@@ -996,24 +996,24 @@ SCENARIOS: dict[str, dict[str, object]] = {
     # face the obstacle; A advances the obstacle text, confirms Yes, and
     # dismisses the used-move text where required before the showcase starts.
     "field-move-cut-fallback": {
-        "id": 45, "frames": 900,
+        "id": 44, "frames": 900,
         "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     "field-move-rock-smash-fallback": {
-        "id": 46, "frames": 900,
+        "id": 45, "frames": 900,
         "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     "field-move-strength-fallback": {
-        "id": 47, "frames": 900,
+        "id": 46, "frames": 900,
         "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     # The Flight Beacon: the trigger opens the fly map, A picks the current
-    # town, and the boxed Wingull that knows Fly is the one shown flying.
+    # town, and the boxed Wingull that could learn Fly is shown flying.
     "flight-beacon-fly": {
-        "id": 48, "frames": 1500,
+        "id": 47, "frames": 1500,
         "keys": [(560, 2, "A")],
         "trigger_frame": 300, "verify": True, "stop_on_observed": True,
     },

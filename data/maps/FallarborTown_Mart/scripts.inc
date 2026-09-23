@@ -41,31 +41,28 @@ FallarborTown_Mart_EventScript_Skitty:: @ 81FFD06
 FallarborTown_Mart_EventScript_DrainPunchTM::
 	lock
 	faceplayer
-	goto_if_set FLAG_EC_GIFT_FALLARBOR_TOWN_MART, FallarborTown_Mart_EventScript_ReceivedTM60
+	goto_if_set FLAG_EC_GIFT_FALLARBOR_TOWN_MART, FallarborTown_Mart_EventScript_ReceivedNugget
 	msgbox FallarborTown_Mart_Text_FreeSample, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_FALLARBOR_TOWN_MART
-	msgbox FallarborTown_Mart_Text_HaveTM60, MSGBOX_DEFAULT
+	msgbox FallarborTown_Mart_Text_TutorAndNugget, MSGBOX_DEFAULT
 	release
 	end
 
-FallarborTown_Mart_EventScript_ReceivedTM60::
-	msgbox FallarborTown_Mart_Text_HaveTM60, MSGBOX_DEFAULT
+FallarborTown_Mart_EventScript_ReceivedNugget::
+	msgbox FallarborTown_Mart_Text_TutorAndNugget, MSGBOX_DEFAULT
 	release
 	end
 
 FallarborTown_Mart_Text_FreeSample:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "A Nugget makes a useful travel fund.\n"
+	.string "Take this one for your next stop!$"
 
-FallarborTown_Mart_Text_HaveTM60:
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+FallarborTown_Mart_Text_TutorAndNugget:
+	.string "That Nugget sells for good money.\p"
+	.string "For moves like Drain Punch, use\n"
+	.string "the Center's free move tutor.$"
 
 FallarborTown_Mart_Text_DecidingSkittyEvolve: @ 81FFD19
 	.string "I'm having a hard time deciding if I\n"

@@ -61,23 +61,12 @@ NavelRock_Bottom_EventScript_Lugia:: @ 82692A2
 	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq NavelRock_Bottom_EventScript_DefeatedLugia
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq NavelRock_Bottom_EventScript_RanFromLugia
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq NavelRock_Bottom_EventScript_RanFromLugia
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, NavelRock_Bottom_EventScript_RanFromLugia
 	setflag FLAG_CAUGHT_LUGIA
 	release
-	end
-
-NavelRock_Bottom_EventScript_DefeatedLugia:: @ 8269336
-	setflag FLAG_DEFEATED_LUGIA
-	setvar VAR_0x8004, SPECIES_LUGIA
-	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Bottom_EventScript_RanFromLugia:: @ 8269344

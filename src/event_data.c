@@ -156,16 +156,15 @@ bool32 CanResetRTC(void)
 
 u16 *GetVarPointer(u16 id)
 {
-    if (id < VARS_START)
-        return NULL;
-    else if (id < SPECIAL_VARS_START)
+    if (id >= VARS_START && id - VARS_START < ARRAY_COUNT(gSaveBlock1Ptr->vars))
         return &gSaveBlock1Ptr->vars[id - VARS_START];
 #if TESTING
-    else if (id >= TESTING_VARS_START)
+    if (id >= TESTING_VARS_START && id - TESTING_VARS_START < ARRAY_COUNT(sTestVars))
         return &sTestVars[id - TESTING_VARS_START];
 #endif // TESTING
-    else
+    if (id >= SPECIAL_VARS_START && id <= SPECIAL_VARS_END)
         return gSpecialVars[id - SPECIAL_VARS_START];
+    return NULL;
 }
 
 u16 VarGet(u16 id)
@@ -194,14 +193,15 @@ u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
         return NULL;
-    else if (id < SPECIAL_FLAGS_START)
+    if (id < FLAGS_COUNT)
         return &gSaveBlock1Ptr->flags[id / 8];
 #if TESTING
-    else if (id >= TESTING_FLAGS_START)
+    if (id >= TESTING_FLAGS_START && id - TESTING_FLAGS_START < sizeof(sTestFlags) * 8)
         return &sTestFlags[(id - TESTING_FLAGS_START) / 8];
 #endif // TESTING
-    else
+    if (id >= SPECIAL_FLAGS_START && id <= SPECIAL_FLAGS_END)
         return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
+    return NULL;
 }
 
 u8 FlagSet(u16 id)
@@ -232,11 +232,5 @@ bool8 FlagGet(u16 id)
 {
     u8 *ptr = GetFlagPointer(id);
 
-    if (!ptr)
-        return FALSE;
-
-    if (!(((*ptr) >> (id & 7)) & 1))
-        return FALSE;
-
-    return TRUE;
+    return ptr != NULL && ((*ptr >> (id & 7)) & 1);
 }

@@ -45,8 +45,15 @@ FortreeCity_Mart_EventScript_Spenser::
 	compare VAR_LAVARIDGE_LUCY_STATE, 2
 	goto_if_eq FortreeCity_Mart_EventScript_SpenserBeatLucy
 FortreeCity_Mart_EventScript_SpenserBattle::
+	goto_if_defeated TRAINER_SPENSER_FORTREE, FortreeCity_Mart_EventScript_SpenserReward
 	msgbox FortreeCity_Mart_Text_SpenserBeforeBattle, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat
+FortreeCity_Mart_EventScript_SpenserReward::
+	setvar VAR_0x8004, ITEM_CHOICE_SCARF
+	setvar VAR_0x8005, 3
+	specialvar VAR_RESULT, CanReceiveFrontierReward
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Mart_Text_SpenserGiveChoiceScarf, MSGBOX_DEFAULT
 	giveitem ITEM_CHOICE_SCARF
 	giveitem ITEM_BOTTLE_CAP, 3
@@ -80,10 +87,6 @@ FortreeCity_Mart_EventScript_SpenserBeatLucy::
 FortreeCity_Mart_Text_SpenserBeatLucy:
 	.string "Hm? You're the youngster who beat Lucy!\n"
 	.string "Gwahahah! She wasn't happy about that!$"
-
-FortreeCity_Mart_Text_SpenserIntro:
-	.string "Hm? You're the youngster Scott's\n"
-	.string "always talking about!$"
 
 FortreeCity_Mart_Text_SpenserBeforeBattle:
 	.string "I'd like to see your skills for myself.\p"

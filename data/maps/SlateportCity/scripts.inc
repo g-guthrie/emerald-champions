@@ -91,12 +91,6 @@ SlateportCity_EventScript_ScottScene:: @ 81DCD1C
 	waitmovement 0
 	msgbox SlateportCity_Text_LetsRegisterEachOther, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox SlateportCity_Text_RegisteredScott, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_SCOTT_MATCH_CALL
 	msgbox SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou, MSGBOX_DEFAULT
 	closemessage
@@ -148,6 +142,7 @@ SlateportCity_EventScript_EnergyGuru:: @ 81DCDBD
 	release
 	end
 
+	.align 2
 SlateportCity_Pokemart_EnergyGuru: @ 81DCDD4
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_IRON
@@ -591,6 +586,7 @@ SlateportCity_EventScript_DecorClerk:: @ 81DD198
 	release
 	end
 
+	.align 2
 SlateportCity_PokemartDecor: @ 81DD1B8
 	.2byte DECOR_RED_BRICK
 	.2byte DECOR_BLUE_BRICK
@@ -615,13 +611,16 @@ SlateportCity_EventScript_PowerTMClerk:: @ 81DD1D8
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart SlateportCity_Pokemart_PowerTMs
+	pokemart SlateportCity_Pokemart_FieldSupplies
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
+	@ Inclement sold TMs here; this game has none, so the stall keeps field supplies.
 	.align 2
-SlateportCity_Pokemart_PowerTMs: @ 81DD1F0	
+SlateportCity_Pokemart_FieldSupplies:
+	.2byte ITEM_HONEY
+	.2byte ITEM_FLUFFY_TAIL
 	.2byte ITEM_NONE
 	release
 	end
@@ -689,14 +688,21 @@ SlateportCity_EventScript_Greta::
 	faceplayer
 	checkflag FLAG_DEFEATED_SLATEPORT_GRETA
 	goto_if_eq SlateportCity_EventScript_GretaDefeated
+	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaReward
 	msgbox SlateportCity_Text_GretaHowdy, MSGBOX_DEFAULT
-	goto_if_unset FLAG_HIDE_LAVARIDGE_POKECENTER_LUCY, SlateportCity_EventScript_GretaNotStrongEnough
-	goto_if_unset FLAG_HIDE_FORTREE_POKECENTER_SPENSER, SlateportCity_EventScript_GretaNotStrongEnough
+	goto_if_not_defeated TRAINER_LUCY_LAVARIDGE, SlateportCity_EventScript_GretaNotStrongEnough
+	goto_if_not_defeated TRAINER_SPENSER_FORTREE, SlateportCity_EventScript_GretaNotStrongEnough
 	msgbox SlateportCity_Text_GretaReadyForBattle, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_EventScript_GretaRefuse
 	msgbox SlateportCity_Text_GretaLetsBattle, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat
+SlateportCity_EventScript_GretaReward::
+	setvar VAR_0x8004, ITEM_CHOICE_SPECS
+	setvar VAR_0x8005, 6
+	specialvar VAR_RESULT, CanReceiveFrontierReward
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SlateportCity_Text_GretaHereHaveStuff, MSGBOX_AUTOCLOSE
 	giveitem ITEM_CHOICE_SPECS
 	giveitem ITEM_BOTTLE_CAP, 6
@@ -767,11 +773,6 @@ SlateportCity_Movement_TyExit: @ 81DD326
 	walk_left
 	step_end
 
-SlateportCity_Movement_Unused: @ 81DD334
-	walk_down
-	walk_in_place_fast_up
-	step_end
-
 SlateportCity_Movement_SternEnterHarbor: @ 81DD337
 	walk_right
 	walk_up
@@ -826,6 +827,8 @@ SlateportCity_EventScript_BerryPowderClerk:: @ 81DD36E
 	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
 	msgbox SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT
 	giveitem ITEM_POWDER_JAR
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_POWDER_JAR
 	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
 	release
@@ -851,7 +854,6 @@ SlateportCity_EventScript_ChooseBerryPowderItem:: @ 81DD3CA
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BERRY_POWDER_VENDOR
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, SlateportCity_EventScript_EnergyPowder
 	case 1, SlateportCity_EventScript_EnergyRoot
@@ -1055,7 +1057,6 @@ SlateportCity_Movement_ScottExitAfterBattleTent: @ 81DD63A
 SlateportCity_EventScript_BerryCrushRankingsSign:: @ 81DD643
 	lockall
 	special ShowBerryCrushRankings
-	waitstate
 	releaseall
 	end
 
@@ -1490,13 +1491,7 @@ SlateportCity_Text_MaybeThisTrainer: @ 81DF0FE
 SlateportCity_Text_LetsRegisterEachOther: @ 81DF12B
 	.string "Scott: All right! I think you're going\n"
 	.string "to become a good friend.\p"
-	.string "So, let's register each other in our\n"
-	.string "PokéNavs.\p"
-	.string "… … … … … …$"
-
-SlateportCity_Text_RegisteredScott: @ 81DF1A6
-	.string "Registered this Scott person\n"
-	.string "in the PokéNav.$"
+	.string "I'll be following your progress!$"
 
 SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou: @ 81DF1D3
 	.string "Scott: What I'd like to do is tag along\n"
@@ -1546,7 +1541,7 @@ SlateportCity_Text_GretaHereHaveStuff:
 	.string "Here, take these with you!$"
 
 SlateportCity_Text_GretaDefeated:
-	.string "Next time we battle will be a lot more\n"
-	.string "fun, but I won't lose again!\p"
-	.string "You'd better do some serious training;\n"
-	.string "no halfhearted rematch allowed!$"
+	.string "That was a blast! Nobody's pushed me\n"
+	.string "that hard in ages.\p"
+	.string "Keep training seriously. I'll be\n"
+	.string "cheering you on!$"

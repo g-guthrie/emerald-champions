@@ -38,7 +38,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	compare VAR_FACING, DIR_WEST
 	call_if_eq SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest
 	goto_if_defeated TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_EventScript_FirstGruntDefeated
-	trainerbattle_no_intro_double TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat
 SlateportCity_OceanicMuseum_2F_EventScript_FirstGruntDefeated::
 	msgbox SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious, MSGBOX_DEFAULT
 	closemessage
@@ -66,7 +66,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_FirstGruntDefeated::
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWarning, MSGBOX_DEFAULT
 	special HealPlayerParty
-	trainerbattle_no_intro_double TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated, MSGBOX_DEFAULT
 	closemessage
 	savebgm MUS_DUMMY
@@ -137,22 +137,6 @@ SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest: @ 820BCC2
 	walk_left
 	walk_down
 	walk_in_place_fast_left
-	step_end
-
-SlateportCity_OceanicMuseum_2F_Movement_Unused: @ 820BCC8
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	delay_8
 	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer: @ 820BCD6
@@ -315,10 +299,6 @@ SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious: @ 820BEFA
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis: @ 820BF35
 	.string "You beat his whole team?!\n"
 	.string "Forget it! I am backing off!$"
-
-SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat: @ 820BF66
-	.string "What?!\n"
-	.string "I lost, too!$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid: @ 820BF7A
 	.string "Now what? If we don't get the parts,\n"

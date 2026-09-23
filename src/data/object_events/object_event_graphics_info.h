@@ -1038,7 +1038,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteM
     .tracks = TRACKS_BIKE_TIRE,
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
-    .anims = sAnimTable_AcroBike,
+    .anims = sAnimTable_Standard,
     .images = sPicTable_CyclingTriathleteM,
 };
 
@@ -1056,7 +1056,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CyclingTriathleteF
     .tracks = TRACKS_BIKE_TIRE,
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
-    .anims = sAnimTable_AcroBike,
+    .anims = sAnimTable_Standard,
     .images = sPicTable_CyclingTriathleteF,
 };
 

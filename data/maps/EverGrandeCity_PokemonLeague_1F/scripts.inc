@@ -26,18 +26,6 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Nurse:: @ 82295FC
 	release
 	end
 
-EverGrandeCity_PokemonLeague_1F_EventScript_Clerk:: @ 822960A
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart PokeMart_Poke_Center_Feather_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-@ The door guards only check for FLAG_BADGE06_GET because Winonas badge is the only one that can be skipped
-@ Its assumed the player has the remaining badges
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard:: @ 8229636
 	lockall
 	compare VAR_TEMP_2, 1
@@ -47,15 +35,23 @@ EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard:: @ 8229636
 	call_if_ge EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight
 	compare VAR_TEMP_0, 8
 	call_if_le EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft
-@ Emerald Champions: Inclement's Elite Four rematch ladder (singles/doubles x
-@ legendaries) is removed -- this is a one-and-done campaign. The dead dispatch
-@ below is kept only so its labels stay defined; it is unreachable.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PokemonLeague_1F_EventScript_Rematches
 	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
 	message EverGrandeCity_PokemonLeague_1F_Text_MustHaveAllGymBadges
 	waitmessage
 	delay 120
+EverGrandeCity_PokemonLeague_1F_EventScript_CheckBadges::
+	goto_if_unset FLAG_BADGE01_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE02_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE03_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE04_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE05_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
 	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE07_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE08_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	specialvar VAR_RESULT, PlayerPartyLeagueEligible
+	compare VAR_RESULT, FALSE
+	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_RestrictedParty
+EverGrandeCity_PokemonLeague_1F_EventScript_AdmitTrainer::
 	closemessage
 	setvar VAR_TEMP_2, 1
 	applymovement LOCALID_GUARD_1, EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay
@@ -77,46 +73,9 @@ EverGrandeCity_PokemonLeague_1F_EventScriptSwitchTrainerMsg:
 	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PokemonLeague_1F_EventScriptGoForthChampion
 	goto EverGrandeCity_PokemonLeague_1F_EventScript_GoForthFacePlayer
 
-EverGrandeCity_PokemonLeague_1F_EventScript_Rematches::
-	message EverGrandeCity_PokemonLeague_1F_Text_ChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, EverGrandeCity_PokemonLeague_1F_EventScript_SetSingles
-	case 1, EverGrandeCity_PokemonLeague_1F_EventScript_SetDoubles
-	case 2, EverGrandeCity_PokemonLeague_1F_EventScript_Exit
-	case 127, EverGrandeCity_PokemonLeague_1F_EventScript_Exit
-
-EverGrandeCity_PokemonLeague_1F_EventScript_SetSingles::
-	msgbox EverGrandeCity_PokemonLeague_1F_Text_Legendaries, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_SetSinglesLegendaries
-	goto EverGrandeCity_PokemonLeague_1F_EventScriptMoveGuards
-
-EverGrandeCity_PokemonLeague_1F_EventScript_SetSinglesLegendaries::
-	goto EverGrandeCity_PokemonLeague_1F_EventScriptMoveGuards
-
-EverGrandeCity_PokemonLeague_1F_EventScript_SetDoubles::
-	msgbox EverGrandeCity_PokemonLeague_1F_Text_Legendaries, MSGBOX_YESNO
-	compare VAR_RESULT, 1
-	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_SetDoublesLegendaries
-	goto EverGrandeCity_PokemonLeague_1F_EventScriptMoveGuards
-
-EverGrandeCity_PokemonLeague_1F_EventScript_SetDoublesLegendaries::
-	goto EverGrandeCity_PokemonLeague_1F_EventScriptMoveGuards
-
-EverGrandeCity_PokemonLeague_1F_EventScriptMoveGuards::
-	setvar VAR_TEMP_2, 1
-	closemessage
-	applymovement LOCALID_GUARD_1, EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay
-	applymovement LOCALID_GUARD_2, EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay
-	waitmovement 0
-	delay 10
-	playfanfare MUS_OBTAIN_BADGE
 EverGrandeCity_PokemonLeague_1F_EventScriptGoForthChampion2::
 	message EverGrandeCity_PokemonLeague_1F_Text_GoForthChampion
 	waitmessage
-	waitfanfare
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -146,6 +105,27 @@ EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges:: @ 82296AE
 	releaseall
 	end
 
+EverGrandeCity_PokemonLeague_1F_EventScript_RestrictedParty::
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_RestrictedParty, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EverGrandeCity_PokemonLeague_1F_EventScript_CheckLeagueDoor::
+	lockall
+	specialvar VAR_RESULT, PlayerPartyLeagueEligible
+	compare VAR_RESULT, TRUE
+	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_LeagueDoorAllowed
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_RestrictedParty, MSGBOX_DEFAULT
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_StepBack
+	waitmovement 0
+EverGrandeCity_PokemonLeague_1F_EventScript_LeagueDoorAllowed::
+	releaseall
+	end
+
+EverGrandeCity_PokemonLeague_1F_Movement_StepBack::
+	walk_down
+	step_end
+
 EverGrandeCity_PokemonLeague_1F_EventScript_GoForth:: @ 82296BB
 	compare VAR_TEMP_2, 1
 	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_GoForthFacePlayer
@@ -169,10 +149,6 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForthFacePlayer::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	goto EverGrandeCity_PokemonLeague_1F_EventScript_GoForth2
-
-EverGrandeCity_PokemonLeague_1F_EventScript_Exit::
-	releaseall
-	end
 
 EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight: @ 82296DA
 	walk_down
@@ -212,17 +188,11 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth: @ 82297EF
 	.string "Trainer! Believe in yourself and your\n"
 	.string "Pokémon, and go forth!$"
 
-EverGrandeCity_PokemonLeague_1F_Text_ChooseFormat:
-	.string "Welcome, Champion!\p"
-	.string "If you wish to take on the Pokémon\n"
-	.string "League again, you must first set the\l"
-	.string "rules for your challenge.\p"
-	.string "Which battle format would you like?$"
-
-EverGrandeCity_PokemonLeague_1F_Text_Legendaries:
-	.string "Would you like to test yourself\n"
-	.string "against the power of Legendary\l"
-	.string "Pokémon?$"
+EverGrandeCity_PokemonLeague_1F_Text_RestrictedParty::
+	.string "League rules exclude Legendary\n"
+	.string "and Mythical Pokémon.\p"
+	.string "Ultra Beasts and Paradox Pokémon\n"
+	.string "may still enter.$"
 
 EverGrandeCity_PokemonLeague_1F_Text_GoForthChampion:
 	.string "Champion! Believe in yourself and your\n"

@@ -11,6 +11,7 @@ SootopolisCity_Mart_EventScript_Clerk:: @ 8226795
 	release
 	end
 
+	.align 2
 SootopolisCity_Mart_Pokemart: @ 82267AC
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION

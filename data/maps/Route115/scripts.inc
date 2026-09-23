@@ -37,87 +37,22 @@ Route115_EventScript_MeteorFallsSign:: @ 81F2985
 	end
 
 Route115_EventScript_Timothy:: @ 81F298E
-	trainerbattle_double TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route115_EventScript_RegisterTimothy
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route115_EventScript_RematchTimothy
-	msgbox Route115_Text_TimothyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route115_EventScript_RegisterTimothy:: @ 81F29BA
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route115_Text_TimothyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route115_EventScript_RematchTimothy:: @ 81F29D9
-	@ This retired encounter has no campaign battle.
-	msgbox Route115_Text_TimothyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route115_EventScript_Koichi:: @ 81F29F0
-	@ This retired encounter has no campaign battle.
-	msgbox Route115_Text_KoichiPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route115_Text_TimothyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Nob:: @ 81F2A07
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route115_EventScript_RematchNob
-	msgbox Route115_Text_NobPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route115_EventScript_RegisterNob:: @ 81F2A33
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route115_Text_NobRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_NOB_1
-	release
-	end
-
-Route115_EventScript_RematchNob:: @ 81F2A52
-	@ This retired encounter has no campaign battle.
-	msgbox Route115_Text_NobPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_NobPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Cyndy:: @ 81F2A69
-	trainerbattle_double TRAINER_CYNDY_1, Route115_Text_CyndyIntro, Route115_Text_CyndyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route115_EventScript_RegisterCyndy
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route115_EventScript_RematchCyndy
-	msgbox Route115_Text_CyndyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route115_EventScript_RegisterCyndy:: @ 81F2A95
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route115_Text_CyndyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route115_EventScript_RematchCyndy:: @ 81F2AB4
-	@ This retired encounter has no campaign battle.
-	msgbox Route115_Text_CyndyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route115_EventScript_Hector:: @ 81F2ACB
-	@ This retired encounter has no campaign battle.
-	msgbox Route115_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_CYNDY_1, Route115_Text_CyndyIntro, Route115_Text_CyndyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route115_Text_CyndyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Kyra:: @ 81F2AE2
 	@ This retired encounter has no campaign battle.
 	msgbox Route115_Text_KyraPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route115_EventScript_Jaiden:: @ 81F2AF9
-	@ This retired encounter has no campaign battle.
-	msgbox Route115_Text_JaidenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Alix:: @ 81F2B10
@@ -148,4 +83,3 @@ Route115_Text_RouteSignRustboro: @ 81F2BC9
 Route115_Text_MeteorFallsSign: @ 81F2BE3
 	.string "Meteor Falls\n"
 	.string "FALLARBOR TOWN THROUGH HERE$"
-

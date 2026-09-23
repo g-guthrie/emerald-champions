@@ -201,12 +201,6 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger4:: @ 826CCC7
 	end
 
 @ Unused
-Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger5:: @ 826CCD3
-	lockall
-	setvar VAR_TEMP_9, 5
-	goto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate
-	end
-
 Route110_TrickHousePuzzle5_EventScript_Mechadoll5Trigger0:: @ 826CCDF
 	lockall
 	setvar VAR_TEMP_9, 0
@@ -371,7 +365,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3:: @ 826CFF4
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL2_Q3, TRUE
 	switch VAR_RESULT
-	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
 
@@ -435,7 +429,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2:: @ 826D10C
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL5_Q2, TRUE
 	switch VAR_RESULT
-	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
 
@@ -443,7 +437,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3:: @ 826D12F
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL5_Q3, TRUE
 	switch VAR_RESULT
-	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
+	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
 
@@ -531,19 +525,6 @@ Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4:: @ 826D25C
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4
 	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
 	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4
-	return
-
-Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5:: @ 826D294
-	compare VAR_TEMP_8, LOCALID_MECHADOLL_1
-	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5
-	compare VAR_TEMP_8, LOCALID_MECHADOLL_2
-	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5
-	compare VAR_TEMP_8, LOCALID_MECHADOLL_3
-	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5
-	compare VAR_TEMP_8, LOCALID_MECHADOLL_4
-	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5
-	compare VAR_TEMP_8, LOCALID_MECHADOLL_5
-	call_if_eq Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5
 	return
 
 Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1:: @ 826D2CC
@@ -711,31 +692,6 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4:: @ 826D4B5
 	waitmovement 0
 	return
 
-Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5:: @ 826D4C0
-	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkLeft5
-	waitmovement 0
-	return
-
-Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5:: @ 826D4CB
-	applymovement LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_Movement_WalkLeft5
-	waitmovement 0
-	return
-
-Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5:: @ 826D4D6
-	applymovement LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_Movement_WalkLeft5
-	waitmovement 0
-	return
-
-Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5:: @ 826D4E1
-	applymovement LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_Movement_WalkLeft5
-	waitmovement 0
-	return
-
-Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5:: @ 826D4EC
-	applymovement LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_Movement_WalkLeft5
-	waitmovement 0
-	return
-
 Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight1:: @ 826D4F7
 	applymovement LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_Movement_WalkRight1
 	waitmovement 0
@@ -883,14 +839,6 @@ Route110_TrickHousePuzzle5_Movement_WalkLeft4: @ 826D613
 	walk_left
 	step_end
 
-Route110_TrickHousePuzzle5_Movement_WalkLeft5: @ 826D618
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	step_end
-
 Route110_TrickHousePuzzle5_Movement_WalkRight1: @ 826D61E
 	walk_right
 	step_end
@@ -983,20 +931,21 @@ Route110_TrickHousePuzzle5_Text_Mechadoll1Intro: @ 826D6CE
 	.string "THEN YOU WILL GO TO MECHADOLL 5.\l"
 	.string "THEN YOU CAN OBTAIN THE SECRET CODE.$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1: @ 826D757
+Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these Pokémon is not found\n"
-	.string "on Route 110. Which one is it?$"
+	.string "Which move guards your side\n"
+	.string "against opposing priority moves?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2: @ 826D7AA
+Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these Pokémon is not of the\n"
-	.string "Water type. Which one is it?$"
+	.string "Which type normally ignores RAGE\n"
+	.string "POWDER when choosing a target?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3: @ 826D7FC
+Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these Pokémon does not use\n"
-	.string "Leech Life. Which one is it?$"
+	.string "Which move normally hits both\n"
+	.string "opponents instead of being\l"
+	.string "redirected by FOLLOW ME?$"
 
 Route110_TrickHousePuzzle5_Text_CorrectGoThrough: @ 826D84D
 	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
@@ -1019,60 +968,60 @@ Route110_TrickHousePuzzle5_Text_Mechadoll2Intro: @ 826D8EA
 	.string "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
 	.string "IS SET TOO LOW.$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1: @ 826D940
+Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which of these Pokémon did Wally\n"
-	.string "borrow from your father?$"
+	.string "TRICK ROOM reverses Speed order\n"
+	.string "within which boundary?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2: @ 826D98C
+Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which of these Pokémon was chasing\n"
-	.string "Prof. Birch?$"
+	.string "When can a Pokémon normally use\n"
+	.string "FAKE OUT successfully?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3: @ 826D9CE
+Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which of these Pokémon did Team Aqua\n"
-	.string "use in Petalburg Forest?$"
+	.string "TAUNT prevents the target from\n"
+	.string "choosing which moves?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll3Intro: @ 826DA1E
-	.string "CLICKETY-CLACK…\n"
-	.string "MECHADOLL 3 AM I!\p"
-	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
+Route110_TrickHousePuzzle5_Text_Mechadoll3Intro:
+	.string "CLICKETY-CLACK... MECHADOLL 3 AM I!\p"
+	.string "SUPPORT, STATUS, AND HELD ITEMS!\n"
+	.string "SMALL DETAILS, LARGE CONSEQUENCES!$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1: @ 826DA64
+Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1:
 	.string "MECHADOLL 3 QUIZ.\p"
-	.string "Which costs more?\n"
-	.string "Three Harbor Mails or one Burn Heal?$"
+	.string "Which status reduces physical\n"
+	.string "damage for most attackers?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2: @ 826DAAD
+Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2:
 	.string "MECHADOLL 3 QUIZ.\p"
-	.string "Sell one Great Ball and buy\n"
-	.string "one Potion. How much money remains?$"
+	.string "Which move boosts an ally's attack\n"
+	.string "damage for the current turn?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3: @ 826DAFF
+Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3:
 	.string "MECHADOLL 3 QUIZ.\p"
-	.string "Do one Repel and Soda Pop cost\n"
-	.string "more than one Super Potion?$"
+	.string "Which Pokémon can receive\n"
+	.string "EVIOLITE's defensive benefit?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Intro: @ 826DB4C
 	.string "CLICKETY-CLACK…\n"
 	.string "MECHADOLL 4 THAT IS ME!\p"
 	.string "MY QUIZ IS AN OBJECT OF BEAUTY.$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1: @ 826DB94
+Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1:
 	.string "MECHADOLL 4 QUIZ.\p"
-	.string "In Seashore House, were there more men\n"
-	.string "or women?$"
+	.string "Which held item can remove TAUNT\n"
+	.string "from its holder?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2: @ 826DBD7
+Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2:
 	.string "MECHADOLL 4 QUIZ.\p"
-	.string "In Lavaridge Town, were there more\n"
-	.string "elderly men or elderly women?$"
+	.string "Which Ability redirects\n"
+	.string "single-target WATER moves?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3: @ 826DC2A
+Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3:
 	.string "MECHADOLL 4 QUIZ.\p"
-	.string "In the Trainer's School, how many\n"
-	.string "girl students were there?$"
+	.string "Which opposing target does PSYCHIC\n"
+	.string "TERRAIN protect from FAKE OUT?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Intro: @ 826DC78
 	.string "CLICKETY-CLACK…\n"
@@ -1080,17 +1029,20 @@ Route110_TrickHousePuzzle5_Text_Mechadoll5Intro: @ 826DC78
 	.string "THE MASTER'S BEST AND PROUDEST\n"
 	.string "ACHIEVEMENT AM I.$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1: @ 826DCCB
+Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1:
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "In Slateport's Pokémon Fan Club,\n"
-	.string "how many Pokémon were there?$"
+	.string "You switch out while TRICK ROOM is\n"
+	.string "active. What happens to the room's\l"
+	.string "timer?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2: @ 826DD1B
+Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2:
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "In Fortree City, how many\n"
-	.string "tree houses were there?$"
+	.string "Which move guards your side\n"
+	.string "against most damaging moves that\l"
+	.string "hit multiple targets?$"
 
-Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3: @ 826DD5F
+Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3:
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "On the Cycling Road, how many\n"
-	.string "Triathletes were there?$"
+	.string "PRANKSTER-boosted TAUNT normally\n"
+	.string "fails against an opposing Pokémon\l"
+	.string "of which type?$"

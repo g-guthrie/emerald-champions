@@ -23,12 +23,9 @@
 u32 GetCurrentLevelCap(void);
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline);
 u32 GetPlayerLevelCapForSpecies(enum Species species);
-bool32 CompleteCampaignMilestone(u16 flag);
-void BufferCampaignMilestoneText(void);
 u32 GetSoftLevelCapExpValue(u32 level, u32 expValue);
 u32 GetCurrentEVCap(void);
 #if EC_HEADLESS_FIXTURES
-void ApplyCampaignLevelCapMilestones(u32 cap);
 #endif
 
 #endif /* GUARD_CAPS_H */

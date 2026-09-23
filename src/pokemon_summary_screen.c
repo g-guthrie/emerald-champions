@@ -1346,7 +1346,8 @@ static bool8 LoadGraphics(void)
         gMain.state++;
         break;
     case 15:
-        UpdateMoveRelearnerState();
+        if (P_SUMMARY_SCREEN_MOVE_RELEARNER)
+            UpdateMoveRelearnerState();
         PutPageWindowTilemaps(sMonSummaryScreen->currPageIndex);
         gMain.state++;
         break;
@@ -2123,11 +2124,26 @@ static bool8 IsValidToViewInMulti(struct Pokemon *mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
         return FALSE;
-    else if (sMonSummaryScreen->curMonIndex != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
+    else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO || !GetMonData(mon, MON_DATA_IS_EGG))
         return TRUE;
     else
         return FALSE;
 }
+
+#ifdef TESTING
+bool32 Test_SummaryCanViewMultiMon(struct Pokemon *mon, bool32 infoPage, u8 currentMon)
+{
+    struct PokemonSummaryScreenData *saved = sMonSummaryScreen;
+    sMonSummaryScreen = AllocZeroed(sizeof(*sMonSummaryScreen));
+    sMonSummaryScreen->currPageIndex = infoPage ? PSS_PAGE_INFO : PSS_PAGE_BATTLE_MOVES;
+    sMonSummaryScreen->curMonIndex = currentMon;
+    bool32 result = IsValidToViewInMulti(mon);
+    Free(sMonSummaryScreen);
+    sMonSummaryScreen = saved;
+    return result;
+}
+#endif
+
 
 static void ChangePage(u8 taskId, s8 delta)
 {
@@ -2550,7 +2566,7 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 PlaySE(SE_SELECT);
                 sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
                 gSpecialVar_0x8005 = sMoveSlotToReplace;
-                gSpecialVar_Result = TRUE;
+                gSpecialVar_Result = sMoveSlotToReplace < MAX_MON_MOVES;
                 BeginCloseSummaryScreen(taskId);
             }
             else if (JOY_NEW(B_BUTTON))
@@ -2573,7 +2589,7 @@ u8 GetMoveSlotToReplace(void)
 
 static void DrawPagination(void) // Updates the pagination dots at the top of the summary screen
 {
-    u16 *tilemap = Alloc(8 * PSS_PAGE_COUNT);
+    u16 tilemap[4 * PSS_PAGE_COUNT];
     u8 i;
 
     for (i = 0; i < PSS_PAGE_COUNT; i++)
@@ -2635,32 +2651,25 @@ static void DrawPagination(void) // Updates the pagination dots at the top of th
     }
     CopyToBgTilemapBufferRect_ChangePalette(3, tilemap, 11, 0, PSS_PAGE_COUNT * 2, 2, 16);
     ScheduleBgCopyTilemapToVram(3);
-    Free(tilemap);
 }
 
 static void CopyNColumnsToTilemap(const struct SlidingWindow *slidingWindow, u16 *tilemapDest, u8 visibleColumns, bool8 isOpeningToTheLeft)
 {
-    u16 i;
-    u16 *alloced = Alloc(slidingWindow->width * 2 * slidingWindow->height);
-    CpuFill16(slidingWindow->defaultTile, alloced, slidingWindow->width * 2 * slidingWindow->height);
-    if (slidingWindow->width != visibleColumns)
+    u32 width = slidingWindow->width;
+    for (u32 row = 0; row < slidingWindow->height; row++)
     {
-        if (!isOpeningToTheLeft)
+        u16 *dest = &tilemapDest[(slidingWindow->top + row) * 32 + slidingWindow->left];
+        const u16 *src = &slidingWindow->gfx[width * row];
+        CpuFill16(slidingWindow->defaultTile, dest, width * sizeof(*dest));
+        if (visibleColumns != width)
         {
-            for (i = 0; i < slidingWindow->height; i++)
-                CpuCopy16(&slidingWindow->gfx[visibleColumns + slidingWindow->width * i], &alloced[slidingWindow->width * i], (slidingWindow->width - visibleColumns) * 2);
-        }
-        else
-        {
-            for (i = 0; i < slidingWindow->height; i++)
-                CpuCopy16(&slidingWindow->gfx[slidingWindow->width * i], &alloced[visibleColumns + slidingWindow->width * i], (slidingWindow->width - visibleColumns) * 2);
+            if (isOpeningToTheLeft)
+                dest += visibleColumns;
+            else
+                src += visibleColumns;
+            CpuCopy16(src, dest, (width - visibleColumns) * sizeof(*dest));
         }
     }
-
-    for (i = 0; i < slidingWindow->height; i++)
-        CpuCopy16(&alloced[slidingWindow->width * i], &tilemapDest[(slidingWindow->top + i) * 32 + slidingWindow->left], slidingWindow->width * 2);
-
-    Free(alloced);
 }
 
 #define tScrollingSpeed data[0]
@@ -3368,8 +3377,8 @@ static void BufferMonTrainerMemo(void)
     }
     else
     {
-        u8 *metLevelString = Alloc(32);
-        u8 *metLocationString = Alloc(32);
+        u8 metLevelString[32];
+        u8 metLocationString[32];
         GetMetLevelString(metLevelString);
 
         if (sum->metLocation < MAPSEC_NONE)
@@ -3399,8 +3408,8 @@ static void BufferMonTrainerMemo(void)
         }
 
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, text);
-        Free(metLevelString);
-        Free(metLocationString);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, NULL);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, NULL);
     }
 }
 

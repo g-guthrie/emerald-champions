@@ -26,7 +26,7 @@ Route112_CableCarStation_EventScript_ExitCableCar:: @ 822AAF3
 	applymovement LOCALID_ATTENDANT, Route112_CableCarStation_Movement_FollowPlayerOutFromCableCar
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
-	setobjectxyperm LOCALID_ATTENDANT, 6, 7
+	setobjectxyperm LOCALID_ATTENDANT, 6, 6
 	setobjectmovementtype LOCALID_ATTENDANT, MOVEMENT_TYPE_FACE_DOWN
 	releaseall
 	end
@@ -52,7 +52,6 @@ Route112_CableCarStation_EventScript_RideCableCar:: @ 822AB38
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special CableCar
-	waitstate
 	release
 	end
 

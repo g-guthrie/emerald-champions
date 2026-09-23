@@ -42,20 +42,9 @@ TrainerHill_Elevator_EventScript_EnterElevator:: @ 8269375
 	end
 
 @ Unused
-TrainerHill_Elevator_EventScript_ExitFloorSelect:: @ 82693CE
-	goto TrainerHill_Elevator_EventScript_CloseFloorSelect
-	end
-
-@ Functionally unused
-TrainerHill_Elevator_EventScript_CloseFloorSelect:: @ 82693D4
-	special CloseDeptStoreElevatorWindow
-	releaseall
-	end
-
 TrainerHill_Elevator_EventScript_MoveElevator:: @ 82693D9
 	waitse
 	special MoveElevator
-	waitstate
 	return
 
 TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator: @ 82693DF

@@ -183,8 +183,6 @@ MauvilleCity_EventScript_DefeatedWally:: @ 81DF593
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLYS_UNCLE
 	setflag FLAG_DEFEATED_WALLY_MAUVILLE
-	setvar VAR_WALLY_CALL_STEP_COUNTER, 0
-	setflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq MauvilleCity_EventScript_ScottApproachPlayerNorth
 	compare VAR_FACING, DIR_EAST
@@ -229,7 +227,7 @@ MauvilleCity_EventScript_ScottExitEast:: @ 81DF628
 
 MauvilleCity_EventScript_BattleWally:: @ 81DF63A
 	msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT
@@ -464,7 +462,7 @@ MauvilleCity_EventScript_BegunNewMauville:: @ 81DF77A
 
 MauvilleCity_EventScript_CompletedNewMauville:: @ 81DF784
 	msgbox MauvilleCity_Text_WattsonThanksTakeTM, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_GOT_TM24_FROM_WATTSON
@@ -475,21 +473,6 @@ MauvilleCity_EventScript_CompletedNewMauville:: @ 81DF784
 MauvilleCity_EventScript_ReceivedThunderbolt:: @ 81DF7B0
 	msgbox MauvilleCity_Text_WattsonYoungTakeCharge, MSGBOX_DEFAULT
 	release
-	end
-
-MauvilleCity_EventScript_RegisterWallyCall:: @ 81DF7BA
-	lockall
-	pokenavcall MauvilleCity_Text_WallyPokenavCall
-	waitmessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox MauvilleCity_Text_RegisteredWally, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
-	setflag FLAG_ENABLE_WALLY_MATCH_CALL
-	clearflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL
-	releaseall
 	end
 
 MauvilleCity_Text_UncleHesTooPeppy: @ 81DF7DC
@@ -578,21 +561,6 @@ MauvilleCity_Text_UncleVisitUsSometime: @ 81DFD34
 	.string "I'm sure Wally would enjoy it.$"
 
 
-MauvilleCity_Text_WallyPokenavCall: @ 81DFDFB
-	.string "… … … … … …\n"
-	.string "… … … … … Beep!\p"
-	.string "Wally: Oh, hello, {PLAYER}!\p"
-	.string "I just wanted to tell you that\n"
-	.string "my uncle bought me a PokéNav!\p"
-	.string "Now I can get in touch with you\n"
-	.string "anytime, {PLAYER}!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
-
-MauvilleCity_Text_RegisteredWally: @ 81DFEB4
-	.string "Registered Wally\n"
-	.string "in the PokéNav.$"
-
 MauvilleCity_Text_ScottYouDidntHoldBack: @ 81DFED5
 	.string "Scott: Hehe…\n"
 	.string "I was watching that match!\p"
@@ -629,10 +597,11 @@ MauvilleCity_Text_WattsonWontBeChallenge: @ 81E0154
 	.string "That's it, then, you have my trust!\n"
 	.string "Wahahahaha!$"
 
-MauvilleCity_Text_WattsonThanksTakeTM: @ 81E020E
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+MauvilleCity_Text_WattsonThanksTakeTM:
+	.string "Wattson: The Generator is safe now!\n"
+	.string "You did well, wahahahaha!\p"
+	.string "Take this Nugget as my thanks.\n"
+	.string "It can help fund your journey!$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge: @ 81E02AA
 	.string "Wattson: Wahahahaha!\p"

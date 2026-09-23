@@ -15,6 +15,7 @@ MauvilleCity_GameCorner_MapScripts:: @ 820FBB8
 	.set MAROWAK_COINS,  	4500
 	.set EXEGGUTOR_COINS,  	4500
 	.set STARTER_COINS, 	2500
+	.set GENESECT_COINS, 	9999
 	.set DOLL_COINS,  		1000
 
 	.set COINS_PRICE_50,    500
@@ -44,14 +45,6 @@ MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50:: @ 820FBE5
 	end
 
 @ Unused
-MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500:: @ 820FC0C
-	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 1, FALSE
-	switch VAR_RESULT
-	case 0, MauvilleCity_GameCorner_EventScript_Buy50Coins
-	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
-	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	end
-
 MauvilleCity_GameCorner_EventScript_Buy50Coins:: @ 820FC33
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, (MAX_COINS + 1 - 50)
@@ -276,7 +269,6 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	setvar VAR_0x8004, SCROLL_MULTI_GAMECORNER_POKEMON
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_Porygon
 	case 1, MauvilleCity_GameCorner_EventScript_Munchlax
@@ -290,7 +282,8 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	case 9, MauvilleCity_GameCorner_EventScript_Raichu
 	case 10, MauvilleCity_GameCorner_EventScript_Marowak
 	case 11, MauvilleCity_GameCorner_EventScript_Exeggutor
-	case 12, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 12, MauvilleCity_GameCorner_EventScript_Genesect
+	case 13, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	end
 
@@ -353,6 +346,21 @@ MauvilleCity_GameCorner_EventScript_Exeggutor::
 	setvar VAR_TEMP_1, SPECIES_EXEGGUTOR_ALOLA
 	setvar VAR_0x8006, EXEGGUTOR_COINS
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_Genesect::
+	goto_if_unset FLAG_BADGE08_GET, MauvilleCity_GameCorner_EventScript_GenesectLocked
+	goto_if_set FLAG_RECEIVED_GAME_CORNER_GENESECT, MauvilleCity_GameCorner_EventScript_GenesectClaimed
+	setvar VAR_TEMP_1, SPECIES_GENESECT
+	setvar VAR_0x8006, GENESECT_COINS
+	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_GenesectLocked::
+	msgbox MauvilleCity_GameCorner_Text_GenesectLocked, MSGBOX_DEFAULT
+	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
+
+MauvilleCity_GameCorner_EventScript_GenesectClaimed::
+	msgbox MauvilleCity_GameCorner_Text_GenesectClaimed, MSGBOX_DEFAULT
+	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
 	
 MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	bufferspeciesname 0, VAR_TEMP_1
@@ -377,12 +385,27 @@ MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon::
 
 MauvilleCity_GameCorner_EventScript_ReceivePokemon::
 	msgbox MauvilleCity_GameCorner_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
+	compare VAR_TEMP_1, SPECIES_GENESECT
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceiveGenesect
 	special GetStaticEncounterLevel
 	givemon VAR_TEMP_1, VAR_0x800A, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonParty
 	compare VAR_RESULT, 1
 	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonPC
+	hidecoinsbox
+	goto Common_EventScript_NoMoreRoomForPokemon
+
+MauvilleCity_GameCorner_EventScript_ReceiveGenesect::
+	setvar VAR_0x8004, SPECIES_GENESECT
+	special GiveEmeraldChampionsGameCornerPokemon
+	compare VAR_RESULT, MON_GIVEN_TO_PARTY
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonParty
+	compare VAR_RESULT, MON_GIVEN_TO_PC
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReceivePokemonPC
+	compare VAR_RESULT, EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT
+	goto_if_eq MauvilleCity_GameCorner_EventScript_GenesectClaimed
+	hidecoinsbox
 	goto Common_EventScript_NoMoreRoomForPokemon
 
 MauvilleCity_GameCorner_EventScript_ReceivePokemonParty::
@@ -455,7 +478,6 @@ MauvilleCity_GameCorner_EventScript_ChooseGrassStarter::
 	setvar VAR_0x8004, SCROLL_MULTI_GAMECORNER_GRASS_STARTERS
 	setvar VAR_0x8006, STARTER_COINS
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_Bulbasaur
 	case 1, MauvilleCity_GameCorner_EventScript_Chikorita
@@ -464,7 +486,9 @@ MauvilleCity_GameCorner_EventScript_ChooseGrassStarter::
 	case 4, MauvilleCity_GameCorner_EventScript_Snivy
 	case 5, MauvilleCity_GameCorner_EventScript_Chespin
 	case 6, MauvilleCity_GameCorner_EventScript_Rowlet
-	case 7, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 7, MauvilleCity_GameCorner_EventScript_Grookey
+	case 8, MauvilleCity_GameCorner_EventScript_Sprigatito
+	case 9, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	end
 	
@@ -472,7 +496,6 @@ MauvilleCity_GameCorner_EventScript_ChooseFireStarter::
 	setvar VAR_0x8004, SCROLL_MULTI_GAMECORNER_FIRE_STARTERS
 	setvar VAR_0x8006, STARTER_COINS
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_Charmander
 	case 1, MauvilleCity_GameCorner_EventScript_Cyndaquil
@@ -481,7 +504,9 @@ MauvilleCity_GameCorner_EventScript_ChooseFireStarter::
 	case 4, MauvilleCity_GameCorner_EventScript_Tepig
 	case 5, MauvilleCity_GameCorner_EventScript_Fennekin
 	case 6, MauvilleCity_GameCorner_EventScript_Litten
-	case 7, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 7, MauvilleCity_GameCorner_EventScript_Scorbunny
+	case 8, MauvilleCity_GameCorner_EventScript_Fuecoco
+	case 9, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	end
 	
@@ -489,7 +514,6 @@ MauvilleCity_GameCorner_EventScript_ChooseWaterStarter::
 	setvar VAR_0x8004, SCROLL_MULTI_GAMECORNER_WATER_STARTERS
 	setvar VAR_0x8006, STARTER_COINS
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_Squirtle
 	case 1, MauvilleCity_GameCorner_EventScript_Totodile
@@ -498,7 +522,9 @@ MauvilleCity_GameCorner_EventScript_ChooseWaterStarter::
 	case 4, MauvilleCity_GameCorner_EventScript_Oshawott
 	case 5, MauvilleCity_GameCorner_EventScript_Froakie
 	case 6, MauvilleCity_GameCorner_EventScript_Popplio
-	case 7, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 7, MauvilleCity_GameCorner_EventScript_Sobble
+	case 8, MauvilleCity_GameCorner_EventScript_Quaxly
+	case 9, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	end
 
@@ -530,6 +556,14 @@ MauvilleCity_GameCorner_EventScript_Rowlet::
 	setvar VAR_TEMP_1, SPECIES_ROWLET
 	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
 
+MauvilleCity_GameCorner_EventScript_Grookey::
+	setvar VAR_TEMP_1, SPECIES_GROOKEY
+	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
+
+MauvilleCity_GameCorner_EventScript_Sprigatito::
+	setvar VAR_TEMP_1, SPECIES_SPRIGATITO
+	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
+
 MauvilleCity_GameCorner_EventScript_Charmander::
 	setvar VAR_TEMP_1, SPECIES_CHARMANDER
 	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
@@ -556,6 +590,14 @@ MauvilleCity_GameCorner_EventScript_Fennekin::
 	
 MauvilleCity_GameCorner_EventScript_Litten::
 	setvar VAR_TEMP_1, SPECIES_LITTEN
+	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
+
+MauvilleCity_GameCorner_EventScript_Scorbunny::
+	setvar VAR_TEMP_1, SPECIES_SCORBUNNY
+	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
+
+MauvilleCity_GameCorner_EventScript_Fuecoco::
+	setvar VAR_TEMP_1, SPECIES_FUECOCO
 	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
 	
 MauvilleCity_GameCorner_EventScript_Squirtle::
@@ -584,6 +626,14 @@ MauvilleCity_GameCorner_EventScript_Froakie::
 	
 MauvilleCity_GameCorner_EventScript_Popplio::
 	setvar VAR_TEMP_1, SPECIES_POPPLIO
+	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
+
+MauvilleCity_GameCorner_EventScript_Sobble::
+	setvar VAR_TEMP_1, SPECIES_SOBBLE
+	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
+
+MauvilleCity_GameCorner_EventScript_Quaxly::
+	setvar VAR_TEMP_1, SPECIES_QUAXLY
 	goto MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize
 	
 MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
@@ -926,10 +976,6 @@ MauvilleCity_GameCorner_Text_NotEnoughCoins: @ 8210673
 	.string "You don't have enough Coins.$"
 
 @ Unused
-MauvilleCity_GameCorner_Text_NoRoomForPlacingDecor: @ 8210690
-	.string "There isn't any room available for\n"
-	.string "placing {STR_VAR_1}.$"
-
 MauvilleCity_GameCorner_Text_OhIsThatSo: @ 82106BF
 	.string "Oh, is that so? \n"
 	.string "You need to save some Coins before\l"
@@ -937,9 +983,6 @@ MauvilleCity_GameCorner_Text_OhIsThatSo: @ 82106BF
 
 MauvilleCity_GameCorner_Text_SoYourChoiceIsX: @ 8210705
 	.string "So your choice is {STR_VAR_1}?$"
-
-MauvilleCity_GameCorner_Text_HereYouGo: @ 821071B
-	.string "Here you go!$"
 
 MauvilleCity_GameCorner_Text_ExchangeCoinsForPokemon:
 	.string "Welcome.\p"
@@ -966,9 +1009,6 @@ MauvilleCity_GameCorner_Text_WhichStarterType:
 	.string "Which Type of Pokémon would you like?$"
 
 @ Unused
-MauvilleCity_GameCorner_Text_CantCarryAnyMore: @ 8210728
-	.string "Oh, you can't carry any more than that.$"
-
 MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne: @ 8210750
 	.string "I made a mistake and got two of\n"
 	.string "the same Dolls.\p"
@@ -1050,3 +1090,9 @@ MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase: @ 8210C2E
 	.string "You can't play if you don't have\n"
 	.string "a Coin Case.$"
 
+MauvilleCity_GameCorner_Text_GenesectLocked::
+	.string "GENESECT is a Champion's prize.\n"
+	.string "Return after earning eight Badges.$"
+
+MauvilleCity_GameCorner_Text_GenesectClaimed::
+	.string "You've already received GENESECT.$"

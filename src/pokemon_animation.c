@@ -483,6 +483,7 @@ enum BackAnim GetSpeciesBackAnimSet(enum Species species)
 #define tAnimId data[3]
 #define tBattlerId data[4]
 #define tSpeciesId data[5]
+#define tTracksBattleWait data[6]
 
 // BUG: In vanilla, tPtrLo is read as an s16, so if bit 15 of the
 // address were to be set it would cause the pointer to be read
@@ -524,21 +525,37 @@ static void Task_HandleMonAnimation(u8 taskId)
         sprite->data[2] = gTasks[taskId].tSpeciesId;
         sprite->data[1] = 0;
 
-        // Task_HandleMonAnimation handles more than just KO animations,
-        // but if the counter is non-zero then only KO animations are running.
-        // This assumption is not checked.
-        if (gBattleStruct->battlerKOAnimsRunning > 0)
+        if (gTasks[taskId].tTracksBattleWait && gBattleStruct != NULL
+         && gBattleStruct->battlerKOAnimsRunning > 0)
             gBattleStruct->battlerKOAnimsRunning--;
         DestroyTask(taskId);
     }
 }
 
-void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId)
+#if TESTING
+void Test_CompleteMonAnimation(struct Sprite *sprite, bool32 tracked)
+{
+    LaunchAnimationTaskForFrontSprite(sprite, 0);
+    u8 taskId = FindTaskIdByFunc(Task_HandleMonAnimation);
+    if (tracked)
+    {
+        TrackMonAnimationForBattle(taskId);
+        TrackMonAnimationForBattle(taskId); // Registration is idempotent.
+    }
+    // Enter the completion phase without needing a rendered animation.
+    gTasks[taskId].tState = 1;
+    sprite->callback = SpriteCallbackDummy;
+    Task_HandleMonAnimation(taskId);
+}
+#endif
+
+u8 LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId)
 {
     u8 taskId = CreateTask(Task_HandleMonAnimation, 128);
     gTasks[taskId].tPtrHi = (u32)(sprite) >> 16;
     gTasks[taskId].tPtrLo = (u32)(sprite);
     gTasks[taskId].tAnimId = frontAnimId;
+    return taskId;
 }
 
 void StartMonSummaryAnimation(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId)
@@ -548,7 +565,7 @@ void StartMonSummaryAnimation(struct Sprite *sprite, enum AnimFunctionIDs frontA
     sprite->callback = sMonAnimFunctions[frontAnimId];
 }
 
-void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, enum BackAnim backAnimSet)
+u8 LaunchAnimationTaskForBackSprite(struct Sprite *sprite, enum BackAnim backAnimSet)
 {
     u8 nature, taskId, battler;
     enum AnimFunctionIDs animId;
@@ -563,6 +580,17 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, enum BackAnim backA
     // * 3 below because each back anim has 3 variants depending on nature
     animId = 3 * backAnimSet + gNaturesInfo[nature].backAnim;
     gTasks[taskId].tAnimId = sBackAnimationIds[animId];
+    return taskId;
+}
+
+void TrackMonAnimationForBattle(u8 taskId)
+{
+    fatal_assertf(gBattleStruct != NULL, "Mon animation wait requires a battle");
+    if (!gTasks[taskId].tTracksBattleWait)
+    {
+        gTasks[taskId].tTracksBattleWait = TRUE;
+        gBattleStruct->battlerKOAnimsRunning++;
+    }
 }
 
 #undef tState
@@ -571,6 +599,7 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, enum BackAnim backA
 #undef tAnimId
 #undef tBattlerId
 #undef tSpeciesId
+#undef tTracksBattleWait
 
 void SetSpriteCB_MonAnimDummy(struct Sprite *sprite)
 {

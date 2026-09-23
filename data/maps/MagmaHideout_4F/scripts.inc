@@ -7,6 +7,7 @@
 .set LOCALID_GROUDON_SLEEPING, 7
 
 MagmaHideout_4F_MapScripts:: @ 823A55F
+	map_script MAP_SCRIPT_ON_TRANSITION, MagmaHideout_4F_ResetUnfinishedAwakening
 	.byte 0
 
 MagmaHideout_4F_EventScript_Maxie:: @ 823A560
@@ -33,7 +34,6 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonApproach
 	waitmovement 0
 	special FadeOutOrbEffect
-	waitstate
 	playmoncry SPECIES_GROUDON, 2
 	waitmoncry
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
@@ -53,7 +53,7 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_MaxieFightMe, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro_double TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -90,6 +90,7 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	removeobject LOCALID_GRUNT_2
 	removeobject LOCALID_GRUNT_3
 	removeobject LOCALID_TABITHA
+	removeobject LOCALID_EC_COURTNEY_MAGMA_HIDEOUT
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	fadescreen FADE_FROM_BLACK
 	releaseall
@@ -114,20 +115,6 @@ MagmaHideout_4F_Movement_GroudonApproach: @ 823A672
 MagmaHideout_4F_Movement_GroudonExit: @ 823A67D
 	slide_up
 	slide_up
-	step_end
-
-MagmaHideout_4F_Movement_MaxieLookAround: @ 823A680
-	face_left
-	delay_16
-	face_right
-	delay_16
-	face_left
-	delay_16
-	face_right
-	delay_16
-	face_up
-	delay_16
-	delay_16
 	step_end
 
 MagmaHideout_4F_EventScript_Grunt11:: @ 823A68C
@@ -237,13 +224,6 @@ MagmaHideout_4F_Text_MaxieAwakenGroudon: @ 823A9F4
 	.string "And show me…\n"
 	.string "Show me the full extent of your power!$"
 
-MagmaHideout_4F_Text_MaxieGroudonWhatsWrong: @ 823AADA
-	.string "Maxie: Groudon!\n"
-	.string "What's wrong?\p"
-	.string "Wasn't the Red Orb the key?\p"
-	.string "Groudon!\n"
-	.string "Where have you gone…$"
-
 MagmaHideout_4F_Text_MaxieOhItWasYou: @ 823AB33
 	.string "Maxie: Oh? You again?\p"
 	.string "I've seen you poking around uninvited\n"
@@ -271,9 +251,15 @@ MagmaHideout_4F_Text_MaxieDefeat: @ 823ABB5
 
 MagmaHideout_4F_Text_MaxieImGoingAfterGroudon: @ 823ABE2
 	.string "Maxie: No!\p"
-	.string "It seems you defeating Groudon was\n"
-	.string "enough to free it from my control…\n"
+	.string "Losing to you broke my hold\n"
+	.string "over Groudon…\p"
 	.string "With Groudon gone, there is no longer\n"
 	.string "any need for this blasted volcano.\p"
 	.string "I am going after Groudon, so this\n"
 	.string "is where we part!$"
+
+MagmaHideout_4F_ResetUnfinishedAwakening::
+	goto_if_set FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, MagmaHideout_4F_AwakeningAlreadyFinished
+	clearflag FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_ASLEEP
+MagmaHideout_4F_AwakeningAlreadyFinished::
+	end

@@ -7,10 +7,10 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother:: @ 822722B
 	faceplayer
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, 255
 	goto_if_eq SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot
+	copyvar VAR_0x8008, VAR_SEEDOT_SIZE_RECORD
 	special CompareSeedotSize
 	compare VAR_RESULT, 1
 	goto_if_eq SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot
@@ -46,6 +46,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot:: @ 8227290
 	end
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1:: @ 82272B2
+	copyvar VAR_SEEDOT_SIZE_RECORD, VAR_0x8008
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1, MSGBOX_DEFAULT
 	release
 	end
@@ -56,10 +57,10 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_LotadBrother:: @ 82272BC
 	faceplayer
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, 255
 	goto_if_eq SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad
+	copyvar VAR_0x8008, VAR_LOTAD_SIZE_RECORD
 	special CompareLotadSize
 	compare VAR_RESULT, 1
 	goto_if_eq SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad
@@ -95,6 +96,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad:: @ 8227321
 	end
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2:: @ 8227343
+	copyvar VAR_LOTAD_SIZE_RECORD, VAR_0x8008
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2, MSGBOX_DEFAULT
 	release
 	end
@@ -134,9 +136,6 @@ SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad: @ 8227480
 	.string "This is my thanks!$"
 
 @ Unused
-SootopolisCity_LotadAndSeedotHouse_Text_ReceivedPotion1: @ 822750E
-	.string "{PLAYER} received a Potion.$"
-
 SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1: @ 8227524
 	.string "Hunh?\n"
 	.string "Your Bag is crammed full.$"
@@ -182,9 +181,6 @@ SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot: @ 822776C
 	.string "This is my thanks!$"
 
 @ Unused
-SootopolisCity_LotadAndSeedotHouse_Text_ReceivedPotion2: @ 82277F4
-	.string "{PLAYER} received a Potion.$"
-
 SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2: @ 822780A
 	.string "Hunh?\n"
 	.string "Your Bag is crammed full.$"

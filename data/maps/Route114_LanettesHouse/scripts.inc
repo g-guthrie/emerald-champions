@@ -12,6 +12,9 @@ Route114_LanettesHouse_EventScript_Lanette:: @ 822B2D2
 	goto_if_set FLAG_RECEIVED_DOLL_LANETTE, Route114_LanettesHouse_EventScript_OfferAdvice
 	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_EverythingClutteredKeepThis, MSGBOX_DEFAULT
+	specialvar VAR_RESULT, CanReceiveLanetteDolls
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowNoRoomForDecor
 	givedecoration DECOR_LOTAD_DOLL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowNoRoomForDecor

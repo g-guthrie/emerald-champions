@@ -122,10 +122,13 @@ BattleFrontier_BattleDomeLobby_EventScript_ResumeChallenge:: @ 82499F9
 BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendant:: @ 8249A35
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOME
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	goto BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome
+	msgbox BattleFrontier_BattleDomeLobby_Text_SinglesClosed, MSGBOX_DEFAULT
+	release
 	end
+
+BattleFrontier_BattleDomeLobby_Text_SinglesClosed:
+	.string "The SINGLE tournament is closed.\n"
+	.string "The DOUBLE counter is open.$"
 
 BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendant:: @ 8249A47
 	lock
@@ -171,7 +174,6 @@ BattleFrontier_BattleDomeLobby_EventScript_TryEnterChallenge:: @ 8249ABF
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge
 	msgbox BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO
@@ -409,15 +411,6 @@ BattleFrontier_OutsideWest_EventScript_Man3:: @ 8249E19
 	end
 
 @ Unused
-BattleFrontier_OutsideWest_EventScript_BattleDomeSign2:: @ 8249E22
-	msgbox BattleFrontier_OutsideWest_Text_BattleDomeSign2, MSGBOX_NPC
-	end
-
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnderConstructionSign:: @ 8249E2B
-	msgbox BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction, MSGBOX_NPC
-	end
-
 BattleFrontier_BattleDomeLobby_EventScript_RulesBoard:: @ 8249E34
 	lockall
 	msgbox BattleFrontier_BattleDomeLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -508,7 +501,7 @@ BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen: @ 824A2AB
 	.string "You don't have three eligible Pokémon.\p"
 	.string "Also, the Pokémon must be holding\n"
 	.string "different kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50: @ 824A353
@@ -518,7 +511,7 @@ BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50: @ 824A353
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome: @ 824A437
@@ -537,21 +530,11 @@ BattleFrontier_BattleDomeLobby_Text_CongratsForWinningTourney: @ 824A4E9
 	.string "your Battle Tournament!$"
 
 @ Unused
-BattleFrontier_BattleDomeLobby_Text_HereIsYourPrize: @ 824A51D
-	.string "Here is your prize for your Battle\n"
-	.string "Tournament victory.$"
-
-@ Used by Verdanturf Tent
 BattleFrontier_BattleDomeLobby_Text_ReceivedPrize: @ 824A554
 	.string "{PLAYER} received the prize\n"
 	.string "{STR_VAR_1}.$"
 
 @ Unused
-BattleFrontier_BattleDomeLobby_Text_BagFullMakeRoom: @ 824A56E
-	.string "Oh, your Bag appears to be full.\p"
-	.string "Please make room in your Bag, then come\n"
-	.string "see me.$"
-
 BattleFrontier_BattleDomeLobby_Text_ThankYouForPlaying: @ 824A5BF
 	.string "Thank you for playing!$"
 
@@ -627,15 +610,6 @@ BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier: @ 824AB06
 	.string "I've long dreamed about a place like it.$"
 
 @ Functionally unused
-BattleFrontier_OutsideWest_Text_BattleDomeSign2: @ 824AB44
-	.string "The BATTLE DOME\n"
-	.string "Become the Unbeatable Superstar!$"
-
-@ Functionally unused
-BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction: @ 824AB75
-	.string "The ??????\n"
-	.string "Under Construction!$"
-
 BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation: @ 824AB94
 	.string "When a Trainer chains tournament\n"
 	.string "wins at the BATTLE DOME, he or she\l"

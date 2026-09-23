@@ -11,8 +11,11 @@
 
 #define NUM_SAVE_SLOTS 2
 
-// If the sector's signature field is not this value then the sector is either invalid or empty.
-#define SECTOR_SIGNATURE 0x8012025
+// Legacy logical-payload checksum; also retained by Hall of Fame sectors.
+#define SECTOR_SIGNATURE 0x08012025
+// New save slots checksum all payload bytes, including SaveBlock3. Keep the
+// low byte identical: incremental saves write that commit byte last.
+#define SECTOR_SIGNATURE_EXTENDED 0x08022025
 
 #define SPECIAL_SECTOR_SENTINEL 0xB39D
 

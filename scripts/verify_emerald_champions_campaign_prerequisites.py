@@ -19,7 +19,6 @@ SPECIAL_PARTY_GATES = {
     "CountPartyNonEggMons",
     "CountPartyAliveNonEggMons",
     "CountPartyAliveNonEggMons_IgnoreVar0x8004Slot",
-    "DoesPlayerPartyHaveSelectedSpeciesFamily",
     "DoesPlayerPartyContainSpecies",
     "CheckPartyHasSpecies",
     "PlayerPartyContainsSpeciesWithPlayerID",

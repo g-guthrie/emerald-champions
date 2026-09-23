@@ -89,7 +89,7 @@ DewfordTown_EventScript_OldRodFisherman::
 	msgbox DewfordTown_Text_FishedUpEviolite
 	giveitem ITEM_EVIOLITE
 	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_BagIsFull
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Text_ReceivedEviolite, MSGBOX_DEFAULT
 	setflag FLAG_DEWFORD_EVIOLITE
 	release
@@ -751,9 +751,10 @@ DewfordTown_Text_FishedUpEviolite:
 	.string "you take it!$"
 
 DewfordTown_Text_ReceivedEviolite:
-	.string "Maybe it'll be more useful in the hands\n"
-	.string "of a Pokémon Trainer?\p"
-	.string "It's no good as bait, that's for sure!$"
+	.string "Eviolite boosts both defenses for\n"
+	.string "Pokémon that can still evolve.\p"
+	.string "A spare lets another partner benefit\n"
+	.string "at the same time. No good as bait!$"
 
 DewfordTown_Text_BrawlyInSlateport:
 	.string "Hey, Champ-to-be!\p"

@@ -8,6 +8,7 @@ LavaridgeTown_MapScripts:: @ 81EA4D3
 
 LavaridgeTown_OnTransition: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
+	call_if_eq VAR_LAVARIDGE_TOWN_STATE, 3, LavaridgeTown_EventScript_ShowPendingGoggles
 	call_if_set FLAG_WHITEOUT_TO_LAVARIDGE, LavaridgeTown_EventScript_ClearLavaridgeWhiteOut
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_ShowMtChimneyTrainers
 	call Common_EventScript_SetupRivalGfxId
@@ -64,6 +65,9 @@ LavaridgeTown_EventScript_RivalGiveGoGoggles:: @ 81EA551
 	call_if_eq LavaridgeTown_EventScript_RivalApproachPlayer1
 	compare VAR_0x8008, 9
 	call_if_ne LavaridgeTown_EventScript_RivalApproachPlayer2
+	specialvar VAR_RESULT, CanReceiveGoGogglesGift
+	compare VAR_RESULT, FALSE
+	goto_if_eq LavaridgeTown_EventScript_GogglesNoRoom
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq LavaridgeTown_EventScript_MayGiveGoGoggles
@@ -257,15 +261,18 @@ LavaridgeTown_EventScript_EggWoman:: @ 81EA744
 	msgbox LavaridgeTown_Text_HaveEggWillYouTakeIt, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LavaridgeTown_EventScript_DeclineEgg
+LavaridgeTown_EventScript_CheckEggSpace::
 	getpartysize
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq LavaridgeTown_EventScript_NoRoomForEgg
-	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT
+	giveegg SPECIES_WYNAUT
+	goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, LavaridgeTown_EventScript_NoRoomForEgg
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
+LavaridgeTown_EventScript_EggDelivered::
+	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message LavaridgeTown_Text_ReceivedTheEgg
 	waitfanfare
-	giveegg SPECIES_WYNAUT
 	release
 	end
 
@@ -441,3 +448,49 @@ LavaridgeTown_Text_HerbShopSign: @ 81EB1CB
 	.string "Pokémon Herb Shop\n"
 	.string "“Bitter taste--better cure!”$"
 
+
+@ State 3 keeps the interrupted gift available without repeating the frame scene.
+LavaridgeTown_EventScript_ShowPendingGoggles::
+	setobjectxyperm LOCALID_RIVAL, 11, 9
+	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL
+	return
+
+LavaridgeTown_EventScript_GogglesNoRoom::
+	setvar VAR_LAVARIDGE_TOWN_STATE, 3
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
+	msgbox LavaridgeTown_Text_GogglesNoRoom, MSGBOX_DEFAULT
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	releaseall
+	end
+
+LavaridgeTown_EventScript_RetryGoGoggles::
+	lock
+	faceplayer
+	specialvar VAR_RESULT, CanReceiveGoGogglesGift
+	compare VAR_RESULT, FALSE
+	goto_if_eq LavaridgeTown_EventScript_GogglesNoRoom
+	giveitem ITEM_GO_GOGGLES
+	giveitem ITEM_SAFETY_GOGGLES
+	setflag FLAG_RECEIVED_GO_GOGGLES
+	setvar VAR_LAVARIDGE_TOWN_STATE, 2
+	msgbox LavaridgeTown_Text_GogglesReady, MSGBOX_DEFAULT
+	removeobject LOCALID_RIVAL
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	release
+	end
+
+LavaridgeTown_Text_GogglesNoRoom:
+	.string "Your Bag is full! Make room for\n"
+	.string "both pairs of goggles, then talk\l"
+	.string "to me. I'll wait here!$"
+
+LavaridgeTown_Text_GogglesReady:
+	.string "Go-Goggles keep desert sand out\n"
+	.string "of your eyes.\p"
+	.string "A Pokémon can hold Safety Goggles\n"
+	.string "to block weather damage and powder.\p"
+	.string "With four badges, you can also\n"
+	.string "challenge your dad in Petalburg!$"

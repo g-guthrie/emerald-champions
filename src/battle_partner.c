@@ -2,6 +2,7 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_partner.h"
+#include "battle_setup.h"
 #include "battle_frontier.h"
 #include "data.h"
 #include "frontier_util.h"
@@ -43,16 +44,20 @@ void FillPartnerParty(u16 trainerId)
         MakePartnerGenerator(&partnerGen, partner);
         if (trainerId == TRAINER_PARTNER(PARTNER_STEVEN))
             partnerGen.otID = OTID_STRUCT_PRESET(STEVEN_OTID);
+        bool32 isRival = trainerId >= TRAINER_PARTNER(PARTNER_MAY_TREECKO_METEOR_FALLS)
+                      && trainerId <= TRAINER_PARTNER(PARTNER_BRENDAN_MUDKIP_METEOR_FALLS);
         for (i = 0; i < lastIndex && i < partner->partySize; i++)
         {
             struct TrainerMon ally = partner->party[i];
-            if (trainerId == TRAINER_PARTNER(PARTNER_STEVEN))
+            if (trainerId == TRAINER_PARTNER(PARTNER_STEVEN) || isRival)
             {
                 ally.lvl = GetCurrentLevelCap();
                 ally.useLevelOffset = FALSE;
             }
             GenerateMonFromTrainerMon(&gParties[B_TRAINER_PARTNER][i], &ally, &partnerGen);
         }
+        if (isRival)
+            ApplyRivalStarterToParty(gParties[B_TRAINER_PARTNER]);
     }
     else if (trainerId == TRAINER_EREADER)
     {
@@ -82,6 +87,7 @@ void FillPartnerParty(u16 trainerId)
         {
             struct EmeraldBattleTowerRecord *record = &gSaveBlock2Ptr->frontier.towerRecords[trainerId];
             struct BattleTowerPokemon monData = record->party[gSaveBlock2Ptr->frontier.trainerIds[18 + i]];
+            memset(trainerName, EOS, sizeof(trainerName));
             StringCopy(trainerName, record->name);
             if (record->language == LANGUAGE_JAPANESE)
             {

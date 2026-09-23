@@ -123,7 +123,7 @@ VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge:: @ 8201893
 
 VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 82018CF
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	setvar VAR_RESULT, 2
 	frontier_checkineligible
 	compare VAR_0x8004, TRUE
@@ -134,7 +134,6 @@ VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 82018CF
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	msgbox VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
@@ -286,7 +285,6 @@ VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 8201B11
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_RulesLevel
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_RulesBasics

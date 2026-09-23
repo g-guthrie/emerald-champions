@@ -145,7 +145,6 @@ MeteorFalls_1F_1R_EventScript_BrendanAfterCancel::
 
 MeteorFalls_1F_1R_EventScript_MultiMay::
 	msgbox MeteorFalls_1F_1R_Text_MayLetsBattle, MSGBOX_DEFAULT
-	applymovement 5, MeteorFalls_1F_1R_Movement_WalkRight1
 	applymovement 11, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
@@ -155,6 +154,8 @@ MeteorFalls_1F_1R_EventScript_MultiMay::
 	choose_mons
     compare VAR_RESULT, 0
     call_if_eq MeteorFalls_1F_1R_EventScript_ChooseMons
+	applymovement LOCALID_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_WalkRight1
+	waitmovement LOCALID_MAGMA_GRUNT_1
 	@ The rival keeps the starter the player left behind (the player takes two).
 	special BufferEmeraldChampionsRivalBranch
 	switch VAR_RESULT
@@ -165,7 +166,6 @@ MeteorFalls_1F_1R_EventScript_MultiMay::
 
 MeteorFalls_1F_1R_EventScript_MultiBrendan::
 	msgbox MeteorFalls_1F_1R_Text_BrendayLetsBattle, MSGBOX_DEFAULT
-	applymovement 5, MeteorFalls_1F_1R_Movement_WalkRight1
 	applymovement 11, Common_Movement_WalkInPlaceLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceLeft
 	waitmovement 0
@@ -175,6 +175,8 @@ MeteorFalls_1F_1R_EventScript_MultiBrendan::
 	choose_mons
     compare VAR_RESULT, 0
     call_if_eq MeteorFalls_1F_1R_EventScript_ChooseMons
+	applymovement LOCALID_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_WalkRight1
+	waitmovement LOCALID_MAGMA_GRUNT_1
 	@ The rival keeps the starter the player left behind (the player takes two).
 	special BufferEmeraldChampionsRivalBranch
 	switch VAR_RESULT
@@ -185,57 +187,33 @@ MeteorFalls_1F_1R_EventScript_MultiBrendan::
 
 MeteorFalls_1F_1R_EventScript_MayBattleTreecko::
     multi_2_vs_2 TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyLose, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntLose, MAY_TREECKO_METEOR_FALLS
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MeteorFalls_1F_1R_EventScript_Lost
-	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
-    releaseall
-    end
+	goto MeteorFalls_1F_1R_EventScript_CheckMultiResult
 
 MeteorFalls_1F_1R_EventScript_MayBattleTorchic::
     multi_2_vs_2 TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyLose, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntLose, MAY_TORCHIC_METEOR_FALLS
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MeteorFalls_1F_1R_EventScript_Lost
-	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
-    releaseall
-    end
+	goto MeteorFalls_1F_1R_EventScript_CheckMultiResult
 
 MeteorFalls_1F_1R_EventScript_MayBattleMudkip::
     multi_2_vs_2 TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyLose, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntLose, MAY_MUDKIP_METEOR_FALLS
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MeteorFalls_1F_1R_EventScript_Lost
-	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
-    releaseall
-    end
+	goto MeteorFalls_1F_1R_EventScript_CheckMultiResult
 
 MeteorFalls_1F_1R_EventScript_BrendanBattleTreecko::
     multi_2_vs_2 TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyLose, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntLose, BRENDAN_TREECKO_METEOR_FALLS
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MeteorFalls_1F_1R_EventScript_Lost
-	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
-    releaseall
-    end
+	goto MeteorFalls_1F_1R_EventScript_CheckMultiResult
 
 MeteorFalls_1F_1R_EventScript_BrendanBattleTorchic::
     multi_2_vs_2 TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyLose, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntLose, BRENDAN_TORCHIC_METEOR_FALLS
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MeteorFalls_1F_1R_EventScript_Lost
-	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
-    releaseall
-    end
+	goto MeteorFalls_1F_1R_EventScript_CheckMultiResult
 
 MeteorFalls_1F_1R_EventScript_BrendanBattleMudkip::
     multi_2_vs_2 TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyLose, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntLose, BRENDAN_MUDKIP_METEOR_FALLS
+	goto MeteorFalls_1F_1R_EventScript_CheckMultiResult
+
+MeteorFalls_1F_1R_EventScript_CheckMultiResult::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MeteorFalls_1F_1R_EventScript_Lost
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_ne MeteorFalls_1F_1R_EventScript_Lost
 	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
-    releaseall
-    end
 
 MeteorFalls_1F_1R_EventScript_ChooseMons::
     msgbox MeteorFalls_1F_1R_Text_ChooseMons, MSGBOX_DEFAULT
@@ -247,9 +225,10 @@ MeteorFalls_1F_1R_EventScript_ChooseMons::
 MeteorFalls_1F_1R_EventScript_CancelMultiBattle::
     msgbox MeteorFalls_1F_1R_Text_CancelMultiBattle, MSGBOX_DEFAULT
 	setvar VAR_METEOR_FALLS_STATE, 2
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp4
-	applymovement OBJ_EVENT_ID_CAMERA, MeteorFalls_1F_1R_Movement_Camera2
-	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_RetreatToLedge
+	applymovement OBJ_EVENT_ID_CAMERA, MeteorFalls_1F_1R_Movement_RetreatToLedge
+	waitmovement OBJ_EVENT_ID_PLAYER
+	waitmovement OBJ_EVENT_ID_CAMERA
 	special RemoveCameraObject
 	fadedefaultbgm
     releaseall
@@ -258,7 +237,6 @@ MeteorFalls_1F_1R_EventScript_CancelMultiBattle::
 MeteorFalls_1F_1R_EventScript_Lost::
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
-	waitstate
 
 MeteorFalls_1F_1R_EventScript_MultiCancelled::
 	lockall
@@ -284,7 +262,8 @@ MeteorFalls_1F_1R_Movement_WalkDown2:
 	walk_down
 	step_end
 
-MeteorFalls_1F_1R_Movement_Camera2:
+MeteorFalls_1F_1R_Movement_RetreatToLedge:
+	walk_up
 	walk_up
 	walk_up
 	step_end
@@ -522,7 +501,7 @@ MeteorFalls_1F_1R_Text_CancelMultiBattle:
 
 MeteorFalls_1F_1R_Text_WithThisMeteorite: @ 822BF47
 	.string "Ahahaha!\p"
-	.string "Well, that's embarrasing.\n"
+	.string "Well, that's embarrassing.\n"
 	.string "But it doesn't matter.\p"
 	.string "With this Meteorite, that thing in\n"
 	.string "Mt. Chimney will…$"
@@ -573,7 +552,7 @@ MeteorFalls_1F_1R_Text_ArchieFarewell: @ 822C2FC
 
 MeteorFalls_1F_1R_Text_MeetProfCozmo: @ 822C342
 	.string "I… I'm Cozmo…\n"
-	.string "I'm a Professor\p"
+	.string "I'm a professor…\p"
 	.string "Team Magma asked me to guide them\n"
 	.string "to Meteor Falls…\p"
 	.string "But they tricked me.\n"

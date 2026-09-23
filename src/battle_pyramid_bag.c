@@ -1412,39 +1412,27 @@ static void CancelItemSwap(u8 taskId)
 
 void TryStoreHeldItemsInPyramidBag(void)
 {
-    u8 i;
-    struct Pokemon *party = gParties[B_TRAINER_PLAYER];
-    u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
-#if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
-    u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
-#else
-    u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
-#endif
-    enum Item heldItem;
+    gSpecialVar_Result = 1;
+    if (gSaveBlock2Ptr->frontier.lvlMode >= FRONTIER_LVL_MODE_COUNT)
+        return;
 
-    memcpy(newItems, gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
-    memcpy(newQuantities, gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
-    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    struct Pokemon *party = gParties[B_TRAINER_PLAYER];
+    struct PyramidBag *bag = &gSaveBlock2Ptr->frontier.pyramidBag;
+    struct PyramidBag before = *bag;
+    for (u32 i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
-        if (heldItem != ITEM_NONE && !AddBagItem(heldItem, 1))
+        enum Item item = GetMonData(&party[i], MON_DATA_HELD_ITEM);
+        if (item != ITEM_NONE && !AddPyramidBagItem(item, 1))
         {
-            // Cant store party held items in pyramid bag because bag is full
-            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
-            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
-            Free(newItems);
-            Free(newQuantities);
-            gSpecialVar_Result = 1;
+            *bag = before;
             return;
         }
     }
 
-    heldItem = ITEM_NONE;
-    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
-        SetMonData(&party[i], MON_DATA_HELD_ITEM, &heldItem);
+    enum Item item = ITEM_NONE;
+    for (u32 i = 0; i < FRONTIER_PARTY_SIZE; i++)
+        SetMonData(&party[i], MON_DATA_HELD_ITEM, &item);
     gSpecialVar_Result = 0;
-    Free(newItems);
-    Free(newQuantities);
 }
 
 static void InitPyramidBagWindows(void)

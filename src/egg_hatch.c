@@ -320,12 +320,11 @@ static void AddHatchedMonToParty(u8 id)
     SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
 
     species = GetMonData(mon, MON_DATA_SPECIES);
+    memset(name, EOS, sizeof(name));
     StringCopy(name, GetSpeciesName(species));
     SetMonData(mon, MON_DATA_NICKNAME, name);
 
     MarkLegendarySignCaughtBySpecies(species);
-    if (GetMonData(mon, MON_DATA_MET_LOCATION) == METLOC_DAYCARE_EGG)
-        FlagSet(FLAG_EC_HATCHED_DAYCARE_EGG);
 
     nationalDexNum = SpeciesToNationalPokedexNum(species);
     GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);

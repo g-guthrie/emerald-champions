@@ -11,6 +11,7 @@ VerdanturfTown_Mart_EventScript_Clerk:: @ 8202587
 	release
 	end
 
+	.align 2
 VerdanturfTown_Mart_Pokemart:
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFENSE
@@ -66,7 +67,7 @@ VerdanturfTown_Mart_Text_HaveTM66:
 	.string "tutor.$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
-	.string "For any Pokémon match, X Special\n"
+	.string "For any Pokémon match, X Sp. Atk\n"
 	.string "is crucial.\p"
 	.string "It jacks up the power of some moves\n"
 	.string "even though it's only for one battle.$"

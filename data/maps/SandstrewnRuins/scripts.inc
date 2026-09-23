@@ -28,6 +28,8 @@ SandstrewnRuins_BlockMirageTower:: @ Block the entrances to room one
 
 Sandstrewn_Ruins_EventScript_OddKeystone::
 	lock
+	checkitemspace ITEM_ODD_KEYSTONE, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox Sandstrewn_Ruins_Text_OddKeystone, MSGBOX_DEFAULT
 	waitmessage
@@ -46,4 +48,4 @@ Sandstrewn_Ruins_Text_OddKeystone:
 	.string "“Aband… …ip.”\l"
 	.string "“Storage … …sh can.”\p"
 	.string "{PLAYER} put away the Odd Keystone\n"
-	.string "in the Key Items Pocket.$"
+	.string "in the Items Pocket.$"

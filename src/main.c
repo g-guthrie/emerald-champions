@@ -85,7 +85,7 @@ static void CallCallbacks(void);
 #ifdef BUGFIX
 static void SeedRngWithRtc(void);
 #endif
-static void ReadKeys(void);
+static void ReadKeys(u16 keyInput);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
@@ -138,7 +138,7 @@ void AgbMainLoop(void)
 {
     for (;;)
     {
-        ReadKeys();
+        ReadKeys(REG_KEYINPUT ^ KEYS_MASK);
 
         if (gSoftResetDisabled == FALSE
          && JOY_HELD_RAW(A_BUTTON)
@@ -276,18 +276,13 @@ void InitKeys(void)
     gMain.newKeysRaw = 0;
 }
 
-static void ReadKeys(void)
+static void ReadKeys(u16 keyInput)
 {
-    u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
     gMain.newKeysRaw = keyInput & ~gMain.heldKeysRaw;
     gMain.newKeys = gMain.newKeysRaw;
     gMain.newAndRepeatedKeys = gMain.newKeysRaw;
 
-    // BUG: Key repeat won't work when pressing L using L=A button mode
-    // because it compares the raw key input with the remapped held keys.
-    // Note that newAndRepeatedKeys is never remapped either.
-
-    if (keyInput != 0 && gMain.heldKeys == keyInput)
+    if (keyInput != 0 && gMain.heldKeysRaw == keyInput)
     {
         gMain.keyRepeatCounter--;
 
@@ -314,11 +309,21 @@ static void ReadKeys(void)
 
         if (JOY_HELD(L_BUTTON))
             gMain.heldKeys |= A_BUTTON;
+
+        if (gMain.newAndRepeatedKeys & L_BUTTON)
+            gMain.newAndRepeatedKeys |= A_BUTTON;
     }
 
     if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
 }
+
+#ifdef TESTING
+void Test_ReadKeys(u16 keys)
+{
+    ReadKeys(keys);
+}
+#endif
 
 void InitIntrHandlers(void)
 {

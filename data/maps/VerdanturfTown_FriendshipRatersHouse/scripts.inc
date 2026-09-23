@@ -67,7 +67,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Trader:: @ 8203C11
 	lock
 	faceplayer
 	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, VerdanturfTown_FriendshipRatersHouse_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_HAPPINY
+	setvar VAR_0x8008, INGAME_TRADE_CYCLIZAR
 	@ This engine reads the trade index from VAR_0x8005 and the party slot from
 	@ VAR_0x8004; Inclement passes them the other way round.
 	copyvar VAR_0x8005, VAR_0x8008
@@ -77,7 +77,6 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Trader:: @ 8203C11
 	compare VAR_RESULT, NO
 	goto_if_eq VerdanturfTown_FriendshipRatersHouse_EventScript_DeclineTrade
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255
 	goto_if_eq VerdanturfTown_FriendshipRatersHouse_EventScript_DeclineTrade
@@ -87,10 +86,15 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Trader:: @ 8203C11
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne VerdanturfTown_FriendshipRatersHouse_EventScript_NotRequestedMon
 	copyvar VAR_0x8004, VAR_0x800A
+	specialvar VAR_RESULT, CanReceiveInGameTradePokemon
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeRestrictedParty
+	call Common_EventScript_ReturnNPCTradeItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeCancelled
+	copyvar VAR_0x8004, VAR_0x800A
 	copyvar VAR_0x8005, VAR_0x8008
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo @ re-buffer species names over the item name
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	bufferspeciesname 0, VAR_0x8009
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_ItsSubtlyDifferentThankYou, MSGBOX_DEFAULT
 	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
@@ -120,12 +124,12 @@ VerdanturfTown_FriendshipRatersHouse_Text_WillingToTradeIt: @ 8203CBE
 	.string "Oh, I can see that you want it!\n"
 	.string "After all, it's priceless!\p"
 	.string "I'll tell you what. I might be willing\n"
-	.string "to trade it for a {STR_VAR_1}.$"
+	.string "to trade it for an Igglybuff.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_ItsSubtlyDifferentThankYou: @ 8203D87
-	.string "Oh, so this is a {STR_VAR_1}?\p"
-	.string "It's sort of like a {STR_VAR_2},\n"
-	.string "and yet it's subtly different.\p"
+	.string "Oh, so this is an Igglybuff?\p"
+	.string "It's so round and soft… Nothing\n"
+	.string "like my Cyclizar at all.\p"
 	.string "Thank you!$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_WontAcceptAnyLessThanRealMon: @ 8203DDE
@@ -141,8 +145,8 @@ VerdanturfTown_FriendshipRatersHouse_Text_NotDesperateOrAnything: @ 8203E12
 VerdanturfTown_FriendshipRatersHouse_Text_ReallyWantedToGetBagon: @ 8203E7F
 	.string "I know I could go looking for one\n"
 	.string "on my own, but…\p"
-	.string "But I really wanted to get a Pyukumuku\n"
-	.string "that another Trainer caught…$"
+	.string "But I really wanted to get an\n"
+	.string "Igglybuff that another Trainer caught…$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou: @ 82030ED
 	.string "Let me see your Pokémon.\n"

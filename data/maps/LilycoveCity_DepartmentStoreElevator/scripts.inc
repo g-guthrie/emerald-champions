@@ -119,7 +119,6 @@ LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator:: @ 82207E5
 	waitmovement 0
 	waitse
 	special MoveElevator
-	waitstate
 	setflag FLAG_TEMP_2
 	return
 

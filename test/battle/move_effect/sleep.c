@@ -74,3 +74,37 @@ SINGLE_BATTLE_TEST("Hypnosis inflicts 1-2 turns of sleep (Champions)")
         STATUS_ICON(opponent, none: TRUE);
     }
 }
+
+DOUBLE_BATTLE_TEST("Wake-Up Slap: curing sleep removes Nightmare before a same-turn new sleep")
+{
+    GIVEN {
+        WITH_CONFIG(B_SLEEP_TURNS, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET) { Attack(1); Speed(200); Moves(MOVE_HYPNOSIS, MOVE_WAKE_UP_SLAP); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_NIGHTMARE, MOVE_HYPNOSIS); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Defense(200); Speed(20); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_HYPNOSIS, target: opponentLeft, WITH_RNG(RNG_SLEEP_TURNS, 3)); MOVE(playerRight, MOVE_NIGHTMARE, target: opponentLeft); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_WAKE_UP_SLAP, target: opponentLeft); MOVE(playerRight, MOVE_HYPNOSIS, target: opponentLeft, WITH_RNG(RNG_SLEEP_TURNS, 3)); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT(opponentLeft->status1 & STATUS1_SLEEP);
+        EXPECT(!(bool32)opponentLeft->volatiles.nightmare);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Jungle Healing: curing an ally removes Nightmare before same-turn new sleep")
+{
+    GIVEN {
+        WITH_CONFIG(B_SLEEP_TURNS, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(200); Moves(MOVE_HYPNOSIS, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_NIGHTMARE, MOVE_HYPNOSIS); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(20); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ZARUDE) { Speed(150); Moves(MOVE_CELEBRATE, MOVE_JUNGLE_HEALING); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_HYPNOSIS, target: opponentLeft, WITH_RNG(RNG_SLEEP_TURNS, 3)); MOVE(playerRight, MOVE_NIGHTMARE, target: opponentLeft); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_HYPNOSIS, target: opponentLeft, WITH_RNG(RNG_SLEEP_TURNS, 3)); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_JUNGLE_HEALING); }
+    } THEN {
+        EXPECT(opponentLeft->status1 & STATUS1_SLEEP);
+        EXPECT(!(bool32)opponentLeft->volatiles.nightmare);
+    }
+}

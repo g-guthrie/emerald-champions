@@ -38,7 +38,6 @@ MauvilleCity_BikeShop_EventScript_NotFar:: @ 820EC3D
 	end
 
 MauvilleCity_BikeShop_EventScript_YesFar:: @ 820EC4A
-	setflag FLAG_RECEIVED_BIKE
 	goto MauvilleCity_BikeShop_EventScript_ChooseBike
 	end
 
@@ -55,6 +54,9 @@ MauvilleCity_BikeShop_EventScript_GetAcroBike:: @ 820EC6D
 	end
 
 MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes:: @ 820EC87
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_BIKE
 	msgbox MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes, MSGBOX_DEFAULT
 	special SwapRegisteredBike
 	release
@@ -325,4 +327,3 @@ MauvilleCity_BikeShop_Text_Jumps: @ 820F898
 	.string "Press it backwards to make the Bike\n"
 	.string "change directions while jumping.\p"
 	.string "Want to read a different page?$"
-

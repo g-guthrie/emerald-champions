@@ -18,7 +18,6 @@
 #include "random.h"
 #include "util.h"
 #include "emerald_champions_battle_plan.h"
-#include "emerald_champions_perish.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/items.h"
@@ -1421,16 +1420,40 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
      // it is not redundant on a user that is already faster.
      && action->executedMove != MOVE_FAKE_OUT && action->executedMove != MOVE_FIRST_IMPRESSION)
     {
-        // Priority buys one thing: striking first. A user that already
-        // outspeeds its target has bought it for free, so the extra step is
-        // worth nothing and the comparison belongs to the damage - which is
+        // Against ordinary-priority attacks, an already faster user gains
+        // no order advantage from priority. In that case the comparison
+        // belongs to the damage - which is
         // how a Huge Power body took the small priority attack twice over the
         // move that would have ended the same target.
         bool32 slowerTarget = gFieldStatuses & STATUS_FIELD_TRICK_ROOM
             ? gAiLogicData->speedStats[actor] < gAiLogicData->speedStats[action->target]
             : gAiLogicData->speedStats[actor] > gAiLogicData->speedStats[action->target];
         if (slowerTarget)
-            return -45;
+        {
+            // Speed alone does not make priority redundant: it can outrun
+            // the target's own priority. Use available moves, never its
+            // selected command. Keep the existing penalty otherwise.
+            s32 priority = AI_GetMovePriority(actor, gAiLogicData->abilities[actor], move);
+            bool32 gainsOrder = FALSE;
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            {
+                enum Move response = gBattleMons[action->target].moves[slot];
+                if (!HasMove(action->target, response)
+                 || IsMoveUnusable(slot, response, gAiLogicData->moveLimitations[action->target])
+                 || IsBattleMoveStatus(response)
+                 || !gAiLogicData->simulatedDmg[action->target][actor][slot].maximum)
+                    continue;
+                s32 responsePriority = AI_GetMovePriority(action->target,
+                    gAiLogicData->abilities[action->target], response);
+                if (responsePriority > 0 && responsePriority <= priority)
+                {
+                    gainsOrder = TRUE;
+                    break;
+                }
+            }
+            if (!gainsOrder)
+                return -45;
+        }
     }
     if (move == MOVE_WIDE_GUARD || move == MOVE_QUICK_GUARD)
     {
@@ -2420,7 +2443,9 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
     {
         if (target == actor || !IsBattlerAlive(target)
          || (move == MOVE_COACHING && target != GetPartnerBattler(actor))
-         || ((speedDrop || sleep || burn || quash || taunt || encore || paralysis || targetDropStat) && IsBattlerAlly(actor, target)))
+         // Sleep can legally target an ally. Cache its effect as well so the
+         // trial charges the lost action/status instead of treating it as free.
+         || ((speedDrop || burn || quash || taunt || encore || paralysis || targetDropStat) && IsBattlerAlly(actor, target)))
             continue;
         struct BattleCalcValues cv = {.battlerAtk = actor, .battlerDef = target, .move = move, .moveEffect = GetMoveEffect(move)};
         for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
@@ -3961,15 +3986,16 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // already acted or can use its chosen move while asleep.
                 newSleepTargets |= 1u << target;
                 newSleepSides |= 1u << side;
-                if (!(acted & (1u << target)) && !IsUsableWhileAsleepEffect(GetMoveEffect(actions[target].move)))
+                chance = chance * min(100, gAiLogicData->moveAccuracy[actor][target][action->index]) * survival[actor] / 10000;
+                chance = chance * guardHitChance / 100;
+                if (chance)
                 {
-                    chance = chance * min(100, gAiLogicData->moveAccuracy[actor][target][action->index]) * survival[actor] / 10000;
-                    chance = chance * guardHitChance / 100;
-                    if (chance)
-                    {
+                    // Sleep still affects later turns if the target already
+                    // acted (or used Sleep Talk). Keep that state's value even
+                    // when there is no current action left to deny.
+                    *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                    if (!(acted & (1u << target)) && !IsUsableWhileAsleepEffect(GetMoveEffect(actions[target].move)))
                         stopped |= 1u << target;
-                        *effectChance = *effectChance ? min(*effectChance, chance) : chance;
-                    }
                 }
                 continue;
             }

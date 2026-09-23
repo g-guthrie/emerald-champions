@@ -30,12 +30,13 @@ RustboroCity_CuttersHouse_Text_ExplainCut: @ 8215D33
 	.string "With the Stone Badge and this\n"
 	.string "license, approach a thin tree\l"
 	.string "and press A to cut it down.\p"
-	.string "Your Pokémon do not need to\n"
-	.string "learn Cut.$"
+	.string "Bring one able to learn Cut;\n"
+	.string "it needn't know the move.\p"
+	.string "You can also clear tall grass\n"
+	.string "using Cut in the party menu.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees: @ 8215E39
 	.string "When they were expanding the city of\n"
 	.string "Rustboro, my dad helped out.\p"
 	.string "He made his Pokémon use Cut to clear\n"
 	.string "the land of trees.$"
-

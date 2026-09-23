@@ -2,7 +2,7 @@
 #include "battle.h"
 #include "battle_ai_util.h"
 #include "battle_setup.h"
-#include "emerald_champions_perish.h"
+#include "emerald_champions_battle_plan.h"
 #include "test/battle.h"
 #include "constants/opponents.h"
 

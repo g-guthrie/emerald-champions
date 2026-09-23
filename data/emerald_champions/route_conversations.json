@@ -11,8 +11,7 @@
         3
       ],
       "scripts": [
-        "Route115_EventScript_Nob",
-        "Route115_EventScript_RematchNob"
+        "Route115_EventScript_Nob"
       ],
       "dialogue": [
         "I punched a rock for training.",
@@ -47,8 +46,7 @@
         17
       ],
       "scripts": [
-        "Route116_EventScript_Karen",
-        "Route116_EventScript_RematchKaren"
+        "Route116_EventScript_Karen"
       ],
       "dialogue": [
         "I studied type matchups all night.",
@@ -154,8 +152,7 @@
         8
       ],
       "scripts": [
-        "Route117_EventScript_Dylan",
-        "Route117_EventScript_RematchDylan"
+        "Route117_EventScript_Dylan"
       ],
       "dialogue": [
         "Training tip: take a breath.",
@@ -929,8 +926,7 @@
         12
       ],
       "scripts": [
-        "Route120_EventScript_Robert",
-        "Route120_EventScript_RematchRobert"
+        "Route120_EventScript_Robert"
       ],
       "dialogue": [
         "My bird knows the way home.",

@@ -139,12 +139,14 @@ AI_SINGLE_BATTLE_TEST("EXPECT_FAIL detects failures caused by EXPECT_MOVE")
 
 AI_SINGLE_BATTLE_TEST("EXPECT_FAIL detects failures caused by EXPECT_SWITCH")
 {
+    // An identical reserve gives the AI no reason to switch, so the expected
+    // switch below must fail whatever the switching heuristics are.
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_CHOICE_SCARF); Moves(MOVE_FAKE_OUT, MOVE_BODY_SLAM); }
-        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM); }
     } WHEN {
-        TURN { EXPECT_MOVE(opponent, MOVE_FAKE_OUT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_BODY_SLAM); }
         EXPECT_FAIL {
             TURN { EXPECT_SWITCH(opponent, 1); }
         }

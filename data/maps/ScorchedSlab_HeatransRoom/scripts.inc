@@ -16,22 +16,12 @@ ScorchedSlab_HeatransRoom_EventScript_Heatran::
 	setwildbattle SPECIES_HEATRAN, VAR_0x800A, ITEM_OCCA_BERRY
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq ScorchedSlab_HeatransRoom_EventScript_DefeatedHeatran
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq ScorchedSlab_HeatransRoom_EventScript_RanFromHeatran
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq ScorchedSlab_HeatransRoom_EventScript_RanFromHeatran
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, ScorchedSlab_HeatransRoom_EventScript_RanFromHeatran
 	setflag FLAG_DEFEATED_HEATRAN
 	release
-	end
-
-ScorchedSlab_HeatransRoom_EventScript_DefeatedHeatran::
-	setflag FLAG_DEFEATED_HEATRAN
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 ScorchedSlab_HeatransRoom_EventScript_RanFromHeatran::

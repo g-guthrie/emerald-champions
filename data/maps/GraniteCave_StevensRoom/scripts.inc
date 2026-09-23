@@ -6,22 +6,18 @@ GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
 GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	lock
 	faceplayer
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_EventScript_GiveReward
 	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
+GraniteCave_StevensRoom_EventScript_GiveReward::
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
 	compare VAR_RESULT, FALSE
-	call_if_eq GraniteCave_StevensRoom_EventScript_BagFull
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox GraniteCave_StevensRoom_Text_RegisteredSteven, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
 	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	closemessage
@@ -53,10 +49,6 @@ GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
 	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
-	return
-
-GraniteCave_StevensRoom_EventScript_BagFull:: @ 822DD3C
-	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
 	return
 
 GraniteCave_StevensRoom_Movement_StevenExit: @ 822DD45
@@ -106,20 +98,7 @@ GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
 	.string "capable.\p"
 	.string "If you keep training, you could even\n"
 	.string "become the Champion of the Pokémon\l"
-	.string "League one day. That's what I think.\p"
-	.string "I know, since we've gotten to know each\n"
-	.string "other, let's register one another in\l"
-	.string "our PokéNavs.\p"
-	.string "… … … … … …$"
-
-GraniteCave_StevensRoom_Text_RegisteredSteven: @ 822DF6A
-	.string "Registered Steven\n"
-	.string "in the PokéNav.$"
+	.string "League one day. That's what I think.$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong: @ 822DF8C
 	.string "Now, I've got to hurry along.$"
-
-GraniteCave_StevensRoom_Text_OhBagIsFull: @ 822DFAA
-	.string "Oh, your Bag is full…\n"
-	.string "That's too bad, then.$"
-

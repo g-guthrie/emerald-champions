@@ -6,11 +6,9 @@ Route133_MapScripts::
 	.byte 0
 
 Route133_OnTransition:
-	compare VAR_POKE_VIAL_MAX_CHARGES, 1
-	goto_if_eq Route133_HideNurse
 	compare VAR_POKE_VIAL_MAX_CHARGES, 2
 	goto_if_eq Route133_ShowNurse
-	end
+	goto Route133_HideNurse
 
 Route133_HideNurse:
 	setflag FLAG_LENT_NURSE_SURF
@@ -25,11 +23,6 @@ Route133_EventScript_Franklin:: @ 81F75A3
 	msgbox Route133_Text_FranklinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route133_EventScript_Debra:: @ 81F75BA
-	@ This retired encounter has no campaign battle.
-	msgbox Route133_Text_DebraPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route133_EventScript_Linda:: @ 81F75D1
 	trainerbattle_double TRAINER_LINDA, Route133_Text_LindaIntro, Route133_Text_LindaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_LindaPostBattle, MSGBOX_AUTOCLOSE
@@ -38,11 +31,6 @@ Route133_EventScript_Linda:: @ 81F75D1
 Route133_EventScript_Warren:: @ 81F75E8
 	trainerbattle_double TRAINER_WARREN, Route133_Text_WarrenIntro, Route133_Text_WarrenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route133_EventScript_Beck:: @ 81F75FF
-	@ This retired encounter has no campaign battle.
-	msgbox Route133_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Mollie:: @ 81F7616
@@ -67,11 +55,14 @@ Route133_EventScript_Nurse::
 	msgbox Route133_Text_NurseHello, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route133_EventScript_NurseRefuse
-Route133_EventScript_NurseTeachAudino::
-	msgbox Route133_Text_NurseTeachAudino, MSGBOX_DEFAULT
-	playse SE_PC_LOGIN
-	waitse
+Route133_EventScript_NurseGuideChansey::
+	msgbox Route133_Text_NurseGuideChansey, MSGBOX_DEFAULT
+	applymovement LOCALID_CHANSEY, Route133_Movement_CrossCurrent
+	waitmovement LOCALID_CHANSEY
+	applymovement LOCALID_NURSE, Route133_Movement_CrossCurrent
+	waitmovement LOCALID_NURSE
 	playfanfare MUS_LEVEL_UP
+	waitfanfare
 	msgbox Route133_Text_NurseDoneHaveVialUpgrade, MSGBOX_DEFAULT
 	setvar VAR_POKE_VIAL_MAX_CHARGES, 3
 	setvar VAR_POKE_VIAL_CHARGES, 3
@@ -92,7 +83,7 @@ Route133_EventScript_NurseShortMsg::
 	msgbox Route133_Text_NurseSoYoullHelp, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route133_EventScript_NurseRefuse
-	goto Route133_EventScript_NurseTeachAudino
+	goto Route133_EventScript_NurseGuideChansey
 
 Route133_EventScript_NurseRefuse::
 	setvar VAR_TEMP_1, 1
@@ -120,13 +111,22 @@ Route133_Movement_ChanseyJump:
 	jump_in_place_left
 	step_end
 
+Route133_Movement_CrossCurrent:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
 Route133_Text_Chansey:
 	.string "Siii!$"
 
 Route133_Text_NurseHello:
 	.string "Oh, hey, {PLAYER}! Can you help\n"
 	.string "us?\p"
-	.string "My Audino is frightened of the\n"
+	.string "My Chansey is frightened of the\n"
 	.string "strong currents. Could your team\l"
 	.string "show it a safe way across?$"
 
@@ -134,15 +134,15 @@ Route133_Text_NurseReally:
 	.string "Really? Please, I'm desperate here!$"
 
 Route133_Text_NurseSoYoullHelp:
-	.string "Will your team help my Audino\n"
+	.string "Will your team help my Chansey\n"
 	.string "across the currents?$"
 
-Route133_Text_NurseTeachAudino:
-	.string "Thank you! Look, Audino. Follow\n"
-	.string "their lead and take your time.$"
+Route133_Text_NurseGuideChansey:
+	.string "Thank you! Look, Chansey. Follow\n"
+	.string "this safe path and take your time.$"
 
 Route133_Text_NurseDoneHaveVialUpgrade:
-	.string "And… done!\p"
+	.string "Chansey made it across!\p"
 	.string "Thanks again, {PLAYER}. As a reward,\n"
 	.string "I'll make sure you get an extra dose\l"
 	.string "whenever you refill your Poké Vial\l"

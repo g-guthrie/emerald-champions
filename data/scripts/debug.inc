@@ -602,9 +602,6 @@ Debug_EventScript_InflictStatus1_Text_Freeze:
 Debug_EventScript_InflictStatus1_Text_Frostbite:
 	.string "Frostbite$"
 
-Debug_EventScript_InflictStatus1_Text_KO:
-	.string "KO$"
-
 Debug_EventScript_ChangeNature_Text_Hardy:
 	.string "Hardy$"
 Debug_EventScript_ChangeNature_Text_Lonely:
@@ -757,7 +754,6 @@ Debug_EventScript_FontTest_Text_8::
 	.string "sayyid. Zloty zloty zodiac for the gizmo\l"
 	.string "ozone of the franz laissez and buzzing.$"
 
-
 Debug_EventScript_FontTest_Text_9::                 @ Special thanks to Nintendo for this nice pangram to test other glyphs
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
 	.string "42 × 138 = 5796.\n"
@@ -817,7 +813,6 @@ Debug_EventScript_FakeRTCNotEnabled::
 
 Debug_EventScript_FakeRTCNotEnabled_Text_0:
 	.string "You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h$"
-
 
 Debug_EventScript_TellTheTime_Text_0:
 	.string "Time and date:\n"

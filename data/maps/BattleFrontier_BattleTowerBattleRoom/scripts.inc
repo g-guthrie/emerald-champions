@@ -456,10 +456,6 @@ BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth: @ 8242217
 	.string "full health.$"
 
 @ Unused
-BattleFrontier_BattleTowerBattleRoom_Text_ReadyForOpponent: @ 8242244
-	.string "You will be facing opponent no. {STR_VAR_1}.\n"
-	.string "Are you ready?$"
-
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor2ndOpponent: @ 8242277
 	.string "You will be facing opponent no. 2.\n"
 	.string "Are you ready?$"

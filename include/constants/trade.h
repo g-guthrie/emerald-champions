@@ -7,10 +7,12 @@
 // In-game Trade IDs
 enum InGameTradeID
 {
-    INGAME_TRADE_FIDOUGH,
-    INGAME_TRADE_BOMBIRDIER,
-    INGAME_TRADE_CYCLIZAR,
-    INGAME_TRADE_TYPE_NULL,
+    // Inclement Emerald's four traders, re-skinned onto species with no other
+    // source; each keeps its donor's OT, otId, conditions and personality.
+    INGAME_TRADE_FIDOUGH,    // Rustboro, Kobe
+    INGAME_TRADE_BOMBIRDIER, // Dewford Hall, Roman
+    INGAME_TRADE_CYCLIZAR,   // Verdanturf, Skylar
+    INGAME_TRADE_TYPE_NULL,  // Fortree, Isis
     // FRLG
     INGAME_TRADE_MR_MIME,
     INGAME_TRADE_JYNX,
@@ -21,16 +23,7 @@ enum InGameTradeID
     INGAME_TRADE_ELECTRODE,
     INGAME_TRADE_TANGELA,
     INGAME_TRADE_SEEL,
-    INGAME_TRADE_TROPIUS,
-    INGAME_TRADE_HAPPINY,
 };
-
-// Inclement Emerald's first and fourth in-game trades live at these same two
-// slots here, re-skinned onto newer species. Both keep the donor's otId, OT
-// name, contest conditions and personality, so the NPCs and their scripts line
-// up 1:1 (Rustboro's Kobe, the Frontier/Fortree trader's Isis).
-#define INGAME_TRADE_PAWNIARD    INGAME_TRADE_FIDOUGH
-#define INGAME_TRADE_KARRABLAST  INGAME_TRADE_TYPE_NULL
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon
 enum CanTradeMon

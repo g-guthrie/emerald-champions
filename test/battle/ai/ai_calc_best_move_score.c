@@ -116,7 +116,8 @@ AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases o
 {
     u32 hp;
 
-    PARAMETRIZE { hp = 120; }
+    // 80 HP: Sonic Boom is a 4HKO (not chip), the other three 2HKOs.
+    PARAMETRIZE { hp = 80; }
     PARAMETRIZE { hp = 20; }
 
     GIVEN {
@@ -124,7 +125,7 @@ AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases o
         PLAYER(SPECIES_WOBBUFFET) { Speed(15); HP(hp); }
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Level(40); Moves(MOVE_SONICBOOM, MOVE_DRAGON_RAGE, MOVE_NIGHT_SHADE, MOVE_SEISMIC_TOSS); }
     } WHEN {
-        if (hp == 120)
+        if (hp == 80)
         {
             TURN {
                 SCORE_EQ_VAL(opponent, MOVE_SONICBOOM,      AI_SCORE_DEFAULT);
@@ -281,7 +282,8 @@ AI_SINGLE_BATTLE_TEST("Fillet Away AI handling")
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_SLOWBRO){ Level(100); Nature(NATURE_BOLD); Ability(ABILITY_REGENERATOR); Speed(96); Moves(move); }
+        // Slowbro's HP keeps Aqua Cutter a 4HKO rather than chip.
+        PLAYER(SPECIES_SLOWBRO){ Level(100); HP(180); Nature(NATURE_BOLD); Ability(ABILITY_REGENERATOR); Speed(96); Moves(move); }
         OPPONENT(SPECIES_VELUZA){ Level(100); Nature(NATURE_ADAMANT); Ability(ABILITY_SHARPNESS); Speed(176); Moves(MOVE_FILLET_AWAY, MOVE_AQUA_CUTTER); }
     } WHEN {
         TURN { MOVE(player, move); EXPECT_MOVE(opponent, move == MOVE_SCALD ? MOVE_FILLET_AWAY : MOVE_AQUA_CUTTER); }

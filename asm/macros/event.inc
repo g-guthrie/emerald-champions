@@ -178,7 +178,7 @@
 	@ Copies the value of source into destination.
 	.macro copyvar destination:req, source:req, warn=TRUE
 	.if \warn && !((\source >= VARS_START && \source <= VARS_END) || (\source >= SPECIAL_VARS_START && \source <= SPECIAL_VARS_END))
-	.warning "copyvar with a value that is not a VAR_ constant; did you mean setvar instead?"
+	.error "copyvar source must be a VAR_ constant; use setvar for literal values"
 	.endif
 	.byte SCR_OP_COPYVAR
 	.2byte \destination
@@ -824,14 +824,9 @@
 	.endm
 
 	@ Starts a doubles trainer battle after dialogue has already been shown.
-	@ This retains the native two-usable-Pokemon guard used by trainerbattle_double.
-	.macro trainerbattle_no_intro_double trainer:req, lose_text:req, not_enough_pkmn_text:req
-	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
-	.endm
-
-	@ Continues an already-started attrition sequence even if only one usable
-	@ player Pokemon survived the previous Double Battle.
-	.macro trainerbattle_no_intro_double_allow_single trainer:req, lose_text:req
+	@ The scene has already committed to this fight, so a player with only one
+	@ usable Pokemon battles alone instead of aborting the script mid-scene.
+	.macro trainerbattle_no_intro_double trainer:req, lose_text:req
 	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES
 	.endm
 
@@ -1221,8 +1216,8 @@
 	.endm
 
 	@ Replaces the move at 'slot' of the Pokémon in the player's party at 'partyIndex' with the specified move.
-	@ If a value greater than PARTY_SIZE is given for partyIndex it will use the last Pokémon in the party instead.
-	@ Note that this means in vanilla a value equal to PARTY_SIZE for partyIndex will go out of bounds.
+	@ A partyIndex >= PARTY_SIZE selects the last party member, including Eggs.
+	@ Empty selections and invalid move/slot values do nothing.
 	.macro setmonmove partyIndex:req, slot:req, move:req
 	.byte SCR_OP_SETMONMOVE
 	.byte \partyIndex
@@ -2882,7 +2877,6 @@
 	.byte \loBerry
 	.byte \hiBerry
 	giveitem VAR_RESULT
-	call EmeraldChampions_EventScript_MintBerryHarvest
 	.endm
 
 @ VS Seeker
@@ -3032,20 +3026,6 @@
 	call EventScript_BrailleCursorWaitButton
 	.endm
 
-	@ Complete a campaign milestone and its stipend once. Only scratch var 3 is
-	@ clobbered; pending item results and the other script parameters survive.
-	.macro completemilestone flag:req
-	setvar VAR_0x8003, \flag
-	special CompleteEmeraldChampionsMilestone
-	.endm
-
-	@ Buffers a completed milestone's new cap into STR_VAR_1 and stipend into
-	@ STR_VAR_2 (both decimal, no currency sign). Sets VAR_RESULT to 0 (not a
-	@ cap/stipend milestone), 1 (cap only), 2 (stipend only), or 3 (both).
-	.macro buffermilestonetext flag:req
-	setvar VAR_0x8003, \flag
-	special BufferCampaignMilestoneText
-	.endm
 
 @ Inclement Emerald compatibility
 @
@@ -3159,7 +3139,8 @@
 	.endm
 
 	@ Inclement's name for the lock_anim movement action
-	@ (MOVEMENT_ACTION_LOCK_ANIM, 0x94 in both engines). Defined here rather
-	@ than beside lock_anim in asm/macros/movement.inc because macros.inc is
-	@ included first, so create_movement_action is already in scope.
-	create_movement_action store_lock_anim, MOVEMENT_ACTION_LOCK_ANIM
+	@ (MOVEMENT_ACTION_LOCK_ANIM, 0x94 in both engines). Event-only users,
+	@ including native script tests, do not include the movement macro factory.
+	.macro store_lock_anim
+	.byte MOVEMENT_ACTION_LOCK_ANIM
+	.endm

@@ -22,8 +22,8 @@ MossdeepCity_Mart_Text_ReviveIsFantastic: @ 8222411
 
 MossdeepCity_Mart_Text_MaxRepelLastsLongest: @ 82224A0
 	.string "Max Repel keeps all weak Pokémon away.\p"
-	.string "Out of all the Repel sprays, it lasts\n"
-	.string "the longest.$"
+	.string "My Repel Spray lasts even longer,\n"
+	.string "and I never run out of it!$"
 
 MossdeepCity_Mart_Text_NetAndDiveBallsRare: @ 82224FA
 	.string "The Net and Dive Balls are rare Poké\n"

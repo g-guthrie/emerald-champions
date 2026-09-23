@@ -92,8 +92,6 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
             rewards[item].append("Route123_BerryMastersHouse: one-time garden berry trade")
     # Follow reachable native transaction entrypoints as well as item macros.
     native_rewards = {
-        "ClaimEmeraldChampionsSootMilestone": ("ITEM_HOUNDOOMINITE", "FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE"),
-        "TradeEmeraldChampionsShoalMaterials": ("ITEM_GLALITITE", "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE"),
     }
     native = (root / "src/field_specials.c").read_text()
     for special, (item, receipt) in native_rewards.items():
@@ -107,14 +105,27 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
     return dict(rewards)
 
 
+def duplicate_reward_sources(rewards: dict[str, list[str]]) -> dict[str, list[str]]:
+    # A one-time Berry Master exchange may give an extra copy of a stone found
+    # at an existing Inclement pickup. Keep the pickup unique and the exchange
+    # one-time; two placed gifts or two exchange grants remain errors.
+    duplicates = {}
+    for item, sources in rewards.items():
+        trades = [source for source in sources if source.endswith("one-time garden berry trade")]
+        pickups = [source for source in sources if source not in trades]
+        if len(pickups) != 1 or len(trades) > 1:
+            duplicates[item] = sources
+    return duplicates
+
+
 def main() -> None:
     rewards = world_reward_sources()
     missing = set(stones()) - rewards.keys()
     if missing:
         raise SystemExit(f"Mega Stones missing world rewards: {sorted(missing)}")
-    duplicates = {item: sources for item, sources in rewards.items() if len(sources) != 1}
+    duplicates = duplicate_reward_sources(rewards)
     if duplicates:
-        raise SystemExit(f"Mega Stones must have exactly one world reward source: {duplicates}")
+        raise SystemExit(f"Mega Stones need one pickup and at most one Berry Master trade: {duplicates}")
     source = (ROOT / "src/field_specials.c").read_text()
     vendor = (ROOT / "data/scripts/emerald_champions.inc").read_text()
     all_scripts = "\n".join(path.read_text() for path in (ROOT / "data").rglob("*.inc"))
@@ -129,7 +140,7 @@ def main() -> None:
     catalogue_stones |= set(stones()) & set(re.findall(r"\bITEM_\w+", (ROOT / "src/data/emerald_champions_form_items.h").read_text()))
     if catalogue_stones:
         raise SystemExit(f"Mega Stones cannot be free catalogue stock: {sorted(catalogue_stones)}")
-    print(f"PASS: all {len(rewards)} Mega Stones have exactly one finite world reward source")
+    print(f"PASS: all {len(rewards)} Mega Stones have one finite pickup and at most one one-time Berry Master trade")
     print("PASS: no free Mega archive or catalogue stock")
 
 

@@ -98,7 +98,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth:: @ 81F93BA
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_MaysHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_MayCatchYouLater, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth
@@ -112,7 +112,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth:: @ 81F93E9
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_MaysHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_MayCatchYouLater, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth
@@ -126,7 +126,7 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest:: @ 81F9418
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_MaysHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_MayCatchYouLater, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest
@@ -139,62 +139,12 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast:: @ 81F9440
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_MaysHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_MayCatchYouLater, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast
 	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast
 	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_ChooseStarterSet::
-	setvar VAR_0x8004, SCROLL_MULTI_REGION_NAMES
-	special ShowScrollableMultichoice
-	waitstate
-	switch VAR_RESULT
-	case 0, LittlerootTown_MaysHouse_2F_EventScript_Kanto
-	case 1, LittlerootTown_MaysHouse_2F_EventScript_Johto
-	case 2, LittlerootTown_MaysHouse_2F_EventScript_Hoenn
-	case 3, LittlerootTown_MaysHouse_2F_EventScript_Sinnoh
-	case 4, LittlerootTown_MaysHouse_2F_EventScript_Unova
-	case 5, LittlerootTown_MaysHouse_2F_EventScript_Kalos
-	case 6, LittlerootTown_MaysHouse_2F_EventScript_Alola
-	goto LittlerootTown_MaysHouse_2F_EventScript_Hoenn
-	end
-
-LittlerootTown_MaysHouse_2F_EventScript_Kanto::
-	setvar VAR_STARTER_GEN, 1
-	bufferstring 1, StarterRegionStringKanto
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Johto::
-	setvar VAR_STARTER_GEN, 2
-	bufferstring 1, StarterRegionStringJohto
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Hoenn::
-	setvar VAR_STARTER_GEN, 3
-	bufferstring 1, StarterRegionStringHoenn
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Sinnoh::
-	setvar VAR_STARTER_GEN, 4
-	bufferstring 1, StarterRegionStringSinnoh
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Unova::
-	setvar VAR_STARTER_GEN, 5
-	bufferstring 1, StarterRegionStringUnova
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Kalos::
-	setvar VAR_STARTER_GEN, 6
-	bufferstring 1, StarterRegionStringKalos
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Alola::
-	setvar VAR_STARTER_GEN, 7
-	bufferstring 1, StarterRegionStringAlola
 	return
 
 LittlerootTown_MaysHouse_2F_Movement_MayEnters: @ 81F946F
@@ -274,12 +224,6 @@ LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest: @ 81F94A4
 	step_end
 
 @ Unused, the player is already facing this direction so its unneeded
-LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayWest: @ 81F94A9
-	delay_16
-	delay_16
-	walk_in_place_fast_right
-	step_end
-
 LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast: @ 81F94AD
 	walk_right
 	walk_right
@@ -376,7 +320,6 @@ LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC:: @ 81F9576
 	playse SE_PC_ON
 	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
 	special BedroomPC
-	waitstate
 	releaseall
 	end
 
@@ -415,11 +358,6 @@ RivalsHouse_2F_Text_MayWhoAreYou: @ 81F959C
 	.string "from the, um…\p"
 	.string "Oh, darn. Which region was it again?$"
 
-RivalsHouse_2F_Text_MayCatchYouLater:
-	.string "Huh? The {STR_VAR_2} region?\n"
-	.string "Wow, I think that was it!\p"
-	.string "{PLAYER}{KUN}, I'll catch you later!$"
-
 RivalsHouse_2F_Text_MayGettingReady: @ 81F978A
 	.string "Pokémon fully restored!\n"
 	.string "Items ready, and…$"
@@ -447,11 +385,6 @@ RivalsHouse_2F_Text_BrendanWhoAreYou: @ 81F97B4
 	.string "They're very rare, and they're all\n"
 	.string "from the, uh…\p"
 	.string "Hmm. Which region was it again?$"
-
-RivalsHouse_2F_Text_BrendanSomeOtherTime:
-	.string "The {STR_VAR_2} region?\n"
-	.string "Huh, I think that was it, actually.\p"
-	.string "Some other time, okay?$"
 
 RivalsHouse_2F_Text_BrendanGettingReady: @ 81F9962
 	.string "Pokémon fully restored…\n"

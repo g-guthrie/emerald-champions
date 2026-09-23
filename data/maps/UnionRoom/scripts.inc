@@ -106,11 +106,3 @@ UnionRoom_EventScript_Attendant:: @ 823D236
 	waitstate
 	release
 	end
-
-UnionRoom_EventScript_Unused:: @ 823D240
-	lockall
-	setvar VAR_RESULT, UR_INTERACT_UNUSED
-	waitstate
-	releaseall
-	end
-

@@ -13,7 +13,6 @@ RustboroCity_Flat1_2F_EventScript_WaldasDad:: @ 821513A
 
 RustboroCity_Flat1_2F_EventScript_GivePhrase:: @ 8215157
 	special DoWaldaNamingScreen
-	waitstate
 	compare VAR_0x8004, 1
 	goto_if_eq RustboroCity_Flat1_2F_EventScript_CancelGivePhrase
 	compare VAR_0x8004, 2

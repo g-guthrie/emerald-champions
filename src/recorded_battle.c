@@ -39,6 +39,7 @@ EWRAM_DATA static u8 sBattleRecords[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE] = {
 EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA static u32 sBattlerDroppedRecordBytes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sRecordMode = 0;
 EWRAM_DATA static u8 sLvlMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
@@ -63,7 +64,6 @@ EWRAM_DATA static u8 sBattleOutcome = 0;
 static u8 sRecordMixFriendLanguage;
 static u8 sApprenticeLanguage;
 
-static u8 GetNextRecordedDataByte(u8 *, u8 *, u8 *);
 static bool32 CopyRecordedBattleFromSave(struct RecordedBattleSave *);
 static void RecordedBattle_RestoreSavedParties(void);
 static void CB2_RecordedBattle(void);
@@ -80,6 +80,7 @@ void RecordedBattle_Init(u8 mode)
         sBattlerRecordSizes[i] = 0;
         sBattlerPrevRecordSizes[i] = 0;
         sBattlerSavedRecordSizes[i] = 0;
+        sBattlerDroppedRecordBytes[i] = 0;
 
         if (mode == B_RECORD_MODE_RECORDING)
         {
@@ -152,21 +153,34 @@ void RecordedBattle_SetTrainerInfo(void)
 
 void RecordedBattle_SetBattlerAction(enum BattlerId battler, u8 action)
 {
-    if (sBattlerRecordSizes[battler] < BATTLER_RECORD_SIZE && sRecordMode != B_RECORD_MODE_PLAYBACK)
+    if (sRecordMode == B_RECORD_MODE_PLAYBACK)
+        return;
+    if (sBattlerRecordSizes[battler] < BATTLER_RECORD_SIZE)
         sBattleRecords[battler][sBattlerRecordSizes[battler]++] = action;
+    else if (sBattlerDroppedRecordBytes[battler] != UINT32_MAX)
+        sBattlerDroppedRecordBytes[battler]++;
 }
 
 void RecordedBattle_ClearBattlerAction(enum BattlerId battler, u8 bytesToClear)
 {
-    s32 i;
-
-    for (i = 0; i < bytesToClear; i++)
+    u32 dropped = min(bytesToClear, sBattlerDroppedRecordBytes[battler]);
+    sBattlerDroppedRecordBytes[battler] -= dropped;
+    bytesToClear -= dropped;
+    // Published history is committed. Only the current, unpublished choice may
+    // be undone, and discarded bytes never consume earlier recorded choices.
+    while (bytesToClear != 0 && sBattlerRecordSizes[battler] > sBattlerPrevRecordSizes[battler])
     {
-        sBattlerRecordSizes[battler]--;
-        sBattleRecords[battler][sBattlerRecordSizes[battler]] = 0xFF;
-        if (sBattlerRecordSizes[battler] == 0)
-            break;
+        sBattleRecords[battler][--sBattlerRecordSizes[battler]] = 0xFF;
+        bytesToClear--;
     }
+}
+
+static void FinishInvalidRecordedBattle(void)
+{
+    gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED;
+    ResetPaletteFadeControl();
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    SetMainCallback2(CB2_QuitRecordedBattle);
 }
 
 u8 RecordedBattle_GetBattlerAction(u32 actionType, enum BattlerId battler)
@@ -177,10 +191,7 @@ u8 RecordedBattle_GetBattlerAction(u32 actionType, enum BattlerId battler)
     // Trying to read past array or invalid action byte, battle is over.
     if (sBattlerRecordSizes[battler] >= BATTLER_RECORD_SIZE || sBattleRecords[battler][sBattlerRecordSizes[battler]] == 0xFF)
     {
-        gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED; // hah
-        ResetPaletteFadeControl();
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        SetMainCallback2(CB2_QuitRecordedBattle);
+        FinishInvalidRecordedBattle();
         return B_ACTION_NONE;
     }
     else
@@ -189,60 +200,79 @@ u8 RecordedBattle_GetBattlerAction(u32 actionType, enum BattlerId battler)
     }
 }
 
-u8 RecordedBattle_BufferNewBattlerData(u8 *dst)
+u8 RecordedBattle_BufferNewBattlerData(u8 *dst, u32 capacity)
 {
-    u8 i, j;
-    u8 idx = 0;
-
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    u32 written = 0;
+    capacity = min(capacity, UINT8_MAX);
+    for (u32 battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
-        if (sBattlerRecordSizes[i] != sBattlerPrevRecordSizes[i])
-        {
-            dst[idx++] = i;
-            dst[idx++] = sBattlerRecordSizes[i] - sBattlerPrevRecordSizes[i];
-
-            for (j = 0; j < sBattlerRecordSizes[i] - sBattlerPrevRecordSizes[i]; j++)
-                dst[idx++] = sBattleRecords[i][sBattlerPrevRecordSizes[i] + j];
-
-            sBattlerPrevRecordSizes[i] = sBattlerRecordSizes[i];
-        }
+        u32 pending = sBattlerRecordSizes[battler] - sBattlerPrevRecordSizes[battler];
+        if (pending == 0)
+            continue;
+        if (capacity - written < 3)
+            break;
+        u32 count = min(pending, capacity - written - 2);
+        dst[written++] = battler;
+        dst[written++] = count;
+        memcpy(dst + written, sBattleRecords[battler] + sBattlerPrevRecordSizes[battler], count);
+        written += count;
+        sBattlerPrevRecordSizes[battler] += count;
     }
-
-    return idx;
+    return written;
 }
 
-void RecordedBattle_RecordAllBattlerData(u8 *src)
+static bool32 AppendRecordedBattleData(const u8 *src, u32 capacity)
 {
-    s32 i;
-    u8 idx = 2;
-    u8 size;
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-        return;
-
-    for (i = 0; i < GetLinkPlayerCount(); i++)
+    if (capacity < 2 || src[0] != src[1] || src[0] > capacity - 2)
+        return FALSE;
+    u32 end = 2 + src[0];
+    u32 sizes[MAX_BATTLERS_COUNT];
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
+        sizes[i] = sBattlerSavedRecordSizes[i];
+    // Validate the whole packet before changing any battler's history.
+    for (u32 offset = 2; offset < end;)
     {
+        if (end - offset < 2)
+            return FALSE;
+        u32 battler = src[offset++];
+        u32 count = src[offset++];
+        if (battler >= MAX_BATTLERS_COUNT || count > end - offset
+         || sizes[battler] + count > BATTLER_RECORD_SIZE)
+            return FALSE;
+        sizes[battler] += count;
+        offset += count;
+    }
+    for (u32 offset = 2; offset < end;)
+    {
+        u32 battler = src[offset++];
+        u32 count = src[offset++];
+        memcpy(sBattleRecords[battler] + sBattlerSavedRecordSizes[battler], src + offset, count);
+        sBattlerSavedRecordSizes[battler] += count;
+        offset += count;
+    }
+    return TRUE;
+}
+
+#ifdef TESTING
+bool32 Test_AppendRecordedBattleData(const u8 *src, u32 capacity)
+{
+    return AppendRecordedBattleData(src, capacity);
+}
+u32 Test_ReceivedRecordSize(enum BattlerId battler)
+{
+    return sBattlerSavedRecordSizes[battler];
+}
+#endif
+
+void RecordedBattle_RecordAllBattlerData(const u8 *src, u32 capacity)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || (gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
+        return;
+    for (u32 i = 0; i < GetLinkPlayerCount(); i++)
         if ((gLinkPlayers[i].version & 0xFF) != VERSION_EMERALD)
             return;
-    }
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-    {
-        for (size = *src; size != 0;)
-        {
-            enum BattlerId battler = GetNextRecordedDataByte(src, &idx, &size);
-            u8 numActions = GetNextRecordedDataByte(src, &idx, &size);
-
-            for (i = 0; i < numActions; i++)
-                sBattleRecords[battler][sBattlerSavedRecordSizes[battler]++] = GetNextRecordedDataByte(src, &idx, &size);
-        }
-    }
-}
-
-static u8 GetNextRecordedDataByte(u8 *data, u8 *idx, u8 *size)
-{
-    (*size)--;
-    return data[(*idx)++];
+    if (!AppendRecordedBattleData(src, capacity))
+        gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
 }
 
 bool32 CanCopyRecordedBattleSaveData(void)
@@ -661,6 +691,40 @@ void RecordedBattle_CopyBattlerMoves(enum BattlerId battler)
 // It shares a value with B_ACTION_SAFARI_POKEBLOCK, which can never occur in a recorded battle.
 #define ACTION_MOVE_CHANGE 6
 
+static bool32 IsRecordedMoveChangeValid(const u8 *record, u32 remaining)
+{
+    if (remaining < 1 + MAX_MON_MOVES)
+        return FALSE;
+    for (u32 i = 1; i <= MAX_MON_MOVES; i++)
+        if (record[i] >= MAX_MON_MOVES)
+            return FALSE;
+    // Legacy writers repeat indices for identical moves (including empty slots).
+    // Such records are safe to read and must remain playable.
+    return TRUE;
+}
+
+#ifdef TESTING
+bool32 Test_IsRecordedMoveChangeValid(const u8 *record, u32 remaining)
+{
+    return IsRecordedMoveChangeValid(record, remaining);
+}
+#endif
+
+static u32 ReorderMimickedMoveFlags(u32 flags, const u8 *order)
+{
+    u32 result = 0;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        result |= ((flags >> order[i]) & 1) << i;
+    return result;
+}
+
+#ifdef TESTING
+u32 Test_ReorderMimickedMoveFlags(u32 flags, const u8 *order)
+{
+    return ReorderMimickedMoveFlags(flags, order);
+}
+#endif
+
 void RecordedBattle_CheckMovesetChanges(u8 mode)
 {
     s32 j, k;
@@ -700,11 +764,21 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
             }
             else // B_RECORD_MODE_PLAYBACK
             {
-                if (sBattleRecords[battler][sBattlerRecordSizes[battler]] == ACTION_MOVE_CHANGE)
+                u32 cursor = sBattlerRecordSizes[battler];
+                if (cursor >= BATTLER_RECORD_SIZE)
                 {
+                    FinishInvalidRecordedBattle();
+                    return;
+                }
+                if (sBattleRecords[battler][cursor] == ACTION_MOVE_CHANGE)
+                {
+                    if (!IsRecordedMoveChangeValid(&sBattleRecords[battler][cursor], BATTLER_RECORD_SIZE - cursor))
+                    {
+                        FinishInvalidRecordedBattle();
+                        return;
+                    }
                     u8 ppBonuses[MAX_MON_MOVES];
                     u8 moveSlots[MAX_MON_MOVES];
-                    u8 mimickedMoveSlots[MAX_MON_MOVES];
                     struct ChooseMoveStruct movePP;
                     u8 ppBonusSet;
 
@@ -721,7 +795,6 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
                         movePP.moves[j] = gBattleMons[battler].moves[moveSlots[j]];
                         movePP.currentPP[j] = gBattleMons[battler].pp[moveSlots[j]];
                         movePP.maxPP[j] = ppBonuses[moveSlots[j]];
-                        mimickedMoveSlots[j] = (gBattleMons[battler].volatiles.mimickedMoves & (1u << j)) >> j;
                     }
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
@@ -729,11 +802,10 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
                         gBattleMons[battler].pp[j] = movePP.currentPP[j];
                     }
                     gBattleMons[battler].ppBonuses = 0;
-                    gBattleMons[battler].volatiles.mimickedMoves = 0;
+                    gBattleMons[battler].volatiles.mimickedMoves = ReorderMimickedMoveFlags(gBattleMons[battler].volatiles.mimickedMoves, moveSlots);
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         gBattleMons[battler].ppBonuses |= movePP.maxPP[j] << (j << 1);
-                        gBattleMons[battler].volatiles.mimickedMoves |= mimickedMoveSlots[j] << j;
                     }
 
                     if (!(gBattleMons[battler].volatiles.transformed))

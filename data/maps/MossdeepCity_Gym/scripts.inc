@@ -49,16 +49,7 @@ MossdeepCity_Gym_EventScript_SetSwitch4Metatiles:: @ 8220885
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLiza:: @ 8220898
-	setflag FLAG_SYS_INVERSE_BATTLE
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_Gym_EventScript_TateAndLizaRematch
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
-	clearflag FLAG_SYS_INVERSE_BATTLE
 	goto_if_unset FLAG_RECEIVED_TM04, MossdeepCity_Gym_EventScript_GiveCalmMind2
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
@@ -83,7 +74,6 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: @ 82208D1
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN
-	clearflag FLAG_SYS_INVERSE_BATTLE
 	setvar VAR_MOSSDEEP_CITY_STATE, 1
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 1
@@ -109,120 +99,6 @@ MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM04
 	return
-
-MossdeepCity_Gym_EventScript_TateAndLizaRematch::
-	msgbox MossdeepCity_Gym_Text_TateAndLizaAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_TATE_AND_LIZA
-	clearflag FLAG_SYS_INVERSE_BATTLE
-	releaseall
-	end
-
-MossdeepCity_Gym_EventScript_TateAndLizaDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_TATE_AND_LIZA
-	clearflag FLAG_SYS_INVERSE_BATTLE
-	releaseall
-	end
-
-MossdeepCity_Gym_EventScript_AlreadyRematched::
-	msgbox MossdeepCity_Gym_Text_TateAndLizaPostRematch, MSGBOX_AUTOCLOSE
-	clearflag FLAG_SYS_INVERSE_BATTLE
-	releaseall
-	end
-
-MossdeepCity_Gym_EventScript_Exit::
-	clearflag FLAG_SYS_INVERSE_BATTLE
-	releaseall
-	end
-
-@ All the below switch scripts are leftover from RS and are functionally unused
-MossdeepCity_Gym_EventScript_Switch1:: @ 8220999
-	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_ClearSwitch1
-	setflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 5, 5, METATILE_RS_MossdeepGym_RedArrow_Right, 0
-	setmetatile 2, 7, METATILE_RS_MossdeepGym_Switch_Down, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed:: @ 82209C8
-	special DrawWholeMapView
-	playse SE_CLICK
-	releaseall
-	end
-
-MossdeepCity_Gym_EventScript_ClearSwitch1:: @ 82209D0
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 5, 5, METATILE_RS_MossdeepGym_RedArrow_Left, 0
-	setmetatile 2, 7, METATILE_RS_MossdeepGym_Switch_Up, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_Switch2:: @ 82209F5
-	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_ClearSwitch2
-	setflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 8, 14, METATILE_RS_MossdeepGym_RedArrow_Right, 0
-	setmetatile 8, 10, METATILE_RS_MossdeepGym_Switch_Down, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_ClearSwitch2:: @ 8220A24
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 8, 14, METATILE_RS_MossdeepGym_RedArrow_Down, 0
-	setmetatile 8, 10, METATILE_RS_MossdeepGym_Switch_Up, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_Switch3:: @ 8220A49
-	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_ClearSwitch3
-	setflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 15, 17, METATILE_RS_MossdeepGym_RedArrow_Left, 0
-	setmetatile 17, 15, METATILE_RS_MossdeepGym_Switch_Down, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_ClearSwitch3:: @ 8220A78
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 15, 17, METATILE_RS_MossdeepGym_RedArrow_Right, 0
-	setmetatile 17, 15, METATILE_RS_MossdeepGym_Switch_Up, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_Switch4:: @ 8220A9D
-	lockall
-	goto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_ClearSwitch4
-	setflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 1, 23, METATILE_RS_MossdeepGym_RedArrow_Up, 0
-	setmetatile 5, 24, METATILE_RS_MossdeepGym_Switch_Down, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
-
-MossdeepCity_Gym_EventScript_ClearSwitch4:: @ 8220ACC
-	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
-	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse
-	waitmovement 0
-	setmetatile 1, 23, METATILE_RS_MossdeepGym_RedArrow_Right, 0
-	setmetatile 5, 24, METATILE_RS_MossdeepGym_Switch_Up, 1
-	goto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed
-	end
 
 MossdeepCity_Gym_EventScript_WarpToEntrance:: @ 8220AF1
 	lockall
@@ -298,6 +174,8 @@ MossdeepCity_Gym_EventScript_GymGuide::
 	goto_if_set FLAG_MOSSDEEP_GYM_REVIVAL_HERBS, MossdeepCity_Gym_Guide2
 	msgbox MossdeepCity_Gym_Text_Guide1, MSGBOX_DEFAULT
 	giveitem ITEM_REVIVAL_HERB, 10
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_MOSSDEEP_GYM_REVIVAL_HERBS
 	msgbox MossdeepCity_Gym_Text_Guide2, MSGBOX_DEFAULT
 	release
@@ -314,11 +192,6 @@ MossdeepCity_Gym_EventScript_GymGuidePostVictory:: @ 81FC998
 	end
 
 @ Leftover from RS, functionally unused
-MossdeepCity_Gym_Movement_WaitAfterSwitchUse: @ 8220C30
-	delay_16
-	delay_16
-	step_end
-
 MossdeepCity_Gym_EventScript_LeftGymStatue:: @ 8220C33
 	lockall
 	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_GymStatueCertified
@@ -595,12 +468,6 @@ MossdeepCity_Gym_Text_TateAndLizaIntro: @ 8221783
 	.string "Liza: We can each determine what…\p"
 	.string "Tate: The other is thinking…\n"
 	.string "Liza: All in our minds!\p"
-	.string "Tate: Also…\n"
-	.string "Liza: This will be an Inverse Battle!\p"
-	.string "Tate: Supereffective moves will be…\n"
-	.string "Liza: Not very effective!\p"
-	.string "Tate: And not very effective moves…\n"
-	.string "Liza: will be Supereffective!\p"
 	.string "Tate: This combination of ours…\n"
 	.string "Liza: Can you beat it?$"
 
@@ -617,12 +484,9 @@ MossdeepCity_Gym_Text_ReceivedMindBadge: @ 822196A
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis: @ 8221999
 	.string "Tate: You earned the Mind Badge!\p"
 	.string "Liza: It lets you use Dive once\n"
-	.string "Steven gives you the license.\l"
-	.string "It works with any party!$"
-
-MossdeepCity_Gym_Text_RegisteredSlowbro: @ 8221AEA
-	.string "Registered Tate & Liza's Slowbro\n"
-	.string "in the PokéNav.$"
+	.string "Steven gives you the license.\p"
+	.string "Bring a Pokémon able to learn it;\n"
+	.string "it needn't know Dive!$"
 
 MossdeepCity_Gym_Text_TakeThis:
 	.string "Liza: You should also take this, too.$"
@@ -631,10 +495,6 @@ MossdeepCity_Gym_Text_ExplainCalmMind: @ 8221A40
 	.string "Tate: This is Meowsticite!\p"
 	.string "Liza: Give it to Meowstic to\n"
 	.string "Mega Evolve with your Mega Ring!$"
-
-MossdeepCity_Gym_Text_RegisteredTateAndLiza: @ 8221AEA
-	.string "Registered Gym Leaders Tate & Liza\n"
-	.string "in the PokéNav.$"
 
 MossdeepCity_Gym_Text_TateAndLizaPostBattle: @ 8221B1D
 	.string "Tate: Looks like the bond between you\n"
@@ -659,37 +519,3 @@ MossdeepCity_Gym_Text_GymStatueCertified: @ 8221CCA
 	.string "Mossdeep City Pokémon Gym\p"
 	.string "Liza and Tate's Certified Trainers:\n"
 	.string "{PLAYER}$"
-
-MossdeepCity_Gym_Text_TateAndLizaPreRematch: @ 8221D0B
-	.string "Tate: Our combination…\n"
-	.string "Liza: We'll show you again and again!$"
-
-MossdeepCity_Gym_Text_TateAndLizaRematchDefeat: @ 8221E05
-	.string "Tate: You and your Pokémon…\n"
-	.string "Liza: It's as if you were siblings!$"
-
-MossdeepCity_Gym_Text_TateAndLizaPostRematch: @ 8221E45
-	.string "Tate: You can knock us down,\n"
-	.string "but we'll never stay down!\p"
-	.string "Liza: Because the two of us,\n"
-	.string "we always support each other!$"
-
-MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons: @ 8221EB8
-	.string "Tate: Oh…\n"
-	.string "Liza: For our match…\p"
-	.string "Tate: You brought just one Pokémon!\n"
-	.string "Liza: You brought just one Pokémon!\p"
-	.string "Tate: We need you to bring at least…\n"
-	.string "Liza: Two Pokémon when you come back.$"
-
-MossdeepCity_Gym_Text_TateAndLizaAllowLegends:
-	.string "Tate: Pokémon…\n"
-	.string "Liza: Pokémon…\p"
-	.string "Tate: By changing the party's mix…\n"
-	.string "Liza: The battle style changes.\p"
-	.string "Tate: But me…\n"
-	.string "Liza: But me…\p"
-	.string "Tate: I'll always be with Liza!\n"
-	.string "Liza: I'll always be with Tate!\p"
-	.string "Tate: Tell us - will you battle…\n"
-	.string "Liza: Our Legendary Pokémon?$"

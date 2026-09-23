@@ -854,6 +854,10 @@ bool8 IsWeatherNotFadingIn(void)
 
 void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
 {
+    // LoadSpritePalette returns 0xFF when no OBJ palette can be allocated.
+    // Never turn that failure into an offset beyond the palette buffers.
+    if (spritePaletteIndex >= 16)
+        return;
     u16 paletteIndex = 16 + spritePaletteIndex;
     u16 i;
 

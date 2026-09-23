@@ -159,17 +159,33 @@ SSTidalCorridor_EventScript_Porthole:: @ 823C17D
 
 SSTidalCorridor_EventScript_LookThroughPorthole:: @ 823C19E
 	special LookThroughPorthole
-	waitstate
 	end
 
 SSTidalCorridor_EventScript_Sailor:: @ 823C1A3
 	lock
 	faceplayer
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	@ Before the League the ship is an ordinary ferry; during the voyage the
+	@ sailor tracks the cabins himself; any other finale stage gets directions.
+	goto_if_eq VAR_RESULT, EC_FINALE_LEAGUE, SSTidalCorridor_EventScript_SailorCabins
+	goto_if_ne VAR_RESULT, EC_FINALE_VOYAGE, SSTidalCorridor_EventScript_SailorDirections
+SSTidalCorridor_EventScript_SailorCabins:
 	goto_if_set FLAG_DEFEATED_SS_TIDAL_TRAINERS, SSTidalCorridor_EventScript_EnjoyYourCruise
 	call SSTidalCorridor_EventScript_CheckIfTrainersDefeated
 	msgbox SSTidalCorridor_Text_VisitOtherCabins, MSGBOX_DEFAULT
 	release
 	end
+
+SSTidalCorridor_EventScript_SailorDirections:
+	compare VAR_RESULT, EC_FINALE_STEVEN
+	call_if_ge SSTidalCorridor_EventScript_RecordVoyageComplete
+	call Common_EventScript_FinaleDirections
+	release
+	end
+
+SSTidalCorridor_EventScript_RecordVoyageComplete:
+	setflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
+	return
 
 SSTidalCorridor_EventScript_EnjoyYourCruise:: @ 823C1BD
 	msgbox SSTidalCorridor_Text_EnjoyYourCruise, MSGBOX_DEFAULT
@@ -256,25 +272,17 @@ SSTidalCorridor_Movement_SailorReturn: @ 823C28B
 	walk_in_place_fast_up
 	step_end
 
-SSTidalCorridor_Text_ScottBattleFrontierInvite: @ 823C28F
-	.string "Scott: Well, hi, hi!\n"
-	.string "{PLAYER}{KUN}, {PLAYER}{KUN}!\p"
-	.string "Something's come up, so I have to\n"
-	.string "disembark, but am I glad to see you!\p"
-	.string "Congratulations, League Champion!\p"
-	.string "There's a place I'd like to invite\n"
-	.string "someone like you.\p"
-	.string "It's the…\n"
-	.string "Battle Frontier!\p"
-	.string "What's the place like?\n"
-	.string "You'll understand when you see it!\p"
-	.string "I've spoken with the ship's CAPTAIN\n"
-	.string "about this.\p"
-	.string "The next time you take a ferry,\n"
-	.string "you should be able to sail to\l"
-	.string "the Battle Frontier.\p"
-	.string "Okay, {PLAYER}{KUN}, I'll be waiting for you\n"
-	.string "at the Battle Frontier!$"
+SSTidalCorridor_Text_ScottBattleFrontierInvite:
+	.string "Scott: Congratulations, Champion!\p"
+	.string "Your journey isn't over yet.\n"
+	.string "Once you've faced Wally, five teams\l"
+	.string "aboard this ship will be ready.\p"
+	.string "You'll find them in the cabins.\n"
+	.string "There's a bed where you can heal.\p"
+	.string "After you've beaten them, Steven\n"
+	.string "awaits deep in Meteor Falls.\p"
+	.string "He knows the way to Birth Island.\n"
+	.string "Something extraordinary waits there!$"
 
 SSTidal_Text_FastCurrentsHopeYouEnjoyVoyage: @ 823C462
 	.string "This ferry is built to plow through\n"

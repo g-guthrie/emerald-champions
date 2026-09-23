@@ -19,7 +19,7 @@ FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 82177CB
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_WrongGuess
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM10
@@ -50,7 +50,7 @@ FortreeCity_House2_EventScript_SleepTalkTM::
 	compare VAR_RESULT, NO
 	goto_if_eq FortreeCity_House2_EventScript_SleepTalkDeclined
 	msgbox FortreeCity_Text_GiveTM49, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BIG_PEARL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_FORTREE_CITY_HOUSE2
 	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
@@ -67,27 +67,19 @@ FortreeCity_House2_EventScript_SleepTalkDeclined::
 	release
 	end
 
-FortreeCity_House2_EventScript_SleepTalkTaught::
-	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
-	release
-	end
-
 FortreeCity_House2_Text_WantSleepTalk:
-	.string "Humph! My wife relies on Hidden\n"
-	.string "Power to stay awake.\p"
-	.string "She should just take a nap like I do,\n"
-	.string "and Sleep Talk.\p"
-	.string "I can teach your Pokémon how to\n"
-	.string "Sleep Talk instead. Interested?$"
+	.string "My wife loves her coin trick.\n"
+	.string "I prefer a good nap!\p"
+	.string "I have a Big Pearl for a traveling\n"
+	.string "Trainer. Would you like it?$"
 
 FortreeCity_House2_Text_SleepTalkDeclined:
-	.string "Oh, fine, fine. You want to stay awake\n"
-	.string "with Hidden Power, too…$"
+	.string "Oh, fine, fine. Come back if you\n"
+	.string "change your mind.$"
 
 FortreeCity_Text_GiveTM49:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Here, take this Big Pearl.\n"
+	.string "It should fetch a good price!$"
 
 FortreeCity_Text_HaveTM49:
 	.string "I've never once gotten my wife's\n"
@@ -122,12 +114,12 @@ FortreeCity_House2_Text_CorrectTryAgainWhichHand2: @ 82179C9
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken: @ 8217A28
 	.string "Oh! Splendid!\n"
 	.string "Your intuition is remarkable!\p"
-	.string "Here, take this Rare Candy\n"
-	.string "to help your Pokémon grow.$"
+	.string "Here, take this Nugget\n"
+	.string "as your prize!$"
 
 FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
-	.string "Rare Candy raises a Pokémon\n"
-	.string "one level, up to your cap.\p"
+	.string "That Nugget can help pay for\n"
+	.string "your journey.\p"
 	.string "For Hidden Power, visit the\n"
 	.string "Pokémon Center's move tutor.$"
 

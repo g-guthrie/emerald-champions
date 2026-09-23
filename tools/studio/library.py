@@ -65,7 +65,7 @@ class Library:
             if kind == "object" and script in catalogue.blocks: self.bindings.append(interaction)
             for label in labels: self.records[label]["owners"].append(owner)
         for name, m in catalogue.maps.items():
-            for index, obj in enumerate(m["object_events"]): bind(name,"object",index,obj)
+            for index, obj in enumerate(m.get("object_events") or []): bind(name,"object",index,obj)
             for index, event in enumerate(m.get("bg_events") or []):
                 bind(name,"background",index,event,"EventScript_HiddenItemScript" if event["type"]=="hidden_item" else None)
             for index, event in enumerate(m.get("coord_events") or []): bind(name,"coordinate",index,event)

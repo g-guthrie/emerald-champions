@@ -139,7 +139,6 @@ BattleFrontier_BattlePyramidLobby_EventScript_TryEnterChallenge:: @ 8250904
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePyramidLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO
@@ -456,7 +455,6 @@ BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep:: @ 8250E09
 
 BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromBag:: @ 8250E40
 	special ChooseItemsToTossFromPyramidBag
-	waitstate
 	message BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep
 	waitmessage
 	goto BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep
@@ -464,7 +462,6 @@ BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromBag:: @ 8250E40
 
 BattleFrontier_BattlePyramidLobby_EventScript_PickItemsFromParty:: @ 8250E50
 	special BattlePyramidChooseMonHeldItems
-	waitstate
 	message BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep
 	waitmessage
 	goto BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep
@@ -582,7 +579,7 @@ BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen: @ 82512E2
 	.string "Pokémon qualified for the challenge.\p"
 	.string "Please also remember to take all\n"
 	.string "items from your Pokémon.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "When you are ready, please have\n"
 	.string "a word with me.$"
 
@@ -594,7 +591,7 @@ BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50: @ 82513C1
 	.string "and each no higher than Level 50.\p"
 	.string "Please also remember to take all\n"
 	.string "items from your Pokémon.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "When you are ready, please have\n"
 	.string "a word with me.$"
 
@@ -670,10 +667,6 @@ BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep: @ 825197E
 	.string "BATTLE Bag, and with your Pokémon.$"
 
 @ Unused
-BattleFrontier_BattlePyramidLobby_Text_ReturnedEverythingMonsHeld: @ 82519CA
-	.string "{PLAYER} returned everything that\n"
-	.string "the Pokémon held.$"
-
 BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept: @ 82519F8
 	.string "The BATTLE Bag you used will be kept\n"
 	.string "in readiness for your next challenge.\p"
@@ -685,22 +678,6 @@ BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait: @ 8251A77
 	.string "Please wait.$"
 
 @ Unused
-BattleFrontier_BattlePyramidLobby_Text_ForConqueringPyramidTakeThis: @ 8251AA0
-	.string "As a memento for conquering\n"
-	.string "the BATTLE PYRAMID, please take this.$"
-
-@ Unused
-BattleFrontier_BattlePyramidLobby_Text_ReceivedPrizeItem: @ 8251AE2
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
-
-@ Unused
-BattleFrontier_BattlePyramidLobby_Text_BagIsFull: @ 8251AFC
-	.string "…Ah…\n"
-	.string "Your Bag appears to be filled.\p"
-	.string "Please return after you've organized\n"
-	.string "your Bag's contents.$"
-
 BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag: @ 8251B5A
 	.string "How disappointing for you…\p"
 	.string "Here is the Bag we've been holding\n"
@@ -712,12 +689,6 @@ BattleFrontier_BattlePyramidLobby_Text_LookForwardToNextChallenge: @ 8251BB6
 	.string "next challenge!$"
 
 @ Unused
-BattleFrontier_BattlePyramidLobby_Text_HereIsPrize: @ 8251BDE
-	.string "We have been looking forward to\n"
-	.string "your arrival!\p"
-	.string "Here is your prize for conquering\n"
-	.string "the PYRAMID.$"
-
 BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait: @ 8251C3B
 	.string "Welcome…\p"
 	.string "I shall be pleased to tell you what\n"

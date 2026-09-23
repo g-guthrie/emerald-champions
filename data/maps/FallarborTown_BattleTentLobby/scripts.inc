@@ -93,14 +93,14 @@ FallarborTown_BattleTentLobby_EventScript_LostChallenge:: @ 81FFF93
 
 FallarborTown_BattleTentLobby_EventScript_ResumeChallenge:: @ 81FFFCD
 	lockall
-	message FallarborTown_BattleTentLobby_Text_LookingForwardToArrival
-	waitmessage
-	fallarbortent_save CHALLENGE_STATUS_SAVING
-	playse SE_SAVE
-	waitse
+	msgbox FallarborTown_BattleTentLobby_Text_Closed, MSGBOX_DEFAULT
+	special LoadPlayerParty
+	special HealPlayerParty
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
-	goto FallarborTown_BattleTentLobby_EventScript_EnterChallenge
+	releaseall
+	end
 
 FallarborTown_BattleTentLobby_EventScript_Attendant:: @ 8200001
 	lock
@@ -108,8 +108,13 @@ FallarborTown_BattleTentLobby_EventScript_Attendant:: @ 8200001
 	fallarbortent_getprize
 	compare VAR_RESULT, ITEM_NONE
 	goto_if_ne FallarborTown_BattleTentLobby_EventScript_PrizeWaiting
-	special SavePlayerParty
-	msgbox FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
+	msgbox FallarborTown_BattleTentLobby_Text_Closed, MSGBOX_DEFAULT
+	release
+	end
+
+FallarborTown_BattleTentLobby_Text_Closed:
+	.string "This Battle Tent isn't open.\n"
+	.string "The others host Double battles.$"
 FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge:: @ 8200021
 	message FallarborTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
@@ -133,7 +138,6 @@ FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge:: @ 820005D
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	msgbox FallarborTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
@@ -259,8 +263,8 @@ FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo:: @ 8200245
 
 FallarborTown_BattleTentLobby_EventScript_RulesBoard:: @ 820024F
 	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
+	msgbox FallarborTown_BattleTentLobby_Text_Closed, MSGBOX_DEFAULT
+	releaseall
 	end
 
 FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard:: @ 820025E
@@ -311,28 +315,26 @@ FallarborTown_BattleTentLobby_Text_MakeThinkImJustKid: @ 8200304
 	.string "I'm going to make everyone think\n"
 	.string "I'm just a kid and let them play down.\p"
 	.string "Then, I'll shock them and grab\n"
-	.string "the title!$"
+	.string "the title at another Tent!$"
 
 FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite: @ 8200382
 	.string "You know how Battle Tents offer\n"
 	.string "different events in different towns?\p"
-	.string "My favorite is definitely the Battle\n"
-	.string "Tent in Fallarbor Town.\p"
-	.string "I think it's fantastic how Trainers\n"
-	.string "try to win with all their faith in\l"
-	.string "their Pokémon.$"
+	.string "The Fallarbor Tent closed, though…\p"
+	.string "Verdanturf's Tent still runs\n"
+	.string "Double Battles!$"
 
 FallarborTown_BattleTentLobby_Text_CameToCampOut: @ 820045A
 	.string "I heard something about some tent,\n"
 	.string "so I came to camp out.\p"
 	.string "I didn't know that tents these days\n"
 	.string "are so luxurious!\p"
-	.string "Since I'm here, I may as well try\n"
-	.string "my hand at battling!$"
+	.string "Too bad the Tent's closed.\n"
+	.string "I'll just camp out, then!$"
 
 FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone: @ 8200501
 	.string "Scott: Hi, {PLAYER}{KUN}!\n"
-	.string "So you came out to this Battle Tent!\p"
+	.string "This Tent's closed, you know.\p"
 	.string "The people in these parts tend to be\n"
 	.string "easygoing and laid-back.\p"
 	.string "But, you see, what I'm looking for are\n"
@@ -346,7 +348,6 @@ FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone: @ 8200501
 	.string "Keep working at it!$"
 
 FallarborTown_BattleTentLobby_Text_ScottMakeChallenge: @ 8200653
-	.string "Scott: Instead of wasting your\n"
-	.string "time with the likes of me, why not\l"
-	.string "make a challenge?$"
-
+	.string "Scott: This Tent has closed its\n"
+	.string "doors, but the other Tents still\l"
+	.string "hold Double Battles. Go on!$"

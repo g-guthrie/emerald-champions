@@ -15,7 +15,6 @@ Furfrou_Haircut_Main::
 	goto_if_eq Furfrou_Trim_NoFurfrouInParty
     msgbox Furfrou_Text_WhichFurfrou, MSGBOX_DEFAULT
     special ChoosePartyMon
-	waitstate
     compare VAR_0x8004, 255
 	goto_if_eq Furfrou_Trim_Exit
 	special IsSelectedMonEgg
@@ -34,9 +33,9 @@ Furfrou_Trim_Multichoice::
     bufferpartymonnick 0, VAR_0x8004
     msgbox Furfrou_Text_WhichStyle, MSGBOX_DEFAULT
     waitmessage
+	setvar VAR_0x8005, 0 @ Open at the first trim, not a previous special's output.
 	setvar VAR_0x8004, SCROLL_MULTI_FURFROU_TRIMS
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
     case 0, Furfrou_HeartTrim
 	case 1, Furfrou_StarTrim

@@ -282,10 +282,20 @@ AI_DOUBLE_BATTLE_TEST("Choiced Pokémon won't switch out if they can still affec
         OPPONENT(SPECIES_ZIGZAGOON);
     } WHEN {
         TURN { SWITCH(playerLeft, 2); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); }
+        // SMART_SWITCHING routes doubles switching through the pair planner, which
+        // picks one switch for the pair jointly rather than per battler in logic
+        // order. Which locked Vaporeon it withdraws is not the point; that the lone
+        // reserve enters exactly once is.
         if (defendingSpecies == SPECIES_VAPOREON)
-            TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_SWITCH(opponentLeft, 2); EXPECT_MOVE(opponentRight, MOVE_SCALD); }
+            TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
         else
             TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); SEND_OUT(playerLeft, 0); }
+    } SCENE {
+        if (defendingSpecies == SPECIES_VAPOREON)
+        {
+            MESSAGE(AI_TRAINER_NAME " sent out Zigzagoon!");
+            NONE_OF { MESSAGE(AI_TRAINER_NAME " sent out Zigzagoon!"); }
+        }
     }
 }
 
@@ -309,9 +319,19 @@ AI_DOUBLE_BATTLE_TEST("Choiced Pokémon won't switch out if they can still affec
         OPPONENT(SPECIES_ZIGZAGOON);
     } WHEN {
         TURN { SWITCH(playerLeft, 2); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); }
+        // SMART_SWITCHING routes doubles switching through the pair planner, which
+        // picks one switch for the pair jointly rather than per battler in logic
+        // order. Which locked Vaporeon it withdraws is not the point; that the lone
+        // reserve enters exactly once is.
         if (defendingSpecies == SPECIES_VAPOREON)
-            TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_SWITCH(opponentRight, 2); EXPECT_MOVE(opponentLeft, MOVE_SCALD); }
+            TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
         else
             TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); SEND_OUT(playerLeft, 0); }
+    } SCENE {
+        if (defendingSpecies == SPECIES_VAPOREON)
+        {
+            MESSAGE(AI_TRAINER_NAME " sent out Zigzagoon!");
+            NONE_OF { MESSAGE(AI_TRAINER_NAME " sent out Zigzagoon!"); }
+        }
     }
 }

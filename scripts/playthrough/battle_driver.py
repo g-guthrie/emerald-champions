@@ -75,9 +75,9 @@ SWITCH_BLOCKS = ['', 'battle_arena', 'commander', 'trapped', 'ability_prevents_e
 MOVE_TARGETS = ['none', 'selected', 'smart', 'depends', 'opponent', 'random', 'both', 'user',
                 'ally', 'user_and_ally', 'user_or_ally', 'foes_and_ally', 'field',
                 'opponents_field', 'all_battlers']
-# Target types where the engine chooses the target itself and ignores the byte
-# the controller sends, so the driver must not offer a choice.
-FIXED_TARGET_MOVES = {'user', 'user_and_ally', 'both', 'foes_and_ally', 'field',
+# Target types with a native default rather than a user-selected target.
+# The target byte still matters to spread iteration.
+FIXED_TARGET_MOVES = {'user', 'user_and_ally', 'ally', 'both', 'foes_and_ally', 'field',
                       'opponents_field', 'all_battlers', 'random'}
 # gBattleCommunication[battler] >= this means the action for this turn is locked in.
 ACTION_CONFIRMED = 4
@@ -425,10 +425,24 @@ class Session:
                   advance_text=False):
         base = self.syms['gEcAgentBattleView']
         addresses = [base + 4 * i for i in range(VIEW_WORDS)]
-        values, frames_run, stopped = self.run(frames=frames, writes=writes, reads=addresses,
+        halted_address = self.syms['gEcAgentBattleHalted']
+        values, frames_run, stopped = self.run(frames=frames, writes=writes,
+                                               reads=addresses + [halted_address],
                                                until=until, advance=advance, png=png,
                                                advance_text=advance_text)
-        return [values[address] for address in addresses], frames_run, stopped
+        # A plain state read can stop mid-publication even without --until.
+        # Wait for a complete decision snapshot; do not invent switch legality
+        # from a partially cleared buffer or bypass the engine's switch checks.
+        for attempt in range(16):
+            words = [values[address] for address in addresses]
+            if words[1] not in (3, 4, 5) or values[halted_address]:
+                return words, frames_run, stopped
+            values, extra, matched = self.run(frames=8 * (attempt + 1),
+                reads=addresses + [halted_address], advance=advance,
+                until=(halted_address, 1, 1))
+            frames_run += extra
+            stopped |= matched
+        fail('native decision snapshot did not finish publication')
 
     def log(self, record):
         with self.events.open('a') as handle:
@@ -442,6 +456,8 @@ def name_of(table, value, prefix):
 
 
 def decode_state(session, words):
+    if words[0] not in (0, 3):
+        fail('This battle uses the obsolete target/switch adapter. Rebuild and start a fresh benchmark.')
     c = session.constants_table()
     species_t, move_t, ability_t, item_t, type_t = (c['species'], c['move'], c['ability'],
                                                     c['item'], c['type'])
@@ -551,11 +567,10 @@ def decode_state(session, words):
                 # `limits` is a slot mask and must never be decoded as reasons.
                 'blocked_by': flags_of((mask >> 16) & 0xFFFF, c['limitation']),
                 'target_type': target_name,
-                # For these the engine ignores the target byte and picks for
-                # itself, so offering a choice invites a misleading record of
-                # "Protect on my ally". Report the user and let it resolve.
-                'targets': ([index] if target_name in FIXED_TARGET_MOVES
-                            else sorted({t for t in range(4) if (mask >> t) & 1} | {index})),
+                # Match the native UI's default target for fixed-target moves.
+                # Spread attacks must start at a foe, not the acting battler.
+                'targets': ([(mask >> 4) & 3] if target_name in FIXED_TARGET_MOVES
+                            else [t for t in range(4) if (mask >> t) & 1]),
             })
         blocker = (switch >> 16) & 0xFF
         refused = (switch >> 24) & 0xFF

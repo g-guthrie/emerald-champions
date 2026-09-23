@@ -227,7 +227,8 @@ u8 CreateTaggedMonIcon(u32 tileTag, u32 paletteTag, enum Species species)
         .affineAnims = sMonIconAffineAnims
     };
 
-    u8 spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
+    u8 spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, 0, 0, 0);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
     gSprites[spriteId].animPaused = TRUE;
     gSprites[spriteId].animBeginning = FALSE;
     UpdateMonIconFrame(&gSprites[spriteId]);
@@ -448,7 +449,8 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
 {
     u8 spriteId;
 
-    struct SpriteFrameImage image = { NULL, sSpriteImageSizes[iconTemplate->oam->shape][iconTemplate->oam->size] };
+    // Both icon constructors use the fixed 32x32 4bpp icon OAM above.
+    static const struct SpriteFrameImage image = { NULL, 32 * 32 / 2 };
 
     struct SpriteTemplate spriteTemplate =
     {
@@ -461,7 +463,8 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
         .callback = iconTemplate->callback,
     };
 
-    spriteId = CreateSprite(&spriteTemplate, x, y, subpriority);
+    spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, x, y, subpriority);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
     gSprites[spriteId].animPaused = TRUE;
     gSprites[spriteId].animBeginning = FALSE;
     gSprites[spriteId].images = (const struct SpriteFrameImage *)iconTemplate->image;

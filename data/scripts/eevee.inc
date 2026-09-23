@@ -9,7 +9,6 @@ EventScript_EeveeDevolution::
     goto_if_eq EventScript_EeveeExit
     msgbox Eevee_Text_WhichEevee, MSGBOX_DEFAULT
     special ChoosePartyMon
-	waitstate
     compare VAR_0x8004, 255
 	goto_if_eq EventScript_EeveeExit
 	special IsSelectedMonEgg

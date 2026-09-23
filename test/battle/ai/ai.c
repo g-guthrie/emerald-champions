@@ -633,9 +633,9 @@ AI_SINGLE_BATTLE_TEST("AI uses a guaranteed KO move instead of the move with the
         ASSUME(GetMoveCategory(MOVE_SLASH) == GetMoveCategory(MOVE_STRENGTH));
         AI_FLAGS(flags);
         TIE_BREAK_SCORE(RNG_AI_SCORE_TIE_SINGLES, SCORE_TIE_LO, 0);
-        // Slash: 98..116 damage; Strength: 112..132. First Slash leaves 110:
-        // both can KO at the AI's max roll, but only Strength guarantees it.
-        PLAYER(SPECIES_WOBBUFFET) { Level(100); MaxHP(208); HP(208); Defense(152); Speed(100); Moves(MOVE_CELEBRATE); }
+        // Slash: 98..116 damage; Strength: 112..132. First Slash leaves 104:
+        // both can KO at the AI's median roll, but only Strength guarantees it.
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); MaxHP(202); HP(202); Defense(152); Speed(100); Moves(MOVE_CELEBRATE); }
         OPPONENT(SPECIES_ABSOL) { Level(100); Attack(296); Speed(200); Ability(ABILITY_SUPER_LUCK); Moves(MOVE_SLASH, MOVE_STRENGTH); }
     } WHEN {
         TURN { SCORE_EQ(opponent, MOVE_SLASH, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_SLASH); }
@@ -652,7 +652,7 @@ AI_SINGLE_BATTLE_TEST("AI uses a guaranteed KO move instead of the move with the
         }
         else
         {
-            HP_BAR(player, hp: 12);
+            HP_BAR(player, hp: 6);
             NOT MESSAGE("Wobbuffet fainted!");
         }
     }
@@ -881,7 +881,8 @@ AI_SINGLE_BATTLE_TEST("AI will not set up Weather if it wont have any affect")
         ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_WEATHER);
         ASSUME(GetMoveWeatherType(MOVE_RAIN_DANCE) == BATTLE_WEATHER_RAIN);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-        PLAYER(SPECIES_GOLDUCK) { Ability(ability); Moves(MOVE_SCRATCH); }
+        // Golduck's HP keeps Pound a 4HKO rather than chip.
+        PLAYER(SPECIES_GOLDUCK) { HP(130); Ability(ability); Moves(MOVE_SCRATCH); }
         OPPONENT(SPECIES_KABUTOPS) { Ability(ABILITY_SWIFT_SWIM); Moves(MOVE_RAIN_DANCE, MOVE_POUND); }
     } WHEN {
         if (ability == ABILITY_CLOUD_NINE)
@@ -957,6 +958,17 @@ AI_SINGLE_BATTLE_TEST("AI won't setup if it can KO through Sturdy effect")
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
         PLAYER(SPECIES_SKARMORY) { Ability(ABILITY_STURDY); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_MOLTRES) { Moves(MOVE_FIRE_BLAST, MOVE_AGILITY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_FIRE_BLAST); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI won't setup if it can KO through Focus Sash effect")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_SKARMORY) { Ability(ABILITY_KEEN_EYE); Item(ITEM_FOCUS_SASH); Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_MOLTRES) { Moves(MOVE_FIRE_BLAST, MOVE_AGILITY); }
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_FIRE_BLAST); }
@@ -1044,7 +1056,9 @@ AI_SINGLE_BATTLE_TEST("AI will see 2HKOs through resist berries")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_ZIGZAGOON) { HP(117); Moves(MOVE_CELEBRATE); Item(ITEM_CHOPLE_BERRY); }
+        // Jump Kick 119..140 (halved by Chople on the first hit) still 2HKOs 170 HP
+        // at any roll; Headbutt 62..73 cannot.
+        PLAYER(SPECIES_ZIGZAGOON) { HP(170); Moves(MOVE_CELEBRATE); Item(ITEM_CHOPLE_BERRY); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_JUMP_KICK, MOVE_HEADBUTT); }
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_JUMP_KICK); }
@@ -1517,11 +1531,13 @@ AI_SINGLE_BATTLE_TEST("AI scores fixed damage moves correctly")
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); Moves(MOVE_SCRATCH); MaxHP(hp); HP(hp); Defense(999); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); Moves(MOVE_SCRATCH, move); }
     } WHEN {
+        // Scratch into Defense 999 needs far more than NEGLIGIBLE_DAMAGE_HITS
+        // hits, so it carries the chip penalty.
         if (hp == 60)
         {
             TURN {
                 EXPECT_MOVE(opponent, move);
-                SCORE_EQ_VAL(opponent, MOVE_SCRATCH, AI_SCORE_DEFAULT);
+                SCORE_EQ_VAL(opponent, MOVE_SCRATCH, AI_SCORE_DEFAULT + BAD_EFFECT);
                 SCORE_EQ_VAL(opponent, move, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE);
             }
         }
@@ -1529,7 +1545,7 @@ AI_SINGLE_BATTLE_TEST("AI scores fixed damage moves correctly")
         {
             TURN {
                 EXPECT_MOVE(opponent, move);
-                SCORE_EQ_VAL(opponent, MOVE_SCRATCH, AI_SCORE_DEFAULT);
+                SCORE_EQ_VAL(opponent, MOVE_SCRATCH, AI_SCORE_DEFAULT + BAD_EFFECT);
                 SCORE_EQ_VAL(opponent, move, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + FAST_KILL);
             }
         }
@@ -1673,9 +1689,11 @@ AI_DOUBLE_BATTLE_TEST("AI sees Dragon Darts damage redirecting if one target is 
 {
     enum Species species;
     enum Ability ability;
+    u32 hp;
 
-    PARAMETRIZE { species = SPECIES_WIGGLYTUFF, ability = ABILITY_CONTRARY; }
-    PARAMETRIZE { species = SPECIES_SHEDINJA, ability = ABILITY_WONDER_GUARD; }
+    // Wigglytuff's HP keeps Fire Punch a 3HKO rather than chip.
+    PARAMETRIZE { species = SPECIES_WIGGLYTUFF, ability = ABILITY_CONTRARY, hp = 150; }
+    PARAMETRIZE { species = SPECIES_SHEDINJA, ability = ABILITY_WONDER_GUARD, hp = 1; }
 
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_DRAGON_DARTS) == DAMAGE_CATEGORY_PHYSICAL);
@@ -1683,7 +1701,7 @@ AI_DOUBLE_BATTLE_TEST("AI sees Dragon Darts damage redirecting if one target is 
         ASSUME(GetMovePower(MOVE_DRAGON_DARTS) == 50);
         ASSUME(GetMoveType(MOVE_FIRE_PUNCH) == TYPE_FIRE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(species) { Speed(4); Ability(ability); }
+        PLAYER(species) { Speed(4); Ability(ability); HP(hp); }
         PLAYER(SPECIES_DRATINI) { Speed(3); Level(60); } // Only 2 hit KOs at L60
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_DRAGON_DARTS, MOVE_FIRE_PUNCH); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(1); Moves(MOVE_CELEBRATE); }

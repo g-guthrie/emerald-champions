@@ -285,7 +285,6 @@ Route109_EventScript_MrBriney:: @ 81EE910
 	end
 
 Route109_EventScript_HaveNotDeliveredDevonGood:: @ 81EE921
-	message Route109_Text_BrineySailToDewfordQuestion
 	msgbox Route109_Text_BrineySailToDewfordQuestion, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq Route109_EventScript_StayHere
@@ -408,16 +407,6 @@ Route109_EventScript_TrainerTipsSign:: @ 81EEA34
 	msgbox Route109_Text_TrainerTipsSign, MSGBOX_SIGN
 	end
 
-Route109_EventScript_David:: @ 81EEA3D
-	@ This retired encounter has no campaign battle.
-	msgbox Route109_Text_DavidPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route109_EventScript_Alice:: @ 81EEA54
-	@ This retired encounter has no campaign battle.
-	msgbox Route109_Text_AlicePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route109_EventScript_Huey:: @ 81EEA6B
 	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_HueyPostBattle, MSGBOX_AUTOCLOSE
@@ -428,62 +417,14 @@ Route109_EventScript_Edmond:: @ 81EEA82
 	msgbox Route109_Text_EdmondPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route109_EventScript_Ricky:: @ 81EEA99
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route109_EventScript_RickyRematch
-	msgbox Route109_Text_RickyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route109_EventScript_RickyRegisterMatchCallAfterBattle:: @ 81EEAC5
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route109_Text_RickyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_RICKY_1
-	release
-	end
-
-Route109_EventScript_RickyRematch:: @ 81EEAE4
-	@ This retired encounter has no campaign battle.
-	msgbox Route109_Text_RickyRematchPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route109_EventScript_Lola:: @ 81EEAFB
-	trainerbattle_double TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route109_EventScript_LolaRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route109_EventScript_LolaRematch
-	msgbox Route109_Text_LolaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route109_EventScript_LolaRegisterMatchCallAfterBattle:: @ 81EEB27
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route109_Text_LolaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route109_EventScript_LolaRematch:: @ 81EEB46
-	@ This retired encounter has no campaign battle.
-	msgbox Route109_Text_LolaRematchPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route109_EventScript_Austina:: @ 81EEB5D
-	@ This retired encounter has no campaign battle.
-	msgbox Route109_Text_AustinaPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route109_Text_LolaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Gwen:: @ 81EEB74
 	@ This retired encounter has no campaign battle.
 	msgbox Route109_Text_GwenPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route109_EventScript_Carter:: @ 81EEB8B
-	@ This retired encounter has no campaign battle.
-	msgbox Route109_Text_CarterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Paul:: @ 81EEBA2

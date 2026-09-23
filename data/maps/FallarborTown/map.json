@@ -78,7 +78,7 @@
       "flag": "FLAG_HIDE_FALLARBOR_AZURILL"
     },
     {
-      "local_id": "LOCALID_FALLARBOR_RIVAL_ON_BIKE",
+      "local_id": "LOCALID_FALLARBOR_RIVAL",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 6,
       "y": 10,
@@ -89,9 +89,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_FALLARBOR_RIVAL1"
+      "flag": "FLAG_HIDE_FALLARBOR_RIVAL"
     },
     {
+      "local_id": "LOCALID_FALLARBOR_RIVAL_ON_BIKE",
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 6,
       "y": 10,

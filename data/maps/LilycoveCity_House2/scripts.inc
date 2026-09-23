@@ -6,7 +6,7 @@ LilycoveCity_House2_EventScript_FatMan:: @ 821ED75
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM44, LilycoveCity_House2_EventScript_ReceivedRest
 	msgbox LilycoveCity_House2_Text_NotAwakeYetHaveThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_PEARL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM44
@@ -22,7 +22,7 @@ LilycoveCity_House2_EventScript_ReceivedRest:: @ 821EDAC
 LilycoveCity_House2_Text_NotAwakeYetHaveThis: @ 821EDB6
 	.string "Huh? What? What's that?\p"
 	.string "I'm not near awake yet…\n"
-	.string "You can have this…$"
+	.string "You can have this Pearl…$"
 
 LilycoveCity_House2_Text_SleepIsEssential: @ 821EDF9
 	.string "Yawn…\p"

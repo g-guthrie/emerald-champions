@@ -30,6 +30,7 @@ PetalburgCity_WallysHouse_EventScript_GiveHM03Surf:: @ 8204251
 PetalburgCity_WallysHouse_EventScript_WallysDad:: @ 8204278
 	lock
 	faceplayer
+	goto_if_lt VAR_PETALBURG_GYM_STATE, 2, PetalburgCity_WallysHouse_EventScript_BeforeTutorial
 	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad
 	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_ReceievedHM03Surf
 	goto_if_set FLAG_THANKED_FOR_PLAYING_WITH_WALLY, PetalburgCity_WallysHouse_EventScript_PlayedWithWally
@@ -56,6 +57,7 @@ PetalburgCity_WallysHouse_EventScript_PlayedWithWally:: @ 82042B6
 PetalburgCity_WallysHouse_EventScript_WallysMom:: @ 82042C0
 	lock
 	faceplayer
+	goto_if_lt VAR_PETALBURG_GYM_STATE, 2, PetalburgCity_WallysHouse_EventScript_BeforeTutorial
 	goto_if_set FLAG_RECEIVED_HM03, PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf
 	msgbox PetalburgCity_WallysHouse_Text_WallyWasReallyHappy, MSGBOX_DEFAULT
 	release
@@ -65,6 +67,17 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf:: @ 82042D5
 	msgbox PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling, MSGBOX_DEFAULT
 	release
 	end
+
+PetalburgCity_WallysHouse_EventScript_BeforeTutorial::
+	msgbox PetalburgCity_WallysHouse_Text_WallyWantsPokemon, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_WallysHouse_Text_WallyWantsPokemon:
+	.string "Our Wally wants a Pokémon partner\n"
+	.string "to take with him to Verdanturf.\p"
+	.string "He's hoping Norman at the Gym\n"
+	.string "can help him catch one.$"
 
 PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally: @ 82042DF
 	.string "You're…\n"
@@ -100,14 +113,14 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs: @ 820446E
 	.string "Happy that he's gained such a great\n"
 	.string "friend as you.\p"
 	.string "This isn't a bribe or anything, but\n"
-	.string "I'd really like you to have this.$"
+	.string "there's something I can do for you.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces: @ 820461A
 	.string "I authorize you to use Surf!\p"
 	.string "With your Balance Badge, press A\n"
 	.string "at the water's edge.\p"
-	.string "You can travel with any team.\n"
-	.string "Nobody needs to learn Surf!$"
+	.string "Bring a Pokémon able to learn\n"
+	.string "Surf; it needn't know the move!$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon: @ 8204661
 	.string "Wally's coming home soon.\n"
@@ -136,4 +149,3 @@ PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling: @ 82047A7
 	.string "he's surprisingly strong-willed.\p"
 	.string "I'm sure that he'll come back safe\n"
 	.string "and sound one day!$"
-

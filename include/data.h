@@ -172,7 +172,6 @@ struct TypeInfo
     //enum Item plate;
     //enum Item memory;
     //enum Item zCrystal;
-    //enum Item teraShard;
     //u16 arceusForm;
 };
 

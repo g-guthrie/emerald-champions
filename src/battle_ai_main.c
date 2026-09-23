@@ -261,9 +261,16 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
 {
     u64 flags = 0;
 
+    // Facility trainers fight Doubles like the campaign and use its profile.
+    // The Palace picks moves by Nature, and link/recorded battles keep their own.
+    bool32 facilityDoubles = trainerId != 0xFFFF
+                          && (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+                          && !(gBattleTypeFlags & (BATTLE_TYPE_PALACE | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED));
+
     if (IsChampionsCircuitBattle() || IsChampionsTentBattle()
      || gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL
-     || IsEmeraldChampionsBirchRescueBattle())
+     || IsEmeraldChampionsBirchRescueBattle()
+     || facilityDoubles)
     {
         return AI_FLAG_BASIC_TRAINER
              | AI_FLAG_OMNISCIENT
@@ -530,68 +537,22 @@ static void SetupRandomRollsForAIMoveSelection(enum BattlerId battler)
 
 void AI_TrySwitchOrUseItem(enum BattlerId battler)
 {
-    struct Pokemon *party;
-    enum BattlerId battlerIn1, battlerIn2;
-    s32 lastId = GetAILastPartyIndex(battler); // + 1
-    party = GetBattlerParty(battler);
-
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        if (gAiLogicData->shouldSwitch & (1u << battler) && IsSwitchinValid(battler))
+        if (gAiLogicData->shouldSwitch & (1u << battler))
         {
-            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
-            SetAIUsingGimmick(battler, NO_GIMMICK);
-            if (gBattleStruct->AI_monToSwitchIntoId[battler] == PARTY_SIZE)
+            u32 switchinId = GetValidAISwitchinId(battler);
+            if (switchinId < PARTY_SIZE)
             {
-                s32 monToSwitchId = gAiLogicData->mostSuitableMonId[battler];
-                if (monToSwitchId == PARTY_SIZE)
-                {
-                    GetActiveBattlerIds(battler, &battlerIn1, &battlerIn2);
-
-                    for (monToSwitchId = (lastId-1); monToSwitchId >= 0; monToSwitchId--)
-                    {
-                        if (!IsValidForBattle(&party[monToSwitchId]))
-                            continue;
-                        if (IsPartyMonOnFieldOrChosenToSwitch(battler, monToSwitchId, battlerIn1, battlerIn2))
-                            continue;
-                        if (IsPartyMonPlannedToBeSwitchedInByPartner(monToSwitchId, battler))
-                            continue;
-                        break;
-                    }
-
-                }
-
-                if (monToSwitchId < 0)
-                {
-                    enum BattlerId battler1, battler2;
-                    s32 lastId = GetAILastPartyIndex(battler); // + 1
-
-                    if (!IsDoubleBattle())
-                    {
-                        battler2 = battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                    }
-                    else
-                    {
-                        battler1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                        battler2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-                    }
-
-                    for (monToSwitchId = 0; monToSwitchId < lastId; monToSwitchId ++)
-                    {
-                        if (IsValidForBattle(&gParties[GetBattlerTrainer(battler)][monToSwitchId])
-                         && !IsPartyMonOnFieldOrChosenToSwitch(battler, monToSwitchId, battler1, battler2))
-                            break;
-                    }
-                }
-
-                gBattleStruct->AI_monToSwitchIntoId[battler] = monToSwitchId;
+                BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
+                SetAIUsingGimmick(battler, NO_GIMMICK);
+                gBattleStruct->AI_monToSwitchIntoId[battler] = switchinId;
+                gBattleStruct->monToSwitchIntoId[battler] = switchinId;
+                gAiLogicData->monToSwitchInId[battler] = switchinId;
+                return;
             }
-
-            gBattleStruct->monToSwitchIntoId[battler] = gBattleStruct->AI_monToSwitchIntoId[battler];
-            gAiLogicData->monToSwitchInId[battler] = gBattleStruct->AI_monToSwitchIntoId[battler];
-            return;
         }
-        else if (ShouldUseItem(battler))
+        if (ShouldUseItem(battler))
         {
             SetAIUsingGimmick(battler, NO_GIMMICK);
             return;
@@ -1193,7 +1154,8 @@ static inline bool32 ShouldConsiderMoveForBattler(enum BattlerId battlerAi, enum
          || target == TARGET_OPPONENTS_FIELD)
             return FALSE;
     }
-    if (!IsBattlerAlly(battlerAi, battlerDef) && target == TARGET_USER_OR_ALLY)
+    if (!IsBattlerAlly(battlerAi, battlerDef)
+     && (target == TARGET_USER_OR_ALLY || target == TARGET_ALLY))
         return FALSE;
     return TRUE;
 }
@@ -3962,6 +3924,11 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             case ABILITY_CONTRARY:
                 if (IsStatLoweringMove(move) && isFriendlyFireOK && ShouldTriggerAbility(battlerAtk, battlerAtkPartner, atkPartnerAbility))
                 {
+                    // Mixed changes can reverse a useful attacking stat too.
+                    // Do not let the generic Contrary bonus bypass that cost.
+                    if (IsStatRaisingMove(move)
+                     && GetAllyStatChangeScore(battlerAtk, battlerAtkPartner, move) <= NO_INCREASE)
+                        RETURN_SCORE_MINUS(10);
                     if (moveTarget == TARGET_FOES_AND_ALLY)
                     {
                         ADJUST_SCORE(GOOD_EFFECT);
@@ -5231,14 +5198,17 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             // Fake Out in doubles
             if (IsDoubleBattle() && IsFlinchGuaranteed(battlerAtk, battlerDef, move))
             {
+                // SetAllyMove resolves simulated and committed choices alike.
+                // A chosen slot may still belong to the preceding decision.
+                enum Move partnerMove = aiData->partnerMove;
                 bool32 atkKoDef = CanAIFaintTarget(battlerAtk, battlerDef, 1);
                 bool32 atkKoDefPartner = CanAIFaintTarget(battlerAtk, battlerDefPartner, 1);
                 bool32 defKoAtkPartner = CanAIFaintTarget(battlerDef, battlerAtkPartner, 1);
                 bool32 atkPartnerKoDef = CanAIFaintTarget(battlerAtkPartner, battlerDef, 1);
                 bool32 atkPartnerKoDefPartner = CanAIFaintTarget(battlerAtkPartner, battlerDefPartner, 1);
                 bool32 defPartnerKoAtkPartner = CanAIFaintTarget(battlerDefPartner, battlerAtkPartner, 1);
-                bool32 atkPartnerDoubleFastKOd = (defKoAtkPartner && AI_WhoStrikesFirst(battlerAtkPartner, battlerDef, gBattleMons[battlerAtkPartner].moves[gAiBattleData->chosenMoveIndex[battlerAtkPartner]], predictedMove, CONSIDER_PRIORITY) == AI_IS_SLOWER)
-                 && (defPartnerKoAtkPartner && AI_WhoStrikesFirst(battlerAtkPartner, battlerDefPartner, gBattleMons[battlerAtkPartner].moves[gAiBattleData->chosenMoveIndex[battlerAtkPartner]], MOVE_SCRATCH, CONSIDER_PRIORITY) == AI_IS_SLOWER);
+                bool32 atkPartnerDoubleFastKOd = (defKoAtkPartner && AI_WhoStrikesFirst(battlerAtkPartner, battlerDef, partnerMove, predictedMove, CONSIDER_PRIORITY) == AI_IS_SLOWER)
+                 && (defPartnerKoAtkPartner && AI_WhoStrikesFirst(battlerAtkPartner, battlerDefPartner, partnerMove, MOVE_SCRATCH, CONSIDER_PRIORITY) == AI_IS_SLOWER);
 
                 // If either opponent has Fake Out, it's their first turn but user is faster - incentivise Fake Out on both
                 if ((HasMove(battlerDef, MOVE_FAKE_OUT) && IsBattlersFirstTurn(battlerDef)
@@ -5250,10 +5220,10 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                 }
                 // If ally has KO on target's partner, but target can fast KO ally (checking move and priority combinations for everything likely gets a bit complicated)
                 else if (hasPartner && atkPartnerKoDefPartner
-                 && (defKoAtkPartner && AI_WhoStrikesFirst(battlerAtkPartner, battlerDef, gBattleMons[battlerAtkPartner].moves[gAiBattleData->chosenMoveIndex[battlerAtkPartner]], predictedMove, CONSIDER_PRIORITY) == AI_IS_SLOWER)
+                 && (defKoAtkPartner && AI_WhoStrikesFirst(battlerAtkPartner, battlerDef, partnerMove, predictedMove, CONSIDER_PRIORITY) == AI_IS_SLOWER)
                  && !(atkKoDef && AI_WhoStrikesFirst(battlerAtk, battlerDef, move, predictedMove, DONT_CONSIDER_PRIORITY) == AI_IS_FASTER))
                 {
-                    if (AI_WhoStrikesFirst(battlerAtkPartner, battlerDefPartner, gBattleMons[battlerAtkPartner].moves[gAiBattleData->chosenMoveIndex[battlerAtkPartner]], predictedMove, CONSIDER_PRIORITY) == AI_IS_FASTER)
+                    if (AI_WhoStrikesFirst(battlerAtkPartner, battlerDefPartner, partnerMove, predictedMove, CONSIDER_PRIORITY) == AI_IS_FASTER)
                         ADJUST_SCORE(FAST_KILL + 2); // No point fast KOing target's partner when user can save ally who will do it anyway
                     else if (atkPartnerDoubleFastKOd)
                     {
@@ -5269,7 +5239,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                 }
                 // If ally has slow KO with their chosen move, user sees no KOs while outspeeding (checking move and priority combinations for everything likely gets a bit complicated)
                 else if (hasPartner
-                 && (atkPartnerKoDef && AI_WhoStrikesFirst(battlerAtkPartner, battlerDef, gBattleMons[battlerAtkPartner].moves[gAiBattleData->chosenMoveIndex[battlerAtkPartner]], predictedMove, CONSIDER_PRIORITY) == AI_IS_SLOWER)
+                 && (atkPartnerKoDef && AI_WhoStrikesFirst(battlerAtkPartner, battlerDef, partnerMove, predictedMove, CONSIDER_PRIORITY) == AI_IS_SLOWER)
                  && !(atkKoDef && AI_WhoStrikesFirst(battlerAtk, battlerDef, move, predictedMove, DONT_CONSIDER_PRIORITY) == AI_IS_FASTER)
                  && !(atkKoDefPartner && AI_WhoStrikesFirst(battlerAtk, battlerDefPartner, move, MOVE_SCRATCH, DONT_CONSIDER_PRIORITY) == AI_IS_FASTER))
                 {
@@ -5390,14 +5360,19 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                 ADJUST_SCORE(DECENT_EFFECT);
             break;
         case HOLD_EFFECT_TOXIC_ORB:
-            if (!ShouldPoison(battlerAtk, battlerAtk)
-             || (gBattleMons[battlerAtk].status1 & STATUS1_PSN_ANY))
-            {
+            // Orbs inflict their holder's status. Evaluate each holder as
+            // itself, rather than granting the giver's status-bypass ability.
+            if (ShouldPoison(battlerDef, battlerDef)
+             || (ShouldPoison(battlerAtk, battlerAtk)
+                 && !(gBattleMons[battlerAtk].status1 & STATUS1_PSN_ANY)))
+                ADJUST_SCORE(-WEAK_EFFECT);
+            else
                 ADJUST_SCORE(DECENT_EFFECT);
-            }
             break;
         case HOLD_EFFECT_FLAME_ORB:
-            if (aiData->abilities[battlerAtk] == ABILITY_KLUTZ)
+            if (ShouldBurn(battlerDef, battlerDef, aiData->abilities[battlerDef]))
+                ADJUST_SCORE(-WEAK_EFFECT);
+            else if (aiData->abilities[battlerAtk] == ABILITY_KLUTZ)
             {
                 if (aiData->abilities[battlerDef] != ABILITY_KLUTZ
                  && !gBattleMons[battlerDef].volatiles.embargoTimer
@@ -5407,11 +5382,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                  && HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
                     ADJUST_SCORE(GOOD_EFFECT);
             }
-            else if (!ShouldBurn(battlerAtk, battlerAtk, aiData->abilities[battlerAtk])
-             || (gBattleMons[battlerAtk].status1 & STATUS1_BURN))
-            {
+            else if (ShouldBurn(battlerAtk, battlerAtk, aiData->abilities[battlerAtk])
+                  && !(gBattleMons[battlerAtk].status1 & STATUS1_BURN))
+                ADJUST_SCORE(-WEAK_EFFECT);
+            else
                 ADJUST_SCORE(DECENT_EFFECT);
-            }
             break;
         case HOLD_EFFECT_BLACK_SLUDGE:
             if (!IS_BATTLER_OF_TYPE(battlerDef, TYPE_POISON) && aiData->abilities[battlerDef] != ABILITY_MAGIC_GUARD)
@@ -5426,14 +5401,22 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             ADJUST_SCORE(DECENT_EFFECT);
             break;
         case HOLD_EFFECT_UTILITY_UMBRELLA:
-            if (!(AI_GetWeather() & B_WEATHER_SUN && aiData->abilities[battlerAtk] == ABILITY_DRY_SKIN)
-             && DoesAbilityBenefitFromSunOrRain(battlerDef, aiData->abilities[battlerDef], AI_GetWeather()))
+            if ((AI_GetWeather() & B_WEATHER_SUN) && aiData->abilities[battlerAtk] == ABILITY_DRY_SKIN)
+            {
+                // Losing active sun protection is a cost, not a neutral tie
+                // with an attack. An Umbrella-for-Umbrella trade retains it.
+                if (GetItemHoldEffect(aiData->items[battlerDef]) != HOLD_EFFECT_UTILITY_UMBRELLA
+                 || GetMoveEffect(move) == EFFECT_BESTOW)
+                    ADJUST_SCORE(-WEAK_EFFECT);
+            }
+            else if ((AI_GetWeather() & B_WEATHER_SUN) && aiData->abilities[battlerDef] == ABILITY_DRY_SKIN)
+                ADJUST_SCORE(-WEAK_EFFECT); // Do not protect the foe from sun damage.
+            else if (DoesAbilityBenefitFromSunOrRain(battlerDef, aiData->abilities[battlerDef], AI_GetWeather()))
             {
                 ADJUST_SCORE(DECENT_EFFECT); // Remove their weather benefit
             }
             break;
         case HOLD_EFFECT_EJECT_BUTTON:
-            //if (!IsRaidBattle() && GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX && gNewBS->dynamaxData.timer[battlerDef] > 1 &&
             if (HasDamagingMove(battlerAtk)
              || (hasPartner && HasDamagingMove(GetPartnerBattler(battlerAtk))))
             {
@@ -5469,7 +5452,10 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
                 case HOLD_EFFECT_UTILITY_UMBRELLA:
                     if ((AI_GetWeather() & B_WEATHER_SUN) && (aiData->abilities[battlerAtk] == ABILITY_DRY_SKIN || aiData->abilities[battlerDef] == ABILITY_DRY_SKIN))
                         ADJUST_SCORE(DECENT_EFFECT);
-                    else if (!DoesAbilityBenefitFromSunOrRain(battlerAtk, aiData->abilities[battlerAtk], AI_GetWeather()))
+                    else if (DoesAbilityBenefitFromSunOrRain(battlerAtk, aiData->abilities[battlerAtk], AI_GetWeather())
+                          || DoesAbilityBenefitFromSunOrRain(battlerDef, aiData->abilities[battlerDef], AI_GetWeather()))
+                        ADJUST_SCORE(-WEAK_EFFECT); // Suppresses ours or restores theirs.
+                    else
                         ADJUST_SCORE(WEAK_EFFECT);
                     break;
                 default:

@@ -1756,7 +1756,8 @@ u8 GetFrontierBrainStatus(void)
     s32 winStreak = winStreakNoModifier + gFrontierBrainInfo[facility].streakAppearances[3];
     s32 symbolsCount;
 
-    if (battleMode != FRONTIER_MODE_SINGLES)
+    // Every open facility now runs Doubles; Brains appear there too, never in Multis.
+    if (battleMode == FRONTIER_MODE_MULTIS || battleMode == FRONTIER_MODE_LINK_MULTIS)
         return FRONTIER_BRAIN_NOT_READY;
 
     symbolsCount = GetPlayerSymbolCountForFacility(facility);

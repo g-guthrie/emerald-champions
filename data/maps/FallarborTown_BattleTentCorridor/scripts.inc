@@ -43,28 +43,3 @@ FallarborTown_BattleTentCorridor_Movement_AttendantEnterDoor: @ 8200701
 
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
-FallarborTown_ContestHall_Text_DoAllRightInPreliminary: @ 8200704
-	.string "We do all right in the preliminary round,\n"
-	.string "but we can never win the appeals…\p"
-	.string "Maybe it means I have to watch what\n"
-	.string "other contestants are doing…$"
-
-@ Unused
-FallarborTown_ContestHall_Text_MonAllTheseRibbons: @ 8200791
-	.string "See!\n"
-	.string "My Pokémon won all these RIBBONS!\p"
-	.string "Have your Pokémon earned any RIBBONS?\n"
-	.string "You can check them on your PokéNav.$"
-
-@ Unused
-FallarborTown_ContestHall_Text_CantWinEverywhere: @ 8200802
-	.string "I can't beat Gym LeaderS…\p"
-	.string "I can't win any CONTESTS…\p"
-	.string "I've been here, there, and everywhere,\n"
-	.string "and it's all for naught…$"
-
-@ Unused
-FallarborTown_ContestHall_Text_SuperRankStage: @ 8200876
-	.string "Pokémon Contests\n"
-	.string "SUPER RANK STAGE!$"
-

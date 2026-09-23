@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "data.h"
 #include "event_data.h"
 #include "pokedex.h"
@@ -11,17 +12,15 @@
 #include "constants/pokemon_size_record.h"
 
 #define DEFAULT_MAX_SIZE 0x8000 // was 0x8100 in Ruby/Sapphire
-#define DEFAULT_MAX_SIZE_MAGIKARP 0
-static u8* ReturnHeightStringNoWhitespace(u32 size);
 
-struct UnknownStruct
+struct MonSizeRange
 {
-    u16 unk0;
-    u8 unk2;
-    u16 unk4;
+    u16 baseScale;
+    u8 divisor;
+    u16 minHash;
 };
 
-static const struct UnknownStruct sBigMonSizeTable[] =
+static const struct MonSizeRange sBigMonSizeTable[] =
 {
     {  290,   1,      0 },
     {  300,   1,     10 },
@@ -32,13 +31,13 @@ static const struct UnknownStruct sBigMonSizeTable[] =
     {  800, 100,   7710 },
     {  900, 150,  17710 },
     { 1000, 150,  32710 },
-    { 1100, 100, -17826 },
-    { 1200,  50,  -7826 },
-    { 1300,  20,  -2826 },
-    { 1400,   5,   -826 },
-    { 1500,   2,   -326 },
-    { 1600,   1,   -126 },
-    { 1700,   1,   -26 },
+    { 1100, 100, 47710 },
+    { 1200,  50,  57710 },
+    { 1300,  20,  62710 },
+    { 1400,   5,   64710 },
+    { 1500,   2,   65210 },
+    { 1600,   1,   65410 },
+    { 1700,   1,   65510 },
 };
 
 enum
@@ -49,7 +48,6 @@ enum
     POKEMON_SIZE_LARGER
 };
 
-extern const u8 gText_DecimalPoint[];
 extern const u8 gText_Marco[];
 
 static u32 GetBoxMonSizeHash(struct BoxPokemon *pkmn)
@@ -67,55 +65,27 @@ static u32 GetBoxMonSizeHash(struct BoxPokemon *pkmn)
     return (hibyte << 8) + lobyte;
 }
 
-static u8 TranslateBigMonSizeTableIndex(u16 a)
+static u32 GetMonSize(enum Species species, u16 sizeHash)
 {
-    u8 i;
+    u32 index = 0;
+    while (index + 1 < ARRAY_COUNT(sBigMonSizeTable)
+        && sizeHash >= sBigMonSizeTable[index + 1].minHash)
+        index++;
 
-    for (i = 1; i < 15; i++)
-    {
-        if (a < sBigMonSizeTable[i].unk4)
-            return i - 1;
-    }
-    return i;
-}
-
-static u32 GetMonSize(enum Species species, u16 b)
-{
-    u64 unk2;
-    u64 unk4;
-    u64 unk0;
-    u32 height;
-    u32 var;
-
-    height = GetSpeciesHeight(species);
-    var = TranslateBigMonSizeTableIndex(b);
-    unk0 = sBigMonSizeTable[var].unk0;
-    unk2 = sBigMonSizeTable[var].unk2;
-    unk4 = sBigMonSizeTable[var].unk4;
-    unk0 += (b - unk4) / unk2;
-    return height * unk0 / 10;
+    const struct MonSizeRange *range = &sBigMonSizeTable[index];
+    u32 scale = range->baseScale + (sizeHash - range->minHash) / range->divisor;
+    return GetSpeciesHeight(species) * scale / 10;
 }
 
 static void FormatMonSizeRecord(u8 *string, u32 size)
 {
-    size = (f64)(size / 100);
-    StringCopy(string,ReturnHeightStringNoWhitespace(size));
-}
+    u8 *heightString = ConvertMonHeightToString(size / 100);
+    const u8 *digits = heightString;
 
-static u8* ReturnHeightStringNoWhitespace(u32 size)
-{
-    u8* heightStr = ConvertMonHeightToString(size);
-    u32 length = StringLength(heightStr);
-    u32 i =  0, j =  0;
-
-    while (i < length && !(heightStr[i] >= CHAR_0 && heightStr[i] <= CHAR_9))
-        i++;
-
-    while (i < length)
-        heightStr[j++] = heightStr[i++];
-
-    heightStr[j] = EOS;
-    return heightStr;
+    while (*digits != EOS && !(*digits >= CHAR_0 && *digits <= CHAR_9))
+        digits++;
+    StringCopy(string, digits);
+    Free(heightString);
 }
 
 static u8 CompareMonSize(enum Species species, u16 *sizeRecord)
@@ -136,7 +106,7 @@ static u8 CompareMonSize(enum Species species, u16 *sizeRecord)
         u32 newSize;
         u16 sizeParams;
 
-        *(&sizeParams) = GetBoxMonSizeHash(boxmon);
+        sizeParams = GetBoxMonSizeHash(boxmon);
         newSize = GetMonSize(species, sizeParams);
         oldSize = GetMonSize(species, *sizeRecord);
         FormatMonSizeRecord(gStringVar2, newSize);

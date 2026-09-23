@@ -27,35 +27,6 @@ Route118_OnFrame: @ 81F3E0A
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
-Route114_EventScript_GoodRodFisherman:: @ 81F3E14
-	lock
-	faceplayer
-	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_ReceivedGoodRod
-	msgbox Route118_Text_YouAgreeGoodRodIsGood, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq Route118_EventScript_ReceiveGoodRod
-	compare VAR_RESULT, NO
-	goto_if_eq Route118_EventScript_DeclineGoodRod
-	end
-
-Route118_EventScript_ReceiveGoodRod:: @ 81F3E3E
-	msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_GOOD_ROD
-	setflag FLAG_RECEIVED_GOOD_ROD
-	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_DeclineGoodRod:: @ 81F3E5F
-	msgbox Route118_Text_DontYouLikeToFish, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_ReceivedGoodRod:: @ 81F3E69
-	msgbox Route118_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT
-	release
-	end
-
 Route118_EventScript_Girl:: @ 81F3E73
 	msgbox Route118_Text_CanCrossRiversWithSurf, MSGBOX_NPC
 	end
@@ -188,24 +159,8 @@ Route118_Movement_StevenExit2: @ 81F3F7E
 	step_end
 
 Route118_EventScript_Rose:: @ 81F3F87
-	trainerbattle_double TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route118_EventScript_RegisterRose
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route118_EventScript_RematchRose
-	msgbox Route118_Text_RosePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_RegisterRose:: @ 81F3FB3
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route118_Text_RosePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_RematchRose:: @ 81F3FD2
-	@ This retired encounter has no campaign battle.
-	msgbox Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route118_Text_RosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Barny:: @ 81F3FE9
@@ -218,38 +173,6 @@ Route118_EventScript_Wade:: @ 81F4000
 	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route118_EventScript_Dalton:: @ 81F4017
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route118_EventScript_RematchDalton
-	msgbox Route118_Text_DaltonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_RegisterDalton:: @ 81F4043
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route118_Text_DaltonRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_DALTON_1
-	release
-	end
-
-Route118_EventScript_RematchDalton:: @ 81F4062
-	@ This retired encounter has no campaign battle.
-	msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route118_EventScript_Perry:: @ 81F4079
-	@ This retired encounter has no campaign battle.
-	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route118_EventScript_Chester:: @ 81F4090
-	@ This retired encounter has no campaign battle.
-	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route118_EventScript_Deandre:: @ 81F40A7
 	trainerbattle_double TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
@@ -258,7 +181,10 @@ Route118_EventScript_Deandre:: @ 81F40A7
 Route114_EventScript_MagikarpGuy::
 	lock
 	faceplayer
+Route118_EventScript_CheckGyaradositeState::
 	goto_if_set FLAG_ROUTE118_GYARADOSITE, Route118_EventScript_ReceivedGyaradosite
+	goto_if_defeated TRAINER_MAGIKARP_GUY, Route118_EventScript_GiveGyaradosite
+Route118_EventScript_OfferMagikarpChallenge::
 	msgbox Route118_Text_DoYouLiekKarp, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route118_EventScript_ILuurveKarp
@@ -291,13 +217,14 @@ Route118_EventScript_CheckParty::
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route118_EventScript_NeedMoreKarp
 	msgbox Route118_Text_KarpFiteStart, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat
+Route118_EventScript_GiveGyaradosite::
 	msgbox Route118_Text_TakeGyaradosite, MSGBOX_DEFAULT
 	giveitem ITEM_GYARADOSITE
+Route118_EventScript_CheckGyaradositeReceipt::
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_ROUTE118_GYARADOSITE
-	msgbox Route118_Text_KarpBetterThanGyara, MSGBOX_DEFAULT
-	release
-	end
+	goto Route118_EventScript_ReceivedGyaradosite
 
 Route118_EventScript_NeedMoreKarp::
 	msgbox Route118_Text_NeedMoreKarp, MSGBOX_DEFAULT
@@ -367,34 +294,13 @@ Route118_Text_StevenQuestions: @ 81F40BE
 	.string "It would be nice if we were to meet\n"
 	.string "again somewhere.$"
 
-Route118_Text_YouAgreeGoodRodIsGood: @ 81F427B
-	.string "Hmm!\n"
-	.string "A Good Rod is really good!\p"
-	.string "Wouldn't you agree?$"
-
-Route118_Text_IdenticalMindsTakeThis: @ 81F42AF
-	.string "Hmm!\n"
-	.string "We're of identical minds!\p"
-	.string "Hmm!\n"
-	.string "Take this Good Rod!$"
-
-Route118_Text_TryYourLuckFishing: @ 81F42E7
-	.string "Wherever there's water, try your luck\n"
-	.string "at fishing.$"
-
-Route118_Text_DontYouLikeToFish: @ 81F4319
-	.string "Don't you like to fish?$"
-
-Route118_Text_TryCatchingMonWithGoodRod: @ 81F4331
-	.string "Try catching all sorts of Pokémon\n"
-	.string "with your Good Rod.$"
-
 Route118_Text_CanCrossRiversWithSurf: @ 81F4367
-	.string "Even if there isn't a boat, you can\n"
-	.string "cross rivers and the sea if you have\l"
-	.string "a Pokémon that knows Surf.\p"
-	.string "Pokémon can be counted on to do so\n"
-	.string "much!$"
+	.string "With the Balance Badge and Surf\n"
+	.string "authorization, you can cross rivers\l"
+	.string "and the sea.\p"
+	.string "Bring a Pokémon able to learn\n"
+	.string "Surf; it needn't know the move.\p"
+	.string "Face the water and press A!$"
 
 Route118_Text_RouteSignMauville: @ 81F43F4
 	.string "Route 118\n"
@@ -403,4 +309,3 @@ Route118_Text_RouteSignMauville: @ 81F43F4
 Route118_Text_RouteSign119: @ 81F440E
 	.string "Route 118\n"
 	.string "{UP_ARROW} Route 119$"
-

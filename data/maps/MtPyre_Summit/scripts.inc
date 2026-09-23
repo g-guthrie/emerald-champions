@@ -73,8 +73,11 @@ MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
 	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer1
 	compare VAR_0x8008, 2
 	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer2
+MtPyre_Summit_EventScript_GiveMagmaEmblem::
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
 	giveitem ITEM_MAGMA_EMBLEM
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall
@@ -175,6 +178,9 @@ MtPyre_Summit_EventScript_OldManNewTale:: @ 8232199
 MtPyre_Summit_EventScript_OldLady:: @ 82321A2
 	lock
 	faceplayer
+	goto_if_lt VAR_MT_PYRE_STATE, 1, MtPyre_Summit_EventScript_OldLadyStory
+	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_GiveMagmaEmblem
+MtPyre_Summit_EventScript_OldLadyStory:
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	compare VAR_MT_PYRE_STATE, 3
 	call_if_ge MtPyre_Summit_EventScript_OldLadyOrbsReturned
@@ -685,7 +691,6 @@ MtPyre_Summit_EventScript_Darkrai::
 	waitmoncry
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome

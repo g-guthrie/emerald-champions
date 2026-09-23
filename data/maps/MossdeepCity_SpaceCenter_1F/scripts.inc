@@ -28,7 +28,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma:: @ 8222F58
 	compare VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 1
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft
 	compare VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 2
-	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown
+	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight
 	compare VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 3
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight
 	end
@@ -37,11 +37,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft:: @ 8222FAA
 	setobjectxyperm LOCALID_STAIR_GRUNT, 12, 2
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown:: @ 8222FB2
-	setobjectxyperm LOCALID_STAIR_GRUNT, 13, 3
-	end
-
-@ Functionally unused. See comment on MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast
+@ Both the south-approach retreat and the east-facing branch step right.
 MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight:: @ 8222FBA
 	setobjectxyperm LOCALID_STAIR_GRUNT, 14, 2
 	end
@@ -162,12 +158,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma:: @ 8223119
 MossdeepCity_SpaceCenter_1F_EventScript_Woman:: @ 822312D
 	lock
 	faceplayer
+MossdeepCity_SpaceCenter_1F_EventScript_WomanDialogueGate::
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
-	goto MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
+	goto MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal:: @ 8223154
@@ -183,12 +178,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma:: @ 822315E
 MossdeepCity_SpaceCenter_1F_EventScript_OldMan:: @ 8223168
 	lock
 	faceplayer
+MossdeepCity_SpaceCenter_1F_EventScript_OldManDialogueGate::
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
-	goto MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
+	goto MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal:: @ 822318F
@@ -242,7 +236,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_Grunt2:: @ 822321F
 	faceplayer
 	goto_if_set FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F, MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated
 	msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt2Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_2, MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_2, MossdeepCity_SpaceCenter_1F_Text_Grunt2Defeat
 	setflag FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F
 	copyobjectxytoperm LOCALID_STAIR_GRUNT
 	switch VAR_FACING

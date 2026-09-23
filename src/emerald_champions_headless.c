@@ -127,7 +127,7 @@ static EWRAM_DATA bool8 sEcHeadlessFurfrouMenuOpened = FALSE;
 static EWRAM_DATA bool8 sEcHeadlessAutoCaptureInProgress = FALSE;
 static const u8 sEcHeadlessPlayerName[] = _("BRENDAN");
 extern void gInitialMainCB2(void);
-extern const u8 Common_EventScript_ChooseStarterRegion[];
+extern const u8 RivalsHouse_EventScript_ChooseStarterRegion[];
 
 bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
 {
@@ -291,10 +291,10 @@ static void PrepareHeadlessOverworldFixtureState(enum Species species)
 
 static EWRAM_DATA enum Species sEcHeadlessFlightRider = SPECIES_NONE;
 
-static void PrepareHeadlessFieldMoveParty(u16 badgeFlag, u16 hmFlag)
+static void PrepareHeadlessFieldMoveParty(enum Species species, u16 badgeFlag, u16 hmFlag)
 {
     ZeroPlayerPartyMons();
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], species, 14, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     FlagSet(badgeFlag);
     FlagSet(hmFlag);
@@ -1713,7 +1713,7 @@ void EmeraldChampionsHeadlessObserve(void)
      && !gEcHeadlessFixtureSetupResult
      && gMain.callback2 == CB2_Overworld)
     {
-        ScriptContext_SetupScript(Common_EventScript_ChooseStarterRegion);
+        ScriptContext_SetupScript(RivalsHouse_EventScript_ChooseStarterRegion);
         gEcHeadlessFixtureSetupResult = TRUE;
         return;
     }
@@ -1912,7 +1912,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 5, OTID_STRUCT_PLAYER_ID);
         CalculatePlayerPartyCount();
         FlagSet(FLAG_SYS_POKEMON_GET);
-        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE);
+        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
         EmeraldChampionsAgentBattleBegin(gEcHeadlessFixtureParam & 0xFF,
                                          (gEcHeadlessFixtureParam >> 8) & 0xFF);
         // Steven grants the Mega Ring after Brawly, which is the cap-24 stage.
@@ -1931,7 +1931,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 14, OTID_STRUCT_PLAYER_ID);
         CalculatePlayerPartyCount();
         FlagSet(FLAG_SYS_POKEMON_GET);
-        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE);
+        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
         if (gEcHeadlessFixtureParam == 4)
         {
             VarSet(VAR_PETALBURG_CITY_STATE, 1);
@@ -3930,7 +3930,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_ADVENTURE_STARTED);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-                VarSet(VAR_EC_OPENING_STATE, EC_OPENING_PRE_RIVAL_READY);
+                VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
                 VarSet(VAR_BIRCH_LAB_STATE, 4);
                 if (storage != 0)
                 {
@@ -3989,7 +3989,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             ClearBag();
             for (slot = 0; slot < pocket->capacity; slot++)
                 BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POTION, 1);
-            VarSet(VAR_RUSTBORO_GYM_GUIDE_STATE, 0);
+            VarSet(VAR_RUSTBORO_CITY_STATE, 0);
             LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, starts[gEcHeadlessFixtureParam][0], starts[gEcHeadlessFixtureParam][1]);
         }
         break;
@@ -4150,35 +4150,34 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         SetMainCallback2(CB2_LoadMap);
         gEcHeadlessFixtureSetupResult = TRUE;
         break;
-    // Field moves without HM carriers: the party is one Zigzagoon that could
-    // learn the move but does not know it, the badge and HM flags are set, and
+    // Field moves without a taught HM: the party member could learn the move
+    // but does not know it, the badge and HM flags are set, and
     // the player stands facing the obstacle. The scenario taps UP, A, then A on
     // the Yes/No, and the observer latches the "used <move>!" showcase.
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_CUT:
-        PrepareHeadlessFieldMoveParty(FLAG_BADGE01_GET, FLAG_RECEIVED_HM_CUT);
+        PrepareHeadlessFieldMoveParty(SPECIES_ZIGZAGOON, FLAG_BADGE01_GET, FLAG_RECEIVED_HM_CUT);
         LoadHeadlessMap(MAP_ROUTE104, 35, 23);
         break;
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH:
-        PrepareHeadlessFieldMoveParty(FLAG_BADGE03_GET, FLAG_RECEIVED_HM_ROCK_SMASH);
+        PrepareHeadlessFieldMoveParty(SPECIES_ZIGZAGOON, FLAG_BADGE03_GET, FLAG_RECEIVED_HM_ROCK_SMASH);
         LoadHeadlessMap(MAP_ROUTE111, 18, 102);
         break;
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_STRENGTH:
-        PrepareHeadlessFieldMoveParty(FLAG_BADGE04_GET, FLAG_RECEIVED_HM_STRENGTH);
+        PrepareHeadlessFieldMoveParty(SPECIES_LINOONE, FLAG_BADGE04_GET, FLAG_RECEIVED_HM_STRENGTH);
         LoadHeadlessMap(MAP_FIERY_PATH, 10, 16);
         break;
-    // The Flight Beacon: nobody in the party can fly, but a boxed Wingull knows
-    // Fly. The trigger opens the fly map the way the item does, A picks the
+    // The Flight Beacon: nobody in the party can fly, but a boxed Wingull can
+    // learn Fly without knowing it. The trigger opens the fly map, A picks the
     // current town, and the observer latches the Fly showcase carrying the
     // boxed rider with the override consumed.
     case EC_HEADLESS_SCENARIO_FLIGHT_BEACON:
     {
         struct Pokemon rider;
 
-        PrepareHeadlessFieldMoveParty(FLAG_BADGE06_GET, FLAG_RECEIVED_HM_FLY);
+        PrepareHeadlessFieldMoveParty(SPECIES_ZIGZAGOON, FLAG_BADGE06_GET, FLAG_RECEIVED_HM_FLY);
         AddBagItem(ITEM_FLIGHT_BEACON, 1);
         FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
         CreateMon(&rider, SPECIES_WINGULL, 20, 0, OTID_STRUCT_PLAYER_ID);
-        SetMonMoveSlot(&rider, MOVE_FLY, 0);
         gPokemonStoragePtr->boxes[0][0] = rider.box;
         sEcHeadlessFlightRider = SPECIES_NONE;
         LoadHeadlessMap(MAP_LITTLEROOT_TOWN, 8, 10);

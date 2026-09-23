@@ -2088,7 +2088,9 @@ static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 
 {
     struct SpriteSheet sheet;
     struct SpritePalette palette;
-    struct SpriteTemplate *template;
+    struct SpriteTemplate template;
+    bool32 newTiles = GetSpriteTileStartByTag(tilesTag) == TAG_NONE;
+    bool32 newPalette = IndexOfSpritePaletteTag(paletteTag) == 0xFF;
     u8 spriteId;
 
     if (!AllocItemIconTemporaryBuffers())
@@ -2099,17 +2101,23 @@ static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 
     sheet.data = gItemIcon4x4Buffer;
     sheet.size = 0x200;
     sheet.tag = tilesTag;
-    LoadSpriteSheet(&sheet);
+    if (newTiles)
+        LoadSpriteSheet(&sheet);
     palette.data = GetDecorationIconPalette(decor);
     palette.tag = paletteTag;
     LoadSpritePalette(&palette);
-    template = Alloc(sizeof(struct SpriteTemplate));
-    *template = gItemIconSpriteTemplate;
-    template->tileTag = tilesTag;
-    template->paletteTag = paletteTag;
-    spriteId = CreateSprite(template, 0, 0, 0);
+    template = gItemIconSpriteTemplate;
+    template.tileTag = tilesTag;
+    template.paletteTag = paletteTag;
+    spriteId = CreateSpriteWithTemplateCopy(&template, 0, 0, 0);
     FreeItemIconTemporaryBuffers();
-    Free(template);
+    if (spriteId == MAX_SPRITES)
+    {
+        if (newTiles)
+            FreeSpriteTilesByTag(tilesTag);
+        if (newPalette)
+            FreeSpritePaletteByTag(paletteTag);
+    }
     return spriteId;
 }
 
@@ -2134,7 +2142,9 @@ static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u
     u8 spriteId;
     struct SpriteSheet sheet;
     struct SpritePalette palette;
-    struct SpriteTemplate *template;
+    struct SpriteTemplate template;
+    bool32 newTiles = GetSpriteTileStartByTag(tilesTag) == TAG_NONE;
+    bool32 newPalette = IndexOfSpritePaletteTag(paletteTag) == 0xFF;
 
     ClearPlaceDecorationGraphicsDataBuffer(&sPlaceDecorationGraphicsDataBuffer);
     sPlaceDecorationGraphicsDataBuffer.decoration = &gDecorations[decor];
@@ -2147,20 +2157,26 @@ static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u
         sheet.data = sPlaceDecorationGraphicsDataBuffer.image;
         sheet.size = sDecorShapes[sPlaceDecorationGraphicsDataBuffer.decoration->shape].size * TILE_SIZE_4BPP;
         sheet.tag = tilesTag;
-        LoadSpriteSheet(&sheet);
+        if (newTiles)
+            LoadSpriteSheet(&sheet);
         palette.data = sPlaceDecorationGraphicsDataBuffer.palette;
         palette.tag = paletteTag;
         LoadSpritePalette(&palette);
-        template = Alloc(sizeof(struct SpriteTemplate));
-        *template = sDecorWhilePlacingSpriteTemplate;
-        template->tileTag = tilesTag;
-        template->paletteTag = paletteTag;
-        spriteId = CreateSprite(template, 0, 0, 0);
-        Free(template);
+        template = sDecorWhilePlacingSpriteTemplate;
+        template.tileTag = tilesTag;
+        template.paletteTag = paletteTag;
+        spriteId = CreateSpriteWithTemplateCopy(&template, 0, 0, 0);
     }
     else
     {
         spriteId = CreateObjectGraphicsSpriteWithTag(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1, paletteTag);
+    }
+    if (spriteId == MAX_SPRITES && sPlaceDecorationGraphicsDataBuffer.decoration->permission != DECORPERM_SPRITE)
+    {
+        if (newTiles)
+            FreeSpriteTilesByTag(tilesTag);
+        if (newPalette)
+            FreeSpritePaletteByTag(paletteTag);
     }
     return spriteId;
 }

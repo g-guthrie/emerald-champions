@@ -687,7 +687,7 @@ static void CreateMonMarkingsOrPokeballIndicators(void)
         // Add icons for occupied slots
         for (i = 0; i < GetMonListCount() - 1; i++)
         {
-            spriteId = CreateSprite(&sprTemplate, 226, (i * 20) + 8, 0);
+            spriteId = CreateSpriteWithTemplateCopy(&sprTemplate, 226, (i * 20) + 8, 0);            fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
             if (spriteId != MAX_SPRITES)
             {
                 menu->partyPokeballSpriteIds[i] = spriteId;
@@ -705,7 +705,7 @@ static void CreateMonMarkingsOrPokeballIndicators(void)
         sprTemplate.callback = SpriteCallbackDummy;
         for (; i < PARTY_SIZE; i++)
         {
-            spriteId = CreateSprite(&sprTemplate, 230, (i * 20) + 8, 0);
+            spriteId = CreateSpriteWithTemplateCopy(&sprTemplate, 230, (i * 20) + 8, 0);            fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
             if (spriteId != MAX_SPRITES)
             {
                 menu->partyPokeballSpriteIds[i] = spriteId;
@@ -720,7 +720,7 @@ static void CreateMonMarkingsOrPokeballIndicators(void)
         // Add cancel icon
         sprTemplate.tileTag = TAG_CONDITION_CANCEL;
         sprTemplate.callback = HighlightCurrentPartyIndexPokeball;
-        spriteId = CreateSprite(&sprTemplate, 222, (i * 20) + 8, 0);
+        spriteId = CreateSpriteWithTemplateCopy(&sprTemplate, 222, (i * 20) + 8, 0);        fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
         if (spriteId != MAX_SPRITES)
         {
             menu->partyPokeballSpriteIds[i] = spriteId;
@@ -814,7 +814,7 @@ static void CreateConditionMonPic(u8 id)
         sprPal.data = GetConditionMonPal(id);
         menu->monPalIndex = LoadSpritePalette(&sprPal);
         menu->monGfxTileStart = LoadSpriteSheet(&sprSheet);
-        spriteId = CreateSprite(&sprTemplate, 38, 104, 0);
+        spriteId = CreateSpriteWithTemplateCopy(&sprTemplate, 38, 104, 0);        fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
         menu->monPicSpriteId = spriteId;
         if (spriteId == MAX_SPRITES)
         {

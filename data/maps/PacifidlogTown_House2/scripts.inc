@@ -79,7 +79,7 @@ PacifidlogTown_House2_Text_AlasNotYou:
 PacifidlogTown_House2_Text_DiancieLikesYou:
 	.string "Oho! That's a Diancie you have with you!\p"
 	.string "And it seems to like you very much.\n"
-	.string "You are worthy of this Mega Stone.\n"
+	.string "You are worthy of this Mega Stone.\l"
 	.string "Please take it!$"
 
 PacifidlogTown_House2_Text_ExplainDiancite:

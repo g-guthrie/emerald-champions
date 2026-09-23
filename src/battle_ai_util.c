@@ -2394,7 +2394,6 @@ bool32 CanAIFaintTarget(enum BattlerId battlerAtk, enum BattlerId battlerDef, u3
 bool32 CanBattlerKOTargetIgnoringSturdy(enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
     struct AiLogicData *aiData = gAiLogicData;
-    s32 dmg;
     enum Move *moves = GetMovesArray(battlerAtk);
     u32 moveLimitations = aiData->moveLimitations[battlerAtk];
 
@@ -2402,9 +2401,28 @@ bool32 CanBattlerKOTargetIgnoringSturdy(enum BattlerId battlerAtk, enum BattlerI
     {
         if (IsMoveUnusable(moveIndex, moves[moveIndex], moveLimitations))
             continue;
-        dmg = AI_GetDamage(battlerAtk, battlerDef, moveIndex, AI_ATTACKING, aiData);
+        if (!CanEndureHit(battlerAtk, battlerDef, moves[moveIndex]))
+            continue;
 
-        if (gBattleMons[battlerDef].hp <= dmg && CanEndureHit(battlerAtk, battlerDef, moves[moveIndex]))
+        u32 hp = gBattleMons[battlerDef].hp;
+        u32 cappedDamage = AI_GetDamage(battlerAtk, battlerDef, moveIndex, AI_ATTACKING, aiData);
+        if (cappedDamage + 1 < hp)
+            continue;
+
+        // The cached simulation has already applied Sturdy/Focus Sash, so a
+        // would-be KO is clipped to hp - 1. Recalculate only this candidate
+        // before guaranteed survival, using the same attacking damage roll.
+        struct AiCalcValues calc = {.move = moves[moveIndex], .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain};
+        struct SimulatedDamage raw = AI_CalcDamageInternal(&calc, battlerAtk, battlerDef, 0, NULL, TRUE);
+        u32 damage;
+        switch (GetConfig(AI_ROLL_ATTACKING))
+        {
+        case AI_ROLL_MIN:    damage = raw.minimum; break;
+        case AI_ROLL_MAX:    damage = raw.maximum; break;
+        case AI_ROLL_RANDOM: damage = raw.random; break;
+        default:             damage = raw.median; break;
+        }
+        if (hp <= damage)
             return TRUE;
     }
     return FALSE;
@@ -3040,7 +3058,7 @@ static bool32 ShouldAvoidProtectingAgainstPartnerMove(enum BattlerId battler, en
         }
 
         if (gAiLogicData->holdEffects[battler] == HOLD_EFFECT_WEAKNESS_POLICY
-         && gAiLogicData->effectiveness[partner][battler][gAiBattleData->chosenMoveIndex[partner]] >= UQ_4_12(2.0))
+         && gAiLogicData->effectiveness[partner][battler][partnerMoveIndex] >= UQ_4_12(2.0))
         {
             return TRUE;
         }

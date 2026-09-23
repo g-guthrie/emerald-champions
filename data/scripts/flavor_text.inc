@@ -4,10 +4,6 @@ EventScript_Bookshelf::
 	msgbox Text_Bookshelf, MSGBOX_SIGN
 	end
 
-EventScript_PokeMartShelf::
-	msgbox Text_PokeMartShelf, MSGBOX_SIGN
-	end
-
 EventScript_Food::
 	msgbox Text_Food, MSGBOX_SIGN
 	end
@@ -96,14 +92,6 @@ EventScript_NeatlyLinedUpTools::
 	msgbox Text_NeatlyLinedUpTools, MSGBOX_SIGN
 	end
 
-EventScript_PokemartSign::
-	msgbox Text_PokemartSign, MSGBOX_SIGN
-	end
-
-EventScript_PokecenterSign::
-	msgbox Text_PokecenterSign, MSGBOX_SIGN
-	end
-
 EventScript_Indigo_UltimateGoal::
 	msgbox Text_Indigo_UltimateGoal, MSGBOX_SIGN
 	end
@@ -115,19 +103,8 @@ EventScript_Indigo_HighestAuthority::
 @ Flavor text for interacting with various background objects
 
 Text_Bookshelf::
-	.string "It's crammed full of POKéMON\n"
+	.string "It's crammed full of Pokémon\n"
 	.string "books.$"
-
-Text_NothingButPokemonBooks::
-	.string "Every book on the shelf is about\n"
-	.string "POKéMON.$"
-
-Text_ATownMap::
-	.string "A TOWN MAP.$"
-
-Text_PokeMartShelf::
-	.string "Wow!\n"
-	.string "Tons of POKéMON stuff!$"
 
 Text_DishesPlatesNeatlyLinedUp::
 	.string "Dishes and plates are neatly\n"
@@ -144,23 +121,15 @@ Text_Dresser::
 Text_Snacks::
 	.string "There's a pile of snacks here.$"
 
-Text_PokemartSign::
-	.string "All your item needs fulfilled!\n"
-	.string "POKéMON MART$"
-
-Text_PokecenterSign::
-	.string "Heal Your POKéMON!\n"
-	.string "POKéMON CENTER$"
-
 Text_Indigo_UltimateGoal::
-	.string "INDIGO PLATEAU\p"
-	.string "The ultimate goal of TRAINERS!\n"
-	.string "POKéMON LEAGUE HQ$"
+	.string "Indigo Plateau\p"
+	.string "The ultimate goal of Trainers!\n"
+	.string "Pokémon League HQ$"
 
 Text_Indigo_HighestAuthority::
-	.string "INDIGO PLATEAU\p"
-	.string "The highest POKéMON authority!\n"
-	.string "POKéMON LEAGUE HQ$"
+	.string "Indigo Plateau\p"
+	.string "The highest Pokémon authority!\n"
+	.string "Pokémon League HQ$"
 
 Text_Food::
 	.string "It should be packed with all kinds\n"
@@ -171,7 +140,7 @@ Text_Blueprints::
 	.string "It's filled with diagrams and text.$"
 
 Text_Painting::
-	.string "It's a pretty picture of a POKéMON.\n"
+	.string "It's a pretty picture of a Pokémon.\n"
 	.string "It looks like it's feeling good.$"
 
 Text_PowerPlantMachine::
@@ -200,7 +169,7 @@ Text_TrashBin::
 	.string "There's nothing here!$"
 
 Text_Cup::
-	.string "It's a cup with a POKéMON mark\n"
+	.string "It's a cup with a Pokémon mark\n"
 	.string "on it.$"
 
 Text_PolishedWindow::
@@ -232,5 +201,5 @@ Text_Burglary::
 	.string "here…$"
 
 Text_PlayerFacingTVScreen::
-	.string "There's a POKéMON on TV!\n"
+	.string "There's a Pokémon on TV!\n"
 	.string "It looks like it's having fun.$"

@@ -5462,6 +5462,32 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 - MOVE_PROTECT
 
+SPECIES_TORNADUS @ ITEM_COVERT_CLOAK
+Level: 101
+Level Offset: 1
+Ability: ABILITY_PRANKSTER
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 0 Def / 4 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_TAILWIND
+- MOVE_BLEAKWIND_STORM
+- MOVE_TAUNT
+- MOVE_PROTECT
+
+SPECIES_GHOLDENGO @ ITEM_LIFE_ORB
+Level: 101
+Level Offset: 1
+Ability: ABILITY_GOOD_AS_GOLD
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_MODEST
+- MOVE_MAKE_IT_RAIN
+- MOVE_SHADOW_BALL
+- MOVE_NASTY_PLOT
+- MOVE_PROTECT
+
 === TRAINER_MELISSA ===
 Name: MELISSA
 Class: Beauty
@@ -6445,10 +6471,10 @@ Party Size: 0
 
 === TRAINER_HERMAN ===
 Name: HERMAN
-Class: Swimmer M
-Pic: Swimmer M
+Class: Cooltrainer
+Pic: Cooltrainer M
 Gender: Male
-Music: Swimmer
+Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
@@ -9037,6 +9063,32 @@ Nature: NATURE_BRAVE
 - MOVE_SNARL
 - MOVE_PROTECT
 
+SPECIES_NINETALES_ALOLA @ ITEM_LIGHT_CLAY
+Level: 101
+Level Offset: 1
+Ability: ABILITY_SNOW_WARNING
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 0 Def / 4 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_AURORA_VEIL
+- MOVE_BLIZZARD
+- MOVE_MOONBLAST
+- MOVE_PROTECT
+
+SPECIES_ARCTOZOLT @ ITEM_LIFE_ORB
+Level: 101
+Level Offset: 1
+Ability: ABILITY_SLUSH_RUSH
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_ADAMANT
+- MOVE_BOLT_BEAK
+- MOVE_ICICLE_CRASH
+- MOVE_LOW_KICK
+- MOVE_PROTECT
+
 === TRAINER_THOMAS ===
 Name: THOMAS
 Class: Gentleman
@@ -9098,6 +9150,32 @@ Nature: NATURE_JOLLY
 - MOVE_MEGAHORN
 - MOVE_POISON_JAB
 - MOVE_SUPERPOWER
+
+SPECIES_RILLABOOM @ ITEM_ASSAULT_VEST
+Level: 101
+Level Offset: 1
+Ability: ABILITY_GRASSY_SURGE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_ADAMANT
+- MOVE_FAKE_OUT
+- MOVE_GRASSY_GLIDE
+- MOVE_WOOD_HAMMER
+- MOVE_U_TURN
+
+SPECIES_URSHIFU_RAPID_STRIKE @ ITEM_MYSTIC_WATER
+Level: 101
+Level Offset: 1
+Ability: ABILITY_UNSEEN_FIST
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_SURGING_STRIKES
+- MOVE_CLOSE_COMBAT
+- MOVE_AQUA_JET
+- MOVE_PROTECT
 
 === TRAINER_SIDNEY ===
 Name: SIDNEY
@@ -21488,6 +21566,32 @@ Nature: NATURE_ADAMANT
 - MOVE_EARTHQUAKE
 - MOVE_ROCK_SLIDE
 
+SPECIES_FARIGIRAF @ ITEM_SAFETY_GOGGLES
+Level: 101
+Level Offset: 1
+Ability: ABILITY_ARMOR_TAIL
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
+Nature: NATURE_SASSY
+- MOVE_TRICK_ROOM
+- MOVE_PSYCHIC
+- MOVE_HELPING_HAND
+- MOVE_PROTECT
+
+SPECIES_URSALUNA @ ITEM_FLAME_ORB
+Level: 101
+Level Offset: 1
+Ability: ABILITY_GUTS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+Happiness: 255
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_BRAVE
+- MOVE_FACADE
+- MOVE_HEADLONG_RUSH
+- MOVE_ICE_PUNCH
+- MOVE_PROTECT
+
 === TRAINER_KIRA_AND_DAN_1 ===
 Name: KIRA & DAN
 Class: Young Couple
@@ -26753,7 +26857,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_LEAF_ALTERING_CAVE ===
-Name: LEAF
+Name: GREEN
 Class: Rival
 Pic: Leaf
 Gender: Female
@@ -27879,7 +27983,7 @@ Nature: NATURE_JOLLY
 === TRAINER_BUFFEL ===
 Name: BUFFEL
 Class: Expert
-Pic: Expert M
+Pic: Cooltrainer M
 Gender: Male
 Music: Hiker
 Double Battle: Yes
@@ -27912,30 +28016,30 @@ Nature: NATURE_BOLD
 - MOVE_RECOVER
 - MOVE_PROTECT
 
-SPECIES_HAXORUS @ ITEM_LIFE_ORB
-Level: 60
-Level Offset: 0
-Ability: ABILITY_UNNERVE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+SPECIES_CALYREX_SHADOW @ ITEM_LIFE_ORB
+Level: 62
+Level Offset: 2
+Ability: ABILITY_AS_ONE_SHADOW_RIDER
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_ADAMANT
-- MOVE_CLOSE_COMBAT
-- MOVE_SWORDS_DANCE
-- MOVE_SCALE_SHOT
-- MOVE_POISON_JAB
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_ASTRAL_BARRAGE
+- MOVE_PSYCHIC
+- MOVE_NASTY_PLOT
+- MOVE_PROTECT
 
-SPECIES_KLINKLANG @ ITEM_LEFTOVERS
-Level: 60
-Level Offset: 0
-Ability: ABILITY_CLEAR_BODY
+SPECIES_ZAMAZENTA_CROWNED @ ITEM_RUSTED_SHIELD
+Level: 62
+Level Offset: 2
+Ability: ABILITY_DAUNTLESS_SHIELD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_SHIFT_GEAR
-- MOVE_GEAR_GRIND
-- MOVE_WILD_CHARGE
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
+Nature: NATURE_IMPISH
+- MOVE_BODY_PRESS
+- MOVE_HEAVY_SLAM
+- MOVE_WIDE_GUARD
 - MOVE_PROTECT
 
 SPECIES_TOGEKISS @ ITEM_SITRUS_BERRY

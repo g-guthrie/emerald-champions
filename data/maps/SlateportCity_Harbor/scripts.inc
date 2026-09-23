@@ -117,13 +117,6 @@ SlateportCity_Harbor_Movement_AquaBoardSub: @ 820CAC8
 	step_end
 
 @ Unused, Archie instead shares above identical movement script with Grunt
-SlateportCity_Harbor_Movement_ArchieBoardSub: @ 820CACD
-	delay_16
-	delay_16
-	jump_up
-	set_invisible
-	step_end
-
 SlateportCity_Harbor_Movement_SubmarineExit: @ 820CAD2
 	delay_16
 	delay_16
@@ -193,17 +186,12 @@ SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier:: @ 820CB50
 	multichoicedefault 17, 6, MULTI_SSTIDAL_SLATEPORT_WITH_BF, 2, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove
-	case 1, LilycoveCity_Harbor_EventScript_GoToBattleFrontierTemp
+	case 1, SlateportCity_Harbor_EventScript_BattleFrontier
 	case 2, SlateportCity_Harbor_EventScript_CancelDestinationSelect
 	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect
 	end
 
 @ Unused. Should be impossible for player to reach Ferry without having received SS Tidal ticket
-SlateportCity_Harbor_EventScript_NoTicket:: @ 820CB88
-	msgbox SlateportCity_Harbor_Text_YouMustHaveTicket, MSGBOX_DEFAULT
-	release
-	end
-
 SlateportCity_Harbor_EventScript_Lilycove:: @ 820CB92
 	msgbox SlateportCity_Harbor_Text_LilycoveItIs, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -380,12 +368,6 @@ SlateportCity_Harbor_Text_MayISeeYourTicket: @ 820CE87
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your Ticket?$"
 
-SlateportCity_Harbor_Text_YouMustHaveTicket: @ 820CEC1
-	.string "{PLAYER} doesn't have the Ticket…\p"
-	.string "I'm terribly sorry.\p"
-	.string "You must have a Ticket to board\n"
-	.string "the ferry.$"
-
 SlateportCity_Harbor_Text_FlashedTicketWhereTo: @ 820CF1C
 	.string "{PLAYER} flashed the Ticket.\p"
 	.string "Perfect! That's all you need!\p"
@@ -463,22 +445,22 @@ SlateportCity_Harbor_Text_TeamAquaLeftNeedDive: @ 820D42B
 	.string "You're not responsible for this.\p"
 	.string "Trying to catch a submarine…\n"
 	.string "It's impossible for most people.\p"
-	.string "You would need a Pokémon that knows\n"
-	.string "how to Dive…\p"
+	.string "You would need a Dive license and\n"
+	.string "the Mind Badge to follow them…\p"
 	.string "Perhaps if you went out to\n"
 	.string "Mossdeep City…\p"
 	.string "A lot of divers live out there, so\n"
-	.string "someone might teach you…$"
+	.string "someone might authorize you…$"
 
 SlateportCity_Harbor_Text_NeedDiveToCatchSub: @ 820D58A
 	.string "Capt. Stern: Trying to catch a\n"
 	.string "submarine… It's impossible.\p"
-	.string "You would need a Pokémon that knows\n"
-	.string "how to Dive…\p"
+	.string "You would need a Dive license and\n"
+	.string "the Mind Badge to follow them…\p"
 	.string "Perhaps if you went out to\n"
 	.string "Mossdeep City…\p"
 	.string "A lot of divers live out there, so\n"
-	.string "someone might teach you…$"
+	.string "someone might authorize you…$"
 
 SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry: @ 820D65C
 	.string "Capt. Stern: Oh, yes.\n"

@@ -93,6 +93,7 @@ enum {
     MSG_MARK_POKE,
     MSG_LAST_POKE,
     MSG_PARTY_FULL,
+    MSG_RESTRICTED_PARTY,
     MSG_HOLDING_POKE,
     MSG_WHICH_ONE_WILL_TAKE,
     MSG_CANT_RELEASE_EGG,
@@ -110,6 +111,7 @@ enum {
     MSG_CHANGED_TO_ITEM,
     MSG_CANT_STORE_MAIL,
     MSG_REMOVE_PROTECTED_ITEM,
+    MSG_UNFUSE_BEFORE_RELEASE,
 };
 
 // IDs for how to resolve variables in the above messages
@@ -577,6 +579,7 @@ static void Task_TakeItemForMoving(u8);
 static void Task_ShowMarkMenu(u8);
 static void Task_ShowMonSummary(u8);
 static void Task_ReleaseMon(u8);
+static bool32 HoldsFusedPartner(enum Species species);
 static void Task_ReshowPokeStorage(u8);
 static void Task_PokeStorageMain(u8);
 static void Task_JumpBox(u8);
@@ -646,7 +649,6 @@ static bool8 TryHideReleaseMon(void);
 static void InitCanReleaseMonVars(void);
 static void ReleaseMon(void);
 static bool32 AtLeastThreeUsableMons(void);
-static s8 RunCanReleaseMon(void);
 static void SaveMovingMon(void);
 static void LoadSavedMovingMon(void);
 static void InitSummaryScreenData(void);
@@ -1057,6 +1059,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_MARK_POKE]            = {COMPOUND_STRING("Mark your POKéMON."),         MSG_VAR_NONE},
     [MSG_LAST_POKE]            = {COMPOUND_STRING("That's your last POKéMON!"),  MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,                          MSG_VAR_NONE},
+    [MSG_RESTRICTED_PARTY]     = {COMPOUND_STRING("1 Legendary/Mythical, 1 Ultra\nBeast, 1 Paradox per party."), MSG_VAR_NONE},
     [MSG_HOLDING_POKE]         = {COMPOUND_STRING("You're holding a POKéMON!"),  MSG_VAR_NONE},
     [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("Which one will you take?"),   MSG_VAR_NONE},
     [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("You can't release an EGG."),  MSG_VAR_NONE},
@@ -1074,6 +1077,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("Changed to {DYNAMIC 0}."),    MSG_VAR_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("MAIL can't be stored!"),      MSG_VAR_NONE},
     [MSG_REMOVE_PROTECTED_ITEM] = {COMPOUND_STRING("Remove its held item first."), MSG_VAR_NONE},
+    [MSG_UNFUSE_BEFORE_RELEASE] = {COMPOUND_STRING("Separate its fused partner first."), MSG_VAR_NONE},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -1621,7 +1625,27 @@ void ResetPokemonStorageSystem(void)
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
         SetBoxWallpaper(boxId, boxId % (MAX_DEFAULT_WALLPAPER + 1));
 
+    // Fused partners belong to the file that fused them.
+    for (u32 i = 0; i < MAX_FUSION_STORAGE; i++)
+        ZeroMonData(&gPokemonStoragePtr->fusions[i]);
+
     ResetWaldaWallpaper();
+}
+
+// A fused form's partner waits in fusion storage until unfused; releasing the
+// form would strand the partner and block that fusion slot for good.
+static bool32 HoldsFusedPartner(enum Species species)
+{
+    const struct Fusion *fusion = gFusionTablePointers[species];
+    if (fusion == NULL)
+        return FALSE;
+    for (u32 i = 0; fusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++)
+    {
+        if (fusion[i].fusingIntoMon == species
+         && GetMonData(&gPokemonStoragePtr->fusions[fusion[i].fusionStorageIndex], MON_DATA_LEVEL) != 0)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 
@@ -1873,17 +1897,102 @@ static void CB2_PokeStorage(void)
     BuildOamBuffer();
 }
 
+// Setup can fail before cursor sprites exist. Recover from the persistent
+// handoff data, never from partially initialized icon state.
+static void RecoverStorageCursorOnInitFailure(bool32 reopening)
+{
+    if (!reopening)
+        return;
+
+    if (sIsMonBeingMoved)
+    {
+        u32 box = sMovingMonOrigBoxId;
+        s32 slot = sMovingMonOrigBoxPos;
+        bool32 empty = (box == TOTAL_BOXES_COUNT && slot < PARTY_SIZE
+            && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == SPECIES_NONE)
+            || (box < TOTAL_BOXES_COUNT && slot < IN_BOX_COUNT
+            && GetBoxMonDataAt(box, slot, MON_DATA_SPECIES) == SPECIES_NONE);
+        if (!empty)
+        {
+            box = TOTAL_BOXES_COUNT;
+            for (slot = 0; slot < PARTY_SIZE; slot++)
+                if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == SPECIES_NONE)
+                    break;
+            if (slot == PARTY_SIZE)
+            {
+                for (box = 0; box < TOTAL_BOXES_COUNT; box++)
+                    if ((slot = GetFirstFreeBoxSpot(box)) >= 0)
+                        break;
+                fatal_assertf(box < TOTAL_BOXES_COUNT, "No space to recover storage cursor Pokemon");
+            }
+        }
+        if (box == TOTAL_BOXES_COUNT)
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+            *mon = sSavedMovingMon;
+            SetMonFormPSS(&mon->box, FORM_CHANGE_WITHDRAW);
+            CalculateMonStats(mon);
+            ClampMonToPlayerLevelCap(mon);
+        }
+        else
+        {
+            SetBoxMonAt(box, slot, &sSavedMovingMon.box);
+            SetMonFormPSS(&gPokemonStoragePtr->boxes[box][slot], FORM_CHANGE_DEPOSIT);
+        }
+        sIsMonBeingMoved = FALSE;
+        gPartiesCount[B_TRAINER_PLAYER] = CalculatePlayerPartyCount();
+    }
+    if (sMovingItemId != ITEM_NONE)
+    {
+        bool32 restored = AddBagItem(sMovingItemId, 1) || AddPCItem(sMovingItemId, 1);
+        // Picking up an item leaves an empty holder, even after item swaps.
+        // This final sink also works when both inventories are full.
+        for (u32 i = 0; i < PARTY_SIZE + TOTAL_BOXES_COUNT * IN_BOX_COUNT && !restored; i++)
+        {
+            struct BoxPokemon *mon = i < PARTY_SIZE ? &gParties[B_TRAINER_PLAYER][i].box
+                : &gPokemonStoragePtr->boxes[(i - PARTY_SIZE) / IN_BOX_COUNT][(i - PARTY_SIZE) % IN_BOX_COUNT];
+            if (GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetBoxMonData(mon, MON_DATA_IS_EGG)
+             && GetBoxMonData(mon, MON_DATA_HELD_ITEM) == ITEM_NONE)
+            {
+                SetBoxMonData(mon, MON_DATA_HELD_ITEM, &sMovingItemId);
+                SetMonFormPSS_ItemHold(mon);
+                restored = TRUE;
+            }
+        }
+        fatal_assertf(restored, "No space to recover storage cursor item");
+        sMovingItemId = ITEM_NONE;
+    }
+}
+
+static void SetStorageFailureReturnCallback(u8 boxOption)
+{
+    if (boxOption == OPTION_SELECT_MON)
+    {
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+        gSpecialVar_Result = FALSE;
+    }
+    SetMainCallback2(boxOption == OPTION_SELECT_MON
+        ? CB2_ReturnToFieldContinueScript : CB2_ExitPokeStorage);
+}
+
+static void Task_ExitStorageAfterInitFailure(u8 taskId)
+{
+    u8 boxOption = sStorage->boxOption;
+    RecoverStorageCursorOnInitFailure(sStorage->isReopening);
+    FreePokeStorageData();
+    SetStorageFailureReturnCallback(boxOption);
+    DestroyTask(taskId);
+}
+
 static void EnterPokeStorage(u8 boxOption)
 {
     ResetTasks();
     sCurrentBoxOption = boxOption;
-    sStorage = Alloc(sizeof(*sStorage));
+    sStorage = AllocUnchecked(sizeof(*sStorage));
     if (sStorage == NULL)
     {
-        if (boxOption == OPTION_SELECT_MON)
-            SetMainCallback2(CB2_ReturnToFieldContinueScript);
-        else
-            SetMainCallback2(CB2_ExitPokeStorage);
+        SetStorageFailureReturnCallback(boxOption);
     }
     else
     {
@@ -1900,13 +2009,11 @@ static void EnterPokeStorage(u8 boxOption)
 static void CB2_ReturnToPokeStorage(void)
 {
     ResetTasks();
-    sStorage = Alloc(sizeof(*sStorage));
+    sStorage = AllocUnchecked(sizeof(*sStorage));
     if (sStorage == NULL)
     {
-        if (sStorage->boxOption == OPTION_SELECT_MON)
-            SetMainCallback2(CB2_ReturnToFieldContinueScript);
-        else
-            SetMainCallback2(CB2_ExitPokeStorage);
+        RecoverStorageCursorOnInitFailure(TRUE);
+        SetStorageFailureReturnCallback(sCurrentBoxOption);
     }
     else
     {
@@ -1998,7 +2105,7 @@ static void Task_InitPokeStorage(u8 taskId)
     case 1:
         if (!InitPokeStorageWindows())
         {
-            SetPokeStorageTask(Task_ChangeScreen);
+            SetPokeStorageTask(Task_ExitStorageAfterInitFailure);
             return;
         }
         break;
@@ -2023,7 +2130,7 @@ static void Task_InitPokeStorage(u8 taskId)
     case 5:
         if (!MultiMove_Init())
         {
-            SetPokeStorageTask(Task_ChangeScreen);
+            SetPokeStorageTask(Task_ExitStorageAfterInitFailure);
             return;
         }
         else
@@ -2555,6 +2662,10 @@ static void Task_OnSelectedMon(u8 taskId)
             {
                 sStorage->state = 7;
             }
+            else if (HoldsFusedPartner(sStorage->displayMonSpecies))
+            {
+                sStorage->state = 8;
+            }
             else
             {
                 PlaySE(SE_SELECT);
@@ -2633,6 +2744,11 @@ static void Task_OnSelectedMon(u8 taskId)
         PrintMessage(MSG_REMOVE_PROTECTED_ITEM);
         sStorage->state = 6;
         break;
+    case 8:
+        PlaySE(SE_FAILURE);
+        PrintMessage(MSG_UNFUSE_BEFORE_RELEASE);
+        sStorage->state = 6;
+        break;
     case 6:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
@@ -2709,6 +2825,11 @@ static void Task_WithdrawMon(u8 taskId)
         if (CalculatePlayerPartyCount() == PARTY_SIZE)
         {
             PrintMessage(MSG_PARTY_FULL);
+            sStorage->state = 1;
+        }
+        else if (!CanAddRestrictedMonToParty(sStorage->displayMonSpecies, PARTY_SIZE))
+        {
+            PrintMessage(MSG_RESTRICTED_PARTY);
             sStorage->state = 1;
         }
         else
@@ -2844,24 +2965,8 @@ static void Task_ReleaseMon(u8 taskId)
         }
         break;
     case 2:
-        RunCanReleaseMon();
         if (!TryHideReleaseMon())
-        {
-            while (1)
-            {
-                s8 canRelease = RunCanReleaseMon();
-                if (canRelease == TRUE)
-                {
-                    sStorage->state++;
-                    break;
-                }
-                else if (!canRelease)
-                {
-                    sStorage->state = 8;
-                    break;
-                }
-            }
-        }
+            sStorage->state = sStorage->canReleaseMon ? 3 : 8;
         break;
     case 3:
         ReleaseMon();
@@ -3556,6 +3661,12 @@ static void Task_OnCloseBoxPressed(u8 taskId)
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
         case 0:
+            if (!PlayerPartyWithinRestrictedLimit())
+            {
+                PrintMessage(MSG_RESTRICTED_PARTY);
+                sStorage->state = 1;
+                break;
+            }
             PlaySE(SE_PC_OFF);
             ClearBottomWindow();
             sStorage->state++;
@@ -3634,6 +3745,12 @@ static void Task_OnBPressed(u8 taskId)
             break;
         case 1:
         case MENU_B_PRESSED:
+            if (!PlayerPartyWithinRestrictedLimit())
+            {
+                PrintMessage(MSG_RESTRICTED_PARTY);
+                sStorage->state = 1;
+                break;
+            }
             PlaySE(SE_PC_OFF);
             ClearBottomWindow();
             sStorage->state++;
@@ -6348,8 +6465,8 @@ static void SetMovingMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
     {
-        sStorage->movingMon = gParties[B_TRAINER_PLAYER][sCursorPosition];
-        if (&gParties[B_TRAINER_PLAYER][sCursorPosition] == GetFirstLiveMon())
+        sStorage->movingMon = gParties[B_TRAINER_PLAYER][position];
+        if (&gParties[B_TRAINER_PLAYER][position] == GetFirstLiveMon())
             gFollowerSteps = 0;
     }
     else
@@ -6514,14 +6631,9 @@ static void InitCanReleaseMonVars(void)
 static bool32 AtLeastThreeUsableMons(void)
 {
     s32 i, j;
-    s32 count = (sIsMonBeingMoved != FALSE);
-
-    // Check party for usable Pokémon
-    for (j = 0; j < PARTY_SIZE; j++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][j], MON_DATA_SANITY_HAS_SPECIES))
-            count++;
-    }
+    // Release targets the carried mon when moving; Eggs are rejected before
+    // this check. Party Eggs, like boxed Eggs, cannot supply a doubles partner.
+    s32 count = (sIsMonBeingMoved != FALSE) + CountPartyNonEggMons();
 
     if (count >= 3)
         return TRUE;
@@ -6542,10 +6654,37 @@ static bool32 AtLeastThreeUsableMons(void)
     return FALSE;
 }
 
-static s8 RunCanReleaseMon(void)
+#if TESTING
+bool32 Test_StorageFailedSelection(void)
 {
-    return sStorage->canReleaseMon;
+    MainCallback callback = gMain.callback2;
+    SetStorageFailureReturnCallback(OPTION_SELECT_MON);
+    bool32 result = gMain.callback2 == CB2_ReturnToFieldContinueScript;
+    SetMainCallback2(callback);
+    return result;
 }
+
+bool32 Test_RecoverStorageCursor(struct Pokemon *mon, u16 item, u8 box, u8 slot)
+{
+    sIsMonBeingMoved = mon != NULL;
+    if (mon != NULL)
+        sSavedMovingMon = *mon;
+    sMovingMonOrigBoxId = box;
+    sMovingMonOrigBoxPos = slot;
+    sMovingItemId = item;
+    RecoverStorageCursorOnInitFailure(TRUE);
+    return !sIsMonBeingMoved && sMovingItemId == ITEM_NONE;
+}
+
+bool32 Test_StorageHasEnoughMonsToRelease(bool8 moving)
+{
+    bool8 savedMoving = sIsMonBeingMoved;
+    sIsMonBeingMoved = moving;
+    bool32 result = AtLeastThreeUsableMons();
+    sIsMonBeingMoved = savedMoving;
+    return result;
+}
+#endif
 
 static void SaveMovingMon(void)
 {
@@ -8023,7 +8162,7 @@ EWRAM_DATA static struct
 
 static bool8 MultiMove_Init(void)
 {
-    sMultiMove = Alloc(sizeof(*sMultiMove));
+    sMultiMove = AllocUnchecked(sizeof(*sMultiMove));
     if (sMultiMove != NULL)
     {
         sStorage->multiMoveWindowId = AddWindow8Bit(&sWindowTemplate_MultiMove);
@@ -8039,9 +8178,41 @@ static bool8 MultiMove_Init(void)
 
 static void MultiMove_Free(void)
 {
-    if (sMultiMove != NULL)
-        Free(sMultiMove);
+    TRY_FREE_AND_SET_NULL(sMultiMove);
 }
+
+#if TESTING
+bool32 Test_StorageWindowFailureExit(u8 previousDestination)
+{
+    struct PokemonStorageSystemData *savedStorage = sStorage;
+    void *savedMultiMove = sMultiMove;
+    u8 savedBg[WINDOWS_MAX];
+    sStorage = AllocZeroed(sizeof(*sStorage));
+    sStorage->boxOption = OPTION_MOVE_MONS;
+    sStorage->state = 5;
+    sStorage->screenChangeType = previousDestination;
+    sStorage->taskId = CreateTask(Task_InitPokeStorage, 3);
+    for (u32 i = 0; i < WINDOWS_MAX; i++)
+    {
+        savedBg[i] = gWindows[i].window.bg;
+        gWindows[i].window.bg = 0; // Force the real AddWindow8Bit failure.
+    }
+    Task_InitPokeStorage(sStorage->taskId);
+    for (u32 i = 0; i < WINDOWS_MAX; i++)
+        gWindows[i].window.bg = savedBg[i];
+    bool32 result = gTasks[sStorage->taskId].func == Task_ExitStorageAfterInitFailure
+        && sStorage->multiMoveWindowId == WINDOW_NONE;
+    DestroyTask(sStorage->taskId);
+    MultiMove_Free();
+    result = result && sMultiMove == NULL;
+    // An early setup failure on reentry must not free the prior allocation again.
+    MultiMove_Free();
+    Free(sStorage);
+    sStorage = savedStorage;
+    sMultiMove = savedMultiMove;
+    return result;
+}
+#endif
 
 static void MultiMove_SetFunction(u8 id)
 {

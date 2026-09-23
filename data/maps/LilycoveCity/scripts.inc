@@ -138,12 +138,16 @@ LilycoveCity_EventScript_Man1:: @ 81E2CDD
 	lockall
 	msgbox LilycoveCity_Text_JustArrivedAndSawRarePokemon, MSGBOX_NPC
 	applymovement LOCALID_MAN_1, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	releaseall
 	end
 
 LilycoveCity_EventScript_Woman1:: @ 81E2CEE
 	lockall
 	msgbox LilycoveCity_Text_HoneymoonVowToSeeRarePokemon, MSGBOX_NPC
 	applymovement LOCALID_WOMAN_1, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	releaseall
 	end
 
 LilycoveCity_EventScript_CitySign:: @ 81E2CFF
@@ -303,32 +307,32 @@ LilycoveCity_EventScript_DeclineBrendanBattle:: @ 81E2ECD
 	end
 
 LilycoveCity_EventScript_BattleMayTreecko:: @ 81E2EDE
-	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TREECKO, LilycoveCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TREECKO, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleMayTorchic:: @ 81E2EEE
-	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TORCHIC, LilycoveCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TORCHIC, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleMayMudkip:: @ 81E2EFE
-	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_MUDKIP, LilycoveCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_MUDKIP, LilycoveCity_Text_MayDefeat
 	goto LilycoveCity_EventScript_DefeatedMay
 	end
 
 LilycoveCity_EventScript_BattleBrendanTreecko:: @ 81E2F0E
-	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TREECKO, LilycoveCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TREECKO, LilycoveCity_Text_BrendanDefeat
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
 LilycoveCity_EventScript_BattleBrendanTorchic:: @ 81E2F1E
-	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TORCHIC, LilycoveCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TORCHIC, LilycoveCity_Text_BrendanDefeat
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
 LilycoveCity_EventScript_BattleBrendanMudkip:: @ 81E2F2E
-	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_MUDKIP, LilycoveCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_MUDKIP, LilycoveCity_Text_BrendanDefeat
 	goto LilycoveCity_EventScript_DefeatedBrendan
 	end
 
@@ -435,7 +439,6 @@ LilycoveCity_EventScript_GiveAltarianite::
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_EventScript_AltariaRefuse
 	special ChoosePartyMon
-	waitstate
 	lock
 	faceplayer
 	compare VAR_0x8004, 255
@@ -451,6 +454,8 @@ LilycoveCity_EventScript_NotAltaria::
 LilycoveCity_EventScript_YesAltaria::
 	msgbox LilycoveCity_Text_YesAltaria, MSGBOX_DEFAULT
 	giveitem ITEM_ALTARIANITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_ITEM_LILYCOVE_CITY_ALTARIANITE
 LilycoveCity_EventScript_ExplainAltarianite::
 	msgbox LilycoveCity_Text_ExplainAltarianite, MSGBOX_DEFAULT
@@ -591,8 +596,8 @@ LilycoveCity_Text_BrendanYouGoingToBattleFrontier: @ 81E39E3
 	.string "consider the Battle Frontier.\p"
 	.string "Heh, if I train my Pokémon a bit more,\n"
 	.string "I'll get stronger than you, {PLAYER}.\p"
-	.string "Maybe I should go to the BATTLE\n"
-	.string "FRONTIER.\p"
+	.string "Maybe I should go to the Battle\n"
+	.string "Frontier.\p"
 	.string "Well, anyway, hang in there!$"
 
 LilycoveCity_Text_MovedLootIntoHideoutToday: @ 81E3B2C
@@ -829,7 +834,8 @@ LilycoveCity_Text_NotAltaria:
 	.string "Hmmm, no. Try again!$"
 
 LilycoveCity_Text_ExplainAltarianite:
-	.string "If you don't already know what that\n"
-	.string "stone does, Winona can show you.\p"
-	.string "Just challenge her to a battle\n"
-	.string "and see for yourself!$"
+	.string "Give that Altarianite to Altaria,\n"
+	.string "then Mega Evolve it with your\l"
+	.string "Mega Ring in battle.\p"
+	.string "It becomes a Dragon- and Fairy-type\n"
+	.string "with an even lovelier song!$"

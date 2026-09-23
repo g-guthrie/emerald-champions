@@ -321,32 +321,30 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
     CalculateMonStats(mon);
 }
 
-static u32 GetExpAtLevelCap(struct Pokemon *mon)
+static void PrepareDaycareWithdrawal(struct Pokemon *mon, struct BoxPokemon *stored, u32 steps)
 {
+    BoxMonToMon(stored, mon);
+    TryFormChange(mon, FORM_CHANGE_WITHDRAW, B_TRAINER_PLAYER);
+    ClampMonToPlayerLevelCap(mon);
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    return gExperienceTables[gSpeciesInfo[species].growthRate][GetPlayerLevelCapForSpecies(species)];
+    u32 maximum = gExperienceTables[gSpeciesInfo[species].growthRate][GetPlayerLevelCapForSpecies(species)];
+    u32 experience = GetMonData(mon, MON_DATA_EXP);
+    // Saturate the gain before addition. Preview and withdrawal use the same
+    // resulting form and cap, including Hoopa's withdrawal reversion.
+    if (experience < maximum)
+    {
+        experience += min(steps, maximum - experience);
+        SetMonData(mon, MON_DATA_EXP, &experience);
+    }
 }
 
 static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
 {
-    u32 experience;
     struct Pokemon pokemon;
 
     GetBoxMonNickname(&daycareMon->mon, gStringVar1);
-    BoxMonToMon(&daycareMon->mon, &pokemon);
-
-    TryFormChange(&pokemon, FORM_CHANGE_WITHDRAW, B_TRAINER_PLAYER);
-    ClampMonToPlayerLevelCap(&pokemon);
-
-    if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(GetMonData(&pokemon, MON_DATA_SPECIES)))
-    {
-        experience = GetMonData(&pokemon, MON_DATA_EXP) + daycareMon->steps;
-        u32 maxExp = GetExpAtLevelCap(&pokemon);
-        if (experience > maxExp)
-            experience = maxExp;
-        SetMonData(&pokemon, MON_DATA_EXP, &experience);
-        ApplyDaycareExperience(&pokemon);
-    }
+    PrepareDaycareWithdrawal(&pokemon, &daycareMon->mon, daycareMon->steps);
+    ApplyDaycareExperience(&pokemon);
 
     gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1] = pokemon;
     if (daycareMon->mail.message.itemId)
@@ -376,16 +374,9 @@ u16 TakePokemonFromDaycare(void)
 
 static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
 {
-    struct BoxPokemon tempMon = *mon;
-    u8 levelBefore = GetLevelFromBoxMonExp(mon);
-    u8 levelCap = GetPlayerLevelCapForSpecies(GetBoxMonData(mon, MON_DATA_SPECIES));
-
-    if (levelBefore >= levelCap)
-        return levelBefore;
-
-    u32 experience = GetBoxMonData(mon, MON_DATA_EXP) + steps;
-    SetBoxMonData(&tempMon, MON_DATA_EXP, &experience);
-    return min(GetLevelFromBoxMonExp(&tempMon), levelCap);
+    struct Pokemon preview;
+    PrepareDaycareWithdrawal(&preview, mon, steps);
+    return GetLevelFromMonExp(&preview);
 }
 
 static u8 GetNumLevelsGainedFromSteps(struct DaycareMon *daycareMon)
@@ -395,7 +386,7 @@ static u8 GetNumLevelsGainedFromSteps(struct DaycareMon *daycareMon)
 
     levelBefore = GetLevelFromBoxMonExp(&daycareMon->mon);
     levelAfter = GetLevelAfterDaycareSteps(&daycareMon->mon, daycareMon->steps);
-    return levelAfter - levelBefore;
+    return levelAfter > levelBefore ? levelAfter - levelBefore : 0;
 }
 
 static u8 GetNumLevelsGainedForDaycareMon(struct DaycareMon *daycareMon)
@@ -406,27 +397,11 @@ static u8 GetNumLevelsGainedForDaycareMon(struct DaycareMon *daycareMon)
     return numLevelsGained;
 }
 
-static u32 PrepareDaycareCostStringForSelectedMon(struct DaycareMon *daycareMon)
-{
-    u32 cost;
-
-    // Emerald Champions (C7): the Day Care is free, like every other service. The
-    // number of levels gained is still buffered so the lady can report it.
-    u8 numLevelsGained = GetNumLevelsGainedFromSteps(daycareMon);
-    GetBoxMonNickname(&daycareMon->mon, gStringVar1);
-    cost = 0;
-    ConvertIntToDecimalStringN(gStringVar2, numLevelsGained, STR_CONV_MODE_LEFT_ALIGN, 2);
-    return cost;
-}
-
-static u16 PrepareDaycareCostStringForMon(struct DayCare *daycare, u8 slotId)
-{
-    return PrepareDaycareCostStringForSelectedMon(&daycare->mons[slotId]);
-}
-
 void GetDaycareCostAndPrepareString(void)
 {
-    gSpecialVar_0x8005 = PrepareDaycareCostStringForMon(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    // Board is free; retain the script's cost output and level-gain text.
+    GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004]);
+    gSpecialVar_0x8005 = 0;
 }
 
 u8 GetNumLevelsGainedFromDaycare(void)
@@ -607,6 +582,8 @@ u32 GetChildNature(struct DayCare *daycare)
 
 static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
+    // Only the gender bit is read: it splits Nidoran and Volbeat/Illumise eggs.
+    daycare->offspringPersonality = Random32();
     FlagSet(FLAG_PENDING_DAYCARE_EGG);
 }
 
@@ -972,7 +949,8 @@ void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLoc
     metloc_u8_t metLocation;
     u8 isEgg;
 
-    CreateRandomMonWithIVs(mon, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS);
+    // Every egg follows the same perfect-IV rule as Day Care breeding (InheritIVs).
+    CreateRandomMonWithIVs(mon, species, EGG_HATCH_LEVEL, MAX_PER_STAT_IVS);
     metLevel = 0;
     ball = BALL_POKE;
     language = LANGUAGE_JAPANESE;
@@ -1482,7 +1460,8 @@ void PutMonInRoute5Daycare(void)
 void GetCostToWithdrawRoute5DaycareMon(void)
 {
 #if IS_FRLG
-    u16 cost = PrepareDaycareCostStringForSelectedMon(&gSaveBlock1Ptr->route5DayCareMon);
+    GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->route5DayCareMon);
+    u16 cost = 0;
 #else
     u16 cost = 100;
 #endif

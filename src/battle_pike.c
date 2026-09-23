@@ -500,14 +500,14 @@ static void (*const sBattlePikeFunctions[])(void) =
 };
 
 static const u8 sRoomTypeHints[] = {
-    PIKE_HINT_PEOPLE,     // PIKE_ROOM_SINGLE_BATTLE
+    PIKE_HINT_PEOPLE,     // PIKE_ROOM_ONE_TRAINER_BATTLE
     PIKE_HINT_PEOPLE,     // PIKE_ROOM_HEAL_FULL
     PIKE_HINT_WHISPERING, // PIKE_ROOM_NPC
     PIKE_HINT_NOSTALGIA,  // PIKE_ROOM_STATUS
     PIKE_HINT_NOSTALGIA,  // PIKE_ROOM_HEAL_PART
     PIKE_HINT_POKEMON,    // PIKE_ROOM_WILD_MONS
     PIKE_HINT_POKEMON,    // PIKE_ROOM_HARD_BATTLE
-    PIKE_HINT_WHISPERING, // PIKE_ROOM_DOUBLE_BATTLE
+    PIKE_HINT_WHISPERING, // PIKE_ROOM_TWO_TRAINER_BATTLE
     PIKE_HINT_BRAIN,      // PIKE_ROOM_BRAIN
 };
 
@@ -555,7 +555,7 @@ static void SetupRoomObjectEvents(void)
 
     switch (sRoomType)
     {
-    case PIKE_ROOM_SINGLE_BATTLE:
+    case PIKE_ROOM_ONE_TRAINER_BATTLE:
         PrepareOneTrainer(FALSE);
         setObjGfx1 = FALSE;
         break;
@@ -585,7 +585,7 @@ static void SetupRoomObjectEvents(void)
         setObjGfx1 = FALSE;
         setObjGfx2 = TRUE;
         break;
-    case PIKE_ROOM_DOUBLE_BATTLE:
+    case PIKE_ROOM_TWO_TRAINER_BATTLE:
         PrepareTwoTrainers();
         setObjGfx1 = FALSE;
         break;
@@ -989,6 +989,10 @@ static u8 GetNextRoomType(void)
     // Check if the player walked into the same room that the lady gave a hint about.
     if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.pikeHintedRoomIndex)
     {
+        u8 hinted = gSaveBlock2Ptr->frontier.pikeHintedRoomType;
+        if ((hinted == PIKE_ROOM_ONE_TRAINER_BATTLE || hinted == PIKE_ROOM_HARD_BATTLE
+          || hinted == PIKE_ROOM_TWO_TRAINER_BATTLE) && !AtLeastTwoAliveMons())
+            return PIKE_ROOM_NPC;
         if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS)
             TryInflictRandomStatus();
         return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
@@ -1010,11 +1014,20 @@ static u8 GetNextRoomType(void)
         }
     }
 
-    // Remove room type candidates that would have no effect on the player's party.
-    if (roomTypesDisabled[PIKE_ROOM_DOUBLE_BATTLE] != TRUE && !AtLeastTwoAliveMons())
+    // Every trainer room now uses doubles. With one usable mon left, keep
+    // offering nonbattle rooms rather than selecting a trainer room it cannot
+    // enter with the Pike's two-mon requirement.
+    if (!AtLeastTwoAliveMons())
     {
-        roomTypesDisabled[PIKE_ROOM_DOUBLE_BATTLE] = TRUE;
-        numRoomCandidates--;
+        const u8 battleRooms[] = {PIKE_ROOM_ONE_TRAINER_BATTLE, PIKE_ROOM_HARD_BATTLE, PIKE_ROOM_TWO_TRAINER_BATTLE};
+        for (u32 room = 0; room < ARRAY_COUNT(battleRooms); room++)
+        {
+            if (!roomTypesDisabled[battleRooms[room]])
+            {
+                roomTypesDisabled[battleRooms[room]] = TRUE;
+                numRoomCandidates--;
+            }
+        }
     }
     if (roomTypesDisabled[PIKE_ROOM_STATUS] != TRUE && !AtLeastOneHealthyMon())
     {
@@ -1311,7 +1324,10 @@ static void SetHintedRoom(void)
         Free(roomCandidates);
         if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS && !AtLeastOneHealthyMon())
             gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
-        if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
+        if ((gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_ONE_TRAINER_BATTLE
+          || gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_HARD_BATTLE
+          || gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_TWO_TRAINER_BATTLE)
+         && !AtLeastTwoAliveMons())
             gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
     }
 }

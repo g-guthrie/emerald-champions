@@ -55,34 +55,17 @@ SkyPillar_Top_EventScript_Rayquaza:: @ 8239722
 	setwildbattle SPECIES_RAYQUAZA, VAR_0x800A, ITEM_DRAGON_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq SkyPillar_Top_EventScript_DefeatedRayquaza
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq SkyPillar_Top_EventScript_RanFromRayquaza
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq SkyPillar_Top_EventScript_RanFromRayquaza
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, SkyPillar_Top_EventScript_RanFromRayquaza
 	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall
-	end
-
-SkyPillar_Top_EventScript_DefeatedRayquaza:: @ 8239768
-	setflag FLAG_DEFEATED_RAYQUAZA
-	goto SkyPillar_Top_EventScript_DefeatedRayquaza2
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza:: @ 8239771
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
 	goto SkyPillar_Top_EventScript_RanFromRayquaza2
-	end
-
-SkyPillar_Top_EventScript_DefeatedRayquaza2:: @ 823977C
-	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers FADE_FROM_BLACK
-	releaseall
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza2:: @ 8239785

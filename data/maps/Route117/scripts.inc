@@ -38,88 +38,22 @@ Route117_EventScript_DayCareSign:: @ 81F39C7
 	end
 
 Route117_EventScript_Isaac:: @ 81F39D0
-	trainerbattle_double TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route117_EventScript_RegisterIsaac
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route117_EventScript_RematchIsaac
-	msgbox Route117_Text_IsaacPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RegisterIsaac:: @ 81F39FC
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route117_Text_IsaacPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RematchIsaac:: @ 81F3A1B
-	@ This retired encounter has no campaign battle.
-	msgbox Route117_Text_IsaacPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route117_Text_IsaacPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Lydia:: @ 81F3A32
-	trainerbattle_double TRAINER_LYDIA_1, Route117_Text_LydiaIntro, Route117_Text_LydiaDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route117_EventScript_RegisterLydia
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route117_EventScript_RematchLydia
-	msgbox Route117_Text_LydiaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RegisterLydia:: @ 81F3A5E
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route117_Text_LydiaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RematchLydia:: @ 81F3A7D
-	@ This retired encounter has no campaign battle.
-	msgbox Route117_Text_LydiaPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_LYDIA_1, Route117_Text_LydiaIntro, Route117_Text_LydiaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route117_Text_LydiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Dylan:: @ 81F3A94
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route117_EventScript_RematchDylan
-	msgbox Route117_Text_DylanPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RegisterDylan:: @ 81F3AC0
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route117_Text_DylanRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_DYLAN_1
-	release
-	end
-
-Route117_EventScript_RematchDylan:: @ 81F3ADF
-	@ This retired encounter has no campaign battle.
-	msgbox Route117_Text_DylanPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route117_Text_DylanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Maria:: @ 81F3AF6
-	trainerbattle_double TRAINER_MARIA_1, Route117_Text_MariaIntro, Route117_Text_MariaDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route117_EventScript_RegisterMaria
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route117_EventScript_RematchMaria
-	msgbox Route117_Text_MariaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RegisterMaria:: @ 81F3B22
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route117_Text_MariaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RematchMaria:: @ 81F3B41
-	@ This retired encounter has no campaign battle.
-	msgbox Route117_Text_MariaPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_MARIA_1, Route117_Text_MariaIntro, Route117_Text_MariaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route117_Text_MariaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Derek:: @ 81F3B58
@@ -128,41 +62,13 @@ Route117_EventScript_Derek:: @ 81F3B58
 	end
 
 Route117_EventScript_Anna:: @ 81F3B6F
-	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_AnnaIntro, Route117_Text_AnnaDefeat, Route117_Text_AnnaNotEnoughMons, Route117_EventScript_RegisterAnna
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route117_EventScript_RematchAnna
-	msgbox Route117_Text_AnnaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RegisterAnna:: @ 81F3B9F
-	msgbox Route117_Text_AnnaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RematchAnna:: @ 81F3BB8
-	@ This retired encounter has no campaign battle.
-	msgbox Route117_Text_AnnaPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_AnnaIntro, Route117_Text_AnnaDefeat, Route117_Text_AnnaNotEnoughMons
+	msgbox Route117_Text_AnnaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Meg:: @ 81F3BD3
-	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_MegIntro, Route117_Text_MegDefeat, Route117_Text_MegNotEnoughMons, Route117_EventScript_RegisterMeg
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route117_EventScript_RematchMeg
-	msgbox Route117_Text_MegPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RegisterMeg:: @ 81F3C03
-	msgbox Route117_Text_MegPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_EventScript_RematchMeg:: @ 81F3C1C
-	@ This retired encounter has no campaign battle.
-	msgbox Route117_Text_MegPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_MegIntro, Route117_Text_MegDefeat, Route117_Text_MegNotEnoughMons
+	msgbox Route117_Text_MegPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Melina:: @ 81F3C37
@@ -205,4 +111,3 @@ Route117_Text_RouteSignMauville: @ 81F3D74
 Route117_Text_DayCareSign: @ 81F3D8E
 	.string "Pokémon Day Care\n"
 	.string "“Let us raise your Pokémon.”$"
-

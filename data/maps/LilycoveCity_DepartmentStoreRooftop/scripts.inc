@@ -77,8 +77,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine:: @ 8220295
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink:: @ 82202A6
 	multichoice 16, 0, MULTI_VENDING_MACHINE, FALSE
-	copyvar VAR_TEMP_1, VAR_RESULT
-	switch VAR_TEMP_1
+	switch VAR_RESULT
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater
 	case 1, LilycoveCity_DepartmentStoreRooftop_EventScript_SodaPop
 	case 2, LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade
@@ -88,61 +87,31 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink:: @ 82202A6
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater:: @ 82202E4
 	setvar VAR_TEMP_0, ITEM_FRESH_WATER
+	setvar VAR_0x8005, 200
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_SodaPop:: @ 82202EF
 	setvar VAR_TEMP_0, ITEM_SODA_POP
+	setvar VAR_0x8005, 300
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade:: @ 82202FA
 	setvar VAR_TEMP_0, ITEM_LEMONADE
+	setvar VAR_0x8005, 350
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink
 	end
 
-LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater:: @ 8220305
-	checkmoney 200
-	return
-
-LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop:: @ 822030C
-	checkmoney 300
-	return
-
-LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade:: @ 8220313
-	checkmoney 350
-	return
-
-LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater:: @ 822031A
-	removemoney 200
-	return
-
-LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop:: @ 8220321
-	removemoney 300
-	return
-
-LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade:: @ 8220328
-	removemoney 350
-	return
-
 LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
-	compare VAR_TEMP_1, 0
-	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater
-	compare VAR_TEMP_1, 1
-	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop
-	compare VAR_TEMP_1, 2
-	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade
+	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare VAR_RESULT, FALSE
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink
 	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink
-	compare VAR_TEMP_1, 0
-	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater
-	compare VAR_TEMP_1, 1
-	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop
-	compare VAR_TEMP_1, 2
-	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade
+	special SubtractMoneyFromVar0x8005
+LilycoveCity_DepartmentStoreRooftop_EventScript_DispensePaidDrink::
 	updatemoneybox
 	bufferitemname 0, VAR_TEMP_0
 	playse SE_VEND
@@ -204,7 +173,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP, LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90, MSGBOX_DEFAULT
@@ -253,7 +222,7 @@ LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink: @ 8220603
 LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute:
 	.string "You have earned a little help\n"
 	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "this Nugget!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90:
 	.string "We human beings should enjoy our\n"

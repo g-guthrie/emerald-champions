@@ -172,7 +172,6 @@ SecretBase_EventScript_SetAsBase:: @ 8275BAB
 	closemessage
 	setflag FLAG_RECEIVED_SECRET_POWER
 	special EnterNewlyCreatedSecretBase
-	waitstate
 	end
 
 SecretBase_Movement_EnterBase: @ 8275BB4
@@ -714,7 +713,6 @@ SecretBase_EventScript_BattleTrainer:: @ 8276286
 	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	compare VAR_RESULT, B_OUTCOME_DREW
 	call_if_eq SecretBase_EventScript_DrewSecretBaseBattle
 	compare VAR_RESULT, B_OUTCOME_WON
@@ -788,8 +786,9 @@ SecretBase_Text_RegistryInfo: @ 8276835
 	.string "may be registered.$"
 
 SecretBase_Text_BattleTowerShield: @ 827692B
-	.string "A shield of {STR_VAR_2} that marks winning\n"
-	.string "{STR_VAR_1} times in a row at the Battle Tower.$"
+	.string "A shield of {STR_VAR_2} that marks\n"
+	.string "winning {STR_VAR_1} times in a row\l"
+	.string "at the Battle Tower.$"
 
 SecretBase_Text_ToyTV: @ 8276974
 	.string "A realistic toy TV. It could be easily\n"

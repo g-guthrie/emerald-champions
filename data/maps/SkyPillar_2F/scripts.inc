@@ -7,7 +7,7 @@ SkyPillar_2F_MapScripts:: @ 823962B
 SkyPillar_2F_OnTransition: @ 823963B
 	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_lt SkyPillar_2F_EventScript_CleanFloor
-	copyvar VAR_ICE_STEP_COUNT, 1
+	setvar VAR_ICE_STEP_COUNT, 1
 	end
 
 SkyPillar_2F_EventScript_CleanFloor:: @ 823964C

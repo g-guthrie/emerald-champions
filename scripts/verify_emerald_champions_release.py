@@ -21,6 +21,7 @@ from rom_artifacts import verify_rom_elf_pair
 # Historical snapshots, prose, team-strength heuristics and corpus quotas are
 # deliberately outside the release path. See docs/VERIFICATION.md.
 STATIC_GATES = (
+    ("no optional rematches; campaign and League reentry retained", (PYTHON, "scripts/verify_no_optional_rematches.py")),
     ("authored trainer roster and world battle calls", (PYTHON, "scripts/verify_campaign_trainer_roster.py")),
     ("compiled map and tile integrity", (
         PYTHON, "scripts/audit/map_integrity.py", "--out", "work/audits/map_tile_inventory.json",
@@ -31,7 +32,7 @@ STATIC_GATES = (
     ("preset structural validation and output agreement (not strategy quality)", (PYTHON, "scripts/generate_emerald_champions_battle_sets.py", "--check")),
     ("authored Circuit projection", (PYTHON, "scripts/generate_showdown_champions_circuit.py", "--check")),
     ("wild table integrity", (PYTHON, "scripts/verify_wild_distribution.py")),
-    ("one acquisition source per Mega Stone", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
+    ("Mega Stone pickups and optional one-time trades", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
     ("ground Mega Stone sparkles on authored tiles", (PYTHON, "scripts/check_stone_placement.py")),
 )
 

@@ -51,4 +51,10 @@ bool32 EmeraldChampions_HasTacticActor(enum BattlerId actor, u32 kind);
 // actor, recipient and move all match this turn's actual command.
 u32 EmeraldChampions_GetTacticKind(enum BattlerId actor, enum BattlerId recipient, enum Move move);
 
+// Authored Perish-trap policy, shared by move and switch scoring.
+bool32 EC_PerishMustEscape(enum BattlerId battler);
+bool32 EC_PerishShouldPivotEarly(enum BattlerId battler);
+s32 EC_PerishPlanScore(enum BattlerId battler, enum Move move);
+
+
 #endif

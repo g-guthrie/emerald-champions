@@ -1,0 +1,39 @@
+{
+  "name": "Devon president introduction choreography",
+  "start": {
+    "fixture": "STORY_HANDOFF",
+    "param": 25
+  },
+  "steps": [
+    {
+      "tap": "A",
+      "every": 60,
+      "frames": 16000,
+      "until": "idle",
+      "label": "President introduction finished"
+    }
+  ],
+  "queries": {
+    "letter": {
+      "kind": 4,
+      "id": "ITEM_LETTER"
+    },
+    "pokenav": {
+      "kind": 1,
+      "id": "FLAG_RECEIVED_POKENAV"
+    },
+    "state": {
+      "kind": 2,
+      "id": "VAR_DEVON_CORP_3F_STATE"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "map": "RustboroCity_DevonCorp_3F",
+    "queries": {
+      "letter": 1,
+      "pokenav": 1,
+      "state": 1
+    }
+  }
+}

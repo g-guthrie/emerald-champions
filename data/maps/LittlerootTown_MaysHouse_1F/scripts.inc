@@ -200,7 +200,7 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
 	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
 	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_MaysHouse_1F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_MayCatchYouLater, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
@@ -222,68 +222,6 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_1F_EventScript_ChooseStarterSet::
-	setvar VAR_0x8004, SCROLL_MULTI_REGION_NAMES
-	setvar VAR_0x8005, 2 @ cursor on Hoenn; the list still opens at its top
-	special ShowScrollableMultichoice
-	waitstate
-	switch VAR_RESULT
-	case 0, LittlerootTown_MaysHouse_1F_EventScript_Kanto
-	case 1, LittlerootTown_MaysHouse_1F_EventScript_Johto
-	case 2, LittlerootTown_MaysHouse_1F_EventScript_Hoenn
-	case 3, LittlerootTown_MaysHouse_1F_EventScript_Sinnoh
-	case 4, LittlerootTown_MaysHouse_1F_EventScript_Unova
-	case 5, LittlerootTown_MaysHouse_1F_EventScript_Kalos
-	case 6, LittlerootTown_MaysHouse_1F_EventScript_Alola
-	case 7, LittlerootTown_MaysHouse_1F_EventScript_Galar
-	case 8, LittlerootTown_MaysHouse_1F_EventScript_Paldea
-	goto LittlerootTown_MaysHouse_1F_EventScript_Hoenn
-	end
-
-LittlerootTown_MaysHouse_1F_EventScript_Kanto::
-	setvar VAR_STARTER_GEN, 1
-	bufferstring 1, StarterRegionStringKanto
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Johto::
-	setvar VAR_STARTER_GEN, 2
-	bufferstring 1, StarterRegionStringJohto
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Hoenn::
-	setvar VAR_STARTER_GEN, 3
-	bufferstring 1, StarterRegionStringHoenn
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Sinnoh::
-	setvar VAR_STARTER_GEN, 4
-	bufferstring 1, StarterRegionStringSinnoh
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Unova::
-	setvar VAR_STARTER_GEN, 5
-	bufferstring 1, StarterRegionStringUnova
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Kalos::
-	setvar VAR_STARTER_GEN, 6
-	bufferstring 1, StarterRegionStringKalos
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Alola::
-	setvar VAR_STARTER_GEN, 7
-	bufferstring 1, StarterRegionStringAlola
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Galar::
-	setvar VAR_STARTER_GEN, 8
-	bufferstring 1, StarterRegionStringGalar
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_Paldea::
-	setvar VAR_STARTER_GEN, 9
-	bufferstring 1, StarterRegionStringPaldea
-	return
 
 LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay:: @ 81F8B2A
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown

@@ -124,6 +124,8 @@ AbandonedShip_HiddenFloorRooms_EventScript_Trash:: @ 8238DF3
 AbandonedShip_HiddenFloorRooms_EventScript_OldSeaMap::
 	lockall
 	giveitem ITEM_OLD_SEA_MAP
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	removeobject LOCALID_OLD_SEA_MAP
 	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
 	releaseall

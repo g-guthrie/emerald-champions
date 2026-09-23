@@ -29,7 +29,6 @@
 #include "gym_leader_rematch.h"
 #include "item.h"
 #include "load_save.h"
-#include "malloc.h"
 #include "metatile_behavior.h"
 #include "mirage_tower.h"
 #include "palette.h"
@@ -94,12 +93,12 @@ static bool32 IsPlayerDefeated(u32 battleOutcome);
 #if FREE_MATCH_CALL == FALSE
 static u16 GetRematchTrainerId(u16 trainerId);
 #endif //FREE_MATCH_CALL
-static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
 static void CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum);
 static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum);
+static u16 GetOncePaidPrizeFlag(u16 trainer);
 static void DoTrainerBattle(void);
 
 EWRAM_DATA TrainerBattleParameter gTrainerBattleParameter = {0};
@@ -965,49 +964,27 @@ enum BattleTransition GetTrainerBattleTransition(void)
 enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
 {
     u16 var;
-    u8 enemyLevel = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL);
-    u8 playerLevel = GetSumOfPlayerPartyLevel(1);
 
-    if (enemyLevel < playerLevel)
+    switch (id)
     {
-        switch (id)
-        {
-        case B_TRANSITION_GROUP_TRAINER_HILL:
-        case B_TRANSITION_GROUP_SECRET_BASE:
-        case B_TRANSITION_GROUP_E_READER:
+    case B_TRANSITION_GROUP_TRAINER_HILL:
+    case B_TRANSITION_GROUP_SECRET_BASE:
+    case B_TRANSITION_GROUP_E_READER:
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL) < GetSumOfPlayerPartyLevel(1))
             return B_TRANSITION_POKEBALLS_TRAIL;
-        case B_TRANSITION_GROUP_B_PYRAMID:
-            return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
-        case B_TRANSITION_GROUP_B_DOME:
-            return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
-        default:
-            break;
-        }
-
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
-            return RANDOM_TRANSITION(sBattleTransitionTable_BattleFrontier);
-    }
-    else
-    {
-        switch (id)
-        {
-        case B_TRANSITION_GROUP_TRAINER_HILL:
-        case B_TRANSITION_GROUP_SECRET_BASE:
-        case B_TRANSITION_GROUP_E_READER:
-            return B_TRANSITION_BIG_POKEBALL;
-        case B_TRANSITION_GROUP_B_PYRAMID:
-            return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
-        case B_TRANSITION_GROUP_B_DOME:
-            return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
-        default:
-            break;
-        }
-
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
-            return RANDOM_TRANSITION(sBattleTransitionTable_BattleFrontier);
+        return B_TRANSITION_BIG_POKEBALL;
+    case B_TRANSITION_GROUP_B_PYRAMID:
+        return RANDOM_TRANSITION(sBattleTransitionTable_BattlePyramid);
+    case B_TRANSITION_GROUP_B_DOME:
+        return RANDOM_TRANSITION(sBattleTransitionTable_BattleDome);
+    default:
+        break;
     }
 
-    var = gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 0]
+    if (VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_LINK_MULTIS)
+        return RANDOM_TRANSITION(sBattleTransitionTable_BattleFrontier);
+
+    var = gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2]
         + gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum * 2 + 1];
 
     return sBattleTransitionTable_BattleFrontier[var % ARRAY_COUNT(sBattleTransitionTable_BattleFrontier)];
@@ -1434,7 +1411,9 @@ bool8 GetTrainerFlag(void)
 
 static void SetBattledTrainersFlags(void)
 {
-    if (TRAINER_BATTLE_PARAM.opponentB != 0)
+    if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+     && TRAINER_BATTLE_PARAM.opponentB != 0
+     && TRAINER_BATTLE_PARAM.opponentB != 0xFFFF)
         FlagSet(GetTrainerBFlag());
     FlagSet(GetTrainerAFlag());
 }
@@ -1443,6 +1422,13 @@ static void UNUSED SetBattledTrainerFlag(void)
 {
     FlagSet(GetTrainerAFlag());
 }
+
+#if TESTING
+void Test_SetBattledTrainersFlags(void)
+{
+    SetBattledTrainersFlags();
+}
+#endif
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
@@ -1486,6 +1472,7 @@ void BattleSetup_StartTrainerBattle(void)
 
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
         VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
         gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
 
@@ -1499,8 +1486,7 @@ void BattleSetup_StartTrainerBattle(void)
         }
         else
         {
-            FillFrontierTrainerParty(1);
-            ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][1]);
+            FillFrontierTrainerParty(FRONTIER_MULTI_PARTY_SIZE);
             ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][2]);
         }
 
@@ -1676,7 +1662,6 @@ static void CB2_EndTrainerBattle(void)
         DowngradeBadPoison();
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InTrainerHillChallenge())
         {
-            RegisterTrainerInMatchCall();
             SetBattledTrainersFlags();
         }
     }
@@ -1696,8 +1681,6 @@ static void CB2_EndRematchBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        RegisterTrainerInMatchCall();
-        SetBattledTrainersFlags();
         HandleRematchVarsOnBattleEnd();
         DowngradeBadPoison();
     }
@@ -2113,11 +2096,6 @@ void ClearCurrentTrainerWantRematchVsSeeker(void)
 #endif //FREE_MATCH_CALL
 }
 
-// Match Call is removed; beating a trainer registers nobody.
-static void RegisterTrainerInMatchCall(void)
-{
-}
-
 static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
     s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
@@ -2319,16 +2297,15 @@ void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Traine
     }
 
     u32 monIndices[monsCount];
-    struct TrainerGenerator *trainerGen = AllocZeroed(sizeof(struct TrainerGenerator));
-    MakeTrainerGenerator(trainerGen, trainer);
+    struct TrainerGenerator trainerGen = {0};
+    MakeTrainerGenerator(&trainerGen, trainer);
     DoTrainerPartyPool(trainer, monIndices, monsCount, gBattleTypeFlags);
 
     for (i = 0; i < monsCount; i++)
     {
         u32 monIndex = monIndices[i];
-        GenerateMonFromTrainerMon(&party[i], &trainer->party[monIndex], trainerGen);
+        GenerateMonFromTrainerMon(&party[i], &trainer->party[monIndex], &trainerGen);
     }
-    Free(trainerGen);
 }
 
 static void CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
@@ -2399,14 +2376,17 @@ static u8 GetHoennStarterStage(enum Species species)
 
 static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
 {
-    enum Species baseSpecies;
+    if (IsRegionalRivalTrainer(trainerNum))
+        ApplyRivalStarterToParty(party);
+}
 
-    if (!IsRegionalRivalTrainer(trainerNum))
-        return;
-
-    baseSpecies = GetStarterPokemonForGeneration(
+// Replaces the party's Hoenn starter line with the rival's regional starter at the same stage.
+void ApplyRivalStarterToParty(struct Pokemon *party)
+{
+    enum Species baseSpecies = GetStarterPokemonForGeneration(
         GetEmeraldChampionsRivalStarterIndex(),
         VarGet(VAR_STARTER_GEN));
+
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         enum Species oldSpecies = GetMonData(&party[i], MON_DATA_SPECIES);
@@ -2447,21 +2427,7 @@ void CreateTrainerPartyForPlayer(void)
     CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], GetTrainerStructFromId(gSpecialVar_0x8004));
 }
 
-// The retuned campaign prize tiers (design item F, September 16 2026). The
-// authored per-trainer values in src/data/trainers.party are the design tier
-// labels (ordinary / ace-Gym-rival / leader-admin / Elite Four / Champion);
-// this table is the money they pay per point of the live level cap. Retuning
-// here rather than in the party file keeps the trainer roster untouched and
-// keeps one place to read the whole prize curve.
-// The authored tier in trainers.party is the money a trainer pays per point of
-// the live cap. It was cut to roughly 40% while the only thing money bought was
-// a small evolution catalogue; with the world paying for itself again, and
-// battle items and training back on the bill, the tier is paid in full.
-static u32 CampaignPrizeMultiplier(u32 authoredTier)
-{
-    return authoredTier;
-}
-
+// Authored trainer prize tiers pay their full value per point of the incoming cap.
 void InitCampaignBattleReward(void)
 {
     gBattleStruct->campaignLevelCap = 0;
@@ -2472,7 +2438,7 @@ void InitCampaignBattleReward(void)
                          | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_EREADER_TRAINER))
         return;
     gBattleStruct->campaignLevelCap = GetCurrentLevelCap();
-    gBattleStruct->campaignPrizeMultiplier = CampaignPrizeMultiplier(GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentA)->prizeMultiplier);
+    gBattleStruct->campaignPrizeMultiplier = GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentA)->prizeMultiplier;
     gBattleStruct->campaignRewardEligible = !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentA);
     // The final interview's trainer flag is cleared to permit repeat battles.
     // Its persistent interview counter still records the first-clear receipt.
@@ -2482,10 +2448,37 @@ void InitCampaignBattleReward(void)
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
         gBattleStruct->campaignPrizeMultiplier = max(gBattleStruct->campaignPrizeMultiplier,
-            CampaignPrizeMultiplier(GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentB)->prizeMultiplier));
+            GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentB)->prizeMultiplier);
         gBattleStruct->campaignRewardEligible |= !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentB);
     }
     gBattleStruct->campaignRewardEligible &= !TRAINER_BATTLE_PARAM.isRematch;
+    u16 paidFlag = GetOncePaidPrizeFlag(TRAINER_BATTLE_PARAM.opponentA);
+    if (paidFlag != 0 && FlagGet(paidFlag))
+        gBattleStruct->campaignRewardEligible = FALSE;
+}
+
+// The Winstrate gauntlet clears its trainer flags when left unfinished, so the
+// "first clear" test alone would pay these three again on every attempt.
+static u16 GetOncePaidPrizeFlag(u16 trainer)
+{
+    switch (trainer)
+    {
+    case TRAINER_VICTOR:
+        return FLAG_EC_PAID_WINSTRATE_VICTOR;
+    case TRAINER_VICTORIA:
+        return FLAG_EC_PAID_WINSTRATE_VICTORIA;
+    case TRAINER_VIVI:
+        return FLAG_EC_PAID_WINSTRATE_VIVI;
+    default:
+        return 0;
+    }
+}
+
+void RecordCampaignPrizePaid(void)
+{
+    u16 paidFlag = GetOncePaidPrizeFlag(TRAINER_BATTLE_PARAM.opponentA);
+    if (paidFlag != 0)
+        FlagSet(paidFlag);
 }
 
 u32 GetCampaignBattleMoneyReward(void)

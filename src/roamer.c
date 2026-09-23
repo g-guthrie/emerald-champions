@@ -73,13 +73,7 @@ void DeactivateAllRoamers(void)
 
 static void ClearRoamerLocationHistory(u32 roamerIndex)
 {
-    u32 i;
-
-    for (i = 0; i < ARRAY_COUNT(sLocationHistory[roamerIndex]); i++)
-    {
-        sLocationHistory[roamerIndex][i][MAP_GRP] = 0;
-        sLocationHistory[roamerIndex][i][MAP_NUM] = 0;
-    }
+    memset(sLocationHistory[roamerIndex], 0, sizeof(sLocationHistory[roamerIndex]));
 }
 
 void MoveAllRoamersToOtherLocationSets(void)
@@ -192,11 +186,6 @@ void RoamerMoveToOtherLocationSet(u32 roamerIndex)
     do
     {
         mapNum = sRoamerLocations[Random() % NUM_LOCATION_SETS][0];
-        if (sRoamerLocation[roamerIndex][MAP_NUM] != mapNum)
-        {
-            sRoamerLocation[roamerIndex][MAP_NUM] = mapNum;
-            return;
-        }
     } while (sRoamerLocation[roamerIndex][MAP_NUM] == mapNum);
     sRoamerLocation[roamerIndex][MAP_NUM] = mapNum;
 }
@@ -238,10 +227,9 @@ void RoamerMove(u32 roamerIndex)
 
 bool8 IsRoamerAt(u32 roamerIndex, u8 mapGroup, u8 mapNum)
 {
-    if (ROAMER(roamerIndex)->active && mapGroup == sRoamerLocation[roamerIndex][MAP_GRP] && mapNum == sRoamerLocation[roamerIndex][MAP_NUM])
-        return TRUE;
-    else
-        return FALSE;
+    return ROAMER(roamerIndex)->active
+        && mapGroup == sRoamerLocation[roamerIndex][MAP_GRP]
+        && mapNum == sRoamerLocation[roamerIndex][MAP_NUM];
 }
 
 void CreateRoamerMonInstance(u32 roamerIndex)

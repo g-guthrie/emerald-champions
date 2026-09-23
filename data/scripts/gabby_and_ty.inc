@@ -1,7 +1,9 @@
-@ Gabby and Ty always move to the same spots for the first 5 battles
-@ From the 6th battle onwards, they move randomly between locations 6-8
+@ Parties 3 and 4 are retired: the counter visits 0, 1, 4, and 5 before cycling 6-8.
+@ Clear the previous Route 118 pair on map entry before selecting the next stop.
 @ Note: The local IDs of Gabby and Ty are hard-coded in GetGabbyAndTyLocalIds
 GabbyAndTy_EventScript_UpdateLocation::
+	@ Party 3/4 are retired; clear the previous Route 118 stop before selecting one.
+	setflag FLAG_HIDE_ROUTE_118_GABBY_AND_TY_1
 	cleartrainerflag TRAINER_GABBY_AND_TY_6
 	specialvar VAR_RESULT, GabbyAndTyGetBattleNum
 	switch VAR_RESULT
@@ -144,30 +146,6 @@ GabbyAndTy_EventScript_GabbyBattle2::
 
 GabbyAndTy_EventScript_TyBattle2::
 	trainerbattle_double TRAINER_GABBY_AND_TY_2, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_GabbyBattle3::
-	@ This retired encounter has no campaign battle.
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_TyBattle3::
-	@ This retired encounter has no campaign battle.
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_GabbyBattle4::
-	@ This retired encounter has no campaign battle.
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_TyBattle4::
-	@ This retired encounter has no campaign battle.
 	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end

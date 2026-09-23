@@ -1567,29 +1567,33 @@ u32 GetBattlerRawSpeedOrder(enum BattlerId battler)
 }
 
 // battlerStealer steals the item of itemBattler
-void StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, enum Item itemOverride)
+bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, enum Item itemOverride)
 {
-    if (itemOverride)
+    enum Item item = itemOverride != ITEM_NONE ? itemOverride : gBattleMons[itemBattler].item;
+    bool32 sendToBag = GetConfig(B_STEAL_WILD_ITEMS) >= GEN_9
+        && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE))
+        && GetMoveEffect(gCurrentMove) == EFFECT_STEAL_ITEM
+        && battlerStealer == gBattlerAttacker;
+
+    // Do not remove the item or announce success unless the Bag accepted it.
+    if (sendToBag && !AddBagItem(item, 1))
+        return FALSE;
+    gLastUsedItem = item;
+    if (itemOverride == ITEM_NONE)
     {
-        gLastUsedItem = itemOverride;
-    }
-    else
-    {
-        gLastUsedItem = gBattleMons[itemBattler].item;
+        RecordBerryRemoval(GetBattlerPartyState(itemBattler)->heldItemOrigin, item);
         gBattleMons[itemBattler].item = ITEM_NONE;
     }
-
-    if (GetConfig(B_STEAL_WILD_ITEMS) >= GEN_9
-     && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE))
-     && GetMoveEffect(gCurrentMove) == EFFECT_STEAL_ITEM
-     && battlerStealer == gBattlerAttacker) // ensure that Pickpocket isn't activating this
-    {
-        AddBagItem(gLastUsedItem, 1);
-    }
+    if (sendToBag)
+        RecordHeldItemSentToBag(itemBattler, item);
     else
     {
         RecordItemEffectBattle(battlerStealer, GetItemHoldEffect(gLastUsedItem));
         gBattleMons[battlerStealer].item = gLastUsedItem;
+        if (itemOverride == ITEM_NONE)
+            TransferHeldItemOrigin(itemBattler, battlerStealer);
+        else
+            GetBattlerPartyState(battlerStealer)->heldItemOrigin = 0; // Delayed Pickpocket supplies the original slot below.
 
         gBattleMons[battlerStealer].volatiles.unburdenActive = FALSE;
         BtlController_EmitSetMonData(battlerStealer, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gLastUsedItem), &gLastUsedItem); // set attacker item
@@ -1597,7 +1601,7 @@ void StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, 
     }
 
     if (itemOverride) // don't change flags for unintended battler
-        return;
+        return TRUE;
 
     PREPARE_MON_NICK_WITH_PREFIX_LOWER_BUFFER(gBattleTextBuff2, itemBattler, gBattlerPartyIndexes[itemBattler]);
 
@@ -1611,6 +1615,7 @@ void StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, 
         gBattleStruct->choicedMove[itemBattler] = MOVE_NONE;
 
     TrySaveExchangedItem(itemBattler, gLastUsedItem);
+    return TRUE;
 }
 
 bool32 TrySetReflect(enum BattlerId battler)
@@ -1721,7 +1726,9 @@ void SetNonVolatileStatus(enum BattlerId battlerAtk, enum BattlerId effectBattle
         gBattlescriptCurrInstr = BattleScript_MoveEffectBurn;
         break;
     case MOVE_EFFECT_FREEZE:
-        GetBattlerPartyState(effectBattler)->freezeTurns = 2;
+        // This counts elapsed frozen actions, not turns remaining. Starting
+        // at the threshold would force an immediate thaw on the next action.
+        GetBattlerPartyState(effectBattler)->freezeTurns = 0;
         gBattleMons[effectBattler].status1 |= STATUS1_FREEZE;
         gBattlescriptCurrInstr = BattleScript_MoveEffectFreeze;
         break;
@@ -2286,21 +2293,20 @@ static void Cmd_getexp(void)
                 gBattleScripting.getexpState = 6;
                 break;
             }
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][*expMonId];
             bool32 wasSentOut = (gBattleStruct->expSentInMons & (1u << *expMonId)) != 0;
-            holdEffect = GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][*expMonId]);
+            holdEffect = GetMonHoldEffect(mon);
 
             if ((holdEffect != HOLD_EFFECT_EXP_SHARE && !wasSentOut && !IsGen6ExpShareEnabled())
-             || GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+             || !IsValidForBattle(mon))
             {
                 gBattleScripting.getexpState = 5;
-                gBattleStruct->battlerExpReward = 0;
             }
-            else if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+            else if (GetMonData(mon, MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 gBattleScripting.getexpState = 5;
-                gBattleStruct->battlerExpReward = 0;
                 if (B_MAX_LEVEL_EV_GAINS >= GEN_5)
-                    MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                    MonGainEVs(mon, faintedSpecies);
             }
             else
             {
@@ -2316,20 +2322,17 @@ static void Cmd_getexp(void)
                     gBattleStruct->wildVictorySong++;
                 }
 
-                if (IsValidForBattle(&gParties[B_TRAINER_PLAYER][*expMonId]))
-                {
-                    gBattleStruct->battlerExpReward = CalculateMonExpReward(*expMonId, wasSentOut, holdEffect);
+                gBattleStruct->battlerExpReward = CalculateMonExpReward(*expMonId, wasSentOut, holdEffect);
 
-                    if (gBattleStruct->battlerExpReward > 0)
-                    {
-                        u32 stringId = IsTradedMon(&gParties[B_TRAINER_PLAYER][*expMonId]) ? STRINGID_ABOOSTED : STRINGID_EMPTYSTRING4;
-                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, *expMonId);
-                        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId);
-                        PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleStruct->battlerExpReward);
-                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, 0);
-                    }
-                    MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                if (gBattleStruct->battlerExpReward > 0)
+                {
+                    u32 stringId = IsTradedMon(mon) ? STRINGID_ABOOSTED : STRINGID_EMPTYSTRING4;
+                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, *expMonId);
+                    PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId);
+                    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleStruct->battlerExpReward);
+                    PrepareStringBattle(STRINGID_PKMNGAINEDEXP, 0);
                 }
+                MonGainEVs(mon, faintedSpecies);
                 // A capped recipient earns EVs but needs no EXP message,
                 // controller animation or level-up processing.
                 gBattleScripting.getexpState = gBattleStruct->battlerExpReward == 0 ? 5 : 3;
@@ -2363,7 +2366,6 @@ static void Cmd_getexp(void)
         {
             if (gBattleResources->bufferB[0][0] == CONTROLLER_TWORETURNVALUES && gBattleResources->bufferB[0][1] == RET_VALUE_LEVELED_UP)
             {
-                u16 temp = 0xFF;
                 enum BattlerId battler = GetBattlerFromPlayerPartyId(*expMonId);
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && battler != MAX_BATTLERS_COUNT)
                     HandleLowHpMusicChange(GetBattlerMon(battler), battler);
@@ -2383,13 +2385,13 @@ static void Cmd_getexp(void)
                     {
                         gBattleMons[battler].level = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL);
                         gBattleMons[battler].hp = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_HP);
+                        gBattleMons[battler].maxHP = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_MAX_HP);
                     }
                     else
                     {
-                        CopyMonLevelAndBaseStatsToBattleMon(battler, &gParties[B_TRAINER_PLAYER][*expMonId], TRUE);
+                        CopyMonLevelAndBaseStatsToBattleMon(battler, &gParties[B_TRAINER_PLAYER][*expMonId],
+                            !gBattleMons[battler].volatiles.speedSwapped);
                     }
-                    if (gBattleMons[battler].volatiles.powerTrick)
-                        SWAP(gBattleMons[battler].attack, gBattleMons[battler].defense, temp);
                 }
 
                 gBattleScripting.getexpState = 5;
@@ -3916,7 +3918,11 @@ static void Cmd_getmoneyreward(void)
     if (gBattleOutcome == B_OUTCOME_WON)
     {
         if (gBattleStruct->campaignPrizeMultiplier != 0)
+        {
             money = GetCampaignBattleMoneyReward();
+            if (money != 0)
+                RecordCampaignPrizePaid();
+        }
         else
         {
             // Return fights (already-defeated trainers, or battles launched via the
@@ -4257,7 +4263,13 @@ static void Cmd_removeitem(void)
     // Corroded items cannot be restored either.
     if (GetBattlerHoldEffect(battler) != HOLD_EFFECT_AIR_BALLOON
      && GetMoveEffect(gCurrentMove) != EFFECT_CORROSIVE_GAS)
-        GetBattlerPartyState(battler)->usedHeldItem = itemId; // Remember if switched out
+        RecordConsumedHeldItem(battler, itemId); // Remember if switched out
+    else
+    {
+        // A corroded Berry is lost like a knocked-off one, never restored after battle.
+        RecordBerryRemoval(GetBattlerPartyState(battler)->heldItemOrigin, itemId);
+        GetBattlerPartyState(battler)->heldItemOrigin = 0;
+    }
 
     gBattleMons[battler].item = ITEM_NONE;
     gBattleStruct->battlerState[battler].canPickupItem = TRUE;
@@ -6159,25 +6171,10 @@ static void Cmd_tryspiteppreduce(void)
     if (gLastMoves[gBattlerTarget] != MOVE_NONE
      && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
     {
-        s32 i;
-
-        // Get move slot to reduce PP.
-        if (IsMaxMove(gLastMoves[gBattlerTarget]))
-        {
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (gBattleStruct->dynamax.baseMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
-                    break;
-            }
-        }
-        else
-        {
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
-                    break;
-            }
-        }
+        enum Move moveToReduce = gLastMoves[gBattlerTarget];
+        if (IsMaxMove(moveToReduce))
+            moveToReduce = gBattleStruct->dynamax.baseMoves[gBattlerTarget];
+        u32 i = GetMoveSlot(gBattleMons[gBattlerTarget].moves, moveToReduce);
 
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > (B_CAN_SPITE_FAIL >= GEN_4 ? 0 : 1))
         {
@@ -6191,15 +6188,11 @@ static void Cmd_tryspiteppreduce(void)
 
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gBattlerTarget])
 
-            ConvertIntToDecimalStringN(gBattleTextBuff2, ppToDeduct, STR_CONV_MODE_LEFT_ALIGN, 1);
-
             PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 1, ppToDeduct)
 
             gBattleMons[gBattlerTarget].pp[i] -= ppToDeduct;
 
-            // if (MOVE_IS_PERMANENT(gBattlerTarget, i)), but backwards
-            if (!(gBattleMons[gBattlerTarget].volatiles.mimickedMoves & (1u << i))
-                && !(gBattleMons[gBattlerTarget].volatiles.transformed))
+            if (MOVE_IS_PERMANENT(gBattlerTarget, i))
             {
                 BtlController_EmitSetMonData(gBattlerTarget, B_COMM_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + i, 0, sizeof(gBattleMons[gBattlerTarget].pp[i]), &gBattleMons[gBattlerTarget].pp[i]);
                 MarkBattlerForControllerExec(gBattlerTarget);
@@ -6706,6 +6699,16 @@ static void Cmd_setforcedtarget(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+static void ClearBattlerNonVolatileStatus(enum BattlerId battler)
+{
+    if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+        TryDeactivateSleepClause(battler, gBattlerPartyIndexes[battler]);
+    gBattleMons[battler].status1 = STATUS1_NONE;
+    gBattleMons[battler].volatiles.nightmare = FALSE;
+    BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
+    MarkBattlerForControllerExec(battler);
+}
+
 static void Cmd_curestatuswithmove(void)
 {
     CMD_ARGS(const u8 *failInstr);
@@ -6714,9 +6717,6 @@ static void Cmd_curestatuswithmove(void)
 
     if (shouldHeal)
     {
-        if (status & STATUS1_SLEEP)
-            TryDeactivateSleepClause(gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker]);
-
         if (status & STATUS1_PARALYSIS)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PARALYSIS;
         else if (status & STATUS1_POISON || status & STATUS1_TOXIC_POISON)
@@ -6732,10 +6732,8 @@ static void Cmd_curestatuswithmove(void)
 
         gBattleScripting.battler = gBattlerAttacker;
 
-        gBattleMons[gBattlerAttacker].status1 = 0;
+        ClearBattlerNonVolatileStatus(gBattlerAttacker);
         gBattlescriptCurrInstr = cmd->nextInstr;
-        BtlController_EmitSetMonData(gBattlerAttacker, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerAttacker].status1), &gBattleMons[gBattlerAttacker].status1);
-        MarkBattlerForControllerExec(gBattlerAttacker);
     }
     else
     {
@@ -6879,6 +6877,14 @@ static void Cmd_tryswapitems(void)
 
             gBattleMons[gBattlerAttacker].item = oldItemDef;
             gBattleMons[gBattlerTarget].item = oldItemAtk;
+            u8 origin = GetBattlerPartyState(gBattlerAttacker)->heldItemOrigin;
+            u8 targetOrigin = GetBattlerPartyState(gBattlerTarget)->heldItemOrigin;
+            // Taking the opponent's Berry is theft; voluntarily giving our
+            // own item in the exchange is not a second theft event.
+            if (GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget))
+                RecordBerryRemoval(targetOrigin, oldItemDef);
+            SetHeldItemOrigin(gBattlerAttacker, targetOrigin);
+            SetHeldItemOrigin(gBattlerTarget, origin);
 
             RecordItemEffectBattle(gBattlerAttacker, GetItemHoldEffect(oldItemDef));
             RecordItemEffectBattle(gBattlerTarget, GetItemHoldEffect(oldItemAtk));
@@ -7516,17 +7522,19 @@ static void Cmd_tryrecycleitem(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    enum Item *usedHeldItem;
+    enum BattlerId source;
 
     if (gCurrentMove == MOVE_NONE && GetBattlerAbility(gBattlerAttacker) == ABILITY_PICKUP)
-        usedHeldItem = &GetBattlerPartyState(gBattlerTarget)->usedHeldItem;
+        source = gBattlerTarget;
     else
-        usedHeldItem = &GetBattlerPartyState(gBattlerAttacker)->usedHeldItem;
+        source = gBattlerAttacker;
+    enum Item *usedHeldItem = &GetBattlerPartyState(source)->usedHeldItem;
     if (*usedHeldItem != ITEM_NONE && gBattleMons[gBattlerAttacker].item == ITEM_NONE)
     {
         gLastUsedItem = *usedHeldItem;
         *usedHeldItem = ITEM_NONE;
         gBattleMons[gBattlerAttacker].item = gLastUsedItem;
+        RecordRecoveredHeldItem(gBattlerAttacker, source, gLastUsedItem);
         gBattleMons[gBattlerAttacker].volatiles.unburdenActive = FALSE;
 
         BtlController_EmitSetMonData(gBattlerAttacker, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerAttacker].item), &gBattleMons[gBattlerAttacker].item);
@@ -8089,6 +8097,16 @@ static void Cmd_givecaughtmon(void)
     switch (state)
     {
     case GIVECAUGHTMON_CHECK_PARTY_SIZE:
+        // An extra Legendary or Ultra Beast goes directly to storage; the
+        // optional full-party swap must not put it beside one already active.
+        if (!CanAddRestrictedMonToParty(
+                GetMonData(GetBattlerMon(GetCatchingBattler()), MON_DATA_SPECIES),
+                PARTY_SIZE))
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NO_MESSAGE_SKIP;
+            gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
+            break;
+        }
 #if EC_HEADLESS_FIXTURES
         if (EmeraldChampionsHeadlessAutoCaptureActive())
         {
@@ -8203,8 +8221,13 @@ static void Cmd_givecaughtmon(void)
         if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
         {
             enum Item lostItem = gBattleStruct->itemLost[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[GetCatchingBattler()]].originalItem;
-            if (GEN_LATEST == GEN_CHAMPIONS
-             || (lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES))
+            if (GEN_LATEST == GEN_CHAMPIONS)
+            {
+                lostItem = GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A,
+                    gBattlerPartyIndexes[GetCatchingBattler()]);
+                SetMonData(caughtMon, MON_DATA_HELD_ITEM, &lostItem);
+            }
+            else if (lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES)
                 SetMonData(caughtMon, MON_DATA_HELD_ITEM, &lostItem);
         }
 
@@ -10148,6 +10171,7 @@ void BS_TryRecycleBerry(void)
         gLastUsedItem = *usedHeldItem;
         *usedHeldItem = ITEM_NONE;
         gBattleMons[gBattlerTarget].item = gLastUsedItem;
+        RecordRecoveredHeldItem(gBattlerTarget, gBattlerTarget, gLastUsedItem);
         gBattleMons[gBattlerTarget].volatiles.unburdenActive = FALSE;
 
         BtlController_EmitSetMonData(gBattlerTarget, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
@@ -10795,16 +10819,7 @@ void BS_InstantHpDrop(void)
 void BS_ClearStatus(void)
 {
     NATIVE_ARGS(u8 battler);
-    enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
-    gBattleMons[battler].status1 = 0;
-    BtlController_EmitSetMonData(
-        battler,
-        B_COMM_TO_CONTROLLER,
-        REQUEST_STATUS_BATTLE,
-        0,
-        sizeof(gBattleMons[battler].status1),
-        &gBattleMons[battler].status1);
-    MarkBattlerForControllerExec(battler);
+    ClearBattlerNonVolatileStatus(GetBattlerForBattleScript(cmd->battler));
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -11180,9 +11195,6 @@ void BS_CureStatus(void)
     enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
     u32 status = gBattleMons[battler].status1;
 
-    if (status & STATUS1_SLEEP)
-        TryDeactivateSleepClause(battler, gBattlerPartyIndexes[battler]);
-
     if (status & STATUS1_PARALYSIS)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PARALYSIS;
     else if (status & STATUS1_POISON || status & STATUS1_TOXIC_POISON)
@@ -11198,9 +11210,7 @@ void BS_CureStatus(void)
 
     gBattleScripting.battler = battler;
 
-    gBattleMons[battler].status1 = 0;
-    BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
-    MarkBattlerForControllerExec(battler);
+    ClearBattlerNonVolatileStatus(battler);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -11947,11 +11957,8 @@ void BS_TryWakeBattlersUproar(void)
 
         if (IsBattlerAlive(battler) && gBattleMons[battler].status1 & STATUS1_SLEEP && !hasSoundproof)
         {
-            TryDeactivateSleepClause(battler, gBattlerPartyIndexes[battler]);
-            gBattleMons[battler].status1 = 0;
             gEffectBattler = battler;
-            BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
-            MarkBattlerForControllerExec(battler);
+            ClearBattlerNonVolatileStatus(battler);
 
             BattleScriptCall(BattleScript_TargetWokeUp);
             return;

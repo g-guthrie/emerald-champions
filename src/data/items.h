@@ -400,7 +400,7 @@ const struct ItemInfo gItemsInfo[] =
         #if B_DREAM_BALL_MODIFIER >= GEN_8
             "A Ball that works\n"
             "better on Pokémon\n"
-            "that are alseep."),
+            "that are asleep."),
         #else
             "A special Ball that\n"
             "appears in the\n"
@@ -2959,7 +2959,7 @@ const struct ItemInfo gItemsInfo[] =
             "attracts wild\n"
             "Pokémon when used."),
         .pocket = POCKET_ITEMS,
-        .sortType = ITEM_TYPE_STATUS_RECOVERY,
+        .sortType = ITEM_TYPE_FIELD_USE,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_Honey,
         .flingPower = 30,
@@ -14703,6 +14703,22 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_FlightBeacon,
         .iconPic = gItemIcon_PokeFlute,
         .iconPalette = gItemIconPalette_PokeFlute,
+    },
+
+    [ITEM_REGENERATOR] =
+    {
+        .name = ITEM_NAME("Regenerator"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Used Berries return\n"
+            "after battle. Except\n"
+            "Knock Off and theft."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_SootSack,
+        .iconPalette = gItemIconPalette_SootSack,
     },
 
     [ITEM_MAGMA_STONE] =

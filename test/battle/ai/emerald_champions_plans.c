@@ -5,7 +5,6 @@
 #include "battle_controllers.h"
 #include "battle_ai_util.h"
 #include "emerald_champions_battle_plan.h"
-#include "emerald_champions_perish.h"
 #include "test/battle.h"
 #include "data.h"
 #include "difficulty.h"
@@ -288,18 +287,29 @@ DOUBLE_BATTLE_TEST("EC Gym mechanics: Cristian's actual Beat Up builds Rage Fist
 AI_DOUBLE_BATTLE_TEST("EC Gym: Cristian activates the recipient that survives the Beat Up")
 {
     bool32 lethal;
-    // Beat Up is Dark: it is lethal on the Ghost recipient and merely feeds
-    // Justified on the Steel one. The authored plan rejects friendly fire that
-    // kills the recipient, so only the survivable activation may be chosen.
-    PARAMETRIZE { lethal = TRUE; }   // Annihilape, weak to Dark.
-    PARAMETRIZE { lethal = FALSE; }  // Lucario, resists Dark.
+    // Annihilape is neutral to Dark: a healthy one is exactly the Rage Fist
+    // recipient Cristian's plan wants. At 18 HP the six Beat Up hits (about 30)
+    // would KO it, which the plan rejects; nothing else threatens it this turn.
+    // Lucario resists Dark; Beat Up (about 12) plus this Psychic (about 36)
+    // leaves it standing. At SpAttack 120 the Psychic alone KOs Lucario, so no
+    // choice of Cristian's could keep it alive.
+    PARAMETRIZE { lethal = TRUE; }   // Annihilape at 18 HP.
+    PARAMETRIZE { lethal = FALSE; }  // Lucario activation case.
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(140); MaxHP(140); Defense(100); SpAttack(120); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_PSYCHIC); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(140); MaxHP(140); Defense(100); SpAttack(60); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_PSYCHIC, MOVE_CELEBRATE); }
         PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(300); MaxHP(300); Defense(150); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
         AuthoredOpponentWithPartner(TRAINER_CRISTIAN, 1, FALSE, lethal ? 2 : 3);
+        if (lethal)
+        {
+            u32 hp = 18;
+            SetMonData(&OPPONENT_A_PARTY[1], MON_DATA_HP, &hp);
+        }
     } WHEN {
         TURN {
-            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
+            if (lethal)
+                MOVE(playerLeft, MOVE_CELEBRATE);
+            else
+                MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
             MOVE(playerRight, MOVE_CELEBRATE);
             if (lethal)
                 NOT_EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP);
@@ -307,7 +317,9 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Cristian activates the recipient that survives th
                 EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight);
         }
     } THEN {
-        EXPECT(opponentRight->hp > 0);
+        // AI replacements can occupy this battler after the recipient faints.
+        // Check the original deployed party member, not its replacement.
+        EXPECT(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_HP) > 0);
         Test_MgbaPrintf("CRISTIAN_RAGE_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
         EXPECT(gBattleStruct->aiDelayFrames <= 72);
     }
@@ -1309,7 +1321,8 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Frost Breath activates Ange
         // guaranteed critical hit is the whole point of the authored pairing.
         PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
         PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
-        AuthoredOpponent(TRAINER_AISHA, 3, FALSE);
+        // Route117 is available before Wattson: two badges, cap30.
+        AuthoredOpponent(TRAINER_AISHA, 2, FALSE);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_SPLASH);
@@ -1612,9 +1625,9 @@ DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or ra
         EXPECT_EQ(opponentRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
         EXPECT_EQ(opponentLeft->species, SPECIES_TORKOAL);
         EXPECT_EQ(opponentRight->species, SPECIES_LILLIGANT);
-        // Authored levels, refreshed after the campaign calibration pass.
-        EXPECT_EQ(opponentLeft->level, 36);
-        EXPECT_EQ(opponentRight->level, 35);
+        // Badge3 cap40, authored offsets +2/+1, Normal difficulty -1.
+        EXPECT_EQ(opponentLeft->level, 41);
+        EXPECT_EQ(opponentRight->level, 40);
     }
 }
 
@@ -1966,9 +1979,9 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
         {
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_1), ABILITY_PRISM_SCALES);
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_HUGE_POWER);
-            // Authored levels, refreshed after the campaign calibration pass.
-            EXPECT_EQ(opponentLeft->level, 96);
-            EXPECT_EQ(opponentRight->level, 95);
+            // Badge8 cap80, authored offsets +2/+1, Normal difficulty -1.
+            EXPECT_EQ(opponentLeft->level, 81);
+            EXPECT_EQ(opponentRight->level, 80);
         }
         gBattleTypeFlags = savedFlags;
     }
@@ -1990,9 +2003,19 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Takao's healthy lead does not withdraw on turn on
         TURN {
             MOVE(playerLeft, MOVE_DAZZLING_GLEAM);
             MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVES(opponentLeft, MOVE_OCTOLOCK, MOVE_DRAIN_PUNCH, MOVE_SUCKER_PUNCH, MOVE_PROTECT);
         }
     } THEN {
-        EXPECT_EQ(opponentLeft->species, SPECIES_GRAPPLOCT);
+        // A knockout can replace the active battler after its selected move.
+        // EXPECT_MOVES above verifies that the original lead did not switch.
+        u32 originalHp = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP);
+        if (power == 400)
+            EXPECT_EQ(originalHp, 0);
+        else
+        {
+            EXPECT(originalHp > 0);
+            EXPECT_EQ(opponentLeft->species, SPECIES_GRAPPLOCT);
+        }
     }
 }
 
@@ -2019,22 +2042,24 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Wattson's Discharge activates Motor Drive before 
 AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's activation survives a board that can fight back")
 {
     GIVEN {
-        // The same authored pairing on a board with real attackers opposite,
-        // which is where the receipts say it stops firing: three runs chose
-        // Icy Wind instead, with every precondition for the activation held.
+        // The attackers pressure Tauros: Tackle cannot damage Ghost Froslass.
+        // The combo must leave its original recipient alive after both attacks.
         PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(200); MaxHP(200); Attack(90); Defense(60); SpDefense(60); Speed(70); Ability(ABILITY_TELEPATHY); Moves(MOVE_TACKLE); }
         PLAYER(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Attack(90); Defense(60); SpDefense(60); Speed(60); Moves(MOVE_TACKLE); }
-        AuthoredOpponent(TRAINER_AISHA, 3, FALSE);
+        // Route117 is available before Wattson: two badges, cap30.
+        AuthoredOpponent(TRAINER_AISHA, 2, FALSE);
     } WHEN {
         TURN {
-            MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
-            MOVE(playerRight, MOVE_TACKLE, target: opponentLeft);
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
             EXPECT_MOVE(opponentLeft, MOVE_FROST_BREATH, target: opponentRight);
             // The recipient must not spend the same turn behind a shield: its
             // own guard blocks the activation the pair just chose.
             NOT_EXPECT_MOVE(opponentRight, MOVE_PROTECT);
         }
     } THEN {
+        EXPECT_EQ(gBattlerPartyIndexes[B_BATTLER_3], 1);
+        EXPECT(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_HP) > 0);
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], MAX_STAT_STAGE);
     }
 }

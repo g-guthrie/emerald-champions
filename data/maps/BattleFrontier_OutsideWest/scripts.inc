@@ -20,7 +20,8 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant:: @ 823D3F0
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	checkitem ITEM_SS_TICKET, 1
+	setvar VAR_0x8004, ITEM_SS_TICKET
+	special CheckEmeraldChampionsHandoffItem
 	compare VAR_RESULT, FALSE
 	goto_if_eq BattleFrontier_OutsideWest_EventScript_NoSSTicket
 	message BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo
@@ -98,15 +99,6 @@ BattleFrontier_OutsideWest_EventScript_BattlePikeSign:: @ 823D4F4
 	end
 
 @ Unused. Of note, Battle Tower is in the East section in the final release
-BattleFrontier_OutsideWest_EventScript_UnusedNPC1:: @ 823D4FD
-	msgbox BattleFrontier_OutsideWest_Text_ThisIsBattleTower, MSGBOX_NPC
-	end
-
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC2:: @ 823D4FD
-	msgbox BattleFrontier_OutsideWest_Text_CantFindBattleTower, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Boy1:: @ 823D50F
 	msgbox BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends, MSGBOX_NPC
 	end
@@ -257,10 +249,6 @@ BattleFrontier_OutsideWest_EventScript_Fisherman1:: @ 823D667
 	end
 
 @ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC3:: @ 823D670
-	msgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Gentleman:: @ 823D679
 	msgbox BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome, MSGBOX_NPC
 	end
@@ -331,11 +319,6 @@ BattleFrontier_OutsideWest_Text_BattlePikeSign: @ 823D772
 	.string "This is the BATTLE PIKE!\n"
 	.string "Choose one of three paths!$"
 
-BattleFrontier_OutsideWest_Text_ThisIsBattleTower: @ 823D7A6
-	.string "This is the Battle Tower.\p"
-	.string "Trainers bring their best-raised\n"
-	.string "Pokémon for elimination-style matches.$"
-
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket: @ 823D808
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your Ticket?$"
@@ -371,12 +354,6 @@ BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends: @ 823D99C
 	.string "I'm the best out of all my friends.\n"
 	.string "But here…\l"
 	.string "I've been useless!$"
-
-BattleFrontier_OutsideWest_Text_CantFindBattleTower: @ 823D9DD
-	.string "I want to go to the Battle Tower,\n"
-	.string "but I can't find it even though I have\l"
-	.string "a map of the Battle Frontier.\p"
-	.string "This place is just too big!$"
 
 BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere: @ 823DA60
 	.string "I wanted to take a challenge as soon\n"
@@ -450,11 +427,6 @@ BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome: @ 823DEFD
 	.string "I'll wish you the best of luck.\n"
 	.string "Let us both win our way up and meet\l"
 	.string "in challenges.$"
-
-BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa: @ 823DF7D
-	.string "Grandpa, over here!\n"
-	.string "The BATTLE DOME is here!\l"
-	.string "Go get 'em, Grandpa!$"
 
 BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe: @ 823DFBF
 	.string "Ah, so this here is the BATTLE DOME?\n"

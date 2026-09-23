@@ -1,4 +1,5 @@
 #include "global.h"
+#include "caps.h"
 #include "battle_main.h"
 #include "battle_setup.h"
 #include "bg.h"
@@ -1210,10 +1211,9 @@ static u8 DexNavTryGenerateMonLevel(enum Species species, enum EncounterType env
     if (Random() % 100 < 4)
         levelBonus += 10; //4% chance of having a +10 level
 
-    if (levelBase + levelBonus > MAX_LEVEL)
-        return MAX_LEVEL;
-    else
-        return levelBase + levelBonus;
+    // The search preview and its generated moves must use the same level
+    // ceiling as the actual wild Pokemon, even after chain/rare bonuses.
+    return min(levelBase + levelBonus, min(MAX_LEVEL, GetCurrentLevelCap()));
 }
 
 static enum Move GetRandomEggMove(enum Species species)
@@ -2519,7 +2519,7 @@ bool32 TryFindHiddenPokemon(void)
             }
             else
             {
-                species = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+                species = gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo->wildPokemon[ChooseWildMonIndex_Land(gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo)].species;
                 environment = ENCOUNTER_TYPE_LAND;
             }
             break;
@@ -2537,7 +2537,7 @@ bool32 TryFindHiddenPokemon(void)
                 }
                 else
                 {
-                    species = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo->wildPokemon[ChooseWildMonIndex_Water()].species;
+                    species = gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo->wildPokemon[ChooseWildMonIndex_Water(gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo)].species;
                     environment = ENCOUNTER_TYPE_WATER;
 
                 }

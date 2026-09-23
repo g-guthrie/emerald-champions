@@ -288,20 +288,11 @@ MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales: @ 828E7EE
 	.string "are even remotely legendary?$"
 
 @ Unused
-MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale: @ 828E844
-	.string "Incidentally… Would you care to hear\n"
-	.string "another legendary tale?$"
-
 MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend: @ 828E881
 	.string "Hmm…\n"
 	.string "I'm not satisfied…\p"
 	.string "I wish you would bring me news worthy\n"
 	.string "of being called a legend.$"
-
-MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested: @ 828E8D9
-	.string "I wish more people would be interested\n"
-	.string "in hearing my epic tales of legendary\l"
-	.string "Trainers.$"
 
 MauvilleCity_PokemonCenter_1F_Text_SavedGameTitle:: @ 828E930
 	.string "The Save-Happy Trainer$"
@@ -656,12 +647,12 @@ MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle:: @ 828F9D1
 	.string "The Item-Finding Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction:: @ 828F9EA
-	.string "Used an Itemfinder$"
+	.string "Used a Dowsing Machine$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory:: @ 828F9FD
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer used an Itemfinder\n"
+	.string "This Trainer used a Dowsing Machine\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must enjoy scouring the\n"
 	.string "ground for hidden items!$"
@@ -805,7 +796,6 @@ MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory:: @ 82900CB
 	.string "{STR_VAR_3} must be a Trainer with\n"
 	.string "baby-smooth skin!$"
 
-
 MauvilleCity_PokemonCenter_1F_EventScript_Storyteller:: @ 829014A
 	lock
 	faceplayer
@@ -868,11 +858,6 @@ MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller:: @ 8290219
 	end
 
 @ Unused
-MauvilleCity_PokemonCenter_1F_EventScript_WaitingForRecordMix:: @ 8290223
-	msgbox MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested, MSGBOX_DEFAULT
-	release
-	end
-
 MauvilleCity_PokemonCenter_1F_EventScript_StorytellerEnd:: @ 829022D
 	release
 	end

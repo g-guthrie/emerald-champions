@@ -1,42 +1,35 @@
 LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket:
-	.string "This is the POKéMON LOTTERY CORNER.\p"
-	.string "Every finished CHAMPIONS CIRCUIT run\n"
-	.string "earns you one LOTO TICKET.\p"
+	.string "This is the Pokémon Lottery Corner.\p"
+	.string "You may draw one Loto Ticket\n"
+	.string "each day.\p"
 	.string "If its number matches the ID number\n"
-	.string "of any of your POKéMON, you win.\p"
+	.string "of any of your Pokémon, you win.\p"
 	.string "Would you like to draw your ticket?$"
-
-LilycoveCity_DepartmentStore_1F_Text_ComeBackAfterACircuitRun:
-	.string "Please come back when you have\n"
-	.string "finished a CHAMPIONS CIRCUIT run.$"
-
-LilycoveCity_DepartmentStore_1F_Text_SentToYourPC:
-	.string "We'll send it to your PC at home.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain:
 	.string "Please do visit again.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket:
-	.string "Please pick a LOTO TICKET.\n"
+	.string "Please pick a Loto Ticket.\n"
 	.string "…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait:
-	.string "The LOTO TICKET number is {STR_VAR_1}.\p"
+	.string "The Loto Ticket number is {STR_VAR_1}.\p"
 	.string "I need to run a check on this number\n"
 	.string "to see if it matches any of your\l"
-	.string "POKéMON's ID numbers. Please wait.$"
+	.string "Pokémon's ID numbers. Please wait.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon:
 	.string "Congratulations!\p"
 	.string "The ID number of your team's\n"
 	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+	.string "Loto Ticket's number!$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon:
 	.string "Congratulations!\p"
 	.string "The ID number of your PC-boxed\n"
 	.string "{STR_VAR_1} matches your\l"
-	.string "LOTO TICKET's number!$"
+	.string "Loto Ticket's number!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched:
 	.string "I'm sorry.\n"
@@ -66,7 +59,7 @@ LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched:
 LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis:
 	.string "Oh?\n"
 	.string "You seem to have no room for this.\p"
-	.string "Please make room in your BAG and\n"
+	.string "Please make room in your Bag and\n"
 	.string "let me know.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding:

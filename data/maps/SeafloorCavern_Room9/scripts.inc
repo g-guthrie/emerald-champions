@@ -6,6 +6,7 @@
 .set LOCALID_KYOGRE_SLEEPING, 7
 
 SeafloorCavern_Room9_MapScripts:: @ 8234DC8
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafloorCavern_Room9_ResetUnfinishedAwakening
 	.byte 0
 
 SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre:: @ 8234DC9
@@ -35,12 +36,10 @@ SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre:: @ 8234DC9
 	setweather WEATHER_NONE
 	doweather
 	special Script_FadeOutMapMusic
-	waitstate
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_BlueOrbShinesByItself, MSGBOX_DEFAULT
 	special WaitWeather
-	waitstate
 	setvar VAR_RESULT, 1
 	playse SE_M_DETECT
 	dofieldeffectsparkle 16, 42, 0
@@ -61,14 +60,13 @@ SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre:: @ 8234DC9
 	applymovement LOCALID_KYOGRE, SeafloorCavern_Room9_Movement_KyogreApproach
 	waitmovement 0
 	special FadeOutOrbEffect
-	waitstate
 	playmoncry SPECIES_KYOGRE, 2
 	waitmoncry
 	applymovement VAR_0x8004, Common_Movement_FacePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_ArchieYouMustDisappear, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_ARCHIE, SeafloorCavern_Room9_Text_ArchieDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_ARCHIE, SeafloorCavern_Room9_Text_ArchieDefeat
 	msgbox SeafloorCavern_Room9_Text_ArchieWithThisBlueOrb, MSGBOX_DEFAULT
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
@@ -169,18 +167,9 @@ SeafloorCavern_Room9_Movement_ArchieApproachPlayer: @ 823502A
 	walk_right
 	step_end
 
-SeafloorCavern_Room9_Movement_Unused1: @ 8235032
-	walk_left
-	walk_left
-	step_end
-
 SeafloorCavern_Room9_Movement_ArchieListenMessage: @ 8235035
 	walk_left
 	delay_16
-	step_end
-
-SeafloorCavern_Room9_Movement_Unused2: @ 8235038
-	walk_right
 	step_end
 
 SeafloorCavern_Room9_Movement_ArchieExit: @ 823503A
@@ -333,3 +322,9 @@ SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue: @ 8235692
 SeafloorCavern_Room9_Text_MaxieComeOnPlayer: @ 8235723
 	.string "Maxie: {PLAYER}, come on, you have\n"
 	.string "to get out of here, too!$"
+
+SeafloorCavern_Room9_ResetUnfinishedAwakening::
+	goto_if_ne VAR_SEAFLOOR_CAVERN_STATE, 0, SeafloorCavern_Room9_AwakeningAlreadyFinished
+	clearflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_ASLEEP
+SeafloorCavern_Room9_AwakeningAlreadyFinished::
+	end

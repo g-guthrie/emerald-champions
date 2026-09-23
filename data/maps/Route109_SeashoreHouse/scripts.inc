@@ -175,7 +175,7 @@ Route109_SeashoreHouse_Text_SimonDefeated: @ 82699C5
 	.string "…I lost, but I won't cry…$"
 
 Route109_SeashoreHouse_Text_SimonPostBattle: @ 82699DF
-	.string "If one of my Pokémon knew the move\n"
-	.string "for carrying me across water on its\l"
-	.string "back, I could get rid of this inner tube.$"
+	.string "If I had a Surf license and the\n"
+	.string "Balance Badge, I could get rid of\l"
+	.string "this inner tube.$"
 

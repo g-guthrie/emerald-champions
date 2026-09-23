@@ -13,7 +13,6 @@ BattleFrontier_Lounge1_EventScript_Breeder:: @ 825E775
 
 BattleFrontier_Lounge1_EventScript_ChooseMonToShowBreeder:: @ 825E792
 	special ChoosePartyMon
-	waitstate
 	compare VAR_0x8004, 255
 	goto_if_ne BattleFrontier_Lounge1_EventScript_ShowMonToBreeder
 	compare VAR_0x8004, 255
@@ -247,11 +246,6 @@ BattleFrontier_Lounge1_Text_NoTimeForMyAdvice: @ 825EE37
 	.string "from the experiences of your elders!$"
 
 @ Unused
-BattleFrontier_Lounge1_Text_HaveBusinessNeedsTending: @ 825EEA6
-	.string "Yes, what is it now?\p"
-	.string "I have business that needs tending!\n"
-	.string "Save it for next time!$"
-
 BattleFrontier_Lounge1_Text_LetsLookAtYourPokemon: @ 825EEF6
 	.string "Ah, youngster! Do your Pokémon's\n"
 	.string "abilities intrigue you?\p"

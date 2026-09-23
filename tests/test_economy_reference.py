@@ -7,7 +7,7 @@ import unittest
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import economy_reference as economy
-from verify_mega_stone_rewards import world_reward_sources
+from verify_mega_stone_rewards import duplicate_reward_sources, world_reward_sources
 
 
 class EconomyReferenceTests(unittest.TestCase):
@@ -76,5 +76,19 @@ class EconomyReferenceTests(unittest.TestCase):
         routes=world_reward_sources()
         self.assertTrue(routes['ITEM_AERODACTYLITE'])
         self.assertEqual(len(routes['ITEM_AERODACTYLITE']),1)
+
+    def test_mega_reward_sources_allow_one_optional_trade_but_reject_duplicate_placements(self):
+        pickup = 'Route120: item pickup'
+        trade = 'Route123_BerryMastersHouse: one-time garden berry trade'
+        cases = [
+            ([pickup], False),
+            ([pickup, trade], False),
+            ([trade], True),
+            ([pickup, pickup], True),
+            ([pickup, trade, trade], True),
+        ]
+        for sources, invalid in cases:
+            with self.subTest(sources=sources):
+                self.assertEqual(bool(duplicate_reward_sources({'ITEM_TEST_STONE': sources})), invalid)
 
 if __name__=='__main__':unittest.main()

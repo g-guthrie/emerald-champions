@@ -8,6 +8,8 @@ BattleFrontier_Lounge3_MapScripts:: @ 8261D82
 BattleFrontier_Lounge3_EventScript_Gambler:: @ 8261D83
 	lock
 	faceplayer
+	special RefundRetiredFrontierGamblerBet
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_Lounge3_EventScript_RefundClosedBet
 	goto_if_set FLAG_MET_BATTLE_FRONTIER_GAMBLER, BattleFrontier_Lounge3_EventScript_AlreadyMetGambler
 	call BattleFrontier_Lounge3_EventScript_CountSilverSymbols
 	compare VAR_0x8004, 2
@@ -16,6 +18,16 @@ BattleFrontier_Lounge3_EventScript_Gambler:: @ 8261D83
 	msgbox BattleFrontier_Lounge3_Text_YouLookToughExplainGambling, MSGBOX_DEFAULT
 	goto BattleFrontier_Lounge3_EventScript_AskToEnterChallenge
 	end
+
+BattleFrontier_Lounge3_EventScript_RefundClosedBet::
+	msgbox BattleFrontier_Lounge3_Text_RefundClosedBet, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_Lounge3_Text_RefundClosedBet:
+	.string "That challenge is closed, so\n"
+	.string "the bet is off.\p"
+	.string "I returned {STR_VAR_1} Battle Points.$"
 
 BattleFrontier_Lounge3_EventScript_AskToEnterChallenge:: @ 8261DAF
 	special ShowFrontierGamblerLookingMessage

@@ -846,7 +846,7 @@
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE120_WEPEAR_BERRY 0x2A7
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE115_NANAB_BERRY 0x2A8
 #define FLAG_EC_WINSTRATE_GARDEN_BERRIES 0x2A9
-#define FLAG_EC_HATCHED_DAYCARE_EGG 0x2AA
+#define FLAG_UNUSED_0x2AA 0x2AA // Unused Flag
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
 #define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
@@ -1368,8 +1368,8 @@
 #define FLAG_EC_STARTER_ARCHIVE_CHESPIN                              0x4B4
 #define FLAG_EC_STARTER_ARCHIVE_FENNEKIN                             0x4B5
 #define FLAG_EC_CAUGHT_ARTICUNO                                    0x4B6
-#define FLAG_EC_CAUGHT_COSMOG                                      0x4B7
-#define FLAG_EC_CAUGHT_ENAMORUS                                    0x4B8
+#define FLAG_EC_PAID_WINSTRATE_VICTOR                              0x4B7 // Winstrate gauntlet resets its trainer flags; prize money pays once
+#define FLAG_EC_PAID_WINSTRATE_VIVI                                0x4B8 // Winstrate gauntlet resets its trainer flags; prize money pays once
 #define FLAG_EC_CAUGHT_FEZANDIPITI                                 0x4B9
 #define FLAG_EC_CAUGHT_MAGEARNA                                    0x4BA
 #define FLAG_EC_CAUGHT_MELOETTA                                    0x4BB
@@ -1380,10 +1380,10 @@
 #define FLAG_EC_CAUGHT_PECHARUNT                                   0x4C0
 #define FLAG_EC_CAUGHT_REGIGIGAS                                   0x4C1
 #define FLAG_EC_CAUGHT_TERAPAGOS                                   0x4C2
-#define FLAG_EC_CAUGHT_WO_CHIEN                                    0x4C3
+#define FLAG_EC_PAID_WINSTRATE_VICTORIA                            0x4C3 // Winstrate gauntlet resets its trainer flags; prize money pays once
 #define FLAG_EC_CAUGHT_ZAPDOS                                      0x4C4
 #define FLAG_EC_GIFT_FALLARBOR_TOWN_MART                                       0x4C5
-#define FLAG_EC_LEGENDARY_QUEST_RESERVED_2                          0x4C6
+#define FLAG_ROUTE111_LEFT_BREAKABLE_ROCK                           0x4C6 // Persistent rock state; old 0x3A is a live legacy Cover Fossil receipt.
 #define FLAG_EC_STARTER_ARCHIVE_ROWLET                               0x4C7
 #define FLAG_EC_STARTER_ARCHIVE_LITTEN                               0x4C8
 #define FLAG_EC_STARTER_ARCHIVE_POPPLIO                              0x4C9
@@ -1710,20 +1710,19 @@
 #define FLAG_EC_RESOLVED_DIANCIE                    (SYSTEM_FLAGS + 0xB5)
 #define FLAG_EC_RESOLVED_JIRACHI                    (SYSTEM_FLAGS + 0xB6)
 #define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
-#define FLAG_EC_SHOAL_ICE_CHARTED                   (SYSTEM_FLAGS + 0xB8) // Emerald Champions: Fen has charted the deep ice for the second haul
-#define FLAG_EC_SHOAL_ICE_SIGHTING                  (SYSTEM_FLAGS + 0xB9) // Emerald Champions: one guaranteed ice-room legendary encounter is owed
-// Set when a Champions Circuit run ends; spent by the Lilycove lottery draw (D7).
+#define FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE              (SYSTEM_FLAGS + 0xB8) // Old 0x20E is a live legacy Underwater Route 128 Dive Ball receipt.
+// Reserved former Circuit lottery-ticket bit; the current lottery uses daily draws.
 #define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
 #define FLAG_EC_TUTOR_MACHINES_LINE_SEEN            (SYSTEM_FLAGS + 0xBB) // Emerald Champions: the Center tutor explained once that machines are gone
 #define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the five opening held items
 #define FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
-#define FLAG_UNUSED_0x91E                           (SYSTEM_FLAGS + 0xBE) // Unused Flag
-#define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
+#define FLAG_EC_FINALE_DEOXYS_RESOLVED              (SYSTEM_FLAGS + 0xBE) // Permanent expedition completion
+#define FLAG_ROUTE111_RIGHT_BREAKABLE_ROCK           0x91F // Persistent rock state; old 0x3B is a live legacy Helix Fossil receipt.
 
 // Daily Flags
 // These flags are cleared once per day
 // The start and end are byte-aligned because the flags are cleared in byte increments
-#define DAILY_FLAGS_START                           (FLAG_UNUSED_0x91F + (8 - FLAG_UNUSED_0x91F % 8))
+#define DAILY_FLAGS_START                           (FLAG_ROUTE111_RIGHT_BREAKABLE_ROCK + (8 - FLAG_ROUTE111_RIGHT_BREAKABLE_ROCK % 8))
 #define FLAG_UNUSED_0x920                           (DAILY_FLAGS_START + 0x0)  // Unused Flag
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)
@@ -2689,9 +2688,6 @@
 #define FLAG_SEASPRAY_CAVE_WATER_PULSE                                 0x2D // shares 0x2D with FLAG_EC_ITEM_EMBER_MASTER_BALL (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_LURE_BALL                                   0x2E // shares 0x2E with FLAG_EC_ITEM_WOODS2_SUN_STONE (dead: its map.json was overwritten)
 #define FLAG_GRANITE_CAVE_BRICK_BREAK                                  0x30 // shares 0x30 with FLAG_EC_ITEM_WOODS3_BEEDRILLITE (dead: its map.json was overwritten)
-#define FLAG_ROUTE111_LEFT_BREAKABLE_ROCK                              0x3A // shares 0x3A with FLAG_EC_ITEM_RUINS_COVER_FOSSIL (dead: its map.json was overwritten)
-#define FLAG_ROUTE111_RIGHT_BREAKABLE_ROCK                             0x3B // shares 0x3B with FLAG_EC_ITEM_RUINS_HELIX_FOSSIL (dead: its map.json was overwritten)
-#define FLAG_HIDE_FALLARBOR_RIVAL1                                     0x3C // shares 0x3C with FLAG_EC_ITEM_RUINS_DOME_FOSSIL (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_STONE_EDGE                                  0x40 // shares 0x40 with FLAG_EC_ITEM_SCORCHED_BEAST_BALL (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_B1F_FREEZE_DRY                              0x41 // shares 0x41 with FLAG_EC_ITEM_SEASPRAY_BLASTOISINITE (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_B1F_KINGS_ROCK                              0x42 // shares 0x42 with FLAG_EC_ITEM_SEASPRAY_DAWN_STONE (dead: its map.json was overwritten)
@@ -2865,7 +2861,6 @@
 #define FLAG_ITEM_DEWFORD_MANOR_TM100                                  0x20A // relocated 0x49B -> 0x20A; 0x49B is live as FLAG_SHOALCAVE_SLOWBRONITE. Target bit's only other name is dead FLAG_HIDDEN_ITEM_UNDERWATER_127_PRISM_SCALE
 #define FLAG_ITEM_DEWFORD_MANOR_BANETTITE                              0x20B // relocated 0x49C -> 0x20B; 0x49C is live as FLAG_SHOWN_DEOXYS_TO_COSMO. Target bit's only other name is dead FLAG_HIDDEN_ITEM_UNDERWATER_127_MOON_BALL
 #define FLAG_TM21_FRUSTRATION                                          0x20D // relocated 0x4E1 -> 0x20D; 0x4E1 is live as FLAG_EC_CAUGHT_JIRACHI. Target bit's only other name is dead FLAG_HIDDEN_ITEM_UNDERWATER_128_DRAGON_SCALE
-#define FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE                             0x20E // relocated 0x4E3 -> 0x20E; 0x4E3 is live as FLAG_EC_CAUGHT_MOLTRES. Target bit's only other name is dead FLAG_HIDDEN_ITEM_UNDERWATER_128_DIVE_BALL
 #define FLAG_HIDE_ASHEN_WOODS_CHANSEY                                  0x20F // relocated 0x4E5 -> 0x20F; 0x4E5 is live as FLAG_EC_CAUGHT_CELEBI. Target bit's only other name is dead FLAG_HIDDEN_ITEM_LILYCOVE_CITY_LOVE_BALL
 #define FLAG_ALTERING_CAVE_COMET_SHARD                                 0x210 // relocated 0x4E9 -> 0x210; 0x4E9 is live as FLAG_EC_CAUGHT_RESHIRAM. Target bit's only other name is dead FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_UPGRADE
 #define FLAG_ALTERING_CAVE_MASTER_BALL_2                               0x212 // relocated 0x4EA -> 0x212; 0x4EA is live as FLAG_HIDE_ROUTE133_VIAL_NURSE. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL

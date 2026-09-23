@@ -317,6 +317,8 @@ Common_Text_DuplicateFiniteReward:
 	.string "This discovery earns a one-time\n"
 	.string "research payment of ¥{STR_VAR_2}!$"
 
+@ Called after an NPC trader accepts the offered party Pokemon (VAR_0x8004).
+@ Returns its held item first; Mail or a full Bag/PC cancels the trade.
 Common_EventScript_ReturnNPCTradeItem::
 	special ReturnInGameTradeHeldItem
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_TradeHeldItemFull
@@ -325,6 +327,19 @@ Common_EventScript_ReturnNPCTradeItem::
 	call_if_eq VAR_RESULT, 3, Common_EventScript_TradeHeldItemPC
 	setvar VAR_RESULT, TRUE
 	return
+
+Common_EventScript_NPCTradeCancelled::
+	release
+	end
+
+Common_EventScript_NPCTradeRestrictedParty::
+	msgbox Common_Text_NPCTradeRestrictedParty, MSGBOX_DEFAULT
+	release
+	end
+
+Common_Text_NPCTradeRestrictedParty:
+	.string "Only one Pokémon of this special\n"
+	.string "kind may be in your party.$"
 
 Common_EventScript_TradeHeldItemBag:
 	msgbox Common_Text_TradeHeldItemBag, MSGBOX_DEFAULT
@@ -341,14 +356,14 @@ Common_EventScript_TradeMailAttached:
 	setvar VAR_RESULT, FALSE
 	return
 Common_Text_TradeHeldItemBag:
-	.string "Your POKéMON's {STR_VAR_1}\n"
-	.string "was returned to your BAG.$"
+	.string "Your Pokémon's {STR_VAR_1}\n"
+	.string "was returned to your Bag.$"
 Common_Text_TradeHeldItemPC:
-	.string "Your POKéMON's {STR_VAR_1}\n"
+	.string "Your Pokémon's {STR_VAR_1}\n"
 	.string "was returned to your item PC.$"
 Common_Text_TradeHeldItemFull:
-	.string "Make room in your BAG or item PC\n"
+	.string "Make room in your Bag or item PC\n"
 	.string "for the held item before trading.$"
 Common_Text_TradeMailAttached:
-	.string "Please remove your POKéMON's MAIL\n"
+	.string "Please remove your Pokémon's Mail\n"
 	.string "before trading. Keep its message safe!$"

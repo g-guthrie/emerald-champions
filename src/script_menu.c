@@ -803,108 +803,67 @@ bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
 
 // gSpecialVar_0x8004 is 1 if the Sailor was shown multiple event tickets at the same time
 // otherwise gSpecialVar_0x8004 is 0
+static u8 BuildLilycoveSSTidalSelections(void)
+{
+    static const struct
+    {
+        enum Item ticket;
+        u16 enabledFlag, shownFlag, earnedFlag;
+        u8 destination;
+    } tickets[] = {
+        {ITEM_EON_TICKET, FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, FLAG_SHOWN_EON_TICKET, FLAG_EC_EARNED_EON_TICKET, SSTIDAL_SELECTION_SOUTHERN_ISLAND},
+        {ITEM_MYSTIC_TICKET, FLAG_ENABLE_SHIP_NAVEL_ROCK, FLAG_SHOWN_MYSTIC_TICKET, FLAG_ENABLE_SHIP_NAVEL_ROCK, SSTIDAL_SELECTION_NAVEL_ROCK},
+        {ITEM_AURORA_TICKET, FLAG_ENABLE_SHIP_BIRTH_ISLAND, FLAG_SHOWN_AURORA_TICKET, FLAG_EC_EARNED_AURORA_TICKET, SSTIDAL_SELECTION_BIRTH_ISLAND},
+        {ITEM_OLD_SEA_MAP, FLAG_ENABLE_SHIP_FARAWAY_ISLAND, FLAG_SHOWN_OLD_SEA_MAP, FLAG_EC_EARNED_OLD_SEA_MAP, SSTIDAL_SELECTION_FARAWAY_ISLAND},
+    };
+    u32 mode = gSpecialVar_0x8004;
+    u8 count = 0;
+    memset(sLilycoveSSTidalSelections, 0xFF, sizeof(sLilycoveSSTidalSelections));
+
+    if (mode == 0)
+    {
+        sLilycoveSSTidalSelections[count++] = SSTIDAL_SELECTION_SLATEPORT;
+        if (FlagGet(FLAG_BADGE06_GET) || FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL))
+            sLilycoveSSTidalSelections[count++] = SSTIDAL_SELECTION_BATTLE_FRONTIER;
+    }
+
+    for (u32 i = 0; i < ARRAY_COUNT(tickets); i++)
+    {
+        if (!FlagGet(tickets[i].enabledFlag))
+            continue;
+        // Current NPCs give physical tickets. Keep older registered passage
+        // usable too, including documents awaiting delivery from a Center.
+        if (!CheckBagHasItem(tickets[i].ticket, 1)
+            && !(tickets[i].earnedFlag && FlagGet(tickets[i].earnedFlag)))
+            continue;
+        if (mode == 0 || (mode == 1 && !FlagGet(tickets[i].shownFlag)))
+        {
+            sLilycoveSSTidalSelections[count++] = tickets[i].destination;
+            if (mode == 1)
+                FlagSet(tickets[i].shownFlag);
+        }
+    }
+    sLilycoveSSTidalSelections[count++] = SSTIDAL_SELECTION_EXIT;
+    return count;
+}
+
+#if TESTING
+u32 Test_BuildLilycoveSSTidalSelections(u8 *out)
+{
+    u32 count = BuildLilycoveSSTidalSelections();
+    memcpy(out, sLilycoveSSTidalSelections, sizeof(sLilycoveSSTidalSelections));
+    return count;
+}
+#endif
+
 static void CreateLilycoveSSTidalMultichoice(void)
 {
-    u8 selectionCount = 0;
-    u8 count;
+    u8 count = BuildLilycoveSSTidalSelections();
+    u8 selectionCount;
     u32 pixelWidth;
-    u8 width;
-    u8 windowId;
-    u8 i;
+    u8 width, windowId, i;
     u32 j;
 
-    for (i = 0; i < SSTIDAL_SELECTION_COUNT; i++)
-    {
-        sLilycoveSSTidalSelections[i] = 0xFF;
-    }
-
-    GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
-
-    if (gSpecialVar_0x8004 == 0)
-    {
-        sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SLATEPORT;
-        selectionCount++;
-
-        if ((FlagGet(FLAG_BADGE06_GET) || FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL)))
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BATTLE_FRONTIER;
-            selectionCount++;
-        }
-    }
-
-    if (FlagGet(FLAG_EC_EARNED_EON_TICKET) && FlagGet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND))
-    {
-        if (gSpecialVar_0x8004 == 0)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SOUTHERN_ISLAND;
-            selectionCount++;
-        }
-
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_EON_TICKET) == FALSE)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SOUTHERN_ISLAND;
-            selectionCount++;
-            FlagSet(FLAG_SHOWN_EON_TICKET);
-        }
-    }
-
-    if (CheckBagHasItem(ITEM_MYSTIC_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_NAVEL_ROCK) == TRUE)
-    {
-        if (gSpecialVar_0x8004 == 0)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_NAVEL_ROCK;
-            selectionCount++;
-        }
-
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_MYSTIC_TICKET) == FALSE)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_NAVEL_ROCK;
-            selectionCount++;
-            FlagSet(FLAG_SHOWN_MYSTIC_TICKET);
-        }
-    }
-
-    if (FlagGet(FLAG_EC_EARNED_AURORA_TICKET) && FlagGet(FLAG_ENABLE_SHIP_BIRTH_ISLAND))
-    {
-        if (gSpecialVar_0x8004 == 0)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BIRTH_ISLAND;
-            selectionCount++;
-        }
-
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_AURORA_TICKET) == FALSE)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BIRTH_ISLAND;
-            selectionCount++;
-            FlagSet(FLAG_SHOWN_AURORA_TICKET);
-        }
-    }
-
-    if (FlagGet(FLAG_EC_EARNED_OLD_SEA_MAP) && FlagGet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND))
-    {
-        if (gSpecialVar_0x8004 == 0)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
-            selectionCount++;
-        }
-
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_OLD_SEA_MAP) == FALSE)
-        {
-            sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
-            selectionCount++;
-            FlagSet(FLAG_SHOWN_OLD_SEA_MAP);
-        }
-    }
-
-    sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_EXIT;
-    selectionCount++;
-
-    if (gSpecialVar_0x8004 == 0 && (FlagGet(FLAG_BADGE06_GET) || FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL)))
-    {
-        count = selectionCount;
-    }
-
-    count = selectionCount;
     if (count == SSTIDAL_SELECTION_COUNT)
     {
         gSpecialVar_0x8004 = SCROLL_MULTI_SS_TIDAL_DESTINATION;
@@ -992,6 +951,8 @@ bool8 ScriptMenu_ShowPokemonPic(enum Species species, u8 x, u8 y)
     else
     {
         spriteId = CreateMonSprite_PicBox(species, x * 8 + 40, y * 8 + 40, 0);
+        if (spriteId == MAX_SPRITES)
+            return FALSE;
         taskId = CreateTask(Task_PokemonPicWindow, 0x50);
         gTasks[taskId].tWindowId = CreateWindowFromRect(x, y, 8, 8);
         gTasks[taskId].tState = 0;

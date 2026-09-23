@@ -82,11 +82,6 @@ BattleFrontier_ReceptionGate_Movement_PlayerFaceScott: @ 82662D7
 	step_end
 
 @ Unused
-BattleFrontier_ReceptionGate_Movement_WalkDown: @ 82662DD
-	walk_down
-	walk_down
-	step_end
-
 BattleFrontier_ReceptionGate_Movement_ScottEnter: @ 82662E0
 	walk_down
 	walk_down
@@ -143,7 +138,6 @@ BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout:: @ 8266320
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BF_RECEPTIONIST
 	special ShowScrollableMultichoice
-	waitstate
 	switch VAR_RESULT
 	case 0, BattleFrontier_ReceptionGate_EventScript_BattleTower
 	case 1, BattleFrontier_ReceptionGate_EventScript_BattleDome
@@ -353,40 +347,38 @@ BattleFrontier_ReceptionGate_Text_LearnAboutWhich2: @ 826689D
 BattleFrontier_ReceptionGate_Text_BattleTowerInfo: @ 82668C2
 	.string "It is the gigantic tower considered\n"
 	.string "to be the Battle Frontier's symbol.\p"
-	.string "There are four kinds of BATTLE ROOMS\n"
-	.string "in the tower for SINGLE, DOUBLE, MULTI,\l"
-	.string "and LINK Multi Battles.$"
+	.string "The tower hosts DOUBLE, MULTI, and\n"
+	.string "LINK MULTI BATTLE ROOMS.\p"
+	.string "Its SINGLE rooms are closed.$"
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo: @ 826696F
 	.string "The BATTLE DOME is the large building\n"
 	.string "shaped like a huge egg.\p"
 	.string "Events named Battle Tourneys are held\n"
 	.string "in this facility.\p"
-	.string "The Battle Tourneys are offered in\n"
-	.string "two courses--for SINGLE and DOUBLE\l"
-	.string "BATTLES.$"
+	.string "The Battle Tourneys are DOUBLE\n"
+	.string "BATTLES. Ask at the DOUBLE counter.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePalaceInfo: @ 8266A34
 	.string "The BATTLE PALACE is the red building\n"
 	.string "on the right of the Battle Frontier.\p"
-	.string "There are two kinds of BATTLE HALLS\n"
-	.string "for SINGLE and Double Battles.$"
+	.string "The DOUBLE BATTLE HALLS are open.\n"
+	.string "The SINGLE counter is closed.$"
 
 BattleFrontier_ReceptionGate_Text_BattleArenaInfo: @ 8266AC2
 	.string "The BATTLE ARENA is the dojo-like\n"
 	.string "building at the center-right of\l"
 	.string "the Battle Frontier.\p"
-	.string "An event called the Set KO Tourney\n"
-	.string "takes place at the BATTLE ARENA.$"
+	.string "The BATTLE ARENA isn't operating.\n"
+	.string "Try another DOUBLE facility.$"
 
 BattleFrontier_ReceptionGate_Text_BattleFactoryInfo: @ 8266B5D
 	.string "The BATTLE FACTORY is the large\n"
 	.string "building that is the closest to us.\p"
 	.string "An event called the Battle Swap\n"
 	.string "is conducted there.\p"
-	.string "The Battle Swap event is offered in\n"
-	.string "two courses for SINGLE and DOUBLE\l"
-	.string "BATTLES.$"
+	.string "The Battle Swap event now runs as\n"
+	.string "a DOUBLE BATTLE.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePikeInfo: @ 8266C24
 	.string "The BATTLE PIKE is the building shaped\n"
@@ -478,7 +470,7 @@ BattleFrontier_ReceptionGate_Text_LearnAboutWhich1: @ 826737C
 
 BattleFrontier_ReceptionGate_Text_SymbolsInfo: @ 82673A1
 	.string "There are seven facilities at\n"
-	.string "the Battle Frontier.\p"
+	.string "the Battle Frontier. Six are open.\p"
 	.string "Trainers who gain recognition for\n"
 	.string "their abilities may be rewarded with\l"
 	.string "symbols from each of the facilities.\p"
@@ -507,4 +499,3 @@ BattleFrontier_ReceptionGate_Text_BattlePointsInfo: @ 826761C
 	.string "You may trade in your Battle Points\n"
 	.string "for prizes at the EXCHANGE SERVICE\l"
 	.string "CORNER.$"
-

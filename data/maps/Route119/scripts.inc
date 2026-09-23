@@ -92,17 +92,17 @@ Route119_EventScript_BattleMay:: @ 81F450B
 	end
 
 Route119_EventScript_BattleMayTreecko:: @ 81F453A
-	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TREECKO, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TREECKO, Route119_Text_MayDefeat
 	goto Route119_EventScript_DefeatedMay
 	end
 
 Route119_EventScript_BattleMayTorchic:: @ 81F454A
-	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TORCHIC, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TORCHIC, Route119_Text_MayDefeat
 	goto Route119_EventScript_DefeatedMay
 	end
 
 Route119_EventScript_BattleMayMudkip:: @ 81F455A
-	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_MUDKIP, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_MUDKIP, Route119_Text_MayDefeat
 	goto Route119_EventScript_DefeatedMay
 	end
 
@@ -124,17 +124,17 @@ Route119_EventScript_BattleBrendan:: @ 81F4585
 	end
 
 Route119_EventScript_BattleBrendanTreecko:: @ 81F45B4
-	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_TREECKO, Route119_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_TREECKO, Route119_Text_BrendanDefeat
 	goto Route119_EventScript_DefeatedBrendan
 	end
 
 Route119_EventScript_BattleBrendanTorchic:: @ 81F45C4
-	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_TORCHIC, Route119_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_TORCHIC, Route119_Text_BrendanDefeat
 	goto Route119_EventScript_DefeatedBrendan
 	end
 
 Route119_EventScript_BattleBrendanMudkip:: @ 81F45D4
-	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_MUDKIP, Route119_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_MUDKIP, Route119_Text_BrendanDefeat
 	goto Route119_EventScript_DefeatedBrendan
 	end
 
@@ -342,11 +342,6 @@ Route119_EventScript_WeatherInstituteSign:: @ 81F477D
 	msgbox Route119_Text_WeatherInstitute, MSGBOX_SIGN
 	end
 
-Route119_EventScript_Brent:: @ 81F4786
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route119_EventScript_Donald:: @ 81F479D
 	trainerbattle_double TRAINER_DONALD, Route119_Text_DonaldIntro, Route119_Text_DonaldDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_DonaldPostBattle, MSGBOX_AUTOCLOSE
@@ -362,56 +357,14 @@ Route119_EventScript_Doug:: @ 81F47CB
 	msgbox Route119_Text_DougPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_EventScript_Greg:: @ 81F47E2
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_GregPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route119_EventScript_Kent:: @ 81F47F9
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_KentPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route119_EventScript_Jackson:: @ 81F4810
-	trainerbattle_double TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route119_EventScript_RegisterJackson
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route119_EventScript_RematchJackson
-	msgbox Route119_Text_JacksonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route119_EventScript_RegisterJackson:: @ 81F483C
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route119_Text_JacksonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route119_EventScript_RematchJackson:: @ 81F485B
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_JacksonPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route119_Text_JacksonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Catherine:: @ 81F4872
-	trainerbattle_double TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route119_EventScript_RegisterCatherine
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route119_EventScript_RematchCatherine
-	msgbox Route119_Text_CatherinePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route119_EventScript_RegisterCatherine:: @ 81F489E
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route119_Text_CatherinePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route119_EventScript_RematchCatherine:: @ 81F48BD
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_CatherinePostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route119_Text_CatherinePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Hugh:: @ 81F48D4
@@ -424,39 +377,14 @@ Route119_EventScript_Phil:: @ 81F48EB
 	msgbox Route119_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_EventScript_Yasu:: @ 81F4902
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route119_EventScript_Takashi:: @ 81F4919
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route119_EventScript_Hideo:: @ 81F4930
 	trainerbattle_double TRAINER_HIDEO, Route119_Text_HideoIntro, Route119_Text_HideoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_HideoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_EventScript_Chris:: @ 81F4947
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route119_EventScript_Fabian:: @ 81F495E
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_FabianPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route119_EventScript_Dayton:: @ 81F4975
 	@ This retired encounter has no campaign battle.
 	msgbox Route119_Text_DaytonPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route119_EventScript_Rachel:: @ 81F498C
-	@ This retired encounter has no campaign battle.
-	msgbox Route119_Text_RachelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_BridgeAquaGrunt1:: @ 81F49A3
@@ -563,7 +491,6 @@ Route119_Text_ScottWayToGoBeSeeingYou: @ 81F4E60
 	.string "I expect that you'll do well at the Gym.\n"
 	.string "Well, I'll be seeing you!$"
 
-
 Route119_Text_ScottYouWonAtFortreeGym: @ 81F4FBA
 	.string "… … … … … …\n"
 	.string "… … … … … Beep!\p"
@@ -593,8 +520,9 @@ Route119_Text_ThoughtFlyByCatchingBirdMons: @ 81F51A2
 	.string "I thought flying meant hanging\n"
 	.string "on to a whole flock of birds!\p"
 	.string "Your Flight Beacon sounds much\n"
-	.string "easier. It works once you earn\l"
-	.string "the Feather Badge.$"
+	.string "easier. It works once your rival\l"
+	.string "authorizes it and you earn the\l"
+	.string "Feather Badge.$"
 
 Route119_Text_TallGrassSnaresBikeTires: @ 81F5261
 	.string "Tch…\n"

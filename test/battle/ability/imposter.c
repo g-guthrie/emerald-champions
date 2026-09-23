@@ -46,23 +46,32 @@ AI_SINGLE_BATTLE_TEST("Imposter AI targets a foe with copied Spore instead of it
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("Billy's Imposter lead targets a vulnerable foe after copying its moves")
+AI_DOUBLE_BATTLE_TEST("Imposter doubles AI targets a vulnerable foe after copying its moves")
 {
+    u64 aiFlags;
+    bool32 transformed;
+    // Retain the original reduced-information reproduction alongside the
+    // current campaign profile. This isolates flags without changing teams.
+    for (u32 i = 0; i < 2; i++)
+    {
+        PARAMETRIZE { transformed = i; aiFlags = AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT
+            | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION
+            | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS
+            | AI_FLAG_KNOW_OPPONENT_PARTY; }
+        PARAMETRIZE { transformed = i; aiFlags = AI_FLAG_BASIC_TRAINER | AI_FLAG_HP_AWARE
+            | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_ASSUME_STAB | AI_FLAG_ASSUME_STATUS_MOVES; }
+    }
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
-        AI_FLAGS(AI_FLAG_BASIC_TRAINER
-               | AI_FLAG_HP_AWARE
-               | AI_FLAG_SMART_MON_CHOICES
-               | AI_FLAG_ASSUME_STAB
-               | AI_FLAG_ASSUME_STATUS_MOVES);
+        AI_FLAGS(aiFlags);
         PLAYER(SPECIES_AMOONGUSS) { Moves(MOVE_CELEBRATE); }
         // Opponent-left Imposter copies the diagonal player-right battler.
         PLAYER(SPECIES_SMEARGLE) { Moves(MOVE_CELEBRATE, MOVE_SPORE); }
-        OPPONENT(SPECIES_DITTO) {
-            Ability(ABILITY_IMPOSTER);
+        OPPONENT(transformed ? SPECIES_DITTO : SPECIES_SMEARGLE) {
+            Ability(transformed ? ABILITY_IMPOSTER : ABILITY_OWN_TEMPO);
             Item(ITEM_CHOICE_SCARF);
-            Moves(MOVE_TRANSFORM, MOVE_CELEBRATE);
+            Moves(transformed ? MOVE_TRANSFORM : MOVE_CELEBRATE, transformed ? MOVE_CELEBRATE : MOVE_SPORE);
         }
         OPPONENT(SPECIES_WIMPOD) {
             Ability(ABILITY_WIMP_OUT);

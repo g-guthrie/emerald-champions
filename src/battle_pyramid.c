@@ -31,6 +31,7 @@
 #include "wild_encounter.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_pyramid.h"
+#include "constants/characters.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/frontier_util.h"
@@ -1486,6 +1487,7 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
 
     // Set species, name
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES, &species);
+    memset(name, EOS, sizeof(name));
     StringCopy(name, GetSpeciesName(species));
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, &name);
 
@@ -1588,6 +1590,7 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
 
     id = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) - 1;
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES, &wildMons[id].species);
+    memset(name, EOS, sizeof(name));
     StringCopy(name, GetSpeciesName(wildMons[id].species));
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, &name);
     if (lvl != FRONTIER_LVL_50)

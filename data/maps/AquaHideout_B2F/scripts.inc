@@ -61,14 +61,6 @@ AquaHideout_B2F_Movement_SumbarineDepartLeft: @ 8233E80
 	walk_left
 	step_end
 
-@ Unused
-AquaHideout_B2F_Movement_SumbarineDepartRight: @ 8233E85
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	step_end
-
 AquaHideout_B2F_EventScript_Grunt4:: @ 8233E8A
 	trainerbattle_double TRAINER_GRUNT_AQUA_HIDEOUT_4, AquaHideout_B2F_Text_Grunt4Intro, AquaHideout_B2F_Text_Grunt4Defeat, EmeraldChampions_Text_NeedTwoPokemon, AquaHideout_B2F_EventScript_Grunt4Defeated
 	msgbox AquaHideout_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE

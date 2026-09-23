@@ -48,7 +48,6 @@ BerryTree_EventScript_ChooseBerryToPlant:: @ 8274393
 	fadescreen FADE_TO_BLACK
 	closemessage
 	special Bag_ChooseBerry
-	waitstate
 	compare VAR_ITEM_ID, 0
 	goto_if_eq BerryTree_EventScript_CancelPlanting
 	removeitem VAR_ITEM_ID
@@ -91,12 +90,6 @@ BerryTree_EventScript_CheckBerryStage4:: @ 82743E1
 	waitbuttonpress
 	goto BerryTree_EventScript_WantToWater
 
-BerryTree_EventScript_End::
-	releaseall
-	end
-
-@ VAR_0x8005 here is the number of times watered
-@ Buffered by ObjectEventInteractionGetBerryTreeData
 BerryTree_EventScript_GetCareAdverb:: @ 82743F6
 	compare VAR_0x8005, 0
 	goto_if_eq BerryTree_EventScript_SetAdverbPoor
@@ -129,6 +122,9 @@ BerryTree_EventScript_PickBerry:: @ 8274448
 	special ObjectEventInteractionPickBerryTree
 	compare VAR_0x8004, 0
 	goto_if_eq BerryTree_EventScript_BerryPocketFull
+	compare VAR_0x8004, 2
+	goto_if_eq BerryTree_EventScript_BerryPocketFull
+BerryTree_EventScript_HarvestSucceeded::
 	special IncrementDailyPickedBerries
 	special ObjectEventInteractionRemoveBerryTree
 	message BerryTree_Text_PickedTheBerry
@@ -187,7 +183,6 @@ BerryTree_EventScript_WaterBerry:: @ 82744C4
 	waitmessage
 	special ObjectEventInteractionWaterBerryTree
 	special DoWateringBerryTreeAnim
-	waitstate
 	message BerryTree_Text_PlantIsDelighted
 	waitmessage
 	waitbuttonpress
@@ -243,7 +238,8 @@ BerryTree_Text_WantToPick: @ 82745EE
 	.string "{STR_VAR_1}?$"
 
 BerryTree_Text_PickedTheBerry: @ 827461B
-	.string "{PLAYER} picked the {STR_VAR_2} {STR_VAR_1}.$"
+	.string "{PLAYER} picked the\n"
+	.string "{STR_VAR_2} {STR_VAR_1}.$"
 
 BerryTree_Text_PutAwayBerry: @ 8274630
 	.string "{PLAYER} put away the {STR_VAR_1}\n"
@@ -271,4 +267,3 @@ BerryTree_Text_PlantIsDelighted: @ 8274723
 
 BerryTree_Text_ExclamationPoint: @ 8274744
 	.string "!$"
-

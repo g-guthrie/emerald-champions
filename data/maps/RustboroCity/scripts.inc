@@ -15,11 +15,17 @@ RustboroCity_OnTransition: @ 81E06C8
 	setflag FLAG_VISITED_RUSTBORO_CITY
 	call Common_EventScript_SetupRivalGfxId
 	compare VAR_RUSTBORO_CITY_STATE, 7
+	call_if_lt RustboroCity_EventScript_HideEarlyRoxanne
+	compare VAR_RUSTBORO_CITY_STATE, 7
 	call_if_eq RustboroCity_EventScript_HideMapNamePopup
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_RUSTBORO_CITY_STATE, 7
 	goto_if_eq RustboroCity_EventScript_PositionScientistForExit
 	end
+
+RustboroCity_EventScript_HideEarlyRoxanne::
+	setflag FLAG_HIDE_RUSTBORO_ROXANNE
+	return
 
 RustboroCity_EventScript_PositionScientistForExit:: @ 81E06EC
 	compare VAR_TEMP_0, 11
@@ -76,27 +82,11 @@ RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	msgbox RustboroCity_Text_AddedMatchCallPleaseCallMrStone, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	goto RustboroCity_EventScript_MatchCallTutorial
+	goto RustboroCity_EventScript_MapTutorial
 
-RustboroCity_EventScript_PleaseSelectPokenav:: @ 81E07AC
-	msgbox RustboroCity_Text_PleaseSelectPokenav, MSGBOX_DEFAULT
-	closemessage
-	delay 10
-	goto RustboroCity_EventScript_MatchCallTutorial
-
-RustboroCity_EventScript_MatchCallTutorial:: @ 81E07BD
+RustboroCity_EventScript_MapTutorial::
+	@ Retained for story-call and scene progression compatibility.
 	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	special ScriptMenu_CreateStartMenuForPokenavTutorial
-	waitstate
-	switch VAR_RESULT
-	case 0, RustboroCity_EventScript_PleaseSelectPokenav
-	case 1, RustboroCity_EventScript_PleaseSelectPokenav
-	case 2, RustboroCity_EventScript_PleaseSelectPokenav
-	case 4, RustboroCity_EventScript_PleaseSelectPokenav
-	case 5, RustboroCity_EventScript_PleaseSelectPokenav
-	case 6, RustboroCity_EventScript_PleaseSelectPokenav
-	case 7, RustboroCity_EventScript_PleaseSelectPokenav
-	case MULTI_B_PRESSED, RustboroCity_EventScript_PleaseSelectPokenav
 	special OpenPokenavForTutorial
 	waitstate
 	delay 20
@@ -126,16 +116,6 @@ RustboroCity_Movement_ScientistApproachPlayer: @ 81E0852
 	step_end
 
 @ Unused
-RustboroCity_Movement_ScientistWalkAroundPlayer: @ 81E0855
-	delay_16
-	walk_left
-	walk_down
-	walk_down
-	walk_right
-	walk_in_place_fast_up
-	delay_16
-	step_end
-
 RustboroCity_Movement_ScientistLeave: @ 81E085D
 	walk_up
 	step_end
@@ -211,10 +191,6 @@ RustboroCity_EventScript_GymSign:: @ 81E08F5
 	end
 
 @ Unused
-RustboroCity_EventScript_DevonCorpBranchOfficeSign:: @ 81E08FE
-	msgbox RustboroCity_Text_DevonCorpBranchOfficeSign, MSGBOX_SIGN
-	end
-
 RustboroCity_EventScript_CitySign:: @ 81E0907
 	msgbox RustboroCity_Text_CitySign, MSGBOX_SIGN
 	end
@@ -324,68 +300,6 @@ RustboroCity_EventScript_StolenGoodsScene:: @ 81E09CD
 	end
 
 @ Unused
-RustboroCity_EventScript_ShadyCharacterTookOff:: @ 81E0A3B
-	msgbox RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel, MSGBOX_DEFAULT
-	return
-
-@ Unused
-RustboroCity_EventScript_YouGotItThankYou:: @ 81E0A44
-	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
-	return
-
-@ Unknown, unused employee movements. Based on the differences in movement theyre for approaching an object (probably the player) in different positions
-RustboroCity_EventScript_EmployeeApproachUp:: @ 81E0A4D
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachUp
-	waitmovement 0
-	return
-
-@ Unused, see above
-RustboroCity_EventScript_EmployeeApproachLeft:: @ 81E0A58
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachLeft
-	waitmovement 0
-	return
-
-@ Unused, see above
-RustboroCity_EventScript_EmployeeApproachRight:: @ 81E0A63
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachRight
-	waitmovement 0
-	return
-
-@ Unused, see above
-RustboroCity_EventScript_EmployeeApproachDown:: @ 81E0A6E
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachDown
-	waitmovement 0
-	return
-
-@ Unused, similar movement to the above scripts
-RustboroCity_EventScript_EmployeeApproachPlayerFar:: @ 81E0A79
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerFar
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
-	waitmovement 0
-	return
-
-@ Unused
-RustboroCity_Movement_GruntEscapeExtended: @ 81E0A8E
-	walk_faster_right
-	walk_faster_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	step_end
-
 RustboroCity_Movement_GruntEscape: @ 81E0AA0
 	walk_faster_right
 	walk_faster_right
@@ -426,48 +340,6 @@ RustboroCity_Movement_EmployeeChaseGrunt2: @ 81E0AB9
 	step_end
 
 @ Functionally unused
-RustboroCity_Movement_EmployeeApproachUp: @ 81E0AC1
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachLeft: @ 81E0AC5
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachRight: @ 81E0ACA
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachDown: @ 81E0ACF
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachPlayerFar: @ 81E0AD5
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_fast_down
-	step_end
-
 RustboroCity_EventScript_DevonEmployee1:: @ 81E0ADD
 	lock
 	faceplayer
@@ -615,7 +487,7 @@ RustboroCity_EventScript_ReturnGoods:: @ 81E0C5B
 	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
 	giveitem ITEM_DREAM_BALL, 2
 	compare VAR_RESULT, FALSE
-	call_if_eq RustboroCity_EventScript_BagFull
+	goto_if_eq RustboroCity_EventScript_BagFull
 	msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
@@ -629,7 +501,8 @@ RustboroCity_EventScript_ReturnGoods:: @ 81E0C5B
 
 RustboroCity_EventScript_BagFull:: @ 81E0CD3
 	msgbox RustboroCity_Text_YoureLoadedWithItems, MSGBOX_DEFAULT
-	return
+	releaseall
+	end
 
 RustboroCity_EventScript_EmployeeFacePlayerUp2:: @ 81E0CDC
 	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFastestUp
@@ -682,7 +555,7 @@ RustboroCity_EventScript_EmployeeApproachPlayerDown2:: @ 81E0D60
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerRight:: @ 81E0D96
-	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
@@ -856,16 +729,9 @@ RustboroCity_EventScript_MayEncounter:: @ 81E100B
 	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_MayHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredMay, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 10
 	setvar VAR_ROUTE104_STATE, 2
-	setvar VAR_0x8008, 0
 	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq RustboroCity_EventScript_BattleMay
@@ -875,7 +741,6 @@ RustboroCity_EventScript_MayEncounter:: @ 81E100B
 	end
 
 RustboroCity_EventScript_MayAskToBattle:: @ 81E1070
-	setvar VAR_0x8008, 1
 	msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq RustboroCity_EventScript_BattleMay
@@ -895,10 +760,7 @@ RustboroCity_EventScript_BattleMay:: @ 81E1092
 
 RustboroCity_EventScript_MayBrineyHint:: @ 81E10C1
 	msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
-	compare VAR_0x8008, 0
-	call_if_eq RustboroCity_EventScript_RestoreBgm
-	releaseall
-	end
+	goto RustboroCity_EventScript_EndRivalConversation
 
 RustboroCity_EventScript_RestoreBgm:: @ 81E10D6
 	savebgm MUS_DUMMY
@@ -906,19 +768,19 @@ RustboroCity_EventScript_RestoreBgm:: @ 81E10D6
 	return
 
 RustboroCity_EventScript_BattleMayTreecko:: @ 81E10DB
-	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TREECKO, RustboroCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TREECKO, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayTorchic:: @ 81E10EE
-	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TORCHIC, RustboroCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TORCHIC, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayMudkip:: @ 81E1101
-	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_MUDKIP, RustboroCity_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_MUDKIP, RustboroCity_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
@@ -929,12 +791,6 @@ RustboroCity_EventScript_BrendanEncounter:: @ 81E1114
 	setflag FLAG_MET_RIVAL_RUSTBORO
 	msgbox RustboroCity_Text_BrendanHiLetsRegister, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredBrendan, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 10
 	setvar VAR_ROUTE104_STATE, 2
@@ -966,25 +822,25 @@ RustboroCity_EventScript_BattleBrendan:: @ 81E1191
 
 RustboroCity_EventScript_BrendanBrineyHint:: @ 81E11C0
 	msgbox RustboroCity_Text_BrendanMrBrineyHint, MSGBOX_DEFAULT
-	compare VAR_0x8008, 0
-	call_if_eq RustboroCity_EventScript_RestoreBgm
+RustboroCity_EventScript_EndRivalConversation::
+	call RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 
 RustboroCity_EventScript_BattleBrendanTreecko:: @ 81E11D5
-	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanTorchic:: @ 81E11E8
-	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
@@ -1005,24 +861,17 @@ RustboroCity_EventScript_PokecallMoveRoxanne::
 	msgbox RustboroCity_Text_RoxanneOhHello, MSGBOX_DEFAULT
 	closemessage
 	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredAnorith, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	msgbox RustboroCity_Movement_RoxanneOneMoreThing, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox RustboroCity_Text_RegisteredRoxanne, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	msgbox RustboroCity_Text_RoxanneBye, MSGBOX_AUTOCLOSE
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROXANNE
 	fadescreen FADE_FROM_BLACK
+	@ Only advance from the PokéNav scene; a later chat must not re-arm the
+	@ rival triggers after Route 104 has moved the story on.
+	goto_if_ne VAR_RUSTBORO_CITY_STATE, 8, RustboroCity_EventScript_RoxanneDone
 	setvar VAR_RUSTBORO_CITY_STATE, 9
+RustboroCity_EventScript_RoxanneDone:
 	releaseall
 	end
 
@@ -1088,37 +937,17 @@ RustboroCity_EventScript_Boy1:: @ 81E1236
 
 RustboroCity_Text_RoxanneOhHello:
 	.string "Roxanne: Oh, hello, {PLAYER}.\p"
-	.string "I see you've got a PokéNav! Did you\n"
-	.string "know about its PokéCall function?\p"
-	.string "Let me explain: you can register\n"
-	.string "Pokémon as well as people.\p"
-	.string "When you're out in the field, you'll\n"
-	.string "be able to call registered Pokémon\l"
-	.string "to help you get through obstacles, like\l"
-	.string "the small trees in Petalburg Woods.\p"
-	.string "Here, I'll register my Anorith for\n"
-	.string "you.\p"
-	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
+	.string "Your Stone Badge lets you use Cut\n"
+	.string "once you have its field license.\p"
+	.string "The man in Cutter's house here in\n"
+	.string "Rustboro can give you that license.$"
 
 RustboroCity_Movement_RoxanneOneMoreThing:
-	.string "Use it in the same way you'd use Cut.\p"
-	.string "One more thing: I'd rather not think\n"
-	.string "that I can't beat you.\p"
-	.string "I promise, I will shape up my Gym\n"
-	.string "so that you may challenge us again.\p"
-	.string "I hope you'll be looking forward to\n"
-	.string "that occasion as much as me!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … Click!$"
-
-RustboroCity_Text_RegisteredAnorith:
-	.string "Registered Roxanne's Anorith\n"
-	.string "in the PokéNav.$"
-
-RustboroCity_Text_RegisteredRoxanne:
-	.string "Registered Gym Leader Roxanne\n"
-	.string "in the PokéNav.$"
+	.string "Then face a thin tree and press A.\p"
+	.string "Bring a Pokémon able to learn\n"
+	.string "Cut; it needn't know the move!\p"
+	.string "Keep studying your partners and\n"
+	.string "their strengths as you travel.$"
 
 RustboroCity_Text_RoxanneBye:
 	.string "Good luck in your next Gym Battle,\n"
@@ -1238,22 +1067,15 @@ RustboroCity_Text_PleaseComeWithMe: @ 81E1A21
 	.string "Devon Corp. worked with a scientist\n"
 	.string "from the Unova Region to develop\l"
 	.string "those modified Dream Balls.\p"
-	.string "Any Pokémon captured in one will\n"
-	.string "receive its Hidden Ability!\p"
+	.string "They work best on Pokémon\n"
+	.string "that are asleep!\p"
 	.string "Excuse me, please!\n"
 	.string "Please come with me!$"
 
 RustboroCity_Text_MayHiLetsRegister: @ 81E1A49
 	.string "May: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "You had a Match Call feature put\n"
-	.string "on your PokéNav!\p"
-	.string "Let's register each other so we can\n"
-	.string "contact one another anytime!\p"
-	.string "… … … … … …$"
-
-RustboroCity_Text_RegisteredMay: @ 81E1ADB
-	.string "Registered May\n"
-	.string "in the PokéNav.$"
+	.string "That PokéNav has a map of Hoenn.\n"
+	.string "It should help you find your way!$"
 
 RustboroCity_Text_MayPassedBrineyWantToBattle: @ 81E1AFA
 	.string "May: Oh, by the way, I passed\n"
@@ -1292,15 +1114,8 @@ RustboroCity_Text_MayMrBrineyHint: @ 81E1CE7
 
 RustboroCity_Text_BrendanHiLetsRegister: @ 81E1D7D
 	.string "Brendan: Oh, hey, {PLAYER}!\p"
-	.string "You had a Match Call feature put\n"
-	.string "on your PokéNav! Cool!\p"
-	.string "Let's register each other so we can\n"
-	.string "get in touch anytime!\p"
-	.string "… … … … … …$"
-
-RustboroCity_Text_RegisteredBrendan: @ 81E1E11
-	.string "Registered Brendan\n"
-	.string "in the PokéNav.$"
+	.string "That PokéNav has a map of Hoenn.\n"
+	.string "Handy for exploring new places!$"
 
 RustboroCity_Text_BrendanPassedBrineyWantToBattle: @ 81E1E34
 	.string "Brendan: By the way, {PLAYER}, I walked\n"
@@ -1353,11 +1168,6 @@ RustboroCity_Text_GymSign: @ 81E2167
 	.string "Leader: Roxanne\p"
 	.string "“The ROCK-loving honors student!”$"
 
-RustboroCity_Text_DevonCorpBranchOfficeSign: @ 81E21B3
-	.string "Devon Corp. Branch Office\p"
-	.string "“Access limited to Devon employees\n"
-	.string "and authorized personnel.”$"
-
 RustboroCity_Text_CitySign: @ 81E220B
 	.string "Rustboro City\p"
 	.string "“The city probing the integration of\n"
@@ -1371,27 +1181,15 @@ RustboroCity_Text_TrainersSchoolSign: @ 81E2253
 RustboroCity_Text_CuttersHouse: @ 81E2296
 	.string "Cutter's House$"
 
-RustboroCity_Text_DevelopedNewPokenavFeature: @ 81E22A5
-	.string "I've been developing an added feature\n"
-	.string "for the PokéNav…\p"
-	.string "And it turned out great!\p"
-	.string "{PLAYER}, may I see that PokéNav?\n"
-	.string "The one our President gave you?$"
+RustboroCity_Text_DevelopedNewPokenavFeature:
+	.string "Before you set off, let me show you\n"
+	.string "the map on your new PokéNav.$"
 
-RustboroCity_Text_AddedMatchCallPleaseCallMrStone: @ 81E2331
-	.string "There you go, {PLAYER}!\p"
-	.string "I added a new feature named\n"
-	.string "Match Call to your PokéNav.\p"
-	.string "Using the Match Call feature,\n"
-	.string "you can chat with people who have\l"
-	.string "been registered in your PokéNav.\p"
-	.string "{PLAYER}, our President Stone should\n"
-	.string "be registered in your PokéNav.\p"
-	.string "Test it out.\n"
-	.string "Please give our President a call.$"
-
-RustboroCity_Text_PleaseSelectPokenav: @ 81E2449
-	.string "Please select the PokéNav.$"
+RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
+	.string "The Hoenn Map shows where you are\n"
+	.string "and the places you can explore.\p"
+	.string "Use A to zoom in and B to go back.\n"
+	.string "Close the PokéNav when you're done.$"
 
 RustboroCity_Text_IdBetterGetBackToWork: @ 81E2464
 	.string "Okay, I'd better get back to work.\n"
@@ -1399,10 +1197,9 @@ RustboroCity_Text_IdBetterGetBackToWork: @ 81E2464
 
 RustboroCity_Text_YouCanHave2On2Battle: @ 81E249D
 	.string "Did you know this?\p"
-	.string "You can have a 2-on-2 battle even\n"
-	.string "if you're not with another Trainer.\p"
-	.string "If you catch the eyes of two Trainers\n"
-	.string "when you have two or more Pokémon,\l"
-	.string "they'll both challenge you.\p"
-	.string "Don't you think it'd be cool if you\n"
-	.string "could beat two Trainers by yourself?$"
+	.string "Every Trainer battle here is a\n"
+	.string "Double Battle, two against two.\p"
+	.string "If only one of your Pokémon can\n"
+	.string "fight, it takes on both foes alone!\p"
+	.string "Don't you think it'd be cool to\n"
+	.string "win a battle like that?$"

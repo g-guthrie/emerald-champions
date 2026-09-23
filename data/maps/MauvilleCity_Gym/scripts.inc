@@ -74,13 +74,6 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 	end
 
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, MauvilleCity_Gym_EventScript_WattsonRematch
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
 	compare VAR_NEW_MAUVILLE_STATE, 6
@@ -134,55 +127,6 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
 MauvilleCity_Gym_EventScript_CompletedNewMauville:: @ 820DFD4
 	msgbox MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor, MSGBOX_DEFAULT
 	release
-	end
-
-MauvilleCity_Gym_EventScript_WattsonRematch::
-	message MauvilleCity_Gym_Text_WattsonChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, MauvilleCity_Gym_EventScript_SetSingles
-	case 1, MauvilleCity_Gym_EventScript_SetDoubles
-	case 2, MauvilleCity_Gym_EventScript_Exit
-	case 127, MauvilleCity_Gym_EventScript_Exit
-	releaseall
-	end
-
-MauvilleCity_Gym_EventScript_SetSingles::
-	msgbox MauvilleCity_Gym_Text_WattsonAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WATTSON
-	releaseall
-	end
-
-MauvilleCity_Gym_EventScript_SetDoubles::
-	msgbox MauvilleCity_Gym_Text_WattsonAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WATTSON
-	releaseall
-	end
-
-MauvilleCity_Gym_EventScript_WattsonSinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WATTSON
-	releaseall
-	end
-
-MauvilleCity_Gym_EventScript_WattsonDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WATTSON
-	releaseall
-	end
-
-MauvilleCity_Gym_EventScript_AlreadyRematched::
-	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-MauvilleCity_Gym_EventScript_Exit::
-	releaseall
 	end
 
 MauvilleCity_Gym_EventScript_Switch1:: @ 820DFF9
@@ -281,6 +225,8 @@ MauvilleCity_Gym_EventScript_GymGuide::
 	goto_if_set FLAG_MAUVILLE_GYM_MOOMOOMILK, MauvilleCity_GymGuide_2
 	msgbox MauvilleCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	giveitem ITEM_MOOMOO_MILK, 12
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_MAUVILLE_GYM_MOOMOOMILK
 	msgbox MauvilleCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -321,7 +267,7 @@ MauvilleCity_Gym_EventScript_GymStatue:: @ 820E175
 MauvilleCity_Gym_Text_GymGuideAdvice2:
 	.string "Wattson, the Leader of Mauville\n"
 	.string "Gym, uses Electric-type Pokémon.\p"
-	.string "He's prepared for Ground and Grass-Type\n"
+	.string "He's prepared for Ground and Grass-type\n"
 	.string "Pokémon, so you should have a backup\l"
 	.string "plan if you want to beat him!\p"
 	.string "And, he's put in switch-controlled\n"
@@ -423,12 +369,13 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge: @ 820E77F
 	.string "from Wattson.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis: @ 820E7AA
-	.string "With the Dynamo Badge, Pokémon can\n"
-	.string "use Rock Smash out of battle.\p"
-	.string "And, I'll register my Raichu in your\n"
-	.string "PokéNav. It'll help you by smashing\l"
-	.string "any rocks in your way.\p"
-	.string "… … … … … …$"
+	.string "With the Dynamo Badge and a Rock\n"
+	.string "Smash license, you can clear rocks!\p"
+	.string "Visit the Rock Smash Dude here in\n"
+	.string "Mauville if you need the license.\p"
+	.string "Then press A by a cracked rock.\n"
+	.string "Bring a Pokémon that could learn\l"
+	.string "Rock Smash; no moveslot needed!$"
 
 MauvilleCity_Gym_Text_ExplainTakeThis:
 	.string "Hmm…\n"
@@ -436,17 +383,9 @@ MauvilleCity_Gym_Text_ExplainTakeThis:
 
 MauvilleCity_Gym_Text_ExplainVoltSwitch: @ 820E844
 	.string "Raichunite X! A Raichu holding\n"
-	.string "it can Mega Evolve with your\l"
-	.string "Mega Ring.\p"
+	.string "it can Mega Evolve once you have\l"
+	.string "a Mega Ring.\p"
 	.string "Put that spark to good use!$"
-
-MauvilleCity_Gym_Text_RegisteredWattson: @ 820E8B5
-	.string "Registered Gym Leader Wattson\n"
-	.string "in the PokéNav.$"
-
-MauvilleCity_Gym_Text_RegisteredRaichu: @ 820E8B5
-	.string "Registered Wattson's Raichu\n"
-	.string "in the PokéNav.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle: @ 820E8E3
 	.string "I swell with optimism, seeing a promising\n"
@@ -463,38 +402,3 @@ MauvilleCity_Gym_Text_GymStatueCertified: @ 820E96C
 	.string "Mauville City Pokémon Gym\p"
 	.string "Wattson's Certified Trainers:\n"
 	.string "{PLAYER}$"
-
-MauvilleCity_Gym_Text_WattsonPreRematch: @ 820E9A7
-	.string "I'll make sparks fly from you!\n"
-	.string "Don't say I didn't warn you!$"
-
-MauvilleCity_Gym_Text_WattsonRematchDefeat: @ 820EA42
-	.string "Oof…\n"
-	.string "Our batteries ran dry…$"
-
-MauvilleCity_Gym_Text_WattsonPostRematch: @ 820EA5E
-	.string "Wattson: We'll have to recharge our\n"
-	.string "batteries again.\p"
-	.string "When we're fully charged up, we'll\n"
-	.string "gladly accept your challenge.\p"
-	.string "So, come back again sometime,\n"
-	.string "won't you?$"
-
-MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons: @ 820EAFD
-	.string "Wattson: Oops! Wait!\n"
-	.string "You've only one Pokémon with you!\p"
-	.string "Come see me with two or more\n"
-	.string "Pokémon, all right?$"
-
-MauvilleCity_Gym_Text_WattsonChooseFormat:
-	.string "Wattson: Ah-ha! Here at last!\n"
-	.string "I know what you want.\l"
-	.string "You want to battle my Pokémon!\p"
-	.string "Wahahahaha!\p"
-	.string "I'll let you decide the rules -\n"
-	.string "Singles or Doubles?$"
-
-MauvilleCity_Gym_Text_WattsonAllowLegends:
-	.string "Think you can handle my Legendary\n"
-	.string "Pokémon?\p"
-	.string "They're shockingly strong!$"

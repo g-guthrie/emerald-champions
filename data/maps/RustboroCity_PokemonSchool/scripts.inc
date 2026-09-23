@@ -211,11 +211,9 @@ RustboroCity_PokemonSchool_Text_ReadWhichTopic: @ 82140F9
 
 RustboroCity_PokemonSchool_Text_ExplainPoison: @ 821411A
 	.string "If a Pokémon is poisoned, it will\n"
-	.string "steadily lose HP.\p"
+	.string "steadily lose HP during battle.\p"
 	.string "The effects of poison remain after\n"
-	.string "a battle.\p"
-	.string "A poisoned Pokémon's HP will drop\n"
-	.string "while it is traveling.\p"
+	.string "a battle, but traveling is safe.\p"
 	.string "Heal a poisoning using an Antidote.$"
 
 RustboroCity_PokemonSchool_Text_ExplainParalysis: @ 82141D8
@@ -224,7 +222,7 @@ RustboroCity_PokemonSchool_Text_ExplainParalysis: @ 82141D8
 	.string "It may also not be able to move while\n"
 	.string "it is in battle.\p"
 	.string "Paralysis remains after battle.\n"
-	.string "Cure it using a Parlyz Heal.$"
+	.string "Cure it using a Paralyze Heal.$"
 
 RustboroCity_PokemonSchool_Text_ExplainSleep: @ 821427D
 	.string "If a Pokémon falls asleep, it will be\n"
@@ -302,13 +300,13 @@ RustboroCity_PokemonSchool_Text_StudentsNotes: @ 82147A2
 	.string "with them.\p"
 	.string "A Trainer's mission is to defeat\n"
 	.string "the strong Trainers who await\l"
-	.string "challengers in Pokémon GymS.$"
+	.string "challengers in Pokémon Gyms.$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut: @ 82148C0
 	.string "Hello? Didn't we meet before?\n"
 	.string "I think back in Petalburg City.\p"
 	.string "Let me introduce myself.\n"
-	.string "My name's SCOTT.\p"
+	.string "My name's Scott.\p"
 	.string "I've been traveling everywhere in\n"
 	.string "search of outstanding Trainers.\p"
 	.string "More specifically, I'm looking for\n"
@@ -319,7 +317,8 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut: @ 82148C0
 	.string "the Pokémon Center. Ask him for\l"
 	.string "a Cut license.\p"
 	.string "With the Stone Badge, you can\n"
-	.string "clear thin trees with any team.\l"
+	.string "clear thin trees if a teammate\l"
+	.string "could learn Cut.\p"
 	.string "Just approach one and press A!$"
 
 RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown: @ 8214A5F
@@ -353,4 +352,3 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge: @ 8214B8A
 	.string "you in battle.\p"
 	.string "It's hard to tell what you're like as\n"
 	.string "a Trainer from a League Badge.$"
-

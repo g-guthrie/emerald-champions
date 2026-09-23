@@ -78,6 +78,7 @@ Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl:: @ 822A40C
 Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail:: @ 822A421
 	msgbox Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_WAILMER_PAIL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
@@ -91,27 +92,12 @@ Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl:: @ 822A442
 	msgbox Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers, MSGBOX_DEFAULT
 	random 8
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem VAR_RESULT
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem ITEM_POMEG_BERRY
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem ITEM_KELPSY_BERRY
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem ITEM_QUALOT_BERRY
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem ITEM_HONDEW_BERRY
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem ITEM_GREPA_BERRY
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem ITEM_TAMATO_BERRY
-	compare VAR_RESULT, 0
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	copyvar VAR_0x8004, VAR_RESULT
+	special GiveFlowerShopBerryBundle
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox Route104_PrettyPetalFlowerShop_Text_ReceivedBerryBundle, MSGBOX_DEFAULT
+	waitfanfare
 	setflag FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release
@@ -121,3 +107,6 @@ Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry:: @ 822A482
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release
 	end
+
+Route104_PrettyPetalFlowerShop_Text_ReceivedBerryBundle:
+	.string "{PLAYER} received seven Berries!$"

@@ -150,26 +150,22 @@ MossdeepCity_StevensHouse_EventScript_Letter:: @ 822291B
 	end
 
 @ Unused, leftover from RS
-MossdeepCity_StevensHouse_EventScript_DiveItemBall:: @ 8222926
-	finditem ITEM_RARE_CANDY
-	setflag FLAG_RECEIVED_HM08
-	end
-
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive: @ 8222936
 	.string "Steven: Thank you for\n"
 	.string "everything.\p"
 	.string "I authorize you to use Dive.\n"
 	.string "With the Mind Badge, press A\l"
 	.string "over dark patches of water.\p"
-	.string "No special Pokémon is needed.$"
+	.string "Bring a Pokémon able to learn\n"
+	.string "Dive; it needn't know it.$"
 
 MossdeepCity_StevensHouse_Text_ExplainDive: @ 8222A0E
 	.string "Steven: While you're using Surf, you\n"
 	.string "should notice dark patches of water.\p"
 	.string "Use Dive if you come to deep water\n"
 	.string "like it. You'll drop to the seafloor.\p"
-	.string "When you want to come back up, use\n"
-	.string "Dive again.\p"
+	.string "Press B underwater when you want\n"
+	.string "to come back up.\p"
 	.string "In some places, it won't be possible\n"
 	.string "for you to surface, though.$"
 
@@ -190,9 +186,6 @@ MossdeepCity_StevensHouse_Text_ObtainedMeltan: @ 8222BED
 	.string "{PLAYER} obtained a Meltan.$"
 
 @ Unused
-MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon: @ 8222C03
-	.string "There is no space for another Pokémon.$"
-
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas: @ 8222C2A
 	.string "{PLAYER} left the Poké Ball where\n"
 	.string "it was.$"
@@ -217,4 +210,3 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven: @ 8222C4E
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks: @ 8222D97
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by Steven.$"
-

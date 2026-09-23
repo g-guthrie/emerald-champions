@@ -97,22 +97,26 @@ BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge:: @ 8255DBF
 
 BattleFrontier_BattleArenaLobby_EventScript_ResumeChallenge:: @ 8255DC0
 	lockall
-	message BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame
-	waitmessage
-	arena_save CHALLENGE_STATUS_SAVING
-	playse SE_SAVE
-	waitse
+	msgbox BattleFrontier_BattleArenaLobby_Text_Closed, MSGBOX_DEFAULT
+	special LoadPlayerParty
+	special HealPlayerParty
+	arena_set ARENA_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
+	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_0, 255
-	goto BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge
+	releaseall
+	end
 
 BattleFrontier_BattleArenaLobby_EventScript_Attendant:: @ 8255DF4
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	special SavePlayerParty
-	msgbox BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleArenaLobby_Text_Closed, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleArenaLobby_Text_Closed:
+	.string "The ARENA isn't operating.\n"
+	.string "Try the DOUBLE facilities.$"
 BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge:: @ 8255E0B
 	message BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge
 	waitmessage
@@ -140,7 +144,6 @@ BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge:: @ 8255E47
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattleArenaLobby_Text_OkayToSave, MSGBOX_YESNO
@@ -318,8 +321,8 @@ BattleFrontier_BattleArenaLobby_EventScript_Woman:: @ 82560C1
 
 BattleFrontier_BattleArenaLobby_EventScript_RulesBoard:: @ 82560CA
 	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleArenaLobby_Text_Closed, MSGBOX_DEFAULT
+	releaseall
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard:: @ 82560D9
@@ -358,12 +361,6 @@ BattleFrontier_BattleArenaLobby_EventScript_BodyRules:: @ 8256156
 BattleFrontier_BattleArenaLobby_EventScript_ExitRules:: @ 8256164
 	releaseall
 	end
-
-BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena: @ 8256166
-	.string "Where the battling spirit of Trainers\n"
-	.string "is put to the test!\p"
-	.string "I welcome you to the BATTLE ARENA!\p"
-	.string "I am your guide to the Set KO Tourney!$"
 
 BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge: @ 82561EA
 	.string "Now, do you wish to take\n"
@@ -415,7 +412,7 @@ BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen: @ 82565A5
 	.string "different kinds of Pokémon.\p"
 	.string "They also must not hold the same\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "When you have made your preparations,\n"
 	.string "please do return.$"
 
@@ -429,7 +426,7 @@ BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50: @ 82566A8
 	.string "must all be Level 50 or lower.\p"
 	.string "They also must not hold the same\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "When you have made your preparations,\n"
 	.string "please do return.$"
 
@@ -456,22 +453,6 @@ BattleFrontier_BattleArenaLobby_Text_RecordAchievement: @ 8256931
 	.string "Please wait while I save the game.$"
 
 @ Unused
-BattleFrontier_BattleArenaLobby_Text_PresentYouWithPrize: @ 8256977
-	.string "In commemoration of your 7-win streak,\n"
-	.string "we present you with this prize.$"
-
-@ Unused
-BattleFrontier_BattleArenaLobby_Text_ReceivedPrize: @ 82569BE
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
-
-@ Unused
-BattleFrontier_BattleArenaLobby_Text_BagFullReturnForPrize: @ 82569D8
-	.string "Oh?\n"
-	.string "Your Bag seems to be full.\p"
-	.string "I urge you to clear space and\n"
-	.string "return for your prize.$"
-
 BattleFrontier_BattleArenaLobby_Text_ThankYouWaitWhileSave: @ 8256A2C
 	.string "Thank you so much for participating!\p"
 	.string "Please wait while I save the game.$"
@@ -479,13 +460,6 @@ BattleFrontier_BattleArenaLobby_Text_ThankYouWaitWhileSave: @ 8256A2C
 BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2: @ 8256A74
 	.string "We await your challenge on\n"
 	.string "another occasion!$"
-
-BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame: @ 8256AA1
-	.string "We have been looking forward to\n"
-	.string "your arrival.\p"
-	.string "Before I show you to the BATTLE\n"
-	.string "ARENA, I must save the game.\l"
-	.string "Please wait.$"
 
 BattleFrontier_BattleArenaLobby_Text_RecordLastMatch: @ 8256B19
 	.string "Shall I record your last BATTLE ARENA\n"
@@ -517,9 +491,6 @@ BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant: @ 8256C9A
 	.string "against the first one.\p"
 	.string "I think that will be a good way of\n"
 	.string "making an effective team.$"
-
-BattleFrontier_BattleArenaLobby_Text_RulesAreListed: @ 8256DB8
-	.string "The Set KO Tourney's rules are listed.$"
 
 BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading: @ 8256DDF
 	.string "Which heading do you want to read?$"

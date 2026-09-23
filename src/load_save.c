@@ -24,6 +24,8 @@ static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
+STATIC_ASSERT(sizeof(struct SaveBlock1) + sizeof(struct SaveBlock2) + sizeof(struct PokemonStorage) <= HEAP_SIZE, RelocatedSaveCopiesFitHeap);
+
 struct LoadedSaveData
 {
  /*0x0000*/ struct Bag bag;
@@ -79,12 +81,10 @@ void ClearSav1(void)
 // Offset is the sum of the trainer id bytes
 void SetSaveBlocksPointers(u16 offset)
 {
-    struct SaveBlock1 **sav1_LocalVar = &gSaveBlock1Ptr;
-
     offset = (offset + Random()) & (SAVEBLOCK_MOVE_RANGE - 4);
 
     gSaveBlock2Ptr = (void *)(&gSaveblock2) + offset;
-    *sav1_LocalVar = (void *)(&gSaveblock1) + offset;
+    gSaveBlock1Ptr = (void *)(&gSaveblock1) + offset;
     gPokemonStoragePtr = (void *)(&gPokemonStorage) + offset;
 
     SetBagItemsPointers();
@@ -93,7 +93,7 @@ void SetSaveBlocksPointers(u16 offset)
 
 void MoveSaveBlocks_ResetHeap(void)
 {
-    void *vblankCB, *hblankCB;
+    IntrCallback vblankCB, hblankCB;
     u32 encryptionKey;
     struct SaveBlock2 *saveBlock2Copy;
     struct SaveBlock1 *saveBlock1Copy;
@@ -259,14 +259,11 @@ void CopyPartyAndObjectsFromSave(void)
 
 void LoadPlayerBag(void)
 {
-    int i;
-
     // load player bag.
     memcpy(&gLoadedSaveData.bag, &gSaveBlock1Ptr->bag, sizeof(struct Bag));
 
     // load mail.
-    for (i = 0; i < MAIL_COUNT; i++)
-        gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
+    memcpy(gLoadedSaveData.mail, gSaveBlock1Ptr->mail, sizeof(gLoadedSaveData.mail));
 
     gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
 }
@@ -289,15 +286,13 @@ static void ApplyNewEncryptionKeyToLegacyBagItems(u32 newKey)
 
 void SavePlayerBag(void)
 {
-    int i;
     u32 encryptionKeyBackup;
 
     // save player bag.
     memcpy(&gSaveBlock1Ptr->bag, &gLoadedSaveData.bag, sizeof(struct Bag));
 
     // save mail.
-    for (i = 0; i < MAIL_COUNT; i++)
-        gSaveBlock1Ptr->mail[i] = gLoadedSaveData.mail[i];
+    memcpy(gSaveBlock1Ptr->mail, gLoadedSaveData.mail, sizeof(gLoadedSaveData.mail));
 
     encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;

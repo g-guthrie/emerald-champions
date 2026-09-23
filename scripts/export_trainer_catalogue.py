@@ -193,7 +193,7 @@ def regional_sets():
                 m = dict(species=species,item=p['item'],nature=p['nature'],ability=p['ability'],
                     moves=enum_list(p['moves']),evs=list(map(int,re.findall(r'\d+',p['evs']))),
                     ivs=[31]*6, friendship=255)
-                # Exact explicit overrides in emerald_champions_opening.c.
+                # Exact explicit overrides in emerald_champions_story.c.
                 if stage == 0:
                     if species == 'SPECIES_CHIKORITA': m['moves'][0] = 'MOVE_GIGA_DRAIN'
                     if species == 'SPECIES_TORCHIC':
@@ -352,10 +352,10 @@ def main():
     for gen,index,stage,m in replacement:
         w.line(f'Generation {gen}; rival starter index {index}; stage {stage} (0 base / 1 middle / 2 final)')
         w.mon(1,m,False)
-    w.line('Runtime replacement source: src/emerald_champions_opening.c')
-    src=read('src/emerald_champions_opening.c')
+    w.line('Runtime replacement source: src/emerald_champions_story.c')
+    src=read('src/emerald_champions_story.c')
     w.line(src[src.index('static void GetOpeningStarterSet'):src.index('static bool32 CreateOpeningStarter')])
-    w.line(src[src.index('void ApplyEmeraldChampionsRegionalRivalSet'):src.index('void GiveEmeraldChampionsOpeningBalls')])
+    w.line(src[src.index('void ApplyEmeraldChampionsRegionalRivalSet'):src.index('\n',src.index('\n}\n',src.index('void ApplyEmeraldChampionsRegionalRivalSet'))+1)])
     src=read('src/battle_setup.c')
     start=src.index('static bool32 IsRegionalRivalTrainer(u16 trainerNum)\n{')
     w.line('Runtime dispatch source: src/battle_setup.c')
@@ -366,7 +366,7 @@ def main():
     w.line(read('src/data/battle_partners.party'))
     w.prose('Inferred ally plan: Metagross uses Assault Vest bulk and priority; Skarmory supplies Tailwind and Body Press pressure; Aggron attacks with Rock Head Head Smash and an Air Balloon. These are source-based observations, not verified ally behavior.')
     w.prose('The Birch rescue is a scripted wild double battle, not a trainer ID. For completeness: level-2 Poochyena and Zigzagoon, both 31 IVs, with the exact scripted sets below. It is not part of the 369 combat-party count.')
-    src=read('src/emerald_champions_opening.c')
+    src=read('src/emerald_champions_story.c')
     w.line(src[src.index('static const struct EmeraldChampionsBattleSet sRescueSets'):src.index('static void GetOpeningStarterSet')])
     w.heading('7. PROCEDURAL CIRCUIT / TENT / EXHIBITION OPPONENTS')
     w.prose('Locations: live Battle Frontier challenge desks feed the Champions Circuit; Battle Tent challenge desks use the same competition generator at their current Tent cap. Exhibition generation uses its supplied fixed level. Exact entrypoint script references are listed below. Each generated party has six Pokemon, max IVs, generated or explicitly authored EV/nature/item/ability/moves, family/role/dependency constraints and lead ordering. There is no fixed named party per opponent. Every available variant and template is listed below; full generating rules follow to specify fields decided at runtime.')
@@ -410,7 +410,7 @@ def main():
     for path in (PARTY,
         'data/emerald_champions/emerald_champions_master_battle_design.txt',
         'src/data/emerald_champions_battle_plans.h','src/battle_setup.c','src/difficulty.c','include/data.h','src/trainer_util.c','src/pokemon.c',
-        'src/emerald_champions_opening.c','src/data/pokemon/emerald_champions_battle_sets.h',
+        'src/emerald_champions_story.c','src/data/pokemon/emerald_champions_battle_sets.h',
         'src/data/pokemon/showdown_champions_circuit.h','src/champions_circuit.c',
         'src/data/battle_partners.party','scripts/export_trainer_catalogue.py'):
         w.line(path);w.line('SHA-256: '+hashlib.sha256((ROOT/path).read_bytes()).hexdigest())

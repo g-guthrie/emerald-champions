@@ -32,11 +32,6 @@ Route110_TrickHousePuzzle6_EventScript_Sophia:: @ 826DDE1
 	msgbox Route110_TrickHousePuzzle6_Text_SophiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle6_EventScript_Benny:: @ 826DDF8
-	@ This retired encounter has no campaign battle.
-	msgbox Route110_TrickHousePuzzle6_Text_BennyPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route110_TrickHousePuzzle6_EventScript_Sebastian:: @ 826DE0F
 	trainerbattle_double TRAINER_SEBASTIAN, Route110_TrickHousePuzzle6_Text_SebastianIntro, Route110_TrickHousePuzzle6_Text_SebastianDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle6_Text_SebastianPostBattle, MSGBOX_AUTOCLOSE
@@ -61,17 +56,6 @@ Route110_TrickHousePuzzle6_Text_SophiaPostBattle: @ 826DEF3
 	.string "this place out.\p"
 	.string "It's a challenge I've found worth\n"
 	.string "repeating!$"
-
-Route110_TrickHousePuzzle6_Text_BennyIntro: @ 826DF55
-	.string "Maybe I could get my Bird Pokémon\n"
-	.string "to fly over the wall…$"
-
-Route110_TrickHousePuzzle6_Text_BennyDefeat: @ 826DF8D
-	.string "Gwaaah! I blew it!$"
-
-Route110_TrickHousePuzzle6_Text_BennyPostBattle: @ 826DFA0
-	.string "Ehehehe… I guess I lost because\n"
-	.string "I was trying to cheat.$"
 
 Route110_TrickHousePuzzle6_Text_SebastianIntro: @ 826DFD7
 	.string "I'm getting dizzy from these rotating\n"

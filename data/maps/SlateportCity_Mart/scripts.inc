@@ -11,6 +11,7 @@ SlateportCity_Mart_EventScript_Clerk:: @ 820DC49
 	release
 	end
 
+	.align 2
 SlateportCity_Mart_Pokemart:
 	.2byte ITEM_FIRE_STONE
 	.2byte ITEM_WATER_STONE

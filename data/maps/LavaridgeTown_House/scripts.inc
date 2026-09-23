@@ -19,19 +19,14 @@ LavaridgeTown_House_EventScript_SuckerPunchTM::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE, LavaridgeTown_House_EventScript_ReceivedTM94
-	msgbox MoveTutor_MimicTeach, MSGBOX_YESNO
+	msgbox LavaridgeTown_House_Text_OfferCandy, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq MoveTutor_EventScript_MimicDeclined
+	goto_if_eq LavaridgeTown_House_EventScript_DeclineCandy
 	msgbox LavaridgeTown_House_Text_GiveTM94, MSGBOX_DEFAULT
 	giveitem ITEM_RARE_CANDY
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE
 	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
-	release
-	end
-
-MoveTutor_EventScript_MimicDeclined::
-	msgbox MoveTutor_MimicDeclined, MSGBOX_DEFAULT
 	release
 	end
 
@@ -60,3 +55,18 @@ LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
 
 LavaridgeTown_House_Text_Zigzagoon: @ 81FF9BB
 	.string "Zigzagoon: Pshoo!$"
+
+LavaridgeTown_House_EventScript_DeclineCandy::
+	msgbox LavaridgeTown_House_Text_DeclineCandy, MSGBOX_DEFAULT
+	release
+	end
+
+LavaridgeTown_House_Text_OfferCandy:
+	.string "Copying a move can catch a foe\n"
+	.string "off guard! A Center tutor can\l"
+	.string "teach Mimic to suitable Pokémon.\p"
+	.string "Would you like a Rare Candy\n"
+	.string "to help one of your partners grow?$"
+LavaridgeTown_House_Text_DeclineCandy:
+	.string "I'll keep it for you. Come back\n"
+	.string "if you change your mind!$"

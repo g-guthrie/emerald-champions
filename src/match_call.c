@@ -1157,6 +1157,9 @@ static u32 GetActiveMatchCallTrainerId(u32 activeMatchCallId)
 */
 bool32 TryStartMatchCall(void)
 {
+    if (!OW_TRAINER_REMATCHES)
+        return FALSE;
+
     if (FlagGet(FLAG_HAS_MATCH_CALL)
         && UpdateMatchCallStepCounter()
         && UpdateMatchCallMinutesCounter()
@@ -1760,7 +1763,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
             numSpecies = 0;
             if (gWildMonHeaders[i].encounterTypes[timeOfDay].landMonsInfo)
             {
-                slot = GetLandEncounterSlotForMatchCall();
+                slot = GetLandEncounterSlotForMatchCall(gWildMonHeaders[i].encounterTypes[timeOfDay].landMonsInfo);
                 species[numSpecies] = gWildMonHeaders[i].encounterTypes[timeOfDay].landMonsInfo->wildPokemon[slot].species;
                 numSpecies++;
             }
@@ -1768,7 +1771,7 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
             timeOfDay = GetTimeOfDayForEncounters(i, WILD_AREA_WATER);
             if (gWildMonHeaders[i].encounterTypes[timeOfDay].waterMonsInfo)
             {
-                slot = GetWaterEncounterSlotForMatchCall();
+                slot = GetWaterEncounterSlotForMatchCall(gWildMonHeaders[i].encounterTypes[timeOfDay].waterMonsInfo);
                 species[numSpecies] = gWildMonHeaders[i].encounterTypes[timeOfDay].waterMonsInfo->wildPokemon[slot].species;
                 numSpecies++;
             }

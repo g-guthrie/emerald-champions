@@ -113,12 +113,17 @@ BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge:: @ 8258592
 BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant:: @ 82585CB
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	goto BattleFrontier_BattleFactoryLobby_EventScript_Attendant
+	msgbox BattleFrontier_BattleFactoryLobby_Text_SinglesClosed, MSGBOX_DEFAULT
+	release
 	end
 
+BattleFrontier_BattleFactoryLobby_Text_SinglesClosed:
+	.string "The SINGLE rentals are closed.\n"
+	.string "The DOUBLE counter is open.$"
+
 BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant:: @ 82585DD
+	lock
+	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	goto BattleFrontier_BattleFactoryLobby_EventScript_Attendant
@@ -374,10 +379,6 @@ BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge: @ 8258C27
 	.string "I need to save the game. Is that okay?$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping: @ 8258C6F
-	.string "Okay, I will hold your Pokémon for\n"
-	.string "safekeeping while you compete.$"
-
 BattleFrontier_BattleFactoryLobby_Text_StepThisWay: @ 8258CB1
 	.string "Please step this way.$"
 
@@ -389,26 +390,11 @@ BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults: @ 8258CC7
 	.string "Please wait.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_ReturnMons: @ 8258D54
-	.string "I will return your Pokémon in exchange\n"
-	.string "for our rental Pokémon.$"
-
 BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins: @ 8258D93
 	.string "Congratulations! You've won seven\n"
 	.string "straight Battle Swap matches!$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak: @ 8258DD3
-	.string "In recognition of your 7-win streak,\n"
-	.string "we award you these Battle Point(s).$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints: @ 8258E1C
-	.string "Oh, oh, oh!\p"
-	.string "Your Battle Points are maxed.\p"
-	.string "Please come back after using\n"
-	.string "some Battle Points.$"
-
 BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume: @ 8258E77
 	.string "We've been waiting for you!\p"
 	.string "Before we resume your challenge,\n"
@@ -421,14 +407,6 @@ BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting: @ 8258ECA
 	.string "from your challenge.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_WellReturnMons: @ 8258F55
-	.string "We'll return your personal Pokémon.$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_ReceivedPrizeItem: @ 8258F79
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
-
 BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle: @ 8258F93
 	.string "Where the intelligence of Trainers\n"
 	.string "is put to the test!\p"
@@ -510,14 +488,6 @@ BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints: @ 82595C4
 	.string "trouble figuring out their hints.$"
 
 @ Unused
-BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried: @ 8259658
-	.string "Like, I'm really tough, but I get bored\n"
-	.string "really easily, so I just kept swapping\l"
-	.string "and battling over and over.\p"
-	.string "So anyway, when I kept entering\n"
-	.string "Battle Swap events, I noticed they\l"
-	.string "varied the rental Pokémon.$"
-
 BattleFrontier_BattleFactoryLobby_Text_RulesAreListed: @ 8259721
 	.string "The Battle Swap rules are listed.$"
 

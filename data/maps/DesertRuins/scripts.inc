@@ -71,22 +71,13 @@ DesertRuins_EventScript_Regirock:: @ 822DA02
 	setwildbattle SPECIES_REGIROCK, VAR_0x800A, ITEM_HARD_STONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq DesertRuins_EventScript_DefeatedRegirock
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq DesertRuins_EventScript_RanFromRegirock
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq DesertRuins_EventScript_RanFromRegirock
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, DesertRuins_EventScript_RanFromRegirock
 	setflag FLAG_DEFEATED_REGIROCK
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	release
-	end
-
-DesertRuins_EventScript_DefeatedRegirock:: @ 822DA49
-	setflag FLAG_DEFEATED_REGIROCK
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 DesertRuins_EventScript_RanFromRegirock:: @ 822DA52

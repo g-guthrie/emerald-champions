@@ -83,7 +83,6 @@ void AI_CaptureCandidateState(struct SwitchCandidateSnapshot *state);
 void AI_RestoreCandidateState(const struct SwitchCandidateSnapshot *state);
 void AI_FreeCandidateState(struct SwitchCandidateSnapshot *state);
 bool32 AI_ApplyMegaCandidate(enum BattlerId battler, bool32 calculateMoves);
-void AI_RefreshCandidateFieldEffects(void);
 // Leaves an entry-adjusted hypothetical board; the caller restores its snapshot.
 // Pair evaluation calculates moves once after all entries/Mega changes are complete.
 void AI_LoadSwitchCandidate(enum BattlerId battler, u32 partyIndex, bool32 calculateMoves);
@@ -92,7 +91,7 @@ u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switc
 bool32 ShouldSwitch(enum BattlerId battler);
 void ModifySwitchAfterMoveScoring(enum BattlerId battler);
 u32 AI_SelectRevivalBlessingMon(enum BattlerId battler);
-bool32 IsSwitchinValid(enum BattlerId battler);
+u32 GetValidAISwitchinId(enum BattlerId battler);
 bool32 IsAceMon(enum BattlerId battler, u32 monPartyId);
 
 #endif // GUARD_BATTLE_AI_SWITCH_H

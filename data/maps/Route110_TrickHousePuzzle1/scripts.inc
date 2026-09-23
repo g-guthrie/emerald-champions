@@ -33,11 +33,6 @@ Route110_TrickHousePuzzle1_EventScript_Eddie:: @ 826B95F
 	msgbox Route110_TrickHousePuzzle1_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle1_EventScript_Robin:: @ 826B976
-	@ This retired encounter has no campaign battle.
-	msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened:: @ 826B98D
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
@@ -66,14 +61,3 @@ Route110_TrickHousePuzzle1_Text_EddieDefeat: @ 826BAB0
 Route110_TrickHousePuzzle1_Text_EddiePostBattle: @ 826BAC3
 	.string "I lost my way, I lost a battle, and I'm\n"
 	.string "now even more lost… I can't get out…$"
-
-Route110_TrickHousePuzzle1_Text_RobinIntro: @ 826BB10
-	.string "Just who is the Trick Master?$"
-
-Route110_TrickHousePuzzle1_Text_RobinDefeat: @ 826BB2E
-	.string "I lost while I was lost in thought!$"
-
-Route110_TrickHousePuzzle1_Text_RobinPostBattle: @ 826BB52
-	.string "You're strong!\n"
-	.string "Just who are you?$"
-

@@ -143,7 +143,6 @@ static void ResumeMap(bool32);
 static void SetCameraToTrackPlayer(void);
 static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
-static void SetCameraToTrackGuestPlayer_2(void);
 static void CreateLinkPlayerSprites(void);
 static void ClearAllPlayerKeys(void);
 static void ResetAllPlayerLinkStates(void);
@@ -160,7 +159,6 @@ static void SetPlayerFacingDirection(u8, u8);
 static void ZeroObjectEvent(struct ObjectEvent *);
 static void SpawnLinkPlayerObjectEvent(u8, s16, s16, u8);
 static void InitLinkPlayerObjectEventPos(struct ObjectEvent *, s16, s16);
-static u8 GetSpriteForLinkedPlayer(u8);
 static void RunTerminateLinkScript(void);
 static u32 GetLinkSendQueueLength(void);
 static void ZeroLinkPlayerObjectEvent(struct LinkPlayerObjectEvent *);
@@ -176,7 +174,6 @@ static bool32 IsCableClubPlayerUnfrozen(struct CableClubPlayer *);
 static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *);
 static const u8 *TryGetTileEventScript(struct CableClubPlayer *);
 static bool32 PlayerIsAtSouthExit(struct CableClubPlayer *);
-static const u8 *TryInteractWithPlayer(struct CableClubPlayer *);
 static u16 KeyInterCB_DeferToRecvQueue(u32);
 static u16 KeyInterCB_DeferToSendQueue(u32);
 static void ResetPlayerHeldKeys(u16 *);
@@ -401,7 +398,7 @@ void DoWhiteOut(void)
     WarpIntoMap();
 }
 
-void Overworld_ResetStateAfterFly(void)
+static void ResetFieldTravelState(void)
 {
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_CYCLING_ROAD);
@@ -412,27 +409,20 @@ void Overworld_ResetStateAfterFly(void)
     FlagClear(FLAG_SYS_USE_FLASH);
 }
 
+void Overworld_ResetStateAfterFly(void)
+{
+    ResetFieldTravelState();
+}
+
 void Overworld_ResetStateAfterTeleport(void)
 {
-    ResetInitialPlayerAvatarState();
-    FlagClear(FLAG_SYS_CYCLING_ROAD);
-    FlagClear(FLAG_SYS_CRUISE_MODE);
-    FlagClear(FLAG_SYS_SAFARI_MODE);
-    VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
-    FlagClear(FLAG_SYS_USE_STRENGTH);
-    FlagClear(FLAG_SYS_USE_FLASH);
+    ResetFieldTravelState();
     RunScriptImmediately(EventScript_ResetMrBriney);
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
 {
-    ResetInitialPlayerAvatarState();
-    FlagClear(FLAG_SYS_CYCLING_ROAD);
-    FlagClear(FLAG_SYS_CRUISE_MODE);
-    FlagClear(FLAG_SYS_SAFARI_MODE);
-    VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
-    FlagClear(FLAG_SYS_USE_STRENGTH);
-    FlagClear(FLAG_SYS_USE_FLASH);
+    ResetFieldTravelState();
 }
 
 #if B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE
@@ -461,13 +451,7 @@ void Overworld_ResetBattleFlagsAndVars(void)
 
 static void Overworld_ResetStateAfterWhiteOut(void)
 {
-    ResetInitialPlayerAvatarState();
-    FlagClear(FLAG_SYS_CYCLING_ROAD);
-    FlagClear(FLAG_SYS_CRUISE_MODE);
-    FlagClear(FLAG_SYS_SAFARI_MODE);
-    VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
-    FlagClear(FLAG_SYS_USE_STRENGTH);
-    FlagClear(FLAG_SYS_USE_FLASH);
+    ResetFieldTravelState();
     if (B_RESET_FLAGS_VARS_AFTER_WHITEOUT == TRUE)
         Overworld_ResetBattleFlagsAndVars();
     // If you were defeated by Kyogre/Groudon and the step counter has
@@ -849,16 +833,14 @@ void SetContinueGameWarpToDynamicWarp(int unused)
 
 const struct MapConnection *GetMapConnection(u8 dir)
 {
-    s32 i;
-    s32 count = gMapHeader.connections->count;
-    const struct MapConnection *connection = gMapHeader.connections->connections;
+    const struct MapConnections *connections = gMapHeader.connections;
 
-    if (connection == NULL)
+    if (connections == NULL || connections->connections == NULL)
         return NULL;
 
-    for (i = 0; i < count; i++, connection++)
-        if (connection->direction == dir)
-            return connection;
+    for (s32 i = 0; i < connections->count; i++)
+        if (connections->connections[i].direction == dir)
+            return &connections->connections[i];
 
     return NULL;
 }
@@ -907,9 +889,6 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetDexNavSearch();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-#if FREE_MATCH_CALL == FALSE
-    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
-#endif //FREE_MATCH_CALL
 
     if (I_VS_SEEKER_CHARGING != 0)
         MapResetTrainerRematches(mapGroup, mapNum);
@@ -973,9 +952,6 @@ static void LoadMapFromWarp(bool32 a1)
     // reset hours override on every warp
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-#if FREE_MATCH_CALL == FALSE
-    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-#endif //FREE_MATCH_CALL
 
     if (I_VS_SEEKER_CHARGING != 0)
          MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
@@ -1126,9 +1102,8 @@ void SetDefaultFlashLevel(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1Ptr->flashLevel = 0;
-    // Emerald Champions: once Flash is unlocked every cave is lit on entry, as
-    // if Flash had been used, so no party member has to carry it.
-    else if (FlagGet(FLAG_SYS_USE_FLASH) || IsFieldMoveUnlocked(FIELD_MOVE_FLASH))
+    // A licensed party member capable of Flash lights caves on entry.
+    else if (FlagGet(FLAG_SYS_USE_FLASH) || FieldMove_GetUserSlot(FIELD_MOVE_FLASH, TRUE) != PARTY_SIZE)
         gSaveBlock1Ptr->flashLevel = 1;
     else
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
@@ -1229,20 +1204,6 @@ static bool16 IsInfiltratedSpaceCenter(struct WarpData *warp)
     return FALSE;
 }
 
-static const u16 sNightMusicTable[END_MUS - START_MUS] =
-{
-    // example usage: [MUS_SOOTOPOLIS - START_MUS] = MUS_LITTLEROOT,
-};
-
-static u16 GetNightMusicFromTrack(u16 track)
-{
-    if (GetTimeOfDay() != TIME_NIGHT)
-        return track;
-    if (sNightMusicTable[track - START_MUS] >= START_MUS && sNightMusicTable[track - START_MUS] <= END_MUS)
-        return sNightMusicTable[track - START_MUS];
-    return track;
-}
-
 u16 GetLocationMusic(struct WarpData *warp)
 {
     if (NoMusicInSootopolisWithLegendaries(warp) == TRUE)
@@ -1329,8 +1290,6 @@ void Overworld_PlaySpecialMapMusic(void)
             music = (IS_FRLG ? MUS_RG_SURF : MUS_SURF);
     }
 
-    music = GetNightMusicFromTrack(music);
-
     if (music != GetCurrentMapMusic())
         PlayNewMapMusic(music);
 }
@@ -1366,7 +1325,6 @@ static void TransitionMapMusic(void)
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
                 newMusic = (IS_FRLG ? MUS_RG_SURF : MUS_SURF);
         }
-        newMusic = GetNightMusicFromTrack(newMusic);
         if (newMusic != currentMusic)
         {
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
@@ -1403,7 +1361,7 @@ u8 GetMapMusicFadeoutSpeed(void)
 void TryFadeOutOldMapMusic(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
-    u16 warpMusic = GetNightMusicFromTrack(GetWarpDestinationMusic());
+    u16 warpMusic = GetWarpDestinationMusic();
     if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && warpMusic != GetCurrentMapMusic())
     {
         if (currentMusic == MUS_SURF
@@ -1506,7 +1464,7 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
         for (i = 0; i < monsCount; i++)
         {
             if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_EGG)
-                && GetMonAbility(&gParties[B_TRAINER_PLAYER][0]) == ABILITY_SWARM)
+                && GetMonAbility(&gParties[B_TRAINER_PLAYER][i]) == ABILITY_SWARM)
             {
                 divBy = 2;
                 break;
@@ -1632,17 +1590,7 @@ static void InitOverworldBgs(void)
 static void InitOverworldBgs_NoResetHeap(void)
 {
     ResetBgsAndClearDma3BusyFlags(FALSE);
-    InitBgsFromTemplates(0, sOverworldBgTemplates, NELEMS(sOverworldBgTemplates));
-    SetBgAttribute(1, BG_ATTR_MOSAIC, TRUE);
-    SetBgAttribute(2, BG_ATTR_MOSAIC, TRUE);
-    SetBgAttribute(3, BG_ATTR_MOSAIC, TRUE);
-    gOverworldTilemapBuffer_Bg1 = AllocZeroed(BG_SCREEN_SIZE);
-    gOverworldTilemapBuffer_Bg2 = AllocZeroed(BG_SCREEN_SIZE);
-    gOverworldTilemapBuffer_Bg3 = AllocZeroed(BG_SCREEN_SIZE);
-    SetBgTilemapBuffer(1, gOverworldTilemapBuffer_Bg1);
-    SetBgTilemapBuffer(2, gOverworldTilemapBuffer_Bg2);
-    SetBgTilemapBuffer(3, gOverworldTilemapBuffer_Bg3);
-    InitStandardTextBoxWindows();
+    InitOverworldBgs();
     InitTextBoxGfxAndPrinters();
     InitFieldMessageBox();
 }
@@ -1878,15 +1826,11 @@ static void OverworldBasic(void)
     if (!gPaletteFade.active && --gTimeUpdateCounter <= 0)
     {
         struct TimeBlendSettings cachedBlend = gTimeBlend;
-        u32 *bld0 = (u32*)&cachedBlend;
-        u32 *bld1 = (u32*)&gTimeBlend;
         gTimeUpdateCounter = (SECONDS_PER_MINUTE * 60 / FakeRtc_GetSecondsRatio());
         UpdateTimeOfDay(TRUE);
         FormChangeTimeUpdate();
-        if (MapHasNaturalLight(gMapHeader.mapType) &&
-           (bld0[0] != bld1[0]
-         || bld0[1] != bld1[1]
-         || bld0[2] != bld1[2]))
+        if (MapHasNaturalLight(gMapHeader.mapType)
+         && memcmp(&cachedBlend, &gTimeBlend, sizeof(cachedBlend)) != 0)
         {
             ApplyWeatherColorMapIfIdle(gWeatherPtr->colorMapIndex);
         }
@@ -1923,25 +1867,15 @@ static bool8 RunFieldCallback(void)
     if (gFieldCallback2)
     {
         if (!gFieldCallback2())
-        {
             return FALSE;
-        }
-        else
-        {
-            gFieldCallback2 = NULL;
-            gFieldCallback = NULL;
-        }
+        gFieldCallback2 = NULL;
     }
+    else if (gFieldCallback)
+        gFieldCallback();
     else
-    {
-        if (gFieldCallback)
-            gFieldCallback();
-        else
-            FieldCB_DefaultWarpExit();
+        FieldCB_DefaultWarpExit();
 
-        gFieldCallback = NULL;
-    }
-
+    gFieldCallback = NULL;
     return TRUE;
 }
 
@@ -2443,7 +2377,7 @@ static bool32 ReturnToFieldLink(u8 *state)
     case 2:
         CreateLinkPlayerSprites();
         InitObjectEventsReturnToField();
-        SetCameraToTrackGuestPlayer_2();
+        SetCameraToTrackGuestPlayer();
         (*state)++;
         break;
     case 3:
@@ -2662,12 +2596,6 @@ static void SetCameraToTrackPlayer(void)
 }
 
 static void SetCameraToTrackGuestPlayer(void)
-{
-    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
-}
-
-// Duplicate function.
-static void SetCameraToTrackGuestPlayer_2(void)
 {
     InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
 }
@@ -3685,8 +3613,9 @@ bool8 GetSetItemObtained(enum Item item, enum ItemObtainFlags caseId)
     return FALSE;
 }
 
-EWRAM_DATA static u8 sHeaderBoxWindowId = 0;
-EWRAM_DATA u8 sItemIconSpriteId = 0;
+EWRAM_DATA static u8 sHeaderBoxWindowIdPlusOne = 0;
+// Zero means no owned icon; the stored slot is otherwise one-based.
+EWRAM_DATA static u8 sItemIconSpriteIdPlusOne = 0;
 
 static void ShowItemIconSprite(enum Item item, bool8 firstTime, bool8 flash);
 static void DestroyItemIconSprite(void);
@@ -3732,12 +3661,18 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     }
 
     SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
-    sHeaderBoxWindowId = AddWindow(&template);
-    FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
-    PutWindowTilemap(sHeaderBoxWindowId);
-    CopyWindowToVram(sHeaderBoxWindowId, 3);
-    SetStandardWindowBorderStyle(sHeaderBoxWindowId, FALSE);
-    DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
+    u8 windowId = AddWindow(&template);
+    if (windowId == WINDOW_NONE)
+    {
+        ShowItemIconSprite(item, FALSE, handleFlash);
+        return;
+    }
+    sHeaderBoxWindowIdPlusOne = windowId + 1;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+    PutWindowTilemap(windowId);
+    CopyWindowToVram(windowId, 3);
+    SetStandardWindowBorderStyle(windowId, FALSE);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 14);
 
     if (ReformatItemDescription(item, dst) == 1)
         textY = 4;
@@ -3745,7 +3680,7 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
         textY = 0;
 
     ShowItemIconSprite(item, TRUE, handleFlash);
-    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
+    AddTextPrinterParameterized(windowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
 }
 
 void ScriptHideItemDescription(struct ScriptContext *ctx)
@@ -3757,13 +3692,14 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
 
     DestroyItemIconSprite();
 
-    if (!GetSetItemObtained(gSpecialVar_0x8006, FLAG_GET_ITEM_OBTAINED))
+    if (sHeaderBoxWindowIdPlusOne != 0)
     {
-        //header box only exists if haven't seen item before
+        u8 windowId = sHeaderBoxWindowIdPlusOne - 1;
         GetSetItemObtained(gSpecialVar_0x8006, FLAG_SET_ITEM_OBTAINED);
-        ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
-        CopyWindowToVram(sHeaderBoxWindowId, 3);
-        RemoveWindow(sHeaderBoxWindowId);
+        ClearStdWindowAndFrameToTransparent(windowId, FALSE);
+        CopyWindowToVram(windowId, 3);
+        RemoveWindow(windowId);
+        sHeaderBoxWindowIdPlusOne = 0;
     }
 }
 
@@ -3780,11 +3716,10 @@ static void ShowItemIconSprite(enum Item item, bool8 firstTime, bool8 flash)
 
     iconSpriteId = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
 
-    if (flash)
-        gSprites[iconSpriteId].copyToObjWin = TRUE;
-
     if (iconSpriteId != MAX_SPRITES)
     {
+        if (flash)
+            gSprites[iconSpriteId].copyToObjWin = TRUE;
         if (!firstTime)
         {
             //show in message box
@@ -3803,16 +3738,33 @@ static void ShowItemIconSprite(enum Item item, bool8 firstTime, bool8 flash)
         gSprites[iconSpriteId].oam.priority = 0;
     }
 
-    sItemIconSpriteId = iconSpriteId;
+    sItemIconSpriteIdPlusOne = iconSpriteId == MAX_SPRITES ? 0 : iconSpriteId + 1;
 }
 
 static void DestroyItemIconSprite(void)
 {
+    if (sItemIconSpriteIdPlusOne == 0)
+        return;
+    u8 spriteId = sItemIconSpriteIdPlusOne - 1;
     FreeSpriteTilesByTag(ITEM_TAG);
     FreeSpritePaletteByTag(ITEM_TAG);
-    FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId]);
-    DestroySprite(&gSprites[sItemIconSpriteId]);
+    FreeSpriteOamMatrix(&gSprites[spriteId]);
+    DestroySprite(&gSprites[spriteId]);
+    sItemIconSpriteIdPlusOne = 0;
 }
+
+#if TESTING
+u8 Test_ShowOverworldItemIcon(enum Item item, bool32 flash)
+{
+    ShowItemIconSprite(item, TRUE, flash);
+    return sItemIconSpriteIdPlusOne == 0 ? MAX_SPRITES : sItemIconSpriteIdPlusOne - 1;
+}
+
+void Test_DestroyOverworldItemIcon(void)
+{
+    DestroyItemIconSprite();
+}
+#endif
 
 // Credits
 

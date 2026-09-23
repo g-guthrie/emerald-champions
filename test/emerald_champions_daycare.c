@@ -13,7 +13,6 @@ static void ResetNursery(void)
     ZeroPlayerPartyMons();
     memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
     FlagClear(FLAG_PENDING_DAYCARE_EGG);
-    FlagClear(FLAG_EC_HATCHED_DAYCARE_EGG);
 }
 
 TEST("Nursery parents produce the baby species without Incense")
@@ -36,7 +35,6 @@ TEST("Nursery parents produce the baby species without Incense")
     EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION), METLOC_DAYCARE_EGG);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_FRIENDSHIP), 5);
-    EXPECT(!FlagGet(FLAG_EC_HATCHED_DAYCARE_EGG)); // Receiving an egg is not a hatch.
     ResetNursery();
 }
 
@@ -104,6 +102,32 @@ TEST("Nursery gift eggs never carry the Daycare breeding origin")
     ResetNursery();
     CreateEgg(&gParties[B_TRAINER_PLAYER][0], SPECIES_TOGEPI, hotSprings);
     EXPECT_NE(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION), METLOC_DAYCARE_EGG);
-    EXPECT(!FlagGet(FLAG_EC_HATCHED_DAYCARE_EGG));
+    ResetNursery();
+}
+
+TEST("Nursery Nidoran and Volbeat lines breed both species")
+{
+    // The offspring gender roll splits Nidoran♂/♀ and Volbeat/Illumise eggs.
+    enum Species parent, male, female;
+    PARAMETRIZE { parent = SPECIES_NIDORAN_M; male = SPECIES_NIDORAN_M; female = SPECIES_NIDORAN_F; }
+    PARAMETRIZE { parent = SPECIES_VOLBEAT; male = SPECIES_VOLBEAT; female = SPECIES_ILLUMISE; }
+    ResetNursery();
+    struct Pokemon mon;
+    CreateMon(&mon, parent, 25, 0, OTID_STRUCT_PLAYER_ID);
+    StorePokemonInDaycare(&mon, &gSaveBlock1Ptr->daycare.mons[0]);
+    CreateMon(&mon, SPECIES_DITTO, 25, 0, OTID_STRUCT_PLAYER_ID);
+    StorePokemonInDaycare(&mon, &gSaveBlock1Ptr->daycare.mons[1]);
+    bool32 sawMale = FALSE, sawFemale = FALSE;
+    for (u32 i = 0; i < 32 && !(sawMale && sawFemale); i++)
+    {
+        ZeroPlayerPartyMons();
+        TriggerPendingDaycareEgg();
+        GiveEggFromDaycare();
+        enum Species egg = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES);
+        sawMale |= egg == male;
+        sawFemale |= egg == female;
+    }
+    EXPECT(sawMale);
+    EXPECT(sawFemale);
     ResetNursery();
 }

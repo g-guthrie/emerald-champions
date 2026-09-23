@@ -40,7 +40,7 @@ OldaleTown_EventScript_MartEmployee:: @ 81E8EFC
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_ExplainPotion
-	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_ExplainPotion
+	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_GivePromotionalItem
 	setflag FLAG_TEMP_1
 	playbgm MUS_FOLLOW_ME, FALSE
 	msgbox OldaleTown_Text_IWorkAtPokemonMart, MSGBOX_DEFAULT
@@ -74,6 +74,8 @@ OldaleTown_EventScript_GoToMartEast:: @ 81E8F75
 
 OldaleTown_EventScript_ExplainPokemonMart:: @ 81E8F8C
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
+
+OldaleTown_EventScript_GivePromotionalItem::
 	giveitem ITEM_FOCUS_SASH
 	compare VAR_RESULT, FALSE
 	goto_if_eq OldaleTown_EventScript_BagIsFull
@@ -129,22 +131,6 @@ OldaleTown_Movement_EmployeeNorth: @ 81E8FE2
 	walk_in_place_fast_down
 	step_end
 
-OldaleTown_Movement_Unknown1: @ 81E8FEB
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	delay_8
-	walk_in_place_fast_down
-	step_end
-
 OldaleTown_Movement_PlayerEast: @ 81E8FF9
 	walk_right
 	walk_up
@@ -171,20 +157,6 @@ OldaleTown_Movement_PlayerNorth: @ 81E900B
 	walk_up
 	walk_up
 	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-OldaleTown_Movement_Unknown2: @ 81E9013
-	walk_left
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
 	walk_up
 	walk_up
 	walk_up
@@ -404,4 +376,3 @@ OldaleTown_Text_BrendanLetsGoBack: @ 81E948A
 OldaleTown_Text_CitySign: @ 81E94DA
 	.string "Oldale Town\n"
 	.string "“Where things start off scarce.”$"
-

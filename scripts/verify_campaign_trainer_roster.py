@@ -36,12 +36,12 @@ def main():
     for branch in branches:
         if branch.trainer in gym_parties and len(branch.mons) != 6:
             errors.append(f'Gym party {branch.trainer}: requires 6 Pokemon, found {len(branch.mons)}')
-    for label,actual in [('nonempty native parties',parties),('Hoenn script battle IDs',calls)]:
+    for label, actual in [('nonempty native parties', parties), ('Hoenn script battle IDs', calls)]:
         if actual != expected:
             errors.append(f'{label}: missing={sorted(expected-actual)} extra={sorted(actual-expected)}')
     if errors:
         raise SystemExit('\n'.join(errors))
-    print(f'PASS: exactly {len(expected)} authored variants = native nonempty parties = Hoenn script battle IDs; no retired battle loadouts')
+    print(f'PASS: {len(expected)} authored/native variants and {len(calls)} active Hoenn battle IDs')
     print(f'PASS: all {len(gym_parties)} Gym trainer/leader parties contain six Pokemon')
 
 if __name__ == '__main__':

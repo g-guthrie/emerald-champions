@@ -20,7 +20,6 @@ LilycoveCity_Harbor_EventScript_FerryAttendant:: @ 821E00F
 	call LilycoveCity_Harbor_EventScript_GetOldSeaMapState
 	call LilycoveCity_Harbor_EventScript_GetMysticTicketState
 	call LilycoveCity_Harbor_EventScript_GetFirstTimeShowingTicket
-	call LilycoveCity_Harbor_EventScript_GetHasTicketsState
 	compare VAR_TEMP_C, 2
 	goto_if_eq LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime
 	compare VAR_TEMP_B, 1
@@ -36,10 +35,7 @@ LilycoveCity_Harbor_EventScript_FerryAttendant:: @ 821E00F
 	goto LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets
 	end
 
-@ First goto_if_eq is unnecessary; identical scripts
 LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets:: @ 821E080
-	compare VAR_TEMP_A, 0
-	goto_if_eq LilycoveCity_Harbor_EventScript_NoEventTickets
 	msgbox LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
 	message LilycoveCity_Harbor_Text_FlashTicketWhereTo
 	waitmessage
@@ -49,11 +45,10 @@ LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets:: @ 821E080
 LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect:: @ 821E09F
 	setvar VAR_0x8004, 0
 	special ScriptMenu_CreateLilycoveSSTidalMultichoice
-	waitstate
 	special GetLilycoveSSTidalSelection
 	switch VAR_RESULT
 	case 0, LilycoveCity_Harbor_EventScript_GoToSlateport
-	case 1, LilycoveCity_Harbor_EventScript_GoToBattleFrontierTemp
+	case 1, LilycoveCity_Harbor_EventScript_GoToBattleFrontier
 	case 2, LilycoveCity_Harbor_EventScript_GoToSouthernIsland
 	case 3, LilycoveCity_Harbor_EventScript_GoToNavelRock
 	case 4, LilycoveCity_Harbor_EventScript_GoToBirthIsland
@@ -77,6 +72,8 @@ LilycoveCity_Harbor_EventScript_GoToNavelRock:: @ 821E119
 	end
 
 LilycoveCity_Harbor_EventScript_GoToBirthIsland:: @ 821E129
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	goto_if_lt VAR_RESULT, EC_FINALE_DEOXYS, Common_EventScript_FinaleWait
 	call LilycoveCity_Harbor_EventScript_BoardFerry
 	warp MAP_BIRTH_ISLAND_HARBOR, 255, 8, 4
 	waitstate
@@ -98,11 +95,6 @@ LilycoveCity_Harbor_EventScript_GoToSlateport:: @ 821E149
 	call LilycoveCity_Harbor_EventScript_BoardFerry
 	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
 	waitstate
-	release
-	end
-
-LilycoveCity_Harbor_EventScript_GoToBattleFrontierTemp::
-	msgbox LilycoveCity_Harbor_Text_BattleFrontierProjectHasStarted, MSGBOX_DEFAULT
 	release
 	end
 
@@ -188,34 +180,6 @@ LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket:: @ 821E2A0
 	addvar VAR_TEMP_B, 8
 	return
 
-LilycoveCity_Harbor_EventScript_GetHasTicketsState:: @ 821E2A6
-	setvar VAR_TEMP_A, 0
-	compare VAR_TEMP_E, 1
-	call_if_eq LilycoveCity_Harbor_EventScript_SetHasEonTicket
-	compare VAR_TEMP_D, 1
-	call_if_eq LilycoveCity_Harbor_EventScript_SetHasAuroraTicket
-	compare VAR_TEMP_C, 1
-	call_if_eq LilycoveCity_Harbor_EventScript_SetHasOldSeaMap
-	compare VAR_TEMP_9, 1
-	call_if_eq LilycoveCity_Harbor_EventScript_SetHasMysticTicket
-	return
-
-LilycoveCity_Harbor_EventScript_SetHasEonTicket:: @ 821E2D8
-	addvar VAR_TEMP_A, 1
-	return
-
-LilycoveCity_Harbor_EventScript_SetHasAuroraTicket:: @ 821E2DE
-	addvar VAR_TEMP_A, 2
-	return
-
-LilycoveCity_Harbor_EventScript_SetHasOldSeaMap:: @ 821E2E4
-	addvar VAR_TEMP_A, 4
-	return
-
-LilycoveCity_Harbor_EventScript_SetHasMysticTicket:: @ 821E2EA
-	addvar VAR_TEMP_A, 8
-	return
-
 LilycoveCity_Harbor_EventScript_EonTicketFirstTime:: @ 821E2F0
 	setflag FLAG_SHOWN_EON_TICKET
 	msgbox EventTicket_Text_ThatPass, MSGBOX_DEFAULT
@@ -234,6 +198,8 @@ LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime:: @ 821E30F
 	end
 
 LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime:: @ 821E320
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	goto_if_lt VAR_RESULT, EC_FINALE_DEOXYS, Common_EventScript_FinaleWait
 	setflag FLAG_SHOWN_AURORA_TICKET
 	msgbox EventTicket_Text_ThatPass, MSGBOX_DEFAULT
 	closemessage
@@ -324,17 +290,22 @@ LilycoveCity_Harbor_EventScript_MultipleEventTicketsFirstTime:: @ 821E44D
 	waitmessage
 	setvar VAR_0x8004, 1
 	special ScriptMenu_CreateLilycoveSSTidalMultichoice
-	waitstate
 	special GetLilycoveSSTidalSelection
 	switch VAR_RESULT
 	case 2, LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime
 	case 3, LilycoveCity_Harbor_EventScript_GoToNavelRockFirstTime
-	case 4, LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime
+	case 4, LilycoveCity_Harbor_EventScript_ChooseBirthIslandFirstTime
 	case 5, LilycoveCity_Harbor_EventScript_GoToFarawayIslandFirstTime
 	case 6, LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect
 	case MULTI_B_PRESSED, LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect
 	release
 	end
+
+LilycoveCity_Harbor_EventScript_ChooseBirthIslandFirstTime:
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	goto_if_ge VAR_RESULT, EC_FINALE_DEOXYS, LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime
+	call Common_EventScript_FinaleDirections
+	goto LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect
 
 LilycoveCity_Harbor_EventScript_ExitFirstTimeTicketSailSelect:: @ 821E4B6
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
@@ -384,42 +355,7 @@ LilycoveCity_Harbor_EventScript_FerryUnavailable:: @ 821E54D
 	release
 	end
 
-LilycoveCity_Harbor_EventScript_NoEventTickets:: @ 821E557
-	msgbox LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	message LilycoveCity_Harbor_Text_FlashTicketWhereTo
-	waitmessage
-	goto LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect
-	end
-
 @ Unused
-LilycoveCity_Harbor_EventScript_NoTicket:: @ 821E56B
-	msgbox LilycoveCity_Harbor_Text_NoTicket, MSGBOX_DEFAULT
-	release
-	end
-
-@ Unused
-LilycoveCity_Harbor_EventScript_GoToSlateportUnused:: @ 821E575
-	msgbox LilycoveCity_Harbor_Text_SlateportItIs, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
-	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE
-	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_SS_TIDAL_CORRIDOR, 255, 1, 10
-	waitstate
-	release
-	end
-
-@ Unused
-LilycoveCity_Harbor_EventScript_GoToBattleFrontierUnused:: @ 821E59D
-	msgbox LilycoveCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind
-	call LilycoveCity_Harbor_EventScript_BoardFerry
-	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
-	waitstate
-	release
-	end
-
 LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind:: @ 821E5C0
 	message LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo
 	waitmessage
@@ -464,10 +400,6 @@ LilycoveCity_Harbor_Movement_PlayerBoardFerryEast: @ 821E630
 	step_end
 
 LilycoveCity_Harbor_Movement_PlayerBoardFerryNorth: @ 821E633
-	walk_up
-	step_end
-
-LilycoveCity_Harbor_Movement_UnusedBoardFerry: @ 821E635
 	walk_up
 	step_end
 
@@ -591,12 +523,6 @@ LilycoveCity_Harbor_Text_MayISeeYourTicket: @ 821E758
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your Ticket?$"
 
-LilycoveCity_Harbor_Text_NoTicket: @ 821E792
-	.string "{PLAYER} doesn't have the Ticket\p"
-	.string "I'm terribly sorry.\p"
-	.string "You must have a Ticket to board\n"
-	.string "the ferry.$"
-
 LilycoveCity_Harbor_Text_FlashTicketWhereTo: @ 821E7ED
 	.string "{PLAYER} flashed the Ticket.\p"
 	.string "Perfect! That's all you need!\p"
@@ -630,13 +556,3 @@ LilycoveCity_Harbor_Text_SailorFerryAvailable: @ 821E976
 	.string "The folks at the Shipyard in Slateport\n"
 	.string "must've worked extra hard.\p"
 	.string "Well, it's my turn to get busy now!$"
-
-LilycoveCity_Harbor_Text_BattleFrontierProjectHasStarted:
-	.string "The Battle Frontier Project has\n"
-	.string "started!\p"
-	.string "Seriously though, it's not ready yet.\l"
-	.string "Parts of it are broken and it needs a\n"
-	.string "complete overhaul to include all the\l"
-	.string "new Pokémon and mechanics.\p"
-	.string "Please come back in a later version\n"
-	.string "of the hack.$"

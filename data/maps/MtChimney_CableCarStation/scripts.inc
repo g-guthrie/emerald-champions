@@ -25,7 +25,7 @@ MtChimney_CableCarStation_EventScript_ExitCableCar:: @ 822AC27
 	applymovement LOCALID_ATTENDANT, MtChimney_CableCarStation_Movement_FollowPlayerOutFromCableCar
 	waitmovement 0
 	setvar VAR_CABLE_CAR_STATION_STATE, 0
-	setobjectxyperm LOCALID_ATTENDANT, 6, 7
+	setobjectxyperm LOCALID_ATTENDANT, 6, 6
 	setobjectmovementtype LOCALID_ATTENDANT, MOVEMENT_TYPE_FACE_DOWN
 	releaseall
 	end
@@ -51,7 +51,6 @@ MtChimney_CableCarStation_EventScript_RideCableCar:: @ 822AC6C
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
 	special CableCar
-	waitstate
 	release
 	end
 

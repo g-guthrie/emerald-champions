@@ -134,9 +134,6 @@ BattlePyramid_Retire:: @ 8252C88
 	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 
 @ Also used by Trainer Hill
-BattleFacility_TrainerBattle_PlaceholderText: @ 8252C8D
-	.string "This is a sample message.$"
-
 gText_BattlePyramidConfirmRest:: @ 8252CA7
 	.string "Your BATTLE PYRAMID quest will be\n"
 	.string "saved so that you may quit for now.\l"

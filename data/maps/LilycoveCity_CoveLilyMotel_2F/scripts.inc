@@ -28,23 +28,25 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma:: @ 821870F
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	special Special_ShowDiploma
-	waitstate
 	release
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_SelfInsert::
 	lockall
 	faceplayer
-	goto_if_set FLAG_DAILY_REMATCH_BUFFEL, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDefeated
+LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelGate::
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	goto_if_lt VAR_RESULT, EC_FINALE_BUFFEL, Common_EventScript_FinaleWait
+	goto_if_defeated TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDefeated
+LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelChallenge::
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ImBuffel, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_SelfInsertNo
 	message LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertBattle
 	waitmessage
-	trainerbattle_no_intro_double TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	setflag FLAG_DAILY_REMATCH_BUFFEL
+	trainerbattle_no_intro_double TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat
 LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDefeated::
-	msgbox LilycoveCity_CoveLilyMotel_2F_Text_ThanksAgain, MSGBOX_DEFAULT
+	call Common_EventScript_FinaleDirections
 	release
 	end
 
@@ -157,28 +159,20 @@ LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy: @ 8218C33
 	.string "of becoming a better Trainer, I'd say.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImBuffel:
-	.string "Hey {PLAYER}!\p"
-	.string "I'm Buffel, the creator of this\n"
-	.string "mod (or ROM hack).\p"
-	.string "Thanks for playing!\p"
-	.string "I hope you had fun on your journey,\n"
-	.string "and didn't run in to too many bugs!\p"
-	.string "Now that you're the Champion, how about\n"
-	.string "we have a friendly battle?\p"
-	.string "Don't worry - I haven't given myself\n"
-	.string "any unfair advantages!\p"
-	.string "So, are you ready?$"
+	.string "I'm Buffel. Welcome to the\n"
+	.string "final trial of your expedition.\p"
+	.string "The League, Wally, the voyage,\n"
+	.string "Steven, and Birth Island…\l"
+	.string "You've overcome them all.\p"
+	.string "Bring your best six Pokémon.\n"
+	.string "One final Double Battle awaits!\p"
+	.string "Are you ready?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertNo:
 	.string "Some other time, then?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SelfInsertBattle:
-	.string "Great! let's see what you can do!$"
+	.string "Great! Let's see what you can do!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat:
 	.string "Well done, {PLAYER}!$"
-
-LilycoveCity_CoveLilyMotel_2F_Text_ThanksAgain:
-	.string "Thanks again for playing!\p"
-	.string "If you want a rematch, come back\n"
-	.string "tomorrow!$"

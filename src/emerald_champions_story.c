@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "battle_util.h"
 #include "emerald_champions_battle_sets.h"
 #include "emerald_champions_opening.h"
@@ -11,6 +12,7 @@
 #include "constants/emerald_champions.h"
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/opponents.h"
 #include "constants/vars.h"
 
 static const struct EmeraldChampionsBattleSet sRescueSets[] =
@@ -73,8 +75,6 @@ bool32 GiveEmeraldChampionsStarterPair(u16 first, u16 second)
 
     GiveScriptedMonToPlayer(&pair[0], 0);
     GiveScriptedMonToPlayer(&pair[1], 1);
-    RecordPlayerPartyMonHeldItemForRestoration(0);
-    RecordPlayerPartyMonHeldItemForRestoration(1);
     VarSet(VAR_STARTER_MON, first);
     VarSet(VAR_EC_SECOND_STARTER, second + 1);
     VarSet(VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED);
@@ -91,16 +91,18 @@ bool32 HasEmeraldChampionsSecondStarter(void)
 {
     u16 state = VarGet(VAR_EC_OPENING_STATE);
 
-    return state >= EC_OPENING_PAIR_GRANTED && state <= EC_OPENING_COMPLETE
+    return state >= EC_OPENING_PAIR_GRANTED && state <= EC_OPENING_RESCUE_WON
         && VarGet(VAR_EC_SECOND_STARTER) >= 1 && VarGet(VAR_EC_SECOND_STARTER) <= 3;
 }
 
 u16 GetEmeraldChampionsRivalStarterIndex(void)
 {
-    u16 first = VarGet(VAR_STARTER_MON);
-    u16 second = GetEmeraldChampionsSecondStarterIndex();
+    u16 first = VarGet(VAR_STARTER_MON) % 3;
 
-    return 3 - first - second;
+    // Saves from before the paired grant hold one starter; the rival takes the next.
+    if (!HasEmeraldChampionsSecondStarter())
+        return (first + 1) % 3;
+    return 3 - first - GetEmeraldChampionsSecondStarterIndex();
 }
 
 void BufferEmeraldChampionsRivalBranch(void)
@@ -200,40 +202,27 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
     ApplyEmeraldChampionsScriptedSet(&party[slot], &preset);
 }
 
-void GiveEmeraldChampionsOpeningBalls(void)
+// Derive progress from earned victories instead of maintaining a second quest
+// state. Existing saves and a previously completed step therefore remain valid.
+u16 GetEmeraldChampionsFinaleStage(void)
 {
-    gSpecialVar_Result = 0;
-    if (AddBagItem(ITEM_POKE_BALL, 20))
-        gSpecialVar_Result = 1;
-    else if (AddPCItem(ITEM_POKE_BALL, 20))
-        gSpecialVar_Result = 2;
-    if (gSpecialVar_Result != 0)
-    {
-        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_PRE_RIVAL_READY);
-        VarSet(VAR_BIRCH_LAB_STATE, 3);
-    }
-}
-
-void BufferEmeraldChampionsStarterNames(void)
-{
-    StringCopy(gStringVar1, GetSpeciesName(GetStarterPokemon(VarGet(VAR_STARTER_MON))));
-    StringCopy(gStringVar2, GetSpeciesName(GetStarterPokemon(GetEmeraldChampionsSecondStarterIndex())));
-}
-
-void SelectEmeraldChampionsStarterForNaming(void)
-{
-    u16 choice = gSpecialVar_0x8004 == 0 ? VarGet(VAR_STARTER_MON) : GetEmeraldChampionsSecondStarterIndex();
-    enum Species species = GetStarterPokemon(choice);
-
-    gSpecialVar_Result = FALSE;
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) == species)
-        {
-            gSpecialVar_0x8004 = i;
-            StringCopy(gStringVar1, GetSpeciesName(species));
-            gSpecialVar_Result = TRUE;
-            return;
-        }
-    }
+    static const u16 voyageTrainers[] = {
+        TRAINER_COLTON, TRAINER_MICAH, TRAINER_THOMAS,
+        TRAINER_LEA_AND_JED, TRAINER_NAOMI,
+    };
+    if (!FlagGet(FLAG_SYS_GAME_CLEAR))
+        return EC_FINALE_LEAGUE;
+    if (!HasTrainerBeenFought(TRAINER_WALLY_VR_2))
+        return EC_FINALE_WALLY;
+    for (u32 i = 0; i < ARRAY_COUNT(voyageTrainers); i++)
+        if (!HasTrainerBeenFought(voyageTrainers[i]))
+            return EC_FINALE_VOYAGE;
+    if (!HasTrainerBeenFought(TRAINER_STEVEN) || !FlagGet(FLAG_RECEIVED_AURORA_TICKET))
+        return EC_FINALE_STEVEN;
+    if (!FlagGet(FLAG_EC_FINALE_DEOXYS_RESOLVED)
+     && !FlagGet(FLAG_BATTLED_DEOXYS) && !FlagGet(FLAG_DEFEATED_DEOXYS))
+        return EC_FINALE_DEOXYS;
+    if (!HasTrainerBeenFought(TRAINER_BUFFEL))
+        return EC_FINALE_BUFFEL;
+    return EC_FINALE_COMPLETE;
 }

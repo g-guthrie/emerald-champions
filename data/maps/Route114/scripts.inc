@@ -24,12 +24,38 @@ Route114_OnFrame: @ 81F2578
 	map_script_2 VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_EndEventAndCleanup_1
 	.2byte 0
 
+Route114_EventScript_GoodRodFisherman:: @ 81F3E14
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route114_EventScript_ReceivedGoodRod
+	msgbox Route114_Text_YouAgreeGoodRodIsGood, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq Route114_EventScript_DeclineGoodRod
+	msgbox Route114_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
+	giveitem ITEM_GOOD_ROD
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_GOOD_ROD
+	msgbox Route114_Text_TryYourLuckFishing, MSGBOX_DEFAULT
+	release
+	end
+
+Route114_EventScript_DeclineGoodRod:: @ 81F3E5F
+	msgbox Route114_Text_DontYouLikeToFish, MSGBOX_DEFAULT
+	release
+	end
+
+Route114_EventScript_ReceivedGoodRod:: @ 81F3E69
+	msgbox Route114_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT
+	release
+	end
+
 Route114_EventScript_Man:: @ 81F2582
 	lock
 	faceplayer
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_ROUTE_114_RECEIVED_BERRY, Route114_EventScript_ReceivedBerry
-	msgbox Route114_Text_LoveUsingBerryCrushShareBerry, MSGBOX_DEFAULT
+	msgbox Route114_Text_CollectBattleBerries, MSGBOX_DEFAULT
 	random NUM_ROUTE_114_MAN_BERRIES
 	addvar VAR_RESULT, NUM_ROUTE_114_MAN_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
@@ -37,30 +63,30 @@ Route114_EventScript_Man:: @ 81F2582
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_114_RECEIVED_BERRY
-	msgbox Route114_Text_TryBerryCrushWithFriends, MSGBOX_DEFAULT
+	msgbox Route114_Text_GrowBattleBerries, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_EventScript_ReceivedBerry:: @ 81F25C7
-	msgbox Route114_Text_FunToThinkAboutBerries, MSGBOX_DEFAULT
+	msgbox Route114_Text_ComeBackForBerries, MSGBOX_DEFAULT
 	release
 	end
 
 Route114_EventScript_RoarGentleman:: @ 81F25D1
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedRoar
-	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedPearl
+	msgbox Route114_Text_RoarGentlemanGift, MSGBOX_DEFAULT
+	giveitem ITEM_BIG_PEARL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05
-	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
+	msgbox Route114_Text_PearlAndRoarTutor, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_EventScript_ReceivedRoar:: @ 81F2608
-	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
+Route114_EventScript_ReceivedPearl:: @ 81F2608
+	msgbox Route114_Text_PearlAndRoarTutor, MSGBOX_DEFAULT
 	release
 	end
 
@@ -96,82 +122,14 @@ Route114_EventScript_Lucas:: @ 81F2657
 	msgbox Route114_Text_LucasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route114_EventScript_Shane:: @ 81F266E
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_ShanePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route114_EventScript_Nancy:: @ 81F2685
 	@ This retired encounter has no campaign battle.
 	msgbox Route114_Text_NancyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_Steve:: @ 81F269C
-	trainerbattle_double TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route114_EventScript_RegisterSteve
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route114_EventScript_RematchSteve
-	msgbox Route114_Text_StevePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route114_EventScript_RegisterSteve:: @ 81F26C8
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route114_Text_StevePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route114_EventScript_RematchSteve:: @ 81F26E7
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_StevePostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route114_EventScript_Bernie:: @ 81F26FE
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route114_EventScript_RematchBernie
-	msgbox Route114_Text_BerniePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route114_EventScript_RegisterBernie:: @ 81F272A
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route114_Text_BernieRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_BERNIE_1
-	release
-	end
-
-Route114_EventScript_RematchBernie:: @ 81F2749
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_BerniePostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route114_EventScript_Claude:: @ 81F2760
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_ClaudePostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route114_EventScript_Nolan:: @ 81F2777
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_NolanPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route114_EventScript_Tyra:: @ 81F278E
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_TyraPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route114_EventScript_Ivy:: @ 81F27A9
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_IvyPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route114_EventScript_Angelina:: @ 81F27C4
-	@ This retired encounter has no campaign battle.
-	msgbox Route114_Text_AngelinaPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route114_Text_StevePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_Charlotte:: @ 81F27DB
@@ -184,17 +142,15 @@ Route114_EventScript_Kai:: @ 81F27F2
 	msgbox Route114_Text_KaiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route114_Text_AllMyMonDoesIsRoarTakeThis: @ 81F2809
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+Route114_Text_RoarGentlemanGift:
+	.string "My Pokémon never stops barking!\p"
+	.string "I found this Big Pearl while taking\n"
+	.string "it for a walk. Please, take it!$"
 
-Route114_Text_ExplainRoar: @ 81F2872
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+Route114_Text_PearlAndRoarTutor:
+	.string "Sell that Big Pearl for supplies.\p"
+	.string "If you want your partner to learn\n"
+	.string "Roar, visit the Center's move tutor.$"
 
 Route114_Text_Poochyena: @ 81F28A6
 	.string "Bow! Bowwow!$"
@@ -209,4 +165,26 @@ Route114_Text_FossilManiacsHouseSign: @ 81F28DB
 
 Route114_Text_LanettesHouse: @ 81F2910
 	.string "Lanette's House$"
+
+Route114_Text_YouAgreeGoodRodIsGood: @ 81F427B
+	.string "Hmm!\n"
+	.string "A Good Rod is really good!\p"
+	.string "Wouldn't you agree?$"
+
+Route114_Text_IdenticalMindsTakeThis: @ 81F42AF
+	.string "Hmm!\n"
+	.string "We're of identical minds!\p"
+	.string "Hmm!\n"
+	.string "Take this Good Rod!$"
+
+Route114_Text_TryYourLuckFishing: @ 81F42E7
+	.string "Wherever there's water, try your luck\n"
+	.string "at fishing.$"
+
+Route114_Text_DontYouLikeToFish: @ 81F4319
+	.string "Don't you like to fish?$"
+
+Route114_Text_TryCatchingMonWithGoodRod: @ 81F4331
+	.string "Try catching all sorts of Pokémon\n"
+	.string "with your Good Rod.$"
 

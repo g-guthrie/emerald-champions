@@ -346,7 +346,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink:: @ 
 	message gText_LinkStandby3
 	waitmessage
 	special LinkRetireStatusWithBattleTowerPartner
-	waitstate
 	compare VAR_RESULT, BATTLE_TOWER_LINKSTAT_CONTINUE
 	goto_if_ne BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_LinkDelayForMsg
@@ -379,7 +378,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink:: @ 82
 	message gText_LinkStandby3
 	waitmessage
 	special LinkRetireStatusWithBattleTowerPartner
-	waitstate
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
 	end
 
@@ -481,35 +479,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor7thOpponentSet: @ 824963C
 	.string "Are you ready?$"
 
 @ Unused
-BattleFrontier_BattleTowerMultiBattleRoom_Text_2ndOpponentSetNext: @ 824966D
-	.string "The 2nd set of opponents is next.\n"
-	.string "Do your best!$"
-
-@ Unused
-BattleFrontier_BattleTowerMultiBattleRoom_Text_3rdOpponentSetNext: @ 824969D
-	.string "The 3rd set of opponents is next.\n"
-	.string "Do your best!$"
-
-@ Unused
-BattleFrontier_BattleTowerMultiBattleRoom_Text_4thOpponentSetNext: @ 82496CD
-	.string "The 4th set of opponents is next.\n"
-	.string "Do your best!$"
-
-@ Unused
-BattleFrontier_BattleTowerMultiBattleRoom_Text_5thOpponentSetNext: @ 82496FD
-	.string "The 5th set of opponents is next.\n"
-	.string "Do your best!$"
-
-@ Unused
-BattleFrontier_BattleTowerMultiBattleRoom_Text_6thOpponentSetNext: @ 824972D
-	.string "The 6th set of opponents is next.\n"
-	.string "Do your best!$"
-
-@ Unused
-BattleFrontier_BattleTowerMultiBattleRoom_Text_7thOpponentSetNext: @ 824975D
-	.string "The 7th set of opponents is next.\n"
-	.string "Do your best!$"
-
 gText_LinkStandby3:: @ 824978D
 	.string "Link standby…$"
 

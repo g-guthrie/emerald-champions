@@ -14,6 +14,3 @@ Text_CurrentTooFast::
 @ early in the Inclement story. Additive only - gText_WantToUseSurf keeps its
 @ existing Emerald Champions wording and was NOT taken from the donor.
 @ ---------------------------------------------------------------------------
-
-Text_ExploudSurf:: @ 8272FD6
-	.string "The water is dyed a deep blue…\nCall Dad's Exploud to Surf?$"

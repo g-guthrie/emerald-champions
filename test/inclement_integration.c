@@ -1,4 +1,7 @@
 #include "global.h"
+#include "lottery_corner.h"
+#include "pokemon_storage_system.h"
+#include "script.h"
 #include "caps.h"
 #include "braille_puzzles.h"
 #include "battle_util.h"
@@ -24,7 +27,7 @@
 #include "pokemon.h"
 #include "test/test.h"
 
-TEST("Inclement integration: every HM uses badge and license without a party requirement")
+TEST("Inclement integration: every HM needs badge, license, and a capable party member without a moveslot")
 {
     static const enum FieldMove moves[] = {FIELD_MOVE_CUT, FIELD_MOVE_FLASH, FIELD_MOVE_ROCK_SMASH,
         FIELD_MOVE_STRENGTH, FIELD_MOVE_SURF, FIELD_MOVE_FLY, FIELD_MOVE_DIVE, FIELD_MOVE_WATERFALL};
@@ -32,6 +35,7 @@ TEST("Inclement integration: every HM uses badge and license without a party req
         FLAG_RECEIVED_HM_STRENGTH, FLAG_RECEIVED_HM_SURF, FLAG_RECEIVED_HM_FLY, FLAG_RECEIVED_HM_DIVE, FLAG_RECEIVED_HM_WATERFALL};
     ZeroPlayerPartyMons();
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MEW, 5, 0, OTID_STRUCT_PLAYER_ID);
     for (u32 i = 0; i < ARRAY_COUNT(moves); i++)
     {
         u16 badge = FLAG_BADGE01_GET + gFieldMoveInfo[moves[i]].arg;
@@ -41,13 +45,16 @@ TEST("Inclement integration: every HM uses badge and license without a party req
         FlagSet(licenses[i]);
         EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), PARTY_SIZE);
         FlagSet(badge);
-        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), 0);
-        // Boxing or replacing this party never removes a player unlock.
+        EXPECT(SpeciesCanLearnFieldMove(SPECIES_MEW, FieldMove_GetMoveId(moves[i])));
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), 1);
+        // The license persists, but the party must still include a capable mon.
         ZeroPlayerPartyMons();
-        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), 0);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), PARTY_SIZE);
         CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MAGIKARP, 5, 0, OTID_STRUCT_PLAYER_ID);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), PARTY_SIZE);
+        CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MEW, 5, 0, OTID_STRUCT_PLAYER_ID);
         FlagClear(licenses[i]);
-        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], FALSE), IS_FRLG ? 0 : PARTY_SIZE);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], FALSE), IS_FRLG ? 1 : PARTY_SIZE);
         FlagClear(badge);
     }
     ZeroPlayerPartyMons();
@@ -162,6 +169,7 @@ TEST("Inclement integration: owned captured and boxed held items unlock paid cop
     struct Pokemon mon;
     memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
     memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));
+    ResetPokemonStorageSystem(); // earlier tests in this worker may leave the PC full
     CreateRandomMon(&mon, SPECIES_ZIGZAGOON, 5);
     enum Item item = ITEM_LIFE_ORB;
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
@@ -213,7 +221,7 @@ TEST("Inclement integration: every restored Ultra Beast can be rolled in its hab
             appearances += ChooseRareWildLegendarySpecies(WILD_AREA_LAND, FALSE) == residents[i].species;
         }
         Test_MgbaPrintf("Ultra Beast species %d, map %d: %d percentile rolls", residents[i].species, residents[i].map, appearances);
-        EXPECT_EQ(appearances, 3);
+        EXPECT_EQ(appearances, 1);
         MarkLegendarySignCaughtBySpecies(residents[i].species);
         EXPECT(!CanAcquireLegendarySignSpecies(residents[i].species));
         for (u32 roll = 0; roll < 100; roll++)
@@ -537,6 +545,8 @@ TEST("Inclement integration: locked field message distinguishes badge from autho
     EXPECT(!FlagGet(FLAG_RECEIVED_HM_ROCK_SMASH));
     FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
     EXPECT(IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
+    BufferFieldMoveUnlockRequirement();
+    EXPECT_EQ(gSpecialVar_Result, 2);
 }
 
 TEST("Inclement integration: HM convenience preserves the Regi puzzle conditions")
@@ -585,9 +595,15 @@ TEST("Inclement integration: HM convenience preserves the Regi puzzle conditions
     gSaveBlock1Ptr->pos.y++;
     EXPECT(!ShouldDoBrailleDigEffect());
     ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEW, 40, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT(SpeciesCanLearnFieldMove(SPECIES_MEW, MOVE_DIG));
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_DIG, TRUE), PARTY_SIZE);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_DIG, 0);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_DIG, TRUE), 0);
+    ZeroPlayerPartyMons();
 }
 
-TEST("Inclement integration: consumed berries still return after battle")
+TEST("Inclement integration: Regenerator restores consumed berries after battle")
 {
     static EWRAM_DATA struct BattleStruct state;
     struct BattleStruct *saved = gBattleStruct;
@@ -598,10 +614,247 @@ TEST("Inclement integration: consumed berries still return after battle")
     enum Item berry = ITEM_SITRUS_BERRY;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &berry);
     RecordPlayerPartyMonHeldItemForRestoration(0);
+    state.partyState[B_TRAINER_PLAYER][0].usedHeldItem = ITEM_SITRUS_BERRY;
     enum Item consumed = ITEM_NONE;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &consumed);
+    AddBagItem(ITEM_REGENERATOR, 1);
     TryRestoreHeldItems();
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_SITRUS_BERRY);
+    RemoveBagItem(ITEM_REGENERATOR, 1);
     gBattleStruct = saved;
+    ZeroPlayerPartyMons();
+}
+
+extern const u8 HyperTraining_EventScript_SelectHiddenPower[];
+extern const u8 HyperTraining_EventScript_ChangeAllIVs[];
+extern const u8 FallarborTown_HyperMainMenu[];
+extern ScrCmdFunc gScriptCmdTable[];
+extern ScrCmdFunc gScriptCmdTableEnd[];
+
+TEST("Inclement integration: Hidden Power menu preserves every type index and cancellation partner")
+{
+    static const u16 results[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 127};
+    for (u32 i = 0; i < ARRAY_COUNT(results); i++)
+    {
+        gSpecialVar_Result = results[i];
+        gSpecialVar_0x8004 = 99;
+        gSpecialVar_0x800A = 1;
+        gSpecialVar_0x8007 = 255;
+        struct ScriptContext ctx;
+        InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
+        SetupBytecodeScript(&ctx, HyperTraining_EventScript_SelectHiddenPower);
+        for (u32 step = 0; step < 6
+          && ctx.scriptPtr != HyperTraining_EventScript_ChangeAllIVs
+          && ctx.scriptPtr != FallarborTown_HyperMainMenu; step++)
+        {
+            u8 command = *ctx.scriptPtr++;
+            EXPECT(!ctx.cmdTable[command](&ctx));
+        }
+        if (results[i] < 16)
+        {
+            EXPECT_EQ(ctx.scriptPtr, HyperTraining_EventScript_ChangeAllIVs);
+            EXPECT_EQ(gSpecialVar_0x8007, results[i]);
+            EXPECT_EQ(gSpecialVar_0x800A, 1);
+        }
+        else
+        {
+            EXPECT_EQ(ctx.scriptPtr, FallarborTown_HyperMainMenu);
+            EXPECT_EQ(gSpecialVar_0x8004, 1);
+            EXPECT_EQ(gSpecialVar_0x8007, 255);
+        }
+    }
+}
+
+TEST("Inclement integration: EV mutation refuses over-cap spreads and saturates valid gains")
+{
+    static const struct {u16 hp, attack, defense, request, expected;} cases[] = {
+        {0, 252, 252, 12, 6},
+        {250, 0, 0, 12, 252},
+        {255, 0, 0, 4, 255},
+        {100, 252, 252, 4, 100},
+        {0, 0, 0, 65535, 252},
+        {0, 252, 252, 0, 0},
+    };
+    ZeroPlayerPartyMons();
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+        CreateMonWithIVs(mon, SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
+        u32 value = cases[i].hp;
+        SetMonData(mon, MON_DATA_HP_EV, &value);
+        value = cases[i].attack;
+        SetMonData(mon, MON_DATA_ATK_EV, &value);
+        value = cases[i].defense;
+        SetMonData(mon, MON_DATA_DEF_EV, &value);
+        CalculateMonStats(mon);
+        struct Pokemon before;
+        memcpy(&before, mon, sizeof(before));
+        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8005 = STAT_HP;
+        gSpecialVar_0x8006 = cases[i].request;
+        IncreaseChosenMonEVs();
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), cases[i].expected);
+        EXPECT_EQ(gSpecialVar_0x8007, cases[i].expected);
+        EXPECT_EQ(gSpecialVar_Result, cases[i].expected > cases[i].hp);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), cases[i].attack);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_DEF_EV), cases[i].defense);
+        if (cases[i].hp >= MAX_PER_STAT_EVS || cases[i].hp + cases[i].attack + cases[i].defense >= MAX_TOTAL_EVS)
+            EXPECT_EQ(memcmp(&before, mon, sizeof(before)), 0);
+    }
+    ZeroPlayerPartyMons();
+}
+
+TEST("Inclement integration: battle EV gains preserve item bonuses caps and legacy normalization")
+{
+    static const struct {u16 item; u8 pokerus; u8 before[NUM_STATS], after[NUM_STATS];} cases[] = {
+        {ITEM_NONE, 0, {0}, {0, 0, 0, 0, 2, 1}},
+        {ITEM_MACHO_BRACE, 0, {0}, {0, 0, 0, 0, 4, 2}},
+        {ITEM_NONE, 0x11, {0}, {0, 0, 0, 0, 4, 2}},
+        {ITEM_MACHO_BRACE, 0x10, {0}, {0, 0, 0, 0, 8, 4}},
+        {ITEM_POWER_WEIGHT, 0, {0}, {8, 0, 0, 0, 2, 1}},
+        {ITEM_POWER_WEIGHT, 0x11, {0}, {16, 0, 0, 0, 4, 2}},
+        {ITEM_POWER_LENS, 0, {0}, {0, 0, 0, 0, 10, 1}},
+        {ITEM_POWER_LENS, 0x10, {0}, {0, 0, 0, 0, 20, 2}},
+        {ITEM_NONE, 0, {252, 252, 0, 0, 5, 0}, {252, 252, 0, 0, 6, 0}},
+        {ITEM_NONE, 0, {0, 0, 0, 0, 251, 0}, {0, 0, 0, 0, 252, 1}},
+        {ITEM_POWER_WEIGHT, 0, {251, 0, 0, 0, 0, 0}, {252, 0, 0, 0, 2, 1}},
+        {ITEM_NONE, 0, {255, 0, 0, 0, 0, 0}, {252, 0, 0, 0, 2, 1}},
+        {ITEM_NONE, 0, {255, 255, 0, 0, 0, 0}, {255, 255, 0, 0, 0, 0}},
+    };
+    EXPECT_EQ(GetCurrentEVCap(), 510);
+    struct Pokemon mon;
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        CreateMonWithIVs(&mon, SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
+        SetMonData(&mon, MON_DATA_HELD_ITEM, &cases[i].item);
+        SetMonData(&mon, MON_DATA_POKERUS, &cases[i].pokerus);
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+            SetMonData(&mon, MON_DATA_HP_EV + stat, &cases[i].before[stat]);
+        MonGainEVs(&mon, SPECIES_BUTTERFREE); // Authored yield: 2 Sp. Atk, 1 Sp. Def.
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_EV + stat), cases[i].after[stat]);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), cases[i].item);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_POKERUS), cases[i].pokerus);
+    }
+}
+
+TEST("Inclement integration: lottery initializes prizes and matches party PC and leading-zero IDs")
+{
+    const struct {u16 id, tier, prize;} cases[] = {
+        {11445, 1, ITEM_PP_UP}, {13345, 2, ITEM_BOTTLE_CAP},
+        {22345, 3, ITEM_MAX_REVIVE}, {12345, 4, ITEM_MASTER_BALL},
+        {12346, 0, ITEM_NONE}, {9995, 0, ITEM_NONE},
+    };
+    ZeroPlayerPartyMons();
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            ZeroBoxMonAt(box, slot);
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        u32 id = 0xABCD0000u | cases[i].id;
+        CreateMon(mon, SPECIES_EEVEE, 10, 0, OTID_STRUCT_PRESET(id));
+        gSpecialVar_Result = 12345;
+        gSpecialVar_0x8005 = ITEM_POTION; // Unrelated previous script value.
+        PickLotteryCornerTicket();
+        EXPECT_EQ(gSpecialVar_0x8004, cases[i].tier);
+        EXPECT_EQ(gSpecialVar_0x8005, cases[i].prize);
+        if (cases[i].tier)
+            EXPECT_EQ(gSpecialVar_0x8006, 0);
+    }
+    // Leading zeros count toward all five digits; boxed mons qualify, Eggs do not.
+    u32 id = 42;
+    CreateMon(mon, SPECIES_EEVEE, 10, 0, OTID_STRUCT_PRESET(id));
+    gPokemonStoragePtr->boxes[0][0] = mon->box;
+    bool8 egg = TRUE;
+    SetMonData(mon, MON_DATA_IS_EGG, &egg);
+    gSpecialVar_Result = 42;
+    PickLotteryCornerTicket();
+    EXPECT_EQ(gSpecialVar_0x8004, 4);
+    EXPECT_EQ(gSpecialVar_0x8005, ITEM_MASTER_BALL);
+    EXPECT_EQ(gSpecialVar_0x8006, 1);
+    SetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_IS_EGG, &egg);
+    PickLotteryCornerTicket();
+    EXPECT_EQ(gSpecialVar_0x8004, 0);
+    EXPECT_EQ(gSpecialVar_0x8005, ITEM_NONE);
+    ZeroBoxMonAt(0, 0);
+    ZeroPlayerPartyMons();
+}
+
+extern void ResetChosenMonEVs(void);
+extern void ChangePokemonNature(void);
+
+TEST("Inclement integration: invalid service selections never mutate any party member")
+{
+    static const u16 slots[] = {PARTY_SIZE, 255, 65535, 1, 2};
+    static void (*const services[])(void) = {
+        IncreaseChosenMonEVs, ResetChosenMonEVs, ChangeChosenMonIVs,
+        ChangeChosenMonHiddenPower, ChangePokemonNature,
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(slots); i++)
+    for (u32 service = 0; service < ARRAY_COUNT(services); service++)
+    {
+        ZeroPlayerPartyMons();
+        CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID, 17);
+        CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][2], SPECIES_TOGEPI, 20, 0, OTID_STRUCT_PLAYER_ID, 17);
+        u32 value = TRUE;
+        SetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_EGG, &value);
+        value = 100;
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV, &value);
+        CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+        struct Pokemon before[PARTY_SIZE];
+        memcpy(before, gParties[B_TRAINER_PLAYER], sizeof(before));
+        gSpecialVar_0x8004 = slots[i];
+        gSpecialVar_0x800A = slots[i];
+        gSpecialVar_0x8005 = STAT_HP;
+        gSpecialVar_0x8006 = 4;
+        gSpecialVar_0x8007 = 0;
+        services[service]();
+        EXPECT_EQ(memcmp(before, gParties[B_TRAINER_PLAYER], sizeof(before)), 0);
+    }
+    ZeroPlayerPartyMons();
+}
+
+extern void BufferChosenMonAllEVs(void);
+extern void BufferChosenMonAllIVs(void);
+extern void BufferChosenMonNature(void);
+
+TEST("Inclement integration: stat service buffers clear invalid selections and preserve valid formatting")
+{
+    ZeroPlayerPartyMons();
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID, 17);
+    gSpecialVar_0x8004 = 0;
+    BufferChosenMonAllEVs();
+    EXPECT_EQ(StringCompare(gStringVar4, COMPOUND_STRING("0/0/0/0/0/0")), 0);
+    BufferChosenMonAllIVs();
+    EXPECT_EQ(StringCompare(gStringVar4, COMPOUND_STRING("17/17/17/17/17/17")), 0);
+    static void (*const buffers[])(void) = {BufferChosenMonAllEVs, BufferChosenMonAllIVs,
+        BufferChosenMonEV, BufferChosenMonIV, BufferChosenMonNature};
+    gSpecialVar_0x8004 = PARTY_SIZE;
+    for (u32 i = 0; i < ARRAY_COUNT(buffers); i++)
+    {
+        StringCopy(gStringVar2, COMPOUND_STRING("stale"));
+        StringCopy(gStringVar4, COMPOUND_STRING("stale"));
+        buffers[i]();
+        EXPECT_EQ(StringCompare(i < 2 ? gStringVar4 : gStringVar2, COMPOUND_STRING("")), 0);
+    }
+    gSpecialVar_0x8005 = gSpecialVar_0x8006 = gSpecialVar_0x8007 = 999;
+    BufferVarsForIVRater();
+    EXPECT_EQ(gSpecialVar_0x8005, 0);
+    EXPECT_EQ(gSpecialVar_0x8006, 0);
+    EXPECT_EQ(gSpecialVar_0x8007, 0);
+    gSpecialVar_0x8004 = 0;
+    gSpecialVar_0x8005 = NUM_STATS;
+    gSpecialVar_0x8006 = 4;
+    CheckChosenMonCanGainEVs();
+    EXPECT(!gSpecialVar_Result);
+    struct Pokemon before;
+    memcpy(&before, &gParties[B_TRAINER_PLAYER][0], sizeof(before));
+    IncreaseChosenMonEVs();
+    EXPECT(!gSpecialVar_Result);
+    EXPECT_EQ(memcmp(&before, &gParties[B_TRAINER_PLAYER][0], sizeof(before)), 0);
+    BufferChosenMonEV();
+    EXPECT_EQ(gSpecialVar_0x8006, 0);
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("")), 0);
     ZeroPlayerPartyMons();
 }

@@ -10,30 +10,9 @@ Route106_EventScript_Douglas:: @ 81EE493
 	msgbox Route106_Text_DouglasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route106_EventScript_Kyla:: @ 81EE4AA
-	@ This retired encounter has no campaign battle.
-	msgbox Route106_Text_KylaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route106_EventScript_Elliot:: @ 81EE4C1
-	trainerbattle_double TRAINER_ELLIOT_1, Route106_Text_ElliotIntro, Route106_Text_ElliotDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route106_EventScript_ElliotRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route106_EventScript_ElliotRematch
-	msgbox Route106_Text_ElliotPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route106_EventScript_ElliotRegisterMatchCallAfterBattle:: @ 81EE4ED
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route106_Text_ElliotPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route106_EventScript_ElliotRematch:: @ 81EE50C
-	@ This retired encounter has no campaign battle.
-	msgbox Route106_Text_ElliotRematchPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_ELLIOT_1, Route106_Text_ElliotIntro, Route106_Text_ElliotDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route106_Text_ElliotPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route106_EventScript_Ned:: @ 81EE523
@@ -45,4 +24,3 @@ Route106_Text_TrainerTips: @ 81EE53A
 	.string "Trainer Tips\p"
 	.string "Advice on catching Pokémon with a Rod:\n"
 	.string "Press the A Button if you get a bite.$"
-

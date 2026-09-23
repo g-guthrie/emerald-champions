@@ -157,9 +157,8 @@ SafariZone_South_Text_GoodLuck: @ 82A52AB
 	.string "to tell me, please!$"
 
 SafariZone_South_Text_Boy: @ 82A52EF
-	.string "Did you know?\p"
-	.string "If you put a {POKEBLOCK} in that square box,\n"
-	.string "Pokémon gather around.$"
+	.string "Those square boxes are empty.\n"
+	.string "I look for Pokémon in the tall grass!$"
 
 SafariZone_South_Text_Man: @ 82A533B
 	.string "I want to keep going deeper, but I\n"
@@ -180,8 +179,8 @@ SafariZone_Northwest_Text_Man: @ 82A542C
 	.string "energy to catch Pokémon…$"
 
 SafariZone_North_Text_Fisherman: @ 82A5489
-	.string "I'm on a mission to find WATER Pokémon\n"
-	.string "you don't see in Hoenn.\p"
+	.string "I'm on a mission to find Water-type\n"
+	.string "Pokémon you don't see in Hoenn.\p"
 	.string "Do you have any idea where the lake is?$"
 
 SafariZone_North_Text_Man: @ 82A54F0
@@ -189,10 +188,9 @@ SafariZone_North_Text_Man: @ 82A54F0
 	.string "here and trade them with my friends!$"
 
 SafariZone_South_Text_Youngster: @ 82A553E
-	.string "I put a {POKEBLOCK} on the {POKEBLOCK} Feeder.\n"
-	.string "But it seems to have disappeared.\p"
-	.string "I guess Pokémon must have eaten it\n"
-	.string "without me noticing.$"
+	.string "I checked that feeding box,\n"
+	.string "but there was nothing inside.\p"
+	.string "I'll try the tall grass instead!$"
 
 Route121_SafariZoneEntrance_Text_TrainerTip: @ 82A55BB
 	.string "Safari Zone Trainer Tip!\p"
@@ -217,23 +215,14 @@ SafariZone_RestHouse_Text_PsychicM: @ 82A56E1
 	.string "Pokémon that don't flee easily.$"
 
 SafariZone_RestHouse_Text_FatMan: @ 82A5764
-	.string "If you put a {POKEBLOCK} on the Feeder,\n"
-	.string "Pokémon are attracted to it.\p"
-	.string "I think Pokémon with the same sort of\n"
-	.string "nature are drawn by a certain {POKEBLOCK}.$"
-
-SafariZone_South_Text_AreaOffLimits1: @ 82A57EE
-	.string "This area is still under construction.\n"
-	.string "It's off-limits, sorry!$"
+	.string "The feeding boxes here are empty.\p"
+	.string "You can still find wild Pokémon\n"
+	.string "in the tall grass and water.$"
 
 SafariZone_Southeast_Text_ExpansionIsFinished: @ 82A582D
 	.string "The Safari Zone's expansion project\n"
 	.string "is finished now.\p"
 	.string "We hope you will enjoy the new area.$"
-
-SafariZone_South_Text_AreaOffLimits2: @ 82A5887
-	.string "This area is still under construction.\n"
-	.string "It's off-limits, sorry!$"
 
 SafariZone_Southeast_Text_LittleGirl: @ 82A58C6
 	.string "Wow! Whee! I haven't seen any of\n"
@@ -255,7 +244,7 @@ SafariZone_Northeast_Text_Boy: @ 82A59A4
 	.string "decide what I should catch.$"
 
 SafariZone_Northeast_Text_Woman: @ 82A5A09
-	.string "I heard that you can see PIKACHU here.\n"
+	.string "I heard that you can see Pikachu here.\n"
 	.string "Where might one be?$"
 
 SafariZone_Northeast_Text_Girl: @ 82A5A44

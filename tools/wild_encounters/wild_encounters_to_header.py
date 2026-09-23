@@ -119,7 +119,7 @@ class WildEncounterAssembler:
                     macro_total_name = macro_base + group_name_mapping[-1] + "_TOTAL"
                     self.WriteLine()
     
-    def WriteMonInfos(self, name, mons, encounter_rate):
+    def WriteMonInfos(self, name, mons, encounter_rate, rates=None, groups=None):
         info_name = name + "Info"
         self.WriteLine(f"const struct WildPokemon {name}[] =")
         self.WriteLine("{")
@@ -131,7 +131,21 @@ class WildEncounterAssembler:
 
         self.WriteLine("};")
         self.WriteLine()
-        self.WriteLine(f"const struct WildPokemonInfo {info_name} = {{ {encounter_rate}, {name} }};")
+        bounds_name = "NULL"
+        if rates is not None:
+            if len(rates) != len(mons) or any(type(x) is not int or not 0 < x <= 100 for x in rates):
+                raise ValueError(f"{name}: invalid per-table probabilities")
+            bounds = [0] * len(rates)
+            for indices in (groups or {"all": list(range(len(rates)))}).values():
+                if sum(rates[i] for i in indices) != 100:
+                    raise ValueError(f"{name}: method probabilities must total 100")
+                total = 0
+                for i in indices:
+                    total += rates[i]
+                    bounds[i] = total
+            bounds_name = name + "Bounds"
+            self.WriteLine(f"static const u8 {bounds_name}[] = {{ " + ", ".join(map(str, bounds)) + " };")
+        self.WriteLine(f"const struct WildPokemonInfo {info_name} = {{ {encounter_rate}, {name}, {bounds_name} }};")
         self.WriteLine()
     
     def WriteTerminator(self):
@@ -252,7 +266,8 @@ class WildEncounterAssembler:
                     mons = mons_entry["mons"]
 
                     mon_array_name = base_label + "_" + mon_type.title().replace("_", "")
-                    self.WriteMonInfos(mon_array_name, mons, encounter_rate)
+                    self.WriteMonInfos(mon_array_name, mons, encounter_rate, mons_entry.get("encounter_rates"),
+                        next((f.get("groups") for f in wild_encounter_group.get("fields", []) if f["type"] == mon_type), None))
                     headers["data"][shared_label][time][mon_type] = mon_array_name + "Info"
                 self.WriteLine(f"#endif")
 

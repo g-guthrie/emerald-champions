@@ -66,7 +66,8 @@ def main():
 
         def cross(label, direction):
             advance(label + '-step', 32, keys=[(0, 16, direction)])
-            for _ in range(20):
+            # The full introduction plus item message exceeds 4,800 frames at slow text speed.
+            for _ in range(40):
                 v = advance(label, keys=[(f, 2, 'A') for f in range(0, 240, 24)])
                 if campaign.is_stable_overworld(v):
                     return v
@@ -77,7 +78,7 @@ def main():
                     (trigger['x'], trigger['y']), 'did not cross intended guide trigger')
             active, pos, _ = campaign.query_campaign_object(local_id=4, **common)
             require(active and pos == (3, 18), f'guide failed to return: {active}, {pos}')
-            value, _ = campaign.query_campaign_value(kind=2, identifier=constants['VAR_RUSTBORO_GYM_GUIDE_STATE'], **common)
+            value, _ = campaign.query_campaign_value(kind=2, identifier=constants['VAR_RUSTBORO_CITY_STATE'], **common)
             require(value == expected_state, f'guide completion state {value} != {expected_state}')
             quantity, _ = campaign.query_campaign_value(kind=4, identifier=constants['ITEM_FRESH_WATER'], **common)
             require(quantity == expected_item, f'Fresh Water count {quantity} != {expected_item}')

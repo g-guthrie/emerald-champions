@@ -435,7 +435,9 @@ SINGLE_BATTLE_TEST("Knock Off doesn't remove item if it's prevented by Sticky Ho
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_MUK) { MaxHP(100); HP(51); Item(ITEM_ORAN_BERRY); Ability(ABILITY_STICKY_HOLD); }
+        // Emerald Champions berries trigger at half HP + 1 (GetBerryActivationThreshold),
+        // so start above that for the Oran Berry to survive until Knock Off lands.
+        OPPONENT(SPECIES_MUK) { MaxHP(100); HP(52); Item(ITEM_ORAN_BERRY); Ability(ABILITY_STICKY_HOLD); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_KNOCK_OFF); }
     } SCENE {

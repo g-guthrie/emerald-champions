@@ -144,13 +144,6 @@ DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 	return
 
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, DewfordTown_Gym_EventScript_BrawlyRematch
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
@@ -194,55 +187,6 @@ DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM08
 	release
-	end
-
-DewfordTown_Gym_EventScript_BrawlyRematch::
-	message DewfordTown_Gym_Text_BrawlyChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, DewfordTown_Gym_EventScript_SetSingles
-	case 1, DewfordTown_Gym_EventScript_SetDoubles
-	case 2, DewfordTown_Gym_EventScript_Exit
-	case 127, DewfordTown_Gym_EventScript_Exit
-	releaseall
-	end
-
-DewfordTown_Gym_EventScript_SetSingles::
-	msgbox DewfordTown_Gym_Text_BrawlyAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_BRAWLY
-	releaseall
-	end
-
-DewfordTown_Gym_EventScript_SetDoubles::
-	msgbox DewfordTown_Gym_Text_BrawlyAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_BRAWLY
-	releaseall
-	end
-
-DewfordTown_Gym_EventScript_BrawlySinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_BRAWLY
-	releaseall
-	end
-
-DewfordTown_Gym_EventScript_BrawlyDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_BRAWLY
-	releaseall
-	end
-
-DewfordTown_Gym_EventScript_AlreadyRematched::
-	msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-DewfordTown_Gym_EventScript_Exit::
-	releaseall
 	end
 
 DewfordTown_Gym_EventScript_Takao:: @ 81FC8B7
@@ -312,6 +256,8 @@ DewfordTown_Gym_EventScript_GymGuide::
 	goto_if_set FLAG_DEWFORD_GYM_FRESHWATER, DewfordTown_Gym_Guide2
 	msgbox DewfordTown_Gym_Text_Guide1, MSGBOX_DEFAULT
 	giveitem ITEM_FRESH_WATER, 10
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_DEWFORD_GYM_FRESHWATER
 	msgbox DewfordTown_Gym_Text_Guide2, MSGBOX_DEFAULT
 	release
@@ -358,8 +304,8 @@ DewfordTown_Gym_Text_Guide1::
 DewfordTown_Gym_Text_Guide2::
 	.string "Dewford's Gym Leader Brawly commands\n"
 	.string "Fighting-type Pokémon.\p"
-	.string "His strongest Pokémon is his Hariyama,\n"
-	.string "and the rest of his team are no joke!\p"
+	.string "Watch out for his Mega Heracross!\n"
+	.string "His partners can help protect it.\p"
 	.string "Bringing a Ghost-type Pokémon\n"
 	.string "could give you an advantage.\p"
 	.string "You can find some in Granite Cave,\n"
@@ -475,16 +421,14 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "That was an excellent battle!\n"
 	.string "You have earned the Knuckle\l"
 	.string "Badge.\p"
+	.string "With a Flash license, it lights\n"
+	.string "up dark caves automatically.\p"
 	.string "Take this Mega Stone as well.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181
 	.string "This is Emboarite. An Emboar\n"
 	.string "holding it can Mega Evolve once\l"
 	.string "you have a Mega Ring.$"
-
-DewfordTown_Gym_Text_RegisteredBrawly: @ 81FD1E0
-	.string "Registered Gym Leader Brawly\n"
-	.string "in the PokéNav.$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle: @ 81FD20D
 	.string "I can see your talent becoming a giant\n"
@@ -498,35 +442,3 @@ DewfordTown_Gym_Text_GymStatueCertified: @ 81FD28B
 	.string "Dewford Town Pokémon Gym\p"
 	.string "Brawly's certified Trainers:\n"
 	.string "{PLAYER}$"
-
-DewfordTown_Gym_Text_BrawlyPreRematch: @ 81FD2C4
-	.string "Brawly: Show me how much higher\n"
-	.string "you've gone!$"
-
-DewfordTown_Gym_Text_BrawlyRematchDefeat: @ 81FD367
-	.string "Wow!\n"
-	.string "Swamped again!$"
-
-DewfordTown_Gym_Text_BrawlyPostRematch: @ 81FD37B
-	.string "Brawly: Battling is vast and it's deep.\n"
-	.string "You can't see the bottom.\l"
-	.string "It's just like the sea of Hoenn!$"
-
-DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons: @ 81FD3DE
-	.string "Oh? You only have one Pokémon\n"
-	.string "that can battle.\p"
-	.string "I'm sorry, but I'd like you to come back\n"
-	.string "with at least two Pokémon.$"
-
-DewfordTown_Gym_Text_BrawlyChooseFormat:
-	.string "Brawly: A wave may draw back, but it\n"
-	.string "always returns to the shore.\p"
-	.string "A giant wave of a talent like you…\n"
-	.string "I knew you would return!\p"
-	.string "So, you want our rematch to be a\n"
-	.string "single battle or a double battle?$"
-
-DewfordTown_Gym_Text_BrawlyAllowLegends:
-	.string "Brawly: And how about battling my\n"
-	.string "Legendary Pokémon? Think you're up\l"
-	.string "to the challenge?$"

@@ -121,17 +121,20 @@ SINGLE_BATTLE_TEST("Berserk will not activate if the last multi hit move activat
     u32 j;
     GIVEN {
         ASSUME(IsMultiHitMove(MOVE_DOUBLE_SLAP));
-        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); MaxHP(100); HP(90); }
-        OPPONENT(SPECIES_SHELLDER) { Ability(ABILITY_SKILL_LINK); } // Always hits 5 times.
+        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); Level(100); Defense(100); MaxHP(100); HP(90); }
+        OPPONENT(SPECIES_SHELLDER) { Ability(ABILITY_SKILL_LINK); Level(100); Attack(50); } // Always hits 5 times.
     } WHEN {
-        TURN { MOVE(opponent, MOVE_DOUBLE_SLAP); }
+        TURN { MOVE(opponent, MOVE_DOUBLE_SLAP, criticalHit: FALSE, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); }
     } SCENE {
         for (j = 0; j < 4; j++) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_SLAP, opponent);
+            HP_BAR(player, hp: 90 - 8 * (j + 1));
             NOT ABILITY_POPUP(player, ABILITY_BERSERK);
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_SLAP, opponent);
+        HP_BAR(player, hp: 50);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
+        HP_BAR(player, hp: 75);
         NOT ABILITY_POPUP(player, ABILITY_BERSERK);
 
     } THEN {
@@ -144,7 +147,7 @@ SINGLE_BATTLE_TEST("Berserk activates before the hp can be restored on non multi
     u16 maxHp = 500;
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
-        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); MaxHP(maxHp); HP(maxHp / 2 + 1); }
+        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); MaxHP(maxHp); HP(maxHp / 2 + 2); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SCRATCH); }

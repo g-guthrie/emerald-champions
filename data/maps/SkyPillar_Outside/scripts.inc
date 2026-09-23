@@ -77,7 +77,6 @@ SkyPillar_Outside_EventScript_WallaceScene:: @ 8239304
 	setweather WEATHER_ABNORMAL
 	doweather
 	special WaitWeather
-	waitstate
 	delay 30
 	msgbox SkyPillar_Outside_Text_GotToGoBackForSootopolis, MSGBOX_DEFAULT
 	closemessage

@@ -68,6 +68,8 @@ VerdanturfTown_WandasHouse_EventScript_WandaGardevoirite::
 	waitmovement 0
 	msgbox VerdanturfTown_WandasHouse_Text_ReceiveGardevoirite, MSGBOX_DEFAULT
 	giveitem ITEM_GARDEVOIRITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_WANDA_GARDEVOIRITE
 	msgbox VerdanturfTown_WandasHouse_Text_PrettyStone, MSGBOX_DEFAULT
 	release

@@ -10,11 +10,12 @@ OldaleTown_House2_EventScript_Man:: @ 81FBF64
 	end
 
 OldaleTown_House2_Text_PokemonLevelUp: @ 81FBF6D
-	.string "When Pokémon battle, they eventually\n"
-	.string "level up and become stronger.$"
+	.string "Pokémon earn experience in battle\n"
+	.string "until they reach the level cap.\p"
+	.string "The nurse's Leveler can bring your\n"
+	.string "whole party up to its current caps.$"
 
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon: @ 81FBFB0
 	.string "If the Pokémon with you become\n"
 	.string "stronger, you'll be able to go farther\l"
 	.string "away from here.$"
-

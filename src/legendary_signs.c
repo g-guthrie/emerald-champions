@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "caps.h"
+#include "constants/emerald_champions.h"
 #include "data.h"
 #include "daycare.h"
 #include "emerald_champions_battle_sets.h"
@@ -399,33 +400,6 @@ static bool32 MeetsSignDiscovery(enum LegendarySignId id)
     return HasCaughtSpeciesFamily(gLegendarySignDefinitions[id].requiredSpecies);
 }
 
-// Prepare presentation only. Discovery is committed after the native song scene.
-void PrepareEmeraldChampionsMeadowSong(void)
-{
-    gSpecialVar_Result = FALSE;
-    if (!FlagGet(FLAG_BADGE02_GET) || !PlayerOwnsItem(ITEM_MEGA_RING))
-        return;
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE || species == SPECIES_EGG)
-            continue;
-        for (u32 move = 0; move < MAX_MON_MOVES; move++)
-        {
-            if (GetMonData(mon, MON_DATA_MOVE1 + move) == MOVE_SING)
-            {
-                GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
-                StringGet_Nickname(gStringVar1);
-                FieldMoveShowMon_ClearSpeciesOverride();
-                gFieldEffectArguments[0] = slot;
-                gSpecialVar_Result = TRUE;
-                return;
-            }
-        }
-    }
-}
-
 void TryUnlockLocalLegendaryDiscovery(void)
 {
     enum LegendarySignId id = gSpecialVar_0x8004;
@@ -433,12 +407,15 @@ void TryUnlockLocalLegendaryDiscovery(void)
     bool32 helped = FALSE;
 
     gSpecialVar_Result = FALSE;
-    if (id != LEGENDARY_SIGN_MELOETTA && id != LEGENDARY_SIGN_LANDORUS)
+    if (id != LEGENDARY_SIGN_MELOETTA && id != LEGENDARY_SIGN_LANDORUS && id != LEGENDARY_SIGN_MARSHADOW)
         return;
-    if (map != gLegendarySignDefinitions[id].mapId || !MeetsSignProgression(id)
+    u16 discoveryMap = id == LEGENDARY_SIGN_MARSHADOW ? MAP_ROUTE113_GLASS_WORKSHOP : gLegendarySignDefinitions[id].mapId;
+    if (map != discoveryMap || !MeetsSignProgression(id)
      || IsLegendarySignUnlocked(id) || IsLegendarySignCaught(id))
         return;
-    if (id == LEGENDARY_SIGN_LANDORUS)
+    if (id == LEGENDARY_SIGN_MARSHADOW)
+        helped = (VarGet(VAR_EC_SOOT_PROGRESS) & EC_SOOT_TOTAL_MASK) >= EC_SOOT_MARSHADOW_TARGET;
+    else if (id == LEGENDARY_SIGN_LANDORUS)
         helped = PlayerPartyHasSpeciesFamily(SPECIES_CASTFORM);
     else
     {
@@ -639,44 +616,7 @@ bool32 PlayerPartyHasSpeciesFamily(enum Species species)
     return FALSE;
 }
 
-void DoesPlayerPartyHaveSelectedSpeciesFamily(void)
-{
-    gSpecialVar_Result = PlayerPartyHasSpeciesFamily(gSpecialVar_0x8004);
-}
-
-void PrepareEmeraldChampionsCastformSurvey(void)
-{
-    gSpecialVar_Result = FALSE;
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE || species == SPECIES_EGG
-         || SpeciesToNationalPokedexNum(species) != NATIONAL_DEX_CASTFORM
-         || GetMonData(mon, MON_DATA_HP) == 0
-         || (GetMonData(mon, MON_DATA_STATUS) & STATUS1_SLEEP))
-            continue;
-        FieldMoveShowMon_ClearSpeciesOverride();
-        gFieldEffectArguments[0] = slot;
-        gSpecialVar_Result = TRUE;
-        return;
-    }
-}
-
-static u8 GetSignLevel(s8 offset)
-{
-    s32 level = (s32)GetCurrentLevelCap() + offset;
-
-    if (level < 1)
-        level = 1;
-    if (level > MAX_LEVEL)
-        level = MAX_LEVEL;
-    return level;
-}
-
-// Legendary and mythical species above 600 BST use floor(cap * 600 / BST)
-// (GetLevelCapForSpecies) before the sign's offset; everything else keeps the
-// live cap. This is the acquisition-side rule the guide states.
+// Scripted discoveries use the live campaign cap plus their encounter offset.
 static u8 GetSignLevelForSpecies(enum Species species, s8 offset)
 {
     s32 level = (s32)GetLevelCapForSpecies(species, GetCurrentLevelCap()) + offset;
@@ -725,28 +665,6 @@ u16 GetSelectedLegendarySignState(void)
     return gSpecialVar_Result;
 }
 
-u16 ShouldShowSelectedLegendarySignObject(void)
-{
-    enum LegendarySignId id = gSpecialVar_0x8004;
-    gSpecialVar_Result = id < LEGENDARY_SIGN_COUNT && !IsLegendarySignCaught(id);
-    return gSpecialVar_Result;
-}
-
-u16 GetSelectedLegendarySignLevel(void)
-{
-    enum LegendarySignId signId = gSpecialVar_0x8004;
-    s8 offset = 2;
-
-    if (signId < LEGENDARY_SIGN_COUNT)
-    {
-        offset = gLegendarySignDefinitions[signId].levelOffset;
-        gSpecialVar_Result = GetSignLevelForSpecies(gLegendarySignDefinitions[signId].species, offset);
-        return gSpecialVar_Result;
-    }
-    gSpecialVar_Result = GetSignLevel(offset);
-    return gSpecialVar_Result;
-}
-
 void CreateSelectedLegendarySignEncounter(void)
 {
     enum LegendarySignId id = gSpecialVar_0x8004;
@@ -785,14 +703,6 @@ void CreateEmeraldChampionsStaticLegendaryEncounter(void)
         ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][0], authored);
     else
         ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
-    if (species == SPECIES_LATIAS || species == SPECIES_LATIOS)
-    {
-        // Southern Island keeps its event origin and Soul Dew at the live cap.
-        u32 fateful = TRUE;
-        u16 item = ITEM_SOUL_DEW;
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &item);
-    }
 }
 
 void TryGiveSelectedLegendarySignReward(void)
@@ -831,7 +741,7 @@ const u8 *GetLegendaryDisplayName(enum Species species)
     }
 }
 
-// Standard encounters give each native resident 3% and each quest discovery 1%.
+// Standard encounters give each eligible wild legend 1%.
 // Sweet Scent shares one 25% roll evenly across both eligible groups.
 enum Species ChooseRareWildLegendarySpecies(enum WildPokemonArea area, bool32 sweetScent)
 {
@@ -849,22 +759,17 @@ enum Species ChooseRareWildLegendarySpecies(enum WildPokemonArea area, bool32 sw
     for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
     {
         const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-        if (sign->mapId != map || !CanAcquireLegendarySignSpecies(sign->species))
+        if (sign->mapId != map
+         || (sign->source != LEGENDARY_SOURCE_NATIVE_WILD && sign->source != LEGENDARY_SOURCE_RARE_WILD)
+         || !CanAcquireLegendarySignSpecies(sign->species))
             continue;
         if (sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
             native[nativeCount++] = sign->species;
-        else if (sign->source == LEGENDARY_SOURCE_RARE_WILD)
+        else
             quests[questCount++] = sign->species;
     }
     if (nativeCount == 0 && questCount == 0)
         return SPECIES_NONE;
-    // A charted deep ice pays one guaranteed local sighting, then is spent.
-    if (map == MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM && FlagGet(FLAG_EC_SHOAL_ICE_SIGHTING))
-    {
-        u32 charted = RandomUniform(RNG_WILD_MON_TARGET, 0, nativeCount + questCount - 1);
-        FlagClear(FLAG_EC_SHOAL_ICE_SIGHTING);
-        return charted < nativeCount ? native[charted] : quests[charted - nativeCount];
-    }
     roll = RandomUniform(RNG_NONE, 0, 99);
     if (sweetScent)
     {
@@ -873,9 +778,9 @@ enum Species ChooseRareWildLegendarySpecies(enum WildPokemonArea area, bool32 sw
         u32 choice = RandomUniform(RNG_WILD_MON_TARGET, 0, nativeCount + questCount - 1);
         return choice < nativeCount ? native[choice] : quests[choice - nativeCount];
     }
-    if (roll < nativeCount * 3)
-        return native[roll / 3];
-    roll -= nativeCount * 3;
+    if (roll < nativeCount)
+        return native[roll];
+    roll -= nativeCount;
     if (roll < questCount)
         return quests[roll];
     return SPECIES_NONE;
@@ -941,7 +846,7 @@ void ResearchSelectedLegendarySign(void)
     }
     if (sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
     {
-        StringAppend(gStringVar4, COMPOUND_STRING("\pA wild resident: 3% per encounter."));
+        StringAppend(gStringVar4, COMPOUND_STRING("\pA wild resident: 1% per encounter."));
         StringAppend(gStringVar4, sign->mapId == MAP_ROUTE125
             ? COMPOUND_STRING("\pSearch while SURFING here.")
             : COMPOUND_STRING("\pSearch the wild Pokémon here."));
@@ -1039,7 +944,8 @@ u16 GetHeatranDiscoveryState(void)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_HEATRAN), FLAG_GET_CAUGHT))
         return 2;
-    return FlagGet(FLAG_EC_CAUGHT_HEATRAN) ? 0 : 1;
+    // The Magma Stone clears Heatran's object hide flag when it awakens.
+    return FlagGet(FLAG_DEFEATED_HEATRAN) ? 0 : 1;
 }
 
 void BufferNextCenterLegendaryLead(void)
@@ -1091,7 +997,7 @@ void BufferNextCenterLegendaryLead(void)
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You've already found\n{STR_VAR_2}!\pThe local lead was:\n{STR_VAR_3}."));
         }
         else if (sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pIt has a 3% wild encounter chance.\nSWEET SCENT gives a shared 25%\lchance among uncaught local legends."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pIt has a 1% wild encounter chance.\nSWEET SCENT gives a shared 25%\lchance among uncaught local legends."));
         else if (!MeetsSignProgression(id))
             AppendLegendaryProgressionRequirements(id);
         else if (!MeetsSignDiscovery(id))
@@ -1136,6 +1042,9 @@ u8 GiveLegendarySignReward(enum Species species, u8 level)
     if (!CanAcquireLegendarySignSpecies(species))
         return LEGENDARY_REWARD_UNAVAILABLE;
     CreateMon(&reward, species, level, Random32(), OTID_STRUCT_PLAYER_ID);
+    // Level-up moves and real stats remain if no usable preset exists for the species.
+    GiveMonInitialMoveset(&reward);
+    CalculateMonStats(&reward);
     ApplyNonMegaGiftSet(&reward);
     giveResult = GiveCapturedMonToPlayer(&reward);
     if (giveResult == MON_CANT_GIVE)

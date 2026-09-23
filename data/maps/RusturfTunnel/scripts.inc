@@ -95,14 +95,7 @@ RusturfTunnel_EventScript_BoyfriendApproachWanda1:: @ 822CF5D
 	waitmovement 0
 	return
 
-RusturfTunnel_EventScript_BoyfriendApproachWanda2:: @ 822CF6F
-	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerWatchBoyfriend
-	applymovement LOCALID_WANDAS_BF, RusturfTunnel_Movement_BoyfriendApproachWanda
-	waitmovement 0
-	applymovement LOCALID_WANDA, Common_Movement_WalkInPlaceFastestDown
-	waitmovement 0
-	return
-
+RusturfTunnel_EventScript_BoyfriendApproachWanda2::
 RusturfTunnel_EventScript_BoyfriendApproachWanda3:: @ 822CF8B
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PlayerWatchBoyfriend
 	applymovement LOCALID_WANDAS_BF, RusturfTunnel_Movement_BoyfriendApproachWanda
@@ -153,20 +146,7 @@ RusturfTunnel_EventScript_WandasBoyfriendNotice:: @ 822CFFF
 	waitmovement 0
 	return
 
-RusturfTunnel_Movement_WandaExit1: @ 822D017
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
+RusturfTunnel_Movement_WandaExit1:
 RusturfTunnel_Movement_WandaExit: @ 822D023
 	walk_right
 	walk_right
@@ -186,25 +166,6 @@ RusturfTunnel_Movement_PlayerWatchWandaExit: @ 822D02F
 	walk_in_place_fast_up
 	delay_16
 	delay_16
-	walk_in_place_fast_right
-	step_end
-
-RusturfTunnel_Movement_Unused1: @ 822D035
-	walk_left
-	walk_in_place_fast_right
-	step_end
-
-RusturfTunnel_Movement_Unused2: @ 822D038
-	walk_down
-	walk_in_place_fast_up
-	delay_8
-	walk_in_place_fast_right
-	step_end
-
-RusturfTunnel_Movement_Unused3: @ 822D03D
-	walk_up
-	walk_in_place_fast_down
-	delay_8
 	walk_in_place_fast_right
 	step_end
 
@@ -315,11 +276,15 @@ RusturfTunnel_EventScript_Peeko:: @ 822D0AF
 RusturfTunnel_EventScript_Grunt:: @ 822D0C2
 	lock
 	faceplayer
+	goto_if_defeated TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_EventScript_ReturnDevonGoods
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	msgbox RusturfTunnel_Text_GruntIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat
+RusturfTunnel_EventScript_ReturnDevonGoods::
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_GOODS
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PushPlayerAsideForGrunt
 	applymovement LOCALID_GRUNT, RusturfTunnel_Movement_GruntEscape
@@ -510,7 +475,8 @@ RusturfTunnel_Text_ExplainStrength: @ 822D6D2
 	.string "license, you can push large\l"
 	.string "boulders.\p"
 	.string "Press A by a boulder to use\n"
-	.string "Strength. Any party will do!$"
+	.string "Strength. Bring a Pokémon that\l"
+	.string "could learn it; no moveslot needed!$"
 
 RusturfTunnel_Text_WandaReunion: @ 822D745
 	.string "Wanda!\n"
@@ -541,3 +507,25 @@ RusturfTunnel_Text_MikePostBattle: @ 822D8F9
 	.string "protect Pokémon, right?\l"
 	.string "There's a feel-good story!$"
 
+@ Both entrances report the same tunnel state.
+Route116_EventScript_RusturfTunnelSign::
+VerdanturfTown_EventScript_RusturfTunnelSign::
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, RusturfTunnel_EventScript_OpenSign
+	msgbox Route116_Text_RusturfTunnelSign, MSGBOX_SIGN
+	end
+
+RusturfTunnel_EventScript_OpenSign::
+	msgbox RusturfTunnel_Text_OpenSign, MSGBOX_SIGN
+	end
+
+Route116_Text_RusturfTunnelSign:
+VerdanturfTown_Text_RusturfTunnelSign:
+	.string "Rusturf Tunnel\n"
+	.string "Linking Rustboro and Verdanturf\p"
+	.string "The tunnel project has been\n"
+	.string "canceled.$"
+
+RusturfTunnel_Text_OpenSign:
+	.string "Rusturf Tunnel\n"
+	.string "Linking Rustboro and Verdanturf\p"
+	.string "The tunnel is open for travel.$"

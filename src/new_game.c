@@ -2,7 +2,6 @@
 #include "clock.h"
 #include "new_game.h"
 #include "random.h"
-#include "clock.h"
 #include "pokemon.h"
 #include "roamer.h"
 #include "pokemon_size_record.h"
@@ -32,7 +31,6 @@
 #include "pokedex.h"
 #include "apprentice.h"
 #include "frontier_util.h"
-#include "pokedex.h"
 #include "save.h"
 #include "link_rfu.h"
 #include "main.h"
@@ -110,6 +108,12 @@ static void SetDefaultOptions(void)
 static void ClearPokedexFlags(void)
 {
     memset(gSaveBlock2Ptr->pokedex.lostLegendaryEncounters, 0, sizeof(gSaveBlock2Ptr->pokedex.lostLegendaryEncounters));
+#if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2 == FALSE
+    // NewGameInitData is also called directly by scene preparation, without
+    // the title flow's earlier SaveBlock2 clear. Progress must never carry over.
+    memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 0, sizeof(gSaveBlock2Ptr->pokedex.harvestedBerries));
+    gSaveBlock2Ptr->pokedex.gardenCelebiUnlocked = FALSE;
+#endif
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
 }
@@ -196,8 +200,6 @@ void NewGameInitData(void)
     ClearPlayerLinkBattleRecords();
     InitSeedotSizeRecord();
     InitLotadSizeRecord();
-    gPartiesCount[B_TRAINER_PLAYER] = 0;
-    ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;

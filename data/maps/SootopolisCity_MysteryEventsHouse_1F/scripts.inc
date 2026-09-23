@@ -133,7 +133,6 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_ChooseParty:: @ 8227AEF
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_KeepItTo3On3, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	return
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementNorth:: @ 8227AFE
@@ -189,9 +188,6 @@ SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles: @ 8227B4
 	.string "my only amusement is watching young\l"
 	.string "Trainers battle.$"
 
-SootopolisCity_MysteryEventsHouse_1F_Text_DoorAppearsToBeLocked: @ 8227BDD
-	.string "The door appears to be locked.$"
-
 SootopolisCity_MysteryEventsHouse_1F_Text_ChallengeVisitingTrainer: @ 8227BFC
 	.string "A Trainer named {STR_VAR_1}\n"
 	.string "is visiting my home.\p"
@@ -216,30 +212,18 @@ SootopolisCity_MysteryEventsHouse_1F_Text_HopeToSeeGoodMatch: @ 8227D21
 	.string "I hope to see a good match!$"
 
 @ Unused
-SootopolisCity_MysteryEventsHouse_1F_Text_StrVar1Tie: @ 8227D3D
-	.string "{STR_VAR_1}$"
-
-SootopolisCity_MysteryEventsHouse_B1F_Text_MatchEndedUpDraw: @ 8227D40
-	.string "The match ended up a draw.$"
-
 SootopolisCity_MysteryEventsHouse_1F_Text_BrilliantStandoff: @ 8227D5B
 	.string "So, it became a standoff.\p"
 	.string "It was a brilliant match in which\n"
 	.string "neither side conceded a step!$"
 
 @ Unused
-SootopolisCity_MysteryEventsHouse_1F_Text_StrVar1Won: @ 8227DB5
-	.string "{STR_VAR_1}$"
-
 SootopolisCity_MysteryEventsHouse_1F_Text_ThatWasSuperlative: @ 8227DB8
 	.string "That was superlative!\p"
 	.string "Why, it was like seeing myself in\n"
 	.string "my youth again!$"
 
 @ Unused
-SootopolisCity_MysteryEventsHouse_1F_Text_StrVar1Lost: @ 8227E00
-	.string "{STR_VAR_1}$"
-
 SootopolisCity_MysteryEventsHouse_1F_Text_TooBadForYou: @ 8227E03
 	.string "Ah, too bad for you!\p"
 	.string "But it was a good match.\n"

@@ -16,7 +16,7 @@ gText_EmeraldChampionsGiveFlightBeacon::
 gText_EmeraldChampionsExplainTools::
 	.string "The Poké Vial fully restores your\n"
 	.string "party outside battle. Every Center\l"
-	.string "refills its one dose.\p"
+	.string "refills your doses.\p"
 	.string "The Leveler raises your party to\n"
 	.string "each Pokémon's cap. It never\l"
 	.string "runs out.\p"
@@ -34,12 +34,16 @@ gText_EmeraldChampionsHealAfterTools::
 gText_EmeraldChampionsExplainFlightBeacon::
 	.string "Use the Flight Beacon after you\n"
 	.string "earn its license and Fly badge.\p"
+	.string "It can call a Pokémon able to learn\n"
+	.string "Fly from your party or PC.\p"
 	.string "For Cut, Surf and other HM skills,\n"
-	.string "you only need the license and\l"
-	.string "badge. Any party will do!\p"
+	.string "you need the license, Badge, and\l"
+	.string "a Pokémon able to learn the move.\p"
+	.string "It doesn't need to know the move.\p"
 	.string "Flash lights caves automatically.\n"
 	.string "Use the other skills at their\l"
-	.string "obstacles by pressing A.$"
+	.string "obstacles by pressing A.\p"
+	.string "Press B to surface when underwater.$"
 
 gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "One more tool for you:\n"
@@ -55,27 +59,27 @@ gText_EmeraldChampionsGiveMissingLeveler::
 	.string "the Leveler!$"
 
 gText_EmeraldChampionsExplainLeveler::
-	.string "The LEVELER raises each party member\n"
+	.string "The Leveler raises each party member\n"
 	.string "to its own level cap. It never\l"
 	.string "runs out.\p"
-	.string "Powerful legendary POKéMON have\n"
+	.string "Powerful legendary Pokémon have\n"
 	.string "lower caps to balance their stats.\l"
-	.string "Check each cap in SUMMARY.$"
+	.string "Check each cap in Summary.$"
 
 gText_WouldYouLikeToRestYourPkmn::
 	.string "Hello, and welcome to\n"
-	.string "the POKéMON CENTER.\p"
-	.string "We restore your tired POKéMON\n"
+	.string "the Pokémon Center.\p"
+	.string "We restore your tired Pokémon\n"
 	.string "to full health.\p"
-	.string "Would you like to rest your POKéMON?$"
+	.string "Would you like to rest your Pokémon?$"
 
 gText_IllTakeYourPkmn::
-	.string "Okay, I'll take your POKéMON\n"
+	.string "Okay, I'll take your Pokémon\n"
 	.string "for a few seconds.$"
 
 gText_RestoredPkmnToFullHealth::
 	.string "Thank you for waiting.\p"
-	.string "We've restored your POKéMON\n"
+	.string "We've restored your Pokémon\n"
 	.string "to full health.$"
 
 gText_WeHopeToSeeYouAgain::
@@ -83,29 +87,29 @@ gText_WeHopeToSeeYouAgain::
 
 gText_WelcomeCutShort::
 	.string "Hello, and welcome to\n"
-	.string "the POKéMON CENTER.\p"
-	.string "We restore your tired POKéMON\n"
+	.string "the Pokémon Center.\p"
+	.string "We restore your tired Pokémon\n"
 	.string "to full health.\p"
 	.string "Would you like to…$"
 
 gText_NoticesGoldCard::
 	.string "Th-that card…\n"
-	.string "Could it be… The GOLD CARD?!\p"
+	.string "Could it be… The Gold Card?!\p"
 	.string "Oh, the gold color is brilliant!\n"
 	.string "The four stars seem to sparkle!\p"
-	.string "I've seen several TRAINERS with\n"
-	.string "a SILVER CARD before, but, {PLAYER},\l"
-	.string "you're the first TRAINER I've ever\l"
-	.string "seen with a GOLD CARD!\p"
+	.string "I've seen several Trainers with\n"
+	.string "a Silver Card before, but, {PLAYER},\l"
+	.string "you're the first Trainer I've ever\l"
+	.string "seen with a Gold Card!\p"
 	.string "Okay, {PLAYER}, please allow me\n"
-	.string "the honor of resting your POKéMON!$"
+	.string "the honor of resting your Pokémon!$"
 
 gText_YouWantTheUsual::
 	.string "I'm delighted to see you, {PLAYER}!\n"
 	.string "You want the usual, am I right?$"
 
 gText_IllTakeYourPkmn2::
-	.string "Okay, I'll take your POKéMON\n"
+	.string "Okay, I'll take your Pokémon\n"
 	.string "for a few seconds.$"
 
 gText_ThankYouForWaiting::

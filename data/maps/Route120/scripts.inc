@@ -192,6 +192,9 @@ Route120_EventScript_StevenAskReadyForBattle:: @ 81F5672
 	end
 
 Route120_EventScript_StevenBattleKecleon:: @ 81F568B
+	checkitemspace ITEM_DEVON_SCOPE, 1
+	goto_if_eq VAR_RESULT, FALSE, Route120_EventScript_DevonScopeNoRoom
+Route120_EventScript_StartKecleonScene::
 	msgbox Route120_Text_StevenShowMeYourPower, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, DIR_NORTH
@@ -294,25 +297,7 @@ Route120_EventScript_Colin:: @ 81F57D7
 	end
 
 Route120_EventScript_Robert:: @ 81F57EE
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route120_EventScript_RematchRobert
-	msgbox Route120_Text_RobertPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route120_EventScript_RegisterRobert:: @ 81F581A
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route120_Text_RobertRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ROBERT_1
-	release
-	end
-
-Route120_EventScript_RematchRobert:: @ 81F5839
-	@ This retired encounter has no campaign battle.
-	msgbox Route120_Text_RobertPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_RobertPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Lorenzo:: @ 81F5850
@@ -325,46 +310,9 @@ Route120_EventScript_Jenna:: @ 81F5867
 	msgbox Route120_Text_JennaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route120_EventScript_Jeffrey:: @ 81F587E
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route120_EventScript_RematchJeffrey
-	msgbox Route120_Text_JeffreyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route120_EventScript_RegisterJeffrey:: @ 81F58AA
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route120_Text_JeffreyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JEFFREY_1
-	release
-	end
-
-Route120_EventScript_RematchJeffrey:: @ 81F58C9
-	@ This retired encounter has no campaign battle.
-	msgbox Route120_Text_JeffreyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route120_EventScript_Jennifer:: @ 81F58E0
 	trainerbattle_double TRAINER_JENNIFER, Route120_Text_JenniferIntro, Route120_Text_JenniferDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route120_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route120_EventScript_Chip:: @ 81F58F7
-	@ This retired encounter has no campaign battle.
-	msgbox Route120_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route120_EventScript_Clarissa:: @ 81F590E
-	@ This retired encounter has no campaign battle.
-	msgbox Route120_Text_ClarissaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route120_EventScript_Angelica:: @ 81F5925
-	@ This retired encounter has no campaign battle.
-	msgbox Route120_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Keigo:: @ 81F593C
@@ -375,11 +323,6 @@ Route120_EventScript_Keigo:: @ 81F593C
 Route120_EventScript_Riley:: @ 81F5953
 	@ This retired encounter has no campaign battle.
 	msgbox Route120_Text_RileyPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route120_EventScript_Leonel:: @ 81F596A
-	@ This retired encounter has no campaign battle.
-	msgbox Route120_Text_LeonelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Callie:: @ 81F5981
@@ -455,3 +398,14 @@ Route120_Text_RouteSignFortree: @ 81F5DCB
 Route120_Text_RouteSign121: @ 81F5DE4
 	.string "{RIGHT_ARROW} Route 121\n"
 	.string "{LEFT_ARROW} Route 120$"
+
+Route120_EventScript_DevonScopeNoRoom::
+	msgbox Route120_Text_DevonScopeNoRoom, MSGBOX_DEFAULT
+	release
+	end
+
+Route120_Text_DevonScopeNoRoom:
+	.string "Steven: First, make room in your\n"
+	.string "Key Items pocket.\p"
+	.string "I'd like to give you a device\n"
+	.string "after this demonstration.$"

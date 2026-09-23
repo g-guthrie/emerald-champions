@@ -17,8 +17,8 @@ PacifidlogTown_House3_Text_IsThatAPokedex:
 
 PacifidlogTown_House3_Text_UsedToBeUseful:
 	.string "I used to be kinda useful, but now…\p"
-	.string "Now I just stand here and waste your time\n"
-	.string "with this pointless monologue, or stare\l"
-	.string "at this pot.\p"
+	.string "Now I just stand here and waste\n"
+	.string "your time with this pointless\l"
+	.string "monologue, or stare at this pot.\p"
 	.string "Maybe one day I'll do something\n"
 	.string "again. Who knows!$"

@@ -66,9 +66,59 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist:: @ 82118DA
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom
 RustboroCity_DevonCorp_2F_EventScript_DreamsFallback::
+	call RustboroCity_DevonCorp_2F_EventScript_TryArceus
 	msgbox RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT
 	release
 	end
+
+@ Devon's final discovery: eight badges and the Sootopolis crisis resolved.
+RustboroCity_DevonCorp_2F_EventScript_TryArceus:
+	special TryGiveArceusLegendarySignMasteryReward
+	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardParty
+	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC
+	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom
+	return
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardParty:
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardParty, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC:
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardPC, MSGBOX_DEFAULT
+	call Common_EventScript_OfferLegendaryGiftSwap
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom:
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
+	.string "You restored Hoenn's weather and\n"
+	.string "earned all eight badges.\l"
+	.string "Something extraordinary has\l"
+	.string "answered!\p"
+	.string "Arceus appears before you and\n"
+	.string "joins your party.$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardPC:
+	.string "You restored Hoenn's weather and\n"
+	.string "earned all eight badges.\l"
+	.string "Something extraordinary has\l"
+	.string "answered!\p"
+	.string "Arceus appears before you and is\n"
+	.string "sent to your PC.$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom:
+	.string "Arceus has answered your journey,\n"
+	.string "but needs room. Please make space\l"
+	.string "in your PC.$"
 
 RustboroCity_DevonCorp_2F_EventScript_FossilScientist:: @ 82118F1
 	lock
@@ -98,10 +148,10 @@ RustboroCity_DevonCorp_2F_EventScript_NoticeFossil::
 	fadescreen FADE_TO_BLACK
 	special Bag_ChooseItem
 	waitstate
+	goto_if_eq VAR_ITEM_ID, ITEM_NONE, RustboroCity_DevonCorp_2F_EventScript_DeclineGiveFossil
 	specialvar VAR_RESULT, IsItemFossil
 	compare VAR_RESULT, FALSE
 	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ThatsNotAFossil
-	special FossilToSpecies
 	bufferitemname 0, VAR_ITEM_ID
 	msgbox RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher, MSGBOX_DEFAULT
 	removeitem VAR_ITEM_ID
@@ -294,10 +344,6 @@ RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher: @ 82122CB
 	.string "the Devon Researcher.$"
 
 @ Unused
-RustboroCity_DevonCorp_2F_Text_TooManyPokemon: @ 82122F5
-	.string "Uh-oh, you've got too many Pokémon.\n"
-	.string "You have no room for this one.$"
-
 RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature: @ 8212338
 	.string "I'm trying to develop a new feature\n"
 	.string "for the PokéNav…\p"
@@ -325,6 +371,7 @@ RustboroCity_DevonCorp_2F_EventScript_MagearnaPC::
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaPC, MSGBOX_DEFAULT
+	call Common_EventScript_OfferLegendaryGiftSwap
 	release
 	end
 
@@ -350,6 +397,7 @@ RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
 	.string "Magearna will wait here.$"
 
 RustboroCity_DevonCorp_2F_EventScript_MagearnaAwake::
+	call RustboroCity_DevonCorp_2F_EventScript_TryArceus
 	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaAwake, MSGBOX_DEFAULT
 	release
 	end

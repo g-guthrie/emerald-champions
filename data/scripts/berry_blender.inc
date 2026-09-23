@@ -120,10 +120,6 @@ BerryBlender_Text_DontHavePokeblockCase2: @ 82934A2
 	.string "then come back.$"
 
 @ Unused
-BerryBlender_Text_MakePokeblocksWithOurGroup: @ 829350B
-	.string "Oh, hello! Did you want to make some\n"
-	.string "{POKEBLOCK}S with our little group?$"
-
 BerryBlender_Text_OhDear: @ 829354E
 	.string "Oh, dear!$"
 
@@ -274,11 +270,13 @@ BerryBlender_EventScript_Blender1NoSpareBerries: @ 8293C92
 BerryBlender_EventScript_Blender1GiveSpareBerry: @ 8293C9C
 	msgbox BerryBlender_Text_CanHaveOneOfMyBerries, MSGBOX_DEFAULT
 	giveitem ITEM_PECHA_BERRY
+BerryBlender_EventScript_CheckSpareBerry1::
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY
 	goto BerryBlender_EventScript_UseBerryBlender1
 	end
 
-BerryBlender_EventScript_UseBerryBlender1: @ 8293CB9
+BerryBlender_EventScript_UseBerryBlender1:: @ 8293CB9
 	msgbox BerryBlender_Text_KnowHowToMakePokeblocks, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq BerryBlender_EventScript_StartBlender1
@@ -313,7 +311,6 @@ BerryBlender_EventScript_DoBerryBlending: @ 8293D2C
 	copyvar VAR_0x8004, NUM_OPPONENTS
 	fadescreen FADE_TO_BLACK
 	special DoBerryBlending
-	waitstate
 	releaseall
 	end
 
@@ -561,7 +558,10 @@ BerryBlender_EventScript_ExpertMNoSpareBerries: @ 8294028
 BerryBlender_EventScript_ExpertMGiveBerry: @ 8294032
 	msgbox BerryBlender_Text_DontHaveAnyBerriesHaveOne, MSGBOX_DEFAULT
 	giveitem ITEM_PECHA_BERRY
+BerryBlender_EventScript_CheckSpareBerry2::
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY
+BerryBlender_EventScript_ReceivedSpareBerry2::
 	msgbox BerryBlender_Text_UseItToMakePokeblocksTogether, MSGBOX_DEFAULT
 	release
 	end
@@ -644,7 +644,6 @@ BerryBlender_EventScript_DoLinkBerryBlending: @ 8294147
 	removeobject 238 
 	removeobject 237
 	special DoBerryBlending
-	waitstate
 	releaseall
 	end
 
@@ -743,12 +742,10 @@ BerryBlender_EventScript_TryJoinGroup: @ 829425D
 
 BerryBlender_EventScript_TryBecomeLinkLeader: @ 8294285
 	special TryBecomeLinkLeader
-	waitstate
 	return
 
 BerryBlender_EventScript_TryJoinLinkGroup: @ 829428A
 	special TryJoinLinkGroup
-	waitstate
 	return
 
 BerryBlender_EventScript_LinkLeaderDecided: @ 829428F

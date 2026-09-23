@@ -160,6 +160,7 @@ bool32 CheckBagHasItem(enum Item itemId, u16 count);
 bool32 HasAtLeastOneBerry(void);
 bool32 HasAtLeastOnePokeBall(void);
 bool32 CheckBagHasSpace(enum Item itemId, u16 count);
+bool32 CheckBagHasSpaceForItemBundle(const struct ItemSlot *items, u32 count);
 u32 GetFreeSpaceForItemInBag(enum Item itemId);
 bool32 AddBagItem(enum Item itemId, u16 count);
 bool32 RemoveBagItem(enum Item itemId, u16 count);

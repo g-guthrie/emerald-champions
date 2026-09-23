@@ -1,4 +1,3 @@
-.set LOCALID_ACE, 3
 .set LOCALID_HIKER, 4
 
 RustboroCity_Flat2_2F_MapScripts::
@@ -7,11 +6,11 @@ RustboroCity_Flat2_2F_MapScripts::
 
 RustboroCity_Flat2_2F_OnTransition: @ 82379A0
 	goto_if_set FLAG_ITEM_RUSTBORO_FLOAT_STONE, RustboroCity_Flat2_2F_HideAceShowHiker
+	setflag FLAG_HIDE_RUSTBORO_HIKER
 	end
 
 RustboroCity_Flat2_2F_HideAceShowHiker:
-	clearflag FLAG_HIDE_RUSTBORO_HIKER 
-	removeobject LOCALID_ACE
+	clearflag FLAG_HIDE_RUSTBORO_HIKER
 	end
 
 RustboroCity_Flat2_2F_EventScript_OldMan:: @ 8215FD8
@@ -41,6 +40,8 @@ RustboroCity_Flat2_2F_EventScript_GiveFloatStone::
 	goto_if_set FLAG_ITEM_RUSTBORO_FLOAT_STONE, RustboroCity_Flat2_2F_EventScript_GaveFloatStone
 	msgbox RustboroCity_Flat2_2F_Text_MyDadsAceAtDevon, MSGBOX_DEFAULT
 	giveitem ITEM_FLOAT_STONE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox RustboroCity_Flat2_2F_Text_PokemonHoldFloatStone, MSGBOX_DEFAULT
 	setflag FLAG_ITEM_RUSTBORO_FLOAT_STONE
 	release

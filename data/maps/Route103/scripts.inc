@@ -29,7 +29,7 @@ Route103_EventScript_Rival:: @ 81EC3C1
 	end
 
 Route103_EventScript_RivalMay:: @ 81EC3DA
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_RivalMayRematch
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_MayPostgameVisit
 	msgbox Route103_Text_MayRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_MAY, TRUE
@@ -49,7 +49,7 @@ Route103_EventScript_RivalMay:: @ 81EC3DA
 	end
 
 Route103_EventScript_RivalBrendan:: @ 81EC434
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_RivalBrendanRematch
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_BrendanPostgameVisit
 	msgbox Route103_Text_BrendanRoute103Pokemon, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
@@ -68,101 +68,34 @@ Route103_EventScript_RivalBrendan:: @ 81EC434
 	case 2, Route103_EventScript_StartBrendanBattleMudkip
 	end
 
-Route103_EventScript_RivalMayRematch::
-	goto_if_set FLAG_DAILY_REMATCH_RIVAL, Route103_EventScript_AfterMayRematch
-	playbgm MUS_ENCOUNTER_MAY, 1
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	msgbox Route103_Text_MayRematch, MSGBOX_DEFAULT
-	@ The rival keeps the starter the player left behind (the player takes two).
-	special BufferEmeraldChampionsRivalBranch
-	switch VAR_RESULT
-	case 0, Route103_EventScript_StartMayRematchTreecko
-	case 1, Route103_EventScript_StartMayRematchTorchic
-	case 2, Route103_EventScript_StartMayRematchMudkip
-	end
-
-Route103_EventScript_RivalBrendanRematch:: @ 81EC434
-	goto_if_set FLAG_DAILY_REMATCH_RIVAL, Route103_EventScript_AfterBrendanRematch
-	playbgm MUS_ENCOUNTER_BRENDAN, 1
-	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	msgbox Route103_Text_BrendanRematch, MSGBOX_DEFAULT
-	@ The rival keeps the starter the player left behind (the player takes two).
-	special BufferEmeraldChampionsRivalBranch
-	switch VAR_RESULT
-	case 0, Route103_EventScript_StartBrendanRematchTreecko
-	case 1, Route103_EventScript_StartBrendanRematchTorchic
-	case 2, Route103_EventScript_StartBrendanRematchMudkip
-	end
-
 Route103_EventScript_StartMayBattleTreecko:: @ 81EC48E
-	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleTorchic:: @ 81EC49E
-	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleMudkip:: @ 81EC4AE
-	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTreecko:: @ 81EC4BE
-	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTorchic:: @ 81EC4CE
-	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleMudkip:: @ 81EC4DE
-	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated
 	goto Route103_EventScript_AfterBrendanBattle
-	end
-
-@@@@@@@@@@@@@@@@@@@@@@@@ Rematch teams @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-Route103_EventScript_StartMayRematchTreecko:: @ 81EC48E
-	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TREECKO, Route103_Text_MayRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	goto Route103_EventScript_AfterMayRematch
-	end
-
-Route103_EventScript_StartMayRematchTorchic:: @ 81EC49E
-	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_TORCHIC, Route103_Text_MayRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	goto Route103_EventScript_AfterMayRematch
-	end
-
-Route103_EventScript_StartMayRematchMudkip:: @ 81EC4AE
-	trainerbattle_no_intro_double TRAINER_MAY_LILYCOVE_MUDKIP, Route103_Text_MayRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	goto Route103_EventScript_AfterMayRematch
-	end
-
-Route103_EventScript_StartBrendanRematchTreecko:: @ 81EC4BE
-	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TREECKO, Route103_Text_BrendanRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	goto Route103_EventScript_AfterBrendanRematch
-	end
-
-Route103_EventScript_StartBrendanRematchTorchic:: @ 81EC4CE
-	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_TORCHIC, Route103_Text_BrendanRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	goto Route103_EventScript_AfterBrendanRematch
-	end
-
-Route103_EventScript_StartBrendanRematchMudkip:: @ 81EC4DE
-	trainerbattle_no_intro_double TRAINER_BRENDAN_LILYCOVE_MUDKIP, Route103_Text_BrendanRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	goto Route103_EventScript_AfterBrendanRematch
 	end
 
 Route103_EventScript_AfterMayBattle:: @ 81EC4EE
@@ -175,24 +108,25 @@ Route103_EventScript_AfterBrendanBattle:: @ 81EC4FC
 	goto Route103_EventScript_RivalExit
 	end
 
-Route103_EventScript_AfterMayRematch:: @ 81EC4EE
-	msgbox Route103_Text_MayPostRematch, MSGBOX_DEFAULT
-	setflag FLAG_DAILY_REMATCH_RIVAL
+Route103_EventScript_MayPostgameVisit:: @ 81EC4EE
+	faceplayer
+	msgbox Route103_Text_MayPostgame, MSGBOX_DEFAULT
 	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, Route103_EventScript_MayGiveEonTicket
 	releaseall
 	end
 
-Route103_EventScript_AfterBrendanRematch:: @ 81EC4FC
-	msgbox Route103_Text_BrendanPostRematch, MSGBOX_DEFAULT
-	setflag FLAG_DAILY_REMATCH_RIVAL
+Route103_EventScript_BrendanPostgameVisit:: @ 81EC4FC
+	faceplayer
+	msgbox Route103_Text_BrendanPostgame, MSGBOX_DEFAULT
 	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, Route103_EventScript_BrendanGiveEonTicket
 	releaseall
 	end
 
 Route103_EventScript_BrendanGiveEonTicket::
 	msgbox Route103_Text_BrendanGiveEonTicket, MSGBOX_DEFAULT
-	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	giveitem ITEM_EON_TICKET
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
@@ -200,8 +134,9 @@ Route103_EventScript_BrendanGiveEonTicket::
 
 Route103_EventScript_MayGiveEonTicket::
 	msgbox Route103_Text_MayGiveEonTicket, MSGBOX_DEFAULT
-	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	giveitem ITEM_EON_TICKET
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
@@ -314,39 +249,13 @@ Route103_EventScript_Daisy:: @ 81EC5F4
 	end
 
 Route103_EventScript_Amy:: @ 81EC60B
-	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_AmyIntro, Route103_Text_AmyDefeated, Route103_Text_AmyNotEnoughPokemon, Route102_EventScript_AmyRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route102_EventScript_AmyRematch
+	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_AmyIntro, Route103_Text_AmyDefeated, Route103_Text_AmyNotEnoughPokemon
 	msgbox Route103_Text_AmyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_AmyRegisterMatchCallAfterBattle:: @ 81EC63A
-	msgbox Route103_Text_AmyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route102_EventScript_AmyRematch:: @ 81EC653
-	@ This retired encounter has no campaign battle.
-	msgbox Route103_Text_AmyRematchPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route103_EventScript_Liv:: @ 81EC66E
-	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_LivIntro, Route103_Text_LivDefeated, Route103_Text_LivNotEnoughPokemon, Route102_EventScript_LivRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route102_EventScript_LivRematch
+	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_LivIntro, Route103_Text_LivDefeated, Route103_Text_LivNotEnoughPokemon
 	msgbox Route103_Text_LivPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route102_EventScript_LivRegisterMatchCallAfterBattle:: @ 81EC69D
-	msgbox Route103_Text_LivPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route102_EventScript_LivRematch:: @ 81EC6B6
-	@ This retired encounter has no campaign battle.
-	msgbox Route103_Text_LivRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Andrew:: @ 81EC6D1
@@ -355,34 +264,13 @@ Route103_EventScript_Andrew:: @ 81EC6D1
 	end
 
 Route103_EventScript_Miguel:: @ 81EC6E8
-	trainerbattle_double TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route103_EventScript_MiguelRematch
-	msgbox Route103_Text_MiguelPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route102_EventScript_MiguelRegisterMatchCallAfterBattle:: @ 81EC714
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route103_Text_MiguelPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route103_EventScript_MiguelRematch:: @ 81EC733
-	@ This retired encounter has no campaign battle.
-	msgbox Route103_Text_MiguelRematchPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route103_Text_MiguelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Marcos:: @ 81EC74A
 	@ This retired encounter has no campaign battle.
 	msgbox Route103_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route103_EventScript_Rhett:: @ 81EC761
-	@ This retired encounter has no campaign battle.
-	msgbox Route103_Text_RhettPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Pete:: @ 81EC778
@@ -402,7 +290,7 @@ Route103_Text_MayRoute103Pokemon: @ 81EC7A6
 Route103_Text_MayLetsBattle: @ 81EC7DE
 	.string "Oh, hi, {PLAYER}{KUN}!\p"
 	.string "…Oh, I see, my dad gave you\n"
-	.string "a Pokémon as a gift.\p"
+	.string "two Pokémon as partners.\p"
 	.string "Since we're here, let's have a quick\n"
 	.string "battle!\p"
 	.string "I'll give you a taste of what being\n"
@@ -415,8 +303,8 @@ Route103_Text_MayDefeated: @ 81EC881
 Route103_Text_MayTimeToHeadBack: @ 81EC8AE
 	.string "May: I think I know why my dad has\n"
 	.string "an eye out for you now.\p"
-	.string "I mean, you just got that Pokémon,\n"
-	.string "but it already likes you.\p"
+	.string "You just met your new partners,\n"
+	.string "but they already like you.\p"
 	.string "You might be able to befriend any\n"
 	.string "kind of Pokémon easily.\p"
 	.string "Well, it's time to head back to\n"
@@ -428,7 +316,7 @@ Route103_Text_BrendanRoute103Pokemon: @ 81EC989
 
 Route103_Text_BrendanLetsBattle: @ 81EC9CE
 	.string "Hey, it's {PLAYER}!\p"
-	.string "…Oh, yeah, Dad gave you a Pokémon.\p"
+	.string "…Oh, yeah, Dad gave you two partners.\p"
 	.string "Since we're here, how about a little\n"
 	.string "battle?\p"
 	.string "I'll teach you what being a Trainer's\n"
@@ -441,8 +329,8 @@ Route103_Text_BrendanTimeToHeadBack: @ 81ECA79
 	.string "Brendan: I think I get it.\n"
 	.string "I think I know why my dad has his eye\l"
 	.string "out for you now.\p"
-	.string "Look, your Pokémon already likes you,\n"
-	.string "even though you just got it.\p"
+	.string "Look, your partners already like you,\n"
+	.string "even though you just met them.\p"
 	.string "{PLAYER}, I get the feeling that you\n"
 	.string "could befriend any Pokémon with ease.\p"
 	.string "We should head back to the Lab.$"
@@ -460,59 +348,13 @@ Route103_Text_RouteSign: @ 81ECC1A
 	.string "Route 103\n"
 	.string "{DOWN_ARROW} Oldale Town$"
 
-Route103_Text_MayRematch:
-	.string "May: Here we are on Route 103 again!\n"
-	.string "Wow, it's so nostalgic, you know?\p"
-	.string "This is where we first battled,\n"
-	.string "isn't it?\p"
-	.string "… {PLAYER}!\n"
-	.string "Could you do something for me?\p"
-	.string "Come on!\n"
-	.string "Let's battle one more time!\p"
-	.string "I wanna know what you saw on\n"
-	.string "your journey, how you felt,\l"
-	.string "and what you experienced out there.\p"
-	.string "I want to understand everything about\n"
-	.string "you and your Pokémon, {PLAYER}!\p"
-	.string "And then…\p"
-	.string "I want you to understand everything\l"
-	.string "about me and mine!$"
-
-Route103_Text_MayRematchDefeated:
-	.string "…\p"
-	.string "Thanks, {PLAYER}!\n"
-	.string "You really are a Champion!$"
-
-Route103_Text_MayPostRematch:
+Route103_Text_MayPostgame:
 	.string "May: Meeting so many different people…\n"
 	.string "And encountering so many Pokémon…\p"
 	.string "It's just really…\n"
 	.string "It's been really, really fun!$"
 
-Route103_Text_BrendanRematch:
-	.string "Brendan: Man, this is nostalgic.\n"
-	.string "Back on Route 103, huh?\p"
-	.string "This is where we battled the first\n"
-	.string "time, huh?\p"
-	.string "Hey, {PLAYER}…\n"
-	.string "Do me a favor?\p"
-	.string "Come on!\n"
-	.string "Let's battle one more time!\p"
-	.string "I wanna know about what you saw on\n"
-	.string "your journey, how you felt,\l"
-	.string "and what you experienced out there.\p"
-	.string "I want to know all about you\n"
-	.string "and your Pokémon, {PLAYER}.\p"
-	.string "But that's not all…\p"
-	.string "I want you to know all about\n"
-	.string "me and mine!$"
-
-Route103_Text_BrendanRematchDefeated:
-	.string "…\p"
-	.string "Thanks, {PLAYER}!\n"
-	.string "Just what I'd expect from a Champion!$"
-
-Route103_Text_BrendanPostRematch:
+Route103_Text_BrendanPostgame:
 	.string "Brendan: Getting to meet so many\n"
 	.string "different people…\p"
 	.string "And so many different Pokémon…\p"
@@ -521,7 +363,7 @@ Route103_Text_BrendanPostRematch:
 
 Route103_Text_BrendanGiveEonTicket:
 	.string "Brendan: One more thing, {PLAYER}.\n"
-	.string "Take this as thanks for a great battle!$"
+	.string "Take this to explore Southern Island!$"
 
 Route103_Text_MayGiveEonTicket:
 	.string "May: Oh, by the way, {PLAYER}.\n"

@@ -47,7 +47,6 @@ PetalburgCity_EventScript_WallyTutorial:: @ 81DC32E
 	waitmovement 0
 	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
 	special StartWallyTutorialBattle
-	waitstate
 	msgbox Route102_Text_WallyIDidIt, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestLeft, MAP_PETALBURG_CITY
 	waitmovement LOCALID_WALLY, MAP_PETALBURG_CITY
@@ -357,12 +356,6 @@ PetalburgCity_EventScript_LeadPlayerToGym3:: @ 81DC5FF
 	return
 
 @ Unused
-PetalburgCity_Movement_Delay48:: @ 81DC611
-	delay_16
-	delay_16
-	delay_16
-	step_end
-
 PetalburgCity_Movement_BoyApproachPlayer0: @ 81DC615
 	walk_right
 	walk_right
@@ -749,8 +742,9 @@ PetalburgCity_Text_WaterReflection: @ 81DC985
 PetalburgCity_Text_FullPartyExplanation: @ 81DCA30
 	.string "Let's say you have six Pokémon.\n"
 	.string "If you catch another one…\p"
-	.string "It is automatically sent to a Storage\n"
-	.string "Box over a PC connection.$"
+	.string "You can send it to a Storage Box,\n"
+	.string "or add it to your party and send\l"
+	.string "another partner to the Box.$"
 
 PetalburgCity_Text_GymSign: @ 81DCAAA
 	.string "Petalburg City Pokémon Gym\n"

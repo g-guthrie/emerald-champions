@@ -1,10 +1,28 @@
 # Current direction — September 19, 2026
 
-Work solo on `main`; the user authorized and completed the integration merge. The user stopped the subagents
-and campaign playthrough. Do not resume them. Review the largest relevant game
-source files first and continue file by file. Prefer removing obsolete code,
-reusing established paths and fixing demonstrated integration defects. Avoid
-cosmetic churn, new frameworks, speculative refactors and gameplay redesign.
+Main owns a gate-by-gate source audit of the entire story, in progression order.
+For each gate, trace prerequisites, map callbacks, every NPC dialogue branch in
+that area, battle outcomes/retries, rewards, receipt flags, exits and the next
+reachable destination. Refactor and debug files as concrete opportunities arise;
+opening a file does not require cosmetic changes. Preserve existing work.
+
+Latest user delegation rule: retain only one reusable Sol Low worker
+(compatibility_audit); all other existing workers remain stopped. Do not spawn
+additional workers. For each confirmed bug, give that worker a bounded scan of
+related callers/data and analogous bugs elsewhere. It may fix only straightforward,
+source-proven cases in explicitly assigned files; main handles anything complex,
+ambiguous, behavioral or design-sensitive. No nested agents or worker builds.
+Main reviews all worker edits and serializes builds. Keep reports concise.
+
+Proceed route by route and person by person, including optional interactions:
+NPC dialogue and state branches, battle/rematch promises, gifts and full-Bag
+retries, item identity/quantity/duplication and reward value, map callbacks,
+story/HM unlocks, re-entry and exits. Early Eviolite/Choice/Focus access changes
+later reward incentives; useful extra copies are not automatically bugs. Retain
+Inclement placement locations. Keep coverage and unresolved findings in
+`docs/STORY_GATE_AUDIT.md`. Use targeted headless screenshots for concrete visual
+or choreography doubts, and focused behavior checks for risky changes. Never
+claim reading source proves every bug is gone.
 
 Preserve the pre-integration authored doubles AI and trainer teams. Compare
 questionable behavior with pre-integration main508775fad8 before changing it;
@@ -13,7 +31,7 @@ forecast patch is parked under work/code-cleanup-20260919 and restored out of
 active source. Batch11 contains that experiment and MUST NOT be delivered.
 
 Inclement is the world/story/progression/economy baseline, with retained native
-ability switching, universal legal-move tutor/no TMs, unlock-only HMs (license + badge, any party),
+ability switching, universal legal-move tutor/no TMs, HMs (license + badge + capable party member, no moveslot),
 Flight Beacon, current-cap Leveler and normal modern XP and the five immediate held-item
 gifts with paid discovery stock. Preserve the native EV/IV services. No Game
 Book, player guides, Center battle presets or Center stat editor. No new ground
@@ -32,8 +50,33 @@ inspect failing tests for actual contract correctness rather than force green.
 Keep a concise source-review ledger and current handoff. Do not update memory
 files, publish, push or merge without applicable user authorization.
 
-Latest approved convenience rules: HMs require only their story license and badge;
-no compatible-party or move-slot requirement. Preserve legendary puzzle conditions.
+Latest approved convenience rules: HMs require their story license, badge, and a
+party member able to learn the move; no move-slot requirement. Flight Beacon may
+use a Fly-capable Pokémon from the party or PC. Preserve legendary puzzle conditions.
 Leveler raises every non-egg party member to its current species cap. Standard
 modern full/half-share XP below the cap; no custom flat/catch-up bonuses and no
-XP award/message/animation at cap. Consumed berries still restore after battle.
+XP award/message/animation at cap. Consumed held Berries stay spent until the
+Regenerator Key Item is received from Norman after Badge5. Then they restore
+after battle, never during it. Other held-item restoration remains unchanged.
+
+Latest direction supersedes blanket rematch removal. Keep routine route/Gym
+rematches and their UI clutter retired, but restore the exact authored post-League
+Wally fight. Build a deliberate finale: League → Wally → five S.S. Tidal cabin
+teams → Steven → Birth Island/Deoxys (defeat or capture) → Buffel final trial.
+Preserve repeat Elite Four. User explicitly authorizes strengthening Buffel/boat
+teams and native tactical playtests; do not rewrite Wally's authored team or
+shared planner casually. Latest clarification: full moveset knowledge is acceptable;
+preserve the shared authored information profile because all 368 battle entries
+were tuned with it. OMNISCIENT/KNOW_OPPONENT_PARTY here provide loadout knowledge,
+not committed-command access. Their temporary removal and the public-forecast
+experiment have been reverted. Never let opponent scoring read the player's
+selected move, target, decision to switch, or chosen replacement. Audit reachability
+across the whole campaign before any AI change; a flag name alone is not evidence.
+Never claim literal unbeatable/perfect gameplay from limited benchmarks.
+
+Latest held-item clarification: consumed held Berries return after battle with
+the tool; Knock Off removes items only for the current battle, while Thief and
+Covet transfer them permanently in ordinary trainer battles. Keep Cud Chew, Recycle,
+Harvest and all normal in-battle effects functional without the tool. A genuinely
+recovered original Berry is no longer lost. Preserve non-Berry restoration policy.
+No cross-task coordination messages: user explicitly requested they stop.

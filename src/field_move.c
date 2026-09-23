@@ -24,19 +24,26 @@ static bool32 IsAlwaysTrue(enum FieldMove fieldMove)
     return TRUE;
 }
 
+static const u16 sEmeraldHiddenMoveLicenses[FIELD_MOVES_COUNT] =
+{
+    [FIELD_MOVE_CUT]        = FLAG_RECEIVED_HM_CUT,
+    [FIELD_MOVE_FLASH]      = FLAG_RECEIVED_HM_FLASH,
+    [FIELD_MOVE_ROCK_SMASH] = FLAG_RECEIVED_HM_ROCK_SMASH,
+    [FIELD_MOVE_STRENGTH]   = FLAG_RECEIVED_HM_STRENGTH,
+    [FIELD_MOVE_SURF]       = FLAG_RECEIVED_HM_SURF,
+    [FIELD_MOVE_FLY]        = FLAG_RECEIVED_HM_FLY,
+    [FIELD_MOVE_DIVE]       = FLAG_RECEIVED_HM_DIVE,
+    [FIELD_MOVE_WATERFALL]  = FLAG_RECEIVED_HM_WATERFALL,
+};
+
+bool32 FieldMove_IsHM(enum FieldMove fieldMove)
+{
+    return (u32)fieldMove < ARRAY_COUNT(sEmeraldHiddenMoveLicenses)
+        && sEmeraldHiddenMoveLicenses[fieldMove] != 0;
+}
+
 static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 {
-    static const u16 sEmeraldHiddenMoveLicenses[FIELD_MOVES_COUNT] =
-    {
-        [FIELD_MOVE_CUT]        = FLAG_RECEIVED_HM_CUT,
-        [FIELD_MOVE_FLASH]      = FLAG_RECEIVED_HM_FLASH,
-        [FIELD_MOVE_ROCK_SMASH] = FLAG_RECEIVED_HM_ROCK_SMASH,
-        [FIELD_MOVE_STRENGTH]   = FLAG_RECEIVED_HM_STRENGTH,
-        [FIELD_MOVE_SURF]       = FLAG_RECEIVED_HM_SURF,
-        [FIELD_MOVE_FLY]        = FLAG_RECEIVED_HM_FLY,
-        [FIELD_MOVE_DIVE]       = FLAG_RECEIVED_HM_DIVE,
-        [FIELD_MOVE_WATERFALL]  = FLAG_RECEIVED_HM_WATERFALL,
-    };
     u16 licenseFlag = sEmeraldHiddenMoveLicenses[fieldMove];
 
     if (!FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET))
@@ -46,8 +53,8 @@ static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
     return FlagGet(licenseFlag);
 }
 
-// Called only after an action has failed the central unlock check.
-// Report its existing badge metadata; this does not grant or change access.
+// Called after an HM action fails its badge, license, or party check.
+// Report the reason without granting or changing access.
 void BufferFieldMoveUnlockRequirement(void)
 {
     static const u8 badgeNames[][14] = {
@@ -64,7 +71,12 @@ void BufferFieldMoveUnlockRequirement(void)
 
     StringCopy(gStringVar1, GetMoveName(FieldMove_GetMoveId(fieldMove)));
     StringCopy(gStringVar2, badgeNames[badge]);
-    gSpecialVar_Result = FlagGet(FLAG_BADGE01_GET + badge);
+    if (!FlagGet(FLAG_BADGE01_GET + badge))
+        gSpecialVar_Result = 0;
+    else if (!IsFieldMoveUnlocked(fieldMove))
+        gSpecialVar_Result = 1;
+    else
+        gSpecialVar_Result = 2; // Unlocked, but no compatible party member.
 }
 
 const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
@@ -88,8 +100,8 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 
 #define FLAG_TO_BADGE(flag) flag - FLAG_BADGE01_GET
 
-// Species compatibility remains relevant to optional non-HM moves, such as
-// Teleport and Sweet Scent. It never gates an HM unlock.
+// Field licenses replace HM moveslots, but a capable party member is still
+// needed. Optional non-HM moves also use this species capability check.
 bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
 {
     const struct LevelUpMove *learnset;
@@ -107,17 +119,29 @@ bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
 
 u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)
 {
-    // HM access belongs to the player. A party slot is chosen only for the
-    // existing field animation, never as a compatibility requirement.
+    // An HM needs its license, badge, and a compatible non-Egg party member.
+    // Prefer a member that knows the move for the field animation, but knowing
+    // it is not required.
     if (FieldMove_IsHM(fieldMove))
     {
+        enum Move move = FieldMove_GetMoveId(fieldMove);
+        u32 capable = PARTY_SIZE;
+
         if (!IsFieldMoveUnlocked(fieldMove))
             return PARTY_SIZE;
         for (u32 i = 0; i < PARTY_SIZE; i++)
-            if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG))
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+            enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+            if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
+                continue;
+            if (SpeciesCanLearnFieldMove(species, move) && MonKnowsMove(mon, move))
                 return i;
-        return 0;
+            if (capable == PARTY_SIZE && SpeciesCanLearnFieldMove(species, move))
+                capable = i;
+        }
+        return capable;
     }
 
     enum Move move = FieldMove_GetMoveId(fieldMove);
@@ -137,17 +161,14 @@ u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)
             continue;
         if (MonKnowsMove(mon, move))
             return i;
-        if (fallback == PARTY_SIZE && SpeciesCanLearnFieldMove(species, move))
+        if (FieldMove_IsCapabilityBased(fieldMove)
+         && fallback == PARTY_SIZE && SpeciesCanLearnFieldMove(species, move))
             fallback = i;
     }
     if (fallback != PARTY_SIZE && IsFieldMoveUnlocked(fieldMove))
         return fallback;
     return PARTY_SIZE;
 }
-
-// Check a proposed party replacement without changing either Pokemon. Field
-// access depends on species compatibility, not on keeping an HM in a move slot.
-
 
 const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
 {
@@ -159,7 +180,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .partyMsgID = PARTY_MSG_NOTHING_TO_CUT,
         .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE02_GET) : FLAG_TO_BADGE(FLAG_BADGE01_GET),
         .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
+        .capabilityInPartyMenu = TRUE, // Optional grass clearing keeps Inclement's party-menu action.
     },
 
     [FIELD_MOVE_FLASH] =

@@ -43,7 +43,7 @@ VictoryRoad_1F_EventScript_WallyEntranceBattle:: @ 8235DE1
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_WALLY_VR_1, VictoryRoad_1F_Text_WallyEntranceDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_WALLY_VR_1, VictoryRoad_1F_Text_WallyEntranceDefeat
 	msgbox VictoryRoad_1F_Text_WallyPostEntranceBattle, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	copyobjectxytoperm LOCALID_WALLY_ENTRANCE
@@ -85,17 +85,12 @@ VictoryRoad_1F_EventScript_EntranceWally:: @ 8235E2C
 	end
 
 @ This Wally appears and remains at the exit after the Hall of Fame is entered 
-VictoryRoad_1F_EventScript_ExitWally:: @ 8235E35
-	trainerbattle_double TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq VictoryRoad_1F_EventScript_RematchWally
-	msgbox VictoryRoad_1F_Text_WallyPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-VictoryRoad_1F_EventScript_RematchWally:: @ 8235E5C
-	@ This retired encounter has no campaign battle.
-	msgbox VictoryRoad_1F_Text_WallyPostBattle, MSGBOX_AUTOCLOSE
+VictoryRoad_1F_EventScript_ExitWally::
+	trainerbattle_double TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat, EmeraldChampions_Text_NeedTwoPokemon, VictoryRoad_1F_EventScript_ExitWallyDirections
+VictoryRoad_1F_EventScript_ExitWallyDirections::
+	msgbox VictoryRoad_1F_Text_WallyChampionPostBattle, MSGBOX_DEFAULT
+	call Common_EventScript_FinaleDirections
+	releaseall
 	end
 
 VictoryRoad_1F_EventScript_Edgar:: @ 8235E73
@@ -153,12 +148,6 @@ VictoryRoad_1F_Text_WallyIntro: @ 8236073
 VictoryRoad_1F_Text_WallyDefeat: @ 82360DA
 	.string "Wow!\n"
 	.string "{PLAYER}, you are strong, after all!$"
-
-VictoryRoad_1F_Text_WallyPostBattle: @ 82360FE
-	.string "Wally: I couldn't beat you this time,\n"
-	.string "too… But one of these days, {PLAYER},\l"
-	.string "I'm going to catch up to you…\p"
-	.string "And challenge the Pokémon League!$"
 
 VictoryRoad_1F_Text_EdgarIntro: @ 8236184
 	.string "I've made it this far a couple times,\n"
@@ -221,3 +210,9 @@ VictoryRoad_1F_Text_KatelynnDefeat: @ 82364A7
 VictoryRoad_1F_Text_KatelynnPostBattle: @ 82364BB
 	.string "Humph, go right on ahead.\n"
 	.string "See if I care.$"
+
+VictoryRoad_1F_Text_WallyChampionPostBattle:
+	.string "Wally: You really are the Champion,\n"
+	.string "{PLAYER}! I'll keep training.\p"
+	.string "Your expedition isn't over yet.\n"
+	.string "Good luck out there!$"

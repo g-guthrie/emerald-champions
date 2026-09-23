@@ -8,6 +8,7 @@
 #include "data.h"
 #include "daycare.h"
 #include "decoration.h"
+#include "decoration_inventory.h"
 #include "diploma.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -21,6 +22,7 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
+#include "pokeball.h"
 #include "field_weather.h"
 #include "frontier_util.h"
 #include "graphics.h"
@@ -338,79 +340,6 @@ static const u16 sEmeraldChampionsSpeciesItems[] =
     ITEM_NONE,
 };
 
-
-static const u16 sEmeraldChampionsBerryItems[] =
-{
-    ITEM_CHERI_BERRY,
-    ITEM_CHESTO_BERRY,
-    ITEM_PECHA_BERRY,
-    ITEM_RAWST_BERRY,
-    ITEM_ASPEAR_BERRY,
-    ITEM_LEPPA_BERRY,
-    ITEM_ORAN_BERRY,
-    ITEM_PERSIM_BERRY,
-    ITEM_LUM_BERRY,
-    ITEM_SITRUS_BERRY,
-    ITEM_FIGY_BERRY,
-    ITEM_WIKI_BERRY,
-    ITEM_MAGO_BERRY,
-    ITEM_AGUAV_BERRY,
-    ITEM_IAPAPA_BERRY,
-    ITEM_RAZZ_BERRY,
-    ITEM_BLUK_BERRY,
-    ITEM_NANAB_BERRY,
-    ITEM_WEPEAR_BERRY,
-    ITEM_PINAP_BERRY,
-    ITEM_POMEG_BERRY,
-    ITEM_KELPSY_BERRY,
-    ITEM_QUALOT_BERRY,
-    ITEM_HONDEW_BERRY,
-    ITEM_GREPA_BERRY,
-    ITEM_TAMATO_BERRY,
-    ITEM_CORNN_BERRY,
-    ITEM_MAGOST_BERRY,
-    ITEM_RABUTA_BERRY,
-    ITEM_NOMEL_BERRY,
-    ITEM_SPELON_BERRY,
-    ITEM_PAMTRE_BERRY,
-    ITEM_WATMEL_BERRY,
-    ITEM_DURIN_BERRY,
-    ITEM_BELUE_BERRY,
-    ITEM_OCCA_BERRY,
-    ITEM_PASSHO_BERRY,
-    ITEM_WACAN_BERRY,
-    ITEM_RINDO_BERRY,
-    ITEM_YACHE_BERRY,
-    ITEM_CHOPLE_BERRY,
-    ITEM_KEBIA_BERRY,
-    ITEM_SHUCA_BERRY,
-    ITEM_COBA_BERRY,
-    ITEM_PAYAPA_BERRY,
-    ITEM_TANGA_BERRY,
-    ITEM_CHARTI_BERRY,
-    ITEM_KASIB_BERRY,
-    ITEM_HABAN_BERRY,
-    ITEM_COLBUR_BERRY,
-    ITEM_BABIRI_BERRY,
-    ITEM_CHILAN_BERRY,
-    ITEM_LIECHI_BERRY,
-    ITEM_GANLON_BERRY,
-    ITEM_SALAC_BERRY,
-    ITEM_PETAYA_BERRY,
-    ITEM_APICOT_BERRY,
-    ITEM_LANSAT_BERRY,
-    ITEM_STARF_BERRY,
-    ITEM_ENIGMA_BERRY,
-    ITEM_MICLE_BERRY,
-    ITEM_CUSTAP_BERRY,
-    ITEM_JABOCA_BERRY,
-    ITEM_ROWAP_BERRY,
-    ITEM_ROSELI_BERRY,
-    ITEM_KEE_BERRY,
-    ITEM_MARANGA_BERRY,
-    ITEM_NONE,
-};
-
 static const u16 *const sEmeraldChampionsBattleItemCategories[] =
 {
     [EC_BATTLE_ITEM_CATEGORY_OFFENSE] = sEmeraldChampionsOffenseItems,
@@ -419,10 +348,7 @@ static const u16 *const sEmeraldChampionsBattleItemCategories[] =
     [EC_BATTLE_ITEM_CATEGORY_TYPE] = sEmeraldChampionsTypeItems,
     [EC_BATTLE_ITEM_CATEGORY_GEM] = sEmeraldChampionsGemItems,
     [EC_BATTLE_ITEM_CATEGORY_SPECIES] = sEmeraldChampionsSpeciesItems,
-    [EC_BATTLE_ITEM_CATEGORY_BERRIES] = sEmeraldChampionsBerryItems,
 };
-
-
 
 static const u16 sEmeraldChampionsEvolutionItems[] =
 {
@@ -438,6 +364,12 @@ static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
+// VAR_0x8004 = species; VAR_RESULT = whether the Pokédex records it as caught.
+void CheckPlayerCaughtSpecies(void)
+{
+    gSpecialVar_Result = GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), FLAG_GET_CAUGHT) != 0;
+}
+
 void IsEmeraldChampionsGameCornerPokemonClaimed(void)
 {
     u16 flag = GetEmeraldChampionsGameCornerPokemonPrizeFlag(gSpecialVar_0x8004);
@@ -449,8 +381,6 @@ void IsEmeraldChampionsGameCornerPokemonClaimed(void)
 static u8 TryGiveEmeraldChampionsPreparedPokemon(enum Species species, u8 level)
 {
     struct Pokemon mon;
-    u32 emptyPartySlot;
-    u32 giveResult;
 
     if (species <= SPECIES_NONE
      || species >= NUM_SPECIES
@@ -460,18 +390,9 @@ static u8 TryGiveEmeraldChampionsPreparedPokemon(enum Species species, u8 level)
 
     CreateRandomMon(&mon, species, level);
 
-    for (emptyPartySlot = 0; emptyPartySlot < PARTY_SIZE; emptyPartySlot++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][emptyPartySlot], MON_DATA_SPECIES) == SPECIES_NONE)
-            break;
-    }
-    giveResult = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
-    if (giveResult == MON_CANT_GIVE)
-        return MON_CANT_GIVE;
-
-    if (giveResult == MON_GIVEN_TO_PARTY && emptyPartySlot < PARTY_SIZE)
-        RecordPlayerPartyMonHeldItemForRestoration(emptyPartySlot);
-    return giveResult;
+    // Field gifts need no battle restoration record. Battle startup records
+    // the actual party, while in-battle captures update their new slot separately.
+    return GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
 }
 
 static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 flag, bool32 rejectInitialStarter)
@@ -496,49 +417,6 @@ static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 fla
     MarkLegendarySignCaughtBySpecies(species);
     FlagSet(flag);
     return giveResult;
-}
-
-// Check actual ownership, never the Pokédex: release/transfer must not strand
-// the survey. Prefer a usable adult over an Egg in any storage location.
-void LocateEmeraldChampionsCastform(void)
-{
-    bool32 hasEgg = FALSE;
-
-    gSpecialVar_Result = EC_CASTFORM_NONE;
-    for (u32 location = EC_CASTFORM_PARTY; location <= EC_CASTFORM_DAYCARE; location++)
-    {
-        u32 count = location == EC_CASTFORM_PARTY ? PARTY_SIZE
-                  : location == EC_CASTFORM_BOX ? TOTAL_BOXES_COUNT * IN_BOX_COUNT : DAYCARE_MON_COUNT;
-        for (u32 slot = 0; slot < count; slot++)
-        {
-            struct BoxPokemon *mon = location == EC_CASTFORM_PARTY ? &gParties[B_TRAINER_PLAYER][slot].box
-                                   : location == EC_CASTFORM_BOX ? GetBoxedMonPtr(slot / IN_BOX_COUNT, slot % IN_BOX_COUNT)
-                                   : &gSaveBlock1Ptr->daycare.mons[slot].mon;
-            enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
-            if (species == SPECIES_NONE || GET_BASE_SPECIES_ID(species) != SPECIES_CASTFORM)
-                continue;
-            if (GetBoxMonData(mon, MON_DATA_IS_EGG))
-            {
-                hasEgg = TRUE;
-                continue;
-            }
-            gSpecialVar_Result = location;
-            gSpecialVar_0x8004 = slot;
-            if (location == EC_CASTFORM_BOX)
-                StringCopy(gStringVar1, GetBoxNamePtr(slot / IN_BOX_COUNT));
-            return;
-        }
-    }
-    if (hasEgg)
-        gSpecialVar_Result = EC_CASTFORM_EGG;
-}
-
-void GiveEmeraldChampionsPreparedPokemon(void)
-{
-    gSpecialVar_Result = TryGiveEmeraldChampionsPreparedPokemon(
-        gSpecialVar_0x8004,
-        gSpecialVar_0x8005
-    );
 }
 
 void GiveEmeraldChampionsGameCornerPokemon(void)
@@ -571,12 +449,13 @@ static s32 EmeraldChampionsBattleItemIndex(enum Item item)
 
     if (item == ITEM_NONE)
         return -1;
-    for (u32 category = 0; category < EC_BATTLE_ITEM_CATEGORY_BERRIES; category++)
+    for (u32 category = 0; category < ARRAY_COUNT(sEmeraldChampionsBattleItemCategories); category++)
     {
         for (u32 i = 0; sEmeraldChampionsBattleItemCategories[category][i] != ITEM_NONE; i++, index++)
         {
+            // Unlock bits live in a fixed save array; stock beyond it stays ungated.
             if (sEmeraldChampionsBattleItemCategories[category][i] == item)
-                return index;
+                return index < (s32)(sizeof(gSaveBlock1Ptr->battleItemsUnlocked) * 8) ? index : -1;
         }
     }
     return -1;
@@ -603,8 +482,79 @@ void EmeraldChampions_UnlockBattleItem(enum Item item)
         gSaveBlock1Ptr->battleItemsUnlocked[index / 8] |= 1u << (index % 8);
 }
 
-// Acquisition bits also preserve partial starter-kit delivery across Bag-full
-// retries. An already acquired item never needs another free opening copy.
+// The daily flower-shop gift is all-or-nothing, including on a full-Bag retry.
+// Gift berries do not mint harvest credit.
+void GiveFlowerShopBerryBundle(void)
+{
+    const enum Item items[] = {
+        gSpecialVar_0x8004, ITEM_POMEG_BERRY, ITEM_KELPSY_BERRY,
+        ITEM_QUALOT_BERRY, ITEM_HONDEW_BERRY, ITEM_GREPA_BERRY, ITEM_TAMATO_BERRY,
+    };
+
+    gSpecialVar_Result = FALSE;
+    if (items[0] < FIRST_BERRY_INDEX || items[0] >= FIRST_BERRY_INDEX + 8)
+        return;
+    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+    {
+        if (!AddBagItem(items[i], 1))
+        {
+            while (i > 0)
+                RemoveBagItem(items[--i], 1);
+            return;
+        }
+    }
+    gSpecialVar_Result = TRUE;
+}
+
+bool32 CanReceiveLanetteDolls(void)
+{
+    return GetNumOwnedDecorationsInCategory(DECORCAT_DOLL) + 2 <= gDecorationInventories[DECORCAT_DOLL].size;
+}
+
+bool32 CanReceiveBerryPair(void)
+{
+    const struct ItemSlot gifts[] = {{gSpecialVar_0x8008, 1}, {gSpecialVar_0x8009, 1}};
+    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+}
+
+bool32 CanReceiveWeatherInstituteRocks(void)
+{
+    static const struct ItemSlot gifts[] = {
+        {ITEM_HEAT_ROCK, 1}, {ITEM_DAMP_ROCK, 1}, {ITEM_ICY_ROCK, 1}, {ITEM_SMOOTH_ROCK, 1},
+    };
+    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+}
+
+bool32 CanReceiveFrontierReward(void)
+{
+    const struct ItemSlot gifts[] = {
+        {gSpecialVar_0x8004, 1}, {ITEM_BOTTLE_CAP, gSpecialVar_0x8005},
+    };
+    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+}
+
+bool32 CanReceiveLatiStones(void)
+{
+    static const struct ItemSlot gifts[] = {{ITEM_LATIOSITE, 1}, {ITEM_LATIASITE, 1}};
+    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+}
+
+bool32 CanReceiveNormanMegaGift(void)
+{
+    static const struct ItemSlot gifts[] = {
+        {ITEM_MEGA_RING, 1}, {ITEM_SCEPTILITE, 1}, {ITEM_BLAZIKENITE, 1}, {ITEM_SWAMPERTITE, 1},
+    };
+    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+}
+
+bool32 CanReceiveGoGogglesGift(void)
+{
+    static const struct ItemSlot gifts[] = {{ITEM_GO_GOGGLES, 1}, {ITEM_SAFETY_GOGGLES, 1}};
+    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+}
+
+// Acquisition bits preserve partial starter-kit delivery across Bag-full retries.
+// An already acquired item never needs another free opening copy.
 void GiveEmeraldChampionsStarterBattleItems(void)
 {
     static const enum Item items[] = {
@@ -631,12 +581,6 @@ void OpenEmeraldChampionsBattleItemMart(void)
     if (category >= ARRAY_COUNT(sEmeraldChampionsBattleItemCategories))
         return;
     stock = sEmeraldChampionsBattleItemCategories[category];
-    if (category == EC_BATTLE_ITEM_CATEGORY_BERRIES)
-    {
-        CreatePokemartMenu(stock);
-        ScriptContext_Stop();
-        return;
-    }
     for (u32 i = 0; stock[i] != ITEM_NONE && out < ARRAY_COUNT(sEmeraldChampionsUnlockedStock) - 1; i++)
     {
         if (IsEmeraldChampionsBattleItemUnlocked(stock[i]))
@@ -669,7 +613,6 @@ void TakeEmeraldChampionsHandoffItem(void)
             && gSaveBlock1Ptr->pcItems[slot].quantity != 0)
         {
             RemovePCItem(slot, 1);
-            CompactPCItems();
             gSpecialVar_Result = TRUE;
             return;
         }
@@ -995,31 +938,6 @@ enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y
     *mapGroup = MAP_GROUP(MAP_ROUTE132);
     *y = 20;
     return SS_TIDAL_LOCATION_CURRENTS;
-}
-
-bool32 ShouldDoWallyCall(void)
-{
-    if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
-    {
-        switch (gMapHeader.mapType)
-        {
-        case MAP_TYPE_TOWN:
-        case MAP_TYPE_CITY:
-        case MAP_TYPE_ROUTE:
-        case MAP_TYPE_OCEAN_ROUTE:
-            if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
-                return FALSE;
-            break;
-        default:
-            return FALSE;
-        }
-    }
-    else
-    {
-        return FALSE;
-    }
-
-    return TRUE;
 }
 
 bool32 ShouldDoScottFortreeCall(void)
@@ -2183,11 +2101,6 @@ static void StopCameraShake(u8 taskId)
 #undef tDelay
 #undef tVerticalPan
 
-bool8 FoundRoute116DuskStone(void)
-{
-    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_DUSK_STONE);
-}
-
 void SetRoute119Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
@@ -2215,6 +2128,8 @@ u8 GetLeadMonIndex(void)
 
 enum Species ScriptGetPartyMonSpecies(void)
 {
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        return SPECIES_NONE;
     return GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
 }
 
@@ -2222,23 +2137,6 @@ enum Species ScriptGetPartyMonSpecies(void)
 void TryInitBattleTowerAwardManObjectEvent(void)
 {
     //TryInitLocalObjectEvent(6);
-}
-
-u16 GetDaysUntilPacifidlogStoneAvailable(void)
-{
-    u16 stoneReceivedDay = VarGet(VAR_PACIFIDLOG_STONE_RECEIVED_DAY);
-    if (gLocalTime.days - stoneReceivedDay >= 7)
-        return 0;
-    else if (gLocalTime.days < 0)
-        return 8;
-
-    return 7 - (gLocalTime.days - stoneReceivedDay);
-}
-
-u16 SetPacifidlogStoneReceivedDay(void)
-{
-    VarSet(VAR_PACIFIDLOG_STONE_RECEIVED_DAY, gLocalTime.days);
-    return gLocalTime.days;
 }
 
 bool8 MonOTNameNotPlayer(void)
@@ -2771,25 +2669,25 @@ void ShowFrontierManiacMessage(void)
             winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_DOME:
-        if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_FACTORY:
-        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_PALACE:
-        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_ARENA:
         if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50]
@@ -3039,7 +2937,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_GAMECORNER_POKEMON:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 13; // Twelve prize Pokemon plus Exit.
+        task->tNumItems = 14; // Thirteen prize Pokemon plus Exit.
         task->tLeft = 19;
         task->tTop = 1;
         task->tWidth = 12;
@@ -3051,7 +2949,7 @@ void ShowScrollableMultichoice(void)
     case SCROLL_MULTI_GAMECORNER_FIRE_STARTERS:
     case SCROLL_MULTI_GAMECORNER_WATER_STARTERS:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 8; // Seven starters plus Exit.
+        task->tNumItems = 10; // Nine starters plus Exit.
         task->tLeft = 19;
         task->tTop = 1;
         task->tWidth = 12;
@@ -3296,6 +3194,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Raichu{CLEAR_TO 72}4500 Coins"),
         COMPOUND_STRING("Marowak{CLEAR_TO 72}4500 Coins"),
         COMPOUND_STRING("Exeggutor{CLEAR_TO 72}4500 Coins"),
+        COMPOUND_STRING("Genesect{CLEAR_TO 72}9999 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
@@ -3307,6 +3206,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Snivy{CLEAR_TO 72}2500 Coins"),
         COMPOUND_STRING("Chespin{CLEAR_TO 72}2500 Coins"),
         COMPOUND_STRING("Rowlet{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Grookey{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Sprigatito{CLEAR_TO 72}2500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
@@ -3318,6 +3219,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Tepig{CLEAR_TO 72}2500 Coins"),
         COMPOUND_STRING("Fennekin{CLEAR_TO 72}2500 Coins"),
         COMPOUND_STRING("Litten{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Scorbunny{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Fuecoco{CLEAR_TO 72}2500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
@@ -3329,6 +3232,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Oshawott{CLEAR_TO 72}2500 Coins"),
         COMPOUND_STRING("Froakie{CLEAR_TO 72}2500 Coins"),
         COMPOUND_STRING("Popplio{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Sobble{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Quaxly{CLEAR_TO 72}2500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
@@ -3613,11 +3518,48 @@ void ShowNatureGirlMessage(void)
     ShowFieldMessage(gNaturesInfo[nature].natureGirlMessage);
 }
 
+// Saved challenge numbers keep their original 0-11 meanings. New wagers use
+// only facilities the player can still enter.
+static const u8 sOpenFrontierGamblerChallenges[] = {1, 2, 4, 6, 8, 10, 11};
+
+static bool32 IsOpenFrontierGamblerChallenge(u32 challenge)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sOpenFrontierGamblerChallenges); i++)
+        if (sOpenFrontierGamblerChallenges[i] == challenge)
+            return TRUE;
+    return FALSE;
+}
+
+static u16 NextOpenFrontierGamblerChallenge(u32 challenge)
+{
+    challenge %= FRONTIER_GAMBLER_CHALLENGE_COUNT;
+    while (!IsOpenFrontierGamblerChallenge(challenge))
+        challenge = (challenge + 1) % FRONTIER_GAMBLER_CHALLENGE_COUNT;
+    return challenge;
+}
+
 void UpdateFrontierGambler(u16 daysSince)
 {
     u16 *var = GetVarPointer(VAR_FRONTIER_GAMBLER_CHALLENGE);
-    *var += daysSince;
-    *var %= FRONTIER_GAMBLER_CHALLENGE_COUNT;
+    *var = NextOpenFrontierGamblerChallenge((u32)*var + daysSince);
+}
+
+void RefundRetiredFrontierGamblerBet(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (VarGet(VAR_FRONTIER_GAMBLER_STATE) != FRONTIER_GAMBLER_PLACED_BET
+     || IsOpenFrontierGamblerChallenge(VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE)))
+        return;
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    u16 bet = VarGet(VAR_FRONTIER_GAMBLER_AMOUNT_BET);
+    u32 points = bet <= FRONTIER_GAMBLER_BET_15 ? (bet + 1) * 5 : 0;
+    u32 balance = min(gSaveBlock2Ptr->frontier.battlePoints, MAX_BATTLE_FRONTIER_POINTS);
+    u32 refunded = min(points, MAX_BATTLE_FRONTIER_POINTS - balance);
+    gSaveBlock2Ptr->frontier.battlePoints = balance + refunded;
+    ConvertIntToDecimalStringN(gStringVar1, refunded, STR_CONV_MODE_LEFT_ALIGN, 2);
+    VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WAITING);
+    gSpecialVar_Result = TRUE;
 }
 
 void ShowFrontierGamblerLookingMessage(void)
@@ -3638,7 +3580,8 @@ void ShowFrontierGamblerLookingMessage(void)
         BattleFrontier_Lounge3_Text_ChallengeBattlePyramid,
     };
 
-    u16 challenge = VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE);
+    u16 challenge = NextOpenFrontierGamblerChallenge(VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE));
+    VarSet(VAR_FRONTIER_GAMBLER_CHALLENGE, challenge);
     ShowFieldMessage(sFrontierGamblerLookingMessages[challenge]);
     VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, challenge);
 }
@@ -3678,7 +3621,7 @@ void FrontierGamblerSetWonOrLost(bool8 won)
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES),
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_DOUBLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PYRAMID, FRONTIER_MODE_SINGLES)
     };
 
@@ -3688,7 +3631,11 @@ void FrontierGamblerSetWonOrLost(bool8 won)
 
     if (VarGet(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_PLACED_BET)
     {
-        if (sFrontierChallenges[challenge] ==  FRONTIER_CHALLENGE(frontierFacilityId, battleMode))
+        bool32 matchesCurrent = challenge < ARRAY_COUNT(sFrontierChallenges)
+            && sFrontierChallenges[challenge] == FRONTIER_CHALLENGE(frontierFacilityId, battleMode);
+        bool32 matchesOldPikeSave = challenge == 10 && frontierFacilityId == FRONTIER_FACILITY_PIKE
+            && battleMode == FRONTIER_MODE_SINGLES;
+        if (matchesCurrent || matchesOldPikeSave)
         {
             if (won)
                 VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON);
@@ -4127,14 +4074,13 @@ static void WaitForDeoxysRockMovement(u8 taskId)
 
 void IncrementBirthIslandRockStepCount(void)
 {
-    u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
+    u32 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
     if ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
      || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG)))
     {
-        if (++stepCount > 99)
-            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
-        else
-            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, stepCount);
+        // Extra walking must not wrap back below the shortest-path limit.
+        // The next rock interaction owns resetting this counter.
+        VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, min(stepCount + 1, 99));
     }
 }
 
@@ -6450,32 +6396,6 @@ bool32 IsSelectedMonEeveelution(void)
         || species == SPECIES_SYLVEON;
 }
 
-bool32 IsSelectedMonFurfrou(void)
-{
-    enum Species species;
-
-    if (gSpecialVar_0x8004 >= CalculatePlayerPartyCount())
-        return FALSE;
-
-    species = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG);
-    if (species == SPECIES_EGG)
-        return FALSE;
-    return GET_BASE_SPECIES_ID(species) == SPECIES_FURFROU;
-}
-
-void ChangeSelectedMonSpecies(void)
-{
-    u16 species = gSpecialVar_0x8005;
-
-    if (gSpecialVar_0x8004 >= CalculatePlayerPartyCount()
-     || species <= SPECIES_NONE
-     || species >= NUM_SPECIES)
-        return;
-
-    SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES, &species);
-    CalculateMonStats(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
-}
-
 // Keep Inclement's pre-badge visibility without overriding unlocked/manual Flash.
 void SetGraniteCaveFlashLevel(void)
 {
@@ -6529,14 +6449,6 @@ static s32 GetEmeraldChampionsCostume(enum Species species)
     return -1;
 }
 
-static const struct { enum Species species; const u8 *name; } sEmeraldChampionsDeoxysForms[] =
-{
-    {SPECIES_DEOXYS_NORMAL, COMPOUND_STRING("Normal")},
-    {SPECIES_DEOXYS_ATTACK, COMPOUND_STRING("Attack")},
-    {SPECIES_DEOXYS_DEFENSE, COMPOUND_STRING("Defense")},
-    {SPECIES_DEOXYS_SPEED, COMPOUND_STRING("Speed")},
-};
-
 static const u8 *GetEmeraldChampionsServiceFormName(enum Species source, enum Species target, u32 mode)
 {
     if (mode == 0)
@@ -6551,16 +6463,6 @@ static const u8 *GetEmeraldChampionsServiceFormName(enum Species source, enum Sp
         s32 to = GetEmeraldChampionsCostume(target);
         if (GetEmeraldChampionsCostume(source) >= 0 && to >= 0)
             return sEmeraldChampionsCostumes[to].name;
-    }
-    else if (mode == 2 && FlagGet(FLAG_EC_REPORT_C43_COMPLETE))
-    {
-        bool32 sourceAllowed = FALSE;
-        for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsDeoxysForms); i++)
-            if (sEmeraldChampionsDeoxysForms[i].species == source)
-                sourceAllowed = TRUE;
-        for (u32 i = 0; sourceAllowed && i < ARRAY_COUNT(sEmeraldChampionsDeoxysForms); i++)
-            if (sEmeraldChampionsDeoxysForms[i].species == target)
-                return sEmeraldChampionsDeoxysForms[i].name;
     }
     return NULL;
 }
@@ -6617,6 +6519,20 @@ void PrepareEmeraldChampionsFormSelection(void)
     gSpecialVar_Result = 2; // Ask the native move-selection screen; nothing is changed yet.
 }
 
+// The costume's signature move replaces the chosen slot; costumes without one
+// clear it, except that a Pikachu is never left without a move (as in ORAS).
+static enum Move GetCostumeReplacementMove(struct Pokemon *mon, enum Species target)
+{
+    enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(target)].move;
+    u32 known = 0;
+
+    if (move != MOVE_NONE && !MonKnowsMove(mon, move))
+        return move;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        known += GetMonData(mon, MON_DATA_MOVE1 + i) != MOVE_NONE;
+    return known <= 1 ? MOVE_THUNDER_SHOCK : MOVE_NONE;
+}
+
 void BufferEmeraldChampionsFormPreview(void)
 {
     struct Pokemon *mon = GetEmeraldChampionsServiceMon();
@@ -6632,10 +6548,10 @@ void BufferEmeraldChampionsFormPreview(void)
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}: {STR_VAR_2}."));
     if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
     {
-        enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(gSpecialVar_0x8008)].move;
+        enum Move move = GetCostumeReplacementMove(mon, gSpecialVar_0x8008);
         enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
         StringCopy(gStringVar2, oldMove == MOVE_NONE ? COMPOUND_STRING("Empty slot") : GetMoveName(oldMove));
-        StringCopy(gStringVar3, move == MOVE_NONE || MonKnowsMove(mon, move) ? COMPOUND_STRING("Empty slot") : GetMoveName(move));
+        StringCopy(gStringVar3, move == MOVE_NONE ? COMPOUND_STRING("Empty slot") : GetMoveName(move));
         u8 text[100];
         StringExpandPlaceholders(text, COMPOUND_STRING("\p{STR_VAR_2} becomes\n{STR_VAR_3}."));
         StringAppend(gStringVar4, text);
@@ -6652,8 +6568,8 @@ void ApplyEmeraldChampionsFormSelection(void)
     enum Species target = gSpecialVar_0x8008;
     if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
     {
-        enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(target)].move;
-        if (move == MOVE_NONE || MonKnowsMove(mon, move))
+        enum Move move = GetCostumeReplacementMove(mon, target);
+        if (move == MOVE_NONE)
         {
             enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
             DeleteMove(mon, oldMove);
@@ -6694,64 +6610,6 @@ void ApplyEmeraldChampionsBonding(void)
     }
 }
 
-void ClaimEmeraldChampionsSootMilestone(void)
-{
-    u16 progress = VarGet(VAR_EC_SOOT_PROGRESS);
-    u16 total = progress & EC_SOOT_TOTAL_MASK;
-    enum Item item = ITEM_NONE;
-    gSpecialVar_Result = 0;
-    if (total >= EC_SOOT_CORD_TARGET && !(progress & EC_SOOT_CORD_RECEIVED))
-        item = ITEM_LINKING_CORD;
-    else if (total >= EC_SOOT_MARSHADOW_TARGET && !IsLegendarySignUnlocked(LEGENDARY_SIGN_MARSHADOW))
-    {
-        UnlockLegendarySign(LEGENDARY_SIGN_MARSHADOW);
-        gSpecialVar_Result = 3;
-        return;
-    }
-    else if (total >= EC_SOOT_MEGA_TARGET && !FlagGet(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE))
-    {
-        // The caller's checkitem ITEM_MEGA_RING arrives in 0x8004, as at every
-        // other Mega Stone provider. Without the bracelet the tier stays open.
-        if (!gSpecialVar_0x8004)
-        {
-            gSpecialVar_Result = 6;
-            return;
-        }
-        item = ITEM_HOUNDOOMINITE;
-    }
-    if (item == ITEM_NONE)
-        return;
-    CopyItemName(item, gStringVar1);
-    // A previously obtained reusable device fulfills this tier too.
-    if (PlayerOwnsItem(item))
-    {
-        u32 bonus = 3000;
-        AddMoney(&gSaveBlock1Ptr->money, bonus);
-        ConvertIntToDecimalStringN(gStringVar2, bonus, STR_CONV_MODE_LEFT_ALIGN, 4);
-        gSpecialVar_Result = 5;
-    }
-    else if (AddBagItem(item, 1))
-        gSpecialVar_Result = 1;
-    else if (AddPCItem(item, 1))
-        gSpecialVar_Result = 2;
-    else
-    {
-        gSpecialVar_Result = 4;
-        return;
-    }
-    if (item == ITEM_LINKING_CORD)
-        VarSet(VAR_EC_SOOT_PROGRESS, progress | EC_SOOT_CORD_RECEIVED);
-    else
-        FlagSet(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
-}
-
-void BufferEmeraldChampionsSootProgress(void)
-{
-    u16 total = VarGet(VAR_EC_SOOT_PROGRESS) & EC_SOOT_TOTAL_MASK;
-    ConvertIntToDecimalStringN(gStringVar2, total, STR_CONV_MODE_LEFT_ALIGN, 4);
-    gSpecialVar_Result = total >= EC_SOOT_MEGA_TARGET ? 3 : total >= EC_SOOT_MARSHADOW_TARGET ? 2 : total >= EC_SOOT_CORD_TARGET ? 1 : 0;
-}
-
 static const u16 sPaidEvolutionItems[] =
 {
 #include "data/emerald_champions_paid_evolution_items.h"
@@ -6787,57 +6645,6 @@ void OpenEmeraldChampionsEvolutionSpecialist(void)
     ScriptContext_Stop();
 }
 
-// Fen's three tiers: Glalitite once, then the deep ice is charted, then the
-// haul buys Shoal decorations in script. The cave never pays money.
-#define EC_SHOAL_TIER_GLALITITE 0
-#define EC_SHOAL_TIER_CHARTING  1
-#define EC_SHOAL_TIER_DECOR     2
-
-static u32 GetEmeraldChampionsShoalTier(void)
-{
-    if (!FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE) && !PlayerOwnsItem(ITEM_GLALITITE))
-        return EC_SHOAL_TIER_GLALITITE;
-    if (!FlagGet(FLAG_EC_SHOAL_ICE_CHARTED))
-        return EC_SHOAL_TIER_CHARTING;
-    return EC_SHOAL_TIER_DECOR;
-}
-
-void BufferEmeraldChampionsShoalReward(void)
-{
-    CopyItemName(ITEM_GLALITITE, gStringVar1);
-    gSpecialVar_Result = GetEmeraldChampionsShoalTier();
-}
-
-void TradeEmeraldChampionsShoalMaterials(void)
-{
-    gSpecialVar_Result = 0;
-    // Only the first tier is an item. Charting and decorations are scripted.
-    if (GetEmeraldChampionsShoalTier() != EC_SHOAL_TIER_GLALITITE)
-        return;
-    if (!CheckBagHasItem(ITEM_SHOAL_SALT, 4) || !CheckBagHasItem(ITEM_SHOAL_SHELL, 4))
-        return;
-    CopyItemName(ITEM_GLALITITE, gStringVar1);
-    if (AddBagItem(ITEM_GLALITITE, 1))
-        gSpecialVar_Result = 1;
-    else if (AddPCItem(ITEM_GLALITITE, 1))
-        gSpecialVar_Result = 2;
-    else
-    {
-        gSpecialVar_Result = 3;
-        return;
-    }
-    FlagSet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
-    RemoveBagItem(ITEM_SHOAL_SALT, 4);
-    RemoveBagItem(ITEM_SHOAL_SHELL, 4);
-}
-
-void CheckEmeraldChampionsRedundantPurchase(void)
-{
-    enum Item item = gSpecialVar_0x8004;
-    gSpecialVar_Result = GetItemImportance(item) && PlayerOwnsItem(item);
-    CopyItemName(item, gStringVar1);
-}
-
 void ConvertEmeraldChampionsFiniteReward(void)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
@@ -6870,74 +6677,51 @@ void PutZigzagoonInPlayerParty(void)
     LoadWallyZigzagoon();
 }
 
-// Every fossil the Devon Corp regenerator accepts, and the only fossils
-// FossilToSpecies can name.
-//
-// The donor tested a contiguous range, ITEM_ARMOR_FOSSIL..ITEM_CLAW_FOSSIL.
-// That range is INVERTED in this engine - here CLAW is 169 and ARMOR is 170 -
-// so porting the test verbatim would have matched nothing at all and quietly
-// broken the whole fossil questline. Listing the fossils explicitly keeps the
-// accepted set in step with the switch below and survives further reordering.
-static const enum Item sRevivableFossils[] =
+// Fossil IDs are not contiguous; acceptance and revival share this mapping.
+static const struct
 {
-    ITEM_HELIX_FOSSIL,
-    ITEM_DOME_FOSSIL,
-    ITEM_OLD_AMBER,
-    ITEM_ROOT_FOSSIL,
-    ITEM_CLAW_FOSSIL,
-    ITEM_ARMOR_FOSSIL,
-    ITEM_SKULL_FOSSIL,
-    ITEM_COVER_FOSSIL,
-    ITEM_PLUME_FOSSIL,
-    ITEM_JAW_FOSSIL,
-    ITEM_SAIL_FOSSIL,
+    enum Item item;
+    enum Species species;
+} sRevivableFossils[] =
+{
+    {ITEM_HELIX_FOSSIL, SPECIES_OMANYTE},
+    {ITEM_DOME_FOSSIL, SPECIES_KABUTO},
+    {ITEM_OLD_AMBER, SPECIES_AERODACTYL},
+    {ITEM_ROOT_FOSSIL, SPECIES_LILEEP},
+    {ITEM_CLAW_FOSSIL, SPECIES_ANORITH},
+    {ITEM_ARMOR_FOSSIL, SPECIES_SHIELDON},
+    {ITEM_SKULL_FOSSIL, SPECIES_CRANIDOS},
+    {ITEM_COVER_FOSSIL, SPECIES_TIRTOUGA},
+    {ITEM_PLUME_FOSSIL, SPECIES_ARCHEN},
+    {ITEM_JAW_FOSSIL, SPECIES_TYRUNT},
+    {ITEM_SAIL_FOSSIL, SPECIES_AMAURA},
 };
 
-// Checks whether the item the player just picked with Bag_ChooseItem is a fossil.
-bool8 IsItemFossil(void)
+static enum Species GetFossilSpecies(enum Item item)
 {
     for (u32 i = 0; i < ARRAY_COUNT(sRevivableFossils); i++)
-    {
-        if (gSpecialVar_ItemId == sRevivableFossils[i])
-            return TRUE;
-    }
-    return FALSE;
+        if (item == sRevivableFossils[i].item)
+            return sRevivableFossils[i].species;
+    return SPECIES_NONE;
 }
 
-// Checks the player's bag for any fossil, so the scientist only offers to
-// revive one when the player actually has something to hand over.
+bool8 IsItemFossil(void)
+{
+    return GetFossilSpecies(gSpecialVar_ItemId) != SPECIES_NONE;
+}
+
 bool8 DoesPlayerHaveFossil(void)
 {
     for (u32 i = 0; i < ARRAY_COUNT(sRevivableFossils); i++)
-    {
-        if (CheckBagHasItem(sRevivableFossils[i], 1))
+        if (CheckBagHasItem(sRevivableFossils[i].item, 1))
             return TRUE;
-    }
     return FALSE;
 }
 
-// Reads a fossil item from gSpecialVar_0x8008 and stores the species it
-// revives into into gSpecialVar_0x8006. Anything that is not a fossil leaves
-// gSpecialVar_0x8006 untouched, which the Devon Corp script relies on.
+// Preserve the existing no-write result for an invalid fossil selection.
 void FossilToSpecies(void)
 {
-    enum Species species = SPECIES_NONE;
-
-    switch (gSpecialVar_0x8008)
-    {
-    case ITEM_HELIX_FOSSIL: species = SPECIES_OMANYTE;    break;
-    case ITEM_DOME_FOSSIL:  species = SPECIES_KABUTO;     break;
-    case ITEM_OLD_AMBER:    species = SPECIES_AERODACTYL; break;
-    case ITEM_ROOT_FOSSIL:  species = SPECIES_LILEEP;     break;
-    case ITEM_CLAW_FOSSIL:  species = SPECIES_ANORITH;    break;
-    case ITEM_ARMOR_FOSSIL: species = SPECIES_SHIELDON;   break;
-    case ITEM_SKULL_FOSSIL: species = SPECIES_CRANIDOS;   break;
-    case ITEM_COVER_FOSSIL: species = SPECIES_TIRTOUGA;   break;
-    case ITEM_PLUME_FOSSIL: species = SPECIES_ARCHEN;     break;
-    case ITEM_SAIL_FOSSIL:  species = SPECIES_AMAURA;     break;
-    case ITEM_JAW_FOSSIL:   species = SPECIES_TYRUNT;     break;
-    }
-
+    enum Species species = GetFossilSpecies(gSpecialVar_0x8008);
     if (species != SPECIES_NONE)
         gSpecialVar_0x8006 = species;
 }
@@ -6961,7 +6745,7 @@ void Bag_ChoosePokeBall(void)
 // gSpecialVar_0x8004: party slot, gSpecialVar_0x8005: the ball to change to.
 void ChangePokeBall(void)
 {
-    u16 pokeball = gSpecialVar_0x8005;
+    u16 pokeball = ItemIdToBallId(gSpecialVar_0x8005);
 
     SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_POKEBALL, &pokeball);
 }
@@ -6975,9 +6759,15 @@ void ChangePokeBall(void)
 // necessary and sufficient.
 void ChangeMonSpecies(void)
 {
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     u16 newSpecies = gSpecialVar_0x8005;
-
+    if (gSpecialVar_0x8004 >= PARTY_SIZE || newSpecies == SPECIES_NONE
+     || newSpecies == SPECIES_EGG || newSpecies >= NUM_SPECIES
+     || GetSpeciesBaseHP(newSpecies) == 0)
+        return;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    enum Species current = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    if (current == SPECIES_NONE || current == SPECIES_EGG)
+        return;
     SetMonData(mon, MON_DATA_SPECIES, &newSpecies);
     CalculateMonStats(mon);
 }
@@ -6990,6 +6780,9 @@ bool8 CheckSpeciesInParty(void)
     u16 wanted[3] = { gSpecialVar_0x8004, gSpecialVar_0x8005, gSpecialVar_0x8006 };
     u32 numSpecies = gSpecialVar_0x8007;
     u32 speciesFound = 0;
+    bool8 found[ARRAY_COUNT(wanted)] = {FALSE};
+    if (numSpecies > ARRAY_COUNT(wanted))
+        return FALSE;
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
@@ -6997,13 +6790,16 @@ bool8 CheckSpeciesInParty(void)
 
         // An empty slot also reads back as SPECIES_NONE, so never let an
         // unused wanted[] entry be satisfied by an empty party slot.
-        if (species == SPECIES_NONE)
+        if (species == SPECIES_NONE || species == SPECIES_EGG)
             continue;
 
         for (u32 j = 0; j < ARRAY_COUNT(wanted); j++)
         {
-            if (wanted[j] != SPECIES_NONE && species == wanted[j])
+            if (!found[j] && wanted[j] != SPECIES_NONE && species == wanted[j])
+            {
+                found[j] = TRUE;
                 speciesFound++;
+            }
         }
     }
 

@@ -46,13 +46,6 @@ PetalburgCity_Gym_OnTransition: @ 820492D
 	call_if_eq PetalburgCity_Gym_EventScript_MoveWallyToEntrance
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_lt PetalburgCity_Gym_EventScript_MoveNormanToEntrance
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	call_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_CheckNormanForRematch
 	end
 
 PetalburgCity_Gym_EventScript_MoveWallyToEntrance:: @ 820494D
@@ -62,17 +55,6 @@ PetalburgCity_Gym_EventScript_MoveWallyToEntrance:: @ 820494D
 PetalburgCity_Gym_EventScript_MoveNormanToEntrance:: @ 8204955
 	setobjectxyperm LOCALID_NORMAN, 4, 107
 	return
-
-PetalburgCity_Gym_EventScript_CheckNormanForRematch:: @ 820495D
-	goto_if_unset FLAG_DAILY_REMATCH_NORMAN, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
-	compare VAR_PETALBURG_GYM_STATE, 8
-	goto_if_eq PetalburgCity_Gym_EventScript_DontMoveNormanToFront @ If var = 8 set var = 8? Why
-	setobjectxyperm LOCALID_NORMAN, 4, 107
-	return
-
-PetalburgCity_Gym_EventScript_DontMoveNormanToFront:: @ 8204985
-	setvar VAR_PETALBURG_GYM_STATE, 8
-	end
 
 PetalburgCity_Gym_OnWarp: @ 820498B
 	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_TurnPlayerNorth
@@ -122,7 +104,7 @@ PetalburgCity_Gym_EventScript_Norman:: @ 82049F1
 	case 5, PetalburgCity_Gym_EventScript_NormanThreeBadges
 	case 6, PetalburgCity_Gym_EventScript_NormanGiveKeystone
 	case 7, PetalburgCity_Gym_EventScript_NormanPostBattle
-	case 8, PetalburgCity_Gym_EventScript_NormanRematch
+	case 8, PetalburgCity_Gym_EventScript_NormanPostBattle
 	msgbox PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
@@ -363,6 +345,7 @@ PetalburgCity_Gym_EventScript_NormanFaceDoorEast:: @ 8204D7F
 	return
 
 PetalburgCity_Gym_EventScript_NormanPostBattle:: @ 8204D80
+	call PetalburgCity_Gym_EventScript_GiveRegenerator
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgCity_Gym_EventScript_GiveEnigmaBerry
@@ -375,55 +358,6 @@ PetalburgCity_Gym_EventScript_NormanPostBattle:: @ 8204D80
 PetalburgCity_Gym_EventScript_GiveFacade2:: @ 8204DAC
 	call PetalburgCity_Gym_EventScript_GiveFacade
 	release
-	end
-
-PetalburgCity_Gym_EventScript_NormanRematch::
-	message PetalburgCity_Gym_Text_NormanChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, PetalburgCity_Gym_EventScript_SetSingles
-	case 1, PetalburgCity_Gym_EventScript_SetDoubles
-	case 2, PetalburgCity_Gym_EventScript_Exit
-	case 127, PetalburgCity_Gym_EventScript_Exit
-	releaseall
-	end
-
-PetalburgCity_Gym_EventScript_SetSingles::
-	msgbox PetalburgCity_Gym_Text_NormanAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_NORMAN
-	releaseall
-	end
-
-PetalburgCity_Gym_EventScript_SetDoubles::
-	msgbox PetalburgCity_Gym_Text_NormanAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_NORMAN
-	releaseall
-	end
-
-PetalburgCity_Gym_EventScript_NormanSinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_NORMAN
-	releaseall
-	end
-
-PetalburgCity_Gym_EventScript_NormanDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_NORMAN
-	releaseall
-	end
-
-PetalburgCity_Gym_EventScript_AlreadyRematched::
-	msgbox PetalburgCity_Gym_Text_NormanPostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-PetalburgCity_Gym_EventScript_Exit::
-	releaseall
 	end
 
 PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry:: @ 8204DCE
@@ -456,6 +390,9 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry:: @ 8204E1D
 
 PetalburgCity_Gym_EventScript_NormanGiveKeystone::
 	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, PetalburgCity_Gym_EventScript_NormanBattle
+	specialvar VAR_RESULT, CanReceiveNormanMegaGift
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	setflag FLAG_SYS_RECEIVED_KEYSTONE
@@ -467,12 +404,12 @@ PetalburgCity_Gym_EventScript_NormanGiveKeystone::
 	giveitem ITEM_SWAMPERTITE
 	waitmessage
 	msgbox PetalburgCity_Gym_Text_NormanWheneverReady, MSGBOX_DEFAULT
-	closemessage
+	release
 	end
 	
 PetalburgCity_Gym_EventScript_NormanBattle::
 	msgbox PetalburgCity_Gym_Text_NormanBattleIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_NORMAN_1, PetalburgCity_Gym_Text_NormanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_NORMAN_1, PetalburgCity_Gym_Text_NormanDefeat
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -482,6 +419,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
+	call PetalburgCity_Gym_EventScript_GiveRegenerator
 	special ResetHealLocationFromDewford
 	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
@@ -733,17 +671,6 @@ PetalburgCity_Gym_Movement_WallysDadApproachPlayerWest: @ 82050D0
 	walk_right
 	walk_right
 	walk_up
-	step_end
-
-PetalburgCity_Gym_Movement_Unused: @ 82050D8
-	walk_in_place_fast_up
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_8
-	walk_in_place_fast_down
 	step_end
 
 PetalburgCity_Gym_Movement_WallyArriveNorth: @ 82050E1
@@ -1252,7 +1179,6 @@ PetalburgCity_Gym_EventScript_SetOHKORoomDoorMetatiles:: @ 8205733
 
 PetalburgCity_Gym_EventScript_SlideOpenRoomDoors:: @ 8205746
 	special PetalburgGymSlideOpenRoomDoors
-	waitstate
 	return
 
 PetalburgCity_Gym_EventScript_UnlockRoomDoors:: @ 820574B
@@ -1266,6 +1192,8 @@ PetalburgCity_Gym_EventScript_GymGuide:: @ 820574F
 	goto_if_set FLAG_PETALBURG_GYM_CHILAN_BERRIES, PetalburgCity_Gym_EventScript_GymGuide2
 	msgbox PetalburgCity_Gym_Text_GymGuideAdvice1, MSGBOX_DEFAULT
 	giveitem ITEM_CHILAN_BERRY, 15
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_PETALBURG_GYM_CHILAN_BERRIES
 	msgbox PetalburgCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -1426,7 +1354,7 @@ PetalburgCity_Gym_Text_NormanIntro: @ 8205FE5
 	.string "But first, let me give you this.$"
 
 PetalburgCity_Gym_Text_NormanMegaBracelet:
-	.string "That Mega Bracelet will allow certain\n"
+	.string "That Mega Ring will allow certain\n"
 	.string "Pokémon to Mega Evolve in battle.\p"
 	.string "It's no good on its own, though.\p"
 	.string "To Mega Evolve a Pokémon, you must\n"
@@ -1471,11 +1399,8 @@ PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis: @ 820618A
 	.string "Surf. Visit Wally's family next\l"
 	.string "door for the license.\p"
 	.string "Then press A at the water's edge.\n"
-	.string "No special Pokémon is needed.$"
-
-PetalburgCity_Gym_Text_RegisteredExploud: @ 81FF517
-	.string "Registered Dad's Exploud\n"
-	.string "in the PokéNav.$"
+	.string "Bring one able to learn Surf;\l"
+	.string "it needn't know the move.$"
 
 PetalburgCity_Gym_Text_TakeThis:
 	.string "This is my gift to you. {PLAYER}, I'm\n"
@@ -1706,10 +1631,6 @@ PetalburgCity_Gym_Text_EnterSpeedRoom: @ 820721E
 	.string "Do you want to go through?$"
 
 @ Unused
-PetalburgCity_Gym_Text_DoorAppearsLocked2: @ 8207256
-	.string "This door appears to be locked\n"
-	.string "right now…$"
-
 PetalburgCity_Gym_Text_EnterAccuracyRoom: @ 8207280
 	.string "“Accuracy Room,” the sign says.\p"
 	.string "Do you want to go through?$"
@@ -1731,7 +1652,7 @@ PetalburgCity_Gym_Text_EnterStrengthRoom: @ 820736C
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterOHKORoom: @ 82073A7
-	.string "“One-Hit Ko Room,” the sign says.\p"
+	.string "“One-Hit KO Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterGymLeadersRoom: @ 82073E4
@@ -1748,42 +1669,35 @@ PetalburgCity_Gym_Text_GymStatueCertified: @ 8207467
 	.string "Norman's Certified Trainers:\n"
 	.string "{PLAYER}$"
 
-PetalburgCity_Gym_Text_NormanPreRematch: @ 82074A2
-	.string "Because we are parent and child,\n"
-	.string "we owe it to each other to do the best\l"
-	.string "we can. Isn't that right, {PLAYER}?$"
+PetalburgCity_Gym_EventScript_GiveRegenerator::
+	setvar VAR_0x8004, ITEM_REGENERATOR
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, Common_EventScript_NopReturn
+	msgbox PetalburgCity_Gym_Text_RegeneratorGift, MSGBOX_DEFAULT
+	giveitem ITEM_REGENERATOR
+	goto_if_eq VAR_RESULT, FALSE, PetalburgCity_Gym_EventScript_RegeneratorNoRoom
+	msgbox PetalburgCity_Gym_Text_RegeneratorExplanation, MSGBOX_DEFAULT
+	return
 
-PetalburgCity_Gym_Text_NormanRematchDefeat: @ 82075CE
-	.string "Uh… Haha…\n"
-	.string "Maybe that was going too hard…$"
+PetalburgCity_Gym_EventScript_RegeneratorNoRoom::
+	msgbox PetalburgCity_Gym_Text_RegeneratorNoRoom, MSGBOX_DEFAULT
+	return
 
-PetalburgCity_Gym_Text_NormanPostRematch: @ 82075F7
-	.string "Dad: {PLAYER}…\n"
-	.string "What is your dream?\p"
-	.string "My dream…\n"
-	.string "Hahaha…\l"
-	.string "It has already come true, actually.$"
+PetalburgCity_Gym_Text_RegeneratorGift:
+	.string "Dad: You've come a long way.\p"
+	.string "As you head farther from home,\n"
+	.string "this will help your team recover.$"
 
-PetalburgCity_Gym_Text_NormanRematchNeedTwoMons: @ 820764A
-	.string "Dad: Hm? Wait a second, {PLAYER}.\p"
-	.string "Do you only have one Pokémon that is\n"
-	.string "capable of battle?\p"
-	.string "Sorry, but you'll have to come back\n"
-	.string "with at least two Pokémon.$"
+PetalburgCity_Gym_Text_RegeneratorExplanation:
+	.string "The Regenerator works automatically.\p"
+	.string "Held Berries used during battle\n"
+	.string "return when the battle ends.\p"
+	.string "Moves and Abilities still work\n"
+	.string "normally during battle.\p"
+	.string "Berries knocked off or stolen\n"
+	.string "won't return.$"
 
-PetalburgCity_Gym_Text_NormanChooseFormat:
-	.string "Dad: {PLAYER}…\n"
-	.string "I had a feeling that you would come.\p"
-	.string "I would never refuse to accept\n"
-	.string "a challenge from you.\p"
-	.string "You do understand, don't you?\p"
-	.string "Inside a Gym, it doesn't matter that\n"
-	.string "we are a parent and child.\p"
-	.string "I'll let you set the rules for our\n"
-	.string "rematch.\p"
-	.string "So what'll it be: a single battle,\n"
-	.string "or a double battle?$"
-
-PetalburgCity_Gym_Text_NormanAllowLegends:
-	.string "Dad: Do you want to try battling my\n"
-	.string "Legendary Pokémon?$"
+PetalburgCity_Gym_Text_RegeneratorNoRoom:
+	.string "Your Key Items pocket is full.\p"
+	.string "Make room and talk to me again.\n"
+	.string "I'll keep the Regenerator for you.$"

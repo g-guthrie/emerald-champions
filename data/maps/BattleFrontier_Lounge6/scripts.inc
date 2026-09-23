@@ -5,7 +5,7 @@ BattleFrontier_Lounge6_EventScript_Trader:: @ 8264FED
 	lock
 	faceplayer
 	goto_if_set FLAG_BATTLE_FRONTIER_TRADE_DONE, BattleFrontier_Lounge6_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_KARRABLAST
+	setvar VAR_0x8008, INGAME_TRADE_TYPE_NULL
 	@ This engine reads the trade index from VAR_0x8005 and the party slot from
 	@ VAR_0x8004; Inclement passes them the other way round.
 	copyvar VAR_0x8005, VAR_0x8008
@@ -15,7 +15,6 @@ BattleFrontier_Lounge6_EventScript_Trader:: @ 8264FED
 	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_Lounge6_EventScript_DeclineTrade
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255
 	goto_if_eq BattleFrontier_Lounge6_EventScript_DeclineTrade
@@ -25,10 +24,15 @@ BattleFrontier_Lounge6_EventScript_Trader:: @ 8264FED
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne BattleFrontier_Lounge6_EventScript_NotRequestedMon
 	copyvar VAR_0x8004, VAR_0x800A
+	specialvar VAR_RESULT, CanReceiveInGameTradePokemon
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeRestrictedParty
+	call Common_EventScript_ReturnNPCTradeItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeCancelled
+	copyvar VAR_0x8004, VAR_0x800A
 	copyvar VAR_0x8005, VAR_0x8008
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo @ re-buffer species names over the item name
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	msgbox BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt, MSGBOX_DEFAULT
 	setflag FLAG_BATTLE_FRONTIER_TRADE_DONE
 	release

@@ -29,6 +29,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 LittlerootTown_ProfessorBirchsLab_OnTransition: @ 81F9CA1
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
+	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_KeepCosmogPending
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
@@ -63,6 +64,7 @@ LittlerootTown_ProfessorBirchsLab_OnWarp: @ 81F9D06
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
@@ -113,27 +115,27 @@ LittlerootTown_ProfessorBirchsLab_OnFrame: @ 81F9DB9
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
 	.2byte 0
 
-@ The starter is technically given prior to this on Route 101 by special ChooseStarter
-@ This is just where the game tells you its yours and lets you nickname it
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent:: @ 81F9DDB
+@ Both partners were granted atomically on Route 101. Confirm ownership and
+@ offer a nickname for each without granting either Pokemon again.
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	lockall
-	bufferleadmonspeciesname 0
+	bufferpartymonnick 0, 0
+	bufferpartymonnick 1, 1
 	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
 	waitmessage
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter:: @ 81F9E07
 	setvar VAR_0x8004, 0
-	call Common_EventScript_NameReceivedPartyMon
+	call LittlerootTown_ProfessorBirchsLab_EventScript_OfferStarterNickname
+	setvar VAR_0x8004, 1
+	call LittlerootTown_ProfessorBirchsLab_EventScript_OfferStarterNickname
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
-	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OfferStarterNickname::
+	bufferpartymonnick 0, VAR_0x8004
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, Common_EventScript_NameReceivedPartyMon
+	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival:: @ 81F9E17
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival, MSGBOX_YESNO
@@ -189,7 +191,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogParty
 	compare VAR_RESULT, 1
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogPC
-	goto Common_EventScript_NoMoreRoomForPokemon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_CosmogNoRoom
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogParty::
@@ -521,12 +523,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter:: @ 81FA24F
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch:: @ 81FA25A
 	lock
 	faceplayer
+	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
-	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	end
 
@@ -549,20 +550,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister:: @ 81FA2
 	compare VAR_BIRCH_LAB_STATE, 5
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
-	release
-	end
-
-EventScript_RegisterProfBirch:: @ 81FA2D2
-	msgbox MatchCall_Text_BirchRegisterCall, MSGBOX_DEFAULT
-	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox MatchCall_Text_RegisteredBirch, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
-	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
-	setvar VAR_REGISTER_BIRCH_STATE, 2
 	release
 	end
 
@@ -772,9 +759,10 @@ LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon: @ 81FA74D
 	.string "I guess you have your father's blood\n"
 	.string "in your veins after all!\p"
 	.string "Oh, yes. As thanks for rescuing me,\n"
-	.string "I'd like you to have the Pokémon you\l"
-	.string "used earlier.\p"
-	.string "{PLAYER} received the {STR_VAR_1}!$"
+	.string "I'd like you to keep both Pokémon\l"
+	.string "that helped you rescue me.\p"
+	.string "{STR_VAR_1} and {STR_VAR_2}\n"
+	.string "are now your partners!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon: @ 81FA8B1
 	.string "Prof. Birch: While you're at it, why not\n"
@@ -792,7 +780,7 @@ LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival: @ 81FA8F6
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou: @ 81FA9D5
 	.string "Prof. Birch: Great! {RIVAL} is on\n"
 	.string "Route 103, north of Oldale Town.\p"
-	.string "Oldale's shop sells Poké Balls.\n"
+	.string "Oldale's Pokémon Center sells Balls.\n"
 	.string "Catch more partners on the way\l"
 	.string "before you challenge {RIVAL}!\p"
 	.string "The Pokémon Center can help you\n"
@@ -805,8 +793,8 @@ LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay: @ 81FAA35
 LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome: @ 81FAA74
 	.string "Prof. Birch: Look for {RIVAL} on\n"
 	.string "Route 103, north of Oldale Town.\p"
-	.string "Buy Poké Balls in Oldale and\n"
-	.string "catch partners along the way.\p"
+	.string "Buy Poké Balls at Oldale's Center\n"
+	.string "and catch partners along the way.\p"
 	.string "The Pokémon Center will help\n"
 	.string "you prepare for the battle.$"
 
@@ -916,7 +904,7 @@ LittlerootTown_ProfessorBirchsLab_Text_OtherDimensionsTakeCosmog:
 LittlerootTown_ProfessorBirchsLab_Text_MayUpgradeSoCool: @ 81FB30F
 	.string "May: Eheheh!\p"
 	.string "It's so cute! I wonder if it evolves?\n"
-	.string "I guess we'll find out,\n"
+	.string "I guess we'll find out,\l"
 	.string "eh {PLAYER}{KUN}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanYouCanThankMe: @ 81FB38E
@@ -999,10 +987,6 @@ LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter: @ 81FB9D7
 	.string "from Prof. Birch!$"
 
 @ Unused
-LittlerootTown_ProfessorBirchsLab_Text_NicknameJohtoStarter: @ 81FB9FC
-	.string "Want to give a nickname to\n"
-	.string "the {STR_VAR_1} you received?$"
-
 LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting: @ 81FBA2C
 	.string "Prof. Birch: Listen, {PLAYER}{KUN}.\n"
 	.string "You've completed the Hoenn Pokédex,\l"
@@ -1017,10 +1001,6 @@ LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone: @ 81FBAF8
 	.string "Better leave the others alone.$"
 
 @ Unused
-LittlerootTown_ProfessorBirchsLab_Text_DontHaveAnyRoomForPokemon: @ 81FBB3A
-	.string "Oh, you don't have any room for\n"
-	.string "this Pokémon.$"
-
 LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere: @ 81FBB68
 	.string "May: {PLAYER}{KUN}, after this…\n"
 	.string "What are you going to do?\p"
@@ -1078,3 +1058,18 @@ Rotom_Appliances_Main::
 Rotom_Appliances_Text_Unavailable:
 	.string "The appliances are all unplugged\n"
 	.string "and pushed against the wall.$"
+
+@ Pending Cosmog is interactive; do not re-enter the automatic scene every frame.
+LittlerootTown_ProfessorBirchsLab_EventScript_KeepCosmogPending::
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_CosmogNoRoom::
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CosmogNoRoom, MSGBOX_DEFAULT
+	releaseall
+	end
+
+LittlerootTown_ProfessorBirchsLab_Text_CosmogNoRoom:
+	.string "Your party and Boxes are full.\p"
+	.string "Make room, then speak to me.\n"
+	.string "I'll keep Cosmog here for you!$"

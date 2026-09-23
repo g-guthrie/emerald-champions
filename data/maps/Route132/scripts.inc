@@ -6,19 +6,9 @@ Route132_EventScript_Gilbert:: @ 81F74EA
 	msgbox Route132_Text_GilbertPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route132_EventScript_Dana:: @ 81F7501
-	@ This retired encounter has no campaign battle.
-	msgbox Route132_Text_DanaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route132_EventScript_Ronald:: @ 81F7518
 	trainerbattle_double TRAINER_RONALD, Route132_Text_RonaldIntro, Route132_Text_RonaldDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route132_Text_RonaldPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route132_EventScript_Kiyo:: @ 81F752F
-	@ This retired encounter has no campaign battle.
-	msgbox Route132_Text_KiyoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route132_EventScript_Paxton:: @ 81F7546

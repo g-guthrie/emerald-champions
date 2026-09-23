@@ -20,86 +20,20 @@ Route124_EventScript_Roland:: @ 81F659C
 	msgbox Route124_Text_RolandPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route124_EventScript_Jenny:: @ 81F65B3
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route124_EventScript_RematchJenny
-	msgbox Route124_Text_JennyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route124_EventScript_RegisterJenny:: @ 81F65DF
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route124_Text_JennyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JENNY_1
-	release
-	end
-
-Route124_EventScript_RematchJenny:: @ 81F65FE
-	@ This retired encounter has no campaign battle.
-	msgbox Route124_Text_JennyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route124_EventScript_Grace:: @ 81F6615
-	@ This retired encounter has no campaign battle.
-	msgbox Route124_Text_GracePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route124_EventScript_Chad:: @ 81F662C
 	@ This retired encounter has no campaign battle.
 	msgbox Route124_Text_ChadPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Lila:: @ 81F6643
-	trainerbattle_double TRAINER_LILA_AND_ROY_1, Route124_Text_LilaIntro, Route124_Text_LilaDefeat, Route124_Text_LilaNotEnoughMons, Route124_EventScript_RegisterLila
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route124_EventScript_RematchLila
-	msgbox Route124_Text_LilaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route124_EventScript_RegisterLila:: @ 81F6673
-	msgbox Route124_Text_LilaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route124_EventScript_RematchLila:: @ 81F668C
-	@ This retired encounter has no campaign battle.
-	msgbox Route124_Text_LilaPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_LILA_AND_ROY_1, Route124_Text_LilaIntro, Route124_Text_LilaDefeat, Route124_Text_LilaNotEnoughMons
+	msgbox Route124_Text_LilaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Roy:: @ 81F66A7
-	trainerbattle_double TRAINER_LILA_AND_ROY_1, Route124_Text_RoyIntro, Route124_Text_RoyDefeat, Route124_Text_RoyNotEnoughMons, Route124_EventScript_RegisterRoy
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route124_EventScript_RematchRoy
-	msgbox Route124_Text_RoyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route124_EventScript_RegisterRoy:: @ 81F66D7
-	msgbox Route124_Text_RoyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route124_EventScript_RematchRoy:: @ 81F66F0
-	@ This retired encounter has no campaign battle.
-	msgbox Route124_Text_RoyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route124_EventScript_Declan:: @ 81F670B
-	@ This retired encounter has no campaign battle.
-	msgbox Route124_Text_DeclanPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route124_EventScript_Isabella:: @ 81F6722
-	@ This retired encounter has no campaign battle.
-	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_LILA_AND_ROY_1, Route124_Text_RoyIntro, Route124_Text_RoyDefeat, Route124_Text_RoyNotEnoughMons
+	msgbox Route124_Text_RoyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_Text_HuntersHouse: @ 81F6739
 	.string "Hunter's House$"
-

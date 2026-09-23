@@ -818,6 +818,17 @@ bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move);
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 u8 GiveCapturedMonToPlayer(struct Pokemon *mon);
+enum RestrictedPartyClass
+{
+    RESTRICTED_PARTY_NONE,
+    RESTRICTED_PARTY_LEGENDARY,
+    RESTRICTED_PARTY_ULTRA_BEAST,
+    RESTRICTED_PARTY_PARADOX,
+};
+enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species);
+bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot);
+bool32 PlayerPartyWithinRestrictedLimit(void);
+bool32 PlayerPartyLeagueEligible(void);
 bool32 ClampMonToPlayerLevelCap(struct Pokemon *mon);
 bool32 ClampBoxMonToPlayerLevelCap(struct BoxPokemon *mon);
 u8 CopyMonToPC(struct Pokemon *mon);
@@ -969,6 +980,8 @@ void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 bool32 IsSpeciesOfType(enum Species species, enum Type type);
 struct BoxPokemon *GetSelectedBoxMonFromPcOrParty(void);
 u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot);
+u16 GetBoxedLegendaryGiftSwapStatus(void);
+u16 SwapBoxedLegendaryGiftWithParty(void);
 void ChangePokemonNicknameWithCallback(void (*callback)(void));
 bool32 HasShedinjaHPHandling(enum Species species);
 void ResolveEVs(const u16 *evsTemplate, u8 *evs, bool32 ignoreTotalEvCheck);

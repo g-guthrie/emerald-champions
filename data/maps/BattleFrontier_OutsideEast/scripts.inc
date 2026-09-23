@@ -118,7 +118,6 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo:: @ 8242CFC
 	lock
 	faceplayer
 	special DoWateringBerryTreeAnim
-	waitstate
 	waitse
 	playse SE_SUDOWOODO_SHAKE
 	applymovement LOCALID_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake
@@ -250,7 +249,7 @@ BattleFrontier_OutsideEast_Text_BattlePalaceSign: @ 8242E58
 
 BattleFrontier_OutsideEast_Text_BattleArenaSign: @ 8242E96
 	.string "This is the BATTLE ARENA!\n"
-	.string "Let the toughest teams gather!$"
+	.string "The facility is closed.$"
 
 BattleFrontier_OutsideEast_Text_BattlePyramidSign: @ 8242ECF
 	.string "This is the BATTLE PYRAMID!\n"
@@ -295,7 +294,7 @@ BattleFrontier_OutsideEast_Text_PutTogetherUltimateTeam: @ 82431A5
 	.string "I didn't sleep for a week, but then\n"
 	.string "I put together the ultimate team!\p"
 	.string "I can't see myself losing, no joke.\n"
-	.string "We're storming the BATTLE ARENA!$"
+	.string "We're storming the BATTLE DOME!$"
 
 BattleFrontier_OutsideEast_Text_DidScottBringYouHere: @ 8243230
 	.string "Did SCOTT bring you here, too?\n"
@@ -352,7 +351,7 @@ BattleFrontier_OutsideEast_Text_HeardPrettyGirlAtBattleArena: @ 8243598
 	.string "Instead of her, do you know what\n"
 	.string "I found?\p"
 	.string "A whole teeming mob of sweaty,\n"
-	.string "stinky, and primitive martial artists!$"
+	.string "stinky… and now the Arena's closed!$"
 
 BattleFrontier_OutsideEast_Text_SometimesImportantOldManInThere: @ 8243668
 	.string "I sometimes see this really important-\n"

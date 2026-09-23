@@ -35,18 +35,20 @@ def hoenn_map_names() -> list[str]:
 
 
 def assembled_sources(map_names: list[str]) -> list[Path]:
-    result = [ROOT / "data/event_scripts.s"]
-    result.extend(
-        path
-        for path in (ROOT / "data/scripts").glob("*.inc")
-        if "frlg" not in path.name.lower()
-    )
-    result.extend(
-        path
-        for map_name in map_names
-        if (path := MAPS_ROOT / map_name / "scripts.inc").is_file()
-    )
-    return list(dict.fromkeys(result))
+    # Follow actual assembly includes: adjacent files such as mevent.inc are
+    # historical sources, not part of this game's script corpus.
+    result: list[Path] = []
+    pending = [ROOT / "data/event_scripts.s"]
+    while pending:
+        path = pending.pop()
+        if path in result or "frlg" in path.name.lower():
+            continue
+        if path.parent.parent == MAPS_ROOT and path.parent.name not in map_names:
+            continue
+        result.append(path)
+        for include in re.findall(r'(?m)^\s*\.include\s+"(data/[^"\n]+)"', path.read_text()):
+            pending.append(ROOT / include)
+    return result
 
 
 def all_assembly_sources() -> list[Path]:
@@ -161,6 +163,7 @@ def verify_specialvar_return_contracts(paths: list[Path]) -> int:
     checked = 0
     for path in paths:
         for line_number, line in enumerate(path.read_text(errors="ignore").splitlines(), 1):
+            line = clean_script_line(line)
             match = re.search(r"\bspecialvar\s+[^,]+,\s*([A-Za-z_][A-Za-z0-9_]*)", line)
             if match is None:
                 continue

@@ -13,9 +13,10 @@ TEST("Emerald Chansey quest map objects resolve renderable graphics")
     {
         {MAP_ROUTE111, LOCALID_ROUTE111_VIAL_CHANSEY},
         {MAP_ROUTE112, LOCALID_ROUTE112_VIAL_CHANSEY},
-        {MAP_JAGGED_PASS, LOCALID_JAGGED_PASS_VIAL_CHANSEY},
-        {MAP_ROUTE133, LOCALID_ROUTE133_VIAL_CHANSEY},
-        {MAP_ASHEN_WOODS, LOCALID_ASHEN_WOODS_VIAL_CHANSEY},
+        // These maps bind Chansey by the script-local LOCALID_CHANSEY value.
+        {MAP_JAGGED_PASS, 7},
+        {MAP_ROUTE133, 9},
+        {MAP_ASHEN_WOODS, 8},
     };
     u32 i, j;
     for (i = 0; i < ARRAY_COUNT(objects); i++)

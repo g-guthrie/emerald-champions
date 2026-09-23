@@ -29,7 +29,7 @@ PetalburgWoods_EventScript_DevonResearcherLeft:: @ 822DFD7
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachPlayer
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaBackOff
 	waitmovement 0
 	call PetalburgWoods_EventScript_DevonResearcherPostBattle
@@ -65,7 +65,7 @@ PetalburgWoods_EventScript_DevonResearcherRight:: @ 822E079
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaBackOff
 	waitmovement 0
 	call PetalburgWoods_EventScript_DevonResearcherPostBattle
@@ -282,46 +282,8 @@ PetalburgWoods_EventScript_Lyle:: @ 822E26D
 	end
 
 PetalburgWoods_EventScript_James:: @ 822E284
-	trainerbattle_double TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, EmeraldChampions_Text_NeedTwoPokemon, PetalburgWoods_EventScript_TryRegisterJames
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq PetalburgWoods_EventScript_JamesRematch
-	setvar VAR_0x8004, TRAINER_JAMES_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq PetalburgWoods_EventScript_TryRegisterJames2
-	msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT
-	release
-	end
-
-PetalburgWoods_EventScript_TryRegisterJames:: @ 822E2C5
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_RegisterJames
-	release
-	end
-
-PetalburgWoods_EventScript_RegisterJames:: @ 822E2D6
-	msgbox PetalburgWoods_Text_IWantRematch1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JAMES_1
-	release
-	end
-
-PetalburgWoods_EventScript_TryRegisterJames2:: @ 822E2EF
-	goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_RegisterJames2
-	msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT
-	release
-	end
-
-PetalburgWoods_EventScript_RegisterJames2:: @ 822E302
-	msgbox PetalburgWoods_Text_IWantRematch2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JAMES_1
-	release
-	end
-
-PetalburgWoods_EventScript_JamesRematch:: @ 822E31B
-	@ This retired encounter has no campaign battle.
-	msgbox PetalburgWoods_Text_IveBeenTrainingHard, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_Text_NotAOneToBeFound: @ 822E332
@@ -373,8 +335,6 @@ PetalburgWoods_Text_ThatWasAwfullyClose: @ 822E63D
 	.string "That was awfully close!\p"
 	.string "Thanks to you, he didn't rob me of\n"
 	.string "these important papers.\p"
-	.string "Healthy party members already share\n"
-	.string "battle experience automatically.\p"
 	.string "Take these three Dusk Balls as thanks!\n"
 	.string "They work best at night and in caves!$"
 
@@ -416,28 +376,6 @@ PetalburgWoods_Text_PeopleRespectYou: @ 822E889
 	.string "If you have a big BUG Pokémon,\n"
 	.string "people respect you for it.$"
 
-PetalburgWoods_Text_IWantRematch1: @ 822E8C3
-	.string "I want a rematch when my BUG\n"
-	.string "Pokémon grow up!\p"
-	.string "I'm registering you in my PokéNav!$"
-
-PetalburgWoods_Text_IWantRematch2: @ 822E914
-	.string "I want a rematch when my BUG \n"
-	.string "Pokémon grow up!\p"
-	.string "I'm registering you in my PokéNav!$"
-
-PetalburgWoods_Text_MyPokemonHaveGrown: @ 822E966
-	.string "My Bug Pokémon have grown.\n"
-	.string "I'll be popular again.$"
-
-PetalburgWoods_Text_CantBePopularIfLose: @ 822E998
-	.string "I can't be popular if I lose.$"
-
-PetalburgWoods_Text_IveBeenTrainingHard: @ 822E9B6
-	.string "You get to be popular if you have\n"
-	.string "strong Pokémon, right?\l"
-	.string "So, I've been training hard.$"
-
 PetalburgWoods_Text_StayOutOfTallGrass: @ 822EA0C
 	.string "Yo, there!\n"
 	.string "Your Pokémon doing okay?\p"
@@ -465,15 +403,16 @@ PetalburgWoods_Text_MiracleSeedExplanation: @ 822EB63
 	.string "other convenient items for Pokémon\l"
 	.string "to hold.$"
 
-PetalburgWoods_Text_TrainerTipsExperience: @ 822EC10
+PetalburgWoods_Text_TrainerTipsExperience:
 	.string "Trainer Tips\p"
-	.string "Any Pokémon that appears even once\n"
-	.string "in a battle is awarded Exp. Points.\p"
-	.string "To raise a weak Pokémon, put it at the\n"
-	.string "left of the team list.\p"
-	.string "As soon as a battle starts, switch it\n"
-	.string "out. It will earn Exp. Points without\l"
-	.string "being exposed to any harm.$"
+	.string "Healthy party members share battle\n"
+	.string "experience automatically.\p"
+	.string "Participants earn full experience;\n"
+	.string "those on the bench earn half.\p"
+	.string "Pokémon at their level cap earn\n"
+	.string "no more experience until it rises.\p"
+	.string "Use the Leveler to bring your party\n"
+	.string "up to its current caps anytime!$"
 
 PetalburgWoods_Text_TrainerTipsPP: @ 822ED07
 	.string "Trainer Tips\p"

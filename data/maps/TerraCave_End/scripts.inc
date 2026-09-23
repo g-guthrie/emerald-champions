@@ -41,25 +41,15 @@ TerraCave_End_EventScript_Groudon:: @ 823B0EC
 	setwildbattle SPECIES_GROUDON, VAR_0x800A, ITEM_GROUND_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq TerraCave_End_EventScript_DefeatedGroudon
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq TerraCave_End_EventScript_RanFromGroudon
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq TerraCave_End_EventScript_RanFromGroudon
+	@ Only a capture resolves it; a knockout or escape lets it be met again,
+	@ like every other static legendary (its Orb comes with the capture).
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, TerraCave_End_EventScript_RanFromGroudon
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON
 	releaseall
-	end
-
-TerraCave_End_EventScript_DefeatedGroudon:: @ 823B155
-	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	setflag FLAG_DEFEATED_GROUDON
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 TerraCave_End_EventScript_RanFromGroudon:: @ 823B163

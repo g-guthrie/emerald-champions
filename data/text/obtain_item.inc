@@ -15,10 +15,6 @@ gText_TooBadBagIsFull::
 	.string "Too bad!\n"
 	.string "The BAG is full…$"
 
-gText_PlayerPutItemInBag::
-	.string "{PLAYER} put away the {STR_VAR_2}\n"
-	.string "in the BAG.$"
-
 gText_ObtainedTheDecor::
 	.string "Obtained the {STR_VAR_2}!$"
 

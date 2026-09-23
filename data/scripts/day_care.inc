@@ -88,7 +88,7 @@ Route117_PokemonDayCare_EventScript_GiveMonToRaise::
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, Route117_PokemonDayCare_EventScript_ComeAgain
 	goto_if_eq VAR_0x8004, PC_MON_CHOSEN, Route117_PokemonDayCare_EventScript_DepositSelectedMon
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	goto_if_lt VAR_RESULT, 2, Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons
+	goto_if_eq VAR_RESULT, 0, Route117_PokemonDayCare_EventScript_OnlyOneAliveMon
 Route117_PokemonDayCare_EventScript_DepositSelectedMon::
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
@@ -114,18 +114,8 @@ Route117_PokemonDayCare_EventScript_CanRaiseOneMore::
 	goto Route117_PokemonDayCare_EventScript_ComeAgain
 	end
 
-Route117_PokemonDayCare_EventScript_OnlyOneMon::
-	msgbox Route117_PokemonDayCare_Text_YouHaveJustOneMon, MSGBOX_DEFAULT
-	release
-	end
-
 Route117_PokemonDayCare_EventScript_OnlyOneAliveMon::
 	msgbox Route117_PokemonDayCare_Text_WhatWillYouBattleWith, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons::
-	msgbox Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne, MSGBOX_DEFAULT
 	release
 	end
 
@@ -222,10 +212,6 @@ Route117_PokemonDayCare_Movement_RetrieveDaycareMon:
 	walk_slow_down
 	step_end
 
-@ Unused. Possibly a commented script, or a typo end added to the above Movement script
-Route117_PokemonDayCare_EventScript_UnusedEnd::
-	end
-
 Route117_PokemonDayCare_EventScript_TwoMonsInDaycare::
 	msgbox Route117_PokemonDayCare_Text_GoodToSeeYou, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
@@ -238,17 +224,6 @@ Route117_PokemonDayCare_EventScript_TwoMonsInDaycare::
 	release
 	end
 
-@ Unused
-Route117_PokemonDayCare_EventScript_UnusedRetrieveMon::
-	special ShowDaycareLevelMenu
-	goto_if_eq VAR_RESULT, 2, Route117_PokemonDayCare_EventScript_ComeAgain
-	copyvar VAR_0x8004, VAR_RESULT
-	specialvar VAR_RESULT, TakePokemonFromDaycare
-	msgbox Route117_PokemonDayCare_Text_HeresYourMon, MSGBOX_DEFAULT
-	msgbox Route117_PokemonDayCare_Text_ComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
 EventScript_EggHatch::
 	lockall
 	msgbox Text_EggHatchHuh, MSGBOX_DEFAULT
@@ -257,19 +232,19 @@ EventScript_EggHatch::
 	end
 
 Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon:
-	.string "I'm the DAY-CARE MAN.\p"
+	.string "I'm the Day-Care Man.\p"
 	.string "I help take care of the precious\n"
-	.string "POKéMON of TRAINERS.\p"
-	.string "If you'd like me to raise your POKéMON,\n"
+	.string "Pokémon of Trainers.\p"
+	.string "If you'd like me to raise your Pokémon,\n"
 	.string "have a word with my wife.$"
 
 Route117_Text_DoYouWantEgg:
 	.string "Ah, it's you!\p"
-	.string "We were raising your POKéMON,\n"
+	.string "We were raising your Pokémon,\n"
 	.string "and my goodness, were we surprised!\p"
-	.string "Your POKéMON had an EGG!\p"
+	.string "Your Pokémon had an Egg!\p"
 	.string "We don't know how it got there,\n"
-	.string "but your POKéMON had it.\p"
+	.string "but your Pokémon had it.\p"
 	.string "You do want it, yes?$"
 
 Route117_Text_YourMonIsDoingFine:
@@ -285,8 +260,8 @@ Route117_Text_YouHaveNoRoomForIt:
 	.string "Come back when you've made room.$"
 
 Route117_Text_ReceivedEgg:
-	.string "{PLAYER} received the EGG from\n"
-	.string "the DAY-CARE MAN.$"
+	.string "{PLAYER} received the Egg from\n"
+	.string "the Day-Care Man.$"
 
 Route117_Text_TakeGoodCareOfIt:
 	.string "Take good care of it.$"
@@ -296,12 +271,7 @@ Route117_Text_FriendlyWithOtherTrainersMon:
 	.string "it seemed to be friendly with\l"
 	.string "{STR_VAR_2}'s {STR_VAR_3}.\p"
 	.string "I may even have seen it receiving\n"
-	.string "a piece of MAIL.$"
-
-@ Unused
-Route117_Text_SeeWifeIfYouWantToPickUpMon:
-	.string "If you want to pick up your POKéMON,\n"
-	.string "have a word with my wife.$"
+	.string "a piece of Mail.$"
 
 Route117_Text_YourMonsAreDoingFine:
 	.string "Ah, it's you! Your {STR_VAR_1} and\n"
@@ -312,12 +282,12 @@ Route117_Text_IWillKeepDoYouWantIt:
 	.string "You do want this, yes?$"
 
 Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon:
-	.string "I'm the DAY-CARE LADY.\p"
-	.string "We can raise POKéMON for you.\p"
+	.string "I'm the Day-Care Lady.\p"
+	.string "We raise Pokémon free of charge.\p"
 	.string "Would you like us to raise one?$"
 
 Route117_PokemonDayCare_Text_WhichMonShouldWeRaise:
-	.string "Choose a POKéMON from your party\n"
+	.string "Choose a Pokémon from your party\n"
 	.string "or PC for us to raise.$"
 
 Route117_PokemonDayCare_Text_WellRaiseYourMon:
@@ -326,7 +296,7 @@ Route117_PokemonDayCare_Text_WellRaiseYourMon:
 	.string "Come back for it later.$"
 
 Route117_PokemonDayCare_Text_WeCanRaiseOneMore:
-	.string "We can raise two of your POKéMON.\n"
+	.string "We can raise two of your Pokémon.\n"
 	.string "Would you like us to raise one more?$"
 
 Route117_PokemonDayCare_Text_HusbandWasLookingForYou:
@@ -346,52 +316,36 @@ Route117_PokemonDayCare_Text_ComeAgain:
 
 Route117_PokemonDayCare_Text_GoodToSeeYou:
 	.string "Ah, it's you! Good to see you.\n"
-	.string "Your POKéMON can only be doing good!$"
+	.string "Your Pokémon can only be doing good!$"
 
 Route117_PokemonDayCare_Text_YourMonHasGrownXLevels:
 	.string "By level, your {STR_VAR_1} has\n"
 	.string "grown by {STR_VAR_2}.$"
 
 Route117_PokemonDayCare_Text_YourTeamIsFull:
-	.string "Your POKéMON team is full.\n"
+	.string "Your Pokémon team is full.\n"
 	.string "Make room, then come see me.$"
-
-@ Unused
-Route117_PokemonDayCare_Text_TakeBackWhichMon:
-	.string "Which POKéMON will you take back?$"
 
 Route117_PokemonDayCare_Text_NoChargeTakeItBack:
 	.string "{STR_VAR_1} gained {STR_VAR_2} levels\n"
-	.string "with us. No charge; the CHAMPIONS\l"
-	.string "settlement covers board.\p"
+	.string "with us. There is no charge.\p"
 	.string "Will you take it back?$"
 
 Route117_PokemonDayCare_Text_HeresYourMon:
 	.string "Perfect!\n"
-	.string "Here's your POKéMON.$"
+	.string "Here's your Pokémon.$"
 
 Route117_PokemonDayCare_Text_TookBackMon:
 	.string "{PLAYER} took back {STR_VAR_1} from\n"
-	.string "the DAY-CARE LADY.$"
-
-Route117_PokemonDayCare_Text_YouHaveJustOneMon:
-	.string "Oh? But you have just one\n"
-	.string "POKéMON.\p"
-	.string "Come back another time.$"
+	.string "the Day-Care Lady.$"
 
 Route117_PokemonDayCare_Text_TakeYourMonBack:
-	.string "Will you take your POKéMON back?$"
+	.string "Will you take your Pokémon back?$"
 
 Route117_PokemonDayCare_Text_WhatWillYouBattleWith:
-	.string "If you leave me that POKéMON,\n"
+	.string "If you leave me that Pokémon,\n"
 	.string "what will you battle with?\p"
 	.string "Come back another time.$"
 
 Text_EggHatchHuh:
 	.string "Huh?$"
-
-Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne:
-	.string "Keep at least two healthy POKéMON\n"
-	.string "with you for double battles.\p"
-	.string "You can leave a boxed POKéMON here\n"
-	.string "without changing your party.$"

@@ -360,16 +360,6 @@ LilycoveCity_ContestLobby_EventScript_SetMasterContestType:: @ 821A5C9
 	return
 
 @ Functionally unused
-LilycoveCity_ContestLobby_EventScript_SetDebug:: @ 821A5CF
-	setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
-	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
-	additem ITEM_CONTEST_PASS
-	setvar VAR_0x800B, 8
-	setvar VAR_CONTEST_RANK, CONTEST_RANK_MASTER
-	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
-	setflag FLAG_SYS_RIBBON_GET
-	end
-
 LilycoveCity_ContestLobby_EventScript_WarpToContestHall:: @ 821A5EF
 	setflag FLAG_ENTERED_CONTEST
 	switch VAR_CONTEST_CATEGORY
@@ -383,31 +373,26 @@ LilycoveCity_ContestLobby_EventScript_WarpToContestHall:: @ 821A5EF
 LilycoveCity_ContestLobby_EventScript_WarpToCoolContestHall:: @ 821A62F
 	setwarp MAP_CONTEST_HALL_COOL, 255, 7, 5
 	special DoContestHallWarp
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_WarpToBeautyContestHall:: @ 821A63C
 	setwarp MAP_CONTEST_HALL_BEAUTY, 255, 7, 5
 	special DoContestHallWarp
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_WarpToCuteContestHall:: @ 821A649
 	setwarp MAP_CONTEST_HALL_CUTE, 255, 7, 5
 	special DoContestHallWarp
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_WarpToSmartContestHall:: @ 821A656
 	setwarp MAP_CONTEST_HALL_SMART, 255, 7, 5
 	special DoContestHallWarp
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_WarpToToughContestHall:: @ 821A663
 	setwarp MAP_CONTEST_HALL_TOUGH, 255, 7, 5
 	special DoContestHallWarp
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_LeadToContestHall:: @ 821A670
@@ -790,12 +775,10 @@ LilycoveCity_ContestLobby_EventScript_TrySetUpLinkContest:: @ 821AA15
 
 LilycoveCity_ContestLobby_EventScript_TryLinkEMode:: @ 821AABB
 	special TryContestEModeLinkup
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_TryLinkGMode:: @ 821AAC0
 	special TryContestGModeLinkup
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_CancelLinkDifferentContest:: @ 821AAC5
@@ -914,12 +897,10 @@ LilycoveCity_ContestLobby_EventScript_TryJoinGroup:: @ 821AC0B
 
 LilycoveCity_ContestLobby_EventScript_TryBecomeLinkLeader:: @ 821AC33
 	special TryBecomeLinkLeader
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_TryJoinLinkGroup:: @ 821AC38
 	special TryJoinLinkGroup
-	waitstate
 	return
 
 LilycoveCity_ContestLobby_EventScript_LinkLeaderDecided:: @ 821AC3D

@@ -4225,6 +4225,7 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
 
                 gLastUsedItem = gBattleMons[battlerDef].item;
                 gBattleMons[battlerDef].item = ITEM_NONE;
+                GetBattlerPartyState(battlerDef)->heldItemOrigin = 0;
                 if (gBattleMons[battlerDef].ability != ABILITY_GORILLA_TACTICS)
                     gBattleStruct->choicedMove[battlerDef] = MOVE_NONE;
                 CheckSetUnburden(battlerDef);
@@ -4264,13 +4265,10 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
             }
             else
             {
-                StealTargetItem(cv->battlerAtk, battlerDef, ITEM_NONE);  // Attacker steals target item
-
-                if (!(GetConfig(B_STEAL_WILD_ITEMS) >= GEN_9
-                 && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE))))
-                {
-                    gBattleMons[cv->battlerAtk].item = gLastUsedItem;
-                }
+                if (!StealTargetItem(cv->battlerAtk, battlerDef, ITEM_NONE))
+                    continue;
+                if (GEN_LATEST == GEN_CHAMPIONS)
+                    RecordPermanentHeldItemTheft(battlerDef, cv->battlerAtk, gLastUsedItem);
 
                 gEffectBattler = cv->battlerDef;
                 if (IsBattlerAlive(cv->battlerAtk))
@@ -4818,6 +4816,10 @@ static enum MoveEndResult MoveEndPickpocket(struct BattleCalcValues *cv)
                     else
                     {
                         StealTargetItem(battlerDef, cv->battlerAtk, itemToSteal); // Don't change cv->battlerAtk's item
+                        struct PartyState *originalHolder = &gBattleStruct->partyState[GetBattlerTrainer(cv->battlerAtk)][originalAttackerPartyId];
+                        RecordBerryRemoval(originalHolder->heldItemOrigin, itemToSteal);
+                        SetHeldItemOrigin(battlerDef, originalHolder->heldItemOrigin);
+                        originalHolder->heldItemOrigin = 0;
 
                         PREPARE_MON_NICK_WITH_PREFIX_LOWER_BUFFER(gBattleTextBuff2, cv->battlerAtk, originalAttackerPartyId);
 
@@ -4934,7 +4936,7 @@ static enum MoveEndResult MoveEndThirdMoveBlock(struct BattleCalcValues *cv)
             enum Item item = gBattleMons[cv->battlerAtk].item;
             gBattleMons[gBattlerAttacker].item = ITEM_NONE;
             gBattleStruct->battlerState[cv->battlerAtk].canPickupItem = TRUE;
-            GetBattlerPartyState(cv->battlerAtk)->usedHeldItem = item;
+            RecordConsumedHeldItem(cv->battlerAtk, item);
             CheckSetUnburden(cv->battlerAtk);
             BtlController_EmitSetMonData(
                 cv->battlerAtk,

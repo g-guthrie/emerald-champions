@@ -301,10 +301,6 @@ Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon: @ 8270650
 	.string "but take this Pokémon.$"
 
 @ Unused
-Route119_WeatherInstitute_2F_Text_NoRoomForPokemon: @ 82706B2
-	.string "Hm? You don't seem to have any room\n"
-	.string "for this Pokémon.$"
-
 Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform: @ 82706E8
 	.string "{PLAYER} received Castform!$"
 

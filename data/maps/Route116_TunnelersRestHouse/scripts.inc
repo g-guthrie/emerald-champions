@@ -11,6 +11,7 @@ Route116_TunnelersRestHouse_EventScript_Tunneler1:: @ 822B85A
 	end
 
 Route116_TunnelersRestHouse_EventScript_Tunneler2:: @ 822B863
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, Route116_TunnelersRestHouse_EventScript_Tunneler3
 	msgbox Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf, MSGBOX_NPC
 	end
 

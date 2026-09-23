@@ -36,12 +36,8 @@ Route114_FossilManiacsTunnel_EventScript_FossilManiac:: @ 822AF87
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_REVIVED_FOSSIL_MON, Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil
-	checkitem ITEM_ROOT_FOSSIL, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
-	checkitem ITEM_CLAW_FOSSIL, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	specialvar VAR_RESULT, DoesPlayerHaveFossil
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
 	msgbox Route114_FossilManiacsTunnel_Text_LookInDesertForFossils, MSGBOX_DEFAULT
 	release
 	end

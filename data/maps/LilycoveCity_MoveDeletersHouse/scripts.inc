@@ -17,7 +17,6 @@ LilycoveCity_EventScript_BallSwapper::
 	msgbox LilycoveCity_Text_BallSwapperChoosePokemon, MSGBOX_DEFAULT
 	@hidemoneybox
 	special ChoosePartyMon
-	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge LilycoveCity_EventScript_BallSwapperExitNoMoneyBox
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
@@ -115,7 +114,7 @@ LilycoveCity_Text_BallSwapperChoosePokeBall:
 
 LilycoveCity_Text_BallSwapperConfirmChoice:
 	.string "So you want to move {STR_VAR_1}\n"
-	.string "into a {STR_VAR_2} for ¥2000?$"
+	.string "into your {STR_VAR_2} for ¥2000?$"
 
 LilycoveCity_Text_BallSwapperChooseGivePokemon:
 	.string "Very well. Please hand over your\n"

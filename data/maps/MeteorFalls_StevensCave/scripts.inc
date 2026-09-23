@@ -5,7 +5,9 @@ MeteorFalls_StevensCave_MapScripts:: @ 823B181
 
 MeteorFalls_StevensCave_EventScript_Steven:: @ 823B182
 	lock
-	goto_if_set FLAG_DAILY_REMATCH_STEVEN, MeteorFalls_StevensCave_EventScript_Defeated
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	goto_if_lt VAR_RESULT, EC_FINALE_STEVEN, MeteorFalls_StevensCave_EventScript_NotYet
+	goto_if_defeated TRAINER_STEVEN, MeteorFalls_StevensCave_EventScript_Defeated
 	waitse
 	playse SE_PIN
 	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
@@ -15,25 +17,34 @@ MeteorFalls_StevensCave_EventScript_Steven:: @ 823B182
 	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_STEVEN, MeteorFalls_StevensCave_Text_StevenDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_STEVEN, MeteorFalls_StevensCave_Text_StevenDefeat
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
-	setflag FLAG_DAILY_REMATCH_STEVEN
 	goto_if_unset FLAG_RECEIVED_AURORA_TICKET, MeteorFalls_StevensCave_EventScript_GiveAuroraTicket
 	release
 	end
 
-MeteorFalls_StevensCave_EventScript_Defeated:: @ 823B1CD
+MeteorFalls_StevensCave_EventScript_NotYet::
+	faceplayer
+	msgbox MeteorFalls_StevensCave_Text_NotYet, MSGBOX_DEFAULT
+	call Common_EventScript_FinaleDirections
+	release
+	end
+
+MeteorFalls_StevensCave_EventScript_Defeated::
 	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
+	goto_if_unset FLAG_RECEIVED_AURORA_TICKET, MeteorFalls_StevensCave_EventScript_GiveAuroraTicket
+	call Common_EventScript_FinaleDirections
 	release
 	end
 
 MeteorFalls_StevensCave_EventScript_GiveAuroraTicket:
 	msgbox MeteorFalls_StevensCave_Text_BirthIsland, MSGBOX_DEFAULT
 	giveitem ITEM_AURORA_TICKET
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	call Common_EventScript_FinaleDirections
 	release
 	end
 
@@ -61,15 +72,19 @@ MeteorFalls_StevensCave_Text_MyPredictionCameTrue: @ 823B358
 	.string "I thought that you would eventually\n"
 	.string "become the Champion.\p"
 	.string "My predictions usually come true.\p"
-	.string "And where will you go from here?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "Fufufu, even I couldn't tell you that.$"
+	.string "Now you're ready for Birth Island.\n"
+	.string "Its strange stone needs someone\l"
+	.string "with your determination.$"
+
+MeteorFalls_StevensCave_Text_NotYet:
+	.string "Steven: Oh, {PLAYER}{KUN}. I'm still\n"
+	.string "studying the stones down here.\p"
+	.string "Come find me once you've reached\n"
+	.string "my part of the expedition.$"
 
 MeteorFalls_StevensCave_Text_BirthIsland:
-	.string "But… maybe you'd like to\n"
-	.string "investigate the strange stone that's\l"
-	.string "appeared on Birth Island?\p"
+	.string "Please investigate the strange stone\n"
+	.string "that's appeared on Birth Island.\p"
 	.string "Here, take this ticket to the harbor\n"
 	.string "in Lilycove.\p"
 	.string "Perhaps you'll find something useful…$"

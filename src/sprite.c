@@ -447,6 +447,37 @@ u32 CreateSpriteUnchecked(const struct SpriteTemplate *template, s16 x, s16 y, u
     return MAX_SPRITES;
 }
 
+// Dynamic constructors may discard their template after this call. Keep a
+// copy for the lifetime of the sprite slot, including generic resource cleanup.
+static EWRAM_DATA struct SpriteTemplate sCopiedSpriteTemplates[MAX_SPRITES] = {0};
+
+u32 CreateSpriteWithTemplateCopy(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
+{
+    u32 id = CreateSpriteUnchecked(template, x, y, subpriority);
+    if (id != MAX_SPRITES)
+    {
+        sCopiedSpriteTemplates[id] = *template;
+        gSprites[id].template = &sCopiedSpriteTemplates[id];
+    }
+    return id;
+}
+
+void CopySpriteToSlot(u32 id, const struct Sprite *source)
+{
+    gSprites[id] = *source;
+    // Static templates retain identity (some animations compare pointers).
+    // A dynamic template must follow the clone, not its original sprite slot.
+    for (u32 i = 0; i < MAX_SPRITES; i++)
+    {
+        if (gSprites[id].template == &sCopiedSpriteTemplates[i])
+        {
+            sCopiedSpriteTemplates[id] = sCopiedSpriteTemplates[i];
+            gSprites[id].template = &sCopiedSpriteTemplates[id];
+            break;
+        }
+    }
+}
+
 u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
 {
     u32 spriteId = CreateSpriteAtEndUnchecked(template, x, y, subpriority);

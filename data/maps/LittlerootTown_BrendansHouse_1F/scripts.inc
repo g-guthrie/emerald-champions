@@ -166,7 +166,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival:: @ 81F78E2
 	compare VAR_0x8008, 2
 	call_if_eq LittlerootTown_BrendansHouse_1F_EventScript_BrendanApproachPlayer2
 	msgbox RivalsHouse_1F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_BrendansHouse_1F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_BrendanSomeOtherTime, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_0x8008, 0
@@ -187,69 +187,6 @@ LittlerootTown_BrendansHouse_1F_EventScript_MeetRival:: @ 81F78E2
 	fadedefaultbgm
 	releaseall
 	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_ChooseStarterSet::
-	setvar VAR_0x8004, SCROLL_MULTI_REGION_NAMES
-	setvar VAR_0x8005, 2 @ cursor on Hoenn; the list still opens at its top
-	special ShowScrollableMultichoice
-	waitstate
-	switch VAR_RESULT
-	case 0, LittlerootTown_BrendansHouse_1F_EventScript_Kanto
-	case 1, LittlerootTown_BrendansHouse_1F_EventScript_Johto
-	case 2, LittlerootTown_BrendansHouse_1F_EventScript_Hoenn
-	case 3, LittlerootTown_BrendansHouse_1F_EventScript_Sinnoh
-	case 4, LittlerootTown_BrendansHouse_1F_EventScript_Unova
-	case 5, LittlerootTown_BrendansHouse_1F_EventScript_Kalos
-	case 6, LittlerootTown_BrendansHouse_1F_EventScript_Alola
-	case 7, LittlerootTown_BrendansHouse_1F_EventScript_Galar
-	case 8, LittlerootTown_BrendansHouse_1F_EventScript_Paldea
-	goto LittlerootTown_BrendansHouse_1F_EventScript_Hoenn
-	end
-
-LittlerootTown_BrendansHouse_1F_EventScript_Kanto:
-	setvar VAR_STARTER_GEN, 1
-	bufferstring 1, StarterRegionStringKanto
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Johto:
-	setvar VAR_STARTER_GEN, 2
-	bufferstring 1, StarterRegionStringJohto
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Hoenn:
-	setvar VAR_STARTER_GEN, 3
-	bufferstring 1, StarterRegionStringHoenn
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Sinnoh:
-	setvar VAR_STARTER_GEN, 4
-	bufferstring 1, StarterRegionStringSinnoh
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Unova:
-	setvar VAR_STARTER_GEN, 5
-	bufferstring 1, StarterRegionStringUnova
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Kalos:
-	setvar VAR_STARTER_GEN, 6
-	bufferstring 1, StarterRegionStringKalos
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Alola:
-	setvar VAR_STARTER_GEN, 7
-	bufferstring 1, StarterRegionStringAlola
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Galar:
-	setvar VAR_STARTER_GEN, 8
-	bufferstring 1, StarterRegionStringGalar
-	return
-
-LittlerootTown_BrendansHouse_1F_EventScript_Paldea:
-	setvar VAR_STARTER_GEN, 9
-	bufferstring 1, StarterRegionStringPaldea
-	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_PlayerFaceBrendan:: @ 81F7981
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
@@ -422,25 +359,10 @@ PlayersHouse_1F_Text_YouShouldRestABit: @ 81F7D08
 PlayersHouse_1F_Text_TakeCareHoney: @ 81F7D5C
 	.string "Mom: Take care, honey!$"
 
-PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom: @ 81F7D73
-	.string "Mom: Oh? Did Dad give you that Badge?\p"
-	.string "Then here's something from your Mom!$"
-
 PlayersHouse_1F_Text_DontPushYourselfTooHard: @ 81F7DBE
 	.string "Don't push yourself too hard, dear.\n"
 	.string "You can always come home.\p"
 	.string "Go for it, honey!$"
-
-PlayersHouse_1F_Text_IsThatAPokenav: @ 81F7E0E
-	.string "Mom: What is that, honey? A PokéNav?\n"
-	.string "Someone from Devon gave it to you?\p"
-	.string "Well, honey, how about registering\n"
-	.string "your mom?\p"
-	.string "… … …$"
-
-PlayersHouse_1F_Text_RegisteredMom: @ 81F7E89
-	.string "Registered Mom\n"
-	.string "in the PokéNav.$"
 
 PlayersHouse_1F_Text_Vigoroth1: @ 81F7EA8
 	.string "Fugiiiiih!$"
@@ -461,7 +383,7 @@ PlayersHouse_1F_Text_TheresAMovieOnTV: @ 81F7F0F
 PlayersHouse_1F_Text_RunningShoesManual: @ 81F7F66
 	.string "It's the instruction booklet for the\n"
 	.string "Running Shoes.\p"
-	.string "“Press the B Button to walk while\n"
+	.string "“Hold the B Button to run while\n"
 	.string "wearing your Running Shoes.\p"
 	.string "“Lace up your Running Shoes and hit\n"
 	.string "the road running!”$"

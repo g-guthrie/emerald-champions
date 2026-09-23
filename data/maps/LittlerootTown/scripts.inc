@@ -948,6 +948,8 @@ LittlerootTown_EventScript_SetReceivedRunningShoes:: @ 81E8686
 	end
 
 LittlerootTown_EventScript_GiveRunningShoes:: @ 81E8693
+	checkitemspace ITEM_OLD_ROD, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox LittlerootTown_Text_WearTheseRunningShoes, MSGBOX_DEFAULT
 	giveitem ITEM_OLD_ROD
 	setflag FLAG_RECEIVED_OLD_ROD
@@ -982,8 +984,8 @@ LittlerootTown_Text_WaitPlayer: @ 81E87E1
 LittlerootTown_Text_WearTheseRunningShoes: @ 81E87F0
 	.string "Mom: {PLAYER}! {PLAYER}! Did you\n"
 	.string "introduce yourself to Prof. Birch?\p"
-	.string "Oh! What an adorable Pokémon!\n"
-	.string "You got it from Prof. Birch. How nice!\p"
+	.string "Oh! What adorable Pokémon!\n"
+	.string "Prof. Birch gave you both? How nice!\p"
 	.string "You're your father's child, all right.\n"
 	.string "You look good together with Pokémon!\p"
 	.string "Here, honey! If you're going out on an\n"
@@ -1071,4 +1073,3 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab: @ 81E8DA2
 	.string "but I never expected this.\p"
 	.string "I have something to show you.\n"
 	.string "Let's go to my Lab.$"
-

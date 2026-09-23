@@ -8,7 +8,6 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
-#include "emerald_champions_battle_sets.h"
 #include "gpu_regs.h"
 #include "item.h"
 #include "link.h"
@@ -168,6 +167,21 @@ static void CB2_BeginEvolutionScene(void)
 
 #define TASK_BIT_CAN_STOP       (1 << 0)
 #define TASK_BIT_LEARN_MOVE     (1 << 7)
+
+// Field and trade scenes commit the same Pokemon/progression changes. Keep
+// presentation separate so their music and link timing remain unchanged.
+static void CommitEvolution(struct Pokemon *mon, enum Species before, enum Species after)
+{
+    u32 zero = 0;
+    SetMonData(mon, MON_DATA_SPECIES, &after);
+    SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
+    CalculateMonStats(mon);
+    ClampMonToPlayerLevelCap(mon);
+    EvolutionRenameMon(mon, before, after);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(after), FLAG_SET_SEEN);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(after), FLAG_SET_CAUGHT);
+    IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+}
 
 static void Task_BeginEvolutionScene(u8 taskId)
 {
@@ -779,19 +793,11 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
-            u32 zero = 0;
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskId].tState++;
-            SetMonData(mon, MON_DATA_SPECIES, (void *)(&gTasks[taskId].tPostEvoSpecies));
-            SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
-            CalculateMonStats(mon);
-            ClampMonToPlayerLevelCap(mon);
-            EvolutionRenameMon(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
-            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
-            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_CAUGHT);
-            IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+            CommitEvolution(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
         }
         break;
     case EVOSTATE_TRY_LEARN_MOVE:
@@ -1210,19 +1216,11 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
-            u32 zero = 0;
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             DrawTextOnTradeWindow(0, gStringVar4, 1);
             PlayFanfare(MUS_EVOLVED);
             gTasks[taskId].tState++;
-            SetMonData(mon, MON_DATA_SPECIES, (&gTasks[taskId].tPostEvoSpecies));
-            SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
-            CalculateMonStats(mon);
-            ClampMonToPlayerLevelCap(mon);
-            EvolutionRenameMon(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
-            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_SEEN);
-            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskId].tPostEvoSpecies), FLAG_SET_CAUGHT);
-            IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+            CommitEvolution(mon, gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies);
         }
         break;
     case T_EVOSTATE_TRY_LEARN_MOVE:
@@ -1256,8 +1254,6 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_END:
         if (!IsTextPrinterActiveOnWindow(0))
         {
-            if (!gTasks[taskId].tEvoWasStopped)
-
             DestroyTask(taskId);
             FREE_AND_SET_NULL(sEvoStructPtr);
             gTextFlags.useAlternateDownArrow = FALSE;
@@ -1467,6 +1463,31 @@ static void Task_TradeEvolutionScene(u8 taskId)
         break;
     }
 }
+
+#if TESTING
+void Test_CommitEvolution(struct Pokemon *mon, enum Species before, enum Species after)
+{
+    CommitEvolution(mon, before, after);
+}
+
+bool32 Test_TradeEvolutionCleanup(bool32 canceled)
+{
+    MainCallback savedCallback = gMain.callback2;
+    MainCallback savedAfterEvolution = gCB2_AfterEvolution;
+    u8 taskId = CreateTask(Task_TradeEvolutionScene, 0);
+    gTasks[taskId].tState = T_EVOSTATE_END;
+    gTasks[taskId].tPartyId = 0;
+    gTasks[taskId].tEvoWasStopped = canceled;
+    gCB2_AfterEvolution = savedCallback;
+    Task_TradeEvolutionScene(taskId);
+    bool32 destroyed = !gTasks[taskId].isActive;
+    if (!destroyed)
+        DestroyTask(taskId);
+    gCB2_AfterEvolution = savedAfterEvolution;
+    SetMainCallback2(savedCallback);
+    return destroyed;
+}
+#endif
 
 #undef tState
 #undef tPreEvoSpecies

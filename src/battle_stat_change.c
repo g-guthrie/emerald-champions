@@ -630,6 +630,8 @@ static bool32 IsIntimidateBlocked(struct BattleCalcValues *cv, struct StatChange
     case ABILITY_OBLIVIOUS:
         if (GetConfig(B_UPDATED_INTIMIDATE) < GEN_8)
             return FALSE;
+        if (st->onlyChecking)
+            return TRUE;
         PREPARE_STAT_BUFFER(gBattleTextBuff1, st->stat);
         st->script = BattleScript_AbilityNoSpecificStatLoss;
         break;
@@ -641,9 +643,13 @@ static bool32 IsIntimidateBlocked(struct BattleCalcValues *cv, struct StatChange
          && GetBattlerRawSpeedOrder(flowerVeilBattler) < GetBattlerRawSpeedOrder(cv->battlerDef))
             return FALSE;
 
-        if (!CompareStat(cv->battlerDef, STAT_ATK, MIN_STAT_STAGE, CMP_GREATER_THAN, cv->abilities[cv->battlerDef]))
-            return FALSE;
+        // A preview reports immunity without queuing a real ability response.
+        if (st->onlyChecking)
+            return TRUE;
 
+        // Guard Dog replaces the drop even at either boundary. The increase
+        // handler clamps at +6; testing whether Attack can fall suppresses the
+        // valid -6 -> -5 response (and returning FALSE would permit a drop).
         SetStatChange2(cv->battlerDef, st->stat, -1 * st->stage);
         st->script = BattleScript_DefiantActivates;
         gEffectBattler = cv->battlerDef;
@@ -920,15 +926,8 @@ void ClearOtherStatChangeValues(enum BattlerId battler)
 void ClearBothStatChangeQueues(void)
 {
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
-    {
-        memset(gSpecialStatuses[battler].statStageQueue2, 0, sizeof(gSpecialStatuses[battler].statStageQueue2));
-        gSpecialStatuses[battler].statStageAmount2 = 0;
-        memset(gSpecialStatuses[battler].statStageQueue, 0, sizeof(gSpecialStatuses[battler].statStageQueue));
-        gSpecialStatuses[battler].statStageAmount = 0;
-    }
-    gBattleStruct->negativeAnimPlayed = 0;
-    gBattleStruct->positiveAnimPlayed = 0;
-    gBattleStruct->statChangeBattler  = 0;
+        ClearOtherStatChangeValues(battler);
+    ClearStatChangeValues();
 }
 
 bool32 CompareStat(enum BattlerId battler, enum Stat statId, u32 cmpTo, u32 cmpKind, enum Ability ability)

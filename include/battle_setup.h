@@ -138,6 +138,7 @@ void TrainerBattleLoadArgs(const u8 *data);
 void TrainerBattleLoadArgsSecondTrainer(const u8 *data);
 void InitTrainerBattleParameter(void);
 void InitCampaignBattleReward(void);
+void RecordCampaignPrizePaid(void);
 u32 GetCampaignBattleMoneyReward(void);
 bool32 IsBattleMoneyRewardEligible(void);
 void InitTrainerMoneyRewardEligibility(void);
@@ -149,5 +150,6 @@ u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBa
 u8 GetRivalBattleFlags(void);
 
 void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer);
+void ApplyRivalStarterToParty(struct Pokemon *party);
 
 #endif // GUARD_BATTLE_SETUP_H

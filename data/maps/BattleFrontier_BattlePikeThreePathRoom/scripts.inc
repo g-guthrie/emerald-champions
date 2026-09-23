@@ -24,6 +24,9 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_TurnPlayerNorth:: @ 825C887
 	end
 
 BattleFrontier_BattlePikeThreePathRoom_EventScript_GetChallengeStatus:: @ 825C891
+	@ Paused saves from the old Pike format resume as Doubles.
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	frontier_getstatus
 	end
 

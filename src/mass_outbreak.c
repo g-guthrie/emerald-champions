@@ -1,4 +1,5 @@
 #include "global.h"
+#include "caps.h"
 #include "event_data.h"
 #include "main.h"
 #include "mass_outbreak.h"
@@ -66,30 +67,28 @@ u8 *GetStaticOutbreakMapName(u8 *dest, enum MassOutbreakIndex outbreakIdx)
 
 void PrepareTvShowForRandomOutbreak(TVShow *show)
 {
-    u32 outbreakIdx = RandomUniform(RNG_NONE, 0, ARRAY_COUNT(sPokeOutbreakSpeciesList));
+    u32 outbreakIdx = RandomUniform(RNG_NONE, 0, ARRAY_COUNT(sPokeOutbreakSpeciesList) - 1);
     show->massOutbreak.outbreakIndex = outbreakIdx + 1;
     show->massOutbreak.species = sPokeOutbreakSpeciesList[outbreakIdx].species;
     show->massOutbreak.locationMapNum = MAP_NUM(sPokeOutbreakSpeciesList[outbreakIdx].location);
     show->massOutbreak.locationMapGroup = MAP_GROUP(sPokeOutbreakSpeciesList[outbreakIdx].location);
 }
 
-void StartMassOutbreak(struct MassOutbreak outbreak)
-{
-    gSaveBlock1Ptr->outbreakPokemonSpecies = outbreak.species;
-    gSaveBlock1Ptr->outbreakLocationMapNum = MAP_NUM(outbreak.location);
-    gSaveBlock1Ptr->outbreakLocationMapGroup = MAP_GROUP(outbreak.location);
-    gSaveBlock1Ptr->outbreakPokemonLevel = outbreak.level;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        gSaveBlock1Ptr->outbreakPokemonMoves[i] = outbreak.moves[i];
-    }
-    gSaveBlock1Ptr->outbreakPokemonProbability = outbreak.probability;
-    gSaveBlock1Ptr->outbreakDaysLeft = outbreak.duration;
-}
-
 void StartStaticMassOutbreak(enum MassOutbreakIndex outbreakIdx)
 {
-    StartMassOutbreak(sPokeOutbreakSpeciesList[outbreakIdx]);
+    // TV records persist this index; reject an invalid record without replacing
+    // the current outbreak or reading past the authored table.
+    if ((u32)outbreakIdx >= ARRAY_COUNT(sPokeOutbreakSpeciesList))
+        return;
+    const struct MassOutbreak *outbreak = &sPokeOutbreakSpeciesList[outbreakIdx];
+    gSaveBlock1Ptr->outbreakPokemonSpecies = outbreak->species;
+    gSaveBlock1Ptr->outbreakLocationMapNum = MAP_NUM(outbreak->location);
+    gSaveBlock1Ptr->outbreakLocationMapGroup = MAP_GROUP(outbreak->location);
+    gSaveBlock1Ptr->outbreakPokemonLevel = outbreak->level;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        gSaveBlock1Ptr->outbreakPokemonMoves[i] = outbreak->moves[i];
+    gSaveBlock1Ptr->outbreakPokemonProbability = outbreak->probability;
+    gSaveBlock1Ptr->outbreakDaysLeft = outbreak->duration;
 }
 
 void UpdateMassOutbreakDaysLeft(u16 days)
@@ -105,14 +104,20 @@ bool32 IsMassOutbreakActive(void)
     return (gSaveBlock1Ptr->outbreakDaysLeft > 0);
 }
 
+void ApplyMassOutbreakMoves(struct Pokemon *mon)
+{
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(mon, gSaveBlock1Ptr->outbreakPokemonMoves[i], i);
+}
+
 bool8 SetUpMassOutbreakEncounter(u8 flags)
 {
-    if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(gSaveBlock1Ptr->outbreakPokemonLevel))
+    u8 level = min(gSaveBlock1Ptr->outbreakPokemonLevel, GetCurrentLevelCap());
+    if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
 
-    CreateWildMon(gSaveBlock1Ptr->outbreakPokemonSpecies, gSaveBlock1Ptr->outbreakPokemonLevel);
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], gSaveBlock1Ptr->outbreakPokemonMoves[i], i);
+    CreateWildMon(gSaveBlock1Ptr->outbreakPokemonSpecies, level);
+    ApplyMassOutbreakMoves(&gParties[B_TRAINER_OPPONENT_A][0]);
 
     return TRUE;
 }

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "battle_pike.h"
 #include "battle_gimmick.h"
 #include "battle_util.h"
 #include "caps.h"
@@ -13,11 +14,14 @@
 #include "trade.h"
 #include "tv.h"
 #include "constants/party_menu.h"
+#include "constants/battle_frontier.h"
 #include "constants/emerald_champions.h"
+#include "constants/battle_pike.h"
 #include "event_data.h"
 #include "field_move.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
+#include "frontier_util.h"
 #include "gym_leader_rematch.h"
 #include "item.h"
 #include "legendary_signs.h"
@@ -379,48 +383,6 @@ TEST("Emerald Champions Options owns the text speed setting")
     EXPECT(IsPlayerTextSpeedInstant());
 }
 
-TEST("Emerald Champions tops basic Balls back up to ten at every Center visit")
-{
-    ClearBag();
-    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
-
-    // An empty Bag comes back with exactly ten.
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
-
-    // A visit that needs no top-up neither adds Balls nor reports a gift.
-    gSpecialVar_Result = 0xFF;
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
-
-    // A spent stack is topped up, and a surplus is never taken away.
-    EXPECT(RemoveBagItem(ITEM_POKE_BALL, 6));
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 4);
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
-    EXPECT(AddBagItem(ITEM_POKE_BALL, 5));
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 15);
-
-    // Balls already in PC storage count toward the ten.
-    ClearBag();
-    EXPECT(AddPCItem(ITEM_POKE_BALL, 7));
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 3);
-
-    // Only the basic Ball is free; better Balls are not a substitute.
-    ClearBag();
-    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
-    EXPECT(AddBagItem(ITEM_GREAT_BALL, 30));
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
-
-    ClearBag();
-    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
-}
-
 TEST("Emerald Champions catch transfers preserve both held-item loadouts")
 {
     struct BattleStruct *savedBattleStruct = gBattleStruct;
@@ -532,9 +494,8 @@ static const struct { u16 flag; u8 cap; } sCampaignCapExpectations[] =
     {FLAG_IS_CHAMPION, 100},
 };
 
-// Flags removed from the level-cap table (Consolidation goal). They must
-// still be settable via CompleteCampaignMilestone (story gates depend on
-// them) but must no longer move the cap or pay a stipend.
+// Former milestone flags that no longer move the cap; cleared alongside the
+// cap flags so each test starts from the same story state.
 static const u16 sRetiredMilestoneFlags[] =
 {
     FLAG_SYS_POKENAV_GET,
@@ -616,23 +577,23 @@ TEST("Emerald Champions level caps follow every campaign milestone")
     ResetCampaignCapMilestones();
 }
 
-TEST("Emerald Champions legendary caps use stable species stats without a team count penalty")
+TEST("Emerald Champions all species use the same campaign level cap")
 {
     static const struct { enum Species species; u8 cap100; u8 cap50; } cases[] =
     {
         {SPECIES_GARCHOMP, 100, 50},
         {SPECIES_MEW, 100, 50},
         {SPECIES_KARTANA, 100, 50},
-        {SPECIES_KYOGRE, 89, 44},
-        {SPECIES_KYOGRE_PRIMAL, 89, 44},
-        {SPECIES_MEWTWO, 88, 44},
-        {SPECIES_MEWTWO_MEGA_X, 88, 44},
-        {SPECIES_ARCEUS, 83, 41},
-        {SPECIES_ARCEUS_FAIRY, 83, 41},
-        {SPECIES_KYUREM_BLACK, 85, 42},
-        {SPECIES_ZACIAN_HERO, 90, 45},
-        {SPECIES_ZACIAN_CROWNED, 85, 42},
-        {SPECIES_NECROZMA_DUSK_MANE, 88, 44},
+        {SPECIES_KYOGRE, 100, 50},
+        {SPECIES_KYOGRE_PRIMAL, 100, 50},
+        {SPECIES_MEWTWO, 100, 50},
+        {SPECIES_MEWTWO_MEGA_X, 100, 50},
+        {SPECIES_ARCEUS, 100, 50},
+        {SPECIES_ARCEUS_FAIRY, 100, 50},
+        {SPECIES_KYUREM_BLACK, 100, 50},
+        {SPECIES_ZACIAN_HERO, 100, 50},
+        {SPECIES_ZACIAN_CROWNED, 100, 50},
+        {SPECIES_NECROZMA_DUSK_MANE, 100, 50},
     };
     for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
     {
@@ -673,27 +634,29 @@ TEST("Emerald Champions Mega items and Dragon Ascent add no player cap penalty")
     ResetCampaignCapMilestones();
 }
 
-TEST("Emerald Champions acquisition caps each legendary and preserves its prepared data")
+TEST("Emerald Champions acquisitions cap normally and box a second Legendary")
 {
     struct Pokemon mon;
     u16 item = ITEM_FOCUS_SASH;
     u32 status = STATUS1_PARALYSIS;
     ResetCampaignCapMilestones();
     ZeroPlayerPartyMons();
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
     CreateMon(&mon, SPECIES_MEWTWO, 80, 12345, OTID_STRUCT_PLAYER_ID);
     SetMonMoveSlot(&mon, MOVE_PSYSTRIKE, 0);
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
     SetMonData(&mon, MON_DATA_STATUS, &status);
     EXPECT_EQ(GiveScriptedMonToPlayer(&mon, 0), MON_GIVEN_TO_PARTY);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 14);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_PSYSTRIKE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), item);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS), status);
     CreateMon(&mon, SPECIES_MEWTWO, 80, 54321, OTID_STRUCT_PLAYER_ID);
-    EXPECT_EQ(GiveScriptedMonToPlayer(&mon, 1), MON_GIVEN_TO_PARTY);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 12);
-    EXPECT_EQ(GetPlayerLevelCapForSpecies(SPECIES_MEWTWO), 12);
+    EXPECT_EQ(GiveScriptedMonToPlayer(&mon, 1), MON_GIVEN_TO_PC);
+    EXPECT_EQ(GetLevelFromBoxMonExp(&gPokemonStoragePtr->boxes[0][0]), 14);
+    EXPECT_EQ(GetPlayerLevelCapForSpecies(SPECIES_MEWTWO), 14);
     ZeroPlayerPartyMons();
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
 }
 
 TEST("Emerald Champions cap changes preserve fainting through boxed storage")
@@ -714,29 +677,29 @@ TEST("Emerald Champions cap changes preserve fainting through boxed storage")
     EXPECT(ClampBoxMonToPlayerLevelCap(&box));
     EXPECT_NE(GetBoxMonData(&box, MON_DATA_HP_LOST), 0);
     BoxMonToMon(&box, &restored);
-    EXPECT_EQ(GetMonData(&restored, MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_LEVEL), 14);
     EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
     EXPECT_EQ(GetMonData(&restored, MON_DATA_HP_LOST), GetMonData(&restored, MON_DATA_MAX_HP));
     EXPECT(!ClampMonToPlayerLevelCap(&restored));
     EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
 }
 
-TEST("Emerald Champions candy and level increments stop at the individual cap")
+TEST("Emerald Champions candy and level increments stop at the campaign cap")
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
     u32 experience;
     ResetCampaignCapMilestones();
     ZeroPlayerPartyMons();
-    CreateMon(mon, SPECIES_MEWTWO, 11, 12345, OTID_STRUCT_PLAYER_ID);
+    CreateMon(mon, SPECIES_MEWTWO, 13, 12345, OTID_STRUCT_PLAYER_ID);
     EXPECT(!ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0));
-    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 14);
     EXPECT(!IsMonEligibleForLeveler(mon));
     EXPECT(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0));
-    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
-    experience = gExperienceTables[gSpeciesInfo[SPECIES_MEWTWO].growthRate][13];
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 14);
+    experience = gExperienceTables[gSpeciesInfo[SPECIES_MEWTWO].growthRate][15];
     SetMonData(mon, MON_DATA_EXP, &experience);
     EXPECT(!TryIncrementMonLevel(mon));
-    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 14);
     ZeroPlayerPartyMons();
 }
 
@@ -923,20 +886,18 @@ TEST("Emerald Champions battle-ready wild presets exclude special encounters")
     EXPECT(!IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_VENUSAUR_MEGA));
 }
 
-TEST("Emerald Champions ordinary wild creation applies a prepared non-Mega set")
+TEST("Emerald Champions ordinary wild creation uses natural moves within the current cap")
 {
-    ClearBag();
-    EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
     SeedRng(17);
-
     CreateWildMon(SPECIES_CHARIZARD, 35);
-
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_CHARIZARD);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 35);
-    EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_OPPONENT_A][0]));
-    EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_CHARIZARDITE_X);
-    EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_CHARIZARDITE_Y);
-    ClearBag();
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), SPECIES_CHARIZARD);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), min(35, GetCurrentLevelCap()));
+    struct Pokemon expected = *mon;
+    GiveMonInitialMoveset(&expected);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        EXPECT_EQ(GetMonData(mon, MON_DATA_MOVE1 + slot), GetMonData(&expected, MON_DATA_MOVE1 + slot));
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), 0);
 }
 
 TEST("Emerald Champions mandatory legendary scenes apply their authored set")
@@ -979,7 +940,7 @@ TEST("Emerald Champions unauthored legendary scenes still receive a random set")
     EXPECT_EQ(nonzeroMoves, MAX_MON_MOVES);
 }
 
-TEST("Emerald Champions manor Jigglypuff keep Sing after random wild preparation")
+TEST("Emerald Champions manor Jigglypuff retain Sing without altering unrelated natural moves")
 {
     u16 oldLayout = gMapHeader.mapLayoutId;
     struct Pokemon ordinary;
@@ -989,22 +950,32 @@ TEST("Emerald Champions manor Jigglypuff keep Sing after random wild preparation
         SeedRng(sample);
         CreateWildMon(SPECIES_JIGGLYPUFF, 20);
         ordinary = gParties[B_TRAINER_OPPONENT_A][0];
-        EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&ordinary));
+        bool32 knowsSing = FALSE;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            knowsSing |= GetMonData(&ordinary, MON_DATA_MOVE1 + slot) == MOVE_SING;
 
         gMapHeader.mapLayoutId = LAYOUT_DEWFORD_MANOR_1F;
         SeedRng(sample);
         CreateWildMon(SPECIES_JIGGLYPUFF, 20);
         struct Pokemon *singer = &gParties[B_TRAINER_OPPONENT_A][0];
-        EXPECT_EQ(GetMonData(singer, MON_DATA_MOVE4), MOVE_SING);
-        EXPECT_EQ(GetMonData(singer, MON_DATA_PP4), GetMoveMaxPP(MOVE_SING));
-        for (u32 slot = 0; slot < MAX_MON_MOVES - 1; slot++)
-            EXPECT_EQ(GetMonData(singer, MON_DATA_MOVE1 + slot), GetMonData(&ordinary, MON_DATA_MOVE1 + slot));
+        bool32 retainsSing = FALSE;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            u32 move = GetMonData(singer, MON_DATA_MOVE1 + slot);
+            retainsSing |= move == MOVE_SING;
+            EXPECT_EQ(move, !knowsSing && slot == MAX_MON_MOVES - 1
+                ? MOVE_SING : GetMonData(&ordinary, MON_DATA_MOVE1 + slot));
+            if (move == MOVE_SING)
+                EXPECT_EQ(GetMonData(singer, MON_DATA_PP1 + slot), GetMoveMaxPP(MOVE_SING));
+        }
+        EXPECT(retainsSing);
         EXPECT_EQ(GetMonData(singer, MON_DATA_PERSONALITY), GetMonData(&ordinary, MON_DATA_PERSONALITY));
         EXPECT_EQ(GetMonData(singer, MON_DATA_HELD_ITEM), GetMonData(&ordinary, MON_DATA_HELD_ITEM));
-        EXPECT_EQ(GetMonData(singer, MON_DATA_LEVEL), 20);
+        EXPECT_EQ(GetMonData(singer, MON_DATA_LEVEL), min(20, GetCurrentLevelCap()));
     }
     CreateWildMon(SPECIES_GASTLY, 20);
-    EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_OPPONENT_A][0]));
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + slot), MOVE_SING);
     gMapHeader.mapLayoutId = oldLayout;
 }
 
@@ -1247,7 +1218,7 @@ TEST("Emerald Champions Game Corner rejects the initially chosen starter")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NONE);
 }
 
-TEST("Emerald Champions Game Corner delivers a prepared alternate starter transactionally")
+TEST("Emerald Champions Game Corner delivers a natural alternate starter transactionally")
 {
     ResetEmeraldChampionsGameCornerTestState();
     SeedRng(7);
@@ -1259,8 +1230,9 @@ TEST("Emerald Champions Game Corner delivers a prepared alternate starter transa
     EXPECT_EQ(gSpecialVar_Result, MON_GIVEN_TO_PARTY);
     EXPECT(FlagGet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_CHARMANDER);
-    EXPECT_NE(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
-    EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_PLAYER][0]));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), min(30, GetCurrentLevelCap()));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 0);
 }
 
 TEST("Emerald Champions Game Corner rejects a repeated archive claim")
@@ -1723,6 +1695,8 @@ TEST("Champions Circuit sends earned rewards to the PC")
 
     EXPECT_EQ(gSpecialVar_Result, 2);
     EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPECIES), SPECIES_CALYREX);
+    EXPECT_EQ(GetLevelFromBoxMonExp(&gPokemonStoragePtr->boxes[0][0]),
+        GetLevelCapForSpecies(SPECIES_CALYREX, GetCurrentLevelCap()));
     EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CALYREX));
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 2);
@@ -1770,6 +1744,16 @@ TEST("Champions Circuit mastery waits for every finite Circuit reward")
     for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
         if (gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CIRCUIT)
             MarkLegendarySignCaughtBySpecies(gLegendarySignDefinitions[signId].species);
+    // Acquisition-source metadata is not the finite reward list: these two
+    // also have wild habitats and still need their Circuit rewards resolved.
+    ChampionsCircuitTryGiveReward();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CELESTEELA));
+    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
+    ChampionsCircuitTryGiveReward();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_XURKITREE));
+    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
     ChampionsCircuitTryGiveReward();
     EXPECT_EQ(gSpecialVar_Result, 2);
     EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
@@ -2084,7 +2068,7 @@ TEST("Emerald Champions reload refreshes cached stats without reviving fainted P
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP), hp);
 }
 
-TEST("Emerald Champions field moves need the badge and a party member that could learn them")
+TEST("Emerald Champions field moves need badge, license, and species compatibility without a moveslot")
 {
     struct Pokemon *party = gParties[B_TRAINER_PLAYER];
 
@@ -2104,20 +2088,22 @@ TEST("Emerald Champions field moves need the badge and a party member that could
 
     FlagSet(FLAG_BADGE05_GET);
     FlagSet(FLAG_RECEIVED_HM_SURF);
-    // Unlocked: the Pokémon that knows the move is preferred.
+    // The compatible member supplies the animation; its moveslot is irrelevant.
     EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE), 1);
     EXPECT_EQ(PartyHasMonWithSurf(), TRUE);
+    SetMonMoveSlot(&party[1], MOVE_SPLASH, 0);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE), 1);
 
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_RECEIVED_HM_CUT);
-    // Unlocked, but neither Magikarp nor Marill could ever learn Cut.
+    // An unlocked license alone is insufficient without a capable party member.
     EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_CUT, TRUE), PARTY_SIZE);
     // A party member that could learn it (without knowing it) does it.
     CreateMon(&party[0], SPECIES_ZIGZAGOON, 14, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_CUT, TRUE), 0);
-    // Obstacle moves never show in the party menu, even unlocked; the
-    // non-obstacle ones still do.
-    EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_CUT), FALSE);
+    // Cut alone retains Inclement's optional grass-clearing party action.
+    EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_CUT), TRUE);
+    EXPECT_EQ(FieldMove_IsCapabilityBased(FIELD_MOVE_CUT), TRUE);
     EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_SURF), FALSE);
     EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_WATERFALL), FALSE);
     EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_SWEET_SCENT), TRUE);
@@ -2326,42 +2312,233 @@ TEST("Emerald Champions authored Coalossal keeps its deliberate zero Attack IV")
     ZeroEnemyPartyMons();
 }
 
-TEST("Emerald Champions milestones move the cap and never pay money")
+extern void Test_SetBattledTrainersFlags(void);
+
+TEST("Frontier gambler skips closed challenges and refunds old wagers once")
 {
-    ResetCampaignCapMilestones();
-    SetMoney(&gSaveBlock1Ptr->money, 6000);
-    EXPECT(CompleteCampaignMilestone(FLAG_BADGE01_GET));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
-    EXPECT_EQ(GetCurrentLevelCap(), 20);
-    EXPECT(!CompleteCampaignMilestone(FLAG_BADGE01_GET));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
+    u16 savedChallenge = VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE);
+    u16 savedSetChallenge = VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE);
+    u16 savedState = VarGet(VAR_FRONTIER_GAMBLER_STATE);
+    u16 savedBet = VarGet(VAR_FRONTIER_GAMBLER_AMOUNT_BET);
+    u16 savedResult = gSpecialVar_Result;
+    u16 savedPoints = gSaveBlock2Ptr->frontier.battlePoints;
+    const bool8 open[FRONTIER_GAMBLER_CHALLENGE_COUNT] = {
+        FALSE, TRUE, TRUE, FALSE, TRUE, FALSE,
+        TRUE, FALSE, TRUE, FALSE, TRUE, TRUE,
+    };
+    for (u32 challenge = 0; challenge < ARRAY_COUNT(open); challenge++)
+    {
+        VarSet(VAR_FRONTIER_GAMBLER_CHALLENGE, challenge);
+        UpdateFrontierGambler(0);
+        EXPECT(open[VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE)]);
+        VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, challenge);
+        VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET);
+        VarSet(VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_5);
+        gSaveBlock2Ptr->frontier.battlePoints = 20;
+        RefundRetiredFrontierGamblerBet();
+        EXPECT_EQ(gSpecialVar_Result, !open[challenge]);
+        EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, open[challenge] ? 20 : 25);
+        EXPECT_EQ(VarGet(VAR_FRONTIER_GAMBLER_STATE),
+            open[challenge] ? FRONTIER_GAMBLER_PLACED_BET : FRONTIER_GAMBLER_WAITING);
+        RefundRetiredFrontierGamblerBet();
+        EXPECT_EQ(gSpecialVar_Result, FALSE);
+        EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, open[challenge] ? 20 : 25);
+    }
+    VarSet(VAR_FRONTIER_GAMBLER_CHALLENGE, 11);
+    UpdateFrontierGambler(1);
+    EXPECT_EQ(VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE), 1);
+    VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, 9);
+    VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET);
+    VarSet(VAR_FRONTIER_GAMBLER_AMOUNT_BET, FRONTIER_GAMBLER_BET_15);
+    gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS - 1;
+    RefundRetiredFrontierGamblerBet();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, MAX_BATTLE_FRONTIER_POINTS);
+    VarSet(VAR_FRONTIER_GAMBLER_CHALLENGE, savedChallenge);
+    VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, savedSetChallenge);
+    VarSet(VAR_FRONTIER_GAMBLER_STATE, savedState);
+    VarSet(VAR_FRONTIER_GAMBLER_AMOUNT_BET, savedBet);
+    gSaveBlock2Ptr->frontier.battlePoints = savedPoints;
+    gSpecialVar_Result = savedResult;
+}
 
-    // Milestones outside the cap table still flip their flag the first time,
-    // since story gates depend on it, but must never move the cap.
-    EXPECT(CompleteCampaignMilestone(FLAG_SYS_POKENAV_GET));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
-    EXPECT_EQ(GetCurrentLevelCap(), 20);
-    EXPECT(!CompleteCampaignMilestone(FLAG_SYS_POKENAV_GET));
+TEST("Frontier gambler settles Pike Doubles and an old Pike-mode wager")
+{
+    u16 savedFacility = VarGet(VAR_FRONTIER_FACILITY);
+    u16 savedMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u16 savedChallenge = VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE);
+    u16 savedState = VarGet(VAR_FRONTIER_GAMBLER_STATE);
 
-    EXPECT(CompleteCampaignMilestone(FLAG_DELIVERED_DEVON_GOODS));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
-    EXPECT_EQ(GetCurrentLevelCap(), 20);
+    VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE);
+    VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, 10);
+    for (u32 mode = FRONTIER_MODE_SINGLES; mode <= FRONTIER_MODE_DOUBLES; mode++)
+    {
+        VarSet(VAR_FRONTIER_BATTLE_MODE, mode);
+        VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET);
+        FrontierGamblerSetWonOrLost(TRUE);
+        EXPECT_EQ(VarGet(VAR_FRONTIER_GAMBLER_STATE), FRONTIER_GAMBLER_WON);
+        VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_PLACED_BET);
+        FrontierGamblerSetWonOrLost(FALSE);
+        EXPECT_EQ(VarGet(VAR_FRONTIER_GAMBLER_STATE), FRONTIER_GAMBLER_LOST);
+    }
 
-    FlagClear(FLAG_RECEIVED_WATTSON_ELECTIRIZER);
-    EXPECT(CompleteCampaignMilestone(FLAG_EC_REPORT_C28_COMPLETE));
-    EXPECT_EQ(GetCurrentLevelCap(), 20);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
-    EXPECT(!FlagGet(FLAG_RECEIVED_WATTSON_ELECTIRIZER));
-    EXPECT(!CompleteCampaignMilestone(FLAG_EC_REPORT_C28_COMPLETE));
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
+    VarSet(VAR_FRONTIER_FACILITY, savedFacility);
+    VarSet(VAR_FRONTIER_BATTLE_MODE, savedMode);
+    VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, savedChallenge);
+    VarSet(VAR_FRONTIER_GAMBLER_STATE, savedState);
+}
 
-    // A cap milestone still moves the cap. Money comes from battles and from
-    // what the world is worth, never from reaching a checkpoint.
-    EXPECT(CompleteCampaignMilestone(FLAG_BADGE03_GET));
-    EXPECT_EQ(GetCurrentLevelCap(), 40);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
+TEST("Pike Doubles retains the old mode's saved streak")
+{
+    u16 savedFacility = VarGet(VAR_FRONTIER_FACILITY);
+    u16 savedMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u8 savedLevel = gSaveBlock2Ptr->frontier.lvlMode;
+    u16 savedStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN];
 
-    ResetCampaignCapMilestones();
+    VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE);
+    gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_OPEN;
+    gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN] = 11;
+    VarSet(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES);
+    EXPECT_EQ(GetCurrentFacilityWinStreak(), 11);
+    VarSet(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES);
+    EXPECT_EQ(GetCurrentFacilityWinStreak(), 11);
+
+    gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN] = savedStreak;
+    gSaveBlock2Ptr->frontier.lvlMode = savedLevel;
+    VarSet(VAR_FRONTIER_FACILITY, savedFacility);
+    VarSet(VAR_FRONTIER_BATTLE_MODE, savedMode);
+}
+
+TEST("Pike rooms with one usable Pokemon do not offer optional doubles trainer rooms")
+{
+    struct Pokemon savedParty[FRONTIER_PARTY_SIZE];
+    u8 savedCount = gPartiesCount[B_TRAINER_PLAYER];
+    u8 savedHint = gSaveBlock2Ptr->frontier.pikeHintedRoomType;
+    u8 savedHintIndex = gSaveBlock2Ptr->frontier.pikeHintedRoomIndex;
+    bool8 savedHealingDisabled = gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled;
+    rng_value_t savedRng = gRngValue;
+    u16 savedChoice = gSpecialVar_0x8007;
+    u16 savedFunction = gSpecialVar_0x8004;
+    memcpy(savedParty, gParties[B_TRAINER_PLAYER], sizeof(savedParty));
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_RATTATA, 30, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    const u8 battleRooms[] = {PIKE_ROOM_ONE_TRAINER_BATTLE, PIKE_ROOM_HARD_BATTLE, PIKE_ROOM_TWO_TRAINER_BATTLE};
+    for (u32 hint = 0; hint < ARRAY_COUNT(battleRooms); hint++)
+    {
+        gSaveBlock2Ptr->frontier.pikeHintedRoomType = battleRooms[hint];
+        gSaveBlock2Ptr->frontier.pikeHintedRoomIndex = 1;
+        gSpecialVar_0x8007 = 1;
+        gSpecialVar_0x8004 = BATTLE_PIKE_FUNC_SET_ROOM_TYPE;
+        CallBattlePikeFunction();
+        gSpecialVar_0x8004 = BATTLE_PIKE_FUNC_GET_ROOM_TYPE;
+        CallBattlePikeFunction();
+        EXPECT_EQ(gSpecialVar_Result, PIKE_ROOM_NPC);
+
+        gSpecialVar_0x8007 = 2;
+        for (u32 disableHealing = 0; disableHealing < 2; disableHealing++)
+        {
+            gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled = disableHealing;
+            for (u32 seed = 1; seed <= 24; seed++)
+            {
+                SeedRng(seed);
+                gSpecialVar_0x8004 = BATTLE_PIKE_FUNC_SET_ROOM_TYPE;
+                CallBattlePikeFunction();
+                gSpecialVar_0x8004 = BATTLE_PIKE_FUNC_GET_ROOM_TYPE;
+                CallBattlePikeFunction();
+                for (u32 room = 0; room < ARRAY_COUNT(battleRooms); room++)
+                    EXPECT_NE(gSpecialVar_Result, battleRooms[room]);
+            }
+        }
+    }
+    memcpy(gParties[B_TRAINER_PLAYER], savedParty, sizeof(savedParty));
+    gPartiesCount[B_TRAINER_PLAYER] = savedCount;
+    gSaveBlock2Ptr->frontier.pikeHintedRoomType = savedHint;
+    gSaveBlock2Ptr->frontier.pikeHintedRoomIndex = savedHintIndex;
+    gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled = savedHealingDisabled;
+    gRngValue = savedRng;
+    gSpecialVar_0x8007 = savedChoice;
+    gSpecialVar_0x8004 = savedFunction;
+}
+
+TEST("Battle setup marks only participating trainer owners and preserves the Fortree gift")
+{
+    u32 flags;
+    u16 opponentB;
+    bool32 markB;
+    PARAMETRIZE_LABEL("%s", "partner one owner") { flags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER; opponentB = 0xFFFF; markB = FALSE; }
+    PARAMETRIZE_LABEL("%s", "single") { flags = BATTLE_TYPE_TRAINER; opponentB = 0; markB = FALSE; }
+    PARAMETRIZE_LABEL("%s", "stale second owner") { flags = BATTLE_TYPE_TRAINER; opponentB = TRAINER_COURTNEY_MOSSDEEP; markB = FALSE; }
+    PARAMETRIZE_LABEL("%s", "partner sentinel") { flags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_TWO_OPPONENTS; opponentB = 0xFFFF; markB = FALSE; }
+    PARAMETRIZE_LABEL("%s", "two owners") { flags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS; opponentB = TRAINER_COURTNEY_MOSSDEEP; markB = TRUE; }
+
+    u32 savedFlags = gBattleTypeFlags;
+    TrainerBattleParameter savedParams = gTrainerBattleParameter;
+    bool32 savedGift = FlagGet(FLAG_EC_GIFT_FORTREE_CITY_HOUSE2);
+    InitTrainerBattleParameter();
+    gBattleTypeFlags = flags;
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_MAXIE_MOSSDEEP;
+    TRAINER_BATTLE_PARAM.opponentB = opponentB;
+    ClearTrainerFlag(TRAINER_MAXIE_MOSSDEEP);
+    ClearTrainerFlag(TRAINER_COURTNEY_MOSSDEEP);
+    FlagClear(FLAG_EC_GIFT_FORTREE_CITY_HOUSE2);
+    Test_SetBattledTrainersFlags();
+    EXPECT(HasTrainerBeenFought(TRAINER_MAXIE_MOSSDEEP));
+    EXPECT_EQ(HasTrainerBeenFought(TRAINER_COURTNEY_MOSSDEEP), markB);
+    EXPECT(!FlagGet(FLAG_EC_GIFT_FORTREE_CITY_HOUSE2));
+    if (savedGift)
+        FlagSet(FLAG_EC_GIFT_FORTREE_CITY_HOUSE2);
+    gBattleTypeFlags = savedFlags;
+    gTrainerBattleParameter = savedParams;
+}
+
+TEST("Evolution conditions commit item costs once after all conditions pass")
+{
+    static const struct EvolutionParam conditions[] = {
+        {IF_HOLD_ITEM, ITEM_METAL_COAT},
+        {IF_BAG_ITEM_COUNT, ITEM_POKE_BALL, 1},
+        {IF_MIN_FRIENDSHIP, 255},
+        {CONDITIONS_END},
+    };
+    bool32 eligible = FALSE;
+    enum EvoState mode = CHECK_EVO;
+    PARAMETRIZE_LABEL("%s", "failed preview") { eligible = FALSE; mode = CHECK_EVO; }
+    PARAMETRIZE_LABEL("%s", "failed commit") { eligible = FALSE; mode = DO_EVO; }
+    PARAMETRIZE_LABEL("%s", "successful preview") { eligible = TRUE; mode = CHECK_EVO; }
+    PARAMETRIZE_LABEL("%s", "successful commit") { eligible = TRUE; mode = DO_EVO; }
+    struct Pokemon mon;
+    CreateMon(&mon, SPECIES_ONIX, 20, 0, OTID_STRUCT_PLAYER_ID);
+    u16 heldItem = ITEM_METAL_COAT;
+    u8 friendship = eligible ? 255 : 0;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &heldItem);
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &friendship);
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_POKE_BALL, 5));
+    bool32 canStop = TRUE;
+    EXPECT_EQ(DoesMonMeetAdditionalConditions(&mon, conditions, NULL, PARTY_SIZE, &canStop, mode), eligible);
+    bool32 consumed = eligible && mode == DO_EVO;
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), consumed ? ITEM_NONE : ITEM_METAL_COAT);
+    EXPECT(CheckBagHasItem(ITEM_POKE_BALL, consumed ? 4 : 5));
+    EXPECT(!CheckBagHasItem(ITEM_POKE_BALL, consumed ? 5 : 6));
+    EXPECT_EQ(canStop, !eligible);
+}
+
+TEST("A held-item evolution can't be cancelled once its item is spent")
+{
+    // Happiny's Oval Stone is taken when the evolution starts; cancelling
+    // afterwards would leave an unevolved Happiny with no stone.
+    static const struct EvolutionParam conditions[] = {
+        {IF_HOLD_ITEM, ITEM_OVAL_STONE},
+        {CONDITIONS_END},
+    };
+    struct Pokemon mon;
+    CreateMon(&mon, SPECIES_HAPPINY, 20, 0, OTID_STRUCT_PLAYER_ID);
+    u16 heldItem = ITEM_OVAL_STONE;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &heldItem);
+    bool32 canStop = TRUE;
+    EXPECT(DoesMonMeetAdditionalConditions(&mon, conditions, NULL, PARTY_SIZE, &canStop, CHECK_EVO));
+    EXPECT(!canStop);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_OVAL_STONE);
 }
 
 TEST("Emerald Champions paired prizes use incoming cap once and exclude replays")
@@ -2457,44 +2634,6 @@ TEST("Emerald Champions v4 final reporter rematches do not renew first-clear mon
     ResetGabbyAndTy();
 }
 
-TEST("Emerald Champions survey locates owned Castform across permanent storage")
-{
-    u32 isEgg = TRUE;
-    ZeroPlayerPartyMons();
-    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_NONE);
-
-    CreateBoxMon(&gSaveBlock1Ptr->daycare.mons[1].mon, SPECIES_CASTFORM_RAINY, 25, 0, OTID_STRUCT_PLAYER_ID);
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_DAYCARE);
-    EXPECT_EQ(gSpecialVar_0x8004, 1);
-
-    StringCopy(GetBoxNamePtr(3), COMPOUND_STRING("SURVEY"));
-    CreateBoxMon(GetBoxedMonPtr(3, 7), SPECIES_CASTFORM_SNOWY, 25, 0, OTID_STRUCT_PLAYER_ID);
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_BOX);
-    EXPECT_EQ(StringCompare(gStringVar1, COMPOUND_STRING("SURVEY")), 0);
-    EXPECT_EQ(gSpecialVar_0x8004, 3 * IN_BOX_COUNT + 7);
-
-    CreateMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_CASTFORM_SUNNY, 25, 0, OTID_STRUCT_PLAYER_ID);
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_PARTY);
-    EXPECT_EQ(gSpecialVar_0x8004, 2);
-    SetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_EGG, &isEgg);
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_BOX);
-
-    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_EGG);
-    ZeroPlayerPartyMons();
-    LocateEmeraldChampionsCastform();
-    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_NONE);
-}
-
 static void ResetBookItemOwnership(void)
 {
     ClearBag();
@@ -2528,65 +2667,21 @@ TEST("Emerald Champions permanent item ownership includes Day Care and protects 
     ResetBookItemOwnership();
 }
 
-TEST("Emerald Champions free Ball restock remains ten after the opening and cannot be sold")
+TEST("Emerald Champions Ball prices and sale policy")
 {
     ResetBookItemOwnership();
-    FlagSet(FLAG_DEFEATED_RIVAL_ROUTE103);
-    EXPECT(AddBagItem(ITEM_POKE_BALL, 7));
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
-    ClearBag();
-    EXPECT(AddPCItem(ITEM_POKE_BALL, 4));
-    RestockEmeraldChampionsBasicBalls();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 6);
-    EXPECT_EQ(GetItemPrice(ITEM_POKE_BALL), 100);
-    EXPECT_EQ(GetItemPrice(ITEM_GREAT_BALL), 300);
-    EXPECT_EQ(GetItemPrice(ITEM_ULTRA_BALL), 600);
-    EXPECT_EQ(GetItemPrice(ITEM_QUICK_BALL), 600);
-    EXPECT_EQ(GetItemPrice(ITEM_ETHER), 1000);
-    EXPECT_EQ(GetItemSellPrice(ITEM_POKE_BALL), 0);
-    EXPECT_EQ(GetItemSellPrice(ITEM_ULTRA_BALL), 0);
-    EXPECT_EQ(GetItemSellPrice(ITEM_HEART_SCALE), 0); // Field treasure is not a money source.
-    FlagClear(FLAG_DEFEATED_RIVAL_ROUTE103);
+    EXPECT_EQ(GetItemPrice(ITEM_POKE_BALL), 200);
+    EXPECT_EQ(GetItemPrice(ITEM_GREAT_BALL), 600);
+    EXPECT_EQ(GetItemPrice(ITEM_ULTRA_BALL), 800);
+    EXPECT_EQ(GetItemPrice(ITEM_QUICK_BALL), 1000);
+    EXPECT_EQ(GetItemPrice(ITEM_ETHER), 1200);
+    EXPECT_EQ(GetItemSellPrice(ITEM_POKE_BALL), 50);
+    EXPECT_EQ(GetItemSellPrice(ITEM_ULTRA_BALL), 200);
+    EXPECT_EQ(GetItemSellPrice(ITEM_HEART_SCALE), 25); // Paid items use the configured modern quarter-price resale.
     ResetBookItemOwnership();
 }
 
-TEST("Emerald Champions soot alternatives close each finite receipt once")
-{
-    u32 savedMoney = GetMoney(&gSaveBlock1Ptr->money);
-    ResetBookItemOwnership();
-    SetMoney(&gSaveBlock1Ptr->money, 6000);
-    EXPECT(AddBagItem(ITEM_LINKING_CORD, 1));
-    VarSet(VAR_EC_SOOT_PROGRESS, 100);
-    ClaimEmeraldChampionsSootMilestone();
-    EXPECT_EQ(gSpecialVar_Result, 5);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
-    EXPECT_EQ(VarGet(VAR_EC_SOOT_PROGRESS), 100 | EC_SOOT_CORD_RECEIVED);
-    ClaimEmeraldChampionsSootMilestone();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
-    // The Mega tier waits for the caller's checkitem ITEM_MEGA_RING.
-    UnlockLegendarySign(LEGENDARY_SIGN_MARSHADOW);
-    VarSet(VAR_EC_SOOT_PROGRESS, 500 | EC_SOOT_CORD_RECEIVED);
-    FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
-    gSpecialVar_0x8004 = FALSE;
-    ClaimEmeraldChampionsSootMilestone();
-    EXPECT_EQ(gSpecialVar_Result, 6);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_HOUNDOOMINITE), 0);
-    gSpecialVar_0x8004 = TRUE;
-    ClaimEmeraldChampionsSootMilestone();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_HOUNDOOMINITE), 1);
-    EXPECT(FlagGet(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE));
-    FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
-    VarSet(VAR_EC_SOOT_PROGRESS, 0);
-    SetMoney(&gSaveBlock1Ptr->money, savedMoney);
-    ResetBookItemOwnership();
-}
-
-TEST("Emerald Champions garden refuses owned stones and Shoal substitutes before charging")
+TEST("Emerald Champions garden refuses owned stones before charging")
 {
     ResetBookItemOwnership();
     FlagClear(FLAG_EC_BERRY_TRADE_BAXCALIBRITE);
@@ -2598,56 +2693,6 @@ TEST("Emerald Champions garden refuses owned stones and Shoal substitutes before
     EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_ALREADY_DONE);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RAZZ_BERRY), 20);
     EXPECT(!FlagGet(FLAG_EC_BERRY_TRADE_BAXCALIBRITE));
-    // An owned Glalitite closes the stone tier; the haul never pays money.
-    FlagClear(FLAG_EC_SHOAL_ICE_CHARTED);
-    EXPECT(AddPCItem(ITEM_GLALITITE, 1));
-    EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
-    EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
-    BufferEmeraldChampionsShoalReward();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    TradeEmeraldChampionsShoalMaterials();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SALT), 4);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SHELL), 4);
-    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
-    ResetBookItemOwnership();
-}
-
-TEST("Emerald Champions Shoal pays Glalitite once, then charts, then decorations")
-{
-    ResetBookItemOwnership();
-    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
-    FlagClear(FLAG_EC_SHOAL_ICE_CHARTED);
-    FlagClear(FLAG_EC_SHOAL_ICE_SIGHTING);
-    EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
-    EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
-    BufferEmeraldChampionsShoalReward();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(StringCompare(gStringVar1, GetItemName(ITEM_GLALITITE)), 0);
-    TradeEmeraldChampionsShoalMaterials();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GLALITITE), 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SALT), 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SHELL), 0);
-    EXPECT(FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE));
-    // Tier two is the charting flag, scripted; the special hands out nothing.
-    EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
-    EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
-    BufferEmeraldChampionsShoalReward();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    TradeEmeraldChampionsShoalMaterials();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GLALITITE), 1);
-    FlagSet(FLAG_EC_SHOAL_ICE_CHARTED);
-    BufferEmeraldChampionsShoalReward();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    TradeEmeraldChampionsShoalMaterials();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 0);
-    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
-    FlagClear(FLAG_EC_SHOAL_ICE_CHARTED);
-    FlagClear(FLAG_EC_SHOAL_ICE_SIGHTING);
     ResetBookItemOwnership();
 }
 
@@ -2686,4 +2731,50 @@ TEST("Emerald Champions NPC trades recover held items from party or PC and rejec
     EXPECT_EQ(GetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
     EXPECT_EQ(GetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_HELD_ITEM), stone);
     ResetBookItemOwnership();
+}
+
+TEST("Emerald Champions party restore preserves fainting status Eggs items and move PP")
+{
+    static const enum Species species[] = {SPECIES_EEVEE, SPECIES_PIKACHU, SPECIES_TOGEPI};
+    static const enum Item items[] = {ITEM_SITRUS_BERRY, ITEM_LEFTOVERS, ITEM_NONE};
+    static const u32 statuses[] = {STATUS1_PARALYSIS, STATUS1_TOXIC_POISON, 0};
+    u32 personalities[3], hp[3];
+    ZeroPlayerPartyMons();
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        CreateMon(mon, species[i], 20, 1234 + i, OTID_STRUCT_PLAYER_ID);
+        CalculateMonStats(mon);
+        hp[i] = i == 0 ? 1 : i == 1 ? 0 : GetMonData(mon, MON_DATA_MAX_HP);
+        SetMonData(mon, MON_DATA_HP, &hp[i]);
+        SetMonData(mon, MON_DATA_STATUS, &statuses[i]);
+        SetMonData(mon, MON_DATA_HELD_ITEM, &items[i]);
+        u32 egg = i == 2;
+        SetMonData(mon, MON_DATA_IS_EGG, &egg);
+        SetMonMoveSlot(mon, MOVE_PROTECT, 0);
+        u32 pp = 3;
+        SetMonData(mon, MON_DATA_PP1, &pp);
+        personalities[i] = GetMonData(mon, MON_DATA_PERSONALITY);
+    }
+    CalculatePlayerPartyCount();
+    SavePlayerParty();
+    ZeroPlayerPartyMons();
+    LoadPlayerParty();
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 3);
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), species[i]);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_PERSONALITY), personalities[i]);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HP), hp[i]);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_STATUS), statuses[i]);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), items[i]);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_IS_EGG), i == 2);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_MOVE1), MOVE_PROTECT);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_PP1), 3);
+    }
+    for (u32 i = 3; i < PARTY_SIZE; i++)
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES), SPECIES_NONE);
+    ZeroPlayerPartyMons();
+    CalculatePlayerPartyCount();
 }

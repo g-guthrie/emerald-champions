@@ -16,87 +16,19 @@
 // from what the world is worth, the way it does in Inclement. A zero cap
 // leaves the current cap alone.
 // The pre-badge cap is the fallback in GetCurrentLevelCap below.
-static const struct { u16 flag; u8 cap; u16 stipend; } sCampaignMilestones[] =
+static const struct { u16 flag; u8 cap; } sCampaignMilestones[] =
 {
-    {FLAG_BADGE01_GET, 20, 0},
-    {FLAG_BADGE02_GET, 30, 0},
-    {FLAG_BADGE03_GET, 40, 0},
-    {FLAG_BADGE04_GET, 45, 0},
-    {FLAG_BADGE05_GET, 55, 0},
-    {FLAG_BADGE06_GET, 60, 0},
-    {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 65, 0},
-    {FLAG_BADGE07_GET, 70, 0},
-    {FLAG_BADGE08_GET, 80, 0},
-    {FLAG_IS_CHAMPION, 100, 0},
+    {FLAG_BADGE01_GET, 20},
+    {FLAG_BADGE02_GET, 30},
+    {FLAG_BADGE03_GET, 40},
+    {FLAG_BADGE04_GET, 45},
+    {FLAG_BADGE05_GET, 55},
+    {FLAG_BADGE06_GET, 60},
+    {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 65},
+    {FLAG_BADGE07_GET, 70},
+    {FLAG_BADGE08_GET, 80},
+    {FLAG_IS_CHAMPION, 100},
 };
-
-// Milestones not in the table above still need their flag set (story gates
-// depend on it) but grant no stipend and move no cap.
-bool32 CompleteCampaignMilestone(u16 flag)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
-    {
-        if (sCampaignMilestones[i].flag != flag)
-            continue;
-        if (FlagGet(flag))
-            return FALSE;
-        FlagSet(flag);
-        AddMoney(&gSaveBlock1Ptr->money, sCampaignMilestones[i].stipend);
-        return TRUE;
-    }
-    if (FlagGet(flag))
-        return FALSE;
-    FlagSet(flag);
-    return TRUE;
-}
-
-// Given VAR_0x8003 = flag, buffers the milestone's new cap (gStringVar1) and
-// stipend (gStringVar2), both as decimal numbers with no currency sign.
-// Returns 0 = not a cap/stipend milestone, 1 = cap only, 2 = stipend only,
-// 3 = both, via VAR_RESULT.
-void BufferCampaignMilestoneText(void)
-{
-    u16 flag = gSpecialVar_0x8003;
-    u32 result = 0;
-
-    for (u32 i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
-    {
-        if (sCampaignMilestones[i].flag != flag)
-            continue;
-        if (sCampaignMilestones[i].cap != 0)
-        {
-            ConvertIntToDecimalStringN(gStringVar1, sCampaignMilestones[i].cap, STR_CONV_MODE_LEFT_ALIGN, 3);
-            result |= 1;
-        }
-        if (sCampaignMilestones[i].stipend != 0)
-        {
-            ConvertIntToDecimalStringN(gStringVar2, sCampaignMilestones[i].stipend, STR_CONV_MODE_LEFT_ALIGN, 5);
-            result |= 2;
-        }
-        break;
-    }
-    gSpecialVar_Result = result;
-}
-
-void CompleteEmeraldChampionsMilestone(void)
-{
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    CompleteCampaignMilestone(gSpecialVar_0x8003);
-}
-
-#if EC_HEADLESS_FIXTURES
-// Headless agent bridge only: put the campaign into the milestone state that
-// yields `cap`, so authored trainer level offsets resolve exactly as in play.
-// This reuses the single milestone table above; it is not a second formula.
-void ApplyCampaignLevelCapMilestones(u32 cap)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
-    {
-        if (sCampaignMilestones[i].cap != 0 && sCampaignMilestones[i].cap <= cap)
-            FlagSet(sCampaignMilestones[i].flag);
-    }
-}
-#endif
 
 u32 GetCurrentLevelCap(void)
 {
@@ -123,23 +55,11 @@ u32 GetCurrentLevelCap(void)
 
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline)
 {
-    const struct SpeciesInfo *info;
-    u32 total;
-
+    // Party composition, rather than species-specific level penalties, now
+    // limits Legendary and Ultra Beast stacking.
+    (void)species;
     baseline = max(1, min(MAX_LEVEL, baseline));
-    if (species == SPECIES_NONE || species >= NUM_SPECIES)
-        return baseline;
-    info = &gSpeciesInfo[species];
-    // Temporary battle transformations do not apply a second level penalty.
-    // Stable fused/rider forms retain their own configured base-stat budget.
-    if (info->isMegaEvolution || info->isPrimalReversion || info->isUltraBurst
-        || info->isGigantamax)
-        species = GET_BASE_SPECIES_ID(species);
-    info = &gSpeciesInfo[species];
-    if (!(info->isRestrictedLegendary || info->isSubLegendary || info->isMythical))
-        return baseline;
-    total = GetSpeciesBaseStatTotal(species);
-    return total > 600 ? max(1, baseline * 600 / total) : baseline;
+    return baseline;
 }
 
 u32 GetPlayerLevelCapForSpecies(enum Species species)

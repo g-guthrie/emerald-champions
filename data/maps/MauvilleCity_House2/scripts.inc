@@ -27,8 +27,10 @@ MauvilleCity_House2_EventScript_AskToTradeForIceStone:: @ 8210C82
 
 MauvilleCity_House2_EventScript_AcceptTrade:: @ 8210CB8
 	msgbox MauvilleCity_House2_Text_IllTradeYouCoinCase, MSGBOX_DEFAULT
-	removeitem ITEM_ICE_STONE
 	giveitem ITEM_COIN_CASE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	removeitem ITEM_ICE_STONE
 	setflag FLAG_RECEIVED_COIN_CASE
 	goto MauvilleCity_House2_EventScript_ReceivedCoinCase
 	end
@@ -110,7 +112,6 @@ MauvilleCity_House2_EventScript_StarterMoveDeclined::
 
 MauvilleCity_House2_EventScript_OpenPartyMenu:: @ 82C8326
 	special ChooseMonForMoveTutor
-	waitstate
 	lock
 	faceplayer
 	return

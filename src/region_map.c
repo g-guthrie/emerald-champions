@@ -78,6 +78,7 @@ static EWRAM_DATA struct {
     u8 tileBuffer[0x1c0];
     bool8 choseFlyLocation;
 } *sFlyMap = NULL;
+static EWRAM_DATA MainCallback sFlyMapCancelCallback = NULL;
 
 static bool32 sDrawFlyDestTextWindow;
 
@@ -703,6 +704,15 @@ static const struct SpriteTemplate sFlyDestIconSpriteTemplate =
     .anims = sFlyDestIcon_Anims,
 };
 
+#ifdef TESTING
+struct RegionMap *Test_SetRegionMap(struct RegionMap *map)
+{
+    struct RegionMap *previous = sRegionMap;
+    sRegionMap = map;
+    return previous;
+}
+#endif
+
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
 {
     InitRegionMapData(regionMap, NULL, zoomed);
@@ -831,12 +841,14 @@ void FreeRegionMapIconResources(void)
     if (sRegionMap->cursorSprite != NULL)
     {
         DestroySprite(sRegionMap->cursorSprite);
+        sRegionMap->cursorSprite = NULL;
         FreeSpriteTilesByTag(sRegionMap->cursorTileTag);
         FreeSpritePaletteByTag(sRegionMap->cursorPaletteTag);
     }
     if (sRegionMap->playerIconSprite != NULL)
     {
         DestroySprite(sRegionMap->playerIconSprite);
+        sRegionMap->playerIconSprite = NULL;
         FreeSpriteTilesByTag(sRegionMap->playerIconTileTag);
         FreeSpritePaletteByTag(sRegionMap->playerIconPaletteTag);
     }
@@ -1693,7 +1705,8 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
     }
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
-    spriteId = CreateSprite(&template, 56, 72, 0);
+    spriteId = CreateSpriteWithTemplateCopy(&template, 56, 72, 0);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
     if (spriteId != MAX_SPRITES)
     {
         sRegionMap->cursorSprite = &gSprites[spriteId];
@@ -1721,6 +1734,7 @@ static void FreeRegionMapCursorSprite(void)
     if (sRegionMap->cursorSprite != NULL)
     {
         DestroySprite(sRegionMap->cursorSprite);
+        sRegionMap->cursorSprite = NULL;
         FreeSpriteTilesByTag(sRegionMap->cursorTileTag);
         FreeSpritePaletteByTag(sRegionMap->cursorPaletteTag);
     }
@@ -1755,7 +1769,10 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     }
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
-    spriteId = CreateSprite(&template, 0, 0, 1);
+    spriteId = CreateSpriteWithTemplateCopy(&template, 0, 0, 1);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+    sRegionMap->playerIconTileTag = tileTag;
+    sRegionMap->playerIconPaletteTag = paletteTag;
     sRegionMap->playerIconSprite = &gSprites[spriteId];
     if (!sRegionMap->zoomed)
     {
@@ -1951,10 +1968,13 @@ void CB2_OpenFlyMap(void)
         SetGpuReg(REG_OFFSET_BG2HOFS, 0);
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
         SetGpuReg(REG_OFFSET_BG3VOFS, 0);
-        sFlyMap = Alloc(sizeof(*sFlyMap));
+        sFlyMap = AllocUnchecked(sizeof(*sFlyMap));
         if (sFlyMap == NULL)
         {
-            SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+            FieldMoveShowMon_ClearSpeciesOverride();
+            SetMainCallback2(sFlyMapCancelCallback != NULL
+                ? sFlyMapCancelCallback : CB2_ReturnToFieldWithOpenMenu);
+            sFlyMapCancelCallback = NULL;
         }
         else
         {
@@ -2050,8 +2070,6 @@ static void SetFlyMapCallback(void callback(void))
 
 // Emerald Champions: the Flight Beacon opens this map from the Bag or the
 // field, so cancelling must return there rather than to the party menu.
-static EWRAM_DATA MainCallback sFlyMapCancelCallback = NULL;
-
 void SetFlyMapCancelCallback(MainCallback callback)
 {
     sFlyMapCancelCallback = callback;

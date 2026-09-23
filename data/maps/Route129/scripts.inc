@@ -34,24 +34,3 @@ Route129_EventScript_Chase:: @ 81F72EC
 	@ This retired encounter has no campaign battle.
 	msgbox Route129_Text_ChasePostBattle, MSGBOX_AUTOCLOSE
 	end
-
-Route129_EventScript_Allison:: @ 81F7303
-	@ This retired encounter has no campaign battle.
-	msgbox Route129_Text_AllisonPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route129_EventScript_Reed:: @ 81F731A
-	@ This retired encounter has no campaign battle.
-	msgbox Route129_Text_ReedPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route129_EventScript_Tisha:: @ 81F7331
-	@ This retired encounter has no campaign battle.
-	msgbox Route129_Text_TishaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route129_EventScript_Clarence:: @ 81F7348
-	@ This retired encounter has no campaign battle.
-	msgbox Route129_Text_ClarencePostBattle, MSGBOX_AUTOCLOSE
-	end
-

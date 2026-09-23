@@ -186,8 +186,25 @@ static void ServeChooseMove(enum BattlerId battler)
     }
     if (moveIndex >= MAX_MON_MOVES)
         moveIndex = 0;
-    if (target >= MAX_BATTLERS_COUNT)
-        target = battler;
+    enum MoveTarget targetType = GetBattlerMoveSelectionTargetType(battler, gBattleMons[battler].moves[moveIndex]);
+    switch (targetType)
+    {
+    case TARGET_USER:
+    case TARGET_USER_AND_ALLY:
+    case TARGET_ALLY:
+    case TARGET_BOTH:
+    case TARGET_FOES_AND_ALLY:
+    case TARGET_FIELD:
+    case TARGET_OPPONENTS_FIELD:
+    case TARGET_ALL_BATTLERS:
+    case TARGET_RANDOM:
+        target = GetDefaultSelectionTarget(battler, targetType);
+        break;
+    default:
+        if (target >= MAX_BATTLERS_COUNT)
+            target = GetDefaultSelectionTarget(battler, targetType);
+        break;
+    }
     if (mega && (usable == GIMMICK_NONE || HasTrainerUsedGimmick(battler, usable)))
         mega = FALSE;
     ClearCommand(battler);
@@ -490,7 +507,9 @@ static void WriteLegality(void)
                     if (CanTargetBattler(battler, target, move) && IsBattlerAlive(target))
                         mask |= 1u << target;
                 }
-                mask |= (GetBattlerMoveSelectionTargetType(battler, move) << 8);
+                enum MoveTarget targetType = GetBattlerMoveSelectionTargetType(battler, move);
+                mask |= GetDefaultSelectionTarget(battler, targetType) << 4;
+                mask |= targetType << 8;
             }
             gEcAgentBattleView[base + 1 + i] = mask | (reasons[i] << 16);
         }
@@ -559,7 +578,7 @@ static void WriteView(void)
 {
     u32 liveFoes = 0;
 
-    gEcAgentBattleView[0] = 1; // schema
+    gEcAgentBattleView[0] = 3; // schema: native targets and completed snapshot publication
     gEcAgentBattleView[1] = gEcAgentBattlePhase;
     gEcAgentBattleView[2] = gEcAgentBattleSerial;
     gEcAgentBattleView[3] = gBattleTurnCounter;
@@ -710,6 +729,9 @@ void EmeraldChampionsAgentBattlePoll(void)
     if (!sBridgeArmed)
         return;
 
+    // Legality calculation may cross a video-frame boundary. Publish the halt
+    // signal only after the entire observation is ready, never mid-write.
+    gEcAgentBattleHalted = 0;
     if (gEcAgentBattleCommand == 1)
         StartRequestedBattle();
     else if (gEcAgentBattleCommand != 0)
@@ -722,8 +744,8 @@ void EmeraldChampionsAgentBattlePoll(void)
     {
         if (sBattleSeen)
             gEcAgentBattlePhase = EC_AGENT_BATTLE_PHASE_ENDED;
-        gEcAgentBattleHalted = (gEcAgentBattlePhase == EC_AGENT_BATTLE_PHASE_ENDED);
         WriteView();
+        gEcAgentBattleHalted = (gEcAgentBattlePhase == EC_AGENT_BATTLE_PHASE_ENDED);
         return;
     }
     sBattleSeen = TRUE;
@@ -797,8 +819,8 @@ void EmeraldChampionsAgentBattlePoll(void)
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             sRevealed[GetBattlerTrainer(battler)] |= 1u << gBattlerPartyIndexes[battler];
     }
-    gEcAgentBattleHalted = (gEcAgentBattleNeedMask != 0);
     WriteView();
+    gEcAgentBattleHalted = (gEcAgentBattleNeedMask != 0);
 }
 
 #endif

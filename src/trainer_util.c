@@ -75,8 +75,21 @@ static void ModifyPersonalityForNature(u32 *personality, s32 newNature)
         diff = NUM_NATURES - diff;
         sign *= -1;
     }
-    *personality += (sModuloLUT[diff] * 0x100 * sign);
+    s32 delta = sModuloLUT[diff] * 0x100 * sign;
+    // Preserve the gender byte while avoiding a u32 wrap, which changes nature.
+    if (delta < 0 && *personality < (u32)-delta)
+        delta += NUM_NATURES * 0x100;
+    else if (delta > 0 && *personality > UINT32_MAX - (u32)delta)
+        delta -= NUM_NATURES * 0x100;
+    *personality += delta;
 }
+
+#ifdef TESTING
+void Test_ModifyTrainerPersonalityForNature(u32 *personality, u32 nature)
+{
+    ModifyPersonalityForNature(personality, nature);
+}
+#endif
 
 static bool32 SetCorrectAbilityNum(struct Pokemon *mon, enum Species species, enum Ability ability)
 {

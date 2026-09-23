@@ -59,10 +59,6 @@ VerdanturfTown_EventScript_BattleTentSign:: @ 81EB5EB
 	msgbox VerdanturfTown_Text_BattleTentSign, MSGBOX_SIGN
 	end
 
-VerdanturfTown_EventScript_RusturfTunnelSign:: @ 81EB5F4
-	msgbox VerdanturfTown_Text_RusturfTunnelSign, MSGBOX_SIGN
-	end
-
 VerdanturfTown_Text_ManTryingToDigTunnel: @ 81EB5FD
 	.string "My papa told me.\p"
 	.string "He says this tunnel is full of\n"
@@ -118,10 +114,4 @@ VerdanturfTown_Text_WandasHouse: @ 81EBA11
 VerdanturfTown_Text_BattleTentSign: @ 81EBA1F
 	.string "Battle Tent Verdanturf Site\n"
 	.string "“Feast Your Eyes on Battles!”$"
-
-VerdanturfTown_Text_RusturfTunnelSign: @ 81EBA59
-	.string "Rusturf Tunnel\n"
-	.string "“Linking Rustboro and Verdanturf\p"
-	.string "“The tunnel project has been\n"
-	.string "canceled.”$"
 

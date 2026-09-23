@@ -2,9 +2,9 @@
 #define GUARD_LINE_BREAK_H
 
 struct StringWord {
-    u32 startIndex:16;
-    u32 length:8;
-    u32 width:8;
+    u16 startIndex;
+    u16 length;
+    u16 width;
 };
 
 struct StringLine {

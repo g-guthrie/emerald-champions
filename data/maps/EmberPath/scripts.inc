@@ -19,22 +19,13 @@ EmberPath_EventScript_Moltres::
 	setwildbattle SPECIES_MOLTRES, VAR_0x800A, ITEM_OCCA_BERRY
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq EmberPath_EventScript_DefeatedMoltres
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq EmberPath_EventScript_RanFromMoltres
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq EmberPath_EventScript_RanFromMoltres
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EmberPath_EventScript_RanFromMoltres
 	setflag FLAG_DEFEATED_MOLTRES
+	setflag FLAG_EC_CAUGHT_MOLTRES
 	release
-	end
-
-EmberPath_EventScript_DefeatedMoltres:: @ 8238F9F
-	setflag FLAG_DEFEATED_MOLTRES
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 EmberPath_EventScript_RanFromMoltres:: @ 8238FA8

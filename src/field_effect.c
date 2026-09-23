@@ -872,14 +872,19 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     u32 paletteSlot = LoadSpritePalette(palette);
     (*script) += 4;
-    SetPaletteColorMapType(paletteSlot + 16, T1_READ_8(*script));
+    enum ColorMapType colorMap = T1_READ_8(*script);
     (*script)++;
+    if (paletteSlot == 0xFF)
+        return;
+    SetPaletteColorMapType(paletteSlot + 16, colorMap);
     UpdateSpritePaletteWithWeather(paletteSlot, ShouldFieldEffectBeFogBlended(*script));
 }
 
 void FieldEffect_LoadFadedPalette(struct SpritePalette *palette, enum ColorMapType colorMap)
 {
     u32 paletteSlot = LoadSpritePalette(palette);
+    if (paletteSlot == 0xFF)
+        return;
     SetPaletteColorMapType(paletteSlot + 16, colorMap);
     UpdateSpritePaletteWithWeather(paletteSlot, TRUE);
 }
@@ -1013,7 +1018,9 @@ u8 CreateTrainerSprite(enum TrainerPicID trainerPicId, s16 x, s16 y, u8 subprior
     spriteTemplate.images = NULL;
     spriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     spriteTemplate.callback = SpriteCallbackDummy;
-    return CreateSprite(&spriteTemplate, x, y, subpriority);
+    u32 spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, x, y, subpriority);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+    return spriteId;
 }
 
 u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
@@ -1025,31 +1032,25 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 u8 CreateMonSprite_PicBox(enum Species species, s16 x, s16 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-    else
-        return spriteId;
+    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
+    return spriteId;
 }
 
 u8 CreateMonSprite_FieldMove(enum Species species, bool8 isShiny, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     u16 spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, x, y, 0, species);
-    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-    else
-        return spriteId;
+    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
+    return spriteId;
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 {
     u8 paletteNum = sprite->oam.paletteNum;
     ResetPreservedPalettesInWeather();
-    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
-    {
-        FreeOamMatrix(sprite->oam.matrixNum);
-    }
     FreeAndDestroyMonPicSpriteNoPalette(spriteId);
     FieldEffectFreePaletteIfUnused(paletteNum); // Clear palette only if unused, in case follower is using it
 }
@@ -2929,13 +2930,18 @@ static void TeleportWarpInFieldEffect_SpinGround(struct Task *task)
 // For both the background streaks move to the right, and the mon sprite enters from the right and exits left
 bool8 FldEff_FieldMoveShowMon(void)
 {
+    u8 spriteId = InitFieldMoveMonSprite(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    if (spriteId == MAX_SPRITES)
+    {
+        FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
+        return FALSE;
+    }
     u8 taskId;
     if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
         taskId = CreateTask(Task_FieldMoveShowMonOutdoors, 0xff);
     else
         taskId = CreateTask(Task_FieldMoveShowMonIndoors, 0xff);
-
-    gTasks[taskId].tMonSpriteId = InitFieldMoveMonSprite(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    gTasks[taskId].tMonSpriteId = spriteId;
     return FALSE;
 }
 
@@ -3312,6 +3318,8 @@ static u8 InitFieldMoveMonSprite(enum Species species, bool8 isShiny, u32 person
     noDucking = (species & SHOW_MON_CRY_NO_DUCKING) >> 16;
     species &= ~SHOW_MON_CRY_NO_DUCKING;
     monSprite = CreateMonSprite_FieldMove(species, isShiny, personality, 320, 80, 0);
+    if (monSprite == MAX_SPRITES)
+        return MAX_SPRITES;
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;

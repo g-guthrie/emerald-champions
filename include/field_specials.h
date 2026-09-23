@@ -15,7 +15,6 @@ void UpdateTrainerFansAfterLinkBattle(void);
 void IncrementBirthIslandRockStepCount(void);
 bool8 AbnormalWeatherHasExpired(void);
 bool8 ShouldDoBrailleRegicePuzzle(void);
-bool32 ShouldDoWallyCall(void);
 bool32 ShouldDoScottFortreeCall(void);
 bool32 ShouldDoScottBattleFrontierCall(void);
 bool32 ShouldDoRoxanneCall(void);
@@ -28,6 +27,7 @@ u8 TryGainNewFanFromCounter(u8 incrementId);
 bool8 InPokemonCenter(void);
 void UpdateFrontierManiac(u16 daysSince);
 void UpdateFrontierGambler(u16 daysSince);
+void RefundRetiredFrontierGamblerBet(void);
 void ResetCyclingRoadChallengeData(void);
 bool8 UsedPokemonCenterWarp(void);
 void ResetFanClub(void);
@@ -41,7 +41,14 @@ bool8 CutMoveRuinValleyCheck(void);
 void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
-void GiveEmeraldChampionsPreparedPokemon(void);
+void GiveFlowerShopBerryBundle(void);
+bool32 CanReceiveWeatherInstituteRocks(void);
+bool32 CanReceiveLanetteDolls(void);
+bool32 CanReceiveBerryPair(void);
+bool32 CanReceiveFrontierReward(void);
+bool32 CanReceiveLatiStones(void);
+bool32 CanReceiveNormanMegaGift(void);
+bool32 CanReceiveGoGogglesGift(void);
 void GiveEmeraldChampionsStarterBattleItems(void);
 #if EC_HEADLESS_FIXTURES
 bool32 IsScrollableMultichoiceHeadlessActive(u16 menu);
@@ -61,13 +68,8 @@ void ApplyEmeraldChampionsBonding(void);
 
 bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item);
 
-void LocateEmeraldChampionsCastform(void);
 
-void TradeEmeraldChampionsShoalMaterials(void);
-void BufferEmeraldChampionsShoalReward(void);
-void CheckEmeraldChampionsRedundantPurchase(void);
 void ConvertEmeraldChampionsFiniteReward(void);
-void ClaimEmeraldChampionsSootMilestone(void);
 
 bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item);
 void EmeraldChampions_UnlockBattleItem(enum Item item);
@@ -82,6 +84,7 @@ void Bag_ChooseItem(void);
 void Bag_ChoosePokeBall(void);
 void ChangePokeBall(void);
 void ChangeMonSpecies(void);
+enum Species ScriptGetPartyMonSpecies(void);
 bool8 CheckSpeciesInParty(void);
 bool8 FoundBlackGlasses(void);
 bool8 CheckMagikarpBattle(void);
@@ -94,5 +97,7 @@ void GiveLeadMonEffortRibbon(void);
 bool8 GetDiancieFriendshipScore(void);
 u8 CountPlayerMuseumPaintings(void);
 bool32 IsTrainerRegistered(void);
+
+void CheckPlayerCaughtSpecies(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

@@ -138,8 +138,6 @@ enum FormChanges
     // Form change that activates after hitting itself in confusion.
     // param1: ability
     FORM_CHANGE_BATTLE_HIT_BY_CONFUSION_SELF_DMG,
-    // Form change that activates when terastallized as as a specific type
-    // param1: tera type
     // Form change that activates at midnight after a certain amount of days has passed.
     // Adding this form change will automatically make the countdown start as soon the Pokémon changes into a species other than the one specified for this form change.
     // param1: amount of days

@@ -476,7 +476,8 @@ AI_SINGLE_BATTLE_TEST("AI uses Tailwind to trigger Wind Rider (Single)")
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        // Wobbuffet's HP keeps Headbutt a 4HKO rather than chip.
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); HP(300); }
         OPPONENT(tailwindSpecies) { Ability(tailwindAbility); Speed(9); Moves(MOVE_TAILWIND, MOVE_HEADBUTT); }
     } WHEN {
         if (expectTailwind)
@@ -499,7 +500,8 @@ AI_SINGLE_BATTLE_TEST("AI uses Tailwind to trigger Wind Power (Single)")
         ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
         ASSUME(GetMoveType(MOVE_THUNDERSHOCK) == TYPE_ELECTRIC);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        // Wobbuffet's HP keeps Thunder Shock a 4HKO rather than chip.
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); HP(240); }
         OPPONENT(tailwindSpecies) { Ability(tailwindAbility); Speed(9); Moves(MOVE_TAILWIND, MOVE_THUNDERSHOCK); }
     } WHEN {
         if (expectTailwind)
@@ -570,8 +572,9 @@ AI_DOUBLE_BATTLE_TEST("AI sees type-changing moves as the correct type")
 
     GIVEN {
         AI_FLAGS(aiFlags);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
+        // 36 HP keeps Return a 4HKO rather than chip.
+        PLAYER(SPECIES_WOBBUFFET) { HP(36); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(36); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(fieldStatus, MOVE_RETURN, MOVE_TAUNT); }
         OPPONENT(species) { Ability(ability); Moves(MOVE_HYPER_VOICE); }
     } WHEN {
@@ -614,10 +617,12 @@ AI_DOUBLE_BATTLE_TEST("AI scores Order Up's stat boost only with Commander")
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-        OPPONENT(species) { Ability(ability); }
-        OPPONENT(SPECIES_DONDOZO) { Moves(MOVE_ORDER_UP, MOVE_DRAGON_CLAW); }
+        // Order Up's Speed boost only scores when it lets a slower Dondozo
+        // overtake its target: Commander's +2 leaves 9 Speed at 18, +3 reaches 22.
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_CELEBRATE); }
+        OPPONENT(species) { Speed(25); Ability(ability); }
+        OPPONENT(SPECIES_DONDOZO) { Speed(9); Moves(MOVE_ORDER_UP, MOVE_DRAGON_CLAW); }
     } WHEN {
         TURN {
             if (expectBoost)

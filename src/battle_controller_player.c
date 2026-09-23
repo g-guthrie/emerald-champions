@@ -2383,7 +2383,7 @@ static void PlayerHandleEndBounceEffect(enum BattlerId battler)
 
 static void PlayerHandleLinkStandbyMsg(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2], sizeof(gBattleResources->transferBuffer) - 2);
     switch (gBattleResources->bufferA[battler][1])
     {
     case LINK_STANDBY_MSG_STOP_BOUNCE:
@@ -2420,7 +2420,7 @@ static void PlayerHandleResetActionMoveSelection(enum BattlerId battler)
 
 static void PlayerHandleEndLinkBattle(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4], sizeof(gBattleResources->transferBuffer) - 4);
     gBattleOutcome = gBattleResources->bufferA[battler][1];
     gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
     FadeOutMapMusic(5);

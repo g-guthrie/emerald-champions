@@ -22,6 +22,11 @@ BattleFrontier_Lounge2_EventScript_AlreadyMetManiac:: @ 826065F
 	end
 
 BattleFrontier_Lounge2_EventScript_GiveAdvice:: @ 826066D
+	@ Tower Singles and the Arena are closed; talk about their open neighbours.
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_SINGLES
+	call_if_eq BattleFrontier_Lounge2_EventScript_UseTowerDoubles
+	compare VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_ARENA
+	call_if_eq BattleFrontier_Lounge2_EventScript_UsePike
 	compare VAR_FRONTIER_MANIAC_FACILITY, 0
 	call_if_eq BattleFrontier_Lounge2_EventScript_BufferSingle
 	compare VAR_FRONTIER_MANIAC_FACILITY, 1
@@ -58,6 +63,14 @@ BattleFrontier_Lounge2_EventScript_BattleTowerNews:: @ 82606F8
 
 BattleFrontier_Lounge2_EventScript_FacilityNews:: @ 8260701
 	msgbox BattleFrontier_Lounge2_Text_FacilityIsHottest, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_Lounge2_EventScript_UseTowerDoubles:
+	setvar VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_DOUBLES
+	return
+
+BattleFrontier_Lounge2_EventScript_UsePike:
+	setvar VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PIKE
 	return
 
 BattleFrontier_Lounge2_EventScript_BufferSingle:: @ 826070A
@@ -137,11 +150,6 @@ BattleFrontier_Lounge2_Text_SwingByForTheLatestWord:: @ 8260857
 	.string "about the latest word? Oh, all right!$"
 
 @ Unused
-BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight:: @ 82608A1
-	.string "Well? Well? Well?\p"
-	.string "I'm sure my information's been\n"
-	.string "seriously useful to you, right?$"
-
 BattleFrontier_Lounge2_Text_FacilityIsHottest:: @ 82608F2
 	.string "Let's see now…\p"
 	.string "It sounds like the {STR_VAR_1}\n"

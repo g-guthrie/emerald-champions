@@ -65,9 +65,9 @@ MossdeepCity_SpaceCenter_2F_Movement_PlayerExit: @ 8223E07
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts:: @ 8223E09
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
 	goto_if_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_FirstGruntDefeated
-	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat
 MossdeepCity_SpaceCenter_2F_EventScript_FirstGruntDefeated::
 	applymovement LOCALID_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
 	waitmovement 0
@@ -80,7 +80,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_FirstGruntDefeated::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
 	applymovement LOCALID_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
@@ -111,12 +111,11 @@ MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated: @ 8223E89
 MossdeepCity_SpaceCenter_2F_EventScript_Scientist:: @ 8223E8D
 	lock
 	faceplayer
+MossdeepCity_SpaceCenter_2F_EventScript_ScientistDialogueGate::
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
-	goto MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
+	goto MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal:: @ 8223EB4
@@ -132,12 +131,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma:: @ 8223EBE
 MossdeepCity_SpaceCenter_2F_EventScript_Gentleman:: @ 8223EC8
 	lock
 	faceplayer
+MossdeepCity_SpaceCenter_2F_EventScript_GentlemanDialogueGate::
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
-	goto MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
+	goto MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal:: @ 8223EEF
@@ -153,12 +151,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma:: @ 8223EF9
 MossdeepCity_SpaceCenter_2F_EventScript_RichBoy:: @ 8223F03
 	lock
 	faceplayer
+MossdeepCity_SpaceCenter_2F_EventScript_RichBoyDialogueGate::
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
 	compare VAR_MOSSDEEP_CITY_STATE, 2
 	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
-	compare VAR_MOSSDEEP_CITY_STATE, 2
-	goto_if_lt MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
-	goto MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
+	goto MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal:: @ 8223F2A
@@ -269,9 +266,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle:: @ 822400C
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
     multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_COURTNEY_MOSSDEEP, MossdeepCity_SpaceCenter_Text_CourtneyDefeat, PARTNER_STEVEN
+MossdeepCity_SpaceCenter_2F_EventScript_CheckMultiResult::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_LOST
-	goto_if_eq MossdeepCity_SpaceCenter_2F_EventScript_Lost
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_ne MossdeepCity_SpaceCenter_2F_EventScript_Lost
+MossdeepCity_SpaceCenter_2F_EventScript_MultiWon::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -321,12 +320,12 @@ MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
 	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_WANDER_AROUND
 	addobject LOCALID_SCIENTIST
 	fadescreen FADE_FROM_BLACK
+	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Lost::
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
-	waitstate
 
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayer:: @ 8224131
 	switch VAR_FACING
@@ -424,10 +423,6 @@ MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat: @ 8224461
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro: @ 822446E
 	.string "You beat his whole team?!\n"
 	.string "I am standing aside. You handle this!$"
-
-MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat: @ 8224499
-	.string "I lost, too!\n"
-	.string "But!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro: @ 82244AB
 	.string "I bet you want to take a break.\n"

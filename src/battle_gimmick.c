@@ -328,9 +328,12 @@ static void SpriteCb_GimmickIndicator(struct Sprite *sprite)
     sprite->y2 = gSprites[gHealthboxSpriteIds[battler]].y2;
 }
 
-static inline u32 GetIndicatorSpriteId(u32 healthboxId)
+static struct Sprite *GetIndicatorSprite(u32 healthboxId)
 {
-    return gBattleStruct->gimmick.indicatorSpriteId[gSprites[healthboxId].hMain_Battler];
+    u32 id = gBattleStruct->gimmick.indicatorSpriteId[gSprites[healthboxId].hMain_Battler];
+    // Safari's player healthbox has no indicator (zero). Failed allocations
+    // return MAX_SPRITES, which is not a live indicator either.
+    return id != 0 && id < MAX_SPRITES ? &gSprites[id] : NULL;
 }
 
 const u32 *GetIndicatorSpriteSrc(enum BattlerId battler)
@@ -368,9 +371,9 @@ void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
 {
     enum BattlerId battler = gSprites[healthboxId].hMain_Battler;
     u32 palTag = GetIndicatorPalTag(battler);
-    struct Sprite *sprite = &gSprites[GetIndicatorSpriteId(healthboxId)];
+    struct Sprite *sprite = GetIndicatorSprite(healthboxId);
 
-    if (GetIndicatorSpriteId(healthboxId) == 0) // safari zone means the player doesn't have an indicator sprite id
+    if (sprite == NULL)
         return;
 
     if (palTag != TAG_NONE)
@@ -395,19 +398,24 @@ void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
 
 void UpdateIndicatorOamPriority(u32 healthboxId, u32 oamPriority)
 {
-    gSprites[GetIndicatorSpriteId(healthboxId)].oam.priority = oamPriority;
+    struct Sprite *sprite = GetIndicatorSprite(healthboxId);
+    if (sprite != NULL)
+        sprite->oam.priority = oamPriority;
 }
 
 void UpdateIndicatorLevelData(u32 healthboxId, u32 level)
 {
     s32 xDelta = 0;
+    struct Sprite *sprite = GetIndicatorSprite(healthboxId);
+    if (sprite == NULL)
+        return;
 
     if (level >= 100)
         xDelta -= 4;
     else if (level < 10)
         xDelta += 5;
 
-    gSprites[GetIndicatorSpriteId(healthboxId)].tLevelXDelta = xDelta;
+    sprite->tLevelXDelta = xDelta;
 }
 
 static const s8 sIndicatorPositions[][2] =

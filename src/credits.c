@@ -1558,6 +1558,11 @@ static void DeterminePokemonToShow(void)
         }
     }
 
+    // Debug entry or an imported save can have no recorded catches.
+    // Keep selection nonempty so sampling and repetition remain defined.
+    if (j == 0)
+        sCreditsData->caughtMonIds[j++] = starter;
+
     // Fill the rest of the array with zeroes
     for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
         sCreditsData->caughtMonIds[dexNum] = NATIONAL_DEX_NONE;
@@ -1623,5 +1628,19 @@ static void DeterminePokemonToShow(void)
     }
     sCreditsData->numMonToShow = NUM_MON_SLIDES;
 }
+
+#if TESTING
+u32 Test_DetermineCreditsMons(u16 *output, u32 capacity)
+{
+    struct CreditsData *saved = sCreditsData;
+    sCreditsData = AllocZeroed(sizeof(*sCreditsData));
+    DeterminePokemonToShow();
+    u32 count = min(capacity, NUM_MON_SLIDES);
+    memcpy(output, sCreditsData->monToShow, count * sizeof(*output));
+    Free(sCreditsData);
+    sCreditsData = saved;
+    return count;
+}
+#endif
 
 #endif // !IS_FRLG

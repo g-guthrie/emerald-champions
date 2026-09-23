@@ -2835,33 +2835,23 @@ u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 
 static const u8 *TryGetStatusString(u8 *src)
 {
-    u32 i;
     u8 status[8];
-    u32 chars1, chars2;
-    u8 *statusPtr;
+    memcpy(status, sText_EmptyStatus, sizeof(status));
+    for (u32 i = 0; i < sizeof(status) && src[i] != EOS; i++)
+        status[i] = src[i];
 
-    memcpy(status, sText_EmptyStatus, min(ARRAY_COUNT(status), ARRAY_COUNT(sText_EmptyStatus)));
-
-    statusPtr = status;
-    for (i = 0; i < ARRAY_COUNT(status); i++)
-    {
-        if (*src == EOS) break; // one line required to match -g
-        *statusPtr = *src;
-        src++;
-        statusPtr++;
-    }
-
-    chars1 = *(u32 *)(&status[0]);
-    chars2 = *(u32 *)(&status[4]);
-
-    for (i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
-    {
-        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
-            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
+    for (u32 i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
+        if (memcmp(status, gStatusConditionStringsTable[i][0], sizeof(status)) == 0)
             return gStatusConditionStringsTable[i][1];
-    }
     return NULL;
 }
+
+#ifdef TESTING
+const u8 *Test_GetBattleStatusString(u8 *src)
+{
+    return TryGetStatusString(src);
+}
+#endif
 
 static void GetBattlerNick(enum BattlerId battler, u8 *dst)
 {
@@ -2883,6 +2873,7 @@ static void GetBattlerNick(enum BattlerId battler, u8 *dst)
             toCpy = sText_WildPkmnPrefix;                               \
         while (*toCpy != EOS)                                           \
         {                                                               \
+            if (dstID + 1 >= dstSize) goto overflow;                    \
             dst[dstID] = *toCpy;                                        \
             dstID++;                                                    \
             toCpy++;                                                    \
@@ -2900,6 +2891,7 @@ static void GetBattlerNick(enum BattlerId battler, u8 *dst)
             toCpy = sText_WildPkmnPrefixLower;                          \
         while (*toCpy != EOS)                                           \
         {                                                               \
+            if (dstID + 1 >= dstSize) goto overflow;                    \
             dst[dstID] = *toCpy;                                        \
             dstID++;                                                    \
             toCpy++;                                                    \
@@ -3079,7 +3071,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     u32 dstID = 0; // if they used dstID, why not use srcID as well?
     const u8 *toCpy = NULL;
     u8 text[max(max(max(32, TRAINER_NAME_LENGTH + 1), POKEMON_NAME_LENGTH + 1), ITEM_NAME_LENGTH)];
-    u8 *textStart = &text[0];
     u8 multiplayerId;
     u8 fontId = FONT_NORMAL;
 
@@ -3087,6 +3078,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
         multiplayerId = gRecordedBattleMultiplayerId;
     else
         multiplayerId = GetMultiplayerId();
+
+    if (dstSize == 0)
+        return 0;
 
     // Clear destination first
     while (dstID < dstSize)
@@ -3102,6 +3096,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
 
         if (*src == PLACEHOLDER_BEGIN)
         {
+            u8 *textStart = text;
             src++;
             u32 classLength = 0;
             u32 nameLength = 0;
@@ -3112,7 +3107,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             case B_TXT_BUFF1:
                 if (gBattleTextBuff1[0] == B_BUFF_PLACEHOLDER_BEGIN)
                 {
-                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gStringVar1);
+                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gStringVar1, sizeof(gStringVar1));
                     toCpy = gStringVar1;
                 }
                 else
@@ -3125,7 +3120,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             case B_TXT_BUFF2:
                 if (gBattleTextBuff2[0] == B_BUFF_PLACEHOLDER_BEGIN)
                 {
-                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff2, gStringVar2);
+                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff2, gStringVar2, sizeof(gStringVar2));
                     toCpy = gStringVar2;
                 }
                 else
@@ -3136,7 +3131,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             case B_TXT_BUFF3:
                 if (gBattleTextBuff3[0] == B_BUFF_PLACEHOLDER_BEGIN)
                 {
-                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff3, gStringVar3);
+                    ExpandBattleTextBuffPlaceholders(gBattleTextBuff3, gStringVar3, sizeof(gStringVar3));
                     toCpy = gStringVar3;
                 }
                 else
@@ -3383,6 +3378,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                         toCpy = sText_WildPkmnPrefix;
                     while (*toCpy != EOS)
                     {
+                        if (dstID + 1 >= dstSize)
+                            goto overflow;
                         dst[dstID] = *toCpy;
                         dstID++;
                         toCpy++;
@@ -3658,6 +3655,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             {
                 while (*toCpy != EOS)
                 {
+                    if (dstID + 1 >= dstSize)
+                        goto overflow;
                     if (*toCpy == CHAR_SPACE)
                         dst[dstID] = CHAR_NBSP;
                     else
@@ -3670,6 +3669,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER2_LOSE_TEXT
                 || *src == B_TXT_TRAINER1_WIN_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
             {
+                if (dstSize - dstID < 3)
+                    goto overflow;
                 dst[dstID] = EXT_CTRL_CODE_BEGIN;
                 dstID++;
                 dst[dstID] = EXT_CTRL_CODE_PAUSE_UNTIL_PRESS;
@@ -3678,6 +3679,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
         }
         else
         {
+            if (dstID + 1 >= dstSize)
+                goto overflow;
             dst[dstID] = *src;
             dstID++;
         }
@@ -3690,6 +3693,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     BreakStringAutomatic(dst, BATTLE_MSG_MAX_WIDTH, BATTLE_MSG_MAX_LINES, fontId, SHOW_SCROLL_PROMPT);
 
     return dstID;
+
+overflow:
+    // Do not expose a partially copied extended control sequence to the printer.
+    dst[0] = EOS;
+    return 1;
 }
 
 static void IllusionNickHack(enum BattlerId battler, u32 partyId, u8 *dst)
@@ -3714,21 +3722,100 @@ static void IllusionNickHack(enum BattlerId battler, u32 partyId, u8 *dst)
         GetMonData(mon, MON_DATA_NICKNAME, dst);
 }
 
-void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
+static bool32 IsBattleTextBufferValid(const u8 *src)
+{
+    static const u8 sizes[] = {
+        [B_BUFF_STRING] = 3, [B_BUFF_NUMBER] = 3, [B_BUFF_MOVE] = 3,
+        [B_BUFF_TYPE] = 2, [B_BUFF_MON_NICK_WITH_PREFIX] = 3, [B_BUFF_STAT] = 2,
+        [B_BUFF_SPECIES] = 3, [B_BUFF_MON_NICK] = 3, [B_BUFF_NEGATIVE_FLAVOR] = 2,
+        [B_BUFF_ABILITY] = 3, [B_BUFF_ITEM] = 3, [B_BUFF_MON_NICK_WITH_PREFIX_LOWER] = 3,
+    };
+    if (src[0] != B_BUFF_PLACEHOLDER_BEGIN)
+        return FALSE;
+    for (u32 offset = 1; offset < TEXT_BUFF_ARRAY_COUNT;)
+    {
+        u32 type = src[offset];
+        if (type == B_BUFF_EOS)
+            return TRUE;
+        if (type >= ARRAY_COUNT(sizes) || offset + sizes[type] > TEXT_BUFF_ARRAY_COUNT)
+            return FALSE;
+        u32 size = sizes[type];
+        u32 value = size == 3 ? T1_READ_16(src + offset + 1) : src[offset + 1];
+        switch (type)
+        {
+        case B_BUFF_NUMBER:
+            if ((src[offset + 1] != 1 && src[offset + 1] != 2 && src[offset + 1] != 4)
+             || src[offset + 2] == 0 || src[offset + 2] > 10)
+                return FALSE;
+            size += src[offset + 1];
+            break;
+        case B_BUFF_STRING:
+            if (value >= STRINGID_COUNT || gBattleStringsTable[value] == NULL) return FALSE;
+            break;
+        case B_BUFF_MOVE:
+            if (value >= MOVES_COUNT_ALL) return FALSE;
+            break;
+        case B_BUFF_TYPE:
+            if (value >= NUMBER_OF_MON_TYPES) return FALSE;
+            break;
+        case B_BUFF_STAT:
+            if (value >= NUM_BATTLE_STATS) return FALSE;
+            break;
+        case B_BUFF_SPECIES:
+            if (value >= NUM_SPECIES) return FALSE;
+            break;
+        case B_BUFF_MON_NICK:
+        case B_BUFF_MON_NICK_WITH_PREFIX:
+        case B_BUFF_MON_NICK_WITH_PREFIX_LOWER:
+            if (src[offset + 1] >= MAX_BATTLERS_COUNT || src[offset + 2] >= PARTY_SIZE) return FALSE;
+            break;
+        case B_BUFF_NEGATIVE_FLAVOR:
+            if (value >= FLAVOR_COUNT) return FALSE;
+            break;
+        case B_BUFF_ABILITY:
+            if (value >= ABILITIES_COUNT) return FALSE;
+            break;
+        case B_BUFF_ITEM:
+            if (value >= ITEMS_COUNT) return FALSE;
+            break;
+        }
+        if (offset + size >= TEXT_BUFF_ARRAY_COUNT)
+            return FALSE; // Every record must leave room for its terminator.
+        offset += size;
+    }
+    return FALSE;
+}
+
+static bool32 WriteBattleTextBuffer(u8 *dst, u32 capacity, const u8 *text, bool32 replace)
+{
+    u32 offset = replace ? 0 : StringLength(dst);
+    u32 length = StringLength(text);
+    if (offset >= capacity || length >= capacity - offset)
+        return FALSE;
+    memcpy(dst + offset, text, length + 1);
+    return TRUE;
+}
+
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
 {
     u32 srcID = 1;
     u32 value = 0;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u16 hword;
+    u8 token[max(max(POKEMON_NAME_LENGTH + 1, ITEM_NAME_LENGTH + 1), 11)];
 
+    if (dstSize == 0)
+        return;
     *dst = EOS;
+    if (!IsBattleTextBufferValid(src))
+        return;
     while (src[srcID] != B_BUFF_EOS)
     {
         switch (src[srcID])
         {
         case B_BUFF_STRING: // battle string
             hword = T1_READ_16(&src[srcID + 1]);
-            StringAppend(dst, gBattleStringsTable[hword]);
+            if (!WriteBattleTextBuffer(dst, dstSize, gBattleStringsTable[hword], FALSE)) goto overflow;
             srcID += 3;
             break;
         case B_BUFF_NUMBER: // int to string
@@ -3744,73 +3831,67 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                 value = T1_READ_32(&src[srcID + 3]);
                 break;
             }
-            ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, src[srcID + 2]);
+            ConvertIntToDecimalStringN(token, value, STR_CONV_MODE_LEFT_ALIGN, src[srcID + 2]);
+            if (!WriteBattleTextBuffer(dst, dstSize, token, TRUE)) goto overflow;
             srcID += src[srcID + 1] + 3;
             break;
         case B_BUFF_MOVE: // move name
-            StringAppend(dst, GetMoveName(T1_READ_16(&src[srcID + 1])));
+            if (!WriteBattleTextBuffer(dst, dstSize, GetMoveName(T1_READ_16(&src[srcID + 1])), FALSE)) goto overflow;
             srcID += 3;
             break;
         case B_BUFF_TYPE: // type name
-            StringAppend(dst, gTypesInfo[src[srcID + 1]].name);
+            if (!WriteBattleTextBuffer(dst, dstSize, gTypesInfo[src[srcID + 1]].name, FALSE)) goto overflow;
             srcID += 2;
             break;
         case B_BUFF_MON_NICK_WITH_PREFIX: // poke nick with prefix
         case B_BUFF_MON_NICK_WITH_PREFIX_LOWER: // poke nick with lowercase prefix
             if (!IsOnPlayerSide(src[srcID + 1]))
             {
+                const u8 *prefix;
                 if (src[srcID] == B_BUFF_MON_NICK_WITH_PREFIX_LOWER)
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        StringAppend(dst, sText_FoePkmnPrefixLower);
-                    else
-                        StringAppend(dst, sText_WildPkmnPrefixLower);
-                }
+                    prefix = (gBattleTypeFlags & BATTLE_TYPE_TRAINER) ? sText_FoePkmnPrefixLower : sText_WildPkmnPrefixLower;
                 else
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        StringAppend(dst, sText_FoePkmnPrefix);
-                    else
-                        StringAppend(dst, sText_WildPkmnPrefix);
-                }
+                    prefix = (gBattleTypeFlags & BATTLE_TYPE_TRAINER) ? sText_FoePkmnPrefix : sText_WildPkmnPrefix;
+                if (!WriteBattleTextBuffer(dst, dstSize, prefix, FALSE)) goto overflow;
             }
             GetMonData(&GetBattlerParty(src[srcID + 1])[src[srcID + 2]], MON_DATA_NICKNAME, nickname);
             StringGet_Nickname(nickname);
-            StringAppend(dst, nickname);
+            if (!WriteBattleTextBuffer(dst, dstSize, nickname, FALSE)) goto overflow;
             srcID += 3;
             break;
         case B_BUFF_STAT: // stats
-            StringAppend(dst, gStatNamesTable[src[srcID + 1]]);
+            if (!WriteBattleTextBuffer(dst, dstSize, gStatNamesTable[src[srcID + 1]], FALSE)) goto overflow;
             srcID += 2;
             break;
         case B_BUFF_SPECIES: // species name
-            StringCopy(dst, GetSpeciesName(T1_READ_16(&src[srcID + 1])));
+            if (!WriteBattleTextBuffer(dst, dstSize, GetSpeciesName(T1_READ_16(&src[srcID + 1])), TRUE)) goto overflow;
             srcID += 3;
             break;
         case B_BUFF_MON_NICK: // poke nick without prefix
             if (src[srcID + 2] == gBattlerPartyIndexes[src[srcID + 1]])
             {
-                GetBattlerNick(src[srcID + 1], dst);
+                GetBattlerNick(src[srcID + 1], token);
             }
             else if (gBattleScripting.illusionNickHack) // for STRINGID_ENEMYABOUTTOSWITCHPKMN
             {
                 gBattleScripting.illusionNickHack = 0;
-                IllusionNickHack(src[srcID + 1], src[srcID + 2], dst);
-                StringGet_Nickname(dst);
+                IllusionNickHack(src[srcID + 1], src[srcID + 2], token);
+                StringGet_Nickname(token);
             }
             else
             {
-                GetMonData(&GetBattlerParty(src[srcID + 1])[src[srcID + 2]], MON_DATA_NICKNAME, dst);
-                StringGet_Nickname(dst);
+                GetMonData(&GetBattlerParty(src[srcID + 1])[src[srcID + 2]], MON_DATA_NICKNAME, token);
+                StringGet_Nickname(token);
             }
+            if (!WriteBattleTextBuffer(dst, dstSize, token, TRUE)) goto overflow;
             srcID += 3;
             break;
         case B_BUFF_NEGATIVE_FLAVOR: // flavor table
-            StringAppend(dst, gPokeblockWasTooXStringTable[src[srcID + 1]]);
+            if (!WriteBattleTextBuffer(dst, dstSize, gPokeblockWasTooXStringTable[src[srcID + 1]], FALSE)) goto overflow;
             srcID += 2;
             break;
         case B_BUFF_ABILITY: // ability names
-            StringAppend(dst, gAbilitiesInfo[T1_READ_16(&src[srcID + 1])].name);
+            if (!WriteBattleTextBuffer(dst, dstSize, gAbilitiesInfo[T1_READ_16(&src[srcID + 1])].name, FALSE)) goto overflow;
             srcID += 3;
             break;
         case B_BUFF_ITEM: // item name
@@ -3821,27 +3902,32 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                 {
                     if (gLinkPlayers[gBattleScripting.multiplayerId].id == gPotentialItemEffectBattler)
                     {
-                        StringCopy(dst, gEnigmaBerries[gPotentialItemEffectBattler].name);
-                        StringAppend(dst, sText_BerrySuffix);
+                        if (!WriteBattleTextBuffer(dst, dstSize, gEnigmaBerries[gPotentialItemEffectBattler].name, TRUE)) goto overflow;
+                        if (!WriteBattleTextBuffer(dst, dstSize, sText_BerrySuffix, FALSE)) goto overflow;
                     }
                     else
                     {
-                        StringAppend(dst, sText_EnigmaBerry);
+                        if (!WriteBattleTextBuffer(dst, dstSize, sText_EnigmaBerry, FALSE)) goto overflow;
                     }
                 }
                 else
                 {
-                    CopyItemName(hword, dst);
+                    CopyItemName(hword, token);
+                    if (!WriteBattleTextBuffer(dst, dstSize, token, TRUE)) goto overflow;
                 }
             }
             else
             {
-                CopyItemName(hword, dst);
+                CopyItemName(hword, token);
+                if (!WriteBattleTextBuffer(dst, dstSize, token, TRUE)) goto overflow;
             }
             srcID += 3;
             break;
         }
     }
+    return;
+overflow:
+    *dst = EOS;
 }
 
 void BattlePutTextOnWindow(const u8 *text, u8 windowId)

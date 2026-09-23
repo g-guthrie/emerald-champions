@@ -685,11 +685,6 @@ void DecompressTrainerFrontPic(enum TrainerPicID trainerPicId, enum BattlerId ba
     LoadSpritePaletteWithTag(GetTrainerFrontPicPalette(trainerPicId), GetTrainerPicTag(trainerPicId, TRUE));
 }
 
-void FreeTrainerFrontPicPalette(enum TrainerPicID trainerPicId)
-{
-    FreeSpritePaletteByTag(GetTrainerPicTag(trainerPicId, TRUE));
-}
-
 bool8 BattleLoadAllHealthBoxesGfx(u8 state)
 {
     bool8 retVal = FALSE;

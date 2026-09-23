@@ -21,6 +21,9 @@ Route119_WeatherInstitute_1F_EventScript_LittleBoy:: @ 826FAA4
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	goto_if_eq Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere
 	goto_if_set FLAG_WEATHER_INSTITUTE_ROCKS, Route119_WeatherInstitute_1F_EventScript_LittleBoyGaveRocks
+	specialvar VAR_RESULT, CanReceiveWeatherInstituteRocks
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox Route119_WeatherInstitute_1F_Text_WowYoureStrong, MSGBOX_DEFAULT
 	giveitem ITEM_HEAT_ROCK
 	giveitem ITEM_DAMP_ROCK
@@ -65,6 +68,8 @@ Route119_WeatherInstitute_1F_EventScript_InstituteWorker2:: @ 826FB0F
 	goto_if_set FLAG_WEATHER_INSTITUTE_BOTTLE_CAPS, Route119_WeatherInstitute_1F_EventScript_ReceivedCaps
 	msgbox Route119_WeatherInstitute_1F_Text_PleaseTakeThese, MSGBOX_DEFAULT
 	giveitem ITEM_BOTTLE_CAP, 4
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_WEATHER_INSTITUTE_BOTTLE_CAPS
 Route119_WeatherInstitute_1F_EventScript_ReceivedCaps::
 	msgbox Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo, MSGBOX_AUTOCLOSE
@@ -158,4 +163,3 @@ Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
 Route119_WeatherInstitute_1F_Text_TakeRestInBed: @ 826FEFC
 	.string "There's a bed…\n"
 	.string "Let's take a rest.$"
-

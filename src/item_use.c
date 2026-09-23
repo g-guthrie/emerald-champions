@@ -48,6 +48,7 @@
 #include "task.h"
 #include "text.h"
 #include "vs_seeker.h"
+#include "wild_encounter.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
@@ -90,8 +91,8 @@ static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe DOWSING MACHINE is responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe DOWSING MACHINE is shaking!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CoinCase[] = _("Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PowderQty[] = _("POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
@@ -101,12 +102,14 @@ static const u8 sText_PlayedPokeFluteCatchy[] = _("Played the POKé FLUTE.\pNow,
 static const u8 sText_PlayedPokeFlute[] = _("Played the POKé FLUTE.");
 static const u8 sText_PokeFluteAwakenedMon[] = _("The POKé FLUTE awakened sleeping\nPOKéMON.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_HoneyCantHere[] = _("Honey won't attract Pokémon\nhere.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_LevelerNoEffect[] = _("Your party has caught up.\nNo Pokémon is ready to evolve.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon can't reach a flier\nyet. Earn the FEATHER BADGE first.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon needs the\nFEATHER BADGE and permission\lto use Fly.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_FlightBeaconNeedsFlier[] = _("A Pokémon in your party or PC\nmust be able to learn Fly.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_FlightBeaconCantHere[] = _("A flier can't pick you up here.{PAUSE_UNTIL_PRESS}");
 
 // EWRAM variables
@@ -1407,13 +1410,14 @@ void ItemUseOutOfBattle_Fusion(u8 taskId)
 
 void Task_UseHoneyOnField(u8 taskId)
 {
-    StartSweetScentFieldEffect();
+    ScriptContext_SetupScript(EventScript_HoneyEncounter);
     DestroyTask(taskId);
 }
 
+// Honey lures a wild Pokémon in place; unlike Dig or an Escape Rope it must keep
+// Safari mode, the Cycling Road challenge and active Strength intact.
 static void ItemUseOnFieldCB_Honey(u8 taskId)
 {
-    Overworld_ResetStateAfterDigEscRope();
     RemoveBagItem(gSpecialVar_ItemId, 1);
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
@@ -1422,6 +1426,11 @@ static void ItemUseOnFieldCB_Honey(u8 taskId)
 
 void ItemUseOutOfBattle_Honey(u8 taskId)
 {
+    if (!CanUseHoneyHere())
+    {
+        DisplayCannotUseItemMessage(taskId, FALSE, sText_HoneyCantHere);
+        return;
+    }
     sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
     gFieldCallback = FieldCB_UseItemOnField;
     gBagMenu->newScreenCallback = CB2_ReturnToField;
@@ -1525,11 +1534,7 @@ static void Task_UseRepelSpray(u8 taskId)
         DisplayItemMessageOnField(taskId, message, Task_CloseCantUseKeyItemMessage);
 }
 
-// Emerald Champions: the Flight Beacon is Fly without a Pokémon that knows
-// it. It opens the same fly map the party menu does; the first non-egg party
-// member rides the Fly animation. Needs the Feather Badge like Fly itself.
-// The flier shown is one of the player's own if any knows Fly (party first,
-// then the PC), else one that could learn it, else whoever leads the party.
+// The Beacon can call a capable flier from the party or PC without a moveslot.
 static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
 {
     for (u32 i = 0; i < PARTY_SIZE; i++)
@@ -1537,23 +1542,23 @@ static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
         enum Species species = GetMonData(mon, MON_DATA_SPECIES);
 
-        if (species == SPECIES_NONE)
-            break;
-        if (GetMonData(mon, MON_DATA_IS_EGG))
+        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
             continue;
-        if (mustKnowFly ? MonKnowsMove(mon, MOVE_FLY) : SpeciesCanLearnFieldMove(species, MOVE_FLY))
+        if (SpeciesCanLearnFieldMove(species, MOVE_FLY)
+         && (!mustKnowFly || MonKnowsMove(mon, MOVE_FLY)))
             return species;
     }
     for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
     {
         for (u32 pos = 0; pos < IN_BOX_COUNT; pos++)
         {
-            struct BoxPokemon *boxMon = &gPokemonStoragePtr->boxes[box][pos];
-            enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+            struct BoxPokemon *mon = &gPokemonStoragePtr->boxes[box][pos];
+            enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
 
-            if (species == SPECIES_NONE || GetBoxMonData(boxMon, MON_DATA_IS_EGG))
+            if (species == SPECIES_NONE || GetBoxMonData(mon, MON_DATA_IS_EGG))
                 continue;
-            if (mustKnowFly ? BoxMonKnowsMove(boxMon, MOVE_FLY) : SpeciesCanLearnFieldMove(species, MOVE_FLY))
+            if (SpeciesCanLearnFieldMove(species, MOVE_FLY)
+             && (!mustKnowFly || BoxMonKnowsMove(mon, MOVE_FLY)))
                 return species;
         }
     }
@@ -1571,11 +1576,8 @@ static void PrepareFlightBeaconRider(void)
     gPartyMenu.slotId = 0;
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-
-        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
-            break;
-        if (!GetMonData(mon, MON_DATA_IS_EGG))
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE
+         && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG))
         {
             gPartyMenu.slotId = i;
             break;
@@ -1612,6 +1614,8 @@ void ItemUseOutOfBattle_FlightBeacon(u8 taskId)
 
     if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
         refusal = sText_FlightBeaconLocked;
+    else if (FindFlightBeaconRider(FALSE) == SPECIES_NONE)
+        refusal = sText_FlightBeaconNeedsFlier;
     else if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
           || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
         refusal = sText_FlightBeaconCantHere;

@@ -172,12 +172,21 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to switch for the same Pokémon for 2 spo
         OPPONENT(SPECIES_HAUNTER) { Moves(MOVE_SHADOW_BALL); }
         OPPONENT(SPECIES_RATICATE) { Moves(MOVE_HEADBUTT); }
     } WHEN {
-        TURN { EXPECT_SWITCH(opponentRight, 2); }
+        // SMART_SWITCHING routes doubles switching through the pair planner, which
+        // picks one switch for the pair jointly rather than per battler in logic
+        // order, and never sends one reserve to both slots. Which Ghost it withdraws
+        // is not the point; that Raticate enters exactly once is.
+        if (flags & AI_FLAG_SMART_SWITCHING)
+            TURN { }
+        else
+            TURN { EXPECT_SWITCH(opponentRight, 2); }
     } SCENE {
-        MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
+        if (!(flags & AI_FLAG_SMART_SWITCHING))
+            MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
         MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
         NONE_OF {
-            MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
+            if (!(flags & AI_FLAG_SMART_SWITCHING))
+                MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
             MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
         }
     }
@@ -267,17 +276,24 @@ AI_TWO_VS_ONE_BATTLE_TEST("AI will not try to switch for the same pokemon for 2 
         OPPONENT_A(SPECIES_GASTLY) { Moves(MOVE_LICK); }
         OPPONENT_A(SPECIES_RATICATE) { Moves(MOVE_HEADBUTT); }
     } WHEN {
-        TURN { EXPECT_SWITCH(opponentLeft, 3); }
-    } SCENE {
-        MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
-        MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
+        // SMART_SWITCHING routes doubles switching through the pair planner, which
+        // picks one switch for the pair jointly rather than per battler in logic
+        // order, and never sends one reserve to both slots. Which Ghost it withdraws
+        // is not the point; that Raticate enters exactly once is.
+        // It also keeps the other Ghost in rather than spend both actions on a
+        // voluntary double switch into Gastly, whose Lick cannot hit either.
         if (flags & AI_FLAG_SMART_SWITCHING)
-        {
-            MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
-            MESSAGE(AI_TRAINER_NAME " sent out Gastly!");
-        }
+            TURN { }
+        else
+            TURN { EXPECT_SWITCH(opponentLeft, 3); }
+    } SCENE {
+        if (!(flags & AI_FLAG_SMART_SWITCHING))
+            MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
+        MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
         NONE_OF {
             MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
+            if (flags & AI_FLAG_SMART_SWITCHING)
+                MESSAGE(AI_TRAINER_NAME " sent out Gastly!");
         }
     }
 }
@@ -302,17 +318,24 @@ AI_TWO_VS_ONE_BATTLE_TEST("AI will not try to switch for the same pokemon for 2 
         OPPONENT_A(SPECIES_GASTLY) { Moves(MOVE_LICK); }
         OPPONENT_A(SPECIES_RATICATE) { Moves(MOVE_HEADBUTT); }
     } WHEN {
-        TURN { EXPECT_SWITCH(opponentRight, 3); }
-    } SCENE {
+        // SMART_SWITCHING routes doubles switching through the pair planner, which
+        // picks one switch for the pair jointly rather than per battler in logic
+        // order, and never sends one reserve to both slots. Which Ghost it withdraws
+        // is not the point; that Raticate enters exactly once is.
+        // It also keeps the other Ghost in rather than spend both actions on a
+        // voluntary double switch into Gastly, whose Lick cannot hit either.
         if (flags & AI_FLAG_SMART_SWITCHING)
-        {
-            MESSAGE(AI_TRAINER_NAME " withdrew Gengar!");
-            MESSAGE(AI_TRAINER_NAME " sent out Gastly!");
-        }
-        MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
+            TURN { }
+        else
+            TURN { EXPECT_SWITCH(opponentRight, 3); }
+    } SCENE {
+        if (!(flags & AI_FLAG_SMART_SWITCHING))
+            MESSAGE(AI_TRAINER_NAME " withdrew Haunter!");
         MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
         NONE_OF {
             MESSAGE(AI_TRAINER_NAME " sent out Raticate!");
+            if (flags & AI_FLAG_SMART_SWITCHING)
+                MESSAGE(AI_TRAINER_NAME " sent out Gastly!");
         }
     }
 }
@@ -390,9 +413,12 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to switch for the same Pokémon for 2 spo
         OPPONENT(SPECIES_SENTRET) { Moves(MOVE_SCRATCH); }
         OPPONENT(SPECIES_GENGAR) { Moves(MOVE_SHADOW_BALL); }
     } WHEN {
-        TURN { EXPECT_SWITCH(opponentRight, 3); }
+        // SMART_SWITCHING routes doubles switching through the pair planner, which
+        // picks one switch for the pair jointly rather than per battler in logic
+        // order, and never sends one reserve to both slots. Which Normal type it
+        // withdraws is not the point; that Gengar enters exactly once is.
+        TURN { }
     } SCENE {
-        MESSAGE(AI_TRAINER_NAME " withdrew Zigzagoon!");
         MESSAGE(AI_TRAINER_NAME " sent out Gengar!");
         NONE_OF {
             MESSAGE(AI_TRAINER_NAME "sent out Zigzagoon!");
@@ -982,29 +1008,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not switch out if it has
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has been Yawn'd with more than 1/3 HP remaining (Doubles)")
-{
-    u32 hp;
-    PARAMETRIZE { hp = 30; }
-    PARAMETRIZE { hp = 10; }
-    PASSES_RANDOMLY(SHOULD_SWITCH_YAWN_PERCENTAGE, 100, RNG_AI_SWITCH_YAWN);
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
-        PLAYER(SPECIES_SLAKOTH) { Moves(MOVE_SCRATCH, MOVE_CELEBRATE, MOVE_YAWN); }
-        PLAYER(SPECIES_SLAKOTH) { Moves(MOVE_SCRATCH, MOVE_CELEBRATE, MOVE_YAWN); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH); HP(hp); MaxHP(30); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SCRATCH); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_YAWN, target: opponentLeft); MOVE(playerRight, MOVE_CELEBRATE, target: opponentLeft); }
-        if (hp == 30)
-            TURN { MOVE(playerLeft, MOVE_YAWN, target: opponentLeft); MOVE(playerRight, MOVE_CELEBRATE, target: opponentLeft); EXPECT_SWITCH(opponentLeft, 2); }
-        else
-            TURN { MOVE(playerLeft, MOVE_YAWN, target: opponentLeft); MOVE(playerRight, MOVE_CELEBRATE, target: opponentLeft); EXPECT_MOVE(opponentLeft, MOVE_SCRATCH); }
-    }
-}
+// Yawn switching in doubles: with SMART_SWITCHING the pair planner owns the switch (PairNeedsSwitchSearch), not ShouldSwitchIfBadlyStatused.
 
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's mon is semi-invulnerable and it has a good switchin")
 {
@@ -1219,21 +1223,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not cycle Intimidate whe
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out to cycle Intimidate in doubles when at least one target is valid")
-{
-    PASSES_RANDOMLY(SHOULD_SWITCH_INTIMIDATE_PERCENTAGE, 100, RNG_AI_SWITCH_INTIMIDATE);
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
-        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_WATER_GUN); }
-        OPPONENT(SPECIES_ARCANINE) { Ability(ABILITY_INTIMIDATE); Moves(MOVE_TACKLE); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); MOVE(playerRight, MOVE_WATER_GUN, target: opponentRight); EXPECT_SWITCH(opponentLeft, 2); }
-    }
-}
-
+// Cycling Intimidate in doubles: with SMART_SWITCHING the pair planner owns the switch;
+// upstream's RNG_AI_SWITCH_INTIMIDATE roll never runs there.
 AI_DOUBLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will not cycle Intimidate in doubles when both targets block Attack drops")
 {
     GIVEN {
@@ -1409,63 +1400,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI correctly handles abilities
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI won't switch out if Yawn'd with only Ace mon remaining")
-{
-    u32 flags;
-    PARAMETRIZE { flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_SMART_SWITCHING; }
-    PARAMETRIZE { flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_SMART_SWITCHING | AI_FLAG_ACE_POKEMON; }
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);
-        AI_FLAGS(flags);
-        PLAYER(SPECIES_SLAKOTH) { Moves(MOVE_SCRATCH, MOVE_YAWN); }
-        OPPONENT(SPECIES_SLAKOTH) { Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_SLAKOTH) { Moves(MOVE_HEADBUTT); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_YAWN); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-        if (flags & AI_FLAG_ACE_POKEMON)
-            TURN { MOVE(player, MOVE_SCRATCH); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-        else
-            TURN { MOVE(player, MOVE_SCRATCH); EXPECT_SWITCH(opponent, 1); }
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI won't switch in ace mon after U-Turn if other options available")
-{
-    u32 flags;
-    PARAMETRIZE { flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_SMART_SWITCHING; }
-    PARAMETRIZE { flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_ACE_POKEMON | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_SMART_SWITCHING; }
-    GIVEN {
-        AI_FLAGS(flags);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SURF); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_U_TURN); }
-        OPPONENT(SPECIES_NUMEL) { Level(5); Moves(MOVE_SPLASH); }
-        OPPONENT(SPECIES_SCIZOR) { Moves(MOVE_BUG_BITE); }
-    } WHEN {
-        if (flags & AI_FLAG_ACE_POKEMON)
-            TURN { EXPECT_MOVE(opponent, MOVE_U_TURN); EXPECT_SEND_OUT(opponent, 1); MOVE(player, MOVE_SURF); }
-        else
-            TURN { EXPECT_MOVE(opponent, MOVE_U_TURN); EXPECT_SEND_OUT(opponent, 2); MOVE(player, MOVE_SURF); }
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("Switch AI: AI won't switch in ace mon after U-Turn if other options available")
-{
-    u32 flag;
-    PARAMETRIZE{ flag = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT; }
-    PARAMETRIZE{ flag = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_ACE_POKEMON | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT; }
-    GIVEN {
-        AI_FLAGS(flag);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SURF); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_U_TURN); }
-        OPPONENT(SPECIES_NUMEL) { Level(5); Moves(MOVE_SPLASH); }
-        OPPONENT(SPECIES_SCIZOR) { Moves(MOVE_BUG_BITE); }
-    } WHEN {
-        if (flag & AI_FLAG_ACE_POKEMON)
-            TURN { EXPECT_MOVE(opponent, MOVE_U_TURN); EXPECT_SEND_OUT(opponent, 1); MOVE(player, MOVE_SURF); }
-        else
-            TURN { EXPECT_MOVE(opponent, MOVE_U_TURN); EXPECT_SEND_OUT(opponent, 2); MOVE(player, MOVE_SURF); }
-    }
-}
+// Emerald Champions has no singles battles; Ace ordering in doubles belongs to the pair planner.
 
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI won't switch in absorbing mon immediately after sending out new mon")
 {
@@ -1853,7 +1788,11 @@ AI_DOUBLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will properly consider immu
         OPPONENT(SPECIES_CERULEDGE) { Moves(MOVE_SPARK); }
         OPPONENT(SPECIES_WHIMSICOTT) { Moves(MOVE_MEGA_DRAIN); }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_KARATE_CHOP, target:opponentLeft); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_CELEBRATE); EXPECT_MOVE(opponentRight, MOVE_CELEBRATE); EXPECT_SEND_OUT(opponentLeft, 3); }
+        // With SMART_MON_CHOICES the pair planner owns doubles switching and pulls
+        // the doomed Zigzagoon before Poliwrath moves, not after it faints. The
+        // matchup read is the same: Whimsicott resists both attacks, while
+        // Ceruledge's Karate Chop immunity leaves it weak to Water Gun.
+        TURN { MOVE(playerLeft, MOVE_KARATE_CHOP, target:opponentLeft); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_SWITCH(opponentLeft, 3); EXPECT_MOVE(opponentRight, MOVE_CELEBRATE); }
     }
 }
 
@@ -2412,5 +2351,75 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: Hazard survival includes exact d
         gBattleMons[battler].hp = hp;
         gBattleMons[battler].volatiles.encoredMove = MOVE_CELEBRATE;
         EXPECT_EQ(ShouldSwitch(battler), canSwitch);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI switch legality: Fairy Lock and Sky Drop block optional switches")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_STEALTH_ROCK); }
+        OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OBLIVIOUS); HP(96); MaxHP(96); Moves(MOVE_CELEBRATE, MOVE_SCRATCH); }
+        OPPONENT(SPECIES_PONYTA) { Moves(MOVE_HEADBUTT); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        u32 savedFieldStatuses = gFieldStatuses;
+        gBattleMons[battler].hp = 13;
+        gBattleMons[battler].volatiles.encoredMove = MOVE_CELEBRATE;
+
+        gFieldStatuses |= STATUS_FIELD_FAIRY_LOCK;
+        EXPECT(!ShouldSwitch(battler));
+        gFieldStatuses = savedFieldStatuses;
+        gBattleMons[battler].volatiles.semiInvulnerable = STATE_SKY_DROP_TARGET;
+        EXPECT(!ShouldSwitch(battler));
+        gBattleMons[battler].volatiles.semiInvulnerable = 0;
+        EXPECT(ShouldSwitch(battler));
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI switch legality: a stale active or fainted reserve is rejected")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_STEALTH_ROCK); }
+        OPPONENT(SPECIES_SLOWPOKE) { Moves(MOVE_CELEBRATE, MOVE_SCRATCH); }
+        OPPONENT(SPECIES_PONYTA) { Moves(MOVE_HEADBUTT); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        struct Pokemon *party = GetBattlerParty(battler);
+        gBattleStruct->AI_monToSwitchIntoId[battler] = 1;
+        EXPECT_EQ(GetValidAISwitchinId(battler), 1);
+        gBattleStruct->AI_monToSwitchIntoId[battler] = 0;
+        EXPECT_EQ(GetValidAISwitchinId(battler), PARTY_SIZE);
+        gBattleStruct->AI_monToSwitchIntoId[battler] = 1;
+        u32 fainted = 0;
+        SetMonData(&party[1], MON_DATA_HP, &fainted);
+        EXPECT_EQ(GetValidAISwitchinId(battler), PARTY_SIZE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI switch legality: a stale partner slot is not a reserve")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_SLOWPOKE) { Moves(MOVE_SCRATCH); }
+        OPPONENT(SPECIES_PONYTA) { Moves(MOVE_SCRATCH); }
+        OPPONENT(SPECIES_SUDOWOODO) { Moves(MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
+               EXPECT_MOVE(opponentLeft, MOVE_SCRATCH); EXPECT_MOVE(opponentRight, MOVE_SCRATCH); }
+    } THEN {
+        enum BattlerId left = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum BattlerId right = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        gBattleStruct->AI_monToSwitchIntoId[left] = gBattlerPartyIndexes[right];
+        EXPECT_EQ(GetValidAISwitchinId(left), PARTY_SIZE);
+        gBattleStruct->AI_monToSwitchIntoId[left] = 2;
+        EXPECT_EQ(GetValidAISwitchinId(left), 2);
     }
 }

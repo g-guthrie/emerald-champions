@@ -7,8 +7,8 @@ Route111_Text_MakingRoomUseTMToMakeYourOwn: @ 82762C9
 	.string "Would you like it?$"
 
 Route111_Text_ExplainSecretPower: @ 827636E
-	.string "A Pokémon that can learn Secret Power\n"
-	.string "can help you make a Secret Base.\p"
+	.string "A Pokémon that knows Secret Power\n"
+	.string "can open a Secret Base.\p"
 	.string "Try a large tree with hanging vines,\n"
 	.string "or a rock wall with a small indent.\p"
 	.string "If you want Secret Power for battles,\n"

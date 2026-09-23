@@ -122,14 +122,6 @@ Common_Movement_WalkUp: @ 82725C9
 	step_end
 
 @ Unused
-Common_Movement_WalkUp2:: @ 82725CB
-	walk_up
-	walk_up
-	step_end
-
-@ Emerald Champions: restored after the Inclement merge overwrote this file;
-@ these are referenced from this engine's own C and scripts.
-
 Common_Movement_FollowerSafeStart::
 
 Common_Movement_FollowerSafeEnd::

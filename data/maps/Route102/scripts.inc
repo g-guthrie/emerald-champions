@@ -18,46 +18,8 @@ Route102_EventScript_Boy:: @ 81EC0FC
 	end
 
 Route102_EventScript_Calvin:: @ 81EC105
-	trainerbattle_double TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route102_EventScript_CalvinRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route102_EventScript_CalvinRematch
-	setvar VAR_0x8004, TRAINER_CALVIN_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route102_EventScript_CalvinTryRegister
-	msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route102_EventScript_CalvinRegisterMatchCallAfterBattle:: @ 81EC146
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegisterMatchCall
-	release
-	end
-
-Route102_EventScript_CalvinRegisterMatchCall:: @ 81EC157
-	msgbox Route102_Text_CalvinRegisterShort, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CALVIN_1
-	release
-	end
-
-Route102_EventScript_CalvinTryRegister:: @ 81EC170
-	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegister
-	msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route102_EventScript_CalvinRegister:: @ 81EC183
-	msgbox Route102_Text_CalvinRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CALVIN_1
-	release
-	end
-
-Route102_EventScript_CalvinRematch:: @ 81EC19C
-	@ This retired encounter has no campaign battle.
-	msgbox Route102_Text_CalvinRematchPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route102_Text_CalvinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route102_EventScript_Rick:: @ 81EC1B3

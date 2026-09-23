@@ -12,6 +12,7 @@
 #include "party_menu.h"
 #include "string_util.h"
 #include "text.h"
+#include "line_break.h"
 #include "constants/abilities.h"
 #include "constants/battle.h"
 #include "constants/battle_string_ids.h"
@@ -757,3 +758,206 @@ TEST("Battle strings fit on the battle message window")
     Free(battleString);
 }
 //*/
+
+TEST("Battle message: trainer name placeholders use independent scratch text")
+{
+    u32 flags = gBattleTypeFlags;
+    u16 trainerA = TRAINER_BATTLE_PARAM.opponentA;
+    u16 trainerB = TRAINER_BATTLE_PARAM.opponentB;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_ROXANNE_1;
+    TRAINER_BATTLE_PARAM.opponentB = TRAINER_BRAWLY_1;
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++) gBattlerPositions[i] = i;
+    u8 first[128], second[128], expected[256], actual[256];
+    BattleStringExpandPlaceholders(COMPOUND_STRING("{B_TRAINER1_NAME_WITH_CLASS}"), first, sizeof(first));
+    BattleStringExpandPlaceholders(COMPOUND_STRING("{B_TRAINER2_NAME_WITH_CLASS}"), second, sizeof(second));
+    StringCopy(expected, first);
+    StringAppend(expected, COMPOUND_STRING("\n"));
+    StringAppend(expected, second);
+    BattleStringExpandPlaceholders(COMPOUND_STRING("{B_TRAINER1_NAME_WITH_CLASS}\n{B_TRAINER2_NAME_WITH_CLASS}"), actual, sizeof(actual));
+    EXPECT_EQ(StringCompare(actual, expected), 0);
+    gBattleTypeFlags = flags;
+    TRAINER_BATTLE_PARAM.opponentA = trainerA;
+    TRAINER_BATTLE_PARAM.opponentB = trainerB;
+}
+
+TEST("Battle message: destination capacity includes terminator and rejects partial controls")
+{
+    static const u8 *const messages[] = {
+        COMPOUND_STRING("ABCDEFGHIJ"),
+        COMPOUND_STRING("{COLOR RED}ABCDEFGHIJ"),
+        COMPOUND_STRING("{B_BUFF1}ABCDEFGHIJ"),
+    };
+    StringCopy(gBattleTextBuff1, COMPOUND_STRING("PREFIX"));
+    for (u32 message = 0; message < ARRAY_COUNT(messages); message++)
+    {
+        u8 full[128];
+        u32 length = BattleStringExpandPlaceholders(messages[message], full, sizeof(full));
+        for (u32 capacity = 0; capacity <= length + 1; capacity++)
+        {
+            u8 output[128];
+            memset(output, 0xA5, sizeof(output));
+            u32 result = BattleStringExpandPlaceholders(messages[message], output + 1, capacity);
+            EXPECT_EQ(output[0], 0xA5);
+            EXPECT_EQ(output[capacity + 1], 0xA5);
+            if (capacity == 0)
+                EXPECT_EQ(result, 0);
+            else if (capacity < length)
+            {
+                EXPECT_EQ(result, 1);
+                EXPECT_EQ(output[1], EOS);
+            }
+            else
+            {
+                EXPECT_EQ(result, length);
+                EXPECT_EQ(StringCompare(output + 1, full), 0);
+            }
+        }
+    }
+}
+
+extern const u8 *Test_GetBattleStatusString(u8 *src);
+
+TEST("Battle message: legacy status tokens match bytewise from unaligned input")
+{
+    ALIGNED(4) u8 input[16];
+    for (u32 i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
+    {
+        memset(input, 0xA5, sizeof(input));
+        memcpy(input + 1, gStatusConditionStringsTable[i][0], 8);
+        EXPECT_EQ(Test_GetBattleStatusString(input + 1), gStatusConditionStringsTable[i][1]);
+        StringCopy(gBattleTextBuff1, input + 1);
+        u8 output[64];
+        BattleStringExpandPlaceholders(COMPOUND_STRING("{B_BUFF1}"), output, sizeof(output));
+        EXPECT_EQ(StringCompare(output, gStatusConditionStringsTable[i][1]), 0);
+    }
+    input[1] = EOS;
+    EXPECT_EQ(Test_GetBattleStatusString(input + 1), NULL);
+    StringCopy(input + 1, COMPOUND_STRING("UNKNOWN"));
+    EXPECT_EQ(Test_GetBattleStatusString(input + 1), NULL);
+}
+
+TEST("Automatic wrapping: overwide words do not create uninitialized trailing lines")
+{
+    u8 text[32];
+    StringCopy(text, COMPOUND_STRING("MMMMMMMMMMMM"));
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(StringCompare(text, COMPOUND_STRING("MMMMMMMMMMMM")), 0);
+    memset(text, 0xA5, sizeof(text));
+    StringCopy(text, COMPOUND_STRING("MMMM NNNN"));
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(StringCompare(text, COMPOUND_STRING("MMMM\nNNNN")), 0);
+    EXPECT_EQ(text[10], 0xA5);
+    StringCopy(text, COMPOUND_STRING("AA BB CC"));
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(StringCompare(text, COMPOUND_STRING("AA\nBB\lCC")), 0);
+}
+
+TEST("Automatic wrapping: leading repeated and trailing spaces preserve word bytes")
+{
+    u8 text[32];
+    memset(text, 0xA5, sizeof(text));
+    StringCopy(text, COMPOUND_STRING("  AA   BB  "));
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(StringCompare(text, COMPOUND_STRING("  AA  \nBB  ")), 0);
+    EXPECT_EQ(text[12], 0xA5);
+    StringCopy(text, COMPOUND_STRING("   "));
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(StringCompare(text, COMPOUND_STRING("   ")), 0);
+    StringCopy(text, COMPOUND_STRING(" AA  "));
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(StringCompare(text, COMPOUND_STRING(" AA  ")), 0);
+}
+
+TEST("Automatic wrapping: long word metrics do not wrap at 255 pixels or bytes")
+{
+    static const u32 lengths[] = {60, 300};
+    for (u32 sample = 0; sample < ARRAY_COUNT(lengths); sample++)
+    {
+        u8 text[320];
+        memset(text, 0xA5, sizeof(text));
+        u32 length = lengths[sample];
+        for (u32 i = 0; i < length; i++) text[i] = CHAR_M;
+        text[length] = CHAR_SPACE;
+        text[length + 1] = CHAR_B;
+        text[length + 2] = EOS;
+        BreakStringAutomatic(text, 200, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+        for (u32 i = 0; i < length; i++) EXPECT_EQ(text[i], CHAR_M);
+        EXPECT_EQ(text[length], CHAR_NEWLINE);
+        EXPECT_EQ(text[length + 1], CHAR_B);
+        EXPECT_EQ(text[length + 2], EOS);
+        EXPECT_EQ(text[length + 3], 0xA5);
+    }
+}
+
+TEST("Automatic wrapping: text control parameters cannot become spaces or line breaks")
+{
+    u8 text[] = {EXT_CTRL_CODE_BEGIN, EXT_CTRL_CODE_PLAY_SE, CHAR_NEWLINE, CHAR_PROMPT_CLEAR,
+        EXT_CTRL_CODE_BEGIN, EXT_CTRL_CODE_COLOR, CHAR_SPACE, CHAR_A, CHAR_A,
+        CHAR_SPACE, CHAR_B, CHAR_B, EOS};
+    u8 original[sizeof(text)];
+    memcpy(original, text, sizeof(text));
+    EXPECT_EQ(CountLineBreaks(text), 0);
+    EXPECT(!StringHasManualBreaks(text));
+    StripLineBreaks(text);
+    EXPECT_EQ(memcmp(text, original, sizeof(text)), 0);
+    BreakStringAutomatic(text, 1, 2, FONT_NORMAL, SHOW_SCROLL_PROMPT);
+    EXPECT_EQ(memcmp(text, original, 9), 0);
+    EXPECT_EQ(text[9], CHAR_NEWLINE);
+    EXPECT_EQ(text[10], CHAR_B);
+    EXPECT_EQ(text[11], CHAR_B);
+    EXPECT_EQ(text[12], EOS);
+}
+
+TEST("Battle message: encoded buffers reject unknown tokens invalid indices and missing terminators")
+{
+    u8 src[TEXT_BUFF_ARRAY_COUNT];
+    u8 dst[256];
+    static const u8 invalid[][8] = {
+        {B_BUFF_PLACEHOLDER_BEGIN, 0xFE, B_BUFF_EOS},
+        {B_BUFF_PLACEHOLDER_BEGIN, B_BUFF_NUMBER, 3, 3, 1, 2, 3, B_BUFF_EOS},
+        {B_BUFF_PLACEHOLDER_BEGIN, B_BUFF_TYPE, 255, B_BUFF_EOS},
+        {B_BUFF_PLACEHOLDER_BEGIN, B_BUFF_ABILITY, 255, 255, B_BUFF_EOS},
+        {B_BUFF_PLACEHOLDER_BEGIN, B_BUFF_MON_NICK, MAX_BATTLERS_COUNT, 0, B_BUFF_EOS},
+        {B_BUFF_PLACEHOLDER_BEGIN, B_BUFF_MON_NICK, 0, PARTY_SIZE, B_BUFF_EOS},
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(invalid); i++)
+    {
+        memset(src, B_BUFF_EOS, sizeof(src));
+        memcpy(src, invalid[i], sizeof(invalid[i]));
+        dst[0] = CHAR_A;
+        ExpandBattleTextBuffPlaceholders(src, dst, sizeof(dst));
+        EXPECT_EQ(dst[0], EOS);
+    }
+    memset(src, 0, sizeof(src));
+    src[0] = B_BUFF_PLACEHOLDER_BEGIN;
+    for (u32 i = 1; i + 2 < sizeof(src); i += 3)
+        src[i] = B_BUFF_MOVE;
+    ExpandBattleTextBuffPlaceholders(src, dst, sizeof(dst));
+    EXPECT_EQ(dst[0], EOS);
+    PREPARE_MOVE_BUFFER(src, MOVE_SURF);
+    ExpandBattleTextBuffPlaceholders(src, dst, sizeof(dst));
+    EXPECT_EQ(StringCompare(dst, GetMoveName(MOVE_SURF)), 0);
+}
+
+TEST("Battle message: encoded concatenation respects each destination capacity")
+{
+    u8 src[TEXT_BUFF_ARRAY_COUNT] = {
+        B_BUFF_PLACEHOLDER_BEGIN, B_BUFF_MOVE, MOVE_SURF & 255, MOVE_SURF >> 8,
+        B_BUFF_MOVE, MOVE_PROTECT & 255, MOVE_PROTECT >> 8, B_BUFF_EOS,
+    };
+    u8 full[128];
+    ExpandBattleTextBuffPlaceholders(src, full, sizeof(full));
+    u32 length = StringLength(full) + 1;
+    EXPECT_GT(length, 1);
+    for (u32 capacity = 0; capacity <= length; capacity++)
+    {
+        u8 output[128];
+        memset(output, 0xA5, sizeof(output));
+        ExpandBattleTextBuffPlaceholders(src, output + 1, capacity);
+        EXPECT_EQ(output[0], 0xA5);
+        EXPECT_EQ(output[capacity + 1], 0xA5);
+        if (capacity && capacity < length) EXPECT_EQ(output[1], EOS);
+        if (capacity == length) EXPECT_EQ(StringCompare(output + 1, full), 0);
+    }
+}

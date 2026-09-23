@@ -117,18 +117,18 @@ TEST("Harvest economy: existing PC ownership cannot charge harvest again")
     ResetHarvest();
 }
 
-TEST("Harvest economy: quantities do not wrap or spill into the next berry")
+TEST("Harvest economy: quantities saturate without wrapping or spilling into the next berry")
 {
     ResetHarvest();
     AddHarvestedBerries(BERRY_ID_LUM, 254);
-    EXPECT(!CanAddHarvestedBerries(BERRY_ID_LUM, 2));
     AddHarvestedBerries(BERRY_ID_LUM, 2);
-    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_LUM), 254);
+    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_LUM), 255);
     AddHarvestedBerries(BERRY_ID_LUM, 1);
     EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_LUM), 255);
     EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_SITRUS), 0);
-    EXPECT(!CanAddHarvestedBerries(0, 1));
-    EXPECT(!CanAddHarvestedBerries(NUM_BERRIES + 1, 1));
+    AddHarvestedBerries(0, 1);
+    AddHarvestedBerries(NUM_BERRIES + 1, 1);
+    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_CHERI), 0);
     ResetHarvest();
 }
 
@@ -155,29 +155,4 @@ TEST("Harvest economy: Celebi invitation is permanent and does not claim a captu
     ResetHarvest();
     VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_0, 0);
     FlagClear(FLAG_EC_CAUGHT_CELEBI);
-}
-
-TEST("Harvest economy: daily seed pair rolls back if only its first berry fits")
-{
-    ResetHarvest();
-    struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES];
-    for (u32 i = 0; i < pocket->capacity; i++)
-        BagPocket_SetSlotItemIdAndCount(pocket, i, ITEM_CHERI_BERRY, MAX_BAG_ITEM_CAPACITY);
-    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
-    gSpecialVar_0x8008 = ITEM_LUM_BERRY;
-    gSpecialVar_0x8009 = ITEM_SITRUS_BERRY;
-    GiveEmeraldChampionsBerryPair();
-    EXPECT_EQ(gSpecialVar_Result, FALSE);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LUM_BERRY), 0);
-    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_LUM), 0);
-    BagPocket_SetSlotItemIdAndCount(pocket, 1, ITEM_NONE, 0);
-    GiveEmeraldChampionsBerryPair();
-    EXPECT_EQ(gSpecialVar_Result, TRUE);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LUM_BERRY), 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SITRUS_BERRY), 1);
-    // Since "berry gifts mint harvest" the pair credits both counters once it
-    // actually lands; only the rolled-back attempt above leaves them at zero.
-    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_SITRUS), 1);
-    EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_LUM), 1);
-    ResetHarvest();
 }

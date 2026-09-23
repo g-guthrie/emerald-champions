@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "field_effect.h"
 #include "battle_z_move.h"
 #include "graphics.h"
 #include "sprite.h"
@@ -181,6 +182,7 @@ static void UpdateStatusIconInHealthbox(u8);
 
 static void FillHealthboxObject(void *, u32, u32);
 
+static void Task_HidePartyStatusSummary(u8);
 static void Task_HidePartyStatusSummary_BattleStart_1(u8);
 static void Task_HidePartyStatusSummary_BattleStart_2(u8);
 static void Task_HidePartyStatusSummary_DuringBattle(u8);
@@ -1210,8 +1212,10 @@ u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *p
         bar_data0 = 5;
     }
 
-    LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
-    LoadSpriteSheet(&sStatusSummaryBallsSpriteSheet);
+    if (GetSpriteTileStartByTag(TAG_STATUS_SUMMARY_BAR_TILE) == TAG_NONE)
+        LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
+    if (GetSpriteTileStartByTag(TAG_STATUS_SUMMARY_BALLS_TILE) == TAG_NONE)
+        LoadSpriteSheet(&sStatusSummaryBallsSpriteSheet);
     LoadSpritePalette(&sStatusSummaryBarSpritePal);
     LoadSpritePalette(&sStatusSummaryBallsSpritePal);
 
@@ -1382,17 +1386,21 @@ u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *p
 
     gTasks[taskId].tIsBattleStart = isBattleStart;
 
-    if (isBattleStart)
-    {
-        gBattleSpritesDataPtr->animationData->field_9_x1C++;
-    }
-
     PlaySE12WithPanning(SE_BALL_TRAY_ENTER, 0);
     return taskId;
 }
 
+void HidePartyStatusSummary(enum BattlerId battler)
+{
+    u8 taskId = gBattlerStatusSummaryTaskId[battler];
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown
+     && taskId < NUM_TASKS && gTasks[taskId].isActive
+     && gTasks[taskId].func == TaskDummy && gTasks[taskId].tBattler == battler)
+        gTasks[taskId].func = Task_HidePartyStatusSummary;
+}
+
 // Slide the party summary tray back offscreen
-void Task_HidePartyStatusSummary(u8 taskId)
+static void Task_HidePartyStatusSummary(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
     bool8 isBattleStart;
@@ -1461,50 +1469,47 @@ static void Task_HidePartyStatusSummary_BattleStart_1(u8 taskId)
         gTasks[taskId].func = Task_HidePartyStatusSummary_BattleStart_2;
 }
 
+static void FinishPartyStatusSummary(u8 taskId)
+{
+    enum BattlerId battler = gTasks[taskId].tBattler;
+    bool32 anotherShown = FALSE;
+    gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = FALSE;
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
+        anotherShown |= gBattleSpritesDataPtr->healthBoxesData[i].partyStatusSummaryShown;
+    if (!anotherShown)
+    {
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    }
+    DestroyTask(taskId);
+}
+
+static void DestroyPartyStatusSummarySprites(u8 taskId)
+{
+    for (u32 i = 0; i <= PARTY_SIZE; i++)
+    {
+        u8 spriteId = i == 0 ? gTasks[taskId].tSummaryBarSpriteId
+            : gTasks[taskId].tBallIconSpriteId(i - 1);
+        FreeSpriteOamMatrix(&gSprites[spriteId]);
+        FieldEffectFreeGraphicsResources(&gSprites[spriteId]);
+    }
+}
+
 static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId)
 {
-    u8 ballIconSpriteIds[PARTY_SIZE];
-    s32 i;
 
-    enum BattlerId battler = gTasks[taskId].tBattler;
     if (--gTasks[taskId].tBlend == -1)
     {
-        u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
-
-        for (i = 0; i < PARTY_SIZE; i++)
-            ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
-
-        gBattleSpritesDataPtr->animationData->field_9_x1C--;
-        if (gBattleSpritesDataPtr->animationData->field_9_x1C == 0)
-        {
-            DestroySpriteAndFreeResources(&gSprites[summaryBarSpriteId]);
-            DestroySpriteAndFreeResources(&gSprites[ballIconSpriteIds[0]]);
-        }
-        else
-        {
-            FreeSpriteOamMatrix(&gSprites[summaryBarSpriteId]);
-            DestroySprite(&gSprites[summaryBarSpriteId]);
-            FreeSpriteOamMatrix(&gSprites[ballIconSpriteIds[0]]);
-            DestroySprite(&gSprites[ballIconSpriteIds[0]]);
-        }
-
-        for (i = 1; i < PARTY_SIZE; i++)
-            DestroySprite(&gSprites[ballIconSpriteIds[i]]);
+        DestroyPartyStatusSummarySprites(taskId);
     }
     else if (gTasks[taskId].tBlend == -3)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = 0;
-        SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        DestroyTask(taskId);
+        FinishPartyStatusSummary(taskId);
     }
 }
 
 static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId)
 {
-    u8 ballIconSpriteIds[PARTY_SIZE];
-    s32 i;
-    enum BattlerId battler = gTasks[taskId].tBattler;
 
     if (--gTasks[taskId].tBlend >= 0)
     {
@@ -1512,25 +1517,41 @@ static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId)
     }
     else if (gTasks[taskId].tBlend == -1)
     {
-        u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
-
-        for (i = 0; i < PARTY_SIZE; i++)
-            ballIconSpriteIds[i] = gTasks[taskId].tBallIconSpriteId(i);
-
-        DestroySpriteAndFreeResources(&gSprites[summaryBarSpriteId]);
-        DestroySpriteAndFreeResources(&gSprites[ballIconSpriteIds[0]]);
-
-        for (i = 1; i < PARTY_SIZE; i++)
-            DestroySprite(&gSprites[ballIconSpriteIds[i]]);
+        DestroyPartyStatusSummarySprites(taskId);
     }
     else if (gTasks[taskId].tBlend == -3)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = 0;
-        SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        DestroyTask(taskId);
+        FinishPartyStatusSummary(taskId);
     }
 }
+
+#if TESTING
+void Test_DestroyPartySummary(u8 taskId, bool32 intro)
+{
+    gTasks[taskId].tBlend = 0;
+    if (intro)
+        Task_HidePartyStatusSummary_BattleStart_2(taskId);
+    else
+        Task_HidePartyStatusSummary_DuringBattle(taskId);
+    gTasks[taskId].tBlend = -2;
+    if (intro)
+        Task_HidePartyStatusSummary_BattleStart_2(taskId);
+    else
+        Task_HidePartyStatusSummary_DuringBattle(taskId);
+}
+
+bool32 Test_CompletePartySummaryHide(enum BattlerId battler, bool32 intro)
+{
+    u8 taskId = CreateTask(TaskDummy, 5);
+    gTasks[taskId].tBattler = battler;
+    gTasks[taskId].tBlend = -2; // Sprites have already been destroyed.
+    if (intro)
+        Task_HidePartyStatusSummary_BattleStart_2(taskId);
+    else
+        Task_HidePartyStatusSummary_DuringBattle(taskId);
+    return !gTasks[taskId].isActive;
+}
+#endif
 
 #undef tBattler
 #undef tSummaryBarSpriteId
@@ -2502,23 +2523,13 @@ bool32 IsAnyAbilityPopUpActive(void)
     return activeAbilityPopUps;
 }
 
-void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isDoubleBattle)
+static u8 *CreateBattlePopUpSprites(enum BattlerId battler, bool32 isDoubleBattle)
 {
     u8 *spriteIds;
     u32 xSlide, tileTag;
     enum BattlerPosition battlerPosition = GetBattlerPosition(battler);
     struct SpriteTemplate template;
     const s16 (*coords)[2];
-
-    if (gBattleScripting.abilityPopupOverwrite)
-        ability = gBattleScripting.abilityPopupOverwrite;
-
-    if (gTestRunnerEnabled)
-    {
-        TestRunner_Battle_RecordAbilityPopUp(battler, ability);
-        if (gTestRunnerHeadless)
-            return;
-    }
 
     if (!IsAnyAbilityPopUpActive())
         LoadSpritePalette(&sSpritePalette_AbilityPopUp);
@@ -2537,10 +2548,12 @@ void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isD
     template = sSpriteTemplate_AbilityPopUp;
     template.tileTag = tileTag;
     spriteIds = gBattleStruct->abilityPopUpSpriteIds[battler];
-    spriteIds[0] = CreateSprite(&template, coords[battlerPosition][0] + xSlide,
+    spriteIds[0] = CreateSpriteWithTemplateCopy(&template, coords[battlerPosition][0] + xSlide,
                                            coords[battlerPosition][1], 0);
-    spriteIds[1] = CreateSprite(&template, coords[battlerPosition][0] + xSlide + ABILITY_POP_UP_POS_X_DIFF,
+    spriteIds[1] = CreateSpriteWithTemplateCopy(&template, coords[battlerPosition][0] + xSlide + ABILITY_POP_UP_POS_X_DIFF,
                                            coords[battlerPosition][1], 0);
+
+    fatal_assertf(spriteIds[0] < MAX_SPRITES && spriteIds[1] < MAX_SPRITES, "Out of sprite slots");
 
     if (IsOnPlayerSide(battler))
     {
@@ -2561,6 +2574,27 @@ void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isD
     gSprites[spriteIds[0]].sBattlerId = battler;
     gSprites[spriteIds[1]].sBattlerId = battler;
 
+    return spriteIds;
+}
+
+#ifdef TESTING
+void Test_CreateBattlePopUpSprites(enum BattlerId battler, bool32 isDoubleBattle)
+{
+    CreateBattlePopUpSprites(battler, isDoubleBattle);
+}
+#endif
+
+void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isDoubleBattle)
+{
+    if (gBattleScripting.abilityPopupOverwrite)
+        ability = gBattleScripting.abilityPopupOverwrite;
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordAbilityPopUp(battler, ability);
+        if (gTestRunnerHeadless)
+            return;
+    }
+    u8 *spriteIds = CreateBattlePopUpSprites(battler, isDoubleBattle);
     PrintBattlerOnAbilityPopUp(battler, spriteIds[0], spriteIds[1]);
     PrintAbilityOnAbilityPopUp(ability, spriteIds[0], spriteIds[1]);
 }
@@ -2665,60 +2699,13 @@ static void Task_FreeAbilityPopUpGfx(u8 taskId)
 
 void CreateItemPopUp(enum BattlerId battler)
 {
-    u8 *spriteIds;
-    u32 xSlide, tileTag;
-    enum BattlerPosition battlerPosition = GetBattlerPosition(battler);
-    struct SpriteTemplate template;
-    const s16 (*coords)[2];
-
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordItemPopUp(battler, gLastUsedItem);
         if (gTestRunnerHeadless)
             return;
     }
-
-    if (!IsAnyAbilityPopUpActive())
-        LoadSpritePalette(&sSpritePalette_AbilityPopUp);
-
-    tileTag = (TAG_ABILITY_POP_UP_PLAYER1 + battler);
-    if (IndexOfSpriteTileTag(tileTag) == 0xFF)
-    {
-        struct SpriteSheet sheet = sSpriteSheet_AbilityPopUp;
-        sheet.tag = tileTag;
-        LoadSpriteSheet(&sheet);
-    }
-
-    coords = IsDoubleBattle() ? sAbilityPopUpCoordsDoubles : sAbilityPopUpCoordsSingles;
-    xSlide = IsOnPlayerSide(battler) ? -ABILITY_POP_UP_POS_X_SLIDE : ABILITY_POP_UP_POS_X_SLIDE;
-
-    template = sSpriteTemplate_AbilityPopUp;
-    template.tileTag = tileTag;
-    spriteIds = gBattleStruct->abilityPopUpSpriteIds[battler];
-    spriteIds[0] = CreateSprite(&template, coords[battlerPosition][0] + xSlide,
-                                           coords[battlerPosition][1], 0);
-    spriteIds[1] = CreateSprite(&template, coords[battlerPosition][0] + xSlide + ABILITY_POP_UP_POS_X_DIFF,
-                                           coords[battlerPosition][1], 0);
-
-    if (IsOnPlayerSide(battler))
-    {
-        gSprites[spriteIds[0]].sIsPlayerSide = TRUE;
-        gSprites[spriteIds[1]].sIsPlayerSide = TRUE;
-    }
-
-    gSprites[spriteIds[1]].oam.tileNum += 32; // Second half of the pop up tiles.
-
-    // Create only one instance, as it's only used for
-    // tracking the SpriteSheet(s) and SpritePalette.
-    if (!IsAnyAbilityPopUpActive())
-        CreateTask(Task_FreeAbilityPopUpGfx, 5);
-
-    gBattleStruct->battlerState[battler].activeAbilityPopUps = TRUE;
-
-    gSprites[spriteIds[0]].sIsMain = TRUE;
-    gSprites[spriteIds[0]].sBattlerId = battler;
-    gSprites[spriteIds[1]].sBattlerId = battler;
-
+    u8 *spriteIds = CreateBattlePopUpSprites(battler, IsDoubleBattle());
     PrintBattlerOnAbilityPopUp(battler, spriteIds[0], spriteIds[1]);
     PrintItemOnItemPopUp(gLastUsedItem, spriteIds[0], spriteIds[1]);
 }

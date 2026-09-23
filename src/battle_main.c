@@ -1872,7 +1872,22 @@ void ModifyPersonalityForNature(u32 *personality, u32 newNature)
         diff = NUM_NATURES - diff;
         sign *= -1;
     }
-    *personality -= (diff * sign);
+    // Wrapping a u32 changes its residue modulo25, so cross the nature
+    // boundary in the other direction if the nearest adjustment would wrap.
+    if (sign > 0)
+    {
+        if (*personality < (u32)diff)
+            *personality += NUM_NATURES - diff;
+        else
+            *personality -= diff;
+    }
+    else
+    {
+        if (*personality > UINT32_MAX - (u32)diff)
+            *personality -= NUM_NATURES - diff;
+        else
+            *personality += diff;
+    }
 }
 
 void VBlankCB_Battle(void)
@@ -2938,8 +2953,13 @@ static void BattleStartClearSetData(void)
         {
             gBattleStruct->partyState[trainer][i].usedHeldItem = ITEM_NONE;
             gBattleStruct->itemLost[trainer][i].originalItem = GetMonData(&gParties[trainer][i], MON_DATA_HELD_ITEM);
-            gPartyCriticalHits[i] = 0;
+            gBattleStruct->partyState[trainer][i].heldItemOrigin =
+                gBattleStruct->itemLost[trainer][i].originalItem != ITEM_NONE
+                    ? trainer * PARTY_SIZE + i + 1
+                    : 0;
+            gBattleStruct->partyState[trainer][i].usedHeldItemOrigin = 0;
         }
+        gPartyCriticalHits[i] = 0;
     }
 
     ClearPursuitValues();
@@ -3048,9 +3068,6 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
             gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
         for (enum BattlerId i = 0; i < gBattlersCount; i++)
         {
-            if (gBattleMons[i].volatiles.escapePrevention && gBattleMons[i].volatiles.battlerPreventingEscape == battler)
-                gBattleMons[i].volatiles.escapePrevention = FALSE;
-
             if (gBattleMons[i].volatiles.battlerWithSureHit == battler + 1)
                 gBattleMons[i].volatiles.battlerWithSureHit = 0;
         }
@@ -3077,9 +3094,11 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
          * ...etc
          */
 
-        enum BattlerId i;
         if (gBattleMons[battler].volatiles.powerTrick)
-            SWAP(gBattleMons[battler].attack, gBattleMons[battler].defense, i);
+        {
+            u16 stat;
+            SWAP(gBattleMons[battler].attack, gBattleMons[battler].defense, stat);
+        }
 
         if (gBattleMons[battler].volatiles.gastroAcid && gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
             gBattleMons[battler].volatiles.gastroAcid = FALSE;
@@ -3090,8 +3109,6 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         gBattleMons[battler].volatiles.substituteHP = volatilesCopy->substituteHP;
         gBattleMons[battler].volatiles.perishSongTimer = volatilesCopy->perishSongTimer;
         gBattleMons[battler].volatiles.battlerPreventingEscape = volatilesCopy->battlerPreventingEscape;
-        gBattleMons[battler].volatiles.embargoTimer = volatilesCopy->embargoTimer;
-        gBattleMons[battler].volatiles.healBlockTimer = volatilesCopy->healBlockTimer;
     }
     else if (effect == EFFECT_SHED_TAIL)
     {
@@ -3804,30 +3821,23 @@ u8 IsRunningFromBattleImpossible(enum BattlerId battler)
 
 void SwitchTwoBattlersInParty(enum BattlerId battler, enum BattlerId battler2)
 {
-    s32 i;
     u32 partyId1, partyId2;
 
-    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-        gBattlePartyCurrentOrder[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders));
+    memcpy(gBattlePartyCurrentOrder, gBattleStruct->battlerPartyOrders[battler], sizeof(gBattlePartyCurrentOrder));
 
     partyId1 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]);
     partyId2 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler2]);
     SwitchPartyMonSlots(partyId1, partyId2);
 
-    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-    {
-        *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
-        *(GetPartnerBattler(battler) * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
-    }
+    memcpy(gBattleStruct->battlerPartyOrders[battler], gBattlePartyCurrentOrder, sizeof(gBattlePartyCurrentOrder));
+    memcpy(gBattleStruct->battlerPartyOrders[GetPartnerBattler(battler)], gBattlePartyCurrentOrder, sizeof(gBattlePartyCurrentOrder));
 }
 
 void SwitchPartyOrder(enum BattlerId battler)
 {
-    s32 i;
     u32 partyId1, partyId2;
 
-    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-        gBattlePartyCurrentOrder[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders));
+    memcpy(gBattlePartyCurrentOrder, gBattleStruct->battlerPartyOrders[battler], sizeof(gBattlePartyCurrentOrder));
 
     partyId1 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]);
     partyId2 = GetPartyIdFromBattlePartyId(gBattleStruct->monToSwitchIntoId[battler]);
@@ -3838,21 +3848,9 @@ void SwitchPartyOrder(enum BattlerId battler)
     else if (gBattleStruct->battlerState[battler].originalBattlerPartyId == partyId2)
         gBattleStruct->battlerState[battler].originalBattlerPartyId = partyId1;
 
+    memcpy(gBattleStruct->battlerPartyOrders[battler], gBattlePartyCurrentOrder, sizeof(gBattlePartyCurrentOrder));
     if (IsDoubleBattle())
-    {
-        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-        {
-            *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
-            *(GetPartnerBattler(battler) * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
-        }
-    }
-    else
-    {
-        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-        {
-            *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
-        }
-    }
+        memcpy(gBattleStruct->battlerPartyOrders[GetPartnerBattler(battler)], gBattlePartyCurrentOrder, sizeof(gBattlePartyCurrentOrder));
 }
 
 enum
@@ -5382,10 +5380,7 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && TRAINER_BATTLE_PARAM.earlyRival)
         {
-            if (TRAINER_BATTLE_PARAM.earlyRival)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text
-            else
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2; // Do white out text
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Early rivals use their defeat dialogue.
             gBattlerAttacker = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         }
         else
@@ -5589,7 +5584,6 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         else
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
-            return;
         }
     }
 
@@ -5608,6 +5602,13 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         FreeBattleSpritesData();
     }
 }
+
+#ifdef TESTING
+void Test_FinishBattleResourceCleanup(void)
+{
+    FreeResetData_ReturnToOvOrDoEvolutions();
+}
+#endif
 
 static void TryEvolvePokemon(void)
 {

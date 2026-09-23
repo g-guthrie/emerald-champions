@@ -45,6 +45,7 @@ EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
 	delay 40
 	setvar VAR_TEMP_1, 1
 	call EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags
+	call_if_unset FLAG_SYS_GAME_CLEAR, EverGrandeCity_HallOfFame_EventScript_FinaleInvitation
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearMale
@@ -56,7 +57,6 @@ EverGrandeCity_HallOfFame_EventScript_GameClearMale:: @ 82298E9
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
 	special GameClear
-	waitstate
 	releaseall
 	end
 
@@ -64,7 +64,6 @@ EverGrandeCity_HallOfFame_EventScript_GameClearFemale:: @ 82298F5
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
 	special GameClear
-	waitstate
 	releaseall
 	end
 
@@ -99,3 +98,18 @@ EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames: @ 82299A3
 	.string "the Pokémon League, and the names of\l"
 	.string "the partners who battled with you.$"
 
+EverGrandeCity_HallOfFame_EventScript_FinaleInvitation::
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	waitmovement 0
+	msgbox EverGrandeCity_HallOfFame_Text_FinaleInvitation, MSGBOX_DEFAULT
+	closemessage
+	return
+
+EverGrandeCity_HallOfFame_Text_FinaleInvitation:
+	.string "Wallace: You are League Champion!\p"
+	.string "One final expedition awaits.\n"
+	.string "Wally has prepared a new team\l"
+	.string "at Victory Road's north exit.\p"
+	.string "Meet him there after you return\n"
+	.string "home. This is your next challenge!$"

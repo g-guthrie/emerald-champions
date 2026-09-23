@@ -34,17 +34,8 @@ Std_MsgboxGetPoints:
 	waitmessage
 	return
 
-Std_10:
-	pokenavcall 0x0
-	waitmessage
-	return
-
-EventScript_UnusedReturn:
-	return
-
 Common_EventScript_SaveGame::
 	special SaveGame
-	waitstate
 	return
 
 @ Emerald Champions: restored after the Inclement merge overwrote this file;

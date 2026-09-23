@@ -2,13 +2,6 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 	.byte 0
 
 RustboroCity_Gym_EventScript_Roxanne::
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, RustboroCity_Gym_EventScript_RoxanneRematch
 	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, EmeraldChampions_Text_NeedTwoPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
@@ -38,55 +31,6 @@ RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
 	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
 	release
-	end
-
-RustboroCity_Gym_EventScript_RoxanneRematch::
-	message RustboroCity_Gym_Text_RoxanneChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, RustboroCity_Gym_EventScript_SetSingles
-	case 1, RustboroCity_Gym_EventScript_SetDoubles
-	case 2, RustboroCity_Gym_EventScript_Exit
-	case 127, RustboroCity_Gym_EventScript_Exit
-	releaseall
-	end
-
-RustboroCity_Gym_EventScript_SetSingles::
-	msgbox RustboroCity_Gym_Text_RoxanneAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_ROXANNE
-	releaseall
-	end
-
-RustboroCity_Gym_EventScript_SetDoubles::
-	msgbox RustboroCity_Gym_Text_RoxanneAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_ROXANNE
-	releaseall
-	end
-
-RustboroCity_Gym_EventScript_RoxanneSinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_ROXANNE
-	releaseall
-	end
-
-RustboroCity_Gym_EventScript_RoxanneDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_ROXANNE
-	releaseall
-	end
-
-RustboroCity_Gym_EventScript_AlreadyRematched::
-	msgbox RustboroCity_Gym_Text_RoxannePostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-RustboroCity_Gym_EventScript_Exit::
-	releaseall
 	end
 
 RustboroCity_Gym_EventScript_Josh:: @ 8212FE3
@@ -207,7 +151,14 @@ Rustboro_Gym_Guide_Trigger4::
 Rustboro_Gym_Guide_Speech::
 	msgbox RustboroCity_Gym_Text_Tips, MSGBOX_DEFAULT
 	giveitem ITEM_FRESH_WATER, 5
+	compare VAR_RESULT, FALSE
+	goto_if_eq Rustboro_Gym_Guide_BagFull
 	setvar VAR_RUSTBORO_CITY_STATE, 1
+	goto Rustboro_Gym_Guide_FinishSpeech
+
+Rustboro_Gym_Guide_BagFull::
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+Rustboro_Gym_Guide_FinishSpeech::
 	compare VAR_TEMP_1, 1
 	goto_if_eq Rustboro_Gym_Guide_Walk_Away1
 	compare VAR_TEMP_1, 2
@@ -332,13 +283,8 @@ RustboroCity_Gym_Text_GymGuideAdvice::
 	.string "If you want more advice, I\n"
 	.string "suggest bringing as many Pokémon\l"
 	.string "as you can!\p"
-	.string "You could also ask around the town.\p"
-	.string "People might have something that\n"
-	.string "could help you, like a Steel-type\l"
-	.string "Pokémon they're willing to trade!\p"
-	.string "That Pokémon might even be holding\n"
-	.string "something that the local Nidoran\l"
-	.string "really like (Hint, hint)!$"
+	.string "You could also ask around the town.\n"
+	.string "People here like to help out!$"
 
 RustboroCity_Gym_Text_GymGuidePostVictory: @ 82132E2
 	.string "Whoa! What a breathtaking victory!\n"
@@ -457,40 +403,3 @@ RustboroCity_Gym_Text_RoxanneRegisterCall: @ 8213A76
 	.string "about your journey!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
-
-RustboroCity_Gym_Text_RegisteredRoxanne: @ 8213C01
-	.string "Registered Gym Leader Roxanne\n"
-	.string "in the PokéNav.$"
-
-RustboroCity_Gym_Text_RoxannePreRematch: @ 8213C2F
-	.string "Roxanne: Let us battle!$"
-
-RustboroCity_Gym_Text_RoxanneRematchDefeat: @ 8213CF9
-	.string "Grr…\n"
-	.string "Again, I have lost…$"
-
-RustboroCity_Gym_Text_RoxannePostRematch: @ 8213D12
-	.string "Roxanne: I still have much to learn\n"
-	.string "when it comes to battling Pokémon.\p"
-	.string "That awareness makes me love battling\n"
-	.string "all that much more!$"
-
-RustboroCity_Gym_Text_RoxanneRematchNeedTwoMons: @ 8213D93
-	.string "Roxanne: Oh, no…\n"
-	.string "You only have one Pokémon with you?\p"
-	.string "Please return with at least one more\n"
-	.string "Pokémon.$"
-
-RustboroCity_Gym_Text_RoxanneChooseFormat:
-	.string "Roxanne: I'm so glad to see you again.\n"
-	.string "I'm Roxanne, the Gym Leader here.\p"
-	.string "I'm sure we've both experienced many\n"
-	.string "battles since we last met.\p"
-	.string "I would like to see how much better\n"
-	.string "we've become.\p"
-	.string "Would you prefer a single battle\n"
-	.string "or a double battle?$"
-
-RustboroCity_Gym_Text_RoxanneAllowLegends:
-	.string "And would you like me to battle with\n"
-	.string "Legendary Pokémon?$"

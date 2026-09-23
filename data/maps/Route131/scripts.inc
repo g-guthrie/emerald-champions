@@ -16,11 +16,6 @@ Route131_EventScript_CheckSetAbnormalWeather:: @ 81F741F
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	return
 
-Route131_EventScript_Richard:: @ 81F7429
-	@ This retired encounter has no campaign battle.
-	msgbox Route131_Text_RichardPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route131_EventScript_Herman:: @ 81F7440
 	trainerbattle_double TRAINER_HERMAN, Route131_Text_HermanIntro, Route131_Text_HermanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_HermanPostBattle, MSGBOX_AUTOCLOSE
@@ -35,24 +30,3 @@ Route131_EventScript_Kara:: @ 81F746E
 	trainerbattle_double TRAINER_KARA, Route131_Text_KaraIntro, Route131_Text_KaraDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_KaraPostBattle, MSGBOX_AUTOCLOSE
 	end
-
-Route131_EventScript_Reli:: @ 81F7485
-	@ This retired encounter has no campaign battle.
-	msgbox Route131_Text_ReliPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route131_EventScript_Ian:: @ 81F74A0
-	@ This retired encounter has no campaign battle.
-	msgbox Route131_Text_IanPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route131_EventScript_Talia:: @ 81F74BB
-	@ This retired encounter has no campaign battle.
-	msgbox Route131_Text_TaliaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route131_EventScript_Kevin:: @ 81F74D2
-	@ This retired encounter has no campaign battle.
-	msgbox Route131_Text_KevinPostBattle, MSGBOX_AUTOCLOSE
-	end
-

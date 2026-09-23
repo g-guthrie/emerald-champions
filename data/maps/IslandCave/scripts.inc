@@ -100,22 +100,13 @@ IslandCave_EventScript_Regice:: @ 8238F58
 	setwildbattle SPECIES_REGICE, VAR_0x800A, ITEM_NEVER_MELT_ICE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq IslandCave_EventScript_DefeatedRegice
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq IslandCave_EventScript_RanFromRegice
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq IslandCave_EventScript_RanFromRegice
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, IslandCave_EventScript_RanFromRegice
 	setflag FLAG_DEFEATED_REGICE
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	release
-	end
-
-IslandCave_EventScript_DefeatedRegice:: @ 8238F9F
-	setflag FLAG_DEFEATED_REGICE
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 IslandCave_EventScript_RanFromRegice:: @ 8238FA8

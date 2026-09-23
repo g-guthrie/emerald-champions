@@ -12,11 +12,19 @@ AshenWoods_OnResume::
 
 AshenWoods_OnTransition::
 	setflag FLAG_LANDMARK_ASHEN_WOODS
+	setflag FLAG_HIDE_ASHEN_WOODS_POKE_BALL
 	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call_if_eq AshenWoods_EventScript_SetWeatherAsh
+	goto_if_lt VAR_CHANSEY_NURSE_STATE, 3, AshenWoods_EventScript_HideChansey
+	goto_if_gt VAR_CHANSEY_NURSE_STATE, 5, AshenWoods_EventScript_HideChansey
+	clearflag FLAG_HIDE_ASHEN_WOODS_CHANSEY
 	switch VAR_CHANSEY_NURSE_STATE
 	case 4, AshenWoods_EventScript_ChanseySetPos1
 	case 5, AshenWoods_EventScript_ChanseySetPos2
+	end
+
+AshenWoods_EventScript_HideChansey:
+	setflag FLAG_HIDE_ASHEN_WOODS_CHANSEY
 	end
 
 AshenWoods_EventScript_SetWeatherAsh::
@@ -72,12 +80,12 @@ AshenWoods_EventScript_ChanseyTrigger2::
 
 AshenWoods_EventScript_ChanseySetPos1::
 	setobjectxy LOCALID_CHANSEY, 6, 40
-	copyobjectxytoperm LOCALID_CHANSEY
+	setobjectxyperm LOCALID_CHANSEY, 6, 40
 	return
 
 AshenWoods_EventScript_ChanseySetPos2::
 	setobjectxy LOCALID_CHANSEY, 27, 43
-	copyobjectxytoperm LOCALID_CHANSEY
+	setobjectxyperm LOCALID_CHANSEY, 27, 43
 	return
 
 AshenWoods_EventScript_Chansey::
@@ -165,11 +173,6 @@ AshenWoods_EventScript_Alannah::
 	msgbox AshenWoods_Text_AlannahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-AshenWoods_EventScript_Martin::
-	@ This retired encounter has no campaign battle.
-	msgbox AshenWoods_Text_MartinPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 AshenWoods_EventScript_Roman::
 	trainerbattle_double TRAINER_ROMAN, AshenWoods_Text_RomanIntro, AshenWoods_Text_RomanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AshenWoods_Text_RomanPostBattle, MSGBOX_AUTOCLOSE
@@ -183,8 +186,8 @@ AshenWoods_EventScript_Elmer::
 AshenWoods_Text_Mushrooms:
 	.string "The mushrooms that grow here are\n"
 	.string "a highly sought after ingredient.\p"
-	.string "They're quite valuable, and they\n"
-	.string "seem to grow back overnight!\n"
+	.string "They're quite valuable, so hang on\n"
+	.string "to any that you find!$"
 
 AshenWoods_Text_BlobNowhereToRun:
 	.string "Blob has nowhere to run!$"

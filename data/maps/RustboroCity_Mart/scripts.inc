@@ -10,7 +10,7 @@ RustboroCity_Mart_EventScript_Boy:: @ 8214F7D
 	end
 
 RustboroCity_Mart_EventScript_BugCatcher:: @ 8214F86
-	msgbox RustboroCity_Mart_Text_GettingEscapeRopeJustInCase, MSGBOX_NPC
+	msgbox RustboroCity_Mart_Text_HeldItemsForBattle, MSGBOX_NPC
 	end
 
 RustboroCity_Mart_EventScript_FalseSwipeTM::
@@ -48,20 +48,19 @@ RustboroCity_Mart_Text_HaveTM98:
 	.string "cap.$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
-	.string "I'm buying some Parlyz Heals and\n"
-	.string "Antidotes.\p"
+	.string "I buy Paralyze Heals and Antidotes\n"
+	.string "at the Pokémon Center.\p"
 	.string "Just in case I run into Paras\n"
 	.string "in Petalburg Woods.$"
 
 RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead: @ 8214FF1
 	.string "My Pokémon evolved.\n"
 	.string "It has a lot of HP now.\p"
-	.string "I should buy Super Potions for it\n"
-	.string "instead of ordinary Potions.$"
+	.string "The Pokémon Center sells Super\n"
+	.string "Potions. I should try those!$"
 
-RustboroCity_Mart_Text_GettingEscapeRopeJustInCase: @ 821505C
-	.string "I'm getting an Escape Rope just in\n"
-	.string "case I get lost in a cave.\p"
-	.string "I just need to use it to get back to\n"
-	.string "the entrance.$"
-
+RustboroCity_Mart_Text_HeldItemsForBattle:
+	.string "This Mart sells items that Pokémon\n"
+	.string "can hold in battle.\p"
+	.string "A held item can help your partner\n"
+	.string "when you can't use your Bag!$"

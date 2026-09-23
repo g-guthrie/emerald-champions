@@ -16,6 +16,7 @@ SealedChamber_InnerRoom_EventScript_Regigigas::
 	specialvar VAR_RESULT, CheckSpeciesInParty
 	compare VAR_RESULT, FALSE
 	goto_if_eq SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_LegendaryNotReady
 	waitse
 	playmoncry SPECIES_REGIGIGAS, 2
 	delay 40
@@ -25,28 +26,8 @@ SealedChamber_InnerRoom_EventScript_Regigigas::
 	setwildbattle SPECIES_REGIGIGAS, VAR_0x800A, ITEM_NORMAL_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq SealedChamber_InnerRoom_EventScript_DefeatedRegigigas
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq SealedChamber_InnerRoom_EventScript_RanFromRegigigas
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq SealedChamber_InnerRoom_EventScript_RanFromRegigigas
-	setflag FLAG_DEFEATED_REGIGIGAS
-	release
-	end
-
-SealedChamber_InnerRoom_EventScript_DefeatedRegigigas::
-	setflag FLAG_DEFEATED_REGIGIGAS
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-SealedChamber_InnerRoom_EventScript_RanFromRegigigas::
-	setvar VAR_0x8004, SPECIES_REGIGIGAS
-	goto Common_EventScript_LegendaryFlewAway
-	end
+SealedChamber_InnerRoom_EventScript_CheckRegigigasResult::
+	goto Common_EventScript_EndVisibleLegendaryEncounter
 
 SealedChamber_InnerRoom_EventScript_RegigigasStatue::
 	release

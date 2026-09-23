@@ -28,18 +28,7 @@ AquaHideout_B1F_EventScript_ShowElectrode2:: @ 82339E7
 	return
 
 AquaHideout_B1F_EventScript_Electrode1:: @ 82339EB
-	lock
-	faceplayer
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
-	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
-	waitse
-	playmoncry SPECIES_ELECTRODE, 2
-	delay 40
-	waitmoncry
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	dowildbattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	call AquaHideout_B1F_EventScript_BattleElectrode
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq AquaHideout_B1F_EventScript_DefeatedElectrode1
@@ -57,18 +46,7 @@ AquaHideout_B1F_EventScript_DefeatedElectrode1:: @ 8233A2F
 	end
 
 AquaHideout_B1F_EventScript_Electrode2:: @ 8233A38
-	lock
-	faceplayer
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
-	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
-	waitse
-	playmoncry SPECIES_ELECTRODE, 2
-	delay 40
-	waitmoncry
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	dowildbattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	call AquaHideout_B1F_EventScript_BattleElectrode
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq AquaHideout_B1F_EventScript_DefeatedElectrode2
@@ -84,6 +62,21 @@ AquaHideout_B1F_EventScript_DefeatedElectrode2:: @ 8233A7C
 	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
 	goto Common_EventScript_RemoveStaticPokemon
 	end
+
+AquaHideout_B1F_EventScript_BattleElectrode::
+	lock
+	faceplayer
+	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
+	copyvar VAR_0x800A, VAR_RESULT
+	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
+	waitse
+	playmoncry SPECIES_ELECTRODE, 2
+	delay 40
+	waitmoncry
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	dowildbattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	return
 
 AquaHideout_B1F_EventScript_Grunt2:: @ 8233A85
 	trainerbattle_double TRAINER_GRUNT_AQUA_HIDEOUT_2, AquaHideout_B1F_Text_Grunt2Intro, AquaHideout_B1F_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon, AquaHideout_B1F_EventScript_Grunt2Defeated

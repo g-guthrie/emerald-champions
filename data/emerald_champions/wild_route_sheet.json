@@ -1,1569 +1,1569 @@
 {
- "_about": "Mirrors the Surf and rod species actually present in wild_encounters.json. Since the Inclement conversion the tables themselves are authoritative; this sheet documents them and lets the gate check slot widths and species validity.",
- "MAP_ROUTE103": {
-  "region": "west",
-  "cap": 14,
-  "why": "Shore birds and tide-pool residents occupy the early channel; the land Corphish and Wingull are available before the later Surf and fishing methods.",
-  "surf": [
-   "WINGULL",
-   "GASTRODON_WEST",
-   "WIGLETT",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "FEEBAS"
-  ],
-  "good_rod": [
-   "TENTACOOL",
-   "WISHIWASHI",
-   "GYARADOS"
-  ],
-  "super_rod": [
-   "GYARADOS",
-   "WAILMER",
-   "SHARPEDO",
-   "SHARPEDO",
-   "SHARPEDO"
-  ]
- },
- "MAP_ROUTE102": {
-  "region": "inland",
-  "cap": 14,
-  "why": "Keep every improved land slot including Timburr 11% and Pachirisu 8%; upgrade the Super Rod Lombre slot to Ludicolo 20%.",
-  "surf": [
-   "SURSKIT",
-   "AZUMARILL",
-   "MASQUERAIN",
-   "MASQUERAIN"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "GOLDEEN"
-  ],
-  "good_rod": [
-   "CORPHISH",
-   "LUDICOLO",
-   "SEAKING"
-  ],
-  "super_rod": [
-   "CRAWDAUNT",
-   "SEAKING",
-   "CRAWDAUNT",
-   "CRAWDAUNT",
-   "CRAWDAUNT"
-  ]
- },
- "MAP_PETALBURG_CITY": {
-  "region": "west",
-  "cap": 14,
-  "why": "Replace marine pond inhabitants with native freshwater families. Old Rod Magikarp/Marill stays unchanged; later rods progress from small pond fish to evolved freshwater partners.",
-  "surf": [
-   "MARILL",
-   "AZUMARILL",
-   "MASQUERAIN",
-   "MASQUERAIN"
-  ],
-  "old_rod": [
-   "LUDICOLO",
-   "GASTRODON"
-  ],
-  "good_rod": [
-   "CORPHISH",
-   "GOLDEEN",
-   "GOLDEEN"
-  ],
-  "super_rod": [
-   "CRAWDAUNT",
-   "CORPHISH",
-   "CORPHISH",
-   "CORPHISH",
-   "CORPHISH"
-  ]
- },
- "MAP_ROUTE104": {
-  "region": "west",
-  "cap": 20,
-  "why": "Briney's beach. Wingull country, Wiglett burrows in the sand, Skrelp hides in the kelp off Petalburg Woods.",
-  "surf": [
-   "MANTINE",
-   "WINGULL",
-   "PELIPPER",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "FEEBAS",
-   "LUVDISC"
-  ],
-  "good_rod": [
-   "LUVDISC",
-   "MAGIKARP",
-   "MAGIKARP"
-  ],
-  "super_rod": [
-   "LUVDISC",
-   "LUVDISC",
-   "GYARADOS",
-   "GYARADOS",
-   "GYARADOS"
-  ]
- },
- "MAP_DEWFORD_TOWN": {
-  "region": "west",
-  "cap": 20,
-  "why": "Keep Old Rod Mantyke unchanged; the Good Rod now leads with Qwilfish and follows with Chinchou/Staryu. Neighboring Route 106 supplies Old Rod Remoraid.",
-  "surf": [
-   "MANTINE",
-   "WINGULL",
-   "PELIPPER",
-   "FRILLISH"
-  ],
-  "old_rod": [
-   "MANTINE",
-   "SHELLDER"
-  ],
-  "good_rod": [
-   "SHELLDER",
-   "STARYU",
-   "FINNEON"
-  ],
-  "super_rod": [
-   "STARYU",
-   "SHELLDER",
-   "LUMINEON",
-   "STARMIE",
-   "CLOYSTER"
-  ]
- },
- "MAP_ROUTE106": {
-  "region": "west",
-  "cap": 20,
-  "why": "Barbaracle replaces Super Rod Luvdisc 30%; Shuckle replaces Rock Smash Woobat 10%; Old Rod Remoraid 40% supports Dewford Mantyke. Receive Pidove in repeated Wingull 10% grass, retaining all Fighting options and earlier Route 103 Wingull.",
-  "surf": [
-   "TENTACOOL",
-   "WINGULL",
-   "BARRASKEWDA",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "BARBARACLE",
-   "SKRELP"
-  ],
-  "good_rod": [
-   "SKRELP",
-   "CLAUNCHER",
-   "CLAUNCHER"
-  ],
-  "super_rod": [
-   "CLAWITZER",
-   "DRAGALGE",
-   "CLAWITZER",
-   "DRAGALGE",
-   "DRAGALGE"
-  ]
- },
- "MAP_ROUTE105": {
-  "region": "west",
-  "cap": 55,
-  "why": "Mantine replaces the leading Super Rod Luvdisc 30%. Receive Ledyba 10% from Route 104 in repeated Wingull's palm-shore foliage slot, retaining Crabrawler, Inkay, Chatot and Cramorant; Wingull now has earlier Route 103 grass and plentiful coastal Surf homes.",
-  "surf": [
-   "TENTACOOL",
-   "WINGULL",
-   "PELIPPER",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "MANTINE",
-   "FEEBAS"
-  ],
-  "good_rod": [
-   "SKRELP",
-   "CLAUNCHER",
-   "CLAUNCHER"
-  ],
-  "super_rod": [
-   "CLAWITZER",
-   "DRAGALGE",
-   "CLAWITZER",
-   "DRAGALGE",
-   "DRAGALGE"
-  ]
- },
- "MAP_ROUTE107": {
-  "region": "west",
-  "cap": 55,
-  "why": "Floatzel replaces Surf Kingler 18%. Arrokuda joins Old Rod 40%; Good Rod follows Floatzel/Arrokuda/Barraskewda, and Barraskewda leads Super Rod 30% with Floatzel as a smaller return. This deliberately develops the fast-swimmer population.",
-  "surf": [
-   "FRILLISH",
-   "MANTYKE",
-   "ARROKUDA",
-   "WINGULL"
-  ],
-  "old_rod": [
-   "BARRASKEWDA",
-   "ARROKUDA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "BARRASKEWDA",
-   "REMORAID"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "OCTILLERY",
-   "GYARADOS",
-   "GYARADOS",
-   "GYARADOS"
-  ]
- },
- "MAP_ROUTE108": {
-  "region": "west",
-  "cap": 55,
-  "why": "Receive Lapras from ship B 1F in the outside Surf Mantine 18% slot; Mantine retains other coasts. Replace Super Rod Luvdisc 20% with Jellicent. Keep Dhelmise limited at Surf 10% and preserve other wreck-associated residents.",
-  "surf": [
-   "FRILLISH",
-   "MANTYKE",
-   "WINGULL",
-   "WINGULL"
-  ],
-  "old_rod": [
-   "REMORAID",
-   "FINNEON"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "REMORAID",
-   "REMORAID"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "OCTILLERY",
-   "GYARADOS",
-   "GYARADOS",
-   "GYARADOS"
-  ]
- },
- "MAP_ROUTE109": {
-  "region": "west",
-  "cap": 30,
-  "why": "Upgrade Super Rod Shellder 20% to Cloyster. Keep all beach-rock Sandygast/Pincurchin encounters and other methods unchanged.",
-  "surf": [
-   "FRILLISH",
-   "MANTYKE",
-   "PYUKUMUKU",
-   "PYUKUMUKU"
-  ],
-  "old_rod": [
-   "FEEBAS",
-   "MAREANIE"
-  ],
-  "good_rod": [
-   "CORSOLA",
-   "MAREANIE",
-   "BRUXISH"
-  ],
-  "super_rod": [
-   "BRUXISH",
-   "CORSOLA",
-   "TOXAPEX",
-   "BRUXISH",
-   "BRUXISH"
-  ]
- },
- "MAP_SLATEPORT_CITY": {
-  "region": "west",
-  "cap": 30,
-  "why": "Clawitzer30%/Dragalge25% replace the generic Super Rod lead pair, developing Old Rod Clauncher and Good Rod Skrelp. Preserve Dhelmise10% offshore and all earlier methods.",
-  "surf": [
-   "TENTACOOL",
-   "WINGULL",
-   "PELIPPER",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "HORSEA",
-   "FRILLISH"
-  ],
-  "good_rod": [
-   "HORSEA",
-   "FRILLISH",
-   "ALOMOMOLA"
-  ],
-  "super_rod": [
-   "SEADRA",
-   "ALOMOMOLA",
-   "JELLICENT",
-   "JELLICENT",
-   "KINGDRA"
-  ]
- },
- "MAP_ROUTE110": {
-  "region": "west",
-  "cap": 30,
-  "why": "Receive Blitzle 13%/Yamper 8% in repeated Electrike/Pachirisu slots; Electrike 103 and Pachirisu 102 remain earlier. Receive Patrat 6% from 123 and Watchog 5% from 120; Stunky goes to 121 and Morpeko to 115. Tadbulb moves from land 5% to Old Rod 60%, retaining its pre-Wattson timing; Chinchou stays Old Rod 40%. Meowth receives freed land 5% from 117. Preserve Plusle/Minun, all pollution residents and Roaming Gimmighoul. Lanturn leads stronger fishing and Clawitzer replaces late Luvdisc.",
-  "surf": [
-   "SHELLOS_WEST",
-   "GASTRODON_WEST",
-   "BARRASKEWDA",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "TADBULB",
-   "FEEBAS"
-  ],
-  "good_rod": [
-   "CHINCHOU",
-   "WAILMER",
-   "WAILMER"
-  ],
-  "super_rod": [
-   "CHINCHOU",
-   "WAILMER",
-   "LANTURN",
-   "WAILORD",
-   "WAILORD"
-  ]
- },
- "MAP_ROUTE111": {
-  "region": "inland",
-  "cap": 30,
-  "why": "Keep the desert land roster intact. Replace Super Rod Octillery 30% with Whiscash and its old 10% Whiscash slot with Gastrodon.",
-  "surf": [
-   "DREDNAW",
-   "SURSKIT",
-   "MASQUERAIN",
-   "AZUMARILL"
-  ],
-  "old_rod": [
-   "BARBOACH",
-   "DREDNAW"
-  ],
-  "good_rod": [
-   "GOLDEEN",
-   "GOLDUCK",
-   "BASCULIN_RED_STRIPED"
-  ],
-  "super_rod": [
-   "BASCULIN_RED_STRIPED",
-   "BASCULIN_RED_STRIPED",
-   "SEAKING",
-   "SEAKING",
-   "SEAKING"
-  ]
- },
- "MAP_ROUTE114": {
-  "region": "inland",
-  "cap": 40,
-  "why": "Floatzel replaces Super Rod Seaking 30%, retaining Dratini. Receive Komala from 118 in repeated Nuzleaf 11% cliffside tree grass; Seedot remains 102 and Nuzleaf evolves from it, while the other established cliff residents stay.",
-  "surf": [
-   "WOOPER",
-   "QUAGSIRE",
-   "MASQUERAIN",
-   "MASQUERAIN"
-  ],
-  "old_rod": [
-   "GOLDUCK",
-   "BARBOACH"
-  ],
-  "good_rod": [
-   "BARBOACH",
-   "WISHIWASHI_SOLO",
-   "BARBOACH"
-  ],
-  "super_rod": [
-   "WISHIWASHI_SOLO",
-   "SEAKING",
-   "WHISCASH",
-   "WHISCASH",
-   "WHISCASH"
-  ]
- },
- "MAP_ROUTE115": {
-  "region": "west",
-  "cap": 14,
-  "why": "Rustboro's north shore. Rocky shallows: Krabby, Binacle, Shellder; a Mantyke in the surf on a good day.",
-  "surf": [
-   "WISHIWASHI_SOLO",
-   "WINGULL",
-   "BARBARACLE",
-   "TENTACRUEL"
-  ],
-  "old_rod": [
-   "FEEBAS",
-   "WAILMER"
-  ],
-  "good_rod": [
-   "WAILMER",
-   "WISHIWASHI_SOLO",
-   "QWILFISH"
-  ],
-  "super_rod": [
-   "QWILFISH",
-   "WISHIWASHI_SOLO",
-   "WAILMER",
-   "WAILORD",
-   "WAILORD"
-  ]
- },
- "MAP_ROUTE117": {
-  "region": "inland",
-  "cap": 30,
-  "why": "Day Care ponds. Gentle water: Lotad, Marill, Ducklett; Tympole singing in the reeds.",
-  "surf": [
-   "MARILL",
-   "AZUMARILL",
-   "SWANNA",
-   "SEAKING"
-  ],
-  "old_rod": [
-   "WOOPER_PALDEA",
-   "FEEBAS"
-  ],
-  "good_rod": [
-   "CORPHISH",
-   "GOLDEEN",
-   "GOLDEEN"
-  ],
-  "super_rod": [
-   "SEAKING",
-   "CORPHISH",
-   "CRAWDAUNT",
-   "CRAWDAUNT",
-   "CRAWDAUNT"
-  ]
- },
- "MAP_ROUTE118": {
-  "region": "inland",
-  "cap": 30,
-  "why": "Where the river meets the sea. Carvanha come upstream; the Good Rod is found here and the water proves it.",
-  "surf": [
-   "TENTACOOL",
-   "WINGULL",
-   "GOLDUCK",
-   "PELIPPER"
-  ],
-  "old_rod": [
-   "BASCULIN_BLUE_STRIPED",
-   "CARVANHA"
-  ],
-  "good_rod": [
-   "CARVANHA",
-   "MAGIKARP",
-   "BASCULIN_RED_STRIPED"
-  ],
-  "super_rod": [
-   "BASCULIN_RED_STRIPED",
-   "BASCULIN_RED_STRIPED",
-   "SHARPEDO",
-   "GYARADOS",
-   "GYARADOS"
-  ]
- },
- "MAP_ROUTE119": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Rainforest river. Feebas water; Tympole and Poliwag everywhere, Slowpoke asleep on the bank.",
-  "surf": [
-   "FLOATZEL",
-   "PELIPPER",
-   "PELIPPER",
-   "MASQUERAIN"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "FEEBAS"
-  ],
-  "good_rod": [
-   "CARVANHA",
-   "MAGIKARP",
-   "SHARPEDO"
-  ],
-  "super_rod": [
-   "CARVANHA",
-   "GYARADOS",
-   "SHARPEDO",
-   "SHARPEDO",
-   "MILOTIC"
-  ]
- },
- "MAP_ROUTE120": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Reed marsh: Wooper, Masquerain and Chewtle. Ludicolo is the distinctive Super Rod find among the freshwater residents.",
-  "surf": [
-   "AZUMARILL",
-   "STUNFISK",
-   "MASQUERAIN",
-   "MASQUERAIN"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "LUDICOLO"
-  ],
-  "good_rod": [
-   "BARBOACH",
-   "MAGIKARP",
-   "STUNFISK"
-  ],
-  "super_rod": [
-   "WHISCASH",
-   "STUNFISK",
-   "GYARADOS",
-   "GYARADOS",
-   "GYARADOS"
-  ]
- },
- "MAP_ROUTE121": {
-  "region": "inland",
-  "cap": 60,
-  "why": "Mt. Pyre foreshore: Frillish and Swanna over still water, with Jellicent on the Super Rod.",
-  "surf": [
-   "PELIPPER",
-   "FRILLISH",
-   "SWANNA",
-   "ALOMOMOLA"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "GOLDUCK"
-  ],
-  "good_rod": [
-   "WAILMER",
-   "WAILMER",
-   "WAILMER"
-  ],
-  "super_rod": [
-   "WAILMER",
-   "GYARADOS",
-   "LUMINEON",
-   "LUMINEON",
-   "LUMINEON"
-  ]
- },
- "MAP_ROUTE123": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Berry Master's river. Fat, healthy fish: Goldeen, Corphish, Basculin; Buizel racing the current.",
-  "surf": [
-   "AZUMARILL",
-   "SURSKIT",
-   "SWANNA",
-   "MASQUERAIN"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "CORPHISH"
-  ],
-  "good_rod": [
-   "CORPHISH",
-   "GOLDEEN",
-   "GOLDEEN"
-  ],
-  "super_rod": [
-   "CORPHISH",
-   "CRAWDAUNT",
-   "SEAKING",
-   "SEAKING",
-   "SEAKING"
-  ]
- },
- "MAP_ROUTE122": {
-  "region": "east",
-  "cap": 60,
-  "why": "Replace Super Rod Kingler 20%/Shellder 15% with Jellicent/Basculegion. Keep Surf Frillish and Super Rod Dhelmise 10% around Mt. Pyre.",
-  "surf": [
-   "PELIPPER",
-   "FRILLISH",
-   "MANTINE",
-   "ALOMOMOLA"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "WAILMER"
-  ],
-  "good_rod": [
-   "WAILMER",
-   "FINNEON",
-   "FINNEON"
-  ],
-  "super_rod": [
-   "WAILMER",
-   "GYARADOS",
-   "LUMINEON",
-   "LUMINEON",
-   "LUMINEON"
-  ]
- },
- "MAP_LILYCOVE_CITY": {
-  "region": "east",
-  "cap": 60,
-  "why": "Milotic and Alomomola replace repeated Kingler/Shellder in advanced bay fishing; preserve Wailmer/Cramorant Surf and the full shore Rock Smash table.",
-  "surf": [
-   "FLOATZEL",
-   "PELIPPER",
-   "CRAMORANT",
-   "BRUXISH"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "STARYU",
-   "BRUXISH"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "BRUXISH",
-   "STARMIE",
-   "STARMIE",
-   "STARMIE"
-  ]
- },
- "MAP_ROUTE124": {
-  "region": "east",
-  "cap": 60,
-  "why": "Huntail and Gorebyss lead advanced shell-bed fishing; leave Mantine/Clamperl Surf and the separate rated10 Dive map intact.",
-  "surf": [
-   "CRAMORANT",
-   "ALOMOMOLA",
-   "MANTINE",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "FINNEON"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "FRILLISH",
-   "ALOMOMOLA"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "JELLICENT",
-   "JELLICENT",
-   "JELLICENT"
-  ]
- },
- "MAP_ROUTE125": {
-  "region": "east",
-  "cap": 60,
-  "why": "Walrein and Dewgong replace Luvdisc/Corsola on Super Rod; retain both Qwilfish forms, the kelp resident Dragalge and the full existing cold-water Surf roster.",
-  "surf": [
-   "JELLICENT",
-   "ALOMOMOLA",
-   "WALREIN",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "ARROKUDA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "FRILLISH",
-   "WALREIN"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "QWILFISH_HISUI",
-   "JELLICENT",
-   "JELLICENT"
-  ]
- },
- "MAP_ROUTE126": {
-  "region": "east",
-  "cap": 60,
-  "why": "Alomomola/Bruxish/Aqua Tauros lead the crater-ring Super Rod, with Dragalge and Feebas retained; Surf Aqua Tauros and all Dive placements remain unchanged.",
-  "surf": [
-   "JELLICENT",
-   "ALOMOMOLA",
-   "MANTINE",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "TAUROS_PALDEA_AQUA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "FRILLISH",
-   "FEEBAS"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "JELLICENT",
-   "JELLICENT",
-   "JELLICENT"
-  ]
- },
- "MAP_ROUTE127": {
-  "region": "east",
-  "cap": 60,
-  "why": "Toxapex/Dragalge replace Super Rod Kingler/Shellder; preserve Mareanie/Pyukumuku/Bruxish Surf and Old Rod Bruxish.",
-  "surf": [
-   "JELLICENT",
-   "ALOMOMOLA",
-   "SHARPEDO",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "FRILLISH",
-   "ALOMOMOLA"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "JELLICENT",
-   "JELLICENT",
-   "JELLICENT"
-  ]
- },
- "MAP_ROUTE128": {
-  "region": "east",
-  "cap": 60,
-  "why": "Good Rod now centers Sharpedo/Dragalge/Barraskewda; Super Rod receives Jellicent in its repeated Wailord slot, developing predatory cavern-approach fishing.",
-  "surf": [
-   "JELLICENT",
-   "ALOMOMOLA",
-   "SHARPEDO",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "BARRASKEWDA",
-   "CORSOLA",
-   "CORSOLA"
-  ],
-  "super_rod": [
-   "LUVDISC",
-   "CORSOLA",
-   "CORSOLA",
-   "CORSOLA",
-   "CORSOLA"
-  ]
- },
- "MAP_MOSSDEEP_CITY": {
-  "region": "east",
-  "cap": 60,
-  "why": "Swap Starmie and Wailord between30% and10% Super Rod slots; retain accessible25% Surf Staryu.",
-  "surf": [
-   "FINIZEN",
-   "FLOATZEL",
-   "CRAMORANT",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "FINNEON"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "WAILMER",
-   "SHARPEDO"
-  ],
-  "super_rod": [
-   "SHARPEDO",
-   "WAILMER",
-   "LUMINEON",
-   "LUMINEON",
-   "LUMINEON"
-  ]
- },
- "MAP_EVER_GRANDE_CITY": {
-  "region": "east",
-  "cap": 80,
-  "why": "Finished Kingdra/Lapras/Gyarados lead the League approach fishing, followed by Mantine and Cloyster; all earlier methods remain unchanged.",
-  "surf": [
-   "PELIPPER",
-   "TENTACRUEL",
-   "MANTINE",
-   "FLOATZEL"
-  ],
-  "old_rod": [
-   "MANTINE",
-   "LUVDISC"
-  ],
-  "good_rod": [
-   "LUVDISC",
-   "CORSOLA",
-   "MAREANIE"
-  ],
-  "super_rod": [
-   "LUVDISC",
-   "CORSOLA",
-   "TOXAPEX",
-   "TOXAPEX",
-   "TOXAPEX"
-  ]
- },
- "MAP_ROUTE129": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Wailord/Lapras/Mantine replace the generic leading Super Rod trio; preserve the existing Wailmer/Wailord pods on Surf.",
-  "surf": [
-   "TENTACRUEL",
-   "ALOMOMOLA",
-   "MANTINE",
-   "WAILORD"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "TENTACOOL",
-   "MANTINE"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "TENTACRUEL",
-   "TENTACRUEL",
-   "TENTACRUEL"
-  ]
- },
- "MAP_ROUTE130": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Preserve the complete Wynaut land colony. Bruxish/Starmie take the two leading Super Rod slots; one Hisuian Qwilfish slot remains20%, beside Relicanth and Basculegion.",
-  "surf": [
-   "TENTACRUEL",
-   "ALOMOMOLA",
-   "WAILORD",
-   "WAILORD"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "TENTACOOL",
-   "QWILFISH_HISUI"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "TENTACRUEL",
-   "TENTACRUEL",
-   "TENTACRUEL"
-  ]
- },
- "MAP_ROUTE131": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Archaeological fishing is led by Relicanth and Omastar with Huntail/Gorebyss and rare Basculegion. Omastar supplies a mature aquatic fossil and distinguishes this pool from Route134; Clamperl stays in Surf/Good Rod.",
-  "surf": [
-   "TENTACRUEL",
-   "ALOMOMOLA",
-   "WAILORD",
-   "WAILORD"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "OMASTAR"
-  ],
-  "good_rod": [
-   "FINNEON",
-   "TENTACOOL",
-   "ALOMOMOLA"
-  ],
-  "super_rod": [
-   "LUMINEON",
-   "ALOMOMOLA",
-   "TENTACRUEL",
-   "TENTACRUEL",
-   "TENTACRUEL"
-  ]
- },
- "MAP_PACIFIDLOG_TOWN": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Replace15% Super Rod Shellder with Gorebyss; preserve Alomomola, fishing birds, and all other methods.",
-  "surf": [
-   "MANTINE",
-   "PELIPPER",
-   "CRAMORANT",
-   "SHARPEDO"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "SKRELP",
-   "WAILMER",
-   "WAILMER"
-  ],
-  "super_rod": [
-   "DRAGALGE",
-   "SHARPEDO",
-   "DHELMISE",
-   "DHELMISE",
-   "DHELMISE"
-  ]
- },
- "MAP_ROUTE132": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Gyarados replaces Surf Magikarp; Barraskewda/Sharpedo/Floatzel lead the stronger rod to match the fast currents. Old Rod Magikarp/Arrokuda stay.",
-  "surf": [
-   "JELLICENT",
-   "PELIPPER",
-   "BARRASKEWDA",
-   "WAILORD"
-  ],
-  "old_rod": [
-   "ARROKUDA",
-   "TENTACOOL"
-  ],
-  "good_rod": [
-   "MAGIKARP",
-   "QWILFISH_HISUI",
-   "BARRASKEWDA"
-  ],
-  "super_rod": [
-   "HORSEA",
-   "SEADRA",
-   "HORSEA",
-   "HORSEA",
-   "KINGDRA"
-  ]
- },
- "MAP_ROUTE133": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Lanturn leads return fishing; Walrein/Dragalge replace Clamperl/Luvdisc, connecting the existing cold-water and kelp Surf populations.",
-  "surf": [
-   "JELLICENT",
-   "PELIPPER",
-   "MANTINE",
-   "WAILORD"
-  ],
-  "old_rod": [
-   "WALREIN",
-   "TENTACOOL"
-  ],
-  "good_rod": [
-   "MAGIKARP",
-   "HORSEA",
-   "HORSEA"
-  ],
-  "super_rod": [
-   "HORSEA",
-   "SEADRA",
-   "HORSEA",
-   "HORSEA",
-   "KINGDRA"
-  ]
- },
- "MAP_ROUTE134": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Huntail/Gorebyss/Relicanth take75% of Super Rod; Clawitzer and Kingdra are useful deeper companions, distinct from Route131 aquatic fossils. Existing easier-method Clamperl stays.",
-  "surf": [
-   "JELLICENT",
-   "PELIPPER",
-   "WAILORD",
-   "WAILORD"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "TENTACOOL"
-  ],
-  "good_rod": [
-   "MAGIKARP",
-   "HORSEA",
-   "HORSEA"
-  ],
-  "super_rod": [
-   "HORSEA",
-   "SEADRA",
-   "HORSEA",
-   "HORSEA",
-   "KINGDRA"
-  ]
- },
- "MAP_SOOTOPOLIS_CITY": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Milotic/Gyarados/Alomomola take the three main Super Rod positions, with Wishiwashi/Finizen forming the sheltered crater school. Leave every other method and the separate Dive habitat unchanged.",
-  "surf": [
-   "FINIZEN",
-   "MAGIKARP",
-   "MAGIKARP",
-   "MAGIKARP"
-  ],
-  "old_rod": [
-   "QWILFISH_HISUI",
-   "TENTACOOL"
-  ],
-  "good_rod": [
-   "FINIZEN",
-   "MAGIKARP",
-   "MAGIKARP"
-  ],
-  "super_rod": [
-   "MAGIKARP",
-   "MAGIKARP",
-   "GYARADOS",
-   "GYARADOS",
-   "GYARADOS"
-  ]
- },
- "MAP_SEAFLOOR_CAVERN_ENTRANCE": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Replace Surf Magikarp12% with Lanturn; preserve Old Rod Magikarp/Chinchou, Surf Sharpedo, and the existing evolved fish in rods.",
-  "surf": [
-   "TENTACRUEL",
-   "GOLBAT",
-   "GOLBAT",
-   "TENTACRUEL"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "QWILFISH_HISUI"
-  ],
-  "good_rod": [
-   "TENTACOOL",
-   "WAILMER",
-   "WAILMER"
-  ],
-  "super_rod": [
-   "WAILMER",
-   "WAILMER",
-   "WAILMER",
-   "WAILMER",
-   "WAILMER"
-  ]
- },
- "MAP_SEAFLOOR_CAVERN_ROOM6": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Barbaracle35%, Gligar16% and Golisopod16% define the shore with other walkers. Keep Frillish/Jellicent and Dragalge in Surf; receive Barraskewda12% and Sharpedo10% there. Kingdra is55% of Super Rod, followed by Dragalge20%, Barraskewda15% and Basculegion10%; Clawitzer remains on Entrance Good Rod and neighboring sea rods.",
-  "surf": [
-   "BARRASKEWDA",
-   "GOLBAT",
-   "GOLBAT",
-   "TENTACRUEL"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "TENTACOOL",
-   "WAILMER",
-   "WAILMER"
-  ],
-  "super_rod": [
-   "WAILMER",
-   "WAILMER",
-   "WAILMER",
-   "WAILMER",
-   "WAILMER"
-  ]
- },
- "MAP_SEAFLOOR_CAVERN_ROOM7": {
-  "region": "deep",
-  "cap": 70,
-  "why": "Toxapex39% and Barbaracle21% replace Mawile and swimming fish, supported by Golisopod/Malamar/Grapploct/Crobat. Preserve the entire Clamperl/Huntail/Gorebyss Surf pool and replace Good Rod Luvdisc with Clamperl.",
-  "surf": [
-   "TENTACRUEL",
-   "GOLBAT",
-   "GOLBAT",
-   "TENTACRUEL"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARRASKEWDA"
-  ],
-  "good_rod": [
-   "TENTACOOL",
-   "WAILMER",
-   "WAILMER"
-  ],
-  "super_rod": [
-   "WAILMER",
-   "WAILMER",
-   "WAILMER",
-   "WAILMER",
-   "WAILMER"
-  ]
- },
- "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM": {
-  "region": "ice",
-  "cap": 60,
-  "why": "Swap Spheal/Zubat to let Spheal lead. Relocate entrance Surf Snom/Cetoddle into duplicate Swinub/Cubchoo land slots, preserving arrival-area availability; those displaced juveniles remain in earlier Seaspray and deeper Shoal. Surf receives Sealeo/Lapras and Super Rod Cetoddle becomes Lapras. Rated10 Ice stays unchanged.",
-  "surf": [
-   "SPHEAL",
-   "GOLBAT",
-   "AVALUGG",
-   "LAPRAS"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "WALREIN"
-  ],
-  "good_rod": [
-   "TENTACOOL",
-   "QWILFISH_HISUI",
-   "SLOWPOKE"
-  ],
-  "super_rod": [
-   "TENTACRUEL",
-   "SLOWPOKE",
-   "SLOWBRO",
-   "SLOWBRO",
-   "SLOWBRO"
-  ]
- },
- "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM": {
-  "region": "ice",
-  "cap": 60,
-  "why": "Replace Surf Cetoddle with Walrein35% and indoor Wailord with Dewgong18%; Clamperl25%, Jellicent12% and Lapras10% remain. Cold cave Super Rod becomes Lanturn30%, Relicanth25%, Cloyster20%, Hisuian Qwilfish15% and Dewgong10%, removing Cetoddle and the generic Luvdisc/Shellder mix. Preserve Galarian Darumaka and every land resident; Snom/Cetoddle retain entrance land access and the untouched Ice roster. Wailord, Octillery, Luvdisc and Shellder remain available globally.",
-  "surf": [
-   "SPHEAL",
-   "GOLBAT",
-   "WALREIN",
-   "LAPRAS"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "WALREIN"
-  ],
-  "good_rod": [
-   "TENTACOOL",
-   "QWILFISH_HISUI",
-   "SLOWPOKE"
-  ],
-  "super_rod": [
-   "TENTACRUEL",
-   "SLOWPOKE",
-   "SLOWBRO",
-   "SLOWBRO",
-   "SLOWBRO"
-  ]
- },
- "MAP_METEOR_FALLS_1F_1R": {
-  "region": "inland",
-  "cap": 40,
-  "why": "Keep all land encounters and the Old Rod unchanged. Floatzel joins Buizel/Whiscash Surf; the Good Rod develops Buizel/Whiscash alongside Crawdaunt, and the Super Rod features Floatzel/Whiscash with Crawdaunt, Drednaw and the existing Dratini slot.",
-  "surf": [
-   "DREDNAW",
-   "DRATINI",
-   "SOLROCK",
-   "LUNATONE"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "DRATINI"
-  ],
-  "good_rod": [
-   "DRATINI",
-   "BARBOACH",
-   "DRAGONAIR"
-  ],
-  "super_rod": [
-   "DRATINI",
-   "DRAGONAIR",
-   "WHISCASH",
-   "WHISCASH",
-   "DRAGONITE"
-  ]
- },
- "MAP_METEOR_FALLS_1F_2R": {
-  "region": "inland",
-  "cap": 40,
-  "why": "Keep the entire land roster, including Scream Tail/Ferrothorn, and keep Surf/Old Rod unchanged. Add Lapras to the Good Rod; lead the Super Rod with Milotic/Lapras and retain Seismitoad and Feebas in their native smaller slots.",
-  "surf": [
-   "GOLBAT",
-   "DRATINI",
-   "SOLROCK",
-   "LUNATONE"
-  ],
-  "old_rod": [
-   "FEEBAS",
-   "DRATINI"
-  ],
-  "good_rod": [
-   "DRATINI",
-   "BARBOACH",
-   "DRAGONAIR"
-  ],
-  "super_rod": [
-   "DRATINI",
-   "DRAGONAIR",
-   "WHISCASH",
-   "WHISCASH",
-   "DRAGONITE"
-  ]
- },
- "MAP_METEOR_FALLS_B1F_1R": {
-  "region": "inland",
-  "cap": 60,
-  "why": "Keep the dragon Surf population and all land/earlier rods unchanged. The Super Rod becomes Dragonair 45%, Kingdra 35%, Dratini 20%; ordinary river/sea predators retain other regional encounters.",
-  "surf": [
-   "GOLBAT",
-   "DRATINI",
-   "SOLROCK",
-   "LUNATONE"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "DRATINI"
-  ],
-  "good_rod": [
-   "DRATINI",
-   "BARBOACH",
-   "DRAGONAIR"
-  ],
-  "super_rod": [
-   "DRATINI",
-   "DRAGONAIR",
-   "WHISCASH",
-   "WHISCASH",
-   "DRAGONITE"
-  ]
- },
- "MAP_METEOR_FALLS_B1F_2R": {
-  "region": "inland",
-  "cap": 60,
-  "why": "Keep every land discovery, especially Roaring Moon/Salamence/Dragonite. Only replace Super Rod Golduck/Lombre with Kingdra/Milotic, preserving the other slots and all earlier methods.",
-  "surf": [
-   "GOLBAT",
-   "DRATINI",
-   "SOLROCK",
-   "LUNATONE"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "FEEBAS"
-  ],
-  "good_rod": [
-   "DRATINI",
-   "BARBOACH",
-   "DRAGONAIR"
-  ],
-  "super_rod": [
-   "DRATINI",
-   "DRAGONAIR",
-   "WHISCASH",
-   "WHISCASH",
-   "DRAGONITE"
-  ]
- },
- "MAP_PETALBURG_WOODS_3": {
-  "region": "inland",
-  "cap": 14,
-  "why": "Exeggcute 13% replaces Oddish in actual foliage; Oddish receives orchard grass 6%. Keep Bellsprout, Kartana, Croagunk, Murkrow, Goomy, Phantump, Misdreavus and Emolga early. The pond's later rod now develops freshwater residents instead of Lanturn/Octillery.",
-  "surf": [
-   "POLIWAG",
-   "SLOWPOKE",
-   "CHEWTLE",
-   "POLIWHIRL"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "LUDICOLO"
-  ],
-  "good_rod": [
-   "FEEBAS",
-   "POLIWAG",
-   "POLIWHIRL"
-  ],
-  "super_rod": [
-   "SLOWBRO",
-   "POLIWHIRL",
-   "SLOWPOKE",
-   "POLIWRATH",
-   "POLITOED"
-  ]
- },
- "MAP_SAFARI_ZONE_NORTHWEST": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Preserve every land resident. Floatzel/Dragonair replace Super Rod Golduck/Lombre; Dratini remains on Surf and Super Rod.",
-  "surf": [
-   "GOLDUCK",
-   "GRIMER_ALOLA",
-   "MUK_ALOLA",
-   "MUK_ALOLA"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "GRIMER"
-  ],
-  "good_rod": [
-   "GRIMER_ALOLA",
-   "MUK_ALOLA",
-   "MUK_ALOLA"
-  ],
-  "super_rod": [
-   "MUK",
-   "MUK_ALOLA",
-   "MUK_ALOLA",
-   "MUK_ALOLA",
-   "MUK_ALOLA"
-  ]
- },
- "MAP_SAFARI_ZONE_SOUTHEAST": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Safari lowland stream: Marill, Lotad and Goldeen families, with Azumarill as the Super Rod prize.",
-  "surf": [
-   "WOOPER",
-   "GOLDUCK",
-   "SWANNA",
-   "QUAGSIRE"
-  ],
-  "old_rod": [
-   "REMORAID",
-   "GOLDUCK"
-  ],
-  "good_rod": [
-   "DREDNAW",
-   "DRAGONAIR",
-   "DRAGONAIR"
-  ],
-  "super_rod": [
-   "DRATINI",
-   "DRAGONAIR",
-   "DRATINI",
-   "DRATINI",
-   "DRAGONITE"
-  ]
- },
- "MAP_SAFARI_ZONE_SOUTHWEST": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Safari deep pond. Slowpoke banks, Psyduck, Carvanha that shouldn't be this far inland.",
-  "surf": [
-   "STUNFISK",
-   "SLIGGOO",
-   "GOLDUCK",
-   "SEISMITOAD"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "GOLDUCK"
-  ],
-  "good_rod": [
-   "GOLDEEN",
-   "SEAKING",
-   "SEAKING"
-  ],
-  "super_rod": [
-   "SEAKING",
-   "SEAKING",
-   "SEAKING",
-   "SEAKING",
-   "SEAKING"
-  ]
- },
- "MAP_SANDSTREWN_RUINS": {
-  "region": "inland",
-  "cap": 30,
-  "why": "Only replace the cistern Swanna slot with Relicanth at 12%, following the report\u2019s preferred ancient-pool interpretation. Preserve Great Tusk, Unown, the entire relic land roster and all rods/Rock Smash.",
-  "surf": [
-   "GOLDUCK",
-   "RELICANTH",
-   "RELICANTH",
-   "RELICANTH"
-  ],
-  "old_rod": [
-   "DREDNAW",
-   "GOLDUCK"
-  ],
-  "good_rod": [
-   "RELICANTH",
-   "RELICANTH",
-   "RELICANTH"
-  ],
-  "super_rod": [
-   "RELICANTH",
-   "RELICANTH",
-   "RELICANTH",
-   "RELICANTH",
-   "RELICANTH"
-  ]
- },
- "MAP_SCORCHED_SLAB_B1F": {
-  "region": "inland",
-  "cap": 55,
-  "why": "Replace Noibat/Gurdurr/Machoke with Torkoal/Magmar/Heatmor, creating 13%/20%/16% volcanic residents. Surf and rods establish a Slowbro/Gastrodon hot pool, replacing the exact Route102 Super Rod copy; retain Old Rod, Surf Feebas and Super Rod Dratini. Gurdurr and Machoke become evolution-only, with Timburr on Route102 and Machop in Rusturf preserving their earliest family access.",
-  "surf": [
-   "GOLDUCK",
-   "GOLBAT",
-   "GOLBAT",
-   "CROBAT"
-  ],
-  "old_rod": [
-   "GOLDUCK",
-   "BARBOACH"
-  ],
-  "good_rod": [
-   "BARBOACH",
-   "GOLDEEN",
-   "WHISCASH"
-  ],
-  "super_rod": [
-   "BARBOACH",
-   "SEAKING",
-   "WHISCASH",
-   "WHISCASH",
-   "WHISCASH"
-  ]
- },
- "MAP_SEASPRAY_CAVE": {
-  "region": "west",
-  "cap": 30,
-  "why": "Replace Surf Wailord 12% with Lanturn. The rods develop Chinchou/Relicanth and sheltered rock-pool shellfish instead of generic beach filler; retain all land Tynamo and both Stunfisk forms unchanged.",
-  "surf": [
-   "QUAGSIRE",
-   "EELEKTRIK",
-   "GOLBAT",
-   "GOLBAT"
-  ],
-  "old_rod": [
-   "WISHIWASHI_SOLO",
-   "KRABBY"
-  ],
-  "good_rod": [
-   "KRABBY",
-   "WISHIWASHI_SOLO",
-   "WISHIWASHI_SOLO"
-  ],
-  "super_rod": [
-   "WISHIWASHI_SOLO",
-   "KINGLER",
-   "WISHIWASHI_SOLO",
-   "KINGLER",
-   "WISHIWASHI_SOLO"
-  ]
- },
- "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS": {
-  "region": "east",
-  "cap": 55,
-  "why": "Flooded wreck: Frillish and Jellicent haunt the corridors; Dhelmise is the leading Super Rod catch and a Surf discovery.",
-  "surf": [
-   "FRILLISH",
-   "FRILLISH",
-   "FRILLISH",
-   "JELLICENT"
-  ],
-  "old_rod": [
-   "FRILLISH",
-   "SKRELP"
-  ],
-  "good_rod": [
-   "SKRELP",
-   "FRILLISH",
-   "DHELMISE"
-  ],
-  "super_rod": [
-   "DRAGALGE",
-   "DHELMISE",
-   "JELLICENT",
-   "JELLICENT",
-   "JELLICENT"
-  ]
- },
- "MAP_ABANDONED_SHIP_ROOMS_B1F": {
-  "region": "east",
-  "cap": 55,
-  "why": "Replace indoor Lapras with Barbaracle in the hull; the early-area owner receives Lapras in Route108 outside water. Preserve the rated10 flooded corridors.",
-  "surf": [
-   "FRILLISH",
-   "FRILLISH",
-   "FRILLISH",
-   "JELLICENT"
-  ],
-  "old_rod": [
-   "BARBARACLE",
-   "SKRELP"
-  ],
-  "good_rod": [
-   "SKRELP",
-   "FRILLISH",
-   "DHELMISE"
-  ],
-  "super_rod": [
-   "DRAGALGE",
-   "DHELMISE",
-   "JELLICENT",
-   "JELLICENT",
-   "JELLICENT"
-  ]
- },
- "MAP_ALTERING_CAVE_B1F": {
-  "region": "inland",
-  "cap": 100,
-  "why": "Guzzlord retains its exact 8% slot, surrounded by Druddigon 23%, Spiritomb 18% and Malamar 17%. Basculegion/Jellicent define the pond and stronger rods, with Malamar tying the methods together. Lucario remains in the adjacent 1F wing; Blissey and Eelektross retain their original basement slots. Rock Smash, Old Rod and hidden tables are unchanged.",
-  "surf": [
-   "SEAKING",
-   "GASTRODON_WEST",
-   "BASCULEGION",
-   "WHISCASH"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "BARBOACH"
-  ],
-  "good_rod": [
-   "FEEBAS",
-   "WHISCASH",
-   "WHISCASH"
-  ],
-  "super_rod": [
-   "GYARADOS",
-   "WHISCASH",
-   "SEAKING",
-   "SEAKING",
-   "SEAKING"
-  ]
- },
- "MAP_VICTORY_ROAD_B2F": {
-  "region": "inland",
-  "cap": 80,
-  "why": "Dragapult 30%, Baxcalibur 25% and Volcarona 16% replace repeated modest/middle-stage land slots. Keep Noivern, Kommo-o, Metagross and Iron Valiant; upgrade only Surf Shellos/Dratini to Gastrodon/Dragonair and Super Rod Golduck to Milotic, preserving earlier access and the other water slots.",
-  "surf": [
-   "DEWGONG",
-   "GOLBAT",
-   "LAPRAS",
-   "LAPRAS"
-  ],
-  "old_rod": [
-   "MAGIKARP",
-   "DREDNAW"
-  ],
-  "good_rod": [
-   "BARBOACH",
-   "BASCULIN_RED_STRIPED",
-   "BASCULIN_RED_STRIPED"
-  ],
-  "super_rod": [
-   "BASCULIN_RED_STRIPED",
-   "BASCULIN_RED_STRIPED",
-   "WHISCASH",
-   "WHISCASH",
-   "WHISCASH"
-  ]
- }
+  "_about": "Authored Surf and rod species in native slot order, reconciled against Inclement and the pre-rebase habitat design. This sheet owns water species; wild_encounters.json owns levels and encounter rates. Region/cap are historical authoring context, NOT physical access gates or encounter levels. Land and Rock Smash species are authored directly in wild_encounters.json.",
+  "MAP_ROUTE103": {
+    "region": "west",
+    "cap": 14,
+    "why": "Coastal channel: shore birds, Shellos and Wiglett with early Remoraid; later fishing adds shellfish and larger marine residents.",
+    "surf": [
+      "WINGULL",
+      "SHELLOS",
+      "STARYU",
+      "WIGLETT"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "REMORAID"
+    ],
+    "good_rod": [
+      "STARYU",
+      "QWILFISH",
+      "CLAMPERL"
+    ],
+    "super_rod": [
+      "KINGLER",
+      "SHELLDER",
+      "SEADRA",
+      "WISHIWASHI",
+      "CHINCHOU"
+    ]
+  },
+  "MAP_ROUTE102": {
+    "region": "inland",
+    "cap": 14,
+    "why": "Freshwater shallows: retain Inclement Corphish/Goldeen fishing; Surf adds pond residents, while later rods broaden freshwater teams.",
+    "surf": [
+      "POLIWAG",
+      "MASQUERAIN",
+      "LOMBRE",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "CORPHISH",
+      "GOLDEEN"
+    ],
+    "good_rod": [
+      "CORPHISH",
+      "OCTILLERY",
+      "PSYDUCK"
+    ],
+    "super_rod": [
+      "DREDNAW",
+      "SEAKING",
+      "LUDICOLO",
+      "QUAGSIRE",
+      "DRATINI"
+    ]
+  },
+  "MAP_PETALBURG_CITY": {
+    "region": "west",
+    "cap": 14,
+    "why": "Freshwater town pond: early Magikarp/Marill; Surf introduces Lotad and Wooper, and later rods offer freshwater evolutions.",
+    "surf": [
+      "MARILL",
+      "LOTAD",
+      "POLIWAG",
+      "WOOPER"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "MARILL"
+    ],
+    "good_rod": [
+      "BARBOACH",
+      "CORPHISH",
+      "POLIWAG"
+    ],
+    "super_rod": [
+      "AZUMARILL",
+      "LUDICOLO",
+      "POLITOED",
+      "WHISCASH",
+      "GASTRODON"
+    ]
+  },
+  "MAP_ROUTE104": {
+    "region": "west",
+    "cap": 20,
+    "why": "Briney coast: keep Inclement Wingull as the common Surf resident, restore Wiglett and coastal invertebrates, and make Skrelp an early kelp-bed catch.",
+    "surf": [
+      "WINGULL",
+      "TENTACRUEL",
+      "CORSOLA",
+      "WIGLETT"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "SKRELP"
+    ],
+    "good_rod": [
+      "CLAUNCHER",
+      "OCTILLERY",
+      "HORSEA"
+    ],
+    "super_rod": [
+      "WISHIWASHI",
+      "SHARPEDO",
+      "LUVDISC",
+      "BRUXISH",
+      "MAREANIE"
+    ]
+  },
+  "MAP_DEWFORD_TOWN": {
+    "region": "west",
+    "cap": 20,
+    "why": "Island shallows: early Mantyke pairs with Route 106 Remoraid; retain Inclement shellfish through later rods and preserve the coastal Surf habitat.",
+    "surf": [
+      "KRABBY",
+      "STARYU",
+      "MANTINE",
+      "CLAMPERL"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "MANTYKE"
+    ],
+    "good_rod": [
+      "QWILFISH",
+      "CHINCHOU",
+      "STARYU"
+    ],
+    "super_rod": [
+      "CLAWITZER",
+      "DRAGALGE",
+      "SHARPEDO",
+      "BRUXISH",
+      "MANTINE"
+    ]
+  },
+  "MAP_ROUTE106": {
+    "region": "west",
+    "cap": 20,
+    "why": "Rocky coast: Remoraid supports nearby Mantyke; retain Inclement early Clauncher, with Skrelp already available on Route 104. Binacle and Wiglett distinguish Surf.",
+    "surf": [
+      "BINACLE",
+      "CLAMPERL",
+      "JELLICENT",
+      "WIGLETT"
+    ],
+    "old_rod": [
+      "REMORAID",
+      "CLAUNCHER"
+    ],
+    "good_rod": [
+      "SHELLDER",
+      "SKRELP",
+      "CARVANHA"
+    ],
+    "super_rod": [
+      "BARBARACLE",
+      "BRUXISH",
+      "STARYU",
+      "QWILFISH",
+      "MAREANIE"
+    ]
+  },
+  "MAP_ROUTE105": {
+    "region": "west",
+    "cap": 55,
+    "why": "Western sea: retain Inclement Clauncher/Skrelp fishing, while authored Wishiwashi, Clamperl and Mantine distinguish Surf from the adjacent coast.",
+    "surf": [
+      "WISHIWASHI",
+      "CLAMPERL",
+      "LUMINEON",
+      "MANTINE"
+    ],
+    "old_rod": [
+      "CLAUNCHER",
+      "SKRELP"
+    ],
+    "good_rod": [
+      "SEADRA",
+      "CLAUNCHER",
+      "SKRELP"
+    ],
+    "super_rod": [
+      "MANTINE",
+      "DRAGALGE",
+      "CLAWITZER",
+      "SHELLDER",
+      "WAILMER"
+    ]
+  },
+  "MAP_ROUTE107": {
+    "region": "west",
+    "cap": 55,
+    "why": "Fast-swimmer channel: authored Arrokuda and Floatzel share the water with Inclement Mantyke; Finneon fishing preserves the native coastal family.",
+    "surf": [
+      "ARROKUDA",
+      "LUMINEON",
+      "FLOATZEL",
+      "MANTYKE"
+    ],
+    "old_rod": [
+      "FINNEON",
+      "ARROKUDA"
+    ],
+    "good_rod": [
+      "FLOATZEL",
+      "REMORAID",
+      "BARRASKEWDA"
+    ],
+    "super_rod": [
+      "BARRASKEWDA",
+      "QWILFISH",
+      "WISHIWASHI",
+      "OCTILLERY",
+      "FLOATZEL"
+    ]
+  },
+  "MAP_ROUTE108": {
+    "region": "west",
+    "cap": 55,
+    "why": "Shipwreck approach: retain Inclement Frillish and Finneon; authored Lapras and Dhelmise make exploration of the wreck waters distinctive. Lapras is a 2% ordinary Surf discovery here, with more plentiful later cold-water homes.",
+    "surf": [
+      "FRILLISH",
+      "DRAGALGE",
+      "LAPRAS",
+      "DHELMISE"
+    ],
+    "old_rod": [
+      "REMORAID",
+      "FINNEON"
+    ],
+    "good_rod": [
+      "QWILFISH",
+      "SEADRA",
+      "WISHIWASHI"
+    ],
+    "super_rod": [
+      "DRAGALGE",
+      "SHARPEDO",
+      "JELLICENT",
+      "BRUXISH",
+      "MAREANIE"
+    ]
+  },
+  "MAP_ROUTE109": {
+    "region": "west",
+    "cap": 30,
+    "why": "Sandy beach: Shellos and Wiglett occupy the shallows; fishing retains a small-fish foundation and later adds shellfish and coastal predators.",
+    "surf": [
+      "SHELLOS",
+      "KINGLER",
+      "PINCURCHIN",
+      "WIGLETT"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "LUVDISC"
+    ],
+    "good_rod": [
+      "OCTILLERY",
+      "CLAUNCHER",
+      "SKRELP"
+    ],
+    "super_rod": [
+      "BRUXISH",
+      "KINGLER",
+      "CLOYSTER",
+      "STARYU",
+      "CARVANHA"
+    ]
+  },
+  "MAP_SLATEPORT_CITY": {
+    "region": "west",
+    "cap": 30,
+    "why": "Harbor: retain Inclement Horsea/Frillish early fishing to distinguish the port from neighboring beaches; later rods add their evolutions and wreck-associated Dhelmise.",
+    "surf": [
+      "TENTACOOL",
+      "PYUKUMUKU",
+      "CORSOLA",
+      "MANTINE"
+    ],
+    "old_rod": [
+      "HORSEA",
+      "FRILLISH"
+    ],
+    "good_rod": [
+      "SKRELP",
+      "SHELLDER",
+      "STARYU"
+    ],
+    "super_rod": [
+      "KINGDRA",
+      "DRAGALGE",
+      "JELLICENT",
+      "WISHIWASHI",
+      "DHELMISE"
+    ]
+  },
+  "MAP_ROUTE110": {
+    "region": "west",
+    "cap": 30,
+    "why": "Estuary beside the cycling road: early Tadbulb and Chinchou supply Electric options; Surf and later rods develop the brackish-water population.",
+    "surf": [
+      "FINNEON",
+      "PELIPPER",
+      "JELLICENT",
+      "CORSOLA"
+    ],
+    "old_rod": [
+      "TADBULB",
+      "CHINCHOU"
+    ],
+    "good_rod": [
+      "CHINCHOU",
+      "HORSEA",
+      "WISHIWASHI"
+    ],
+    "super_rod": [
+      "LANTURN",
+      "DRAGALGE",
+      "SHARPEDO",
+      "CLAWITZER",
+      "SEADRA"
+    ]
+  },
+  "MAP_ROUTE111": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Inland ponds: retain Inclement Barboach/Goldeen fishing and Basculin; authored Wooper, Palpitoad and larger freshwater residents expand later methods. Dratini is a 2% ordinary Surf visitor here; Meteor Falls remains its principal habitat.",
+    "surf": [
+      "WOOPER",
+      "WHISCASH",
+      "DREDNAW",
+      "DRATINI"
+    ],
+    "old_rod": [
+      "BARBOACH",
+      "GOLDEEN"
+    ],
+    "good_rod": [
+      "BASCULIN",
+      "PALPITOAD",
+      "DREDNAW"
+    ],
+    "super_rod": [
+      "WHISCASH",
+      "GOLDUCK",
+      "LOMBRE",
+      "QUAGSIRE",
+      "GASTRODON"
+    ]
+  },
+  "MAP_ROUTE114": {
+    "region": "inland",
+    "cap": 40,
+    "why": "Mountain river and Good Rod gift: preserve Inclement Wishiwashi/Barboach and Quagsire; authored Buizel, Basculin and Shellos diversify the river.",
+    "surf": [
+      "BUIZEL",
+      "BASCULIN",
+      "SHELLOS",
+      "QUAGSIRE"
+    ],
+    "old_rod": [
+      "WISHIWASHI",
+      "BARBOACH"
+    ],
+    "good_rod": [
+      "WHISCASH",
+      "GOLDUCK",
+      "LOMBRE"
+    ],
+    "super_rod": [
+      "FLOATZEL",
+      "BASCULIN",
+      "LANTURN",
+      "POLIWHIRL",
+      "DRATINI"
+    ]
+  },
+  "MAP_ROUTE115": {
+    "region": "west",
+    "cap": 14,
+    "why": "Northern rocky shore: retain Inclement Wishiwashi/Wailmer fishing; authored Krabby, Barbaracle and Shellos distinguish Surf, with Wailord on the later rod.",
+    "surf": [
+      "KRABBY",
+      "BARBARACLE",
+      "SHELLOS",
+      "WAILMER"
+    ],
+    "old_rod": [
+      "WISHIWASHI",
+      "WAILMER"
+    ],
+    "good_rod": [
+      "STARYU",
+      "CLAMPERL",
+      "QWILFISH"
+    ],
+    "super_rod": [
+      "CLAWITZER",
+      "DRAGALGE",
+      "WAILORD",
+      "LUVDISC",
+      "QWILFISH"
+    ]
+  },
+  "MAP_ROUTE117": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Day-Care ponds: authored Paldean Wooper and Tympole give the early inland route a distinct niche; retain Inclement Corphish through the Good Rod.",
+    "surf": [
+      "LOTAD",
+      "SWANNA",
+      "SEAKING",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "WOOPER_PALDEA",
+      "TYMPOLE"
+    ],
+    "good_rod": [
+      "GOLDEEN",
+      "CARVANHA",
+      "CORPHISH"
+    ],
+    "super_rod": [
+      "LOMBRE",
+      "QUAGSIRE",
+      "WHISCASH",
+      "CRAWDAUNT",
+      "POLITOED"
+    ]
+  },
+  "MAP_ROUTE118": {
+    "region": "inland",
+    "cap": 30,
+    "why": "River mouth: retain Inclement Tentacool and Carvanha alongside authored Shellos and Basculin; Aqua Tauros is a later Surf discovery, not an opening fishing catch.",
+    "surf": [
+      "TENTACOOL",
+      "SHELLOS",
+      "BASCULIN",
+      "TAUROS_PALDEA_AQUA"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "CARVANHA"
+    ],
+    "good_rod": [
+      "CHINCHOU",
+      "PSYDUCK",
+      "LOMBRE"
+    ],
+    "super_rod": [
+      "SEAKING",
+      "WHISCASH",
+      "CRAWDAUNT",
+      "BASCULIN_BLUE_STRIPED",
+      "DRATINI"
+    ]
+  },
+  "MAP_ROUTE119": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Rainforest river: retain Inclement eastern Gastrodon and Floatzel, with Poliwag and Tympole. Feebas is exclusive to the original seeded fishing spots, using any rod; ordinary tables do not contain it. Feebas evolves into Milotic; the ordinary tables do not offer Milotic directly.",
+    "surf": [
+      "GASTRODON_EAST",
+      "FLOATZEL",
+      "POLIWAG",
+      "POLIWHIRL"
+    ],
+    "old_rod": [
+      "CARVANHA",
+      "TYMPOLE"
+    ],
+    "good_rod": [
+      "BASCULIN",
+      "QUAGSIRE",
+      "SEAKING"
+    ],
+    "super_rod": [
+      "LANTURN",
+      "POLIWHIRL",
+      "DREDNAW",
+      "SHARPEDO",
+      "POLIWHIRL"
+    ]
+  },
+  "MAP_ROUTE120": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Rain-fed ponds: preserve Inclement Stunfisk, Azumarill and Masquerain; authored Chewtle and later freshwater evolutions expand the local team options.",
+    "surf": [
+      "AZUMARILL",
+      "STUNFISK",
+      "MASQUERAIN",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "BARBOACH",
+      "MAGIKARP"
+    ],
+    "good_rod": [
+      "SEISMITOAD",
+      "QUAGSIRE",
+      "STUNFISK"
+    ],
+    "super_rod": [
+      "LANTURN",
+      "POLIWHIRL",
+      "DREDNAW",
+      "WHISCASH",
+      "LUDICOLO"
+    ]
+  },
+  "MAP_ROUTE121": {
+    "region": "inland",
+    "cap": 60,
+    "why": "Coastal wetlands: preserve Inclement Pelipper, Frillish, Alomomola and Wailmer rather than replacing the sea with an inland pond; authored Swanna joins Surf.",
+    "surf": [
+      "PELIPPER",
+      "FRILLISH",
+      "ALOMOMOLA",
+      "SWANNA"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "WAILMER"
+    ],
+    "good_rod": [
+      "LANTURN",
+      "WAILMER",
+      "FINNEON"
+    ],
+    "super_rod": [
+      "SHARPEDO",
+      "OCTILLERY",
+      "GYARADOS",
+      "LUMINEON",
+      "JELLICENT"
+    ]
+  },
+  "MAP_ROUTE123": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Freshwater ponds: retain Inclement Goldeen/Corphish fishing; authored Buizel, Swanna, Seismitoad and Chewtle make the return route distinct.",
+    "surf": [
+      "BUIZEL",
+      "SWANNA",
+      "SEISMITOAD",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "GOLDEEN",
+      "CORPHISH"
+    ],
+    "good_rod": [
+      "CRAWDAUNT",
+      "SEISMITOAD",
+      "DREDNAW"
+    ],
+    "super_rod": [
+      "QUAGSIRE",
+      "WHISCASH",
+      "BASCULIN",
+      "LANTURN",
+      "DRATINI"
+    ]
+  },
+  "MAP_ROUTE122": {
+    "region": "east",
+    "cap": 60,
+    "why": "Mt. Pyre waters: retain Inclement Frillish and Wailmer; authored Chinchou, Lapras and later Ghost-water residents reinforce the offshore graveyard habitat.",
+    "surf": [
+      "FRILLISH",
+      "TOXAPEX",
+      "TENTACRUEL",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "WAILMER",
+      "CHINCHOU"
+    ],
+    "good_rod": [
+      "QWILFISH",
+      "SEADRA",
+      "OCTILLERY"
+    ],
+    "super_rod": [
+      "DRAGALGE",
+      "CLAWITZER",
+      "JELLICENT",
+      "BASCULEGION",
+      "DHELMISE"
+    ]
+  },
+  "MAP_LILYCOVE_CITY": {
+    "region": "east",
+    "cap": 60,
+    "why": "Eastern port: preserve Inclement Finneon, Staryu and Bruxish fishing; authored Cramorant, Pyukumuku and Lapras distinguish the bay from Slateport.",
+    "surf": [
+      "CRAMORANT",
+      "PYUKUMUKU",
+      "BRUXISH",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "FINNEON"
+    ],
+    "good_rod": [
+      "CORSOLA",
+      "STARYU",
+      "BRUXISH"
+    ],
+    "super_rod": [
+      "STARMIE",
+      "ALOMOMOLA",
+      "BRUXISH",
+      "BARRASKEWDA",
+      "RELICANTH"
+    ]
+  },
+  "MAP_ROUTE124": {
+    "region": "east",
+    "cap": 60,
+    "why": "Eastern open water: retain Inclement Jellicent and Alomomola, with authored Clamperl and Finizen; later rods develop the shellfish family.",
+    "surf": [
+      "JELLICENT",
+      "ALOMOMOLA",
+      "CLAMPERL",
+      "FINIZEN"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "FINNEON"
+    ],
+    "good_rod": [
+      "OCTILLERY",
+      "CORSOLA",
+      "DRAGALGE"
+    ],
+    "super_rod": [
+      "HUNTAIL",
+      "GOREBYSS",
+      "WAILORD",
+      "SHARPEDO",
+      "RELICANTH"
+    ]
+  },
+  "MAP_ROUTE125": {
+    "region": "east",
+    "cap": 60,
+    "why": "Shoal approach: retain Inclement Jellicent and Finneon, but restore the authored cold-water Spheal, Dewgong and Lapras habitat outside the cave.",
+    "surf": [
+      "SPHEAL",
+      "JELLICENT",
+      "DEWGONG",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "FINNEON",
+      "ARROKUDA"
+    ],
+    "good_rod": [
+      "LANTURN",
+      "SHARPEDO",
+      "SEADRA"
+    ],
+    "super_rod": [
+      "QWILFISH",
+      "WALREIN",
+      "DEWGONG",
+      "DRAGALGE",
+      "QWILFISH_HISUI"
+    ]
+  },
+  "MAP_ROUTE126": {
+    "region": "east",
+    "cap": 60,
+    "why": "Sootopolis outer reef: keep Inclement Alomomola and Sharpedo; authored Wishiwashi and Mantine broaden Surf, with Aqua Tauros reserved for the later rod.",
+    "surf": [
+      "ALOMOMOLA",
+      "WISHIWASHI",
+      "MANTINE",
+      "SHARPEDO"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "FINNEON"
+    ],
+    "good_rod": [
+      "CLAWITZER",
+      "SEADRA",
+      "OCTILLERY"
+    ],
+    "super_rod": [
+      "ALOMOMOLA",
+      "BRUXISH",
+      "TAUROS_PALDEA_AQUA",
+      "DRAGALGE",
+      "CORSOLA"
+    ]
+  },
+  "MAP_ROUTE127": {
+    "region": "east",
+    "cap": 60,
+    "why": "Eastern reef: retain Inclement Alomomola and Frillish fishing while restoring the authored Mareanie, Pyukumuku and Bruxish niche.",
+    "surf": [
+      "MAREANIE",
+      "PYUKUMUKU",
+      "ALOMOMOLA",
+      "BRUXISH"
+    ],
+    "old_rod": [
+      "FINNEON",
+      "FRILLISH"
+    ],
+    "good_rod": [
+      "DRAGALGE",
+      "QWILFISH",
+      "LUVDISC"
+    ],
+    "super_rod": [
+      "TOXAPEX",
+      "DRAGALGE",
+      "BARRASKEWDA",
+      "WAILORD",
+      "RELICANTH"
+    ]
+  },
+  "MAP_ROUTE128": {
+    "region": "east",
+    "cap": 60,
+    "why": "Seafloor approach: preserve Inclement Luvdisc/Corsola fishing and Jellicent/Alomomola Surf; authored Wailmer and Finizen diversify the offshore route.",
+    "surf": [
+      "WAILMER",
+      "JELLICENT",
+      "ALOMOMOLA",
+      "FINIZEN"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "LUVDISC"
+    ],
+    "good_rod": [
+      "SHARPEDO",
+      "CORSOLA",
+      "BARRASKEWDA"
+    ],
+    "super_rod": [
+      "BARRASKEWDA",
+      "JELLICENT",
+      "SHARPEDO",
+      "LANTURN",
+      "LAPRAS"
+    ]
+  },
+  "MAP_MOSSDEEP_CITY": {
+    "region": "east",
+    "cap": 60,
+    "why": "Super Rod port: keep Inclement Floatzel and Finneon, with authored Cramorant, Staryu and Finizen; the new rod immediately offers Starmie and larger marine partners.",
+    "surf": [
+      "CRAMORANT",
+      "STARYU",
+      "FLOATZEL",
+      "FINIZEN"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "FINNEON"
+    ],
+    "good_rod": [
+      "CORSOLA",
+      "QWILFISH",
+      "WAILMER"
+    ],
+    "super_rod": [
+      "STARMIE",
+      "SHARPEDO",
+      "LANTURN",
+      "SEADRA",
+      "WAILORD"
+    ]
+  },
+  "MAP_EVER_GRANDE_CITY": {
+    "region": "east",
+    "cap": 80,
+    "why": "League coast: keep Inclement Tentacruel, Luvdisc and the Mareanie family; authored Mantine, Pyukumuku and Lapras distinguish this final mainland shore.",
+    "surf": [
+      "TENTACRUEL",
+      "MANTINE",
+      "PYUKUMUKU",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "LUVDISC",
+      "HORSEA"
+    ],
+    "good_rod": [
+      "QWILFISH",
+      "CORSOLA",
+      "MAREANIE"
+    ],
+    "super_rod": [
+      "KINGDRA",
+      "LAPRAS",
+      "GYARADOS",
+      "TOXAPEX",
+      "CLOYSTER"
+    ]
+  },
+  "MAP_ROUTE129": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Southern open sea: retain Inclement Tentacruel, Alomomola and Wailord; authored Lapras and deep-water rod residents reward the longer sea route.",
+    "surf": [
+      "TENTACRUEL",
+      "ALOMOMOLA",
+      "WAILORD",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "FINNEON",
+      "CHINCHOU"
+    ],
+    "good_rod": [
+      "QWILFISH",
+      "BARRASKEWDA",
+      "BRUXISH"
+    ],
+    "super_rod": [
+      "WAILORD",
+      "LAPRAS",
+      "MANTINE",
+      "RELICANTH",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_ROUTE130": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Southern channel: keep Inclement Alomomola and Wailord, add authored Frillish and Wishiwashi, and reserve the unusual Hisuian fish for the Super Rod.",
+    "surf": [
+      "FRILLISH",
+      "WISHIWASHI",
+      "ALOMOMOLA",
+      "WAILORD"
+    ],
+    "old_rod": [
+      "FINNEON",
+      "REMORAID"
+    ],
+    "good_rod": [
+      "SEADRA",
+      "BARRASKEWDA",
+      "BRUXISH"
+    ],
+    "super_rod": [
+      "BRUXISH",
+      "STARMIE",
+      "QWILFISH_HISUI",
+      "RELICANTH",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_ROUTE131": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Ancient southern reef: retain Inclement Tentacruel and Lumineon; authored Clamperl and Relicanth establish the habitat, with Omastar and shellfish evolutions on the Super Rod.",
+    "surf": [
+      "CLAMPERL",
+      "TENTACRUEL",
+      "RELICANTH",
+      "LUMINEON"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "RELICANTH"
+    ],
+    "good_rod": [
+      "SHELLDER",
+      "CLAMPERL",
+      "LUVDISC"
+    ],
+    "super_rod": [
+      "RELICANTH",
+      "OMASTAR",
+      "HUNTAIL",
+      "GOREBYSS",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_PACIFIDLOG_TOWN": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Floating village: preserve Inclement Skrelp fishing and Dhelmise on the Super Rod; authored Cramorant, Mantine and Finizen suit the inhabited shallows.",
+    "surf": [
+      "CRAMORANT",
+      "PELIPPER",
+      "MANTINE",
+      "FINIZEN"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "SKRELP"
+    ],
+    "good_rod": [
+      "CLAMPERL",
+      "WAILMER",
+      "BRUXISH"
+    ],
+    "super_rod": [
+      "RELICANTH",
+      "DRAGALGE",
+      "DHELMISE",
+      "GOREBYSS",
+      "LAPRAS"
+    ]
+  },
+  "MAP_ROUTE132": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Fast currents: keep Inclement Jellicent and Wailord, restore authored Barraskewda and Finizen, and retain the Horsea family through later rods.",
+    "surf": [
+      "JELLICENT",
+      "BARRASKEWDA",
+      "WAILORD",
+      "FINIZEN"
+    ],
+    "old_rod": [
+      "ARROKUDA",
+      "TENTACOOL"
+    ],
+    "good_rod": [
+      "BRUXISH",
+      "HORSEA",
+      "QWILFISH_HISUI"
+    ],
+    "super_rod": [
+      "BARRASKEWDA",
+      "SHARPEDO",
+      "FLOATZEL",
+      "SEADRA",
+      "KINGDRA"
+    ]
+  },
+  "MAP_ROUTE133": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Western current return: retain Inclement Pelipper and Wailord; authored Dragalge and Mantine add coastal variety, with Skrelp available before its evolution.",
+    "surf": [
+      "PELIPPER",
+      "DRAGALGE",
+      "MANTINE",
+      "WAILORD"
+    ],
+    "old_rod": [
+      "SKRELP",
+      "TENTACOOL"
+    ],
+    "good_rod": [
+      "CLAWITZER",
+      "HORSEA",
+      "QWILFISH"
+    ],
+    "super_rod": [
+      "LANTURN",
+      "WALREIN",
+      "DRAGALGE",
+      "KINGLER",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_ROUTE134": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Deep current outlet: retain Inclement Jellicent and the Horsea line in fishing; authored Seel, Clamperl and Gorebyss distinguish Surf and preserve shellfish diversity.",
+    "surf": [
+      "SEEL",
+      "CLAMPERL",
+      "JELLICENT",
+      "GOREBYSS"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "RELICANTH"
+    ],
+    "good_rod": [
+      "LANTURN",
+      "HORSEA",
+      "CLAMPERL"
+    ],
+    "super_rod": [
+      "HUNTAIL",
+      "GOREBYSS",
+      "RELICANTH",
+      "CLAWITZER",
+      "KINGDRA"
+    ]
+  },
+  "MAP_SOOTOPOLIS_CITY": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Enclosed crater lake: preserve Inclement Magikarp and Gyarados as the dominant family; authored Wishiwashi and Finizen add variety without importing the whole outer reef.",
+    "surf": [
+      "MAGIKARP",
+      "GYARADOS",
+      "WISHIWASHI",
+      "FINIZEN"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "TENTACOOL"
+    ],
+    "good_rod": [
+      "SEADRA",
+      "QWILFISH_HISUI",
+      "LANTURN"
+    ],
+    "super_rod": [
+      "ALOMOMOLA",
+      "GYARADOS",
+      "ALOMOMOLA",
+      "WISHIWASHI",
+      "FINIZEN"
+    ]
+  },
+  "MAP_SEAFLOOR_CAVERN_ENTRANCE": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Marine cave entrance: retain Inclement Tentacruel and Golbat, with authored Clamperl and Lanturn; Chinchou fishing develops the light-bearing cave resident.",
+    "surf": [
+      "TENTACRUEL",
+      "GOLBAT",
+      "CLAMPERL",
+      "LANTURN"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "CHINCHOU"
+    ],
+    "good_rod": [
+      "RELICANTH",
+      "DRAGALGE",
+      "CLAWITZER"
+    ],
+    "super_rod": [
+      "QWILFISH_HISUI",
+      "QWILFISH",
+      "OCTILLERY",
+      "SEADRA",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM6": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Fast cave water: keep Inclement Golbat among authored Frillish, Dragalge and Barraskewda; later fishing offers Kingdra and other strong marine residents.",
+    "surf": [
+      "FRILLISH",
+      "GOLBAT",
+      "DRAGALGE",
+      "BARRASKEWDA"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "QWILFISH"
+    ],
+    "good_rod": [
+      "SHELLDER",
+      "BRUXISH",
+      "CLAMPERL"
+    ],
+    "super_rod": [
+      "KINGDRA",
+      "TENTACRUEL",
+      "DRAGALGE",
+      "BARRASKEWDA",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM7": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Deep cave pool: retain Inclement Tentacruel fishing while restoring authored Clamperl, Wishiwashi and both shellfish evolutions to distinguish the inner chamber.",
+    "surf": [
+      "CLAMPERL",
+      "WISHIWASHI",
+      "HUNTAIL",
+      "GOREBYSS"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "RELICANTH"
+    ],
+    "good_rod": [
+      "LANTURN",
+      "CLAMPERL",
+      "TENTACRUEL"
+    ],
+    "super_rod": [
+      "SHELLDER",
+      "BARRASKEWDA",
+      "BRUXISH",
+      "CLAMPERL",
+      "BASCULEGION"
+    ]
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM": {
+    "region": "ice",
+    "cap": 60,
+    "why": "Cold cave entrance: retain Inclement Spheal and Lapras; authored Avalugg and Sealeo broaden the ice habitat, while native Slowpoke remains available by fishing.",
+    "surf": [
+      "SPHEAL",
+      "AVALUGG",
+      "SEALEO",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "SHELLDER"
+    ],
+    "good_rod": [
+      "LANTURN",
+      "SLOWPOKE",
+      "LUVDISC"
+    ],
+    "super_rod": [
+      "WALREIN",
+      "DEWGONG",
+      "QWILFISH_HISUI",
+      "CLAMPERL",
+      "LAPRAS"
+    ]
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM": {
+    "region": "ice",
+    "cap": 60,
+    "why": "Inner cold pool: retain Inclement Golbat, Lapras and the Slowpoke family; authored Walrein and Clamperl distinguish this chamber from the entrance.",
+    "surf": [
+      "WALREIN",
+      "CLAMPERL",
+      "GOLBAT",
+      "LAPRAS"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "CLAMPERL"
+    ],
+    "good_rod": [
+      "RELICANTH",
+      "SLOWPOKE",
+      "WALREIN"
+    ],
+    "super_rod": [
+      "LANTURN",
+      "SLOWBRO",
+      "CLOYSTER",
+      "QWILFISH_HISUI",
+      "DEWGONG"
+    ]
+  },
+  "MAP_METEOR_FALLS_1F_1R": {
+    "region": "inland",
+    "cap": 40,
+    "why": "Meteor river entrance: preserve Inclement early Barboach/Dratini and the dragon family; authored Buizel and Whiscash supply river residents alongside the native cave bat.",
+    "surf": [
+      "BUIZEL",
+      "DRATINI",
+      "GOLBAT",
+      "WHISCASH"
+    ],
+    "old_rod": [
+      "BARBOACH",
+      "DRATINI"
+    ],
+    "good_rod": [
+      "CRAWDAUNT",
+      "WHISCASH",
+      "BUIZEL"
+    ],
+    "super_rod": [
+      "FLOATZEL",
+      "WHISCASH",
+      "CRAWDAUNT",
+      "DRAGONAIR",
+      "DRAGONITE"
+    ]
+  },
+  "MAP_METEOR_FALLS_1F_2R": {
+    "region": "inland",
+    "cap": 40,
+    "why": "Upper meteor pools: preserve Inclement Dratini and Lunatone cave identity; authored Basculin and Poliwhirl add river variety, with Lapras on later rods.",
+    "surf": [
+      "BASCULIN",
+      "DRATINI",
+      "LUNATONE",
+      "POLIWHIRL"
+    ],
+    "old_rod": [
+      "BARBOACH",
+      "DRATINI"
+    ],
+    "good_rod": [
+      "WHISCASH",
+      "LAPRAS",
+      "BASCULIN"
+    ],
+    "super_rod": [
+      "WHISCASH",
+      "LAPRAS",
+      "WHISCASH",
+      "SEISMITOAD",
+      "DRAGONAIR"
+    ]
+  },
+  "MAP_METEOR_FALLS_B1F_1R": {
+    "region": "inland",
+    "cap": 60,
+    "why": "Deep dragon pool: retain Inclement Dratini, Dragonair and Solrock identity; authored Basculin and Kingdra develop the late cave habitat.",
+    "surf": [
+      "DRATINI",
+      "BASCULIN",
+      "DRAGONAIR",
+      "SOLROCK"
+    ],
+    "old_rod": [
+      "BARBOACH",
+      "DRATINI"
+    ],
+    "good_rod": [
+      "CRAWDAUNT",
+      "SEISMITOAD",
+      "DREDNAW"
+    ],
+    "super_rod": [
+      "DRAGONAIR",
+      "KINGDRA",
+      "DRATINI",
+      "DRAGONITE",
+      "KINGDRA"
+    ]
+  },
+  "MAP_METEOR_FALLS_B1F_2R": {
+    "region": "inland",
+    "cap": 60,
+    "why": "Quiet deep pool: retain Inclement Dratini fishing and cave Golbat; authored Slowpoke, Quagsire and Poliwhirl give the chamber a different freshwater roster.",
+    "surf": [
+      "SLOWPOKE",
+      "QUAGSIRE",
+      "GOLBAT",
+      "POLIWHIRL"
+    ],
+    "old_rod": [
+      "BARBOACH",
+      "DRATINI"
+    ],
+    "good_rod": [
+      "BASCULIN",
+      "SHARPEDO",
+      "OCTILLERY"
+    ],
+    "super_rod": [
+      "SEISMITOAD",
+      "DREDNAW",
+      "KINGDRA",
+      "KINGDRA",
+      "POLIWRATH"
+    ]
+  },
+  "MAP_PETALBURG_WOODS_3": {
+    "region": "inland",
+    "cap": 14,
+    "why": "Woodland pond: retain Inclement Poliwag/Slowpoke fishing and both final Poli evolutions; authored Lotad and Chewtle add forest-pond variety.",
+    "surf": [
+      "POLIWAG",
+      "SLOWPOKE",
+      "LOTAD",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "POLIWAG",
+      "SLOWPOKE"
+    ],
+    "good_rod": [
+      "SLOWPOKE",
+      "POLIWAG",
+      "POLIWHIRL"
+    ],
+    "super_rod": [
+      "SLOWBRO",
+      "LUDICOLO",
+      "POLIWRATH",
+      "POLITOED",
+      "SEISMITOAD"
+    ]
+  },
+  "MAP_SAFARI_ZONE_NORTHWEST": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Safari sludge habitat: preserve Inclement Alolan Grimer/Muk and ordinary Grimer/Muk access; authored Golduck remains a secondary pond resident.",
+    "surf": [
+      "GRIMER_ALOLA",
+      "MUK_ALOLA",
+      "GRIMER",
+      "GOLDUCK"
+    ],
+    "old_rod": [
+      "GRIMER_ALOLA",
+      "GRIMER"
+    ],
+    "good_rod": [
+      "GRIMER_ALOLA",
+      "MUK_ALOLA",
+      "GOLDUCK"
+    ],
+    "super_rod": [
+      "MUK",
+      "MUK_ALOLA",
+      "QUAGSIRE",
+      "FLOATZEL",
+      "DRATINI"
+    ]
+  },
+  "MAP_SAFARI_ZONE_SOUTHEAST": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Safari freshwater pool: preserve Inclement Wooper, Quagsire and the Dratini fishing family; authored Swanna and Chewtle add local diversity.",
+    "surf": [
+      "WOOPER",
+      "QUAGSIRE",
+      "SWANNA",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "REMORAID",
+      "DRATINI"
+    ],
+    "good_rod": [
+      "CRAWDAUNT",
+      "DRAGONAIR",
+      "GOLDUCK"
+    ],
+    "super_rod": [
+      "DREDNAW",
+      "SHARPEDO",
+      "DRAGONAIR",
+      "AZUMARILL",
+      "DRAGONITE"
+    ]
+  },
+  "MAP_SAFARI_ZONE_SOUTHWEST": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Safari marsh: preserve Inclement Stunfisk, Sliggoo and Seismitoad; authored Slowpoke complements the marsh, with freshwater fish on the rods.",
+    "surf": [
+      "STUNFISK",
+      "SLIGGOO",
+      "SEISMITOAD",
+      "SLOWPOKE"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "GOLDEEN"
+    ],
+    "good_rod": [
+      "BASCULIN",
+      "LOMBRE",
+      "QUAGSIRE"
+    ],
+    "super_rod": [
+      "OCTILLERY",
+      "GOLDUCK",
+      "SEAKING",
+      "WHISCASH",
+      "DRATINI"
+    ]
+  },
+  "MAP_SANDSTREWN_RUINS": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Ancient isolated pool: retain Inclement Relicanth in every method and as the dominant Surf resident; authored Whiscash and Chewtle add limited freshwater variety.",
+    "surf": [
+      "RELICANTH",
+      "RELICANTH",
+      "WHISCASH",
+      "CHEWTLE"
+    ],
+    "old_rod": [
+      "RELICANTH",
+      "BARBOACH"
+    ],
+    "good_rod": [
+      "RELICANTH",
+      "CARVANHA",
+      "OCTILLERY"
+    ],
+    "super_rod": [
+      "RELICANTH",
+      "DREDNAW",
+      "GOLDUCK",
+      "LOMBRE",
+      "RELICANTH"
+    ]
+  },
+  "MAP_SCORCHED_SLAB_B1F": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Rocky underground pool: retain Inclement Golbat/Crobat and Barboach fishing; authored Slowbro and Gastrodon diversify the water without erasing the cave bats.",
+    "surf": [
+      "GOLBAT",
+      "CROBAT",
+      "SLOWBRO",
+      "GASTRODON"
+    ],
+    "old_rod": [
+      "GOLDEEN",
+      "BARBOACH"
+    ],
+    "good_rod": [
+      "SLOWBRO",
+      "GASTRODON",
+      "WHISCASH"
+    ],
+    "super_rod": [
+      "SLOWBRO",
+      "GASTRODON",
+      "WHISCASH",
+      "QUAGSIRE",
+      "DRATINI"
+    ]
+  },
+  "MAP_SEASPRAY_CAVE": {
+    "region": "west",
+    "cap": 30,
+    "why": "Coastal cave: Tynamo keeps the electric-eel family at the local stage; preserve Inclement Quagsire and Wishiwashi/Krabby fishing while authored Binacle and Clamperl add shellfish.",
+    "surf": [
+      "QUAGSIRE",
+      "TYNAMO",
+      "BINACLE",
+      "CLAMPERL"
+    ],
+    "old_rod": [
+      "WISHIWASHI",
+      "KRABBY"
+    ],
+    "good_rod": [
+      "CHINCHOU",
+      "RELICANTH",
+      "KRABBY"
+    ],
+    "super_rod": [
+      "LANTURN",
+      "KINGLER",
+      "CLOYSTER",
+      "CLAMPERL",
+      "MAREANIE"
+    ]
+  },
+  "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS": {
+    "region": "east",
+    "cap": 55,
+    "why": "Submerged wreck: preserve Inclement Frillish/Skrelp fishing and Dhelmise; authored Dragalge broadens Surf without diluting the ghost-and-kelp habitat.",
+    "surf": [
+      "FRILLISH",
+      "JELLICENT",
+      "DRAGALGE",
+      "DHELMISE"
+    ],
+    "old_rod": [
+      "FRILLISH",
+      "SKRELP"
+    ],
+    "good_rod": [
+      "SKRELP",
+      "FRILLISH",
+      "DHELMISE"
+    ],
+    "super_rod": [
+      "DRAGALGE",
+      "DHELMISE",
+      "SHARPEDO",
+      "LANTURN",
+      "JELLICENT"
+    ]
+  },
+  "MAP_ABANDONED_SHIP_ROOMS_B1F": {
+    "region": "east",
+    "cap": 55,
+    "why": "Flooded hull: retain Inclement Frillish/Skrelp fishing; restore authored Golisopod, Mareanie and Barbaracle as wreck-dwelling Surf residents.",
+    "surf": [
+      "FRILLISH",
+      "MAREANIE",
+      "GOLISOPOD",
+      "BARBARACLE"
+    ],
+    "old_rod": [
+      "FRILLISH",
+      "SKRELP"
+    ],
+    "good_rod": [
+      "CORSOLA",
+      "SHELLDER",
+      "DHELMISE"
+    ],
+    "super_rod": [
+      "CLAWITZER",
+      "OCTILLERY",
+      "QWILFISH",
+      "BARBARACLE",
+      "DHELMISE"
+    ]
+  },
+  "MAP_ALTERING_CAVE_B1F": {
+    "region": "inland",
+    "cap": 100,
+    "why": "Unusual cave pool: keep Inclement western Gastrodon and Whiscash fishing; authored Basculegion, Jellicent and Malamar give this optional cavern its distinct roster.",
+    "surf": [
+      "GASTRODON",
+      "BASCULEGION",
+      "JELLICENT",
+      "MALAMAR"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "BARBOACH"
+    ],
+    "good_rod": [
+      "MALAMAR",
+      "WHISCASH",
+      "SLOWBRO"
+    ],
+    "super_rod": [
+      "CRAWDAUNT",
+      "BASCULEGION",
+      "JELLICENT",
+      "SEISMITOAD",
+      "SLOWBRO"
+    ]
+  },
+  "MAP_VICTORY_ROAD_B2F": {
+    "region": "inland",
+    "cap": 80,
+    "why": "Final cave water: retain Inclement Dewgong, Lapras and Barboach/Basculin fishing; authored Floatzel and Dragonair add late-campaign options.",
+    "surf": [
+      "DEWGONG",
+      "LAPRAS",
+      "FLOATZEL",
+      "DRAGONAIR"
+    ],
+    "old_rod": [
+      "MAGIKARP",
+      "BARBOACH"
+    ],
+    "good_rod": [
+      "LANTURN",
+      "BASCULIN",
+      "SEISMITOAD"
+    ],
+    "super_rod": [
+      "DREDNAW",
+      "CRAWDAUNT",
+      "CRAWDAUNT",
+      "BASCULIN",
+      "DRAGONAIR"
+    ]
+  }
 }

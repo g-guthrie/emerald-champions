@@ -41,25 +41,15 @@ MarineCave_End_EventScript_Kyogre:: @ 823B01B
 	setwildbattle SPECIES_KYOGRE, VAR_0x800A, ITEM_WATER_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq MarineCave_End_EventScript_DefeatedKyogre
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq MarineCave_End_EventScript_RanFromKyogre
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq MarineCave_End_EventScript_RanFromKyogre
+	@ Only a capture resolves it; a knockout or escape lets it be met again,
+	@ like every other static legendary (its Orb comes with the capture).
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, MarineCave_End_EventScript_RanFromKyogre
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
 	releaseall
-	end
-
-MarineCave_End_EventScript_DefeatedKyogre:: @ 823B084
-	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	setflag FLAG_DEFEATED_KYOGRE
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 MarineCave_End_EventScript_RanFromKyogre:: @ 823B092

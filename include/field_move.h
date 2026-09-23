@@ -26,8 +26,8 @@ struct FieldMoveInfo
     u32 partyMsgID:7;
     u32 arg:8;
     u32 hideIfLocked:1;
-    // Emerald Champions: obstacle moves are used by pressing A on the
-    // obstacle, so they never appear in a Pokémon's party menu.
+    // Obstacle moves normally use A at the obstacle. Cut is also exposed in
+    // the party menu for Inclement's optional grass-clearing action.
     u32 hideInPartyMenu:1;
     // Emerald Champions: a field move never occupies a battle move slot. A move
     // marked here is offered in the party menu to any member whose species could
@@ -42,13 +42,7 @@ extern const struct FieldMoveUnlock gFieldMoveUnlocks[];
 u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck);
 bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move);
 
-static inline bool32 FieldMove_IsHM(enum FieldMove fieldMove)
-{
-    return fieldMove == FIELD_MOVE_CUT || fieldMove == FIELD_MOVE_FLASH
-        || fieldMove == FIELD_MOVE_ROCK_SMASH || fieldMove == FIELD_MOVE_STRENGTH
-        || fieldMove == FIELD_MOVE_SURF || fieldMove == FIELD_MOVE_FLY
-        || fieldMove == FIELD_MOVE_DIVE || fieldMove == FIELD_MOVE_WATERFALL;
-}
+bool32 FieldMove_IsHM(enum FieldMove fieldMove);
 
 static inline bool32 SetUpFieldMove(enum FieldMove fieldMove)
 {

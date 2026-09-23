@@ -4,7 +4,6 @@
 
 .set LOCALID_MAGMA_GRUNT_1, 26
 
-
 MtChimney_MapScripts:: @ 822EDC1
 	map_script MAP_SCRIPT_ON_RESUME, MtChimney_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, MtChimney_OnTransition
@@ -50,7 +49,7 @@ MtChimney_EventScript_Maxie:: @ 822EE0B
 	applymovement LOCALID_MAXIE, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MtChimney_Text_MaxieIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -113,13 +112,14 @@ MtChimney_EventScript_LavaCookieLady:: @ 822EEF3
 	checkmoney 200
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_NotEnoughMoney
-	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE, 1
-	compare VAR_RESULT, TRUE
-	call_if_eq MtChimney_EventScript_RemoveMoney
+	compare VAR_RESULT, FALSE
+	goto_if_eq MtChimney_EventScript_BagIsFull
 	giveitem ITEM_LAVA_COOKIE
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_BagIsFull
+	call MtChimney_EventScript_RemoveMoney
+	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
 	hidemoneybox
 	release
 	end
@@ -190,209 +190,6 @@ MtChimney_Movement_ArchieExitNorth: @ 822EF9C
 	walk_down
 	step_end
 
-MtChimney_Movement_Unused1: @ 822EFA6
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused2: @ 822EFB8
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused3: @ 822EFC1
-	walk_right
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused4: @ 822EFD0
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused5: @ 822EFE9
-	delay_16
-	delay_16
-	delay_16
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused6: @ 822EFF4
-	delay_16
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused7: @ 822F004
-	delay_16
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused8: @ 822F015
-	delay_16
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_in_place_fast_down
-	step_end
-
-MtChimney_Movement_Unused9: @ 822F01D
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused10: @ 822F02B
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused11: @ 822F02D
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused12: @ 822F035
-	delay_16
-	delay_16
-	walk_in_place_fast_left
-	delay_16
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused13: @ 822F03F
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	walk_in_place_fast_left
-	delay_16
-	walk_down
-	walk_down
-	step_end
-
-MtChimney_Movement_Unused14: @ 822F04A
-	lock_facing_direction
-	walk_fast_left
-	unlock_facing_direction
-	face_right
-	step_end
-
-MtChimney_Movement_Unused15: @ 822F04F
-	walk_left
-	walk_in_place_fast_right
-	delay_16
-	step_end
-
 MtChimney_EventScript_BusyAquaGrunt1:: @ 822F053
 	msgbox MtChimney_Text_MagmaOutnumbersUs, MSGBOX_SIGN
 	end
@@ -408,11 +205,6 @@ MtChimney_EventScript_BusyAquaGrunt3:: @ 822F065
 MtChimney_EventScript_Tabitha:: @ 822F06E
 	trainerbattle_double TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-MtChimney_EventScript_Grunt2:: @ 822F085
-	@ This retired encounter has no campaign battle.
-	msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_BusyMagmaGrunt1:: @ 822F09C
@@ -454,9 +246,11 @@ MtChimney_EventScript_MeteoriteMachine:: @ 822F0E4
 	msgbox MtChimney_Text_RemoveTheMeteorite, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_LeaveMeteoriteAlone
-	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
 	giveitem ITEM_METEORITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_METEORITE
+	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -480,34 +274,8 @@ MtChimney_EventScript_RouteSign:: @ 822F141
 	end
 
 MtChimney_EventScript_Shelby:: @ 822F14A
-	trainerbattle_double TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, EmeraldChampions_Text_NeedTwoPokemon, MtChimney_EventScript_DefeatedShelby
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq MtChimney_EventScript_RematchShelby
-	msgbox MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-MtChimney_EventScript_DefeatedShelby:: @ 822F176
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-MtChimney_EventScript_RematchShelby:: @ 822F195
-	@ This retired encounter has no campaign battle.
-	msgbox MtChimney_Text_ShelbyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-MtChimney_EventScript_Melissa:: @ 822F1AC
-	@ This retired encounter has no campaign battle.
-	msgbox MtChimney_Text_MelissaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-MtChimney_EventScript_Sheila:: @ 822F1C3
-	@ This retired encounter has no campaign battle.
-	msgbox MtChimney_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox MtChimney_Text_ShelbyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Shirley:: @ 822F1DA
@@ -518,28 +286,6 @@ MtChimney_EventScript_Shirley:: @ 822F1DA
 MtChimney_EventScript_Grunt1:: @ 822F1F1
 	trainerbattle_double TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
-	end
-
-MtChimney_EventScript_Sawyer:: @ 822F208
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq MtChimney_EventScript_SawyerRematch
-	msgbox MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-MtChimney_EventScript_SawyerDefeated:: @ 822F234
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox MtChimney_Text_SawyerRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_SAWYER_1
-	release
-	end
-
-MtChimney_EventScript_SawyerRematch:: @ 822F253
-	@ This retired encounter has no campaign battle.
-	msgbox MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_Text_MeteoriteWillActivateVolcano: @ 822F26A
@@ -609,23 +355,6 @@ MtChimney_Text_TabithaPostBattle: @ 822F76D
 	.string "Boss, hurry!\n"
 	.string "Give it the Meteorite's energy!\p"
 	.string "Hehehe…$"
-
-MtChimney_Text_Grunt2Intro: @ 822F7A2
-	.string "We of Team Magma are working hard for\n"
-	.string "everyone's sake.\p"
-	.string "Like, if that thing's power made more\n"
-	.string "land, there'd be more places to live.\p"
-	.string "Everyone'd be happy!$"
-
-MtChimney_Text_Grunt2Defeat: @ 822F83A
-	.string "Hunh?\n"
-	.string "What do you mean I lost?$"
-
-MtChimney_Text_Grunt2PostBattle: @ 822F859
-	.string "Our Boss says, “It will make everyone\n"
-	.string "happy.”\p"
-	.string "But why does everyone keep getting\n"
-	.string "in our way?$"
 
 MtChimney_Text_Grunt1Intro: @ 822F8B6
 	.string "If there were more land, I'd be able\n"
@@ -768,51 +497,6 @@ MtChimney_Text_ShelbyPostBattle: @ 82300A2
 	.string "Well, well, I've lost. I can't call\n"
 	.string "myself an Expert now, can I?$"
 
-MtChimney_Text_ShelbyRegister: @ 82300E3
-	.string "Thank you, child. It was fun, as if\n"
-	.string "I were battling my own grandchild.\p"
-	.string "Please, come see me again for\n"
-	.string "a rematch.$"
-
-MtChimney_Text_ShelbyRematchIntro: @ 8230153
-	.string "If you can mesh your heart with those\n"
-	.string "of your Pokémon, why, you should be\l"
-	.string "able to achieve great things.$"
-
-MtChimney_Text_ShelbyRematchDefeat: @ 82301BB
-	.string "Oh, my goodness.\n"
-	.string "Now, aren't you something!$"
-
-MtChimney_Text_ShelbyPostRematch: @ 82301E7
-	.string "Perhaps your heart has become one\n"
-	.string "with the hearts of your Pokémon.$"
-
-MtChimney_Text_MelissaIntro: @ 823022A
-	.string "I've got the fire in me, baby.\n"
-	.string "I can't stand it! I have to battle!$"
-
-MtChimney_Text_MelissaDefeat: @ 823026D
-	.string "Ooh, that was a scorching-hot match!$"
-
-MtChimney_Text_MelissaPostBattle: @ 8230292
-	.string "The heat of Mt. Chimney warms\n"
-	.string "me up, baby!$"
-
-MtChimney_Text_SheilaIntro: @ 82302BD
-	.string "I've finally made it to Mt. Chimney.\n"
-	.string "I want to make my Pokémon battle!$"
-
-MtChimney_Text_SheilaDefeat: @ 8230304
-	.string "The way you battle…\n"
-	.string "It's like a Mt. Chimney eruption!$"
-
-MtChimney_Text_SheilaPostBattle: @ 823033A
-	.string "Like I said, I've finally made it to\n"
-	.string "Mt. Chimney. It would be a shame if\l"
-	.string "I only do a little sightseeing…\p"
-	.string "I want to get in some battles and buy\n"
-	.string "Cookies as souvenirs.$"
-
 MtChimney_Text_ShirleyIntro: @ 82303DF
 	.string "Since I bathed in the hot springs,\n"
 	.string "I've been feeling great!\l"
@@ -826,30 +510,3 @@ MtChimney_Text_ShirleyPostBattle: @ 8230463
 	.string "I'll have to take another dip in the\n"
 	.string "hot springs. Want to join me?\p"
 	.string "Just joking!$"
-
-MtChimney_Text_SawyerIntro: @ 82304B3
-	.string "This is one fine mountain! Plenty of\n"
-	.string "hot people around for company!$"
-
-MtChimney_Text_SawyerDefeat: @ 82304F7
-	.string "Oh, you're a real firebrand, too!$"
-
-MtChimney_Text_SawyerPostBattle: @ 8230519
-	.string "I think I need a dip in Lavaridge\n"
-	.string "Hot Spring with the locals!$"
-
-MtChimney_Text_SawyerRegister: @ 8230557
-	.string "I like little fireballs like you.\n"
-	.string "Let me register you in my PokéNav.$"
-
-MtChimney_Text_SawyerRematchIntro: @ 823059C
-	.string "I'm happily surrounded by hot people\n"
-	.string "around these parts. I won't lose!$"
-
-MtChimney_Text_SawyerRematchDefeat: @ 82305E3
-	.string "Gosh, you're still the same\n"
-	.string "firebrand as before!$"
-
-MtChimney_Text_SawyerPostRematch: @ 8230614
-	.string "Actually, it really is hot here.\n"
-	.string "I'm overdressed for these parts.$"

@@ -94,6 +94,39 @@ struct SpecialEmote
     u8 emotion;
 };
 
+// Runtime-only: restored objects retain their state while a dynamic palette
+// is unavailable. Their ordinary movement callback retries before drawing.
+static EWRAM_DATA u16 sPendingObjectPalettes = 0;
+STATIC_ASSERT(OBJECT_EVENTS_COUNT <= 16, PendingObjectPaletteMaskFits);
+
+static u32 GetPendingPaletteBitForSprite(const struct Sprite *sprite)
+{
+    if (sPendingObjectPalettes)
+        for (u32 i = 0; i < OBJECT_EVENTS_COUNT; i++)
+            if ((sPendingObjectPalettes & (1u << i))
+             && gObjectEvents[i].spriteId < MAX_SPRITES
+             && sprite == &gSprites[gObjectEvents[i].spriteId])
+                return 1u << i;
+    return 0;
+}
+
+// The old palette was released but the replacement could not load: park the
+// owning object on the pending path so it stays hidden and retries later
+// instead of drawing from a freed slot.
+static void MarkSpritePalettePending(struct Sprite *sprite)
+{
+    for (u32 i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].active && gObjectEvents[i].spriteId < MAX_SPRITES
+         && sprite == &gSprites[gObjectEvents[i].spriteId])
+        {
+            sPendingObjectPalettes |= 1u << i;
+            break;
+        }
+    }
+    sprite->invisible = TRUE;
+}
+
 // Sprite data used throughout
 #define sObjEventId   data[0]
 #define sTypeFuncId   data[1] // Index into corresponding gMovementTypeFuncs_* table
@@ -1320,6 +1353,9 @@ static const u8 sPlayerDirectionToCopyDirection[][4] = {
 
 void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
+    for (u32 i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        if (objectEvent == &gObjectEvents[i])
+            sPendingObjectPalettes &= ~(1u << i);
     *objectEvent = (struct ObjectEvent){};
     objectEvent->localId = LOCALID_PLAYER;
     objectEvent->mapNum = MAP_NUM(MAP_UNDEFINED);
@@ -1624,6 +1660,7 @@ void RemoveObjectEvent(struct ObjectEvent *objectEvent)
     OnOverworldWildEncounterDespawn(objectEvent);
     objectEvent->active = FALSE;
     RemoveObjectEventInternal(objectEvent);
+    sPendingObjectPalettes &= ~(1u << (objectEvent - gObjectEvents));
     // zero potential species info
     objectEvent->graphicsId = objectEvent->shiny = 0;
 }
@@ -1658,7 +1695,10 @@ static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
         if (OW_GFX_COMPRESS)
             tileStart = gSprites[objectEvent->spriteId].sheetTileStart;
         DestroySprite(&gSprites[objectEvent->spriteId]);
-        FieldEffectFreePaletteIfUnused(paletteNum);
+        // A pending restored sprite uses a hidden placeholder slot; it never
+        // acquired that palette and must not release somebody else's load.
+        if (!(sPendingObjectPalettes & (1u << (objectEvent - gObjectEvents))))
+            FieldEffectFreePaletteIfUnused(paletteNum);
         if (OW_GFX_COMPRESS && tileStart)
             FieldEffectFreeTilesIfUnused(tileStart);
     }
@@ -1788,7 +1828,17 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
 
     objectEvent = &gObjectEvents[objectEventId];
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    if (spriteTemplate->paletteTag != TAG_NONE && spriteTemplate->paletteTag != OBJ_EVENT_PAL_TAG_DYNAMIC)
+    if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
+    {
+        u32 paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
+        if (paletteNum == 0xFF)
+        {
+            objectEvent->active = FALSE;
+            return OBJECT_EVENTS_COUNT;
+        }
+        spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
+    }
+    else if (spriteTemplate->paletteTag != TAG_NONE)
         LoadObjectEventPalette(spriteTemplate->paletteTag);
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
@@ -1808,9 +1858,6 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     }
 
     sprite = &gSprites[spriteId];
-    // Use palette from species palette table
-    if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
-        sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
     if (OW_GFX_COMPRESS && sprite->usingSheet)
         sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
     GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
@@ -1919,14 +1966,12 @@ static void CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(u16 graphics
 
 // Loads information from graphicsId, with shininess separate
 // also can write palette tag to the template
-static u32 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId, struct SpriteTemplate *template)
+static u32 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId)
 {
     enum Species species = graphicsId & OBJ_EVENT_MON_SPECIES_MASK;
     bool32 shiny = graphicsId & OBJ_EVENT_MON_SHINY;
     bool32 female = graphicsId & OBJ_EVENT_MON_FEMALE;
     u8 paletteNum = LoadDynamicFollowerPalette(species, shiny, female);
-    if (template)
-        template->paletteTag = GetGraphicsIdForMon(species, shiny, female);
 
     return paletteNum;
 }
@@ -1934,40 +1979,60 @@ static u32 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId, struct Sprit
 // Used to create a sprite using a graphicsId associated with object events.
 u8 CreateObjectGraphicsSpriteWithTag(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u16 paletteTag)
 {
-    struct SpriteTemplate *spriteTemplate;
+    struct SpriteTemplate spriteTemplate;
     const struct SubspriteTable *subspriteTables;
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
-    struct Sprite *sprite;
+    bool32 newPalette = FALSE, newTiles = FALSE;
     u8 spriteId;
+    u16 occupiedPalettes = 0;
 
-    spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
-    CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, spriteTemplate, &subspriteTables);
+    for (spriteId = 0; spriteId < MAX_SPRITES; spriteId++)
+        if (!gSprites[spriteId].inUse)
+            break;
+    if (spriteId == MAX_SPRITES)
+        return MAX_SPRITES;
 
+    CopyObjectGraphicsInfoToSpriteTemplate(graphicsId, callback, &spriteTemplate, &subspriteTables);
+    for (u32 i = 0; i < 16; i++)
+        if (GetSpritePaletteTagByPaletteNum(i) != TAG_NONE)
+            occupiedPalettes |= 1 << i;
 
-    if (OW_GFX_COMPRESS)
+    if (spriteTemplate.paletteTag != TAG_NONE)
     {
-        // Checking only for compressed here so as not to mess with decorations
-        if (graphicsInfo->compressed)
-            spriteTemplate->tileTag = LoadSheetGraphicsInfo(graphicsInfo, graphicsId, NULL);
+        u32 paletteNum;
+        if (spriteTemplate.paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
+            paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId);
+        else
+            paletteNum = LoadObjectEventPalette(spriteTemplate.paletteTag);
+        if (paletteNum == 0xFF)
+            return MAX_SPRITES;
+        spriteTemplate.paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
+        newPalette = !(occupiedPalettes & (1 << paletteNum));
     }
 
-    if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
+    if (OW_GFX_COMPRESS && graphicsInfo->compressed)
     {
-        u32 paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, spriteTemplate);
-        spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
+        u16 tag = graphicsInfo->tileTag == TAG_NONE
+            ? COMP_OW_TILE_TAG_BASE + graphicsId : graphicsInfo->tileTag;
+        newTiles = GetSpriteTileStartByTag(tag) == TAG_NONE;
+        spriteTemplate.tileTag = LoadSheetGraphicsInfo(graphicsInfo, graphicsId, NULL);
     }
-    else if (spriteTemplate->paletteTag != TAG_NONE)
+    if (spriteTemplate.tileTag != TAG_NONE && GetSpriteTileStartByTag(spriteTemplate.tileTag) == TAG_NONE)
+        spriteId = MAX_SPRITES;
+    else
+        spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, x, y, subpriority);
+
+    if (spriteId == MAX_SPRITES)
     {
-        LoadObjectEventPalette(spriteTemplate->paletteTag);
+        if (newTiles)
+            FreeSpriteTilesByTag(spriteTemplate.tileTag);
+        if (newPalette)
+            FreeSpritePaletteByTag(spriteTemplate.paletteTag);
+        return MAX_SPRITES;
     }
-
-    spriteId = CreateSprite(spriteTemplate, x, y, subpriority);
-
-    Free(spriteTemplate);
-
-    if (spriteId != MAX_SPRITES && subspriteTables != NULL)
+    if (subspriteTables != NULL)
     {
-        sprite = &gSprites[spriteId];
+        struct Sprite *sprite = &gSprites[spriteId];
         if (OW_GFX_COMPRESS && graphicsInfo->compressed)
             sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
         SetSubspriteTables(sprite, subspriteTables);
@@ -2004,7 +2069,9 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 16);
     if (spriteTemplate.paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
-        u32 paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, &spriteTemplate);
+        u32 paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId);
+        if (paletteNum == 0xFF)
+            return MAX_SPRITES;
         spriteTemplate.paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
     }
     else if (spriteTemplate.paletteTag != TAG_NONE)
@@ -2114,13 +2181,13 @@ static u32 LoadDynamicFollowerPalette(enum Species species, bool32 shiny, bool32
     u32 paletteNum;
     // Use standalone palette, unless entry is OOB or NULL (fallback to front-sprite-based)
 #if OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
-    if ((shiny && gSpeciesInfo[species].overworldPalette)
-    || (!shiny && gSpeciesInfo[species].overworldShinyPalette))
+    if ((shiny && gSpeciesInfo[species].overworldShinyPalette)
+    || (!shiny && gSpeciesInfo[species].overworldPalette))
     {
         struct SpritePalette spritePalette;
         u16 palTag = species + OBJ_EVENT_MON + (shiny ? OBJ_EVENT_MON_SHINY : 0);
     #if P_GENDER_DIFFERENCES
-        if (female && gSpeciesInfo[species].overworldShinyPaletteFemale != NULL)
+        if (female && (shiny ? gSpeciesInfo[species].overworldShinyPaletteFemale : gSpeciesInfo[species].overworldPaletteFemale) != NULL)
             palTag += OBJ_EVENT_MON_FEMALE;
     #endif
         // palette already loaded
@@ -2128,7 +2195,7 @@ static u32 LoadDynamicFollowerPalette(enum Species species, bool32 shiny, bool32
             return paletteNum;
         spritePalette.tag = palTag;
     #if P_GENDER_DIFFERENCES
-        if (female && gSpeciesInfo[species].overworldPaletteFemale != NULL)
+        if (female && (shiny ? gSpeciesInfo[species].overworldShinyPaletteFemale : gSpeciesInfo[species].overworldPaletteFemale) != NULL)
         {
             if (shiny)
                 spritePalette.data = gSpeciesInfo[species].overworldShinyPaletteFemale;
@@ -2149,22 +2216,54 @@ static u32 LoadDynamicFollowerPalette(enum Species species, bool32 shiny, bool32
     else
 #endif //OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
     {
-        // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more Pokémon
-        // so that palette tags do not overlap
+        u16 tag = GetGraphicsIdForMon(species, shiny, female);
         const u16 *palette = GetMonSpritePalFromSpecies(species, shiny, female); //ETODO
         // palette already loaded
-        if ((paletteNum = IndexOfSpritePaletteTag(species)) < 16)
+        if ((paletteNum = IndexOfSpritePaletteTag(tag)) < 16)
             return paletteNum;
         // Use matching front sprite's normal/shiny palettes
         // Load compressed palette
-        LoadSpritePaletteWithTag(palette, species);
-        paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
+        paletteNum = LoadSpritePaletteWithTag(palette, tag);
     }
 
+    if (paletteNum == 0xFF)
+        return paletteNum;
     if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     return paletteNum;
 }
+
+static void UpdateDynamicFollowerPalette(struct Sprite *sprite, enum Species species, bool32 shiny, bool32 female)
+{
+    u32 pendingBit = GetPendingPaletteBitForSprite(sprite);
+    bool32 inUse = sprite->inUse;
+    sprite->inUse = FALSE;
+    if (!pendingBit)
+        FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
+    sprite->inUse = inUse;
+    u32 paletteNum = LoadDynamicFollowerPalette(species, shiny, female);
+    if (paletteNum != 0xFF)
+    {
+        sprite->oam.paletteNum = paletteNum;
+        sPendingObjectPalettes &= ~pendingBit;
+    }
+    else
+    {
+        MarkSpritePalettePending(sprite);
+    }
+}
+
+#if TESTING
+u32 Test_LoadDynamicFollowerPalette(enum Species species, bool32 shiny, bool32 female)
+{
+    return LoadDynamicFollowerPalette(species, shiny, female);
+}
+
+void Test_UpdateDynamicFollowerPalette(struct Sprite *sprite, enum Species species, bool32 shiny, bool32 female)
+{
+    UpdateDynamicFollowerPalette(sprite, species, shiny, female);
+}
+#endif
 
 // Set graphics & sprite for a follower object event by species & shininess.
 static void FollowerSetGraphics(struct ObjectEvent *objEvent, enum Species species, bool32 shiny, bool32 female)
@@ -2176,10 +2275,7 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, enum Species speci
     {
         struct Sprite *sprite = &gSprites[objEvent->spriteId];
         // Free palette if otherwise unused
-        sprite->inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
-        sprite->inUse = TRUE;
-        sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, shiny, female);
+        UpdateDynamicFollowerPalette(sprite, species, shiny, female);
     }
 }
 
@@ -2216,10 +2312,7 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
 
     if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
-        sprite->inUse = FALSE;
-        FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
-        sprite->inUse = TRUE;
-        sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, shiny, female);
+        UpdateDynamicFollowerPalette(sprite, species, shiny, female);
     }
     else if (i != 0xFF)
     {
@@ -2925,6 +3018,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
 {
     u32 i;
     struct Sprite *sprite;
+    bool32 palettePending = FALSE;
     struct ObjectEvent *objectEvent;
     struct SpriteTemplate spriteTemplate;
     struct SpriteFrameImage spriteFrameImage;
@@ -2944,23 +3038,30 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
 
-    if (OW_GFX_COMPRESS)
-        spriteTemplate.tileTag = LoadSheetGraphicsInfo(graphicsInfo, objectEvent->graphicsId, NULL);
-
     if (spriteTemplate.paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
         u32 paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
-        spriteTemplate.paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
+        palettePending = paletteNum == 0xFF;
+        spriteTemplate.paletteTag = palettePending ? TAG_NONE : GetSpritePaletteTagByPaletteNum(paletteNum);
     }
     else if (spriteTemplate.paletteTag != TAG_NONE)
     {
         LoadObjectEventPalette(spriteTemplate.paletteTag);
     }
 
+    if (OW_GFX_COMPRESS)
+        spriteTemplate.tileTag = LoadSheetGraphicsInfo(graphicsInfo, objectEvent->graphicsId, NULL);
+
     i = CreateSprite(&spriteTemplate, 0, 0, 0);
     if (i != MAX_SPRITES)
     {
         sprite = &gSprites[i];
+        sPendingObjectPalettes &= ~(1u << objectEventId);
+        if (palettePending)
+        {
+            sPendingObjectPalettes |= 1u << objectEventId;
+            sprite->invisible = TRUE;
+        }
         // Use palette from species palette table
         if (OW_GFX_COMPRESS && sprite->usingSheet)
             sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
@@ -3014,22 +3115,42 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8 objectEventId, u8 spriteI
 // Update sprite's palette, freeing old palette if necessary
 static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct Sprite *sprite)
 {
-    // Free palette if otherwise unused
-    sprite->inUse = FALSE;
-    FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
-    sprite->inUse = TRUE;
-    if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF)
+    u32 pendingBit = GetPendingPaletteBitForSprite(sprite);
+    u32 paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
+    if (paletteNum == sprite->oam.paletteNum)
     {
-        sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
-        UpdateSpritePaletteWithWeather(sprite->oam.paletteNum, FALSE);
+        sPendingObjectPalettes &= ~pendingBit;
+        return paletteNum;
     }
-    else
+    bool32 needsLoad = paletteNum == 0xFF;
+    // Free palette if otherwise unused
+    bool32 inUse = sprite->inUse;
+    sprite->inUse = FALSE;
+    if (!pendingBit)
+        FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
+    sprite->inUse = inUse;
+    if (needsLoad)
     {
-        sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+        paletteNum = LoadSpritePalette(spritePalette);
+        if (paletteNum == 0xFF)
+        {
+            MarkSpritePalettePending(sprite);
+            return 0xFF;
+        }
+        UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     }
 
-    return sprite->oam.paletteNum;
+    sprite->oam.paletteNum = paletteNum;
+    sPendingObjectPalettes &= ~pendingBit;
+    return paletteNum;
 }
+
+#if TESTING
+u8 Test_UpdateObjectSpritePalette(const struct SpritePalette *palette, struct Sprite *sprite)
+{
+    return UpdateSpritePalette(palette, sprite);
+}
+#endif
 
 // Find and update based on template's paletteTag
 u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate *template, struct Sprite *sprite)
@@ -3497,7 +3618,7 @@ u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
     {
         if (!gSprites[i].inUse)
         {
-            gSprites[i] = *sprite;
+            CopySpriteToSlot(i, sprite);
             gSprites[i].x = x;
             gSprites[i].y = y;
             gSprites[i].subpriority = subpriority;
@@ -3515,7 +3636,7 @@ u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
     {
         if (!gSprites[i].inUse)
         {
-            gSprites[i] = *sprite;
+            CopySpriteToSlot(i, sprite);
             gSprites[i].x = x;
             gSprites[i].y = y;
             gSprites[i].subpriority = subpriority;
@@ -5337,7 +5458,7 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
     if (OW_FOLLOWERS_COPY_WILD_PKMN
         && (MonKnowsMove(mon = GetFirstLiveMon(), MOVE_TRANSFORM)
          || (ability = GetMonAbility(mon)) == ABILITY_IMPOSTER || ability == ABILITY_ILLUSION)
-        && (Random() & 0xFFFF) < 18 && GetLocalWildMon(FALSE))
+        && (Random() & 0xFFFF) < 18 && GetLocalWildMon(NULL))
     {
         sprite->data[7] = TRANSFORM_TYPE_RANDOM_WILD << 8;
         PlaySE(SE_M_MINIMIZE);
@@ -5382,7 +5503,7 @@ static bool8 UpdateFollowerTransformEffect(struct ObjectEvent *objectEvent, stru
             break;
         case TRANSFORM_TYPE_RANDOM_WILD:
             multi = objectEvent->graphicsId;
-            objectEvent->graphicsId = GetLocalWildMon(FALSE);
+            objectEvent->graphicsId = GetLocalWildMon(NULL);
             if (!objectEvent->graphicsId)
             {
                 objectEvent->graphicsId = multi;
@@ -6436,9 +6557,53 @@ u8 ObjectEventGetHeldMovementActionId(struct ObjectEvent *objectEvent)
     return MOVEMENT_ACTION_NONE;
 }
 
+static bool32 TryRestoreObjectPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u32 bit = 1u << (objectEvent - gObjectEvents);
+    if (!(sPendingObjectPalettes & bit))
+        return TRUE;
+    u16 paletteTag = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->paletteTag;
+    if (paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
+    {
+        u32 paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
+        if (paletteNum == 0xFF)
+        {
+            sprite->invisible = TRUE;
+            return FALSE;
+        }
+        sprite->oam.paletteNum = paletteNum;
+    }
+    else if (paletteTag != TAG_NONE)
+    {
+        u32 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
+        if (paletteIndex == 0xFF
+         || UpdateSpritePalette(&sObjectEventSpritePalettes[paletteIndex], sprite) == 0xFF)
+        {
+            sprite->invisible = TRUE;
+            return FALSE;
+        }
+    }
+    sPendingObjectPalettes &= ~bit;
+    sprite->invisible = objectEvent->invisible || objectEvent->offScreen;
+    return TRUE;
+}
+
+#if TESTING
+void Test_RecreateObjectSprite(u8 objectEventId)
+{
+    SpawnObjectEventOnReturnToField(objectEventId, 0, 0);
+}
+bool32 Test_RestoreObjectPalette(u8 objectEventId)
+{
+    return TryRestoreObjectPalette(&gObjectEvents[objectEventId], &gSprites[gObjectEvents[objectEventId].spriteId]);
+}
+#endif
+
 void UpdateObjectEventCurrentMovement(struct ObjectEvent *objectEvent, struct Sprite *sprite, bool8 (*callback)(struct ObjectEvent *, struct Sprite *))
 {
-    DoGroundEffects_OnSpawn(objectEvent, sprite);
+    bool32 paletteReady = TryRestoreObjectPalette(objectEvent, sprite);
+    if (paletteReady)
+        DoGroundEffects_OnSpawn(objectEvent, sprite);
     TryEnableObjectEventAnim(objectEvent, sprite);
 
     if (ObjectEventIsHeldMovementActive(objectEvent))
@@ -6446,8 +6611,11 @@ void UpdateObjectEventCurrentMovement(struct ObjectEvent *objectEvent, struct Sp
     else if (!objectEvent->frozen)
         while (callback(objectEvent, sprite));
 
-    DoGroundEffects_OnBeginStep(objectEvent, sprite);
-    DoGroundEffects_OnFinishStep(objectEvent, sprite);
+    if (paletteReady)
+    {
+        DoGroundEffects_OnBeginStep(objectEvent, sprite);
+        DoGroundEffects_OnFinishStep(objectEvent, sprite);
+    }
     UpdateObjectEventSpriteAnimPause(objectEvent, sprite);
     UpdateObjectEventVisibility(objectEvent, sprite);
     ObjectEventUpdateSubpriority(objectEvent, sprite);
@@ -8952,7 +9120,8 @@ static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct S
 static void UpdateObjectEventSpriteVisibility(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
-    if (objectEvent->invisible || objectEvent->offScreen)
+    if (objectEvent->invisible || objectEvent->offScreen
+     || (sPendingObjectPalettes & (1u << (objectEvent - gObjectEvents))))
         sprite->invisible = TRUE;
 }
 

@@ -36,9 +36,11 @@ void ReloadSave(void)
 
 // Reload restores the last disk save, independently of battle Retry.
 // SAVE_STATUS_ERROR means loading recovered a valid redundant slot.
+// A new game that has not been saved yet must not reload the previous file.
 bool32 CanReloadLastSave(void)
 {
-    return gSaveFileStatus == SAVE_STATUS_OK || gSaveFileStatus == SAVE_STATUS_ERROR;
+    return (gSaveFileStatus == SAVE_STATUS_OK || gSaveFileStatus == SAVE_STATUS_ERROR)
+        && !gDifferentSaveFile;
 }
 
 void ReloadLastSave(void)

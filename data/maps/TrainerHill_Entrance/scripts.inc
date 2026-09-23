@@ -17,9 +17,6 @@ TrainerHill_Entrance_OnTransition: @ 82680C6
 	end
 
 @ Unused
-TrainerHill_Entrance_OnWarp: @ 82680CF
-	end
-
 TrainerHill_Entrance_OnResume: @ 82680D0
 	trainerhill_resumetimer
 	setvar VAR_TEMP_0, 0
@@ -215,10 +212,6 @@ TrainerHill_Entrance_Movement_PushPlayerBackFromCounter: @ 8268381
 	step_end
 
 @ Unused
-TrainerHill_Entrance_Movement_FaceUp: @ 8268383
-	face_up
-	step_end
-
 TrainerHill_Entrance_Movement_PlayerExitElevator: @ 8268385
 	walk_down
 	walk_down
@@ -228,7 +221,6 @@ TrainerHill_Entrance_EventScript_Records:: @ 8268388
 	lockall
 	fadescreen FADE_TO_BLACK
 	special ShowTrainerHillRecords
-	waitstate
 	releaseall
 	end
 
@@ -248,58 +240,6 @@ TrainerHill_Entrance_EventScript_Girl:: @ 82683AC
 
 TrainerHill_Entrance_EventScript_GirlTrainerHillClosed:: @ 82683BE
 	msgbox TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen, MSGBOX_NPC
-	end
-
-TrainerHill_Entrance_EventScript_Clerk:: @ 82683C7
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	goto_if_set FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_ExpandedPokemart
-	pokemart TrainerHill_Entrance_Pokemart_Basic
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-TrainerHill_Entrance_Pokemart_Basic: @ 82683E8
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
-
-TrainerHill_Entrance_EventScript_ExpandedPokemart:: @ 8268402
-	pokemart TrainerHill_Entrance_Pokemart_Expanded
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-TrainerHill_Entrance_Pokemart_Expanded: @ 8268414
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
 	end
 
 TrainerHill_Entrance_Text_StillGettingReady: @ 8268430
@@ -378,12 +318,6 @@ TrainerHill_Entrance_Text_ExplainTrainerHill: @ 82687C3
 	.string "be awarded.$"
 
 @ Unused
-TrainerHill_Entrance_Text_NeedAtLeastTwoPokemon: @ 826890D
-	.string "Oh, I'm sorry, but you appear to have\n"
-	.string "only one Pokémon with you.\p"
-	.string "You will need at least two Pokémon\n"
-	.string "to enter this event.$"
-
 TrainerHill_Roof_Text_YouFinallyCameBravo: @ 8268986
 	.string "Hm! Hm!\p"
 	.string "You finally came!\n"
@@ -428,12 +362,6 @@ TrainerHill_Roof_Text_ArriveZippierNextTime: @ 8268C31
 	.string "Until we meet again, amigo!$"
 
 @ Unused
-TrainerHill_Roof_Text_BuiltTrainerHillToFindPartner: @ 8268CC6
-	.string "I had the Trainer Hill built for but\n"
-	.string "one reason and one only!\p"
-	.string "To find the most suitable partner\n"
-	.string "with whom I may form a tag team!$"
-
 TrainerHill_Entrance_Text_ChallengeTime: @ 8268D47
 	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
 

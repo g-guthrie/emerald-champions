@@ -143,7 +143,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AlteringCave_B1F_EventScript_Mewtwo",
-      "flag": "FLAG_DEFEATED_MEWTWO"
+      "flag": "FLAG_EC_CAUGHT_MEWTWO"
     },
     {
       "local_id": "LOCALID_EC_LEAF",

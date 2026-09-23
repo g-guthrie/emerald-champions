@@ -50,19 +50,19 @@ static const u8 *const sBirchDexRatingTexts[BIRCH_DEX_STRINGS] =
 // This shows your Hoenn Pokédex rating and not your National Dex.
 const u8 *GetPokedexRatingText(u32 count)
 {
-    u32 i, j;
     u16 maxDex = REGIONAL_DEX_COUNT - 1;
-    // doesNotCountForRegionalPokedex
-    for (i = 0; i < REGIONAL_DEX_COUNT; i++)
+    for (u32 i = 1; i < REGIONAL_DEX_COUNT; i++)
     {
-        j = NationalPokedexNumToSpecies(RegionalToNationalOrder(i + 1));
-        if (gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired)
+        enum NationalDexOrder dex = RegionalToNationalOrder(i);
+        enum Species species = NationalPokedexNumToSpecies(dex);
+        if (gSpeciesInfo[species].isMythical && !gSpeciesInfo[species].dexForceRequired)
         {
-            if (GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
+            if (count != 0 && GetSetPokedexFlag(dex, FLAG_GET_CAUGHT))
                 count--;
             maxDex--;
         }
     }
+    count = min(count, maxDex);
     return sBirchDexRatingTexts[(count * (BIRCH_DEX_STRINGS - 1)) / maxDex];
 }
 
@@ -164,4 +164,3 @@ void GetProfOaksRatingMessage(void)
 {
     ShowFieldMessage(GetProfOaksRatingMessageByCount(gSpecialVar_0x8004));
 }
-

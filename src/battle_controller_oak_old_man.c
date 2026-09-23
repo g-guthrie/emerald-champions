@@ -879,8 +879,7 @@ static void OakOldManHandleIntroTrainerBallThrow(enum BattlerId battler)
     }
     else
     {
-        if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
-            gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
+        HidePartyStatusSummary(battler);
         OakOldManBufferExecCompleted(battler);
     }
 }

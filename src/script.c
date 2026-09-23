@@ -44,28 +44,15 @@ extern ScrCmdFunc gScriptCmdTableEnd[];
 
 void InitScriptStack(struct ScriptStack *stk)
 {
-    stk->stackDepth = 0;
-    memset(stk->stack, 0, (int)ARRAY_COUNT(stk->stack) * sizeof(u8*));
+    memset(stk, 0, sizeof(*stk));
 }
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
 {
-    s32 i;
-
+    memset(ctx, 0, sizeof(*ctx));
     ctx->mode = SCRIPT_MODE_STOPPED;
-    ctx->scriptPtr = NULL;
-    ctx->stackDepth = 0;
-    ctx->nativePtr = NULL;
     ctx->cmdTable = cmdTable;
     ctx->cmdTableEnd = cmdTableEnd;
-
-    for (i = 0; i < (int)ARRAY_COUNT(ctx->data); i++)
-        ctx->data[i] = 0;
-
-    for (i = 0; i < (int)ARRAY_COUNT(ctx->stack); i++)
-        ctx->stack[i] = NULL;
-
-    ctx->breakOnTrainerBattle = FALSE;
 }
 
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
@@ -137,7 +124,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
 
 bool8 ScriptStackPush(struct ScriptStack *stk, const u8 *ptr)
 {
-    if (stk->stackDepth + 1 >= (int)ARRAY_COUNT(stk->stack))
+    if (stk->stackDepth >= ARRAY_COUNT(stk->stack))
     {
         return FALSE;
     }
@@ -151,7 +138,7 @@ bool8 ScriptStackPush(struct ScriptStack *stk, const u8 *ptr)
 
 bool8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr)
 {
-    if (ctx->stackDepth + 1 >= (int)ARRAY_COUNT(ctx->stack))
+    if (ctx->stackDepth >= ARRAY_COUNT(ctx->stack))
     {
         return TRUE;
     }
@@ -213,8 +200,8 @@ void ScriptReturn(struct ScriptContext *ctx)
 
 u16 ScriptReadHalfword(struct ScriptContext *ctx)
 {
-    u16 value = *(ctx->scriptPtr++);
-    value |= *(ctx->scriptPtr++) << 8;
+    u16 value = ScriptPeekHalfword(ctx);
+    ctx->scriptPtr += 2;
     return value;
 }
 
@@ -227,11 +214,9 @@ u16 ScriptPeekHalfword(struct ScriptContext *ctx)
 
 u32 ScriptReadWord(struct ScriptContext *ctx)
 {
-    u32 value0 = *(ctx->scriptPtr++);
-    u32 value1 = *(ctx->scriptPtr++);
-    u32 value2 = *(ctx->scriptPtr++);
-    u32 value3 = *(ctx->scriptPtr++);
-    return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
+    u32 value = ScriptPeekWord(ctx);
+    ctx->scriptPtr += 4;
+    return value;
 }
 
 u32 ScriptPeekWord(struct ScriptContext *ctx)

@@ -58,50 +58,6 @@ Route113_EventScript_Dillon:: @ 81F21D7
 	msgbox Route113_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route113_EventScript_Madeline:: @ 81F21EE
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route113_EventScript_RematchMadeline
-	msgbox Route113_Text_MadelinePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route113_EventScript_RegisterMadeline:: @ 81F221A
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route113_Text_MadelineRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_MADELINE_1
-	release
-	end
-
-Route113_EventScript_RematchMadeline:: @ 81F2239
-	@ This retired encounter has no campaign battle.
-	msgbox Route113_Text_MadelinePostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route113_EventScript_Lao:: @ 81F2250
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route113_EventScript_RematchLao
-	msgbox Route113_Text_LaoPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route113_EventScript_RegisterLao:: @ 81F227C
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route113_Text_LaoRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_LAO_1
-	release
-	end
-
-Route113_EventScript_RematchLao:: @ 81F229B
-	@ This retired encounter has no campaign battle.
-	msgbox Route113_Text_LaoPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route113_EventScript_Lung:: @ 81F22B2
 	trainerbattle_double TRAINER_LUNG, Route113_Text_LungIntro, Route113_Text_LungDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route113_Text_LungPostBattle, MSGBOX_AUTOCLOSE
@@ -167,4 +123,3 @@ Route113_Text_TrainerTipsRegisterKeyItems: @ 81F2471
 Route113_Text_GlassWorkshopSign: @ 81F24F8
 	.string "Glass Workshop\n"
 	.string "“Turning Volcanic Ash into Glass Items”$"
-

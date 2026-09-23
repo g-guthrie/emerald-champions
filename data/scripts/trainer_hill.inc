@@ -54,11 +54,6 @@ TrainerHill_EventScript_WarpToEntranceCounter::
 	end
 
 @ Unused
-TrainerHill_1F_Movement_SetInvisible::
-	set_invisible
-	step_end
-
-@ TRAINER_PHILLIP is an actual Trainer on the SS Tidal, but is used as a placeholder here
 TrainerHill_EventScript_TrainerBattle::
 	facilitytrainerbattle FACILITY_BATTLE_TRAINER_HILL
 	trainerhill_postbattletext

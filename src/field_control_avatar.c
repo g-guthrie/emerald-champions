@@ -88,19 +88,7 @@ static const u8 *GetSignpostScriptAtMapPosition(struct MapPosition *position);
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
-    input->pressedAButton = FALSE;
-    input->checkStandardWildEncounter = FALSE;
-    input->pressedStartButton = FALSE;
-    input->pressedSelectButton = FALSE;
-    input->heldDirection = FALSE;
-    input->heldDirection2 = FALSE;
-    input->tookStep = FALSE;
-    input->pressedBButton = FALSE;
-    input->pressedRButton = FALSE;
-    input->pressedLButton = FALSE;
-    input->input_field_1_2 = FALSE;
-    input->input_field_1_3 = FALSE;
-    input->dpadDirection = 0;
+    memset(input, 0, sizeof(*input));
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -140,7 +128,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (tileTransitionState == T_TILE_CENTER && runningState == MOVING)
             input->tookStep = TRUE;
-        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER)
+        if (tileTransitionState == T_TILE_CENTER)
             input->checkStandardWildEncounter = TRUE;
     }
 
@@ -675,12 +663,9 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
      && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
-        if (!IsFieldMoveUnlocked(FIELD_MOVE_SURF))
+        if (FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) == PARTY_SIZE)
             return EventScript_SurfLocked;
-        if (PartyHasMonWithSurf() == TRUE)
-            return EventScript_UseSurf;
-        // Unlocked, but nobody in the party could learn Surf: say so.
-        return EventScript_NobodyCanSurf;
+        return EventScript_UseSurf;
     }
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE
@@ -689,7 +674,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
     {
         if (!IsPlayerSurfingNorth())
             return EventScript_CannotUseWaterfall;
-        if (!IsFieldMoveUnlocked(FIELD_MOVE_WATERFALL))
+        if (FieldMove_GetUserSlot(FIELD_MOVE_WATERFALL, TRUE) == PARTY_SIZE)
             return EventScript_WaterfallLocked;
         return EventScript_UseWaterfall;
     }
@@ -703,7 +688,7 @@ static bool32 TrySetupDiveDownScript(void)
 
     if (TrySetDiveWarp() == 2)
     {
-        ScriptContext_SetupScript(IsFieldMoveUnlocked(FIELD_MOVE_DIVE)
+        ScriptContext_SetupScript(FieldMove_GetUserSlot(FIELD_MOVE_DIVE, TRUE) != PARTY_SIZE
             ? EventScript_UseDive : EventScript_DiveLocked);
         return TRUE;
     }
@@ -717,7 +702,7 @@ static bool32 TrySetupDiveEmergeScript(void)
 
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
-        ScriptContext_SetupScript(IsFieldMoveUnlocked(FIELD_MOVE_DIVE)
+        ScriptContext_SetupScript(FieldMove_GetUserSlot(FIELD_MOVE_DIVE, TRUE) != PARTY_SIZE
             ? EventScript_UseDiveUnderwater : EventScript_DiveLocked);
         return TRUE;
     }
@@ -791,7 +776,6 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return FALSE;
     }
 
-    IncrementRematchStepCounter();
     IncrementDaycareSteps();
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();
@@ -820,11 +804,6 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         if (ShouldDoBrailleRegicePuzzle() == TRUE)
         {
             ScriptContext_SetupScript(IslandCave_EventScript_OpenRegiEntrance);
-            return TRUE;
-        }
-        if (ShouldDoWallyCall() == TRUE)
-        {
-            ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
             return TRUE;
         }
         if (ShouldDoScottFortreeCall() == TRUE)

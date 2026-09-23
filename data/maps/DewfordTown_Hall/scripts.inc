@@ -275,7 +275,7 @@ DewfordTown_Hall_EventScript_Trader:: @ 82162BB
 	lock
 	faceplayer
 	goto_if_set FLAG_FORTREE_NPC_TRADE_COMPLETED, DewfordTown_Hall_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_TROPIUS
+	setvar VAR_0x8008, INGAME_TRADE_BOMBIRDIER
 	@ This engine reads the trade index from VAR_0x8005 and the party slot from
 	@ VAR_0x8004; Inclement passes them the other way round.
 	copyvar VAR_0x8005, VAR_0x8008
@@ -285,7 +285,6 @@ DewfordTown_Hall_EventScript_Trader:: @ 82162BB
 	compare VAR_RESULT, NO
 	goto_if_eq DewfordTown_Hall_EventScript_DeclineTrade
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255
 	goto_if_eq DewfordTown_Hall_EventScript_DeclineTrade
@@ -295,10 +294,15 @@ DewfordTown_Hall_EventScript_Trader:: @ 82162BB
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne DewfordTown_Hall_EventScript_NotRequestedMon
 	copyvar VAR_0x8004, VAR_0x800A
+	specialvar VAR_RESULT, CanReceiveInGameTradePokemon
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeRestrictedParty
+	call Common_EventScript_ReturnNPCTradeItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeCancelled
+	copyvar VAR_0x8004, VAR_0x800A
 	copyvar VAR_0x8005, VAR_0x8008
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo @ re-buffer species names over the item name
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	bufferspeciesname 0, VAR_0x8009
 	msgbox DewfordTown_Hall_Text_MonYouTakeCare, MSGBOX_DEFAULT
 	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
@@ -347,7 +351,7 @@ DewfordTown_Hall_Text_YouWontTradeMe: @ 821649F
 DewfordTown_Hall_Text_GoingToMakeVolbeatStrong: @ 82164DB
 	.string "I'm going to make Croagunk super\n"
 	.string "strong from this moment on!\p"
-	.string "I hope you do the same with Tropius!$"
+	.string "I hope you do the same with Bombirdier!$"
 
 DewfordTown_Hall_Text_CantImagineLifeWithoutTrend: @ 81FD818
 	.string "What's in vogue? Why, it has to be\n"

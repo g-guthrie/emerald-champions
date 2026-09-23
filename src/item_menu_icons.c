@@ -503,22 +503,14 @@ void AddBagItemIconSprite(enum Item itemId, u8 id)
 
 void RemoveBagItemIconSprite(u8 id)
 {
-// BUG: For one frame, the item you scroll to in the Bag menu
-// will have an incorrect palette and may be seen as a flicker.
 #ifdef BUGFIX
-    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
-
-    if (spriteId[id ^ 1] != SPRITE_NONE)
-        gSprites[spriteId[id ^ 1]].invisible = TRUE;
-
-    if (spriteId[id] != SPRITE_NONE)
-    {
-        DestroySpriteAndFreeResources(&gSprites[spriteId[id]]);
-        spriteId[id] = SPRITE_NONE;
-    }
-#else
-    RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
+    // Hide the other icon during replacement to avoid a one-frame palette flash.
+    u8 other = gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM + (id ^ 1)];
+    if (other != SPRITE_NONE)
+        gSprites[other].invisible = TRUE;
 #endif
+    // Bag slots own stable tags; the icon's temporary SpriteTemplate is freed.
+    RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
 }
 
 void CreateItemMenuSwapLine(void)
@@ -600,7 +592,8 @@ static u32 CreateBerrySprite(const struct SpriteTemplate *sprTemplate, u32 berry
     dynamicGfx->images[0].size = BERRY_SPRITE_SIZE;
     dynamicGfx->images[0].relativeFrames = FALSE;
 
-    spriteId = CreateSprite(&newSprTemplate, x, y, 0);
+    spriteId = CreateSpriteWithTemplateCopy(&newSprTemplate, x, y, 0);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
     StoreWordInTwoHalfwords((u16 *) &gSprites[spriteId].data[BERRY_ICON_GFX_PTR_DATA_ID], (u32) dynamicGfx);
     return spriteId;
 }
@@ -630,8 +623,8 @@ void DestroyBerryIconSpritePtr(struct Sprite *sprite, u32 berryId, bool32 freePa
     u32 gfxBuffer;
 
     LoadWordFromTwoHalfwords((u16 *) &sprite->data[BERRY_ICON_GFX_PTR_DATA_ID], &gfxBuffer);
-    Free((void *)gfxBuffer);
     DestroySprite(sprite);
+    Free((void *)gfxBuffer);
     if (freePal)
         FreeBerryIconSpritePalette(berryId);
 }

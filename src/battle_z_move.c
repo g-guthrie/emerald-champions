@@ -322,7 +322,7 @@ bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
                 gDisplayedStringBattle[1] = 0;
                 gDisplayedStringBattle[2] = EOS;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, zEffect - Z_EFFECT_ATK_UP_1 + 1);
-                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 2);
+                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 2, sizeof(gDisplayedStringBattle) - 2);
                 break;
             case Z_EFFECT_ATK_UP_2:
             case Z_EFFECT_DEF_UP_2:
@@ -336,7 +336,7 @@ bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
                 gDisplayedStringBattle[2] = 0;
                 gDisplayedStringBattle[3] = EOS;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, zEffect - Z_EFFECT_ATK_UP_2 + 1);
-                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 3);
+                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 3, sizeof(gDisplayedStringBattle) - 3);
                 break;
             case Z_EFFECT_ATK_UP_3:
             case Z_EFFECT_DEF_UP_3:
@@ -351,7 +351,7 @@ bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
                 gDisplayedStringBattle[3] = 0;
                 gDisplayedStringBattle[4] = EOS;
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, zEffect - Z_EFFECT_ATK_UP_3 + 1);
-                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 4);
+                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 4, sizeof(gDisplayedStringBattle) - 4);
                 break;
             default:
                 if (B_SHOW_USELESS_Z_MOVE_INFO == TRUE)

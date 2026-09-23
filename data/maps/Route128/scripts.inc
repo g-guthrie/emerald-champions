@@ -82,25 +82,6 @@ Route128_EventScript_KyogreAwakenedScene:: @ 81F6B57
 	releaseall
 	end
 
-Route128_Movement_Unused1: @ 81F6C76
-	walk_fast_left
-	step_end
-
-Route128_Movement_Unused2: @ 81F6C78
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
 Route128_Movement_StevenWalkUp: @ 81F6C85
 	walk_up
 	step_end
@@ -178,47 +159,9 @@ Route128_Movement_MaxieApproachPlayer: @ 81F6CBB
 	walk_in_place_fast_down
 	step_end
 
-Route128_EventScript_Isaiah:: @ 81F6CBE
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route128_EventScript_RematchIsaiah
-	msgbox Route128_Text_IsaiahPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route128_EventScript_RegisterIsaiah:: @ 81F6CEA
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route128_Text_IsaiahRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ISAIAH_1
-	release
-	end
-
-Route128_EventScript_RematchIsaiah:: @ 81F6D09
-	@ This retired encounter has no campaign battle.
-	msgbox Route128_Text_IsaiahPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route128_EventScript_Katelyn:: @ 81F6D20
-	trainerbattle_double TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route128_EventScript_RegisterKatelyn
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route128_EventScript_RematchKatelyn
-	msgbox Route128_Text_KatelynPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route128_EventScript_RegisterKatelyn:: @ 81F6D4C
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route128_Text_KatelynPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route128_EventScript_RematchKatelyn:: @ 81F6D6B
-	@ This retired encounter has no campaign battle.
-	msgbox Route128_Text_KatelynPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route128_Text_KatelynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Alexa:: @ 81F6D82
@@ -234,16 +177,6 @@ Route128_EventScript_Ruben:: @ 81F6D99
 Route128_EventScript_Wayne:: @ 81F6DB0
 	@ This retired encounter has no campaign battle.
 	msgbox Route128_Text_WaynePostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route128_EventScript_Harrison:: @ 81F6DC7
-	@ This retired encounter has no campaign battle.
-	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route128_EventScript_Carlee:: @ 81F6DDE
-	@ This retired encounter has no campaign battle.
-	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_Text_ArchieWhatHappened: @ 81F6DF5
@@ -304,4 +237,3 @@ Route128_Text_StevenImGoingToSootopolis: @ 81F721B
 	.string "but don't do anything reckless.\p"
 	.string "Okay.\n"
 	.string "I'm going to Sootopolis.$"
-

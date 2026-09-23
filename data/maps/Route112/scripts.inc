@@ -9,6 +9,12 @@ Route112_MapScripts:: @ 81F1DA8
 Route112_OnTransition: @ 81F1DAE
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 1, Route112_EventScript_ShowChansey
+	setflag FLAG_HIDE_ROUTE112_CHANSEY
+	end
+
+Route112_EventScript_ShowChansey:
+	clearflag FLAG_HIDE_ROUTE112_CHANSEY
 	end
 
 Route112_EventScript_MagmaGrunts:: @ 81F1DB7
@@ -84,33 +90,6 @@ Route112_EventScript_Brice:: @ 81F1E6A
 	msgbox Route112_Text_BricePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route112_EventScript_Trent:: @ 81F1E81
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route112_EventScript_RematchTrent
-	msgbox Route112_Text_TrentPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route112_EventScript_RegisterTrent:: @ 81F1EAD
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route112_Text_TrentRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_TRENT_1
-	release
-	end
-
-Route112_EventScript_RematchTrent:: @ 81F1ECC
-	@ This retired encounter has no campaign battle.
-	msgbox Route112_Text_TrentRematchPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route112_EventScript_Larry:: @ 81F1EE3
-	@ This retired encounter has no campaign battle.
-	msgbox Route112_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route112_EventScript_Carol:: @ 81F1EFA
 	@ This retired encounter has no campaign battle.
 	msgbox Route112_Text_CarolPostBattle, MSGBOX_AUTOCLOSE
@@ -173,4 +152,3 @@ Route112_Text_MtChimneySign: @ 81F20ED
 Route112_Text_RouteSignLavaridge: @ 81F2138
 	.string "Route 112\n"
 	.string "{LEFT_ARROW} Lavaridge Town$"
-

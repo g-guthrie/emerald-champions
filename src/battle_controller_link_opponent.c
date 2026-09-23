@@ -379,13 +379,13 @@ static void LinkOpponentHandleDrawPartyStatusSummary(enum BattlerId battler)
 
 static void LinkOpponentHandleLinkStandbyMsg(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2], sizeof(gBattleResources->transferBuffer) - 2);
     BtlController_Complete(battler);
 }
 
 static void LinkOpponentHandleEndLinkBattle(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4], sizeof(gBattleResources->transferBuffer) - 4);
 
     if (gBattleResources->bufferA[battler][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleResources->bufferA[battler][1];

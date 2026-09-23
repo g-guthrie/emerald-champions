@@ -31,9 +31,12 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert:: @ 8236DD9
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell
 	checkitemspace ITEM_SHELL_BELL, 1
 	compare VAR_RESULT, FALSE
-	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed
-	compare VAR_RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
+	goto_if_set FLAG_SHOALCAVE_SLOWBRONITE, ShoalCave_LowTideEntranceRoom_EventScript_MakeShellBell
+	checkitemspace ITEM_SLOWBRONITE, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+ShoalCave_LowTideEntranceRoom_EventScript_MakeShellBell::
 	msgbox ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT
 	removeitem ITEM_SHOAL_SALT, 4
 	removeitem ITEM_SHOAL_SHELL, 4
@@ -53,23 +56,6 @@ ShoalCave_LowTideEntranceRoom_EventScript_Slowbronite::
 	setflag FLAG_SHOALCAVE_SLOWBRONITE
 	release
 	end
-
-@ If the bag is full, check if a slot will be freed when 4 Shoal Salt or Shells are given
-ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed:: @ 8236E69
-	checkitem ITEM_SHOAL_SALT, 5
-	compare VAR_RESULT, TRUE
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells
-	return
-
-ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells:: @ 8236E7A
-	checkitem ITEM_SHOAL_SHELL, 5
-	compare VAR_RESULT, TRUE
-	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed
-	return
-
-ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed:: @ 8236E8B
-	setvar VAR_RESULT, 2
-	return
 
 ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell:: @ 8236E91
 	msgbox ShoalCave_LowTideEntranceRoom_Text_NoSpaceInYourBag, MSGBOX_DEFAULT

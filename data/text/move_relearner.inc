@@ -1,16 +1,3 @@
-MoveRelearner_Text_WouldLearnNewMoves:
-	.string "Hi, I'm the Move Relearner.\n"
-	.string "Would you like to learn new moves?$"
-
-MoveRelearner_Text_LevelUpMoves:
-	.string "Level Up Moves$"
-
-MoveRelearner_Text_EggMoves:
-	.string "Egg Moves$"
-
-MoveRelearner_Text_SeeYa:
-	.string "See ya!$"
-
 MoveRelearner_Text_AnythingElse:
 	.string "Is there anything else I may do\n"
 	.string "for you?$"

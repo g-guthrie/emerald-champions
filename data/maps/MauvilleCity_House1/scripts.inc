@@ -26,13 +26,12 @@ MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
 	.string "Earn the Dynamo Badge, then\n"
 	.string "press A by a cracked rock\l"
 	.string "to smash it. Woohoo!\p"
-	.string "This license works with any\n"
-	.string "party. No move slot needed!$"
+	.string "Bring a Pokémon able to learn\n"
+	.string "Rock Smash. No move slot needed!$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
 	.string "Oh, yes, if you smash a rock, a Pokémon\n"
 	.string "could come flying out of hiding.\p"
-	.string "Sometimes you'll find an item, or even\n"
-	.string "a Fossil.\p"
+	.string "A cracked rock could be hiding\n"
+	.string "a rare Pokémon.\p"
 	.string "Woohoo!$"
-

@@ -98,7 +98,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanNorth:: @ 81F8507
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_BrendansHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_BrendanSomeOtherTime, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanNorth
@@ -112,7 +112,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanSouth:: @ 81F8536
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_BrendansHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_BrendanSomeOtherTime, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanSouth
@@ -126,7 +126,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanWest:: @ 81F8565
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_BrendansHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_BrendanSomeOtherTime, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanWest
@@ -140,61 +140,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanEast:: @ 81F8594
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
-	call LittlerootTown_BrendansHouse_2F_EventScript_ChooseStarterSet
+	call RivalsHouse_EventScript_ChooseStarterRegion
 	msgbox RivalsHouse_1F_Text_BrendanSomeOtherTime, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCEast
 	waitmovement 0
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_ChooseStarterSet::
-	setvar VAR_0x8004, SCROLL_MULTI_REGION_NAMES
-	special ShowScrollableMultichoice
-	waitstate
-	switch VAR_RESULT
-	case 0, LittlerootTown_BrendansHouse_2F_EventScript_Kanto
-	case 1, LittlerootTown_BrendansHouse_2F_EventScript_Johto
-	case 2, LittlerootTown_BrendansHouse_2F_EventScript_Hoenn
-	case 3, LittlerootTown_BrendansHouse_2F_EventScript_Sinnoh
-	case 4, LittlerootTown_BrendansHouse_2F_EventScript_Unova
-	case 5, LittlerootTown_BrendansHouse_2F_EventScript_Kalos
-	case 6, LittlerootTown_BrendansHouse_2F_EventScript_Alola
-	goto LittlerootTown_BrendansHouse_2F_EventScript_Hoenn
-	end
-
-LittlerootTown_BrendansHouse_2F_EventScript_Kanto:
-	setvar VAR_STARTER_GEN, 1
-	bufferstring 1, StarterRegionStringKanto
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_Johto:
-	setvar VAR_STARTER_GEN, 2
-	bufferstring 1, StarterRegionStringJohto
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_Hoenn:
-	setvar VAR_STARTER_GEN, 3
-	bufferstring 1, StarterRegionStringHoenn
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_Sinnoh:
-	setvar VAR_STARTER_GEN, 4
-	bufferstring 1, StarterRegionStringSinnoh
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_Unova:
-	setvar VAR_STARTER_GEN, 5
-	bufferstring 1, StarterRegionStringUnova
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_Kalos:
-	setvar VAR_STARTER_GEN, 6
-	bufferstring 1, StarterRegionStringKalos
-	return
-
-LittlerootTown_BrendansHouse_2F_EventScript_Alola:
-	setvar VAR_STARTER_GEN, 7
-	bufferstring 1, StarterRegionStringAlola
 	return
 
 LittlerootTown_BrendansHouse_2F_Movement_BrendanEnters: @ 81F85BC
@@ -299,12 +249,6 @@ LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCEast: @ 81F8604
 	step_end
 
 @ Unused, the player is already facing this direction so its unneeded
-LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanEast: @ 81F8609
-	delay_16
-	delay_16
-	walk_in_place_fast_left
-	step_end
-
 LittlerootTown_BrendansHouse_2F_EventScript_PC:: @ 81F860D
 	lockall
 	checkplayergender
@@ -320,7 +264,6 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC:: @ 81F8626
 	playse SE_PC_ON
 	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
 	special BedroomPC
-	waitstate
 	releaseall
 	end
 

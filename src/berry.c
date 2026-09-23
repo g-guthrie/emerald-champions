@@ -2840,12 +2840,6 @@ void ObjectEventInteractionPickBerryTree(void)
     u8 mutation = GetTreeMutationValue(id);
 
     u8 count = GetBerryCountByBerryTreeId(id);
-    if (!CanAddHarvestedBerries(berry, count)
-     || (OW_BERRY_MUTATIONS && mutation && !CanAddHarvestedBerries(mutation, 1)))
-    {
-        gSpecialVar_0x8004 = 4; // Pouch full: leave the crop intact.
-        return;
-    }
     if (!OW_BERRY_MUTATIONS || mutation == 0)
     {
         gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), count);

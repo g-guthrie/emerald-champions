@@ -32,8 +32,7 @@
 
 #define CIRCUIT_TEAM_SIZE PARTY_SIZE
 #define CIRCUIT_BASE_LEVEL CHAMPIONS_CIRCUIT_BASE_LEVEL
-// Acquisition levels are independent of arena normalization.
-#define CIRCUIT_REWARD_LEVEL 80
+// Acquisition levels follow the live campaign cap, independently of arena normalization.
 static const struct
 {
     enum LegendarySignId sign;
@@ -51,8 +50,9 @@ static const struct
     {LEGENDARY_SIGN_ZARUDE, 20},
     {LEGENDARY_SIGN_KORAIDON, 22},
     {LEGENDARY_SIGN_MIRAIDON, 24},
+    // Mastery follows all earlier unclaimed rewards through the same retry path.
+    {LEGENDARY_SIGN_ETERNATUS, 40},
 };
-#define CIRCUIT_MASTERY_WINS 40
 
 struct CircuitTeamDetails
 {
@@ -207,7 +207,7 @@ bool32 IsChampionsCircuitOpponent(const struct Pokemon *mon)
 
 u8 GetChampionsCircuitOpponentLevel(u16 wins, u32 slot)
 {
-    // Mirrors GetCampaignTrainerLevel: Hard plays as designed, Medium -2, Easy -4.
+    // Mirrors campaign difficulty: Hard as designed, Medium -1, Easy -3.
     u32 level = CIRCUIT_BASE_LEVEL + 2 - GetTrainerLevelReduction()
               + wins / PARTY_SIZE + (slot < wins % PARTY_SIZE);
     return min(CHAMPIONS_CIRCUIT_MAX_LEVEL, level);
@@ -1711,7 +1711,8 @@ void ChampionsCircuitTryGiveReward(void)
 
         if (wins < sCircuitLegendaryRewards[reward].wins || IsLegendarySignCaught(signId))
             continue;
-        giveResult = GiveLegendarySignReward(sign->species, CIRCUIT_REWARD_LEVEL);
+        giveResult = GiveLegendarySignReward(sign->species,
+            GetLevelCapForSpecies(sign->species, GetCurrentLevelCap()));
         if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
         {
             StringCopy(gStringVar1, GetSpeciesName(sign->species));
@@ -1728,28 +1729,6 @@ void ChampionsCircuitTryGiveReward(void)
         return;
     }
 
-    if (wins >= CIRCUIT_MASTERY_WINS && !IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS))
-    {
-        u8 giveResult;
-
-        for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-            if (gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CIRCUIT && !IsLegendarySignCaught(signId))
-                return;
-        giveResult = GiveLegendarySignReward(SPECIES_ETERNATUS, CIRCUIT_REWARD_LEVEL);
-        if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
-        {
-            StringCopy(gStringVar1, GetSpeciesName(SPECIES_ETERNATUS));
-            gSpecialVar_Result = 4;
-            return;
-        }
-        if (giveResult == MON_CANT_GIVE)
-        {
-            gSpecialVar_Result = 3;
-            return;
-        }
-        StringCopy(gStringVar1, GetSpeciesName(SPECIES_ETERNATUS));
-        gSpecialVar_Result = giveResult == MON_GIVEN_TO_PARTY ? 1 : 2;
-    }
 }
 
 void ChampionsCircuitEnd(void)
@@ -1761,10 +1740,6 @@ void ChampionsCircuitEnd(void)
         CalculatePlayerPartyCount();
         HealPlayerParty();
     }
-    // D7: a completed Circuit run is the lottery's ticket. The Lilycove clerk spends
-    // the flag on the draw, so a run that ends without one being redeemed keeps it.
-    if (VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE))
-        FlagSet(FLAG_EC_LOTTERY_TICKET_READY);
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
 }

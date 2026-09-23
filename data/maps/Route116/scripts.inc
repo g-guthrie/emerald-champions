@@ -128,10 +128,6 @@ Route116_EventScript_RouteSignRustboro:: @ 81F2D57
 	msgbox Route116_Text_RouteSignRustboro, MSGBOX_SIGN
 	end
 
-Route116_EventScript_RusturfTunnelSign:: @ 81F2D60
-	msgbox Route116_Text_RusturfTunnelSign, MSGBOX_SIGN
-	end
-
 Route116_EventScript_TunnelersRestHouseSign:: @ 81F2D69
 	msgbox Route116_Text_TunnelersRestHouse, MSGBOX_SIGN
 	end
@@ -257,46 +253,8 @@ Route116_EventScript_Jose:: @ 81F2EA0
 	end
 
 Route116_EventScript_Jerry:: @ 81F2EB7
-	trainerbattle_double TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route116_EventScript_TryRegisterJerryAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route116_EventScript_RematchJerry
-	setvar VAR_0x8004, TRAINER_JERRY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route116_EventScript_TryRegisterJerry
-	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_TryRegisterJerryAfterBattle:: @ 81F2EF8
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerryAfterBattle
-	release
-	end
-
-Route116_EventScript_RegisterJerryAfterBattle:: @ 81F2F03
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_JerryRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JERRY_1
-	release
-	end
-
-Route116_EventScript_TryRegisterJerry:: @ 81F2F22
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerry
-	msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_RegisterJerry:: @ 81F2F35
-	msgbox Route116_Text_JerryRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JERRY_1
-	release
-	end
-
-Route116_EventScript_RematchJerry:: @ 81F2F4E
-	@ This retired encounter has no campaign battle.
-	msgbox Route116_Text_JerryPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route116_Text_JerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Clark:: @ 81F2F65
@@ -310,46 +268,7 @@ Route116_EventScript_Janice:: @ 81F2F7C
 	end
 
 Route116_EventScript_Karen:: @ 81F2F93
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route116_EventScript_RematchKaren
-	setvar VAR_0x8004, TRAINER_KAREN_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route116_EventScript_TryRegisterKaren
-	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_TryRegisterKarenAfterBattle:: @ 81F2FD4
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKarenAfterBattle
-	release
-	end
-
-Route116_EventScript_RegisterKarenAfterBattle:: @ 81F2FDF
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route116_Text_KarenRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_KAREN_1
-	release
-	end
-
-Route116_EventScript_TryRegisterKaren:: @ 81F2FFE
-	goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKaren
-	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route116_EventScript_RegisterKaren:: @ 81F3011
-	msgbox Route116_Text_KarenRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_KAREN_1
-	release
-	end
-
-Route116_EventScript_RematchKaren:: @ 81F302A
-	@ This retired encounter has no campaign battle.
-	msgbox Route116_Text_KarenPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route116_Text_KarenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Sarah:: @ 81F3041
@@ -423,7 +342,7 @@ Route116_Text_ThankYouTokenOfAppreciation: @ 81F3317
 	.string "is our gift to our wonderful Trainer!$"
 
 Route116_Text_AlsoNeedKeystone: @ 81F3521
-	.string "You'll also need a Keystone to use\n"
+	.string "You'll also need a Mega Ring to use\n"
 	.string "it, but I bet you already knew that!\p"
 	.string "Please do try it out!\n"
 	.string "Thank you and bye-bye!$"
@@ -448,7 +367,7 @@ Route116_Text_MayISeeThoseGlasses: @ 81F3688
 
 Route116_Text_NotWhatImLookingForMaybeTheyArentHere: @ 81F36B4
 	.string "Hmm…\n"
-	.string "These are BlackGlasses.\l"
+	.string "These are Black Glasses.\l"
 	.string "They're not what I'm looking for…\p"
 	.string "Maybe my glasses aren't around\n"
 	.string "here…$"
@@ -460,18 +379,12 @@ Route116_Text_CantFindGlassesNotHere: @ 81F3718
 
 Route116_Text_NotWhatImLookingFor: @ 81F375E
 	.string "Hmm…\n"
-	.string "These are BlackGlasses.\l"
+	.string "These are Black Glasses.\l"
 	.string "They're not what I'm looking for…$"
 
 Route116_Text_RouteSignRustboro: @ 81F379D
 	.string "Route 116\n"
 	.string "{LEFT_ARROW} Rustboro City$"
-
-Route116_Text_RusturfTunnelSign: @ 81F37B7
-	.string "Rusturf Tunnel\n"
-	.string "“Linking Rustboro and Verdanturf\p"
-	.string "“The tunnel project has been\n"
-	.string "canceled.”$"
 
 Route116_Text_TunnelersRestHouse: @ 81F380F
 	.string "Tunneler's Rest House$"

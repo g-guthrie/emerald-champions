@@ -37,7 +37,10 @@ def fixture_source():
     constants = header[header.index('// Each 4 KiB'):header.index('extern u16')]
     signatures = [
         'static u16 CalculateChecksum(void *data, u16 size)',
+        'static bool32 IsSaveSlotSignature(u32 signature)',
+        'static u16 CalculateSaveSlotChecksum(struct SaveSector *sector, u16 legacySize)',
         'static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)',
+        'static u8 ValidateSaveSlot(u16 slotOffset, const struct SaveSectorLocation *locations, u32 *counter)',
         'static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)',
         'static u8 TryLoadSaveSlot(u16 sectorId, struct SaveSectorLocation *locations)',
         'u8 TrySavingData(u8 saveType)',
@@ -49,6 +52,7 @@ def fixture_source():
 
 PREAMBLE = r'''
 #include <stdint.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -181,6 +185,63 @@ static void ValidSlot(unsigned slot)
     }
 }
 
+static void ValidExtendedSlot(unsigned slot)
+{
+    for (unsigned id = 0; id < NUM_SECTORS_PER_SLOT; id++)
+    {
+        struct SaveSector *s = &flash[slot * NUM_SECTORS_PER_SLOT + id];
+        memset(s, 0, sizeof(*s));
+        s->id = id;
+        s->signature = SECTOR_SIGNATURE_EXTENDED;
+        s->counter = slot;
+        *(u32 *)s->data = 100 + id;
+        s->checksum = CalculateChecksum(s->data, offsetof(struct SaveSector, id));
+    }
+}
+
+static int ExtendedFormat(void)
+{
+    SeedFlash();
+    ValidExtendedSlot(0);
+    CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_OK);
+    for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) CHECK(destinations[i] == 100 + i);
+
+    // Incremental saves can legitimately update only part of a legacy slot.
+    SeedFlash();
+    ValidSlot(0);
+    for (unsigned id = 0; id <= SECTOR_ID_SAVEBLOCK1_END; id++)
+    {
+        struct SaveSector *s = &flash[id];
+        s->signature = SECTOR_SIGNATURE_EXTENDED;
+        s->checksum = CalculateChecksum(s->data, offsetof(struct SaveSector, id));
+    }
+    CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_OK);
+    for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) CHECK(destinations[i] == 100 + i);
+
+    // Both edges of every SaveBlock3 chunk are in the extended checksum range.
+    for (unsigned id = 0; id < NUM_SECTORS_PER_SLOT; id++)
+        for (unsigned edge = 0; edge < 2; edge++)
+        {
+            SeedFlash();
+            ValidExtendedSlot(0);
+            flash[id].saveBlock3Chunk[edge ? SAVE_BLOCK_3_CHUNK_SIZE - 1 : 0] ^= 1;
+            CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_CORRUPT);
+            CHECK(destinations[id] == 0xdeadbeef);
+        }
+
+    SeedFlash();
+    ValidExtendedSlot(0);
+    flash[0].signature = 0x08032025;
+    CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_CORRUPT);
+    CHECK(destinations[0] == 0xdeadbeef);
+
+    SeedFlash();
+    ValidExtendedSlot(0);
+    flash[1].counter++;
+    CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_CORRUPT);
+    return 0;
+}
+
 static int Corruption(void)
 {
     SeedFlash();
@@ -242,6 +303,7 @@ int main(int argc, char **argv)
     if (!strcmp(argv[1], "lifecycle")) return Lifecycle();
     if (!strcmp(argv[1], "other-saves")) return OtherSaves();
     if (!strcmp(argv[1], "corruption")) return Corruption();
+    if (!strcmp(argv[1], "extended-format")) return ExtendedFormat();
     return 2;
 }
 '''
@@ -278,6 +340,9 @@ class SaveIntegrityTests(unittest.TestCase):
 
     def test_erased_invalid_and_recovered_sectors(self):
         self.scenario('corruption')
+
+    def test_legacy_extended_and_incremental_mixed_formats(self):
+        self.scenario('extended-format')
 
 
 if __name__ == '__main__':

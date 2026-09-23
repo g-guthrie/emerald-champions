@@ -48,3 +48,267 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Heavy Slam
 - High Horsepower
 - Protect
+
+=== PARTNER_MAY_TREECKO_METEOR_FALLS ===
+Name: MAY
+Class: Rival
+Pic: May
+Gender: Female
+Music: Female
+AI: Smart Trainer / Hp Aware / Smart Switching
+
+Blaziken @ Life Orb
+Ability: Speed Boost
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Flare Blitz
+- Close Combat
+- Rock Slide
+- Protect
+
+Manectric @ Focus Sash
+Ability: Lightning Rod
+Timid Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+- Thunderbolt
+- Volt Switch
+- Snarl
+- Protect
+
+Mimikyu @ Mental Herb
+Ability: Disguise
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Play Rough
+- Shadow Sneak
+- Will-O-Wisp
+- Taunt
+
+=== PARTNER_MAY_TORCHIC_METEOR_FALLS ===
+Name: MAY
+Class: Rival
+Pic: May
+Gender: Female
+Music: Female
+AI: Smart Trainer / Hp Aware / Smart Switching
+
+Swampert @ Life Orb
+Ability: Torrent
+Adamant Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+- Waterfall
+- High Horsepower
+- Ice Punch
+- Protect
+
+Manectric @ Focus Sash
+Ability: Lightning Rod
+Timid Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+- Thunderbolt
+- Volt Switch
+- Snarl
+- Protect
+
+Mimikyu @ Mental Herb
+Ability: Disguise
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Play Rough
+- Shadow Sneak
+- Will-O-Wisp
+- Taunt
+
+=== PARTNER_MAY_MUDKIP_METEOR_FALLS ===
+Name: MAY
+Class: Rival
+Pic: May
+Gender: Female
+Music: Female
+AI: Smart Trainer / Hp Aware / Smart Switching
+
+Sceptile @ Life Orb
+Ability: Overgrow
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Leaf Blade
+- Dragon Claw
+- X-Scissor
+- Protect
+
+Manectric @ Focus Sash
+Ability: Lightning Rod
+Timid Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+- Thunderbolt
+- Volt Switch
+- Snarl
+- Protect
+
+Mimikyu @ Mental Herb
+Ability: Disguise
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Play Rough
+- Shadow Sneak
+- Will-O-Wisp
+- Taunt
+
+=== PARTNER_BRENDAN_TREECKO_METEOR_FALLS ===
+Name: BRENDAN
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+AI: Smart Trainer / Hp Aware / Smart Switching
+
+Blaziken @ Life Orb
+Ability: Speed Boost
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Flare Blitz
+- Close Combat
+- Rock Slide
+- Protect
+
+Manectric @ Focus Sash
+Ability: Lightning Rod
+Timid Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+- Thunderbolt
+- Volt Switch
+- Snarl
+- Protect
+
+Mimikyu @ Mental Herb
+Ability: Disguise
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Play Rough
+- Shadow Sneak
+- Will-O-Wisp
+- Taunt
+
+=== PARTNER_BRENDAN_TORCHIC_METEOR_FALLS ===
+Name: BRENDAN
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+AI: Smart Trainer / Hp Aware / Smart Switching
+
+Swampert @ Life Orb
+Ability: Torrent
+Adamant Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+- Waterfall
+- High Horsepower
+- Ice Punch
+- Protect
+
+Manectric @ Focus Sash
+Ability: Lightning Rod
+Timid Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+- Thunderbolt
+- Volt Switch
+- Snarl
+- Protect
+
+Mimikyu @ Mental Herb
+Ability: Disguise
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Play Rough
+- Shadow Sneak
+- Will-O-Wisp
+- Taunt
+
+=== PARTNER_BRENDAN_MUDKIP_METEOR_FALLS ===
+Name: BRENDAN
+Class: Rival
+Pic: Brendan
+Gender: Male
+Music: Male
+AI: Smart Trainer / Hp Aware / Smart Switching
+
+Sceptile @ Life Orb
+Ability: Overgrow
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Leaf Blade
+- Dragon Claw
+- X-Scissor
+- Protect
+
+Manectric @ Focus Sash
+Ability: Lightning Rod
+Timid Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+- Thunderbolt
+- Volt Switch
+- Snarl
+- Protect
+
+Mimikyu @ Mental Herb
+Ability: Disguise
+Jolly Nature
+Level: 40
+Happiness: 255
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+- Play Rough
+- Shadow Sneak
+- Will-O-Wisp
+- Taunt

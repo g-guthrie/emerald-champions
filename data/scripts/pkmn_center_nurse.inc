@@ -2,6 +2,7 @@ Common_EventScript_PkmnCenterNurse::
 	lock
 	faceplayer
 	call EC_DeliverTravelDocuments
+	call EventScript_PkmnCenterNurse_Itemfinder
 	call_if_set FLAG_EC_BIRCH_GREAT_BALLS_PENDING, EventScript_PkmnCenterNurse_BirchGift
 	call_if_set FLAG_EC_WOODS_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_WoodsGift
 	call_if_set FLAG_EC_RUSTBORO_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_RustboroGift
@@ -21,9 +22,9 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	message gText_EmeraldChampionsExplainTools
-	waitmessage
-	waitbuttonpress
+	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
 	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
 
 EventScript_PkmnCenterNurse_HasVial::
@@ -185,13 +186,13 @@ EventScript_PkmnCenterNurse_KeepDevonGift::
 	msgbox Text_PkmnCenterNurse_KeepDevonGift, MSGBOX_DEFAULT
 	return
 Text_PkmnCenterNurse_WoodsGift:
-	.string "The WOODS researcher left three\n"
-	.string "DUSK BALLS for you. Here you are!$"
+	.string "The Woods researcher left three\n"
+	.string "Dusk Balls for you. Here you are!$"
 Text_PkmnCenterNurse_DevonGift:
-	.string "A DEVON researcher left a GREAT BALL\n"
+	.string "A Devon researcher left a Great Ball\n"
 	.string "for you. Here you are!$"
 Text_PkmnCenterNurse_KeepDevonGift:
-	.string "Your BAG is still full. I'll keep it\n"
+	.string "Your Bag is still full. I'll keep it\n"
 	.string "safe. Make room and speak to me again.$"
 
 EventScript_PkmnCenterNurse_BirchGift::
@@ -201,7 +202,7 @@ EventScript_PkmnCenterNurse_BirchGift::
 	clearflag FLAG_EC_BIRCH_GREAT_BALLS_PENDING
 	return
 Text_PkmnCenterNurse_BirchGift:
-	.string "PROF. BIRCH left 10 GREAT BALLS\n"
+	.string "Prof. Birch left 10 Great Balls\n"
 	.string "for your journey. Here you are!$"
 
 EventScript_PkmnCenterNurse_ToolsPending::
@@ -209,8 +210,24 @@ EventScript_PkmnCenterNurse_ToolsPending::
 	goto EventScript_PkmnCenterNurse_Main
 
 gText_EmeraldChampionsToolsPending:
-	.string "Your BAG is full. We will hold\n"
+	.string "Your Bag is full. We will hold\n"
 	.string "the missing tools for you.\p"
 	.string "Healing is still available. Make\n"
 	.string "room and return for the tools\l"
 	.string "whenever you are ready.$"
+
+@ Route110 completion records entitlement; ownership includes deposited items.
+EventScript_PkmnCenterNurse_Itemfinder::
+	goto_if_lt VAR_ROUTE110_STATE, 1, Common_EventScript_NopReturn
+	setvar VAR_0x8004, ITEM_ITEMFINDER
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, Common_EventScript_NopReturn
+	checkitemspace ITEM_ITEMFINDER, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+	msgbox Text_PkmnCenterNurse_Itemfinder, MSGBOX_DEFAULT
+	giveitem ITEM_ITEMFINDER
+	return
+
+Text_PkmnCenterNurse_Itemfinder:
+	.string "Your friend left a Dowsing Machine\n"
+	.string "for you after your Route 110 battle!$"

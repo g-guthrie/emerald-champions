@@ -16,34 +16,32 @@ LilycoveCity_DepartmentStore_4F_EventScript_Youngster:: @ 821FDFD
 LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: @ 821FE06
 	lock
 	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Stones, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+	special OpenEmeraldChampionsEvolutionSpecialist
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs: @ 821FE20
-	.2byte ITEM_NONE
 	release
 	end
 
 LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight:: @ 821FE2C
 	lock
 	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Tools, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 1
+	special OpenEmeraldChampionsEvolutionSpecialist
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-	.align 2
-LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs: @ 821FE44
-	.2byte ITEM_NONE
-	release
-	end
+LilycoveCity_DepartmentStore_4F_Text_Stones:
+	.string "We stock every evolution stone!\n"
+	.string "Which one does your partner need?$"
+
+LilycoveCity_DepartmentStore_4F_Text_Tools:
+	.string "Special evolution tools and\n"
+	.string "reusable devices, all in stock!\p"
+	.string "A reusable device only needs to be\n"
+	.string "bought once. Check its description!$"
 
 LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM: @ 821FE50
 	.string "Should I evolve my partner now,\n"

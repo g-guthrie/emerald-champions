@@ -44,21 +44,7 @@ SootopolisCity_Gym_1F_OnFrame: @ 8224ECB
 	.2byte 0
 
 SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs:: @ 8224EED
-	addvar VAR_ICE_STEP_COUNT, 1
-	delay 40
-	playse SE_ICE_STAIRS
-	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
-	special DrawWholeMapView
-	end
-
 SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs:: @ 8224F01
-	addvar VAR_ICE_STEP_COUNT, 1
-	delay 40
-	playse SE_ICE_STAIRS
-	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
-	special DrawWholeMapView
-	end
-
 SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs:: @ 8224F15
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
@@ -83,13 +69,6 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce: @ 8224F42
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_Juan:: @ 8224F44
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_Gym_1F_EventScript_JuanRematch
 	trainerbattle_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, EmeraldChampions_Text_NeedTwoPokemon, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_GiveScald2
 	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
@@ -128,66 +107,13 @@ SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
 	return
 
 SootopolisCity_Gym_1F_EventScript_GiveScald2:: @ 8224FF7
-	giveitem ITEM_FERALIGITE
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM03
+	call SootopolisCity_Gym_1F_EventScript_GiveScald
 	release
 	end
 
 SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge:: @ 822501B
 	msgbox SootopolisCity_Gym_1F_Text_GoGetFortreeBadge, MSGBOX_DEFAULT
 	release
-	end
-
-SootopolisCity_Gym_1F_EventScript_JuanRematch::
-	message SootopolisCity_Gym_1F_Text_JuanChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, SootopolisCity_Gym_1F_EventScript_SetSingles
-	case 1, SootopolisCity_Gym_1F_EventScript_SetDoubles
-	case 2, SootopolisCity_Gym_1F_EventScript_Exit
-	case 127, SootopolisCity_Gym_1F_EventScript_Exit
-	releaseall
-	end
-
-SootopolisCity_Gym_1F_EventScript_SetSingles::
-	msgbox SootopolisCity_Gym_1F_Text_JuanAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_JUAN
-	releaseall
-	end
-
-SootopolisCity_Gym_1F_EventScript_SetDoubles::
-	msgbox SootopolisCity_Gym_1F_Text_JuanAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_JUAN
-	releaseall
-	end
-
-SootopolisCity_Gym_1F_EventScript_JuanSinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_JUAN
-	releaseall
-	end
-
-SootopolisCity_Gym_1F_EventScript_JuanDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_JUAN
-	releaseall
-	end
-
-SootopolisCity_Gym_1F_EventScript_AlreadyRematched::
-	msgbox SootopolisCity_Gym_1F_Text_JuanPostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-SootopolisCity_Gym_1F_EventScript_Exit::
-	releaseall
 	end
 
 SootopolisCity_Gym_1F_EventScript_GymGuide:: @ 8225040
@@ -289,12 +215,9 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge: @ 8225598
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis: @ 82255BE
 	.string "The Rain Badge and Waterfall\n"
 	.string "license let you climb waterfalls.\p"
-	.string "Press A at the falls. No special\n"
-	.string "Pokémon or move slot is needed.$"
-
-SootopolisCity_Gym_1F_Text_RegisteredKabutops:
-	.string "Registered Juan's Kabutops\n"
-	.string "in the PokéNav.$"
+	.string "Press A at the falls with a Pokémon\n"
+	.string "able to learn Waterfall.\p"
+	.string "It needn't know the move.$"
 
 SootopolisCity_Gym_1F_Text_TakeThis:
 	.string "And, so that you never forget the\n"
@@ -304,10 +227,6 @@ SootopolisCity_Gym_1F_Text_ExplainScald: @ 82256C1
 	.string "This is Feraligite. A Feraligatr\n"
 	.string "holding it can Mega Evolve with\l"
 	.string "your Mega Ring.$"
-
-SootopolisCity_Gym_1F_Text_RegisteredJuan: @ 822574D
-	.string "Registered Gym Leader Juan\n"
-	.string "in the PokéNav.$"
 
 SootopolisCity_Gym_1F_Text_JuanPostBattle: @ 8225778
 	.string "The Trainers who have gathered all\n"
@@ -333,41 +252,3 @@ SootopolisCity_Gym_1F_Text_GymStatueCertified: @ 8225916
 	.string "Sootopolis City Pokémon Gym\p"
 	.string "Juan's Certified Trainers:\n"
 	.string "{PLAYER}$"
-
-SootopolisCity_Gym_1F_Text_JuanPreRematch: @ 8225950
-	.string "Juan: Very Good!\n"
-	.string "Let the dance begin!$"
-
-SootopolisCity_Gym_1F_Text_JuanRematchDefeat: @ 8225A2E
-	.string "Ahahaha, you are the winner!\n"
-	.string "You have defeated me again!$"
-
-SootopolisCity_Gym_1F_Text_JuanPostRematch: @ 8225A67
-	.string "Juan: If I told you to become my\n"
-	.string "apprentice, you will refuse, I am sure.\p"
-	.string "I would like to make a gift of my coat\n"
-	.string "to you.\p"
-	.string "But again, you will refuse.\n"
-	.string "I imagine that to be so.\p"
-	.string "And that, my friend, is a certain sign\n"
-	.string "of nobility!$"
-
-SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons: @ 8225B48
-	.string "Juan: Ah, no, no, no.\n"
-	.string "You have with you but one Pokémon.\p"
-	.string "I wish that you would return with\n"
-	.string "two, perhaps more, Pokémon, please.$"
-
-SootopolisCity_Gym_1F_Text_JuanChooseFormat:
-	.string "Juan: Ah, this Gym had returned to its\n"
-	.string "usual state of serenity…\p"
-	.string "But our young typhoon has returned\n"
-	.string "to put us to the test again!\p"
-	.string "Well, my friend, most certainly!\p"
-	.string "I shall be delighted to dance with you\n"
-	.string "as often as you wish!\p"
-	.string "So, how shall we do this?$"
-
-SootopolisCity_Gym_1F_Text_JuanAllowLegends:
-	.string "And would you allow me to dance with\n"
-	.string "Legendary Pokémon?$"

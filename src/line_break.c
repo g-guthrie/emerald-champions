@@ -2,6 +2,19 @@
 #include "line_break.h"
 #include "text.h"
 #include "malloc.h"
+#include "string_util.h"
+
+// Encoded parameter bytes are not visible separators, even when their value
+// equals a space, newline, page break or EOS.
+static u32 TextTokenLength(const u8 *src)
+{
+    if (*src == EXT_CTRL_CODE_BEGIN)
+        return 1 + max(1, GetExtCtrlCodeLength(src[1]));
+    if (*src == CHAR_EXTRA_SYMBOL || *src == CHAR_KEYPAD_ICON
+     || *src == CHAR_DYNAMIC || *src == PLACEHOLDER_BEGIN)
+        return 2;
+    return 1;
+}
 
 void StripLineBreaks(u8 *src)
 {
@@ -16,8 +29,10 @@ void StripLineBreaks(u8 *src)
             else
                 src[currIndex] = CHAR_SPACE;
         }
-        prevChar = src[currIndex];
-        currIndex++;
+        u32 length = TextTokenLength(src + currIndex);
+        if (length == 1)
+            prevChar = src[currIndex];
+        currIndex += length;
     }
 }
 
@@ -29,7 +44,7 @@ u32 CountLineBreaks(u8 *src)
     {
         if (src[currIndex] == CHAR_PROMPT_SCROLL || src[currIndex] == CHAR_NEWLINE)
             numNewLines++;
-        currIndex++;
+        currIndex += TextTokenLength(src + currIndex);
     }
 
     return numNewLines;
@@ -49,7 +64,7 @@ void BreakStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enu
             src[currIndex] = replacedChar;
             currSrc = &src[currIndex + 1];
         }
-        currIndex++;
+        currIndex += TextTokenLength(src + currIndex);
     }
     BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId, toggleScrollPrompt);
 }
@@ -63,56 +78,52 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, 
     //  Sanity check
     if (src[0] == EOS)
         return;
-    u32 numChars = 1;
-    u32 numWords = 1;
-    u32 currWordIndex = 0;
-    u32 currWordLength = 1;
-    bool32 isPrevCharSplitting = FALSE;
-    bool32 isCurrCharSplitting;
-    //  Get numbers of chars in string and count words
+    u32 numChars = 0;
+    u32 numWords = 0;
+    bool32 inWord = FALSE;
     while (src[numChars] != EOS)
     {
-        isCurrCharSplitting = IsWordSplittingChar(src, numChars);
-        if (isCurrCharSplitting && !isPrevCharSplitting)
+        bool32 splitting = IsWordSplittingChar(src, numChars);
+        if (!splitting && !inWord)
             numWords++;
-        isPrevCharSplitting = isCurrCharSplitting;
-        numChars++;
+        inWord = !splitting;
+        numChars += TextTokenLength(src + numChars);
     }
-    //  Allocate enough space for word data
-    struct StringWord *allWords = Alloc(numWords*sizeof(struct StringWord));
+    if (numWords <= 1)
+        return;
 
-    allWords[currWordIndex].startIndex = 0;
-    allWords[currWordIndex].width = 0;
-    isPrevCharSplitting = FALSE;
-    //  Fill in word begin index and lengths
-    for (u32 i = 1; i < numChars; i++)
+    struct StringWord *allWords = Alloc(numWords * sizeof(*allWords));
+    u32 currWordIndex = 0;
+    for (u32 i = 0; i < numChars;)
     {
-        isCurrCharSplitting = IsWordSplittingChar(src, i);
-        if (isCurrCharSplitting && !isPrevCharSplitting)
+        if (IsWordSplittingChar(src, i))
         {
-            allWords[currWordIndex].length = currWordLength;
-            currWordIndex++;
-            currWordLength = 0;
+            i++;
+            continue;
         }
-        else if (!isCurrCharSplitting && isPrevCharSplitting)
-        {
-            allWords[currWordIndex].startIndex = i;
-            allWords[currWordIndex].width = 0;
-            currWordLength++;
-        }
-        else
-        {
-            currWordLength++;
-        }
-        isPrevCharSplitting = isCurrCharSplitting;
+        u32 start = i;
+        while (i < numChars && !IsWordSplittingChar(src, i))
+            i += TextTokenLength(src + i);
+        allWords[currWordIndex].startIndex = start;
+        allWords[currWordIndex].length = i - start;
+        allWords[currWordIndex].width = 0;
+        currWordIndex++;
     }
-    allWords[currWordIndex].length = currWordLength;
 
     //  Fill in individual word widths
     for (u32 i = 0; i < numWords; i++)
     {
-        for (u32 j = 0; j < allWords[i].length; j++)
-            allWords[i].width += GetGlyphWidth(src[allWords[i].startIndex + j], FALSE, fontId);
+        for (u32 j = 0; j < allWords[i].length;)
+        {
+            const u8 *token = src + allWords[i].startIndex + j;
+            if (*token == CHAR_EXTRA_SYMBOL)
+                allWords[i].width += GetGlyphWidth(token[1] | 0x100, FALSE, fontId);
+            else if (*token == CHAR_KEYPAD_ICON)
+                allWords[i].width += GetKeypadIconWidth(token[1]);
+            else if (TextTokenLength(token) == 1)
+                allWords[i].width += GetGlyphWidth(*token, FALSE, fontId);
+            j += TextTokenLength(token);
+        }
     }
 
     //  Step 1: Does it all fit one one line? Then no break
@@ -214,6 +225,8 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, 
                     currWordIndex++;
                 }
             }
+            if (!shouldTryAgain)
+                totalLines = currLineIndex + 1;
         } while (shouldTryAgain);
         BuildNewString(stringLines, totalLines, screenLines, src, toggleScrollPrompt);
         Free(stringLines);
@@ -238,22 +251,15 @@ bool32 IsWordSplittingChar(const u8 *src, u32 index)
 //  Build the new string from the data stored in the StringLine structs
 void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, u8 *str, enum ToggleScrollPrompt toggleScrollPrompt)
 {
-    u32 srcCharIndex = 0;
-    for (u32 lineIndex = 0; lineIndex < numLines; lineIndex++)
+    for (u32 lineIndex = 0; lineIndex + 1 < numLines; lineIndex++)
     {
-        srcCharIndex += stringLines[lineIndex].words[0].length;
-        for (u32 wordIndex = 1; wordIndex < stringLines[lineIndex].numWords; wordIndex++)
-            //  Add length of word and a space
-            srcCharIndex += stringLines[lineIndex].words[wordIndex].length + 1;
-        if (lineIndex + 1 < numLines)
-        {
-            //  Add the appropriate line break depending on line number
-            if (lineIndex >= maxLines - 1 && numLines > maxLines && toggleScrollPrompt == SHOW_SCROLL_PROMPT)
-                str[srcCharIndex] = CHAR_PROMPT_SCROLL;
-            else
-                str[srcCharIndex] = CHAR_NEWLINE;
-            srcCharIndex++;
-        }
+        // Replace the separator immediately before the next line's first word,
+        // rather than assuming all gaps have exactly one byte.
+        u32 separator = stringLines[lineIndex + 1].words[0].startIndex - 1;
+        if (lineIndex >= maxLines - 1 && numLines > maxLines && toggleScrollPrompt == SHOW_SCROLL_PROMPT)
+            str[separator] = CHAR_PROMPT_SCROLL;
+        else
+            str[separator] = CHAR_NEWLINE;
     }
 }
 
@@ -264,7 +270,7 @@ bool32 StringHasManualBreaks(u8 *src)
     {
         if (src[charIndex] == CHAR_PROMPT_SCROLL || src[charIndex] == CHAR_NEWLINE)
             return TRUE;
-        charIndex++;
+        charIndex += TextTokenLength(src + charIndex);
     }
     return FALSE;
 }

@@ -36,11 +36,9 @@ struct PokenavCallbacks
 };
 
 static u32 GetCurrentMenuCB(void);
-static u32 IsActiveMenuLoopTaskActive_(void);
 static bool32 SetActivePokenavMenu(u32);
 static bool32 AnyMonHasRibbon(void);
 static void InitPokenavResources(struct PokenavResources *);
-static void InitKeys_(void);
 static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
@@ -159,16 +157,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[] =
         .isLoopTaskActive = IsSearchResultLoopedTaskActive,
         .free1 = FreeSearchResultSubstruct1,
         .free2 = FreeSearchResultSubstruct2,
-    },
-    [POKENAV_MATCH_CALL - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MatchCall,
-        .callback = GetMatchCallCallback,
-        .open = OpenMatchCall,
-        .createLoopTask = CreateMatchCallLoopedTask,
-        .isLoopTaskActive = IsMatchCallLoopedTaskActive,
-        .free1 = FreeMatchCallSubstruct1,
-        .free2 = FreeMatchCallSubstruct2,
     },
     [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
     {
@@ -487,7 +475,7 @@ static void Task_Pokenav(u8 taskId)
         }
         break;
     case 4:
-        if (!IsActiveMenuLoopTaskActive_())
+        if (!IsActiveMenuLoopTaskActive())
             tState = 3;
         break;
     case 5:
@@ -512,7 +500,11 @@ static bool32 SetActivePokenavMenu(u32 menuId)
 {
     u32 index = menuId - POKENAV_MENU_IDS_START;
 
-    InitKeys_();
+    // Subtraction is unsigned, so IDs below the menu base fail this bound too.
+    // Retired entries are holes in the stable ID table, not callable menus.
+    if (index >= ARRAY_COUNT(PokenavMenuCallbacks) || PokenavMenuCallbacks[index].init == NULL)
+        return FALSE;
+    InitKeys();
     if (!PokenavMenuCallbacks[index].init())
         return FALSE;
     if (!PokenavMenuCallbacks[index].open())
@@ -524,19 +516,9 @@ static bool32 SetActivePokenavMenu(u32 menuId)
     return TRUE;
 }
 
-static u32 IsActiveMenuLoopTaskActive_(void)
-{
-    return IsActiveMenuLoopTaskActive();
-}
-
 static u32 GetCurrentMenuCB(void)
 {
     return gPokenavResources->currentMenuCb1();
-}
-
-static void InitKeys_(void)
-{
-    InitKeys();
 }
 
 void SetVBlankCallback_(IntrCallback callback)
@@ -593,3 +575,10 @@ bool32 CanViewRibbonsMenu(void)
 {
     return gPokenavResources->hasAnyRibbons;
 }
+
+#if TESTING
+bool32 Test_SetActivePokenavMenu(u32 menuId)
+{
+    return SetActivePokenavMenu(menuId);
+}
+#endif

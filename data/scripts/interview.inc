@@ -179,31 +179,6 @@ BattleFrontier_BattleTowerLobby_EventScript_Reporter::
 	compare VAR_RESULT, NO
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview
 	end
-BattleFrontier_BattleTowerLobby_Text_NoStoryToFile:
-	.string "There is no broadcast to file.\n"
-	.string "The CIRCUIT keeps its own record.$"
-
-
-
-@ ---------------------------------------------------------------------------
-@ Inclement Emerald Lilycove Contest Lobby helpers, restored verbatim because
-@ data/maps/LilycoveCity_ContestLobby/scripts.inc calls
-@ LilycoveCity_ContestLobby_EventScript_TryShowContestReporter (on transition)
-@ and LilycoveCity_ContestLobby_EventScript_SetPlayerGfx (contest entry).
-@
-@ TryShowContestReporter and its two tails come from the donor's
-@ data/scripts/interview.inc. SetPlayerGfx and its two tails come from the
-@ donor's data/maps/ContestHall/scripts.inc, which has no counterpart in this
-@ engine (there is no data/maps/ContestHall here), so they are homed in this
-@ file rather than in the map script.
-@
-@ Note: the special InterviewBefore below is passed
-@ TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE, a TV show this engine no longer
-@ implements. InterviewBefore clears VAR_RESULT to FALSE and ignores unhandled
-@ show types, so the call is inert: the duplicate-broadcast check simply never
-@ suppresses the reporter. Kept verbatim rather than rewritten.
-@ ---------------------------------------------------------------------------
-
 LilycoveCity_ContestLobby_EventScript_TryShowContestReporter::
 	compare VAR_CONTEST_HALL_STATE, 2
 	goto_if_ne LilycoveCity_ContestLobby_EventScript_DontShowContestReporter
@@ -370,14 +345,3 @@ BattleFrontier_BattleTowerLobby_EventScript_HideReporter::
 	return
 
 @ Unused
-EventScript_ContestLiveInterview::
-	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
-	special InterviewBefore
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_ContestLiveInterviewEnd
-	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
-	special InterviewAfter
-	return
-
-EventScript_ContestLiveInterviewEnd::
-	return

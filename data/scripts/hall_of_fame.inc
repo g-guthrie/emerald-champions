@@ -31,6 +31,7 @@ EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
 	clearflag FLAG_DEFEATED_MEW
 	clearflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+	call_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_RecordDeoxysFinale
 	clearflag FLAG_DEFEATED_DEOXYS
 	clearflag FLAG_DEFEATED_LUGIA
 	clearflag FLAG_DEFEATED_HO_OH

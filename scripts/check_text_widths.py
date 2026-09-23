@@ -306,8 +306,8 @@ def discover_files():
 # .string block extraction
 # ---------------------------------------------------------------------------
 
-LABEL_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)::?\s*$")
-STRING_RE = re.compile(r'^\s*\.string\s+"(.*)"\s*$')
+LABEL_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)::?\s*(?:@.*)?$")
+STRING_RE = re.compile(r'^\s*\.string\s+"(.*)"\s*(?:@.*)?$')
 COMMENT_OR_BLANK_RE = re.compile(r"^\s*(@.*)?$")
 
 

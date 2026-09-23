@@ -1465,8 +1465,7 @@ static void PlayCollisionSoundIfNotFacingWarp(enum Direction direction)
 
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y)
 {
-    *x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
-    *y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+    PlayerGetDestCoords(x, y);
     MoveCoords(GetPlayerFacingDirection(), x, y);
 }
 
@@ -1616,8 +1615,7 @@ enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 
 bool8 PartyHasMonWithSurf(void)
 {
-    // Emerald Champions: the Balance Badge is the requirement; any party
-    // animation uses a party member, but access is the player's unlock.
+    // Surf needs badge, license, and a compatible party member, but no moveslot.
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return FALSE;
     return FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) != PARTY_SIZE;

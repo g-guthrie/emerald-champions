@@ -33,7 +33,10 @@ MossdeepCity_EventScript_PokefanFMagmaGone:: @ 81E4AC7
 MossdeepCity_EventScript_Sailor:: @ 81E4AD1
 	lock
 	faceplayer
+MossdeepCity_EventScript_SailorDialogueGate::
 	goto_if_set FLAG_RECEIVED_HM08, MossdeepCity_EventScript_SailorMagmaGone
+	goto_if_ge VAR_MOSSDEEP_CITY_STATE, 3, MossdeepCity_EventScript_SailorMagmaGone
+MossdeepCity_EventScript_SailorMagmaPresent::
 	msgbox MossdeepCity_Text_MossdeepTargetedByMagma, MSGBOX_DEFAULT
 	release
 	end
@@ -288,7 +291,7 @@ MossdeepCity_EventScript_AvalancheTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_MOSSDEEP_CITY, MossdeepCity_EventScript_ReceivedTM96
 	msgbox MossdeepCity_Text_AvalancheNonsense, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BIG_PEARL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_MOSSDEEP_CITY
 	msgbox MossdeepCity_Text_HaveTM96, MSGBOX_DEFAULT
@@ -434,7 +437,7 @@ MossdeepCity_Text_SpaceCenterSign: @ 81E541F
 MossdeepCity_Text_ScottSomethingWrongWithTown: @ 81E5453
 	.string "Scott: {PLAYER}{KUN}, feeling good?\n"
 	.string "I'm doing great!\p"
-	.string "I'd heard Mossdeep's Gym Leader is\n"
+	.string "I'd heard Mossdeep's Gym Leaders are\n"
 	.string "pretty strong, so I decided to come\l"
 	.string "take a look-see for myself.\p"
 	.string "But there's something wrong about\n"
@@ -457,9 +460,8 @@ MossdeepCity_Text_SootopolisNewGymLeader: @ 81E5581
 MossdeepCity_Text_AvalancheNonsense:
 	.string "You have earned a little help\n"
 	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "this Big Pearl!$"
 
 MossdeepCity_Text_HaveTM96:
-	.string "That Rare Candy helps a Pokémon\n"
-	.string "grow one level, up to your\l"
-	.string "current cap.$"
+	.string "Sell that Big Pearl at a Mart to\n"
+	.string "help pay for your team's supplies.$"

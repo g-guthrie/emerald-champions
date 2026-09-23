@@ -29,7 +29,6 @@ BattleFrontier_ScottsHouse_EventScript_CheckSilverSymbols:: @ 8263704
 	goto_if_unset FLAG_SYS_TOWER_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_DOME_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PALACE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_ARENA_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_FACTORY_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PIKE_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PYRAMID_SILVER, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
@@ -46,7 +45,6 @@ BattleFrontier_ScottsHouse_EventScript_CheckGoldSymbols:: @ 826376A
 	goto_if_unset FLAG_SYS_TOWER_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_DOME_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PALACE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
-	goto_if_unset FLAG_SYS_ARENA_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_FACTORY_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PIKE_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
 	goto_if_unset FLAG_SYS_PYRAMID_GOLD, BattleFrontier_ScottsHouse_EventScript_CheckGiveShield
@@ -90,7 +88,7 @@ BattleFrontier_ScottsHouse_EventScript_ArtisanCaveComment:: @ 8263811
 	end
 
 BattleFrontier_ScottsHouse_EventScript_CheckGiveSilverShield:: @ 826381B
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES @ Tower Singles is closed
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	tower_get TOWER_DATA_WIN_STREAK
 	compare VAR_RESULT, 50
@@ -123,7 +121,7 @@ BattleFrontier_ScottsHouse_EventScript_GivenShield:: @ 82638AA
 	end
 
 BattleFrontier_ScottsHouse_EventScript_CheckGiveGoldShield:: @ 82638B4
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES @ Tower Singles is closed
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	tower_get TOWER_DATA_WIN_STREAK
 	compare VAR_RESULT, 100

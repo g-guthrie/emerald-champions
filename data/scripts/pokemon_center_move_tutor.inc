@@ -259,10 +259,6 @@ PKMN_Center_Move_Tutor_CloseDescriptionWindow::
     special CloseBattleFrontierTutorWindow
     goto PKMN_Center_Move_Tutor_MoveTutorMenu
 
-PKMN_Center_Move_Tutor_CloseDescriptionWindowReturn::
-    special CloseBattleFrontierTutorWindow
-    goto PKMN_Center_Move_Tutor
-
 PKMN_Center_Move_Tutor_ExitReturn::
     goto PKMN_Center_Move_Tutor
 
@@ -315,12 +311,6 @@ PKMN_Center_Move_Tutor_General_Exit::
 	end
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ EXP Grinding @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-PKMN_Center_EventScript_Exp_Grind::
-
-	releaseall
-	end
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Event Reset @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 PKMN_Center_EventScript_Event_Reset::
 	compare VAR_EVENT_RESET_STATE, 2
 	goto_if_eq PKMN_Center_EventReset_EventScript_AlreadyReset

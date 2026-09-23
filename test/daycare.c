@@ -753,217 +753,32 @@ TEST("GetChildNature returns the nature of a random parent if they are both hold
         EXPECT_EQ(GetChildNature(&gSaveBlock1Ptr->daycare), NATURE_LONELY);
 }
 
-TEST("InheritIVs will pass 3 random stats from the parents to the egg")
+// Emerald Champions retires IV inheritance: parents, Destiny Knot and Power items
+// never matter, and every egg gets the same perfect spread.
+TEST("InheritIVs gives every egg perfect IVs regardless of parents and held items")
 {
+    enum Item item = ITEM_NONE;
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_DESTINY_KNOT; }
+    PARAMETRIZE { item = ITEM_POWER_WEIGHT; }
     struct Pokemon egg;
     CreateMonWithIVs(&egg, SPECIES_BULBASAUR, 1, Random32(), OTID_STRUCT_PLAYER_ID, 0);
-
-    u32 rngIv = 0;
-    u32 j;
-    for (j = 0; j < 720; j++)
-    {
-        PARAMETRIZE { rngIv = j; }
-    }
-    SET_RNG(RNG_DAYCARE_INHERITED_STATS, rngIv);
 
     ZeroPlayerPartyMons();
     memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
     RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31;
-        givemon SPECIES_BULBASAUR, 100, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31;
+        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, hpIv=0, atkIv=0, defIv=0, speedIv=0, spAtkIv=0, spDefIv=0;
+        givemon SPECIES_BULBASAUR, 100, gender=MON_FEMALE, hpIv=0, atkIv=0, defIv=0, speedIv=0, spAtkIv=0, spDefIv=0;
     );
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
 
     gSpecialVar_0x8004 = 0;
     StoreSelectedPokemonInDaycare();
     StoreSelectedPokemonInDaycare();
 
     InheritIVs(&egg, &gSaveBlock1Ptr->daycare);
-    u32 passedIvCount = 0;
-    for (j = 0; j < NUM_STATS; j++)
-    {
-        if (GetMonData(&egg, MON_DATA_HP_IV + j) == 31)
-            passedIvCount++;
-    }
-
-    EXPECT_EQ(passedIvCount, 3);
-}
-
-TEST("InheritIVs will pass 5 random stats from the parents to the egg if one parent is holding a destiny knot")
-{
-    struct Pokemon egg;
-    CreateMonWithIVs(&egg, SPECIES_BULBASAUR, 1, Random32(), OTID_STRUCT_PLAYER_ID, 0);
-
-    u32 j;
-    u32 rngIv = 0;
-    u32 slot = 0;
-    for (j = 0; j < 720; j++)
-    {
-        PARAMETRIZE { rngIv = j; slot = 1; }
-        PARAMETRIZE { rngIv = j; slot = 0; }
-    }
-    SET_RNG(RNG_DAYCARE_INHERITED_STATS, rngIv);
-
-    ZeroPlayerPartyMons();
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, item=ITEM_DESTINY_KNOT;
-        givemon SPECIES_BULBASAUR, 100, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31;
-    );
-
-    gSpecialVar_0x8004 = slot;
-    StoreSelectedPokemonInDaycare();
-    gSpecialVar_0x8004 = 0;
-    StoreSelectedPokemonInDaycare();
-
-    InheritIVs(&egg, &gSaveBlock1Ptr->daycare);
-    u32 passedIvCount = 0;
-    for (j = 0; j < NUM_STATS; j++)
-    {
-        if (GetMonData(&egg, MON_DATA_HP_IV + j) == 31)
-            passedIvCount++;
-    }
-
-    EXPECT_EQ(passedIvCount, 5);
-}
-
-TEST("InheritIVs does not pass more stats when a power item is equipped")
-{
-    struct Pokemon egg;
-    CreateMonWithIVs(&egg, SPECIES_BULBASAUR, 1, Random32(), OTID_STRUCT_PLAYER_ID, 0);
-
-    u32 j;
-    u32 rngIv = 0;
-    enum Item item0 = ITEM_NONE;
-    enum Item item1 = ITEM_NONE;
-    for (j = 0; j < 720; j++)
-    {
-        for (enum Item k = ITEM_POWER_WEIGHT; k <= ITEM_POWER_ANKLET; k++)
-        {
-            PARAMETRIZE { rngIv = j; item0 = k; item1 = ITEM_NONE; }
-            PARAMETRIZE { rngIv = j; item0 = k; item1 = ITEM_DESTINY_KNOT; }
-            PARAMETRIZE { rngIv = j; item0 = k; item1 = ITEM_POWER_WEIGHT; }
-        }
-    }
-    SET_RNG(RNG_DAYCARE_INHERITED_STATS, rngIv);
-
-    ZeroPlayerPartyMons();
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    gSpecialVar_0x8000 = item0;
-    gSpecialVar_0x8001 = item1;
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, item=VAR_0x8000;
-        givemon SPECIES_BULBASAUR, 100, gender=MON_FEMALE, hpIv=31, atkIv=31, defIv=31, speedIv=31, spAtkIv=31, spDefIv=31, item=VAR_0x8001;
-    );
-
-    gSpecialVar_0x8004 = 0;
-    StoreSelectedPokemonInDaycare();
-    StoreSelectedPokemonInDaycare();
-
-    InheritIVs(&egg, &gSaveBlock1Ptr->daycare);
-    u32 passedIvCount = 0;
-    for (j = 0; j < NUM_STATS; j++)
-    {
-        if (GetMonData(&egg, MON_DATA_HP_IV + j) == 31)
-            passedIvCount++;
-    }
-
-    if (item1 == ITEM_DESTINY_KNOT)
-        EXPECT_EQ(passedIvCount, 5);
-    else
-        EXPECT_EQ(passedIvCount, 3);
-}
-
-TEST("InheritIVs will always pass the preferred stat from the parent holding the parent item")
-{
-    struct Pokemon egg;
-    CreateMonWithIVs(&egg, SPECIES_BULBASAUR, 1, Random32(), OTID_STRUCT_PLAYER_ID, 0);
-    SET_RNG(RNG_DAYCARE_PICK_IVS_PARENT, 31);
-
-    u32 j;
-    u32 rngIv = 0;
-    enum Item item0 = ITEM_NONE;
-    enum Stat powerStat = 0;
-    for (j = 0; j < 720; j++)
-    {
-        for (enum Item k = ITEM_POWER_WEIGHT; k <= ITEM_POWER_ANKLET; k++)
-        {
-            PARAMETRIZE { rngIv = j; item0 = k; powerStat = GetItemSecondaryId(k); }
-        }
-    }
-
-    SET_RNG(RNG_DAYCARE_INHERITED_STATS, rngIv);
-
-    ZeroPlayerPartyMons();
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    gSpecialVar_0x8000 = item0;
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, hpIv=0, atkIv=0, defIv=0, speedIv=0, spAtkIv=0, spDefIv=0, item=VAR_0x8000;
-        givemon SPECIES_BULBASAUR, 100, gender=MON_FEMALE, hpIv=1, atkIv=1, defIv=1, speedIv=1, spAtkIv=1, spDefIv=1;
-    );
-
-    u32 value = 31;
-    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_IV + powerStat, &value);
-    gSpecialVar_0x8004 = 0;
-    StoreSelectedPokemonInDaycare();
-    StoreSelectedPokemonInDaycare();
-
-    InheritIVs(&egg, &gSaveBlock1Ptr->daycare);
-    u32 passedValues = 0;
-    for (j = 0; j < NUM_STATS; j++)
-    {
-        value = GetMonData(&egg, MON_DATA_HP_IV + j);
-        if (j == powerStat)
-            EXPECT_EQ(value, 31);
-        else if (value == 1)
-            passedValues++;
-        else
-            EXPECT_EQ(value, 0);
-    }
-    EXPECT_EQ(passedValues, 2);
-}
-
-TEST("InheritIVs pick one parent at random to pass its power stat if two power items are equipped")
-{
-    struct Pokemon egg;
-    CreateMonWithIVs(&egg, SPECIES_BULBASAUR, 1, Random32(), OTID_STRUCT_PLAYER_ID, 0);
-
-    enum Item item0 = ITEM_NONE;
-    enum Item item1 = ITEM_NONE;
-    u32 parent = 0;
-    for (enum Item j = ITEM_POWER_WEIGHT; j <= ITEM_POWER_ANKLET; j++)
-    {
-        for (enum Item k = ITEM_POWER_WEIGHT; k <= ITEM_POWER_ANKLET; k++)
-        {
-            PARAMETRIZE { item0 = j; item1 = k; parent = 0; }
-            PARAMETRIZE { item0 = j; item1 = k; parent = 1; }
-        }
-    }
-    SET_RNG(RNG_DAYCARE_PICK_IVS_PARENT, parent);
-    enum Stat powerStat0 = GetItemSecondaryId(item0);
-    enum Stat powerStat1 = GetItemSecondaryId(item1);
-
-    ZeroPlayerPartyMons();
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-    gSpecialVar_0x8000 = item0;
-    gSpecialVar_0x8001 = item1;
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, hpIv=0, atkIv=0, defIv=0, speedIv=0, spAtkIv=0, spDefIv=0, item=VAR_0x8000;
-        givemon SPECIES_BULBASAUR, 100, gender=MON_FEMALE, hpIv=0, atkIv=0, defIv=0, speedIv=0, spAtkIv=0, spDefIv=0, item=VAR_0x8001;
-    );
-
-    u32 value = 31;
-    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_IV + powerStat0, &value);
-    value = 30;
-    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP_IV + powerStat1, &value);
-    gSpecialVar_0x8004 = 0;
-    StoreSelectedPokemonInDaycare();
-    StoreSelectedPokemonInDaycare();
-
-    InheritIVs(&egg, &gSaveBlock1Ptr->daycare);
-    if (parent == 0)
-        EXPECT_EQ(GetMonData(&egg, MON_DATA_HP_IV + powerStat0), 31);
-    else
-        EXPECT_EQ(GetMonData(&egg, MON_DATA_HP_IV + powerStat1), 30);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        EXPECT_EQ(GetMonData(&egg, MON_DATA_HP_IV + stat), MAX_PER_STAT_IVS);
 }
 
 TEST("InheritPokeball doesn't do anything, all eggs are born in Pokeball (gen5-)")

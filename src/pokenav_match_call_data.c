@@ -213,10 +213,7 @@ static const struct MatchCallStructTrainer sNormanMatchCallHeader =
         { MatchCall_Text_Norman3,                  FLAG_DEFEATED_LAVARIDGE_GYM,   NO_FLAG_TO_SET },
         { MatchCall_Text_Norman4,                  FLAG_DEFEATED_PETALBURG_GYM,   NO_FLAG_TO_SET },
         { MatchCall_Text_Norman5,                  FLAG_RECEIVED_RED_OR_BLUE_ORB, NO_FLAG_TO_SET },
-        { MatchCall_Text_Norman_Preparing,         REMATCH_CALL_START,            NO_FLAG_TO_SET },
-        { MatchCall_Text_Norman_PreparingPostGame, FLAG_SYS_GAME_CLEAR,           NO_FLAG_TO_SET },
-        { MatchCall_Text_Norman_RematchReady,      FLAG_SYS_GAME_CLEAR,           NO_FLAG_TO_SET },
-        { MatchCall_Text_Norman_PostRematch,       FLAG_SYS_GAME_CLEAR,           NO_FLAG_TO_SET },
+        { MatchCall_Text_Norman_PostRematch, ALWAYS_AVAILABLE,           NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -380,10 +377,7 @@ static const struct MatchCallStructTrainer sRoxanneMatchCallHeader =
     .desc = COMPOUND_STRING("ROCKIN' WHIZ"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_Roxanne_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_Roxanne_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Roxanne_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Roxanne_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_Roxanne_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -397,10 +391,7 @@ static const struct MatchCallStructTrainer sBrawlyMatchCallHeader =
     .desc = COMPOUND_STRING("THE BIG HIT"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_Brawly_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_Brawly_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Brawly_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Brawly_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_Brawly_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -414,10 +405,7 @@ static const struct MatchCallStructTrainer sWattsonMatchCallHeader =
     .desc = COMPOUND_STRING("SWELL SHOCK"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_Wattson_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_Wattson_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Wattson_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Wattson_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_Wattson_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -431,10 +419,7 @@ static const struct MatchCallStructTrainer sFlanneryMatchCallHeader =
     .desc = COMPOUND_STRING("PASSION BURN"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_Flannery_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_Flannery_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Flannery_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Flannery_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_Flannery_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -448,10 +433,7 @@ static const struct MatchCallStructTrainer sWinonaMatchCallHeader =
     .desc = COMPOUND_STRING("SKY TAMER"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_Winona_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_Winona_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Winona_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Winona_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_Winona_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -465,10 +447,7 @@ static const struct MatchCallStructTrainer sTateLizaMatchCallHeader =
     .desc = COMPOUND_STRING("MYSTIC DUO"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_TateLiza_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_TateLiza_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_TateLiza_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_TateLiza_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_TateLiza_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -482,10 +461,7 @@ static const struct MatchCallStructTrainer sJuanMatchCallHeader =
     .desc = COMPOUND_STRING("DANDY CHARM"),
     .name = NULL,
     .textData = (const match_call_text_data_t[]) {
-        { MatchCall_Text_Juan_Preparing,         REMATCH_CALL_START,  NO_FLAG_TO_SET },
-        { MatchCall_Text_Juan_PreparingPostGame, ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Juan_RematchReady,      ALWAYS_AVAILABLE,    NO_FLAG_TO_SET },
-        { MatchCall_Text_Juan_PostRematch,       FLAG_SYS_GAME_CLEAR, NO_FLAG_TO_SET },
+        { MatchCall_Text_Juan_PostRematch, ALWAYS_AVAILABLE, NO_FLAG_TO_SET },
         MATCH_CALL_TEXT_END
     }
 };
@@ -1002,51 +978,16 @@ static void MatchCall_BufferCallMessageText(const match_call_text_data_t *textDa
     StringExpandPlaceholders(dest, textData[i].text);
 }
 
-static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u16 idx, u8 *dest)
+static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_data_t *textData, u16 idx UNUSED, u8 *dest)
 {
-#if FREE_MATCH_CALL == FALSE
-    u32 i;
-    for (i = 0; textData[i].text != NULL; i++)
-    {
-        if (textData[i].availabilityFlag == REMATCH_CALL_START)
-            break;
-        if (textData[i].availabilityFlag != ALWAYS_AVAILABLE && !FlagGet(textData[i].availabilityFlag))
-            break;
-    }
-    if (textData[i].availabilityFlag != REMATCH_CALL_START)
-    {
-        if (i)
-            i--;
-        if (textData[i].flagToSetOnCompletion != NO_FLAG_TO_SET)
-            FlagSet(textData[i].flagToSetOnCompletion);
-        StringExpandPlaceholders(dest, textData[i].text);
-    }
-    else
-    {
-        if (!OW_TRAINER_REMATCHES)
-        {
-            // The fourth row is a safe retrospective line. Never select the
-            // preparing/ready rematch promises in a rematch-free campaign.
-            i += 3;
-        }
-        else if (FlagGet(FLAG_SYS_GAME_CLEAR))
-        {
-            do
-            {
-                // If the rematch is ready, advance to the rematch call.
-                if (gSaveBlock1Ptr->trainerRematches[idx]) i += 2;
-                // No rematch ready, but if the player has defeated them in
-                // a rematch before, advance to the final call.
-                // Note: The 2 "rematch" teams battled includes the first non-rematch battle.
-                else if (CountBattledRematchTeams(idx) >= 2) i += 3; 
-                // No rematch ready and never defeated in a rematch, advance to congratulations call.
-                else i++;
-            } while (0);
-        }
-        // If the game hasn't been cleared yet, the index remains on the basic "preparing for rematch" call.
-        StringExpandPlaceholders(dest, textData[i].text);
-    }
-#endif //FREE_MATCH_CALL
+    u32 i = 0;
+    while (textData[i + 1].text != NULL
+        && (textData[i + 1].availabilityFlag == ALWAYS_AVAILABLE
+            || FlagGet(textData[i + 1].availabilityFlag)))
+        i++;
+    if (textData[i].flagToSetOnCompletion != NO_FLAG_TO_SET)
+        FlagSet(textData[i].flagToSetOnCompletion);
+    StringExpandPlaceholders(dest, textData[i].text);
 }
 
 void MatchCall_GetNameAndDesc(u32 idx, const u8 **desc, const u8 **name)

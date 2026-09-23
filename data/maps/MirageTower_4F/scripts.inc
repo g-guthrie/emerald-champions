@@ -11,6 +11,8 @@ MirageTower_4F_EventScript_RootFossil:: @ 823AD48
 	compare VAR_RESULT, NO
 	goto_if_eq MirageTower_4F_EventScript_LeaveRootFossil
 	giveitem ITEM_ROOT_FOSSIL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
@@ -32,6 +34,8 @@ MirageTower_4F_EventScript_ClawFossil:: @ 823AD89
 	compare VAR_RESULT, NO
 	goto_if_eq MirageTower_4F_EventScript_LeaveClawFossil
 	giveitem ITEM_CLAW_FOSSIL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
 	setflag FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL
 	setflag FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL
@@ -54,7 +58,6 @@ MirageTower_4F_EventScript_CollapseMirageTower:: @ 823ADCA
 	special ShakeCamera
 	waitstate
 	special DoMirageTowerCeilingCrumble
-	waitstate
 	setvar VAR_MIRAGE_TOWER_STATE, 1
 	clearflag FLAG_LANDMARK_MIRAGE_TOWER
 	warp MAP_ROUTE111, 255, 19, 59
@@ -66,6 +69,8 @@ MirageTower_4F_Text_TakeRootFossil: @ 823ADF9
 	.string "You found the Root Fossil.\p"
 	.string "If this Fossil is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
+	.string "Anything else up here would be\n"
+	.string "lost with it.\p"
 	.string "Take the Root Fossil anyway?$"
 
 MirageTower_4F_Text_LeftRootFossilAlone: @ 823AE79
@@ -75,6 +80,8 @@ MirageTower_4F_Text_TakeClawFossil: @ 823AE98
 	.string "You found the Claw Fossil.\p"
 	.string "If this Fossil is taken, the ground\n"
 	.string "around it will likely crumble away…\p"
+	.string "Anything else up here would be\n"
+	.string "lost with it.\p"
 	.string "Take the Claw Fossil anyway?$"
 
 MirageTower_4F_Text_LeaveClawFossilAlone: @ 823AF18

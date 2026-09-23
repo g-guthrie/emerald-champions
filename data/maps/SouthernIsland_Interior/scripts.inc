@@ -85,23 +85,12 @@ SouthernIsland_Interior_EventScript_Lati:: @ 8242AD0
 	call_if_ne SouthernIsland_Interior_EventScript_SetLatiasBattleVars
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLatiBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq SouthernIsland_Interior_EventScript_LatiDefeated
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq SouthernIsland_Interior_EventScript_RanFromLati
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq SouthernIsland_Interior_EventScript_RanFromLati
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, SouthernIsland_Interior_EventScript_RanFromLati
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
-	end
-
-SouthernIsland_Interior_EventScript_LatiDefeated:: @ 8242B81
-	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
-	copyvar VAR_0x8004, VAR_TEMP_4
-	goto Common_EventScript_LegendaryFlewAway
 	end
 
 SouthernIsland_Interior_EventScript_RanFromLati:: @ 8242B8F
@@ -111,11 +100,19 @@ SouthernIsland_Interior_EventScript_RanFromLati:: @ 8242B8F
 
 SouthernIsland_Interior_EventScript_Sign:: @ 8242B9A
 	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
-	goto_if_unset FLAG_RECEIVED_LATI_STONES SouthernIsland_Interior_EventScript_GiveLatiStones
+	goto_if_unset FLAG_RECEIVED_LATI_STONES, SouthernIsland_Interior_EventScript_GiveLatiStones
+	releaseall
+	end
+
+SouthernIsland_Interior_EventScript_LatiStonesBagFull:
+	msgbox SouthernIsland_Interior_Text_SparkleBagFull, MSGBOX_DEFAULT
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_GiveLatiStones::
+	specialvar VAR_RESULT, CanReceiveLatiStones
+	compare VAR_RESULT, FALSE
+	goto_if_eq SouthernIsland_Interior_EventScript_LatiStonesBagFull
 	closemessage
 	delay 20
 	playse SE_M_DETECT
@@ -181,3 +178,7 @@ SouthernIsland_Interior_Movement_LatiApproach: @ 8242BDA
 	walk_down
 	walk_down
 	step_end
+
+SouthernIsland_Interior_Text_SparkleBagFull:
+	.string "Something sparkles near the words,\n"
+	.string "but your Bag has no room for it.$"

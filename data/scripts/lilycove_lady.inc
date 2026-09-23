@@ -78,7 +78,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem:: @ 82A846C
     fadescreen FADE_TO_BLACK
     setvar VAR_RESULT, 0
     special Script_FavorLadyOpenBagMenu
-    waitstate
     compare VAR_RESULT, 0
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem
     compare VAR_RESULT, 1
@@ -224,13 +223,11 @@ LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState:: @ 82A8635
 
 LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion:: @ 82A864C
     special QuizLadyShowQuizQuestion
-    waitstate
     goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
     end
 
 LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer:: @ 82A8656
     special QuizLadyGetPlayerAnswer
-    waitstate
     goto LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState
     end
 
@@ -331,7 +328,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_PickPrize:: @ 82A878D
     fadescreen FADE_TO_BLACK
     setvar VAR_RESULT, 0
     special Script_QuizLadyOpenBagMenu
-    waitstate
     compare VAR_RESULT, 0
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize
     compare VAR_RESULT, 1
@@ -354,7 +350,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz:: @ 82A87CE
 LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion:: @ 82A87E1
     fadescreen FADE_TO_BLACK
     special QuizLadySetCustomQuestion
-    waitstate
     compare VAR_RESULT, 0
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion
     goto LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz
@@ -422,7 +417,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock:: @ 82A88B0
 LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock:: @ 82A88BA
     fadescreen FADE_TO_BLACK
     special OpenPokeblockCaseForContestLady
-    waitstate
     compare VAR_RESULT, 0xFFFF
     goto_if_eq LilycoveCity_PokemonCenter_1F_EventScript_AskQuitGivingPokeblock
     compare VAR_RESULT, 0xFFFF
@@ -516,10 +510,6 @@ LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady: @ 82A89BB
     step_end
 
 @ Unused
-LilycoveCity_PokemonCenter_1F_Movement_MonFaceDown: @ 82A89BE
-    face_down
-    step_end
-
 LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer: @ 82A89C0
     face_player
     step_end
@@ -721,10 +711,6 @@ LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize: @ 82A9007
     .string "{STR_VAR_1}!$"
 
 @ Unused
-LilycoveCity_PokemonCenter_1F_Text_XReceivedOneY: @ 82A9056
-    .string "{STR_VAR_1} received\n"
-    .string "one {STR_VAR_2}!$"
-
 LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp: @ 82A906A
     .string "Oh? Your Bag is filled up!\n"
     .string "Come see me when you have room.$"
@@ -771,10 +757,6 @@ LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion: @ 82A92D3
     .string "your quiz question?$"
 
 @ Unused
-LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizAnswer: @ 82A9305
-    .string "Are you going to quit choosing\n"
-    .string "your quiz answer?$"
-
 LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger: @ 82A9336
     .string "Thank you!\n"
     .string "You've put together a nice quiz.\p"

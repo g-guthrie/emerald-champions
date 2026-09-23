@@ -1016,16 +1016,19 @@ void HandleAction_TryFinish(void)
 void HandleAction_NothingIsFainted(void)
 {
     gCurrentTurnActionNumber++;
-    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
+    gCurrentActionFuncId = gCurrentTurnActionNumber < gBattlersCount
+        ? gActionsByTurnOrder[gCurrentTurnActionNumber] : B_ACTION_FINISHED;
 }
 
 void HandleAction_ActionFinished(void)
 {
     u32 i, j;
-    bool32 afterYouActive = gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
+    bool32 afterYouActive = gCurrentTurnActionNumber + 1 < gBattlersCount
+        && gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
     gBattleStruct->monToSwitchIntoId[gBattlerByTurnOrder[gCurrentTurnActionNumber]] = gSelectedMonPartyId = PARTY_SIZE;
     gCurrentTurnActionNumber++;
-    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
+    gCurrentActionFuncId = gCurrentTurnActionNumber < gBattlersCount
+        ? gActionsByTurnOrder[gCurrentTurnActionNumber] : B_ACTION_FINISHED;
     memset(&gSpecialStatuses, 0, sizeof(gSpecialStatuses));
 
     gCurrentMove = MOVE_NONE;
@@ -1194,8 +1197,10 @@ void CancelMultiTurnMoves(enum BattlerId battler)
         gBattleMons[battler].volatiles.rampageTurns = 0;
     }
 
-    // Clear battler's semi-invulnerable bits if they are not held by Sky Drop.
-    if (gBattleMons[battler].volatiles.semiInvulnerable != STATE_SKY_DROP_TARGET)
+    // Cancel move-owned states, not attachment to another Pokemon. Yawn can
+    // end a move while a Commander remains inside its Dondozo partner.
+    if (gBattleMons[battler].volatiles.semiInvulnerable != STATE_SKY_DROP_TARGET
+     && gBattleMons[battler].volatiles.semiInvulnerable != STATE_COMMANDER)
         gBattleMons[battler].volatiles.semiInvulnerable = STATE_NONE;
 
 }
@@ -1908,126 +1913,52 @@ bool32 HandleFaintedMonActions(void)
 
 bool32 HasNoMonsToSwitch(enum BattlerId battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
 {
-    u32 i, playerId, flankId;
-    s32 lastId = GetAILastPartyIndex(battler); // + 1
+    u32 lastId = GetAILastPartyIndex(battler);
     struct Pokemon *party = GetBattlerParty(battler);
-
+    bool32 isPlayerSide = IsOnPlayerSide(battler);
 
     if (!IsDoubleBattle())
         return FALSE;
 
-    bool32 isPlayerSide = IsOnPlayerSide(battler);
-
-    if (BATTLE_TWO_VS_ONE_OPPONENT && !isPlayerSide)
+    bool32 twoVsOneOpponent = BATTLE_TWO_VS_ONE_OPPONENT && !isPlayerSide;
+    bool32 partnerWildOpponent = (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        && !isPlayerSide && WILD_DOUBLE_BATTLE;
+    if (!twoVsOneOpponent && !partnerWildOpponent
+     && ((gBattleTypeFlags & (BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_MULTI))
+         || ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !isPlayerSide)))
     {
-        flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-
-        // Edge case: If both opposing Pokemon were knocked out on the same turn,
-        // make sure opponent only sends out the final Pokemon once.
-        if (battler == playerId
-         && (gHitMarker & HITMARKER_FAINTED(flankId))
-         && (gHitMarker & HITMARKER_FAINTED(playerId)))
-        {
-            u8 count = 0;
-            for (i = 0; i < lastId; i++)
-                if (IsValidForBattle(&party[i]))
-                    count++;
-
-            if (count < 2)
-                return TRUE;
-        }
-
-        if (partyIdBattlerOn1 == PARTY_SIZE)
-            partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
-        if (partyIdBattlerOn2 == PARTY_SIZE)
-            partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
-
-        for (i = 0; i < lastId; i++)
-        {
-            if (IsValidForBattle(&party[i])
-             && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
-             && i != gBattleStruct->monToSwitchIntoId[flankId] && i != playerId[gBattleStruct->monToSwitchIntoId])
-                break;
-        }
-        return (i == lastId);
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-    {
-        if (!isPlayerSide && WILD_DOUBLE_BATTLE)
-        {
-            flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-
-            if (partyIdBattlerOn1 == PARTY_SIZE)
-                partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
-            if (partyIdBattlerOn2 == PARTY_SIZE)
-                partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
-
-            for (i = 0; i < lastId; i++)
-            {
-                if (IsValidForBattle(&party[i])
-                 && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
-                 && i != gBattleStruct->monToSwitchIntoId[flankId] && i != playerId[gBattleStruct->monToSwitchIntoId])
-                    break;
-            }
-            return (i == lastId);
-        }
-        else
-        {
-            for (i = 0; i < lastId; i++)
-            {
-                if (IsValidForBattle(&party[i]))
-                    break;
-            }
-            return (i == lastId);
-        }
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        for (i = 0; i < lastId; i++)
-        {
+        // Separate trainers own separate parties, so the other flank cannot
+        // reserve a slot in this party.
+        for (u32 i = 0; i < lastId; i++)
             if (IsValidForBattle(&party[i]))
-                break;
-        }
-        return (i == lastId);
+                return FALSE;
+        return TRUE;
     }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !isPlayerSide)
+
+    enum BattlerId left = GetBattlerAtPosition(isPlayerSide ? B_POSITION_PLAYER_LEFT : B_POSITION_OPPONENT_LEFT);
+    enum BattlerId right = GetBattlerAtPosition(isPlayerSide ? B_POSITION_PLAYER_RIGHT : B_POSITION_OPPONENT_RIGHT);
+    if (twoVsOneOpponent && battler == right
+     && (gHitMarker & HITMARKER_FAINTED(left)) && (gHitMarker & HITMARKER_FAINTED(right)))
     {
-        for (i = 0; i < lastId; i++)
-        {
+        u32 count = 0;
+        for (u32 i = 0; i < lastId; i++)
             if (IsValidForBattle(&party[i]))
-                break;
-        }
-        return (i == lastId);
+                count++;
+        if (count < 2)
+            return TRUE;
     }
-    else
-    {
-        if (!isPlayerSide)
-        {
-            flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        }
-        else
-        {
-            flankId = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            playerId = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-        }
 
-        if (partyIdBattlerOn1 == PARTY_SIZE)
-            partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
-        if (partyIdBattlerOn2 == PARTY_SIZE)
-            partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
-
-        for (i = 0; i < lastId; i++)
-        {
-            if (IsValidForBattle(&party[i])
-             && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
-             && i != gBattleStruct->monToSwitchIntoId[flankId] && i != playerId[gBattleStruct->monToSwitchIntoId])
-                break;
-        }
-        return (i == lastId);
-    }
+    if (partyIdBattlerOn1 == PARTY_SIZE)
+        partyIdBattlerOn1 = gBattlerPartyIndexes[left];
+    if (partyIdBattlerOn2 == PARTY_SIZE)
+        partyIdBattlerOn2 = gBattlerPartyIndexes[right];
+    for (u32 i = 0; i < lastId; i++)
+        if (IsValidForBattle(&party[i])
+         && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
+         && i != gBattleStruct->monToSwitchIntoId[left]
+         && i != gBattleStruct->monToSwitchIntoId[right])
+            return FALSE;
+    return TRUE;
 }
 
 static bool32 TryChangeWeatherWithAbility(enum BattlerId battler, u32 battleWeather, enum Ability ability)
@@ -3764,6 +3695,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     gLastUsedItem = gLastUsedBall;
                     gBattleScripting.battler = battler;
                     gBattleMons[battler].item = gLastUsedItem;
+                    GetBattlerPartyState(battler)->heldItemOrigin = 0;
                     BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
                     MarkBattlerForControllerExec(battler);
                     gHasFetchedBall = TRUE;
@@ -3778,6 +3710,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     gBattleMons[battler].volatiles.cudChew = FALSE;
                     gLastUsedItem = GetBattlerPartyState(battler)->usedHeldItem;
                     GetBattlerPartyState(battler)->usedHeldItem = ITEM_NONE;
+                    GetBattlerPartyState(battler)->usedHeldItemOrigin = 0;
                     BattleScriptCall(BattleScript_CudChewActivates);
                     effect++;
                 }
@@ -4525,7 +4458,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                         break;
                     }
 
-                    StealTargetItem(battler, targetBattler, ITEM_NONE);
+                    if (!StealTargetItem(battler, targetBattler, ITEM_NONE))
+                        continue;
                     gBattlerAbility = battler;
                     gEffectBattler = targetBattler;
                     BattleScriptCall(BattleScript_MagicianActivates);
@@ -5649,7 +5583,11 @@ enum Obedience GetAttackerObedienceForAction(void)
     // must not make a legally downleveled capture disobey.
     if (B_EXP_CAP_TYPE != EXP_CAP_NONE)
     {
-        obedienceLevel = GetPlayerLevelCapForSpecies(gBattleMons[gBattlerAttacker].species);
+        // Battle-only forms (Crowned, Complete, ...) keep the cap of the species that entered.
+        enum Species species = GetBattlerPartyState(gBattlerAttacker)->changedSpecies;
+        if (species == SPECIES_NONE)
+            species = gBattleMons[gBattlerAttacker].species;
+        obedienceLevel = GetPlayerLevelCapForSpecies(species);
     }
     else
     {
@@ -8652,6 +8590,9 @@ bool32 IsBattlerUltraBursted(enum BattlerId battler)
 enum Species GetBattleFormChangeTargetSpecies(enum BattlerId battler, enum FormChanges method, enum Ability ability)
 {
     enum Species species = gBattleMons[battler].species;
+    // Eligibility and previews must agree with CanBattlerFormChange execution.
+    if (gBattleMons[battler].volatiles.transformed && GetConfig(B_TRANSFORM_FORM_CHANGES) >= GEN_5)
+        return species;
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
 
     if (formChanges == NULL)
@@ -9213,30 +9154,179 @@ void SortBattlersBySpeed(enum BattlerId *battlers, bool32 slowToFast)
     }
 }
 
+STATIC_ASSERT(MAX_BATTLE_TRAINERS * PARTY_SIZE < 256, HeldItemOriginFitsByte);
+
+static struct PartyState *GetHeldItemOriginState(u8 origin, enum Item item)
+{
+    if (origin == 0 || origin > MAX_BATTLE_TRAINERS * PARTY_SIZE)
+        return NULL;
+    u32 trainer = (origin - 1) / PARTY_SIZE;
+    u32 slot = (origin - 1) % PARTY_SIZE;
+    if (gBattleStruct->itemLost[trainer][slot].originalItem != item)
+        return NULL;
+    return &gBattleStruct->partyState[trainer][slot];
+}
+
+void RecordHeldItemSentToBag(enum BattlerId battler, enum Item item)
+{
+    struct PartyState *holder = GetBattlerPartyState(battler);
+    u8 origin = holder->heldItemOrigin;
+    // An extracted item already exists in inventory; capture/end-of-battle
+    // restoration must not create another copy at its original slot.
+    struct PartyState *owner = GetHeldItemOriginState(origin, item);
+    if (owner != NULL)
+    {
+        gBattleStruct->itemLost[(origin - 1) / PARTY_SIZE][(origin - 1) % PARTY_SIZE].originalItem = ITEM_NONE;
+        owner->originalBerryConsumed = FALSE;
+        owner->originalBerryDestroyed = FALSE;
+    }
+    holder->heldItemOrigin = 0;
+}
+
+void RecordBerryRemoval(u8 origin, enum Item item)
+{
+    struct PartyState *owner = GetHeldItemOriginState(origin, item);
+    if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
+        owner->originalBerryRemoved = TRUE;
+}
+
+void SetHeldItemOrigin(enum BattlerId battler, u8 origin)
+{
+    struct PartyState *state = GetBattlerPartyState(battler);
+    state->heldItemOrigin = origin;
+    // A genuinely recovered original item is no longer lost.
+    if (origin == GetBattlerTrainer(battler) * PARTY_SIZE + gBattlerPartyIndexes[battler] + 1)
+        state->originalBerryRemoved = FALSE;
+}
+
+void TransferHeldItemOrigin(enum BattlerId source, enum BattlerId recipient)
+{
+    SetHeldItemOrigin(recipient, GetBattlerPartyState(source)->heldItemOrigin);
+    GetBattlerPartyState(source)->heldItemOrigin = 0;
+}
+
+void RecordPermanentHeldItemTheft(enum BattlerId source, enum BattlerId recipient, enum Item item)
+{
+    enum BattleTrainer sourceTrainer = GetBattlerTrainer(source);
+    enum BattleTrainer recipientTrainer = GetBattlerTrainer(recipient);
+    u32 sourceSlot = gBattlerPartyIndexes[source];
+    u32 recipientSlot = gBattlerPartyIndexes[recipient];
+
+    // Ordinary trainer battles keep Thief/Covet transfers. Temporary battle
+    // parties retain their existing end-of-battle item restoration.
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_FRONTIER
+                          | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE
+                          | BATTLE_TYPE_EREADER_TRAINER)
+     || sourceTrainer == recipientTrainer)
+        return;
+
+    // The controller has already moved the item. Make that transfer the new
+    // restoration baseline so cleanup cannot return it to the victim.
+    gBattleStruct->itemLost[sourceTrainer][sourceSlot].originalItem = ITEM_NONE;
+    gBattleStruct->itemLost[recipientTrainer][recipientSlot].originalItem = item;
+    GetBattlerPartyState(source)->heldItemOrigin = 0;
+    GetBattlerPartyState(recipient)->heldItemOrigin = recipientTrainer * PARTY_SIZE + recipientSlot + 1;
+    GetBattlerPartyState(recipient)->originalBerryConsumed = FALSE;
+    GetBattlerPartyState(recipient)->originalBerryDestroyed = FALSE;
+    GetBattlerPartyState(recipient)->originalBerryRemoved = FALSE;
+}
+
+void RecordConsumedHeldItem(enum BattlerId battler, enum Item item)
+{
+    struct PartyState *state = GetBattlerPartyState(battler);
+    struct PartyState *owner = GetHeldItemOriginState(state->heldItemOrigin, item);
+    state->usedHeldItem = item;
+    state->usedHeldItemOrigin = state->heldItemOrigin;
+    state->heldItemOrigin = 0;
+    if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
+        owner->originalBerryConsumed = TRUE;
+}
+
+void RecordDestroyedHeldItem(enum BattlerId battler, enum Item item)
+{
+    struct PartyState *state = GetBattlerPartyState(battler);
+    struct PartyState *owner = GetHeldItemOriginState(state->heldItemOrigin, item);
+    if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
+        owner->originalBerryDestroyed = TRUE;
+    state->heldItemOrigin = 0;
+}
+
+void RecordRecoveredHeldItem(enum BattlerId recipient, enum BattlerId source, enum Item item)
+{
+    struct PartyState *state = GetBattlerPartyState(source);
+    u8 origin = state->usedHeldItemOrigin;
+    struct PartyState *owner = GetHeldItemOriginState(origin, item);
+    SetHeldItemOrigin(recipient, origin);
+    state->usedHeldItemOrigin = 0;
+    if (owner == NULL)
+        return;
+    // The Berry exists again. If the other side recovered it (a foe's Pickup or
+    // Recycle), it is held away from its owner like a stolen one until it returns.
+    owner->originalBerryConsumed = FALSE;
+    if (GetBattlerTrainer(recipient) != (origin - 1) / PARTY_SIZE)
+        RecordBerryRemoval(origin, item);
+}
+
+enum Item GetBattleRestoredHeldItem(enum BattleTrainer trainer, u32 partySlot)
+{
+    enum Item original = gBattleStruct->itemLost[trainer][partySlot].originalItem;
+
+    // Temporary parties and abandoned attempts keep their existing restoration.
+    // Retry separately reloads its prebattle snapshot after normal cleanup.
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_FRONTIER
+                         | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE
+                         | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_CATCH_TUTORIAL))
+        return original;
+
+    if (GetItemPocket(original) == POCKET_BERRIES)
+    {
+        const struct PartyState *state = &gBattleStruct->partyState[trainer][partySlot];
+        // Knock Off and theft are losses, not Regenerator-eligible consumption.
+        if (state->originalBerryRemoved)
+            return ITEM_NONE;
+        if ((state->originalBerryConsumed || state->originalBerryDestroyed)
+         && !CheckBagHasItem(ITEM_REGENERATOR, 1)
+         && !CheckPCHasItem(ITEM_REGENERATOR, 1))
+            return ITEM_NONE;
+    }
+    return original;
+}
+
 void RestorePlayerPartyMonHeldItem(u32 partySlot)
 {
     enum Item originalItem;
 
-    if (partySlot >= PARTY_SIZE
+    if (gBattleStruct == NULL || partySlot >= PARTY_SIZE
      || GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_SPECIES) == SPECIES_NONE)
         return;
 
-    originalItem = gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].originalItem;
+    originalItem = GetBattleRestoredHeldItem(B_TRAINER_PLAYER, partySlot);
     if (GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM) != originalItem)
         SetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM, &originalItem);
 }
 
 void RecordPlayerPartyMonHeldItemForRestoration(u32 partySlot)
 {
-    if (partySlot >= PARTY_SIZE)
+    if (gBattleStruct == NULL || partySlot >= PARTY_SIZE)
         return;
 
     gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].originalItem =
         GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM);
+    gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].originalBerryConsumed = FALSE;
+    gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].originalBerryDestroyed = FALSE;
+    gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].originalBerryRemoved = FALSE;
+    gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].usedHeldItem = ITEM_NONE;
+    gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].heldItemOrigin =
+        gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].originalItem != ITEM_NONE ? B_TRAINER_PLAYER * PARTY_SIZE + partySlot + 1 : 0;
+    gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].usedHeldItemOrigin = 0;
 }
 
 void TryRestoreHeldItems(void)
 {
+    if (gBattleStruct == NULL)
+        return;
+
     if (GEN_LATEST == GEN_CHAMPIONS)
     {
         for (u32 i = 0; i < PARTY_SIZE; i++)
@@ -9320,24 +9410,19 @@ void TrySaveExchangedItem(enum BattlerId battler, enum Item stolenItem)
         gBattleStruct->itemLost[B_TRAINER_PLAYER][gBattlerPartyIndexes[battler]].stolen = TRUE;
 }
 
-bool32 IsBattlerAffectedByHazards(enum BattlerId battler, enum HoldEffect holdEffect, bool32 toxicSpikes)
+bool32 IsBattlerAffectedByHazards(enum BattlerId battler, enum HoldEffect holdEffect, bool32 toxicSpikes UNUSED)
 {
-    bool32 ret = TRUE;
     if (!IsBattlerAlive(battler))
+        return FALSE;
+    // Poison-type absorption happens in the switch-in handler before this
+    // check. Keep the argument for existing callers; Boots block every hazard
+    // that reaches this predicate, regardless of its type.
+    if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
     {
-        ret = FALSE;
-    }
-    else if (toxicSpikes && holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS && !IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
-    {
-        ret = FALSE;
         RecordItemEffectBattle(battler, holdEffect);
+        return FALSE;
     }
-    else if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
-    {
-        ret = FALSE;
-        RecordItemEffectBattle(battler, holdEffect);
-    }
-    return ret;
+    return TRUE;
 }
 
 bool32 IsSheerForceAffected(enum Move move, enum Ability ability)
@@ -9481,6 +9566,12 @@ void CopyMonLevelAndBaseStatsToBattleMon(enum BattlerId battler, struct Pokemon 
         gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
     gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
     gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+    // Every base-stat refresh must preserve the active Attack/Defense swap.
+    if (gBattleMons[battler].volatiles.powerTrick)
+    {
+        u16 temp;
+        SWAP(gBattleMons[battler].attack, gBattleMons[battler].defense, temp);
+    }
 }
 
 void CopyMonAbilityAndTypesToBattleMon(enum BattlerId battler, struct Pokemon *mon)
@@ -9504,10 +9595,9 @@ void RecalcBattlerStats(enum BattlerId battler, struct Pokemon *mon, bool32 isDy
 {
     u32 hp = GetMonData(mon, MON_DATA_HP);
     u32 oldMaxHp = GetMonData(mon, MON_DATA_MAX_HP);
-    if (gBattleMons[battler].volatiles.speedSwapped && GetConfig(B_MEGA_EVO_SPEED_SWAP) >= GEN_CHAMPIONS)
-        CalculateMonStatsCont(mon, FALSE);
-    else
-        CalculateMonStats(mon);
+    bool32 updateSpeed = !gBattleMons[battler].volatiles.speedSwapped
+        || GetConfig(B_MEGA_EVO_SPEED_SWAP) < GEN_CHAMPIONS;
+    CalculateMonStatsCont(mon, updateSpeed);
 
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
     {
@@ -9526,10 +9616,7 @@ void RecalcBattlerStats(enum BattlerId battler, struct Pokemon *mon, bool32 isDy
             }
         }
     }
-    if (gBattleMons[battler].volatiles.speedSwapped && GetConfig(B_MEGA_EVO_SPEED_SWAP) >= GEN_CHAMPIONS)
-        CopyMonLevelAndBaseStatsToBattleMon(battler, mon, FALSE);
-    else
-        CopyMonLevelAndBaseStatsToBattleMon(battler, mon, TRUE);
+    CopyMonLevelAndBaseStatsToBattleMon(battler, mon, updateSpeed);
     CopyMonAbilityAndTypesToBattleMon(battler, mon);
 }
 
@@ -10112,6 +10199,7 @@ bool32 TrySymbiosis(enum BattlerId battler, enum Item itemId, const u8 *nextInst
 void BestowItem(enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
     gLastUsedItem = gBattleMons[battlerAtk].item;
+    TransferHeldItemOrigin(battlerAtk, battlerDef);
 
     gBattleMons[battlerAtk].item = ITEM_NONE;
     BtlController_EmitSetMonData(battlerAtk, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerAtk].item), &gBattleMons[battlerAtk].item);
@@ -10840,44 +10928,22 @@ void SetWrapTurns(enum BattlerId battler, enum HoldEffect holdEffect)
 // Return True if the order was changed, and false if the order was not changed(for example because the target would move after the attacker anyway).
 bool32 ChangeOrderTargetAfterAttacker(enum BattlerId battlerDef)
 {
-    u8 data[MAX_BATTLERS_COUNT];
-    u8 actionsData[MAX_BATTLERS_COUNT];
-    u32 attackerTurnOrderNum = GetBattlerTurnOrderNum(gBattlerAttacker);
-    u32 targetTurnOrderNum = GetBattlerTurnOrderNum(battlerDef);
+    u32 attackerOrder = GetBattlerTurnOrderNum(gBattlerAttacker);
+    u32 targetOrder = GetBattlerTurnOrderNum(battlerDef);
 
-    if (attackerTurnOrderNum > targetTurnOrderNum)
+    if (attackerOrder >= targetOrder || targetOrder >= gBattlersCount)
         return FALSE;
-    if (attackerTurnOrderNum + 1 == targetTurnOrderNum)
+    if (attackerOrder + 1 == targetOrder)
         return GetConfig(B_AFTER_YOU_TURN_ORDER) >= GEN_8;
 
-    for (enum BattlerId i = 0; i < MAX_BATTLERS_COUNT; i++)
+    u8 targetAction = gActionsByTurnOrder[targetOrder];
+    for (u32 i = targetOrder; i > attackerOrder + 1; i--)
     {
-        data[i] = gBattlerByTurnOrder[i];
-        actionsData[i] = gActionsByTurnOrder[i];
+        gBattlerByTurnOrder[i] = gBattlerByTurnOrder[i - 1];
+        gActionsByTurnOrder[i] = gActionsByTurnOrder[i - 1];
     }
-    if (attackerTurnOrderNum == 0 && targetTurnOrderNum == 2)
-    {
-        gBattlerByTurnOrder[1] = battlerDef;
-        gActionsByTurnOrder[1] = actionsData[2];
-        gBattlerByTurnOrder[2] = data[1];
-        gActionsByTurnOrder[2] = actionsData[1];
-    }
-    else if (attackerTurnOrderNum == 0 && targetTurnOrderNum == 3)
-    {
-        gBattlerByTurnOrder[1] = battlerDef;
-        gActionsByTurnOrder[1] = actionsData[3];
-        gBattlerByTurnOrder[2] = data[1];
-        gActionsByTurnOrder[2] = actionsData[1];
-        gBattlerByTurnOrder[3] = data[2];
-        gActionsByTurnOrder[3] = actionsData[2];
-    }
-    else // attackerTurnOrderNum == 1, targetTurnOrderNum == 3
-    {
-        gBattlerByTurnOrder[2] = battlerDef;
-        gActionsByTurnOrder[2] = actionsData[3];
-        gBattlerByTurnOrder[3] = data[2];
-        gActionsByTurnOrder[3] = actionsData[2];
-    }
+    gBattlerByTurnOrder[attackerOrder + 1] = battlerDef;
+    gActionsByTurnOrder[attackerOrder + 1] = targetAction;
     return TRUE;
 }
 

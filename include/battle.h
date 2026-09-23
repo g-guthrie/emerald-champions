@@ -574,8 +574,12 @@ struct PartyState
     u32 sentOut:1;
     u32 isKnockedOff:1;
     u32 freezeTurns:2;
-    u32 padding:3;
+    u32 originalBerryDestroyed:1; // Incinerate/Bug Bite: not recoverable by Recycle.
+    u32 originalBerryConsumed:1; // Independent of the last item available to Recycle.
+    u32 originalBerryRemoved:1; // Knock Off or theft is not consumption.
     enum Item usedHeldItem;
+    u8 heldItemOrigin; // trainer * PARTY_SIZE + slot + 1; 0 means unknown.
+    u8 usedHeldItemOrigin;
 };
 
 struct EventStates
@@ -939,7 +943,7 @@ struct BattleAnimationInfo
     u8 criticalCaptureSuccess:1;
     u8 introAnimActive:1;
     u8 wildMonInvisible:1;
-    u8 field_9_x1C:3;
+    u8 :3; // Reserved; summary graphics use live sprite ownership.
     u8 field_9_x20:1;
     u8 field_9_x40:1;
     u8 field_9_x80:1;

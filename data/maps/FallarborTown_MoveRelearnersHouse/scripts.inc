@@ -92,7 +92,7 @@ FallarborTown_Text_AnnoyingIntroPart5:
 	.string "Effort Values, or EVs for short?$"
 
 FallarborTown_Text_AnnoyingIntroPart6:
-	.string "Ivy: OK! now, how about Individual\n"
+	.string "Ivy: OK! Now, how about Individual\n"
 	.string "Values, or IVs?\p"
 	.string "Do you want me to explain them?$"
 
@@ -115,7 +115,6 @@ FallarborTown_SuperTrainer::
 	faceplayer
 	msgbox SuperTraining_Text_ChoosePokemon, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge SuperTraining_Refuse
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
@@ -148,9 +147,6 @@ FallarborTown_Explain_EVs::
 
 FallarborTown_ChangeEV::
 	bufferpartymonnick 0, VAR_0x8004
-	@specialvar VAR_RESULT, AreChosenMonEVsMaxedOut
-	@compare VAR_RESULT, 1
-	@goto_if_eq FallarborTown_EVsMaxedOut
 	msgbox SuperTraining_Text_ThisIsMonsCurrentSpread, MSGBOX_DEFAULT
 	special BufferChosenMonAllEVs
 	multichoice 0, 0, MULTI_BASE_STATS, 0
@@ -228,10 +224,6 @@ FallarborTown_ChangeSPDEFEV::
 FallarborTown_MaxEVs::
 	msgbox SuperTraining_ReportMaxEVs
 	goto FallarborTown_ChangeEV
-
-FallarborTown_EVsMaxedOut::
-	msgbox SuperTraining_ReportMaxTotalEVs
-	goto FallarborTown_SuperMainMenu
 
 FallarborTown_ChooseNewEV::
 	multichoice 0, 0, MULTI_EV_MENU, 0
@@ -349,11 +341,8 @@ FallarborTown_Text_SomeOtherTime:
 	.string "Oh, OK.\n"
 	.string "Some other time, then?$"
 
-SuperTraining_Text_RememberEvs:
-	.string "And you remember how EVs work, right?$"
-
 FallarborTown_Text_ExplainEvs:
-	.string "Evie: EVs are part of every stat a\n"
+	.string "Evie: EVs are part of every stat\n"
 	.string "a Pokémon has.\p"
 	.string "They can have HP EVs, Attack EVs,\n"
 	.string "Defense EVs… you get the idea.\p"
@@ -428,12 +417,9 @@ SuperTraining_ReportMaxEVs:
 	.string "{STR_VAR_1} has 252 EVs in that stat!\n"
 	.string "It can't gain any more!$"
 
-SuperTraining_ReportMaxTotalEVs:
-	.string "{STR_VAR_1}'s EVs are maxed out!\n"
-	.string "It can't gain any more!$"
-
 SuperTraining_TooManyEVs:
-	.string "{STR_VAR_1} already has {STR_VAR_2} EVs in total!\n"
+	.string "{STR_VAR_1} already has\n"
+	.string "{STR_VAR_2} EVs in total!\p"
 	.string "It can't gain that many more!$"
 
 SuperTraining_ShowPrice:
@@ -449,7 +435,6 @@ FallarborTown_HyperTrainer::
 	faceplayer
 	msgbox HyperTraining_Text_ChoosePokemon, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge SuperTraining_Refuse
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
@@ -593,91 +578,9 @@ HyperTraining_EventScript_ChangeHiddenPower::
 	copyvar VAR_0x800A, VAR_0x8004
 	setvar VAR_0x8004, SCROLL_MULTI_HIDDEN_POWER
 	special ShowScrollableMultichoice
-	waitstate
-	switch VAR_RESULT
-	case 0, HyperTraining_EventScript_ChangeHPFighting
-	case 1, HyperTraining_EventScript_ChangeHPFlying
-	case 2, HyperTraining_EventScript_ChangeHPPoison
-	case 3, HyperTraining_EventScript_ChangeHPGround
-	case 4, HyperTraining_EventScript_ChangeHPRock
-	case 5, HyperTraining_EventScript_ChangeHPBug
-	case 6, HyperTraining_EventScript_ChangeHPGhost
-	case 7, HyperTraining_EventScript_ChangeHPSteel
-	case 8, HyperTraining_EventScript_ChangeHPFire
-	case 9, HyperTraining_EventScript_ChangeHPWater
-	case 10, HyperTraining_EventScript_ChangeHPGrass
-	case 11, HyperTraining_EventScript_ChangeHPElectric
-	case 12, HyperTraining_EventScript_ChangeHPPsychic
-	case 13, HyperTraining_EventScript_ChangeHPIce
-	case 14, HyperTraining_EventScript_ChangeHPDragon
-	case 15, HyperTraining_EventScript_ChangeHPDark
-	case 16, HyperTraining_EventScript_RebufferChosenMon
-	case 127, HyperTraining_EventScript_RebufferChosenMon
-	releaseall
-	end
-
-HyperTraining_EventScript_ChangeHPFighting::
-	setvar 0x8007, 0
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPFlying::
-	setvar 0x8007, 1
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPPoison::
-	setvar 0x8007, 2
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPGround::
-	setvar 0x8007, 3
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPRock::
-	setvar 0x8007, 4
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPBug::
-	setvar 0x8007, 5
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPGhost::
-	setvar 0x8007, 6
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPSteel::
-	setvar 0x8007, 7
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPFire::
-	setvar 0x8007, 8
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPWater::
-	setvar 0x8007, 9
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPGrass::
-	setvar 0x8007, 10
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPElectric::
-	setvar 0x8007, 11
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPPsychic::
-	setvar 0x8007, 12
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPIce::
-	setvar 0x8007, 13
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPDragon::
-	setvar 0x8007, 14
-	goto HyperTraining_EventScript_ChangeAllIVs
-
-HyperTraining_EventScript_ChangeHPDark::
-	setvar 0x8007, 15
+HyperTraining_EventScript_SelectHiddenPower::
+	goto_if_ge VAR_RESULT, 16, HyperTraining_EventScript_RebufferChosenMon
+	copyvar VAR_0x8007, VAR_RESULT
 	goto HyperTraining_EventScript_ChangeAllIVs
 
 HyperTraining_EventScript_ChangeAllIVs::
@@ -714,14 +617,11 @@ HyperTraining_Text_ChoosePokemon:
 	.string "Ivy: Which Pokémon needs some\n"
 	.string "Hyper Training?$"
 
-HyperTraining_Text_WantMeExplainIVs:
-	.string "Would you like me to explain IVs again?$"
-
 HyperTraining_Text_ExplainIVs:
 	.string "Ivy: IVs are a hidden part of your\n"
-	.string "Pokémon's stats that can only be\l"
-	.string "changed with special training,\l"
-	.string "or raised by giving them Vitamins.\p"
+	.string "Pokémon's stats.\p"
+	.string "My special training can change them.\n"
+	.string "Vitamins raise EVs instead.\p"
 	.string "They can be any value between\n"
 	.string "0 and 31, and affect things like\l"
 	.string "the type of the move Hidden Power.\p"

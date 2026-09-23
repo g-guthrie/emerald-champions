@@ -5,8 +5,15 @@
 @ 1: Defeated for the first time
 
 MossdeepCity_House1_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, MossdeepCity_House1_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, MossdeepCity_House1_MapScripts_OnFrame
 	.byte 0
+
+MossdeepCity_House1_OnTransition:
+	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_House1_EndTransition
+	setflag FLAG_HIDE_MOSSDEEP_CYNTHIA
+MossdeepCity_House1_EndTransition:
+	end
 
 MossdeepCity_House1_MapScripts_OnFrame:
 	map_script_2 VAR_CYNTHIA_STATE, 1, MossdeepCity_House1_EventScript_CynthiaBattle
@@ -27,58 +34,33 @@ MossdeepCity_House1_EventScript_CynthiaBattle::
 	waitmovement 0
 	msgbox MossdeepCity_House1_Text_WhatsThis, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	call_if_eq MossdeepCity_House1_EventScript_CynthiaHeal
+	goto_if_eq MossdeepCity_House1_EventScript_CynthiaDeclined
 	msgbox MossdeepCity_House1_Text_BeforeISendOut, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro_double TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat
 	msgbox MossdeepCity_House1_Text_BeyondExpectation, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
+	setvar VAR_CYNTHIA_STATE, 2
+	goto MossdeepCity_House1_EventScript_CynthiaGift
+
+MossdeepCity_House1_EventScript_CynthiaGift::
 	giveitem ITEM_MYSTIC_TICKET
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
 	setflag FLAG_RECEIVED_MYSTIC_TICKET
-	setflag FLAG_DAILY_REMATCH_CYNTHIA
 	setvar VAR_CYNTHIA_STATE, 2
 	releaseall
 	end
 
-MossdeepCity_House1_EventScript_CynthiaHeal::
-	msgbox MossdeepCity_House1_Text_LetMeHealYourPokemon, MSGBOX_DEFAULT
-	playfanfare MUS_HEAL
-	waitfanfare
-	special HealPlayerParty
-	return
-
 MossdeepCity_House1_EventScript_Cynthia::
 	lockall
 	faceplayer
-@ Emerald Champions: one-and-done campaign -- Cynthia's daily rematch is disabled.
-@ Her post-game encounter (VAR_CYNTHIA_STATE, set by the Hall of Fame) is unaffected.
-@	goto_if_unset FLAG_DAILY_REMATCH_CYNTHIA, MossdeepCity_House1_EventScript_CynthiaRematch
+	goto_if_set FLAG_RECEIVED_MYSTIC_TICKET, MossdeepCity_House1_EventScript_CynthiaAfterGift
+	goto_if_defeated TRAINER_CYNTHIA_1, MossdeepCity_House1_EventScript_CynthiaGift
+	goto MossdeepCity_House1_EventScript_CynthiaBattle
+MossdeepCity_House1_EventScript_CynthiaAfterGift:
 	msgbox MossdeepCity_House1_Text_AfterBattle, MSGBOX_DEFAULT
-	releaseall
-	end
-
-MossdeepCity_House1_EventScript_CynthiaRematch::
-	msgbox MossdeepCity_House1_Text_BeforeRematch, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MossdeepCity_House1_EventScript_CynthiaStartRematch
-	releaseall
-	end
-
-MossdeepCity_House1_EventScript_CynthiaStartRematch::
-	msgbox MossdeepCity_House1_Text_NoHoldsBarred, MSGBOX_DEFAULT
-	random 1
-	compare VAR_RESULT, 1
-	goto_if_eq MossdeepCity_House1_EventScript_CynthiaTeam1
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_CYNTHIA
-	releaseall
-	end
-
-MossdeepCity_House1_EventScript_CynthiaTeam1::
-	trainerbattle_no_intro_double TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	setflag FLAG_DAILY_REMATCH_CYNTHIA
 	releaseall
 	end
 
@@ -106,10 +88,6 @@ MossdeepCity_House1_Text_WhatsThis:
 	.string "decide - with a Pokémon battle!\p"
 	.string "Would you care to be my opponent?$"
 
-MossdeepCity_House1_Text_LetMeHealYourPokemon:
-	.string "Oh? I see. Allow me to me heal your\n"
-	.string "Pokémon first.$"
-
 MossdeepCity_House1_Text_BeforeISendOut:
 	.string "Before I send out my Pokémon, my heart\n"
 	.string "always begins to race…\p"
@@ -135,12 +113,8 @@ MossdeepCity_House1_Text_AfterBattle:
 	.string "it would make me happy to see you\l"
 	.string "again sometime.$"
 
-MossdeepCity_House1_Text_BeforeRematch:
-	.string "Cynthia: How terrific to see you again!\p"
-	.string "I've got to tell you… \n"
-	.string "My Pokémon are excited to battle yours.\p"
-	.string "Would you care to be my opponent?$"
-
-MossdeepCity_House1_Text_NoHoldsBarred:
-	.string "This will be such fun!\n" 
-	.string "No holds barred!$"
+MossdeepCity_House1_EventScript_CynthiaDeclined::
+	setvar VAR_CYNTHIA_STATE, 0
+	fadedefaultbgm
+	releaseall
+	end

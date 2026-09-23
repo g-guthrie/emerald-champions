@@ -36,24 +36,12 @@ u16 GetHarvestedBerryCount(u8 berry)
     return berry && berry <= NUM_BERRIES ? gSaveBlock2Ptr->pokedex.harvestedBerries[berry - 1] : 0;
 }
 
-bool32 CanAddHarvestedBerries(u8 berry, u16 count)
-{
-    return berry && berry <= NUM_BERRIES && count <= EC_HARVEST_LIMIT - GetHarvestedBerryCount(berry);
-}
-
+// The pouch count saturates: picking is never refused just because a type's
+// record is full, since most berry types are never spent by a trade.
 void AddHarvestedBerries(u8 berry, u16 count)
 {
-    if (CanAddHarvestedBerries(berry, count))
-        gSaveBlock2Ptr->pokedex.harvestedBerries[berry - 1] += count;
-}
-
-// Every berry gift mints one pouch credit, so a gifted berry is worth as much
-// as a picked one. The caller's giveitem leaves the item in 0x8000.
-void MintEmeraldChampionsHarvestCredit(void)
-{
-    enum Item item = gSpecialVar_0x8000;
-    if (GetItemPocket(item) == POCKET_BERRIES)
-        AddHarvestedBerries(ItemIdToBerryType(item), 1);
+    if (berry && berry <= NUM_BERRIES)
+        gSaveBlock2Ptr->pokedex.harvestedBerries[berry - 1] = min(EC_HARVEST_LIMIT, GetHarvestedBerryCount(berry) + count);
 }
 
 static bool32 RewardClaimed(u32 choice)
@@ -148,26 +136,6 @@ void CheckEmeraldChampionsGardenCelebi(void)
 {
     gSpecialVar_Result = IsLegendarySignCaught(LEGENDARY_SIGN_CELEBI) ? 2
         : gSaveBlock2Ptr->pokedex.gardenCelebiUnlocked ? 1 : 0;
-}
-
-// Paired gifts deliver atomically and mint one pouch credit each.
-void GiveEmeraldChampionsBerryPair(void)
-{
-    enum Item first = gSpecialVar_0x8008;
-    enum Item second = gSpecialVar_0x8009;
-    gSpecialVar_Result = FALSE;
-    if (GetItemPocket(first) != POCKET_BERRIES || GetItemPocket(second) != POCKET_BERRIES)
-        return;
-    if (!AddBagItem(first, 1))
-        return;
-    if (!AddBagItem(second, 1))
-    {
-        RemoveBagItem(first, 1);
-        return;
-    }
-    AddHarvestedBerries(ItemIdToBerryType(first), 1);
-    AddHarvestedBerries(ItemIdToBerryType(second), 1);
-    gSpecialVar_Result = TRUE;
 }
 
 // The Champions archive is exactly the Mega Stones the campaign distributes,

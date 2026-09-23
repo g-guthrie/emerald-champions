@@ -7,6 +7,7 @@ AlteringCave_B1F_MapScripts::
 AlteringCave_B1F_EventScript_Mewtwo::
 	lock
 	faceplayer
+	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_LegendaryNotReady
 	waitse
 	playmoncry SPECIES_MEWTWO, 2
 	delay 40
@@ -16,31 +17,12 @@ AlteringCave_B1F_EventScript_Mewtwo::
 	setwildbattle SPECIES_MEWTWO, VAR_0x800A, ITEM_PSYCHIC_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq AlteringCave_B1F_EventScript_DefeatedMewtwo
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq AlteringCave_B1F_EventScript_RanFromMewtwo
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq AlteringCave_B1F_EventScript_RanFromMewtwo
-	setflag FLAG_DEFEATED_MEWTWO
-	release
-	end
-
-AlteringCave_B1F_EventScript_DefeatedMewtwo::
-	setflag FLAG_DEFEATED_MEWTWO
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
-AlteringCave_B1F_EventScript_RanFromMewtwo::
-	setvar VAR_0x8004, SPECIES_MEWTWO
-	goto Common_EventScript_LegendaryFlewAway
-	end
+AlteringCave_B1F_EventScript_CheckMewtwoResult::
+	goto Common_EventScript_EndVisibleLegendaryEncounter
 
 AlteringCave_B1F_EventScript_Leaf::
 	lockall
+	goto_if_defeated TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_EventScript_LeafReward
 	playse SE_PIN
 	applymovement LOCALID_LEAF, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -52,10 +34,15 @@ AlteringCave_B1F_EventScript_Leaf::
 	applymovement LOCALID_LEAF, AlteringCave_Movement_Leaf
 	applymovement OBJ_EVENT_ID_PLAYER, AlteringCave_Movement_Player
 	waitmovement 0
-	trainerbattle_no_intro_double TRAINER_LEAF_ALTERING_CAVE, AlteringCave_Text_LeafDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	setvar VAR_LEAF_STATE, 1
+	trainerbattle_no_intro_double TRAINER_LEAF_ALTERING_CAVE, AlteringCave_Text_LeafDefeated
+AlteringCave_B1F_EventScript_LeafReward::
+	applymovement LOCALID_LEAF, Common_Movement_FacePlayer
+	waitmovement 0
 	msgbox AlteringCave_Text_LeafGift, MSGBOX_DEFAULT
 	giveitem ITEM_BOTTLE_CAP, 30
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setvar VAR_LEAF_STATE, 1
 	msgbox AlteringCave_Text_LeafExit, MSGBOX_DEFAULT
 	closemessage
 	applymovement  OBJ_EVENT_ID_PLAYER, AlteringCave_Movement_GiveWay

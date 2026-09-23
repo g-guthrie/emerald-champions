@@ -9,7 +9,6 @@ SlateportCity_NameRatersHouse_NatureChanger::
 	call_if_unset FLAG_MET_NATURE_CHANGER, SlateportCity_NameRatersHouse_NatureChangerIntro
 	msgbox NatureChanger_Text_ChoosePokemon, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge Nature_Changer_No
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies

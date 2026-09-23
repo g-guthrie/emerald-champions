@@ -117,66 +117,49 @@ bool8 DoesPartyHaveEnigmaBerry(void)
     return hasItem;
 }
 
-void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
+static void InitScriptedWildMon(struct Pokemon *mon, enum Species species, u8 level, enum Item item)
 {
-    u8 heldItem[2];
-
-    ZeroEnemyPartyMons();
     u32 personality = GetMonPersonality(species,
         GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species),
         GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species),
         RANDOM_UNOWN_LETTER);
-    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
-    GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
-    if (item)
+    CreateMonWithIVs(mon, species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+    GiveMonInitialMoveset(mon);
+    if (item != ITEM_NONE)
     {
-        heldItem[0] = item;
-        heldItem[1] = item >> 8;
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, heldItem);
+        u16 heldItem = item;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
     }
 }
+
+void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
+{
+    ZeroEnemyPartyMons();
+    InitScriptedWildMon(&gParties[B_TRAINER_OPPONENT_A][0], species, level, item);
+}
+
 void CreateScriptedDoubleWildMon(enum Species species1, u8 level1, enum Item item1, enum Species species2, u8 level2, enum Item item2)
 {
-    u8 heldItem1[2];
-    u8 heldItem2[2];
-
     ZeroEnemyPartyMons();
-    u32 personality = GetMonPersonality(species1,
-        GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species1),
-        GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species1),
-        RANDOM_UNOWN_LETTER);
-    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species1, level1, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
-    GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
-    if (item1)
-    {
-        heldItem1[0] = item1;
-        heldItem1[1] = item1 >> 8;
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, heldItem1);
-    }
-
-    personality = GetMonPersonality(species2,
-        GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species2),
-        GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species2),
-        RANDOM_UNOWN_LETTER);
-    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][1], species2, level2, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
-    GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][1]);
-    if (item2)
-    {
-        heldItem2[0] = item2;
-        heldItem2[1] = item2 >> 8;
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_HELD_ITEM, heldItem2);
-    }
+    InitScriptedWildMon(&gParties[B_TRAINER_OPPONENT_A][0], species1, level1, item1);
+    InitScriptedWildMon(&gParties[B_TRAINER_OPPONENT_A][1], species2, level2, item2);
 }
 
 void ScriptSetMonMoveSlot(u8 monIndex, enum Move move, u8 slot)
 {
-// Allows monIndex to go out of bounds of gParties[B_TRAINER_PLAYER]. Doesn't occur in vanilla
-#ifdef BUGFIX
+    if (slot >= MAX_MON_MOVES || move >= MOVES_COUNT_ALL)
+        return;
+
+    // Scripts may request the last party member, including a newly gifted Egg.
     if (monIndex >= PARTY_SIZE)
-#else
-    if (monIndex > PARTY_SIZE)
-#endif
-        monIndex = gPartiesCount[B_TRAINER_PLAYER] - 1;
+    {
+        u8 count = CalculatePlayerPartyCount();
+        if (count == 0)
+            return;
+        monIndex = count - 1;
+    }
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][monIndex], MON_DATA_SPECIES) == SPECIES_NONE)
+        return;
 
     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][monIndex], move, slot);
 }

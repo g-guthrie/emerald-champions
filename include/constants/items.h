@@ -941,6 +941,9 @@ enum __attribute__((packed)) Item
     ITEM_MILOTICITE,
     ITEM_KINGDRANITE,
 
+    // Append new tools to preserve existing item IDs in saved games.
+    ITEM_REGENERATOR,
+
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };

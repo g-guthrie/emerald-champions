@@ -109,7 +109,7 @@ SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge:: @ 82088CA
 
 SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge:: @ 8208906
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox SlateportCity_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
 	switch VAR_RESULT
@@ -191,13 +191,6 @@ SlateportCity_BattleTentLobby_EventScript_CancelChallenge:: @ 8208A2E
 	end
 
 @ Unused
-SlateportCity_BattleTentLobby_Movement_UnusedEnterDoor:: @ 8208A38
-	walk_up
-	walk_up
-	walk_up
-	set_invisible
-	step_end
-
 SlateportCity_BattleTentLobby_EventScript_TormentGiver:: @ 8208A3D
 	lock
 	faceplayer
@@ -308,4 +301,3 @@ SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons: @ 8208DA6
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection: @ 8208DF1
 	.string "Wouldn't it be nice if they had more of\n"
 	.string "a selection?$"
-

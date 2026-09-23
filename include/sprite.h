@@ -276,6 +276,8 @@ void AnimateSprites(void);
 void BuildOamBuffer(void);
 u32 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 u32 CreateSpriteUnchecked(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateSpriteWithTemplateCopy(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+void CopySpriteToSlot(u32 id, const struct Sprite *source);
 u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 u32 CreateSpriteAtEndUnchecked(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 u32 CreateInvisibleSprite(void (*callback)(struct Sprite *));

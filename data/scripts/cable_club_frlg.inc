@@ -221,11 +221,10 @@ CableClub_EventScript_SelectBattleMode_Frlg::
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_SingleBattleMode_Frlg
-	case 1, CableClub_EventScript_DoubleBattleMode_Frlg
-	case 2, CableClub_EventScript_MultiBattleMode_Frlg
-	case 3, CableClub_EventScript_BattleModeInfo_Frlg
-	case 4, CableClub_EventScript_AbortLink_Frlg
+	case 0, CableClub_EventScript_DoubleBattleMode_Frlg
+	case 1, CableClub_EventScript_MultiBattleMode_Frlg
+	case 2, CableClub_EventScript_BattleModeInfo_Frlg
+	case 3, CableClub_EventScript_AbortLink_Frlg
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink_Frlg
 	end
 
@@ -829,11 +828,10 @@ CableClub_EventScript_WirelessBattleSelect_Frlg::
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_WirelessSingleBattle_Frlg
-	case 1, CableClub_EventScript_WirelessDoubleBattle_Frlg
-	case 2, CableClub_EventScript_WirelessMultiBattle_Frlg
-	case 3, CableClub_EventScript_WirelessBattleInfo_Frlg
-	case 4, CableClub_EventScript_AbortLink_Frlg
+	case 0, CableClub_EventScript_WirelessDoubleBattle_Frlg
+	case 1, CableClub_EventScript_WirelessMultiBattle_Frlg
+	case 2, CableClub_EventScript_WirelessBattleInfo_Frlg
+	case 3, CableClub_EventScript_AbortLink_Frlg
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink_Frlg
 	end
 

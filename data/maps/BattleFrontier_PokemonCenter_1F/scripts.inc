@@ -48,7 +48,7 @@ BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon: @ 8267944
 	.string "like that.$"
 
 BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena: @ 82679EB
-	.string "Okay! Next stop, the BATTLE ARENA!\n"
+	.string "Okay! Next stop, the BATTLE PIKE!\n"
 	.string "I'd better get the right Pokémon from\l"
 	.string "the PC Storage System.$"
 
@@ -58,4 +58,3 @@ BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge: @ 8267A4B
 
 BattleFrontier_PokemonCenter_1F_Text_Skitty: @ 8267A90
 	.string "Skitty: Mya myaaah!$"
-

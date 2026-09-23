@@ -27,9 +27,9 @@ STATIC_ASSERT(NUM_SPECIES <= PAL_TAG_REFLECTION_OFFSET, TooManySpeciesForReflect
 #define REFLECTION_PAL_TAG(tag, num) ((tag) == TAG_NONE ? (num) + PAL_RAW_REFLECTION_OFFSET : (tag) + PAL_TAG_REFLECTION_OFFSET)
 
 static void UpdateObjectReflectionSprite(struct Sprite *);
-static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite);
-static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *, struct Sprite *sprite);
-static void LoadObjectRegularReflectionPalette(struct ObjectEvent *, struct Sprite *);
+static bool32 LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool32 LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *, struct Sprite *sprite);
+static bool32 LoadObjectRegularReflectionPalette(struct ObjectEvent *, struct Sprite *);
 
 static void UpdateGrassFieldEffectSubpriority(struct Sprite *, u8, u8);
 static void FadeFootprintsTireTracks_Step0(struct Sprite *);
@@ -85,7 +85,8 @@ void SetUpReflection(struct ObjectEvent *objectEvent, struct Sprite *sprite, boo
     reflectionSprite->sReflectionObjEventId = sprite->sReflectionObjEventId;
     reflectionSprite->sReflectionObjEventLocalId = objectEvent->localId;
     reflectionSprite->sIsStillReflection = stillReflection;
-    LoadObjectReflectionPalette(objectEvent, reflectionSprite);
+    if (!LoadObjectReflectionPalette(objectEvent, reflectionSprite))
+        reflectionSprite->invisible = TRUE;
 
     if (!stillReflection)
         reflectionSprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -96,7 +97,7 @@ static s16 GetReflectionVerticalOffset(struct ObjectEvent *objectEvent)
     return GetObjectEventGraphicsInfo(objectEvent->graphicsId)->height - 2;
 }
 
-static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *reflectionSprite)
+static bool32 LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *reflectionSprite)
 {
     u8 bridgeType;
     u16 bridgeReflectionVerticalOffsets[] = {
@@ -109,11 +110,11 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
         || (bridgeType = MetatileBehavior_GetBridgeType(objectEvent->currentMetatileBehavior)))
     {
         reflectionSprite->sReflectionVerticalOffset = bridgeReflectionVerticalOffsets[bridgeType - 1];
-        LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite);
+        return LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite);
     }
     else
     {
-        LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
+        return LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
     }
 }
 
@@ -163,7 +164,7 @@ static void ApplyIceFilter(u8 paletteNum, u16 *dest)
     }
 }
 
-static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     const struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
     u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
@@ -171,6 +172,11 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
     if (paletteNum == 0xFF)
     {
+        // Release only an unshared previous reflection palette.
+        bool32 inUse = sprite->inUse;
+        sprite->inUse = FALSE;
+        FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
+        sprite->inUse = inUse;
         // Load filtered palette
         u16 filteredData[16];
         struct SpritePalette filteredPal = {.tag = paletteTag, .data = filteredData};
@@ -179,21 +185,32 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
         else
             ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
         paletteNum = LoadSpritePalette(&filteredPal);
+        if (paletteNum == 0xFF)
+            return FALSE;
         UpdateSpritePaletteWithWeather(paletteNum, TRUE);
     }
     sprite->oam.paletteNum = paletteNum;
     sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    return TRUE;
 }
 
 // When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
 // This is so the sprite blends in with the dark water metatile underneath the bridge.
-static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+static bool32 LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u16 blueData[16];
-    struct SpritePalette bluePalette = {.tag = HIGH_BRIDGE_PAL_TAG, .data = blueData};
-    CpuFill16(0x55C9, blueData, PLTT_SIZE_4BPP);
-    sprite->oam.paletteNum = LoadSpritePalette(&bluePalette);
-    UpdateSpritePaletteWithWeather(sprite->oam.paletteNum, TRUE);
+    u32 paletteNum = IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG);
+    if (paletteNum == 0xFF)
+    {
+        u16 blueData[16];
+        struct SpritePalette bluePalette = {.tag = HIGH_BRIDGE_PAL_TAG, .data = blueData};
+        CpuFill16(0x55C9, blueData, PLTT_SIZE_4BPP);
+        paletteNum = LoadSpritePalette(&bluePalette);
+        if (paletteNum == 0xFF)
+            return FALSE;
+        UpdateSpritePaletteWithWeather(paletteNum, TRUE);
+    }
+    sprite->oam.paletteNum = paletteNum;
+    return TRUE;
 }
 
 static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
@@ -208,37 +225,15 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         return;
     }
 
-    // Only filter palette if not using the high bridge blue palette
-    // This is basically a copy of LoadObjectRegularReflectionPalette
-    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum)
-    {
-        u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
-        u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
-        u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-        if (paletteNum == 0xFF)
-        {
-            // Build filtered palette
-            u16 filteredData[16];
-            struct SpritePalette filteredPal = {.tag = paletteTag, .data = filteredData};
-            // Free palette if unused
-            reflectionSprite->inUse = FALSE;
-            FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
-            reflectionSprite->inUse = TRUE;
-            if (reflectionSprite->sIsStillReflection == FALSE)
-                ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
-            else
-                ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
-            paletteNum = LoadSpritePalette(&filteredPal);
-            UpdateSpritePaletteWithWeather(paletteNum, TRUE);
-        }
-        reflectionSprite->oam.paletteNum = paletteNum;
-    }
+    bool32 paletteReady = reflectionSprite->sReflectionVerticalOffset != 0
+        ? LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite)
+        : LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
     reflectionSprite->oam.shape = mainSprite->oam.shape;
     reflectionSprite->oam.size = mainSprite->oam.size;
     reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
     reflectionSprite->oam.tileNum = mainSprite->oam.tileNum;
     reflectionSprite->subspriteTables = mainSprite->subspriteTables;
-    reflectionSprite->invisible = mainSprite->invisible;
+    reflectionSprite->invisible = mainSprite->invisible || !paletteReady;
     reflectionSprite->x = mainSprite->x;
     // sReflectionVerticalOffset is only set for high bridges
     reflectionSprite->y = mainSprite->y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->sReflectionVerticalOffset;
@@ -265,6 +260,14 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         reflectionSprite->oam.matrixNum = (mainSprite->oam.matrixNum & ST_OAM_HFLIP) ? 1 : 0;
     }
 }
+
+#if TESTING
+bool32 Test_LoadReflectionPalette(struct ObjectEvent *object, struct Sprite *sprite, bool32 bridge)
+{
+    return bridge ? LoadObjectHighBridgeReflectionPalette(object, sprite)
+        : LoadObjectRegularReflectionPalette(object, sprite);
+}
+#endif
 
 #undef sReflectionObjEventId
 #undef sReflectionObjEventLocalId

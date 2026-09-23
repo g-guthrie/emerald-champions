@@ -18,7 +18,44 @@ Common_EventScript_TransferredToPC::
 	bufferspeciesname 1, VAR_TEMP_1
 	call_if_unset FLAG_SYS_PC_LANETTE, EventScript_TransferredSomeonesPC
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_TransferredLanettesPC
+	call Common_EventScript_OfferLegendaryGiftSwap
 	return
+
+Common_EventScript_OfferLegendaryGiftSwap::
+	specialvar VAR_RESULT, GetBoxedLegendaryGiftSwapStatus
+	compare VAR_RESULT, 0
+	goto_if_eq Common_EventScript_LegendaryGiftSwapDone
+	compare VAR_RESULT, 2
+	goto_if_eq Common_EventScript_LegendaryGiftHasMail
+	msgbox Common_Text_ReplacePartyLegendary, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq Common_EventScript_LegendaryGiftSwapDone
+	specialvar VAR_RESULT, SwapBoxedLegendaryGiftWithParty
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_LegendaryGiftSwapDone
+	bufferboxname 2, VAR_PC_BOX_TO_SEND_MON
+	msgbox Common_Text_SwappedPartyLegendary, MSGBOX_DEFAULT
+	return
+
+Common_EventScript_LegendaryGiftHasMail:
+	msgbox Common_Text_PartyLegendaryHasMail, MSGBOX_DEFAULT
+Common_EventScript_LegendaryGiftSwapDone:
+	setvar VAR_RESULT, FALSE
+	return
+
+Common_Text_ReplacePartyLegendary:
+	.string "Send {STR_VAR_1} to the PC and put\n"
+	.string "{STR_VAR_2} in your party?$"
+
+Common_Text_SwappedPartyLegendary:
+	.string "{STR_VAR_2} joined your party!\p"
+	.string "{STR_VAR_1} was sent to\n"
+	.string "{STR_VAR_3}.$"
+
+Common_Text_PartyLegendaryHasMail:
+	.string "{STR_VAR_1} has Mail attached.\n"
+	.string "Remove it before swapping.\p"
+	.string "Your gift is safe in the PC.$"
 
 EventScript_TransferredSomeonesPC::
 	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage

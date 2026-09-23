@@ -20,41 +20,6 @@ CableClub_EventScript_HideMysteryGiftMan::
 	setflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
 
-CableClub_EventScript_MysteryGiftMan::
-	specialvar VAR_RESULT, ShouldDistributeEonTicket
-	compare VAR_RESULT, TRUE
-	goto_if_eq CableClub_EventScript_DistributeEonTicket
-	goto CableClub_EventScript_AlreadyGotEonTicket
-	end
-
-CableClub_EventScript_AlreadyGotEonTicket::
-	trywondercardscript
-
-@ Unused?
-CableClub_EventScript_MysteryGiftThankYou::
-	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_NPC
-	end
-
-CableClub_EventScript_DistributeEonTicket::
-	checkitem ITEM_EON_TICKET, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq CableClub_EventScript_AlreadyGotEonTicket
-	goto_if_set FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, CableClub_EventScript_AlreadyGotEonTicket
-	msgbox MysteryGift_Text_TheresATicketForYou, MSGBOX_DEFAULT
-	giveitem ITEM_EON_TICKET
-	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_AlreadyGotEonTicket
-	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
-	setvar VAR_DISTRIBUTE_EON_TICKET, 0
-	msgbox MysteryGift_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
-	release
-	end
-
-@ Unused?
-CableClub_EventScript_MysteryGiftThankYou2::
-	msgbox gText_ThankYouForAccessingMysteryGift, MSGBOX_DEFAULT
-	release
-	end
-
 CableClub_OnWarp:
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
@@ -270,11 +235,6 @@ CableClub_EventScript_WelcomeToCableClub::
 	goto CableClub_EventScript_SelectCableClubRoom
 	end
 
-CableClub_EventScript_UnusedWelcomeToCableClub::
-	msgbox CableClub_Text_WhichService, MSGBOX_DEFAULT
-	goto CableClub_EventScript_SelectCableClubRoom
-	end
-
 CableClub_EventScript_SelectCableClubRoom::
 	setvar VAR_0x8004, 0
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_CableClubUnlockedRecordCorner
@@ -306,11 +266,10 @@ CableClub_EventScript_SelectBattleMode::
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_SingleBattleMode
-	case 1, CableClub_EventScript_DoubleBattleMode
-	case 2, CableClub_EventScript_MultiBattleMode
-	case 3, CableClub_EventScript_BattleModeInfo
-	case 4, CableClub_EventScript_AbortLink
+	case 0, CableClub_EventScript_DoubleBattleMode
+	case 1, CableClub_EventScript_MultiBattleMode
+	case 2, CableClub_EventScript_BattleModeInfo
+	case 3, CableClub_EventScript_AbortLink
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
 	end
 
@@ -319,27 +278,27 @@ CableClub_EventScript_BattleModeInfo::
 	goto CableClub_EventScript_SelectBattleMode
 	end
 
-CableClub_EventScript_SingleBattleMode::
-	setvar VAR_0x8004, USING_SINGLE_BATTLE
-	goto CableClub_EventScript_TryEnterColosseum
-	end
-
+@ The Colosseum seat rejects parties below the Champions link rules, so check
+@ them here where the player can still be told why.
 CableClub_EventScript_DoubleBattleMode::
-	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
-	goto_if_ne CableClub_EventScript_NeedTwoMonsForDoubleBattle
+	setvar VAR_0x8004, USING_DOUBLE_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeeded
 	setvar VAR_0x8004, USING_DOUBLE_BATTLE
 	goto CableClub_EventScript_TryEnterColosseum
 	end
 
-CableClub_EventScript_NeedTwoMonsForDoubleBattle::
-	msgbox CableClub_Text_NeedTwoMonsForDoubleBattle, MSGBOX_DEFAULT
-	goto CableClub_EventScript_SelectBattleMode
-	end
-
 CableClub_EventScript_MultiBattleMode::
 	setvar VAR_0x8004, USING_MULTI_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeeded
+	setvar VAR_0x8004, USING_MULTI_BATTLE
 	goto CableClub_EventScript_TryEnterColosseum
+	end
+
+CableClub_EventScript_LinkPartyNeeded::
+	msgbox CableClub_Text_LinkPartyRequirements, MSGBOX_DEFAULT
+	goto CableClub_EventScript_SelectBattleMode
 	end
 
 CableClub_EventScript_TryEnterColosseum::
@@ -349,7 +308,6 @@ CableClub_EventScript_TryEnterColosseum::
 	message gText_PleaseWaitForLink
 	waitmessage
 	special TryBattleLinkup
-	waitstate
 	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterColosseum
 	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
@@ -393,20 +351,13 @@ CableClub_EventScript_EnterColosseum::
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
 	special DoCableClubWarp
-	waitstate
 	end
 
 @ Unused
-CableClub_EventScript_PlayerApproachLinkRoomRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomRight
-	waitmovement 0
-	return
-
 CableClub_EventScript_WarpTo4PColosseum::
 	special SetCableClubWarp
 	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
 	special DoCableClubWarp
-	waitstate
 	end
 
 CableClub_EventScript_AbortLinkIncorrectNumberOfBattlers::
@@ -452,7 +403,6 @@ CableClub_EventScript_TradeCenter::
 	message gText_PleaseWaitForLink
 	waitmessage
 	special TryTradeLinkup
-	waitstate
 	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq CableClub_EventScript_EnterTradeCenter
 	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
@@ -496,7 +446,6 @@ CableClub_EventScript_EnterTradeCenter::
 	special SetCableClubWarp
 	setwarp MAP_TRADE_CENTER, 255, 5, 8
 	special DoCableClubWarp
-	waitstate
 	end
 
 CableClub_EventScript_CheckPartyTradeRequirements::
@@ -527,9 +476,7 @@ CableClub_EventScript_RecordCorner::
 	message gText_PleaseWaitForLink
 	waitmessage
 	special TryRecordMixLinkup
-	waitstate
 	special ValidateMixingGameLanguage
-	waitstate
 	compare VAR_RESULT, LINKUP_FOREIGN_GAME
 	goto_if_eq CableClub_EventScript_AbortLinkForeignGame
 	compare VAR_RESULT, LINKUP_SUCCESS
@@ -571,7 +518,6 @@ CableClub_EventScript_EnterRecordCorner::
 	special SetCableClubWarp
 	setwarp MAP_RECORD_CORNER, 255, 8, 9
 	special DoCableClubWarp
-	waitstate
 	end
 
 CableClub_EventScript_AbortLinkPlayerNotReady::
@@ -617,12 +563,6 @@ MossdeepCity_GameCorner_1F_EventScript_AbortMinigame::
 	end
 
 @ Unused
-CableClub_EventScript_CableClubWarp::
-	special SetCableClubWarp
-	special DoCableClubWarp
-	waitstate
-	end
-
 CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants::
 	special CloseLink
 	msgbox CableClub_Text_IncorrectNumberOfParticipants, MSGBOX_DEFAULT
@@ -656,10 +596,6 @@ Movement_AttendantFaceDown:
 	step_end
 
 @ Unused
-Movement_AttendantFaceRight:
-	face_right
-	step_end
-
 Movement_AttendantFaceLeft:
 	face_left
 	step_end
@@ -687,10 +623,6 @@ Movement_PlayerEnterLinkRoom:
 	step_end
 
 @ Unused
-Movement_PlayerFaceAttendantLeft:
-	face_left
-	step_end
-
 Movement_PlayerFaceAttendantRight:
 	face_right
 	step_end
@@ -714,57 +646,47 @@ EventScript_CableBoxResults::
 EventScript_BattleColosseum_2P_PlayerSpot0::
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
-	waitstate
 	end
 
 EventScript_BattleColosseum_2P_PlayerSpot1::
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
-	waitstate
 	end
 
 EventScript_BattleColosseum_4P_PlayerSpot0::
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 0
 	special ColosseumPlayerSpotTriggered
-	waitstate
 	end
 
 EventScript_BattleColosseum_4P_PlayerSpot1::
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 1
 	special ColosseumPlayerSpotTriggered
-	waitstate
 	end
 
 EventScript_BattleColosseum_4P_PlayerSpot2::
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 2
 	special ColosseumPlayerSpotTriggered
-	waitstate
 	end
 
 EventScript_BattleColosseum_4P_PlayerSpot3::
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_BattleColosseum_4P_CancelSpotTrigger
 	setvar VAR_0x8005, 3
 	special ColosseumPlayerSpotTriggered
-	waitstate
 	end
 
 EventScript_BattleColosseum_4P_CancelSpotTrigger::
@@ -773,34 +695,29 @@ EventScript_BattleColosseum_4P_CancelSpotTrigger::
 EventScript_TradeCenter_Chair0::
 	setvar VAR_0x8005, 0
 	special PlayerEnteredTradeSeat
-	waitstate
 	end
 
 EventScript_TradeCenter_Chair1::
 	setvar VAR_0x8005, 1
 	special PlayerEnteredTradeSeat
-	waitstate
 	end
 
 /* Never used */
 EventScript_TradeCenter_Chair2::
 	setvar VAR_0x8005, 2
 	special PlayerEnteredTradeSeat
-	waitstate
 	end
 
 /* Never used */
 EventScript_TradeCenter_Chair3::
 	setvar VAR_0x8005, 3
 	special PlayerEnteredTradeSeat
-	waitstate
 	end
 
 @ VAR_TEMP_1 for below scripts set by ReceiveGiftItem
 EventScript_RecordCenter_Spot0::
 	setvar VAR_0x8005, 0
 	special RecordMixingPlayerSpotTriggered
-	waitstate
 	compare VAR_TEMP_1, ITEM_NONE
 	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
@@ -808,7 +725,6 @@ EventScript_RecordCenter_Spot0::
 EventScript_RecordCenter_Spot1::
 	setvar VAR_0x8005, 1
 	special RecordMixingPlayerSpotTriggered
-	waitstate
 	compare VAR_TEMP_1, ITEM_NONE
 	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
@@ -816,7 +732,6 @@ EventScript_RecordCenter_Spot1::
 EventScript_RecordCenter_Spot2::
 	setvar VAR_0x8005, 2
 	special RecordMixingPlayerSpotTriggered
-	waitstate
 	compare VAR_TEMP_1, ITEM_NONE
 	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
@@ -824,7 +739,6 @@ EventScript_RecordCenter_Spot2::
 EventScript_RecordCenter_Spot3::
 	setvar VAR_0x8005, 3
 	special RecordMixingPlayerSpotTriggered
-	waitstate
 	compare VAR_TEMP_1, ITEM_NONE
 	goto_if_ne RecordCorner_EventScript_ReceivedGiftItem
 	end
@@ -841,14 +755,12 @@ CableClub_EventScript_ReadTrainerCard::
 	msgbox CableClub_Text_GotToLookAtTrainerCard, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
-	waitstate
 	end
 
 CableClub_EventScript_ReadTrainerCardColored::
 	msgbox CableClub_Text_GotToLookAtColoredTrainerCard, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special Script_ShowLinkTrainerCard
-	waitstate
 	end
 
 CableClub_EventScript_TooBusyToNotice::
@@ -907,7 +819,6 @@ EventScript_TerminateLink::
 EventScript_DoLinkRoomExit::
 	special CleanupLinkRoomState
 	special ReturnFromLinkRoom
-	waitstate
 	end
 
 CableClub_EventScript_UnionRoomAttendant::
@@ -1096,35 +1007,32 @@ CableClub_EventScript_WirelessBattleSelect::
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_WirelessSingleBattle
-	case 1, CableClub_EventScript_WirelessDoubleBattle
-	case 2, CableClub_EventScript_WirelessMultiBattle
-	case 3, CableClub_EventScript_WirelessBattleInfo
-	case 4, CableClub_EventScript_AbortLink
+	case 0, CableClub_EventScript_WirelessDoubleBattle
+	case 1, CableClub_EventScript_WirelessMultiBattle
+	case 2, CableClub_EventScript_WirelessBattleInfo
+	case 3, CableClub_EventScript_AbortLink
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
 	end
 
-CableClub_EventScript_WirelessSingleBattle::
-	setvar VAR_0x8004, LINK_GROUP_SINGLE_BATTLE
-	goto CableClub_EventScript_SaveAndChooseLinkLeader
-	end
-
 CableClub_EventScript_WirelessDoubleBattle::
-	special HasEnoughMonsForDoubleBattle
-	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
-	goto_if_ne CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle
+	setvar VAR_0x8004, USING_DOUBLE_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeededWireless
 	setvar VAR_0x8004, LINK_GROUP_DOUBLE_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
-CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle::
-	msgbox CableClub_Text_NeedTwoMonsForDoubleBattle, MSGBOX_DEFAULT
-	goto CableClub_EventScript_WirelessBattleSelect
-	end
-
 CableClub_EventScript_WirelessMultiBattle::
+	setvar VAR_0x8004, USING_MULTI_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeededWireless
 	setvar VAR_0x8004, LINK_GROUP_MULTI_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
+	end
+
+CableClub_EventScript_LinkPartyNeededWireless::
+	msgbox CableClub_Text_LinkPartyRequirements, MSGBOX_DEFAULT
+	goto CableClub_EventScript_WirelessBattleSelect
 	end
 
 CableClub_EventScript_WirelessBattleInfo::
@@ -1270,12 +1178,10 @@ CableClub_EventScript_TryJoinGroupXPlayers::
 
 CableClub_EventScript_TryBecomeLinkLeader::
 	special TryBecomeLinkLeader
-	waitstate
 	return
 
 CableClub_EventScript_TryJoinLinkGroup::
 	special TryJoinLinkGroup
-	waitstate
 	return
 
 CableClub_EventScript_EnterWirelessLinkRoom::
@@ -1312,7 +1218,6 @@ EventScript_WirelessBoxResults::
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
 	fadescreen FADE_TO_BLACK
 	special ShowWirelessCommunicationScreen
-	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -1412,7 +1317,6 @@ MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump::
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8005, 0
 	special ChooseMonForWirelessMinigame
-	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	call Common_EventScript_SaveGame
@@ -1431,7 +1335,6 @@ MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking::
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8005, 1
 	special ChooseMonForWirelessMinigame
-	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
 	call Common_EventScript_SaveGame
@@ -1522,13 +1425,11 @@ MossdeepCity_GameCorner_1F_EventScript_ExplainDodrioBerryPickingRequirements::
 MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords::
 	lockall
 	special ShowPokemonJumpRecords
-	waitstate
 	releaseall
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords::
 	lockall
 	special ShowDodrioBerryPickingRecords
-	waitstate
 	releaseall
 	end

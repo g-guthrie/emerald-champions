@@ -1,12 +1,40 @@
 #include "global.h"
+#include "main.h"
+#include "malloc.h"
 #include "battle.h"
 #include "event_data.h"
 #include "item_menu.h"
 #include "load_save.h"
 #include "strings.h"
 #include "pokemon.h"
+#include "constants/item_effects.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
+
+TEST("Item effect parameters: absent effects return zero and healing offsets retain their data source")
+{
+    EXPECT(GetItemEffect(ITEM_NONE) == NULL);
+    EXPECT(GetItemEffect(ITEM_POKE_BALL) == NULL);
+    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_NONE, 4, ITEM4_HEAL_HP), 0);
+    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_POKE_BALL, 4, ITEM4_HEAL_HP), 0);
+    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_POTION, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START);
+    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_FULL_RESTORE, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START);
+    for (u32 battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    {
+        struct BattleEnigmaBerry saved = gEnigmaBerries[battler];
+        memset(gEnigmaBerries[battler].itemEffect, 0, sizeof(gEnigmaBerries[battler].itemEffect));
+        // An HP EV parameter preceding healing shifts the heal offset by one.
+        gEnigmaBerries[battler].itemEffect[4] = ITEM4_EV_HP | ITEM4_HEAL_HP;
+        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START + 1);
+        gEnigmaBerries[battler].itemEffect[4] = ITEM4_EV_HP | ITEM4_EV_ATK | ITEM4_HEAL_HP | ITEM4_HEAL_PP;
+        gEnigmaBerries[battler].itemEffect[5] = ITEM5_EV_DEF | ITEM5_EV_SPEED;
+        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START + 2);
+        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 4, ITEM4_HEAL_PP), ITEM_EFFECT_ARG_START + 3);
+        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 5, ITEM5_EV_DEF), ITEM_EFFECT_ARG_START + 4);
+        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 5, ITEM5_EV_SPEED), ITEM_EFFECT_ARG_START + 5);
+        gEnigmaBerries[battler] = saved;
+    }
+}
 
 static const enum Item sEmeraldChampionsMegaStoneArchiveItems[] =
 {
@@ -276,4 +304,42 @@ TEST("Key items can be registered to SELECT, L and R independently")
     DeselectRegisteredKeyItem(ITEM_MACH_BIKE);
     EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_NONE);
     EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_BICYCLE);
+}
+
+static void BagAllocationTestReturn(void) {}
+static void BagAllocationTestExplicitReturn(void) {}
+
+TEST("Bag allocation: exhausted heap returns through explicit or remembered callback")
+{
+    bool32 explicitCallback;
+    PARAMETRIZE { explicitCallback = FALSE; }
+    PARAMETRIZE { explicitCallback = TRUE; }
+    struct BagPosition oldPosition = gBagPosition;
+    MainCallback oldCallback = gMain.callback2;
+    void *blocks[64];
+    u32 count = 0;
+    const struct MemBlock *head = HeapHead();
+    const struct MemBlock *block = head;
+    gBagPosition.exitCallback = BagAllocationTestReturn;
+    // Occupy every free block that could hold the Bag, without replacing
+    // the harness heap or disturbing its existing allocations.
+    do
+    {
+        if (!block->allocated && block->size >= sizeof(struct BagMenu))
+        {
+            ASSUME(count < ARRAY_COUNT(blocks));
+            blocks[count++] = AllocUnchecked(block->size);
+        }
+        block = block->next;
+    } while (block != head);
+    GoToBagMenu(ITEMMENULOCATION_LAST, POCKETS_COUNT,
+        explicitCallback ? BagAllocationTestExplicitReturn : NULL);
+    MainCallback actualCallback = gMain.callback2;
+    bool32 noBag = gBagMenu == NULL;
+    for (u32 i = 0; i < count; i++)
+        Free(blocks[i]);
+    gBagPosition = oldPosition;
+    SetMainCallback2(oldCallback);
+    EXPECT(noBag);
+    EXPECT(actualCallback == (explicitCallback ? BagAllocationTestExplicitReturn : BagAllocationTestReturn));
 }

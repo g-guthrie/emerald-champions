@@ -26,112 +26,123 @@ static const u8 sIvData[NUM_STATS] =
     MON_DATA_SPEED_IV, MON_DATA_SPATK_IV, MON_DATA_SPDEF_IV,
 };
 
-static struct Pokemon *ChosenMon(void)
+static struct Pokemon *GetServiceMon(u32 slot)
 {
-    u32 slot = gSpecialVar_0x8004;
-
     if (slot >= PARTY_SIZE)
-        slot = 0;
-    return &gParties[B_TRAINER_PLAYER][slot];
+        return NULL;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+    if (!GetMonData(mon, MON_DATA_SPECIES) || GetMonData(mon, MON_DATA_IS_EGG)
+        || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
+        return NULL;
+    return mon;
 }
 
 static u32 TotalEVs(struct Pokemon *mon)
 {
     u32 total = 0;
 
+    if (mon == NULL)
+        return 0;
     for (u32 i = 0; i < NUM_STATS; i++)
         total += GetMonData(mon, sStatData[i]);
     return total;
 }
 
-void BufferChosenMonAllEVs(void)
+static void BufferAllStats(const u8 *fields, u32 digits)
 {
-    struct Pokemon *mon = ChosenMon();
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u8 *dst = gStringVar4;
 
+    *dst = EOS;
+    if (mon == NULL)
+        return;
     for (u32 i = 0; i < NUM_STATS; i++)
     {
-        dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, sStatData[i]), STR_CONV_MODE_LEFT_ALIGN, 3);
+        dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, fields[i]), STR_CONV_MODE_LEFT_ALIGN, digits);
         *dst++ = (i == NUM_STATS - 1) ? EOS : CHAR_SLASH;
     }
     *dst = EOS;
+}
+
+void BufferChosenMonAllEVs(void)
+{
+    BufferAllStats(sStatData, 3);
 }
 
 void BufferChosenMonAllIVs(void)
 {
-    struct Pokemon *mon = ChosenMon();
-    u8 *dst = gStringVar4;
+    BufferAllStats(sIvData, 2);
+}
 
-    for (u32 i = 0; i < NUM_STATS; i++)
-    {
-        dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, sIvData[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
-        *dst++ = (i == NUM_STATS - 1) ? EOS : CHAR_SLASH;
-    }
-    *dst = EOS;
+static void BufferStat(const u8 *fields, u32 digits)
+{
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+    u32 stat = gSpecialVar_0x8005;
+
+    gSpecialVar_0x8006 = 0;
+    gStringVar2[0] = EOS;
+    if (mon == NULL || stat >= NUM_STATS)
+        return;
+    gSpecialVar_0x8006 = GetMonData(mon, fields[stat]);
+    ConvertIntToDecimalStringN(gStringVar2, gSpecialVar_0x8006, STR_CONV_MODE_LEFT_ALIGN, digits);
 }
 
 void BufferChosenMonEV(void)
 {
-    u32 stat = gSpecialVar_0x8005;
-
-    if (stat >= NUM_STATS)
-        stat = 0;
-    gSpecialVar_0x8006 = GetMonData(ChosenMon(), sStatData[stat]);
-    ConvertIntToDecimalStringN(gStringVar2, gSpecialVar_0x8006, STR_CONV_MODE_LEFT_ALIGN, 3);
+    BufferStat(sStatData, 3);
 }
 
 void BufferChosenMonIV(void)
 {
-    u32 stat = gSpecialVar_0x8005;
-
-    if (stat >= NUM_STATS)
-        stat = 0;
-    gSpecialVar_0x8006 = GetMonData(ChosenMon(), sIvData[stat]);
-    ConvertIntToDecimalStringN(gStringVar2, gSpecialVar_0x8006, STR_CONV_MODE_LEFT_ALIGN, 2);
+    BufferStat(sIvData, 2);
 }
 
 void BufferChosenMonNature(void)
 {
-    StringCopy(gStringVar2, gNaturesInfo[GetMonData(ChosenMon(), MON_DATA_HIDDEN_NATURE)].name);
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+    gStringVar2[0] = EOS;
+    if (mon != NULL)
+        StringCopy(gStringVar2, gNaturesInfo[GetMonData(mon, MON_DATA_HIDDEN_NATURE)].name);
 }
 
 // TRUE while the spread still has room for the requested amount.
 void CheckChosenMonCanGainEVs(void)
 {
-    struct Pokemon *mon = ChosenMon();
-    u32 stat = gSpecialVar_0x8005 < NUM_STATS ? gSpecialVar_0x8005 : 0;
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+    u32 stat = gSpecialVar_0x8005;
     u32 want = gSpecialVar_0x8006;
+    gSpecialVar_0x8008 = 0;
+    gSpecialVar_Result = FALSE;
+    if (mon == NULL || stat >= NUM_STATS)
+        return;
     u32 current = GetMonData(mon, sStatData[stat]);
-
     gSpecialVar_0x8008 = TotalEVs(mon);
     gSpecialVar_Result = (current + want <= MAX_PER_STAT_EVS
                        && gSpecialVar_0x8008 + want <= MAX_TOTAL_EVS);
 }
 
-void AreChosenMonEVsMaxedOut(void)
-{
-    gSpecialVar_Result = (TotalEVs(ChosenMon()) >= MAX_TOTAL_EVS);
-}
-
 bool8 Special_AreLeadMonEVsMaxedOut(void)
 {
-    return TotalEVs(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]) >= MAX_TOTAL_EVS;
+    return TotalEVs(GetServiceMon(GetLeadMonIndex())) >= MAX_TOTAL_EVS;
 }
 
 void IncreaseChosenMonEVs(void)
 {
-    struct Pokemon *mon = ChosenMon();
-    u32 stat = gSpecialVar_0x8005 < NUM_STATS ? gSpecialVar_0x8005 : 0;
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+    u32 stat = gSpecialVar_0x8005;
     u32 want = gSpecialVar_0x8006;
+    gSpecialVar_0x8007 = 0;
+    gSpecialVar_Result = FALSE;
+    if (mon == NULL || stat >= NUM_STATS)
+        return;
     u32 current = GetMonData(mon, sStatData[stat]);
-    u32 room = MAX_TOTAL_EVS - TotalEVs(mon);
-    u32 gained;
-
-    if (want > MAX_PER_STAT_EVS - current)
-        want = MAX_PER_STAT_EVS - current;
-    if (want > room)
-        want = room;
-    gained = current + want;
+    u32 total = TotalEVs(mon);
+    gSpecialVar_0x8007 = current;
+    // Existing over-cap records must not wrap either remaining-room subtraction.
+    if (current >= MAX_PER_STAT_EVS || total >= MAX_TOTAL_EVS)
+        return;
+    want = min(want, min(MAX_PER_STAT_EVS - current, MAX_TOTAL_EVS - total));
+    u32 gained = current + want;
     SetMonData(mon, sStatData[stat], &gained);
     CalculateMonStats(mon);
     gSpecialVar_0x8007 = gained;
@@ -140,9 +151,11 @@ void IncreaseChosenMonEVs(void)
 
 void ResetChosenMonEVs(void)
 {
-    struct Pokemon *mon = ChosenMon();
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u32 zero = 0;
 
+    if (mon == NULL)
+        return;
     for (u32 i = 0; i < NUM_STATS; i++)
         SetMonData(mon, sStatData[i], &zero);
     CalculateMonStats(mon);
@@ -151,11 +164,11 @@ void ResetChosenMonEVs(void)
 // The native menu permits low IVs as well as maximum IVs.
 void ChangeChosenMonIVs(void)
 {
-    struct Pokemon *mon = ChosenMon();
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u32 stat = gSpecialVar_0x8005;
     u32 value = gSpecialVar_0x8006;
 
-    if (stat >= NUM_STATS || value > MAX_PER_STAT_IVS)
+    if (mon == NULL || stat >= NUM_STATS || value > MAX_PER_STAT_IVS)
         return;
     SetMonData(mon, sIvData[stat], &value);
     CalculateMonStats(mon);
@@ -186,9 +199,9 @@ void ChangeChosenMonHiddenPower(void)
     u32 slot = gSpecialVar_0x800A;
     u32 type = gSpecialVar_0x8007;
 
-    if (slot >= PARTY_SIZE || type >= ARRAY_COUNT(spreads))
+    struct Pokemon *mon = GetServiceMon(slot);
+    if (mon == NULL || type >= ARRAY_COUNT(spreads))
         return;
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
     for (u32 i = 0; i < NUM_STATS; i++)
         SetMonData(mon, sIvData[i], &spreads[type][i]);
     CalculateMonStats(mon);
@@ -196,11 +209,11 @@ void ChangeChosenMonHiddenPower(void)
 
 void ChangePokemonNature(void)
 {
-    struct Pokemon *mon = ChosenMon();
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u32 raisedStat = gSpecialVar_0x8005;
     u32 loweredStat = gSpecialVar_0x8006;
 
-    if (raisedStat >= NUM_STATS - 1 || loweredStat >= NUM_STATS - 1)
+    if (mon == NULL || raisedStat >= NUM_STATS - 1 || loweredStat >= NUM_STATS - 1)
         return;
     u32 nature = raisedStat * (NUM_STATS - 1) + loweredStat;
     // Preserve personality; this is the effective nature used for stats.
@@ -210,9 +223,12 @@ void ChangePokemonNature(void)
 
 void BufferVarsForIVRater(void)
 {
-    struct Pokemon *mon = ChosenMon();
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u32 best = 0, bestStat = 0, total = 0;
 
+    gSpecialVar_0x8005 = gSpecialVar_0x8006 = gSpecialVar_0x8007 = 0;
+    if (mon == NULL)
+        return;
     for (u32 i = 0; i < NUM_STATS; i++)
     {
         u32 iv = GetMonData(mon, sIvData[i]);

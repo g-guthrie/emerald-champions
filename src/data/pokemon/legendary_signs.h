@@ -1,5 +1,5 @@
-// Acquisition locations and progression gates. Rare wild discoveries each have
-// a 1% encounter chance. Native residents have 3% slots. Both stop appearing once caught.
+// Acquisition locations and progression gates. Wild residents and gated
+// discoveries each have a 1% standard encounter chance. Both stop appearing once caught.
 // Center guides offer local clues and never grant access.
 #define RARE_WILD_SIGN(id, mon, map, badges, offset, reqMon, reqFlag) \
     [id] = {SPECIES_##mon, MAP_##map, SPECIES_##reqMon, reqFlag, LEGENDARY_SOURCE_RARE_WILD, badges, offset}
@@ -25,7 +25,7 @@ VISIBLE_SIGN(LEGENDARY_SIGN_DARKRAI, DARKRAI, MT_PYRE_SUMMIT, 0, 0, MUSHARNA, FL
 NATIVE_WILD_SIGN(LEGENDARY_SIGN_DIALGA, DIALGA, METEOR_FALLS_B1F_1R),
 NATIVE_WILD_SIGN(LEGENDARY_SIGN_ENTEI, ENTEI, FIERY_PATH),
 OTHER_SIGN(LEGENDARY_SIGN_ETERNATUS, ETERNATUS, LEGENDARY_SOURCE_MASTERY),
-OTHER_SIGN(LEGENDARY_SIGN_GENESECT, GENESECT, LEGENDARY_SOURCE_GAME_CORNER),
+[LEGENDARY_SIGN_GENESECT] = {SPECIES_GENESECT, 0xFFFF, SPECIES_NONE, 0, LEGENDARY_SOURCE_GAME_CORNER, 8, 0},
 NATIVE_WILD_SIGN(LEGENDARY_SIGN_GIRATINA, GIRATINA, MT_PYRE_6F),
 OTHER_SIGN(LEGENDARY_SIGN_GLASTRIER, GLASTRIER, LEGENDARY_SOURCE_CIRCUIT),
 NATIVE_WILD_SIGN(LEGENDARY_SIGN_GUZZLORD, GUZZLORD, ALTERING_CAVE_B1F),

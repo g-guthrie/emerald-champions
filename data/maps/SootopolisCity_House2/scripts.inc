@@ -43,7 +43,6 @@ SootopolisCity_House2_EventScript_DracoMeteorDeclined::
 
 SootopolisCity_House2_EventScript_OpenPartyMenu:: @ 82C8326
 	special ChooseMonForMoveTutor
-	waitstate
 	lock
 	faceplayer
 	return

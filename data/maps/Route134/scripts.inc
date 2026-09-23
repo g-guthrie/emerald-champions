@@ -6,21 +6,6 @@ Route134_OnResume: @ 81F764A
 	setdivewarp MAP_UNDERWATER_ROUTE134, 255, 8, 6
 	end
 
-Route134_EventScript_Jack:: @ 81F7653
-	@ This retired encounter has no campaign battle.
-	msgbox Route134_Text_JackPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route134_EventScript_Laurel:: @ 81F766A
-	@ This retired encounter has no campaign battle.
-	msgbox Route134_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route134_EventScript_Alex:: @ 81F7681
-	@ This retired encounter has no campaign battle.
-	msgbox Route134_Text_AlexPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route134_EventScript_Aaron:: @ 81F7698
 	trainerbattle_double TRAINER_AARON, Route134_Text_AaronIntro, Route134_Text_AaronDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_AaronPostBattle, MSGBOX_AUTOCLOSE
@@ -36,18 +21,7 @@ Route134_EventScript_Hudson:: @ 81F76C6
 	msgbox Route134_Text_HudsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route134_EventScript_Reyna:: @ 81F76DD
-	@ This retired encounter has no campaign battle.
-	msgbox Route134_Text_ReynaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route134_EventScript_Marley:: @ 81F76F4
 	trainerbattle_double TRAINER_MARLEY, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_MarleyPostBattle, MSGBOX_AUTOCLOSE
 	end
-
-Route134_EventScript_Kelvin:: @ 81F770B
-	@ This retired encounter has no campaign battle.
-	msgbox Route134_Text_KelvinPostBattle, MSGBOX_AUTOCLOSE
-	end
-

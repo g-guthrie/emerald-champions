@@ -11,7 +11,7 @@ BirthIsland_Exterior_OnReturnToField: @ 8267F25
 	special SetDeoxysRockPalette
 	end
 
-BirthIsland_Exterior_OnTransition: @ 8267F29
+BirthIsland_Exterior_OnTransition:: @ 8267F29
 	setflag FLAG_MAP_SCRIPT_CHECKED_DEOXYS
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
 	setvar VAR_DEOXYS_ROCK_STEP_COUNT, 0
@@ -46,7 +46,6 @@ BirthIsland_Exterior_EventScript_Triangle:: @ 8267F83
 	lock
 	faceplayer
 	special DoDeoxysRockInteraction
-	waitstate
 	switch VAR_RESULT
 	case 0, BirthIsland_Exterior_EventScript_NotSolved1
 	case 1, BirthIsland_Exterior_EventScript_NotSolved2
@@ -55,13 +54,7 @@ BirthIsland_Exterior_EventScript_Triangle:: @ 8267F83
 	end
 
 BirthIsland_Exterior_EventScript_NotSolved1:: @ 8267FBB
-	release
-	end
-
 BirthIsland_Exterior_EventScript_NotSolved2:: @ 8267FBD
-	release
-	end
-
 BirthIsland_Exterior_EventScript_NotSolved3:: @ 8267FBF
 	release
 	end
@@ -69,8 +62,8 @@ BirthIsland_Exterior_EventScript_NotSolved3:: @ 8267FBF
 BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	waitse
 	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
-	setfieldeffectargument 1, 58
-	setfieldeffectargument 2, 26
+	setfieldeffectargument 1, MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR)
+	setfieldeffectargument 2, MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR)
 	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
 	playbgm MUS_RG_ENCOUNTER_DEOXYS, FALSE
 	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
@@ -89,8 +82,8 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	special CreateEventLegalEnemyMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+BirthIsland_Exterior_EventScript_CheckEncounterOutcome::
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq BirthIsland_Exterior_EventScript_DefeatedDeoxys
@@ -98,20 +91,40 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, BirthIsland_Exterior_EventScript_EncounterFinished
+	setflag FLAG_EC_FINALE_DEOXYS_RESOLVED
 	setflag FLAG_BATTLED_DEOXYS
+BirthIsland_Exterior_EventScript_EncounterFinished::
 	release
 	end
 
+@ The battle starts from the triangle, so the shared retreat helper (which hides
+@ the last-talked object) would leave Deoxys standing; remove Deoxys itself.
+BirthIsland_Exterior_EventScript_DeoxysLeaves::
+	fadescreenswapbuffers FADE_TO_BLACK
+	removeobject LOCALID_DEOXYS
+	fadescreenswapbuffers FADE_FROM_BLACK
+	return
+
+@ A defeat resolves the finale; the triangle stays quiet until the next League win.
 BirthIsland_Exterior_EventScript_DefeatedDeoxys:: @ 826803B
+	setflag FLAG_EC_FINALE_DEOXYS_RESOLVED
 	setflag FLAG_DEFEATED_DEOXYS
-	setvar VAR_0x8004, SPECIES_DEOXYS
-	goto Common_EventScript_LegendaryFlewAway
+	call BirthIsland_Exterior_EventScript_DeoxysLeaves
+	msgbox BirthIsland_Exterior_Text_DeoxysVanished, MSGBOX_DEFAULT
+	release
 	end
 
 BirthIsland_Exterior_EventScript_RanFromDeoxys:: @ 8268049
-	setvar VAR_0x8004, SPECIES_DEOXYS
-	goto Common_EventScript_LegendaryFlewAway
+	call BirthIsland_Exterior_EventScript_DeoxysLeaves
+	bufferspeciesname STR_VAR_1, SPECIES_DEOXYS
+	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
+	release
 	end
+
+BirthIsland_Exterior_Text_DeoxysVanished:
+	.string "Deoxys vanished into the sky.\n"
+	.string "The strange stone has gone quiet.$"
 
 BirthIsland_Exterior_Movement_DeoxysApproach: @ 8268054
 	walk_slow_down

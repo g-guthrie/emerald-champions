@@ -43,8 +43,13 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale:: @ 82574CC
 	return
 
 BattleFrontier_BattleArenaBattleRoom_OnFrame: @ 82574D2
-	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom
+	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobby
 	.2byte 0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_ReturnToLobby::
+	lockall
+	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 5, 6
+	waitstate
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom:: @ 82574DC
 	lockall
@@ -477,10 +482,6 @@ BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceDown: @ 8257C08
 	step_end
 
 @ Unused, redundant
-BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight2: @ 8257C0A
-	walk_in_place_faster_right
-	step_end
-
 BattleFrontier_BattleArenaBattleRoom_OnWarp: @ 8257C0C
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects
 	.2byte 0

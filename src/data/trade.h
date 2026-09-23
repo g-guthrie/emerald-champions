@@ -998,7 +998,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("ROMAN"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_VOLBEAT
+        .requestedSpecies = SPECIES_CROAGUNK
     },
     [INGAME_TRADE_CYCLIZAR] =
     {
@@ -1014,7 +1014,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("SKYLAR"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_BAGON
+        .requestedSpecies = SPECIES_IGGLYBUFF
     },
     [INGAME_TRADE_TYPE_NULL] =
     {
@@ -1212,38 +1212,6 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_PONYTA
     },
-    [INGAME_TRADE_TROPIUS] =
-    {
-        .nickname = _("BANANANA"),
-        .species = SPECIES_TROPIUS,
-        .ivs = {31, 31, 31, 31, 31, 31},
-        .abilityNum = 1,
-        .otId = 73996,
-        .conditions = {5, 5, 30, 5, 5},
-        .personality = 0x6F,
-        .heldItem = ITEM_NONE,
-        .mailNum = MAIL_NONE,
-        .otName = _("ROMAN"),
-        .otGender = MALE,
-        .sheen = 10,
-        .requestedSpecies = SPECIES_CROAGUNK
-    },
-    [INGAME_TRADE_HAPPINY] =
-    {
-        .nickname = _("HAPPY"),
-        .species = SPECIES_CHANSEY,
-        .ivs = {31, 31, 31, 31, 31, 31},
-        .abilityNum = 0,
-        .otId = 46285,
-        .conditions = {5, 5, 5, 5, 30},
-        .personality = 0x7F,
-        .heldItem = ITEM_NONE,
-        .mailNum = MAIL_NONE,
-        .otName = _("SKYLAR"),
-        .otGender = MALE,
-        .sheen = 10,
-        .requestedSpecies = SPECIES_IGGLYBUFF
-    }
 };
 
 static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =

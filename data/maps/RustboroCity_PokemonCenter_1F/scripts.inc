@@ -65,5 +65,5 @@ RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor: @ 8214E81
 	.string "The cutter next door gave me a\n"
 	.string "Cut license.\p"
 	.string "With the Stone Badge, I can\n"
-	.string "clear thin trees with any team!$"
-
+	.string "clear thin trees if someone\l"
+	.string "on my team could learn Cut!$"

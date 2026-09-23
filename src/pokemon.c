@@ -145,7 +145,7 @@ static const struct CombinedMove sCombinedMoves[2] =
 #define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name - 1] = NATIONAL_DEX_##name,
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name,
 
-static const enum NationalDexOrder sKantoToNationalOrder[KANTO_DEX_COUNT] =
+static const enum NationalDexOrder sKantoToNationalOrder[KANTO_DEX_COUNT - 1] =
 {
     FOREACH_SPECIES_IN_KANTO_DEX_ORDER(KANTO_TO_NATIONAL)
 };
@@ -954,6 +954,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
     SetBoxMonData(boxMon, MON_DATA_CHECKSUM, &checksum);
     EncryptBoxMon(boxMon);
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
+    // The nickname setter copies the full field, including bytes after EOS.
+    memset(speciesName, EOS, sizeof(speciesName));
     StringCopy(speciesName, GetSpeciesName(species));
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
     SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
@@ -1067,6 +1069,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     SetMonData(mon, MON_DATA_HELD_ITEM, &src->heldItem);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &src->friendship);
 
+    memset(nickname, EOS, sizeof(nickname));
     StringCopy(nickname, src->nickname);
 
     if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
@@ -1129,6 +1132,7 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     SetMonData(mon, MON_DATA_HELD_ITEM, &src->heldItem);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &src->friendship);
 
+    memset(nickname, EOS, sizeof(nickname));
     StringCopy(nickname, src->nickname);
 
     if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
@@ -2960,11 +2964,70 @@ bool32 ClampBoxMonToPlayerLevelCap(struct BoxPokemon *boxMon)
     return TRUE;
 }
 
+enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species)
+{
+    const struct SpeciesInfo *info;
+
+    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
+        return RESTRICTED_PARTY_NONE;
+    info = &gSpeciesInfo[GET_BASE_SPECIES_ID(species)];
+    if (info->isUltraBeast)
+        return RESTRICTED_PARTY_ULTRA_BEAST;
+    if (info->isRestrictedLegendary || info->isSubLegendary || info->isMythical)
+        return RESTRICTED_PARTY_LEGENDARY;
+    if (info->isParadox)
+        return RESTRICTED_PARTY_PARADOX;
+    return RESTRICTED_PARTY_NONE;
+}
+
+bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot)
+{
+    enum RestrictedPartyClass kind = GetRestrictedPartyClass(species);
+
+    if (kind == RESTRICTED_PARTY_NONE)
+        return TRUE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if ((s32)slot != replacedSlot
+         && GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) == kind)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+bool32 PlayerPartyWithinRestrictedLimit(void)
+{
+    u8 legends = 0, ultraBeasts = 0, paradoxes = 0;
+
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        switch (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)))
+        {
+        case RESTRICTED_PARTY_LEGENDARY: legends++; break;
+        case RESTRICTED_PARTY_ULTRA_BEAST: ultraBeasts++; break;
+        case RESTRICTED_PARTY_PARADOX: paradoxes++; break;
+        default: break;
+        }
+    }
+    return legends <= 1 && ultraBeasts <= 1 && paradoxes <= 1;
+}
+
+bool32 PlayerPartyLeagueEligible(void)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        if (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) == RESTRICTED_PARTY_LEGENDARY)
+            return FALSE;
+    return TRUE;
+}
+
 static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
 {
     s32 i;
 
     ClampMonToPlayerLevelCap(mon);
+
+    if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), PARTY_SIZE))
+        return CopyMonToPC(mon);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -3022,6 +3085,60 @@ u8 CopyMonToPC(struct Pokemon *mon)
     } while (boxNo != StorageGetCurrentBox());
 
     return MON_CANT_GIVE;
+}
+
+static s32 GetUniquePartyLegendarySlot(void)
+{
+    s32 found = PARTY_SIZE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_LEGENDARY)
+            continue;
+        if (found != PARTY_SIZE)
+            return -1;
+        found = slot;
+    }
+    return found;
+}
+
+// A gift was already placed safely in the PC. Replacing the party Legendary
+// swaps that exact box slot, so even a now-full PC cannot lose either Pokémon.
+u16 GetBoxedLegendaryGiftSwapStatus(void)
+{
+    if (gPokemonStoragePtr == NULL || gSpecialVar_MonBoxId >= TOTAL_BOXES_COUNT
+     || gSpecialVar_MonBoxPos >= IN_BOX_COUNT)
+        return 0;
+
+    struct BoxPokemon *gift = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+    if (GetRestrictedPartyClass(GetBoxMonData(gift, MON_DATA_SPECIES)) != RESTRICTED_PARTY_LEGENDARY)
+        return 0;
+
+    s32 slot = GetUniquePartyLegendarySlot();
+    if (slot < 0 || slot >= PARTY_SIZE)
+        return 0;
+
+    GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_NICKNAME, gStringVar1);
+    GetBoxMonData(gift, MON_DATA_NICKNAME, gStringVar2);
+    return ItemIsMail(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM)) ? 2 : 1;
+}
+
+u16 SwapBoxedLegendaryGiftWithParty(void)
+{
+    if (GetBoxedLegendaryGiftSwapStatus() != 1)
+        return FALSE;
+
+    s32 slot = GetUniquePartyLegendarySlot();
+    struct BoxPokemon *giftBox = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
+    struct Pokemon gift;
+    struct Pokemon old = gParties[B_TRAINER_PLAYER][slot];
+    BoxMonToMon(giftBox, &gift);
+    MonRestorePP(&old);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    *giftBox = old.box;
+    gParties[B_TRAINER_PLAYER][slot] = gift;
+    CalculatePlayerPartyCount();
+    return TRUE;
 }
 
 u8 CalculatePartyCount(enum BattleTrainer trainer)
@@ -3968,8 +4085,8 @@ bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, enum BattlerId bat
 
 u8 GetItemEffectParamOffset(enum BattlerId battler, enum Item itemId, u8 effectByte, u8 effectBit)
 {
-    const u8 *temp;
-    const u8 *itemEffect;
+    const u8 *itemEffect = itemId == ITEM_ENIGMA_BERRY_E_READER
+        ? gEnigmaBerries[battler].itemEffect : GetItemEffect(itemId);
     u8 offset;
     int i;
     u8 j;
@@ -3977,17 +4094,8 @@ u8 GetItemEffectParamOffset(enum BattlerId battler, enum Item itemId, u8 effectB
 
     offset = ITEM_EFFECT_ARG_START;
 
-    temp = GetItemEffect(itemId);
-
-    if (temp != NULL && !temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
+    if (itemEffect == NULL)
         return 0;
-
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        temp = gEnigmaBerries[battler].itemEffect;
-    }
-
-    itemEffect = temp;
 
     for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
     {
@@ -4016,17 +4124,17 @@ u8 GetItemEffectParamOffset(enum BattlerId battler, enum Item itemId, u8 effectB
                             effectFlags &= ~(ITEM4_REVIVE >> 2);
                         // fallthrough
                     case 0: // ITEM4_EV_HP
-                        if (i == effectByte && (effectFlags & effectBit))
+                        if (i == effectByte && (effectBit & 1))
                             return offset;
                         offset++;
                         break;
                     case 1: // ITEM4_EV_ATK
-                        if (i == effectByte && (effectFlags & effectBit))
+                        if (i == effectByte && (effectBit & 1))
                             return offset;
                         offset++;
                         break;
                     case 3: // ITEM4_HEAL_PP
-                        if (i == effectByte && (effectFlags & effectBit))
+                        if (i == effectByte && (effectBit & 1))
                             return offset;
                         offset++;
                         break;
@@ -4058,7 +4166,7 @@ u8 GetItemEffectParamOffset(enum BattlerId battler, enum Item itemId, u8 effectB
                     case 4: // ITEM5_PP_MAX
                     case 5: // ITEM5_FRIENDSHIP_LOW
                     case 6: // ITEM5_FRIENDSHIP_MID
-                        if (i == effectByte && (effectFlags & effectBit))
+                        if (i == effectByte && (effectBit & 1))
                             return offset;
                         offset++;
                         break;
@@ -4387,8 +4495,6 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
                 currentCondition = TRUE;
                 removeBagItem = params[i].arg1;
                 removeBagItemCount = params[i].arg2;
-                if (canStopEvo != NULL)
-                    *canStopEvo = FALSE;
             }
             break;
         case IF_REGION:
@@ -4403,23 +4509,24 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
             break;
         }
 
-        // check if an evolution is about to happen and items should be removed
-        if (evoState == DO_EVO)
-        {
-            if (removeHoldItem)
-            {
-                enum Item heldItem = ITEM_NONE;
-                SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
-            }
-
-            if (removeBagItem != ITEM_NONE)
-                RemoveBagItem(removeBagItem, removeBagItemCount);
-        }
-
         if (currentCondition == FALSE)
             return FALSE;
     }
 
+    // Commit costs only after every condition passed, and only once. An
+    // evolution that spends an item can't be cancelled, or the item is lost.
+    if ((removeBagItem != ITEM_NONE || removeHoldItem) && canStopEvo != NULL)
+        *canStopEvo = FALSE;
+    if (evoState == DO_EVO)
+    {
+        if (removeHoldItem)
+        {
+            enum Item item = ITEM_NONE;
+            SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+        }
+        if (removeBagItem != ITEM_NONE)
+            RemoveBagItem(removeBagItem, removeBagItemCount);
+    }
     return TRUE;
 }
 
@@ -4692,38 +4799,22 @@ u32 NationalToRegionalOrder(enum NationalDexOrder nationalNum)
 
 enum KantoDexOrder NationalToKantoOrder(enum NationalDexOrder nationalNum)
 {
-    u16 kantoNum;
-
-    if (!nationalNum)
+    if (nationalNum == NATIONAL_DEX_NONE)
         return 0;
-
-    kantoNum = 0;
-
-    while (kantoNum < KANTO_DEX_COUNT && sKantoToNationalOrder[kantoNum] != nationalNum)
-        kantoNum++;
-
-    if (kantoNum >= KANTO_DEX_COUNT)
-        return 0;
-
-    return kantoNum + 1;
+    for (u32 i = 0; i < ARRAY_COUNT(sKantoToNationalOrder); i++)
+        if (sKantoToNationalOrder[i] == nationalNum)
+            return i + 1;
+    return 0;
 }
 
 enum HoennDexOrder NationalToHoennOrder(enum NationalDexOrder nationalNum)
 {
-    u16 hoennNum;
-
-    if (!nationalNum)
+    if (nationalNum == NATIONAL_DEX_NONE)
         return 0;
-
-    hoennNum = 0;
-
-    while (hoennNum < (HOENN_DEX_COUNT - 1) && sHoennToNationalOrder[hoennNum] != nationalNum)
-        hoennNum++;
-
-    if (hoennNum >= HOENN_DEX_COUNT - 1)
-        return 0;
-
-    return hoennNum + 1;
+    for (u32 i = 0; i < ARRAY_COUNT(sHoennToNationalOrder); i++)
+        if (sHoennToNationalOrder[i] == nationalNum)
+            return i + 1;
+    return 0;
 }
 
 enum NationalDexOrder SpeciesToNationalPokedexNum(enum Species species)
@@ -4765,7 +4856,7 @@ enum NationalDexOrder RegionalToNationalOrder(u32 regionalNum)
 
 enum NationalDexOrder KantoToNationalOrder(enum KantoDexOrder kantoNum)
 {
-    if (!kantoNum || kantoNum >= (KANTO_DEX_COUNT + 1))
+    if (!kantoNum || kantoNum >= KANTO_DEX_COUNT)
         return 0;
 
     return sKantoToNationalOrder[kantoNum - 1];
@@ -4937,97 +5028,39 @@ s32 CalculateFriendshipBonuses(struct Pokemon *mon, s32 modifier, enum HoldEffec
 
 void MonGainEVs(struct Pokemon *mon, enum Species defeatedSpecies)
 {
+    const u8 yields[NUM_STATS] = {
+        [STAT_HP] = gSpeciesInfo[defeatedSpecies].evYield_HP,
+        [STAT_ATK] = gSpeciesInfo[defeatedSpecies].evYield_Attack,
+        [STAT_DEF] = gSpeciesInfo[defeatedSpecies].evYield_Defense,
+        [STAT_SPEED] = gSpeciesInfo[defeatedSpecies].evYield_Speed,
+        [STAT_SPATK] = gSpeciesInfo[defeatedSpecies].evYield_SpAttack,
+        [STAT_SPDEF] = gSpeciesInfo[defeatedSpecies].evYield_SpDefense,
+    };
     u8 evs[NUM_STATS];
-    u16 evIncrease = 0;
-    u16 totalEVs = 0;
-    enum Item heldItem;
-    enum HoldEffect holdEffect;
-    enum Stat i;
-    int multiplier;
-    u8 stat;
-    u8 bonus;
+    u32 totalEVs = 0;
     u32 currentEVCap = GetCurrentEVCap();
+    enum Item heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+    enum HoldEffect holdEffect = GetItemHoldEffect(heldItem);
+    u32 multiplier = CheckMonHasHadPokerus(mon) ? 2 : 1;
 
-    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    holdEffect = GetItemHoldEffect(heldItem);
-
-    stat = GetItemSecondaryId(heldItem);
-    bonus = GetItemHoldEffectParam(heldItem);
-
-    for (i = 0; i < NUM_STATS; i++)
+    if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
+        multiplier *= 2;
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
-        evs[i] = GetMonData(mon, MON_DATA_HP_EV + i, 0);
-        totalEVs += evs[i];
+        evs[stat] = GetMonData(mon, MON_DATA_HP_EV + stat);
+        totalEVs += evs[stat];
     }
-
-    for (i = 0; i < NUM_STATS; i++)
+    for (u32 stat = 0; stat < NUM_STATS && totalEVs < currentEVCap; stat++)
     {
-        if (totalEVs >= currentEVCap)
-            break;
-
-        if (CheckMonHasHadPokerus(mon))
-            multiplier = 2;
-        else
-            multiplier = 1;
-
-        switch (i)
-        {
-        case STAT_HP:
-            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_HP)
-                evIncrease = (gSpeciesInfo[defeatedSpecies].evYield_HP + bonus) * multiplier;
-            else
-                evIncrease = gSpeciesInfo[defeatedSpecies].evYield_HP * multiplier;
-            break;
-        case STAT_ATK:
-            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_ATK)
-                evIncrease = (gSpeciesInfo[defeatedSpecies].evYield_Attack + bonus) * multiplier;
-            else
-                evIncrease = gSpeciesInfo[defeatedSpecies].evYield_Attack * multiplier;
-            break;
-        case STAT_DEF:
-            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_DEF)
-                evIncrease = (gSpeciesInfo[defeatedSpecies].evYield_Defense + bonus) * multiplier;
-            else
-                evIncrease = gSpeciesInfo[defeatedSpecies].evYield_Defense * multiplier;
-            break;
-        case STAT_SPEED:
-            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_SPEED)
-                evIncrease = (gSpeciesInfo[defeatedSpecies].evYield_Speed + bonus) * multiplier;
-            else
-                evIncrease = gSpeciesInfo[defeatedSpecies].evYield_Speed * multiplier;
-            break;
-        case STAT_SPATK:
-            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_SPATK)
-                evIncrease = (gSpeciesInfo[defeatedSpecies].evYield_SpAttack + bonus) * multiplier;
-            else
-                evIncrease = gSpeciesInfo[defeatedSpecies].evYield_SpAttack * multiplier;
-            break;
-        case STAT_SPDEF:
-            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_SPDEF)
-                evIncrease = (gSpeciesInfo[defeatedSpecies].evYield_SpDefense + bonus) * multiplier;
-            else
-                evIncrease = gSpeciesInfo[defeatedSpecies].evYield_SpDefense * multiplier;
-            break;
-        default:
-            break;
-        }
-
-        if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
-            evIncrease *= 2;
-
-        if (totalEVs + (s16)evIncrease > currentEVCap)
-            evIncrease = ((s16)evIncrease + currentEVCap) - (totalEVs + evIncrease);
-
-        if (evs[i] + (s16)evIncrease > MAX_PER_STAT_EVS)
-        {
-            int val1 = (s16)evIncrease + MAX_PER_STAT_EVS;
-            int val2 = evs[i] + evIncrease;
-            evIncrease = val1 - val2;
-        }
-
-        evs[i] += evIncrease;
-        totalEVs += evIncrease;
-        SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
+        u32 gain = yields[stat];
+        if (holdEffect == HOLD_EFFECT_POWER_ITEM && GetItemSecondaryId(heldItem) == stat)
+            gain += GetItemHoldEffectParam(heldItem);
+        gain = min(gain * multiplier, currentEVCap - totalEVs);
+        u32 newEVs = min(evs[stat] + gain, MAX_PER_STAT_EVS);
+        // Preserve existing normalization of legacy over-stat-cap records,
+        // without expressing a negative adjustment through unsigned wraparound.
+        totalEVs = totalEVs - evs[stat] + newEVs;
+        SetMonData(mon, MON_DATA_HP_EV + stat, &newEVs);
     }
 }
 
@@ -6705,8 +6738,13 @@ u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
     ClampMonToPlayerLevelCap(mon);
     if (slot < PARTY_SIZE)
     {
-        memcpy(&gParties[B_TRAINER_PLAYER][slot], mon, sizeof(struct Pokemon));
-        sentToPc = MON_GIVEN_TO_PARTY;
+        if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), slot))
+            sentToPc = CopyMonToPC(mon);
+        else
+        {
+            memcpy(&gParties[B_TRAINER_PLAYER][slot], mon, sizeof(struct Pokemon));
+            sentToPc = MON_GIVEN_TO_PARTY;
+        }
     }
     else
     {
@@ -6910,6 +6948,16 @@ void CreateMonFromTemplate(struct Pokemon *mon, const struct PokemonTemplate *mo
     for (u32 i = 0; i < NUM_STATS; i++)
     {
         SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
+    }
+
+    // Unspecified IVs keep the universal constructed-Pokémon value; explicit ones are honored.
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        if (monTemplate->ivs[i] <= MAX_PER_STAT_IVS)
+        {
+            u8 iv = monTemplate->ivs[i];
+            SetMonData(mon, MON_DATA_HP_IV + i, &iv);
+        }
     }
 
     enum Move moves[MAX_MON_MOVES];

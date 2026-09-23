@@ -255,7 +255,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
 void SetPPNumbersPaletteInMoveSelection(enum BattlerId battler);
 u8 GetCurrentPPToMaxPPState(u8 currentPP, u8 maxPP);
-void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 

@@ -22,6 +22,9 @@ BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth:: @ 825B6FD
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus:: @ 825B707
+	@ Normalize old in-progress Pike saves before streak/bet result handling.
+	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	frontier_getstatus
 	end
 
@@ -95,7 +98,7 @@ BattleFrontier_BattlePikeLobby_EventScript_Attendant:: @ 825B868
 	lock
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	special SavePlayerParty
 	msgbox BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike, MSGBOX_DEFAULT
 BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge:: @ 825B87F
@@ -125,7 +128,6 @@ BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge:: @ 825B8BB
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
@@ -267,7 +269,6 @@ BattleFrontier_BattlePikeLobby_EventScript_ExitRules:: @ 825BB47
 BattleFrontier_BattlePike_EventScript_CloseCurtain:: @ 825BB49
 	playse SE_PIKE_CURTAIN_CLOSE
 	special CloseBattlePikeCurtain
-	waitstate
 	waitse
 	return
 
@@ -317,7 +318,7 @@ BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLv50: @ 825BE8C
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when\n"
 	.string "you are ready…$"
 
@@ -329,7 +330,7 @@ BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLvOpen: @ 825BF9A
 	.string "Pokémon to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when\n"
 	.string "you are ready…$"
 
@@ -360,17 +361,6 @@ BattleFrontier_BattlePikeLobby_Text_ShallRecordResults: @ 825C1DF
 	.string "Please wait…$"
 
 @ Unused
-BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2: @ 825C209
-	.string "To commemorate your completion of\n"
-	.string "the Battle Choice challenge, we award\l"
-	.string "you these Battle Point(s)…$"
-
-@ Unused
-BattleFrontier_BattlePikeLobby_Text_ReachedBattlePointLimit: @ 825C26C
-	.string "You appear to have reached the limit\n"
-	.string "for Battle Points…\pPlease exchange some Battle Points\n"
-	.string "for prizes, then return…$"
-
 BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting: @ 825C2E0
 	.string "I beg your pardon, but…\p"
 	.string "You failed to save before you quit\n"
@@ -405,13 +395,6 @@ BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere: @ 825C4FD
 	.string "here?$"
 
 @ Unused
-BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose: @ 825C558
-	.string "What is this weird place?\n"
-	.string "I can't figure it out at all!\p"
-	.string "I've taken the challenge a bunch\n"
-	.string "of times, but all I ever do is run into\l"
-	.string "Trainers whichever path I choose.$"
-
 BattleFrontier_BattlePikeLobby_Text_RulesAreListed: @ 825C5FB
 	.string "The Battle Choice's rules are listed.$"
 
@@ -433,4 +416,3 @@ BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules: @ 825C6EB
 	.string "changed.\p"
 	.string "The sequence must be set before\n"
 	.string "starting your challenge.$"
-

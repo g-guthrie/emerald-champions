@@ -71,22 +71,13 @@ AncientTomb_EventScript_Registeel:: @ 823905A
 	setwildbattle SPECIES_REGISTEEL, VAR_0x800A, ITEM_METAL_COAT
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq AncientTomb_EventScript_DefeatedRegisteel
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_RanFromRegisteel
 	setflag FLAG_DEFEATED_REGISTEEL
+	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	release
-	end
-
-AncientTomb_EventScript_DefeatedRegisteel:: @ 82390A1
-	setflag FLAG_DEFEATED_REGISTEEL
-	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 AncientTomb_EventScript_RanFromRegisteel:: @ 82390AA

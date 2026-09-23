@@ -1,10 +1,37 @@
 #include "global.h"
 #include "event_object_movement.h"
 #include "overworld.h"
+#include "pokemon.h"
 #include "sprite.h"
 #include "constants/event_object_movement.h"
 #include "constants/layouts.h"
 #include "test/test.h"
+
+TEST("Ambient cries: Swarm in any non-Egg party slot halves the repeat delay")
+{
+    u32 swarmSlot = PARTY_SIZE;
+    bool32 egg = FALSE;
+    for (u32 slot = 0; slot <= PARTY_SIZE; slot++)
+        for (u32 isEgg = 0; isEgg <= 1; isEgg++)
+            PARAMETRIZE { swarmSlot = slot; egg = isEgg; }
+    ZeroPlayerPartyMons();
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        CreateMon(&gParties[B_TRAINER_PLAYER][slot], slot == swarmSlot ? SPECIES_LEDYBA : SPECIES_RATTATA, 20, 0, OTID_STRUCT_PLAYER_ID);
+    if (swarmSlot < PARTY_SIZE)
+    {
+        u32 abilitySlot = 0;
+        SetMonData(&gParties[B_TRAINER_PLAYER][swarmSlot], MON_DATA_ABILITY_NUM, &abilitySlot);
+        SetMonData(&gParties[B_TRAINER_PLAYER][swarmSlot], MON_DATA_IS_EGG, &egg);
+    }
+    s16 state = 2; // AMB_CRY_RESET: choose the repeat delay without playing audio.
+    u16 delay = 0;
+    UpdateAmbientCry(&state, &delay);
+    EXPECT_EQ(state, 3); // AMB_CRY_WAIT
+    if (swarmSlot < PARTY_SIZE && !egg)
+        EXPECT(delay >= 600 && delay < 1200);
+    else
+        EXPECT(delay >= 1200 && delay < 2400);
+}
 
 TEST("Object movement: unsupported directions use the existing downward fallback")
 {

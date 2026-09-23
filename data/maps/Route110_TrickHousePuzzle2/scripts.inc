@@ -94,11 +94,6 @@ Route110_TrickHousePuzzle2_EventScript_Ted:: @ 826BC75
 	msgbox Route110_TrickHousePuzzle2_Text_TedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_TrickHousePuzzle2_EventScript_Paul:: @ 826BC8C
-	@ This retired encounter has no campaign battle.
-	msgbox Route110_TrickHousePuzzle2_Text_PaulPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route110_TrickHousePuzzle2_EventScript_Georgia:: @ 826BCA3
 	trainerbattle_double TRAINER_GEORGIA, Route110_TrickHousePuzzle2_Text_GeorgiaIntro, Route110_TrickHousePuzzle2_Text_GeorgiaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle, MSGBOX_AUTOCLOSE
@@ -121,17 +116,6 @@ Route110_TrickHousePuzzle2_Text_TedDefeat: @ 826BD45
 Route110_TrickHousePuzzle2_Text_TedPostBattle: @ 826BD70
 	.string "Can I get you to push all the buttons\n"
 	.string "for me?$"
-
-Route110_TrickHousePuzzle2_Text_PaulIntro: @ 826BD9E
-	.string "Oh! You're on your second Trick House\n"
-	.string "challenge!$"
-
-Route110_TrickHousePuzzle2_Text_PaulDefeat: @ 826BDCF
-	.string "You're good at battling too?$"
-
-Route110_TrickHousePuzzle2_Text_PaulPostBattle: @ 826BDEC
-	.string "The Trick Master rigged all the tricks\n"
-	.string "in this house all by himself.$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaIntro: @ 826BE31
 	.string "I want to make my own Gym one day.\n"

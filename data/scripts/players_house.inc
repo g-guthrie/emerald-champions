@@ -1,3 +1,68 @@
+@ Both rival meeting paths share every region and default cancellation to Hoenn.
+RivalsHouse_EventScript_ChooseStarterRegion::
+	setvar VAR_0x8004, SCROLL_MULTI_REGION_NAMES
+	setvar VAR_0x8005, 2 @ cursor on Hoenn; the list still opens at its top
+	special ShowScrollableMultichoice
+
+RivalsHouse_EventScript_ApplyStarterRegion::
+	switch VAR_RESULT
+	case 0, RivalsHouse_EventScript_Kanto
+	case 1, RivalsHouse_EventScript_Johto
+	case 2, RivalsHouse_EventScript_Hoenn
+	case 3, RivalsHouse_EventScript_Sinnoh
+	case 4, RivalsHouse_EventScript_Unova
+	case 5, RivalsHouse_EventScript_Kalos
+	case 6, RivalsHouse_EventScript_Alola
+	case 7, RivalsHouse_EventScript_Galar
+	case 8, RivalsHouse_EventScript_Paldea
+	goto RivalsHouse_EventScript_Hoenn
+	end
+
+RivalsHouse_EventScript_Kanto:
+	setvar VAR_STARTER_GEN, 1
+	bufferstring 1, StarterRegionStringKanto
+	return
+
+RivalsHouse_EventScript_Johto:
+	setvar VAR_STARTER_GEN, 2
+	bufferstring 1, StarterRegionStringJohto
+	return
+
+RivalsHouse_EventScript_Hoenn:
+	setvar VAR_STARTER_GEN, 3
+	bufferstring 1, StarterRegionStringHoenn
+	return
+
+RivalsHouse_EventScript_Sinnoh:
+	setvar VAR_STARTER_GEN, 4
+	bufferstring 1, StarterRegionStringSinnoh
+	return
+
+RivalsHouse_EventScript_Unova:
+	setvar VAR_STARTER_GEN, 5
+	bufferstring 1, StarterRegionStringUnova
+	return
+
+RivalsHouse_EventScript_Kalos:
+	setvar VAR_STARTER_GEN, 6
+	bufferstring 1, StarterRegionStringKalos
+	return
+
+RivalsHouse_EventScript_Alola:
+	setvar VAR_STARTER_GEN, 7
+	bufferstring 1, StarterRegionStringAlola
+	return
+
+RivalsHouse_EventScript_Galar:
+	setvar VAR_STARTER_GEN, 8
+	bufferstring 1, StarterRegionStringGalar
+	return
+
+RivalsHouse_EventScript_Paldea:
+	setvar VAR_STARTER_GEN, 9
+	bufferstring 1, StarterRegionStringPaldea
+	return
+
 PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet::
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	return
@@ -299,6 +364,22 @@ PlayersHouse_1F_Movement_MomReturnToSeatFemale:
 PlayersHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
+	goto_if_unset FLAG_RECEIVED_OLD_ROD, PlayersHouse_1F_EventScript_MomNormal
+	setvar VAR_0x8004, ITEM_OLD_ROD
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, PlayersHouse_1F_EventScript_MomNormal
+	checkitemspace ITEM_OLD_ROD, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox PlayersHouse_1F_Text_OldRodStillHere, MSGBOX_DEFAULT
+	giveitem ITEM_OLD_ROD
+	release
+	end
+
+PlayersHouse_1F_Text_OldRodStillHere:
+	.string "I kept your Old Rod safe.\n"
+	.string "You can take it now!$"
+
+PlayersHouse_1F_EventScript_MomNormal:
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
@@ -313,8 +394,6 @@ PlayersHouse_1F_EventScript_DontPushYourselfTooHard::
 	release
 	end
 
-@ MOM has nothing to hand over: money is not a reward in this campaign. The flag
-@ only records that she has already said her piece about DAD's BADGE.
 PlayersHouse_1F_EventScript_MomHealsParty::
 	msgbox PlayersHouse_1F_Text_YouShouldRestABit, MSGBOX_DEFAULT
 	goto PlayersHouse_1F_EventScript_HealParty
@@ -474,11 +553,6 @@ PlayersHouse_1F_EventScript_SSTicketNoRoom::
 	goto PlayersHouse_1F_EventScript_ReceivedSSTicket
 
 @ Never called.
-PlayersHouse_1F_EventScript_AirLatiBroadcast::
-	goto_if_set FLAG_LATIOS_OR_LATIAS_ROAMING, PlayersHouse_1F_EventScript_LatiReportFinished
-	setflag FLAG_SYS_TV_LATIAS_LATIOS
-	return
-
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD

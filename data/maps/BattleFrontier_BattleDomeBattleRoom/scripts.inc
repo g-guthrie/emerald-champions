@@ -1183,17 +1183,6 @@ BattleFrontier_BattleDomeBattleRoom_Text_LookForwardToNextEncounter: @ 824D54D
 	.string "our next encounter!$"
 
 @ Unused
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ2: @ 824D5F5
-	.string "{PLAYER} is the Level 50\n"
-	.string "Battle Tournament Champion!\p"
-	.string "Congratulations!$"
-
-@ Unused
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp2: @ 824D635
-	.string "{PLAYER} is the Open Level\n"
-	.string "Battle Tournament Champion!\p"
-	.string "Congratulations!$"
-
 BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker: @ 824D677
 	.string "The final match!\p"
 	.string "{PLAYER} versus the DOME ACE, TUCKER!\p"

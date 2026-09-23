@@ -133,6 +133,7 @@ gSpecials::
 	def_special GetDewfordHallPaintingNameIndex
 	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
+	def_special PlayerPartyLeagueEligible
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special MauvilleGymSetDefaultBarriers
@@ -167,6 +168,7 @@ gSpecials::
 	def_special UpdateTrainerFanClubGameClear
 	def_special Script_TryGainNewFanFromCounter
 	def_special RockSmashWildEncounter
+	def_special HoneyWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
@@ -238,6 +240,7 @@ gSpecials::
 	def_special PlayerPC, waitstate=1
 	def_special FieldShowRegionMap, waitstate=1
 	def_special GetInGameTradeSpeciesInfo
+	def_special CanReceiveInGameTradePokemon
 	def_special CreateInGameTradePokemon
 	def_special DoInGameTradeScene, waitstate=1
 	def_special GetTradeSpecies
@@ -293,7 +296,6 @@ gSpecials::
 	def_special StartRegiBattle, waitstate=1
 	def_special SetTrainerFacingDirection
 	def_special DoSealedChamberShakingEffect_Short, waitstate=1
-	def_special FoundRoute116DuskStone
 	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
 	def_special DoFallWarp, waitstate=1
@@ -303,15 +305,11 @@ gSpecials::
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
 	def_special IsSelectedMonEeveelution
-	def_special IsSelectedMonFurfrou
-	def_special ChangeSelectedMonSpecies
 	def_special Special_HasMoveToRelearn
 	def_special TryInitBattleTowerAwardManObjectEvent
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
 	def_special Script_FadeOutMapMusic, waitstate=1
-	def_special SetPacifidlogStoneReceivedDay
-	def_special GetDaysUntilPacifidlogStoneAvailable
 	def_special HasAllHoennMons
 	def_special MonOTNameNotPlayer
 	def_special BufferLottoTicketNumber
@@ -420,6 +418,7 @@ gSpecials::
 	def_special TakeBerryPowder
 	def_special PrintPlayerBerryPowderAmount
 	def_special ShowFrontierGamblerLookingMessage
+	def_special RefundRetiredFrontierGamblerBet
 	def_special ShowFrontierGamblerGoMessage
 	def_special Script_DoRayquazaScene, waitstate=1
 	def_special CountPlayerTrainerStars
@@ -436,6 +435,8 @@ gSpecials::
 	def_special StartMirageTowerFossilFallAndSink, waitstate=1
 	def_special GetPCBoxToSendMon
 	def_special ShouldShowBoxWasFullMessage
+	def_special GetBoxedLegendaryGiftSwapStatus
+	def_special SwapBoxedLegendaryGiftWithParty
 	def_special SetMatchCallRegisteredFlag
 	def_special DoDomeConfetti
 	def_special CreateAbnormalWeatherEvent
@@ -453,15 +454,11 @@ gSpecials::
 	def_special OpenEmeraldChampionsEvolutionItemArchive
 	def_special IsEmeraldChampionsGameCornerPokemonClaimed
 	def_special GiveEmeraldChampionsGameCornerPokemon
-	def_special GiveEmeraldChampionsPreparedPokemon
 	def_special TryUnlockSelectedLegendarySign
 	def_special GetSelectedLegendarySignState
-	def_special ShouldShowSelectedLegendarySignObject
-	def_special GetSelectedLegendarySignLevel
 	def_special CreateSelectedLegendarySignEncounter
 	def_special TryGiveSelectedLegendarySignReward
 	def_special CreateEmeraldChampionsStaticLegendaryEncounter
-	def_special DoesPlayerPartyHaveSelectedSpeciesFamily
 	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
 	def_special TryGiveArceusLegendarySignMasteryReward
@@ -488,9 +485,6 @@ gSpecials::
 	def_special ApplyEmeraldChampionsBonding
 	def_special StartEmeraldChampionsBirchRescue, waitstate=1
 	def_special BufferEmeraldChampionsRivalBranch
-	def_special GiveEmeraldChampionsOpeningBalls
-	def_special BufferEmeraldChampionsStarterNames
-	def_special SelectEmeraldChampionsStarterForNaming
 	def_special SaveForBattleTowerLink, waitstate=1
 	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
@@ -635,29 +629,17 @@ gSpecials::
 	def_special TryUnlockLocalLegendaryDiscovery
 	def_special BufferNextCenterLegendaryLead
 
-	def_special ClaimEmeraldChampionsSootMilestone
-	def_special BufferEmeraldChampionsSootProgress
+	def_special Unused_ClaimEmeraldChampionsSootMilestone, unused=1
+	def_special Unused_BufferEmeraldChampionsSootProgress, unused=1
 
 	def_special OpenEmeraldChampionsEvolutionSpecialist
 
-	def_special TradeEmeraldChampionsShoalMaterials
 
-	def_special GetHeatranDiscoveryState
-
-	def_special CompleteEmeraldChampionsMilestone, requests_effects=1
-	def_special BufferCampaignMilestoneText
-
-	def_special LocateEmeraldChampionsCastform
-	def_special CheckEmeraldChampionsRedundantPurchase
+	def_special CheckPlayerCaughtSpecies
 	def_special ConvertEmeraldChampionsFiniteReward, requests_effects=1
-	def_special BufferEmeraldChampionsShoalReward
 	def_special ReturnInGameTradeHeldItem, requests_effects=1
 	def_special BufferEmeraldChampionsHarvestRecipe
 	def_special CheckEmeraldChampionsGardenCelebi
-	def_special GiveEmeraldChampionsBerryPair
-	def_special MintEmeraldChampionsHarvestCredit
-	def_special PrepareEmeraldChampionsMeadowSong
-	def_special PrepareEmeraldChampionsCastformSurvey
 
 	@ Inclement Emerald's Super Training, Hyper Training and nature services,
 	@ implemented natively in src/inclement_stat_services.c.
@@ -667,7 +649,6 @@ gSpecials::
 	def_special BufferChosenMonIV
 	def_special BufferChosenMonNature
 	def_special CheckChosenMonCanGainEVs
-	def_special AreChosenMonEVsMaxedOut
 	def_special Special_AreLeadMonEVsMaxedOut
 	def_special IncreaseChosenMonEVs
 	def_special ResetChosenMonEVs
@@ -866,3 +847,21 @@ gSpecials::
 	def_special ShowTrainerHillRecords, waitstate=1
 
 	def_special BufferFieldMoveUnlockRequirement
+
+	def_special GiveFlowerShopBerryBundle
+
+	def_special GetEmeraldChampionsFinaleStage
+
+	def_special CanReceiveWeatherInstituteRocks
+
+	def_special CanReceiveFrontierReward
+
+	def_special CanReceiveLatiStones
+
+	def_special CanReceiveNormanMegaGift
+
+	def_special CanReceiveGoGogglesGift
+
+	def_special CanReceiveLanetteDolls
+
+	def_special CanReceiveBerryPair

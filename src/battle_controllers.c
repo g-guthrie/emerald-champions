@@ -15,6 +15,7 @@
 #include "cable_club.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_effect.h"
 #include "item.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -843,13 +844,14 @@ void BtlController_EmitGetMonData(enum BattlerId battler, u32 bufferId, u8 reque
 
 void BtlController_EmitSetMonData(enum BattlerId battler, u32 bufferId, u8 requestId, u8 monToCheck, u8 bytes, void *data)
 {
-    s32 i;
+    fatal_assertf(bytes <= sizeof(gBattleResources->transferBuffer) - 3,
+        "Controller data update exceeds transfer buffer");
 
     gBattleResources->transferBuffer[0] = CONTROLLER_SETMONDATA;
     gBattleResources->transferBuffer[1] = requestId;
     gBattleResources->transferBuffer[2] = monToCheck;
-    for (i = 0; i < bytes; i++)
-        gBattleResources->transferBuffer[3 + i] = *(u8 *)(data++);
+    if (bytes != 0)
+        memcpy(&gBattleResources->transferBuffer[3], data, bytes);
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 3 + bytes);
 }
 
@@ -961,17 +963,18 @@ void BtlController_EmitMoveAnimation(enum BattlerId battler, u32 bufferId, enum 
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 16 + sizeof(struct LinkBattleAnim));
 }
 
-void BtlController_EmitPrintString(enum BattlerId battler, u32 bufferId, enum StringID stringID)
+static void EmitBattleString(enum BattlerId battler, u32 bufferId, enum StringID stringID, u8 command, u8 argument)
 {
     s32 i;
     struct BattleMsgData *stringInfo;
 
-    gBattleResources->transferBuffer[0] = CONTROLLER_PRINTSTRING;
-    gBattleResources->transferBuffer[1] = gBattleOutcome;
+    gBattleResources->transferBuffer[0] = command;
+    gBattleResources->transferBuffer[1] = argument;
     gBattleResources->transferBuffer[2] = stringID;
     gBattleResources->transferBuffer[3] = (stringID & 0xFF00) >> 8;
 
     stringInfo = (struct BattleMsgData *)(&gBattleResources->transferBuffer[4]);
+    memset(stringInfo, 0, sizeof(*stringInfo));
     stringInfo->currentMove = gCurrentMove;
     stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
@@ -993,33 +996,14 @@ void BtlController_EmitPrintString(enum BattlerId battler, u32 bufferId, enum St
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, sizeof(struct BattleMsgData) + 4);
 }
 
+void BtlController_EmitPrintString(enum BattlerId battler, u32 bufferId, enum StringID stringID)
+{
+    EmitBattleString(battler, bufferId, stringID, CONTROLLER_PRINTSTRING, gBattleOutcome);
+}
+
 void BtlController_EmitPrintSelectionString(enum BattlerId battler, u32 bufferId, enum StringID stringID)
 {
-    s32 i;
-    struct BattleMsgData *stringInfo;
-
-    gBattleResources->transferBuffer[0] = CONTROLLER_PRINTSTRINGPLAYERONLY;
-    gBattleResources->transferBuffer[1] = CONTROLLER_PRINTSTRINGPLAYERONLY;
-    gBattleResources->transferBuffer[2] = stringID;
-    gBattleResources->transferBuffer[3] = (stringID & 0xFF00) >> 8;
-
-    stringInfo = (struct BattleMsgData *)(&gBattleResources->transferBuffer[4]);
-    stringInfo->currentMove = gCurrentMove;
-    stringInfo->originallyUsedMove = gChosenMove;
-    stringInfo->lastItem = gLastUsedItem;
-    stringInfo->lastAbility = gLastUsedAbility;
-    stringInfo->scrActive = gBattleScripting.battler;
-    stringInfo->bakScriptPartyIdx = gBattleStruct->scriptPartyIdx;
-
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        stringInfo->abilities[i] = gBattleMons[i].ability;
-    for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
-    {
-        stringInfo->textBuffs[0][i] = gBattleTextBuff1[i];
-        stringInfo->textBuffs[1][i] = gBattleTextBuff2[i];
-        stringInfo->textBuffs[2][i] = gBattleTextBuff3[i];
-    }
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, sizeof(struct BattleMsgData) + 4);
+    EmitBattleString(battler, bufferId, stringID, CONTROLLER_PRINTSTRINGPLAYERONLY, CONTROLLER_PRINTSTRINGPLAYERONLY);
 }
 
 // itemId only relevant for B_ACTION_USE_ITEM
@@ -1125,14 +1109,14 @@ void BtlController_EmitStatusAnimation(enum BattlerId battler, u32 bufferId, boo
 
 void BtlController_EmitDataTransfer(enum BattlerId battler, u32 bufferId, u16 size, void *data)
 {
-    s32 i;
-
+    fatal_assertf(size <= sizeof(gBattleResources->transferBuffer) - 4,
+        "Controller data response exceeds transfer buffer");
     gBattleResources->transferBuffer[0] = CONTROLLER_DATATRANSFER;
     gBattleResources->transferBuffer[1] = CONTROLLER_DATATRANSFER;
     gBattleResources->transferBuffer[2] = size;
-    gBattleResources->transferBuffer[3] = (size & 0xFF00) >> 8;
-    for (i = 0; i < size; i++)
-        gBattleResources->transferBuffer[4 + i] = *(u8 *)(data++);
+    gBattleResources->transferBuffer[3] = size >> 8;
+    if (size != 0)
+        memcpy(&gBattleResources->transferBuffer[4], data, size);
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, size + 4);
 }
 
@@ -1153,11 +1137,8 @@ void BtlController_EmitChosenMonReturnValue(enum BattlerId battler, u32 bufferId
 
     gBattleResources->transferBuffer[0] = CONTROLLER_CHOSENMONRETURNVALUE;
     gBattleResources->transferBuffer[1] = partyId;
-    if (battlePartyOrder != NULL)
-    {
-        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
-            gBattleResources->transferBuffer[2 + i] = battlePartyOrder[i];
-    }
+    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+        gBattleResources->transferBuffer[2 + i] = battlePartyOrder != NULL ? battlePartyOrder[i] : 0;
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 5);
 }
 
@@ -1307,7 +1288,7 @@ void BtlController_EmitLinkStandbyMsg(enum BattlerId battler, u32 bufferId, u8 m
     gBattleResources->transferBuffer[1] = mode;
 
     if (record)
-        gBattleResources->transferBuffer[3] = gBattleResources->transferBuffer[2] = RecordedBattle_BufferNewBattlerData(&gBattleResources->transferBuffer[4]);
+        gBattleResources->transferBuffer[3] = gBattleResources->transferBuffer[2] = RecordedBattle_BufferNewBattlerData(&gBattleResources->transferBuffer[4], sizeof(gBattleResources->transferBuffer) - 4);
     else
         gBattleResources->transferBuffer[3] = gBattleResources->transferBuffer[2] = 0;
 
@@ -1327,7 +1308,7 @@ void BtlController_EmitEndLinkBattle(enum BattlerId battler, u32 bufferId, u8 ba
     gBattleResources->transferBuffer[1] = battleOutcome;
     gBattleResources->transferBuffer[2] = gSaveBlock2Ptr->frontier.disableRecordBattle;
     gBattleResources->transferBuffer[3] = gSaveBlock2Ptr->frontier.disableRecordBattle;
-    gBattleResources->transferBuffer[5] = gBattleResources->transferBuffer[4] = RecordedBattle_BufferNewBattlerData(&gBattleResources->transferBuffer[6]);
+    gBattleResources->transferBuffer[5] = gBattleResources->transferBuffer[4] = RecordedBattle_BufferNewBattlerData(&gBattleResources->transferBuffer[6], sizeof(gBattleResources->transferBuffer) - 6);
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, gBattleResources->transferBuffer[4] + 6);
 }
 
@@ -1347,7 +1328,7 @@ void BtlController_Complete(enum BattlerId battler)
 
 static u32 GetBattlerMonData(enum BattlerId battler, struct Pokemon *party, u32 monId, u8 *dst)
 {
-    struct BattlePokemon battleMon;
+    struct BattlePokemon battleMon = {0};
     struct MovePPInfo moveData;
     u8 nickname[POKEMON_NAME_LENGTH * 2];
     u8 *src;
@@ -2056,14 +2037,19 @@ static void Controller_DoMoveAnimation(enum BattlerId battler)
     }
 }
 
+static void FreeTrainerSprite(struct Sprite *sprite)
+{
+    u8 paletteNum = sprite->oam.paletteNum;
+    FreeSpriteOamMatrix(sprite);
+    DestroySprite(sprite);
+    FieldEffectFreePaletteIfUnused(paletteNum);
+}
+
 static void Controller_HandleTrainerSlideBack(enum BattlerId battler)
 {
     if (gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].callback == SpriteCallbackDummy)
     {
-        if (!IsOnPlayerSide(battler))
-            FreeTrainerFrontPicPalette(gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].oam.affineParam);
-        FreeSpriteOamMatrix(&gSprites[gBattleStruct->trainerSlideSpriteIds[battler]]);
-        DestroySprite(&gSprites[gBattleStruct->trainerSlideSpriteIds[battler]]);
+        FreeTrainerSprite(&gSprites[gBattleStruct->trainerSlideSpriteIds[battler]]);
         BtlController_Complete(battler);
     }
 }
@@ -2172,24 +2158,25 @@ void BattleControllerDummy(enum BattlerId battler)
 // Handlers of the controller commands
 void BtlController_HandleGetMonData(enum BattlerId battler)
 {
-    u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two Pokémon, trying to get more will result in overwriting data
+    u8 monData[sizeof(gBattleResources->transferBuffer) - 4];
+    u8 record[sizeof(struct BattlePokemon)];
     struct Pokemon *party = GetBattlerParty(battler);
     u32 size = 0;
-    u8 monToCheck;
-    s32 i;
-
-    if (gBattleResources->bufferA[battler][2] == 0)
+    u32 mask = gBattleResources->bufferA[battler][2];
+    if (mask == 0)
     {
-        size += GetBattlerMonData(battler, party, gBattlerPartyIndexes[battler], monData);
+        fatal_assertf(gBattlerPartyIndexes[battler] < PARTY_SIZE, "Invalid active party slot");
+        mask = 1u << gBattlerPartyIndexes[battler];
     }
-    else
+    for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        monToCheck = gBattleResources->bufferA[battler][2];
-        for (i = 0; i < PARTY_SIZE; i++)
+        if (mask & (1u << i))
         {
-            if (monToCheck & 1)
-                size += GetBattlerMonData(battler, party, i, monData + size);
-            monToCheck >>= 1;
+            u32 recordSize = GetBattlerMonData(battler, party, i, record);
+            fatal_assertf(recordSize <= sizeof(monData) - size,
+                "Controller party response exceeds transfer buffer");
+            memcpy(monData + size, record, recordSize);
+            size += recordSize;
         }
     }
     BtlController_EmitDataTransfer(battler, B_COMM_TO_ENGINE, size, monData);
@@ -2198,17 +2185,11 @@ void BtlController_HandleGetMonData(enum BattlerId battler)
 
 void BtlController_HandleGetRawMonData(enum BattlerId battler)
 {
-    struct BattlePokemon battleMon;
-    struct Pokemon *mon = GetBattlerMon(battler);
-
-    u8 *src = (u8 *)mon + gBattleResources->bufferA[battler][1];
-    u8 *dst = (u8 *)&battleMon + gBattleResources->bufferA[battler][1];
-    u8 i;
-
-    for (i = 0; i < gBattleResources->bufferA[battler][2]; i++)
-        dst[i] = src[i];
-
-    BtlController_EmitDataTransfer(battler, B_COMM_TO_ENGINE, gBattleResources->bufferA[battler][2], dst);
+    u32 offset = gBattleResources->bufferA[battler][1];
+    u32 size = gBattleResources->bufferA[battler][2];
+    fatal_assertf(offset <= sizeof(struct Pokemon) && size <= sizeof(struct Pokemon) - offset,
+        "Raw Pokemon read exceeds record");
+    BtlController_EmitDataTransfer(battler, B_COMM_TO_ENGINE, size, (u8 *)GetBattlerMon(battler) + offset);
     BtlController_Complete(battler);
 }
 
@@ -2236,12 +2217,11 @@ void BtlController_HandleSetMonData(enum BattlerId battler)
 
 void BtlController_HandleSetRawMonData(enum BattlerId battler)
 {
-    u32 i;
-    u8 *dst = (u8 *)GetBattlerMon(battler) + gBattleResources->bufferA[battler][1];
-
-    for (i = 0; i < gBattleResources->bufferA[battler][2]; i++)
-        dst[i] = gBattleResources->bufferA[battler][3 + i];
-
+    u32 offset = gBattleResources->bufferA[battler][1];
+    u32 size = gBattleResources->bufferA[battler][2];
+    fatal_assertf(offset <= sizeof(struct Pokemon) && size <= sizeof(struct Pokemon) - offset,
+        "Raw Pokemon write exceeds record");
+    memcpy((u8 *)GetBattlerMon(battler) + offset, &gBattleResources->bufferA[battler][3], size);
     BtlController_Complete(battler);
 }
 
@@ -2369,7 +2349,7 @@ void BtlController_HandleDrawTrainerPic(enum BattlerId battler, enum TrainerPicI
                                                              subpriority);
 
             gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(GetTrainerPicTag(trainerPicId, TRUE));
-            gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].oam.affineMode = ST_OAM_AFFINE_OFF;
+            FreeSpriteOamMatrix(&gSprites[gBattleStruct->trainerSlideSpriteIds[battler]]);
             gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].hFlip = 1;
             gSprites[gBattleStruct->trainerSlideSpriteIds[battler]].y2 = 48;
         }
@@ -2798,8 +2778,7 @@ void BtlController_HandleIntroTrainerBallThrow(enum BattlerId battler, u16 tagTr
     gTasks[taskId].tFramesToWait = framesToWait;
     SetWordTaskArg(taskId, tControllerFunc_1, (uint32_t)(controllerCallback));
 
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
+    HidePartyStatusSummary(battler);
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
     gBattlerControllerFuncs[battler] = BattleControllerDummy;
@@ -2874,9 +2853,7 @@ static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
     enum BattlerId battler = sprite->sBattlerId;
 
     // Free player trainer sprite
-    FreeSpriteOamMatrix(sprite);
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
-    DestroySprite(sprite);
+    FreeTrainerSprite(sprite);
 
     // Load mon sprite
     BattleLoadMonSpriteGfx(GetBattlerMon(battler), battler);
@@ -2885,10 +2862,15 @@ static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
 
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
 {
-    FreeTrainerFrontPicPalette(sprite->oam.affineParam);
-    FreeSpriteOamMatrix(sprite);
-    DestroySprite(sprite);
+    FreeTrainerSprite(sprite);
 }
+
+#if TESTING
+void Test_FreeOpponentTrainerPortrait(u8 spriteId)
+{
+    SpriteCB_FreeOpponentSprite(&gSprites[spriteId]);
+}
+#endif
 
 #undef sBattlerId
 
@@ -2900,8 +2882,6 @@ void BtlController_HandleDrawPartyStatusSummary(enum BattlerId battler, enum Bat
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = 1;
-
         if (side == B_SIDE_OPPONENT && gBattleResources->bufferA[battler][2] != 0)
         {
             if (gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay < 2)
@@ -2916,6 +2896,7 @@ void BtlController_HandleDrawPartyStatusSummary(enum BattlerId battler, enum Bat
         }
 
         gBattlerStatusSummaryTaskId[battler] = CreatePartyStatusSummarySprites(battler, (struct HpAndStatus *)&gBattleResources->bufferA[battler][4], gBattleResources->bufferA[battler][1], gBattleResources->bufferA[battler][2]);
+        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = TRUE;
         gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
 
         // If intro, skip the delay after drawing
@@ -2928,8 +2909,7 @@ void BtlController_HandleDrawPartyStatusSummary(enum BattlerId battler, enum Bat
 
 void BtlController_HandleHidePartyStatusSummary(enum BattlerId battler)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
+    HidePartyStatusSummary(battler);
     BtlController_Complete(battler);
 }
 
@@ -2984,20 +2964,21 @@ static void LaunchKOAnimation(enum BattlerId battlerId, u16 animId, bool32 isFro
     enum Species species = GetBattlerVisualSpecies(battlerId);
     u32 spriteId = gBattlerSpriteIds[battlerId];
 
-    gBattleStruct->battlerKOAnimsRunning++;
+    u8 taskId;
 
     if (isFront)
     {
-        LaunchAnimationTaskForFrontSprite(&gSprites[spriteId], animId);
+        taskId = LaunchAnimationTaskForFrontSprite(&gSprites[spriteId], animId);
 
         if (HasTwoFramesAnimation(species))
             StartSpriteAnim(&gSprites[spriteId], 1);
     }
     else
     {
-        LaunchAnimationTaskForBackSprite(&gSprites[spriteId], animId);
+        taskId = LaunchAnimationTaskForBackSprite(&gSprites[spriteId], animId);
     }
 
+    TrackMonAnimationForBattle(taskId);
     PlayCry_Normal(species, CRY_PRIORITY_NORMAL);
 }
 

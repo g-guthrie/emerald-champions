@@ -19,7 +19,7 @@ FortreeCity_House1_EventScript_Trader:: @ 8264FED
 	lock
 	faceplayer
 	goto_if_set FLAG_BATTLE_FRONTIER_TRADE_DONE, FortreeCity_House1_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_KARRABLAST
+	setvar VAR_0x8008, INGAME_TRADE_TYPE_NULL
 	@ This engine reads the trade index from VAR_0x8005 and the party slot from
 	@ VAR_0x8004; Inclement passes them the other way round.
 	copyvar VAR_0x8005, VAR_0x8008
@@ -29,7 +29,6 @@ FortreeCity_House1_EventScript_Trader:: @ 8264FED
 	compare VAR_RESULT, NO
 	goto_if_eq FortreeCity_House1_EventScript_DeclineTrade
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 255
 	goto_if_eq FortreeCity_House1_EventScript_DeclineTrade
@@ -39,10 +38,15 @@ FortreeCity_House1_EventScript_Trader:: @ 8264FED
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne FortreeCity_House1_EventScript_NotRequestedMon
 	copyvar VAR_0x8004, VAR_0x800A
+	specialvar VAR_RESULT, CanReceiveInGameTradePokemon
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeRestrictedParty
+	call Common_EventScript_ReturnNPCTradeItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NPCTradeCancelled
+	copyvar VAR_0x8004, VAR_0x800A
 	copyvar VAR_0x8005, VAR_0x8008
+	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo @ re-buffer species names over the item name
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	msgbox FortreeCity_House1_Text_PromiseIllBeGoodToIt, MSGBOX_DEFAULT
 	setflag FLAG_BATTLE_FRONTIER_TRADE_DONE
 	release
@@ -67,8 +71,8 @@ FortreeCity_House1_EventScript_TradeCompleted:: @ 8265083
 FortreeCity_House1_Text_WouldYouLikeToTrade: @ 826508D
 	.string "My Pokémon is a {STR_VAR_2}.\n"
 	.string "Do you know it?\l"
-	.string "It's quite cute and rather nice.\p"
-	.string "This little one, I could trade with\n"
+	.string "It's tough, and rather rare.\p"
+	.string "This one, I could trade with\n"
 	.string "pride!\p"
 	.string "Would you like to trade me a {STR_VAR_1}\n"
 	.string "for my {STR_VAR_2}?$"
@@ -92,8 +96,9 @@ FortreeCity_House1_Text_WellThatsFineToo: @ 82651CB
 
 FortreeCity_House1_Text_SkittySoMuchCuterThanImagined: @ 826520E
 	.string "Giggle!\n"
-	.string "Did you know Karrablast would evolve?\l"
-	.string "Your Shelmet evolved too!$"
+	.string "Skitty is so much cuter than I\l"
+	.string "imagined. I'm delighted!\p"
+	.string "I hope NULL is doing well with you!$"
 
 FortreeCity_House1_Text_Zigzagoon: @ 8216597
 	.string "Zigzagoon: Gumomoh?$"

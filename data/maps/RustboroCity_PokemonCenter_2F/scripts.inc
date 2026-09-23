@@ -8,12 +8,3 @@ RustboroCity_PokemonCenter_2F_MapScripts::
 RustboroCity_PokemonCenter_2F_EventScript_Colosseum::
 	call CableClub_EventScript_Colosseum
 	end
-
-RustboroCity_PokemonCenter_2F_EventScript_TradeCenter::
-	call CableClub_EventScript_TradeCenter
-	end
-
-RustboroCity_PokemonCenter_2F_EventScript_RecordCorner::
-	call CableClub_EventScript_RecordCorner
-	end
-

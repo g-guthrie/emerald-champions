@@ -75,22 +75,6 @@ Route104_EventScript_RivalTrigger:: @ 81ECCB3
 	goto Route104_EventScript_RivalEncounter
 
 @ Unused, shares script with Rustboro encounter instead
-Route104_EventScript_PlayRivalMusic:: @ 81ECD11
-	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq Route104_EventScript_PlayMayMusic
-	compare VAR_RESULT, FEMALE
-	goto_if_eq Route104_EventScript_PlayBrendanMusic
-	return
-
-Route104_EventScript_PlayMayMusic:: @ 81ECD29
-	playbgm MUS_ENCOUNTER_MAY, TRUE
-	return
-
-Route104_EventScript_PlayBrendanMusic:: @ 81ECD2E
-	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
-	return
-
 Route104_EventScript_RivalEncounter:: @ 81ECD33
 	checkplayergender
 	compare VAR_RESULT, MALE
@@ -105,12 +89,6 @@ Route104_EventScript_MayEncounter:: @ 81ECD4B
 	setflag FLAG_REGISTER_RIVAL_POKENAV
 	msgbox Route104_Text_MayWeShouldRegister, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route104_Text_RegisteredMay, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_PlayerFaceRival
 	applymovement LOCALID_RIVAL, Route104_Movement_RivalWalkSlowLeft
@@ -173,19 +151,19 @@ Route104_EventScript_RestoreMusic:: @ 81ECE31
 	return
 
 Route104_EventScript_BattleMayTreecko:: @ 81ECE36
-	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayTorchic:: @ 81ECE49
-	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayMudkip:: @ 81ECE5C
-	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
@@ -196,12 +174,6 @@ Route104_EventScript_BrendanEncounter:: @ 81ECE6F
 	setflag FLAG_REGISTER_RIVAL_POKENAV
 	msgbox Route104_Text_BrendanWeShouldRegister, MSGBOX_DEFAULT
 	closemessage
-	delay 30
-	playfanfare MUS_REGISTER_MATCH_CALL
-	msgbox Route104_Text_RegisteredBrendan, MSGBOX_DEFAULT
-	waitfanfare
-	closemessage
-	delay 30
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_PlayerFaceRival
 	applymovement LOCALID_RIVAL, Route104_Movement_RivalWalkSlowLeft
@@ -245,19 +217,19 @@ Route104_EventScript_BrendanDefeated:: @ 81ECF38
 	end
 
 Route104_EventScript_BattleBrendanTreecko:: @ 81ECF4D
-	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanTorchic:: @ 81ECF60
-	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanMudkip:: @ 81ECF73
-	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
@@ -861,143 +833,19 @@ Route104_Movement_BrineyExitBoat: @ 81ED35C
 	walk_in_place_fast_left
 	step_end
 
-Route104_EventScript_Ivan:: @ 81ED35F
-	@ This retired encounter has no campaign battle.
-	msgbox Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route104_EventScript_Billy:: @ 81ED376
 	trainerbattle_double TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Haley:: @ 81ED38D
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route104_EventScript_RematchHaley
-	setvar VAR_0x8004, TRAINER_HALEY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route104_EventScript_TryRegisterHaley
-	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_TryRegisterHaleyAfterBattle:: @ 81ED3CE
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaleyAfterBattle
-	release
-	end
-
-Route104_EventScript_RegisterHaleyAfterBattle:: @ 81ED3DF
-	msgbox Route104_Text_HaleyRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_HALEY_1
-	release
-	end
-
-Route104_EventScript_TryRegisterHaley:: @ 81ED3F8
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaley
-	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_RegisterHaley:: @ 81ED40B
-	msgbox Route104_Text_HaleyRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_HALEY_1
-	release
-	end
-
-Route104_EventScript_RematchHaley:: @ 81ED424
-	@ This retired encounter has no campaign battle.
-	msgbox Route104_Text_HaleyPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route104_EventScript_Winston:: @ 81ED43B
-	trainerbattle_double TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterWinstonAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route104_EventScript_RematchWinston
-	setvar VAR_0x8004, TRAINER_WINSTON_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route104_EventScript_TryRegisterWinston
-	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_TryRegisterWinstonAfterBattle:: @ 81ED47C
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinstonAfterBattle
-	release
-	end
-
-Route104_EventScript_RegisterWinstonAfterBattle:: @ 81ED48D
-	msgbox Route104_Text_WinstonRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_WINSTON_1
-	release
-	end
-
-Route104_EventScript_TryRegisterWinston:: @ 81ED4A6
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinston
-	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_RegisterWinston:: @ 81ED4B9
-	msgbox Route104_Text_WinstonRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_WINSTON_1
-	release
-	end
-
-Route104_EventScript_RematchWinston:: @ 81ED4D2
-	@ This retired encounter has no campaign battle.
-	msgbox Route104_Text_WinstonPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route104_Text_WinstonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Cindy:: @ 81ED4E9
-	trainerbattle_double TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterCindyAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route104_EventScript_RematchCindy
-	setvar VAR_0x8004, TRAINER_CINDY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route104_EventScript_TryRegisterCindy
-	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_TryRegisterCindyAfterBattle:: @ 81ED52A
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindyAfterBattle
-	release
-	end
-
-Route104_EventScript_RegisterCindyAfterBattle:: @ 81ED53B
-	msgbox Route104_Text_CindyRegister2, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CINDY_1
-	release
-	end
-
-Route104_EventScript_TryRegisterCindy:: @ 81ED554
-	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindy
-	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route104_EventScript_RegisterCindy:: @ 81ED567
-	msgbox Route104_Text_CindyRegister1, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CINDY_1
-	release
-	end
-
-Route104_EventScript_RematchCindy:: @ 81ED580
-	@ This retired encounter has no campaign battle.
-	msgbox Route104_Text_CindyPostRematch, MSGBOX_AUTOCLOSE
+	trainerbattle_double TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route104_Text_CindyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Gina:: @ 81ED597
@@ -1095,25 +943,17 @@ Route104_Text_PrettyPetalFlowShop: @ 81EDAD6
 
 Route104_Text_TrainerTipsDoubleBattles: @ 81EDAEF
 	.string "Trainer Tips\p"
-	.string "In the Hoenn region there are pairs\n"
-	.string "of Trainers who challenge others\l"
-	.string "for 2-on-2 Pokémon battles called\l"
-	.string "Double Battles.\p"
-	.string "In a Double Battle, the Trainer must\n"
-	.string "send out two Pokémon, the one at the\l"
-	.string "left of the list and the top one.\l"
-	.string "Watch how Pokémon are lined up.$"
+	.string "In a Double Battle, your first two\n"
+	.string "usable Pokémon fight together.\p"
+	.string "If only one can battle, you can\n"
+	.string "still take on both opponents.\p"
+	.string "Check your party order before\n"
+	.string "you challenge a Trainer!$"
 
 Route104_Text_MayWeShouldRegister: @ 81EDBFF
 	.string "May: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "Devon upgraded your PokéNav with\n"
-	.string "the Match Call system, huh?\p"
-	.string "We should register each other so we\n"
-	.string "can get in contact anytime.$"
-
-Route104_Text_RegisteredMay: @ 81EDC8F
-	.string "{PLAYER} registered May\n"
-	.string "in the PokéNav.$"
+	.string "That PokéNav has a map of Hoenn.\n"
+	.string "It should help you find your way!$"
 
 Route104_Text_MayHowsYourPokedex: @ 81EDCB1
 	.string "May: Oh, by the way, {PLAYER}{KUN},\n"
@@ -1152,14 +992,8 @@ Route104_Text_MayPostBattle: @ 81EDE3E
 
 Route104_Text_BrendanWeShouldRegister: @ 81EDF04
 	.string "Brendan: Oh, hey, {PLAYER}!\p"
-	.string "Cool, you had Devon install the Match\n"
-	.string "Call system on your PokéNav!\p"
-	.string "Let's register each other in our\n"
-	.string "PokéNavs so we can keep in touch.$"
-
-Route104_Text_RegisteredBrendan: @ 81EDFA0
-	.string "{PLAYER} registered Brendan\n"
-	.string "in the PokéNav.$"
+	.string "That PokéNav has a map of Hoenn.\n"
+	.string "Handy for exploring new places!$"
 
 Route104_Text_BrendanHowsYourPokedex: @ 81EDFC6
 	.string "Brendan: {PLAYER}, how's your Pokédex?\n"

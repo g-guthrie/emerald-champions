@@ -426,21 +426,6 @@ static void ApplySwitchCandidateEntry(enum BattlerId battler)
     }
 }
 
-void AI_RefreshCandidateFieldEffects(void)
-{
-    RefreshSwitchCandidateData();
-    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
-    {
-        if (!IsBattlerAlive(actor))
-            continue;
-        ApplySwitchinItems(actor, gFieldTimers.terrain);
-        ApplySwitchinForm(actor, FORM_CHANGE_BATTLE_WEATHER);
-        SetBattlerAiData(actor, gAiLogicData);
-        SetBattlerVolatilesForSwitchin(actor, AI_GetWeather(), gFieldTimers.terrain);
-    }
-    RefreshSwitchCandidateData();
-}
-
 static void FinishSwitchCandidateEntries(u32 enteredMask, bool32 afterSwitch, bool32 calculateMoves)
 {
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
@@ -1689,17 +1674,13 @@ bool32 ShouldSwitchIfLoses1v1(struct SwitchAiContext *switchContext)
 
 static bool32 CanBattlerConsiderSwitch(enum BattlerId battler)
 {
-    if (gBattleMons[battler].volatiles.wrapped)
-        return FALSE;
-    if (gBattleMons[battler].volatiles.escapePrevention)
-        return FALSE;
-    if (gBattleMons[battler].volatiles.root)
-        return FALSE;
-    if (IsAbilityPreventingEscape(battler))
-        return FALSE;
-    if (gBattleStruct->battlerState[battler].commanderSpecies)
-        return FALSE;
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+    // Match the actual switch command's legality gates, including Fairy Lock,
+    // Sky Drop, Ghost escape and Shed Shell. Hand-listing traps here drifted.
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA
+     || gBattleStruct->battlerState[battler].commanderSpecies != SPECIES_NONE
+     || (!CanBattlerEscape(battler) && GetBattlerHoldEffect(battler) != HOLD_EFFECT_SHED_SHELL)
+     || (GetItemHoldEffect(gBattleMons[battler].item) != HOLD_EFFECT_SHED_SHELL
+      && IsAbilityPreventingEscape(battler)))
         return FALSE;
     return TRUE;
 }
@@ -1942,32 +1923,43 @@ void ModifySwitchAfterMoveScoring(enum BattlerId battler)
         gAiLogicData->shouldSwitch &= ~(1u << battler);
 }
 
-bool32 IsSwitchinValid(enum BattlerId battler)
+u32 GetValidAISwitchinId(enum BattlerId battler)
 {
-    // Edge case: See if partner already chose to switch into the same mon
-    if (IsDoubleBattle())
+    struct SwitchAiContext context = {0};
+    context.battler = battler;
+    context.party = GetBattlerParty(battler);
+    context.lastId = GetAILastPartyIndex(battler);
+    GetActiveBattlerIds(battler, &context.battlerIn1, &context.battlerIn2);
+
+    if (!CanBattlerConsiderSwitch(battler))
+        return PARTY_SIZE;
+    GetShouldSwitchPartyMonEligibility(&context);
+
+    if (IsDoubleBattle() && BattlersShareParty(battler, GetPartnerBattler(battler)))
     {
         enum BattlerId partner = GetPartnerBattler(battler);
-        if (gBattleStruct->AI_monToSwitchIntoId[battler] == PARTY_SIZE) // Generic switch
-        {
-            if ((gAiLogicData->shouldSwitch & (1u << partner))
-             && gAiLogicData->monToSwitchInId[partner] == gAiLogicData->mostSuitableMonId[battler]
-             && BattlersShareParty(battler, partner))
-            {
-                return FALSE;
-            }
-        }
-        else // Override switch
-        {
-            if ((gAiLogicData->shouldSwitch & (1u << partner))
-             && gAiLogicData->monToSwitchInId[partner] == gAiLogicData->mostSuitableMonId[battler]
-             && BattlersShareParty(battler, partner))
-            {
-                return FALSE;
-            }
-        }
+        u32 partnerChoice = gAiLogicData->monToSwitchInId[partner];
+        if ((gAiLogicData->shouldSwitch & (1u << partner)) && partnerChoice < PARTY_SIZE)
+            context.eligiblePartyMons &= ~(1u << partnerChoice);
     }
-    return TRUE;
+
+    if (context.eligiblePartyMons == 0)
+        return PARTY_SIZE;
+
+    u32 planned = gBattleStruct->AI_monToSwitchIntoId[battler];
+    if (planned > PARTY_SIZE)
+        return PARTY_SIZE;
+    u32 preferred = planned < PARTY_SIZE ? planned : gAiLogicData->mostSuitableMonId[battler];
+    if (preferred < PARTY_SIZE)
+        return context.eligiblePartyMons & (1u << preferred) ? preferred : PARTY_SIZE;
+    if (preferred != PARTY_SIZE)
+        return PARTY_SIZE;
+
+    // A generic switch keeps the prior high-to-low reserve preference.
+    for (s32 slot = context.lastId - 1; slot >= 0; slot--)
+        if (context.eligiblePartyMons & (1u << slot))
+            return slot;
+    return PARTY_SIZE;
 }
 
 static u32 GetSwitchinSingleUseItemHealing(enum BattlerId battler, s32 currentHP)

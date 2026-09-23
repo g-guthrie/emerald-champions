@@ -34,16 +34,6 @@ Route130_EventScript_CheckSetAbnormalWeather:: @ 81F73B5
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	return
 
-Route130_EventScript_Rodney:: @ 81F73BF
-	@ This retired encounter has no campaign battle.
-	msgbox Route130_Text_RodneyPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route130_EventScript_Katie:: @ 81F73D6
-	@ This retired encounter has no campaign battle.
-	msgbox Route130_Text_KatiePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route130_EventScript_Santiago:: @ 81F73ED
 	trainerbattle_double TRAINER_SANTIAGO, Route130_Text_SantiagoIntro, Route130_Text_SantiagoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route130_Text_SantiagoPostBattle, MSGBOX_AUTOCLOSE

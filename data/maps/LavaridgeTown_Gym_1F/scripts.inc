@@ -45,13 +45,6 @@ LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers:: @ 81FE78B
 	return
 
 LavaridgeTown_Gym_1F_EventScript_Flannery:: @ 81FE78C
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
 	trainerbattle_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM50, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
@@ -81,12 +74,8 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated:: @ 81FE7C1
 	release
 	end
 
-LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
-	giveitem ITEM_HEATRANITE
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM50
+LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
+	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
 	release
 	end
 
@@ -97,60 +86,6 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM50
 	return
-
-LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
-	message LavaridgeTown_Gym_1F_Text_FlanneryChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, LavaridgeTown_Gym_1F_EventScript_SetSingles
-	case 1, LavaridgeTown_Gym_1F_EventScript_SetDoubles
-	case 2, LavaridgeTown_Gym_1F_EventScript_Exit
-	case 127, LavaridgeTown_Gym_1F_EventScript_Exit
-	releaseall
-	end
-
-@ 2: singles, legendaries
-@ 3: singles, no legendaries
-@ 4: doubles, legendaries
-@ 5: doubles, no legendaries
-
-LavaridgeTown_Gym_1F_EventScript_SetSingles::
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_FLANNERY
-	releaseall
-	end
-
-LavaridgeTown_Gym_1F_EventScript_SetDoubles::
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_FLANNERY
-	releaseall
-	end
-
-LavaridgeTown_Gym_1F_EventScript_FlannerySinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_FLANNERY
-	releaseall
-	end
-
-LavaridgeTown_Gym_1F_EventScript_FlanneryDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_FLANNERY
-	releaseall
-	end
-
-LavaridgeTown_Gym_1F_EventScript_AlreadyRematched::
-	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-LavaridgeTown_Gym_1F_EventScript_Exit::
-	releaseall
-	end
 
 LavaridgeTown_Gym_1F_EventScript_Cole:: @ 81FE87F
 	trainerbattle_double TRAINER_COLE, LavaridgeTown_Gym_1F_Text_ColeIntro, LavaridgeTown_Gym_1F_Text_ColeDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_EventScript_CheckTrainerScript
@@ -207,6 +142,8 @@ LavaridgeTown_Gym_1F_EventScript_GymGuide:: @ 81FE96C
 	goto_if_set FLAG_LAVARIDGE_GYM_ENERGY_ROOTS, LavaridgeTown_Gym_1F_EventScript_GymGuide2
 	msgbox LavaridgeTown_Gym_1F_Text_GymGuideAdvice1, MSGBOX_DEFAULT
 	giveitem ITEM_ENERGY_ROOT, 15
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_LAVARIDGE_GYM_ENERGY_ROOTS
 	msgbox LavaridgeTown_Gym_1F_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -405,8 +342,8 @@ LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis: @ 81FF359
 	.string "The Heat Badge lets you use\n"
 	.string "Strength. Get the license from\l"
 	.string "the grateful man in Rusturf Tunnel.\p"
-	.string "Then you can push boulders\n"
-	.string "with any team!\p"
+	.string "Bring a Pokémon able to learn\n"
+	.string "Strength; no moveslot needed!\p"
 	.string "Take this Mega Stone, too!$"
 
 LavaridgeTown_Gym_1F_Text_TakeThis:
@@ -414,17 +351,9 @@ LavaridgeTown_Gym_1F_Text_TakeThis:
 	.string "Don't be shy about taking it!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainOverheat: @ 81FF45C
-	.string "This is Heatranite. Give it to\n"
-	.string "Heatran to use its Mega\l"
-	.string "Evolution with your Mega Ring.$"
-
-LavaridgeTown_Gym_1F_Text_RegisteredFlannery: @ 81FF517
-	.string "Registered Gym Leader Flannery\n"
-	.string "in the PokéNav.$"
-
-LavaridgeTown_Gym_1F_Text_RegisteredArcanine: @ 81FF517
-	.string "Registered Flannery's Arcanine\n"
-	.string "in the PokéNav.$"
+	.string "This is Heatranite. Once you have\n"
+	.string "a Mega Ring, Heatran can Mega Evolve\l"
+	.string "while holding it.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle: @ 81FF546
 	.string "Your power reminds me of someone…\p"
@@ -436,40 +365,5 @@ LavaridgeTown_Gym_1F_Text_GymStatue: @ 81FF5A9
 
 LavaridgeTown_Gym_1F_Text_GymStatueCertified: @ 81FF5C4
 	.string "Lavaridge Town Pokémon Gym\p"
-	.string "FLANNERY's Certified Trainers:\n"
+	.string "Flannery's Certified Trainers:\n"
 	.string "{PLAYER}$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryPreRematch: @ 81FF601
-	.string "Flannery: Let's exchange superhot\n"
-	.string "moves in another battle!$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat: @ 81FF69F
-	.string "Whew!\n"
-	.string "On the verge of eruption!$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryPostRematch: @ 81FF6BF
-	.string "Flannery: I lost the match,\n"
-	.string "but I'm completely satisfied.\p"
-	.string "It's not often I get to enjoy a battle\n"
-	.string "this heated.\p"
-	.string "Let's have another one like this\n"
-	.string "again sometime!$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons: @ 81FF75E
-	.string "Oh, wait. Do you only have one Pokémon\n"
-	.string "that can battle?\p"
-	.string "I hate to say this, but when you come\n"
-	.string "see me, bring at least two Pokémon.$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryChooseFormat:
-	.string "Flannery: Losing a battle isn't going\n"
-	.string "to deflate me.\p"
-	.string "I love Pokémon.\n"
-	.string "I love to battle.\l"
-	.string "And… I love this Gym!\p"
-	.string "So… Let's choose some rules for our\n"
-	.string "rematch: singles or doubles?$"
-
-LavaridgeTown_Gym_1F_Text_FlanneryAllowLegends:
-	.string "Flannery: And can I turn up the heat\n"
-	.string "with my Legendary Pokémon?$"

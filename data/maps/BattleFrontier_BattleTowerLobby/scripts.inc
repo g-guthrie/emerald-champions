@@ -181,9 +181,13 @@ BattleFrontier_BattleTowerLobby_EventScript_SetBravoTrainerOn:: @ 823E930
 BattleFrontier_BattleTowerLobby_EventScript_SinglesAttendant:: @ 823E936
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER
-	special SavePlayerParty
-	msgbox BattleFrontier_BattleTowerLobby_Text_WelcomSingleBattle, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattleTowerLobby_Text_SinglesClosed, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_Text_SinglesClosed:
+	.string "The SINGLE rooms are closed.\n"
+	.string "The DOUBLE counter is open.$"
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterSinglesChallenge:: @ 823E948
 	message BattleFrontier_BattleTowerLobby_Text_TakeSinglesChallenge
 	waitmessage
@@ -212,7 +216,6 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterSinglesChallenge:: @ 823E984
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge
 	msgbox BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO
@@ -278,7 +281,6 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterDoublesChallenge:: @ 823EAED
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_DOUBLES_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge
 	msgbox BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO
@@ -345,7 +347,6 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterMultisChallenge:: @ 823EC59
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge
 	msgbox BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO
@@ -411,7 +412,6 @@ BattleFrontier_BattleTowerLobby_EventScript_TryEnterLinkMultisChallenge:: @ 823E
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_MULTI_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_LoadPartyCancelChallenge
 	msgbox BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering, MSGBOX_YESNO
@@ -663,15 +663,6 @@ BattleFrontier_BattleTowerLobby_Movement_PlayerEnterElevator: @ 823F19C
 	step_end
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Movement_UnusedEnterElevator: @ 823F1A0
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	set_invisible
-	step_end
-
 BattleFrontier_BattleTowerLobby_EventScript_BufferModeText:: @ 823F1A7
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_BufferTextSingle
@@ -790,7 +781,6 @@ BattleFrontier_BattleTowerLobby_EventScript_TryCableLink:: @ 823F2C5
 	waitmessage
 	setvar VAR_0x8005, 0
 	special TryBattleLinkup
-	waitstate
 	compare VAR_RESULT, LINKUP_SUCCESS
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful
 	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
@@ -859,7 +849,6 @@ BattleFrontier_BattleTowerLobby_EventScript_CableLinkSuccessful:: @ 823F3AF
 	waitmessage
 	tower_save CHALLENGE_STATUS_SAVING
 	special SaveForBattleTowerLink
-	waitstate
 	playse SE_SAVE
 	waitse
 	special TrySetBattleTowerLinkType
@@ -920,7 +909,6 @@ BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful:: @ 823F496
 	waitmessage
 	tower_save CHALLENGE_STATUS_SAVING
 	special SaveForBattleTowerLink
-	waitstate
 	playse SE_SAVE
 	waitse
 	goto BattleFrontier_BattleTowerLobby_EventScript_EnterElevator
@@ -970,9 +958,6 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules:: @ 823F558
 	end
 
 @ Unused
-BattleFrontier_BattleTowerLobby_EventScript_DirectYouToBattleRoom: @ 823F55A
-	.string "I'll direct you to your BATTLE ROOM now.$"
-
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting: @ 823F583
 	.string "Excuse me!\p"
 	.string "You didn't save before you quit your\n"
@@ -986,21 +971,11 @@ BattleFrontier_BattleTowerLobby_Text_CongratsBeatenSeven: @ 823F60D
 	.string "$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_EarnedFabulousPrize: @ 823F641
-	.string "For beating seven Trainers in a row,\n"
-	.string "you have earned this fabulous prize!\p"
-	.string "$"
-
 BattleFrontier_BattleTowerLobby_Text_ReceivedPrize: @ 823F68C
 	.string "{PLAYER} received the prize\n"
 	.string "{STR_VAR_1}.$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_BagFullMakeRoom: @ 823F6A6
-	.string "Oh, your Bag appears to be full.\p"
-	.string "Please make room in your Bag, then come\n"
-	.string "see me.$"
-
 BattleFrontier_BattleTowerLobby_Text_ThankYouForPlaying: @ 823F6F7
 	.string "Thank you for playing!\p"
 	.string "$"
@@ -1080,23 +1055,6 @@ BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins: @ 823FB26
 	.string "to the challenge.$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_DoubleBattleRoomConstruction: @ 823FBCE
-	.string "Welcome to the Battle Tower\n"
-	.string "Double Battle CORNER!\p"
-	.string "Unfortunately, the BATTLE ROOMS\n"
-	.string "are still under construction.\p"
-	.string "Please come back when the work\n"
-	.string "is completed.$"
-
-@ Unused
-BattleFrontier_BattleTowerLobby_Text_MultiBattleRoomConstruction: @ 823FC6B
-	.string "Welcome to the Battle Tower\n"
-	.string "MULTI BATTLE CORNER!\p"
-	.string "Unfortunately, the BATTLE ROOMS\n"
-	.string "are still under construction.\p"
-	.string "Please come back when the work\n"
-	.string "is completed.$"
-
 BattleFrontier_BattleTowerLobby_Text_LookForwardToAnotherChallenge: @ 823FD07
 	.string "We look forward to seeing you on\n"
 	.string "another challenge!$"
@@ -1107,10 +1065,6 @@ BattleFrontier_BattleTowerLobby_Text_WhichLevelMode: @ 823FD3B
 	.string "Which is your choice?$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_PleaseSelectMons: @ 823FD9A
-	.string "Please select the Pokémon you wish\n"
-	.string "to enter.$"
-
 BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering: @ 823FDC7
 	.string "Before entering a BATTLE ROOM, your\n"
 	.string "progress must be saved. Is that okay?$"
@@ -1124,27 +1078,6 @@ BattleFrontier_BattleTowerLobby_Text_RecordLastMatch: @ 823FE3C
 	.string "match on your FRONTIER PASS?$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50: @ 823FE7F
-	.string "Excuse me!\p"
-	.string "You don't have {STR_VAR_2} eligible Pokémon.\p"
-	.string "You must have {STR_VAR_2} different Pokémon\n"
-	.string "of Level 50 or less to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-@ Unused
-BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpen: @ 823FF5D
-	.string "Excuse me!\p"
-	.string "You don't have {STR_VAR_2} eligible Pokémon.\p"
-	.string "You must have {STR_VAR_2} different Pokémon\n"
-	.string "to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Singles: @ 8240027
 	.string "Excuse me!\p"
 	.string "You don't have three eligible Pokémon.\p"
@@ -1152,7 +1085,7 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Singles: @ 8240027
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenSingles: @ 824010B
@@ -1162,7 +1095,7 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenSingles: @ 824010B
 	.string "to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Doubles: @ 82401DB
@@ -1172,7 +1105,7 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Doubles: @ 82401DB
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenDoubles: @ 82402BD
@@ -1182,7 +1115,7 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenDoubles: @ 82402BD
 	.string "to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Multis: @ 824038B
@@ -1192,7 +1125,7 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Multis: @ 824038B
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenMultis: @ 824046B
@@ -1202,15 +1135,8 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenMultis: @ 824046B
 	.string "to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_WelcomSingleBattle: @ 8240537
-	.string "Where the talents of Trainers\n"
-	.string "are put to the test!\p"
-	.string "Welcome to the Battle Tower!\p"
-	.string "I am your guide to the SINGLE\n"
-	.string "BATTLE ROOMS.$"
 
 BattleFrontier_BattleTowerLobby_Text_TakeSinglesChallenge: @ 82405B3
 	.string "Would you like to take the SINGLE\n"
@@ -1340,13 +1266,6 @@ BattleFrontier_BattleTowerLobby_Text_PleaseSelectTwoMons2: @ 824115E
 	.string "that are to be entered.$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_ChoseSameMonAsFriend: @ 8241198
-	.string "You have chosen the same kind of\n"
-	.string "Pokémon as your friend.\p"
-	.string "Please choose two Pokémon different\n"
-	.string "from your friend's, match the level\l"
-	.string "you wish to enter, and register again.$"
-
 BattleFrontier_BattleTowerLobby_Text_LinkMultiOnlyForTwoPlayers: @ 8241240
 	.string "The LINK MULTI BATTLE ROOM challenge\n"
 	.string "is only for two linked players.$"
@@ -1364,19 +1283,6 @@ BattleFrontier_BattleTowerLobby_Text_FriendChoseDifferentLvlMode: @ 82412E8
 	.string "battle level.$"
 
 @ Unused
-BattleFrontier_BattleTowerLobby_Text_FriendChoseDifferentLvlModeSameMon: @ 8241319
-	.string "Your friend has chosen a different\n"
-	.string "battle level.\p"
-	.string "Your friend has also selected\n"
-	.string "the Pokémon {STR_VAR_1}.$"
-
-@ Unused
-BattleFrontier_BattleTowerLobby_Text_FriendChoseDifferentLvlModeSameMons: @ 8241378
-	.string "Your friend has chosen a different\n"
-	.string "battle level.\p"
-	.string "Your friend has also selected the\n"
-	.string "Pokémon {STR_VAR_1} and {STR_VAR_2}.$"
-
 BattleFrontier_BattleTowerLobby_Text_ChooseDifferentMonsMatchLvlMode: @ 82413DE
 	.string "Please choose two Pokémon different\n"
 	.string "from your friend's, match the level\l"
@@ -1405,12 +1311,9 @@ BattleFrontier_BattleTowerLobby_Text_ReadWhichHeading: @ 8241563
 	.string "Which heading do you want to read?$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainTowerRules: @ 8241586
-	.string "The Battle Tower is a facility where\n"
-	.string "four types of battles are waged--\l"
-	.string "SINGLE BATTLE, Double Battle, MULTI\l"
-	.string "BATTLE, and LINK MULTI BATTLE.\p"
-	.string "For each of these types, there are\n"
-	.string "separate BATTLE ROOMS.\p"
+	.string "The Battle Tower hosts DOUBLE,\n"
+	.string "MULTI, and LINK MULTI BATTLES.\p"
+	.string "The SINGLE rooms are closed.\p"
 	.string "Please speak with a guide offering\n"
 	.string "the type of battle you wish to enter.$"
 
@@ -1418,10 +1321,9 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMonRules: @ 8241693
 	.string "Depending on the BATTLE ROOM you are\n"
 	.string "entering, you will be required to take\l"
 	.string "a certain number of Pokémon.\p"
-	.string "The SINGLE BATTLE mode requires\n"
-	.string "three Pokémon.\p"
-	.string "The Double Battle mode requires four,\n"
-	.string "and the MULTI modes both require two.$"
+	.string "The DOUBLE BATTLE room requires\n"
+	.string "four Pokémon.\p"
+	.string "The MULTI rooms require two.$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainSalonRules: @ 8241777
 	.string "The BATTLE SALON is where you must\n"

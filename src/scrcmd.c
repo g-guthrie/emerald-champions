@@ -2301,8 +2301,8 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1);
 
     gSpecialVar_Result = FieldMove_GetUserSlot(fieldMove, doUnlockedCheck);
-    // Non-HM moves can still lack a compatible user. HM access itself
-    // depends only on the player's unlock, so this case never blocks an HM.
+    // An unlocked HM can still lack a compatible party member; non-HM field
+    // moves likewise report when nobody can use them.
     gSpecialVar_0x8005 = 0;
     if (gSpecialVar_Result != PARTY_SIZE)
     {
@@ -3309,7 +3309,7 @@ void Script_TriggerUniqueEvolution(struct ScriptContext *ctx)
         gSpecialVar_Result = EVO_EVENT_IMPOSSIBLE;
         return;
     }
-    assertf(gSpecialVar_0x8004 <= PARTY_SIZE, "TriggerEvolution script called with invalid partyIndex %d", gSpecialVar_0x8004)
+    assertf(gSpecialVar_0x8004 < PARTY_SIZE, "TriggerEvolution script called with invalid partyIndex %d", gSpecialVar_0x8004)
     {
         gSpecialVar_Result = EVO_EVENT_IMPOSSIBLE;
         return;
@@ -3420,7 +3420,8 @@ void NativeFunc_CheckPartyHasSpecies(struct ScriptContext *ctx)
 
     for (u32 i = 0; i < partyCount; i++)
     {
-        enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
+        // An Egg is not the species it will hatch into.
+        enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
 
         if (SpeciesToNationalPokedexNum(species) == wantedDexNum)
         {

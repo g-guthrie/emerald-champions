@@ -24,7 +24,6 @@ Roulette_EventScript_Table2:: @ 82A5ADF
 
 Roulette_EventScript_Play:: @ 82A5B0D
 	special PlayRoulette
-	waitstate
 	end
 	
 Roulette_Text_PlayMinimumWagerIsX:: @ 82A5B12
@@ -63,9 +62,6 @@ Roulette_Text_BoardWillBeCleared:: @ 82A5C21
 	.string "The ROULETTE board will be cleared.$"
 
 @ Unused
-Roulette_Text_YouDontHaveACoinCase:: @ 82A5C45
-	.string "You don't have a COIN CASE.$"
-
 Roulette_Text_CoinCaseIsFull:: @ 82A5C61
 	.string "Your COIN CASE is full!\n"
 	.string "Coins can be exchanged for prizes.$"

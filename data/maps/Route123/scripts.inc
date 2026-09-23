@@ -15,7 +15,7 @@ Route123_EventScript_GigaDrainGirl:: @ 81F6151
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route123_EventScript_NoGrassMons
 	msgbox Route123_Text_YouLikeGrassMonsTooHaveThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_STAR_PIECE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM19
@@ -54,55 +54,6 @@ Route123_EventScript_Braxton:: @ 81F61DC
 	msgbox Route123_Text_BraxtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route123_EventScript_Violet:: @ 81F61F3
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_VioletPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route123_EventScript_Cameron:: @ 81F620A
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route123_EventScript_RematchCameron
-	msgbox Route123_Text_CameronPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route123_EventScript_RegisterCameron:: @ 81F6236
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route123_Text_CameronRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CAMERON_1
-	release
-	end
-
-Route123_EventScript_RematchCameron:: @ 81F6255
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_CameronPostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route123_EventScript_Jacki:: @ 81F626C
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route123_EventScript_RematchJacki
-	msgbox Route123_Text_JackiPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route123_EventScript_RegisterJacki:: @ 81F6298
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route123_Text_JackiRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JACKI_1
-	release
-	end
-
-Route123_EventScript_RematchJacki:: @ 81F62B7
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_JackiPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route123_EventScript_Miu:: @ 81F62CE
 	trainerbattle_double TRAINER_MIU_AND_YUKI, Route123_Text_MiuIntro, Route123_Text_MiuDefeat, Route123_Text_MiuNotEnoughMons
 	msgbox Route123_Text_MiuPostBattle, MSGBOX_AUTOCLOSE
@@ -123,16 +74,6 @@ Route123_EventScript_Frederick:: @ 81F631B
 	msgbox Route123_Text_FrederickPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route123_EventScript_Alberto:: @ 81F6332
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_AlbertoPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route123_EventScript_Ed:: @ 81F6349
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_EdPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route123_EventScript_Kayley:: @ 81F6360
 	trainerbattle_double TRAINER_KAYLEY, Route123_Text_KayleyIntro, Route123_Text_KayleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_KayleyPostBattle, MSGBOX_AUTOCLOSE
@@ -148,33 +89,6 @@ Route123_EventScript_Jazmyn:: @ 81F638E
 	msgbox Route123_Text_JazmynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route123_EventScript_Davis:: @ 81F63A5
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_DavisPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route123_EventScript_Fernando:: @ 81F63BC
-	@ This retired encounter has no campaign battle.
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare VAR_RESULT, TRUE
-	goto_if_eq Route123_EventScript_RematchFernando
-	msgbox Route123_Text_FernandoPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route123_EventScript_RegisterFernando:: @ 81F63E8
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route123_Text_FernandoRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_FERNANDO_1
-	release
-	end
-
-Route123_EventScript_RematchFernando:: @ 81F6407
-	@ This retired encounter has no campaign battle.
-	msgbox Route123_Text_FernandoPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 Route123_Text_LoveGrassMonsHaveAny: @ 81F641E
 	.string "I love Grass-type Pokémon!\p"
 	.string "Do you have any Grass-type Pokémon?$"
@@ -183,8 +97,10 @@ Route123_Text_YouLikeGrassMonsTooHaveThis: @ 81F645D
 	.string "Oh?\p"
 	.string "You like Grass-type Pokémon, too,\n"
 	.string "don't you?\p"
-	.string "I'm so happy, you can have this!\n"
-	.string "It's a token of our friendship.$"
+	.string "Take this Star Piece as a token\n"
+	.string "of our friendship!\p"
+	.string "Sell it at a Mart to help pay\n"
+	.string "for your team's supplies.$"
 
 Route123_Text_CheckTreesWithMyGrassMon: @ 81F64CF
 	.string "I check trees with my Grass-type\n"
@@ -200,4 +116,3 @@ Route123_Text_RouteSignMtPyre: @ 81F6529
 
 Route123_Text_BerryMastersHouse: @ 81F6557
 	.string "Berry Master's House$"
-

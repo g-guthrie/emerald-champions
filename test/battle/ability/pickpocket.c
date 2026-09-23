@@ -326,8 +326,8 @@ SINGLE_BATTLE_TEST("Pickpocket activates when user has Protective Pads, but not 
         ASSUME(GetItemHoldEffect(ITEM_PROTECTIVE_PADS) == HOLD_EFFECT_PROTECTIVE_PADS);
         ASSUME(GetItemHoldEffect(ITEM_PUNCHING_GLOVE) == HOLD_EFFECT_PUNCHING_GLOVE);
         ASSUME(GetItemHoldEffect(ITEM_FOCUS_SASH) == HOLD_EFFECT_FOCUS_SASH);
-        PLAYER(SPECIES_DECIDUEYE) { Ability(ability); Item(item); }
-        OPPONENT(SPECIES_SNEASEL) { Ability(ABILITY_PICKPOCKET); Item(ITEM_FOCUS_SASH); }
+        PLAYER(SPECIES_DECIDUEYE) { Ability(ability); Item(item); Attack(500); }
+        OPPONENT(SPECIES_SNEASEL) { Ability(ABILITY_PICKPOCKET); Item(ITEM_FOCUS_SASH); HP(100); MaxHP(100); }
     } WHEN {
         TURN { MOVE(player, MOVE_MACH_PUNCH); }
     } SCENE {
@@ -393,6 +393,8 @@ SINGLE_BATTLE_TEST("Pickpocket steals from the original U-turn user before it sw
         ABILITY_POPUP(opponent, ABILITY_PICKPOCKET);
         MESSAGE("The opposing Sneasel stole Wobbuffet's Potion!");
     } THEN {
+        EXPECT_EQ(GetBattlerPartyState(B_BATTLER_1)->heldItemOrigin, B_TRAINER_PLAYER * PARTY_SIZE + 1);
+        EXPECT_EQ(gBattleStruct->partyState[B_TRAINER_PLAYER][0].heldItemOrigin, 0);
         EXPECT(opponent->item == ITEM_POTION);
         EXPECT(player->item == ITEM_NONE);
     }
@@ -417,6 +419,8 @@ SINGLE_BATTLE_TEST("Pickpocket steals the attacker's item even after Red Card fo
         ABILITY_POPUP(opponent, ABILITY_PICKPOCKET);
         MESSAGE("The opposing Sneasel stole Wobbuffet's Poké Ball!");
     } THEN {
+        EXPECT_EQ(GetBattlerPartyState(B_BATTLER_1)->heldItemOrigin, B_TRAINER_PLAYER * PARTY_SIZE + 1);
+        EXPECT_EQ(gBattleStruct->partyState[B_TRAINER_PLAYER][0].heldItemOrigin, 0);
         EXPECT(opponent->item == ITEM_POKE_BALL);
         EXPECT(player->item == ITEM_NONE);
     }

@@ -48,7 +48,6 @@
 
 #define MAX_ITEMS_SHOWN 8
 #define SHOP_ITEM_NAME_WIDTH_WITH_PRICE    84
-#define SHOP_ITEM_NAME_WIDTH_WITHOUT_PRICE 108
 #define SHOP_MENU_PALETTE_ID (gMapHeader.mapLayout->isFrlg ? 11 : 12)
 
 enum {
@@ -95,7 +94,6 @@ struct MartInfo
     u16 itemCount;
     u8 windowId;
     u8 martType;
-    bool8 freeItems;
 };
 
 struct ShopData
@@ -116,13 +114,11 @@ static EWRAM_DATA struct MartInfo sMartInfo = {0};
 static EWRAM_DATA struct ShopData *sShopData = NULL;
 static EWRAM_DATA struct ListMenuItem *sListMenuItems = NULL;
 static EWRAM_DATA u8 (*sItemNames)[ITEM_NAME_LENGTH + 2] = {0};
-static EWRAM_DATA u8 sPurchaseHistoryId = 0;
 EWRAM_DATA struct ItemSlot gMartPurchaseHistory[SMARTSHOPPER_NUM_ITEMS] = {0};
 
 static void Task_ShopMenu(u8 taskId);
 static void Task_HandleShopMenuQuit(u8 taskId);
 static void CB2_InitBuyMenu(void);
-static void Task_OpenFreeCatalog(u8 taskId);
 static void Task_GoToBuyOrSellMenu(u8 taskId);
 static void MapPostLoadHook_ReturnToShopMenu(void);
 static void Task_ReturnToShopMenu(u8 taskId);
@@ -156,7 +152,7 @@ static void BuyMenuConfirmPurchase(u8 taskId);
 static void BuyMenuPrintItemQuantityAndPrice(u8 taskId);
 static void Task_BuyHowManyDialogueHandleInput(u8 taskId);
 static void BuyMenuSubtractMoney(u8 taskId);
-static void RecordItemPurchase(u8 taskId);
+static void RecordItemPurchase(enum Item item, u16 quantity);
 static void Task_ReturnToItemListAfterItemPurchase(u8 taskId);
 static void Task_ReturnToItemListAfterDecorationPurchase(u8 taskId);
 static void Task_HandleShopMenuBuy(u8 taskId);
@@ -171,9 +167,6 @@ static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
     BuyMenuReturnToItemList
 };
 
-static const u8 sText_CatalogSingleConfirm[] = _("{STR_VAR_1}?\nIs that right?");
-static const u8 sText_CatalogQuantityConfirm[] = _("{STR_VAR_1} ×{STR_VAR_2}.\nIs that right?");
-static const u8 sText_CatalogSuccess[] = _("Here you go!\nYour items are ready.");
 
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
@@ -360,7 +353,7 @@ static u8 CreateShopMenu(u8 martType)
     LockPlayerFieldControls();
     sMartInfo.martType = martType;
 
-    if (martType == MART_TYPE_NORMAL && !sMartInfo.freeItems)
+    if (martType == MART_TYPE_NORMAL)
     {
         struct WindowTemplate winTemplate = sShopMenuWindowTemplates[WIN_BUY_SELL_QUIT];
         winTemplate.width = GetMaxWidthInMenuTable(sShopMenuActions_BuySellQuit, ARRAY_COUNT(sShopMenuActions_BuySellQuit));
@@ -481,15 +474,6 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
     }
 }
 
-static void Task_OpenFreeCatalog(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        DestroyTask(taskId);
-        SetMainCallback2(CB2_InitBuyMenu);
-    }
-}
-
 static void MapPostLoadHook_ReturnToShopMenu(void)
 {
     FadeInFromBlack();
@@ -500,17 +484,6 @@ static void Task_ReturnToShopMenu(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
-        // Emerald Champions' free catalogs are already nested under a native
-        // category menu. One B exits the item list directly back to that
-        // category instead of inserting the redundant BUY / QUIT layer.
-        if (sMartInfo.freeItems)
-        {
-            UnlockPlayerFieldControls();
-            DestroyTask(taskId);
-            if (sMartInfo.callback)
-                sMartInfo.callback();
-            return;
-        }
         if (sMartInfo.martType == MART_TYPE_DECOR2)
             DisplayItemMessageOnField(taskId, gText_CanIHelpWithAnythingElse, ShowShopMenuAfterExitingBuyOrSellMenu);
         else
@@ -614,13 +587,6 @@ static void BuyMenuBuildListMenuTemplate(void)
     sListMenuItems[i].id = LIST_CANCEL;
 
     gMultiuseListMenuTemplate = sShopBuyMenuListTemplate;
-    if (sMartInfo.freeItems)
-    {
-        // Free catalogs need no redundant price column.  Give the item names
-        // the full list width while retaining the ordinary shop layout below.
-        gMultiuseListMenuTemplate.itemPrintFunc = NULL;
-        gMultiuseListMenuTemplate.textNarrowWidth = SHOP_ITEM_NAME_WIDTH_WITHOUT_PRICE;
-    }
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = sMartInfo.itemCount + 1;
     if (gMultiuseListMenuTemplate.totalItems > MAX_ITEMS_SHOWN)
@@ -679,7 +645,7 @@ static bool32 IsSinglePurchaseItem(enum Item item)
 
 static u32 GetShopItemPrice(enum Item item)
 {
-    if (sMartInfo.freeItems || IsEmeraldChampionsFreeCatalogueItem(item))
+    if (IsEmeraldChampionsFreeCatalogueItem(item))
         return 0;
     return GetItemPrice(item);
 }
@@ -688,7 +654,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 {
     u8 x;
 
-    if (sMartInfo.freeItems || itemId == LIST_CANCEL)
+    if (itemId == LIST_CANCEL)
         return;
 
     if (sMartInfo.martType == MART_TYPE_NORMAL)
@@ -816,9 +782,7 @@ static void BuyMenuInitWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(WIN_MONEY, 1, BG_PLTT_ID(13));
     LoadMessageBoxGfx(WIN_MONEY, 0xA, BG_PLTT_ID(14));
-    // A free catalog has no price to pay, so it never shows the money box.
-    if (!sMartInfo.freeItems)
-        PutWindowTilemap(WIN_MONEY);
+    PutWindowTilemap(WIN_MONEY);
     PutWindowTilemap(WIN_ITEM_LIST);
     PutWindowTilemap(WIN_ITEM_DESCRIPTION);
 }
@@ -838,11 +802,8 @@ static void BuyMenuDrawGraphics(void)
 {
     BuyMenuDrawMapGraphics();
     BuyMenuCopyMenuBgToBg1TilemapBuffer();
-    if (!sMartInfo.freeItems)
-    {
-        AddMoneyLabelObject(19, 11);
-        PrintMoneyAmountInMoneyBoxWithBorder(WIN_MONEY, 1, 13, GetMoney(&gSaveBlock1Ptr->money));
-    }
+    AddMoneyLabelObject(19, 11);
+    PrintMoneyAmountInMoneyBoxWithBorder(WIN_MONEY, 1, 13, GetMoney(&gSaveBlock1Ptr->money));
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
@@ -1087,13 +1048,8 @@ static void Task_BuyMenu(u8 taskId)
                     {
                         tItemCount = 1;
                         sShopData->totalCost = GetShopItemPrice(tItemId) * tItemCount;
-                        if (sMartInfo.freeItems)
-                            StringExpandPlaceholders(gStringVar4, sText_CatalogSingleConfirm);
-                        else
-                        {
-                            ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
-                            StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
-                        }
+                        ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
+                        StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
                         BuyMenuDisplayMessage(taskId, gStringVar4, BuyMenuConfirmPurchase);
                     }
                     else
@@ -1124,7 +1080,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     u16 quantityInBag = CountTotalItemQuantityInBag(tItemId);
-    u16 maxQuantity;
+    u32 maxQuantity;
 
     DrawStdFrameWithCustomTileAndPalette(WIN_QUANTITY_IN_BAG, FALSE, 1, 13);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS + 1);
@@ -1141,10 +1097,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     else
         maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / sShopData->totalCost;
 
-    if (maxQuantity > MAX_BAG_ITEM_CAPACITY)
-        sShopData->maxQuantity = MAX_BAG_ITEM_CAPACITY;
-    else
-        sShopData->maxQuantity = maxQuantity;
+    sShopData->maxQuantity = min(maxQuantity, MAX_BAG_ITEM_CAPACITY);
 
     gTasks[taskId].func = Task_BuyHowManyDialogueHandleInput;
 }
@@ -1171,10 +1124,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
             CopyItemName(tItemId, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
             ConvertIntToDecimalStringN(gStringVar3, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
-            if (sMartInfo.freeItems)
-                BuyMenuDisplayMessage(taskId, sText_CatalogQuantityConfirm, BuyMenuConfirmPurchase);
-            else
-                BuyMenuDisplayMessage(taskId, gText_Var1AndYouWantedVar2, BuyMenuConfirmPurchase);
+            BuyMenuDisplayMessage(taskId, gText_Var1AndYouWantedVar2, BuyMenuConfirmPurchase);
         }
         else if (JOY_NEW(B_BUTTON))
         {
@@ -1204,10 +1154,10 @@ static void BuyMenuTryMakePurchase(u8 taskId)
         if (AddBagItem(tItemId, tItemCount) == TRUE)
         {
             GetSetItemObtained(tItemId, FLAG_SET_ITEM_OBTAINED);
-            RecordItemPurchase(taskId);
+            RecordItemPurchase(tItemId, tItemCount);
             BuyMenuDisplayMessage(
                 taskId,
-                sMartInfo.freeItems ? sText_CatalogSuccess : gText_HereYouGoThankYou,
+                gText_HereYouGoThankYou,
                 BuyMenuSubtractMoney);
         }
         else
@@ -1235,11 +1185,8 @@ static void BuyMenuSubtractMoney(u8 taskId)
 {
     IncrementGameStat(GAME_STAT_SHOPPED);
     PlaySE(SE_SHOP);
-    if (!sMartInfo.freeItems)
-    {
-        RemoveMoney(&gSaveBlock1Ptr->money, sShopData->totalCost);
-        PrintMoneyAmountInMoneyBox(WIN_MONEY, GetMoney(&gSaveBlock1Ptr->money), 0);
-    }
+    RemoveMoney(&gSaveBlock1Ptr->money, sShopData->totalCost);
+    PrintMoneyAmountInMoneyBox(WIN_MONEY, GetMoney(&gSaveBlock1Ptr->money), 0);
 
     if (sMartInfo.martType == MART_TYPE_NORMAL)
         gTasks[taskId].func = Task_ReturnToItemListAfterItemPurchase;
@@ -1309,8 +1256,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(WIN_QUANTITY_PRICE, PIXEL_FILL(1));
-    if (!sMartInfo.freeItems)
-        PrintMoneyAmount(WIN_QUANTITY_PRICE, CalculateMoneyTextHorizontalPosition(sShopData->totalCost), 1, sShopData->totalCost, TEXT_SKIP_DRAW);
+    PrintMoneyAmount(WIN_QUANTITY_PRICE, CalculateMoneyTextHorizontalPosition(sShopData->totalCost), 1, sShopData->totalCost, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(WIN_QUANTITY_PRICE, gStringVar4, 0, 1, 0, COLORID_NORMAL);
@@ -1327,8 +1273,7 @@ static void Task_ExitBuyMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        if (!sMartInfo.freeItems)
-            RemoveMoneyLabelObject();
+        RemoveMoneyLabelObject();
         BuyMenuFreeMemory();
         SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
@@ -1337,35 +1282,36 @@ static void Task_ExitBuyMenu(u8 taskId)
 
 static void ClearItemPurchases(void)
 {
-    sPurchaseHistoryId = 0;
     memset(gMartPurchaseHistory, 0, sizeof(gMartPurchaseHistory));
 }
 
-static void RecordItemPurchase(u8 taskId)
+static void RecordItemPurchase(enum Item item, u16 quantity)
 {
-    s16 *data = gTasks[taskId].data;
-
-    u16 i;
-
-    for (i = 0; i < ARRAY_COUNT(gMartPurchaseHistory); i++)
+    for (u32 i = 0; i < ARRAY_COUNT(gMartPurchaseHistory); i++)
     {
-        if (gMartPurchaseHistory[i].itemId == tItemId && gMartPurchaseHistory[i].quantity != 0)
+        struct ItemSlot *purchase = &gMartPurchaseHistory[i];
+        if (purchase->itemId == item || purchase->itemId == ITEM_NONE)
         {
-            if (gMartPurchaseHistory[i].quantity + tItemCount > 255)
-                gMartPurchaseHistory[i].quantity = 255;
-            else
-                gMartPurchaseHistory[i].quantity += tItemCount;
+            purchase->itemId = item;
+            // The TV report treats 255 as a bulk purchase, regardless of
+            // whether the player bought it in one transaction or several.
+            purchase->quantity = min(purchase->quantity + quantity, 255);
             return;
         }
     }
-
-    if (sPurchaseHistoryId < ARRAY_COUNT(gMartPurchaseHistory))
-    {
-        gMartPurchaseHistory[sPurchaseHistoryId].itemId = tItemId;
-        gMartPurchaseHistory[sPurchaseHistoryId].quantity = tItemCount;
-        sPurchaseHistoryId++;
-    }
 }
+
+#if TESTING
+void Test_ClearShopPurchaseHistory(void)
+{
+    ClearItemPurchases();
+}
+
+void Test_RecordShopPurchase(enum Item item, u16 quantity)
+{
+    RecordItemPurchase(item, quantity);
+}
+#endif
 
 #undef tItemCount
 #undef tItemId
@@ -1375,31 +1321,14 @@ static void RecordItemPurchase(u8 taskId)
 
 void CreatePokemartMenu(const u16 *itemsForSale)
 {
-    sMartInfo.freeItems = FALSE;
     CreateShopMenu(MART_TYPE_NORMAL);
     SetShopItemsForSale(itemsForSale);
     ClearItemPurchases();
     SetShopMenuCallback(ScriptContext_Enable);
 }
 
-void CreateFreePokemartMenu(const u16 *itemsForSale)
-{
-    // The battle vendor already supplies the category layer.  Enter the
-    // native item list directly instead of inserting a redundant BUY / QUIT
-    // box between category and catalog.
-    sMartInfo.freeItems = TRUE;
-    sMartInfo.martType = MART_TYPE_NORMAL;
-    SetShopItemsForSale(itemsForSale);
-    ClearItemPurchases();
-    SetShopMenuCallback(ScriptContext_Enable);
-    LockPlayerFieldControls();
-    FadeScreen(FADE_TO_BLACK, 0);
-    CreateTask(Task_OpenFreeCatalog, 8);
-}
-
 void CreateDecorationShop1Menu(const u16 *itemsForSale)
 {
-    sMartInfo.freeItems = FALSE;
     CreateShopMenu(MART_TYPE_DECOR);
     SetShopItemsForSale(itemsForSale);
     SetShopMenuCallback(ScriptContext_Enable);
@@ -1407,7 +1336,6 @@ void CreateDecorationShop1Menu(const u16 *itemsForSale)
 
 void CreateDecorationShop2Menu(const u16 *itemsForSale)
 {
-    sMartInfo.freeItems = FALSE;
     CreateShopMenu(MART_TYPE_DECOR2);
     SetShopItemsForSale(itemsForSale);
     SetShopMenuCallback(ScriptContext_Enable);

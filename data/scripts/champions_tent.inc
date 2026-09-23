@@ -67,17 +67,17 @@ ChampionsTent_EventScript_Exit::
 	end
 
 ChampionsTent_Text_Challenge:
-	.string "Take on three DOUBLE BATTLES?$"
+	.string "Take on three Double Battles?$"
 ChampionsTent_Text_Rules:
 	.string "Bring six Pokémon ready to battle.\n"
-	.string "EGGS cannot enter.\p"
+	.string "Eggs cannot enter.\p"
 	.string "Your team fights at your current\n"
 	.string "level cap. Your chosen builds stay.\p"
 	.string "Win three battles for a prize.\n"
 	.string "You may retire between battles.\p"
 	.string "Your party is restored afterward.\n"
 	.string "These wins are separate from the\l"
-	.string "CHAMPIONS CIRCUIT.$"
+	.string "Champions Circuit.$"
 ChampionsTent_Text_Opponent:
 	.string "Battle {STR_VAR_2}: {STR_VAR_1}!\n"
 	.string "The opposing team is Lv. {STR_VAR_3}.$"
@@ -92,10 +92,10 @@ ChampionsTent_Text_Prize:
 	.string "{PLAYER} received {STR_VAR_1}!$"
 ChampionsTent_Text_PrizeFull:
 	.string "Your prize is waiting here.\n"
-	.string "Make room in your BAG and return.$"
+	.string "Make room in your Bag and return.$"
 ChampionsTent_Text_NeedParty:
 	.string "Bring six Pokémon able to battle.\n"
-	.string "Prepare at a POKéMON CENTER, then\l"
+	.string "Prepare at a Pokémon Center, then\l"
 	.string "come back when you are ready.$"
 ChampionsTent_Text_NoOpponent:
 	.string "The next team is not ready yet.\n"

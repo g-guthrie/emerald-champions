@@ -37,6 +37,8 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 1-100")
         case EFFECT_DISABLE:
 
         // tests exist elsewhere
+        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
+        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_STAT_CHANGE:
         case EFFECT_GROWTH:
             break;
@@ -205,6 +207,8 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 201-300")
         case EFFECT_WISH:
 
         // tests exist elsewhere
+        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
+        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_STAT_CHANGE:
         case EFFECT_CHARGE:
         case EFFECT_STOCKPILE:
@@ -287,6 +291,8 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 301-400")
         case EFFECT_MAGNET_RISE:
 
         // tests exist elsewhere
+        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
+        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_STAT_CHANGE:
         case EFFECT_GRAVITY:
         case EFFECT_HEAL_BELL:
@@ -435,6 +441,8 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 501-600")
         case EFFECT_FAIRY_LOCK:
 
         // tests exist elsewhere
+        // the partner holds the same move here and the AI won't phaze twice; left as chip it ties Splash
+        case EFFECT_HIT_SWITCH_TARGET:
         case EFFECT_STAT_CHANGE:
         case EFFECT_ROTOTILLER:
         case EFFECT_FLOWER_SHIELD:
@@ -508,6 +516,8 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 601-700")
         case EFFECT_AURORA_VEIL:
 
         // tests exist elsewhere
+        // fails for anyone but Hoopa Unbound, so it rightly ties Splash (check_bad_move.c)
+        case EFFECT_HYPERSPACE_FURY:
         case EFFECT_STAT_CHANGE:
         case EFFECT_STUFF_CHEEKS:
         case EFFECT_GEOMANCY:
@@ -650,6 +660,10 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 801-900")
         case EFFECT_TIDY_UP:
 
         // tests exist elsewhere
+        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
+        case EFFECT_REFLECT_DAMAGE:
+        // needs a revealed priority attack, which the AI never reads from a pending command
+        case EFFECT_UPPER_HAND:
         case EFFECT_STAT_CHANGE:
         case EFFECT_DRAGON_CHEER:
             break;

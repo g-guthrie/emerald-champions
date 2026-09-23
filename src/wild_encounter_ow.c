@@ -580,12 +580,13 @@ static bool32 StartWildBattleWithOWE_CheckMassOutbreak(enum CategoryOWE category
     if (category != OWE_CATEGORY_MASS_OUTBREAK)
         return FALSE;
 
-    assertf(gSaveBlock1Ptr->outbreakPokemonSpecies == speciesId && gSaveBlock1Ptr->outbreakPokemonLevel == level, "Outbreak OW encounter is not matching last active outbreak")
+    assertf(gSaveBlock1Ptr->outbreakPokemonSpecies == speciesId && level <= gSaveBlock1Ptr->outbreakPokemonLevel, "Outbreak OW encounter is not matching last active outbreak")
     {
         return FALSE;
     }
-    ZeroEnemyPartyMons();
-    SetUpMassOutbreakEncounter(0);
+    // Collision already created the visible species, level and appearance.
+    // Its stored level may reflect an earlier, lower campaign cap.
+    ApplyMassOutbreakMoves(&gParties[B_TRAINER_OPPONENT_A][0]);
     BattleSetup_StartWildBattle();
     return TRUE;
 }

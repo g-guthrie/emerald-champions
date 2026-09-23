@@ -897,6 +897,10 @@ static void TakeGabbyAndTyOffTheAir(void)
 // See gabby_and_ty.inc for details
 u8 GabbyAndTyGetBattleNum(void)
 {
+    // Saves from before parties 3 and 4 were retired must advance to a live stop.
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum == 2 || gSaveBlock1Ptr->gabbyAndTyData.battleNum == 3)
+        gSaveBlock1Ptr->gabbyAndTyData.battleNum = 4;
+
     if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 5)
         return (gSaveBlock1Ptr->gabbyAndTyData.battleNum % 3) + 6;
 

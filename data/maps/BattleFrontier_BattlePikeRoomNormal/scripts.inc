@@ -18,15 +18,15 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterRoom:: @ 825D171
 	setvar VAR_TEMP_0, 1
 	pike_getroomtype
 	switch VAR_RESULT
-	case PIKE_ROOM_SINGLE_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom
+	case PIKE_ROOM_ONE_TRAINER_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterOneTrainerBattleRoom
 	case PIKE_ROOM_HEAL_FULL, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom
 	case PIKE_ROOM_STATUS, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom
 	case PIKE_ROOM_HARD_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom
-	case PIKE_ROOM_DOUBLE_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom
+	case PIKE_ROOM_TWO_TRAINER_BATTLE, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterTwoTrainerBattleRoom
 	case PIKE_ROOM_BRAIN, BattleFrontier_BattlePikeRoomNormal_EventScript_EnterBrainRoom
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom:: @ 825D1C6
+BattleFrontier_BattlePikeRoomNormal_EventScript_EnterOneTrainerBattleRoom:: @ 825D1C6
 	lockall
 	delay 16
 	applymovement LOCALID_OBJ_0, BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer
@@ -36,17 +36,17 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom:: @ 825D1C
 	waitmessage
 	closemessage
 	releaseall
-	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_SINGLE
+	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_ONE_TRAINER
 	waitstate
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle
+	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonOneTrainerBattle
 BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost:: @ 825D20A
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle:: @ 825D226
+BattleFrontier_BattlePikeRoomNormal_EventScript_WonOneTrainerBattle:: @ 825D226
 	applymovement LOCALID_OBJ_0, BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit
 	waitmovement 0
 	end
@@ -64,7 +64,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom:: @ 825D231
 	waitmessage
 	closemessage
 	releaseall
-	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_SINGLE
+	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_ONE_TRAINER
 	waitstate
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle
@@ -236,7 +236,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom:: @ 825D50E
 	releaseall
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom:: @ 825D53E
+BattleFrontier_BattlePikeRoomNormal_EventScript_EnterTwoTrainerBattleRoom:: @ 825D53E
 	lockall
 	delay 16
 	applymovement LOCALID_OBJ_0, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1WalkRight
@@ -259,14 +259,14 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom:: @ 825D53
 	pike_gettrainerintro 1
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
-	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_DOUBLE
+	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_TWO_TRAINERS
 	waitstate
 	switch VAR_RESULT
-	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle
+	case 1, BattleFrontier_BattlePikeRoomNormal_EventScript_WonTwoTrainerBattle
 	goto BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle:: @ 825D5DC
+BattleFrontier_BattlePikeRoomNormal_EventScript_WonTwoTrainerBattle:: @ 825D5DC
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2
 	waitmovement 0
 	applymovement LOCALID_OBJ_0, BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1Exit
@@ -393,7 +393,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle:: @ 825D77B
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2
 	waitmovement 0
-	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_SINGLE
+	dofacilitytrainerbattle FACILITY_BATTLE_PIKE_ONE_TRAINER
 	waitstate
 	return
 
@@ -649,11 +649,6 @@ BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanUp: @ 825D9B0
 	step_end
 
 @ Unused
-BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanDown: @ 825D9B3
-	walk_down
-	walk_down
-	step_end
-
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreToFullHealth: @ 825D9B6
 	.string "Welcome…\n"
 	.string "You must be commended for your luck…\p"
@@ -677,32 +672,6 @@ BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell: @ 825DABE
 @ Seems there was a planned room type where the player could choose to battle and would be healed if they won
 @ Possibly replaced/superseded by the hard battle room, which is the same but the battle isnt optional
 @ Unused
-BattleFrontier_BattlePikeRoomNormal_Text_CareForBattleWillRestoreMons: @ 825DAE1
-	.string "Excuse me…\p"
-	.string "Would you care for a battle?\n"
-	.string "I'll restore your Pokémon if you win.$"
-
-@ Unused
-BattleFrontier_BattlePikeRoomNormal_Text_NowShallWe: @ 825DB2F
-	.string "Very well…\n"
-	.string "Now, shall we?$"
-
-@ Unused
-BattleFrontier_BattlePikeRoomNormal_Text_HowUnsportingOfYou: @ 825DB49
-	.string "I see…\n"
-	.string "How unsporting of you…$"
-
-@ Unused
-BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreMonsAsPromised: @ 825DB67
-	.string "Magnificent…\p"
-	.string "As promised, I shall restore your\n"
-	.string "Pokémon to full health.$"
-
-@ Unused
-BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell2: @ 825DBAE
-	.string "The best of luck to you.\n"
-	.string "Farewell.$"
-
 BattleFrontier_BattlePikeRoomNormal_Text_WatchOut: @ 825DBD1
 	.string "Oh, my!\p"
 	.string "Watch out!$"
@@ -841,13 +810,6 @@ BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealTwo: @ 825E238
 	.string "restore two Pokémon to full health…$"
 
 @ Unused
-BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreAllMons: @ 825E293
-	.string "I welcome you…\p"
-	.string "Giggle…\n"
-	.string "You should thank your lucky stars…\p"
-	.string "Since you have chosen this room,\n"
-	.string "all your Pokémon will be restored…$"
-
 BattleFrontier_BattlePikeRoomNormal_Text_ShallFetchOurMaster: @ 825E311
 	.string "I shall go fetch our master…$"
 

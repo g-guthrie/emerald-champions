@@ -17,7 +17,6 @@
 #include "util.h"
 #include "move.h"
 #include "random.h"
-#include "string_util.h"
 #include "config/battle.h"
 
 static inline bool32 IgnoreTargetingForMoveEffect(enum MoveEffect moveEffect);
@@ -76,27 +75,15 @@ static void HandleSetEffectFlinch(struct BattleCalcValues *cv, struct SetEffect 
             gLastUsedAbility = ABILITY_INNER_FOCUS;
             gBattlerAbility = se->effectBattler;
             RecordAbilityBattle(se->effectBattler, ABILITY_INNER_FOCUS);
-            gBattlescriptCurrInstr = se->script;
-        }
-        else
-        {
-            gBattlescriptCurrInstr = se->script;
         }
     }
-    else if (gBattleMons[se->effectBattler].volatiles.flinched)
-    {
-        gBattlescriptCurrInstr = se->script;
-    }
-    else if (!HasBattlerActedThisTurn(se->effectBattler)
+    else if (!gBattleMons[se->effectBattler].volatiles.flinched
+          && !HasBattlerActedThisTurn(se->effectBattler)
           && GetActiveGimmick(se->effectBattler) != GIMMICK_DYNAMAX)
     {
         gBattleMons[se->effectBattler].volatiles.flinched = TRUE;
-        gBattlescriptCurrInstr = se->script;
     }
-    else
-    {
-        gBattlescriptCurrInstr = se->script;
-    }
+    gBattlescriptCurrInstr = se->script;
 }
 
 static void HandleSetEffectAbsorb(struct BattleCalcValues *cv, struct SetEffect *se)
@@ -322,6 +309,7 @@ static void HandleSetEffectRemoveStatus(struct BattleCalcValues *cv, struct SetE
             gBattlescriptCurrInstr = BattleScript_TargetPRLZHeal;
             break;
         case STATUS1_SLEEP:
+            gBattleMons[se->effectBattler].volatiles.nightmare = FALSE;
             TryDeactivateSleepClause(se->effectBattler, gBattlerPartyIndexes[se->effectBattler]);
             gBattlescriptCurrInstr = BattleScript_TargetWokeUp;
             break;
@@ -446,6 +434,19 @@ static void HandleSetEffectThroatChop(struct BattleCalcValues *cv, struct SetEff
     }
 }
 
+static void DestroyHeldItemForMove(struct SetEffect *se, const u8 *effectScript)
+{
+    gLastUsedItem = gBattleMons[se->effectBattler].item;
+    RecordDestroyedHeldItem(se->effectBattler, gLastUsedItem);
+    gBattleMons[se->effectBattler].item = ITEM_NONE;
+    CheckSetUnburden(se->effectBattler);
+
+    BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[se->effectBattler].item), &gBattleMons[se->effectBattler].item);
+    MarkBattlerForControllerExec(se->effectBattler);
+    BattleScriptPush(se->script);
+    gBattlescriptCurrInstr = effectScript;
+}
+
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -454,14 +455,7 @@ static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEff
     if (gItemsInfo[gBattleMons[se->effectBattler].item].pocket == POCKET_BERRIES
      || (B_INCINERATE_GEMS >= GEN_6 && GetItemHoldEffect(gBattleMons[se->effectBattler].item) == HOLD_EFFECT_GEMS))
     {
-        gLastUsedItem = gBattleMons[se->effectBattler].item;
-        gBattleMons[se->effectBattler].item = ITEM_NONE;
-        CheckSetUnburden(se->effectBattler);
-
-        BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[se->effectBattler].item), &gBattleMons[se->effectBattler].item);
-        MarkBattlerForControllerExec(se->effectBattler);
-        BattleScriptPush(se->script);
-        gBattlescriptCurrInstr = BattleScript_MoveEffectIncinerate;
+        DestroyHeldItemForMove(se, BattleScript_MoveEffectIncinerate);
     }
 }
 
@@ -475,15 +469,8 @@ static void HandleSetEffectBugBite(struct BattleCalcValues *cv, struct SetEffect
     else if (GetItemPocket(gBattleMons[se->effectBattler].item) == POCKET_BERRIES
         && cv->abilities[se->effectBattler] != ABILITY_STICKY_HOLD)
     {
-        // target loses their berry
-        gLastUsedItem = gBattleMons[se->effectBattler].item;
-        gBattleMons[se->effectBattler].item = ITEM_NONE;
-        CheckSetUnburden(se->effectBattler);
-
-        BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[se->effectBattler].item), &gBattleMons[se->effectBattler].item);
-        MarkBattlerForControllerExec(se->effectBattler);
-        BattleScriptPush(se->script);
-        gBattlescriptCurrInstr = BattleScript_MoveEffectBugBite;
+        RecordBerryRemoval(GetBattlerPartyState(se->effectBattler)->heldItemOrigin, gBattleMons[se->effectBattler].item);
+        DestroyHeldItemForMove(se, BattleScript_MoveEffectBugBite);
     }
 }
 
@@ -745,12 +732,7 @@ static void HandleSetEffectEerieSpell(struct BattleCalcValues *cv, struct SetEff
     if (IsMaxMove(moveToReduce))
         moveToReduce = gBattleStruct->dynamax.baseMoves[se->effectBattler];
 
-    u32 i;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (moveToReduce == gBattleMons[se->effectBattler].moves[i])
-            break;
-    }
+    u32 i = GetMoveSlot(gBattleMons[se->effectBattler].moves, moveToReduce);
 
     if (i != MAX_MON_MOVES && gBattleMons[se->effectBattler].pp[i] != 0)
     {
@@ -760,11 +742,9 @@ static void HandleSetEffectEerieSpell(struct BattleCalcValues *cv, struct SetEff
             ppToDeduct = gBattleMons[se->effectBattler].pp[i];
 
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, moveToReduce)
-        ConvertIntToDecimalStringN(gBattleTextBuff2, ppToDeduct, STR_CONV_MODE_LEFT_ALIGN, 1);
         PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 1, ppToDeduct)
         gBattleMons[se->effectBattler].pp[i] -= ppToDeduct;
-        if (!(gBattleMons[se->effectBattler].volatiles.mimickedMoves & (1u << i))
-            && !(gBattleMons[se->effectBattler].volatiles.transformed))
+        if (MOVE_IS_PERMANENT(se->effectBattler, i))
         {
             BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + i, 0, sizeof(gBattleMons[se->effectBattler].pp[i]), &gBattleMons[se->effectBattler].pp[i]);
             MarkBattlerForControllerExec(se->effectBattler);

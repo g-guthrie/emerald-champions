@@ -557,6 +557,11 @@ static void BattleTest_Run(void *data)
     {
         requiredPartySizes[Test_GetBattlerTrainer(i)] = DATA.currentMonIndexes[i] + 1;
     }
+    // Campaign doubles permit a lone player Pokemon. Keep both opposing
+    // battlers required and let the engine mark the empty player slot absent.
+    if (OW_DOUBLE_APPROACH_WITH_ONE_MON && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+        && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)))
+        requiredPartySizes[B_TRAINER_PLAYER] = 1;
     for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
         if (DATA.partySizes[trainer] < requiredPartySizes[trainer])
@@ -1427,9 +1432,9 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
             u32 moveSlot = GetMoveSlot(gBattleMons[battlerId].moves, moveId);
             PrintAiMoveLog(battlerId, moveSlot, moveId, gAiBattleData->finalScore[battlerId][expectedAction->target][moveSlot]);
             if (countExpected > 1)
-                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVES %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
+                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVES %S, got %S targeting %s", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId), BattlerIdentifier(target));
             else
-                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVE %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
+                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVE %S, got %S targeting %s", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId), BattlerIdentifier(target));
         }
         if (expectedAction->notMove && !movePasses)
         {

@@ -8,12 +8,3 @@ SootopolisCity_PokemonCenter_2F_MapScripts::
 SootopolisCity_PokemonCenter_2F_EventScript_Colosseum::
 	call CableClub_EventScript_Colosseum
 	end
-
-SootopolisCity_PokemonCenter_2F_EventScript_TradeCenter::
-	call CableClub_EventScript_TradeCenter
-	end
-
-SootopolisCity_PokemonCenter_2F_EventScript_RecordCorner::
-	call CableClub_EventScript_RecordCorner
-	end
-

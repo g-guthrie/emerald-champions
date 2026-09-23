@@ -111,10 +111,13 @@ BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge:: @ 824D908
 BattleFrontier_BattlePalaceLobby_EventScript_SinglesAttendant:: @ 824D944
 	lock
 	faceplayer
-	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	goto BattleFrontier_BattlePalaceLobby_EventScript_Attendant
+	msgbox BattleFrontier_BattlePalaceLobby_Text_SinglesClosed, MSGBOX_DEFAULT
+	release
 	end
+
+BattleFrontier_BattlePalaceLobby_Text_SinglesClosed:
+	.string "The SINGLE halls are closed.\n"
+	.string "The DOUBLE counter is open.$"
 
 BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant:: @ 824D956
 	lock
@@ -163,7 +166,6 @@ BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge:: @ 824D9E6
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2, MSGBOX_YESNO
@@ -444,7 +446,7 @@ BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50: @ 824E173
 	.string "Level 50 or lower.\p"
 	.string "They also must not be holding\n"
 	.string "the same kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Come back when you have made\n"
 	.string "your preparations.$"
 
@@ -456,7 +458,7 @@ BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen: @ 824E29E
 	.string "different kinds of Pokémon.\p"
 	.string "They also must not be holding\n"
 	.string "the same kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "EGGS{STR_VAR_1}.\p"
 	.string "Come back when you have made\n"
 	.string "your preparations.$"
 
@@ -488,10 +490,6 @@ BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded: @ 824E4F7
 	.string "I must ask you to briefly wait.$"
 
 @ Unused
-BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak: @ 824E5333
-    .string "For the feat of your 7-win streak,\n"
-    .string "we present you with Battle Point(s).$"
-
 BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize: @ 824E57B
 	.string "You seem to have no space for\n"
 	.string "our prize.\p"
@@ -513,10 +511,6 @@ BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge: @ 824E6
 	.string "disqualified. It is most unfortunate.$"
 
 @ Unused
-BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize: @ 824E6C9
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
-
 BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink: @ 824E6E3
 	.string "For a hardy fellow like me,\n"
 	.string "hardy Pokémon are the best.\p"
@@ -664,4 +658,3 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger: @ 824F3F4
 	.string "nature when it is in trouble.\p"
 	.string "If a Pokémon begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"
-

@@ -220,7 +220,7 @@ static const u8 sText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}?")
 static const u8 sText_DepositedVar2Var1s[] = _("Deposited {STR_VAR_2}\n{STR_VAR_1}.");
 static const u8 sText_NoRoomForItems[] = _("There's no room to\nstore items.");
 static const u8 sText_CantStoreImportantItems[] = _("Important items\ncan't be stored in\nthe PC!");
-static const u8 sText_MegaStoneIsHeld[] = _("A Mega Stone only works when a\nPokémon is holding it in battle.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_MegaStoneIsHeld[] = _("This item only works when a\nPokémon is holding it in battle.{PAUSE_UNTIL_PRESS}");
 
 static void Task_LoadBagSortOptions(u8 taskId);
 static void ItemMenu_SortByName(u8 taskId);
@@ -653,33 +653,33 @@ void QuizLadyOpenBagMenu(void)
 
 void GoToBagMenu(u8 location, u8 pocket, MainCallback exitCallback)
 {
-    gBagMenu = AllocZeroed(sizeof(*gBagMenu));
+    gBagMenu = AllocZeroedUnchecked(sizeof(*gBagMenu));
     if (gBagMenu == NULL)
     {
-        // Alloc failed, exit
-        SetMainCallback2(exitCallback);
+        // Reopening the last pocket passes NULL to retain its return path.
+        // Report "nothing chosen" so no caller acts on a stale item.
+        gSpecialVar_ItemId = ITEM_NONE;
+        SetMainCallback2(exitCallback ? exitCallback : gBagPosition.exitCallback);
+        return;
     }
-    else
-    {
-        if (location != ITEMMENULOCATION_LAST)
-            gBagPosition.location = location;
-        if (exitCallback)
-            gBagPosition.exitCallback = exitCallback;
-        if (pocket < POCKETS_COUNT)
-            gBagPosition.pocket = pocket;
-        if (gBagPosition.location == ITEMMENULOCATION_BERRY_TREE
-         || gBagPosition.location == ITEMMENULOCATION_BERRY_BLENDER_CRUSH
-         || gBagPosition.location == ITEMMENULOCATION_BERRY_TREE_MULCH
-         || gBagPosition.location == ITEMMENULOCATION_RAIDEND)
-            gBagMenu->pocketSwitchDisabled = TRUE;
-        gBagMenu->newScreenCallback = NULL;
-        gBagMenu->toSwapPos = NOT_SWAPPING;
-        gBagMenu->pocketScrollArrowsTask = TASK_NONE;
-        gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
-        memset(gBagMenu->spriteIds, SPRITE_NONE, sizeof(gBagMenu->spriteIds));
-        memset(gBagMenu->windowIds, WINDOW_NONE, sizeof(gBagMenu->windowIds));
-        SetMainCallback2(CB2_Bag);
-    }
+    if (location != ITEMMENULOCATION_LAST)
+        gBagPosition.location = location;
+    if (exitCallback)
+        gBagPosition.exitCallback = exitCallback;
+    if (pocket < POCKETS_COUNT)
+        gBagPosition.pocket = pocket;
+    if (gBagPosition.location == ITEMMENULOCATION_BERRY_TREE
+     || gBagPosition.location == ITEMMENULOCATION_BERRY_BLENDER_CRUSH
+     || gBagPosition.location == ITEMMENULOCATION_BERRY_TREE_MULCH
+     || gBagPosition.location == ITEMMENULOCATION_RAIDEND)
+        gBagMenu->pocketSwitchDisabled = TRUE;
+    gBagMenu->newScreenCallback = NULL;
+    gBagMenu->toSwapPos = NOT_SWAPPING;
+    gBagMenu->pocketScrollArrowsTask = TASK_NONE;
+    gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
+    memset(gBagMenu->spriteIds, SPRITE_NONE, sizeof(gBagMenu->spriteIds));
+    memset(gBagMenu->windowIds, WINDOW_NONE, sizeof(gBagMenu->windowIds));
+    SetMainCallback2(CB2_Bag);
 }
 
 void CB2_BagMenuRun(void)
@@ -1855,7 +1855,7 @@ static void ItemMenu_UseOutOfBattle(u8 taskId)
     if (GetItemFieldFunc(gSpecialVar_ItemId))
     {
         RemoveContextWindow();
-        // A Mega Stone has no field use; say what it is for instead of DAD's advice.
+        // Mega Stones and Primal Orbs have no field use; say what they're for.
         if (gBagPosition.pocket == POCKET_MEGA_STONES)
         {
             FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
@@ -1960,6 +1960,20 @@ static void ConfirmToss(u8 taskId)
         gTasks[taskId].func = Task_TossItemFromBag;
 }
 
+// Rebuild the current pocket after removing items, preserving its cursor.
+static void RefreshBagListAfterRemoval(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+
+    DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
+    UpdatePocketItemList(gBagPosition.pocket);
+    UpdatePocketListPosition(gBagPosition.pocket);
+    LoadBagItemListBuffers(gBagPosition.pocket);
+    tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+}
+
 static void Task_TossItemFromBag(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -1970,11 +1984,7 @@ static void Task_TossItemFromBag(u8 taskId)
     {
         PlaySE(SE_SELECT);
         RemoveBagItemFromSlot(&gBagPockets[gBagPosition.pocket], *scrollPos + *cursorPos, tItemCount);
-        DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
-        UpdatePocketItemList(gBagPosition.pocket);
-        UpdatePocketListPosition(gBagPosition.pocket);
-        LoadBagItemListBuffers(gBagPosition.pocket);
-        tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+        RefreshBagListAfterRemoval(taskId);
         ScheduleBgCopyTilemapToVram(0);
         ReturnToItemList(taskId);
     }
@@ -1985,18 +1995,12 @@ static void Task_TossItemFromBag(u8 taskId)
 static void Task_RemoveItemFromBag(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
         PlaySE(SE_SELECT);
         RemoveBagItem(gSpecialVar_ItemId, tItemCount);
-        DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
-        UpdatePocketItemList(gBagPosition.pocket);
-        UpdatePocketListPosition(gBagPosition.pocket);
-        LoadBagItemListBuffers(gBagPosition.pocket);
-        tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+        RefreshBagListAfterRemoval(taskId);
         ScheduleBgCopyTilemapToVram(0);
         ReturnToItemList(taskId);
     }
@@ -2234,6 +2238,9 @@ bool8 UseRegisteredKeyItemOnField(enum RegisterButton button)
         else
         {
             *registeredItemPtr = ITEM_NONE;
+            // L/R only act when bound; an emptied binding frees the press.
+            if (button != REGISTER_BUTTON_SELECT)
+                return FALSE;
         }
     }
     ScriptContext_SetupScript(EventScript_SelectWithoutRegisteredItem);
@@ -2346,17 +2353,11 @@ static void ConfirmSell(u8 taskId)
 static void SellItem(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
-    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
 
     PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, tItemCount);
     AddMoney(&gSaveBlock1Ptr->money, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
-    DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
-    UpdatePocketItemList(gBagPosition.pocket);
-    UpdatePocketListPosition(gBagPosition.pocket);
-    LoadBagItemListBuffers(gBagPosition.pocket);
-    tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+    RefreshBagListAfterRemoval(taskId);
     BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
     PrintMoneyAmountInMoneyBox(gBagMenu->windowIds[ITEMWIN_MONEY], GetMoney(&gSaveBlock1Ptr->money), 0);
     gTasks[taskId].func = WaitAfterItemSell;
@@ -2513,9 +2514,7 @@ void DoWallyTutorialBagMenu(void)
 
 void InitOldManBag(void)
 {
-    PrepareBagForWallyTutorial();
-    AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS - 1, CB2_SetUpReshowBattleScreenAfterMenu2);
+    DoWallyTutorialBagMenu();
 }
 
 #define tTimer data[8]

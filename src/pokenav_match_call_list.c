@@ -292,22 +292,9 @@ mapsec_u16_t GetMatchCallMapSec(int index)
     return state->matchCallEntries[index].mapSec;
 }
 
-bool32 ShouldDrawRematchPokeballIcon(int index)
+bool32 ShouldDrawRematchPokeballIcon(int index UNUSED)
 {
-#if FREE_MATCH_CALL == FALSE
-    struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
-    if (!state->matchCallEntries[index].isSpecialTrainer)
-        index = state->matchCallEntries[index].headerId;
-    else
-        index = MatchCall_GetRematchTableIdx(state->matchCallEntries[index].headerId);
-
-    if (index == REMATCH_TABLE_ENTRIES)
-        return FALSE;
-
-    return gSaveBlock1Ptr->trainerRematches[index] != 0;
-#else
     return FALSE;
-#endif //FREE_MATCH_CALL
 }
 
 enum TrainerPicID GetMatchCallTrainerPic(int index)

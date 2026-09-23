@@ -4,12 +4,25 @@
 LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 81FFAFA
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_PokemonCenter_1F_OnFrame
 	.byte 0
 
 LavaridgeTown_PokemonCenter_1F_OnTransition: @ 81FFB05
 	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
 	call Common_EventScript_UpdateBrineyLocation
+	goto_if_ne VAR_LAVARIDGE_LUCY_STATE, 0, LavaridgeTown_PokemonCenter_1F_EndTransition
+	setflag FLAG_HIDE_LAVARIDGE_POKECENTER_LUCY
+	@ The forced doorway step does not run the coordinate event at (2, 2).
+	getplayerxy VAR_0x8004, VAR_0x8005
+	goto_if_ne VAR_0x8004, 2, LavaridgeTown_PokemonCenter_1F_EndTransition
+	goto_if_ne VAR_0x8005, 1, LavaridgeTown_PokemonCenter_1F_EndTransition
+	setvar VAR_TEMP_0, 1
+LavaridgeTown_PokemonCenter_1F_EndTransition:
 	end
+
+LavaridgeTown_PokemonCenter_1F_OnFrame:
+	map_script_2 VAR_TEMP_0, 1, LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger
+	.2byte 0
 
 LavaridgeTown_PokemonCenter_1F_EventScript_Nurse:: @ 81FFB0E
 	setvar VAR_0x800B, LOCALID_NURSE
@@ -94,6 +107,7 @@ LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughSpace::
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger::
+	setvar VAR_TEMP_0, 0
 	lock
 	addobject LOCALID_LUCY
 	setvar VAR_LAVARIDGE_LUCY_STATE, 1
@@ -110,8 +124,15 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger::
 	compare VAR_RESULT, NO
 	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
+	goto_if_defeated TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyBattle, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
+LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
+	setvar VAR_0x8004, ITEM_CHOICE_BAND
+	setvar VAR_0x8005, 3
+	specialvar VAR_RESULT, CanReceiveFrontierReward
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_LAVARIDGE_LUCY_STATE, 2
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand, MSGBOX_DEFAULT
 	giveitem ITEM_CHOICE_BAND
@@ -128,6 +149,7 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_Lucy::
+	lock
 	applymovement LOCALID_LUCY, Common_Movement_FacePlayer
 	waitmovement 0
 	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle
@@ -199,8 +221,9 @@ LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk:
 	.string "Moomoo Milk?\p"
 	.string "It's great before entering the\n"
 	.string "hot spring!\p"
-	.string "And even better afterward.\n"
-	.string "How about some?$"
+	.string "And even better afterward.\p"
+	.string "It's ¥500 a bottle, or ¥6,000\n"
+	.string "for a dozen. How about some?$"
 
 LavaridgeTown_PokemonCenter_1F_Text_ThatsTooBad:
 	.string "Well, now I feel udder-ly useless!$"

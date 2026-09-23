@@ -940,7 +940,8 @@ static u8 AddScrollIndicatorArrowObject(u8 arrowDir, u8 x, u8 y, u16 tileTag, u1
     spriteTemplate.tileTag = tileTag;
     spriteTemplate.paletteTag = palTag;
 
-    spriteId = CreateSprite(&spriteTemplate, x, y, 0);
+    spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, x, y, 0);
+    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].tState = 0;
     gSprites[spriteId].tAnimNum = sScrollIndicatorTemplates[arrowDir].animNum;
@@ -1241,7 +1242,8 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
     spriteTemplate.tileTag = cursor->tileTag;
     spriteTemplate.paletteTag = cursor->palTag;
 
-    data->spriteId = CreateSprite(&spriteTemplate, cursor->left + 120, cursor->top + 120, 0);
+    data->spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, cursor->left + 120, cursor->top + 120, 0);
+    fatal_assertf(data->spriteId < MAX_SPRITES, "Out of sprite slots");
     SetSubspriteTables(&gSprites[data->spriteId], &data->subspriteTable);
     gSprites[data->spriteId].oam.priority = 0;
     gSprites[data->spriteId].subpriority = 0;
@@ -1323,7 +1325,8 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
     spriteTemplate.tileTag = cursor->tileTag;
     spriteTemplate.paletteTag = cursor->palTag;
 
-    data->spriteId = CreateSprite(&spriteTemplate, cursor->left, cursor->top, 0);
+    data->spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, cursor->left, cursor->top, 0);
+    fatal_assertf(data->spriteId < MAX_SPRITES, "Out of sprite slots");
     gSprites[data->spriteId].x2 = 8;
     gSprites[data->spriteId].y2 = 8;
 

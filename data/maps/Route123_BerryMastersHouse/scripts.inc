@@ -9,23 +9,57 @@ Route123_BerryMastersHouse_OnTransition: @ 826F841
 Route123_BerryMastersHouse_EventScript_BerryMaster:: @ 826F845
 	lock
 	faceplayer
+	message Route123_BerryMastersHouse_Text_GardenWelcome
+	waitmessage
+	dynmultipush Route123_BerryMastersHouse_Text_BerryGifts, 0
+	dynmultipush Route123_BerryMastersHouse_Text_HarvestRewards, 1
+	dynmultipush Route123_BerryMastersHouse_Text_Leave, 2
+	dynmultistack 8, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, 0, Route123_BerryMastersHouse_EventScript_DailyBerries
+	goto_if_eq VAR_RESULT, 1, Route123_BerryMastersHouse_EventScript_HarvestRewards
+	release
+	end
+
+@ The Harvest Pouch sends players here to trade harvested berries for rewards.
+Route123_BerryMastersHouse_EventScript_HarvestRewards:
+	setvar VAR_0x8009, 1
+	call EmeraldChampions_EventScript_HarvestMenu
+	release
+	end
+
+Route123_BerryMastersHouse_Text_GardenWelcome:
+	.string "A good garden always has something\n"
+	.string "to share. What brings you here?$"
+
+Route123_BerryMastersHouse_Text_BerryGifts:
+	.string "Berry gifts$"
+
+Route123_BerryMastersHouse_Text_HarvestRewards:
+	.string "Harvest rewards$"
+
+Route123_BerryMastersHouse_Text_Leave:
+	.string "See you later$"
+
+Route123_BerryMastersHouse_EventScript_DailyBerries:
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_ReceivedBerryToday
 	msgbox Route123_BerryMastersHouse_Text_YoureDeservingOfBerry, MSGBOX_DEFAULT
 	random NUM_BERRY_MASTER_BERRIES
 	addvar VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem VAR_RESULT
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
-	msgbox Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother, MSGBOX_DEFAULT
+	copyvar VAR_0x8008, VAR_RESULT
 	random NUM_BERRY_MASTER_BERRIES
 	addvar VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem VAR_RESULT
+	copyvar VAR_0x8009, VAR_RESULT
+	specialvar VAR_RESULT, CanReceiveBerryPair
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
+	giveitem VAR_0x8008
+	msgbox Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother, MSGBOX_DEFAULT
+	giveitem VAR_0x8009
+	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
 	msgbox Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop, MSGBOX_DEFAULT
 	release
 	end

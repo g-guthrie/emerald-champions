@@ -78,7 +78,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowExhibitHall:: @ 8219808
 	applymovement OBJ_EVENT_ID_PLAYER, LilycoveCity_LilycoveMuseum_2F_Movement_PlayerWalkInPlaceLeft
 	waitmovement 0
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit, MSGBOX_SIGN
-	copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
+	setvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
 	releaseall
 	end
 
@@ -183,38 +183,39 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy:: @ 821999C
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PaintingNotOnDisplay, MSGBOX_SIGN
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+	fadescreen FADE_TO_BLACK
+	showcontestpainting CONTEST_WINNER_MUSEUM_COOL
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PaintingNotOnDisplay, MSGBOX_SIGN
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+	fadescreen FADE_TO_BLACK
+	showcontestpainting CONTEST_WINNER_MUSEUM_BEAUTY
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PaintingNotOnDisplay, MSGBOX_SIGN
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+	fadescreen FADE_TO_BLACK
+	showcontestpainting CONTEST_WINNER_MUSEUM_CUTE
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PaintingNotOnDisplay, MSGBOX_SIGN
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+	fadescreen FADE_TO_BLACK
+	showcontestpainting CONTEST_WINNER_MUSEUM_SMART
 	releaseall
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_PaintingNotOnDisplay, MSGBOX_SIGN
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+	fadescreen FADE_TO_BLACK
+	showcontestpainting CONTEST_WINNER_MUSEUM_TOUGH
 	releaseall
 	end
-
-@ Emerald Champions: Pokemon Contests are retired (src/contest.c is gone), so the
-@ contest-painting viewer no longer exists. The FLAG_*_PAINTING_MADE flags can
-@ never be set now, so the frames on the wall always read as empty; these scripts
-@ are kept for the unreachable case and describe the empty frame instead.
-LilycoveCity_LilycoveMuseum_2F_Text_PaintingNotOnDisplay:
-	.string "The frame is empty.\p"
-	.string "The painting that belongs here is\n"
-	.string "not on display.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall: @ 82199EB
 	.string "This is our special exhibit hall.$"

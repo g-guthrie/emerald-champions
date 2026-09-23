@@ -1,10 +1,7 @@
 General_Mart_Script::
 	lock
 	faceplayer
-	goto_if_set FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS, General_Mart_ChooseService
-	special GiveEmeraldChampionsStarterBattleItems
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_StarterItemsBagFull
-	msgbox EmeraldChampions_Text_BattleVendorStarterKit, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_TryStarterKit
 General_Mart_ChooseService:
 	message gText_HowMayIServeYou
 	waitmessage
@@ -38,6 +35,7 @@ General_Mart_Supplies::
 	release
 	end
 
+	.align 2
 PokeMart_Poke_Center_No_Badges::
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE

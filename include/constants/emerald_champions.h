@@ -1,14 +1,20 @@
 #ifndef GUARD_CONSTANTS_EMERALD_CHAMPIONS_H
 #define GUARD_CONSTANTS_EMERALD_CHAMPIONS_H
 
+#define EC_FINALE_LEAGUE 0
+#define EC_FINALE_WALLY 1
+#define EC_FINALE_VOYAGE 2
+#define EC_FINALE_STEVEN 3
+#define EC_FINALE_DEOXYS 4
+#define EC_FINALE_BUFFEL 5
+#define EC_FINALE_COMPLETE 6
+
 #define EC_TRAINING_EVS 0
 #define EC_TRAINING_IVS 1
 
 #define EC_SOOT_TOTAL_MASK 0x7FFF
-#define EC_SOOT_CORD_RECEIVED 0x8000
-#define EC_SOOT_CORD_TARGET 100
+#define EC_SOOT_CORD_RECEIVED 0x8000 // Reserved receipt bit from the retired soot reward tiers.
 #define EC_SOOT_MARSHADOW_TARGET 250
-#define EC_SOOT_MEGA_TARGET 500
 
 
 #define EC_BATTLE_SET_FAILED                 0
@@ -27,8 +33,7 @@
 #define EC_BATTLE_ITEM_CATEGORY_TYPE 3
 #define EC_BATTLE_ITEM_CATEGORY_GEM 4
 #define EC_BATTLE_ITEM_CATEGORY_SPECIES 5
-#define EC_BATTLE_ITEM_CATEGORY_BERRIES 6
-#define EC_BATTLE_ITEM_CATEGORY_COUNT 7
+#define EC_BATTLE_ITEM_CATEGORY_COUNT 6
 // Bounds the vendor's filtered stock buffer; the widest non-berry category.
 #define EC_BATTLE_ITEM_MAX_CATEGORY 40
 
@@ -36,8 +41,6 @@
 #define EC_OPENING_UNSELECTED                 0
 #define EC_OPENING_PAIR_GRANTED               1
 #define EC_OPENING_RESCUE_WON                 2
-#define EC_OPENING_PRE_RIVAL_READY            3
-#define EC_OPENING_COMPLETE                  4
 
 #define EMERALD_CHAMPIONS_MEGA_ONLY          TRUE
 

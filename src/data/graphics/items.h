@@ -1969,8 +1969,6 @@ const u16 gItemIconPalette_ScrollOfWaters[] = INCGFX_U16("graphics/items/icon_pa
 const u32 gItemIcon_TinyBambooShoot[] = INCGFX_U32("graphics/items/icons/tiny_bamboo_shoot.png", ".4bpp.smol");
 const u16 gItemIconPalette_TinyBambooShoot[] = INCGFX_U16("graphics/items/icon_palettes/tiny_bamboo_shoot.pal", ".gbapal");
 
-// Tera Shards
-
 // Mochi
 
 const u32 gItemIcon_Mochi[] = INCGFX_U32("graphics/items/icons/mochi.png", ".4bpp.smol");

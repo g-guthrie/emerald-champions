@@ -63,7 +63,7 @@ def field_move_gate(move):
     # also checks the received-HM license; a badge alone does not certify use.
     return " + ".join([badges[-1] if badges else "badge UNKNOWN",
                        license[1] if license else "license UNKNOWN",
-                       "eligible field-move user"])
+                       "player unlock; no compatible party or learned move required"])
 
 rod_gifts = collections.defaultdict(list)
 for m in maps:
@@ -138,7 +138,14 @@ def base_species_of_stone(item):
 
 rows = []; mismatches = []
 for m in maps:
-    j = json.load(open(ROOT/"data/maps"/m/"map.json"))
+    j = map_data[m]
+    event_sources = {m}
+    while "shared_events_map" in j:
+        source = j["shared_events_map"]
+        if source in event_sources:
+            raise ValueError(f"{m}: shared map event cycle through {source}")
+        event_sources.add(source)
+        j = map_data[source]
     for o in j["object_events"]:
         item = str(o.get("trainer_sight_or_berry_tree_id", ""))
         is_stone_item = item in stone_desc

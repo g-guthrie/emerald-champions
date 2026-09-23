@@ -16,13 +16,6 @@ FortreeCity_Gym_EventScript_InitRotatingGates:: @ 82165C4
 	end
 
 FortreeCity_Gym_EventScript_Winona:: @ 82165C8
-@ Emerald Champions: Inclement's Gym-leader rematch ladder is restored in script but
-@ its teams are not authored yet, and these _2.._5 trainer slots were recycled by EC
-@ for bespoke campaign fights -- so post-game rematching a leader would start the
-@ WRONG trainer's team (e.g. Wattson_2 is Courtney's Magma Hideout party) or an empty
-@ one. The gate below is disabled so leaders fall through to normal post-battle
-@ dialogue. To re-enable once real rematch teams exist, restore this single line.
-@	goto_if_set FLAG_SYS_GAME_CLEAR, FortreeCity_Gym_EventScript_WinonaRematch
 	trainerbattle_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, EmeraldChampions_Text_NeedTwoPokemon, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM51, FortreeCity_Gym_EventScript_GiveRoost2
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
@@ -63,55 +56,6 @@ FortreeCity_Gym_EventScript_GiveRoost:: @ 821666A
 	setflag FLAG_RECEIVED_TM51
 	return
 
-FortreeCity_Gym_EventScript_WinonaRematch::
-	message FortreeCity_Gym_Text_WinonaChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, FortreeCity_Gym_EventScript_SetSingles
-	case 1, FortreeCity_Gym_EventScript_SetDoubles
-	case 2, FortreeCity_Gym_EventScript_Exit
-	case 127, FortreeCity_Gym_EventScript_Exit
-	releaseall
-	end
-
-FortreeCity_Gym_EventScript_SetSingles::
-	msgbox FortreeCity_Gym_Text_WinonaAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WINONA
-	releaseall
-	end
-
-FortreeCity_Gym_EventScript_SetDoubles::
-	msgbox FortreeCity_Gym_Text_WinonaAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WINONA
-	releaseall
-	end
-
-FortreeCity_Gym_EventScript_WinonaSinglesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WINONA
-	releaseall
-	end
-
-FortreeCity_Gym_EventScript_WinonaDoublesRematch::
-	@ This retired encounter has no campaign battle.
-	setflag FLAG_DAILY_REMATCH_WINONA
-	releaseall
-	end
-
-FortreeCity_Gym_EventScript_AlreadyRematched::
-	msgbox FortreeCity_Gym_Text_WinonaPostRematch, MSGBOX_AUTOCLOSE
-	releaseall
-	end
-
-FortreeCity_Gym_EventScript_Exit::
-	releaseall
-	end
-
 FortreeCity_Gym_EventScript_Jared:: @ 82166A8
 	trainerbattle_double TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox FortreeCity_Gym_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
@@ -149,6 +93,8 @@ FortreeCity_Gym_EventScript_GymGuide:: @ 8216732
 	goto_if_set FLAG_MOVE_FORTREE_GYM_ENERGY_ROOT, FortreeCity_GymGuide_2
 	msgbox FortreeCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	giveitem ITEM_ENERGY_ROOT, 10
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_MOVE_FORTREE_GYM_ENERGY_ROOT
 	msgbox FortreeCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -311,24 +257,18 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge: @ 8216EEC
 	.string "from Winona.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis: @ 8216F17
-	.string "With the Feather Badge, all Pokémon up\n"
-	.string "to LV 80, even those received through\l"
-	.string "trades, will obey your every command.\p"
+	.string "The Feather Badge and the Fly\n"
+	.string "license your rival gave you let you\l"
+	.string "fly to towns you've visited.\p"
+	.string "The Flight Beacon can call a flier\n"
+	.string "from your party or PC!\p"
 	.string "And this…\n"
 	.string "This is a gift from me.$"
 
 FortreeCity_Gym_Text_ExplainRoost: @ 8216FEC
-	.string "Roost…\p"
-	.string "With this move, the user can restore its\n"
-	.string "HP by up to half of its max HP by\l"
-	.string "landing on the ground and resting.\p"
-	.string "However, the user loses its Flying-type\n"
-	.string "designation during the turn, so be\l"
-	.string "cautious.$"
-
-FortreeCity_Gym_Text_RegisteredWinona: @ 8217044
-	.string "Registered Gym Leader Winona\n"
-	.string "in the PokéNav.$"
+	.string "This is Staraptite. A Staraptor\n"
+	.string "holding it can Mega Evolve with\l"
+	.string "your Mega Ring.$"
 
 FortreeCity_Gym_Text_WinonaPostBattle: @ 8217071
 	.string "Though I fell to you, I will remain\n"
@@ -341,39 +281,3 @@ FortreeCity_Gym_Text_GymStatueCertified: @ 82170C7
 	.string "Fortree City Pokémon Gym\p"
 	.string "Winona's Certified Trainers:\n"
 	.string "{PLAYER}$"
-
-FortreeCity_Gym_Text_WinonaPreRematch: @ 8217100
-	.string "Winona: Please, allow me to see your\n"
-	.string "power at full flight!$"
-
-FortreeCity_Gym_Text_WinonaRematchDefeat: @ 82171E6
-	.string "I failed to reach your height again…$"
-
-FortreeCity_Gym_Text_WinonaPostRematch: @ 821720B
-	.string "Winona: Even though I have lost,\n"
-	.string "the wings of my heart remain unbroken.\p"
-	.string "I can rise and soar again and\n"
-	.string "yet again.\p"
-	.string "I am convinced of it!$"
-
-FortreeCity_Gym_Text_WinonaRematchNeedTwoMons: @ 8217292
-	.string "Oh, no… Do you have but one\n"
-	.string "Pokémon with you?\p"
-	.string "Please return with two Pokémon\n"
-	.string "at the very least.$"
-
-FortreeCity_Gym_Text_WinonaChooseFormat:
-	.string "Winona: We humans can never escape\n"
-	.string "gravity's pull on the ground.\p"
-	.string "But by striving for excellence,\n"
-	.string "we have the power to soar!\p"
-	.string "You have scaled the pinnacle as\n"
-	.string "the reigning Champion.\p"
-	.string "Please, allow me to see your power\n"
-	.string "at full flight!\p"
-	.string "Now, please tell me - how would you\n"
-	.string "like to battle?$"
-
-FortreeCity_Gym_Text_WinonaAllowLegends:
-	.string "Winona: and would you like to challenge\n"
-	.string "my Legendary Pokémon?$"

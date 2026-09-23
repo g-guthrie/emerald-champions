@@ -10,35 +10,9 @@ MoveRelearner_EventScript_TeachAllMoves::
 	goto MoveRelearner_EventScript_TeachMove
 	end
 
-Common_EventScript_MoveRelearnerDynMultiChoice::
-	dynmultipush MoveRelearner_Text_LevelUpMoves, 0
-	dynmultipush MoveRelearner_Text_EggMoves, 1
-	dynmultipush MoveRelearner_Text_SeeYa, 2
-	dynmultistack 0, 0, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	switch VAR_RESULT
-	case 0, MoveRelearner_EventScript_TeachLevelUpMoves
-	case 1, MoveRelearner_EventScript_TeachEggMoves
-	case 2, MoveRelearner_EventScript_PleaseComeAgain
 MoveRelearner_EventScript_PleaseComeAgain:
 	msgbox MoveRelearner_Text_ThankYouComeAgain, MSGBOX_DEFAULT
 	releaseall
-	end
-
-MoveRelearner_EventScript_PushEggMoves:
-	dynmultipush MoveRelearner_Text_EggMoves, 1
-	return
-
-MoveRelearner_EventScript_TeachLevelUpMoves:
-	setmoverelearnerstate MOVE_RELEARNER_LEVEL_UP_MOVES
-	bufferstring STR_VAR_3, MoveRelearner_Text_LevelUpMoveLWR
-	goto MoveRelearner_EventScript_TeachMove
-	end
-
-MoveRelearner_EventScript_TeachEggMoves:
-	setmoverelearnerstate MOVE_RELEARNER_EGG_MOVES
-	bufferstring STR_VAR_3, MoveRelearner_Text_EggMoveLWR
-	goto MoveRelearner_EventScript_TeachMove
 	end
 
 MoveRelearner_EventScript_TeachMove::

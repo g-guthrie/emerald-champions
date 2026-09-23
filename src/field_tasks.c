@@ -762,6 +762,25 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
 #define tPrevX data[1]
 #define tPrevY data[2]
 
+static void CollectAsh(void)
+{
+    if (!CheckBagHasItem(ITEM_SOOT_SACK, 1))
+        return;
+    u16 ash = VarGet(VAR_ASH_GATHER_COUNT);
+    u16 progress = VarGet(VAR_EC_SOOT_PROGRESS);
+    if (ash < 9999)
+        VarSet(VAR_ASH_GATHER_COUNT, ash + 1);
+    if ((progress & EC_SOOT_TOTAL_MASK) < 9999)
+        VarSet(VAR_EC_SOOT_PROGRESS, progress + 1);
+}
+
+#if TESTING
+void Test_CollectAsh(void)
+{
+    CollectAsh();
+}
+#endif
+
 static void AshGrassPerStepCallback(u8 taskId)
 {
     s16 x, y;
@@ -782,13 +801,7 @@ static void AshGrassPerStepCallback(u8 taskId)
         else
             StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass, 4);
 
-        // Try to gather ash
-        if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
-        {
-            u16 progress = VarGet(VAR_EC_SOOT_PROGRESS);
-            if ((progress & EC_SOOT_TOTAL_MASK) < 9999)
-                VarSet(VAR_EC_SOOT_PROGRESS, progress + 1);
-        }
+        CollectAsh();
     }
 }
 

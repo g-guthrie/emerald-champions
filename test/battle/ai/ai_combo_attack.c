@@ -8,6 +8,8 @@ AI_DOUBLE_BATTLE_TEST("Combo Attack: Round will not be incentivised on lower bat
         ASSUME(GetMoveEffect(MOVE_ROUND) == EFFECT_ROUND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_POWERFUL_STATUS);
         TIE_BREAK_TARGET(TARGET_TIE_LO,0);
+        // Every attack into a full-HP Wobbuffet is chip (>= NEGLIGIBLE_DAMAGE_HITS)
+        // and carries BAD_EFFECT.
         PLAYER(SPECIES_WOBBUFFET) { Speed(6); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ROUND, MOVE_TRI_ATTACK); Speed(4); }
@@ -16,10 +18,10 @@ AI_DOUBLE_BATTLE_TEST("Combo Attack: Round will not be incentivised on lower bat
         TURN {
             EXPECT_MOVE(opponentLeft, MOVE_TRI_ATTACK, target:playerLeft);
             EXPECT_MOVE(opponentRight, MOVE_TAILWIND);
-            SCORE_EQ_VAL(opponentLeft, MOVE_TRI_ATTACK, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE, target:playerLeft);
+            SCORE_EQ_VAL(opponentLeft, MOVE_TRI_ATTACK, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BAD_EFFECT, target:playerLeft);
             SCORE_EQ_VAL(opponentRight, MOVE_TAILWIND, AI_SCORE_DEFAULT + POWERFUL_STATUS_MOVE + 4, target:playerLeft); // + 4 from "regular" Tailwind AI
-            SCORE_EQ_VAL(opponentLeft, MOVE_ROUND, AI_SCORE_DEFAULT, target:playerLeft);
-            SCORE_EQ_VAL(opponentRight, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BEST_EFFECT, target:playerLeft);
+            SCORE_EQ_VAL(opponentLeft, MOVE_ROUND, AI_SCORE_DEFAULT + BAD_EFFECT, target:playerLeft);
+            SCORE_EQ_VAL(opponentRight, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BEST_EFFECT + BAD_EFFECT, target:playerLeft);
         }
     }
 }
@@ -30,8 +32,10 @@ AI_DOUBLE_BATTLE_TEST("Combo Attack: Round is incentivised over higher damaging 
         ASSUME(GetMoveEffect(MOVE_ROUND) == EFFECT_ROUND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         TIE_BREAK_TARGET(TARGET_TIE_LO,0);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
+        // 90 HP keeps both attacks 3HKOs rather than chip. At full HP the chip
+        // penalty lands on foe targets only, and Round into the partner outscores them.
+        PLAYER(SPECIES_WOBBUFFET) { HP(90); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(90); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ROUND, MOVE_TRI_ATTACK); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ROUND, MOVE_TRI_ATTACK); }
     } WHEN {
@@ -40,8 +44,8 @@ AI_DOUBLE_BATTLE_TEST("Combo Attack: Round is incentivised over higher damaging 
             EXPECT_MOVE(opponentRight, MOVE_ROUND, target:playerLeft);
             SCORE_GT(opponentLeft, MOVE_ROUND, MOVE_TRI_ATTACK, target:playerLeft);
             SCORE_GT(opponentRight, MOVE_ROUND, MOVE_TRI_ATTACK, target:playerLeft);
-            SCORE_EQ_VAL(opponentLeft, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_EFFECT, target:playerLeft);
-            SCORE_EQ_VAL(opponentRight, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_EFFECT, target:playerLeft);
+            SCORE_EQ_VAL(opponentLeft, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BEST_EFFECT, target:playerLeft);
+            SCORE_EQ_VAL(opponentRight, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BEST_EFFECT, target:playerLeft);
             SCORE_EQ_VAL(opponentLeft, MOVE_TRI_ATTACK, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE, target:playerLeft);
             SCORE_EQ_VAL(opponentRight, MOVE_TRI_ATTACK, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE, target:playerLeft);
         }
@@ -54,6 +58,8 @@ AI_DOUBLE_BATTLE_TEST("Combo Attack: Round is not disincentivised due to partner
         ASSUME(GetMoveEffect(MOVE_ROUND) == EFFECT_ROUND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         TIE_BREAK_TARGET(TARGET_TIE_LO,0);
+        // Every attack into a full-HP Wobbuffet is chip (>= NEGLIGIBLE_DAMAGE_HITS)
+        // and carries BAD_EFFECT.
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ROUND, MOVE_SCRATCH); Speed(4); }
@@ -62,9 +68,9 @@ AI_DOUBLE_BATTLE_TEST("Combo Attack: Round is not disincentivised due to partner
         TURN {
             EXPECT_MOVE(opponentLeft, MOVE_ROUND, target:playerLeft);
             EXPECT_MOVE(opponentRight, MOVE_SCRATCH, target:playerLeft);
-            SCORE_EQ_VAL(opponentLeft, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE, target:playerLeft);
-            SCORE_EQ_VAL(opponentRight, MOVE_SCRATCH, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE, target:playerLeft);
-            SCORE_EQ_VAL(opponentLeft, MOVE_SCRATCH, AI_SCORE_DEFAULT, target:playerLeft);
+            SCORE_EQ_VAL(opponentLeft, MOVE_ROUND, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BAD_EFFECT, target:playerLeft);
+            SCORE_EQ_VAL(opponentRight, MOVE_SCRATCH, AI_SCORE_DEFAULT + BEST_DAMAGE_MOVE + BAD_EFFECT, target:playerLeft);
+            SCORE_EQ_VAL(opponentLeft, MOVE_SCRATCH, AI_SCORE_DEFAULT + BAD_EFFECT, target:playerLeft);
         }
     }
 }

@@ -293,6 +293,7 @@ TEST("togglegigantamaxfactor fails for Melmetal")
 TEST("givemon [simple]")
 {
     ZeroPlayerPartyMons();
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100;
@@ -305,23 +306,34 @@ TEST("givemon [simple]")
 TEST("givemon respects FORM_CHANGE_ITEM_HOLD")
 {
     ZeroPlayerPartyMons();
-
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_ARCEUS_NORMAL, 100, item=ITEM_ZAP_PLATE;
+    );
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
+
+    ZeroPlayerPartyMons();
+    RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_ARCEUS_GRASS, 100, item=ITEM_ZAP_PLATE;
+    );
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
+
+    ZeroPlayerPartyMons();
+    RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_ARCEUS_ELECTRIC, 100, item=ITEM_ZAP_PLATE;
+    );
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
+
+    ZeroPlayerPartyMons();
+    RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_GIRATINA_ORIGIN, 100, item=ITEM_POTION;
     );
-
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_SPECIES), SPECIES_GIRATINA_ALTERED);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_GIRATINA_ALTERED);
 }
 
 TEST("givemon [moves]")
 {
     ZeroPlayerPartyMons();
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_NONE, move4=MOVE_NONE;
@@ -342,6 +354,7 @@ TEST("givemon [moves]")
 TEST("givemon [moves (default)]")
 {
     ZeroPlayerPartyMons();
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_PYUKUMUKU, 100, move1=MOVE_DEFAULT, move2=MOVE_DEFAULT, move3=MOVE_DEFAULT;
@@ -368,6 +381,7 @@ TEST("givemon [moves (default)]")
 TEST("givemon [all]")
 {
     ZeroPlayerPartyMons();
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, dmaxLevel=7;
@@ -408,6 +422,7 @@ TEST("givemon [all]")
 TEST("givemon [egg]: properties are preserved after hatching")
 {
     ZeroPlayerPartyMons();
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, dmaxLevel=7, isEgg=TRUE;
@@ -461,6 +476,7 @@ TEST("givemon [egg]: properties are preserved after hatching")
 TEST("givemon [vars]")
 {
     ZeroPlayerPartyMons();
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
 
     VarSet(VAR_TEMP_C, SPECIES_WOBBUFFET);
     VarSet(VAR_TEMP_D, 100);
