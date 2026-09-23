@@ -9,9 +9,9 @@ Use the actual native game and its visual evidence. The browser and headless wor
 
 ## Find the running project
 
-Run the installed skill's `locate.py` to print the checkout and Studio URL. Prefer the user's supplied checkout when they name one. Read that checkout's AGENTS.md and docs/CONTINUE.md. Then use `python3 tools/studio/cli.py start` from its root if the service is stopped. The working tree may be newer than the running build: inspect `status` and `builds` before attributing behavior to current source.
+Run this skill's `locate.py` to print the checkout and Studio URL. In this repository, use `python3 .claude/skills/emerald-studio/locate.py`. Prefer the user's supplied checkout when they name one, and read that checkout's AGENTS.md. Then use `python3 tools/studio/cli.py start` from its root if the service is stopped. The working tree may be newer than the running build: inspect `status` and `builds` before attributing behavior to current source.
 
-The user can keep playing in the Codex browser. Prefer an independent headless scene worker when inspecting or testing would interrupt them. Do not switch the visible session unless the task calls for it. All Studio sessions are experimental; the earned campaign is separate.
+The user can keep playing in the Studio browser. Prefer an independent headless scene worker when inspecting or testing would interrupt them. Do not switch the visible session unless the task calls for it. All Studio sessions are experimental; the earned campaign is separate.
 
 ## Commands
 
