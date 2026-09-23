@@ -154,6 +154,8 @@ Route119_WeatherInstitute_2F_EventScript_AnomalyReport::
 	compare VAR_RESULT, 0
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_AnomalyReportNone
 	msgbox Route119_WeatherInstitute_2F_Text_AnomalyReportIntro, MSGBOX_DEFAULT
+	@ msgbox expands into gStringVar4, so refill the report right before showing it.
+	special BufferWeatherAnomalyReport
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	msgbox Route119_WeatherInstitute_2F_Text_AnomalyReportOutro, MSGBOX_DEFAULT
 	release
