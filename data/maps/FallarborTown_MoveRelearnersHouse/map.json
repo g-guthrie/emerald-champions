@@ -15,7 +15,7 @@
   "connections": 0,
   "object_events": [
     {
-      "local_id": "LOCALID_MOVE_RELEARNER",
+      "local_id": "LOCALID_EVIE",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 4,
       "y": 4,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_EV_TRAINER",
+      "local_id": "LOCALID_IVY",
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
       "x": 7,
       "y": 4,

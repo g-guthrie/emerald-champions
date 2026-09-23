@@ -104,3 +104,18 @@ Water and rod tables use narrow level bands tied to when Surf/each rod opens.
 Do not reintroduce percentage text in dialogue; the route sign rosters and
 Center leads describe location and requirements only. Tune odds and timing in
 the JSON and gate table, never in prose.
+
+Weather anomalies (September 23, 2026). Twenty-two legends are "visitors": they
+are wild only while a weather anomaly is live on their home route. Anomalies
+exist from the Weather Institute rescue (FLAG_HIDE_ROUTE_119_TEAM_AQUA) until
+Rayquaza calms the sky (FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE): four live at a
+time, each lasting 1,500 player steps, refilled from unlocked uncaught visitors
+with a one-cycle cooldown and never two on one map. A live anomaly overrides the
+map's weather at runtime (rain, thunderstorm, downpour or horizontal fog only;
+routes and caves, never cities) and gives its visitor a flat 20% of encounters
+there. Outside its anomaly a visitor's slot is inert; after the window closes
+uncaught visitors become ordinary 1% residents. The visitor table lives beside
+the gate table in src/legendary_signs.c; state is in save vars. The Institute
+2F scientist lists live anomalies (BufferWeatherAnomalyReport); route signs add
+one line while a storm is on. Codex owns overworld presentation: this system
+adds no objects and edits no map.json.

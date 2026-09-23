@@ -49,7 +49,8 @@
 #define VAR_OBJ_GFX_ID_F           0x401F
 
 // general purpose vars
-#define VAR_RECYCLE_GOODS                                0x4020
+#define VAR_WEATHER_ANOMALY_STATE_0                      0x4020 // Bits 0-15 of the packed weather anomaly state (src/weather_anomaly.c). Reclaimed
+        // VAR_RECYCLE_GOODS; neither it nor its FRLG alias VAR_REPEL_STEP_COUNT_FRLG had any reference.
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
 #define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
@@ -218,7 +219,8 @@
 #define VAR_METEOR_FALLS_STATE                           0x40BF
 #define VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE              0x40C0
 #define VAR_TRICK_HOUSE_PRIZE_PICKUP                     0x40C1
-#define VAR_PACIFIDLOG_STONE_RECEIVED_DAY                0x40C2
+#define VAR_WEATHER_ANOMALY_STATE_1                      0x40C2 // Bits 16-31 of the weather anomaly state. Reclaimed VAR_PACIFIDLOG_STONE_RECEIVED_DAY;
+        // neither it nor its FRLG alias VAR_0x40C2 had any reference.
 #define VAR_VICTORY_ROAD_1F_STATE                        0x40C3
 #define VAR_FOSSIL_RESURRECTION_STATE                    0x40C4
 #define VAR_WHICH_FOSSIL_REVIVED                         0x40C5
@@ -269,7 +271,8 @@
 #define VAR_SECRET_BASE_HIGH_TV_FLAGS                    0x40EF // Used by Secret Base TV programs
 #define VAR_SECRET_BASE_IS_NOT_LOCAL                     0x40F0 // Set to TRUE while in another player's secret base.
 #define VAR_DAILY_BP                                     0x40F1
-#define VAR_WALLY_CALL_STEP_COUNTER                      0x40F2
+#define VAR_WEATHER_ANOMALY_STATE_2                      0x40F2 // Bits 32-47 of the weather anomaly state. Reclaimed VAR_WALLY_CALL_STEP_COUNTER
+        // (Match Call is removed); neither it nor its FRLG alias VAR_0x40F2 had any reference.
 #define VAR_SCOTT_FORTREE_CALL_STEP_COUNTER              0x40F3
 #define VAR_ROXANNE_CALL_STEP_COUNTER                    0x40F4
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER                   0x40F5

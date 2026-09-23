@@ -202,11 +202,11 @@ TEST("Inclement integration: New Mauville discoveries use Wattson's native compl
     FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
     FlagSet(FLAG_EC_REPORT_C28_COMPLETE);
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_ZERAORA));
-    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_ZEKROM));
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_XURKITREE));
     FlagClear(FLAG_EC_REPORT_C28_COMPLETE);
     FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_ZERAORA));
-    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_ZEKROM));
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_XURKITREE));
 }
 
 

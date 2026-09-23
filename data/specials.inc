@@ -866,3 +866,5 @@ gSpecials::
 	def_special CanReceiveLanetteDolls
 
 	def_special CanReceiveBerryPair
+
+	def_special BufferWeatherAnomalyReport

@@ -17,6 +17,8 @@
 #include "battle.h"
 #include "script_pokemon_util.h"
 #include "string_util.h"
+#include "weather_anomaly.h"
+#include "constants/weather.h"
 #include "constants/characters.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -599,6 +601,9 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
     case FLAG_RECEIVED_RED_OR_BLUE_ORB:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, help the elders at Mt. Pyre\nand receive the Magma Emblem."));
         break;
+    case FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, confront Team Aqua deep in\nthe Seafloor Cavern."));
+        break;
     case FLAG_IS_CHAMPION:
     case FLAG_SYS_GAME_CLEAR:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, enter the Hall of Fame."));
@@ -621,6 +626,15 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
     }
 }
 
+// A weather-anomaly visitor outside its anomaly, while the window is open:
+// it can only be met in a live storm, which the Weather Institute tracks.
+static bool32 IsVisitorAwayInStorms(enum LegendarySignId id)
+{
+    return IsWeatherAnomalyVisitor(id) && IsWeatherAnomalyWindowOpen() && !IsWeatherAnomalyLive(id);
+}
+
+static const u8 sText_VisitorFollowsStorms[] = _("\pIt follows the storms.\nThe WEATHER INSTITUTE tracks them.");
+
 // Result: 0 = needs progression, 1 = needs discovery, 2 = available,
 // 4 = caught, 5 = resting after a failed static encounter.
 void ResearchSelectedLegendarySign(void)
@@ -642,6 +656,8 @@ void ResearchSelectedLegendarySign(void)
     if (!MeetsSignProgression(id))
     {
         AppendLegendaryProgressionRequirements(id);
+        if (IsVisitorAwayInStorms(id))
+            StringAppend(gStringVar4, sText_VisitorFollowsStorms);
         return;
     }
     if (!MeetsSignDiscovery(id))
@@ -675,6 +691,11 @@ void ResearchSelectedLegendarySign(void)
         return;
     }
     gSpecialVar_Result = 2;
+    if (IsVisitorAwayInStorms(id))
+    {
+        StringAppend(gStringVar4, sText_VisitorFollowsStorms);
+        return;
+    }
     switch (gate->kind)
     {
     case LEGENDARY_KIND_WILD:
@@ -765,9 +786,15 @@ void BufferNextCenterLegendaryLead(void)
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You've already found\n{STR_VAR_2}!\pThat's one local legend you have\nturned into a partner."));
         }
         else if (!MeetsSignProgression(id))
+        {
             AppendLegendaryProgressionRequirements(id);
+            if (IsVisitorAwayInStorms(id))
+                StringAppend(gStringVar4, sText_VisitorFollowsStorms);
+        }
         else if (!MeetsSignDiscovery(id))
             StringAppend(gStringVar4, COMPOUND_STRING("\pThat discovery is still waiting\nfor your help."));
+        else if (IsVisitorAwayInStorms(id))
+            StringAppend(gStringVar4, sText_VisitorFollowsStorms);
         else if (gate->kind == LEGENDARY_KIND_WILD || gate->kind == LEGENDARY_KIND_QUEST)
             StringAppend(gStringVar4, COMPOUND_STRING("\pYou've met its requirements!\nYou can search for it there now."));
         else if (gate->kind == LEGENDARY_KIND_STATIC)

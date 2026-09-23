@@ -14,6 +14,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "weather_anomaly.h"
 #include "gpu_regs.h"
 #include "palette.h"
 
@@ -2515,7 +2516,14 @@ u8 GetSavedWeather(void)
 void SetSavedWeatherFromCurrMapHeader(void)
 {
     enum OverworldWeather oldWeather = gSaveBlock1Ptr->weather;
-    gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
+    enum OverworldWeather weather = gMapHeader.weather;
+    // A live weather anomaly replaces its home map's header weather while the
+    // map is loaded; the header itself never changes.
+    u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
+
+    if (anomalyWeather != WEATHER_NONE)
+        weather = anomalyWeather;
+    gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }
 

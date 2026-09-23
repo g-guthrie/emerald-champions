@@ -1,5 +1,3 @@
-.set LOCALID_EVIE, 1
-.set LOCALID_IVY,  2
 
 FallarborTown_MoveRelearnersHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_MoveRelearnersHouse_OnFrame

@@ -29,6 +29,13 @@ struct LegendaryGate
     enum Species requiredSpecies; // Family that must be caught in the Pokedex; NONE = none.
     u8 minimumBadges;
     u8 kind;                   // enum LegendaryKind
+    // Weather-anomaly visitor data (src/weather_anomaly.c). A visitor is wild
+    // only inside its own anomaly while the anomaly window is open, and an
+    // ordinary gated resident of its home map afterwards. Residents keep 0.
+    u8 anomalyId;              // 1-based, append-only save id; 0 = not a visitor.
+    u8 anomalyHabitat;         // enum WildPokemonArea: WILD_AREA_LAND or WILD_AREA_WATER.
+    u8 anomalyWeather;         // enum OverworldWeather shown on the home map; WEATHER_NONE otherwise.
+    u16 anomalyMap;            // MAP_* home map (group << 8 | num).
 };
 
 extern const struct LegendaryGate gLegendaryGates[LEGENDARY_SIGN_COUNT];

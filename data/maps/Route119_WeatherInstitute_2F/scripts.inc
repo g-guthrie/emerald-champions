@@ -141,7 +141,26 @@ Route119_WeatherInstitute_2F_EventScript_ExplainCastform:: @ 82700EA
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather:: @ 82700F7
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	goto_if_set FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route119_WeatherInstitute_2F_EventScript_AnomalyReport
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
+	release
+	end
+
+@ After the rescue and until the sky calms, the scientist reads the live
+@ weather anomalies. The special fills gStringVar4 with one line per storm
+@ and leaves the count in VAR_RESULT.
+Route119_WeatherInstitute_2F_EventScript_AnomalyReport::
+	special BufferWeatherAnomalyReport
+	compare VAR_RESULT, 0
+	goto_if_eq Route119_WeatherInstitute_2F_EventScript_AnomalyReportNone
+	msgbox Route119_WeatherInstitute_2F_Text_AnomalyReportIntro, MSGBOX_DEFAULT
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox Route119_WeatherInstitute_2F_Text_AnomalyReportOutro, MSGBOX_DEFAULT
+	release
+	end
+
+Route119_WeatherInstitute_2F_EventScript_AnomalyReportNone::
+	msgbox Route119_WeatherInstitute_2F_Text_AnomalyReportNone, MSGBOX_DEFAULT
 	release
 	end
 
@@ -309,6 +328,21 @@ Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather: @ 82706FE
 	.string "to the weather conditions.\p"
 	.string "There're plenty of them in the\n"
 	.string "Institute--go ahead and take it.$"
+
+Route119_WeatherInstitute_2F_Text_AnomalyReportIntro:
+	.string "Ever since TEAM AQUA broke in, our\n"
+	.string "instruments have picked up storms\l"
+	.string "where no storm should be.\p"
+	.string "Rare POKéMON seem to travel inside\n"
+	.string "them. Here is what we're tracking:$"
+
+Route119_WeatherInstitute_2F_Text_AnomalyReportOutro:
+	.string "They never last long.\n"
+	.string "If you want to see one, hurry.$"
+
+Route119_WeatherInstitute_2F_Text_AnomalyReportNone:
+	.string "Our instruments are quiet right now.\n"
+	.string "Storms come and go. Check back soon.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous: @ 827077E
 	.string "I've been researching rain for many\n"

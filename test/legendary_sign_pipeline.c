@@ -258,11 +258,12 @@ TEST("Research reports badges, milestone, family and availability from the gate 
     FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
     FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
 
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
+    // Zeraora: five badges, then Wattson's New Mauville receipt.
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_ZERAORA;
     ResearchSelectedLegendarySign();
     EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required:\n3.")));
-    for (u32 badge = 0; badge < 3; badge++)
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required:\n5.")));
+    for (u32 badge = 0; badge < 5; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
     ResearchSelectedLegendarySign();
     EXPECT_EQ(gSpecialVar_Result, 0);

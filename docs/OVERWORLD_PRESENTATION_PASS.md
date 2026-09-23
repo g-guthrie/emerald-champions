@@ -51,8 +51,9 @@ delivered and no claim of full campaign acceptance is made.
 
 ## Remaining work
 
-Replay both Rustboro rival variants including decline, return, victory and music;
-check the rescue's full-Bag retry and re-entry; check Devon repeat dialogue and
+The Rustboro rival replay gap is revisited below; audible music remains outside
+the native image captures. The rescue's full-Bag retry and Devon return dialogue
+are also revisited below. Check other rescue re-entry and
 the transition through Briney's cottage to Dewford. Continue regional NPC review
 with before/after story states, readable dialogue, facing, collisions, entrances,
 exits and regained controls. The rest of the overworld remains unverified here.
@@ -2639,10 +2640,24 @@ the ROM's changed-source archive byte-for-byte. Wins are fixture-assisted,
 and these are separate scene starts, not an earned four-Badge run.
 
 The Berry pocket holds68 distinct Berry item types, including Chilan, so a
-normal distinct-slot full pocket with Chilan absent is not constructible;
-the Petalburg full-Bag failure branch was not artificially asserted from
-an impossible slot setup. Existing normal/repeat checks do not cover a
-Chilan stack near its quantity limit.
+normal distinct-slot full pocket with Chilan absent is not constructible.
+A later native stack-boundary replay supplies989 Chilan Berries: only10
+fit in the first Berry slot, fewer than the guide's15, so two talks
+show Bag-full without adding any Berry or setting the receipt.
+With984 already held, the full15 fit exactly: one talk reaches999 and
+sets the receipt, then repeat dialogue gives no extras. Both scenes
+return control and their contact sheets were inspected
+(`movement/petalburg-guide-chilan-{short-by-five,exact-fit}-valid`,
+ROM `5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`).
+The first setup requested more than the999-per-slot limit and was
+rejected before gameplay; corrected quantities are the executed tests.
+
+The named `FLAG_HIDE_ROUTE_111_DYNAMO_GUARD` and
+`FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD` currently have no map object or
+script consumer; only their old constant declarations remain. Those
+names do not describe live NPC blockers in this checkout. This
+source check is narrower than walking every route boundary and does
+not assert that all physical story gates are traversable.
 
 ### Petalburg Gym first doors and trainer handoff
 
@@ -3340,3 +3355,277 @@ of the three *replacement* pickups may see it respawn once after this
 flag move; the retained Lure Ball, Blastoisinite and King's Rock keep
 their old collected state. Other changed Seaspray pickups still need
 the same source/old-save review.
+
+### Three actor-ID metadata handoffs corrected
+
+The Lilycove Harbor map named actor4 `LOCALID_LILYCOVE_HARBOR_BRINEY`,
+but actor4 is the Sailor sprite and actor5 is Briney's Expert sprite.
+Meteor Falls named Archie actor7 as Aqua grunt2 while the real grunt
+actor9 lacked that ID. Route111 named Victoria actor2 as Vicky and
+named the desert fossil actor33 as Victoria; Vivi actor3 and Vicky
+actor4 lacked IDs. Corrected the map JSON names without changing any
+actor number, graphic, flag or movement. The scripts' existing numeric
+local IDs already targeted the right actors, and the regenerated map
+header now names their actual identities.
+
+Native verification on ROM
+`5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`
+passes the first Old Sea Map ferry trip: Sailor4 makes way, Briney5
+appears and addresses the player, all three board, Faraway Island is
+visited, and a separately selected return reaches Lilycove with
+control ready (`movement/lilycove-harbor-old-sea-map-briney-validated`).
+The first assertion expected to stop at Faraway Island, but repeated A
+input chose the return trip; a visited-map assertion records the
+actually executed path. Its contact sheet was inspected.
+
+The native Meteor Falls accepted-party scene visibly stages Archie7
+and both grunts8/9 after the fixture-assisted Magma fight, then
+removes them, advances state1 and returns control
+(`movement/meteor-archie-grunts-metadata-accepted-run`).
+An earlier all-A fixture repeatedly toggled the first party slot;
+the corrected sequence uses the menu's Start confirmation. The
+Route111 Winstrate gauntlet also passes four fixture-assisted fights
+with Victor1, Victoria2, Vivi3 and Vicky4 entering/exiting the house
+in order. All four hide flags are set on return and control is ready
+(`movement/route111-winstrate-four-exits-run`). Harbor, Meteor Falls
+and Winstrate contact sheets were inspected. These are visual/script
+checks, not tactical battle wins or one earned continuous campaign.
+The ROM receipt records Git commit bce92012db for these map sources;
+the static progression verifier passes540 maps and3,996 events.
+
+### Fallarbor and Verdanturf Battle Tent corridor staging
+
+The two simple Tent corridors start their OnFrame movement as soon as the
+warp begins, so a normal ready-state scene capture starts too late to see
+the walk. Captured from the warp transition instead, on ROM
+`5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`.
+Both native runs passed their Battle Room visit assertion. Their inspected
+contact sheets show the attendant ahead of the player through the four-step
+approach, a clear doorway as they enter in order, then the door/fade handoff
+(`movement/fallarbortown-tent-corridor-immediate2` and
+`movement/verdanturftown-tent-corridor-immediate2`). No visible collision,
+actor overlap or blocked door appeared. Fallarbor returned to its lobby
+after the Battle Room under this synthetic fixture state; Verdanturf entered
+its opponent introduction. These runs establish corridor presentation, not
+a completed Tent challenge.
+
+Slateport uses a different rental/menu path. Its native warp-entry capture
+shows the Scientist attendant ahead of the player, both aligned in the
+corridor, and the attendant turning to deliver the first rental explanation
+with the player one tile behind (`movement/slateport-tent-corridor-run`). The
+contact sheet was inspected and the script remains live awaiting dialogue
+input. The lobby source sets `VAR_0x8006` to zero before a new challenge and
+warps to the same (2,7) entry used in this replay; this checks the entrance
+presentation but does not establish rental selection or a completed challenge.
+
+### Fallarbor Evie/Ivy actor metadata
+
+The first-visit script explicitly moves Evie as actor1 and Ivy as actor2,
+then has Evie explain EV training and Ivy explain IV training. The house map
+instead named actor1 `LOCALID_MOVE_RELEARNER` and actor2
+`LOCALID_EV_TRAINER`, neither of which describes the attached service or
+speaker. Renamed the map metadata to `LOCALID_EVIE` and `LOCALID_IVY`,
+matching the script's existing numeric IDs. Generated event constants are
+now1/2 under those names; the map event data and scene commands are unchanged.
+The earlier native doorway and repeat-entry runs (`movement/ivy-evie` and
+`movement/ivy-evie-repeat`) already show actor1/2 completing the introduction
+and returning control. This change corrects actor identity for subsequent
+source work; it does not claim a new movement behavior or require a ROM fix.
+
+### Rustboro rival approach, decline and retry
+
+Ran the southern center trigger with May and Brendan on ROM
+`5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`.
+Both rivals visibly approach, face the player, offer a battle, use their
+gender-correct overworld and battle portraits, deliver the Briney hint after
+a fixture-assisted win, set met/defeated and Rustboro state10, and return
+control (`movement/rustboro-rival-{may,brendan}-first-run`). May's No choice
+also leaves defeated unset, keeps her present, restores control and shows
+the decline dialogue (`movement/rustboro-rival-may-decline-corrected`). A
+separate post-decline state10 entry talks to May from the north, accepts the
+retry and completes the same postbattle return (`movement/rustboro-rival-may-
+retry-facing-fixed`). The success, decline and retry contact sheets were
+inspected. The two early retry probes faced away from May, so A did nothing;
+that was a scene setup error. These are separate synthetic starts, not one
+earned save or tactical battle wins. The earlier assembled script test checks
+music cleanup routing; these visual replays do not capture audible music.
+No new script defect surfaced.
+
+The same initial May encounter was then replayed from all eight Rustboro
+south-street trigger tiles, x12–19 at y53. Every compiled path leaves the
+player at its trigger tile, places May directly north at (x,52), sets
+state10/met/defeated, and returns control after the fixture-assisted battle.
+The two longest outer approaches and a representative middle approach were
+inspected visually: no rail crossing, actor overlap or wrong facing appears.
+Evidence: `movement/rustboro-rival-outer-{12,19}-run`,
+`movement/rustboro-rival-lane-{13,14,15,17,18}-run`, and the center x16 run
+above, all on the same ROM. This closes the eight-trigger movement matrix;
+it does not extend tactical or audible-music verification.
+
+### Rusturf full-Key-Items reward and same-state recovery
+
+The rescue's Devon Goods use the Key Items pocket. A native fixture-assisted
+grunt battle with all55 slots synthetically occupied by an unrelated Key Item
+reaches the Bag-full refusal with control restored, Goods0, stolen flag still1,
+rescued flag0, and grunt/Peeko still present
+(`movement/rusturf-rescue-full-goods-with-snapshot`). The full-pocket state was
+saved, one slot freed, and the same native state resumed. Talking to the
+already-defeated grunt then grants exactly one Devon Goods without a second
+battle; the grunt leaves, Briney approaches Peeko, both depart, and the
+Rustboro/Briney house story states advance to5/1. Final flags are rescued1,
+stolen0 and grunt hidden1, with player control ready
+(`movement/rusturf-rescue-retry-goods-run`). Both contact sheets were inspected.
+The repeated synthetic filler item is a capacity probe, not an obtainable
+inventory; the scene itself runs native scripts and movement. No source fix
+was needed for this failure/retry branch.
+
+### Devon president repeat before Letter delivery
+
+After the introduction state1, the walkable desk-side tile is (14,5); (16,5)
+is furniture collision. A native return interaction from(14,5) addresses
+Mr. Stone through the map's intentional invisible actor at(15,5), shows
+“I'm counting on you!”, leaves state1 and returns control
+(`movement/devon-president-repeat-proxy`, same ROM). The contact sheet shows
+the visible president at his desk and no stray proxy sprite. The first
+probe's blocked (16,5) warp was a setup error, not an inaccessible NPC.
+
+### Rusturf completed rescue re-entry
+
+The rescue script removes the grunt, Briney and Peeko without separate
+`setflag` lines, which initially looked like a reload risk. In this engine,
+`ScrCmd_removeobject` calls `RemoveObjectEventByLocalIdAndMap`, and that routine
+sets each removed object's template hide flag before despawning it. The saved
+native state after the full-pocket retry confirms all three flags1. Rewarping
+to Rusturf Tunnel from that same completed state leaves only the player in
+the rescue area, shows no repeat rescue dialogue, and returns control
+(`movement/rusturf-reentry-after-success-run`, ROM above). Its contact sheet
+was inspected. No code change is warranted; this closes the re-entry doubt
+using both engine behavior and a real map reload.
+
+### Sootopolis Gym crisis door and Wallace handoff
+
+Before the Magma/Aqua leaders depart, Wallace stands at(31,33) in front of
+the Gym. Native talk from(31,34) delivers his request to hear both leaders,
+does not grant Waterfall, and a continued north input cannot pass him
+(`movement/sootopolis-gym-wallace-blocked-run`). Separately hiding Wallace
+in a synthetic pre-departure setup isolates the physical door: the OnLoad
+metatile closes (31,32), and north input stops the player at(31,33) without
+entering the Gym (`movement/sootopolis-gym-door-closed-run`). This second
+setup is a door test, not a claimed reachable story state.
+
+With the leaders-departed flag set and Wallace present, native dialogue
+grants the Waterfall license, explains the Rain Badge/capable-Pokémon rule,
+moves Wallace one tile right and persists Wallace state1. The player then
+walks straight through (31,32) into Sootopolis Gym1F with control ready
+(`movement/sootopolis-gym-wallace-unblock-run`). A separate seeded re-entry
+with that persisted state places Wallace right of the doorway and lets the
+player enter again (`movement/sootopolis-gym-wallace-reentry-run`). All four
+contact sheets were inspected on ROM
+`5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`.
+This covers the access choreography and physical blockage, not a continuous
+earned weather-crisis run or Juan's battle. No source fix was warranted.
+
+Wallace's lateral talk branches also pass. From the west tile(30,33), the
+player faces east and Wallace steps right to(32,33), persisting state1;
+from the east tile(32,33), the player faces west and Wallace steps left
+to(30,33), persisting state2. Both Waterfall talks return control with
+the center lane clear (`movement/sootopolis-wallace-{west,east}-talk-run`).
+Native map re-entry with either stored Wallace state1 or2 places him on
+the corresponding side and allows a straight north walk into Gym1F
+(`movement/sootopolis-gym-wallace-{reentry,left-reentry}-run`). All four
+additional contact sheets were inspected. These starts seed the post-crisis
+state independently; they do not claim one continuous save through the
+legendary scene.
+
+### Sootopolis leaders-to-Gym local story handoff
+
+At post-Rayquaza state5 with both leaders still present, native first talks
+to Maxie and Archie each set only that leader's met flag; both actors stay
+visible, Wallace stays at the center doorway, and control returns
+(`movement/sootopolis-{maxie,archie}-first-talk-run`). If the other met flag
+is already set, either leader's talk hides both, sets their departure flag,
+updates Mt. Pyre state2, and warps the player to(31,34) directly south of
+Wallace (`movement/sootopolis-archie-second-departure-run` and
+`movement/sootopolis-maxie-second-departure-west`). Maxie's first attempted
+approach at(33,34) was a collision tile; the corrected west approach(32,35)
+is walkable. First and second talk contact sheets were inspected.
+
+A single native scene then talked to Maxie, walked around the pair on the
+southern edge, talked to Archie, accepted Wallace's Waterfall license and
+walked into Gym1F without restarting or reseeding between conversations
+(`movement/sootopolis-leaders-wallace-gym-continuous-run`). It finished
+with both leaders hidden, both met flags1, departure1, Waterfall1,
+Wallace state1, Mt. Pyre state2 and player controls ready in the Gym.
+The contact sheet was inspected. This validates the local post-Rayquaza
+handoff and both second-speaker orders; its starting state is synthetic,
+so it does not prove the entire weather crisis through an earned save.
+No scene or dialogue correction was needed.
+
+### Cave of Origin Wallace wrong-answer recovery
+
+Replayed the full native conversation on ROM
+`5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`
+with each of the three wrong menu choices—Cave of Origin, Mt. Pyre and
+“Don't remember”—followed by Sky Pillar in the *same* interaction. Each
+choice shows its distinct response, reopens the four-choice menu, and
+accepts Sky Pillar. Wallace fades out, his Cave actor stays hidden, the
+Sky Pillar actor becomes available, Sootopolis advances2→3 and control
+returns (`movement/cave-wallace-wrong-then-correct-run` and
+`movement/cave-wallace-{1,3}-then-correct-run`). Native task
+state detected the actual menu before each input, avoiding frame-timed
+guesses. The three contact sheets and recorded dialogue transitions were
+inspected. These are synthetic city-stage starts; no source change was
+warranted for the retry loop.
+
+### Sealed Chamber underwater ascent split
+
+The Sealed Chamber underwater map chooses its surface destination from the
+player's exact coordinate. Native Dive from(12,44) takes the player to
+Sealed Chamber Outer Room(10,19), while Dive from neighboring(12,45)
+surfaces on Route134(60,31). Both return control with the player visible;
+their contact sheets show the underwater prompt, Dive animation and distinct
+surface landings (`movement/sealed-chamber-dive-{inner,outer}-run`, ROM
+`5dd27b957ff6d4098736a50c8239edbeab5f7e722eb4514e25937bd18557103a`).
+These starts seed the underwater positions and licenses, so they verify the
+two branch destinations rather than a complete Route134 current traversal.
+No source correction was needed.
+
+### Route134 surface-to-Sealed-Chamber connected passage
+
+The designated Route134 deep-water patch at(60,31) natively Dives to
+Underwater Route134(8,6). From there, three south steps cross its downward
+arrow warp and land at Underwater Sealed Chamber(7,2). A 49-step path
+through the long underwater passage reaches the marked(12,44) ascent tile;
+native Dive then lands at Sealed Chamber Outer Room(10,19) with control
+ready (`movement/route134-surface-to-sealed-chamber-run`). Its two contact
+sheets were inspected across the surface Dive, inter-map warp, passage
+turns and chamber landing. The first entrance probe stopped on the arrow
+tile after one south step; a second south step triggered the warp. That
+was an input-boundary issue, not a blocked entrance. Collision-grid routing
+selected the path, but native movement and rendered frames establish that
+it is walkable. The start is a synthetic warp to Route134's deep-water
+patch, so reaching that patch through the route's surface currents remains
+outside this scene. No map or movement code change was warranted.
+
+### Route134 current into the Sealed Chamber Dive patch
+
+At Route134(65,31), a short west input follows the current into the
+deep-water pocket and stops at(60,31) when released. A longer held input
+overshot the pocket to(54,31), showing why the Dive opening requires
+steering rather than simply holding west. The corrected native path keeps
+the surfing sprite visible at the pocket (`movement/route134-current-to-
+dive-patch-stopped`). Extended without restarting, the same current approach
+then Dives through Underwater Route134, crosses the arrow entrance, walks
+the49-step underwater passage and surfaces in Sealed Chamber Outer Room
+(`movement/route134-current-to-sealed-chamber-run`). Both of its contact
+sheets were inspected. This ties the current to the chamber, but begins on
+Route134's current rather than at Pacifidlog or the Route133 boundary.
+
+A separate Route133 boundary probe was not accepted as natural Surf evidence:
+forcing a fresh session onto shallow/current water made its walking sprite
+leave the Surf blob behind. Starting on a walkable Route133 shore tile and
+using the real Surf interaction, then entering a westward current, kept the
+surfing sprite attached (`movement/route133-native-surf-current-run`). The
+apparent sprite separation therefore belongs to that synthetic warp setup;
+the route's upstream current lanes still need a continuous native traversal
+from a valid surfing start. No source edit followed from the invalid probe.

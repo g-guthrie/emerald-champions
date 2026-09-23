@@ -26,6 +26,7 @@
 #include "text.h"
 #include "tv.h"
 #include "wild_encounter.h"
+#include "weather_anomaly.h"
 #include "battle_debug.h"
 #include "constants/abilities.h"
 #include "constants/game_stat.h"
@@ -51,6 +52,14 @@ extern const u8 EmeraldChampions_EventScript_RepelSprayWoreOff[];
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
 static bool8 sSweetScentActive = FALSE;
+static bool8 sGeneratingSecondWildMon = FALSE;
+
+// A table slot can yield its species: Legendary/UB gate and capture rules,
+// plus weather-anomaly visitors, whose own slot waits for the window to close.
+static bool32 IsWildSlotLive(enum Species species)
+{
+    return IsWildSlotSpeciesAcquirable(species) && !IsWeatherAnomalyVisitorSlotInert(species);
+}
 
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
@@ -236,6 +245,17 @@ void BufferCurrentMapRouteSignSpecies(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE119))
         dest = StringCopy(dest, COMPOUND_STRING("\pFEEBAS hides in a few fishing spots.\nAny rod works if you find one."));
+    if (headerId != HEADER_NONE)
+    {
+        enum LegendarySignId anomaly = GetLiveWeatherAnomalyOnMap(gSaveBlock1Ptr->location.mapGroup,
+                                                                 gSaveBlock1Ptr->location.mapNum);
+        if (anomaly < LEGENDARY_SIGN_COUNT)
+        {
+            dest = StringCopy(dest, sText_RouteSignSpeciesPageBreak);
+            dest = StringCopy(dest, GetLegendaryDisplayName(gLegendaryGates[anomaly].species));
+            dest = StringCopy(dest, COMPOUND_STRING(" has been sighted in\nthis weather."));
+        }
+    }
     if (hasMethod && hasLegend)
         dest = StringCopy(dest, COMPOUND_STRING("\pLegends and Ultra Beasts are rare\nhere. SWEET SCENT draws them out."));
     if (hasMethod)
@@ -435,7 +455,7 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
         u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
         if (IsSweetScentLegendSlot(mons[i].species))
         {
-            if (CanAcquireLegendarySignSpecies(mons[i].species))
+            if (IsWildSlotLive(mons[i].species))
                 legendTotal += weight;
             continue;
         }
@@ -460,7 +480,7 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
         for (u32 i = 0; i < slots; i++)
         {
             u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
-            if (!IsSweetScentLegendSlot(mons[i].species) || !CanAcquireLegendarySignSpecies(mons[i].species))
+            if (!IsSweetScentLegendSlot(mons[i].species) || !IsWildSlotLive(mons[i].species))
                 continue;
             if (target < weight)
                 return i;
@@ -786,6 +806,14 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     u8 level;
     enum Species species;
     bool32 legendary;
+
+    // A live weather anomaly on this map takes a flat share of land or Surf
+    // encounters before any slot draw (Sweet Scent and abilities included).
+    // The second mon of a double battle never repeats the visitor.
+    species = sGeneratingSecondWildMon ? SPECIES_NONE : TryRollWeatherAnomalyEncounter(area);
+    if (species != SPECIES_NONE)
+        goto CREATE;
+
     if (sSweetScentActive && (area == WILD_AREA_LAND || area == WILD_AREA_WATER))
         wildMonIndex = ChooseSweetScentWildMonIndex(wildMonInfo, area);
     else
@@ -836,7 +864,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     }
 
     species = wildMonInfo->wildPokemon[wildMonIndex].species;
-    if (!IsWildSlotSpeciesAcquirable(species))
+    if (!IsWildSlotLive(species))
     {
         // A gated or caught Legendary/Ultra Beast slot is inert: the draw
         // moves on to the next acquirable slot of the same table.
@@ -849,13 +877,14 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
         {
             wildMonIndex = (wildMonIndex + 1) % slots;
             species = wildMonInfo->wildPokemon[wildMonIndex].species;
-            if (IsWildSlotSpeciesAcquirable(species))
+            if (IsWildSlotLive(species))
                 break;
         }
         if (tried == slots)
             return FALSE;
     }
 
+CREATE:
     legendary = IsLegendaryEncounterSpecies(species);
     // Emerald Champions: nothing in the wild is ever above the live level cap.
     // Table levels describe the route; an early Old Rod cannot pull a Lv 45
@@ -887,19 +916,19 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     enum Species wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level;
 
-    if (!IsWildSlotSpeciesAcquirable(wildMonSpecies) && rod <= SUPER_ROD)
+    if (!IsWildSlotLive(wildMonSpecies) && rod <= SUPER_ROD)
     {
         u32 candidate = wildMonIndex;
         bool32 found = FALSE;
         for (u32 i = 1; i < counts[rod] && !found; i++)
         {
             candidate = starts[rod] + (wildMonIndex - starts[rod] + i) % counts[rod];
-            found = IsWildSlotSpeciesAcquirable(wildMonInfo->wildPokemon[candidate].species);
+            found = IsWildSlotLive(wildMonInfo->wildPokemon[candidate].species);
         }
         for (u32 i = 1; i < NUM_FISHING_MONS_ENCOUNTER_SLOTS && !found; i++)
         {
             candidate = (wildMonIndex + i) % NUM_FISHING_MONS_ENCOUNTER_SLOTS;
-            found = IsWildSlotSpeciesAcquirable(wildMonInfo->wildPokemon[candidate].species);
+            found = IsWildSlotLive(wildMonInfo->wildPokemon[candidate].species);
         }
         // A table made only of inert legends keeps its drawn slot.
         if (found)
@@ -1001,7 +1030,12 @@ static bool32 UsesLandEncounterTable(u32 headerId, u16 behavior)
 static bool32 TryGenerateSecondWildMon(const struct WildPokemonInfo *info, enum WildPokemonArea area, u8 flags)
 {
     struct Pokemon first = gParties[B_TRAINER_OPPONENT_A][0];
-    if (!TryGenerateWildMon(info, area, flags))
+    bool32 generated;
+
+    sGeneratingSecondWildMon = TRUE;
+    generated = TryGenerateWildMon(info, area, flags);
+    sGeneratingSecondWildMon = FALSE;
+    if (!generated)
         return FALSE;
     gParties[B_TRAINER_OPPONENT_A][1] = first;
     return TRUE;
