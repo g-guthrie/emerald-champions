@@ -1205,6 +1205,21 @@ def fail(message: str) -> None:
     raise RuntimeError(message)
 
 
+def _runtime_library_path() -> None:
+    """The runners link Homebrew ffmpeg, which can trail an x265 upgrade.
+
+    Offer every installed x265 so the dylib ffmpeg was built against resolves.
+    Hardened Python strips DYLD_* from its own environment, so set it here for
+    the child processes rather than relying on the caller's shell."""
+    dirs = sorted(str(p) for p in Path("/opt/homebrew/Cellar/x265").glob("*/lib"))
+    if dirs:
+        current = os.environ.get("DYLD_LIBRARY_PATH", "")
+        os.environ["DYLD_LIBRARY_PATH"] = ":".join([d for d in dirs if d not in current] + ([current] if current else []))
+
+
+_runtime_library_path()
+
+
 def run(command: list[str], *, timeout: int = 120) -> subprocess.CompletedProcess[str]:
     result = subprocess.run(
         command,

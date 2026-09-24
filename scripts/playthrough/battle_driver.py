@@ -713,7 +713,7 @@ def script_pairings():
     return pairs
 
 
-MILESTONE_RE = re.compile(r'\{\s*(FLAG_[A-Z0-9_]+)\s*,\s*(\d+)\s*,\s*\d+\s*\}')
+MILESTONE_RE = re.compile(r'\{\s*(FLAG_[A-Z0-9_]+)\s*,\s*(\d+)\s*(?:,\s*\d+\s*)?\}')  # {flag, cap[, stipend]}
 
 
 def campaign_milestones():
