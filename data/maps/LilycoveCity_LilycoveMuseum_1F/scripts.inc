@@ -241,7 +241,7 @@ LilycoveCity_LilycoveMuseum_1F_Text_BigPokeBallCarvedFromStone: @ 82192AA
 LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText: @ 8219311
 	.string "It's a huge stone tablet inscribed\n"
 	.string "with Pokémon and dense text in the\l"
-	.string "small characters of an ancient,\l"
+	.string "small characters of an ancient,\p"
 	.string "unreadable language.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts: @ 82193B4

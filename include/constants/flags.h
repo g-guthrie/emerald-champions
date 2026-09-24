@@ -516,26 +516,26 @@
 #define FLAG_EC_ITEM_SEASPRAY_CAVE_DUSK_BALL 0x1E3
 
 // Mystery Gift Flags (Unknown)
-#define FLAG_MYSTERY_GIFT_DONE               0x1E4
-#define FLAG_MYSTERY_GIFT_1                  0x1E5
-#define FLAG_MYSTERY_GIFT_2                  0x1E6
-#define FLAG_MYSTERY_GIFT_3                  0x1E7
-#define FLAG_MYSTERY_GIFT_4                  0x1E8
-#define FLAG_MYSTERY_GIFT_5                  0x1E9
-#define FLAG_MYSTERY_GIFT_6                  0x1EA
-#define FLAG_MYSTERY_GIFT_7                  0x1EB
-#define FLAG_MYSTERY_GIFT_8                  0x1EC
-#define FLAG_MYSTERY_GIFT_9                  0x1ED
-#define FLAG_MYSTERY_GIFT_10                 0x1EE
-#define FLAG_MYSTERY_GIFT_11                 0x1EF
-#define FLAG_MYSTERY_GIFT_12                 0x1F0
-#define FLAG_MYSTERY_GIFT_13                 0x1F1
-#define FLAG_MYSTERY_GIFT_14                 0x1F2
-#define FLAG_MYSTERY_GIFT_15                 0x1F3
+#define FLAG_MYSTERY_GIFT_DONE                                                 0x15c // relocated 0x1e4 -> 0x15c (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_1                                                    0x15d // relocated 0x1e5 -> 0x15d (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_2                                                    0x15e // relocated 0x1e6 -> 0x15e (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_3                                                    0x15f // relocated 0x1e7 -> 0x15f (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_4                                                    0x160 // relocated 0x1e8 -> 0x160 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_5                                                    0x161 // relocated 0x1e9 -> 0x161 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_6                                                    0x162 // relocated 0x1ea -> 0x162 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_7                                                    0x163 // relocated 0x1eb -> 0x163 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_8                                                    0x164 // relocated 0x1ec -> 0x164 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_9                                                    0x165 // relocated 0x1ed -> 0x165 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_10                                                   0x166 // relocated 0x1ee -> 0x166 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_11                                                   0x167 // relocated 0x1ef -> 0x167 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_12                                                   0x168 // relocated 0x1f0 -> 0x168 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_13                                                   0x169 // relocated 0x1f1 -> 0x169 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_14                                                   0x16a // relocated 0x1f2 -> 0x16a (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MYSTERY_GIFT_15                                                   0x16b // relocated 0x1f3 -> 0x16b (Sept 23 2026: bit was shared with a live flag)
 
 // Hidden Items
 #define FLAG_HIDDEN_ITEMS_START                                                         0x1F4
-#define FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL             (FLAG_HIDDEN_ITEMS_START + 0x00)
+#define FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL                               (FLAG_HIDDEN_ITEMS_START + 0x2) // relocated 0x1f4 -> 0x1f6 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_TRICK_HOUSE_SHINY_STONE                  (FLAG_HIDDEN_ITEMS_START + 0x01)
 #define FLAG_HIDDEN_ITEM_ROUTE_111_SUN_STONE                  (FLAG_HIDDEN_ITEMS_START + 0x02)
 #define FLAG_HIDDEN_ITEM_ROUTE_113_ETHER                     (FLAG_HIDDEN_ITEMS_START + 0x03)
@@ -663,13 +663,13 @@
 #define FLAG_HIDDEN_ITEM_CABLECAR_STATION_BOTTLE_CAP                           (FLAG_HIDDEN_ITEMS_START + 0x7e)
 #define FLAG_HIDDEN_ITEM_DEWFORD_MANOR_BOTTLE_CAP                              (FLAG_HIDDEN_ITEMS_START + 0x7f)
 #define FLAG_HIDDEN_ITEM_DEWFORD_MANOR_DREAD_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0x80)
-#define FLAG_HIDDEN_ITEM_DEWFORD_MEADOW_FAIRY_GEM                              (FLAG_HIDDEN_ITEMS_START + 0x81)
-#define FLAG_HIDDEN_ITEM_DEWFORD_MEADOW_GRASS_GEM                              (FLAG_HIDDEN_ITEMS_START + 0x82)
+#define FLAG_HIDDEN_ITEM_DEWFORD_MEADOW_FAIRY_GEM                              (FLAG_HIDDEN_ITEMS_START + 0x1a) // relocated 0x275 -> 0x20e (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_DEWFORD_MEADOW_GRASS_GEM                              (FLAG_HIDDEN_ITEMS_START + 0x24) // relocated 0x276 -> 0x218 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_EMBER_PATH_FLAME_PLATE                                (FLAG_HIDDEN_ITEMS_START + 0x83)
-#define FLAG_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER                                 (FLAG_HIDDEN_ITEMS_START + 0x84)
-#define FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_NUGGET                                 (FLAG_HIDDEN_ITEMS_START + 0x85)
-#define FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP1                               (FLAG_HIDDEN_ITEMS_START + 0x86)
-#define FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP2                               (FLAG_HIDDEN_ITEMS_START + 0x87)
+#define FLAG_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER                                 (FLAG_HIDDEN_ITEMS_START + 0x26) // relocated 0x278 -> 0x21a (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_NUGGET                                 (FLAG_HIDDEN_ITEMS_START + 0x27) // relocated 0x279 -> 0x21b (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP1                               (FLAG_HIDDEN_ITEMS_START + 0x28) // relocated 0x27a -> 0x21c (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP2                               (FLAG_HIDDEN_ITEMS_START + 0x29) // relocated 0x27b -> 0x21d (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL                                 (FLAG_HIDDEN_ITEMS_START + 0x88)
 #define FLAG_HIDDEN_ITEM_JAGGED_PASS_LEVEL_BALL                                (FLAG_HIDDEN_ITEMS_START + 0x89)
 #define FLAG_HIDDEN_ITEM_JIRACHIS_ROOM_COMET_SHARD                             (FLAG_HIDDEN_ITEMS_START + 0x8a)
@@ -688,7 +688,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE110_BOTTLE_CAP                                   (FLAG_HIDDEN_ITEMS_START + 0x97)
 #define FLAG_HIDDEN_ITEM_ROUTE_104_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0x98)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                                   (FLAG_HIDDEN_ITEMS_START + 0x99)
-#define FLAG_HIDDEN_ITEM_ROUTE_105_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0x9a)
+#define FLAG_HIDDEN_ITEM_ROUTE_105_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0x2a) // relocated 0x28e -> 0x21e (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_ROUTE_106_BIG_PEARL                                   (FLAG_HIDDEN_ITEMS_START + 0x9b)
 #define FLAG_HIDDEN_ITEM_ROUTE_106_PRISM_SCALE                                 (FLAG_HIDDEN_ITEMS_START + 0x9c)
 #define FLAG_HIDDEN_ITEM_ROUTE_108_RARE_CANDY                                  (FLAG_HIDDEN_ITEMS_START + 0x9d)
@@ -710,13 +710,13 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_114_CARBOS                                      (FLAG_HIDDEN_ITEMS_START + 0xad)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0xae)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_FIST_PLATE                                  (FLAG_HIDDEN_ITEMS_START + 0xaf)
-#define FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES                               (FLAG_HIDDEN_ITEMS_START + 0xb0)
+#define FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES                               (FLAG_HIDDEN_ITEMS_START + 0x2e) // relocated 0x2a4 -> 0x222 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_ROUTE_117_BRIGHT_POWDER                               (FLAG_HIDDEN_ITEMS_START + 0xb1)
-#define FLAG_HIDDEN_ITEM_ROUTE_118_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0xb2)
+#define FLAG_HIDDEN_ITEM_ROUTE_118_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0x2f) // relocated 0x2a6 -> 0x223 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_ROUTE_118_IRON                                        (FLAG_HIDDEN_ITEMS_START + 0xb3)
 #define FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM                                     (FLAG_HIDDEN_ITEMS_START + 0xb4)
 #define FLAG_HIDDEN_ITEM_ROUTE_119_ZAP_PLATE                                   (FLAG_HIDDEN_ITEMS_START + 0xb5)
-#define FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1                                (FLAG_HIDDEN_ITEMS_START + 0xb6)
+#define FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1                                (FLAG_HIDDEN_ITEMS_START + 0x34) // relocated 0x2aa -> 0x228 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2                                (FLAG_HIDDEN_ITEMS_START + 0xb7)
 #define FLAG_HIDDEN_ITEM_ROUTE_120_TOXIC_PLATE                                 (FLAG_HIDDEN_ITEMS_START + 0xb8)
 #define FLAG_HIDDEN_ITEM_ROUTE_120_ZINC                                        (FLAG_HIDDEN_ITEMS_START + 0xb9)
@@ -724,60 +724,58 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_121_NUGGET                                      (FLAG_HIDDEN_ITEMS_START + 0xbb)
 #define FLAG_HIDDEN_ITEM_ROUTE_123_BLACK_SLUDGE                                (FLAG_HIDDEN_ITEMS_START + 0xbc)
 #define FLAG_HIDDEN_ITEM_ROUTE_123_FOCUS_SASH                                  (FLAG_HIDDEN_ITEMS_START + 0xbd)
-#define FLAG_HIDDEN_ITEM_ROUTE_123_PP_MAX                                      (FLAG_HIDDEN_ITEMS_START + 0xbe)
-#define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                                  (FLAG_HIDDEN_ITEMS_START + 0xbf)
-#define FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1                                (FLAG_HIDDEN_ITEMS_START + 0xc0)
-#define FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2                                (FLAG_HIDDEN_ITEMS_START + 0xc1)
-#define FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3                                (FLAG_HIDDEN_ITEMS_START + 0xc2)
-#define FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_1                           (FLAG_HIDDEN_ITEMS_START + 0xc3)
-#define FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_2                           (FLAG_HIDDEN_ITEMS_START + 0xc4)
-#define FLAG_HIDDEN_ITEM_RUSTBORO_CITY_BOTTLE_CAP                              (FLAG_HIDDEN_ITEMS_START + 0xc5)
-#define FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_RARE_CANDY                     (FLAG_HIDDEN_ITEMS_START + 0xc6)
-#define FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_ZINC                           (FLAG_HIDDEN_ITEMS_START + 0xc7)
-#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BLUE_SHARD                           (FLAG_HIDDEN_ITEMS_START + 0xc8)
-#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_GREEN_SHARD                          (FLAG_HIDDEN_ITEMS_START + 0xc9)
-#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_RED_SHARD                            (FLAG_HIDDEN_ITEMS_START + 0xca)
-#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_YELLOW_SHARD                         (FLAG_HIDDEN_ITEMS_START + 0xcb)
-#define FLAG_HIDDEN_ITEM_SCORCHED_SLAB_STONE_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0xcc)
-#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICE_STONE                           (FLAG_HIDDEN_ITEMS_START + 0xcd)
-#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICICLE_PLATE                        (FLAG_HIDDEN_ITEMS_START + 0xce)
-#define FLAG_HIDDEN_ITEM_SKY_PILLAR_SKY_PLATE                                  (FLAG_HIDDEN_ITEMS_START + 0xcf)
-#define FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_LEFTOVERS                         (FLAG_HIDDEN_ITEMS_START + 0xd0)
-#define FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET                                    (FLAG_HIDDEN_ITEMS_START + 0xd1)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL                              (FLAG_HIDDEN_ITEMS_START + 0xd2)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_1                           (FLAG_HIDDEN_ITEMS_START + 0xd3)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_2                           (FLAG_HIDDEN_ITEMS_START + 0xd4)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM                                (FLAG_HIDDEN_ITEMS_START + 0xd5)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_CARBOS                                 (FLAG_HIDDEN_ITEMS_START + 0xd6)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL                                  (FLAG_HIDDEN_ITEMS_START + 0xd7)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_124_PIXIE_PLATE                            (FLAG_HIDDEN_ITEMS_START + 0xd8)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_126_BIG_PEARL                              (FLAG_HIDDEN_ITEMS_START + 0xd9)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_126_BOTTLE_CAP                             (FLAG_HIDDEN_ITEMS_START + 0xda)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON                                   (FLAG_HIDDEN_ITEMS_START + 0xdb)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0xdc)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL                                  (FLAG_HIDDEN_ITEMS_START + 0xdd)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_126_STARDUST                               (FLAG_HIDDEN_ITEMS_START + 0xde)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_127_BOTTLE_CAP                             (FLAG_HIDDEN_ITEMS_START + 0xdf)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_127_HP_UP                                  (FLAG_HIDDEN_ITEMS_START + 0xe0)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_127_MIND_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0xe1)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_127_STAR_PIECE                             (FLAG_HIDDEN_ITEMS_START + 0xe2)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_128_PEARL                                  (FLAG_HIDDEN_ITEMS_START + 0xe3)
-#define FLAG_HIDDEN_ITEM_UNDERWATER_128_PROTEIN                                (FLAG_HIDDEN_ITEMS_START + 0xe4)
-#define FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_PP_MAX                                (FLAG_HIDDEN_ITEMS_START + 0xe5)
-#define FLAG_HIDDEN_ITEM_YELLOW_NECTAR                                         (FLAG_HIDDEN_ITEMS_START + 0xe6)
+#define FLAG_HIDDEN_ITEM_ROUTE_123_PP_MAX                                      (FLAG_HIDDEN_ITEMS_START + 0x38) // relocated 0x2b2 -> 0x22c (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                                  (FLAG_HIDDEN_ITEMS_START + 0x39) // relocated 0x2b3 -> 0x22d (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1                                (FLAG_HIDDEN_ITEMS_START + 0x3b) // relocated 0x2b4 -> 0x22f (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2                                (FLAG_HIDDEN_ITEMS_START + 0x3c) // relocated 0x2b5 -> 0x230 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3                                (FLAG_HIDDEN_ITEMS_START + 0x42) // relocated 0x2b6 -> 0x236 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_1                           (FLAG_HIDDEN_ITEMS_START + 0x43) // relocated 0x2b7 -> 0x237 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_2                           (FLAG_HIDDEN_ITEMS_START + 0x45) // relocated 0x2b8 -> 0x239 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_RUSTBORO_CITY_BOTTLE_CAP                              (FLAG_HIDDEN_ITEMS_START + 0x46) // relocated 0x2b9 -> 0x23a (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_RARE_CANDY                     (FLAG_HIDDEN_ITEMS_START + 0x47) // relocated 0x2ba -> 0x23b (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_ZINC                           (FLAG_HIDDEN_ITEMS_START + 0x4b) // relocated 0x2bb -> 0x23f (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BLUE_SHARD                           (FLAG_HIDDEN_ITEMS_START + 0x4c) // relocated 0x2bc -> 0x240 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_GREEN_SHARD                          (FLAG_HIDDEN_ITEMS_START + 0x4d) // relocated 0x2bd -> 0x241 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_RED_SHARD                            (FLAG_HIDDEN_ITEMS_START + 0x4f) // relocated 0x2be -> 0x243 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_YELLOW_SHARD                         (FLAG_HIDDEN_ITEMS_START + 0x50) // relocated 0x2bf -> 0x244 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SCORCHED_SLAB_STONE_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0x54) // relocated 0x2c0 -> 0x248 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICE_STONE                           (FLAG_HIDDEN_ITEMS_START + 0x56) // relocated 0x2c1 -> 0x24a (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICICLE_PLATE                        (FLAG_HIDDEN_ITEMS_START + 0x58) // relocated 0x2c2 -> 0x24c (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SKY_PILLAR_SKY_PLATE                                  (FLAG_HIDDEN_ITEMS_START + 0x59) // relocated 0x2c3 -> 0x24d (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_LEFTOVERS                         (FLAG_HIDDEN_ITEMS_START + 0x5a) // relocated 0x2c4 -> 0x24e (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET                                    (FLAG_HIDDEN_ITEMS_START + 0x5b) // relocated 0x2c5 -> 0x24f (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL                              (FLAG_HIDDEN_ITEMS_START + 0x5c) // relocated 0x2c6 -> 0x250 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_1                           (FLAG_HIDDEN_ITEMS_START + 0x5d) // relocated 0x2c7 -> 0x251 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_2                           (FLAG_HIDDEN_ITEMS_START + 0x5e) // relocated 0x2c8 -> 0x252 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_CALCIUM                                (FLAG_HIDDEN_ITEMS_START + 0x5f) // relocated 0x2c9 -> 0x253 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_CARBOS                                 (FLAG_HIDDEN_ITEMS_START + 0x60) // relocated 0x2ca -> 0x254 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL                                  (FLAG_HIDDEN_ITEMS_START + 0x61) // relocated 0x2cb -> 0x255 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_124_PIXIE_PLATE                            (FLAG_HIDDEN_ITEMS_START + 0x62) // relocated 0x2cc -> 0x256 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_126_BIG_PEARL                              (FLAG_HIDDEN_ITEMS_START + 0x63) // relocated 0x2cd -> 0x257 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_126_BOTTLE_CAP                             (FLAG_HIDDEN_ITEMS_START + 0x65) // relocated 0x2ce -> 0x259 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON                                   (FLAG_HIDDEN_ITEMS_START + 0x66) // relocated 0x2cf -> 0x25a (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0x67) // relocated 0x2d0 -> 0x25b (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL                                  (FLAG_HIDDEN_ITEMS_START + 0x68) // relocated 0x2d1 -> 0x25c (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_126_STARDUST                               (FLAG_HIDDEN_ITEMS_START + 0x6a) // relocated 0x2d2 -> 0x25e (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_127_BOTTLE_CAP                             (FLAG_HIDDEN_ITEMS_START + 0x6b) // relocated 0x2d3 -> 0x25f (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_127_HP_UP                                  (FLAG_HIDDEN_ITEMS_START + 0x6e) // relocated 0x2d4 -> 0x262 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_127_MIND_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0x6f) // relocated 0x2d5 -> 0x263 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_127_STAR_PIECE                             (FLAG_HIDDEN_ITEMS_START + 0x21f) // relocated 0x2d6 -> 0x413 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_128_PEARL                                  (FLAG_HIDDEN_ITEMS_START + 0x242) // relocated 0x2d7 -> 0x436 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_UNDERWATER_128_PROTEIN                                (FLAG_HIDDEN_ITEMS_START + 0x2ac) // relocated 0x2d8 -> 0x4a0 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_VICTORY_ROAD_1F_PP_MAX                                (FLAG_HIDDEN_ITEMS_START + 0x2ad) // relocated 0x2d9 -> 0x4a1 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_YELLOW_NECTAR                                         (FLAG_HIDDEN_ITEMS_START + 0x2bd) // relocated 0x2da -> 0x4b1 (Sept 23 2026: bit was shared with a live flag)
 // Inclement declares these two bare at 0x22/0x23, below FLAG_HIDDEN_ITEMS_START,
 // which this engine's bg_hidden_item_event assertion rejects. Renamed in the map
 // data and given proper in-range flags.
-#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SUPER_POTION                        (FLAG_HIDDEN_ITEMS_START + 0xef)
-#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_HEAL_BALL                           (FLAG_HIDDEN_ITEMS_START + 0xf0)
-#define FLAG_PETALBURG_WOODS_BIG_ROOT                                          (FLAG_HIDDEN_ITEMS_START + 0xe7)
-#define FLAG_PETALBURG_WOODS_INSECT_PLATE                                      (FLAG_HIDDEN_ITEMS_START + 0xe8)
-#define FLAG_SANDSTREWN_RUINS_BIG_NUGGET                                       (FLAG_HIDDEN_ITEMS_START + 0xe9)
-#define FLAG_SANDSTREWN_RUINS_PROTECTOR                                        (FLAG_HIDDEN_ITEMS_START + 0xea)
-#define FLAG_SEASPRAY_CAVE_DAWN_STONE                                          (FLAG_HIDDEN_ITEMS_START + 0xeb)
-#define FLAG_SEASPRAY_CAVE_RARE_CANDY                                          (FLAG_HIDDEN_ITEMS_START + 0xec)
-#define PETALBURG_WOODS_2_HEAL_BALL                                            (FLAG_HIDDEN_ITEMS_START + 0xed)
-#define PETALBURG_WOODS_2_SUPER_POTION                                         (FLAG_HIDDEN_ITEMS_START + 0xee)
+#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SUPER_POTION                        (FLAG_HIDDEN_ITEMS_START + 0x2be) // relocated 0x2e3 -> 0x4b2 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_HEAL_BALL                           (FLAG_HIDDEN_ITEMS_START + 0x2bf) // relocated 0x2e4 -> 0x4b3 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_PETALBURG_WOODS_BIG_ROOT                                          (FLAG_HIDDEN_ITEMS_START + 0x2c5) // relocated 0x2db -> 0x4b9 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_PETALBURG_WOODS_INSECT_PLATE                                      (FLAG_HIDDEN_ITEMS_START + 0x2c6) // relocated 0x2dc -> 0x4ba (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_SANDSTREWN_RUINS_BIG_NUGGET                                       (FLAG_HIDDEN_ITEMS_START + 0x2c8) // relocated 0x2dd -> 0x4bc (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_SANDSTREWN_RUINS_PROTECTOR                                        (FLAG_HIDDEN_ITEMS_START + 0x2ca) // relocated 0x2de -> 0x4be (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_SEASPRAY_CAVE_DAWN_STONE                                          (FLAG_HIDDEN_ITEMS_START + 0x2cb) // relocated 0x2df -> 0x4bf (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_SEASPRAY_CAVE_RARE_CANDY                                          (FLAG_HIDDEN_ITEMS_START + 0x2d6) // relocated 0x2e0 -> 0x4ca (Sept 23 2026: bit was shared with a live flag)
 
 #define FLAG_EC_ITEM_SEASPRAY_CAVE_B1F_QUICK_BALL 0x264
 #define FLAG_EC_ITEM_SLATEPORT_CITY_QUICK_BALL 0x266
@@ -1032,7 +1030,6 @@
 #define FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN                           0x364
 #define FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY          0x365
 #define FLAG_HIDE_LANETTES_HOUSE_LANETTE                            0x366
-#define FLAG_HIDE_FALLARBOR_POKEMON_CENTER_LANETTE                  0x367
 #define FLAG_HIDE_TRICK_HOUSE_ENTRANCE_MAN                          0x368
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER_REPLACEMENT    0x369
 #define FLAG_HIDE_DESERT_UNDERPASS_FOSSIL                           0x36A
@@ -1192,7 +1189,6 @@
 #define FLAG_ITEM_ROUTE_119_LEAF_STONE                              0x403
 #define FLAG_ITEM_ROUTE_119_ULTRA_BALL                              0x404
 #define FLAG_ITEM_ROUTE_119_HYPER_POTION_1                          0x405
-#define FLAG_ITEM_ROUTE_120_GENGARITE                                  0x406
 #define FLAG_ITEM_ROUTE_120_KANGASKHANITE                               0x407
 #define FLAG_ITEM_ROUTE_123_TIMER_BALL                              0x408
 #define FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE                    0x409 // Unused Flag, leftover from R/S. In Emerald this is a hidden item and uses a different flag
@@ -1238,7 +1234,6 @@
 #define FLAG_ITEM_MT_PYRE_EXTERIOR_MAX_POTION                       0x431
 #define FLAG_ITEM_MT_PYRE_EXTERIOR_DUSK_BALL                    0x432
 #define FLAG_ITEM_NEW_MAUVILLE_ULTRA_BALL                           0x433
-#define FLAG_ITEM_NEW_MAUVILLE_ESCAPE_ROPE                          0x434
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL    0x435
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER        0x436
 #define FLAG_ITEM_SCORCHED_SLAB_MASTER_BALL                        0x437
@@ -1252,14 +1247,12 @@
 #define FLAG_ITEM_VICTORY_ROAD_B1F_FULL_RESTORE                     0x43F
 #define FLAG_ITEM_VICTORY_ROAD_B2F_FULL_HEAL                        0x440
 #define FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_MASTER_BALL              0x442
-#define FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE                               0x443
 #define FLAG_ITEM_ROUTE_124_RED_SHARD                               0x444
 #define FLAG_ITEM_ROUTE_124_BLUE_SHARD                              0x445
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_HONEY              0x446
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_HARBOR_MAIL               0x447
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_ESCAPE_ROPE              0x448
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_B1F_DIVE_BALL              0x449
-#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE              0x44A
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_REVIVE                  0x44B
 #define FLAG_ITEM_ABANDONED_SHIP_CAPTAINS_OFFICE_STORAGE_KEY        0x44C
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_WATER_STONE    0x44D
@@ -1282,8 +1275,6 @@
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_OVAL_STONE                          0x45F
 #define FLAG_ITEM_MT_PYRE_3F_SUPER_REPEL                            0x460
 #define FLAG_ITEM_ROUTE_118_SCIZORITE                            0x461
-#define FLAG_ITEM_NEW_MAUVILLE_ROTOM_CATALOG                            0x462
-#define FLAG_ITEM_NEW_MAUVILLE_UPGRADE                        0x463
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL                      0x464
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL                 0x465 // Unused Flag, leftover from the Ruby Magma hideout
 #define FLAG_SEASPRAY_CAVE_B1F_FREEZE_DRY                           0x466 // Formerly unused Ruby Magma flag; the pickup is now Absolite Z.
@@ -2598,8 +2589,8 @@
 // ---------------------------------------------------------------------------
 #define FLAG_DECORATION_0                                           0x2F // Restored from Inclement Emerald; relocated 0xAD -> 0x2F (donor ID taken by live EC content).
 #define FLAG_DEWFORD_EVIOLITE                                       0x3F // Restored from Inclement Emerald; relocated 0x36 -> 0x3F (donor ID taken by live EC content).
-#define FLAG_DEWFORD_GYM_FRESHWATER                                 0xD8 // Restored from Inclement Emerald; relocated 0x32 -> 0xD8 (donor ID taken by live EC content).
-#define FLAG_MAUVILLE_GYM_MOOMOOMILK                                0x158 // Restored from Inclement Emerald; relocated 0x38 -> 0x158 (donor ID taken by live EC content).
+#define FLAG_DEWFORD_GYM_FRESHWATER                                            0x16c // relocated 0xd8 -> 0x16c (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_MAUVILLE_GYM_MOOMOOMILK                                           0x16d // relocated 0x158 -> 0x16d (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_DEFEATED_MOLTRES                                       0x1E5 // Restored from Inclement Emerald; relocated 0x4A2 -> 0x1E5 (donor ID taken by live EC content).
 #define FLAG_DEFEATED_MEWTWO                                        0x1E6 // Restored from Inclement Emerald; relocated 0x4A3 -> 0x1E6 (donor ID taken by live EC content).
 #define FLAG_DEFEATED_JIRACHI                                       0x1E7 // Restored from Inclement Emerald; relocated 0x4A8 -> 0x1E7 (donor ID taken by live EC content).
@@ -2884,3 +2875,13 @@
 #define FLAG_ENABLE_MOM_MATCH_CALL           0xD8
 #define FLAG_ENABLE_MR_STONE_POKENAV         0x158
 #endif // GUARD_CONSTANTS_FLAGS_H
+
+// Fixture-era names for item balls and objects that map data names differently.
+// Same object, same bit: kept as aliases so the flag-collision gate stays exact.
+#define FLAG_HIDE_FALLARBOR_POKEMON_CENTER_LANETTE                   FLAG_HIDE_FALLORBOR_POKEMON_CENTER_LANETTE
+#define FLAG_ITEM_ROUTE_120_GENGARITE                                FLAG_ITEM_ROUTE_120_NUGGET
+#define FLAG_ITEM_NEW_MAUVILLE_ESCAPE_ROPE                           FLAG_ITEM_NEW_MAUVILLE_DUSK_BALL
+#define FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE                           FLAG_ITEM_FIERY_PATH_TM06
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE                 FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM_13
+#define FLAG_ITEM_NEW_MAUVILLE_ROTOM_CATALOG                         FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL
+#define FLAG_ITEM_NEW_MAUVILLE_UPGRADE                               FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER

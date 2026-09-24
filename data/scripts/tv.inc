@@ -25,6 +25,8 @@ EventScript_TryDoTVShow::
 	specialvar VAR_RESULT, GetSelectedTVShow
 	compare VAR_RESULT, 0
 	goto_if_ne EventScript_DoTVShow
+	@ No show selected: still release the lockall and turn the screen off.
+	goto EventScript_MomDadMightLikeThis2
 	end
 
 EventScript_MomDadMightLikeThis1::
@@ -43,6 +45,9 @@ EventScript_PlayersHouseMovie::
 @ It's called again when Mom actually asks for the color, overwriting
 @ whatever it does here.
 EventScript_PlayersHouseLatiNewsFlash::
+	@ CheckForPlayersHouseNews also answers LATI before the Petalburg Gym broadcast
+	@ sets FLAG_SYS_TV_HOME; only the real bulletin may start the roamer.
+	goto_if_unset FLAG_SYS_TV_LATIAS_LATIOS, EventScript_MomDadMightLikeThis1
 	msgbox PlayersHouse_1F_Text_LatiEmergencyNewsFlash, MSGBOX_DEFAULT
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS

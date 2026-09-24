@@ -38,7 +38,7 @@ DewfordTown_House2_Text_WantYouToHaveSilkScarf: @ 81FE27A
 
 DewfordTown_House2_Text_NoRoom: @ 81FE356
 	.string "Oh, you don't have room?\p"
-	.string "Now, listen tight, this SCARF is a must-\n"
+	.string "Now, listen tight, this Scarf is a must-\n"
 	.string "have! Why, I would sell all my items\l"
 	.string "in order to get it!$"
 

@@ -27,7 +27,8 @@ gText_Birch_MainSpeech::
 	.string "Gyms. Listen to its people.\l"
 	.string "Watch its Pokémon.\p"
 	.string "I wonder what you will discover\n"
-	.string "together!$"
+	.string "together!\p"
+	.string "$"
 
 gText_Birch_AndYouAre::
 	.string "And you are?$"

@@ -103,16 +103,16 @@ RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom:
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
 	.string "You entered the Hall of Fame as\n"
-	.string "Hoenn's Champion.\l"
-	.string "Something extraordinary has\l"
+	.string "Hoenn's Champion.\p"
+	.string "Something extraordinary has\n"
 	.string "answered!\p"
 	.string "Arceus appears before you and\n"
 	.string "joins your party.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardPC:
 	.string "You entered the Hall of Fame as\n"
-	.string "Hoenn's Champion.\l"
-	.string "Something extraordinary has\l"
+	.string "Hoenn's Champion.\p"
+	.string "Something extraordinary has\n"
 	.string "answered!\p"
 	.string "Arceus appears before you and is\n"
 	.string "sent to your PC.$"

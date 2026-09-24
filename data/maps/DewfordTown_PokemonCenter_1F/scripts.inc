@@ -35,5 +35,5 @@ DewfordTown_PokemonCenter_1F_Text_StoneCavern: @ 81FC557
 DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM: @ 81FC5AE
 	.string "Once you have the badge and\n"
 	.string "license, bring a Pokémon that\l"
-	.string "could learn the HM skill.\p"
+	.string "could learn that field move.\p"
 	.string "It won't need a move slot!$"

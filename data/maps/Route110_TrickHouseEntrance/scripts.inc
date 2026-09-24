@@ -836,8 +836,8 @@ Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges: @ 826A9AF
 	.string "I'm in the midst of devising new tricky\n"
 	.string "challenges!\p"
 	.string "It's not too much to ask for a bit more\n"
-	.string "time for me to think, is it now?\l"
-	.string "You wouldn't begrudge me that?\l"
+	.string "time for me to think, is it now?\p"
+	.string "You wouldn't begrudge me that?\n"
 	.string "Come back in a little while!$"
 
 Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward: @ 826AA82

@@ -332,12 +332,22 @@ def main():
             objects = map_rows.get(map_id, {}).get('object_events', [])
             scripts_path = ROOT / 'data' / 'maps' / map_rows.get(map_id, {}).get('_dir', '') / 'scripts.inc'
             local_scripts = scripts_path.read_text() if scripts_path.exists() else ''
+            def script_body(label):
+                body = local_scripts.split(label + '::', 1)
+                return body[1].split('\n\n', 1)[0] if len(body) == 2 else ''
             def rolls_rock_table(obj):
+                # The object's own script, or a script it jumps to in one
+                # hop (Route 109's sand mounds share one dig script).
                 script = obj.get('script', '')
                 if script == 'EventScript_RockSmash':
                     return True
-                body = local_scripts.split(script + '::', 1)
-                return len(body) == 2 and 'RockSmashWildEncounter' in body[1].split('\n\n', 1)[0]
+                body = script_body(script)
+                if 'RockSmashWildEncounter' in body:
+                    return True
+                for target in re.findall(r'\b(?:goto|call)\s+(\w+)', body):
+                    if 'RockSmashWildEncounter' in script_body(target):
+                        return True
+                return False
             if not any(rolls_rock_table(obj) for obj in objects):
                 errors.append(f"{map_id}/rock_smash_mons: map has no smashable rock")
         for table in entry.values():

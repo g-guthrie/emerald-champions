@@ -120,7 +120,9 @@ static u8 CollectRouteSignSpecies(
         if (species == SPECIES_NONE || species >= NUM_SPECIES)
             continue;
         for (j = 0; j < count; j++)
-            if (entries[j].species == species)
+            // Forms that share a display name (Pumpkaboo sizes) list once.
+            if (entries[j].species == species
+             || StringCompare(GetLegendaryDisplayName(entries[j].species), GetLegendaryDisplayName(species)) == 0)
                 break;
         if (j == count && count < ROUTE_SIGN_MAX_METHOD_SPECIES)
             entries[count++].species = species;
@@ -244,7 +246,7 @@ void BufferCurrentMapRouteSignSpecies(void)
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE119))
-        dest = StringCopy(dest, COMPOUND_STRING("\pFEEBAS hides in a few fishing spots.\nAny rod works if you find one."));
+        dest = StringCopy(dest, COMPOUND_STRING("\pFeebas hides in a few fishing spots.\nAny rod works if you find one."));
     if (headerId != HEADER_NONE)
     {
         enum LegendarySignId anomaly = GetLiveWeatherAnomalyOnMap(gSaveBlock1Ptr->location.mapGroup,
@@ -257,9 +259,9 @@ void BufferCurrentMapRouteSignSpecies(void)
         }
     }
     if (hasMethod && hasLegend)
-        dest = StringCopy(dest, COMPOUND_STRING("\pLegends and Ultra Beasts are rare\nhere. SWEET SCENT draws them out."));
+        dest = StringCopy(dest, COMPOUND_STRING("\pLegends and Ultra Beasts are rare\nhere. Sweet Scent draws them out."));
     if (hasMethod)
-        StringCopy(dest, COMPOUND_STRING("\pSWEET SCENT reverses grass/Surf\nrarity: rare species become common."));
+        StringCopy(dest, COMPOUND_STRING("\pSweet Scent reverses grass/Surf\nrarity: rare species become common."));
     else
         StringCopy(gStringVar4, sText_RouteSignNoSpecies);
 }

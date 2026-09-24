@@ -2504,6 +2504,12 @@ static u8 GetDynamicWeather(void);
 void SetSavedWeather(enum OverworldWeather weather)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
+    // A live weather anomaly owns its home map's sky: scripted weather
+    // (desert triggers, ash on transition, cutscene resets) cannot clear it.
+    u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
+
+    if (anomalyWeather != WEATHER_NONE)
+        weather = anomalyWeather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }

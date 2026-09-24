@@ -245,7 +245,7 @@ LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit: @ 8219BC4
 	.string "and works of art depicting them.\p"
 	.string "If you were to come across such\n"
 	.string "a painting, may we ask you to obtain\l"
-	.string "the artist's permission to exhibit\l"
+	.string "the artist's permission to exhibit\p"
 	.string "it here?$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit: @ 8219CF3

@@ -19,6 +19,9 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: @ 821FE06
 	msgbox LilycoveCity_DepartmentStore_4F_Text_Stones, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
 	special OpenEmeraldChampionsEvolutionSpecialist
+	@ The special opens a native Mart but is not a waitstate special;
+	@ wait here like the pokemart command so the farewell follows the shop.
+	waitstate
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -29,6 +32,9 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight:: @ 821FE2C
 	msgbox LilycoveCity_DepartmentStore_4F_Text_Tools, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 1
 	special OpenEmeraldChampionsEvolutionSpecialist
+	@ The special opens a native Mart but is not a waitstate special;
+	@ wait here like the pokemart command so the farewell follows the shop.
+	waitstate
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end

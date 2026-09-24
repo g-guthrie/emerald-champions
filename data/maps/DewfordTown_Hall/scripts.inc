@@ -419,7 +419,7 @@ DewfordTown_Hall_Text_BooksAboutTrend: @ 81FDB89
 	.string "“{STR_VAR_1}” &\l"
 	.string "Bad “{STR_VAR_1}”…\p"
 	.string "The Link Between\n"
-	.string "“{STR_VAR_1}” AND\l"
+	.string "“{STR_VAR_1}” and\l"
 	.string "Pokémon…\p"
 	.string "Useful\n"
 	.string "“{STR_VAR_1}”…\p"
@@ -427,19 +427,19 @@ DewfordTown_Hall_Text_BooksAboutTrend: @ 81FDB89
 	.string "“{STR_VAR_1}.”$"
 
 DewfordTown_Hall_Text_TrendsScream: @ 81FDC05
-	.string "“{STR_VAR_1}'S\n"
+	.string "“{STR_VAR_1}'s\n"
 	.string "Scream” is the title.$"
 
 DewfordTown_Hall_Text_TrendsSmile: @ 81FDC21
-	.string "“{STR_VAR_1}'S\n"
+	.string "“{STR_VAR_1}'s\n"
 	.string "Smile” is the title.$"
 
 DewfordTown_Hall_Text_LastTrend: @ 81FDC3C
-	.string "It's titled “The LAST\n"
+	.string "It's titled “The Last\n"
 	.string "{STR_VAR_1}”.$"
 
 DewfordTown_Hall_Text_BirthOfTrend: @ 81FDC57
-	.string "It's titled “The BIRTH OF\n"
+	.string "It's titled “The Birth of\n"
 	.string "{STR_VAR_1}”.$"
 
 DewfordTown_Hall_Text_SawTrendCoolestThing: @ 81FDC76
@@ -474,21 +474,21 @@ DewfordTown_Hall_Text_ComposedTrendThemeSong: @ 81FDD95
 DewfordTown_Hall_Text_WorkOnYourSinging: @ 81FDE0E
 	.string "… …\p"
 	.string "I dare say, chap, it would pay for you\n"
-	.string "to work on your singing before you\l"
-	.string "trifle yourself with\l"
+	.string "to work on your singing…\p"
+	.string "…before you trifle yourself with\n"
 	.string "“{STR_VAR_1}.”$"
 
 DewfordTown_Hall_Text_OrganizeTrendParty: @ 81FDE77
 	.string "Anyway, as I was saying earlier, we\n"
-	.string "should get together and organize a\l"
-	.string "“{STR_VAR_1}” party\l"
+	.string "should get together and organize…\p"
+	.string "…a “{STR_VAR_1}” party\n"
 	.string "on the island.$"
 
 DewfordTown_Hall_Text_BrilliantIndeed: @ 81FDED8
 	.string "Oh, a smashing good idea!\p"
 	.string "It will settle once and for all\n"
 	.string "who is the best at\l"
-	.string "“{STR_VAR_1}.”\l"
+	.string "“{STR_VAR_1}.”\p"
 	.string "Brilliant, indeed!\p"
 	.string "Starting today, our lives will revolve\n"
 	.string "around “{STR_VAR_1}”!$"
@@ -497,16 +497,16 @@ DewfordTown_Hall_Text_TrendHasBecomePartOfLife: @ 81FDF72
 	.string "I was thinking, though…\p"
 	.string "Wouldn't you agree that\n"
 	.string "“{STR_VAR_1}” has\l"
-	.string "grown from being something trendy to\l"
-	.string "being a part of our daily lives?$"
+	.string "grown from being something trendy…\p"
+	.string "…to being a part of our daily lives?$"
 
 DewfordTown_Hall_Text_TrendWeighsHeavilyOnMind: @ 81FDFF1
 	.string "Beg pardon?\n"
 	.string "That much, what?\p"
 	.string "However, it's true that\n"
 	.string "“{STR_VAR_1}”\l"
-	.string "weighs heavily on your mind, whether\l"
-	.string "you're awake or asleep.\p"
+	.string "weighs heavily on your mind…\p"
+	.string "…whether you're awake or asleep.\p"
 	.string "Absolutely, you're the\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "Professor, old sport!$"

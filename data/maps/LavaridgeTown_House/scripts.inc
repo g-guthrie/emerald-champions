@@ -62,9 +62,8 @@ LavaridgeTown_House_EventScript_DeclineCandy::
 	end
 
 LavaridgeTown_House_Text_OfferCandy:
-	.string "Copying a move can catch a foe\n"
-	.string "off guard! A Center tutor can\l"
-	.string "teach Mimic to suitable Pokémon.\p"
+	.string "Training near a volcano is hard\n"
+	.string "work, isn't it?\p"
 	.string "Would you like a Rare Candy\n"
 	.string "to help one of your partners grow?$"
 LavaridgeTown_House_Text_DeclineCandy:

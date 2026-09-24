@@ -552,13 +552,10 @@ MauvilleCity_Text_UncleNoNeedToBeDown: @ 81DFC8A
 	.string "Everyone's waiting for you.$"
 
 MauvilleCity_Text_UncleVisitUsSometime: @ 81DFD34
-	.string "Uncle: {PLAYER}{KUN}, it just dawned on me\n"
-	.string "that you must be the Trainer who kept\l"
-	.string "an eye out for Wally when he caught\l"
-	.string "his Pokémon.\p"
+	.string "Uncle: {PLAYER}{KUN}, it just dawned on me!\n"
+	.string "You helped Wally catch his Pokémon.\p"
 	.string "Why don't you visit us in Verdanturf\n"
-	.string "sometime?\l"
-	.string "I'm sure Wally would enjoy it.$"
+	.string "sometime? Wally would enjoy it.$"
 
 
 MauvilleCity_Text_ScottYouDidntHoldBack: @ 81DFED5

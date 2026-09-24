@@ -88,8 +88,8 @@ GraniteCave_StevensRoom_Text_ImStevenLetterForMe: @ 822DD5A
 GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "Steven: Thank you for delivering\n"
 	.string "the letter.\p"
-	.string "Please take this Rare Candy. If\n"
-	.string "you want to learn my favorite\l"
+	.string "Please take this Rare Candy.\p"
+	.string "If you want to learn my favorite\n"
 	.string "move, Steel Wing, ask the Center\l"
 	.string "tutor.$"
 

@@ -219,7 +219,7 @@ extern const u8 NewMauville_Inside_EventScript_DefeatedRotom[];
 extern const u8 NewMauville_Inside_EventScript_PlayerCaughtRotom[];
 extern const u8 NewMauville_Inside_EventScript_RetryRotom[];
 
-TEST("Campaign gates: New Mauville completes on Rotom defeat or capture and retries other outcomes")
+TEST("Campaign gates: New Mauville completes only on Rotom capture and retries every other outcome")
 {
     u16 oldState = VarGet(VAR_NEW_MAUVILLE_STATE);
     u8 oldOutcome = gBattleOutcome;
@@ -230,8 +230,8 @@ TEST("Campaign gates: New Mauville completes on Rotom defeat or capture and retr
         struct ScriptContext ctx;
         InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
         SetupBytecodeScript(&ctx, NewMauville_Inside_EventScript_CheckRotomOutcome);
-        const u8 *expected = outcome == B_OUTCOME_WON ? NewMauville_Inside_EventScript_DefeatedRotom
-            : outcome == B_OUTCOME_CAUGHT ? NewMauville_Inside_EventScript_PlayerCaughtRotom
+        const u8 *expected = outcome == B_OUTCOME_CAUGHT ? NewMauville_Inside_EventScript_PlayerCaughtRotom
+            : outcome == B_OUTCOME_WON ? NewMauville_Inside_EventScript_DefeatedRotom
             : NewMauville_Inside_EventScript_RetryRotom;
         for (u32 step = 0; step < 6 && ctx.scriptPtr != expected; step++)
         {

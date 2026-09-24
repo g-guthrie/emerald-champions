@@ -16,7 +16,7 @@ Route113_EventScript_CheckSetAshWeather:: @ 81F216A
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 19
 	goto_if_lt Route113_EventScript_DontSetAshWeather
-	compare VAR_TEMP_0, 84
+	compare VAR_TEMP_0, 93
 	goto_if_gt Route113_EventScript_DontSetAshWeather
 	setweather WEATHER_VOLCANIC_ASH
 	return
@@ -43,6 +43,8 @@ Route113_EventScript_RouteSignFallarbor:: @ 81F21A5
 Route113_EventScript_ShowRouteRoster::
 	call Common_EventScript_ShowRouteRoster
 	setvar VAR_0x8004, LEGENDARY_SIGN_MARSHADOW
+	call Common_EventScript_ShowRouteLegend
+	setvar VAR_0x8004, LEGENDARY_SIGN_RESHIRAM
 	call Common_EventScript_ShowRouteLegend
 	releaseall
 	end

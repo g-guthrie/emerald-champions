@@ -45,15 +45,17 @@ Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf: @ 822B99F
 	.string "He's desperate to get through.\p"
 	.string "He says that if he digs little by little\n"
 	.string "without using machines, he won't\l"
-	.string "disturb Pokémon, and he'll avoid\l"
-	.string "harming the natural environment.\p"
+	.string "disturb Pokémon.\p"
+	.string "And he'll avoid harming the natural\n"
+	.string "environment, too.\p"
 	.string "I wonder if he made it through yet.$"
 
 Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel: @ 822BAAF
 	.string "To get to Verdanturf without using\n"
 	.string "this Tunnel, you'd have to cross the\l"
-	.string "sea to Dewford, sail on to Slateport,\l"
-	.string "then travel through Mauville.$"
+	.string "sea to Dewford.\p"
+	.string "Then you'd sail on to Slateport and\n"
+	.string "travel through Mauville.$"
 
 Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough: @ 822BB3B
 	.string "Did you hear? The Tunnel to Verdanturf\n"

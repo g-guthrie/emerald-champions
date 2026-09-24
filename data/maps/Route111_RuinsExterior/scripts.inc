@@ -56,8 +56,8 @@ Route111_RuinsExterior_Text_CastformReading:
 
 Route111_RuinsExterior_Text_LandorusStirs:
 	.string "The pattern points to Landorus.\n"
-	.string "It roams the grass around these\l"
-	.string "ruins now. Keep searching!$"
+	.string "It appears in the grass around\l"
+	.string "these ruins now. Keep searching!$"
 
 Route111_RuinsExterior_Text_LandorusCaught:
 	.string "Landorus travels with you now.\n"

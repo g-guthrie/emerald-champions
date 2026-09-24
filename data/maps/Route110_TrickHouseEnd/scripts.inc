@@ -325,11 +325,11 @@ Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent: @ 826B485
 	.string "But that has nothing to do with my\n"
 	.string "losing!\p"
 	.string "In recognition of the friendship\n"
-	.string "between you, the driven, and the genius\l"
-	.string "that is myself, I demand that you take\l"
+	.string "between you, the driven, and the genius\p"
+	.string "that is myself, I demand that you take\n"
 	.string "this keepsake!\p"
 	.string "Actually there are two--\n"
-	.string "a Red Tent and a Blue Tent.\l"
+	.string "a Red Tent and a Blue Tent.\p"
 	.string "Which do you prefer?$"
 
 Route110_TrickHouseEnd_Text_NoRoomInPC: @ 826B615

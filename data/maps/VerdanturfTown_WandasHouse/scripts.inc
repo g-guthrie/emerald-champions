@@ -107,10 +107,9 @@ VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande:: @ 8202989
 VerdanturfTown_WandasHouse_Text_StrongerSpeech: @ 8202993
 	.string "Wally: I lost to you, {PLAYER}, but I'm\n"
 	.string "not feeling down anymore.\p"
-	.string "Because I have a new purpose in life.\n"
-	.string "Together with my Kirlia, I'm going\l"
-	.string "to challenge Pokémon Gyms and become\l"
-	.string "a great Trainer.\p"
+	.string "Because I have a new purpose in life.\p"
+	.string "Kirlia and I are going to challenge\n"
+	.string "Pokémon Gyms and become great!\p"
 	.string "Please watch me, {PLAYER}.\n"
 	.string "I'm going to be stronger than you.\p"
 	.string "When I do, I'm going to challenge you\n"

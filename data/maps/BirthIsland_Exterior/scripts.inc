@@ -85,13 +85,9 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 8267FC1
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 BirthIsland_Exterior_EventScript_CheckEncounterOutcome::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq BirthIsland_Exterior_EventScript_DefeatedDeoxys
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq BirthIsland_Exterior_EventScript_RanFromDeoxys
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, BirthIsland_Exterior_EventScript_EncounterFinished
+	@ A win or a capture resolves the finale; any other ending retreats for a retry.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	setflag FLAG_EC_FINALE_DEOXYS_RESOLVED
 	setflag FLAG_BATTLED_DEOXYS
 BirthIsland_Exterior_EventScript_EncounterFinished::
@@ -124,7 +120,9 @@ BirthIsland_Exterior_EventScript_RanFromDeoxys:: @ 8268049
 
 BirthIsland_Exterior_Text_DeoxysVanished:
 	.string "Deoxys vanished into the sky.\n"
-	.string "The strange stone has gone quiet.$"
+	.string "The strange stone has gone quiet.\p"
+	.string "Perhaps it will stir again after\n"
+	.string "your next League victory.$"
 
 BirthIsland_Exterior_Movement_DeoxysApproach: @ 8268054
 	walk_slow_down

@@ -35,6 +35,7 @@ static bool32 MgbaOpen_(void);
 static void MgbaExit_(u8 exitCode);
 static s32 MgbaVPrintf_(const char *fmt, va_list va);
 static void Intr_Timer2(void);
+void FlashTimerIntr(void); // src/agb_flash.c: the flash driver's own Timer 2 handler
 
 extern const struct Test __start_tests[];
 extern const struct Test __stop_tests[];
@@ -728,6 +729,14 @@ static void ReinitCallbacks(void)
 
 static void Intr_Timer2(void)
 {
+    // The flash driver borrows Timer 2 with a faster prescaler while a save
+    // sector is programmed. Those ticks belong to its timeout, not the test's:
+    // counting them made a save-heavy test time out under a parallel run.
+    if ((REG_TM2CNT_H & 3) != TIMER_1024CLK)
+    {
+        FlashTimerIntr();
+        return;
+    }
     if (--gTestRunnerState.timeoutSeconds == 0)
     {
         if (gTestRunnerState.test->runner->checkProgress

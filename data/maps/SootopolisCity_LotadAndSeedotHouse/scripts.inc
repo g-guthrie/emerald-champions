@@ -121,9 +121,9 @@ SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot: @ 8227369
 	.string "Anyway, I love big Seedot.\n"
 	.string "The bigger the better.\p"
 	.string "But my younger brother, he says that\n"
-	.string "LOTAD is bigger.\p"
+	.string "Lotad is bigger.\p"
 	.string "That's silly.\n"
-	.string "SEEDOT has to be bigger than that!\p"
+	.string "Seedot has to be bigger than that!\p"
 	.string "Huh? Do you have a Seedot with you?\n"
 	.string "P-p-please, show me!$"
 
@@ -135,7 +135,6 @@ SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad: @ 8227480
 	.string "Thanks for showing me.\n"
 	.string "This is my thanks!$"
 
-@ Unused
 SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1: @ 8227524
 	.string "Hunh?\n"
 	.string "Your Bag is crammed full.$"
@@ -180,7 +179,6 @@ SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot: @ 822776C
 	.string "Thanks for showing me!\n"
 	.string "This is my thanks!$"
 
-@ Unused
 SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2: @ 822780A
 	.string "Hunh?\n"
 	.string "Your Bag is crammed full.$"

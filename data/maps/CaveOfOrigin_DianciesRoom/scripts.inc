@@ -16,19 +16,11 @@ CaveOfOrigin_DianciesRoom_EventScript_Diancie::
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq CaveOfOrigin_DianciesRoom_EventScript_DefeatedDiancie
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie
+	@ Only a capture resolves it. A knockout, escape, Red Card or Emergency
+	@ Exit ending (B_OUTCOME_MON_TELEPORTED) retreats and stays catchable.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie
 	setflag FLAG_DEFEATED_DIANCIE
 	release
-	end
-
-CaveOfOrigin_DianciesRoom_EventScript_DefeatedDiancie::
-	@ A knocked-out legendary retreats like one that was fled from; it stays catchable.
-	goto CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie
 	end
 
 CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie::

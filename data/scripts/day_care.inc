@@ -159,6 +159,10 @@ Route117_PokemonDayCare_EventScript_TryRetrieveMon::
 @ Emerald Champions (C7): board is free, so there is no fee prompt and no money check.
 @ GetDaycareCostAndPrepareString still buffers the nickname and the levels gained.
 Route117_PokemonDayCare_EventScript_CostPrompt::
+	@ VAR_0x8004 holds the board slot here. A PC Pokemon left on the board must
+	@ not bypass the party rule on its way back.
+	specialvar VAR_RESULT, CanTakeDaycareMonWithinPartyRule
+	goto_if_eq VAR_RESULT, FALSE, Route117_PokemonDayCare_EventScript_PartyRuleRefusal
 	special GetDaycareCostAndPrepareString
 	msgbox Route117_PokemonDayCare_Text_NoChargeTakeItBack, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_RetrieveMon
@@ -182,6 +186,11 @@ Route117_PokemonDayCare_EventScript_RetrieveMon::
 Route117_PokemonDayCare_EventScript_AskRetrieveOtherMon::
 	msgbox Route117_PokemonDayCare_Text_TakeOtherOneBackToo, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_TryRetrieveMon
+	goto Route117_PokemonDayCare_EventScript_ComeAgain
+	end
+
+Route117_PokemonDayCare_EventScript_PartyRuleRefusal::
+	msgbox Route117_PokemonDayCare_Text_PartyRuleRefusal, MSGBOX_DEFAULT
 	goto Route117_PokemonDayCare_EventScript_ComeAgain
 	end
 
@@ -322,13 +331,22 @@ Route117_PokemonDayCare_Text_YourMonHasGrownXLevels:
 	.string "By level, your {STR_VAR_1} has\n"
 	.string "grown by {STR_VAR_2}.$"
 
+Route117_PokemonDayCare_Text_PartyRuleRefusal:
+	.string "Oh, dear. Your team already has one\n"
+	.string "of that special kind with it.\p"
+	.string "A party may hold 1 Legendary or\n"
+	.string "Mythical, 1 Ultra Beast and\l"
+	.string "1 Paradox Pokémon.\p"
+	.string "Store that one in the PC first,\n"
+	.string "then come back for this one.$"
+
 Route117_PokemonDayCare_Text_YourTeamIsFull:
 	.string "Your Pokémon team is full.\n"
 	.string "Make room, then come see me.$"
 
 Route117_PokemonDayCare_Text_NoChargeTakeItBack:
-	.string "{STR_VAR_1} gained {STR_VAR_2} levels\n"
-	.string "with us. There is no charge.\p"
+	.string "There is no charge for raising\n"
+	.string "{STR_VAR_1}.\p"
 	.string "Will you take it back?$"
 
 Route117_PokemonDayCare_Text_HeresYourMon:

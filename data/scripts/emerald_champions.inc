@@ -392,6 +392,11 @@ EmeraldChampions_Text_BondingUnavailable:
 Common_EventScript_CenterLocalGuide::
 	lockall
 	faceplayer
+	@ Probe for a first lead before the intro (msgbox overwrites gStringVar4),
+	@ so a Center with nothing to tell says so instead of going silent.
+	setvar VAR_0x8004, 0
+	special BufferNextCenterLegendaryLead
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterLocalGuideNoLeads
 	msgbox EmeraldChampions_Text_CenterLocalGuide, MSGBOX_DEFAULT
 	setvar VAR_0x8004, 0
 
@@ -404,6 +409,15 @@ EmeraldChampions_EventScript_CenterLocalGuideNext::
 EmeraldChampions_EventScript_CenterLocalGuideEnd::
 	releaseall
 	end
+
+EmeraldChampions_EventScript_CenterLocalGuideNoLeads::
+	msgbox EmeraldChampions_Text_CenterLocalGuideNoLeads, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EmeraldChampions_Text_CenterLocalGuideNoLeads:
+	.string "I listen for stories about rare\n"
+	.string "Pokémon, but none come from here.$"
 
 EmeraldChampions_Text_CenterLocalGuide:
 	.string "I listen for stories about rare\n"
@@ -610,11 +624,10 @@ EmeraldChampions_EventScript_NextAncientRuin::
 	msgbox EmeraldChampions_Text_NextAncientRuin, MSGBOX_DEFAULT
 	return
 SealedChamber_InnerRoom_Text_ResearchPending:
-	.string "The marks describe three records:\n"
-	.string "the Desert safeguards, Castform's\l"
-	.string "weather, and Stern's seabed scan.\p"
-	.string "Complete those research reports\n"
-	.string "to read the builders' message.$"
+	.string "The marks are worn. The builders'\n"
+	.string "message must be read first.\p"
+	.string "Seek it in the Sealed Chamber\n"
+	.string "before these ruins will answer.$"
 EmeraldChampions_Text_NextDesertRuin:
 	.string "Next, read the Desert Ruins\n"
 	.string "account in Route 111's desert.\l"
@@ -631,33 +644,34 @@ EmeraldChampions_Text_ThreeRuinsComplete:
 	.string "The three guardians have answered!\p"
 	.string "Together, their accounts tell of an\n"
 	.string "age when the land and sea powers\l"
-	.string "were feared beyond reckoning, until\l"
-	.string "a guardian of the sky was called to\l"
-	.string "hold them apart.$"
+	.string "were feared beyond reckoning,\p"
+	.string "until a guardian of the sky was\n"
+	.string "called to hold them apart.$"
 EmeraldChampions_Text_ThreeRuinsCompleteConfirmed:
 	.string "The three guardians have answered!\p"
 	.string "Together, their accounts tell of an\n"
 	.string "age when the land and sea powers\l"
-	.string "were feared beyond reckoning, until\l"
-	.string "a guardian of the sky was called to\l"
-	.string "hold them apart - just as you saw\l"
-	.string "at Sootopolis.$"
+	.string "were feared beyond reckoning,\p"
+	.string "until a guardian of the sky was\n"
+	.string "called to hold them apart - just\l"
+	.string "as you saw at Sootopolis.$"
 EmeraldChampions_Text_ThreeRuinsLore:
 	.string "The three accounts agree: long ago\n"
 	.string "the land and sea powers were feared\l"
-	.string "beyond reckoning, until a guardian\l"
-	.string "of the sky was invoked to keep\l"
-	.string "them apart.\p"
+	.string "beyond reckoning,\p"
+	.string "until a guardian of the sky was\n"
+	.string "invoked to keep them apart.\p"
 	.string "A fourth mark repeats across all\n"
 	.string "three - Regigigas, said to have\l"
 	.string "mustered the others together.$"
 EmeraldChampions_Text_ThreeRuinsLoreConfirmed:
 	.string "The three accounts agree: long ago\n"
 	.string "the land and sea powers were feared\l"
-	.string "beyond reckoning, until a guardian\l"
-	.string "of the sky was invoked to keep\l"
-	.string "them apart - the same balance you\l"
-	.string "restored at Sootopolis.\p"
+	.string "beyond reckoning,\p"
+	.string "until a guardian of the sky was\n"
+	.string "invoked to keep them apart -\p"
+	.string "the same balance you restored\n"
+	.string "at Sootopolis.\p"
 	.string "A fourth mark repeats across all\n"
 	.string "three - Regigigas, said to have\l"
 	.string "mustered the others together.$"

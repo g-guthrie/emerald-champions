@@ -382,7 +382,7 @@ Route111_Movement_WaitForNextWinstrate: @ 81F114F
 
 Route111_EventScript_RouteSignMauville:: @ 81F1153
 	msgbox Route111_Text_RouteSignMauville, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	goto Route111_EventScript_ShowRouteRoster
 
 Route111_EventScript_WinstrateHouseSign:: @ 81F115C
 	msgbox Route111_Text_WinstrateHouseSign, MSGBOX_SIGN
@@ -390,14 +390,21 @@ Route111_EventScript_WinstrateHouseSign:: @ 81F115C
 
 Route111_EventScript_RouteSign112:: @ 81F1165
 	msgbox Route111_Text_RouteSign112, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	goto Route111_EventScript_ShowRouteRoster
 
 Route111_EventScript_RouteSign113:: @ 81F116E
 	msgbox Route111_Text_RouteSign113, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	goto Route111_EventScript_ShowRouteRoster
 
 Route111_EventScript_OldLadysRestStopSign:: @ 81F1177
 	msgbox Route111_Text_OldLadysRestStopSign, MSGBOX_SIGN
+	end
+
+Route111_EventScript_ShowRouteRoster::
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_KORAIDON
+	call Common_EventScript_ShowRouteLegend
+	releaseall
 	end
 
 Route111_EventScript_TrainerTipsSpAtkSpDef:: @ 81F1180
@@ -637,7 +644,8 @@ Route111_Text_BlobGetInAnyHealBall:
 	.string "Good luck!$"
 
 Route111_Text_BringBlobBack:
-	.string "Blob ran off up Route 111.\p"
+	.string "Blob ran off north, toward the\n"
+	.string "Route 112 Cable Car and Mt. Chimney.\p"
 	.string "Please bring it back to me!$"
 
 Route111_Text_ThanksPlayer:

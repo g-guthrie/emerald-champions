@@ -19,11 +19,13 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	call_if_set FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_AskForMeteorite
 	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
-	giveitem ITEM_STAR_PIECE
+	@ Check room first so the Meteorite is handed over before the reward.
+	checkitemspace ITEM_STAR_PIECE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE
 	setvar VAR_0x8004, ITEM_METEORITE
 	call Common_EventScript_PlayerHandedOverTheItem
+	setflag FLAG_EC_GIFT_FALLARBOR_TOWN_COZMOS_HOUSE
+	giveitem ITEM_STAR_PIECE
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteReward, MSGBOX_DEFAULT
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
 	releaseall
@@ -174,8 +176,8 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsHappy:: @ 8200FE4
 	end
 
 FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow: @ 8200FEE
-	.string "Prof. Cozmo: Oh…\n"
-	.string "I never should have let myself be\l"
+	.string "Prof. Cozmo: Oh…\p"
+	.string "I never should have let myself be\n"
 	.string "conned into telling Team Magma where\l"
 	.string "you can find Meteorites…\p"
 	.string "That Meteorite from Meteor Falls…\n"

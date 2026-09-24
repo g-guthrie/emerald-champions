@@ -8,7 +8,7 @@ MtPyre_Exterior_OnTransition: @ 8231FD2
 
 MtPyre_Exterior_EventScript_CheckEnterFromSummit:: @ 8231FD8
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_TEMP_1, 12
+	compare VAR_TEMP_1, 22
 	goto_if_lt MtPyre_Exterior_EventScript_EnterFromSummit
 	return
 

@@ -356,7 +356,7 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
-    EXPECT(GuideTextContains(COMPOUND_STRING("SING")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("Sing")));
     EXPECT(GuideTextContains(COMPOUND_STRING("Gym Badges required:\n2.")));
     EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_MELOETTA));
     FlagSet(FLAG_BADGE01_GET);
@@ -369,11 +369,11 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
     EXPECT(GuideTextContains(COMPOUND_STRING("You've already found")));
-    EXPECT(!GuideTextContains(COMPOUND_STRING("SING")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("Sing")));
     gMapHeader.regionMapSectionId = MAPSEC_OLDALE_TOWN;
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
-    EXPECT(GuideTextContains(COMPOUND_STRING("SHAYMIN")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("Shaymin")));
     EXPECT(!GuideTextContains(COMPOUND_STRING("%")));
     BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
@@ -387,9 +387,9 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MOLTRES_GALAR), FLAG_SET_CAUGHT);
     gMapHeader.regionMapSectionId = MAPSEC_LAVARIDGE_TOWN;
     gSpecialVar_0x8004 = 0;
-    do { BufferNextCenterLegendaryLead(); } while (gSpecialVar_Result && !GuideTextContains(COMPOUND_STRING("MOLTRES")));
+    do { BufferNextCenterLegendaryLead(); } while (gSpecialVar_Result && !GuideTextContains(COMPOUND_STRING("Moltres")));
     EXPECT_EQ(gSpecialVar_Result, TRUE);
-    EXPECT(GuideTextContains(COMPOUND_STRING("EMBER PATH")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("Ember Path")));
     EXPECT(!GuideTextContains(COMPOUND_STRING("You've already found")));
     FlagSet(FLAG_EC_CAUGHT_MOLTRES);
     gSpecialVar_0x8004--; // Revisit the same lead after the original encounter is caught.

@@ -87,7 +87,7 @@ Eevee_Text_WhichEevee:
     .string "revert to Eevee?$"
 
 Eevee_Text_ThatsEgg:
-    .string "That's just an egg!$"
+    .string "That's just an Egg!$"
 
 Eevee_Text_Exit:
     .string "See you later then!$"

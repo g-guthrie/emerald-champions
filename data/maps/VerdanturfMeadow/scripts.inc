@@ -1,14 +1,31 @@
 VerdanturfMeadow_MapScripts::
 	.byte 0
 
+@ Route sign for the Meadow, Enamorus's anomaly home. Proposed: a sign
+@ bg_event in map.json (Codex owns placement) pointing here; until then this
+@ label is unreferenced.
+VerdanturfMeadow_EventScript_MeadowSign::
+	msgbox VerdanturfMeadow_Text_MeadowSign, MSGBOX_SIGN
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_ENAMORUS
+	call Common_EventScript_ShowRouteLegend
+	setvar VAR_0x8004, LEGENDARY_SIGN_FEZANDIPITI
+	call Common_EventScript_ShowRouteLegend
+	releaseall
+	end
+
+VerdanturfMeadow_Text_MeadowSign:
+	.string "Verdanturf Meadow\n"
+	.string "{UP_ARROW} Verdanturf Town$"
+
 VerdanturfMeadow_EventScript_GiftAudino::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_AUDINO, VerdanturfMeadow_EventScript_TakeCareOfAudino
 	msgbox VerdanturfMeadow_Text_PleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, SPECIES_AUDINO
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	@ Gift Pokemon arrive at the current level cap.
+	special GetLevelCapForScriptedGift
 	givemon SPECIES_AUDINO, VAR_0x800A, ITEM_LUCKY_EGG
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfMeadow_EventScript_ReceiveAudinoParty

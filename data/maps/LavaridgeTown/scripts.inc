@@ -400,9 +400,10 @@ LavaridgeTown_Text_HotSpringsNeverRunDry: @ 81EAE03
 	.string "and yet the hot springs never run dry.\p"
 	.string "Isn't it magical?\p"
 	.string "These hot springs appear near active\n"
-	.string "volcanoes. Veins of water under the\l"
-	.string "ground are heated by magma to well up\l"
-	.string "as hot springs.$"
+	.string "volcanoes.\p"
+	.string "Veins of water under the ground are\n"
+	.string "heated by magma, and well up as\l"
+	.string "hot springs.$"
 
 LavaridgeTown_Text_PokemonNippedBackside: @ 81EAEE1
 	.string "Being buried in this hot sand is…\n"
@@ -429,10 +430,10 @@ LavaridgeTown_Text_IfPokemonInHotSprings: @ 81EB003
 
 LavaridgeTown_Text_HotSpringsClaims: @ 81EB092
 	.string "They're claiming that these hot springs\n"
-	.string "are good for calming nervous tension,\l"
-	.string "relieving aching muscles, solving\l"
-	.string "romantic problems, and attracting\l"
-	.string "money…$"
+	.string "are good for calming nervous tension\l"
+	.string "and relieving aching muscles.\p"
+	.string "And for solving romantic problems,\n"
+	.string "and even attracting money…$"
 
 LavaridgeTown_Text_TownSign: @ 81EB12B
 	.string "Lavaridge Town\p"

@@ -633,7 +633,7 @@ static bool32 IsVisitorAwayInStorms(enum LegendarySignId id)
     return IsWeatherAnomalyVisitor(id) && IsWeatherAnomalyWindowOpen() && !IsWeatherAnomalyLive(id);
 }
 
-static const u8 sText_VisitorFollowsStorms[] = _("\pIt follows the storms.\nThe WEATHER INSTITUTE tracks them.");
+static const u8 sText_VisitorFollowsStorms[] = _("\pIt rides the weather anomalies.\nThe Weather Institute tracks them.");
 
 // Result: 0 = needs progression, 1 = needs discovery, 2 = available,
 // 4 = caught, 5 = resting after a failed static encounter.
@@ -748,7 +748,7 @@ void BufferNextCenterLegendaryLead(void)
         gSpecialVar_0x8004 = i + 1;
         StringCopy(gStringVar4, sCenterLegendaryLeads[i].lead);
         if (id == LEGENDARY_SIGN_SHAYMIN && !FlagGet(FLAG_ADVENTURE_STARTED))
-            StringCopy(gStringVar4, COMPOUND_STRING("After you battle the PROF.'s kid,\nreturn to BIRCH for your send-off.\pThen head west to ROUTE 102.\nSHAYMIN lives in its grass."));
+            StringCopy(gStringVar4, COMPOUND_STRING("After you battle the Prof.'s kid,\nreturn to Birch for your send-off.\pThen head west to Route 102.\nShaymin lives in its grass."));
         if (id >= LEGENDARY_SIGN_COUNT)
         {
             enum Species species = sCenterLegendaryLeads[i].classicSpecies;

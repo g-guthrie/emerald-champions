@@ -1396,8 +1396,8 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge: @ 8206162
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis: @ 820618A
 	.string "Dad: The Balance Badge lets you\n"
-	.string "Surf. Visit Wally's family next\l"
-	.string "door for the license.\p"
+	.string "Surf. Wally's family here in town\l"
+	.string "has the license for you.\p"
 	.string "Then press A at the water's edge.\n"
 	.string "Bring one able to learn Surf;\l"
 	.string "it needn't know the move.$"
@@ -1694,8 +1694,8 @@ PetalburgCity_Gym_Text_RegeneratorExplanation:
 	.string "return when the battle ends.\p"
 	.string "Moves and Abilities still work\n"
 	.string "normally during battle.\p"
-	.string "Berries knocked off or stolen\n"
-	.string "won't return.$"
+	.string "Berries stolen or eaten by a\n"
+	.string "foe won't return.$"
 
 PetalburgCity_Gym_Text_RegeneratorNoRoom:
 	.string "Your Key Items pocket is full.\p"

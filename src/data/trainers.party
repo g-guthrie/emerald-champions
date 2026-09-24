@@ -27911,7 +27911,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MAGIKARP_GUY ===
-Name: FISHERMAN
+Name: WADE
 Class: Fisherman
 Pic: Fisherman
 Gender: Male

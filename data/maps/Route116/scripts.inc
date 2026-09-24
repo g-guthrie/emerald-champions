@@ -326,8 +326,9 @@ Route116_Text_ThankYouTokenOfAppreciation: @ 81F3317
 	.string "Oh! It's you!\p"
 	.string "You're that person who not only helped\n"
 	.string "me in Petalburg Woods, but also got\l"
-	.string "back my stolen package and then even\l"
-	.string "graciously delivered it to Slateport!\p"
+	.string "back my stolen package!\p"
+	.string "And then you even graciously\n"
+	.string "delivered it to Slateport!\p"
 	.string "Capt. Stern informed us that the\n"
 	.string "package arrived, too!\p"
 	.string "I thank you very, very much!\p"
@@ -342,8 +343,8 @@ Route116_Text_ThankYouTokenOfAppreciation: @ 81F3317
 	.string "is our gift to our wonderful Trainer!$"
 
 Route116_Text_AlsoNeedKeystone: @ 81F3521
-	.string "You'll also need a Mega Ring to use\n"
-	.string "it, but I bet you already knew that!\p"
+	.string "An Aggron holding it can Mega Evolve\n"
+	.string "once you have a Mega Ring.\p"
 	.string "Please do try it out!\n"
 	.string "Thank you and bye-bye!$"
 
@@ -353,9 +354,9 @@ Route116_Text_BagIsJamPacked: @ 81F3593
 
 Route116_Text_TokenOfAppreciation: @ 81F35CE
 	.string "As a token of our appreciation for\n"
-	.string "your delivering our package, I have\l"
-	.string "a gift of a Mega Stone for our most\l"
-	.string "wonderful Trainer!$"
+	.string "your delivering our package…\p"
+	.string "I have a gift of a Mega Stone for\n"
+	.string "our most wonderful Trainer!$"
 
 Route116_Text_CanYouHelpMeFindGlasses: @ 81F3657
 	.string "I dropped my glasses…\n"
@@ -393,7 +394,7 @@ Route116_Text_TrainerTipsBToStopEvolution: @ 81F3825
 	.string "Trainer Tips\p"
 	.string "If you want to stop a Pokémon from\n"
 	.string "evolving, press the B Button while it\l"
-	.string "is trying to evolve.\l"
+	.string "is trying to evolve.\p"
 	.string "The startled Pokémon will stop.\p"
 	.string "This is called an evolution cancel.$"
 

@@ -626,8 +626,8 @@ HyperTraining_Text_ExplainIVs:
 	.string "Higher IVs means higher stats, but\n"
 	.string "higher stats aren't always better!\p"
 	.string "Example: If your Pokémon relies on\n"
-	.string "Special Attacks, a low Attack IV will\l"
-	.string "reduce the damage it takes if it hits\l"
+	.string "Special Attacks, a low Attack IV will\p"
+	.string "reduce the damage it takes if it hits\n"
 	.string "itself in confusion.$"
 
 HyperTraining_Text_LetsTakeALook:

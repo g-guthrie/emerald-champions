@@ -372,30 +372,34 @@ Route109_EventScript_Zigzagoon:: @ 81EEA18
 	release
 	end
 
+@ Sand mounds share Route 109's Rock Smash table. As in EventScript_SmashRock,
+@ wait out an encounter before releasing, so controls never return during
+@ the battle transition; the mound is cleared either way.
 Route_109_EventScript_SandMound::
 	lockall
 	faceplayer
-	special RockSmashWildEncounter
-	delay 0x60
-	removeobject 17
-	releaseall
-	end
+	setvar VAR_0x8004, 17
+	goto Route109_EventScript_DigSandMound
 
 Route_109_EventScript_SandMound1::
 	lockall
 	faceplayer
-	special RockSmashWildEncounter
-	delay 0x60
-	removeobject 18
-	releaseall
-	end
+	setvar VAR_0x8004, 18
+	goto Route109_EventScript_DigSandMound
 
 Route_109_EventScript_SandMound2::
 	lockall
 	faceplayer
+	setvar VAR_0x8004, 19
+	goto Route109_EventScript_DigSandMound
+
+Route109_EventScript_DigSandMound::
+	delay 0x30
+	removeobject VAR_0x8004
 	special RockSmashWildEncounter
-	delay 0x60
-	removeobject 19
+	goto_if_eq VAR_RESULT, FALSE, Route109_EventScript_SandMoundEmpty
+	waitstate
+Route109_EventScript_SandMoundEmpty::
 	releaseall
 	end
 
@@ -491,8 +495,8 @@ Route109_Text_BrineyTellMeWhenYouNeedToSail: @ 81EEE72
 Route109_Text_ChillAtMyPapasSpot: @ 81EEEB4
 	.string "Yo, Trainers!\n"
 	.string "Whether you're hot to trot,\l"
-	.string "or cool cat not,\l"
-	.string "chill at my papa's spot!$"
+	.string "or cool cat not…\p"
+	.string "Chill at my papa's spot!$"
 
 Route109_Text_LittleKidsDartAround: @ 81EEF08
 	.string "Little kids can dart around so quickly…\p"

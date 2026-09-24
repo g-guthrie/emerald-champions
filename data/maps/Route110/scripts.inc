@@ -869,8 +869,8 @@ Route110_Text_ChallengeReactionWorst: @ 81F05CE
 Route110_Text_RatedForNumberOfCollisions: @ 81F0661
 	.string "This is Cycling Road.\p"
 	.string "If you were to ride from Mauville to\n"
-	.string "Slateport on a Mach Bike, you would\l"
-	.string "be rated for the number of collisions\l"
+	.string "Slateport on a Mach Bike, you would\p"
+	.string "be rated for the number of collisions\n"
 	.string "and your total time.$"
 
 Route110_Text_AlwaysAimHigher: @ 81F06FB

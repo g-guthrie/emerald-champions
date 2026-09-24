@@ -56,8 +56,8 @@ SootopolisCity_Mart_EventScript_GentlemanNoLegendaries:: @ 822680C
 	end
 
 SootopolisCity_Mart_Text_PPUpIsGreat: @ 8226816
-	.string "PP UP is great!\p"
-	.string "It raises the POWER POINTS, the PP,\n"
+	.string "PP Up is great!\p"
+	.string "It raises the Power Points, the PP,\n"
 	.string "of a Pokémon move.$"
 
 SootopolisCity_Mart_Text_TooScaryOutside: @ 822685D

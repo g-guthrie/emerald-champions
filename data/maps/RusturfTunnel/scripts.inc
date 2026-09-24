@@ -453,7 +453,7 @@ RusturfTunnel_Text_WhyCantTheyKeepDigging: @ 822D510
 	.string "Why can't they keep digging?\n"
 	.string "Is the bedrock too hard?\p"
 	.string "My beloved awaits me in Verdanturf\n"
-	.string "TOWN just beyond here…\p"
+	.string "Town just beyond here…\p"
 	.string "If Rustboro and Verdanturf were\n"
 	.string "joined by this tunnel, I could visit\l"
 	.string "her every day…\p"
@@ -476,7 +476,7 @@ RusturfTunnel_Text_ExplainStrength: @ 822D6D2
 	.string "boulders.\p"
 	.string "Press A by a boulder to use\n"
 	.string "Strength. Bring a Pokémon that\l"
-	.string "could learn it; no moveslot needed!$"
+	.string "could learn it; no move slot needed!$"
 
 RusturfTunnel_Text_WandaReunion: @ 822D745
 	.string "Wanda!\n"

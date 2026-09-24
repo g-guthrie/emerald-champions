@@ -365,8 +365,8 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2: @ 820B81F
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact3: @ 820B912
 	.string "“OCEANIC MINIFACT 3\n"
 	.string "Which is bigger? The sea or land?\p"
-	.string "“The sea covers about 70% of\n"
-	.string "the planet, and the rest is land.\p"
+	.string "“The sea covers more than two-thirds\n"
+	.string "of the planet, and the rest is land.\p"
 	.string "“The sea is therefore more than twice\n"
 	.string "the size of land.”$"
 

@@ -100,7 +100,9 @@ Regis caught in the Pokédex, not carried. Arceus is the Devon researcher's gift
 after the Hall of Fame. Groudon/Kyogre weather reports open after the Sootopolis
 crisis. The Champions Circuit gives no Pokémon; its former rewards live in the
 campaign. Game Corner Pokémon prizes arrive at the cap; starters are one-time.
-Water and rod tables use narrow level bands tied to when Surf/each rod opens.
+Water and rod tables use narrow level bands tied to when Surf/each rod opens;
+land, Rock Smash and honey bands sit just under the cap of the gate that opens
+the map (table maximum = cap minus 4), so no dungeon is trivially under-levelled.
 Do not reintroduce percentage text in dialogue; the route sign rosters and
 Center leads describe location and requirements only. Tune odds and timing in
 the JSON and gate table, never in prose.

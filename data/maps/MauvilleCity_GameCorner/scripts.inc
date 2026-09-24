@@ -266,6 +266,13 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 	showcoinsbox 1, 1
 	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize
 
+@ Back to the list after a refusal. The Coins box is already open; opening
+@ it again would allocate a second window and leak the first.
+MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize::
+	message MauvilleCity_GameCorner_Text_WhichPokemon
+	waitmessage
+	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize
+
 MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	setvar VAR_0x8004, SCROLL_MULTI_GAMECORNER_POKEMON
 	special ShowScrollableMultichoice
@@ -356,11 +363,11 @@ MauvilleCity_GameCorner_EventScript_Genesect::
 
 MauvilleCity_GameCorner_EventScript_GenesectLocked::
 	msgbox MauvilleCity_GameCorner_Text_GenesectLocked, MSGBOX_DEFAULT
-	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 
 MauvilleCity_GameCorner_EventScript_GenesectClaimed::
 	msgbox MauvilleCity_GameCorner_Text_GenesectClaimed, MSGBOX_DEFAULT
-	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	
 MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	bufferspeciesname 0, VAR_TEMP_1
@@ -380,7 +387,7 @@ MauvilleCity_GameCorner_EventScript_CancelPokemonSelect::
 	
 MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
-	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	end
 
 MauvilleCity_GameCorner_EventScript_ReceivePokemon::
@@ -464,6 +471,13 @@ MauvilleCity_GameCorner_EventScript_ChooseStarterPrizeMessage::
 	waitmessage
 	setvar VAR_0x8004, 0
 	showcoinsbox 1, 1
+	goto MauvilleCity_GameCorner_EventScript_ChooseStarterType
+
+@ Back to the type menu after a refusal, without a second Coins box.
+MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize::
+	message MauvilleCity_GameCorner_Text_WhichStarterType
+	waitmessage
+MauvilleCity_GameCorner_EventScript_ChooseStarterType::
 	multichoice 0, 0, MULTI_GRASS_FIRE_WATER, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_ChooseGrassStarter
@@ -665,11 +679,11 @@ MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
 MauvilleCity_GameCorner_EventScript_StarterClaimed::
 	bufferspeciesname 0, VAR_TEMP_1
 	msgbox MauvilleCity_GameCorner_Text_StarterClaimed, MSGBOX_DEFAULT
-	goto MauvilleCity_GameCorner_EventScript_ChooseStarterPrizeMessage
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
 	
 MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForStarter::
 	msgbox MauvilleCity_GameCorner_Text_NotEnoughCoins, MSGBOX_DEFAULT
-	goto MauvilleCity_GameCorner_EventScript_ChooseStarterPrizeMessage
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
 	end
 	
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1027,7 +1041,7 @@ MauvilleCity_GameCorner_Text_TakeCareOfPokemon:
 	.string "Take good care of {STR_VAR_1}!$"
 
 MauvilleCity_GameCorner_Text_WhichStarterType:
-	.string "Which Type of Pokémon would you like?$"
+	.string "Which type of Pokémon would you like?$"
 
 @ Unused
 MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne: @ 8210750
@@ -1112,11 +1126,12 @@ MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase: @ 8210C2E
 	.string "a Coin Case.$"
 
 MauvilleCity_GameCorner_Text_GenesectLocked::
-	.string "GENESECT is a Champion's prize.\n"
-	.string "Return after earning eight Badges.$"
+	.string "Genesect is reserved for Trainers\n"
+	.string "who hold all eight Badges.\p"
+	.string "Please come back once you do!$"
 
 MauvilleCity_GameCorner_Text_GenesectClaimed::
-	.string "You've already received GENESECT.$"
+	.string "You've already received Genesect.$"
 
 MauvilleCity_GameCorner_Text_StarterClaimed::
 	.string "{STR_VAR_1} was already claimed.\n"

@@ -247,7 +247,7 @@ RustboroCity_PokemonSchool_Text_ExplainFreeze: @ 82143B8
 RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw: @ 8214433
 	.string "Students who don't study get a little\n"
 	.string "taste of my Quick Claw.\p"
-	.string "Whether or not you are a good student \n"
+	.string "Whether or not you are a good student\n"
 	.string "will be evident from the way you use\l"
 	.string "this item.$"
 

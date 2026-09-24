@@ -654,7 +654,6 @@ SootopolisCity_Movement_PlayerApproachLegendaries: @ 81E5E68
 	walk_up
 	step_end
 
-@ Unused
 SootopolisCity_EventScript_CaveOfOriginExpert:: @ 81E5E8D
 	lock
 	faceplayer
@@ -1491,7 +1490,6 @@ SootopolisCity_EventScript_MaxieArchieLeave:: @ 81E654C
 	releaseall
 	end
 
-@ Unused
 SootopolisCity_Text_GymSign: @ 81E656F
 	.string "Sootopolis City Pokémon Gym\n"
 	.string "Leader: Juan\p"
@@ -1694,9 +1692,10 @@ SootopolisCity_Text_AfterAllOurScheming: @ 81E737E
 	.string "Maxie: So the super-ancient Pokémon\n"
 	.string "weren't only Groudon and Kyogre…\p"
 	.string "After all our fruitless scheming and\n"
-	.string "frantic efforts, that one Pokémon's\l"
-	.string "simple action puts everything right\l"
-	.string "again as if nothing had happened…\p"
+	.string "frantic efforts…\p"
+	.string "That one Pokémon's simple action\n"
+	.string "puts everything right again, as if\l"
+	.string "nothing had happened…\p"
 	.string "Fu…\n"
 	.string "Fuhahaha…$"
 
@@ -1801,7 +1800,7 @@ SootopolisCity_Text_ExplainWaterfallGoToGym: @ 81E7B86
 	.string "here in Sootopolis.\p"
 	.string "Then press A at a waterfall\n"
 	.string "with a Pokémon able to learn\l"
-	.string "Waterfall; no moveslot needed.$"
+	.string "Waterfall; no move slot needed.$"
 
 SootopolisCity_Text_DazzledByMentor: @ 81E7CBC
 	.string "Wallace: I'm sure that you will be\n"

@@ -1427,13 +1427,11 @@ void EmeraldChampionsHeadlessObserve(void)
                 && gEcHeadlessCampaignLastResolution == EC_HEADLESS_BATTLE_WIN
                 && FlagGet(FLAG_BADGE01_GET)
                 && FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)
-                && !FlagGet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE)
-                && FlagGet(FLAG_RECEIVED_ROXANNE_OLD_AMBER)
+                && FlagGet(FLAG_RECEIVED_TM39) // Roxanne's Delphoxite receipt
                 && HasTrainerBeenFought(TRAINER_ROXANNE_1)
                 && GetCurrentLevelCap() == 20
-                && !CheckBagHasItem(ITEM_AERODACTYLITE, 1)
-                && CheckBagHasItem(ITEM_OLD_AMBER, 1)
-                && VarGet(VAR_RUSTBORO_CITY_STATE) == 1
+                && CheckBagHasItem(ITEM_DELPHOXITE, 1)
+                && VarGet(VAR_RUSTBORO_CITY_STATE) == 2
                 && !gMain.inBattle
                 && gMain.callback2 == CB2_Overworld
                 && !ArePlayerFieldControlsLocked()
@@ -1915,9 +1913,10 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
         EmeraldChampionsAgentBattleBegin(gEcHeadlessFixtureParam & 0xFF,
                                          (gEcHeadlessFixtureParam >> 8) & 0xFF);
-        // Steven grants the Mega Ring after Brawly, which is the cap-24 stage.
-        // Later caps therefore start this synthetic board with the bracelet.
-        if ((gEcHeadlessFixtureParam & 0xFF) >= 24)
+        // Norman grants the Mega Ring before his own battle, the cap-45 stage.
+        // Only boards at that cap or later start with the bracelet; earlier
+        // fights must be played without Mega Evolution, as the real player does.
+        if ((gEcHeadlessFixtureParam & 0xFF) >= 45)
             AddBagItem(ITEM_MEGA_RING, 1);
         gEcHeadlessFixtureSetupResult = TRUE;
         LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 6);
@@ -3821,7 +3820,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else
                 {
                     VarSet(VAR_FOSSIL_RESURRECTION_STATE, 1);
-                    VarSet(VAR_WHICH_FOSSIL_REVIVED, 5); // Old Amber already handed in.
+                    VarSet(VAR_WHICH_FOSSIL_REVIVED, ITEM_OLD_AMBER); // Old Amber already handed in (the var holds an item id).
                     LoadHeadlessMap(MAP_RUSTBORO_CITY_DEVON_CORP_2F, 14, 9);
                 }
                 break;

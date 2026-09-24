@@ -3627,5 +3627,273 @@ leave the Surf blob behind. Starting on a walkable Route133 shore tile and
 using the real Surf interaction, then entering a westward current, kept the
 surfing sprite attached (`movement/route133-native-surf-current-run`). The
 apparent sprite separation therefore belongs to that synthetic warp setup;
-the route's upstream current lanes still need a continuous native traversal
-from a valid surfing start. No source edit followed from the invalid probe.
+the connected upstream traversal is recorded below. No source edit followed
+from the invalid probe.
+
+### Pacifidlog-to-Sealed-Chamber continuous overworld route
+
+A native scene now starts on Pacifidlog's south boardwalk at(8,27), invokes
+Surf from land, and follows the connected westward route through Route132,
+Route133 and Route134. Route132's Fisherman Ronald and another defeated
+trainer still occupy their map tiles, so the player skirts the first island,
+re-Surfs at its west edge, passes north of the second trainer, and reaches
+Route133's upper current. Steering through its calmer gaps reaches the lower
+exit at(0,31). The connection lands on Route134 shallow water, where the
+player re-Surfs and rides west to the(60,31) Dive patch. Dive, the arrow
+entrance, the49-step underwater passage and the marked ascent then finish
+at Sealed Chamber Outer Room(10,19), control ready
+(`movement/pacifidlog-to-sealed-chamber-complete-run`). The route markers,
+five contact sheets and final map/position were inspected. This is one
+uninterrupted native overworld traversal after a synthetic chapter-7 start;
+the twelve route trainer receipts and a Repel Spray state were seeded to
+isolate movement, so it does not certify their battles or an earned save.
+
+The first upper-lane probe held west and was deposited above the pocket;
+that was a real route choice, not a trap. A direct warp onto shallow current
+water also produced an invalid walking-avatar setup. The continuous run uses
+real Surf activations and retains its surfing sprite through the currents.
+ROM `5df154e1cbbddd37c068e1c468b52d4925d167f3071df587129beec4a24d2fab`
+is archived from commit70ddcfe0 with an unrelated Weather Institute script
+edit; the relevant route maps and field movement source match that build.
+No current, warp or sprite repair was needed for this path.
+
+### Sealed Chamber Dig wall and Regi-door choreography
+
+From the chamber's outer landing(10,19), a native walk threads the Braille
+rows to(10,3). Facing the center wall and carrying a Pokémon that actually
+knows Dig opens the hole, sets `FLAG_SYS_BRAILLE_DIG`, and lets the player
+walk through to Inner Room(10,19). Dig is a non-HM field move here: a
+Sandslash prepared without the move receives “Nobody in your party can use
+Dig,” leaves the wall closed and restores control
+(`movement/sealed-wall-idle-dig-run`). The first long-walk probe also faced
+east after its final right turn, so its A presses missed the wall; the
+corrected north-facing run passed (`movement/sealed-chamber-wall-dig-entry-
+known-move-run`). The Dig user was prepared in a work-only native fixture,
+not added to production code.
+
+With Wailord first and Relicanth last, the Inner Room path skirts the
+Regigigas statue, reads the back-wall Braille and plays the shaking/door
+sequence exactly once. The distant-door message appears, the Regi-door
+flag becomes1 and control returns (`movement/sealed-chamber-regi-wall-open-
+run`). In a single native continuation from the outer landing, Sandshrew
+knows Dig in the middle party slot while Wailord leads and Relicanth is
+last; both walls complete without restarting or reseeding between them
+(`movement/sealed-chamber-both-gates-continuous-known-move-run`). An invalid
+Wailord position leaves the Regi doors closed; an already-opened flag
+shows the Braille without replaying the shake, both returning control
+(`movement/sealed-chamber-regi-wall-{invalid,repeat}-run`). The relevant
+contact sheets were inspected on ROM
+`5df154e1cbbddd37c068e1c468b52d4925d167f3071df587129beec4a24d2fab`.
+This checks the two local puzzle gates and retry/repeat branches from
+synthetic starts, not the three separate ruin battles or an earned save.
+No map or script fix was warranted.
+
+### Sealed Chamber completed-gate exit and re-entry
+
+Preserved the native state immediately after both Braille gates opened, then
+walked from Inner Room past Regigigas to its southern exit. The transition
+returned the player to Outer Room(10,3) with the Dig hole still visibly
+open and both persistent flags1. Walking north through that same hole
+returned to Inner Room(10,19) with control ready and Regigigas still in
+place (`movement/sealed-chamber-after-gates-roundtrip-run`). Its contact
+sheet was inspected. This is the same saved native state after the two-gate
+scene, not separately seeded open flags; no re-entry softlock or wall reset
+appeared. Regigigas's battle and the three ruins remain separate coverage.
+
+### Three Regi ruin exterior story gates
+
+The shared Sealed Chamber `FLAG_REGI_DOORS_OPENED` controls physical
+rock-door metatiles on Route105(9,20), Route111(29,87) and Route120(7,55).
+With that flag clear, north input from the adjacent south tile stops at
+each closed rock wall and restores control. With the flag set, the hole is
+visibly open and the same input enters Island Cave, Desert Ruins or Ancient
+Tomb respectively, landing at(8,29) with control ready
+(`movement/route{105,111,120}-regi-exterior-{closed,open}-run`). All six
+contact sheets were inspected on ROM
+`5df154e1cbbddd37c068e1c468b52d4925d167f3071df587129beec4a24d2fab`.
+The three interiors then have their own Braille/field-move puzzle flags;
+these runs establish the shared exterior gate and map handoff, not those
+three second-stage puzzles or Regi battles. No source fix was needed.
+
+### Two live overworld sprite palette bindings repaired
+
+The Island Cave Regice was visibly green in the native full-lap capture even
+though its indexed Inclement sprite uses blue colors at indices8–10. Its
+`ObjectEventGraphicsInfo` bound those indices to `NPC_3`, whose same slots
+are green. Cave of Origin Diancie rendered cyan/blue because its indexed
+pink/white sprite used `NPC_1`. Bound Regice to `OBJ_EVENT_PAL_TAG_NPC_1`/
+`PALSLOT_NPC_1` and Diancie to `OBJ_EVENT_PAL_TAG_NPC_4`/`PALSLOT_NPC_4`,
+matching their sprite colors without changing actor IDs, tiles, movement,
+scripts or battles. Before scenes are `movement/island-cave-regice-lap-entry-
+corrected` and `movement/diancie-palette-before-run`.
+
+Built the two-line-per-actor correction from a clean detached checkout of
+commit b2f26cf54f so concurrent wild/story edits were not mixed into the
+validation ROM. The final ROM is
+`93029df0f19743a2d415bc9d774e08864687a9ec5ff0852249c1d89a9f18cf20`;
+its source receipt archives only the graphics-info change. Native scenes
+on that exact ROM render Regice blue and Diancie pink/white with their
+rooms and controls intact (`palette-qa/regice-final`, `palette-qa/diancie-
+final`). At matching final frames, the old/new pixel differences are confined
+to Regice's 27×21 sprite box and Diancie's 21×27 sprite box; Wallace and the
+rooms are pixel-identical. The contact sheets were inspected, and the ROM,
+ELF, source receipt and recordings were copied under `palette-qa/`.
+
+The analogous binding scan checked all16 Inclement static graphics-info
+uses. Regirock's indexed PNG palette also suggests `NPC_1`, but a native
+trial recolored the familiar gold/brown Regirock pink/green. That sprite
+intentionally uses `NPC_2`; the trial was reverted, and its final native
+frame is pixel-identical to the original (`palette-qa/regirock-final`).
+Registeel and the active Carbink form matched their bound palettes; maps
+use the dedicated palette-tag versions of Jirachi and Heatran. This is a
+scoped static/pixel audit, not proof of every animated or dynamic species
+graphic in the game.
+
+A follow-on scan joined non-FRLG map object graphics to their runtime
+graphics-info, PNG and generic NPC palette bindings. Of164 distinct active
+graphics-info references,137 resolve to an indexed PNG using one of
+`NPC_1`–`NPC_4`; one more is the Berry Tree's dynamic image table and26
+use other palette tags. The only remaining strong alternate-generic-palette
+signal among the137 is Regirock's intentional recolor, rejected by native
+before/after frames above. This screen narrows the same bug class; it does
+not assess those26 custom tags, shared-palette conflicts across every map,
+or runtime species graphics selected dynamically.
+
+The apparent `PALSLOT_NPC_SPECIAL` collision in Altering Cave B1F was
+resolved by tracing the active sprite loader. `CopyObjectGraphicsInfoToSpriteTemplate`
+copies `paletteTag`; `LoadObjectEventPalette` finds or loads a palette by that
+tag and the sprite allocator chooses its actual OAM palette bank. The
+`ObjectEventGraphicsInfo.paletteSlot` field is not read by this overworld
+path. Mewtwo and Leaf have distinct palette tags, so their shared metadata
+slot is not evidence of an on-screen palette overwrite. A synthetic native
+midpoint scene loaded both actor IDs, and the land-side Leaf scene showed
+the expected colors (`movement/altering-mewtwo-leaf-palette-flash-retry`),
+but Flash darkness prevented a useful same-frame visual comparison of both.
+No palette-slot code change was made for this candidate.
+
+### Weather restored when returning inside long overworld routes
+
+Route113's east-side ash triggers begin at x85, with a sunny trigger at
+x94. Its map-entry callback stopped restoring ash at x84, so a saved/reloaded
+position at x85–93 showed no falling ash until another trigger was crossed.
+Native entries at x84,85,90 on ROM93029df0 showed ash only at x84. The
+callback now treats x19–93 as ash. In the isolated rebuilt ROM564dbc21,
+x85 and x90 show falling ash, while x94 remains sunny (`movement/route113-
+weather-{entry,corrected}-*`). Each scene returned control; the before/after
+contact sheets were inspected.
+
+Mt. Pyre exterior's stair at y21 starts horizontal fog, but its map-entry
+callback restored fog only above y12. On ROM93029df0, walking from y22 to
+y21 visibly faded into fog, whereas direct map entry at y20 or y21 remained
+clear. The callback now restores fog through y21. On isolated rebuilt
+ROM179ba4fb, entry at y20/y21 is foggy and the lower y25 entry stays clear
+(`movement/mtpyre-fog-{walk-trigger,entry,corrected}-*`). These are
+synthetic native positions, not a continuous earned climb.
+
+Route120 had the same mismatch in two distinct bands: rain triggers at
+(22,61) and (12,64) but map entry made all y≥61 cloudy; sunny triggers at
+(28,15–17) but map entry made those upper tiles rainy. The entry callback
+now starts rain in the lower-west band through y74/x34, clouds east and
+south of that band, and sun at upper x≥28/y15–18. The pre-fix trigger
+walks and the five corrected native entries at (22,61), (12,64), (28,16),
+(35,63), and (12,75) show the intended rain/sun/cloud split. The corrected
+scenes all passed and their contact sheets were inspected on isolated
+ROM6426647f (`movement/route120-weather-corrected-*`). Other mid-route
+weather boundaries can depend on the direction of travel; this correction
+aligns the observed entry points and all authored weather-trigger tiles,
+not every possible saved position on the route.
+
+The analogous Route119 reload suspicion did not reproduce when entered by
+the authored weather trigger. A synthetic player crossed the cycle trigger
+at (29,13), saved on the route with rain active, and clean-booted at the
+same place with rain still active. A direct synthetic warp into the middle
+had looked sunny because it skipped that trigger; it was not a save/reload
+failure. The tentative Route119 map-entry edit was reverted. Its native
+probe and portable test save are under `weather-qa/` as
+`route119_trigger_reload_probe.py` and `route119-trigger-stage-one.sav`;
+this is a bounded synthetic
+weather-state result, not an earned Route119 traversal.
+
+All three isolated ROM/ELF pairs and source receipts are preserved in
+`work/studio/builds/` under their full SHA prefixes. The latest isolated
+receipt includes only these three weather scripts on base b2f26cf54f;
+concurrent story/wild-script edits in the canonical checkout were not
+part of these rendered ROMs.
+
+The forward source pass reached Route114. Its map has20 objects, five
+warps and no coordinate triggers or authored `applymovement` sequence.
+The Good Rod, daily Berry and Big Pearl NPCs set their receipt flags only
+after `giveitem` succeeds, so their refusal paths can retry; the five
+breakable rocks use temporary hide flags. The Route114 source/map review
+found no new choreography defect. This is source coverage, not a native
+conversation or route-traversal claim.
+The adjacent Fossil Maniac house/tunnel and Lanette house were also traced
+through their first/repeat dialogue, gifts, callbacks and map events.
+The tunnel's cave-in line is a one-time Hall-of-Fame state trigger at y4;
+Badge5 separately opens the wall and moves the Maniac off the passage.
+The Rare Candy and paired dolls set their receipt flags after successful
+delivery, and Lanette checks capacity for both decorations before giving
+either. No source-proven blocker or dialogue-state defect surfaced there;
+native interactions remain outside this small forward pass.
+
+### Remaining active custom overworld palettes screened
+
+The earlier generic-palette scan left26 active static graphics bindings
+using other tags. I joined their graphics-info entries to the frame-image
+tables, indexed art, runtime palette table and live non-FRLG map references.
+Twenty-four resolve to indexed PNGs:22 use the same colors at every drawn
+palette index. Sleeping Groudon and Kyogre are the two deliberate exceptions:
+their runtime palettes turn the colorful source art gray, and each awakening
+script replaces that actor with a separate full-color one. Native synthetic
+entries show both asleep sprites gray in Magma Hideout 4F and Seafloor Cavern
+Room9 (`movement/magma-sleeping-groudon-palette-walkable` and
+`movement/seafloor-sleeping-kyogre-palette-run`, ROM93029df0). The two
+remaining bindings are rival Brendan/May sprites assembled from binary
+walking frames; their corresponding indexed walking PNG colors match the
+runtime player palettes at all drawn indices. The read-only scan and output
+are preserved under `palette-qa/custom-palette-scan.*`. This closes the
+static custom-palette mismatch screen, not dynamic species/follower art,
+animation timing, or every map-specific palette interaction.
+
+### Ambient NPC movement-range screen
+
+The live non-FRLG maps contain234 objects with a `WANDER*` movement type.
+Checking their starting tiles, four immediate directions and configured
+range against the authored layout collision bits found no blocked start or
+actor with zero usable neighboring steps (`movement/wander-collision-scan.*`).
+This is a coarse screen; elevation, directional ledges, other actors and
+story-state placement still matter at runtime.
+
+Five `WALK_SEQUENCE_*` NPCs initially looked as though a one-tile turn would
+meet a wall: Aqua Hideout1F/B2F guards, a Magma Hideout2F guard, Route111's
+Dusty and the Battle Frontier east Psychic. That heuristic omitted the
+engine's multi-step patrol range. Native ambient replays of all five on
+ROM93029df0 sampled900–1200 frames each. Their actors visited36,12,18,8
+and16 distinct walkable coordinates respectively, with no sampled
+collision-marked destination; the contact sheets were inspected. The first
+Aqua1F attempt stalled only because the synthetic player stood on the next
+patrol tile. Moving the player to(24,9) restored the full patrol
+(`movement/aqua-1f-guard-ambient-offpath`). The other evidence is under
+`movement/{aqua-b2f-guard,frontier-east-psychic,magma-2f-guard,route111-
+dusty}-ambient-run`. These fixture-assisted stationary observations do not
+prove dynamic collisions or every patrol in every story state.
+
+A separate source join checked419 active Hoenn coordinate-event elevations
+against their layout tiles (`movement/coord-elevation-scan.*`). No event
+with a nonzero tile elevation had a conflicting nonzero event elevation.
+Route101's west-exit trigger and Route123's weather trigger specify
+elevation3 on transition-elevation0 tiles; `PlayerGetElevation` uses the
+player object's retained previous elevation on those tiles, so the static
+tile value alone does not make either trigger dead. The earlier native
+Route101 exit replay covers the west story gate; Route123's trigger was
+not replayed in this pass.
+
+The first-step script scan resolved574 local-actor `applymovement` calls
+against their static map templates and found112 apparent blocked/OOB first
+steps (`movement/script-first-step-scan.*`). This remains a candidate list,
+not112 defects: many movements start after a prior scripted reposition or
+intentionally enter a door/exit tile. For example, the Fan Club girl's
+"move closer" call starts only after her preceding approach; the Pike hint
+giver's "return" starts after a six-step approach. These source traces
+remove those two false positives, while the remaining candidates still
+need state-aware path or native scene checks.

@@ -20,10 +20,14 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant:: @ 823D3F0
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_MayISeeYourTicket, MSGBOX_DEFAULT
+	@ Like the harbor ferries, honor a ticket that was earned but still
+	@ awaits delivery at a Pokemon Center (Bag and PC were full at home).
+	goto_if_set FLAG_EC_EARNED_SS_TICKET, BattleFrontier_OutsideWest_EventScript_TicketAccepted
 	setvar VAR_0x8004, ITEM_SS_TICKET
 	special CheckEmeraldChampionsHandoffItem
 	compare VAR_RESULT, FALSE
 	goto_if_eq BattleFrontier_OutsideWest_EventScript_NoSSTicket
+BattleFrontier_OutsideWest_EventScript_TicketAccepted::
 	message BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo
 	waitmessage
 	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination

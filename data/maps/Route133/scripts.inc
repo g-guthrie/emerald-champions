@@ -125,26 +125,25 @@ Route133_Text_Chansey:
 
 Route133_Text_NurseHello:
 	.string "Oh, hey, {PLAYER}! Can you help\n"
-	.string "us?\p"
-	.string "My Chansey is frightened of the\n"
-	.string "strong currents. Could your team\l"
-	.string "show it a safe way across?$"
+	.string "us again?\p"
+	.string "Blob is frightened of the strong\n"
+	.string "currents. Could your team show it\l"
+	.string "a safe way across?$"
 
 Route133_Text_NurseReally:
 	.string "Really? Please, I'm desperate here!$"
 
 Route133_Text_NurseSoYoullHelp:
-	.string "Will your team help my Chansey\n"
-	.string "across the currents?$"
+	.string "Will your team help Blob across\n"
+	.string "the currents?$"
 
 Route133_Text_NurseGuideChansey:
-	.string "Thank you! Look, Chansey. Follow\n"
+	.string "Thank you! Look, Blob. Follow\n"
 	.string "this safe path and take your time.$"
 
 Route133_Text_NurseDoneHaveVialUpgrade:
-	.string "Chansey made it across!\p"
+	.string "Blob made it across!\p"
 	.string "Thanks again, {PLAYER}. As a reward,\n"
-	.string "I'll make sure you get an extra dose\l"
-	.string "whenever you refill your Poké Vial\l"
-	.string "from now on.\p"
+	.string "I'll make sure you get another dose\l"
+	.string "whenever you refill your Poké Vial.\p"
 	.string "See you around!$"

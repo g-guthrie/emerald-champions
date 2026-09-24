@@ -372,6 +372,20 @@ u16 TakePokemonFromDaycare(void)
     return TakeSelectedPokemonMonFromDaycareShiftSlots(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
+// Special: the party rule (one Legendary/Mythical, one Ultra Beast, one
+// Paradox) applies to a withdrawal from the board exactly as it does to a PC
+// withdrawal. gSpecialVar_0x8004 is the board slot; VAR_RESULT is TRUE when
+// the party can take it.
+bool32 CanTakeDaycareMonWithinPartyRule(void)
+{
+    struct DaycareMon *daycareMon;
+
+    if (gSpecialVar_0x8004 >= DAYCARE_MON_COUNT)
+        return FALSE;
+    daycareMon = &gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004];
+    return CanAddRestrictedMonToParty(GetBoxMonData(&daycareMon->mon, MON_DATA_SPECIES), PARTY_SIZE);
+}
+
 static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
 {
     struct Pokemon preview;

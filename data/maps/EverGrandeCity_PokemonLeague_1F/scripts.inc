@@ -26,6 +26,8 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Nurse:: @ 82295FC
 	release
 	end
 
+@ The guards stand in the doorway on every visit (map positions). Admission is
+@ checked once (badges, then the party rule); later visits step them aside again.
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard:: @ 8229636
 	lockall
 	compare VAR_TEMP_2, 1
@@ -74,8 +76,7 @@ EverGrandeCity_PokemonLeague_1F_EventScriptSwitchTrainerMsg:
 	goto EverGrandeCity_PokemonLeague_1F_EventScript_GoForthFacePlayer
 
 EverGrandeCity_PokemonLeague_1F_EventScriptGoForthChampion2::
-	message EverGrandeCity_PokemonLeague_1F_Text_GoForthChampion
-	waitmessage
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_GoForthChampion, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -137,6 +138,9 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForth:: @ 82296BB
 	delay 10
 	playfanfare MUS_OBTAIN_BADGE
 	setvar VAR_TEMP_2, 1
+	@ A returning Champion is greeted as one.
+	goto EverGrandeCity_PokemonLeague_1F_EventScriptSwitchTrainerMsg
+
 EverGrandeCity_PokemonLeague_1F_EventScript_GoForth2::
 	msgbox EverGrandeCity_PokemonLeague_1F_Text_GoForth, MSGBOX_DEFAULT
 	closemessage
@@ -189,10 +193,10 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth: @ 82297EF
 	.string "Pokémon, and go forth!$"
 
 EverGrandeCity_PokemonLeague_1F_Text_RestrictedParty::
-	.string "League rules allow at most one\n"
-	.string "Legendary or Mythical Pokémon,\l"
-	.string "one Ultra Beast and one Paradox\l"
-	.string "Pokémon in your party.\p"
+	.string "League rules allow one Legendary\n"
+	.string "or Mythical Pokémon per party,\p"
+	.string "plus one Ultra Beast and one\n"
+	.string "Paradox Pokémon.\p"
 	.string "Adjust your party at a PC,\n"
 	.string "then come back.$"
 

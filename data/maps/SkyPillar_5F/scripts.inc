@@ -5,7 +5,7 @@ SkyPillar_5F_MapScripts:: @ 82396A2
 SkyPillar_5F_OnTransition: @ 82396A8
 	compare VAR_SKY_PILLAR_STATE, 2
 	call_if_lt SkyPillar_5F_EventScript_CleanFloor
-	return
+	end
 
 SkyPillar_5F_EventScript_CleanFloor:: @ 82396B4
 	setmaplayoutindex LAYOUT_SKY_PILLAR_5F_CLEAN

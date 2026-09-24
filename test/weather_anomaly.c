@@ -379,8 +379,17 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     EXPECT_EQ(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110))->weather, route110Weather);
     EXPECT_EQ(gMapHeader.weather, route110Weather);
 
+    // Scripted weather on the home map (a transition's setweather, a desert
+    // trigger) cannot clear the storm; off the home map it applies as usual.
+    SetSavedWeather(WEATHER_SANDSTORM);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    SetSavedWeather(WEATHER_SUNNY);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+
     // Another map keeps its header weather.
     SetLocation(MAP_ROUTE111);
+    SetSavedWeather(WEATHER_SANDSTORM);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SANDSTORM);
     EXPECT_EQ(GetWeatherAnomalyWeatherForCurrentMap(), WEATHER_NONE);
     SetSavedWeatherFromCurrMapHeader();
     EXPECT_EQ(GetSavedWeather(), gMapHeader.weather);
@@ -636,12 +645,12 @@ TEST("Weather anomalies: research, Center leads and the route sign follow the st
     gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
     ResearchSelectedLegendarySign();
     EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It follows the storms.")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
 
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
     ResearchSelectedLegendarySign();
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It follows the storms.")));
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
 
     // The live anomaly adds one page to its route sign.
@@ -657,13 +666,13 @@ TEST("Weather anomalies: research, Center leads and the route sign follow the st
     ResearchSelectedLegendarySign();
     EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Seafloor Cavern")));
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It follows the storms.")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
 
     // Window closed: the ordinary resident text.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
     ResearchSelectedLegendarySign();
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It follows the storms.")));
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
 
     gSaveBlock1Ptr->location = savedLocation;

@@ -529,9 +529,9 @@ Route119_Text_ThoughtFlyByCatchingBirdMons: @ 81F51A2
 	.string "I thought flying meant hanging\n"
 	.string "on to a whole flock of birds!\p"
 	.string "Your Flight Beacon sounds much\n"
-	.string "easier. It works once your rival\l"
-	.string "authorizes it and you earn the\l"
-	.string "Feather Badge.$"
+	.string "easier.\p"
+	.string "It works once your rival authorizes\n"
+	.string "it and you earn the Feather Badge.$"
 
 Route119_Text_TallGrassSnaresBikeTires: @ 81F5261
 	.string "Tch…\n"

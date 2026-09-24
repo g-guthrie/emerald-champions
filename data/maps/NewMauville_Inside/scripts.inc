@@ -185,8 +185,8 @@ NewMauville_Inside_EventScript_Rotom2::
 	end
 
 NewMauville_Inside_EventScript_RotomEncounter::
-	lock
-	faceplayer
+	@ A floor trigger: there is no talked-to object to face the player.
+	lockall
 	setmetatile 33, 6, METATILE_BikeShop_Button_Pressed, 0
 	special DrawWholeMapView
 	playmoncry SPECIES_ROTOM, 2
@@ -207,25 +207,26 @@ NewMauville_Inside_EventScript_RotomEncounter::
 	dowildbattle
 NewMauville_Inside_EventScript_CheckRotomOutcome::
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq NewMauville_Inside_EventScript_DefeatedRotom
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_eq NewMauville_Inside_EventScript_PlayerCaughtRotom
+	@ Rotom is the only one in the game: like every unique encounter, only a
+	@ capture resolves it. A knockout sends it back into the generator, and
+	@ the job stays open until it is caught.
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_PlayerCaughtRotom
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedRotom
 NewMauville_Inside_EventScript_RetryRotom::
 	setvar VAR_NEW_MAUVILLE_STATE, 5
-	release
+	releaseall
 	end
 
 NewMauville_Inside_EventScript_DefeatedRotom::
 	msgbox NewMauville_Inside_Text_RotomLeftGenerator, MSGBOX_DEFAULT
-	goto NewMauville_Inside_EventScript_FinishRotomQuest
+	goto NewMauville_Inside_EventScript_RetryRotom
 
 NewMauville_Inside_EventScript_PlayerCaughtRotom::
 	msgbox NewMauville_Inside_Text_GeneratorStopped, MSGBOX_DEFAULT
 NewMauville_Inside_EventScript_FinishRotomQuest::
 	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
 	setvar VAR_NEW_MAUVILLE_STATE, 6
-	release
+	releaseall
 	end
 
 NewMauville_Inside_EventScript_SetGeneratorOffMetatiles::
@@ -398,7 +399,8 @@ NewMauville_Inside_Text_GeneratorRestartedAgain:
 	.string "The generator restarted again!$"
 
 NewMauville_Inside_Text_RotomLeftGenerator:
-	.string "Rotom left the generator and vanished…$"
+	.string "Rotom slipped back into the\n"
+	.string "generator! It's still in there…$"
 
 NewMauville_Inside_Text_GeneratorStopped:
 	.string "The generator appears to have\n"

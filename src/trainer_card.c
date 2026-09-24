@@ -1246,7 +1246,10 @@ static void PrintBadgesAndLeadersOnCard(void)
 static void PrintMegasAndCircuitOnCard(void)
 {
     PrintStatOnBackOfCard(2, gText_TrainerCardMegasWitnessed, sData->textMegas, sTrainerCardStatColors);
-    PrintStatOnBackOfCard(3, gText_TrainerCardCircuitBestStreak, sData->textCircuitStreak, sTrainerCardStatColors);
+    // The Champions Circuit desk is not in the campaign yet; a permanent "0"
+    // would only confuse. The line returns the moment a streak exists.
+    if (VarGet(VAR_EC_CIRCUIT_BEST_WINS) != 0)
+        PrintStatOnBackOfCard(3, gText_TrainerCardCircuitBestStreak, sData->textCircuitStreak, sTrainerCardStatColors);
 }
 
 static void PrintHofDebutTimeOnCard(void)

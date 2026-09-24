@@ -131,3 +131,30 @@ TEST("Nursery Nidoran and Volbeat lines breed both species")
     EXPECT(sawFemale);
     ResetNursery();
 }
+
+TEST("Nursery withdrawal obeys the party rule like a PC withdrawal")
+{
+    struct Pokemon mon;
+
+    ResetNursery();
+    ZeroPlayerPartyMons();
+    CreateMon(&mon, SPECIES_KYOGRE, 50, 0, OTID_STRUCT_PLAYER_ID);
+    gSaveBlock1Ptr->daycare.mons[0].mon = mon.box;
+    gSpecialVar_0x8004 = 0;
+    // No Legendary in the party: the board can hand Kyogre back.
+    EXPECT(CanTakeDaycareMonWithinPartyRule());
+    // A Legendary already in the party: refused, exactly as the PC refuses.
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_GROUDON, 50, 0, OTID_STRUCT_PLAYER_ID);
+    gPartiesCount[B_TRAINER_PLAYER] = 1;
+    EXPECT(!CanTakeDaycareMonWithinPartyRule());
+    // An Ultra Beast is a different class and is still allowed.
+    CreateMon(&mon, SPECIES_NIHILEGO, 50, 0, OTID_STRUCT_PLAYER_ID);
+    gSaveBlock1Ptr->daycare.mons[0].mon = mon.box;
+    EXPECT(CanTakeDaycareMonWithinPartyRule());
+    // An out-of-range slot never passes.
+    gSpecialVar_0x8004 = 2;
+    EXPECT(!CanTakeDaycareMonWithinPartyRule());
+    gSpecialVar_0x8004 = 0;
+    ZeroPlayerPartyMons();
+    ResetNursery();
+}

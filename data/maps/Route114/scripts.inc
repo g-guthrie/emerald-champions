@@ -102,6 +102,14 @@ Route114_EventScript_Poochyena:: @ 81F2612
 
 Route114_EventScript_MeteorFallsSign:: @ 81F2625
 	msgbox Route114_Text_MeteorFallsSign, MSGBOX_SIGN
+	goto Route114_EventScript_ShowRouteRoster
+	end
+
+Route114_EventScript_ShowRouteRoster::
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_MESPRIT
+	call Common_EventScript_ShowRouteLegend
+	releaseall
 	end
 
 Route114_EventScript_FossilManiacsHouseSign:: @ 81F262E
@@ -157,7 +165,7 @@ Route114_Text_Poochyena: @ 81F28A6
 
 Route114_Text_MeteorFallsSign: @ 81F28B3
 	.string "Meteor Falls\n"
-	.string "RUSTBORO CITY THROUGH HERE$"
+	.string "Rustboro City Through Here$"
 
 Route114_Text_FossilManiacsHouseSign: @ 81F28DB
 	.string "Fossil Maniac's House\n"

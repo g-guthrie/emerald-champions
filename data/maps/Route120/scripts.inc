@@ -73,9 +73,14 @@ Route120_EventScript_SetWeather:: @ 81F54D8
 	goto_if_le Route120_EventScript_SetSunnyWeather
 	compare VAR_TEMP_1, 60
 	goto_if_le Route120_EventScript_TrySetRainyWeather
-	compare VAR_TEMP_1, 61
-	goto_if_ge Route120_EventScript_SetCloudyWeather
-	return
+	compare VAR_TEMP_1, 74
+	goto_if_le Route120_EventScript_TrySetLowerRainyWeather
+	goto Route120_EventScript_SetCloudyWeather
+
+Route120_EventScript_TrySetLowerRainyWeather::
+	compare VAR_TEMP_0, 34
+	goto_if_le Route120_EventScript_SetRainyWeather
+	goto Route120_EventScript_SetCloudyWeather
 
 Route120_EventScript_SetCloudyWeather:: @ 81F54FF
 	setweather WEATHER_SUNNY_CLOUDS
@@ -86,12 +91,20 @@ Route120_EventScript_SetSunnyWeather:: @ 81F5503
 	return
 
 Route120_EventScript_TrySetRainyWeather:: @ 81F5507
+	compare VAR_TEMP_1, 18
+	goto_if_le Route120_EventScript_TrySetUpperSunnyWeather
+Route120_EventScript_ChooseMiddleWeather::
 	compare VAR_TEMP_0, 7
 	goto_if_le Route120_EventScript_SetRainyWeather
 	compare VAR_TEMP_0, 19
 	goto_if_le Route120_EventScript_SetSunnyWeather
 	goto Route120_EventScript_SetRainyWeather
 	end
+
+Route120_EventScript_TrySetUpperSunnyWeather::
+	compare VAR_TEMP_0, 28
+	goto_if_ge Route120_EventScript_SetSunnyWeather
+	goto Route120_EventScript_ChooseMiddleWeather
 
 Route120_EventScript_SetRainyWeather:: @ 81F5523
 	setweather WEATHER_RAIN
@@ -293,7 +306,7 @@ Route120_EventScript_RouteSign121:: @ 81F57CE
 
 Route120_EventScript_ShowRouteRoster::
 	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_MESPRIT
+	setvar VAR_0x8004, LEGENDARY_SIGN_CALYREX
 	call Common_EventScript_ShowRouteLegend
 	setvar VAR_0x8004, LEGENDARY_SIGN_OGERPON
 	call Common_EventScript_ShowRouteLegend

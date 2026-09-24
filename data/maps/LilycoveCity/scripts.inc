@@ -651,8 +651,9 @@ LilycoveCity_Text_GoingToMoveDeleterForHMs: @ 81E3E7D
 	.string "Contest.\p"
 	.string "The Center tutor can teach\n"
 	.string "anything my Pokémon can legally\l"
-	.string "learn, and field techniques need\l"
-	.string "no move slots.$"
+	.string "learn.\p"
+	.string "And field techniques like Surf\n"
+	.string "don't need a move slot at all!$"
 
 LilycoveCity_Text_ImFromKanto: @ 81E3F05
 	.string "I came from Kanto.\p"

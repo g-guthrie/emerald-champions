@@ -710,9 +710,10 @@ MtPyre_Summit_EventScript_DarkraiQuiet::
 
 MtPyre_Summit_Text_DarkraiDormant:
 	.string "A dream can calm this nightmare.\p"
-	.string "After helping the elders, catch\n"
-	.string "Munna in Verdanturf Meadow,\l"
-	.string "then return to this pedestal.\p"
+	.string "Help the elders, earn six Gym\n"
+	.string "Badges and catch Munna in\l"
+	.string "Verdanturf Meadow.\p"
+	.string "Then return to this pedestal.\p"
 	.string "Munna or Musharna can be in\n"
 	.string "your party or your PC.$"
 

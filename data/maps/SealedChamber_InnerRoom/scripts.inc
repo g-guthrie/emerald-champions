@@ -130,5 +130,5 @@ SealedChamber_InnerRoom_Text_RegigigasStatue:
 
 SealedChamber_InnerRoom_Text_RegigigasStatueSilent:
 	.string "The statue stays silent…\p"
-	.string "It may stir once REGIROCK, REGICE\n"
-	.string "and REGISTEEL have all been caught.$"
+	.string "It may stir once Regirock, Regice\n"
+	.string "and Registeel have all been caught.$"

@@ -16,9 +16,9 @@ PacifidlogTown_House3_Text_IsThatAPokedex:
 	.string "I wish I was like you.$"
 
 PacifidlogTown_House3_Text_UsedToBeUseful:
-	.string "I used to be kinda useful, but now…\p"
-	.string "Now I just stand here and waste\n"
-	.string "your time with this pointless\l"
-	.string "monologue, or stare at this pot.\p"
-	.string "Maybe one day I'll do something\n"
-	.string "again. Who knows!$"
+	.string "I used to ferry folks between the\n"
+	.string "floating houses, but now…\p"
+	.string "Everyone Surfs, so I just stand here\n"
+	.string "and stare at this pot.\p"
+	.string "Maybe one day I'll find something\n"
+	.string "useful to do again. Who knows!$"

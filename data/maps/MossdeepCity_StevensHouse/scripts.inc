@@ -87,7 +87,9 @@ MossdeepCity_StevensHouse_EventScript_LeaveMeltan:: @ 822285B
 
 MossdeepCity_StevensHouse_EventScript_GiveMeltan:: @ 8222865
 	setvar VAR_TEMP_1, SPECIES_MELTAN
-	givemon SPECIES_MELTAN, 5, ITEM_NONE
+	@ Gift Pokemon arrive at the live level cap (Lv. 100 after the Hall of Fame).
+	special GetLevelCapForScriptedGift
+	givemon SPECIES_MELTAN, VAR_0x800A, ITEM_NONE
 	compare VAR_RESULT, 0
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_SendMeltanParty
 	compare VAR_RESULT, 1
@@ -149,7 +151,6 @@ MossdeepCity_StevensHouse_EventScript_Letter:: @ 822291B
 	releaseall
 	end
 
-@ Unused, leftover from RS
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive: @ 8222936
 	.string "Steven: Thank you for\n"
 	.string "everything.\p"

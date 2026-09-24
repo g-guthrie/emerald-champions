@@ -194,7 +194,9 @@ AshenWoods_Text_BlobNowhereToRun:
 
 AshenWoods_Text_BlobNoHealBall:
 	.string "But {PLAYER} doesn't have a\n"
-	.string "Heal Ball to catch it…$"
+	.string "Heal Ball to catch it…\p"
+	.string "Verdanturf's Pokémon Center\n"
+	.string "sells Heal Balls.$"
 
 AshenWoods_Text_CatchBlob:
 	.string "{PLAYER} threw a Heal Ball at Blob!$"

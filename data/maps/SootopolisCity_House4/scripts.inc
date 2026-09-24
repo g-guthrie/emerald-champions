@@ -29,9 +29,9 @@ SootopolisCity_House4_Text_AncientTreasuresWaitingInSea: @ 8226D3B
 
 SootopolisCity_House4_Text_StrollUnderwaterWithPokemon: @ 8226DEA
 	.string "Ancient treasures…\p"
-	.string "It would be nice if they existed, but\n"
-	.string "even if they didn't, it would be so\l"
-	.string "beautiful to take an underwater\l"
+	.string "It would be nice if they existed.\p"
+	.string "But even if they didn't, it would be\n"
+	.string "so beautiful to take an underwater\l"
 	.string "stroll with my Pokémon.$"
 
 SootopolisCity_House4_Text_Azumarill: @ 8226E7F

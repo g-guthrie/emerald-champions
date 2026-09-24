@@ -18,7 +18,7 @@ gText_EmeraldChampionsExplainTools::
 	.string "party outside battle. Every Center\l"
 	.string "refills your doses.\p"
 	.string "The Leveler raises your party to\n"
-	.string "each Pokémon's cap. It never\l"
+	.string "the current level cap. It never\l"
 	.string "runs out.\p"
 	.string "The tutor teaches moves for free.\n"
 	.string "The vendor sells discovered items.$"
@@ -59,12 +59,10 @@ gText_EmeraldChampionsGiveMissingLeveler::
 	.string "the Leveler!$"
 
 gText_EmeraldChampionsExplainLeveler::
-	.string "The Leveler raises each party member\n"
-	.string "to its own level cap. It never\l"
-	.string "runs out.\p"
-	.string "Powerful legendary Pokémon have\n"
-	.string "lower caps to balance their stats.\l"
-	.string "Check each cap in Summary.$"
+	.string "The Leveler raises your whole party\n"
+	.string "to the current level cap.\p"
+	.string "It never runs out, and the cap\n"
+	.string "rises as your journey goes on.$"
 
 gText_WouldYouLikeToRestYourPkmn::
 	.string "Hello, and welcome to\n"

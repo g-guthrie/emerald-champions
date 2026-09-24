@@ -114,9 +114,9 @@ AncientTomb_EventScript_ReadAccount::
 	return
 
 DesertRuins_Text_RouteAccount:
-	.string "The first account describes a\n"
-	.string "route south of the eastern city,\l"
-	.string "past two broad sea routes.\p"
+	.string "The first account describes an\n"
+	.string "islet on the western sea, between\l"
+	.string "Petalburg's shore and Dewford.\p"
 	.string "When land and sea fought, the\n"
 	.string "builders appealed to the guardian\l"
 	.string "of the sky.$"

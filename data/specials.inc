@@ -190,6 +190,7 @@ gSpecials::
 	def_special GetNumLevelsGainedFromDaycare
 	def_special GetDaycareCostAndPrepareString
 	def_special TakePokemonFromDaycare
+	def_special CanTakeDaycareMonWithinPartyRule
 	def_special ScriptHatchMon
 	def_special EggHatch, waitstate=1
 	def_special CheckDaycareMonReceivedMail

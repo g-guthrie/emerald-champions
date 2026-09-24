@@ -341,8 +341,8 @@ MtChimney_Text_MaxieYouHaventSeenLastOfMagma: @ 822F5F7
 MtChimney_Text_TabithaIntro: @ 822F6AA
 	.string "Hehehe!\p"
 	.string "So you've come all the way here!\p"
-	.string "But you're too late!\n"
-	.string "Courtney's already delivered the\l"
+	.string "But you're too late!\p"
+	.string "Courtney's already delivered the\n"
 	.string "Meteorite from Meteor Falls to\l"
 	.string "the Boss!$"
 

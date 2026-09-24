@@ -115,12 +115,12 @@ SootopolisCity_Gym_B1F_Text_BridgetDefeat: @ 82260B6
 SootopolisCity_Gym_B1F_Text_BridgetPostBattle: @ 82260D1
 	.string "Rather than being satisfied by being\n"
 	.string "in a strong Gym, I imagine training in\l"
-	.string "other places will make you stronger.\l"
+	.string "other places will make you stronger.\p"
 	.string "But above all, it looks more fun.$"
 
 SootopolisCity_Gym_B1F_Text_OliviaIntro: @ 8226164
 	.string "I train my Pokémon together with\n"
-	.string "JUAN.\p"
+	.string "Juan.\p"
 	.string "Don't think I'm a pushover.$"
 
 SootopolisCity_Gym_B1F_Text_OliviaDefeat: @ 82261A7

@@ -205,8 +205,8 @@ BattleFrontier_Lounge2_Text_DomeAceGoldMons:: @ 8260D3A
 	.string "When he's demonstrating his strategy,\n"
 	.string "he uses these three Pokémon:\p"
 	.string "A DRAGON & FLYING EON Pokémon,\n"
-	.string "a WATER & GROUND MUD FISH Pokémon,\l"
-	.string "and a STEEL- & Psychic-type IRON LEG\l"
+	.string "a WATER & GROUND MUD FISH Pokémon,\p"
+	.string "and a STEEL- & Psychic-type IRON LEG\n"
 	.string "Pokémon.$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadIsThere:: @ 8260E1E
@@ -254,8 +254,8 @@ BattleFrontier_Lounge2_Text_PikeQueenGoldMons:: @ 8261194
 	.string "When she's seriously annoyed, they say\n"
 	.string "she uses these three Pokémon:\p"
 	.string "A POISON-type FANG SNAKE Pokémon,\n"
-	.string "a STEEL & GROUND IRON SNAKE Pokémon,\l"
-	.string "and a WATER- & Flying-type ATROCIOUS\l"
+	.string "a STEEL & GROUND IRON SNAKE Pokémon,\p"
+	.string "and a WATER- & Flying-type ATROCIOUS\n"
 	.string "Pokémon.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonIsThere:: @ 8261282
@@ -280,8 +280,8 @@ BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons:: @ 8261403
 	.string "When she battles for keeps,\n"
 	.string "she supposedly uses these Pokémon:\p"
 	.string "A DARK-type MOONLIGHT Pokémon,\n"
-	.string "a GHOST & POISON SHADOW Pokémon\l"
-	.string "and a GRASS- & FIGHTING-type\l"
+	.string "a GHOST & POISON SHADOW Pokémon,\p"
+	.string "and a GRASS- & FIGHTING-type\n"
 	.string "MUSHROOM Pokémon.$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenIsThere:: @ 82614E6
@@ -331,8 +331,8 @@ BattleFrontier_Lounge2_Text_PyramidKingGoldMons:: @ 82618C4
 	.string "When he's pumped with hot power,\n"
 	.string "he apparently uses these Pokémon:\p"
 	.string "An ICE & FLYING FREEZE Pokémon, an\n"
-	.string "ELECTRIC & FLYING ELECTRIC Pokémon,\l"
-	.string "and a FIRE- & Flying-type FLAME\l"
+	.string "ELECTRIC & FLYING ELECTRIC Pokémon,\p"
+	.string "and a FIRE- & Flying-type FLAME\n"
 	.string "Pokémon.$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice1:: @ 82619AC
@@ -352,8 +352,8 @@ BattleFrontier_Lounge2_Text_DoubleBattleAdvice2:: @ 8261A91
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice3:: @ 8261B0C
 	.string "Once you're confident and comfortable\n"
-	.string "with Double Battles here, you should\l"
-	.string "think about challenging other places\l"
+	.string "with Double Battles here, you should\p"
+	.string "think about challenging other places\n"
 	.string "offering Double Battles.$"
 
 BattleFrontier_Lounge2_Text_MultiBattleAdvice:: @ 8261B95

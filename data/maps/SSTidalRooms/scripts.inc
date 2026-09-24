@@ -28,44 +28,50 @@ SSTidalRooms_EventScript_Bed:: @ 823CA33
 	releaseall
 	end
 
+@ Before the voyage stage the cabin teams only point the way; face the player first.
+SSTidalRooms_EventScript_CabinWait:
+	lock
+	faceplayer
+	goto Common_EventScript_FinaleWait
+
 SSTidalRooms_EventScript_Colton:: @ 823CA49
 	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
-	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, Common_EventScript_FinaleWait
+	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, SSTidalRooms_EventScript_CabinWait
 	trainerbattle_double TRAINER_COLTON, SSTidalRooms_Text_ColtonIntro, SSTidalRooms_Text_ColtonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Micah:: @ 823CA60
 	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
-	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, Common_EventScript_FinaleWait
+	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, SSTidalRooms_EventScript_CabinWait
 	trainerbattle_double TRAINER_MICAH, SSTidalRooms_Text_MicahIntro, SSTidalRooms_Text_MicahDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_MicahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Thomas:: @ 823CA77
 	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
-	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, Common_EventScript_FinaleWait
+	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, SSTidalRooms_EventScript_CabinWait
 	trainerbattle_double TRAINER_THOMAS, SSTidalRooms_Text_ThomasIntro, SSTidalRooms_Text_ThomasDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_ThomasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Jed:: @ 823CA8E
 	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
-	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, Common_EventScript_FinaleWait
+	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, SSTidalRooms_EventScript_CabinWait
 	trainerbattle_double TRAINER_LEA_AND_JED, SSTidalRooms_Text_JedIntro, SSTidalRooms_Text_JedDefeat, SSTidalRooms_Text_JedNotEnoughMons
 	msgbox SSTidalRooms_Text_JedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Lea:: @ 823CAA9
 	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
-	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, Common_EventScript_FinaleWait
+	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, SSTidalRooms_EventScript_CabinWait
 	trainerbattle_double TRAINER_LEA_AND_JED, SSTidalRooms_Text_LeaIntro, SSTidalRooms_Text_LeaDefeat, SSTidalRooms_Text_LeaNotEnoughMons
 	msgbox SSTidalRooms_Text_LeaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Naomi:: @ 823CADB
 	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
-	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, Common_EventScript_FinaleWait
+	goto_if_lt VAR_RESULT, EC_FINALE_VOYAGE, SSTidalRooms_EventScript_CabinWait
 	trainerbattle_double TRAINER_NAOMI, SSTidalRooms_Text_NaomiIntro, SSTidalRooms_Text_NaomiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_NaomiPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -83,9 +89,9 @@ SSTidalRooms_Text_ColtonDefeat: @ 823CB58
 	.string "That was an enjoyable match!$"
 
 SSTidalRooms_Text_ColtonPostBattle: @ 823CB75
-	.string "I get so excited imagining what kinds\n"
-	.string "of Pokémon I'll get to see in the next\l"
-	.string "Contest. The anticipation of it thrills!$"
+	.string "What a voyage this has been!\n"
+	.string "I'll tell every port in Hoenn about\p"
+	.string "the new Champion's splendid team!$"
 
 SSTidalRooms_Text_MicahIntro:
 	.string "Champion, are your friends ready?\p"

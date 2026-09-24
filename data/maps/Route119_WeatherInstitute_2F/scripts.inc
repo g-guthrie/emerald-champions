@@ -332,10 +332,10 @@ Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather: @ 82706FE
 	.string "Institute--go ahead and take it.$"
 
 Route119_WeatherInstitute_2F_Text_AnomalyReportIntro:
-	.string "Ever since TEAM AQUA broke in, our\n"
+	.string "Ever since Team Aqua broke in, our\n"
 	.string "instruments have picked up storms\l"
 	.string "where no storm should be.\p"
-	.string "Rare POKéMON seem to travel inside\n"
+	.string "Rare Pokémon seem to travel inside\n"
 	.string "them. Here is what we're tracking:$"
 
 Route119_WeatherInstitute_2F_Text_AnomalyReportOutro:

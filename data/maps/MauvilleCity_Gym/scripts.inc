@@ -375,7 +375,7 @@ MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis: @ 820E7AA
 	.string "Mauville if you need the license.\p"
 	.string "Then press A by a cracked rock.\n"
 	.string "Bring a Pokémon that could learn\l"
-	.string "Rock Smash; no moveslot needed!$"
+	.string "Rock Smash; no move slot needed!$"
 
 MauvilleCity_Gym_Text_ExplainTakeThis:
 	.string "Hmm…\n"

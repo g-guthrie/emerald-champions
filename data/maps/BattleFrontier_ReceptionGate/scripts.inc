@@ -385,20 +385,24 @@ BattleFrontier_ReceptionGate_Text_BattlePikeInfo: @ 8266C24
 	.string "like a Pokémon at the center-left of\l"
 	.string "the Battle Frontier.\p"
 	.string "An event called the Battle Choice\n"
-	.string "is conducted there.$"
+	.string "is conducted there.\p"
+	.string "Its Trainer battles are\n"
+	.string "DOUBLE BATTLES.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePyramidInfo: @ 8266CBB
 	.string "The BATTLE PYRAMID is the enormous\n"
 	.string "pyramid.\p"
 	.string "An event called the Battle Quest\n"
-	.string "is conducted there.$"
+	.string "is conducted there.\p"
+	.string "Its Trainer battles are\n"
+	.string "DOUBLE BATTLES.$"
 
 BattleFrontier_ReceptionGate_Text_RankingHallInfo: @ 8266D1C
 	.string "The RANKING HALL is located near\n"
 	.string "the Battle Tower.\p"
 	.string "There, you may see the most fantastic\n"
-	.string "records left by the Trainers that\l"
-	.string "took on the many challenges of\l"
+	.string "records left by the Trainers that\p"
+	.string "took on the many challenges of\n"
 	.string "the Battle Frontier.$"
 
 BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo: @ 8266DCB
@@ -410,9 +414,9 @@ BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo: @ 8266DCB
 
 BattleFrontier_ReceptionGate_Text_YourGuideToRules: @ 8266E66
 	.string "I'm your guide to the basic rules that\n"
-	.string "are common to all the challenges\l"
-	.string "offered by the facilities in the BATTLE\l"
-	.string "FRONTIER.$"
+	.string "are common to all the challenges\p"
+	.string "offered by the facilities in the\n"
+	.string "Battle Frontier.$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhat: @ 8266EE0
 	.string "What would you like to learn about?$"
@@ -486,8 +490,8 @@ BattleFrontier_ReceptionGate_Text_RecordedBattleInfo: @ 82674F3
 	.string "You may record a battle you had with\n"
 	.string "a friend or friends.\p"
 	.string "Or you may record a battle conducted\n"
-	.string "at the Battle Frontier excluding\l"
-	.string "matches at the BATTLE PIKE or\l"
+	.string "at the Battle Frontier excluding\p"
+	.string "matches at the BATTLE PIKE or\n"
 	.string "the BATTLE PYRAMID.\p"
 	.string "You may choose to record your match\n"
 	.string "at the end of a battle.$"

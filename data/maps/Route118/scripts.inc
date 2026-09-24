@@ -43,6 +43,8 @@ Route118_EventScript_ShowRouteRoster::
 	call Common_EventScript_ShowRouteRoster
 	setvar VAR_0x8004, LEGENDARY_SIGN_THUNDURUS
 	call Common_EventScript_ShowRouteLegend
+	setvar VAR_0x8004, LEGENDARY_SIGN_MIRAIDON
+	call Common_EventScript_ShowRouteLegend
 	releaseall
 	end
 

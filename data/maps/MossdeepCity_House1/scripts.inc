@@ -30,8 +30,12 @@ MossdeepCity_House1_EventScript_CynthiaBattle::
 	applymovement LOCALID_CYNTHIA, Common_Movement_Delay48
 	waitmovement 0
 	playbgm DP_SEQ_EYE_CHAMP, FALSE
+	@ The doorway ambush turns her toward the door; faceplayer already
+	@ handled a player who walked up and talked to her.
+	goto_if_ne VAR_CYNTHIA_STATE, 1, MossdeepCity_House1_EventScript_CynthiaAsk
 	applymovement LOCALID_CYNTHIA, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
+MossdeepCity_House1_EventScript_CynthiaAsk:
 	msgbox MossdeepCity_House1_Text_WhatsThis, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MossdeepCity_House1_EventScript_CynthiaDeclined
@@ -39,8 +43,12 @@ MossdeepCity_House1_EventScript_CynthiaBattle::
 	closemessage
 	trainerbattle_no_intro_double TRAINER_CYNTHIA_1, MossdeepCity_House1_Text_CynthiaDefeat
 	msgbox MossdeepCity_House1_Text_BeyondExpectation, MSGBOX_DEFAULT
+	@ Only the doorway ambush (state 1) leaves a gap to close; a player who
+	@ talked to her is already adjacent and would walk into her tile.
+	goto_if_ne VAR_CYNTHIA_STATE, 1, MossdeepCity_House1_EventScript_CynthiaHandOver
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
+MossdeepCity_House1_EventScript_CynthiaHandOver:
 	setvar VAR_CYNTHIA_STATE, 2
 	goto MossdeepCity_House1_EventScript_CynthiaGift
 

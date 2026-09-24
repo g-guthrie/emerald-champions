@@ -152,8 +152,11 @@ EventScript_FoundItemMessage::
 	message gText_PlayerFoundOneItem
 	return
 
+@ The ball stays on the map, so say it was found, not obtained.
 EventScript_NoRoomToPickUpItem::
-	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
+	call EventScript_FoundItem
+	waitmessage
+	waitbuttonpress
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, FALSE
 	return

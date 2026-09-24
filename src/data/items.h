@@ -14711,8 +14711,8 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Used Berries return\n"
-            "after battle. Except\n"
-            "Knock Off and theft."),
+            "after battle unless\n"
+            "stolen or eaten."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

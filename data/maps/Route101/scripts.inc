@@ -253,7 +253,10 @@ Route101_EventScript_FinishRescue::
 	release
 	end
 
+@ A lost or fled rescue carries no penalty and no whiteout, so the partners
+@ must be restored here; otherwise a retry would begin with a fainted pair.
 Route101_EventScript_RescueLost::
+	special HealPlayerParty
 	msgbox Route101_Text_RescueTryAgain, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route101_EventScript_BattleRescue
 	goto Route101_EventScript_ReturnToBag

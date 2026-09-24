@@ -339,9 +339,9 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "a promotional item.$"
 
 OldaleTown_Text_PotionExplanation: @ 81E92AF
-	.string "If you're after healing items like\n"
-	.string "Potions or Poké Balls, please see our\l"
-	.string "friendly clerks in any Pokémon Center.$"
+	.string "If you're after Potions or Poké Balls,\n"
+	.string "please see the friendly clerk\l"
+	.string "in any Pokémon Center.$"
 
 OldaleTown_Text_WaitDontComeInHere: @ 81E9313
 	.string "Aaaaah! Wait!\n"

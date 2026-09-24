@@ -422,6 +422,5 @@ RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex: @ 81F9B0D
 RivalsHouse_2F_Text_BrendanWhereShouldIGoNext: @ 81F9BE7
 	.string "Brendan: I'm having a hard time deciding\n"
 	.string "where I should catch Pokémon next.\p"
-	.string "Hey, {PLAYER}, if I see you while I'm out\n"
-	.string "catching Pokémon, I can pitch you a\l"
-	.string "battle if you'd like.$"
+	.string "Hey, {PLAYER}, if I see you while I'm out,\n"
+	.string "let's compare our Pokédexes.$"

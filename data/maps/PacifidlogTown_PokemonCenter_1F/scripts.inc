@@ -59,8 +59,8 @@ PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola: @ 820350F
 PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats: @ 820356F
 	.string "The ancestors of the people in\n"
 	.string "Pacifidlog were said to have been\l"
-	.string "born on boats and then lived and died\l"
-	.string "aboard them.\p"
+	.string "born on boats.\p"
+	.string "They lived and died aboard them.\p"
 	.string "I understand that they lived that way\n"
 	.string "because they were searching for\l"
 	.string "something.$"

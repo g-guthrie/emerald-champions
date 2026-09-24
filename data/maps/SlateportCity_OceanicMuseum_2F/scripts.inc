@@ -78,6 +78,10 @@ SlateportCity_OceanicMuseum_2F_EventScript_FirstGruntDefeated::
 	fadescreen FADE_FROM_BLACK
 	delay 30
 	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS
+	@ The Aqua queue outside the Museum was part of this raid. Clear it now so
+	@ Scott's "they ran away" scene and the city agree; Brawly's Gym still sets
+	@ it too, for players who fight him before the Museum.
+	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs, MSGBOX_DEFAULT

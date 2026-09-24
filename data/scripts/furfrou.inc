@@ -30,7 +30,8 @@ Furfrou_Haircut_Main::
     copyvar VAR_0x8007, VAR_0x8004 @ Need to copy this because it gets overwritten by the multichoice
     goto Furfrou_Trim_Multichoice
 Furfrou_Trim_Multichoice::
-    bufferpartymonnick 0, VAR_0x8004
+    @ VAR_0x8004 holds the multichoice id after the first pass; 0x8007 keeps the slot.
+    bufferpartymonnick 0, VAR_0x8007
     msgbox Furfrou_Text_WhichStyle, MSGBOX_DEFAULT
     waitmessage
 	setvar VAR_0x8005, 0 @ Open at the first trim, not a previous special's output.
@@ -95,18 +96,19 @@ Furfrou_Trim_CheckMoney::
     compare VAR_0x8006, SPECIES_FURFROU
     call_if_eq Furfrou_Trim_CheckNaturalToNatural
     compare VAR_0x8006, VAR_0x8005
-    call_if_eq Furfrou_Trim_ConfirmSameTrim
+    goto_if_eq Furfrou_Trim_ConfirmSameTrim
+Furfrou_Trim_Pay::
 	checkmoney 500
 	compare VAR_RESULT, FALSE
 	goto_if_eq Furfrou_Trim_NotEnoughMoney
     msgbox Furfrou_Text_TakeMoney, MSGBOX_DEFAULT
     removemoney 500
     msgbox Furfrou_Text_StartTrim, MSGBOX_DEFAULT
+    @ Show the snip before the fade: a faded palette hides the message box.
+    msgbox Furfrou_Text_Snip, MSGBOX_AUTOCLOSE
 	fadescreen 1
     copyvar VAR_0x8004, VAR_0x8007
     special ChangeMonSpecies
-    msgbox Furfrou_Text_Snip, MSGBOX_AUTOCLOSE
-    waitmessage
 	fadescreen 0
     msgbox Furfrou_Text_ThankYou, MSGBOX_DEFAULT
     showmonpic VAR_0x8005, 10, 3
@@ -128,11 +130,12 @@ Furfrou_Trim_AlreadyNatural::
     releaseall
     end
 
+@ Reached by goto so a NO does not leave a return address on the script stack.
 Furfrou_Trim_ConfirmSameTrim::
     msgbox Furfrou_Text_SameStyle, MSGBOX_YESNO
     compare VAR_RESULT, NO
     goto_if_eq Furfrou_Trim_Multichoice
-    return
+    goto Furfrou_Trim_Pay
 
 Furfrou_Trim_NoFurfrouInParty::
     msgbox Furfrou_Text_PlayerNoFurfrou, MSGBOX_DEFAULT

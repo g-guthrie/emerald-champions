@@ -1011,7 +1011,9 @@ SlateportCity_EventScript_ScottBattleTentScene:: @ 81DD5DC
 
 SlateportCity_EventScript_Brawly::
 	lockall
+	goto_if_set FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA, SlateportCity_EventScript_BrawlyLineGone
 	msgbox SlateportCity_Text_WhoahLineSoLong, MSGBOX_DEFAULT
+SlateportCity_EventScript_BrawlyNoticePlayer::
 	waitse
 	playse SE_PIN
 	applymovement LOCALID_BRAWLY, Common_Movement_ExclamationMark
@@ -1026,6 +1028,11 @@ SlateportCity_EventScript_Brawly::
 	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
+
+@ The Museum raid clears the Aqua queue; Brawly may still be waiting here.
+SlateportCity_EventScript_BrawlyLineGone::
+	msgbox SlateportCity_Text_WhoahLineScattered, MSGBOX_DEFAULT
+	goto SlateportCity_EventScript_BrawlyNoticePlayer
 
 SlateportCity_Movement_PushPlayerDown: @ 81DD630
 	lock_facing_direction
@@ -1063,6 +1070,10 @@ SlateportCity_EventScript_BerryCrushRankingsSign:: @ 81DD643
 SlateportCity_Text_WhoahLineSoLong:
 	.string "Whoah! This line's way too long,\n"
 	.string "dude! What's the deal?$"
+
+SlateportCity_Text_WhoahLineScattered:
+	.string "Whoah! That whole line just split,\n"
+	.string "dude! What was it even for?$"
 
 SlateportCity_Text_LookingForBrawly:
 	.string "Oh, hey there!\p"
@@ -1158,7 +1169,7 @@ SlateportCity_Text_BushedHikingFromMauville: @ 81DDA9A
 
 SlateportCity_Text_EveryoneCallsHimCaptStern: @ 81DDB21
 	.string "Stern, the fellow who built the\n"
-	.string "MUSEUM, also happens to be the leader\l"
+	.string "Museum, also happens to be the leader\l"
 	.string "of an undersea exploration team.\p"
 	.string "So, everyone calls him Capt. Stern.$"
 
@@ -1479,7 +1490,7 @@ SlateportCity_Text_YouDroveTeamAquaAway: @ 81DF032
 	.string "Scott: Huh?\n"
 	.string "I'm sure I met you somewhere before.\p"
 	.string "Have I introduced myself to you?\n"
-	.string "If not, my name's SCOTT.\p"
+	.string "If not, my name's Scott.\p"
 	.string "I just saw Team Aqua run away from\n"
 	.string "here like they were stung.\p"
 	.string "Let me guess--you drove them away?$"
@@ -1522,8 +1533,9 @@ SlateportCity_Text_GretaReadyForBattle:
 SlateportCity_Text_GretaMaybeNot:
 	.string "Hmm… no, maybe not. To be blunt, you\n"
 	.string "look pretty weak.\p"
-	.string "Come see me again once you've trained\n"
-	.string "up a bit more. Or a lot more!$"
+	.string "Beat the tough Trainers waiting in\n"
+	.string "Lavaridge's Pokémon Center and\l"
+	.string "Fortree's Mart. Then come see me!$"
 
 SlateportCity_Text_GretaLetsBattle:
 	.string "Great! Be ready for a thrashing!$"

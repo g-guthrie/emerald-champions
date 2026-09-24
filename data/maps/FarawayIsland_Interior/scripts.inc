@@ -147,22 +147,10 @@ FarawayIsland_Interior_EventScript_Mew:: @ 8267DF2
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq FarawayIsland_Interior_EventScript_MewDefeated
-	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq FarawayIsland_Interior_EventScript_PlayerOrMewRan
-	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq FarawayIsland_Interior_EventScript_PlayerOrMewRan
-	compare VAR_RESULT, B_OUTCOME_MON_TELEPORTED
-	goto_if_eq FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, FarawayIsland_Interior_EventScript_PlayerOrMewRan
 	setflag FLAG_CAUGHT_MEW
 	release
-	end
-
-FarawayIsland_Interior_EventScript_MewDefeated:: @ 8267E96
-	@ Knocked out, it retreats like a fled encounter and can be met again.
-	setvar VAR_0x8004, SPECIES_MEW
-	goto Common_EventScript_LegendaryFlewAway
 	end
 
 FarawayIsland_Interior_EventScript_PlayerOrMewRan:: @ 8267EA4

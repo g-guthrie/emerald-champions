@@ -43,9 +43,9 @@ RustboroCity_Mart_Text_ExcuseMeTrainer:
 
 RustboroCity_Mart_Text_HaveTM98:
 	.string "Use that Rare Candy to help a\n"
-	.string "partner grow one level. It\l"
-	.string "cannot take you past the current\l"
-	.string "cap.$"
+	.string "partner grow one level.\p"
+	.string "It can't raise a Pokémon past\n"
+	.string "the current level cap, though.$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
 	.string "I buy Paralyze Heals and Antidotes\n"

@@ -516,10 +516,10 @@ BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints: @ 825FF12
 
 BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls: @ 825FF5D
 	.string "Oh, they're so nice!\n"
-	.string "I wish I had them!\l"
-	.string "Cute cushions!\l"
-	.string "Big plush Dolls!\l"
-	.string "Little plush Dolls!\l"
+	.string "I wish I had them!\p"
+	.string "Cute cushions!\n"
+	.string "Big plush Dolls!\p"
+	.string "Little plush Dolls!\n"
 	.string "I wish I had them all!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant: @ 825FFD0

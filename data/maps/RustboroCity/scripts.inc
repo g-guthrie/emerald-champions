@@ -28,13 +28,24 @@ RustboroCity_EventScript_HideEarlyRoxanne::
 	return
 
 RustboroCity_EventScript_PositionScientistForExit:: @ 81E06EC
+	goto_if_ne VAR_TEMP_1, 15, RustboroCity_EventScript_PositionScientistBesidePlayer
 	compare VAR_TEMP_0, 11
 	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
+	goto_if_ne VAR_TEMP_0, 12, RustboroCity_EventScript_PositionScientistBesidePlayer
 	setobjectxyperm LOCALID_SCIENTIST, 12, 15
 	end
 
 RustboroCity_EventScript_PositionScientistLeftExit:: @ 81E06FF
 	setobjectxyperm LOCALID_SCIENTIST, 11, 15
+	end
+
+@ Arriving any way other than Devon's door (Teleport to the Center, or a
+@ route edge) must not leave the scientist talking from off screen: he
+@ appears right above the player instead of walking out of Devon.
+RustboroCity_EventScript_PositionScientistBesidePlayer::
+	setvar VAR_TEMP_2, 1
+	subvar VAR_TEMP_1, 1
+	setobjectxyperm LOCALID_SCIENTIST, VAR_TEMP_0, VAR_TEMP_1
 	end
 
 RustboroCity_EventScript_HideMapNamePopup:: @ 81E0707
@@ -48,6 +59,7 @@ RustboroCity_OnFrame: @ 81E070B
 RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	lockall
 	setvar VAR_ROUTE104_STATE, 1
+	goto_if_eq VAR_TEMP_2, 1, RustboroCity_EventScript_ScientistAppearBesidePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerWalkDown
 	waitmovement 0
 	playse SE_EXIT
@@ -55,6 +67,12 @@ RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	addobject LOCALID_SCIENTIST
 	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistApproachPlayer
 	waitmovement 0
+	goto RustboroCity_EventScript_ScientistNoticePlayer
+
+RustboroCity_EventScript_ScientistAppearBesidePlayer::
+	delay 10
+	addobject LOCALID_SCIENTIST
+RustboroCity_EventScript_ScientistNoticePlayer::
 	playse SE_PIN
 	applymovement LOCALID_SCIENTIST, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -389,7 +407,9 @@ RustboroCity_EventScript_EmployeeAskToGetGoods:: @ 81E0B2E
 	call_if_eq RustboroCity_EventScript_EmployeeApproachPlayerDown1
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
 	setvar VAR_RUSTBORO_CITY_STATE, 4
-	copyobjectxytoperm LOCALID_DEVON_EMPLOYEE
+	@ Keep his saved spot at 30,10. Every return trigger assumes it; a saved
+	@ 30,11 (after he steps down to meet the player) would walk him into a
+	@ player returning on 30,12.
 	msgbox RustboroCity_Text_HelpMeIWasRobbed, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -858,7 +878,13 @@ RustboroCity_EventScript_Roxanne::
 	goto RustboroCity_EventScript_PokecallMoveRoxanne
 
 RustboroCity_EventScript_PokecallMoveRoxanne::
+	goto_if_set FLAG_RECEIVED_HM_CUT, RustboroCity_EventScript_RoxanneCutLicenseHeld
 	msgbox RustboroCity_Text_RoxanneOhHello, MSGBOX_DEFAULT
+	goto RustboroCity_EventScript_RoxanneCutHowTo
+
+RustboroCity_EventScript_RoxanneCutLicenseHeld:
+	msgbox RustboroCity_Text_RoxanneOhHelloLicenseHeld, MSGBOX_DEFAULT
+RustboroCity_EventScript_RoxanneCutHowTo:
 	closemessage
 	delay 30
 	msgbox RustboroCity_Movement_RoxanneOneMoreThing, MSGBOX_DEFAULT
@@ -942,8 +968,14 @@ RustboroCity_Text_RoxanneOhHello:
 	.string "The man in Cutter's house here in\n"
 	.string "Rustboro can give you that license.$"
 
+RustboroCity_Text_RoxanneOhHelloLicenseHeld:
+	.string "Roxanne: Oh, hello, {PLAYER}.\p"
+	.string "With my Stone Badge and your Cut\n"
+	.string "license, you can clear thin trees.$"
+
 RustboroCity_Movement_RoxanneOneMoreThing:
-	.string "Then face a thin tree and press A.\p"
+	.string "To use Cut, face a thin tree and\n"
+	.string "press A.\p"
 	.string "Bring a Pokémon able to learn\n"
 	.string "Cut; it needn't know the move!\p"
 	.string "Keep studying your partners and\n"
@@ -1166,7 +1198,7 @@ RustboroCity_Text_DevonCorpSign: @ 81E2128
 RustboroCity_Text_GymSign: @ 81E2167
 	.string "Rustboro City Pokémon Gym\n"
 	.string "Leader: Roxanne\p"
-	.string "“The ROCK-loving honors student!”$"
+	.string "“The Rock-loving honors student!”$"
 
 RustboroCity_Text_CitySign: @ 81E220B
 	.string "Rustboro City\p"
@@ -1199,7 +1231,9 @@ RustboroCity_Text_YouCanHave2On2Battle: @ 81E249D
 	.string "Did you know this?\p"
 	.string "Every Trainer battle here is a\n"
 	.string "Double Battle, two against two.\p"
-	.string "If only one of your Pokémon can\n"
-	.string "fight, it takes on both foes alone!\p"
+	.string "A Trainer will only battle you if\n"
+	.string "two of your Pokémon can fight.\p"
+	.string "But if one faints, the other takes\n"
+	.string "on both foes alone!\p"
 	.string "Don't you think it'd be cool to\n"
 	.string "win a battle like that?$"

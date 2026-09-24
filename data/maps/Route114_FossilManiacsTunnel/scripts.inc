@@ -59,8 +59,8 @@ Route114_FossilManiacsTunnel_Text_LookInDesertForFossils: @ 822AFD0
 	.string "But the Fossils around these parts all\n"
 	.string "belong to me… None for you…\p"
 	.string "If you can't bear to go without\n"
-	.string "a Fossil, look in a desert where there\l"
-	.string "are boulders and sand that may hide\l"
+	.string "a Fossil, look in a desert where there\p"
+	.string "are boulders and sand that may hide\n"
 	.string "Fossils…$"
 
 Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils: @ 822B0D6

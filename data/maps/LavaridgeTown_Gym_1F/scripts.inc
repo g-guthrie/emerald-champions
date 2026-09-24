@@ -343,7 +343,7 @@ LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis: @ 81FF359
 	.string "Strength. Get the license from\l"
 	.string "the grateful man in Rusturf Tunnel.\p"
 	.string "Bring a Pokémon able to learn\n"
-	.string "Strength; no moveslot needed!\p"
+	.string "Strength; no move slot needed!\p"
 	.string "Take this Mega Stone, too!$"
 
 LavaridgeTown_Gym_1F_Text_TakeThis:

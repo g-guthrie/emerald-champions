@@ -49,7 +49,15 @@ DewfordMeadow_EventScript_Warden::
 	end
 
 DewfordMeadow_EventScript_AfterSong::
+	setvar VAR_0x8004, LEGENDARY_SIGN_MELOETTA
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, DewfordMeadow_EventScript_MeloettaCaught
 	msgbox DewfordMeadow_Text_AfterSong, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordMeadow_EventScript_MeloettaCaught::
+	msgbox DewfordMeadow_Text_MeloettaCaught, MSGBOX_DEFAULT
 	release
 	end
 
@@ -77,6 +85,10 @@ DewfordMeadow_Text_MelodyAnswers:
 DewfordMeadow_Text_AfterSong:
 	.string "Our song has been answered! You can\n"
 	.string "search this meadow for Meloetta.$"
+
+DewfordMeadow_Text_MeloettaCaught:
+	.string "You found Meloetta! I can still hear\n"
+	.string "its song when the wind is right.$"
 
 DewfordMeadow_Text_NotYet:
 	.string "A melody sometimes drifts over this\n"

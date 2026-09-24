@@ -255,13 +255,24 @@ PetalburgWoods_EventScript_Girl:: @ 822E222
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_ExplainMiracleSeed
-	msgbox PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT
+	call_if_set FLAG_BADGE01_GET, PetalburgWoods_EventScript_GirlNoticesBadge
+	call_if_unset FLAG_BADGE01_GET, PetalburgWoods_EventScript_GirlNoticesTrainer
 	giveitem ITEM_MIRACLE_SEED
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MIRACLE_SEED
 	release
 	end
+
+@ Most players cross the Woods before Rustboro Gym, so only mention the
+@ Stone Badge when the player actually has it.
+PetalburgWoods_EventScript_GirlNoticesBadge::
+	msgbox PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT
+	return
+
+PetalburgWoods_EventScript_GirlNoticesTrainer::
+	msgbox PetalburgWoods_Text_TryUsingThisItemNoBadge, MSGBOX_DEFAULT
+	return
 
 PetalburgWoods_EventScript_ExplainMiracleSeed:: @ 822E251
 	msgbox PetalburgWoods_Text_MiracleSeedExplanation, MSGBOX_DEFAULT
@@ -373,7 +384,7 @@ PetalburgWoods_Text_CantBePopularIfILose: @ 822E86B
 	.string "I can't be popular if I lose.$"
 
 PetalburgWoods_Text_PeopleRespectYou: @ 822E889
-	.string "If you have a big BUG Pokémon,\n"
+	.string "If you have a big Bug Pokémon,\n"
 	.string "people respect you for it.$"
 
 PetalburgWoods_Text_StayOutOfTallGrass: @ 822EA0C
@@ -392,6 +403,12 @@ PetalburgWoods_Text_HiddenItemsExplanation: @ 822EA8B
 PetalburgWoods_Text_TryUsingThisItem: @ 822EAFE
 	.string "Oh, neat!\n"
 	.string "That's the Badge from Rustboro Gym!\p"
+	.string "You must be a Trainer.\n"
+	.string "You should try using this item.$"
+
+PetalburgWoods_Text_TryUsingThisItemNoBadge:
+	.string "Oh, neat!\n"
+	.string "You've got Pokémon with you!\p"
 	.string "You must be a Trainer.\n"
 	.string "You should try using this item.$"
 
