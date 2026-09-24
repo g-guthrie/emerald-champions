@@ -10,6 +10,7 @@
 #include "overworld.h"
 #include "hall_of_fame.h"
 #include "item.h"
+#include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "trainer_hill.h"
 #include "link.h"
@@ -862,7 +863,10 @@ u8 LoadGameSave(u8 saveType)
         // ERROR here means one valid slot was recovered with a warning;
         // CORRUPT/EMPTY have no complete save to migrate.
         if (status == SAVE_STATUS_OK || status == SAVE_STATUS_ERROR)
+        {
             MigrateBagPocketsIfNeeded();
+            MaxPlayerIVsIfNeeded();
+        }
         gSaveFileStatus = status;
         gGameContinueCallback = NULL;
         break;

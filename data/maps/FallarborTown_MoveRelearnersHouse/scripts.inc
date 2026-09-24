@@ -95,16 +95,16 @@ FallarborTown_Text_AnnoyingIntroPart6:
 	.string "Do you want me to explain them?$"
 
 FallarborTown_Text_AnnoyingIntroPart7:
-	.string "Evie: Right, here's the deal. For ¥100,\n"
+	.string "Evie: Right, here's the deal. For ¥2,\n"
 	.string "I'll increase a Pokémon's EVs by one.$"
 
 FallarborTown_Text_AnnoyingIntroPart8:
-	.string "Ivy: And for one Bottle Cap, I'll change\n"
-	.string "one of a Pokémon's IVs to whatever\l"
-	.string "you want.\p"
-	.string "Also, for three Caps, I'll change all\n"
-	.string "of a Pokémon's IVs to give them a new\l"
-	.string "Hidden Power type.$"
+	.string "Ivy: Your Pokémon already have perfect\n"
+	.string "IVs, so I'll only lower them on request.\p"
+	.string "I'll set Speed or Attack as low or as\n"
+	.string "high as you like, free of charge.\p"
+	.string "Also, for three Bottle Caps, I'll give\n"
+	.string "a Pokémon a new Hidden Power type.$"
 
 @@@@@@@@@@@@@@@@ Super Training Script @@@@@@@@@@@@@@@@
 
@@ -236,32 +236,32 @@ FallarborTown_ChooseNewEV::
 
 FallarborTown_ChangeEV4::
 	setvar VAR_0x8006, 4
-	setvar VAR_0x8009, 400
+	setvar VAR_0x8009, 8
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV8::
 	setvar VAR_0x8006, 8
-	setvar VAR_0x8009, 800
+	setvar VAR_0x8009, 16
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV12::
 	setvar VAR_0x8006, 12
-	setvar VAR_0x8009, 1200
+	setvar VAR_0x8009, 24
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV64::
 	setvar VAR_0x8006, 64
-	setvar VAR_0x8009, 6400
+	setvar VAR_0x8009, 128
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV128::
 	setvar VAR_0x8006, 128
-	setvar VAR_0x8009, 12800
+	setvar VAR_0x8009, 256
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV252::
 	setvar VAR_0x8006, 252
-	setvar VAR_0x8009, 25200
+	setvar VAR_0x8009, 504
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ResetEVs::
@@ -344,12 +344,8 @@ FallarborTown_Text_ExplainEvs:
 	.string "a Pokémon has.\p"
 	.string "They can have HP EVs, Attack EVs,\n"
 	.string "Defense EVs… you get the idea.\p"
-	.string "Every time your Pokémon gains\n"
-	.string "experience in battle, it also gains EVs.\p"
-	.string "The kind of EVs gained depends on the\n"
-	.string "kind of Pokémon you defeated.\p"
-	.string "For example, beating a Zubat will give\n"
-	.string "your Pokémon one Speed EV.\p"
+	.string "Battling won't raise them. Only\n"
+	.string "vitamins and my training do.\p"
 	.string "Once you have enough EVs in a stat,\n"
 	.string "that stat will go up!\p"
 	.string "You can have up to 252 EVs in one stat,\n"
@@ -359,7 +355,7 @@ FallarborTown_Text_ExplainEvs:
 	.string "but you can get creative with EVs too!$"
 
 SuperTraining_Text_TakeALookatEVs:
-	.string "OK! Again, I charge ¥100 per EV\n"
+	.string "OK! Again, I charge ¥2 per EV\n"
 	.string "added. Now let's take a look at your\l"
 	.string "{STR_VAR_1}'s EVs.$"
 
@@ -465,110 +461,35 @@ HyperTraining_EventScript_Explain_IVs::
 
 HyperTraining_EventScript_ChangeIV::
 	bufferpartymonnick 0, VAR_0x8004
-	msgbox HyperTraining_Text_WhichIVShouldChange, MSGBOX_DEFAULT
-	special BufferChosenMonAllIVs
-	multichoice 0, 0, MULTI_BASE_STATS, 0
-	switch VAR_RESULT
-	case 0, HyperTraining_EventScript_ChangeHPIV
-	case 1, FallarborTown_ChangeATKIV
-	case 2, FallarborTown_ChangeDEFIV
-	case 3, FallarborTown_ChangeSPEEDIV
-	case 4, FallarborTown_ChangeSPATKIV
-	case 5, FallarborTown_ChangeSPDEFIV
-	case 127, FallarborTown_HyperMainMenu
-	releaseall
-	end
-
-HyperTraining_EventScript_ChangeHPIV::
-	setvar VAR_0x8005, 0
+	message HyperTraining_Text_WhichIVShouldChange
+	waitmessage
+	dynmultipush HyperTraining_Text_Speed, 3
+	dynmultipush HyperTraining_Text_Attack, 1
+	dynmultipush EmeraldChampions_Text_Back, 127
+	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, 127, FallarborTown_HyperMainMenu
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, FallarborTown_HyperMainMenu
+	copyvar VAR_0x8005, VAR_RESULT
 	special BufferChosenMonIV
 	bufferpartymonnick 0, VAR_0x8004
 	buffernumberstring 1, VAR_0x8006
-	msgbox HyperTraining_ReportHP
-	goto FallarborTown_ChooseNewIV
+	goto_if_eq VAR_0x8005, 3, HyperTraining_EventScript_ReportSpeed
+	message HyperTraining_ReportAtk
+	goto HyperTraining_EventScript_ChooseLevel
 
-FallarborTown_ChangeATKIV::
-	setvar VAR_0x8005, 1
-	special BufferChosenMonIV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	msgbox HyperTraining_ReportAtk
-	goto FallarborTown_ChooseNewIV
+HyperTraining_EventScript_ReportSpeed::
+	message HyperTraining_ReportSpeed
 
-FallarborTown_ChangeDEFIV::
-	setvar VAR_0x8005, 2
-	special BufferChosenMonIV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	msgbox HyperTraining_ReportDef
-	goto FallarborTown_ChooseNewIV
-
-FallarborTown_ChangeSPEEDIV::
-	setvar VAR_0x8005, 3
-	special BufferChosenMonIV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	msgbox HyperTraining_ReportSpeed
-	goto FallarborTown_ChooseNewIV
-
-FallarborTown_ChangeSPATKIV::
-	setvar VAR_0x8005, 4
-	special BufferChosenMonIV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	msgbox HyperTraining_ReportSpAtk
-	goto FallarborTown_ChooseNewIV
-
-FallarborTown_ChangeSPDEFIV::
-	setvar VAR_0x8005, 5
-	special BufferChosenMonIV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	msgbox HyperTraining_ReportSpDef
-	goto FallarborTown_ChooseNewIV
-
-FallarborTown_ChooseNewIV::
-	multichoice 0, 0, MULTI_IV_MENU, 0
-	switch VAR_RESULT
-	case 0, HyperTraining_EventScript_ChangeIV0
-	case 1, HyperTraining_EventScript_ChangeIV1
-	case 2, HyperTraining_EventScript_ChangeIV14
-	case 3, HyperTraining_EventScript_ChangeIV15
-	case 4, HyperTraining_EventScript_ChangeIV30
-	case 5, HyperTraining_EventScript_ChangeIV31
-	case 127, HyperTraining_EventScript_ChangeIV
-
-HyperTraining_EventScript_ChangeIV0::
-	setvar VAR_0x8006, 0
-	goto HyperTraining_EventScript_ChangeOneIV
-
-HyperTraining_EventScript_ChangeIV1::
-	setvar VAR_0x8006, 1
-	goto HyperTraining_EventScript_ChangeOneIV
-
-HyperTraining_EventScript_ChangeIV14::
-	setvar VAR_0x8006, 14
-	goto HyperTraining_EventScript_ChangeOneIV
-
-HyperTraining_EventScript_ChangeIV15::
-	setvar VAR_0x8006, 15
-	goto HyperTraining_EventScript_ChangeOneIV
-
-HyperTraining_EventScript_ChangeIV30::
-	setvar VAR_0x8006, 30
-	goto HyperTraining_EventScript_ChangeOneIV
-
-HyperTraining_EventScript_ChangeIV31::
-	setvar VAR_0x8006, 31
-	goto HyperTraining_EventScript_ChangeOneIV
-
-HyperTraining_EventScript_ChangeOneIV::
-	checkitem ITEM_BOTTLE_CAP, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq HyperTraining_EventScript_NotEnoughCaps
+HyperTraining_EventScript_ChooseLevel::
+	waitmessage
+	dynmultipush HyperTraining_Text_Lowest, 0
+	dynmultipush HyperTraining_Text_Highest, 31
+	dynmultistack 30, 1, FALSE, 2, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, HyperTraining_EventScript_ChangeIV
+	copyvar VAR_0x8006, VAR_RESULT
 	special ChangeChosenMonIVs
-	msgbox HyperTraining_Text_PayOneCap, MSGBOX_DEFAULT
-	removeitem ITEM_BOTTLE_CAP
 	goto HyperTraining_EventScript_DoHyperTraining
 
 HyperTraining_EventScript_ChangeHiddenPower::
@@ -591,6 +512,7 @@ HyperTraining_EventScript_ChangeAllIVs::
 	goto HyperTraining_EventScript_DoHyperTraining
 
 HyperTraining_EventScript_DoHyperTraining::
+	setflag FLAG_EC_PLAYER_IVS_MAXED
 	msgbox HyperTraining_Text_StartHyperTraining, MSGBOX_AUTOCLOSE
 	fadescreen 1
 	playfanfare 0x173
@@ -618,17 +540,14 @@ HyperTraining_Text_ChoosePokemon:
 HyperTraining_Text_ExplainIVs:
 	.string "Ivy: IVs are a hidden part of your\n"
 	.string "Pokémon's stats.\p"
-	.string "My special training can change them.\n"
-	.string "Vitamins raise EVs instead.\p"
-	.string "They can be any value between\n"
-	.string "0 and 31, and affect things like\l"
-	.string "the type of the move Hidden Power.\p"
-	.string "Higher IVs means higher stats, but\n"
-	.string "higher stats aren't always better!\p"
-	.string "Example: If your Pokémon relies on\n"
-	.string "Special Attacks, a low Attack IV will\p"
-	.string "reduce the damage it takes if it hits\n"
-	.string "itself in confusion.$"
+	.string "Every Pokémon you raise has them at\n"
+	.string "their best already.\p"
+	.string "Sometimes lower is better. The slowest\n"
+	.string "Pokémon move first under Trick Room,\p"
+	.string "and a special attacker with low Attack\n"
+	.string "hurts itself less in confusion.\p"
+	.string "IVs also decide the type of the move\n"
+	.string "Hidden Power.$"
 
 HyperTraining_Text_LetsTakeALook:
 	.string "OK! Let's take a look at your\n"
@@ -636,31 +555,27 @@ HyperTraining_Text_LetsTakeALook:
 
 HyperTraining_Text_WhichIVShouldChange:
 	.string "Which of {STR_VAR_1}'s IVs\n"
-	.string "would you like to change?$"
+	.string "would you like to set?$"
 
-HyperTraining_ReportHP:
-	.string "{STR_VAR_1}'s HP IV is {STR_VAR_2}.\n"
-	.string "What would you like to change it to?$"
+HyperTraining_Text_Speed:
+	.string "Speed$"
+
+HyperTraining_Text_Attack:
+	.string "Attack$"
+
+HyperTraining_Text_Lowest:
+	.string "Lowest (0)$"
+
+HyperTraining_Text_Highest:
+	.string "Highest (31)$"
 
 HyperTraining_ReportAtk:
 	.string "{STR_VAR_1}'s Attack IV is {STR_VAR_2}.\n"
-	.string "What would you like to change it to?$"
-
-HyperTraining_ReportDef:
-	.string "{STR_VAR_1}'s Defense IV is {STR_VAR_2}.\n"
-	.string "What would you like to change it to?$"
+	.string "What should I set it to?$"
 
 HyperTraining_ReportSpeed:
 	.string "{STR_VAR_1}'s Speed IV is {STR_VAR_2}.\n"
-	.string "What would you like to change it to?$"
-
-HyperTraining_ReportSpAtk:
-	.string "{STR_VAR_1}'s Sp. Atk IV is {STR_VAR_2}.\n"
-	.string "What would you like to change it to?$"
-
-HyperTraining_ReportSpDef:
-	.string "{STR_VAR_1}'s Sp. Def IV is {STR_VAR_2}.\n"
-	.string "What would you like to change it to?$"
+	.string "What should I set it to?$"
 
 HyperTraining_Text_HyperTrainingMadeMonStronger:
 	.string "The Hyper Training is complete\n"
@@ -688,9 +603,6 @@ HyperTraining_Text_StartHyperTraining:
 
 HyperTraining_Text_NotEnoughCaps:
 	.string "You don't have enough Bottle Caps.$"
-
-HyperTraining_Text_PayOneCap:
-	.string "{PLAYER} handed over one Bottle Cap.$"
 
 HyperTraining_Text_PayThreeCaps:
 	.string "{PLAYER} handed over three Bottle Caps.$"

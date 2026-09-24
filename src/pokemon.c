@@ -2933,6 +2933,44 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         boxMon->checksum = CalculateBoxMonChecksumReencrypt(boxMon);
 }
 
+// Emerald Champions: every Pokemon the player owns has perfect IVs, so no one
+// grinds for them. Ivy in Fallarbor lowers Attack or Speed on request (Trick
+// Room, special attackers) and changes Hidden Power; trainers keep their
+// authored IVs.
+static void MaxBoxMonIVs(struct BoxPokemon *boxMon)
+{
+    u8 iv = MAX_PER_STAT_IVS;
+
+    if (GetBoxMonData(boxMon, MON_DATA_SPECIES) == SPECIES_NONE)
+        return;
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        SetBoxMonData(boxMon, MON_DATA_HP_IV + stat, &iv);
+}
+
+void MaxPlayerMonIVs(struct Pokemon *mon)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+        return;
+    MaxBoxMonIVs(&mon->box);
+    CalculateMonStats(mon);
+}
+
+// Saves from before the rule get one upgrade on load. New games set the flag
+// at once, so a Speed or Attack IV the player chose at Ivy's is never undone.
+void MaxPlayerIVsIfNeeded(void)
+{
+    if (FlagGet(FLAG_EC_PLAYER_IVS_MAXED))
+        return;
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+        MaxPlayerMonIVs(&gParties[B_TRAINER_PLAYER][i]);
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        for (u32 pos = 0; pos < IN_BOX_COUNT; pos++)
+            MaxBoxMonIVs(&gPokemonStoragePtr->boxes[box][pos]);
+    }
+    FlagSet(FLAG_EC_PLAYER_IVS_MAXED);
+}
+
 bool32 ClampMonToPlayerLevelCap(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
@@ -3024,6 +3062,7 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
     s32 i;
 
     ClampMonToPlayerLevelCap(mon);
+    MaxPlayerMonIVs(mon);
 
     if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), PARTY_SIZE))
         return CopyMonToPC(mon);

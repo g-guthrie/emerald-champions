@@ -662,24 +662,17 @@ TEST("Inclement integration: EV mutation refuses over-cap spreads and saturates 
     ZeroPlayerPartyMons();
 }
 
-TEST("Inclement integration: battle EV gains preserve item bonuses caps and legacy normalization")
+TEST("Emerald Champions: battles never train EVs; only Evie and vitamins do")
 {
-    static const struct {u16 item; u8 pokerus; u8 before[NUM_STATS], after[NUM_STATS];} cases[] = {
-        {ITEM_NONE, 0, {0}, {0, 0, 0, 0, 2, 1}},
-        {ITEM_MACHO_BRACE, 0, {0}, {0, 0, 0, 0, 4, 2}},
-        {ITEM_NONE, 0x11, {0}, {0, 0, 0, 0, 4, 2}},
-        {ITEM_MACHO_BRACE, 0x10, {0}, {0, 0, 0, 0, 8, 4}},
-        {ITEM_POWER_WEIGHT, 0, {0}, {8, 0, 0, 0, 2, 1}},
-        {ITEM_POWER_WEIGHT, 0x11, {0}, {16, 0, 0, 0, 4, 2}},
-        {ITEM_POWER_LENS, 0, {0}, {0, 0, 0, 0, 10, 1}},
-        {ITEM_POWER_LENS, 0x10, {0}, {0, 0, 0, 0, 20, 2}},
-        {ITEM_NONE, 0, {252, 252, 0, 0, 5, 0}, {252, 252, 0, 0, 6, 0}},
-        {ITEM_NONE, 0, {0, 0, 0, 0, 251, 0}, {0, 0, 0, 0, 252, 1}},
-        {ITEM_POWER_WEIGHT, 0, {251, 0, 0, 0, 0, 0}, {252, 0, 0, 0, 2, 1}},
-        {ITEM_NONE, 0, {255, 0, 0, 0, 0, 0}, {252, 0, 0, 0, 2, 1}},
-        {ITEM_NONE, 0, {255, 255, 0, 0, 0, 0}, {255, 255, 0, 0, 0, 0}},
+    static const struct {u16 item; u8 pokerus; u8 evs[NUM_STATS];} cases[] = {
+        {ITEM_NONE, 0, {0}},
+        {ITEM_MACHO_BRACE, 0, {0}},
+        {ITEM_NONE, 0x11, {0}},
+        {ITEM_POWER_LENS, 0x11, {0}},
+        {ITEM_NONE, 0, {252, 252, 0, 0, 5, 0}},
+        {ITEM_POWER_WEIGHT, 0, {251, 0, 0, 0, 0, 0}},
     };
-    EXPECT_EQ(GetCurrentEVCap(), 510);
+    EXPECT_EQ(GetCurrentEVCap(), 0);
     struct Pokemon mon;
     for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
     {
@@ -687,12 +680,10 @@ TEST("Inclement integration: battle EV gains preserve item bonuses caps and lega
         SetMonData(&mon, MON_DATA_HELD_ITEM, &cases[i].item);
         SetMonData(&mon, MON_DATA_POKERUS, &cases[i].pokerus);
         for (u32 stat = 0; stat < NUM_STATS; stat++)
-            SetMonData(&mon, MON_DATA_HP_EV + stat, &cases[i].before[stat]);
+            SetMonData(&mon, MON_DATA_HP_EV + stat, &cases[i].evs[stat]);
         MonGainEVs(&mon, SPECIES_BUTTERFREE); // Authored yield: 2 Sp. Atk, 1 Sp. Def.
         for (u32 stat = 0; stat < NUM_STATS; stat++)
-            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_EV + stat), cases[i].after[stat]);
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), cases[i].item);
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_POKERUS), cases[i].pokerus);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_EV + stat), cases[i].evs[stat]);
     }
 }
 

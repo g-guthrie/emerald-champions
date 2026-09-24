@@ -2588,6 +2588,7 @@
 #define FLAG_DEWFORD_EVIOLITE                                       0x3F // Restored from Inclement Emerald; relocated 0x36 -> 0x3F (donor ID taken by live EC content).
 #define FLAG_DEWFORD_GYM_FRESHWATER                                            0x16c // relocated 0xd8 -> 0x16c (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_MAUVILLE_GYM_MOOMOOMILK                                           0x16d // relocated 0x158 -> 0x16d (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_EC_PLAYER_IVS_MAXED                                               0x16e // Player Pokemon have perfect IVs; set at new game and by the one-time save upgrade. Old rematch bit, retired with native rematches.
 #define FLAG_DEFEATED_MOLTRES                                       0x1E5 // Restored from Inclement Emerald; relocated 0x4A2 -> 0x1E5 (donor ID taken by live EC content).
 #define FLAG_DEFEATED_MEWTWO                                        0x1E6 // Restored from Inclement Emerald; relocated 0x4A3 -> 0x1E6 (donor ID taken by live EC content).
 #define FLAG_DEFEATED_JIRACHI                                       0x1E7 // Restored from Inclement Emerald; relocated 0x4A8 -> 0x1E7 (donor ID taken by live EC content).

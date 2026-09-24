@@ -193,6 +193,7 @@ void NewGameInitData(void)
     ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 6000);
+    FlagSet(FLAG_EC_PLAYER_IVS_MAXED); // Every Pokemon obtained from here on arrives with perfect IVs.
     SetCoins(0);
     ResetLinkContestBoolean();
     ResetGameStats();
