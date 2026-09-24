@@ -29,7 +29,7 @@ static const u16 sCaughtVars[] = {
 static const u16 sProgressFlags[] = {
     FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
     FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
-    FLAG_HIDE_ROUTE_119_TEAM_AQUA, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE,
+    FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE,
     FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
     FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, FLAG_IS_CHAMPION,
 };
@@ -214,7 +214,7 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
     // Downpour visitors wait for Kyogre's awakening, which precedes the window end.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_FINI].unlockFlag, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KELDEO].minimumBadges, 7);
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_VISITED_FORTREE_CITY);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_BADGE06_GET);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_RECEIVED_RED_OR_BLUE_ORB);
 }
@@ -228,7 +228,7 @@ TEST("Weather anomalies: none before the window opens or after it closes")
     EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_STATE_0) | VarGet(VAR_WEATHER_ANOMALY_STATE_1) | VarGet(VAR_WEATHER_ANOMALY_STATE_2), 0);
 
     // The first step inside the window fills all four slots.
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     EXPECT(IsWeatherAnomalyWindowOpen());
     EXPECT_EQ(CountLive(), 0);
     TakeSteps(1);
@@ -258,7 +258,7 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
 {
     ResetAnomalyState();
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     TakeSteps(1);
     u8 first[WEATHER_ANOMALY_SLOT_COUNT];
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
@@ -342,7 +342,7 @@ TEST("Weather anomalies: an empty pool leaves slots empty until a cycle passes")
 {
     ResetAnomalyState();
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_KOKO);
     TakeSteps(1);
     EXPECT_EQ(CountLive(), 1);
@@ -381,7 +381,7 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     struct MapHeader savedHeader = gMapHeader;
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
     SetWeatherAnomalySlot(1, LEGENDARY_SIGN_TAPU_FINI, WEATHER_ANOMALY_DURATION_STEPS); // Gate closed: never live.
 
@@ -440,7 +440,7 @@ TEST("Weather anomalies: the visitor takes a fifth of encounters on its own map 
     u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
     VarSet(VAR_REPEL_STEP_COUNT, 0);
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
     SetWeatherAnomalySlot(1, LEGENDARY_SIGN_SUICUNE, WEATHER_ANOMALY_DURATION_STEPS);
 
@@ -513,7 +513,7 @@ TEST("Weather anomalies: the visitor takes a fifth of encounters on its own map 
     // Window closed: no anomaly roll at all.
     ResetAnomalyState();
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     for (u32 seed = 0; seed < 200; seed++)
@@ -535,7 +535,7 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
     u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
     VarSet(VAR_REPEL_STEP_COUNT, 0);
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     SetLocation(MAP_ROUTE111);
     struct WildPokemon mons[NUM_LAND_MONS_ENCOUNTER_SLOTS];
     for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
@@ -589,7 +589,7 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
     u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
     VarSet(VAR_REPEL_STEP_COUNT, 0);
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     SetLocation(MAP_ROUTE110);
     struct WildPokemon mons[NUM_LAND_MONS_ENCOUNTER_SLOTS];
@@ -623,7 +623,7 @@ TEST("Weather anomalies: the Institute report lists each live anomaly and counts
     EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT_EQ(gStringVar4[0], EOS);
 
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     // The first report inside the window draws the storms itself, so the
     // scientist is never "quiet" for the one step before the first draw.
     BufferWeatherAnomalyReport();
@@ -665,7 +665,7 @@ TEST("Weather anomalies: research, Center leads and the route sign follow the st
     ResetAnomalyState();
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     SetBadges(5);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
 
     gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
     ResearchSelectedLegendarySign();

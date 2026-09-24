@@ -766,12 +766,12 @@ TEST("Rare habitat: native meadow residents disappear independently after captur
     // Gated residents stay off the map until their milestones.
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
-    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagClear(FLAG_VISITED_FORTREE_CITY);
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_ENAMORUS, MAPSEC_VERDANTURF_MEADOW));
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_FEZANDIPITI, MAPSEC_VERDANTURF_MEADOW));
     for (u32 badge = 0; badge < 6; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     EXPECT(Test_PokedexAreaHasSection(SPECIES_ENAMORUS, MAPSEC_VERDANTURF_MEADOW));
     EXPECT(Test_PokedexAreaHasSection(SPECIES_FEZANDIPITI, MAPSEC_VERDANTURF_MEADOW));
     MarkLegendarySignCaughtBySpecies(SPECIES_ENAMORUS);
@@ -779,7 +779,7 @@ TEST("Rare habitat: native meadow residents disappear independently after captur
     EXPECT(Test_PokedexAreaHasSection(SPECIES_FEZANDIPITI, MAPSEC_VERDANTURF_MEADOW));
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
-    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagClear(FLAG_VISITED_FORTREE_CITY);
     gMapHeader.regionMapSectionId = oldSection;
     gAreaTimeOfDay = oldTime;
     ResetSignState();
@@ -972,7 +972,7 @@ TEST("Center guide: side quests appear with their gates and retire when done")
     for (u32 badge = 0; badge < 8; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
     FlagSet(FLAG_SYS_GAME_CLEAR);
-    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
     for (u32 city = 0; city < ARRAY_COUNT(cities); city++)
         CenterGuideTipsMention(cities[city], COMPOUND_STRING("")); // Width checks only.
 
@@ -1023,7 +1023,7 @@ TEST("Center guide: side quests appear with their gates and retire when done")
 
     for (u32 badge = 0; badge < 8; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
-    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagClear(FLAG_VISITED_FORTREE_CITY);
     FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
     FlagClear(FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE);
     VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);

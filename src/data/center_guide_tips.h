@@ -40,7 +40,7 @@ TIP(LAVARIDGE_TOWN, 4, 0, 0, NONE, sTip_Desert),
 TIP(FALLARBOR_TOWN, 5, 0, 0, NONE, COMPOUND_STRING("After five badges, the Fossil\nManiac's tunnel on Route 114\lopens into ruins under the\ldesert, full of fossils.\pDevon's lab in Rustboro can\nrevive them.")),
 TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. They raise EVs for\lmoney and change IVs for\lBottle Caps.")),
 
-TIP(FORTREE_CITY, 0, FLAG_HIDE_ROUTE_119_TEAM_AQUA, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, NONE, COMPOUND_STRING("Strange storms bring visiting\nlegends to some routes. The\lWeather Institute on Route 119\ltracks where they are.")),
+TIP(FORTREE_CITY, 0, FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, NONE, COMPOUND_STRING("Strange storms bring visiting\nlegends to some routes. The\lWeather Institute on Route 119\ltracks where they are.")),
 
 TIP(LILYCOVE_CITY, 0, 0, 0, NONE, COMPOUND_STRING("Draw a lottery ticket at the\nDepartment Store every day.\lMatch your Pokémon's ID numbers\lto win.\pThe top prize is a Master Ball!")),
 TIP(LILYCOVE_CITY, 0, 0, 0, NONE, COMPOUND_STRING("The Safari Zone on Route 121\nis home to rare Pokémon.\pYou'll need a Pokéblock Case.\nThe Contest Hall here in town\lgives one out.")),

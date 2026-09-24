@@ -36,18 +36,17 @@ u32 GetCurrentLevelCap(void)
 
     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
     {
-        // Milestones count in order: the cap stops at the first one not yet
-        // reached. Nothing on Routes 120-121, Mt. Pyre or the Magma Hideout
-        // checks Winona's badge, so a later flag alone must not skip a step.
-        u32 cap = 14;
-        for (i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
+        for (i = ARRAY_COUNT(sCampaignMilestones); i > 0; i--)
         {
-            if (!FlagGet(sCampaignMilestones[i].flag))
-                break;
-            if (sCampaignMilestones[i].cap != 0)
-                cap = sCampaignMilestones[i].cap;
+            u16 flag = sCampaignMilestones[i - 1].flag;
+            // Nothing on Routes 120-121, Mt. Pyre or the Magma Hideout checks
+            // Winona's badge; waking Groudon early must not skip her step.
+            if (flag == FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT && !FlagGet(FLAG_BADGE06_GET))
+                continue;
+            if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(flag))
+                return sCampaignMilestones[i - 1].cap;
         }
-        return cap;
+        return 14;
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {

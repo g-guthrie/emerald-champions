@@ -514,7 +514,7 @@ TEST("Campaign gates: first League admission requires every Gym Badge")
     }
 }
 
-TEST("Level cap milestones count in order: the Magma Hideout before Winona keeps cap 55")
+TEST("Level cap: the Magma Hideout before Winona keeps cap 55")
 {
     static const u16 badges[] = {FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET,
                                  FLAG_BADGE04_GET, FLAG_BADGE05_GET};

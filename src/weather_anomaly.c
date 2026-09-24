@@ -15,7 +15,7 @@
 
 // Weather anomalies (Emerald Champions).
 //
-// Window: FLAG_HIDE_ROUTE_119_TEAM_AQUA set and FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE
+// Window: FLAG_VISITED_FORTREE_CITY set and FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE
 // clear. Inside it, four slots each hold one visiting legend (a gate row with
 // an anomalyId) for WEATHER_ANOMALY_DURATION_STEPS steps. An expired slot is
 // refilled at once by a uniform draw over visitors whose gate is met, who are

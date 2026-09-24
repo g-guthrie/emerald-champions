@@ -661,8 +661,8 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
     case FLAG_GOT_TM24_FROM_WATTSON:
         StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Wattson stop New Mauville's\ngenerator, then report back to him."));
         break;
-    case FLAG_HIDE_ROUTE_119_TEAM_AQUA:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, rescue the Weather Institute\nresearchers from Team Aqua."));
+    case FLAG_VISITED_FORTREE_CITY:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, travel north along Route 119\nto Fortree City."));
         break;
     case FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT:
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, confront Maxie deep inside\nthe Magma Hideout."));
