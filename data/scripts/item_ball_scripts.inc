@@ -416,7 +416,7 @@ MeteorFalls_1F_1R_EventScript_ItemPPUP:: @ 82911D2
 	end
 
 MeteorFalls_B1F_2R_EventScript_ItemTM02:: @ 82911DF
-	finditem ITEM_CHANDELURITE
+	finditem ITEM_HEATRANITE
 	end
 
 NewMauville_Inside_EventScript_ItemFastBall:: @ 82911EC

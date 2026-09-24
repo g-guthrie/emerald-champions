@@ -305,6 +305,7 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	applymovement LOCALID_VICTORIA, Route111_Movement_WinstrateExitHouse
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
+	call Route111_EventScript_WinstrateHeal
 	msgbox Route111_Text_VictoriaIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
 	applymovement LOCALID_VICTORIA, Common_Movement_WalkInPlaceFastestUp
@@ -323,6 +324,7 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	applymovement LOCALID_VIVI, Route111_Movement_WinstrateExitHouse
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
+	call Route111_EventScript_WinstrateHeal
 	msgbox Route111_Text_ViviIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_VIVI, Route111_Text_ViviDefeat
 	applymovement LOCALID_VIVI, Common_Movement_WalkInPlaceFastestUp
@@ -341,6 +343,7 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	applymovement LOCALID_VICKY, Route111_Movement_WinstrateExitHouse
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
+	call Route111_EventScript_WinstrateHeal
 	msgbox Route111_Text_VickyIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_VICKY, Route111_Text_VickyDefeat
 	msgbox Route111_Text_VickyPostBattle, MSGBOX_DEFAULT
@@ -354,6 +357,15 @@ Route111_EventScript_BattleWinstrates:: @ 81F0FE7
 	call Route111_EventScript_CloseWinstrateDoor
 	release
 	end
+
+@ The family fights fair: each Winstrate restores your team before stepping up.
+Route111_EventScript_WinstrateHeal::
+	msgbox Route111_Text_WinstrateHeal, MSGBOX_DEFAULT
+	closemessage
+	playfanfare MUS_HEAL
+	waitfanfare
+	special HealPlayerParty
+	return
 
 Route111_EventScript_OpenWinstrateDoor:: @ 81F113C
 	opendoor 13, 113
@@ -797,3 +809,7 @@ Route111_Text_RootFossilDisappeared: @ 81F1C9F
 Route111_Text_TrainerHillSign: @ 81F1D61
 	.string "Trainer Hill\n"
 	.string "“Closed until further notice.”$"
+
+Route111_Text_WinstrateHeal:
+	.string "Hold on! A Winstrate never battles\n"
+	.string "a tired team. Let me fix them up!$"

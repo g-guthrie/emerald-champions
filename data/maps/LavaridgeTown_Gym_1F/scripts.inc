@@ -80,7 +80,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
-	giveitem ITEM_HEATRANITE
+	giveitem ITEM_CHANDELURITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -353,9 +353,9 @@ LavaridgeTown_Gym_1F_Text_TakeThis:
 	.string "Don't be shy about taking it!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainOverheat: @ 81FF45C
-	.string "This is Heatranite. Once you have\n"
-	.string "a Mega Ring, Heatran can Mega Evolve\l"
-	.string "while holding it.$"
+	.string "This is Chandelurite. Once you have\n"
+	.string "a Mega Ring, Chandelure can Mega\l"
+	.string "Evolve while holding it.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle: @ 81FF546
 	.string "Your power reminds me of someone…\p"
