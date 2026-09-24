@@ -171,7 +171,7 @@ DOUBLE_BATTLE_TEST("EC Gym: Lilith's actual Costar reserve copies Scraggy's earn
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
-            MOVE(opponentLeft, MOVE_HELPING_HAND, target: opponentRight);
+            MOVE(opponentLeft, MOVE_FAKE_OUT, target: playerLeft);
             MOVE(opponentRight, MOVE_DRAGON_DANCE);
         }
         TURN {
@@ -1979,9 +1979,9 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
         {
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_1), ABILITY_PRISM_SCALES);
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_HUGE_POWER);
-            // Badge8 cap80, authored offsets +2/+1, Normal difficulty -1.
-            EXPECT_EQ(opponentLeft->level, 81);
-            EXPECT_EQ(opponentRight->level, 80);
+            // Badge8 cap80, authored offsets +6/+5, Normal difficulty -1.
+            EXPECT_EQ(opponentLeft->level, 85);
+            EXPECT_EQ(opponentRight->level, 84);
         }
         gBattleTypeFlags = savedFlags;
     }
