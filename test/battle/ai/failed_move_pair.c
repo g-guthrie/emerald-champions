@@ -42,6 +42,47 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Tailwind is not set again while it is st
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock that cannot hurt either foe is left, not repeated")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        // Locked into Psychic by the board it chose on, then faced with a
+        // Dark body that is immune and a Steel/Psychic body that takes a
+        // quarter. Every turn it stays is a turn of nothing.
+        PLAYER(SPECIES_MACHAMP) { Level(50); Speed(40); Moves(MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_KNOCK_OFF); }
+        PLAYER(SPECIES_TOXICROAK) { Level(50); Speed(45); Moves(MOVE_DRAIN_PUNCH, MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_SUCKER_PUNCH); }
+        PLAYER(SPECIES_INCINEROAR) { Level(50); Speed(50); Moves(MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_PARTING_SHOT); }
+        PLAYER(SPECIES_METAGROSS) { Level(50); Speed(60); Moves(MOVE_METEOR_MASH, MOVE_ZEN_HEADBUTT, MOVE_PROTECT, MOVE_ICE_PUNCH); }
+        OPPONENT(SPECIES_VICTINI) {
+            Level(50); Speed(120); Item(ITEM_CHOICE_SPECS); Ability(ABILITY_VICTORY_STAR); Nature(NATURE_TIMID);
+            Moves(MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_FOCUS_BLAST, MOVE_ENERGY_BALL);
+        }
+        OPPONENT(SPECIES_AUDINO) {
+            Level(50); Speed(50); Item(ITEM_SITRUS_BERRY); Ability(ABILITY_REGENERATOR);
+            Moves(MOVE_WISH, MOVE_PROTECT, MOVE_HELPING_HAND, MOVE_THROAT_CHOP);
+        }
+        OPPONENT(SPECIES_CENTISKORCH) {
+            Level(50); Speed(70); Item(ITEM_LIFE_ORB); Ability(ABILITY_FLASH_FIRE);
+            Moves(MOVE_FIRE_LASH, MOVE_LEECH_LIFE, MOVE_POWER_WHIP, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_BEWEAR) {
+            Level(50); Speed(60); Item(ITEM_LIFE_ORB); Ability(ABILITY_FLUFFY);
+            Moves(MOVE_DOUBLE_EDGE, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT);
+        }
+    } WHEN {
+        TURN {
+            SWITCH(playerLeft, 2);
+            SWITCH(playerRight, 3);
+            EXPECT_MOVE(opponentLeft, MOVE_PSYCHIC);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_KNOCK_OFF, target: opponentRight);
+            MOVE(playerRight, MOVE_METEOR_MASH, target: opponentRight);
+            EXPECT_SWITCH(opponentLeft, 2);
+        }
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a fresh foe Choice item does not bring Tailwind back while it blows")
 {
     GIVEN {

@@ -135,6 +135,11 @@
 // More than a whole member, so an exit that loses the body it brings in can
 // never win on a margin.
 #define PAIR_SWITCH_INTO_DEATH 220
+// A Choice lock into a move that every foe is immune to or resists is not one
+// wasted turn but every turn until it leaves, which a one-turn board cannot
+// see. Credit the exit with the turns it recovers: more than the commitment,
+// so a reasonable reserve wins, and far less than a lethal entry.
+#define PAIR_USELESS_LOCK_ESCAPE 70
 
 static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
@@ -5387,8 +5392,32 @@ static bool32 PairLegalReserve(enum BattlerId actor, u32 slot)
         && !IsPartyMonPlannedToBeSwitchedInByPartner(slot, actor);
 }
 
+// Locked by a Choice item into a status move, or into an attack that no
+// living foe takes more than half damage from. The pressure search below only
+// asks whether anything connects, so a quarter-damage Psychic into Metagross
+// beside an immune Incineroar kept the lock "productive" for seven turns.
+static bool32 PairUselessChoiceLock(enum BattlerId actor)
+{
+    enum Move locked = gBattleStruct->choicedMove[actor];
+    if (!IsBattlerAlive(actor) || !HasChoiceEffect(actor)
+     || locked == MOVE_NONE || locked == MOVE_UNAVAILABLE)
+        return FALSE;
+    u32 index = GetMoveIndex(actor, locked);
+    if (index >= MAX_MON_MOVES)
+        return FALSE;
+    if (IsBattleMoveStatus(locked))
+        return TRUE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        if (IsBattlerAlive(foe) && !IsBattlerAlly(actor, foe)
+         && gAiLogicData->effectiveness[actor][foe][index] > UQ_4_12(0.5))
+            return FALSE;
+    return TRUE;
+}
+
 static bool32 PairNeedsSwitchSearch(enum BattlerId actor)
 {
+    if (PairUselessChoiceLock(actor))
+        return TRUE;
     enum Ability ability = gAiLogicData->abilities[actor];
     if (gBattleMons[actor].species == SPECIES_PALAFIN
      || (ability == ABILITY_REGENERATOR && gBattleMons[actor].hp * 3 <= gBattleMons[actor].maxHP * 2)
@@ -5824,6 +5853,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     // A position that needs to change is not paying for the turn it gives up:
     // the extra costs below are for leaving a healthy, unpressured board.
     bool32 pressured[2] = {PairNeedsSwitchSearch(actor), PairNeedsSwitchSearch(partner)};
+    bool32 uselessLock[2] = {PairUselessChoiceLock(actor), PairUselessChoiceLock(partner)};
     u32 revealMega = 0;
     for (u32 index = 0; index < 2; index++)
         if ((canMega & (1u << index)) && !deadline[index]
@@ -6036,6 +6066,9 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 }
                 if (forcedExit)
                     score += 200;
+                for (u32 index = 0; index < 2; index++)
+                    if (uselessLock[index] && slots[index] < PARTY_SIZE)
+                        score += PAIR_USELESS_LOCK_ESCAPE;
                 // An authored singer leaves one turn early while its partner
                 // still traps the affected foes. This is a conditional phase
                 // preference, never an excuse to bypass reserve legality.
