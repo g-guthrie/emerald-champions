@@ -592,6 +592,29 @@ text, departure hide flag1 and control restored. Initial setup attempted adding
 quantity0, which the native command rejected; corrected start omits the item
 and asserts absence. Evidence: `movement/route116-glasses-absent-checked`.
 
+The remaining pickup-to-conversation gap was closed on current native
+ROMf81cdd28. Starting with both glasses flags clear and no Black Glasses,
+the player found the actual hidden item at(70,13), walked to the owner,
+heard his "not my glasses" response, and watched his westward departure.
+Final readback is Black Glasses1, hidden-item receipt1, owner hide1, with
+control ready (`movement/route116-glasses-continuous-run`); its contact
+sheet was inspected. This is a synthetic map start that performs the real
+pickup and interaction, not an earned campaign arrival.
+
+Current-source watch item: the active Rusturf Tunnel `map.json` has an
+uncommitted `WEATHER_FOG_HORIZONTAL`→`WEATHER_NONE` change, while the local
+Inclement source still uses horizontal fog. Rusturf is not listed as a
+weather-anomaly home route in `src/legendary_signs.c`. I did not overwrite
+the concurrent weather edit; its visual intent still needs review before
+treating the atmosphere change as accepted.
+Native synthetic frames now show the material difference at Rusturf(18,5):
+the earlier fogged ROM93029df0 is washed in horizontal mist, while the
+current mixed-source ROMf81cdd28 is clear green
+(`movement/rusturf-weather-{old,current}-run`). Both scenes return control
+and their sheets were inspected. This verifies a visible change, not whether
+removing Inclement's fog is an approved art-direction decision; the
+concurrent map edit remains untouched here.
+
 Route118 Steven outer trigger lanes43/45 pass ledge jump, dialogue and departure,
 ending route state1/Steven hidden/control restored. Lane43 sheet inspected;
 canonical script matches. Evidence: `movement/route118-steven-{43,45}`, ROM
@@ -3827,6 +3850,7 @@ after `giveitem` succeeds, so their refusal paths can retry; the five
 breakable rocks use temporary hide flags. The Route114 source/map review
 found no new choreography defect. This is source coverage, not a native
 conversation or route-traversal claim.
+
 The adjacent Fossil Maniac house/tunnel and Lanette house were also traced
 through their first/repeat dialogue, gifts, callbacks and map events.
 The tunnel's cave-in line is a one-time Hall-of-Fame state trigger at y4;
@@ -3897,3 +3921,195 @@ intentionally enter a door/exit tile. For example, the Fan Club girl's
 giver's "return" starts after a six-step approach. These source traces
 remove those two false positives, while the remaining candidates still
 need state-aware path or native scene checks.
+
+### Closed Battle Arena lobby dialogue corrected
+
+The Battle Arena attendant and exterior sign say that facility is closed,
+and the Frontier gambler's current challenge selector skips Arena wagers.
+The lobby woman remained reachable and still advised the player to build
+an Arena team in present tense. A synthetic native talk on ROM93029df0
+displayed that stale advice (`movement/arena-woman-old-advice-run`); its
+short input bound stopped during the long text, so it is evidence of the
+branch and displayed wording, not a completed conversation. Her dialogue
+now acknowledges the closure and offers a short doubles-partner tip. A
+native replay on ROM8f276a96 delivered the new pages, returned control,
+and left the actor in place (`movement/arena-woman-closure-advice-run`).
+The after contact sheet was inspected; the source built successfully and
+the width checker did not flag this label. The other lobby members describe
+past Arena matches, so their past-tense stories remain coherent.
+
+### Persistent-variable alias screen
+
+After the earlier hide-flag alias bugs, I resolved numeric IDs for the
+Hoenn and inherited FRLG `VAR_*` definitions and joined them to live source
+references (`movement/var-alias-scan.*`). The195 directly named persistent
+Hoenn slots have no duplicate live Hoenn names. Including inherited FRLG
+names yields26 same-number pairs. The high-risk-looking writers were traced
+to FRLG-only entry scripts or maps: Daisy's massage, Resort Gorgeous,
+Kanto elevators, Magikarp/Heracross size houses, trainer-card photo setup,
+Seagallop and Trainer Tower. The trainer-card FRLG branch reads some of the
+overlapping slots but does not write them when an Emerald card is generated.
+No normal Hoenn map callback or NPC was found writing a campaign variable
+through those FRLG names. The current flag-collision gate also passes.
+This is source reachability evidence; it does not constitute an FRLG link-card
+or debug-menu runtime test.
+
+### Safari Zone entry and both early-exit approaches
+
+The Safari South attendant's scripted `walk_right` initially looked as
+though it would enter the player's tile after the Route121 entrance warp.
+A natural native admission on ROM8f276a96 paid ₽500, displayed the30 Safari
+Balls message, entered Safari South and returned control with the player
+at(32,35) and attendant at(32,34), visibly separate
+(`movement/safari-admission-enter-run`). The warp destination is the door
+coordinate(32,33), but the native arrival/entry choreography places the
+player below it before the attendant closes the path. The contact sheet
+was inspected; no map or movement change is warranted.
+
+From that admitted state, both reachable conversations with the attendant
+were replayed through the first good-luck line, the early-exit choice,
+separate NPC/player departure paths, and the return to the Route121
+entrance. Speaking from the south facing north and from the west facing
+east both passed with control restored (`movement/safari-early-exit-north-run`
+and `movement/safari-early-exit-west-corrected-run`). Recorded actor/player
+coordinates never matched during either Safari departure. An earlier west
+probe failed only because one-frame direction presses turned the player
+without walking to the west tile; the corrected run held movement through
+the tile and tested the actual branch. These are synthetic admissions, not
+earned Safari progress or an encounter/capture test.
+
+### Lilycove Contest receptionist doorway overlap repaired
+
+The ordinary contest reception script opens the counter flap before the
+receptionist walks through it; the collision-marked static tile is intentional
+and the native scene shows that sequence correctly. The later hall escort had
+a real one-frame presentation error: receptionist and player started their
+parallel movement together and reached the hall doorway(9,1) while both
+were still visible. Actor telemetry recorded both on that tile at frame3426,
+and the pre-fix native frame shows the sprites merging
+(`movement/contest-receptionist-escort-run`, ROM8f276a96).
+
+The player now starts the hall walk16 frames after the receptionist. On
+rebuilt ROM8a00d327 the same natural Normal/Cool entry reaches Contest Hall,
+starts the contest, and never has both sprites visible on the shared exit
+tile (`movement/contest-receptionist-escort-staggered`). The corrected
+frame3426 shows the player one tile behind the now-hidden guide. The
+before/after frames and contact sheets were inspected; the full contest
+result was outside this escort check. The mirrored link-contest escort uses
+the same movement lengths and received the same16-frame stagger by source
+analogy; it has not had a link-session native replay.
+
+### Co-located actors in recorded cutscenes
+
+A read-only pass over824 native movement recordings looked for two visible
+actors on the same tile (`movement/scan-recorded-actor-overlaps.py` and
+`movement/recorded-actor-overlaps.txt`). It yielded52 scene/actor rows,
+including repeated runs of the same event. Coordinates alone are not proof
+of a visual bug: the Route120 Kecleon and its shadow deliberately layer;
+the old Mauville Gym-exit and Route110 Birch fixtures lacked the earlier
+story flags that hide Wally and Aqua grunts; and some shared exit tiles are
+already offscreen. The existing corrected Mauville recording has no
+visible player/Wally overlap. This screen is a triage aid, not a claim that
+all824 recordings or every flagged row have been visually accepted.
+
+Follow-up spot checks classify several other rows without changing source.
+The Briney sailing scenes layer boat, player and Briney graphics on the same
+tile as part of the vessel animation; the coherent Mauville Gym-exit replay
+has Wally hidden before the player lands; Route110's overlapping Birch/Aqua
+fixture omitted the earlier Museum flag that hides the grunts. Gabby/Ty's
+shared tile in the recorded Stern interview and Archie/Maxie's Route128
+departure are outside the camera when sampled. Wanda and her boyfriend
+meet at Rusturf Tunnel's bottom exit for three sampled frames, already
+almost below the viewport; inspected frames show only the top of the
+departing sprite at the edge. These findings narrow the recorded-scene
+candidate set, but do not certify every entry or an earned progression path.
+
+Two additional on-screen crossings were confirmed. In Oceanic Museum2F,
+Archie reached(10,6) while the second Aqua grunt was still standing there
+for two sampled frames (`movement/oceanic-museum-north-complete`, ROMa0caf103).
+Removing one `delay_16` from the grunt's approach movement makes him step
+down before Archie reaches that tile. The same fixture-assisted entrance
+on rebuilt ROM875f650e showed no shared visible tile and progressed into
+Archie's warning (`movement/oceanic-museum-archie-staggered-run`). Its
+focused bound ends during dialogue; the older unmodified full mission
+recording is the evidence for later handoff state, not a post-fix full-run
+claim. Before/after frames00838 were inspected.
+
+In Weather Institute2F, the incoming Aqua messenger's first left step
+crossed the stationary grunt at(15,6) (`movement/weather-institute-handoff`,
+ROMcc7b755d). The stationary grunt now steps down to the open(15,7) tile
+before the messenger appears. A rebuilt native replay on ROM7eb1a80f
+showed separated actors, completed Shelly's exit and the scientist's
+Castform handoff, set the Aqua hide flag and returned control
+(`movement/weather-institute-grunt-makes-room`). Its sheet was inspected;
+the forced trainer win in this synthetic run does not validate battle play.
+
+Meteor Falls' accepted postbattle scene had the same crossing-player class
+as the earlier Jagged Pass shove: Magma grunt2 reached the player's tile
+at(14,20) for one sampled frame before the scripted dodge moved the player
+down (`movement/meteor-accept-fixed`, ROMe70d95c9). A16-frame head start
+for the player and Cozmo removed that crossing, but its first native replay
+showed the two Magma grunts converging on the far visible exit tile
+(`movement/meteor-accepted-player-dodge-staggered`, ROM9f7fc731). The
+second correction lengthens grunt1's existing delay by16 frames and waits
+for/removes grunt2 before waiting for/removing grunt1. The full accepted
+fixture-assisted scene now has no sampled visible player/Magma or
+Magma/Magma shared tile; both grunts reach the exit before removal,
+Meteor Falls state advances to1 and control returns
+(`movement/meteor-accepted-clear-exit`, ROM9022c191). Original and final
+frames near the dodge and exit were inspected. The later Aqua trio's
+shared coordinates are offscreen, as documented in the earlier Meteor
+handoff review. This verifies the choreography and progression under a
+forced battle win, not the battle itself.
+
+### Frontier NPC freezes after warning and summit replies
+
+The existing static lock-path checker was rerun against the current map
+scripts. It identified three Battle Pike `NoTurningBack` coordinate-event
+replies that used `lockall`, closed their warning, and reached `end` without
+`releaseall`. `ScrCmd_end` stops the script, while `ScrCmd_releaseall`
+explicitly unfreezes object events; the player-control loop alone becoming
+ready concealed the object-freeze leak. All three Pike warning variants now
+release. The normal Pike room's two-trainer-win branch likewise releases
+after both trainers finish exiting. The checker dropped from11 to7
+reported paths after these Pike edits. A synthetic native Three Path Room
+backtrack trigger on ROM520641e2 displayed the warning, cleared its
+backtrack variable and returned controls (`movement/pike-backtrack-warning-run`).
+This validates that branch, not a full Pike challenge or motion of every
+NPC after the warning.
+
+At the Battle Pyramid summit, the attendant's "step forward when ready"
+and Brandon-ready replies both ended after `lock` without `release`. The
+Brandon reply also ended while its one-step attendant movement was still
+running. They now release, with an explicit wait for the attendant's step
+in the Brandon branch. The checker then reported5 remaining paths; the
+Dome/Pike pause cases deliberately soft-reset after saving, while the
+Contest Hall, Fan Club and porthole cases retain their earlier documented
+limits. Two native synthetic summit conversations on ROMf81cdd28 pass:
+the simple reminder returns control at(17,12), and the Brandon branch
+moves the attendant to(18,11), sets state1 and returns control
+(`movement/pyramid-attendant-wait-run`,
+`movement/pyramid-attendant-brandon-complete`). The latter needed a longer
+input bound to finish its long dialogue; its contact sheet was inspected.
+Neither run includes the subsequent Brandon battle.
+
+The remaining lock candidates were traced again. Pike and Dome pause
+scripts use `frontier_reset`, whose macro invokes the soft-reset utility
+after saving; their subsequent `end` is not an in-map return path. Contest
+Hall's audience-look-around helper can leave objects locked briefly, but
+the enclosing `ContestHall_EventScript_Contest` immediately chooses a
+valid contest-type warp back to the lobby after prize handling. The
+S.S. Tidal porthole uses a native warp/view task in place of a script
+`releaseall`: a synthetic sail on ROMf81cdd28 showed the moving ship over
+currents, then A returned to the corridor with the player visible and
+controls ready (`movement/sstidal-porthole-return-run`, sheet inspected).
+
+The Fan Club interviewer's old "shouldn't be reached" branch was the
+remaining in-map fallthrough: if `InterviewBefore` finds an already-active
+Fan Club TV show while its separate interview receipt is clear, it ended
+the locked conversation without a reply. That result now goes to the
+existing "already interviewed" dialogue, which releases normally; the
+empty stub was removed. The event-scripts object assembles, and the
+static lock checker now reports4 paths: the two deliberate soft resets,
+Contest Hall's warp handoff and the porthole handoff. This edge case was
+source-verified, not forced through a native active-TV-show save.

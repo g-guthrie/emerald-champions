@@ -207,7 +207,6 @@ SlateportCity_OceanicMuseum_2F_Movement_GruntMoveForArchie: @ 820BCFE
 	delay_16
 	delay_16
 	delay_16
-	delay_16
 	delay_8
 	walk_fast_down
 	walk_in_place_fast_up

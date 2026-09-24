@@ -522,7 +522,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_Interview:: @ 821CD90
 	setvar VAR_0x8005, TVSHOW_FAN_CLUB_SPECIAL
 	special InterviewBefore
 	compare VAR_RESULT, TRUE
-	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2
+	goto_if_eq LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed
 	copyvar VAR_0x800A, VAR_0x8006
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
@@ -617,10 +617,6 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed:: @ 821CEED
 	special BufferFanClubTrainerName
 	msgbox LilycoveCity_PokemonTrainerFanClub_HopeYouCatchTVSpecial, MSGBOX_DEFAULT
 	release
-	end
-
-@ Shouldnt be reached
-LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2:: @ 821CEFF
 	end
 
 LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer: @ 821CF00

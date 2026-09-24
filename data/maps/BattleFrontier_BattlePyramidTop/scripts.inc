@@ -99,6 +99,7 @@ BattleFrontier_BattlePyramidTop_EventScript_WarpToLobbyWon:: @ 825521A
 BattleFrontier_BattlePyramidTop_EventScript_StepForwardWhenReady:: @ 8255236
 	msgbox BattleFrontier_BattlePyramidTop_Text_StepForwardWhenReady, MSGBOX_DEFAULT
 	closemessage
+	release
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside:: @ 8255240
@@ -106,6 +107,8 @@ BattleFrontier_BattlePyramidTop_EventScript_BrandonHereMoveAside:: @ 8255240
 	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePyramidTop_Movement_AttendantMoveAside
 	setvar VAR_TEMP_D, 1
 	closemessage
+	waitmovement LOCALID_ATTENDANT
+	release
 	end
 
 BattleFrontier_BattlePyramidTop_EventScript_BattleBrandon:: @ 8255256

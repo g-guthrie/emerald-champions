@@ -55,6 +55,8 @@ Route119_WeatherInstitute_2F_EventScript_Shelly:: @ 826FFAD
 Route119_WeatherInstitute_2F_EventScript_ShellyDefeated:: @ 826FFC8
 	msgbox Route119_WeatherInstitute_2F_Text_ShellyPostBattle, MSGBOX_DEFAULT
 	closemessage
+	applymovement LOCALID_GRUNT_1, Route119_WeatherInstitute_2F_Movement_GruntMakeRoom
+	waitmovement 0
 	addobject LOCALID_GRUNT_3
 	applymovement LOCALID_GRUNT_3, Route119_WeatherInstitute_2F_Movement_GruntApproachShelly
 	applymovement OBJ_EVENT_ID_PLAYER, Route119_WeatherInstitute_2F_Movement_ShovePlayerOutOfWay
@@ -211,6 +213,10 @@ Route119_WeatherInstitute_2F_Movement_GruntApproachShelly: @ 8270170
 	walk_fast_left
 	walk_fast_left
 	walk_fast_left
+	step_end
+
+Route119_WeatherInstitute_2F_Movement_GruntMakeRoom:
+	walk_down
 	step_end
 
 Route119_WeatherInstitute_2F_Movement_ShovePlayerOutOfWay: @ 827017C

@@ -62,11 +62,13 @@ MeteorFalls_1F_1R_EventScript_MagmaAfterBattle::
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay
 	applymovement 11, MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay
+	delay 16
 	applymovement 5, MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit
 	applymovement 6, MeteorFalls_1F_1R_Movement_MagmaGrunt2Exit
-	waitmovement 0
-	removeobject LOCALID_MAGMA_GRUNT_1
+	waitmovement LOCALID_MAGMA_GRUNT_2
 	removeobject LOCALID_MAGMA_GRUNT_2
+	waitmovement LOCALID_MAGMA_GRUNT_1
+	removeobject LOCALID_MAGMA_GRUNT_1
 	applymovement LOCALID_ARCHIE, MeteorFalls_1F_1R_Movement_ArchieApproachPlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
@@ -273,6 +275,7 @@ MeteorFalls_1F_1R_Movement_WalkRight1:
 	step_end
 
 MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit: @ 822BEC4
+	delay_16
 	delay_16
 	walk_fast_right
 	walk_fast_right

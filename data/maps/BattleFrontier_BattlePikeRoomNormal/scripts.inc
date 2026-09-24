@@ -275,6 +275,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_WonTwoTrainerBattle:: @ 825D5DC
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceUp
 	waitmovement 0
+	releaseall
 	end
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom:: @ 825D605

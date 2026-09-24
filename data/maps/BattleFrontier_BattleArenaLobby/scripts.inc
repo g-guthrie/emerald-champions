@@ -482,15 +482,11 @@ BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw: @ 8256C19
 	.string "the same amount of HP left.$"
 
 BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant: @ 8256C9A
-	.string "In the BATTLE ARENA, the order of\n"
-	.string "Pokémon is totally important.\p"
-	.string "For example, if your first Pokémon\n"
-	.string "has certain type disadvantages,\l"
-	.string "try making your second Pokémon one\l"
-	.string "with moves that are super effective\l"
-	.string "against the first one.\p"
-	.string "I think that will be a good way of\n"
-	.string "making an effective team.$"
+	.string "The ARENA is closed now, but I used\n"
+	.string "to study team order there.\p"
+	.string "In DOUBLE battles, partners can\n"
+	.string "cover each other's weak points.\p"
+	.string "It's a different kind of plan!$"
 
 BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading: @ 8256DDF
 	.string "Which heading do you want to read?$"
