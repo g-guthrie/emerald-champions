@@ -4437,10 +4437,10 @@ trainer_id: TRAINER_HEIDI
 format: double
 strategy: NONE
 team:
-  1. SPECIES_SHAYMIN @ ITEM_EXPERT_BELT | level_offset=1 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SEED_FLARE,MOVE_EARTH_POWER,MOVE_AIR_SLASH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_LURANTIS @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_CONTRARY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SUPERPOWER,MOVE_LEAF_BLADE,MOVE_SYNTHESIS,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_MUDSDALE @ ITEM_ASSAULT_VEST | level_offset=2 | ability=ABILITY_STAMINA | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE,MOVE_CLOSE_COMBAT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_PARASECT @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_DRY_SKIN | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_SPORE,MOVE_LEECH_SEED,MOVE_X_SCISSOR,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SHAYMIN @ ITEM_EXPERT_BELT | level_offset=4 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SEED_FLARE,MOVE_EARTH_POWER,MOVE_AIR_SLASH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_LURANTIS @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_CONTRARY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SUPERPOWER,MOVE_LEAF_BLADE,MOVE_SYNTHESIS,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_MUDSDALE @ ITEM_ASSAULT_VEST | level_offset=5 | ability=ABILITY_STAMINA | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE,MOVE_CLOSE_COMBAT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_PARASECT @ ITEM_LEFTOVERS | level_offset=5 | ability=ABILITY_DRY_SKIN | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_SPORE,MOVE_LEECH_SEED,MOVE_X_SCISSOR,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -4509,10 +4509,10 @@ format: double
 ai_extra: Conservative
 strategy: NONE
 team:
-  1. SPECIES_TING_LU @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_VESSEL_OF_RUIN | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_RUINATION,MOVE_STOMPING_TANTRUM,MOVE_THROAT_CHOP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_SIGILYPH @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_MAGIC_GUARD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_PSYCHIC,MOVE_AIR_SLASH,MOVE_HEAT_WAVE,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_BASTIODON @ ITEM_CHESTO_BERRY | level_offset=2 | ability=ABILITY_SOUNDPROOF | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_STEALTH_ROCK,MOVE_METAL_BURST,MOVE_FLASH_CANNON,MOVE_REST | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_AURORUS @ ITEM_THROAT_SPRAY | level_offset=2 | ability=ABILITY_REFRIGERATE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYPER_VOICE,MOVE_ICY_WIND,MOVE_ANCIENT_POWER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_TING_LU @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_VESSEL_OF_RUIN | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_RUINATION,MOVE_STOMPING_TANTRUM,MOVE_THROAT_CHOP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_SIGILYPH @ ITEM_LIFE_ORB | level_offset=4 | ability=ABILITY_MAGIC_GUARD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_PSYCHIC,MOVE_AIR_SLASH,MOVE_HEAT_WAVE,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_BASTIODON @ ITEM_CHESTO_BERRY | level_offset=4 | ability=ABILITY_SOUNDPROOF | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_STEALTH_ROCK,MOVE_METAL_BURST,MOVE_FLASH_CANNON,MOVE_REST | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_AURORUS @ ITEM_THROAT_SPRAY | level_offset=4 | ability=ABILITY_REFRIGERATE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYPER_VOICE,MOVE_ICY_WIND,MOVE_ANCIENT_POWER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -4651,10 +4651,10 @@ trainer_id: TRAINER_JUSTIN
 format: double
 strategy: NONE
 team:
-  1. SPECIES_KECLEON @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_PROTEAN | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_SHADOW_SNEAK,MOVE_DRAIN_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_MALAMAR @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_CONTRARY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SUPERPOWER,MOVE_KNOCK_OFF,MOVE_TOPSY_TURVY,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_BOUFFALANT @ ITEM_ASSAULT_VEST | level_offset=0 | ability=ABILITY_SOUNDPROOF | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAD_CHARGE,MOVE_HIGH_HORSEPOWER,MOVE_CLOSE_COMBAT,MOVE_WILD_CHARGE | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_CACTURNE @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SEED_BOMB,MOVE_DRAIN_PUNCH,MOVE_SUCKER_PUNCH,MOVE_SPIKY_SHIELD | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_KECLEON @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_PROTEAN | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_SHADOW_SNEAK,MOVE_DRAIN_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_MALAMAR @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_CONTRARY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SUPERPOWER,MOVE_KNOCK_OFF,MOVE_TOPSY_TURVY,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_BOUFFALANT @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_SOUNDPROOF | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAD_CHARGE,MOVE_HIGH_HORSEPOWER,MOVE_CLOSE_COMBAT,MOVE_WILD_CHARGE | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_CACTURNE @ ITEM_LIFE_ORB | level_offset=4 | ability=ABILITY_WATER_ABSORB | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SEED_BOMB,MOVE_DRAIN_PUNCH,MOVE_SUCKER_PUNCH,MOVE_SPIKY_SHIELD | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -4705,12 +4705,12 @@ requirement: optional
 status: master_audited_ready_for_implementation
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Rhydon, Palossand, Aggron, Golem) on its own terms: First two useful turns: Rhydon and Palossand attack appropriate targets; Palossand's Water Compaction does not make an incoming Water hit harmless. Turn two chooses the right heavy reserve rather than protecting both slow members. Alternate deployment: Rhydon and Mega Aggron offer stronger physical bulk and Body Press coverage. Reserves & disruption: Golem's Sturdy/Policy depends on HP and the exact hit sequence. Lightning Rod on Rhydon is a matchup tool, not a Water weakness answer. Counterplay & audit: Special Water/Grass pressure, Ground attacks, Taunt and multi-hit damage into Sturdy. Disposition: Keep but prioritize a special-pressure benchmark; four slow bodies need active damage, not just survival prose. Could this team be cooler? It is a coherent rock-and-steel wall room and is retained: Mega Aggron's Filter-grade bulk behind Heavy Slam and Body Press, Golem holding a Weakness Policy so a super-effective hit that fails to kill hands it +2/+2, Palossand's Water Compaction raising Defense two stages every time a player tries to wash it away, and an Eviolite Rhydon whose Lightning Rod draws Electric attacks off the Ground-weak partners. Every member answers a different kind of pressure, which is exactly what a regular trainer's four should do. The one thing that would raise it further is a spread move to punish the double-target that this much bulk invites - flagged rather than forced. Offsets individual: Rhydon -1 despite Eviolite because Lightning Rod already makes it a free switch-in.
-theme_and_tempo: First two useful turns: Rhydon and Palossand attack appropriate targets; Palossand's Water Compaction does not make an incoming Water hit harmless. Turn two chooses the right heavy reserve rather than protecting both slow members. Alternate deployment: Rhydon and Mega Aggron offer stronger physical bulk and Body Press coverage. Reserves & disruption: Golem's Sturdy/Policy depends on HP and the exact hit sequence. Lightning Rod on Rhydon is a matchup tool, not a Water weakness answer. Counterplay & audit: Special Water/Grass pressure, Ground attacks, Taunt and multi-hit damage into Sturdy. Disposition: Keep but prioritize a special-pressure benchmark; four slow bodies need active damage, not just survival prose. Could this team be cooler? It is a coherent rock-and-steel wall room and is retained: Mega Aggron's Filter-grade bulk behind Heavy Slam and Body Press, Golem holding a Weakness Policy so a super-effective hit that fails to kill hands it +2/+2, Palossand's Water Compaction raising Defense two stages every time a player tries to wash it away, and an Eviolite Rhydon whose Lightning Rod draws Electric attacks off the Ground-weak partners. Every member answers a different kind of pressure, which is exactly what a regular trainer's four should do. The one thing that would raise it further is a spread move to punish the double-target that this much bulk invites - flagged rather than forced. Offsets individual: Rhydon -1 despite Eviolite because Lightning Rod already makes it a free switch-in.
-intentional_weakness: Special Water/Grass pressure, Ground attacks, Taunt and multi-hit damage into Sturdy. Disposition: Keep but prioritize a special-pressure benchmark; four slow bodies need active damage, not just survival prose.
-first_loss_lesson: Special Water/Grass pressure, Ground attacks, Taunt and multi-hit damage into Sturdy. Disposition: Keep but prioritize a special-pressure benchmark; four slow bodies need active damage, not just survival prose.
-strongest_part: First two useful turns: Rhydon and Palossand attack appropriate targets; Palossand's Water Compaction does not make an incoming Water hit harmless. Turn two chooses the right heavy reserve rather than protecting both slow members. Alternate deployment: Rhydon and Mega Aggron offer stronger physical bulk and Body Press coverage. Reserves & disruption: Golem's Sturdy/Policy depends on HP and the exact hit sequence. Lightning Rod on Rhydon is a matchup tool, not a Water weakness answer. Counterplay & audit: Special Water/Grass pressure, Ground attacks, Taunt and multi-hit damage into Sturdy. Disposition: Keep but prioritize a special-pressure benchmark; four slow bodies need active damage, not just survival prose. Could this team be cooler? It is a coherent rock-and-steel wall room and is retained: Mega Aggron's Filter-grade bulk behind Heavy Slam and Body Press, Golem holding a Weakness Policy so a super-effective hit that fails to kill hands it +2/+2, Palossand's Water Compaction raising Defense two stages every time a player tries to wash it away, and an Eviolite Rhydon whose Lightning Rod draws Electric attacks off the Ground-weak partners. Every member answers a different kind of pressure, which is exactly what a regular trainer's four should do. The one thing that would raise it further is a spread move to punish the double-target that this much bulk invites - flagged rather than forced. Offsets individual: Rhydon -1 despite Eviolite because Lightning Rod already makes it a free switch-in.
-weakest_link: Special Water/Grass pressure, Ground attacks, Taunt and multi-hit damage into Sturdy. Disposition: Keep but prioritize a special-pressure benchmark; four slow bodies need active damage, not just survival prose.
+primary_question: Can the player beat this regular team (Rhydon, Palossand, Aggron, Tyranitar) on its own terms: A rock-and-steel wall room that finally owns its weather. First two useful turns: Tyranitar's Sand Stream lands on entry and overwrites the player's rain - Swift Swim stops doubling Speed, Water attacks lose their rain boost, and every Rock type on Alan's side takes special hits with 50% more Special Defence - while Rhydon and Palossand attack appropriate targets. Tyranitar's own turn goes to Thunder Punch into the Water type or rain setter, or Rock Slide when two Flying rain birds are in front of it; Smooth Rock keeps the sand up for eight turns so a returning Pelipper cannot simply win the weather back. Palossand's Water Compaction does not make an incoming Water hit harmless, so it trades Protect for Giga Drain and hits the Water attacker back super-effectively while healing off it. Alternate deployment: Rhydon and Mega Aggron offer stronger physical bulk and Body Press coverage; Rhydon's Megahorn is the answer to a Water/Grass Ludicolo, which shrugs off Thunder Punch and Giga Drain. Reserves & disruption: Mega Aggron is pure Steel, so Water hits it only neutrally, and sand chips every non Rock/Ground/Steel body on the player's side while all four of Alan's are immune. Lightning Rod on Rhydon is a matchup tool, not a Water weakness answer. Could this team be cooler? Yes: it was four slow Water-weak bodies, three of them taking four times from Water, and one rain Ludicolo swept it without loss; Golem also repeated Roman's Golem-and-Rhydon pair four encounters earlier. Tyranitar replaces it as the room's weather and its Water answer at once - the sand removes the rain engine, Thunder Punch punishes the Water attacker, and a wall room now has a reason to be slow. Offsets individual: Rhydon -1 despite Eviolite because Lightning Rod already makes it a free switch-in; Tyranitar keeps Golem's +1.
+theme_and_tempo: A rock-and-steel wall room that finally owns its weather. First two useful turns: Tyranitar's Sand Stream lands on entry and overwrites the player's rain - Swift Swim stops doubling Speed, Water attacks lose their rain boost, and every Rock type on Alan's side takes special hits with 50% more Special Defence - while Rhydon and Palossand attack appropriate targets. Tyranitar's own turn goes to Thunder Punch into the Water type or rain setter, or Rock Slide when two Flying rain birds are in front of it; Smooth Rock keeps the sand up for eight turns so a returning Pelipper cannot simply win the weather back. Palossand's Water Compaction does not make an incoming Water hit harmless, so it trades Protect for Giga Drain and hits the Water attacker back super-effectively while healing off it. Alternate deployment: Rhydon and Mega Aggron offer stronger physical bulk and Body Press coverage; Rhydon's Megahorn is the answer to a Water/Grass Ludicolo, which shrugs off Thunder Punch and Giga Drain. Reserves & disruption: Mega Aggron is pure Steel, so Water hits it only neutrally, and sand chips every non Rock/Ground/Steel body on the player's side while all four of Alan's are immune. Lightning Rod on Rhydon is a matchup tool, not a Water weakness answer. Could this team be cooler? Yes: it was four slow Water-weak bodies, three of them taking four times from Water, and one rain Ludicolo swept it without loss; Golem also repeated Roman's Golem-and-Rhydon pair four encounters earlier. Tyranitar replaces it as the room's weather and its Water answer at once - the sand removes the rain engine, Thunder Punch punishes the Water attacker, and a wall room now has a reason to be slow. Offsets individual: Rhydon -1 despite Eviolite because Lightning Rod already makes it a free switch-in; Tyranitar keeps Golem's +1.
+intentional_weakness: Win the weather back after Smooth Rock expires, or remove Tyranitar first - Fighting, Water and Grass hit it super-effectively and nothing else resets the sand. Special Water or Grass pressure still works in sand, but the Rock types take it with boosted Special Defence; Ground attacks, Taunt against Shore Up, and double-targeting the slow members before Mega Aggron's bulk comes online.
+first_loss_lesson: Win the weather back after Smooth Rock expires, or remove Tyranitar first - Fighting, Water and Grass hit it super-effectively and nothing else resets the sand. Special Water or Grass pressure still works in sand, but the Rock types take it with boosted Special Defence; Ground attacks, Taunt against Shore Up, and double-targeting the slow members before Mega Aggron's bulk comes online.
+strongest_part: A rock-and-steel wall room that finally owns its weather. First two useful turns: Tyranitar's Sand Stream lands on entry and overwrites the player's rain - Swift Swim stops doubling Speed, Water attacks lose their rain boost, and every Rock type on Alan's side takes special hits with 50% more Special Defence - while Rhydon and Palossand attack appropriate targets. Tyranitar's own turn goes to Thunder Punch into the Water type or rain setter, or Rock Slide when two Flying rain birds are in front of it; Smooth Rock keeps the sand up for eight turns so a returning Pelipper cannot simply win the weather back. Palossand's Water Compaction does not make an incoming Water hit harmless, so it trades Protect for Giga Drain and hits the Water attacker back super-effectively while healing off it. Alternate deployment: Rhydon and Mega Aggron offer stronger physical bulk and Body Press coverage; Rhydon's Megahorn is the answer to a Water/Grass Ludicolo, which shrugs off Thunder Punch and Giga Drain. Reserves & disruption: Mega Aggron is pure Steel, so Water hits it only neutrally, and sand chips every non Rock/Ground/Steel body on the player's side while all four of Alan's are immune. Lightning Rod on Rhydon is a matchup tool, not a Water weakness answer. Could this team be cooler? Yes: it was four slow Water-weak bodies, three of them taking four times from Water, and one rain Ludicolo swept it without loss; Golem also repeated Roman's Golem-and-Rhydon pair four encounters earlier. Tyranitar replaces it as the room's weather and its Water answer at once - the sand removes the rain engine, Thunder Punch punishes the Water attacker, and a wall room now has a reason to be slow. Offsets individual: Rhydon -1 despite Eviolite because Lightning Rod already makes it a free switch-in; Tyranitar keeps Golem's +1.
+weakest_link: Win the weather back after Smooth Rock expires, or remove Tyranitar first - Fighting, Water and Grass hit it super-effectively and nothing else resets the sand. Special Water or Grass pressure still works in sand, but the Rock types take it with boosted Special Defence; Ground attacks, Taunt against Shore Up, and double-targeting the slow members before Mega Aggron's bulk comes online.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: master_intent_authored_exact_lines_pending
 reservation_status: hand-authored; species, Mega and legendary placement tracked in data/emerald_champions/emerald_champions_battle_teams.txt
@@ -4720,12 +4720,12 @@ branches:
 trainer_id: TRAINER_ALAN
 format: double
 ai_extra: Conservative
-strategy: NONE
+strategy: SAND
 team:
   1. SPECIES_RHYDON @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_DRILL_RUN,MOVE_MEGAHORN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_PALOSSAND @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_WATER_COMPACTION | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_EARTH_POWER,MOVE_SHADOW_BALL,MOVE_SHORE_UP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_PALOSSAND @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_WATER_COMPACTION | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_EARTH_POWER,MOVE_SHADOW_BALL,MOVE_GIGA_DRAIN,MOVE_SHORE_UP | ivs=31/31/31/31/31/31 | friendship=255
   3. SPECIES_AGGRON @ ITEM_AGGRONITE | level_offset=0 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAVY_SLAM,MOVE_BODY_PRESS,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_GOLEM @ ITEM_WEAKNESS_POLICY | level_offset=1 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_STOMPING_TANTRUM,MOVE_HEAVY_SLAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TYRANITAR @ ITEM_SMOOTH_ROCK | level_offset=1 | ability=ABILITY_SAND_STREAM | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_KNOCK_OFF,MOVE_THUNDER_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5100,10 +5100,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_OMASTAR @ ITEM_WHITE_HERB | level_offset=3 | ability=ABILITY_WEAK_ARMOR | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SHELL_SMASH,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_EARTH_POWER | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_RUNERIGUS @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_WANDERING_SPIRIT | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_PROTECT,MOVE_POLTERGEIST,MOVE_BODY_PRESS,MOVE_WILL_O_WISP | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_SLOWBRO @ ITEM_SLOWBRONITE | level_offset=0 | ability=ABILITY_REGENERATOR | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_PSYSHOCK,MOVE_ICE_BEAM,MOVE_CALM_MIND,MOVE_SLACK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_RELICANTH @ ITEM_CHOICE_BAND | level_offset=3 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_OMASTAR @ ITEM_WHITE_HERB | level_offset=6 | ability=ABILITY_WEAK_ARMOR | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SHELL_SMASH,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_EARTH_POWER | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_RUNERIGUS @ ITEM_LEFTOVERS | level_offset=5 | ability=ABILITY_WANDERING_SPIRIT | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_PROTECT,MOVE_POLTERGEIST,MOVE_BODY_PRESS,MOVE_WILL_O_WISP | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_SLOWBRO @ ITEM_SLOWBRONITE | level_offset=3 | ability=ABILITY_REGENERATOR | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_PSYSHOCK,MOVE_ICE_BEAM,MOVE_CALM_MIND,MOVE_SLACK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_RELICANTH @ ITEM_CHOICE_BAND | level_offset=6 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5135,10 +5135,10 @@ trainer_id: TRAINER_LUIS
 format: double
 strategy: TAILWIND
 team:
-  1. SPECIES_LANTURN @ ITEM_ASSAULT_VEST | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_DAZZLING_GLEAM | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_MANTINE @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_TAILWIND,MOVE_SURF,MOVE_AIR_SLASH,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_SHARPEDO @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_WATERFALL,MOVE_ICE_FANG,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_ARCTOVISH @ ITEM_EXPERT_BELT | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_NAIVE | evs=4/252/0/252/0/0 | moves=MOVE_FREEZE_DRY,MOVE_FISHIOUS_REND,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_LANTURN @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_DAZZLING_GLEAM | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_MANTINE @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_TAILWIND,MOVE_SURF,MOVE_AIR_SLASH,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_SHARPEDO @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_WATERFALL,MOVE_ICE_FANG,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_ARCTOVISH @ ITEM_EXPERT_BELT | level_offset=3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_NAIVE | evs=4/252/0/252/0/0 | moves=MOVE_FREEZE_DRY,MOVE_FISHIOUS_REND,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5206,9 +5206,9 @@ format: double
 strategy: RAIN, SETUP
 team:
   1. SPECIES_POLITOED @ ITEM_DAMP_ROCK | level_offset=1 | ability=ABILITY_DRIZZLE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_WEATHER_BALL,MOVE_ICY_WIND,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_KINGDRA @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MUDDY_WATER,MOVE_DRACO_METEOR,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_KINGDRA @ ITEM_WISE_GLASSES | level_offset=0 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MUDDY_WATER,MOVE_DRACO_METEOR,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   3. SPECIES_ROTOM_WASH @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_LEVITATE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_WILL_O_WISP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_BARRASKEWDA @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_LIQUIDATION,MOVE_CLOSE_COMBAT,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_BARRASKEWDA @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_LIQUIDATION,MOVE_CLOSE_COMBAT,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_LUDICOLO @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_FAKE_OUT,MOVE_HYDRO_PUMP,MOVE_GIGA_DRAIN,MOVE_ICE_BEAM | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_GYARADOS @ ITEM_GYARADOSITE | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_CRUNCH,MOVE_DRAGON_DANCE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -5243,10 +5243,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_SEADRA @ ITEM_SCOPE_LENS | level_offset=1 | ability=ABILITY_SNIPER | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_FOCUS_ENERGY,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_FERALIGATR @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_SHEER_FORCE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_LIQUIDATION,MOVE_ICE_PUNCH,MOVE_CRUNCH,MOVE_ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_ARCTIBAX @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_THERMAL_EXCHANGE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ICICLE_CRASH,MOVE_DRAGON_CLAW,MOVE_IRON_HEAD,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_MILOTIC @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_COMPETITIVE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_RECOVER,MOVE_ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SEADRA @ ITEM_SCOPE_LENS | level_offset=4 | ability=ABILITY_SNIPER | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_FOCUS_ENERGY,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_FERALIGATR @ ITEM_LIFE_ORB | level_offset=5 | ability=ABILITY_SHEER_FORCE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_LIQUIDATION,MOVE_ICE_PUNCH,MOVE_CRUNCH,MOVE_ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_ARCTIBAX @ ITEM_EVIOLITE | level_offset=7 | ability=ABILITY_THERMAL_EXCHANGE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ICICLE_CRASH,MOVE_DRAGON_CLAW,MOVE_IRON_HEAD,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_MILOTIC @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_COMPETITIVE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_RECOVER,MOVE_ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5385,10 +5385,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_GOLEM_ALOLA @ ITEM_ASSAULT_VEST | level_offset=-1 | ability=ABILITY_GALVANIZE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_STOMPING_TANTRUM,MOVE_ROCK_SLIDE,MOVE_FIRE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_CARRACOSTA @ ITEM_WHITE_HERB | level_offset=0 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_LIQUIDATION,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_RELICANTH @ ITEM_CHOICE_BAND | level_offset=0 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_ARMALDO @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_BATTLE_ARMOR | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_X_SCISSOR,MOVE_STONE_EDGE,MOVE_AQUA_JET,MOVE_SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_GOLEM_ALOLA @ ITEM_ASSAULT_VEST | level_offset=2 | ability=ABILITY_GALVANIZE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_STOMPING_TANTRUM,MOVE_ROCK_SLIDE,MOVE_FIRE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_CARRACOSTA @ ITEM_WHITE_HERB | level_offset=3 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_LIQUIDATION,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_RELICANTH @ ITEM_CHOICE_BAND | level_offset=3 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_ARMALDO @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_BATTLE_ARMOR | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_X_SCISSOR,MOVE_STONE_EDGE,MOVE_AQUA_JET,MOVE_SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5620,12 +5620,12 @@ requirement: optional
 status: master_audited_ready_for_implementation
 battle_class: ace
 ai_profile: sharp
-primary_question: Can the player beat this ace team (Ditto, Milotic, Magikarp, Feebas, Gyarados) on its own terms: First two useful turns: Ditto transforms only into a worthwhile eligible target while Milotic attacks or controls speed. Turn two exploits the actual copied set and item rather than assume a perfect counter. Alternate deployment: Milotic and Mega Gyarados are the genuine competitive pressure mode. Reserves & disruption: Magikarp's two moves and Feebas's utility are deliberate identity choices, not missing data. They still cost slots and should not be rated as high-pressure threats. Counterplay & audit: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled. Could this team be cooler? No - and that is the point, so it is kept exactly as built. This is the campaign's one joke team and it commits: a bare Magikarp with Flail and Tackle, an Eviolite Feebas that actually does something (Chilling Water, Icy Wind and Hypnosis off 116/140 defensive EVs), and a Choice Scarf Imposter Ditto that copies the player's best Pokemon and outspeeds it. The gag lands because Milotic and Mega Gyarados are waiting behind the two fish nobody respects. Changing any of it would break the joke; what it needed was levels, so the Feebas that has to survive to be funny goes to +3 while the rest sit at +1. The moment to remember is Ditto turning into the player's own ace and moving first.
-theme_and_tempo: First two useful turns: Ditto transforms only into a worthwhile eligible target while Milotic attacks or controls speed. Turn two exploits the actual copied set and item rather than assume a perfect counter. Alternate deployment: Milotic and Mega Gyarados are the genuine competitive pressure mode. Reserves & disruption: Magikarp's two moves and Feebas's utility are deliberate identity choices, not missing data. They still cost slots and should not be rated as high-pressure threats. Counterplay & audit: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled. Could this team be cooler? No - and that is the point, so it is kept exactly as built. This is the campaign's one joke team and it commits: a bare Magikarp with Flail and Tackle, an Eviolite Feebas that actually does something (Chilling Water, Icy Wind and Hypnosis off 116/140 defensive EVs), and a Choice Scarf Imposter Ditto that copies the player's best Pokemon and outspeeds it. The gag lands because Milotic and Mega Gyarados are waiting behind the two fish nobody respects. Changing any of it would break the joke; what it needed was levels, so the Feebas that has to survive to be funny goes to +3 while the rest sit at +1. The moment to remember is Ditto turning into the player's own ace and moving first.
-intentional_weakness: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled.
-first_loss_lesson: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled.
-strongest_part: First two useful turns: Ditto transforms only into a worthwhile eligible target while Milotic attacks or controls speed. Turn two exploits the actual copied set and item rather than assume a perfect counter. Alternate deployment: Milotic and Mega Gyarados are the genuine competitive pressure mode. Reserves & disruption: Magikarp's two moves and Feebas's utility are deliberate identity choices, not missing data. They still cost slots and should not be rated as high-pressure threats. Counterplay & audit: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled. Could this team be cooler? No - and that is the point, so it is kept exactly as built. This is the campaign's one joke team and it commits: a bare Magikarp with Flail and Tackle, an Eviolite Feebas that actually does something (Chilling Water, Icy Wind and Hypnosis off 116/140 defensive EVs), and a Choice Scarf Imposter Ditto that copies the player's best Pokemon and outspeeds it. The gag lands because Milotic and Mega Gyarados are waiting behind the two fish nobody respects. Changing any of it would break the joke; what it needed was levels, so the Feebas that has to survive to be funny goes to +3 while the rest sit at +1. The moment to remember is Ditto turning into the player's own ace and moving first.
-weakest_link: Deny a useful Ditto target, Taunt the utility fish and preserve an answer to Gyarados. Disposition: Keep as an optional novelty challenge; do not claim it matches the strategic pressure of a six-member boss merely because every field is filled.
+primary_question: Can the player beat this ace team (Magikarp, Feebas, Wishiwashi, Pyukumuku, Gyarados) on its own terms: The Magikarp lover's exam, and the only fight in the campaign the player must enter with six Magikarp. Every member is a fish the rest of the world throws back, and every member is a lock that one of Magikarp's own moves opens - Tackle, Dragon Rage, Focus Sash plus Flail, Rattled, even Bounce - so the player leaves believing Magikarp are secretly great. Nothing here carries Electric or Grass coverage, so almost every attack the fisherman owns is a resisted Water move. First two useful turns: his own Magikarp and Feebas lead. His Magikarp holds the same Focus Sash and Flail the player is likely to bring - it is harmless at high HP and dangerous only once it sits at one HP - so the lesson is to chip it with Dragon Rage, whose fixed 40 breaks the Sash and never leaves it in Flail range for long. Feebas is the mirror image: Eviolite bulk plus Mirror Coat returns double the damage of any special hit, and Dragon Rage is special, so the right answer to Feebas is the humble Tackle. Alternate deployment: Wishiwashi arrives in School Form with 130-plus Defence and Special Defence that makes Flail bounce off, but Dragon Rage ignores defences; two Dragon Rages a turn bring its 131 HP down inside two turns, and without HP investment a full-health Magikarp survives two of its resisted Liquidations. Pyukumuku is the inverse lock: Counter doubles any physical hit back and Innards Out deals its remaining HP to whatever finishes it, so it is also a Dragon Rage target - chip it low first and the final hit costs only the last sliver. Its Toxic even feeds a Facade Magikarp. Reserves & disruption: Gyarados is the ace and the promise - what the player's Magikarp become. Its Intimidate lowers the Attack Flail needs but triggers Rattled, so a Rattled Magikarp gains a Speed stage and outruns even a Dragon Danced Gyarados. Waterfall is resisted and a full-HP Magikarp survives one, a Focus Sash Magikarp survives anything once and answers at one HP with a 200-power Flail, and the turn Gyarados spends in the air on Bounce is a free turn of Dragon Rage. The Mega, the Choice Scarf Imposter Ditto and Milotic are gone: they made the fight unwinnable rather than hard. Levels sit at the cap so the player's own cap-level Magikarp are even with the fish, and Gyarados at +1 is the one step up.
+theme_and_tempo: The Magikarp lover's exam, and the only fight in the campaign the player must enter with six Magikarp. Every member is a fish the rest of the world throws back, and every member is a lock that one of Magikarp's own moves opens - Tackle, Dragon Rage, Focus Sash plus Flail, Rattled, even Bounce - so the player leaves believing Magikarp are secretly great. Nothing here carries Electric or Grass coverage, so almost every attack the fisherman owns is a resisted Water move. First two useful turns: his own Magikarp and Feebas lead. His Magikarp holds the same Focus Sash and Flail the player is likely to bring - it is harmless at high HP and dangerous only once it sits at one HP - so the lesson is to chip it with Dragon Rage, whose fixed 40 breaks the Sash and never leaves it in Flail range for long. Feebas is the mirror image: Eviolite bulk plus Mirror Coat returns double the damage of any special hit, and Dragon Rage is special, so the right answer to Feebas is the humble Tackle. Alternate deployment: Wishiwashi arrives in School Form with 130-plus Defence and Special Defence that makes Flail bounce off, but Dragon Rage ignores defences; two Dragon Rages a turn bring its 131 HP down inside two turns, and without HP investment a full-health Magikarp survives two of its resisted Liquidations. Pyukumuku is the inverse lock: Counter doubles any physical hit back and Innards Out deals its remaining HP to whatever finishes it, so it is also a Dragon Rage target - chip it low first and the final hit costs only the last sliver. Its Toxic even feeds a Facade Magikarp. Reserves & disruption: Gyarados is the ace and the promise - what the player's Magikarp become. Its Intimidate lowers the Attack Flail needs but triggers Rattled, so a Rattled Magikarp gains a Speed stage and outruns even a Dragon Danced Gyarados. Waterfall is resisted and a full-HP Magikarp survives one, a Focus Sash Magikarp survives anything once and answers at one HP with a 200-power Flail, and the turn Gyarados spends in the air on Bounce is a free turn of Dragon Rage. The Mega, the Choice Scarf Imposter Ditto and Milotic are gone: they made the fight unwinnable rather than hard. Levels sit at the cap so the player's own cap-level Magikarp are even with the fish, and Gyarados at +1 is the one step up.
+intentional_weakness: Dragon Rage his Magikarp so its Sash breaks early and it never Flails from one HP; Tackle Feebas and never feed it a special move for Mirror Coat. Double Dragon Rage Wishiwashi and Pyukumuku - fixed damage walks through School Form's defences, ignores Counter, and chips Pyukumuku low before the Innards Out finish. Save the Focus Sash Flail Magikarp and the Rattled Magikarp for Gyarados: let it swing first, answer from one HP, and spend its Bounce turns on Dragon Rage.
+first_loss_lesson: Dragon Rage his Magikarp so its Sash breaks early and it never Flails from one HP; Tackle Feebas and never feed it a special move for Mirror Coat. Double Dragon Rage Wishiwashi and Pyukumuku - fixed damage walks through School Form's defences, ignores Counter, and chips Pyukumuku low before the Innards Out finish. Save the Focus Sash Flail Magikarp and the Rattled Magikarp for Gyarados: let it swing first, answer from one HP, and spend its Bounce turns on Dragon Rage.
+strongest_part: The Magikarp lover's exam, and the only fight in the campaign the player must enter with six Magikarp. Every member is a fish the rest of the world throws back, and every member is a lock that one of Magikarp's own moves opens - Tackle, Dragon Rage, Focus Sash plus Flail, Rattled, even Bounce - so the player leaves believing Magikarp are secretly great. Nothing here carries Electric or Grass coverage, so almost every attack the fisherman owns is a resisted Water move. First two useful turns: his own Magikarp and Feebas lead. His Magikarp holds the same Focus Sash and Flail the player is likely to bring - it is harmless at high HP and dangerous only once it sits at one HP - so the lesson is to chip it with Dragon Rage, whose fixed 40 breaks the Sash and never leaves it in Flail range for long. Feebas is the mirror image: Eviolite bulk plus Mirror Coat returns double the damage of any special hit, and Dragon Rage is special, so the right answer to Feebas is the humble Tackle. Alternate deployment: Wishiwashi arrives in School Form with 130-plus Defence and Special Defence that makes Flail bounce off, but Dragon Rage ignores defences; two Dragon Rages a turn bring its 131 HP down inside two turns, and without HP investment a full-health Magikarp survives two of its resisted Liquidations. Pyukumuku is the inverse lock: Counter doubles any physical hit back and Innards Out deals its remaining HP to whatever finishes it, so it is also a Dragon Rage target - chip it low first and the final hit costs only the last sliver. Its Toxic even feeds a Facade Magikarp. Reserves & disruption: Gyarados is the ace and the promise - what the player's Magikarp become. Its Intimidate lowers the Attack Flail needs but triggers Rattled, so a Rattled Magikarp gains a Speed stage and outruns even a Dragon Danced Gyarados. Waterfall is resisted and a full-HP Magikarp survives one, a Focus Sash Magikarp survives anything once and answers at one HP with a 200-power Flail, and the turn Gyarados spends in the air on Bounce is a free turn of Dragon Rage. The Mega, the Choice Scarf Imposter Ditto and Milotic are gone: they made the fight unwinnable rather than hard. Levels sit at the cap so the player's own cap-level Magikarp are even with the fish, and Gyarados at +1 is the one step up.
+weakest_link: Dragon Rage his Magikarp so its Sash breaks early and it never Flails from one HP; Tackle Feebas and never feed it a special move for Mirror Coat. Double Dragon Rage Wishiwashi and Pyukumuku - fixed damage walks through School Form's defences, ignores Counter, and chips Pyukumuku low before the Innards Out finish. Save the Focus Sash Flail Magikarp and the Rattled Magikarp for Gyarados: let it swing first, answer from one HP, and spend its Bounce turns on Dragon Rage.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented native source dialogue; literal width verified; bespoke team-specific rewrite not claimed
 reservation_status: hand-authored; species, Mega and legendary placement tracked in data/emerald_champions/emerald_champions_battle_teams.txt
@@ -5634,14 +5634,14 @@ branches:
 --- BRANCH TRAINER_MAGIKARP_GUY ---
 trainer_id: TRAINER_MAGIKARP_GUY
 format: double
-ai_extra: Conservative
+ai_extra: Ace Pokemon, Conservative
 strategy: SETUP
 team:
-  1. SPECIES_DITTO @ ITEM_CHOICE_SCARF | level_offset=1 | ability=ABILITY_IMPOSTER | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_MILOTIC @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_COMPETITIVE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_RECOVER,MOVE_ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_MAGIKARP @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_RATTLED | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FLAIL,MOVE_TACKLE | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_FEEBAS @ ITEM_EVIOLITE | level_offset=3 | ability=ABILITY_OBLIVIOUS | nature=NATURE_BOLD | evs=252/0/116/0/140/0 | moves=MOVE_CHILLING_WATER,MOVE_ICY_WIND,MOVE_HYPNOSIS,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  5. SPECIES_GYARADOS @ ITEM_GYARADOSITE | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_CRUNCH,MOVE_DRAGON_DANCE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_MAGIKARP @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_RATTLED | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FLAIL,MOVE_BOUNCE,MOVE_TACKLE | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_FEEBAS @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_OBLIVIOUS | nature=NATURE_CALM | evs=4/0/0/0/252/252 | moves=MOVE_MIRROR_COAT,MOVE_TACKLE,MOVE_FLAIL,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_WISHIWASHI @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_SCHOOLING | nature=NATURE_BOLD | evs=0/0/252/0/252/0 | moves=MOVE_LIQUIDATION,MOVE_AQUA_RING,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_PYUKUMUKU @ ITEM_KEE_BERRY | level_offset=0 | ability=ABILITY_INNARDS_OUT | nature=NATURE_BOLD | evs=0/0/252/0/252/0 | moves=MOVE_COUNTER,MOVE_TOXIC,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  5. SPECIES_GYARADOS @ ITEM_MYSTIC_WATER | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_BOUNCE,MOVE_DRAGON_DANCE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5887,10 +5887,10 @@ trainer_id: TRAINER_PHIL
 format: double
 strategy: TAILWIND
 team:
-  1. SPECIES_STARAPTOR @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_CLOSE_COMBAT,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_FARFETCHD @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_DEFIANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_LEAF_BLADE,MOVE_FEINT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_KILOWATTREL @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_HURRICANE,MOVE_VOLT_SWITCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_UNFEZANT @ ITEM_SCOPE_LENS | level_offset=1 | ability=ABILITY_SUPER_LUCK | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_TAILWIND,MOVE_PROTECT,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_STARAPTOR @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_CLOSE_COMBAT,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_FARFETCHD @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_DEFIANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_LEAF_BLADE,MOVE_FEINT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_KILOWATTREL @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_HURRICANE,MOVE_VOLT_SWITCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_UNFEZANT @ ITEM_SCOPE_LENS | level_offset=4 | ability=ABILITY_SUPER_LUCK | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_TAILWIND,MOVE_PROTECT,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5922,10 +5922,10 @@ trainer_id: TRAINER_GRUNT_WEATHER_INST_1
 format: double
 strategy: NONE
 team:
-  1. SPECIES_GOLBAT @ ITEM_EVIOLITE | level_offset=5 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAUNT,MOVE_PROTECT,MOVE_BRAVE_BIRD,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_CRAWDAUNT @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_ADAPTABILITY | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_AQUA_JET,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_LIEPARD @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_PRANKSTER | nature=NATURE_JOLLY | evs=252/0/4/0/0/252 | moves=MOVE_FAKE_OUT,MOVE_FOUL_PLAY,MOVE_ENCORE,MOVE_TAUNT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE | level_offset=2 | ability=ABILITY_LIQUID_OOZE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_MUDDY_WATER,MOVE_SLUDGE_BOMB,MOVE_ACID_SPRAY,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_GOLBAT @ ITEM_EVIOLITE | level_offset=7 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAUNT,MOVE_PROTECT,MOVE_BRAVE_BIRD,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_CRAWDAUNT @ ITEM_LIFE_ORB | level_offset=5 | ability=ABILITY_ADAPTABILITY | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_AQUA_JET,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_LIEPARD @ ITEM_FOCUS_SASH | level_offset=4 | ability=ABILITY_PRANKSTER | nature=NATURE_JOLLY | evs=252/0/4/0/0/252 | moves=MOVE_FAKE_OUT,MOVE_FOUL_PLAY,MOVE_ENCORE,MOVE_TAUNT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE | level_offset=4 | ability=ABILITY_LIQUID_OOZE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_MUDDY_WATER,MOVE_SLUDGE_BOMB,MOVE_ACID_SPRAY,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -6308,10 +6308,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: NONE
 team:
-  1. SPECIES_OGERPON @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_DEFIANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_IVY_CUDGEL,MOVE_HORN_LEECH,MOVE_SPIKY_SHIELD,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_ZANGOOSE @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_TOXIC_BOOST | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_NIDOQUEEN @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_SHEER_FORCE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_STARMIE @ ITEM_EXPERT_BELT | level_offset=2 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_OGERPON @ ITEM_LIFE_ORB | level_offset=4 | ability=ABILITY_DEFIANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_IVY_CUDGEL,MOVE_HORN_LEECH,MOVE_SPIKY_SHIELD,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_ZANGOOSE @ ITEM_TOXIC_ORB | level_offset=4 | ability=ABILITY_TOXIC_BOOST | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_NIDOQUEEN @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_SHEER_FORCE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_STARMIE @ ITEM_EXPERT_BELT | level_offset=5 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -6379,10 +6379,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_SABLEYE @ ITEM_SABLENITE | level_offset=0 | ability=ABILITY_PRANKSTER | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_WILL_O_WISP,MOVE_FOUL_PLAY,MOVE_RECOVER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_KOMMO_O @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_BULLETPROOF | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_IRON_DEFENSE,MOVE_BODY_PRESS,MOVE_FLAMETHROWER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_WHIMSICOTT @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_PRANKSTER | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MOONBLAST,MOVE_TAILWIND,MOVE_ENCORE,MOVE_HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HYDREIGON @ ITEM_WISE_GLASSES | level_offset=2 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_DARK_PULSE,MOVE_FIRE_BLAST,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SABLEYE @ ITEM_SABLENITE | level_offset=3 | ability=ABILITY_PRANKSTER | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_WILL_O_WISP,MOVE_FOUL_PLAY,MOVE_RECOVER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_KOMMO_O @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_BULLETPROOF | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_IRON_DEFENSE,MOVE_BODY_PRESS,MOVE_FLAMETHROWER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_WHIMSICOTT @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_PRANKSTER | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MOONBLAST,MOVE_TAILWIND,MOVE_ENCORE,MOVE_HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HYDREIGON @ ITEM_WISE_GLASSES | level_offset=5 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_DARK_PULSE,MOVE_FIRE_BLAST,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -6490,10 +6490,10 @@ trainer_id: TRAINER_MIU_AND_YUKI
 format: double
 strategy: SUN, SNOW
 team:
-  1. SPECIES_NINETALES @ ITEM_HEAT_ROCK | level_offset=0 | ability=ABILITY_DROUGHT | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HEAT_WAVE,MOVE_SOLAR_BEAM,MOVE_ENCORE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_WEEPINBELL @ ITEM_EVIOLITE | level_offset=1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_SLUDGE_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_NINETALES_ALOLA @ ITEM_LIGHT_CLAY | level_offset=1 | ability=ABILITY_SNOW_WARNING | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_BLIZZARD,MOVE_AURORA_VEIL,MOVE_ENCORE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_TORTERRA @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_SOLID_ROCK | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_WOOD_HAMMER,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_NINETALES @ ITEM_HEAT_ROCK | level_offset=3 | ability=ABILITY_DROUGHT | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HEAT_WAVE,MOVE_SOLAR_BEAM,MOVE_ENCORE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_WEEPINBELL @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_SLUDGE_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_NINETALES_ALOLA @ ITEM_LIGHT_CLAY | level_offset=4 | ability=ABILITY_SNOW_WARNING | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_BLIZZARD,MOVE_AURORA_VEIL,MOVE_ENCORE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TORTERRA @ ITEM_LIFE_ORB | level_offset=4 | ability=ABILITY_SOLID_ROCK | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_WOOD_HAMMER,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -6526,10 +6526,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: TRICK_ROOM, SAND
 team:
-  1. SPECIES_AEGISLASH @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_STANCE_CHANGE | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_SHADOW_BALL,MOVE_FLASH_CANNON,MOVE_WIDE_GUARD,MOVE_KINGS_SHIELD | ivs=31/31/31/31/31/0 | friendship=255
-  2. SPECIES_COMFEY @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_TRIAGE | nature=NATURE_MODEST | evs=252/0/4/0/252/0 | moves=MOVE_FLORAL_HEALING,MOVE_DRAINING_KISS,MOVE_HELPING_HAND,MOVE_TRICK_ROOM | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_MILOTIC @ ITEM_ROCKY_HELMET | level_offset=1 | ability=ABILITY_COMPETITIVE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_RECOVER,MOVE_HAZE | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_TYRANITAR @ ITEM_TYRANITARITE | level_offset=2 | ability=ABILITY_SAND_STREAM | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_CRUNCH,MOVE_HIGH_HORSEPOWER,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  1. SPECIES_AEGISLASH @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_STANCE_CHANGE | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_SHADOW_BALL,MOVE_FLASH_CANNON,MOVE_WIDE_GUARD,MOVE_KINGS_SHIELD | ivs=31/31/31/31/31/0 | friendship=255
+  2. SPECIES_COMFEY @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_TRIAGE | nature=NATURE_MODEST | evs=252/0/4/0/252/0 | moves=MOVE_FLORAL_HEALING,MOVE_DRAINING_KISS,MOVE_HELPING_HAND,MOVE_TRICK_ROOM | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_MILOTIC @ ITEM_ROCKY_HELMET | level_offset=4 | ability=ABILITY_COMPETITIVE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_RECOVER,MOVE_HAZE | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TYRANITAR @ ITEM_TYRANITARITE | level_offset=5 | ability=ABILITY_SAND_STREAM | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_CRUNCH,MOVE_HIGH_HORSEPOWER,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -6562,10 +6562,10 @@ format: double
 ai_extra: Conservative
 strategy: SUN, SETUP
 team:
-  1. SPECIES_CASTFORM @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_FORECAST | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SUNNY_DAY,MOVE_WEATHER_BALL,MOVE_SOLAR_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_SAWSBUCK @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HORN_LEECH,MOVE_DOUBLE_EDGE,MOVE_MEGAHORN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_CHARIZARD @ ITEM_CHARIZARDITE_X | level_offset=0 | ability=ABILITY_BLAZE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_DRAGON_CLAW,MOVE_DRAGON_DANCE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_EMOLGA @ ITEM_WISE_GLASSES | level_offset=2 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_ELECTROWEB,MOVE_ENCORE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_CASTFORM @ ITEM_FOCUS_SASH | level_offset=3 | ability=ABILITY_FORECAST | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SUNNY_DAY,MOVE_WEATHER_BALL,MOVE_SOLAR_BEAM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_SAWSBUCK @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HORN_LEECH,MOVE_DOUBLE_EDGE,MOVE_MEGAHORN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_CHARIZARD @ ITEM_CHARIZARDITE_X | level_offset=2 | ability=ABILITY_BLAZE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_DRAGON_CLAW,MOVE_DRAGON_DANCE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_EMOLGA @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_ELECTROWEB,MOVE_ENCORE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -6634,8 +6634,8 @@ format: double
 ai_extra: Ace Pokemon
 strategy: TAILWIND
 team:
-  1. SPECIES_CROBAT @ ITEM_SAFETY_GOGGLES | level_offset=1 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_HAZE,MOVE_TAUNT,MOVE_TAILWIND,MOVE_BRAVE_BIRD | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_SLAKING @ ITEM_CHOICE_SCARF | level_offset=1 | ability=ABILITY_TRUANT | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_CROBAT @ ITEM_SAFETY_GOGGLES | level_offset=2 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_HAZE,MOVE_TAUNT,MOVE_TAILWIND,MOVE_BRAVE_BIRD | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_SLAKING @ ITEM_CHOICE_SCARF | level_offset=2 | ability=ABILITY_TRUANT | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
   3. SPECIES_LAPRAS @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_FREEZE_DRY,MOVE_HYDRO_PUMP,MOVE_ICY_WIND,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   4. SPECIES_ARCANINE @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_NAIVE | evs=4/252/0/252/0/0 | moves=MOVE_FLARE_BLITZ,MOVE_EXTREME_SPEED,MOVE_SNARL,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_VENUSAUR @ ITEM_BLACK_SLUDGE | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_SLUDGE_BOMB,MOVE_EARTH_POWER,MOVE_PROTECT,MOVE_GIGA_DRAIN | ivs=31/31/31/31/31/31 | friendship=255
@@ -7013,10 +7013,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_ZERAORA @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_PLASMA_FISTS,MOVE_CLOSE_COMBAT,MOVE_PLAY_ROUGH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_SHIFTRY @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_WIND_RIDER | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_FAKE_OUT,MOVE_LEAF_STORM,MOVE_DARK_PULSE,MOVE_TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_STOUTLAND @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HAXORUS @ ITEM_LUM_BERRY | level_offset=2 | ability=ABILITY_MOLD_BREAKER | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DRAGON_CLAW,MOVE_POISON_JAB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_ZERAORA @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_PLASMA_FISTS,MOVE_CLOSE_COMBAT,MOVE_PLAY_ROUGH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_SHIFTRY @ ITEM_FOCUS_SASH | level_offset=3 | ability=ABILITY_WIND_RIDER | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_FAKE_OUT,MOVE_LEAF_STORM,MOVE_DARK_PULSE,MOVE_TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_STOUTLAND @ ITEM_CLEAR_AMULET | level_offset=3 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HAXORUS @ ITEM_LUM_BERRY | level_offset=4 | ability=ABILITY_MOLD_BREAKER | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DRAGON_CLAW,MOVE_POISON_JAB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7122,10 +7122,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP
 team:
-  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=2 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
   3. SPECIES_BRELOOM @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_POISON_HEAL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SPORE,MOVE_MACH_PUNCH,MOVE_SEED_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_SALAMENCE @ ITEM_SALAMENCITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DOUBLE_EDGE,MOVE_DRAGON_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_SCEPTILE @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_OVERGROW | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_LEAF_BLADE,MOVE_DRAGON_CLAW,MOVE_X_SCISSOR,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -7135,10 +7135,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP
 team:
-  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=2 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
   3. SPECIES_BRELOOM @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_POISON_HEAL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SPORE,MOVE_MACH_PUNCH,MOVE_SEED_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_SALAMENCE @ ITEM_SALAMENCITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DOUBLE_EDGE,MOVE_DRAGON_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_SWAMPERT @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_TORRENT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_WATERFALL,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -7148,10 +7148,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP
 team:
-  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=2 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
   3. SPECIES_BRELOOM @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_POISON_HEAL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SPORE,MOVE_MACH_PUNCH,MOVE_SEED_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_SALAMENCE @ ITEM_SALAMENCITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DOUBLE_EDGE,MOVE_DRAGON_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_BLAZIKEN @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_SPEED_BOOST | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_CLOSE_COMBAT,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -7161,10 +7161,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP
 team:
-  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=2 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
   3. SPECIES_BRELOOM @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_POISON_HEAL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SPORE,MOVE_MACH_PUNCH,MOVE_SEED_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_SALAMENCE @ ITEM_SALAMENCITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DOUBLE_EDGE,MOVE_DRAGON_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_SCEPTILE @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_OVERGROW | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_LEAF_BLADE,MOVE_DRAGON_CLAW,MOVE_X_SCISSOR,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -7174,10 +7174,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP
 team:
-  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=2 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
   3. SPECIES_BRELOOM @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_POISON_HEAL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SPORE,MOVE_MACH_PUNCH,MOVE_SEED_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_SALAMENCE @ ITEM_SALAMENCITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DOUBLE_EDGE,MOVE_DRAGON_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_SWAMPERT @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_TORRENT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_WATERFALL,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -7187,10 +7187,10 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP
 team:
-  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SWELLOW @ ITEM_FLAME_ORB | level_offset=2 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FACADE,MOVE_BRAVE_BIRD,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   2. SPECIES_MANECTRIC @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_VOLT_SWITCH,MOVE_SNARL,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
   3. SPECIES_BRELOOM @ ITEM_TOXIC_ORB | level_offset=1 | ability=ABILITY_POISON_HEAL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SPORE,MOVE_MACH_PUNCH,MOVE_SEED_BOMB,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_HEAVY_SLAM | ivs=31/31/31/31/31/31 | friendship=255
   5. SPECIES_SALAMENCE @ ITEM_SALAMENCITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_DOUBLE_EDGE,MOVE_DRAGON_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_BLAZIKEN @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_SPEED_BOOST | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_CLOSE_COMBAT,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -7225,10 +7225,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_EXPLOUD @ ITEM_CHOICE_SPECS | level_offset=0 | ability=ABILITY_SCRAPPY | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_BOOMBURST,MOVE_FOCUS_BLAST,MOVE_FIRE_BLAST,MOVE_HYPER_VOICE | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_NOIVERN @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_TELEPATHY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_TAILWIND,MOVE_SUPER_FANG,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_GARDEVOIR @ ITEM_WISE_GLASSES | level_offset=0 | ability=ABILITY_TELEPATHY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HYPER_VOICE,MOVE_PSYSHOCK,MOVE_CALM_MIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_SYLVEON @ ITEM_THROAT_SPRAY | level_offset=1 | ability=ABILITY_PIXILATE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYPER_VOICE,MOVE_HELPING_HAND,MOVE_PSYSHOCK,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_EXPLOUD @ ITEM_CHOICE_SPECS | level_offset=2 | ability=ABILITY_SCRAPPY | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_BOOMBURST,MOVE_FOCUS_BLAST,MOVE_FIRE_BLAST,MOVE_HYPER_VOICE | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_NOIVERN @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_TELEPATHY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_TAILWIND,MOVE_SUPER_FANG,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_GARDEVOIR @ ITEM_WISE_GLASSES | level_offset=2 | ability=ABILITY_TELEPATHY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HYPER_VOICE,MOVE_PSYSHOCK,MOVE_CALM_MIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_SYLVEON @ ITEM_THROAT_SPRAY | level_offset=3 | ability=ABILITY_PIXILATE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYPER_VOICE,MOVE_HELPING_HAND,MOVE_PSYSHOCK,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7337,10 +7337,10 @@ trainer_id: TRAINER_GRUNT_MT_PYRE_1
 format: double
 strategy: NONE
 team:
-  1. SPECIES_LIEPARD @ ITEM_FOCUS_SASH | level_offset=-2 | ability=ABILITY_PRANKSTER | nature=NATURE_JOLLY | evs=252/0/4/0/0/252 | moves=MOVE_ENCORE,MOVE_TAUNT,MOVE_FOUL_PLAY,MOVE_FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_RATICATE_ALOLA @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_HUSTLE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_CRUNCH,MOVE_SUCKER_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_QWILFISH_HISUI @ ITEM_BLACK_SLUDGE | level_offset=-3 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BARB_BARRAGE,MOVE_CRUNCH,MOVE_AQUA_JET,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_LANTURN @ ITEM_ASSAULT_VEST | level_offset=-2 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_VOLT_SWITCH | ivs=31/0/31/31/31/0 | friendship=255
+  1. SPECIES_LIEPARD @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_PRANKSTER | nature=NATURE_JOLLY | evs=252/0/4/0/0/252 | moves=MOVE_ENCORE,MOVE_TAUNT,MOVE_FOUL_PLAY,MOVE_FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_RATICATE_ALOLA @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_HUSTLE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_CRUNCH,MOVE_SUCKER_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_QWILFISH_HISUI @ ITEM_BLACK_SLUDGE | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BARB_BARRAGE,MOVE_CRUNCH,MOVE_AQUA_JET,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_LANTURN @ ITEM_ASSAULT_VEST | level_offset=2 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_HYDRO_PUMP,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_VOLT_SWITCH | ivs=31/0/31/31/31/0 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7372,10 +7372,10 @@ trainer_id: TRAINER_GRUNT_MT_PYRE_2
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_POLTEAGEIST_ANTIQUE @ ITEM_WHITE_HERB | level_offset=-2 | ability=ABILITY_CURSED_BODY | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_SHELL_SMASH,MOVE_SHADOW_BALL,MOVE_GIGA_DRAIN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_WEAVILE @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_PRESSURE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FAKE_OUT,MOVE_KNOCK_OFF,MOVE_ICICLE_CRASH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_MISMAGIUS @ ITEM_FOCUS_SASH | level_offset=-2 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SHADOW_BALL,MOVE_DAZZLING_GLEAM,MOVE_WILL_O_WISP,MOVE_TAUNT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_CARRACOSTA @ ITEM_WEAKNESS_POLICY | level_offset=-2 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_WATERFALL,MOVE_ROCK_SLIDE,MOVE_AQUA_JET | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_POLTEAGEIST_ANTIQUE @ ITEM_WHITE_HERB | level_offset=1 | ability=ABILITY_CURSED_BODY | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_SHELL_SMASH,MOVE_SHADOW_BALL,MOVE_GIGA_DRAIN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_WEAVILE @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_PRESSURE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FAKE_OUT,MOVE_KNOCK_OFF,MOVE_ICICLE_CRASH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_MISMAGIUS @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_SHADOW_BALL,MOVE_DAZZLING_GLEAM,MOVE_WILL_O_WISP,MOVE_TAUNT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_CARRACOSTA @ ITEM_WEAKNESS_POLICY | level_offset=1 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_WATERFALL,MOVE_ROCK_SLIDE,MOVE_AQUA_JET | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7407,10 +7407,10 @@ trainer_id: TRAINER_GRUNT_MT_PYRE_3
 format: double
 strategy: TRICK_ROOM, REDIRECTION
 team:
-  1. SPECIES_SPIRITOMB @ ITEM_LEFTOVERS | level_offset=-1 | ability=ABILITY_PRESSURE | nature=NATURE_SASSY | evs=252/0/4/0/252/0 | moves=MOVE_TRICK_ROOM,MOVE_SUCKER_PUNCH,MOVE_WILL_O_WISP,MOVE_DARK_PULSE | ivs=31/31/31/31/31/0 | friendship=255
-  2. SPECIES_HUNTAIL @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_WATER_VEIL | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_WATERFALL,MOVE_CRUNCH,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/0 | friendship=255
-  3. SPECIES_LUMINEON @ ITEM_WISE_GLASSES | level_offset=0 | ability=ABILITY_STORM_DRAIN | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_SURF,MOVE_ICE_BEAM,MOVE_U_TURN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_DRIFBLIM @ ITEM_ROCKY_HELMET | level_offset=-1 | ability=ABILITY_AFTERMATH | nature=NATURE_BRAVE | evs=252/0/4/252/0/0 | moves=MOVE_SHADOW_BALL,MOVE_HEX,MOVE_WILL_O_WISP,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  1. SPECIES_SPIRITOMB @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_PRESSURE | nature=NATURE_SASSY | evs=252/0/4/0/252/0 | moves=MOVE_TRICK_ROOM,MOVE_SUCKER_PUNCH,MOVE_WILL_O_WISP,MOVE_DARK_PULSE | ivs=31/31/31/31/31/0 | friendship=255
+  2. SPECIES_HUNTAIL @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_WATER_VEIL | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_WATERFALL,MOVE_CRUNCH,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/0 | friendship=255
+  3. SPECIES_LUMINEON @ ITEM_WISE_GLASSES | level_offset=3 | ability=ABILITY_STORM_DRAIN | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_SURF,MOVE_ICE_BEAM,MOVE_U_TURN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_DRIFBLIM @ ITEM_ROCKY_HELMET | level_offset=2 | ability=ABILITY_AFTERMATH | nature=NATURE_BRAVE | evs=252/0/4/252/0/0 | moves=MOVE_SHADOW_BALL,MOVE_HEX,MOVE_WILL_O_WISP,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7442,10 +7442,10 @@ trainer_id: TRAINER_GRUNT_MT_PYRE_4
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_SNEASLER @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_UNBURDEN | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FAKE_OUT,MOVE_DIRE_CLAW,MOVE_CLOSE_COMBAT,MOVE_THROAT_CHOP | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_ABSOL @ ITEM_SCOPE_LENS | level_offset=-1 | ability=ABILITY_SUPER_LUCK | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_NIGHT_SLASH,MOVE_PSYCHO_CUT,MOVE_SUCKER_PUNCH,MOVE_SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_BRUXISH @ ITEM_CHOICE_SCARF | level_offset=0 | ability=ABILITY_STRONG_JAW | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_PSYCHIC_FANGS,MOVE_LIQUIDATION,MOVE_CRUNCH,MOVE_ICE_FANG | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_FROSLASS @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_CURSED_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_ICE_BEAM,MOVE_SHADOW_BALL,MOVE_DESTINY_BOND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_SNEASLER @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_UNBURDEN | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FAKE_OUT,MOVE_DIRE_CLAW,MOVE_CLOSE_COMBAT,MOVE_THROAT_CHOP | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_ABSOL @ ITEM_SCOPE_LENS | level_offset=2 | ability=ABILITY_SUPER_LUCK | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_NIGHT_SLASH,MOVE_PSYCHO_CUT,MOVE_SUCKER_PUNCH,MOVE_SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_BRUXISH @ ITEM_CHOICE_SCARF | level_offset=3 | ability=ABILITY_STRONG_JAW | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_PSYCHIC_FANGS,MOVE_LIQUIDATION,MOVE_CRUNCH,MOVE_ICE_FANG | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_FROSLASS @ ITEM_FOCUS_SASH | level_offset=3 | ability=ABILITY_CURSED_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_ICE_BEAM,MOVE_SHADOW_BALL,MOVE_DESTINY_BOND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7515,10 +7515,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_1
 format: double
 strategy: NONE
 team:
-  1. SPECIES_GLIMMORA @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_TOXIC_DEBRIS | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_POWER_GEM,MOVE_SLUDGE_WAVE,MOVE_MORTAL_SPIN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_SWALOT @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_STICKY_HOLD | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_YAWN,MOVE_SLUDGE_BOMB,MOVE_ENCORE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_MIGHTYENA @ ITEM_CHOICE_BAND | level_offset=-1 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_PLAY_ROUGH,MOVE_FIRE_FANG,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_CAMERUPT @ ITEM_WISE_GLASSES | level_offset=-1 | ability=ABILITY_SOLID_ROCK | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_HEAT_WAVE,MOVE_EARTH_POWER,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+  1. SPECIES_GLIMMORA @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_TOXIC_DEBRIS | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_POWER_GEM,MOVE_SLUDGE_WAVE,MOVE_MORTAL_SPIN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_SWALOT @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_STICKY_HOLD | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_YAWN,MOVE_SLUDGE_BOMB,MOVE_ENCORE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_MIGHTYENA @ ITEM_CHOICE_BAND | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_PLAY_ROUGH,MOVE_FIRE_FANG,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_CAMERUPT @ ITEM_WISE_GLASSES | level_offset=2 | ability=ABILITY_SOLID_ROCK | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_HEAT_WAVE,MOVE_EARTH_POWER,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7585,10 +7585,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_14
 format: double
 strategy: TAILWIND
 team:
-  1. SPECIES_TALONFLAME @ ITEM_SHARP_BEAK | level_offset=-1 | ability=ABILITY_GALE_WINGS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAILWIND,MOVE_BRAVE_BIRD,MOVE_FLARE_BLITZ,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_NIDOQUEEN @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_SHEER_FORCE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_HOUNDOOM @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_FLASH_FIRE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HEAT_WAVE,MOVE_DARK_PULSE,MOVE_NASTY_PLOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_SKUNTANK @ ITEM_BLACK_SLUDGE | level_offset=-1 | ability=ABILITY_AFTERMATH | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_GUNK_SHOT,MOVE_SUCKER_PUNCH,MOVE_TAUNT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_TALONFLAME @ ITEM_SHARP_BEAK | level_offset=1 | ability=ABILITY_GALE_WINGS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAILWIND,MOVE_BRAVE_BIRD,MOVE_FLARE_BLITZ,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_NIDOQUEEN @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_SHEER_FORCE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_HOUNDOOM @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_FLASH_FIRE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HEAT_WAVE,MOVE_DARK_PULSE,MOVE_NASTY_PLOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_SKUNTANK @ ITEM_BLACK_SLUDGE | level_offset=1 | ability=ABILITY_AFTERMATH | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_GUNK_SHOT,MOVE_SUCKER_PUNCH,MOVE_TAUNT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7620,10 +7620,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_3
 format: double
 strategy: TRICK_ROOM
 team:
-  1. SPECIES_CLAYDOL @ ITEM_MENTAL_HERB | level_offset=0 | ability=ABILITY_LEVITATE | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_TRICK_ROOM,MOVE_EARTH_POWER,MOVE_PSYCHIC,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-  2. SPECIES_BRONZONG @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_LEVITATE | nature=NATURE_SASSY | evs=252/0/252/0/4/0 | moves=MOVE_GYRO_BALL,MOVE_HEAVY_SLAM,MOVE_TRICK_ROOM,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  3. SPECIES_RUNERIGUS @ ITEM_ROCKY_HELMET | level_offset=-1 | ability=ABILITY_WANDERING_SPIRIT | nature=NATURE_BRAVE | evs=252/0/252/0/4/0 | moves=MOVE_EARTHQUAKE,MOVE_POLTERGEIST,MOVE_WILL_O_WISP,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  4. SPECIES_GARBODOR @ ITEM_CLEAR_AMULET | level_offset=0 | ability=ABILITY_AFTERMATH | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_GUNK_SHOT,MOVE_STOMPING_TANTRUM,MOVE_TOXIC_SPIKES,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  1. SPECIES_CLAYDOL @ ITEM_MENTAL_HERB | level_offset=3 | ability=ABILITY_LEVITATE | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_TRICK_ROOM,MOVE_EARTH_POWER,MOVE_PSYCHIC,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+  2. SPECIES_BRONZONG @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_LEVITATE | nature=NATURE_SASSY | evs=252/0/252/0/4/0 | moves=MOVE_GYRO_BALL,MOVE_HEAVY_SLAM,MOVE_TRICK_ROOM,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  3. SPECIES_RUNERIGUS @ ITEM_ROCKY_HELMET | level_offset=2 | ability=ABILITY_WANDERING_SPIRIT | nature=NATURE_BRAVE | evs=252/0/252/0/4/0 | moves=MOVE_EARTHQUAKE,MOVE_POLTERGEIST,MOVE_WILL_O_WISP,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  4. SPECIES_GARBODOR @ ITEM_CLEAR_AMULET | level_offset=3 | ability=ABILITY_AFTERMATH | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_GUNK_SHOT,MOVE_STOMPING_TANTRUM,MOVE_TOXIC_SPIKES,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7725,10 +7725,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_15
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_INCINEROAR @ ITEM_SITRUS_BERRY | level_offset=0 | ability=ABILITY_INTIMIDATE | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_FAKE_OUT,MOVE_FLARE_BLITZ,MOVE_THROAT_CHOP,MOVE_PARTING_SHOT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_ARMAROUGE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_WEAK_ARMOR | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_ARMOR_CANNON,MOVE_PSYSHOCK,MOVE_HEAT_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_KLAWF @ ITEM_ROCKY_HELMET | level_offset=0 | ability=ABILITY_ANGER_SHELL | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_STONE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_KNOCK_OFF,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_MUK @ ITEM_BLACK_SLUDGE | level_offset=0 | ability=ABILITY_POISON_TOUCH | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_GUNK_SHOT,MOVE_KNOCK_OFF,MOVE_SHADOW_SNEAK,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_INCINEROAR @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_INTIMIDATE | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_FAKE_OUT,MOVE_FLARE_BLITZ,MOVE_THROAT_CHOP,MOVE_PARTING_SHOT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_ARMAROUGE @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_WEAK_ARMOR | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_ARMOR_CANNON,MOVE_PSYSHOCK,MOVE_HEAT_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_KLAWF @ ITEM_ROCKY_HELMET | level_offset=3 | ability=ABILITY_ANGER_SHELL | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_STONE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_KNOCK_OFF,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_MUK @ ITEM_BLACK_SLUDGE | level_offset=3 | ability=ABILITY_POISON_TOUCH | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_GUNK_SHOT,MOVE_KNOCK_OFF,MOVE_SHADOW_SNEAK,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7795,10 +7795,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_7
 format: double
 strategy: NONE
 team:
-  1. SPECIES_LARVESTA @ ITEM_EVIOLITE | level_offset=1 | ability=ABILITY_FLAME_BODY | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_WILL_O_WISP,MOVE_FLARE_BLITZ,MOVE_U_TURN,MOVE_MORNING_SUN | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_CENTISKORCH @ ITEM_SITRUS_BERRY | level_offset=0 | ability=ABILITY_FLAME_BODY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_COIL,MOVE_FIRE_LASH,MOVE_LEECH_LIFE,MOVE_KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_ARCANINE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_EXTREME_SPEED,MOVE_WILD_CHARGE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_WEEZING @ ITEM_BLACK_SLUDGE | level_offset=1 | ability=ABILITY_LEVITATE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_SLUDGE_BOMB,MOVE_WILL_O_WISP,MOVE_HEAT_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_LARVESTA @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_FLAME_BODY | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_WILL_O_WISP,MOVE_FLARE_BLITZ,MOVE_U_TURN,MOVE_MORNING_SUN | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_CENTISKORCH @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_FLAME_BODY | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_COIL,MOVE_FIRE_LASH,MOVE_LEECH_LIFE,MOVE_KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_ARCANINE @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_EXTREME_SPEED,MOVE_WILD_CHARGE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_WEEZING @ ITEM_BLACK_SLUDGE | level_offset=4 | ability=ABILITY_LEVITATE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_SLUDGE_BOMB,MOVE_WILL_O_WISP,MOVE_HEAT_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7830,10 +7830,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_8
 format: double
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_MUDSDALE @ ITEM_ASSAULT_VEST | level_offset=2 | ability=ABILITY_STAMINA | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_BODY_PRESS,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_FLYGON @ ITEM_YACHE_BERRY | level_offset=1 | ability=ABILITY_LEVITATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAILWIND,MOVE_DRAGON_CLAW,MOVE_EARTHQUAKE,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_PERRSERKER @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_STEELY_SPIRIT | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_IRON_HEAD,MOVE_CLOSE_COMBAT,MOVE_THROAT_CHOP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_TURTONATOR @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_SHELL_ARMOR | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_FLAMETHROWER,MOVE_DRAGON_PULSE,MOVE_BODY_PRESS,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_MUDSDALE @ ITEM_ASSAULT_VEST | level_offset=4 | ability=ABILITY_STAMINA | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_BODY_PRESS,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_FLYGON @ ITEM_YACHE_BERRY | level_offset=3 | ability=ABILITY_LEVITATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_TAILWIND,MOVE_DRAGON_CLAW,MOVE_EARTHQUAKE,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_PERRSERKER @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_STEELY_SPIRIT | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_IRON_HEAD,MOVE_CLOSE_COMBAT,MOVE_THROAT_CHOP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TURTONATOR @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_SHELL_ARMOR | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_FLAMETHROWER,MOVE_DRAGON_PULSE,MOVE_BODY_PRESS,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7935,10 +7935,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_10
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_PALOSSAND @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_WATER_COMPACTION | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_SHADOW_BALL,MOVE_EARTH_POWER,MOVE_SHORE_UP,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_TYPHLOSION_HISUI @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_BLAZE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_INFERNAL_PARADE,MOVE_HEAT_WAVE,MOVE_FOCUS_BLAST,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_MIGHTYENA @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_PLAY_ROUGH,MOVE_SUCKER_PUNCH,MOVE_HOWL | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_DUGTRIO_ALOLA @ ITEM_CLEAR_AMULET | level_offset=2 | ability=ABILITY_SAND_FORCE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_EARTHQUAKE,MOVE_IRON_HEAD,MOVE_SUCKER_PUNCH,MOVE_STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_PALOSSAND @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_WATER_COMPACTION | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_SHADOW_BALL,MOVE_EARTH_POWER,MOVE_SHORE_UP,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_TYPHLOSION_HISUI @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_BLAZE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_INFERNAL_PARADE,MOVE_HEAT_WAVE,MOVE_FOCUS_BLAST,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_MIGHTYENA @ ITEM_LIFE_ORB | level_offset=5 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_PLAY_ROUGH,MOVE_SUCKER_PUNCH,MOVE_HOWL | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_DUGTRIO_ALOLA @ ITEM_CLEAR_AMULET | level_offset=5 | ability=ABILITY_SAND_FORCE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_EARTHQUAKE,MOVE_IRON_HEAD,MOVE_SUCKER_PUNCH,MOVE_STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7970,10 +7970,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_11
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_ORTHWORM @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_EARTH_EATER | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_COIL,MOVE_IRON_HEAD,MOVE_BODY_PRESS,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_PANGORO @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_IRON_FIST | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAIN_PUNCH,MOVE_KNOCK_OFF,MOVE_PARTING_SHOT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_AGGRON @ ITEM_WEAKNESS_POLICY | level_offset=2 | ability=ABILITY_HEAVY_METAL | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAVY_SLAM,MOVE_STONE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_TOEDSCRUEL @ ITEM_ROCKY_HELMET | level_offset=2 | ability=ABILITY_MYCELIUM_MIGHT | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_SPORE,MOVE_SLUDGE_BOMB,MOVE_GIGA_DRAIN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_ORTHWORM @ ITEM_LEFTOVERS | level_offset=5 | ability=ABILITY_EARTH_EATER | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_COIL,MOVE_IRON_HEAD,MOVE_BODY_PRESS,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_PANGORO @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_IRON_FIST | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAIN_PUNCH,MOVE_KNOCK_OFF,MOVE_PARTING_SHOT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_AGGRON @ ITEM_WEAKNESS_POLICY | level_offset=5 | ability=ABILITY_HEAVY_METAL | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAVY_SLAM,MOVE_STONE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TOEDSCRUEL @ ITEM_ROCKY_HELMET | level_offset=5 | ability=ABILITY_MYCELIUM_MIGHT | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_SPORE,MOVE_SLUDGE_BOMB,MOVE_GIGA_DRAIN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8005,10 +8005,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_12
 format: double
 strategy: SUN, SETUP
 team:
-  1. SPECIES_TORKOAL @ ITEM_HEAT_ROCK | level_offset=2 | ability=ABILITY_DROUGHT | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_ERUPTION,MOVE_HEAT_WAVE,MOVE_BODY_PRESS,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-  2. SPECIES_SCOVILLAIN @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_HASTY | evs=4/0/0/252/0/252 | moves=MOVE_RAGE_POWDER,MOVE_OVERHEAT,MOVE_ENERGY_BALL,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_VOLCARONA @ ITEM_WISE_GLASSES | level_offset=2 | ability=ABILITY_FLAME_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_QUIVER_DANCE,MOVE_HEAT_WAVE,MOVE_BUG_BUZZ,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_GARCHOMP @ ITEM_CLEAR_AMULET | level_offset=2 | ability=ABILITY_ROUGH_SKIN | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_CLAW,MOVE_STOMPING_TANTRUM,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_TORKOAL @ ITEM_HEAT_ROCK | level_offset=5 | ability=ABILITY_DROUGHT | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_ERUPTION,MOVE_HEAT_WAVE,MOVE_BODY_PRESS,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+  2. SPECIES_SCOVILLAIN @ ITEM_FOCUS_SASH | level_offset=5 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_HASTY | evs=4/0/0/252/0/252 | moves=MOVE_RAGE_POWDER,MOVE_OVERHEAT,MOVE_ENERGY_BALL,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_VOLCARONA @ ITEM_WISE_GLASSES | level_offset=5 | ability=ABILITY_FLAME_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_QUIVER_DANCE,MOVE_HEAT_WAVE,MOVE_BUG_BUZZ,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_GARCHOMP @ ITEM_CLEAR_AMULET | level_offset=5 | ability=ABILITY_ROUGH_SKIN | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_CLAW,MOVE_STOMPING_TANTRUM,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8040,10 +8040,10 @@ trainer_id: TRAINER_GRUNT_MAGMA_HIDEOUT_13
 format: double
 strategy: SAND
 team:
-  1. SPECIES_TYRANITAR @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_SAND_STREAM | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_STONE_EDGE,MOVE_CRUNCH,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_STEELIX @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_SHEER_FORCE | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_WIDE_GUARD,MOVE_BODY_PRESS,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_PROBOPASS @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_MAGNET_PULL | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_POWER_GEM,MOVE_FLASH_CANNON,MOVE_THUNDER_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_RHYDON @ ITEM_EVIOLITE | level_offset=2 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_MEGAHORN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_TYRANITAR @ ITEM_ASSAULT_VEST | level_offset=5 | ability=ABILITY_SAND_STREAM | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_STONE_EDGE,MOVE_CRUNCH,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_STEELIX @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_SHEER_FORCE | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_WIDE_GUARD,MOVE_BODY_PRESS,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_PROBOPASS @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_MAGNET_PULL | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_POWER_GEM,MOVE_FLASH_CANNON,MOVE_THUNDER_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_RHYDON @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_MEGAHORN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8077,9 +8077,9 @@ ai_extra: Ace Pokemon
 strategy: SAND, SETUP
 team:
   1. SPECIES_GIGALITH @ ITEM_SMOOTH_ROCK | level_offset=2 | ability=ABILITY_SAND_STREAM | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_HEAVY_SLAM,MOVE_WIDE_GUARD,MOVE_STOMPING_TANTRUM | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_EXCADRILL @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_SAND_RUSH | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HIGH_HORSEPOWER,MOVE_IRON_HEAD,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_EXCADRILL @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_SAND_RUSH | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_HIGH_HORSEPOWER,MOVE_IRON_HEAD,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   3. SPECIES_COALOSSAL @ ITEM_WEAKNESS_POLICY | level_offset=2 | ability=ABILITY_STEAM_ENGINE | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_HEAT_WAVE,MOVE_POWER_GEM,MOVE_EARTH_POWER,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_VOLCANION @ ITEM_CHOICE_SPECS | level_offset=2 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_STEAM_ERUPTION,MOVE_HEAT_WAVE,MOVE_SLUDGE_BOMB,MOVE_EARTH_POWER | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_VOLCANION @ ITEM_CHOICE_SPECS | level_offset=3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_STEAM_ERUPTION,MOVE_HEAT_WAVE,MOVE_SLUDGE_BOMB,MOVE_EARTH_POWER | ivs=31/0/31/31/31/31 | friendship=255
   5. SPECIES_KROOKODILE @ ITEM_CLEAR_AMULET | level_offset=2 | ability=ABILITY_MOXIE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_HIGH_HORSEPOWER,MOVE_CRUNCH,MOVE_THROAT_CHOP,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
   6. SPECIES_GOLURK @ ITEM_GOLURKITE | level_offset=3 | ability=ABILITY_IRON_FIST | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_SHADOW_PUNCH,MOVE_DRAIN_PUNCH,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
@@ -8189,10 +8189,10 @@ trainer_id: TRAINER_GRUNT_AQUA_HIDEOUT_1
 format: double
 strategy: NONE
 team:
-  1. SPECIES_WAILORD @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_WATER_VEIL | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_WATER_SPOUT,MOVE_ICE_BEAM,MOVE_HYPER_VOICE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE | level_offset=-1 | ability=ABILITY_CLEAR_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_SLUDGE_BOMB,MOVE_ICY_WIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_DHELMISE @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_STEELWORKER | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_HEAVY_SLAM,MOVE_POWER_WHIP,MOVE_SHADOW_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  4. SPECIES_MANTINE @ ITEM_LEFTOVERS | level_offset=-1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_WIDE_GUARD,MOVE_TAILWIND,MOVE_SCALD,MOVE_ROOST | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_WAILORD @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_WATER_VEIL | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_WATER_SPOUT,MOVE_ICE_BEAM,MOVE_HYPER_VOICE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE | level_offset=3 | ability=ABILITY_CLEAR_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_SLUDGE_BOMB,MOVE_ICY_WIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_DHELMISE @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_STEELWORKER | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_HEAVY_SLAM,MOVE_POWER_WHIP,MOVE_SHADOW_CLAW,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  4. SPECIES_MANTINE @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_WIDE_GUARD,MOVE_TAILWIND,MOVE_SCALD,MOVE_ROOST | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8259,10 +8259,10 @@ trainer_id: TRAINER_GRUNT_AQUA_HIDEOUT_3
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_SEISMITOAD @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MUDDY_WATER,MOVE_EARTH_POWER,MOVE_GRASS_KNOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_BARBARACLE @ ITEM_WHITE_HERB | level_offset=-1 | ability=ABILITY_TOUGH_CLAWS | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SHELL_SMASH,MOVE_RAZOR_SHELL,MOVE_STONE_EDGE,MOVE_CROSS_CHOP | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_DREDNAW @ ITEM_LUM_BERRY | level_offset=0 | ability=ABILITY_SHELL_ARMOR | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SHELL_SMASH,MOVE_LIQUIDATION,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_TOXAPEX @ ITEM_BLACK_SLUDGE | level_offset=0 | ability=ABILITY_REGENERATOR | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_SURF,MOVE_TOXIC,MOVE_RECOVER,MOVE_WIDE_GUARD | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_SEISMITOAD @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MUDDY_WATER,MOVE_EARTH_POWER,MOVE_GRASS_KNOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_BARBARACLE @ ITEM_WHITE_HERB | level_offset=1 | ability=ABILITY_TOUGH_CLAWS | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SHELL_SMASH,MOVE_RAZOR_SHELL,MOVE_STONE_EDGE,MOVE_CROSS_CHOP | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_DREDNAW @ ITEM_LUM_BERRY | level_offset=2 | ability=ABILITY_SHELL_ARMOR | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SHELL_SMASH,MOVE_LIQUIDATION,MOVE_ROCK_SLIDE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_TOXAPEX @ ITEM_BLACK_SLUDGE | level_offset=2 | ability=ABILITY_REGENERATOR | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_SURF,MOVE_TOXIC,MOVE_RECOVER,MOVE_WIDE_GUARD | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8294,10 +8294,10 @@ trainer_id: TRAINER_GRUNT_AQUA_HIDEOUT_5
 format: double
 strategy: RAIN, TAILWIND
 team:
-  1. SPECIES_POLITOED @ ITEM_DAMP_ROCK | level_offset=0 | ability=ABILITY_DRIZZLE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_MUDDY_WATER,MOVE_ICY_WIND,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_BARRASKEWDA @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_LIQUIDATION,MOVE_CLOSE_COMBAT,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_KILOWATTREL @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_WIND_POWER | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDER,MOVE_HURRICANE,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_JELLICENT @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_WATER_SPOUT,MOVE_SHADOW_BALL,MOVE_WILL_O_WISP,MOVE_RECOVER | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_POLITOED @ ITEM_DAMP_ROCK | level_offset=3 | ability=ABILITY_DRIZZLE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_MUDDY_WATER,MOVE_ICY_WIND,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_BARRASKEWDA @ ITEM_FOCUS_SASH | level_offset=4 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_LIQUIDATION,MOVE_CLOSE_COMBAT,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_KILOWATTREL @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_WIND_POWER | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDER,MOVE_HURRICANE,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_JELLICENT @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_WATER_ABSORB | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_WATER_SPOUT,MOVE_SHADOW_BALL,MOVE_WILL_O_WISP,MOVE_RECOVER | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8364,10 +8364,10 @@ trainer_id: TRAINER_GRUNT_AQUA_HIDEOUT_4
 format: double
 strategy: SETUP, ALLY_COMBO
 team:
-  1. SPECIES_CROBAT @ ITEM_BLACK_SLUDGE | level_offset=2 | ability=ABILITY_INFILTRATOR | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_CROSS_POISON,MOVE_TAUNT,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_CLAWITZER @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_MEGA_LAUNCHER | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_HEAL_PULSE,MOVE_WATER_PULSE,MOVE_DARK_PULSE,MOVE_AURA_SPHERE | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_MUK_ALOLA @ ITEM_FIGY_BERRY | level_offset=1 | ability=ABILITY_POISON_TOUCH | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_KNOCK_OFF,MOVE_GUNK_SHOT,MOVE_SHADOW_SNEAK,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  4. SPECIES_EELEKTROSS @ ITEM_EELEKTROSSITE | level_offset=1 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_DRAIN_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_CROBAT @ ITEM_BLACK_SLUDGE | level_offset=5 | ability=ABILITY_INFILTRATOR | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BRAVE_BIRD,MOVE_CROSS_POISON,MOVE_TAUNT,MOVE_U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_CLAWITZER @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_MEGA_LAUNCHER | nature=NATURE_MODEST | evs=252/0/4/252/0/0 | moves=MOVE_HEAL_PULSE,MOVE_WATER_PULSE,MOVE_DARK_PULSE,MOVE_AURA_SPHERE | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_MUK_ALOLA @ ITEM_FIGY_BERRY | level_offset=4 | ability=ABILITY_POISON_TOUCH | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_KNOCK_OFF,MOVE_GUNK_SHOT,MOVE_SHADOW_SNEAK,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  4. SPECIES_EELEKTROSS @ ITEM_EELEKTROSSITE | level_offset=4 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_DRAIN_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8434,10 +8434,10 @@ trainer_id: TRAINER_GRUNT_AQUA_HIDEOUT_8
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_GYARADOS @ ITEM_LUM_BERRY | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_WATERFALL,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_RELICANTH @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_GOLISOPOD @ ITEM_CHOICE_BAND | level_offset=2 | ability=ABILITY_EMERGENCY_EXIT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FIRST_IMPRESSION,MOVE_LIQUIDATION,MOVE_CLOSE_COMBAT,MOVE_LEECH_LIFE | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_WALREIN @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_THICK_FAT | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_ICICLE_SPEAR,MOVE_SURF,MOVE_PROTECT,MOVE_ENCORE | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_GYARADOS @ ITEM_LUM_BERRY | level_offset=4 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DRAGON_DANCE,MOVE_WATERFALL,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_RELICANTH @ ITEM_LIFE_ORB | level_offset=4 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_GOLISOPOD @ ITEM_CHOICE_BAND | level_offset=4 | ability=ABILITY_EMERGENCY_EXIT | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_FIRST_IMPRESSION,MOVE_LIQUIDATION,MOVE_CLOSE_COMBAT,MOVE_LEECH_LIFE | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_WALREIN @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_THICK_FAT | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_ICICLE_SPEAR,MOVE_SURF,MOVE_PROTECT,MOVE_ENCORE | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8581,10 +8581,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_LAPRAS @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_FREEZE_DRY,MOVE_HYDRO_PUMP,MOVE_ICY_WIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_AUDINO @ ITEM_MENTAL_HERB | level_offset=0 | ability=ABILITY_REGENERATOR | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_WISH,MOVE_PROTECT,MOVE_HELPING_HAND,MOVE_THROAT_CHOP | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_ZWEILOUS @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_HUSTLE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_BODY_SLAM,MOVE_ZEN_HEADBUTT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_SWANNA @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_BIG_PECKS | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HURRICANE,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_ROOST | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_LAPRAS @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_FREEZE_DRY,MOVE_HYDRO_PUMP,MOVE_ICY_WIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_AUDINO @ ITEM_MENTAL_HERB | level_offset=3 | ability=ABILITY_REGENERATOR | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_WISH,MOVE_PROTECT,MOVE_HELPING_HAND,MOVE_THROAT_CHOP | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_ZWEILOUS @ ITEM_EVIOLITE | level_offset=3 | ability=ABILITY_HUSTLE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CRUNCH,MOVE_BODY_SLAM,MOVE_ZEN_HEADBUTT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_SWANNA @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_BIG_PECKS | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HURRICANE,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_ROOST | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8653,10 +8653,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_CRAWDAUNT @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SWORDS_DANCE,MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_AQUA_JET | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_KINGLER @ ITEM_KINGLERITE | level_offset=0 | ability=ABILITY_HYPER_CUTTER | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_PROTECT,MOVE_X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_CRABOMINABLE @ ITEM_MUSCLE_BAND | level_offset=0 | ability=ABILITY_IRON_FIST | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_ICE_HAMMER,MOVE_DRAIN_PUNCH,MOVE_MACH_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_DRACOVISH @ ITEM_CHOICE_SCARF | level_offset=0 | ability=ABILITY_STRONG_JAW | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FISHIOUS_REND,MOVE_DRAGON_RUSH,MOVE_PSYCHIC_FANGS,MOVE_CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_CRAWDAUNT @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_SWORDS_DANCE,MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_AQUA_JET | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_KINGLER @ ITEM_KINGLERITE | level_offset=3 | ability=ABILITY_HYPER_CUTTER | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_PROTECT,MOVE_X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_CRABOMINABLE @ ITEM_MUSCLE_BAND | level_offset=3 | ability=ABILITY_IRON_FIST | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_ICE_HAMMER,MOVE_DRAIN_PUNCH,MOVE_MACH_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_DRACOVISH @ ITEM_CHOICE_SCARF | level_offset=3 | ability=ABILITY_STRONG_JAW | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_FISHIOUS_REND,MOVE_DRAGON_RUSH,MOVE_PSYCHIC_FANGS,MOVE_CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -8726,10 +8726,10 @@ format: double
 ai_extra: Conservative
 strategy: REDIRECTION, TAILWIND
 team:
-  1. SPECIES_FEAROW @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DRILL_PECK,MOVE_DRILL_RUN,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_ZEBSTRIKA @ ITEM_WISE_GLASSES | level_offset=0 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_OVERHEAT,MOVE_VOLT_SWITCH,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_BUTTERFREE @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_COMPOUND_EYES | nature=NATURE_TIMID | evs=252/0/4/0/0/252 | moves=MOVE_SLEEP_POWDER,MOVE_RAGE_POWDER,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_CORSOLA_GALAR @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_CURSED_BODY | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_WILL_O_WISP,MOVE_STRENGTH_SAP,MOVE_NIGHT_SHADE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_FEAROW @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DRILL_PECK,MOVE_DRILL_RUN,MOVE_U_TURN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_ZEBSTRIKA @ ITEM_WISE_GLASSES | level_offset=2 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_OVERHEAT,MOVE_VOLT_SWITCH,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_BUTTERFREE @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_COMPOUND_EYES | nature=NATURE_TIMID | evs=252/0/4/0/0/252 | moves=MOVE_SLEEP_POWDER,MOVE_RAGE_POWDER,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_CORSOLA_GALAR @ ITEM_EVIOLITE | level_offset=2 | ability=ABILITY_CURSED_BODY | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_WILL_O_WISP,MOVE_STRENGTH_SAP,MOVE_NIGHT_SHADE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -9763,12 +9763,12 @@ format: double
 ai_extra: Conservative
 strategy: TAILWIND, SETUP
 team:
-  1. SPECIES_ARCANINE @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_EXTREME_SPEED,MOVE_CLOSE_COMBAT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_CORVIKNIGHT @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_MIRROR_ARMOR | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_BRAVE_BIRD,MOVE_BODY_PRESS,MOVE_TAILWIND,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_PROBOPASS @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_MAGNET_PULL | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FLASH_CANNON,MOVE_POWER_GEM,MOVE_THUNDER_WAVE,MOVE_WIDE_GUARD | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_SCEPTILE @ ITEM_WHITE_HERB | level_offset=1 | ability=ABILITY_UNBURDEN | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_LEAF_STORM,MOVE_DRAGON_PULSE,MOVE_FOCUS_BLAST,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  5. SPECIES_VOLCARONA @ ITEM_HEAVY_DUTY_BOOTS | level_offset=1 | ability=ABILITY_FLAME_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HEAT_WAVE,MOVE_BUG_BUZZ,MOVE_QUIVER_DANCE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  6. SPECIES_PIDGEOT @ ITEM_PIDGEOTITE | level_offset=2 | ability=ABILITY_NO_GUARD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HURRICANE,MOVE_HEAT_WAVE,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_ARCANINE @ ITEM_CLEAR_AMULET | level_offset=3 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_FLARE_BLITZ,MOVE_EXTREME_SPEED,MOVE_CLOSE_COMBAT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_CORVIKNIGHT @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_MIRROR_ARMOR | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_BRAVE_BIRD,MOVE_BODY_PRESS,MOVE_TAILWIND,MOVE_ROOST | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_PROBOPASS @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_MAGNET_PULL | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FLASH_CANNON,MOVE_POWER_GEM,MOVE_THUNDER_WAVE,MOVE_WIDE_GUARD | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_SCEPTILE @ ITEM_WHITE_HERB | level_offset=3 | ability=ABILITY_UNBURDEN | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_LEAF_STORM,MOVE_DRAGON_PULSE,MOVE_FOCUS_BLAST,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  5. SPECIES_VOLCARONA @ ITEM_HEAVY_DUTY_BOOTS | level_offset=3 | ability=ABILITY_FLAME_BODY | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HEAT_WAVE,MOVE_BUG_BUZZ,MOVE_QUIVER_DANCE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  6. SPECIES_PIDGEOT @ ITEM_PIDGEOTITE | level_offset=4 | ability=ABILITY_NO_GUARD | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_HURRICANE,MOVE_HEAT_WAVE,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -9801,10 +9801,10 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_MILTANK @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_SCRAPPY | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BODY_SLAM,MOVE_ROCK_SLIDE,MOVE_HELPING_HAND,MOVE_MILK_DRINK | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_AZUMARILL @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_HUGE_POWER | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_AQUA_JET,MOVE_PLAY_ROUGH,MOVE_KNOCK_OFF,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_FURFROU_KABUKI @ ITEM_MENTAL_HERB | level_offset=1 | ability=ABILITY_FUR_COAT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_U_TURN,MOVE_SUCKER_PUNCH,MOVE_THUNDER_WAVE,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_WHISCASH @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_OBLIVIOUS | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_DRAGON_DANCE,MOVE_HIGH_HORSEPOWER,MOVE_WATERFALL,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_MILTANK @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_SCRAPPY | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_BODY_SLAM,MOVE_ROCK_SLIDE,MOVE_HELPING_HAND,MOVE_MILK_DRINK | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_AZUMARILL @ ITEM_CLEAR_AMULET | level_offset=3 | ability=ABILITY_HUGE_POWER | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_AQUA_JET,MOVE_PLAY_ROUGH,MOVE_KNOCK_OFF,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_FURFROU_KABUKI @ ITEM_MENTAL_HERB | level_offset=3 | ability=ABILITY_FUR_COAT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_U_TURN,MOVE_SUCKER_PUNCH,MOVE_THUNDER_WAVE,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_WHISCASH @ ITEM_LIFE_ORB | level_offset=4 | ability=ABILITY_OBLIVIOUS | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_DRAGON_DANCE,MOVE_HIGH_HORSEPOWER,MOVE_WATERFALL,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10377,10 +10377,10 @@ trainer_id: TRAINER_GRUNT_SEAFLOOR_CAVERN_5
 format: double
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_MANDIBUZZ @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_OVERCOAT | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_TAILWIND,MOVE_TAUNT,MOVE_FOUL_PLAY,MOVE_KNOCK_OFF | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_GYARADOS @ ITEM_LUM_BERRY | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_DRAGON_DANCE,MOVE_PROTECT,MOVE_CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_TOXAPEX @ ITEM_BLACK_SLUDGE | level_offset=2 | ability=ABILITY_REGENERATOR | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_LIQUIDATION,MOVE_HAZE,MOVE_RECOVER,MOVE_BANEFUL_BUNKER | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_SKUNTANK @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_AFTERMATH | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SUCKER_PUNCH,MOVE_POISON_JAB,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_MANDIBUZZ @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_OVERCOAT | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_TAILWIND,MOVE_TAUNT,MOVE_FOUL_PLAY,MOVE_KNOCK_OFF | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_GYARADOS @ ITEM_LUM_BERRY | level_offset=5 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_DRAGON_DANCE,MOVE_PROTECT,MOVE_CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_TOXAPEX @ ITEM_BLACK_SLUDGE | level_offset=5 | ability=ABILITY_REGENERATOR | nature=NATURE_IMPISH | evs=252/0/252/0/4/0 | moves=MOVE_LIQUIDATION,MOVE_HAZE,MOVE_RECOVER,MOVE_BANEFUL_BUNKER | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_SKUNTANK @ ITEM_LIFE_ORB | level_offset=6 | ability=ABILITY_AFTERMATH | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_SUCKER_PUNCH,MOVE_POISON_JAB,MOVE_CRUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10412,10 +10412,10 @@ trainer_id: TRAINER_GRUNT_SEAFLOOR_CAVERN_3
 format: double
 strategy: RAIN
 team:
-  1. SPECIES_WAILORD @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_DRIZZLE | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_WATER_SPOUT,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_SEAKING @ ITEM_CLEAR_AMULET | level_offset=3 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_THROAT_CHOP,MOVE_DRILL_RUN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_DRAPION @ ITEM_SCOPE_LENS | level_offset=3 | ability=ABILITY_SNIPER | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CROSS_POISON,MOVE_NIGHT_SLASH,MOVE_ICE_FANG,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_MORPEKO @ ITEM_MUSCLE_BAND | level_offset=2 | ability=ABILITY_HUNGER_SWITCH | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_AURA_WHEEL,MOVE_CRUNCH,MOVE_PARTING_SHOT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_WAILORD @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_DRIZZLE | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_WATER_SPOUT,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_SEAKING @ ITEM_CLEAR_AMULET | level_offset=6 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_WATERFALL,MOVE_THROAT_CHOP,MOVE_DRILL_RUN,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_DRAPION @ ITEM_SCOPE_LENS | level_offset=6 | ability=ABILITY_SNIPER | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CROSS_POISON,MOVE_NIGHT_SLASH,MOVE_ICE_FANG,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_MORPEKO @ ITEM_MUSCLE_BAND | level_offset=5 | ability=ABILITY_HUNGER_SWITCH | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_AURA_WHEEL,MOVE_CRUNCH,MOVE_PARTING_SHOT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10520,12 +10520,12 @@ trainer_id: TRAINER_ANDREA
 format: double
 strategy: SETUP
 team:
-  1. SPECIES_CLOYSTER @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_SKILL_LINK | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ICICLE_SPEAR,MOVE_ROCK_BLAST,MOVE_DRILL_RUN,MOVE_SHELL_SMASH | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_FLOATZEL @ ITEM_CHOICE_BAND | level_offset=2 | ability=ABILITY_WATER_VEIL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_WAVE_CRASH,MOVE_ICE_SPINNER,MOVE_AQUA_JET,MOVE_LOW_KICK | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_JELLICENT @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_MUDDY_WATER,MOVE_SHADOW_BALL,MOVE_RECOVER,MOVE_WILL_O_WISP | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_QWILFISH @ ITEM_ROCKY_HELMET | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_LIQUIDATION,MOVE_POISON_JAB,MOVE_SPIKES,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  5. SPECIES_SIMIPOUR @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_TORRENT | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_GRASS_KNOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  6. SPECIES_BASCULIN @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WAVE_CRASH,MOVE_AQUA_JET,MOVE_CRUNCH,MOVE_HEAD_SMASH | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_CLOYSTER @ ITEM_FOCUS_SASH | level_offset=5 | ability=ABILITY_SKILL_LINK | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ICICLE_SPEAR,MOVE_ROCK_BLAST,MOVE_DRILL_RUN,MOVE_SHELL_SMASH | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_FLOATZEL @ ITEM_CHOICE_BAND | level_offset=5 | ability=ABILITY_WATER_VEIL | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_WAVE_CRASH,MOVE_ICE_SPINNER,MOVE_AQUA_JET,MOVE_LOW_KICK | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_JELLICENT @ ITEM_LEFTOVERS | level_offset=5 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_MUDDY_WATER,MOVE_SHADOW_BALL,MOVE_RECOVER,MOVE_WILL_O_WISP | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_QWILFISH @ ITEM_ROCKY_HELMET | level_offset=5 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | evs=252/252/4/0/0/0 | moves=MOVE_LIQUIDATION,MOVE_POISON_JAB,MOVE_SPIKES,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  5. SPECIES_SIMIPOUR @ ITEM_LIFE_ORB | level_offset=5 | ability=ABILITY_TORRENT | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_GRASS_KNOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  6. SPECIES_BASCULIN @ ITEM_ASSAULT_VEST | level_offset=6 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_WAVE_CRASH,MOVE_AQUA_JET,MOVE_CRUNCH,MOVE_HEAD_SMASH | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10595,12 +10595,12 @@ trainer_id: TRAINER_BRIANNA
 format: double
 strategy: TRICK_ROOM
 team:
-  1. SPECIES_SLOWKING @ ITEM_MENTAL_HERB | level_offset=2 | ability=ABILITY_REGENERATOR | nature=NATURE_SASSY | evs=252/0/4/0/252/0 | moves=MOVE_TRICK_ROOM,MOVE_SCALD,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-  2. SPECIES_RELICANTH @ ITEM_CHOICE_BAND | level_offset=2 | ability=ABILITY_ROCK_HEAD | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/0 | friendship=255
-  3. SPECIES_CURSOLA @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_PERISH_BODY | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_SHADOW_BALL,MOVE_ICE_BEAM,MOVE_STRENGTH_SAP,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-  4. SPECIES_QUAGSIRE @ ITEM_ROCKY_HELMET | level_offset=2 | ability=ABILITY_UNAWARE | nature=NATURE_RELAXED | evs=252/0/252/0/4/0 | moves=MOVE_LIQUIDATION,MOVE_HIGH_HORSEPOWER,MOVE_RECOVER,MOVE_YAWN | ivs=31/31/31/31/31/0 | friendship=255
-  5. SPECIES_OVERQWIL @ ITEM_ASSAULT_VEST | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_BARB_BARRAGE,MOVE_LIQUIDATION,MOVE_CRUNCH,MOVE_AQUA_JET | ivs=31/31/31/31/31/0 | friendship=255
-  6. SPECIES_AVALUGG @ ITEM_LEFTOVERS | level_offset=3 | ability=ABILITY_STURDY | nature=NATURE_BRAVE | evs=252/0/252/0/4/0 | moves=MOVE_AVALANCHE,MOVE_BODY_PRESS,MOVE_WIDE_GUARD,MOVE_RECOVER | ivs=31/31/31/31/31/0 | friendship=255
+  1. SPECIES_SLOWKING @ ITEM_MENTAL_HERB | level_offset=4 | ability=ABILITY_REGENERATOR | nature=NATURE_SASSY | evs=252/0/4/0/252/0 | moves=MOVE_TRICK_ROOM,MOVE_SCALD,MOVE_ICE_BEAM,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+  2. SPECIES_RELICANTH @ ITEM_CHOICE_BAND | level_offset=4 | ability=ABILITY_ROCK_HEAD | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_HEAD_SMASH,MOVE_WATERFALL,MOVE_STOMPING_TANTRUM,MOVE_DOUBLE_EDGE | ivs=31/31/31/31/31/0 | friendship=255
+  3. SPECIES_CURSOLA @ ITEM_FOCUS_SASH | level_offset=4 | ability=ABILITY_PERISH_BODY | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_SHADOW_BALL,MOVE_ICE_BEAM,MOVE_STRENGTH_SAP,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+  4. SPECIES_QUAGSIRE @ ITEM_ROCKY_HELMET | level_offset=4 | ability=ABILITY_UNAWARE | nature=NATURE_RELAXED | evs=252/0/252/0/4/0 | moves=MOVE_LIQUIDATION,MOVE_HIGH_HORSEPOWER,MOVE_RECOVER,MOVE_YAWN | ivs=31/31/31/31/31/0 | friendship=255
+  5. SPECIES_OVERQWIL @ ITEM_ASSAULT_VEST | level_offset=4 | ability=ABILITY_INTIMIDATE | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_BARB_BARRAGE,MOVE_LIQUIDATION,MOVE_CRUNCH,MOVE_AQUA_JET | ivs=31/31/31/31/31/0 | friendship=255
+  6. SPECIES_AVALUGG @ ITEM_LEFTOVERS | level_offset=5 | ability=ABILITY_STURDY | nature=NATURE_BRAVE | evs=252/0/252/0/4/0 | moves=MOVE_AVALANCHE,MOVE_BODY_PRESS,MOVE_WIDE_GUARD,MOVE_RECOVER | ivs=31/31/31/31/31/0 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -11004,10 +11004,10 @@ trainer_id: TRAINER_EVERETT
 format: double
 strategy: PERISH_TRAP
 team:
-  1. SPECIES_LAPRAS @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_PERISH_SONG,MOVE_FREEZE_DRY,MOVE_LIFE_DEW,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_WOBBUFFET @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_SHADOW_TAG | nature=NATURE_CALM | evs=252/0/128/0/128/0 | moves=MOVE_COUNTER,MOVE_MIRROR_COAT,MOVE_ENCORE,MOVE_SAFEGUARD | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_BEHEEYEM @ ITEM_MENTAL_HERB | level_offset=1 | ability=ABILITY_ANALYTIC | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_PSYCHIC,MOVE_TRICK_ROOM,MOVE_ENERGY_BALL,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-  4. SPECIES_MUSHARNA @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_FOREWARN | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_PSYCHIC,MOVE_YAWN,MOVE_MOONLIGHT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_LAPRAS @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_WATER_ABSORB | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_PERISH_SONG,MOVE_FREEZE_DRY,MOVE_LIFE_DEW,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_WOBBUFFET @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_SHADOW_TAG | nature=NATURE_CALM | evs=252/0/128/0/128/0 | moves=MOVE_COUNTER,MOVE_MIRROR_COAT,MOVE_ENCORE,MOVE_SAFEGUARD | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_BEHEEYEM @ ITEM_MENTAL_HERB | level_offset=4 | ability=ABILITY_ANALYTIC | nature=NATURE_QUIET | evs=252/0/4/252/0/0 | moves=MOVE_PSYCHIC,MOVE_TRICK_ROOM,MOVE_ENERGY_BALL,MOVE_PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+  4. SPECIES_MUSHARNA @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_FOREWARN | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_PSYCHIC,MOVE_YAWN,MOVE_MOONLIGHT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -11040,12 +11040,12 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_DELCATTY @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_WONDER_SKIN | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FAKE_OUT,MOVE_HELPING_HAND,MOVE_THUNDER_WAVE,MOVE_HEAL_BELL | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_GARDEVOIR @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_TRACE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_PSYCHIC,MOVE_MOONBLAST,MOVE_MYSTICAL_FIRE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_ALTARIA @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_NATURAL_CURE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_DRAGON_PULSE,MOVE_FLAMETHROWER,MOVE_TAILWIND,MOVE_ROOST | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_MAGNEZONE @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_MAGNET_PULL | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_FLASH_CANNON,MOVE_ELECTROWEB,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  5. SPECIES_ROSELIA @ ITEM_EVIOLITE | level_offset=1 | ability=ABILITY_NATURAL_CURE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_SLUDGE_BOMB,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  6. SPECIES_GALLADE @ ITEM_GALLADITE | level_offset=3 | ability=ABILITY_SHARPNESS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_PSYCHO_CUT,MOVE_SACRED_SWORD,MOVE_NIGHT_SLASH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_DELCATTY @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_WONDER_SKIN | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FAKE_OUT,MOVE_HELPING_HAND,MOVE_THUNDER_WAVE,MOVE_HEAL_BELL | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_GARDEVOIR @ ITEM_LIFE_ORB | level_offset=5 | ability=ABILITY_TRACE | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_PSYCHIC,MOVE_MOONBLAST,MOVE_MYSTICAL_FIRE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_ALTARIA @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_NATURAL_CURE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_DRAGON_PULSE,MOVE_FLAMETHROWER,MOVE_TAILWIND,MOVE_ROOST | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_MAGNEZONE @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_MAGNET_PULL | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_THUNDERBOLT,MOVE_FLASH_CANNON,MOVE_ELECTROWEB,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  5. SPECIES_ROSELIA @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_NATURAL_CURE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_SLUDGE_BOMB,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  6. SPECIES_GALLADE @ ITEM_GALLADITE | level_offset=6 | ability=ABILITY_SHARPNESS | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_PSYCHO_CUT,MOVE_SACRED_SWORD,MOVE_NIGHT_SLASH,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -11114,12 +11114,12 @@ trainer_id: TRAINER_ALBERT
 format: double
 strategy: NONE
 team:
-  1. SPECIES_RHYPERIOR @ ITEM_WEAKNESS_POLICY | level_offset=1 | ability=ABILITY_SOLID_ROCK | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  2. SPECIES_SABLEYE @ ITEM_MENTAL_HERB | level_offset=1 | ability=ABILITY_PRANKSTER | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_FAKE_OUT,MOVE_QUASH,MOVE_ENCORE,MOVE_NIGHT_SHADE | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_WEAVILE @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_PRESSURE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_KNOCK_OFF,MOVE_ICICLE_CRASH,MOVE_LOW_KICK,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  4. SPECIES_URSALUNA @ ITEM_FLAME_ORB | level_offset=1 | ability=ABILITY_GUTS | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_FACADE,MOVE_HEADLONG_RUSH,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  5. SPECIES_GUZZLORD @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_BEAST_BOOST | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_CRUNCH,MOVE_HEAVY_SLAM,MOVE_HIGH_HORSEPOWER,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  6. SPECIES_GLIMMORA @ ITEM_GLIMMORANITE | level_offset=2 | ability=ABILITY_TOXIC_DEBRIS | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_POWER_GEM,MOVE_SLUDGE_BOMB,MOVE_EARTH_POWER,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_RHYPERIOR @ ITEM_WEAKNESS_POLICY | level_offset=4 | ability=ABILITY_SOLID_ROCK | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  2. SPECIES_SABLEYE @ ITEM_MENTAL_HERB | level_offset=4 | ability=ABILITY_PRANKSTER | nature=NATURE_CAREFUL | evs=252/0/4/0/252/0 | moves=MOVE_FAKE_OUT,MOVE_QUASH,MOVE_ENCORE,MOVE_NIGHT_SHADE | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_WEAVILE @ ITEM_CLEAR_AMULET | level_offset=4 | ability=ABILITY_PRESSURE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_KNOCK_OFF,MOVE_ICICLE_CRASH,MOVE_LOW_KICK,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  4. SPECIES_URSALUNA @ ITEM_FLAME_ORB | level_offset=4 | ability=ABILITY_GUTS | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_FACADE,MOVE_HEADLONG_RUSH,MOVE_ICE_PUNCH,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  5. SPECIES_GUZZLORD @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_BEAST_BOOST | nature=NATURE_BRAVE | evs=252/252/4/0/0/0 | moves=MOVE_CRUNCH,MOVE_HEAVY_SLAM,MOVE_HIGH_HORSEPOWER,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  6. SPECIES_GLIMMORA @ ITEM_GLIMMORANITE | level_offset=5 | ability=ABILITY_TOXIC_DEBRIS | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_POWER_GEM,MOVE_SLUDGE_BOMB,MOVE_EARTH_POWER,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -11152,12 +11152,12 @@ format: double
 ai_extra: Ace Pokemon
 strategy: SETUP, TAILWIND
 team:
-  1. SPECIES_FORRETRESS @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_STURDY | nature=NATURE_RELAXED | evs=252/0/252/0/4/0 | moves=MOVE_GYRO_BALL,MOVE_STEALTH_ROCK,MOVE_VOLT_SWITCH,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-  2. SPECIES_LILLIGANT @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_OWN_TEMPO | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_LEAF_STORM,MOVE_SLEEP_POWDER,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_SALAZZLE @ ITEM_WISE_GLASSES | level_offset=1 | ability=ABILITY_CORROSION | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_FAKE_OUT,MOVE_HEAT_WAVE,MOVE_SLUDGE_BOMB,MOVE_TOXIC | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_AERODACTYL @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_UNNERVE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ROCK_SLIDE,MOVE_TAILWIND,MOVE_TAUNT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  5. SPECIES_VAPOREON @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  6. SPECIES_TATSUGIRI_CURLY @ ITEM_TATSUGIRINITE | level_offset=2 | ability=ABILITY_STORM_DRAIN | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_HYDRO_PUMP,MOVE_NASTY_PLOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_FORRETRESS @ ITEM_SITRUS_BERRY | level_offset=4 | ability=ABILITY_STURDY | nature=NATURE_RELAXED | evs=252/0/252/0/4/0 | moves=MOVE_GYRO_BALL,MOVE_STEALTH_ROCK,MOVE_VOLT_SWITCH,MOVE_PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+  2. SPECIES_LILLIGANT @ ITEM_FOCUS_SASH | level_offset=4 | ability=ABILITY_OWN_TEMPO | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_LEAF_STORM,MOVE_SLEEP_POWDER,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_SALAZZLE @ ITEM_WISE_GLASSES | level_offset=4 | ability=ABILITY_CORROSION | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_FAKE_OUT,MOVE_HEAT_WAVE,MOVE_SLUDGE_BOMB,MOVE_TOXIC | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_AERODACTYL @ ITEM_CLEAR_AMULET | level_offset=4 | ability=ABILITY_UNNERVE | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ROCK_SLIDE,MOVE_TAILWIND,MOVE_TAUNT,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  5. SPECIES_VAPOREON @ ITEM_LEFTOVERS | level_offset=4 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  6. SPECIES_TATSUGIRI_CURLY @ ITEM_TATSUGIRINITE | level_offset=5 | ability=ABILITY_STORM_DRAIN | nature=NATURE_MODEST | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_HYDRO_PUMP,MOVE_NASTY_PLOT,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -11191,12 +11191,12 @@ ai_extra: Ace Pokemon
 strategy: REDIRECTION, SETUP, TAILWIND
 tactic: SUPPRESS WEEZING NONE SLAKING
 team:
-  1. SPECIES_SLAKING @ ITEM_CHOICE_SCARF | level_offset=1 | ability=ABILITY_TRUANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-  2. SPECIES_WEEZING @ ITEM_BLACK_SLUDGE | level_offset=1 | ability=ABILITY_NEUTRALIZING_GAS | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_SLUDGE_BOMB,MOVE_WILL_O_WISP,MOVE_HEAT_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  3. SPECIES_BUTTERFREE @ ITEM_MENTAL_HERB | level_offset=1 | ability=ABILITY_COMPOUND_EYES | nature=NATURE_TIMID | evs=252/0/4/0/0/252 | moves=MOVE_SLEEP_POWDER,MOVE_RAGE_POWDER,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_DURANT @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_TRUANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ENTRAINMENT,MOVE_IRON_HEAD,MOVE_X_SCISSOR,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  5. SPECIES_TERRAKION @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_JUSTIFIED | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CLOSE_COMBAT,MOVE_ROCK_SLIDE,MOVE_QUICK_GUARD,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  6. SPECIES_ZYGARDE_50_POWER_CONSTRUCT @ ITEM_ZYGARDITE | level_offset=2 | ability=ABILITY_POWER_CONSTRUCT | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_THOUSAND_ARROWS,MOVE_DRAGON_DANCE,MOVE_GLARE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  1. SPECIES_SLAKING @ ITEM_CHOICE_SCARF | level_offset=3 | ability=ABILITY_TRUANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_DOUBLE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+  2. SPECIES_WEEZING @ ITEM_BLACK_SLUDGE | level_offset=3 | ability=ABILITY_NEUTRALIZING_GAS | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_SLUDGE_BOMB,MOVE_WILL_O_WISP,MOVE_HEAT_WAVE,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  3. SPECIES_BUTTERFREE @ ITEM_MENTAL_HERB | level_offset=3 | ability=ABILITY_COMPOUND_EYES | nature=NATURE_TIMID | evs=252/0/4/0/0/252 | moves=MOVE_SLEEP_POWDER,MOVE_RAGE_POWDER,MOVE_TAILWIND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_DURANT @ ITEM_FOCUS_SASH | level_offset=3 | ability=ABILITY_TRUANT | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_ENTRAINMENT,MOVE_IRON_HEAD,MOVE_X_SCISSOR,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  5. SPECIES_TERRAKION @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_JUSTIFIED | nature=NATURE_JOLLY | evs=4/252/0/0/0/252 | moves=MOVE_CLOSE_COMBAT,MOVE_ROCK_SLIDE,MOVE_QUICK_GUARD,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  6. SPECIES_ZYGARDE_50_POWER_CONSTRUCT @ ITEM_ZYGARDITE | level_offset=4 | ability=ABILITY_POWER_CONSTRUCT | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_THOUSAND_ARROWS,MOVE_DRAGON_DANCE,MOVE_GLARE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -11341,12 +11341,12 @@ format: double
 ai_extra: Conservative
 strategy: SETUP
 team:
-  1. SPECIES_MEGANIUM @ ITEM_MEGANIUMITE | level_offset=2 | ability=ABILITY_TRIAGE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_HEAL_PULSE,MOVE_GIGA_DRAIN,MOVE_LIGHT_SCREEN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  2. SPECIES_MACHAMP @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_NO_GUARD | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DYNAMIC_PUNCH,MOVE_WIDE_GUARD,MOVE_STONE_EDGE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-  3. SPECIES_CHANSEY @ ITEM_EVIOLITE | level_offset=2 | ability=ABILITY_NATURAL_CURE | nature=NATURE_BOLD | evs=252/0/4/0/252/0 | moves=MOVE_SEISMIC_TOSS,MOVE_SOFT_BOILED,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  4. SPECIES_HYDREIGON @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_DARK_PULSE,MOVE_FIRE_BLAST,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-  5. SPECIES_PROBOPASS @ ITEM_SITRUS_BERRY | level_offset=2 | ability=ABILITY_MAGNET_PULL | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FLASH_CANNON,MOVE_POWER_GEM,MOVE_THUNDER_WAVE,MOVE_STEALTH_ROCK | ivs=31/0/31/31/31/31 | friendship=255
-  6. SPECIES_UMBREON @ ITEM_LEFTOVERS | level_offset=2 | ability=ABILITY_SYNCHRONIZE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FOUL_PLAY,MOVE_SNARL,MOVE_WISH,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  1. SPECIES_MEGANIUM @ ITEM_MEGANIUMITE | level_offset=5 | ability=ABILITY_TRIAGE | nature=NATURE_BOLD | evs=252/0/252/0/4/0 | moves=MOVE_HEAL_PULSE,MOVE_GIGA_DRAIN,MOVE_LIGHT_SCREEN,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  2. SPECIES_MACHAMP @ ITEM_CLEAR_AMULET | level_offset=4 | ability=ABILITY_NO_GUARD | nature=NATURE_ADAMANT | evs=4/252/0/0/0/252 | moves=MOVE_DYNAMIC_PUNCH,MOVE_WIDE_GUARD,MOVE_STONE_EDGE,MOVE_PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+  3. SPECIES_CHANSEY @ ITEM_EVIOLITE | level_offset=5 | ability=ABILITY_NATURAL_CURE | nature=NATURE_BOLD | evs=252/0/4/0/252/0 | moves=MOVE_SEISMIC_TOSS,MOVE_SOFT_BOILED,MOVE_HELPING_HAND,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  4. SPECIES_HYDREIGON @ ITEM_LIFE_ORB | level_offset=5 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | evs=4/0/0/252/0/252 | moves=MOVE_DRACO_METEOR,MOVE_DARK_PULSE,MOVE_FIRE_BLAST,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+  5. SPECIES_PROBOPASS @ ITEM_SITRUS_BERRY | level_offset=5 | ability=ABILITY_MAGNET_PULL | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FLASH_CANNON,MOVE_POWER_GEM,MOVE_THUNDER_WAVE,MOVE_STEALTH_ROCK | ivs=31/0/31/31/31/31 | friendship=255
+  6. SPECIES_UMBREON @ ITEM_LEFTOVERS | level_offset=5 | ability=ABILITY_SYNCHRONIZE | nature=NATURE_CALM | evs=252/0/4/0/252/0 | moves=MOVE_FOUL_PLAY,MOVE_SNARL,MOVE_WISH,MOVE_PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
