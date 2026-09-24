@@ -513,3 +513,20 @@ TEST("Campaign gates: first League admission requires every Gym Badge")
             FlagClear(FLAG_BADGE01_GET + badge);
     }
 }
+
+TEST("Level cap milestones count in order: the Magma Hideout before Winona keeps cap 55")
+{
+    static const u16 badges[] = {FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET,
+                                 FLAG_BADGE04_GET, FLAG_BADGE05_GET};
+    for (u32 i = 0; i < ARRAY_COUNT(badges); i++)
+        FlagSet(badges[i]);
+    FlagClear(FLAG_BADGE06_GET);
+    FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+    EXPECT_EQ(GetCurrentLevelCap(), 55);
+    FlagSet(FLAG_BADGE06_GET);
+    EXPECT_EQ(GetCurrentLevelCap(), 65);
+    FlagClear(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+    FlagClear(FLAG_BADGE06_GET);
+    for (u32 i = 0; i < ARRAY_COUNT(badges); i++)
+        FlagClear(badges[i]);
+}

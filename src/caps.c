@@ -36,12 +36,18 @@ u32 GetCurrentLevelCap(void)
 
     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
     {
-        for (i = ARRAY_COUNT(sCampaignMilestones); i > 0; i--)
+        // Milestones count in order: the cap stops at the first one not yet
+        // reached. Nothing on Routes 120-121, Mt. Pyre or the Magma Hideout
+        // checks Winona's badge, so a later flag alone must not skip a step.
+        u32 cap = 14;
+        for (i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
         {
-            if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(sCampaignMilestones[i - 1].flag))
-                return sCampaignMilestones[i - 1].cap;
+            if (!FlagGet(sCampaignMilestones[i].flag))
+                break;
+            if (sCampaignMilestones[i].cap != 0)
+                cap = sCampaignMilestones[i].cap;
         }
-        return 14;
+        return cap;
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {
