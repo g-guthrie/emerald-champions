@@ -1947,8 +1947,9 @@ Music: Aqua
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
 Prize Multiplier: 25
+Starting Status: Weather Rain
 
-SPECIES_PELIPPER @ ITEM_DAMP_ROCK
+SPECIES_PELIPPER @ ITEM_WACAN_BERRY
 Level: 73
 Level Offset: 3
 Ability: ABILITY_DRIZZLE
@@ -10186,18 +10187,18 @@ Nature: NATURE_BOLD
 - MOVE_SNARL
 - MOVE_TAILWIND
 
-SPECIES_TOXAPEX @ ITEM_BLACK_SLUDGE
+SPECIES_ALTARIA @ ITEM_LEFTOVERS
 Level: 73
 Level Offset: 3
-Ability: ABILITY_REGENERATOR
+Ability: ABILITY_CLOUD_NINE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
-Nature: NATURE_CALM
-- MOVE_ACID_SPRAY
-- MOVE_WIDE_GUARD
-- MOVE_RECOVER
-- MOVE_BANEFUL_BUNKER
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_MODEST
+- MOVE_FLAMETHROWER
+- MOVE_ICE_BEAM
+- MOVE_WILL_O_WISP
+- MOVE_PROTECT
 
 SPECIES_MANAPHY @ ITEM_SITRUS_BERRY
 Level: 74
@@ -20140,6 +20141,20 @@ Music: Magma
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Prize Multiplier: 25
+Starting Status: Weather Sun
+
+SPECIES_RUNERIGUS @ ITEM_MENTAL_HERB
+Level: 64
+Level Offset: 4
+Ability: ABILITY_WANDERING_SPIRIT
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
+Nature: NATURE_RELAXED
+- MOVE_TRICK_ROOM
+- MOVE_BODY_PRESS
+- MOVE_POLTERGEIST
+- MOVE_PROTECT
 
 SPECIES_STAKATAKA @ ITEM_FOCUS_SASH
 Level: 64
@@ -20165,19 +20180,6 @@ Nature: NATURE_BRAVE
 - MOVE_CURSE
 - MOVE_WOOD_HAMMER
 - MOVE_HIGH_HORSEPOWER
-- MOVE_PROTECT
-
-SPECIES_RUNERIGUS @ ITEM_MENTAL_HERB
-Level: 64
-Level Offset: 4
-Ability: ABILITY_WANDERING_SPIRIT
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
-Happiness: 255
-EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
-Nature: NATURE_RELAXED
-- MOVE_TRICK_ROOM
-- MOVE_BODY_PRESS
-- MOVE_POLTERGEIST
 - MOVE_PROTECT
 
 SPECIES_RHYPERIOR @ ITEM_ASSAULT_VEST
@@ -25564,35 +25566,9 @@ Pic: Magma Leader Maxie
 Gender: Male
 Music: Magma
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Multi Party: Half
 Prize Multiplier: 25
-
-SPECIES_RHYPERIOR @ ITEM_ASSAULT_VEST
-Level: 73
-Level Offset: 3
-Ability: ABILITY_LIGHTNING_ROD
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 252 HP / 252 Atk / 0 Def / 0 SpA / 4 SpD / 0 Spe
-Nature: NATURE_ADAMANT
-- MOVE_HIGH_HORSEPOWER
-- MOVE_ROCK_SLIDE
-- MOVE_ICE_PUNCH
-- MOVE_FIRE_PUNCH
-
-SPECIES_COPPERAJAH @ ITEM_WEAKNESS_POLICY
-Level: 73
-Level Offset: 3
-Ability: ABILITY_HEAVY_METAL
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
-Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_BRAVE
-- MOVE_HEAVY_SLAM
-- MOVE_HIGH_HORSEPOWER
-- MOVE_PLAY_ROUGH
-- MOVE_PROTECT
 
 SPECIES_CAMERUPT @ ITEM_CAMERUPTITE
 Level: 72
@@ -25605,6 +25581,32 @@ Nature: NATURE_QUIET
 - MOVE_ERUPTION
 - MOVE_EARTH_POWER
 - MOVE_ANCIENT_POWER
+- MOVE_PROTECT
+
+SPECIES_RAGING_BOLT @ ITEM_ASSAULT_VEST
+Level: 73
+Level Offset: 3
+Ability: ABILITY_PROTOSYNTHESIS
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_MODEST
+- MOVE_THUNDERCLAP
+- MOVE_THUNDERBOLT
+- MOVE_DRACO_METEOR
+- MOVE_SNARL
+
+SPECIES_COPPERAJAH @ ITEM_WEAKNESS_POLICY
+Level: 73
+Level Offset: 3
+Ability: ABILITY_HEAVY_METAL
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+Happiness: 255
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_BRAVE
+- MOVE_HEAVY_SLAM
+- MOVE_HIGH_HORSEPOWER
+- MOVE_POWER_WHIP
 - MOVE_PROTECT
 
 === TRAINER_ANDRES_1 ===
@@ -27646,20 +27648,20 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Multi Party: Half
 Prize Multiplier: 25
 
-SPECIES_NINETALES @ ITEM_HEAT_ROCK
+SPECIES_CHARIZARD @ ITEM_CHARIZARDITE_Y
 Level: 73
 Level Offset: 3
-Ability: ABILITY_DROUGHT
+Ability: ABILITY_BLAZE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 Nature: NATURE_TIMID
 - MOVE_HEAT_WAVE
 - MOVE_SOLAR_BEAM
-- MOVE_ENCORE
+- MOVE_SCORCHING_SANDS
 - MOVE_PROTECT
 
-SPECIES_GREAT_TUSK @ ITEM_ASSAULT_VEST
+SPECIES_GREAT_TUSK @ ITEM_BOOSTER_ENERGY
 Level: 73
 Level Offset: 3
 Ability: ABILITY_PROTOSYNTHESIS
@@ -27669,10 +27671,10 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_JOLLY
 - MOVE_HEADLONG_RUSH
 - MOVE_CLOSE_COMBAT
-- MOVE_KNOCK_OFF
 - MOVE_ROCK_SLIDE
+- MOVE_PROTECT
 
-SPECIES_HEATRAN @ ITEM_HEATRANITE
+SPECIES_HEATRAN @ ITEM_SHUCA_BERRY
 Level: 72
 Level Offset: 2
 Ability: ABILITY_FLASH_FIRE
