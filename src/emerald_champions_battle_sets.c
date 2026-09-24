@@ -2,6 +2,7 @@
 #include "move.h"
 #include "data.h"
 #include "emerald_champions_battle_sets.h"
+#include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
 #include "random.h"
@@ -12,6 +13,7 @@
 
 #include "data/pokemon/emerald_champions_battle_sets.h"
 #include "data/pokemon/emerald_champions_preparation_learnsets.h"
+#include "data/pokemon/emerald_champions_iconic_moves.h"
 
 static const u8 sRecommendedSetName[] = _("Recommended");
 
@@ -670,13 +672,56 @@ static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, boo
 
 }
 
+static u32 CountIconicTutorBadges(void)
+{
+    u32 badges = 0;
+    for (u32 flag = FLAG_BADGE01_GET; flag <= FLAG_BADGE08_GET; flag++)
+        badges += FlagGet(flag);
+    return badges;
+}
+
+// Iconic moves stay legal once taught; only the tutor checks badges.
+static bool32 IsEmeraldChampionsIconicMove(enum Species species, enum Move move, u32 badges)
+{
+    species = GET_BASE_SPECIES_ID(species);
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+    {
+        if (sEmeraldChampionsIconicMoves[i].species == species
+         && sEmeraldChampionsIconicMoves[i].move == move
+         && sEmeraldChampionsIconicMoves[i].badges <= badges)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move)
 {
     bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
     if (move <= MOVE_NONE || move >= MOVES_COUNT_ALL)
         return FALSE;
+    if (IsEmeraldChampionsIconicMove(species, move, 8))
+        return TRUE;
     BuildEmeraldChampionsPreparationMoveAccess(species, availableMoves);
     return availableMoves[move];
+}
+
+u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves)
+{
+    enum Species species = GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES));
+    u32 badges = CountIconicTutorBadges();
+    u32 numMoves = 0;
+
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+    {
+        const struct EmeraldChampionsIconicMove *entry = &sEmeraldChampionsIconicMoves[i];
+        if (entry->species == species && entry->badges <= badges && !BoxMonKnowsMove(mon, entry->move))
+        {
+            if (moves != NULL)
+                moves[numMoves] = entry->move;
+            numMoves++;
+        }
+    }
+    return numMoves;
 }
 
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)

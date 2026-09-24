@@ -69,6 +69,7 @@ const u16 *GetEmeraldChampionsPreparationMoves(enum Species species);
 // Pass NULL to count without writing a list.
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves);
 bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move);
+u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves);
 bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(enum Species species, enum Move move);
 
 #endif // GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H

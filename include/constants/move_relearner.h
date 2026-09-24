@@ -13,6 +13,7 @@ enum MoveRelearnerStates
     MOVE_RELEARNER_LEVEL_UP_MOVES,
     MOVE_RELEARNER_EGG_MOVES,
     MOVE_RELEARNER_ALL_MOVES,
+    MOVE_RELEARNER_ICONIC_MOVES, // Mauville's iconic tutor only
     MOVE_RELEARNER_COUNT,
 };
 

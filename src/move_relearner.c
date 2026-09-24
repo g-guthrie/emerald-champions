@@ -262,6 +262,8 @@ static bool32 IsAllMoveRelearnerActive(void);
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon);
+static bool32 IsIconicMoveRelearnerActive(void);
+static bool32 HasRelearnerIconicMoves(struct BoxPokemon *boxMon);
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 
@@ -289,6 +291,12 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .isActive = IsAllMoveRelearnerActive,
         .hasMoveToRelearn = HasRelearnerAllMoves,
         .getMoves = GetEmeraldChampionsPreparationMovesToLearn,
+        .moveText = MoveRelearner_Text_MoveLWR
+    },
+    [MOVE_RELEARNER_ICONIC_MOVES] = {
+        .isActive = IsIconicMoveRelearnerActive,
+        .hasMoveToRelearn = HasRelearnerIconicMoves,
+        .getMoves = GetEmeraldChampionsIconicMovesToLearn,
         .moveText = MoveRelearner_Text_MoveLWR
     },
 };
@@ -997,4 +1005,15 @@ static bool32 IsEggMoveRelearnerActive(void)
 static bool32 IsAllMoveRelearnerActive(void)
 {
     return TRUE;
+}
+
+// Only Mauville's tutor opens this list; other relearners never cycle into it.
+static bool32 IsIconicMoveRelearnerActive(void)
+{
+    return gMoveRelearnerState == MOVE_RELEARNER_ICONIC_MOVES;
+}
+
+static bool32 HasRelearnerIconicMoves(struct BoxPokemon *boxMon)
+{
+    return GetEmeraldChampionsIconicMovesToLearn(boxMon, NULL) != 0;
 }

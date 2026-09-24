@@ -48,77 +48,33 @@ MauvilleCity_House2_EventScript_DeclineTrade:: @ 8210CE4
 MauvilleCity_House2_EventScript_Tutor::
 	lock
 	faceplayer
-	msgbox MauvilleCity_House2_Text_StarterMoveTeach, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_House2_EventScript_StarterMoveDeclined
-	setvar VAR_0x8008, TRUE
-	message MauvilleCity_House2_Text_StarterMoveWhichMove
-	waitmessage
-	multichoice 0, 0, MULTI_STARTER_MOVES, 0
-	switch VAR_RESULT
-	case 0, MauvilleCity_House2_EventScript_StarterMoveGrassPledge
-	case 1, MauvilleCity_House2_EventScript_StarterMoveFirePledge
-	case 2, MauvilleCity_House2_EventScript_StarterMoveWaterPledge
-	case 3, MauvilleCity_House2_EventScript_StarterMoveFrenzyPlant
-	case 4, MauvilleCity_House2_EventScript_StarterMoveBlastBurn
-	case 5, MauvilleCity_House2_EventScript_StarterMoveHydroCannon
-	case MULTI_B_PRESSED, MauvilleCity_House2_EventScript_StarterMoveDeclined
-	goto MauvilleCity_House2_EventScript_StarterMoveDeclined
-	end
+	msgbox MauvilleCity_House2_Text_IconicTutorIntro, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, MauvilleCity_House2_EventScript_IconicTutorDeclined
+	setmoverelearnerstate MOVE_RELEARNER_ICONIC_MOVES
+	bufferstring STR_VAR_3, MoveRelearner_Text_MoveLWR
+MauvilleCity_House2_EventScript_IconicTutorChooseMon:
+	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
+	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MauvilleCity_House2_EventScript_IconicTutorDeclined
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_House2_EventScript_IconicTutorNothing
+	special Special_HasMoveToRelearn
+	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_House2_EventScript_IconicTutorNothing
+	msgbox MoveRelearner_Text_WhichXmoveShouldTeach, MSGBOX_DEFAULT
+	special TeachMoveRelearnerMove
+	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_House2_EventScript_IconicTutorDeclined
+	msgbox MauvilleCity_House2_Text_IconicTutorAnother, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, MauvilleCity_House2_EventScript_IconicTutorChooseMon
+	goto MauvilleCity_House2_EventScript_IconicTutorDeclined
 
-	MauvilleCity_House2_EventScript_StarterMoveGrassPledge::
-	setvar VAR_0x8006, MOVE_GRASS_PLEDGE
-	goto MauvilleCity_House2_EventScript_TeachMove
+MauvilleCity_House2_EventScript_IconicTutorNothing:
+	msgbox MauvilleCity_House2_Text_IconicTutorNothing, MSGBOX_DEFAULT
+	goto MauvilleCity_House2_EventScript_IconicTutorChooseMon
 
-	MauvilleCity_House2_EventScript_StarterMoveFirePledge::
-	setvar VAR_0x8006, MOVE_FIRE_PLEDGE
-	goto MauvilleCity_House2_EventScript_TeachMove
-
-	MauvilleCity_House2_EventScript_StarterMoveWaterPledge::
-	setvar VAR_0x8006, MOVE_WATER_PLEDGE
-	goto MauvilleCity_House2_EventScript_TeachMove
-
-	MauvilleCity_House2_EventScript_StarterMoveFrenzyPlant::
-	setvar VAR_0x8006, MOVE_FRENZY_PLANT
-	goto MauvilleCity_House2_EventScript_TeachMove
-
-	MauvilleCity_House2_EventScript_StarterMoveBlastBurn::
-	setvar VAR_0x8006, MOVE_BLAST_BURN
-	goto MauvilleCity_House2_EventScript_TeachMove
-
-	MauvilleCity_House2_EventScript_StarterMoveHydroCannon::
-	setvar VAR_0x8006, MOVE_HYDRO_CANNON
-	goto MauvilleCity_House2_EventScript_TeachMove
-
-	MauvilleCity_House2_EventScript_TeachMove::
-	@ This engine's tutor reads the MOVE id from VAR_0x8005 (party_menu.c
-	@ DisplayPartyPokemonDataToTeachMove / TryTutorSelectedMon); VAR_0x8006 is never
-	@ read. Inclement set 0x8005 to a TUTOR_MOVE_* learnset index instead, which this
-	@ engine has no table for, so copy the real move across.
-	copyvar VAR_0x8005, VAR_0x8006
-	buffermovename 0, VAR_0x8006
-	msgbox MauvilleCity_House2_Text_StarterMoveWhichMon, MSGBOX_DEFAULT
-	call MauvilleCity_House2_EventScript_OpenPartyMenu
-	compare VAR_RESULT, 0
-	goto_if_eq MauvilleCity_House2_EventScript_StarterMoveDeclined
-	goto MauvilleCity_House2_EventScript_StarterMoveTaught
-	end
-
-MauvilleCity_House2_EventScript_StarterMoveDeclined::
-	setvar VAR_0x8008, FALSE
-	msgbox MauvilleCity_House2_Text_StarterMoveDeclined, MSGBOX_DEFAULT
-	release
-	end
-
-MauvilleCity_House2_EventScript_OpenPartyMenu:: @ 82C8326
-	special ChooseMonForMoveTutor
-	lock
-	faceplayer
-	return
-
-MauvilleCity_House2_EventScript_StarterMoveTaught::
-	setvar VAR_0x8008, FALSE
-	msgbox MauvilleCity_House2_Text_StarterMoveTaught, MSGBOX_DEFAULT
+MauvilleCity_House2_EventScript_IconicTutorDeclined:
+	setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES
+	msgbox MauvilleCity_House2_Text_IconicTutorDeclined, MSGBOX_DEFAULT
 	release
 	end
 
@@ -146,24 +102,22 @@ MauvilleCity_House2_Text_ThatsDisappointing: @ 8210E16
 	.string "A Coin Case is needed for the\n"
 	.string "Game Corner.$"
 
-MauvilleCity_House2_Text_StarterMoveTeach:
-	.string "If you've got any Pokémon from a\n"
-	.string "Professor - starter Pokémon, in other\l"
-	.string "words - I can teach them special moves.\p"
-	.string "Would you like a Pokémon to learn one?$"
+MauvilleCity_House2_Text_IconicTutorIntro:
+	.string "Some Pokémon are famous for moves\n"
+	.string "nobody else will ever teach them.\p"
+	.string "A flying Pikachu, a Magikarp with\n"
+	.string "Dragon Rage… I know them all.\p"
+	.string "The wilder ones I only share with\n"
+	.string "Trainers who have proven themselves.\p"
+	.string "Shall I teach one of yours?$"
 
-MauvilleCity_House2_Text_StarterMoveDeclined:
-	.string "Suit yourself. Come back if you change\n"
-	.string "your mind.$"
+MauvilleCity_House2_Text_IconicTutorNothing:
+	.string "Hmm… I have nothing for that one.\n"
+	.string "Or perhaps you need more Badges.$"
 
-MauvilleCity_House2_Text_StarterMoveTaught:
-	.string "If you want to try out more of these\n"
-	.string "moves, you can get more starter\l"
-	.string "Pokémon at the Game Corner.$"
+MauvilleCity_House2_Text_IconicTutorAnother:
+	.string "Splendid! Shall I teach another?$"
 
-MauvilleCity_House2_Text_StarterMoveWhichMove:
-	.string "Which move should I teach?$"
-
-MauvilleCity_House2_Text_StarterMoveWhichMon:
-	.string "Which Pokémon should learn\n"
-	.string "{STR_VAR_1}?$"
+MauvilleCity_House2_Text_IconicTutorDeclined:
+	.string "Come back whenever a legend\n"
+	.string "needs its signature move.$"
