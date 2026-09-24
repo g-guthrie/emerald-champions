@@ -25,12 +25,16 @@ SealedChamber_InnerRoom_EventScript_Regigigas::
 	playmoncry SPECIES_REGIGIGAS, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_REGIGIGAS, VAR_0x800A, ITEM_NORMAL_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 SealedChamber_InnerRoom_EventScript_CheckRegigigasResult::
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	setvar VAR_0x8004, SPECIES_REGIGIGAS
+	specialvar VAR_RESULT, GetBattleOutcome
+	@ A knockout loses it for good; capture resolves it; anything else retreats.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryGone
 	goto Common_EventScript_EndVisibleLegendaryEncounter
 
 SealedChamber_InnerRoom_EventScript_RegigigasStatue::
@@ -126,6 +130,8 @@ SealedChamber_InnerRoom_EventScript_BrailleStoryPart6:: @ 8239287
 SealedChamber_InnerRoom_Text_RegigigasStatue:
 	.string "It's a statue of a Pokémon.\n"
 	.string "It exudes tremendous power…\p"
+	.string "Trainers say a legend that faints\n"
+	.string "in battle never returns.\p"
 	.string "There's something engraved on it…$"
 
 SealedChamber_InnerRoom_Text_RegigigasStatueSilent:

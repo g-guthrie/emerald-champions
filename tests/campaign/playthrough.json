@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Book v4 input-driven campaign recipes, rebuilt and verified from a fresh save in story order. Later recipes remain unvalidated until reached. Use --battle-mode native for primary campaign evidence; autowin is separate script traversal with compatible recipes. Direct warps and story flag writes are forbidden in the main chain.",
+  "description": "Book v4 input-driven campaign recipes, rebuilt and verified from a fresh save in story order. Later recipes remain unvalidated until reached. Use --battle-mode native for primary campaign evidence; autowin is separate script traversal with compatible recipes. Direct warps and story flag writes are forbidden in the main chain. State expectations were re-traced against source on 2026-09-23 after the Inclement rebase; the input recipes have not been re-run natively since that rebase.",
   "battle_policy": {
     "native": "Default: normal player inputs and engine battle outcomes. Canonical v4 recipes use this mode.",
     "autowin": "Explicit legacy script-traversal mode; requires compatible recipes and does not assess combat."
@@ -2497,11 +2497,11 @@
         },
         "stable_overworld": true,
         "vars": {
-          "VAR_EC_OPENING_STATE": 3,
+          "VAR_EC_OPENING_STATE": 2,
           "VAR_BIRCH_LAB_STATE": 3
         },
         "items": {
-          "ITEM_POKE_BALL": 20
+          "ITEM_POKE_BALL": 0
         }
       }
     },
@@ -2985,11 +2985,11 @@
         },
         "stable_overworld": true,
         "vars": {
-          "VAR_EC_OPENING_STATE": 3,
+          "VAR_EC_OPENING_STATE": 2,
           "VAR_BIRCH_LAB_STATE": 3
         },
         "items": {
-          "ITEM_POKE_BALL": 20
+          "ITEM_POKE_BALL": 0
         }
       }
     },
@@ -3404,11 +3404,11 @@
         },
         "stable_overworld": true,
         "vars": {
-          "VAR_EC_OPENING_STATE": 3,
+          "VAR_EC_OPENING_STATE": 2,
           "VAR_BIRCH_LAB_STATE": 3
         },
         "items": {
-          "ITEM_POKE_BALL": 20
+          "ITEM_POKE_BALL": 0
         }
       }
     },
@@ -4192,11 +4192,11 @@
         },
         "stable_overworld": true,
         "vars": {
-          "VAR_EC_OPENING_STATE": 3,
+          "VAR_EC_OPENING_STATE": 2,
           "VAR_BIRCH_LAB_STATE": 3
         },
         "items": {
-          "ITEM_POKE_BALL": 20,
+          "ITEM_POKE_BALL": 0,
           "ITEM_POTION": 1
         }
       }
@@ -5023,7 +5023,8 @@
         "states": [
           "VAR_LITTLEROOT_TOWN_STATE",
           "FLAG_RECEIVED_RUNNING_SHOES",
-          "FLAG_SYS_B_DASH"
+          "FLAG_SYS_B_DASH",
+          "FLAG_RECEIVED_OLD_ROD"
         ]
       },
       "expected": {
@@ -5039,10 +5040,14 @@
         "flags": {
           "FLAG_RECEIVED_RUNNING_SHOES": 1,
           "FLAG_SYS_B_DASH": 1,
-          "FLAG_ADVENTURE_STARTED": 1
+          "FLAG_ADVENTURE_STARTED": 1,
+          "FLAG_RECEIVED_OLD_ROD": 1
         },
         "battle_serial_min": 2,
-        "stable_overworld": true
+        "stable_overworld": true,
+        "items": {
+          "ITEM_OLD_ROD": 1
+        }
       }
     },
     {
@@ -5311,8 +5316,7 @@
           "MAP_ROUTE102"
         ],
         "scripts": [
-          "Route102_EventScript_Calvin",
-          "Route102_EventScript_CalvinRegisterMatchCallAfterBattle"
+          "Route102_EventScript_Calvin"
         ],
         "battles": [
           "BATTLE_002_ROUTE_102_CALVIN",
@@ -7018,7 +7022,7 @@
         ],
         "object_scripts": [
           "PetalburgWoods_EventScript_Lyle",
-          "Common_EventScript_FindItem"
+          "PetalburgWoods_EventScript_ItemParalyzeHeal"
         ],
         "trainers": [
           "TRAINER_LYLE"
@@ -7027,7 +7031,7 @@
           "BATTLE_009_PETALBURG_WOODS_LYLE"
         ],
         "flags": [
-          "FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL"
+          "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL"
         ],
         "items": [
           "ITEM_PARALYZE_HEAL"
@@ -7044,7 +7048,7 @@
           27
         ],
         "flags": {
-          "FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL": 1
+          "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 18,
@@ -7159,7 +7163,7 @@
           "VAR_PETALBURG_WOODS_STATE"
         ],
         "items": [
-          "ITEM_GREAT_BALL"
+          "ITEM_DUSK_BALL"
         ],
         "labels": [
           "native_flow_required",
@@ -7448,7 +7452,7 @@
         "object_scripts": [
           "PetalburgWoods_EventScript_Boy1",
           "PetalburgWoods_EventScript_James",
-          "Common_EventScript_FindItem"
+          "PetalburgWoods_EventScript_ItemEther"
         ],
         "bg_scripts": [
           "PetalburgWoods_EventScript_Sign2"
@@ -7557,7 +7561,7 @@
         },
         "flags": {
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION": 1,
-          "FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL": 1,
+          "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL": 1,
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL": 1,
           "FLAG_ITEM_PETALBURG_WOODS_ETHER": 1
         },
@@ -7567,7 +7571,7 @@
       }
     },
     {
-      "id": "main-08-route104-winston-haley",
+      "id": "main-08-route104-boy2-winston",
       "parent": "main-07-woods-north-exit",
       "chapter": "Route 104 North",
       "frames": 1,
@@ -7601,7 +7605,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 32,
+          "local_id": 30,
           "candidates": [
             {
               "position": [
@@ -7656,7 +7660,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 25,
+          "local_id": 23,
           "candidates": [
             {
               "position": [
@@ -7712,10 +7716,6 @@
           ],
           "order": "xy",
           "allow_battle_interruptions": true
-        },
-        {
-          "type": "screenshot",
-          "name": "haley-defeated"
         }
       ],
       "coverage": {
@@ -7724,22 +7724,19 @@
         ],
         "object_scripts": [
           "Route104_EventScript_Boy2",
-          "Route104_EventScript_Winston",
-          "Route104_EventScript_Haley"
+          "Route104_EventScript_Winston"
         ],
         "trainers": [
-          "TRAINER_WINSTON_1",
-          "TRAINER_HALEY_1"
+          "TRAINER_WINSTON_1"
         ],
         "branches": [
-          "BATTLE_012_ROUTE_104_WINSTON",
-          "BATTLE_013_ROUTE_104_HALEY"
+          "BATTLE_012_ROUTE_104_WINSTON"
         ],
         "flags": [
-          "FLAG_RECEIVED_ROUTE104_LEAF_STONE"
+          "FLAG_RECEIVED_TM09"
         ],
         "items": [
-          "ITEM_LEAF_STONE"
+          "ITEM_RARE_CANDY"
         ],
         "labels": [
           "route104_north",
@@ -7753,7 +7750,7 @@
           24
         ],
         "flags": {
-          "FLAG_RECEIVED_ROUTE104_LEAF_STONE": 1
+          "FLAG_RECEIVED_TM09": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 28,
@@ -7762,7 +7759,7 @@
     },
     {
       "id": "main-08-route104-gina-mia",
-      "parent": "main-08-route104-winston-haley",
+      "parent": "main-08-route104-boy2-winston",
       "chapter": "Route 104 North",
       "frames": 1,
       "semantic_actions": [
@@ -7822,7 +7819,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 23,
+          "local_id": 21,
           "candidates": [
             {
               "position": [
@@ -8442,7 +8439,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 18,
+          "local_id": 16,
           "candidates": [
             {
               "position": [
@@ -8486,7 +8483,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 20,
+          "local_id": 18,
           "candidates": [
             {
               "position": [
@@ -8579,7 +8576,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 31,
+          "local_id": 29,
           "candidates": [
             {
               "position": [
@@ -8606,7 +8603,7 @@
               ]
             }
           ],
-          "screenshot": "route104-potion"
+          "screenshot": "route104-soothe-bell"
         },
         {
           "type": "advance_dialogue",
@@ -8645,18 +8642,18 @@
         ],
         "object_scripts": [
           "BerryTreeScript",
-          "Common_EventScript_FindItem"
+          "Route104_EventScript_ItemSootheBell"
         ],
         "flags": [
           "FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL",
-          "FLAG_ITEM_ROUTE_104_POTION",
+          "FLAG_ITEM_ROUTE_104_SOOTHE_BELL",
           "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION"
         ],
         "items": [
           "ITEM_ORAN_BERRY",
           "ITEM_CHERI_BERRY",
           "ITEM_POKE_BALL",
-          "ITEM_POTION",
+          "ITEM_SOOTHE_BELL",
           "ITEM_SUPER_POTION"
         ],
         "labels": [
@@ -8673,7 +8670,7 @@
         ],
         "flags": {
           "FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL": 1,
-          "FLAG_ITEM_ROUTE_104_POTION": 1,
+          "FLAG_ITEM_ROUTE_104_SOOTHE_BELL": 1,
           "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION": 1
         },
         "battle_serial_min": 29,
@@ -8681,7 +8678,7 @@
       }
     },
     {
-      "id": "main-08-route104-ivan-berries-and-gifts",
+      "id": "main-08-route104-north-berries-and-gifts",
       "parent": "main-08-route104-left-berries-and-items",
       "chapter": "Route 104 North",
       "frames": 1,
@@ -8786,27 +8783,6 @@
           "allow_battle_interruptions": true
         },
         {
-          "type": "interact_object",
-          "local_id": 9,
-          "candidates": [
-            {
-              "position": [
-                28,
-                8
-              ]
-            }
-          ],
-          "screenshot": "ivan-native-battle"
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 40
-        },
-        {
-          "type": "screenshot",
-          "name": "ivan-defeated"
-        },
-        {
           "type": "walk_to",
           "position": [
             28,
@@ -8857,7 +8833,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 10,
+          "local_id": 8,
           "candidates": [
             {
               "position": [
@@ -8889,7 +8865,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 12,
+          "local_id": 10,
           "candidates": [
             {
               "position": [
@@ -8921,7 +8897,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 16,
+          "local_id": 14,
           "candidates": [
             {
               "position": [
@@ -8964,19 +8940,14 @@
           "MAP_ROUTE104"
         ],
         "object_scripts": [
-          "Route104_EventScript_Ivan",
           "BerryTreeScript",
           "Route104_EventScript_ExpertF"
         ],
         "bg_scripts": [
           "Route104_EventScript_RouteSignRustboro"
         ],
-        "trainers": [
-          "TRAINER_IVAN"
-        ],
-        "branches": [
-          "BATTLE_015_ROUTE_104_IVAN"
-        ],
+        "trainers": [],
+        "branches": [],
         "flags": [
           "FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104"
         ],
@@ -8987,7 +8958,6 @@
         ],
         "labels": [
           "route104_north_first_pass",
-          "optional_trainer_required_for_complete_campaign",
           "berry_harvest",
           "dynamic_object_interaction",
           "deferred_love_ball_until_cut",
@@ -9007,7 +8977,7 @@
     },
     {
       "id": "main-08-rustboro-south-checkpoint",
-      "parent": "main-08-route104-ivan-berries-and-gifts",
+      "parent": "main-08-route104-north-berries-and-gifts",
       "chapter": "Rustboro City",
       "frames": 1,
       "semantic_actions": [
@@ -9236,9 +9206,7 @@
         "flags": [
           "FLAG_RECEIVED_HM_CUT"
         ],
-        "items": [
-          "ITEM_HM_CUT"
-        ],
+        "items": [],
         "labels": [
           "rustboro_first_visit",
           "native_field_move_gift"
@@ -10094,11 +10062,10 @@
           "MAP_RUSTBORO_CITY_MART"
         ],
         "scripts": [
-          "RustboroCity_Mart_EventScript_Clerk",
           "RustboroCity_Mart_EventScript_Boy",
           "RustboroCity_Mart_EventScript_PokefanF",
           "RustboroCity_Mart_EventScript_BugCatcher",
-          "RustboroCity_Mart_EventScript_MoveSpecialist"
+          "RustboroCity_Mart_EventScript_FalseSwipeTM"
         ],
         "labels": [
           "rustboro_first_visit",
@@ -10779,7 +10746,7 @@
         ],
         "items": [
           "ITEM_PREMIER_BALL",
-          "ITEM_METAL_COAT"
+          "ITEM_FLOAT_STONE"
         ],
         "labels": [
           "rustboro_first_visit",
@@ -10889,7 +10856,7 @@
       "expected": {
         "map": "MAP_RUSTBORO_CITY_GYM",
         "vars": {
-          "VAR_RUSTBORO_GYM_GUIDE_STATE": 1
+          "VAR_RUSTBORO_CITY_STATE": 1
         },
         "stable_overworld": true,
         "position": [
@@ -11164,15 +11131,13 @@
         "flags": {
           "FLAG_BADGE01_GET": 1,
           "FLAG_DEFEATED_RUSTBORO_GYM": 1,
-          "FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE": 1,
-          "FLAG_RECEIVED_ROXANNE_OLD_AMBER": 1
+          "FLAG_RECEIVED_TM39": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 1
+          "VAR_RUSTBORO_CITY_STATE": 2
         },
         "items": {
-          "ITEM_AERODACTYLITE": 1,
-          "ITEM_OLD_AMBER": 1
+          "ITEM_DELPHOXITE": 1
         },
         "stable_overworld": true
       }
@@ -11297,7 +11262,7 @@
           "FLAG_BADGE01_GET": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 1
+          "VAR_RUSTBORO_CITY_STATE": 2
         }
       },
       "draft_notes": "Portal pending runtime: mirrors existing interiors step onto exit then DOWN allow_map_change. If firstDOWN transitions, omit redundant step based actual telemetry."
@@ -11357,7 +11322,7 @@
           "FLAG_DEVON_GOODS_STOLEN": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 2,
+          "VAR_RUSTBORO_CITY_STATE": 3,
           "VAR_RUSTURF_TUNNEL_STATE": 2,
           "VAR_ROUTE116_STATE": 1
         }
@@ -11454,7 +11419,7 @@
           "FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 3
+          "VAR_RUSTBORO_CITY_STATE": 4
         }
       },
       "draft_notes": "Static collision and authored objects only; must execute before claiming coverage."
@@ -11516,7 +11481,7 @@
         ],
         "stable_overworld": true,
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 3
+          "VAR_RUSTBORO_CITY_STATE": 4
         }
       },
       "draft_notes": "Map connection is right/offset0. Borderstep destination0,13 pending runtime; do not hold directional input past connection."
@@ -11812,7 +11777,7 @@
         ],
         "scripts": [
           "RusturfTunnel_EventScript_Grunt",
-          "RusturfTunnel_EventScript_ReceivedDevonParts"
+          "RusturfTunnel_EventScript_ReturnDevonGoods"
         ]
       },
       "expected": {
@@ -11828,7 +11793,7 @@
           "FLAG_HIDE_ROUTE_116_MR_BRINEY": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 4,
+          "VAR_RUSTBORO_CITY_STATE": 5,
           "VAR_BRINEY_HOUSE_STATE": 1
         },
         "items": {
@@ -12075,8 +12040,7 @@
         "scripts": [
           "RustboroCity_EventScript_ReturnGoodsTrigger1",
           "RustboroCity_EventScript_ReturnGoods",
-          "RustboroCity_DevonCorp_3F_EventScript_MeetPresident",
-          "RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter"
+          "RustboroCity_DevonCorp_3F_EventScript_MeetPresident"
         ]
       },
       "expected": {
@@ -12092,7 +12056,7 @@
           "FLAG_RECEIVED_POKENAV": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 6,
+          "VAR_RUSTBORO_CITY_STATE": 7,
           "VAR_DEVON_CORP_3F_STATE": 1,
           "VAR_BRINEY_LOCATION": 1
         },
@@ -12101,7 +12065,7 @@
           "ITEM_LETTER": 1
         }
       },
-      "draft_notes": "Step31,10 activatesreturntrigger. Must advance through employee+directwarp+OnFramepresidentdialogue without stablewaitbetween. GreatBall+1 isrelative topriorbag count, so no fabricatedexactquantity. Presidentheal andLetterbag1 normalcapacity branch; parts retained."
+      "draft_notes": "Step31,10 activatesreturntrigger. Must advance through employee+directwarp+OnFramepresidentdialogue without stablewaitbetween. The employee gives 2 Dream Balls (RustboroCity/scripts.inc ReturnGoods); no exact Dream Ball count is asserted. Presidentheal andLetterbag1 normalcapacity branch; parts retained."
     },
     {
       "id": "main-11-devon-save",
@@ -12212,7 +12176,7 @@
           "FLAG_RECEIVED_POKENAV": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 6,
+          "VAR_RUSTBORO_CITY_STATE": 7,
           "VAR_DEVON_CORP_3F_STATE": 1,
           "VAR_BRINEY_LOCATION": 1
         },
@@ -12257,7 +12221,7 @@
           "FLAG_BADGE01_GET": 1
         },
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 6,
+          "VAR_RUSTBORO_CITY_STATE": 7,
           "VAR_DEVON_CORP_3F_STATE": 1,
           "VAR_BRINEY_LOCATION": 1
         },
@@ -12962,7 +12926,7 @@
       "chapter": "Briney and the Dewford Crossing"
     },
     {
-      "id": "main-13-oldrod-refuse",
+      "id": "main-13-eviolite-gift",
       "parent": "main-12-sail-dewford",
       "frames": 1,
       "semantic_actions": [
@@ -13022,74 +12986,6 @@
           "face_frames": 2
         },
         {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "duration": 2,
-          "frames": 120
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "duration": 2,
-          "frames": 120
-        },
-        {
-          "type": "wait_stable_overworld"
-        },
-        {
-          "type": "screenshot",
-          "name": "oldrod-refuse"
-        }
-      ],
-      "expected": {
-        "map": "MAP_DEWFORD_TOWN",
-        "stable_overworld": true,
-        "flags": {
-          "FLAG_RECEIVED_OLD_ROD": 0
-        },
-        "items": {
-          "ITEM_OLD_ROD": 0
-        }
-      },
-      "chapter": "Granite Cave and Steven’s Letter"
-    },
-    {
-      "id": "main-13-oldrod-gift",
-      "parent": "main-13-oldrod-refuse",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "interact_object",
-          "local_id": 3,
-          "candidates": [
-            {
-              "position": [
-                11,
-                13
-              ]
-            },
-            {
-              "position": [
-                12,
-                13
-              ]
-            },
-            {
-              "position": [
-                13,
-                13
-              ]
-            }
-          ],
-          "retry_failed_pairs": true,
-          "max_relocations": 32,
-          "face_frames": 2
-        },
-        {
           "type": "advance_dialogue",
           "max_presses": 60
         },
@@ -13098,14 +12994,14 @@
         },
         {
           "type": "screenshot",
-          "name": "oldrod-gift"
+          "name": "eviolite-gift"
         }
       ],
       "expected": {
         "map": "MAP_DEWFORD_TOWN",
         "stable_overworld": true,
         "flags": {
-          "FLAG_RECEIVED_OLD_ROD": 1
+          "FLAG_DEWFORD_EVIOLITE": 1
         },
         "items": {
           "ITEM_OLD_ROD": 1
@@ -13114,8 +13010,8 @@
       "chapter": "Granite Cave and Steven’s Letter"
     },
     {
-      "id": "main-13-oldrod-revisit",
-      "parent": "main-13-oldrod-gift",
+      "id": "main-13-eviolite-revisit",
+      "parent": "main-13-eviolite-gift",
       "frames": 1,
       "semantic_actions": [
         {
@@ -13154,14 +13050,14 @@
         },
         {
           "type": "screenshot",
-          "name": "oldrod-revisit"
+          "name": "eviolite-revisit"
         }
       ],
       "expected": {
         "map": "MAP_DEWFORD_TOWN",
         "stable_overworld": true,
         "flags": {
-          "FLAG_RECEIVED_OLD_ROD": 1
+          "FLAG_DEWFORD_EVIOLITE": 1
         },
         "items": {
           "ITEM_OLD_ROD": 1
@@ -13171,7 +13067,7 @@
     },
     {
       "id": "main-13-route106-entry",
-      "parent": "main-13-oldrod-revisit",
+      "parent": "main-13-eviolite-revisit",
       "frames": 1,
       "semantic_actions": [
         {
@@ -13435,8 +13331,7 @@
         "stable_overworld": true,
         "items": {
           "ITEM_LETTER": 1,
-          "ITEM_DEVON_PARTS": 1,
-          "ITEM_HM_FLASH": 1
+          "ITEM_DEVON_PARTS": 1
         },
         "flags": {
           "FLAG_RECEIVED_HM_FLASH": 1,
@@ -13988,7 +13883,8 @@
         },
         "flags": {
           "FLAG_DELIVERED_STEVEN_LETTER": 1,
-          "FLAG_BADGE02_GET": 0
+          "FLAG_BADGE02_GET": 0,
+          "FLAG_HIDE_GRANITE_CAVE_STEVEN": 1
         }
       },
       "chapter": "Granite Cave and Steven’s Letter"
@@ -15237,7 +15133,7 @@
         },
         "flags": {
           "FLAG_DOCK_REJECTED_DEVON_GOODS": 1,
-          "FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA": 1
+          "FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA": 0
         }
       },
       "chapter": "Stern and the Oceanic Museum"
@@ -15441,7 +15337,7 @@
           "max_presses": 80,
           "capture_presses": {
             "1": "familiar-grunt",
-            "3": "deep-sea-tooth-gift",
+            "3": "rare-candy-gift",
             "6": "grunt-departure"
           }
         },
@@ -15457,11 +15353,10 @@
         "map": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F",
         "stable_overworld": true,
         "items": {
-          "ITEM_DEVON_PARTS": 1,
-          "ITEM_DEEP_SEA_TOOTH": 1
+          "ITEM_DEVON_PARTS": 1
         },
         "flags": {
-          "FLAG_RECEIVED_MUSEUM_DEEP_SEA_TOOTH": 1,
+          "FLAG_RECEIVED_TM46": 1,
           "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT": 1
         }
       },
@@ -15556,7 +15451,7 @@
       }
     },
     {
-      "id": "optional-rustboro-fossil-deposit",
+      "id": "optional-rustboro-devon1-exit",
       "parent": "optional-rustboro-functional-entry",
       "frames": 1,
       "semantic_actions": [
@@ -15581,271 +15476,6 @@
             8
           ]
         },
-        {
-          "type": "interact_object",
-          "local_id": 5,
-          "candidates": [
-            {
-              "position": [
-                13,
-                8
-              ]
-            }
-          ],
-          "screenshot": "fossil-intro"
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 60,
-          "capture_presses": {
-            "4": "fossil-offer",
-            "7": "fossil-selection",
-            "10": "fossil-deposit"
-          }
-        },
-        {
-          "type": "screenshot",
-          "name": "fossil-deposited"
-        }
-      ],
-      "expected": {
-        "map": "MAP_RUSTBORO_CITY_DEVON_CORP_2F",
-        "position": [
-          13,
-          8
-        ],
-        "stable_overworld": true,
-        "items": {
-          "ITEM_OLD_AMBER": 0
-        },
-        "vars": {
-          "VAR_FOSSIL_RESURRECTION_STATE": 1
-        }
-      },
-      "coverage": {
-        "maps": [
-          "MAP_RUSTBORO_CITY_DEVON_CORP_2F"
-        ],
-        "scripts": [
-          "RustboroCity_DevonCorp_2F_EventScript_FossilScientist",
-          "RustboroCity_DevonCorp_2F_EventScript_ChooseOldAmber"
-        ]
-      }
-    },
-    {
-      "id": "optional-rustboro-fossil-ready",
-      "parent": "optional-rustboro-fossil-deposit",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "walk_to",
-          "position": [
-            13,
-            5
-          ]
-        },
-        {
-          "type": "interact_object",
-          "local_id": 6,
-          "candidates": [
-            {
-              "position": [
-                13,
-                5
-              ]
-            }
-          ]
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 40
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            13,
-            8
-          ]
-        },
-        {
-          "type": "interact_object",
-          "local_id": 5,
-          "candidates": [
-            {
-              "position": [
-                13,
-                8
-              ]
-            }
-          ],
-          "screenshot": "revival-ready"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 100
-        },
-        {
-          "type": "screenshot",
-          "name": "revival-1"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 100
-        },
-        {
-          "type": "screenshot",
-          "name": "revival-2"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 100
-        },
-        {
-          "type": "screenshot",
-          "name": "revival-3"
-        }
-      ],
-      "expected": {
-        "map": "MAP_RUSTBORO_CITY_DEVON_CORP_2F",
-        "vars": {
-          "VAR_FOSSIL_RESURRECTION_STATE": 2
-        }
-      },
-      "coverage": {
-        "maps": [
-          "MAP_RUSTBORO_CITY_DEVON_CORP_2F"
-        ],
-        "scripts": [
-          "RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist",
-          "RustboroCity_DevonCorp_2F_EventScript_FossilMonReady"
-        ]
-      }
-    },
-    {
-      "id": "optional-rustboro-fossil-collect",
-      "parent": "optional-rustboro-fossil-ready",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 120
-        },
-        {
-          "type": "screenshot",
-          "name": "nickname-prompt"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120
-        },
-        {
-          "type": "screenshot",
-          "name": "nickname-declined"
-        },
-        {
-          "type": "wait_stable_overworld"
-        }
-      ],
-      "expected": {
-        "map": "MAP_RUSTBORO_CITY_DEVON_CORP_2F",
-        "stable_overworld": true,
-        "flags": {
-          "FLAG_RECEIVED_REVIVED_FOSSIL_MON": 1
-        },
-        "vars": {
-          "VAR_FOSSIL_RESURRECTION_STATE": 0,
-          "VAR_WHICH_FOSSIL_REVIVED": 0
-        },
-        "items": {
-          "ITEM_OLD_AMBER": 0
-        }
-      },
-      "coverage": {
-        "maps": [
-          "MAP_RUSTBORO_CITY_DEVON_CORP_2F"
-        ],
-        "scripts": [
-          "RustboroCity_DevonCorp_2F_EventScript_FinishReceivingFossilMon"
-        ]
-      }
-    },
-    {
-      "id": "optional-rustboro-fossil-party",
-      "parent": "optional-rustboro-fossil-collect",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "press",
-          "keys": [
-            "START"
-          ],
-          "frames": 60
-        },
-        {
-          "type": "screenshot",
-          "name": "start-menu"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "DOWN"
-          ],
-          "frames": 20
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 180
-        },
-        {
-          "type": "screenshot",
-          "name": "aerodactyl-party"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 120
-        },
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 60
-        },
-        {
-          "type": "wait_stable_overworld"
-        }
-      ],
-      "expected": {
-        "map": "MAP_RUSTBORO_CITY_DEVON_CORP_2F",
-        "stable_overworld": true
-      }
-    },
-    {
-      "id": "optional-rustboro-devon1-exit",
-      "parent": "optional-rustboro-fossil-party",
-      "frames": 1,
-      "semantic_actions": [
         {
           "type": "walk_to",
           "position": [
@@ -16249,7 +15879,7 @@
           17
         ],
         "vars": {
-          "VAR_RUSTBORO_CITY_STATE": 7
+          "VAR_RUSTBORO_CITY_STATE": 8
         },
         "stable_overworld": true
       }
@@ -16325,10 +15955,10 @@
         "map": "MAP_RUSTBORO_CITY_POKEMON_SCHOOL",
         "stable_overworld": true,
         "items": {
-          "ITEM_SUN_STONE": 0
+          "ITEM_QUICK_CLAW": 0
         },
         "flags": {
-          "FLAG_RECEIVED_SCHOOL_SUN_STONE": 0
+          "FLAG_RECEIVED_QUICK_CLAW": 0
         }
       }
     },
@@ -16375,8 +16005,8 @@
           "type": "advance_dialogue",
           "max_presses": 40,
           "capture_presses": {
-            "2": "teacher-sun-stone",
-            "4": "sun-stone-received"
+            "2": "teacher-quick-claw",
+            "4": "quick-claw-received"
           }
         },
         {
@@ -16395,10 +16025,10 @@
         ],
         "stable_overworld": true,
         "items": {
-          "ITEM_SUN_STONE": 1
+          "ITEM_QUICK_CLAW": 1
         },
         "flags": {
-          "FLAG_RECEIVED_SCHOOL_SUN_STONE": 1
+          "FLAG_RECEIVED_QUICK_CLAW": 1
         }
       },
       "coverage": {
@@ -16444,10 +16074,10 @@
         ],
         "stable_overworld": true,
         "items": {
-          "ITEM_SUN_STONE": 1
+          "ITEM_QUICK_CLAW": 1
         },
         "flags": {
-          "FLAG_RECEIVED_SCHOOL_SUN_STONE": 1
+          "FLAG_RECEIVED_QUICK_CLAW": 1
         }
       },
       "coverage": {
@@ -16455,7 +16085,7 @@
           "MAP_RUSTBORO_CITY_POKEMON_SCHOOL"
         ],
         "scripts": [
-          "RustboroCity_PokemonSchool_EventScript_GaveSunStone"
+          "RustboroCity_PokemonSchool_EventScript_GaveQuickClaw"
         ]
       }
     },
@@ -16717,15 +16347,15 @@
         "map": "MAP_DEWFORD_TOWN_HOUSE2",
         "stable_overworld": true,
         "items": {
-          "ITEM_REAPER_CLOTH": 0
+          "ITEM_SILK_SCARF": 0
         },
         "flags": {
-          "FLAG_RECEIVED_DEWFORD_REAPER_CLOTH": 0
+          "FLAG_RECEIVED_SILK_SCARF": 0
         }
       }
     },
     {
-      "id": "optional-dewford-reaper-cloth",
+      "id": "optional-dewford-silk-scarf",
       "parent": "optional-dewford-house2-entry",
       "frames": 1,
       "semantic_actions": [
@@ -16747,13 +16377,13 @@
               ]
             }
           ],
-          "screenshot": "reaper-cloth-offer"
+          "screenshot": "silk-scarf-offer"
         },
         {
           "type": "advance_dialogue",
           "max_presses": 40,
           "capture_presses": {
-            "3": "reaper-cloth-received"
+            "3": "silk-scarf-received"
           }
         },
         {
@@ -16764,16 +16394,16 @@
         "map": "MAP_DEWFORD_TOWN_HOUSE2",
         "stable_overworld": true,
         "items": {
-          "ITEM_REAPER_CLOTH": 1
+          "ITEM_SILK_SCARF": 1
         },
         "flags": {
-          "FLAG_RECEIVED_DEWFORD_REAPER_CLOTH": 1
+          "FLAG_RECEIVED_SILK_SCARF": 1
         }
       }
     },
     {
-      "id": "optional-dewford-cloth-repeat",
-      "parent": "optional-dewford-reaper-cloth",
+      "id": "optional-dewford-scarf-repeat",
+      "parent": "optional-dewford-silk-scarf",
       "frames": 1,
       "semantic_actions": [
         {
@@ -16798,16 +16428,16 @@
         "map": "MAP_DEWFORD_TOWN_HOUSE2",
         "stable_overworld": true,
         "items": {
-          "ITEM_REAPER_CLOTH": 1
+          "ITEM_SILK_SCARF": 1
         },
         "flags": {
-          "FLAG_RECEIVED_DEWFORD_REAPER_CLOTH": 1
+          "FLAG_RECEIVED_SILK_SCARF": 1
         }
       }
     },
     {
       "id": "optional-dewford-house2-out",
-      "parent": "optional-dewford-cloth-repeat",
+      "parent": "optional-dewford-scarf-repeat",
       "frames": 1,
       "semantic_actions": [
         {
@@ -16880,39 +16510,33 @@
       "expected": {
         "map": "MAP_DEWFORD_TOWN_HALL",
         "stable_overworld": true,
-        "items": {
-          "ITEM_DEEP_SEA_SCALE": 0
-        },
         "flags": {
-          "FLAG_RECEIVED_DEWFORD_DEEP_SEA_SCALE": 0
+          "FLAG_RECEIVED_TM36": 0
         }
       }
     },
     {
-      "id": "optional-dewford-scale-unavailable",
+      "id": "optional-dewford-hall-gift-unavailable",
       "parent": "optional-dewford-hall-entry",
       "frames": 1,
       "semantic_actions": [
         {
           "type": "screenshot",
-          "name": "scale-man-hidden"
+          "name": "rare-candy-man-hidden"
         }
       ],
       "expected": {
         "map": "MAP_DEWFORD_TOWN_HALL",
         "stable_overworld": true,
-        "items": {
-          "ITEM_DEEP_SEA_SCALE": 0
-        },
         "flags": {
           "FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN": 1,
-          "FLAG_RECEIVED_DEWFORD_DEEP_SEA_SCALE": 0
+          "FLAG_RECEIVED_TM36": 0
         }
       }
     },
     {
-      "id": "optional-dewford-tropius-offer",
-      "parent": "optional-dewford-scale-unavailable",
+      "id": "optional-dewford-trade-offer",
+      "parent": "optional-dewford-hall-gift-unavailable",
       "frames": 1,
       "semantic_actions": [
         {
@@ -16962,7 +16586,7 @@
               ]
             }
           ],
-          "screenshot": "tropius-intro",
+          "screenshot": "bombirdier-trade-intro",
           "max_relocations": 60,
           "retry_failed_pairs": true,
           "frames_per_step": 16,
@@ -16977,19 +16601,19 @@
         },
         {
           "type": "screenshot",
-          "name": "tropius-offer"
+          "name": "bombirdier-trade-offer"
         }
       ],
       "expected": {
         "map": "MAP_DEWFORD_TOWN_HALL",
         "flags": {
-          "FLAG_EC_DEWFORD_TROPIUS_TRADE": 0
+          "FLAG_FORTREE_NPC_TRADE_COMPLETED": 0
         }
       }
     },
     {
-      "id": "optional-dewford-tropius-refusal",
-      "parent": "optional-dewford-tropius-offer",
+      "id": "optional-dewford-trade-refusal",
+      "parent": "optional-dewford-trade-offer",
       "frames": 1,
       "semantic_actions": [
         {
@@ -17001,7 +16625,7 @@
         },
         {
           "type": "screenshot",
-          "name": "tropius-party"
+          "name": "bombirdier-trade-party"
         },
         {
           "type": "press",
@@ -17012,7 +16636,7 @@
         },
         {
           "type": "screenshot",
-          "name": "tropius-refusal"
+          "name": "bombirdier-trade-refusal"
         },
         {
           "type": "advance_dialogue",
@@ -17026,13 +16650,13 @@
         "map": "MAP_DEWFORD_TOWN_HALL",
         "stable_overworld": true,
         "flags": {
-          "FLAG_EC_DEWFORD_TROPIUS_TRADE": 0
+          "FLAG_FORTREE_NPC_TRADE_COMPLETED": 0
         }
       }
     },
     {
       "id": "optional-dewford-center-entry",
-      "parent": "optional-dewford-tropius-refusal",
+      "parent": "optional-dewford-trade-refusal",
       "frames": 1,
       "semantic_actions": [
         {
@@ -17224,11 +16848,11 @@
         "map": "MAP_DEWFORD_TOWN_POKEMON_CENTER_1F",
         "stable_overworld": true,
         "items": {
-          "ITEM_REAPER_CLOTH": 1
+          "ITEM_SILK_SCARF": 1
         },
         "flags": {
-          "FLAG_RECEIVED_DEWFORD_REAPER_CLOTH": 1,
-          "FLAG_EC_DEWFORD_TROPIUS_TRADE": 0
+          "FLAG_RECEIVED_SILK_SCARF": 1,
+          "FLAG_FORTREE_NPC_TRADE_COMPLETED": 0
         }
       }
     },
@@ -17240,18 +16864,18 @@
         "map": "MAP_ROUTE109",
         "stable_overworld": true,
         "items": {
-          "ITEM_WATER_STONE": 0,
+          "ITEM_SOFT_SAND": 0,
           "ITEM_SODA_POP": 0
         },
         "flags": {
-          "FLAG_RECEIVED_ROUTE109_WATER_STONE": 0,
+          "FLAG_RECEIVED_SOFT_SAND": 0,
           "FLAG_RECEIVED_6_SODA_POP": 0,
           "FLAG_DEFEATED_SEASHORE_HOUSE": 0
         }
       }
     },
     {
-      "id": "optional-route109-water-stone",
+      "id": "optional-route109-soft-sand",
       "parent": "optional-route109-baseline",
       "frames": 1,
       "semantic_actions": [
@@ -17281,7 +16905,7 @@
         },
         {
           "type": "interact_object",
-          "local_id": 15,
+          "local_id": 8,
           "candidates": [
             {
               "position": [
@@ -17290,13 +16914,13 @@
               ]
             }
           ],
-          "screenshot": "water-stone-offer"
+          "screenshot": "soft-sand-offer"
         },
         {
           "type": "advance_dialogue",
           "max_presses": 40,
           "capture_presses": {
-            "2": "water-stone-received"
+            "2": "soft-sand-received"
           }
         },
         {
@@ -17307,21 +16931,21 @@
         "map": "MAP_ROUTE109",
         "stable_overworld": true,
         "items": {
-          "ITEM_WATER_STONE": 1
+          "ITEM_SOFT_SAND": 1
         },
         "flags": {
-          "FLAG_RECEIVED_ROUTE109_WATER_STONE": 1
+          "FLAG_RECEIVED_SOFT_SAND": 1
         }
       }
     },
     {
-      "id": "optional-route109-water-repeat",
-      "parent": "optional-route109-water-stone",
+      "id": "optional-route109-soft-sand-repeat",
+      "parent": "optional-route109-soft-sand",
       "frames": 1,
       "semantic_actions": [
         {
           "type": "interact_object",
-          "local_id": 15,
+          "local_id": 8,
           "candidates": [
             {
               "position": [
@@ -17341,10 +16965,10 @@
         "map": "MAP_ROUTE109",
         "stable_overworld": true,
         "items": {
-          "ITEM_WATER_STONE": 1
+          "ITEM_SOFT_SAND": 1
         },
         "flags": {
-          "FLAG_RECEIVED_ROUTE109_WATER_STONE": 1
+          "FLAG_RECEIVED_SOFT_SAND": 1
         }
       }
     },
@@ -17626,13 +17250,13 @@
         "map": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F",
         "stable_overworld": true,
         "items": {
-          "ITEM_DEVON_PARTS": 0,
-          "ITEM_DEEP_SEA_TOOTH": 1
+          "ITEM_DEVON_PARTS": 0
         },
         "flags": {
           "FLAG_DELIVERED_DEVON_GOODS": 1,
           "FLAG_HIDE_ROUTE_110_TEAM_AQUA": 1,
-          "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS": 1
+          "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS": 1,
+          "FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA": 1
         },
         "vars": {
           "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE": 1
@@ -17736,13 +17360,13 @@
         "map": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F",
         "stable_overworld": true,
         "items": {
-          "ITEM_DEVON_PARTS": 0,
-          "ITEM_DEEP_SEA_TOOTH": 1
+          "ITEM_DEVON_PARTS": 0
         },
         "flags": {
           "FLAG_DELIVERED_DEVON_GOODS": 1,
           "FLAG_HIDE_ROUTE_110_TEAM_AQUA": 1,
-          "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS": 1
+          "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS": 1,
+          "FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA": 1
         },
         "vars": {
           "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE": 1
@@ -17850,13 +17474,13 @@
         "map": "MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F",
         "stable_overworld": true,
         "items": {
-          "ITEM_DEVON_PARTS": 0,
-          "ITEM_DEEP_SEA_TOOTH": 1
+          "ITEM_DEVON_PARTS": 0
         },
         "flags": {
           "FLAG_DELIVERED_DEVON_GOODS": 1,
           "FLAG_HIDE_ROUTE_110_TEAM_AQUA": 1,
-          "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS": 1
+          "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_AQUA_GRUNTS": 1,
+          "FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA": 1
         },
         "vars": {
           "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE": 1
@@ -17870,7 +17494,7 @@
     },
     {
       "id": "optional-route109-seashore-entry",
-      "parent": "optional-route109-water-repeat",
+      "parent": "optional-route109-soft-sand-repeat",
       "frames": 1,
       "semantic_actions": [
         {
@@ -18104,12 +17728,12 @@
         ],
         "stable_overworld": true,
         "items": {
-          "ITEM_WATER_STONE": 1,
+          "ITEM_SOFT_SAND": 1,
           "ITEM_SODA_POP": 0,
           "ITEM_DEVON_PARTS": 1
         },
         "flags": {
-          "FLAG_RECEIVED_ROUTE109_WATER_STONE": 1,
+          "FLAG_RECEIVED_SOFT_SAND": 1,
           "FLAG_RECEIVED_6_SODA_POP": 0,
           "FLAG_DEFEATED_SEASHORE_HOUSE": 0
         }
@@ -19625,10 +19249,10 @@
         "flags": {
           "FLAG_BADGE02_GET": 1,
           "FLAG_DEFEATED_DEWFORD_GYM": 1,
-          "FLAG_RECEIVED_BRAWLY_LUCARIONITE": 1
+          "FLAG_RECEIVED_TM08": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Brawly and the Knuckle Badge"
@@ -19667,10 +19291,10 @@
         "stable_overworld": true,
         "flags": {
           "FLAG_BADGE02_GET": 1,
-          "FLAG_RECEIVED_BRAWLY_LUCARIONITE": 1
+          "FLAG_RECEIVED_TM08": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Brawly and the Knuckle Badge"
@@ -19913,7 +19537,7 @@
       }
     },
     {
-      "id": "optional-slateport-field-unavailable",
+      "id": "optional-slateport-catching-shop",
       "parent": "optional-slateport-powder-repeat",
       "frames": 1,
       "semantic_actions": [
@@ -19959,24 +19583,6 @@
             46
           ]
         },
-        {
-          "type": "screenshot",
-          "name": "field-vendor-unavailable"
-        }
-      ],
-      "expected": {
-        "map": "MAP_SLATEPORT_CITY",
-        "stable_overworld": true,
-        "flags": {
-          "FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN": 1
-        }
-      }
-    },
-    {
-      "id": "optional-slateport-catching-shop",
-      "parent": "optional-slateport-field-unavailable",
-      "frames": 1,
-      "semantic_actions": [
         {
           "type": "walk_to",
           "position": [
@@ -20219,7 +19825,7 @@
       }
     },
     {
-      "id": "optional-slateport-soothe-bell",
+      "id": "optional-slateport-friendship-check",
       "parent": "optional-slateport-chairman",
       "frames": 1,
       "semantic_actions": [
@@ -20271,9 +19877,6 @@
       "expected": {
         "map": "MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB",
         "stable_overworld": true,
-        "items": {
-          "ITEM_SOOTHE_BELL": 0
-        },
         "flags": {
           "FLAG_RECEIVED_SOOTHE_BELL": 0
         }
@@ -20281,7 +19884,7 @@
     },
     {
       "id": "optional-slateport-name-entry",
-      "parent": "optional-slateport-soothe-bell",
+      "parent": "optional-slateport-friendship-check",
       "frames": 1,
       "semantic_actions": [
         {
@@ -20542,7 +20145,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -20621,7 +20224,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -20748,7 +20351,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -20875,7 +20478,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -20994,7 +20597,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -21145,7 +20748,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -21184,7 +20787,7 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -21267,97 +20870,14 @@
           "FLAG_RECEIVED_HM_FLASH": 1
         },
         "items": {
-          "ITEM_LUCARIONITE": 1
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-17-steven-ring",
+      "id": "main-18-granite-return-leave-steven",
       "parent": "main-17-knuckle-granite-steven-door",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "walk_to",
-          "position": [
-            7,
-            7
-          ],
-          "allow_battle_interruptions": true
-        },
-        {
-          "type": "interact_object",
-          "local_id": 1,
-          "candidates": [
-            {
-              "position": [
-                7,
-                7
-              ]
-            }
-          ]
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 140,
-          "capture_presses": {
-            "1": "steven-reward-1",
-            "2": "steven-reward-2",
-            "3": "steven-reward-3",
-            "4": "steven-reward-4",
-            "5": "steven-reward-5",
-            "6": "steven-reward-6",
-            "7": "steven-reward-7",
-            "8": "steven-reward-8",
-            "9": "steven-reward-9",
-            "10": "steven-reward-10",
-            "11": "steven-reward-11",
-            "12": "steven-reward-12",
-            "13": "steven-reward-13",
-            "14": "steven-reward-14",
-            "15": "steven-reward-15",
-            "16": "steven-reward-16",
-            "17": "steven-reward-17",
-            "18": "steven-reward-18",
-            "19": "steven-reward-19",
-            "20": "steven-reward-20",
-            "21": "steven-reward-21",
-            "22": "steven-reward-22",
-            "23": "steven-reward-23",
-            "24": "steven-reward-24"
-          }
-        },
-        {
-          "type": "wait_stable_overworld"
-        },
-        {
-          "type": "screenshot",
-          "name": "pilot-steven-ring"
-        }
-      ],
-      "expected": {
-        "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
-        "stable_overworld": true,
-        "flags": {
-          "FLAG_BADGE02_GET": 1,
-          "FLAG_DELIVERED_STEVEN_LETTER": 1,
-          "FLAG_HIDE_GRANITE_CAVE_STEVEN": 1
-        },
-        "items": {
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1,
-          "ITEM_LUCARIONITE": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
-        }
-      },
-      "chapter": "Steven’s Gift and the Road to Mauville"
-    },
-    {
-      "id": "main-18-ring-return-leave-steven",
-      "parent": "main-17-steven-ring",
       "frames": 1,
       "semantic_actions": [
         {
@@ -21391,20 +20911,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-return-granite-steven-door-reverse",
-      "parent": "main-18-ring-return-leave-steven",
+      "id": "main-18-granite-return-granite-steven-door-reverse",
+      "parent": "main-18-granite-return-leave-steven",
       "frames": 1,
       "semantic_actions": [
         {
@@ -21454,20 +20969,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-return-granite-b1f-upper-exit-reverse",
-      "parent": "main-18-ring-return-granite-steven-door-reverse",
+      "id": "main-18-granite-return-granite-b1f-upper-exit-reverse",
+      "parent": "main-18-granite-return-granite-steven-door-reverse",
       "frames": 1,
       "semantic_actions": [
         {
@@ -21501,20 +21011,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-return-granite-b2f-east-north-reverse",
-      "parent": "main-18-ring-return-granite-b1f-upper-exit-reverse",
+      "id": "main-18-granite-return-granite-b2f-east-north-reverse",
+      "parent": "main-18-granite-return-granite-b1f-upper-exit-reverse",
       "frames": 1,
       "semantic_actions": [
         {
@@ -21636,20 +21141,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-return-granite-b1f-west-east-reverse",
-      "parent": "main-18-ring-return-granite-b2f-east-north-reverse",
+      "id": "main-18-granite-return-granite-b1f-west-east-reverse",
+      "parent": "main-18-granite-return-granite-b2f-east-north-reverse",
       "frames": 1,
       "semantic_actions": [
         {
@@ -21787,20 +21287,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-return-granite-first-ladder-reverse",
-      "parent": "main-18-ring-return-granite-b1f-west-east-reverse",
+      "id": "main-18-granite-return-granite-first-ladder-reverse",
+      "parent": "main-18-granite-return-granite-b1f-west-east-reverse",
       "frames": 1,
       "semantic_actions": [
         {
@@ -21910,20 +21405,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-return-route106-dewford",
-      "parent": "main-18-ring-return-granite-first-ladder-reverse",
+      "id": "main-18-granite-return-route106-dewford",
+      "parent": "main-18-granite-return-granite-first-ladder-reverse",
       "frames": 1,
       "semantic_actions": [
         {
@@ -22045,20 +21535,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-slateport-sail",
-      "parent": "main-18-ring-return-route106-dewford",
+      "id": "main-18-slateport-sail",
+      "parent": "main-18-granite-return-route106-dewford",
       "frames": 1,
       "semantic_actions": [
         {
@@ -22139,20 +21624,15 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
     },
     {
-      "id": "main-18-ring-slateport-city",
-      "parent": "main-18-ring-slateport-sail",
+      "id": "main-18-slateport-city",
+      "parent": "main-18-slateport-sail",
       "frames": 1,
       "semantic_actions": [
         {
@@ -22210,12 +21690,7 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
@@ -22223,7 +21698,7 @@
     },
     {
       "id": "main-18-route110-open",
-      "parent": "main-18-ring-slateport-city",
+      "parent": "main-18-slateport-city",
       "frames": 1,
       "semantic_actions": [
         {
@@ -22297,12 +21772,7 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true
       },
@@ -22336,12 +21806,7 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         }
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
@@ -22433,12 +21898,7 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true,
         "position": [
@@ -22471,12 +21931,7 @@
         "items": {
           "ITEM_LETTER": 0,
           "ITEM_DEVON_PARTS": 0,
-          "ITEM_MEGA_RING": 1,
-          "ITEM_CHARIZARDITE_X": 1,
-          "ITEM_CHARIZARDITE_Y": 1
-        },
-        "vars": {
-          "VAR_STEVEN_STARTER_STONE_DELIVERY": 3
+          "ITEM_EMBOARITE": 1
         },
         "stable_overworld": true,
         "position": [
@@ -22485,238 +21940,6 @@
         ]
       },
       "chapter": "Steven’s Gift and the Road to Mauville"
-    },
-    {
-      "id": "optional-slateport-greta-offer",
-      "parent": "optional-slateport-museum-exit",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "walk_to",
-          "position": [
-            30,
-            28
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            21,
-            28
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            21,
-            34
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            20,
-            34
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            20,
-            36
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            19,
-            36
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            19,
-            52
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            34,
-            52
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            34,
-            54
-          ]
-        },
-        {
-          "type": "walk_to",
-          "position": [
-            35,
-            54
-          ]
-        },
-        {
-          "type": "interact_object",
-          "local_id": 39,
-          "candidates": [
-            {
-              "position": [
-                35,
-                54
-              ]
-            }
-          ],
-          "screenshot": "greta-offer"
-        },
-        {
-          "type": "press",
-          "keys": [
-            "A"
-          ],
-          "frames": 100
-        },
-        {
-          "type": "screenshot",
-          "name": "greta-challenge-menu"
-        }
-      ],
-      "expected": {
-        "map": "MAP_SLATEPORT_CITY",
-        "items": {
-          "ITEM_GENGARITE": 0
-        },
-        "flags": {
-          "FLAG_RECEIVED_GRETA_GENGARITE": 0
-        }
-      }
-    },
-    {
-      "id": "optional-slateport-greta-decline",
-      "parent": "optional-slateport-greta-offer",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "press",
-          "keys": [
-            "B"
-          ],
-          "frames": 100
-        },
-        {
-          "type": "screenshot",
-          "name": "greta-declined"
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 25
-        },
-        {
-          "type": "wait_stable_overworld"
-        }
-      ],
-      "expected": {
-        "map": "MAP_SLATEPORT_CITY",
-        "stable_overworld": true,
-        "items": {
-          "ITEM_GENGARITE": 0
-        },
-        "flags": {
-          "FLAG_RECEIVED_GRETA_GENGARITE": 0
-        }
-      }
-    },
-    {
-      "id": "optional-slateport-greta-reward",
-      "parent": "optional-slateport-greta-decline",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "interact_object",
-          "local_id": 39,
-          "candidates": [
-            {
-              "position": [
-                35,
-                54
-              ]
-            }
-          ],
-          "screenshot": "greta-rechallenge"
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 180,
-          "capture_presses": {
-            "5": "greta-battle",
-            "45": "greta-reward"
-          }
-        },
-        {
-          "type": "wait_stable_overworld"
-        }
-      ],
-      "expected": {
-        "map": "MAP_SLATEPORT_CITY",
-        "position": [
-          35,
-          54
-        ],
-        "stable_overworld": true,
-        "battle_serial_min": 4,
-        "items": {
-          "ITEM_GENGARITE": 1
-        },
-        "flags": {
-          "FLAG_RECEIVED_GRETA_GENGARITE": 1
-        }
-      }
-    },
-    {
-      "id": "optional-slateport-greta-revisit",
-      "parent": "optional-slateport-greta-reward",
-      "frames": 1,
-      "semantic_actions": [
-        {
-          "type": "interact_object",
-          "local_id": 39,
-          "candidates": [
-            {
-              "position": [
-                35,
-                54
-              ]
-            }
-          ],
-          "screenshot": "greta-after-reward"
-        },
-        {
-          "type": "advance_dialogue",
-          "max_presses": 25
-        },
-        {
-          "type": "wait_stable_overworld"
-        }
-      ],
-      "expected": {
-        "map": "MAP_SLATEPORT_CITY",
-        "position": [
-          35,
-          54
-        ],
-        "stable_overworld": true,
-        "items": {
-          "ITEM_GENGARITE": 1
-        },
-        "flags": {
-          "FLAG_RECEIVED_GRETA_GENGARITE": 1
-        }
-      }
     }
   ]
 }

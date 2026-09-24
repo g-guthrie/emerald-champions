@@ -62,6 +62,7 @@ IslandCave_EventScript_CaveEntranceMiddle:: @ 8238EEF
 
 IslandCave_EventScript_BigHoleInWall:: @ 8238F13
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+	msgbox IslandCave_Text_GuardianWarning, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -95,21 +96,33 @@ IslandCave_EventScript_Regice:: @ 8238F58
 	playmoncry SPECIES_REGICE, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_REGICE, VAR_0x800A, ITEM_NEVER_MELT_ICE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	@ A capture resolves it and a knockout loses it for good; an escape or
+	@ any other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IslandCave_EventScript_DefeatedRegice
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, IslandCave_EventScript_RanFromRegice
 	setflag FLAG_DEFEATED_REGICE
 	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	release
 	end
 
+IslandCave_EventScript_DefeatedRegice::
+	setflag FLAG_DEFEATED_REGICE
+	setvar VAR_0x8004, SPECIES_REGICE
+	goto Common_EventScript_LegendaryGone
+
 IslandCave_EventScript_RanFromRegice:: @ 8238FA8
 	setvar VAR_0x8004, SPECIES_REGICE
 	goto Common_EventScript_LegendaryFlewAway
 	end
+
+@ The point of no return: its guardian is lost for good if it faints.
+IslandCave_Text_GuardianWarning:
+	.string "Words are scratched beside it:\p"
+	.string "“A guardian that faints here\n"
+	.string "never rises again.”$"

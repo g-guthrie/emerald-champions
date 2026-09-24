@@ -96,7 +96,14 @@ table; Ultra Beasts and Paradox 2-3%; ordinary slots never below 2%; every
 method totals 100 via per-table `encounter_rates`. Sweet Scent multiplies live
 legend/UB slots by five. Party rule everywhere, including the League door: one
 Legendary/Mythical, one Ultra Beast, one Paradox. Regigigas needs the three
-Regis caught in the Pokédex, not carried. Arceus is the Devon researcher's gift
+Regis caught in the Pokédex, not carried. Static legendaries are high stakes like
+the vanilla games (owner rule, September 23): a knockout loses one for good, fleeing
+keeps it, capture resolves it; save before them. Norman gives the Mega Stones that fit
+the player's starters (Swampertite if none apply) and every other starter stone has one
+dynamic home. Cut trees roll one shared table (Skwovet, Pineco, Aipom, Burmy, Applin,
+Phantump) and those six live nowhere else. The Center guide is the built-in guide:
+legend leads, the next story destination and the local side quests, requirements stated
+once in prose. Route sign rosters page with A and close with B. Arceus is the Devon researcher's gift
 after the Hall of Fame. Groudon/Kyogre weather reports open after the Sootopolis
 crisis. The Champions Circuit gives no Pokémon; its former rewards live in the
 campaign. Game Corner Pokémon prizes arrive at the cap; starters are one-time.
@@ -113,8 +120,9 @@ exist from the Weather Institute rescue (FLAG_HIDE_ROUTE_119_TEAM_AQUA) until
 Rayquaza calms the sky (FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE): four live at a
 time, each lasting 1,500 player steps, refilled from unlocked uncaught visitors
 with a one-cycle cooldown and never two on one map. A live anomaly overrides the
-map's weather at runtime (rain, thunderstorm, downpour or horizontal fog only;
-routes and caves, never cities) and gives its visitor a flat 20% of encounters
+map's sky weather at runtime (rain, thunderstorm, downpour or horizontal fog
+only; routes and caves, never cities; terrain weather such as the desert
+sandstorm and Route 113's volcanic ash always wins, so no visitor lives there) and gives its visitor a flat 20% of encounters
 there. Outside its anomaly a visitor's slot is inert; after the window closes
 uncaught visitors become ordinary 1% residents. The visitor table lives beside
 the gate table in src/legendary_signs.c; state is in save vars. The Institute

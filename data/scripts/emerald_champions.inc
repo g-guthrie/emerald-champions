@@ -99,7 +99,7 @@ EmeraldChampions_EventScript_StarterItemsBagFull:
 
 EmeraldChampions_Text_StarterItemsBagFull:
 	.string "Make room in your Bag and come back.\n"
-	.string "I'll keep the rest of your kit here.$"
+	.string "I'll keep your kit here.$"
 
 EmeraldChampions_EventScript_BattleVendorMain:
 	@ Let the prior native list window finish clearing before another menu can
@@ -389,40 +389,108 @@ EmeraldChampions_Text_BondingDone:
 EmeraldChampions_Text_BondingUnavailable:
 	.string "Please choose a Pokémon, not an Egg.$"
 
+@ The Pokémon Center local guide: the game's built-in walkthrough. The
+@ special BufferNextCenterLegendaryLead reads the topic from VAR_0x8005
+@ (values match include/center_guide.h) and a cursor from VAR_0x8004, and
+@ fills gStringVar4. msgbox expands into gStringVar4, so every page is
+@ buffered again right before it is shown.
+	.set CENTER_GUIDE_TOPIC_LEGENDS, 0
+	.set CENTER_GUIDE_TOPIC_TIPS, 1
+	.set CENTER_GUIDE_TOPIC_STORY, 2
+	.set CENTER_GUIDE_TOPIC_BYE, 3
+
 Common_EventScript_CenterLocalGuide::
 	lockall
 	faceplayer
-	@ Probe for a first lead before the intro (msgbox overwrites gStringVar4),
-	@ so a Center with nothing to tell says so instead of going silent.
-	setvar VAR_0x8004, 0
-	special BufferNextCenterLegendaryLead
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterLocalGuideNoLeads
-	msgbox EmeraldChampions_Text_CenterLocalGuide, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 0
+	msgbox EmeraldChampions_Text_CenterGuideHello, MSGBOX_DEFAULT
 
-EmeraldChampions_EventScript_CenterLocalGuideNext::
+EmeraldChampions_EventScript_CenterGuideMenu:
+	@ Offer a topic only when this city has something to say about it.
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_LEGENDS
 	special BufferNextCenterLegendaryLead
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterLocalGuideEnd
+	copyvar VAR_0x8006, VAR_RESULT
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_TIPS
+	special BufferNextCenterLegendaryLead
+	copyvar VAR_0x8007, VAR_RESULT
+	message EmeraldChampions_Text_CenterGuideAsk
+	waitmessage
+	dynmultipush EmeraldChampions_Text_CenterGuideWhereToGo, CENTER_GUIDE_TOPIC_STORY
+	goto_if_eq VAR_0x8006, FALSE, EmeraldChampions_EventScript_CenterGuideNoLegends
+	dynmultipush EmeraldChampions_Text_CenterGuideRarePokemon, CENTER_GUIDE_TOPIC_LEGENDS
+EmeraldChampions_EventScript_CenterGuideNoLegends:
+	goto_if_eq VAR_0x8007, FALSE, EmeraldChampions_EventScript_CenterGuideNoTips
+	dynmultipush EmeraldChampions_Text_CenterGuideThingsToDo, CENTER_GUIDE_TOPIC_TIPS
+EmeraldChampions_EventScript_CenterGuideNoTips:
+	dynmultipush EmeraldChampions_Text_CenterGuideBye, CENTER_GUIDE_TOPIC_BYE
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case CENTER_GUIDE_TOPIC_STORY, EmeraldChampions_EventScript_CenterGuideStory
+	case CENTER_GUIDE_TOPIC_LEGENDS, EmeraldChampions_EventScript_CenterGuideLegends
+	case CENTER_GUIDE_TOPIC_TIPS, EmeraldChampions_EventScript_CenterGuideTips
+	msgbox EmeraldChampions_Text_CenterGuideGoodbye, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EmeraldChampions_EventScript_CenterGuideStory:
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_STORY
+	special BufferNextCenterLegendaryLead
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterGuideFinale
 	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_CenterLocalGuideNext
+	goto EmeraldChampions_EventScript_CenterGuideMenu
 
-EmeraldChampions_EventScript_CenterLocalGuideEnd::
-	releaseall
-	end
+@ After the Hall of Fame the shared finale directions say where to go.
+EmeraldChampions_EventScript_CenterGuideFinale:
+	call Common_EventScript_FinaleDirections
+	goto EmeraldChampions_EventScript_CenterGuideMenu
 
-EmeraldChampions_EventScript_CenterLocalGuideNoLeads::
-	msgbox EmeraldChampions_Text_CenterLocalGuideNoLeads, MSGBOX_DEFAULT
-	releaseall
-	end
+EmeraldChampions_EventScript_CenterGuideLegends:
+	msgbox EmeraldChampions_Text_CenterGuideSaveFirst, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_LEGENDS
+	goto EmeraldChampions_EventScript_CenterGuideNextPage
 
-EmeraldChampions_Text_CenterLocalGuideNoLeads:
-	.string "I listen for stories about rare\n"
-	.string "Pokémon, but none come from here.$"
+EmeraldChampions_EventScript_CenterGuideTips:
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_TIPS
+EmeraldChampions_EventScript_CenterGuideNextPage:
+	special BufferNextCenterLegendaryLead
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterGuideMenu
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideNextPage
 
-EmeraldChampions_Text_CenterLocalGuide:
-	.string "I listen for stories about rare\n"
-	.string "Pokémon around here. Let me tell\l"
-	.string "you where to look!$"
+EmeraldChampions_Text_CenterGuideHello:
+	.string "Hello! I'm the local guide.\n"
+	.string "I know this area inside out.$"
+
+EmeraldChampions_Text_CenterGuideAsk:
+	.string "What would you like to know?$"
+
+EmeraldChampions_Text_CenterGuideWhereToGo:
+	.string "Where to go$"
+
+EmeraldChampions_Text_CenterGuideRarePokemon:
+	.string "Rare Pokémon$"
+
+EmeraldChampions_Text_CenterGuideThingsToDo:
+	.string "Things to do$"
+
+EmeraldChampions_Text_CenterGuideBye:
+	.string "Goodbye$"
+
+EmeraldChampions_Text_CenterGuideSaveFirst:
+	.string "A legend you meet face to face\n"
+	.string "is one of a kind. If it faints,\l"
+	.string "it's gone for good.\p"
+	.string "Save before you face one. You\n"
+	.string "can always run and try again.$"
+
+EmeraldChampions_Text_CenterGuideGoodbye:
+	.string "Come back whenever you feel\n"
+	.string "lost. Good luck out there!$"
 
 EmeraldChampions_EventScript_UseHarvestPouch::
 	lockall
@@ -496,13 +564,24 @@ EmeraldChampions_EventScript_HarvestCelebiCheck:
 	special CheckEmeraldChampionsGardenCelebi
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestConfirm
 	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_HarvestAlready
+	goto_if_eq VAR_RESULT, 3, EmeraldChampions_EventScript_HarvestCelebiLost
 	msgbox EmeraldChampions_Text_HarvestMeetCelebi, MSGBOX_YESNO
 	goto_if_ne VAR_RESULT, YES, EmeraldChampions_EventScript_HarvestRequests
 	setvar VAR_0x8004, SPECIES_CELEBI
 	setvar VAR_0x8005, 0
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	dowildbattle
+	@ Like every static legend: a knockout loses it for good; anything but a
+	@ capture or a knockout leaves it in the garden for another visit.
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_ne VAR_RESULT, B_OUTCOME_WON, EmeraldChampions_EventScript_HarvestMenu
+	special LoseEmeraldChampionsGardenCelebi
+	msgbox EmeraldChampions_Text_HarvestCelebiVanished, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_HarvestMenu
+
+EmeraldChampions_EventScript_HarvestCelebiLost:
+	msgbox EmeraldChampions_Text_HarvestCelebiVanished, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestRequests
 
 EmeraldChampions_EventScript_HarvestAlready:
 	msgbox EmeraldChampions_Text_HarvestAlready, MSGBOX_DEFAULT
@@ -517,6 +596,9 @@ EmeraldChampions_EventScript_HarvestHelp:
 	msgbox EmeraldChampions_Text_HarvestHelp, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_HarvestMenu
 
+EmeraldChampions_Text_HarvestCelebiVanished:
+	.string "Celebi collapsed and vanished from\n"
+	.string "the garden without a trace…$"
 EmeraldChampions_Text_HarvestWelcome:
 	.string "Your harvest pouch keeps picked\n"
 	.string "berries separate from battle supplies.$"

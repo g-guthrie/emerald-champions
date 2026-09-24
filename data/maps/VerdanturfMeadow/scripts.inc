@@ -1,27 +1,10 @@
 VerdanturfMeadow_MapScripts::
 	.byte 0
 
-@ Route sign for the Meadow, Enamorus's anomaly home. Proposed: a sign
-@ bg_event in map.json (Codex owns placement) pointing here; until then this
-@ label is unreferenced.
-VerdanturfMeadow_EventScript_MeadowSign::
-	msgbox VerdanturfMeadow_Text_MeadowSign, MSGBOX_SIGN
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_ENAMORUS
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_FEZANDIPITI
-	call Common_EventScript_ShowRouteLegend
-	releaseall
-	end
-
-VerdanturfMeadow_Text_MeadowSign:
-	.string "Verdanturf Meadow\n"
-	.string "{UP_ARROW} Verdanturf Town$"
-
 VerdanturfMeadow_EventScript_GiftAudino::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_AUDINO, VerdanturfMeadow_EventScript_TakeCareOfAudino
+	goto_if_set FLAG_RECEIVED_AUDINO, VerdanturfMeadow_EventScript_MeadowGuide
 	msgbox VerdanturfMeadow_Text_PleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_1, SPECIES_AUDINO
 	@ Gift Pokemon arrive at the current level cap.
@@ -69,6 +52,22 @@ VerdanturfMeadow_EventScript_ReceivedAudinoFanfare::
 VerdanturfMeadow_EventScript_TakeCareOfAudino::
 	msgbox VerdanturfMeadow_Text_TakeCareOfAudino, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_AUDINO
+@ The Meadow has no route sign: the Audino girl tells its roster and the
+@ legend pages (Enamorus, Fezandipiti) a sign would show.
+VerdanturfMeadow_EventScript_MeadowGuide::
+	msgbox VerdanturfMeadow_Text_AskMeadowGuide, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, VerdanturfMeadow_EventScript_MeadowGuideDeclined
+	msgbox VerdanturfMeadow_Text_MeadowGuideIntro, MSGBOX_DEFAULT
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_ENAMORUS
+	call Common_EventScript_ShowRouteLegend
+	setvar VAR_0x8004, LEGENDARY_SIGN_FEZANDIPITI
+	call Common_EventScript_ShowRouteLegend
+	releaseall
+	end
+
+VerdanturfMeadow_EventScript_MeadowGuideDeclined::
+	msgbox VerdanturfMeadow_Text_MeadowGuideDeclined, MSGBOX_DEFAULT
 	release
 	end
 
@@ -88,3 +87,15 @@ VerdanturfMeadow_Text_PlayerReceivedAudino:
 
 VerdanturfMeadow_Text_TakeCareOfAudino:
 	.string "Take good care of Audino!$"
+
+VerdanturfMeadow_Text_AskMeadowGuide:
+	.string "I know every Pokémon in this\n"
+	.string "meadow. Want to hear about them?$"
+
+VerdanturfMeadow_Text_MeadowGuideIntro:
+	.string "Here's who lives in\n"
+	.string "Verdanturf Meadow!$"
+
+VerdanturfMeadow_Text_MeadowGuideDeclined:
+	.string "Be gentle with the Pokémon\n"
+	.string "out here, okay?$"

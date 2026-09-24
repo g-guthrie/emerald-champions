@@ -1152,6 +1152,8 @@ Common_EventScript_ShowPokemonCenterSign::
 @ this map's wild roster. Maps with legendary residents call
 @ Common_EventScript_ShowRouteRoster, then Common_EventScript_ShowRouteLegend
 @ once per resident, then releaseall/end.
+@ A turns the roster's pages; B closes the sign at once and the legend pages
+@ that follow are skipped (ShowRouteSignRoster in src/wild_encounter.c).
 Common_EventScript_ShowRouteSpecies::
 	call Common_EventScript_ShowRouteRoster
 	releaseall
@@ -1159,14 +1161,12 @@ Common_EventScript_ShowRouteSpecies::
 
 Common_EventScript_ShowRouteRoster::
 	lockall
-	special BufferCurrentMapRouteSignSpecies
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	callnative ShowRouteSignRoster
 	return
 
 @ VAR_0x8004 = the LEGENDARY_SIGN_* id of a resident of this map.
 Common_EventScript_ShowRouteLegend::
-	special ResearchSelectedLegendarySign
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	callnative ShowRouteSignLegendPage
 	return
 
 Common_ShowEasyChatScreen::
@@ -1548,18 +1548,40 @@ Common_EventScript_LegendaryRestingAtShrine::
 	releaseall
 	end
 
+@ Emerald Champions: a static Legendary or Mythical Pokémon that faints in
+@ battle is lost for good, like the original games. Callers set its defeated
+@ flag first and put its species in VAR_0x8004; VAR_LAST_TALKED is its object.
+@ removeobject also saves the object's hide flag, so re-entry never brings it
+@ back. A capture resolves the encounter; any other ending retreats instead.
+Common_EventScript_LegendaryGone::
+	call Common_EventScript_LegendaryVanishes
+	releaseall
+	end
+
+Common_EventScript_LegendaryVanishes::
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	fadescreenswapbuffers FADE_TO_BLACK
+	removeobject VAR_LAST_TALKED
+	fadescreenswapbuffers FADE_FROM_BLACK
+	bufferspeciesname STR_VAR_1, VAR_0x8004
+	msgbox gText_LegendaryVanished, MSGBOX_DEFAULT
+	return
+
+@ A shrine legend has no object: the caller sets the flag that keeps its
+@ shrine quiet, then this reports the loss.
+Common_EventScript_LegendaryGoneAtShrine::
+	bufferspeciesname STR_VAR_1, VAR_0x8004
+	msgbox gText_LegendaryVanished, MSGBOX_DEFAULT
+	releaseall
+	end
+
+gText_LegendaryVanished::
+	.string "The {STR_VAR_1} collapsed and\n"
+	.string "vanished without a trace…$"
+
 Common_EventScript_ExplainLegendaryResting::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryVictoryReminder
 	msgbox gText_LegendaryResting, MSGBOX_DEFAULT
 	return
-Common_EventScript_LegendaryVictoryReminder::
-	msgbox gText_LegendaryVictoryReminder, MSGBOX_DEFAULT
-	return
-gText_LegendaryVictoryReminder:
-	.string "You won this challenge.\p"
-	.string "If you want to catch the Pokémon,\n"
-	.string "leave this area and return later.$"
 
 gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} has retreated.\n"

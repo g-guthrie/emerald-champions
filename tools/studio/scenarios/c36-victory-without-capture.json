@@ -4,13 +4,8 @@
   },
   "setup": {
     "flags": {
-      "FLAG_EC_RESOLVED_SOUTHERN_LATI": true,
-      "FLAG_BADGE01_GET": true,
-      "FLAG_BADGE02_GET": true,
-      "FLAG_BADGE03_GET": true,
-      "FLAG_BADGE04_GET": true,
-      "FLAG_BADGE05_GET": true,
-      "FLAG_BADGE06_GET": true
+      "FLAG_DEFEATED_MEW": false,
+      "FLAG_CAUGHT_MEW": false
     }
   },
   "warp": {
@@ -33,18 +28,14 @@
       "every": 100,
       "frames": 8000,
       "until": "idle",
-      "label": "Mew resolved without capture"
+      "label": "Knockout: Mew vanishes"
     }
   ],
   "battle_resolution": "fixture_defeat",
   "queries": {
-    "resolved": {
+    "knocked_out": {
       "kind": 1,
-      "id": "FLAG_EC_RESOLVED_MEW"
-    },
-    "report": {
-      "kind": 1,
-      "id": "FLAG_EC_REPORT_C36_COMPLETE"
+      "id": "FLAG_DEFEATED_MEW"
     },
     "caught": {
       "kind": 1,
@@ -53,12 +44,11 @@
   },
   "expect": {
     "ready": true,
-    "cap": 64,
+    "contains_text": "vanished without a trace",
     "queries": {
-      "resolved": 1,
-      "report": 1,
+      "knocked_out": 1,
       "caught": 0
     }
   },
-  "name": "c36-victory-without-capture"
+  "name": "Mew knockout loses it for good"
 }

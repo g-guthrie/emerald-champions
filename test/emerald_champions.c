@@ -1938,10 +1938,11 @@ TEST("Champions Circuit templates use configured legal Abilities")
 
 TEST("Champions Circuit restores the exact prepared party after a run")
 {
+    // One Legendary only: the desk enforces the party rule.
     static const enum Species species[PARTY_SIZE] =
     {
         SPECIES_MEWTWO,
-        SPECIES_ARCEUS,
+        SPECIES_MACHAMP,
         SPECIES_SQUIRTLE,
         SPECIES_PIKACHU,
         SPECIES_EEVEE,
@@ -2527,16 +2528,17 @@ TEST("Emerald Champions paired prizes use incoming cap once and exclude replays"
     ResetCampaignCapMilestones();
 }
 
-TEST("Emerald Champions v4 reporter stages skip retired teams and preserve interview actors")
+TEST("Emerald Champions v4 reporter stages skip retired teams and end after party 6")
 {
-    static const u8 nextStates[] = {1, 4, 5, 6, 7, 8, 6};
+    // Parties 1, 2, 5 and 6 are fought once each (Route 111, 118, 118, 120);
+    // after party 6 the counter stays at 6 and the pair stays on Route 120.
+    static const u8 nextStates[] = {1, 4, 5, 6, 6};
     static const u8 gabbyIds[] = {LOCALID_ROUTE111_GABBY_1, LOCALID_ROUTE118_GABBY_1,
-        LOCALID_ROUTE118_GABBY_2, LOCALID_ROUTE120_GABBY_2, LOCALID_ROUTE111_GABBY_3,
-        LOCALID_ROUTE118_GABBY_3, LOCALID_ROUTE120_GABBY_2};
+        LOCALID_ROUTE118_GABBY_2, LOCALID_ROUTE120_GABBY_2, LOCALID_ROUTE120_GABBY_2};
     static const u8 tyIds[] = {LOCALID_ROUTE111_TY_1, LOCALID_ROUTE118_TY_1,
-        LOCALID_ROUTE118_TY_2, LOCALID_ROUTE120_TY_2, LOCALID_ROUTE111_TY_3,
-        LOCALID_ROUTE118_TY_3, LOCALID_ROUTE120_TY_2};
+        LOCALID_ROUTE118_TY_2, LOCALID_ROUTE120_TY_2, LOCALID_ROUTE120_TY_2};
     ResetGabbyAndTy();
+    EXPECT_EQ(GabbyAndTyGetBattleNum(), 0);
     gBattleResults.lastUsedMovePlayer = MOVE_TACKLE;
     for (u32 i = 0; i < ARRAY_COUNT(nextStates); i++)
     {
@@ -2549,13 +2551,20 @@ TEST("Emerald Champions v4 reporter stages skip retired teams and preserve inter
     for (u32 i = 0; i < 300; i++)
     {
         GabbyAndTyBeforeInterview();
-        EXPECT_EQ(GabbyAndTyGetBattleNum(), 6 + (i + 1) % 3);
+        EXPECT_EQ(GabbyAndTyGetBattleNum(), 6);
+    }
+    // Saves from the old endless party-6 cycle (7, 8) and the retired
+    // parties 3/4 (2, 3) land on a live state.
+    for (u32 legacy = 2; legacy <= 8; legacy++)
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.battleNum = legacy;
+        EXPECT_EQ(GabbyAndTyGetBattleNum(), legacy <= 3 ? 4 : min(legacy, 6));
     }
     ResetGabbyAndTy();
     FlagClear(FLAG_TEMP_SKIP_GABBY_INTERVIEW);
 }
 
-TEST("Emerald Champions v4 final reporter rematches do not renew first-clear money")
+TEST("Emerald Champions v4 final reporter battle pays first-clear money once")
 {
     struct BattleStruct *savedStruct = gBattleStruct;
     u32 savedFlags = gBattleTypeFlags;
@@ -2569,8 +2578,8 @@ TEST("Emerald Champions v4 final reporter rematches do not renew first-clear mon
     gSaveBlock1Ptr->gabbyAndTyData.battleNum = 5;
     InitCampaignBattleReward();
     EXPECT(GetCampaignBattleMoneyReward() > 0);
-    // The map permits replay by clearing the native trainer flag. The persistent
-    // interview counter still owns the already-earned first-clear receipt.
+    // The retired pair never battles again (the map keeps the trainer flag
+    // set); even a legacy save with the flag cleared earns no second receipt.
     gSaveBlock1Ptr->gabbyAndTyData.battleNum = 6;
     ClearTrainerFlag(TRAINER_GABBY_AND_TY_6);
     InitCampaignBattleReward();

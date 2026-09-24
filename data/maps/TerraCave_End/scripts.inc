@@ -36,21 +36,28 @@ TerraCave_End_EventScript_Groudon:: @ 823B0EC
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_GROUDON
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_GROUDON, VAR_0x800A, ITEM_GROUND_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout or escape lets it be met again,
-	@ like every other static legendary (its Orb comes with the capture).
+	@ A capture resolves it (its Orb comes with the capture). A knockout
+	@ loses it for good and ends the weather, like the original game; an
+	@ escape or any other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, TerraCave_End_EventScript_DefeatedGroudon
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, TerraCave_End_EventScript_RanFromGroudon
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON
 	releaseall
 	end
+
+TerraCave_End_EventScript_DefeatedGroudon::
+	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	setflag FLAG_DEFEATED_GROUDON
+	setvar VAR_0x8004, SPECIES_GROUDON
+	goto Common_EventScript_LegendaryGone
 
 TerraCave_End_EventScript_RanFromGroudon:: @ 823B163
 	setvar VAR_0x8004, SPECIES_GROUDON

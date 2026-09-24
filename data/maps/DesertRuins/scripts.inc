@@ -48,6 +48,7 @@ DesertRuins_EventScript_CaveEntranceMiddle:: @ 822D9DB
 
 DesertRuins_EventScript_BigHoleInWall:: @ 822D9EE
 	msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+	msgbox DesertRuins_Text_GuardianWarning, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -66,22 +67,33 @@ DesertRuins_EventScript_Regirock:: @ 822DA02
 	playmoncry SPECIES_REGIROCK, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_REGIROCK, VAR_0x800A, ITEM_HARD_STONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	@ A capture resolves it and a knockout loses it for good; an escape or
+	@ any other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, DesertRuins_EventScript_RanFromRegirock
 	setflag FLAG_DEFEATED_REGIROCK
 	call EmeraldChampions_EventScript_ThreeRuinsProgress
 	release
 	end
 
+DesertRuins_EventScript_DefeatedRegirock::
+	setflag FLAG_DEFEATED_REGIROCK
+	setvar VAR_0x8004, SPECIES_REGIROCK
+	goto Common_EventScript_LegendaryGone
+
 DesertRuins_EventScript_RanFromRegirock:: @ 822DA52
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+@ The point of no return: its guardian is lost for good if it faints.
+DesertRuins_Text_GuardianWarning:
+	.string "Words are scratched beside it:\p"
+	.string "“A guardian that faints here\n"
+	.string "never rises again.”$"

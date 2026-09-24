@@ -68,11 +68,18 @@ NavelRock_Top_EventScript_HoOh:: @ 826916F
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, LOCALID_HO_OH
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	@ A capture resolves it and a knockout loses it; an escape or any
+	@ other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Top_EventScript_DefeatedHoOh
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, NavelRock_Top_EventScript_RanFromHoOh
 	setflag FLAG_CAUGHT_HO_OH
 	releaseall
 	end
+
+NavelRock_Top_EventScript_DefeatedHoOh::
+	setflag FLAG_DEFEATED_HO_OH
+	setvar VAR_0x8004, SPECIES_HO_OH
+	goto Common_EventScript_LegendaryGone
 
 NavelRock_Top_EventScript_RanFromHoOh:: @ 8269225
 	setvar VAR_0x8004, SPECIES_HO_OH

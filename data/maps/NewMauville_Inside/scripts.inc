@@ -200,16 +200,15 @@ NewMauville_Inside_EventScript_RotomEncounter::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox NewMauville_Inside_Text_PokemonCameOut, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_ROTOM, VAR_0x800A, ITEM_NONE
 	waitse
 	dowildbattle
 NewMauville_Inside_EventScript_CheckRotomOutcome::
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Rotom is the only one in the game: like every unique encounter, only a
-	@ capture resolves it. A knockout sends it back into the generator, and
-	@ the job stays open until it is caught.
+	@ Rotom is the only one in the game. A capture or a knockout stops the
+	@ generator and finishes Wattson's job; a knockout loses Rotom for good.
+	@ An escape or any other ending leaves it in the generator for a retry.
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_PlayerCaughtRotom
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedRotom
 NewMauville_Inside_EventScript_RetryRotom::
@@ -218,10 +217,12 @@ NewMauville_Inside_EventScript_RetryRotom::
 	end
 
 NewMauville_Inside_EventScript_DefeatedRotom::
-	msgbox NewMauville_Inside_Text_RotomLeftGenerator, MSGBOX_DEFAULT
-	goto NewMauville_Inside_EventScript_RetryRotom
+	setvar VAR_NEW_MAUVILLE_STATE, 6
+	msgbox NewMauville_Inside_Text_RotomVanished, MSGBOX_DEFAULT
+	goto NewMauville_Inside_EventScript_FinishRotomQuest
 
 NewMauville_Inside_EventScript_PlayerCaughtRotom::
+	setvar VAR_NEW_MAUVILLE_STATE, 6
 	msgbox NewMauville_Inside_Text_GeneratorStopped, MSGBOX_DEFAULT
 NewMauville_Inside_EventScript_FinishRotomQuest::
 	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
@@ -275,8 +276,7 @@ NewMauville_Inside_EventScript_GeneratorOff:: @ 82377A5
 NewMauville_Inside_EventScript_Electrode1:: @ 82377AF
 	lock
 	faceplayer
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
 	waitse
 	playmoncry SPECIES_ELECTRODE, 2
@@ -304,8 +304,7 @@ NewMauville_Inside_EventScript_DefeatedVoltorb1:: @ 82377F3
 NewMauville_Inside_EventScript_Electrode2:: @ 82377FC
 	lock
 	faceplayer
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
 	waitse
 	playmoncry SPECIES_ELECTRODE, 2
@@ -333,8 +332,7 @@ NewMauville_Inside_EventScript_DefeatedVoltorb2:: @ 8237840
 NewMauville_Inside_EventScript_Electrode3:: @ 8237849
 	lock
 	faceplayer
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
 	waitse
 	playmoncry SPECIES_ELECTRODE, 2
@@ -367,12 +365,16 @@ NewMauville_Inside_EventScript_Zapdos::
 	playmoncry SPECIES_ZAPDOS, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_ZAPDOS, VAR_0x800A, ITEM_WACAN_BERRY
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 NewMauville_Inside_EventScript_CheckZapdosResult::
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	setvar VAR_0x8004, SPECIES_ZAPDOS
+	specialvar VAR_RESULT, GetBattleOutcome
+	@ A knockout loses it for good; capture resolves it; anything else retreats.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryGone
 	goto Common_EventScript_EndVisibleLegendaryEncounter
 
 NewMauville_Inside_Text_GeneratorRadiatingHeat: @ 8237896
@@ -398,9 +400,11 @@ NewMauville_Inside_Text_GeneratorRestarted:
 NewMauville_Inside_Text_GeneratorRestartedAgain:
 	.string "The generator restarted again!$"
 
-NewMauville_Inside_Text_RotomLeftGenerator:
-	.string "Rotom slipped back into the\n"
-	.string "generator! It's still in there…$"
+NewMauville_Inside_Text_RotomVanished:
+	.string "Rotom collapsed and vanished\n"
+	.string "without a trace…\p"
+	.string "The generator appears to have\n"
+	.string "stopped…$"
 
 NewMauville_Inside_Text_GeneratorStopped:
 	.string "The generator appears to have\n"

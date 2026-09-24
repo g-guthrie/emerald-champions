@@ -823,7 +823,9 @@ static u8 BuildLilycoveSSTidalSelections(void)
     if (mode == 0)
     {
         sLilycoveSSTidalSelections[count++] = SSTIDAL_SELECTION_SLATEPORT;
-        if (FlagGet(FLAG_BADGE06_GET) || FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL))
+        // One rule at both harbors (SlateportCity_Harbor too): the Battle
+        // Frontier is on the ferry map after the Hall of Fame.
+        if (FlagGet(FLAG_SYS_GAME_CLEAR))
             sLilycoveSSTidalSelections[count++] = SSTIDAL_SELECTION_BATTLE_FRONTIER;
     }
 

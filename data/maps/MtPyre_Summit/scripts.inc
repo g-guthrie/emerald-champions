@@ -570,7 +570,9 @@ MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis: @ 823290E
 	.string "I couldn't imagine what exactly it\n"
 	.string "could be.\p"
 	.string "I would like you to have it.\n"
-	.string "Perhaps it will be useful in some way.$"
+	.string "Perhaps it will be useful in some way.\p"
+	.string "The same mark is carved into\n"
+	.string "the rocks of Jagged Pass.$"
 
 MtPyre_Summit_Text_OrbsHaveBeenTaken: @ 8232AD8
 	.string "The Blue Orb and Red Orb taken by\n"
@@ -680,6 +682,7 @@ MtPyre_Summit_Text_HoennTrioTale: @ 823325D
 MtPyre_Summit_EventScript_Darkrai::
 	lockall
 	special TryUnlockDarkraiLegendarySign
+	goto_if_eq VAR_RESULT, 6, MtPyre_Summit_EventScript_DarkraiGone
 	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiDormant
 	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiDormant
@@ -694,7 +697,20 @@ MtPyre_Summit_EventScript_Darkrai::
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
+	@ A knockout loses it for good (its shrine flag marks the loss); capture
+	@ resolves it; any other ending rests it until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtPyre_Summit_EventScript_DefeatedDarkrai
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
+	releaseall
+	end
+
+MtPyre_Summit_EventScript_DefeatedDarkrai::
+	setflag FLAG_HIDE_LEGENDARY_SIGN_DARKRAI
+	setvar VAR_0x8004, SPECIES_DARKRAI
+	goto Common_EventScript_LegendaryGoneAtShrine
+
+MtPyre_Summit_EventScript_DarkraiGone::
+	msgbox MtPyre_Summit_Text_DarkraiGone, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -716,6 +732,10 @@ MtPyre_Summit_Text_DarkraiDormant:
 	.string "Then return to this pedestal.\p"
 	.string "Munna or Musharna can be in\n"
 	.string "your party or your PC.$"
+
+MtPyre_Summit_Text_DarkraiGone:
+	.string "The pedestal is cold and silent.\n"
+	.string "Darkrai vanished and won't return.$"
 
 MtPyre_Summit_Text_DarkraiQuiet:
 	.string "The nightmare has lifted.\n"

@@ -92,6 +92,28 @@ TEST("Finale: Steven's delivered Aurora Ticket appears in the ferry menu")
     ClearBag();
 }
 
+TEST("Finale: the Battle Frontier is on the Lilycove ferry map exactly after the Hall of Fame")
+{
+    u8 destinations[SSTIDAL_SELECTION_COUNT];
+    ClearBag();
+    gSpecialVar_0x8004 = 0;
+    // Neither Badge 6 nor meeting Scott opens it any more; one rule at both harbors.
+    for (u32 bits = 0; bits < 8; bits++)
+    {
+        bool32 cleared = bits & 1;
+        if (cleared) FlagSet(FLAG_SYS_GAME_CLEAR); else FlagClear(FLAG_SYS_GAME_CLEAR);
+        if (bits & 2) FlagSet(FLAG_BADGE06_GET); else FlagClear(FLAG_BADGE06_GET);
+        if (bits & 4) FlagSet(FLAG_MET_SCOTT_ON_SS_TIDAL); else FlagClear(FLAG_MET_SCOTT_ON_SS_TIDAL);
+        u32 count = Test_BuildLilycoveSSTidalSelections(destinations);
+        EXPECT_EQ(destinations[0], SSTIDAL_SELECTION_SLATEPORT);
+        EXPECT_EQ(count, cleared ? 3 : 2);
+        EXPECT_EQ(destinations[1], cleared ? SSTIDAL_SELECTION_BATTLE_FRONTIER : SSTIDAL_SELECTION_EXIT);
+    }
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    FlagClear(FLAG_BADGE06_GET);
+    FlagClear(FLAG_MET_SCOTT_ON_SS_TIDAL);
+}
+
 extern void GetLilycoveSSTidalSelection(void);
 
 TEST("Finale: ferry ticket choices preserve unlocks presentation flags and destination mapping")
@@ -102,7 +124,7 @@ TEST("Finale: ferry ticket choices preserve unlocks presentation flags and desti
         {ITEM_AURORA_TICKET, FLAG_ENABLE_SHIP_BIRTH_ISLAND, FLAG_SHOWN_AURORA_TICKET, FLAG_EC_EARNED_AURORA_TICKET, SSTIDAL_SELECTION_BIRTH_ISLAND},
         {ITEM_OLD_SEA_MAP, FLAG_ENABLE_SHIP_FARAWAY_ISLAND, FLAG_SHOWN_OLD_SEA_MAP, FLAG_EC_EARNED_OLD_SEA_MAP, SSTIDAL_SELECTION_FARAWAY_ISLAND},
     };
-    FlagClear(FLAG_BADGE06_GET);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
     FlagClear(FLAG_MET_SCOTT_ON_SS_TIDAL);
     for (u32 ticket = 0; ticket < ARRAY_COUNT(tickets); ticket++)
     for (u32 bits = 0; bits < 32; bits++)
@@ -144,7 +166,7 @@ TEST("Finale: ferry ticket choices preserve unlocks presentation flags and desti
         EXPECT_EQ(gSpecialVar_Result, MULTI_B_PRESSED);
     }
     ClearBag();
-    FlagSet(FLAG_BADGE06_GET);
+    FlagSet(FLAG_SYS_GAME_CLEAR);
     for (u32 i = 0; i < ARRAY_COUNT(tickets); i++)
     {
         EXPECT(AddBagItem(tickets[i].item, 1));
@@ -156,7 +178,7 @@ TEST("Finale: ferry ticket choices preserve unlocks presentation flags and desti
     for (u32 i = 0; i < SSTIDAL_SELECTION_COUNT; i++)
         EXPECT_EQ(destinations[i], i);
     ClearBag();
-    FlagClear(FLAG_BADGE06_GET);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
     for (u32 i = 0; i < ARRAY_COUNT(tickets); i++)
     {
         FlagClear(tickets[i].enabled);

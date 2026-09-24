@@ -9,19 +9,25 @@ CaveOfOrigin_DianciesRoom_EventScript_Diancie::
 	playmoncry SPECIES_DIANCIE, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_DIANCIE, VAR_0x800A, ITEM_FAIRY_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it. A knockout, escape, Red Card or Emergency
-	@ Exit ending (B_OUTCOME_MON_TELEPORTED) retreats and stays catchable.
+	@ A capture resolves it and a knockout loses it for good; an escape,
+	@ Red Card, Emergency Exit or any other ending retreats until the
+	@ player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CaveOfOrigin_DianciesRoom_EventScript_DefeatedDiancie
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie
 	setflag FLAG_DEFEATED_DIANCIE
 	release
 	end
+
+CaveOfOrigin_DianciesRoom_EventScript_DefeatedDiancie::
+	setflag FLAG_DEFEATED_DIANCIE
+	setvar VAR_0x8004, SPECIES_DIANCIE
+	goto Common_EventScript_LegendaryGone
 
 CaveOfOrigin_DianciesRoom_EventScript_RanFromDiancie::
 	setvar VAR_0x8004, SPECIES_DIANCIE

@@ -29,12 +29,10 @@ EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
-	clearflag FLAG_DEFEATED_MEW
-	clearflag FLAG_DEFEATED_LATIAS_OR_LATIOS
 	call_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_RecordDeoxysFinale
+	@ Only Deoxys stirs again after a League win (finale retry); a knocked-out
+	@ island legend stays lost, as in the vanilla games.
 	clearflag FLAG_DEFEATED_DEOXYS
-	clearflag FLAG_DEFEATED_LUGIA
-	clearflag FLAG_DEFEATED_HO_OH
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ReadyCynthiaEvent::

@@ -87,9 +87,19 @@ SouthernIsland_Interior_EventScript_Lati:: @ 8242AD0
 	special BattleSetup_StartLatiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	@ A capture resolves it and earns the Eon stones. A knockout loses it,
+	@ and the stones with it; an escape or any other ending retreats until
+	@ the player sails back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_DefeatedLati
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, SouthernIsland_Interior_EventScript_RanFromLati
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
+	goto SouthernIsland_Interior_EventScript_GiveLatiStones
+
+SouthernIsland_Interior_EventScript_DefeatedLati::
+	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+	copyvar VAR_0x8004, VAR_TEMP_4
+	call Common_EventScript_LegendaryVanishes
+	msgbox SouthernIsland_Interior_Text_StonesFaded, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -98,9 +108,23 @@ SouthernIsland_Interior_EventScript_RanFromLati:: @ 8242B8F
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+@ The Eon stones sparkle only for a Trainer who caught the island's Pokémon.
 SouthernIsland_Interior_EventScript_Sign:: @ 8242B9A
+	goto_if_set FLAG_RECEIVED_LATI_STONES, SouthernIsland_Interior_EventScript_SignOnly
+	goto_if_set FLAG_CAUGHT_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_SignThenStones
+	goto_if_set FLAG_DEFEATED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_SignStonesLost
+SouthernIsland_Interior_EventScript_SignOnly::
 	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
-	goto_if_unset FLAG_RECEIVED_LATI_STONES, SouthernIsland_Interior_EventScript_GiveLatiStones
+	releaseall
+	end
+
+SouthernIsland_Interior_EventScript_SignThenStones::
+	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
+	goto SouthernIsland_Interior_EventScript_GiveLatiStones
+
+SouthernIsland_Interior_EventScript_SignStonesLost::
+	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT
+	msgbox SouthernIsland_Interior_Text_StonesLost, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -182,3 +206,14 @@ SouthernIsland_Interior_Movement_LatiApproach: @ 8242BDA
 SouthernIsland_Interior_Text_SparkleBagFull:
 	.string "Something sparkles near the words,\n"
 	.string "but your Bag has no room for it.$"
+
+SouthernIsland_Interior_Text_StonesFaded:
+	.string "Something sparkled near the words,\n"
+	.string "then faded away.\p"
+	.string "The stones the Pokémon guarded\n"
+	.string "were lost along with it.$"
+
+SouthernIsland_Interior_Text_StonesLost:
+	.string "Nothing sparkles near the words.\n"
+	.string "The stones the Pokémon guarded\l"
+	.string "were lost along with it.$"

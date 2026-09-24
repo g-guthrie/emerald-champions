@@ -33,7 +33,10 @@ RustboroCity_CuttersHouse_Text_ExplainCut: @ 8215D33
 	.string "Bring one able to learn Cut;\n"
 	.string "it needn't know the move.\p"
 	.string "You can also clear tall grass\n"
-	.string "using Cut in the party menu.$"
+	.string "using Cut in the party menu.\p"
+	.string "One more thing: Pokémon nest in\n"
+	.string "thin trees, and some live nowhere\l"
+	.string "else. A route's sign lists them.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees: @ 8215E39
 	.string "When they were expanding the city of\n"

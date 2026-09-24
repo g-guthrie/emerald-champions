@@ -164,7 +164,9 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	call DewfordTown_Gym_EventScript_GiveBulkUp
+	@ FLAG_RECEIVED_TM08 is Emboarite's only receipt (Norman may give it
+	@ to a Tepig pair); see src/mega_stone_rewards.c.
+	call_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp
 	closemessage
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
@@ -423,6 +425,8 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "Badge.\p"
 	.string "With a Flash license, it lights\n"
 	.string "up dark caves automatically.\p"
+	.string "Just bring a partner that could\n"
+	.string "learn Flash.\p"
 	.string "Take this Mega Stone as well.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181

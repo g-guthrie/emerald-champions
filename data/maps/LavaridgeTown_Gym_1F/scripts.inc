@@ -195,6 +195,8 @@ LavaridgeTown_Gym_1F_Text_GymGuideAdvice2: @ 81FE9BF
 	.string "She likes to battle in the sun, and\n"
 	.string "her Pokémon are all trained to hit as\l"
 	.string "hard as they can.\p"
+	.string "The hot-spring steam also fills\n"
+	.string "every battle here with Misty Terrain.\p"
 	.string "You might need some extra power to\n"
 	.string "keep up!\p"	
 	.string "Try buying some Gems from the local\n"

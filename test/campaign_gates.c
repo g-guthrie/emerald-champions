@@ -219,7 +219,7 @@ extern const u8 NewMauville_Inside_EventScript_DefeatedRotom[];
 extern const u8 NewMauville_Inside_EventScript_PlayerCaughtRotom[];
 extern const u8 NewMauville_Inside_EventScript_RetryRotom[];
 
-TEST("Campaign gates: New Mauville completes only on Rotom capture and retries every other outcome")
+TEST("Campaign gates: New Mauville completes on Rotom capture or knockout and retries every other outcome")
 {
     u16 oldState = VarGet(VAR_NEW_MAUVILLE_STATE);
     u8 oldOutcome = gBattleOutcome;
@@ -240,6 +240,12 @@ TEST("Campaign gates: New Mauville completes only on Rotom capture and retries e
         }
         EXPECT_EQ(ctx.scriptPtr, expected);
         EXPECT_EQ(VarGet(VAR_NEW_MAUVILLE_STATE), 5);
+        // Each branch opens by recording the job: finished (6) after a capture
+        // or a knockout (which loses Rotom for good), still open (5) otherwise.
+        u8 command = *ctx.scriptPtr++;
+        EXPECT(!ctx.cmdTable[command](&ctx));
+        EXPECT_EQ(VarGet(VAR_NEW_MAUVILLE_STATE),
+            (outcome == B_OUTCOME_CAUGHT || outcome == B_OUTCOME_WON) ? 6 : 5);
     }
     VarSet(VAR_NEW_MAUVILLE_STATE, oldState);
     gBattleOutcome = oldOutcome;

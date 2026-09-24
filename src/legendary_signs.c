@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "caps.h"
+#include "center_guide.h"
 #include "constants/emerald_champions.h"
 #include "data.h"
 #include "daycare.h"
@@ -178,12 +179,57 @@ static u16 GetLegendarySignObjectFlag(enum LegendarySignId signId)
     return (u32)signId < LEGENDARY_SIGN_COUNT ? sObjectFlags[signId] : 0;
 }
 
+// A static Legendary or Mythical that faints in battle is lost for good.
+// Its map keeps it away with this flag: the object hide flag its knockout's
+// removeobject saves, the shrine flag its script sets, or the classic
+// defeated flag. A capture sets the same flag, so the caught bit tells the
+// two apart. Deoxys is not listed: its defeat completes the finale.
+static u16 GetStaticLegendaryGoneFlag(enum LegendarySignId signId)
+{
+    switch (signId)
+    {
+    case LEGENDARY_SIGN_ARTICUNO:  return FLAG_EC_CAUGHT_ARTICUNO;
+    case LEGENDARY_SIGN_ZAPDOS:    return FLAG_EC_CAUGHT_ZAPDOS;
+    case LEGENDARY_SIGN_MEWTWO:    return FLAG_EC_CAUGHT_MEWTWO;
+    case LEGENDARY_SIGN_REGIGIGAS: return FLAG_EC_CAUGHT_REGIGIGAS;
+    case LEGENDARY_SIGN_PECHARUNT: return FLAG_EC_CAUGHT_PECHARUNT;
+    case LEGENDARY_SIGN_DARKRAI:   return FLAG_HIDE_LEGENDARY_SIGN_DARKRAI;
+    case LEGENDARY_SIGN_MOLTRES:   return FLAG_DEFEATED_MOLTRES;
+    case LEGENDARY_SIGN_HEATRAN:   return FLAG_DEFEATED_HEATRAN;
+    case LEGENDARY_SIGN_REGIROCK:  return FLAG_DEFEATED_REGIROCK;
+    case LEGENDARY_SIGN_REGICE:    return FLAG_DEFEATED_REGICE;
+    case LEGENDARY_SIGN_REGISTEEL: return FLAG_DEFEATED_REGISTEEL;
+    case LEGENDARY_SIGN_GROUDON:   return FLAG_DEFEATED_GROUDON;
+    case LEGENDARY_SIGN_KYOGRE:    return FLAG_DEFEATED_KYOGRE;
+    case LEGENDARY_SIGN_RAYQUAZA:  return FLAG_DEFEATED_RAYQUAZA;
+    case LEGENDARY_SIGN_JIRACHI:   return FLAG_DEFEATED_JIRACHI;
+    case LEGENDARY_SIGN_DIANCIE:   return FLAG_DEFEATED_DIANCIE;
+    default:                       return 0;
+    }
+}
+
+static bool32 IsLegendarySignLost(enum LegendarySignId signId)
+{
+    u16 goneFlag = GetStaticLegendaryGoneFlag(signId);
+
+    if (goneFlag == 0 || !FlagGet(goneFlag) || IsLegendarySignCaught(signId))
+        return FALSE;
+    // These two flags start set, before the Pokémon has ever appeared.
+    if (signId == LEGENDARY_SIGN_DARKRAI)
+        return IsLegendarySignUnlocked(signId); // Its shrine unlocks it first.
+    if (signId == LEGENDARY_SIGN_HEATRAN) // The Magma Stone (a Key Item) was set down.
+        return FlagGet(FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAGMA_STONE)
+            && !CheckBagHasItem(ITEM_MAGMA_STONE, 1) && !CheckPCHasItem(ITEM_MAGMA_STONE, 1);
+    return TRUE;
+}
+
 void UnlockLegendarySign(enum LegendarySignId signId)
 {
     u16 objectFlag = GetLegendarySignObjectFlag(signId);
+    bool32 lost = IsLegendarySignLost(signId);
 
     SetLegendaryStateBit(VAR_LEGENDARY_SIGNS_UNLOCKED_0, signId);
-    if (objectFlag != 0 && !IsLegendarySignCaught(signId))
+    if (objectFlag != 0 && !IsLegendarySignCaught(signId) && !lost)
         FlagClear(objectFlag);
 }
 
@@ -346,7 +392,26 @@ bool32 CanAcquireLegendarySignSpecies(enum Species species)
 {
     enum LegendarySignId id = GetLegendarySignIdBySpecies(species);
     return id >= LEGENDARY_SIGN_COUNT
-        || (!IsLegendarySignCaught(id) && MeetsSignProgression(id) && MeetsSignDiscovery(id));
+        || (!IsLegendarySignCaught(id) && !IsLegendarySignLost(id)
+         && MeetsSignProgression(id) && MeetsSignDiscovery(id));
+}
+
+// A discovery whose required Pokémon was lost in battle (and never caught)
+// can no longer be completed.
+static bool32 IsRequiredFamilyLost(enum Species species)
+{
+    return IsLegendarySignLost(GetLegendarySignIdBySpecies(species)) && !HasCaughtSpeciesFamily(species);
+}
+
+static bool32 IsSignDiscoveryLost(enum LegendarySignId id)
+{
+    enum Species required = gLegendaryGates[id].requiredSpecies;
+
+    if (id == LEGENDARY_SIGN_REGIGIGAS)
+        return IsRequiredFamilyLost(SPECIES_REGIROCK)
+            || IsRequiredFamilyLost(SPECIES_REGICE)
+            || IsRequiredFamilyLost(SPECIES_REGISTEEL);
+    return required != SPECIES_NONE && IsRequiredFamilyLost(required);
 }
 
 // Saved bit indices are append-only: 0-23 are undelivered relics and
@@ -481,6 +546,8 @@ void TryUnlockSelectedLegendarySign(void)
         return;
     if (IsLegendarySignCaught(id))
         gSpecialVar_Result = 4;
+    else if (IsLegendarySignLost(id))
+        gSpecialVar_Result = 6;
     else if (!MeetsSignProgression(id))
         return;
     else if (!MeetsSignDiscovery(id))
@@ -501,6 +568,8 @@ u16 GetSelectedLegendarySignState(void)
         gSpecialVar_Result = 0;
     else if (IsLegendarySignCaught(id))
         gSpecialVar_Result = 2;
+    else if (IsLegendarySignLost(id))
+        gSpecialVar_Result = 4;
     else if (CanAcquireLegendarySignSpecies(gLegendaryGates[id].species))
         gSpecialVar_Result = IsSignResting(id) ? 3 : 1;
     else
@@ -579,7 +648,7 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
     if (needsBadges)
     {
         ConvertIntToDecimalStringN(gStringVar1, gate->minimumBadges, STR_CONV_MODE_LEFT_ALIGN, 1);
-        StringExpandPlaceholders(buffer, COMPOUND_STRING("\pGym Badges required:\n{STR_VAR_1}."));
+        StringExpandPlaceholders(buffer, COMPOUND_STRING("\pGym Badges required: {STR_VAR_1}."));
         StringAppend(gStringVar4, buffer);
     }
     if (gate->unlockFlag == 0 || FlagGet(gate->unlockFlag))
@@ -634,9 +703,11 @@ static bool32 IsVisitorAwayInStorms(enum LegendarySignId id)
 }
 
 static const u8 sText_VisitorFollowsStorms[] = _("\pIt rides the weather anomalies.\nThe Weather Institute tracks them.");
+static const u8 sText_LegendaryLost[] = _("\pIt fainted in battle and vanished.\nA fainted legend never returns.");
+static const u8 sText_LegendaryDiscoveryLost[] = _("\pA Pokémon it needs fainted and\nvanished. That lead is closed.");
 
 // Result: 0 = needs progression, 1 = needs discovery, 2 = available,
-// 4 = caught, 5 = resting after a failed static encounter.
+// 4 = caught, 5 = resting after an escape, 6 = lost after a knockout.
 void ResearchSelectedLegendarySign(void)
 {
     u16 selection = gSpecialVar_0x8004;
@@ -653,6 +724,12 @@ void ResearchSelectedLegendarySign(void)
         gSpecialVar_Result = 4;
         return;
     }
+    if (IsLegendarySignLost(id))
+    {
+        StringAppend(gStringVar4, sText_LegendaryLost);
+        gSpecialVar_Result = 6;
+        return;
+    }
     if (!MeetsSignProgression(id))
     {
         AppendLegendaryProgressionRequirements(id);
@@ -662,7 +739,9 @@ void ResearchSelectedLegendarySign(void)
     }
     if (!MeetsSignDiscovery(id))
     {
-        if (id == LEGENDARY_SIGN_MARSHADOW)
+        if (IsSignDiscoveryLost(id))
+            StringAppend(gStringVar4, sText_LegendaryDiscoveryLost);
+        else if (id == LEGENDARY_SIGN_MARSHADOW)
             StringAppend(gStringVar4, COMPOUND_STRING("\pCollect 250 soot in total, then\nspeak to Route 113's glassmaker.\lYour soot total is never spent."));
         else if (id == LEGENDARY_SIGN_MELOETTA)
             StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Dewford Meadow's warden perform\na song. Bring a Pokémon with SING."));
@@ -738,8 +817,27 @@ u16 GetHeatranDiscoveryState(void)
     return FlagGet(FLAG_DEFEATED_HEATRAN) ? 0 : 1;
 }
 
+// Replaces a lead whose static Pokémon fainted in battle.
+static void BufferLostLegendaryLead(enum Species species)
+{
+    StringCopy(gStringVar2, GetLegendaryDisplayName(species));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} fainted in a battle\nwith you and vanished.\pA fainted legend never returns,\nso that lead is closed."));
+}
+
+// The Center local guide's one special. VAR_0x8005 picks the topic (see
+// include/center_guide.h); VAR_0x8004 is the cursor for the listing topics.
 void BufferNextCenterLegendaryLead(void)
 {
+    if (gSpecialVar_0x8005 == CENTER_GUIDE_TOPIC_TIPS)
+    {
+        BufferNextCenterGuideTip();
+        return;
+    }
+    if (gSpecialVar_0x8005 == CENTER_GUIDE_TOPIC_STORY)
+    {
+        BufferCenterGuideDirections();
+        return;
+    }
     for (u32 i = gSpecialVar_0x8004; i < ARRAY_COUNT(sCenterLegendaryLeads); i++)
     {
         if (sCenterLegendaryLeads[i].city != gMapHeader.regionMapSectionId)
@@ -747,8 +845,13 @@ void BufferNextCenterLegendaryLead(void)
         enum LegendarySignId id = sCenterLegendaryLeads[i].id;
         gSpecialVar_0x8004 = i + 1;
         StringCopy(gStringVar4, sCenterLegendaryLeads[i].lead);
-        if (id == LEGENDARY_SIGN_SHAYMIN && !FlagGet(FLAG_ADVENTURE_STARTED))
+        if (id == LEGENDARY_SIGN_SHAYMIN && !FlagGet(FLAG_ADVENTURE_STARTED) && !IsLegendarySignCaught(id))
+        {
+            // The west exit is still closed: no "search there now" line yet.
             StringCopy(gStringVar4, COMPOUND_STRING("After you battle the Prof.'s kid,\nreturn to Birch for your send-off.\pThen head west to Route 102.\nShaymin lives in its grass."));
+            gSpecialVar_Result = TRUE;
+            return;
+        }
         if (id >= LEGENDARY_SIGN_COUNT)
         {
             enum Species species = sCenterLegendaryLeads[i].classicSpecies;
@@ -770,11 +873,15 @@ void BufferNextCenterLegendaryLead(void)
             bool32 caught = species == SPECIES_MOLTRES ? FlagGet(FLAG_EC_CAUGHT_MOLTRES)
                 : GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
             if (species == SPECIES_HEATRAN && GetHeatranDiscoveryState() == 1)
-                StringCopy(gStringVar4, COMPOUND_STRING("HEATRAN is awake in the deepest\nroom of SCORCHED SLAB.\pIf it fled after a battle, leave\nthat room and return to find it."));
+                StringCopy(gStringVar4, COMPOUND_STRING("Heatran is awake in the deepest\nroom of Scorched Slab.\pIf it fled after a battle, leave\nthat room and return to find it."));
             if (caught)
             {
                 StringCopy(gStringVar2, GetSpeciesName(species));
                 StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You've already found\n{STR_VAR_2}!\pThat's one local legend you have\nturned into a partner."));
+            }
+            else if (IsLegendarySignLost(GetLegendarySignIdBySpecies(species)))
+            {
+                BufferLostLegendaryLead(species);
             }
             gSpecialVar_Result = TRUE;
             return;
@@ -785,20 +892,24 @@ void BufferNextCenterLegendaryLead(void)
             StringCopy(gStringVar2, GetLegendaryDisplayName(gate->species));
             StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("You've already found\n{STR_VAR_2}!\pThat's one local legend you have\nturned into a partner."));
         }
-        else if (!MeetsSignProgression(id))
-        {
-            AppendLegendaryProgressionRequirements(id);
-            if (IsVisitorAwayInStorms(id))
-                StringAppend(gStringVar4, sText_VisitorFollowsStorms);
-        }
-        else if (!MeetsSignDiscovery(id))
-            StringAppend(gStringVar4, COMPOUND_STRING("\pThat discovery is still waiting\nfor your help."));
+        else if (IsLegendarySignLost(id))
+            BufferLostLegendaryLead(gate->species);
+        else if (IsSignDiscoveryLost(id))
+            StringAppend(gStringVar4, sText_LegendaryDiscoveryLost);
+        // Each lead states its own requirements in prose, the way an NPC
+        // would; only the current status is added here.
         else if (IsVisitorAwayInStorms(id))
             StringAppend(gStringVar4, sText_VisitorFollowsStorms);
+        else if (!MeetsSignProgression(id) || !MeetsSignDiscovery(id))
+            ;
+        else if (IsWeatherAnomalyVisitor(id) && IsWeatherAnomalyLive(id))
+            StringAppend(gStringVar4, COMPOUND_STRING("\pIts storm is raging there right\nnow. Go and take a look!"));
         else if (gate->kind == LEGENDARY_KIND_WILD || gate->kind == LEGENDARY_KIND_QUEST)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pYou've met its requirements!\nYou can search for it there now."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pYou're ready! You can search\nfor it there now."));
         else if (gate->kind == LEGENDARY_KIND_STATIC)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pYou've met its requirements.\nVisit its resting place to meet it."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pYou're ready! Visit its resting\nplace to meet it."));
+        else if (gate->kind == LEGENDARY_KIND_GIFT || gate->kind == LEGENDARY_KIND_PRIZE)
+            StringAppend(gStringVar4, COMPOUND_STRING("\pYou're ready! You can claim it\nthere now."));
         gSpecialVar_Result = TRUE;
         return;
     }

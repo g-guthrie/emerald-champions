@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "script.h"
 #include "caps.h"
+#include "center_guide.h"
 #include "constants/emerald_champions.h"
 #include "event_object_movement.h"
 #include "constants/event_objects.h"
@@ -262,7 +263,7 @@ TEST("Research reports badges, milestone, family and availability from the gate 
     gSpecialVar_0x8004 = LEGENDARY_SIGN_ZERAORA;
     ResearchSelectedLegendarySign();
     EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required:\n5.")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required: 5.")));
     for (u32 badge = 0; badge < 5; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
     ResearchSelectedLegendarySign();
@@ -353,18 +354,22 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     for (u32 badge = 0; badge < 8; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
     gMapHeader.regionMapSectionId = MAPSEC_DEWFORD_TOWN;
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT(GuideTextContains(COMPOUND_STRING("Sing")));
-    EXPECT(GuideTextContains(COMPOUND_STRING("Gym Badges required:\n2.")));
+    // The lead states its badge requirement in prose; nothing is appended.
+    EXPECT(GuideTextContains(COMPOUND_STRING("After two")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("Gym Badges required")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("You're ready!")));
     EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_MELOETTA));
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
     UnlockLegendarySign(LEGENDARY_SIGN_MELOETTA);
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
-    EXPECT(GuideTextContains(COMPOUND_STRING("You've met its requirements!")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("You're ready!")));
     MarkLegendarySignCaughtBySpecies(SPECIES_MELOETTA);
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
@@ -472,6 +477,7 @@ extern const u8 ShoalCave_LowTideIceRoom_EventScript_CheckArticunoResult[];
 extern const u8 NewMauville_Inside_EventScript_CheckZapdosResult[];
 extern const u8 AlteringCave_B1F_EventScript_CheckMewtwoResult[];
 extern const u8 Common_EventScript_LegendaryResting[];
+extern const u8 Common_EventScript_LegendaryGone[];
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
 
@@ -480,7 +486,7 @@ extern const u8 ShoalCave_LowTideIceRoom_EventScript_Articuno[];
 extern const u8 NewMauville_Inside_EventScript_Zapdos[];
 extern const u8 AlteringCave_B1F_EventScript_Mewtwo[];
 
-TEST("Visible legendary events: uncaught outcomes retreat and capture uses the map hide flag")
+TEST("Visible legendary events: a knockout is lost, other uncaught outcomes retreat, capture uses the map hide flag")
 {
     const struct {u16 map; enum Species species; const u8 *gate, *entry;} cases[] = {
         {MAP_SEALED_CHAMBER_INNER_ROOM, SPECIES_REGIGIGAS, SealedChamber_InnerRoom_EventScript_CheckRegigigasResult, SealedChamber_InnerRoom_EventScript_Regigigas},
@@ -488,7 +494,8 @@ TEST("Visible legendary events: uncaught outcomes retreat and capture uses the m
         {MAP_NEW_MAUVILLE_INSIDE, SPECIES_ZAPDOS, NewMauville_Inside_EventScript_CheckZapdosResult, NewMauville_Inside_EventScript_Zapdos},
         {MAP_ALTERING_CAVE_B1F, SPECIES_MEWTWO, AlteringCave_B1F_EventScript_CheckMewtwoResult, AlteringCave_B1F_EventScript_Mewtwo},
     };
-    const u8 outcomes[] = {B_OUTCOME_WON, B_OUTCOME_RAN, B_OUTCOME_PLAYER_TELEPORTED, B_OUTCOME_CAUGHT};
+    const u8 outcomes[] = {B_OUTCOME_WON, B_OUTCOME_RAN, B_OUTCOME_PLAYER_TELEPORTED,
+        B_OUTCOME_MON_FLED, B_OUTCOME_MON_TELEPORTED, B_OUTCOME_CAUGHT};
     for (u32 encounter = 0; encounter < ARRAY_COUNT(cases); encounter++)
     {
         for (u32 i = 0; i < ARRAY_COUNT(outcomes); i++)
@@ -498,17 +505,21 @@ TEST("Visible legendary events: uncaught outcomes retreat and capture uses the m
             SetupBytecodeScript(&ctx, cases[encounter].gate);
             gBattleOutcome = outcomes[i];
             FlagSet(FLAG_SYS_CTRL_OBJ_DELETE);
-            for (u32 step = 0; step < 6
+            for (u32 step = 0; step < 16
               && ctx.scriptPtr != Common_EventScript_LegendaryResting
+              && ctx.scriptPtr != Common_EventScript_LegendaryGone
               && ctx.scriptPtr != Common_EventScript_VisibleLegendaryCaught; step++)
             {
                 u8 command = *ctx.scriptPtr++;
                 EXPECT(!ctx.cmdTable[command](&ctx));
             }
-            EXPECT_EQ(ctx.scriptPtr, outcomes[i] == B_OUTCOME_CAUGHT
-                ? Common_EventScript_VisibleLegendaryCaught
+            EXPECT_EQ(ctx.scriptPtr, outcomes[i] == B_OUTCOME_CAUGHT ? Common_EventScript_VisibleLegendaryCaught
+                : outcomes[i] == B_OUTCOME_WON ? Common_EventScript_LegendaryGone
                 : Common_EventScript_LegendaryResting);
             EXPECT(!FlagGet(FLAG_SYS_CTRL_OBJ_DELETE));
+            // The knockout path reports the species it loses.
+            if (outcomes[i] == B_OUTCOME_WON)
+                EXPECT_EQ(VarGet(VAR_0x8004), cases[encounter].species);
         }
         ResetSignState();
         const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(
@@ -524,6 +535,127 @@ TEST("Visible legendary events: uncaught outcomes retreat and capture uses the m
         EXPECT(FlagGet(object->flagId));
         EXPECT(IsLegendarySignCaught(GetLegendarySignIdBySpecies(cases[encounter].species)));
     }
+}
+
+// A knockout saves the object's hide flag (removeobject) or the shrine flag
+// (setflag) without a capture: the Pokémon is lost for good.
+TEST("Static legendary knockout: lost for good, never re-armed, and every lead says so")
+{
+    static const struct {enum LegendarySignId id; u16 flag;} visible[] = {
+        {LEGENDARY_SIGN_REGIGIGAS, FLAG_EC_CAUGHT_REGIGIGAS},
+        {LEGENDARY_SIGN_ARTICUNO, FLAG_EC_CAUGHT_ARTICUNO},
+        {LEGENDARY_SIGN_ZAPDOS, FLAG_EC_CAUGHT_ZAPDOS},
+        {LEGENDARY_SIGN_MEWTWO, FLAG_EC_CAUGHT_MEWTWO},
+        {LEGENDARY_SIGN_PECHARUNT, FLAG_EC_CAUGHT_PECHARUNT},
+        {LEGENDARY_SIGN_REGIROCK, FLAG_DEFEATED_REGIROCK},
+        {LEGENDARY_SIGN_RAYQUAZA, FLAG_DEFEATED_RAYQUAZA},
+        {LEGENDARY_SIGN_REGICE, FLAG_DEFEATED_REGICE}, // Kyogre/Groudon would grant their Orbs here.
+        {LEGENDARY_SIGN_JIRACHI, FLAG_DEFEATED_JIRACHI},
+        {LEGENDARY_SIGN_MOLTRES, FLAG_DEFEATED_MOLTRES},
+    };
+    u8 savedCaught[sizeof(gSaveBlock1Ptr->dexCaught)];
+    memcpy(savedCaught, gSaveBlock1Ptr->dexCaught, sizeof(savedCaught));
+    memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(savedCaught));
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_SYS_GAME_CLEAR);
+    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    for (u32 i = 0; i < ARRAY_COUNT(visible); i++)
+    {
+        ResetSignState();
+        FlagClear(visible[i].flag);
+        gSpecialVar_0x8004 = visible[i].id;
+        GetSelectedLegendarySignState();
+        EXPECT_NE(gSpecialVar_Result, 4);
+        FlagSet(visible[i].flag); // Knocked out: the map hides it for good.
+        gSpecialVar_0x8004 = visible[i].id;
+        EXPECT_EQ(GetSelectedLegendarySignState(), 4);
+        TryUnlockSelectedLegendarySign();
+        EXPECT_EQ(gSpecialVar_Result, 6);
+        EXPECT(!CanAcquireLegendarySignSpecies(gLegendaryGates[visible[i].id].species));
+        UnlockLegendarySign(visible[i].id); // Never re-arms the object.
+        EXPECT(FlagGet(visible[i].flag));
+        ResearchSelectedLegendarySign();
+        EXPECT_EQ(gSpecialVar_Result, 6);
+        EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("never returns")));
+        // A capture sets the same flag; the caught bit wins.
+        MarkLegendarySignCaughtBySpecies(gLegendaryGates[visible[i].id].species);
+        gSpecialVar_0x8004 = visible[i].id;
+        EXPECT_EQ(GetSelectedLegendarySignState(), 2);
+        FlagClear(visible[i].flag);
+    }
+
+    // Darkrai's shrine flag starts set: only an unlocked, uncaught shrine is lost.
+    ResetSignState();
+    FlagSet(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_DARKRAI;
+    EXPECT_NE(GetSelectedLegendarySignState(), 4);
+    UnlockLegendarySign(LEGENDARY_SIGN_DARKRAI);
+    EXPECT(!FlagGet(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI));
+    FlagSet(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_DARKRAI;
+    EXPECT_EQ(GetSelectedLegendarySignState(), 4);
+    TryUnlockSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 6);
+    EXPECT(FlagGet(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI));
+
+    // Heatran's room flag starts set until the Magma Stone is set down.
+    ResetSignState();
+    FlagSet(FLAG_DEFEATED_HEATRAN);
+    FlagClear(FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAGMA_STONE);
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_HEATRAN;
+    EXPECT_NE(GetSelectedLegendarySignState(), 4);
+    FlagSet(FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAGMA_STONE);
+    EXPECT(AddBagItem(ITEM_MAGMA_STONE, 1));
+    EXPECT_NE(GetSelectedLegendarySignState(), 4);
+    EXPECT(RemoveBagItem(ITEM_MAGMA_STONE, 1));
+    EXPECT_EQ(GetSelectedLegendarySignState(), 4);
+
+    // Center leads: a lost classic legend closes its own lead, and a lost
+    // Regirock closes the Regigigas lead that depends on it.
+    ResetSignState();
+    FlagClear(FLAG_DEFEATED_HEATRAN);
+    FlagClear(FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAGMA_STONE);
+    FlagSet(FLAG_DEFEATED_REGIROCK);
+    gMapHeader.regionMapSectionId = MAPSEC_PACIFIDLOG_TOWN;
+    bool32 sawRegirock = FALSE, sawRegigigas = FALSE;
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
+    gSpecialVar_0x8004 = 0;
+    while (TRUE)
+    {
+        BufferNextCenterLegendaryLead();
+        if (!gSpecialVar_Result)
+            break;
+        if (GuideTextContains(COMPOUND_STRING("Regirock fainted")))
+        {
+            sawRegirock = TRUE;
+            EXPECT(GuideTextContains(COMPOUND_STRING("never returns")));
+        }
+        if (GuideTextContains(COMPOUND_STRING("wakes Regigigas")))
+        {
+            sawRegigigas = TRUE;
+            EXPECT(GuideTextContains(COMPOUND_STRING("That lead is closed.")));
+        }
+    }
+    EXPECT(sawRegirock);
+    EXPECT(sawRegigigas);
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_REGIGIGAS;
+    ResearchSelectedLegendarySign();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("That lead is closed.")));
+    // A later Regirock record (e.g. from a trade) reopens the lead.
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_REGIROCK), FLAG_SET_CAUGHT);
+    ResearchSelectedLegendarySign();
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("That lead is closed.")));
+
+    FlagClear(FLAG_DEFEATED_REGIROCK);
+    FlagClear(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    memcpy(gSaveBlock1Ptr->dexCaught, savedCaught, sizeof(savedCaught));
+    ResetSignState();
 }
 
 extern void Test_CollectAsh(void);
@@ -713,4 +845,188 @@ TEST("Gate table: every wild or quest row has a compiled slot and every wild leg
         }
     }
     EXPECT_EQ(missing, 0);
+}
+
+// Every guide page: each line within 200px, and it fits gStringVar4.
+static void ExpectCenterGuidePageFits(void)
+{
+    u8 line[sizeof(gStringVar4)];
+    u32 length = 0;
+
+    EXPECT_LT(StringLength(gStringVar4), sizeof(gStringVar4));
+    for (u32 i = 0; ; i++)
+    {
+        u8 c = gStringVar4[i];
+        if (c == EOS || c == CHAR_NEWLINE || c == CHAR_PROMPT_SCROLL || c == CHAR_PROMPT_CLEAR)
+        {
+            line[length] = EOS;
+            EXPECT_LE(GetStringWidth(FONT_NORMAL, line, 0), 200);
+            length = 0;
+            if (c == EOS)
+                break;
+        }
+        else
+        {
+            line[length++] = c;
+        }
+    }
+}
+
+static bool32 CenterGuideTipsMention(u16 city, const u8 *needle)
+{
+    bool32 found = FALSE;
+
+    gMapHeader.regionMapSectionId = city;
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_TIPS;
+    gSpecialVar_0x8004 = 0;
+    while (TRUE)
+    {
+        BufferNextCenterLegendaryLead();
+        if (!gSpecialVar_Result)
+            break;
+        ExpectCenterGuidePageFits();
+        found |= GuideTextContains(needle);
+    }
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
+    return found;
+}
+
+TEST("Center guide: story directions follow the campaign, one step at a time")
+{
+    // The story flags in campaign order, as the guide reads them.
+    static const u16 sStory[] = {
+        FLAG_DEFEATED_RIVAL_ROUTE103, FLAG_ADVENTURE_STARTED, FLAG_BADGE01_GET,
+        FLAG_RECOVERED_DEVON_GOODS, FLAG_RETURNED_DEVON_GOODS, FLAG_RECEIVED_POKENAV,
+        FLAG_DELIVERED_STEVEN_LETTER, FLAG_DELIVERED_DEVON_GOODS, FLAG_HIDE_SLATEPORT_CITY_BRAWLY,
+        FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_MET_ARCHIE_METEOR_FALLS,
+        FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FLAG_BADGE04_GET, FLAG_BADGE05_GET,
+        FLAG_HIDE_ROUTE_119_TEAM_AQUA, FLAG_RECEIVED_DEVON_SCOPE, FLAG_KECLEON_FLED_FORTREE,
+        FLAG_BADGE06_GET, FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,
+        FLAG_MET_TEAM_AQUA_HARBOR, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, FLAG_BADGE07_GET,
+        FLAG_DEFEATED_MAGMA_SPACE_CENTER, FLAG_RECEIVED_HM08, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
+        FLAG_WALLACE_GOES_TO_SKY_PILLAR,
+    };
+    u8 last[sizeof(gStringVar4)];
+
+    for (u32 i = 0; i < ARRAY_COUNT(sStory); i++)
+        FlagClear(sStory[i]);
+    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    FlagClear(FLAG_RECEIVED_HM07);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 0);
+    gMapHeader.regionMapSectionId = MAPSEC_OLDALE_TOWN;
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_STORY;
+    BufferNextCenterLegendaryLead();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT(GuideTextContains(COMPOUND_STRING("Route 103")));
+    // Each completed step moves the guide on to a new destination.
+    for (u32 i = 0; i < ARRAY_COUNT(sStory); i++)
+    {
+        StringCopy(last, gStringVar4);
+        FlagSet(sStory[i]);
+        BufferNextCenterLegendaryLead();
+        EXPECT_EQ(gSpecialVar_Result, TRUE);
+        ExpectCenterGuidePageFits();
+        EXPECT_NE(StringCompare(last, gStringVar4), 0);
+    }
+    EXPECT(GuideTextContains(COMPOUND_STRING("Sky")));
+    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 5);
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Maxie")));
+    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Wallace")));
+    FlagSet(FLAG_RECEIVED_HM07);
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Juan")));
+    FlagSet(FLAG_BADGE08_GET);
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Victory Road")));
+    ExpectCenterGuidePageFits();
+    // After the Hall of Fame the shared finale directions take over.
+    FlagSet(FLAG_SYS_GAME_CLEAR);
+    BufferNextCenterLegendaryLead();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    for (u32 i = 0; i < ARRAY_COUNT(sStory); i++)
+        FlagClear(sStory[i]);
+    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    FlagClear(FLAG_RECEIVED_HM07);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 0);
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
+}
+
+TEST("Center guide: side quests appear with their gates and retire when done")
+{
+    const u16 cities[] = {MAPSEC_OLDALE_TOWN, MAPSEC_PETALBURG_CITY, MAPSEC_DEWFORD_TOWN,
+        MAPSEC_RUSTBORO_CITY, MAPSEC_SLATEPORT_CITY, MAPSEC_MAUVILLE_CITY,
+        MAPSEC_VERDANTURF_TOWN, MAPSEC_LAVARIDGE_TOWN, MAPSEC_FALLARBOR_TOWN,
+        MAPSEC_FORTREE_CITY, MAPSEC_LILYCOVE_CITY, MAPSEC_MOSSDEEP_CITY,
+        MAPSEC_SOOTOPOLIS_CITY, MAPSEC_PACIFIDLOG_TOWN, MAPSEC_EVER_GRANDE_CITY,
+        MAPSEC_BATTLE_FRONTIER};
+
+    ResetSignState();
+    for (u32 badge = 0; badge < 8; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_SYS_GAME_CLEAR);
+    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    for (u32 city = 0; city < ARRAY_COUNT(cities); city++)
+        CenterGuideTipsMention(cities[city], COMPOUND_STRING("")); // Width checks only.
+
+    // The Chansey chase: one tip per stage, then the Route 133 upgrade.
+    VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+    VarSet(VAR_CHANSEY_NURSE_STATE, 0);
+    EXPECT(CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("has lost her")));
+    VarSet(VAR_CHANSEY_NURSE_STATE, 3);
+    EXPECT(CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Heal Ball")));
+    EXPECT(CenterGuideTipsMention(MAPSEC_LAVARIDGE_TOWN, COMPOUND_STRING("Heal Ball")));
+    EXPECT(!CenterGuideTipsMention(MAPSEC_PACIFIDLOG_TOWN, COMPOUND_STRING("Route 133")));
+    VarSet(VAR_CHANSEY_NURSE_STATE, 6);
+    EXPECT(CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("You caught Blob")));
+    VarSet(VAR_POKE_VIAL_MAX_CHARGES, 2);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Blob")));
+    EXPECT(CenterGuideTipsMention(MAPSEC_PACIFIDLOG_TOWN, COMPOUND_STRING("Route 133")));
+    VarSet(VAR_POKE_VIAL_MAX_CHARGES, 3);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_PACIFIDLOG_TOWN, COMPOUND_STRING("Route 133")));
+
+    // Spiritomb: shown until the Odd Keystone is spent.
+    FlagClear(FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE);
+    EXPECT(CenterGuideTipsMention(MAPSEC_SLATEPORT_CITY, COMPOUND_STRING("Odd Keystone")));
+    FlagSet(FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE);
+    AddBagItem(ITEM_ODD_KEYSTONE, 1);
+    EXPECT(CenterGuideTipsMention(MAPSEC_SLATEPORT_CITY, COMPOUND_STRING("Odd Keystone")));
+    RemoveBagItem(ITEM_ODD_KEYSTONE, 1);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_SLATEPORT_CITY, COMPOUND_STRING("Odd Keystone")));
+
+    // Badge gates and receipts.
+    for (u32 badge = 4; badge < 8; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Wattson")));
+    FlagSet(FLAG_BADGE05_GET);
+    EXPECT(CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Wattson")));
+    FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Wattson")));
+    FlagClear(FLAG_RECEIVED_MELTAN);
+    EXPECT(CenterGuideTipsMention(MAPSEC_MOSSDEEP_CITY, COMPOUND_STRING("Meltan")));
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_MOSSDEEP_CITY, COMPOUND_STRING("Meltan")));
+    // Dewford has no side quest of its own; the menu then omits the topic.
+    gMapHeader.regionMapSectionId = MAPSEC_DEWFORD_TOWN;
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_TIPS;
+    gSpecialVar_0x8004 = 0;
+    BufferNextCenterLegendaryLead();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    for (u32 badge = 0; badge < 8; badge++)
+        FlagClear(FLAG_BADGE01_GET + badge);
+    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
+    FlagClear(FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE);
+    VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+    VarSet(VAR_CHANSEY_NURSE_STATE, 0);
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
 }

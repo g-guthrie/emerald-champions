@@ -2501,14 +2501,22 @@ static enum OverworldWeather TranslateWeatherNum(enum OverworldWeather weather);
 static void UpdateRainCounter(u8, u8);
 static u8 GetDynamicWeather(void);
 
+// Desert sandstorm and volcanic ash are terrain, not weather: a place that is
+// a desert stays a desert. Everything else (sun, clouds, rain cycles, cutscene
+// resets) yields to a live weather anomaly on the map.
+static bool32 IsTerrainWeather(enum OverworldWeather weather)
+{
+    return weather == WEATHER_SANDSTORM || weather == WEATHER_VOLCANIC_ASH;
+}
+
 void SetSavedWeather(enum OverworldWeather weather)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
     // A live weather anomaly owns its home map's sky: scripted weather
-    // (desert triggers, ash on transition, cutscene resets) cannot clear it.
+    // (cloud/sun triggers, rain cycles, cutscene resets) cannot clear it.
     u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
 
-    if (anomalyWeather != WEATHER_NONE)
+    if (anomalyWeather != WEATHER_NONE && !IsTerrainWeather(weather))
         weather = anomalyWeather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
@@ -2527,7 +2535,7 @@ void SetSavedWeatherFromCurrMapHeader(void)
     // map is loaded; the header itself never changes.
     u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
 
-    if (anomalyWeather != WEATHER_NONE)
+    if (anomalyWeather != WEATHER_NONE && !IsTerrainWeather(weather))
         weather = anomalyWeather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);

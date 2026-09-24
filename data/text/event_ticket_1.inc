@@ -20,11 +20,6 @@ EventTicket_Text_ShowEonTicket:
 	.string "That shivers my timbers!\p"
 	.string "All aboard!$"
 
-EventTicket_Text_SouthernIslandSailBack:
-	.string "Aye, mate, this island has a quiet\n"
-	.string "all its own.\p"
-	.string "Ready to sail back to Lilycove?$"
-
 EventTicket_Text_SailHome:
 	.string "Aye, right, then!\n"
 	.string "Sail home we will!$"

@@ -1,14 +1,13 @@
 {
-  "name": "C44 \u2014 Scanner repeat claim",
+  "name": "Stern trades 12 Bottle Caps for the Scanner (no repeat reward)",
   "start": {
     "chapter": 3
   },
   "setup": {
     "flags": {
       "FLAG_BADGE07_GET": true,
-      "FLAG_EC_REPORT_C43_COMPLETE": true,
       "FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN": false,
-      "FLAG_EC_REPORT_C42_COMPLETE": true
+      "FLAG_EXCHANGED_SCANNER": false
     },
     "vars": {
       "VAR_SLATEPORT_HARBOR_STATE": 2
@@ -27,14 +26,14 @@
     {
       "press": "A",
       "frames": 120,
-      "label": "Scanner handoff"
+      "label": "Stern asks for the Scanner"
     },
     {
       "tap": "A",
       "every": 90,
       "frames": 6000,
       "until": "idle",
-      "label": "Reward and directions"
+      "label": "Trade accepted"
     },
     {
       "press": "A",
@@ -46,34 +45,30 @@
       "every": 90,
       "frames": 3500,
       "until": "idle",
-      "label": "No duplicate stipend or item"
+      "label": "No second trade"
     }
   ],
   "expect": {
     "ready": true,
     "map": "SlateportCity_Harbor",
     "queries": {
-      "report": 1,
+      "exchanged": 1,
       "scanner": 0,
-      "tooth": 1,
-      "money": 18000
+      "caps": 12
     }
   },
   "queries": {
-    "report": {
+    "exchanged": {
       "kind": 1,
-      "id": "FLAG_EC_REPORT_C44_COMPLETE"
+      "id": "FLAG_EXCHANGED_SCANNER"
     },
     "scanner": {
       "kind": 4,
       "id": "ITEM_SCANNER"
     },
-    "tooth": {
+    "caps": {
       "kind": 4,
-      "id": "ITEM_DEEP_SEA_TOOTH"
-    },
-    "money": {
-      "kind": 9
+      "id": "ITEM_BOTTLE_CAP"
     }
   }
 }

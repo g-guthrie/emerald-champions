@@ -800,8 +800,6 @@
 #define FLAG_EC_BERRY_TRADE_DRAGONINITE  0x279
 #define FLAG_EC_BERRY_TRADE_TYRANITARITE  0x27A
 #define FLAG_EC_MEGA_REWARD_BUTTERFRENITE 0x27B
-#define FLAG_EC_MEGA_REWARD_SCEPTILITE 0x27C
-#define FLAG_EC_MEGA_REWARD_SWAMPERTITE 0x27D
 #define FLAG_EC_MEGA_REWARD_GOLISOPITE 0x27E
 #define FLAG_EC_MEGA_REWARD_SHARPEDONITE 0x27F
 #define FLAG_EC_MEGA_REWARD_ABSOLITE_Z 0x280
@@ -821,7 +819,6 @@
 #define FLAG_EC_GARDEN_BUNDLE_ABANDONEDSHIP_ROOM_B1F_KELPSY_BERRY 0x294
 #define FLAG_EC_MEGA_GIFT_AMPHAROSITE 0x295
 #define FLAG_EC_MEGA_GIFT_BARBARACITE 0x296
-#define FLAG_EC_MEGA_GIFT_BLAZIKENITE 0x297
 #define FLAG_EC_MEGA_GIFT_CHIMECHITE 0x298
 #define FLAG_EC_MEGA_GIFT_CLEFABLITE 0x299
 #define FLAG_EC_MEGA_GIFT_GALLADITE 0x29A
@@ -851,11 +848,11 @@
 #define FLAG_EC_RUSTBORO_GREAT_BALL_PENDING    0x2B5 // Separate rescue reward entitlement.
 #define FLAG_EC_BIRCH_GREAT_BALLS_PENDING      0x2B6 // Ten-ball send-off gift; never locks Route102.
 #define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
-#define FLAG_EC_MEGA_GIFT_EMBOARITE 0x2B8 // Emerald Champions: scripted ground gift.
-#define FLAG_EC_MEGA_GIFT_CHARIZARDITE_X 0x2B9 // Emerald Champions: scripted ground gift.
-#define FLAG_EC_MEGA_GIFT_CHARIZARDITE_Y 0x2BA // Emerald Champions: scripted ground gift.
+// Hoenn starter Mega Stone receipts: Norman's Ring gift or his shown-partner gift (src/mega_stone_rewards.c).
+#define FLAG_EC_MEGA_GIFT_SCEPTILITE 0x2B8
+#define FLAG_EC_MEGA_GIFT_BLAZIKENITE 0x2B9
+#define FLAG_EC_MEGA_GIFT_SWAMPERTITE 0x2BA
 #define FLAG_EC_MEGA_GIFT_EELEKTROSSITE 0x2BB // Emerald Champions: scripted ground gift.
-#define FLAG_EC_MEGA_GIFT_DELPHOXITE 0x2BF // Emerald Champions: scripted ground gift.
 #define FLAG_EC_MEGA_GIFT_GOLURKITE 0x2C0 // Emerald Champions: scripted ground gift.
 #define FLAG_EC_MEGA_GIFT_FLYGONITE 0x2C1 // Emerald Champions: scripted ground gift.
 #define FLAG_EC_MEGA_GIFT_LATIASITE 0x2C2 // Emerald Champions: scripted ground gift.

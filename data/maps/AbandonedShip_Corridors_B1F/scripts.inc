@@ -69,8 +69,12 @@ AbandonedShip_Corridors_B1F_Text_DuncanPostBattle: @ 8237E92
 	.string "we might make some progress…$"
 
 AbandonedShip_Corridors_B1F_Text_YayItsAShip: @ 8237F03
-	.string "Yay!\n"
-	.string "It's a ship!$"
+	.string "Yay! It's a ship!\p"
+	.string "My grandpa says a ghost sleeps\n"
+	.string "in the storage room's trash can.\p"
+	.string "It wakes up for an Odd Keystone,\n"
+	.string "but only if a Lickitung or a\l"
+	.string "Slugma comes along too!$"
 
 AbandonedShip_Corridors_B1F_Text_DoorIsLocked: @ 8237F15
 	.string "The door is locked.\p"

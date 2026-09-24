@@ -14696,7 +14696,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Calls a flier to\n"
             "carry you. Needs\n"
-            "the FEATHER BADGE."),
+            "the Feather Badge."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

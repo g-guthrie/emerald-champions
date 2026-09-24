@@ -815,6 +815,9 @@ u8 GetSelectedTVShow(void)
 
 // IN SEARCH OF TRAINERS
 
+// The battle counter after party 6 (the last authored team) is beaten.
+#define GABBY_AND_TY_RETIRED 6
+
 void ResetGabbyAndTy(void)
 {
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = SPECIES_NONE;
@@ -843,11 +846,9 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.playerMon1Species;
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMovePlayer;
-    // The authored sequence retains parties 1, 2, 5 and 6. Keep the final
-    // route cycle bounded rather than eventually saturating the u8 counter.
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum >= 8)
-        gSaveBlock1Ptr->gabbyAndTyData.battleNum = 6;
-    else
+    // The authored sequence keeps parties 1, 2, 5 and 6, one battle each.
+    // Beating party 6 retires the pair: the counter stops at 6.
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum < GABBY_AND_TY_RETIRED)
         gSaveBlock1Ptr->gabbyAndTyData.battleNum++;
     if (gSaveBlock1Ptr->gabbyAndTyData.battleNum == 2)
         gSaveBlock1Ptr->gabbyAndTyData.battleNum = 4;
@@ -894,15 +895,17 @@ static void TakeGabbyAndTyOffTheAir(void)
     gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
 }
 
-// See gabby_and_ty.inc for details
+// See gabby_and_ty.inc for details: 0, 1, 4 and 5 are the four battle stops
+// (parties 1, 2, 5, 6); GABBY_AND_TY_RETIRED means party 6 is beaten and the
+// pair stays on Route 120 as interviewers.
 u8 GabbyAndTyGetBattleNum(void)
 {
     // Saves from before parties 3 and 4 were retired must advance to a live stop.
     if (gSaveBlock1Ptr->gabbyAndTyData.battleNum == 2 || gSaveBlock1Ptr->gabbyAndTyData.battleNum == 3)
         gSaveBlock1Ptr->gabbyAndTyData.battleNum = 4;
-
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 5)
-        return (gSaveBlock1Ptr->gabbyAndTyData.battleNum % 3) + 6;
+    // Saves from the old endless party-6 cycle (7, 8) have already retired them.
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > GABBY_AND_TY_RETIRED)
+        gSaveBlock1Ptr->gabbyAndTyData.battleNum = GABBY_AND_TY_RETIRED;
 
     return gSaveBlock1Ptr->gabbyAndTyData.battleNum;
 }
@@ -957,17 +960,9 @@ void GetGabbyAndTyLocalIds(void)
         gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_2;
         gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_2;
         break;
-    case 6:
+    case GABBY_AND_TY_RETIRED: // Party 6 on Route 120, and the retired pair there.
         gSpecialVar_0x8004 = LOCALID_ROUTE120_GABBY_2;
         gSpecialVar_0x8005 = LOCALID_ROUTE120_TY_2;
-        break;
-    case 7:
-        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_3;
-        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_3;
-        break;
-    case 8:
-        gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_3;
-        gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_3;
         break;
     }
 }

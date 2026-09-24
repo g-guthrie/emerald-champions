@@ -65,8 +65,24 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist:: @ 82118DA
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaParty
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom
+@ Diancie was knocked out and lost: without its spark Magearna can never wake.
+RustboroCity_DevonCorp_2F_EventScript_MagearnaLostDiancie::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaLostDiancie, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_MagearnaLostDiancie:
+	.string "The prototype needed Diancie's\n"
+	.string "spark to wake…\p"
+	.string "Without it, Magearna will sleep\n"
+	.string "forever. I'm sorry.$"
+
 RustboroCity_DevonCorp_2F_EventScript_DreamsFallback::
 	call RustboroCity_DevonCorp_2F_EventScript_TryArceus
+	@ Magearna needs Diancie caught; a knocked-out Diancie closes that for good.
+	setvar VAR_0x8004, LEGENDARY_SIGN_DIANCIE
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_MagearnaLostDiancie
 	msgbox RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT
 	call_if_unset FLAG_IS_CHAMPION, RustboroCity_DevonCorp_2F_EventScript_ArceusHint
 	release

@@ -1246,9 +1246,10 @@ static void PrintBadgesAndLeadersOnCard(void)
 static void PrintMegasAndCircuitOnCard(void)
 {
     PrintStatOnBackOfCard(2, gText_TrainerCardMegasWitnessed, sData->textMegas, sTrainerCardStatColors);
-    // The Champions Circuit desk is not in the campaign yet; a permanent "0"
-    // would only confuse. The line returns the moment a streak exists.
-    if (VarGet(VAR_EC_CIRCUIT_BEST_WINS) != 0)
+    // The Champions Circuit desk (Battle Tower lobby) opens with the Frontier
+    // after the Hall of Fame. From then on the row shows, even at 0, so the card
+    // points the player to it; before that it appears only if a streak exists.
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) || VarGet(VAR_EC_CIRCUIT_BEST_WINS) != 0)
         PrintStatOnBackOfCard(3, gText_TrainerCardCircuitBestStreak, sData->textCircuitStreak, sTrainerCardStatColors);
 }
 

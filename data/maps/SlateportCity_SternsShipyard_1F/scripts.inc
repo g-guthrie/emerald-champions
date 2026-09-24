@@ -87,8 +87,9 @@ SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern: @ 82080A5
 SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern: @ 82081A5
 	.string "Dock: Where could Capt. Stern have\n"
 	.string "gone off to?\p"
-	.string "Could you go find Capt. Stern and\n"
-	.string "deliver that parcel to him?$"
+	.string "He had business at the Oceanic\n"
+	.string "Museum. Could you find him there\l"
+	.string "and deliver that parcel to him?$"
 
 SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran: @ 8208213
 	.string "Dock: Shipbuilding is an art.\p"

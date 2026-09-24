@@ -84,6 +84,10 @@ static EWRAM_DATA bool8 sTentActive;
 static EWRAM_DATA u8 sTentId;
 static EWRAM_DATA u8 sTentWins;
 static EWRAM_DATA u8 sTentCap;
+// The Circuit borrows the Frontier trainer table for names and pictures. A Tent
+// challenge leaves lvlMode at FRONTIER_LVL_TENT, which would point that lookup at
+// the much smaller Tent tables, so a run forces Open Level and restores it after.
+static EWRAM_DATA u8 sCircuitSavedLvlMode;
 
 static const u8 sCircuitRecordUnrecorded[] = _("--");
 
@@ -1477,12 +1481,14 @@ static void NormalizeCircuitPlayerParty(u8 level)
     HealPlayerParty();
 }
 
+// VAR_RESULT: CIRCUIT_ENTRY_OK (TRUE), CIRCUIT_ENTRY_NEEDS_SIX (FALSE) or
+// CIRCUIT_ENTRY_PARTY_RULE. The desk script reads the numeric values.
 void ChampionsCircuitCanEnter(void)
 {
-    gSpecialVar_Result = TRUE;
+    gSpecialVar_Result = CIRCUIT_ENTRY_OK;
     if (CalculatePlayerPartyCount() != PARTY_SIZE)
     {
-        gSpecialVar_Result = FALSE;
+        gSpecialVar_Result = CIRCUIT_ENTRY_NEEDS_SIX;
         return;
     }
     for (u32 i = 0; i < PARTY_SIZE; i++)
@@ -1492,15 +1498,23 @@ void ChampionsCircuitCanEnter(void)
          || !IsSpeciesEnabled(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES))
          || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HP) == 0)
         {
-            gSpecialVar_Result = FALSE;
+            gSpecialVar_Result = CIRCUIT_ENTRY_NEEDS_SIX;
             return;
         }
     }
+    // The campaign's party rule holds here too: one Legendary or Mythical,
+    // one Ultra Beast and one Paradox Pokemon at most.
+    if (!PlayerPartyWithinRestrictedLimit())
+        gSpecialVar_Result = CIRCUIT_ENTRY_PARTY_RULE;
 }
 
+// The desk opens with the Frontier, after the Hall of Fame, when the level cap
+// is already CIRCUIT_BASE_LEVEL (Lv. 100): the whole party battles at the cap.
 void ChampionsCircuitBegin(void)
 {
     SavePlayerParty();
+    sCircuitSavedLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_OPEN;
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
     NormalizeCircuitPlayerParty(CIRCUIT_BASE_LEVEL);
@@ -1610,22 +1624,23 @@ void ChampionsTentEnd(void)
     gSpecialVar_0x8004 = sTentId;
 }
 
+// Record board beside the desk: STR_VAR_1 best streak ("--" before the first
+// win), STR_VAR_2 lifetime wins. A run lives inside one desk conversation, so
+// there is never a current streak to show from the lobby.
 void ChampionsCircuitBufferRecord(void)
 {
     u16 best = VarGet(VAR_EC_CIRCUIT_BEST_WINS);
-    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
     if (best != 0)
-        ConvertIntToDecimalStringN(gStringVar2, best, STR_CONV_MODE_LEFT_ALIGN, 5);
+        ConvertIntToDecimalStringN(gStringVar1, best, STR_CONV_MODE_LEFT_ALIGN, 5);
     else
-        StringCopy(gStringVar2, sCircuitRecordUnrecorded);
-    ConvertIntToDecimalStringN(gStringVar3, VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
+        StringCopy(gStringVar1, sCircuitRecordUnrecorded);
+    ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
 }
 
-// Every Circuit victory funds the Battle Point exchange. The old Frontier
-// facilities' frontier_givepoints paths are unreachable because every
-// challenge desk now leads here, so this is the only repeatable BP source.
-// Base award grows with the current streak and every tenth lifetime win pays
-// a milestone bonus.
+// The Circuit's only prize is Battle Points for the Exchange Service Corner; it
+// never gives Pokemon. The native Frontier facilities keep their own
+// frontier_givepoints awards. The base award grows with the current streak and
+// every tenth lifetime win pays a milestone bonus.
 #define CIRCUIT_BP_BASE            5
 #define CIRCUIT_BP_STREAK_MAX      15
 #define CIRCUIT_BP_MILESTONE_EVERY 10
@@ -1663,6 +1678,10 @@ void ChampionsCircuitHandleBattleResult(void)
         if (total != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, total + 1);
         points = AwardCircuitBattlePoints(wins, min((u32)total + 1, 0xFFFF));
+        // STR_VAR_1 feeds the native "obtained X Battle Point(s)" line;
+        // STR_VAR_2 is the new streak.
+        ConvertIntToDecimalStringN(gStringVar1, points, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
         ConvertIntToDecimalStringN(gStringVar3, points, STR_CONV_MODE_LEFT_ALIGN, 2);
         HealPlayerParty();
         gSpecialVar_Result = TRUE;
@@ -1688,6 +1707,7 @@ void ChampionsCircuitEnd(void)
         LoadPlayerParty();
         CalculatePlayerPartyCount();
         HealPlayerParty();
+        gSaveBlock2Ptr->frontier.lvlMode = sCircuitSavedLvlMode;
     }
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);

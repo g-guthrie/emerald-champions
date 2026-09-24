@@ -12,7 +12,7 @@ SouthernIsland_Exterior_OnTransition: @ 82429CE
 SouthernIsland_Exterior_EventScript_Sailor:: @ 82429D2
 	lock
 	faceplayer
-	msgbox EventTicket_Text_SouthernIslandSailBack, MSGBOX_YESNO
+	msgbox SouthernIsland_Exterior_Text_SailBack, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SouthernIsland_Exterior_EventScript_AsYouLike
 	msgbox EventTicket_Text_SailHome, MSGBOX_DEFAULT
@@ -56,3 +56,10 @@ SouthernIsland_Exterior_EventScript_Sign:: @ 8242A3C
 	msgbox SouthernIsland_Exterior_Text_Sign, MSGBOX_SIGN
 	end
 
+@ The point of no return for the island's Eon Pokémon.
+SouthernIsland_Exterior_Text_SailBack:
+	.string "Aye, mate, this island has a quiet\n"
+	.string "all its own.\p"
+	.string "Sailors say a legend that faints\n"
+	.string "in battle is gone. Mind yourself.\p"
+	.string "Ready to sail back to Lilycove?$"

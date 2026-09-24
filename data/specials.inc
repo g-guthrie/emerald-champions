@@ -641,6 +641,7 @@ gSpecials::
 	def_special ReturnInGameTradeHeldItem, requests_effects=1
 	def_special BufferEmeraldChampionsHarvestRecipe
 	def_special CheckEmeraldChampionsGardenCelebi
+	def_special LoseEmeraldChampionsGardenCelebi
 
 	@ Inclement Emerald's Super Training, Hyper Training and nature services,
 	@ implemented natively in src/inclement_stat_services.c.

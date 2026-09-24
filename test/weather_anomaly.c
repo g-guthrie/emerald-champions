@@ -237,7 +237,9 @@ TEST("Weather anomalies: none before the window opens or after it closes")
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
     {
         EXPECT(IsFirstVisitor(GetWeatherAnomalySlotSignId(slot)));
-        EXPECT_EQ(GetWeatherAnomalySlotStepsRemaining(slot), WEATHER_ANOMALY_DURATION_STEPS);
+        // The opening fill is staggered: one slot turns over every quarter cycle.
+        EXPECT_EQ(GetWeatherAnomalySlotStepsRemaining(slot),
+                  WEATHER_ANOMALY_DURATION_TICKS * (slot + 1) / WEATHER_ANOMALY_SLOT_COUNT * WEATHER_ANOMALY_TICK_STEPS);
     }
 
     // Once the sky calms, nothing is live, even before the next step, and the
@@ -262,8 +264,10 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
         first[slot] = GetWeatherAnomalySlotSignId(slot);
 
-    // A full cycle: all four expire together after 1451-1500 steps and are
-    // replaced by the other four eligible visitors on the same step.
+    // The opening fill is staggered: slot 0 expires after a quarter cycle and
+    // is replaced at once by another eligible visitor; the slots always stay
+    // full and distinct while the pool has enough visitors.
+    const u32 quarter = WEATHER_ANOMALY_DURATION_TICKS / WEATHER_ANOMALY_SLOT_COUNT * WEATHER_ANOMALY_TICK_STEPS;
     u32 steps = 0;
     while (GetWeatherAnomalySlotSignId(0) == first[0] && steps < 2000)
     {
@@ -271,9 +275,19 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
         steps++;
         EXPECT_EQ(CountLive(), WEATHER_ANOMALY_SLOT_COUNT);
     }
-    EXPECT_GE(steps, WEATHER_ANOMALY_DURATION_STEPS - WEATHER_ANOMALY_TICK_STEPS + 1);
-    EXPECT_LE(steps, WEATHER_ANOMALY_DURATION_STEPS);
+    EXPECT_GE(steps, quarter - WEATHER_ANOMALY_TICK_STEPS + 1);
+    EXPECT_LE(steps, quarter);
+    EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), first[0]);
     EXPECT_EQ(CountLive(), WEATHER_ANOMALY_SLOT_COUNT);
+    EXPECT(LiveSlotsAreDistinct());
+    // By the end of the first full cycle every opening visitor has rotated
+    // out and the other four eligible visitors hold the slots.
+    while (steps < WEATHER_ANOMALY_DURATION_STEPS)
+    {
+        TakeSteps(1);
+        steps++;
+        EXPECT_EQ(CountLive(), WEATHER_ANOMALY_SLOT_COUNT);
+    }
     EXPECT(LiveSlotsAreDistinct());
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
     {
@@ -343,7 +357,9 @@ TEST("Weather anomalies: an empty pool leaves slots empty until a cycle passes")
     EXPECT_EQ(CountLive(), 0);
     EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), LEGENDARY_SIGN_TAPU_KOKO);
     // When an empty slot has waited out its cycle, the cooldown lapses and
-    // Koko returns: never sooner than 1000 steps, never later than a cycle.
+    // Koko returns. The opening fill is staggered, so the first empty slot
+    // (slot 1) waits half a cycle; never sooner than that, never later.
+    const u32 emptyWait = WEATHER_ANOMALY_DURATION_TICKS * 2 / WEATHER_ANOMALY_SLOT_COUNT * WEATHER_ANOMALY_TICK_STEPS;
     u32 waited = 0;
     while (CountLive() == 0 && waited < 2 * WEATHER_ANOMALY_DURATION_STEPS)
     {
@@ -351,8 +367,8 @@ TEST("Weather anomalies: an empty pool leaves slots empty until a cycle passes")
         waited++;
     }
     Test_MgbaPrintf("Empty-pool wait: %d steps", waited);
-    EXPECT_GT(waited, 1000);
-    EXPECT_LE(waited, WEATHER_ANOMALY_DURATION_STEPS);
+    EXPECT_GE(waited, emptyWait - WEATHER_ANOMALY_TICK_STEPS);
+    EXPECT_LE(waited, emptyWait);
     EXPECT_EQ(CountLive(), 1);
     EXPECT(IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_KOKO));
     EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), WEATHER_ANOMALY_EMPTY);
@@ -379,11 +395,18 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     EXPECT_EQ(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110))->weather, route110Weather);
     EXPECT_EQ(gMapHeader.weather, route110Weather);
 
-    // Scripted weather on the home map (a transition's setweather, a desert
-    // trigger) cannot clear the storm; off the home map it applies as usual.
-    SetSavedWeather(WEATHER_SANDSTORM);
-    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    // Scripted sky weather on the home map (a transition's setweather, a
+    // cloud/sun trigger) cannot clear the storm; terrain weather (desert
+    // sandstorm, volcanic ash) always wins; off the home map all apply as usual.
     SetSavedWeather(WEATHER_SUNNY);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    SetSavedWeather(WEATHER_RAIN_THUNDERSTORM);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    SetSavedWeather(WEATHER_SANDSTORM);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SANDSTORM);
+    SetSavedWeather(WEATHER_VOLCANIC_ASH);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_VOLCANIC_ASH);
+    SetSavedWeatherFromCurrMapHeader();
     EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
 
     // Another map keeps its header weather.
@@ -601,8 +624,10 @@ TEST("Weather anomalies: the Institute report lists each live anomaly and counts
     EXPECT_EQ(gStringVar4[0], EOS);
 
     FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    // The first report inside the window draws the storms itself, so the
+    // scientist is never "quiet" for the one step before the first draw.
     BufferWeatherAnomalyReport();
-    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(gSpecialVar_Result, 4);
     TakeSteps(1);
     BufferWeatherAnomalyReport();
     EXPECT_EQ(gSpecialVar_Result, 4);
@@ -620,8 +645,8 @@ TEST("Weather anomalies: the Institute report lists each live anomaly and counts
     BufferWeatherAnomalyReport();
     EXPECT_EQ(gSpecialVar_Result, 2);
     u8 expected[64];
-    u8 *end = GetMapName(expected, Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110))->regionMapSectionId, 0);
-    end = StringCopy(end, COMPOUND_STRING(": "));
+    // Map names print in title case, not the region map's capitals.
+    u8 *end = StringCopy(expected, COMPOUND_STRING("Route 110: "));
     StringCopy(end, GetSpeciesName(SPECIES_TAPU_KOKO));
     EXPECT(BufferContains(gStringVar4, expected));
     EXPECT(GetStringWidth(FONT_NORMAL, expected, 0) <= 200);

@@ -71,6 +71,8 @@ Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl:: @ 822A40C
 	lock
 	faceplayer
 	goto_if_unset FLAG_RECEIVED_WAILMER_PAIL, Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail
+	checkitem ITEM_BERRY_POUCH
+	goto_if_eq VAR_RESULT, FALSE, Route104_PrettyPetalFlowerShop_EventScript_GiveHarvestPouch
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
 	release
 	end
@@ -81,8 +83,21 @@ Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail:: @ 822A421
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WAILMER_PAIL
+@ The Harvest Pouch tracks every Berry picked; the berry NPCs assume it.
+Route104_PrettyPetalFlowerShop_EventScript_GiveHarvestPouch::
+	checkitem ITEM_BERRY_POUCH
+	goto_if_eq VAR_RESULT, TRUE, Route104_PrettyPetalFlowerShop_EventScript_HarvestPouchDone
+	msgbox Route104_PrettyPetalFlowerShop_Text_TakeHarvestPouch, MSGBOX_DEFAULT
+	giveitem ITEM_BERRY_POUCH
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+Route104_PrettyPetalFlowerShop_EventScript_HarvestPouchDone::
 	release
 	end
+
+Route104_PrettyPetalFlowerShop_Text_TakeHarvestPouch:
+	.string "Take this Harvest Pouch, too.\n"
+	.string "It keeps every Berry you pick\l"
+	.string "apart from your battle supplies.$"
 
 Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl:: @ 822A442
 	lock

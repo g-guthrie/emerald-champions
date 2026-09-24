@@ -46,20 +46,34 @@ SkyPillar_Top_EventScript_RayquazaFaceDown:: @ 823971D
 
 SkyPillar_Top_EventScript_Rayquaza:: @ 8239722
 	lockall
+	@ Like the original game, Rayquaza can be challenged only once the
+	@ Sootopolis crisis is settled (its gate table row names the same flag).
+	goto_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SkyPillar_Top_EventScript_RayquazaNotYet
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_RAYQUAZA, VAR_0x800A, ITEM_DRAGON_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	@ A capture resolves it and a knockout loses it for good; an escape or
+	@ any other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SkyPillar_Top_EventScript_DefeatedRayquaza
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, SkyPillar_Top_EventScript_RanFromRayquaza
 	setflag FLAG_DEFEATED_RAYQUAZA
+	releaseall
+	end
+
+SkyPillar_Top_EventScript_DefeatedRayquaza::
+	setflag FLAG_DEFEATED_RAYQUAZA
+	setvar VAR_0x8004, SPECIES_RAYQUAZA
+	goto Common_EventScript_LegendaryGone
+
+SkyPillar_Top_EventScript_RayquazaNotYet::
+	msgbox SkyPillar_Top_Text_RayquazaNotYet, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -173,3 +187,8 @@ SkyPillar_Top_Movement_CameraPanDown: @ 823985C
 SkyPillar_Top_Text_RayquazaFlewOff: @ 8239860
 	.string "The awakened Rayquaza flew off…$"
 
+SkyPillar_Top_Text_RayquazaNotYet:
+	.string "Rayquaza rests here, gazing\n"
+	.string "toward Sootopolis.\p"
+	.string "It won't be disturbed while the\n"
+	.string "city still needs your help.$"

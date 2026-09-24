@@ -1067,7 +1067,7 @@ RustboroCity_Text_OutOfTheWay: @ 81E17FE
 
 RustboroCity_Text_WaitDontTakeMyGoods: @ 81E1817
 	.string "Wait! Pleeeaaase!\p"
-	.string "Don't take my Goods!$"
+	.string "Don't take my Devon Parts!$"
 
 RustboroCity_Text_HelpMeIWasRobbed: @ 81E183E
 	.string "Oh, it's you!\p"

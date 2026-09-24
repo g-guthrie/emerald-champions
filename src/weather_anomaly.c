@@ -167,6 +167,7 @@ void UpdateWeatherAnomaliesOnStep(void)
     u64 state = LoadState();
     u32 expiredSlots = 0, expiredIds = 0, newCooldown = 0, excluded;
     bool32 tick, cooldownLapsed = FALSE;
+    bool32 seeding = state == 0;
 
     if (!IsWeatherAnomalyWindowOpen())
     {
@@ -227,9 +228,16 @@ void UpdateWeatherAnomaliesOnStep(void)
         state = SetCooldown(state, 0);
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
     {
-        // A failed draw leaves the slot empty for one full cycle.
+        // A failed draw leaves the slot empty for one full cycle. The opening
+        // four are staggered so one storm turns over every quarter cycle;
+        // visitors unlocked mid-window (Kyogre's downpours) then get drawn
+        // soon instead of waiting for a whole batch to expire at once.
         if (expiredSlots & (1u << slot))
-            state = SetSlot(state, slot, DrawVisitor(state, excluded), WEATHER_ANOMALY_DURATION_TICKS);
+        {
+            u32 ticks = seeding ? WEATHER_ANOMALY_DURATION_TICKS * (slot + 1) / WEATHER_ANOMALY_SLOT_COUNT
+                                : WEATHER_ANOMALY_DURATION_TICKS;
+            state = SetSlot(state, slot, DrawVisitor(state, excluded), ticks);
+        }
     }
     StoreState(state);
 }
@@ -332,10 +340,42 @@ enum Species TryRollWeatherAnomalyEncounter(enum WildPokemonArea area)
     return gLegendaryGates[sign].species;
 }
 
+// Region-map names are stored in capitals; the scientist speaks in title case.
+static u8 *AppendMapNameTitleCase(u8 *dest, u16 map)
+{
+    u8 *start = dest;
+    bool32 wordStart = TRUE;
+
+    dest = GetMapName(dest, Overworld_GetMapHeaderByGroupAndId(map >> 8, map & 0xFF)->regionMapSectionId, 0);
+    for (; start < dest; start++)
+    {
+        if (*start >= CHAR_A && *start <= CHAR_Z)
+        {
+            if (!wordStart)
+                *start += CHAR_a - CHAR_A;
+            wordStart = FALSE;
+        }
+        else
+        {
+            wordStart = (*start == CHAR_SPACE || *start == CHAR_PERIOD);
+        }
+    }
+    return dest;
+}
+
 void BufferWeatherAnomalyReport(void)
 {
     u8 *dest = gStringVar4;
     u32 count = 0;
+    bool32 empty = TRUE;
+
+    // Right after the rescue no step has been taken yet: draw the first storms
+    // now so the scientist's first report is not "quiet" for one step.
+    for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
+        if (GetWeatherAnomalySlotSignId(slot) != WEATHER_ANOMALY_EMPTY)
+            empty = FALSE;
+    if (empty && IsWeatherAnomalyWindowOpen())
+        UpdateWeatherAnomaliesOnStep();
 
     *dest = EOS;
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
@@ -350,7 +390,7 @@ void BufferWeatherAnomalyReport(void)
             dest = StringCopy(dest, COMPOUND_STRING("\n"));
         else if (count > 1)
             dest = StringCopy(dest, COMPOUND_STRING("\l"));
-        dest = GetMapName(dest, Overworld_GetMapHeaderByGroupAndId(map >> 8, map & 0xFF)->regionMapSectionId, 0);
+        dest = AppendMapNameTitleCase(dest, map);
         dest = StringCopy(dest, COMPOUND_STRING(": "));
         dest = StringCopy(dest, GetLegendaryDisplayName(gLegendaryGates[sign].species));
         count++;

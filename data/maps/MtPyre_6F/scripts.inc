@@ -13,6 +13,7 @@ MtPyre_6F_EventScript_Pecharunt::
 	lockall
 	setvar VAR_0x8004, LEGENDARY_SIGN_PECHARUNT
 	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 4, MtPyre_6F_EventScript_PecharuntGone
 	goto_if_eq VAR_RESULT, 3, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntQuiet
 	setvar VAR_0x8004, LEGENDARY_SIGN_OKIDOGI
@@ -26,6 +27,7 @@ MtPyre_6F_EventScript_Pecharunt::
 	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
 	setvar VAR_0x8004, LEGENDARY_SIGN_PECHARUNT
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, MtPyre_6F_EventScript_PecharuntGone
 	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntDormant
 	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntDormant
@@ -39,7 +41,20 @@ MtPyre_6F_EventScript_Pecharunt::
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
+	@ A knockout loses it for good (its shrine flag marks the loss); capture
+	@ resolves it; any other ending rests it until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtPyre_6F_EventScript_DefeatedPecharunt
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
+	releaseall
+	end
+
+MtPyre_6F_EventScript_DefeatedPecharunt::
+	setflag FLAG_EC_CAUGHT_PECHARUNT
+	setvar VAR_0x8004, SPECIES_PECHARUNT
+	goto Common_EventScript_LegendaryGoneAtShrine
+
+MtPyre_6F_EventScript_PecharuntGone::
+	msgbox MtPyre_6F_Text_PecharuntGone, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -62,6 +77,10 @@ MtPyre_6F_Text_PecharuntDormant:
 MtPyre_6F_Text_PecharuntAwakens:
 	.string "The three masks flare!\n"
 	.string "Pecharunt emerges from the mist!$"
+
+MtPyre_6F_Text_PecharuntGone:
+	.string "The three masks are cracked.\n"
+	.string "Pecharunt vanished and won't return.$"
 
 MtPyre_6F_Text_PecharuntQuiet:
 	.string "The tombstone is still.\n"

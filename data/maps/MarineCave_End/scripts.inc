@@ -36,21 +36,28 @@ MarineCave_End_EventScript_Kyogre:: @ 823B01B
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_KYOGRE
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_KYOGRE, VAR_0x800A, ITEM_WATER_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout or escape lets it be met again,
-	@ like every other static legendary (its Orb comes with the capture).
+	@ A capture resolves it (its Orb comes with the capture). A knockout
+	@ loses it for good and ends the weather, like the original game; an
+	@ escape or any other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MarineCave_End_EventScript_DefeatedKyogre
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, MarineCave_End_EventScript_RanFromKyogre
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
 	releaseall
 	end
+
+MarineCave_End_EventScript_DefeatedKyogre::
+	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	setflag FLAG_DEFEATED_KYOGRE
+	setvar VAR_0x8004, SPECIES_KYOGRE
+	goto Common_EventScript_LegendaryGone
 
 MarineCave_End_EventScript_RanFromKyogre:: @ 823B092
 	setvar VAR_0x8004, SPECIES_KYOGRE

@@ -1,10 +1,11 @@
 {
-  "name": "c25-moltres \u2014 native reveal",
+  "name": "Moltres battle at the Ember Path roost",
   "start": {
     "chapter": 3
   },
   "setup": {
     "flags": {
+      "FLAG_DEFEATED_MOLTRES": false,
       "FLAG_EC_CAUGHT_MOLTRES": false
     },
     "items": {}

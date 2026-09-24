@@ -1,5 +1,22 @@
 VictoryRoad_B1F_MapScripts:: @ 82364E4
+	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_B1F_OnTransition
 	.byte 0
+
+@ The east corridor is only reached through the north rock/boulder cluster,
+@ which can only be cleared from the west. Coming back down the south-east
+@ ladder (from 1F's dead-end Metagrossite pocket) reloads the cluster intact
+@ and would seal the player in with no Escape Rope for sale; so that ladder
+@ arrives with the cluster already cleared.
+VictoryRoad_B1F_OnTransition:
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	goto_if_ne VAR_TEMP_0, 42, VictoryRoad_B1F_OnTransition_End
+	goto_if_ne VAR_TEMP_1, 25, VictoryRoad_B1F_OnTransition_End
+	setflag FLAG_TEMP_19
+	setflag FLAG_TEMP_1A
+	setobjectxyperm 1, 20, 6
+	setobjectxyperm 2, 21, 3
+VictoryRoad_B1F_OnTransition_End:
+	end
 
 VictoryRoad_B1F_EventScript_Samuel:: @ 82364E5
 	trainerbattle_double TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat, EmeraldChampions_Text_NeedTwoPokemon

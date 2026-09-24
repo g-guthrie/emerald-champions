@@ -66,8 +66,7 @@ AquaHideout_B1F_EventScript_DefeatedElectrode2:: @ 8233A7C
 AquaHideout_B1F_EventScript_BattleElectrode::
 	lock
 	faceplayer
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_ELECTRODE, VAR_0x800A, ITEM_NONE
 	waitse
 	playmoncry SPECIES_ELECTRODE, 2

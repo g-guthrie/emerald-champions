@@ -1185,7 +1185,8 @@ SlateportCity_Text_VisitedMuseumOften: @ 81DDBD5
 
 SlateportCity_Text_QuitPushing: @ 81DDC4F
 	.string "Hey, there! Quit pushing!\n"
-	.string "This is the line, can't you see?$"
+	.string "This is the line, can't you see?\p"
+	.string "Come back later if you want in.$"
 
 SlateportCity_Text_AquaHasPolicy: @ 81DDC8A
 	.string "Team Aqua has a policy of\n"

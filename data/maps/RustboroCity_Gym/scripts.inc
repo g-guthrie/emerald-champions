@@ -21,7 +21,10 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	call Common_EventScript_SetGymTrainers
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
-	goto RustboroCity_Gym_EventScript_GiveRockTomb
+	@ FLAG_RECEIVED_TM39 is Delphoxite's only receipt (Norman may give it
+	@ to a Fennekin pair); see src/mega_stone_rewards.c.
+	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
+	release
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
@@ -365,8 +368,8 @@ RustboroCity_Gym_Text_ReceivedStoneBadge: @ 82137EC
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
 	.string "The Stone Badge lets you use\n"
-	.string "Cut. Visit the cutter beside the\l"
-	.string "Pokémon Center for the license.\p"
+	.string "Cut. The Cutter beside the\l"
+	.string "Pokémon Center gives the license.\p"
 	.string "Please take this Mega Stone,\n"
 	.string "too.$"
 

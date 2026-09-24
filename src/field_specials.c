@@ -536,13 +536,7 @@ bool32 CanReceiveLatiStones(void)
     return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
 }
 
-bool32 CanReceiveNormanMegaGift(void)
-{
-    static const struct ItemSlot gifts[] = {
-        {ITEM_MEGA_RING, 1}, {ITEM_SCEPTILITE, 1}, {ITEM_BLAZIKENITE, 1}, {ITEM_SWAMPERTITE, 1},
-    };
-    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
-}
+// CanReceiveNormanMegaGift lives in mega_stone_rewards.c beside the starter stone table.
 
 bool32 CanReceiveGoGogglesGift(void)
 {
@@ -550,8 +544,9 @@ bool32 CanReceiveGoGogglesGift(void)
     return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
 }
 
-// Acquisition bits preserve partial starter-kit delivery across Bag-full retries.
-// An already acquired item never needs another free opening copy.
+// The kit is all or nothing: every listed item arrives together, or none does
+// and the receipt stays clear for a retry. (Checking "already unlocked" here
+// skipped the Eviolite for a Torchic player whose starter merely held one.)
 void GiveEmeraldChampionsStarterBattleItems(void)
 {
     static const enum Item items[] = {
@@ -559,10 +554,21 @@ void GiveEmeraldChampionsStarterBattleItems(void)
         ITEM_FOCUS_SASH, ITEM_EVIOLITE,
     };
 
+    if (FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS))
+    {
+        gSpecialVar_Result = TRUE;
+        return;
+    }
     gSpecialVar_Result = FALSE;
     for (u32 i = 0; i < ARRAY_COUNT(items); i++)
-        if (!IsEmeraldChampionsBattleItemUnlocked(items[i]) && !AddBagItem(items[i], 1))
+    {
+        if (!AddBagItem(items[i], 1))
+        {
+            while (i > 0)
+                RemoveBagItem(items[--i], 1);
             return;
+        }
+    }
     FlagSet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS);
     gSpecialVar_Result = TRUE;
 }
@@ -6820,23 +6826,22 @@ bool8 CheckMagikarpBattle(void)
     return TRUE;
 }
 
-// Picks the level for gift mons and static encounters that can still evolve:
-// three below the player's best, floored at 1, left in gSpecialVar_0x800A.
-void GetStaticEncounterLevel(void)
-{
-    s32 level = GetHighestLevelInPlayerParty() - 3;
-
-    if (level < 1)
-        level = 1;
-
-    gSpecialVar_0x800A = level;
-}
-
-// Gift Pokemon that should arrive ready to use (Game Corner prizes) take the
-// live campaign cap, left in gSpecialVar_0x800A for givemon.
+// One rule for every scripted Pokemon: gifts (givemon), fossils, prizes and
+// static encounters (setwildbattle) all arrive at the live level cap, left in
+// gSpecialVar_0x800A. Nothing scripted is ever over the cap, and a Pokemon
+// that still evolves by level is not stranded below it: at the cap the
+// Leveler evolves it (IsMonEligibleForLeveler), exactly as it raises the rest
+// of the party. Legendary and Ultra Beast statics already meet the player at
+// the cap through GetLegendaryEncounterLevel.
 void GetLevelCapForScriptedGift(void)
 {
     gSpecialVar_0x800A = GetCurrentLevelCap();
+}
+
+// The same rule under its older name (fossils at Devon, Cosmog at Birch's Lab).
+void GetStaticEncounterLevel(void)
+{
+    GetLevelCapForScriptedGift();
 }
 
 // Birth Island, Faraway Island, Navel Rock and Southern Island set up their

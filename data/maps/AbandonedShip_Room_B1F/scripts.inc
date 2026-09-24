@@ -23,15 +23,25 @@ AbandonedShip_Room_B1F_EventScript_CheckOddKeystone::
 	compare VAR_RESULT, NO
 	goto_if_eq AbandonedShip_Room_B1F_EventScript_End
 	closemessage
-	removeitem ITEM_ODD_KEYSTONE, 1
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_SPIRITOMB, VAR_0x800A, ITEM_SMOKE_BALL
 	waitse
 	playmoncry SPECIES_SPIRITOMB, 2
 	delay 40
 	waitmoncry
 	dowildbattle
+	@ Only a capture or a knockout spends the Keystone. The player keeps it
+	@ after running away, and after a whiteout (which never returns here).
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AbandonedShip_Room_B1F_EventScript_SpendKeystone
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AbandonedShip_Room_B1F_EventScript_SpendKeystone
+	msgbox AbandonedShip_Room_B1F_Text_KeystoneRolledBack, MSGBOX_DEFAULT
+	closemessage
+	release
+	end
+
+AbandonedShip_Room_B1F_EventScript_SpendKeystone::
+	removeitem ITEM_ODD_KEYSTONE, 1
 	release
 	end
 
@@ -44,3 +54,9 @@ AbandonedShip_Room_B1F_Text_PutKeystoneInTrash:
 	.string "Something is compelling you to toss\n"
 	.string "the Odd Keystone into this trash can.\p"
 	.string "Trash the Odd Keystone?$"
+
+AbandonedShip_Room_B1F_Text_KeystoneRolledBack:
+	.string "The Odd Keystone rolled back out\n"
+	.string "of the trash can.\p"
+	.string "{PLAYER} picked the Odd Keystone\n"
+	.string "back up.$"

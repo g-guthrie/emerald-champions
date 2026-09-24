@@ -109,9 +109,8 @@ static void CoordEventWeather_Route123Cycle(void)
 void DoCoordEventWeather(u8 coordEventWeather)
 {
     u8 i;
-    // A live weather anomaly holds its weather over the whole home map.
-    if (GetWeatherAnomalyWeatherForCurrentMap() != WEATHER_NONE)
-        return;
+    // SetSavedWeather decides whether a live anomaly overrides this weather
+    // (terrain weather such as desert sandstorm and volcanic ash always wins).
     for (i = 0; i < ARRAY_COUNT(sCoordEventWeatherFuncs); i++)
     {
         if (sCoordEventWeatherFuncs[i].coordEventWeather == coordEventWeather)

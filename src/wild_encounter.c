@@ -6,6 +6,7 @@
 #include "event_data.h"
 #include "emerald_champions_battle_sets.h"
 #include "legendary_signs.h"
+#include "field_message_box.h"
 #include "fieldmap.h"
 #include "fishing.h"
 #include "follower_npc.h"
@@ -13,6 +14,7 @@
 #include "random.h"
 #include "field_player_avatar.h"
 #include "link.h"
+#include "main.h"
 #include "mass_outbreak.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -101,6 +103,89 @@ static const u8 sText_RouteSignGoodRod[] = _("Good Rod: ");
 static const u8 sText_RouteSignSuperRod[] = _("Super Rod: ");
 static const u8 sText_RouteSignHoney[] = _("Honey: ");
 static const u8 sText_RouteSignHidden[] = _("Hidden: ");
+static const u8 sText_RouteSignCutTrees[] = _("Cut trees: ");
+
+// Every Cut tree in the wild shares this one habitat, and these six species
+// live nowhere else (scripts/verify_wild_distribution.py reads this table and
+// keeps them out of every map table). Odds are percent of tree encounters.
+// A felled tree hides a Pokemon one time in three: the "sometimes" of
+// Headbutt trees and of Sword/Shield's shaken Berry trees, and Inclement's
+// own tree rule. The level sits just under the live cap like every land
+// table: cap minus 8 to cap minus 4. Maps with no wild Pokemon at all (the
+// Trick House puzzle rooms) never roll.
+#define CUT_TREE_ENCOUNTER_ODDS 3
+#define CUT_TREE_LEVELS_BELOW_CAP_MIN 4
+#define CUT_TREE_LEVELS_BELOW_CAP_MAX 8
+
+static const struct CutTreeHabitatSlot
+{
+    enum Species species;
+    u8 odds;
+} sCutTreeHabitat[] =
+{
+    {SPECIES_SKWOVET, 40},
+    {SPECIES_PINECO, 30},
+    {SPECIES_AIPOM, 15},
+    {SPECIES_BURMY, 8},
+    {SPECIES_APPLIN, 5},
+    {SPECIES_PHANTUMP, 2},
+};
+
+extern const u8 EventScript_CutTree[];
+
+u32 GetCutTreeSlotCount(void)
+{
+    return ARRAY_COUNT(sCutTreeHabitat);
+}
+
+enum Species GetCutTreeSlotSpecies(u32 slot)
+{
+    return slot < ARRAY_COUNT(sCutTreeHabitat) ? sCutTreeHabitat[slot].species : SPECIES_NONE;
+}
+
+u32 GetCutTreeSlotOdds(u32 slot)
+{
+    return slot < ARRAY_COUNT(sCutTreeHabitat) ? sCutTreeHabitat[slot].odds : 0;
+}
+
+u32 ChooseCutTreeSlotFromRoll(u32 roll)
+{
+    u32 slot;
+
+    for (slot = 0; slot + 1 < ARRAY_COUNT(sCutTreeHabitat); slot++)
+    {
+        if (roll < sCutTreeHabitat[slot].odds)
+            return slot;
+        roll -= sCutTreeHabitat[slot].odds;
+    }
+    return slot;
+}
+
+u8 GetCutTreeEncounterLevelFromRoll(u32 roll)
+{
+    u32 cap = GetCurrentLevelCap();
+    u32 low = cap > CUT_TREE_LEVELS_BELOW_CAP_MAX ? cap - CUT_TREE_LEVELS_BELOW_CAP_MAX : 1;
+    u32 high = cap > CUT_TREE_LEVELS_BELOW_CAP_MIN ? cap - CUT_TREE_LEVELS_BELOW_CAP_MIN : 1;
+
+    return low + roll % (high - low + 1);
+}
+
+// Does the map the player stands on have a Cut tree? The sign roster lists
+// the tree habitat only where a tree grows.
+static bool32 CurrentMapHasCutTrees(void)
+{
+    const struct MapEvents *events = Overworld_GetMapHeaderByGroupAndId(
+        gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->events;
+
+    if (events == NULL)
+        return FALSE;
+    for (u32 i = 0; i < events->objectEventCount; i++)
+    {
+        if (events->objectEvents[i].script == EventScript_CutTree)
+            return TRUE;
+    }
+    return FALSE;
+}
 
 static u8 CollectRouteSignSpecies(
     struct RouteSignSpecies *entries,
@@ -242,6 +327,12 @@ void BufferCurrentMapRouteSignSpecies(void)
             count = CollectRouteSignSpecies(entries, info, 0, NUM_HIDDEN_MONS_ENCOUNTER_SLOTS);
             dest = AppendRouteSignMethod(dest, sText_RouteSignHidden, entries, count, &hasMethod, &hasLegend);
         }
+        if (CurrentMapHasCutTrees())
+        {
+            for (count = 0; count < ARRAY_COUNT(sCutTreeHabitat); count++)
+                entries[count].species = sCutTreeHabitat[count].species;
+            dest = AppendRouteSignMethod(dest, sText_RouteSignCutTrees, entries, count, &hasMethod, &hasLegend);
+        }
     }
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
@@ -264,6 +355,49 @@ void BufferCurrentMapRouteSignSpecies(void)
         StringCopy(dest, COMPOUND_STRING("\pSweet Scent reverses grass/Surf\nrarity: rare species become common."));
     else
         StringCopy(gStringVar4, sText_RouteSignNoSpecies);
+}
+
+// Route signs page through the roster in the ordinary field message box:
+// A turns the page (the text printer's own prompt), B closes the sign at
+// once, including any legend pages the map script shows after the roster.
+EWRAM_DATA static bool8 sRouteSignClosed = FALSE;
+
+static bool8 WaitForRouteSignPage(void)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        HideFieldMessageBox();
+        sRouteSignClosed = TRUE;
+        return TRUE;
+    }
+    // After the last page, A continues like waitbuttonpress.
+    return IsFieldMessageBoxHidden() && JOY_NEW(A_BUTTON);
+}
+
+static void ShowRouteSignPages(struct ScriptContext *ctx)
+{
+    if (sRouteSignClosed || !ShowFieldMessageFromBuffer())
+        return;
+    SetupNativeScript(ctx, WaitForRouteSignPage);
+    ctx->waitAfterCallNative = TRUE;
+}
+
+// callnative from Common_EventScript_ShowRouteRoster.
+void ShowRouteSignRoster(struct ScriptContext *ctx)
+{
+    sRouteSignClosed = FALSE;
+    BufferCurrentMapRouteSignSpecies();
+    ShowRouteSignPages(ctx);
+}
+
+// callnative from Common_EventScript_ShowRouteLegend (VAR_0x8004 = the
+// resident's LEGENDARY_SIGN_* id). Skipped once B closed the sign.
+void ShowRouteSignLegendPage(struct ScriptContext *ctx)
+{
+    if (sRouteSignClosed)
+        return;
+    ResearchSelectedLegendarySign();
+    ShowRouteSignPages(ctx);
 }
 
 const struct WildPokemon gWildFeebas = {20, 25, SPECIES_FEEBAS};
@@ -1222,6 +1356,28 @@ void RockSmashWildEncounter(void)
     {
         gSpecialVar_Result = FALSE;
     }
+}
+
+// A felled Cut tree (data/scripts/field_move_scripts.inc) may hide one of the
+// tree habitat's species. VAR_RESULT is TRUE when a battle starts; the
+// script then waits for it with waitstate.
+void CutTreeWildEncounter(void)
+{
+    enum Species species;
+    u8 level;
+
+    gSpecialVar_Result = FALSE;
+    if (GetCurrentMapWildMonHeaderId() == HEADER_NONE)
+        return;
+    if (Random() % CUT_TREE_ENCOUNTER_ODDS != 0)
+        return;
+    species = sCutTreeHabitat[ChooseCutTreeSlotFromRoll(Random() % 100)].species;
+    level = GetCutTreeEncounterLevelFromRoll(Random());
+    if (!IsWildLevelAllowedByRepel(level) || !IsAbilityAllowingEncounter(level))
+        return;
+    CreateWildMon(species, level);
+    BattleSetup_StartWildBattle();
+    gSpecialVar_Result = TRUE;
 }
 
 static bool8 SweetScentWildEncounterInner(void)

@@ -436,5 +436,5 @@ PetalburgWoods_Text_TrainerTipsPP: @ 822ED07
 	.string "In addition to Hit Points (HP), Pokémon\n"
 	.string "have Power Points (PP) that are used to\l"
 	.string "make moves during battle.\p"
-	.string "If a Pokémon runs out of PP, it must be\n"
-	.string "taken to a Pokémon Center.$"
+	.string "If a Pokémon runs out of PP, use the\n"
+	.string "Poké Vial or visit a Pokémon Center.$"

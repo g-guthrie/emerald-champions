@@ -173,8 +173,10 @@ SlateportCity_Harbor_EventScript_AskForTicket:: @ 820CB06
 	goto SlateportCity_Harbor_EventScript_ChooseDestination
 	end
 
+@ One rule at both harbors (BuildLilycoveSSTidalSelections in src/script_menu.c):
+@ the Battle Frontier is on the ferry map after the Hall of Fame.
 SlateportCity_Harbor_EventScript_ChooseDestination:: @ 820CB1A
-	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
 	multichoicedefault 18, 8, MULTI_SSTIDAL_SLATEPORT_NO_BF, 2, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove

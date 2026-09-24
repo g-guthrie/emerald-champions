@@ -21,13 +21,10 @@ EventScript_CutTreeDown:: @ fallthrough
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	@ Inclement tree habitats share the Rock Smash encounter table.
-	@ Preserve its one-in-three encounter branch, without random item drops.
-	random 3
-	goto_if_ne VAR_RESULT, 0, EventScript_CancelCut
-	compare VAR_REPEL_STEP_COUNT, 0
-	goto_if_gt EventScript_CancelCut
-	special RockSmashWildEncounter
+	@ Every Cut tree shares one habitat (Skwovet, Pineco, Aipom, Burmy, Applin,
+	@ Phantump: found nowhere else). One tree in three hides a Pokemon; the
+	@ odds, levels and Repel rule live in CutTreeWildEncounter (wild_encounter.c).
+	callnative CutTreeWildEncounter
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CancelCut
 	waitstate
 	releaseall

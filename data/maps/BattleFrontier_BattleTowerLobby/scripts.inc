@@ -178,16 +178,192 @@ BattleFrontier_BattleTowerLobby_EventScript_SetBravoTrainerOn:: @ 823E930
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, TRUE
 	return
 
+@ Emerald Champions: the closed Single counter is the Champions Circuit desk. The
+@ Circuit opens with the Frontier, after the Hall of Fame. A run is one sitting at
+@ this counter: ChampionsCircuitBegin snapshots the party and sets it to Lv. 100 (the
+@ Champion's cap), each match is a native trainer battle started by
+@ BattleSetup_StartChampionsCircuitBattle, and ChampionsCircuitEnd restores the
+@ snapshot on retirement, loss or failure. Its only prize is Battle Points; the
+@ Circuit never gives Pokemon. The Single rooms themselves stay closed.
 BattleFrontier_BattleTowerLobby_EventScript_SinglesAttendant:: @ 823E936
 	lock
 	faceplayer
-	msgbox BattleFrontier_BattleTowerLobby_Text_SinglesClosed, MSGBOX_DEFAULT
+	goto_if_unset FLAG_SYS_GAME_CLEAR, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
+	call_if_ne VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE, BattleFrontier_BattleTowerLobby_EventScript_CircuitClearStaleRun
+	goto_if_set FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED, BattleFrontier_BattleTowerLobby_EventScript_CircuitWelcomeBack
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcome, MSGBOX_DEFAULT
+	setflag FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitAsk
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitWelcomeBack::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack, MSGBOX_DEFAULT
+BattleFrontier_BattleTowerLobby_EventScript_CircuitAsk::
+	message BattleFrontier_BattleTowerLobby_Text_CircuitTakeChallenge
+	waitmessage
+	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleTowerLobby_EventScript_CircuitTryEnter
+	case 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitExplain
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitExplain::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRules, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitAsk
+
+@ VAR_RESULT from ChampionsCircuitCanEnter: 0 needs six, 1 ok, 2 party rule
+@ (CIRCUIT_ENTRY_* in include/champions_circuit.h).
+BattleFrontier_BattleTowerLobby_EventScript_CircuitTryEnter::
+	special ChampionsCircuitCanEnter
+	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitPartyRule
+	goto_if_ne VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitNeedsParty
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitConfirm, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel
+	special ChampionsCircuitBegin
+@ The challenge loop. The CIRCUIT_ROOM headless fixture enters here directly.
+BattleFrontier_BattleTowerLobby_EventScript_CircuitNextMatch::
+	special ChampionsCircuitGenerateOpponent
+	goto_if_ne VAR_RESULT, PARTY_SIZE, BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitOpponent, MSGBOX_DEFAULT
+	closemessage
+	special BattleSetup_StartChampionsCircuitBattle
+	special ChampionsCircuitHandleBattleResult
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleTowerLobby_EventScript_CircuitLost
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitContinue, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, BattleFrontier_BattleTowerLobby_EventScript_CircuitNextMatch
+	special ChampionsCircuitEnd
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRetire, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitExit
+
+@ ChampionsCircuitHandleBattleResult already ended the run on any non-win.
+BattleFrontier_BattleTowerLobby_EventScript_CircuitLost::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitLost, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitExit
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed::
+	special ChampionsCircuitEnd
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitGenerationFailed, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitExit
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitLocked, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitExit
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitPartyRule::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitPartyRule, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitExit
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitNeedsParty::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitNeedsParty, MSGBOX_DEFAULT
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitExit
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitCancel, MSGBOX_DEFAULT
+BattleFrontier_BattleTowerLobby_EventScript_CircuitExit::
+	closemessage
 	release
 	end
 
-BattleFrontier_BattleTowerLobby_Text_SinglesClosed:
-	.string "The SINGLE rooms are closed.\n"
-	.string "The DOUBLE counter is open.$"
+@ A run never outlives the desk conversation, so an active flag here can only be
+@ left over from an interrupted state. Restore the party snapshot silently.
+BattleFrontier_BattleTowerLobby_EventScript_CircuitClearStaleRun::
+	special ChampionsCircuitEnd
+	return
+
+BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
+	.string "Welcome to the Champions Circuit!\p"
+	.string "Here you face one generated team\n"
+	.string "after another in Double Battles.\p"
+	.string "Your six Pokémon battle at Lv. 100,\n"
+	.string "the Champion's level cap.\p"
+	.string "Every win earns Battle Points. The\n"
+	.string "longer your streak, the more you earn.\p"
+	.string "When the run ends, your team returns\n"
+	.string "exactly as you brought it.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack:
+	.string "Welcome back to the Champions Circuit.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitTakeChallenge:
+	.string "Would you like to take on the\n"
+	.string "Champions Circuit?$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRules:
+	.string "Bring six Pokémon able to battle and\n"
+	.string "no Eggs. The party rule applies.\p"
+	.string "One Legendary or Mythical Pokémon,\n"
+	.string "one Ultra Beast and one Paradox\l"
+	.string "Pokémon at most.\p"
+	.string "Every battle is a Double Battle, and\n"
+	.string "your team battles at Lv. 100.\p"
+	.string "Your difficulty setting decides how\n"
+	.string "strong the first opponent is.\p"
+	.string "Each win makes the next opponent a\n"
+	.string "little stronger.\p"
+	.string "HP and held items are restored after\n"
+	.string "every battle.\p"
+	.string "After a win you may continue or retire.\n"
+	.string "A loss ends the run.\p"
+	.string "Each win earns more Battle Points as\n"
+	.string "your streak grows, and every tenth\l"
+	.string "win pays a bonus.\p"
+	.string "Trade them at the Exchange Service\n"
+	.string "Corner. Your Trainer Card keeps your\l"
+	.string "best streak.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitConfirm:
+	.string "Your team will battle at Lv. 100\n"
+	.string "until the run ends. Shall we begin?$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitOpponent:
+	.string "Match {STR_VAR_2}! Your opponent brings\n"
+	.string "{STR_VAR_1}.\p"
+	.string "Its Pokémon are up to Lv. {STR_VAR_3}.\n"
+	.string "Let the battle begin!$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitContinue:
+	.string "Your streak stands at {STR_VAR_2}, and\n"
+	.string "your team has been restored.\p"
+	.string "Take on the next opponent?$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRetire:
+	.string "You retired with a streak of {STR_VAR_2}.\p"
+	.string "Your team is back as you brought it.\n"
+	.string "Please come again!$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitLost:
+	.string "Your run ends with a streak of\n"
+	.string "{STR_VAR_2}.\p"
+	.string "Your team is back as you brought it.\n"
+	.string "Please come again!$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitGenerationFailed:
+	.string "The next opponent couldn't be\n"
+	.string "prepared, so your run ends here.\p"
+	.string "Your team is back as you brought it.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitLocked:
+	.string "This counter runs the Champions\n"
+	.string "Circuit. It opens to Trainers who\l"
+	.string "have entered the Hall of Fame.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitPartyRule:
+	.string "The Circuit follows the party rule:\n"
+	.string "one Legendary or Mythical Pokémon,\l"
+	.string "one Ultra Beast and one Paradox\l"
+	.string "Pokémon at most.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitNeedsParty:
+	.string "The Circuit needs six Pokémon able\n"
+	.string "to battle, and no Eggs.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitCancel:
+	.string "Come back when your team is ready.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRecord:
+	.string "Champions Circuit record\p"
+	.string "Best streak: {STR_VAR_1}\n"
+	.string "Total wins: {STR_VAR_2}$"
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterSinglesChallenge:: @ 823E948
 	message BattleFrontier_BattleTowerLobby_Text_TakeSinglesChallenge
 	waitmessage
@@ -513,12 +689,11 @@ BattleFrontier_BattleTowerLobby_EventScript_Boy:: @ 823EFBE
 	msgbox BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins, MSGBOX_NPC
 	end
 
+@ The board beside the Circuit desk shows the Circuit record; the Single rooms
+@ are closed, so their native results board had nothing to show.
 BattleFrontier_BattleTowerLobby_EventScript_ShowSinglesResults:: @ 823EFC7
-	lockall
-	frontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_SINGLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_ShowDoublesResults:: @ 823EFE0

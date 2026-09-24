@@ -63,11 +63,18 @@ NavelRock_Bottom_EventScript_Lugia:: @ 82692A2
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ Only a capture resolves it; a knockout, escape or forced end retreats.
+	@ A capture resolves it and a knockout loses it; an escape or any
+	@ other ending retreats until the player comes back.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Bottom_EventScript_DefeatedLugia
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, NavelRock_Bottom_EventScript_RanFromLugia
 	setflag FLAG_CAUGHT_LUGIA
 	release
 	end
+
+NavelRock_Bottom_EventScript_DefeatedLugia::
+	setflag FLAG_DEFEATED_LUGIA
+	setvar VAR_0x8004, SPECIES_LUGIA
+	goto Common_EventScript_LegendaryGone
 
 NavelRock_Bottom_EventScript_RanFromLugia:: @ 8269344
 	setvar VAR_0x8004, SPECIES_LUGIA

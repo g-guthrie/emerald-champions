@@ -111,9 +111,8 @@ static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_m
 // src/difficulty.c: cap-relative Easy -4, Medium -2, Hard 0.
 static const u8 *const sDifficultyDescription[] =
 {
-    COMPOUND_STRING("Easy: opponents 4 levels lower."),
-    COMPOUND_STRING("Medium: 2 lower. Hard: as designed."),
-    COMPOUND_STRING("Teams never change."),
+    COMPOUND_STRING("Easy: foes 4 levels lower. Medium: 2."),
+    COMPOUND_STRING("Hard: as designed. Teams never change."),
 };
 
 static const u8 sEqualSignGfx[] = INCGFX_U8("graphics/interface/option_menu_equals_sign.png", ".4bpp");
@@ -705,7 +704,7 @@ static void DrawDescriptionText(void)
 
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(1));
     for (i = 0; i < ARRAY_COUNT(sDifficultyDescription); i++)
-        AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, sDifficultyDescription[i], 4, i * 8, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, sDifficultyDescription[i], 4, i * 12, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_FULL);
 }
 

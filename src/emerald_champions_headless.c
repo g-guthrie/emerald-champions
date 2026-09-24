@@ -128,6 +128,7 @@ static EWRAM_DATA bool8 sEcHeadlessAutoCaptureInProgress = FALSE;
 static const u8 sEcHeadlessPlayerName[] = _("BRENDAN");
 extern void gInitialMainCB2(void);
 extern const u8 RivalsHouse_EventScript_ChooseStarterRegion[];
+extern const u8 BattleFrontier_BattleTowerLobby_EventScript_CircuitNextMatch[];
 
 bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
 {
@@ -1715,6 +1716,17 @@ void EmeraldChampionsHeadlessObserve(void)
         gEcHeadlessFixtureSetupResult = TRUE;
         return;
     }
+    // A Circuit run in progress: enter the desk's challenge loop at its next
+    // match once the lobby is idle, as if the player had just chosen to continue.
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CIRCUIT_ROOM
+     && !gEcHeadlessFixtureSetupResult
+     && gMain.callback2 == CB2_Overworld
+     && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+    {
+        ScriptContext_SetupScript(BattleFrontier_BattleTowerLobby_EventScript_CircuitNextMatch);
+        gEcHeadlessFixtureSetupResult = TRUE;
+        return;
+    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_MOVE_ANIMATION
      && gMain.inBattle
      && gBattleStruct != NULL)
@@ -2242,9 +2254,34 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         LoadHeadlessMap(MAP_MAUVILLE_CITY_GAME_CORNER, 13, 3);
         break;
     case EC_HEADLESS_SCENARIO_CIRCUIT_LOBBY:
-        FlagSet(FLAG_SYS_GAME_CLEAR);
+        // The player stands at the Circuit desk (the Tower's Single counter) with
+        // a legal party of six. Param 0: Frontier open. 1: before the Hall of Fame
+        // (the desk refuses). 2: two Legendary Pokemon (party rule refusal).
+        // 3: only five Pokemon. 4: Frontier open with a prior record (best 12,
+        // 40 lifetime wins, rules already heard) for the record board.
         PrepareCircuitParty();
-        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 23, 6);
+        if (gEcHeadlessFixtureParam != 1)
+        {
+            FlagSet(FLAG_SYS_GAME_CLEAR);
+            FlagSet(FLAG_IS_CHAMPION);
+        }
+        if (gEcHeadlessFixtureParam == 2)
+        {
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEWTWO, 80, OTID_STRUCT_PLAYER_ID);
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_LUGIA, 80, OTID_STRUCT_PLAYER_ID);
+        }
+        else if (gEcHeadlessFixtureParam == 3)
+        {
+            ZeroMonData(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1]);
+            CalculatePlayerPartyCount();
+        }
+        else if (gEcHeadlessFixtureParam == 4)
+        {
+            FlagSet(FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED);
+            VarSet(VAR_EC_CIRCUIT_BEST_WINS, 12);
+            VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 40);
+        }
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 6, 6);
         break;
     case EC_HEADLESS_SCENARIO_LEVELER:
         GiveHeadlessGeodude(1);
@@ -4052,10 +4089,23 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
         break;
     case EC_HEADLESS_SCENARIO_CIRCUIT_ROOM:
+    {
+        // A Circuit run already in progress at the desk with `param` wins (also
+        // the best and lifetime totals). The Observe hook starts the next match.
+        // Param 9 makes the next win the tenth lifetime win (milestone bonus).
+        u16 wins = gEcHeadlessFixtureParam;
+
         PrepareCircuitParty();
+        FlagSet(FLAG_SYS_GAME_CLEAR);
+        FlagSet(FLAG_IS_CHAMPION);
+        FlagSet(FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED);
         ChampionsCircuitBegin();
-        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 5, 8);
+        VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, wins);
+        VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, wins);
+        VarSet(VAR_EC_CIRCUIT_BEST_WINS, wins);
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 6, 6);
         break;
+    }
     case EC_HEADLESS_SCENARIO_POKEDEX:
         PrepareHeadlessPokedex();
         gEcHeadlessFixtureSetupResult = TRUE;

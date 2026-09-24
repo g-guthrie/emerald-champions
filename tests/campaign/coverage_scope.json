@@ -234,7 +234,7 @@
     {
       "id": "optional.legendary_signs",
       "classification": "optional",
-      "evidence": [{"path": "src/legendary_signs.c", "contains": "gLegendarySignDefinitions"}]
+      "evidence": [{"path": "src/legendary_signs.c", "contains": "gLegendaryGates"}]
     },
     {
       "id": "optional.restored_areas",
@@ -268,7 +268,7 @@
       "id": "choice.starter_region",
       "classification": "main_story",
       "evidence": [
-        {"path": "data/maps/LittlerootTown_BrendansHouse_2F/scripts.inc", "contains": "Common_EventScript_ChooseStarterRegion"}
+        {"path": "data/maps/LittlerootTown_BrendansHouse_2F/scripts.inc", "contains": "RivalsHouse_EventScript_ChooseStarterRegion"}
       ]
     },
     {
@@ -298,7 +298,7 @@
       "id": "world.shoal_tide",
       "classification": "main_story",
       "evidence": [
-        {"path": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "contains": "ShoalCave_EventScript_TurnTide"},
+        {"path": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "contains": "UpdateShoalTideFlag"},
         {"path": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "contains": "ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems"}
       ]
     },

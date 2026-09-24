@@ -16,6 +16,9 @@ is not a FireRed/LeafGreen table):
 4. Land slot levels satisfy 1 <= min <= max <= 100.
 5. With --placement SPEC, each wild/quest placement appears exactly once on its
    map and method at its rate, and no restricted species appears elsewhere.
+6. The shared Cut-tree habitat (sCutTreeHabitat in src/wild_encounter.c) totals
+   100, follows the ordinary ladder, and is the only home of its species: none
+   of them appears in any map table. It counts as a valid species home.
 
 Species classes follow GetRestrictedPartyClass in src/pokemon.c: the flags of
 the form table's base species (Ultra Beast, then Legendary-class, then
@@ -160,6 +163,19 @@ SURF_HABITATS = {
     "MAP_ALTERING_CAVE_B1F": {"BASCULEGION", "MALAMAR"},
     "MAP_VICTORY_ROAD_B2F": {"DEWGONG", "LAPRAS"},
 }
+
+CUT_TREE_SOURCE = ROOT / 'src/wild_encounter.c'
+CUT_TREE_TABLE = re.compile(r"sCutTreeHabitat\[\]\s*=\s*\{(.*?)\};", re.S)
+CUT_TREE_SLOT = re.compile(r"\{\s*(SPECIES_[A-Z0-9_]+)\s*,\s*(\d+)\s*\}")
+
+
+def cut_tree_habitat():
+    """Return [(species, odds)] from the native Cut-tree table."""
+    match = CUT_TREE_TABLE.search(CUT_TREE_SOURCE.read_text())
+    if match is None:
+        raise SystemExit(f"{CUT_TREE_SOURCE}: sCutTreeHabitat table not found")
+    return [(species, int(odds)) for species, odds in CUT_TREE_SLOT.findall(match.group(1))]
+
 
 FLAG_FIELDS = ("isUltraBeast", "isRestrictedLegendary", "isSubLegendary", "isMythical", "isParadox")
 FORM_TABLE = re.compile(r"static const u16 (s\w+FormSpeciesIdTable)\[\]\s*=\s*\{(.*?)\};", re.S)
@@ -437,6 +453,29 @@ def main():
             checked += 1
     if not checked:
         errors.append('no Emerald encounter tables checked')
+    # Rule 6: the Cut-tree habitat is its species' only home.
+    cut_slots = cut_tree_habitat()
+    cut_species = {resolve_species(species, aliases) for species, _ in cut_slots}
+    if not cut_slots or sum(odds for _, odds in cut_slots) != 100:
+        errors.append(f'cut_tree: odds {[odds for _, odds in cut_slots]} must total 100')
+    for species, odds in cut_slots:
+        canonical = resolve_species(species, aliases)
+        if not configured.get(canonical):
+            errors.append(f'cut_tree: invalid configured species {species}')
+        elif class_of(species) != ORDINARY:
+            errors.append(f'cut_tree: {class_of(species)} {species} is not allowed on Cut trees')
+        elif odds < MIN_ORDINARY_SLOT_PERCENT:
+            errors.append(f'cut_tree: ordinary {species} has {odds}%, below {MIN_ORDINARY_SLOT_PERCENT}%')
+        else:
+            sources.setdefault(canonical, set()).add('CUT_TREES/cut_tree')
+            wild_sources.add(canonical)
+    for entry in emerald:
+        for name, table in entry.items():
+            if not isinstance(table, dict) or 'mons' not in table:
+                continue
+            for slot, mon in enumerate(table['mons']):
+                if resolve_species(mon['species'], aliases) in cut_species:
+                    errors.append(f"{entry['map']}/{name} slot {slot}: {mon['species']} lives only in Cut trees")
     paradox_species = {s for s, kind in classes.items() if kind == PARADOX and configured.get(s)}
     for species in sorted(paradox_species - wild_sources):
         errors.append(f'{species}: enabled Paradox species lacks a Hoenn wild source')
@@ -452,6 +491,7 @@ def main():
     if errors:
         raise SystemExit('\n'.join(errors))
     print(f'PASS: {checked} Emerald encounter tables have explicit weights, the rarity ladder and valid level templates')
+    print(f'PASS: the shared Cut-tree habitat ({len(cut_slots)} species) totals 100 and is their only home')
     if placement_count is not None:
         print(f'PASS: {placement_count} wild/quest placements from {args.placement} match their map, method and rate')
     print(f'INFO: {len(sources)} canonical species referenced by ordinary Hoenn tables; campaign access is not verified')

@@ -108,7 +108,7 @@ static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{P
 static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_LevelerNoEffect[] = _("Your party has caught up.\nNo Pokémon is ready to evolve.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon needs the\nFEATHER BADGE and permission\lto use Fly.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon needs the\nFeather Badge and permission\lto use Fly.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_FlightBeaconNeedsFlier[] = _("A Pokémon in your party or PC\nmust be able to learn Fly.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_FlightBeaconCantHere[] = _("A flier can't pick you up here.{PAUSE_UNTIL_PRESS}");
 

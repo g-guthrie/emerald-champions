@@ -37,7 +37,7 @@ TEST("Campaign gifts: shared pockets, duplicate items and cross-pocket failures"
     EXPECT(AddBagItem(ITEM_LATIOSITE, 1));
     EXPECT(AddBagItem(ITEM_LATIASITE, 1));
 
-    // The key fits, but Norman must not grant it if his three stones do not.
+    // The key fits, but Norman must not grant it if the stones he owes do not.
     for (u32 slot = 0; slot < keys->capacity; slot++)
         BagPocket_SetSlotItemIdAndCount(keys, slot, ITEM_NONE, 0);
     EXPECT(!CanReceiveNormanMegaGift());
@@ -629,4 +629,47 @@ TEST("Campaign gifts: bundle simulation works without heap and never grants part
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LATIASITE), 0);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POTION), 0);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ORAN_BERRY), fits ? 997 : 998);
+}
+
+extern const u8 SouthernIsland_Interior_EventScript_Sign[];
+extern const u8 SouthernIsland_Interior_EventScript_SignOnly[];
+extern const u8 SouthernIsland_Interior_EventScript_SignThenStones[];
+extern const u8 SouthernIsland_Interior_EventScript_SignStonesLost[];
+
+TEST("Campaign gifts: Southern Island's Eon stones follow only a capture")
+{
+    bool8 saved[3] = {FlagGet(FLAG_RECEIVED_LATI_STONES), FlagGet(FLAG_CAUGHT_LATIAS_OR_LATIOS),
+                      FlagGet(FLAG_DEFEATED_LATIAS_OR_LATIOS)};
+    const u16 flags[] = {FLAG_RECEIVED_LATI_STONES, FLAG_CAUGHT_LATIAS_OR_LATIOS, FLAG_DEFEATED_LATIAS_OR_LATIOS};
+    for (u32 mask = 0; mask < 8; mask++)
+    {
+        for (u32 i = 0; i < ARRAY_COUNT(flags); i++)
+        {
+            if (mask & (1u << i)) FlagSet(flags[i]);
+            else FlagClear(flags[i]);
+        }
+        // Received stones end it; a capture earns them (or a Bag-full retry);
+        // a knockout loses them with the Pokémon; before any result, nothing.
+        const u8 *expected = (mask & 1) ? SouthernIsland_Interior_EventScript_SignOnly
+            : (mask & 2) ? SouthernIsland_Interior_EventScript_SignThenStones
+            : (mask & 4) ? SouthernIsland_Interior_EventScript_SignStonesLost
+            : SouthernIsland_Interior_EventScript_SignOnly;
+        struct ScriptContext ctx;
+        InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
+        SetupBytecodeScript(&ctx, SouthernIsland_Interior_EventScript_Sign);
+        for (u32 step = 0; step < 8
+          && ctx.scriptPtr != SouthernIsland_Interior_EventScript_SignOnly
+          && ctx.scriptPtr != SouthernIsland_Interior_EventScript_SignThenStones
+          && ctx.scriptPtr != SouthernIsland_Interior_EventScript_SignStonesLost; step++)
+        {
+            u8 command = *ctx.scriptPtr++;
+            EXPECT(!ctx.cmdTable[command](&ctx));
+        }
+        EXPECT_EQ(ctx.scriptPtr, expected);
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(flags); i++)
+    {
+        if (saved[i]) FlagSet(flags[i]);
+        else FlagClear(flags[i]);
+    }
 }

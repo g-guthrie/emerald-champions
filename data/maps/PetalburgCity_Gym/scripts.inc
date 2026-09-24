@@ -346,6 +346,7 @@ PetalburgCity_Gym_EventScript_NormanFaceDoorEast:: @ 8204D7F
 
 PetalburgCity_Gym_EventScript_NormanPostBattle:: @ 8204D80
 	call PetalburgCity_Gym_EventScript_GiveRegenerator
+	call PetalburgCity_Gym_EventScript_NormanPartnerStones
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgCity_Gym_EventScript_GiveEnigmaBerry
@@ -388,6 +389,9 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry:: @ 8204E1D
 	release
 	end
 
+@ The Ring comes with the Mega Stones of the starter pair's final forms that
+@ have not reached the player yet, or Swampertite when the pair has none
+@ (src/mega_stone_rewards.c). The Bag check covers the Ring and every stone.
 PetalburgCity_Gym_EventScript_NormanGiveKeystone::
 	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, PetalburgCity_Gym_EventScript_NormanBattle
 	specialvar VAR_RESULT, CanReceiveNormanMegaGift
@@ -397,15 +401,50 @@ PetalburgCity_Gym_EventScript_NormanGiveKeystone::
 	giveitem ITEM_MEGA_RING
 	setflag FLAG_SYS_RECEIVED_KEYSTONE
 	msgbox PetalburgCity_Gym_Text_NormanMegaBracelet, MSGBOX_DEFAULT
-	giveitem ITEM_SCEPTILITE
-	waitmessage
-	giveitem ITEM_BLAZIKENITE
-	waitmessage
-	giveitem ITEM_SWAMPERTITE
-	waitmessage
+	callnative BufferNormanMegaGiftKind
+	switch VAR_RESULT
+	case 0, PetalburgCity_Gym_EventScript_NormanStarterStones
+	case 1, PetalburgCity_Gym_EventScript_NormanStarterStone
+	case 2, PetalburgCity_Gym_EventScript_NormanFallbackStone
+	msgbox PetalburgCity_Gym_Text_NormanStonesAlreadyHeld, MSGBOX_DEFAULT
+	goto PetalburgCity_Gym_EventScript_NormanStonesGiven
+
+PetalburgCity_Gym_EventScript_NormanStarterStones::
+	msgbox PetalburgCity_Gym_Text_NormanStarterStones, MSGBOX_DEFAULT
+	goto PetalburgCity_Gym_EventScript_NormanNextStarterStone
+
+PetalburgCity_Gym_EventScript_NormanStarterStone::
+	msgbox PetalburgCity_Gym_Text_NormanStarterStone, MSGBOX_DEFAULT
+	goto PetalburgCity_Gym_EventScript_NormanNextStarterStone
+
+PetalburgCity_Gym_EventScript_NormanFallbackStone::
+	msgbox PetalburgCity_Gym_Text_NormanFallbackStone, MSGBOX_DEFAULT
+PetalburgCity_Gym_EventScript_NormanNextStarterStone::
+	callnative BufferNormanStarterMegaStone
+	goto_if_eq VAR_RESULT, ITEM_NONE, PetalburgCity_Gym_EventScript_NormanStonesGiven
+	copyvar VAR_0x8004, VAR_RESULT
+	giveitem VAR_0x8004
+	goto_if_eq VAR_RESULT, FALSE, PetalburgCity_Gym_EventScript_NormanStonesGiven
+	callnative MarkStarterMegaStoneReceived
+	goto PetalburgCity_Gym_EventScript_NormanNextStarterStone
+
+PetalburgCity_Gym_EventScript_NormanStonesGiven::
+	msgbox PetalburgCity_Gym_Text_NormanHoennPartnerStones, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_NormanWheneverReady, MSGBOX_DEFAULT
 	release
 	end
+
+@ The Hoenn stones Norman did not give with the Ring wait here until the
+@ player shows him that partner's line; each is handed over once.
+PetalburgCity_Gym_EventScript_NormanPartnerStones::
+	callnative BufferNormanPartnerMegaStone
+	goto_if_eq VAR_RESULT, ITEM_NONE, Common_EventScript_NopReturn
+	copyvar VAR_0x8004, VAR_RESULT
+	msgbox PetalburgCity_Gym_Text_NormanPartnerStone, MSGBOX_DEFAULT
+	giveitem VAR_0x8004
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	callnative MarkStarterMegaStoneReceived
+	goto PetalburgCity_Gym_EventScript_NormanPartnerStones
 	
 PetalburgCity_Gym_EventScript_NormanBattle::
 	msgbox PetalburgCity_Gym_Text_NormanBattleIntro, MSGBOX_DEFAULT
@@ -1365,8 +1404,37 @@ PetalburgCity_Gym_Text_NormanMegaBracelet:
 	.string "technique, but I think you and your\l"
 	.string "Pokémon are ready for it.\p"
 	.string "If you can, give it a try in our\n"
-	.string "battle!\p"
-	.string "Here, take these Mega Stones too.$"
+	.string "battle!$"
+
+PetalburgCity_Gym_Text_NormanStarterStones:
+	.string "I kept Mega Stones for the partners\n"
+	.string "you set out with. Here, take them.$"
+
+PetalburgCity_Gym_Text_NormanStarterStone:
+	.string "I kept a Mega Stone for one of the\n"
+	.string "partners you set out with. Here.$"
+
+PetalburgCity_Gym_Text_NormanFallbackStone:
+	.string "Your partners can't Mega Evolve,\n"
+	.string "I'm afraid.\p"
+	.string "Take this one anyway. A Swampert\n"
+	.string "could use it, if one joins you.$"
+
+PetalburgCity_Gym_Text_NormanStonesAlreadyHeld:
+	.string "I see you already have Mega Stones\n"
+	.string "for your partners. Good.$"
+
+PetalburgCity_Gym_Text_NormanHoennPartnerStones:
+	.string "I also keep the Mega Stones for\n"
+	.string "Treecko, Torchic and Mudkip.\p"
+	.string "Raise one I haven't given you a\n"
+	.string "stone for, and show it to me.$"
+
+PetalburgCity_Gym_Text_NormanPartnerStone:
+	.string "Dad: That's a {STR_VAR_1} you're\n"
+	.string "raising!\p"
+	.string "Then this {STR_VAR_2} belongs\n"
+	.string "with you. Take it.$"
 
 PetalburgCity_Gym_Text_NormanWheneverReady:
 	.string "Now then, {PLAYER}!\n"

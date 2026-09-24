@@ -12,12 +12,16 @@ AlteringCave_B1F_EventScript_Mewtwo::
 	playmoncry SPECIES_MEWTWO, 2
 	delay 40
 	waitmoncry
-	specialvar VAR_RESULT, GetHighestLevelInPlayerParty
-	copyvar VAR_0x800A, VAR_RESULT
+	special GetLevelCapForScriptedGift
 	setwildbattle SPECIES_MEWTWO, VAR_0x800A, ITEM_PSYCHIC_GEM
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 AlteringCave_B1F_EventScript_CheckMewtwoResult::
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	setvar VAR_0x8004, SPECIES_MEWTWO
+	specialvar VAR_RESULT, GetBattleOutcome
+	@ A knockout loses it for good; capture resolves it; anything else retreats.
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryGone
 	goto Common_EventScript_EndVisibleLegendaryEncounter
 
 AlteringCave_B1F_EventScript_Leaf::

@@ -30,10 +30,18 @@ Route115_EventScript_Woman:: @ 81F2973
 
 Route115_EventScript_RouteSignRustboro:: @ 81F297C
 	msgbox Route115_Text_RouteSignRustboro, MSGBOX_SIGN
-	goto Common_EventScript_ShowRouteSpecies
+	goto Route115_EventScript_ShowRouteRoster
 
 Route115_EventScript_MeteorFallsSign:: @ 81F2985
 	msgbox Route115_Text_MeteorFallsSign, MSGBOX_SIGN
+	goto Route115_EventScript_ShowRouteRoster
+	end
+
+Route115_EventScript_ShowRouteRoster::
+	call Common_EventScript_ShowRouteRoster
+	setvar VAR_0x8004, LEGENDARY_SIGN_RESHIRAM
+	call Common_EventScript_ShowRouteLegend
+	releaseall
 	end
 
 Route115_EventScript_Timothy:: @ 81F298E

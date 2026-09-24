@@ -349,7 +349,10 @@ BattleFrontier_ReceptionGate_Text_BattleTowerInfo: @ 82668C2
 	.string "to be the Battle Frontier's symbol.\p"
 	.string "The tower hosts DOUBLE, MULTI, and\n"
 	.string "LINK MULTI BATTLE ROOMS.\p"
-	.string "Its SINGLE rooms are closed.$"
+	.string "Its SINGLE rooms are closed. That\n"
+	.string "counter runs the Champions Circuit:\p"
+	.string "Double Battles at Lv. 100 for as long\n"
+	.string "as you keep winning, for Battle Points.$"
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo: @ 826696F
 	.string "The BATTLE DOME is the large building\n"

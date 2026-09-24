@@ -1,12 +1,12 @@
 {
-  "name": "C46 \u2014 native Rayquaza awakening",
+  "name": "Rayquaza awakening at the Sky Pillar top",
   "start": {
     "chapter": 3
   },
   "setup": {
     "vars": {
       "VAR_SKY_PILLAR_STATE": 0,
-      "VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE": 0
+      "VAR_SKY_PILLAR_RAQUAZA_CRY_DONE": 0
     },
     "flags": {
       "FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA": false,

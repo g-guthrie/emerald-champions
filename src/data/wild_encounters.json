@@ -15780,7 +15780,7 @@
               {
                 "min_level": 6,
                 "max_level": 8,
-                "species": "SPECIES_PHANTUMP"
+                "species": "SPECIES_BLIPBUG"
               },
               {
                 "min_level": 6,
@@ -15815,7 +15815,7 @@
               {
                 "min_level": 6,
                 "max_level": 8,
-                "species": "SPECIES_BURMY_PLANT"
+                "species": "SPECIES_BLIPBUG"
               },
               {
                 "min_level": 6,
@@ -15941,7 +15941,7 @@
               {
                 "min_level": 12,
                 "max_level": 14,
-                "species": "SPECIES_APPLIN"
+                "species": "SPECIES_KAKUNA"
               },
               {
                 "min_level": 12,
@@ -20436,11 +20436,6 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 21,
-                "max_level": 21,
-                "species": "SPECIES_KORAIDON"
-              },
-              {
                 "min_level": 22,
                 "max_level": 22,
                 "species": "SPECIES_STONJOURNER"
@@ -20494,11 +20489,15 @@
                 "min_level": 22,
                 "max_level": 22,
                 "species": "SPECIES_HIPPOPOTAS"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_STONJOURNER"
               }
             ],
             "encounter_rates": [
-              1,
-              20,
+              19,
               19,
               15,
               10,
@@ -20508,6 +20507,7 @@
               4,
               4,
               3,
+              2,
               2
             ]
           },
@@ -20907,11 +20907,6 @@
               {
                 "min_level": 35,
                 "max_level": 35,
-                "species": "SPECIES_RESHIRAM"
-              },
-              {
-                "min_level": 35,
-                "max_level": 35,
                 "species": "SPECIES_SPINDA"
               },
               {
@@ -20958,12 +20953,16 @@
                 "min_level": 36,
                 "max_level": 36,
                 "species": "SPECIES_SKARMORY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_SPINDA"
               }
             ],
             "encounter_rates": [
               1,
-              1,
-              20,
+              19,
               20,
               15,
               10,
@@ -20972,7 +20971,8 @@
               5,
               4,
               4,
-              3
+              3,
+              2
             ]
           },
           "honey_mons": {
@@ -21081,14 +21081,14 @@
                 "species": "SPECIES_PHANPY"
               },
               {
-                "min_level": 35,
-                "max_level": 35,
-                "species": "SPECIES_NATU"
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_KORAIDON"
               }
             ],
             "encounter_rates": [
               1,
-              20,
+              21,
               18,
               15,
               10,
@@ -21098,7 +21098,7 @@
               4,
               4,
               3,
-              2
+              1
             ]
           },
           "water_mons": {
@@ -21338,11 +21338,11 @@
               {
                 "min_level": 18,
                 "max_level": 18,
-                "species": "SPECIES_TANGELA"
+                "species": "SPECIES_RESHIRAM"
               }
             ],
             "encounter_rates": [
-              20,
+              21,
               18,
               15,
               10,
@@ -21353,7 +21353,7 @@
               4,
               3,
               2,
-              2
+              1
             ]
           },
           "water_mons": {
@@ -23171,9 +23171,9 @@
                 "species": "SPECIES_LINOONE"
               },
               {
-                "min_level": 49,
-                "max_level": 49,
-                "species": "SPECIES_APPLIN"
+                "min_level": 51,
+                "max_level": 51,
+                "species": "SPECIES_SPIDOPS"
               },
               {
                 "min_level": 49,
@@ -29910,9 +29910,9 @@
                 "species": "SPECIES_HOUNDOOM"
               },
               {
-                "min_level": 45,
-                "max_level": 45,
-                "species": "SPECIES_PINECO"
+                "min_level": 44,
+                "max_level": 44,
+                "species": "SPECIES_HOUNDOOM"
               },
               {
                 "min_level": 46,

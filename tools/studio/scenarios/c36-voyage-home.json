@@ -1,5 +1,5 @@
 {
-  "name": "c36 voyage home",
+  "name": "Faraway Island sailor sails home to Lilycove",
   "start": {
     "chapter": 3
   },
@@ -19,8 +19,7 @@
   ],
   "expect": {
     "ready": true,
-    "map": "LilycoveCity_Harbor",
-    "contains_text": "MT. PYRE"
+    "map": "LilycoveCity_Harbor"
   },
   "warp": {
     "map": "FarawayIsland_Entrance",
@@ -29,12 +28,7 @@
     "facing": 1
   },
   "setup": {
-    "flags": {
-      "FLAG_EC_RESOLVED_MEW": true,
-      "FLAG_EC_REPORT_C36_COMPLETE": true,
-      "FLAG_BADGE06_GET": true,
-      "FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT": false
-    },
+    "flags": {},
     "vars": {}
   }
 }

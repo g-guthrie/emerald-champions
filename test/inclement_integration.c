@@ -78,7 +78,7 @@ TEST("Inclement integration: failed item delivery cannot unlock vendor stock")
     EXPECT(IsEmeraldChampionsBattleItemUnlocked(ITEM_CHOICE_BAND));
 }
 
-TEST("Inclement integration: opening held items retry without duplicate gifts")
+TEST("Inclement integration: opening held items arrive together or not at all, never twice")
 {
     static const enum Item items[] = {ITEM_CHOICE_BAND, ITEM_CHOICE_SPECS,
         ITEM_CHOICE_SCARF, ITEM_FOCUS_SASH, ITEM_EVIOLITE};
@@ -92,8 +92,9 @@ TEST("Inclement integration: opening held items retry without duplicate gifts")
     GiveEmeraldChampionsStarterBattleItems();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
     EXPECT(!FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS));
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHOICE_BAND), 1);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHOICE_SPECS), 1);
+    // All or nothing: a full Bag hands over no part of the kit.
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHOICE_BAND), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHOICE_SPECS), 0);
     for (u32 i = 0; i < 3; i++)
         BagPocket_SetSlotItemIdAndCount(pocket, i, ITEM_NONE, 0);
     GiveEmeraldChampionsStarterBattleItems();

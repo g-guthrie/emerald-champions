@@ -5,6 +5,10 @@ Every OBJ_EVENT_GFX_MEGA_STONE sparkle must sit on a designer-authored pickup ti
 (data/emerald_champions/authored_pickup_tiles.json, snapshotted from Inclement Emerald)
 or on an explicitly approved tile below. Preserve Inclement's authored clusters,
 including the Aqua Hideout decoy puzzle. Exit 1 on invented pickup placement.
+
+Starter-stone sparkles stay where they are for every save; when Norman hands the
+player that stone with the Mega Ring he sets the sparkle's own object flag, so it
+never appears (src/mega_stone_rewards.c, checked by verify_mega_stone_rewards.py).
 """
 import json
 import sys
