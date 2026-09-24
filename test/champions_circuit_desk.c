@@ -33,14 +33,13 @@ TEST("Champions Circuit desk: entry enforces the one/one/one party rule")
     EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_OK);
 
     // One of each restricted class is legal.
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEWTWO, 20, 0, OTID_STRUCT_PLAYER_ID);
-    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_KARTANA, 20, 0, OTID_STRUCT_PLAYER_ID);
-    CreateMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_FLUTTER_MANE, 20, 0, OTID_STRUCT_PLAYER_ID);
-    ChampionsCircuitCanEnter();
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEWTWO, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_KARTANA, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][2], SPECIES_FLUTTER_MANE, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
     EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_OK);
 
     // A second Legendary closes the desk with the party-rule answer.
-    CreateMon(&gParties[B_TRAINER_PLAYER][3], SPECIES_LUGIA, 20, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][3], SPECIES_LUGIA, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
     ChampionsCircuitCanEnter();
     EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_PARTY_RULE);
 
