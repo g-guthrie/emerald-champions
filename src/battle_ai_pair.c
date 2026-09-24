@@ -4727,8 +4727,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (hp[actor] && (choiceStarted & (1u << actor))
          && ((livingSides >> (GetBattlerSide(actor) ^ 1)) & 1u)
          && (!(usedItems & (1u << actor)) || gAiLogicData->abilities[actor] == ABILITY_GORILLA_TACTICS))
+            // Signed before it meets the unsigned survival: a foe's value is
+            // subtracted, and letting the -1 wrap made every board a
+            // Choice-holding foe could reach worth ~42 million, which the
+            // forecast weighting then overflowed below the -10000 vetoes.
             score += (GetBattlerSide(actor) == ev->side ? 1 : -1)
-                * ev->firstChoiceValue[actor][actions[actor].index] * survival[actor] / 100;
+                * (s32)(ev->firstChoiceValue[actor][actions[actor].index] * survival[actor] / 100);
         if (hp[actor] && (newWish & (1u << actor)) && !(newParalysisTargets & (1u << actor)))
         {
             u32 foeSide = GetBattlerSide(actor) ^ 1;
