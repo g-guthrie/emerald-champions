@@ -2119,6 +2119,17 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     case EFFECT_ENCORE:
         if (GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX)
             ADJUST_SCORE(-10);
+        // Native Encore fails on a body that is already encored.
+        else if (gBattleMons[battlerDef].volatiles.encoredMove != MOVE_NONE)
+            ADJUST_SCORE(-10);
+        // Going first, the move to lock is the one already on record. Encore
+        // fails if that move cannot be encored or has no PP left.
+        else if (aiData->lastUsedMove[battlerDef] != MOVE_NONE
+              && AI_IsFaster(battlerAtk, battlerDef, move, predictedMove, CONSIDER_PRIORITY)
+              && (IsMoveEncoreBanned(aiData->lastUsedMove[battlerDef])
+                  || GetMoveIndex(battlerDef, aiData->lastUsedMove[battlerDef]) >= MAX_MON_MOVES
+                  || gBattleMons[battlerDef].pp[GetMoveIndex(battlerDef, aiData->lastUsedMove[battlerDef])] == 0))
+            ADJUST_SCORE(-10);
         else if (gBattleMons[battlerDef].volatiles.encoreTimer == 0
             && (B_MENTAL_HERB < GEN_5 || aiData->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB)
             && !DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
@@ -5030,8 +5041,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         default:
             break;
         }
+        // Encore itself (and the other banned moves) cannot be encored, so
+        // the last move being one of them is no reason to use it.
         if (gBattleMons[battlerDef].volatiles.encoreTimer == 0
          && (B_MENTAL_HERB < GEN_5 || aiData->holdEffects[battlerDef] != HOLD_EFFECT_MENTAL_HERB)
+         && !IsMoveEncoreBanned(aiData->lastUsedMove[battlerDef])
          && (encourage))
             ADJUST_SCORE(BEST_EFFECT);
         break;

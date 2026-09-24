@@ -569,6 +569,12 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
                  && GetMoveEffect(action->executedMove) == EFFECT_NON_VOLATILE_STATUS
                  && gBattleMons[action->target].status1)
                     continue;
+                // Encore fails outright on a body that is already encored.
+                // Two runs spent a Wobbuffet's turn re-encoring the same
+                // locked Sableye and Yveltal.
+                if (GetMoveEffect(action->executedMove) == EFFECT_ENCORE
+                 && gBattleMons[action->target].volatiles.encoredMove != MOVE_NONE)
+                    continue;
             }
             ev->choices[actor][useful++] = *action;
         }
@@ -1399,18 +1405,36 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         // opposing side has actually used belongs to it, this is a guess, not
         // a read.
         u32 categories = GetMoveReflectDamage_DamageCategories(move);
-        bool32 seen = FALSE, matched = FALSE;
+        bool32 seen = FALSE, matched = FALSE, able = FALSE;
         for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         {
+            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+                continue;
+            // The returned hit carries the move's own type: Counter cannot
+            // touch a Ghost and Mirror Coat cannot touch a Dark body, so a
+            // hit from one of those is nothing to reflect.
+            if (gAiLogicData->effectiveness[actor][foe][action->index] == UQ_4_12(0.0))
+                continue;
+            for (u32 slot = 0; slot < MAX_MON_MOVES && !able; slot++)
+            {
+                enum Move known = gBattleMons[foe].moves[slot];
+                if (known != MOVE_NONE && known != MOVE_UNAVAILABLE && !IsBattleMoveStatus(known)
+                 && (categories & (1u << (IsBattleMovePhysical(known) ? DAMAGE_CATEGORY_PHYSICAL : DAMAGE_CATEGORY_SPECIAL)))
+                 && !IsMoveUnusable(slot, known, gAiLogicData->moveLimitations[foe])
+                 && gAiLogicData->simulatedDmg[foe][actor][slot].maximum)
+                    able = TRUE;
+            }
             enum Move last = gAiLogicData->lastUsedMove[foe];
-            if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe)
-             || last == MOVE_NONE || last == MOVE_UNAVAILABLE || IsBattleMoveStatus(last))
+            if (last == MOVE_NONE || last == MOVE_UNAVAILABLE || IsBattleMoveStatus(last))
                 continue;
             seen = TRUE;
             if (categories & (1u << (IsBattleMovePhysical(last) ? DAMAGE_CATEGORY_PHYSICAL : DAMAGE_CATEGORY_SPECIAL)))
                 matched = TRUE;
         }
-        if (seen && !matched)
+        // Nothing the reflection could reach is able to hit this user in the
+        // right category at all, or everything it has seen hit belongs to the
+        // other category: a guess, not a read.
+        if (!able || (seen && !matched))
             return -40;
         // The other half of the same read: a side that has only hit specially
         // is the one board state where Mirror Coat is a read rather than a
@@ -1506,7 +1530,11 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
         bool32 pranksterBlocked = GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7
             && gAiLogicData->abilities[actor] == ABILITY_PRANKSTER
             && IS_BATTLER_OF_TYPE(action->target, TYPE_DARK);
-        if (last != MOVE_NONE && last != MOVE_UNAVAILABLE && !pranksterBlocked
+        // Native Encore fails on a move that cannot be encored or that has
+        // run out of PP, so neither is a lock worth paying for.
+        u32 lastSlot = last != MOVE_NONE && last != MOVE_UNAVAILABLE ? GetMoveIndex(action->target, last) : MAX_MON_MOVES;
+        if (lastSlot < MAX_MON_MOVES && !pranksterBlocked && !IsMoveEncoreBanned(last)
+         && gBattleMons[action->target].pp[lastSlot] != 0
          && !gBattleMons[action->target].volatiles.encoreTimer)
         {
             s32 value = IsBattleMoveStatus(last) ? 35 : 20;
@@ -3309,7 +3337,10 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // The isolated opinion cannot see this trial's recipients or
             // shields. A preceding opposing attack is not enough: it must
             // actually hit this user with the required damage category.
-            if (!retaliation->chance)
+            // Nor is a hit from a body the returned damage cannot affect.
+            if (!retaliation->chance
+             || (retaliation->source < gBattlersCount && hp[retaliation->source]
+                 && gAiLogicData->effectiveness[actor][retaliation->source][action->index] == UQ_4_12(0.0)))
             {
                 score -= sign * 150;
                 continue;

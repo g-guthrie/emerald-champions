@@ -113,6 +113,68 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a fresh foe Choice item does not bring T
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Counter and Mirror Coat are not aimed back at bodies they cannot affect")
+{
+    enum Species attacker;
+    enum Move attack, reflect;
+    // Counter is Fighting, so a Ghost's physical hit cannot be returned.
+    // Mirror Coat is Psychic, so a Dark body's special hit cannot either.
+    // With Safeguard already up and a fresh partner beside it that has not
+    // moved, Encore on the attacker is the working turn.
+    PARAMETRIZE { attacker = SPECIES_SABLEYE; attack = MOVE_SHADOW_CLAW; reflect = MOVE_COUNTER; }
+    PARAMETRIZE { attacker = SPECIES_HOUNDOOM; attack = MOVE_DARK_PULSE; reflect = MOVE_MIRROR_COAT; }
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(attacker) { HP(300); MaxHP(300); Attack(200); SpAttack(200); Speed(100); Moves(attack); }
+        PLAYER(SPECIES_MAGIKARP) { HP(300); MaxHP(300); Speed(90); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_CLEFAIRY) { HP(300); MaxHP(300); Speed(90); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); Speed(50); Moves(MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_ENCORE, MOVE_SAFEGUARD); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(40); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, attack, target: opponentLeft);
+            SWITCH(playerRight, 2);
+            EXPECT_MOVE(opponentLeft, MOVE_SAFEGUARD);
+        }
+        TURN {
+            MOVE(playerLeft, attack, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            NOT_EXPECT_MOVE(opponentLeft, reflect);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Encore is not spent where it must fail")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        // The player's Whimsicott encores its own partner into Calm Mind. The
+        // lock cannot be applied twice, and Whimsicott's own last move is
+        // Encore, which cannot be encored while Wobbuffet moves first. An
+        // attack is the only turn that does anything.
+        PLAYER(SPECIES_CLEFABLE) { Level(30); Speed(45); Moves(MOVE_CALM_MIND, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_SOFT_BOILED); }
+        PLAYER(SPECIES_WHIMSICOTT) { Level(30); Speed(40); Ability(ABILITY_INFILTRATOR); Moves(MOVE_ENCORE, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_GIGA_DRAIN); }
+        OPPONENT(SPECIES_WOBBUFFET) {
+            Level(31); Speed(50); Item(ITEM_SITRUS_BERRY); Ability(ABILITY_SHADOW_TAG);
+            Moves(MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_ENCORE, MOVE_PSYCHIC);
+        }
+        OPPONENT(SPECIES_MUSHARNA) {
+            Level(30); Speed(25); Item(ITEM_LEFTOVERS); Ability(ABILITY_SYNCHRONIZE);
+            Moves(MOVE_PSYCHIC, MOVE_YAWN, MOVE_PROTECT, MOVE_MOONBLAST);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CALM_MIND);
+            MOVE(playerRight, MOVE_ENCORE, target: playerLeft);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_CALM_MIND);
+            MOVE(playerRight, MOVE_PROTECT);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_ENCORE);
+        }
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a guard is not repeated into its own failure beside a fresh foe Choice item")
 {
     u16 item;
@@ -156,5 +218,31 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a guard is not repeated into its own fai
             MOVE(playerRight, MOVE_BRICK_BREAK, target: opponentLeft);
             NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
         }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a body already encored")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_SMEARGLE) { Speed(40); Moves(MOVE_SPLASH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPLASH); }
+        TURN { MOVE(player, MOVE_SPLASH); EXPECT_MOVE(opponent, MOVE_ENCORE); }
+        TURN { MOVE(player, MOVE_SPLASH); SCORE_LT_VAL(opponent, MOVE_ENCORE, AI_SCORE_DEFAULT); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a move that cannot be encored")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        // Wobbuffet moves first, so the move to lock is Encore itself.
+        PLAYER(SPECIES_WHIMSICOTT) { Speed(40); Moves(MOVE_ENCORE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENCORE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); SCORE_LT_VAL(opponent, MOVE_ENCORE, AI_SCORE_DEFAULT); }
     }
 }
