@@ -17,7 +17,7 @@ claim. In particular:
   - Signature owner is the design tier used across this file, not a claim
     about difficulty or story weight:
       elite/leader > gym > admin/boss > rival > ace > brain > regular/casual/grunt
-    Ties break on first-access order: the lower docs/trainer-review-index.json
+    Ties break on first-access order: the lower data/emerald_champions/trainer-review-index.json
     review_index (falling back to encounter number when a trainer id is not
     indexed) wins.
 """
@@ -38,7 +38,7 @@ from verify_trainer_ability_legality import preprocess_species_info
 ROOT = Path(__file__).resolve().parents[1]
 FORM_TABLES = ROOT / "src/data/pokemon/form_change_tables.h"
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
-REVIEW_INDEX = ROOT / "docs/trainer-review-index.json"
+REVIEW_INDEX = ROOT / "data/emerald_champions/trainer-review-index.json"
 WILD = ROOT / "src/data/wild_encounters.json"
 LEGENDARY_SIGNS = ROOT / "src/data/pokemon/legendary_signs.h"
 MAPS_DIR = ROOT / "data/maps"
@@ -472,7 +472,7 @@ def species_legendary_sign_maps() -> dict[str, set[str]]:
 
 
 def review_index_order() -> dict[str, int]:
-    """TRAINER_x -> review_index, from docs/trainer-review-index.json."""
+    """TRAINER_x -> review_index, from data/emerald_champions/trainer-review-index.json."""
     if not REVIEW_INDEX.exists():
         return {}
     data = json.loads(REVIEW_INDEX.read_text())
@@ -585,7 +585,7 @@ def render_lines() -> tuple[list[str], list[dict], list[dict]]:
         "\nMEGA REGISTER",
         f"{len(rows)} item-based Mega Stones. Signature owner = highest design tier "
         "(elite/leader>gym>admin/boss>rival>ace>brain>regular/casual/grunt), ties broken "
-        "by earlier docs/trainer-review-index.json review_index. mega_slots=yes means the "
+        "by earlier data/emerald_champions/trainer-review-index.json review_index. mega_slots=yes means the "
         "holder's authored Mega permission bitmask covers that party position, not that the "
         "AI will trigger it in a given battle. player_family_access is the earliest strict_cap "
         "of any authored trainer encounter located on a map where the base family is available "

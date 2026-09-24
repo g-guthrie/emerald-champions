@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Advance an earned native session or an explicitly separate synthetic scene.
 
-See docs/VERIFICATION.md. Uses immutable per-session ROM/ELF, native buttons,
+Uses immutable per-session ROM/ELF, native buttons,
 read-only telemetry, before-state archives and screenshot/trace evidence.
 """
 from pathlib import Path

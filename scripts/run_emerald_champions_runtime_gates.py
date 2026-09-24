@@ -572,7 +572,7 @@ def main() -> None:
     elapsed = time.monotonic() - started
     print(
         "\nEMERALD CHAMPIONS CURATED RUNTIME GATES: PASS WITH IDENTITY-PINNED DEBT\n"
-        "See docs/VERIFICATION.md; no unlisted runtime regression was accepted.\n"
+        "No unlisted runtime regression was accepted.\n"
         f"build_seconds={build_elapsed:.2f} filter_seconds={test_elapsed:.2f} "
         f"wall_seconds={elapsed:.2f}",
         flush=True,

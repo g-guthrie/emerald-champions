@@ -19,7 +19,7 @@ from rom_artifacts import verify_rom_elf_pair
 
 # Required gates protect current source structure and authored/generated agreement.
 # Historical snapshots, prose, team-strength heuristics and corpus quotas are
-# deliberately outside the release path. See docs/VERIFICATION.md.
+# deliberately outside the release path.
 STATIC_GATES = (
     ("no optional rematches; campaign and League reentry retained", (PYTHON, "scripts/verify_no_optional_rematches.py")),
     ("authored trainer roster and world battle calls", (PYTHON, "scripts/verify_campaign_trainer_roster.py")),

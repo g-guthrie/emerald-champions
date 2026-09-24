@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Maintain the per-encounter acceptance ladder in docs/trainer-review-index.json
+"""Maintain the per-encounter acceptance ladder in data/emerald_champions/trainer-review-index.json
 and render the generated ACCEPTANCE LADDER book section.
 
-This is the official maintainer of docs/trainer-review-index.json's
+This is the official maintainer of data/emerald_champions/trainer-review-index.json's
 source_sha256 and per-encounter "ladder" field: run
     python3 scripts/acceptance_ladder.py --write
 after any change to the battle teams file, test/tests trees, work/ benchmark
@@ -34,9 +34,7 @@ Ladder levels (each is a design-review signal, not a gameplay guarantee):
                       under-match. It does not replay or verify the battle.
   L3 earned_clear  -- the trainer id appears in handoff/checkpoint.json's
                       "cleared_trainers" list (the machine-readable earned-win
-                      record; docs/CONTINUE.md's prose "earned campaign" notes
-                      are not parsed here because no exact machine-readable
-                      count phrase was found there -- see the module report).
+                      record).
 """
 from __future__ import annotations
 
@@ -50,10 +48,9 @@ import emerald_champions_teams as teams
 import export_trainer_catalogue as trainers
 
 ROOT = Path(__file__).resolve().parents[1]
-REVIEW_INDEX = ROOT / "docs/trainer-review-index.json"
+REVIEW_INDEX = ROOT / "data/emerald_champions/trainer-review-index.json"
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 CHECKPOINT = ROOT / "handoff/checkpoint.json"
-CONTINUE = ROOT / "docs/CONTINUE.md"
 WORK_DIR = ROOT / "work"
 TEST_DIRS = (ROOT / "test", ROOT / "tests")
 TEST_SUFFIXES = {".c", ".h", ".py", ".json", ".inc", ".s"}
@@ -110,7 +107,7 @@ def cleared_trainer_names() -> set[str]:
 
 
 def compute_ladder() -> tuple[dict[str, dict[str, bool]], dict]:
-    """Pure recompute: never touches docs/trainer-review-index.json."""
+    """Pure recompute: never touches data/emerald_champions/trainer-review-index.json."""
     branches = teams.read_teams()
     known_trainers = {b.trainer for b in branches}
     class_by_trainer = {b.trainer: b.cls for b in branches}
@@ -214,8 +211,8 @@ def check_index() -> bool:
         if enc.get("ladder") != ladder.get(enc["key"]):
             ok = False
             print(f"FAIL: stale ladder for {enc['key']}")
-    print("PASS: docs/trainer-review-index.json ladder matches a fresh recompute" if ok else
-          "FAIL: docs/trainer-review-index.json ladder is stale")
+    print("PASS: data/emerald_champions/trainer-review-index.json ladder matches a fresh recompute" if ok else
+          "FAIL: data/emerald_champions/trainer-review-index.json ladder is stale")
     return ok
 
 
@@ -227,7 +224,7 @@ def main() -> None:
     args = parser.parse_args()
     if args.write:
         write_index()
-        print("PASS: docs/trainer-review-index.json ladder + source_sha256 refreshed")
+        print("PASS: data/emerald_champions/trainer-review-index.json ladder + source_sha256 refreshed")
     else:
         if not check_index():
             raise SystemExit(1)

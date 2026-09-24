@@ -12,7 +12,6 @@ no screenshots, no story receipts. It never earns campaign progress.
     act     validate and submit this decision point's commands, advance, report
     result  print the final outcome
 
-See docs/VERIFICATION.md, "Headless per-turn battle driver".
 """
 import argparse
 import hashlib

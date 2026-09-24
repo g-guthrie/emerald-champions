@@ -131,7 +131,7 @@ def main():
                         raise ValueError(f'Unknown asset format: {asset["format"]}')
         path.unlink()  # Installed bytes remain; avoid keeping another full archive copy.
         print(f'Installed {asset["name"]}', flush=True)
-    print('Verified handoff assets installed. Read docs/CONTINUE.md before advancing the earned run.')
+    print('Verified handoff assets installed.')
 
 
 if __name__ == '__main__':

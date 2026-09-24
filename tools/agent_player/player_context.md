@@ -20,7 +20,6 @@ just because it is not a battle.
   Groudon and Kyogre Primal Reversion is automatic and species-specific.
 - The current v4 Game Book defines the revised story and required exploration.
   Exploration, NPCs, routes, puzzles, native captures and progression gates matter.
-  See the repository AGENTS.md and docs/CONTINUE.md for current development scope.
 
 ## Preparation resources
 
