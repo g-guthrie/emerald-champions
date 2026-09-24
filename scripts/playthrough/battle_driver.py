@@ -694,7 +694,7 @@ def scenario_index(name):
 
 
 MULTI_RE = re.compile(
-    r'^\s*multi_2_vs_2\s+(TRAINER_\w+)\s*,[^,]+,\s*(TRAINER_\w+)\s*,[^,]+,\s*(PARTNER_\w+)', re.M)
+    r'^\s*multi_2_vs_2\s+(TRAINER_\w+)\s*,[^,]+,\s*(TRAINER_\w+)\s*,[^,]+,\s*(?:PARTNER_)?(\w+)', re.M)
 TWO_RE = re.compile(
     r'^\s*trainerbattle_double_two_trainers\s+(TRAINER_\w+)\s*,[^,]+,\s*(TRAINER_\w+)', re.M)
 
@@ -705,6 +705,7 @@ def script_pairings():
     for path in sorted((ROOT / 'data/maps').glob('*/scripts.inc')):
         text = path.read_text()
         for a, b, partner in MULTI_RE.findall(text):
+            partner = 'PARTNER_' + partner  # maps may use the unprefixed aliases
             for key in (a, b):
                 pairs[key] = {'a': a, 'b': b, 'partner': partner, 'script': str(path)}
         for a, b in TWO_RE.findall(text):
