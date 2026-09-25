@@ -15877,33 +15877,33 @@ Pic: Wally
 Gender: Male
 Music: Male
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
-SPECIES_DELCATTY @ ITEM_SITRUS_BERRY
+SPECIES_LUDICOLO @ ITEM_ASSAULT_VEST
 Level: 86
 Level Offset: 6
-Ability: ABILITY_WONDER_SKIN
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: ABILITY_OWN_TEMPO
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
-Nature: NATURE_CALM
-- MOVE_FAKE_OUT
-- MOVE_HELPING_HAND
-- MOVE_THUNDER_WAVE
-- MOVE_HEAL_BELL
-
-SPECIES_GARDEVOIR @ ITEM_LIFE_ORB
-Level: 87
-Level Offset: 7
-Ability: ABILITY_TRACE
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+EVs: 252 HP / 0 Atk / 0 Def / 252 SpA / 4 SpD / 0 Spe
 Nature: NATURE_MODEST
-- MOVE_PSYCHIC
-- MOVE_MOONBLAST
-- MOVE_MYSTICAL_FIRE
+- MOVE_FAKE_OUT
+- MOVE_MUDDY_WATER
+- MOVE_ICE_BEAM
+- MOVE_GIGA_DRAIN
+
+SPECIES_GALLADE @ ITEM_GALLADITE
+Level: 88
+Level Offset: 8
+Ability: ABILITY_SHARPNESS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_SACRED_SWORD
+- MOVE_PSYCHO_CUT
+- MOVE_KNOCK_OFF
 - MOVE_PROTECT
 
 SPECIES_ALTARIA @ ITEM_LEFTOVERS
@@ -15919,17 +15919,30 @@ Nature: NATURE_CALM
 - MOVE_TAILWIND
 - MOVE_ROOST
 
-SPECIES_MAGNEZONE @ ITEM_WISE_GLASSES
+SPECIES_MAGNEZONE @ ITEM_AIR_BALLOON
 Level: 86
 Level Offset: 6
 Ability: ABILITY_MAGNET_PULL
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
+EVs: 4 HP / 0 Atk / 252 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_BOLD
+- MOVE_THUNDERBOLT
+- MOVE_BODY_PRESS
+- MOVE_ELECTROWEB
+- MOVE_PROTECT
+
+SPECIES_GARDEVOIR @ ITEM_LIFE_ORB
+Level: 87
+Level Offset: 7
+Ability: ABILITY_TRACE
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
 EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 Nature: NATURE_MODEST
-- MOVE_THUNDERBOLT
-- MOVE_FLASH_CANNON
-- MOVE_ELECTROWEB
+- MOVE_MOONBLAST
+- MOVE_MYSTICAL_FIRE
+- MOVE_FOCUS_BLAST
 - MOVE_PROTECT
 
 SPECIES_ROSELIA @ ITEM_EVIOLITE
@@ -15943,19 +15956,6 @@ Nature: NATURE_CALM
 - MOVE_SLEEP_POWDER
 - MOVE_GIGA_DRAIN
 - MOVE_SLUDGE_BOMB
-- MOVE_PROTECT
-
-SPECIES_GALLADE @ ITEM_GALLADITE
-Level: 88
-Level Offset: 8
-Ability: ABILITY_SHARPNESS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_PSYCHO_CUT
-- MOVE_SACRED_SWORD
-- MOVE_NIGHT_SLASH
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_103_MUDKIP ===
