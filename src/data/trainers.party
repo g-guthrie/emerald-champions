@@ -20144,8 +20144,8 @@ Prize Multiplier: 25
 Starting Status: Weather Sun
 
 SPECIES_TORKOAL @ ITEM_HEAT_ROCK
-Level: 71
-Level Offset: 11
+Level: 74
+Level Offset: 14
 Ability: ABILITY_DROUGHT
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20157,8 +20157,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_SPIRITOMB @ ITEM_MENTAL_HERB
-Level: 71
-Level Offset: 11
+Level: 75
+Level Offset: 15
 Ability: ABILITY_PRESSURE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20170,8 +20170,8 @@ Nature: NATURE_SASSY
 - MOVE_PROTECT
 
 SPECIES_CAMERUPT @ ITEM_CAMERUPTITE
-Level: 70
-Level Offset: 10
+Level: 73
+Level Offset: 13
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20183,8 +20183,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_KORAIDON @ ITEM_HEAT_ROCK
-Level: 71
-Level Offset: 11
+Level: 74
+Level Offset: 14
 Ability: ABILITY_ORICHALCUM_PULSE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20196,8 +20196,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_RUNERIGUS @ ITEM_MENTAL_HERB
-Level: 72
-Level Offset: 12
+Level: 75
+Level Offset: 15
 Ability: ABILITY_WANDERING_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20209,8 +20209,8 @@ Nature: NATURE_RELAXED
 - MOVE_PROTECT
 
 SPECIES_TORTERRA @ ITEM_LEFTOVERS
-Level: 71
-Level Offset: 11
+Level: 74
+Level Offset: 14
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
