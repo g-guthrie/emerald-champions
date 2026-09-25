@@ -537,3 +537,50 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: a drop is not judged useless on a movese
         TURN { MOVE(player, MOVE_BODY_SLAM); SCORE_GT_VAL(opponent, MOVE_EERIE_IMPULSE, 0); }
     }
 }
+
+// vj-a/win-1 turn 4: Winona's Altaria Hazed a field whose only stage change
+// was its own Intimidated Attack, on a body with no attack to spend it on.
+AI_SINGLE_BATTLE_TEST("EC failed moves: Haze scores as a failure on a field with nothing to reset")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_INCINEROAR) { Ability(ABILITY_INTIMIDATE); Speed(40); Moves(MOVE_KNOCK_OFF, MOVE_SWORDS_DANCE); }
+        OPPONENT(SPECIES_ALTARIA) { Ability(ABILITY_NATURAL_CURE); Speed(50); Moves(MOVE_HAZE, MOVE_ROOST, MOVE_TAILWIND); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_KNOCK_OFF); SCORE_EQ_VAL(opponent, MOVE_HAZE, 0); }
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("EC failed moves: Haze keeps its value against a foe's boost")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_INCINEROAR) { Ability(ABILITY_INTIMIDATE); Speed(40); Moves(MOVE_KNOCK_OFF, MOVE_SWORDS_DANCE); }
+        OPPONENT(SPECIES_ALTARIA) { Ability(ABILITY_NATURAL_CURE); Speed(50); Moves(MOVE_HAZE, MOVE_ROOST, MOVE_TAILWIND); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SWORDS_DANCE); }
+        TURN { MOVE(player, MOVE_KNOCK_OFF); SCORE_GT_VAL(opponent, MOVE_HAZE, 0); }
+    }
+}
+
+// vj-b/wdl-2 turn 9: Wallace's Zamazenta at 3 HP and burned raised Defense,
+// and the burn finished it at the end of the same turn. A boost its user
+// will not live to spend is certain to buy nothing.
+AI_SINGLE_BATTLE_TEST("EC failed moves: a self-boost scores as a failure on a body its burn finishes this turn")
+{
+    u32 hp;
+    PARAMETRIZE { hp = 3; }
+    PARAMETRIZE { hp = 300; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_AMOONGUSS) { Speed(30); Moves(MOVE_POLLEN_PUFF, MOVE_PROTECT); }
+        OPPONENT(SPECIES_ZAMAZENTA_CROWNED) { Speed(50); HP(hp); Status1(STATUS1_BURN); Moves(MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_HEAVY_SLAM, MOVE_PROTECT); }
+    } WHEN {
+        if (hp == 3)
+            TURN { MOVE(player, MOVE_PROTECT); SCORE_EQ_VAL(opponent, MOVE_IRON_DEFENSE, 0); }
+        else
+            TURN { MOVE(player, MOVE_PROTECT); SCORE_GT_VAL(opponent, MOVE_IRON_DEFENSE, 0); }
+    }
+}

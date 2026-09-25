@@ -7126,6 +7126,11 @@ static u32 AI_OffenseStatsOfMove(enum Move move)
 #define AI_BOOST_SPDEF  (1u << 4)
 static bool32 AI_IsSelfBoostWithoutPayoff(enum BattlerId battlerAtk, enum Move move)
 {
+    // A user the end of this turn is certain to finish never lives to spend
+    // any boost, Baton Pass included: Wallace's Zamazenta raised Defense at 3
+    // HP while burned and fainted to the burn the same turn.
+    if (AI_WillFaintFromResidual(battlerAtk))
+        return TRUE;
     if (gAiLogicData->abilities[battlerAtk] == ABILITY_CONTRARY)
         return FALSE;
     u32 raised = 0;
@@ -7248,6 +7253,33 @@ bool32 AI_WillFaintFromResidual(enum BattlerId battler)
     return TRUE;
 }
 
+// Haze resets every stat stage on the field, which buys something only when a
+// foe holds a raised stage or one of ours holds a lowered stage it has a use
+// for. Otherwise the turn resets nothing that matters: Winona's Altaria Hazed a
+// field whose only change was its own Intimidated Attack, on a body with no
+// physical move to spend it on.
+static bool32 AI_HazeResetsNothing(enum BattlerId battlerAtk)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (!IsBattlerAlive(battler))
+            continue;
+        bool32 ally = IsBattlerAlly(battlerAtk, battler);
+        u32 used = ally ? AI_AttackingStatsUsed(battler) : 0;
+        for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+        {
+            s32 stage = gBattleMons[battler].statStages[stat];
+            if (!ally && stage > DEFAULT_STAT_STAGE)
+                return FALSE;
+            if (ally && stage < DEFAULT_STAT_STAGE
+             && !(stat == STAT_ATK && !(used & AI_USES_ATTACK))
+             && !(stat == STAT_SPATK && !(used & AI_USES_SPATK)))
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+
 // A status move the engine is certain to refuse on the board the AI can see:
 // the effect it sets is already in place, or the target is immune to it by
 // type, ability, item, Substitute or field. These mirror the engine's own fail
@@ -7306,6 +7338,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
             || gBattleMons[battlerAtk].hp <= max(1, GetNonDynamaxMaxHP(battlerAtk) / 4);
     case EFFECT_FOCUS_ENERGY:
         return gBattleMons[battlerAtk].volatiles.focusEnergy || gBattleMons[battlerAtk].volatiles.dragonCheer;
+    case EFFECT_HAZE:
+        return AI_HazeResetsNothing(battlerAtk);
     case EFFECT_FAIRY_LOCK:
         return (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK) != 0;
     case EFFECT_PERISH_SONG:

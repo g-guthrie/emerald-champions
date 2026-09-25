@@ -203,12 +203,20 @@ static u32 PairDecisionBudgetShare(void)
 // a shared multi clock can leave it. Consumed by that one decision.
 EWRAM_DATA bool8 gTestPairBudgetSpent = FALSE;
 static EWRAM_DATA bool8 sTestPairBudgetSpentNow = FALSE;
+// Test hook: the next opposing joint decision's clock runs out once it has
+// scored this many pairs, as the shared multi clock did after seven of the
+// Mossdeep board's forty-nine. Consumed by that one decision.
+EWRAM_DATA u8 gTestPairBudgetPairs = 0;
+static EWRAM_DATA u8 sTestPairBudgetPairsNow = 0;
+static EWRAM_DATA u16 sTestPairsScored = 0;
 #endif
 
 static bool32 PairDecisionBudgetExpired(void)
 {
 #if TESTING
     if (sTestPairBudgetSpentNow)
+        return TRUE;
+    if (sTestPairBudgetPairsNow && sTestPairsScored >= sTestPairBudgetPairsNow)
         return TRUE;
 #endif
     return (u32)(gMain.vblankCounter1 - gAiLogicData->decisionStartFrame) >= PairDecisionBudgetShare();
@@ -357,6 +365,9 @@ struct PairEvaluation
     u8 encoreGuardIndex[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // Move slot + 1; zero is ineligible.
     s8 encoreGuardPriority[MAX_BATTLERS_COUNT];
     bool8 sleepClause;
+    // What a held healing Berry will restore when it is eaten, this turn or a
+    // later one. See the board value in ScoreFastPair.
+    u16 berryHeal[MAX_BATTLERS_COUNT];
 };
 
 static u32 PairCopiedDance(enum Move move)
@@ -848,6 +859,30 @@ static void PairApplyDamageWhenActing(u32 *hp, u32 *survival, u32 minimum, u32 m
     aliveMass += 10000 - actionChance;
     *hp = aliveMass ? DIV_ROUND_UP(hpMass, aliveMass) : 0;
     *survival = aliveMass ? max(1, *survival * aliveMass / 10000) : 0;
+}
+
+// The HP a held healing Berry restores whenever it is eaten, whatever the
+// holder's HP now. Zero for anything else, a disliked flavor or Heal Block.
+static u32 PairHeldBerryHeal(const struct PairEvaluation *ev, enum BattlerId battler)
+{
+    enum Item item = gBattleMons[battler].item;
+    enum HoldEffect effect = gAiLogicData->holdEffects[battler];
+    u32 amount;
+    if (!IsBattlerAlive(battler)
+     || (B_HEAL_BLOCKING >= GEN_5 && gBattleMons[battler].volatiles.healBlockTimer))
+        return 0;
+    if (effect == HOLD_EFFECT_RESTORE_PCT_HP)
+        amount = PairNonDynamaxHP(ev, battler, gBattleMons[battler].maxHP) * GetItemHoldEffectParam(item) / 100;
+    else if (effect == HOLD_EFFECT_RESTORE_HP)
+        amount = GetItemHoldEffectParam(item);
+    else if (effect == HOLD_EFFECT_CONFUSE_FLAVOR
+          && GetFlavorRelationByPersonality(gBattleMons[battler].personality, GetItemSecondaryId(item)) >= 0)
+        amount = PairNonDynamaxHP(ev, battler, gBattleMons[battler].maxHP) / max(1, GetItemHoldEffectParam(item));
+    else
+        return 0;
+    if (gAiLogicData->abilities[battler] == ABILITY_RIPEN && GetItemPocket(item) == POCKET_BERRIES)
+        amount *= 2;
+    return max(1, amount);
 }
 
 static void PairTryHealingBerry(const struct PairEvaluation *ev, enum BattlerId target,
@@ -4045,6 +4080,21 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             && !IsBattlerAlly(actor, selectedTarget)
             && GetMoveTarget(move) != TARGET_OPPONENTS_FIELD
             ? (hp[selectedTarget] ? 100 - survival[selectedTarget] : 100) : 0;
+        // The positive opinion was formed against the selected target. The
+        // share of this hit that falls to its partner - because the selected
+        // target is already gone - earns the partner's opinion of the same
+        // move, not a knockout bonus on a body that was never there to hit:
+        // Heatran's Magma Storm kept the 1 HP Metagross's knockout credit
+        // while the hit landed, resisted, on Mega Tyranitar.
+        s32 fallbackOpinion = 0;
+        if (damageOpinion && fallbackChance && fallback < gBattlersCount)
+            for (u32 choice = 0; choice < ev->count[actor]; choice++)
+                if (ev->choices[actor][choice].index == action->index
+                 && ev->choices[actor][choice].target == fallback)
+                {
+                    fallbackOpinion = max(0, (ev->choices[actor][choice].score - AI_SCORE_DEFAULT) * 4);
+                    break;
+                }
         for (enum BattlerId original = 0; original < gBattlersCount; original++)
         {
             if (original == actor || !hp[original]
@@ -4298,8 +4348,15 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // targeting and guard checks; spread moves may still hit a partner.
             if (damage.affectsTarget && damageOpinion)
             {
-                score += damageOpinion * guardHitChance / 100;
-                damageOpinion = 0;
+                if (!fallbackChance)
+                {
+                    score += damageOpinion * guardHitChance / 100;
+                    damageOpinion = 0;
+                }
+                else if (target == selectedTarget)
+                    score += damageOpinion * guardHitChance / 100 * (100 - fallbackChance) / 100;
+                else
+                    score += fallbackOpinion * guardHitChance / 100;
             }
             bool32 hpPowerAdjusted = !copy && actionHp != gBattleMons[actor].hp
                 && (ev->hpPowerTargets[actor][action->index] & (1u << target));
@@ -5045,7 +5102,16 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (hasFoe)
                 hp[actor] = 0;
         }
-        s32 value = PairMonValue(&ev->board, ev->board.owner[actor], hp[actor], gBattleMons[actor].maxHP)
+        // A healing Berry still in hand is HP its holder has yet to use. The
+        // one-turn board saw only the heal of the hit that triggered it, so a
+        // hit pushing a Sitrus holder under half looked a quarter smaller
+        // than the same hit on anything else: Winona's Zapdos answered a
+        // Sitrus Incineroar with a non-STAB Heat Wave, and Sidney's
+        // Incineroar kept its Flare Blitz off a fresh Sitrus Buzzwole.
+        u32 standingHp = hp[actor];
+        if (standingHp && ev->berryHeal[actor] && !(usedItems & (1u << actor)))
+            standingHp += ev->berryHeal[actor];
+        s32 value = PairMonValue(&ev->board, ev->board.owner[actor], standingHp, gBattleMons[actor].maxHP)
             * survival[actor] / 100;
         if (hp[actor])
             score += coachingValue[actor] * survival[actor] / 100;
@@ -5408,6 +5474,8 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     enum BattlerId partner = GetPartnerBattler(actor);
     ev->weather = AI_GetWeather();
     ev->sleepClause = IsSleepClauseEnabled();
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        ev->berryHeal[battler] = PairHeldBerryHeal(ev, battler);
     ev->paralysisActionChance = GetConfig(B_PARALYSIS_CHANCE) >= GEN_CHAMPIONS ? 8750 : 7500;
     // The only newly forecast item loss is Knock Off. Avoid native anchor
     // calculations when no other living actor can use it. Do not filter by
@@ -5588,9 +5656,85 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                 scoredAttack[side] = FALSE;
         }
     bool32 mixed = FALSE;
-    for (u32 left = 0; left < ev->count[actor]; left++)
+    // The order the pairs are visited in decides what a search cut short by
+    // its allowance or the clock has seen. Row by row, a stop saw the actor's
+    // first-ranked action beside every partner action and nothing else: the
+    // crowded Mossdeep multi scored seven of forty-nine pairs, all of them
+    // Heatran's Magma Storm into a 1 HP Metagross that Raging Bolt's
+    // Thunderclap was already removing, and Earth Power into the Mega
+    // Tyranitar it hits super effectively was never looked at. Visit best
+    // responses first instead: every actor action beside the partner's
+    // strongest one, then every partner action beside the actor's best reply,
+    // then every actor action beside that, and only then the rest by rank.
+    // A complete search scores the same pairs in any order.
+    u32 countLeft = ev->count[actor], countRight = ev->count[partner];
+    u32 totalPairs = countLeft * countRight;
+    bool8 visited[PAIR_ACTIONS][PAIR_ACTIONS];
+    memset(visited, 0, sizeof(visited));
+    u32 phase = 0, cursor = 0, diagonal = 0, visits = 0;
+    u32 sweepLeft = 0, sweepRight = 0, bestLeft = 0, bestRight = 0;
+    s32 sweepBest = INT_MIN;
+    while (visits < totalPairs)
     {
-        for (u32 right = 0; right < ev->count[partner]; right++)
+        u32 left = 0, right = 0;
+        {
+            bool32 found = FALSE;
+            while (!found)
+            {
+                if (phase == 0 || phase == 2)
+                {
+                    if (cursor < countLeft)
+                    {
+                        left = cursor++;
+                        right = phase == 0 ? 0 : sweepRight;
+                        found = !visited[left][right];
+                        continue;
+                    }
+                }
+                else if (phase == 1)
+                {
+                    if (cursor < countRight)
+                    {
+                        left = sweepLeft;
+                        right = cursor++;
+                        found = !visited[left][right];
+                        continue;
+                    }
+                }
+                else
+                {
+                    // Remaining pairs by combined rank, strongest first.
+                    while (diagonal <= countLeft + countRight - 2 && !found)
+                    {
+                        if (cursor > diagonal || cursor >= countLeft)
+                        {
+                            diagonal++;
+                            cursor = 0;
+                            continue;
+                        }
+                        left = cursor++;
+                        if (diagonal - left < countRight)
+                        {
+                            right = diagonal - left;
+                            found = !visited[left][right];
+                        }
+                    }
+                    break;
+                }
+                // The phase is exhausted: the next sweep starts from the best
+                // pair found so far.
+                if (phase == 0)
+                    sweepLeft = bestLeft;
+                else if (phase == 1)
+                    sweepRight = bestRight;
+                phase++;
+                cursor = 0;
+            }
+            if (!found)
+                break;
+        }
+        visited[left][right] = TRUE;
+        visits++;
         {
             // Deterministic first: every arm of one decision searches the same
             // number of pairs, so a candidate board and the stay board are
@@ -5618,6 +5762,9 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                     goto settle;
             }
             examined++;
+#if TESTING
+            sTestPairsScored++;
+#endif
             ev->action[actor] = ev->choices[actor][left];
             ev->action[partner] = ev->choices[partner][right];
             if (ev->action[actor].index != PAIR_IDLE
@@ -5672,6 +5819,12 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                 shortlist[slot] = (struct PairShortlistEntry){primary, standalone, left, right};
                 if (shortCount < shortLimit)
                     shortCount++;
+            }
+            if (phase < 3 && primary > sweepBest)
+            {
+                sweepBest = primary;
+                bestLeft = left;
+                bestRight = right;
             }
         }
     }
@@ -6411,8 +6564,11 @@ static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
 // Only a healthy holder defers - one likely to fall this turn evolves now.
 static bool32 PairMegaForfeitsSpeedBoost(enum BattlerId battler)
 {
+    // One banked boost is the plan; a second base-form turn only postpones
+    // the Mega. Thomas's Scolipede waited two turns, guarding the second, and
+    // evolved on the third with the Mega's turns spent in base form.
     if (!IsBattlerAlive(battler) || gAiLogicData->abilities[battler] != ABILITY_SPEED_BOOST
-     || gBattleMons[battler].statStages[STAT_SPEED] >= MAX_STAT_STAGE
+     || gBattleMons[battler].statStages[STAT_SPEED] > DEFAULT_STAT_STAGE
      || gBattleMons[battler].hp * 2 <= gBattleMons[battler].maxHP)
         return FALSE;
     enum Species mega = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ABILITY_SPEED_BOOST);
@@ -6489,6 +6645,13 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 #if TESTING
     sTestPairBudgetSpentNow = gTestPairBudgetSpent;
     gTestPairBudgetSpent = FALSE;
+    sTestPairBudgetPairsNow = 0;
+    if (gTestPairBudgetPairs && GetBattlerSide(actor) == B_SIDE_OPPONENT)
+    {
+        sTestPairBudgetPairsNow = gTestPairBudgetPairs;
+        gTestPairBudgetPairs = 0;
+        sTestPairsScored = 0;
+    }
 #endif
     struct SwitchCandidateSnapshot *state = AI_SaveCandidateState();
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
@@ -6810,6 +6973,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 decisionReady:
 #if TESTING
     sTestPairBudgetSpentNow = FALSE;
+    sTestPairBudgetPairsNow = 0;
 #endif
     sPairVisibleForecast.mode = PAIR_VISIBLE_FORECAST_NONE;
     AI_RestoreCandidateState(state);
