@@ -12,13 +12,14 @@ SOURCE = ROOT / "src" / "data" / "pokemon" / "form_change_tables.h"
 OUTPUT = ROOT / "src" / "data" / "emerald_champions_mega_stones.h"
 EVOLUTION_OUTPUT = ROOT / "src" / "data" / "emerald_champions_evolution_items.h"
 
+# The DNA Splicers, Reins of Unity, N-Solarizer, N-Lunarizer, Prison Bottle and
+# Zygarde Cube are not stock: they open trump forms, so they are relics earned
+# with their legend and handed over after the Hall of Fame (legendary_signs.c).
 FORM_ACCESS_ITEMS = {
-    "ITEM_ROTOM_CATALOG", "ITEM_GRACIDEA", "ITEM_PRISON_BOTTLE",
+    "ITEM_ROTOM_CATALOG", "ITEM_GRACIDEA",
     "ITEM_RED_NECTAR", "ITEM_YELLOW_NECTAR", "ITEM_PINK_NECTAR", "ITEM_PURPLE_NECTAR",
     "ITEM_ADAMANT_CRYSTAL", "ITEM_LUSTROUS_GLOBE", "ITEM_GRISEOUS_CORE",
     "ITEM_DOUSE_DRIVE", "ITEM_SHOCK_DRIVE", "ITEM_BURN_DRIVE", "ITEM_CHILL_DRIVE",
-    "ITEM_DNA_SPLICERS", "ITEM_ZYGARDE_CUBE", "ITEM_N_SOLARIZER", "ITEM_N_LUNARIZER",
-    "ITEM_REINS_OF_UNITY",
 }
 
 

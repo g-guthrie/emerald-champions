@@ -156,6 +156,17 @@ void EmeraldChampionsAgentPrepPoll(void)
             Fail(EC_AGENT_PREP_BAD_SPECIES, slot);
             return;
         }
+        // The party rule the PC, gifts and the League door all enforce: one
+        // Legendary/Mythical, one Ultra Beast and one Paradox per party.
+        enum RestrictedPartyClass kind = GetRestrictedPartyClass(species);
+        for (u32 earlier = 0; kind != RESTRICTED_PARTY_NONE && earlier < slot; earlier++)
+        {
+            if (GetRestrictedPartyClass(gEcAgentPrepSpecies[earlier]) == kind)
+            {
+                Fail(EC_AGENT_PREP_RESTRICTED_PARTY, slot);
+                return;
+            }
+        }
         if (level == EC_AGENT_PREP_KEEP)
             level = GetPlayerLevelCapForSpecies(species);
         if (level != GetPlayerLevelCapForSpecies(species) || level > MAX_LEVEL)

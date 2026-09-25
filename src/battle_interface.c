@@ -30,6 +30,7 @@
 #include "item_icon.h"
 #include "item_use.h"
 #include "test_runner.h"
+#include "emerald_champions_agent_battle.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -2588,6 +2589,7 @@ void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isD
 {
     if (gBattleScripting.abilityPopupOverwrite)
         ability = gBattleScripting.abilityPopupOverwrite;
+    EmeraldChampionsAgentBattlePopUp(battler, FALSE, ability);
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordAbilityPopUp(battler, ability);
@@ -2699,6 +2701,7 @@ static void Task_FreeAbilityPopUpGfx(u8 taskId)
 
 void CreateItemPopUp(enum BattlerId battler)
 {
+    EmeraldChampionsAgentBattlePopUp(battler, TRUE, gLastUsedItem);
     if (gTestRunnerEnabled)
     {
         TestRunner_Battle_RecordItemPopUp(battler, gLastUsedItem);

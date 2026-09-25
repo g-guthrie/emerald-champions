@@ -43,7 +43,8 @@ MarineCave_End_EventScript_Kyogre:: @ 823B01B
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
-	@ A capture resolves it (its Orb comes with the capture). A knockout
+	@ A capture resolves it; its Orb is earned with it but waits for the
+	@ Hall of Fame, then the next Pokémon Center heal. A knockout
 	@ loses it for good and ends the weather, like the original game; an
 	@ escape or any other ending retreats until the player comes back.
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MarineCave_End_EventScript_DefeatedKyogre

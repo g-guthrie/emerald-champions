@@ -1740,6 +1740,36 @@ static bool32 PairHitsOnlyAfterLastAction(enum BattlerId actor, const struct Pai
     return FALSE;
 }
 
+// A charge move that has to spend this turn charging - Solar Beam outside the
+// sun, a Sky Attack without a Power Herb - does nothing on the board this
+// turn, and the trial rightly gives it no damage. It is still not a free
+// option: it holds the user to a hit the foes watch coming, a Solar Beam
+// fired from rain lands at half power, and the user can be removed before it
+// fires. Beside a usable attack that hits now it was winning ties by noise:
+// Maxie's Torkoal charged Solar Beam into Pelipper's rain with Heat Wave and
+// Earth Power in hand. A charge turn that does something itself (Meteor Beam's
+// boost) keeps its value.
+static bool32 PairChargeTurnWasted(enum BattlerId actor, const struct PairAction *action)
+{
+    enum Move move = action->executedMove;
+    if (action->index == PAIR_IDLE || gBattleMons[actor].volatiles.multipleTurns
+     || !IsTwoTurnNotSemiInvulnerableMove(actor, move))
+        return FALSE;
+    for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
+        if (GetMoveAdditionalEffectById(move, effectIndex)->onChargeTurnOnly)
+            return FALSE;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move other = gBattleMons[actor].moves[slot];
+        if (other != MOVE_NONE && other != move && !IsBattleMoveStatus(other)
+         && !IsMoveUnusable(slot, other, gAiLogicData->moveLimitations[actor])
+         && !IsTwoTurnNotSemiInvulnerableMove(actor, other)
+         && gBattleMoveEffects[GetMoveEffect(other)].twoTurnEffect == FALSE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
 {
     s32 score = PairPlanScoreInner(actor, action);
@@ -1779,6 +1809,8 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     // Sludge Bombed a 10 HP poisoned Blaziken that had already moved.
     if (PairHitsOnlyAfterLastAction(actor, action))
         return -PAIR_DOOMED_TARGET_COST;
+    if (PairChargeTurnWasted(actor, action))
+        return -PAIR_SUPPORT_WASTED_COST;
     // A last-turn "refresh" costs both actions and can cancel itself when one
     // setter is interrupted. Let the room expire and establish it next turn.
     if (effect == EFFECT_TRICK_ROOM)
@@ -3733,6 +3765,36 @@ static u32 PairDefenseBoostShare(enum BattlerId actor, enum Move move, const u32
         if (GetMoveEffect(gBattleMons[actor].moves[slot]) == EFFECT_BODY_PRESS
          && !IsMoveUnusable(slot, gBattleMons[actor].moves[slot], gAiLogicData->moveLimitations[actor]))
             bodyPress = TRUE;
+    // Through Body Press a Defense boost is offense, and offense bought with
+    // this turn's Press only breaks even on the next one: +2 then a doubled
+    // Press is two Presses. It gains from the second boosted Press, so the
+    // user has to outlast two more rounds of the hits the boost does not
+    // blunt. Winona's Mega Skarmory raised Defense in front of a lone Lanturn
+    // whose special Thunderbolt took five sixths of it.
+    if (bodyPress && (raised & (1u << 1)))
+    {
+        u32 incoming = 0;
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            if (!hp[foe] || !IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+                continue;
+            u32 best = 0;
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            {
+                enum Move known = gBattleMons[foe].moves[slot];
+                if (known == MOVE_NONE || known == MOVE_UNAVAILABLE || IsBattleMoveStatus(known)
+                 || IsMoveUnusable(slot, known, gAiLogicData->moveLimitations[foe]))
+                    continue;
+                bool32 physical = IsBattleMovePhysical(known) || GetMoveEffect(known) == EFFECT_PSYSHOCK;
+                if (raised & (physical ? (1u << 1) : (1u << 2)))
+                    continue;
+                best = max(best, gAiLogicData->simulatedDmg[foe][actor][slot].median);
+            }
+            incoming += best;
+        }
+        if (incoming * 2 >= hp[actor])
+            bodyPress = FALSE;
+    }
     u32 threshold = max(1, gBattleMons[actor].maxHP / 8), share = 0;
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
     {
@@ -6672,11 +6734,30 @@ static bool32 PairLegalReserve(enum BattlerId actor, u32 slot)
         && !IsPartyMonPlannedToBeSwitchedInByPartner(slot, actor);
 }
 
+// The share of its power a held attack still carries at the stage its user
+// fires it from, against this foe: the stat that powers it (Defense for Body
+// Press; Foul Play borrows the target's), and nothing for a foe whose Unaware
+// ignores the stage.
+static u32 PairLockStageShare(enum BattlerId actor, enum BattlerId foe, enum Move move)
+{
+    enum BattleMoveEffects effect = GetMoveEffect(move);
+    if (effect == EFFECT_FOUL_PLAY || gAiLogicData->abilities[foe] == ABILITY_UNAWARE)
+        return 100;
+    enum Stat stat = effect == EFFECT_BODY_PRESS ? STAT_DEF
+        : IsBattleMovePhysical(move) ? STAT_ATK : STAT_SPATK;
+    u32 stage = gBattleMons[actor].statStages[stat];
+    return gStatStageRatios[stage][0] * 100 / gStatStageRatios[stage][1];
+}
+
 // Whether a move the battler is held to buys nothing: a status move, a move it
 // cannot select at all (so the turn is a Struggle), or an attack that no living
 // foe takes more than half damage from. The pressure search below only asks
 // whether anything connects, so a quarter-damage Psychic into Metagross beside
-// an immune Incineroar kept the lock "productive" for seven turns.
+// an immune Incineroar kept the lock "productive" for seven turns. The move is
+// judged at the power it has now, not at a fresh stage: Glacia's
+// Specs Kyurem fired Draco Meteor at -2, -4 and -6, and Juan's Specs Kingdra
+// at -4 and -6 beside a full Mega Gyarados. A -2 Draco Meteor into a neutral
+// foe is the resisted hit this already calls useless.
 static bool32 PairLockedMoveUseless(enum BattlerId actor, enum Move locked)
 {
     u32 index = GetMoveIndex(actor, locked);
@@ -6686,7 +6767,7 @@ static bool32 PairLockedMoveUseless(enum BattlerId actor, enum Move locked)
         return TRUE;
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         if (IsBattlerAlive(foe) && !IsBattlerAlly(actor, foe)
-         && gAiLogicData->effectiveness[actor][foe][index] > UQ_4_12(0.5))
+         && gAiLogicData->effectiveness[actor][foe][index] * PairLockStageShare(actor, foe, locked) / 100 > UQ_4_12(0.5))
             return FALSE;
     return TRUE;
 }

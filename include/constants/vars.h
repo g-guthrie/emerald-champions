@@ -252,13 +252,14 @@
 #define VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS                 0x40DC
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
 #define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic delivery bits 0-15.
-#define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned species bits 24-29.
+#define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned grant bits 0-5.
 #define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE                 0x40E0  // Restored from Inclement Emerald. Reclaimed the
         // id of VAR_STEVEN_STARTER_STONE_DELIVERY, which had zero references in data/, src/ or include/.
 #define VAR_EC_SECOND_STARTER                         0x40E1 // 0 unset; second regional starter index + 1.
 #define VAR_EC_OPENING_STATE                         0x40E2 // EC_OPENING_* transaction state.
 #define VAR_EC_CIRCUIT_BEST_WINS                         0x40E3 // Best observed Circuit streak; 0 means no record yet.
-#define VAR_GIFT_UNUSED_7                                0x40E4 // var is written to, but never read
+#define VAR_LEGENDARY_RELIC_DELIVERY_2                    0x40E4 // Pending bits 24-31 and earned grant bits 6-13. Reclaimed
+        // VAR_GIFT_UNUSED_7, which was only ever cleared to 0 and never read.
 #define VAR_CHAMPIONS_CIRCUIT_ACTIVE                     0x40E5
 #define VAR_DAILY_SLOTS                                  0x40E6
 #define VAR_DAILY_WILDS                                  0x40E7

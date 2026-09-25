@@ -7,7 +7,8 @@ user-authorized stage-legal party through the existing native preparation API,
 and then answers every player decision point from a memory mailbox. No buttons,
 no screenshots, no story receipts. It never earns campaign progress.
 
-    start   boot, prepare the party, begin the battle, stop at the first decision
+    start   boot, prepare the party, begin the battle under the trainer's map weather,
+            stop at the first decision
     state   print the current semantic state (read-only; never advances)
     act     validate and submit this decision point's commands, advance, report
     result  print the final outcome
@@ -29,7 +30,7 @@ sys.path.insert(0, str(ROOT / 'scripts' / 'playthrough'))
 import native_tools
 import render_emerald_champions_ui as ui
 from rom_artifacts import verify_rom_elf_pair
-from prepare_party import protocol as prepare_protocol
+from prepare_party import PREP_RESULTS, protocol as prepare_protocol
 
 RTC_EPOCH = '946684800'
 BOOT_FRAMES = 2400
@@ -46,11 +47,16 @@ BATTLER_BASE, BATTLER_SIZE = 32, 28
 PARTY_BASE, PARTY_SIZE_W = 144, 12
 FOE_BASE, FOE_SIZE = 216, 3
 LEGAL_BASE, LEGAL_SIZE = 252, 6
-CONSTANTS_SCHEMA = 2  # bump whenever build_constants() gains or renames a table
+CONSTANTS_SCHEMA = 3  # bump whenever build_constants() gains or renames a table
+# The legacy 14-message ring; the complete event log (LOG_*) supersedes it.
 MSG_BASE, MSG_SIZE, MSG_COUNT = 276, 14, 14
 PREV_BASE, PREV_SIZE = 472, 4
 FIELD_BASE = 488
 MSG_CHARS = (MSG_SIZE - 1) * 4
+# Mirrors EC_AGENT_BATTLE_LOG_* in include/emerald_champions_agent_battle.h.
+LOG_HEAD_WORD, LOG_SIZE_WORD, MAP_FIELD_WORD = 492, 493, 494
+LOG_TEXT, LOG_MOVE, LOG_HP, LOG_POPUP = 1, 2, 3, 4
+READS_PER_CALL = 500  # the runner accepts 512 --read requests
 
 PHASES = ['idle', 'starting', 'running', 'await_action', 'await_switch', 'ended']
 ACTIONS = {0: 'use_move', 1: 'use_item', 2: 'switch', 3: 'run', 10: 'exec_script',
@@ -58,6 +64,9 @@ ACTIONS = {0: 'use_move', 1: 'use_item', 2: 'switch', 3: 'run', 10: 'exec_script
 GIMMICKS = ['none', 'mega', 'ultra_burst', 'z_move', 'dynamax', 'tera']
 OUTCOMES = {0: 'ongoing', 1: 'won', 2: 'lost', 3: 'drew', 4: 'ran', 5: 'player_teleported',
             6: 'mon_fled', 7: 'caught', 8: 'no_safari_balls', 9: 'forfeited', 10: 'mon_teleported'}
+# IsPlayerDefeated (src/battle_setup.c) whites the player out for these, so a
+# double KO that empties both sides at once is a loss, exactly as in play.
+PLAYER_DEFEATED = {'lost', 'drew', 'forfeited'}
 TERRAINS = ['none', 'grassy', 'misty', 'electric', 'psychic']
 # Bit order of AuthoredFieldMask in src/emerald_champions_agent_battle.c.
 AUTHORED_FIELD = {
@@ -117,6 +126,11 @@ ENUM_FILES = {
     'item': ('constants/items.h', 'ITEM_'),
     'type': ('constants/pokemon.h', 'TYPE_'),
 }
+# Enums that share their header with others: (header, enum name, prefix).
+ENUM_BLOCKS = {
+    'ow_weather': ('constants/weather.h', 'OverworldWeather', 'WEATHER_'),
+    'environment': ('constants/battle.h', 'BattleEnvironments', 'BATTLE_ENVIRONMENT_'),
+}
 
 
 def fail(message):
@@ -143,13 +157,13 @@ def clone_file(source, target):
 
 # ------------------------------------------------------------------- constants
 
-def parse_enum(path, prefix):
+def parse_enum(path, prefix, text=None):
     """Name<->value for a packed engine enum; the first real spelling of a value wins.
 
     Count sentinels (MOVES_COUNT_GEN2 and friends) share a value with a real
     member, so they are resolvable but never become a display name."""
     names, values, counter = {}, {}, 0
-    for line in path.read_text().splitlines():
+    for line in (path.read_text() if text is None else text).splitlines():
         line = line.strip()
         if line.startswith('#') or line.startswith('//'):
             continue
@@ -202,6 +216,11 @@ def build_constants():
     tables = {}
     for key, (relative, prefix) in ENUM_FILES.items():
         names, values = parse_enum(ROOT / 'include' / relative, prefix)
+        tables[key] = {'names': {str(k): v for k, v in names.items()}, 'values': values}
+    for key, (relative, enum, prefix) in ENUM_BLOCKS.items():
+        text = (ROOT / 'include' / relative).read_text()
+        block = text.split(f'enum {enum}')[1].split('{', 1)[1].split('};')[0]
+        names, values = parse_enum(None, prefix, text=block)
         tables[key] = {'names': {str(k): v for k, v in names.items()}, 'values': values}
     requests = []
     for group, (header, names) in DEFINE_GROUPS.items():
@@ -443,6 +462,28 @@ class Session:
             stopped |= matched
         fail('native decision snapshot did not finish publication')
 
+    def read_log(self, words, start):
+        """The event-log bytes written since `start`, or None if the ROM has no
+        log or the ring wrapped past `start` (then only the legacy ring is left).
+
+        Read after the halt without advancing: a parked battle writes nothing,
+        and outside a battle the bridge does not log."""
+        size, end = words[LOG_SIZE_WORD], words[LOG_HEAD_WORD]
+        if not size or 'gEcAgentBattleLog' not in self.syms:
+            return None
+        if end < start or end - start > size:
+            return None
+        base = self.syms['gEcAgentBattleLog']
+        first = start - start % 4
+        positions = list(range(first, end, 4))
+        data = bytearray()
+        for chunk in range(0, len(positions), READS_PER_CALL):
+            addresses = [base + pos % size for pos in positions[chunk:chunk + READS_PER_CALL]]
+            values, _, _ = self.run(frames=1, reads=addresses, advance=False)
+            for address in addresses:
+                data += values[address].to_bytes(4, 'little')
+        return bytes(data[start - first:end - first])
+
     def log(self, record):
         with self.events.open('a') as handle:
             handle.write(json.dumps(record) + '\n')
@@ -469,12 +510,14 @@ def decode_state(session, words):
         flags = words[base + 8]
         gimmick = words[base + 25]
         last = words[base + 26]
-        return {
+        entry = {
             'battler': index,
             'side': 'player' if flags & 4 else 'opponent',
             'agent_controlled': bool(flags & 8),
             'alive': bool(flags & 1),
             'absent': bool(flags & 2),
+            # As displayed: an opposing Illusion shows its disguise's species,
+            # types, ability and item until the disguise breaks.
             'species': name_of(species_t, words[base + 0], 'SPECIES_'),
             'level': words[base + 1],
             'hp': words[base + 2],
@@ -482,7 +525,7 @@ def decode_state(session, words):
             'status': decode_status(words[base + 4], c['status']),
             'item': name_of(item_t, words[base + 5], 'ITEM_'),
             'ability': name_of(ability_t, words[base + 6], 'ABILITY_'),
-            'party_slot': words[base + 7],
+            'party_slot': words[base + 7] & 0xFF,
             'stat_stages': {STAT_NAMES[i]: words[base + 9 + i] - 6 for i in range(8)},
             'types': [name_of(type_t, (words[base + 27] >> (8 * i)) & 0xFF, 'TYPE_')
                       for i in range(3)],
@@ -504,6 +547,12 @@ def decode_state(session, words):
                          'move_index': (last >> 8) & 0xFF,
                          'target': (last >> 16) & 0xFF},
         }
+        disguise = words[base + 7] >> 8
+        if disguise:
+            # Only the player's own battlers publish this: the truth plus the
+            # Pokemon the opponent sees.
+            entry['illusion_disguise'] = name_of(species_t, disguise, 'SPECIES_')
+        return entry
 
     def party(slot):
         base = PARTY_BASE + slot * PARTY_SIZE_W
@@ -616,7 +665,10 @@ def decode_state(session, words):
             pending.append(entry)
 
 
-    return {
+    native_outcome = OUTCOMES.get(words[7], words[7])
+    has_log = bool(words[LOG_SIZE_WORD])
+    map_field = words[MAP_FIELD_WORD]
+    state = {
         'phase': phase,
         'awaiting_now': [i for i in range(4) if (need_mask >> i) & 1],
         'turn': words[3],
@@ -627,7 +679,7 @@ def decode_state(session, words):
         'terrain_turns': words[30],
         'sides': {'player': flags_of(words[17], c['side']),
                   'opponent': flags_of(words[18], c['side'])},
-        'outcome': OUTCOMES.get(words[7], words[7]),
+        'outcome': 'lost' if native_outcome in PLAYER_DEFEATED else native_outcome,
         'player_faints': words[14],
         'opponent_faints': words[15],
         'level_cap': words[22],
@@ -636,10 +688,16 @@ def decode_state(session, words):
         'ai_setup_frames': words[10],
         'ai_delay_frames': words[11],
         'actives': actives,
+        # Always present, so its presence says nothing about this board.
+        'display_note': ('Opposing species, types, ability and item are what the battle '
+                         'displays: a Pokemon under Illusion shows its disguise (and stays '
+                         'unrevealed in opponent_party) until the disguise breaks. Your own '
+                         'Illusion user shows the truth plus illusion_disguise.'),
         'player_reserves': [p for p in (party(s) for s in range(6)) if p],
         'opponent_party': foes(),
         'pending_decision': pending,
         'message_serial': words[16],
+        'log_head': words[LOG_HEAD_WORD],
         'selection_state': selection,
         # Where the field state came from. The engine's only setup-side channel
         # is the trainer's authored startingStatus; this game has no map or Gym
@@ -655,7 +713,13 @@ def decode_state(session, words):
                                   else str(words[FIELD_BASE + 2])),
             'weather_at_turn_0': flags_of(words[FIELD_BASE + 3], c['weather']) or ['none'],
             'terrain_is_permanent': bool(words[29]) and words[30] == 0,
-            'from_map': False,
+            # The trainer's map weather stood in for the headless room's sky
+            # when the battle opened (see resolve_map_field and `start`).
+            'from_map': bool(map_field & 0x10000),
+            'map_weather': (name_of(c['ow_weather'], (map_field & 0xFF) - 1, 'WEATHER_')
+                            if has_log and map_field & 0xFF else None),
+            'environment': (name_of(c['environment'], map_field >> 24, 'BATTLE_ENVIRONMENT_')
+                            if has_log else None),
         },
         'previous_turn': [
             {'battler': i,
@@ -667,6 +731,82 @@ def decode_state(session, words):
                                         min(battlers_count, 4))}
             for i in range(min(battlers_count, 4))],
     }
+    if native_outcome != state['outcome']:
+        state['outcome_native'] = native_outcome
+    return state
+
+
+def decode_log(session, data):
+    """(messages, moves, hp_changes, popups) from event-log bytes.
+
+    moves, hp_changes and popups carry message_index: how many of this call's
+    messages came before them, so each can be placed against the text."""
+    c = session.constants_table()
+    messages, moves, changes, popups = [], [], [], []
+    i = 0
+    while i + 2 <= len(data):
+        kind, length = data[i], data[i + 1]
+        payload = data[i + 2:i + 2 + length]
+        i += 2 + length
+        if kind == LOG_TEXT:
+            text = decode_text(payload, c['charmap'])
+            if text:
+                messages.append(text)
+        elif kind == LOG_MOVE and length >= 4:
+            moves.append({'user': payload[0], 'target': payload[1],
+                          'move': name_of(c['move'], payload[2] | (payload[3] << 8), 'MOVE_'),
+                          'message_index': len(messages), 'damage': {}, 'healing': {},
+                          'self_hp_change': 0})
+        elif kind == LOG_HP and length >= 9:
+            battler, attacker = payload[0], payload[1]
+            before, after = payload[2] | (payload[3] << 8), payload[4] | (payload[5] << 8)
+            move = name_of(c['move'], payload[6] | (payload[7] << 8), 'MOVE_')
+            # The engine clears gCurrentMove between actions and at the end of
+            # the turn, so a change with no current move is residual (weather,
+            # status, items, hazards). One inside the latest logged move by the
+            # same attacker belongs to that move.
+            current = (moves[-1] if moves and moves[-1]['user'] == attacker
+                       and moves[-1]['move'] == move else None)
+            cause = ('residual' if move == 'MOVE_NONE'
+                     else 'move' if current is not None else 'other')
+            change = {'battler': battler, 'hp_before': before, 'hp_after': after,
+                      'change': after - before, 'cause': cause, 'message_index': len(messages)}
+            if move != 'MOVE_NONE':
+                change['attacker'] = attacker
+                change['move'] = move
+                # Charge it to the move in progress: damage and healing dealt
+                # to others, and the user's own recoil, Life Orb or drain.
+                if current is not None:
+                    if battler == attacker:
+                        current['self_hp_change'] += after - before
+                    else:
+                        # Losses and gains apart: a target's Sitrus Berry
+                        # firing mid-move must not shrink the move's damage.
+                        key, bucket = str(battler), ('damage' if after < before else 'healing')
+                        current[bucket][key] = current[bucket].get(key, 0) + abs(after - before)
+            changes.append(change)
+        elif kind == LOG_POPUP and length >= 4:
+            # Berries, Life Orb-like items and many abilities show only a
+            # pop-up, never a message.
+            value = payload[2] | (payload[3] << 8)
+            popups.append({'battler': payload[0], 'message_index': len(messages),
+                           **({'item': name_of(c['item'], value, 'ITEM_')} if payload[1]
+                              else {'ability': name_of(c['ability'], value, 'ABILITY_')})})
+    return messages, moves, changes, popups
+
+
+def battle_log(session, words, since_log, since_serial):
+    """Every message (plus move and HP records) since log position `since_log`,
+    falling back to the legacy 14-message ring (from message `since_serial`)
+    on an older ROM or if more than the whole ring was written in one call."""
+    data = session.read_log(words, since_log)
+    if data is None:
+        legacy = decode_messages(session, words, since_serial)
+        return {'messages': legacy, 'moves': [], 'hp_changes': [], 'popups': [],
+                'log_complete': words[16] - since_serial <= len(legacy)}
+    messages, moves, changes, popups = decode_log(session, data)
+    return {'messages': messages, 'moves': moves, 'hp_changes': changes, 'popups': popups,
+            'log_complete': True}
 
 
 def decode_messages(session, words, since):
@@ -716,6 +856,333 @@ def script_pairings():
             for key in (a, b):
                 pairs[key] = {'a': a, 'b': b, 'partner': 'PARTNER_NONE', 'script': str(path)}
     return pairs
+
+
+# ------------------------------------------------------------ the map's field
+#
+# The game opens every trainer battle with the overworld weather the player is
+# standing in (B_OVERWORLD_WEATHER_OVERRIDE is GEN_8, so it is not locked), and
+# with the environment of the tile under the player. The headless room is the
+# Oldale Pokemon Center, so both come from the trainer's own map instead: the
+# map header, the map's ON_TRANSITION weather script evaluated at the trainer's
+# tile, and the nearest weather trigger the player walks across to reach them.
+
+BATTLE_CALL_RE = re.compile(r'^\s*(trainerbattle\w*|multi_2_vs_2)\b(.*)$')
+LABEL_RE = re.compile(r'^([A-Za-z_]\w*)::?(?:\s*@.*)?$')
+# What the engine's FIELD_EFFECT_OVERWORLD_WEATHER/TERRAIN cases make of each
+# overworld weather (src/battle_util.c, B_OVERWORLD_FOG GEN_LATEST,
+# B_OVERWORLD_SNOW GEN_LATEST, B_THUNDERSTORM_TERRAIN TRUE).
+BATTLE_EFFECT_OF_WEATHER = {
+    'WEATHER_RAIN': 'rain', 'WEATHER_DOWNPOUR': 'rain',
+    'WEATHER_RAIN_THUNDERSTORM': 'rain + electric terrain',
+    'WEATHER_SANDSTORM': 'sandstorm', 'WEATHER_DROUGHT': 'sun', 'WEATHER_SNOW': 'snow',
+    'WEATHER_FOG_HORIZONTAL': 'misty terrain', 'WEATHER_FOG_DIAGONAL': 'misty terrain',
+}
+WEATHER_ALIASES = {
+    'none': 'WEATHER_NONE', 'clear': 'WEATHER_NONE', 'rain': 'WEATHER_RAIN',
+    'downpour': 'WEATHER_DOWNPOUR', 'thunderstorm': 'WEATHER_RAIN_THUNDERSTORM',
+    'sun': 'WEATHER_DROUGHT', 'drought': 'WEATHER_DROUGHT', 'sand': 'WEATHER_SANDSTORM',
+    'sandstorm': 'WEATHER_SANDSTORM', 'snow': 'WEATHER_SNOW', 'fog': 'WEATHER_FOG_HORIZONTAL',
+}
+CYCLE_TABLES = {'WEATHER_ROUTE119_CYCLE': 'sWeatherCycleRoute119',
+                'WEATHER_ROUTE123_CYCLE': 'sWeatherCycleRoute123'}
+
+
+def parse_script_file(path):
+    """(instructions, label->index) for one map's scripts.inc, in file order,
+    so a label that does not end falls through into the next one."""
+    code, labels = [], {}
+    if not path.exists():
+        return code, labels
+    for raw in path.read_text().splitlines():
+        line = raw.split('@')[0].rstrip() if not raw.lstrip().startswith('.') else ''
+        match = LABEL_RE.match(line.strip()) if line and not line[0].isspace() else None
+        if match:
+            labels[match[1]] = len(code)
+            continue
+        parts = line.strip().split(None, 1)
+        if parts:
+            args = [a.strip() for a in parts[1].split(',')] if len(parts) > 1 else []
+            code.append((parts[0], args))
+    return code, labels
+
+
+def run_weather_script(code, labels, entry, xy=None, limit=2000):
+    """Evaluate the weather a map script leaves, as the overworld would.
+
+    A tiny interpreter for the commands the weather scripts are written in:
+    getplayerxy/compare/goto_if_*/call_if_*/goto/call/return/end/setweather.
+    Anything it cannot know (story vars and flags) is taken as not taken, and a
+    setweather reachable only through such a branch is returned separately as
+    conditional, so the caller can report it without applying it."""
+    tests = {'lt': lambda a, b: a < b, 'le': lambda a, b: a <= b, 'gt': lambda a, b: a > b,
+             'ge': lambda a, b: a >= b, 'eq': lambda a, b: a == b, 'ne': lambda a, b: a != b}
+    variables, weather, conditional = {}, None, set()
+    compared, stack, steps = None, [], 0
+    pc = labels.get(entry)
+
+    def scan(label, depth=0):
+        """Weathers a skipped branch could set, without evaluating it."""
+        found, i = set(), labels.get(label)
+        while i is not None and i < len(code) and depth < 4:
+            op, args = code[i]
+            if op == 'setweather' and args:
+                found.add(args[0])
+            elif op in ('call', 'goto') or op.startswith(('call_if', 'goto_if')):
+                if args and args[-1] in labels and args[-1] != label:
+                    found |= scan(args[-1], depth + 1)
+            if op in ('end', 'return', 'goto'):
+                break
+            i += 1
+        return found
+
+    while pc is not None and pc < len(code) and steps < limit:
+        steps += 1
+        op, args = code[pc]
+        pc += 1
+        if op == 'getplayerxy' and xy is not None and len(args) == 2:
+            variables[args[0]], variables[args[1]] = xy
+        elif op == 'compare' and len(args) == 2:
+            value = variables.get(args[0])
+            try:
+                operand = int(args[1], 0)
+            except ValueError:
+                operand = None
+            compared = (value, operand) if value is not None and operand is not None else None
+        elif op.startswith(('goto_if_', 'call_if_')) and args:
+            kind = op.split('_if_')[1]
+            target = args[-1]
+            taken = False
+            if kind in tests and compared is not None:
+                taken = tests[kind](*compared)
+            elif kind in tests or kind in ('set', 'unset', 'defeated', 'not_defeated'):
+                conditional |= scan(target)
+            if taken and target in labels:
+                if op.startswith('call'):
+                    stack.append(pc)
+                pc = labels[target]
+        elif op == 'goto' and args:
+            pc = labels.get(args[0])
+        elif op == 'call' and args:
+            if args[0] in labels:
+                stack.append(pc)
+                pc = labels[args[0]]
+        elif op == 'return':
+            pc = stack.pop() if stack else None
+        elif op == 'end':
+            pc = None
+        elif op == 'setweather' and args:
+            weather = args[0]
+    return weather, conditional - ({weather} if weather else set())
+
+
+def find_trainer_script(trainer):
+    """(map name, enclosing label) of the map script that starts this battle."""
+    token = re.compile(r'\b' + re.escape(trainer) + r'\b')
+    for path in sorted((ROOT / 'data/maps').glob('*/scripts.inc')):
+        label = None
+        for raw in path.read_text().splitlines():
+            match = LABEL_RE.match(raw.split('@')[0].strip()) if raw and not raw[0].isspace() else None
+            if match:
+                label = match[1]
+                continue
+            battle = BATTLE_CALL_RE.match(raw)
+            if battle and token.search(battle[2]):
+                return path.parent.name, label
+    return None, None
+
+
+def trainer_position(map_json, code, labels, label):
+    """The tile the trainer stands on: the object event whose script reaches the
+    battle label, directly, by goto/call, or by falling through into it."""
+    starts = sorted((start, name) for name, start in labels.items())
+    owners, cursor, owner = [], 0, None
+    for index in range(len(code)):
+        while cursor < len(starts) and starts[cursor][0] <= index:
+            owner = starts[cursor][1]
+            cursor += 1
+        owners.append(owner)
+    callers = {}
+    for index, (op, args) in enumerate(code):
+        if (op in ('goto', 'call', 'case') or op.startswith(('goto_if', 'call_if'))) \
+           and args and owners[index]:
+            callers.setdefault(args[-1], set()).add(owners[index])
+    for start, name in starts:
+        if 0 < start <= len(code) and code[start - 1][0] not in ('end', 'return', 'goto', 'releaseall_end'):
+            if owners[start - 1] and owners[start - 1] != name:
+                callers.setdefault(name, set()).add(owners[start - 1])
+    wanted, frontier = {label}, [label]
+    for _ in range(4):
+        frontier = [c for name in frontier for c in callers.get(name, ()) if c not in wanted]
+        wanted |= set(frontier)
+    objects = [o for o in map_json.get('object_events', []) if o.get('script') in wanted]
+    trainers = [o for o in objects if o.get('trainer_type', 'TRAINER_TYPE_NONE') != 'TRAINER_TYPE_NONE']
+    for group in (trainers, objects):
+        if group:
+            return group[0]['x'], group[0]['y']
+    for event in map_json.get('coord_events', []):
+        if event.get('script') in wanted:
+            return event['x'], event['y']
+    return None
+
+
+def layout_grid(map_json):
+    layouts = json.loads((ROOT / 'data/layouts/layouts.json').read_text())['layouts']
+    layout = next((l for l in layouts if l.get('id') == map_json['layout']), None)
+    if layout is None or 'blockdata_filepath' not in layout:
+        return None
+    data = (ROOT / layout['blockdata_filepath']).read_bytes()
+    width, height = layout['width'], layout['height']
+    words = [data[i] | (data[i + 1] << 8) for i in range(0, min(len(data), 2 * width * height), 2)]
+    return width, height, words
+
+
+def nearest_trigger_weather(map_json, code, labels, xy):
+    """The weather of the nearest weather trigger by walking distance.
+
+    Weather regions are fenced by trigger tiles (a sunny row outside, a
+    sandstorm row inside), so the last trigger crossed on the way to a trainer
+    is the nearest one reachable from its tile through passable ground."""
+    triggers = {}
+    for event in map_json.get('coord_events', []):
+        weather = None
+        if event.get('type') == 'weather':
+            weather = event.get('weather', '').replace('COORD_EVENT_', '')
+        elif event.get('type') == 'trigger' and event.get('script') in labels:
+            weather, _ = run_weather_script(code, labels, event['script'])
+        if weather:
+            triggers[(event['x'], event['y'])] = weather
+    if not triggers or xy is None:
+        return None, None
+    grid = layout_grid(map_json)
+    if grid is None:
+        return None, None
+    width, height, words = grid
+    start = tuple(xy)
+    seen, queue = {start: 0}, [start]
+    for x, y in queue:
+        if (x, y) in triggers:
+            return triggers[(x, y)], seen[(x, y)]
+        for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if 0 <= nx < width and 0 <= ny < height and (nx, ny) not in seen:
+                block = words[ny * width + nx]
+                if ((block >> 10) & 3) == 0 or (nx, ny) in triggers:
+                    seen[(nx, ny)] = seen[(x, y)] + 1
+                    queue.append((nx, ny))
+    return None, None
+
+
+def weather_cycle(name):
+    text = (ROOT / 'src/field_weather_effect.c').read_text()
+    block = text.split(CYCLE_TABLES[name])[1].split('{')[1].split('}')[0]
+    return re.findall(r'WEATHER_\w+', block)
+
+
+def anomaly_visitors(map_name):
+    """Weather-anomaly visitors whose home is this map (src/weather_anomaly.c).
+    Anomalies roll on player steps, so they are never applied by default."""
+    text = (ROOT / 'src/data/pokemon/legendary_signs.h').read_text()
+    map_json = json.loads((ROOT / 'data/maps' / map_name / 'map.json').read_text())
+    home = map_json.get('id', '').removeprefix('MAP_')
+    out = []
+    for mon, _, flag, _, where, _, weather in re.findall(
+            r'^VISITOR\((\w+),\s*(\d+),\s*(\w+),\s*(\d+),\s*(\w+),\s*(\w+),\s*(\w+)\)', text, re.M):
+        if where == home:
+            out.append({'species': 'SPECIES_' + mon, 'weather': 'WEATHER_' + weather, 'gate': flag})
+    return out
+
+
+def resolve_map_field(trainer, map_override=None):
+    """Everything start needs to open the battle under the trainer's own sky."""
+    map_name, label = find_trainer_script(trainer)
+    source = 'battle script'
+    if map_override:
+        if map_name != map_override:
+            label = None
+        map_name, source = map_override, '--map'
+    info = {'map': map_name, 'map_source': source, 'script_label': label}
+    if not map_name or not (ROOT / 'data/maps' / map_name / 'map.json').exists():
+        info.update(weather='WEATHER_NONE', weather_basis='no map found for this trainer',
+                    environment=None)
+        return info
+    map_json = json.loads((ROOT / 'data/maps' / map_name / 'map.json').read_text())
+    code, labels = parse_script_file(ROOT / 'data/maps' / map_name / 'scripts.inc')
+    # The shared scripts (Common_EventScript_SetAbnormalWeather and friends)
+    # are reachable from every map; append them after an 'end' so nothing
+    # falls through into them.
+    shared_code, shared_labels = parse_script_file(ROOT / 'data/event_scripts.s')
+    code.append(('end', []))
+    labels.update({name: start + len(code) for name, start in shared_labels.items()
+                   if name not in labels})
+    code += shared_code
+    xy = trainer_position(map_json, code, labels, label) if label else None
+    info['trainer_xy'] = list(xy) if xy else None
+    header = map_json.get('weather', 'WEATHER_NONE')
+    weather, basis = header, 'map header'
+    conditional = set()
+    transition = next((a[1] for op, a in code if op == 'map_script' and len(a) == 2
+                       and a[0] == 'MAP_SCRIPT_ON_TRANSITION'), None)
+    if transition:
+        scripted, conditional = run_weather_script(code, labels, transition, xy)
+        if scripted and (xy is not None or not any(op == 'getplayerxy' for op, _ in code)):
+            weather, basis = scripted, 'ON_TRANSITION script at the trainer tile'
+    triggered, distance = nearest_trigger_weather(map_json, code, labels, xy)
+    if triggered:
+        info['trigger_weather'] = {'weather': triggered, 'steps': distance}
+        if triggered != weather:
+            basis = (f'nearest weather trigger ({distance} steps); '
+                     f'{basis} alone says {weather}')
+        else:
+            basis += f'; nearest weather trigger agrees ({distance} steps)'
+        weather = triggered
+    if weather in CYCLE_TABLES:
+        cycle = weather_cycle(weather)
+        effects = [BATTLE_EFFECT_OF_WEATHER.get(w, 'none') for w in cycle]
+        modal = max(cycle, key=lambda w: (effects.count(BATTLE_EFFECT_OF_WEATHER.get(w, 'none')),
+                                          -cycle.index(w)))
+        info['weather_cycle'] = cycle
+        basis += (f'; {weather} changes daily {cycle}, the most frequent battle weather '
+                  f'({modal}) is used; pass --weather to choose another day')
+        weather = modal
+    elif weather == 'WEATHER_DYNAMIC':
+        basis += '; WEATHER_DYNAMIC follows the daily seed and is not reproduced'
+        weather = 'WEATHER_NONE'
+    info['weather'] = weather
+    info['weather_basis'] = basis
+    if conditional and xy is None and any(op == 'getplayerxy' for op, _ in code):
+        # Without the trainer's tile the map's own region test cannot run.
+        info['position_dependent_weather'] = sorted(conditional)
+        info['weather_basis'] += '; the trainer tile is unknown and this map sets weather by position'
+    elif conditional:
+        # Weather a story flag or var switches on (the Groudon/Kyogre storm's
+        # WEATHER_ABNORMAL, for one). Not applied; --weather reproduces it.
+        info['story_conditional_weather'] = sorted(conditional)
+    visitors = anomaly_visitors(map_name)
+    if visitors:
+        info['possible_anomaly_weather'] = visitors
+    # BattleSetup_GetEnvironmentId, without the tile metatile behaviour: Route
+    # 113 and a sandstorm are sand, then the map type decides.
+    map_type = map_json.get('map_type', '')
+    on_water = False
+    if xy:
+        grid = layout_grid(map_json)
+        if grid:
+            width, _, words = grid
+            on_water = ((words[xy[1] * width + xy[0]] >> 12) & 0xF) == 1
+    if map_name == 'Route113' or weather == 'WEATHER_SANDSTORM':
+        environment = 'BATTLE_ENVIRONMENT_SAND'
+    elif map_type == 'MAP_TYPE_UNDERGROUND':
+        environment = 'BATTLE_ENVIRONMENT_POND' if on_water else 'BATTLE_ENVIRONMENT_CAVE'
+    elif map_type in ('MAP_TYPE_INDOOR', 'MAP_TYPE_SECRET_BASE'):
+        environment = 'BATTLE_ENVIRONMENT_BUILDING'
+    elif map_type == 'MAP_TYPE_UNDERWATER':
+        environment = 'BATTLE_ENVIRONMENT_UNDERWATER'
+    elif on_water:
+        environment = 'BATTLE_ENVIRONMENT_WATER'
+    else:
+        environment = 'BATTLE_ENVIRONMENT_PLAIN'
+    info['environment'] = environment
+    return info
 
 
 MILESTONE_RE = re.compile(r'\{\s*(FLAG_[A-Z0-9_]+)\s*,\s*(\d+)\s*(?:,\s*\d+\s*)?\}')  # {flag, cap[, stipend]}
@@ -820,6 +1287,7 @@ def command_start(args):
         fail(f'unknown trainer identifier: {name_b}')
     partners = resolve_defines([('constants/battle_partner.h', partner_name)])
     difficulty = {'easy': 0, 'medium': 1, 'normal': 1, 'hard': 2}[args.difficulty]
+    map_field = map_field_for_start(args, name_a, constants)
 
     session.meta = {
         'rom_sha256': rom_hash, 'elf_sha256': elf_hash, 'seed': args.seed,
@@ -828,6 +1296,7 @@ def command_start(args):
         'party_manifest': str(Path(args.party).resolve()),
         'party_sha256': hashlib.sha256(Path(args.party).read_bytes()).hexdigest(),
         'script_pairing': pairing,
+        'map_field': map_field,
         'scope': ('Synthetic headless benchmark: native debug trainer lifecycle, native AI, '
                   'user-authorized stage-legal preparation. Not earned campaign play.'),
     }
@@ -860,30 +1329,100 @@ def command_start(args):
     reads = [syms['gEcAgentPrepResult'], syms['gEcAgentPrepErrorSlot']]
     values, _, _ = session.run(frames=PREP_FRAMES, writes=writes, reads=reads)
     if values[syms['gEcAgentPrepResult']] != 1:
-        fail(f'native preparation rejected the manifest: result='
-             f'{values[syms["gEcAgentPrepResult"]]} slot={values[syms["gEcAgentPrepErrorSlot"]]}')
+        fail('native preparation rejected the manifest: ' + describe_prep_failure(
+            values[syms['gEcAgentPrepResult']], values[syms['gEcAgentPrepErrorSlot']], spec))
     session.meta['prepared'] = {'encounter': spec['encounter'], 'party': len(spec['party'])}
 
-    # 4. Start the battle through the native debug lifecycle.
+    # 4. Start the battle through the native debug lifecycle, under the
+    #    trainer's map weather and environment (0 keeps the room's own).
     battle_writes = [
         (syms['gEcAgentBattleTrainerA'], trainers[name_a]),
         (syms['gEcAgentBattleTrainerB'], trainers[name_b] if name_b else 0),
         (syms['gEcAgentBattlePartner'], partners[partner_name]),
         (syms['gEcAgentBattleHalted'], 0),
         (syms['gEcAgentBattleResult'], 0),
-        (syms['gEcAgentBattleCommand'], 1),
     ]
+    if 'gEcAgentBattleMapWeather' in syms:
+        ow_weather, environment = constants['ow_weather']['values'], constants['environment']['values']
+        battle_writes += [
+            (syms['gEcAgentBattleMapWeather'], ow_weather[map_field['weather']] + 1),
+            (syms['gEcAgentBattleEnvironment'],
+             environment[map_field['environment']] + 1 if map_field.get('environment') else 0)]
+    else:
+        print('battle_driver: warning: this build predates map weather; the battle opens under '
+              'the headless room\'s sky', file=sys.stderr)
+    battle_writes.append((syms['gEcAgentBattleCommand'], 1))
+    # The bridge answers the start command on the next frame. Read its verdict
+    # first: a refused start never halts, and would otherwise burn the whole
+    # frame budget looking like a hung battle.
+    values, _, _ = session.run(frames=4, writes=battle_writes,
+                               reads=[syms['gEcAgentBattleResult']])
+    verdict = values[syms['gEcAgentBattleResult']]
+    if verdict != BATTLE_START_OK:
+        fail(f'the bridge refused the battle: {BATTLE_START_RESULTS.get(verdict, verdict)}')
     view, frames_run, stopped = advance_to_halt(
-        session, battle_writes, png=(session.dir / 'start.png') if args.png else None)
+        session, [], png=(session.dir / 'start.png') if args.png else None)
     if not stopped:
         fail(f'no decision point was reached in {frames_run} frames; the battle never halted')
     state = decode_state(session, view)
+    annotate_field(session, state)
+    log = battle_log(session, view, 0, 0)
     session.meta['started'] = {'frames': frames_run}
     session.meta_path.write_text(json.dumps(session.meta, indent=2) + '\n')
     session.log({'event': 'start', 'trainer_a': name_a, 'trainer_b': name_b,
                  'partner': partner_name, 'seed': args.seed, 'frames': frames_run,
-                 'messages': decode_messages(session, view, 0), 'state': state})
+                 'messages': log['messages'], 'moves': log['moves'],
+                 'hp_changes': log['hp_changes'], 'popups': log['popups'],
+                 'log_complete': log['log_complete'],
+                 'state': state})
     print(json.dumps(state, indent=2))
+
+
+BATTLE_START_OK = 1
+# enum EmeraldChampionsAgentBattleResult (include/emerald_champions_agent_battle.h).
+BATTLE_START_RESULTS = {
+    0: 'pending (the ROM never read the start command)',
+    2: 'bad command',
+    3: 'bad trainer: unknown trainer id or an empty authored party',
+    4: 'bad party: the prepared party is empty',
+    5: 'not ready: the overworld was not idle (a script or battle was running)',
+}
+
+
+def map_field_for_start(args, trainer, constants):
+    """The trainer's map weather/environment, or the --weather override."""
+    field = resolve_map_field(trainer, args.map)
+    if args.weather != 'map':
+        name = WEATHER_ALIASES.get(args.weather.lower(), args.weather.upper())
+        if name not in constants['ow_weather']['values']:
+            fail(f'--weather {args.weather}: use map, none, rain, downpour, thunderstorm, sun, '
+                 f'sandstorm, snow, fog or a WEATHER_* name')
+        field['map_weather'] = field['weather']
+        field['weather'] = name
+        field['weather_basis'] = f'--weather {args.weather} (the map gives {field["map_weather"]})'
+    if field['weather'] not in constants['ow_weather']['values']:
+        fail(f'map weather {field["weather"]} is not an overworld weather constant')
+    field['battle_effect'] = BATTLE_EFFECT_OF_WEATHER.get(field['weather'], 'none')
+    if not field.get('map'):
+        print(f'battle_driver: warning: no map script starts {trainer}; the battle opens with '
+              f'no map weather. Pass --map <MapName> (the order file has it).', file=sys.stderr)
+    return field
+
+
+def annotate_field(session, state):
+    """Put the start-time map resolution next to what the battle actually shows."""
+    field = session.meta.get('map_field')
+    if field:
+        state['field_source']['map'] = {key: field.get(key) for key in (
+            'map', 'trainer_xy', 'weather', 'battle_effect', 'weather_basis', 'weather_cycle',
+            'story_conditional_weather', 'position_dependent_weather', 'possible_anomaly_weather') if field.get(key)}
+
+
+def describe_prep_failure(result, slot, spec):
+    name = PREP_RESULTS.get(result, f'result {result}')
+    party = spec.get('party', [])
+    where = f' at slot {slot} ({party[slot]["species"]})' if 0 <= slot < len(party) else ''
+    return name + where
 
 
 def command_state(args):
@@ -892,6 +1431,7 @@ def command_state(args):
     view, _, _ = session.read_view(advance=False,
                                    png=(session.dir / 'state.png') if args.png else None)
     state = decode_state(session, view)
+    annotate_field(session, state)
     drop_committed_slots(session, state)
     session.log({'event': 'state', 'state': state})
     print(json.dumps(state, indent=2))
@@ -1102,6 +1642,7 @@ def command_act(args):
                 'to': f"{active['species']} ({key})",
             }
 
+    log = battle_log(session, view, state['log_head'], state['message_serial'])
     events = {
         'event': 'act',
         'turn_before': state['turn'],
@@ -1124,12 +1665,25 @@ def command_act(args):
         'faints': fainted,
         'weather': after['weather'],
         'field': after['field'],
-        'messages': decode_messages(session, view, state['message_serial']),
+        # Every message of the call, in order. moves[] is each move as it was
+        # used: user and target battlers, HP it took from (damage) and gave to
+        # (healing) each other battler while it resolved, and the user's own HP
+        # change (recoil, Life Orb, drain);
+        # hp_changes[] is every HP change with its cause; popups[] the ability
+        # and item pop-ups that print no text (Sitrus Berry, Intimidate).
+        # message_index places each record before messages[message_index].
+        'messages': log['messages'],
+        'moves': log['moves'],
+        'hp_changes': log['hp_changes'],
+        'popups': log['popups'],
+        'log_complete': log['log_complete'],
         'player_faints': after['player_faints'],
         'opponent_faints': after['opponent_faints'],
         'outcome': after['outcome'],
         'phase': after['phase'],
     }
+    if 'outcome_native' in after:
+        events['outcome_native'] = after['outcome_native']
     session.log(events)
     print(json.dumps(events, indent=2))
     if not stopped and after['phase'] != 'ended':
@@ -1170,6 +1724,8 @@ def command_result(args):
         'level_cap': state['level_cap'],
         'phase': state['phase'],
         'outcome': state['outcome'],
+        'outcome_native': state.get('outcome_native', state['outcome']),
+        'map_weather': (session.meta.get('map_field') or {}).get('weather'),
         'turns': turns,
         'decisions': decisions,
         'player_faints': player_faints,
@@ -1203,6 +1759,12 @@ def main():
     start.add_argument('--run-dir', required=True)
     start.add_argument('--build-dir',
                        help='directory holding a stamped headless ROM/ELF/inputs triple')
+    start.add_argument('--map', help='map the fight happens on; normally found from the map '
+                                     'script that starts the battle')
+    start.add_argument('--weather', default='map',
+                       help='overworld weather to open under: map (default: the trainer\'s own '
+                            'map, tile and region), none, rain, downpour, thunderstorm, sun, '
+                            'sandstorm, snow, fog, or a WEATHER_* name')
     start.add_argument('--png', action='store_true')
     start.set_defaults(func=command_start)
 

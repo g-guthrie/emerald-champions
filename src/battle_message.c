@@ -904,6 +904,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_S]                                    = COMPOUND_STRING("s"),
     [STRINGID_LOSTSOMEOFITSHP]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} lost some of its HP!"),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} hasn't eaten any held Berries, so it can't possibly belch!\p"),
+    [STRINGID_LEGENDARYRELICWAITS]                  = COMPOUND_STRING("{STR_VAR_1} will be waiting for you at a Pokémon Center once you become the Champion!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

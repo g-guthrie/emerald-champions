@@ -414,8 +414,7 @@ static bool32 IsSignDiscoveryLost(enum LegendarySignId id)
     return required != SPECIES_NONE && IsRequiredFamilyLost(required);
 }
 
-// Saved bit indices are append-only: 0-23 are undelivered relics and
-// 24-29 mark species whose one-time relic grant has already been earned.
+// Relic item indices are append-only save ids (see the state layout below).
 static const enum Item sLegendaryRelicItems[] =
 {
     ITEM_RED_ORB, ITEM_BLUE_ORB, ITEM_RUSTED_SWORD, ITEM_RUSTED_SHIELD,
@@ -425,92 +424,193 @@ static const enum Item sLegendaryRelicItems[] =
     ITEM_SKY_PLATE, ITEM_MIND_PLATE, ITEM_INSECT_PLATE, ITEM_STONE_PLATE,
     ITEM_SPOOKY_PLATE, ITEM_DRACO_PLATE, ITEM_DREAD_PLATE, ITEM_IRON_PLATE,
     ITEM_PIXIE_PLATE,
+    ITEM_DNA_SPLICERS, ITEM_REINS_OF_UNITY, ITEM_N_SOLARIZER, ITEM_N_LUNARIZER,
+    ITEM_PRISON_BOTTLE, ITEM_ZYGARDE_CUBE,
 };
 
+// The legend is yours when you catch it; its trump form is the final act's.
+// A championOnly grant waits for the Hall of Fame and arrives at the next
+// Pokémon Center heal: Primal Groudon and Kyogre, the Crowned heroes, and the
+// fusion and unbinding tools behind Black and White Kyurem, the Calyrex
+// riders, Dusk Mane and Dawn Wings Necrozma, Hoopa Unbound and Complete
+// Zygarde. Grant indices are append-only save ids too.
 static const struct
 {
     enum Species species;
     u8 firstItem;
     u8 itemCount;
+    bool8 championOnly;
 } sLegendaryRelicGrants[] =
 {
-    {SPECIES_GROUDON, 0, 1},
-    {SPECIES_KYOGRE, 1, 1},
-    {SPECIES_ZACIAN, 2, 1},
-    {SPECIES_ZAMAZENTA, 3, 1},
-    {SPECIES_OGERPON_TEAL, 4, 3},
-    {SPECIES_ARCEUS, 7, 17},
+    {SPECIES_GROUDON, 0, 1, TRUE},
+    {SPECIES_KYOGRE, 1, 1, TRUE},
+    {SPECIES_ZACIAN, 2, 1, TRUE},
+    {SPECIES_ZAMAZENTA, 3, 1, TRUE},
+    {SPECIES_OGERPON_TEAL, 4, 3, FALSE},
+    {SPECIES_ARCEUS, 7, 17, FALSE},
+    {SPECIES_KYUREM, 24, 1, TRUE},
+    {SPECIES_CALYREX, 25, 1, TRUE},
+    {SPECIES_NECROZMA, 26, 2, TRUE},
+    {SPECIES_HOOPA, 28, 1, TRUE},
+    {SPECIES_ZYGARDE, 29, 1, TRUE},
 };
 
-#define LEGENDARY_RELIC_EARNED_SHIFT 24
+STATIC_ASSERT(ARRAY_COUNT(sLegendaryRelicItems) <= 32, LegendaryRelicPendingBitsFit);
+STATIC_ASSERT(ARRAY_COUNT(sLegendaryRelicGrants) <= 14, LegendaryRelicEarnedBitsFit);
 
-static u32 GetLegendaryRelicDeliveryState(void)
+// Saved state:
+//   DELIVERY_0 bits 0-15: undelivered relics 0-15
+//   DELIVERY_1 bits 0-7:  undelivered relics 16-23; bits 8-13: grants 0-5 earned
+//   DELIVERY_2 bits 0-7:  undelivered relics 24-31; bits 8-15: grants 6-13 earned
+static u32 GetPendingLegendaryRelics(void)
 {
     return VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0)
-         | ((u32)VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1) << 16);
+         | ((u32)(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1) & 0xFF) << 16)
+         | ((u32)(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_2) & 0xFF) << 24);
 }
 
-static void SetLegendaryRelicDeliveryState(u32 state)
+static u32 GetEarnedLegendaryRelicGrants(void)
 {
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, state & 0xFFFF);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, state >> 16);
+    return (VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1) >> 8)
+         | ((u32)(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_2) >> 8) << 6);
 }
 
-static bool32 GiveLegendaryRelicItem(enum Item item)
+static void SetLegendaryRelicState(u32 pending, u32 earned)
 {
-    return CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)
-        || AddBagItem(item, 1) || AddPCItem(item, 1);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, pending & 0xFFFF);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, ((pending >> 16) & 0xFF) | ((earned & 0x3F) << 8));
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_2, ((pending >> 24) & 0xFF) | ((earned >> 6) << 8));
 }
 
-// The legend is yours when you catch it; its trump form is the final act's.
-// The Red and Blue Orbs and the Rusted Sword and Shield (the first four
-// relics) wait for the Hall of Fame and arrive at the next Pokémon Center.
-#define LEGENDARY_RELIC_CHAMPION_ONLY_COUNT 4
-
-static bool32 IsRelicHeldForChampion(u32 item)
+static bool32 OwnsLegendaryRelic(u32 relic)
 {
-    return item < LEGENDARY_RELIC_CHAMPION_ONLY_COUNT && !FlagGet(FLAG_IS_CHAMPION);
+    return CheckBagHasItem(sLegendaryRelicItems[relic], 1)
+        || CheckPCHasItem(sLegendaryRelicItems[relic], 1);
 }
 
-// callnative from the nurse; VAR_RESULT counts relics handed over this time.
-void RetryPendingLegendaryRelics(void)
+static bool32 GiveLegendaryRelicItem(u32 relic)
 {
-    u32 state = GetLegendaryRelicDeliveryState();
-    u32 delivered = 0;
-    for (u32 item = 0; item < ARRAY_COUNT(sLegendaryRelicItems); item++)
+    return OwnsLegendaryRelic(relic)
+        || AddBagItem(sLegendaryRelicItems[relic], 1)
+        || AddPCItem(sLegendaryRelicItems[relic], 1);
+}
+
+static bool32 IsRelicHeldForChampion(u32 relic)
+{
+    if (FlagGet(FLAG_IS_CHAMPION))
+        return FALSE;
+    for (u32 group = 0; group < ARRAY_COUNT(sLegendaryRelicGrants); group++)
     {
-        if ((state & (1u << item)) && !IsRelicHeldForChampion(item)
-         && GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
+        if (relic >= sLegendaryRelicGrants[group].firstItem
+         && relic < sLegendaryRelicGrants[group].firstItem + sLegendaryRelicGrants[group].itemCount)
+            return sLegendaryRelicGrants[group].championOnly;
+    }
+    return FALSE;
+}
+
+// A pending relic the player already owns counts as delivered, so no relic is
+// ever handed over twice. Returns the relics the nurse can hand over now.
+static u32 SettleLegendaryRelics(void)
+{
+    u32 pending = GetPendingLegendaryRelics();
+    u32 deliverable = 0;
+    for (u32 relic = 0; relic < ARRAY_COUNT(sLegendaryRelicItems); relic++)
+    {
+        if (!(pending & (1u << relic)))
+            continue;
+        if (OwnsLegendaryRelic(relic))
+            pending &= ~(1u << relic);
+        else if (!IsRelicHeldForChampion(relic))
+            deliverable |= 1u << relic;
+    }
+    SetLegendaryRelicState(pending, GetEarnedLegendaryRelicGrants());
+    return deliverable;
+}
+
+// callnative from the nurse after a heal; VAR_RESULT = relics to hand over.
+void CountDeliverableLegendaryRelics(void)
+{
+    u32 deliverable = SettleLegendaryRelics();
+    u32 count = 0;
+    for (; deliverable != 0; deliverable &= deliverable - 1)
+        count++;
+    gSpecialVar_Result = count;
+}
+
+// callnative from the nurse; VAR_RESULT = the next relic, which the script
+// hands over by name (ITEM_NONE when none is left). It stays pending until
+// the player owns it, so a full Bag only postpones it.
+void BufferNextLegendaryRelic(void)
+{
+    u32 deliverable = SettleLegendaryRelics();
+    gSpecialVar_Result = ITEM_NONE;
+    for (u32 relic = 0; relic < ARRAY_COUNT(sLegendaryRelicItems); relic++)
+    {
+        if (deliverable & (1u << relic))
         {
-            state &= ~(1u << item);
-            delivered++;
+            gSpecialVar_Result = sLegendaryRelicItems[relic];
+            return;
         }
     }
-    SetLegendaryRelicDeliveryState(state);
-    gSpecialVar_Result = delivered;
 }
+
+// Relics the most recent grant put aside for the Hall of Fame.
+static EWRAM_DATA u16 sRelicsHeldOnCatchSpecies = SPECIES_NONE;
+static EWRAM_DATA u32 sRelicsHeldOnCatch = 0;
 
 static void GiveLegendaryRelicsForSpecies(enum Species species)
 {
-    u32 state = GetLegendaryRelicDeliveryState();
+    u32 pending = GetPendingLegendaryRelics();
+    u32 earned = GetEarnedLegendaryRelicGrants();
+
+    sRelicsHeldOnCatchSpecies = species;
+    sRelicsHeldOnCatch = 0;
     for (u32 group = 0; group < ARRAY_COUNT(sLegendaryRelicGrants); group++)
     {
-        u32 earned = 1u << (LEGENDARY_RELIC_EARNED_SHIFT + group);
-        if (sLegendaryRelicGrants[group].species != species || (state & earned))
+        if (sLegendaryRelicGrants[group].species != species || (earned & (1u << group)))
             continue;
-        state |= earned;
-        for (u32 item = sLegendaryRelicGrants[group].firstItem;
-             item < sLegendaryRelicGrants[group].firstItem + sLegendaryRelicGrants[group].itemCount;
-             item++)
+        earned |= 1u << group;
+        for (u32 relic = sLegendaryRelicGrants[group].firstItem;
+             relic < sLegendaryRelicGrants[group].firstItem + sLegendaryRelicGrants[group].itemCount;
+             relic++)
         {
             // A relic held for the Hall of Fame, or a real acquisition with
             // failed insertion, becomes debt the nurse pays later.
-            if (IsRelicHeldForChampion(item) || !GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
-                state |= 1u << item;
+            if (IsRelicHeldForChampion(relic))
+            {
+                pending |= 1u << relic;
+                sRelicsHeldOnCatch |= 1u << relic;
+            }
+            else if (!GiveLegendaryRelicItem(relic))
+            {
+                pending |= 1u << relic;
+            }
         }
-        SetLegendaryRelicDeliveryState(state);
+        SetLegendaryRelicState(pending, earned);
         return;
     }
+}
+
+// For the catch message: names the relics this catch put aside for the Hall
+// of Fame ("The Blue Orb", "The N-Solarizer and the N-Lunarizer").
+bool32 BufferLegendaryRelicsHeldOnCatch(enum Species species, u8 *dest)
+{
+    u32 held = sRelicsHeldOnCatch;
+    bool32 first = TRUE;
+
+    sRelicsHeldOnCatch = 0;
+    if (held == 0 || sRelicsHeldOnCatchSpecies != GET_BASE_SPECIES_ID(SanitizeSpeciesId(species)))
+        return FALSE;
+    *dest = EOS;
+    for (u32 relic = 0; relic < ARRAY_COUNT(sLegendaryRelicItems); relic++)
+    {
+        if (!(held & (1u << relic)))
+            continue;
+        dest = StringAppend(dest, first ? COMPOUND_STRING("The ") : COMPOUND_STRING(" and the "));
+        dest = StringAppend(dest, GetItemName(sLegendaryRelicItems[relic]));
+        first = FALSE;
+    }
+    return TRUE;
 }
 
 void MarkLegendarySignCaughtBySpecies(enum Species species)
@@ -520,9 +620,10 @@ void MarkLegendarySignCaughtBySpecies(enum Species species)
     u16 objectFlag;
 
     // Form-defining relics are earned with their Pokémon, never synthesized
-    // by the free held-item vendor or a tutor preset.  This call is
-    // earned once and persists any undelivered items, including Groudon/Kyogre, whose
-    // canonical Emerald encounters are not Legendary Sign rows.
+    // by the free held-item vendor, the form-item counter or a tutor preset.
+    // Each grant is earned once and persists any undelivered items, including
+    // Groudon/Kyogre, whose canonical Emerald encounters are not Legendary
+    // Sign rows.
     GiveLegendaryRelicsForSpecies(GET_BASE_SPECIES_ID(species));
 
     if (signId >= LEGENDARY_SIGN_COUNT)

@@ -25,6 +25,7 @@ enum EmeraldChampionsAgentPrepResult
     EC_AGENT_PREP_BAD_ABILITY,
     EC_AGENT_PREP_BAD_ITEM,
     EC_AGENT_PREP_BAD_EVS,
+    EC_AGENT_PREP_RESTRICTED_PARTY, // a second Legendary/Mythical, Ultra Beast or Paradox
 };
 
 extern volatile u32 gEcAgentPrepCommand;

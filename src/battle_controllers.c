@@ -29,6 +29,7 @@
 #include "sound.h"
 #include "task.h"
 #include "test_runner.h"
+#include "emerald_champions_agent_battle.h"
 #include "text.h"
 #include "trainer.h"
 #include "util.h"
@@ -2593,6 +2594,7 @@ void BtlController_HandleHealthBarUpdate(enum BattlerId battler)
     {
         SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, curHP, hpVal);
         TestRunner_Battle_RecordHP(battler, curHP, min(maxHP, max(0, curHP - hpVal)));
+        EmeraldChampionsAgentBattleHp(battler, curHP, min(maxHP, max(0, curHP - hpVal)));
     }
     else
     {
@@ -2604,6 +2606,7 @@ void BtlController_HandleHealthBarUpdate(enum BattlerId battler)
          || IsControllerWally(battler))
             UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, 0, maxHP);
         TestRunner_Battle_RecordHP(battler, curHP, 0);
+        EmeraldChampionsAgentBattleHp(battler, curHP, 0);
     }
 
     gBattlerControllerFuncs[battler] = Controller_WaitForHealthBar;

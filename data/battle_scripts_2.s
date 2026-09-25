@@ -209,6 +209,10 @@ BattleScript_TryNicknameCaughtMon::
 BattleScript_GiveCaughtMonEnd::
 	givecaughtmon BattleScript_SuccessBallThrowEnd
 BattleScript_SuccessBallThrowEnd::
+	jumpifnolegendaryrelicwaits BattleScript_SuccessBallThrowOutcome
+	printstring STRINGID_LEGENDARYRELICWAITS
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_SuccessBallThrowOutcome:
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 

@@ -18,6 +18,7 @@
 #include "caps.h" // GetCurrentLevelCap for the observation view
 #include "difficulty.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "main.h"
 #include "load_save.h"
 #include "pokemon.h"
@@ -51,6 +52,9 @@ EWRAM_DATA volatile u32 gEcAgentBattleTarget[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleMega[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleSwitchSlot[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleView[EC_AGENT_BATTLE_VIEW_WORDS] = {0};
+EWRAM_DATA volatile u8 gEcAgentBattleLog[EC_AGENT_BATTLE_LOG_BYTES] = {0};
+EWRAM_DATA volatile u32 gEcAgentBattleMapWeather = 0;
+EWRAM_DATA volatile u32 gEcAgentBattleEnvironment = 0;
 
 static EWRAM_DATA bool8 sBridgeArmed = FALSE;
 static EWRAM_DATA bool8 sBattleSeen = FALSE;
@@ -82,6 +86,14 @@ static EWRAM_DATA u8 sFinalOutcome = 0;
 // The field the battle actually opened with, before any move could change it.
 static EWRAM_DATA u8 sOpeningTerrain = 0;
 static EWRAM_DATA u16 sOpeningWeather = 0;
+// Bytes ever appended to gEcAgentBattleLog; the host reads by this cursor.
+static EWRAM_DATA u32 sLogHead = 0;
+// The trainer's map weather stands in for the headless room's own sky while
+// the battle runs; the room's values go back once the outcome is known.
+static EWRAM_DATA bool8 sMapWeatherApplied = FALSE;
+static EWRAM_DATA bool8 sRoomWeatherHeld = FALSE;
+static EWRAM_DATA u8 sRoomWeather = 0;
+static EWRAM_DATA u8 sRoomNextWeather = 0;
 
 #define NO_PENDING_SWITCH 0xFF
 
@@ -108,6 +120,11 @@ void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
     sFinalOutcome = 0;
     sOpeningTerrain = 0;
     sOpeningWeather = 0;
+    sLogHead = 0;
+    sMapWeatherApplied = FALSE;
+    sRoomWeatherHeld = FALSE;
+    gEcAgentBattleMapWeather = 0;
+    gEcAgentBattleEnvironment = 0;
     gEcAgentBattlePhase = EC_AGENT_BATTLE_PHASE_IDLE;
     gEcAgentBattleSerial = 0;
     gEcAgentBattleNeedMask = 0;
@@ -288,10 +305,58 @@ void EmeraldChampionsAgentBattleChoosePokemon(enum BattlerId battler)
 
 // ---------------------------------------------------------------- message log
 
+static void LogAppend(u32 kind, const u8 *payload, u32 length)
+{
+    if (length > EC_AGENT_BATTLE_LOG_TEXT_MAX)
+        length = EC_AGENT_BATTLE_LOG_TEXT_MAX;
+    gEcAgentBattleLog[sLogHead++ % EC_AGENT_BATTLE_LOG_BYTES] = kind;
+    gEcAgentBattleLog[sLogHead++ % EC_AGENT_BATTLE_LOG_BYTES] = length;
+    for (u32 i = 0; i < length; i++)
+        gEcAgentBattleLog[sLogHead++ % EC_AGENT_BATTLE_LOG_BYTES] = payload[i];
+}
+
+void EmeraldChampionsAgentBattleMoveUsed(u32 attacker, u32 target, u32 move)
+{
+    u8 record[4] = {attacker, target, move & 0xFF, move >> 8};
+
+    if (!sBridgeArmed || !gMain.inBattle)
+        return;
+    LogAppend(EC_AGENT_LOG_MOVE, record, sizeof(record));
+}
+
+// Every HP change passes through the health bar, residual damage and healing
+// included. The attacker, move and action are the engine's current ones.
+void EmeraldChampionsAgentBattleHp(u32 battler, u32 oldHp, u32 newHp)
+{
+    u8 record[9] = {battler, gBattlerAttacker, oldHp & 0xFF, oldHp >> 8, newHp & 0xFF, newHp >> 8,
+                    gCurrentMove & 0xFF, gCurrentMove >> 8, gCurrentActionFuncId};
+
+    if (!sBridgeArmed || !gMain.inBattle)
+        return;
+    LogAppend(EC_AGENT_LOG_HP, record, sizeof(record));
+}
+
+// Gen 9 berries, Life Orb-style items and many abilities announce themselves
+// only with a pop-up and no text, so the pop-ups are logged too.
+void EmeraldChampionsAgentBattlePopUp(u32 battler, bool32 isItem, u32 id)
+{
+    u8 record[4] = {battler, isItem ? 1 : 0, id & 0xFF, id >> 8};
+
+    if (!sBridgeArmed || !gMain.inBattle)
+        return;
+    LogAppend(EC_AGENT_LOG_POPUP, record, sizeof(record));
+}
+
 void EmeraldChampionsAgentBattleText(const u8 *text)
 {
     if (!sBridgeArmed || text == NULL || !gMain.inBattle)
         return;
+
+    u32 fullLength = 0;
+    while (fullLength < EC_AGENT_BATTLE_LOG_TEXT_MAX && text[fullLength] != EOS)
+        fullLength++;
+    if (fullLength != 0)
+        LogAppend(EC_AGENT_LOG_TEXT, text, fullLength);
 
     u32 entry = sMessageSerial % EC_AGENT_BATTLE_MSG_COUNT;
     u32 base = EC_AGENT_BATTLE_MSG_BASE + entry * EC_AGENT_BATTLE_MSG_SIZE;
@@ -389,14 +454,27 @@ static void WriteBattlers(void)
                 gEcAgentBattleView[base + i] = 0;
             continue;
         }
-        gEcAgentBattleView[base + 0] = mon->species;
+        // An opposing Illusion shows what the player sees: the disguise's
+        // species, types, ability and item, until the disguise breaks. The
+        // player's own Illusion reports the truth plus the disguise worn.
+        // Read the state directly: GetIllusionMonPtr would set it early.
+        struct Pokemon *disguise = (gBattleStruct != NULL
+                                    && gBattleStruct->illusion[battler].state == ILLUSION_ON)
+                                 ? gBattleStruct->illusion[battler].mon : NULL;
+        u32 disguiseSpecies = (disguise != NULL) ? GetMonData(disguise, MON_DATA_SPECIES) : SPECIES_NONE;
+        bool32 hideTruth = disguiseSpecies != SPECIES_NONE && GetBattlerSide(battler) != B_SIDE_PLAYER;
+
+        gEcAgentBattleView[base + 0] = hideTruth ? disguiseSpecies : mon->species;
         gEcAgentBattleView[base + 1] = mon->level;
         gEcAgentBattleView[base + 2] = mon->hp;
         gEcAgentBattleView[base + 3] = mon->maxHP;
         gEcAgentBattleView[base + 4] = mon->status1;
-        gEcAgentBattleView[base + 5] = mon->item;
-        gEcAgentBattleView[base + 6] = mon->ability;
-        gEcAgentBattleView[base + 7] = gBattlerPartyIndexes[battler];
+        gEcAgentBattleView[base + 5] = hideTruth ? GetMonData(disguise, MON_DATA_HELD_ITEM) : mon->item;
+        gEcAgentBattleView[base + 6] = hideTruth ? GetMonAbility(disguise) : mon->ability;
+        // Party index in the low byte; the disguise species (0 if none) above
+        // it, published only for the player's own battlers.
+        gEcAgentBattleView[base + 7] = gBattlerPartyIndexes[battler]
+                                     | ((hideTruth ? SPECIES_NONE : disguiseSpecies) << 8);
         gEcAgentBattleView[base + 8] = (IsBattlerAlive(battler) ? 1 : 0)
                                      | ((gAbsentBattlerFlags & (1u << battler)) ? 2 : 0)
                                      | (GetBattlerSide(battler) == B_SIDE_PLAYER ? 4 : 0)
@@ -418,7 +496,12 @@ static void WriteBattlers(void)
                                       | (HasTrainerUsedGimmick(battler, GIMMICK_MEGA) ? 0x10000 : 0);
         gEcAgentBattleView[base + 26] = sLastAction[battler] | (sLastMovePos[battler] << 8)
                                       | (sLastTarget[battler] << 16);
-        gEcAgentBattleView[base + 27] = mon->types[0] | (mon->types[1] << 8) | (mon->types[2] << 16);
+        if (hideTruth)
+            gEcAgentBattleView[base + 27] = GetSpeciesType(disguiseSpecies, 0)
+                                          | (GetSpeciesType(disguiseSpecies, 1) << 8)
+                                          | (TYPE_MYSTERY << 16);
+        else
+            gEcAgentBattleView[base + 27] = mon->types[0] | (mon->types[1] << 8) | (mon->types[2] << 16);
     }
 }
 
@@ -544,11 +627,12 @@ static void WriteLegality(void)
     }
 }
 
-// What the battle setup actually asked for. The engine's only setup-side channel
-// for a field effect is the trainer's authored startingStatus, which battle_main
-// ORs into gStartingStatuses before the first turn; there is no map or Gym field
-// table. Reporting it lets a caller tell "the room authored nothing" apart from
-// "the driver dropped it".
+// What the trainer's own data asked for. Besides the overworld weather of the
+// map (gEcAgentBattleMapWeather, read by the engine at the opening), the only
+// setup-side channel for a field effect is the trainer's authored
+// startingStatus, which battle_main ORs into gStartingStatuses before the first
+// turn; there is no Gym field table. Reporting it lets a caller tell "the room
+// authored nothing" apart from "the driver dropped it".
 static u32 AuthoredFieldMask(u32 trainerId)
 {
     if (trainerId == TRAINER_NONE || trainerId >= TRAINERS_COUNT)
@@ -641,6 +725,14 @@ static void WriteView(void)
     }
     gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 2] = sOpeningTerrain;
     gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 3] = sOpeningWeather;
+    gEcAgentBattleView[EC_AGENT_BATTLE_LOG_HEAD_WORD] = sLogHead;
+    gEcAgentBattleView[EC_AGENT_BATTLE_LOG_SIZE_WORD] = EC_AGENT_BATTLE_LOG_BYTES;
+    // The requested map weather/environment (value + 1, 0 = the room's own)
+    // and whether the weather actually stood in for the room's sky.
+    gEcAgentBattleView[EC_AGENT_BATTLE_MAP_FIELD_WORD] = (gEcAgentBattleMapWeather & 0xFF)
+                                                     | ((gEcAgentBattleEnvironment & 0xFF) << 8)
+                                                     | (sMapWeatherApplied ? 0x10000 : 0)
+                                                     | (gBattleEnvironment << 24);
     gEcAgentBattleView[29] = gFieldTimers.terrain;
     gEcAgentBattleView[30] = gFieldTimers.terrainTimer;
     // Per-battler action-selection state, so the host knows which of its
@@ -686,7 +778,9 @@ static void StartRequestedBattle(void)
         gEcAgentBattleCommand = 0;
         return;
     }
-    if (CalculatePlayerPartyCount() < 2)
+    // OW_DOUBLE_APPROACH_WITH_ONE_MON: a one-Pokemon party still fights the
+    // authored doubles battle in play, with its second slot empty.
+    if (CalculatePlayerPartyCount() < 1)
     {
         gEcAgentBattleResult = EC_AGENT_BATTLE_BAD_PARTY;
         gEcAgentBattleCommand = 0;
@@ -752,6 +846,31 @@ void EmeraldChampionsAgentBattlePoll(void)
         WriteView();
         gEcAgentBattleHalted = (gEcAgentBattlePhase == EC_AGENT_BATTLE_PHASE_ENDED);
         return;
+    }
+    if (!sBattleSeen && gEcAgentBattleMapWeather != 0)
+    {
+        // The engine reads the overworld weather (GetCurrentWeather) when the
+        // opening field effects run, long after this first battle frame, and
+        // the overworld weather task is not running during the battle. This is
+        // the same value the trainer's map would have left there, so rain,
+        // sandstorm, drought, snow, thunderstorm terrain and fog's Misty
+        // Terrain all come from the engine's own B_OVERWORLD_* handling.
+        sRoomWeather = gWeatherPtr->currWeather;
+        sRoomNextWeather = gWeatherPtr->nextWeather;
+        gWeatherPtr->currWeather = gEcAgentBattleMapWeather - 1;
+        gWeatherPtr->nextWeather = gEcAgentBattleMapWeather - 1;
+        sMapWeatherApplied = TRUE;
+        sRoomWeatherHeld = TRUE;
+    }
+    // Battle init derives the environment from the headless room's floor
+    // tile, so the trainer's map environment is held in place for the battle.
+    if (gEcAgentBattleEnvironment != 0)
+        gBattleEnvironment = gEcAgentBattleEnvironment - 1;
+    if (sRoomWeatherHeld && gBattleOutcome != 0)
+    {
+        gWeatherPtr->currWeather = sRoomWeather;
+        gWeatherPtr->nextWeather = sRoomNextWeather;
+        sRoomWeatherHeld = FALSE;
     }
     sBattleSeen = TRUE;
     if (gEcAgentBattlePhase == EC_AGENT_BATTLE_PHASE_STARTING)
@@ -821,7 +940,11 @@ void EmeraldChampionsAgentBattlePoll(void)
                                ? gChosenMoveByBattler[battler] : MOVE_NONE;
         }
         sLastSelection[battler] = selection;
-        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+        // A disguised Illusion user stays unrevealed until the disguise breaks.
+        // The engine settles the state (ON or OFF) when the healthbox names the
+        // battler, so an unsettled switch-in frame reveals nothing yet.
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER
+         && gBattleStruct->illusion[battler].state == ILLUSION_OFF)
             sRevealed[GetBattlerTrainer(battler)] |= 1u << gBattlerPartyIndexes[battler];
     }
     WriteView();

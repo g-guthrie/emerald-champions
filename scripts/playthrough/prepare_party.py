@@ -11,6 +11,24 @@ import tempfile
 from pathlib import Path
 
 KEEP = 0xffffffff
+# enum EmeraldChampionsAgentPrepResult (include/emerald_champions_agent_prep.h),
+# as the reason a caller reports when the native preparation refuses a party.
+PREP_RESULTS = {
+    0: 'pending (the ROM never read the preparation command)',
+    2: 'bad command',
+    3: 'called during a battle',
+    4: 'bad party size (prepare one to six Pokemon)',
+    5: 'unknown species',
+    6: 'bad level (the level must be the campaign cap for that species)',
+    7: 'bad preset',
+    8: 'illegal move for this species',
+    9: 'bad nature',
+    10: 'ability not available to this species',
+    11: 'bad held item',
+    12: 'bad EV spread',
+    13: ('restricted party: the game allows one Legendary/Mythical, one Ultra Beast and one '
+         'Paradox Pokemon per party, and this is a second one of its class'),
+}
 
 
 def protocol(path, root):

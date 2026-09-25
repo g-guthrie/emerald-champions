@@ -1608,6 +1608,13 @@
 	.byte \equal
 	.endm
 
+	@ After a catch, buffers the relics it put aside for the Hall of Fame;
+	@ jumps when there are none.
+	.macro jumpifnolegendaryrelicwaits jumpInstr:req
+	callnative BS_JumpIfNoLegendaryRelicWaits
+	.4byte \jumpInstr
+	.endm
+
 	.macro jumpifnoally battler:req, jumpInstr:req
 	callnative BS_JumpIfNoAlly
 	.byte \battler

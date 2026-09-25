@@ -103,6 +103,12 @@ bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item)
     case ITEM_WELLSPRING_MASK:
     case ITEM_HEARTHFLAME_MASK:
     case ITEM_CORNERSTONE_MASK:
+    case ITEM_DNA_SPLICERS:
+    case ITEM_REINS_OF_UNITY:
+    case ITEM_N_SOLARIZER:
+    case ITEM_N_LUNARIZER:
+    case ITEM_PRISON_BOTTLE:
+    case ITEM_ZYGARDE_CUBE:
         return TRUE;
     default:
         return FALSE;

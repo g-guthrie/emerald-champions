@@ -77,6 +77,7 @@
 #include "data/battle_move_effects.h"
 #include "follower_npc.h"
 #include "load_save.h"
+#include "emerald_champions_agent_battle.h"
 #if EC_HEADLESS_FIXTURES
 #include "emerald_champions_headless.h"
 #endif
@@ -1035,6 +1036,7 @@ static void Cmd_printattackstring(void)
         return;
 
     PrepareStringBattle(STRINGID_USEDMOVE, gBattlerAttacker);
+    EmeraldChampionsAgentBattleMoveUsed(gBattlerAttacker, gBattlerTarget, gCurrentMove);
     gBattleCommunication[MSG_DISPLAY] = MSG_DISPLAY_CONTINUE;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -10347,6 +10349,17 @@ void BS_JumpIfHoldEffect(void)
             gLastUsedItem = gBattleMons[battler].item; // For B_LAST_USED_ITEM
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
+
+// A legend caught before the Hall of Fame names the relic that will wait
+// for the player at a Pokémon Center (legendary_signs.c).
+void BS_JumpIfNoLegendaryRelicWaits(void)
+{
+    NATIVE_ARGS(const u8 *jumpInstr);
+    if (BufferLegendaryRelicsHeldOnCatch(gBattleResults.caughtMonSpecies, gStringVar1))
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    else
+        gBattlescriptCurrInstr = cmd->jumpInstr;
 }
 
 void BS_JumpIfNoAlly(void)

@@ -2132,41 +2132,175 @@ TEST("Emerald Champions rejects invalid preset requests without changing held it
     }
 }
 
-TEST("Emerald Champions: a legend's relic waits for the Hall of Fame, then the next Center heal")
+// Catching sign-row legends sets caught bits and hide flags; tests that do
+// so restore every event flag and var afterwards.
+static EWRAM_DATA u8 sSavedRelicTestFlags[NUM_FLAG_BYTES];
+static EWRAM_DATA u16 sSavedRelicTestVars[VARS_COUNT];
+
+static void SaveRelicTestEventState(void)
 {
-    bool32 champion = FlagGet(FLAG_IS_CHAMPION);
-    FlagClear(FLAG_IS_CHAMPION);
-    ClearBag();
+    memcpy(sSavedRelicTestFlags, gSaveBlock1Ptr->flags, sizeof(sSavedRelicTestFlags));
+    memcpy(sSavedRelicTestVars, gSaveBlock1Ptr->vars, sizeof(sSavedRelicTestVars));
+}
+
+static void RestoreRelicTestEventState(void)
+{
+    memcpy(gSaveBlock1Ptr->flags, sSavedRelicTestFlags, sizeof(sSavedRelicTestFlags));
+    memcpy(gSaveBlock1Ptr->vars, sSavedRelicTestVars, sizeof(sSavedRelicTestVars));
+}
+
+static void ResetLegendaryRelicState(void)
+{
     VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
     VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_2, 0);
+}
+
+// Runs the nurse's hand-over the way data/scripts/pkmn_center_nurse.inc does:
+// one named giveitem per relic until none is left or the Bag refuses one.
+static u32 HandOverLegendaryRelics(enum Item *given, u32 capacity)
+{
+    u32 count = 0;
+    for (;;)
+    {
+        BufferNextLegendaryRelic();
+        enum Item item = gSpecialVar_Result;
+        if (item == ITEM_NONE || !AddBagItem(item, 1))
+            return count;
+        if (count < capacity)
+            given[count] = item;
+        count++;
+    }
+}
+
+TEST("Emerald Champions: a legend's relic waits for the Hall of Fame, then the next Center heal")
+{
+    u8 message[64];
+    enum Item given[4];
+    SaveRelicTestEventState();
+    FlagClear(FLAG_IS_CHAMPION);
+    ClearBag();
+    ResetLegendaryRelicState();
 
     MarkLegendarySignCaughtBySpecies(SPECIES_KYOGRE);
     EXPECT(!CheckBagHasItem(ITEM_BLUE_ORB, 1));
-    RetryPendingLegendaryRelics();
+    // The catch names the relic it put aside.
+    EXPECT(BufferLegendaryRelicsHeldOnCatch(SPECIES_KYOGRE, message));
+    EXPECT_EQ(StringCompare(message, COMPOUND_STRING("The Blue Orb")), 0);
+    EXPECT(!BufferLegendaryRelicsHeldOnCatch(SPECIES_KYOGRE, message));
+    CountDeliverableLegendaryRelics();
     EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 0);
     EXPECT(!CheckBagHasItem(ITEM_BLUE_ORB, 1));
 
     FlagSet(FLAG_IS_CHAMPION);
-    RetryPendingLegendaryRelics();
+    CountDeliverableLegendaryRelics();
     EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 1);
+    EXPECT_EQ(given[0], ITEM_BLUE_ORB);
     EXPECT(CheckBagHasItem(ITEM_BLUE_ORB, 1));
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+
+    // A catch after the Hall of Fame hands its relic over at once, silently.
+    MarkLegendarySignCaughtBySpecies(SPECIES_GROUDON);
+    EXPECT(CheckBagHasItem(ITEM_RED_ORB, 1));
+    EXPECT(!BufferLegendaryRelicsHeldOnCatch(SPECIES_GROUDON, message));
 
     ClearBag();
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
-    if (!champion)
-        FlagClear(FLAG_IS_CHAMPION);
+    RestoreRelicTestEventState();
 }
 
-TEST("Emerald Champions pending relics survive full stores and never replay discarded rewards")
+TEST("Emerald Champions: fusion and unbinding tools are relics that wait for the Hall of Fame")
+{
+    static const enum Item formCounterStock[] =
+    {
+#include "../src/data/emerald_champions_form_items.h"
+    };
+    static const struct { enum Species caught; enum Item tools[2]; const u8 *message; } legends[] =
+    {
+        {SPECIES_KYUREM, {ITEM_DNA_SPLICERS}, COMPOUND_STRING("The DNA Splicers")},
+        {SPECIES_CALYREX, {ITEM_REINS_OF_UNITY}, COMPOUND_STRING("The Reins of Unity")},
+        {SPECIES_NECROZMA, {ITEM_N_SOLARIZER, ITEM_N_LUNARIZER}, COMPOUND_STRING("The N-Solarizer and the N-Lunarizer")},
+        {SPECIES_HOOPA, {ITEM_PRISON_BOTTLE}, COMPOUND_STRING("The Prison Bottle")},
+        {SPECIES_ZYGARDE, {ITEM_ZYGARDE_CUBE}, COMPOUND_STRING("The Zygarde Cube")},
+    };
+    u8 message[64];
+    enum Item given[8];
+    u32 toolCount = 0;
+
+    // No shop hands them out for free before the legend is caught.
+    for (u32 l = 0; l < ARRAY_COUNT(legends); l++)
+    {
+        for (u32 t = 0; t < ARRAY_COUNT(legends[l].tools) && legends[l].tools[t] != ITEM_NONE; t++)
+        {
+            for (u32 i = 0; i < ARRAY_COUNT(formCounterStock); i++)
+                EXPECT_NE(formCounterStock[i], legends[l].tools[t]);
+            EXPECT(!IsEmeraldChampionsFreeCatalogueItem(legends[l].tools[t]));
+            EXPECT(IsEmeraldChampionsProtectedProgressionItem(legends[l].tools[t]));
+        }
+    }
+
+    SaveRelicTestEventState();
+    FlagClear(FLAG_IS_CHAMPION);
+    ClearBag();
+    ResetLegendaryRelicState();
+    for (u32 l = 0; l < ARRAY_COUNT(legends); l++)
+    {
+        // Caught in any form, the legend earns its base form's tools.
+        MarkLegendarySignCaughtBySpecies(legends[l].caught);
+        EXPECT(BufferLegendaryRelicsHeldOnCatch(legends[l].caught, message));
+        EXPECT_EQ(StringCompare(message, legends[l].message), 0);
+        for (u32 t = 0; t < ARRAY_COUNT(legends[l].tools) && legends[l].tools[t] != ITEM_NONE; t++, toolCount++)
+        {
+            EXPECT(!CheckBagHasItem(legends[l].tools[t], 1));
+            EXPECT(!CheckPCHasItem(legends[l].tools[t], 1));
+        }
+    }
+    // Pending relics 24-29 and earned grants 6-10 live in the third var;
+    // the Orb, Plate and Mask bits in the first two are untouched.
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_2), 0x1F3F);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 0);
+
+    FlagSet(FLAG_IS_CHAMPION);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, toolCount);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), toolCount);
+    EXPECT_EQ(given[0], ITEM_DNA_SPLICERS);
+    EXPECT_EQ(given[1], ITEM_REINS_OF_UNITY);
+    EXPECT_EQ(given[2], ITEM_N_SOLARIZER);
+    EXPECT_EQ(given[3], ITEM_N_LUNARIZER);
+    EXPECT_EQ(given[4], ITEM_PRISON_BOTTLE);
+    EXPECT_EQ(given[5], ITEM_ZYGARDE_CUBE);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_2), 0x1F00);
+
+    // Each grant is earned once: another catch never repeats a tool.
+    ClearBag();
+    MarkLegendarySignCaughtBySpecies(SPECIES_KYUREM_BLACK);
+    MarkLegendarySignCaughtBySpecies(SPECIES_NECROZMA_DAWN_WINGS);
+    EXPECT(!BufferLegendaryRelicsHeldOnCatch(SPECIES_NECROZMA, message));
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT(!CheckBagHasItem(ITEM_DNA_SPLICERS, 1));
+    EXPECT(!CheckBagHasItem(ITEM_N_SOLARIZER, 1));
+
+    ClearBag();
+    RestoreRelicTestEventState();
+}
+
+TEST("Emerald Champions pending relics survive a full Bag and never replay discarded rewards")
 {
     // Delivery mechanics after the Hall of Fame, when the relics are released.
-    bool32 champion = FlagGet(FLAG_IS_CHAMPION);
+    enum Item given[2];
+    SaveRelicTestEventState();
     FlagSet(FLAG_IS_CHAMPION);
     ClearBag();
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    ResetLegendaryRelicState();
     struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_RED_ORB)];
     for (u32 slot = 0; slot < pocket->capacity; slot++)
         BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_SOFT_SAND, 1);
@@ -2178,38 +2312,51 @@ TEST("Emerald Champions pending relics survive full stores and never replay disc
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x100);
     EXPECT(!CheckBagHasItem(ITEM_RED_ORB, 1));
     EXPECT(!CheckPCHasItem(ITEM_RED_ORB, 1));
-    RetryPendingLegendaryRelics();
+
+    // The nurse names it, but a full Bag keeps it pending for the next heal.
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 0);
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 1);
 
-    RemovePCItem(0, 1);
-    RetryPendingLegendaryRelics();
-    EXPECT(CheckPCHasItem(ITEM_RED_ORB, 1));
+    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 1);
+    EXPECT_EQ(given[0], ITEM_RED_ORB);
+    EXPECT(CheckBagHasItem(ITEM_RED_ORB, 1));
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
-    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
-    {
-        if (gSaveBlock1Ptr->pcItems[slot].itemId == ITEM_RED_ORB)
-        {
-            RemovePCItem(slot, 1);
-            break;
-        }
-    }
+
+    // Discarded, it is not handed over again, even after another catch.
+    EXPECT(RemoveBagItem(ITEM_RED_ORB, 1));
     MarkLegendarySignCaughtBySpecies(SPECIES_GROUDON);
-    RetryPendingLegendaryRelics();
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT(!CheckBagHasItem(ITEM_RED_ORB, 1));
     EXPECT(!CheckPCHasItem(ITEM_RED_ORB, 1));
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x100);
+
+    // A pending relic the player already holds settles without a second copy.
+    ResetLegendaryRelicState();
+    FlagClear(FLAG_IS_CHAMPION);
+    MarkLegendarySignCaughtBySpecies(SPECIES_GROUDON);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 1);
+    EXPECT(AddBagItem(ITEM_RED_ORB, 1));
+    FlagSet(FLAG_IS_CHAMPION);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RED_ORB), 1);
+
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
-    if (!champion)
-        FlagClear(FLAG_IS_CHAMPION);
+    RestoreRelicTestEventState();
 }
 
 TEST("Emerald Champions partial mask grants retry only their saved undelivered items")
 {
+    enum Item given[4];
     ClearBag();
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    ResetLegendaryRelicState();
     struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_WELLSPRING_MASK)];
     EXPECT_EQ(GetItemPocket(ITEM_HEARTHFLAME_MASK), pocket->id);
     EXPECT_EQ(GetItemPocket(ITEM_CORNERSTONE_MASK), pocket->id);
@@ -2221,25 +2368,25 @@ TEST("Emerald Champions partial mask grants retry only their saved undelivered i
     MarkLegendarySignCaughtBySpecies(SPECIES_OGERPON_TEAL);
     EXPECT(CheckBagHasItem(ITEM_WELLSPRING_MASK, 1));
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), (1u << 5) | (1u << 6));
-    u16 savedLow = VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0);
-    u16 savedHigh = VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, savedLow);
-    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, savedHigh);
+    // Masks are not held for the Hall of Fame, so the catch says nothing.
+    EXPECT(!BufferLegendaryRelicsHeldOnCatch(SPECIES_OGERPON_TEAL, (u8[64]){0}));
     EXPECT(RemoveBagItem(ITEM_WELLSPRING_MASK, 1));
-    RemovePCItem(0, 1);
-    RetryPendingLegendaryRelics();
-    EXPECT(CheckBagHasItem(ITEM_HEARTHFLAME_MASK, 1));
-    EXPECT(CheckPCHasItem(ITEM_CORNERSTONE_MASK, 1));
+    BagPocket_SetSlotItemIdAndCount(pocket, 1, ITEM_NONE, 0);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 2);
+    EXPECT_EQ(given[0], ITEM_HEARTHFLAME_MASK);
+    EXPECT_EQ(given[1], ITEM_CORNERSTONE_MASK);
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x1000);
     MarkLegendarySignCaughtBySpecies(SPECIES_OGERPON_TEAL);
-    RetryPendingLegendaryRelics();
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT(!CheckBagHasItem(ITEM_WELLSPRING_MASK, 1));
     EXPECT(!CheckPCHasItem(ITEM_WELLSPRING_MASK, 1));
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    ResetLegendaryRelicState();
 }
 
 TEST("Emerald Champions no-repetition evolutions work at cap and honor Everstone")

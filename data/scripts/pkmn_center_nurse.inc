@@ -102,8 +102,6 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_0x800B, Common_Movement_FaceDown
 	waitmovement 0
 	special HealPlayerParty
-	callnative RetryPendingLegendaryRelics
-	call_if_ne VAR_RESULT, 0, EventScript_PkmnCenterNurse_RelicsArrived
 	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
 	callnative UpdateFollowingPokemon
 	return
@@ -115,6 +113,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
+	call EventScript_PkmnCenterNurse_DeliverRelics
 	message gText_WeHopeToSeeYouAgain
 	return
 
@@ -123,6 +122,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn2::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
+	call EventScript_PkmnCenterNurse_DeliverRelics
 	message gText_WeHopeToSeeYouAgain2
 	return
 
@@ -133,6 +133,7 @@ EventScript_PkmnCenterNurse_CheckPokerus::
 	end
 
 EventScript_PkmnCenterNurse_ExplainPokerus::
+	call EventScript_PkmnCenterNurse_DeliverRelics
 	message gText_PokerusExplanation
 	setflag FLAG_POKERUS_EXPLAINED
 	return
@@ -233,16 +234,45 @@ Text_PkmnCenterNurse_Itemfinder:
 	.string "Your friend left a Dowsing Machine\n"
 	.string "for you after your Route 110 battle!$"
 
-@ Relics held for the Hall of Fame (the Red and Blue Orbs, the Rusted Sword
-@ and Shield) are handed over at the first heal after becoming Champion.
-EventScript_PkmnCenterNurse_RelicsArrived::
-	playfanfare MUS_OBTAIN_ITEM
+@ Relics a legend put aside for the Hall of Fame (legendary_signs.c) are
+@ handed over once the heal is done, before the farewell, each by name.
+@ One the Bag cannot take stays pending for the next heal.
+EventScript_PkmnCenterNurse_DeliverRelics::
+	callnative CountDeliverableLegendaryRelics
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_NopReturn
+	goto_if_unset FLAG_IS_CHAMPION, EventScript_PkmnCenterNurse_RelicWaiting
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_RelicArrived
 	msgbox EventScript_PkmnCenterNurse_Text_RelicsArrived, MSGBOX_DEFAULT
-	waitfanfare
+	goto EventScript_PkmnCenterNurse_GiveRelics
+
+EventScript_PkmnCenterNurse_RelicArrived:
+	msgbox EventScript_PkmnCenterNurse_Text_RelicArrived, MSGBOX_DEFAULT
+	goto EventScript_PkmnCenterNurse_GiveRelics
+
+@ Before the Hall of Fame only a relic the Bag and PC were too full to take
+@ at the catch can be waiting here.
+EventScript_PkmnCenterNurse_RelicWaiting:
+	msgbox EventScript_PkmnCenterNurse_Text_RelicWaiting, MSGBOX_DEFAULT
+EventScript_PkmnCenterNurse_GiveRelics:
+	callnative BufferNextLegendaryRelic
+	goto_if_eq VAR_RESULT, ITEM_NONE, Common_EventScript_NopReturn
+	giveitem VAR_RESULT
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_GiveRelics
+	msgbox EventScript_PkmnCenterNurse_Text_KeepRelic, MSGBOX_DEFAULT
 	return
 
-EventScript_PkmnCenterNurse_Text_RelicsArrived:
+EventScript_PkmnCenterNurse_Text_RelicArrived:
 	.string "Oh! This was left here for you,\n"
-	.string "Champion. It's humming with power…\p"
-	.string "Your Legendary Pokémon's relic is\n"
-	.string "now in your Bag.$"
+	.string "Champion. It's humming with power…$"
+
+EventScript_PkmnCenterNurse_Text_RelicsArrived:
+	.string "Oh! These were left here for you,\n"
+	.string "Champion. They're humming with power…$"
+
+EventScript_PkmnCenterNurse_Text_RelicWaiting:
+	.string "Oh! We've been keeping something\n"
+	.string "safe for you. Here you are!$"
+
+EventScript_PkmnCenterNurse_Text_KeepRelic:
+	.string "Oh, your Bag is full! I'll keep it\n"
+	.string "safe until your next visit.$"

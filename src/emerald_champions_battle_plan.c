@@ -44,7 +44,7 @@ bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
 {
     // A legend's trump form is the final act's: the player's Rayquaza keeps
     // Dragon Ascent but Mega Evolves only after the Hall of Fame, like the
-    // orbs and Rusted weapons (legendary_signs.c).
+    // Orbs, Rusted weapons and fusion tools (legendary_signs.c).
     if (!TESTING && GetBattlerSide(battler) == B_SIDE_PLAYER
      && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_RAYQUAZA
      && !FlagGet(FLAG_IS_CHAMPION))
