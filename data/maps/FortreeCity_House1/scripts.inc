@@ -98,7 +98,7 @@ FortreeCity_House1_Text_SkittySoMuchCuterThanImagined: @ 826520E
 	.string "Giggle!\n"
 	.string "Skitty is so much cuter than I\l"
 	.string "imagined. I'm delighted!\p"
-	.string "I hope NULL is doing well with you!$"
+	.string "I hope Null is doing well with you!$"
 
 FortreeCity_House1_Text_Zigzagoon: @ 8216597
 	.string "Zigzagoon: Gumomoh?$"

@@ -1,7 +1,7 @@
 gText_PkmnTransferredSomeonesPC::
 	.string "{STR_VAR_2} was transferred to\n"
 	.string "Someone's PC.\p"
-	.string "It was placed in \n"
+	.string "It was placed in\n"
 	.string "Box “{STR_VAR_1}.”$"
 
 gText_PkmnTransferredLanettesPC::
@@ -11,7 +11,7 @@ gText_PkmnTransferredLanettesPC::
 #else
 	.string "Lanette's PC.\p"
 #endif
-	.string "It was placed in \n"
+	.string "It was placed in\n"
 	.string "Box “{STR_VAR_1}.”$"
 
 gText_PkmnTransferredSomeonesPCBoxFull::
@@ -33,7 +33,7 @@ gText_PkmnTransferredLanettesPCBoxFull::
 gText_PkmnSentToPCAfterCatch::
 	.string "{STR_VAR_2} was sent to\n"
 	.string "{B_PC_CREATOR_NAME} PC.\p"
-	.string "It was placed in \n"
+	.string "It was placed in\n"
 	.string "Box “{STR_VAR_1}”.$"
 
 gText_PlayerObtainedTheMon::

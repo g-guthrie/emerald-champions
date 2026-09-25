@@ -182,7 +182,7 @@ Rotom_Text_RotomWouldLikeToInvestigate:
     .string "Oh?\p"
     .string "Rotom would like to investigate the\n"
     .string "motors of the electrical appliances…\l"
-    .string "Is that OK?$"
+    .string "Is that okay?$"
 
 Rotom_Text_NicknameReluctantlyGaveUp:
     .string "{STR_VAR_1} reluctantly gave up on\n"

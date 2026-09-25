@@ -394,7 +394,7 @@ LilycoveCity_ContestHall_Text_StillLoveSmartnessContests: @ 821BD70
 	.string "It's so… So… Cool.$"
 
 LilycoveCity_ContestHall_Text_AreYouEnteringBeautyContest: @ 821BDDD
-	.string "MC: Are you entering the BEAUTY\n"
+	.string "MC: Are you entering the Beauty\n"
 	.string "Contest, too? Good luck!$"
 
 LilycoveCity_ContestHall_Text_EveryPokemonPristineBeauty: @ 821BE16
@@ -430,7 +430,7 @@ LilycoveCity_ContestHall_Text_PokemonLooksLikeYoungerMe: @ 821BFE3
 	.string "Did I say something funny?$"
 
 LilycoveCity_ContestHall_Text_WinBeautyContestMakesMeHappy: @ 821C07F
-	.string "You know, if I win at a BEAUTY\n"
+	.string "You know, if I win at a Beauty\n"
 	.string "Contest, sure it makes me\l"
 	.string "happy. More than usual, anyway.$"
 
@@ -476,7 +476,7 @@ LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter: @ 821C365
 	.string "Everyone's Pokémon are very cute.\p"
 	.string "However, if my Pokémon were to make\n"
 	.string "a cute appeal…\p"
-	.string "I'm sure that it would be so much \n"
+	.string "I'm sure that it would be so much\n"
 	.string "cuter than the others.$"
 
 LilycoveCity_ContestHall_Text_MyChildIsInContest: @ 821C3F4
@@ -498,14 +498,14 @@ LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn: @ 821C4B1
 	.string "I'm going to go catch some!$"
 
 LilycoveCity_ContestHall_Text_BeautyContestStage: @ 821C512
-	.string "BEAUTY Contest STAGE\n"
-	.string "BE ALLURED BY BEAUTIFUL POKéMON!$"
+	.string "Beauty Contest Stage\n"
+	.string "Be Allured by Beautiful Pokémon!$"
 
 LilycoveCity_ContestHall_Text_CuteContestStage: @ 821C548
-	.string "CUTENESS Contest STAGE\n"
-	.string "BE CHARMED BY CUTE POKéMON!$"
+	.string "Cuteness Contest Stage\n"
+	.string "Be Charmed by Cute Pokémon!$"
 
 LilycoveCity_ContestHall_Text_SmartContestStage: @ 821C57B
-	.string "Smartness Contest STAGE\n"
-	.string "BE IMPRESSED BY SMART POKéMON!$"
+	.string "Smartness Contest Stage\n"
+	.string "Be Impressed by Smart Pokémon!$"
 

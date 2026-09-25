@@ -57,7 +57,7 @@ BattleFrontier_Mart_Text_ChaperonGrandson: @ 8267B29
 BattleFrontier_Mart_Text_ProteinMakeNiceGift: @ 8267B8F
 	.string "Dear, what do you think of this?\n"
 	.string "Wouldn't this make a nice gift?\p"
-	.string "It's…PRO…TE…IN?\n"
+	.string "It's…Pro…Te…In?\n"
 	.string "It sounds delicious, doesn't it?$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems: @ 8267C01

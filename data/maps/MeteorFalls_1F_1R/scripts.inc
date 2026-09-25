@@ -500,7 +500,7 @@ MeteorFalls_1F_1R_Text_ChooseMons:
 
 MeteorFalls_1F_1R_Text_CancelMultiBattle:
 	.string "Oh, you've got to get ready first?\n"
-	.string "OK, but please hurry!$"
+	.string "Okay, but please hurry!$"
 
 MeteorFalls_1F_1R_Text_WithThisMeteorite: @ 822BF47
 	.string "Ahahaha!\p"

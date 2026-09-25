@@ -35,7 +35,7 @@ gBirchDexRatingText_LessThan50::
 	.string "Keep up the effort.$"
 
 gBirchDexRatingText_LessThan60::
-	.string "Are you using any RODS?\n"
+	.string "Are you using any Rods?\n"
 	.string "There are many Pokémon in the sea.$"
 
 gBirchDexRatingText_LessThan70::
@@ -161,7 +161,7 @@ PokedexRating_Text_LessThan50::
 PokedexRating_Text_LessThan60::
 	.string "Ah, you've finally topped 50\n"
 	.string "species!\p"
-	.string "I've given one of my Aides an EXP.\n"
+	.string "I've given one of my Aides an Exp.\n"
 	.string "Share. Be sure to go get it!$"
 
 PokedexRating_Text_LessThan70::

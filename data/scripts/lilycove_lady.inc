@@ -588,7 +588,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_Pikachu:: @ 82A8A56
     end
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady: @ 82A8A69
-    .string "I'm the FAVOR LADY…$"
+    .string "I'm the Favor Lady…$"
 
 LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing: @ 82A8A7D
     .string "I've recently developed an obsession\n"
@@ -665,7 +665,7 @@ LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt: @ 82A8DBD
     .string "your Bag organized…$"
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady: @ 82A8E2B
-    .string "I'm the QUIZ LADY!\n"
+    .string "I'm the Quiz Lady!\n"
     .string "I love quizzes!$"
 
 LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz: @ 82A8E4E
@@ -781,7 +781,7 @@ LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase: @ 82A9451
     .string "Please, may I have one {POKEBLOCK}?\n"
     .string "All I'm asking for is one!\p"
     .string "…Oh, but…\n"
-    .string "Don't you have a {POKEBLOCK} CASE?\l"
+    .string "Don't you have a {POKEBLOCK} Case?\l"
     .string "That's no good. Next time, then!$"
 
 LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock: @ 82A94E8

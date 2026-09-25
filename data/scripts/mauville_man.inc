@@ -96,7 +96,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_TeachWord:: @ 828E1A4
 
 @ Trader
 MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor: @ 828E1B1
-	.string "Hi, I'm the TRADER.\n"
+	.string "Hi, I'm the Trader.\n"
 	.string "Want to trade decorations with me?$"
 
 MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues: @ 828E1E8
@@ -250,7 +250,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_NoRoomForDecor:: @ 828E5EC
 
 @ Storyteller
 MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale: @ 828E5F6
-	.string "I'm the STORYTELLER.\n"
+	.string "I'm the Storyteller.\n"
 	.string "I'll tell you tales of legendary\l"
 	.string "Trainers.\p"
 	.string "Will you hear my tale?$"
@@ -334,7 +334,7 @@ MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory:: @ 828EAA8
 	.string "This Trainer planted Berries\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} is a legendary lover of\n"
-	.string "BERRIES!$"
+	.string "Berries!$"
 
 MauvilleCity_PokemonCenter_1F_Text_BikeTradesTitle:: @ 828EB19
 	.string "The Bike-Loving Trainer$"
@@ -395,7 +395,7 @@ MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle:: @ 828EDA1
 	.string "The Fishing Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction:: @ 828EDB5
-	.string "Caught Pokémon with a ROD$"
+	.string "Caught Pokémon with a Rod$"
 
 MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory:: @ 828EDCF
 	.string "This is a tale of a Trainer\n"
@@ -409,15 +409,15 @@ MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle:: @ 828EE45
 	.string "The Egg-Warming Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction:: @ 828EE5D
-	.string "Hatched EGGS$"
+	.string "Hatched Eggs$"
 
 MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory:: @ 828EE6A
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
 	.string "This Trainer hatched {STR_VAR_1} Pokémon\n"
-	.string "from EGGS!\p"
+	.string "from Eggs!\p"
 	.string "{STR_VAR_3} is a legendary warmer\n"
-	.string "of EGGS!$"
+	.string "of Eggs!$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle:: @ 828EEDD
 	.string "The Evolver Trainer$"
@@ -462,7 +462,7 @@ MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory:: @ 828F071
 	.string "than {STR_VAR_3}!$"
 
 MauvilleCity_PokemonCenter_1F_Text_SafariGamesTitle:: @ 828F0F3
-	.string "The SAFARI-Loving Trainer$"
+	.string "The Safari-Loving Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_SafariGamesAction:: @ 828F10D
 	.string "Entered the Safari Zone$"
@@ -518,60 +518,60 @@ MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory:: @ 828F32A
 	.string "to move houses often!$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedSplashTitle:: @ 828F3AD
-	.string "The SPLASH-Happy Trainer$"
+	.string "The Splash-Happy Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedSplashAction:: @ 828F3C6
-	.string "Used SPLASH$"
+	.string "Used Splash$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory:: @ 828F3D2
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer used SPLASH\n"
+	.string "This Trainer used Splash\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} is a Trainer who must love\n"
-	.string "SPLASHING around!$"
+	.string "Splashing around!$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedStruggleTitle:: @ 828F44B
 	.string "The Tenacious Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedStruggleAction:: @ 828F461
-	.string "Resorted to using STRUGGLE$"
+	.string "Resorted to using Struggle$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory:: @ 828F47C
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer had to rely on STRUGGLE\n"
+	.string "This Trainer had to rely on Struggle\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} is a tenacious Trainer\n"
 	.string "who never gives in to adversity!$"
 
 MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsTitle:: @ 828F50C
-	.string "The SLOT Champ$"
+	.string "The Slot Champ$"
 
 MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsAction:: @ 828F51B
-	.string "Won the jackpot on the SLOTS$"
+	.string "Won the jackpot on the Slots$"
 
 MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory:: @ 828F538
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
 	.string "This Trainer won the jackpot on\n"
-	.string "the SLOTS {STR_VAR_1} times.\p"
+	.string "the Slots {STR_VAR_1} times.\p"
 	.string "{STR_VAR_3} is a Trainer who was lucky\n"
-	.string "on the SLOTS!$"
+	.string "on the Slots!$"
 
 MauvilleCity_PokemonCenter_1F_Text_RouletteWinsTitle:: @ 828F5BE
-	.string "The ROULETTE Champ$"
+	.string "The Roulette Champ$"
 
 MauvilleCity_PokemonCenter_1F_Text_RouletteWinsAction:: @ 828F5D1
-	.string "Had consecutive ROULETTE wins of$"
+	.string "Had consecutive Roulette wins of$"
 
 MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory:: @ 828F5F2
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer won in ROULETTE\n"
+	.string "This Trainer won in Roulette\n"
 	.string "{STR_VAR_1} times in a row.\p"
 	.string "{STR_VAR_3} was lucky when the ball\n"
-	.string "bounced in ROULETTE!$"
+	.string "bounced in Roulette!$"
 
 MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesTitle:: @ 828F678
 	.string "The Battle Tower Challenger$"
@@ -599,7 +599,7 @@ MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory:: @ 828F776
 	.string "This Trainer made {POKEBLOCK}S\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "There is none better at using a Berry\n"
-	.string "BLENDER than {STR_VAR_3}!$"
+	.string "Blender than {STR_VAR_3}!$"
 
 MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle:: @ 828F7F6
 	.string "The Contest-Loving Trainer$"
@@ -627,7 +627,7 @@ MauvilleCity_PokemonCenter_1F_Text_WonContestsStory:: @ 828F8BC
 	.string "This Trainer won Contests\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be an incredible\n"
-	.string "CONTEST master!$"
+	.string "Contest master!$"
 
 MauvilleCity_PokemonCenter_1F_Text_TimesShoppedTitle:: @ 828F92F
 	.string "The Happy Shopper$"
@@ -686,18 +686,18 @@ MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory:: @ 828FB47
 	.string "Pokémon in a Pokédex!$"
 
 MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle:: @ 828FBC4
-	.string "The RIBBON Collector$"
+	.string "The Ribbon Collector$"
 
 MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction:: @ 828FBD9
-	.string "Received RIBBONS$"
+	.string "Received Ribbons$"
 
 MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory:: @ 828FBEA
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer received RIBBONS\n"
+	.string "This Trainer received Ribbons\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a Trainer who\n"
-	.string "loves to collect RIBBONS!$"
+	.string "loves to collect Ribbons!$"
 
 MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle:: @ 828FC6B
 	.string "The Ledge-Jumping Trainer$"
@@ -741,15 +741,15 @@ MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory:: @ 828FDCE
 	.string "who's conscious of the time.$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle:: @ 828FE57
-	.string "The Pokémon LOTTERY Wizard$"
+	.string "The Pokémon Lottery Wizard$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction:: @ 828FE72
-	.string "Won Pokémon LOTTERIES$"
+	.string "Won Pokémon Lotteries$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory:: @ 828FE88
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer won Pokémon LOTTERIES\n"
+	.string "This Trainer won Pokémon Lotteries\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must have many friends\n"
 	.string "to trade Pokémon with!$"
@@ -864,7 +864,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_StorytellerEnd:: @ 829022D
 
 @ Giddy
 MauvilleCity_PokemonCenter_1F_Text_HearMyStory: @ 829022F
-	.string "I'm GIDDY!\n"
+	.string "I'm Giddy!\n"
 	.string "I have a scintillating story for you!\p"
 	.string "Would you like to hear my story?$"
 
@@ -934,7 +934,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_ToldEnoughTales:: @ 8290384
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong: @ 829038E
-	.string "Hi, I'm the BARD.\n"
+	.string "Hi, I'm the Bard.\n"
 	.string "Would you like to hear my song?$"
 
 MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1: @ 82903C0
@@ -970,7 +970,7 @@ MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile: @ 8290514
 	.string "I'll sing this song for a while.$"
 
 MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening: @ 829054C
-	.string "Hey, yo! They call me the HIPSTER.\n"
+	.string "Hey, yo! They call me the Hipster.\n"
 	.string "I'll teach you what's hip and happening.$"
 
 MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou: @ 8290598

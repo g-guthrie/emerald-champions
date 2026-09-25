@@ -432,7 +432,7 @@ PlayersHouse_1F_Text_LatiEmergencyNewsFlash: @ 81F826F
 	.string "We bring you this emergency\n"
 	.string "news flash!\p"
 	.string "In various Hoenn locales, there have\n"
-	.string "been reports of a BZZT…colored\l"
+	.string "been reports of a Bzzt…colored\l"
 	.string "Pokémon in flight.\p"
 	.string "The identity of this Pokémon is\n"
 	.string "currently unknown.\p"

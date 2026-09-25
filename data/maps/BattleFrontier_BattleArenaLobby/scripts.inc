@@ -115,8 +115,8 @@ BattleFrontier_BattleArenaLobby_EventScript_Attendant:: @ 8255DF4
 	end
 
 BattleFrontier_BattleArenaLobby_Text_Closed:
-	.string "The ARENA isn't operating.\n"
-	.string "Try the DOUBLE facilities.$"
+	.string "The Arena isn't operating.\n"
+	.string "Try the Double facilities.$"
 BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge:: @ 8255E0B
 	message BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge
 	waitmessage
@@ -364,14 +364,14 @@ BattleFrontier_BattleArenaLobby_EventScript_ExitRules:: @ 8256164
 
 BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge: @ 82561EA
 	.string "Now, do you wish to take\n"
-	.string "the BATTLE ARENA challenge?$"
+	.string "the Battle Arena challenge?$"
 
 BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge: @ 825621F
 	.string "We await your challenge on\n"
 	.string "another occasion!$"
 
 BattleFrontier_BattleArenaLobby_Text_ExplainChallenge: @ 825624C
-	.string "In the BATTLE ARENA, we undertake\n"
+	.string "In the Battle Arena, we undertake\n"
 	.string "the Set KO Tourney.\p"
 	.string "All participants enter with a team of\n"
 	.string "three Pokémon.\p"
@@ -392,11 +392,11 @@ BattleFrontier_BattleArenaLobby_Text_ExplainChallenge: @ 825624C
 	.string "we will present you with Battle Points.$"
 
 BattleFrontier_BattleArenaLobby_Text_OkayToSave: @ 82564CE
-	.string "Before showing you to the BATTLE\n"
-	.string "ARENA, you must save. Is that okay?$"
+	.string "Before showing you to the Battle\n"
+	.string "Arena, you must save. Is that okay?$"
 
 BattleFrontier_BattleArenaLobby_Text_WhichLevelMode: @ 8256513
-	.string "The BATTLE ARENA offers two levels\n"
+	.string "The Battle Arena offers two levels\n"
 	.string "of challenge, Level 50 and Open Level.\l"
 	.string "Which is your choice?$"
 
@@ -412,7 +412,7 @@ BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen: @ 82565A5
 	.string "different kinds of Pokémon.\p"
 	.string "They also must not hold the same\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1}.\p"
+	.string "Eggs{STR_VAR_1}.\p"
 	.string "When you have made your preparations,\n"
 	.string "please do return.$"
 
@@ -426,13 +426,13 @@ BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50: @ 82566A8
 	.string "must all be Level 50 or lower.\p"
 	.string "They also must not hold the same\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1}.\p"
+	.string "Eggs{STR_VAR_1}.\p"
 	.string "When you have made your preparations,\n"
 	.string "please do return.$"
 
 BattleFrontier_BattleArenaLobby_Text_GuideYouToArena: @ 82567E6
 	.string "I shall now guide you to\n"
-	.string "the BATTLE ARENA.$"
+	.string "the Battle Arena.$"
 
 BattleFrontier_BattleArenaLobby_Text_DidntSaveBeforeShuttingDown: @ 8256811
 	.string "My dear challenger!\p"
@@ -462,11 +462,11 @@ BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge2: @ 8256A74
 	.string "another occasion!$"
 
 BattleFrontier_BattleArenaLobby_Text_RecordLastMatch: @ 8256B19
-	.string "Shall I record your last BATTLE ARENA\n"
-	.string "match on your FRONTIER PASS?$"
+	.string "Shall I record your last Battle Arena\n"
+	.string "match on your Frontier Pass?$"
 
 BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack: @ 8256B5C
-	.string "I lost on the REFEREE's decision…\p"
+	.string "I lost on the Referee's decision…\p"
 	.string "I don't think it was a good idea to only\n"
 	.string "use defensive moves and not attack…$"
 
@@ -482,9 +482,9 @@ BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw: @ 8256C19
 	.string "the same amount of HP left.$"
 
 BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant: @ 8256C9A
-	.string "The ARENA is closed now, but I used\n"
+	.string "The Arena is closed now, but I used\n"
 	.string "to study team order there.\p"
-	.string "In DOUBLE battles, partners can\n"
+	.string "In Double battles, partners can\n"
 	.string "cover each other's weak points.\p"
 	.string "It's a different kind of plan!$"
 
@@ -498,7 +498,7 @@ BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules: @ 8256E02
 	.string "three turns.\p"
 	.string "If the outcome is not decided after\n"
 	.string "three turns, it goes to judging.\p"
-	.string "The REFEREE will choose the winner\n"
+	.string "The Referee will choose the winner\n"
 	.string "based on how the Pokémon battled.\p"
 	.string "Also, a Pokémon cannot be switched out\n"
 	.string "until its battle's outcome is decided.$"
@@ -524,9 +524,9 @@ BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules: @ 8256FF2
 	.string "effective” and goes down if it was\l"
 	.string "“not very effective.”\p"
 	.string "The Skill rating will not go up for\n"
-	.string "moves such as PROTECT and DETECT.\p"
-	.string "If the opponent used PROTECT or\n"
-	.string "DETECT, and your Pokémon failed to\l"
+	.string "moves such as Protect and Detect.\p"
+	.string "If the opponent used Protect or\n"
+	.string "Detect, and your Pokémon failed to\l"
 	.string "hit with a move, its Skill rating will not\l"
 	.string "go down.$"
 
@@ -539,8 +539,8 @@ BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules: @ 8257202
 	.string "battle, and what remained at the end.$"
 
 BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon: @ 82572D9
-	.string "A victory snatched from the ARENA\n"
-	.string "TYCOON, and a seven-Trainer sweep!\p"
+	.string "A victory snatched from the Arena\n"
+	.string "Tycoon, and a seven-Trainer sweep!\p"
 	.string "We congratulate you on your most\n"
 	.string "splendid challenge!$"
 

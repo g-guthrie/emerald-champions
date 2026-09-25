@@ -258,7 +258,7 @@ BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints: @ 8263CB0
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints: @ 8263CD0
 	.string "Scott: You can check your Battle\n"
-	.string "Points on your FRONTIER PASS.\p"
+	.string "Points on your Frontier Pass.\p"
 	.string "The more success you have here at\n"
 	.string "the Battle Frontier, the more Battle\l"
 	.string "Points you will collect.\p"
@@ -282,10 +282,10 @@ BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers: @ 8263DDD
 
 BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain: @ 8263F12
 	.string "Scott: Have you met any of\n"
-	.string "the FRONTIER BRAINS?\p"
+	.string "the Frontier Brains?\p"
 	.string "Better yet, have you obtained any\n"
 	.string "symbols from them?\p"
-	.string "I handpicked the FRONTIER BRAINS\n"
+	.string "I handpicked the Frontier Brains\n"
 	.string "as the toughest Trainers anywhere.\p"
 	.string "But I'm sure that seeing how tough\n"
 	.string "you are will startle even them!$"
@@ -305,7 +305,7 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols: @ 82640BC
 	.string "the Battle Frontier?\p"
 	.string "…Wait a second…\n"
 	.string "Oh!\p"
-	.string "Your FRONTIER PASS!\n"
+	.string "Your Frontier Pass!\n"
 	.string "You've collected the full set\l"
 	.string "of silver symbols!\p"
 	.string "That's more than impressive!\n"
@@ -320,7 +320,7 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols: @ 8264216
 	.string "everything in the Battle Frontier.\p"
 	.string "…Wait a second…\n"
 	.string "Oh, my disbelieving eyes!\p"
-	.string "Your FRONTIER PASS!\n"
+	.string "Your Frontier Pass!\n"
 	.string "You've gathered up the full set\l"
 	.string "of gold symbols!\p"
 	.string "That's more than stupendous!\n"

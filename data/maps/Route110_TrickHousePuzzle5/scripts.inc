@@ -938,14 +938,14 @@ Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1:
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "Which type normally ignores RAGE\n"
-	.string "POWDER when choosing a target?$"
+	.string "Which type normally ignores Rage\n"
+	.string "Powder when choosing a target?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3:
 	.string "MECHADOLL 1 QUIZ.\p"
 	.string "Which move normally hits both\n"
 	.string "opponents instead of being\l"
-	.string "redirected by FOLLOW ME?$"
+	.string "redirected by Follow Me?$"
 
 Route110_TrickHousePuzzle5_Text_CorrectGoThrough: @ 826D84D
 	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
@@ -970,21 +970,21 @@ Route110_TrickHousePuzzle5_Text_Mechadoll2Intro: @ 826D8EA
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "TRICK ROOM reverses Speed order\n"
+	.string "Trick Room reverses Speed order\n"
 	.string "within which boundary?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2:
 	.string "MECHADOLL 2 QUIZ.\p"
 	.string "When can a Pokémon normally use\n"
-	.string "FAKE OUT successfully?$"
+	.string "Fake Out successfully?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "TAUNT prevents the target from\n"
+	.string "Taunt prevents the target from\n"
 	.string "choosing which moves?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Intro:
-	.string "CLICKETY-CLACK... MECHADOLL 3 AM I!\p"
+	.string "CLICKETY-CLACK… MECHADOLL 3 AM I!\p"
 	.string "SUPPORT, STATUS, AND HELD ITEMS!\n"
 	.string "SMALL DETAILS, LARGE CONSEQUENCES!$"
 
@@ -1001,7 +1001,7 @@ Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2:
 Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3:
 	.string "MECHADOLL 3 QUIZ.\p"
 	.string "Which Pokémon can receive\n"
-	.string "EVIOLITE's defensive benefit?$"
+	.string "Eviolite's defensive benefit?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Intro: @ 826DB4C
 	.string "CLICKETY-CLACK…\n"
@@ -1010,18 +1010,18 @@ Route110_TrickHousePuzzle5_Text_Mechadoll4Intro: @ 826DB4C
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1:
 	.string "MECHADOLL 4 QUIZ.\p"
-	.string "Which held item can remove TAUNT\n"
+	.string "Which held item can remove Taunt\n"
 	.string "from its holder?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2:
 	.string "MECHADOLL 4 QUIZ.\p"
 	.string "Which Ability redirects\n"
-	.string "single-target WATER moves?$"
+	.string "single-target Water moves?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3:
 	.string "MECHADOLL 4 QUIZ.\p"
-	.string "Which opposing target does PSYCHIC\n"
-	.string "TERRAIN protect from FAKE OUT?$"
+	.string "Which opposing target does Psychic\n"
+	.string "Terrain protect from Fake Out?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Intro: @ 826DC78
 	.string "CLICKETY-CLACK…\n"
@@ -1031,7 +1031,7 @@ Route110_TrickHousePuzzle5_Text_Mechadoll5Intro: @ 826DC78
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1:
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "You switch out while TRICK ROOM is\n"
+	.string "You switch out while Trick Room is\n"
 	.string "active. What happens to the room's\l"
 	.string "timer?$"
 
@@ -1043,6 +1043,6 @@ Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2:
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3:
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "PRANKSTER-boosted TAUNT normally\n"
+	.string "Prankster-boosted Taunt normally\n"
 	.string "fails against an opposing Pokémon\l"
 	.string "of which type?$"

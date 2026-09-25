@@ -21,7 +21,7 @@ RustboroCity_CuttersHouse_EventScript_Lass:: @ 8215C0A
 	end
 
 RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse: @ 8215C13
-	.string "That determined expression...\n"
+	.string "That determined expression…\n"
 	.string "You look ready to learn how to\l"
 	.string "clear a path.\p"
 	.string "I authorize you to use Cut!$"

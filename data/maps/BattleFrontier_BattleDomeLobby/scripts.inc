@@ -127,8 +127,8 @@ BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendant:: @ 8249A35
 	end
 
 BattleFrontier_BattleDomeLobby_Text_SinglesClosed:
-	.string "The SINGLE tournament is closed.\n"
-	.string "The DOUBLE counter is open.$"
+	.string "The Single tournament is closed.\n"
+	.string "The Double counter is open.$"
 
 BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendant:: @ 8249A47
 	lock
@@ -451,21 +451,21 @@ BattleFrontier_BattleDomeLobby_EventScript_ExitRules:: @ 8249EB5
 BattleFrontier_BattleDomeLobby_Text_WelcomeSingleBattle: @ 8249EB7
 	.string "Where the strategies of Trainers\n"
 	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE DOME!\p"
-	.string "I am your guide to the SINGLE BATTLE\n"
+	.string "Welcome to the Battle Dome!\p"
+	.string "I am your guide to the Single Battle\n"
 	.string "Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_TakeSinglesChallenge: @ 8249F3A
 	.string "Would you like to challenge\n"
-	.string "the SINGLE BATTLE Tournament?$"
+	.string "the Single Battle Tournament?$"
 
 BattleFrontier_BattleDomeLobby_Text_HopeToSeeYouAgain: @ 8249F74
 	.string "We hope to see you again.$"
 
 BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge: @ 8249F8E
-	.string "The SINGLE BATTLE Tournament\n"
+	.string "The Single Battle Tournament\n"
 	.string "is exactly as the name suggests--\l"
-	.string "a tournament of SINGLE BATTLES.\p"
+	.string "a tournament of Single Battles.\p"
 	.string "All participating Trainers must\n"
 	.string "enter three Pokémon each.\p"
 	.string "In each battle, one of the three\n"
@@ -484,7 +484,7 @@ BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge: @ 8249F8E
 	.string "you will be disqualified.$"
 
 BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge: @ 824A1C6
-	.string "Before I show you to the BATTLE DOME,\n"
+	.string "Before I show you to the Battle Dome,\n"
 	.string "I must save the data. Is that okay?$"
 
 BattleFrontier_BattleDomeLobby_Text_WhichLevelMode: @ 824A210
@@ -501,7 +501,7 @@ BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen: @ 824A2AB
 	.string "You don't have three eligible Pokémon.\p"
 	.string "Also, the Pokémon must be holding\n"
 	.string "different kinds of items.\p"
-	.string "EGGS{STR_VAR_1}.\p"
+	.string "Eggs{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50: @ 824A353
@@ -511,12 +511,12 @@ BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50: @ 824A353
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1}.\p"
+	.string "Eggs{STR_VAR_1}.\p"
 	.string "Please come see me when you are ready.$"
 
 BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome: @ 824A437
 	.string "I will now show you to\n"
-	.string "the BATTLE DOME.$"
+	.string "the Battle Dome.$"
 
 BattleFrontier_BattleDomeLobby_Text_DidntSaveBeforeQuitting: @ 824A45F
 	.string "Excuse me!\p"
@@ -546,13 +546,13 @@ BattleFrontier_BattleDomeLobby_Text_WeveBeenWaitingForYou: @ 824A5FE
 	.string "We've been waiting for you!$"
 
 BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge2: @ 824A61A
-	.string "Before I show you to the BATTLE DOME,\n"
+	.string "Before I show you to the Battle Dome,\n"
 	.string "I must save the data. Is that okay?$"
 
 BattleFrontier_BattleDomeLobby_Text_WelcomeDoubleBattle: @ 824A664
 	.string "Where the strategies of Trainers\n"
 	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE DOME!\p"
+	.string "Welcome to the Battle Dome!\p"
 	.string "I am your guide to the Double Battle\n"
 	.string "Tournament.$"
 
@@ -583,7 +583,7 @@ BattleFrontier_BattleDomeLobby_Text_ExplainDoublesChallenge: @ 824A721
 
 BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLv50: @ 824A966
 	.string "They're the results of the last\n"
-	.string "Level 50 SINGLE BATTLE Tournament.$"
+	.string "Level 50 Single Battle Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50: @ 824A9A9
 	.string "They're the results of the last\n"
@@ -591,7 +591,7 @@ BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50: @ 824A9A9
 
 BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLvOpen: @ 824A9EC
 	.string "They're the results of the last\n"
-	.string "Open Level SINGLE BATTLE Tournament.$"
+	.string "Open Level Single Battle Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen: @ 824AA31
 	.string "They're the results of the last\n"
@@ -612,10 +612,10 @@ BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier: @ 824AB06
 @ Functionally unused
 BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation: @ 824AB94
 	.string "When a Trainer chains tournament\n"
-	.string "wins at the BATTLE DOME, he or she\l"
+	.string "wins at the Battle Dome, he or she\l"
 	.string "gains a reputation as a star.\p"
 	.string "Tough Trainers are drawn by that\n"
-	.string "reputation to the BATTLE DOME.\p"
+	.string "reputation to the Battle Dome.\p"
 	.string "A true superstar is a Trainer who\n"
 	.string "can keep winning tournaments.$"
 
@@ -633,7 +633,7 @@ BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully: @ 824ACD3
 
 BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker: @ 824AD67
 	.string "Congratulations!\p"
-	.string "You defeated the DOME ACE and won\n"
+	.string "You defeated the Dome Ace and won\n"
 	.string "the Battle Tournament!$"
 
 BattleFrontier_BattleDomeLobby_Text_AwardTheseBattlePoints: @ 824ADB1
@@ -643,8 +643,8 @@ BattleFrontier_BattleDomeLobby_Text_AwardTheseBattlePoints: @ 824ADB1
 
 BattleFrontier_BattleDomeLobby_Text_RecordLastMatch: @ 824AE17
 	.string "Would you like to record your\n"
-	.string "last BATTLE DOME match on your\l"
-	.string "FRONTIER PASS?$"
+	.string "last Battle Dome match on your\l"
+	.string "Frontier Pass?$"
 
 BattleFrontier_BattleDomeLobby_Text_RulesAreListed: @ 824AE63
 	.string "The Battle Tournament rules\n"
@@ -668,11 +668,11 @@ BattleFrontier_BattleDomeLobby_Text_ExplainTourneyTree: @ 824AF4C
 	.string "several kinds of data.\p"
 	.string "The data on view includes the previous\n"
 	.string "tournament's results, the Pokémon held\l"
-	.string "by TRAINERS, and the battle styles of\l"
+	.string "by Trainers, and the battle styles of\l"
 	.string "Trainers.$"
 
 BattleFrontier_BattleDomeLobby_Text_ExplainDoubleKORules: @ 824B073
 	.string "If battling Pokémon faint at the same\n"
 	.string "time--a double KO--in a tournament\l"
-	.string "match, the REFEREES will review\l"
+	.string "match, the Referees will review\l"
 	.string "the match and declare the winner.$"

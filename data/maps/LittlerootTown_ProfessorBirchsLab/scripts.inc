@@ -1015,7 +1015,7 @@ LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere: @ 81FBB68
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanPreferCollectingSlowly: @ 81FBC2D
 	.string "Brendan: Rather than collecting\n"
-	.string "Pokémon, I prefer slowly and \l"
+	.string "Pokémon, I prefer slowly and\l"
 	.string "steadily raising the one I chose.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayHaveYouGoneToBattleFrontier: @ 81FBC8D

@@ -40,7 +40,7 @@ BattleFrontier_PokemonCenter_1F_EventScript_Skitty:: @ 8267931
 	end
 
 BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon: @ 8267944
-	.string "There was someone here using a \n"
+	.string "There was someone here using a\n"
 	.string "Pokémon I've never seen before.\p"
 	.string "I never learned about it at\n"
 	.string "Trainer's School at least.\p"
@@ -48,7 +48,7 @@ BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon: @ 8267944
 	.string "like that.$"
 
 BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena: @ 82679EB
-	.string "Okay! Next stop, the BATTLE PIKE!\n"
+	.string "Okay! Next stop, the Battle Pike!\n"
 	.string "I'd better get the right Pokémon from\l"
 	.string "the PC Storage System.$"
 

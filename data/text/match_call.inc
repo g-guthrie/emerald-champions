@@ -696,12 +696,12 @@ MatchCall_PersonalizedText6::
 MatchCall_PersonalizedText7::
 	.string "Hello, this is {STR_VAR_1}…\p"
 	.string "I've grown a little jaded with this\n"
-	.string "whole COOLTRAINER thing…\p"
+	.string "whole Cooltrainer thing…\p"
 	.string "Everyone thinks I'm a perfect\n"
 	.string "Trainer, and that makes me try to\l"
 	.string "live up to that expectation.\p"
 	.string "But I guess that goes with being\n"
-	.string "a COOLTRAINER.\p"
+	.string "a Cooltrainer.\p"
 	.string "I'll just have to buckle down…\n"
 	.string "and grin and bear it.\p"
 	.string "You're the only person that I could\n"
@@ -900,10 +900,10 @@ MatchCall_PersonalizedText24::
 MatchCall_PersonalizedText25::
 	.string "Snivel… It's… {STR_VAR_1}…\n"
 	.string "…Sob…\p"
-	.string "ROXANNE chewed me out in class\n"
+	.string "Roxanne chewed me out in class\n"
 	.string "today.\p"
 	.string "But I don't dislike her or anything.\p"
-	.string "ROXANNE tells me exactly what\n"
+	.string "Roxanne tells me exactly what\n"
 	.string "I did wrong so I can learn from it.\p"
 	.string "You bet I'll be going to\n"
 	.string "the Trainer's School tomorrow!\p"
@@ -911,11 +911,11 @@ MatchCall_PersonalizedText25::
 
 MatchCall_PersonalizedText26::
 	.string "It's {STR_VAR_1}!\p"
-	.string "ROXANNE let me battle with her\n"
+	.string "Roxanne let me battle with her\n"
 	.string "yesterday.\p"
 	.string "The results…\n"
 	.string "Terrible, like you needed to ask.\p"
-	.string "But I was delighted that ROXANNE\n"
+	.string "But I was delighted that Roxanne\n"
 	.string "would even let me challenge her!\p"
 	.string "You wouldn't believe how much\n"
 	.string "more I admire her!\p"
@@ -923,20 +923,20 @@ MatchCall_PersonalizedText26::
 	.string "I'd better go!$"
 
 MatchCall_PersonalizedText27::
-	.string "Hi, it's ANNA! I'm with my junior\n"
-	.string "partner MEG again today.\p"
-	.string "I really love caring for MEG and\n"
+	.string "Hi, it's Anna! I'm with my junior\n"
+	.string "partner Meg again today.\p"
+	.string "I really love caring for Meg and\n"
 	.string "Pokémon. They're so cute!\p"
 	.string "I wish I could look after them\n"
 	.string "as if they were my siblings!\p"
-	.string "Oh, hi, MEG!\n"
+	.string "Oh, hi, Meg!\n"
 	.string "Did you get the buns?\p"
 	.string "Huh? No, no, I'm not treating you\n"
 	.string "like my personal slave!\p"
 	.string "You lost the match, so you have\n"
 	.string "to go buy the bread as punishment!\p"
 	.string "I wouldn't treat you like a slave,\n"
-	.string "MEG! You're too special to me!\p"
+	.string "Meg! You're too special to me!\p"
 	.string "I have to go now.\n"
 	.string "It's time for our snack!$"
 
@@ -972,12 +972,12 @@ MatchCall_PersonalizedText29::
 
 MatchCall_PersonalizedText30::
 	.string "I am… {STR_VAR_1}.\n"
-	.string "People call me an EXPERT.\p"
+	.string "People call me an Expert.\p"
 	.string "But there is one thing I know.\n"
-	.string "I could not be an EXPERT on my own\l"
+	.string "I could not be an Expert on my own\l"
 	.string "power.\p"
 	.string "Only with the help of Pokémon can\n"
-	.string "a Trainer become an EXPERT.\p"
+	.string "a Trainer become an Expert.\p"
 	.string "Humph! I believe I may have said\n"
 	.string "something deep and profound!\p"
 	.string "I shall leave you in good spirits!$"
@@ -990,7 +990,7 @@ MatchCall_PersonalizedText31::
 	.string "I've been battling young Trainers\n"
 	.string "since we met, but you're still\l"
 	.string "the best of the lot.\p"
-	.string "I imagine you'll become an EXPERT\n"
+	.string "I imagine you'll become an Expert\n"
 	.string "in your old age! Ohohoho…$"
 
 MatchCall_PersonalizedText32::
@@ -1031,7 +1031,7 @@ MatchCall_PersonalizedText34::
 	.string "I never was much for getting all\n"
 	.string "stressed or rushing things.\p"
 	.string "But wouldn't you know it,\n"
-	.string "I'm now a TRIATHLETE.\p"
+	.string "I'm now a Triathlete.\p"
 	.string "You just can't tell where life will\n"
 	.string "take you, if you get my drift.\p"
 	.string "You're a Trainer now, but who\n"
@@ -1081,7 +1081,7 @@ MatchCall_PersonalizedText37::
 MatchCall_PersonalizedText38::
 	.string "Oh, it's {STR_VAR_1}, hello.\p"
 	.string "I've been swimming a lot but I still\n"
-	.string "can't seem to reach EVERGRANDE.\p"
+	.string "can't seem to reach Evergrande.\p"
 	.string "Maybe I'm just going in circles.\p"
 	.string "No, no, that can't be possible.\n"
 	.string "Wahahaha.\l"
@@ -1116,7 +1116,7 @@ MatchCall_PersonalizedText41::
 	.string "Hello, {PLAYER}{KUN}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How are your Pokémon doing?\p"
-	.string "My DRAGON Pokémon appear to be\n"
+	.string "My Dragon Pokémon appear to be\n"
 	.string "in peak form. Bye for now.$"
 
 MatchCall_PersonalizedText42::
@@ -1180,17 +1180,17 @@ MatchCall_PersonalizedText47::
 
 MatchCall_PersonalizedText48::
 	.string "Oh, hi, hi, this is {STR_VAR_1}!\p"
-	.string "I'm raising Pokémon with LIV!\n"
+	.string "I'm raising Pokémon with Liv!\n"
 	.string "We're trying very hard!\p"
 	.string "If we try harder, can we become\n"
 	.string "number one? Bye-bye!$"
 
 MatchCall_PersonalizedText49::
 	.string "{STR_VAR_1} here!\p"
-	.string "I'm a SAILOR, but I'm not on a boat\n"
+	.string "I'm a Sailor, but I'm not on a boat\n"
 	.string "now.\p"
 	.string "It makes me wonder--what should\n"
-	.string "a SAILOR on land be called?\p"
+	.string "a Sailor on land be called?\p"
 	.string "That's what I've been thinking\n"
 	.string "while staring out across the waves.\p"
 	.string "All right, next time!$"
@@ -1259,13 +1259,13 @@ MatchCall_PersonalizedText55::
 MatchCall_PersonalizedText56::
 	.string "It's me, {STR_VAR_1}.\p"
 	.string "I'm popular because I have lots\n"
-	.string "of BUG Pokémon, right?\p"
+	.string "of Bug Pokémon, right?\p"
 	.string "Well, I took a bunch of my fave\n"
 	.string "bugs to school today.\p"
 	.string "This girl I like started crying!\n"
 	.string "Go ahead and laugh if you want.\p"
 	.string "I have to try teaching her what\n"
-	.string "makes BUG Pokémon so appealing.\p"
+	.string "makes Bug Pokémon so appealing.\p"
 	.string "Snivel…\n"
 	.string "See you!$"
 
@@ -1283,12 +1283,12 @@ MatchCall_PersonalizedText57::
 MatchCall_PersonalizedText58::
 	.string "Oh, hi!\p"
 	.string "I'm still searching for treasures\n"
-	.string "with KIRA!\p"
+	.string "with Kira!\p"
 	.string "Maybe there isn't any treasure\n"
 	.string "here at all…\p"
 	.string "But the important thing is for me\n"
-	.string "to search alongside KIRA.\p"
-	.string "Oh, hey, KIRA!\n"
+	.string "to search alongside Kira.\p"
+	.string "Oh, hey, Kira!\n"
 	.string "Wh-why are you angry?\p"
 	.string "I'm not ignoring you, honey!\n"
 	.string "You're my one and only!\p"
@@ -1334,7 +1334,7 @@ MatchCall_PersonalizedText61::
 	.string "Hi, this is {STR_VAR_1}!\n"
 	.string "We just won a battle!\p"
 	.string "We don't win often, but it was this\n"
-	.string "cool SWIMMER guy.\p"
+	.string "cool Swimmer guy.\p"
 	.string "My sister was steamed!\p"
 	.string "She wanted to pretend that she\n"
 	.string "was weak to make an impression!\p"
@@ -1364,7 +1364,7 @@ MatchCall_PersonalizedText63::
 	.string "It's me, {STR_VAR_1}!\l"
 	.string "I'm out on Route 108 now!\l"
 	.string "In other words, where I always am!\p"
-	.string "Today, a gorgeous SWIMMER \n"
+	.string "Today, a gorgeous Swimmer\n"
 	.string "swam by me!\p"
 	.string "So I startled her with a shout!\p"
 	.string "And she gave me a nasty glare!\p"
@@ -2169,14 +2169,14 @@ MatchCall_Text_Winona_Preparing::
 MatchCall_Text_Winona_PreparingPostGame::
 	.string "Winona: You've done it, {PLAYER}!\p"
 	.string "News about the new Champion\n"
-	.string "has reached us in FORTREE!\p"
+	.string "has reached us in Fortree!\p"
 	.string "But… The next time we battle,\n"
 	.string "it's not going to end the same way.$"
 
 MatchCall_Text_Winona_RematchReady::
 	.string "Winona: Is this {PLAYER}?\n"
 	.string "Our Gym is back in operation!\p"
-	.string "We're waiting for you in FORTREE!$"
+	.string "We're waiting for you in Fortree!$"
 
 MatchCall_Text_Winona_PostRematch::
 	.string "Winona: {PLAYER}…\n"
@@ -2576,7 +2576,7 @@ MatchCall_Text_Wally3::
 
 MatchCall_Text_Wally4::
 	.string "Wally: {PLAYER}?\n"
-	.string "It's me, WALLY!\p"
+	.string "It's me, Wally!\p"
 	.string "The world of Trainers is amazing!\p"
 	.string "When I have my Pokémon with me,\n"
 	.string "all sorts of people say hi!\p"
@@ -2585,7 +2585,7 @@ MatchCall_Text_Wally4::
 
 MatchCall_Text_Wally5::
 	.string "Wally: {PLAYER}? It's awesome!\n"
-	.string "That RALTS we caught together?\l"
+	.string "That Ralts we caught together?\l"
 	.string "It evolved, {PLAYER}!\p"
 	.string "Maybe I'm talented…\p"
 	.string "Oh, but I shouldn't get a big head\n"
@@ -2842,7 +2842,7 @@ MatchCall_Text_MrStone4::
 MatchCall_Text_MrStone5::
 	.string "Mr. Stone: Hello, hello, {PLAYER}{KUN}!\p"
 	.string "I heard from someone in Petalburg\n"
-	.string "that you're NORMAN's child!\p"
+	.string "that you're Norman's child!\p"
 	.string "No wonder you're such a capable\n"
 	.string "being!$"
 
@@ -2856,7 +2856,7 @@ MatchCall_Text_MrStone6::
 
 MatchCall_Text_MrStone7::
 	.string "Hello!\n"
-	.string "This is Devon CORPORATI…\l"
+	.string "This is Devon Corporati…\l"
 	.string "Oh, hello, {PLAYER}!\p"
 	.string "Our President was here a little\n"
 	.string "while ago, but he's gone out.\p"
@@ -2865,17 +2865,17 @@ MatchCall_Text_MrStone7::
 
 MatchCall_Text_MrStone8::
 	.string "…Huh? …What's that?\p"
-	.string "GROU… Yes? …DON?\p"
+	.string "Grou… Yes? …Don?\p"
 	.string "You're breaking up…\n"
 	.string "…can't hear…\p"
-	.string "BZZZZ…$"
+	.string "Bzzzz…$"
 
 MatchCall_Text_MrStone9::
 	.string "…Huh? …What's that?\p"
 	.string "Seaflo… Yes? …Caver…?\p"
 	.string "You're breaking up…\n"
 	.string "…can't hear…\p"
-	.string "BZZZZ…$"
+	.string "Bzzzz…$"
 
 MatchCall_Text_MrStone10::
 	.string "Mr. Stone: {PLAYER}{KUN}! It's me!\p"

@@ -135,13 +135,13 @@ BattlePyramid_Retire:: @ 8252C88
 
 @ Also used by Trainer Hill
 gText_BattlePyramidConfirmRest:: @ 8252CA7
-	.string "Your BATTLE PYRAMID quest will be\n"
+	.string "Your Battle Pyramid quest will be\n"
 	.string "saved so that you may quit for now.\l"
 	.string "Is that okay?$"
 
 gText_BattlePyramidConfirmRetire:: @ 8252CFB
 	.string "Are you sure you want to quit your\n"
-	.string "PYRAMID quest?$"
+	.string "Pyramid quest?$"
 
 BattlePyramid_Text_ExitHintUp1:: @ 8252D2D
 	.string "This floor's exit is in\n"
@@ -439,39 +439,39 @@ BattlePyramid_Text_ZeroItemsRemaining4:: @ 8253D3E
 	.string "items on the ground.$"
 
 BattlePyramid_Text_EightItemsRemaining5:: @ 8253D96
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are eight items…$"
 
 BattlePyramid_Text_SevenItemsRemaining5:: @ 8253DD2
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are seven items…$"
 
 BattlePyramid_Text_SixItemsRemaining5:: @ 8253E0E
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are six items…$"
 
 BattlePyramid_Text_FiveItemsRemaining5:: @ 8253E48
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are five items…$"
 
 BattlePyramid_Text_FourItemsRemaining5:: @ 8253E83
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are four items…$"
 
 BattlePyramid_Text_ThreeItemsRemaining5:: @ 8253EBE
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are three items…$"
 
 BattlePyramid_Text_TwoItemsRemaining5:: @ 8253EFA
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are two items…$"
 
 BattlePyramid_Text_OneItemRemaining5:: @ 8253F34
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there is one item…$"
 
 BattlePyramid_Text_ZeroItemsRemaining5:: @ 8253F6C
-	.string "On this floor of the PYRAMID,\n"
+	.string "On this floor of the Pyramid,\n"
 	.string "I hear there are no items…$"
 
 BattlePyramid_Text_EightItemsRemaining6:: @ 8253FA5
@@ -706,27 +706,27 @@ BattlePyramid_Text_ZeroTrainersRemaining5:: @ 8254E6E
 
 BattlePyramid_Text_SevenTrainersRemaining6:: @ 8254ED3
 	.string "Can you keep winning against\n"
-	.string "the seven remaining TRAINERS?$"
+	.string "the seven remaining Trainers?$"
 
 BattlePyramid_Text_SixTrainersRemaining6:: @ 8254F0E
 	.string "Can you keep winning against\n"
-	.string "the six remaining TRAINERS?$"
+	.string "the six remaining Trainers?$"
 
 BattlePyramid_Text_FiveTrainersRemaining6:: @ 8254F47
 	.string "Can you keep winning against\n"
-	.string "the five remaining TRAINERS?$"
+	.string "the five remaining Trainers?$"
 
 BattlePyramid_Text_FourTrainersRemaining6:: @ 8254F81
 	.string "Can you keep winning against\n"
-	.string "the four remaining TRAINERS?$"
+	.string "the four remaining Trainers?$"
 
 BattlePyramid_Text_ThreeTrainersRemaining6:: @ 8254FBB
 	.string "Can you keep winning against\n"
-	.string "the three remaining TRAINERS?$"
+	.string "the three remaining Trainers?$"
 
 BattlePyramid_Text_TwoTrainersRemaining6:: @ 8254FF6
 	.string "Can you keep winning against\n"
-	.string "the two remaining TRAINERS?$"
+	.string "the two remaining Trainers?$"
 
 BattlePyramid_Text_OneTrainersRemaining6:: @ 825502F
 	.string "Can you keep winning against\n"

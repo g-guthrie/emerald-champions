@@ -749,12 +749,12 @@ static const u8 sText_1MinutePlus[] = _("1 minute +");
 static const u8 sText_SpaceSeconds[] = _(" seconds");
 static const u8 sText_SpaceTimes[] = _(" time(s)");
 
-static const u8 sText_Wallace[] = _("WALLACE");
-static const u8 sText_Steven[] = _("STEVEN");
-static const u8 sText_Brawly[] = _("BRAWLY");
-static const u8 sText_Winona[] = _("WINONA");
-static const u8 sText_Phoebe[] = _("PHOEBE");
-static const u8 sText_Glacia[] = _("GLACIA");
+static const u8 sText_Wallace[] = _("Wallace");
+static const u8 sText_Steven[] = _("Steven");
+static const u8 sText_Brawly[] = _("Brawly");
+static const u8 sText_Winona[] = _("Winona");
+static const u8 sText_Phoebe[] = _("Phoebe");
+static const u8 sText_Glacia[] = _("Glacia");
 
 void Special_ShowDiploma(void)
 {
@@ -3051,63 +3051,63 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] =
     {
-        COMPOUND_STRING("KISS POSTER{CLEAR_TO 94}16BP"),
-        COMPOUND_STRING("KISS CUSHION{CLEAR_TO 94}32BP"),
-        COMPOUND_STRING("SMOOCHUM DOLL{CLEAR_TO 94}32BP"),
-        COMPOUND_STRING("TOGEPI DOLL{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("MEOWTH DOLL{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("CLEFAIRY DOLL{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("DITTO DOLL{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("CYNDAQUIL DOLL{CLEAR_TO 94}80BP"),
-        COMPOUND_STRING("CHIKORITA DOLL{CLEAR_TO 94}80BP"),
-        COMPOUND_STRING("TOTODILE DOLL{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("Kiss Poster{CLEAR_TO 94}16BP"),
+        COMPOUND_STRING("Kiss Cushion{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("Smoochum Doll{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("Togepi Doll{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("Meowth Doll{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("Clefairy Doll{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("Ditto Doll{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("Cyndaquil Doll{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("Chikorita Doll{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("Totodile Doll{CLEAR_TO 94}80BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2] =
     {
-        COMPOUND_STRING("LAPRAS DOLL{CLEAR_TO 88}128BP"),
-        COMPOUND_STRING("SNORLAX DOLL{CLEAR_TO 88}128BP"),
-        COMPOUND_STRING("VENUSAUR DOLL{CLEAR_TO 88}256BP"),
-        COMPOUND_STRING("CHARIZARD DOLL{CLEAR_TO 88}256BP"),
-        COMPOUND_STRING("BLASTOISE DOLL{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("Lapras Doll{CLEAR_TO 88}128BP"),
+        COMPOUND_STRING("Snorlax Doll{CLEAR_TO 88}128BP"),
+        COMPOUND_STRING("Venusaur Doll{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("Charizard Doll{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("Blastoise Doll{CLEAR_TO 88}256BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR] =
     {
-        COMPOUND_STRING("QUICK BALL{CLEAR_TO 100}2BP"),
-        COMPOUND_STRING("TIMER BALL{CLEAR_TO 100}2BP"),
-        COMPOUND_STRING("MAX REVIVE{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("SACRED ASH{CLEAR_TO 94}32BP"),
-        COMPOUND_STRING("DREAM BALL{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("BEAST BALL{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("Quick Ball{CLEAR_TO 100}2BP"),
+        COMPOUND_STRING("Timer Ball{CLEAR_TO 100}2BP"),
+        COMPOUND_STRING("Max Revive{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("Sacred Ash{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("Dream Ball{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("Beast Ball{CLEAR_TO 100}8BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR] =
     {
-        COMPOUND_STRING("LINKING CORD{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("PROTECTOR{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("ELECTIRIZER{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("MAGMARIZER{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("REAPER CLOTH{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("RAZOR CLAW{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("SWEET APPLE{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("TART APPLE{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("PRISM SCALE{CLEAR_TO 94}16BP"),
+        COMPOUND_STRING("Linking Cord{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("Protector{CLEAR_TO 94}12BP"),
+        COMPOUND_STRING("Electirizer{CLEAR_TO 94}12BP"),
+        COMPOUND_STRING("Magmarizer{CLEAR_TO 94}12BP"),
+        COMPOUND_STRING("Reaper Cloth{CLEAR_TO 94}12BP"),
+        COMPOUND_STRING("Razor Claw{CLEAR_TO 94}12BP"),
+        COMPOUND_STRING("Sweet Apple{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("Tart Apple{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("Prism Scale{CLEAR_TO 94}16BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BERRY_POWDER_VENDOR] =
     {
-        COMPOUND_STRING("ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50"),
-        COMPOUND_STRING("ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80"),
-        COMPOUND_STRING("HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50"),
-        COMPOUND_STRING("REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300"),
-        COMPOUND_STRING("ETHER{CLEAR_TO 99}{FONT_SMALL}500"),
-        COMPOUND_STRING("MAX ETHER{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("ELIXIR{CLEAR_TO 99}{FONT_SMALL}1,500"),
-        COMPOUND_STRING("MAX ELIXIR{CLEAR_TO 99}{FONT_SMALL}3,000"),
-        COMPOUND_STRING("PP UP{CLEAR_TO 99}{FONT_SMALL}3,000"),
-        COMPOUND_STRING("PP MAX{CLEAR_TO 99}{FONT_SMALL}9,000"),
-        COMPOUND_STRING("SACRED ASH{CLEAR_TO 99}{FONT_SMALL}12,000"),
+        COMPOUND_STRING("Energy Powder{CLEAR_TO 114}{FONT_SMALL}50"),
+        COMPOUND_STRING("Energy Root{CLEAR_TO 114}{FONT_SMALL}80"),
+        COMPOUND_STRING("Heal Powder{CLEAR_TO 114}{FONT_SMALL}50"),
+        COMPOUND_STRING("Revival Herb{CLEAR_TO 108}{FONT_SMALL}300"),
+        COMPOUND_STRING("Ether{CLEAR_TO 99}{FONT_SMALL}500"),
+        COMPOUND_STRING("Max Ether{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("Elixir{CLEAR_TO 99}{FONT_SMALL}1,500"),
+        COMPOUND_STRING("Max Elixir{CLEAR_TO 99}{FONT_SMALL}3,000"),
+        COMPOUND_STRING("PP Up{CLEAR_TO 99}{FONT_SMALL}3,000"),
+        COMPOUND_STRING("PP Max{CLEAR_TO 99}{FONT_SMALL}9,000"),
+        COMPOUND_STRING("Sacred Ash{CLEAR_TO 99}{FONT_SMALL}12,000"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_RECEPTIONIST] =
@@ -3125,30 +3125,30 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
-        COMPOUND_STRING("SOFTBOILED{CLEAR_TO 78}16BP"),
-        COMPOUND_STRING("SEISMIC TOSS{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("DREAM EATER{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("MEGA PUNCH{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("MEGA KICK{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("BODY SLAM{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("ROCK SLIDE{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("COUNTER{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("THUNDER WAVE{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("SWORDS DANCE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Soft-Boiled{CLEAR_TO 78}16BP"),
+        COMPOUND_STRING("Seismic Toss{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Dream Eater{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Mega Punch{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Mega Kick{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Body Slam{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Rock Slide{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Counter{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Thunder Wave{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Swords Dance{CLEAR_TO 78}48BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_2] =
     {
-        COMPOUND_STRING("DEFENSE CURL{CLEAR_TO 78}16BP"),
-        COMPOUND_STRING("SNORE{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("MUD-SLAP{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("SWIFT{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("ICY WIND{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("ENDURE{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("PSYCH UP{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("ICE PUNCH{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("THUNDERPUNCH{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("FIRE PUNCH{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Defense Curl{CLEAR_TO 78}16BP"),
+        COMPOUND_STRING("Snore{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Mud-Slap{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Swift{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Icy Wind{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("Endure{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Psych Up{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Ice Punch{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Thunder Punch{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("Fire Punch{CLEAR_TO 78}48BP"),
         gText_Exit
     },
     [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
@@ -3212,58 +3212,58 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_GAMECORNER_POKEMON] =
     {
-        COMPOUND_STRING("Porygon{CLEAR_TO 72}5000 Coins"),
-        COMPOUND_STRING("Munchlax{CLEAR_TO 72}4000 Coins"),
-        COMPOUND_STRING("Vulpix{CLEAR_TO 72}2000 Coins"),
-        COMPOUND_STRING("Sandshrew{CLEAR_TO 72}2000 Coins"),
-        COMPOUND_STRING("Rattata{CLEAR_TO 72}1000 Coins"),
-        COMPOUND_STRING("Meowth{CLEAR_TO 72}2000 Coins"),
-        COMPOUND_STRING("Grimer{CLEAR_TO 72}2000 Coins"),
-        COMPOUND_STRING("Diglett{CLEAR_TO 72}2000 Coins"),
-        COMPOUND_STRING("Geodude{CLEAR_TO 72}2000 Coins"),
-        COMPOUND_STRING("Raichu{CLEAR_TO 72}4500 Coins"),
-        COMPOUND_STRING("Marowak{CLEAR_TO 72}4500 Coins"),
-        COMPOUND_STRING("Exeggutor{CLEAR_TO 72}4500 Coins"),
-        COMPOUND_STRING("Genesect{CLEAR_TO 72}9999 Coins"),
+        COMPOUND_STRING("Porygon{CLEAR_TO 72}5,000 Coins"),
+        COMPOUND_STRING("Munchlax{CLEAR_TO 72}4,000 Coins"),
+        COMPOUND_STRING("Vulpix{CLEAR_TO 72}2,000 Coins"),
+        COMPOUND_STRING("Sandshrew{CLEAR_TO 72}2,000 Coins"),
+        COMPOUND_STRING("Rattata{CLEAR_TO 72}1,000 Coins"),
+        COMPOUND_STRING("Meowth{CLEAR_TO 72}2,000 Coins"),
+        COMPOUND_STRING("Grimer{CLEAR_TO 72}2,000 Coins"),
+        COMPOUND_STRING("Diglett{CLEAR_TO 72}2,000 Coins"),
+        COMPOUND_STRING("Geodude{CLEAR_TO 72}2,000 Coins"),
+        COMPOUND_STRING("Raichu{CLEAR_TO 72}4,500 Coins"),
+        COMPOUND_STRING("Marowak{CLEAR_TO 72}4,500 Coins"),
+        COMPOUND_STRING("Exeggutor{CLEAR_TO 72}4,500 Coins"),
+        COMPOUND_STRING("Genesect{CLEAR_TO 72}9,999 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
     {
-        COMPOUND_STRING("Bulbasaur{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Chikorita{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Treecko{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Turtwig{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Snivy{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Chespin{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Rowlet{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Grookey{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Sprigatito{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Bulbasaur{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Chikorita{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Treecko{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Turtwig{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Snivy{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Chespin{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Rowlet{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Grookey{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Sprigatito{CLEAR_TO 72}2,500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
     {
-        COMPOUND_STRING("Charmander{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Cyndaquil{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Torchic{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Chimchar{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Tepig{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Fennekin{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Litten{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Scorbunny{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Fuecoco{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Charmander{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Cyndaquil{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Torchic{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Chimchar{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Tepig{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Fennekin{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Litten{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Scorbunny{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Fuecoco{CLEAR_TO 72}2,500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
     {
-        COMPOUND_STRING("Squirtle{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Totodile{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Mudkip{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Piplup{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Oshawott{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Froakie{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Popplio{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Sobble{CLEAR_TO 72}2500 Coins"),
-        COMPOUND_STRING("Quaxly{CLEAR_TO 72}2500 Coins"),
+        COMPOUND_STRING("Squirtle{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Totodile{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Mudkip{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Piplup{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Oshawott{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Froakie{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Popplio{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Sobble{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Quaxly{CLEAR_TO 72}2,500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
@@ -6624,10 +6624,14 @@ void BufferEmeraldChampionsBondingPreview(void)
     gSpecialVar_Result = mon != NULL && gSpecialVar_0x8008 < 3;
     if (!gSpecialVar_Result)
         return;
-    static const u8 values[] = {0, FRIENDSHIP_EVO_THRESHOLD, 255};
+    static const u8 *const sBondingPrompts[] =
+    {
+        COMPOUND_STRING("{STR_VAR_1} will keep its distance\nfrom you. Is that okay?"),
+        COMPOUND_STRING("{STR_VAR_1} will be close enough\nto evolve. Is that okay?"),
+        COMPOUND_STRING("{STR_VAR_1} will adore you!\nIs that okay?"),
+    };
     GetMonNickname(mon, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar2, values[gSpecialVar_0x8008], STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Set {STR_VAR_1}'s friendship\nto {STR_VAR_2}?"));
+    StringExpandPlaceholders(gStringVar4, sBondingPrompts[gSpecialVar_0x8008]);
 }
 
 void ApplyEmeraldChampionsBonding(void)

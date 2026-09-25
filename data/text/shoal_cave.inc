@@ -1,9 +1,9 @@
 ShoalCave_Text_WasShoalSaltNowNothing:
-	.string "There was some SHOAL SALT here.\n"
+	.string "There was some Shoal Salt here.\n"
 	.string "But, there's nothing here now.$"
 
 ShoalCave_Text_WasShoallShellNowNothing:
-	.string "There was a SHOAL SHELL here.\n"
+	.string "There was a Shoal Shell here.\n"
 	.string "But, there's nothing here now.$"
 
 @ ---------------------------------------------------------------------------

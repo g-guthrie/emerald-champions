@@ -167,7 +167,7 @@ SafariZone_South_Text_Man: @ 82A533B
 	.string "live in the outlying areas.$"
 
 SafariZone_Southwest_Text_Woman: @ 82A53B7
-	.string "Sometimes, when I toss a {POKEBLOCK} at \n"
+	.string "Sometimes, when I toss a {POKEBLOCK} at\n"
 	.string "Pokémon, it gets ignored.\p"
 	.string "Do Pokémon have likes and dislikes\n"
 	.string "about what they eat?$"

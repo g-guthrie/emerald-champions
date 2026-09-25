@@ -1012,7 +1012,7 @@ MauvilleCity_GameCorner_Text_NotEnoughCoins: @ 8210673
 
 @ Unused
 MauvilleCity_GameCorner_Text_OhIsThatSo: @ 82106BF
-	.string "Oh, is that so? \n"
+	.string "Oh, is that so?\n"
 	.string "You need to save some Coins before\l"
 	.string "coming back here.$"
 
@@ -1087,7 +1087,7 @@ MauvilleCity_GameCorner_Text_RouletteTablesDifferentRates: @ 8210932
 	.string "pick a table.$"
 
 MauvilleCity_GameCorner_Text_EasyToLoseTrackOfTime: @ 821098E
-	.string "It's easy to lose track of time in here. \n"
+	.string "It's easy to lose track of time in here.\n"
 	.string "I should get back to work.$"
 
 MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay: @ 82109D3

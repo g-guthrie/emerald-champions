@@ -95,14 +95,14 @@ LilycoveCity_Text_BallSwapperIntro:
 	.string "I'm the Poké Ball Swapper!\p"
 	.string "I can move your Pokémon from their\n"
 	.string "current Poké Ball into a new one.\p"
-	.string "I charge ¥2000 for this, and I'll need\n"
+	.string "I charge ¥2,000 for this, and I'll need\n"
 	.string "you to provide the new Poké Ball.$"
 
 LilycoveCity_Text_BallSwapperCantAfford:
 	.string "I'm the Poké Ball Swapper!\p"
 	.string "…But it seems you can't afford my\n"
 	.string "services.\p"
-	.string "Please come back when you have ¥2000.$"
+	.string "Please come back when you have ¥2,000.$"
 
 LilycoveCity_Text_BallSwapperChoosePokemon:
 	.string "Which Pokémon's Ball would you like\n"
@@ -114,7 +114,7 @@ LilycoveCity_Text_BallSwapperChoosePokeBall:
 
 LilycoveCity_Text_BallSwapperConfirmChoice:
 	.string "So you want to move {STR_VAR_1}\n"
-	.string "into your {STR_VAR_2} for ¥2000?$"
+	.string "into your {STR_VAR_2} for ¥2,000?$"
 
 LilycoveCity_Text_BallSwapperChooseGivePokemon:
 	.string "Very well. Please hand over your\n"

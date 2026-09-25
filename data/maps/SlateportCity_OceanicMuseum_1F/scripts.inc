@@ -344,7 +344,7 @@ SlateportCity_OceanicMuseum_1F_Text_BeachSandDisplay: @ 820B699
 	.string "up as sand on beaches.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact1: @ 820B74B
-	.string "“OCEANIC MINIFACT 1\n"
+	.string "“Oceanic Minifact 1\n"
 	.string "Why is seawater blue?\p"
 	.string "“Light is composed of many colors.\p"
 	.string "“When light passes through water,\n"
@@ -353,7 +353,7 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact1: @ 820B74B
 	.string "color, making the sea appear blue.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2: @ 820B81F
-	.string "“OCEANIC MINIFACT 2\n"
+	.string "“Oceanic Minifact 2\n"
 	.string "Why is the sea salty?\p"
 	.string "“Seawater contains dissolved salt in\n"
 	.string "the form of sodium and chlorine ions.\p"
@@ -363,7 +363,7 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2: @ 820B81F
 	.string "makes the sea salty.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact3: @ 820B912
-	.string "“OCEANIC MINIFACT 3\n"
+	.string "“Oceanic Minifact 3\n"
 	.string "Which is bigger? The sea or land?\p"
 	.string "“The sea covers more than two-thirds\n"
 	.string "of the planet, and the rest is land.\p"

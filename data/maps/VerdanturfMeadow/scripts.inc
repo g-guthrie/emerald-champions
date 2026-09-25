@@ -78,9 +78,9 @@ VerdanturfMeadow_Text_PleaseTakePokemon:
 	.string "Some Trainers use Audino like punching\n"
 	.string "bags for their Pokémon, just to make\l"
 	.string "their team grow quickly.\p"
-	.string "This is not OK!\p"
+	.string "This is not okay!\p"
 	.string "Please take this Audino to keep it safe\n"
-	.string "from EXP-mad Trainers!$"
+	.string "from Exp.-mad Trainers!$"
 
 VerdanturfMeadow_Text_PlayerReceivedAudino:
 	.string "{PLAYER} received Audino!$"

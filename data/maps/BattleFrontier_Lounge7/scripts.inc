@@ -311,7 +311,7 @@ BattleFrontier_Lounge7_Text_LeftTutorIntro: @ 82656ED
 	.string "You couldn't tell it from looking now,\n"
 	.string "but I used to be one tough Trainer.\p"
 	.string "I had a reputation as the toughest\n"
-	.string "BEAUTY around, I tell you!\p"
+	.string "Beauty around, I tell you!\p"
 	.string "… … … … … …\p"
 	.string "What is it now?\n"
 	.string "You don't believe me.\p"
@@ -369,7 +369,7 @@ BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong: @ 8265C6F
 	.string "stay out here together, would they?$"
 
 BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful: @ 8265D17
-	.string "When I was just a wee YOUNGSTER,\n"
+	.string "When I was just a wee Youngster,\n"
 	.string "those ladies were strong and beautiful.\p"
 	.string "They were idols among us Trainers.\p"
 	.string "Even now, age hasn't dulled their\n"
@@ -428,12 +428,12 @@ BattleFrontier_Lounge7_Text_ThunderWaveDesc:: @ 8265FAA
 BattleFrontier_Lounge7_Text_SwordsDanceDesc:: @ 8265FDD
 	.string "A fighting dance\n"
 	.string "that sharply\n"
-	.string "raises ATTACK.$"
+	.string "raises Attack.$"
 
 BattleFrontier_Lounge7_Text_DefenseCurlDesc:: @ 826600A
 	.string "Curls up to con-\n"
 	.string "ceal weak spots\n"
-	.string "and raise DEFENSE.$"
+	.string "and raise Defense.$"
 
 BattleFrontier_Lounge7_Text_SnoreDesc:: @ 826603E
 	.string "A loud attack\n"
@@ -453,7 +453,7 @@ BattleFrontier_Lounge7_Text_SwiftDesc:: @ 82660A6
 BattleFrontier_Lounge7_Text_IcyWindDesc:: @ 82660D0
 	.string "A chilling attack\n"
 	.string "that lowers the\n"
-	.string "foe's SPEED.$"
+	.string "foe's Speed.$"
 
 BattleFrontier_Lounge7_Text_EndureDesc:: @ 82660FF
 	.string "Endures any at-\n"

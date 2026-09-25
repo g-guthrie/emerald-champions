@@ -118,8 +118,8 @@ BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant:: @ 82585CB
 	end
 
 BattleFrontier_BattleFactoryLobby_Text_SinglesClosed:
-	.string "The SINGLE rentals are closed.\n"
-	.string "The DOUBLE counter is open.$"
+	.string "The Single rentals are closed.\n"
+	.string "The Double counter is open.$"
 
 BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant:: @ 82585DD
 	lock
@@ -341,7 +341,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_ExitRules:: @ 82588EC
 BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle: @ 82588EE
 	.string "Where the intelligence of Trainers\n"
 	.string "is put to the test!\p"
-	.string "Welcome to the BATTLE FACTORY!\p"
+	.string "Welcome to the Battle Factory!\p"
 	.string "I am your guide to the Battle Swap\n"
 	.string "Single Tournament.$"
 
@@ -351,12 +351,12 @@ BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge: @ 825897A
 
 BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge: @ 82589B3
 	.string "The Battle Swap Single Tournament\n"
-	.string "is a SINGLE BATTLE competition using\l"
+	.string "is a Single Battle competition using\l"
 	.string "only rental Pokémon.\p"
 	.string "First, you will be loaned three\n"
 	.string "Pokémon specifically for this event.\p"
 	.string "Using the supplied rental Pokémon,\n"
-	.string "you must conduct a SINGLE BATTLE.\p"
+	.string "you must conduct a Single Battle.\p"
 	.string "If you win, you are permitted to trade\n"
 	.string "one of your rental Pokémon.\p"
 	.string "Repeat this cycle of battling and\n"
@@ -410,7 +410,7 @@ BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting: @ 8258ECA
 BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle: @ 8258F93
 	.string "Where the intelligence of Trainers\n"
 	.string "is put to the test!\p"
-	.string "Welcome to the BATTLE FACTORY!\p"
+	.string "Welcome to the Battle Factory!\p"
 	.string "I am your guide to the Battle Swap\n"
 	.string "Double Tournament.$"
 
@@ -438,7 +438,7 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge: @ 8259058
 
 BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead: @ 825926A
 	.string "Congratulations for defeating\n"
-	.string "the FACTORY HEAD and winning\l"
+	.string "the Factory Head and winning\l"
 	.string "seven matches in a row!$"
 
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints: @ 82592BD
@@ -454,8 +454,8 @@ BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave: @ 8259323
 
 BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch: @ 8259388
 	.string "Would you like to record your last\n"
-	.string "BATTLE FACTORY match on your\l"
-	.string "FRONTIER PASS?$"
+	.string "Battle Factory match on your\l"
+	.string "Frontier Pass?$"
 
 BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves: @ 82593D7
 	.string "Hi!\n"
@@ -528,5 +528,5 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainSwapNotesRules: @ 8259920
 
 BattleFrontier_BattleFactoryLobby_Text_ExplainOpenLvRules: @ 8259A5E
 	.string "In the Open Level, the rental Pokémon\n"
-	.string "and the opposing TRAINERS' Pokémon\l"
+	.string "and the opposing Trainers' Pokémon\l"
 	.string "are all Level 100.$"

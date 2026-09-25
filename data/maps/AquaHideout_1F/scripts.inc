@@ -51,7 +51,7 @@ AquaHideout_1F_EventScript_Grunt1Defeated:: @ 8233513
 	end
 
 AquaHideout_1F_Text_OurBossIsSnatchingSomething: @ 823351D
-	.string "What? What? What do you want with \n"
+	.string "What? What? What do you want with\n"
 	.string "Team Aqua?\p"
 	.string "Our Boss isn't here! He's gone off to\n"
 	.string "snatch something important!\p"
@@ -69,7 +69,7 @@ AquaHideout_1F_Text_WhereMightMagmaHideoutBe: @ 82335E3
 	.string "But where might their Hideout be?$"
 
 AquaHideout_1F_Text_BossWentToJackASubmarine: @ 823367D
-	.string "What? What? What do you want with \n"
+	.string "What? What? What do you want with\n"
 	.string "Team Aqua?\p"
 	.string "Our Boss isn't here!\n"
 	.string "He's gone off to jack a submarine!\p"
@@ -79,7 +79,7 @@ AquaHideout_1F_Text_BossWentToJackASubmarine: @ 823367D
 	.string "you something that crucial?$"
 
 AquaHideout_1F_Text_BossIsOnRoute122: @ 8233739
-	.string "What? What? What do you want with \n"
+	.string "What? What? What do you want with\n"
 	.string "Team Aqua?\p"
 	.string "Our Boss isn't here! He's on his way to\n"
 	.string "Mt. Pyre on Route 122!\p"
