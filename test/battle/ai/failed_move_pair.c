@@ -266,3 +266,145 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice Scarf Imposter does not lock it
         NONE_OF { MESSAGE("The opposing Ditto used Protect!"); }
     }
 }
+
+// Takao's Wobbuffet: Safeguard again while its first Safeguard was still up,
+// and Mirror Coat into a side that could only hit physically. Both fail on the
+// board the AI can see; Counter into the physical Mawile and Encore can work.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Safeguard is not set again while it is up, nor Mirror Coat aimed at a physical side")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_SABLEYE) { Level(20); Ability(ABILITY_PRANKSTER); Speed(50); Moves(MOVE_FOUL_PLAY, MOVE_WILL_O_WISP, MOVE_PROTECT); }
+        PLAYER(SPECIES_MAWILE) { Level(20); Ability(ABILITY_INTIMIDATE); Speed(50); Moves(MOVE_PLAY_ROUGH, MOVE_IRON_HEAD, MOVE_PROTECT); }
+        OPPONENT(SPECIES_WOBBUFFET) {
+            Level(22); Speed(33); Item(ITEM_SITRUS_BERRY); Ability(ABILITY_SHADOW_TAG);
+            Moves(MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_ENCORE, MOVE_SAFEGUARD);
+        }
+        OPPONENT(SPECIES_POLIWRATH) { Level(22); Speed(60); Moves(MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_PLAY_ROUGH, target: opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_PLAY_ROUGH, target: opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_PLAY_ROUGH, target: opponentRight); }
+    } THEN {
+        // Safeguard lasts five turns: one use at most in three.
+        EXPECT_GE(opponentLeft->pp[3], GetMovePP(MOVE_SAFEGUARD) - 1);
+        EXPECT_EQ(opponentLeft->pp[1], GetMovePP(MOVE_MIRROR_COAT));
+    }
+}
+
+// Shayla's Maractus: Leech Seed has nowhere to land once the only non-Grass
+// foe is seeded.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Leech Seed is not aimed at a Grass body or a seeded one")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_AMOONGUSS) { Speed(30); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_SNORLAX) { Speed(30); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_MARACTUS) { Speed(60); Moves(MOVE_LEECH_SEED, MOVE_HYPER_VOICE); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_GE(opponentLeft->pp[0], GetMovePP(MOVE_LEECH_SEED) - 1);
+        EXPECT_EQ((u32)playerLeft->volatiles.leechSeed, 0);
+    }
+}
+
+// Matt's Grimmsnarl: a Prankster Thunder Wave cannot touch a Dark body, and
+// no Thunder Wave touches a Ground one. (The benchmark's own miss was a Mega
+// Evolution into Dark on the same turn, which the AI could not see.)
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Thunder Wave is not aimed at a body it cannot affect")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_UMBREON) { Speed(30); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_GARCHOMP) { Speed(30); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_GRIMMSNARL) { Speed(60); Ability(ABILITY_PRANKSTER); Moves(MOVE_THUNDER_WAVE, MOVE_SPIRIT_BREAK, MOVE_LIGHT_SCREEN); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); NOT_EXPECT_MOVE(opponentLeft, MOVE_THUNDER_WAVE); }
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); NOT_EXPECT_MOVE(opponentLeft, MOVE_THUNDER_WAVE); }
+    }
+}
+
+// Leaf's Ninetales: Encore cannot touch Good as Gold. (The benchmark's own miss
+// was a switch-in the AI could not see; this is the board it can.)
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Encore is not aimed at a Good as Gold body")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_GHOLDENGO) { Speed(30); Ability(ABILITY_GOOD_AS_GOLD); Moves(MOVE_NASTY_PLOT); }
+        PLAYER(SPECIES_GHOLDENGO) { Speed(30); Ability(ABILITY_GOOD_AS_GOLD); Moves(MOVE_NASTY_PLOT); }
+        OPPONENT(SPECIES_NINETALES) { Speed(60); Moves(MOVE_ENCORE, MOVE_EMBER); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_NASTY_PLOT); MOVE(playerRight, MOVE_NASTY_PLOT); }
+        TURN { MOVE(playerLeft, MOVE_NASTY_PLOT); MOVE(playerRight, MOVE_NASTY_PLOT); NOT_EXPECT_MOVE(opponentLeft, MOVE_ENCORE); }
+    }
+}
+
+// Shannon's Ribombee: Tailwind while its own is still blowing. (The benchmark's
+// own miss was forced by the player's Encore; the choice itself was Moonblast.)
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a partner does not copy a side condition the other is setting")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        // Two Safeguards, two Tailwinds or two Reflects in one turn: the
+        // second meets the condition the first has just set.
+        PLAYER(SPECIES_WOBBUFFET) { Speed(30); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(30); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_RIBOMBEE) { Speed(90); Moves(MOVE_TAILWIND, MOVE_SAFEGUARD, MOVE_REFLECT, MOVE_POLLEN_PUFF); }
+        OPPONENT(SPECIES_WHIMSICOTT) { Speed(80); Moves(MOVE_TAILWIND, MOVE_SAFEGUARD, MOVE_REFLECT, MOVE_MOONBLAST); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); MOVE(playerRight, MOVE_TACKLE, target: opponentRight); }
+    } SCENE {
+        NONE_OF { MESSAGE("But it failed!"); }
+    }
+}
+
+// Two status moves into the same body: the second meets a status.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: partners do not stack two statuses on one body")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_MACHAMP) { Speed(30); Attack(200); Moves(MOVE_CLOSE_COMBAT); }
+        PLAYER(SPECIES_BLISSEY) { Speed(20); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_SABLEYE) { Speed(60); Moves(MOVE_WILL_O_WISP, MOVE_SHADOW_SNEAK); }
+        OPPONENT(SPECIES_JOLTEON) { Speed(90); Moves(MOVE_THUNDER_WAVE, MOVE_THUNDER_SHOCK); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CLOSE_COMBAT, target: opponentRight); MOVE(playerRight, MOVE_CELEBRATE); }
+    } SCENE {
+        NONE_OF { MESSAGE("Machamp is already paralyzed!"); MESSAGE("Machamp is already burned!"); MESSAGE("But it failed!"); }
+    }
+}
+
+#if TESTING
+extern bool8 gTestPairBudgetSpent;
+#endif
+
+// A shared multi clock can spend the whole budget before the first board. The
+// search then abandoned that board and handed the engine its placeholder:
+// slot zero aimed at the user - in the benchmarks a Headlong Rush into the
+// AI's own Skarmory. The Ghost leaves Tackle one real target.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a spent decision budget still yields a scored action")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); Speed(10); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_GENGAR) { HP(300); MaxHP(300); Speed(10); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_SNORLAX) { Speed(50); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_SKARMORY) { HP(300); MaxHP(300); Speed(40); Moves(MOVE_PECK); }
+        gTestPairBudgetSpent = TRUE;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft);
+        }
+    } THEN {
+        gTestPairBudgetSpent = FALSE;
+        EXPECT_EQ(opponentRight->hp, 300);
+    }
+}

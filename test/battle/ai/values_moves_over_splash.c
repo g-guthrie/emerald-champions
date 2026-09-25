@@ -228,11 +228,13 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 201-300")
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
+        // Attract fails between two bodies of the same gender, and the AI
+        // sees gender: give it a board where the move can land.
+        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); Gender(MON_FEMALE); }
+        PLAYER(SPECIES_WOBBUFFET) { Gender(MON_FEMALE); }
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH, move); Status1(STATUS1_BURN); Item(ITEM_STARF_BERRY); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, move); Item(ITEM_STARF_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH, move); Status1(STATUS1_BURN); Item(ITEM_STARF_BERRY); Gender(MON_MALE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, move); Item(ITEM_STARF_BERRY); Gender(MON_MALE); }
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

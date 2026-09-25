@@ -6833,6 +6833,209 @@ bool32 CanMoveBeBouncedBack(enum BattlerId battler, enum Move move)
     return FALSE;
 }
 
+// Whether the target's last move is already settled when our move lands: it
+// can only change first if the target can act before us this turn.
+static bool32 AI_TargetActsAfterMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    enum Move *moves = GetMovesArray(battlerDef);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
+         && !AI_IsFaster(battlerAtk, battlerDef, move, moves[i], CONSIDER_PRIORITY))
+            return FALSE;
+    return TRUE;
+}
+
+// A last move the engine can lock or disable: known, in the moveset, with PP.
+static bool32 AI_HasUsableLastMove(enum BattlerId battler, bool32 forEncore)
+{
+    enum Move last = gLastMoves[battler];
+    if (last == MOVE_NONE || last == MOVE_UNAVAILABLE || (forEncore && IsMoveEncoreBanned(last)))
+        return FALSE;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (gBattleMons[battler].moves[i] == last)
+            return gBattleMons[battler].pp[i] != 0;
+    return FALSE;
+}
+
+// Aroma Veil anywhere on the target's side protects it from the mental moves.
+static bool32 AI_IsAromaVeilProtected(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (IsBattlerAlive(battler) && IsBattlerAlly(battler, battlerDef)
+         && AI_GetMoldBreakerSanitizedAbility(battlerAtk, gAiLogicData->abilities[battlerAtk], gAiLogicData->abilities[battler],
+                gAiLogicData->holdEffects[battler], move) == ABILITY_AROMA_VEIL)
+            return TRUE;
+    return FALSE;
+}
+
+// A status move the engine is certain to refuse on the board the AI can see:
+// the effect it sets is already in place, or the target is immune to it by
+// type, ability, item, Substitute or field. These mirror the engine's own fail
+// checks (CanSetNonVolatileStatus, the ability blockers, the side and volatile
+// setters' "already set" tests), not a separate opinion of what is useful.
+// Anything that hinges on this turn's unrevealed commands - a switch, a
+// redirection, a Protect - is not certain and is never judged here.
+bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    struct AiLogicData *aiData = gAiLogicData;
+    enum BattleMoveEffects effect = GetMoveEffect(move);
+    enum BattleSide side = GetBattlerSide(battlerAtk);
+    enum BattleSide foeSide = side ^ BIT_SIDE;
+
+    if (!IsBattleMoveStatus(move))
+        return FALSE;
+
+    // Side, field and self effects that are already up.
+    switch (effect)
+    {
+    case EFFECT_SAFEGUARD:
+        return (gSideStatuses[side] & SIDE_STATUS_SAFEGUARD) != 0;
+    case EFFECT_TAILWIND:
+        return (gSideStatuses[side] & SIDE_STATUS_TAILWIND) != 0;
+    case EFFECT_REFLECT:
+        return (gSideStatuses[side] & SIDE_STATUS_REFLECT) != 0;
+    case EFFECT_LIGHT_SCREEN:
+        return (gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN) != 0;
+    case EFFECT_AURORA_VEIL:
+        return (gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL) || !(AI_GetWeather() & B_WEATHER_ICY_ANY);
+    case EFFECT_MIST:
+        return gSideTimers[side].mistTimer != 0;
+    case EFFECT_LUCKY_CHANT:
+        return (gSideStatuses[side] & SIDE_STATUS_LUCKY_CHANT) != 0;
+    case EFFECT_GRAVITY:
+        return (gFieldStatuses & STATUS_FIELD_GRAVITY) != 0;
+    case EFFECT_WEATHER:
+        return (gBattleWeather & gBattleWeatherInfo[GetMoveWeatherType(move)].flag)
+            || (gBattleWeather & B_WEATHER_PRIMAL_ANY);
+    case EFFECT_TERRAIN:
+        return gFieldTimers.terrain == GetMoveTerrainType(move);
+    case EFFECT_SPIKES:
+        return gSideTimers[foeSide].spikesAmount >= 3;
+    case EFFECT_TOXIC_SPIKES:
+        return gSideTimers[foeSide].toxicSpikesAmount >= 2;
+    case EFFECT_STEALTH_ROCK:
+        return IsHazardOnSide(foeSide, HAZARDS_STEALTH_ROCK);
+    case EFFECT_STICKY_WEB:
+        return IsHazardOnSide(foeSide, HAZARDS_STICKY_WEB);
+    case EFFECT_SUBSTITUTE:
+        return gBattleMons[battlerAtk].volatiles.substitute
+            || gBattleMons[battlerAtk].hp <= max(1, GetNonDynamaxMaxHP(battlerAtk) / 4);
+    case EFFECT_FOCUS_ENERGY:
+        return gBattleMons[battlerAtk].volatiles.focusEnergy || gBattleMons[battlerAtk].volatiles.dragonCheer;
+    case EFFECT_FAIRY_LOCK:
+        return (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK) != 0;
+    case EFFECT_PERISH_SONG:
+    {
+        // Native trysetperishsong fails only when no battler takes a count.
+        for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+            if (IsBattlerAlive(battler) && !gBattleMons[battler].volatiles.perishSong
+             && (battler == battlerAtk || aiData->abilities[battler] != ABILITY_SOUNDPROOF))
+                return FALSE;
+        return TRUE;
+    }
+    case EFFECT_STAT_CHANGE:
+        // Self-boosts fail when no stat can move, the native CanStatChange.
+        if (AI_GetBattlerMoveTargetType(battlerAtk, move) == TARGET_USER)
+            return !AI_CanAnyStatChange(battlerAtk, battlerAtk, move);
+        break;
+    default:
+        break;
+    }
+
+    // Everything below acts on a chosen other battler.
+    if (battlerDef == battlerAtk || !IsBattlerAlive(battlerDef))
+        return FALSE;
+    enum MoveTarget moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
+    if (moveTarget != TARGET_SELECTED && moveTarget != TARGET_SMART && moveTarget != TARGET_RANDOM)
+        return FALSE;
+
+    enum Ability abilityAtk = aiData->abilities[battlerAtk];
+    enum Ability abilityDef = AI_GetMoldBreakerSanitizedAbility(battlerAtk, abilityAtk,
+        aiData->abilities[battlerDef], aiData->holdEffects[battlerDef], move);
+    bool32 foe = !IsBattlerAlly(battlerAtk, battlerDef);
+
+    // What stops any status move at the target: an absorbing or blocking
+    // ability (Good as Gold, Soundproof, Overcoat and powder, Psychic
+    // Terrain), Dazzling-type priority blocks, Prankster into a Dark foe,
+    // Magic Bounce sending it back, a Substitute and a type immunity.
+    struct DamageContext ctx = {0};
+    ctx.battlerAtk = battlerAtk;
+    ctx.battlerDef = battlerDef;
+    ctx.move = ctx.chosenMove = ctx.baseMove = move;
+    ctx.moveType = GetBattleMoveType(move);
+    ctx.weather = AI_GetWeather();
+    ctx.terrain = gFieldTimers.terrain;
+    ctx.abilities[battlerAtk] = abilityAtk;
+    ctx.abilities[battlerDef] = abilityDef;
+    ctx.holdEffects[battlerAtk] = aiData->holdEffects[battlerAtk];
+    ctx.holdEffects[battlerDef] = aiData->holdEffects[battlerDef];
+    if (foe && (AI_CanMoveBeBlockedByTarget(&ctx) || Ai_IsPriorityBlocked(battlerAtk, battlerDef, move, aiData)))
+        return TRUE;
+    if (foe && GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7 && abilityAtk == ABILITY_PRANKSTER
+     && AI_GetMovePriority(battlerAtk, abilityAtk, move) > GetMovePriority(move)
+     && IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK))
+        return TRUE;
+    if (foe && abilityDef == ABILITY_MAGIC_BOUNCE && CanMoveBeBouncedBack(battlerAtk, move))
+        return TRUE;
+    if (DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
+        return TRUE;
+    // Native type calculation ignores status moves except Thunder Wave (and
+    // an old-generation Glare into a Ghost); only those can be type-immune.
+    if ((move == MOVE_THUNDER_WAVE || (move == MOVE_GLARE && B_GLARE_GHOST < GEN_4))
+     && AI_GetMoveEffectiveness(move, battlerAtk, battlerDef) == UQ_4_12(0.0))
+        return TRUE;
+
+    switch (effect)
+    {
+    case EFFECT_NON_VOLATILE_STATUS:
+        return !CanSetNonVolatileStatus(battlerAtk, battlerDef, abilityAtk, abilityDef,
+            GetMoveNonVolatileStatus(move), CHECK_TRIGGER);
+    case EFFECT_YAWN:
+        return gBattleMons[battlerDef].volatiles.yawn
+            || !CanSetNonVolatileStatus(battlerAtk, battlerDef, abilityAtk, abilityDef, MOVE_EFFECT_SLEEP, CHECK_TRIGGER);
+    case EFFECT_CONFUSE:
+        return gBattleMons[battlerDef].volatiles.confusionTimer
+            || abilityDef == ABILITY_OWN_TEMPO
+            || IsSafeguardProtected(battlerAtk, battlerDef, abilityAtk)
+            || IsMistyTerrainAffected(battlerDef, abilityDef, aiData->holdEffects[battlerDef], gFieldTimers.terrain);
+    case EFFECT_ATTRACT:
+        return gBattleMons[battlerDef].volatiles.infatuation
+            || abilityDef == ABILITY_OBLIVIOUS
+            || !AreBattlersOfOppositeGender(battlerAtk, battlerDef)
+            || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move);
+    case EFFECT_LEECH_SEED:
+        return gBattleMons[battlerDef].volatiles.leechSeed || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS);
+    case EFFECT_ENCORE:
+        return gBattleMons[battlerDef].volatiles.encoredMove != MOVE_NONE
+            || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move)
+            || (!AI_HasUsableLastMove(battlerDef, TRUE) && AI_TargetActsAfterMove(battlerAtk, battlerDef, move));
+    case EFFECT_DISABLE:
+        return gBattleMons[battlerDef].volatiles.disabledMove != MOVE_NONE
+            || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move)
+            || (!AI_HasUsableLastMove(battlerDef, FALSE) && AI_TargetActsAfterMove(battlerAtk, battlerDef, move));
+    case EFFECT_TAUNT:
+        return gBattleMons[battlerDef].volatiles.tauntTimer
+            || (GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && abilityDef == ABILITY_OBLIVIOUS)
+            || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move);
+    case EFFECT_TORMENT:
+        return gBattleMons[battlerDef].volatiles.torment
+            || GetActiveGimmick(battlerDef) == GIMMICK_DYNAMAX
+            || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move);
+    case EFFECT_HEAL_BLOCK:
+        return gBattleMons[battlerDef].volatiles.healBlockTimer
+            || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move);
+    case EFFECT_EMBARGO:
+        return gBattleMons[battlerDef].volatiles.embargoTimer != 0;
+    case EFFECT_NIGHTMARE:
+        return gBattleMons[battlerDef].volatiles.nightmare
+            || (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) && abilityDef != ABILITY_COMATOSE);
+    case EFFECT_STAT_CHANGE:
+        return foe && !AI_CanAnyStatChange(battlerAtk, battlerDef, move);
+    default:
+        return FALSE;
+    }
+}
+
 u32 GetActiveBattlerIds(enum BattlerId battler, enum BattlerId *battlerIn1, enum BattlerId *battlerIn2)
 {
     enum BattlerId opposingBattler = 0;

@@ -191,8 +191,19 @@ static u32 PairDecisionBudgetShare(void)
     return 60 * (groups - pending + 1) / groups;
 }
 
+#if TESTING
+// Test hook: the next joint decision starts with its budget already spent, as
+// a shared multi clock can leave it. Consumed by that one decision.
+EWRAM_DATA bool8 gTestPairBudgetSpent = FALSE;
+static EWRAM_DATA bool8 sTestPairBudgetSpentNow = FALSE;
+#endif
+
 static bool32 PairDecisionBudgetExpired(void)
 {
+#if TESTING
+    if (sTestPairBudgetSpentNow)
+        return TRUE;
+#endif
     return (u32)(gMain.vblankCounter1 - gAiLogicData->decisionStartFrame) >= PairDecisionBudgetShare();
 }
 
@@ -552,6 +563,12 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
         {
             const struct PairAction *action = &ev->choices[actor][index];
             enum MoveTarget targetType = GetMoveTarget(action->executedMove);
+            // A move the engine is certain to refuse on this board - its
+            // effect already up, or the target immune by type, ability, item,
+            // Substitute or field - is not an option for either side: the
+            // shared check the standard AI zeroes it with.
+            if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove))
+                continue;
             if (!IsBattlerAlly(actor, action->target)
              && targetType != TARGET_BOTH && targetType != TARGET_FOES_AND_ALLY
              && targetType != TARGET_ALL_BATTLERS && targetType != TARGET_RANDOM
@@ -560,20 +577,6 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
                 if (!IsBattleMoveStatus(action->executedMove)
                  && !(ev->soakable & ((1u << actor) | (1u << action->target)))
                  && gAiLogicData->effectiveness[actor][action->target][action->index] == UQ_4_12(0.0))
-                    continue;
-                // The native opinion only penalizes a spent status. That
-                // failed move can otherwise become a repeatable fake guard
-                // against Sucker Punch. Exclude pure immediate status here;
-                // keep damaging secondaries, delayed Yawn and spread users.
-                if (IsBattleMoveStatus(action->executedMove)
-                 && GetMoveEffect(action->executedMove) == EFFECT_NON_VOLATILE_STATUS
-                 && gBattleMons[action->target].status1)
-                    continue;
-                // Encore fails outright on a body that is already encored.
-                // Two runs spent a Wobbuffet's turn re-encoring the same
-                // locked Sableye and Yveltal.
-                if (GetMoveEffect(action->executedMove) == EFFECT_ENCORE
-                 && gBattleMons[action->target].volatiles.encoredMove != MOVE_NONE)
                     continue;
             }
             ev->choices[actor][useful++] = *action;
@@ -1334,6 +1337,80 @@ static u32 PairWorkAllowance(u32 pairs)
 
 static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *action);
 
+// Two copies of one effect in the same turn where only the first can land:
+// the second meets the state the first has just set - the same "already in
+// place" failure the shared check sees on the start-of-turn board, reached a
+// few frames later. The standard AI prices this from the partner's chosen
+// move; the pair chooses both at once and has to see it here instead.
+static bool32 PairSecondCopyFails(enum BattleSide side, const struct PairAction *mine, const struct PairAction *theirs)
+{
+    if (mine->index == PAIR_IDLE || theirs->index == PAIR_IDLE)
+        return FALSE;
+    enum BattleMoveEffects effect = GetMoveEffect(mine->executedMove);
+    enum BattleMoveEffects other = GetMoveEffect(theirs->executedMove);
+    switch (effect)
+    {
+    case EFFECT_TRICK_ROOM:
+    case EFFECT_MAGIC_ROOM:
+    case EFFECT_WONDER_ROOM:
+    case EFFECT_WEATHER:
+    case EFFECT_TAILWIND:
+    case EFFECT_FOLLOW_ME:
+    case EFFECT_STEALTH_ROCK:
+    case EFFECT_STICKY_WEB:
+    case EFFECT_SAFEGUARD:
+    case EFFECT_MIST:
+    case EFFECT_LUCKY_CHANT:
+    case EFFECT_REFLECT:
+    case EFFECT_LIGHT_SCREEN:
+    case EFFECT_AURORA_VEIL:
+    case EFFECT_GRAVITY:
+    case EFFECT_FAIRY_LOCK:
+    case EFFECT_PERISH_SONG:
+    case EFFECT_HAZE:
+        return effect == other;
+    case EFFECT_TERRAIN:
+        return other == EFFECT_TERRAIN && GetMoveTerrainType(mine->executedMove) == GetMoveTerrainType(theirs->executedMove);
+    case EFFECT_SPIKES:
+        return other == effect && gSideTimers[side ^ BIT_SIDE].spikesAmount >= 2;
+    case EFFECT_TOXIC_SPIKES:
+        return other == effect && gSideTimers[side ^ BIT_SIDE].toxicSpikesAmount >= 1;
+    // One non-volatile status per body: a second inducer, or a Yawn beside
+    // one, meets a body that is already statused.
+    case EFFECT_NON_VOLATILE_STATUS:
+    case EFFECT_YAWN:
+        return mine->target == theirs->target
+            && (other == EFFECT_NON_VOLATILE_STATUS || other == EFFECT_YAWN);
+    case EFFECT_LEECH_SEED:
+    case EFFECT_ENCORE:
+    case EFFECT_DISABLE:
+    case EFFECT_TORMENT:
+    case EFFECT_HEAL_BLOCK:
+    case EFFECT_CONFUSE:
+    case EFFECT_TAUNT:
+    case EFFECT_ATTRACT:
+    case EFFECT_EMBARGO:
+    case EFFECT_NIGHTMARE:
+        return effect == other && mine->target == theirs->target;
+    default:
+        return FALSE;
+    }
+}
+
+// What a foe's own history with this body says about a Counter or Mirror
+// Coat: the move it last landed on the body while both have stayed in. It is
+// public and it is about this body, where the side's last moves may have been
+// aimed at the partner. 1 when that hit is the category the move returns, -1
+// when it is the other one, 0 when the foe has not hit the body with damage.
+static s32 PairReflectEvidence(enum BattlerId actor, enum BattlerId foe, enum Move move)
+{
+    enum Move taken = gBattleStruct->lastTakenMoveFrom[actor][foe];
+    if (taken == MOVE_NONE || taken == MOVE_UNAVAILABLE || IsBattleMoveStatus(taken))
+        return 0;
+    u32 category = IsBattleMovePhysical(taken) ? DAMAGE_CATEGORY_PHYSICAL : DAMAGE_CATEGORY_SPECIAL;
+    return (GetMoveReflectDamage_DamageCategories(move) & (1u << category)) ? 1 : -1;
+}
+
 // Whether a status move takes its user out of a Choice lock on its own: it
 // leaves the field, gives the item away or faints the user.
 static bool32 PairStatusEndsChoiceLock(enum BattleMoveEffects effect)
@@ -1378,6 +1455,11 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     enum Move move = action->move;
     enum BattleMoveEffects effect = GetMoveEffect(move);
     u32 plan = EmeraldChampions_GetBattlePlan(actor);
+    // A move the engine is certain to refuse on the board we can see is a
+    // failed move, whatever the isolated opinion or any plan reward says: the
+    // same shared check the standard AI zeroes it with.
+    if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove))
+        return -10000;
     // A last-turn "refresh" costs both actions and can cancel itself when one
     // setter is interrupted. Let the room expire and establish it next turn.
     if (effect == EFFECT_TRICK_ROOM)
@@ -1444,7 +1526,7 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
         // opposing side has actually used belongs to it, this is a guess, not
         // a read.
         u32 categories = GetMoveReflectDamage_DamageCategories(move);
-        bool32 seen = FALSE, matched = FALSE, able = FALSE;
+        bool32 seen = FALSE, matched = FALSE, able = FALSE, read = FALSE, contradicted = FALSE;
         for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         {
             if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
@@ -1454,6 +1536,11 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
             // hit from one of those is nothing to reflect.
             if (gAiLogicData->effectiveness[actor][foe][action->index] == UQ_4_12(0.0))
                 continue;
+            s32 evidence = PairReflectEvidence(actor, foe, move);
+            if (evidence > 0)
+                read = TRUE;
+            else if (evidence < 0)
+                contradicted = TRUE;
             for (u32 slot = 0; slot < MAX_MON_MOVES && !able; slot++)
             {
                 enum Move known = gBattleMons[foe].moves[slot];
@@ -1463,23 +1550,33 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
                  && gAiLogicData->simulatedDmg[foe][actor][slot].maximum)
                     able = TRUE;
             }
+            // Only a hit aimed at this user is a read on what it will take:
+            // a special move thrown at the partner says nothing about the
+            // Tackles that keep landing here.
             enum Move last = gAiLogicData->lastUsedMove[foe];
-            if (last == MOVE_NONE || last == MOVE_UNAVAILABLE || IsBattleMoveStatus(last))
+            if (last == MOVE_NONE || last == MOVE_UNAVAILABLE || IsBattleMoveStatus(last)
+             || (!PairSpread(last) && gBattleStruct->battlerState[foe].lastMoveTarget != actor))
                 continue;
             seen = TRUE;
             if (categories & (1u << (IsBattleMovePhysical(last) ? DAMAGE_CATEGORY_PHYSICAL : DAMAGE_CATEGORY_SPECIAL)))
                 matched = TRUE;
         }
         // Nothing the reflection could reach is able to hit this user in the
-        // right category at all, or everything it has seen hit belongs to the
-        // other category: a guess, not a read.
-        if (!able || (seen && !matched))
-            return -40;
-        // The other half of the same read: a side that has only hit specially
-        // is the one board state where Mirror Coat is a read rather than a
-        // guess, and it was never being chosen.
-        if (matched)
+        // right category at all: the engine is certain to refuse it.
+        if (!able)
+            return -10000;
+        // The read is a foe that has hit this body in the returned category.
+        // A side that has only hit specially is where Mirror Coat is a read
+        // rather than a guess - but only when those hits landed here. Dragon
+        // Rages aimed at the partner read nothing about this body: the
+        // fisherman's Feebas took them as a read for eight failed Mirror Coats
+        // while every hit it actually took was a Tackle.
+        if (read)
             return 25;
+        // A foe that has answered this body in the other category, or a side
+        // whose every hit was the other category: a guess, not a read.
+        if (contradicted || (seen && !matched))
+            return -40;
     }
     if (!IsBattleMoveStatus(action->executedMove) && IsBattlerAlive(action->target)
      && !IsBattlerAlly(actor, action->target)
@@ -3277,17 +3374,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         statStage[actor][3] = gBattleMons[actor].statStages[STAT_SPATK];
         for (u32 stat = 0; stat < 4; stat++)
             statModifier[actor][stat] = 100;
-        if (GetBattlerSide(actor) == ev->side && actions[actor].index != PAIR_IDLE)
-        {
-            enum BattleMoveEffects effect = GetMoveEffect(actions[actor].move);
-            enum BattleMoveEffects partnerEffect = GetMoveEffect(actions[GetPartnerBattler(actor)].move);
-            if (effect == partnerEffect && (effect == EFFECT_TRICK_ROOM || effect == EFFECT_WEATHER
-                || effect == EFFECT_TAILWIND || effect == EFFECT_FOLLOW_ME
-                || effect == EFFECT_STEALTH_ROCK || effect == EFFECT_STICKY_WEB
-                || (effect == EFFECT_SPIKES && gSideTimers[ev->side ^ 1].spikesAmount >= 2)
-                || (effect == EFFECT_TOXIC_SPIKES && gSideTimers[ev->side ^ 1].toxicSpikesAmount >= 1)))
-                return -10000;
-        }
+        if (GetBattlerSide(actor) == ev->side && actions[actor].index != PAIR_IDLE
+         && PairSecondCopyFails(ev->side, &actions[actor], &actions[GetPartnerBattler(actor)]))
+            return -10000;
     }
     for (u32 turn = 0; turn < gBattlersCount || pendingDancers;)
     {
@@ -4256,6 +4345,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     worstDamage = retaliation->damage.maximum * percent / 100;
                 }
                 accuracy = accuracy * retaliation->chance / 100;
+                // The forecast fed the reflection with a hit this foe has
+                // visibly not been answering this body with: its last hit on
+                // it was the other category. That hit is the alternative,
+                // not the expected pattern, and is priced as one.
+                if (!copy && retaliation->source < gBattlersCount
+                 && PairReflectEvidence(actor, retaliation->source, move) < 0)
+                    accuracy = accuracy * PAIR_FORECAST_ALTERNATE / 100;
             }
             if (effect == EFFECT_POPULATION_BOMB && gAiLogicData->populationBomb[actor][target].valid)
             {
@@ -4280,18 +4376,26 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // weather. Preserve the cached zero for immunity/failure.
                 amount = minimumDamage = worstDamage = damage.maximum ? PairFixedPercentDamage(ev, target, move, hp[target]) : 0;
             }
-            if ((copy || IsBattlerAlly(actor, target)) && damage.maximum == 0)
+            // A foe's absorbing ability turns the hit into its own gain. A
+            // spread move still reaches the other recipient, so it is not a
+            // failed move - but Discharge healing a Volt Absorb body and
+            // Eruption lighting a Flash Fire were being scored as free.
+            bool32 foeAbsorbs = !copy && !IsBattlerAlly(actor, target) && !IsBattleMoveStatus(move);
+            if ((copy || IsBattlerAlly(actor, target) || foeAbsorbs) && damage.maximum == 0)
             {
                 enum Type type = actualType;
+                bool32 boosted = FALSE;
                 if ((targetAbility == ABILITY_STORM_DRAIN && type == TYPE_WATER)
                  || (targetAbility == ABILITY_LIGHTNING_ROD && type == TYPE_ELECTRIC))
                 {
                     PairChangeStat(&statStage[target][3], &statModifier[target][3], 1, 100, FALSE);
+                    boosted = TRUE;
                 }
                 else if (targetAbility == ABILITY_MOTOR_DRIVE && type == TYPE_ELECTRIC)
                 {
                     if (!(acted & (1u << target)))
                         speed[target] = speed[target] * PairChangeStage(&speedStage[target], 1) / 100;
+                    boosted = TRUE;
                 }
                 else if ((targetAbility == ABILITY_WATER_ABSORB && type == TYPE_WATER)
                       || (targetAbility == ABILITY_DRY_SKIN && type == TYPE_WATER)
@@ -4301,6 +4405,17 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     if (!gBattleMons[target].volatiles.healBlockTimer)
                         hp[target] = min(gBattleMons[target].maxHP, hp[target] + gBattleMons[target].maxHP / 4);
                 }
+                else if ((targetAbility == ABILITY_SAP_SIPPER && type == TYPE_GRASS)
+                      || (targetAbility == ABILITY_FLASH_FIRE && type == TYPE_FIRE)
+                      || (targetAbility == ABILITY_WELL_BAKED_BODY && type == TYPE_FIRE)
+                      || (targetAbility == ABILITY_WIND_RIDER && IsWindMove(move)))
+                {
+                    boosted = TRUE;
+                }
+                // The heal is already in the foe's HP. A boost is the same
+                // next-turn value a setup move buys, handed to the other side.
+                if (foeAbsorbs && boosted)
+                    score -= sign * PAIR_SETUP_HORIZON * (s32)(accuracy * survival[actor] / 100) / 100;
             }
             bool32 singleHit = GetMoveStrikeCount(move) <= 1 && !IsMultiHitMove(move)
                 && effect != EFFECT_BEAT_UP && gAiLogicData->abilities[actor] != ABILITY_PARENTAL_BOND;
@@ -5337,7 +5452,13 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             {
                 gAiPairBudgetTruncated = TRUE;
                 gAiPairDecisionTruncated = TRUE;
-                if (!canStop)
+                // A turn's first board has nothing behind it: abandoning it
+                // left the placeholder - slot zero aimed at the user - as the
+                // decision, and the AI attacked its own battler whenever a
+                // shared multi clock ran out first. It settles with what it
+                // has once each body has a real scored action. A candidate
+                // query (no chosen actions) still abandons the comparison.
+                if (!canStop && chosen == NULL)
                     goto done;
                 if (shortCount != 0 && scoredAttack[0] && scoredAttack[1])
                     goto settle;
@@ -5999,6 +6120,10 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     }
     if (gAiLogicData->battlerMovesScored & (1u << actor))
         return TRUE;
+#if TESTING
+    sTestPairBudgetSpentNow = gTestPairBudgetSpent;
+    gTestPairBudgetSpent = FALSE;
+#endif
     struct SwitchCandidateSnapshot *state = AI_SaveCandidateState();
     struct PairEvaluation *ev = AllocZeroed(sizeof(*ev));
     // This owner restores before every candidate and at decisionReady. A
@@ -6259,6 +6384,9 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
         }
     }
 decisionReady:
+#if TESTING
+    sTestPairBudgetSpentNow = FALSE;
+#endif
     sPairVisibleForecast.mode = PAIR_VISIBLE_FORECAST_NONE;
     AI_RestoreCandidateState(state);
     bool32 attackPivot[2] = {FALSE, FALSE};
@@ -6271,6 +6399,15 @@ decisionReady:
     AI_RestoreCandidateState(state);
     AI_FreeCandidateState(state);
     FreePairEvaluation(ev);
+    // No board produced a scored pair, so the actions above are still the
+    // placeholder. Hand the turn to the per-battler scorer rather than the
+    // placeholder's self-aimed slot zero.
+    if (best == INT_MIN)
+    {
+        if (CanMegaEvolve(actor))
+            SetAIUsingGimmick(actor, USE_GIMMICK);
+        return FALSE;
+    }
     for (u32 index = 0; index < 2; index++)
     {
         enum BattlerId battler = actors[index];

@@ -1453,18 +1453,23 @@ static bool32 AI_RedirectionHasPartnerPayoff(enum BattlerId battler, enum Move m
 
 
 // Repeating a revealed redirection move is a risk, not knowledge of the
-// player's pending command. Avoid rewarding another Seed that would reach
-// an already-seeded recipient. This adds no simulated turns or new state.
-static bool32 IsLeechSeedLikelyRedirectedToSeededFoe(enum BattlerId battlerAtk, enum BattlerId battlerDef)
+// player's pending command. Avoid rewarding a status move that the redirector
+// would take and is certain to refuse: a second Seed into the seeded body, a
+// second Will-O-Wisp into the burn it already gave. No simulated turns or state.
+static bool32 IsStatusLikelyRedirectedIntoFailure(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
     struct AiLogicData *aiData = gAiLogicData;
     enum BattlerId redirector = GetPartnerBattler(battlerDef);
     enum Move previous = aiData->lastUsedMove[redirector];
-    if (!HasPartner(battlerDef) || !gBattleMons[redirector].volatiles.leechSeed
+    enum MoveTarget target = AI_GetBattlerMoveTargetType(battlerAtk, move);
+    if (!IsBattleMoveStatus(move) || IsBattlerAlly(battlerAtk, battlerDef)
+     || (target != TARGET_SELECTED && target != TARGET_SMART)
+     || !HasPartner(battlerDef) || !IsBattlerAlive(redirector)
      || (previous != MOVE_FOLLOW_ME && previous != MOVE_RAGE_POWDER)
      || IsBattlerIncapacitated(redirector, aiData->abilities[redirector])
-     || IsMoveRedirectionPrevented(battlerAtk, MOVE_LEECH_SEED, aiData->abilities[battlerAtk])
-     || (IsPowderMove(previous) && !IsAffectedByPowderMove(battlerAtk, aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk])))
+     || IsMoveRedirectionPrevented(battlerAtk, move, aiData->abilities[battlerAtk])
+     || (IsPowderMove(previous) && !IsAffectedByPowderMove(battlerAtk, aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk]))
+     || !AI_IsMoveCertainToFail(battlerAtk, redirector, move))
         return FALSE;
     enum Move *moves = GetMovesArray(redirector);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
@@ -1517,6 +1522,14 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         // status move with no reserve) apply only to the valid-target path.
         return 0;
     }
+
+    // The same holds for any move the engine is certain to refuse on the
+    // board the AI can see: an effect already in place, or a target immune
+    // by type, ability, item, Substitute or field.
+    if (AI_IsMoveCertainToFail(battlerAtk, battlerDef, move))
+        return 0;
+    if (IsStatusLikelyRedirectedIntoFailure(battlerAtk, battlerDef, move))
+        ADJUST_SCORE(-20);
 
     // Don't use moves that miss against already semi-invulnerable targets when we move first.
     if (!CanBreakThroughSemiInvulnerablity(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move)
@@ -2085,9 +2098,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-8);
         break;
     case EFFECT_LEECH_SEED:
-        if (IsLeechSeedLikelyRedirectedToSeededFoe(battlerAtk, battlerDef))
-            ADJUST_SCORE(-20);
-        else if (gBattleMons[battlerDef].volatiles.leechSeed
+        if (gBattleMons[battlerDef].volatiles.leechSeed
          || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS)
          || DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
             ADJUST_SCORE(-10);

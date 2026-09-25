@@ -2135,3 +2135,120 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Jaclyn's Wobbuffet never Encores it
         EXPECT_EQ(opponentRight->species, SPECIES_GALLADE);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Georgia's Duskull does not Wisp through a burned Rage Powder user")
+{
+    GIVEN {
+        // The benchmark line: the burned Amoonguss has just drawn Duskull's
+        // Will-O-Wisp with Rage Powder, and the Choice Band Excadrill is
+        // still locked into Iron Head. Every further Wisp aimed at Excadrill
+        // was redirected into the burn it had already given, twice.
+        const struct EmeraldChampionsBattleSet amoonguss = {
+            .moves = {MOVE_RAGE_POWDER, MOVE_SPORE, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH, .nature = NATURE_BOLD, .ability = ABILITY_REGENERATOR,
+        };
+        const struct EmeraldChampionsBattleSet excadrill = {
+            .moves = {MOVE_IRON_HEAD, MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE},
+            .item = ITEM_CHOICE_BAND, .nature = NATURE_ADAMANT, .ability = ABILITY_MOLD_BREAKER,
+        };
+        struct Pokemon mon;
+        CreateRandomMonWithIVs(&mon, SPECIES_AMOONGUSS, 40, MAX_PER_STAT_IVS);
+        EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, &amoonguss), EC_BATTLE_SET_SUCCESS);
+        CalculateMonStats(&mon);
+        PLAYER(SPECIES_AMOONGUSS) {
+            *gBattleTestRunnerState->data.currentMon = mon;
+            Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+            Moves(amoonguss.moves[0], amoonguss.moves[1], amoonguss.moves[2], amoonguss.moves[3]);
+            Status1(STATUS1_BURN);
+        }
+        PreparedPlayer(SPECIES_EXCADRILL, 40, &excadrill);
+        // Trick House 2 is Georgia's room: three badges, cap40. Azumarill
+        // stands beside Duskull as it did once Metang fell.
+        AuthoredOpponentWithPartner(TRAINER_GEORGIA, 3, FALSE, 2);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_RAGE_POWDER); MOVE(playerRight, MOVE_IRON_HEAD, target: opponentRight); }
+        TURN {
+            MOVE(playerLeft, MOVE_RAGE_POWDER);
+            MOVE(playerRight, MOVE_IRON_HEAD, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_WILL_O_WISP);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: the fisherman's Feebas does not Mirror Coat Tackles")
+{
+    GIVEN {
+        // The benchmark line: six Magikarp, whose only special move is Dragon
+        // Rage, answered Feebas with Tackle and Flail and aimed every Dragon
+        // Rage at the other fish. Feebas chose Mirror Coat on eight turns and
+        // it failed on every one.
+        const struct EmeraldChampionsBattleSet karp = {
+            .moves = {MOVE_DRAGON_RAGE, MOVE_FLAIL, MOVE_BOUNCE, MOVE_TACKLE},
+            .item = ITEM_FOCUS_SASH, .nature = NATURE_JOLLY, .ability = ABILITY_SWIFT_SWIM,
+            .evs = {252, 0, 4, 0, 0, 252},
+        };
+        for (u32 i = 0; i < 6; i++)
+            PreparedPlayer(SPECIES_MAGIKARP, 55, &karp);
+        // Route 118's fisherman is met after the fifth badge.
+        AuthoredOpponent(TRAINER_MAGIKARP_GUY, 5, FALSE);
+    } WHEN {
+        // Turn one of the benchmark: both Dragon Rages into his Magikarp.
+        TURN {
+            MOVE(playerLeft, MOVE_DRAGON_RAGE, target: opponentLeft);
+            MOVE(playerRight, MOVE_DRAGON_RAGE, target: opponentLeft);
+        }
+        // Turn two: Dragon Rage at his Magikarp again, Tackle into Feebas.
+        TURN {
+            MOVE(playerLeft, MOVE_DRAGON_RAGE, target: opponentLeft);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+        }
+        // Feebas has now taken a Tackle and no special hit at all.
+        TURN {
+            MOVE(playerLeft, MOVE_DRAGON_RAGE, target: opponentLeft);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_MIRROR_COAT);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Takao's Wobbuffet does not raise a second Safeguard")
+{
+    GIVEN {
+        // The benchmark line: Sableye and Mawile push into Grapploct while
+        // Takao's Safeguard is up. The Wobbuffet set it on turn one and chose
+        // it again three turns later, into its own veil.
+        const struct EmeraldChampionsBattleSet sets[] = {
+            {.moves = {MOVE_FAKE_OUT, MOVE_WILL_O_WISP, MOVE_FOUL_PLAY, MOVE_PROTECT}, .item = ITEM_SITRUS_BERRY, .nature = NATURE_CAREFUL, .ability = ABILITY_PRANKSTER},
+            {.moves = {MOVE_PLAY_ROUGH, MOVE_IRON_HEAD, MOVE_SUCKER_PUNCH, MOVE_PROTECT}, .item = ITEM_FOCUS_SASH, .nature = NATURE_ADAMANT, .ability = ABILITY_INTIMIDATE},
+            {.moves = {MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_PSYCHIC, MOVE_PROTECT}, .item = ITEM_EVIOLITE, .nature = NATURE_MODEST, .ability = ABILITY_FLOWER_VEIL},
+        };
+        // Bulk enough that both leads stand through the line, so every turn
+        // is the same decision the benchmark faced.
+        const enum Species leads[] = {SPECIES_SABLEYE, SPECIES_MAWILE};
+        for (u32 i = 0; i < ARRAY_COUNT(leads); i++)
+        {
+            struct Pokemon mon;
+            CreateRandomMonWithIVs(&mon, leads[i], 20, MAX_PER_STAT_IVS);
+            EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, &sets[i]), EC_BATTLE_SET_SUCCESS);
+            CalculateMonStats(&mon);
+            PLAYER(leads[i]) {
+                *gBattleTestRunnerState->data.currentMon = mon;
+                Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+                Moves(sets[i].moves[0], sets[i].moves[1], sets[i].moves[2], sets[i].moves[3]);
+                HP(400); MaxHP(400);
+            }
+        }
+        PreparedPlayer(SPECIES_FLOETTE, 20, &sets[2]);
+        // Takao is the Dewford gym's trainer: one badge, cap20.
+        AuthoredOpponent(TRAINER_TAKAO, 1, FALSE);
+    } WHEN {
+        // Every command repeats, so an Encore on either never changes it.
+        for (u32 turn = 0; turn < 4; turn++)
+            TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentLeft); MOVE(playerRight, MOVE_PLAY_ROUGH, target: opponentLeft); }
+    } THEN {
+        // Safeguard lasts five turns: the Wobbuffet sets it once in four.
+        struct Pokemon *wobbuffet = &gParties[B_TRAINER_OPPONENT_A][1];
+        EXPECT_EQ(GetMonData(wobbuffet, MON_DATA_SPECIES), SPECIES_WOBBUFFET);
+        EXPECT_GE(GetMonData(wobbuffet, MON_DATA_PP4), GetMovePP(MOVE_SAFEGUARD) - 1);
+    }
+}
