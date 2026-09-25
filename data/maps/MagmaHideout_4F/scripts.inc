@@ -18,7 +18,8 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	delay 20
 	setvar VAR_RESULT, 1
 	playse SE_M_DETECT
-	dofieldeffectsparkle 18, 42, 0
+	@ The Red Orb shines in Maxie's hands (16, 21), as Archie's does at Seafloor Cavern.
+	dofieldeffectsparkle 16, 21, 0
 	waitfieldeffect FLDEFF_SPARKLE
 	setvar VAR_RESULT, 0
 	playfanfare MUS_AWAKEN_LEGEND
@@ -113,6 +114,9 @@ MagmaHideout_4F_Movement_GroudonApproach: @ 823A672
 	step_end
 
 MagmaHideout_4F_Movement_GroudonExit: @ 823A67D
+	@ Clear the top of the screen before Groudon is removed.
+	slide_up
+	slide_up
 	slide_up
 	slide_up
 	step_end

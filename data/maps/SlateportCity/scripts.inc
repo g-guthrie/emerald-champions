@@ -1022,8 +1022,8 @@ SlateportCity_EventScript_BrawlyNoticePlayer::
 	waitmovement 0
 	faceplayer
 	msgbox SlateportCity_Text_LookingForBrawly, MSGBOX_DEFAULT
-	fadescreen FADE_TO_BLACK
 	closemessage
+	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_BRAWLY
 	fadescreen FADE_FROM_BLACK
 	releaseall

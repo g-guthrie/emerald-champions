@@ -117,6 +117,10 @@ MeteorFalls_1F_1R_EventScript_MayAfterCancel::
 	waitmovement 0
 	playse SE_PIN
 	applymovement 11, Common_Movement_ExclamationMark
+	waitmovement 0
+	@ Let the rival's "!" finish before the player steps into the tile it covers.
+	applymovement 11, Common_Movement_Delay48
+	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_WalkDown2
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_MayPlayerHere, MSGBOX_YESNO
@@ -137,6 +141,10 @@ MeteorFalls_1F_1R_EventScript_BrendanAfterCancel::
 	waitmovement 0
 	playse SE_PIN
 	applymovement 11, Common_Movement_ExclamationMark
+	waitmovement 0
+	@ Let the rival's "!" finish before the player steps into the tile it covers.
+	applymovement 11, Common_Movement_Delay48
+	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_WalkDown2
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_BrendanPlayerHere, MSGBOX_YESNO
@@ -153,9 +161,7 @@ MeteorFalls_1F_1R_EventScript_MultiMay::
 	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_CourtneyLetsBattle, MSGBOX_DEFAULT
-	choose_mons
-    compare VAR_RESULT, 0
-    call_if_eq MeteorFalls_1F_1R_EventScript_ChooseMons
+	closemessage
 	applymovement LOCALID_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_WalkRight1
 	waitmovement LOCALID_MAGMA_GRUNT_1
 	@ The rival keeps the starter the player left behind (the player takes two).
@@ -174,9 +180,7 @@ MeteorFalls_1F_1R_EventScript_MultiBrendan::
 	applymovement 6, Common_Movement_WalkInPlaceRight
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_CourtneyLetsBattle, MSGBOX_DEFAULT
-	choose_mons
-    compare VAR_RESULT, 0
-    call_if_eq MeteorFalls_1F_1R_EventScript_ChooseMons
+	closemessage
 	applymovement LOCALID_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_WalkRight1
 	waitmovement LOCALID_MAGMA_GRUNT_1
 	@ The rival keeps the starter the player left behind (the player takes two).
@@ -217,15 +221,9 @@ MeteorFalls_1F_1R_EventScript_CheckMultiResult::
 	goto_if_ne MeteorFalls_1F_1R_EventScript_Lost
 	goto MeteorFalls_1F_1R_EventScript_MagmaAfterBattle
 
-MeteorFalls_1F_1R_EventScript_ChooseMons::
-    msgbox MeteorFalls_1F_1R_Text_ChooseMons, MSGBOX_DEFAULT
-    choose_mons
-    compare VAR_RESULT, 0
-    goto_if_eq MeteorFalls_1F_1R_EventScript_CancelMultiBattle
-    return
-
 MeteorFalls_1F_1R_EventScript_CancelMultiBattle::
     msgbox MeteorFalls_1F_1R_Text_CancelMultiBattle, MSGBOX_DEFAULT
+	closemessage
 	setvar VAR_METEOR_FALLS_STATE, 2
 	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_RetreatToLedge
 	applymovement OBJ_EVENT_ID_CAMERA, MeteorFalls_1F_1R_Movement_RetreatToLedge
@@ -248,9 +246,32 @@ MeteorFalls_1F_1R_EventScript_MultiCancelled::
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq MeteorFalls_1F_1R_EventScript_MayAfterCancel
+	goto_if_eq MeteorFalls_1F_1R_EventScript_MayRetry
 	compare VAR_RESULT, FEMALE
-	goto_if_eq MeteorFalls_1F_1R_EventScript_BrendanAfterCancel
+	goto_if_eq MeteorFalls_1F_1R_EventScript_BrendanRetry
+
+@ The rival already knows the player is here: no second "!" or first greeting.
+MeteorFalls_1F_1R_EventScript_MayRetry::
+	applymovement 11, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_WalkDown2
+	waitmovement 0
+	msgbox MeteorFalls_1F_1R_Text_MayReadyNow, MSGBOX_YESNO
+	switch VAR_RESULT
+	case NO, MeteorFalls_1F_1R_EventScript_CancelMultiBattle
+	case YES, MeteorFalls_1F_1R_EventScript_MultiMay
+	end
+
+MeteorFalls_1F_1R_EventScript_BrendanRetry::
+	applymovement 11, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, MeteorFalls_1F_1R_Movement_WalkDown2
+	waitmovement 0
+	msgbox MeteorFalls_1F_1R_Text_BrendanReadyNow, MSGBOX_YESNO
+	switch VAR_RESULT
+	case NO, MeteorFalls_1F_1R_EventScript_CancelMultiBattle
+	case YES, MeteorFalls_1F_1R_EventScript_MultiBrendan
+	end
 
 MeteorFalls_1F_1R_EventScript_RivalTalkAfterBattle::
 	lock
@@ -476,6 +497,16 @@ MeteorFalls_1F_1R_Text_BrendanPlayerHere:
 	.string "Sorry to ask, {PLAYER}, but…\n"
 	.string "Battle alongside me!$"
 
+MeteorFalls_1F_1R_Text_MayReadyNow:
+	.string "May: {PLAYER}{KUN}! Are you ready now?\p"
+	.string "{PLAYER}{KUN}, please!\n"
+	.string "Battle together with me!$"
+
+MeteorFalls_1F_1R_Text_BrendanReadyNow:
+	.string "Brendan: {PLAYER}! You ready now?\p"
+	.string "Sorry to ask, {PLAYER}, but…\n"
+	.string "Battle alongside me!$"
+
 MeteorFalls_1F_1R_Text_MayLetsBattle:
 	.string "Thanks a mill!$"
 
@@ -494,9 +525,6 @@ MeteorFalls_1F_1R_Text_CourtneyLose:
 MeteorFalls_1F_1R_Text_GruntLose:
 	.string "Are you telling me you're that strong\n"
 	.string "and still just kids?!$"
-
-MeteorFalls_1F_1R_Text_ChooseMons:
-	.string "Choose which Pokémon will battle.$"
 
 MeteorFalls_1F_1R_Text_CancelMultiBattle:
 	.string "Oh, you've got to get ready first?\n"

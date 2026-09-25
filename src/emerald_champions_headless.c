@@ -4221,7 +4221,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH:
         PrepareHeadlessFieldMoveParty(SPECIES_ZIGZAGOON, FLAG_BADGE03_GET, FLAG_RECEIVED_HM_ROCK_SMASH);
-        LoadHeadlessMap(MAP_ROUTE111, 18, 102);
+        // Beside the nurse, below the east rock; her own tile is occupied.
+        LoadHeadlessMap(MAP_ROUTE111, 19, 101);
         break;
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_STRENGTH:
         PrepareHeadlessFieldMoveParty(SPECIES_LINOONE, FLAG_BADGE04_GET, FLAG_RECEIVED_HM_STRENGTH);
@@ -4246,7 +4247,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     }
     case EC_HEADLESS_SCENARIO_HALL_OF_FAME_RECORD:
         PrepareHeadlessHallParty(gEcHeadlessFixtureParam);
-        LoadHeadlessMap(MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 7, 11);
+        // Where Wallace's walk leaves the player, so the balls land on the machine.
+        LoadHeadlessMap(MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 7, 5);
         gFieldCallback = FieldCB_HeadlessSuppressOnFrame;
         break;
     case EC_HEADLESS_SCENARIO_MULTI_CORRIDOR_DOOR:

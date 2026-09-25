@@ -148,7 +148,16 @@ EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, EmeraldChampions_EventScript_BattleItemCategoryBack
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_RESULT
+	special BufferEmeraldChampionsBattleItemStock
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_BattleItemCategoryEmpty
+	@ Like every Poke Mart, Buy/Sell/Quit opens under the clerk's question.
+	message General_Mart_Text_BuyingOrSelling
+	waitmessage
 	special OpenEmeraldChampionsBattleItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_BattleItemCategoryEmpty:
+	msgbox EmeraldChampions_Text_BattleItemCategoryEmpty, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_BattleItemCategories
 
 EmeraldChampions_EventScript_BattleItemCategoryBack:
@@ -157,6 +166,8 @@ EmeraldChampions_EventScript_BattleItemCategoryBack:
 	goto EmeraldChampions_EventScript_BattleVendorExit
 
 EmeraldChampions_EventScript_OpenEvolutionArchive:
+	message General_Mart_Text_BuyingOrSelling
+	waitmessage
 	special OpenEmeraldChampionsEvolutionItemArchive
 	goto EmeraldChampions_EventScript_BattleVendorMain
 
@@ -196,6 +207,10 @@ EmeraldChampions_Text_HeldItems:
 
 EmeraldChampions_Text_BattleItemCategoryPrompt:
 	.string "Which kind of held item do you need?$"
+
+EmeraldChampions_Text_BattleItemCategoryEmpty:
+	.string "None of those are in stock yet.\n"
+	.string "Find one on your journey first!$"
 
 EmeraldChampions_Text_OffenseItems:
 	.string "Offense$"

@@ -602,12 +602,17 @@ void GiveEmeraldChampionsStarterBattleItems(void)
 
 static EWRAM_DATA u16 sEmeraldChampionsUnlockedStock[EC_BATTLE_ITEM_MAX_CATEGORY + 1];
 
-void OpenEmeraldChampionsBattleItemMart(void)
+// Builds the unlocked shelf for category VAR_0x8004; VAR_RESULT is its item
+// count, so the vendor can say an empty category is out of stock instead of
+// opening a Buy list that holds only Cancel.
+void BufferEmeraldChampionsBattleItemStock(void)
 {
     u16 category = gSpecialVar_0x8004;
     const u16 *stock;
     u32 out = 0;
 
+    sEmeraldChampionsUnlockedStock[0] = ITEM_NONE;
+    gSpecialVar_Result = 0;
     if (category >= ARRAY_COUNT(sEmeraldChampionsBattleItemCategories))
         return;
     stock = sEmeraldChampionsBattleItemCategories[category];
@@ -617,6 +622,12 @@ void OpenEmeraldChampionsBattleItemMart(void)
             sEmeraldChampionsUnlockedStock[out++] = stock[i];
     }
     sEmeraldChampionsUnlockedStock[out] = ITEM_NONE;
+    gSpecialVar_Result = out;
+}
+
+// Opens the shelf BufferEmeraldChampionsBattleItemStock prepared.
+void OpenEmeraldChampionsBattleItemMart(void)
+{
     CreatePokemartMenu(sEmeraldChampionsUnlockedStock);
     ScriptContext_Stop();
 }

@@ -958,6 +958,8 @@ SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth:: @ 81E6255
 @ Approaches from north (player faces south) and west (player faces east):
 @ the player steps clear, then trails Steven one tile behind to the same spot.
 SootopolisCity_EventScript_StartWalkToCaveOfOriginSouth::
+	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerStepAsideForSteven
+	waitmovement 0
 	applymovement LOCALID_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginSouth
 	waitmovement 0
@@ -969,8 +971,13 @@ SootopolisCity_EventScript_StartWalkToCaveOfOriginEast::
 	waitmovement 0
 	return
 
-SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginSouth:
+SootopolisCity_Movement_PlayerStepAsideForSteven:
 	walk_left
+	step_end
+
+SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginSouth:
+	face_right
+	delay_16
 	walk_right
 	walk_up
 	walk_up

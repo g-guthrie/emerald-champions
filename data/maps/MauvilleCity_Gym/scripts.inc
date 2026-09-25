@@ -87,7 +87,6 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
-	closemessage
 	msgbox MauvilleCity_Gym_Text_ExplainTakeThis, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT

@@ -62,7 +62,10 @@ PetalburgWoods_EventScript_DevonResearcherRight:: @ 822E079
 	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherFleeToPlayerRight
 	waitmovement 0
 	msgbox PetalburgWoods_Text_YouHaveToHelpMe, MSGBOX_DEFAULT
+	closemessage
+	@ Step in front of the player, as on the left lane, rather than talk diagonally.
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaApproachPlayerRight
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NoOneCrossesTeamAqua, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_GRUNT_PETALBURG_WOODS, PetalburgWoods_Text_YoureKiddingMe
@@ -241,6 +244,11 @@ PetalburgWoods_Movement_AquaEntrance: @ 822E209
 
 PetalburgWoods_Movement_AquaApproachPlayer: @ 822E20E
 	walk_down
+	step_end
+
+PetalburgWoods_Movement_AquaApproachPlayerRight:
+	walk_right
+	walk_in_place_fast_down
 	step_end
 
 PetalburgWoods_EventScript_Boy1:: @ 822E210

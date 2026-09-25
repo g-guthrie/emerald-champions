@@ -5526,8 +5526,10 @@ static void HandleEndTurn_FinishBattle(void)
         {
             bool32 changedForm = TryRevertPartyMonFormChange(i);
 
-            // Recalculate the stats of every party member before the end
-            if (!changedForm && B_RECALCULATE_STATS >= GEN_5)
+            // Recalculate the stats of every party member before the end;
+            // an empty slot would otherwise be left holding 10 HP.
+            if (!changedForm && B_RECALCULATE_STATS >= GEN_5
+             && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE)
                 CalculateMonStats(&gParties[B_TRAINER_PLAYER][i]);
         }
         RecordedBattle_SetPlaybackFinished();

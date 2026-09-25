@@ -444,8 +444,8 @@ gSpecials::
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
 	def_special OpenEmeraldChampionsBattleItemMart
-	@ Retired category wrappers: preserve all subsequent special IDs.
-	def_special Unused_EmeraldChampionsOffenseItemMart, unused=1
+	@ Reuses the first retired category slot; the rest stay reserved so later special IDs never move.
+	def_special BufferEmeraldChampionsBattleItemStock
 	def_special Unused_EmeraldChampionsDefenseItemMart, unused=1
 	def_special Unused_EmeraldChampionsFieldItemMart, unused=1
 	def_special Unused_EmeraldChampionsTypeItemMart, unused=1

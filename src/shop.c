@@ -672,6 +672,8 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 
     if (IsSinglePurchaseItem(itemId) && PlayerOwnsItem(itemId))
         StringCopy(gStringVar4, gText_SoldOut);
+    else if (sMartInfo.martType == MART_TYPE_NORMAL && GetShopItemPrice(itemId) == 0)
+        StringCopy(gStringVar4, gText_ShopFree);
     else
         StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
     x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 120);
@@ -1049,7 +1051,8 @@ static void Task_BuyMenu(u8 taskId)
                         tItemCount = 1;
                         sShopData->totalCost = GetShopItemPrice(tItemId) * tItemCount;
                         ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
-                        StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
+                        StringExpandPlaceholders(gStringVar4, sShopData->totalCost == 0
+                            ? gText_YouWantedVar1NoCharge : gText_YouWantedVar1ThatllBeVar2);
                         BuyMenuDisplayMessage(taskId, gStringVar4, BuyMenuConfirmPurchase);
                     }
                     else
@@ -1124,7 +1127,8 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
             CopyItemName(tItemId, gStringVar1);
             ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
             ConvertIntToDecimalStringN(gStringVar3, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
-            BuyMenuDisplayMessage(taskId, gText_Var1AndYouWantedVar2, BuyMenuConfirmPurchase);
+            BuyMenuDisplayMessage(taskId, sShopData->totalCost == 0
+                ? gText_Var1AndYouWantedVar2NoCharge : gText_Var1AndYouWantedVar2, BuyMenuConfirmPurchase);
         }
         else if (JOY_NEW(B_BUTTON))
         {
@@ -1256,7 +1260,11 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(WIN_QUANTITY_PRICE, PIXEL_FILL(1));
-    PrintMoneyAmount(WIN_QUANTITY_PRICE, CalculateMoneyTextHorizontalPosition(sShopData->totalCost), 1, sShopData->totalCost, TEXT_SKIP_DRAW);
+    // Free catalogue tools read "Free", ending where a six-digit price ends.
+    if (sMartInfo.martType == MART_TYPE_NORMAL && GetShopItemPrice(tItemId) == 0)
+        BuyMenuPrint(WIN_QUANTITY_PRICE, gText_ShopFree, GetStringRightAlignXOffset(FONT_NORMAL, gText_ShopFree, 68), 1, 0, COLORID_NORMAL);
+    else
+        PrintMoneyAmount(WIN_QUANTITY_PRICE, CalculateMoneyTextHorizontalPosition(sShopData->totalCost), 1, sShopData->totalCost, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(WIN_QUANTITY_PRICE, gStringVar4, 0, 1, 0, COLORID_NORMAL);

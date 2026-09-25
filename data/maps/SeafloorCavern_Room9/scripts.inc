@@ -68,6 +68,7 @@ SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre:: @ 8234DC9
 	msgbox SeafloorCavern_Room9_Text_ArchieYouMustDisappear, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_ARCHIE, SeafloorCavern_Room9_Text_ArchieDefeat
 	msgbox SeafloorCavern_Room9_Text_ArchieWithThisBlueOrb, MSGBOX_DEFAULT
+	closemessage
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
@@ -194,6 +195,8 @@ SeafloorCavern_Room9_Movement_KyogreApproach: @ 8235040
 	step_end
 
 SeafloorCavern_Room9_Movement_KyogreExit: @ 823504B
+	slide_up
+	slide_up
 	slide_up
 	slide_up
 	step_end

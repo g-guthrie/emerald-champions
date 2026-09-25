@@ -60,7 +60,6 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: @ 82208D1
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT
-	closemessage
 	msgbox MossdeepCity_Gym_Text_TakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
@@ -491,7 +490,7 @@ MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis: @ 8221999
 	.string "Dive. It needn't know the move!$"
 
 MossdeepCity_Gym_Text_TakeThis:
-	.string "Liza: You should also take this, too.$"
+	.string "Liza: You should also take this.$"
 
 MossdeepCity_Gym_Text_ExplainCalmMind: @ 8221A40
 	.string "Tate: This is Meowsticite!\p"

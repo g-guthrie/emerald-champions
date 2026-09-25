@@ -55,6 +55,9 @@ AquaHideout_B2F_EventScript_SubmarineEscape:: @ 8233E25
 	end
 
 AquaHideout_B2F_Movement_SumbarineDepartLeft: @ 8233E80
+	@ The wide shadow must clear the left edge of the screen before it is removed.
+	walk_left
+	walk_left
 	walk_left
 	walk_left
 	walk_left

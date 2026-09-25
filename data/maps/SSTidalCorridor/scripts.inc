@@ -211,7 +211,15 @@ SSTidalCorridor_EventScript_ScottScene:: @ 823C219
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
+	@ Wally may already be beaten when the player first boards.
+	specialvar VAR_RESULT, GetEmeraldChampionsFinaleStage
+	goto_if_ge VAR_RESULT, EC_FINALE_VOYAGE, SSTidalCorridor_EventScript_ScottInviteAfterWally
 	msgbox SSTidalCorridor_Text_ScottBattleFrontierInvite, MSGBOX_DEFAULT
+	goto SSTidalCorridor_EventScript_ScottLeaves
+
+SSTidalCorridor_EventScript_ScottInviteAfterWally:
+	msgbox SSTidalCorridor_Text_ScottInviteAfterWally, MSGBOX_DEFAULT
+SSTidalCorridor_EventScript_ScottLeaves:
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, SSTidalCorridor_Movement_PlayerWatchScottExit
 	applymovement LOCALID_SAILOR, SSTidalCorridor_Movement_SailorMoveForScott
@@ -277,6 +285,18 @@ SSTidalCorridor_Text_ScottBattleFrontierInvite:
 	.string "Your journey isn't over yet.\n"
 	.string "Once you've faced Wally, five teams\l"
 	.string "aboard this ship will be ready.\p"
+	.string "You'll find them in the cabins.\n"
+	.string "There's a bed where you can heal.\p"
+	.string "After you've beaten them, Steven\n"
+	.string "awaits deep in Meteor Falls.\p"
+	.string "He knows the way to Birth Island.\n"
+	.string "Something extraordinary waits there!$"
+
+SSTidalCorridor_Text_ScottInviteAfterWally:
+	.string "Scott: Congratulations, Champion!\p"
+	.string "Your journey isn't over yet.\n"
+	.string "You've faced Wally, so five teams\l"
+	.string "aboard this ship are ready for you.\p"
 	.string "You'll find them in the cabins.\n"
 	.string "There's a bed where you can heal.\p"
 	.string "After you've beaten them, Steven\n"

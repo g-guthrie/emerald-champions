@@ -968,46 +968,46 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "hall-of-fame-record-1": {
-        "id": 43, "param": 1, "frames": 1600, "keys": [],
+        "id": 42, "param": 1, "frames": 1600, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "hall-of-fame-record-6": {
-        "id": 43, "param": 6, "frames": 1600, "keys": [],
+        "id": 42, "param": 6, "frames": 1600, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-left-open": {
-        "id": 44, "param": 0, "frames": 1000, "keys": [],
+        "id": 43, "param": 0, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-right-open": {
-        "id": 44, "param": 1, "frames": 1000, "keys": [],
+        "id": 43, "param": 1, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-left-close": {
-        "id": 44, "param": 2, "frames": 1000, "keys": [],
+        "id": 43, "param": 2, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-right-close": {
-        "id": 44, "param": 3, "frames": 1000, "keys": [],
+        "id": 43, "param": 3, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     # Field moves without HM carriers: a Zigzagoon that could learn the move
     # (but does not know it) performs it once the badge is held. UP turns to
-    # face the obstacle; A advances the obstacle text, confirms Yes, and
-    # dismisses the used-move text where required before the showcase starts.
+    # face the obstacle; a steady A advances the obstacle text, confirms Yes,
+    # and dismisses the used-move text; the run stops at the showcase.
     "field-move-cut-fallback": {
-        "id": 44, "frames": 900,
-        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
+        "id": 44, "frames": 1500, "keys": [(200, 2, "UP")],
+        "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },
     "field-move-rock-smash-fallback": {
-        "id": 45, "frames": 900,
-        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
+        "id": 45, "frames": 1500, "keys": [(200, 2, "UP")],
+        "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },
     "field-move-strength-fallback": {
-        "id": 46, "frames": 900,
-        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A")],
+        "id": 46, "frames": 1500, "keys": [(200, 2, "UP")],
+        "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },
     # The Flight Beacon: the trigger opens the fly map, A picks the current

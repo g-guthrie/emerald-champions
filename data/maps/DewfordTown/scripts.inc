@@ -122,6 +122,9 @@ DewfordTown_EventScript_SailToPetalburg:: @ 81E9660
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
+	@ Swap in Route 104's own boat on the same tile, as the other landings do,
+	@ so the boat does not vanish before the warp fades out.
+	addobject LOCALID_BOAT_R104
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	hideobjectat LOCALID_BOAT_DEWFORD, MAP_DEWFORD_TOWN
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 2

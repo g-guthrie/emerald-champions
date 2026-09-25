@@ -1555,7 +1555,7 @@ Common_EventScript_LegendaryGoneAtShrine::
 	end
 
 gText_LegendaryVanished::
-	.string "The {STR_VAR_1} collapsed and\n"
+	.string "{STR_VAR_1} collapsed and\n"
 	.string "vanished without a trace…$"
 
 Common_EventScript_ExplainLegendaryResting::
@@ -1563,7 +1563,7 @@ Common_EventScript_ExplainLegendaryResting::
 	return
 
 gText_LegendaryFlewAway::
-	.string "The {STR_VAR_1} has retreated.\n"
+	.string "{STR_VAR_1} has retreated.\n"
 	.string "Leave the area, then come back.$"
 
 gText_WantWhichFloor::

@@ -112,8 +112,9 @@ FallarborTown_EventScript_BrendanScene::
 
 FallarborTown_EventScript_RivalExit::
 	setobjectxyperm 6, 12, 10
-	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_DOWN
-	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_DOWN
+	@ The rival mounts the Bike still facing the player, then rides off west.
+	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_RIGHT
 	removeobject 5
 	addobject 6
 	delay 45

@@ -134,6 +134,8 @@ Rustboro_Gym_Guide_Trigger3::
 	waitmovement 0
 	applymovement 4, Rustboro_Gym_Guide_Move3
 	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Rustboro_Gym_Player_Move2
+	waitmovement 0
 	goto Rustboro_Gym_Guide_Speech
 
 Rustboro_Gym_Guide_Trigger4::
