@@ -537,16 +537,17 @@ void CountDeliverableLegendaryRelics(void)
     gSpecialVar_Result = count;
 }
 
-// callnative from the nurse; VAR_RESULT = the next relic, which the script
-// hands over by name (ITEM_NONE when none is left). It stays pending until
-// the player owns it, so a full Bag only postpones it.
+// callnative from the nurse; VAR_RESULT = the next relic the Bag has room
+// for, which the script hands over by name (ITEM_NONE when none fits). A
+// relic stays pending until the player owns it, so a full pocket only
+// postpones that relic; relics bound for other pockets still arrive.
 void BufferNextLegendaryRelic(void)
 {
     u32 deliverable = SettleLegendaryRelics();
     gSpecialVar_Result = ITEM_NONE;
     for (u32 relic = 0; relic < ARRAY_COUNT(sLegendaryRelicItems); relic++)
     {
-        if (deliverable & (1u << relic))
+        if ((deliverable & (1u << relic)) && CheckBagHasSpace(sLegendaryRelicItems[relic], 1))
         {
             gSpecialVar_Result = sLegendaryRelicItems[relic];
             return;

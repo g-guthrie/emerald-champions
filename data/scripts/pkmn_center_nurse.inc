@@ -253,11 +253,21 @@ EventScript_PkmnCenterNurse_RelicArrived:
 @ at the catch can be waiting here.
 EventScript_PkmnCenterNurse_RelicWaiting:
 	msgbox EventScript_PkmnCenterNurse_Text_RelicWaiting, MSGBOX_DEFAULT
+@ Each relic the Bag has room for is handed over; one whose pocket is full
+@ stays pending without holding back the relics bound for other pockets.
 EventScript_PkmnCenterNurse_GiveRelics:
 	callnative BufferNextLegendaryRelic
-	goto_if_eq VAR_RESULT, ITEM_NONE, Common_EventScript_NopReturn
+	goto_if_eq VAR_RESULT, ITEM_NONE, EventScript_PkmnCenterNurse_KeepRelics
 	giveitem VAR_RESULT
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_GiveRelics
+EventScript_PkmnCenterNurse_KeepRelics:
+	callnative CountDeliverableLegendaryRelics
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_NopReturn
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_KeepRelic
+	msgbox EventScript_PkmnCenterNurse_Text_KeepRelics, MSGBOX_DEFAULT
+	return
+
+EventScript_PkmnCenterNurse_KeepRelic:
 	msgbox EventScript_PkmnCenterNurse_Text_KeepRelic, MSGBOX_DEFAULT
 	return
 
@@ -275,4 +285,8 @@ EventScript_PkmnCenterNurse_Text_RelicWaiting:
 
 EventScript_PkmnCenterNurse_Text_KeepRelic:
 	.string "Oh, your Bag is full! I'll keep it\n"
+	.string "safe until your next visit.$"
+
+EventScript_PkmnCenterNurse_Text_KeepRelics:
+	.string "Oh, your Bag is full! I'll keep them\n"
 	.string "safe until your next visit.$"

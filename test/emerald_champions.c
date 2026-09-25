@@ -2157,7 +2157,7 @@ static void ResetLegendaryRelicState(void)
 }
 
 // Runs the nurse's hand-over the way data/scripts/pkmn_center_nurse.inc does:
-// one named giveitem per relic until none is left or the Bag refuses one.
+// one named giveitem per relic the Bag has room for, until none fits.
 static u32 HandOverLegendaryRelics(enum Item *given, u32 capacity)
 {
     u32 count = 0;
@@ -2346,6 +2346,52 @@ TEST("Emerald Champions pending relics survive a full Bag and never replay disca
     EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RED_ORB), 1);
+
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    RestoreRelicTestEventState();
+}
+
+TEST("Emerald Champions relics bound for other pockets arrive past one whose pocket is full")
+{
+    enum Item given[4];
+    SaveRelicTestEventState();
+    FlagSet(FLAG_IS_CHAMPION);
+    ClearBag();
+    ResetLegendaryRelicState();
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_RUSTED_SWORD)];
+    EXPECT_NE(GetItemPocket(ITEM_RED_ORB), pocket->id);
+    EXPECT_NE(GetItemPocket(ITEM_DNA_SPLICERS), pocket->id);
+    for (u32 slot = 0; slot < pocket->capacity; slot++)
+        BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_SOFT_SAND, 1);
+    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+        gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_SOFT_SAND, 1};
+
+    // Pending: Red Orb (0), Rusted Sword (2) and DNA Splicers (24).
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, (1u << 0) | (1u << 2));
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0x500);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_2, 0x101);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 3);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 2);
+    EXPECT_EQ(given[0], ITEM_RED_ORB);
+    EXPECT_EQ(given[1], ITEM_DNA_SPLICERS);
+    EXPECT(!CheckBagHasItem(ITEM_RUSTED_SWORD, 1));
+    EXPECT(!CheckPCHasItem(ITEM_RUSTED_SWORD, 1));
+    // Only the Rusted Sword is left for the nurse's "keep it safe" line.
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 1u << 2);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x500);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_2), 0x100);
+
+    // Freed space delivers it at the next heal.
+    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
+    EXPECT_EQ(HandOverLegendaryRelics(given, ARRAY_COUNT(given)), 1);
+    EXPECT_EQ(given[0], ITEM_RUSTED_SWORD);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    CountDeliverableLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
 
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
