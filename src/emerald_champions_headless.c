@@ -1162,7 +1162,7 @@ void EmeraldChampionsHeadlessObserve(void)
         else if (gEcHeadlessFixtureParam == 151)
             LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 23, 6);
         else if (gEcHeadlessFixtureParam == 154)
-            LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 23, 11);
+            LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 24, 5);
         else if (gEcHeadlessFixtureParam == 245 || gEcHeadlessFixtureParam == 249)
             LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, 10);
         else if (gEcHeadlessFixtureParam == 246 || gEcHeadlessFixtureParam == 250)
@@ -3211,7 +3211,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA);
                     if (gEcHeadlessFixtureParam == 154)
                         GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MUNNA), FLAG_SET_CAUGHT);
-                    LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 23, 11);
+                    // Darkrai's altar is read from beside the elders.
+                    LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 24, 5);
                 }
                 break;
             }

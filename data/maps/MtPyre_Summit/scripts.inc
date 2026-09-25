@@ -729,14 +729,14 @@ MtPyre_Summit_Text_DarkraiDormant:
 	.string "Help the elders, earn six Gym\n"
 	.string "Badges and catch Munna in\l"
 	.string "Verdanturf Meadow.\p"
-	.string "Then return to this pedestal.\p"
+	.string "Then return to this altar.\p"
 	.string "Munna or Musharna can be in\n"
 	.string "your party or your PC.$"
 
 MtPyre_Summit_Text_DarkraiGone:
-	.string "The pedestal is cold and silent.\n"
+	.string "The altar is cold and silent.\n"
 	.string "Darkrai vanished and won't return.$"
 
 MtPyre_Summit_Text_DarkraiQuiet:
 	.string "The nightmare has lifted.\n"
-	.string "The pedestal is quiet.$"
+	.string "The altar is quiet.$"

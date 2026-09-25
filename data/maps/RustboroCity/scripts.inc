@@ -27,25 +27,28 @@ RustboroCity_EventScript_HideEarlyRoxanne::
 	setflag FLAG_HIDE_RUSTBORO_ROXANNE
 	return
 
+@ VAR_TEMP_2: 2 = the player came out of Devon's door and the scientist
+@ follows on the next frame; 1 = the player arrived some other way and he
+@ waits in front of Devon for them to talk to him.
 RustboroCity_EventScript_PositionScientistForExit:: @ 81E06EC
-	goto_if_ne VAR_TEMP_1, 15, RustboroCity_EventScript_PositionScientistBesidePlayer
+	goto_if_ne VAR_TEMP_1, 15, RustboroCity_EventScript_ScientistWaitAtDevon
 	compare VAR_TEMP_0, 11
 	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
-	goto_if_ne VAR_TEMP_0, 12, RustboroCity_EventScript_PositionScientistBesidePlayer
+	goto_if_ne VAR_TEMP_0, 12, RustboroCity_EventScript_ScientistWaitAtDevon
+	setvar VAR_TEMP_2, 2
 	setobjectxyperm LOCALID_SCIENTIST, 12, 15
 	end
 
 RustboroCity_EventScript_PositionScientistLeftExit:: @ 81E06FF
+	setvar VAR_TEMP_2, 2
 	setobjectxyperm LOCALID_SCIENTIST, 11, 15
 	end
 
-@ Arriving any way other than Devon's door (Teleport to the Center, or a
-@ route edge) must not leave the scientist talking from off screen: he
-@ appears right above the player instead of walking out of Devon.
-RustboroCity_EventScript_PositionScientistBesidePlayer::
+RustboroCity_EventScript_ScientistWaitAtDevon::
 	setvar VAR_TEMP_2, 1
-	subvar VAR_TEMP_1, 1
-	setobjectxyperm LOCALID_SCIENTIST, VAR_TEMP_0, VAR_TEMP_1
+	setobjectxyperm LOCALID_SCIENTIST, 12, 16
+	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_FACE_DOWN
+	clearflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	end
 
 RustboroCity_EventScript_HideMapNamePopup:: @ 81E0707
@@ -53,13 +56,13 @@ RustboroCity_EventScript_HideMapNamePopup:: @ 81E0707
 	return
 
 RustboroCity_OnFrame: @ 81E070B
-	map_script_2 VAR_RUSTBORO_CITY_STATE, 7, RustboroCity_EventScript_ScientistAddMatchCall
+	map_script_2 VAR_TEMP_2, 2, RustboroCity_EventScript_ScientistAddMatchCall
 	.2byte 0
 
 RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	lockall
+	setvar VAR_TEMP_2, 0
 	setvar VAR_ROUTE104_STATE, 1
-	goto_if_eq VAR_TEMP_2, 1, RustboroCity_EventScript_ScientistAppearBesidePlayer
 	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerWalkDown
 	waitmovement 0
 	playse SE_EXIT
@@ -69,19 +72,18 @@ RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
 	waitmovement 0
 	goto RustboroCity_EventScript_ScientistNoticePlayer
 
-RustboroCity_EventScript_ScientistAppearBesidePlayer::
-	delay 10
-	addobject LOCALID_SCIENTIST
+@ Talking to the scientist waiting in front of Devon.
+RustboroCity_EventScript_ScientistWaiting::
+	lockall
+	setvar VAR_TEMP_2, 0
+	setvar VAR_ROUTE104_STATE, 1
 RustboroCity_EventScript_ScientistNoticePlayer::
 	playse SE_PIN
 	applymovement LOCALID_SCIENTIST, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_SCIENTIST, Common_Movement_Delay48
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
-	waitmovement 0
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistWalkInPlaceDown
-	waitmovement 0
+	facetogether OBJ_EVENT_ID_PLAYER, LOCALID_SCIENTIST
 	msgbox RustboroCity_Text_DevelopedNewPokenavFeature, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HAS_MATCH_CALL
@@ -119,10 +121,6 @@ RustboroCity_EventScript_MapTutorial::
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	releaseall
 	end
-
-RustboroCity_Movement_ScientistWalkInPlaceDown: @ 81E084E
-	walk_in_place_down
-	step_end
 
 RustboroCity_Movement_PlayerWalkDown: @ 81E0850
 	walk_down
