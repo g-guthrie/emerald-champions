@@ -5272,6 +5272,25 @@ static s32 PairForecastMixture(struct PairEvaluation *ev, enum BattlerId firstFo
     return (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
 }
 
+// What a pair of actions does to the board by itself: the same trial with
+// both foes standing still. Only consulted to separate pairs the forecast
+// scores identically, so it never changes how a scored difference is read.
+static s32 PairStandaloneScore(struct PairEvaluation *ev, enum BattlerId actor, enum BattlerId partner,
+    enum BattlerId firstFoe, enum BattlerId secondFoe, const struct PairAction *mine, const struct PairAction *theirs)
+{
+    struct PairAction saved[4] = {ev->action[actor], ev->action[partner], ev->action[firstFoe], ev->action[secondFoe]};
+    ev->action[actor] = *mine;
+    ev->action[partner] = *theirs;
+    ev->action[firstFoe] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, firstFoe};
+    ev->action[secondFoe] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, secondFoe};
+    s32 score = ScorePairWithImmediateEffects(ev);
+    ev->action[actor] = saved[0];
+    ev->action[partner] = saved[1];
+    ev->action[firstFoe] = saved[2];
+    ev->action[secondFoe] = saved[3];
+    return score;
+}
+
 // nonGuard, when supplied, comes back holding the best final score this board
 // reached with each of the two bodies doing something other than shielding -
 // the comparison the guard trace's margin is asking for. It is INT_MIN when no
@@ -5382,6 +5401,31 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             action->planScore = GetBattlerSide(battler) == ev->side ? PairPlanScore(battler, action) : 0;
             action->tacticScore = GetBattlerSide(battler) == ev->side ? PairTacticScore(battler, action) : 0;
         }
+        // Our own options are searched strongest-first by their standalone
+        // opinion. A search the clock cuts short keeps what it reached first,
+        // and in move-slot order that was slot zero into the first legal
+        // target: the crowded Mossdeep multi, at its budget every turn, sent
+        // Heatran's Magma Storm into a resisting Tyranitar while an Earth
+        // Power knockout on a quarter-health Metagross was never scored.
+        // Stable, so equal opinions keep their slot order.
+        if (GetBattlerSide(battler) == ev->side)
+        {
+            for (u32 index = 1; index < ev->count[battler]; index++)
+            {
+                struct PairAction option = ev->choices[battler][index];
+                s32 key = (option.score - AI_SCORE_DEFAULT) * 4 + option.planScore + option.tacticScore;
+                u32 slot = index;
+                while (slot > 0)
+                {
+                    const struct PairAction *before = &ev->choices[battler][slot - 1];
+                    if ((before->score - AI_SCORE_DEFAULT) * 4 + before->planScore + before->tacticScore >= key)
+                        break;
+                    ev->choices[battler][slot] = *before;
+                    slot--;
+                }
+                ev->choices[battler][slot] = option;
+            }
+        }
     }
     // Confirmed human actions have exactly one choice. Only genuinely unknown
     // actors retain the alternative-move/target forecast.
@@ -5433,6 +5477,7 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     struct PairShortlistEntry
     {
         s32 score;
+        s32 standalone; // INT_MIN until a tie asks for it.
         u8 left;
         u8 right;
     } shortlist[PAIR_SHORTLIST];
@@ -5506,16 +5551,35 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             ev->action[firstFoe] = forecasts[0][0];
             ev->action[secondFoe] = forecasts[0][1];
             s32 primary = ScorePairWithImmediateEffects(ev);
+            // An exact tie on the forecast is settled by what the two
+            // actions do on their own, never by enumeration order. A body
+            // forecast to fall before it moves scores every one of its
+            // actions the same, and slot zero into the first legal target
+            // used to win by default: a resisted Collision Course over a sun
+            // Flare Blitz, a Specs Moonblast into Zacian over Mystical Fire,
+            // and both partners aimed at the one foe the faster hit removes.
+            s32 standalone = INT_MIN;
             u32 slot = shortCount;
-            while (slot > 0 && shortlist[slot - 1].score < primary)
+            while (slot > 0 && shortlist[slot - 1].score <= primary)
             {
+                if (shortlist[slot - 1].score == primary)
+                {
+                    if (standalone == INT_MIN)
+                        standalone = PairStandaloneScore(ev, actor, partner, firstFoe, secondFoe,
+                            &ev->choices[actor][left], &ev->choices[partner][right]);
+                    if (shortlist[slot - 1].standalone == INT_MIN)
+                        shortlist[slot - 1].standalone = PairStandaloneScore(ev, actor, partner, firstFoe, secondFoe,
+                            &ev->choices[actor][shortlist[slot - 1].left], &ev->choices[partner][shortlist[slot - 1].right]);
+                    if (shortlist[slot - 1].standalone >= standalone)
+                        break;
+                }
                 if (slot < shortLimit)
                     shortlist[slot] = shortlist[slot - 1];
                 slot--;
             }
             if (slot < shortLimit)
             {
-                shortlist[slot] = (struct PairShortlistEntry){primary, left, right};
+                shortlist[slot] = (struct PairShortlistEntry){primary, standalone, left, right};
                 if (shortCount < shortLimit)
                     shortCount++;
             }

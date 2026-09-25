@@ -96,8 +96,11 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
 
 // A benchmark board caught mid-battle: these authored members start at these
 // HP (0 is fainted). Consumed by the next AuthoredOpponentWithPartner call.
+// sAuthoredLeads, when set, brings those two members to the front as the
+// leads that board had on the field.
 struct AuthoredInjury { enum Species species; u16 hp; };
 EWRAM_DATA static struct AuthoredInjury sAuthoredInjuries[4] = {0};
+EWRAM_DATA static enum Species sAuthoredLeads[2] = {0};
 
 // Use the compiled campaign loadouts and production stat/level generation,
 // including reserves, rather than a second hand-maintained copy of the team.
@@ -128,6 +131,20 @@ static void AuthoredOpponentWithPartner(u16 trainerId, u32 badges, bool32 injure
         party[1] = party[partnerSlot];
         party[partnerSlot] = swap;
     }
+    for (u32 lead = 0; lead < ARRAY_COUNT(sAuthoredLeads); lead++)
+    {
+        if (sAuthoredLeads[lead] == SPECIES_NONE)
+            continue;
+        for (u32 i = 0; i < trainer->partySize; i++)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) == sAuthoredLeads[lead])
+            {
+                struct Pokemon swap = party[lead];
+                party[lead] = party[i];
+                party[i] = swap;
+                break;
+            }
+    }
+    memset(sAuthoredLeads, 0, sizeof(sAuthoredLeads));
     gBattleTypeFlags = savedFlags;
     SetCurrentDifficultyLevel(savedDifficulty);
     for (u32 i = 0; i < ARRAY_COUNT(savedBadges); i++)
@@ -2059,6 +2076,21 @@ static void PreparedPlayer(enum Species species, u32 level, const struct Emerald
     }
 }
 
+// The same body caught mid-battle at a benchmark's HP.
+static void InjuredPlayer(enum Species species, u32 level, const struct EmeraldChampionsBattleSet *set, u32 hp)
+{
+    struct Pokemon mon;
+    CreateRandomMonWithIVs(&mon, species, level, MAX_PER_STAT_IVS);
+    EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, set), EC_BATTLE_SET_SUCCESS);
+    CalculateMonStats(&mon);
+    PLAYER(species) {
+        *gBattleTestRunnerState->data.currentMon = mon;
+        Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+        Moves(set->moves[0], set->moves[1], set->moves[2], set->moves[3]);
+        HP(hp);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Storm Throw is priced by the boosted reply it enables")
 {
     GIVEN {
@@ -2362,5 +2394,67 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Ben's Charjabug does not Eerie Impu
             MOVE(playerRight, MOVE_HIGH_HORSEPOWER, target: opponentRight);
             NOT_EXPECT_MOVE(opponentLeft, MOVE_EERIE_IMPULSE);
         }
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sJuanFoeSets[] = {
+    {.moves = {MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT}, .item = ITEM_LIFE_ORB, .nature = NATURE_TIMID, .ability = ABILITY_HADRON_ENGINE, .evs = {4, 0, 0, 252, 0, 252}},
+    {.moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_HEAVY_SLAM}, .item = ITEM_ASSAULT_VEST, .nature = NATURE_ADAMANT, .ability = ABILITY_QUARK_DRIVE, .evs = {252, 252, 4, 0, 0, 0}},
+    {.moves = {MOVE_FAKE_OUT, MOVE_GRASSY_GLIDE, MOVE_WOOD_HAMMER, MOVE_KNOCK_OFF}, .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_GRASSY_SURGE, .evs = {252, 252, 4, 0, 0, 0}},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC KO allocation: Juan's Specs Kingdra does not open with the first slot when Miraidon removes it first")
+{
+    GIVEN {
+        // The benchmark line: Kingdra enters beside Altaria, whose Cloud Nine
+        // takes the rain and with it Swift Swim. Miraidon outspeeds and
+        // removes Kingdra, so every Kingdra action scored alike on the
+        // forecast and Hydro Pump - resisted by Miraidon - won as slot zero
+        // over the Ice Beam or Draco Meteor that removes Miraidon.
+        InjuredPlayer(SPECIES_MIRAIDON, 70, &sJuanFoeSets[0], 130);
+        InjuredPlayer(SPECIES_IRON_HANDS, 70, &sJuanFoeSets[1], 218);
+        PreparedPlayer(SPECIES_RILLABOOM, 70, &sJuanFoeSets[2]);
+        sAuthoredLeads[0] = SPECIES_ALTARIA;
+        sAuthoredLeads[1] = SPECIES_KINGDRA;
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_SUICUNE, 0};
+        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_MANAPHY, 0};
+        AuthoredOpponent(TRAINER_JUAN_1, 7, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DRACO_METEOR, target: opponentRight);
+            MOVE(playerRight, MOVE_HEAVY_SLAM, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_HYDRO_PUMP);
+        }
+    }
+}
+
+extern bool8 gTestPairBudgetSpent;
+
+AI_DOUBLE_BATTLE_TEST("EC KO allocation: a search the clock cuts short still starts from the strongest option")
+{
+    GIVEN {
+        // Juan's board again, decided with the budget already spent, as the
+        // crowded Mossdeep multi decided every turn. The search keeps the
+        // first pair it scores, and that used to be slot zero: Hydro Pump
+        // into the Miraidon that resists it.
+        InjuredPlayer(SPECIES_MIRAIDON, 70, &sJuanFoeSets[0], 130);
+        InjuredPlayer(SPECIES_IRON_HANDS, 70, &sJuanFoeSets[1], 218);
+        PreparedPlayer(SPECIES_RILLABOOM, 70, &sJuanFoeSets[2]);
+        sAuthoredLeads[0] = SPECIES_ALTARIA;
+        sAuthoredLeads[1] = SPECIES_KINGDRA;
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_SUICUNE, 0};
+        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_MANAPHY, 0};
+        AuthoredOpponent(TRAINER_JUAN_1, 7, FALSE);
+        gTestPairBudgetSpent = TRUE;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DRACO_METEOR, target: opponentRight);
+            MOVE(playerRight, MOVE_HEAVY_SLAM, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_HYDRO_PUMP);
+        }
+    } THEN {
+        gTestPairBudgetSpent = FALSE;
     }
 }
