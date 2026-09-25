@@ -1528,6 +1528,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     // by type, ability, item, Substitute or field.
     if (AI_IsMoveCertainToFail(battlerAtk, battlerDef, move))
         return 0;
+    // A spread attack every foe is visibly immune to hits nobody, or only
+    // the partner, unless that partner hit is the point.
+    if (AI_IsSpreadMoveWasted(battlerAtk, move))
+        return 0;
     if (IsStatusLikelyRedirectedIntoFailure(battlerAtk, battlerDef, move))
         ADJUST_SCORE(-20);
 

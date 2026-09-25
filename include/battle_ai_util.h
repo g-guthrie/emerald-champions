@@ -430,6 +430,8 @@ bool32 AI_OpponentCanFaintAiWithMod(enum BattlerId battler, u32 healAmount);
 bool32 ShouldInstructPartner(enum BattlerId partner, enum Move move);
 bool32 CanMoveBeBouncedBack(enum BattlerId battler, enum Move move);
 bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+bool32 AI_IsFoeStatDropUseless(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+bool32 AI_IsSpreadMoveWasted(enum BattlerId battlerAtk, enum Move move);
 bool32 AI_CanAnyStatChange(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 bool32 ShouldUseFusionMove(enum BattlerId battler);
 bool32 ShouldUseRound(enum BattlerId battler, enum BattleMoveEffects moveEffect);

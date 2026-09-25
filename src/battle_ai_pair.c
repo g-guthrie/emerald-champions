@@ -569,6 +569,10 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
             // shared check the standard AI zeroes it with.
             if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove))
                 continue;
+            // A spread attack every foe is visibly immune to reaches nobody
+            // but the partner; it stays only when that hit is the point.
+            if (AI_IsSpreadMoveWasted(actor, action->executedMove))
+                continue;
             if (!IsBattlerAlly(actor, action->target)
              && targetType != TARGET_BOTH && targetType != TARGET_FOES_AND_ALLY
              && targetType != TARGET_ALL_BATTLERS && targetType != TARGET_RANDOM
@@ -1458,7 +1462,8 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     // A move the engine is certain to refuse on the board we can see is a
     // failed move, whatever the isolated opinion or any plan reward says: the
     // same shared check the standard AI zeroes it with.
-    if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove))
+    if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove)
+     || AI_IsSpreadMoveWasted(actor, action->executedMove))
         return -10000;
     // A last-turn "refresh" costs both actions and can cancel itself when one
     // setter is interrupted. Let the room expire and establish it next turn.
@@ -1541,13 +1546,18 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
                 read = TRUE;
             else if (evidence < 0)
                 contradicted = TRUE;
+            // The reflection moves last, so the hit it returns must also leave
+            // the user standing: a Dragon Rage's fixed 40 into a 28 HP Feebas
+            // ends it before Mirror Coat can answer.
             for (u32 slot = 0; slot < MAX_MON_MOVES && !able; slot++)
             {
                 enum Move known = gBattleMons[foe].moves[slot];
                 if (known != MOVE_NONE && known != MOVE_UNAVAILABLE && !IsBattleMoveStatus(known)
                  && (categories & (1u << (IsBattleMovePhysical(known) ? DAMAGE_CATEGORY_PHYSICAL : DAMAGE_CATEGORY_SPECIAL)))
                  && !IsMoveUnusable(slot, known, gAiLogicData->moveLimitations[foe])
-                 && gAiLogicData->simulatedDmg[foe][actor][slot].maximum)
+                 && gAiLogicData->simulatedDmg[foe][actor][slot].maximum
+                 && (gAiLogicData->simulatedDmg[foe][actor][slot].minimum < gBattleMons[actor].hp
+                  || CanEndureHit(foe, actor, known)))
                     able = TRUE;
             }
             // Only a hit aimed at this user is a read on what it will take:
@@ -3313,6 +3323,15 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
 {
     struct PairAction actions[MAX_BATTLERS_COUNT];
     memcpy(actions, ev->action, sizeof(actions));
+    // A plan veto holds whether or not this trial lets the move run. The
+    // per-action check below is reached only by an action that executes, so
+    // a body forecast to fall first, or a Mirror Coat whose trial found no hit
+    // to return, made its certain failure a free choice: the fisherman's
+    // Feebas picked Mirror Coat at 28 HP with Dragon Rage its only read.
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (GetBattlerSide(battler) == ev->side && actions[battler].index != PAIR_IDLE
+         && actions[battler].planScore <= -10000)
+            return -10000;
     u32 hp[MAX_BATTLERS_COUNT], boost[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 statusBoost[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 survival[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};

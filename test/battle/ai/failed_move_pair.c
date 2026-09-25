@@ -408,3 +408,73 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a spent decision budget still yields a s
         EXPECT_EQ(opponentRight->hp, 300);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a spread attack every foe is immune to scores as useless unless the partner absorbs it")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_VOLT_ABSORB; }
+    PARAMETRIZE { ability = ABILITY_ILLUMINATE; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_GASTRODON_WEST) { Speed(40); Moves(MOVE_RECOVER); }
+        PLAYER(SPECIES_DIGGERSBY) { Speed(60); Moves(MOVE_SWORDS_DANCE); }
+        OPPONENT(SPECIES_ELECTRODE) { Speed(100); Moves(MOVE_DISCHARGE, MOVE_SPLASH); }
+        OPPONENT(SPECIES_LANTURN) { HP(30); MaxHP(150); Ability(ability); Speed(50); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_RECOVER);
+            MOVE(playerRight, MOVE_SWORDS_DANCE);
+            if (ability == ABILITY_VOLT_ABSORB)
+                SCORE_GT_VAL(opponentLeft, MOVE_DISCHARGE, 0, target: playerLeft);
+            else
+                SCORE_EQ_VAL(opponentLeft, MOVE_DISCHARGE, 0, target: playerLeft);
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("EC failed moves: an Attack or Sp. Atk drop scores as useless on a body that cannot use it")
+{
+    enum Species species;
+    enum Move drop, move;
+    PARAMETRIZE { species = SPECIES_DIGGERSBY; move = MOVE_BODY_SLAM; drop = MOVE_EERIE_IMPULSE; }
+    PARAMETRIZE { species = SPECIES_ALAKAZAM; move = MOVE_PSYCHIC; drop = MOVE_CHARM; }
+    // Body Press runs on Defense, Foul Play on its target's Attack.
+    PARAMETRIZE { species = SPECIES_CORVIKNIGHT; move = MOVE_BODY_PRESS; drop = MOVE_CHARM; }
+    PARAMETRIZE { species = SPECIES_SABLEYE; move = MOVE_FOUL_PLAY; drop = MOVE_CHARM; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(species) { Speed(40); Moves(move); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(drop, MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(player, move); SCORE_EQ_VAL(opponent, drop, 0); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("EC failed moves: an Attack or Sp. Atk drop keeps its value on a body that uses it")
+{
+    enum Species species;
+    enum Move drop, move;
+    PARAMETRIZE { species = SPECIES_DIGGERSBY; move = MOVE_BODY_SLAM; drop = MOVE_CHARM; }
+    PARAMETRIZE { species = SPECIES_ALAKAZAM; move = MOVE_PSYCHIC; drop = MOVE_EERIE_IMPULSE; }
+    // Photon Geyser follows whichever attacking stat is higher.
+    PARAMETRIZE { species = SPECIES_NECROZMA; move = MOVE_PHOTON_GEYSER; drop = MOVE_CHARM; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(species) { Speed(40); Moves(move); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(drop, MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(player, move); SCORE_GT_VAL(opponent, drop, 0); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("EC failed moves: a drop is not judged useless on a moveset the AI has not seen")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_DIGGERSBY) { Speed(40); Moves(MOVE_BODY_SLAM, MOVE_EARTH_POWER); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Moves(MOVE_EERIE_IMPULSE, MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_BODY_SLAM); SCORE_GT_VAL(opponent, MOVE_EERIE_IMPULSE, 0); }
+        TURN { MOVE(player, MOVE_BODY_SLAM); SCORE_GT_VAL(opponent, MOVE_EERIE_IMPULSE, 0); }
+    }
+}

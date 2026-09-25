@@ -94,6 +94,11 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
     gBattleTypeFlags = savedFlags;
 }
 
+// A benchmark board caught mid-battle: these authored members start at these
+// HP (0 is fainted). Consumed by the next AuthoredOpponentWithPartner call.
+struct AuthoredInjury { enum Species species; u16 hp; };
+EWRAM_DATA static struct AuthoredInjury sAuthoredInjuries[4] = {0};
+
 // Use the compiled campaign loadouts and production stat/level generation,
 // including reserves, rather than a second hand-maintained copy of the team.
 static void AuthoredOpponentWithPartner(u16 trainerId, u32 badges, bool32 injuredCoalossal, u32 partnerSlot)
@@ -152,8 +157,13 @@ static void AuthoredOpponentWithPartner(u16 trainerId, u32 badges, bool32 injure
                   GetMonData(&party[i], MON_DATA_MOVE3), GetMonData(&party[i], MON_DATA_MOVE4));
             if (injuredCoalossal && GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_COALOSSAL)
                 HP(1);
+            for (u32 j = 0; j < ARRAY_COUNT(sAuthoredInjuries); j++)
+                if (sAuthoredInjuries[j].species != SPECIES_NONE
+                 && GetMonData(&party[i], MON_DATA_SPECIES) == sAuthoredInjuries[j].species)
+                    HP(sAuthoredInjuries[j].hp);
         }
     }
+    memset(sAuthoredInjuries, 0, sizeof(sAuthoredInjuries));
     Free(party);
 }
 
@@ -2211,6 +2221,40 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: the fisherman's Feebas does not Mir
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: the fisherman's Feebas does not Mirror Coat a Dragon Rage it cannot survive")
+{
+    GIVEN {
+        // The benchmark line: Feebas at 28 HP after two turns of Tackle and
+        // Flail. Dragon Rage, the only special move across the field, deals
+        // a fixed 40: it knocks Feebas out before a last-moving Mirror Coat
+        // can return it, and every other hit is physical.
+        const struct EmeraldChampionsBattleSet karp = {
+            .moves = {MOVE_DRAGON_RAGE, MOVE_FLAIL, MOVE_BOUNCE, MOVE_TACKLE},
+            .item = ITEM_FOCUS_SASH, .nature = NATURE_JOLLY, .ability = ABILITY_SWIFT_SWIM,
+            .evs = {252, 0, 4, 0, 0, 252},
+        };
+        for (u32 i = 0; i < 2; i++)
+            PreparedPlayer(SPECIES_MAGIKARP, 55, &karp);
+        // As in the benchmark, the reserves have fallen.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_FEEBAS, 39};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_WISHIWASHI, 0};
+        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_PYUKUMUKU, 0};
+        sAuthoredInjuries[3] = (struct AuthoredInjury){SPECIES_GYARADOS, 0};
+        AuthoredOpponent(TRAINER_MAGIKARP_GUY, 5, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_MIRROR_COAT);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_MIRROR_COAT);
+        }
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC authored strategy: Takao's Wobbuffet does not raise a second Safeguard")
 {
     GIVEN {
@@ -2250,5 +2294,73 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Takao's Wobbuffet does not raise a 
         struct Pokemon *wobbuffet = &gParties[B_TRAINER_OPPONENT_A][1];
         EXPECT_EQ(GetMonData(wobbuffet, MON_DATA_SPECIES), SPECIES_WOBBUFFET);
         EXPECT_GE(GetMonData(wobbuffet, MON_DATA_PP4), GetMovePP(MOVE_SAFEGUARD) - 1);
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sBenFoeGastrodon = {
+    .moves = {MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_SLUDGE_BOMB, MOVE_RECOVER},
+    .item = ITEM_CHOICE_SPECS, .nature = NATURE_MODEST, .ability = ABILITY_STORM_DRAIN,
+};
+static const struct EmeraldChampionsBattleSet sBenFoeDiggersby = {
+    .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_QUICK_ATTACK, MOVE_BODY_SLAM},
+    .item = ITEM_CHOICE_BAND, .nature = NATURE_ADAMANT, .ability = ABILITY_HUGE_POWER,
+};
+static const struct EmeraldChampionsBattleSet sBenFoePawmot = {
+    .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_MACH_PUNCH, MOVE_ICE_PUNCH},
+    .item = ITEM_FOCUS_SASH, .nature = NATURE_JOLLY, .ability = ABILITY_VOLT_ABSORB,
+};
+static const struct EmeraldChampionsBattleSet sBenFoeClodsire = {
+    .moves = {MOVE_HIGH_HORSEPOWER, MOVE_POISON_JAB, MOVE_RECOVER, MOVE_PROTECT},
+    .item = ITEM_LIFE_ORB, .nature = NATURE_ADAMANT, .ability = ABILITY_WATER_ABSORB,
+};
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Ben's Charjabug does not Discharge into two Ground bodies and its own partner")
+{
+    GIVEN {
+        // The benchmark line: Charjabug at 15 HP beside Eelektross, facing
+        // Gastrodon and Diggersby. Discharge touched neither foe and took
+        // 6 HP from the Levitate Eelektross, twice.
+        PreparedPlayer(SPECIES_GASTRODON_WEST, 30, &sBenFoeGastrodon);
+        PreparedPlayer(SPECIES_DIGGERSBY, 30, &sBenFoeDiggersby);
+        // Route 117's Youngster Ben is met after the second badge: cap30.
+        // Lanturn and Vikavolt had already fallen.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_CHARJABUG, 15};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANTURN, 0};
+        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_VIKAVOLT, 0};
+        AuthoredOpponentWithPartner(TRAINER_BEN, 2, FALSE, 3);
+    } WHEN {
+        // Charjabug shielded the turn before, as in the benchmark.
+        TURN {
+            MOVE(playerLeft, MOVE_EARTH_POWER, target: opponentRight);
+            MOVE(playerRight, MOVE_HIGH_HORSEPOWER, target: opponentRight);
+            EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_EARTH_POWER, target: opponentRight);
+            MOVE(playerRight, MOVE_HIGH_HORSEPOWER, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_DISCHARGE);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Ben's Charjabug does not Eerie Impulse a side with no special moves")
+{
+    const struct EmeraldChampionsBattleSet *partner;
+    enum Species partnerSpecies;
+    PARAMETRIZE { partnerSpecies = SPECIES_DIGGERSBY; partner = &sBenFoeDiggersby; }
+    PARAMETRIZE { partnerSpecies = SPECIES_CLODSIRE; partner = &sBenFoeClodsire; }
+    GIVEN {
+        // The benchmark lines: Eerie Impulse into the Choice Band Diggersby
+        // on three turns running, and into Clodsire, beside a Pawmot that
+        // only punches.
+        PreparedPlayer(SPECIES_PAWMOT, 30, &sBenFoePawmot);
+        PreparedPlayer(partnerSpecies, 30, partner);
+        AuthoredOpponent(TRAINER_BEN, 2, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentRight);
+            MOVE(playerRight, MOVE_HIGH_HORSEPOWER, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_EERIE_IMPULSE);
+        }
     }
 }

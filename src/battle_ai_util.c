@@ -6868,13 +6868,237 @@ static bool32 AI_IsAromaVeilProtected(enum BattlerId battlerAtk, enum BattlerId 
     return FALSE;
 }
 
+// Whether the AI knows every move this battler carries: the whole set when it
+// is aware of it, otherwise only once all four have been revealed in battle.
+static bool32 AI_KnowsWholeMoveset(enum BattlerId battler)
+{
+    enum Move *moves = GetMovesArray(battler);
+    if (moves == gBattleMons[battler].moves)
+        return TRUE;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (moves[i] == MOVE_NONE || moves[i] == MOVE_UNAVAILABLE)
+            return FALSE;
+    return TRUE;
+}
+
+// Which of its own attacking stats a battler's known moves read: bit 0 its
+// Attack, bit 1 its Sp. Atk. Foul Play reads its target's Attack, Body Press
+// the user's Defense and fixed-damage moves neither; Photon Geyser and Shell
+// Side Arm take whichever is better. A move that copies, calls or swaps (Baton
+// Pass, Power Swap, Transform, Metronome...) can carry either stat anywhere,
+// so it counts as both.
+#define AI_USES_ATTACK  (1u << 0)
+#define AI_USES_SPATK   (1u << 1)
+static u32 AI_AttackingStatsUsed(enum BattlerId battler)
+{
+    enum Move *moves = GetMovesArray(battler);
+    u32 used = 0;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = moves[i];
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
+            continue;
+        switch (GetMoveEffect(move))
+        {
+        case EFFECT_FOUL_PLAY:
+        case EFFECT_BODY_PRESS:
+            continue;
+        case EFFECT_PHOTON_GEYSER:
+        case EFFECT_SHELL_SIDE_ARM:
+        case EFFECT_BATON_PASS:
+        case EFFECT_POWER_SWAP:
+        case EFFECT_HEART_SWAP:
+        case EFFECT_POWER_TRICK:
+        case EFFECT_PSYCH_UP:
+        case EFFECT_TRANSFORM:
+        case EFFECT_MIMIC:
+        case EFFECT_SKETCH:
+        case EFFECT_METRONOME:
+        case EFFECT_MIRROR_MOVE:
+        case EFFECT_COPYCAT:
+        case EFFECT_ASSIST:
+        case EFFECT_SLEEP_TALK:
+        case EFFECT_ME_FIRST:
+        case EFFECT_NATURE_POWER:
+            return AI_USES_ATTACK | AI_USES_SPATK;
+        default:
+            break;
+        }
+        if (IsFixedDamageMove(move))
+            continue;
+        switch (GetBattleMoveCategory(move))
+        {
+        case DAMAGE_CATEGORY_PHYSICAL:
+            used |= AI_USES_ATTACK;
+            break;
+        case DAMAGE_CATEGORY_SPECIAL:
+            used |= AI_USES_SPATK;
+            break;
+        default:
+            break;
+        }
+    }
+    return used;
+}
+
+// A foe-targeting stat-drop move that the engine performs but that changes
+// nothing the target can use: every stat it moves is an Attack the target
+// never attacks with, a Sp. Atk it never attacks with, or a stage already at
+// the floor. Defense, Sp. Def, Speed, accuracy and evasion always count (the
+// AI's side, turn order and later turns can use them). A moveset the AI has
+// not fully seen, or an Eject Pack the drop would fire, is never judged.
+static bool32 AI_IsStatDropUselessOn(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    if (!IsBattlerAlive(battlerDef) || IsBattlerAlly(battlerAtk, battlerDef)
+     || !AI_KnowsWholeMoveset(battlerDef)
+     || gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_EJECT_PACK)
+        return FALSE;
+    u32 used = AI_AttackingStatsUsed(battlerDef);
+    bool32 changesAny = FALSE;
+    for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
+    {
+        const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, effectIndex);
+        for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+        {
+            if (GetStatStage(stat, additional) == 0)
+                continue;
+            if (additional->moveEffect != STAT_CHANGE_EFFECT_MINUS)
+                return FALSE;
+            changesAny = TRUE;
+            if (stat == STAT_ATK && !(used & AI_USES_ATTACK))
+                continue;
+            if (stat == STAT_SPATK && !(used & AI_USES_SPATK))
+                continue;
+            if (gBattleMons[battlerDef].statStages[stat] <= MIN_STAT_STAGE)
+                continue;
+            return FALSE;
+        }
+    }
+    return changesAny;
+}
+
+bool32 AI_IsFoeStatDropUseless(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    enum BattleMoveEffects effect = GetMoveEffect(move);
+    if (!IsBattleMoveStatus(move) || (effect != EFFECT_STAT_CHANGE && effect != EFFECT_CAPTIVATE))
+        return FALSE;
+    enum MoveTarget moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
+    if (moveTarget == TARGET_BOTH)
+    {
+        // Growl-style drops reach both foes: useless only if useless on each.
+        bool32 anyFoe = FALSE;
+        for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        {
+            if (!IsBattlerAlive(battler) || IsBattlerAlly(battlerAtk, battler))
+                continue;
+            anyFoe = TRUE;
+            if (!AI_IsStatDropUselessOn(battlerAtk, battler, move))
+                return FALSE;
+        }
+        return anyFoe;
+    }
+    if (moveTarget != TARGET_SELECTED && moveTarget != TARGET_SMART && moveTarget != TARGET_RANDOM)
+        return FALSE;
+    return AI_IsStatDropUselessOn(battlerAtk, battlerDef, move);
+}
+
+// Whether a foe visibly takes nothing from a damaging move on the board the AI
+// can see: a type immunity (Levitate and an Air Balloon included) or an
+// ability that absorbs or blocks it. Mold Breaker is honoured.
+static bool32 AI_FoeTakesNothingFrom(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    struct AiLogicData *aiData = gAiLogicData;
+    enum Ability abilityAtk = aiData->abilities[battlerAtk];
+    struct DamageContext ctx = {0};
+    ctx.battlerAtk = battlerAtk;
+    ctx.battlerDef = battlerDef;
+    ctx.move = ctx.chosenMove = ctx.baseMove = move;
+    ctx.updateFlags = FALSE;
+    ctx.weather = AI_GetWeather();
+    ctx.terrain = gFieldTimers.terrain;
+    ctx.abilities[battlerAtk] = abilityAtk;
+    ctx.abilities[battlerDef] = AI_GetMoldBreakerSanitizedAbility(battlerAtk, abilityAtk,
+        aiData->abilities[battlerDef], aiData->holdEffects[battlerDef], move);
+    ctx.holdEffects[battlerAtk] = aiData->holdEffects[battlerAtk];
+    ctx.holdEffects[battlerDef] = aiData->holdEffects[battlerDef];
+
+    SaveBattlerData(battlerAtk);
+    SaveBattlerData(battlerDef);
+    SetBattlerData(battlerAtk);
+    SetBattlerData(battlerDef);
+    SetTypeBeforeUsingMove(move, battlerAtk, abilityAtk, ctx.holdEffects[battlerAtk]);
+    ctx.moveType = GetBattleMoveType(move);
+    bool32 nothing = CalcTypeEffectivenessMultiplier(&ctx) == UQ_4_12(0.0)
+                  || AI_CanMoveBeBlockedByTarget(&ctx);
+    RestoreBattlerData(battlerAtk);
+    RestoreBattlerData(battlerDef);
+    return nothing;
+}
+
+// The partner is the point of the hit: an ability that turns this move into
+// healing or a boost, or an authored activation on it.
+static bool32 AI_DoesPartnerWelcomeHit(enum BattlerId battlerAtk, enum BattlerId partner, enum Move move)
+{
+    if (EmeraldChampions_GetTacticKind(battlerAtk, partner, move))
+        return TRUE;
+    switch (gAiLogicData->abilities[partner])
+    {
+    case ABILITY_VOLT_ABSORB:
+    case ABILITY_WATER_ABSORB:
+    case ABILITY_DRY_SKIN:
+    case ABILITY_EARTH_EATER:
+    case ABILITY_MOTOR_DRIVE:
+    case ABILITY_LIGHTNING_ROD:
+    case ABILITY_STORM_DRAIN:
+    case ABILITY_SAP_SIPPER:
+    case ABILITY_WELL_BAKED_BODY:
+    case ABILITY_WIND_RIDER:
+    case ABILITY_FLASH_FIRE:
+        return AI_FoeTakesNothingFrom(battlerAtk, partner, move);
+    default:
+        return FALSE;
+    }
+}
+
+// A damaging move that reaches every foe (and perhaps the user's partner)
+// when each foe visibly takes nothing from it: it can only miss, or hit the
+// partner. Kept only when that partner hit is itself the point.
+bool32 AI_IsSpreadMoveWasted(enum BattlerId battlerAtk, enum Move move)
+{
+    if (IsBattleMoveStatus(move))
+        return FALSE;
+    enum MoveTarget moveTarget = AI_GetBattlerMoveTargetType(battlerAtk, move);
+    if (moveTarget != TARGET_BOTH && moveTarget != TARGET_FOES_AND_ALLY)
+        return FALSE;
+    bool32 anyFoe = FALSE;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (!IsBattlerAlive(battler) || IsBattlerAlly(battlerAtk, battler))
+            continue;
+        anyFoe = TRUE;
+        if (gBattleMons[battler].volatiles.semiInvulnerable == STATE_COMMANDER)
+            continue;
+        if (!AI_FoeTakesNothingFrom(battlerAtk, battler, move))
+            return FALSE;
+    }
+    if (!anyFoe)
+        return FALSE;
+    enum BattlerId partner = GetPartnerBattler(battlerAtk);
+    if (moveTarget == TARGET_FOES_AND_ALLY && HasPartner(battlerAtk) && IsBattlerAlive(partner)
+     && AI_DoesPartnerWelcomeHit(battlerAtk, partner, move))
+        return FALSE;
+    return TRUE;
+}
+
 // A status move the engine is certain to refuse on the board the AI can see:
 // the effect it sets is already in place, or the target is immune to it by
 // type, ability, item, Substitute or field. These mirror the engine's own fail
 // checks (CanSetNonVolatileStatus, the ability blockers, the side and volatile
 // setters' "already set" tests), not a separate opinion of what is useful.
 // Anything that hinges on this turn's unrevealed commands - a switch, a
-// redirection, a Protect - is not certain and is never judged here.
+// redirection, a Protect - is not certain and is never judged here. An Attack
+// or Sp. Atk drop on a foe that never uses that stat counts too: it lands and
+// does nothing (AI_IsFoeStatDropUseless).
 bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
     struct AiLogicData *aiData = gAiLogicData;
@@ -6941,6 +7165,11 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     default:
         break;
     }
+
+    // A drop the engine performs but that moves only stats the foe never
+    // uses fails at the one thing it is for: the same zero, the same veto.
+    if (AI_IsFoeStatDropUseless(battlerAtk, battlerDef, move))
+        return TRUE;
 
     // Everything below acts on a chosen other battler.
     if (battlerDef == battlerAtk || !IsBattlerAlive(battlerDef))
