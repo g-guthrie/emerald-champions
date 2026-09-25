@@ -600,3 +600,26 @@ SINGLE_BATTLE_TEST("Knock Off remove items that can change the form of the Knock
         EXPECT_MUL_EQ(results[1].damage, UQ_4_12(1.0), results[0].damage);
     }
 }
+
+SINGLE_BATTLE_TEST("Knock Off gets past a full-HP Focus Sash; Sticky Hold keeps it (Emerald Champions)")
+{
+    enum Move move;
+    enum Ability ability;
+    bool32 survives;
+    PARAMETRIZE { move = MOVE_KNOCK_OFF; ability = ABILITY_TELEPATHY;    survives = FALSE; }
+    PARAMETRIZE { move = MOVE_TACKLE;    ability = ABILITY_TELEPATHY;    survives = TRUE; }
+    PARAMETRIZE { move = MOVE_KNOCK_OFF; ability = ABILITY_STICKY_HOLD;  survives = TRUE; }
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_FOCUS_SASH].holdEffect == HOLD_EFFECT_FOCUS_SASH);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(2); MaxHP(2); Item(ITEM_FOCUS_SASH); Ability(ability); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, move); if (!survives) SEND_OUT(opponent, 1); }
+    } THEN {
+        if (survives)
+            EXPECT_EQ(gBattleMons[B_BATTLER_1].hp, 1);
+        else
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP), 0);
+    }
+}

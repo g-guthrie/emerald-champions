@@ -8033,7 +8033,8 @@ s32 GetAdjustedDamage(struct DamageContext *ctx, s32 damage)
         gLastUsedItem = gBattleMons[ctx->battlerDef].item;
         gBattleStruct->moveResultFlags[ctx->battlerDef] |= MOVE_RESULT_FOE_HUNG_ON;
     }
-    else if (ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_FOCUS_SASH && IsBattlerAtMaxHp(ctx->battlerDef))
+    else if (ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_FOCUS_SASH && IsBattlerAtMaxHp(ctx->battlerDef)
+          && !IsFocusSashBypassed(ctx->move, ctx->abilities[ctx->battlerDef]))
     {
         enduredHit = TRUE;
         RecordItemEffectBattle(ctx->battlerDef, ctx->holdEffects[ctx->battlerDef]);
@@ -8455,6 +8456,13 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(enum Species species, enum Item heldIt
         }
     }
     return FALSE;
+}
+
+// Emerald Champions: Knock Off strips a Focus Sash before it can hold, unless
+// Sticky Hold keeps the item on. The AI's survival checks share this rule.
+bool32 IsFocusSashBypassed(enum Move move, enum Ability targetAbility)
+{
+    return GetMoveEffect(move) == EFFECT_KNOCK_OFF && targetAbility != ABILITY_STICKY_HOLD;
 }
 
 bool32 CanMegaEvolve(enum BattlerId battler)

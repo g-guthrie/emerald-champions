@@ -149,6 +149,7 @@ void UpdateMoveResultFlags(uq4_12_t modifier, u32 *resultFlags);
 s32 GetStealthHazardDamage(enum TypeSideHazard hazardType, enum BattlerId battler);
 s32 GetStealthHazardDamageByTypesAndHP(enum TypeSideHazard hazardType, enum Type type1, enum Type type2, u32 maxHp);
 bool32 CanMegaEvolve(enum BattlerId battler);
+bool32 IsFocusSashBypassed(enum Move move, enum Ability targetAbility);
 bool32 CanUltraBurst(enum BattlerId battler);
 void ActivateMegaEvolution(enum BattlerId battler);
 void ActivateUltraBurst(enum BattlerId battler);

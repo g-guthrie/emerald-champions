@@ -954,7 +954,8 @@ static u32 AI_AdjustGuaranteedSurvival(struct DamageContext *ctx, u32 damage, u8
     bool32 endured = gBattleMons[ctx->battlerDef].volatiles.endured
         || GetMoveEffect(ctx->move) == EFFECT_FALSE_SWIPE
         || (fullHp && GetConfig(B_STURDY) >= GEN_5 && ctx->abilities[ctx->battlerDef] == ABILITY_STURDY);
-    if (!endured && fullHp && ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_FOCUS_SASH)
+    if (!endured && fullHp && ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_FOCUS_SASH
+     && !IsFocusSashBypassed(ctx->move, ctx->abilities[ctx->battlerDef]))
     {
         *consumed |= rollBit;
         ctx->holdEffects[ctx->battlerDef] = HOLD_EFFECT_NONE;
@@ -1198,7 +1199,7 @@ static void AI_CalcContextKOChance(struct DamageContext *ctx, const struct Simul
         return;
     if (maxHits == 1 && (AI_FirstStrikeBlocked(ctx) || gBattleMons[ctx->battlerDef].volatiles.endured
         || effect == EFFECT_FALSE_SWIPE || (IsBattlerAtMaxHp(ctx->battlerDef)
-         && (ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_FOCUS_SASH
+         && ((ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_FOCUS_SASH && !IsFocusSashBypassed(ctx->move, ctx->abilities[ctx->battlerDef]))
           || (GetConfig(B_STURDY) >= GEN_5 && ctx->abilities[ctx->battlerDef] == ABILITY_STURDY)))))
         return;
 
@@ -2169,7 +2170,8 @@ bool32 CanEndureHit(enum BattlerId battler, enum BattlerId battlerTarget, enum M
     if (GetMoveStrikeCount(move) > 1 && !DragonDartsHitsBothTargets(battler, battlerTarget, move))
         return FALSE;
 
-    if (gAiLogicData->holdEffects[battlerTarget] == HOLD_EFFECT_FOCUS_SASH)
+    if (gAiLogicData->holdEffects[battlerTarget] == HOLD_EFFECT_FOCUS_SASH
+     && !IsFocusSashBypassed(move, gAiLogicData->abilities[battlerTarget]))
         return TRUE;
 
     if (!DoesBattlerIgnoreAbilityChecks(battler, gAiLogicData->abilities[battler], move))

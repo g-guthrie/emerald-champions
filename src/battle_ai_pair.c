@@ -898,7 +898,7 @@ static u32 PairForecastDamage(const struct PairEvaluation *ev, enum BattlerId ac
     bool32 singleHit = GetMoveStrikeCount(move) <= 1 && !IsMultiHitMove(move)
         && GetMoveEffect(move) != EFFECT_BEAT_UP && gAiLogicData->abilities[actor] != ABILITY_PARENTAL_BOND;
     if (damage >= hp && hp == gBattleMons[target].maxHP && singleHit
-     && (gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH
+     && ((gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH && !IsFocusSashBypassed(move, gAiLogicData->abilities[target]))
          || AI_GetMoldBreakerSanitizedAbility(actor, gAiLogicData->abilities[actor], gAiLogicData->abilities[target],
              gAiLogicData->holdEffects[target], move) == ABILITY_STURDY))
         return hp - 1;
@@ -4250,7 +4250,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (worstDamage >= hp[target] && singleHit
              && (((copy || hpPowerAdjusted || conditionalBoostAdjusted || fieldAdjusted || rageAdjusted || defenderItemAdjusted) && gBattleMons[target].volatiles.endured)
                  || (hp[target] == gBattleMons[target].maxHP
-                     && ((gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH && !(usedItems & (1u << target)))
+                     && ((gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH && !(usedItems & (1u << target))
+                          && !IsFocusSashBypassed(move, gAiLogicData->abilities[target]))
                  || AI_GetMoldBreakerSanitizedAbility(actor, gAiLogicData->abilities[actor], gAiLogicData->abilities[target],
                      gAiLogicData->holdEffects[target], move) == ABILITY_STURDY))))
             {
