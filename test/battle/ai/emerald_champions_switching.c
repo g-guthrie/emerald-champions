@@ -19,7 +19,9 @@
 extern bool8 gTestPairBudgetSpent;
 #endif
 
-struct SwitchInjury { enum Species species; u16 hp; u32 status; };
+// A member's state on the board being replayed. A held move leaves every
+// other move without PP, so a replay can re-create the Choice lock it had.
+struct SwitchInjury { enum Species species; u16 hp; u32 status; enum Move held; };
 EWRAM_DATA static struct SwitchInjury sSwitchInjuries[6] = {0};
 
 static void BuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
@@ -67,6 +69,12 @@ static void DeclareAuthoredMon(struct Pokemon *mon)
             HP(sSwitchInjuries[j].hp);
             if (sSwitchInjuries[j].status)
                 Status1(sSwitchInjuries[j].status);
+            for (u32 slot = 0; slot < MAX_MON_MOVES && sSwitchInjuries[j].held != MOVE_NONE; slot++)
+            {
+                u8 spent = 0;
+                if (GetMonData(mon, MON_DATA_MOVE1 + slot) != sSwitchInjuries[j].held)
+                    SetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_PP1 + slot, &spent);
+            }
         }
 }
 
@@ -240,8 +248,15 @@ AI_DOUBLE_BATTLE_TEST("EC Mega: Glacia's Froslass evolves into Mega Charizard's 
 // that could not help it - there a Protect that was one-in-three, here a Water
 // Spout both foes resist - and Kyogre stayed in until it fell. A lock that
 // buys nothing for turns to come is a reason to leave, not to wait it out.
-AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves an Encore into a move both foes resist")
+// Both reserves are Wallace's aces. As on the benchmark board, Miraidon has
+// spent a Draco Meteor, and neither ace falls to its Electro Drift on arrival.
+// At full Special Attack that Electro Drift removes either one, and Kyogre
+// waits the Encore out rather than hand an ace over for it.
+AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves a useless Encore for an ace only when the ace survives entry")
 {
+    bool32 dracoSpent;
+    PARAMETRIZE { dracoSpent = TRUE; }
+    PARAMETRIZE { dracoSpent = FALSE; }
     GIVEN {
         SwitchPlayer(SPECIES_WHIMSICOTT, 100, 0, WHIMSICOTT_SET);
         SwitchPlayer(SPECIES_MIRAIDON, 100, 0, SET(MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_HADRON_ENGINE, ITEM_LIFE_ORB, 4, 0, 0, 252, 0, 252));
@@ -252,7 +267,10 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves an Encore into a mo
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PROTECT);
-            MOVE(playerRight, MOVE_PROTECT);
+            if (dracoSpent)
+                MOVE(playerRight, MOVE_DRACO_METEOR, target: opponentRight);
+            else
+                MOVE(playerRight, MOVE_PROTECT);
             EXPECT_MOVE(opponentLeft, MOVE_WATER_SPOUT);
         }
         TURN {
@@ -264,7 +282,10 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves an Encore into a mo
             MOVE(playerRight, MOVE_DAZZLING_GLEAM, target: opponentLeft);
         }
     } THEN {
-        EXPECT_NE(opponentLeft->species, SPECIES_KYOGRE_PRIMAL);
+        if (dracoSpent)
+            EXPECT_NE(opponentLeft->species, SPECIES_KYOGRE_PRIMAL);
+        else
+            EXPECT_EQ(opponentLeft->species, SPECIES_KYOGRE_PRIMAL);
     }
 }
 
@@ -308,6 +329,159 @@ AI_DOUBLE_BATTLE_TEST("EC switching: a Choice-lock exit prices each reserve agai
             MOVE(playerLeft, MOVE_PROTECT);
             MOVE(playerRight, MOVE_PROTECT);
             EXPECT_SWITCH(opponentLeft, 3);
+        }
+    }
+}
+
+// An ace leaves the bench to end a useless lock only into a board where it
+// lives to act. Each of these replays a benchmark board whose only reserve (or
+// the reserve the exit chose) was the trainer's ace. Where a replay's first
+// turn re-creates a Choice lock, the locked member's other moves are spent so
+// the lock is the one the benchmark board had.
+
+#define SHAWN_LANTURN_SET SET(MOVE_SCALD, MOVE_ICE_BEAM, MOVE_THUNDER_WAVE, MOVE_PROTECT, NATURE_MODEST, ABILITY_VOLT_ABSORB, ITEM_LIFE_ORB, 0, 0, 0, 0, 0, 0)
+#define SHAWN_DURALUDON_SET SET(MOVE_FLASH_CANNON, MOVE_DRACO_METEOR, MOVE_THUNDERBOLT, MOVE_PROTECT, NATURE_MODEST, ABILITY_STALWART, ITEM_CHOICE_SPECS, 0, 0, 0, 0, 0, 0)
+
+// w4-02/r36c turn 8: Crabominable's Band Ice Punch is held into Bronzor, the
+// last foe, which resists it. Jocelyn's ace Sirfetch'd takes the lock's place;
+// Bronzor's best answer, Psychic, leaves it standing. The same board with
+// Sirfetch'd low enough for that Psychic to finish it keeps the lock: the exit
+// would hand the ace over for the one turn the lock costs. The first turn
+// sets the lock on a stand-in that falls to it, brings in Breloom, and has
+// Bronzor restore the board's Trick Room.
+AI_DOUBLE_BATTLE_TEST("EC switching: Jocelyn's Crabominable leaves a useless lock for her ace only when the ace survives entry")
+{
+    u16 aceHp = 0;
+    PARAMETRIZE { aceHp = 0; }
+    PARAMETRIZE { aceHp = 12; }
+    GIVEN {
+        SwitchPlayer(SPECIES_BRONZOR, 20, 0, SET(MOVE_TRICK_ROOM, MOVE_GYRO_BALL, MOVE_PSYCHIC, MOVE_PROTECT, NATURE_RELAXED, ABILITY_LEVITATE, ITEM_EVIOLITE, 0, 0, 0, 0, 0, 0));
+        PLAYER(SPECIES_TROPIUS) { Level(20); HP(30); Speed(200); Moves(MOVE_AIR_SLASH); }
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_LILLIGANT_HISUI, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_ORICORIO_POM_POM, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_WHIMSICOTT, 10};
+        sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_CRABOMINABLE, 56, 0, MOVE_ICE_PUNCH};
+        if (aceHp)
+            sSwitchInjuries[4] = (struct SwitchInjury){SPECIES_SIRFETCHD, aceHp};
+        SwitchLeads(2, 3);
+        SwitchAuthoredOpponent(TRAINER_JOCELYN, 1);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TRICK_ROOM);
+            MOVE(playerRight, MOVE_AIR_SLASH, target: opponentLeft);
+            EXPECT_MOVE(opponentRight, MOVE_ICE_PUNCH, target: playerRight);
+            EXPECT_SEND_OUT(opponentLeft, 4);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_PSYCHIC, target: opponentRight);
+            SKIP_TURN(playerRight);
+            if (aceHp == 0)
+                EXPECT_SWITCH(opponentRight, 5);
+            else
+                EXPECT_MOVE(opponentRight, MOVE_ICE_PUNCH);
+        }
+    }
+}
+
+// w4-04/sh83a turn 7: Jolteon's Specs Thunderbolt is held into Duraludon
+// (resists) and Lanturn (Volt Absorb), and the one reserve left is Shawn's ace
+// Ampharos, which nothing on the board knocks out on arrival. The lock still
+// pays: the resisted Specs hit and Pawmot's Ice Punch take Duraludon down
+// together, so the exit loses on the board and Jolteon stays.
+AI_DOUBLE_BATTLE_TEST("EC switching: Shawn's Jolteon keeps a resisted lock that still threatens Duraludon")
+{
+    GIVEN {
+        PLAYER(SPECIES_GYARADOS) { Level(30); HP(80); Ability(ABILITY_MOXIE); Speed(1); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_FLYGON) { Level(30); Ability(ABILITY_LEVITATE); Speed(1); Moves(MOVE_CELEBRATE); }
+        SwitchPlayer(SPECIES_DURALUDON, 30, 0, SHAWN_DURALUDON_SET);
+        SwitchPlayer(SPECIES_LANTURN, 30, 112, SHAWN_LANTURN_SET);
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_ELECTRODE_HISUI, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_BELLIBOLT, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_ROTOM_WASH, 0};
+        sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_PAWMOT, 73};
+        sSwitchInjuries[4] = (struct SwitchInjury){SPECIES_JOLTEON, 49, STATUS1_BURN};
+        SwitchLeads(3, 4);
+        SwitchAuthoredOpponent(TRAINER_SHAWN, 2);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_ICE_PUNCH, target: playerRight);
+            EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerLeft);
+            SEND_OUT(playerLeft, 2);
+            SEND_OUT(playerRight, 3);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_DRACO_METEOR, target: opponentLeft);
+            MOVE(playerRight, MOVE_SCALD, target: opponentRight);
+            EXPECT_MOVE(opponentRight, MOVE_THUNDERBOLT);
+        }
+    }
+}
+
+// w4-04/wa84d turn 7: Galvantula's Specs Thunder is held into Duraludon
+// (resists) and Clodsire (immune). The one reserve left is Wattson's ace
+// Manectric, and Clodsire's Life Orb High Horsepower removes it on arrival.
+// The first turn sets the lock on a stand-in that falls to it.
+AI_DOUBLE_BATTLE_TEST("EC switching: Wattson's Galvantula keeps a useless lock rather than spend an ace that falls on entry")
+{
+    GIVEN {
+        PLAYER(SPECIES_GYARADOS) { Level(30); HP(60); Ability(ABILITY_MOXIE); Speed(1); Moves(MOVE_CELEBRATE); }
+        SwitchPlayer(SPECIES_CLODSIRE, 30, 0, SET(MOVE_HIGH_HORSEPOWER, MOVE_POISON_JAB, MOVE_RECOVER, MOVE_PROTECT, NATURE_ADAMANT, ABILITY_UNAWARE, ITEM_LIFE_ORB, 0, 0, 0, 0, 0, 0));
+        SwitchPlayer(SPECIES_DURALUDON, 30, 0, SHAWN_DURALUDON_SET);
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_ELECTRODE, 37};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_ELECTIVIRE, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_MAGNEZONE, 0};
+        sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_THUNDURUS, 0};
+        sSwitchInjuries[4] = (struct SwitchInjury){SPECIES_GALVANTULA, 34, 0, MOVE_THUNDER};
+        SwitchLeads(0, 4);
+        SwitchAuthoredOpponent(TRAINER_WATTSON_1, 2);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_PROTECT);
+            EXPECT_MOVE(opponentRight, MOVE_THUNDER, target: playerLeft);
+            SEND_OUT(playerLeft, 2);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_FLASH_CANNON, target: opponentRight);
+            MOVE(playerRight, MOVE_HIGH_HORSEPOWER, target: opponentLeft);
+            EXPECT_MOVE(opponentRight, MOVE_THUNDER);
+        }
+    }
+}
+
+// w4-17/cyn-1 turns 6-7: Lucario's Scarf Close Combat takes Kartana, then is
+// held into Flutter Mane (immune) and Amoonguss (resists). The one reserve
+// left is Cynthia's ace Garchomp at 55 HP, which Flutter Mane's Moonblast
+// removes on arrival: the exit would spend the ace for nothing.
+AI_DOUBLE_BATTLE_TEST("EC switching: Cynthia's Lucario keeps a useless lock rather than spend an ace that falls on entry")
+{
+    bool32 champion = FlagGet(FLAG_IS_CHAMPION);
+    GIVEN {
+        FlagSet(FLAG_IS_CHAMPION);
+        SwitchPlayer(SPECIES_FLUTTER_MANE, 100, 0, SET(MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_PROTOSYNTHESIS, ITEM_BOOSTER_ENERGY, 4, 0, 0, 252, 0, 252));
+        SwitchPlayer(SPECIES_KARTANA, 100, 208, SET(MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_SMART_STRIKE, MOVE_PROTECT, NATURE_JOLLY, ABILITY_BEAST_BOOST, ITEM_LIFE_ORB, 4, 252, 0, 0, 0, 252));
+        SwitchPlayer(SPECIES_AMOONGUSS, 100, 0, SET(MOVE_SPORE, MOVE_RAGE_POWDER, MOVE_POLLEN_PUFF, MOVE_PROTECT, NATURE_RELAXED, ABILITY_REGENERATOR, ITEM_ROCKY_HELMET, 252, 0, 252, 0, 4, 0));
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_MILOTIC, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_TOGEKISS, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_MIRAIDON, 0};
+        sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_GARCHOMP, 55};
+        SwitchLeads(2, 3);
+        SwitchAuthoredOpponent(TRAINER_CYNTHIA_1, 8);
+        if (!champion)
+            FlagClear(FLAG_IS_CHAMPION);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft);
+            MOVE(playerRight, MOVE_SACRED_SWORD, target: opponentRight);
+            EXPECT_MOVE(opponentRight, MOVE_CLOSE_COMBAT, target: playerRight);
+            SEND_OUT(playerRight, 2);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft);
+            MOVE(playerRight, MOVE_SPORE, target: opponentRight);
+            EXPECT_MOVE(opponentRight, MOVE_CLOSE_COMBAT);
         }
     }
 }

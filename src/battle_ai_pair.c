@@ -5825,6 +5825,39 @@ static bool32 PairEntryIsLethal(enum BattlerId entering)
     return FALSE;
 }
 
+// Whether the body now loaded into this slot is expected to go down before it
+// acts: some foe's best usable attack - a spread move included, and priced in
+// the Mega form that foe can still take - does at least its HP on the median
+// roll, and no Sash or Sturdy holds it at one. Loadouts are visible, the foes'
+// committed moves are not, so every usable attack counts.
+static bool32 PairEntryExpectedKo(enum BattlerId entering)
+{
+    if (!IsBattlerAlive(entering))
+        return TRUE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(entering, foe))
+            continue;
+        u32 forms = CanMegaEvolve(foe) ? 2 : 1;
+        for (u32 index = 0; index < MAX_MON_MOVES; index++)
+        {
+            enum Move move = gBattleMons[foe].moves[index];
+            if (move == MOVE_NONE || IsBattleMoveStatus(move)
+             || IsMoveUnusable(index, move, gAiLogicData->moveLimitations[foe])
+             || CanEndureHit(foe, entering, move))
+                continue;
+            for (u32 form = 0; form < forms; form++)
+            {
+                struct AiCalcValues calc = {.move = move, .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain,
+                    .gimmickAtk = form ? GIMMICK_MEGA : GIMMICK_NONE};
+                if (AI_CalcDamage(&calc, foe, entering).median >= gBattleMons[entering].hp)
+                    return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
 static bool32 PairCanSwitch(enum BattlerId actor)
 {
     if (!IsBattlerAlive(actor) || (gBattleTypeFlags & BATTLE_TYPE_ARENA)
@@ -6546,6 +6579,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
             continue;
         {
             u32 slots[2] = {reserves[0][left], reserves[1][right]};
+            u32 aceFalls = 2; // Unknown until the board is first loaded.
             // Voluntary double switches spend both actions and multiply the
             // candidate space. Forced double replacements are ranked separately.
             if (slots[0] < PARTY_SIZE && slots[1] < PARTY_SIZE)
@@ -6603,6 +6637,8 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     || ((mega & 1) && slots[0] < PARTY_SIZE)
                     || ((mega & 2) && slots[1] < PARTY_SIZE))
                     continue;
+                if (aceFalls == 1)
+                    continue;
                 AI_RestoreCandidateState(state);
                 u32 noActionMask = 0;
                 // Evolving is free. Counting it as a tie-break cost made a
@@ -6627,6 +6663,23 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     AI_LoadSwitchCandidate(actor, slots[0], FALSE);
                 else if (slots[1] < PARTY_SIZE)
                     AI_LoadSwitchCandidate(partner, slots[1], FALSE);
+                // An ace that leaves the bench to end a useless lock has to
+                // live to act. If the foes' visible attacks are expected to
+                // remove it on arrival, the exit only trades the ace for the
+                // one turn the lock would have cost, however the rest of the
+                // board prices that trade. Planned exits are not voluntary.
+                if (aceFalls == 2)
+                {
+                    aceFalls = 0;
+                    for (u32 index = 0; index < 2; index++)
+                        if (slots[index] < PARTY_SIZE && uselessLock[index]
+                         && !deadline[index] && !earlyPivot[index]
+                         && IsAceMon(actors[index], slots[index])
+                         && PairEntryExpectedKo(actors[index]))
+                            aceFalls = 1;
+                    if (aceFalls)
+                        continue;
+                }
                 bool32 valid = TRUE;
                 for (u32 index = 0; index < 2; index++)
                     if ((mega & (1u << index)) && !AI_ApplyMegaCandidate(actors[index], FALSE))
