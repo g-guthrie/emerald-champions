@@ -591,7 +591,9 @@ u32 GetChildNature(struct DayCare *daycare)
     if (slot == DAYCARE_MON_COUNT)
         return NATURE_RANDOM;
 
-    return GetNatureFromPersonality(GetBoxMonData(&daycare->mons[slot].mon, MON_DATA_PERSONALITY));
+    // The nature the summary shows: a nature changed at Slateport lives in
+    // the hidden-nature field, not the personality value.
+    return GetBoxMonData(&daycare->mons[slot].mon, MON_DATA_HIDDEN_NATURE);
 }
 
 static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
@@ -681,6 +683,18 @@ void InheritAbility(struct Pokemon *egg, struct DayCare *daycare)
 
     if (inheritAbility < 0)
         return;
+
+    // Emerald Champions: IVs are always perfect, so a Destiny Knot's breeding
+    // job is the Ability instead - the chosen parent's slot always passes.
+    bool32 knot = FALSE;
+    for (u32 i = 0; i < DAYCARE_MON_COUNT; i++)
+        if (GetItemHoldEffect(GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_DESTINY_KNOT)
+            knot = TRUE;
+    if (knot)
+    {
+        SetMonData(egg, MON_DATA_ABILITY_NUM, &inheritAbility);
+        return;
+    }
 
     u32 hiddenAbilityPercentChance = (GetConfig(ABILITY_INHERITANCE) == GEN_5) ? 80 : 60;
     if (inheritAbility == 2 && !RandomPercentage(RNG_DAYCARE_ABILITY_INHERITANCE, hiddenAbilityPercentChance))

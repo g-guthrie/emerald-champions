@@ -1157,3 +1157,28 @@ TEST("InheritAbility copy the ability of the mother or non-ditto parent (gen6+)"
     else
         EXPECT_EQ(GetMonData(&egg, MON_DATA_ABILITY_NUM), 3);
 }
+
+TEST("InheritAbility: a Destiny Knot always passes the parent's Ability (Emerald Champions)")
+{
+    struct Pokemon egg;
+    CreateMonWithIVs(&egg, SPECIES_ABRA, 1, Random32(), OTID_STRUCT_PLAYER_ID, 0);
+    u32 value = 0;
+    SetMonData(&egg, MON_DATA_ABILITY_NUM, &value);
+
+    SetConfig(CONFIG_ABILITY_INHERITANCE, GEN_9);
+    SET_RNG(RNG_DAYCARE_ABILITY_INHERITANCE, FALSE); // the ordinary roll fails
+
+    ZeroPlayerPartyMons();
+    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_ABRA, 100, gender=MON_FEMALE, abilityNum=2, item=ITEM_DESTINY_KNOT;
+        givemon SPECIES_ABRA, 100, gender=MON_MALE, abilityNum=0;
+    );
+    gSpecialVar_0x8004 = 0;
+    StoreSelectedPokemonInDaycare();
+    gSpecialVar_0x8004 = 0;
+    StoreSelectedPokemonInDaycare();
+
+    InheritAbility(&egg, &gSaveBlock1Ptr->daycare);
+    EXPECT_EQ(GetMonData(&egg, MON_DATA_ABILITY_NUM), 2);
+}
