@@ -2528,7 +2528,7 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Juan's Manaphy does not Tail Glow into the 
         PreparedPlayerAt(SPECIES_IRON_HANDS, 70, &sJuanFoeIronHands, 294, 0);
         // Juan is the eighth gym: seven badges, cap70.
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
-        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_SUICUNE, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANDORUS_THERIAN, 0};
         sAuthoredLeadSlot = 2;
         AuthoredOpponentWithPartner(TRAINER_JUAN_1, 7, FALSE, 3);
     } WHEN {
@@ -2723,7 +2723,7 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: Juan's Specs Kingdra does not open with
         sAuthoredLeads[0] = SPECIES_ALTARIA;
         sAuthoredLeads[1] = SPECIES_KINGDRA;
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
-        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_SUICUNE, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANDORUS_THERIAN, 0};
         sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_MANAPHY, 0};
         AuthoredOpponent(TRAINER_JUAN_1, 7, FALSE);
     } WHEN {
@@ -2750,7 +2750,7 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: a search the clock cuts short still sta
         sAuthoredLeads[0] = SPECIES_ALTARIA;
         sAuthoredLeads[1] = SPECIES_KINGDRA;
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
-        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_SUICUNE, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANDORUS_THERIAN, 0};
         sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_MANAPHY, 0};
         AuthoredOpponent(TRAINER_JUAN_1, 7, FALSE);
         gTestPairBudgetSpent = TRUE;
