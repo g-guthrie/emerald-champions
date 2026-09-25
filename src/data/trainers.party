@@ -9292,8 +9292,8 @@ Nature: NATURE_IMPISH
 - MOVE_PROTECT
 
 SPECIES_LUNALA @ ITEM_COVERT_CLOAK
-Level: 90
-Level Offset: 10
+Level: 91
+Level Offset: 11
 Ability: ABILITY_SHADOW_SHIELD
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9305,8 +9305,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_GENGAR @ ITEM_GENGARITE
-Level: 89
-Level Offset: 9
+Level: 90
+Level Offset: 10
 Ability: ABILITY_CURSED_BODY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20144,8 +20144,8 @@ Prize Multiplier: 25
 Starting Status: Weather Sun
 
 SPECIES_TORKOAL @ ITEM_HEAT_ROCK
-Level: 69
-Level Offset: 9
+Level: 73
+Level Offset: 13
 Ability: ABILITY_DROUGHT
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20157,8 +20157,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_RUNERIGUS @ ITEM_MENTAL_HERB
-Level: 70
-Level Offset: 10
+Level: 74
+Level Offset: 14
 Ability: ABILITY_WANDERING_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20170,8 +20170,8 @@ Nature: NATURE_RELAXED
 - MOVE_PROTECT
 
 SPECIES_CAMERUPT @ ITEM_CAMERUPTITE
-Level: 68
-Level Offset: 8
+Level: 72
+Level Offset: 12
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20183,8 +20183,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_TORTERRA @ ITEM_LEFTOVERS
-Level: 69
-Level Offset: 9
+Level: 73
+Level Offset: 13
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20196,8 +20196,8 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 SPECIES_COPPERAJAH @ ITEM_WEAKNESS_POLICY
-Level: 69
-Level Offset: 9
+Level: 73
+Level Offset: 13
 Ability: ABILITY_HEAVY_METAL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20209,8 +20209,8 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 SPECIES_STAKATAKA @ ITEM_FOCUS_SASH
-Level: 69
-Level Offset: 9
+Level: 73
+Level Offset: 13
 Ability: ABILITY_BEAST_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
