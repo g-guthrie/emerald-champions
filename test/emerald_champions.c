@@ -2132,8 +2132,38 @@ TEST("Emerald Champions rejects invalid preset requests without changing held it
     }
 }
 
+TEST("Emerald Champions: a legend's relic waits for the Hall of Fame, then the next Center heal")
+{
+    bool32 champion = FlagGet(FLAG_IS_CHAMPION);
+    FlagClear(FLAG_IS_CHAMPION);
+    ClearBag();
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+
+    MarkLegendarySignCaughtBySpecies(SPECIES_KYOGRE);
+    EXPECT(!CheckBagHasItem(ITEM_BLUE_ORB, 1));
+    RetryPendingLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT(!CheckBagHasItem(ITEM_BLUE_ORB, 1));
+
+    FlagSet(FLAG_IS_CHAMPION);
+    RetryPendingLegendaryRelics();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT(CheckBagHasItem(ITEM_BLUE_ORB, 1));
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+
+    ClearBag();
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    if (!champion)
+        FlagClear(FLAG_IS_CHAMPION);
+}
+
 TEST("Emerald Champions pending relics survive full stores and never replay discarded rewards")
 {
+    // Delivery mechanics after the Hall of Fame, when the relics are released.
+    bool32 champion = FlagGet(FLAG_IS_CHAMPION);
+    FlagSet(FLAG_IS_CHAMPION);
     ClearBag();
     VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
     VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
@@ -2171,6 +2201,8 @@ TEST("Emerald Champions pending relics survive full stores and never replay disc
     EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x100);
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    if (!champion)
+        FlagClear(FLAG_IS_CHAMPION);
 }
 
 TEST("Emerald Champions partial mask grants retry only their saved undelivered items")

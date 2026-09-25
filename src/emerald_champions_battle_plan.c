@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "battle.h"
 #include "battle_ai_util.h"
 #include "battle_util.h"
@@ -41,6 +42,14 @@ u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler)
 
 bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
 {
+    // A legend's trump form is the final act's: the player's Rayquaza keeps
+    // Dragon Ascent but Mega Evolves only after the Hall of Fame, like the
+    // orbs and Rusted weapons (legendary_signs.c).
+    if (!TESTING && GetBattlerSide(battler) == B_SIDE_PLAYER
+     && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_RAYQUAZA
+     && !FlagGet(FLAG_IS_CHAMPION))
+        return FALSE;
+
     u32 trainer = GetCampaignTrainer(battler);
     u32 permissions = trainer < ARRAY_COUNT(sEmeraldChampionsMegaPermissions)
         ? sEmeraldChampionsMegaPermissions[trainer] : 0;
@@ -88,9 +97,11 @@ u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species spec
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
     {
         const struct EmeraldChampionsBattleTactic *tactic = &sEmeraldChampionsBattleTactics[i];
+        enum Species actor = GET_BASE_SPECIES_ID(tactic->actor);
+        enum Species recipient = GET_BASE_SPECIES_ID(tactic->recipient);
         if (tactic->trainer == trainer
-         && ((tactic->actor == species && tactic->recipient == partnerSpecies)
-             || (tactic->recipient == species && tactic->actor == partnerSpecies)))
+         && ((actor == species && recipient == partnerSpecies)
+             || (recipient == species && actor == partnerSpecies)))
             kinds |= tactic->kind;
     }
     return kinds;
@@ -107,8 +118,10 @@ u32 EmeraldChampions_GetTacticKind(enum BattlerId actor, enum BattlerId recipien
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
     {
         const struct EmeraldChampionsBattleTactic *tactic = &sEmeraldChampionsBattleTactics[i];
-        if (tactic->trainer == trainer && tactic->actor == species
-         && tactic->recipient == recipientSpecies && tactic->move == move)
+        // Authored entries may name a regional form (Paldean Tauros); the
+        // battlers are compared by base species, so the entries must be too.
+        if (tactic->trainer == trainer && GET_BASE_SPECIES_ID(tactic->actor) == species
+         && GET_BASE_SPECIES_ID(tactic->recipient) == recipientSpecies && tactic->move == move)
             kinds |= tactic->kind;
     }
     return kinds;
@@ -122,7 +135,7 @@ bool32 EmeraldChampions_HasTacticActor(enum BattlerId actor, u32 kind)
     enum Species species = GET_BASE_SPECIES_ID(gBattleMons[actor].species);
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
         if (sEmeraldChampionsBattleTactics[i].trainer == trainer
-         && sEmeraldChampionsBattleTactics[i].actor == species
+         && GET_BASE_SPECIES_ID(sEmeraldChampionsBattleTactics[i].actor) == species
          && (sEmeraldChampionsBattleTactics[i].kind & kind))
             return TRUE;
     return FALSE;

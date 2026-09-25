@@ -462,15 +462,32 @@ static bool32 GiveLegendaryRelicItem(enum Item item)
         || AddBagItem(item, 1) || AddPCItem(item, 1);
 }
 
+// The legend is yours when you catch it; its trump form is the final act's.
+// The Red and Blue Orbs and the Rusted Sword and Shield (the first four
+// relics) wait for the Hall of Fame and arrive at the next Pokémon Center.
+#define LEGENDARY_RELIC_CHAMPION_ONLY_COUNT 4
+
+static bool32 IsRelicHeldForChampion(u32 item)
+{
+    return item < LEGENDARY_RELIC_CHAMPION_ONLY_COUNT && !FlagGet(FLAG_IS_CHAMPION);
+}
+
+// callnative from the nurse; VAR_RESULT counts relics handed over this time.
 void RetryPendingLegendaryRelics(void)
 {
     u32 state = GetLegendaryRelicDeliveryState();
+    u32 delivered = 0;
     for (u32 item = 0; item < ARRAY_COUNT(sLegendaryRelicItems); item++)
     {
-        if ((state & (1u << item)) && GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
+        if ((state & (1u << item)) && !IsRelicHeldForChampion(item)
+         && GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
+        {
             state &= ~(1u << item);
+            delivered++;
+        }
     }
     SetLegendaryRelicDeliveryState(state);
+    gSpecialVar_Result = delivered;
 }
 
 static void GiveLegendaryRelicsForSpecies(enum Species species)
@@ -486,8 +503,9 @@ static void GiveLegendaryRelicsForSpecies(enum Species species)
              item < sLegendaryRelicGrants[group].firstItem + sLegendaryRelicGrants[group].itemCount;
              item++)
         {
-            // Only a real acquisition with failed insertion creates debt.
-            if (!GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
+            // A relic held for the Hall of Fame, or a real acquisition with
+            // failed insertion, becomes debt the nurse pays later.
+            if (IsRelicHeldForChampion(item) || !GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
                 state |= 1u << item;
         }
         SetLegendaryRelicDeliveryState(state);

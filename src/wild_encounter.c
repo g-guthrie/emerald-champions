@@ -557,18 +557,59 @@ static u32 ChooseEncounterSlotWithLure(const u8 *bounds, u32 count)
     return slot;
 }
 
-u32 ChooseWildMonIndex_Land(const struct WildPokemonInfo *info)
+// Resident legends are meant to be found, not ground for: a live Legendary-
+// class slot (sub-legends, Mythicals, box legends; not Ultra Beasts) gets four
+// extra chances on top of its table odds, so a 1% slot meets the player about
+// 5% of the time. Gated, caught or storm-held slots stay inert.
+#define RESIDENT_LEGEND_EXTRA_CHANCES 4
+#define RESIDENT_LEGEND_EXTRA_CAP     20 // a slot authored large is not pushed toward certainty
+
+static bool32 IsResidentLegendSlot(enum Species species)
 {
-    return ChooseEncounterSlotWithLure(GetEncounterBounds(info, sLandEncounterBounds), ARRAY_COUNT(sLandEncounterBounds));
+    return GetRestrictedPartyClass(species) == RESTRICTED_PARTY_LEGENDARY && IsWildSlotLive(species);
 }
 
-// Sweet Scent draws out eligible Legendary and Ultra Beast slots: each gets
-// five times its table odds (1% -> 5%, 3% -> 15%), with their combined share
-// scaled down to at most half of all outcomes. Gated or caught slots are inert
+static u32 ChooseWildMonIndexWithResidentLegends(const struct WildPokemonInfo *info, const u8 *defaults, u32 slots)
+{
+    const u8 *bounds = GetEncounterBounds(info, defaults);
+    u32 legendOdds = 0;
+    for (u32 i = 0; i < slots; i++)
+        if (IsResidentLegendSlot(info->wildPokemon[i].species))
+            legendOdds += bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+    if (legendOdds != 0)
+    {
+        u32 roll = Random() % bounds[slots - 1];
+        if (roll < min(legendOdds * RESIDENT_LEGEND_EXTRA_CHANCES, RESIDENT_LEGEND_EXTRA_CAP))
+        {
+            u32 target = roll % legendOdds;
+            for (u32 i = 0; i < slots; i++)
+            {
+                u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+                if (!IsResidentLegendSlot(info->wildPokemon[i].species))
+                    continue;
+                if (target < weight)
+                    return i;
+                target -= weight;
+            }
+        }
+    }
+    return ChooseEncounterSlotWithLure(bounds, slots);
+}
+
+u32 ChooseWildMonIndex_Land(const struct WildPokemonInfo *info)
+{
+    return ChooseWildMonIndexWithResidentLegends(info, sLandEncounterBounds, ARRAY_COUNT(sLandEncounterBounds));
+}
+
+// Sweet Scent draws out eligible Legendary and Ultra Beast slots: a Legendary
+// gets 25 times its table odds (1% -> 25%, a storm's share) and an Ultra Beast
+// five times (3% -> 15%), with their combined share scaled down to at most
+// half of all outcomes. Gated or caught slots are inert
 // and contribute nothing. The remaining mass reverses ordinary species
 // probabilities, not slot positions: duplicate slots are combined first and
 // tied species share their reversed probability equally.
-#define SWEET_SCENT_LEGEND_MULTIPLIER 5
+#define SWEET_SCENT_LEGEND_MULTIPLIER 25
+#define SWEET_SCENT_ULTRA_BEAST_MULTIPLIER 5
 
 static bool32 IsSweetScentLegendSlot(enum Species species)
 {
@@ -592,7 +633,8 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
         if (IsSweetScentLegendSlot(mons[i].species))
         {
             if (IsWildSlotLive(mons[i].species))
-                legendTotal += weight;
+                legendTotal += weight * (GetRestrictedPartyClass(mons[i].species) == RESTRICTED_PARTY_ULTRA_BEAST
+                    ? SWEET_SCENT_ULTRA_BEAST_MULTIPLIER : SWEET_SCENT_LEGEND_MULTIPLIER);
             continue;
         }
         u32 j;
@@ -605,7 +647,7 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
         ordinaryTotal += weight;
     }
 
-    legendMass = min(legendTotal * SWEET_SCENT_LEGEND_MULTIPLIER, total / 2);
+    legendMass = min(legendTotal, total / 2);
     // A table with no ordinary residents gives every outcome to its legends.
     if (count == 0 && legendTotal != 0)
         legendMass = total;
@@ -618,6 +660,8 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
             u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
             if (!IsSweetScentLegendSlot(mons[i].species) || !IsWildSlotLive(mons[i].species))
                 continue;
+            weight *= GetRestrictedPartyClass(mons[i].species) == RESTRICTED_PARTY_ULTRA_BEAST
+                ? SWEET_SCENT_ULTRA_BEAST_MULTIPLIER : SWEET_SCENT_LEGEND_MULTIPLIER;
             if (target < weight)
                 return i;
             target -= weight;
@@ -723,7 +767,7 @@ u8 GetLandEncounterSlotForMatchCall(const struct WildPokemonInfo *info)
 
 u32 ChooseWildMonIndex_Water(const struct WildPokemonInfo *info)
 {
-    return ChooseEncounterSlotWithLure(GetEncounterBounds(info, sWaterEncounterBounds), ARRAY_COUNT(sWaterEncounterBounds));
+    return ChooseWildMonIndexWithResidentLegends(info, sWaterEncounterBounds, ARRAY_COUNT(sWaterEncounterBounds));
 }
 
 // Match Call uses ordinary odds without the optional Lure reversal.

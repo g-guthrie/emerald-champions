@@ -886,8 +886,9 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
             EXPECT(level >= GetCurrentLevelCap() - 12 && level <= GetCurrentLevelCap() - 9);
         }
     }
-    EXPECT_GT(raikou, 0);
-    EXPECT_LT(raikou, 64);
+    // A default 4% slot, boosted x5 (capped +20 points): about a fifth.
+    EXPECT_GT(raikou, 64);
+    EXPECT_LT(raikou, 160);
 
     // Caught: the slot is inert again.
     MarkLegendarySignCaughtBySpecies(SPECIES_RAIKOU);
@@ -930,7 +931,7 @@ static u32 CountSweetScentSlot(const struct WildPokemonInfo *info, u32 slot)
     return hits;
 }
 
-TEST("Sweet Scent: live legend slots get five times their odds, capped at half of all outcomes")
+TEST("Sweet Scent: live legend slots get a storm's share, Ultra Beasts five times, capped at half")
 {
     bool8 saved[ARRAY_COUNT(sWildCapFlags)];
     SaveAndClearWildCapFlags(saved);
@@ -943,8 +944,8 @@ TEST("Sweet Scent: live legend slots get five times their odds, capped at half o
     static const u8 heavy[] = {40, 60, 80, 100};
     struct WildPokemonInfo info = {.wildPokemon = mons, .encounterBounds = onePercent};
 
-    // A 1% Legendary slot becomes 5%.
-    EXPECT_EQ(CountSweetScentSlot(&info, 3), 5);
+    // A 1% Legendary slot becomes 25%, a storm's share.
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 25);
     // Caught: inert, and the ordinary reversal takes every outcome.
     MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
@@ -953,7 +954,7 @@ TEST("Sweet Scent: live legend slots get five times their odds, capped at half o
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
-    EXPECT_EQ(CountSweetScentSlot(&info, 3), 5);
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 25);
 
     // A 3% Ultra Beast slot becomes 15%.
     mons[3].species = SPECIES_POIPOLE;

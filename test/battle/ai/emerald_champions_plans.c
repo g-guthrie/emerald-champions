@@ -51,7 +51,7 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_DRAGAPULT, SPECIES_COALOSSAL), 0);
     EXPECT(!(EmeraldChampions_GetBattlePlan(B_BATTLER_1) & EC_BATTLE_PLAN_ALLY_COMBO));
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_DARIUS;
-    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_TORNADUS, SPECIES_KILOWATTREL), EC_BATTLE_TACTIC_ACTIVATE);
+    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_CHATOT, SPECIES_KILOWATTREL), EC_BATTLE_TACTIC_ACTIVATE);
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_NATE;
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_ORANGURU, SPECIES_DELPHOX), EC_BATTLE_TACTIC_INSTRUCT);
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_CRISTIAN;
@@ -1020,7 +1020,7 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Darius charges Wind Power with the 
             NOT_EXPECT_MOVE(opponentRight, MOVE_PROTECT);
         }
     } THEN {
-        EXPECT_EQ(opponentLeft->species, SPECIES_TORNADUS);
+        EXPECT_EQ(opponentLeft->species, SPECIES_CHATOT);
         EXPECT_EQ(opponentRight->species, SPECIES_KILOWATTREL);
         EXPECT(gSideStatuses[B_SIDE_OPPONENT] & SIDE_STATUS_TAILWIND);
         EXPECT(playerLeft->hp < 600 || playerRight->hp < 600);
@@ -1313,11 +1313,11 @@ DOUBLE_BATTLE_TEST("EC Laura pivot mechanics: a faster U-turn preserves the same
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Frost Breath activates Anger Point")
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Storm Throw activates Anger Point")
 {
     GIVEN {
         // A deliberately harmless board: nothing can punish the turn, Frost
-        // Breath into a Normal body is neutral and nowhere near lethal, and the
+        // Throw into the Fighting-type Tauros is neutral and nowhere near lethal, and the
         // guaranteed critical hit is the whole point of the authored pairing.
         PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_SPLASH); }
         PLAYER(SPECIES_MAGIKARP) { Level(30); HP(400); MaxHP(400); Defense(200); SpDefense(200); Speed(5); Moves(MOVE_SPLASH); }
@@ -1327,10 +1327,10 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Frost Breath activates Ange
         TURN {
             MOVE(playerLeft, MOVE_SPLASH);
             MOVE(playerRight, MOVE_SPLASH);
-            EXPECT_MOVE(opponentLeft, MOVE_FROST_BREATH, target: opponentRight);
+            EXPECT_MOVE(opponentLeft, MOVE_STORM_THROW, target: opponentRight);
         }
     } THEN {
-        EXPECT_EQ(opponentLeft->species, SPECIES_FROSLASS);
+        EXPECT_EQ(opponentLeft->species, SPECIES_THROH);
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], MAX_STAT_STAGE);
     }
 }
@@ -2042,7 +2042,7 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Wattson's Discharge activates Motor Drive before 
 AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's activation survives a board that can fight back")
 {
     GIVEN {
-        // The attackers pressure Tauros: Tackle cannot damage Ghost Froslass.
+        // The attackers pressure Tauros while Throh sets up the critical hit.
         // The combo must leave its original recipient alive after both attacks.
         PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(200); MaxHP(200); Attack(90); Defense(60); SpDefense(60); Speed(70); Ability(ABILITY_TELEPATHY); Moves(MOVE_TACKLE); }
         PLAYER(SPECIES_MAGIKARP) { Level(30); HP(200); MaxHP(200); Attack(90); Defense(60); SpDefense(60); Speed(60); Moves(MOVE_TACKLE); }
@@ -2052,7 +2052,7 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's activation survives a board
         TURN {
             MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
             MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
-            EXPECT_MOVE(opponentLeft, MOVE_FROST_BREATH, target: opponentRight);
+            EXPECT_MOVE(opponentLeft, MOVE_STORM_THROW, target: opponentRight);
             // The recipient must not spend the same turn behind a shield: its
             // own guard blocks the activation the pair just chose.
             NOT_EXPECT_MOVE(opponentRight, MOVE_PROTECT);

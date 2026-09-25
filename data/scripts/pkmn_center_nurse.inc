@@ -103,6 +103,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	waitmovement 0
 	special HealPlayerParty
 	callnative RetryPendingLegendaryRelics
+	call_if_ne VAR_RESULT, 0, EventScript_PkmnCenterNurse_RelicsArrived
 	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
 	callnative UpdateFollowingPokemon
 	return
@@ -231,3 +232,17 @@ EventScript_PkmnCenterNurse_Itemfinder::
 Text_PkmnCenterNurse_Itemfinder:
 	.string "Your friend left a Dowsing Machine\n"
 	.string "for you after your Route 110 battle!$"
+
+@ Relics held for the Hall of Fame (the Red and Blue Orbs, the Rusted Sword
+@ and Shield) are handed over at the first heal after becoming Champion.
+EventScript_PkmnCenterNurse_RelicsArrived::
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox EventScript_PkmnCenterNurse_Text_RelicsArrived, MSGBOX_DEFAULT
+	waitfanfare
+	return
+
+EventScript_PkmnCenterNurse_Text_RelicsArrived:
+	.string "Oh! This was left here for you,\n"
+	.string "Champion. It's humming with power…\p"
+	.string "Your legendary Pokémon's relic is\n"
+	.string "now in your Bag.$"

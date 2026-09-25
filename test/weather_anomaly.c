@@ -433,7 +433,7 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     ResetAnomalyState();
 }
 
-TEST("Weather anomalies: the visitor takes a fifth of encounters on its own map only")
+TEST("Weather anomalies: the visitor takes a quarter of encounters on its own map only")
 {
     ResetAnomalyState();
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
@@ -450,7 +450,7 @@ TEST("Weather anomalies: the visitor takes a fifth of encounters on its own map 
     const struct WildPokemonInfo table = {.encounterRate = 20, .wildPokemon = mons};
     struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
 
-    // Route 110 grass: about 20%, at the cap.
+    // Route 110 grass: about 25%, at the cap.
     SetLocation(MAP_ROUTE110);
     u32 koko = 0;
     for (u32 seed = 0; seed < 1000; seed++)
@@ -464,8 +464,8 @@ TEST("Weather anomalies: the visitor takes a fifth of encounters on its own map 
         }
     }
     Test_MgbaPrintf("Tapu Koko anomaly encounters: %d/1000", koko);
-    EXPECT_GT(koko, 150);
-    EXPECT_LT(koko, 250);
+    EXPECT_GT(koko, 200);
+    EXPECT_LT(koko, 300);
 
     // Surf, Rock Smash and Honey on Route 110 never meet the land visitor.
     for (u32 seed = 0; seed < 200; seed++)
@@ -567,7 +567,8 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
     }
     EXPECT_EQ(hits, 0);
 
-    // After the window: an ordinary gated 1% resident.
+    // After the window: an ordinary gated 1% resident, which Sweet Scent
+    // draws out at a storm's share.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     EXPECT(!IsWeatherAnomalyVisitorSlotInert(SPECIES_TAPU_KOKO));
     hits = 0;
@@ -576,7 +577,7 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
         SET_RNG(RNG_NONE, roll);
         hits += ChooseSweetScentWildMonIndex(&scent, WILD_AREA_WATER) == 3;
     }
-    EXPECT_EQ(hits, 5);
+    EXPECT_EQ(hits, 25);
     ResetAnomalyState();
     gSaveBlock1Ptr->location = savedLocation;
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
@@ -608,8 +609,9 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), GetCurrentLevelCap());
         }
     }
-    EXPECT_GT(koko, 0);
-    EXPECT_LT(koko, 64);
+    // A default 4% slot, boosted x5 (capped +20 points) like any resident legend.
+    EXPECT_GT(koko, 64);
+    EXPECT_LT(koko, 160);
     gSaveBlock1Ptr->location = savedLocation;
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
     ResetAnomalyState();
