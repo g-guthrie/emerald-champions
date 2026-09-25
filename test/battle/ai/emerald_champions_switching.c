@@ -21,7 +21,16 @@ extern bool8 gTestPairBudgetSpent;
 
 // A member's state on the board being replayed. A held move leaves every
 // other move without PP, so a replay can re-create the Choice lock it had.
-struct SwitchInjury { enum Species species; u16 hp; u32 status; enum Move held; };
+// noItem: the member's item was spent before this board.
+struct SwitchInjury { enum Species species; u16 hp; u32 status; enum Move held; bool32 noItem; };
+// A milestone past the badges that sets the fight's level cap (the Hall of
+// Fame, Groudon's awakening). Consumed by the next authored build.
+EWRAM_DATA static u16 sSwitchMilestone = 0;
+// Two authored party slots that trade places, so a board's leads stand where
+// they stood on the benchmark. Consumed by the next authored build.
+EWRAM_DATA static u8 sSwitchSwap[2] = {0};
+// The species a board led with, brought to the front in this order.
+EWRAM_DATA static enum Species sSwitchLeadSpecies[2] = {0};
 EWRAM_DATA static struct SwitchInjury sSwitchInjuries[6] = {0};
 
 static void BuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
@@ -38,10 +47,15 @@ static void BuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party,
         else
             FlagClear(FLAG_BADGE01_GET + i);
     }
+    bool8 savedMilestone = sSwitchMilestone ? FlagGet(sSwitchMilestone) : FALSE;
+    if (sSwitchMilestone)
+        FlagSet(sSwitchMilestone);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     gBattleTypeFlags = flags;
     CreateNPCTrainerPartyFromTrainer(party, trainer);
     gBattleTypeFlags = savedFlags;
+    if (sSwitchMilestone && !savedMilestone)
+        FlagClear(sSwitchMilestone);
     SetCurrentDifficultyLevel(savedDifficulty);
     for (u32 i = 0; i < ARRAY_COUNT(savedBadges); i++)
     {
@@ -75,6 +89,8 @@ static void DeclareAuthoredMon(struct Pokemon *mon)
                 if (GetMonData(mon, MON_DATA_MOVE1 + slot) != sSwitchInjuries[j].held)
                     SetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_PP1 + slot, &spent);
             }
+            if (sSwitchInjuries[j].noItem)
+                Item(ITEM_NONE);
         }
 }
 
@@ -84,6 +100,25 @@ static void SwitchAuthoredOpponent(u16 trainerId, u32 badges)
     const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     BuildAuthoredParty(trainerId, badges, party, BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE);
+    if (sSwitchSwap[0] != sSwitchSwap[1])
+    {
+        struct Pokemon swap = party[sSwitchSwap[0]];
+        party[sSwitchSwap[0]] = party[sSwitchSwap[1]];
+        party[sSwitchSwap[1]] = swap;
+        sSwitchSwap[0] = sSwitchSwap[1] = 0;
+    }
+    for (u32 lead = 0; lead < ARRAY_COUNT(sSwitchLeadSpecies); lead++)
+    {
+        for (u32 i = 0; sSwitchLeadSpecies[lead] != SPECIES_NONE && i < PARTY_SIZE; i++)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) == sSwitchLeadSpecies[lead])
+            {
+                struct Pokemon swap = party[lead];
+                party[lead] = party[i];
+                party[i] = swap;
+                break;
+            }
+        sSwitchLeadSpecies[lead] = SPECIES_NONE;
+    }
     if (IsAITest())
         AI_FLAGS(trainer->aiFlags | AI_FLAG_DOUBLE_BATTLE);
     gBattleTestRunnerState->data.recordedBattle.opponentA = trainerId;
@@ -95,6 +130,7 @@ static void SwitchAuthoredOpponent(u16 trainerId, u32 badges)
         }
     }
     memset(sSwitchInjuries, 0, sizeof(sSwitchInjuries));
+    sSwitchMilestone = 0;
     Free(party);
 }
 
@@ -156,6 +192,8 @@ AI_MULTI_BATTLE_TEST("EC multi mega: Maxie's Camerupt evolves beside Courtney's 
 
 // A benchmark player member: the prepared set at the fight's cap, perfect IVs
 // and the set's EVs, at the HP it had on the board being replayed.
+EWRAM_DATA static u32 sSwitchPlayerStatus = 0; // Consumed by the next SwitchPlayer.
+
 static void SwitchPlayer(enum Species species, u32 level, u16 hp, const struct EmeraldChampionsBattleSet *set)
 {
     struct Pokemon mon;
@@ -168,7 +206,10 @@ static void SwitchPlayer(enum Species species, u32 level, u16 hp, const struct E
         Moves(set->moves[0], set->moves[1], set->moves[2], set->moves[3]);
         if (hp)
             HP(hp);
+        if (sSwitchPlayerStatus)
+            Status1(sSwitchPlayerStatus);
     }
+    sSwitchPlayerStatus = 0;
 }
 
 #define SET(m1, m2, m3, m4, _nature, _ability, _item, hp, atk, def, spa, spd, spe) \
@@ -482,6 +523,307 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Cynthia's Lucario keeps a useless lock rath
             MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft);
             MOVE(playerRight, MOVE_SPORE, target: opponentRight);
             EXPECT_MOVE(opponentRight, MOVE_CLOSE_COMBAT);
+        }
+    }
+}
+
+#define TALONFLAME_SET SET(MOVE_BRAVE_BIRD, MOVE_FLARE_BLITZ, MOVE_TAILWIND, MOVE_PROTECT, NATURE_JOLLY, ABILITY_GALE_WINGS, ITEM_NONE, 4, 252, 0, 0, 0, 252)
+#define GARDEVOIR_SET SET(MOVE_HYPER_VOICE, MOVE_PSYSHOCK, MOVE_MOONBLAST, MOVE_PROTECT, NATURE_TIMID, ABILITY_TRACE, ITEM_GARDEVOIRITE, 4, 0, 0, 252, 0, 252)
+#define MIRAIDON_SET SET(MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_HADRON_ENGINE, ITEM_LIFE_ORB, 4, 0, 0, 252, 0, 252)
+
+// Whether this battler's pair decision chose to switch to that party slot.
+static bool32 PairSwitchedTo(enum BattlerId battler, u32 slot)
+{
+    return (gAiSwitchTrace[battler] & AI_SWITCH_FROM_PAIR)
+        && ((gAiSwitchTrace[battler] >> AI_SWITCH_SLOT_SHIFT) & 7) == slot;
+}
+
+extern void (*gTestAiTurnSetupHook)(void);
+
+// vj-a/lily-1 turn 3, restored as it stood: Hariyama's Close Combat drops,
+// Miraidon's Electric Terrain with two turns left (no Spore on Gardevoir),
+// Breloom and Hariyama a turn past Fake Out, and the Poison Heal Gardevoir
+// Traced from Breloom.
+static void LilycoveBoard(void)
+{
+    gBattleMons[B_BATTLER_3].statStages[STAT_DEF] = DEFAULT_STAT_STAGE - 1;
+    gBattleMons[B_BATTLER_3].statStages[STAT_SPDEF] = DEFAULT_STAT_STAGE - 1;
+    gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_3].isFirstTurn = 0;
+    gFieldTimers.terrain = B_TERRAIN_ELECTRIC;
+    gFieldTimers.terrainTimer = 2;
+    gBattleStruct->tracedAbility[B_BATTLER_2] = ABILITY_POISON_HEAL;
+    gBattleMons[B_BATTLER_2].ability = gBattleMons[B_BATTLER_2].volatiles.overwrittenAbility = ABILITY_POISON_HEAL;
+    gBattleMons[B_BATTLER_2].volatiles.traceActivated = TRUE;
+}
+
+// vj-a/lily-1 turn 3: Breloom, poisoned by its Orb and facing Talonflame's
+// Brave Bird, left for the Mega-ace Salamence beside a Gardevoir holding its
+// stone. Gardevoir evolved first and Pixilate Hyper Voice removed Salamence
+// before it moved. The entry was only ever checked against moves the player
+// had already used, and this Gardevoir had not attacked yet - though even its
+// base-form Moonblast removes Salamence on arrival. Hand-built boards without
+// the terrain, the Close Combat drops and the spent Fake Out stayed in.
+AI_DOUBLE_BATTLE_TEST("EC switching: Lilycove Brendan keeps Salamence out of a visible Mega Gardevoir")
+{
+    GIVEN {
+        memset(gAiSwitchTrace, 0, sizeof(gAiSwitchTrace));
+        SwitchPlayer(SPECIES_TALONFLAME, 60, 124, TALONFLAME_SET);
+        SwitchPlayer(SPECIES_GARDEVOIR, 60, 154, GARDEVOIR_SET);
+        sSwitchPlayerStatus = STATUS1_PARALYSIS;
+        SwitchPlayer(SPECIES_INCINEROAR, 60, 107, SET(MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, NATURE_ADAMANT, ABILITY_INTIMIDATE, ITEM_NONE, 252, 252, 4, 0, 0, 0));
+        SwitchPlayer(SPECIES_MIRAIDON, 60, 189, MIRAIDON_SET);
+        SwitchPlayer(SPECIES_METAGROSS, 60, 0, SET(MOVE_METEOR_MASH, MOVE_ZEN_HEADBUTT, MOVE_BULLET_PUNCH, MOVE_PROTECT, NATURE_JOLLY, ABILITY_CLEAR_BODY, ITEM_LIFE_ORB, 4, 252, 0, 0, 0, 252));
+        SwitchPlayer(SPECIES_IRON_HANDS, 60, 0, SET(MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT, NATURE_ADAMANT, ABILITY_QUARK_DRIVE, ITEM_SITRUS_BERRY, 252, 252, 4, 0, 0, 0));
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_SWELLOW, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_MANECTRIC, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_BRELOOM, 163, STATUS1_TOXIC_POISON};
+        SwitchLeads(2, 3);
+        SwitchAuthoredOpponent(TRAINER_BRENDAN_LILYCOVE_MUDKIP, 6);
+        gTestAiTurnSetupHook = LilycoveBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_BRAVE_BIRD, target: opponentLeft);
+            MOVE(playerRight, MOVE_HYPER_VOICE, gimmick: GIMMICK_MEGA);
+        }
+    } THEN {
+        EXPECT(!PairSwitchedTo(B_BATTLER_1, 4) && !PairSwitchedTo(B_BATTLER_3, 4));
+    }
+}
+
+// vj-b/lj-1 turn 1 as it stood: Gholdengo at -1 Attack from Tauros'
+// Intimidate and -2 Special Attack from its Make It Rain.
+static void LeaAndJedBoard(void)
+{
+    gBattleMons[B_BATTLER_2].statStages[STAT_ATK] = DEFAULT_STAT_STAGE - 1;
+    gBattleMons[B_BATTLER_2].statStages[STAT_SPATK] = DEFAULT_STAT_STAGE - 2;
+}
+
+// vj-b/lj-1 turn 1: Kyogre fell and Iron Hands arrived beside Gholdengo. A
+// 118 HP Miltank, faster than both, left for Ursaluna - Normal/Ground, taking
+// Iron Hands' visible Drain Punch at double - and lost two thirds of it. The
+// forecast had both foes aiming at Primeape, so the newcomer never met the
+// hit it was walking into. Farigiraf takes it neutrally and Shadow Ball not
+// at all.
+AI_DOUBLE_BATTLE_TEST("EC switching: Lea & Jed's Miltank does not bring Ursaluna into Iron Hands' Drain Punch")
+{
+    GIVEN {
+        memset(gAiSwitchTrace, 0, sizeof(gAiSwitchTrace));
+        SwitchPlayer(SPECIES_IRON_HANDS, 100, 0, SET(MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_HEAVY_SLAM, NATURE_ADAMANT, ABILITY_QUARK_DRIVE, ITEM_ASSAULT_VEST, 252, 252, 4, 0, 0, 0));
+        SwitchPlayer(SPECIES_GHOLDENGO, 100, 341, SET(MOVE_MAKE_IT_RAIN, MOVE_SHADOW_BALL, MOVE_NASTY_PLOT, MOVE_PROTECT, NATURE_MODEST, ABILITY_GOOD_AS_GOLD, ITEM_LIFE_ORB, 252, 0, 4, 252, 0, 0));
+        SwitchPlayer(SPECIES_CHANDELURE, 100, 0, SET(MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_PROTECT, NATURE_TIMID, ABILITY_FLASH_FIRE, ITEM_CHOICE_SPECS, 4, 0, 0, 252, 0, 252));
+        SwitchPlayer(SPECIES_INCINEROAR, 100, 0, SET(MOVE_FAKE_OUT, MOVE_THROAT_CHOP, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT, NATURE_ADAMANT, ABILITY_INTIMIDATE, ITEM_SITRUS_BERRY, 252, 252, 4, 0, 0, 0));
+        SwitchPlayer(SPECIES_AMOONGUSS, 100, 0, SET(MOVE_SPORE, MOVE_RAGE_POWDER, MOVE_POLLEN_PUFF, MOVE_PROTECT, NATURE_RELAXED, ABILITY_REGENERATOR, ITEM_ROCKY_HELMET, 252, 0, 252, 0, 4, 0));
+        // Miltank's Sitrus Berry went on the first turn; Tauros fell.
+        sSwitchInjuries[0] = (struct SwitchInjury){.species = SPECIES_MILTANK, .hp = 118, .noItem = TRUE};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_TAUROS, 0};
+        sSwitchMilestone = FLAG_IS_CHAMPION;
+        SwitchLeads(0, 2);
+        SwitchAuthoredOpponent(TRAINER_LEA_AND_JED, 8);
+        gTestAiTurnSetupHook = LeaAndJedBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DRAIN_PUNCH, target: opponentLeft);
+            MOVE(playerRight, MOVE_SHADOW_BALL, target: opponentRight);
+        }
+    } THEN {
+        EXPECT(!PairSwitchedTo(B_BATTLER_1, 5));
+    }
+}
+
+// vj-a/wal-2 turn 5 as it stood: the Gardevoir had Traced Yveltal's Dark Aura
+// on entry, and Yveltal has since fallen.
+static void WallyVictoryRoadBoard(void)
+{
+    gBattleStruct->tracedAbility[B_BATTLER_3] = ABILITY_DARK_AURA;
+    gBattleMons[B_BATTLER_3].ability = gBattleMons[B_BATTLER_3].volatiles.overwrittenAbility = ABILITY_DARK_AURA;
+    gBattleMons[B_BATTLER_3].volatiles.traceActivated = TRUE;
+}
+
+// vj-a/wal-2 turn 5: a 27 HP Gardevoir, below a faster Flutter Mane's Shadow
+// Ball, left for Roselia beside Magnezone - into the Heat Wave of a Heatran
+// that had just arrived with its stone. Roselia fell to it before moving.
+AI_DOUBLE_BATTLE_TEST("EC switching: Wally keeps Roselia out of a visible Heatran's Heat Wave")
+{
+    GIVEN {
+        memset(gAiSwitchTrace, 0, sizeof(gAiSwitchTrace));
+        SwitchPlayer(SPECIES_FLUTTER_MANE, 80, 86, SET(MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_PROTOSYNTHESIS, ITEM_BOOSTER_ENERGY, 4, 0, 0, 252, 0, 252));
+        SwitchPlayer(SPECIES_HEATRAN, 80, 0, SET(MOVE_HEAT_WAVE, MOVE_EARTH_POWER, MOVE_FLASH_CANNON, MOVE_PROTECT, NATURE_MODEST, ABILITY_FLASH_FIRE, ITEM_HEATRANITE, 252, 0, 4, 252, 0, 0));
+        SwitchPlayer(SPECIES_INCINEROAR, 80, 0, SET(MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, NATURE_CAREFUL, ABILITY_INTIMIDATE, ITEM_SITRUS_BERRY, 252, 0, 4, 0, 252, 0));
+        SwitchPlayer(SPECIES_GARCHOMP, 80, 0, SET(MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT, NATURE_JOLLY, ABILITY_ROUGH_SKIN, ITEM_LIFE_ORB, 4, 252, 0, 0, 0, 252));
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_LUDICOLO, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_GALLADE, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_ALTARIA, 0};
+        sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_GARDEVOIR, 27};
+        SwitchLeads(3, 4);
+        SwitchAuthoredOpponent(TRAINER_WALLY_VR_1, 8);
+        gTestAiTurnSetupHook = WallyVictoryRoadBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SHADOW_BALL, target: opponentRight);
+            MOVE(playerRight, MOVE_HEAT_WAVE, gimmick: GIMMICK_MEGA);
+        }
+    } THEN {
+        EXPECT(!PairSwitchedTo(B_BATTLER_3, 5));
+    }
+}
+
+// vj-b/wal-1 turn 5 as it stood: Tapu Fini shielded last turn, its Misty
+// Terrain and Kyogre's rain have run out, and Iron Hands carries Ferrothorn's
+// Leech Seed and has spent its Fake Out.
+static void WallaceBoard(void)
+{
+    gBattleMons[B_BATTLER_1].volatiles.consecutiveMoveUses = 1;
+    gLastResultingMoves[B_BATTLER_1] = MOVE_PROTECT;
+    gLastMoves[B_BATTLER_1] = MOVE_PROTECT;
+    gFieldTimers.terrain = B_TERRAIN_NONE;
+    gFieldTimers.terrainTimer = 0;
+    gBattleMons[B_BATTLER_2].volatiles.leechSeed = LEECHSEEDED_BY(B_BATTLER_3);
+    gBattleStruct->battlerState[B_BATTLER_0].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_2].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_3].isFirstTurn = 0;
+}
+
+// vj-b/wal-1 turn 5: Tapu Fini shielded a second time - one in three - into a
+// faster Kartana whose Leaf Blade removes it, and the shield failed. Leaving
+// was the better board before the switch paid the tempo cost of an attack a
+// shielding body was never going to make.
+AI_DOUBLE_BATTLE_TEST("EC guard: Wallace's Tapu Fini does not shield twice into Kartana's Leaf Blade")
+{
+    GIVEN {
+        memset(gAiSwitchTrace, 0, sizeof(gAiSwitchTrace));
+        SwitchPlayer(SPECIES_KARTANA, 80, 0, SET(MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_SMART_STRIKE, MOVE_PROTECT, NATURE_JOLLY, ABILITY_BEAST_BOOST, ITEM_LIFE_ORB, 4, 252, 0, 0, 0, 252));
+        SwitchPlayer(SPECIES_IRON_HANDS, 80, 83, SET(MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_HEAVY_SLAM, NATURE_ADAMANT, ABILITY_QUARK_DRIVE, ITEM_ASSAULT_VEST, 252, 252, 4, 0, 0, 0));
+        SwitchPlayer(SPECIES_MIRAIDON, 80, 173, SET(MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_HADRON_ENGINE, ITEM_CHOICE_SPECS, 4, 0, 0, 252, 0, 252));
+        SwitchPlayer(SPECIES_ARCHALUDON, 80, 0, SET(MOVE_ELECTRO_SHOT, MOVE_DRACO_METEOR, MOVE_FLASH_CANNON, MOVE_PROTECT, NATURE_MODEST, ABILITY_STAMINA, ITEM_ASSAULT_VEST, 252, 0, 4, 252, 0, 0));
+        SwitchPlayer(SPECIES_AMOONGUSS, 80, 0, SET(MOVE_SPORE, MOVE_RAGE_POWDER, MOVE_POLLEN_PUFF, MOVE_PROTECT, NATURE_RELAXED, ABILITY_REGENERATOR, ITEM_ROCKY_HELMET, 252, 0, 252, 0, 4, 0));
+        SwitchPlayer(SPECIES_INCINEROAR, 80, 0, SET(MOVE_FAKE_OUT, MOVE_THROAT_CHOP, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT, NATURE_ADAMANT, ABILITY_INTIMIDATE, ITEM_SITRUS_BERRY, 252, 252, 4, 0, 0, 0));
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_KYOGRE, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_PALKIA, 0};
+        // The benchmark had Ferrothorn on the left; the authored order puts
+        // Tapu Fini there, and the player's targets follow it.
+        SwitchLeads(1, 2);
+        SwitchAuthoredOpponent(TRAINER_WALLACE, 8);
+        gTestAiTurnSetupHook = WallaceBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_LEAF_BLADE, target: opponentLeft);
+            MOVE(playerRight, MOVE_DRAIN_PUNCH, target: opponentRight);
+            SEND_OUT(playerRight, 5);
+        }
+    } SCENE {
+        NOT MESSAGE("The opposing Tapu Fini used Protect!");
+    }
+}
+
+// vj-a/rox-1 turn 3 as it stood: Carbink and Shaymin are past their first
+// turn; Lucario and Tyrantrum have just arrived.
+static void RoxanneBoard(void)
+{
+    gBattleStruct->battlerState[B_BATTLER_3].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_2].isFirstTurn = 0;
+}
+
+#define ROXANNE_FOE(m1, m2, m3, m4, _nature, _ability, _item) \
+    SET(m1, m2, m3, m4, _nature, _ability, _item, 0, 0, 0, 0, 0, 0)
+
+// vj-a/rox-1 turn 3: Tyrantrum Earthquaked a 29/51 Carbink - its own partner,
+// weak to Ground - beside Lucario and Shaymin, with Fire Fang super effective
+// on either foe in hand. Roxanne's pressure plan counts HP at a quarter, and
+// Shaymin's Seed Flare was forecast to finish the Carbink anyway, so the
+// friendly fire came out nearly free.
+AI_DOUBLE_BATTLE_TEST("EC friendly fire: Roxanne's Tyrantrum does not Earthquake its own Carbink")
+{
+    GIVEN {
+        SwitchPlayer(SPECIES_LUCARIO, 14, 0, ROXANNE_FOE(MOVE_CLOSE_COMBAT, MOVE_METEOR_MASH, MOVE_EXTREME_SPEED, MOVE_PROTECT, NATURE_JOLLY, ABILITY_INNER_FOCUS, ITEM_FOCUS_SASH));
+        SwitchPlayer(SPECIES_SHAYMIN, 14, 0, ROXANNE_FOE(MOVE_SEED_FLARE, MOVE_EARTH_POWER, MOVE_AIR_SLASH, MOVE_PROTECT, NATURE_TIMID, ABILITY_NATURAL_CURE, ITEM_FOCUS_SASH));
+        SwitchPlayer(SPECIES_MARILL, 14, 0, ROXANNE_FOE(MOVE_AQUA_JET, MOVE_PLAY_ROUGH, MOVE_LIQUIDATION, MOVE_PROTECT, NATURE_ADAMANT, ABILITY_HUGE_POWER, ITEM_EVIOLITE));
+        SwitchPlayer(SPECIES_TURTWIG, 14, 0, ROXANNE_FOE(MOVE_SEED_BOMB, MOVE_SUPERPOWER, MOVE_WIDE_GUARD, MOVE_PROTECT, NATURE_ADAMANT, ABILITY_SHELL_ARMOR, ITEM_EVIOLITE));
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_AERODACTYL, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_RELICANTH, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_CARBINK, 29};
+        // Tyrantrum on the left, as on the benchmark.
+        sSwitchSwap[0] = 1;
+        sSwitchSwap[1] = 3;
+        SwitchLeads(1, 3);
+        SwitchAuthoredOpponent(TRAINER_ROXANNE_1, 0);
+        gTestAiTurnSetupHook = RoxanneBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CLOSE_COMBAT, target: opponentLeft);
+            MOVE(playerRight, MOVE_SEED_FLARE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_EARTHQUAKE);
+        }
+    }
+}
+
+// vj-a/lily-1 turns 3-4: Gardevoir had Traced Breloom's Poison Heal, then Mega
+// Evolved into Pixilate. The Traced record outlived the Mega, so the AI still
+// read Poison Heal on Mega Gardevoir - and on the Mega it pictured for a
+// Gardevoir still holding its stone - and its Hyper Voice as a Normal move.
+AI_DOUBLE_BATTLE_TEST("EC Mega: the AI reads a Traced Gardevoir's Mega as Pixilate")
+{
+    bool32 evolve;
+    PARAMETRIZE { evolve = FALSE; }
+    PARAMETRIZE { evolve = TRUE; }
+    GIVEN {
+        SwitchPlayer(SPECIES_TALONFLAME, 60, 124, TALONFLAME_SET);
+        SwitchPlayer(SPECIES_GARDEVOIR, 60, 154, GARDEVOIR_SET);
+        sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_SWELLOW, 0};
+        sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_MANECTRIC, 0};
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_BRELOOM, 163, STATUS1_TOXIC_POISON};
+        SwitchLeads(2, 3);
+        SwitchAuthoredOpponent(TRAINER_BRENDAN_LILYCOVE_MUDKIP, 6);
+        gTestAiTurnSetupHook = LilycoveBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            if (evolve)
+                MOVE(playerRight, MOVE_PROTECT, gimmick: GIMMICK_MEGA);
+            else
+                MOVE(playerRight, MOVE_PROTECT);
+        }
+    } THEN {
+        if (evolve)
+        {
+            EXPECT_EQ(gBattleMons[B_BATTLER_2].species, SPECIES_GARDEVOIR_MEGA);
+            EXPECT_EQ(AI_DecideKnownAbilityForTurn(B_BATTLER_2), ABILITY_PIXILATE);
+        }
+        else
+        {
+            // The Mega the board prices for a Gardevoir still holding its stone.
+            struct BattlePokemon saved = gBattleMons[B_BATTLER_2];
+            enum Ability savedAbility = gAiLogicData->abilities[B_BATTLER_2];
+            EXPECT(AI_ApplyMegaForm(B_BATTLER_2));
+            enum Ability megaAbility = gAiLogicData->abilities[B_BATTLER_2];
+            SetActiveGimmick(B_BATTLER_2, GIMMICK_NONE);
+            gBattleMons[B_BATTLER_2] = saved;
+            gAiLogicData->abilities[B_BATTLER_2] = savedAbility;
+            EXPECT_EQ(megaAbility, ABILITY_PIXILATE);
+        }
+    }
+}
+
+// vj-b/dra-1 turn 0: Drake's Salamence and Reshiram against Incineroar and a
+// Gardevoir holding its stone. Reshiram's Earth Power was chosen beside the
+// Double-Edge that Incineroar's Fake Out then took from Salamence; Mega
+// Gardevoir's Hyper Voice removed Salamence the same turn.
+AI_DOUBLE_BATTLE_TEST("EC forecast: Drake's lead reckons with Incineroar's Fake Out")
+{
+    GIVEN {
+        SwitchPlayer(SPECIES_INCINEROAR, 80, 0, SET(MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, NATURE_CAREFUL, ABILITY_INTIMIDATE, ITEM_SITRUS_BERRY, 252, 0, 4, 0, 252, 0));
+        SwitchPlayer(SPECIES_GARDEVOIR, 80, 0, SET(MOVE_HYPER_VOICE, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_PROTECT, NATURE_TIMID, ABILITY_TRACE, ITEM_GARDEVOIRITE, 4, 0, 0, 252, 0, 252));
+        SwitchPlayer(SPECIES_ZACIAN, 80, 0, SET(MOVE_PLAY_ROUGH, MOVE_IRON_HEAD, MOVE_CLOSE_COMBAT, MOVE_PROTECT, NATURE_JOLLY, ABILITY_INTREPID_SWORD, ITEM_LIFE_ORB, 4, 252, 0, 0, 0, 252));
+        SwitchPlayer(SPECIES_FLUTTER_MANE, 80, 0, SET(MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_PROTOSYNTHESIS, ITEM_BOOSTER_ENERGY, 4, 0, 0, 252, 0, 252));
+        sSwitchLeadSpecies[0] = SPECIES_SALAMENCE;
+        sSwitchLeadSpecies[1] = SPECIES_RESHIRAM;
+        SwitchAuthoredOpponent(TRAINER_DRAKE, 8);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentLeft);
+            MOVE(playerRight, MOVE_HYPER_VOICE, gimmick: GIMMICK_MEGA);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_EARTH_POWER);
         }
     }
 }

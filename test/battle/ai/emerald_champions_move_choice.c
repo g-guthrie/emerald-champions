@@ -256,6 +256,15 @@ static const struct EmeraldChampionsBattleSet sShellyFoes[] = {
 // Thunderbolt into it then falls, resisted, on Iron Hands. The Thunderbolt
 // kept the knockout credit its isolated opinion gave the Metagross, so the
 // pair sent both attacks at one body while Hydro Pump into Iron Hands stood.
+extern void (*gTestAiTurnSetupHook)(void);
+
+// The Metagross had been in play before the turn this replays; only Iron Hands
+// was fresh. Not an opening, so no lead Fake Out is forecast.
+static void ShellyBoard(void)
+{
+    gBattleStruct->battlerState[B_BATTLER_0].isFirstTurn = 0;
+}
+
 AI_DOUBLE_BATTLE_TEST("EC move choice: Shelly's Rotom does not follow a partner's knockout into the same low body")
 {
     GIVEN {
@@ -270,6 +279,7 @@ AI_DOUBLE_BATTLE_TEST("EC move choice: Shelly's Rotom does not follow a partner'
         sChoiceMembers[4] = (struct ChoiceMember){SPECIES_ROTOM_WASH, 122, ITEMS_COUNT, 0};
         sChoiceMembers[5] = (struct ChoiceMember){SPECIES_FERALIGATR_MEGA, 125, ITEMS_COUNT, 0};
         ChoiceOpponent(TRAINER_SHELLY_WEATHER_INSTITUTE, 4, 5, 5, SPECIES_FERALIGATR_MEGA, ABILITY_DRAGONIZE);
+        gTestAiTurnSetupHook = ShellyBoard;
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PROTECT);

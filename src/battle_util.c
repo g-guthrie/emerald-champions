@@ -8559,6 +8559,9 @@ void ActivateMegaEvolution(enum BattlerId battler)
         TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ability);
         BattleScriptPushCursorAndCallback(BattleScript_MegaEvolution);
     }
+    // The form's ability replaced any copied one (Trace, Skill Swap); the
+    // stale record kept the AI reading a Traced Poison Heal on Mega Gardevoir.
+    gBattleMons[battler].volatiles.overwrittenAbility = ABILITY_NONE;
 }
 
 void ActivateUltraBurst(enum BattlerId battler)

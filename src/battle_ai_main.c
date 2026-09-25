@@ -826,6 +826,14 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId bat
     RestoreBattlerData(battlerAtk);
 }
 
+#if TESTING
+// A test can restore a benchmark board's in-battle state - stat stages, a
+// field, a Traced ability - that no legal opening turn reproduces, before
+// the AI reads the board. Called once, at the next AI turn setup, and then
+// cleared, so a test that stops early cannot leave it to the next one.
+EWRAM_DATA void (*gTestAiTurnSetupHook)(void) = NULL;
+#endif
+
 void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 {
     memset(aiData, 0, sizeof(struct AiLogicData));
@@ -834,6 +842,14 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 
     if (!IsSmartBattle())
         return;
+#if TESTING
+    if (gTestAiTurnSetupHook != NULL)
+    {
+        void (*hook)(void) = gTestAiTurnSetupHook;
+        gTestAiTurnSetupHook = NULL;
+        hook();
+    }
+#endif
 
     gAiLogicData->aiCalcInProgress = TRUE;
     AIDebugTimerStart();

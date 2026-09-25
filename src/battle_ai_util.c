@@ -1308,6 +1308,9 @@ bool32 AI_ApplyMegaForm(enum BattlerId battler)
     gBattleMons[battler].species = species;
     SetActiveGimmick(battler, GIMMICK_MEGA);
     RecalcBattlerStats(battler, &mon, FALSE);
+    // The Mega's own ability replaces a copied one, as ActivateMegaEvolution
+    // does; a Traced Poison Heal is not what Mega Gardevoir hits with.
+    gBattleMons[battler].volatiles.overwrittenAbility = ABILITY_NONE;
     gAiLogicData->abilities[battler] = AI_DecideKnownAbilityForTurn(battler);
     gAiLogicData->speedStats[battler] = GetBattlerTotalSpeedStat(battler, gAiLogicData->abilities[battler], gAiLogicData->holdEffects[battler]);
     gAiLogicData->hpPercents[battler] = GetHealthPercentage(battler);
