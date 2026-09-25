@@ -1079,7 +1079,7 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Nate instructs the Delphox that alr
         PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
         PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
         // Delphox is the authored Instruct recipient.
-        AuthoredOpponentWithPartner(TRAINER_NATE, 6, FALSE, 5);
+        AuthoredOpponentWithPartner(TRAINER_NATE, 6, FALSE, 1);
     } WHEN {
         // Instruct only repeats a move the recipient has already used, so the
         // first turn establishes it and the second is the authored repeat.
@@ -1711,6 +1711,10 @@ DOUBLE_BATTLE_TEST("EC misty gym: airborne seed sprint does not grant status imm
         gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(150); }
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
+        // Talonflame now leads beside Hawlucha; this seed-and-status check
+        // needs Crobat's Cross Poison in the second slot.
+        sAuthoredLeads[0] = SPECIES_HAWLUCHA;
+        sAuthoredLeads[1] = SPECIES_CROBAT;
         AuthoredMistyGymOpponent(TRAINER_JEFF);
     } WHEN {
         TURN {
@@ -1945,7 +1949,7 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
     u32 first = 0, second = 0;
     enum Species firstForm = SPECIES_NONE, secondForm = SPECIES_NONE;
     PARAMETRIZE { trainer = TRAINER_SIDNEY; first = 4; second = 5; firstForm = SPECIES_SHARPEDO_MEGA; secondForm = SPECIES_ABSOL_MEGA_Z; }
-    PARAMETRIZE { trainer = TRAINER_PHOEBE; first = 3; second = 5; firstForm = SPECIES_BANETTE_MEGA; secondForm = SPECIES_GENGAR_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_PHOEBE; first = 2; second = 3; firstForm = SPECIES_GENGAR_MEGA; secondForm = SPECIES_BANETTE_MEGA; }
     PARAMETRIZE { trainer = TRAINER_GLACIA; first = 3; second = 5; firstForm = SPECIES_FROSLASS_MEGA; secondForm = SPECIES_BAXCALIBUR_MEGA; }
     PARAMETRIZE { trainer = TRAINER_DRAKE; first = 0; second = 5; firstForm = SPECIES_SALAMENCE_MEGA; secondForm = SPECIES_DRAGONITE_MEGA; }
     PARAMETRIZE { trainer = TRAINER_WALLACE; first = 4; second = 5; firstForm = SPECIES_MILOTIC_MEGA; secondForm = SPECIES_STARMIE_MEGA; }

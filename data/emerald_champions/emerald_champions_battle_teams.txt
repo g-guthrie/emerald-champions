@@ -923,13 +923,12 @@ ROSERADE @BLACK_SLUDGE NATURAL_CURE TIMID 4/0/0/252/0/252 1 | LEAF_STORM, SLUDGE
 ## E0079 TRAINER_VIVI class=ace
 strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
-ai: Ace Pokemon
 plan: Vibrava's legal Bulldoze can damage foes and turn the resisted friendly Speed drop into a Contrary boost for Fomantis. Fomantis's Leaf Storm similarly raises its own special offense. Virizion uses Quick Guard instead of another Swords Dance; Quagsire supplies a physical Unaware alternative. Stats: Fast special Fomantis64 Speed becomes96 after one actual boost; Vibrava92 moves before it initially. The friendly hit still costs HP and is unsafe when the recipient cannot survive. Keep the Speed investment for this purpose. Could it be cooler? The tiny plant turns both offensive and speed drawbacks into growth, giving the four a real interaction. Overrepresented? Distinct from Daisy's Sap Sipper Attack boost. Fomantis is unique; Virizion has another later owner. Do not carry the named Bulldoze benefit over to incompatible allies. Medium cap30 levels36/29/28/34 are initial design seeds; no new battle validation is claimed.
 crack: Flying immunity to Bulldoze, priority, removing the recipient, ability suppression and unsafe friendly damage beside Quagsire or Virizion.
 FOMANTIS @EVIOLITE CONTRARY MODEST 4/0/0/252/0/252 6 | LEAF_STORM, GIGA_DRAIN, SYNTHESIS, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-QUAGSIRE @RINDO_BERRY UNAWARE ADAMANT 252/252/4/0/0/0 1 | LIQUIDATION, ICE_PUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-VIRIZION @LIFE_ORB JUSTIFIED JOLLY 4/252/0/0/0/252 0 | LEAF_BLADE, CLOSE_COMBAT, STONE_EDGE, QUICK_GUARD | ivs=31/31/31/31/31/31 | friendship=255
 VIBRAVA @EVIOLITE LEVITATE JOLLY 4/252/0/0/0/252 4 | DRAGON_CLAW, BULLDOZE, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+VIRIZION @LIFE_ORB JUSTIFIED JOLLY 4/252/0/0/0/252 0 | LEAF_BLADE, CLOSE_COMBAT, STONE_EDGE, QUICK_GUARD | ivs=31/31/31/31/31/31 | friendship=255
+QUAGSIRE @RINDO_BERRY UNAWARE ADAMANT 252/252/4/0/0/0 1 | LIQUIDATION, ICE_PUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0080 TRAINER_VICKY class=ace
 strategy: REDIRECTION
@@ -1553,15 +1552,14 @@ TYPHLOSION_HISUI @LIFE_ORB BLAZE TIMID 4/0/0/252/0/252 0 | INFERNAL_PARADE, WILL
 strategy: TAILWIND,ALLY_COMBO
 field: MISTY_TERRAIN
 mega_slots: NONE
-ai: Ace Pokemon
 plan: Misty Seed/Unburden Hawlucha replaces Drifblim, which moves to Jace. A terrain seed can activate on a Flying Pokemon, but Flying Hawlucha does not receive Misty status protection. The consumed seed raises special defense, enables Unburden and powers Acrobatics; Feint supports the other fast physical attackers. Keep Crobat, Infernape, Scarf Darmanitan, Band Cinderace and Gale Wings Talonflame with Tailwind/Roost. Opposing terrain replacement before seed activation disrupts this opening. Do not call the six physical attackers mixed offense or assume Flying members cannot be burned. Medium cap40 levels 40/40/39/39/39/40. Source implementation; full native battle calibration and Protect cadence remain pending.
 crack: Weather or terrain control as separate choices; deny the useful support action, exploit actual typing/grounding, and prioritize attacks over unproductive setup.
 HAWLUCHA @MISTY_SEED UNBURDEN ADAMANT 252/252/0/0/0/4 0 | ACROBATICS, CLOSE_COMBAT, FEINT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CROBAT @ROCKY_HELMET INFILTRATOR JOLLY 4/252/0/0/0/252 0 | CROSS_POISON, BRAVE_BIRD, U_TURN, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
+TALONFLAME @SITRUS_BERRY GALE_WINGS JOLLY 4/252/0/0/0/252 0 | BRAVE_BIRD, FLARE_BLITZ, ROOST, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
 INFERNAPE @LIFE_ORB IRON_FIST JOLLY 4/252/0/0/0/252 -1 | FLARE_BLITZ, CLOSE_COMBAT, MACH_PUNCH, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 DARMANITAN @CHOICE_SCARF SHEER_FORCE JOLLY 4/252/0/0/0/252 0 | FLARE_BLITZ, SUPERPOWER, U_TURN, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 CINDERACE @CHOICE_BAND LIBERO JOLLY 4/252/0/0/0/252 0 | PYRO_BALL, HIGH_JUMP_KICK, U_TURN, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-TALONFLAME @SITRUS_BERRY GALE_WINGS JOLLY 4/252/0/0/0/252 0 | BRAVE_BIRD, FLARE_BLITZ, ROOST, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
+CROBAT @ROCKY_HELMET INFILTRATOR JOLLY 4/252/0/0/0/252 0 | CROSS_POISON, BRAVE_BIRD, U_TURN, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0150 TRAINER_FLANNERY_1 class=leader
 strategy: SUN
@@ -2012,13 +2010,12 @@ KABUTOPS @EXPERT_BELT SWIFT_SWIM ADAMANT 4/252/0/0/0/252 1 | ROCK_SLIDE, LIQUIDA
 ## E0235 TRAINER_JACKSON_1 class=ace
 strategy: REDIRECTION,ALLY_COMBO
 mega_slots: NONE
-ai: Ace Pokemon
 plan: First two useful turns: Tapu Koko establishes Electric Terrain while Alolan Raichu uses a legal Fake Out or attacks at its actual speed. Turn two may pivot Koko only when preserving/resetting terrain is worthwhile. Alternate deployment: Tangrowth's Rage Powder supports Raichu when terrain is already active. Reserves & disruption: Rotom-Fan's custom Motor Drive is reactive because this roster lacks Discharge. Stun Spore and sleep/terrain interactions must use actual target grounding. Counterplay & audit: Ground immunity, terrain replacement, powder immunity and Trick Room. Disposition: Keep; no fabricated allied Motor Drive trigger is credited to a team without the necessary move. Could this team be cooler? It already contains the cleanest ability combination in this stretch and the ALLY_COMBO flag is added because the loadout genuinely backs it: Tapu Koko's Electric Surge sets Electric Terrain on entry, and Alolan Raichu's Surge Surfer doubles its Speed while that terrain is up - so the terrain is not flavour, it is a Speed button the player has to turn off. The terrain also blocks sleep on every grounded Pokemon, which cuts off a common answer, and Tangrowth's Rage Powder keeps the frail pair alive. Rotom-Fan is the Levitate pivot that the terrain cannot reach. Honest counterplay: replace the terrain, or bring Ground damage that Tapu Koko cannot switch into. Offsets individual: Tangrowth +2 as the support body.
 crack: Ground immunity, terrain replacement, powder immunity and Trick Room. Disposition: Keep; no fabricated allied Motor Drive trigger is credited to a team without the necessary move.
 TAPU_KOKO @LIFE_ORB ELECTRIC_SURGE TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, DAZZLING_GLEAM, VOLT_SWITCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 RAICHU_ALOLA @FOCUS_SASH SURGE_SURFER TIMID 4/0/0/252/0/252 1 | PSYCHIC, THUNDERBOLT, FAKE_OUT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ROTOM_FAN @WISE_GLASSES MOTOR_DRIVE TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, AIR_SLASH, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TANGROWTH @SITRUS_BERRY REGENERATOR BOLD 252/0/252/0/4/0 2 | GIGA_DRAIN, STUN_SPORE, RAGE_POWDER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ROTOM_FAN @WISE_GLASSES MOTOR_DRIVE TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, AIR_SLASH, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0236 TRAINER_CATHERINE_1 class=ace
 strategy: RAIN
@@ -2247,16 +2244,15 @@ SCIZOR @SCIZORITE TECHNICIAN ADAMANT 4/252/0/0/0/252 2 | BULLET_PUNCH, BUG_BITE,
 
 ## E0268 TRAINER_BRAXTON class=ace
 strategy: SETUP,TAILWIND
-mega_slots: 6
-ai: Ace Pokemon
+mega_slots: 3
 plan: First two useful turns: Braviary chooses Tailwind only when Garchomp can exploit it; Garchomp attacks or safely uses Swords Dance. Turn two attacks through the earned speed/boost instead of stacking another setup. Alternate deployment: Blastoise's special Mega Launcher pressure complements Mega Salamence's physical lane. Reserves & disruption: Scolipede is a Speed Boost reserve and Bisharp punishes opposing drops. Only Salamence holds a Mega Stone; base Blastoise's custom ability is not a second Mega. Counterplay & audit: Ice/Fairy pressure, priority, physical mitigation and room reversal. Disposition: Keep the confirmed custom Blastoise permission and one-Mega owner limit. Could this team be cooler? Kept, and it is one of the strongest ace sixes in the range: Rough Skin Garchomp behind a Clear Amulet cannot be Intimidated out of its Swords Dance, Speed Boost Scolipede gets faster every turn it survives, Defiant Bisharp punishes the stat drops a player uses against the physical core, and Mega Launcher Blastoise is the one special answer that multiplies Water Pulse, Aura Sphere and Dark Pulse by 1.5. Mega Salamence's Aerilate Double-Edge closes. The improvement worth naming is that Braviary's Tailwind is the team's only support turn and it is on the frailest body. Offsets individual and flat at +1 with Mega Salamence at +2 as the ace.
 crack: Ice/Fairy pressure, priority, physical mitigation and room reversal. Disposition: Keep the confirmed custom Blastoise permission and one-Mega owner limit.
 BRAVIARY @LIFE_ORB SHEER_FORCE JOLLY 4/252/0/0/0/252 1 | BRAVE_BIRD, ROCK_SLIDE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 GARCHOMP @CLEAR_AMULET ROUGH_SKIN JOLLY 4/252/0/0/0/252 1 | SWORDS_DANCE, DRAGON_CLAW, STOMPING_TANTRUM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SCOLIPEDE @FOCUS_SASH SPEED_BOOST JOLLY 4/252/0/0/0/252 1 | PROTECT, MEGAHORN, POISON_JAB, SUPERPOWER | ivs=31/31/31/31/31/31 | friendship=255
+SALAMENCE @SALAMENCITE INTIMIDATE JOLLY 4/252/0/0/0/252 2 | DOUBLE_EDGE, DRAGON_DANCE, DRAGON_CLAW, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BISHARP @BLACK_GLASSES DEFIANT ADAMANT 4/252/0/0/0/252 1 | IRON_HEAD, THROAT_CHOP, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BLASTOISE @WISE_GLASSES MEGA_LAUNCHER MODEST 4/0/0/252/0/252 1 | WATER_PULSE, AURA_SPHERE, DARK_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SALAMENCE @SALAMENCITE INTIMIDATE JOLLY 4/252/0/0/0/252 2 | DOUBLE_EDGE, DRAGON_DANCE, DRAGON_CLAW, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SCOLIPEDE @FOCUS_SASH SPEED_BOOST JOLLY 4/252/0/0/0/252 1 | PROTECT, MEGAHORN, POISON_JAB, SUPERPOWER | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0272 TRAINER_MIU_AND_YUKI class=regular
 strategy: SUN,SNOW
@@ -2270,14 +2266,13 @@ TORTERRA @LIFE_ORB SOLID_ROCK ADAMANT 252/252/4/0/0/0 8 | WOOD_HAMMER, HIGH_HORS
 
 ## E0274 TRAINER_FREDRICK class=ace
 strategy: TRICK_ROOM,SAND
-mega_slots: 4
-ai: Ace Pokemon
+mega_slots: 1
 plan: First two useful turns: Aegislash attacks or guards a concrete threat while Comfey sets Trick Room only if the slow attackers benefit. Turn two uses Triage healing or Helping Hand on a surviving relevant partner. Alternate deployment: Comfey and Mega Tyranitar are the central slow sand-offense mode. Reserves & disruption: Milotic supplies Haze/recovery and takes sand chip unless a supported effect prevents it. Aegislash's King's Shield and Wide Guard have different purposes. Counterplay & audit: Taunt, special Fighting/Water pressure, priority denial on the relevant target and weather replacement. Disposition: Keep; don't infer that a healing priority ability makes Trick Room itself priority. Could this team be cooler? The concept is unusual and good - a Triage Comfey whose Floral Healing and Draining Kiss always move at +3 priority, setting Trick Room and then healing the slow bodies faster than they can be broken - but it had the campaign's recurring Trick Room bug: the Quiet Aegislash and Brave Mega Tyranitar both carried 31 Speed IVs, so the room was inverting the wrong side. Those are now zeroed; Comfey keeps its Speed because Triage does its work regardless. Aegislash's Wide Guard plus King's Shield is a guard kit with genuine payoff, and Milotic's Haze is the answer to a player who sets up in reply. The moment to remember is a priority heal landing before a knockout that was already scheduled.
 crack: Taunt, special Fighting/Water pressure, priority denial on the relevant target and weather replacement. Disposition: Keep; don't infer that a healing priority ability makes Trick Room itself priority.
-AEGISLASH @LEFTOVERS STANCE_CHANGE QUIET 252/0/4/252/0/0 4 | SHADOW_BALL, FLASH_CANNON, WIDE_GUARD, KINGS_SHIELD | ivs=31/31/31/31/31/0 | friendship=255
+TYRANITAR @TYRANITARITE SAND_STREAM BRAVE 252/252/4/0/0/0 5 | ROCK_SLIDE, CRUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 COMFEY @SITRUS_BERRY TRIAGE MODEST 252/0/4/0/252/0 4 | FLORAL_HEALING, DRAINING_KISS, HELPING_HAND, TRICK_ROOM | ivs=31/31/31/31/31/31 | friendship=255
 MILOTIC @ROCKY_HELMET COMPETITIVE BOLD 252/0/252/0/4/0 4 | MUDDY_WATER, ICE_BEAM, RECOVER, HAZE | ivs=31/31/31/31/31/31 | friendship=255
-TYRANITAR @TYRANITARITE SAND_STREAM BRAVE 252/252/4/0/0/0 5 | ROCK_SLIDE, CRUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+AEGISLASH @LEFTOVERS STANCE_CHANGE QUIET 252/0/4/252/0/0 4 | SHADOW_BALL, FLASH_CANNON, WIDE_GUARD, KINGS_SHIELD | ivs=31/31/31/31/31/0 | friendship=255
 
 ## E0277 TRAINER_KAYLEY class=ace
 strategy: SUN,SETUP
@@ -2442,14 +2437,14 @@ HAXORUS @LUM_BERRY MOLD_BREAKER JOLLY 4/252/0/0/0/252 4 | DRAGON_DANCE, DRAGON_C
 
 ## E0300 TRAINER_CRISTIN_1 class=ace
 strategy: SUN,TAILWIND
-mega_slots: 3
+mega_slots: 4
 ai: Ace Pokemon
 plan: First two useful turns: Regieleki chooses Electroweb only when Ninetales's attack or a reserve benefits; Ninetales supplies sun and immediate Fire pressure. Turn two attacks through the created order rather than add redundant Tailwind automatically. Alternate deployment: Ninetales and Lilligant create the direct Chlorophyll mode. Reserves & disruption: Mega Flygon is a separate special/Tailwind reserve with a custom transformation that must be source-bound. Regieleki still cannot hit Ground immunity with ordinary Electric attacks. Counterplay & audit: Ground pressure, weather replacement, Wide Guard and speed reversal. Disposition: Keep; benchmark whether both speed tools are useful in distinct states rather than delete one by rule. Could this team be cooler? Kept: Regieleki's Transistor multiplies its Electric damage by 1.5 on the fastest body in the game, and Electroweb from that Speed is speed control nobody outruns - a legendary used for a specific job rather than for its stat line. Ninetales's Drought then powers Solar Beam as a one-turn move and Chlorophyll Lilligant doubles its Speed, while Mega Flygon supplies Tailwind so the sun team is fast before the Chlorophyll even lands. That is two independent speed engines stacked on purpose. The honest weakness is that Regieleki has exactly one attacking type and a Ground lead blanks it. Offsets individual: Mega Flygon 0, Lilligant +2 as the fragile Sleep Powder support.
 crack: Ground pressure, weather replacement, Wide Guard and speed reversal. Disposition: Keep; benchmark whether both speed tools are useful in distinct states rather than delete one by rule.
 REGIELEKI @MAGNET TRANSISTOR TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, ELECTROWEB, VOLT_SWITCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 NINETALES @CHARCOAL DROUGHT TIMID 4/0/0/252/0/252 2 | HEAT_WAVE, SOLAR_BEAM, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-FLYGON @FLYGONITE LEVITATE TIMID 4/0/0/252/0/252 1 | BUG_BUZZ, DRAGON_PULSE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 LILLIGANT @FOCUS_SASH CHLOROPHYLL MODEST 4/0/0/252/0/252 2 | LEAF_STORM, SLEEP_POWDER, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FLYGON @FLYGONITE LEVITATE TIMID 4/0/0/252/0/252 1 | BUG_BUZZ, DRAGON_PULSE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0301 TRAINER_GABBY_AND_TY_5 class=regular
 strategy: SETUP,TAILWIND
@@ -2820,17 +2815,16 @@ PYROAR @PYROARITE COMPETITIVE TIMID 4/0/0/252/0/252 3 | HYPER_VOICE, HEAT_WAVE, 
 
 ## E0339 TRAINER_MAXIE_MAGMA_HIDEOUT class=leader
 strategy: TRICK_ROOM,SUN,SETUP
-mega_slots: 6
-ai: Ace Pokemon
+mega_slots: 3
 field: WEATHER_SUN
 plan: Maxie wakes Groudon before this battle and fights with it standing in the chamber, so the battle opens in the harsh sunlight of a starting field. That sun is a head start, not a lock - a player's Drizzle replaces it on switch-in - so Maxie now carries the sun himself. First two useful turns: Torkoal and Runerigus lead. Torkoal's base 20 Speed with zero Speed IVs makes it the slowest Drought on any board, so its switch-in ability resolves after the player's Drizzle and the sun is back before anyone moves; Heat Rock holds it for eight turns. That protects the room: with the sun up, a turn-one Weather Ball is a Fire move and every Water attack is halved, so nothing one-shots the setter. Runerigus sets Trick Room: Ghost typing makes Fake Out miss it, Mental Herb cures the first Taunt the moment it lands, and base 145 Defense keeps it standing. Torkoal's own turn is a sun Heat Wave into both slots, Solar Beam into the Water body that came to beat Fire, or Earth Power into the Fire and Electric types, and under the room it moves first. Alternate deployment: Mega Camerupt is the payload. Quiet, zero Speed, Eruption at full HP is 150 base power into both slots from a Mega Special Attack stat, multiplied by the sun and arriving first under the room; Heat Wave is the fallback once it is chipped. Reserves & disruption: Stakataka is the second setter in reserve, and its Focus Sash guarantees it one action - the room again if Runerigus falls, or Wide Guard against the spread answer. If the player re-sets rain by switching their Drizzle user back in, Torkoal re-takes the sun on its own next entry, and the pair AI already pivots a Drought reserve in whenever the sun is gone. Torterra's Curse lowers its own Speed, so under the room it climbs to +2/+2 while getting faster, and Wood Hammer punishes the Water bodies. Copperajah is the Steel anchor whose Weakness Policy pays out on the Ground or Fighting hit it takes. Counterplay & audit: switching the Drizzle user out and back in wins the weather again until Torkoal re-enters, and Cloud Nine, Air Lock or Utility Umbrella blunt the sun; the sun boosts the player's Fire too, and Torterra and Copperajah are Fire-weak; a second Taunt after the Herb, Imprison or the player's own Trick Room ends the room; spread damage breaks Stakataka's Sash; Protect through five turns; Haze erases Curse; Ice into Torterra; Ground and Fighting into Stakataka, Torkoal and Camerupt. Could this team be cooler? The concept was right and the weather was borrowed. On the replaceable-weather build a rain lead overwrote the opening sun, rain Weather Ball one-shot Runerigus on turn one, Prankster Taunt stopped Stakataka, the room never went up, and five of six members were Water-weak with nothing able to bring the sun back. Rhyperior contributed least - 4x Water-weak, and its Lightning Rod covered a lane rain teams rarely use - so Torkoal takes its slot. It is cooler now because each Maxie fight gets its sun differently: Ninetales' fast Drought and Tailwind at Mt. Chimney, the slowest Drought on the field inside the room here, and Courtney's Mega Charizard Y at Mossdeep. Torkoal is also Courtney's hideout lead one room earlier; hers wins the race to power Eruption and Yawn beside a Storm Drain trap, Maxie's wins it to protect a Trick Room setter.
 crack: Switch your Drizzle user out and back in to take the weather back until Torkoal re-enters; Cloud Nine, Air Lock or Utility Umbrella blunt the sun; the sun boosts your Fire too, and Torterra and Copperajah are Fire-weak; a second Taunt after Mental Herb, Imprison or your own Trick Room breaks the room; spread damage through Stakataka's Sash; Protect and pivot through five turns; Haze undoes Curse; Ice into Torterra; Ground and Fighting into Stakataka, Torkoal and Camerupt; chip Camerupt so Eruption weakens.
 TORKOAL @HEAT_ROCK DROUGHT QUIET 252/0/4/252/0/0 4 | HEAT_WAVE, SOLAR_BEAM, EARTH_POWER, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 RUNERIGUS @MENTAL_HERB WANDERING_SPIRIT RELAXED 252/0/252/0/4/0 5 | TRICK_ROOM, BODY_PRESS, POLTERGEIST, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-STAKATAKA @FOCUS_SASH BEAST_BOOST BRAVE 252/252/4/0/0/0 4 | TRICK_ROOM, WIDE_GUARD, GYRO_BALL, STONE_EDGE | ivs=31/31/31/31/31/0 | friendship=255
+CAMERUPT @CAMERUPTITE SOLID_ROCK QUIET 252/0/4/252/0/0 3 | ERUPTION, EARTH_POWER, HEAT_WAVE, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 TORTERRA @LEFTOVERS SOLID_ROCK BRAVE 252/252/4/0/0/0 4 | CURSE, WOOD_HAMMER, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 COPPERAJAH @WEAKNESS_POLICY HEAVY_METAL BRAVE 252/252/4/0/0/0 4 | HEAVY_SLAM, HIGH_HORSEPOWER, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-CAMERUPT @CAMERUPTITE SOLID_ROCK QUIET 252/0/4/252/0/0 3 | ERUPTION, EARTH_POWER, HEAT_WAVE, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+STAKATAKA @FOCUS_SASH BEAST_BOOST BRAVE 252/252/4/0/0/0 4 | TRICK_ROOM, WIDE_GUARD, GYRO_BALL, STONE_EDGE | ivs=31/31/31/31/31/0 | friendship=255
 
 ## E0340 TRAINER_GRUNT_AQUA_HIDEOUT_1 class=grunt
 strategy: NONE
@@ -2983,14 +2977,13 @@ DRACOVISH @CHOICE_SCARF STRONG_JAW JOLLY 4/252/0/0/0/252 5 | FISHIOUS_REND, DRAG
 
 ## E0379 TRAINER_ATHENA class=ace
 strategy: SETUP
-mega_slots: 4
-ai: Ace Pokemon
+mega_slots: 1
 plan: First two useful turns: Athena's team is pure speed and the fight is decided in the first two exchanges. Mega Kangaskhan opens with Fake Out, which Parental Bond makes hit twice - the second hit does not flinch again, but it is free chip damage - while Pheromosa, at 151 base Speed, attacks immediately and Beast Boost raises its highest stat after every knockout. Infernape's Mach Punch is the priority lane. Alternate deployment: Accelgor is the team's honest trick. Final Gambit deals damage equal to Accelgor's current HP and faints it, so at full HP it is a guaranteed removal of almost anything on the player's side; the Bug Gem plus Unburden set means it can instead double its Speed after a single Bug attack. The AI must only spend Final Gambit when Accelgor's actual current HP makes the trade worth it. Counterplay & audit: every member here is frail - Pheromosa has 37 base defences - so any priority move, any spread move and Fake Out of your own all invert the fight; Rock, Flying and Psychic pressure answers the Bug and Fighting lanes. Could this team be cooler? Asked honestly, no, and the audit keeps it. The concrete judgement: it is the campaign's glass-cannon fight, it owns that identity completely, and Final Gambit gives an ordinary ace trainer one genuinely startling moment that costs the player their best Pokemon if they leave it at full HP. The counterplay is clean - hit first, hit both slots, or hit with priority - and the fight punishes exactly the players who have been winning by out-bulking things.
 crack: Priority and spread moves beat the whole team; Fake Out denies the opening; chip Accelgor to make Final Gambit worthless; Rock, Flying and Psychic pressure.
+KANGASKHAN @KANGASKHANITE SCRAPPY JOLLY 4/252/0/0/0/252 1 | FAKE_OUT, DOUBLE_EDGE, DRAIN_PUNCH, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+PHEROMOSA @LIFE_ORB BEAST_BOOST NAIVE 8/124/0/124/0/252 0 | CLOSE_COMBAT, LUNGE, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 INFERNAPE @FOCUS_SASH BLAZE NAIVE 8/124/0/124/0/252 0 | MACH_PUNCH, OVERHEAT, CLOSE_COMBAT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ACCELGOR @BUG_GEM UNBURDEN TIMID 252/0/4/0/0/252 0 | FINAL_GAMBIT, BUG_BUZZ, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PHEROMOSA @LIFE_ORB BEAST_BOOST NAIVE 8/124/0/124/0/252 0 | CLOSE_COMBAT, LUNGE, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-KANGASKHAN @KANGASKHANITE SCRAPPY JOLLY 4/252/0/0/0/252 1 | FAKE_OUT, DOUBLE_EDGE, DRAIN_PUNCH, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0382 TRAINER_KATELYN_1 class=regular
 strategy: REDIRECTION,TAILWIND
@@ -3019,7 +3012,6 @@ MAWILE @MAWILITE INTIMIDATE ADAMANT 252/252/4/0/0/0 1 | PLAY_ROUGH, IRON_HEAD, S
 ## E0384 TRAINER_RUBEN class=ace
 strategy: SETUP
 mega_slots: 4
-ai: Ace Pokemon
 plan: First two useful turns: Ruben is the campaign's healer, and Meganium is the reason - Triage gives every healing move on it +3 priority, so Heal Pulse restores half of an ally's maximum HP before anything else on the field acts. The opening is therefore Heatmor or Dragonite attacking while Meganium holds the board together from behind a Light Screen. Alternate deployment: Mega Lopunny is the ace and Scrappy lets Fake Out and Close Combat hit Ghost types, which are the usual answer to a Normal-Fighting attacker; Fake Out also buys Dragonite the turn its Dragon Dance needs, and Multiscale means Dragonite survives the first hit at full HP regardless. Reserves & disruption: Milotic's Competitive punishes the Intimidate and Icy Wind the player brings against a physical team with +2 Special Attack; Florges' Flower Veil makes every Grass-typed ally - Meganium - immune to stat drops and status, which protects the healer specifically. Counterplay & audit: Taunt is the key, because it shuts off Heal Pulse, Light Screen and Wish at once; burst damage that outpaces a priority half-heal, Steel and Poison pressure on the Fairy lane, and Ice and Fairy on Dragonite. Could this team be cooler? The old build's ace was Mega Latias, which the audit has now given to Kathleen as the Mossdeep gym's examiner, and the team was one slot short of stating its own idea. It is cooler now because every remaining member exists to keep somebody else alive or to punish the player for interfering: priority healing, a Fairy that blocks stat drops on the healer, a Competitive wall, Multiscale, and a Mega whose Fake Out buys the healer its turn. Fighting a team you cannot chip down is a genuinely different problem from anything else on these routes.
 crack: Taunt the Meganium and the whole structure stops; burst damage rather than chip; Fire, Ice, Bug and Flying pressure; Steel and Poison answer Florges.
 HEATMOR @LIFE_ORB TOUGH_CLAWS ADAMANT 4/252/0/0/0/252 0 | FIRE_LASH, SUCKER_PUNCH, PROTECT, THUNDER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
@@ -3119,17 +3111,16 @@ HYPNO @ROCKY_HELMET INSOMNIA SASSY 252/0/252/0/4/0 1 | PSYCHIC, FOUL_PLAY, THUND
 
 ## E0395 TRAINER_NATE class=gym
 strategy: ALLY_COMBO,SETUP
-mega_slots: 6
-ai: Ace Pokemon
+mega_slots: 2
 tactic: INSTRUCT ORANGURU INSTRUCT DELPHOX
 plan: Room eight: Instruct, and the gym's "that attack happened twice" room. First two useful turns: Oranguru uses Instruct on Mega Delphox, which immediately repeats Delphox's last move at full power with no charge, no recoil and no turn spent - two Mystical Fires or two Psychics in one turn, from a Mega special attacker. The AI must only spend Instruct when Delphox has actually already moved this turn and its last move is worth repeating; Instructing a Protect or a failed move is worthless. Alternate deployment: Choice Specs Beheeyem is the other Instruct target, and Analytic adds 30 percent when it moves last, which it usually does - an Instructed Analytic Psychic is the single largest number in the gym outside the leaders. Reserves & disruption: Mimikyu's Disguise guarantees it survives one hit and Swords Dance behind that free turn is a real threat; Orbeetle is the room's shield - Light Screen and Reflect halve the damage the player can do to the Instruct pair for five turns, Mental Herb stops one Taunt from shutting the screens off, and Bug Buzz is the gym's answer to the Dark types that walk through its Psychic attacks; Alolan Exeggutor's Harvest and Dragon lane covers the rest. Counterplay & audit: remove Oranguru first even though Delphox is the scarier body, Taunt denies Instruct, and Dark types resist the Psychic half of the room.
 crack: Remove or Taunt Oranguru and the room halves; Dark and Ghost pressure on Delphox and Beheeyem; Fire, Flying and Rock attacks on Orbeetle before the screens go up, or Brick Break and Psychic Fangs through them; break Disguise with a spread move before Mimikyu sets up.
 ORANGURU @SITRUS_BERRY INNER_FOCUS QUIET 252/0/4/252/0/0 2 | INSTRUCT, PSYCHIC, FOUL_PLAY, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-BEHEEYEM @CHOICE_SPECS ANALYTIC QUIET 252/0/4/252/0/0 2 | PSYCHIC, THUNDERBOLT, SHADOW_BALL, ENERGY_BALL | ivs=31/31/31/31/31/0 | friendship=255
+DELPHOX @DELPHOXITE MAGICIAN MODEST 4/0/0/252/0/252 2 | MYSTICAL_FIRE, PSYCHIC, DAZZLING_GLEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 MIMIKYU @LIFE_ORB DISGUISE JOLLY 4/252/0/0/0/252 1 | SWORDS_DANCE, PLAY_ROUGH, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ORBEETLE @MENTAL_HERB FRISK BOLD 252/0/252/0/4/0 1 | LIGHT_SCREEN, REFLECT, BUG_BUZZ, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 EXEGGUTOR_ALOLA @SITRUS_BERRY HARVEST QUIET 252/0/4/252/0/0 1 | DRACO_METEOR, PSYCHIC, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-DELPHOX @DELPHOXITE MAGICIAN MODEST 4/0/0/252/0/252 2 | MYSTICAL_FIRE, PSYCHIC, DAZZLING_GLEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BEHEEYEM @CHOICE_SPECS ANALYTIC QUIET 252/0/4/252/0/0 2 | PSYCHIC, THUNDERBOLT, SHADOW_BALL, ENERGY_BALL | ivs=31/31/31/31/31/0 | friendship=255
 
 ## E0396 TRAINER_MACEY class=gym
 strategy: SETUP
@@ -3184,16 +3175,15 @@ SLOWBRO @SLOWBRONITE REGENERATOR QUIET 252/0/4/252/0/0 3 | CALM_MIND, PSYCHIC, S
 
 ## E0400 TRAINER_TATE_AND_LIZA_1 class=leader
 strategy: TRICK_ROOM,SETUP
-mega_slots: 6
-ai: Double Ace Pokemon
+mega_slots: 3
 plan: The twins are one trainer with two minds and the fight is built so that both halves of every pair matter. First two useful turns: Solrock and Lunatone enter together - the sun and the moon, the gym's emblem - and Solrock sets Trick Room with a Mental Herb so Taunt cannot stop the first attempt, while Lunatone spends a Power Herb on an instant Meteor Beam, which is a 120 base power Rock attack plus a free +1 Special Attack with no charging turn. That is the twins' opening statement: the room reverses and the first attack is already at full power. Alternate deployment: Tapu Lele's Psychic Surge is the second half of the engine. Psychic Terrain blocks all priority against grounded targets, which is the only fast answer to a Trick Room team, and it boosts Expanding Force into a 120 base power spread move for Hatterene and Gardevoir. Hatterene, at 29 base Speed with Magic Bounce, is both the fastest thing on the field under Trick Room and immune to every status move aimed at it. Reserves & disruption: Cresselia is the twins' durability - Lunar Blessing-free Moonlight, Helping Hand and a second Trick Room so the room can be re-set when it lapses. Mega Gardevoir with Pixilate turns Hyper Voice into a Fairy-typed spread attack off an enormous Special Attack stat, under terrain, under Trick Room, moving first. Counterplay & audit: this is the hardest board in the region to unpick with one action - Taunt is answered by Mental Herb and Magic Bounce, priority is answered by Psychic Terrain, and speed is answered by Trick Room. The honest answers are Wide Guard against the spread attacks, Steel and Poison typing against the Fairy lane, Dark types that ignore the Psychic half entirely, and surviving the five turns. Could this team be cooler? The six species were already right - Solrock and Lunatone are the twins' identity and Tapu Lele, Hatterene, Cresselia and Mega Gardevoir are the correct escalation. What was missing was the statement that the two field effects are one machine: Trick Room decides the order and Psychic Terrain removes the only tool that beats it. Asked again after the revision: the leaders are a major step beyond their twelve rooms because they run two of the gym's showcased mechanics simultaneously, at the highest levels in the building, and because every individual answer the player learned in a single room is covered by the other half of the pair here.
 crack: Wide Guard and Protect against the spread turns; a Dark type ignores the Psychic lane and Psychic Terrain does not stop its priority-free damage; Steel and Poison answer Pixilate; outlast the five Trick Room turns and the twins are the slowest team in the region.
 SOLROCK @MENTAL_HERB LEVITATE SASSY 252/0/4/0/252/0 4 | TRICK_ROOM, ROCK_SLIDE, WILL_O_WISP, HELPING_HAND | ivs=31/31/31/31/31/0 | friendship=255
 LUNATONE @POWER_HERB LEVITATE QUIET 252/0/4/252/0/0 3 | METEOR_BEAM, PSYCHIC, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-CRESSELIA @SITRUS_BERRY LEVITATE SASSY 252/0/4/0/252/0 4 | PSYCHIC, TRICK_ROOM, HELPING_HAND, MOONLIGHT | ivs=31/31/31/31/31/0 | friendship=255
+GARDEVOIR @GARDEVOIRITE TRACE QUIET 252/0/4/252/0/0 4 | HYPER_VOICE, EXPANDING_FORCE, MYSTICAL_FIRE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 TAPU_LELE @CHOICE_SPECS PSYCHIC_SURGE QUIET 252/0/4/252/0/0 3 | PSYCHIC, MOONBLAST, FOCUS_BLAST, PSYSHOCK | ivs=31/31/31/31/31/0 | friendship=255
 HATTERENE @LIFE_ORB MAGIC_BOUNCE QUIET 252/0/4/252/0/0 3 | EXPANDING_FORCE, DAZZLING_GLEAM, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-GARDEVOIR @GARDEVOIRITE TRACE QUIET 252/0/4/252/0/0 4 | HYPER_VOICE, EXPANDING_FORCE, MYSTICAL_FIRE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+CRESSELIA @SITRUS_BERRY LEVITATE SASSY 252/0/4/0/252/0 4 | PSYCHIC, TRICK_ROOM, HELPING_HAND, MOONLIGHT | ivs=31/31/31/31/31/0 | friendship=255
 
 
 ## E0401 TRAINER_GRUNT_SPACE_CENTER_3 class=grunt
@@ -3629,16 +3619,15 @@ SWAMPERT @SWAMPERTITE TORRENT ADAMANT 252/252/4/0/0/0 3 | WATERFALL, HIGH_HORSEP
 
 ## E0464 TRAINER_OLIVIA class=gym
 strategy: SETUP
-mega_slots: 6
-ai: Double Ace Pokemon
+mega_slots: 3
 plan: Concept: room six - the artillery room. Mega Launcher pulses, a Water Bubble spider that doubles its own Water damage, a cormorant that spits its catch back at whoever hit it, and a clay guardian that fires itself at the Electric attacker the rest of the room fears. First two useful turns: Carracosta takes a Shell Smash only when Araquanid's attack or Wide Guard buys a survivable window; unlike every other Shell Smash in the gym this one holds a Weakness Policy rather than a White Herb, so the Defence drops stay and the gamble is real - the payoff is that a super-effective hit raises both attacking stats by two more stages on top, and its Earthquake is aimed squarely at the Electric attacker that just triggered it. Araquanid's Wide Guard shelters its own side from that quake, so the lead pair can spread-attack without friendly fire. Turn two uses the actual boosts and Policy state. Alternate deployment: against an Electric lead, Golurk is the replacement that changes the board. Ground/Ghost typing makes it immune to Electric attacks, to Fighting attacks and to Fake Out, so an Electric/Fighting attacker has almost nothing left to hit it with and an Electric/Dragon one is down to its Dragon moves; Iron Fist powers Headlong Rush, a 120-power Ground punch that hits Electric types for double at the cost of a Defence and Special Defence stage each time, Ice Punch covers the Dragons and Flying types that dodge Ground, and Drain Punch buys back what Headlong Rush costs. Golurk were built by an ancient civilisation to protect people, and Sootopolis is the old city built around the Cave of Origin. Carracosta's Earthquake hits Golurk too, so the two share the field only behind Araquanid's Wide Guard. Golurk fronts for Choice Specs Clawitzer, whose Mega Launcher raises every pulse move by half again. Reserves & disruption: Cramorant is the room's signature - after it uses Surf it holds a catch, and the next attacker to strike it takes damage and either a Defence drop or paralysis in return, whichever form it swallowed. Relicanth-free Rock coverage comes from Carracosta's Stone Edge. Surf also hits the ally slot, which is why Cramorant is paired with the Water-resistant members rather than the frail ones or the Water-weak Golurk. Could this team be cooler? The Policy gamble, the pulse artillery and Gulp Missile were already the room people describe afterwards; what failed was the matchup a Water gym most expects. Five of six members took double damage or more from Electric, Cramorant four times, and an Electric/Dragon beside an Electric/Fighting swept the room in five turns because Carracosta's Earthquake was its only Ground attack. Tentacruel's Liquid Ooze was the narrowest job in the room, so its slot goes to the one member that Electric plan cannot touch. Overrepresented? Tentacruel leaves the room and keeps a Weather Institute grunt and Ronald; Golurk's three other owners - Lucas's No Guard set, Drew's Life Orb punches and Tabitha's Mega - all come well before the Aqua arc ends, and none carries Headlong Rush or an Assault Vest.
 crack: Electric attacks no longer cover the room: Golurk is immune and hits back, so remove it first with Water, Grass, Ice, Ghost or Dark attacks - every Headlong Rush it lands lowers its own defences, and the Assault Vest leaves it no Protect. Grass attacks still cover the five Water types, though Araquanid's Leech Life and Cramorant's Hurricane and Ice Beam hit back. Attack Carracosta with a neutral hit so the Weakness Policy never fires, and finish it with priority once the Defence drops land. Do not strike Cramorant after it has surfaced; kill it from range or let it waste the catch. Wide Guard blanks Surf and Earthquake.
 CARRACOSTA @WEAKNESS_POLICY SOLID_ROCK ADAMANT 252/252/4/0/0/0 9 | SHELL_SMASH, LIQUIDATION, STONE_EDGE, EARTHQUAKE | ivs=31/31/31/31/31/31 | friendship=255
 ARAQUANID @SITRUS_BERRY WATER_BUBBLE ADAMANT 252/252/4/0/0/0 8 | LIQUIDATION, LEECH_LIFE, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CRAMORANT @MYSTIC_WATER GULP_MISSILE MODEST 252/0/4/252/0/0 8 | SURF, HURRICANE, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BLASTOISE @BLASTOISINITE TORRENT MODEST 4/0/0/252/0/252 9 | WATER_PULSE, AURA_SPHERE, DARK_PULSE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 GOLURK @ASSAULT_VEST IRON_FIST ADAMANT 252/252/4/0/0/0 8 | HEADLONG_RUSH, ICE_PUNCH, DRAIN_PUNCH, SHADOW_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 CLAWITZER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 9 | WATER_PULSE, DARK_PULSE, AURA_SPHERE, DRAGON_PULSE | ivs=31/0/31/31/31/31 | friendship=255
-BLASTOISE @BLASTOISINITE TORRENT MODEST 4/0/0/252/0/252 9 | WATER_PULSE, AURA_SPHERE, DARK_PULSE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+CRAMORANT @MYSTIC_WATER GULP_MISSILE MODEST 252/0/4/252/0/0 8 | SURF, HURRICANE, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0465 TRAINER_TIFFANY class=gym
 strategy: SETUP
@@ -3679,7 +3668,6 @@ SAMUROTT_HISUI @CHOICE_BAND SHARPNESS ADAMANT 4/252/0/0/0/252 7 | CEASELESS_EDGE
 ## E0468 TRAINER_DAPHNE class=gym
 strategy: SNOW
 mega_slots: NONE
-ai: Ace Pokemon
 plan: Concept: room ten - the freeze. The last room before Juan is the one that changes the weather itself: Lapras lays down snow by hand, which raises every Ice type's Defence by half, and the room's Ice Body members then heal from the same storm every turn. First two useful turns: Lapras opens with Snowscape when the team can bank the Defence boost and the passive healing, or with Freeze-Dry, which is the room's signature - an Ice attack that is super effective against Water, so this room beats the rest of its own gym. Walrein attacks beside it with Thick Fat cutting incoming Fire and Ice damage in half. Turn two uses the real weather state and picks between Blizzard's now-perfect accuracy and single-target damage. Alternate deployment: Cryogonal's Levitate makes it immune to Ground attacks, and its Icy Wind and Rapid Spin support Samurott's physical line. Reserves & disruption: snow makes Blizzard never miss, so Walrein's Choice Specs lock is far less dangerous than it looks once the weather is up; Rotom-Wash supplies the Electric coverage the room otherwise lacks and Levitate keeps it out of Ground range; Fur Coat halves physical damage against Dewgong. Could this team be cooler? It is now the room the gym was missing. The authored version had no engine at all - four unrelated Water types plus a Tapu Fini that duplicated Champion Wallace's own legend, which is exactly the kind of collision that makes a later fight feel less special. Rebuilding Daphne as the snow room gives Sootopolis its eleventh distinct strategy, hands Freeze-Dry to the one trainer for whom being a Water gym's worst matchup is the joke, and lets Walrein's Blizzard finally be accurate somewhere. Cryogonal is the rare, genuinely strange body the room deserves: a floating ice crystal with enormous Special Defence and no Ground weakness. Overrepresented? Cryogonal, Walrein and Dewgong appear only here in the gym; Lapras's other owners are the route trainer Everett's Perish Song set and Micah's Mega far into the post-game; Rotom-Wash recurs with Keira after the League. Tapu Fini is returned to Champion Wallace alone. Levels: cap 84, offsets 2/2/2/2/2/3.
 crack: Replace the weather and the Defence boost, the healing and Blizzard's accuracy all go at once. Fire, Fighting, Rock and Steel attacks cover the Ice core; Samurott and Rotom-Wash are the only members that are not weak to Fighting. Taunt stops Snowscape and Rapid Spin, and Walrein is locked into whatever it picked.
 LAPRAS @LIGHT_CLAY WATER_ABSORB MODEST 252/0/4/252/0/0 2 | SNOWSCAPE, FREEZE_DRY, HYDRO_PUMP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -3785,16 +3773,15 @@ TATSUGIRI_CURLY @TATSUGIRINITE STORM_DRAIN MODEST 4/0/0/252/0/252 5 | DRACO_METE
 ## E0480 TRAINER_QUINCY class=ace
 strategy: REDIRECTION,TAILWIND
 mega_slots: NONE
-ai: Ace Pokemon
 tactic: SUPPRESS WEEZING NONE SLAKING
 plan: Concept: the cleverest single idea in Victory Road - a team built entirely around turning off the worst abilities in the game. Slaking has Truant and can only attack every other turn; Weezing's Neutralizing Gas suppresses every ability on the field while it is alive, Truant included, so a Choice Scarf Slaking with 160 base Attack simply attacks every turn instead. The authored SUPPRESS tactic is what tells the AI to keep Weezing alive for exactly that reason. First two useful turns: Weezing enters beside Slaking and stays; Slaking fires Double-Edge or High Horsepower with no downtime. Turn two protects the suppressor - the moment Weezing dies, Slaking loses half its turns. Alternate deployment: Durant's Entrainment is the backup plan and the fight's second joke - it forcibly gives Truant to an opposing Pokemon, locking the player's own sweeper out of every other turn. Butterfree's Compound Eyes makes Sleep Powder effectively accurate, Rage Powder protects the suppressor and Tailwind hands the slow suppressors the speed. Reserves & disruption: Terrakion's Quick Guard blocks the priority aimed at Weezing. The ace is Archeops, the gas's second beneficiary: its Defeatist halves its Attack and Special Attack once it drops below half HP, and under Neutralizing Gas that drawback simply does not exist, so a 140-Attack Rock/Flying bird hits at full power however hurt it is. Its Sitrus Berry is the backup for when the gas is gone - it pulls Archeops back above the Defeatist line once. Rock Slide and Dual Wingbeat avoid the Earthquake that would hit Weezing, which has Neutralizing Gas rather than Levitate. Every slot serves one legible idea: the player beats it by killing a Weezing, and doing so visibly halves Slaking and cripples Archeops at the same time.
 crack: Kill Weezing and the fight halves. Psychic and Ground attacks answer it; Fighting answers Slaking; Fire answers Durant and Butterfree. Do not let Durant touch your sweeper with Entrainment. Quick Guard only blocks priority, so remove the suppressor with an ordinary attack. Once the gas is gone, chip Archeops below half and it stops hitting hard; Rock, Steel, Electric, Ice and Water answer it, and Wide Guard blanks its Rock Slide.
 SLAKING @CHOICE_SCARF TRUANT JOLLY 4/252/0/0/0/252 5 | DOUBLE_EDGE, HIGH_HORSEPOWER, ROCK_SLIDE, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 WEEZING @BLACK_SLUDGE NEUTRALIZING_GAS BOLD 252/0/252/0/4/0 5 | SLUDGE_BOMB, WILL_O_WISP, HEAT_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BUTTERFREE @MENTAL_HERB COMPOUND_EYES TIMID 252/0/4/0/0/252 5 | SLEEP_POWDER, RAGE_POWDER, TAILWIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+ARCHEOPS @SITRUS_BERRY DEFEATIST JOLLY 4/252/0/0/0/252 6 | ROCK_SLIDE, DUAL_WINGBEAT, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DURANT @FOCUS_SASH TRUANT JOLLY 4/252/0/0/0/252 5 | ENTRAINMENT, IRON_HEAD, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TERRAKION @LIFE_ORB JUSTIFIED JOLLY 4/252/0/0/0/252 5 | CLOSE_COMBAT, ROCK_SLIDE, QUICK_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ARCHEOPS @SITRUS_BERRY DEFEATIST JOLLY 4/252/0/0/0/252 6 | ROCK_SLIDE, DUAL_WINGBEAT, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BUTTERFREE @MENTAL_HERB COMPOUND_EYES TIMID 252/0/4/0/0/252 5 | SLEEP_POWDER, RAGE_POWDER, TAILWIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0481 TRAINER_KATELYNN class=ace
 strategy: SETUP
@@ -3933,16 +3920,16 @@ AEGISLASH @WEAKNESS_POLICY STANCE_CHANGE QUIET 252/0/4/252/0/0 1 | SHADOW_BALL, 
 
 ## E0492 TRAINER_DIANNE class=ace
 strategy: SNOW,SETUP
-mega_slots: 6
+mega_slots: 3
 ai: Ace Pokemon
 plan: Concept: the blizzard door - automatic snow, an Aurora Veil that halves both kinds of damage, and a closer that smashes through the screens it hid behind. First two useful turns: Abomasnow's Snow Warning is live on entry, so Froslass can immediately use Aurora Veil, which needs snow to work at all and then reduces physical and special damage for five turns; Abomasnow's Blizzard never misses in its own weather. Turn two attacks from behind the veil rather than adding more setup. Alternate deployment: Magmortar and Virizion are the deliberately off-type answers to the Fire, Steel and Fighting attacks a player brings to beat an Ice team; Justified raises Virizion's Attack whenever a Dark attack hits it. Reserves & disruption: Froslass's Destiny Bond takes the attacker down with it, so removing the veil-setter has a real price; Kingambit's Supreme Overlord raises its Attack for every ally that has already fainted, which makes it strongest exactly when the fight is nearly over, and Sucker Punch turns that accumulated power into priority. Mega Barbaracle's Shell Smash under a still-active Aurora Veil is the intended finish. Could this team be cooler? The Aurora Veil plus Destiny Bond pairing is a genuinely nasty trap - killing the screen-setter costs the player a Pokemon - and the snow is properly sourced, so the concept holds. The change is Bisharp, which was an exact duplicate of Vito's five doors earlier: Kingambit is its evolution, it is rarer, and Supreme Overlord makes it a late-fight threat that scales with the gauntlet's own attrition, which is a far better fit for the last ace before the Elite Four than a second copy of a set the player just beat. Overrepresented? Kingambit, Magmortar, Virizion and Mega Barbaracle are unique in the campaign; Abomasnow's other owner Makayla runs a physical route set; Froslass recurs as Glacia's League Mega, which reads as this trainer studying under her. Levels: cap 96, offsets 1/1/1/1/1/2.
 crack: Replace the weather and Aurora Veil cannot be set at all; Brick Break, Defog and Infiltrator get through it once it is up. Fire, Fighting, Rock and Steel attacks answer the Ice half. Do not kill Froslass with your ace - Destiny Bond takes it with her. Kingambit gets stronger as the fight goes on, so do not save it for last.
 ABOMASNOW @SITRUS_BERRY SNOW_WARNING QUIET 252/0/4/252/0/0 1 | BLIZZARD, GIGA_DRAIN, ICE_SHARD, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 FROSLASS @FOCUS_SASH CURSED_BODY TIMID 4/0/0/252/0/252 2 | BLIZZARD, SHADOW_BALL, AURORA_VEIL, DESTINY_BOND | ivs=31/0/31/31/31/31 | friendship=255
+BARBARACLE @BARBARACITE TOUGH_CLAWS ADAMANT 4/252/0/0/0/252 2 | SHELL_SMASH, LIQUIDATION, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MAGMORTAR @LIFE_ORB FLAME_BODY MODEST 4/0/0/252/0/252 2 | HEAT_WAVE, FOCUS_BLAST, THUNDERBOLT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 VIRIZION @CLEAR_AMULET JUSTIFIED JOLLY 4/252/0/0/0/252 1 | LEAF_BLADE, CLOSE_COMBAT, STONE_EDGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 KINGAMBIT @MUSCLE_BAND SUPREME_OVERLORD ADAMANT 252/252/4/0/0/0 1 | SUCKER_PUNCH, IRON_HEAD, THROAT_CHOP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BARBARACLE @BARBARACITE TOUGH_CLAWS ADAMANT 4/252/0/0/0/252 2 | SHELL_SMASH, LIQUIDATION, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0493 TRAINER_SIDNEY class=elite
 strategy: TAILWIND
@@ -3959,16 +3946,15 @@ ABSOL @ABSOLITE_Z SUPER_LUCK JOLLY 4/252/0/0/0/252 6 | SUCKER_PUNCH, KNOCK_OFF, 
 
 ## E0494 TRAINER_PHOEBE class=elite
 strategy: NONE
-mega_slots: 4,6
-ai: Ace Pokemon
+mega_slots: 3,4
 plan: Ghost trapping, Encore and boost punishment. Mega Banette replaces Dusclops. Mega Gengar keeps trapping/control; Banette supplies Poltergeist/Encore/Will-O-Wisp/Protect. Lunala replaces Calm Mind with Wide Guard and gets Timid/Cloak. Keep Giratina, Marshadow and Specs Spectrier. Stats: Physical Giratina supports and survives; Lunala and Spectrier attack specially; Marshadow/Banette exploit physical lanes. Banette uses its165 Mega Attack with HP investment and priority utility. Gengar receives95 as a starting seed for170 Special Attack/130 Speed; this is not proven balanced. Could it be cooler? Gengar can trap a foe while Banette Encores an already-used move. Lunala's Wide Guard covers applicable spread attacks; Marshadow steals opposing boosts. This is a coordinated trap/control team, without inventing Perish Song. Overrepresented? Gengar and Banette exist earlier as individual Megas; Phoebe combines them and has no species overlap with the other four League teams. Keep its ghost identity rather than add another weather setter. Medium cap96 levels 97/96/96/100/97/95 are initial design seeds; complete battle calibration remains pending.
 crack: Ghost types can escape Shadow Tag, valid pivots can escape, Dark types block hostile Prankster, and Taunt/ability suppression/priority or special mitigation can disrupt the formation. Poltergeist requires the target to hold an item. Spectrier's Grim Neigh needs a knockout, not just a teammate's KO.
 GIRATINA @LEFTOVERS PRESSURE IMPISH 252/0/252/0/4/0 8 | POLTERGEIST, ICY_WIND, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 LUNALA @COVERT_CLOAK SHADOW_SHIELD TIMID 4/0/0/252/0/252 7 | MOONGEIST_BEAM, MOONBLAST, WIDE_GUARD, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MARSHADOW @LIFE_ORB TECHNICIAN JOLLY 4/252/0/0/0/252 7 | SPECTRAL_THIEF, CLOSE_COMBAT, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BANETTE @BANETTITE INSOMNIA ADAMANT 252/252/0/0/4/0 11 | POLTERGEIST, ENCORE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SPECTRIER @CHOICE_SPECS GRIM_NEIGH TIMID 4/0/0/252/0/252 8 | SHADOW_BALL, DARK_PULSE, PSYCHIC, HEX | ivs=31/31/31/31/31/31 | friendship=255
 GENGAR @GENGARITE CURSED_BODY TIMID 4/0/0/252/0/252 6 | SHADOW_BALL, SLUDGE_BOMB, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BANETTE @BANETTITE INSOMNIA ADAMANT 252/252/0/0/4/0 11 | POLTERGEIST, ENCORE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MARSHADOW @LIFE_ORB TECHNICIAN JOLLY 4/252/0/0/0/252 7 | SPECTRAL_THIEF, CLOSE_COMBAT, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SPECTRIER @CHOICE_SPECS GRIM_NEIGH TIMID 4/0/0/252/0/252 8 | SHADOW_BALL, DARK_PULSE, PSYCHIC, HEX | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0495 TRAINER_GLACIA class=elite
 strategy: SNOW
@@ -3990,9 +3976,9 @@ ai: Ace Pokemon
 plan: Mixed Dragon air force with a sun phase and a real answer to Fairy types. First two useful turns: Mega Salamence sets Tailwind or fires Aerilate Double-Edge while Koraidon's Orichalcum Pulse raises the sun for Reshiram's Blue Flare and Mega Dragonite's Flamethrower. Roles: Dragalge replaces Zekrom as the Fairy answer. It is Poison/Dragon, so Fairy moves hit it only neutrally, and its 123 base Special Defense behind an Assault Vest takes the special Fairy attackers that reach the League - Mega Gardevoir, Flutter Mane, Tapu Lele, Enamorus. Adaptability Sludge Bomb is a doubled-STAB super-effective hit on every one of them; Draco Meteor is the Adaptability Dragon nuke, Thunderbolt keeps the Electric coverage Zekrom brought, and Focus Blast answers the Steel types that resist both STABs. Mega Salamence trades Earthquake, which hit its grounded partners, for Iron Head: under its own Tailwind a 120-base Mega outspeeds Flutter Mane and Iron Valiant, so a super-effective Steel hit lands before the fast Fairies move. Reshiram, Koraidon and Specs Regidrago are the damage; Mega Dragonite (145 Special Attack, Multiscale, Roost) is the specially offensive closer and the ace. How the pieces combine: Tailwind plus Iron Head races the fast Fairy, Dragalge walls and poisons the slow special one, and the sun doubles Reshiram's and Dragonite's Fire into the Steel types that wall Dragon moves. Could it be cooler? Drake is a sailor, and Dragalge is the sea dragon that hides in kelp - the Fairy answer comes from his own waters rather than a borrowed Steel wall. Overrepresented? Zekrom leaves the League; Dragalge's other uses are an Aqua Hideout grunt and Shelly's Mega, both far from the League, and the Steel/Dragon line is already Caroline's and Felix's on Victory Road. Mega Rayquaza stays with the final Steven exhibition, not a third Mega here.
 crack: Psychic and Ground hit Dragalge super-effectively and it is slow, so remove it first and Fairy pressure works on the rest again; Fairy immunity to Dragon moves, Ice pressure, Wide Guard against Dragon Energy, your own weather or Trick Room against Tailwind, and chip that breaks Dragonite's Multiscale. Draco Meteor lowers Special Attack and Roost changes Dragonite's grounding; neither is a free loop. Steel types resist Iron Head and Sludge Bomb but fear the sun Fire.
 SALAMENCE @SALAMENCITE INTIMIDATE JOLLY 4/252/0/0/0/252 5 | DOUBLE_EDGE, IRON_HEAD, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-RESHIRAM @WISE_GLASSES TURBOBLAZE TIMID 4/0/0/252/0/252 5 | BLUE_FLARE, DRACO_METEOR, EARTH_POWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DRAGALGE @ASSAULT_VEST ADAPTABILITY MODEST 252/0/4/252/0/0 6 | SLUDGE_BOMB, DRACO_METEOR, THUNDERBOLT, FOCUS_BLAST | ivs=31/0/31/31/31/31 | friendship=255
 KORAIDON @LIFE_ORB ORICHALCUM_PULSE JOLLY 4/252/0/0/0/252 4 | COLLISION_COURSE, FLARE_BLITZ, DRAGON_CLAW, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DRAGALGE @ASSAULT_VEST ADAPTABILITY MODEST 252/0/4/252/0/0 6 | SLUDGE_BOMB, DRACO_METEOR, THUNDERBOLT, FOCUS_BLAST | ivs=31/0/31/31/31/31 | friendship=255
+RESHIRAM @WISE_GLASSES TURBOBLAZE TIMID 4/0/0/252/0/252 5 | BLUE_FLARE, DRACO_METEOR, EARTH_POWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 REGIDRAGO @CHOICE_SPECS DRAGONS_MAW MODEST 4/0/0/252/0/252 7 | DRAGON_ENERGY, DRACO_METEOR, EARTH_POWER, ANCIENT_POWER | ivs=31/31/31/31/31/31 | friendship=255
 DRAGONITE @DRAGONINITE MULTISCALE MODEST 252/0/4/252/0/0 7 | DRACO_METEOR, AIR_SLASH, FLAMETHROWER, ROOST | ivs=31/0/31/31/31/31 | friendship=255
 
@@ -4011,16 +3997,16 @@ STARMIE @STARMINITE NATURAL_CURE JOLLY 4/252/0/0/0/252 7 | LIQUIDATION, PSYCHO_C
 
 ## E0498 TRAINER_WALLY_VR_2 class=rival
 strategy: REDIRECTION,SETUP
-mega_slots: 6
-ai: Double Ace Pokemon
+mega_slots: 2
+ai: Ace Pokemon
 plan: Concept: the rival arc, part two. Wally comes back as Champion-tier and the arc completes its mirror - the Gallade that was his Mega at Victory Road now stands beside him as an ordinary partner while Altaria, the Swablu he caught on Route 114, carries the stone. First two useful turns: Indeedee-F sets Psychic Terrain on entry and redirects with Follow Me to keep Gallade's Sharpness-boosted Psycho Cut or Sacred Sword alive; Psychic Terrain also blocks all priority moves aimed at his grounded members, which is what makes the setup viable at this level. Gallade attacks. Turn two picks the special half rather than repeating the redirect. Alternate deployment: Tapu Lele is the raw damage mode - its Psychic Surge re-establishes the terrain if it has been replaced, and under it Psychic and Psyshock hit half again as hard. Gardevoir's Trace copies the most valuable ability on the opposing side the moment it enters. Reserves & disruption: Magearna's Soul-Heart raises its Special Attack every time any Pokemon on the field faints, so a long fight makes it progressively lethal, and Fleur Cannon is enormous at the cost of a two-stage drop each use. Mega Altaria's Pixilate converts Return into a Fairy-type attack with a power bonus, and at maximum friendship Return is already at full power - a Dragon Dance behind that is the closer, and its Dragon/Fairy typing means the Steel answer the player saved for Magearna is the only thing that also answers this. Note that Psychic Terrain blocks the team's own priority as well, so Gallade has no safe priority option while it is up. Could this team be cooler? Yes, and the rebuild is what makes the two Wally fights a rival arc rather than two unrelated bosses. The authored roster was Dragapult, Heatran and Incineroar behind a Mega Magearna - a strong team with no connection to Wally at all, and one that borrowed Steven's and the League's identities. The new version keeps a single coherent Psychic and Fairy identity across both fights, promotes his own Altaria to the Mega slot using the campaign's one unused Altarianite, and makes the memorable moment structural: the player recognises every Pokemon, and the one that was a support in the first fight is now the thing that kills them. Overrepresented? Mega Altaria, Tapu Lele and Magearna appear nowhere else in the campaign; Indeedee-F's other owner is the route trainer Alexis at a far lower tier; Gardevoir and Gallade are Wally's alone. Levels: cap 100, offsets 1/2/2/2/2/3.
 crack: Steel and Poison attacks answer four of the six; Fire answers Magearna and Gallade; Ghost and Flying answer the Psychic half. Replace the terrain and your priority works again. Spread damage ignores Follow Me. Let Magearna use Fleur Cannon twice and it has halved its own Special Attack; Mega Altaria is bulky but must dance before it threatens, and Steel and Poison attacks answer it outright.
 INDEEDEE_F @SITRUS_BERRY PSYCHIC_SURGE MODEST 252/0/4/0/252/0 11 | FOLLOW_ME, EXPANDING_FORCE, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GALLADE @LIFE_ORB SHARPNESS JOLLY 4/252/0/0/0/252 12 | PSYCHO_CUT, SACRED_SWORD, NIGHT_SLASH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ALTARIA @ALTARIANITE NATURAL_CURE ADAMANT 252/0/4/0/0/252 13 | RETURN, DRAGON_DANCE, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 GARDEVOIR @CHOICE_SPECS TRACE TIMID 4/0/0/252/0/252 12 | PSYCHIC, MOONBLAST, MYSTICAL_FIRE, SHADOW_BALL | ivs=31/0/31/31/31/31 | friendship=255
 TAPU_LELE @LIFE_ORB PSYCHIC_SURGE TIMID 4/0/0/252/0/252 12 | PSYCHIC, MOONBLAST, PSYSHOCK, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GALLADE @LIFE_ORB SHARPNESS JOLLY 4/252/0/0/0/252 12 | PSYCHO_CUT, SACRED_SWORD, NIGHT_SLASH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MAGEARNA @ASSAULT_VEST SOUL_HEART MODEST 252/0/4/252/0/0 12 | FLEUR_CANNON, FLASH_CANNON, AURA_SPHERE, THUNDERBOLT | ivs=31/0/31/31/31/31 | friendship=255
-ALTARIA @ALTARIANITE NATURAL_CURE ADAMANT 252/0/4/0/0/252 13 | RETURN, DRAGON_DANCE, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0499 TRAINER_VINCENT class=ace
 strategy: SETUP
@@ -4050,16 +4036,15 @@ CLEFABLE @CLEFABLITE UNAWARE MODEST 252/0/4/0/252/0 2 | FOLLOW_ME, MOONBLAST, DA
 
 ## E0501 TRAINER_LEROY class=ace
 strategy: TRICK_ROOM
-mega_slots: 6
-ai: Ace Pokemon
+mega_slots: 2
 plan: Concept: the post-game Trick Room - six slow bodies that are happiest moving last, set up by a legendary that never needs to move first. First two useful turns: Cresselia sets Trick Room behind a Mental Herb, or Helping Hands a Skeledirge attack when the speeds already favour the team; Mega Scrafty's Fake Out protects the room turn before the transformation, and Intimidate on entry softens the physical lead. Turn two spends the reversed order rather than cycling Moonlight. Roles: Skeledirge is the special cannon - every Torch Song raises its Special Attack, so it grows stronger through the room's five turns, and Unaware means the player's own boosts, Calm Minds and Dragon Dances included, do nothing to protect them from it or to help them break it; Earth Power hits the Fire and Rock types that resist its Fire, and Shadow Ball covers the Ghost and Psychic bodies. Copperajah is the physical closer: Sheer Force strips the flinch from Rock Slide for a 30 percent power bonus and no Life Orb recoil, Heavy Slam from a 650-kilogram elephant flattens light targets, and High Horsepower answers the Fire and Steel types that would wall it. Reserves & disruption: Mawile is base Intimidate and deliberately not a second Mega, so its slot is a second Intimidate body and a Sucker Punch, not a hidden ace; Slurpuff's Sweet Veil makes the whole team immune to sleep, which is the specific answer to the Spore and Sleep Powder leads the post-game is full of. Every slow member carries a zero Speed IV so the room works in the team's favour. Cresselia is the fight's one legendary and its whole job is the room.
 crack: Taunt the setter, or be slower yourself. Dark, Ghost and Bug attacks answer Cresselia; Water, Ground and Rock answer Skeledirge, and Dark and Ghost hit it too - chip it before Torch Song stacks; Fire and Ground answer Copperajah and Mawile, and Fighting hits Copperajah too. Sweet Veil stops sleep but nothing else - paralysis, burn and confusion all still land. Wait out the five turns if you can survive them.
 CRESSELIA @MENTAL_HERB LEVITATE SASSY 252/0/4/0/252/0 1 | TRICK_ROOM, PSYCHIC, HELPING_HAND, MOONLIGHT | ivs=31/0/31/31/31/0 | friendship=255
-SKELEDIRGE @ASSAULT_VEST UNAWARE QUIET 252/0/4/252/0/0 1 | TORCH_SONG, HEAT_WAVE, SHADOW_BALL, EARTH_POWER | ivs=31/0/31/31/31/0 | friendship=255
+SCRAFTY @SCRAFTINITE INTIMIDATE BRAVE 252/252/4/0/0/0 2 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, ICE_PUNCH | ivs=31/31/31/31/31/0 | friendship=255
 MAWILE @SITRUS_BERRY INTIMIDATE BRAVE 252/252/4/0/0/0 1 | PLAY_ROUGH, IRON_HEAD, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 SLURPUFF @LEFTOVERS SWEET_VEIL QUIET 252/0/4/0/252/0 1 | DAZZLING_GLEAM, FLAMETHROWER, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 COPPERAJAH @LIFE_ORB SHEER_FORCE BRAVE 252/252/4/0/0/0 1 | HEAVY_SLAM, HIGH_HORSEPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-SCRAFTY @SCRAFTINITE INTIMIDATE BRAVE 252/252/4/0/0/0 2 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, ICE_PUNCH | ivs=31/31/31/31/31/0 | friendship=255
+SKELEDIRGE @ASSAULT_VEST UNAWARE QUIET 252/0/4/252/0/0 1 | TORCH_SONG, HEAT_WAVE, SHADOW_BALL, EARTH_POWER | ivs=31/0/31/31/31/0 | friendship=255
 
 ## E0504 TRAINER_COLTON class=ace
 strategy: SETUP,TAILWIND

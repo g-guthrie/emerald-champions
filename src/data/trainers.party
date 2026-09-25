@@ -1606,21 +1606,21 @@ Pic: Expert M
 Gender: Male
 Music: Intense
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
-SPECIES_AEGISLASH @ ITEM_LEFTOVERS
-Level: 59
-Level Offset: 4
-Ability: ABILITY_STANCE_CHANGE
+SPECIES_TYRANITAR @ ITEM_TYRANITARITE
+Level: 60
+Level Offset: 5
+Ability: ABILITY_SAND_STREAM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
-Nature: NATURE_QUIET
-- MOVE_SHADOW_BALL
-- MOVE_FLASH_CANNON
-- MOVE_WIDE_GUARD
-- MOVE_KINGS_SHIELD
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_BRAVE
+- MOVE_ROCK_SLIDE
+- MOVE_CRUNCH
+- MOVE_HIGH_HORSEPOWER
+- MOVE_PROTECT
 
 SPECIES_COMFEY @ ITEM_SITRUS_BERRY
 Level: 59
@@ -1648,18 +1648,18 @@ Nature: NATURE_BOLD
 - MOVE_RECOVER
 - MOVE_HAZE
 
-SPECIES_TYRANITAR @ ITEM_TYRANITARITE
-Level: 60
-Level Offset: 5
-Ability: ABILITY_SAND_STREAM
+SPECIES_AEGISLASH @ ITEM_LEFTOVERS
+Level: 59
+Level Offset: 4
+Ability: ABILITY_STANCE_CHANGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_BRAVE
-- MOVE_ROCK_SLIDE
-- MOVE_CRUNCH
-- MOVE_HIGH_HORSEPOWER
-- MOVE_PROTECT
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_QUIET
+- MOVE_SHADOW_BALL
+- MOVE_FLASH_CANNON
+- MOVE_WIDE_GUARD
+- MOVE_KINGS_SHIELD
 
 === TRAINER_MATT ===
 Name: MATT
@@ -3198,7 +3198,7 @@ Pic: Cooltrainer M
 Gender: Male
 Music: Cool
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_BRAVIARY @ ITEM_LIFE_ORB
@@ -3227,18 +3227,18 @@ Nature: NATURE_JOLLY
 - MOVE_STOMPING_TANTRUM
 - MOVE_PROTECT
 
-SPECIES_SCOLIPEDE @ ITEM_FOCUS_SASH
-Level: 56
-Level Offset: 1
-Ability: ABILITY_SPEED_BOOST
+SPECIES_SALAMENCE @ ITEM_SALAMENCITE
+Level: 57
+Level Offset: 2
+Ability: ABILITY_INTIMIDATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_JOLLY
+- MOVE_DOUBLE_EDGE
+- MOVE_DRAGON_DANCE
+- MOVE_DRAGON_CLAW
 - MOVE_PROTECT
-- MOVE_MEGAHORN
-- MOVE_POISON_JAB
-- MOVE_SUPERPOWER
 
 SPECIES_BISHARP @ ITEM_BLACK_GLASSES
 Level: 56
@@ -3266,18 +3266,18 @@ Nature: NATURE_MODEST
 - MOVE_DARK_PULSE
 - MOVE_PROTECT
 
-SPECIES_SALAMENCE @ ITEM_SALAMENCITE
-Level: 57
-Level Offset: 2
-Ability: ABILITY_INTIMIDATE
+SPECIES_SCOLIPEDE @ ITEM_FOCUS_SASH
+Level: 56
+Level Offset: 1
+Ability: ABILITY_SPEED_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_JOLLY
-- MOVE_DOUBLE_EDGE
-- MOVE_DRAGON_DANCE
-- MOVE_DRAGON_CLAW
 - MOVE_PROTECT
+- MOVE_MEGAHORN
+- MOVE_POISON_JAB
+- MOVE_SUPERPOWER
 
 === TRAINER_VINCENT ===
 Name: VINCENT
@@ -3374,7 +3374,7 @@ Pic: Cooltrainer M
 Gender: Male
 Music: Cool
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_CRESSELIA @ ITEM_MENTAL_HERB
@@ -3390,18 +3390,18 @@ Nature: NATURE_SASSY
 - MOVE_HELPING_HAND
 - MOVE_MOONLIGHT
 
-SPECIES_SKELEDIRGE @ ITEM_ASSAULT_VEST
-Level: 101
-Level Offset: 1
-Ability: ABILITY_UNAWARE
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+SPECIES_SCRAFTY @ ITEM_SCRAFTINITE
+Level: 102
+Level Offset: 2
+Ability: ABILITY_INTIMIDATE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
-Nature: NATURE_QUIET
-- MOVE_TORCH_SONG
-- MOVE_HEAT_WAVE
-- MOVE_SHADOW_BALL
-- MOVE_EARTH_POWER
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_BRAVE
+- MOVE_FAKE_OUT
+- MOVE_CLOSE_COMBAT
+- MOVE_KNOCK_OFF
+- MOVE_ICE_PUNCH
 
 SPECIES_MAWILE @ ITEM_SITRUS_BERRY
 Level: 101
@@ -3442,18 +3442,18 @@ Nature: NATURE_BRAVE
 - MOVE_ROCK_SLIDE
 - MOVE_PROTECT
 
-SPECIES_SCRAFTY @ ITEM_SCRAFTINITE
-Level: 102
-Level Offset: 2
-Ability: ABILITY_INTIMIDATE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+SPECIES_SKELEDIRGE @ ITEM_ASSAULT_VEST
+Level: 101
+Level Offset: 1
+Ability: ABILITY_UNAWARE
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_BRAVE
-- MOVE_FAKE_OUT
-- MOVE_CLOSE_COMBAT
-- MOVE_KNOCK_OFF
-- MOVE_ICE_PUNCH
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_QUIET
+- MOVE_TORCH_SONG
+- MOVE_HEAT_WAVE
+- MOVE_SHADOW_BALL
+- MOVE_EARTH_POWER
 
 === TRAINER_WILTON_1 ===
 Name: WILTON
@@ -5170,7 +5170,7 @@ Pic: Lady
 Gender: Female
 Music: Female
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_LAPRAS @ ITEM_LIGHT_CLAY
@@ -5773,7 +5773,7 @@ Pic: Beauty
 Gender: Female
 Music: Female
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_CARRACOSTA @ ITEM_WEAKNESS_POLICY
@@ -5802,17 +5802,17 @@ Nature: NATURE_ADAMANT
 - MOVE_WIDE_GUARD
 - MOVE_PROTECT
 
-SPECIES_CRAMORANT @ ITEM_MYSTIC_WATER
-Level: 78
-Level Offset: 8
-Ability: ABILITY_GULP_MISSILE
+SPECIES_BLASTOISE @ ITEM_BLASTOISINITE
+Level: 79
+Level Offset: 9
+Ability: ABILITY_TORRENT
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 Nature: NATURE_MODEST
-- MOVE_SURF
-- MOVE_HURRICANE
-- MOVE_ICE_BEAM
+- MOVE_WATER_PULSE
+- MOVE_AURA_SPHERE
+- MOVE_DARK_PULSE
 - MOVE_PROTECT
 
 SPECIES_GOLURK @ ITEM_ASSAULT_VEST
@@ -5841,17 +5841,17 @@ Nature: NATURE_MODEST
 - MOVE_AURA_SPHERE
 - MOVE_DRAGON_PULSE
 
-SPECIES_BLASTOISE @ ITEM_BLASTOISINITE
-Level: 79
-Level Offset: 9
-Ability: ABILITY_TORRENT
+SPECIES_CRAMORANT @ ITEM_MYSTIC_WATER
+Level: 78
+Level Offset: 8
+Ability: ABILITY_GULP_MISSILE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
 Nature: NATURE_MODEST
-- MOVE_WATER_PULSE
-- MOVE_AURA_SPHERE
-- MOVE_DARK_PULSE
+- MOVE_SURF
+- MOVE_HURRICANE
+- MOVE_ICE_BEAM
 - MOVE_PROTECT
 
 === TRAINER_TIFFANY ===
@@ -7285,7 +7285,7 @@ Pic: Kindler
 Gender: Male
 Music: Hiker
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 Starting Status: Misty Terrain
 
@@ -7302,18 +7302,18 @@ Nature: NATURE_ADAMANT
 - MOVE_FEINT
 - MOVE_PROTECT
 
-SPECIES_CROBAT @ ITEM_ROCKY_HELMET
+SPECIES_TALONFLAME @ ITEM_SITRUS_BERRY
 Level: 40
 Level Offset: 0
-Ability: ABILITY_INFILTRATOR
+Ability: ABILITY_GALE_WINGS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_JOLLY
-- MOVE_CROSS_POISON
 - MOVE_BRAVE_BIRD
-- MOVE_U_TURN
-- MOVE_TAUNT
+- MOVE_FLARE_BLITZ
+- MOVE_ROOST
+- MOVE_TAILWIND
 
 SPECIES_INFERNAPE @ ITEM_LIFE_ORB
 Level: 39
@@ -7354,18 +7354,18 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 - MOVE_SUCKER_PUNCH
 
-SPECIES_TALONFLAME @ ITEM_SITRUS_BERRY
+SPECIES_CROBAT @ ITEM_ROCKY_HELMET
 Level: 40
 Level Offset: 0
-Ability: ABILITY_GALE_WINGS
+Ability: ABILITY_INFILTRATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
 EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_JOLLY
+- MOVE_CROSS_POISON
 - MOVE_BRAVE_BIRD
-- MOVE_FLARE_BLITZ
-- MOVE_ROOST
-- MOVE_TAILWIND
+- MOVE_U_TURN
+- MOVE_TAUNT
 
 === TRAINER_AXLE ===
 Name: AXLE
@@ -9274,7 +9274,7 @@ Pic: Elite Four Phoebe
 Gender: Female
 Music: Elite Four
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Mugshot: Green
 Prize Multiplier: 40
 
@@ -9304,17 +9304,17 @@ Nature: NATURE_TIMID
 - MOVE_WIDE_GUARD
 - MOVE_PROTECT
 
-SPECIES_MARSHADOW @ ITEM_LIFE_ORB
-Level: 87
-Level Offset: 7
-Ability: ABILITY_TECHNICIAN
+SPECIES_GENGAR @ ITEM_GENGARITE
+Level: 86
+Level Offset: 6
+Ability: ABILITY_CURSED_BODY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_SPECTRAL_THIEF
-- MOVE_CLOSE_COMBAT
-- MOVE_SHADOW_SNEAK
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_SHADOW_BALL
+- MOVE_SLUDGE_BOMB
+- MOVE_ICY_WIND
 - MOVE_PROTECT
 
 SPECIES_BANETTE @ ITEM_BANETTITE
@@ -9330,6 +9330,19 @@ Nature: NATURE_ADAMANT
 - MOVE_WILL_O_WISP
 - MOVE_PROTECT
 
+SPECIES_MARSHADOW @ ITEM_LIFE_ORB
+Level: 87
+Level Offset: 7
+Ability: ABILITY_TECHNICIAN
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_SPECTRAL_THIEF
+- MOVE_CLOSE_COMBAT
+- MOVE_SHADOW_SNEAK
+- MOVE_PROTECT
+
 SPECIES_SPECTRIER @ ITEM_CHOICE_SPECS
 Level: 88
 Level Offset: 8
@@ -9342,19 +9355,6 @@ Nature: NATURE_TIMID
 - MOVE_DARK_PULSE
 - MOVE_PSYCHIC
 - MOVE_HEX
-
-SPECIES_GENGAR @ ITEM_GENGARITE
-Level: 86
-Level Offset: 6
-Ability: ABILITY_CURSED_BODY
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_TIMID
-- MOVE_SHADOW_BALL
-- MOVE_SLUDGE_BOMB
-- MOVE_ICY_WIND
-- MOVE_PROTECT
 
 === TRAINER_GLACIA ===
 Name: GLACIA
@@ -9469,17 +9469,17 @@ Nature: NATURE_JOLLY
 - MOVE_TAILWIND
 - MOVE_PROTECT
 
-SPECIES_RESHIRAM @ ITEM_WISE_GLASSES
-Level: 85
-Level Offset: 5
-Ability: ABILITY_TURBOBLAZE
+SPECIES_KORAIDON @ ITEM_LIFE_ORB
+Level: 84
+Level Offset: 4
+Ability: ABILITY_ORICHALCUM_PULSE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_TIMID
-- MOVE_BLUE_FLARE
-- MOVE_DRACO_METEOR
-- MOVE_EARTH_POWER
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_COLLISION_COURSE
+- MOVE_FLARE_BLITZ
+- MOVE_DRAGON_CLAW
 - MOVE_PROTECT
 
 SPECIES_DRAGALGE @ ITEM_ASSAULT_VEST
@@ -9495,17 +9495,17 @@ Nature: NATURE_MODEST
 - MOVE_THUNDERBOLT
 - MOVE_FOCUS_BLAST
 
-SPECIES_KORAIDON @ ITEM_LIFE_ORB
-Level: 84
-Level Offset: 4
-Ability: ABILITY_ORICHALCUM_PULSE
+SPECIES_RESHIRAM @ ITEM_WISE_GLASSES
+Level: 85
+Level Offset: 5
+Ability: ABILITY_TURBOBLAZE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_COLLISION_COURSE
-- MOVE_FLARE_BLITZ
-- MOVE_DRAGON_CLAW
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_BLUE_FLARE
+- MOVE_DRACO_METEOR
+- MOVE_EARTH_POWER
 - MOVE_PROTECT
 
 SPECIES_REGIDRAGO @ ITEM_CHOICE_SPECS
@@ -10070,7 +10070,7 @@ Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 25
 
 SPECIES_SOLROCK @ ITEM_MENTAL_HERB
@@ -10099,18 +10099,18 @@ Nature: NATURE_QUIET
 - MOVE_ICE_BEAM
 - MOVE_PROTECT
 
-SPECIES_CRESSELIA @ ITEM_SITRUS_BERRY
+SPECIES_GARDEVOIR @ ITEM_GARDEVOIRITE
 Level: 64
 Level Offset: 4
-Ability: ABILITY_LEVITATE
+Ability: ABILITY_TRACE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
-Nature: NATURE_SASSY
-- MOVE_PSYCHIC
-- MOVE_TRICK_ROOM
-- MOVE_HELPING_HAND
-- MOVE_MOONLIGHT
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_QUIET
+- MOVE_HYPER_VOICE
+- MOVE_EXPANDING_FORCE
+- MOVE_MYSTICAL_FIRE
+- MOVE_PROTECT
 
 SPECIES_TAPU_LELE @ ITEM_CHOICE_SPECS
 Level: 63
@@ -10138,18 +10138,18 @@ Nature: NATURE_QUIET
 - MOVE_TRICK_ROOM
 - MOVE_PROTECT
 
-SPECIES_GARDEVOIR @ ITEM_GARDEVOIRITE
+SPECIES_CRESSELIA @ ITEM_SITRUS_BERRY
 Level: 64
 Level Offset: 4
-Ability: ABILITY_TRACE
+Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
-Nature: NATURE_QUIET
-- MOVE_HYPER_VOICE
-- MOVE_EXPANDING_FORCE
-- MOVE_MYSTICAL_FIRE
-- MOVE_PROTECT
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 252 SpD / 0 Spe
+Nature: NATURE_SASSY
+- MOVE_PSYCHIC
+- MOVE_TRICK_ROOM
+- MOVE_HELPING_HAND
+- MOVE_MOONLIGHT
 
 === TRAINER_JUAN_1 ===
 Name: JUAN
@@ -11578,7 +11578,7 @@ Pic: Cooltrainer M
 Gender: Male
 Music: Cool
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_SLAKING @ ITEM_CHOICE_SCARF
@@ -11607,17 +11607,17 @@ Nature: NATURE_BOLD
 - MOVE_HEAT_WAVE
 - MOVE_PROTECT
 
-SPECIES_BUTTERFREE @ ITEM_MENTAL_HERB
-Level: 85
-Level Offset: 5
-Ability: ABILITY_COMPOUND_EYES
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+SPECIES_ARCHEOPS @ ITEM_SITRUS_BERRY
+Level: 86
+Level Offset: 6
+Ability: ABILITY_DEFEATIST
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_TIMID
-- MOVE_SLEEP_POWDER
-- MOVE_RAGE_POWDER
-- MOVE_TAILWIND
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_ROCK_SLIDE
+- MOVE_DUAL_WINGBEAT
+- MOVE_U_TURN
 - MOVE_PROTECT
 
 SPECIES_DURANT @ ITEM_FOCUS_SASH
@@ -11646,17 +11646,17 @@ Nature: NATURE_JOLLY
 - MOVE_QUICK_GUARD
 - MOVE_PROTECT
 
-SPECIES_ARCHEOPS @ ITEM_SITRUS_BERRY
-Level: 86
-Level Offset: 6
-Ability: ABILITY_DEFEATIST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+SPECIES_BUTTERFREE @ ITEM_MENTAL_HERB
+Level: 85
+Level Offset: 5
+Ability: ABILITY_COMPOUND_EYES
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_ROCK_SLIDE
-- MOVE_DUAL_WINGBEAT
-- MOVE_U_TURN
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_SLEEP_POWDER
+- MOVE_RAGE_POWDER
+- MOVE_TAILWIND
 - MOVE_PROTECT
 
 === TRAINER_KATELYNN ===
@@ -13484,6 +13484,19 @@ Nature: NATURE_TIMID
 - MOVE_AURORA_VEIL
 - MOVE_DESTINY_BOND
 
+SPECIES_BARBARACLE @ ITEM_BARBARACITE
+Level: 82
+Level Offset: 2
+Ability: ABILITY_TOUGH_CLAWS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_ADAMANT
+- MOVE_SHELL_SMASH
+- MOVE_LIQUIDATION
+- MOVE_ROCK_SLIDE
+- MOVE_PROTECT
+
 SPECIES_MAGMORTAR @ ITEM_LIFE_ORB
 Level: 82
 Level Offset: 2
@@ -13521,19 +13534,6 @@ Nature: NATURE_ADAMANT
 - MOVE_SUCKER_PUNCH
 - MOVE_IRON_HEAD
 - MOVE_THROAT_CHOP
-- MOVE_PROTECT
-
-SPECIES_BARBARACLE @ ITEM_BARBARACITE
-Level: 82
-Level Offset: 2
-Ability: ABILITY_TOUGH_CLAWS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_ADAMANT
-- MOVE_SHELL_SMASH
-- MOVE_LIQUIDATION
-- MOVE_ROCK_SLIDE
 - MOVE_PROTECT
 
 === TRAINER_JANI ===
@@ -17742,7 +17742,7 @@ Pic: Pokemon Ranger M
 Gender: Male
 Music: Cool
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_TAPU_KOKO @ ITEM_LIFE_ORB
@@ -17771,19 +17771,6 @@ Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_PROTECT
 
-SPECIES_ROTOM_FAN @ ITEM_WISE_GLASSES
-Level: 56
-Level Offset: 1
-Ability: ABILITY_MOTOR_DRIVE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_TIMID
-- MOVE_THUNDERBOLT
-- MOVE_AIR_SLASH
-- MOVE_WILL_O_WISP
-- MOVE_PROTECT
-
 SPECIES_TANGROWTH @ ITEM_SITRUS_BERRY
 Level: 57
 Level Offset: 2
@@ -17795,6 +17782,19 @@ Nature: NATURE_BOLD
 - MOVE_GIGA_DRAIN
 - MOVE_STUN_SPORE
 - MOVE_RAGE_POWDER
+- MOVE_PROTECT
+
+SPECIES_ROTOM_FAN @ ITEM_WISE_GLASSES
+Level: 56
+Level Offset: 1
+Ability: ABILITY_MOTOR_DRIVE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_THUNDERBOLT
+- MOVE_AIR_SLASH
+- MOVE_WILL_O_WISP
 - MOVE_PROTECT
 
 === TRAINER_LORENZO ===
@@ -18802,8 +18802,34 @@ Pic: Cooltrainer F
 Gender: Female
 Music: Cool
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon / Will Suicide
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Will Suicide
 Prize Multiplier: 10
+
+SPECIES_KANGASKHAN @ ITEM_KANGASKHANITE
+Level: 61
+Level Offset: 1
+Ability: ABILITY_SCRAPPY
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_FAKE_OUT
+- MOVE_DOUBLE_EDGE
+- MOVE_DRAIN_PUNCH
+- MOVE_SUCKER_PUNCH
+
+SPECIES_PHEROMOSA @ ITEM_LIFE_ORB
+Level: 60
+Level Offset: 0
+Ability: ABILITY_BEAST_BOOST
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 8 HP / 124 Atk / 0 Def / 124 SpA / 0 SpD / 252 Spe
+Nature: NATURE_NAIVE
+- MOVE_CLOSE_COMBAT
+- MOVE_LUNGE
+- MOVE_ICE_BEAM
+- MOVE_PROTECT
 
 SPECIES_INFERNAPE @ ITEM_FOCUS_SASH
 Level: 60
@@ -18830,32 +18856,6 @@ Nature: NATURE_TIMID
 - MOVE_BUG_BUZZ
 - MOVE_ENCORE
 - MOVE_PROTECT
-
-SPECIES_PHEROMOSA @ ITEM_LIFE_ORB
-Level: 60
-Level Offset: 0
-Ability: ABILITY_BEAST_BOOST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 8 HP / 124 Atk / 0 Def / 124 SpA / 0 SpD / 252 Spe
-Nature: NATURE_NAIVE
-- MOVE_CLOSE_COMBAT
-- MOVE_LUNGE
-- MOVE_ICE_BEAM
-- MOVE_PROTECT
-
-SPECIES_KANGASKHAN @ ITEM_KANGASKHANITE
-Level: 61
-Level Offset: 1
-Ability: ABILITY_SCRAPPY
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_FAKE_OUT
-- MOVE_DOUBLE_EDGE
-- MOVE_DRAIN_PUNCH
-- MOVE_SUCKER_PUNCH
 
 === TRAINER_HARRISON ===
 Name: HARRISON
@@ -18903,7 +18903,7 @@ Pic: Gentleman
 Gender: Male
 Music: Rich
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_ORANGURU @ ITEM_SITRUS_BERRY
@@ -18919,18 +18919,18 @@ Nature: NATURE_QUIET
 - MOVE_FOUL_PLAY
 - MOVE_PROTECT
 
-SPECIES_BEHEEYEM @ ITEM_CHOICE_SPECS
+SPECIES_DELPHOX @ ITEM_DELPHOXITE
 Level: 62
 Level Offset: 2
-Ability: ABILITY_ANALYTIC
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+Ability: ABILITY_MAGICIAN
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
-Nature: NATURE_QUIET
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_MODEST
+- MOVE_MYSTICAL_FIRE
 - MOVE_PSYCHIC
-- MOVE_THUNDERBOLT
-- MOVE_SHADOW_BALL
-- MOVE_ENERGY_BALL
+- MOVE_DAZZLING_GLEAM
+- MOVE_PROTECT
 
 SPECIES_MIMIKYU @ ITEM_LIFE_ORB
 Level: 61
@@ -18971,18 +18971,18 @@ Nature: NATURE_QUIET
 - MOVE_GIGA_DRAIN
 - MOVE_PROTECT
 
-SPECIES_DELPHOX @ ITEM_DELPHOXITE
+SPECIES_BEHEEYEM @ ITEM_CHOICE_SPECS
 Level: 62
 Level Offset: 2
-Ability: ABILITY_MAGICIAN
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: ABILITY_ANALYTIC
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_MODEST
-- MOVE_MYSTICAL_FIRE
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_QUIET
 - MOVE_PSYCHIC
-- MOVE_DAZZLING_GLEAM
-- MOVE_PROTECT
+- MOVE_THUNDERBOLT
+- MOVE_SHADOW_BALL
+- MOVE_ENERGY_BALL
 
 === TRAINER_KATHLEEN ===
 Name: KATHLEEN
@@ -20139,7 +20139,7 @@ Pic: Magma Leader Maxie
 Gender: Male
 Music: Magma
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 25
 Starting Status: Weather Sun
 
@@ -20169,18 +20169,18 @@ Nature: NATURE_RELAXED
 - MOVE_POLTERGEIST
 - MOVE_PROTECT
 
-SPECIES_STAKATAKA @ ITEM_FOCUS_SASH
-Level: 64
-Level Offset: 4
-Ability: ABILITY_BEAST_BOOST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+SPECIES_CAMERUPT @ ITEM_CAMERUPTITE
+Level: 63
+Level Offset: 3
+Ability: ABILITY_SOLID_ROCK
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_BRAVE
-- MOVE_TRICK_ROOM
-- MOVE_WIDE_GUARD
-- MOVE_GYRO_BALL
-- MOVE_STONE_EDGE
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_QUIET
+- MOVE_ERUPTION
+- MOVE_EARTH_POWER
+- MOVE_HEAT_WAVE
+- MOVE_PROTECT
 
 SPECIES_TORTERRA @ ITEM_LEFTOVERS
 Level: 64
@@ -20208,18 +20208,18 @@ Nature: NATURE_BRAVE
 - MOVE_PLAY_ROUGH
 - MOVE_PROTECT
 
-SPECIES_CAMERUPT @ ITEM_CAMERUPTITE
-Level: 63
-Level Offset: 3
-Ability: ABILITY_SOLID_ROCK
-IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+SPECIES_STAKATAKA @ ITEM_FOCUS_SASH
+Level: 64
+Level Offset: 4
+Ability: ABILITY_BEAST_BOOST
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
-Nature: NATURE_QUIET
-- MOVE_ERUPTION
-- MOVE_EARTH_POWER
-- MOVE_HEAT_WAVE
-- MOVE_PROTECT
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_BRAVE
+- MOVE_TRICK_ROOM
+- MOVE_WIDE_GUARD
+- MOVE_GYRO_BALL
+- MOVE_STONE_EDGE
 
 === TRAINER_MAXIE_MT_CHIMNEY ===
 Name: MAXIE
@@ -20453,7 +20453,7 @@ Pic: Lass
 Gender: Female
 Music: Female
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_FOMANTIS @ ITEM_EVIOLITE
@@ -20469,18 +20469,18 @@ Nature: NATURE_MODEST
 - MOVE_SYNTHESIS
 - MOVE_PROTECT
 
-SPECIES_QUAGSIRE @ ITEM_RINDO_BERRY
-Level: 31
-Level Offset: 1
-Ability: ABILITY_UNAWARE
+SPECIES_VIBRAVA @ ITEM_EVIOLITE
+Level: 34
+Level Offset: 4
+Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_ADAMANT
-- MOVE_LIQUIDATION
-- MOVE_ICE_PUNCH
-- MOVE_HIGH_HORSEPOWER
-- MOVE_PROTECT
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_DRAGON_CLAW
+- MOVE_BULLDOZE
+- MOVE_ROCK_SLIDE
+- MOVE_U_TURN
 
 SPECIES_VIRIZION @ ITEM_LIFE_ORB
 Level: 30
@@ -20495,18 +20495,18 @@ Nature: NATURE_JOLLY
 - MOVE_STONE_EDGE
 - MOVE_QUICK_GUARD
 
-SPECIES_VIBRAVA @ ITEM_EVIOLITE
-Level: 34
-Level Offset: 4
-Ability: ABILITY_LEVITATE
+SPECIES_QUAGSIRE @ ITEM_RINDO_BERRY
+Level: 31
+Level Offset: 1
+Ability: ABILITY_UNAWARE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_DRAGON_CLAW
-- MOVE_BULLDOZE
-- MOVE_ROCK_SLIDE
-- MOVE_U_TURN
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_ADAMANT
+- MOVE_LIQUIDATION
+- MOVE_ICE_PUNCH
+- MOVE_HIGH_HORSEPOWER
+- MOVE_PROTECT
 
 === TRAINER_SALLY ===
 Name: SALLY
@@ -22243,7 +22243,7 @@ Pic: Wally
 Gender: Male
 Music: Male
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Prize Multiplier: 10
 
 SPECIES_INDEEDEE_F @ ITEM_SITRUS_BERRY
@@ -22259,17 +22259,17 @@ Nature: NATURE_MODEST
 - MOVE_HELPING_HAND
 - MOVE_PROTECT
 
-SPECIES_GALLADE @ ITEM_LIFE_ORB
-Level: 112
-Level Offset: 12
-Ability: ABILITY_SHARPNESS
+SPECIES_ALTARIA @ ITEM_ALTARIANITE
+Level: 113
+Level Offset: 13
+Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_JOLLY
-- MOVE_PSYCHO_CUT
-- MOVE_SACRED_SWORD
-- MOVE_NIGHT_SLASH
+EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_ADAMANT
+- MOVE_RETURN
+- MOVE_DRAGON_DANCE
+- MOVE_ROOST
 - MOVE_PROTECT
 
 SPECIES_GARDEVOIR @ ITEM_CHOICE_SPECS
@@ -22298,6 +22298,19 @@ Nature: NATURE_TIMID
 - MOVE_PSYSHOCK
 - MOVE_PROTECT
 
+SPECIES_GALLADE @ ITEM_LIFE_ORB
+Level: 112
+Level Offset: 12
+Ability: ABILITY_SHARPNESS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
+Nature: NATURE_JOLLY
+- MOVE_PSYCHO_CUT
+- MOVE_SACRED_SWORD
+- MOVE_NIGHT_SLASH
+- MOVE_PROTECT
+
 SPECIES_MAGEARNA @ ITEM_ASSAULT_VEST
 Level: 112
 Level Offset: 12
@@ -22310,19 +22323,6 @@ Nature: NATURE_MODEST
 - MOVE_FLASH_CANNON
 - MOVE_AURA_SPHERE
 - MOVE_THUNDERBOLT
-
-SPECIES_ALTARIA @ ITEM_ALTARIANITE
-Level: 113
-Level Offset: 13
-Ability: ABILITY_NATURAL_CURE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 252 HP / 0 Atk / 4 Def / 0 SpA / 0 SpD / 252 Spe
-Nature: NATURE_ADAMANT
-- MOVE_RETURN
-- MOVE_DRAGON_DANCE
-- MOVE_ROOST
-- MOVE_PROTECT
 
 === TRAINER_BRENDAN_LILYCOVE_MUDKIP ===
 Name: BRENDAN
@@ -23022,7 +23022,7 @@ Pic: Cooltrainer M
 Gender: Male
 Music: Cool
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
 Prize Multiplier: 10
 
 SPECIES_HEATMOR @ ITEM_LIFE_ORB
@@ -26708,19 +26708,6 @@ Nature: NATURE_TIMID
 - MOVE_ENCORE
 - MOVE_PROTECT
 
-SPECIES_FLYGON @ ITEM_FLYGONITE
-Level: 61
-Level Offset: 1
-Ability: ABILITY_LEVITATE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
-Nature: NATURE_TIMID
-- MOVE_BUG_BUZZ
-- MOVE_DRAGON_PULSE
-- MOVE_TAILWIND
-- MOVE_PROTECT
-
 SPECIES_LILLIGANT @ ITEM_FOCUS_SASH
 Level: 62
 Level Offset: 2
@@ -26732,6 +26719,19 @@ Nature: NATURE_MODEST
 - MOVE_LEAF_STORM
 - MOVE_SLEEP_POWDER
 - MOVE_HELPING_HAND
+- MOVE_PROTECT
+
+SPECIES_FLYGON @ ITEM_FLYGONITE
+Level: 61
+Level Offset: 1
+Ability: ABILITY_LEVITATE
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
+Nature: NATURE_TIMID
+- MOVE_BUG_BUZZ
+- MOVE_DRAGON_PULSE
+- MOVE_TAILWIND
 - MOVE_PROTECT
 
 === TRAINER_MAY_RUSTBORO_TREECKO ===
