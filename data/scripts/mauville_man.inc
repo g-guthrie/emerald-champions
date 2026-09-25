@@ -133,7 +133,7 @@ MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade: @ 828E356
 	.string "I feel unwanted…$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis: @ 828E380
-	.string "You've got all the {STR_VAR_2}S that can\n"
+	.string "You've got all the {STR_VAR_2}s that can\n"
 	.string "be stored. You've no room for this.$"
 
 MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor: @ 828E3C4
@@ -591,12 +591,12 @@ MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle:: @ 828F751
 	.string "The Blend-Loving Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction:: @ 828F76A
-	.string "Made {POKEBLOCK}S$"
+	.string "Made Pokéblocks$"
 
 MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory:: @ 828F776
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This Trainer made {POKEBLOCK}S\n"
+	.string "This Trainer made Pokéblocks\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "There is none better at using a Berry\n"
 	.string "Blender than {STR_VAR_3}!$"

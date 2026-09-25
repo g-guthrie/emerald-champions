@@ -86,14 +86,14 @@ MossdeepCity_House1_Text_WhatsThis:
 	.string "researching Pokémon myths.\p"
 	.string "Have you heard of Navel Rock?\p"
 	.string "It's said that two Legendary Pokémon\n"
-	.string "await a special trainer there.\p"
+	.string "await a special Trainer there.\p"
 	.string "You can get there by taking a\n"
 	.string "Mystic Ticket to the ferry captain.\p"
 	.string "I was going to go myself, but…\n"
 	.string "Strangely, I get the feeling that you\l"
 	.string "should go instead.\p"
 	.string "Of course, there's only one way to\n"
-	.string "decide - with a Pokémon battle!\p"
+	.string "decide: with a Pokémon battle!\p"
 	.string "Would you care to be my opponent?$"
 
 MossdeepCity_House1_Text_BeforeISendOut:

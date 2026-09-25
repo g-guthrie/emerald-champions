@@ -149,7 +149,7 @@ struct Trainer
 
 struct TrainerClass
 {
-    u8 name[13];
+    u8 name[16]; // "Pokémon Trainer", "Pokémon Breeder"
     u8 money;
     u16 ball;
 };

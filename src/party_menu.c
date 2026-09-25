@@ -523,7 +523,7 @@ static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId);
 static u8 CombinedToIndividualPartyId(u8 index);
 static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 
-static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
+static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nAbility to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_DigThroughWall[] = _("Use Dig to open a passage\nthrough this wall?");
@@ -2843,7 +2843,10 @@ void DisplayPartyMenuStdMessage(u32 stringId)
         }
         DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 13);
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
-        AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
+        // "Do what with this Pokémon?" shares the row with the action menu,
+        // so it narrows to fit its window rather than run under the frame.
+        AddTextPrinterParameterized(*windowPtr, GetFontIdToFit(gStringVar4, FONT_NORMAL, 0, GetWindowAttribute(*windowPtr, WINDOW_WIDTH) * 8),
+                                    gStringVar4, 0, 1, 0, 0);
         ScheduleBgCopyTilemapToVram(2);
     }
 }

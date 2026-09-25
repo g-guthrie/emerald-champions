@@ -128,12 +128,12 @@ Route121_SafariZoneEntrance_Text_PCIsFull: @ 82A50E5
 	.string "Your PC Box is full.$"
 
 Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase: @ 82A5105
-	.string "Excuse me!\n"
-	.string "You seem to be without a {POKEBLOCK} Case.\p"
+	.string "Excuse me! You seem to be without\n"
+	.string "a Pokéblock Case.\p"
 	.string "Your Safari Game will be much more\n"
-	.string "fruitful if you use {POKEBLOCK}S.\p"
-	.string "Please come back with a {POKEBLOCK} Case.\p"
-	.string "You may obtain a {POKEBLOCK} Case from\n"
+	.string "fruitful if you use Pokéblocks.\p"
+	.string "Please come back with a Pokéblock Case.\p"
+	.string "You may obtain a Pokéblock Case from\n"
 	.string "the Lilycove Contest Hall.$"
 
 SafariZone_South_Text_StillHaveTimeExit: @ 82A51D4
@@ -167,7 +167,7 @@ SafariZone_South_Text_Man: @ 82A533B
 	.string "live in the outlying areas.$"
 
 SafariZone_Southwest_Text_Woman: @ 82A53B7
-	.string "Sometimes, when I toss a {POKEBLOCK} at\n"
+	.string "Sometimes, when I toss a Pokéblock at\n"
 	.string "Pokémon, it gets ignored.\p"
 	.string "Do Pokémon have likes and dislikes\n"
 	.string "about what they eat?$"
@@ -194,24 +194,24 @@ SafariZone_South_Text_Youngster: @ 82A553E
 
 Route121_SafariZoneEntrance_Text_TrainerTip: @ 82A55BB
 	.string "Safari Zone Trainer Tip!\p"
-	.string "Throw {POKEBLOCK}S at wild Pokémon to make\n"
-	.string "them less likely to flee.$"
+	.string "Throw Pokéblocks at wild Pokémon\n"
+	.string "to make them less likely to flee.$"
 
 SafariZone_Southwest_Text_RestHouseSign: @ 82A5613
 	.string "“Relieve your tired feet.”\n"
 	.string "Rest House$"
 
 SafariZone_RestHouse_Text_Youngster: @ 82A5639
-	.string "I don't have any {POKEBLOCK}S, but I caught\n"
-	.string "a good number of Pokémon.\p"
+	.string "I don't have any Pokéblocks, but\n"
+	.string "I caught a good number of Pokémon.\p"
 	.string "You can improve your chances of making\n"
 	.string "a catch by getting closer to them\l"
 	.string "before throwing a Safari Ball.$"
 
 SafariZone_RestHouse_Text_PsychicM: @ 82A56E1
-	.string "If you use {POKEBLOCK}S, wild Pokémon won't\n"
-	.string "be so quick to run away.\p"
-	.string "It's not much use to give {POKEBLOCK}S to\n"
+	.string "If you use Pokéblocks, wild Pokémon\n"
+	.string "won't be so quick to run away.\p"
+	.string "It's not much use to give Pokéblocks to\n"
 	.string "Pokémon that don't flee easily.$"
 
 SafariZone_RestHouse_Text_FatMan: @ 82A5764

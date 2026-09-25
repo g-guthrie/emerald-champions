@@ -5155,8 +5155,9 @@ u16 SpeciesToPokedexNum(enum Species species)
     }
     else
     {
+        // Species outside the regional dex map to 0, which would print No000.
         species = SpeciesToRegionalPokedexNum(species);
-        if (species <= REGIONAL_DEX_COUNT)
+        if (species != 0 && species <= REGIONAL_DEX_COUNT)
             return species;
         return 0xFFFF;
     }

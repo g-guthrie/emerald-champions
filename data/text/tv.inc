@@ -380,8 +380,8 @@ gTVFanClubOpinionsText00::
 
 gTVFanClubOpinionsText01::
 	.string "We asked {STR_VAR_1}, “When you first\n"
-	.string "laid eyes on your {STR_VAR_2}, what was\l"
-	.string "your initial thought?”\p"
+	.string "laid eyes on your {STR_VAR_2},\l"
+	.string "what was your initial thought?”\p"
 	.string "“{STR_VAR_3}!”\p"
 	.string "Yeahah! That's a mighty fine shout!\p"
 	.string "Doesn't it bring back memories of those\n"
@@ -537,12 +537,12 @@ gTVRecentHappeningsText01::
 	.string "It's as if we were there as witnesses!$"
 
 gTVRecentHappeningsText02::
-	.string "“{STR_VAR_3}.” That\n"
-	.string "accents the tale and gives it depth.$"
+	.string "The bit “{STR_VAR_3}” accents\n"
+	.string "the tale and gives it depth.$"
 
 gTVRecentHappeningsText03::
-	.string "“{STR_VAR_3}.”\n"
-	.string "That gives the tale a sense of place.\l"
+	.string "The mention of “{STR_VAR_3}”\n"
+	.string "gives the tale a sense of place.\l"
 	.string "It lets us envision the tale's setting.$"
 
 gTVRecentHappeningsText04::
@@ -575,8 +575,8 @@ gTVMassOutbreakText00::
 
 gTV3CheersForPokeblocksText00::
 	.string "MC: We hope you're in good cheer,\n"
-	.string "“3 Cheers for {POKEBLOCK}S” is here!\p"
-	.string "Today, we examine the {POKEBLOCK} blended\n"
+	.string "“3 Cheers for Pokéblocks” is here!\p"
+	.string "Today, we examine the Pokéblock blended\n"
 	.string "by {STR_VAR_1} and associates.\p"
 	.string "Without any delay, let me feed it\n"
 	.string "to my gourmet Pokémon Gulpin.\p"
@@ -593,7 +593,7 @@ gTV3CheersForPokeblocksText02::
 	.string "{STR_VAR_1}'s blending performance\n"
 	.string "left something to be desired.\p"
 	.string "If this Trainer could blend better,\n"
-	.string "the {POKEBLOCK} would be much tastier.$"
+	.string "the Pokéblock would be much tastier.$"
 
 gTV3CheersForPokeblocksText03::
 	.string "Gulpin: Gubi! Gubii!\p"
@@ -610,7 +610,7 @@ gTV3CheersForPokeblocksText04::
 
 gTV3CheersForPokeblocksText05::
 	.string "Tune in next time!\n"
-	.string "Our slogan is “3 Cheers for {POKEBLOCK}S!”$"
+	.string "Our slogan is “3 Cheers for Pokéblocks!”$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer::
 	.string "Hi, there!\p"
@@ -2380,12 +2380,12 @@ gTVSafariFanClubText01::
 	.string "{STR_VAR_2} Pokémon.$"
 
 gTVSafariFanClubText02::
-	.string "The Trainer is clever with {POKEBLOCK}S.\n"
+	.string "The Trainer is clever with Pokéblocks.\n"
 	.string "Used {STR_VAR_2} that time, I think.$"
 
 gTVSafariFanClubText03::
 	.string "The Trainer didn't use a single\n"
-	.string "{POKEBLOCK}! Not a one!\p"
+	.string "Pokéblock! Not a one!\p"
 	.string "There's an expert for you.$"
 
 gTVSafariFanClubText04::
@@ -2410,14 +2410,14 @@ gTVSafariFanClubText06::
 	.string "catch one Pokémon. Not a one!$"
 
 gTVSafariFanClubText07::
-	.string "The Trainer does use {POKEBLOCK}S.\n"
+	.string "The Trainer does use Pokéblocks.\n"
 	.string "Used {STR_VAR_2} that time, I think.\p"
 	.string "But, boy, I wish the Trainer would\n"
 	.string "get a bit better at this.$"
 
 gTVSafariFanClubText08::
 	.string "I think the Trainer would have better\n"
-	.string "luck using {POKEBLOCK}S, which weren't\l"
+	.string "luck using Pokéblocks, which weren't\l"
 	.string "used at all that time.$"
 
 gTVSafariFanClubText09::
@@ -2867,10 +2867,11 @@ gTVInSearchOfTrainersText03::
 	.string "{STR_VAR_3}--selflessly supporting\l"
 	.string "each other in the thick of battle…\p"
 	.string "It was a marvelous sight to behold!\p"
-	.string "{STR_VAR_2} was the move the Trainer\n"
-	.string "used last in our battle.\p"
-	.string "The move {STR_VAR_2} is {STR_VAR_1}\n"
-	.string "and {STR_VAR_3}'s sign of friendship!$"
+	.string "{STR_VAR_2} was the last move\n"
+	.string "the Trainer used in our battle.\p"
+	.string "The move {STR_VAR_2} is\n"
+	.string "{STR_VAR_1} and {STR_VAR_3}'s\l"
+	.string "sign of friendship!$"
 
 gTVInSearchOfTrainersText04::
 	.string "…I lost confidence in myself as\n"

@@ -59,11 +59,11 @@ void BufferFieldMoveUnlockRequirement(void)
 {
     static const u8 badgeNames[][14] = {
 #if IS_FRLG
-        _("BOULDER BADGE"), _("CASCADE BADGE"), _("THUNDER BADGE"), _("RAINBOW BADGE"),
-        _("SOUL BADGE"), _("MARSH BADGE"), _("VOLCANO BADGE"), _("EARTH BADGE"),
+        _("Boulder Badge"), _("Cascade Badge"), _("Thunder Badge"), _("Rainbow Badge"),
+        _("Soul Badge"), _("Marsh Badge"), _("Volcano Badge"), _("Earth Badge"),
 #else
-        _("STONE BADGE"), _("KNUCKLE BADGE"), _("DYNAMO BADGE"), _("HEAT BADGE"),
-        _("BALANCE BADGE"), _("FEATHER BADGE"), _("MIND BADGE"), _("RAIN BADGE"),
+        _("Stone Badge"), _("Knuckle Badge"), _("Dynamo Badge"), _("Heat Badge"),
+        _("Balance Badge"), _("Feather Badge"), _("Mind Badge"), _("Rain Badge"),
 #endif
     };
     enum FieldMove fieldMove = gSpecialVar_0x8004;

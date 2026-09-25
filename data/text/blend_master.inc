@@ -36,7 +36,7 @@ BerryBlender_Text_BlendMasterKnowHowToMakePokeblocks:
 	.string "Of course!\n"
 	.string "Of course!\p"
 	.string "Incidentally…\n"
-	.string "You do know how to blend {POKEBLOCK}S\l"
+	.string "You do know how to blend Pokéblocks\l"
 	.string "from Berries?$"
 
 BerryBlender_Text_BlendMasterExplainBerryBlending:
@@ -57,15 +57,15 @@ BerryBlender_Text_BlendMasterLetsBerryBlender:
 BerryBlender_Text_BlendMasterNoPokeblockCase:
 	.string "Hmmm!\p"
 	.string "You don't appear to have gotten\n"
-	.string "the {POKEBLOCK} Case!\p"
-	.string "I shall be here all day!\n"
-	.string "Obtain the {POKEBLOCK} Case and hurry back!$"
+	.string "the Pokéblock Case!\p"
+	.string "I shall be here all day! Obtain\n"
+	.string "the Pokéblock Case and hurry back!$"
 
 BerryBlender_Text_BlendMasterPokeblockCaseFull:
 	.string "Hmmm!\p"
-	.string "Your {POKEBLOCK} Case appears to be full!\p"
+	.string "Your Pokéblock Case appears to be full!\p"
 	.string "I shall be here all day!\n"
-	.string "Use some {POKEBLOCK}S and hurry back!$"
+	.string "Use some Pokéblocks and hurry back!$"
 
 BerryBlender_Text_WhoaAwesome:
 	.string "Whoa!\n"
@@ -79,7 +79,7 @@ BerryBlender_Text_WhatAnExpert:
 
 BerryBlender_Text_MadeAmazingPokeblocksWithMaster:
 	.string "When I blended with the Master,\n"
-	.string "we made amazing {POKEBLOCK}S!$"
+	.string "we made amazing Pokéblocks!$"
 
 BerryBlender_Text_QualitiesOfBlendMaster:
 	.string "Eyes that track the arrow with\n"

@@ -856,7 +856,7 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
 
 static const u8 gText_JustOnePkmn[] = _("There is just one Pokémon with you.");
 static const u8 gText_PartyFull[] = _("Your party is full!");
-static const u8 gText_Box[] = _("Box");
+static const u8 gText_Box[] = _("Box ");
 
 struct {
     const u8 *text;

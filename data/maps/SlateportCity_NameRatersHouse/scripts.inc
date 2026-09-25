@@ -142,16 +142,16 @@ Nature_Changer_Nature_Change::
 
 NatureChanger_Text_Intro:
 	.string "Ohohoho! You are a Trainer, yes?\p"
-	.string "I was once a great {POKEBLOCK}\n"
+	.string "I was once a great Pokéblock\n"
 	.string "chef in Kalos!\p"
-	.string "My special training {POKEBLOCK}s\n"
+	.string "My special training Pokéblocks\n"
 	.string "adjust how a Pokémon's stats grow.\p"
 	.string "For five Oran Berries, I can\n"
 	.string "match that growth to a new Nature.$"
 
 NatureChanger_Text_ChoosePokemon:
 	.string "Which Pokémon shall try my\n"
-	.string "special training {POKEBLOCK}s?$"
+	.string "special training Pokéblocks?$"
 
 NatureChanger_Text_MonHasNature:
 	.string "Ohohoho! {STR_VAR_1}'s stats\n"
@@ -169,7 +169,7 @@ NatureChanger_Text_SomeOtherTime:
 NatureChanger_Text_ThisIsEgg:
 	.string "This is but an Egg!\p"
 	.string "An Egg cannot use my\n"
-	.string "training {POKEBLOCK}s!$"
+	.string "training Pokéblocks!$"
 
 NatureChanger_Text_NeedMoreBerries:
 	.string "I need more Oran Berries than that.\n"
@@ -185,7 +185,7 @@ NatureChanger_Text_WhichColorDislike:
 
 NatureChanger_Text_SpecialPokeblock:
 	.string "Ohohoho! I will make a special\n"
-	.string "training {POKEBLOCK} from your Berries.\p"
+	.string "training Pokéblock from your Berries.\p"
 	.string "Wait just a moment…$"
 
 NatureChanger_Text_Pause:
@@ -203,6 +203,6 @@ NatureChanger_Text_ItIsDone:
 
 NatureChanger_Text_MonHasNature1:
 	.string "{STR_VAR_1} ate the special\n"
-	.string "training {POKEBLOCK}.\p"
+	.string "training Pokéblock.\p"
 	.string "Its stats now grow like a\n"
 	.string "{STR_VAR_2} Nature!$"

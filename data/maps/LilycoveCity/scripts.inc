@@ -783,12 +783,12 @@ LilycoveCity_Text_FasterSpinBetterPokeblocks: @ 81E47A1
 	.string "People have to work together to get it\n"
 	.string "to spin faster.\p"
 	.string "The faster you can make it spin, the\n"
-	.string "better {POKEBLOCK}S you can get, I've heard.$"
+	.string "better the Pokéblocks, I've heard.$"
 
 LilycoveCity_Text_ExplainBerryBlender: @ 81E4824
 	.string "It's used for making a kind of candy\n"
-	.string "called a {POKEBLOCK}.\p"
-	.string "If you give a good {POKEBLOCK} to a Pokémon,\n"
+	.string "called a Pokéblock.\p"
+	.string "If you give a Pokémon a good Pokéblock,\n"
 	.string "its condition will improve by a lot.$"
 
 LilycoveCity_Text_HeardTowerCalledSkyPillar: @ 81E48A5

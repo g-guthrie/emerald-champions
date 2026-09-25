@@ -181,8 +181,8 @@ static const u8 sText_SoSo[] = _("So-so");
 static const u8 sText_Bad[] = _("Bad");
 static const u8 sText_TheWorst[] = _("The worst");
 
-static const u8 sText_Slots[] = _("SLOTS");
-static const u8 sText_Roulette[] = _("ROULETTE");
+static const u8 sText_Slots[] = _("Slots");
+static const u8 sText_Roulette[] = _("Roulette");
 static const u8 sText_Jackpot[] = _("jackpot");
 
 static const u16 sNumberOneVarsAndThresholds[][2] = {
@@ -922,6 +922,7 @@ bool8 GabbyAndTyGetLastQuote(void)
         return FALSE;
     }
     CopyEasyChatWord(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.quote[0]);
+    CapitalizeEasyChatText(gStringVar1);
     gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
     return TRUE;
 }
@@ -4555,11 +4556,13 @@ static void DoTVShowPokemonFanClubLetter(void)
         break;
     case 50:
         ConvertEasyChatWordsToString(gStringVar4, show->fanclubLetter.words, 2, 2);
+        CapitalizeEasyChatText(gStringVar4);
         ShowFieldMessage(gStringVar4);
         sTVShowState = 1;
         return;
     case 51:
         ConvertEasyChatWordsToString(gStringVar4, show->fanclubLetter.words, 2, 2);
+        CapitalizeEasyChatText(gStringVar4);
         ShowFieldMessage(gStringVar4);
         sTVShowState = 3;
         return;
@@ -4595,6 +4598,7 @@ static void DoTVShowRecentHappenings(void)
         break;
     case 50:
         ConvertEasyChatWordsToString(gStringVar4, show->recentHappenings.words, 2, 2);
+        CapitalizeEasyChatText(gStringVar4);
         ShowFieldMessage(gStringVar4);
         sTVShowState = 1;
         return;
@@ -4624,11 +4628,13 @@ static void DoTVShowPokemonFanClubOpinions(void)
         TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
         StringCopy(gStringVar2, GetSpeciesName(show->fanclubOpinions.species));
         CopyEasyChatWord(gStringVar3, show->fanclubOpinions.words[0]);
+        CapitalizeEasyChatText(gStringVar3);
         sTVShowState = 4;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
         CopyEasyChatWord(gStringVar3, show->fanclubOpinions.words[1]);
+        CapitalizeEasyChatText(gStringVar3);
         TVShowDone();
         break;
     }
@@ -5166,6 +5172,7 @@ void DoTVShowInSearchOfTrainers(void)
         break;
     case 8:
         CopyEasyChatWord(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.quote[0]);
+        CapitalizeEasyChatText(gStringVar1);
         StringCopy(gStringVar2, GetSpeciesName(gSaveBlock1Ptr->gabbyAndTyData.mon1));
         StringCopy(gStringVar3, GetSpeciesName(gSaveBlock1Ptr->gabbyAndTyData.mon2));
         gSpecialVar_Result = TRUE;
@@ -5794,6 +5801,7 @@ static void DoTVShowTrainerFanClubSpecial(void)
         TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
         TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
         CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
+        CapitalizeEasyChatText(gStringVar3);
         if (show->fanClubSpecial.score >= 90)
             sTVShowState = 1;
         else if (show->fanClubSpecial.score >= 70)
@@ -5831,6 +5839,7 @@ static void DoTVShowTrainerFanClubSpecial(void)
         TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
         TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
         CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
+        CapitalizeEasyChatText(gStringVar3);
         TVShowDone();
         break;
     }

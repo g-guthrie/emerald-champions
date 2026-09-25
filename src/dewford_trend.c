@@ -291,6 +291,7 @@ void BufferTrendyPhraseString(void)
 {
     struct DewfordTrend *trend = &gSaveBlock1Ptr->dewfordTrends[gSpecialVar_0x8004];
     ConvertEasyChatWordsToString(gStringVar1, trend->words, 2, 1);
+    CapitalizeEasyChatText(gStringVar1);
 }
 
 // Returns TRUE if the current trendy phrase is "boring", FALSE otherwise

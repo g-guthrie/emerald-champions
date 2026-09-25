@@ -5177,7 +5177,7 @@ u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord)
     {
         u16 index = EC_INDEX(easyChatWord);
         u8 groupId = EC_GROUP(easyChatWord);
-        resultStr = StringCopyUppercase(dest, GetEasyChatWord(groupId, index));
+        resultStr = StringCopy(dest, GetEasyChatWord(groupId, index));
     }
     else
     {
@@ -5186,6 +5186,14 @@ u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord)
     }
 
     return resultStr;
+}
+
+// Easy Chat words are stored in mixed case with ordinary words in lowercase.
+// Dialogue that quotes a word as speech or as a catchphrase capitalizes it.
+void CapitalizeEasyChatText(u8 *str)
+{
+    if (*str >= CHAR_a && *str <= CHAR_z)
+        *str += CHAR_A - CHAR_a;
 }
 
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
@@ -5315,6 +5323,7 @@ void ShowEasyChatProfile(void)
     }
 
     ConvertEasyChatWordsToString(gStringVar4, easyChatWords, columns, rows);
+    CapitalizeEasyChatText(gStringVar4);
     ShowFieldAutoScrollMessage(gStringVar4);
 }
 
@@ -5324,6 +5333,7 @@ void BufferDeepLinkPhrase(void)
     int groupId = Random() & 1 ? EC_GROUP_HOBBIES : EC_GROUP_LIFESTYLE;
     u16 easyChatWord = GetRandomEasyChatWordFromUnlockedGroup(groupId);
     CopyEasyChatWord(gStringVar2, easyChatWord);
+    CapitalizeEasyChatText(gStringVar2);
 }
 
 /*

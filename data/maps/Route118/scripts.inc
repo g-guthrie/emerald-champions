@@ -269,8 +269,8 @@ Route118_Text_MagikarpDefeat:
 	.string "Ah! Your love for Magikarp is clear!$"
 
 Route118_Text_TakeGyaradosite:
-	.string "Here, take this Gyaradosite - you\n"
-	.string "earned it!$"
+	.string "Here, take this Gyaradosite.\n"
+	.string "You earned it!$"
 
 Route118_Text_KarpBetterThanGyara:
 	.string "Gyarados might not be Magikarp, but\n"

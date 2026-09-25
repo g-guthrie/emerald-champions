@@ -130,7 +130,7 @@ static void ReturnToPokeblockCaseOnField(void);
 static void CreateTossPokeblockYesNoMenu(u8);
 static void TossPokeblock(u8);
 
-static const u8 sText_StowCase[] = _("Stow CASE.");
+static const u8 sText_StowCase[] = _("Stow Case.");
 static const u8 sText_LvVar1[] = _("{LV}{STR_VAR_1}");
 static const u8 sText_ThrowAwayVar1[] = _("Throw away this\n{STR_VAR_1}?");
 static const u8 sText_Var1ThrownAway[] = _("The {STR_VAR_1}\nwas thrown away.");
@@ -202,20 +202,20 @@ static const struct BgTemplate sBgTemplatesForPokeblockMenu[] =
 const u8 *const gPokeblockNames[] =
 {
     [PBLOCK_CLR_NONE]      = NULL,
-    [PBLOCK_CLR_RED]       = COMPOUND_STRING("RED {POKEBLOCK}"),
-    [PBLOCK_CLR_BLUE]      = COMPOUND_STRING("BLUE {POKEBLOCK}"),
-    [PBLOCK_CLR_PINK]      = COMPOUND_STRING("PINK {POKEBLOCK}"),
-    [PBLOCK_CLR_GREEN]     = COMPOUND_STRING("GREEN {POKEBLOCK}"),
-    [PBLOCK_CLR_YELLOW]    = COMPOUND_STRING("YELLOW {POKEBLOCK}"),
-    [PBLOCK_CLR_PURPLE]    = COMPOUND_STRING("PURPLE {POKEBLOCK}"),
-    [PBLOCK_CLR_INDIGO]    = COMPOUND_STRING("INDIGO {POKEBLOCK}"),
-    [PBLOCK_CLR_BROWN]     = COMPOUND_STRING("BROWN {POKEBLOCK}"),
-    [PBLOCK_CLR_LITE_BLUE] = COMPOUND_STRING("LITEBLUE {POKEBLOCK}"),
-    [PBLOCK_CLR_OLIVE]     = COMPOUND_STRING("OLIVE {POKEBLOCK}"),
-    [PBLOCK_CLR_GRAY]      = COMPOUND_STRING("GRAY {POKEBLOCK}"),
-    [PBLOCK_CLR_BLACK]     = COMPOUND_STRING("BLACK {POKEBLOCK}"),
-    [PBLOCK_CLR_WHITE]     = COMPOUND_STRING("WHITE {POKEBLOCK}"),
-    [PBLOCK_CLR_GOLD]      = COMPOUND_STRING("GOLD {POKEBLOCK}")
+    [PBLOCK_CLR_RED]       = COMPOUND_STRING("Red Pokéblock"),
+    [PBLOCK_CLR_BLUE]      = COMPOUND_STRING("Blue Pokéblock"),
+    [PBLOCK_CLR_PINK]      = COMPOUND_STRING("Pink Pokéblock"),
+    [PBLOCK_CLR_GREEN]     = COMPOUND_STRING("Green Pokéblock"),
+    [PBLOCK_CLR_YELLOW]    = COMPOUND_STRING("Yellow Pokéblock"),
+    [PBLOCK_CLR_PURPLE]    = COMPOUND_STRING("Purple Pokéblock"),
+    [PBLOCK_CLR_INDIGO]    = COMPOUND_STRING("Indigo Pokéblock"),
+    [PBLOCK_CLR_BROWN]     = COMPOUND_STRING("Brown Pokéblock"),
+    [PBLOCK_CLR_LITE_BLUE] = COMPOUND_STRING("Sky Blue Pokéblock"),
+    [PBLOCK_CLR_OLIVE]     = COMPOUND_STRING("Olive Pokéblock"),
+    [PBLOCK_CLR_GRAY]      = COMPOUND_STRING("Gray Pokéblock"),
+    [PBLOCK_CLR_BLACK]     = COMPOUND_STRING("Black Pokéblock"),
+    [PBLOCK_CLR_WHITE]     = COMPOUND_STRING("White Pokéblock"),
+    [PBLOCK_CLR_GOLD]      = COMPOUND_STRING("Gold Pokéblock")
 };
 
 static const struct MenuAction sPokeblockMenuActions[] =
@@ -702,13 +702,15 @@ static void DrawPokeblockMenuTitleText(void)
     u8 i;
 
     const u8 *itemName = GetItemName(ITEM_POKEBLOCK_CASE);
-    PrintOnPokeblockWindow(WIN_TITLE, itemName, GetStringCenterAlignXOffset(FONT_NORMAL, itemName, 0x48));
+    // "Pokéblock Case" is wider than the 72px title plate in the normal font.
+    u32 titleFontId = GetFontIdToFit(itemName, FONT_NORMAL, 0, 0x48);
+    AddTextPrinterParameterized4(WIN_TITLE, titleFontId, GetStringCenterAlignXOffset(titleFontId, itemName, 0x48), 1, 0, 0, sTextColor, 0, itemName);
 
-    PrintOnPokeblockWindow(WIN_SPICY,  COMPOUND_STRING("SPICY"),  0);
-    PrintOnPokeblockWindow(WIN_DRY,    COMPOUND_STRING("DRY"),    0);
-    PrintOnPokeblockWindow(WIN_SWEET,  COMPOUND_STRING("SWEET"),  0);
-    PrintOnPokeblockWindow(WIN_BITTER, COMPOUND_STRING("BITTER"), 0);
-    PrintOnPokeblockWindow(WIN_SOUR,   COMPOUND_STRING("SOUR"),   0);
+    PrintOnPokeblockWindow(WIN_SPICY,  COMPOUND_STRING("Spicy"),  0);
+    PrintOnPokeblockWindow(WIN_DRY,    COMPOUND_STRING("Dry"),    0);
+    PrintOnPokeblockWindow(WIN_SWEET,  COMPOUND_STRING("Sweet"),  0);
+    PrintOnPokeblockWindow(WIN_BITTER, COMPOUND_STRING("Bitter"), 0);
+    PrintOnPokeblockWindow(WIN_SOUR,   COMPOUND_STRING("Sour"),   0);
 
     for (i = 0; i < WIN_ACTIONS_TALL; i++)
         PutWindowTilemap(i);

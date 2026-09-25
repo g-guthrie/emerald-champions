@@ -450,7 +450,7 @@ void CB2_FlashNotDetectedScreen(void)
     InitWindows(textWin);
     DrawStdFrameWithCustomTileAndPalette(0, TRUE, 0x214, 0xE);
     static const u8 saveFailedMessage[] =_(
-        "{COLOR RED}ERROR! {COLOR DARK_GRAY}Flash memory not detected!\n"
+        "{COLOR RED}Error! {COLOR DARK_GRAY}Flash memory not detected!\n"
         "\n"
         "If playing on an emulator, set your\n"
         "save type setting to\n"

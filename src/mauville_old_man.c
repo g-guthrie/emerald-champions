@@ -295,6 +295,7 @@ void GenerateGiddyLine(void)
         adjective %= ARRAY_COUNT(sGiddyAdjectives);
 
         stringPtr = CopyEasyChatWord(gStringVar4, giddy->randomWords[giddy->taleCounter]);
+        CapitalizeEasyChatText(gStringVar4);
         stringPtr = StringCopy(stringPtr, GiddyText_Is);
         stringPtr = StringCopy(stringPtr, sGiddyAdjectives[adjective]);
         StringCopy(stringPtr, GiddyText_DontYouAgree);

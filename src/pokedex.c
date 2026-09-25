@@ -2307,6 +2307,7 @@ void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
     u8 text[7];
     u16 dexNum;
+    u32 fontId = FONT_NARROW;
     // {NO} occupies two encoded bytes.  Inclement writes the first digit
     // after both bytes so the list renders as No001 rather than overwriting
     // the control sequence.
@@ -2315,11 +2316,14 @@ void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToRegionalOrder(dexNum);
-    if (dexNum > 999)
+    // National numbers use four digits throughout, as on the info page.
+    if (dexNum > 999 || (NATIONAL_DEX_COUNT > 999 && sPokedexView->dexMode != DEX_MODE_HOENN))
     {
         memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
         text[offset] = CHAR_0 + dexNum / 1000;
         offset++;
+        // The fourth digit would meet the name; the narrower digits keep the gap.
+        fontId = FONT_NARROWER;
     }
     else
     {
@@ -2336,7 +2340,7 @@ void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
             text[i] = CHAR_HYPHEN;
     }
 
-    PrintMonDexNum(0, FONT_NARROW, text, left, top);
+    PrintMonDexNum(0, fontId, text, left, top);
 }
 
 void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 unused)

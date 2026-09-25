@@ -570,6 +570,7 @@ static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest)
         // Replace \n with \l at the end of line 2
         dest[i] = CHAR_PROMPT_SCROLL;
     }
+    CapitalizeEasyChatText(dest);
 }
 
 static void BufferTowerOpponentSpeech(void)

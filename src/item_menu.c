@@ -296,12 +296,12 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_GIVE]              = {gMenuText_Give,               {ItemMenu_Give}},
     [ACTION_CANCEL]            = {gText_Cancel2,                {ItemMenu_Cancel}},
     [ACTION_BATTLE_USE]        = {gMenuText_Use,                {ItemMenu_UseInBattle}},
-    [ACTION_CHECK]             = {COMPOUND_STRING("CHECK"),     {ItemMenu_UseOutOfBattle}},
-    [ACTION_WALK]              = {COMPOUND_STRING("WALK"),      {ItemMenu_UseOutOfBattle}},
-    [ACTION_DESELECT]          = {COMPOUND_STRING("DESELECT"),  {ItemMenu_Deselect}},
-    [ACTION_CHECK_TAG]         = {COMPOUND_STRING("CHECK TAG"), {ItemMenu_CheckTag}},
+    [ACTION_CHECK]             = {COMPOUND_STRING("Check"),     {ItemMenu_UseOutOfBattle}},
+    [ACTION_WALK]              = {COMPOUND_STRING("Walk"),      {ItemMenu_UseOutOfBattle}},
+    [ACTION_DESELECT]          = {COMPOUND_STRING("Deselect"),  {ItemMenu_Deselect}},
+    [ACTION_CHECK_TAG]         = {COMPOUND_STRING("Check Tag"), {ItemMenu_CheckTag}},
     [ACTION_CONFIRM]           = {gMenuText_Confirm,            {Task_FadeAndCloseBagMenu}},
-    [ACTION_SHOW]              = {COMPOUND_STRING("SHOW"),      {ItemMenu_Show}},
+    [ACTION_SHOW]              = {COMPOUND_STRING("Show"),      {ItemMenu_Show}},
     [ACTION_GIVE_FAVOR_LADY]   = {gMenuText_Give2,              {ItemMenu_GiveFavorLady}},
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,            {ItemMenu_ConfirmQuizLady}},
     [ACTION_BY_NAME]           = {COMPOUND_STRING("Name"),      {ItemMenu_SortByName}},
@@ -2613,14 +2613,14 @@ static void PrintPocketNames(const u8 *pocketName1, const u8 *pocketName2)
     windowId = AddWindow(&window);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     // Each pocket name owns a 64px half of the switch-animation strip. Long
-    // Inclement names such as "Held Items" fall back to the narrow font the
-    // same way the Pokédex list does, instead of dropping their space.
-    fontId = GetFontIdToFit(pocketName1, FONT_NORMAL, 0, 0x40);
+    // Inclement names such as "Mega Stones" fall back to the narrow font the
+    // same way the Pokédex list does, keeping clear of the switch arrows.
+    fontId = GetFontIdToFit(pocketName1, FONT_NORMAL, 0, 0x40 - 4);
     offset = GetStringCenterAlignXOffset(fontId, pocketName1, 0x40);
     BagMenu_Print(windowId, fontId, pocketName1, offset, 1, 0, 0, TEXT_SKIP_DRAW, COLORID_POCKET_NAME);
     if (pocketName2)
     {
-        fontId = GetFontIdToFit(pocketName2, FONT_NORMAL, 0, 0x40);
+        fontId = GetFontIdToFit(pocketName2, FONT_NORMAL, 0, 0x40 - 4);
         offset = GetStringCenterAlignXOffset(fontId, pocketName2, 0x40);
         BagMenu_Print(windowId, fontId, pocketName2, offset + 0x40, 1, 0, 0, TEXT_SKIP_DRAW, COLORID_POCKET_NAME);
     }

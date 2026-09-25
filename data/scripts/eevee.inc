@@ -56,7 +56,7 @@ EventScript_Eevee_SelectedMonIsEgg::
     end
 
 Eevee_Text_HaveAnEevee:
-    .string "Do you have an Eeveelution - that is,\n"
+    .string "Do you have an Eeveelution? That is,\n"
     .string "a Pokémon that evolved from Eevee?$"
 
 Eevee_Text_NoEevee:

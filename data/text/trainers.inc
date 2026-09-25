@@ -76,8 +76,7 @@ Route103_Text_AmyNotEnoughPokemon:
 	.string "You can't battle us like that.$"
 
 Route103_Text_LivIntro:
-	.string "Liv: We battle together as one\n"
-	.string "team.$"
+	.string "Liv: We battle together as one team.$"
 
 Route103_Text_LivDefeated:
 	.string "Liv: Oh, we lost, big sister…$"
@@ -581,8 +580,7 @@ Route111_Text_WiltonPostBattle:
 
 Route111_Text_BrookeIntro:
 	.string "Every partner has a job. Some make\n"
-	.string "an opening; others charge through\l"
-	.string "it.\p"
+	.string "an opening; others charge through it.\p"
 	.string "Which one will you answer first?$"
 
 Route111_Text_BrookeDefeat:
@@ -852,10 +850,9 @@ Route114_Text_CharlottePostBattle:
 
 Route115_Text_TimothyIntro:
 	.string "Hariyama opens with Fake Out.\n"
-	.string "Then Dusclops slows the clock for\l"
-	.string "Conkeldurr.\p"
-	.string "Read the tempo. Then keep me\n"
-	.string "company.$"
+	.string "Then Dusclops slows the clock\l"
+	.string "for Conkeldurr.\p"
+	.string "Read the tempo. Then keep me company.$"
 
 Route115_Text_TimothyDefeat:
 	.string "You set the pace of that match!$"
@@ -1835,8 +1832,7 @@ Route133_Text_WarrenPostBattle:
 
 Route133_Text_MollieIntro:
 	.string "I've battled thousands of times.\n"
-	.string "Gengar remembers every one of\l"
-	.string "them.$"
+	.string "Gengar remembers every one of them.$"
 
 Route133_Text_MollieDefeat:
 	.string "Thousands of losses, and this one\n"

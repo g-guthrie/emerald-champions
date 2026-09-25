@@ -374,8 +374,8 @@ DewfordTown_Hall_Text_TeachingMonAboutTrend: @ 81FD8ED
 DewfordTown_Hall_Text_DeepLinkBetweenXAndY: @ 81FD948
 	.string "I'm studying up on the hip and trendy\n"
 	.string "“{STR_VAR_1}” now.\p"
-	.string "Is it true that there's a deep link\n"
-	.string "between “{STR_VAR_1}”\l"
+	.string "Is it true there's a deep link between\n"
+	.string "“{STR_VAR_1}”\l"
 	.string "and “{STR_VAR_2}”?$"
 
 DewfordTown_Hall_Text_MyHunchWasRight: @ 81FD9B3

@@ -167,9 +167,9 @@ EmeraldChampions_EventScript_BattleVendorExit:
 
 EmeraldChampions_Text_BattleVendorStarterKit:
 	.string "Before you shop, take these.\p"
-	.string "A Choice Band, Choice Specs and\n"
-	.string "Choice Scarf, a Focus Sash and\l"
-	.string "an Eviolite.\p"
+	.string "A Choice Band, Choice Specs,\n"
+	.string "a Choice Scarf, a Focus Sash\l"
+	.string "and an Eviolite.\p"
 	.string "These will help you get started.\n"
 	.string "The rest you buy like anyone else.$"
 

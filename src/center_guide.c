@@ -36,11 +36,11 @@ struct CenterGuideTip
 };
 
 static const u8 sTip_MoveTutor[] = _("Every Pokémon Center has a Move\nTutor. No machines needed!\pBring any Pokémon, and the Tutor\nwill teach it any move it can learn.");
-static const u8 sTip_TrickHouse[] = _("The Trick Master hides in his\nhouse on Route 110. Find him,\lsolve his maze and claim a\lprize.\pYour third Badge and every one\nafter it open a new puzzle.\lThe last waits until you are\lChampion.");
+static const u8 sTip_TrickHouse[] = _("The Trick Master hides in his\nhouse on Route 110. Find him,\lsolve his maze and claim a prize.\pYour third Badge and every one\nafter it open a new puzzle.\lThe last waits until you are Champion.");
 static const u8 sTip_BlobLost[] = _("A nurse on Route 111, just north\nof Mauville, has lost her\lChansey, Blob.\pHelp catch it, and every nurse\nwill fill your Poké Vial with\lan extra dose.");
 static const u8 sTip_BlobChase[] = _("Blob ran off by the Route 112\ncable car. Follow it down\lJagged Pass, through Ember Path\land into the Ashen Woods.\pCatch it with a Heal Ball.\nVerdanturf's Pokémon Center\lsells them.");
 static const u8 sTip_BlobFound[] = _("You caught Blob! Take it back\nto the nurse on Route 111 for\lyour reward.");
-static const u8 sTip_Desert[] = _("With Go-Goggles from Lavaridge,\nyou can cross the Route 111\ldesert.\pMirage Tower there hides two\nfossils, but it crumbles once\lyou take one.\pDevon's lab in Rustboro can\nrevive fossils.");
+static const u8 sTip_Desert[] = _("With Go-Goggles from Lavaridge,\nyou can cross the Route 111 desert.\pMirage Tower there hides two\nfossils, but it crumbles once\lyou take one.\pDevon's lab in Rustboro can\nrevive fossils.");
 static const u8 sTip_BerryMaster[] = _("The Berry Master lives on\nRoute 123. He hands out\lBerries every day and rewards\lthe Berries you harvest.");
 
 static const struct CenterGuideTip sCenterGuideTips[] =
@@ -124,8 +124,8 @@ static const struct
     {FLAG_RECEIVED_POKENAV, COMPOUND_STRING("Devon's president wants to\nthank you. Visit him on the top\lfloor of Devon Corporation.")},
     {FLAG_DELIVERED_STEVEN_LETTER, COMPOUND_STRING("Mr. Briney, whose cottage is on\nRoute 104, will sail you to\lDewford Town.\pBring the letter to Steven in\nGranite Cave, north of Dewford.")},
     {FLAG_DELIVERED_DEVON_GOODS, COMPOUND_STRING("Mr. Briney can sail you from\nDewford to Slateport City.\pBring the Devon Goods to\nCapt. Stern at the Oceanic\lMuseum there.")},
-    {FLAG_HIDE_SLATEPORT_CITY_BRAWLY, COMPOUND_STRING("Brawly, Dewford's Gym Leader,\nwent to Slateport City. Look\lfor him near the Oceanic\lMuseum.")},
-    {FLAG_BADGE02_GET, COMPOUND_STRING("Brawly is back at the Dewford\nGym. Mr. Briney sails there\lfrom Route 109, just south of\lSlateport.")},
+    {FLAG_HIDE_SLATEPORT_CITY_BRAWLY, COMPOUND_STRING("Brawly, Dewford's Gym Leader,\nwent to Slateport City. Look\lfor him near the Oceanic Museum.")},
+    {FLAG_BADGE02_GET, COMPOUND_STRING("Brawly is back at the Dewford Gym.\nMr. Briney sails there from\lRoute 109, just south of Slateport.")},
     {FLAG_BADGE03_GET, COMPOUND_STRING("Take Route 110 north from\nSlateport to Mauville City.\lWattson leads the Gym there.")},
     {FLAG_MET_ARCHIE_METEOR_FALLS, COMPOUND_STRING("Team Magma is blocking the\ncable car on Route 112.\pGo through Fiery Path to Route\n113, then west to Fallarbor.\lMagma is up to something at\lMeteor Falls on Route 114.")},
     {FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, COMPOUND_STRING("Team Magma has gone up\nMt. Chimney. Ride the cable car\lfrom Route 112 and stop them!")},

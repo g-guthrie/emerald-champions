@@ -6,7 +6,7 @@ Gender: Male
 Music: Male
 
 === PARTNER_STEVEN ===
-Name: STEVEN
+Name: Steven
 Class: Rival
 Pic: Steven
 Gender: Male
@@ -50,7 +50,7 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Protect
 
 === PARTNER_MAY_TREECKO_METEOR_FALLS ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -94,7 +94,7 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Taunt
 
 === PARTNER_MAY_TORCHIC_METEOR_FALLS ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -138,7 +138,7 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Taunt
 
 === PARTNER_MAY_MUDKIP_METEOR_FALLS ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -182,7 +182,7 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Taunt
 
 === PARTNER_BRENDAN_TREECKO_METEOR_FALLS ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -226,7 +226,7 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Taunt
 
 === PARTNER_BRENDAN_TORCHIC_METEOR_FALLS ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -270,7 +270,7 @@ EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Taunt
 
 === PARTNER_BRENDAN_MUDKIP_METEOR_FALLS ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male

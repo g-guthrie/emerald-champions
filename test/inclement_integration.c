@@ -493,7 +493,7 @@ TEST("Inclement integration: locked field message distinguishes badge from autho
     EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
     BufferFieldMoveUnlockRequirement();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
-    EXPECT_EQ(StringCompare(gStringVar2, IS_FRLG ? COMPOUND_STRING("MARSH BADGE") : COMPOUND_STRING("DYNAMO BADGE")), 0);
+    EXPECT_EQ(StringCompare(gStringVar2, IS_FRLG ? COMPOUND_STRING("Marsh Badge") : COMPOUND_STRING("Dynamo Badge")), 0);
     FlagSet(badgeFlag);
     FlagClear(FLAG_RECEIVED_HM_ROCK_SMASH);
     EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH), IS_FRLG);

@@ -1005,11 +1005,11 @@ LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase:: @ 821AD06
 LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase: @ 821AD10
 	.string "Yippee!\p"
 	.string "The lady at the reception counter\n"
-	.string "gave me a case for {POKEBLOCK}s!$"
+	.string "gave me a case for Pokéblocks!$"
 
 LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries: @ 821AD55
-	.string "Make {POKEBLOCK}S and put them in there.\p"
-	.string "When you make a {POKEBLOCK}, everyone\n"
+	.string "Make Pokéblocks and put them in there.\p"
+	.string "When you make a Pokéblock, everyone\n"
 	.string "has to put in a different Berry.$"
 
 LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint: @ 821ADB9
@@ -1099,8 +1099,8 @@ LilycoveCity_ContestLobby_Text_LavishedCareOnMon: @ 821B392
 	.string "Today, victory is mine!$"
 
 LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily: @ 821B3FC
-	.string "I made {POKEBLOCK}S with Mom, Dad, and\n"
+	.string "I made Pokéblocks with Mom, Dad, and\n"
 	.string "Big Sister. They turned out great!\p"
 	.string "I bet you can make smoother, better\n"
-	.string "{POKEBLOCK}s if you have more people.$"
+	.string "Pokéblocks if you have more people.$"
 
