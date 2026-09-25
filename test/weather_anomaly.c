@@ -1,5 +1,6 @@
 #include "global.h"
 #include "caps.h"
+#include "center_guide.h"
 #include "event_data.h"
 #include "field_weather.h"
 #include "legendary_signs.h"
@@ -15,6 +16,7 @@
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/maps.h"
+#include "constants/region_map_sections.h"
 #include "constants/map_types.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
@@ -662,46 +664,53 @@ TEST("Weather anomalies: the Institute report lists each live anomaly and counts
     ResetAnomalyState();
 }
 
-TEST("Weather anomalies: research, Center leads and the route sign follow the storms")
+// Pages through a Center's legend leads until one names the species.
+static bool32 FindCenterLead(u16 mapsec, const u8 *name)
+{
+    u16 savedSection = gMapHeader.regionMapSectionId;
+    bool32 found = FALSE;
+
+    gMapHeader.regionMapSectionId = mapsec;
+    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
+    gSpecialVar_0x8004 = 0;
+    while (!found)
+    {
+        BufferNextCenterLegendaryLead();
+        if (!gSpecialVar_Result)
+            break;
+        found = BufferContains(gStringVar4, name);
+    }
+    gMapHeader.regionMapSectionId = savedSection;
+    return found;
+}
+
+TEST("Weather anomalies: Center leads follow the storms")
 {
     ResetAnomalyState();
-    struct WarpData savedLocation = gSaveBlock1Ptr->location;
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
 
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 2);
+    // Window open, no storm: the lead points at the Weather Institute.
+    EXPECT(FindCenterLead(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Tapu Koko")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("You're ready!")));
 
+    // Its storm is live: the lead sends the player there.
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
-    ResearchSelectedLegendarySign();
+    EXPECT(FindCenterLead(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Tapu Koko")));
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Its storm is raging")));
 
-    // The live anomaly adds one page to its route sign.
-    SetLocation(MAP_ROUTE110);
-    BufferCurrentMapRouteSignSpecies();
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING(" has been sighted in\nthis weather.")));
-    SetLocation(MAP_ROUTE111);
-    BufferCurrentMapRouteSignSpecies();
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING(" has been sighted in")));
-
-    // Gate not met yet, window open: requirements, then the storms line.
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_FINI;
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Seafloor Cavern")));
+    // Gate not met yet, window open: still the storms line.
+    EXPECT(FindCenterLead(MAPSEC_SOOTOPOLIS_CITY, COMPOUND_STRING("Tapu Fini")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
 
-    // Window closed: the ordinary resident text.
+    // Window closed: the ordinary resident line.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_TAPU_KOKO;
-    ResearchSelectedLegendarySign();
+    ClearWeatherAnomalies();
+    EXPECT(FindCenterLead(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Tapu Koko")));
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("You're ready!")));
 
-    gSaveBlock1Ptr->location = savedLocation;
     ResetAnomalyState();
 }

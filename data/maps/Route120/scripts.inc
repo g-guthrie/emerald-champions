@@ -297,21 +297,10 @@ Route120_EventScript_BridgeKecleon:: @ 81F57BC
 
 Route120_EventScript_RouteSignFortree:: @ 81F57C5
 	msgbox Route120_Text_RouteSignFortree, MSGBOX_SIGN
-	goto Route120_EventScript_ShowRouteRoster
+	end
 
 Route120_EventScript_RouteSign121:: @ 81F57CE
 	msgbox Route120_Text_RouteSign121, MSGBOX_SIGN
-	goto Route120_EventScript_ShowRouteRoster
-
-Route120_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_CALYREX
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_OGERPON
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_CELESTEELA
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 Route120_EventScript_Colin:: @ 81F57D7

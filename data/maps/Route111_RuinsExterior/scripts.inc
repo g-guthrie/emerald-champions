@@ -13,7 +13,8 @@ Route111_RuinsExterior_EventScript_Archaeologist::
 	goto_if_eq VAR_RESULT, TRUE, Route111_RuinsExterior_EventScript_CastformReading
 	goto_if_set FLAG_EC_RESOLVED_LANDORUS, Route111_RuinsExterior_EventScript_AfterSurvey
 	msgbox Route111_RuinsExterior_Text_NeedCastform, MSGBOX_DEFAULT
-	goto Route111_RuinsExterior_EventScript_SurveyRoster
+	release
+	end
 
 Route111_RuinsExterior_EventScript_CastformReading::
 	msgbox Route111_RuinsExterior_Text_CastformReading, MSGBOX_DEFAULT
@@ -24,30 +25,22 @@ Route111_RuinsExterior_EventScript_CastformReading::
 	waitmovement 0
 	setflag FLAG_EC_RESOLVED_LANDORUS
 	msgbox Route111_RuinsExterior_Text_LandorusStirs, MSGBOX_DEFAULT
-	goto Route111_RuinsExterior_EventScript_SurveyRoster
+	release
+	end
 
 Route111_RuinsExterior_EventScript_AfterSurvey::
 	msgbox Route111_RuinsExterior_Text_LandorusStirs, MSGBOX_DEFAULT
-	goto Route111_RuinsExterior_EventScript_SurveyRoster
+	release
+	end
 
 Route111_RuinsExterior_EventScript_LandorusCaught::
 	msgbox Route111_RuinsExterior_Text_LandorusCaught, MSGBOX_DEFAULT
-	goto Route111_RuinsExterior_EventScript_SurveyRoster
+	release
+	end
 
 Route111_RuinsExterior_EventScript_NotYet::
 	msgbox Route111_RuinsExterior_Text_NotYet, MSGBOX_DEFAULT
-	goto Route111_RuinsExterior_EventScript_SurveyRoster
-
-@ These ruins have no route sign, so the archaeologist reads out the
-@ survey: the ordinary roster, then one requirement page per legend.
-Route111_RuinsExterior_EventScript_SurveyRoster::
-	msgbox Route111_RuinsExterior_Text_SurveyLog, MSGBOX_DEFAULT
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_LANDORUS
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_STAKATAKA
-	call Common_EventScript_ShowRouteLegend
-	releaseall
+	release
 	end
 
 Route111_RuinsExterior_Text_NeedCastform:
@@ -69,10 +62,6 @@ Route111_RuinsExterior_Text_LandorusStirs:
 Route111_RuinsExterior_Text_LandorusCaught:
 	.string "Landorus travels with you now.\n"
 	.string "These ruins have told their story.$"
-
-Route111_RuinsExterior_Text_SurveyLog:
-	.string "Here's what my survey has logged\n"
-	.string "around these ruins so far.$"
 
 Route111_RuinsExterior_Text_NotYet:
 	.string "I'm surveying these ruins. The\n"

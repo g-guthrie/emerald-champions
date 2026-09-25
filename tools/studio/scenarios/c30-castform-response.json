@@ -13,7 +13,7 @@
       "every": 100,
       "frames": 4000,
       "until": "idle",
-      "label": "Castform reading and survey roster closed"
+      "label": "Castform reading closed"
     }
   ],
   "expect": {

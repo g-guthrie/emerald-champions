@@ -98,7 +98,7 @@ Route110_EventScript_Boy2:: @ 81EF338
 
 Route110_EventScript_SlateportCitySign:: @ 81EF341
 	msgbox Route110_Text_SlateportCitySign, MSGBOX_SIGN
-	goto Route110_EventScript_ShowRouteRoster
+	end
 
 Route110_EventScript_CyclingRoadSign:: @ 81EF34A
 	msgbox Route110_Text_CyclingRoadSign, MSGBOX_SIGN
@@ -110,7 +110,7 @@ Route110_EventScript_VandalizedSign:: @ 81EF353
 
 Route110_EventScript_Route103Sign:: @ 81EF35C
 	msgbox Route110_Text_Route103Sign, MSGBOX_SIGN
-	goto Route110_EventScript_ShowRouteRoster
+	end
 
 Route110_EventScript_SeasideParkingSign:: @ 81EF365
 	msgbox Route110_Text_SeasideParkingSign, MSGBOX_SIGN
@@ -118,15 +118,6 @@ Route110_EventScript_SeasideParkingSign:: @ 81EF365
 
 Route110_EventScript_MauvilleCitySign:: @ 81EF36E
 	msgbox Route110_Text_MauvilleCitySign, MSGBOX_SIGN
-	goto Route110_EventScript_ShowRouteRoster
-
-Route110_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_RAIKOU
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_TAPU_KOKO
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 Route110_EventScript_TrainerTipsPrlzSleep:: @ 81EF377

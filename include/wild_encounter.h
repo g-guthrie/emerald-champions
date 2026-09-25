@@ -86,7 +86,10 @@ u32 ChooseWildMonIndex_Rocks(const struct WildPokemonInfo *info);
 u32 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
-void BufferCurrentMapRouteSignSpecies(void);
+struct MapHeader;
+bool32 MapHeaderHasCutTrees(const struct MapHeader *header);
+bool32 IsCutTreeHabitatSpecies(enum Species species);
+bool32 IsDexNavSearchableSpecies(enum Species species);
 
 u8 GetLandEncounterSlotForMatchCall(const struct WildPokemonInfo *info);
 u8 GetWaterEncounterSlotForMatchCall(const struct WildPokemonInfo *info);

@@ -79,15 +79,6 @@ Route112_EventScript_MtChimneySign:: @ 81F1E4F
 
 Route112_EventScript_RouteSignLavaridge:: @ 81F1E58
 	msgbox Route112_Text_RouteSignLavaridge, MSGBOX_SIGN
-	goto Route112_EventScript_ShowRouteRoster
-
-Route112_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_ZAPDOS_GALAR
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_ZEKROM
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 Route112_EventScript_Hiker:: @ 81F1E61

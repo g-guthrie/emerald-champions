@@ -63,6 +63,16 @@ static bool32 IsWildSlotLive(enum Species species)
     return IsWildSlotSpeciesAcquirable(species) && !IsWeatherAnomalyVisitorSlotInert(species);
 }
 
+// DexNav lists and searches a map's ordinary residents only. Legendary,
+// Mythical, Ultra Beast and Paradox slots keep their authored rarity, so
+// DexNav never targets them, live or not; the live-slot rule still applies.
+bool32 IsDexNavSearchableSpecies(enum Species species)
+{
+    return species != SPECIES_NONE && species < NUM_SPECIES
+        && GetRestrictedPartyClass(species) == RESTRICTED_PARTY_NONE
+        && IsWildSlotLive(species);
+}
+
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, enum Species species, enum WildPokemonArea area);
@@ -79,31 +89,6 @@ EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
 
 #include "data/wild_encounters.h"
-
-#define ROUTE_SIGN_MAX_METHOD_SPECIES NUM_LAND_MONS_ENCOUNTER_SLOTS
-#define ROUTE_SIGN_MAX_LINE_WIDTH 200
-
-struct RouteSignSpecies
-{
-    enum Species species;
-};
-
-static const u8 sText_RouteSignSpeciesHeader[] = _("Pokémon found here:");
-static const u8 sText_RouteSignSpeciesSeparator[] = _(", ");
-static const u8 sText_RouteSignSpeciesComma[] = _(",");
-static const u8 sText_RouteSignSpeciesNewLine[] = _("\n");
-static const u8 sText_RouteSignSpeciesLineBreak[] = _("\l");
-static const u8 sText_RouteSignSpeciesPageBreak[] = _("\p");
-static const u8 sText_RouteSignNoSpecies[] = _("No wild Pokémon are found here.");
-static const u8 sText_RouteSignGrass[] = _("Grass: ");
-static const u8 sText_RouteSignSurf[] = _("Surf: ");
-static const u8 sText_RouteSignRockSmash[] = _("Rock Smash: ");
-static const u8 sText_RouteSignOldRod[] = _("Old Rod: ");
-static const u8 sText_RouteSignGoodRod[] = _("Good Rod: ");
-static const u8 sText_RouteSignSuperRod[] = _("Super Rod: ");
-static const u8 sText_RouteSignHoney[] = _("Honey: ");
-static const u8 sText_RouteSignHidden[] = _("Hidden: ");
-static const u8 sText_RouteSignCutTrees[] = _("Cut trees: ");
 
 // Every Cut tree in the wild shares this one habitat, and these six species
 // live nowhere else (scripts/verify_wild_distribution.py reads this table and
@@ -143,6 +128,14 @@ enum Species GetCutTreeSlotSpecies(u32 slot)
     return slot < ARRAY_COUNT(sCutTreeHabitat) ? sCutTreeHabitat[slot].species : SPECIES_NONE;
 }
 
+bool32 IsCutTreeHabitatSpecies(enum Species species)
+{
+    for (u32 slot = 0; slot < ARRAY_COUNT(sCutTreeHabitat); slot++)
+        if (sCutTreeHabitat[slot].species == species)
+            return TRUE;
+    return FALSE;
+}
+
 u32 GetCutTreeSlotOdds(u32 slot)
 {
     return slot < ARRAY_COUNT(sCutTreeHabitat) ? sCutTreeHabitat[slot].odds : 0;
@@ -170,12 +163,11 @@ u8 GetCutTreeEncounterLevelFromRoll(u32 roll)
     return low + roll % (high - low + 1);
 }
 
-// Does the map the player stands on have a Cut tree? The sign roster lists
-// the tree habitat only where a tree grows.
-static bool32 CurrentMapHasCutTrees(void)
+// Does this map have a Cut tree? The Pokedex area page marks the tree
+// habitat wherever one grows.
+bool32 MapHeaderHasCutTrees(const struct MapHeader *header)
 {
-    const struct MapEvents *events = Overworld_GetMapHeaderByGroupAndId(
-        gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->events;
+    const struct MapEvents *events = header->events;
 
     if (events == NULL)
         return FALSE;
@@ -185,219 +177,6 @@ static bool32 CurrentMapHasCutTrees(void)
             return TRUE;
     }
     return FALSE;
-}
-
-static u8 CollectRouteSignSpecies(
-    struct RouteSignSpecies *entries,
-    const struct WildPokemonInfo *info,
-    u8 firstSlot,
-    u8 slotCount)
-{
-    u8 count = 0;
-
-    if (info == NULL)
-        return 0;
-    for (u32 i = 0; i < slotCount; i++)
-    {
-        enum Species species = info->wildPokemon[firstSlot + i].species;
-        u32 j;
-
-        if (species == SPECIES_NONE || species >= NUM_SPECIES)
-            continue;
-        for (j = 0; j < count; j++)
-            // Forms that share a display name (Pumpkaboo sizes) list once.
-            if (entries[j].species == species
-             || StringCompare(GetLegendaryDisplayName(entries[j].species), GetLegendaryDisplayName(species)) == 0)
-                break;
-        if (j == count && count < ROUTE_SIGN_MAX_METHOD_SPECIES)
-            entries[count++].species = species;
-    }
-    return count;
-}
-
-static u8 *AppendRouteSignMethod(
-    u8 *dest,
-    const u8 *methodName,
-    const struct RouteSignSpecies *entries,
-    u8 count,
-    bool32 *hasMethod,
-    bool32 *hasLegend)
-{
-    bool32 firstName = TRUE;
-    u16 lineWidth;
-
-    if (count == 0)
-        return dest;
-    dest = StringCopy(dest, *hasMethod ? sText_RouteSignSpeciesPageBreak : sText_RouteSignSpeciesNewLine);
-    dest = StringCopy(dest, methodName);
-    lineWidth = GetStringWidth(FONT_NORMAL, methodName, 0);
-    for (u32 i = 0; i < count; i++)
-    {
-        u8 name[64];
-        enum LegendarySignId id = GetLegendarySignIdBySpecies(entries[i].species);
-        if (IsLegendaryEncounterSpecies(entries[i].species))
-            *hasLegend = TRUE;
-        StringCopy(name, GetLegendaryDisplayName(entries[i].species));
-        if (id < LEGENDARY_SIGN_COUNT && IsLegendarySignCaught(id))
-            StringAppend(name, COMPOUND_STRING(" (Caught)"));
-        u16 nameWidth = GetStringWidth(FONT_NORMAL, name, 0);
-        u16 separatorWidth = firstName ? 0 : GetStringWidth(FONT_NORMAL, sText_RouteSignSpeciesSeparator, 0);
-
-        // Reserve the comma that will end this line if the next name wraps.
-        u16 trailingWidth = i + 1 < count ? GetStringWidth(FONT_NORMAL, sText_RouteSignSpeciesComma, 0) : 0;
-        if (lineWidth + separatorWidth + nameWidth + trailingWidth > ROUTE_SIGN_MAX_LINE_WIDTH)
-        {
-            if (!firstName)
-                dest = StringCopy(dest, sText_RouteSignSpeciesComma);
-            dest = StringCopy(dest, sText_RouteSignSpeciesLineBreak);
-            lineWidth = 0;
-            firstName = TRUE;
-        }
-        if (!firstName)
-        {
-            dest = StringCopy(dest, sText_RouteSignSpeciesSeparator);
-            lineWidth += separatorWidth;
-        }
-        dest = StringCopy(dest, name);
-        lineWidth += nameWidth;
-        firstName = FALSE;
-    }
-    *hasMethod = TRUE;
-    return dest;
-}
-
-static const struct WildPokemonInfo *GetRouteSignInfo(u32 headerId, enum WildPokemonArea area)
-{
-    enum TimeOfDay time = GetTimeOfDayForEncounters(headerId, area);
-    const struct WildEncounterTypes *types = &gWildMonHeaders[headerId].encounterTypes[time];
-
-    switch (area)
-    {
-    case WILD_AREA_LAND:
-        return types->landMonsInfo;
-    case WILD_AREA_WATER:
-        return types->waterMonsInfo;
-    case WILD_AREA_ROCKS:
-        return types->rockSmashMonsInfo;
-    case WILD_AREA_FISHING:
-        return types->fishingMonsInfo;
-    case WILD_AREA_HIDDEN:
-        return types->hiddenMonsInfo;
-    case WILD_AREA_HONEY:
-        return types->honeyMonsInfo;
-    default:
-        return NULL;
-    }
-}
-
-void BufferCurrentMapRouteSignSpecies(void)
-{
-    struct RouteSignSpecies entries[ROUTE_SIGN_MAX_METHOD_SPECIES];
-    u32 headerId = GetCurrentMapWildMonHeaderId();
-    bool32 hasMethod = FALSE, hasLegend = FALSE;
-    u8 *dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);
-
-    if (headerId != HEADER_NONE)
-    {
-        const struct WildPokemonInfo *info;
-        u8 count;
-
-        info = GetRouteSignInfo(headerId, WILD_AREA_LAND);
-        count = CollectRouteSignSpecies(entries, info, 0, NUM_LAND_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignGrass, entries, count, &hasMethod, &hasLegend);
-        info = GetRouteSignInfo(headerId, WILD_AREA_WATER);
-        count = CollectRouteSignSpecies(entries, info, 0, NUM_WATER_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignSurf, entries, count, &hasMethod, &hasLegend);
-        info = GetRouteSignInfo(headerId, WILD_AREA_ROCKS);
-        count = CollectRouteSignSpecies(entries, info, 0, NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignRockSmash, entries, count, &hasMethod, &hasLegend);
-        info = GetRouteSignInfo(headerId, WILD_AREA_FISHING);
-        count = CollectRouteSignSpecies(entries, info, 0, 2);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignOldRod, entries, count, &hasMethod, &hasLegend);
-        count = CollectRouteSignSpecies(entries, info, 2, 3);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignGoodRod, entries, count, &hasMethod, &hasLegend);
-        count = CollectRouteSignSpecies(entries, info, 5, 5);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignSuperRod, entries, count, &hasMethod, &hasLegend);
-        info = GetRouteSignInfo(headerId, WILD_AREA_HONEY);
-        count = CollectRouteSignSpecies(entries, info, 0, NUM_HONEY_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignHoney, entries, count, &hasMethod, &hasLegend);
-        if (DEXNAV_ENABLED)
-        {
-            info = GetRouteSignInfo(headerId, WILD_AREA_HIDDEN);
-            count = CollectRouteSignSpecies(entries, info, 0, NUM_HIDDEN_MONS_ENCOUNTER_SLOTS);
-            dest = AppendRouteSignMethod(dest, sText_RouteSignHidden, entries, count, &hasMethod, &hasLegend);
-        }
-        if (CurrentMapHasCutTrees())
-        {
-            for (count = 0; count < ARRAY_COUNT(sCutTreeHabitat); count++)
-                entries[count].species = sCutTreeHabitat[count].species;
-            dest = AppendRouteSignMethod(dest, sText_RouteSignCutTrees, entries, count, &hasMethod, &hasLegend);
-        }
-    }
-
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE119))
-        dest = StringCopy(dest, COMPOUND_STRING("\pFeebas hides in a few fishing spots.\nAny rod works if you find one."));
-    if (headerId != HEADER_NONE)
-    {
-        enum LegendarySignId anomaly = GetLiveWeatherAnomalyOnMap(gSaveBlock1Ptr->location.mapGroup,
-                                                                 gSaveBlock1Ptr->location.mapNum);
-        if (anomaly < LEGENDARY_SIGN_COUNT)
-        {
-            dest = StringCopy(dest, sText_RouteSignSpeciesPageBreak);
-            dest = StringCopy(dest, GetLegendaryDisplayName(gLegendaryGates[anomaly].species));
-            dest = StringCopy(dest, COMPOUND_STRING(" has been sighted in\nthis weather."));
-        }
-    }
-    if (hasMethod && hasLegend)
-        dest = StringCopy(dest, COMPOUND_STRING("\pLegends and Ultra Beasts are rare\nhere. Sweet Scent draws them out."));
-    if (hasMethod)
-        StringCopy(dest, COMPOUND_STRING("\pSweet Scent reverses grass/Surf\nrarity: rare species become common."));
-    else
-        StringCopy(gStringVar4, sText_RouteSignNoSpecies);
-}
-
-// Route signs page through the roster in the ordinary field message box:
-// A turns the page (the text printer's own prompt), B closes the sign at
-// once, including any legend pages the map script shows after the roster.
-EWRAM_DATA static bool8 sRouteSignClosed = FALSE;
-
-static bool8 WaitForRouteSignPage(void)
-{
-    if (JOY_NEW(B_BUTTON))
-    {
-        HideFieldMessageBox();
-        sRouteSignClosed = TRUE;
-        return TRUE;
-    }
-    // After the last page, A continues like waitbuttonpress.
-    return IsFieldMessageBoxHidden() && JOY_NEW(A_BUTTON);
-}
-
-static void ShowRouteSignPages(struct ScriptContext *ctx)
-{
-    if (sRouteSignClosed || !ShowFieldMessageFromBuffer())
-        return;
-    SetupNativeScript(ctx, WaitForRouteSignPage);
-    ctx->waitAfterCallNative = TRUE;
-}
-
-// callnative from Common_EventScript_ShowRouteRoster.
-void ShowRouteSignRoster(struct ScriptContext *ctx)
-{
-    sRouteSignClosed = FALSE;
-    BufferCurrentMapRouteSignSpecies();
-    ShowRouteSignPages(ctx);
-}
-
-// callnative from Common_EventScript_ShowRouteLegend (VAR_0x8004 = the
-// resident's LEGENDARY_SIGN_* id). Skipped once B closed the sign.
-void ShowRouteSignLegendPage(struct ScriptContext *ctx)
-{
-    if (sRouteSignClosed)
-        return;
-    ResearchSelectedLegendarySign();
-    ShowRouteSignPages(ctx);
 }
 
 const struct WildPokemon gWildFeebas = {20, 25, SPECIES_FEEBAS};
@@ -1238,7 +1017,7 @@ static bool32 UsesLandEncounterTable(u32 headerId, u16 behavior)
         return TRUE;
     return gMapHeader.mapType == MAP_TYPE_UNDERWATER
         && MetatileBehavior_IsWaterWildEncounter(behavior)
-        && GetRouteSignInfo(headerId, WILD_AREA_LAND) != NULL;
+        && gWildMonHeaders[headerId].encounterTypes[GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND)].landMonsInfo != NULL;
 }
 
 static bool32 TryGenerateSecondWildMon(const struct WildPokemonInfo *info, enum WildPokemonArea area, u8 flags)

@@ -332,7 +332,7 @@ static void FindMapsWithMon(enum Species species)
     enum RegionMapType currentRegionMapType;
     u16 i;
     struct Roamer *roamer;
-    bool32 showWild;
+    bool32 showWild, cutTree;
 
     sPokedexAreaScreen->alteringCaveCounter = 0;
     sPokedexAreaScreen->alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
@@ -367,14 +367,18 @@ static void FindMapsWithMon(enum Species species)
     // residents are ordinary slots, shown only while their slot is live:
     // gate open and species not yet caught.
     showWild = IsWildSlotSpeciesAcquirable(species);
+    // The Cut tree habitat is not a table: it lives on every map with wild
+    // Pokemon and a Cut tree (CutTreeWildEncounter).
+    cutTree = IsCutTreeHabitatSpecies(species);
     for (i = 0; showWild && gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
     {
-        u32 headerSectionId = Overworld_GetMapHeaderByGroupAndId(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum)->regionMapSectionId;
+        const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
 
-        if (GetRegionMapType(headerSectionId) != currentRegionMapType)
+        if (GetRegionMapType(header->regionMapSectionId) != currentRegionMapType)
             continue;
 
-        if (MapHasSpecies(&gWildMonHeaders[i].encounterTypes[gAreaTimeOfDay], gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum, species))
+        if (MapHasSpecies(&gWildMonHeaders[i].encounterTypes[gAreaTimeOfDay], gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum, species)
+         || (cutTree && MapHeaderHasCutTrees(header)))
         {
             AddMapToAreaScreen(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
         }

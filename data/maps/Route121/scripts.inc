@@ -43,21 +43,10 @@ Route121_EventScript_Woman:: @ 81F5DFD
 
 Route121_EventScript_MtPyrePierSign:: @ 81F5E06
 	msgbox Route121_Text_MtPyrePierSign, MSGBOX_SIGN
-	goto Route121_EventScript_ShowRouteRoster
 	end
 
 Route121_EventScript_SafariZoneSign:: @ 81F5E0F
 	msgbox Route121_Text_SafariZoneSign, MSGBOX_SIGN
-	goto Route121_EventScript_ShowRouteRoster
-	end
-
-Route121_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_XERNEAS
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_YVELTAL
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 Route121_EventScript_AquaGruntsMoveOut:: @ 81F5E18

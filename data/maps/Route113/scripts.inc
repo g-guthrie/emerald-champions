@@ -34,17 +34,10 @@ Route113_EventScript_NinjaBoy:: @ 81F2193
 
 Route113_EventScript_RouteSign111:: @ 81F219C
 	msgbox Route113_Text_RouteSign111, MSGBOX_SIGN
-	goto Route113_EventScript_ShowRouteRoster
+	end
 
 Route113_EventScript_RouteSignFallarbor:: @ 81F21A5
 	msgbox Route113_Text_RouteSignFallarbor, MSGBOX_SIGN
-	goto Route113_EventScript_ShowRouteRoster
-
-Route113_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_MARSHADOW
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 Route113_EventScript_GlassWorkshopSign:: @ 81F21AE

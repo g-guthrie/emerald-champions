@@ -33,19 +33,10 @@ Route118_EventScript_Girl:: @ 81F3E73
 
 Route118_EventScript_RouteSignMauville:: @ 81F3E7C
 	msgbox Route118_Text_RouteSignMauville, MSGBOX_SIGN
-	goto Route118_EventScript_ShowRouteRoster
+	end
 
 Route118_EventScript_RouteSign119:: @ 81F3E85
 	msgbox Route118_Text_RouteSign119, MSGBOX_SIGN
-	goto Route118_EventScript_ShowRouteRoster
-
-Route118_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_THUNDURUS
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_MIRAIDON
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 Route118_EventScript_StevenTrigger0:: @ 81F3E8E

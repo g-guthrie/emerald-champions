@@ -3,6 +3,7 @@
 #include "caps.h"
 #include "event_data.h"
 #include "field_specials.h"
+#include "overworld.h"
 #include "pokemon.h"
 #include "random.h"
 #include "string_util.h"
@@ -12,6 +13,7 @@
 #include "constants/map_event_ids.h"
 #include "constants/maps.h"
 #include "constants/opponents.h"
+#include "constants/region_map_sections.h"
 #include "constants/rtc.h"
 #include "constants/vars.h"
 #include "test/overworld_script.h"
@@ -51,16 +53,6 @@ static void RestoreCapFlags(const bool8 *saved)
         else
             FlagClear(sCapFlags[i]);
     }
-}
-
-static bool32 BufferContains(const u8 *haystack, const u8 *needle)
-{
-    u32 length = StringLength(haystack);
-    u32 needleLength = StringLength(needle);
-    for (u32 i = 0; i + needleLength <= length; i++)
-        if (StringCompareN(haystack + i, needle, needleLength) == 0)
-            return TRUE;
-    return FALSE;
 }
 
 static bool32 IsCutTreeSpecies(enum Species species)
@@ -146,27 +138,21 @@ TEST("Cut trees: their six species live in no map table")
     EXPECT_GT(checked, 0);
 }
 
-TEST("Cut trees: route rosters list the tree habitat only where a Cut tree grows")
+extern bool32 Test_PokedexAreaHasSection(enum Species species, u16 section);
+
+TEST("Cut trees: the Pokedex area page marks the tree habitat only where a Cut tree grows")
 {
-    s8 savedGroup = gSaveBlock1Ptr->location.mapGroup;
-    s8 savedMap = gSaveBlock1Ptr->location.mapNum;
-
     // Route 116 has Cut trees; Route 101 has none.
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE116);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ROUTE116);
-    BufferCurrentMapRouteSignSpecies();
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Cut trees: ")));
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Skwovet")));
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Phantump")));
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("%")));
-
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE101);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ROUTE101);
-    BufferCurrentMapRouteSignSpecies();
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("Cut trees: ")));
-
-    gSaveBlock1Ptr->location.mapGroup = savedGroup;
-    gSaveBlock1Ptr->location.mapNum = savedMap;
+    EXPECT(MapHeaderHasCutTrees(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE116), MAP_NUM(MAP_ROUTE116))));
+    EXPECT(!MapHeaderHasCutTrees(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101))));
+    for (u32 slot = 0; slot < GetCutTreeSlotCount(); slot++)
+    {
+        enum Species species = GetCutTreeSlotSpecies(slot);
+        EXPECT(IsCutTreeHabitatSpecies(species));
+        EXPECT(Test_PokedexAreaHasSection(species, MAPSEC_ROUTE_116));
+        EXPECT(!Test_PokedexAreaHasSection(species, MAPSEC_ROUTE_101));
+    }
+    EXPECT(!IsCutTreeHabitatSpecies(SPECIES_ZIGZAGOON));
 }
 
 TEST("Cut trees: a map without wild Pokemon never rolls an encounter")

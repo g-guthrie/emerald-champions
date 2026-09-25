@@ -394,7 +394,7 @@ Route111_Movement_WaitForNextWinstrate: @ 81F114F
 
 Route111_EventScript_RouteSignMauville:: @ 81F1153
 	msgbox Route111_Text_RouteSignMauville, MSGBOX_SIGN
-	goto Route111_EventScript_ShowRouteRoster
+	end
 
 Route111_EventScript_WinstrateHouseSign:: @ 81F115C
 	msgbox Route111_Text_WinstrateHouseSign, MSGBOX_SIGN
@@ -402,19 +402,14 @@ Route111_EventScript_WinstrateHouseSign:: @ 81F115C
 
 Route111_EventScript_RouteSign112:: @ 81F1165
 	msgbox Route111_Text_RouteSign112, MSGBOX_SIGN
-	goto Route111_EventScript_ShowRouteRoster
+	end
 
 Route111_EventScript_RouteSign113:: @ 81F116E
 	msgbox Route111_Text_RouteSign113, MSGBOX_SIGN
-	goto Route111_EventScript_ShowRouteRoster
+	end
 
 Route111_EventScript_OldLadysRestStopSign:: @ 81F1177
 	msgbox Route111_Text_OldLadysRestStopSign, MSGBOX_SIGN
-	end
-
-Route111_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	releaseall
 	end
 
 Route111_EventScript_TrainerTipsSpAtkSpDef:: @ 81F1180

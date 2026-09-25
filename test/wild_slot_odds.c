@@ -196,48 +196,6 @@ TEST("Wild outbreaks: applying authored moves preserves the visible Pokemon iden
     memcpy(gSaveBlock1Ptr->outbreakPokemonMoves, oldMoves, sizeof(oldMoves));
 }
 
-TEST("Route rosters: every encounter map fits the dialog buffer with caught labels")
-{
-    static const u16 caughtVars[] = {
-        VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
-        VAR_LEGENDARY_SIGNS_CAUGHT_2, VAR_LEGENDARY_SIGNS_CAUGHT_3,
-        VAR_LEGENDARY_SIGNS_CAUGHT_4, VAR_LEGENDARY_SIGNS_CAUGHT_5,
-    };
-    u16 savedCaught[ARRAY_COUNT(caughtVars)];
-    s8 savedGroup = gSaveBlock1Ptr->location.mapGroup;
-    s8 savedMap = gSaveBlock1Ptr->location.mapNum;
-    u16 savedCave = VarGet(VAR_ALTERING_CAVE_WILD_SET);
-    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
-        savedCaught[i] = VarGet(caughtVars[i]);
-    VarSet(VAR_ALTERING_CAVE_WILD_SET, 0);
-    u32 maximum = 0, checked = 0;
-    for (u32 caught = 0; caught < 2; caught++)
-    {
-        for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
-            VarSet(caughtVars[i], caught ? 0xFFFF : 0);
-        for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
-        {
-            gSaveBlock1Ptr->location.mapGroup = gWildMonHeaders[header].mapGroup;
-            gSaveBlock1Ptr->location.mapNum = gWildMonHeaders[header].mapNum;
-            rng_value_t before = gRngValue;
-            BufferCurrentMapRouteSignSpecies();
-            u32 length = 0;
-            while (length < sizeof(gStringVar4) && gStringVar4[length] != EOS)
-                length++;
-            EXPECT_LT(length, sizeof(gStringVar4));
-            EXPECT_EQ(memcmp(&before, &gRngValue, sizeof(before)), 0);
-            maximum = max(maximum, length);
-            checked++;
-        }
-    }
-    Test_MgbaPrintf("Route roster checks=%d maximum bytes=%d capacity=%d", checked, maximum, sizeof(gStringVar4));
-    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
-        VarSet(caughtVars[i], savedCaught[i]);
-    VarSet(VAR_ALTERING_CAVE_WILD_SET, savedCave);
-    gSaveBlock1Ptr->location.mapGroup = savedGroup;
-    gSaveBlock1Ptr->location.mapNum = savedMap;
-}
-
 TEST("Local wild species: optional habitat output preserves selection and RNG")
 {
     static const u16 maps[] = {MAP_ROUTE101, MAP_ROUTE103, MAP_ROUTE125, MAP_UNDEFINED};
@@ -599,7 +557,7 @@ TEST("Paradox habitats: every enabled species has a usable land encounter tile")
     gMapHeader = saved;
 }
 
-TEST("Disabled DexNav: no wild source depends on hidden habitats")
+TEST("DexNav detector: no wild source depends on hidden habitats")
 {
     u32 checked = 0;
 

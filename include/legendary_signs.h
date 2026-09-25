@@ -90,7 +90,6 @@ void TryUnlockLocalLegendaryDiscovery(void);
 void ResetLegendaryEncounterVisits(void);
 void FinishLegendaryLandmarkEncounter(void);
 void HideRestingLegendaryObject(void);
-void ResearchSelectedLegendarySign(void);
 void TryGiveArceusLegendarySignMasteryReward(void);
 u8 GiveLegendarySignReward(enum Species species, u8 level);
 #define LEGENDARY_REWARD_UNAVAILABLE 3

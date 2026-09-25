@@ -460,7 +460,6 @@ gSpecials::
 	def_special CreateSelectedLegendarySignEncounter
 	def_special TryGiveSelectedLegendarySignReward
 	def_special CreateEmeraldChampionsStaticLegendaryEncounter
-	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
 	def_special TryGiveArceusLegendarySignMasteryReward
 	def_special ChampionsCircuitCanEnter
@@ -615,7 +614,6 @@ gSpecials::
 	def_special TakeEmeraldChampionsHandoffItem
 	def_special SetGraniteCaveFlashLevel
 
-	def_special ResearchSelectedLegendarySign
 
 	def_special BuildEmeraldChampionsHarvestChoices
 	def_special TradeEmeraldChampionsGardenBerries

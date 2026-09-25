@@ -8,17 +8,6 @@ DewfordMeadow_OnTransition:
 
 DewfordMeadow_EventScript_ManorSign::
 	msgbox DewfordMeadow_Text_ManorSign, MSGBOX_SIGN
-	goto DewfordMeadow_EventScript_ShowRouteRoster
-
-DewfordMeadow_EventScript_ShowRouteRoster::
-	call Common_EventScript_ShowRouteRoster
-	setvar VAR_0x8004, LEGENDARY_SIGN_COSMOG
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_MELOETTA
-	call Common_EventScript_ShowRouteLegend
-	setvar VAR_0x8004, LEGENDARY_SIGN_PHEROMOSA
-	call Common_EventScript_ShowRouteLegend
-	releaseall
 	end
 
 DewfordMeadow_Text_ManorSign:

@@ -33,7 +33,6 @@ STATIC_GATES = (
     ("authored Circuit projection", (PYTHON, "scripts/generate_showdown_champions_circuit.py", "--check")),
     ("wild table integrity", (PYTHON, "scripts/verify_wild_distribution.py")),
     ("every live flag name owns its own save bit", (PYTHON, "scripts/audit/flag_collisions.py")),
-    ("route signs list exactly their table's legends", (PYTHON, "scripts/audit/route_sign_legends.py")),
     ("Mega Stone pickups and optional one-time trades", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
     ("ground Mega Stone sparkles on authored tiles", (PYTHON, "scripts/check_stone_placement.py")),
 )

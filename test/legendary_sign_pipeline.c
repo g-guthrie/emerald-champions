@@ -168,87 +168,20 @@ TEST("Sweet Scent reverses species totals with duplicates and ties while preserv
     // test/wild_slot_odds.c.
 }
 
-static bool32 BufferContains(const u8 *haystack, const u8 *needle)
+TEST("A caught gate row closes its wild slot")
 {
-    u32 length = StringLength(haystack);
-    u32 needleLength = StringLength(needle);
-    for (u32 i = 0; i + needleLength <= length; i++)
-        if (StringCompareN(haystack + i, needle, needleLength) == 0)
-            return TRUE;
-    return FALSE;
-}
-
-static void ExpectLinesFitSignWindow(void)
-{
-    u8 line[sizeof(gStringVar4)];
-    u32 lineLength = 0;
-    for (u32 i = 0; ; i++)
-    {
-        u8 c = gStringVar4[i];
-        if (c == EOS || c == CHAR_NEWLINE || c == CHAR_PROMPT_SCROLL || c == CHAR_PROMPT_CLEAR)
-        {
-            line[lineLength] = EOS;
-            EXPECT_LE(GetStringWidth(FONT_NORMAL, line, 0), 200);
-            lineLength = 0;
-            if (c == EOS)
-                break;
-        }
-        else
-            line[lineLength++] = c;
-    }
-}
-
-TEST("Route rosters list legend slots with caught marks and the Sweet Scent hint")
-{
-    struct WarpData oldLocation = gSaveBlock1Ptr->location;
-    u16 oldCave = VarGet(VAR_ALTERING_CAVE_WILD_SET);
-    u32 checked = 0;
     ResetSignState();
-    VarSet(VAR_ALTERING_CAVE_WILD_SET, 0);
-    for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
-    {
-        const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
-        enum Species legend = SPECIES_NONE;
-        for (u32 slot = 0; types->landMonsInfo != NULL && slot < NUM_LAND_MONS_ENCOUNTER_SLOTS && legend == SPECIES_NONE; slot++)
-            if (IsLegendaryEncounterSpecies(types->landMonsInfo->wildPokemon[slot].species))
-                legend = types->landMonsInfo->wildPokemon[slot].species;
-        for (u32 slot = 0; types->waterMonsInfo != NULL && slot < NUM_WATER_MONS_ENCOUNTER_SLOTS && legend == SPECIES_NONE; slot++)
-            if (IsLegendaryEncounterSpecies(types->waterMonsInfo->wildPokemon[slot].species))
-                legend = types->waterMonsInfo->wildPokemon[slot].species;
-        if (legend == SPECIES_NONE || GetLegendarySignIdBySpecies(legend) >= LEGENDARY_SIGN_COUNT)
-            continue;
-        gSaveBlock1Ptr->location.mapGroup = gWildMonHeaders[header].mapGroup;
-        gSaveBlock1Ptr->location.mapNum = gWildMonHeaders[header].mapNum;
-        if (GetCurrentMapWildMonHeaderId() != header)
-            continue; // Altering Cave variants share one map.
-        MarkLegendarySignCaughtBySpecies(legend);
-        BufferCurrentMapRouteSignSpecies();
-        u8 name[64];
-        StringCopy(name, GetLegendaryDisplayName(legend));
-        StringAppend(name, COMPOUND_STRING(" (Caught)"));
-        EXPECT_LT(StringLength(gStringVar4), sizeof(gStringVar4));
-        EXPECT(BufferContains(gStringVar4, name));
-        EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Legends and Ultra Beasts are rare")));
-        EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("%")));
-        ExpectLinesFitSignWindow();
-        checked++;
-    }
-    Test_MgbaPrintf("Route rosters with legend slots: %d", checked);
-    EXPECT_GT(checked, 0);
-    // Every gate row reports its capture on research.
     for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
     {
         MarkLegendarySignCaughtBySpecies(gLegendaryGates[id].species);
-        gSpecialVar_0x8004 = id;
-        ResearchSelectedLegendarySign();
-        EXPECT_EQ(gSpecialVar_Result, 4);
+        EXPECT(IsLegendarySignCaught(id));
+        EXPECT(!CanAcquireLegendarySignSpecies(gLegendaryGates[id].species));
+        EXPECT(!IsWildSlotSpeciesAcquirable(gLegendaryGates[id].species));
     }
-    gSaveBlock1Ptr->location = oldLocation;
-    VarSet(VAR_ALTERING_CAVE_WILD_SET, oldCave);
     ResetSignState();
 }
 
-TEST("Research reports badges, milestone, family and availability from the gate row")
+TEST("Gates follow badges, milestone and family from the gate row")
 {
     ResetSignState();
     u8 savedCaught[sizeof(gSaveBlock1Ptr->dexCaught)];
@@ -260,33 +193,20 @@ TEST("Research reports badges, milestone, family and availability from the gate 
     FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
 
     // Zeraora: five badges, then Wattson's New Mauville receipt.
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_ZERAORA;
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required: 5.")));
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_ZERAORA));
     for (u32 badge = 0; badge < 5; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 0);
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("Gym Badges required")));
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Help Wattson")));
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_ZERAORA));
     FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Available now!")));
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_ZERAORA));
 
+    // Cresselia: every badge and the milestone, then a Darkrai record.
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
     FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_CRESSELIA;
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT(BufferContains(gStringVar4, GetSpeciesName(SPECIES_DARKRAI)));
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_CRESSELIA));
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DARKRAI), FLAG_SET_CAUGHT);
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 2);
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("%")));
-    ExpectLinesFitSignWindow();
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_CRESSELIA));
 
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
@@ -575,9 +495,6 @@ TEST("Static legendary knockout: lost for good, never re-armed, and every lead s
         EXPECT(!CanAcquireLegendarySignSpecies(gLegendaryGates[visible[i].id].species));
         UnlockLegendarySign(visible[i].id); // Never re-arms the object.
         EXPECT(FlagGet(visible[i].flag));
-        ResearchSelectedLegendarySign();
-        EXPECT_EQ(gSpecialVar_Result, 6);
-        EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("never returns")));
         // A capture sets the same flag; the caught bit wins.
         MarkLegendarySignCaughtBySpecies(gLegendaryGates[visible[i].id].species);
         gSpecialVar_0x8004 = visible[i].id;
@@ -639,14 +556,22 @@ TEST("Static legendary knockout: lost for good, never re-armed, and every lead s
     }
     EXPECT(sawRegirock);
     EXPECT(sawRegigigas);
-    gSpecialVar_0x8004 = LEGENDARY_SIGN_REGIGIGAS;
-    ResearchSelectedLegendarySign();
-    EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It won't come.")));
     // A later Regirock record (e.g. from a trade) reopens the lead.
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_REGIROCK), FLAG_SET_CAUGHT);
-    ResearchSelectedLegendarySign();
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It won't come.")));
+    sawRegigigas = FALSE;
+    gSpecialVar_0x8004 = 0;
+    while (TRUE)
+    {
+        BufferNextCenterLegendaryLead();
+        if (!gSpecialVar_Result)
+            break;
+        if (GuideTextContains(COMPOUND_STRING("wakes Regigigas")))
+        {
+            sawRegigigas = TRUE;
+            EXPECT(!GuideTextContains(COMPOUND_STRING("It won't come.")));
+        }
+    }
+    EXPECT(sawRegigigas);
 
     FlagClear(FLAG_DEFEATED_REGIROCK);
     FlagClear(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);
