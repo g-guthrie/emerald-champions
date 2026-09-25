@@ -7225,15 +7225,15 @@ static bool32 AI_IsSelfBoostWithoutPayoff(enum BattlerId battlerAtk, enum Move m
     return (raised & paid) == 0;
 }
 
-// A battler the end of this turn is certain to finish: its poison, burn,
-// weather, Leech Seed, curse, trap or nightmare damage covers what HP it has,
-// and nothing visible heals or cures it first (Leftovers, Black Sludge,
-// Grassy Terrain, Aqua Ring, Ingrain, a due Wish, Shed Skin, Hydration, a
-// Healer partner). Whatever it does this turn is its last action.
-bool32 AI_WillFaintFromResidual(enum BattlerId battler)
+// The end-of-turn damage this battler is certain to take: poison, burn,
+// weather, Leech Seed, curse, trap or nightmare, with nothing visible that
+// heals or cures it first (Leftovers, Black Sludge, Grassy Terrain, Aqua Ring,
+// Ingrain, a due Wish, Shed Skin, Hydration, a Healer partner). Zero when any
+// of those can intervene.
+u32 AI_GetCertainResidualDamage(enum BattlerId battler)
 {
     if (!IsBattlerAlive(battler))
-        return FALSE;
+        return 0;
     enum Ability ability = gAiLogicData->abilities[battler];
     enum HoldEffect holdEffect = gAiLogicData->holdEffects[battler];
     u32 damage = GetBattlerSecondaryDamage(battler);
@@ -7243,8 +7243,8 @@ bool32 AI_WillFaintFromResidual(enum BattlerId battler)
             / ((GetConfig(B_BURN_DAMAGE) >= GEN_7 || GetConfig(B_BURN_DAMAGE) == GEN_1) ? 16 : 8);
         damage += ability == ABILITY_HEATPROOF ? burn / 2 : burn;
     }
-    if (damage == 0 || damage < gBattleMons[battler].hp)
-        return FALSE;
+    if (damage == 0)
+        return 0;
     enum BattlerId partner = GetPartnerBattler(battler);
     if (holdEffect == HOLD_EFFECT_LEFTOVERS || holdEffect == HOLD_EFFECT_BLACK_SLUDGE
      || gBattleMons[battler].volatiles.aquaRing || gBattleMons[battler].volatiles.root
@@ -7252,8 +7252,16 @@ bool32 AI_WillFaintFromResidual(enum BattlerId battler)
      || ability == ABILITY_SHED_SKIN || ability == ABILITY_HYDRATION
      || (HasPartner(battler) && IsBattlerAlive(partner) && gAiLogicData->abilities[partner] == ABILITY_HEALER)
      || (gFieldTimers.terrain == B_TERRAIN_GRASSY && AI_IsBattlerGrounded(battler)))
-        return FALSE;
-    return TRUE;
+        return 0;
+    return damage;
+}
+
+// A battler the end of this turn is certain to finish: that damage covers
+// what HP it has. Whatever it does this turn is its last action.
+bool32 AI_WillFaintFromResidual(enum BattlerId battler)
+{
+    u32 damage = AI_GetCertainResidualDamage(battler);
+    return damage != 0 && damage >= gBattleMons[battler].hp;
 }
 
 // Haze resets every stat stage on the field, which buys something only when a

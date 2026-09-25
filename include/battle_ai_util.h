@@ -433,6 +433,7 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
 bool32 AI_IsFoeStatDropUseless(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 bool32 AI_IsSpreadMoveWasted(enum BattlerId battlerAtk, enum Move move);
 bool32 AI_IsMoveLikelyToFailAfterFoeMega(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+u32 AI_GetCertainResidualDamage(enum BattlerId battler);
 bool32 AI_WillFaintFromResidual(enum BattlerId battler);
 bool32 AI_CanAnyStatChange(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 bool32 ShouldUseFusionMove(enum BattlerId battler);

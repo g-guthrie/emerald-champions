@@ -49,6 +49,14 @@
 // A lead holding Fake Out on an opening spends it about a third of the time,
 // split across our bodies by the threat each poses to its side.
 #define PAIR_FORECAST_FAKE_OUT 35
+// A foe that has raised Wide Guard in its last few moves raises it again while
+// our side keeps spread moves in hand: the guard never fails on repeat, so the
+// player loses nothing by holding it up. Maxie's Torkoal and Camerupt fed Heat
+// Wave and Eruption into a visible Pelipper's Wide Guard on six of seven turns.
+#define PAIR_FORECAST_WIDE_GUARD 50
+// A redirector drawing a hit it is immune to or absorbs gives up nothing by
+// drawing it again, so it is the likeliest pattern, not an alternative.
+#define PAIR_FORECAST_REDIRECT_SAFE 60
 // Expected value drives the choice. A small pessimism share keeps a rare
 // catastrophe visible without restoring assume-the-worst guarding.
 #define PAIR_RISK_AVERSION 25
@@ -385,6 +393,8 @@ struct PairEvaluation
     // What a held healing Berry will restore when it is eaten, this turn or a
     // later one. See the board value in ScoreFastPair.
     u16 berryHeal[MAX_BATTLERS_COUNT];
+    // End-of-turn damage each battler is certain to take (AI_GetCertainResidualDamage).
+    u16 residual[MAX_BATTLERS_COUNT];
 };
 
 static u32 PairCopiedDance(enum Move move)
@@ -1099,6 +1109,25 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
          || (previous != MOVE_FOLLOW_ME && previous != MOVE_RAGE_POWDER)
          || IsBattlerIncapacitated(redirector, gAiLogicData->abilities[redirector]))
             continue;
+        // A redirector that takes nothing from what it draws - a Volt Absorb
+        // body drawing our Thunderbolt - loses nothing by drawing it again, and
+        // every one of those hits heals it: the Route 103 rival's Pikachu
+        // Thunderbolted into Follow Me from a Volt Absorb Pachirisu twice.
+        u32 weight = PAIR_FORECAST_ALTERNATE;
+        for (u32 body = 0; body < 2 && weight == PAIR_FORECAST_ALTERNATE; body++)
+            for (u32 choice = 0; choice < ev->count[targets[body]]; choice++)
+            {
+                const struct PairAction *mine = &ev->choices[targets[body]][choice];
+                if (mine->index != PAIR_IDLE && !IsBattleMoveStatus(mine->executedMove) && !PairSpread(mine->executedMove)
+                 && mine->target == foes[foe ^ 1]
+                 && !IsMoveRedirectionPrevented(targets[body], mine->executedMove, gAiLogicData->abilities[targets[body]])
+                 && gAiLogicData->simulatedDmg[targets[body]][foes[foe ^ 1]][mine->index].maximum
+                 && !gAiLogicData->simulatedDmg[targets[body]][redirector][mine->index].maximum)
+                {
+                    weight = PAIR_FORECAST_REDIRECT_SAFE;
+                    break;
+                }
+            }
         for (u32 choice = 0; choice < ev->count[redirector]; choice++)
         {
             const struct PairAction *action = &ev->choices[redirector][choice];
@@ -1107,8 +1136,45 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
             forecasts[1][0] = forecasts[0][0];
             forecasts[1][1] = forecasts[0][1];
             forecasts[1][foe] = *action;
-            weights[1] = PAIR_FORECAST_ALTERNATE;
+            weights[1] = weight;
             count = 2;
+            break;
+        }
+    }
+    // A Wide Guard the foe keeps raising is the pattern our spread moves meet
+    // next. It is judged on public history - the foe's own last moves - and
+    // only while our pair holds a spread attack for it to stop.
+    bool32 ourSpread = FALSE;
+    for (u32 body = 0; body < 2 && !ourSpread; body++)
+        for (u32 choice = 0; choice < ev->count[targets[body]]; choice++)
+        {
+            const struct PairAction *mine = &ev->choices[targets[body]][choice];
+            if (mine->index != PAIR_IDLE && !IsBattleMoveStatus(mine->executedMove) && PairSpread(mine->executedMove))
+                ourSpread = TRUE;
+        }
+    for (u32 foe = 0; foe < ARRAY_COUNT(foes) && ourSpread && count < PAIR_FORECASTS; foe++)
+    {
+        enum BattlerId guard = foes[foe];
+        bool32 raised = FALSE;
+        for (u32 index = 0; index < AI_MOVE_HISTORY_COUNT; index++)
+            if (gBattleHistory->moveHistory[guard][index] == MOVE_WIDE_GUARD)
+                raised = TRUE;
+        if (!raised || !IsBattlerAlive(guard) || IsBattlerIncapacitated(guard, gAiLogicData->abilities[guard]))
+            continue;
+        for (u32 choice = 0; choice < ev->count[guard]; choice++)
+        {
+            const struct PairAction *action = &ev->choices[guard][choice];
+            if (action->index == PAIR_IDLE || action->move != MOVE_WIDE_GUARD)
+                continue;
+            struct PairAction guarded[2] = {forecasts[0][0], forecasts[0][1]};
+            guarded[foe] = *action;
+            if (!PairSameForecast(guarded, forecasts[0]))
+            {
+                forecasts[count][0] = guarded[0];
+                forecasts[count][1] = guarded[1];
+                weights[count] = PAIR_FORECAST_WIDE_GUARD;
+                count++;
+            }
             break;
         }
     }
@@ -1222,19 +1288,49 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
         weights[count] = PAIR_FORECAST_PASSIVE;
         count++;
     }
+    // The primary pattern always keeps a share of its own.
+    u32 others = 0;
+    for (u32 index = 1; index < count; index++)
+        others += weights[index];
+    if (others > 90)
+        for (u32 index = 1; index < count; index++)
+            weights[index] = weights[index] * 90 / others;
     weights[0] = 100;
     for (u32 index = 1; index < count; index++)
         weights[0] -= weights[index];
+    // The pairs are ranked against the first pattern before the mixture
+    // settles the shortlist, so the likeliest pattern goes first. A repeat
+    // Wide Guard outweighing the damage pattern left the shortlist full of
+    // Heat Wave pairs that the guard stops, and the single-target moves that
+    // play around it were never settled.
+    for (u32 index = 1; index < count; index++)
+    {
+        if (weights[index] <= weights[0])
+            continue;
+        struct PairAction swap[2] = {forecasts[0][0], forecasts[0][1]};
+        u8 weight = weights[0];
+        forecasts[0][0] = forecasts[index][0];
+        forecasts[0][1] = forecasts[index][1];
+        weights[0] = weights[index];
+        forecasts[index][0] = swap[0];
+        forecasts[index][1] = swap[1];
+        weights[index] = weight;
+    }
     return count;
 }
 
 // A partner turn the shield genuinely buys: an authored field or setup reward
 // (Trick Room, Tailwind, weather, a stat boost), a Fake Out turn, or a
 // knockout the partner is certain to land while the guard absorbs the reply.
-static bool32 PairGuardPartnerPayoff(enum BattlerId user, const struct PairAction *actions)
+// The trial says whether that turn happened: partnerPaid is false when the
+// partner fell before it acted, or when its self-boost dies with it or can
+// never be cashed (PairBoostOutrun). Juan's Altaria shielded beside a
+// Manaphy whose Tail Glow Iron Hands' Wild Charge was about to end, and the
+// guard was paid for the boost anyway.
+static bool32 PairGuardPartnerPayoff(enum BattlerId user, const struct PairAction *actions, bool32 partnerPaid)
 {
     enum BattlerId partner = GetPartnerBattler(user);
-    if (!IsBattlerAlive(partner) || actions[partner].index == PAIR_IDLE)
+    if (!partnerPaid || !IsBattlerAlive(partner) || actions[partner].index == PAIR_IDLE)
         return FALSE;
     const struct PairAction *action = &actions[partner];
     if (GetMoveEffect(action->move) == EFFECT_PROTECT)
@@ -1280,13 +1376,13 @@ static bool32 PairHealsMoreThanGuardDenies(enum BattlerId user, s32 denied)
 }
 
 static u32 PairGuardBankedShare(const struct PairEvaluation *ev, enum BattlerId user,
-    const struct PairAction *actions, s32 denied)
+    const struct PairAction *actions, s32 denied, bool32 partnerPaid)
 {
     if (PairHealsMoreThanGuardDenies(user, denied))
         return PAIR_GUARD_BANKED_BASE;
     u32 banked = PAIR_GUARD_BANKED_BASE
         + (ev->waitingPayoff ? PAIR_GUARD_BANKED_WAIT : 0)
-        + (PairGuardPartnerPayoff(user, actions) ? PAIR_GUARD_BANKED_PARTNER : 0)
+        + (PairGuardPartnerPayoff(user, actions, partnerPaid) ? PAIR_GUARD_BANKED_PARTNER : 0)
         + ((gAiThinkingStruct->aiFlags[user] & AI_FLAG_CONSERVATIVE) ? PAIR_GUARD_BANKED_CONSERVATIVE : 0);
     return min(100, banked);
 }
@@ -1361,6 +1457,27 @@ static bool32 PairFieldClockExpiring(enum BattlerId actor)
         || (gBattleWeather && gBattleStruct->weatherDuration == 1);
 }
 
+// A Sucker Punch is worth waiting out only where it would land something that
+// matters: at least half of what one of our bodies has left. Waiting spends
+// none of it, so a Sucker Punch that barely scratches is no reason to keep
+// shielding: Wattson's Mega Manectric shielded seven turns running against a
+// lone -1 Attack Shedinja whose Sucker Punch could not dent it.
+static bool32 PairSuckerPunchThreat(enum BattlerId foe, enum BattlerId actor)
+{
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move move = gBattleMons[foe].moves[slot];
+        if (move == MOVE_NONE || GetMoveEffect(move) != EFFECT_SUCKER_PUNCH
+         || IsMoveUnusable(slot, move, gAiLogicData->moveLimitations[foe]))
+            continue;
+        for (enum BattlerId ours = 0; ours < gBattlersCount; ours++)
+            if (IsBattlerAlive(ours) && IsBattlerAlly(actor, ours)
+             && gAiLogicData->simulatedDmg[foe][ours][slot].median * 2 >= gBattleMons[ours].hp)
+                return TRUE;
+    }
+    return FALSE;
+}
+
 static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum BattlerId actor)
 {
     // This permits passive waiting; it does not reward or force a guard.
@@ -1382,7 +1499,7 @@ static bool32 PairWaitingHasPayoff(const struct PairEvaluation *ev, enum Battler
              || gBattleMons[battler].volatiles.yawn
              || (ability == ABILITY_TRUANT && !gBattleMons[battler].volatiles.truantCounter)
              || (gBattleStruct->battlerState[battler].isFirstTurn && HasMove(battler, MOVE_FAKE_OUT))
-             || HasMoveWithEffect(battler, EFFECT_SUCKER_PUNCH)
+             || PairSuckerPunchThreat(battler, actor)
              || (gBattleMons[battler].volatiles.semiInvulnerable
                  && gBattleMons[battler].volatiles.semiInvulnerable != STATE_COMMANDER))
                 return TRUE;
@@ -2277,8 +2394,11 @@ static void CachePairDefenderItems(struct PairEvaluation *ev, u32 noActionMask)
             bool32 removableDefense = (ev->itemRemovers & ~(1u << target))
                 && (held == HOLD_EFFECT_EVIOLITE || held == HOLD_EFFECT_ASSAULT_VEST
                     || held == HOLD_EFFECT_DEEP_SEA_SCALE || held == HOLD_EFFECT_METAL_POWDER);
+            // A full-HP Focus Sash spent by one hit leaves the next hit of the
+            // same turn to land in full.
+            bool32 sash = held == HOLD_EFFECT_FOCUS_SASH && gBattleMons[target].hp == gBattleMons[target].maxHP;
             if (actor == target || !IsBattlerAlive(actor) || !IsBattlerAlive(target)
-             || (noActionMask & (1u << actor)) || (held != HOLD_EFFECT_RESIST_BERRY && !removableDefense))
+             || (noActionMask & (1u << actor)) || (held != HOLD_EFFECT_RESIST_BERRY && !removableDefense && !sash))
             {
                 if (cache != NULL)
                     Free(cache);
@@ -3526,6 +3646,180 @@ static void PairApplyPopulationBomb(const struct PairEvaluation *ev, enum Battle
     }
 }
 
+// What a self-boost raises: a mask of the columns the trial tracks (bit 0
+// Attack, 1 Defense, 2 Sp. Def, 3 Sp. Atk) and its Speed stages, after the
+// user's own Simple. A Contrary body's "boost" is a drop and Acupressure's is
+// a lottery; neither is read here.
+static u32 PairSelfBoostRaises(enum BattlerId actor, enum Move move, s32 *speedStages)
+{
+    *speedStages = 0;
+    if (move == MOVE_NONE || !IsStatRaisingMove(move) || GetMoveEffect(move) == EFFECT_ACUPRESSURE
+     || AI_GetBattlerMoveTargetType(actor, move) != TARGET_USER
+     || gAiLogicData->abilities[actor] == ABILITY_CONTRARY)
+        return 0;
+    u32 raised = 0;
+    for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
+    {
+        const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, effectIndex);
+        if (additional->moveEffect != STAT_CHANGE_EFFECT_PLUS)
+            continue;
+        if (GetStatStage(STAT_ATK, additional))
+            raised |= 1u << 0;
+        if (GetStatStage(STAT_DEF, additional))
+            raised |= 1u << 1;
+        if (GetStatStage(STAT_SPDEF, additional))
+            raised |= 1u << 2;
+        if (GetStatStage(STAT_SPATK, additional))
+            raised |= 1u << 3;
+        if (GetStatStage(STAT_SPEED, additional))
+            *speedStages += GetAdjustedStatStage(GetStatStage(STAT_SPEED, additional), gAiLogicData->abilities[actor], FALSE);
+    }
+    return raised;
+}
+
+// The share of a self-boost's full reward that its raise is still worth from
+// the stages the user already holds: the damage multiplier the raise adds,
+// relative to the same raise from neutral. +2 Defense from +3 multiplies it by
+// 1.4 where the first +2 doubled it, so it is worth 40 percent. Speed is order,
+// not a multiplier, and keeps its full worth. Wallace's burned Zamazenta took
+// Iron Defense from +3 to +5 in front of a Great Tusk its partner was about to
+// remove, on the full reward of a first boost.
+static u32 PairBoostWorth(enum BattlerId actor, enum Move move)
+{
+    u32 best = 0;
+    bool32 any = FALSE;
+    for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
+    {
+        const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, effectIndex);
+        if (additional->moveEffect != STAT_CHANGE_EFFECT_PLUS)
+            continue;
+        static const u8 stats[] = {STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED};
+        for (u32 index = 0; index < ARRAY_COUNT(stats); index++)
+        {
+            s32 delta = GetAdjustedStatStage(GetStatStage(stats[index], additional), gAiLogicData->abilities[actor], FALSE);
+            if (delta <= 0)
+                continue;
+            any = TRUE;
+            if (stats[index] == STAT_SPEED)
+                return 100;
+            s32 old = (s32)gBattleMons[actor].statStages[stats[index]] - DEFAULT_STAT_STAGE;
+            s32 next = min(MAX_STAT_STAGE - DEFAULT_STAT_STAGE, old + delta);
+            if (next <= old)
+                continue;
+            u32 oldNum = old >= 0 ? 2 + old : 2, oldDen = old >= 0 ? 2 : 2 - old;
+            u32 newNum = next >= 0 ? 2 + next : 2, newDen = next >= 0 ? 2 : 2 - next;
+            s32 gain = (s32)(newNum * oldDen * 100 / (newDen * oldNum)) - 100;
+            best = max(best, min(100, (u32)max(0, gain) * 100 / (u32)(delta * 50)));
+        }
+    }
+    return any ? best : 100;
+}
+
+// A boost that only raises Defense or Sp. Def pays through the foes it is
+// raised against: those still standing after this turn with a hit of that
+// category worth trimming (an eighth of the user's HP), or, for Defense, a foe
+// the user's Body Press can reach. The share is the likeliest of them to be
+// there. Wallace's Zamazenta raised Defense into a Great Tusk that Zapdos'
+// Hurricane was about to remove, beside a Sableye whose Knock Off barely
+// scratches it.
+static u32 PairDefenseBoostShare(enum BattlerId actor, enum Move move, const u32 *hp, const u32 *survival)
+{
+    s32 speedStages;
+    u32 raised = PairSelfBoostRaises(actor, move, &speedStages);
+    if (speedStages || (raised & ((1u << 0) | (1u << 3))) || !(raised & ((1u << 1) | (1u << 2))))
+        return 100;
+    bool32 bodyPress = FALSE;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        if (GetMoveEffect(gBattleMons[actor].moves[slot]) == EFFECT_BODY_PRESS
+         && !IsMoveUnusable(slot, gBattleMons[actor].moves[slot], gAiLogicData->moveLimitations[actor]))
+            bodyPress = TRUE;
+    u32 threshold = max(1, gBattleMons[actor].maxHP / 8), share = 0;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!hp[foe] || !IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+            continue;
+        bool32 pays = FALSE;
+        for (u32 slot = 0; slot < MAX_MON_MOVES && !pays; slot++)
+        {
+            enum Move known = gBattleMons[foe].moves[slot];
+            if (known == MOVE_NONE || known == MOVE_UNAVAILABLE || IsBattleMoveStatus(known)
+             || gAiLogicData->simulatedDmg[foe][actor][slot].maximum < threshold)
+                continue;
+            bool32 physical = IsBattleMovePhysical(known) || GetMoveEffect(known) == EFFECT_PSYSHOCK;
+            if (raised & (physical ? (1u << 1) : (1u << 2)))
+                pays = TRUE;
+        }
+        if (!pays && bodyPress && (raised & (1u << 1)))
+            for (u32 slot = 0; slot < MAX_MON_MOVES && !pays; slot++)
+                if (GetMoveEffect(gBattleMons[actor].moves[slot]) == EFFECT_BODY_PRESS
+                 && gAiLogicData->simulatedDmg[actor][foe][slot].maximum)
+                    pays = TRUE;
+        if (pays)
+            share = max(share, survival[foe]);
+    }
+    return share;
+}
+
+// A self-boost pays through its user's next action, so it pays nothing when
+// a visible foe still standing after this turn will move before that action
+// and is certain to knock the user out from the HP it keeps: the foe's
+// weakest roll, with a hit that cannot miss. Declining the knockout this turn
+// only moves it to the next one. Braxton's Garchomp Swords Danced in front of
+// a faster Miraidon whose Draco Meteor removes it from full. What the boost
+// itself buys still counts: a Speed boost that puts the user in front, or a
+// defensive boost on the side the hit comes from. A Focus Sash or Sturdy on a
+// full-HP user keeps it standing, and a Fake Out is spent by next turn.
+static bool32 PairBoostOutrun(enum BattlerId actor, const struct PairAction *action, const u32 *hp, const u32 *speed, const u8 *speedStage, bool32 trickRoom)
+{
+    s32 speedStages;
+    u32 raised = PairSelfBoostRaises(actor, action->executedMove, &speedStages);
+    if (action->index == PAIR_IDLE || !hp[actor] || (!raised && !speedStages))
+        return FALSE;
+    u32 mySpeed = speed[actor];
+    // The trial applies a dance's Speed itself; any other boost's Speed is
+    // what the user carries into next turn.
+    if (speedStages && !PairSetupDance(action->executedMove))
+    {
+        u32 old = speedStage[actor];
+        u32 next = max(MIN_STAT_STAGE, min(MAX_STAT_STAGE, (s32)old + speedStages));
+        mySpeed = mySpeed * gStatStageRatios[next][0] * gStatStageRatios[old][1]
+            / (gStatStageRatios[next][1] * gStatStageRatios[old][0]);
+    }
+    s32 myPriority = 0;
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move known = gBattleMons[actor].moves[slot];
+        if (known != MOVE_NONE && !IsBattleMoveStatus(known) && GetMoveEffect(known) != EFFECT_FIRST_TURN_ONLY
+         && !IsMoveUnusable(slot, known, gAiLogicData->moveLimitations[actor]))
+            myPriority = max(myPriority, AI_GetMovePriority(actor, gAiLogicData->abilities[actor], known));
+    }
+    bool32 enduresFull = hp[actor] >= gBattleMons[actor].maxHP
+        && (gAiLogicData->holdEffects[actor] == HOLD_EFFECT_FOCUS_SASH || gAiLogicData->abilities[actor] == ABILITY_STURDY);
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!hp[foe] || !IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+            continue;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            enum Move known = gBattleMons[foe].moves[slot];
+            if (known == MOVE_NONE || known == MOVE_UNAVAILABLE || IsBattleMoveStatus(known)
+             || GetMoveEffect(known) == EFFECT_FIRST_TURN_ONLY
+             || IsMoveUnusable(slot, known, gAiLogicData->moveLimitations[foe])
+             || gAiLogicData->moveAccuracy[foe][actor][slot] < 100
+             || gAiLogicData->simulatedDmg[foe][actor][slot].minimum < hp[actor])
+                continue;
+            bool32 physical = IsBattleMovePhysical(known) || GetMoveEffect(known) == EFFECT_PSYSHOCK;
+            if ((raised & (physical ? (1u << 1) : (1u << 2))) || enduresFull)
+                continue;
+            s32 priority = AI_GetMovePriority(foe, gAiLogicData->abilities[foe], known);
+            if (priority > myPriority
+             || (priority == myPriority && (trickRoom ? speed[foe] < mySpeed : speed[foe] > mySpeed)))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *effectChance)
 {
     struct PairAction actions[MAX_BATTLERS_COUNT];
@@ -3555,6 +3849,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     u32 choiceStarted = 0;
     u8 rageHits[MAX_BATTLERS_COUNT];
     u32 acted = 0, protected = 0, stopped = 0, wideGuard = 0, quickGuard = 0;
+    u32 executed = 0; // Selected actions that reached the board this trial.
+    u32 sashBroken = 0; // Focus Sashes this trial's hits spent.
     struct PairRetaliation received[MAX_BATTLERS_COUNT][DAMAGE_CATEGORY_STATUS] = {0};
     u8 lastReceivedCategory[MAX_BATTLERS_COUNT] = {0};
     u32 newSleepTargets = 0, newSleepSides = 0;
@@ -3678,6 +3974,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (((newTauntTargets & (1u << actor)) || gBattleMons[actor].volatiles.tauntTimer)
          && IsBattleMoveStatus(move))
             continue;
+        if (!copied)
+            executed |= 1u << actor;
         if (!copy && ev->firstChoice[actor][action->index])
             choiceStarted |= 1u << actor;
         // Conditional HP includes branches where an earlier lethal move
@@ -4726,6 +5024,19 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
              && !DoesSubstituteBlockMove(actor, target, move)
              && PairScreenEffectApplies(applyEffects, hitChance, effectChance))
                 charged |= 1u << target;
+            // A Focus Sash that stops a knockout is spent by it: a second hit
+            // this turn meets no Sash (the defender-item anchors), and what
+            // it kept standing is one hit from falling (sashBroken below).
+            if (!(usedItems & (1u << target)) && damage.affectsTarget
+             && gAiLogicData->holdEffects[target] == HOLD_EFFECT_FOCUS_SASH
+             && hp[target] == gBattleMons[target].maxHP
+             && (damage.consumedItem & AI_ITEM_CONSUMED_MEDIAN)
+             && !DoesSubstituteBlockMove(actor, target, move)
+             && PairScreenEffectApplies(applyEffects, hitChance, effectChance))
+            {
+                usedItems |= 1u << target;
+                sashBroken |= 1u << target;
+            }
             if (!(usedItems & (1u << target)) && damage.affectsTarget
              && gAiLogicData->holdEffects[target] == HOLD_EFFECT_RESIST_BERRY
              && (damage.consumedItem & AI_ITEM_CONSUMED_MEDIAN)
@@ -5204,6 +5515,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         // Counter 2/new casts are outside this immediate healing horizon.
         if (hp[actor] && ev->dueWishHeal[actor])
             hp[actor] = min(gBattleMons[actor].maxHP, hp[actor] + ev->dueWishHeal[actor]);
+        // The end of the turn is the board the next one starts from: a body
+        // its residual damage finishes is gone, whatever it kept until then.
+        // Phoebe's Mega Banette shielded at 9 HP in the sand that ended it.
+        if (hp[actor] && ev->residual[actor] >= hp[actor])
+            hp[actor] = 0;
         if (EC_PerishMustEscape(actor))
         {
             // Count before applying ANY countdown deaths. A lower-index foe
@@ -5289,6 +5605,22 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         u32 credited = hp[target] ? ev->board.healthValue[ev->board.owner[target]] * survival[target] / 100 : 0;
         score -= (s32)(friendlyLoss[target] * (100 - min(100, credited)) / max(1, gBattleMons[target].maxHP));
     }
+    // A spent Focus Sash is next-turn value the one-turn board cannot see: the
+    // HP its holder kept only because of the Sash is gone at the next hit. A
+    // body the Sash left at 1 HP has already paid that in HP; a 1 HP Shedinja
+    // has paid nothing. Without this, breaking a Shedinja's Sash scored as a
+    // wasted turn, and Wattson's Mega Manectric shielded seven turns running
+    // against a lone Shedinja rather than Flamethrower it twice.
+    for (enum BattlerId target = 0; target < gBattlersCount; target++)
+        if ((sashBroken & (1u << target)) && hp[target])
+            score += (GetBattlerSide(target) == ev->side ? -1 : 1)
+                * (s32)(ev->board.healthValue[ev->board.owner[target]] * hp[target] / max(1, gBattleMons[target].maxHP)
+                    * survival[target] / 100);
+    // Whose self-boost this trial leaves nothing to cash: see PairBoostOutrun.
+    u32 outrun = 0;
+    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        if (hp[actor] && PairBoostOutrun(actor, &actions[actor], hp, speed, speedStage, trickRoom))
+            outrun |= 1u << actor;
     // A shield's saving is only partly permanent. Without a payoff the same
     // threat returns next turn and the foes can focus the unprotected ally, so
     // bank only the share a payoff makes real.
@@ -5296,10 +5628,18 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     {
         if (GetBattlerSide(actor) != ev->side)
             continue;
+        enum BattlerId partner = GetPartnerBattler(actor);
+        s32 partnerBoostStages;
+        bool32 partnerPaid = (executed & (1u << partner))
+            && !((PairSelfBoostRaises(partner, actions[partner].executedMove, &partnerBoostStages) || partnerBoostStages)
+                 && (!hp[partner] || (outrun & (1u << partner))));
+        // A shield on a body the end of the turn finishes saved nothing.
+        if (guardDenied[actor] && !hp[actor] && ev->residual[actor])
+            guardDenied[actor] = 0;
         if (guardDenied[actor])
-            score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions, guardDenied[actor])) / 100;
+            score -= guardDenied[actor] * (s32)(100 - PairGuardBankedShare(ev, actor, actions, guardDenied[actor], partnerPaid)) / 100;
         else if ((guardUsed & (1u << actor)) && !ev->waitingPayoff
-              && !PairGuardPartnerPayoff(actor, actions))
+              && !PairGuardPartnerPayoff(actor, actions, partnerPaid))
             score -= PAIR_GUARD_EMPTY_COST;
     }
     if (!ev->wholeTurnPayoff)
@@ -5315,10 +5655,13 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         }
     }
     // A self-boost's plan and opinion reward, in the branches where its user
-    // lives to use the boost.
+    // lives to use the boost, at what the raise still adds (PairBoostWorth)
+    // and, for a purely defensive raise, as far as its threats stay standing.
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
-        if (setupReward[actor] && hp[actor])
-            score += setupReward[actor] * (s32)survival[actor] / 100;
+        if (setupReward[actor] && hp[actor] && !(outrun & (1u << actor)))
+            score += setupReward[actor] * (s32)survival[actor] / 100
+                * (s32)PairBoostWorth(actor, actions[actor].executedMove) / 100
+                * (s32)PairDefenseBoostShare(actor, actions[actor].executedMove, hp, survival) / 100;
     // Next-turn value that a one-turn board cannot see. Each term is paid only
     // when the effect actually landed in this trial and its owner or victim is
     // still standing at the end of it, so a boost that gets its user killed and
@@ -5327,7 +5670,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     {
         const struct PairAction *action = &actions[actor];
         s32 sign = GetBattlerSide(actor) == ev->side ? 1 : -1;
-        if (action->index == PAIR_IDLE || !hp[actor] || !IsStatRaisingMove(action->move))
+        if (action->index == PAIR_IDLE || !hp[actor] || !IsStatRaisingMove(action->move)
+         || (outrun & (1u << actor)))
             continue;
         bool32 raised = speedStage[actor] > gBattleMons[actor].statStages[STAT_SPEED];
         static const u8 stats[4] = {STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK};
@@ -5361,7 +5705,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             raised = useful;
         }
         if (raised)
-            score += sign * PAIR_SETUP_HORIZON * (s32)survival[actor] / 100;
+            score += sign * PAIR_SETUP_HORIZON * (s32)survival[actor] / 100
+                * (s32)PairBoostWorth(actor, action->executedMove) / 100
+                * (s32)PairDefenseBoostShare(actor, action->executedMove, hp, survival) / 100;
     }
     for (enum BattlerId target = 0; target < gBattlersCount; target++)
     {
@@ -5679,7 +6025,10 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     ev->weather = AI_GetWeather();
     ev->sleepClause = IsSleepClauseEnabled();
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
         ev->berryHeal[battler] = PairHeldBerryHeal(ev, battler);
+        ev->residual[battler] = min(0xFFFF, AI_GetCertainResidualDamage(battler));
+    }
     ev->paralysisActionChance = GetConfig(B_PARALYSIS_CHANCE) >= GEN_CHAMPIONS ? 8750 : 7500;
     // The only newly forecast item loss is Knock Off. Avoid native anchor
     // calculations when no other living actor can use it. Do not filter by
