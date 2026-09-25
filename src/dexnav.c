@@ -1207,6 +1207,7 @@ static u8 DexNavTryGenerateMonLevel(enum Species species, enum EncounterType env
 
     if (levelBase == MON_LEVEL_NONEXISTENT)
         return MON_LEVEL_NONEXISTENT;   //species not found in the area
+    levelBase = ApplyWildLevelFloor(species, levelBase); // same floor as ordinary slots
 
     if (Random() % 100 < 4)
         levelBonus += 10; //4% chance of having a +10 level

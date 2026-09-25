@@ -96,6 +96,49 @@ TEST("Wild levels: creation respects the current cap without raising low-level e
     ZeroEnemyPartyMons();
 }
 
+TEST("Wild levels: stale tables are floored to the cap and evolved Pokemon to their evolution level")
+{
+    bool8 saved[ARRAY_COUNT(sWildCapFlags)];
+    SaveAndClearWildCapFlags(saved);
+    // Cap 14: an early route's own levels stand.
+    EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZIGZAGOON, 3), 3);
+    // Cap 45: a table authored for level 20 rises to within 12 of the cap.
+    FlagSet(FLAG_BADGE01_GET); FlagSet(FLAG_BADGE02_GET); FlagSet(FLAG_BADGE03_GET); FlagSet(FLAG_BADGE04_GET);
+    EXPECT_EQ(GetCurrentLevelCap(), 45);
+    for (u32 i = 0; i < 20; i++)
+    {
+        u32 level = ApplyWildLevelFloor(SPECIES_SANDSHREW, 20);
+        EXPECT(level >= 33 && level <= 36);
+    }
+    // In-range levels are untouched.
+    EXPECT_EQ(ApplyWildLevelFloor(SPECIES_SANDSHREW, 40), 40);
+    // Zweilous evolves from Deino at 50: never met below it, but never above the cap.
+    EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZWEILOUS, 40), 45);
+    FlagSet(FLAG_BADGE05_GET); FlagSet(FLAG_BADGE06_GET); FlagSet(FLAG_BADGE07_GET);
+    EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZWEILOUS, 60), 60);
+    u32 floored = ApplyWildLevelFloor(SPECIES_ZWEILOUS, 49); // cap 70: floor 58-61
+    EXPECT(floored >= 58 && floored <= 61);
+    RestoreWildCapFlags(saved);
+}
+
+TEST("Wild levels: the generated evolution floors match each species' level evolution")
+{
+    static const struct { enum Species species; u8 level; } cases[] = {
+        {SPECIES_GRAVELER, 25}, {SPECIES_ZWEILOUS, 50}, {SPECIES_CLAYDOL, 36},
+        {SPECIES_MANECTRIC, 26}, {SPECIES_ZIGZAGOON, 1},
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        enum Species pre = GetSpeciesPreEvolution(cases[i].species);
+        u32 expected = 1;
+        const struct Evolution *evolutions = pre != SPECIES_NONE ? GetSpeciesEvolutions(pre) : NULL;
+        for (u32 j = 0; evolutions != NULL && evolutions[j].method != EVOLUTIONS_END; j++)
+            if (evolutions[j].targetSpecies == cases[i].species && evolutions[j].method == EVO_LEVEL && evolutions[j].param != 0)
+                expected = evolutions[j].param;
+        EXPECT_EQ(expected, cases[i].level);
+    }
+}
+
 TEST("Wild levels: outbreak Repel checks the capped level before creating an encounter")
 {
     bool8 saved[ARRAY_COUNT(sWildCapFlags)];
@@ -818,7 +861,7 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
     }
 
     // Gate open: the slot spawns at the cap with a competitive set, while
-    // ordinary slots keep their table level.
+    // ordinary slots keep the wild level floor.
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
     FlagSet(FLAG_BADGE03_GET);
@@ -838,7 +881,9 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
         }
         else
         {
-            EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 5);
+            // A level-5 table at cap 40 is floored to within 12 of the cap.
+            u32 level = GetMonData(mon, MON_DATA_LEVEL);
+            EXPECT(level >= GetCurrentLevelCap() - 12 && level <= GetCurrentLevelCap() - 9);
         }
     }
     EXPECT_GT(raikou, 0);
@@ -858,12 +903,14 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
     SeedRng(1);
     EXPECT(!TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
 
-    // Paradox slots are not legend slots: table level, no gate.
+    // Paradox slots are not legend slots: no gate, and the ordinary wild
+    // level floor (not the cap) applies to their table level.
     for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         mons[i] = (struct WildPokemon){9, 9, SPECIES_IRON_LEAVES};
     SeedRng(2);
     EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 9);
+    u32 paradoxLevel = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL);
+    EXPECT(paradoxLevel >= GetCurrentLevelCap() - 12 && paradoxLevel <= GetCurrentLevelCap() - 9);
 
     ClearLegendCaughtBits();
     RestoreWildCapFlags(saved);

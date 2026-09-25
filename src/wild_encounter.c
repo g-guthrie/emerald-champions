@@ -760,7 +760,41 @@ u32 ChooseWildMonIndex_Fishing(const struct WildPokemonInfo *info, u8 rod)
     return starts[rod] + ChooseEncounterSlotWithLure(GetEncounterBounds(info, defaults) + starts[rod], counts[rod]);
 }
 
+// Emerald Champions: a table authored for an early visit must not leave an
+// area far below the Trainer who returns to it, and no evolved Pokemon is
+// met below the level it evolves at. Levels already in range are untouched;
+// every caller still applies the cap ceiling afterwards.
+#define WILD_LEVELS_BELOW_CAP_FLOOR 12
+#define WILD_LEVEL_FLOOR_SPREAD     4
+
+#include "data/wild_evolution_floors.h"
+
+static u8 GetWildEvolutionFloor(enum Species species)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sWildEvolutionFloors); i++)
+        if (sWildEvolutionFloors[i].species == species)
+            return sWildEvolutionFloors[i].level;
+    return 1;
+}
+
+u8 ApplyWildLevelFloor(enum Species species, u8 level)
+{
+    u32 cap = GetCurrentLevelCap();
+    u32 floor = cap > WILD_LEVELS_BELOW_CAP_FLOOR ? cap - WILD_LEVELS_BELOW_CAP_FLOOR : 1;
+    if (level < floor)
+        level = floor + Random() % WILD_LEVEL_FLOOR_SPREAD;
+    level = max(level, GetWildEvolutionFloor(species));
+    return min(level, min(cap, MAX_LEVEL));
+}
+
+static u8 ChooseTableWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area);
+
 u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area)
+{
+    return ApplyWildLevelFloor(wildPokemon[wildMonIndex].species, ChooseTableWildMonLevel(wildPokemon, wildMonIndex, area));
+}
+
+static u8 ChooseTableWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area)
 {
     u8 min;
     u8 max;
