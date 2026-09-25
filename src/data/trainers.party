@@ -10442,7 +10442,7 @@ Nature: NATURE_BOLD
 Name: KATE & JOY
 Class: Sr And Jr
 Pic: Sr And Jr
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -10455,7 +10455,7 @@ Party Size: 0
 Name: ANNA & MEG
 Class: Sr And Jr
 Pic: Sr And Jr
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -14772,7 +14772,7 @@ Party Size: 0
 Name: AMY & LIV
 Class: Twins
 Pic: Twins
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -14834,7 +14834,7 @@ Nature: NATURE_BOLD
 Name: GINA & MIA
 Class: Twins
 Pic: Twins
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -14896,7 +14896,7 @@ Nature: NATURE_MODEST
 Name: MIU & YUKI
 Class: Twins
 Pic: Twins
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -15359,7 +15359,7 @@ Nature: NATURE_ADAMANT
 
 === TRAINER_JAZMYN ===
 Name: JAZMYN
-Class: Cooltrainer 2
+Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
 Music: Cool
@@ -23146,7 +23146,7 @@ Party Size: 0
 Name: TORI & TIA
 Class: Twins
 Pic: Twins
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -23208,7 +23208,7 @@ Nature: NATURE_MODEST
 Name: KIM & IRIS
 Class: Sr And Jr
 Pic: Sr And Jr
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -23221,7 +23221,7 @@ Party Size: 0
 Name: TYRA & IVY
 Class: Sr And Jr
 Pic: Sr And Jr
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party
@@ -26948,7 +26948,7 @@ Nature: NATURE_TIMID
 
 === TRAINER_CYNTHIA_1 ===
 Name: CYNTHIA
-Class: Cooltrainer
+Class: Champion
 Pic: Cynthia
 Gender: Female
 Music: Female
@@ -27199,7 +27199,7 @@ Nature: NATURE_ADAMANT
 
 === TRAINER_COURTNEY_METEOR_FALLS ===
 Name: COURTNEY
-Class: Team Magma
+Class: Magma Admin
 Pic: Magma Grunt F
 Gender: Female
 Music: Magma
@@ -27463,7 +27463,7 @@ Nature: NATURE_BOLD
 
 === TRAINER_COURTNEY_MAGMA_HIDEOUT ===
 Name: COURTNEY
-Class: Team Magma
+Class: Magma Admin
 Pic: Magma Grunt F
 Gender: Female
 Music: Magma
@@ -27639,7 +27639,7 @@ Nature: NATURE_ADAMANT
 
 === TRAINER_COURTNEY_MOSSDEEP ===
 Name: COURTNEY
-Class: Team Magma
+Class: Magma Admin
 Pic: Magma Grunt F
 Gender: Female
 Music: Magma
@@ -28007,7 +28007,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
-Prize Multiplier: 10
+Prize Multiplier: 25
 
 SPECIES_MIENSHAO @ ITEM_FOCUS_SASH
 Level: 60

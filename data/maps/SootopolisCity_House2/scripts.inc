@@ -27,7 +27,6 @@ SootopolisCity_House2_EventScript_DracoMeteorTutor::
 	compare VAR_RESULT, NO
 	goto_if_eq SootopolisCity_House2_EventScript_DracoMeteorDeclined
 	msgbox SootopolisCity_House2_Text_DracoMeteorWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8008, TRUE @ Used to indicate a tutor move requires max happiness
 	setvar VAR_0x8005, MOVE_DRACO_METEOR
 	call SootopolisCity_House2_EventScript_OpenPartyMenu
 	compare VAR_RESULT, 0
@@ -36,7 +35,6 @@ SootopolisCity_House2_EventScript_DracoMeteorTutor::
 	end
 
 SootopolisCity_House2_EventScript_DracoMeteorDeclined::
-	setvar VAR_0x8008, FALSE
 	msgbox SootopolisCity_House2_Text_DracoMeteorDeclined, MSGBOX_DEFAULT
 	release
 	end
@@ -48,7 +46,6 @@ SootopolisCity_House2_EventScript_OpenPartyMenu:: @ 82C8326
 	return
 
 SootopolisCity_House2_EventScript_DracoMeteorTaught::
-	setvar VAR_0x8008, FALSE
 	msgbox SootopolisCity_House2_Text_DracoMeteorTaught, MSGBOX_DEFAULT
 	release
 	end

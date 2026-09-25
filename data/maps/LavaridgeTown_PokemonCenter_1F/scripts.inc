@@ -192,7 +192,8 @@ LavaridgeTown_PokemonCenter_1F_Text_LucyYouThere:
 
 LavaridgeTown_PokemonCenter_1F_Text_ScottSaid:
 	.string "???: Scott said I might find you here.\n"
-	.string "I am Lucy…\p"
+	.string "I am Lucy, Pike Queen of the Battle\l"
+	.string "Frontier he is building…\p"
 	.string "I'm not one for idle chatter… I want\n"
 	.string "to battle. Are you ready?$"
 

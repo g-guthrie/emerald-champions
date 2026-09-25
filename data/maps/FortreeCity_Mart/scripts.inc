@@ -89,6 +89,8 @@ FortreeCity_Mart_Text_SpenserBeatLucy:
 	.string "Gwahahah! She wasn't happy about that!$"
 
 FortreeCity_Mart_Text_SpenserBeforeBattle:
+	.string "Scott speaks highly of you. I am to be\n"
+	.string "Palace Maven of his Battle Frontier.\p"
 	.string "I'd like to see your skills for myself.\p"
 	.string "Can your bonds of trust with your\n"
 	.string "Pokémon match mine?\p"

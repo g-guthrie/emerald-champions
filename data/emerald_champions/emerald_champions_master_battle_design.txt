@@ -7242,9 +7242,9 @@ strict_cap: 60
 location: LilycoveCity_CoveLilyMotel_2F
 requirement: optional
 status: master_audited_ready_for_implementation
-battle_class: ace
-ai_profile: sharp
-primary_question: Can the player beat this ace team (Mienshao, Milotic, Calyrex Shadow, Zamazenta Crowned, Togekiss, Volcarona) on its own terms: Final expedition trial. Fake Out and Follow Me create setup turns for Calyrex or the reserved Volcarona. Mega Milotic punishes Intimidate, while Zamazenta supplies Wide Guard against the spread attacks that normally bypass redirection. Preserve the authored coordination planner; use only revealed opponent information.
+battle_class: boss
+ai_profile: master
+primary_question: Can the player beat this boss team (Mienshao, Milotic, Calyrex Shadow, Zamazenta Crowned, Togekiss, Volcarona) on its own terms: Final expedition trial. Fake Out and Follow Me create setup turns for Calyrex or the reserved Volcarona. Mega Milotic punishes Intimidate, while Zamazenta supplies Wide Guard against the spread attacks that normally bypass redirection. Preserve the authored coordination planner; use only revealed opponent information.
 theme_and_tempo: Final expedition trial. Fake Out and Follow Me create setup turns for Calyrex or the reserved Volcarona. Mega Milotic punishes Intimidate, while Zamazenta supplies Wide Guard against the spread attacks that normally bypass redirection. Preserve the authored coordination planner; use only revealed opponent information.
 intentional_weakness: Deny setup with Taunt or Encore, disrupt redirection, and exploit the choice between protecting single-target and spread lanes. Dark pressure on Calyrex and targeted Fire or Ground pressure on Zamazenta remain real answers. Difficulty is provisional until native benchmark play.
 first_loss_lesson: Deny setup with Taunt or Encore, disrupt redirection, and exploit the choice between protecting single-target and spread lanes. Dark pressure on Calyrex and targeted Fire or Ground pressure on Zamazenta remain real answers. Difficulty is provisional until native benchmark play.

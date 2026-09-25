@@ -1525,7 +1525,9 @@ SlateportCity_Text_TakingBattleTentChallenge: @ 81DF28C
 	.string "Give it your best effort!$"
 
 SlateportCity_Text_GretaHowdy:
-	.string "Hey! Howdy! Up for a battle, Trainer?$"
+	.string "Hey! Howdy! I'm Greta, Arena Tycoon of\n"
+	.string "Scott's Battle Frontier-to-be!\p"
+	.string "Up for a battle, Trainer?$"
 
 SlateportCity_Text_GretaReadyForBattle:
 	.string "Hmm… yeah, you look like you're up\n"
