@@ -3951,12 +3951,12 @@ mega_slots: 5,6
 ai: Ace Pokemon
 plan: Dark Aura pressure with protected fast finishers. Replace Darkrai with Light Clay Grimmsnarl and Hoopa-Unbound with Speed Boost Sharpedo. Keep Incineroar/Yveltal as the opening, Urshifu as the protection-breaking reserve and Mega Absol Z as the fast Magic Bounce threat. Yveltal gains Heat Wave over Snarl and Life Orb for special pressure. Stats: Incineroar and Grimmsnarl receive compensating level100 support seeds; Yveltal is fast special; Sharpedo/Absol/Urshifu fast physical. Mega Sharpedo gets Strong Jaw for Crunch/Psychic Fangs, not Liquidation. Dark Aura boosts eligible Dark attacks on both sides. Could it be cooler? Sharpedo can earn a Speed Boost before Mega Evolution, then trade its ability for Strong Jaw; the Mega decision is a timing choice. Psychic Fangs removes screens. Mega Absol Z uses its151 base Speed and Magic Bounce to punish direct status targeting; it does not grant teamwide reflection. Overrepresented? Sharpedo is also an Archie showcase; Sidney adds Dark Aura and a second Dark Mega rather than another rain room. Absol Z stays Sidney's exclusive named form. Darkrai/Hoopa are released for more deliberate homes rather than included only for their power. Medium cap96 levels 100/96/100/97/98/96 are initial design seeds; complete battle calibration remains pending.
 crack: Fairy pressure, burns on eligible physical attackers, screen removal, Trick Room, priority and denying Sharpedo a safe setup/activation window. Dark types obstruct Grimmsnarl Prankster Thunder Wave. No Dark Void coin flip is required.
-INCINEROAR @SITRUS_BERRY INTIMIDATE CAREFUL 252/0/4/0/252/0 7 | FAKE_OUT, FLARE_BLITZ, THROAT_CHOP, PARTING_SHOT | ivs=31/31/31/31/31/31 | friendship=255
-YVELTAL @LIFE_ORB DARK_AURA MODEST 4/0/0/252/0/252 3 | OBLIVION_WING, DARK_PULSE, HEAT_WAVE, TAILWIND | ivs=31/0/31/31/31/31 | friendship=255
-GRIMMSNARL @LIGHT_CLAY PRANKSTER CAREFUL 252/4/116/0/136/0 7 | REFLECT, LIGHT_SCREEN, SPIRIT_BREAK, THUNDER_WAVE | ivs=31/31/31/31/31/31 | friendship=255
-URSHIFU @CLEAR_AMULET UNSEEN_FIST JOLLY 4/252/0/0/0/252 4 | WICKED_BLOW, CLOSE_COMBAT, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHARPEDO @SHARPEDONITE SPEED_BOOST JOLLY 4/252/0/0/0/252 5 | CRUNCH, PSYCHIC_FANGS, LIQUIDATION, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ABSOL @ABSOLITE_Z SUPER_LUCK JOLLY 4/252/0/0/0/252 3 | SUCKER_PUNCH, KNOCK_OFF, CLOSE_COMBAT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+INCINEROAR @SITRUS_BERRY INTIMIDATE CAREFUL 252/0/4/0/252/0 10 | FAKE_OUT, FLARE_BLITZ, THROAT_CHOP, PARTING_SHOT | ivs=31/31/31/31/31/31 | friendship=255
+YVELTAL @LIFE_ORB DARK_AURA MODEST 4/0/0/252/0/252 6 | OBLIVION_WING, DARK_PULSE, HEAT_WAVE, TAILWIND | ivs=31/0/31/31/31/31 | friendship=255
+GRIMMSNARL @LIGHT_CLAY PRANKSTER CAREFUL 252/4/116/0/136/0 10 | REFLECT, LIGHT_SCREEN, SPIRIT_BREAK, THUNDER_WAVE | ivs=31/31/31/31/31/31 | friendship=255
+URSHIFU @CLEAR_AMULET UNSEEN_FIST JOLLY 4/252/0/0/0/252 7 | WICKED_BLOW, CLOSE_COMBAT, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHARPEDO @SHARPEDONITE SPEED_BOOST JOLLY 4/252/0/0/0/252 8 | CRUNCH, PSYCHIC_FANGS, LIQUIDATION, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ABSOL @ABSOLITE_Z SUPER_LUCK JOLLY 4/252/0/0/0/252 6 | SUCKER_PUNCH, KNOCK_OFF, CLOSE_COMBAT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0494 TRAINER_PHOEBE class=elite
 strategy: NONE
@@ -3978,8 +3978,8 @@ ai: Ace Pokemon
 plan: Snow endurance with physical and special closers. Mega Froslass replaces Articuno as the fast special reserve and second Snow Warning opportunity. Ninetales keeps Aurora Veil; Froslass uses Blizzard/Shadow Ball/Icy Wind/Protect. Keep Specs Kyurem, Chien-Pao, Slush Rush Sandslash and Mega Baxcalibur; Baxcalibur gains High Horsepower over redundant Ice Shard. Stats: Ninetales invests in HP/Speed; Kyurem special offense; Chien-Pao/Sandslash/Baxcalibur physical offense; Froslass fast special. Mega Baxcalibur has175 Attack/115HP/117Defense and retains Thermal Exchange. Snow's Ice Defense bonus does not cover special attacks. Could it be cooler? If the first snow setter goes down or weather is replaced, Mega Froslass can establish the second snow phase through actual Mega activation. Sword of Ruin and the physical sweepers convert that window into pressure; Icy Wind offers speed control when snow-speed alone does not solve the board. Overrepresented? This is the League culmination of Lucas's snow formation. No unnecessary third snow setter or fourth generic Ice setup sweeper. Froslass/Baxcalibur are separate offensive roles and do not duplicate another League Mega. Medium cap96 levels 100/95/96/97/100/96 are initial design seeds; complete battle calibration remains pending.
 crack: Weather replacement, strong special Fire/Fighting coverage, screen removal and denying the fast attackers. Sword of Ruin also reduces eligible teammates' Defense; snow is not an excuse to ignore that liability. Glaive Rush leaves its real retaliation risk.
 NINETALES_ALOLA @LIGHT_CLAY SNOW_WARNING TIMID 252/0/0/4/0/252 8 | AURORA_VEIL, BLIZZARD, MOONBLAST, ENCORE | ivs=31/0/31/31/31/31 | friendship=255
-KYUREM @CHOICE_SPECS PRESSURE MODEST 4/0/0/252/0/252 3 | BLIZZARD, DRACO_METEOR, FREEZE_DRY, EARTH_POWER | ivs=31/31/31/31/31/31 | friendship=255
-CHIEN_PAO @FOCUS_SASH SWORD_OF_RUIN JOLLY 4/252/0/0/0/252 4 | ICICLE_CRASH, SUCKER_PUNCH, SACRED_SWORD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KYUREM @CHOICE_SPECS PRESSURE MODEST 4/0/0/252/0/252 4 | BLIZZARD, DRACO_METEOR, FREEZE_DRY, EARTH_POWER | ivs=31/31/31/31/31/31 | friendship=255
+CHIEN_PAO @FOCUS_SASH SWORD_OF_RUIN JOLLY 4/252/0/0/0/252 5 | ICICLE_CRASH, SUCKER_PUNCH, SACRED_SWORD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 FROSLASS @FROSLASSITE CURSED_BODY TIMID 4/0/0/252/0/252 5 | BLIZZARD, SHADOW_BALL, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 SANDSLASH_ALOLA @LIFE_ORB SLUSH_RUSH ADAMANT 4/252/0/0/0/252 8 | ICICLE_CRASH, IRON_HEAD, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BAXCALIBUR @BAXCALIBRITE THERMAL_EXCHANGE ADAMANT 4/252/0/0/0/252 4 | GLAIVE_RUSH, ICICLE_CRASH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
@@ -4003,12 +4003,12 @@ mega_slots: 5,6
 ai: Double Ace Pokemon, Conservative
 plan: Rain and mist with a durable special anchor and physical Mega finisher. Make Wallace's signature Milotic the second Mega with Miloticite and Muddy Water/Helping Hand/Recover/Ice Beam. Keep Huge Power physical Mega Starmie, Kyogre/Tapu Fini leads, Ferrothorn and Palkia. Give Ferrothorn zero Speed IVs. Stats: Mega Milotic is Water/Fairy with95HP/109Defense/155Special Defense; Prism Scales reduces incoming special damage by30%, so HP/Defense investment covers its weaker side. Mega Starmie has100 Attack doubled by Huge Power and120 Speed. Kyogre/Palkia stay special, avoiding an all-physical ending. Could it be cooler? Kyogre starts rain while Fini starts Misty Terrain; each field is independently replaceable. Later Milotic can use priority Helping Hand for Starmie or recover when doing so buys progress. Milotic's base Competitive phase can punish a real stat drop before it Mega Evolves; the ability changes to Prism Scales afterward. Overrepresented? Milotic is Wallace's own signature, so this pairing strengthens his identity. Starmie's unusual physical Mega stays reserved for the Champion. Keep Ferrothorn's Grass/Steel resistance and Palkia's rain Thunder rather than replace every supporting species with another legendary. Medium cap96 levels 96/100/100/96/98/97 are initial design seeds; complete battle calibration remains pending.
 crack: Change rain, change terrain, use Wide Guard, target the physical/special lane appropriately, pressure Kyogre before Water Spout, and punish a passive Recover turn. Mist does not cure existing status; sun/rain changes do not remove it. Palkia intentionally avoids Dragon STAB into grounded targets protected by mist.
-KYOGRE @MYSTIC_WATER DRIZZLE MODEST 4/0/0/252/0/252 4 | WATER_SPOUT, ICE_BEAM, ORIGIN_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAPU_FINI @SITRUS_BERRY MISTY_SURGE TIMID 252/0/4/0/0/252 8 | MUDDY_WATER, MOONBLAST, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-FERROTHORN @LEFTOVERS IRON_BARBS RELAXED 252/0/252/0/4/0 8 | IRON_HEAD, POWER_WHIP, LEECH_SEED, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-PALKIA @LIFE_ORB PRESSURE TIMID 4/0/0/252/0/252 4 | AURA_SPHERE, HYDRO_PUMP, THUNDER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MILOTIC @MILOTICITE COMPETITIVE BOLD 252/0/252/0/4/0 6 | MUDDY_WATER, HELPING_HAND, RECOVER, ICE_BEAM | ivs=31/0/31/31/31/31 | friendship=255
-STARMIE @STARMINITE NATURAL_CURE JOLLY 4/252/0/0/0/252 5 | LIQUIDATION, PSYCHO_CUT, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KYOGRE @MYSTIC_WATER DRIZZLE MODEST 4/0/0/252/0/252 6 | WATER_SPOUT, ICE_BEAM, ORIGIN_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAPU_FINI @SITRUS_BERRY MISTY_SURGE TIMID 252/0/4/0/0/252 10 | MUDDY_WATER, MOONBLAST, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FERROTHORN @LEFTOVERS IRON_BARBS RELAXED 252/0/252/0/4/0 10 | IRON_HEAD, POWER_WHIP, LEECH_SEED, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+PALKIA @LIFE_ORB PRESSURE TIMID 4/0/0/252/0/252 6 | AURA_SPHERE, HYDRO_PUMP, THUNDER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MILOTIC @MILOTICITE COMPETITIVE BOLD 252/0/252/0/4/0 8 | MUDDY_WATER, HELPING_HAND, RECOVER, ICE_BEAM | ivs=31/0/31/31/31/31 | friendship=255
+STARMIE @STARMINITE NATURAL_CURE JOLLY 4/252/0/0/0/252 7 | LIQUIDATION, PSYCHO_CUT, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0498 TRAINER_WALLY_VR_2 class=rival
 strategy: REDIRECTION,SETUP
@@ -4016,12 +4016,12 @@ mega_slots: 6
 ai: Double Ace Pokemon
 plan: Concept: the rival arc, part two. Wally comes back as Champion-tier and the arc completes its mirror - the Gallade that was his Mega at Victory Road now stands beside him as an ordinary partner while Altaria, the Swablu he caught on Route 114, carries the stone. First two useful turns: Indeedee-F sets Psychic Terrain on entry and redirects with Follow Me to keep Gallade's Sharpness-boosted Psycho Cut or Sacred Sword alive; Psychic Terrain also blocks all priority moves aimed at his grounded members, which is what makes the setup viable at this level. Gallade attacks. Turn two picks the special half rather than repeating the redirect. Alternate deployment: Tapu Lele is the raw damage mode - its Psychic Surge re-establishes the terrain if it has been replaced, and under it Psychic and Psyshock hit half again as hard. Gardevoir's Trace copies the most valuable ability on the opposing side the moment it enters. Reserves & disruption: Magearna's Soul-Heart raises its Special Attack every time any Pokemon on the field faints, so a long fight makes it progressively lethal, and Fleur Cannon is enormous at the cost of a two-stage drop each use. Mega Altaria's Pixilate converts Return into a Fairy-type attack with a power bonus, and at maximum friendship Return is already at full power - a Dragon Dance behind that is the closer, and its Dragon/Fairy typing means the Steel answer the player saved for Magearna is the only thing that also answers this. Note that Psychic Terrain blocks the team's own priority as well, so Gallade has no safe priority option while it is up. Could this team be cooler? Yes, and the rebuild is what makes the two Wally fights a rival arc rather than two unrelated bosses. The authored roster was Dragapult, Heatran and Incineroar behind a Mega Magearna - a strong team with no connection to Wally at all, and one that borrowed Steven's and the League's identities. The new version keeps a single coherent Psychic and Fairy identity across both fights, promotes his own Altaria to the Mega slot using the campaign's one unused Altarianite, and makes the memorable moment structural: the player recognises every Pokemon, and the one that was a support in the first fight is now the thing that kills them. Overrepresented? Mega Altaria, Tapu Lele and Magearna appear nowhere else in the campaign; Indeedee-F's other owner is the route trainer Alexis at a far lower tier; Gardevoir and Gallade are Wally's alone. Levels: cap 100, offsets 1/2/2/2/2/3.
 crack: Steel and Poison attacks answer four of the six; Fire answers Magearna and Gallade; Ghost and Flying answer the Psychic half. Replace the terrain and your priority works again. Spread damage ignores Follow Me. Let Magearna use Fleur Cannon twice and it has halved its own Special Attack; Mega Altaria is bulky but must dance before it threatens, and Steel and Poison attacks answer it outright.
-INDEEDEE_F @SITRUS_BERRY PSYCHIC_SURGE MODEST 252/0/4/0/252/0 5 | FOLLOW_ME, EXPANDING_FORCE, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GALLADE @LIFE_ORB SHARPNESS JOLLY 4/252/0/0/0/252 6 | PSYCHO_CUT, SACRED_SWORD, NIGHT_SLASH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GARDEVOIR @CHOICE_SPECS TRACE TIMID 4/0/0/252/0/252 6 | PSYCHIC, MOONBLAST, MYSTICAL_FIRE, SHADOW_BALL | ivs=31/0/31/31/31/31 | friendship=255
-TAPU_LELE @LIFE_ORB PSYCHIC_SURGE TIMID 4/0/0/252/0/252 6 | PSYCHIC, MOONBLAST, PSYSHOCK, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MAGEARNA @ASSAULT_VEST SOUL_HEART MODEST 252/0/4/252/0/0 6 | FLEUR_CANNON, FLASH_CANNON, AURA_SPHERE, THUNDERBOLT | ivs=31/0/31/31/31/31 | friendship=255
-ALTARIA @ALTARIANITE NATURAL_CURE ADAMANT 252/0/4/0/0/252 7 | RETURN, DRAGON_DANCE, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+INDEEDEE_F @SITRUS_BERRY PSYCHIC_SURGE MODEST 252/0/4/0/252/0 9 | FOLLOW_ME, EXPANDING_FORCE, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GALLADE @LIFE_ORB SHARPNESS JOLLY 4/252/0/0/0/252 10 | PSYCHO_CUT, SACRED_SWORD, NIGHT_SLASH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GARDEVOIR @CHOICE_SPECS TRACE TIMID 4/0/0/252/0/252 10 | PSYCHIC, MOONBLAST, MYSTICAL_FIRE, SHADOW_BALL | ivs=31/0/31/31/31/31 | friendship=255
+TAPU_LELE @LIFE_ORB PSYCHIC_SURGE TIMID 4/0/0/252/0/252 10 | PSYCHIC, MOONBLAST, PSYSHOCK, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+MAGEARNA @ASSAULT_VEST SOUL_HEART MODEST 252/0/4/252/0/0 10 | FLEUR_CANNON, FLASH_CANNON, AURA_SPHERE, THUNDERBOLT | ivs=31/0/31/31/31/31 | friendship=255
+ALTARIA @ALTARIANITE NATURAL_CURE ADAMANT 252/0/4/0/0/252 11 | RETURN, DRAGON_DANCE, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0499 TRAINER_VINCENT class=ace
 strategy: SETUP
@@ -4068,9 +4068,9 @@ mega_slots: 6
 ai: Conservative
 plan: Concept: a cruise-liner cat burglar's team - Prankster control, two pivots and a tiny Fairy that quietly becomes unkillable. First two useful turns: Liepard's Prankster gives Fake Out, Taunt, Encore and Foul Play priority, so it takes the first turn and decides what the player is allowed to do with theirs; Fezandipiti attacks or sets Tailwind, and its Toxic Chain has a chance to badly poison on every hit. Turn two converts the control into damage rather than adding another passive support. Alternate deployment: Mesprit's Helping Hand and Thunder Wave behind a Covert Cloak - which blocks all secondary effects and Fake Out aimed at it - supports Mega Floette's Calm Mind. Reserves & disruption: Alolan Persian's Fur Coat halves physical damage and Foul Play uses the attacker's own Attack, so the pair of them punish physical setup twice over; Incineroar is the Intimidate pivot with Parting Shot lowering both of a target's attacking stats as it leaves. Eternal Floette's Flower Veil protects the team's Grass and Fairy members from stat drops, and Wish needs a recipient that will survive to receive it. Could this team be cooler? The composition is a good, thematically tight "thieves on a ship" roster and the four-way priority-control opening is genuinely oppressive, so it earns retention. Eternal Floette deserves specific defence: it is one of the rarest forms in the series, it is not simply a stat upgrade, and pairing its Calm Mind with Flower Veil and Wish makes it a win condition the player has to break through rather than out-damage. The change is tier - the block's stale note about a discarded level-100 floor is replaced by honest live-cap offsets. Overrepresented? Liepard, Fezandipiti, Alolan Persian, Mesprit and Mega Floette are unique in the campaign; Incineroar's other owners are the Elite Four's Dark specialist and Wally's earlier authored draft, which this pass removes. Levels: cap 100, offsets 1/1/1/1/1/2.
 crack: Fighting, Bug and Fairy attacks answer the Dark half; Steel, Poison and Ground answer Fezandipiti and Floette. Taunt beats their Taunt if you move first, and Prankster status fails against Dark types entirely - a Dark lead of your own turns the whole opening off. Break Floette before three Calm Minds.
-LIEPARD @FOCUS_SASH PRANKSTER JOLLY 252/0/4/0/0/252 6 | FAKE_OUT, FOUL_PLAY, ENCORE, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
+LIEPARD @FOCUS_SASH PRANKSTER JOLLY 252/0/4/0/0/252 7 | FAKE_OUT, FOUL_PLAY, ENCORE, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
 FEZANDIPITI @LIFE_ORB TOXIC_CHAIN TIMID 4/0/0/252/0/252 6 | MOONBLAST, SLUDGE_BOMB, TAILWIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-PERSIAN_ALOLA @SITRUS_BERRY FUR_COAT TIMID 252/0/4/0/0/252 6 | U_TURN, FOUL_PLAY, SNARL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PERSIAN_ALOLA @SITRUS_BERRY FUR_COAT TIMID 252/0/4/0/0/252 7 | U_TURN, FOUL_PLAY, SNARL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 INCINEROAR @MENTAL_HERB INTIMIDATE CAREFUL 252/0/4/0/252/0 6 | FLARE_BLITZ, THROAT_CHOP, PARTING_SHOT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MESPRIT @COVERT_CLOAK LEVITATE CALM 252/0/4/0/252/0 6 | HELPING_HAND, THUNDER_WAVE, PSYCHIC, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 FLOETTE_ETERNAL @FLOETTITE FLOWER_VEIL MODEST 252/0/4/0/252/0 7 | MOONBLAST, WISH, CALM_MIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
@@ -4081,10 +4081,10 @@ mega_slots: 2
 ai: Conservative
 plan: Snow doubles on the final voyage. Ninetales supplies Aurora Veil and reliable snow, Arctozolt exploits Slush Rush, and Lapras and Jolteon retain the original snow/Weather Ball core. Clawitzer supplies special coverage and Luxray supplies Intimidate.
 crack: Remove snow, deny Aurora Veil, or pressure the weather support before the speed advantage takes hold.
-JOLTEON @CHOICE_SPECS VOLT_ABSORB TIMID 4/0/0/252/0/252 3 | THUNDERBOLT, VOLT_SWITCH, SHADOW_BALL, WEATHER_BALL | ivs=31/0/31/31/31/31 | friendship=255
+JOLTEON @CHOICE_SPECS VOLT_ABSORB TIMID 4/0/0/252/0/252 4 | THUNDERBOLT, VOLT_SWITCH, SHADOW_BALL, WEATHER_BALL | ivs=31/0/31/31/31/31 | friendship=255
 LAPRAS @LAPRASITE WATER_ABSORB MODEST 4/0/0/252/0/252 4 | FREEZE_DRY, HYDRO_PUMP, SNOWSCAPE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 CLAWITZER @LIFE_ORB MEGA_LAUNCHER MODEST 4/0/0/252/0/252 4 | WATER_PULSE, AURA_SPHERE, DARK_PULSE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-LUXRAY @SITRUS_BERRY INTIMIDATE BRAVE 252/252/4/0/0/0 4 | WILD_CHARGE, CRUNCH, SNARL, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+LUXRAY @SITRUS_BERRY INTIMIDATE BRAVE 252/252/4/0/0/0 5 | WILD_CHARGE, CRUNCH, SNARL, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 NINETALES_ALOLA @LIGHT_CLAY SNOW_WARNING TIMID 252/0/0/4/0/252 4 | AURORA_VEIL, BLIZZARD, MOONBLAST, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 ARCTOZOLT @LIFE_ORB SLUSH_RUSH ADAMANT 4/252/0/0/0/252 4 | BOLT_BEAK, ICICLE_CRASH, LOW_KICK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -4095,12 +4095,12 @@ ai: Conservative
 tactic: ACTIVATE WEAVILE ICE_SHARD ARMAROUGE
 plan: The original Weavile-to-Armarouge Weak Armor activation remains intact. Rillaboom adds Fake Out, terrain and pivot support; Urshifu supplies immediate physical pressure beside the special sweeper. Genesect and Mega Scolipede retain the original cleanup roles.
 crack: Deny the allied activation, use speed control, and punish Armarouge before it converts the free speed into damage.
-WEAVILE @FOCUS_SASH PRESSURE JOLLY 252/4/0/0/0/252 1 | ICE_SHARD, FAKE_OUT, KNOCK_OFF, TAUNT | ivs=31/0/31/31/31/31 | friendship=255
-ARMAROUGE @LIFE_ORB WEAK_ARMOR MODEST 4/0/0/252/0/252 2 | ARMOR_CANNON, PSYCHIC, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GENESECT @CHOICE_SCARF DOWNLOAD MODEST 4/0/0/252/0/252 1 | BUG_BUZZ, ICE_BEAM, FLAMETHROWER, U_TURN | ivs=31/0/31/31/31/31 | friendship=255
-SCOLIPEDE @SCOLIPITE SPEED_BOOST JOLLY 4/252/0/0/0/252 1 | PROTECT, MEGAHORN, POISON_JAB, SUPERPOWER | ivs=31/31/31/31/31/31 | friendship=255
-RILLABOOM @ASSAULT_VEST GRASSY_SURGE ADAMANT 252/252/4/0/0/0 1 | FAKE_OUT, GRASSY_GLIDE, WOOD_HAMMER, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-URSHIFU_RAPID_STRIKE @MYSTIC_WATER UNSEEN_FIST JOLLY 4/252/0/0/0/252 1 | SURGING_STRIKES, CLOSE_COMBAT, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WEAVILE @FOCUS_SASH PRESSURE JOLLY 252/4/0/0/0/252 3 | ICE_SHARD, FAKE_OUT, KNOCK_OFF, TAUNT | ivs=31/0/31/31/31/31 | friendship=255
+ARMAROUGE @LIFE_ORB WEAK_ARMOR MODEST 4/0/0/252/0/252 4 | ARMOR_CANNON, PSYCHIC, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GENESECT @CHOICE_SCARF DOWNLOAD MODEST 4/0/0/252/0/252 3 | BUG_BUZZ, ICE_BEAM, FLAMETHROWER, U_TURN | ivs=31/0/31/31/31/31 | friendship=255
+SCOLIPEDE @SCOLIPITE SPEED_BOOST JOLLY 4/252/0/0/0/252 3 | PROTECT, MEGAHORN, POISON_JAB, SUPERPOWER | ivs=31/31/31/31/31/31 | friendship=255
+RILLABOOM @ASSAULT_VEST GRASSY_SURGE ADAMANT 252/252/4/0/0/0 3 | FAKE_OUT, GRASSY_GLIDE, WOOD_HAMMER, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+URSHIFU_RAPID_STRIKE @MYSTIC_WATER UNSEEN_FIST JOLLY 4/252/0/0/0/252 3 | SURGING_STRIKES, CLOSE_COMBAT, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0507 TRAINER_LEA_AND_JED class=casual
 strategy: TRICK_ROOM
@@ -4120,12 +4120,12 @@ mega_slots: 3
 ai: Conservative
 plan: Queenly Majesty protects setup from priority. Salazzle supplies Fake Out, Tornadus supplies Tailwind and Taunt, and Mega Darkrai and Gholdengo offer separate special setup threats. Meowscarada retains immediate physical pressure.
 crack: Deny speed control or setup and exploit the shared Ground weakness while respecting Tornadus immunity.
-TSAREENA @LIFE_ORB QUEENLY_MAJESTY JOLLY 4/252/0/0/0/252 0 | POWER_WHIP, HIGH_JUMP_KICK, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SALAZZLE @FOCUS_SASH CORROSION TIMID 4/0/0/252/0/252 1 | FAKE_OUT, HEAT_WAVE, SLUDGE_BOMB, TOXIC | ivs=31/0/31/31/31/31 | friendship=255
-DARKRAI @DARKRANITE BAD_DREAMS TIMID 4/0/0/252/0/252 1 | HYPNOSIS, DARK_PULSE, NASTY_PLOT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MEOWSCARADA @LIFE_ORB PROTEAN JOLLY 4/252/0/0/0/252 1 | FLOWER_TRICK, KNOCK_OFF, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TORNADUS @COVERT_CLOAK PRANKSTER TIMID 252/0/0/4/0/252 1 | TAILWIND, BLEAKWIND_STORM, TAUNT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GHOLDENGO @LIFE_ORB GOOD_AS_GOLD MODEST 4/0/0/252/0/252 1 | MAKE_IT_RAIN, SHADOW_BALL, NASTY_PLOT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+TSAREENA @LIFE_ORB QUEENLY_MAJESTY JOLLY 4/252/0/0/0/252 3 | POWER_WHIP, HIGH_JUMP_KICK, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SALAZZLE @FOCUS_SASH CORROSION TIMID 4/0/0/252/0/252 4 | FAKE_OUT, HEAT_WAVE, SLUDGE_BOMB, TOXIC | ivs=31/0/31/31/31/31 | friendship=255
+DARKRAI @DARKRANITE BAD_DREAMS TIMID 4/0/0/252/0/252 4 | HYPNOSIS, DARK_PULSE, NASTY_PLOT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+MEOWSCARADA @LIFE_ORB PROTEAN JOLLY 4/252/0/0/0/252 4 | FLOWER_TRICK, KNOCK_OFF, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TORNADUS @COVERT_CLOAK PRANKSTER TIMID 252/0/0/4/0/252 4 | TAILWIND, BLEAKWIND_STORM, TAUNT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GHOLDENGO @LIFE_ORB GOOD_AS_GOLD MODEST 4/0/0/252/0/252 4 | MAKE_IT_RAIN, SHADOW_BALL, NASTY_PLOT, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0510 TRAINER_WALLACE_DOUBLES_LEGENDS class=elite
 strategy: RAIN,TAILWIND,SETUP,REDIRECTION,ALLY_COMBO,PRESSURE
@@ -4146,12 +4146,12 @@ mega_slots: 6
 ai: Ace Pokemon
 plan: Concept: the Kanto challenger in Altering Cave - six Pokemon from a different region's memory, led by sun and ended by the strongest Psychic attacker in the series. First two useful turns: Ninetales establishes Drought on entry, so Solar Beam needs no charge turn and Encore can lock a wasted opposing action; Kangaskhan opens with Fake Out or immediate Scrappy pressure, which lets its Normal attacks hit Ghost types that would otherwise be immune. Turn two pivots to whichever support and threat pair the opening revealed. Alternate deployment: Chlorophyll Tangrowth is already at doubled Speed in its own sun and uses Rage Powder to hold the field for Mega Mewtwo Y's special offence, or Sleep Powder to remove a threat outright. Reserves & disruption: Gengar supplies Icy Wind speed control and Sludge Bomb, and Snorlax is the immovable object - Thick Fat halves incoming Fire and Ice damage, Recycle restores its consumed Leftovers, and its HP is large enough to absorb the burst the player was saving for Mewtwo. Rage Powder has ordinary target restrictions and cannot protect against spread attacks. Could this team be cooler? Yes, and one slot changed for both theme and duplication. Zeraora is not a Kanto Pokemon and it duplicated Vincent's Mega two doors earlier, so it was doing double damage to the fight's identity. Snorlax replaces it with the most recognisable Kanto body in the series, gives the roster the physical wall it completely lacked, and adds a genuinely memorable interaction in Recycle - a Snorlax that keeps eating its own Leftovers is a wall the player has to actually kill rather than outlast. The team now reads as exactly what it is: a Kanto champion's party, unchanged in spirit, ending on Mega Mewtwo Y. Overrepresented? Snorlax, Kangaskhan's base Scrappy set, Tangrowth and Mega Mewtwo Y are unique in the campaign; Ninetales's Drought recurs with Vito and the Magma arc at lower tiers; Gengar's other owners are the route ace Mollie and Phoebe's League Mega, all with different items and roles. Levels: cap 100, offsets 1/1/1/1/1/2, scaled to the live cap rather than the discarded fixed level-100 floor.
 crack: Take the sun and Solar Beam needs a charge turn while Tangrowth loses half its Speed. Rock and Water attacks answer Ninetales; Fighting answers Kangaskhan and Snorlax; Fire, Ice and Flying answer Tangrowth; Dark and Ghost answer Mewtwo. Safety Goggles ignores both powders, spread damage ignores Rage Powder, and Mega Mewtwo Y is extraordinarily frail on the physical side.
-NINETALES @CHARCOAL DROUGHT TIMID 4/0/0/252/0/252 1 | HEAT_WAVE, SOLAR_BEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-KANGASKHAN @LIFE_ORB SCRAPPY JOLLY 4/252/0/0/0/252 1 | FAKE_OUT, DOUBLE_EDGE, DRAIN_PUNCH, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-GENGAR @FOCUS_SASH CURSED_BODY TIMID 4/0/0/252/0/252 1 | SHADOW_BALL, SLUDGE_BOMB, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-TANGROWTH @SITRUS_BERRY CHLOROPHYLL MODEST 4/0/0/252/0/252 1 | GIGA_DRAIN, SLEEP_POWDER, RAGE_POWDER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-SNORLAX @LEFTOVERS THICK_FAT ADAMANT 252/252/4/0/0/0 1 | BODY_SLAM, HIGH_HORSEPOWER, CRUNCH, RECYCLE | ivs=31/31/31/31/31/31 | friendship=255
-MEWTWO @MEWTWONITE_Y PRESSURE TIMID 4/0/0/252/0/252 2 | PSYSTRIKE, AURA_SPHERE, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+NINETALES @CHARCOAL DROUGHT TIMID 4/0/0/252/0/252 2 | HEAT_WAVE, SOLAR_BEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+KANGASKHAN @LIFE_ORB SCRAPPY JOLLY 4/252/0/0/0/252 2 | FAKE_OUT, DOUBLE_EDGE, DRAIN_PUNCH, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+GENGAR @FOCUS_SASH CURSED_BODY TIMID 4/0/0/252/0/252 2 | SHADOW_BALL, SLUDGE_BOMB, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+TANGROWTH @SITRUS_BERRY CHLOROPHYLL MODEST 4/0/0/252/0/252 2 | GIGA_DRAIN, SLEEP_POWDER, RAGE_POWDER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+SNORLAX @LEFTOVERS THICK_FAT ADAMANT 252/252/4/0/0/0 2 | BODY_SLAM, HIGH_HORSEPOWER, CRUNCH, RECYCLE | ivs=31/31/31/31/31/31 | friendship=255
+MEWTWO @MEWTWONITE_Y PRESSURE TIMID 4/0/0/252/0/252 3 | PSYSTRIKE, AURA_SPHERE, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0512 TRAINER_STEVEN class=rival
 strategy: SETUP,TAILWIND
