@@ -83,7 +83,7 @@ Music: Male
 Double Battle: No
 
 === TRAINER_SAWYER_1 ===
-Name: SAWYER
+Name: Sawyer
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -96,7 +96,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -158,7 +158,7 @@ Nature: NATURE_CALM
 - MOVE_ROOST
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -220,7 +220,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_3 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -282,7 +282,7 @@ Nature: NATURE_CALM
 - MOVE_WIDE_GUARD
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_4 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -344,7 +344,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -406,7 +406,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -468,7 +468,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_3 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -530,7 +530,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GABRIELLE_1 ===
-Name: GABRIELLE
+Name: Gabrielle
 Class: Pkmn Breeder
 Pic: Pokemon Breeder F
 Gender: Female
@@ -618,7 +618,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_PETALBURG_WOODS ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -680,7 +680,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_MARCEL ===
-Name: MARCEL
+Name: Marcel
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -742,7 +742,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_ALBERTO ===
-Name: ALBERTO
+Name: Alberto
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -755,7 +755,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ED ===
-Name: ED
+Name: Ed
 Class: Collector
 Pic: Collector
 Gender: Male
@@ -768,7 +768,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_4 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -830,7 +830,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_DECLAN ===
-Name: DECLAN
+Name: Declan
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -843,7 +843,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_RUSTURF_TUNNEL ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -905,7 +905,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_WEATHER_INST_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -967,7 +967,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_WEATHER_INST_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1029,7 +1029,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_WEATHER_INST_3 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1091,7 +1091,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MUSEUM_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1153,7 +1153,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MUSEUM_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1166,7 +1166,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_SPACE_CENTER_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -1228,7 +1228,7 @@ Nature: NATURE_ADAMANT
 - MOVE_U_TURN
 
 === TRAINER_GRUNT_MT_PYRE_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1290,7 +1290,7 @@ Nature: NATURE_QUIET
 - MOVE_VOLT_SWITCH
 
 === TRAINER_GRUNT_MT_PYRE_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1352,7 +1352,7 @@ Nature: NATURE_ADAMANT
 - MOVE_AQUA_JET
 
 === TRAINER_GRUNT_MT_PYRE_3 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -1414,7 +1414,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_WEATHER_INST_4 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -1476,7 +1476,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_5 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -1538,7 +1538,7 @@ Nature: NATURE_BOLD
 - MOVE_RECOVER
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_6 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -1600,7 +1600,7 @@ Nature: NATURE_JOLLY
 - MOVE_CRUNCH
 
 === TRAINER_FREDRICK ===
-Name: FREDRICK
+Name: Fredrick
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -1662,7 +1662,7 @@ Nature: NATURE_QUIET
 - MOVE_KINGS_SHIELD
 
 === TRAINER_MATT ===
-Name: MATT
+Name: Matt
 Class: Aqua Admin
 Pic: Aqua Admin M
 Gender: Male
@@ -1750,7 +1750,7 @@ Nature: NATURE_ADAMANT
 - MOVE_AQUA_JET
 
 === TRAINER_ZANDER ===
-Name: ZANDER
+Name: Zander
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -1763,7 +1763,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SHELLY_WEATHER_INSTITUTE ===
-Name: SHELLY
+Name: Shelly
 Class: Aqua Admin
 Pic: Aqua Admin F
 Gender: Female
@@ -1851,7 +1851,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_SHELLY_SEAFLOOR_CAVERN ===
-Name: SHELLY
+Name: Shelly
 Class: Aqua Admin
 Pic: Aqua Admin F
 Gender: Female
@@ -1939,7 +1939,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_ARCHIE ===
-Name: ARCHIE
+Name: Archie
 Class: Aqua Leader
 Pic: Aqua Leader Archie
 Gender: Male
@@ -2028,7 +2028,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_LEAH ===
-Name: LEAH
+Name: Leah
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -2041,7 +2041,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DAISY ===
-Name: DAISY
+Name: Daisy
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
@@ -2103,7 +2103,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_ROSE_1 ===
-Name: ROSE
+Name: Rose
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
@@ -2165,7 +2165,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_FELIX ===
-Name: FELIX
+Name: Felix
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -2253,7 +2253,7 @@ Nature: NATURE_QUIET
 - MOVE_SHADOW_SNEAK
 
 === TRAINER_VIOLET ===
-Name: VIOLET
+Name: Violet
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
@@ -2266,7 +2266,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DUSTY_1 ===
-Name: DUSTY
+Name: Dusty
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -2328,7 +2328,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_CHIP ===
-Name: CHIP
+Name: Chip
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -2341,7 +2341,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_FOSTER ===
-Name: FOSTER
+Name: Foster
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -2403,7 +2403,7 @@ Nature: NATURE_ADAMANT
 - MOVE_DOUBLE_EDGE
 
 === TRAINER_GABBY_AND_TY_1 ===
-Name: GABBY & TY
+Name: Gabby & Ty
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
@@ -2465,7 +2465,7 @@ Nature: NATURE_JOLLY
 - MOVE_QUICK_ATTACK
 
 === TRAINER_GABBY_AND_TY_2 ===
-Name: GABBY & TY
+Name: Gabby & Ty
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
@@ -2527,7 +2527,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 === TRAINER_GABBY_AND_TY_3 ===
-Name: GABBY & TY
+Name: Gabby & Ty
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
@@ -2540,7 +2540,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GABBY_AND_TY_4 ===
-Name: GABBY & TY
+Name: Gabby & Ty
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
@@ -2553,7 +2553,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GABBY_AND_TY_5 ===
-Name: GABBY & TY
+Name: Gabby & Ty
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
@@ -2615,7 +2615,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_GABBY_AND_TY_6 ===
-Name: GABBY & TY
+Name: Gabby & Ty
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
@@ -2677,7 +2677,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_LOLA_1 ===
-Name: LOLA
+Name: Lola
 Class: Tuber F
 Pic: Tuber F
 Gender: Female
@@ -2739,7 +2739,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_AUSTINA ===
-Name: AUSTINA
+Name: Austina
 Class: Tuber F
 Pic: Tuber F
 Gender: Female
@@ -2752,7 +2752,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RICKY_1 ===
-Name: RICKY
+Name: Ricky
 Class: Tuber M
 Pic: Tuber M
 Gender: Male
@@ -2765,7 +2765,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SIMON ===
-Name: SIMON
+Name: Simon
 Class: Tuber M
 Pic: Tuber M
 Gender: Male
@@ -2827,7 +2827,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_CHARLIE ===
-Name: CHARLIE
+Name: Charlie
 Class: Tuber M
 Pic: Tuber M
 Gender: Male
@@ -2840,7 +2840,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RANDALL ===
-Name: RANDALL
+Name: Randall
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -2928,7 +2928,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_PARKER ===
-Name: PARKER
+Name: Parker
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3016,7 +3016,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_GEORGE ===
-Name: GEORGE
+Name: George
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3104,7 +3104,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_BERKE ===
-Name: BERKE
+Name: Berke
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3192,7 +3192,7 @@ Nature: NATURE_ADAMANT
 - MOVE_FAKE_OUT
 
 === TRAINER_BRAXTON ===
-Name: BRAXTON
+Name: Braxton
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3280,7 +3280,7 @@ Nature: NATURE_JOLLY
 - MOVE_SUPERPOWER
 
 === TRAINER_VINCENT ===
-Name: VINCENT
+Name: Vincent
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3368,7 +3368,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_LEROY ===
-Name: LEROY
+Name: Leroy
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3456,7 +3456,7 @@ Nature: NATURE_QUIET
 - MOVE_EARTH_POWER
 
 === TRAINER_WILTON_1 ===
-Name: WILTON
+Name: Wilton
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3518,7 +3518,7 @@ Nature: NATURE_RELAXED
 - MOVE_PROTECT
 
 === TRAINER_EDGAR ===
-Name: EDGAR
+Name: Edgar
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3606,7 +3606,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_ALBERT ===
-Name: ALBERT
+Name: Albert
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3694,7 +3694,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_SAMUEL ===
-Name: SAMUEL
+Name: Samuel
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3782,7 +3782,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_VITO ===
-Name: VITO
+Name: Vito
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3870,7 +3870,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_OWEN ===
-Name: OWEN
+Name: Owen
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -3958,7 +3958,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_WARREN ===
-Name: WARREN
+Name: Warren
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -4046,7 +4046,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_MARY ===
-Name: MARY
+Name: Mary
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4134,7 +4134,7 @@ Nature: NATURE_JOLLY
 - MOVE_DRAIN_PUNCH
 
 === TRAINER_ALEXIA ===
-Name: ALEXIA
+Name: Alexia
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4222,7 +4222,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_JODY ===
-Name: JODY
+Name: Jody
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4310,7 +4310,7 @@ Nature: NATURE_MODEST
 - MOVE_ICE_BEAM
 
 === TRAINER_WENDY ===
-Name: WENDY
+Name: Wendy
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4398,7 +4398,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_KEIRA ===
-Name: KEIRA
+Name: Keira
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4486,7 +4486,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_BROOKE_1 ===
-Name: BROOKE
+Name: Brooke
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4548,7 +4548,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_JENNIFER ===
-Name: JENNIFER
+Name: Jennifer
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4610,7 +4610,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_HOPE ===
-Name: HOPE
+Name: Hope
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4698,7 +4698,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_SHANNON ===
-Name: SHANNON
+Name: Shannon
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4786,7 +4786,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_MICHELLE ===
-Name: MICHELLE
+Name: Michelle
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4874,7 +4874,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_CAROLINE ===
-Name: CAROLINE
+Name: Caroline
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -4962,7 +4962,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_JULIE ===
-Name: JULIE
+Name: Julie
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -5050,7 +5050,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_PATRICIA ===
-Name: PATRICIA
+Name: Patricia
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -5063,7 +5063,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TAMMY ===
-Name: TAMMY
+Name: Tammy
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -5076,7 +5076,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_VALERIE_1 ===
-Name: VALERIE
+Name: Valerie
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -5089,7 +5089,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TASHA ===
-Name: TASHA
+Name: Tasha
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -5102,7 +5102,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CINDY_1 ===
-Name: CINDY
+Name: Cindy
 Class: Lady
 Pic: Lady
 Gender: Female
@@ -5164,7 +5164,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ROCK_SLIDE
 
 === TRAINER_DAPHNE ===
-Name: DAPHNE
+Name: Daphne
 Class: Lady
 Pic: Lady
 Gender: Female
@@ -5252,7 +5252,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SPACE_CENTER_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -5314,7 +5314,7 @@ Nature: NATURE_ADAMANT
 - MOVE_CLOSE_COMBAT
 
 === TRAINER_BRIANNA ===
-Name: BRIANNA
+Name: Brianna
 Class: Lady
 Pic: Lady
 Gender: Female
@@ -5402,7 +5402,7 @@ Nature: NATURE_RELAXED
 - MOVE_LIQUIDATION
 
 === TRAINER_NAOMI ===
-Name: NAOMI
+Name: Naomi
 Class: Lady
 Pic: Lady
 Gender: Female
@@ -5490,7 +5490,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_MELISSA ===
-Name: MELISSA
+Name: Melissa
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5503,7 +5503,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SHEILA ===
-Name: SHEILA
+Name: Sheila
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5516,7 +5516,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SHIRLEY ===
-Name: SHIRLEY
+Name: Shirley
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5578,7 +5578,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_JESSICA_1 ===
-Name: JESSICA
+Name: Jessica
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5591,7 +5591,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CONNIE ===
-Name: CONNIE
+Name: Connie
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5679,7 +5679,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_BRIDGET ===
-Name: BRIDGET
+Name: Bridget
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5767,7 +5767,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_OLIVIA ===
-Name: OLIVIA
+Name: Olivia
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5855,7 +5855,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_TIFFANY ===
-Name: TIFFANY
+Name: Tiffany
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -5943,7 +5943,7 @@ Nature: NATURE_JOLLY
 - MOVE_DRAGON_DANCE
 
 === TRAINER_WINSTON_1 ===
-Name: WINSTON
+Name: Winston
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
@@ -6005,7 +6005,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_MOLLIE ===
-Name: MOLLIE
+Name: Mollie
 Class: Expert
 Pic: Expert F
 Gender: Female
@@ -6067,7 +6067,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_GARRET ===
-Name: GARRET
+Name: Garret
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
@@ -6080,7 +6080,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_STEVE_1 ===
-Name: STEVE
+Name: Steve
 Class: Pokemaniac
 Pic: Pokemaniac
 Gender: Male
@@ -6142,7 +6142,7 @@ Nature: NATURE_JOLLY
 - MOVE_IRON_HEAD
 
 === TRAINER_THALIA_1 ===
-Name: THALIA
+Name: Thalia
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -6155,7 +6155,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MARK ===
-Name: MARK
+Name: Mark
 Class: Pokemaniac
 Pic: Pokemaniac
 Gender: Male
@@ -6168,7 +6168,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_MT_CHIMNEY_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt F
 Gender: Female
@@ -6230,7 +6230,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_LUIS ===
-Name: LUIS
+Name: Luis
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6292,7 +6292,7 @@ Nature: NATURE_NAIVE
 - MOVE_PROTECT
 
 === TRAINER_DARRIN ===
-Name: DARRIN
+Name: Darrin
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6380,7 +6380,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_TONY_1 ===
-Name: TONY
+Name: Tony
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6393,7 +6393,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DAVID ===
-Name: DAVID
+Name: David
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6406,7 +6406,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_STAN ===
-Name: STAN
+Name: Stan
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6419,7 +6419,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BARRY ===
-Name: BARRY
+Name: Barry
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6432,7 +6432,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DEAN ===
-Name: DEAN
+Name: Dean
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6445,7 +6445,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RODNEY ===
-Name: RODNEY
+Name: Rodney
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6458,7 +6458,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RICHARD ===
-Name: RICHARD
+Name: Richard
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6471,7 +6471,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_HERMAN ===
-Name: HERMAN
+Name: Herman
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -6559,7 +6559,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_SANTIAGO ===
-Name: SANTIAGO
+Name: Santiago
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6621,7 +6621,7 @@ Nature: NATURE_CALM
 - MOVE_ENCORE
 
 === TRAINER_GILBERT ===
-Name: GILBERT
+Name: Gilbert
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6634,7 +6634,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KEVIN ===
-Name: KEVIN
+Name: Kevin
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6647,7 +6647,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JACK ===
-Name: JACK
+Name: Jack
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -6660,7 +6660,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TAKAO ===
-Name: TAKAO
+Name: Takao
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -6748,7 +6748,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_KIYO ===
-Name: KIYO
+Name: Kiyo
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -6761,7 +6761,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KOICHI ===
-Name: KOICHI
+Name: Koichi
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -6774,7 +6774,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_YUJI ===
-Name: YUJI
+Name: Yuji
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -6836,7 +6836,7 @@ Nature: NATURE_NAIVE
 - MOVE_PROTECT
 
 === TRAINER_DAISUKE ===
-Name: DAISUKE
+Name: Daisuke
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -6849,7 +6849,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ATSUSHI ===
-Name: ATSUSHI
+Name: Atsushi
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -6862,7 +6862,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KIRK ===
-Name: KIRK
+Name: Kirk
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -6951,7 +6951,7 @@ Nature: NATURE_JOLLY
 - MOVE_FIRE_FANG
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_7 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -7013,7 +7013,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_8 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -7075,7 +7075,7 @@ Nature: NATURE_CALM
 - MOVE_ENCORE
 
 === TRAINER_SHAWN ===
-Name: SHAWN
+Name: Shawn
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -7164,7 +7164,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_FERNANDO_1 ===
-Name: FERNANDO
+Name: Fernando
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -7177,7 +7177,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DALTON_1 ===
-Name: DALTON
+Name: Dalton
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -7190,7 +7190,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_COLE ===
-Name: COLE
+Name: Cole
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -7279,7 +7279,7 @@ Nature: NATURE_ADAMANT
 - MOVE_BUG_BITE
 
 === TRAINER_JEFF ===
-Name: JEFF
+Name: Jeff
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -7368,7 +7368,7 @@ Nature: NATURE_JOLLY
 - MOVE_TAUNT
 
 === TRAINER_AXLE ===
-Name: AXLE
+Name: Axle
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -7457,7 +7457,7 @@ Nature: NATURE_ADAMANT
 - MOVE_POISON_JAB
 
 === TRAINER_JACE ===
-Name: JACE
+Name: Jace
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -7547,7 +7547,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_KEEGAN ===
-Name: KEEGAN
+Name: Keegan
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -7636,7 +7636,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_BERNIE_1 ===
-Name: BERNIE
+Name: Bernie
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -7649,7 +7649,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DREW ===
-Name: DREW
+Name: Drew
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -7711,7 +7711,7 @@ Nature: NATURE_BRAVE
 - MOVE_U_TURN
 
 === TRAINER_BEAU ===
-Name: BEAU
+Name: Beau
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -7773,7 +7773,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_LARRY ===
-Name: LARRY
+Name: Larry
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -7786,7 +7786,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SHANE ===
-Name: SHANE
+Name: Shane
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -7799,7 +7799,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JUSTIN ===
-Name: JUSTIN
+Name: Justin
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -7861,7 +7861,7 @@ Nature: NATURE_ADAMANT
 - MOVE_SPIKY_SHIELD
 
 === TRAINER_ETHAN_1 ===
-Name: ETHAN
+Name: Ethan
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -7923,7 +7923,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_AUTUMN ===
-Name: AUTUMN
+Name: Autumn
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -7985,7 +7985,7 @@ Nature: NATURE_JOLLY
 - MOVE_HELPING_HAND
 
 === TRAINER_TRAVIS ===
-Name: TRAVIS
+Name: Travis
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -8047,7 +8047,7 @@ Nature: NATURE_JOLLY
 - MOVE_QUICK_ATTACK
 
 === TRAINER_BRENT ===
-Name: BRENT
+Name: Brent
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -8060,7 +8060,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DONALD ===
-Name: DONALD
+Name: Donald
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -8122,7 +8122,7 @@ Nature: NATURE_CAREFUL
 - MOVE_TAUNT
 
 === TRAINER_TAYLOR ===
-Name: TAYLOR
+Name: Taylor
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -8184,7 +8184,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_JEFFREY_1 ===
-Name: JEFFREY
+Name: Jeffrey
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -8197,7 +8197,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DEREK ===
-Name: DEREK
+Name: Derek
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -8259,7 +8259,7 @@ Nature: NATURE_TIMID
 - MOVE_U_TURN
 
 === TRAINER_EDWARD ===
-Name: EDWARD
+Name: Edward
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8273,7 +8273,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_PRESTON ===
-Name: PRESTON
+Name: Preston
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8361,7 +8361,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_VIRGIL ===
-Name: VIRGIL
+Name: Virgil
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8449,7 +8449,7 @@ Nature: NATURE_BRAVE
 - MOVE_ICE_PUNCH
 
 === TRAINER_BLAKE ===
-Name: BLAKE
+Name: Blake
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8537,7 +8537,7 @@ Nature: NATURE_TIMID
 - MOVE_THUNDERBOLT
 
 === TRAINER_WILLIAM ===
-Name: WILLIAM
+Name: William
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8550,7 +8550,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JOSHUA ===
-Name: JOSHUA
+Name: Joshua
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8563,7 +8563,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CAMERON_1 ===
-Name: CAMERON
+Name: Cameron
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -8576,7 +8576,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JACLYN ===
-Name: JACLYN
+Name: Jaclyn
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8638,7 +8638,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_HANNAH ===
-Name: HANNAH
+Name: Hannah
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8726,7 +8726,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_SAMANTHA ===
-Name: SAMANTHA
+Name: Samantha
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8814,7 +8814,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_MAURA ===
-Name: MAURA
+Name: Maura
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8902,7 +8902,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_KAYLA ===
-Name: KAYLA
+Name: Kayla
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8915,7 +8915,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ALEXIS ===
-Name: ALEXIS
+Name: Alexis
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8977,7 +8977,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_JACKI_1 ===
-Name: JACKI
+Name: Jacki
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -8990,7 +8990,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_WALTER_1 ===
-Name: WALTER
+Name: Walter
 Class: Gentleman
 Pic: Gentleman
 Gender: Male
@@ -9003,7 +9003,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MICAH ===
-Name: MICAH
+Name: Micah
 Class: Gentleman
 Pic: Gentleman
 Gender: Male
@@ -9091,7 +9091,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_THOMAS ===
-Name: THOMAS
+Name: Thomas
 Class: Gentleman
 Pic: Gentleman
 Gender: Male
@@ -9179,7 +9179,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_SIDNEY ===
-Name: SIDNEY
+Name: Sidney
 Class: Elite Four
 Pic: Elite Four Sidney
 Gender: Male
@@ -9268,7 +9268,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_PHOEBE ===
-Name: PHOEBE
+Name: Phoebe
 Class: Elite Four
 Pic: Elite Four Phoebe
 Gender: Female
@@ -9279,8 +9279,8 @@ Mugshot: Green
 Prize Multiplier: 40
 
 SPECIES_GIRATINA @ ITEM_LEFTOVERS
-Level: 89
-Level Offset: 9
+Level: 91
+Level Offset: 11
 Ability: ABILITY_PRESSURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9292,8 +9292,8 @@ Nature: NATURE_IMPISH
 - MOVE_PROTECT
 
 SPECIES_LUNALA @ ITEM_COVERT_CLOAK
-Level: 88
-Level Offset: 8
+Level: 90
+Level Offset: 10
 Ability: ABILITY_SHADOW_SHIELD
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9305,8 +9305,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_GENGAR @ ITEM_GENGARITE
-Level: 87
-Level Offset: 7
+Level: 89
+Level Offset: 9
 Ability: ABILITY_CURSED_BODY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9318,8 +9318,8 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_BANETTE @ ITEM_BANETTITE
-Level: 92
-Level Offset: 12
+Level: 94
+Level Offset: 14
 Ability: ABILITY_INSOMNIA
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9331,8 +9331,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_MARSHADOW @ ITEM_LIFE_ORB
-Level: 88
-Level Offset: 8
+Level: 90
+Level Offset: 10
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9344,8 +9344,8 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_SPECTRIER @ ITEM_CHOICE_SPECS
-Level: 89
-Level Offset: 9
+Level: 91
+Level Offset: 11
 Ability: ABILITY_GRIM_NEIGH
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9357,7 +9357,7 @@ Nature: NATURE_TIMID
 - MOVE_HEX
 
 === TRAINER_GLACIA ===
-Name: GLACIA
+Name: Glacia
 Class: Elite Four
 Pic: Elite Four Glacia
 Gender: Female
@@ -9381,8 +9381,8 @@ Nature: NATURE_TIMID
 - MOVE_ENCORE
 
 SPECIES_KYUREM @ ITEM_CHOICE_SPECS
-Level: 85
-Level Offset: 5
+Level: 86
+Level Offset: 6
 Ability: ABILITY_PRESSURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9433,8 +9433,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_BAXCALIBUR @ ITEM_BAXCALIBRITE
-Level: 85
-Level Offset: 5
+Level: 86
+Level Offset: 6
 Ability: ABILITY_THERMAL_EXCHANGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -9446,7 +9446,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_DRAKE ===
-Name: DRAKE
+Name: Drake
 Class: Elite Four
 Pic: Elite Four Drake
 Gender: Male
@@ -9535,7 +9535,7 @@ Nature: NATURE_MODEST
 - MOVE_ROOST
 
 === TRAINER_ROXANNE_1 ===
-Name: ROXANNE
+Name: Roxanne
 Class: Leader
 Pic: Leader Roxanne
 Gender: Female
@@ -9623,7 +9623,7 @@ Nature: NATURE_JOLLY
 - MOVE_TAILWIND
 
 === TRAINER_BRAWLY_1 ===
-Name: BRAWLY
+Name: Brawly
 Class: Leader
 Pic: Leader Brawly
 Gender: Male
@@ -9711,7 +9711,7 @@ Nature: NATURE_TIMID
 - MOVE_COACHING
 
 === TRAINER_WATTSON_1 ===
-Name: WATTSON
+Name: Wattson
 Class: Leader
 Pic: Leader Wattson
 Gender: Male
@@ -9799,7 +9799,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_FLANNERY_1 ===
-Name: FLANNERY
+Name: Flannery
 Class: Leader
 Pic: Leader Flannery
 Gender: Female
@@ -9888,7 +9888,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_NORMAN_1 ===
-Name: NORMAN
+Name: Norman
 Class: Leader
 Pic: Leader Norman
 Gender: Male
@@ -9976,7 +9976,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_WINONA_1 ===
-Name: WINONA
+Name: Winona
 Class: Leader
 Pic: Leader Winona
 Gender: Female
@@ -10064,7 +10064,7 @@ Nature: NATURE_IMPISH
 - MOVE_IRON_DEFENSE
 
 === TRAINER_TATE_AND_LIZA_1 ===
-Name: TATE&LIZA
+Name: Tate&Liza
 Class: Leader
 Pic: Leader Tate And Liza
 Gender: Male
@@ -10152,7 +10152,7 @@ Nature: NATURE_SASSY
 - MOVE_MOONLIGHT
 
 === TRAINER_JUAN_1 ===
-Name: JUAN
+Name: Juan
 Class: Leader
 Pic: Leader Juan
 Gender: Male
@@ -10240,7 +10240,7 @@ Nature: NATURE_ADAMANT
 - MOVE_DRAGON_DANCE
 
 === TRAINER_JERRY_1 ===
-Name: JERRY
+Name: Jerry
 Class: School Kid
 Pic: School Kid M
 Gender: Male
@@ -10302,7 +10302,7 @@ Nature: NATURE_BOLD
 - MOVE_PAIN_SPLIT
 
 === TRAINER_TED ===
-Name: TED
+Name: Ted
 Class: School Kid
 Pic: School Kid M
 Gender: Male
@@ -10364,7 +10364,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PLAY_ROUGH
 
 === TRAINER_PAUL ===
-Name: PAUL
+Name: Paul
 Class: School Kid
 Pic: School Kid M
 Gender: Male
@@ -10377,7 +10377,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GEORGIA ===
-Name: GEORGIA
+Name: Georgia
 Class: School Kid
 Pic: School Kid F
 Gender: Female
@@ -10439,7 +10439,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_KATE_AND_JOY ===
-Name: KATE & JOY
+Name: Kate & Joy
 Class: Sr And Jr
 Pic: Sr And Jr
 Gender: Female
@@ -10452,7 +10452,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ANNA_AND_MEG_1 ===
-Name: ANNA & MEG
+Name: Anna & Meg
 Class: Sr And Jr
 Pic: Sr And Jr
 Gender: Female
@@ -10514,7 +10514,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 === TRAINER_VICTOR ===
-Name: VICTOR
+Name: Victor
 Class: Winstrate
 Pic: Pokefan M
 Gender: Male
@@ -10576,7 +10576,7 @@ Nature: NATURE_IMPISH
 - MOVE_HELPING_HAND
 
 === TRAINER_MIGUEL_1 ===
-Name: MIGUEL
+Name: Miguel
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
@@ -10638,7 +10638,7 @@ Nature: NATURE_ADAMANT
 - MOVE_RECYCLE
 
 === TRAINER_COLTON ===
-Name: COLTON
+Name: Colton
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
@@ -10726,7 +10726,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_VICTORIA ===
-Name: VICTORIA
+Name: Victoria
 Class: Winstrate
 Pic: Pokefan F
 Gender: Female
@@ -10788,7 +10788,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_BETHANY ===
-Name: BETHANY
+Name: Bethany
 Class: Pokefan
 Pic: Pokefan F
 Gender: Female
@@ -10876,7 +10876,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_ISABEL_1 ===
-Name: ISABEL
+Name: Isabel
 Class: Pokefan
 Pic: Pokefan F
 Gender: Female
@@ -10939,7 +10939,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_TIMOTHY_1 ===
-Name: TIMOTHY
+Name: Timothy
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -11001,7 +11001,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_VICKY ===
-Name: VICKY
+Name: Vicky
 Class: Winstrate
 Pic: Expert F
 Gender: Female
@@ -11063,7 +11063,7 @@ Nature: NATURE_ADAMANT
 - MOVE_HELPING_HAND
 
 === TRAINER_SHELBY_1 ===
-Name: SHELBY
+Name: Shelby
 Class: Expert
 Pic: Expert F
 Gender: Female
@@ -11125,7 +11125,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 === TRAINER_CALVIN_1 ===
-Name: CALVIN
+Name: Calvin
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11187,7 +11187,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 === TRAINER_BILLY ===
-Name: BILLY
+Name: Billy
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11246,7 +11246,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_JOSH ===
-Name: JOSH
+Name: Josh
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11334,7 +11334,7 @@ Nature: NATURE_IMPISH
 - MOVE_PROTECT
 
 === TRAINER_TOMMY ===
-Name: TOMMY
+Name: Tommy
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11422,7 +11422,7 @@ Nature: NATURE_JOLLY
 - MOVE_CROSS_CHOP
 
 === TRAINER_JOEY ===
-Name: JOEY
+Name: Joey
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11484,7 +11484,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_BEN ===
-Name: BEN
+Name: Ben
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11572,7 +11572,7 @@ Nature: NATURE_MODEST
 - MOVE_VOLT_SWITCH
 
 === TRAINER_QUINCY ===
-Name: QUINCY
+Name: Quincy
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -11660,7 +11660,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_KATELYNN ===
-Name: KATELYNN
+Name: Katelynn
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -11748,7 +11748,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_JAYLEN ===
-Name: JAYLEN
+Name: Jaylen
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11810,7 +11810,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_DILLON ===
-Name: DILLON
+Name: Dillon
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11872,7 +11872,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_EDDIE ===
-Name: EDDIE
+Name: Eddie
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11934,7 +11934,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_ALLEN ===
-Name: ALLEN
+Name: Allen
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -11996,7 +11996,7 @@ Nature: NATURE_ADAMANT
 - MOVE_U_TURN
 
 === TRAINER_TIMMY ===
-Name: TIMMY
+Name: Timmy
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -12055,7 +12055,7 @@ Nature: NATURE_RELAXED
 - MOVE_TRANSFORM
 
 === TRAINER_WALLACE ===
-Name: WALLACE
+Name: Wallace
 Class: Champion
 Pic: Champion Wallace
 Gender: Male
@@ -12144,7 +12144,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_IVAN ===
-Name: IVAN
+Name: Ivan
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12157,7 +12157,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CLAUDE ===
-Name: CLAUDE
+Name: Claude
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12170,7 +12170,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ELLIOT_1 ===
-Name: ELLIOT
+Name: Elliot
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12232,7 +12232,7 @@ Nature: NATURE_ADAMANT
 - MOVE_X_SCISSOR
 
 === TRAINER_NED ===
-Name: NED
+Name: Ned
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12294,7 +12294,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_NOLAN ===
-Name: NOLAN
+Name: Nolan
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12307,7 +12307,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CARTER ===
-Name: CARTER
+Name: Carter
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12320,7 +12320,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RONALD ===
-Name: RONALD
+Name: Ronald
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -12393,7 +12393,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_JACOB ===
-Name: JACOB
+Name: Jacob
 Class: Triathlete
 Pic: Cycling Triathlete M
 Gender: Male
@@ -12455,7 +12455,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 === TRAINER_ANTHONY ===
-Name: ANTHONY
+Name: Anthony
 Class: Triathlete
 Pic: Cycling Triathlete M
 Gender: Male
@@ -12517,7 +12517,7 @@ Nature: NATURE_MODEST
 - MOVE_REFLECT
 
 === TRAINER_BENJAMIN_1 ===
-Name: BENJAMIN
+Name: Benjamin
 Class: Triathlete
 Pic: Cycling Triathlete M
 Gender: Male
@@ -12530,7 +12530,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ABIGAIL_1 ===
-Name: ABIGAIL
+Name: Abigail
 Class: Triathlete
 Pic: Cycling Triathlete F
 Gender: Female
@@ -12543,7 +12543,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JASMINE ===
-Name: JASMINE
+Name: Jasmine
 Class: Triathlete
 Pic: Cycling Triathlete F
 Gender: Female
@@ -12605,7 +12605,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_MARIA_1 ===
-Name: MARIA
+Name: Maria
 Class: Triathlete
 Pic: Running Triathlete F
 Gender: Female
@@ -12667,7 +12667,7 @@ Nature: NATURE_JOLLY
 - MOVE_SUCKER_PUNCH
 
 === TRAINER_CAMDEN ===
-Name: CAMDEN
+Name: Camden
 Class: Triathlete
 Pic: Swimming Triathlete M
 Gender: Male
@@ -12680,7 +12680,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DEMETRIUS ===
-Name: DEMETRIUS
+Name: Demetrius
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -12693,7 +12693,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ISAIAH_1 ===
-Name: ISAIAH
+Name: Isaiah
 Class: Triathlete
 Pic: Swimming Triathlete M
 Gender: Male
@@ -12706,7 +12706,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_PABLO_1 ===
-Name: PABLO
+Name: Pablo
 Class: Triathlete
 Pic: Swimming Triathlete M
 Gender: Male
@@ -12719,7 +12719,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CHASE ===
-Name: CHASE
+Name: Chase
 Class: Triathlete
 Pic: Swimming Triathlete M
 Gender: Male
@@ -12732,7 +12732,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DONNY ===
-Name: DONNY
+Name: Donny
 Class: Triathlete
 Pic: Swimming Triathlete F
 Gender: Female
@@ -12745,7 +12745,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TALIA ===
-Name: TALIA
+Name: Talia
 Class: Triathlete
 Pic: Swimming Triathlete F
 Gender: Female
@@ -12758,7 +12758,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KATELYN_1 ===
-Name: KATELYN
+Name: Katelyn
 Class: Triathlete
 Pic: Swimming Triathlete F
 Gender: Female
@@ -12820,7 +12820,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_ALLISON ===
-Name: ALLISON
+Name: Allison
 Class: Triathlete
 Pic: Swimming Triathlete F
 Gender: Female
@@ -12833,7 +12833,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_NICOLAS_1 ===
-Name: NICOLAS
+Name: Nicolas
 Class: Dragon Tamer
 Pic: Dragon Tamer
 Gender: Male
@@ -12895,7 +12895,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ROOST
 
 === TRAINER_AARON ===
-Name: AARON
+Name: Aaron
 Class: Dragon Tamer
 Pic: Dragon Tamer
 Gender: Male
@@ -12957,7 +12957,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_PERRY ===
-Name: PERRY
+Name: Perry
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -12970,7 +12970,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_PHIL ===
-Name: PHIL
+Name: Phil
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13032,7 +13032,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 === TRAINER_JARED ===
-Name: JARED
+Name: Jared
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13120,7 +13120,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_HUMBERTO ===
-Name: HUMBERTO
+Name: Humberto
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13208,7 +13208,7 @@ Nature: NATURE_TIMID
 - MOVE_ROOST
 
 === TRAINER_PRESLEY ===
-Name: PRESLEY
+Name: Presley
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13221,7 +13221,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_EDWARDO ===
-Name: EDWARDO
+Name: Edwardo
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13309,7 +13309,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ROCK_SLIDE
 
 === TRAINER_COLIN ===
-Name: COLIN
+Name: Colin
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13371,7 +13371,7 @@ Nature: NATURE_MODEST
 - MOVE_U_TURN
 
 === TRAINER_BENNY ===
-Name: BENNY
+Name: Benny
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13384,7 +13384,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CHESTER ===
-Name: CHESTER
+Name: Chester
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13397,7 +13397,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ALEX ===
-Name: ALEX
+Name: Alex
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13410,7 +13410,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BECK ===
-Name: BECK
+Name: Beck
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -13423,7 +13423,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_YASU ===
-Name: YASU
+Name: Yasu
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -13436,7 +13436,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TAKASHI ===
-Name: TAKASHI
+Name: Takashi
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -13449,7 +13449,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DIANNE ===
-Name: DIANNE
+Name: Dianne
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -13537,7 +13537,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_JANI ===
-Name: JANI
+Name: Jani
 Class: Tuber F
 Pic: Tuber F
 Gender: Female
@@ -13599,7 +13599,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_LAO_1 ===
-Name: LAO
+Name: Lao
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -13612,7 +13612,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LUNG ===
-Name: LUNG
+Name: Lung
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -13674,7 +13674,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_JOCELYN ===
-Name: JOCELYN
+Name: Jocelyn
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -13762,7 +13762,7 @@ Nature: NATURE_ADAMANT
 - MOVE_FIRST_IMPRESSION
 
 === TRAINER_LAURA ===
-Name: LAURA
+Name: Laura
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -13850,7 +13850,7 @@ Nature: NATURE_JOLLY
 - MOVE_COUNTER
 
 === TRAINER_CYNDY_1 ===
-Name: CYNDY
+Name: Cyndy
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -13912,7 +13912,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_CORA ===
-Name: CORA
+Name: Cora
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -13925,7 +13925,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_PAULA ===
-Name: PAULA
+Name: Paula
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -13938,7 +13938,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MADELINE_1 ===
-Name: MADELINE
+Name: Madeline
 Class: Parasol Lady
 Pic: Parasol Lady
 Gender: Female
@@ -13951,7 +13951,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CLARISSA ===
-Name: CLARISSA
+Name: Clarissa
 Class: Parasol Lady
 Pic: Parasol Lady
 Gender: Female
@@ -13964,7 +13964,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ANGELICA ===
-Name: ANGELICA
+Name: Angelica
 Class: Parasol Lady
 Pic: Parasol Lady
 Gender: Female
@@ -13977,7 +13977,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BEVERLY ===
-Name: BEVERLY
+Name: Beverly
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -13990,7 +13990,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_IMANI ===
-Name: IMANI
+Name: Imani
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14003,7 +14003,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KYLA ===
-Name: KYLA
+Name: Kyla
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14016,7 +14016,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DENISE ===
-Name: DENISE
+Name: Denise
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14029,7 +14029,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TARA ===
-Name: TARA
+Name: Tara
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14091,7 +14091,7 @@ Nature: NATURE_BOLD
 - MOVE_ICY_WIND
 
 === TRAINER_MISSY ===
-Name: MISSY
+Name: Missy
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14104,7 +14104,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ALICE ===
-Name: ALICE
+Name: Alice
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14117,7 +14117,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JENNY_1 ===
-Name: JENNY
+Name: Jenny
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14130,7 +14130,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRACE ===
-Name: GRACE
+Name: Grace
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14143,7 +14143,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TANYA ===
-Name: TANYA
+Name: Tanya
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14156,7 +14156,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_NIKKI ===
-Name: NIKKI
+Name: Nikki
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14218,7 +14218,7 @@ Nature: NATURE_MODEST
 - MOVE_SHORE_UP
 
 === TRAINER_BRENDA ===
-Name: BRENDA
+Name: Brenda
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14280,7 +14280,7 @@ Nature: NATURE_CAREFUL
 - MOVE_SAFEGUARD
 
 === TRAINER_KATIE ===
-Name: KATIE
+Name: Katie
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14293,7 +14293,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SUSIE ===
-Name: SUSIE
+Name: Susie
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14381,7 +14381,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_KARA ===
-Name: KARA
+Name: Kara
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14443,7 +14443,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_DANA ===
-Name: DANA
+Name: Dana
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14456,7 +14456,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SIENNA ===
-Name: SIENNA
+Name: Sienna
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14469,7 +14469,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DEBRA ===
-Name: DEBRA
+Name: Debra
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14482,7 +14482,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LINDA ===
-Name: LINDA
+Name: Linda
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14544,7 +14544,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_LAUREL ===
-Name: LAUREL
+Name: Laurel
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14557,7 +14557,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CARLEE ===
-Name: CARLEE
+Name: Carlee
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -14570,7 +14570,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_HEIDI ===
-Name: HEIDI
+Name: Heidi
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -14632,7 +14632,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MARTHA ===
-Name: MARTHA
+Name: Martha
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -14694,7 +14694,7 @@ Nature: NATURE_MODEST
 - MOVE_LEECH_SEED
 
 === TRAINER_DIANA_1 ===
-Name: DIANA
+Name: Diana
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -14756,7 +14756,7 @@ Nature: NATURE_JOLLY
 - MOVE_ENCORE
 
 === TRAINER_CEDRIC ===
-Name: CEDRIC
+Name: Cedric
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -14769,7 +14769,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_AMY_AND_LIV_1 ===
-Name: AMY & LIV
+Name: Amy & Liv
 Class: Twins
 Pic: Twins
 Gender: Female
@@ -14831,7 +14831,7 @@ Nature: NATURE_BOLD
 - MOVE_LIGHT_SCREEN
 
 === TRAINER_GINA_AND_MIA_1 ===
-Name: GINA & MIA
+Name: Gina & Mia
 Class: Twins
 Pic: Twins
 Gender: Female
@@ -14893,7 +14893,7 @@ Nature: NATURE_MODEST
 - MOVE_HELPING_HAND
 
 === TRAINER_MIU_AND_YUKI ===
-Name: MIU & YUKI
+Name: Miu & Yuki
 Class: Twins
 Pic: Twins
 Gender: Female
@@ -14955,7 +14955,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_EDMOND ===
-Name: EDMOND
+Name: Edmond
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15017,7 +15017,7 @@ Nature: NATURE_ADAMANT
 - MOVE_QUICK_ATTACK
 
 === TRAINER_ERNEST_1 ===
-Name: ERNEST
+Name: Ernest
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15030,7 +15030,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DWAYNE ===
-Name: DWAYNE
+Name: Dwayne
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15092,7 +15092,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_PHILLIP ===
-Name: PHILLIP
+Name: Phillip
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15105,7 +15105,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LEONARD ===
-Name: LEONARD
+Name: Leonard
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15118,7 +15118,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DUNCAN ===
-Name: DUNCAN
+Name: Duncan
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15180,7 +15180,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_ELI ===
-Name: ELI
+Name: Eli
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -15270,7 +15270,7 @@ Nature: NATURE_JOLLY
 - MOVE_MEGAHORN
 
 === TRAINER_ANNIKA ===
-Name: ANNIKA
+Name: Annika
 Class: Pokefan
 Pic: Pokefan F
 Gender: Female
@@ -15358,7 +15358,7 @@ Nature: NATURE_ADAMANT
 - MOVE_DRILL_RUN
 
 === TRAINER_JAZMYN ===
-Name: JAZMYN
+Name: Jazmyn
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -15420,7 +15420,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_KAYLEY ===
-Name: KAYLEY
+Name: Kayley
 Class: Parasol Lady
 Pic: Parasol Lady
 Gender: Female
@@ -15482,7 +15482,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_AURON ===
-Name: AURON
+Name: Auron
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -15544,7 +15544,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_KELVIN ===
-Name: KELVIN
+Name: Kelvin
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15557,7 +15557,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MARLEY ===
-Name: MARLEY
+Name: Marley
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -15619,7 +15619,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ROCK_SLIDE
 
 === TRAINER_REYNA ===
-Name: REYNA
+Name: Reyna
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -15632,7 +15632,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_HUDSON ===
-Name: HUDSON
+Name: Hudson
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -15694,7 +15694,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_CONOR ===
-Name: CONOR
+Name: Conor
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -15756,7 +15756,7 @@ Nature: NATURE_BRAVE
 - MOVE_RECOVER
 
 === TRAINER_EDWIN_1 ===
-Name: EDWIN
+Name: Edwin
 Class: Collector
 Pic: Collector
 Gender: Male
@@ -15770,7 +15770,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_HECTOR ===
-Name: HECTOR
+Name: Hector
 Class: Collector
 Pic: Collector
 Gender: Male
@@ -15783,7 +15783,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TABITHA_MOSSDEEP ===
-Name: TABITHA
+Name: Tabitha
 Class: Magma Admin
 Pic: Magma Admin
 Gender: Male
@@ -15871,7 +15871,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_WALLY_VR_1 ===
-Name: WALLY
+Name: Wally
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -15959,7 +15959,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_103_MUDKIP ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16021,7 +16021,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_110_MUDKIP ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16096,7 +16096,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_119_MUDKIP ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16184,7 +16184,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_103_TREECKO ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16246,7 +16246,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_110_TREECKO ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16321,7 +16321,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_119_TREECKO ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16409,7 +16409,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_103_TORCHIC ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16471,7 +16471,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_110_TORCHIC ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16546,7 +16546,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_ROUTE_119_TORCHIC ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -16634,7 +16634,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_103_MUDKIP ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -16696,7 +16696,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_110_MUDKIP ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -16771,7 +16771,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_119_MUDKIP ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -16859,7 +16859,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_103_TREECKO ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -16921,7 +16921,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_110_TREECKO ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -16996,7 +16996,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_119_TREECKO ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -17084,7 +17084,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_103_TORCHIC ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -17146,7 +17146,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_110_TORCHIC ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -17221,7 +17221,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MAY_ROUTE_119_TORCHIC ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -17309,7 +17309,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_ISAAC_1 ===
-Name: ISAAC
+Name: Isaac
 Class: Pkmn Breeder
 Pic: Pokemon Breeder M
 Gender: Male
@@ -17397,7 +17397,7 @@ Nature: NATURE_ADAMANT
 - MOVE_SUCKER_PUNCH
 
 === TRAINER_DAVIS ===
-Name: DAVIS
+Name: Davis
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -17410,7 +17410,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MITCHELL ===
-Name: MITCHELL
+Name: Mitchell
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -17498,7 +17498,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_LYDIA_1 ===
-Name: LYDIA
+Name: Lydia
 Class: Pkmn Breeder
 Pic: Pokemon Breeder F
 Gender: Female
@@ -17586,7 +17586,7 @@ Nature: NATURE_ADAMANT
 - MOVE_BUG_BITE
 
 === TRAINER_HALLE ===
-Name: HALLE
+Name: Halle
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -17674,7 +17674,7 @@ Nature: NATURE_JOLLY
 - MOVE_ROCK_SLIDE
 
 === TRAINER_GARRISON ===
-Name: GARRISON
+Name: Garrison
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -17736,7 +17736,7 @@ Nature: NATURE_ADAMANT
 - MOVE_SWORDS_DANCE
 
 === TRAINER_JACKSON_1 ===
-Name: JACKSON
+Name: Jackson
 Class: Pkmn Ranger
 Pic: Pokemon Ranger M
 Gender: Male
@@ -17798,7 +17798,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_LORENZO ===
-Name: LORENZO
+Name: Lorenzo
 Class: Pkmn Ranger
 Pic: Pokemon Ranger M
 Gender: Male
@@ -17860,7 +17860,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_SEBASTIAN ===
-Name: SEBASTIAN
+Name: Sebastian
 Class: Pkmn Ranger
 Pic: Pokemon Ranger M
 Gender: Male
@@ -17922,7 +17922,7 @@ Nature: NATURE_CAREFUL
 - MOVE_PROTECT
 
 === TRAINER_CATHERINE_1 ===
-Name: CATHERINE
+Name: Catherine
 Class: Pkmn Ranger
 Pic: Pokemon Ranger F
 Gender: Female
@@ -17984,7 +17984,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_JENNA ===
-Name: JENNA
+Name: Jenna
 Class: Pkmn Ranger
 Pic: Pokemon Ranger F
 Gender: Female
@@ -18046,7 +18046,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_SOPHIA ===
-Name: SOPHIA
+Name: Sophia
 Class: Pkmn Ranger
 Pic: Pokemon Ranger F
 Gender: Female
@@ -18108,7 +18108,7 @@ Nature: NATURE_ADAMANT
 - MOVE_HEAVY_SLAM
 
 === TRAINER_JULIO ===
-Name: JULIO
+Name: Julio
 Class: Triathlete
 Pic: Cycling Triathlete M
 Gender: Male
@@ -18170,7 +18170,7 @@ Nature: NATURE_JOLLY
 - MOVE_QUICK_ATTACK
 
 === TRAINER_GRUNT_SEAFLOOR_CAVERN_5 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -18232,7 +18232,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MT_PYRE_4 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -18294,7 +18294,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_JAGGED_PASS ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -18356,7 +18356,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_MARC ===
-Name: MARC
+Name: Marc
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -18444,7 +18444,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ROCK_SLIDE
 
 === TRAINER_BRENDEN ===
-Name: BRENDEN
+Name: Brenden
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -18532,7 +18532,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 === TRAINER_LILITH ===
-Name: LILITH
+Name: Lilith
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -18620,7 +18620,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_CRISTIAN ===
-Name: CRISTIAN
+Name: Cristian
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -18708,7 +18708,7 @@ Nature: NATURE_ADAMANT
 - MOVE_STONE_EDGE
 
 === TRAINER_SYLVIA ===
-Name: SYLVIA
+Name: Sylvia
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -18796,7 +18796,7 @@ Nature: NATURE_SASSY
 - MOVE_PROTECT
 
 === TRAINER_ATHENA ===
-Name: ATHENA
+Name: Athena
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -18858,7 +18858,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_HARRISON ===
-Name: HARRISON
+Name: Harrison
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -18871,7 +18871,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_MT_CHIMNEY_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -18884,7 +18884,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CLARENCE ===
-Name: CLARENCE
+Name: Clarence
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -18897,7 +18897,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_NATE ===
-Name: NATE
+Name: Nate
 Class: Gentleman
 Pic: Gentleman
 Gender: Male
@@ -18985,7 +18985,7 @@ Nature: NATURE_QUIET
 - MOVE_ENERGY_BALL
 
 === TRAINER_KATHLEEN ===
-Name: KATHLEEN
+Name: Kathleen
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -19073,7 +19073,7 @@ Nature: NATURE_QUIET
 - MOVE_SLACK_OFF
 
 === TRAINER_CLIFFORD ===
-Name: CLIFFORD
+Name: Clifford
 Class: Gentleman
 Pic: Gentleman
 Gender: Male
@@ -19161,7 +19161,7 @@ Nature: NATURE_TIMID
 - MOVE_ENERGY_BALL
 
 === TRAINER_NICHOLAS ===
-Name: NICHOLAS
+Name: Nicholas
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -19249,7 +19249,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SPACE_CENTER_3 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt F
 Gender: Female
@@ -19311,7 +19311,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SPACE_CENTER_4 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -19373,7 +19373,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SPACE_CENTER_5 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -19435,7 +19435,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_SPACE_CENTER_6 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -19448,7 +19448,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_SPACE_CENTER_7 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -19510,7 +19510,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MACEY ===
-Name: MACEY
+Name: Macey
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -19598,7 +19598,7 @@ Nature: NATURE_TIMID
 - MOVE_ENERGY_BALL
 
 === TRAINER_BRENDAN_RUSTBORO_TREECKO ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -19660,7 +19660,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_RUSTBORO_MUDKIP ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -19722,7 +19722,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_PAXTON ===
-Name: PAXTON
+Name: Paxton
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -19784,7 +19784,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_ISABELLA ===
-Name: ISABELLA
+Name: Isabella
 Class: Triathlete
 Pic: Swimming Triathlete F
 Gender: Female
@@ -19797,7 +19797,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_GRUNT_WEATHER_INST_5 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Female
@@ -19859,7 +19859,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_TABITHA_MT_CHIMNEY ===
-Name: TABITHA
+Name: Tabitha
 Class: Magma Admin
 Pic: Magma Admin
 Gender: Male
@@ -19947,7 +19947,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_JONATHAN ===
-Name: JONATHAN
+Name: Jonathan
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -20009,7 +20009,7 @@ Nature: NATURE_CAREFUL
 - MOVE_RECOVER
 
 === TRAINER_BRENDAN_RUSTBORO_TORCHIC ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -20071,7 +20071,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MAY_RUSTBORO_MUDKIP ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -20133,7 +20133,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAXIE_MAGMA_HIDEOUT ===
-Name: MAXIE
+Name: Maxie
 Class: Magma Leader
 Pic: Magma Leader Maxie
 Gender: Male
@@ -20144,8 +20144,8 @@ Prize Multiplier: 25
 Starting Status: Weather Sun
 
 SPECIES_TORKOAL @ ITEM_HEAT_ROCK
-Level: 66
-Level Offset: 6
+Level: 69
+Level Offset: 9
 Ability: ABILITY_DROUGHT
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20157,8 +20157,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_RUNERIGUS @ ITEM_MENTAL_HERB
-Level: 67
-Level Offset: 7
+Level: 70
+Level Offset: 10
 Ability: ABILITY_WANDERING_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20170,8 +20170,8 @@ Nature: NATURE_RELAXED
 - MOVE_PROTECT
 
 SPECIES_CAMERUPT @ ITEM_CAMERUPTITE
-Level: 65
-Level Offset: 5
+Level: 68
+Level Offset: 8
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20183,8 +20183,8 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_TORTERRA @ ITEM_LEFTOVERS
-Level: 66
-Level Offset: 6
+Level: 69
+Level Offset: 9
 Ability: ABILITY_SOLID_ROCK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20196,8 +20196,8 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 SPECIES_COPPERAJAH @ ITEM_WEAKNESS_POLICY
-Level: 66
-Level Offset: 6
+Level: 69
+Level Offset: 9
 Ability: ABILITY_HEAVY_METAL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20209,8 +20209,8 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 SPECIES_STAKATAKA @ ITEM_FOCUS_SASH
-Level: 66
-Level Offset: 6
+Level: 69
+Level Offset: 9
 Ability: ABILITY_BEAST_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
 Happiness: 255
@@ -20222,7 +20222,7 @@ Nature: NATURE_BRAVE
 - MOVE_STONE_EDGE
 
 === TRAINER_MAXIE_MT_CHIMNEY ===
-Name: MAXIE
+Name: Maxie
 Class: Magma Leader
 Pic: Magma Leader Maxie
 Gender: Male
@@ -20310,7 +20310,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_TIANA ===
-Name: TIANA
+Name: Tiana
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20372,7 +20372,7 @@ Nature: NATURE_JOLLY
 - MOVE_DRAIN_PUNCH
 
 === TRAINER_HALEY_1 ===
-Name: HALEY
+Name: Haley
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20385,7 +20385,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JANICE ===
-Name: JANICE
+Name: Janice
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20447,7 +20447,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_VIVI ===
-Name: VIVI
+Name: Vivi
 Class: Winstrate
 Pic: Lass
 Gender: Female
@@ -20509,7 +20509,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_SALLY ===
-Name: SALLY
+Name: Sally
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20571,7 +20571,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_ROBIN ===
-Name: ROBIN
+Name: Robin
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20584,7 +20584,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ANDREA ===
-Name: ANDREA
+Name: Andrea
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20594,8 +20594,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 10
 
 SPECIES_CLOYSTER @ ITEM_FOCUS_SASH
-Level: 79
-Level Offset: 9
+Level: 81
+Level Offset: 11
 Ability: ABILITY_SKILL_LINK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20607,8 +20607,8 @@ Nature: NATURE_JOLLY
 - MOVE_SHELL_SMASH
 
 SPECIES_FLOATZEL @ ITEM_CHOICE_BAND
-Level: 79
-Level Offset: 9
+Level: 81
+Level Offset: 11
 Ability: ABILITY_WATER_VEIL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20620,8 +20620,8 @@ Nature: NATURE_JOLLY
 - MOVE_LOW_KICK
 
 SPECIES_JELLICENT @ ITEM_LEFTOVERS
-Level: 79
-Level Offset: 9
+Level: 81
+Level Offset: 11
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20633,8 +20633,8 @@ Nature: NATURE_CALM
 - MOVE_WILL_O_WISP
 
 SPECIES_MAMOSWINE @ ITEM_LOADED_DICE
-Level: 79
-Level Offset: 9
+Level: 81
+Level Offset: 11
 Ability: ABILITY_THICK_FAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20646,8 +20646,8 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_SIMIPOUR @ ITEM_LIFE_ORB
-Level: 79
-Level Offset: 9
+Level: 81
+Level Offset: 11
 Ability: ABILITY_TORRENT
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20659,8 +20659,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_DRAGAPULT @ ITEM_HABAN_BERRY
-Level: 80
-Level Offset: 10
+Level: 82
+Level Offset: 12
 Ability: ABILITY_INFILTRATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -20672,7 +20672,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_CRISSY ===
-Name: CRISSY
+Name: Crissy
 Class: Lass
 Pic: Lass
 Gender: Female
@@ -20760,7 +20760,7 @@ Nature: NATURE_MODEST
 - MOVE_PSYCHIC
 
 === TRAINER_RICK ===
-Name: RICK
+Name: Rick
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -20822,7 +20822,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_LYLE ===
-Name: LYLE
+Name: Lyle
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -20884,7 +20884,7 @@ Nature: NATURE_MODEST
 - MOVE_HELPING_HAND
 
 === TRAINER_JOSE ===
-Name: JOSE
+Name: Jose
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -20946,7 +20946,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_DOUG ===
-Name: DOUG
+Name: Doug
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -21008,7 +21008,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GREG ===
-Name: GREG
+Name: Greg
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -21021,7 +21021,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KENT ===
-Name: KENT
+Name: Kent
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -21034,7 +21034,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JAMES_1 ===
-Name: JAMES
+Name: James
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -21096,7 +21096,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRICE ===
-Name: BRICE
+Name: Brice
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21158,7 +21158,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_TRENT_1 ===
-Name: TRENT
+Name: Trent
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21171,7 +21171,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LENNY ===
-Name: LENNY
+Name: Lenny
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21233,7 +21233,7 @@ Nature: NATURE_IMPISH
 - MOVE_PROTECT
 
 === TRAINER_LUCAS_1 ===
-Name: LUCAS
+Name: Lucas
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21295,7 +21295,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_ALAN ===
-Name: ALAN
+Name: Alan
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21357,7 +21357,7 @@ Nature: NATURE_BOLD
 - MOVE_SHORE_UP
 
 === TRAINER_CLARK ===
-Name: CLARK
+Name: Clark
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21419,7 +21419,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_ERIC ===
-Name: ERIC
+Name: Eric
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21432,7 +21432,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MIKE_2 ===
-Name: MIKE
+Name: Mike
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -21494,7 +21494,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ICE_SHARD
 
 === TRAINER_DEZ_AND_LUKE ===
-Name: DEZ & LUKE
+Name: Dez & Luke
 Class: Young Couple
 Pic: Young Couple
 Gender: Male
@@ -21507,7 +21507,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LEA_AND_JED ===
-Name: LEA & JED
+Name: Lea & Jed
 Class: Young Couple
 Pic: Young Couple
 Gender: Male
@@ -21595,7 +21595,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_KIRA_AND_DAN_1 ===
-Name: KIRA & DAN
+Name: Kira & Dan
 Class: Young Couple
 Pic: Young Couple
 Gender: Male
@@ -21608,7 +21608,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JOHANNA ===
-Name: JOHANNA
+Name: Johanna
 Class: Beauty
 Pic: Beauty
 Gender: Female
@@ -21670,7 +21670,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GERALD ===
-Name: GERALD
+Name: Gerald
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -21759,7 +21759,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_VIVIAN ===
-Name: VIVIAN
+Name: Vivian
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -21848,7 +21848,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_DANIELLE ===
-Name: DANIELLE
+Name: Danielle
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -21937,7 +21937,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_HIDEO ===
-Name: HIDEO
+Name: Hideo
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -21999,7 +21999,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_FLINT ===
-Name: FLINT
+Name: Flint
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -22087,7 +22087,7 @@ Nature: NATURE_JOLLY
 - MOVE_DRAGON_DANCE
 
 === TRAINER_ASHLEY ===
-Name: ASHLEY
+Name: Ashley
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -22175,7 +22175,7 @@ Nature: NATURE_TIMID
 - MOVE_ROOST
 
 === TRAINER_WALLY_MAUVILLE ===
-Name: WALLY
+Name: Wally
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -22237,7 +22237,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_WALLY_VR_2 ===
-Name: WALLY
+Name: Wally
 Class: Rival
 Pic: Wally
 Gender: Male
@@ -22325,7 +22325,7 @@ Nature: NATURE_MODEST
 - MOVE_THUNDERBOLT
 
 === TRAINER_BRENDAN_LILYCOVE_MUDKIP ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -22413,7 +22413,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_LILYCOVE_TREECKO ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -22501,7 +22501,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRENDAN_LILYCOVE_TORCHIC ===
-Name: BRENDAN
+Name: Brendan
 Class: Rival
 Pic: Brendan
 Gender: Male
@@ -22589,7 +22589,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MAY_LILYCOVE_MUDKIP ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -22677,7 +22677,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_LILYCOVE_TREECKO ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -22765,7 +22765,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_LILYCOVE_TORCHIC ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -22853,7 +22853,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_HENRY ===
-Name: HENRY
+Name: Henry
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -22866,7 +22866,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ROGER ===
-Name: ROGER
+Name: Roger
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -22928,7 +22928,7 @@ Nature: NATURE_JOLLY
 - MOVE_CRUNCH
 
 === TRAINER_ALEXA ===
-Name: ALEXA
+Name: Alexa
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -23016,7 +23016,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_RUBEN ===
-Name: RUBEN
+Name: Ruben
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -23104,7 +23104,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_KOJI_1 ===
-Name: KOJI
+Name: Koji
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -23117,7 +23117,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_REED ===
-Name: REED
+Name: Reed
 Class: Swimmer M
 Pic: Swimmer M
 Gender: Male
@@ -23130,7 +23130,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TISHA ===
-Name: TISHA
+Name: Tisha
 Class: Swimmer F
 Pic: Swimmer F
 Gender: Female
@@ -23143,7 +23143,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TORI_AND_TIA ===
-Name: TORI & TIA
+Name: Tori & Tia
 Class: Twins
 Pic: Twins
 Gender: Female
@@ -23205,7 +23205,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_KIM_AND_IRIS ===
-Name: KIM & IRIS
+Name: Kim & Iris
 Class: Sr And Jr
 Pic: Sr And Jr
 Gender: Female
@@ -23218,7 +23218,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TYRA_AND_IVY ===
-Name: TYRA & IVY
+Name: Tyra & Ivy
 Class: Sr And Jr
 Pic: Sr And Jr
 Gender: Female
@@ -23231,7 +23231,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MEL_AND_PAUL ===
-Name: MEL & PAUL
+Name: Mel & Paul
 Class: Young Couple
 Pic: Young Couple
 Gender: Male
@@ -23293,7 +23293,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_JOHN_AND_JAY_1 ===
-Name: JOHN & JAY
+Name: John & Jay
 Class: Old Couple
 Pic: Old Couple
 Gender: Male
@@ -23306,7 +23306,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RELI_AND_IAN ===
-Name: RELI & IAN
+Name: Reli & Ian
 Class: Sis And Bro
 Pic: Sis And Bro
 Gender: Male
@@ -23319,7 +23319,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LILA_AND_ROY_1 ===
-Name: LILA & ROY
+Name: Lila & Roy
 Class: Sis And Bro
 Pic: Sis And Bro
 Gender: Male
@@ -23381,7 +23381,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_LISA_AND_RAY ===
-Name: LISA & RAY
+Name: Lisa & Ray
 Class: Sis And Bro
 Pic: Sis And Bro
 Gender: Male
@@ -23394,7 +23394,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CHRIS ===
-Name: CHRIS
+Name: Chris
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -23407,7 +23407,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_DAWSON ===
-Name: DAWSON
+Name: Dawson
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
@@ -23469,7 +23469,7 @@ Nature: NATURE_JOLLY
 - MOVE_ENCORE
 
 === TRAINER_SARAH ===
-Name: SARAH
+Name: Sarah
 Class: Lady
 Pic: Lady
 Gender: Female
@@ -23531,7 +23531,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_DARIAN ===
-Name: DARIAN
+Name: Darian
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -23593,7 +23593,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_HAILEY ===
-Name: HAILEY
+Name: Hailey
 Class: Tuber F
 Pic: Tuber F
 Gender: Female
@@ -23655,7 +23655,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_CHANDLER ===
-Name: CHANDLER
+Name: Chandler
 Class: Tuber M
 Pic: Tuber M
 Gender: Male
@@ -23717,7 +23717,7 @@ Nature: NATURE_IMPISH
 - MOVE_RECOVER
 
 === TRAINER_KALEB ===
-Name: KALEB
+Name: Kaleb
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
@@ -23780,7 +23780,7 @@ Nature: NATURE_IMPISH
 - MOVE_SNARL
 
 === TRAINER_JOSEPH ===
-Name: JOSEPH
+Name: Joseph
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -23794,7 +23794,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ALYSSA ===
-Name: ALYSSA
+Name: Alyssa
 Class: Triathlete
 Pic: Cycling Triathlete F
 Gender: Female
@@ -23808,7 +23808,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RHETT ===
-Name: RHETT
+Name: Rhett
 Class: Black Belt
 Pic: Black Belt
 Gender: Male
@@ -23821,7 +23821,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_TYRON ===
-Name: TYRON
+Name: Tyron
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -23883,7 +23883,7 @@ Nature: NATURE_JOLLY
 - MOVE_ROCK_SLIDE
 
 === TRAINER_CELINA ===
-Name: CELINA
+Name: Celina
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
@@ -23896,7 +23896,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BIANCA ===
-Name: BIANCA
+Name: Bianca
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -23958,7 +23958,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_HAYDEN ===
-Name: HAYDEN
+Name: Hayden
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -23971,7 +23971,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_SOPHIE ===
-Name: SOPHIE
+Name: Sophie
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -24033,7 +24033,7 @@ Nature: NATURE_CAREFUL
 - MOVE_RAGE_POWDER
 
 === TRAINER_COBY ===
-Name: COBY
+Name: Coby
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -24095,7 +24095,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_LAWRENCE ===
-Name: LAWRENCE
+Name: Lawrence
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -24157,7 +24157,7 @@ Nature: NATURE_ADAMANT
 - MOVE_WIDE_GUARD
 
 === TRAINER_WYATT ===
-Name: WYATT
+Name: Wyatt
 Class: Pokemaniac
 Pic: Pokemaniac
 Gender: Male
@@ -24219,7 +24219,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_ANGELINA ===
-Name: ANGELINA
+Name: Angelina
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -24232,7 +24232,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_KAI ===
-Name: KAI
+Name: Kai
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -24294,7 +24294,7 @@ Nature: NATURE_IMPISH
 - MOVE_PROTECT
 
 === TRAINER_CHARLOTTE ===
-Name: CHARLOTTE
+Name: Charlotte
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -24356,7 +24356,7 @@ Nature: NATURE_QUIET
 - MOVE_TRICK_ROOM
 
 === TRAINER_DEANDRE ===
-Name: DEANDRE
+Name: Deandre
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -24418,7 +24418,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_1 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24480,7 +24480,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_2 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24542,7 +24542,7 @@ Nature: NATURE_MODEST
 - MOVE_SLUDGE_BOMB
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_3 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24604,7 +24604,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_4 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24666,7 +24666,7 @@ Nature: NATURE_ADAMANT
 - MOVE_SUPERPOWER
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_5 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24728,7 +24728,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_6 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24790,7 +24790,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_7 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24852,7 +24852,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_8 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24914,7 +24914,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_9 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -24976,7 +24976,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_10 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -25038,7 +25038,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_11 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -25100,7 +25100,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_12 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -25162,7 +25162,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_13 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -25224,7 +25224,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_14 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt F
 Gender: Female
@@ -25286,7 +25286,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_15 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt F
 Gender: Female
@@ -25348,7 +25348,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_MAGMA_HIDEOUT_16 ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt F
 Gender: Female
@@ -25410,7 +25410,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_TABITHA_MAGMA_HIDEOUT ===
-Name: TABITHA
+Name: Tabitha
 Class: Magma Admin
 Pic: Magma Admin
 Gender: Male
@@ -25498,7 +25498,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_DARCY ===
-Name: DARCY
+Name: Darcy
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -25560,7 +25560,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_MAXIE_MOSSDEEP ===
-Name: MAXIE
+Name: Maxie
 Class: Magma Leader
 Pic: Magma Leader Maxie
 Gender: Male
@@ -25610,7 +25610,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_ANDRES_1 ===
-Name: ANDRES
+Name: Andres
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -25623,7 +25623,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_JOSUE ===
-Name: JOSUE
+Name: Josue
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -25685,7 +25685,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_CAMRON ===
-Name: CAMRON
+Name: Camron
 Class: Triathlete
 Pic: Swimming Triathlete M
 Gender: Male
@@ -25698,7 +25698,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CORY_1 ===
-Name: CORY
+Name: Cory
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -25711,7 +25711,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CAROLINA ===
-Name: CAROLINA
+Name: Carolina
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -25773,7 +25773,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 === TRAINER_CELIA ===
-Name: CELIA
+Name: Celia
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -25786,7 +25786,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BRYAN ===
-Name: BRYAN
+Name: Bryan
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -25799,7 +25799,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BRANDEN ===
-Name: BRANDEN
+Name: Branden
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -25812,7 +25812,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_BRYANT ===
-Name: BRYANT
+Name: Bryant
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -25874,7 +25874,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_SHAYLA ===
-Name: SHAYLA
+Name: Shayla
 Class: Aroma Lady
 Pic: Aroma Lady
 Gender: Female
@@ -25936,7 +25936,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_JAIDEN ===
-Name: JAIDEN
+Name: Jaiden
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -25949,7 +25949,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ALIX ===
-Name: ALIX
+Name: Alix
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -26011,7 +26011,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 === TRAINER_MARLENE ===
-Name: MARLENE
+Name: Marlene
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -26073,7 +26073,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 === TRAINER_DEVAN ===
-Name: DEVAN
+Name: Devan
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -26135,7 +26135,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_JOHNSON ===
-Name: JOHNSON
+Name: Johnson
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -26197,7 +26197,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MELINA ===
-Name: MELINA
+Name: Melina
 Class: Triathlete
 Pic: Running Triathlete F
 Gender: Female
@@ -26259,7 +26259,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_BRANDI ===
-Name: BRANDI
+Name: Brandi
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -26321,7 +26321,7 @@ Nature: NATURE_QUIET
 - MOVE_SAFEGUARD
 
 === TRAINER_AISHA ===
-Name: AISHA
+Name: Aisha
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Female
@@ -26383,7 +26383,7 @@ Nature: NATURE_ADAMANT
 - MOVE_WIDE_GUARD
 
 === TRAINER_MAKAYLA ===
-Name: MAKAYLA
+Name: Makayla
 Class: Expert
 Pic: Expert F
 Gender: Female
@@ -26445,7 +26445,7 @@ Nature: NATURE_ADAMANT
 - MOVE_LIQUIDATION
 
 === TRAINER_FABIAN ===
-Name: FABIAN
+Name: Fabian
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -26458,7 +26458,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_RACHEL ===
-Name: RACHEL
+Name: Rachel
 Class: Parasol Lady
 Pic: Parasol Lady
 Gender: Female
@@ -26471,7 +26471,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_LEONEL ===
-Name: LEONEL
+Name: Leonel
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -26484,7 +26484,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_CALE ===
-Name: CALE
+Name: Cale
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -26497,7 +26497,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_MYLES ===
-Name: MYLES
+Name: Myles
 Class: Pkmn Breeder
 Pic: Pokemon Breeder M
 Gender: Male
@@ -26585,7 +26585,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_PAT ===
-Name: PAT
+Name: Pat
 Class: Pkmn Breeder
 Pic: Pokemon Breeder F
 Gender: Female
@@ -26673,7 +26673,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_CRISTIN_1 ===
-Name: CRISTIN
+Name: Cristin
 Class: Cooltrainer
 Pic: Cooltrainer F
 Gender: Female
@@ -26735,7 +26735,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_MAY_RUSTBORO_TREECKO ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -26797,7 +26797,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_MAY_RUSTBORO_TORCHIC ===
-Name: MAY
+Name: May
 Class: Rival
 Pic: May
 Gender: Female
@@ -26859,7 +26859,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_LEAF_ALTERING_CAVE ===
-Name: GREEN
+Name: Green
 Class: Rival
 Pic: Leaf
 Gender: Female
@@ -26947,7 +26947,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_CYNTHIA_1 ===
-Name: CYNTHIA
+Name: Cynthia
 Class: Champion
 Pic: Cynthia
 Gender: Female
@@ -26957,8 +26957,8 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 25
 
 SPECIES_MILOTIC @ ITEM_LEFTOVERS
-Level: 106
-Level Offset: 6
+Level: 107
+Level Offset: 7
 Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -27009,8 +27009,8 @@ Nature: NATURE_NAIVE
 - MOVE_AURA_SPHERE
 
 SPECIES_MIRAIDON @ ITEM_CHOICE_SPECS
-Level: 106
-Level Offset: 6
+Level: 107
+Level Offset: 7
 Ability: ABILITY_HADRON_ENGINE
 IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -27035,7 +27035,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_ALANNAH ===
-Name: ALANNAH
+Name: Alannah
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -27097,7 +27097,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_MARTIN ===
-Name: MARTIN
+Name: Martin
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -27110,7 +27110,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_ARCHIE_SLATEPORT ===
-Name: ARCHIE
+Name: Archie
 Class: Aqua Leader
 Pic: Aqua Leader Archie
 Gender: Male
@@ -27198,7 +27198,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_COURTNEY_METEOR_FALLS ===
-Name: COURTNEY
+Name: Courtney
 Class: Magma Admin
 Pic: Magma Grunt F
 Gender: Female
@@ -27286,7 +27286,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_METEOR_FALLS ===
-Name: GRUNT
+Name: Grunt
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -27374,7 +27374,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ICE_FANG
 
 === TRAINER_LUCY_LAVARIDGE ===
-Name: LUCY
+Name: Lucy
 Class: Pike Queen
 Pic: Pike Queen Lucy
 Gender: Female
@@ -27462,7 +27462,7 @@ Nature: NATURE_BOLD
 - MOVE_HELPING_HAND
 
 === TRAINER_COURTNEY_MAGMA_HIDEOUT ===
-Name: COURTNEY
+Name: Courtney
 Class: Magma Admin
 Pic: Magma Grunt F
 Gender: Female
@@ -27550,7 +27550,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_MATT_MT_PYRE ===
-Name: MATT
+Name: Matt
 Class: Aqua Admin
 Pic: Aqua Admin M
 Gender: Male
@@ -27638,7 +27638,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_COURTNEY_MOSSDEEP ===
-Name: COURTNEY
+Name: Courtney
 Class: Magma Admin
 Pic: Magma Grunt F
 Gender: Female
@@ -27688,7 +27688,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_WALLACE_DOUBLES_LEGENDS ===
-Name: WALLACE
+Name: Wallace
 Class: Champion
 Pic: Champion Wallace
 Gender: Male
@@ -27776,7 +27776,7 @@ Nature: NATURE_BRAVE
 - MOVE_BODY_PRESS
 
 === TRAINER_GRETA_SLATEPORT ===
-Name: GRETA
+Name: Greta
 Class: Arena Tycoon
 Pic: Arena Tycoon Greta
 Gender: Female
@@ -27838,7 +27838,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_SPENSER_FORTREE ===
-Name: SPENSER
+Name: Spenser
 Class: Palace Maven
 Pic: Palace Maven Spenser
 Gender: Male
@@ -27926,7 +27926,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MAGIKARP_GUY ===
-Name: WADE
+Name: Wade
 Class: Fisherman
 Pic: Fisherman
 Gender: Male
@@ -28000,7 +28000,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_BUFFEL ===
-Name: BUFFEL
+Name: Buffel
 Class: Expert
 Pic: Cooltrainer M
 Gender: Male
@@ -28088,7 +28088,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_ROMAN ===
-Name: ROMAN
+Name: Roman
 Class: Hiker
 Pic: Hiker
 Gender: Male
@@ -28150,7 +28150,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_ELMER ===
-Name: ELMER
+Name: Elmer
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male
@@ -28212,7 +28212,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 === TRAINER_ANGELO ===
-Name: ANGELO
+Name: Angelo
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -28301,7 +28301,7 @@ Nature: NATURE_ADAMANT
 - MOVE_ICE_FANG
 
 === TRAINER_DARIUS ===
-Name: DARIUS
+Name: Darius
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -28389,7 +28389,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 === TRAINER_STEVEN ===
-Name: STEVEN
+Name: Steven
 Class: Rival
 Pic: Steven
 Gender: Male
@@ -28477,7 +28477,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 === TRAINER_MARIELA ===
-Name: MARIELA
+Name: Mariela
 Class: Psychic
 Pic: Psychic F
 Gender: Female
@@ -28539,7 +28539,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 === TRAINER_ALVARO ===
-Name: ALVARO
+Name: Alvaro
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -28552,7 +28552,7 @@ Party Size: 0
 /* Retired: metadata only; no battle party in the canonical book. */
 
 === TRAINER_EVERETT ===
-Name: EVERETT
+Name: Everett
 Class: Gentleman
 Pic: Gentleman
 Gender: Male
