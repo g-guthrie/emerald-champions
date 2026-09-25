@@ -16,8 +16,6 @@ RustboroCity_OnTransition: @ 81E06C8
 	call Common_EventScript_SetupRivalGfxId
 	compare VAR_RUSTBORO_CITY_STATE, 7
 	call_if_lt RustboroCity_EventScript_HideEarlyRoxanne
-	compare VAR_RUSTBORO_CITY_STATE, 7
-	call_if_eq RustboroCity_EventScript_HideMapNamePopup
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_RUSTBORO_CITY_STATE, 7
 	goto_if_eq RustboroCity_EventScript_PositionScientistForExit
@@ -30,30 +28,35 @@ RustboroCity_EventScript_HideEarlyRoxanne::
 @ VAR_TEMP_2: 2 = the player came out of Devon's door and the scientist
 @ follows on the next frame; 1 = the player arrived some other way and he
 @ waits in front of Devon for them to talk to him.
+@ He starts hidden on every arrival: the door scene adds him itself, and a
+@ player who met him waiting outside and then went into Devon must not come
+@ back out onto the tile he was just moved to.
 RustboroCity_EventScript_PositionScientistForExit:: @ 81E06EC
+	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	goto_if_ne VAR_TEMP_1, 15, RustboroCity_EventScript_ScientistWaitAtDevon
 	compare VAR_TEMP_0, 11
 	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
 	goto_if_ne VAR_TEMP_0, 12, RustboroCity_EventScript_ScientistWaitAtDevon
 	setvar VAR_TEMP_2, 2
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	setobjectxyperm LOCALID_SCIENTIST, 12, 15
 	end
 
 RustboroCity_EventScript_PositionScientistLeftExit:: @ 81E06FF
 	setvar VAR_TEMP_2, 2
+	setflag FLAG_HIDE_MAP_NAME_POPUP
 	setobjectxyperm LOCALID_SCIENTIST, 11, 15
 	end
 
+@ Only the door scene hides the map name, and it clears the flag when it
+@ ends. Clearing it here also frees saves that left town with it still set.
 RustboroCity_EventScript_ScientistWaitAtDevon::
 	setvar VAR_TEMP_2, 1
 	setobjectxyperm LOCALID_SCIENTIST, 12, 16
 	setobjectmovementtype LOCALID_SCIENTIST, MOVEMENT_TYPE_FACE_DOWN
 	clearflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	end
-
-RustboroCity_EventScript_HideMapNamePopup:: @ 81E0707
-	setflag FLAG_HIDE_MAP_NAME_POPUP
-	return
 
 RustboroCity_OnFrame: @ 81E070B
 	map_script_2 VAR_TEMP_2, 2, RustboroCity_EventScript_ScientistAddMatchCall

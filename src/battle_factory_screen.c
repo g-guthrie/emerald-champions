@@ -3779,8 +3779,10 @@ static void Swap_PrintYesNoOptions(void)
 
 static void Swap_PrintActionString(const u8 *str, u32 y, u32 windowId)
 {
-    s32 x = GetStringRightAlignXOffset(FONT_SMALL, str, 70);
-    AddTextPrinterParameterized3(windowId, FONT_SMALL, x, y, sSwapMenuOptionsTextColors, 0, str);
+    // "Pokémon for Swap" is wider than the 70px column in the small font.
+    u32 fontId = GetFontIdToFit(str, FONT_SMALL, 0, 70);
+    s32 x = GetStringRightAlignXOffset(fontId, str, 70);
+    AddTextPrinterParameterized3(windowId, fontId, x, y, sSwapMenuOptionsTextColors, 0, str);
 }
 
 static void Swap_PrintActionStrings(void)

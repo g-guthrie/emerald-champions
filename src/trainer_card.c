@@ -64,7 +64,7 @@ struct TrainerCardData
     bool8 unused_F;
     bool8 hasTrades;
     u8 badgeCount[NUM_BADGES];
-    u8 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH][13];
+    u8 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH][16]; // Room for "Lightning Rod", "Smelling Salts"
     u8 textPlayersCard[70];
     u8 textHofTime[70];
     u8 textBadges[16];

@@ -928,9 +928,9 @@ static const u8 *const sBattleDomeOpponentStatsTexts[] =
     COMPOUND_STRING("Emphasizes Defense and Speed."),          // DOME_TEXT_DEF starts here
     COMPOUND_STRING("Emphasizes Defense and Sp. Atk."),
     COMPOUND_STRING("Emphasizes Defense and Sp. Def."),
-    COMPOUND_STRING("Emphasizes Speed and Sp. Atk."),       // DOME_TEXT_Speed starts here
+    COMPOUND_STRING("Emphasizes Speed and Sp. Atk."),          // DOME_TEXT_SPEED starts here
     COMPOUND_STRING("Emphasizes Speed and Sp. Def."),
-    COMPOUND_STRING("Emphasizes Sp. Atk and Sp. Def."), // DOME_TEXT_SPATK starts here
+    COMPOUND_STRING("Emphasizes Sp. Atk and Sp. Def."),        // DOME_TEXT_SPATK starts here
     COMPOUND_STRING("Emphasizes HP."),                         // DOME_TEXT_ONE_GOOD_STAT starts here
     COMPOUND_STRING("Emphasizes Attack."),
     COMPOUND_STRING("Emphasizes Defense."),

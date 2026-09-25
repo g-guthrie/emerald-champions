@@ -719,7 +719,7 @@ static const struct MenuAction MultichoiceList_FrontierRules[] =
     {COMPOUND_STRING("Two Styles")},
     {COMPOUND_STRING("Lv. 50")},
     {COMPOUND_STRING("Open Level")},
-    {COMPOUND_STRING("{PKMN} Type & No.")},
+    {COMPOUND_STRING("Pokémon Type & No.")},
     {COMPOUND_STRING("Hold Items")},
     {gText_Exit},
 };
@@ -749,7 +749,7 @@ static const struct MenuAction MultichoiceList_BattleArenaRules[] =
 static const struct MenuAction MultichoiceList_BattleTowerRules[] =
 {
     {COMPOUND_STRING("Tower Info")},
-    {COMPOUND_STRING("Battle {PKMN}")},
+    {COMPOUND_STRING("Battle Pokémon")},
     {COMPOUND_STRING("Battle Salon")},
     {COMPOUND_STRING("Multi-Link")},
     {gText_Exit},
