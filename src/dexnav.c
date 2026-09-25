@@ -1,6 +1,8 @@
 #include "global.h"
 #include "caps.h"
 #include "battle_main.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "bg.h"
 #include "data.h"
@@ -38,6 +40,7 @@
 #include "random.h"
 #include "region_map.h"
 #include "rtc.h"
+#include "safari_zone.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "script_pokemon_util.h"
@@ -946,9 +949,22 @@ static void RevealHiddenSearch(void)
     RevealHiddenMon();
 }
 
+// DexNav works where its start menu entry does: in hand, outside the Safari
+// Zone and the Battle Pike and Pyramid, which keep their own encounter rules.
+static bool32 IsDexNavUsableHere(void)
+{
+    return FlagGet(DN_FLAG_DEXNAV_GET)
+        && !GetSafariZoneFlag()
+        && !InBattlePike()
+        && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE;
+}
+
 bool32 TryStartDexNavSearch(void)
 {
     u16 val = VarGet(DN_VAR_SPECIES);
+
+    if (!IsDexNavUsableHere())
+        return FALSE;
 
     if (FlagGet(DN_FLAG_SEARCHING) && sDexNavSearchDataPtr->hiddenSearch)
     {
@@ -1475,7 +1491,7 @@ static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType 
     u8 max = 0;
     u8 i;
 
-    if (headerId == HEADER_NONE)
+    if (headerId == HEADER_NONE || !IsDexNavSearchableSpecies(species))
         return MON_LEVEL_NONEXISTENT;
 
     switch (environment)
@@ -1702,7 +1718,7 @@ static bool8 CapturedAllLandMons(u32 headerId)
         for (i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; ++i)
         {
             species = landMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
+            if (IsDexNavSearchableSpecies(species))
             {
                 if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
                     break;
@@ -1735,7 +1751,7 @@ static bool8 CapturedAllWaterMons(u32 headerId)
         for (i = 0; i < NUM_WATER_MONS_ENCOUNTER_SLOTS; ++i)
         {
             species = waterMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
+            if (IsDexNavSearchableSpecies(species))
             {
                 count++;
                 if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
@@ -1766,7 +1782,7 @@ static bool8 CapturedAllHiddenMons(u32 headerId)
         for (i = 0; i < NUM_HIDDEN_MONS_ENCOUNTER_SLOTS; ++i)
         {
             species = hiddenMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
+            if (IsDexNavSearchableSpecies(species))
             {
                 count++;
                 if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
@@ -1924,7 +1940,7 @@ static void DexNavLoadEncounterData(void)
         for (i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         {
             species = landMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE && !SpeciesInArray(species, 0))
+            if (IsDexNavSearchableSpecies(species) && !SpeciesInArray(species, 0))
                 sDexNavUiDataPtr->landSpecies[grassIndex++] = landMonsInfo->wildPokemon[i].species;
         }
     }
@@ -1935,7 +1951,7 @@ static void DexNavLoadEncounterData(void)
         for (i = 0; i < NUM_WATER_MONS_ENCOUNTER_SLOTS; i++)
         {
             species = waterMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE && !SpeciesInArray(species, 1))
+            if (IsDexNavSearchableSpecies(species) && !SpeciesInArray(species, 1))
                 sDexNavUiDataPtr->waterSpecies[waterIndex++] = waterMonsInfo->wildPokemon[i].species;
         }
     }
@@ -1946,7 +1962,7 @@ static void DexNavLoadEncounterData(void)
         for (i = 0; i < NUM_HIDDEN_MONS_ENCOUNTER_SLOTS; i++)
         {
             species = hiddenMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE && !SpeciesInArray(species, 2))
+            if (IsDexNavSearchableSpecies(species) && !SpeciesInArray(species, 2))
                 sDexNavUiDataPtr->hiddenSpecies[hiddenIndex++] = hiddenMonsInfo->wildPokemon[i].species;
         }
     }
@@ -2670,3 +2686,47 @@ void IncrementDexNavChain(void)
     if (gSaveBlock3Ptr->dexNavChain < DEXNAV_CHAIN_MAX)
         gSaveBlock3Ptr->dexNavChain++;
 }
+
+// Birch hands DexNav over with the Pokedex. Saves made before DexNav existed
+// already hold the Pokedex, so they get it once on load, with a clean
+// registration (its var once held other state).
+void GiveDexNavIfNeeded(void)
+{
+    if (!FlagGet(FLAG_SYS_POKEDEX_GET) || FlagGet(DN_FLAG_DEXNAV_GET))
+        return;
+    FlagSet(DN_FLAG_DEXNAV_GET);
+    VarSet(DN_VAR_SPECIES, SPECIES_NONE);
+}
+
+#if TESTING
+// The level a search would use on the current map, or MON_LEVEL_NONEXISTENT.
+u8 Test_DexNavGenerateMonLevel(enum Species species, enum EncounterType environment)
+{
+    return DexNavTryGenerateMonLevel(species, environment);
+}
+
+// Does the DexNav screen on the current map list this species?
+bool32 Test_DexNavListsSpecies(enum Species species)
+{
+    typeof(sDexNavUiDataPtr) saved = sDexNavUiDataPtr;
+    bool32 listed;
+
+    sDexNavUiDataPtr = AllocZeroed(sizeof(*sDexNavUiDataPtr));
+    if (sDexNavUiDataPtr == NULL)
+    {
+        sDexNavUiDataPtr = saved;
+        return FALSE;
+    }
+    DexNavLoadEncounterData();
+    listed = species != SPECIES_NONE
+          && (SpeciesInArray(species, 0) || SpeciesInArray(species, 1) || SpeciesInArray(species, 2));
+    Free(sDexNavUiDataPtr);
+    sDexNavUiDataPtr = saved;
+    return listed;
+}
+
+bool32 Test_DexNavIsUsableHere(void)
+{
+    return IsDexNavUsableHere();
+}
+#endif

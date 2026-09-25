@@ -210,7 +210,8 @@
 #define VAR_EC_SOOT_PROGRESS                             0x40B8 // Low 15 bits: lifetime soot; high bit: Cord received.
 #define VAR_MT_PYRE_STATE                                0x40B9
 #define VAR_NEW_MAUVILLE_STATE                           0x40BA
-#define VAR_RUSTBORO_GYM_GUIDE_STATE                     0x40BB // 0: entrance advice pending, 1: complete
+#define VAR_DEXNAV_SPECIES                               0x40BB // Registered DexNav species and habitat. Reclaimed VAR_RUSTBORO_GYM_GUIDE_STATE,
+        // retired with the Rustboro guide; the DexNav grant clears any stale value.
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                0x40BC
 #define VAR_JAGGED_PASS_ASH_WEATHER                      0x40BD
 #define VAR_GLASS_WORKSHOP_STATE                         0x40BE // Restored from Inclement Emerald at its own ID.
@@ -313,7 +314,7 @@
 #define VAR_CONTEST_CATEGORY          0x8011
 #define VAR_MON_BOX_ID                0x8012
 #define VAR_MON_BOX_POS               0x8013
-#define VAR_UNUSED_0x8014             0x8014
+#define VAR_DEXNAV_STEP_COUNTER       0x8014 // DexNav hidden-Pokemon steps (never saved)
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of TRAINER_BATTLE_PARAM.opponentA
 
 #define SPECIAL_VARS_END              0x8015

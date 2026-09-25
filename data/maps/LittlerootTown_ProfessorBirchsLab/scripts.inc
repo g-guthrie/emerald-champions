@@ -560,6 +560,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
@@ -601,6 +602,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex:: @ 81FA3AC
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET
+	setflag FLAG_RECEIVED_DEXNAV
+	setvar VAR_DEXNAV_SPECIES, SPECIES_NONE
 	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setflag FLAG_SYS_NATIONAL_DEX
@@ -826,6 +829,11 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex: @ 81FAC4B
 	.string "and records its data in the Pokédex,\p"
 	.string "why, {RIVAL} looks for me while I'm out\n"
 	.string "doing fieldwork, and shows me.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav:
+	.string "Prof. Birch: I built a DexNav into it,\n"
+	.string "too. It shows which Pokémon live\l"
+	.string "nearby. Perfect for fieldwork!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait: @ 81FAD6F
 	.string "Prof. Birch: Countless Pokémon\n"

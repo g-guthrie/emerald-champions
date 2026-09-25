@@ -391,6 +391,7 @@ static void PrepareBookResearchScene(void)
         FlagSet(FLAG_BADGE01_GET + badge);
     FlagSet(FLAG_SYS_POKEMON_GET);
     FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_RECEIVED_DEXNAV);
     FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
     VarSet(VAR_WEATHER_INSTITUTE_STATE, 1);
     VarSet(VAR_REPEL_STEP_COUNT, 250);
@@ -2043,6 +2044,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         gEcHeadlessCampaignBattleSerial = 0;
         gEcHeadlessCampaignCaptureSerial = 0;
         FlagClear(FLAG_SYS_POKEDEX_GET);
+        FlagClear(FLAG_RECEIVED_DEXNAV);
         FlagClear(FLAG_SYS_NATIONAL_DEX);
         FlagClear(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
         FlagClear(FLAG_ADVENTURE_STARTED);
@@ -2307,6 +2309,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 break;
             // Established-save state so story objects are in their normal positions.
             FlagSet(FLAG_SYS_POKEDEX_GET);
+            FlagSet(FLAG_RECEIVED_DEXNAV);
             FlagSet(FLAG_SYS_POKEMON_GET);
             FlagSet(FLAG_SYS_POKENAV_GET);
             // Ground Mega Stone actors only spawn once the Ring is carried.
@@ -3963,6 +3966,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_DEFEATED_RIVAL_ROUTE103);
                 FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
                 FlagSet(FLAG_SYS_POKEDEX_GET);
+                FlagSet(FLAG_RECEIVED_DEXNAV);
                 FlagClear(FLAG_ADVENTURE_STARTED);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
@@ -4042,9 +4046,10 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         LoadHeadlessMap(MAP_NEW_MAUVILLE_INSIDE, 6, 12);
         break;
     case EC_HEADLESS_SCENARIO_START_MENU_FULL:
-        // Every Start menu row an established save can show: Pokedex, Pokemon, Bag,
-        // PokeNav, Player, Save, Reload, Option, Exit (nine rows, one more than fits).
+        // Every Start menu row an established save can show: Pokedex, DexNav, Pokemon,
+        // Bag, PokeNav, Player, Save, Reload, Option, Exit (ten rows, two more than fit).
         FlagSet(FLAG_SYS_POKEDEX_GET);
+        FlagSet(FLAG_RECEIVED_DEXNAV);
         FlagSet(FLAG_SYS_POKEMON_GET);
         FlagSet(FLAG_SYS_POKENAV_GET);
         gSaveFileStatus = SAVE_STATUS_OK; // makes the Reload row appear, as on a real save

@@ -1409,7 +1409,8 @@
 #define FLAG_EC_CAUGHT_RESHIRAM                                     0x4E9
 #define FLAG_HIDE_ROUTE133_VIAL_NURSE                              0x4EA
 #define FLAG_RECEIVED_GAME_CORNER_GENESECT                          0x4EB
-#define FLAG_UNUSED_0x4EC                                           0x4EC // Retired Game Corner Poipole prize; Poipole is a wild Ultra Beast.
+#define FLAG_RECEIVED_DEXNAV                                        0x4EC // DexNav in the start menu; Birch adds it to the Pokedex. Reclaimed the retired
+        // Game Corner Poipole prize flag (no references). Saves with the Pokedex get it on load.
 #define FLAG_HIDE_LEGENDARY_SIGN_DARKRAI                            0x4ED
 #define FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA                          0x4EE
 #define FLAG_HIDE_LEGENDARY_SIGN_DIALGA                             0x4EF
@@ -1791,7 +1792,9 @@
 #define FLAG_STORING_ITEMS_IN_PYRAMID_BAG       (SPECIAL_FLAGS_START + 0x4)
 #define FLAG_SAFE_FOLLOWER_MOVEMENT             (SPECIAL_FLAGS_START + 0x5) // When set, applymovement does not put the follower inside a pokeball
                                                                             // Also, scripted movements on the player will move follower(s), too
-// FLAG_SPECIAL_FLAG_0x4005 - 0x407F also exist and are unused
+#define FLAG_DEXNAV_SEARCHING                   (SPECIAL_FLAGS_START + 0x6) // A DexNav search is running (never saved)
+#define FLAG_DEXNAV_DETECTOR_MODE               (SPECIAL_FLAGS_START + 0x7) // DexNav hidden-Pokemon detector; never set (no hidden tables)
+// FLAG_SPECIAL_FLAG_0x4008 - 0x407F also exist and are unused
 #define SPECIAL_FLAGS_END                       (SPECIAL_FLAGS_START + 0x7F)
 #define NUM_SPECIAL_FLAGS                       (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
 

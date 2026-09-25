@@ -5,6 +5,7 @@
 #include "save.h"
 #include "task.h"
 #include "decompress.h"
+#include "dexnav.h"
 #include "load_save.h"
 #include "new_game.h"
 #include "overworld.h"
@@ -866,6 +867,7 @@ u8 LoadGameSave(u8 saveType)
         {
             MigrateBagPocketsIfNeeded();
             MaxPlayerIVsIfNeeded();
+            GiveDexNavIfNeeded();
         }
         gSaveFileStatus = status;
         gGameContinueCallback = NULL;
