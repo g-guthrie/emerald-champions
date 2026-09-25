@@ -625,10 +625,18 @@ void BufferEmeraldChampionsBattleItemStock(void)
     gSpecialVar_Result = out;
 }
 
-// Opens the shelf BufferEmeraldChampionsBattleItemStock prepared.
+// Opens the shelf BufferEmeraldChampionsBattleItemStock prepared, straight
+// into its Buy list.
 void OpenEmeraldChampionsBattleItemMart(void)
 {
-    CreatePokemartMenu(sEmeraldChampionsUnlockedStock);
+    CreatePokemartBuyMenu(sEmeraldChampionsUnlockedStock);
+    ScriptContext_Stop();
+}
+
+// The Center clerk's Sell row: the Bag in sell mode, then back to her menu.
+void OpenEmeraldChampionsSellMenu(void)
+{
+    CreatePokemartSellMenu();
     ScriptContext_Stop();
 }
 
@@ -688,7 +696,7 @@ void OpenEmeraldChampionsEvolutionItemArchive(void)
             stock[count++] = item;
     }
     stock[count] = ITEM_NONE;
-    CreatePokemartMenu(stock);
+    CreatePokemartBuyMenu(stock);
     ScriptContext_Stop();
 }
 

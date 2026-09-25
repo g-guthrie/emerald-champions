@@ -103,7 +103,7 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
         if name not in nodes:
             continue
         body, location, fallthrough = nodes[name]
-        for shop in re.findall(r"\bpokemart\s+(\w+)", body):
+        for shop in re.findall(r"\bpokemart(?:buy)?\s+(\w+)", body):
             stock = nodes.get(shop, ("", "", None))[0]
             sold_stones = set(re.findall(r"\bITEM_\w+", stock)) & required
             if sold_stones:

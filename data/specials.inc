@@ -444,9 +444,9 @@ gSpecials::
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
 	def_special OpenEmeraldChampionsBattleItemMart
-	@ Reuses the first retired category slot; the rest stay reserved so later special IDs never move.
+	@ Reuses retired category slots; the rest stay reserved so later special IDs never move.
 	def_special BufferEmeraldChampionsBattleItemStock
-	def_special Unused_EmeraldChampionsDefenseItemMart, unused=1
+	def_special OpenEmeraldChampionsSellMenu
 	def_special Unused_EmeraldChampionsFieldItemMart, unused=1
 	def_special Unused_EmeraldChampionsTypeItemMart, unused=1
 	def_special Unused_EmeraldChampionsGemItemMart, unused=1

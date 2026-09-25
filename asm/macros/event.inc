@@ -1321,6 +1321,12 @@
 	.4byte \products
 	.endm
 
+	@ Opens the Buy list for products directly, without the Buy/Sell/Quit box.
+	.macro pokemartbuy products:req
+	.byte SCR_OP_POKEMARTBUY
+	.4byte \products
+	.endm
+
 	@ Used as the endpoint for a Pokemart item list
 	.macro pokemartlistend
 	.2byte ITEM_NONE

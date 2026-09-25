@@ -73,18 +73,8 @@ EmeraldChampions_EventScript_MoveTutorExit:
 	releaseall
 	end
 
-Common_EventScript_EmeraldChampionsBattleVendor::
-	lock
-	faceplayer
-	setvar VAR_0x8008, 0
-	setvar VAR_0x8009, 0
-
 @ The five held items a competitive set cannot function without are handed over
-@ once, free. Everything else on his shelves is bought.
-EmeraldChampions_EventScript_BattleVendorStarterKit:
-	call EmeraldChampions_EventScript_TryStarterKit
-	goto EmeraldChampions_EventScript_BattleVendorMain
-
+@ once, free. Everything else on the clerk's shelves is bought.
 @ A full Bag only postpones the kit; the counter's services stay open.
 EmeraldChampions_EventScript_TryStarterKit::
 	goto_if_set FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS, Common_EventScript_NopReturn
@@ -101,80 +91,55 @@ EmeraldChampions_Text_StarterItemsBagFull:
 	.string "Make room in your Bag and come back.\n"
 	.string "I'll keep your kit here.$"
 
-EmeraldChampions_EventScript_BattleVendorMain:
-	@ Let the prior native list window finish clearing before another menu can
-	@ reuse the same BG tiles and briefly erase its frame.
-	delay 1
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorCompleteArchive
+@ Held Items: pick a shelf, buy, and land back on the same shelf. B or Back
+@ returns to the clerk's service menu.
+EmeraldChampions_EventScript_HeldItems::
+	goto_if_ne VAR_0x800A, 0, EmeraldChampions_EventScript_BattleItemCategories
+	setvar VAR_0x800A, 1
 	message EmeraldChampions_Text_BattleVendorWelcome
 	waitmessage
 	goto EmeraldChampions_EventScript_BattleItemCategoryChoices
 
-EmeraldChampions_EventScript_BattleVendorCompleteArchive:
-	message EmeraldChampions_Text_BattleVendorCompleteWelcome
-	waitmessage
-	dynmultipush EmeraldChampions_Text_HeldItems, 0
-	dynmultipush EmeraldChampions_Text_EvolutionArchive, 1
-	dynmultipush EmeraldChampions_Text_Exit, 2
-	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleVendorExit
-	copyvar VAR_0x8009, VAR_RESULT
-	switch VAR_RESULT
-	case 0, EmeraldChampions_EventScript_BattleItemCategories
-	case 1, EmeraldChampions_EventScript_OpenEvolutionArchive
-	goto EmeraldChampions_EventScript_BattleVendorExit
-
 EmeraldChampions_EventScript_BattleItemCategories:
-EmeraldChampions_EventScript_BattleItemCategoriesReady:
-	delay 1
 	message EmeraldChampions_Text_BattleItemCategoryPrompt
 	waitmessage
-
 EmeraldChampions_EventScript_BattleItemCategoryChoices:
+	delay 1
 	dynmultipush EmeraldChampions_Text_OffenseItems, EC_BATTLE_ITEM_CATEGORY_OFFENSE
 	dynmultipush EmeraldChampions_Text_DefenseItems, EC_BATTLE_ITEM_CATEGORY_DEFENSE
 	dynmultipush EmeraldChampions_Text_FieldItems, EC_BATTLE_ITEM_CATEGORY_FIELD
 	dynmultipush EmeraldChampions_Text_TypeItems, EC_BATTLE_ITEM_CATEGORY_TYPE
 	dynmultipush EmeraldChampions_Text_GemItems, EC_BATTLE_ITEM_CATEGORY_GEM
 	dynmultipush EmeraldChampions_Text_SpeciesItems, EC_BATTLE_ITEM_CATEGORY_SPECIES
-	dynmultipush EmeraldChampions_Text_Back, 8
-	@ Four visible rows keep the lower scroll arrow comfortably above the
-	@ native message box while preserving the category cursor between visits.
-	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
+	dynmultipush EmeraldChampions_Text_Back, EC_BATTLE_ITEM_CATEGORY_COUNT
+	@ Five rows keep the lower scroll arrow clear of the message box.
+	dynmultistack 30, 1, FALSE, 5, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleItemCategoryBack
-	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, EmeraldChampions_EventScript_BattleItemCategoryBack
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, General_Mart_AnythingElse
+	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, General_Mart_AnythingElse
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_RESULT
 	special BufferEmeraldChampionsBattleItemStock
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_BattleItemCategoryEmpty
-	@ Like every Poke Mart, Buy/Sell/Quit opens under the clerk's question.
-	message General_Mart_Text_BuyingOrSelling
-	waitmessage
 	special OpenEmeraldChampionsBattleItemMart
+	waitstate
 	goto EmeraldChampions_EventScript_BattleItemCategories
 
 EmeraldChampions_EventScript_BattleItemCategoryEmpty:
-	msgbox EmeraldChampions_Text_BattleItemCategoryEmpty, MSGBOX_DEFAULT
+	message EmeraldChampions_Text_BattleItemCategoryEmpty
+	waitmessage
+	waitbuttonpress
 	goto EmeraldChampions_EventScript_BattleItemCategories
 
-EmeraldChampions_EventScript_BattleItemCategoryBack:
-	checkitem ITEM_MEGA_RING, 1
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain
-	goto EmeraldChampions_EventScript_BattleVendorExit
-
+@ Form Items (Mega Ring holders): the explanation once per visit, then the list.
+EmeraldChampions_EventScript_FormItems::
+	goto_if_ne VAR_0x800B, 0, EmeraldChampions_EventScript_OpenEvolutionArchive
+	setvar VAR_0x800B, 1
+	msgbox EmeraldChampions_Text_BattleVendorCompleteWelcome, MSGBOX_DEFAULT
 EmeraldChampions_EventScript_OpenEvolutionArchive:
-	message General_Mart_Text_BuyingOrSelling
-	waitmessage
 	special OpenEmeraldChampionsEvolutionItemArchive
-	goto EmeraldChampions_EventScript_BattleVendorMain
-
-EmeraldChampions_EventScript_BattleVendorExit:
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	waitstate
+	goto General_Mart_AnythingElse
 
 EmeraldChampions_Text_BattleVendorStarterKit:
 	.string "Before you shop, take these.\p"

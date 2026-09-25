@@ -26,7 +26,7 @@ NATIVE_SINKS={'AddBagItem','AddPCItem','GiveMonToPlayer','GiveScriptedMonToPlaye
     'CreatePokemartMenu','CreateFreePokemartMenu','CreateDecorationShop1Menu','CreateDecorationShop2Menu',
     'DecorationAdd','UnlockLegendarySign','GiveEggFromDaycare','TryGiveEmeraldChampionsPreparedPokemon'}
 BOOKKEEPING={'TakeFrontierBattlePoints','TakeBattlePoints','SetMoney','SetCoins','RemoveBagItem','RemovePCItem','RemoveMoney','RemoveCoins','TakeBerryPowder','SetMonData','SetBoxMonData'}
-SHOPS={'pokemart','pokemartdecoration','pokemartdecoration2'}
+SHOPS={'pokemart','pokemartbuy','pokemartdecoration','pokemartdecoration2'}
 NULL={None,0,'0','0x0','NULL','0x00000000'}
 TOKENS=re.compile(r'\b(?:ITEM|DECOR|SPECIES)_[A-Z0-9_]+\b')
 

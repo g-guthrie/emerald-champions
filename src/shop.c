@@ -94,6 +94,9 @@ struct MartInfo
     u16 itemCount;
     u8 windowId;
     u8 martType;
+    // Opened straight into Buy or Sell by a script menu: no Buy/Sell/Quit
+    // box, and leaving the list hands control back to that script.
+    bool8 direct;
 };
 
 struct ShopData
@@ -145,6 +148,7 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
 static bool8 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *);
 static void ExitBuyMenu(u8 taskId);
 static void Task_ExitBuyMenu(u8 taskId);
+static void Task_ReturnToScriptFromDirectShop(u8 taskId);
 static void BuyMenuTryMakePurchase(u8 taskId);
 static void BuyMenuReturnToItemList(u8 taskId);
 static void Task_BuyHowManyDialogueInit(u8 taskId);
@@ -477,7 +481,23 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
 static void MapPostLoadHook_ReturnToShopMenu(void)
 {
     FadeInFromBlack();
-    CreateTask(Task_ReturnToShopMenu, 8);
+    if (sMartInfo.direct)
+        CreateTask(Task_ReturnToScriptFromDirectShop, 8);
+    else
+        CreateTask(Task_ReturnToShopMenu, 8);
+}
+
+static void Task_ReturnToScriptFromDirectShop(u8 taskId)
+{
+    if (IsWeatherNotFadingIn() == TRUE)
+    {
+        sMartInfo.direct = FALSE;
+        TryPutSmartShopperOnAir();
+        UnlockPlayerFieldControls();
+        DestroyTask(taskId);
+        if (sMartInfo.callback)
+            sMartInfo.callback();
+    }
 }
 
 static void Task_ReturnToShopMenu(u8 taskId)
@@ -1321,22 +1341,49 @@ void Test_RecordShopPurchase(enum Item item, u16 quantity)
 }
 #endif
 
-#undef tItemCount
-#undef tItemId
-#undef tListTaskId
-#undef tCallbackHi
-#undef tCallbackLo
-
 void CreatePokemartMenu(const u16 *itemsForSale)
 {
+    sMartInfo.direct = FALSE;
     CreateShopMenu(MART_TYPE_NORMAL);
     SetShopItemsForSale(itemsForSale);
     ClearItemPurchases();
     SetShopMenuCallback(ScriptContext_Enable);
 }
 
+static void OpenDirectShop(void (*cb2)(void))
+{
+    u8 taskId;
+    s16 *data;
+
+    LockPlayerFieldControls();
+    sMartInfo.martType = MART_TYPE_NORMAL;
+    sMartInfo.direct = TRUE;
+    ClearItemPurchases();
+    SetShopMenuCallback(ScriptContext_Enable);
+    taskId = CreateTask(Task_GoToBuyOrSellMenu, 8);
+    data = gTasks[taskId].data;
+    tCallbackHi = (u32)cb2 >> 16;
+    tCallbackLo = (u32)cb2;
+    FadeScreen(FADE_TO_BLACK, 0);
+}
+
+// The Center clerk's own menu already asked what the player wants, so these
+// skip the Buy/Sell/Quit box and resume the script when the list closes.
+void CreatePokemartBuyMenu(const u16 *itemsForSale)
+{
+    SetShopItemsForSale(itemsForSale);
+    OpenDirectShop(CB2_InitBuyMenu);
+}
+
+void CreatePokemartSellMenu(void)
+{
+    SetShopItemsForSale(sShopItemsListDummy);
+    OpenDirectShop(CB2_GoToSellMenu);
+}
+
 void CreateDecorationShop1Menu(const u16 *itemsForSale)
 {
+    sMartInfo.direct = FALSE;
     CreateShopMenu(MART_TYPE_DECOR);
     SetShopItemsForSale(itemsForSale);
     SetShopMenuCallback(ScriptContext_Enable);
@@ -1344,7 +1391,14 @@ void CreateDecorationShop1Menu(const u16 *itemsForSale)
 
 void CreateDecorationShop2Menu(const u16 *itemsForSale)
 {
+    sMartInfo.direct = FALSE;
     CreateShopMenu(MART_TYPE_DECOR2);
     SetShopItemsForSale(itemsForSale);
     SetShopMenuCallback(ScriptContext_Enable);
 }
+
+#undef tItemCount
+#undef tItemId
+#undef tListTaskId
+#undef tCallbackHi
+#undef tCallbackLo

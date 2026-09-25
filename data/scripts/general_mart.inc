@@ -1,30 +1,81 @@
+@ The Center clerk. One service menu; every counter returns to it, and B
+@ always steps back one level. The Held Items shelves and Form Items share
+@ this entry with the retired standalone battle vendor label.
 General_Mart_Script::
+Common_EventScript_EmeraldChampionsBattleVendor::
 	lock
 	faceplayer
 	call EmeraldChampions_EventScript_TryStarterKit
-General_Mart_ChooseService:
+	setvar VAR_0x8008, 0 @ Held Items category cursor
+	setvar VAR_0x8009, 0 @ service menu cursor
+	setvar VAR_0x800A, 0 @ Held Items welcome given this visit
+	setvar VAR_0x800B, 0 @ Form Items welcome given this visit
 	message gText_HowMayIServeYou
 	waitmessage
+General_Mart_ServiceMenu:
+	@ Let the prior native list window finish clearing before another menu can
+	@ reuse the same BG tiles and briefly erase its frame.
+	delay 1
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, TRUE, General_Mart_ServiceMenuWithForms
 	dynmultipush General_Mart_Text_Supplies, 0
 	dynmultipush EmeraldChampions_Text_HeldItems, 1
-	dynmultipush EmeraldChampions_Text_Exit, 2
-	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultipush General_Mart_Text_Sell, 2
+	dynmultipush EmeraldChampions_Text_Exit, 3
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
 	closemessage
-	goto_if_eq VAR_RESULT, 0, General_Mart_Supplies
-	goto_if_eq VAR_RESULT, 1, Common_EventScript_EmeraldChampionsBattleVendor
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, General_Mart_Exit
+	copyvar VAR_0x8009, VAR_RESULT
+	switch VAR_RESULT
+	case 0, General_Mart_Supplies
+	case 1, EmeraldChampions_EventScript_HeldItems
+	case 2, General_Mart_Sell
+	goto General_Mart_Exit
+
+General_Mart_ServiceMenuWithForms:
+	dynmultipush General_Mart_Text_Supplies, 0
+	dynmultipush EmeraldChampions_Text_HeldItems, 1
+	dynmultipush EmeraldChampions_Text_EvolutionArchive, 2
+	dynmultipush General_Mart_Text_Sell, 3
+	dynmultipush EmeraldChampions_Text_Exit, 4
+	dynmultistack 30, 1, FALSE, 5, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, General_Mart_Exit
+	copyvar VAR_0x8009, VAR_RESULT
+	switch VAR_RESULT
+	case 0, General_Mart_Supplies
+	case 1, EmeraldChampions_EventScript_HeldItems
+	case 2, EmeraldChampions_EventScript_FormItems
+	case 3, General_Mart_Sell
+	goto General_Mart_Exit
+
+General_Mart_AnythingElse::
+	message General_Mart_Text_AnythingElse
+	waitmessage
+	goto General_Mart_ServiceMenu
+
+General_Mart_Sell:
+	special OpenEmeraldChampionsSellMenu
+	waitstate
+	goto General_Mart_AnythingElse
+
+General_Mart_Exit::
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
+
 General_Mart_Text_Supplies:
 	.string "Supplies$"
 
-General_Mart_Text_BuyingOrSelling:
-	.string "Certainly! Will you be buying\n"
-	.string "or selling today?$"
+General_Mart_Text_Sell:
+	.string "Sell$"
 
-@ Buy/Sell follows the service menu, so the clerk answers instead of greeting again.
+General_Mart_Text_AnythingElse:
+	.string "Is there anything else I can do\n"
+	.string "for you?$"
+
+@ Supplies scale with badges and open straight into the Buy list.
 General_Mart_Supplies::
-	message General_Mart_Text_BuyingOrSelling
-	waitmessage
 	goto_if_set FLAG_BADGE06_GET, Mart_Poke_Center_Feather_Badge
 	goto_if_set FLAG_BADGE05_GET, Mart_Poke_Center_Balance_Badge
 	goto_if_set FLAG_BADGE04_GET, Mart_Poke_Center_Heat_Badge
@@ -33,10 +84,8 @@ General_Mart_Supplies::
 	goto_if_set FLAG_BADGE01_GET, Mart_Poke_Center_Stone_Badge
 	goto_if_set FLAG_VISITED_RUSTBORO_CITY, Mart_Poke_Center_Rustboro
 	goto_if_set FLAG_SYS_POKEMON_GET, Mart_Poke_Center_Pokedex
-	pokemart PokeMart_Poke_Center_No_Badges
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_No_Badges
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_No_Badges::
@@ -49,10 +98,8 @@ PokeMart_Poke_Center_No_Badges::
 	end
 
 Mart_Poke_Center_Pokedex::
-	pokemart PokeMart_Poke_Center_Pokedex
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Pokedex
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Pokedex::
@@ -66,10 +113,8 @@ PokeMart_Poke_Center_Pokedex::
 	end
 	
 Mart_Poke_Center_Rustboro::
-	pokemart PokeMart_Poke_Center_Rustboro
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Rustboro
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Rustboro::
@@ -84,10 +129,8 @@ PokeMart_Poke_Center_Rustboro::
 	end
 	
 Mart_Poke_Center_Stone_Badge::
-	pokemart PokeMart_Poke_Center_Stone_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Stone_Badge
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Stone_Badge::
@@ -104,10 +147,8 @@ PokeMart_Poke_Center_Stone_Badge::
 	release
 	
 Mart_Poke_Center_Knuckle_Badge::
-	pokemart PokeMart_Poke_Center_Knuckle_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Knuckle_Badge
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Knuckle_Badge::
@@ -130,10 +171,8 @@ PokeMart_Poke_Center_Knuckle_Badge::
 	end	
 	
 Mart_Poke_Center_Dynamo_Badge::
-	pokemart PokeMart_Poke_Center_Dynamo_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Dynamo_Badge
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Dynamo_Badge::
@@ -159,10 +198,8 @@ PokeMart_Poke_Center_Dynamo_Badge::
 	end	
 
 Mart_Poke_Center_Heat_Badge::
-	pokemart PokeMart_Poke_Center_Heat_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Heat_Badge
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Heat_Badge::
@@ -190,10 +227,8 @@ PokeMart_Poke_Center_Heat_Badge::
 	end	
 	
 Mart_Poke_Center_Balance_Badge::
-	pokemart PokeMart_Poke_Center_Balance_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Balance_Badge
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Balance_Badge::
@@ -222,10 +257,8 @@ PokeMart_Poke_Center_Balance_Badge::
 	end	
 	
 Mart_Poke_Center_Feather_Badge::
-	pokemart PokeMart_Poke_Center_Feather_Badge
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
+	pokemartbuy PokeMart_Poke_Center_Feather_Badge
+	goto General_Mart_AnythingElse
 
 	.align 2
 PokeMart_Poke_Center_Feather_Badge::
