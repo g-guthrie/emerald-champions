@@ -2722,9 +2722,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (param == 246 || param == 250)
                 {
-                    // Box legends wait for the Hall of Fame (legendary_signs.h).
-                    FlagSet(FLAG_BADGE08_GET);
-                    FlagSet(FLAG_IS_CHAMPION);
                     FlagClear(FLAG_DEFEATED_RAYQUAZA);
                     FlagSet(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA);
                     FlagClear(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL);

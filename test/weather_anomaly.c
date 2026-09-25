@@ -215,9 +215,8 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_FINI].unlockFlag, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KELDEO].minimumBadges, 7);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_VISITED_FORTREE_CITY);
-    // Box legends wait for the Hall of Fame, so pre-League storms never draw them.
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_IS_CHAMPION);
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_IS_CHAMPION);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_BADGE06_GET);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_RECEIVED_RED_OR_BLUE_ORB);
 }
 
 TEST("Weather anomalies: none before the window opens or after it closes")
@@ -304,7 +303,6 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
     SetBadges(8);
     FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
     FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
-    FlagSet(FLAG_IS_CHAMPION); // box-legend visitors are gated on the Hall of Fame
     u32 seenVisitors = 0;
     for (u32 round = 0; round < 200; round++)
     {

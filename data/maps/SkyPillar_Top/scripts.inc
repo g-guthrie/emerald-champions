@@ -46,9 +46,9 @@ SkyPillar_Top_EventScript_RayquazaFaceDown:: @ 823971D
 
 SkyPillar_Top_EventScript_Rayquaza:: @ 8239722
 	lockall
-	@ Box legends wait for the Hall of Fame; its gate table row names the
-	@ same flag.
-	goto_if_unset FLAG_IS_CHAMPION, SkyPillar_Top_EventScript_RayquazaNotYet
+	@ Like the original game, Rayquaza can be challenged only once the
+	@ Sootopolis crisis is settled (its gate table row names the same flag).
+	goto_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SkyPillar_Top_EventScript_RayquazaNotYet
 	waitse
 	playmoncry SPECIES_RAYQUAZA, 2
 	delay 40
@@ -189,6 +189,6 @@ SkyPillar_Top_Text_RayquazaFlewOff: @ 8239860
 
 SkyPillar_Top_Text_RayquazaNotYet:
 	.string "Rayquaza rests here, gazing\n"
-	.string "down at the world below.\p"
-	.string "It will only answer a Trainer who\n"
-	.string "has entered the Hall of Fame.$"
+	.string "toward Sootopolis.\p"
+	.string "It won't be disturbed while the\n"
+	.string "city still needs your help.$"

@@ -16,7 +16,7 @@ AI_DOUBLE_BATTLE_TEST("EC weather survival: Cherubi uses timely support before l
     PARAMETRIZE { setup = MOVE_TRICK_ROOM; }
     PARAMETRIZE { incoming = MOVE_PROTECT; }
     GIVEN {
-        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_LOLA_1;
+        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_KAYLEY; // an authored SUN plan
         AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
             | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE
             | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE);
