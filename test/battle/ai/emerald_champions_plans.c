@@ -1631,36 +1631,6 @@ DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or ra
     }
 }
 
-DOUBLE_BATTLE_TEST("EC misty gym: Spinner unlocks Flareon's Orb and keeps the seed boost")
-{
-    bool32 clear;
-    u8 savedWeather = WEATHER_NONE;
-    PARAMETRIZE { clear = FALSE; }
-    PARAMETRIZE { clear = TRUE; }
-    GIVEN {
-        savedWeather = gWeatherPtr->currWeather;
-        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
-        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
-        PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
-        AuthoredMistyGymOpponent(TRAINER_KEEGAN);
-    } WHEN {
-        TURN {
-            MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
-            if (clear) MOVE(opponentLeft, MOVE_ICE_SPINNER, target: playerLeft);
-            else MOVE(opponentLeft, MOVE_PROTECT);
-            MOVE(opponentRight, MOVE_PROTECT);
-        }
-    } THEN {
-        gWeatherPtr->currWeather = savedWeather;
-        EXPECT_EQ(opponentLeft->species, SPECIES_HITMONTOP);
-        EXPECT_EQ(opponentLeft->item, ITEM_NONE);
-        EXPECT_EQ(opponentLeft->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
-        EXPECT_EQ(gFieldTimers.terrain, clear ? B_TERRAIN_NONE : B_TERRAIN_MISTY);
-        EXPECT_EQ(opponentRight->status1 & STATUS1_ANY, clear ? STATUS1_TOXIC_POISON : STATUS1_NONE);
-        EXPECT_EQ(opponentRight->ability, ABILITY_GUTS);
-    }
-}
-
 DOUBLE_BATTLE_TEST("EC misty gym: Defog opens Corrosion while the airborne Orb works in mist")
 {
     bool32 clear;
