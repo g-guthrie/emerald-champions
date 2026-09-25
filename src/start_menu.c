@@ -1707,8 +1707,17 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
 
 static bool8 StartMenuDexNavCallback(void)
 {
-    CreateTask(Task_OpenDexNavFromStartMenu, 0);
-    return TRUE;
+    // Like the other full-screen entries, drop the scroll arrows first: their
+    // task would otherwise outlive the DexNav screen and move whatever
+    // sprites reuse its slots, including the field camera.
+    if (!gPaletteFade.active)
+    {
+        PlayRainStoppingSoundEffect();
+        RemoveExtraStartMenuWindows();
+        CreateTask(Task_OpenDexNavFromStartMenu, 0);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 void Script_ForceSaveGame(struct ScriptContext *ctx)
