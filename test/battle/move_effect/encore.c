@@ -415,3 +415,89 @@ DOUBLE_BATTLE_TEST("Encore uses the priority of the Encored move on the turn the
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
     }
 }
+
+// An Encored move that Cursed Body then disables leaves nothing selectable;
+// the battler Struggles rather than stalling the turn, even when it is trapped.
+SINGLE_BATTLE_TEST("Encore: a trapped Pokemon whose Encored move is disabled by Cursed Body uses Struggle")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_MEAN_LOOK) == EFFECT_MEAN_LOOK);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_SHADOW_SNEAK, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_FRILLISH) { Ability(ABILITY_CURSED_BODY); Speed(10); HP(300); MaxHP(300); Moves(MOVE_ENCORE, MOVE_MEAN_LOOK, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHADOW_SNEAK, WITH_RNG(RNG_CURSED_BODY, FALSE)); MOVE(opponent, MOVE_ENCORE); }
+        TURN { MOVE(player, MOVE_SHADOW_SNEAK, WITH_RNG(RNG_CURSED_BODY, TRUE)); MOVE(opponent, MOVE_MEAN_LOOK); }
+        TURN { FORCED_MOVE(player); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_SNEAK, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_SNEAK, player);
+        ABILITY_POPUP(opponent, ABILITY_CURSED_BODY);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MEAN_LOOK, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, player);
+    } THEN {
+        EXPECT_EQ((enum Move)player->volatiles.disabledMove, MOVE_SHADOW_SNEAK);
+        EXPECT_EQ((enum Move)player->volatiles.encoredMove, MOVE_SHADOW_SNEAK);
+    }
+}
+
+// The same lock reached by Disable, on an AI battler that Shadow Tag keeps in.
+AI_SINGLE_BATTLE_TEST("Encore: a trapped AI Pokemon whose Encored move is disabled uses Struggle")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_DISABLE) == EFFECT_DISABLE);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Speed(10); Moves(MOVE_ENCORE, MOVE_DISABLE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Speed(20); Moves(MOVE_SCRATCH, MOVE_CELEBRATE, MOVE_SPLASH); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Speed(1); Moves(MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENCORE); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_DISABLE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DISABLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Encore into Fake Out: a trapped AI Pokemon uses Struggle after its first turn (Champions)")
+{
+    GIVEN {
+        WITH_CONFIG(B_FIRST_TURN_MOVE, GEN_CHAMPIONS);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Item(ITEM_COVERT_CLOAK); Speed(10); Moves(MOVE_ENCORE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Speed(20); Moves(MOVE_FAKE_OUT, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Speed(1); Moves(MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENCORE); EXPECT_MOVE(opponent, MOVE_FAKE_OUT); }
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
+    }
+}
+
+// Doubles, as the harness hit it: the Encored Fake Out user is also trapped.
+DOUBLE_BATTLE_TEST("Encore into Fake Out: a trapped player Pokemon uses Struggle in doubles (Champions)")
+{
+    GIVEN {
+        WITH_CONFIG(B_FIRST_TURN_MOVE, GEN_CHAMPIONS);
+        PLAYER(SPECIES_ZIGZAGOON) { Speed(30); Moves(MOVE_FAKE_OUT, MOVE_SCRATCH); }
+        PLAYER(SPECIES_WYNAUT) { Speed(20); }
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Item(ITEM_COVERT_CLOAK); Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentLeft); MOVE(opponentLeft, MOVE_ENCORE, target: playerLeft); }
+        TURN { FORCED_MOVE(playerLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, playerLeft);
+    }
+}

@@ -576,6 +576,10 @@ def decode_state(session, words):
         return {
             'battler': index,
             'species': actives[index]['species'],
+            # Every slot is blocked (an Encored move later Disabled, an Encored
+            # Fake Out past the first turn, no PP left): the engine answers
+            # Fight with Struggle, so "N:struggle" is the move command.
+            'must_struggle': bool(moves) and not any(m['legal'] for m in moves),
             'may_switch': bool(switch & 0x100),
             # The engine's own switch gate: Shadow Tag and friends, the trapping
             # moves and volatiles, Battle Arena and Commander. Empty means legal.
@@ -963,7 +967,7 @@ def occupants(state):
         seen.setdefault(f"player:{mon['slot']}", (mon['species'], mon['hp'], None))
     return seen
 
-COMMAND_RE = re.compile(r'^(\d+)\s*:\s*(?:move(\d+)@(\d+)(,mega)?|switch(\d+))$')
+COMMAND_RE = re.compile(r'^(\d+)\s*:\s*(?:move(\d+)@(\d+)(,mega)?|switch(\d+)|(struggle))$')
 
 
 def command_act(args):
@@ -982,7 +986,8 @@ def command_act(args):
     for text in args.commands:
         match = COMMAND_RE.match(text.strip())
         if not match:
-            fail(f'unparsable command: {text!r} (use "0:move1@3" or "0:move0@1,mega" or "2:switch3")')
+            fail(f'unparsable command: {text!r} (use "0:move1@3" or "0:move0@1,mega" or "2:switch3" '
+                 f'or "0:struggle")')
         battler = int(match[1])
         if battler not in pending:
             fail(f'battler {battler} does not need a command here; pending={sorted(pending)}')
@@ -1005,6 +1010,19 @@ def command_act(args):
             writes += [(syms['gEcAgentBattleSwitchSlot'] + 4 * battler, slot),
                        (syms['gEcAgentBattleAction'] + 4 * battler, 2)]
             submitted[battler] = {'action': 'switch', 'slot': slot}
+        elif match[6] is not None:
+            if state['phase'] == 'await_switch':
+                fail(f'battler {battler} must be replaced with a switch, not a move')
+            if not entry.get('must_struggle'):
+                fail(f'battler {battler} still has a legal move; Struggle is only for '
+                     f'a battler whose every move is blocked')
+            # Fight with nothing selectable: the engine substitutes Struggle
+            # and never asks which move, so index and target are unused.
+            writes += [(syms['gEcAgentBattleMoveIndex'] + 4 * battler, 0),
+                       (syms['gEcAgentBattleTarget'] + 4 * battler, 0),
+                       (syms['gEcAgentBattleMega'] + 4 * battler, 0),
+                       (syms['gEcAgentBattleAction'] + 4 * battler, 1)]
+            submitted[battler] = {'action': 'move', 'move': 'MOVE_STRUGGLE', 'mega': False}
         else:
             index, target, mega = int(match[2]), int(match[3]), match[4] is not None
             if state['phase'] == 'await_switch':

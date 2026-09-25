@@ -167,6 +167,11 @@ static void ServeChooseAction(enum BattlerId battler)
     }
     else
     {
+        // With every slot blocked the engine answers Fight with Struggle and
+        // never asks which move, so the command is spent here. Left set, it
+        // would silently answer this battler's next turn as well.
+        if (CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL) == (1u << MAX_MON_MOVES) - 1)
+            ClearCommand(battler);
         BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, 0);
     }
     BtlController_Complete(battler);

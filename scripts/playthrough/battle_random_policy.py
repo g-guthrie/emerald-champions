@@ -28,6 +28,14 @@ def choose(rng, entry, phase, taken):
     """`taken` collects reserve slots already spent in this act call, so a double
     faint never sends the same Pokemon out twice."""
     legal_moves = [m for m in entry['moves'] if m['legal']]
+    if entry.get('must_struggle') and phase == 'await_action' and not entry.get('replacing'):
+        slots = ([s for s in entry['switch_slots'] if s not in taken]
+                 if entry['may_switch'] else [])
+        choice = rng.choice(slots + ['struggle'])
+        if choice == 'struggle':
+            return f'{entry["battler"]}:struggle'
+        taken.add(choice)
+        return f'{entry["battler"]}:switch{choice}'
     if entry.get('replacing') or phase == 'await_switch' or not legal_moves:
         slots = [s for s in entry['switch_slots'] if s not in taken]
         if not slots:

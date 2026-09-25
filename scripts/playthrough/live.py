@@ -526,6 +526,8 @@ class Harness:
         for d in state['pending_decision']:
             moves = [f"move{m['index']}={m['move'].replace('MOVE_', '')}"
                      f"{'' if m['legal'] else '(X)'}@{m['targets']}" for m in d['moves']]
+            if d.get('must_struggle'):
+                moves.append('struggle')
             pend.append({'battler': d['battler'], 'species': d.get('species'),
                          'replacing': d.get('replacing'), 'moves': moves,
                          'switch': d['switch_slots'] if (d['may_switch'] or d.get('replacing')) else []})
@@ -594,7 +596,7 @@ class Harness:
         for text in commands:
             match = bd.COMMAND_RE.match(text.strip())
             if not match:
-                raise ValueError(f'unparsable {text!r}; use 0:move1@3 or 2:switch3')
+                raise ValueError(f'unparsable {text!r}; use 0:move1@3, 2:switch3 or 0:struggle')
             battler = int(match[1])
             if battler not in pending:
                 raise ValueError(f'battler {battler} not pending; pending={sorted(pending)}')
@@ -610,6 +612,17 @@ class Harness:
                 writes += [(s['gEcAgentBattleSwitchSlot'] + 4 * battler, slot),
                            (s['gEcAgentBattleAction'] + 4 * battler, 2)]
                 submitted[battler] = {'action': 'switch', 'slot': slot}
+            elif match[6] is not None:
+                if state['phase'] == 'await_switch':
+                    raise ValueError(f'battler {battler} must switch')
+                if not entry.get('must_struggle'):
+                    raise ValueError(f'battler {battler} still has a legal move')
+                # The engine substitutes Struggle for Fight and never asks which move.
+                writes += [(s['gEcAgentBattleMoveIndex'] + 4 * battler, 0),
+                           (s['gEcAgentBattleTarget'] + 4 * battler, 0),
+                           (s['gEcAgentBattleMega'] + 4 * battler, 0),
+                           (s['gEcAgentBattleAction'] + 4 * battler, 1)]
+                submitted[battler] = {'action': 'move', 'move': 'MOVE_STRUGGLE'}
             else:
                 index, target, mega = int(match[2]), int(match[3]), match[4] is not None
                 if state['phase'] == 'await_switch':
