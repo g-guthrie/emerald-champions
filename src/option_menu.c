@@ -6,6 +6,7 @@
 #include "international_string_util.h"
 #include "main.h"
 #include "main_menu.h"
+#include "malloc.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
@@ -130,8 +131,9 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
-    // Seven rows leave no room for a title bar, so the list runs from the top
-    // and shares its bottom frame edge with the description strip.
+    // One framed panel: the seven rows, then the difficulty note under a
+    // rule. Both share bg0 so the note reads as part of the list, not a
+    // second menu underneath it.
     [WIN_OPTIONS] = {
         .bg = 0,
         .tilemapLeft = 2,
@@ -142,11 +144,11 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .baseBlock = 2
     },
     [WIN_DESCRIPTION] = {
-        .bg = 1,
+        .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 16,
+        .tilemapTop = 15,
         .width = 26,
-        .height = 3,
+        .height = 4,
         .paletteNum = 1,
         .baseBlock = 2 + 26 * 14
     },
@@ -217,6 +219,9 @@ void CB2_InitOptionMenu(void)
         ChangeBgX(3, 0, BG_COORD_SET);
         ChangeBgY(3, 0, BG_COORD_SET);
         InitWindows(sOptionMenuWinTemplates);
+        // Both windows live on bg0, so InitWindows leaves bg1 (the frame)
+        // without a tilemap buffer.
+        SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
         DeactivateAllTextPrinters();
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -410,6 +415,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
+        Free(GetBgTilemapBuffer(1));
         FreeAllWindowBuffers();
         SetMainCallback2(gMain.savedCallback);
     }
@@ -703,8 +709,9 @@ static void DrawDescriptionText(void)
     u32 i;
 
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(1));
+    FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(7), 4, 2, 26 * 8 - 8, 1);
     for (i = 0; i < ARRAY_COUNT(sDifficultyDescription); i++)
-        AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, sDifficultyDescription[i], 4, i * 12, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, sDifficultyDescription[i], 8, 6 + i * 12, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_FULL);
 }
 
@@ -721,21 +728,12 @@ static void DrawOptionMenuTexts(void)
 static void DrawBgWindowFrames(void)
 {
     //                     bg, tile,              x, y, width, height, palNum
-    // Draw options list window frame
+    // One frame around the list and the note
     FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
     FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 26,  1,  7);
     FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1, 14,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1, 14,  7);
-
-    // The divider doubles as the description strip's top edge
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 15,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 15, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 15,  1,  1,  7);
-
-    // Draw description window frame
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1, 16,  1,  3,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28, 16,  1,  3,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1, 18,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1, 18,  7);
     FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
     FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
     FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
