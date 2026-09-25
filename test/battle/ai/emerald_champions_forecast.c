@@ -302,6 +302,9 @@ AI_DOUBLE_BATTLE_TEST("EC charge: Maxie's Torkoal does not Solar Beam in the rai
         ForecastPlayer(SPECIES_KARTANA, 60, 0, MAXIE_KARTANA);
         ForecastPlayer(SPECIES_INCINEROAR, 60, 0, MAXIE_INCINEROAR);
         sForecastInjuries[0] = (struct ForecastInjury){SPECIES_RUNERIGUS, 82, 0, TRUE};
+        // The redesign leads Spiritomb; Runerigus (now slot 5) stood beside
+        // Torkoal on the benchmark board.
+        ForecastLeads(0, 4);
         ForecastAuthoredOpponent(TRAINER_MAXIE_MAGMA_HIDEOUT, 6);
         gTestAiTurnSetupHook = MaxieTorkoalBoard;
         // The benchmark decision ran into its clock (61 frames against a

@@ -268,6 +268,10 @@ AI_DOUBLE_BATTLE_TEST("EC forecast: Maxie's Torkoal does not Heat Wave into a Wi
         SupportPlayer(SPECIES_LANDORUS, 60, 0, SET(MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_PSYCHIC, MOVE_PROTECT, NATURE_TIMID, ABILITY_SHEER_FORCE, ITEM_LIFE_ORB, 4, 0, 0, 252, 0, 252));
         sSupportMembers[0] = (struct SupportMember){.species = SPECIES_TORKOAL, .hp = 220, .level = 63};
         sSupportMembers[1] = (struct SupportMember){.species = SPECIES_RUNERIGUS, .hp = 208, .level = 64, .noItem = TRUE};
+        // Runerigus led beside Torkoal on this board; the redesign leads
+        // Spiritomb, so bring Runerigus forward to keep the benchmark board.
+        sSupportLeads[0] = SPECIES_TORKOAL;
+        sSupportLeads[1] = SPECIES_RUNERIGUS;
         SupportOpponent(TRAINER_MAXIE_MAGMA_HIDEOUT, 6);
         gTestAiTurnSetupHook = MaxieBoard;
     } WHEN {
