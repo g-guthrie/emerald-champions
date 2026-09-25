@@ -145,11 +145,19 @@
 // More than a whole member, so an exit that loses the body it brings in can
 // never win on a margin.
 #define PAIR_SWITCH_INTO_DEATH 220
+// A foe move the body leaving does not resist: not a hit its switch dodges.
+// See PairOutgoingLoss.
+#define PAIR_NOT_RELIEVED 0xFF
 // A Choice lock into a move that every foe is immune to or resists is not one
 // wasted turn but every turn until it leaves, which a one-turn board cannot
 // see. Credit the exit with the turns it recovers: more than the commitment,
 // so a reasonable reserve wins, and far less than a lethal entry.
 #define PAIR_USELESS_LOCK_ESCAPE 70
+// The first move a Choice holder uses is the move it is held to next turn, so
+// a lock is worth what that move still does to the foes left standing. A
+// sure knockout of one foe beside a move the other foe walls leaves a lock
+// that buys nothing, which is where the escape above begins.
+#define PAIR_CHOICE_LOCK_HORIZON 40
 
 static const enum Move sCopiedDances[] = {MOVE_PETAL_DANCE, MOVE_FIERY_DANCE, MOVE_REVELATION_DANCE, MOVE_AQUA_STEP, MOVE_FEATHER_DANCE};
 
@@ -354,7 +362,12 @@ struct PairEvaluation
     u8 soakable;
     u8 chargeable;
     u8 electricMoves[MAX_BATTLERS_COUNT][2]; // Original / Soaked attacker; native dynamic move typing.
+    // Whether this move would start a Choice lock, the small tie-break value
+    // the foes' forecast gives it, and what it takes from each foe's maximum
+    // HP, as a percentage.
+    bool8 firstChoice[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 firstChoiceValue[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    u8 firstChoiceShare[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT];
     struct PairDefenderItemCache *defenderItem[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     struct PairRageCache *rage[MAX_BATTLERS_COUNT];
     u8 rageActors;
@@ -1775,6 +1788,11 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     if (!IsBattleMoveStatus(action->executedMove) && IsBattlerAlive(action->target)
      && !IsBattlerAlly(actor, action->target)
      && AI_GetMovePriority(actor, gAiLogicData->abilities[actor], move) > 0
+     // Only a move built for priority trades power for it. Gale Wings lends a
+     // full Brave Bird the step for free, and charging that as redundant sent
+     // Jeff's faster Talonflame's resisted Flare Blitz into Glimmora over a
+     // neutral Brave Bird into Incineroar.
+     && GetMovePriority(action->executedMove) > 0
      // Fake Out's worth is the flinch it buys, not the step in the order, so
      // it is not redundant on a user that is already faster.
      && action->executedMove != MOVE_FAKE_OUT && action->executedMove != MOVE_FIRST_IMPRESSION)
@@ -2700,14 +2718,16 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
         bool32 harmsPartner = PairSpread(executedMove) && GetMoveTarget(executedMove) == TARGET_FOES_AND_ALLY
             && IsBattlerAlive(partner) && gAiLogicData->simulatedDmg[actor][partner][index].maximum;
         if (!harmsPartner)
+        {
+            ev->firstChoice[actor][index] = TRUE;
             for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
                 if (IsBattlerAlive(foe) && !IsBattlerAlly(actor, foe))
-                    // Small future commitment value, not damage through Protect
-                    // or a fictitious KO. First-lock ties should not lock a
-                    // resisted move just because every current target guards.
-                    ev->firstChoiceValue[actor][index] += 8
-                        * min(gBattleMons[foe].maxHP, gAiLogicData->simulatedDmg[actor][foe][index].median)
-                        / max(1, gBattleMons[foe].maxHP);
+                {
+                    u32 damage = min(gBattleMons[foe].maxHP, gAiLogicData->simulatedDmg[actor][foe][index].median);
+                    ev->firstChoiceValue[actor][index] += 8 * damage / max(1, gBattleMons[foe].maxHP);
+                    ev->firstChoiceShare[actor][index][foe] = 100 * damage / max(1, gBattleMons[foe].maxHP);
+                }
+        }
     }
     enum Stat defenseStat = PairSelfDefenseStat(move);
     if (defenseStat != STAT_HP && IsBattlerAlive(actor))
@@ -3658,7 +3678,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (((newTauntTargets & (1u << actor)) || gBattleMons[actor].volatiles.tauntTimer)
          && IsBattleMoveStatus(move))
             continue;
-        if (!copy && ev->firstChoiceValue[actor][action->index])
+        if (!copy && ev->firstChoice[actor][action->index])
             choiceStarted |= 1u << actor;
         // Conditional HP includes branches where an earlier lethal move
         // missed. A surviving setter must not supply certain weather/order
@@ -5209,12 +5229,33 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (hp[actor] && (choiceStarted & (1u << actor))
          && ((livingSides >> (GetBattlerSide(actor) ^ 1)) & 1u)
          && (!(usedItems & (1u << actor)) || gAiLogicData->abilities[actor] == ABILITY_GORILLA_TACTICS))
+        {
+            // Our own lock is worth what it still threatens next turn: the
+            // move's hit on the foe it hurts most among those this trial
+            // leaves standing. Not damage through Protect or a fictitious KO -
+            // a first lock is not settled by every current target guarding -
+            // and not a foe this turn removes: Tate & Liza's Specs Tapu Lele
+            // took Moonblast for the sure knockout on Incineroar with Focus
+            // Blast, super effective on both, in hand, and sat two turns in a
+            // lock Heatran walled. The foes' forecast keeps the small
+            // tie-break value: it asks what they do this turn, and the lock
+            // they walk into is theirs to escape.
+            u32 lockValue = ev->firstChoiceValue[actor][actions[actor].index];
+            if (GetBattlerSide(actor) == ev->side)
+            {
+                u32 threat = 0;
+                for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                    if (hp[foe] && !IsBattlerAlly(actor, foe))
+                        threat = max(threat, ev->firstChoiceShare[actor][actions[actor].index][foe] * survival[foe] / 100);
+                lockValue = PAIR_CHOICE_LOCK_HORIZON * threat / 100;
+            }
             // Signed before it meets the unsigned survival: a foe's value is
             // subtracted, and letting the -1 wrap made every board a
             // Choice-holding foe could reach worth ~42 million, which the
             // forecast weighting then overflowed below the -10000 vetoes.
             score += (GetBattlerSide(actor) == ev->side ? 1 : -1)
-                * (s32)(ev->firstChoiceValue[actor][actions[actor].index] * survival[actor] / 100);
+                * (s32)(lockValue * survival[actor] / 100);
+        }
         if (hp[actor] && (newWish & (1u << actor)) && !(newParalysisTargets & (1u << actor)))
         {
             u32 foeSide = GetBattlerSide(actor) ^ 1;
@@ -5594,6 +5635,21 @@ static s32 PairStandaloneScore(struct PairEvaluation *ev, enum BattlerId actor, 
     return score;
 }
 
+// Whether both of our actions are single-target attacks aimed at the same foe.
+// When one of them removes that foe, the other lands on the foe's partner by
+// the native retarget, so the model scores the stacked pair and the split pair
+// alike; the stacked pair still loses both hits to that foe's Protect, Follow
+// Me or switch where the split one keeps one. An exact tie goes to the split.
+static bool32 PairStacksTarget(enum BattlerId actor, const struct PairAction *mine, const struct PairAction *theirs)
+{
+    return mine->index != PAIR_IDLE && theirs->index != PAIR_IDLE
+        && mine->target == theirs->target && mine->target < gBattlersCount && !IsBattlerAlly(actor, mine->target)
+        && !IsBattleMoveStatus(mine->executedMove) && !IsBattleMoveStatus(theirs->executedMove)
+        && !PairSpread(mine->executedMove) && !PairSpread(theirs->executedMove)
+        && GetMoveTarget(mine->executedMove) == TARGET_SELECTED
+        && GetMoveTarget(theirs->executedMove) == TARGET_SELECTED;
+}
+
 // nonGuard, when supplied, comes back holding the best final score this board
 // reached with each of the two bodies doing something other than shielding -
 // the comparison the guard trace's margin is asking for. It is INT_MIN when no
@@ -5955,7 +6011,11 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
                     if (shortlist[slot - 1].standalone == INT_MIN)
                         shortlist[slot - 1].standalone = PairStandaloneScore(ev, actor, partner, firstFoe, secondFoe,
                             &ev->choices[actor][shortlist[slot - 1].left], &ev->choices[partner][shortlist[slot - 1].right]);
-                    if (shortlist[slot - 1].standalone >= standalone)
+                    if (shortlist[slot - 1].standalone > standalone
+                     || (shortlist[slot - 1].standalone == standalone
+                         && (PairStacksTarget(actor, &ev->choices[actor][left], &ev->choices[partner][right])
+                             || !PairStacksTarget(actor, &ev->choices[actor][shortlist[slot - 1].left],
+                                                  &ev->choices[partner][shortlist[slot - 1].right]))))
                         break;
                 }
                 if (slot < shortLimit)
@@ -5985,6 +6045,7 @@ settle:
     // against a stay board that was scored on the full mixture. The budget
     // controls how many pairs are searched, never how a pair is valued.
     mixed = forecastCount > 1;
+    bool32 bestStacked = FALSE;
     for (u32 entry = 0; entry < shortCount; entry++)
     {
         ev->action[actor] = ev->choices[actor][shortlist[entry].left];
@@ -6007,9 +6068,11 @@ settle:
                  && score > nonGuard[index])
                     nonGuard[index] = score;
         }
-        if (score > best)
+        bool32 stacked = PairStacksTarget(actor, &ev->action[actor], &ev->action[partner]);
+        if (score > best || (score == best && bestStacked && !stacked))
         {
             best = score;
+            bestStacked = stacked;
             if (chosen != NULL)
             {
                 chosen[0] = ev->action[actor];
@@ -6099,26 +6162,35 @@ static s32 PairForfeitedAttackValue(enum BattlerId actor)
 
 // What a voluntary switch-in is walking into. A move the other side holds that
 // would remove the arriving body before it acts costs the whole switch penalty.
-// A super-effective one that takes half of it or more costs the share by which
-// it exceeds the HP share of the body the switch relieves: the forecast is a
-// guess at where the foes aim, the switch was the answer to their best hit on
-// this slot, and a newcomer that loses more than the outgoing body had left
-// is a trade the wrong way round. Lea & Jed's Ursaluna gave two thirds to Iron
-// Hands' Drain Punch to save a Miltank at a third; Wally's Roselia fell to
-// Heatran's Heat Wave to save a Gardevoir at a ninth. A full Tapu Fini leaving
-// a Leaf Blade it cannot survive for a Milotic that can is not charged. The
-// AI reads exactly the loadout its flags show it (GetMovesArray): campaign
-// trainers see sets, so a Gardevoir that had not yet attacked still visibly
-// held the Moonblast that ended Lilycove Brendan's Salamence on arrival. The
-// damage is the candidate board's, which prices a foe's visible Mega. Dead
-// weight - a body held in a useless lock, or with no attack to use - is costed
-// as before, by the moves the foes have shown knocking the newcomer out: the
-// foes' strongest hit is aimed at it wherever it stands.
-static s32 PairEntryCost(enum BattlerId entering, bool32 deadWeight, u32 savedShare)
+// A move that takes half of the newcomer or more is a trade the wrong way
+// round when the newcomer loses more than the switch saves, costed at the
+// share of a body by which it does. What the switch saves from a move the
+// outgoing body resists or is immune to is exactly what that move would have
+// taken from it (PairOutgoingLoss): Cynthia's full Togekiss, immune to Primal
+// Groudon's Precipice Blades, left for a Garchomp that took it neutrally and
+// arrived at 42%. From a super-effective hit on the newcomer the switch saved
+// at most the share the outgoing body had left: the forecast is a guess at
+// where the foes aim, and the switch was the answer to their best hit on this
+// slot. Lea & Jed's Ursaluna gave two thirds to Iron Hands' Drain Punch to
+// save a Miltank at a third; Wally's Roselia fell to Heatran's Heat Wave to
+// save a Gardevoir at a ninth. A full Tapu Fini leaving a Leaf Blade it cannot
+// survive for a Milotic that can is not charged, and neither is a Regidrago
+// leaving the Play Rough that removes it for the Multiscale Dragonite that
+// lives through it. The AI reads exactly the loadout its flags show it
+// (GetMovesArray): campaign trainers see sets, so a Gardevoir that had not yet
+// attacked still visibly held the Moonblast that ended Lilycove Brendan's
+// Salamence on arrival. The damage is the candidate board's, which prices a
+// foe's visible Mega. Dead weight - a body held in a useless lock, or with no
+// attack to use - is costed as before, by the moves the foes have shown
+// knocking the newcomer out: the foes' strongest hit is aimed at it wherever
+// it stands.
+static s32 PairEntryCost(enum BattlerId entering, bool32 deadWeight, u32 savedShare,
+    const u8 outgoingLoss[MAX_BATTLERS_COUNT][MAX_MON_MOVES])
 {
     if (!IsBattlerAlive(entering))
         return 0;
-    u32 share = 0;
+    u32 hp = gBattleMons[entering].hp, maxHp = max(1, gBattleMons[entering].maxHP);
+    s32 excess = 0;
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
     {
         if (!IsBattlerAlive(foe) || IsBattlerAlly(entering, foe))
@@ -6139,17 +6211,62 @@ static s32 PairEntryCost(enum BattlerId entering, bool32 deadWeight, u32 savedSh
                     continue;
             }
             const struct SimulatedDamage *damage = &gAiLogicData->simulatedDmg[foe][entering][index];
-            if (damage->minimum >= gBattleMons[entering].hp && damage->minimum != 0)
+            if (damage->minimum >= hp && damage->minimum != 0)
                 return PAIR_SWITCH_INTO_DEATH;
-            if (!deadWeight && gAiLogicData->effectiveness[foe][entering][index] >= UQ_4_12(2.0))
-                share = max(share, min(100, damage->median * 100 / max(1, gBattleMons[entering].hp)));
+            if (deadWeight)
+                continue;
+            u32 share = min(100, damage->median * 100 / max(1, hp));
+            if (share * 2 < 100)
+                continue;
+            s32 loss = (s32)(min(hp, damage->median) * 100 / maxHp);
+            if (outgoingLoss[foe][index] != PAIR_NOT_RELIEVED)
+                excess = max(excess, loss - (s32)outgoingLoss[foe][index]);
+            if (gAiLogicData->effectiveness[foe][entering][index] >= UQ_4_12(2.0))
+                excess = max(excess, (s32)share - (s32)savedShare);
         }
     }
-    // A super-effective hit that takes more of the newcomer than the body it
-    // relieves still had is a trade the wrong way round.
-    if (share * 2 < 100 || share <= savedShare)
-        return 0;
-    return PAIR_SWITCH_INTO_DEATH * (s32)(share - savedShare) / 100;
+    return PAIR_SWITCH_INTO_DEATH * min(100, excess) / 100;
+}
+
+// What each foe's visible attacks take from a body that may leave, as a
+// percentage of its maximum HP, priced like a newcomer: every usable attack,
+// at the harder of a foe's two forms while it can still Mega Evolve. Only a
+// move the body resists or is immune to is recorded - the hits a switch out of
+// it dodges. The rest are PAIR_NOT_RELIEVED. Read before any candidate loads.
+static void PairOutgoingLoss(enum BattlerId battler, u8 loss[MAX_BATTLERS_COUNT][MAX_MON_MOVES])
+{
+    memset(loss, PAIR_NOT_RELIEVED, sizeof(u8) * MAX_BATTLERS_COUNT * MAX_MON_MOVES);
+    if (!IsBattlerAlive(battler))
+        return;
+    u32 hp = gBattleMons[battler].hp, maxHp = max(1, gBattleMons[battler].maxHP);
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
+            continue;
+        enum Move *moves = GetMovesArray(foe);
+        for (u32 index = 0; index < MAX_MON_MOVES; index++)
+        {
+            enum Move move = moves[index];
+            if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsBattleMoveStatus(move)
+             || IsMoveUnusable(index, move, gAiLogicData->moveLimitations[foe]))
+                continue;
+            u32 median = gAiLogicData->simulatedDmg[foe][battler][index].median;
+            uq4_12_t effectiveness = gAiLogicData->effectiveness[foe][battler][index];
+            if (CanMegaEvolve(foe))
+            {
+                struct AiCalcValues calc = {.move = move, .gimmickAtk = GIMMICK_MEGA, .gimmickDef = GIMMICK_NONE,
+                    .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain};
+                struct SimulatedDamage mega = AI_CalcDamage(&calc, foe, battler);
+                if (mega.median > median)
+                {
+                    median = mega.median;
+                    effectiveness = calc.typeEffectiveness;
+                }
+            }
+            if (effectiveness <= UQ_4_12(0.5))
+                loss[foe][index] = min(hp, median) * 100 / maxHp;
+        }
+    }
 }
 
 // Whether the body now loaded into this slot is expected to go down before it
@@ -6845,9 +6962,11 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     // What each body leaving would relieve: its share of HP, and whether it
     // is dead weight - held in a useless lock, or with no attack to use.
     u32 outgoingShare[2];
+    u8 outgoingLoss[2][MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     bool32 deadWeight[2];
     for (u32 index = 0; index < 2; index++)
     {
+        PairOutgoingLoss(actors[index], outgoingLoss[index]);
         outgoingShare[index] = IsBattlerAlive(actors[index])
             ? gBattleMons[actors[index]].hp * 100 / max(1, gBattleMons[actors[index]].maxHP) : 0;
         deadWeight[index] = uselessLock[index];
@@ -7124,7 +7243,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                         // change the sprite. Live play produced this over and
                         // over, and the exits were winning by 14 and 38 points
                         // - well inside a body. See PairEntryCost.
-                        score -= PairEntryCost(actors[index], deadWeight[index], outgoingShare[index]);
+                        score -= PairEntryCost(actors[index], deadWeight[index], outgoingShare[index], outgoingLoss[index]);
                         // The commitment is the attack a pivot gives up. A body
                         // whose best stay is a repeated shield gives up none: it
                         // spends the turn either way, and the shield fails two
