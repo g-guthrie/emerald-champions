@@ -2693,7 +2693,7 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Wallace's Zamazenta does not raise Defense 
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_KYOGRE_PRIMAL, 0};
         sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_ZAPDOS, 0};
         sAuthoredLeadSlot = 3;
-        AuthoredOpponentWithPartner(TRAINER_WALLACE_DOUBLES_LEGENDS, 8, FALSE, 4);
+        AuthoredOpponentWithPartner(TRAINER_WALLACE_DOUBLES_LEGENDS, 8, FALSE, 5);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_HEAT_WAVE);

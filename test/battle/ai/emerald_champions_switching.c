@@ -303,6 +303,9 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves a useless Encore fo
         SwitchPlayer(SPECIES_MIRAIDON, 100, 0, SET(MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_HADRON_ENGINE, ITEM_LIFE_ORB, 4, 0, 0, 252, 0, 252));
         sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_LUCARIO, 0};
         sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_ZAPDOS, 0};
+        // Zygarde, immune to Electro Drift, replaced Melmetal; with it down
+        // the ace Marshadow is the only exit, as on the benchmark board.
+        sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_ZYGARDE, 0};
         SwitchLeads(0, 3);
         SwitchAuthoredOpponent(TRAINER_WALLACE_DOUBLES_LEGENDS, 8);
     } WHEN {

@@ -9769,7 +9769,7 @@ EVs: 4 HP / 0 Atk / 0 Def / 252 SpA / 0 SpD / 252 Spe
 Nature: NATURE_TIMID
 - MOVE_THUNDERBOLT
 - MOVE_GRASS_KNOT
-- MOVE_THUNDER_WAVE
+- MOVE_TOXIC
 - MOVE_NASTY_PLOT
 
 SPECIES_GALVANTULA @ ITEM_CHOICE_SPECS
@@ -27694,7 +27694,7 @@ Pic: Champion Wallace
 Gender: Male
 Music: Male
 Double Battle: Yes
-AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Double Ace Pokemon
+AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Ace Pokemon
 Prize Multiplier: 25
 
 SPECIES_KYOGRE_PRIMAL @ ITEM_COVERT_CLOAK
@@ -27749,6 +27749,19 @@ Nature: NATURE_IMPISH
 - MOVE_HEAVY_SLAM
 - MOVE_PROTECT
 
+SPECIES_ZYGARDE @ ITEM_LUM_BERRY
+Level: 106
+Level Offset: 6
+Ability: ABILITY_AURA_BREAK
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_ADAMANT
+- MOVE_THOUSAND_ARROWS
+- MOVE_DRAGON_DANCE
+- MOVE_EXTREME_SPEED
+- MOVE_PROTECT
+
 SPECIES_MARSHADOW @ ITEM_ASSAULT_VEST
 Level: 106
 Level Offset: 6
@@ -27761,19 +27774,6 @@ Nature: NATURE_ADAMANT
 - MOVE_SPECTRAL_THIEF
 - MOVE_CLOSE_COMBAT
 - MOVE_SHADOW_SNEAK
-
-SPECIES_MELMETAL @ ITEM_ASSAULT_VEST
-Level: 106
-Level Offset: 6
-Ability: ABILITY_IRON_FIST
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
-Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_BRAVE
-- MOVE_DOUBLE_IRON_BASH
-- MOVE_THUNDER_PUNCH
-- MOVE_ICE_PUNCH
-- MOVE_BODY_PRESS
 
 === TRAINER_GRETA_SLATEPORT ===
 Name: Greta
@@ -28097,17 +28097,17 @@ Double Battle: Yes
 AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall Prevention / Hp Aware / Try To 2HKO / Powerful Status / Know Opponent Party / Conservative
 Prize Multiplier: 5
 
-SPECIES_DONPHAN @ ITEM_LIFE_ORB
-Level: 50
-Level Offset: 5
-Ability: ABILITY_STURDY
+SPECIES_KLEAVOR @ ITEM_FOCUS_SASH
+Level: 52
+Level Offset: 7
+Ability: ABILITY_SHARPNESS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 Nature: NATURE_ADAMANT
-- MOVE_HIGH_HORSEPOWER
-- MOVE_ICE_SPINNER
-- MOVE_KNOCK_OFF
+- MOVE_STONE_AXE
+- MOVE_X_SCISSOR
+- MOVE_CLOSE_COMBAT
 - MOVE_PROTECT
 
 SPECIES_CLODSIRE @ ITEM_BLACK_SLUDGE
@@ -28123,6 +28123,19 @@ Nature: NATURE_ADAMANT
 - MOVE_RECOVER
 - MOVE_PROTECT
 
+SPECIES_DONPHAN @ ITEM_LIFE_ORB
+Level: 50
+Level Offset: 5
+Ability: ABILITY_STURDY
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Happiness: 255
+EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
+Nature: NATURE_ADAMANT
+- MOVE_HIGH_HORSEPOWER
+- MOVE_ICE_SPINNER
+- MOVE_KNOCK_OFF
+- MOVE_PROTECT
+
 SPECIES_GARGANACL @ ITEM_LEFTOVERS
 Level: 51
 Level Offset: 6
@@ -28134,19 +28147,6 @@ Nature: NATURE_IMPISH
 - MOVE_SALT_CURE
 - MOVE_BODY_PRESS
 - MOVE_RECOVER
-- MOVE_PROTECT
-
-SPECIES_GOLEM @ ITEM_WEAKNESS_POLICY
-Level: 52
-Level Offset: 7
-Ability: ABILITY_STURDY
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_ADAMANT
-- MOVE_ROCK_SLIDE
-- MOVE_STOMPING_TANTRUM
-- MOVE_HEAVY_SLAM
 - MOVE_PROTECT
 
 === TRAINER_ELMER ===

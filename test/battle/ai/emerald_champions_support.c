@@ -432,7 +432,7 @@ AI_DOUBLE_BATTLE_TEST("EC support: Wallace's Zamazenta does not stack Iron Defen
         SupportPlayer(SPECIES_AMOONGUSS, 100, 0, AMOONGUSS_HELMET);
         sSupportMembers[0] = (struct SupportMember){SPECIES_KYOGRE_PRIMAL, 0};
         sSupportMembers[1] = (struct SupportMember){SPECIES_LUCARIO, 0};
-        sSupportMembers[2] = (struct SupportMember){SPECIES_MELMETAL, 0};
+        sSupportMembers[2] = (struct SupportMember){SPECIES_ZYGARDE, 0};
         sSupportMembers[3] = (struct SupportMember){.species = SPECIES_ZAMAZENTA_CROWNED, .hp = 356, .status = STATUS1_BURN};
         sSupportMembers[4] = (struct SupportMember){.species = SPECIES_ZAPDOS, .hp = FULL_HP};
         sSupportMembers[5] = (struct SupportMember){.species = SPECIES_MARSHADOW, .hp = FULL_HP};
