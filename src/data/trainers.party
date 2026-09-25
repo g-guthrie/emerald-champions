@@ -20143,6 +20143,19 @@ AI: Basic Trainer / Omniscient / Smart Switching / Smart Mon Choices / Pp Stall 
 Prize Multiplier: 25
 Starting Status: Weather Sun
 
+SPECIES_TORKOAL @ ITEM_HEAT_ROCK
+Level: 64
+Level Offset: 4
+Ability: ABILITY_DROUGHT
+IVs: 31 HP / 0 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
+Happiness: 255
+EVs: 252 HP / 0 Atk / 4 Def / 252 SpA / 0 SpD / 0 Spe
+Nature: NATURE_QUIET
+- MOVE_HEAT_WAVE
+- MOVE_SOLAR_BEAM
+- MOVE_EARTH_POWER
+- MOVE_PROTECT
+
 SPECIES_RUNERIGUS @ ITEM_MENTAL_HERB
 Level: 64
 Level Offset: 4
@@ -20181,19 +20194,6 @@ Nature: NATURE_BRAVE
 - MOVE_WOOD_HAMMER
 - MOVE_HIGH_HORSEPOWER
 - MOVE_PROTECT
-
-SPECIES_RHYPERIOR @ ITEM_ASSAULT_VEST
-Level: 64
-Level Offset: 4
-Ability: ABILITY_LIGHTNING_ROD
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 0 Spe
-Happiness: 255
-EVs: 252 HP / 252 Atk / 4 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_BRAVE
-- MOVE_HIGH_HORSEPOWER
-- MOVE_ROCK_SLIDE
-- MOVE_ICE_PUNCH
-- MOVE_HAMMER_ARM
 
 SPECIES_COPPERAJAH @ ITEM_WEAKNESS_POLICY
 Level: 64
