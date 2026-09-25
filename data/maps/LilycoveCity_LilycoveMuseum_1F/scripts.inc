@@ -212,7 +212,7 @@ LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfBeautifulWoman: @ 82190F9
 	.string "woman with a Pokémon on her lap.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfLegendaryPokemon: @ 8219142
-	.string "It's a painting of a legendary Pokémon\n"
+	.string "It's a painting of a Legendary Pokémon\n"
 	.string "from long ago.\p"
 	.string "The artist painted this from\n"
 	.string "imagination.$"

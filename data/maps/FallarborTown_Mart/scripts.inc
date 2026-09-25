@@ -62,7 +62,7 @@ FallarborTown_Mart_Text_FreeSample:
 FallarborTown_Mart_Text_TutorAndNugget:
 	.string "That Nugget sells for good money.\p"
 	.string "For moves like Drain Punch, use\n"
-	.string "the Center's free move tutor.$"
+	.string "the Center's free Move Tutor.$"
 
 FallarborTown_Mart_Text_DecidingSkittyEvolve: @ 81FFD19
 	.string "I'm having a hard time deciding if I\n"

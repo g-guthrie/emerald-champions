@@ -637,7 +637,7 @@ LilycoveCity_Text_GetLostMessingUpTraining: @ 81E3D4A
 
 LilycoveCity_Text_ContestHallInTown: @ 81E3D9E
 	.string "There's a Pokémon Contest Hall\n"
-	.string "right in this here town. \p"
+	.string "right in this here town.\p"
 	.string "That means well-raised Pokémon will\n"
 	.string "come from all over the country.\p"
 	.string "My heart swells with excitement!$"
@@ -649,9 +649,8 @@ LilycoveCity_Text_StrangeCaveInCove: @ 81E3E3C
 LilycoveCity_Text_GoingToMoveDeleterForHMs: @ 81E3E7D
 	.string "I am preparing new moves for a\n"
 	.string "Contest.\p"
-	.string "The Center tutor can teach\n"
-	.string "anything my Pokémon can legally\l"
-	.string "learn.\p"
+	.string "The Move Tutor can teach my\n"
+	.string "Pokémon any move it can learn.\p"
 	.string "And field techniques like Surf\n"
 	.string "don't need a move slot at all!$"
 

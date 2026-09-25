@@ -121,7 +121,7 @@ FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
 	.string "That Nugget can help pay for\n"
 	.string "your journey.\p"
 	.string "For Hidden Power, visit the\n"
-	.string "Pokémon Center's move tutor.$"
+	.string "Pokémon Center's Move Tutor.$"
 
 FortreeCity_House2_Text_YouGuessedWrong: @ 8217AC7
 	.string "No, too bad.\n"

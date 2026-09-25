@@ -61,7 +61,7 @@ LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs: @ 821FEC7
 	.string "before buying one.$"
 
 LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves: @ 821FF2D
-	.string "The Center tutor offers plenty\n"
+	.string "The Move Tutor offers plenty\n"
 	.string "of moves, but a Pokémon can use\l"
 	.string "only four at once.\p"
 	.string "I choose them to suit the whole\n"

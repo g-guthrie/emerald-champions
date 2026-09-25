@@ -493,5 +493,5 @@ LavaridgeTown_Text_GogglesReady:
 	.string "of your eyes.\p"
 	.string "A Pokémon can hold Safety Goggles\n"
 	.string "to block weather damage and powder.\p"
-	.string "With four badges, you can also\n"
+	.string "With four Badges, you can also\n"
 	.string "challenge your dad in Petalburg!$"

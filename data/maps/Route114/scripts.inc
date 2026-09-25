@@ -160,7 +160,7 @@ Route114_Text_RoarGentlemanGift:
 Route114_Text_PearlAndRoarTutor:
 	.string "Sell that Big Pearl for supplies.\p"
 	.string "If you want your partner to learn\n"
-	.string "Roar, visit the Center's move tutor.$"
+	.string "Roar, visit the Move Tutor.$"
 
 Route114_Text_Poochyena: @ 81F28A6
 	.string "Bow! Bowwow!$"

@@ -178,6 +178,6 @@ SSTidalRooms_Text_ExplainSnatch: @ 823D145
 	.string "Sell that Big Pearl at a shop.\n"
 	.string "Put it toward your battle supplies.\p"
 	.string "If you want to learn Snatch,\n"
-	.string "ask the Center's move tutor.\p"
+	.string "ask the Move Tutor at a Center.\p"
 	.string "Just don't try it on me!$"
 

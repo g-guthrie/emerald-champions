@@ -1515,8 +1515,8 @@ gText_LegendaryNotReady::
 	.string "away. Earn more Gym Badges first.$"
 
 gText_LegendaryResting::
-	.string "The legendary has retreated to rest.\n"
-	.string "Leave this area and return to try again.$"
+	.string "It has gone off to rest for now.\n"
+	.string "Leave the area, then come back.$"
 
 @ Visible Sign residents retire permanently only after capture. The capture
 @ ledger and resume callback hide the caught object; other outcomes rest locally.
@@ -1585,7 +1585,7 @@ Common_EventScript_ExplainLegendaryResting::
 
 gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} has retreated.\n"
-	.string "Leave this area and return to try again.$"
+	.string "Leave the area, then come back.$"
 
 gText_WantWhichFloor::
 	.string "Which floor do you want?$"

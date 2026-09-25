@@ -707,7 +707,7 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
         }
         else
         {
-            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, reach the next milestone\nof your journey."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pKeep going on your journey, then\ncome back later."));
         }
         break;
     }
@@ -722,7 +722,7 @@ static bool32 IsVisitorAwayInStorms(enum LegendarySignId id)
 
 static const u8 sText_VisitorFollowsStorms[] = _("\pIt rides the weather anomalies.\nThe Weather Institute tracks them.");
 static const u8 sText_LegendaryLost[] = _("\pIt fainted in battle and vanished.\nA fainted legend never returns.");
-static const u8 sText_LegendaryDiscoveryLost[] = _("\pA Pokémon it needs fainted and\nvanished. That lead is closed.");
+static const u8 sText_LegendaryDiscoveryLost[] = _("\pThe Pokémon it was waiting for\nfainted and vanished. It won't come.");
 
 // Result: 0 = needs progression, 1 = needs discovery, 2 = available,
 // 4 = caught, 5 = resting after an escape, 6 = lost after a knockout.
@@ -738,7 +738,7 @@ void ResearchSelectedLegendarySign(void)
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}"));
     if (IsLegendarySignCaught(id))
     {
-        StringAppend(gStringVar4, COMPOUND_STRING("\pCaught! This discovery is recorded."));
+        StringAppend(gStringVar4, COMPOUND_STRING("\pYou've caught this one!"));
         gSpecialVar_Result = 4;
         return;
     }
@@ -762,20 +762,20 @@ void ResearchSelectedLegendarySign(void)
         else if (id == LEGENDARY_SIGN_MARSHADOW)
             StringAppend(gStringVar4, COMPOUND_STRING("\pCollect 250 soot in total, then\nspeak to Route 113's glassmaker.\lYour soot total is never spent."));
         else if (id == LEGENDARY_SIGN_MELOETTA)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Dewford Meadow's warden perform\na song. Bring a Pokémon with SING."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Dewford Meadow's warden perform\na song. Bring a Pokémon with Sing."));
         else if (id == LEGENDARY_SIGN_LANDORUS)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pBring CASTFORM to the archaeologist\nat Route 111's elevated ruins.\lHelp with the local weather survey."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pBring Castform to the archaeologist\nat Route 111's elevated ruins.\lHelp with the local weather survey."));
         else if (id == LEGENDARY_SIGN_KYUREM)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, catch RESHIRAM or ZEKROM.\nEither discovery is enough."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, catch Reshiram or Zekrom.\nEither one will do."));
         else if (id == LEGENDARY_SIGN_REGIGIGAS)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pCatch REGIROCK, REGICE and\nREGISTEEL. Their Pokédex records\lare enough; they can stay in the PC."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pCatch Regirock, Regice and\nRegisteel. Once they're caught,\lthey can stay in your PC."));
         else if (id == LEGENDARY_SIGN_PECHARUNT)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pCatch OKIDOGI, MUNKIDORI and\nFEZANDIPITI, then inspect the shrine."));
+            StringAppend(gStringVar4, COMPOUND_STRING("\pCatch Okidogi, Munkidori and\nFezandipiti, then inspect the shrine."));
         else
         {
             u8 buffer[180];
             StringCopy(gStringVar1, GetSpeciesName(gate->requiredSpecies));
-            StringExpandPlaceholders(buffer, COMPOUND_STRING("\pA clue points to this family:\n{STR_VAR_1}.\pBefriend a member of that family.\nA caught Pokédex entry is enough;\lyour partner can stay in the PC."));
+            StringExpandPlaceholders(buffer, COMPOUND_STRING("\pA clue points to this family:\n{STR_VAR_1}.\pCatch one of them. Once it's\ncaught, it can stay in your PC."));
             StringAppend(gStringVar4, buffer);
         }
         gSpecialVar_Result = 1;
@@ -783,7 +783,7 @@ void ResearchSelectedLegendarySign(void)
     }
     if (IsSignResting(id))
     {
-        StringAppend(gStringVar4, COMPOUND_STRING("\pResting after your last encounter.\nLeave this area and return to retry."));
+        StringAppend(gStringVar4, COMPOUND_STRING("\pIt's resting after your last battle.\nLeave the area, then come back."));
         gSpecialVar_Result = 5;
         return;
     }
@@ -806,7 +806,7 @@ void ResearchSelectedLegendarySign(void)
         StringAppend(gStringVar4, COMPOUND_STRING("\pAvailable now! Ask the Pokémon prize\ncounter at Mauville's Game Corner."));
         break;
     case LEGENDARY_KIND_BREED:
-        StringAppend(gStringVar4, COMPOUND_STRING("\pLeave MANAPHY and DITTO together\nat Route 117's Day Care.\pHatch their Egg to meet PHIONE."));
+        StringAppend(gStringVar4, COMPOUND_STRING("\pLeave Manaphy and Ditto together\nat Route 117's Day Care.\pHatch their Egg to meet Phione."));
         break;
     default:
         StringAppend(gStringVar4, COMPOUND_STRING("\pReady! Approach the Pokémon or\ninspect its shrine."));
@@ -839,7 +839,7 @@ u16 GetHeatranDiscoveryState(void)
 static void BufferLostLegendaryLead(enum Species species)
 {
     StringCopy(gStringVar2, GetLegendaryDisplayName(species));
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} fainted in a battle\nwith you and vanished.\pA fainted legend never returns,\nso that lead is closed."));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} fainted in a battle\nwith you and vanished.\pA fainted legend never returns."));
 }
 
 // The Center local guide's one special. VAR_0x8005 picks the topic (see

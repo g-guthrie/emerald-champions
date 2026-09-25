@@ -42,8 +42,8 @@ Common_Text_FinaleLeague:
 Common_Text_FinaleWally:
 	.string "Your final expedition starts with\n"
 	.string "Wally at Victory Road's north exit.\p"
-	.string "He's prepared a full doubles team\n"
-	.string "to challenge the new Champion!$"
+	.string "He's built a Double Battle team to\n"
+	.string "challenge the new Champion!$"
 Common_Text_FinaleVoyage:
 	.string "Sail aboard the S.S. Tidal between\n"
 	.string "Slateport and Lilycove.\p"
@@ -67,11 +67,12 @@ Common_Text_FinaleBuffel:
 	.string "Your last opponent is Buffel,\n"
 	.string "upstairs in Lilycove's motel.\p"
 	.string "Prepare your best six partners.\n"
-	.string "This is the final doubles trial!$"
+	.string "This is your final trial!$"
 Common_Text_FinaleComplete:
-	.string "League Champion. Expedition cleared.\n"
-	.string "Final trial conquered.\p"
-	.string "You've completed the campaign!\p"
+	.string "You became Champion, and then you\n"
+	.string "conquered the final trial, too!\p"
+	.string "Your journey through Hoenn will be\n"
+	.string "talked about for years to come!\p"
 	.string "The League remains open whenever\n"
 	.string "you want to battle again.$"
 

@@ -48,7 +48,7 @@ MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner: @ 8210F06
 	.string "about today?$"
 
 MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun: @ 8210F8A
-	.string "I visit the move tutor whenever\n"
+	.string "I visit the Move Tutor whenever\n"
 	.string "I catch a new Pokémon.\p"
 	.string "A good move can make a big\n"
 	.string "difference in a Double Battle!$"

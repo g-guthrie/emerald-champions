@@ -33,13 +33,13 @@ Route123_BerryMastersHouse_Text_GardenWelcome:
 	.string "to share. What brings you here?$"
 
 Route123_BerryMastersHouse_Text_BerryGifts:
-	.string "Berry gifts$"
+	.string "Berry Gifts$"
 
 Route123_BerryMastersHouse_Text_HarvestRewards:
-	.string "Harvest rewards$"
+	.string "Harvest Rewards$"
 
 Route123_BerryMastersHouse_Text_Leave:
-	.string "See you later$"
+	.string "Exit$"
 
 Route123_BerryMastersHouse_EventScript_DailyBerries:
 	dotimebasedevents

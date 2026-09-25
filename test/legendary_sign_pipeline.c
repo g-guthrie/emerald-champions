@@ -634,7 +634,7 @@ TEST("Static legendary knockout: lost for good, never re-armed, and every lead s
         if (GuideTextContains(COMPOUND_STRING("wakes Regigigas")))
         {
             sawRegigigas = TRUE;
-            EXPECT(GuideTextContains(COMPOUND_STRING("That lead is closed.")));
+            EXPECT(GuideTextContains(COMPOUND_STRING("It won't come.")));
         }
     }
     EXPECT(sawRegirock);
@@ -642,11 +642,11 @@ TEST("Static legendary knockout: lost for good, never re-armed, and every lead s
     gSpecialVar_0x8004 = LEGENDARY_SIGN_REGIGIGAS;
     ResearchSelectedLegendarySign();
     EXPECT_EQ(gSpecialVar_Result, 1);
-    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("That lead is closed.")));
+    EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It won't come.")));
     // A later Regirock record (e.g. from a trade) reopens the lead.
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_REGIROCK), FLAG_SET_CAUGHT);
     ResearchSelectedLegendarySign();
-    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("That lead is closed.")));
+    EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It won't come.")));
 
     FlagClear(FLAG_DEFEATED_REGIROCK);
     FlagClear(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);

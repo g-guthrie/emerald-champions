@@ -74,10 +74,10 @@ void BufferEmeraldChampionsHarvestRecipe(void)
     if (choice >= ARRAY_COUNT(sBerryStoneTrades))
         return;
     if (choice == 3)
-        StringCopy(gStringVar1, COMPOUND_STRING("Celebi's invitation"));
+        StringCopy(gStringVar1, COMPOUND_STRING("Celebi's Invitation"));
     else
         CopyItemName(sBerryStoneTrades[choice].item, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}\nHarvested berries: have / need"));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}\nBerries picked / Berries needed"));
     for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades[choice].recipe); i++)
     {
         const struct HarvestIngredient *part = &sBerryStoneTrades[choice].recipe[i];
@@ -94,8 +94,8 @@ void BufferEmeraldChampionsHarvestRecipe(void)
     }
     gSpecialVar_0x800B = RewardClaimed(choice);
     StringAppend(gStringVar4, gSpecialVar_0x800B
-        ? COMPOUND_STRING("\pAlready claimed. No more berries due.")
-        : COMPOUND_STRING("\pBring these to the BERRY MASTER\non ROUTE 123. One of each reward!"));
+        ? COMPOUND_STRING("\pYou've already claimed this reward.")
+        : COMPOUND_STRING("\pShow your harvest to the Berry\nMaster on Route 123. Each reward\lcan be claimed once!"));
 }
 
 void TradeEmeraldChampionsGardenBerries(void)

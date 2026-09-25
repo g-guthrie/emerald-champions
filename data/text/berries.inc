@@ -13,10 +13,10 @@ Route104_Text_PlantBerriesInSoilTakeThis:
 Route104_Text_TrainersOftenMakeMonHoldBerries:
 	.string "Trainers often have their Pokémon\n"
 	.string "hold Berries in battle.\p"
-	.string "Picking a tree also adds that type\n"
-	.string "to your Harvest Pouch.\p"
+	.string "Every Berry you pick from a tree\n"
+	.string "counts in your Harvest Pouch, too.\p"
 	.string "The Berry Master on Route 123\n"
-	.string "trades those harvests for prizes.$"
+	.string "trades prizes for a good harvest.$"
 
 Route111_Text_WateredPlantsEveryDayTakeBerry:
 	.string "I watered the plants every day.\n"
@@ -136,8 +136,8 @@ Route104_PrettyPetalFlowerShop_Text_BerriesExplanation:
 	.string "Even the slowest kind ripens\n"
 	.string "within four hours. Ripe fruit\l"
 	.string "waits for you to pick it.\p"
-	.string "Each harvest gives you Berries\n"
-	.string "and matching Harvest Pouch credit.\p"
+	.string "Each Berry you pick goes into your\n"
+	.string "Bag and your Harvest Pouch count.\p"
 	.string "The Berry Master on Route 123\n"
 	.string "asks for different kinds. His\l"
 	.string "prizes include Mega Stones!\p"
@@ -170,9 +170,9 @@ Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 	.string "It's for you!$"
 
 Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries:
-	.string "That gift is a seed or a held Berry.\n"
-	.string "Only picking trees fills your\l"
-	.string "Harvest Pouch.\p"
+	.string "Plant that Berry, or let a Pokémon\n"
+	.string "hold it. Only Berries you pick from\l"
+	.string "trees count in your Harvest Pouch.\p"
 	.string "Try planting different kinds.\n"
 	.string "The Berry Master on Route 123\l"
 	.string "asks for a colorful harvest!$"

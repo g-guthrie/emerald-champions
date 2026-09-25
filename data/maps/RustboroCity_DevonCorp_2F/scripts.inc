@@ -309,7 +309,7 @@ RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams: @ 8211EE0
 	.string "But it's not going well.\p"
 	.string "My other project is a mechanical\n"
 	.string "Pokémon named Magearna.\p"
-	.string "Earn eight badges and catch\n"
+	.string "Earn eight Badges and catch\n"
 	.string "Diancie, then come back.\p"
 	.string "Its power may awaken the\n"
 	.string "prototype!$"

@@ -185,7 +185,7 @@ NatureChanger_Text_WhichColorDislike:
 
 NatureChanger_Text_SpecialPokeblock:
 	.string "Ohohoho! I will make a special\n"
-	.string "training {POKEBLOCK} from your berries.\p"
+	.string "training {POKEBLOCK} from your Berries.\p"
 	.string "Wait just a moment…$"
 
 NatureChanger_Text_Pause:

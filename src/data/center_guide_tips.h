@@ -25,7 +25,7 @@ TIP(MAUVILLE_CITY, 0, 0, 0, BLOB_FOUND, sTip_BlobFound),
 TIP(MAUVILLE_CITY, 0, 0, FLAG_RECEIVED_LIFE_ORB, NONE, COMPOUND_STRING("The Winstrate family lives on\nRoute 111. Beat all four of\lthem in a row, and they'll\lreward you at their house.")),
 TIP(MAUVILLE_CITY, 0, 0, 0, NONE, COMPOUND_STRING("The Game Corner trades Coins\nfor rare Pokémon, including\lstarters from every region.\pYou'll need a Coin Case. The\nlady next door trades one for\lan Ice Stone from Slateport.")),
 TIP(MAUVILLE_CITY, 0, 0, 0, TRICK_HOUSE, sTip_TrickHouse),
-TIP(MAUVILLE_CITY, 5, 0, FLAG_GOT_TM24_FROM_WATTSON, NONE, COMPOUND_STRING("After your fifth badge, Wattson\nwaits outside his Gym. He needs\lhelp with New Mauville's\lgenerator.\pNew Mauville is a short Surf\nfrom Route 110. A Rotom lives\linside, so save before you go.")),
+TIP(MAUVILLE_CITY, 5, 0, FLAG_GOT_TM24_FROM_WATTSON, NONE, COMPOUND_STRING("After your fifth Badge, Wattson\nwaits outside his Gym. He needs\lhelp with New Mauville's\lgenerator.\pNew Mauville is a short Surf\nfrom Route 110. A Rotom lives\linside, so save before you go.")),
 TIP(MAUVILLE_CITY, 5, 0, FLAG_ROUTE118_GYARADOSITE, NONE, COMPOUND_STRING("A fisherman across the river\non Route 118 loves Magikarp.\pBeat his team with a party of\nsix Magikarp, and he'll give\lyou a Gyaradosite.")),
 TIP(MAUVILLE_CITY, 5, 0, 0, NONE, sTip_BerryMaster),
 TIP(MAUVILLE_CITY, 4, 0, 0, NONE, sTip_Desert),
@@ -37,7 +37,7 @@ TIP(VERDANTURF_TOWN, 0, FLAG_RECEIVED_AUDINO, 0, NONE, COMPOUND_STRING("The Audi
 TIP(LAVARIDGE_TOWN, 0, 0, 0, BLOB_CHASE, sTip_BlobChase),
 TIP(LAVARIDGE_TOWN, 4, 0, 0, NONE, sTip_Desert),
 
-TIP(FALLARBOR_TOWN, 5, 0, 0, NONE, COMPOUND_STRING("After five badges, the Fossil\nManiac's tunnel on Route 114\lopens into ruins under the\ldesert, full of fossils.\pDevon's lab in Rustboro can\nrevive them.")),
+TIP(FALLARBOR_TOWN, 5, 0, 0, NONE, COMPOUND_STRING("After five Badges, the Fossil\nManiac's tunnel on Route 114\lopens into ruins under the\ldesert, full of fossils.\pDevon's lab in Rustboro can\nrevive them.")),
 TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. They raise EVs for\lmoney and change IVs for\lBottle Caps.")),
 
 TIP(FORTREE_CITY, 0, FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, NONE, COMPOUND_STRING("Strange storms bring visiting\nlegends to some routes. The\lWeather Institute on Route 119\ltracks where they are.")),

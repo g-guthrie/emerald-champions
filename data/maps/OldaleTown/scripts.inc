@@ -326,11 +326,11 @@ OldaleTown_Text_SavingMyProgress: @ 81E918E
 
 OldaleTown_Text_IWorkAtPokemonMart: @ 81E91C0
 	.string "Hi!\n"
-	.string "I work at a Pokémon Mart.\p"
+	.string "I work at a Poké Mart.\p"
 	.string "Can I get you to come with me?$"
 
 OldaleTown_Text_ThisIsAPokemonMart:
-	.string "This is a Pokémon Mart.\n"
+	.string "This is a Poké Mart.\n"
 	.string "Just look for our blue roof.\p"
 	.string "We sell a variety of consumable items\n"
 	.string "that Pokémon can hold in battle, as\l"

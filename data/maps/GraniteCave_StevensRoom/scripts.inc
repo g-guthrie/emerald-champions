@@ -89,9 +89,8 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "Steven: Thank you for delivering\n"
 	.string "the letter.\p"
 	.string "Please take this Rare Candy.\p"
-	.string "If you want to learn my favorite\n"
-	.string "move, Steel Wing, ask the Center\l"
-	.string "tutor.$"
+	.string "If you'd like to learn my favorite\n"
+	.string "move, Steel Wing, ask the Move Tutor.$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
 	.string "Steven: Your Pokémon appear quite\n"

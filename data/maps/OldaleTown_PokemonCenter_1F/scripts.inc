@@ -47,7 +47,7 @@ OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC: @ 81FC059
 
 OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat: @ 81FC0CD
 	.string "Pokémon Centers are great!\p"
-	.string "Healing and the move tutor are free,\n"
+	.string "Healing and the Move Tutor are free,\n"
 	.string "no matter how often you use them.\p"
 	.string "The shop clerk sells supplies, too.$"
 
@@ -57,5 +57,5 @@ OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable: @ 81FC148
 
 OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub: @ 81FC1B9
 	.string "I change my team as I travel.\p"
-	.string "The tutor here helps each partner\n"
+	.string "The Move Tutor here helps each partner\n"
 	.string "learn new moves for free!$"

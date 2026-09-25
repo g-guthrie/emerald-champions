@@ -90,7 +90,7 @@ FallarborTown_Text_AnnoyingIntroPart5:
 	.string "Effort Values, or EVs for short?$"
 
 FallarborTown_Text_AnnoyingIntroPart6:
-	.string "Ivy: OK! Now, how about Individual\n"
+	.string "Ivy: Okay! Now, how about Individual\n"
 	.string "Values, or IVs?\p"
 	.string "Do you want me to explain them?$"
 
@@ -336,7 +336,7 @@ FallarborTown_Text_CantTrainEgg:
 	.string "Bring it back once it's hatched.$"
 
 FallarborTown_Text_SomeOtherTime:
-	.string "Oh, OK.\n"
+	.string "Oh, okay.\n"
 	.string "Some other time, then?$"
 
 FallarborTown_Text_ExplainEvs:
@@ -355,7 +355,7 @@ FallarborTown_Text_ExplainEvs:
 	.string "but you can get creative with EVs too!$"
 
 SuperTraining_Text_TakeALookatEVs:
-	.string "OK! Again, I charge ¥2 per EV\n"
+	.string "Okay! Again, I charge ¥2 per EV\n"
 	.string "added. Now let's take a look at your\l"
 	.string "{STR_VAR_1}'s EVs.$"
 
@@ -417,7 +417,7 @@ SuperTraining_TooManyEVs:
 	.string "It can't gain that many more!$"
 
 SuperTraining_ShowPrice:
-	.string "That'll cost ¥{STR_VAR_3}. Is that OK?$"
+	.string "That'll cost ¥{STR_VAR_3}. Is that okay?$"
 
 FallarborTown_CantAfford_String:
 	.string "You don't have the money.$"
@@ -542,15 +542,16 @@ HyperTraining_Text_ExplainIVs:
 	.string "Pokémon's stats.\p"
 	.string "Every Pokémon you raise has them at\n"
 	.string "their best already.\p"
-	.string "Sometimes lower is better. The slowest\n"
-	.string "Pokémon move first under Trick Room,\p"
-	.string "and a special attacker with low Attack\n"
+	.string "But sometimes lower is better!\p"
+	.string "Under Trick Room, the slowest\n"
+	.string "Pokémon move first.\p"
+	.string "And a special attacker with low Attack\n"
 	.string "hurts itself less in confusion.\p"
 	.string "IVs also decide the type of the move\n"
 	.string "Hidden Power.$"
 
 HyperTraining_Text_LetsTakeALook:
-	.string "OK! Let's take a look at your\n"
+	.string "Okay! Let's take a look at your\n"
 	.string "{STR_VAR_1}'s IVs.$"
 
 HyperTraining_Text_WhichIVShouldChange:

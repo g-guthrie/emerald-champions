@@ -174,20 +174,22 @@ EmeraldChampions_Text_BattleVendorStarterKit:
 	.string "The rest you buy like anyone else.$"
 
 EmeraldChampions_Text_BattleVendorWelcome:
-	.string "I stock the held items you discover.\p"
-	.string "Buy extra copies for your team here.\p"
+	.string "Find a held item on your journey,\n"
+	.string "and I'll sell you more of it here.\p"
 	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
-	.string "Your Ring opens the Form Tools archive.\n"
-	.string "Tools are free; held equipment is sold\lafter you catch its Pokémon.\p"
-	.string "Evolution specialists sell stones and\n"
-	.string "devices. Lilycove has the full range.\p"
-	.string "For Mega Stones, explore Hoenn and\n"
-	.string "get to know the people who live here.$"
+	.string "Oh, a Mega Ring! Then I can offer\n"
+	.string "you form items, too.\p"
+	.string "The tools are free. Items a Pokémon\n"
+	.string "holds go on sale once you catch it.\p"
+	.string "Some Poké Marts sell evolution stones.\n"
+	.string "Lilycove Department Store has them all.\p"
+	.string "As for Mega Stones, explore Hoenn\n"
+	.string "and get to know the people here!$"
 
 EmeraldChampions_Text_EvolutionArchive:
-	.string "Form Tools$"
+	.string "Form Items$"
 
 EmeraldChampions_Text_HeldItems:
 	.string "Held Items$"
@@ -217,10 +219,9 @@ EmeraldChampions_Text_MoveTutorHowCanHelp:
 	.string "How can I help prepare your Pokémon?$"
 
 EmeraldChampions_Text_MoveTutorNoMachines:
-	.string "There's no need for machines any\n"
-	.string "more.\p"
-	.string "Bring me any Pokémon and I'll teach\n"
-	.string "it anything it can legally learn.$"
+	.string "No need for machines anymore!\p"
+	.string "Bring me any Pokémon, and I'll teach\n"
+	.string "it any move it can learn.$"
 
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
@@ -371,21 +372,21 @@ EmeraldChampions_Text_ConfirmFormChange:
 EmeraldChampions_Text_FormChanged:
 	.string "Your partner's new look is ready!$"
 EmeraldChampions_Text_FormUnavailable:
-	.string "That partner isn't part of this\nservice. Choose another Pokémon.$"
+	.string "That Pokémon can't change its look\nhere. Please choose another.$"
 EmeraldChampions_Text_Bonding:
 	.string "Bonding$"
 EmeraldChampions_Text_BondingChooseMon:
-	.string "Whose friendship would you like\nto adjust?$"
+	.string "Whose bond with you should\nI help with?$"
 EmeraldChampions_Text_BondingValues:
-	.string "Choose a friendship value.$"
+	.string "How close should it feel to you?$"
 EmeraldChampions_Text_BondingLow:
-	.string "Low (0)$"
+	.string "Keeps Its Distance$"
 EmeraldChampions_Text_BondingThreshold:
-	.string "Evolution threshold$"
+	.string "Ready to Evolve$"
 EmeraldChampions_Text_BondingMaximum:
-	.string "Maximum (255)$"
+	.string "Adores You$"
 EmeraldChampions_Text_BondingDone:
-	.string "Friendship is set. Your Leveler can\nhelp when evolution conditions are met.$"
+	.string "All done! If it's ready to evolve,\nyour Leveler can help it along.$"
 EmeraldChampions_Text_BondingUnavailable:
 	.string "Please choose a Pokémon, not an Egg.$"
 
@@ -470,16 +471,16 @@ EmeraldChampions_Text_CenterGuideAsk:
 	.string "What would you like to know?$"
 
 EmeraldChampions_Text_CenterGuideWhereToGo:
-	.string "Where to go$"
+	.string "Where to Go$"
 
 EmeraldChampions_Text_CenterGuideRarePokemon:
 	.string "Rare Pokémon$"
 
 EmeraldChampions_Text_CenterGuideThingsToDo:
-	.string "Things to do$"
+	.string "Things to Do$"
 
 EmeraldChampions_Text_CenterGuideBye:
-	.string "Goodbye$"
+	.string "Exit$"
 
 EmeraldChampions_Text_CenterGuideSaveFirst:
 	.string "A legend you meet face to face\n"
@@ -505,7 +506,13 @@ EmeraldChampions_EventScript_HarvestMenu::
 	dynmultipush EmeraldChampions_Text_MyHarvest, 0
 	dynmultipush EmeraldChampions_Text_HarvestRequests, 1
 	dynmultipush EmeraldChampions_Text_HarvestHelpChoice, 2
+	@ Opened from the Bag, this is the top menu; at the Berry Master's it is one of his.
+	goto_if_ne VAR_0x8009, 0, EmeraldChampions_EventScript_HarvestMenuBack
+	dynmultipush EmeraldChampions_Text_Exit, 3
+	goto EmeraldChampions_EventScript_HarvestMenuShow
+EmeraldChampions_EventScript_HarvestMenuBack:
 	dynmultipush EmeraldChampions_Text_Back, 3
+EmeraldChampions_EventScript_HarvestMenuShow:
 	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestListStart
@@ -600,17 +607,17 @@ EmeraldChampions_Text_HarvestCelebiVanished:
 	.string "Celebi collapsed and vanished from\n"
 	.string "the garden without a trace…$"
 EmeraldChampions_Text_HarvestWelcome:
-	.string "Your harvest pouch keeps picked\n"
-	.string "berries separate from battle supplies.$"
+	.string "The Harvest Pouch keeps count of\n"
+	.string "every Berry you pick from a tree.$"
 EmeraldChampions_Text_MyHarvest:
-	.string "My harvest$"
+	.string "My Harvest$"
 EmeraldChampions_Text_HarvestRequests:
-	.string "Reward requests$"
+	.string "Harvest Rewards$"
 EmeraldChampions_Text_HarvestHelpChoice:
-	.string "How it works$"
+	.string "How It Works$"
 EmeraldChampions_Text_HarvestList:
-	.string "Harvested Berries - by type\n"
-	.string "Only picking a tree adds to this pouch.$"
+	.string "Here's what you've harvested so far,\n"
+	.string "Berry by Berry.$"
 EmeraldChampions_Text_HarvestRequestsPrompt:
 	.string "The Berry Master on Route 123\n"
 	.string "offers these harvest rewards.$"
@@ -621,40 +628,37 @@ EmeraldChampions_Text_HarvestDragoninite:
 EmeraldChampions_Text_HarvestTyranitarite:
 	.string "Tyranitarite$"
 EmeraldChampions_Text_HarvestCelebi:
-	.string "Celebi's invitation$"
+	.string "Celebi's Invitation$"
 EmeraldChampions_Text_HarvestConfirm:
-	.string "Trade those harvested berries for\n"
+	.string "Trade your harvested Berries for\n"
 	.string "{STR_VAR_1}?$"
 EmeraldChampions_Text_HarvestReceived:
 	.string "You received {STR_VAR_1}!\n"
-	.string "Your battle berries are untouched.$"
+	.string "The Berries in your Bag are safe.$"
 EmeraldChampions_Text_HarvestAlready:
 	.string "That reward is already yours.\n"
-	.string "I'll keep your harvest untouched.$"
+	.string "Your harvest wasn't used.$"
 EmeraldChampions_Text_HarvestNotEnough:
-	.string "You still need some of that harvest.\n"
-	.string "Pick as you travel, or plant the gaps!$"
+	.string "You need more of those Berries.\n"
+	.string "Pick as you go, or plant your own!$"
 EmeraldChampions_Text_HarvestBagFull:
-	.string "Make room for the stone in your Bag.\n"
-	.string "Your harvested berries are safe.$"
+	.string "Make room in your Bag for the stone.\n"
+	.string "Your harvested Berries are safe.$"
 EmeraldChampions_Text_HarvestMeetCelebi:
-	.string "Celebi visits to share your harvest!\n"
-	.string "Would you like to meet it now?\p"
-	.string "Bring your Poké Balls. You can try\n"
-	.string "again without another berry payment.$"
+	.string "Celebi has come to share\n"
+	.string "your harvest!\p"
+	.string "Bring Poké Balls. If you run, you\n"
+	.string "can come back without more Berries.\p"
+	.string "Would you like to meet it now?$"
 EmeraldChampions_Text_HarvestHelp:
-	.string "The Center's held-item counter\n"
-	.string "stocks every berry from the start.\p"
-	.string "Equip them for battle or plant seeds.\n"
-	.string "They aren't medicine to use by hand.\p"
-	.string "Pick three Lum Berries: you get three\n"
-	.string "battle berries and three harvested Lum.\p"
-	.string "Each type has its own harvest count.\n"
-	.string "Only picking trees fills this pouch.\p"
-	.string "Growing takes at most four hours.\n"
-	.string "Ripe crops stay until you pick them.\p"
-	.string "Watering improves your yield. Check\n"
-	.string "requests and plant what you're missing!$"
+	.string "Shop clerks sell every Berry. They\n"
+	.string "work when a Pokémon holds them.\p"
+	.string "Each Berry you pick from a tree goes\n"
+	.string "into your Bag and this pouch's count.\p"
+	.string "Trees ripen within four hours and\n"
+	.string "wait for you. Water them for more!\p"
+	.string "Check the rewards, then plant the\n"
+	.string "Berries you're missing!$"
 
 @ Both berries are already delivered; show the normal receipt without adding again.
 Common_EventScript_ShowDeliveredBerry::
@@ -735,55 +739,52 @@ EmeraldChampions_Text_ThreeRuinsCompleteConfirmed:
 	.string "age when the land and sea powers\l"
 	.string "were feared beyond reckoning,\p"
 	.string "until a guardian of the sky was\n"
-	.string "called to hold them apart - just\l"
-	.string "as you saw at Sootopolis.$"
+	.string "called to hold them apart,\l"
+	.string "just as you saw at Sootopolis.$"
 EmeraldChampions_Text_ThreeRuinsLore:
 	.string "The three accounts agree: long ago\n"
 	.string "the land and sea powers were feared\l"
 	.string "beyond reckoning,\p"
 	.string "until a guardian of the sky was\n"
 	.string "invoked to keep them apart.\p"
-	.string "A fourth mark repeats across all\n"
-	.string "three - Regigigas, said to have\l"
+	.string "A fourth mark appears in all three.\n"
+	.string "It names Regigigas, said to have\l"
 	.string "mustered the others together.$"
 EmeraldChampions_Text_ThreeRuinsLoreConfirmed:
 	.string "The three accounts agree: long ago\n"
 	.string "the land and sea powers were feared\l"
 	.string "beyond reckoning,\p"
 	.string "until a guardian of the sky was\n"
-	.string "invoked to keep them apart -\p"
-	.string "the same balance you restored\n"
+	.string "invoked to keep them apart.\p"
+	.string "It is the same balance you restored\n"
 	.string "at Sootopolis.\p"
-	.string "A fourth mark repeats across all\n"
-	.string "three - Regigigas, said to have\l"
+	.string "A fourth mark appears in all three.\n"
+	.string "It names Regigigas, said to have\l"
 	.string "mustered the others together.$"
 
 EmeraldChampions_EventScript_GuardianDesert::
 	msgbox EmeraldChampions_Text_GuardianDesert, MSGBOX_DEFAULT
 	return
 EmeraldChampions_Text_GuardianDesert:
-	.string "Regirock still waits in\n"
+	.string "Regirock still waits inside the\n"
 	.string "Desert Ruins on Route 111.\p"
-	.string "Catch it to complete this\n"
-	.string "discovery.$"
+	.string "Will you be the one to catch it?$"
 
 EmeraldChampions_EventScript_GuardianIsland::
 	msgbox EmeraldChampions_Text_GuardianIsland, MSGBOX_DEFAULT
 	return
 EmeraldChampions_Text_GuardianIsland:
-	.string "Regice still waits in\n"
+	.string "Regice still waits inside the\n"
 	.string "Island Cave on Route 105.\p"
-	.string "Catch it to complete this\n"
-	.string "discovery.$"
+	.string "Will you be the one to catch it?$"
 
 EmeraldChampions_EventScript_GuardianAncient::
 	msgbox EmeraldChampions_Text_GuardianAncient, MSGBOX_DEFAULT
 	return
 EmeraldChampions_Text_GuardianAncient:
-	.string "Registeel still waits in\n"
+	.string "Registeel still waits inside the\n"
 	.string "Ancient Tomb on Route 120.\p"
-	.string "Catch it to complete this\n"
-	.string "discovery.$"
+	.string "Will you be the one to catch it?$"
 
 EC_DeliverTravelDocuments::
 	setvar VAR_0x8009, 0

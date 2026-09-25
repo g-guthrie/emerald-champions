@@ -244,5 +244,5 @@ EventScript_PkmnCenterNurse_RelicsArrived::
 EventScript_PkmnCenterNurse_Text_RelicsArrived:
 	.string "Oh! This was left here for you,\n"
 	.string "Champion. It's humming with power…\p"
-	.string "Your legendary Pokémon's relic is\n"
+	.string "Your Legendary Pokémon's relic is\n"
 	.string "now in your Bag.$"

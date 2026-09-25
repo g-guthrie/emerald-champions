@@ -82,7 +82,7 @@ MauvilleCity_House2_Text_BuyIceStoneAtSlateport: @ 8210CEE
 	.string "If I had a Bike, it'd be easy to cycle to\n"
 	.string "Slateport for some shopping.\p"
 	.string "I'd be able to buy an Ice Stone at the\n"
-	.string "Pokémon Mart in Slateport.$"
+	.string "Poké Mart in Slateport.$"
 
 MauvilleCity_House2_Text_TradeIceStoneForCoinCase: @ 8210D76
 	.string "Oh! You have an Ice Stone?\n"

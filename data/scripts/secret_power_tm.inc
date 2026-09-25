@@ -12,8 +12,8 @@ Route111_Text_ExplainSecretPower: @ 827636E
 	.string "Try a large tree with hanging vines,\n"
 	.string "or a rock wall with a small indent.\p"
 	.string "If you want Secret Power for battles,\n"
-	.string "a Pokémon Center tutor can teach it\l"
-	.string "to a compatible partner.\p"
+	.string "the Move Tutor can teach it to any\l"
+	.string "partner that can learn it.\p"
 	.string "I'm off to find a place of my own!$"
 
 Route111_Text_DontWantThis: @ 827655C

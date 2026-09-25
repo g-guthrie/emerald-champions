@@ -35,8 +35,8 @@ struct CenterGuideTip
     const u8 *text;
 };
 
-static const u8 sTip_MoveTutor[] = _("Every Pokémon Center has a move\ntutor. It teaches any move a\lPokémon can legally learn, and\lno machines are needed.");
-static const u8 sTip_TrickHouse[] = _("The Trick Master hides in his\nhouse on Route 110. Find him,\lsolve his maze and claim a\lprize.\pYour third badge and every one\nafter it open a new puzzle.\lThe last waits until you are\lChampion.");
+static const u8 sTip_MoveTutor[] = _("Every Pokémon Center has a Move\nTutor. No machines needed!\pBring any Pokémon, and the Tutor\nwill teach it any move it can learn.");
+static const u8 sTip_TrickHouse[] = _("The Trick Master hides in his\nhouse on Route 110. Find him,\lsolve his maze and claim a\lprize.\pYour third Badge and every one\nafter it open a new puzzle.\lThe last waits until you are\lChampion.");
 static const u8 sTip_BlobLost[] = _("A nurse on Route 111, just north\nof Mauville, has lost her\lChansey, Blob.\pHelp catch it, and every nurse\nwill fill your Poké Vial with\lan extra dose.");
 static const u8 sTip_BlobChase[] = _("Blob ran off by the Route 112\ncable car. Follow it down\lJagged Pass, through Ember Path\land into the Ashen Woods.\pCatch it with a Heal Ball.\nVerdanturf's Pokémon Center\lsells them.");
 static const u8 sTip_BlobFound[] = _("You caught Blob! Take it back\nto the nurse on Route 111 for\lyour reward.");
@@ -118,7 +118,7 @@ static const struct
 {
     {FLAG_DEFEATED_RIVAL_ROUTE103, COMPOUND_STRING("Prof. Birch's kid is studying\nPokémon on Route 103, north of\lOldale Town. Go and meet them!")},
     {FLAG_ADVENTURE_STARTED, COMPOUND_STRING("Head back to Prof. Birch's lab\nin Littleroot Town. He has\lsomething for you.")},
-    {FLAG_BADGE01_GET, COMPOUND_STRING("Head west to Petalburg City and\nvisit its Gym. Then go north\lthrough Petalburg Woods to\lRustboro City.\pRoxanne, the Rustboro Gym\nLeader, has your first badge.")},
+    {FLAG_BADGE01_GET, COMPOUND_STRING("Head west to Petalburg City and\nvisit its Gym. Then go north\lthrough Petalburg Woods to\lRustboro City.\pRoxanne, the Rustboro Gym\nLeader, has your first Badge.")},
     {FLAG_RECOVERED_DEVON_GOODS, COMPOUND_STRING("A thief stole goods from Devon!\nHe ran east along Route 116\linto Rusturf Tunnel.")},
     {FLAG_RETURNED_DEVON_GOODS, COMPOUND_STRING("Bring the Devon Goods back to\nthe Devon employee waiting in\lRustboro City.")},
     {FLAG_RECEIVED_POKENAV, COMPOUND_STRING("Devon's president wants to\nthank you. Visit him on the top\lfloor of Devon Corporation.")},
@@ -134,7 +134,7 @@ static const struct
     {FLAG_HIDE_ROUTE_119_TEAM_AQUA, COMPOUND_STRING("Surf east from Mauville along\nRoute 118, then go north on\lRoute 119.\pTeam Aqua has taken over the\nWeather Institute there!")},
     {FLAG_RECEIVED_DEVON_SCOPE, COMPOUND_STRING("Something unseen blocks the\nGym in Fortree City. Steven is\lwaiting on Route 120, just\least of Fortree.")},
     {FLAG_KECLEON_FLED_FORTREE, COMPOUND_STRING("Use the Devon Scope on what\nblocks the Fortree Gym. Then\lchallenge Winona!")},
-    {FLAG_BADGE06_GET, COMPOUND_STRING("Winona leads the Fortree Gym.\nWin your sixth badge there!")},
+    {FLAG_BADGE06_GET, COMPOUND_STRING("Winona leads the Fortree Gym.\nWin your sixth Badge there!")},
     {FLAG_RECEIVED_RED_OR_BLUE_ORB, COMPOUND_STRING("Teams Aqua and Magma are after\nsomething on Mt. Pyre, south of\lRoute 121. Hurry to the summit!")},
     {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, COMPOUND_STRING("The Magma Emblem opens Team\nMagma's hideout. Look for it\lon Jagged Pass.")},
     {FLAG_MET_TEAM_AQUA_HARBOR, COMPOUND_STRING("Team Aqua is after Capt.\nStern's submarine. Hurry to\lSlateport's harbor!")},
@@ -151,7 +151,7 @@ static const struct
 static const u8 sText_GuideSkyPillar[] = _("Wallace is waiting at Sky\nPillar on Route 131. Climb to\lthe top and wake Rayquaza.\pThe cracked floors inside call\nfor a Mach Bike.");
 static const u8 sText_GuideLeaders[] = _("Rayquaza calmed the skies!\nBack in Sootopolis, hear what\lMaxie and Archie have to say.");
 static const u8 sText_GuideWaterfall[] = _("Wallace is waiting for you in\nSootopolis City.");
-static const u8 sText_GuideJuan[] = _("Juan leads the Sootopolis Gym.\nWin your last badge there!");
+static const u8 sText_GuideJuan[] = _("Juan leads the Sootopolis Gym.\nWin your last Badge there!");
 static const u8 sText_GuideLeague[] = _("Ever Grande City lies east of\nRoute 128. Climb its waterfall,\lcross Victory Road and take on\lthe Pokémon League!");
 
 static const u8 *GetCenterGuideStoryText(void)
