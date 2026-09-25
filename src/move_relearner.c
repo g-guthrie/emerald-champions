@@ -503,14 +503,10 @@ static void RedrawMoveList(void)
     ShowTeachMoveText();
 }
 
+// Every mode stays in the list after a move is taught, so a tutor can teach
+// several moves in one visit; B leaves the list.
 static void UIEndTask(u8 taskId)
 {
-    if (gRelearnMode == RELEARN_MODE_SCRIPT && gSpecialVar_Result == TRUE)
-    {
-        gTasks[taskId].func = Task_MoveRelearner_Quit;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        return;
-    }
     if (gSpecialVar_Result == TRUE)
         RedrawMoveList();
     else
@@ -658,11 +654,16 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
     case LIST_CANCEL:
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
-        gTasks[taskId].func = Task_MoveRelearner_Giveup_Prompt;
+        // A tutor's list costs nothing to leave: B goes straight back to the
+        // script, which returns to choosing a Pokémon.
         if (gRelearnMode == RELEARN_MODE_SCRIPT)
-            StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerGiveUp);
-        else
-            StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerStop);
+        {
+            gTasks[taskId].func = Task_MoveRelearner_Quit;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            break;
+        }
+        gTasks[taskId].func = Task_MoveRelearner_Giveup_Prompt;
+        StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerStop);
         MoveRelearnerPrintMessage(gStringVar4);
         break;
     default:

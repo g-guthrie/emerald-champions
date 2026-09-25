@@ -1,20 +1,21 @@
 Common_EventScript_EmeraldChampionsMoveTutor::
 	lockall
 	faceplayer
-	setvar VAR_0x8009, 0
+	setvar VAR_0x800B, 0
 	call_if_unset FLAG_EC_TUTOR_MACHINES_LINE_SEEN, EmeraldChampions_EventScript_MoveTutorNoMachines
 
+@ One menu; VAR_0x800B keeps the cursor on the service last used.
 EmeraldChampions_EventScript_MoveTutorMain:
 	message EmeraldChampions_Text_MoveTutorHowCanHelp
 	waitmessage
 	dynmultipush EmeraldChampions_Text_LearnMove, 0
-	dynmultipush EmeraldChampions_Text_OtherServices, 1
+	dynmultipush EmeraldChampions_Text_Bonding, 1
 	dynmultipush EmeraldChampions_Text_Exit, 2
-	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 3, 0, VAR_0x800B, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_OpenMoveRelearner
-	case 1, EmeraldChampions_EventScript_OtherServices
+	case 1, EmeraldChampions_EventScript_SpecialistBonding
 	goto EmeraldChampions_EventScript_MoveTutorExit
 
 EmeraldChampions_EventScript_MoveTutorNoMachines:
@@ -22,26 +23,16 @@ EmeraldChampions_EventScript_MoveTutorNoMachines:
 	msgbox EmeraldChampions_Text_MoveTutorNoMachines, MSGBOX_DEFAULT
 	return
 
-EmeraldChampions_EventScript_OtherServices:
-	message EmeraldChampions_Text_OtherServicesPrompt
-	waitmessage
-	dynmultipush EmeraldChampions_Text_Bonding, 0
-	dynmultipush EmeraldChampions_Text_Back, 1
-	dynmultistack 30, 1, FALSE, 2, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	switch VAR_RESULT
-	case 0, EmeraldChampions_EventScript_SpecialistBonding
-	case 1, EmeraldChampions_EventScript_MoveTutorMain
-	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorMain
-
+@ The party screen and the move list carry their own prompts. B in the list
+@ returns to the party screen; B there returns to the tutor's menu.
 EmeraldChampions_EventScript_OpenMoveRelearner:
+	setvar VAR_0x800B, 0
 	setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES
 	bufferstring STR_VAR_3, MoveRelearner_Text_MoveLWR
 
 EmeraldChampions_EventScript_MoveRelearnerChooseMon:
 	getpartysize
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_MoveRelearnerNoPokemon
-	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
 	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain
@@ -49,12 +40,8 @@ EmeraldChampions_EventScript_MoveRelearnerChooseMon:
 	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_MoveRelearnerEgg
 	special Special_HasMoveToRelearn
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MoveRelearnerNoMoves
-	msgbox MoveRelearner_Text_WhichXmoveShouldTeach, MSGBOX_DEFAULT
 	special TeachMoveRelearnerMove
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MoveTutorMain
-	msgbox MoveRelearner_Text_AnythingElse, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_MoveRelearnerChooseMon
-	goto EmeraldChampions_EventScript_MoveTutorMain
+	goto EmeraldChampions_EventScript_MoveRelearnerChooseMon
 
 EmeraldChampions_EventScript_MoveRelearnerNoPokemon:
 	msgbox MoveRelearner_Text_HaveNoPkmn, MSGBOX_DEFAULT
@@ -206,12 +193,6 @@ EmeraldChampions_Text_MoveTutorNoMachines:
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
 
-EmeraldChampions_Text_OtherServices:
-	.string "Other Services$"
-
-EmeraldChampions_Text_OtherServicesPrompt:
-	.string "What else can I help with?$"
-
 EmeraldChampions_Text_Exit:
 	.string "Exit$"
 
@@ -306,8 +287,9 @@ EmeraldChampions_EventScript_FormUnavailable:
 	goto EmeraldChampions_EventScript_FormChooseMon
 
 EmeraldChampions_EventScript_SpecialistBonding:
+	setvar VAR_0x800B, 1
 	call Common_EventScript_EmeraldChampionsBonding
-	goto EmeraldChampions_EventScript_OtherServices
+	goto EmeraldChampions_EventScript_MoveTutorMain
 
 Common_EventScript_EmeraldChampionsBonding::
 	msgbox EmeraldChampions_Text_BondingChooseMon, MSGBOX_DEFAULT

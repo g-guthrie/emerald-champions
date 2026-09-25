@@ -52,8 +52,9 @@ MauvilleCity_House2_EventScript_Tutor::
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_House2_EventScript_IconicTutorDeclined
 	setmoverelearnerstate MOVE_RELEARNER_ICONIC_MOVES
 	bufferstring STR_VAR_3, MoveRelearner_Text_MoveLWR
+@ The party screen and move list carry their own prompts. B in the list
+@ returns to the party screen; B there ends the lesson.
 MauvilleCity_House2_EventScript_IconicTutorChooseMon:
-	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
 	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MauvilleCity_House2_EventScript_IconicTutorDeclined
@@ -61,12 +62,8 @@ MauvilleCity_House2_EventScript_IconicTutorChooseMon:
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_House2_EventScript_IconicTutorNothing
 	special Special_HasMoveToRelearn
 	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_House2_EventScript_IconicTutorNothing
-	msgbox MoveRelearner_Text_WhichXmoveShouldTeach, MSGBOX_DEFAULT
 	special TeachMoveRelearnerMove
-	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_House2_EventScript_IconicTutorDeclined
-	msgbox MauvilleCity_House2_Text_IconicTutorAnother, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_House2_EventScript_IconicTutorChooseMon
-	goto MauvilleCity_House2_EventScript_IconicTutorDeclined
+	goto MauvilleCity_House2_EventScript_IconicTutorChooseMon
 
 MauvilleCity_House2_EventScript_IconicTutorNothing:
 	msgbox MauvilleCity_House2_Text_IconicTutorNothing, MSGBOX_DEFAULT
@@ -114,9 +111,6 @@ MauvilleCity_House2_Text_IconicTutorIntro:
 MauvilleCity_House2_Text_IconicTutorNothing:
 	.string "Hmm… I have nothing for that one.\n"
 	.string "Or perhaps you need more Badges.$"
-
-MauvilleCity_House2_Text_IconicTutorAnother:
-	.string "Splendid! Shall I teach another?$"
 
 MauvilleCity_House2_Text_IconicTutorDeclined:
 	.string "Come back whenever a legend\n"
