@@ -930,8 +930,8 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Connie's mutual Surf activates Stor
     GIVEN {
         // Paralysis leaves both foes slower than Gastrodon: this matchup has
         // an absorption payoff but no reason to establish Tailwind first.
-        PLAYER(SPECIES_TYRANITAR) { Level(70); Ability(ABILITY_UNNERVE); Item(ITEM_ASSAULT_VEST); Status1(STATUS1_PARALYSIS); Moves(MOVE_SMACK_DOWN); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
-        PLAYER(SPECIES_TYRANITAR) { Level(70); Ability(ABILITY_UNNERVE); Item(ITEM_ASSAULT_VEST); Status1(STATUS1_PARALYSIS); Moves(MOVE_SMACK_DOWN); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
+        PLAYER(SPECIES_TYRANITAR) { Level(75); Ability(ABILITY_UNNERVE); Item(ITEM_ASSAULT_VEST); Status1(STATUS1_PARALYSIS); Moves(MOVE_SMACK_DOWN); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
+        PLAYER(SPECIES_TYRANITAR) { Level(75); Ability(ABILITY_UNNERVE); Item(ITEM_ASSAULT_VEST); Status1(STATUS1_PARALYSIS); Moves(MOVE_SMACK_DOWN); Speed(GetMonData(gBattleTestRunnerState->data.currentMon, MON_DATA_SPEED)); }
         AuthoredOpponent(TRAINER_CONNIE, 7, FALSE);
     } WHEN {
         TURN {
