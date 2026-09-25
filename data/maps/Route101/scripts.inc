@@ -5,7 +5,16 @@ Route101_MapScripts::
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
+	call_if_lt VAR_ROUTE101_STATE, 2, Route101_EventScript_HidePoochyenaBeforeChase
 	end
+
+@ Its map spot beside the bag shows at the top of the screen from the
+@ trigger row, then vanishes when the chase starts; wait off screen instead.
+@ Column 2 is the farthest west that still spawns (and stays spawned) for a
+@ player entering at x 10 or 11, and is eight or more tiles off screen.
+Route101_EventScript_HidePoochyenaBeforeChase:
+	setobjectxyperm LOCALID_ROUTE101_POOCHYENA, 2, 17
+	return
 
 Route101_OnFrame:
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup

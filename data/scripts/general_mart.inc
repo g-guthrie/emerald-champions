@@ -17,10 +17,13 @@ General_Mart_ChooseService:
 General_Mart_Text_Supplies:
 	.string "Supplies$"
 
+General_Mart_Text_BuyingOrSelling:
+	.string "Certainly! Will you be buying\n"
+	.string "or selling today?$"
+
+@ Buy/Sell follows the service menu, so the clerk answers instead of greeting again.
 General_Mart_Supplies::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
+	message General_Mart_Text_BuyingOrSelling
 	waitmessage
 	goto_if_set FLAG_BADGE06_GET, Mart_Poke_Center_Feather_Badge
 	goto_if_set FLAG_BADGE05_GET, Mart_Poke_Center_Balance_Badge

@@ -46,9 +46,9 @@ Route133_EventScript_Conor:: @ 81F762D
 Route133_EventScript_Nurse::
 	lockall
 	faceplayer
-	playse SE_PIN
 	compare VAR_TEMP_1, 1
 	goto_if_eq Route133_EventScript_NurseShortMsg
+	playse SE_PIN
 	applymovement LOCALID_NURSE, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 40
@@ -61,6 +61,10 @@ Route133_EventScript_NurseGuideChansey::
 	waitmovement LOCALID_CHANSEY
 	applymovement LOCALID_NURSE, Route133_Movement_CrossCurrent
 	waitmovement LOCALID_NURSE
+	@ Both turn back to thank the player instead of talking with their backs to them.
+	applymovement LOCALID_NURSE, Common_Movement_FaceLeft
+	applymovement LOCALID_CHANSEY, Route133_Movement_ChanseyJump
+	waitmovement 0
 	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	msgbox Route133_Text_NurseDoneHaveVialUpgrade, MSGBOX_DEFAULT

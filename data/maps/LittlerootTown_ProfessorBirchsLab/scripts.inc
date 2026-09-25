@@ -182,8 +182,12 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	delay 30
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OtherDimensionsTakeCosmog, MSGBOX_DEFAULT
 	closemessage
+	@ A retry (state 7) is a face-to-face talk: the fetch walk would step
+	@ into a player standing on Birch's left, so he hands it over in place.
+	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_GiveCosmog
 	applymovement LOCALID_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchGiveCosmogs
 	waitmovement 0
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveCosmog:
 	setvar VAR_TEMP_1, SPECIES_COSMOG
 	special GetStaticEncounterLevel
 	givemon SPECIES_COSMOG, VAR_0x800A, ITEM_LUCKY_EGG
@@ -234,9 +238,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_RivalCosmog::
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BrendanUpgradeComment
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting2, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFastestRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
-	waitmovement 0
+	@ A retry can leave the player anywhere beside the rival, not only on her right.
+	facetogether OBJ_EVENT_ID_PLAYER, LOCALID_RIVAL
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_MayGoRoute103

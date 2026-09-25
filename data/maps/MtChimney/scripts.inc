@@ -58,9 +58,11 @@ MtChimney_EventScript_Maxie:: @ 822EE0B
 	removeobject LOCALID_MAGMA_GRUNT_1
 	removeobject LOCALID_TABITHA
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA
-	fadescreen FADE_FROM_BLACK
+	@ Place Archie while the screen is black: spawned after the fade-in he
+	@ popped into view at the bottom edge before walking up.
 	setobjectxyperm LOCALID_ARCHIE, 10, 12
 	addobject LOCALID_ARCHIE
+	fadescreen FADE_FROM_BLACK
 	compare VAR_FACING, DIR_EAST
 	call_if_eq MtChimney_EventScript_ArchieApproachPlayerEast
 	compare VAR_FACING, DIR_NORTH

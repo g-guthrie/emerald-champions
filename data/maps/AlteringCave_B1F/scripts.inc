@@ -26,7 +26,7 @@ AlteringCave_B1F_EventScript_CheckMewtwoResult::
 
 AlteringCave_B1F_EventScript_Leaf::
 	lockall
-	goto_if_defeated TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_EventScript_LeafReward
+	goto_if_defeated TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_EventScript_LeafRetryReward
 	playse SE_PIN
 	applymovement LOCALID_LEAF, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -55,6 +55,21 @@ AlteringCave_B1F_EventScript_LeafReward::
 	removeobject LOCALID_LEAF
 	releaseall
 	end
+
+@ A full Bag left the reward pending and the player re-entered the trigger
+@ below. Restore the post-battle spacing (Leaf one tile above the player)
+@ so the give-way and exit paths stay on open floor.
+AlteringCave_B1F_EventScript_LeafRetryReward:
+	getobjectxy LOCALID_LEAF, CURRENT_POSITION, VAR_0x8004, VAR_0x8005
+	call_if_eq VAR_0x8005, 16, AlteringCave_B1F_EventScript_LeafStepDown
+	applymovement OBJ_EVENT_ID_PLAYER, AlteringCave_Movement_Player
+	waitmovement 0
+	goto AlteringCave_B1F_EventScript_LeafReward
+
+AlteringCave_B1F_EventScript_LeafStepDown:
+	applymovement LOCALID_LEAF, AlteringCave_Movement_Leaf
+	waitmovement 0
+	return
 
 AlteringCave_Text_LeafPreBattle:
 	.string "???: Are you here looking for\n"

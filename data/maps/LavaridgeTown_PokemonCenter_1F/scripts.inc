@@ -139,7 +139,9 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
 	giveitem ITEM_BOTTLE_CAP, 3
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE
 	waitmessage
-	getplayerxy VAR_0x8004, VAR_0x8005
+	@ Lucy still at the springs doorway (a full-Bag retry keeps her there)
+	@ leaves by the springs route, whichever side the player talks from.
+	getobjectxy LOCALID_LUCY, CURRENT_POSITION, VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 2
 	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitFromSprings
 	switch VAR_FACING
@@ -162,7 +164,15 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse::
 	end
 
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitFromSprings::
+	getplayerxy VAR_0x8004, VAR_0x8005
+	goto_if_eq VAR_0x8005, 4, LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitAroundPlayer
 	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitFromSprings
+	waitmovement 0
+	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
+
+@ The player stands below her doorway spot: step right before heading down.
+LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitAroundPlayer:
+	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitAroundPlayer
 	waitmovement 0
 	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
 
@@ -276,6 +286,19 @@ LavaridgeTown_PokemonCenter_1F_Movement_LucyGoWait:
 	walk_right
 	walk_right
 	face_down
+	step_end
+
+LavaridgeTown_PokemonCenter_1F_Movement_LucyExitAroundPlayer:
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 LavaridgeTown_PokemonCenter_1F_Movement_LucyExitFromSprings:

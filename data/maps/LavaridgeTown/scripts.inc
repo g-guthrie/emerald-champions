@@ -322,7 +322,7 @@ LavaridgeTown_Text_MayExplainGoGoggles: @ 81EA897
 
 LavaridgeTown_Text_MayGiveSafetyGogglesChallengeDad:
 	.string "May: Safety Goggles are like Go-Goggles\n"
-	.string "for Pokémon - they'll protect them from\l"
+	.string "for Pokémon. They'll protect them from\l"
 	.string "weather and Powder moves.\p"
 	.string "But, wow, {PLAYER}{KUN}…\n"
 	.string "Challenging Gyms…\p"
@@ -476,7 +476,12 @@ LavaridgeTown_EventScript_RetryGoGoggles::
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	setvar VAR_LAVARIDGE_TOWN_STATE, 2
 	msgbox LavaridgeTown_Text_GogglesReady, MSGBOX_DEFAULT
+	closemessage
+	@ The rival may stand anywhere the interrupted scene left her, beside a
+	@ player on any side; fade her out instead of popping her off screen.
+	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_RIVAL
+	fadescreen FADE_FROM_BLACK
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	savebgm MUS_DUMMY
 	fadedefaultbgm

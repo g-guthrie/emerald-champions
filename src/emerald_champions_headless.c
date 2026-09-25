@@ -125,7 +125,7 @@ static EWRAM_DATA u8 sEcHeadlessName[POKEMON_NAME_LENGTH + 1] = {0};
 static EWRAM_DATA u16 sEcHeadlessObservedDelay = 0;
 static EWRAM_DATA bool8 sEcHeadlessFurfrouMenuOpened = FALSE;
 static EWRAM_DATA bool8 sEcHeadlessAutoCaptureInProgress = FALSE;
-static const u8 sEcHeadlessPlayerName[] = _("BRENDAN");
+static const u8 sEcHeadlessPlayerName[] = _("Brendan");
 extern void gInitialMainCB2(void);
 extern const u8 RivalsHouse_EventScript_ChooseStarterRegion[];
 extern const u8 BattleFrontier_BattleTowerLobby_EventScript_CircuitNextMatch[];
@@ -1209,8 +1209,8 @@ void EmeraldChampionsHeadlessObserve(void)
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_LEAF_SCENE)
     {
         gEcHeadlessFixtureFlashLevel = GetFlashLevel();
-        gEcHeadlessLeafRewardOwned = CheckBagHasItem(ITEM_MEWTWONITE_X, 1);
-        gEcHeadlessLeafCompleted = FlagGet(FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE);
+        gEcHeadlessLeafRewardOwned = CheckBagHasItem(ITEM_BOTTLE_CAP, 30);
+        gEcHeadlessLeafCompleted = VarGet(VAR_LEAF_STATE) != 0;
         gEcHeadlessLeafTrainerDefeated = HasTrainerBeenFought(TRAINER_LEAF_ALTERING_CAVE);
         // Host setup requests only: reload preserves persistent encounter state.
         if (gEcHeadlessFixtureTrigger && gMain.callback2 == CB2_Overworld
@@ -2330,17 +2330,23 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 80, OTID_STRUCT_PLAYER_ID);
             CalculatePlayerPartyCount();
             FlagSet(FLAG_SYS_POKEMON_GET);
-            FlagClear(FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE);
+            VarSet(VAR_LEAF_STATE, 0);
+            FlagClear(FLAG_DEFEATED_LEAF);
             ClearTrainerFlag(TRAINER_LEAF_ALTERING_CAVE);
             ClearBag();
             if (gEcHeadlessFixtureParam == EC_HEADLESS_LEAF_COMPLETED)
-                FlagSet(FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE);
+            {
+                SetTrainerFlag(TRAINER_LEAF_ALTERING_CAVE);
+                VarSet(VAR_LEAF_STATE, 1);
+                FlagSet(FLAG_DEFEATED_LEAF);
+            }
             else if (gEcHeadlessFixtureParam == EC_HEADLESS_LEAF_PENDING_FULL_BAG)
             {
-                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_MEWTWONITE_X)];
+                // The reward is Bottle Caps; fill their pocket with something else.
+                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_BOTTLE_CAP)];
                 SetTrainerFlag(TRAINER_LEAF_ALTERING_CAVE);
                 for (slot = 0; slot < pocket->capacity; slot++)
-                    BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_LEFTOVERS, 1);
+                    BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_NUGGET, 1);
             }
             LoadHeadlessMap(MAP_ALTERING_CAVE_B1F, 21, 20);
         }
