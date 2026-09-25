@@ -78,8 +78,10 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock that cannot hurt either fo
         TURN {
             MOVE(playerLeft, MOVE_KNOCK_OFF, target: opponentRight);
             MOVE(playerRight, MOVE_METEOR_MASH, target: opponentRight);
-            EXPECT_SWITCH(opponentLeft, 2);
         }
+    } THEN {
+        // Which reserve takes the slot is the board's call; both are priced.
+        EXPECT_NE(opponentLeft->species, SPECIES_VICTINI);
     }
 }
 

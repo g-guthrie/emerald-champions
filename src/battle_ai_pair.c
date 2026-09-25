@@ -5846,20 +5846,17 @@ static bool32 PairLegalReserve(enum BattlerId actor, u32 slot)
         && !IsPartyMonPlannedToBeSwitchedInByPartner(slot, actor);
 }
 
-// Locked by a Choice item into a status move, or into an attack that no
-// living foe takes more than half damage from. The pressure search below only
-// asks whether anything connects, so a quarter-damage Psychic into Metagross
-// beside an immune Incineroar kept the lock "productive" for seven turns.
-static bool32 PairUselessChoiceLock(enum BattlerId actor)
+// Whether a move the battler is held to buys nothing: a status move, a move it
+// cannot select at all (so the turn is a Struggle), or an attack that no living
+// foe takes more than half damage from. The pressure search below only asks
+// whether anything connects, so a quarter-damage Psychic into Metagross beside
+// an immune Incineroar kept the lock "productive" for seven turns.
+static bool32 PairLockedMoveUseless(enum BattlerId actor, enum Move locked)
 {
-    enum Move locked = gBattleStruct->choicedMove[actor];
-    if (!IsBattlerAlive(actor) || !HasChoiceEffect(actor)
-     || locked == MOVE_NONE || locked == MOVE_UNAVAILABLE)
-        return FALSE;
     u32 index = GetMoveIndex(actor, locked);
     if (index >= MAX_MON_MOVES)
         return FALSE;
-    if (IsBattleMoveStatus(locked))
+    if (IsBattleMoveStatus(locked) || IsMoveUnusable(index, locked, gAiLogicData->moveLimitations[actor]))
         return TRUE;
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         if (IsBattlerAlive(foe) && !IsBattlerAlly(actor, foe)
@@ -5868,9 +5865,37 @@ static bool32 PairUselessChoiceLock(enum BattlerId actor)
     return TRUE;
 }
 
+static bool32 PairUselessChoiceLock(enum BattlerId actor)
+{
+    enum Move locked = gBattleStruct->choicedMove[actor];
+    if (!IsBattlerAlive(actor) || !HasChoiceEffect(actor)
+     || locked == MOVE_NONE || locked == MOVE_UNAVAILABLE)
+        return FALSE;
+    return PairLockedMoveUseless(actor, locked);
+}
+
+// The same for an Encore. Wally's Ludicolo, Encored into a Fake Out it could
+// never use again, Struggled twice while his healthy Gallade was the one that
+// left; Wallace's Kyogre sat in an Encored Protect that could only fail. A lock
+// that ends with this turn costs only this turn, which the board already sees.
+static bool32 PairUselessEncore(enum BattlerId actor, bool32 turnsAfterThis)
+{
+    enum Move locked = gBattleMons[actor].volatiles.encoredMove;
+    if (!IsBattlerAlive(actor) || !gBattleMons[actor].volatiles.encoreTimer
+     || locked == MOVE_NONE || locked == MOVE_UNAVAILABLE
+     || (turnsAfterThis && gBattleMons[actor].volatiles.encoreTimer < 2))
+        return FALSE;
+    return PairLockedMoveUseless(actor, locked);
+}
+
+static bool32 PairUselessLock(enum BattlerId actor)
+{
+    return PairUselessChoiceLock(actor) || PairUselessEncore(actor, TRUE);
+}
+
 static bool32 PairNeedsSwitchSearch(enum BattlerId actor)
 {
-    if (PairUselessChoiceLock(actor))
+    if (PairUselessChoiceLock(actor) || PairUselessEncore(actor, FALSE))
         return TRUE;
     enum Ability ability = gAiLogicData->abilities[actor];
     if (gBattleMons[actor].species == SPECIES_PALAFIN
@@ -5996,6 +6021,50 @@ static u32 PairReserveTypeFactor(enum BattlerId attacker, enum BattlerId defende
     return CalcPartyMonTypeEffectivenessMultiplier(move, species, ctx.abilities[defender]);
 }
 
+// The type a Normal move becomes under an -ate ability, or TYPE_NONE.
+static enum Type PairAteType(enum Ability ability)
+{
+    switch (ability)
+    {
+    case ABILITY_PIXILATE: return TYPE_FAIRY;
+    case ABILITY_AERILATE: return TYPE_FLYING;
+    case ABILITY_REFRIGERATE: return TYPE_ICE;
+    case ABILITY_GALVANIZE: return TYPE_ELECTRIC;
+    default: return TYPE_NONE;
+    }
+}
+
+// A standard-formula estimate of one hit, as a percentage of the defender's
+// current HP. Only the terms that separate one reserve from another: level,
+// power, the two stats, STAB, type and the spread reduction. No rolls, no
+// field; this only orders candidates, and the board then prices the winners.
+static u32 PairEstimatePercent(u32 level, u32 power, u32 attack, u32 defense, bool32 stab,
+                               uq4_12_t factor, bool32 spread, u32 hp)
+{
+    if (!factor || !power || !hp)
+        return 0;
+    u32 damage = ((2 * level / 5 + 2) * power * attack / max(1, defense)) / 50 + 2;
+    if (stab)
+        damage = damage * 3 / 2;
+    damage = damage * factor / UQ_4_12(1.0);
+    if (spread)
+        damage = damage * 3 / 4;
+    return min(300, damage * 100 / hp);
+}
+
+static u32 PairStagedStat(enum BattlerId battler, enum Stat stat, u32 value)
+{
+    u32 stage = gBattleMons[battler].statStages[stat];
+    return value * gStatStageRatios[stage][0] / gStatStageRatios[stage][1];
+}
+
+// How much of this reserve the foes' visible sets take on arrival, and how
+// much of the foes it takes back. Each foe's best usable attack is priced
+// against the reserve's own bulk and typing - spread moves included, since
+// they reach whatever comes in - and a foe that can still Mega Evolve is
+// priced in whichever form hits harder: Mega Gardevoir's Pixilate Hyper
+// Voice is on the board the moment the stone is. Loadouts are known to both
+// sides; the foes' committed moves are not, so every usable attack counts.
 static s32 PairRankReserve(enum BattlerId actor, u32 slot)
 {
     struct Pokemon *mon = &GetBattlerParty(actor)[slot];
@@ -6003,37 +6072,81 @@ static s32 PairRankReserve(enum BattlerId actor, u32 slot)
     enum Ability ability = GetMonAbility(mon);
     enum HoldEffect item = GetItemHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM));
     enum Type type1 = gSpeciesInfo[species].types[0], type2 = gSpeciesInfo[species].types[1];
-    s32 rank = GetMonData(mon, MON_DATA_HP) * 100 / max(1, GetMonData(mon, MON_DATA_MAX_HP));
+    u32 hp = GetMonData(mon, MON_DATA_HP), maxHp = max(1, GetMonData(mon, MON_DATA_MAX_HP));
+    u32 level = GetMonData(mon, MON_DATA_LEVEL);
+    u32 defense = GetMonData(mon, MON_DATA_DEF), spDefense = GetMonData(mon, MON_DATA_SPDEF);
+    if (item == HOLD_EFFECT_ASSAULT_VEST)
+        spDefense = spDefense * 3 / 2;
+    s32 rank = hp * 100 / maxHp;
     if (PairReserveChangesPlan(actor, slot))
         rank += 40;
+    u32 threatTotal = 0;
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
     {
         if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
             continue;
         u32 attack = 0, threat = 0;
+        enum Ability foeAbility = gAiLogicData->abilities[foe];
+        enum Species foeSpecies = gBattleMons[foe].species;
+        // The visible Mega: its ability and typing, at the base form's stats.
+        enum Species foeMega = SPECIES_NONE;
+        if (CanMegaEvolve(foe))
+        {
+            foeMega = GetBattleFormChangeTargetSpecies(foe, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, foeAbility);
+            if (foeMega == foeSpecies)
+                foeMega = SPECIES_NONE;
+        }
         for (u32 index = 0; index < MAX_MON_MOVES; index++)
         {
             enum Move move = GetMonData(mon, MON_DATA_MOVE1 + index);
             if (move != MOVE_NONE && !IsBattleMoveStatus(move) && GetMonData(mon, MON_DATA_PP1 + index))
             {
                 enum Type type = GetMoveType(move);
-                u32 factor = PairReserveTypeFactor(actor, foe, move, gBattleMons[foe].species,
-                    ability, gAiLogicData->abilities[foe], gAiLogicData->holdEffects[foe]);
-                u32 power = max(40, GetMovePower(move));
-                if (type == type1 || type == type2)
-                    power = power * 3 / 2;
-                attack = max(attack, power * factor / UQ_4_12(1.0));
+                u32 factor = PairReserveTypeFactor(actor, foe, move, foeSpecies,
+                    ability, foeAbility, gAiLogicData->holdEffects[foe]);
+                bool32 physical = GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL;
+                u32 percent = PairEstimatePercent(level, max(40, GetMovePower(move)),
+                    GetMonData(mon, physical ? MON_DATA_ATK : MON_DATA_SPATK),
+                    PairStagedStat(foe, physical ? STAT_DEF : STAT_SPDEF,
+                        physical ? gBattleMons[foe].defense : gBattleMons[foe].spDefense),
+                    type == type1 || type == type2, factor, PairSpread(move), gBattleMons[foe].hp);
+                attack = max(attack, percent);
             }
             move = gBattleMons[foe].moves[index];
-            if (!IsMoveUnusable(index, move, gAiLogicData->moveLimitations[foe]) && !IsBattleMoveStatus(move))
+            if (move == MOVE_NONE || IsBattleMoveStatus(move)
+             || IsMoveUnusable(index, move, gAiLogicData->moveLimitations[foe]))
+                continue;
+            bool32 physical = GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL;
+            u32 foeAttack = physical ? PairStagedStat(foe, STAT_ATK, gBattleMons[foe].attack)
+                                     : PairStagedStat(foe, STAT_SPATK, gBattleMons[foe].spAttack);
+            for (u32 form = 0; form < (foeMega != SPECIES_NONE ? 2 : 1); form++)
             {
-                u32 factor = PairReserveTypeFactor(foe, actor, move, species,
-                    gAiLogicData->abilities[foe], ability, item);
-                threat = max(threat, max(40, GetMovePower(move)) * factor / UQ_4_12(1.0));
+                enum Species attacker = form ? foeMega : foeSpecies;
+                enum Ability attackerAbility = form ? GetSpeciesAbility(foeMega, 0) : foeAbility;
+                u32 factor = PairReserveTypeFactor(foe, actor, move, species, attackerAbility, ability, item);
+                enum Type type = GetMoveType(move);
+                u32 power = max(40, GetMovePower(move));
+                enum Type ate = PairAteType(attackerAbility);
+                if (type == TYPE_NORMAL && ate != TYPE_NONE && factor)
+                {
+                    type = ate;
+                    power = power * 6 / 5;
+                    factor = GetTypeModifier(type, type1);
+                    if (type2 != type1)
+                        factor = uq4_12_multiply(factor, GetTypeModifier(type, type2));
+                }
+                bool32 stab = type == gSpeciesInfo[attacker].types[0] || type == gSpeciesInfo[attacker].types[1];
+                threat = max(threat, PairEstimatePercent(gBattleMons[foe].level, power, foeAttack,
+                    physical ? defense : spDefense, stab, factor, PairSpread(move), max(1, hp)));
             }
         }
-        rank += (s32)attack - (s32)threat;
+        rank += (s32)min(100, attack) / 2 - (s32)min(150, threat);
+        threatTotal += threat;
     }
+    // A body the visible sets knock out before it acts has not been saved,
+    // only spent; rank it below anything that survives.
+    if (threatTotal >= 100)
+        rank -= 100;
     return rank;
 }
 
@@ -6259,6 +6372,53 @@ static bool32 PairTryAttackBeforeSwitch(enum BattlerId actor, u32 reserve,
     return bestDamage != 0;
 }
 
+// Whether evolving this turn gives up an end-of-turn Speed Boost the base form
+// would still collect. The battler choosing now is on the field from the turn's
+// start, so the boost fires at its end; the Mega keeps a stage it already has.
+// Only a healthy holder defers - one likely to fall this turn evolves now.
+static bool32 PairMegaForfeitsSpeedBoost(enum BattlerId battler)
+{
+    if (!IsBattlerAlive(battler) || gAiLogicData->abilities[battler] != ABILITY_SPEED_BOOST
+     || gBattleMons[battler].statStages[STAT_SPEED] >= MAX_STAT_STAGE
+     || gBattleMons[battler].hp * 2 <= gBattleMons[battler].maxHP)
+        return FALSE;
+    enum Species mega = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ABILITY_SPEED_BOOST);
+    if (mega == gBattleMons[battler].species)
+        mega = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, ABILITY_SPEED_BOOST);
+    if (mega == gBattleMons[battler].species)
+        return FALSE;
+    for (u32 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
+        if (GetSpeciesAbility(mega, slot) == ABILITY_SPEED_BOOST)
+            return FALSE;
+    return TRUE;
+}
+
+// Whether this battler's Mega brings back the weather its trainer's plan is
+// built on. The trial prices this turn inside the new weather, but the five
+// turns after it - Slush Rush, a sure Blizzard, the foe's sun gone - are the
+// reason the form exists, and a one-turn board never sees them.
+static bool32 PairMegaRestoresPlanWeather(enum BattlerId battler)
+{
+    if (!IsBattlerAlive(battler) || (gBattleWeather & B_WEATHER_PRIMAL_ANY))
+        return FALSE;
+    enum Ability ability = gAiLogicData->abilities[battler];
+    enum Species mega = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ability);
+    if (mega == gBattleMons[battler].species)
+        mega = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, ability);
+    if (mega == gBattleMons[battler].species)
+        return FALSE;
+    u32 plan = EmeraldChampions_GetBattlePlan(battler), weather;
+    switch (GetSpeciesAbility(mega, 0))
+    {
+    case ABILITY_DROUGHT: plan &= EC_BATTLE_PLAN_SUN; weather = B_WEATHER_SUN; break;
+    case ABILITY_DRIZZLE: plan &= EC_BATTLE_PLAN_RAIN; weather = B_WEATHER_RAIN; break;
+    case ABILITY_SAND_STREAM: plan &= EC_BATTLE_PLAN_SAND; weather = B_WEATHER_SANDSTORM; break;
+    case ABILITY_SNOW_WARNING: plan &= EC_BATTLE_PLAN_SNOW; weather = B_WEATHER_ICY_ANY; break;
+    default: return FALSE;
+    }
+    return plan != 0 && !(gBattleWeather & weather);
+}
+
 bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 {
     enum BattlerId partner = GetPartnerBattler(actor);
@@ -6311,7 +6471,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     // A position that needs to change is not paying for the turn it gives up:
     // the extra costs below are for leaving a healthy, unpressured board.
     bool32 pressured[2] = {PairNeedsSwitchSearch(actor), PairNeedsSwitchSearch(partner)};
-    bool32 uselessLock[2] = {PairUselessChoiceLock(actor), PairUselessChoiceLock(partner)};
+    bool32 uselessLock[2] = {PairUselessLock(actor), PairUselessLock(partner)};
     u32 revealMega = 0;
     for (u32 index = 0; index < 2; index++)
         if ((canMega & (1u << index)) && !deadline[index]
@@ -6320,6 +6480,15 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
         {
             revealMega = 1u << index;
             break;
+        }
+    bool32 bothMegaLegal = canMega == 3
+        && !(IsPartnerMonFromSameTrainer(actor) && GetRemainingMegaEvolutions(actor) < 2);
+    bool32 boostBeforeMega[2] = {FALSE, FALSE}, megaWeather[2] = {FALSE, FALSE};
+    for (u32 index = 0; index < 2; index++)
+        if (canMega & (1u << index))
+        {
+            boostBeforeMega[index] = PairMegaForfeitsSpeedBoost(actors[index]);
+            megaWeather[index] = PairMegaRestoresPlanWeather(actors[index]);
         }
     for (u32 index = 0; index < 2; index++)
         if (PairCanSwitch(actors[index]))
@@ -6349,6 +6518,11 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
             // alternate on the right, without expanding ordinary switch search.
             if (index == 1 && deadline[0] && deadline[1] && secondRank != INT_MIN)
                 count[index] = 3;
+            // Under pressure the ranking only shortlists: the second reserve
+            // is priced on the board too, so a ranking error costs a board
+            // rather than a body walking into the hit it was meant to dodge.
+            if (pressured && secondRank != INT_MIN)
+                count[index] = 3;
         }
     // A board that runs out of budget before its first pair leaves nothing
     // behind, so start from a defined legal action rather than stack contents.
@@ -6362,9 +6536,14 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     s32 bestNonGuard[2] = {INT_MIN, INT_MIN}; // Best board where each attacked.
     u32 activeMega = 0;
     s32 best = INT_MIN;
-    for (u32 left = 0; left < count[0]; left++)
+    // Every first-choice reserve is priced before any second choice, so the
+    // clock never spends the actor's best exit on the partner's alternate.
+    static const u8 sPairBoardOrder[][2] = {{0, 0}, {0, 1}, {1, 0}, {0, 2}, {2, 0}, {1, 1}, {1, 2}, {2, 1}, {2, 2}};
+    for (u32 order = 0; order < ARRAY_COUNT(sPairBoardOrder); order++)
     {
-        for (u32 right = 0; right < count[1]; right++)
+        u32 left = sPairBoardOrder[order][0], right = sPairBoardOrder[order][1];
+        if (left >= count[0] || right >= count[1])
+            continue;
         {
             u32 slots[2] = {reserves[0][left], reserves[1][right]};
             // Voluntary double switches spend both actions and multiply the
@@ -6392,7 +6571,14 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 // available Mega was never once considered. Singles elect a
                 // usable Mega by default; this makes doubles agree when the
                 // comparison cannot be afforded.
-                u32 mega = megaChoice ^ (revealMega ? revealMega : canMega);
+                // The reveal board was ordered first on its own, which in a
+                // two-owner multi put Courtney's reveal ahead of the board
+                // where Maxie's Camerupt evolves too, and the shared clock
+                // stopped between them every time. The board where every
+                // usable Mega evolves already contains the reveal, so it
+                // leads whenever it is legal; the reveal alone leads only
+                // when one owner cannot afford both.
+                u32 mega = megaChoice ^ (bothMegaLegal || !revealMega ? canMega : revealMega);
                 if (revealMega && best != INT_MIN && (bestMega & revealMega)
                  && !(mega & revealMega))
                     continue;
@@ -6481,7 +6667,19 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 s32 boardRaw = score;
                 if (mega != 0)
                 {
-                    score += PAIR_MEGA_HORIZON;
+                    // Each evolving body earns its own horizon: a board where
+                    // both owners evolve is not worth the same as one Mega.
+                    // A Speed Boost holder whose Mega loses the ability earns
+                    // +1 Speed by ending this turn in base form, and the Mega
+                    // keeps the stage. Evolving now spends that boost and
+                    // only brings the horizon forward a turn, so its board
+                    // has to win on this turn alone, by the boost it forfeits.
+                    // A Mega that brings back its plan's weather earns the
+                    // turns of that weather the board cannot see.
+                    for (u32 index = 0; index < 2; index++)
+                        if (mega & (1u << index))
+                            score += (boostBeforeMega[index] ? -PAIR_SETUP_HORIZON : PAIR_MEGA_HORIZON)
+                                + (megaWeather[index] ? PAIR_SETUP_HORIZON : 0);
                     gAiPairMegaTrace[actor] |= AI_PAIR_MEGA_SCORED;
                 }
                 // Demand a meaningful improvement before voluntarily giving up
