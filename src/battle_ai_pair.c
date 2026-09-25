@@ -1332,7 +1332,46 @@ static u32 PairWorkAllowance(u32 pairs)
     return sPairWorkAllowance;
 }
 
+static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *action);
+
+// Whether a status move takes its user out of a Choice lock on its own: it
+// leaves the field, gives the item away or faints the user.
+static bool32 PairStatusEndsChoiceLock(enum BattleMoveEffects effect)
+{
+    switch (effect)
+    {
+    case EFFECT_TRICK:
+    case EFFECT_BATON_PASS:
+    case EFFECT_TELEPORT:
+    case EFFECT_PARTING_SHOT:
+    case EFFECT_SHED_TAIL:
+    case EFFECT_HEALING_WISH:
+    case EFFECT_LUNAR_DANCE:
+    case EFFECT_MEMENTO:
+    case EFFECT_TRANSFORM:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
+{
+    s32 score = PairPlanScoreInner(actor, action);
+    // A Choice item locks its holder into the first move it uses, and a status
+    // move is a lock with nothing in it: every later turn is that move again
+    // or a switch. The switch search already prices leaving such a lock at
+    // PAIR_USELESS_LOCK_ESCAPE; walking into it costs the same, or a Scarf
+    // Imposter Ditto opens with Protect and repeats it until it faints.
+    if (action->index != PAIR_IDLE && score > -10000
+     && IsBattleMoveStatus(action->executedMove) && HasChoiceEffect(actor)
+     && (gBattleStruct->choicedMove[actor] == MOVE_NONE || gBattleStruct->choicedMove[actor] == MOVE_UNAVAILABLE)
+     && !PairStatusEndsChoiceLock(GetMoveEffect(action->executedMove)))
+        score -= PAIR_USELESS_LOCK_ESCAPE;
+    return score;
+}
+
+static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *action)
 {
     if (action->index == PAIR_IDLE)
         return 0;
@@ -1595,6 +1634,24 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
                 return 55;
         }
         return -20;
+    }
+    // The mirror image: a move whose whole effect is to take choices away from
+    // whoever it lands on must never land on our own side. Encore aimed at a
+    // partner locks it into whatever it just did for three turns and costs the
+    // foes nothing; the trial sees no cost because the lock only bites later.
+    if (action->target != actor && IsBattlerAlive(action->target) && IsBattlerAlly(actor, action->target))
+    {
+        switch (effect)
+        {
+        case EFFECT_ENCORE:
+        case EFFECT_TAUNT:
+        case EFFECT_DISABLE:
+        case EFFECT_TORMENT:
+        case EFFECT_HEAL_BLOCK:
+            return -10000;
+        default:
+            break;
+        }
     }
     // A move whose whole effect is to help whoever it lands on must never
     // land on the other side. Heal Pulse aimed at a foe heals the foe; the
@@ -4310,6 +4367,18 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             // Sturdy/Policy recipient can enable its reply inside this trial.
             if (hp[target] > worstDamage && amount)
             {
+                // Anger Point turns a critical hit into maximum Attack before
+                // the body's own action. An always-critical move is certain
+                // to trigger it, so a slower reply in this same trial lands
+                // at +6. Without this the trial priced Aisha's Storm Throw
+                // into Tauros as pure self-damage, and the knockout it sets
+                // up that very turn lost to throwing the foe instead.
+                if (gAiLogicData->abilities[target] == ABILITY_ANGER_POINT && target != actor
+                 && statStage[target][0] < MAX_STAT_STAGE
+                 && !DoesSubstituteBlockMove(actor, target, move)
+                 && AI_MoveAlwaysCrits(actor, target, move))
+                    PairChangeStat(&statStage[target][0], &statModifier[target][0],
+                        MAX_STAT_STAGE - statStage[target][0], hitChance, FALSE);
                 if (gAiLogicData->holdEffects[target] == HOLD_EFFECT_WEAKNESS_POLICY
                  && !(usedItems & (1u << target))
                  && effectiveness > UQ_4_12(1.0))
@@ -5015,6 +5084,59 @@ static bool32 RefreshPairMoveData(u32 noActionMask, bool32 canStop)
     return TRUE;
 }
 
+enum
+{
+    PAIR_VISIBLE_FORECAST_NONE,
+    PAIR_VISIBLE_FORECAST_CAPTURE,
+    PAIR_VISIBLE_FORECAST_USE,
+};
+
+// The foe forecast of the board the opponent is actually looking at, kept for
+// the switch candidates of the same decision. See EvaluatePairBoard.
+static EWRAM_DATA struct
+{
+    u8 mode;
+    bool8 valid;
+    u8 count;
+    u8 weights[PAIR_FORECASTS];
+    struct PairAction forecasts[PAIR_FORECASTS][2];
+} sPairVisibleForecast = {0};
+
+// Expected value of our pair over a weighted foe forecast, with the bounded
+// pessimism share. The primary pattern's score is passed in when the caller
+// already has it, INT_MIN otherwise.
+static s32 PairForecastMixture(struct PairEvaluation *ev, enum BattlerId firstFoe, enum BattlerId secondFoe,
+    const struct PairAction forecasts[PAIR_FORECASTS][2], const u8 *weights, u32 count, s32 primary)
+{
+    if (primary == INT_MIN)
+    {
+        ev->action[firstFoe] = forecasts[0][0];
+        ev->action[secondFoe] = forecasts[0][1];
+        primary = ScorePairWithImmediateEffects(ev);
+    }
+    s32 total = primary * 100, worst = primary;
+    if (count > 1)
+    {
+        total = primary * weights[0];
+        for (u32 forecast = 1; forecast < count; forecast++)
+        {
+            // The alternative patterns can coincide with the primary one,
+            // and scoring the same four actions again cannot change the
+            // answer. Exact reuse, not an approximation.
+            if (PairSameForecast(forecasts[forecast], forecasts[0]))
+            {
+                total += primary * weights[forecast];
+                continue;
+            }
+            ev->action[firstFoe] = forecasts[forecast][0];
+            ev->action[secondFoe] = forecasts[forecast][1];
+            s32 forecastScore = ScorePairWithImmediateEffects(ev);
+            total += forecastScore * weights[forecast];
+            worst = min(worst, forecastScore);
+        }
+    }
+    return (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
+}
 
 // nonGuard, when supplied, comes back holding the best final score this board
 // reached with each of the two bodies doing something other than shielding -
@@ -5132,6 +5254,29 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     struct PairAction forecasts[PAIR_FORECASTS][2];
     u8 forecastWeights[PAIR_FORECASTS] = {0};
     u32 forecastCount = ChooseJointFoeForecast(ev, actor, forecasts, forecastWeights);
+    // The foes commit their targets against the board they can see, and our
+    // switch lands after that choice. A candidate board's own forecast lets
+    // them re-aim at a body that has not arrived yet, which can flatter the
+    // switch as easily as punish it: the Magikarp fisherman's Feebas was
+    // credited with Mirror Coating Dragon Rages re-aimed at it, and switched
+    // a Magikarp out every turn for it. A switch is therefore credited with
+    // the worse of the two readings - the foes' choice on the board they saw,
+    // and a foe that saw the switch coming - and never the better one.
+    bool32 visibleForecast = FALSE;
+    if (sPairVisibleForecast.mode == PAIR_VISIBLE_FORECAST_CAPTURE)
+    {
+        sPairVisibleForecast.count = forecastCount;
+        memcpy(sPairVisibleForecast.forecasts, forecasts, sizeof(forecasts));
+        memcpy(sPairVisibleForecast.weights, forecastWeights, sizeof(forecastWeights));
+        sPairVisibleForecast.valid = TRUE;
+    }
+    else if (sPairVisibleForecast.mode == PAIR_VISIBLE_FORECAST_USE && sPairVisibleForecast.valid)
+    {
+        visibleForecast = sPairVisibleForecast.count != forecastCount;
+        for (u32 forecast = 0; forecast < forecastCount && !visibleForecast; forecast++)
+            visibleForecast = !PairSameForecast(forecasts[forecast], sPairVisibleForecast.forecasts[forecast])
+                || forecastWeights[forecast] != sPairVisibleForecast.weights[forecast];
+    }
     enum BattlerId firstFoe = GetOppositeBattler(actor);
     enum BattlerId secondFoe = GetPartnerBattler(firstFoe);
     bool32 canWait = PairWaitingHasPayoff(ev, actor);
@@ -5247,30 +5392,13 @@ settle:
     mixed = forecastCount > 1;
     for (u32 entry = 0; entry < shortCount; entry++)
     {
-        s32 total = shortlist[entry].score * 100, worst = shortlist[entry].score;
         ev->action[actor] = ev->choices[actor][shortlist[entry].left];
         ev->action[partner] = ev->choices[partner][shortlist[entry].right];
-        if (mixed)
-        {
-            total = shortlist[entry].score * forecastWeights[0];
-            for (u32 forecast = 1; forecast < forecastCount; forecast++)
-            {
-                // The alternative patterns can coincide with the primary one,
-                // and scoring the same four actions again cannot change the
-                // answer. Exact reuse, not an approximation.
-                if (PairSameForecast(forecasts[forecast], forecasts[0]))
-                {
-                    total += shortlist[entry].score * forecastWeights[forecast];
-                    continue;
-                }
-                ev->action[firstFoe] = forecasts[forecast][0];
-                ev->action[secondFoe] = forecasts[forecast][1];
-                s32 forecastScore = ScorePairWithImmediateEffects(ev);
-                total += forecastScore * forecastWeights[forecast];
-                worst = min(worst, forecastScore);
-            }
-        }
-        s32 score = (total / 100 * (100 - PAIR_RISK_AVERSION) + worst * PAIR_RISK_AVERSION) / 100;
+        s32 score = PairForecastMixture(ev, firstFoe, secondFoe, forecasts, forecastWeights,
+            mixed ? forecastCount : 1, shortlist[entry].score);
+        if (visibleForecast)
+            score = min(score, PairForecastMixture(ev, firstFoe, secondFoe, sPairVisibleForecast.forecasts,
+                sPairVisibleForecast.weights, sPairVisibleForecast.count, INT_MIN));
         if (nonGuard != NULL)
         {
             // Every scored pair, not just the one that won. The old margin was
@@ -5930,6 +6058,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     for (u32 index = 0; index < 2; index++)
         bestActions[index] = (struct PairAction){MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actors[index]};
     u32 bestReserves[2] = {PARTY_SIZE, PARTY_SIZE};
+    sPairVisibleForecast.valid = FALSE;
     u32 bestMega = 0, bestTieCost = UINT_MAX;
     s32 bestStay = INT_MIN; // Best board that keeps both bodies, for the trace.
     s32 bestNonGuard[2] = {INT_MIN, INT_MIN}; // Best board where each attacked.
@@ -6040,6 +6169,9 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                 // Mega ever evolved. A form change is not optional work, so
                 // the Mega boards finish the way a countdown exit does.
                 s32 boardNonGuard[2];
+                // The unchanged board is the one the foes choose against.
+                sPairVisibleForecast.mode = slots[0] < PARTY_SIZE || slots[1] < PARTY_SIZE ? PAIR_VISIBLE_FORECAST_USE
+                    : mega == 0 ? PAIR_VISIBLE_FORECAST_CAPTURE : PAIR_VISIBLE_FORECAST_NONE;
                 s32 score = EvaluatePairBoard(actor, noActionMask, chosen, ev,
                     mega != 0 || noActionMask != 0, canStop,
                     deadline[0] || deadline[1] || mega != 0, boardNonGuard);
@@ -6127,6 +6259,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
         }
     }
 decisionReady:
+    sPairVisibleForecast.mode = PAIR_VISIBLE_FORECAST_NONE;
     AI_RestoreCandidateState(state);
     bool32 attackPivot[2] = {FALSE, FALSE};
     if (!bestMega)

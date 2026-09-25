@@ -2033,3 +2033,105 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's activation survives a board
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], MAX_STAT_STAGE);
     }
 }
+
+// A player body with a benchmark's preparation: cap level, perfect IVs and
+// the given set, through the same preset path the Center uses.
+static void PreparedPlayer(enum Species species, u32 level, const struct EmeraldChampionsBattleSet *set)
+{
+    struct Pokemon mon;
+    CreateRandomMonWithIVs(&mon, species, level, MAX_PER_STAT_IVS);
+    EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, set), EC_BATTLE_SET_SUCCESS);
+    CalculateMonStats(&mon);
+    PLAYER(species) {
+        *gBattleTestRunnerState->data.currentMon = mon;
+        Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+        Moves(set->moves[0], set->moves[1], set->moves[2], set->moves[3]);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Aisha's Storm Throw is priced by the boosted reply it enables")
+{
+    GIVEN {
+        // Throwing Mawile beside Close Combat was a sure knockout, and the
+        // trial never let the thrown Tauros hit at +6, so the activation
+        // looked like self-damage and lost. Anger Point fires before the
+        // slower Tauros acts, and its maximum-Attack Close Combat takes the
+        // same knockout while the authored boost stays on the board.
+        const struct EmeraldChampionsBattleSet mawile = {
+            .moves = {MOVE_IRON_HEAD, MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_INTIMIDATE,
+        };
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); HP(400); MaxHP(400); Defense(300); SpDefense(300); Speed(10); Moves(MOVE_SPLASH); }
+        PreparedPlayer(SPECIES_MAWILE, 30, &mawile);
+        // Route117 is available before Wattson: two badges, cap30.
+        AuthoredOpponent(TRAINER_AISHA, 2, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_PROTECT);
+            EXPECT_MOVE(opponentLeft, MOVE_STORM_THROW, target: opponentRight);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->statStages[STAT_ATK], MAX_STAT_STAGE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: the fisherman's Magikarp takes the Dragon Rage it cannot dodge")
+{
+    GIVEN {
+        // The player aims at the Magikarp standing there, and our switch
+        // lands after that choice: the incoming body eats the same fixed 80.
+        // Scored only on its own board, the switch let both Dragon Rages
+        // re-aim at Feebas and credited Mirror Coat with returning them, so
+        // the Magikarp left every time it was targeted.
+        const struct EmeraldChampionsBattleSet karp = {
+            .moves = {MOVE_DRAGON_RAGE, MOVE_FLAIL, MOVE_BOUNCE, MOVE_TACKLE},
+            .item = ITEM_FOCUS_SASH, .nature = NATURE_JOLLY, .ability = ABILITY_SWIFT_SWIM,
+            .evs = {252, 0, 4, 0, 0, 252},
+        };
+        PreparedPlayer(SPECIES_MAGIKARP, 55, &karp);
+        PreparedPlayer(SPECIES_MAGIKARP, 55, &karp);
+        // Route 118's fisherman is met after the fifth badge.
+        AuthoredOpponent(TRAINER_MAGIKARP_GUY, 5, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DRAGON_RAGE, target: opponentLeft);
+            MOVE(playerRight, MOVE_DRAGON_RAGE, target: opponentLeft);
+            EXPECT_MOVES(opponentLeft, MOVE_FLAIL, MOVE_BOUNCE, MOVE_TACKLE);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_MIRROR_COAT);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_MAGIKARP);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Jaclyn's Wobbuffet never Encores its own partner")
+{
+    GIVEN {
+        // The benchmark line: both foes already encored, Safeguard up and
+        // Counter/Mirror Coat unable to touch a Ghost or Dark body. Encoring
+        // the fresh Gallade looked free because the lock only bites later;
+        // the plan's Encore is for a foe's completed move.
+        const struct EmeraldChampionsBattleSet sets[] = {
+            {.moves = {MOVE_FAKE_OUT, MOVE_WILL_O_WISP, MOVE_FOUL_PLAY, MOVE_PROTECT}, .item = ITEM_SITRUS_BERRY, .nature = NATURE_CAREFUL, .ability = ABILITY_PRANKSTER},
+            {.moves = {MOVE_DARK_PULSE, MOVE_HEAT_WAVE, MOVE_NASTY_PLOT, MOVE_PROTECT}, .item = ITEM_CHOICE_SPECS, .nature = NATURE_TIMID, .ability = ABILITY_FLASH_FIRE},
+            {.moves = {MOVE_IRON_HEAD, MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_PROTECT}, .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_INTIMIDATE},
+        };
+        PreparedPlayer(SPECIES_SABLEYE, 30, &sets[0]);
+        PreparedPlayer(SPECIES_HOUNDOOM, 30, &sets[1]);
+        PreparedPlayer(SPECIES_MAWILE, 30, &sets[2]);
+        // Route117 is available before Wattson: two badges, cap30.
+        AuthoredOpponent(TRAINER_JACLYN, 2, FALSE);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentRight); MOVE(playerRight, MOVE_DARK_PULSE, target: opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_DARK_PULSE, target: opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_DARK_PULSE, target: opponentRight); }
+        TURN {
+            SWITCH(playerLeft, 2);
+            MOVE(playerRight, MOVE_DARK_PULSE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_ENCORE);
+        }
+    } THEN {
+        EXPECT_EQ(opponentRight->species, SPECIES_GALLADE);
+    }
+}

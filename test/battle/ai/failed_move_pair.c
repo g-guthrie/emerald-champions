@@ -246,3 +246,23 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a move tha
         TURN { MOVE(player, MOVE_CELEBRATE); SCORE_LT_VAL(opponent, MOVE_ENCORE, AI_SCORE_DEFAULT); }
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice Scarf Imposter does not lock itself into Protect")
+{
+    GIVEN {
+        // Transform copies Protect with the rest of the set. Under the Scarf
+        // a status move is a lock with nothing in it: Timmy's Ditto shielded
+        // once and then repeated a failing Protect until it fell. A shield
+        // that is worth a turn to an unlocked body is not worth that.
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_MACHAMP) { Level(30); Speed(80); Moves(MOVE_CLOSE_COMBAT, MOVE_PROTECT); }
+        PLAYER(SPECIES_SNORLAX) { Level(30); Speed(70); Moves(MOVE_PROTECT, MOVE_TACKLE, MOVE_SPLASH); }
+        OPPONENT(SPECIES_DITTO) { Level(30); Ability(ABILITY_IMPOSTER); Item(ITEM_CHOICE_SCARF); Speed(40); Moves(MOVE_TRANSFORM); }
+        OPPONENT(SPECIES_MAGIKARP) { Level(30); Speed(10); Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CLOSE_COMBAT, target: opponentLeft); MOVE(playerRight, MOVE_SPLASH); }
+    } SCENE {
+        // Its moves are the copied Snorlax's, not the declared set.
+        NONE_OF { MESSAGE("The opposing Ditto used Protect!"); }
+    }
+}
