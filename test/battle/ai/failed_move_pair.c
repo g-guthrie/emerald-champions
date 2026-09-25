@@ -467,6 +467,63 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: an Attack or Sp. Atk drop keeps its valu
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a side does not use Trick Room under its own room")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        // The room pays against the two fast leads. Two slow bodies replace
+        // them, and now both of the AI's bodies outspeed the other side, but
+        // another Trick Room sets nothing: it ends the room this side set.
+        // Tate & Liza's Cresselia twisted the dimensions back the turn after
+        // twisting them.
+        PLAYER(SPECIES_WEAVILE) { Speed(150); Moves(MOVE_KNOCK_OFF, MOVE_PROTECT); }
+        PLAYER(SPECIES_JOLTEON) { Speed(140); Moves(MOVE_THUNDERBOLT, MOVE_PROTECT); }
+        PLAYER(SPECIES_HOUNDOOM) { HP(900); MaxHP(900); Speed(10); Moves(MOVE_CRUNCH, MOVE_PROTECT); }
+        PLAYER(SPECIES_UMBREON) { HP(900); MaxHP(900); Speed(10); Moves(MOVE_FOUL_PLAY, MOVE_PROTECT); }
+        OPPONENT(SPECIES_CRESSELIA) { Speed(60); Moves(MOVE_PSYCHIC, MOVE_TRICK_ROOM, MOVE_ICY_WIND, MOVE_PROTECT); }
+        OPPONENT(SPECIES_REUNICLUS) { Speed(40); Moves(MOVE_PSYCHIC, MOVE_FOCUS_BLAST, MOVE_PROTECT, MOVE_SHADOW_BALL); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_PROTECT);
+            EXPECT_MOVE(opponentLeft, MOVE_TRICK_ROOM);
+        }
+        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
+        TURN {
+            MOVE(playerLeft, MOVE_CRUNCH, target: opponentLeft);
+            MOVE(playerRight, MOVE_FOUL_PLAY, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_TRICK_ROOM);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Taunt is not aimed at a body whose only status move is Protect")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        // Wattson's Electrode, all of whose Electric attacks the Lightning
+        // Rod Marowak took, taunted that Marowak - whose only status move is
+        // Protect - because the body beside it held Trick Room. Here that body
+        // is Oblivious, so the room cannot be taken either; taking Protect
+        // alone is not worth the turn.
+        PLAYER(SPECIES_MAROWAK) { Speed(40); Ability(ABILITY_LIGHTNING_ROD); Moves(MOVE_BONEMERANG, MOVE_ROCK_SLIDE, MOVE_PROTECT); }
+        PLAYER(SPECIES_SLOWBRO) { Speed(20); Ability(ABILITY_OBLIVIOUS); Moves(MOVE_TRICK_ROOM, MOVE_LIGHT_SCREEN, MOVE_SCALD, MOVE_PROTECT); }
+        OPPONENT(SPECIES_JOLTEON) { Speed(130); Moves(MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_TAUNT, MOVE_PROTECT); }
+        OPPONENT(SPECIES_GALVANTULA) { Speed(108); Moves(MOVE_BUG_BUZZ, MOVE_ENERGY_BALL, MOVE_PROTECT); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_ROCK_SLIDE);
+            MOVE(playerRight, MOVE_SCALD, target: opponentLeft);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_ROCK_SLIDE);
+            MOVE(playerRight, MOVE_SCALD, target: opponentLeft);
+        }
+    } THEN {
+        EXPECT_EQ((u32)playerLeft->volatiles.tauntTimer, 0);
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("EC failed moves: a drop is not judged useless on a moveset the AI has not seen")
 {
     GIVEN {

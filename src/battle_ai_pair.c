@@ -105,6 +105,13 @@
 // nothing; the trial already gives it no benefit, and this makes it lose to an
 // action that does something rather than to a tie.
 #define PAIR_SUPPORT_WASTED_COST 40
+// A move that fails on the board a visible foe's Mega leaves. Trainers Mega
+// on the first turn they can, so that board is the forecast; this is the
+// failure priced as likely rather than the certain-failure veto.
+#define PAIR_MEGA_FORECAST_FAIL_COST 150
+// A hit on a foe the end of the turn finishes after its own last action. Not
+// a veto: a switch out of that slot would meet the hit instead.
+#define PAIR_DOOMED_TARGET_COST 100
 
 // A single turn cannot see what a boost, a sleep or a stat drop is worth,
 // because all of their value arrives on the turns after this one. Without an
@@ -1401,6 +1408,16 @@ static bool32 PairSecondCopyFails(enum BattleSide side, const struct PairAction 
     }
 }
 
+// Helping Hand multiplies the partner's attack this turn. The pair picks both
+// actions, so a partner spending the turn on a status move - a screen, a
+// guard, a boost - or not acting at all leaves the boost nothing to multiply:
+// Blake's Meowstic helped its partner's Reflect.
+static bool32 PairHelpsNothing(const struct PairAction *mine, const struct PairAction *theirs)
+{
+    return GetMoveEffect(mine->executedMove) == EFFECT_HELPING_HAND
+        && (theirs->index == PAIR_IDLE || IsBattleMoveStatus(theirs->executedMove));
+}
+
 // What a foe's own history with this body says about a Counter or Mirror
 // Coat: the move it last landed on the body while both have stayed in. It is
 // public and it is about this body, where the side's last moves may have been
@@ -1436,6 +1453,41 @@ static bool32 PairStatusEndsChoiceLock(enum BattleMoveEffects effect)
     }
 }
 
+// A plain hit on a foe whose last action this turn is already behind it: the
+// end of the turn is certain to finish it (AI_WillFaintFromResidual) and it
+// visibly moves before this attack does. Nothing the hit does - damage, a
+// secondary on the target - outlives the residual, so while another foe
+// stands, this one is a spent turn. Drains, self effects and
+// anything that is not a plain hit keep their own value and are not judged.
+static bool32 PairHitsOnlyAfterLastAction(enum BattlerId actor, const struct PairAction *action)
+{
+    enum BattlerId target = action->target;
+    enum Move move = action->executedMove;
+    if (action->index == PAIR_IDLE || IsBattleMoveStatus(move)
+     || AI_GetBattlerMoveTargetType(actor, move) != TARGET_SELECTED
+     || GetMoveEffect(move) != EFFECT_HIT || target >= gBattlersCount || !IsBattlerAlive(target)
+     || IsBattlerAlly(actor, target) || !AI_WillFaintFromResidual(target))
+        return FALSE;
+    for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
+    {
+        const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, effectIndex);
+        if (additional->self || additional->moveEffect == MOVE_EFFECT_ABSORB)
+            return FALSE;
+    }
+    if (AI_GetMovePriority(actor, gAiLogicData->abilities[actor], move) > 0)
+        return FALSE;
+    u32 mine = gAiLogicData->speedStats[actor], theirs = gAiLogicData->speedStats[target];
+    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM ? mine <= theirs : mine >= theirs)
+        return FALSE;
+    // Another foe that stays is where this turn belongs, by this move or any
+    // other the user holds.
+    for (enum BattlerId other = 0; other < gBattlersCount; other++)
+        if (other != target && IsBattlerAlive(other) && !IsBattlerAlly(actor, other)
+         && !AI_WillFaintFromResidual(other))
+            return TRUE;
+    return FALSE;
+}
+
 static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
 {
     s32 score = PairPlanScoreInner(actor, action);
@@ -1465,6 +1517,16 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove)
      || AI_IsSpreadMoveWasted(actor, action->executedMove))
         return -10000;
+    // The board a visible Mega leaves is the one this turn's moves most
+    // likely meet. A move that fails there is priced as the failure it will
+    // almost always be, short of the certain-failure veto.
+    if (AI_IsMoveLikelyToFailAfterFoeMega(actor, action->target, action->executedMove))
+        return -PAIR_MEGA_FORECAST_FAIL_COST;
+    // A foe the end of the turn will finish is not worth a hit it takes after
+    // its own last action, when another target stands: Norman's Weezing
+    // Sludge Bombed a 10 HP poisoned Blaziken that had already moved.
+    if (PairHitsOnlyAfterLastAction(actor, action))
+        return -PAIR_DOOMED_TARGET_COST;
     // A last-turn "refresh" costs both actions and can cancel itself when one
     // setter is interrupted. Let the room expire and establish it next turn.
     if (effect == EFFECT_TRICK_ROOM)
@@ -1798,14 +1860,17 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     }
     if (effect == EFFECT_TAUNT)
     {
-        // Taunt spends the whole turn to take a move away. If nothing on the
-        // other side is holding a status move - or everything that is has
-        // already been taunted - there is nothing on the board to take.
+        // Taunt spends the whole turn to take a move away. If the body it is
+        // aimed at holds no status move - or has already been taunted - there
+        // is nothing to take from it, whatever its partner holds: Wattson's
+        // Electrode taunted a Marowak whose only status move was Protect
+        // while the Trick Room setter stood beside it.
         bool32 worthTaking = FALSE;
         for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         {
             if (!IsBattlerAlive(foe) || IsBattlerAlly(actor, foe)
-             || gBattleMons[foe].volatiles.tauntTimer)
+             || gBattleMons[foe].volatiles.tauntTimer
+             || (IsBattlerAlive(action->target) && !IsBattlerAlly(actor, action->target) && foe != action->target))
                 continue;
             for (u32 index = 0; index < MAX_MON_MOVES; index++)
             {
@@ -3361,6 +3426,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     s32 guardDenied[MAX_BATTLERS_COUNT] = {0};
     u32 guardUsed = 0;
     s32 tacticReward[MAX_BATTLERS_COUNT] = {0};
+    s32 setupReward[MAX_BATTLERS_COUNT] = {0};
     u8 sideGuardUser[NUM_BATTLE_SIDES][2];
     memset(sideGuardUser, MAX_BATTLERS_COUNT, sizeof(sideGuardUser));
     u32 weather = ev->weather;
@@ -3394,7 +3460,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         for (u32 stat = 0; stat < 4; stat++)
             statModifier[actor][stat] = 100;
         if (GetBattlerSide(actor) == ev->side && actions[actor].index != PAIR_IDLE
-         && PairSecondCopyFails(ev->side, &actions[actor], &actions[GetPartnerBattler(actor)]))
+         && (PairSecondCopyFails(ev->side, &actions[actor], &actions[GetPartnerBattler(actor)])
+          || PairHelpsNothing(&actions[actor], &actions[GetPartnerBattler(actor)])))
             return -10000;
     }
     for (u32 turn = 0; turn < gBattlersCount || pendingDancers;)
@@ -3514,10 +3581,21 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (sign > 0 && !copy)
         {
             s32 planScore = action->planScore;
+            // A status move's reward is paid only where its payoff lands: a
+            // self-boost in the branches where its user is still standing at
+            // the end of the turn, anything else in those where the user is
+            // alive to act now. The trial already gates the effect itself;
+            // the plan and opinion rewards rode on a user that the forecast
+            // had knocked out: Juan's Manaphy Tail Glowed into the Wild Charge
+            // that ended it.
+            s32 statusReward = 0;
+            bool32 statusPayoff = IsBattleMoveStatus(action->executedMove) && effect != EFFECT_PROTECT;
             if (planScore <= -10000)
                 return -10000;
             if (move == MOVE_COACHING && planScore > 0)
                 coachingOpinion += planScore;
+            else if (statusPayoff && planScore > 0)
+                statusReward += planScore;
             else
                 score += planScore;
             // Deferred: an activation that kills its own recipient is not the
@@ -3561,12 +3639,18 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     s32 opinion = (action->score - AI_SCORE_DEFAULT) * 4;
                     if (move == MOVE_COACHING && opinion > 0)
                         coachingOpinion += opinion;
+                    else if (statusPayoff && opinion > 0)
+                        statusReward += opinion;
                     else if (opinion <= 0 || IsBattleMoveStatus(action->executedMove))
                         score += opinion;
                     else
                         damageOpinion = opinion;
                 }
             }
+            if (statusReward && IsStatRaisingMove(move) && AI_GetBattlerMoveTargetType(actor, move) == TARGET_USER)
+                setupReward[actor] += statusReward;
+            else if (statusReward)
+                score += statusReward * (s32)(survival[actor] * actionChance[actor] / 10000) / 100;
         }
         if (effect == EFFECT_BELLY_DRUM)
         {
@@ -3681,10 +3765,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (hp[partner] && !(acted & (1u << partner))
              && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD
              && !IsFixedDamageMove(other->executedMove)
-             // A partner spending its own turn behind a shield has no damage
-             // to multiply, and this pair is choosing both actions together,
-             // so it knows that before it commits.
-             && GetMoveEffect(other->executedMove) != EFFECT_PROTECT)
+             // A partner spending its own turn behind a shield, or on any
+             // other status move, has no damage to multiply, and this pair is
+             // choosing both actions together, so it knows that before it
+             // commits: Blake's Meowstic helped a Reflect.
+             && !IsBattleMoveStatus(other->executedMove))
                 boost[partner] = boost[partner] * 3 / 2;
             else if (sign > 0 && !copy)
                 // Nothing to boost: the partner is leaving, has already acted,
@@ -5015,6 +5100,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             break;
         }
     }
+    // A self-boost's plan and opinion reward, in the branches where its user
+    // lives to use the boost.
+    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        if (setupReward[actor] && hp[actor])
+            score += setupReward[actor] * (s32)survival[actor] / 100;
     // Next-turn value that a one-turn board cannot see. Each term is paid only
     // when the effect actually landed in this trial and its owner or victim is
     // still standing at the end of it, so a boost that gets its user killed and

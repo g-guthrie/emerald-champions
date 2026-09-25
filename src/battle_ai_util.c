@@ -7090,6 +7090,164 @@ bool32 AI_IsSpreadMoveWasted(enum BattlerId battlerAtk, enum Move move)
     return TRUE;
 }
 
+// Which of the user's own stats a damaging move reads to hit: Attack, Sp.
+// Atk, or (Body Press) Defense. Fixed damage and Foul Play read none of them.
+#define AI_USES_DEFENSE (1u << 2)
+static u32 AI_OffenseStatsOfMove(enum Move move)
+{
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsBattleMoveStatus(move) || IsFixedDamageMove(move))
+        return 0;
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_FOUL_PLAY:
+        return 0;
+    case EFFECT_BODY_PRESS:
+        return AI_USES_DEFENSE;
+    case EFFECT_PHOTON_GEYSER:
+    case EFFECT_SHELL_SIDE_ARM:
+        return AI_USES_ATTACK | AI_USES_SPATK;
+    default:
+        return IsBattleMovePhysical(move) ? AI_USES_ATTACK : AI_USES_SPATK;
+    }
+}
+
+// A self-boost whose every raised stat has nothing to pay it. Attack and Sp.
+// Atk pay through an attack of the user's that reads them and lands on a
+// living foe; Defense through a landing Body Press, or through physical hits
+// from the other side worth trimming (an eighth of the user's HP or more);
+// Sp. Def the same for special hits; Speed through anything else the user
+// does to the board. Baton Pass and Stored Power cash any boost at all. A foe
+// carrying a Spectral Thief that can hit the user takes every boost before
+// its hit lands, so nothing pays. Wallace's Zamazenta raised Defense four
+// times into two Ghosts that Body Press cannot touch, one a Sableye whose
+// Knock Off barely scratches it. A foe moveset the AI has not fully seen is
+// assumed to hit in both categories.
+#define AI_BOOST_SPEED  (1u << 3)
+#define AI_BOOST_SPDEF  (1u << 4)
+static bool32 AI_IsSelfBoostWithoutPayoff(enum BattlerId battlerAtk, enum Move move)
+{
+    if (gAiLogicData->abilities[battlerAtk] == ABILITY_CONTRARY)
+        return FALSE;
+    u32 raised = 0;
+    for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
+    {
+        const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, effectIndex);
+        if (additional->moveEffect != STAT_CHANGE_EFFECT_PLUS)
+            continue;
+        for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
+        {
+            if (GetStatStage(stat, additional) == 0)
+                continue;
+            switch (stat)
+            {
+            case STAT_ATK:   raised |= AI_USES_ATTACK;  break;
+            case STAT_SPATK: raised |= AI_USES_SPATK;   break;
+            case STAT_DEF:   raised |= AI_USES_DEFENSE; break;
+            case STAT_SPDEF: raised |= AI_BOOST_SPDEF;  break;
+            case STAT_SPEED: raised |= AI_BOOST_SPEED;  break;
+            default:         return FALSE; // accuracy and evasion always count
+            }
+        }
+    }
+    if (!raised)
+        return FALSE;
+
+    u32 paid = 0;
+    u32 threshold = max(1, gBattleMons[battlerAtk].maxHP / 8);
+    bool32 anyFoe = FALSE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battlerAtk, foe))
+            continue;
+        anyFoe = TRUE;
+        enum Move *foeMoves = GetMovesArray(foe);
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            if (foeMoves[slot] != MOVE_NONE && foeMoves[slot] != MOVE_UNAVAILABLE
+             && MoveHasAdditionalEffect(foeMoves[slot], MOVE_EFFECT_STEAL_STATS)
+             && !AI_FoeTakesNothingFrom(foe, battlerAtk, foeMoves[slot]))
+                return TRUE;
+        if (!AI_KnowsWholeMoveset(foe))
+        {
+            paid |= AI_USES_DEFENSE | AI_BOOST_SPDEF;
+            continue;
+        }
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            enum Move known = gBattleMons[foe].moves[slot];
+            if (known == MOVE_NONE || known == MOVE_UNAVAILABLE || IsBattleMoveStatus(known) || IsFixedDamageMove(known)
+             || gAiLogicData->simulatedDmg[foe][battlerAtk][slot].maximum < threshold)
+                continue;
+            if (IsBattleMovePhysical(known) || GetMoveEffect(known) == EFFECT_PSYSHOCK)
+                paid |= AI_USES_DEFENSE;
+            else
+                paid |= AI_BOOST_SPDEF;
+        }
+    }
+    if (!anyFoe)
+        return FALSE;
+
+    enum Move *moves = GetMovesArray(battlerAtk);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move known = moves[slot];
+        if (known == MOVE_NONE || known == MOVE_UNAVAILABLE || known == move)
+            continue;
+        enum BattleMoveEffects effect = GetMoveEffect(known);
+        if (effect == EFFECT_BATON_PASS || effect == EFFECT_STORED_POWER)
+            return FALSE;
+        if (IsBattleMoveStatus(known))
+        {
+            // Turn order serves any other move that acts on the board.
+            if (effect != EFFECT_PROTECT && !(effect == EFFECT_STAT_CHANGE
+                && AI_GetBattlerMoveTargetType(battlerAtk, known) == TARGET_USER))
+                paid |= AI_BOOST_SPEED;
+            continue;
+        }
+        u32 offense = AI_OffenseStatsOfMove(known);
+        for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        {
+            if (IsBattlerAlive(foe) && !IsBattlerAlly(battlerAtk, foe)
+             && !AI_FoeTakesNothingFrom(battlerAtk, foe, known))
+            {
+                paid |= offense | AI_BOOST_SPEED;
+                break;
+            }
+        }
+    }
+    return (raised & paid) == 0;
+}
+
+// A battler the end of this turn is certain to finish: its poison, burn,
+// weather, Leech Seed, curse, trap or nightmare damage covers what HP it has,
+// and nothing visible heals or cures it first (Leftovers, Black Sludge,
+// Grassy Terrain, Aqua Ring, Ingrain, a due Wish, Shed Skin, Hydration, a
+// Healer partner). Whatever it does this turn is its last action.
+bool32 AI_WillFaintFromResidual(enum BattlerId battler)
+{
+    if (!IsBattlerAlive(battler))
+        return FALSE;
+    enum Ability ability = gAiLogicData->abilities[battler];
+    enum HoldEffect holdEffect = gAiLogicData->holdEffects[battler];
+    u32 damage = GetBattlerSecondaryDamage(battler);
+    if ((gBattleMons[battler].status1 & STATUS1_BURN) && ability != ABILITY_MAGIC_GUARD)
+    {
+        u32 burn = GetNonDynamaxMaxHP(battler)
+            / ((GetConfig(B_BURN_DAMAGE) >= GEN_7 || GetConfig(B_BURN_DAMAGE) == GEN_1) ? 16 : 8);
+        damage += ability == ABILITY_HEATPROOF ? burn / 2 : burn;
+    }
+    if (damage == 0 || damage < gBattleMons[battler].hp)
+        return FALSE;
+    enum BattlerId partner = GetPartnerBattler(battler);
+    if (holdEffect == HOLD_EFFECT_LEFTOVERS || holdEffect == HOLD_EFFECT_BLACK_SLUDGE
+     || gBattleMons[battler].volatiles.aquaRing || gBattleMons[battler].volatiles.root
+     || gBattleStruct->wish[battler].counter == 1
+     || ability == ABILITY_SHED_SKIN || ability == ABILITY_HYDRATION
+     || (HasPartner(battler) && IsBattlerAlive(partner) && gAiLogicData->abilities[partner] == ABILITY_HEALER)
+     || (gFieldTimers.terrain == B_TERRAIN_GRASSY && AI_IsBattlerGrounded(battler)))
+        return FALSE;
+    return TRUE;
+}
+
 // A status move the engine is certain to refuse on the board the AI can see:
 // the effect it sets is already in place, or the target is immune to it by
 // type, ability, item, Substitute or field. These mirror the engine's own fail
@@ -7098,7 +7256,9 @@ bool32 AI_IsSpreadMoveWasted(enum BattlerId battlerAtk, enum Move move)
 // Anything that hinges on this turn's unrevealed commands - a switch, a
 // redirection, a Protect - is not certain and is never judged here. An Attack
 // or Sp. Atk drop on a foe that never uses that stat counts too: it lands and
-// does nothing (AI_IsFoeStatDropUseless).
+// does nothing (AI_IsFoeStatDropUseless), as does a self-boost that nothing
+// can cash (AI_IsSelfBoostWithoutPayoff). By owner rule, healing at full HP
+// and a Trick Room under the side's own room count as failures as well.
 bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
     struct AiLogicData *aiData = gAiLogicData;
@@ -7158,10 +7318,27 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
         return TRUE;
     }
     case EFFECT_STAT_CHANGE:
-        // Self-boosts fail when no stat can move, the native CanStatChange.
+        // Self-boosts fail when no stat can move, the native CanStatChange,
+        // and do nothing when no raised stat has anything to pay it.
         if (AI_GetBattlerMoveTargetType(battlerAtk, move) == TARGET_USER)
-            return !AI_CanAnyStatChange(battlerAtk, battlerAtk, move);
+            return !AI_CanAnyStatChange(battlerAtk, battlerAtk, move)
+                || AI_IsSelfBoostWithoutPayoff(battlerAtk, move);
         break;
+    case EFFECT_TRICK_ROOM:
+        // Under this side's own room the move does not set anything: it ends
+        // the room it set. Tate & Liza's Cresselia twisted the dimensions back
+        // the turn after twisting them.
+        return (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) && gFieldTimers.trickRoomSetter == 1 + side;
+    case EFFECT_RESTORE_HP:
+    case EFFECT_SOFTBOILED:
+    case EFFECT_ROOST:
+    case EFFECT_MORNING_SUN:
+    case EFFECT_SYNTHESIS:
+    case EFFECT_MOONLIGHT:
+    case EFFECT_SHORE_UP:
+    case EFFECT_REST:
+        // "Its HP is full": Josh's Naclstack Recovered at 53/53.
+        return gBattleMons[battlerAtk].hp >= gBattleMons[battlerAtk].maxHP;
     default:
         break;
     }
@@ -7263,6 +7440,61 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     default:
         return FALSE;
     }
+}
+
+// Whether a move fails, or loses at least half its damage, on the board a
+// visible foe's Mega Evolution this turn would leave: the new form's types
+// and ability, and the weather that ability brings in. Mega Evolution happens
+// before any move, and a trainer who can Mega almost always does so at once,
+// so the caller weighs this as the likely board, not a certain one. Matt's
+// Grimmsnarl Prankster Thunder Waved a Gyarados that became Dark, Glacia's
+// Ninetales raised Aurora Veil into Charizard Y's sun, and Archie's Pelipper
+// threw a rain Weather Ball that the sun turned to Fire. What the foe holds
+// and whether it can Mega are public; its command is never read.
+bool32 AI_IsMoveLikelyToFailAfterFoeMega(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    struct AiLogicData *aiData = gAiLogicData;
+    bool32 damaging = !IsBattleMoveStatus(move) && battlerDef != battlerAtk && IsBattlerAlive(battlerDef)
+        && !IsBattlerAlly(battlerAtk, battlerDef);
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battlerAtk, foe) || !CanMegaEvolve(foe))
+            continue;
+        u32 savedWeather = gBattleWeather;
+        struct BattlePokemon savedMon = gBattleMons[foe];
+        enum Ability savedAbility = aiData->abilities[foe];
+        u16 savedSpeed = aiData->speedStats[foe];
+        u8 savedHpPercent = aiData->hpPercents[foe];
+        if (!AI_ApplyMegaForm(foe))
+            continue;
+        u32 megaWeather = AI_GetSwitchinWeather(foe);
+        gBattleWeather = megaWeather;
+        bool32 fails = damaging
+            ? (battlerDef == foe && AI_FoeTakesNothingFrom(battlerAtk, battlerDef, move))
+            : AI_IsMoveCertainToFail(battlerAtk, battlerDef, move);
+        SetActiveGimmick(foe, GIMMICK_NONE);
+        gBattleMons[foe] = savedMon;
+        aiData->abilities[foe] = savedAbility;
+        aiData->speedStats[foe] = savedSpeed;
+        aiData->hpPercents[foe] = savedHpPercent;
+        gBattleWeather = savedWeather;
+        if (!fails && damaging && megaWeather != savedWeather)
+        {
+            // A weather-borne loss: the same attack on the weather the Mega
+            // brings in (and, into the Mega itself, on its new form).
+            uq4_12_t effectiveness;
+            u32 before = AI_CalcDamageSaveBattlers(move, battlerAtk, battlerDef, &effectiveness,
+                GIMMICK_NONE, GIMMICK_NONE).median;
+            gBattleWeather = megaWeather;
+            u32 after = AI_CalcDamageSaveBattlers(move, battlerAtk, battlerDef, &effectiveness,
+                GIMMICK_NONE, battlerDef == foe ? GIMMICK_MEGA : GIMMICK_NONE).median;
+            gBattleWeather = savedWeather;
+            fails = before != 0 && after * 2 <= before;
+        }
+        if (fails)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 u32 GetActiveBattlerIds(enum BattlerId battler, enum BattlerId *battlerIn1, enum BattlerId *battlerIn2)

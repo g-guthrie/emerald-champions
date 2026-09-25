@@ -178,6 +178,7 @@ struct FieldTimer
     u8 wonderRoomTimer;
     u8 magicRoomTimer;
     u8 trickRoomTimer;
+    u8 trickRoomSetter; // 1 + side of the battler whose Trick Room is up; 0 unknown (a starting room)
     u8 terrain;
     u8 terrainTimer;
     u8 gravityTimer;

@@ -7099,6 +7099,7 @@ static void Cmd_setroom(void)
     {
     case EFFECT_TRICK_ROOM:
         HandleRoomMove(STATUS_FIELD_TRICK_ROOM, &gFieldTimers.trickRoomTimer, 0);
+        gFieldTimers.trickRoomSetter = (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) ? 1 + GetBattlerSide(gBattlerAttacker) : 0;
         break;
     case EFFECT_WONDER_ROOM:
         HandleRoomMove(STATUS_FIELD_WONDER_ROOM, &gFieldTimers.wonderRoomTimer, 2);

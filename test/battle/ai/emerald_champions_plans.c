@@ -100,6 +100,9 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
 // leads that board had on the field.
 struct AuthoredInjury { enum Species species; u16 hp; };
 EWRAM_DATA static struct AuthoredInjury sAuthoredInjuries[4] = {0};
+// A benchmark board whose left lead is a later member: that party slot trades
+// places with slot 0. Consumed like the injuries.
+EWRAM_DATA static u8 sAuthoredLeadSlot = 0;
 EWRAM_DATA static enum Species sAuthoredLeads[2] = {0};
 
 // Use the compiled campaign loadouts and production stat/level generation,
@@ -123,6 +126,17 @@ static void AuthoredOpponentWithPartner(u16 trainerId, u32 badges, bool32 injure
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
     CreateNPCTrainerPartyFromTrainer(party, trainer);
     EXPECT(partnerSlot < trainer->partySize);
+    if (sAuthoredLeadSlot != 0)
+    {
+        // Same fixture rule as the partner swap: non-Mega leads only.
+        EXPECT(sAuthoredLeadSlot < trainer->partySize && sAuthoredLeadSlot != partnerSlot);
+        struct Pokemon swap = party[0];
+        party[0] = party[sAuthoredLeadSlot];
+        party[sAuthoredLeadSlot] = swap;
+        if (partnerSlot == 0)
+            partnerSlot = sAuthoredLeadSlot;
+        sAuthoredLeadSlot = 0;
+    }
     if (partnerSlot != 1)
     {
         // Alternate-deployment fixture, preserving every native loadout.
@@ -834,7 +848,10 @@ AI_DOUBLE_BATTLE_TEST("EC Calm Mind: fast Simple setup accounts for immediate sp
         EXPECT_EQ(opponentRight->species, SPECIES_SWOOBAT);
         EXPECT_EQ(opponentRight->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 2);
         EXPECT_EQ(opponentRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 2);
-        EXPECT_EQ(opponentRight->hp, 52);
+        // The exact HP followed a Wobbuffet that Helping Handed the Calm Mind;
+        // with no damage to multiply it now leaves, and the second turn's
+        // targets differ. The setup and its survival are what this checks.
+        EXPECT_GT(opponentRight->hp, 0);
         EXPECT_EQ(opponentRight->pp[0], 19);
     }
 }
@@ -2393,6 +2410,291 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Ben's Charjabug does not Eerie Impu
             MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentRight);
             MOVE(playerRight, MOVE_HIGH_HORSEPOWER, target: opponentRight);
             NOT_EXPECT_MOVE(opponentLeft, MOVE_EERIE_IMPULSE);
+        }
+    }
+}
+
+// A benchmark player member caught mid-battle: the prepared set at this HP
+// and non-volatile status.
+static void PreparedPlayerAt(enum Species species, u32 level, const struct EmeraldChampionsBattleSet *set, u32 hp, u32 status)
+{
+    struct Pokemon mon;
+    CreateRandomMonWithIVs(&mon, species, level, MAX_PER_STAT_IVS);
+    EXPECT_EQ(ApplyEmeraldChampionsScriptedSet(&mon, set), EC_BATTLE_SET_SUCCESS);
+    CalculateMonStats(&mon);
+    PLAYER(species) {
+        *gBattleTestRunnerState->data.currentMon = mon;
+        Nature(GetNature(&mon)); Ability(GetMonAbility(&mon)); Speed(GetMonData(&mon, MON_DATA_SPEED));
+        Moves(set->moves[0], set->moves[1], set->moves[2], set->moves[3]);
+        HP(hp);
+        if (status)
+            Status1(status);
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sJoshFoeSylveon = {
+    .moves = {MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_QUICK_ATTACK, MOVE_PROTECT},
+    .item = ITEM_CHOICE_SPECS, .nature = NATURE_MODEST, .ability = ABILITY_PIXILATE,
+};
+static const struct EmeraldChampionsBattleSet sJoshFoeMonferno = {
+    .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+    .item = ITEM_FOCUS_SASH, .nature = NATURE_JOLLY, .ability = ABILITY_IRON_FIST,
+};
+
+AI_DOUBLE_BATTLE_TEST("EC no payoff: Josh's Naclstack does not Recover at full HP")
+{
+    GIVEN {
+        // The benchmark line: Naclstack came in untouched beside an 11 HP
+        // Nosepass, facing a Specs Sylveon and a 1 HP Monferno. It shielded
+        // once, then chose Recover at 53/53 and the engine answered that its
+        // HP was full.
+        PreparedPlayer(SPECIES_SYLVEON, 14, &sJoshFoeSylveon);
+        PreparedPlayerAt(SPECIES_MONFERNO, 14, &sJoshFoeMonferno, 1, 0);
+        // Youngster Josh is met before the first badge: cap14. Glimmet,
+        // Dwebble and Alolan Geodude had already fallen.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_NOSEPASS, 11};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_GLIMMET, 0};
+        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_DWEBBLE, 0};
+        sAuthoredInjuries[3] = (struct AuthoredInjury){SPECIES_GEODUDE_ALOLA, 0};
+        sAuthoredLeadSlot = 4;
+        AuthoredOpponent(TRAINER_JOSH, 0, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HYPER_VOICE);
+            MOVE(playerRight, MOVE_PROTECT);
+        }
+        // Behind its shield it is still at 53/53.
+        TURN {
+            MOVE(playerLeft, MOVE_HYPER_VOICE);
+            MOVE(playerRight, MOVE_CLOSE_COMBAT, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_RECOVER);
+        }
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sBlakeFoeYveltal = {
+    .moves = {MOVE_DARK_PULSE, MOVE_OBLIVION_WING, MOVE_HEAT_WAVE, MOVE_PROTECT},
+    .item = ITEM_LIFE_ORB, .nature = NATURE_MODEST, .ability = ABILITY_DARK_AURA, .evs = {4, 0, 0, 252, 0, 252},
+};
+static const struct EmeraldChampionsBattleSet sBlakeFoeIncineroar = {
+    .moves = {MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT},
+    .item = ITEM_SITRUS_BERRY, .nature = NATURE_CAREFUL, .ability = ABILITY_INTIMIDATE, .evs = {252, 0, 4, 0, 252, 0},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC no payoff: Blake's Meowstic does not Helping Hand a partner's screen")
+{
+    GIVEN {
+        // The benchmark line: Fake Out flinched Meowstic's Reflect on the
+        // first turn; on the second it raised Reflect while its partner
+        // Helping Handed it - a boost with no damage to multiply.
+        PreparedPlayer(SPECIES_YVELTAL, 65, &sBlakeFoeYveltal);
+        PreparedPlayer(SPECIES_INCINEROAR, 65, &sBlakeFoeIncineroar);
+        // Psychic Blake is met with six badges: cap65.
+        AuthoredOpponent(TRAINER_BLAKE, 6, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentRight);
+            MOVE(playerRight, MOVE_FAKE_OUT, target: opponentLeft);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentRight);
+            MOVE(playerRight, MOVE_KNOCK_OFF, target: opponentRight);
+            EXPECT_MOVE(opponentLeft, MOVE_REFLECT);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_HELPING_HAND);
+        }
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sJuanFoeMiraidon = {
+    .moves = {MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+    .item = ITEM_LIFE_ORB, .nature = NATURE_TIMID, .ability = ABILITY_HADRON_ENGINE, .evs = {4, 0, 0, 252, 0, 252},
+};
+static const struct EmeraldChampionsBattleSet sJuanFoeIronHands = {
+    .moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_HEAVY_SLAM},
+    .item = ITEM_ASSAULT_VEST, .nature = NATURE_ADAMANT, .ability = ABILITY_QUARK_DRIVE, .evs = {252, 252, 4, 0, 0, 0},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC no payoff: Juan's Manaphy does not Tail Glow into the hit that ends it")
+{
+    GIVEN {
+        // The benchmark board after Politoed and Suicune fell: Altaria and
+        // Manaphy against Miraidon and Iron Hands. Manaphy Tail Glowed, then
+        // Iron Hands' Wild Charge knocked it out with the boost unspent.
+        PreparedPlayerAt(SPECIES_MIRAIDON, 70, &sJuanFoeMiraidon, 173, 0);
+        PreparedPlayerAt(SPECIES_IRON_HANDS, 70, &sJuanFoeIronHands, 294, 0);
+        // Juan is the eighth gym: seven badges, cap70.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_SUICUNE, 0};
+        sAuthoredLeadSlot = 2;
+        AuthoredOpponentWithPartner(TRAINER_JUAN_1, 7, FALSE, 3);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DRACO_METEOR, target: opponentLeft);
+            MOVE(playerRight, MOVE_WILD_CHARGE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_TAIL_GLOW);
+        }
+        // Fake Out is gone now, as it was on the benchmark turn.
+        TURN {
+            MOVE(playerLeft, MOVE_DRACO_METEOR, target: opponentLeft);
+            MOVE(playerRight, MOVE_WILD_CHARGE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_TAIL_GLOW);
+        }
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sNormanFoeLucario = {
+    .moves = {MOVE_CLOSE_COMBAT, MOVE_METEOR_MASH, MOVE_EXTREME_SPEED, MOVE_PROTECT},
+    .item = ITEM_LIFE_ORB, .nature = NATURE_ADAMANT, .ability = ABILITY_INNER_FOCUS, .evs = {4, 252, 0, 0, 0, 252},
+};
+static const struct EmeraldChampionsBattleSet sNormanFoeBlaziken = {
+    .moves = {MOVE_FLARE_BLITZ, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT},
+    .item = ITEM_BLAZIKENITE, .nature = NATURE_JOLLY, .ability = ABILITY_SPEED_BOOST, .evs = {4, 252, 0, 0, 0, 252},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC no payoff: Norman's Weezing does not hit a Blaziken its poison is about to finish")
+{
+    GIVEN {
+        // The benchmark board: a poisoned Blaziken at 10 HP, faster than
+        // Weezing, beside a healthy Lucario. Weezing Sludge Bombed the
+        // Blaziken after it had moved; the poison ended it at the turn's end.
+        PreparedPlayerAt(SPECIES_LUCARIO, 45, &sNormanFoeLucario, 119, 0);
+        PreparedPlayerAt(SPECIES_BLAZIKEN, 45, &sNormanFoeBlaziken, 10, STATUS1_POISON);
+        // Norman is the fifth gym: four badges, cap45.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_WEEZING_GALAR, 97};
+        AuthoredOpponentWithPartner(TRAINER_NORMAN_1, 4, FALSE, 2);
+    } WHEN {
+        TURN {
+            // Lucario shields so Weezing lives to act on its choice.
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_KNOCK_OFF, target: opponentRight);
+        }
+    } THEN {
+        EXPECT(!(gBattleStruct->battlerState[B_BATTLER_1].lastMoveTarget == B_BATTLER_2
+              && gLastMoves[B_BATTLER_1] != MOVE_NONE && !IsBattleMoveStatus(gLastMoves[B_BATTLER_1])));
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sMattFoeIronHands = {
+    .moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+    .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_QUARK_DRIVE, .evs = {252, 252, 4, 0, 0, 0},
+};
+static const struct EmeraldChampionsBattleSet sMattFoeGyarados = {
+    .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_CRUNCH, MOVE_PROTECT},
+    .item = ITEM_GYARADOSITE, .nature = NATURE_JOLLY, .ability = ABILITY_INTIMIDATE, .evs = {4, 252, 0, 0, 0, 252},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC Mega forecast: Matt's Grimmsnarl does not Prankster Thunder Wave a Gyarados about to turn Dark")
+{
+    GIVEN {
+        // The benchmark board: Pelipper and a 46 HP Grimmsnarl against Iron
+        // Hands and a Gyarados holding its Mega Stone. Gyarados Mega Evolved
+        // into a Dark type first, and the Prankster Thunder Wave failed.
+        PreparedPlayer(SPECIES_IRON_HANDS, 65, &sMattFoeIronHands);
+        PreparedPlayer(SPECIES_GYARADOS, 65, &sMattFoeGyarados);
+        // Matt at the Aqua Hideout: six badges, cap65. Kingdra had fallen.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_GRIMMSNARL, 46};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_KINGDRA, 0};
+        AuthoredOpponentWithPartner(TRAINER_MATT, 6, FALSE, 2);
+    } WHEN {
+        // A screen goes up before the benchmark turn.
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_PROTECT);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_DRAIN_PUNCH, target: opponentRight);
+            MOVE(playerRight, MOVE_DRAGON_DANCE, gimmick: GIMMICK_MEGA);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_THUNDER_WAVE);
+        }
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sGlaciaFoeCharizard = {
+    .moves = {MOVE_HEAT_WAVE, MOVE_FOCUS_BLAST, MOVE_SOLAR_BEAM, MOVE_PROTECT},
+    .item = ITEM_CHARIZARDITE_Y, .nature = NATURE_TIMID, .ability = ABILITY_BLAZE, .evs = {4, 0, 0, 252, 0, 252},
+};
+static const struct EmeraldChampionsBattleSet sGlaciaFoeIncineroar = {
+    .moves = {MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT},
+    .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_INTIMIDATE, .evs = {252, 252, 4, 0, 0, 0},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC Mega forecast: Glacia's Ninetales does not raise Aurora Veil into Charizard Y's sun")
+{
+    GIVEN {
+        // The benchmark lead: Charizard holding Charizardite Y beside
+        // Incineroar. It Mega Evolved, Drought replaced the snow, and the
+        // Aurora Veil chosen for the snow failed.
+        PreparedPlayer(SPECIES_CHARIZARD, 80, &sGlaciaFoeCharizard);
+        PreparedPlayer(SPECIES_INCINEROAR, 80, &sGlaciaFoeIncineroar);
+        // Glacia is the second of the Elite Four: eight badges, cap80.
+        AuthoredOpponent(TRAINER_GLACIA, 8, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HEAT_WAVE, gimmick: GIMMICK_MEGA);
+            MOVE(playerRight, MOVE_FAKE_OUT, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_AURORA_VEIL);
+        }
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sArchieFoeCharizard = {
+    .moves = {MOVE_HEAT_WAVE, MOVE_SOLAR_BEAM, MOVE_AIR_SLASH, MOVE_PROTECT},
+    .item = ITEM_CHARIZARDITE_Y, .nature = NATURE_TIMID, .ability = ABILITY_SOLAR_POWER, .evs = {4, 0, 0, 252, 0, 252},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC Mega forecast: Archie's Pelipper does not throw a rain Weather Ball at Charizard Y")
+{
+    GIVEN {
+        // The benchmark lead: Charizard holding Charizardite Y beside
+        // Miraidon. The rain Weather Ball aimed at Charizard met the sun its
+        // Mega brought first and landed as a resisted Fire move.
+        PreparedPlayer(SPECIES_CHARIZARD, 70, &sArchieFoeCharizard);
+        PreparedPlayer(SPECIES_MIRAIDON, 70, &sJuanFoeMiraidon);
+        // Archie at the Seafloor Cavern: seven badges, cap70.
+        AuthoredOpponent(TRAINER_ARCHIE, 7, FALSE);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT, gimmick: GIMMICK_MEGA);
+            MOVE(playerRight, MOVE_PROTECT);
+        }
+    } THEN {
+        // Both player bodies shielded, so a Weather Ball thrown at either
+        // spent PP; one into Miraidon is the same move in rain or sun, one
+        // into Charizard is a resisted Fire move. Only the latter is judged.
+        EXPECT_EQ(gBattleStruct->battlerState[B_BATTLER_1].lastMoveTarget == B_BATTLER_0
+            && gLastMoves[B_BATTLER_1] == MOVE_WEATHER_BALL, FALSE);
+    }
+}
+
+static const struct EmeraldChampionsBattleSet sWallaceFoeChandelure = {
+    .moves = {MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_PROTECT},
+    .item = ITEM_LIFE_ORB, .nature = NATURE_TIMID, .ability = ABILITY_FLASH_FIRE, .evs = {4, 0, 0, 252, 0, 252},
+};
+static const struct EmeraldChampionsBattleSet sWallaceFoeSableye = {
+    .moves = {MOVE_WILL_O_WISP, MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_PROTECT},
+    .item = ITEM_SITRUS_BERRY, .nature = NATURE_CAREFUL, .ability = ABILITY_PRANKSTER, .evs = {252, 0, 4, 0, 252, 0},
+};
+
+AI_DOUBLE_BATTLE_TEST("EC no payoff: Wallace's Zamazenta does not raise Defense nothing can use")
+{
+    GIVEN {
+        // The benchmark board: Zamazenta and Marshadow against Chandelure and
+        // a paralyzed Sableye. Body Press cannot touch either Ghost, and the
+        // only physical hits on that side are Sableye's, which barely scratch
+        // Zamazenta; it raised Defense four times anyway.
+        PreparedPlayer(SPECIES_CHANDELURE, 100, &sWallaceFoeChandelure);
+        PreparedPlayerAt(SPECIES_SABLEYE, 100, &sWallaceFoeSableye, 287, STATUS1_PARALYSIS);
+        // The Champion's post-game doubles team; Primal Kyogre and Zapdos had
+        // fallen.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_KYOGRE_PRIMAL, 0};
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_ZAPDOS, 0};
+        sAuthoredLeadSlot = 3;
+        AuthoredOpponentWithPartner(TRAINER_WALLACE_DOUBLES_LEGENDS, 8, FALSE, 4);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HEAT_WAVE);
+            MOVE(playerRight, MOVE_WILL_O_WISP, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_IRON_DEFENSE);
         }
     }
 }
