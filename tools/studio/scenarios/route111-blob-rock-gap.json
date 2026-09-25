@@ -1,0 +1,86 @@
+{
+  "name": "Route 111 — smashing the rock by Blob starts the escape",
+  "start": {
+    "chapter": 7
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_RECEIVED_HM_ROCK_SMASH": true
+    },
+    "vars": {
+      "VAR_CHANSEY_NURSE_STATE": 0,
+      "VAR_POKE_VIAL_MAX_CHARGES": 1
+    }
+  },
+  "warp": {
+    "map": "Route111",
+    "x": 19,
+    "y": 101,
+    "facing": 3
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "Examine rock"
+    },
+    {
+      "tap": "A",
+      "every": 45,
+      "frames": 2500,
+      "until": "idle",
+      "label": "Rock smashed"
+    },
+    {
+      "hold": "Left",
+      "frames": 20,
+      "label": "Step into gap"
+    },
+    {
+      "frames": 60,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 45,
+      "frames": 9000,
+      "until": "idle",
+      "label": "Controls returned"
+    }
+  ],
+  "queries": {
+    "state": {
+      "kind": 2,
+      "id": "VAR_CHANSEY_NURSE_STATE"
+    },
+    "heal": {
+      "kind": 4,
+      "id": "ITEM_HEAL_BALL"
+    },
+    "left": {
+      "kind": 1,
+      "id": "FLAG_ROUTE111_LEFT_BREAKABLE_ROCK"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "map": "Route111",
+    "x": 18,
+    "y": 101,
+    "queries": {
+      "state": 1,
+      "heal": 1,
+      "left": 1
+    },
+    "forbidden_text": [
+      "how did you even get over there"
+    ]
+  },
+  "party": [
+    "SPECIES_MACHAMP",
+    "SPECIES_ALAKAZAM"
+  ]
+}

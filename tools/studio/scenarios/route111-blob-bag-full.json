@@ -1,0 +1,103 @@
+{
+  "name": "Route 111 — no room for the Heal Ball steps the player back out",
+  "start": {
+    "chapter": 7
+  },
+  "setup": {
+    "flags": {
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_RECEIVED_HM_ROCK_SMASH": true
+    },
+    "vars": {
+      "VAR_CHANSEY_NURSE_STATE": 0,
+      "VAR_POKE_VIAL_MAX_CHARGES": 1
+    },
+    "items": {
+      "ITEM_POKE_BALL": 1,
+      "ITEM_GREAT_BALL": 1,
+      "ITEM_ULTRA_BALL": 1,
+      "ITEM_MASTER_BALL": 1,
+      "ITEM_PREMIER_BALL": 1,
+      "ITEM_NET_BALL": 1,
+      "ITEM_NEST_BALL": 1,
+      "ITEM_DIVE_BALL": 1,
+      "ITEM_DUSK_BALL": 1,
+      "ITEM_TIMER_BALL": 1,
+      "ITEM_QUICK_BALL": 1,
+      "ITEM_REPEAT_BALL": 1,
+      "ITEM_LUXURY_BALL": 1,
+      "ITEM_LEVEL_BALL": 1,
+      "ITEM_LURE_BALL": 1,
+      "ITEM_MOON_BALL": 1,
+      "ITEM_FRIEND_BALL": 1,
+      "ITEM_LOVE_BALL": 1,
+      "ITEM_FAST_BALL": 1,
+      "ITEM_HEAVY_BALL": 1,
+      "ITEM_DREAM_BALL": 1,
+      "ITEM_SAFARI_BALL": 1,
+      "ITEM_SPORT_BALL": 1,
+      "ITEM_PARK_BALL": 1,
+      "ITEM_BEAST_BALL": 1,
+      "ITEM_CHERISH_BALL": 1,
+      "ITEM_STRANGE_BALL": 1
+    }
+  },
+  "warp": {
+    "map": "Route111",
+    "x": 19,
+    "y": 104,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "hold": "Up",
+      "frames": 40,
+      "label": "Step on trigger"
+    },
+    {
+      "tap": "A",
+      "every": 45,
+      "frames": 3000,
+      "until": "idle",
+      "label": "Pushed back"
+    },
+    {
+      "hold": "Up",
+      "frames": 20,
+      "label": "Try again"
+    },
+    {
+      "tap": "A",
+      "every": 45,
+      "frames": 3000,
+      "until": "idle",
+      "label": "Pushed back again"
+    }
+  ],
+  "queries": {
+    "state": {
+      "kind": 2,
+      "id": "VAR_CHANSEY_NURSE_STATE"
+    },
+    "left": {
+      "kind": 1,
+      "id": "FLAG_ROUTE111_LEFT_BREAKABLE_ROCK"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "map": "Route111",
+    "x": 19,
+    "y": 103,
+    "queries": {
+      "state": 0,
+      "left": 0
+    }
+  },
+  "party": [
+    "SPECIES_MACHAMP",
+    "SPECIES_ALAKAZAM"
+  ]
+}

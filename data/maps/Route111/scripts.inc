@@ -510,27 +510,44 @@ Route111_EventScript_TrainerHillSign:: @ 81F146C
 	msgbox Route111_Text_TrainerHillSign, MSGBOX_SIGN
 	end
 
+@ Stepping into the rock pocket beside the nurse. Every way in is one of these tiles.
 Route111_EventScript_ChanseyBlob::
 	lockall
+	specialvar VAR_0x8008, GetPlayerFacingDirection
+	setvar VAR_0x8009, TRUE
+	call_if_ne VAR_0x8008, DIR_NORTH, Route111_EventScript_PlayerFaceUp
+	goto Route111_EventScript_CheckHealBallSpace
+
+@ Stepping into a smashed rock's gap while Blob is still there: the way is open, so it bolts.
+Route111_EventScript_ChanseyBlobGap::
+	lockall
+	specialvar VAR_0x8008, GetPlayerFacingDirection
+	setvar VAR_0x8009, TRUE
+	facetogether OBJ_EVENT_ID_PLAYER, LOCALID_CHANSEY
+	goto Route111_EventScript_CheckHealBallSpace
+
+@ Reaching Blob or the nurse some other way before the chase starts it too.
+Route111_EventScript_TalkBlob::
+	lockall
+	setvar VAR_0x8009, FALSE
+	goto Route111_EventScript_CheckHealBallSpace
+
 Route111_EventScript_CheckHealBallSpace::
 	checkitemspace ITEM_HEAL_BALL, 1
 	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_HealBallBagFull
 Route111_EventScript_ChanseyEscapeScene::
-	specialvar VAR_RESULT, GetPlayerFacingDirection
-	compare VAR_RESULT, DIR_NORTH
-	call_if_ne Route111_EventScript_PlayerFaceUp
 	applymovement LOCALID_NURSE, Common_Movement_WalkInPlaceFastestUp
 	applymovement LOCALID_CHANSEY, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Route111_Text_BlobGetBackHere, MSGBOX_DEFAULT
+	call_if_unset FLAG_ROUTE111_LEFT_BREAKABLE_ROCK, Route111_EventScript_BlobOutOfReach
 	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyJump
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_CHANSEY, 0
 	delay 40
 	waitmoncry
-	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyEscape
-	waitmovement 0
+	call Route111_EventScript_ChanseyRunsOff
 	msgbox Route111_Text_ThatsJustGreat, MSGBOX_DEFAULT
 	playse SE_PIN
 	applymovement LOCALID_NURSE, Common_Movement_ExclamationMark
@@ -544,23 +561,88 @@ Route111_EventScript_ChanseyEscapeScene::
 	releaseall
 	end
 
+Route111_EventScript_BlobOutOfReach::
+	msgbox Route111_Text_HowDidYouGetOverThere, MSGBOX_DEFAULT
+	return
+
+@ Blob runs north until it is out of sight, around the player if they stand in its way.
+Route111_EventScript_ChanseyRunsOff::
+	getplayerxy VAR_0x8004, VAR_0x8005
+	goto_if_ge VAR_0x8005, 102, Route111_EventScript_ChanseyRunsFromPocket
+	goto_if_ne VAR_0x8004, 18, Route111_EventScript_ChanseyRunsFar
+	goto_if_ne VAR_0x8005, 99, Route111_EventScript_ChanseyRunsFar
+	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyEscapeWest
+	waitmovement 0
+	return
+
+Route111_EventScript_ChanseyRunsFar::
+	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyEscapeFar
+	waitmovement 0
+	return
+
+Route111_EventScript_ChanseyRunsFromPocket::
+	applymovement LOCALID_CHANSEY, Route111_Movement_ChanseyEscape
+	waitmovement 0
+	return
+
 Route111_EventScript_HealBallBagFull::
+	playse SE_PIN
+	applymovement LOCALID_NURSE, Common_Movement_ExclamationMark
+	waitmovement 0
+	facetogether OBJ_EVENT_ID_PLAYER, LOCALID_NURSE
 	msgbox Route111_Text_HealBallBagFull, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_NURSE, Common_Movement_FaceUp
+	waitmovement 0
+	call_if_eq VAR_0x8009, TRUE, Route111_EventScript_PlayerStepsBack
 	releaseall
 	end
 
+@ Back out the way the player came, still facing the nurse, so the rocks stay out of reach.
+Route111_EventScript_PlayerStepsBack::
+	switch VAR_0x8008
+	case DIR_NORTH, Route111_EventScript_PlayerStepsBackDown
+	case DIR_SOUTH, Route111_EventScript_PlayerStepsBackUp
+	case DIR_WEST, Route111_EventScript_PlayerStepsBackRight
+	case DIR_EAST, Route111_EventScript_PlayerStepsBackLeft
+	return
+
+Route111_EventScript_PlayerStepsBackDown::
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_StepBackDown
+	waitmovement 0
+	return
+
+Route111_EventScript_PlayerStepsBackUp::
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_StepBackUp
+	waitmovement 0
+	return
+
+Route111_EventScript_PlayerStepsBackRight::
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_StepBackRight
+	waitmovement 0
+	return
+
+Route111_EventScript_PlayerStepsBackLeft::
+	applymovement OBJ_EVENT_ID_PLAYER, Route111_Movement_StepBackLeft
+	waitmovement 0
+	return
+
 Route111_Text_HealBallBagFull:
-	.string "Please make room for a Heal Ball\n"
-	.string "in your Bag, then come back.\p"
-	.string "I need your help!$"
+	.string "Oh! Excuse me, could you help me\n"
+	.string "with my Chansey?\p"
+	.string "You'll need room in your Bag for\n"
+	.string "a Heal Ball. Please make some space,\l"
+	.string "then come back!$"
 
 Route111_EventScript_VialUpgradeNurse::
-	lock
+	lockall
+	setvar VAR_0x8009, FALSE
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_CheckHealBallSpace
 	faceplayer
 	compare VAR_CHANSEY_NURSE_STATE, 6
 	goto_if_eq Route111_EventScript_UpgradeVialHideNurse
 	msgbox Route111_Text_BringBlobBack, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
 
 Route111_EventScript_UpgradeVialHideNurse::
@@ -602,7 +684,59 @@ Route111_Movement_ChanseyEscape:
 	walk_up
 	step_end
 
+Route111_Movement_ChanseyEscapeFar:
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	step_end
+
+Route111_Movement_ChanseyEscapeWest:
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	step_end
+
+Route111_Movement_StepBackDown:
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
+	step_end
+
+Route111_Movement_StepBackUp:
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
+	step_end
+
+Route111_Movement_StepBackRight:
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
+	step_end
+
+Route111_Movement_StepBackLeft:
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
+	step_end
+
+@ The nurse walks all the way out of view before she is removed.
 Route111_Movement_NurseLeaves1:
+	walk_down
 	walk_down
 	walk_down
 	walk_down
@@ -619,11 +753,17 @@ Route111_Movement_NurseLeaves2:
 	walk_down
 	walk_down
 	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_down
 	step_end
 
 Route111_Text_BlobGetBackHere:
 	.string "Blob!\n"
-	.string "Stop goofing around and get back here!\p"
+	.string "Stop goofing around and get back here!$"
+
+Route111_Text_HowDidYouGetOverThere:
 	.string "Argh, how did you even get over there?$"
 
 Route111_Text_ThatsJustGreat:

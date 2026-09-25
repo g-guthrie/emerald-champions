@@ -1,0 +1,55 @@
+{
+  "name": "Route 111 — Blob escapes the rock pocket",
+  "start": {
+    "chapter": 7
+  },
+  "setup": {
+    "flags": {},
+    "vars": {
+      "VAR_CHANSEY_NURSE_STATE": 0,
+      "VAR_POKE_VIAL_MAX_CHARGES": 1
+    }
+  },
+  "warp": {
+    "map": "Route111",
+    "x": 19,
+    "y": 105,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "hold": "Up",
+      "frames": 40,
+      "label": "Step on trigger"
+    },
+    {
+      "frames": 90,
+      "label": "Scene begins"
+    },
+    {
+      "tap": "A",
+      "every": 45,
+      "frames": 9000,
+      "until": "idle",
+      "label": "Controls returned"
+    }
+  ],
+  "queries": {
+    "state": {
+      "kind": 2,
+      "id": "VAR_CHANSEY_NURSE_STATE"
+    },
+    "heal": {
+      "kind": 4,
+      "id": "ITEM_HEAL_BALL"
+    }
+  },
+  "expect": {
+    "ready": true,
+    "map": "Route111",
+    "queries": {
+      "state": 1,
+      "heal": 1
+    }
+  }
+}
