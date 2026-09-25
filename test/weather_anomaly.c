@@ -218,7 +218,8 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KELDEO].minimumBadges, 7);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_VISITED_FORTREE_CITY);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_BADGE06_GET);
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    // Geomancy Xerneas swept the Elite Four: it waits for the Hall of Fame.
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_IS_CHAMPION);
 }
 
 TEST("Weather anomalies: none before the window opens or after it closes")
