@@ -73,6 +73,9 @@ EventScript_ObtainedItemMessage:
 EventScript_ContinueObtainedItem:
 	delay 10
 	showitemdescription
+	@ At slower text speeds the fanfare can end first; a message started
+	@ while one is still printing is dropped.
+	waitmessage
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
