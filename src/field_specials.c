@@ -458,12 +458,39 @@ static s32 EmeraldChampionsBattleItemIndex(enum Item item)
     return -1;
 }
 
+// Items no pickup or gift hands over: the vendor stocks them once the Trainer
+// has enough Badges, so nothing competitive depends on a lucky wild held item.
+// Holding one earlier still unlocks it the ordinary way.
+static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
+{
+    {ITEM_LOADED_DICE,      2},
+    {ITEM_EJECT_PACK,       3},
+    {ITEM_HEAVY_DUTY_BOOTS, 4},
+    {ITEM_CLEAR_AMULET,     4},
+    {ITEM_COVERT_CLOAK,     5},
+    {ITEM_MIRROR_HERB,      5},
+    {ITEM_BOOSTER_ENERGY,   5},
+};
+
+static bool32 IsBattleItemStockedByBadges(enum Item item)
+{
+    u32 badges = 0;
+    for (u32 flag = FLAG_BADGE01_GET; flag <= FLAG_BADGE08_GET; flag++)
+        badges += FlagGet(flag);
+    for (u32 i = 0; i < ARRAY_COUNT(sBadgeStockedBattleItems); i++)
+        if (sBadgeStockedBattleItems[i].item == item)
+            return badges >= sBadgeStockedBattleItems[i].badges;
+    return FALSE;
+}
+
 bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
 {
     s32 index = EmeraldChampionsBattleItemIndex(item);
 
     // Anything outside the catalogue is not gated at all.
     if (index < 0)
+        return TRUE;
+    if (IsBattleItemStockedByBadges(item))
         return TRUE;
     return (gSaveBlock1Ptr->battleItemsUnlocked[index / 8] >> (index % 8)) & 1;
 }
