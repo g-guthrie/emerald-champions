@@ -483,10 +483,12 @@ MossdeepCity_Gym_Text_ReceivedMindBadge: @ 822196A
 
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis: @ 8221999
 	.string "Tate: You earned the Mind Badge!\p"
-	.string "Liza: It lets you use Dive once\n"
+	.string "Liza: Your Pokémon can now grow\n"
+	.string "up to Lv. 70!\p"
+	.string "Tate: It also lets you use Dive once\n"
 	.string "Steven gives you the license.\p"
-	.string "Bring a Pokémon able to learn it;\n"
-	.string "it needn't know Dive!$"
+	.string "Liza: Bring a Pokémon able to learn\n"
+	.string "Dive. It needn't know the move!$"
 
 MossdeepCity_Gym_Text_TakeThis:
 	.string "Liza: You should also take this, too.$"

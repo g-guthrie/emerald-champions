@@ -1398,7 +1398,7 @@ PetalburgCity_Gym_Text_NormanMegaBracelet:
 	.string "It's no good on its own, though.\p"
 	.string "To Mega Evolve a Pokémon, you must\n"
 	.string "also let it hold its Mega Stone.\p"
-	.string "Then, press START before choosing a\n"
+	.string "Then, press Start before choosing a\n"
 	.string "move.\p"
 	.string "Mega Evolution is a very powerful\n"
 	.string "technique, but I think you and your\l"
@@ -1463,9 +1463,10 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge: @ 8206162
 	.string "from Dad!$"
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis: @ 820618A
-	.string "Dad: The Balance Badge lets you\n"
-	.string "Surf. Wally's family here in town\l"
-	.string "has the license for you.\p"
+	.string "Dad: With the Balance Badge, your\n"
+	.string "Pokémon can grow up to Lv. 55.\p"
+	.string "It also lets you Surf. Wally's family\n"
+	.string "here in town has the license.\p"
 	.string "Then press A at the water's edge.\n"
 	.string "Bring one able to learn Surf;\l"
 	.string "it needn't know the move.$"

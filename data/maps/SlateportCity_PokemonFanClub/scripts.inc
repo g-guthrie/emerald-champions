@@ -286,16 +286,15 @@ SlateportCity_PokemonFanClub_EventScript_ReceivedTM58::
 	end
 
 SlateportCity_PokemonFanClub_Text_GiveTM58:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Your Pokémon look so happy with you!\n"
+	.string "Here, have a Rare Candy!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
-	.string "That Rare Candy raises a partner\n"
-	.string "one level, up to your cap.\p"
-	.string "The Center tutor can teach Endure\n"
-	.string "to compatible Pokémon. It helps\l"
-	.string "them withstand a powerful attack.$"
+	.string "A Rare Candy lets a partner grow a\n"
+	.string "level, as far as your Badges allow.\p"
+	.string "And the Move Tutor can teach Endure!\n"
+	.string "It helps a partner hang on through\l"
+	.string "a powerful attack.$"
 
 SlateportCity_PokemonFanClub_Text_MeetChairman: @ 820A233
 	.string "Er-hem! I am the Chairman of the\n"

@@ -71,8 +71,9 @@ ChampionsTent_Text_Challenge:
 ChampionsTent_Text_Rules:
 	.string "Bring six Pokémon ready to battle.\n"
 	.string "Eggs cannot enter.\p"
-	.string "Your team fights at your current\n"
-	.string "level cap. Your chosen builds stay.\p"
+	.string "Your Pokémon keep their moves and\n"
+	.string "items, and battle at the highest\l"
+	.string "level your Badges allow.\p"
 	.string "Win three battles for a prize.\n"
 	.string "You may retire between battles.\p"
 	.string "Your party is restored afterward.$"

@@ -218,7 +218,9 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge: @ 8225598
 	.string "from Juan.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis: @ 82255BE
-	.string "The Rain Badge and Waterfall\n"
+	.string "With the Rain Badge, your Pokémon\n"
+	.string "can grow up to Lv. 80.\p"
+	.string "The Rain Badge and a Waterfall\n"
 	.string "license let you climb waterfalls.\p"
 	.string "Press A at the falls with a Pokémon\n"
 	.string "able to learn Waterfall.\p"

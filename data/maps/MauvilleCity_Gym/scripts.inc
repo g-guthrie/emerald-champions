@@ -369,8 +369,10 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge: @ 820E77F
 	.string "from Wattson.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis: @ 820E7AA
-	.string "With the Dynamo Badge and a Rock\n"
-	.string "Smash license, you can clear rocks!\p"
+	.string "With the Dynamo Badge, your Pokémon\n"
+	.string "can grow up to Lv. 40! Wahahahaha!\p"
+	.string "Add a Rock Smash license, and you\n"
+	.string "can clear rocks, too!\p"
 	.string "Visit the Rock Smash Dude here in\n"
 	.string "Mauville if you need the license.\p"
 	.string "Then press A by a cracked rock.\n"

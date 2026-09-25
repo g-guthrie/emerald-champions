@@ -36,16 +36,14 @@ LavaridgeTown_House_EventScript_ReceivedTM94::
 	end
 
 LavaridgeTown_House_Text_HaveTM94::
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+	.string "One candy, one level. But it won't\n"
+	.string "go past what your Badges allow!\p"
+	.string "For new techniques, see the Move\n"
+	.string "Tutor at the Pokémon Center!$"
 
 LavaridgeTown_House_Text_GiveTM94::
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Heh! Then it's yours.\n"
+	.string "A ninja never takes back a gift!$"
 
 LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
 	.string "My wife's warming an Egg in the hot\n"

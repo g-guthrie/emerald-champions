@@ -426,10 +426,11 @@ PetalburgWoods_Text_TrainerTipsExperience:
 	.string "experience automatically.\p"
 	.string "Participants earn full experience;\n"
 	.string "those on the bench earn half.\p"
-	.string "Pokémon at their level cap earn\n"
-	.string "no more experience until it rises.\p"
-	.string "Use the Leveler to bring your party\n"
-	.string "up to its current caps anytime!$"
+	.string "Your Pokémon can't grow any stronger\n"
+	.string "than your Badges allow. Earn more\l"
+	.string "Badges to let them grow again.\p"
+	.string "Use the Leveler to raise your party\n"
+	.string "that high anytime!$"
 
 PetalburgWoods_Text_TrainerTipsPP: @ 822ED07
 	.string "Trainer Tips\p"

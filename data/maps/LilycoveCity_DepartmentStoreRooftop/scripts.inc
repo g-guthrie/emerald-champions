@@ -220,9 +220,8 @@ LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink: @ 8220603
 	.string "Decided against buying a drink.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Nugget!$"
+	.string "Life's too short not to treat\n"
+	.string "yourself! Here, take this Nugget!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90:
 	.string "We human beings should enjoy our\n"

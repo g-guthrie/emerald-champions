@@ -17,11 +17,11 @@ gText_EmeraldChampionsExplainTools::
 	.string "The Poké Vial fully restores your\n"
 	.string "party outside battle. Every Center\l"
 	.string "refills your doses.\p"
-	.string "The Leveler raises your party to\n"
-	.string "the current level cap. It never\l"
-	.string "runs out.\p"
-	.string "The tutor teaches moves for free.\n"
-	.string "The vendor sells discovered items.$"
+	.string "The Leveler raises your party as\n"
+	.string "high as your Badges allow, anytime.\p"
+	.string "The Move Tutor teaches moves for\n"
+	.string "free, and our shop clerk sells\l"
+	.string "held items you've found.$"
 
 gText_EmeraldChampionsGiveMissingFlightBeacon::
 	.string "One more tool for you:\n"
@@ -32,18 +32,15 @@ gText_EmeraldChampionsHealAfterTools::
 	.string "you also like to heal your Pokémon?$"
 
 gText_EmeraldChampionsExplainFlightBeacon::
-	.string "Use the Flight Beacon after you\n"
-	.string "earn its license and Fly badge.\p"
-	.string "It can call a Pokémon able to learn\n"
-	.string "Fly from your party or PC.\p"
-	.string "For Cut, Surf and other HM skills,\n"
-	.string "you need the license, Badge, and\l"
-	.string "a Pokémon able to learn the move.\p"
-	.string "It doesn't need to know the move.\p"
-	.string "Flash lights caves automatically.\n"
-	.string "Use the other skills at their\l"
-	.string "obstacles by pressing A.\p"
-	.string "Press B to surface when underwater.$"
+	.string "With the Feather Badge and a Fly\n"
+	.string "license, the Flight Beacon can call\l"
+	.string "a flier from your party or PC.\p"
+	.string "Cut, Surf and the rest work the same:\n"
+	.string "earn the Badge and license, and bring\l"
+	.string "a Pokémon that could learn the move.\p"
+	.string "Press A at an obstacle to use one.\n"
+	.string "Flash lights caves by itself, and\l"
+	.string "B takes you up from underwater.$"
 
 gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "One more tool for you:\n"
@@ -60,9 +57,9 @@ gText_EmeraldChampionsGiveMissingLeveler::
 
 gText_EmeraldChampionsExplainLeveler::
 	.string "The Leveler raises your whole party\n"
-	.string "to the current level cap.\p"
-	.string "It never runs out, and the cap\n"
-	.string "rises as your journey goes on.$"
+	.string "as high as your Badges allow.\p"
+	.string "It never runs out, and each new\n"
+	.string "Badge lets your Pokémon grow more.$"
 
 gText_WouldYouLikeToRestYourPkmn::
 	.string "Hello, and welcome to\n"

@@ -39,18 +39,18 @@ Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother: @ 822AD85
 	.string "your Pokémon grow a level…$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance: @ 822AE48
-	.string "The Center tutor can teach Dig\n"
+	.string "The Move Tutor can teach Dig\n"
 	.string "to Pokémon that can learn it…\p"
-	.string "A Rare Candy raises a level,\n"
-	.string "up to your current cap…$"
+	.string "A Rare Candy raises a level…\n"
+	.string "as far as your Badges allow…$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase: @ 822AE92
 	.string "Rocks in peculiar shapes fill\n"
 	.string "the display case…$"
 
 Route114_FossilManiacsHouse_Text_CrammedWithBooks: @ 822AEC2
-	.string "THE COMPOSITION OF STRATA…\n"
-	.string "HOW RAIN SHAPES THE LAND…\l"
-	.string "STONES, SOIL, AND ROCK…\p"
+	.string "The Composition of Strata…\n"
+	.string "How Rain Shapes the Land…\l"
+	.string "Stones, Soil, and Rock…\p"
 	.string "It's crammed with books.$"
 

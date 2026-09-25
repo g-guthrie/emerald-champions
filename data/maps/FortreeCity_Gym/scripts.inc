@@ -257,9 +257,11 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge: @ 8216EEC
 	.string "from Winona.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis: @ 8216F17
-	.string "The Feather Badge and the Fly\n"
-	.string "license your rival gave you let you\l"
-	.string "fly to towns you've visited.\p"
+	.string "With the Feather Badge, your\n"
+	.string "Pokémon can grow up to Lv. 60.\p"
+	.string "With it and the Fly license your\n"
+	.string "rival gave you, you can fly to\l"
+	.string "towns you've visited.\p"
 	.string "The Flight Beacon can call a flier\n"
 	.string "from your party or PC!\p"
 	.string "And this…\n"

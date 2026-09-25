@@ -273,8 +273,8 @@ RustboroCity_Gym_Text_Tips::
 	.string "She has a full team of six, with good\n"
 	.string "type variety.\p"
 	.string "Her Pokémon are a few levels above\n"
-	.string "the level cap, so train yours up to\l"
-	.string "the cap before you challenge her.\p"
+	.string "what yours can reach for now, so\l"
+	.string "train yours as high as they'll go!\p"
 	.string "Grass and Steel moves hit most of\n"
 	.string "her team hard!\p"
 	.string "Come see me afterwards, if you beat\n"
@@ -367,11 +367,12 @@ RustboroCity_Gym_Text_ReceivedStoneBadge: @ 82137EC
 	.string "from Roxanne.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
-	.string "The Stone Badge lets you use\n"
-	.string "Cut. The Cutter beside the\l"
-	.string "Pokémon Center gives the license.\p"
-	.string "Please take this Mega Stone,\n"
-	.string "too.$"
+	.string "With the Stone Badge, your Pokémon\n"
+	.string "can grow up to Lv. 20!\p"
+	.string "It also lets you use Cut. The Cutter\n"
+	.string "beside the Pokémon Center has\l"
+	.string "the license.\p"
+	.string "Please take this Mega Stone, too.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
 	.string "This is Delphoxite. Give it to\n"

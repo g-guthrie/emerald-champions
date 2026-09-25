@@ -421,12 +421,12 @@ DewfordTown_Gym_Text_ReceivedKnuckleBadge: @ 81FD07D
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "That was an excellent battle!\n"
-	.string "You have earned the Knuckle\l"
-	.string "Badge.\p"
-	.string "With a Flash license, it lights\n"
-	.string "up dark caves automatically.\p"
-	.string "Just bring a partner that could\n"
-	.string "learn Flash.\p"
+	.string "The Knuckle Badge is yours!\p"
+	.string "With it, your Pokémon can grow\n"
+	.string "up to Lv. 30!\p"
+	.string "Add a Flash license, and it lights\n"
+	.string "up dark caves by itself. Just bring\l"
+	.string "a partner that could learn Flash.\p"
 	.string "Take this Mega Stone as well.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181

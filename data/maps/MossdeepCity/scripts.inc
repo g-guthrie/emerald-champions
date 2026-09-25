@@ -458,9 +458,8 @@ MossdeepCity_Text_SootopolisNewGymLeader: @ 81E5581
 	.string "mentored Wallace.$"
 
 MossdeepCity_Text_AvalancheNonsense:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Big Pearl!$"
+	.string "Hwah! Only a strong Trainer makes\n"
+	.string "it to Mossdeep. Take this Big Pearl!$"
 
 MossdeepCity_Text_HaveTM96:
 	.string "Sell that Big Pearl at a Mart to\n"

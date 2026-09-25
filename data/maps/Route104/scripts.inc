@@ -902,16 +902,16 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 	.string "then spitting them out fast!\p"
 	.string "Here, have a Rare Candy for\n"
 	.string "your Pokémon!\p"
-	.string "It helps one grow a level, up\n"
-	.string "to your current cap.$"
+	.string "It helps one grow a level, as far\n"
+	.string "as your Badges allow.$"
 
 Route104_Text_TMsAreOneTimeUse:
-	.string "The Center tutor teaches every\n"
-	.string "move your Pokémon can legally\l"
-	.string "learn, for free.\p"
-	.string "That Rare Candy will help it\n"
-	.string "grow one level, up to your\l"
-	.string "current cap.$"
+	.string "The Move Tutor will teach your\n"
+	.string "Pokémon any move it can learn,\l"
+	.string "for free!\p"
+	.string "And that Rare Candy will help one\n"
+	.string "grow a level, as far as your\l"
+	.string "Badges allow.$"
 
 Route104_Text_DontNeedThisTakeIt: @ 81ED96A
 	.string "This Flower Shop started selling\n"

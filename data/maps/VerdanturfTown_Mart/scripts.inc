@@ -55,16 +55,12 @@ VerdanturfTown_Mart_EventScript_ReceivedTM66::
 	end
 
 VerdanturfTown_Mart_Text_SlowPokemon:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "You've come such a long way!\n"
+	.string "Please take this Rare Candy!$"
 
 VerdanturfTown_Mart_Text_HaveTM66:
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+	.string "A Rare Candy helps a Pokémon grow\n"
+	.string "a level, as far as your Badges allow.$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
 	.string "For any Pokémon match, X Sp. Atk\n"

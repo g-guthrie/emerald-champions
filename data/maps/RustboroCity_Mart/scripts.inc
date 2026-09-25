@@ -36,16 +36,16 @@ RustboroCity_Mart_Text_ExcuseMeTrainer:
 	.string "False Swipe leaves a wild Pokémon\n"
 	.string "with at least one HP. It helps\l"
 	.string "when you're trying to catch one.\p"
-	.string "The Center tutor can teach it\n"
-	.string "to compatible Pokémon.\p"
+	.string "The Move Tutor can teach it\n"
+	.string "to any Pokémon that can learn it.\p"
 	.string "Here's a Rare Candy to help\n"
 	.string "your new partners grow!$"
 
 RustboroCity_Mart_Text_HaveTM98:
 	.string "Use that Rare Candy to help a\n"
 	.string "partner grow one level.\p"
-	.string "It can't raise a Pokémon past\n"
-	.string "the current level cap, though.$"
+	.string "It won't raise a Pokémon past\n"
+	.string "the level your Badges allow, though.$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
 	.string "I buy Paralyze Heals and Antidotes\n"

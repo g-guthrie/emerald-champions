@@ -526,8 +526,8 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
-static const u8 sText_DigThroughWall[] = _("Use DIG to open a passage\nthrough this wall?");
-static const u8 sText_LevelerComplete[] = _("Party raised to each Pokémon's cap.\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_DigThroughWall[] = _("Use Dig to open a passage\nthrough this wall?");
+static const u8 sText_LevelerComplete[] = _("Your party grew as high as your\nBadges allow: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
 
@@ -5850,7 +5850,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         {
             gPartyMenuUseExitCallback = FALSE;
             ConvertIntToDecimalStringN(gStringVar1, GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES)), STR_CONV_MODE_LEFT_ALIGN, 3);
-            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("This Pokémon's level cap is Lv. {STR_VAR_1}."));
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("This Pokémon can't grow past\nLv. {STR_VAR_1} for now."));
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
             if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))

@@ -664,13 +664,11 @@ MauvilleCity_Text_BeenCheckingOutTV: @ 81E0699
 	.string "Hi, have you been checking out TVs?$"
 
 MauvilleCity_Text_GiveTM74:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Hey there! You look like you could\n"
+	.string "use a treat. Have a Rare Candy!$"
 
 MauvilleCity_Text_HaveTM74:
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+	.string "Just one level per candy, mind you.\n"
+	.string "Your Badges decide how high it goes.\p"
+	.string "Want new moves? The Move Tutor at\n"
+	.string "the Pokémon Center teaches them!$"

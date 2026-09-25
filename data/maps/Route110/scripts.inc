@@ -833,9 +833,8 @@ Route110_Text_ChallengeReactionBest: @ 81F0431
 	.string "You've shaken me to my very soul!$"
 
 Route110_Text_GiveTM93:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Such a ride deserves a reward.\n"
+	.string "Please accept this Rare Candy!$"
 
 Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "Your technique is remarkable.\p"
@@ -843,9 +842,8 @@ Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "still avoiding collisions.$"
 
 Route110_Text_GiveTM83:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Still, a fine effort deserves\n"
+	.string "something. Take this Rare Candy.$"
 
 Route110_Text_ChallengeReactionOk: @ 81F0500
 	.string "I would consider you a work in\n"
@@ -927,12 +925,12 @@ Route110_Text_TrickHouseSign: @ 81F09DB
 	.string "to reach the wondrous Trick House.”$"
 
 Route110_Text_BestRecord: @ 81F0A1E
-	.string "THE BEST RECORD TO DATE…\p"
+	.string "The Best Record to Date…\p"
 	.string "No. of collisions: {STR_VAR_1}\p"
 	.string "Elapsed time: {STR_VAR_2}$"
 
 Route110_Text_ThereIsNoRecord: @ 81F0A5E
-	.string "THE BEST RECORD TO DATE…\p"
+	.string "The Best Record to Date…\p"
 	.string "No one seems to have taken the\n"
 	.string "challenge. There is no record…$"
 

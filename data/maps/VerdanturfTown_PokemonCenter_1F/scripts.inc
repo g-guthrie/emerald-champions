@@ -75,16 +75,14 @@ VerdanturfTown_PokemonCenter_1F_Text_DoYouLikeBugs:
 	.string "You agree, right?$"
 
 VerdanturfTown_PokemonCenter_1F_Text_GiveTM81:
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Yeah! You get it! That means you\n"
+	.string "get this Rare Candy!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_HaveTM81:
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+	.string "Give it to a Bug Pokémon! It'll grow\n"
+	.string "a level, if your Badges allow it.\p"
+	.string "Want it to learn cool moves, too?\n"
+	.string "Ask the Move Tutor right here!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_DontLikeBugs:
 	.string "No? We're not on the same wavelength.$"

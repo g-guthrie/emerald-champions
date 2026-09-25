@@ -341,9 +341,11 @@ LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge: @ 81FF32F
 	.string "from Flannery.$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis: @ 81FF359
-	.string "The Heat Badge lets you use\n"
-	.string "Strength. Get the license from\l"
-	.string "the grateful man in Rusturf Tunnel.\p"
+	.string "With the Heat Badge, your Pokémon\n"
+	.string "can grow up to Lv. 45!\p"
+	.string "It also lets you use Strength. Get\n"
+	.string "the license from the grateful man\l"
+	.string "in Rusturf Tunnel.\p"
 	.string "Bring a Pokémon able to learn\n"
 	.string "Strength; no move slot needed!\p"
 	.string "Take this Mega Stone, too!$"

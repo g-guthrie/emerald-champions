@@ -66,11 +66,10 @@ PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats: @ 820356F
 	.string "something.$"
 
 PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion: @ 82C7CFA
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Out here on the sea, we look after\n"
+	.string "travelers. Take this Rare Candy!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion: @ 82C7E7A
 	.string "I will become a star one day.\n"
-	.string "Use that Rare Candy to help your\l"
-	.string "partner grow, too!$"
+	.string "May that candy help your partner\l"
+	.string "shine, too!$"

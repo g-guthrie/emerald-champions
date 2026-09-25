@@ -30,16 +30,14 @@ SootopolisCity_House1_EventScript_Kecleon:: @ 822698E
 	end
 
 SootopolisCity_House1_Text_DevelopedThisTM: @ 82269A1
-	.string "You have earned a little help\n"
-	.string "for your journey. Please take\l"
-	.string "this Rare Candy!$"
+	.string "Hm! You carry yourself like a\n"
+	.string "fighter. Take this Rare Candy!$"
 
 SootopolisCity_House1_Text_ExplainBrickBreak: @ 8226A13
-	.string "A Rare Candy raises a Pokémon by\n"
-	.string "one level, up to your current\l"
-	.string "cap.\p"
-	.string "For new moves, visit the Center\n"
-	.string "tutor.$"
+	.string "One candy, one level. No higher\n"
+	.string "than your Badges allow!\p"
+	.string "For new techniques, visit the\n"
+	.string "Move Tutor. Hwah!$"
 
 SootopolisCity_House1_Text_Kecleon: @ 8226A60
 	.string "Kecleon: Puu puhyaah.$"

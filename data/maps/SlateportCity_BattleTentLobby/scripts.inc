@@ -282,8 +282,8 @@ SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe: @ 8208B4E
 
 SlateportCity_BattleTentLobby_Text_ExplainTorment: @ 8208C5C
 	.string "That's, like, a Rare Candy!\p"
-	.string "It raises a Pokémon one level,\n"
-	.string "up to your current cap.\p"
+	.string "It, like, raises a Pokémon a level,\n"
+	.string "as far as your Badges allow.\p"
 	.string "Hey, now, you listen here, like,\n"
 	.string "I'm not laying a torment on you!$"
 

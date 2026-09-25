@@ -1957,8 +1957,8 @@ const struct ItemInfo gItemsInfo[] =
         .price = 10000,
         .description = COMPOUND_STRING(
             "Raises a Pokémon\n"
-            "by one level.\n"
-            "Stops at the cap."),
+            "by one level, up to\n"
+            "what Badges allow."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_LEVEL_UP_ITEM,
         .type = ITEM_USE_PARTY_MENU,
@@ -14663,8 +14663,8 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Raises the party\n"
-            "to the current\n"
-            "level cap."),
+            "as high as your\n"
+            "Badges allow."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
