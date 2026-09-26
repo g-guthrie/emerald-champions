@@ -9,6 +9,7 @@ struct Pokemon;
 enum DifficultyLevel GetCurrentDifficultyLevel(void);
 void SetCurrentDifficultyLevel(enum DifficultyLevel);
 u8 GetTrainerLevelReduction(void);
+u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty);
 u8 GetCampaignTrainerLevel(s16 offset);
 
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16);

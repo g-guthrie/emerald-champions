@@ -26,7 +26,12 @@ or data.
   legal-move tutor, no TMs. HMs need their story license, the badge and a party
   member able to learn the move — no move slot. Flight Beacon may use a
   Fly-capable Pokémon from party or PC. Leveler raises the party to the current
-  cap. Standard modern XP below the cap, none at it. Native ability switching.
+  cap. Battles grant no experience; leveling and evolving never change moves.
+  Native ability switching.
+- Inclement's stat buffs and ability changes apply to player-owned and wild
+  Pokémon only, never lowering a stat; trainer-owned Pokémon and tuned teams
+  never change. Difficulty offsets live in `GetTrainerLevelReduction`; any
+  text quoting them derives the numbers from it.
 - No Game Book, player guides, Center battle presets or Center stat editor. No
   new ground or hidden items: only replace original pickups or TM gifts.
 - No Terastallization anywhere.

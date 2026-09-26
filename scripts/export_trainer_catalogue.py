@@ -22,6 +22,17 @@ STATS = ('HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe')
 PARTY = 'src/data/trainers.party'
 
 
+WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
+
+
+def difficulty_offsets():
+    """Levels below Hard for Medium and Easy, read from GetTrainerLevelReductionFor."""
+    body = (ROOT / 'src/difficulty.c').read_text().split('u8 GetTrainerLevelReductionFor(', 1)[1].split('\n}', 1)[0]
+    returns = dict(re.findall(r'case (DIFFICULTY_\w+):\s*return (\d+);', body))
+    hard = int(re.search(r'default:\s*return (\d+);', body)[1])
+    return int(returns['DIFFICULTY_NORMAL']) - hard, int(returns['DIFFICULTY_EASY']) - hard
+
+
 def read(path):
     return (ROOT / path).read_text()
 
@@ -270,7 +281,7 @@ def main():
     w.heading('1. FINDINGS, AUTHORING COMPARISON, AND READING GUIDE')
     findings=[
         f'LOADOUT AGREEMENT: all {len(branches)} retained authored variants and {checked} Pokemon slots match native source for species, order, items, abilities, natures, EVs, IVs, moves, friendship and level offsets. Separate generator verification checks generated encounter/AI tables. Agreement is not proof that every tactical idea works or every battle has been played.',
-        'LEVELS: actual campaign level = live player cap + authored offset + difficulty adjustment, with a floor of 1 and the existing native byte representation bound of 255. Opponents can exceed 100. Hard plays the roster as authored against the cap; Medium is one level below and Easy four. The cap ladder is Inclement Emerald Strict, badge-indexed, with one extra step at the Groudon awakening: 14, 20, 30, 40, 45, 55, 60, 65, 70, 80, 100. The printed absolute Level in trainers.party is a Hard-difficulty preview rendered against the authored strict_cap, not a stored encounter level.',
+        f'LEVELS: actual campaign level = live player cap + authored offset + difficulty adjustment, with a floor of 1 and the existing native byte representation bound of 255. Opponents can exceed 100. Hard plays the roster as authored against the cap; Medium is {WORDS[difficulty_offsets()[0]]} level(s) below and Easy {WORDS[difficulty_offsets()[1]]}. The cap ladder is Inclement Emerald Strict, badge-indexed, with one extra step at the Groudon awakening: 14, 20, 30, 40, 45, 55, 60, 65, 70, 80, 100. The printed absolute Level in trainers.party is a Hard-difficulty preview rendered against the authored strict_cap, not a stored encounter level.',
         'LEVEL LIMIT REPAIRED: this audit exposed the old signed four-bit (-8..+7) offset restriction and level-100 clamp. Trainer offsets now use signed 16-bit storage and authoring accepts -254..+254. Trainer creation uses bounded EXP plus transient opponent levels; stat recalculation preserves overlevel trainer opponents, including Mega forms and either opponent owner. The native battle/controller level fields remain one byte (1..255); this is a technical representation bound, not a prescribed difficulty cap. No blanket party-level increase was applied.',
         'DWAYNE IS AN EXPERIMENT: the exported working tree currently uses Magmar, Jynx, Electabuzz and Monferno. The original Magby/Smoochum/Elekid/Monferno battle was won in four turns with zero faints. The evolved-team retest is paused mid-battle; it is not an accepted final composition or completed difficulty benchmark. The user clarified that level tuning should preserve deliberate low-stat themes.',
         'RUNTIME RIVALS: native Hoenn trainer blocks are seeds. Nonmatching regional starters replace the first Hoenn starter slot using the selected generation and unchosen starter index, preserving its level and using the matching evolution stage. Appendix 5 gives the complete alternative sets; printing only the seeds would be incomplete.',

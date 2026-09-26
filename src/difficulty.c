@@ -40,7 +40,12 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
 // same authored teams and the same opponents at different level gaps.
 u8 GetTrainerLevelReduction(void)
 {
-    switch (GetCurrentDifficultyLevel())
+    return GetTrainerLevelReductionFor(GetCurrentDifficultyLevel());
+}
+
+u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty)
+{
+    switch (difficulty)
     {
     case DIFFICULTY_EASY:
         return 6;

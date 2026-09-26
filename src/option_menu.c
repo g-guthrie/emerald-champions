@@ -2,6 +2,7 @@
 #include "option_menu.h"
 #include "bg.h"
 #include "difficulty.h"
+#include "string_util.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
@@ -108,13 +109,6 @@ static const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN
 
 static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_menu_text.pal", ".gbapal");
 // note: this is only used in the Japanese release
-// The offsets these lines quote are GetCampaignTrainerLevel's, in
-// src/difficulty.c: relative to Hard, Easy -4 and Medium -1.
-static const u8 *const sDifficultyDescription[] =
-{
-    COMPOUND_STRING("Easy: foes 4 levels lower. Medium: 1."),
-    COMPOUND_STRING("Hard: as designed. Teams never change."),
-};
 
 static const u8 sEqualSignGfx[] = INCGFX_U8("graphics/interface/option_menu_equals_sign.png", ".4bpp");
 
@@ -706,12 +700,16 @@ static void ButtonMode_DrawChoices(u8 selection)
 
 static void DrawDescriptionText(void)
 {
-    u32 i;
+    u8 hard = GetTrainerLevelReductionFor(DIFFICULTY_HARD);
 
+    // The numbers come from GetTrainerLevelReductionFor, so they can't drift.
+    ConvertIntToDecimalStringN(gStringVar1, GetTrainerLevelReductionFor(DIFFICULTY_EASY) - hard, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, GetTrainerLevelReductionFor(DIFFICULTY_NORMAL) - hard, STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Easy: foes {STR_VAR_1} levels lower. Medium: {STR_VAR_2}."));
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(1));
     FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(7), 4, 2, 26 * 8 - 8, 1);
-    for (i = 0; i < ARRAY_COUNT(sDifficultyDescription); i++)
-        AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, sDifficultyDescription[i], 8, 6 + i * 12, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, gStringVar4, 8, 6, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, COMPOUND_STRING("Hard: as designed. Teams never change."), 8, 18, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_FULL);
 }
 
