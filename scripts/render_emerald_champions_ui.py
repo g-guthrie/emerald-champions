@@ -24,8 +24,20 @@ DEFAULT_ROM = ROOT / "pokeemerald-headless.gba"
 DEFAULT_ELF = ROOT / "pokeemerald-headless.elf"
 DEFAULT_OUT = ROOT / "work/visual-audit/rendered/current"
 OVERWORLD_FIXTURE_TABLE = ROOT / "include/emerald_champions_headless_overworld_fixtures.h"
+HEADLESS_HEADER = ROOT / "include/emerald_champions_headless.h"
+
+
+def scenario_id(name: str) -> int:
+    """Index of EC_HEADLESS_SCENARIO_<name>, read from the native enum so the
+    fixture ids cannot drift when scenarios are added or removed."""
+    header = HEADLESS_HEADER.read_text()
+    body = header.split("enum EmeraldChampionsHeadlessScenario", 1)[1].split("};", 1)[0]
+    names = re.findall(r"EC_HEADLESS_SCENARIO_\w+", body)
+    return names.index("EC_HEADLESS_SCENARIO_" + name)
+
+
 SCENARIO_SYMBOL = "gEcHeadlessFixtureScenario"
-GENERIC_OVERWORLD_SCENARIO_ID = 28
+GENERIC_OVERWORLD_SCENARIO_ID = scenario_id("SPECIES_OVERWORLD")
 RESULT_PATTERN = re.compile(r"^RESULT .*video_hash=(?P<video>[0-9a-f]{16}) ", re.MULTILINE)
 READ_PATTERN = re.compile(
     r"^READ width=4 address=(?P<address>[0-9a-f]{8}) value=(?P<value>[0-9a-f]{8})$",
@@ -34,9 +46,9 @@ READ_PATTERN = re.compile(
 
 
 SCENARIOS: dict[str, dict[str, object]] = {
-    "center-oldale": {"id": 1, "frames": 600, "keys": []},
+    "center-oldale": {"id": scenario_id("CENTER_OLDALE"), "frames": 600, "keys": []},
     "nurse-heal-facing-machine": {
-        "id": 1,
+        "id": scenario_id("CENTER_OLDALE"),
         "param": 1,
         "frames": 1690,
         "keys": [
@@ -49,7 +61,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "nurse-heal-tray": {
-        "id": 1,
+        "id": scenario_id("CENTER_OLDALE"),
         "param": 1,
         "frames": 1750,
         "keys": [
@@ -62,7 +74,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "nurse-heal-return": {
-        "id": 1,
+        "id": scenario_id("CENTER_OLDALE"),
         "param": 1,
         "frames": 1900,
         "keys": [
@@ -75,52 +87,39 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "whiteout-heal-placement": {
-        "id": 1,
+        "id": scenario_id("CENTER_OLDALE"),
         "param": 2,
         "frames": 1280,
         "keys": [(900, 2, "A"), (1160, 2, "A")],
         "verify": True,
     },
     "whiteout-heal-league-placement": {
-        "id": 1,
+        "id": scenario_id("CENTER_OLDALE"),
         "param": 4,
         "frames": 1280,
         "keys": [(900, 2, "A"), (1160, 2, "A")],
         "verify": True,
     },
     "whiteout-heal-lavaridge-placement": {
-        "id": 1,
+        "id": scenario_id("CENTER_OLDALE"),
         "param": 6,
         "frames": 1280,
         "keys": [(900, 2, "A"), (1160, 2, "A")],
         "verify": True,
     },
-    "trainer-hill-nurse-heal-placement": {
-        "id": 1,
-        "param": 5,
-        "frames": 1750,
-        "keys": [
-            (200, 2, "UP"),
-            (250, 2, "A"),
-            (1400, 2, "A"),
-            (1480, 2, "A"),
-            (1560, 2, "A"),
-        ],
-        "verify": True,
-    },
-    "center-lavaridge": {"id": 2, "frames": 600, "keys": []},
+    "center-lavaridge": {"id": scenario_id("CENTER_LAVARIDGE"), "frames": 600, "keys": []},
     "ability-menu": {
-        "id": 3,
+        "id": scenario_id("ABILITY_MENU"),
         "frames": 520,
         "keys": [(210, 2, "A"), (250, 2, "DOWN"), (290, 2, "A")],
     },
     "ability-back-to-actions": {
-        "id": 3,
+        "id": scenario_id("ABILITY_MENU"),
         "frames": 680,
         "keys": [(210, 2, "A"), (250, 2, "DOWN"), (290, 2, "A"), (560, 2, "B")],
     },
     "ability-cancel-to-actions": {
-        "id": 3,
+        "id": scenario_id("ABILITY_MENU"),
         "frames": 720,
         "keys": [
             (210, 2, "A"),
@@ -131,7 +130,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "ability-applied-message": {
-        "id": 3,
+        "id": scenario_id("ABILITY_MENU"),
         "frames": 680,
         "keys": [
             (210, 2, "A"),
@@ -142,7 +141,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "ability-applied-return": {
-        "id": 3,
+        "id": scenario_id("ABILITY_MENU"),
         "frames": 820,
         "keys": [
             (210, 2, "A"),
@@ -153,16 +152,16 @@ SCENARIOS: dict[str, dict[str, object]] = {
             (720, 2, "A"),
         ],
     },
-    "party-overview": {"id": 3, "frames": 300, "keys": []},
-    "party-action-menu": {"id": 3, "frames": 245, "keys": [(210, 2, "A")]},
-    "options": {"id": 4, "frames": 520, "keys": []},
+    "party-overview": {"id": scenario_id("ABILITY_MENU"), "frames": 300, "keys": []},
+    "party-action-menu": {"id": scenario_id("ABILITY_MENU"), "frames": 245, "keys": [(210, 2, "A")]},
+    "options": {"id": scenario_id("OPTIONS"), "frames": 520, "keys": []},
     "battle-vendor": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 760,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (360, 2, "A"), (460, 2, "A")],
     },
     "battle-vendor-category-back": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 900,
         "keys": [
             (220, 2, "UP"),
@@ -173,13 +172,13 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-postbadge-root": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "param": 1,
         "frames": 620,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (360, 2, "A")],
     },
     "battle-vendor-postbadge-held-items": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "param": 1,
         "frames": 900,
         "keys": [
@@ -190,7 +189,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-shop": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1040,
         "keys": [
             (220, 2, "UP"),
@@ -201,7 +200,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-quantity": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1240,
         "keys": [
             (220, 2, "UP"),
@@ -213,7 +212,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-quantity-adjusted": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1300,
         "keys": [
             (220, 2, "UP"),
@@ -226,7 +225,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-quantity-back": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1480,
         "keys": [
             (220, 2, "UP"),
@@ -239,7 +238,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-confirm": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1580,
         "keys": [
             (220, 2, "UP"),
@@ -252,7 +251,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-confirm-no": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1760,
         "keys": [
             (220, 2, "UP"),
@@ -266,7 +265,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-purchase-success": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 3400,
         "keys": [
             (220, 2, "UP"),
@@ -280,7 +279,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "battle-vendor-purchase-return": {
-        "id": 5,
+        "id": scenario_id("BATTLE_VENDOR"),
         "frames": 1940,
         "keys": [
             (220, 2, "UP"),
@@ -295,22 +294,22 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "move-specialist-root": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 350,
         "keys": [(220, 2, "UP"), (250, 2, "A")],
     },
     "move-specialist-root-back": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 520,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "B")],
     },
     "move-specialist-party-prompt": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 700,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "A")],
     },
     "move-specialist-party-back": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 880,
         "keys": [
             (220, 2, "UP"),
@@ -321,7 +320,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "capture-to-party": {
-        "id": 57,
+        "id": scenario_id("CAPTURE_TO_PARTY"),
         "frames": 3000,
         "keys": [
             (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
@@ -332,7 +331,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-to-pc": {
-        "id": 58,
+        "id": scenario_id("CAPTURE_TO_PC"),
         "frames": 3000,
         "keys": [
             (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
@@ -343,7 +342,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-quest-diancie": {
-        "id": 59,
+        "id": scenario_id("CAPTURE_QUEST_DIANCIE"),
         "frames": 4200,
         "keys": [
             (300, 20, "UP"), (380, 2, "A"),
@@ -357,7 +356,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-quest-registeel": {
-        "id": 60,
+        "id": scenario_id("CAPTURE_QUEST_REGISTEEL"),
         "frames": 4200,
         "keys": [
             (300, 20, "UP"), (380, 2, "A"),
@@ -371,7 +370,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-quest-latios": {
-        "id": 61,
+        "id": scenario_id("CAPTURE_QUEST_LATIOS"),
         "frames": 5000,
         "keys": [
             (300, 20, "UP"), (380, 2, "A"),
@@ -387,7 +386,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "capture-ordinary-first": {
-        "id": 62,
+        "id": scenario_id("CAPTURE_ORDINARY_FIRST"),
         "frames": 3200,
         "keys": [
             (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
@@ -399,14 +398,14 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "roxanne-victory": {
-        "id": 63,
+        "id": scenario_id("ROXANNE_VICTORY"),
         "frames": 6500,
         "keys": [(300, 20, "UP"), (380, 2, "A")],
         "repeat_key": (420, 6460, 40, 2, "A"),
         "verify": True,
     },
     "first-center-acquisition": {
-        "id": 64,
+        "id": scenario_id("FIRST_CENTER_ACQUISITION"),
         "frames": 7500,
         "keys": [(300, 20, "UP"), (380, 2, "A")],
         "repeat_key": (420, 7460, 40, 2, "A"),
@@ -414,17 +413,17 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "stop_on_observed": True,
     },
     "move-specialist-learn-move-party": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 940,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "A"), (640, 2, "A")],
     },
     "move-specialist-learn-move-back": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 1120,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "A"), (640, 2, "A"), (980, 2, "B")],
     },
     "all-legal-moves": {
-        "id": 6,
+        "id": scenario_id("MOVE_SPECIALIST"),
         "frames": 1050,
         "keys": [
             (220, 2, "UP"),
@@ -437,12 +436,12 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "game-corner-prizes": {
-        "id": 10,
+        "id": scenario_id("GAME_CORNER"),
         "frames": 700,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (360, 2, "A"), (480, 2, "A")],
     },
     "game-corner-regions": {
-        "id": 10,
+        "id": scenario_id("GAME_CORNER"),
         "frames": 980,
         "keys": [
             (220, 2, "UP"),
@@ -456,7 +455,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "game-corner-region-list": {
-        "id": 10,
+        "id": scenario_id("GAME_CORNER"),
         "frames": 760,
         "keys": [
             (220, 2, "UP"),
@@ -468,109 +467,109 @@ SCENARIOS: dict[str, dict[str, object]] = {
             (680, 2, "A"),
         ],
     },
-    "circuit-lobby": {"id": 11, "frames": 600, "keys": []},
+    "circuit-lobby": {"id": scenario_id("CIRCUIT_LOBBY"), "frames": 600, "keys": []},
     "circuit-welcome": {
-        "id": 11,
+        "id": scenario_id("CIRCUIT_LOBBY"),
         "frames": 700,
         "keys": [(220, 2, "UP"), (250, 2, "A")],
     },
-    "leveler-complete": {"id": 12, "frames": 700, "keys": []},
-    "all-legal-moves-direct": {"id": 13, "frames": 650, "keys": []},
+    "leveler-complete": {"id": scenario_id("LEVELER"), "frames": 700, "keys": []},
+    "all-legal-moves-direct": {"id": scenario_id("ALL_LEGAL_MOVES"), "frames": 650, "keys": []},
     "all-legal-move-selected": {
-        "id": 13,
+        "id": scenario_id("ALL_LEGAL_MOVES"),
         "frames": 1050,
         "keys": [(700, 2, "A")],
     },
     "all-legal-move-selected-back": {
-        "id": 13,
+        "id": scenario_id("ALL_LEGAL_MOVES"),
         "frames": 1250,
         "keys": [(700, 2, "A"), (1080, 2, "B")],
     },
     "all-legal-move-confirmed": {
-        "id": 13,
+        "id": scenario_id("ALL_LEGAL_MOVES"),
         "frames": 1500,
         "keys": [(700, 2, "A"), (1080, 2, "A")],
     },
     "all-legal-move-give-up": {
-        "id": 13,
+        "id": scenario_id("ALL_LEGAL_MOVES"),
         "frames": 1000,
         "keys": [(700, 2, "B")],
     },
     "all-legal-move-give-up-no": {
-        "id": 13,
+        "id": scenario_id("ALL_LEGAL_MOVES"),
         "frames": 1220,
         "keys": [(700, 2, "B"), (1040, 2, "B")],
     },
-    "all-legal-moves-mew": {"id": 14, "frames": 650, "keys": []},
+    "all-legal-moves-mew": {"id": scenario_id("ALL_LEGAL_MOVES_MEW"), "frames": 650, "keys": []},
     "all-legal-moves-mew-middle": {
-        "id": 14,
+        "id": scenario_id("ALL_LEGAL_MOVES_MEW"),
         "frames": 1500,
         "keys": [(400, 1000, "DOWN")],
     },
     "all-legal-moves-mew-final": {
-        "id": 14,
+        "id": scenario_id("ALL_LEGAL_MOVES_MEW"),
         "frames": 3500,
         "keys": [(400, 3000, "DOWN")],
     },
     "all-legal-move-replacement": {
-        "id": 51,
+        "id": scenario_id("MOVE_REPLACEMENT"),
         "frames": 1000,
         "keys": [(400, 2, "A")],
         "verify": True,
         "stop_on_observed": True,
     },
     "dewford-gym-entry": {
-        "id": 52,
+        "id": scenario_id("DEWFORD_GYM_ENTRY"),
         "frames": 1000,
         "keys": [(300, 120, "UP")],
         "verify": True,
     },
-    "start-menu-full": {"id": 52, "frames": 700, "keys": [(400, 2, "START")]},
+    "start-menu-full": {"id": scenario_id("START_MENU_FULL"), "frames": 700, "keys": [(400, 2, "START")]},
     "start-menu-scroll-bottom": {
-        "id": 53,
+        "id": scenario_id("START_MENU_FULL"),
         "frames": 900,
         "keys": [(400, 2, "START"), (480, 2, "DOWN"), (492, 2, "DOWN"), (504, 2, "DOWN"), (516, 2, "DOWN"), (528, 2, "DOWN"), (540, 2, "DOWN"), (552, 2, "DOWN"), (564, 2, "DOWN")],
     },
-    "start-menu-wrap-up": {"id": 52, "frames": 800, "keys": [(400, 2, "START"), (480, 2, "UP")]},
+    "start-menu-wrap-up": {"id": scenario_id("START_MENU_FULL"), "frames": 800, "keys": [(400, 2, "START"), (480, 2, "UP")]},
     "start-menu-wrap-down": {
-        "id": 53,
+        "id": scenario_id("START_MENU_FULL"),
         "frames": 900,
         "keys": [(400, 2, "START"), (480, 2, "DOWN"), (492, 2, "DOWN"), (504, 2, "DOWN"), (516, 2, "DOWN"), (528, 2, "DOWN"), (540, 2, "DOWN"), (552, 2, "DOWN"), (564, 2, "DOWN"), (576, 2, "DOWN")],
     },
     "wild-action-menu": {
-        "id": 15,
+        "id": scenario_id("WILD_ACTION_MENU"),
         "frames": 1500,
         "keys": [(900, 2, "A"), (1100, 2, "A")],
         "verify": True,
     },
     "wild-foe-types": {
-        "id": 49,
+        "id": scenario_id("WILD_FOE_TYPES"),
         "frames": 1500,
         "keys": [(900, 2, "A"), (1100, 2, "A"), (1300, 2, "L")],
         "verify": True,
     },
     "move-details": {
-        "id": 16,
+        "id": scenario_id("MOVE_DETAILS"),
         "frames": 1750,
         "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "R")],
         "verify": True,
     },
     "move-foe-types": {
-        "id": 50,
+        "id": scenario_id("MOVE_FOE_TYPES"),
         "frames": 1750,
         "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "L")],
         "verify": True,
     },
-    "naming": {"id": 18, "frames": 600, "keys": []},
-    "storage-root": {"id": 19, "frames": 700, "keys": []},
-    "storage-boxes": {"id": 19, "frames": 1400, "keys": [(760, 2, "A")]},
+    "naming": {"id": scenario_id("NAMING"), "frames": 600, "keys": []},
+    "storage-root": {"id": scenario_id("STORAGE"), "frames": 700, "keys": []},
+    "storage-boxes": {"id": scenario_id("STORAGE"), "frames": 1400, "keys": [(760, 2, "A")]},
     "storage-box-popup": {
-        "id": 19,
+        "id": scenario_id("STORAGE"),
         "frames": 1900,
         "keys": [(760, 2, "A"), (1250, 2, "START"), (1370, 2, "A"), (1510, 2, "A")],
     },
     "storage-move-items": {
-        "id": 19,
+        "id": scenario_id("STORAGE"),
         "frames": 2800,
         "keys": [
             (900, 2, "DOWN"),
@@ -582,42 +581,42 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
     },
     "starter-regions": {
-        "id": 20,
+        "id": scenario_id("STARTER_REGIONS"),
         "frames": 1100,
         "keys": [(700, 2, "A"), (840, 2, "A")],
     },
-    "circuit-room": {"id": 21, "frames": 900, "keys": []},
-    "pokedex": {"id": 23, "param": 0, "frames": 900, "keys": [], "verify": True},
+    "circuit-room": {"id": scenario_id("CIRCUIT_ROOM"), "frames": 900, "keys": []},
+    "pokedex": {"id": scenario_id("POKEDEX"), "param": 0, "frames": 900, "keys": [], "verify": True},
     "pokedex-info": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 1,
         "frames": 1200,
         "keys": [(900, 2, "A")],
         "verify": True,
     },
     "pokedex-area": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 2,
         "frames": 1400,
         "keys": [(900, 2, "A"), (1200, 2, "RIGHT")],
         "verify": True,
     },
-    "pokedex-area-ashen-woods": {"id": 23, "param": 20, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
-    "pokedex-area-dewford-meadow": {"id": 23, "param": 21, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
-    "pokedex-area-verdanturf-meadow": {"id": 23, "param": 22, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
-    "pokedex-area-ashen-woods-late": {"id": 23, "param": 20, "frames": 1460, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
-    "pokedex-area-verdanturf-meadow-late": {"id": 23, "param": 22, "frames": 1460, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
-    "pokedex-area-ashen-woods-b": {"id": 23, "param": 20, "frames": 1413, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
-    "pokedex-area-ashen-woods-c": {"id": 23, "param": 20, "frames": 1426, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods": {"id": scenario_id("POKEDEX"), "param": 20, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-dewford-meadow": {"id": scenario_id("POKEDEX"), "param": 21, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-verdanturf-meadow": {"id": scenario_id("POKEDEX"), "param": 22, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods-late": {"id": scenario_id("POKEDEX"), "param": 20, "frames": 1460, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-verdanturf-meadow-late": {"id": scenario_id("POKEDEX"), "param": 22, "frames": 1460, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods-b": {"id": scenario_id("POKEDEX"), "param": 20, "frames": 1413, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods-c": {"id": scenario_id("POKEDEX"), "param": 20, "frames": 1426, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
     "pokedex-stats": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 3,
         "frames": 1580,
         "keys": [(900, 2, "A"), (1200, 2, "RIGHT"), (1380, 2, "RIGHT")],
         "verify": True,
     },
     "pokedex-evolutions": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 4,
         "frames": 1760,
         "keys": [
@@ -629,7 +628,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "pokedex-forms": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 5,
         "frames": 2350,
         "keys": [
@@ -642,7 +641,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "pokedex-cry": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 6,
         "frames": 2060,
         "keys": [
@@ -655,7 +654,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "pokedex-size": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 7,
         "frames": 2240,
         "keys": [
@@ -669,14 +668,14 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "pokedex-search": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 8,
         "frames": 1200,
         "keys": [(900, 2, "SELECT")],
         "verify": True,
     },
     "pokedex-search-results": {
-        "id": 23,
+        "id": scenario_id("POKEDEX"),
         "param": 9,
         "frames": 3800,
         "keys": [
@@ -692,59 +691,59 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
         "verify": True,
     },
-    "summary-info": {"id": 24, "param": 0, "frames": 900, "keys": [], "verify": True},
+    "summary-info": {"id": scenario_id("SUMMARY"), "param": 0, "frames": 900, "keys": [], "verify": True},
     "summary-skills": {
-        "id": 24,
+        "id": scenario_id("SUMMARY"),
         "param": 1,
         "frames": 1050,
         "keys": [(800, 2, "RIGHT")],
         "verify": True,
     },
     "summary-moves": {
-        "id": 24,
+        "id": scenario_id("SUMMARY"),
         "param": 2,
         "frames": 1200,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
         "verify": True,
     },
         "summary-move-detail": {
-        "id": 24,
+        "id": scenario_id("SUMMARY"),
         "param": 3,
         "frames": 1400,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT"), (1160, 2, "A")],
         "verify": True,
     },
     "summary-party-roundtrip": {
-        "id": 24,
+        "id": scenario_id("SUMMARY"),
         "param": 4,
         "frames": 1200,
         "keys": [(820, 2, "B")],
         "verify": True,
     },
-    "bag": {"id": 25, "param": 2, "frames": 650, "keys": [], "verify": True},
+    "bag": {"id": scenario_id("BAG"), "param": 2, "frames": 650, "keys": [], "verify": True},
     "bag-berries": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 3,
         "frames": 800,
         "keys": [(700, 2, "RIGHT")],
         "verify": True,
     },
     "bag-poke-balls": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 4,
         "frames": 980,
         "keys": [(700, 2, "RIGHT"), (880, 2, "RIGHT")],
         "verify": True,
     },
     "bag-key-items": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 5,
         "frames": 1160,
         "keys": [(700, 2, "RIGHT"), (880, 2, "RIGHT"), (1060, 2, "RIGHT")],
         "verify": True,
     },
     "bag-mega-stones": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 6,
         "frames": 1340,
         "keys": [
@@ -756,7 +755,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "bag-items": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 0,
         "frames": 1520,
         "keys": [
@@ -769,7 +768,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "bag-medicine": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 1,
         "frames": 1700,
         "keys": [
@@ -783,7 +782,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "bag-battle-items": {
-        "id": 25,
+        "id": scenario_id("BAG"),
         "param": 2,
         "frames": 1880,
         "keys": [
@@ -797,15 +796,15 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
         "verify": True,
     },
-    "frontier-pass": {"id": 26, "frames": 900, "keys": []},
+    "frontier-pass": {"id": scenario_id("FRONTIER_PASS"), "frames": 900, "keys": []},
     "frontier-pass-map": {
-        "id": 26,
+        "id": scenario_id("FRONTIER_PASS"),
         "frames": 1500,
         "keys": [(900, 2, "A")],
     },
-    "ember-path-warden": {"id": 27, "frames": 650, "keys": []},
+    "ember-path-warden": {"id": scenario_id("EMBER_PATH_WARDEN"), "frames": 650, "keys": []},
     "double-status-ability": {
-        "id": 29,
+        "id": scenario_id("DOUBLE_STATUS_ABILITY"),
         "frames": 1640,
         "keys": [(500, 2, "A"), (700, 2, "A"), (900, 2, "A"), (1100, 2, "A")],
         "trigger_frame": 1600,
@@ -813,14 +812,14 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "stop_on_observed": True,
     },
     "mega-ready": {
-        "id": 30,
+        "id": scenario_id("MEGA"),
         "param": 0,
         "frames": 2400,
         "keys": [(900, 2, "A"), (1120, 2, "A"), (1400, 2, "A")],
         "verify": True,
     },
     "mega-active": {
-        "id": 30,
+        "id": scenario_id("MEGA"),
         "param": 1,
         "frames": 5000,
         "keys": [
@@ -836,7 +835,7 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "opposing-primals": {
-        "id": 31,
+        "id": scenario_id("PRIMALS"),
         "frames": 4200,
         "keys": [
             (500, 2, "A"),
@@ -851,45 +850,45 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "safari-action": {
-        "id": 32,
+        "id": scenario_id("SAFARI"),
         "frames": 1800,
         "keys": [(1000, 2, "A")],
         "verify": True,
     },
-    "title-live": {"id": 33, "frames": 900, "keys": []},
-    "birch-introduction": {"id": 34, "frames": 1500, "keys": [(600, 2, "A")]},
-    "trainer-card-gold": {"id": 35, "frames": 1000, "keys": []},
-    "slot-machine": {"id": 36, "frames": 1200, "keys": []},
+    "title-live": {"id": scenario_id("TITLE"), "frames": 900, "keys": []},
+    "birch-introduction": {"id": scenario_id("BIRCH"), "frames": 1500, "keys": [(600, 2, "A")]},
+    "trainer-card-gold": {"id": scenario_id("TRAINER_CARD"), "frames": 1000, "keys": []},
+    "slot-machine": {"id": scenario_id("SLOT_MACHINE"), "frames": 1200, "keys": []},
     "fairy-summary-info": {
-        "id": 38,
+        "id": scenario_id("FAIRY_SUMMARY"),
         "param": 0,
         "frames": 900,
         "keys": [],
         "verify": True,
     },
     "fairy-summary-moves": {
-        "id": 38,
+        "id": scenario_id("FAIRY_SUMMARY"),
         "param": 2,
         "frames": 1200,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
         "verify": True,
     },
     "magma-sparkle-placement": {
-        "id": 40,
+        "id": scenario_id("MAGMA_SPARKLE"),
         "frames": 608,
         "keys": [],
         "trigger_frame": 600,
         "verify": True,
     },
     "furfrou-trims": {
-        "id": 41,
+        "id": scenario_id("FURFROU_TRIMS"),
         "param": 0,
         "frames": 700,
         "keys": [],
         "verify": True,
     },
     "furfrou-trims-scrolled": {
-        "id": 41,
+        "id": scenario_id("FURFROU_TRIMS"),
         "param": 1,
         "frames": 1550,
         "keys": [
@@ -907,14 +906,14 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "furfrou-trims-b-cancel": {
-        "id": 41,
+        "id": scenario_id("FURFROU_TRIMS"),
         "param": 2,
         "frames": 1000,
         "keys": [(800, 2, "B")],
         "verify": True,
     },
     "furfrou-trims-back": {
-        "id": 41,
+        "id": scenario_id("FURFROU_TRIMS"),
         "param": 3,
         "frames": 1750,
         "keys": [
@@ -933,27 +932,27 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "hall-of-fame-record-1": {
-        "id": 42, "param": 1, "frames": 1600, "keys": [],
+        "id": scenario_id("HALL_OF_FAME_RECORD"), "param": 1, "frames": 1600, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "hall-of-fame-record-6": {
-        "id": 42, "param": 6, "frames": 1600, "keys": [],
+        "id": scenario_id("HALL_OF_FAME_RECORD"), "param": 6, "frames": 1600, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-left-open": {
-        "id": 43, "param": 0, "frames": 1000, "keys": [],
+        "id": scenario_id("MULTI_CORRIDOR_DOOR"), "param": 0, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-right-open": {
-        "id": 43, "param": 1, "frames": 1000, "keys": [],
+        "id": scenario_id("MULTI_CORRIDOR_DOOR"), "param": 1, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-left-close": {
-        "id": 43, "param": 2, "frames": 1000, "keys": [],
+        "id": scenario_id("MULTI_CORRIDOR_DOOR"), "param": 2, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     "multi-corridor-door-right-close": {
-        "id": 43, "param": 3, "frames": 1000, "keys": [],
+        "id": scenario_id("MULTI_CORRIDOR_DOOR"), "param": 3, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     # Field moves without HM carriers: a Zigzagoon that could learn the move
@@ -961,24 +960,24 @@ SCENARIOS: dict[str, dict[str, object]] = {
     # face the obstacle; a steady A advances the obstacle text, confirms Yes,
     # and dismisses the used-move text; the run stops at the showcase.
     "field-move-cut-fallback": {
-        "id": 44, "frames": 1500, "keys": [(200, 2, "UP")],
+        "id": scenario_id("FIELD_MOVE_CUT"), "frames": 1500, "keys": [(200, 2, "UP")],
         "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },
     "field-move-rock-smash-fallback": {
-        "id": 45, "frames": 1500, "keys": [(200, 2, "UP")],
+        "id": scenario_id("FIELD_MOVE_ROCK_SMASH"), "frames": 1500, "keys": [(200, 2, "UP")],
         "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },
     "field-move-strength-fallback": {
-        "id": 46, "frames": 1500, "keys": [(200, 2, "UP")],
+        "id": scenario_id("FIELD_MOVE_STRENGTH"), "frames": 1500, "keys": [(200, 2, "UP")],
         "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },
     # The Flight Beacon: the trigger opens the fly map, A picks the current
     # town, and the boxed Wingull that could learn Fly is shown flying.
     "flight-beacon-fly": {
-        "id": 47, "frames": 1500,
+        "id": scenario_id("FLIGHT_BEACON"), "frames": 1500,
         "keys": [(560, 2, "A")],
         "trigger_frame": 300, "verify": True, "stop_on_observed": True,
     },
@@ -992,7 +991,6 @@ SERVICE_UI_SCENARIOS = (
     "whiteout-heal-placement",
     "whiteout-heal-league-placement",
     "whiteout-heal-lavaridge-placement",
-    "trainer-hill-nurse-heal-placement",
     "party-overview",
     "party-action-menu",
     "ability-menu",
@@ -1105,7 +1103,7 @@ for fixture in HOENN_HEAL_FIXTURES:
     slug = str(fixture["id"]).removeprefix("HEAL_LOCATION_").lower().replace("_", "-")
     name = f"heal-whiteout-{slug}"
     SCENARIOS[name] = {
-        "id": 42,
+        "id": scenario_id("HEAL_LOCATION_WHITEOUT"),
         "param": fixture["heal_location_id"],
         "frames": 1280,
         "keys": [(900, 2, "A"), (1160, 2, "A")],

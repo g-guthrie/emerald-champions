@@ -23,6 +23,8 @@ extern void StartPlannedEVSpread(void);
 extern void BufferPlannedEVRow(void);
 extern void AdjustPlannedEV(void);
 extern void ClearPlannedEVs(void);
+extern void UndoPlannedEVs(void);
+extern void GetPlannedEV(void);
 extern void CheckPlannedEVSpreadChanged(void);
 extern void BufferPlannedEVSummary(void);
 extern void ApplyPlannedEVSpread(void);
@@ -154,11 +156,8 @@ static u32 PlanEVs(u32 stat, u32 step)
 static u32 PlannedEV(u32 stat)
 {
     gSpecialVar_0x8005 = stat;
-    BufferPlannedEVRow();
-    u32 value = 0;
-    for (const u8 *c = gStringVar3; *c != EOS; c++)
-        value = value * 10 + (*c - CHAR_0);
-    return value;
+    GetPlannedEV();
+    return gSpecialVar_Result;
 }
 
 TEST("Center EV training: a planned spread changes nothing until it is applied whole")
@@ -222,9 +221,18 @@ TEST("Center EV training: a planned spread changes nothing until it is applied w
     CheckPlannedEVSpreadChanged();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
-    // Clear All empties the plan; a different Pokémon in the slot is refused.
+    // Clear All plans 0 everywhere (a change to confirm); Undo Changes puts
+    // the plan back to the Pokémon's own spread.
     ClearPlannedEVs();
     EXPECT_EQ(PlannedEV(STAT_ATK), 0);
+    CheckPlannedEVSpreadChanged();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    UndoPlannedEVs();
+    EXPECT_EQ(PlannedEV(STAT_ATK), 252);
+    EXPECT_EQ(PlannedEV(STAT_SPEED), 252);
+    CheckPlannedEVSpreadChanged();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    // A different Pokémon in the slot is refused.
     CreateMon(mon, SPECIES_PICHU, 20, 1, OTID_STRUCT_PLAYER_ID);
     ApplyPlannedEVSpread();
     EXPECT_EQ(gSpecialVar_Result, FALSE);

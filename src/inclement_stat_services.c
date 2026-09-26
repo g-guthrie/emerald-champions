@@ -215,15 +215,47 @@ void StartPlannedEVSpread(void)
     gSpecialVar_Result = TRUE;
 }
 
-// One editor row: in VAR_0x8005 stat; out STR_VAR_2 its EVs now and
-// STR_VAR_3 its planned EVs.
+// Editor rows keep four fixed columns whatever the name or digit count:
+// the name, the current EVs right-aligned, the arrow, the planned EVs
+// right-aligned (pixel positions within the list window).
+#define EV_ROW_NOW_RIGHT     70
+#define EV_ROW_ARROW_LEFT    76
+#define EV_ROW_PLAN_RIGHT   112
+
+static u8 *AppendClearTo(u8 *dst, u32 x)
+{
+    *dst++ = EXT_CTRL_CODE_BEGIN;
+    *dst++ = EXT_CTRL_CODE_CLEAR_TO;
+    *dst++ = x;
+    *dst = EOS;
+    return dst;
+}
+
+static u8 *AppendRightAligned(u8 *dst, u32 value, u32 rightEdge)
+{
+    u8 digits[4];
+    ConvertIntToDecimalStringN(digits, value, STR_CONV_MODE_LEFT_ALIGN, 3);
+    dst = AppendClearTo(dst, rightEdge - GetStringWidth(FONT_NORMAL, digits, 0));
+    return StringCopy(dst, digits);
+}
+
+// One editor row for the stat in VAR_0x8005, in STR_VAR_2.
 void BufferPlannedEVRow(void)
 {
     struct Pokemon *mon = GetPlannedEVsMon();
     u32 stat = min(gSpecialVar_0x8005, NUM_STATS - 1);
+    u8 *dst = StringCopy(gStringVar2, sPlannedEVStatNames[stat]);
 
-    ConvertIntToDecimalStringN(gStringVar2, mon != NULL ? GetMonData(mon, sStatData[stat]) : 0, STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, sPlannedEVs[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
+    dst = AppendRightAligned(dst, mon != NULL ? GetMonData(mon, sStatData[stat]) : 0, EV_ROW_NOW_RIGHT);
+    dst = AppendClearTo(dst, EV_ROW_ARROW_LEFT);
+    *dst++ = CHAR_RIGHT_ARROW;
+    AppendRightAligned(dst, sPlannedEVs[stat], EV_ROW_PLAN_RIGHT);
+}
+
+// Planned value of the stat in VAR_0x8005, in VAR_RESULT.
+void GetPlannedEV(void)
+{
+    gSpecialVar_Result = gSpecialVar_0x8005 < NUM_STATS ? sPlannedEVs[gSpecialVar_0x8005] : 0;
 }
 
 // Out STR_VAR_3 the planned total.
@@ -304,6 +336,16 @@ void ClearPlannedEVs(void)
 {
     for (u32 i = 0; i < NUM_STATS; i++)
         sPlannedEVs[i] = 0;
+}
+
+// Undo Changes: the plan goes back to the Pokémon's spread, which nothing
+// has touched since the editor opened.
+void UndoPlannedEVs(void)
+{
+    struct Pokemon *mon = GetPlannedEVsMon();
+
+    for (u32 i = 0; i < NUM_STATS; i++)
+        sPlannedEVs[i] = mon != NULL ? min(GetMonData(mon, sStatData[i]), MAX_PER_STAT_EVS) : 0;
 }
 
 // Out VAR_RESULT TRUE when the plan differs from the Pokémon's spread.

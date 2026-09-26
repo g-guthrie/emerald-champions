@@ -9292,7 +9292,8 @@ enum Item GetBattleRestoredHeldItem(enum BattleTrainer trainer, u32 partySlot)
     {
         const struct PartyState *state = &gBattleStruct->partyState[trainer][partySlot];
         // Only the holder's own use is refunded by the Regenerator. A Berry
-        // knocked off, stolen, eaten by a foe, burned or corroded is gone.
+        // stolen, eaten by a foe, burned or corroded is gone; a knocked-off
+        // one is not recorded here and returns like any other item.
         if (state->originalBerryRemoved || state->originalBerryDestroyed)
             return ITEM_NONE;
         if (state->originalBerryConsumed

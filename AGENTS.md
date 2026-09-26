@@ -38,9 +38,9 @@ or data.
 - No Terastallization anywhere.
 - Held items: the first Center nurse gives the Regenerator Key Item with the
   Leveler. With it, a held Berry its own holder eats in battle returns after
-  battle. A Berry knocked off, stolen, eaten by a foe, burned or corroded is
-  gone. Knock Off removes other items for the current battle only; Thief and
-  Covet transfer permanently.
+  battle. A Berry stolen, swapped away, eaten by a foe, burned or corroded is
+  gone. Knock Off removes an item, Berries included, for the current battle
+  only; Thief and Covet transfer permanently.
 - EVs: every Pokémon joining the player (catch, gift, starter, trade, hatch)
   arrives with 252 HP / 52 Atk, Def, SpA, SpD / 50 Spe; owned Pokémon keep
   their chosen spread. Every Center move tutor plans a whole spread and

@@ -602,6 +602,7 @@ gSpecials::
 	def_special BufferPlannedEVStatPrompt
 	def_special AdjustPlannedEV
 	def_special ClearPlannedEVs
+	def_special UndoPlannedEVs
 	def_special CheckPlannedEVSpreadChanged
 	def_special BufferPlannedEVSummary
 	def_special ApplyPlannedEVSpread

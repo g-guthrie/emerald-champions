@@ -81,7 +81,8 @@ EmeraldChampions_EventScript_EVTrainingChooseMon:
 	setvar VAR_EV_PLAN_CURSOR, 0
 	setvar VAR_EV_PLAN_STEP, 0
 
-@ The editor: every stat as "now > planned", then Clear All and Confirm.
+@ The editor: every stat as "now > planned", then Undo Changes, Clear All
+@ and Confirm.
 EmeraldChampions_EventScript_EVPlan:
 	bufferpartymonnick STR_VAR_1, VAR_EV_PLAN_MON
 	special BufferPlannedEVTotal
@@ -92,29 +93,31 @@ EmeraldChampions_EventScript_EVPlan:
 	delay 1
 	setvar VAR_0x8005, 0
 	special BufferPlannedEVRow
-	dynmultipush EmeraldChampions_Text_EVRowHP, 0
+	dynmultipush EmeraldChampions_Text_EVRow, 0
 	setvar VAR_0x8005, 1
 	special BufferPlannedEVRow
-	dynmultipush EmeraldChampions_Text_EVRowAttack, 1
+	dynmultipush EmeraldChampions_Text_EVRow, 1
 	setvar VAR_0x8005, 2
 	special BufferPlannedEVRow
-	dynmultipush EmeraldChampions_Text_EVRowDefense, 2
+	dynmultipush EmeraldChampions_Text_EVRow, 2
 	setvar VAR_0x8005, 3
 	special BufferPlannedEVRow
-	dynmultipush EmeraldChampions_Text_EVRowSpeed, 3
+	dynmultipush EmeraldChampions_Text_EVRow, 3
 	setvar VAR_0x8005, 4
 	special BufferPlannedEVRow
-	dynmultipush EmeraldChampions_Text_EVRowSpAtk, 4
+	dynmultipush EmeraldChampions_Text_EVRow, 4
 	setvar VAR_0x8005, 5
 	special BufferPlannedEVRow
-	dynmultipush EmeraldChampions_Text_EVRowSpDef, 5
-	dynmultipush EmeraldChampions_Text_EVPlanClearAll, 6
-	dynmultipush EmeraldChampions_Text_EVPlanConfirm, 7
+	dynmultipush EmeraldChampions_Text_EVRow, 5
+	dynmultipush EmeraldChampions_Text_EVPlanUndo, 6
+	dynmultipush EmeraldChampions_Text_EVPlanClearAll, 7
+	dynmultipush EmeraldChampions_Text_EVPlanConfirm, 8
 	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_PLAN_CURSOR, DYN_MULTICHOICE_CB_NONE
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EVPlanBack
 	copyvar VAR_EV_PLAN_CURSOR, VAR_RESULT
-	goto_if_eq VAR_RESULT, 7, EmeraldChampions_EventScript_EVPlanConfirm
-	goto_if_eq VAR_RESULT, 6, EmeraldChampions_EventScript_EVPlanClearAll
+	goto_if_eq VAR_RESULT, 8, EmeraldChampions_EventScript_EVPlanConfirm
+	goto_if_eq VAR_RESULT, 7, EmeraldChampions_EventScript_EVPlanClearAll
+	goto_if_eq VAR_RESULT, 6, EmeraldChampions_EventScript_EVPlanUndo
 
 @ One stat: stay here, step by step, until B returns to the editor.
 EmeraldChampions_EventScript_EVPlanStat:
@@ -149,8 +152,16 @@ EmeraldChampions_EventScript_EVPlanTotalFull:
 	msgbox EmeraldChampions_Text_EVPlanTotalFull, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_EVPlanStat
 
+@ Undo Changes: back to the Pokémon's own spread; free, nothing applied.
+EmeraldChampions_EventScript_EVPlanUndo:
+	special UndoPlannedEVs
+	msgbox EmeraldChampions_Text_EVPlanUndone, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EVPlan
+
+@ Clear All: plan 0 everywhere, applied through Confirm like any change.
 EmeraldChampions_EventScript_EVPlanClearAll:
 	special ClearPlannedEVs
+	msgbox EmeraldChampions_Text_EVPlanClearedAll, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_EVPlan
 
 EmeraldChampions_EventScript_EVPlanConfirm:
@@ -203,24 +214,18 @@ EmeraldChampions_Text_EVTraining:
 	.string "EV Training$"
 EmeraldChampions_Text_EVTrainingIntro:
 	.string "Choose a Pokémon and plan its EVs.\n"
-	.string "A new spread costs ¥500 to apply.$"
+	.string "A new spread costs ¥500 to apply.\p"
+	.string "Undo Changes puts the plan back.\n"
+	.string "Clear All plans 0 in every stat.$"
 EmeraldChampions_Text_EVTrainingEgg:
 	.string "An Egg can't be trained yet.$"
 EmeraldChampions_Text_EVPlanPrompt:
 	.string "{STR_VAR_1}: {STR_VAR_3} of 510 EVs planned.\n"
 	.string "Each row shows now and planned.$"
-EmeraldChampions_Text_EVRowHP:
-	.string "HP{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
-EmeraldChampions_Text_EVRowAttack:
-	.string "Attack{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
-EmeraldChampions_Text_EVRowDefense:
-	.string "Defense{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
-EmeraldChampions_Text_EVRowSpeed:
-	.string "Speed{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
-EmeraldChampions_Text_EVRowSpAtk:
-	.string "Sp. Atk{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
-EmeraldChampions_Text_EVRowSpDef:
-	.string "Sp. Def{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVRow:
+	.string "{STR_VAR_2}$"
+EmeraldChampions_Text_EVPlanUndo:
+	.string "Undo Changes$"
 EmeraldChampions_Text_EVPlanClearAll:
 	.string "Clear All$"
 EmeraldChampions_Text_EVPlanConfirm:
@@ -257,6 +262,12 @@ EmeraldChampions_Text_EVPlanApplied:
 EmeraldChampions_Text_EVPlanUnchanged:
 	.string "That's the spread it already has.\n"
 	.string "Change a stat first.$"
+EmeraldChampions_Text_EVPlanUndone:
+	.string "The plan is back to {STR_VAR_1}'s\n"
+	.string "current spread. Nothing was charged.$"
+EmeraldChampions_Text_EVPlanClearedAll:
+	.string "Every stat is planned at 0.\n"
+	.string "Confirm to remove all its EVs.$"
 EmeraldChampions_Text_EVPlanDiscard:
 	.string "Discard changes?$"
 
