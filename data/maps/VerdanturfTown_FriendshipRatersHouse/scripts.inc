@@ -145,8 +145,8 @@ VerdanturfTown_FriendshipRatersHouse_Text_NotDesperateOrAnything: @ 8203E12
 VerdanturfTown_FriendshipRatersHouse_Text_ReallyWantedToGetBagon: @ 8203E7F
 	.string "I know I could go looking for one\n"
 	.string "on my own, but…\p"
-	.string "But I really wanted to get an\n"
-	.string "Igglybuff that another Trainer caught…$"
+	.string "But I really wanted an Igglybuff\n"
+	.string "that another Trainer caught…$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou: @ 82030ED
 	.string "Let me see your Pokémon.\n"

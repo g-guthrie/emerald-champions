@@ -1221,8 +1221,8 @@ RustboroCity_Text_DevelopedNewPokenavFeature:
 RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
 	.string "The Hoenn Map shows where you are\n"
 	.string "and the places you can explore.\p"
-	.string "Use A to zoom in and B to go back.\n"
-	.string "Close the PokéNav when you're done.$"
+	.string "Press A to zoom in and out.\n"
+	.string "Press B to close it when you're done.$"
 
 RustboroCity_Text_IdBetterGetBackToWork: @ 81E2464
 	.string "Okay, I'd better get back to work.\n"

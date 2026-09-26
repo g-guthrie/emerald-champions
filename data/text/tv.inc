@@ -609,8 +609,8 @@ gTV3CheersForPokeblocksText04::
 	.string "a better showing next time!$"
 
 gTV3CheersForPokeblocksText05::
-	.string "Tune in next time!\n"
-	.string "Our slogan is “3 Cheers for Pokéblocks!”$"
+	.string "Tune in next time! Our slogan is\n"
+	.string "“3 Cheers for Pokéblocks!”$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer::
 	.string "Hi, there!\p"
