@@ -1533,8 +1533,10 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
     {
         type = TYPE_NORMAL; // Max Guard is always a Normal-type move
     }
-    else if (P_SHOW_DYNAMIC_TYPES) // Non-vanilla changes to battle UI showing dynamic types
+    else
     {
+        // Emerald Champions: the type the move really has now (Pixilate, Weather
+        // Ball, ...), the same one its effectiveness mark is worked out from.
         struct Pokemon *mon = GetBattlerMon(battler);
         type = CheckDynamicMoveType(mon, move, battler, MON_IN_BATTLE);
     }
