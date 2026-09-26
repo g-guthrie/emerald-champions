@@ -1775,8 +1775,9 @@ bool32 IsAbilityAndRecord(enum BattlerId battler, enum Ability battlerAbility, e
 }
 
 // Knocking out the last wild Pokémon starts the victory tune while the
-// player still has a Pokémon standing.
-static void TryPlayWildVictorySong(enum BattlerId faintedBattler)
+// player still has a Pokémon standing. The faint script starts it with the
+// "fainted!" message; the fainted-mon pass is the fallback.
+void TryPlayWildVictorySong(enum BattlerId faintedBattler)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      && !IsOnPlayerSide(faintedBattler)

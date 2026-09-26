@@ -7888,6 +7888,13 @@ void RestoreTarget(void)
     gBattlerTarget = gBattleStruct->savedBattlerTarget[gBattleStruct->savedTargetCount];
 }
 
+void BS_TryPlayWildVictorySong(void)
+{
+    NATIVE_ARGS();
+    TryPlayWildVictorySong(gBattlerFainted);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_SaveTarget(void)
 {
     NATIVE_ARGS();
