@@ -52,7 +52,7 @@ TEST("EC trainer levels: wide offsets survive creation, Mega stats and both oppo
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     EXPECT_EQ(GetCampaignTrainerLevel(50), 150);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignTrainerLevel(50), 147);
+    EXPECT_EQ(GetCampaignTrainerLevel(50), 146);
     // A transient opponent level must not leak into saved player progression.
     gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_OPPONENT_A][0];
     CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);

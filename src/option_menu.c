@@ -109,10 +109,10 @@ static const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN
 static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_menu_text.pal", ".gbapal");
 // note: this is only used in the Japanese release
 // The offsets these lines quote are GetCampaignTrainerLevel's, in
-// src/difficulty.c: cap-relative Easy -4, Medium -2, Hard 0.
+// src/difficulty.c: relative to Hard, Easy -4 and Medium -1.
 static const u8 *const sDifficultyDescription[] =
 {
-    COMPOUND_STRING("Easy: foes 4 levels lower. Medium: 2."),
+    COMPOUND_STRING("Easy: foes 4 levels lower. Medium: 1."),
     COMPOUND_STRING("Hard: as designed. Teams never change."),
 };
 
