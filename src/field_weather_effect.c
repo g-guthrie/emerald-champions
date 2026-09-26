@@ -8,6 +8,8 @@
 #include "script.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
+#include "constants/vars.h"
+#include "event_data.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "sound.h"
@@ -19,9 +21,8 @@
 #include "palette.h"
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
-// Latest map/script request beneath an anomaly. This survives menu and battle
-// returns; map loads and Continue initialize it explicitly.
-EWRAM_DATA static u8 sBaseWeather = WEATHER_NONE;
+// Applied override is transient; the underlying map/script weather is saved
+// in VAR_WEATHER_ANOMALY_BASE so Continue preserves it beneath a storm.
 EWRAM_DATA static u8 sAppliedAnomalyWeather = WEATHER_NONE;
 
 const u16 gCloudsWeatherPalette[] = INCGFX_U16("graphics/weather/cloud.png", ".gbapal");
@@ -2520,7 +2521,7 @@ void SetSavedWeather(enum OverworldWeather weather)
     // (cloud/sun triggers, rain cycles, cutscene resets) cannot clear it.
     u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
 
-    sBaseWeather = weather;
+    VarSet(VAR_WEATHER_ANOMALY_BASE, weather + 1);
     sAppliedAnomalyWeather = anomalyWeather;
     if (anomalyWeather != WEATHER_NONE && !IsTerrainWeather(weather))
         weather = anomalyWeather;
@@ -2541,12 +2542,14 @@ void SetSavedWeatherFromCurrMapHeader(void)
 void InitWeatherAnomalyBaseFromSavedGame(void)
 {
     u8 weather = GetSavedWeather();
+    u16 base = VarGet(VAR_WEATHER_ANOMALY_BASE);
     u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
 
-    // Existing saves contain the effective weather, not the hidden base. If
-    // saved under a storm, recover the map baseline; resume scripts may refine
-    // it. Ordinary scripted weather and terrain remain exactly as saved.
-    if (anomalyWeather != WEATHER_NONE && weather == anomalyWeather)
+    if (base > 0 && base <= WEATHER_COUNT)
+        weather = base - 1;
+    // Legacy saves contain only effective weather. A storm's hidden base is
+    // unrecoverable there, so fall back to the header for that one migration.
+    else if (anomalyWeather != WEATHER_NONE && weather == anomalyWeather)
         weather = gMapHeader.weather;
     SetSavedWeather(weather);
 }
@@ -2557,7 +2560,8 @@ static bool32 RefreshSavedAnomalyWeather(void)
 
     if (sAppliedAnomalyWeather == GetWeatherAnomalyWeatherForCurrentMap())
         return FALSE;
-    SetSavedWeather(sBaseWeather);
+    u16 base = VarGet(VAR_WEATHER_ANOMALY_BASE);
+    SetSavedWeather(base > 0 && base <= WEATHER_COUNT ? base - 1 : gMapHeader.weather);
     return oldWeather != GetSavedWeather();
 }
 
