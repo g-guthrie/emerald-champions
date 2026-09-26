@@ -12,6 +12,9 @@ TITLESCREENGFXDIR := graphics/title_screen
 JPCONTESTGFXDIR := graphics/contest/japanese
 
 types := none normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy stellar
+# The Summary's contest page draws these five icons right after the types
+# (NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_*), in contest category order.
+contest_types := cool beauty cute smart tough
 
 ### Miscellaneous ###
 
@@ -95,8 +98,9 @@ $(BTLANMSPRGFXDIR)/spark.4bpp: $(BTLANMSPRGFXDIR)/spark_0.4bpp \
                                $(BTLANMSPRGFXDIR)/spark_1.4bpp
 	@cat $^ >$@
 
-$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp)
-	@cat $^ >$@
+# Also depends on this file, so a change to either list rebuilds the sheet.
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp) graphics_file_rules.mk
+	@cat $(filter %.4bpp,$^) >$@
 
 $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
                                   $(TYPESGFXDIR)/move_types_2.gbapal \
