@@ -308,7 +308,7 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_BY_TYPE]           = {COMPOUND_STRING("Type"),      {ItemMenu_SortByType}},
     [ACTION_BY_AMOUNT]         = {COMPOUND_STRING("Amount"),    {ItemMenu_SortByAmount}},
     [ACTION_BY_INDEX]          = {COMPOUND_STRING("Index"),     {ItemMenu_SortByIndex}},
-    [ACTION_REGISTER_SELECT]   = {COMPOUND_STRING("SELECT"),    {ItemMenu_RegisterSelect}},
+    [ACTION_REGISTER_SELECT]   = {COMPOUND_STRING("Select"),    {ItemMenu_RegisterSelect}},
     [ACTION_REGISTER_L]        = {COMPOUND_STRING("L"),         {ItemMenu_RegisterL}},
     [ACTION_REGISTER_R]        = {COMPOUND_STRING("R"),         {ItemMenu_RegisterR}},
     [ACTION_DUMMY]             = {gText_EmptyString2, {NULL}}
@@ -1689,7 +1689,24 @@ static void OpenContextMenu(u8 taskId)
                 if (IsItemProtectedFromLoss(gSpecialVar_ItemId))
                     gBagMenu->contextMenuItemsBuffer[2] = ACTION_DUMMY;
                 if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
+                {
                     gBagMenu->contextMenuItemsBuffer[0] = ACTION_CHECK;
+                }
+                else if (gBagPosition.pocket != POCKET_MEGA_STONES
+                      && (GetItemFieldFunc(gSpecialVar_ItemId) == NULL
+                       || GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse))
+                {
+                    // A held or battle-only item has no field use, so no Use
+                    // row that can only answer "not now": Give leads, like Balls.
+                    gBagMenu->contextMenuItemsBuffer[0] = ACTION_GIVE;
+                    gBagMenu->contextMenuItemsBuffer[1] = ACTION_DUMMY;
+                    if (gBagMenu->contextMenuItemsBuffer[2] == ACTION_DUMMY)
+                    {
+                        // Nothing to toss either: keep Cancel beside Give.
+                        gBagMenu->contextMenuItemsBuffer[1] = ACTION_CANCEL;
+                        gBagMenu->contextMenuItemsBuffer[3] = ACTION_DUMMY;
+                    }
+                }
                 break;
             case POCKET_KEY_ITEMS:
                 gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
