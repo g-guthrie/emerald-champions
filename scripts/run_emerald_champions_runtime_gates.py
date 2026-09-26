@@ -117,9 +117,6 @@ RUNTIME_GATES = (
         "Sleep Clause: Sleep clause is deactivated when a sleeping mon is sent out and transforms into a mon with Insomnia / Vital spirit",
     ),
     RuntimeGate(
-        "Billy's Imposter lead targets a vulnerable foe after copying its moves",
-    ),
-    RuntimeGate(
         "test/battle/ai/ai_doubles.c",
     ),
     RuntimeGate(

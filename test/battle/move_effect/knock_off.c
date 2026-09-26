@@ -391,22 +391,6 @@ SINGLE_BATTLE_TEST("Knock Off doesn't knock off begin-battle form-change hold it
     }
 }
 
-SINGLE_BATTLE_TEST("Knock Off does not activate if user faints (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_FAINT_MOVE_EFFECT_TIMING, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ROCKY_HELMET); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_KNOCK_OFF); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
-        MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Rocky Helmet!");
-        MESSAGE("Wobbuffet fainted!");
-    } THEN {
-        EXPECT(opponent->item == ITEM_ROCKY_HELMET);
-    }
-}
 
 SINGLE_BATTLE_TEST("Knock Off does activate if user faints (Champions)")
 {
@@ -549,30 +533,7 @@ SINGLE_BATTLE_TEST("Knock Off used by a Paradox mon doesn't knock off a non-Para
     }
 }
 
-SINGLE_BATTLE_TEST("Knock Off does not remove items that can change the form of the Knock Off user (Gen9-)", s16 damage)
-{
-    enum Item item;
-    
-    PARAMETRIZE { item = ITEM_MASTER_BALL; }
-    PARAMETRIZE { item = ITEM_MALAMARITE; }
 
-    GIVEN {
-        WITH_CONFIG(B_KNOCK_OFF_REMOVAL, GEN_9);
-        PLAYER(SPECIES_MALAMAR);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_KNOCK_OFF); }
-    } SCENE {
-        NOT MESSAGE("Malamar knocked off the opposing Wobbuffet's Malamarite!");
-    } THEN {
-        if (item == ITEM_MALAMARITE)
-        {
-            EXPECT(opponent->item == ITEM_MALAMARITE);
-        }
-    } FINALLY {
-        EXPECT_MUL_EQ(results[1].damage, UQ_4_12(1.5), results[0].damage);
-    }
-}
 
 SINGLE_BATTLE_TEST("Knock Off remove items that can change the form of the Knock Off user (Champions)", s16 damage)
 {

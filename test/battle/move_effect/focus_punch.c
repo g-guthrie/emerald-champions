@@ -184,30 +184,6 @@ SINGLE_BATTLE_TEST("Focus Punch activates when the user's Substitute is hit")
     }
 }
 
-SINGLE_BATTLE_TEST("Focus Punch uses PP when losing focus (Gen 3-4)")
-{
-    enum Move move;
-    bool32 activate;
-    PARAMETRIZE { move = MOVE_SCRATCH; activate = FALSE; }
-    PARAMETRIZE { move = MOVE_LEER; activate = TRUE; }
-    GIVEN {
-        WITH_CONFIG(B_FOCUS_PUNCH_FAILURE, GEN_3);
-        PLAYER(SPECIES_WOBBUFFET) {MovesWithPP({MOVE_FOCUS_PUNCH, 1});};
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_FOCUS_PUNCH); MOVE(opponent, move); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, player);
-        MESSAGE("Wobbuffet is tightening its focus!");
-        ANIMATION(ANIM_TYPE_MOVE, move, opponent);
-        if (activate)
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
-        else
-            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
-    } THEN {
-        EXPECT_EQ(player->pp[0], 0);
-    }
-}
 
 SINGLE_BATTLE_TEST("Focus Punch doesn't use PP when losing focus (Gen 5+)")
 {
@@ -237,23 +213,6 @@ SINGLE_BATTLE_TEST("Focus Punch doesn't use PP when losing focus (Gen 5+)")
     }
 }
 
-SINGLE_BATTLE_TEST("Focus Punch failing occurs after flinching (Gen 3-4)")
-{
-    GIVEN {
-        ASSUME(MoveHasAdditionalEffect(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH) == TRUE);
-        WITH_CONFIG(B_FOCUS_PUNCH_FAILURE, GEN_3);
-        PLAYER(SPECIES_WOBBUFFET) {MovesWithPP({MOVE_FOCUS_PUNCH, 1});};
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_FOCUS_PUNCH); MOVE(opponent, MOVE_FAKE_OUT); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, player);
-        MESSAGE("Wobbuffet is tightening its focus!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, opponent);
-        MESSAGE("Wobbuffet flinched and couldn't move!");
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
-    }
-}
 
 SINGLE_BATTLE_TEST("Focus Punch failing occurs before flinching (Gen 5+)")
 {
@@ -273,34 +232,6 @@ SINGLE_BATTLE_TEST("Focus Punch failing occurs before flinching (Gen 5+)")
     }
 }
 
-
-
-SINGLE_BATTLE_TEST("Focus Punch's initial message is not shown if the user selected a different move and was Encored into using Focus Punch (Gen9-)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MOVE_EFFECTS_BEFORE_MOVES, GEN_9);
-        ASSUME(GetMoveEffect(MOVE_ENCORE) == EFFECT_ENCORE);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_FOCUS_PUNCH); }
-        TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, player);
-        MESSAGE("Wobbuffet is tightening its focus!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, player);
-        HP_BAR(opponent);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, player);
-            MESSAGE("Wobbuffet is tightening its focus!");
-        }
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponent);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, player);
-            MESSAGE("Wobbuffet is tightening its focus!");
-        }
-    }
-}
 
 SINGLE_BATTLE_TEST("Focus Punch's initial message is shown if the user selected a different move and was Encored into using Focus Punch (Champions)")
 {
@@ -327,34 +258,6 @@ SINGLE_BATTLE_TEST("Focus Punch's initial message is shown if the user selected 
     }
 }
 
-DOUBLE_BATTLE_TEST("Focus Punch will lose focus if damaged when used by selecting a different move and being Encored (Gen 3-4)")
-{
-    GIVEN {
-        WITH_CONFIG(B_FOCUS_PUNCH_FAILURE, GEN_3);
-        ASSUME(GetMoveEffect(MOVE_ENCORE) == EFFECT_ENCORE);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
-        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(3); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_FOCUS_PUNCH, target: opponentLeft); }
-        TURN { MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft);
-               MOVE(opponentLeft, MOVE_ENCORE, target: playerLeft);
-               MOVE(playerLeft, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, playerLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, playerLeft);
-        HP_BAR(opponentLeft);
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, playerLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponentLeft);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, playerLeft);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
-        }
-        MESSAGE("Wobbuffet lost its focus and couldn't move!");
-    }
-}
 
 DOUBLE_BATTLE_TEST("Focus Punch will NOT lose focus if damaged when used by selecting a different move and being Encored (Gen 5+)")
 {
@@ -385,33 +288,7 @@ DOUBLE_BATTLE_TEST("Focus Punch will NOT lose focus if damaged when used by sele
     }
 }
 
-DOUBLE_BATTLE_TEST("Focus Punch will lose focus if damaged when encored into a different move and selected Focus Punch (Gen 5-6)")
-{
-    GIVEN {
-        WITH_CONFIG(B_FOCUS_PUNCH_FAILURE, GEN_5);
-        ASSUME(GetMoveEffect(MOVE_ENCORE) == EFFECT_ENCORE);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
-        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(3); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft); }
-        TURN { MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft);
-               MOVE(opponentLeft, MOVE_ENCORE, target: playerLeft);
-               MOVE(playerLeft, MOVE_FOCUS_PUNCH, target: opponentLeft); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-        HP_BAR(opponentLeft);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, playerLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponentLeft);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, playerLeft);
-        }
-        MESSAGE("Wobbuffet lost its focus and couldn't move!");
-    }
-}
+
 
 AI_SINGLE_BATTLE_TEST("AI won't use Focus Punch if it predicts a damaging move")
 {

@@ -423,41 +423,6 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "frames": 1120,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "A"), (640, 2, "A"), (980, 2, "B")],
     },
-    "move-specialist-forget-intro": {
-        "id": 6,
-        "frames": 840,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "A")],
-    },
-    "move-specialist-forget-decline": {
-        "id": 6,
-        "frames": 1340,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "A"), (840, 2, "A"), (1040, 2, "A"), (1240, 2, "B")],
-    },
-    "move-specialist-forget-party": {
-        "id": 6,
-        "frames": 1580,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "A"), (840, 2, "A"), (1040, 2, "A"), (1240, 2, "A"), (1440, 2, "A")],
-    },
-    "move-specialist-forget-party-back": {
-        "id": 6,
-        "frames": 1820,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "A"), (840, 2, "A"), (1040, 2, "A"), (1240, 2, "A"), (1440, 2, "A"), (1640, 2, "B")],
-    },
-    "move-specialist-rename-prompt": {
-        "id": 6,
-        "frames": 860,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "DOWN"), (740, 2, "A")],
-    },
-    "move-specialist-rename-party": {
-        "id": 6,
-        "frames": 1090,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "DOWN"), (740, 2, "A"), (940, 2, "A")],
-    },
-    "move-specialist-rename-back": {
-        "id": 6,
-        "frames": 1420,
-        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "DOWN"), (420, 2, "DOWN"), (460, 2, "DOWN"), (500, 2, "DOWN"), (540, 2, "A"), (690, 2, "DOWN"), (740, 2, "A"), (940, 2, "A"), (1240, 2, "B")],
-    },
     "all-legal-moves": {
         "id": 6,
         "frames": 1050,
@@ -757,28 +722,28 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "verify": True,
     },
     "bag": {"id": 25, "param": 2, "frames": 650, "keys": [], "verify": True},
-    "bag-tms-hms": {
+    "bag-berries": {
         "id": 25,
         "param": 3,
         "frames": 800,
         "keys": [(700, 2, "RIGHT")],
         "verify": True,
     },
-    "bag-berries": {
+    "bag-poke-balls": {
         "id": 25,
         "param": 4,
         "frames": 980,
         "keys": [(700, 2, "RIGHT"), (880, 2, "RIGHT")],
         "verify": True,
     },
-    "bag-poke-balls": {
+    "bag-key-items": {
         "id": 25,
         "param": 5,
         "frames": 1160,
         "keys": [(700, 2, "RIGHT"), (880, 2, "RIGHT"), (1060, 2, "RIGHT")],
         "verify": True,
     },
-    "bag-key-items": {
+    "bag-mega-stones": {
         "id": 25,
         "param": 6,
         "frames": 1340,
@@ -790,9 +755,9 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
         "verify": True,
     },
-    "bag-mega-stones": {
+    "bag-items": {
         "id": 25,
-        "param": 7,
+        "param": 0,
         "frames": 1520,
         "keys": [
             (700, 2, "RIGHT"),
@@ -803,9 +768,9 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
         "verify": True,
     },
-    "bag-items": {
+    "bag-medicine": {
         "id": 25,
-        "param": 0,
+        "param": 1,
         "frames": 1700,
         "keys": [
             (700, 2, "RIGHT"),
@@ -817,9 +782,9 @@ SCENARIOS: dict[str, dict[str, object]] = {
         ],
         "verify": True,
     },
-    "bag-medicine": {
+    "bag-battle-items": {
         "id": 25,
-        "param": 1,
+        "param": 2,
         "frames": 1880,
         "keys": [
             (700, 2, "RIGHT"),
@@ -1045,13 +1010,6 @@ SERVICE_UI_SCENARIOS = (
     "move-specialist-party-back",
     "move-specialist-learn-move-party",
     "move-specialist-learn-move-back",
-    "move-specialist-forget-intro",
-    "move-specialist-forget-decline",
-    "move-specialist-forget-party",
-    "move-specialist-forget-party-back",
-    "move-specialist-rename-prompt",
-    "move-specialist-rename-party",
-    "move-specialist-rename-back",
     "all-legal-moves-direct",
     "all-legal-move-selected",
     "all-legal-move-selected-back",
@@ -1179,13 +1137,13 @@ INCLEMENT_SEAM_SCENARIOS = tuple(dict.fromkeys((
     "fairy-summary-info",
     "fairy-summary-moves",
     "bag",
-    "bag-items",
     "bag-medicine",
-    "bag-tms-hms",
+    "bag-battle-items",
     "bag-berries",
     "bag-poke-balls",
     "bag-key-items",
     "bag-mega-stones",
+    "bag-items",
     "furfrou-trims",
     "furfrou-trims-scrolled",
     "furfrou-trims-b-cancel",

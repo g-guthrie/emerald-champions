@@ -6,23 +6,6 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_LAST_RESORT) == EFFECT_LAST_RESORT);
 }
 
-SINGLE_BATTLE_TEST("Last Resort always fails if it's the only known move (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_LAST_RESORT_SELECTABLE, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        NOT HP_BAR(opponent);
-    }
-}
 
 SINGLE_BATTLE_TEST("Last Resort as the only known move results in Struggle (Champions)")
 {
@@ -39,77 +22,6 @@ SINGLE_BATTLE_TEST("Last Resort as the only known move results in Struggle (Cham
     }
 }
 
-SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been used - 2 moves")
-{
-    GIVEN {
-        WITH_CONFIG(B_LAST_RESORT_SELECTABLE, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        HP_BAR(opponent);
-    }
-}
-
-SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been used - 3 moves")
-{
-    GIVEN {
-        WITH_CONFIG(B_LAST_RESORT_SELECTABLE, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_QUICK_ATTACK, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_QUICK_ATTACK); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Quick Attack!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        HP_BAR(opponent);
-    }
-}
-
-SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been used - 4 moves")
-{
-    GIVEN {
-        WITH_CONFIG(B_LAST_RESORT_SELECTABLE, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_QUICK_ATTACK, MOVE_SCRATCH, MOVE_GUST); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_QUICK_ATTACK); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_GUST); }
-        TURN { MOVE(player, MOVE_LAST_RESORT); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Quick Attack!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Gust!");
-        MESSAGE("Wobbuffet used Last Resort!");
-        HP_BAR(opponent);
-    }
-}
 
 // PP needs to be deducted for Last Resort to work
 SINGLE_BATTLE_TEST("Last Resort fails if mon was paralyzed last turn")

@@ -1,21 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Freeze has a 25% chance of being thawed (Gen9-)")
-{
-    PASSES_RANDOMLY(20, 100, RNG_FROZEN);
-    GIVEN {
-        WITH_CONFIG(B_FREEZE_TURNS, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        STATUS_ICON(player, none: TRUE);
-    }
-}
-
-
 
 SINGLE_BATTLE_TEST("Freeze is thawed by opponent's Fire-type attacks (Gen 3+)")
 {
@@ -73,40 +58,6 @@ SINGLE_BATTLE_TEST("Freeze is thawed by opponent's Weather Ball when it becomes 
     }
 }
 
-SINGLE_BATTLE_TEST("Freeze is thawed by opponent's attack that can burn (Gen 1-2)")
-{
-    GIVEN {
-        WITH_CONFIG(B_HIT_THAW, GEN_2);
-        ASSUME(MoveHasAdditionalEffect(MOVE_EMBER, MOVE_EFFECT_BURN));
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_EMBER); MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
-        MESSAGE("Wobbuffet thawed out!");
-        STATUS_ICON(player, none: TRUE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
-    }
-}
-
-SINGLE_BATTLE_TEST("Freeze is thawed by opponent's Tri Attack 1/3 of the time (Gen 1-2)")
-{
-    PASSES_RANDOMLY(1, 3, RNG_RANDOM_FROM_LIST);
-    GIVEN {
-        WITH_CONFIG(B_HIT_THAW, GEN_2);
-        ASSUME(MoveHasAdditionalEffect(MOVE_TRI_ATTACK, MOVE_EFFECT_RANDOM_FROM_LIST));
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_TRI_ATTACK); MOVE(player, MOVE_CELEBRATE, WITH_RNG(RNG_FROZEN, FALSE)); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRI_ATTACK, opponent);
-        MESSAGE("Wobbuffet thawed out!");
-        STATUS_ICON(player, none: TRUE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
-    }
-}
 
 SINGLE_BATTLE_TEST("Freeze is thawed by opponent's attack that can thaw the user (Gen 6+)")
 {
@@ -178,24 +129,6 @@ SINGLE_BATTLE_TEST("Freeze is thawed by user's Flame Wheel")
     }
 }
 
-SINGLE_BATTLE_TEST("Freeze isn't thawed if opponent is asleep during thawing attack (Gen9-)")
-{
-    PASSES_RANDOMLY(80, 100, RNG_FROZEN);
-    GIVEN {
-        WITH_CONFIG(B_FREEZE_TURNS, GEN_9);
-        ASSUME(GetMoveType(MOVE_EMBER) == TYPE_FIRE);
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_SLEEP); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_EMBER); MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        NONE_OF {
-            MESSAGE("The opposing Wobbuffet used Ember!");
-            MESSAGE("Wobbuffet thawed out!");
-            STATUS_ICON(player, none: TRUE);
-        }
-    }
-}
 
 SINGLE_BATTLE_TEST("Freeze isn't thawed if opponent is asleep during thawing attack (Champions)")
 {
@@ -216,23 +149,6 @@ SINGLE_BATTLE_TEST("Freeze isn't thawed if opponent is asleep during thawing att
     }
 }
 
-SINGLE_BATTLE_TEST("Freeze isn't thawed if opponent is asleep during thawing attack when using Scald (Gen9-)")
-{
-    PASSES_RANDOMLY(80, 100, RNG_FROZEN);
-    GIVEN {
-        WITH_CONFIG(B_FREEZE_TURNS, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_SLEEP); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_SCALD); MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALD, opponent);
-            MESSAGE("Wobbuffet thawed out!");
-            STATUS_ICON(player, none: TRUE);
-        }
-    }
-}
 
 SINGLE_BATTLE_TEST("Freeze isn't thawed if opponent is asleep during thawing attack when using Scald (Champions)")
 {

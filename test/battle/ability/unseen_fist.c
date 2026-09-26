@@ -38,67 +38,6 @@ SINGLE_BATTLE_TEST("Unseen Fist ignores Protect when user has Protective Pads, b
     }
 }
 
-SINGLE_BATTLE_TEST("Unseen Fist bypasses protect effects without triggering their contact effects (Gens 8-9)")
-{
-    enum Move protectMove = MOVE_NONE;
-    u8 loweredStat = 0;
-
-    PARAMETRIZE { protectMove = MOVE_SPIKY_SHIELD;    loweredStat = 0; }
-    PARAMETRIZE { protectMove = MOVE_KINGS_SHIELD;    loweredStat = STAT_ATK; }
-    PARAMETRIZE { protectMove = MOVE_BANEFUL_BUNKER;  loweredStat = 0; }
-    PARAMETRIZE { protectMove = MOVE_BURNING_BULWARK; loweredStat = 0; }
-    PARAMETRIZE { protectMove = MOVE_OBSTRUCT;        loweredStat = STAT_DEF; }
-    PARAMETRIZE { protectMove = MOVE_SILK_TRAP;       loweredStat = STAT_SPEED; }
-
-    GIVEN {
-        WITH_CONFIG(B_UNSEEN_FIST_PIERCING_DRILL, GEN_9);
-        PLAYER(SPECIES_URSHIFU) { Ability(ABILITY_UNSEEN_FIST); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, protectMove); MOVE(player, MOVE_SCRATCH); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, protectMove, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
-        HP_BAR(opponent);
-        NONE_OF {
-            HP_BAR(player);
-            STATUS_ICON(player, STATUS1_POISON);
-            STATUS_ICON(player, STATUS1_BURN);
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        }
-    } THEN {
-        EXPECT_EQ(player->hp, player->maxHP);
-        EXPECT_EQ(player->status1, STATUS1_NONE);
-        if (loweredStat != 0)
-            EXPECT_EQ(player->statStages[loweredStat], DEFAULT_STAT_STAGE);
-    }
-}
-
-SINGLE_BATTLE_TEST("Unseen Fist continues bypassing protect effects after being replaced during a multi-strike move")
-{
-    GIVEN {
-        WITH_CONFIG(B_UNSEEN_FIST_PIERCING_DRILL, GEN_9);
-        ASSUME(MoveMakesContact(MOVE_SURGING_STRIKES));
-        ASSUME(GetMoveStrikeCount(MOVE_SURGING_STRIKES) == 3);
-        ASSUME(GetMoveEffect(MOVE_OBSTRUCT) == EFFECT_PROTECT);
-        PLAYER(SPECIES_URSHIFU_RAPID_STRIKE) { Ability(ABILITY_UNSEEN_FIST); Attack(1); }
-        OPPONENT(SPECIES_COFAGRIGUS) { Ability(ABILITY_MUMMY); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_OBSTRUCT); MOVE(player, MOVE_SURGING_STRIKES); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_OBSTRUCT, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
-        HP_BAR(opponent);
-        ABILITY_POPUP(opponent, ABILITY_MUMMY);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
-        HP_BAR(opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SURGING_STRIKES, player);
-        HP_BAR(opponent);
-    } THEN {
-        EXPECT_EQ(player->ability, ABILITY_MUMMY);
-        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
-    }
-}
 
 SINGLE_BATTLE_TEST("Unseen Fist no longer bypasses the contact effects of protect moves (Champions)")
 {

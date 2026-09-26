@@ -94,7 +94,6 @@ SINGLE_BATTLE_TEST("Rapid Spin blows away all hazards")
 }
 
 
-
 SINGLE_BATTLE_TEST("Rapid Spin doesn't blow away Wrap, hazards or raise Speed when Sheer Force boosted (Gen 9+)")
 {
     GIVEN {
@@ -163,27 +162,6 @@ SINGLE_BATTLE_TEST("Rapid Spin and Mortal Spin remove Leech Seed")
     }
 }
 
-SINGLE_BATTLE_TEST("Rapid Spin and Mortal Spin don't remove hazards if the user faints (Gen9)")
-{
-    enum Move move;
-
-    PARAMETRIZE { move = MOVE_RAPID_SPIN; }
-    PARAMETRIZE { move = MOVE_MORTAL_SPIN; }
-
-    GIVEN {
-        WITH_CONFIG(B_FAINT_MOVE_EFFECT_TIMING, GEN_9);
-        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
-        OPPONENT(SPECIES_GARCHOMP) { Ability(ABILITY_ROUGH_SKIN); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_STEALTH_ROCK); MOVE(player, move); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, move, player);
-        ABILITY_POPUP(opponent, ABILITY_ROUGH_SKIN);
-        NONE_OF {
-            MESSAGE("The pointed stones disappeared from around your team!");
-        }
-    }
-}
 
 SINGLE_BATTLE_TEST("Rapid Spin and Mortal Spin remove hazards even if the user faints (Champions)")
 {

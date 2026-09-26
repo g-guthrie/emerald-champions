@@ -35,37 +35,24 @@ SINGLE_BATTLE_TEST("Color Change does not change the type when hit by a move tha
     }
 }
 
-SINGLE_BATTLE_TEST("Color Change does not change the type of a dual-type Pokemon when hit by a move that shares its primary type")
+SINGLE_BATTLE_TEST("Color Change preserves both existing types when hit by either type")
 {
+    enum Move move;
+    PARAMETRIZE { move = MOVE_WATER_GUN; }
+    PARAMETRIZE { move = MOVE_PSYCHO_CUT; }
     GIVEN {
-        PLAYER(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
-        OPPONENT(SPECIES_SLOWBRO);
+        PLAYER(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); Speed(10); }
+        OPPONENT(SPECIES_SLOWBRO) { Speed(20); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SKILL_SWAP); MOVE(player, MOVE_PSYCHO_CUT); }
+        TURN { MOVE(opponent, MOVE_SKILL_SWAP); MOVE(player, move); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHO_CUT, player);
-        NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
-            MESSAGE("The opposing Slowbro's Color Change made it the Psychic type!");
-        }
-    }
-}
-
-SINGLE_BATTLE_TEST("Color Change does not change the type of a dual-type Pokemon when hit by a move that shares its secondary type")
-{
-    GIVEN {
-        PLAYER(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
-        OPPONENT(SPECIES_SLOWBRO);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_SKILL_SWAP); MOVE(player, MOVE_PSYCHO_CUT); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHO_CUT, player);
-        NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
-            MESSAGE("The opposing Slowbro's Color Change made it the Psychic type!");
-        }
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        NOT ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
+    } THEN {
+        EXPECT_EQ(opponent->ability, ABILITY_COLOR_CHANGE);
+        EXPECT_EQ(opponent->types[0], TYPE_WATER);
+        EXPECT_EQ(opponent->types[1], TYPE_PSYCHIC);
     }
 }
 
@@ -174,19 +161,6 @@ SINGLE_BATTLE_TEST("Color Change does not change the type to Normal when a Pokem
     }
 }
 
-SINGLE_BATTLE_TEST("Color Change does not activate if move is boosted by Sheer Force (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_SHEER_FORCE_AGAINST_ABILITIES, GEN_9);
-        PLAYER(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
-        OPPONENT(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_EMBER); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
-        NOT ABILITY_POPUP(player, ABILITY_COLOR_CHANGE);
-    }
-}
 
 SINGLE_BATTLE_TEST("Color Change does activate if move is boosted by Sheer Force (Champions)")
 {

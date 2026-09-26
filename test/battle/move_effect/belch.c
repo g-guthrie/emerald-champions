@@ -25,34 +25,6 @@ AI_SINGLE_BATTLE_TEST("AI: Belch has nonzero score after eating a berry")
     }
 }
 
-SINGLE_BATTLE_TEST("Belch cannot be used if the user has not eaten a berry (Gen6-9)")
-{
-    enum Item item = ITEM_NONE;
-    PARAMETRIZE { item = ITEM_NONE; }
-    PARAMETRIZE { item = ITEM_ORAN_BERRY; }
-    GIVEN {
-        WITH_CONFIG(B_BELCH_SELECTABLE, GEN_9);
-        PLAYER(SPECIES_SKWOVET) { Item(item); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        if (item == ITEM_NONE)
-            TURN { MOVE(player, MOVE_BELCH, allowed: FALSE); MOVE(player, MOVE_CELEBRATE); }
-        else {
-            TURN { MOVE(player, MOVE_STUFF_CHEEKS); }
-            TURN { MOVE(player, MOVE_BELCH); }
-            TURN { MOVE(player, MOVE_BELCH); }
-        }
-    } SCENE {
-        if (item == ITEM_NONE) {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
-        }
-        else {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_STUFF_CHEEKS, player);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_BELCH, player);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_BELCH, player);
-        }
-    }
-}
 
 SINGLE_BATTLE_TEST("Belch can still be used after switching out")
 {

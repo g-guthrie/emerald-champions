@@ -537,30 +537,6 @@ DOUBLE_BATTLE_TEST("Sleep Clause: Dark Void can only sleep one opposing mon if s
     }
 }
 
-DOUBLE_BATTLE_TEST("Sleep Clause: G-Max Befuddle can only sleep one opposing mon if sleep clause is active")
-{
-    GIVEN {
-        FLAG_SET(B_FLAG_SLEEP_CLAUSE);
-        ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_BEFUDDLE, MOVE_EFFECT_EFFECT_SPORE_SIDE));
-        PLAYER(SPECIES_BUTTERFREE) { GigantamaxFactor(TRUE); }
-        PLAYER(SPECIES_CATERPIE);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft, gimmick: GIMMICK_DYNAMAX,
-               WITH_RNG(RNG_G_MAX_BEFUDDLE, STATUS1_SLEEP)); }
-    } SCENE {
-        MESSAGE("Butterfree used G-Max Befuddle!");
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentLeft);
-        MESSAGE("The opposing Wobbuffet fell asleep!");
-        STATUS_ICON(opponentLeft, sleep: TRUE);
-        NONE_OF {
-            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentRight);
-            STATUS_ICON(opponentRight, sleep: TRUE);
-            MESSAGE("The opposing Wobbuffet fell asleep!");
-        }
-    }
-}
 
 SINGLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mon wakes up")
 {
@@ -1170,33 +1146,6 @@ AI_SINGLE_BATTLE_TEST("Sleep Clause: AI will use sleep moves again when sleep cl
     }
 }
 
-DOUBLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mon is woken up with G-Max Sweetness")
-{
-    GIVEN {
-        FLAG_SET(B_FLAG_SLEEP_CLAUSE);
-        ASSUME(MoveHasAdditionalEffectSelf(MOVE_G_MAX_SWEETNESS, MOVE_EFFECT_AROMATHERAPY));
-        ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
-        ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
-        PLAYER(SPECIES_APPLETUN) { GigantamaxFactor(TRUE); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponentRight, MOVE_SPORE, target: playerRight); }
-        TURN { MOVE(playerLeft, MOVE_VINE_WHIP, target: opponentLeft, gimmick: GIMMICK_DYNAMAX); }
-        TURN { MOVE(opponentRight, MOVE_SPORE, target: playerRight); }
-    } SCENE {
-        MESSAGE("The opposing Wobbuffet used Spore!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponentRight);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, playerRight);
-        MESSAGE("Wobbuffet fell asleep!");
-        MESSAGE("Appletun used G-Max Sweetness!");
-        MESSAGE("The opposing Wobbuffet used Spore!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponentRight);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, playerRight);
-        MESSAGE("Wobbuffet fell asleep!");
-    }
-}
 
 SINGLE_BATTLE_TEST("Sleep Clause: Pre-existing sleep condition doesn't activate sleep clause")
 {

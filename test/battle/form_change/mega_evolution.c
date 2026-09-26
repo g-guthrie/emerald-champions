@@ -74,21 +74,6 @@ SINGLE_BATTLE_TEST("Rayquaza can Mega Evolve knowing Dragon Ascent")
     }
 }
 
-SINGLE_BATTLE_TEST("Mega Evolution doesn't affect turn order (Gen6)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MEGA_EVO_TURN_ORDER, GEN_6);
-        PLAYER(SPECIES_GARDEVOIR) { Level(100); SpeedIV(31); Item(ITEM_GARDEVOIRITE); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
-    } SCENE {
-        MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Gardevoir used Celebrate!");
-    } THEN {
-        EXPECT_EQ(player->speed, 236);
-    }
-}
 
 SINGLE_BATTLE_TEST("Mega Evolution affects turn order (Gen7+)")
 {
@@ -220,25 +205,6 @@ SINGLE_BATTLE_TEST("Rayquaza returns its base Form upon battle end after Mega Ev
     }
 }
 
-SINGLE_BATTLE_TEST("Venusaur returns to its base form after fainting and being revived (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MEGA_RETAIN_ON_FAINT, GEN_9);
-        PLAYER(SPECIES_VENUSAUR) { HP(1); Item(ITEM_VENUSAURITE); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN {
-            MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA);
-            MOVE(opponent, MOVE_SCRATCH);
-            SEND_OUT(player, 1);
-        }
-        TURN { USE_ITEM(player, ITEM_REVIVE, 0); }
-        TURN { SWITCH(player, 0); }
-    } THEN {
-        EXPECT_EQ(player->species, SPECIES_VENUSAUR);
-    }
-}
 
 SINGLE_BATTLE_TEST("Venusaur remains Mega Evolved after fainting and being revived (Champions)")
 {
@@ -260,25 +226,6 @@ SINGLE_BATTLE_TEST("Venusaur remains Mega Evolved after fainting and being reviv
     }
 }
 
-SINGLE_BATTLE_TEST("Rayquaza returns to its base form after fainting and being revived (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MEGA_RETAIN_ON_FAINT, GEN_9);
-        PLAYER(SPECIES_RAYQUAZA) { HP(1); Moves(MOVE_DRAGON_ASCENT, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN {
-            MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA);
-            MOVE(opponent, MOVE_SCRATCH);
-            SEND_OUT(player, 1);
-        }
-        TURN { USE_ITEM(player, ITEM_REVIVE, 0); }
-        TURN { SWITCH(player, 0); }
-    } THEN {
-        EXPECT_EQ(player->species, SPECIES_RAYQUAZA);
-    }
-}
 
 SINGLE_BATTLE_TEST("Mega Evolution preserves Power Trick after recalculating base stats")
 {

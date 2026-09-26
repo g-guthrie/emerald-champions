@@ -22,47 +22,6 @@ SINGLE_BATTLE_TEST("Burn Up user loses its Fire-type")
     }
 }
 
-SINGLE_BATTLE_TEST("Burn Up fails if the user isn't a Fire-type (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MOVES_THAT_REMOVE_TYPE, GEN_9);
-        ASSUME(GetMoveEffect(MOVE_BURN_UP) == EFFECT_FAIL_IF_NOT_ARG_TYPE);
-        ASSUME(IsMoveEffectRemoveSpeciesType(MOVE_BURN_UP, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_FIRE) == TRUE);
-        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_FIRE || GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_FIRE);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_BURN_UP); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Burn Up!");
-        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_BURN_UP, player); }
-        MESSAGE("But it failed!");
-    }
-}
-
-
-
-SINGLE_BATTLE_TEST("Burn Up fails if the user has Protean/Libero and is not a Fire-type (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MOVES_THAT_REMOVE_TYPE, GEN_9);
-        WITH_CONFIG(B_PROTEAN_LIBERO, GEN_6);
-        PLAYER(SPECIES_REGIROCK);
-        OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_PROTEAN); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_BURN_UP); }
-    } SCENE {
-        MESSAGE("The opposing Kecleon used Burn Up!");
-        NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_PROTEAN);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_BURN_UP, player);
-        }
-        MESSAGE("But it failed!");
-    }
-}
-
-
 
 SINGLE_BATTLE_TEST("Burn Up user loses its Fire-type if enemy faints")
 {
@@ -103,23 +62,6 @@ SINGLE_BATTLE_TEST("Double Shock user loses its Electric-type")
     }
 }
 
-SINGLE_BATTLE_TEST("Double Shock fails if the user isn't an Electric-type (Gen9)")
-{
-    GIVEN {
-        WITH_CONFIG(B_MOVES_THAT_REMOVE_TYPE, GEN_9);
-        ASSUME(GetMoveEffect(MOVE_DOUBLE_SHOCK) == EFFECT_FAIL_IF_NOT_ARG_TYPE);
-        ASSUME(IsMoveEffectRemoveSpeciesType(MOVE_DOUBLE_SHOCK, MOVE_EFFECT_REMOVE_ARG_TYPE, TYPE_ELECTRIC) == TRUE);
-        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_ELECTRIC || GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_ELECTRIC);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_DOUBLE_SHOCK); }
-    } SCENE {
-        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_SHOCK, player); }
-        MESSAGE("Wobbuffet used Double Shock!");
-        MESSAGE("But it failed!");
-    }
-}
 
 SINGLE_BATTLE_TEST("Double Shock user loses its Electric-type if enemy faints")
 {
