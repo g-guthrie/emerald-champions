@@ -46,68 +46,10 @@ static void Task_RunLoopedTask_LinkMode(u8);
 static void Task_RunLoopedTask(u8);
 static void Task_Pokenav(u8);
 
+// The Hoenn map is the PokeNav's only screen. Its menu ID stays at its old
+// slot in the stable ID table; every other ID is rejected.
 const struct PokenavCallbacks PokenavMenuCallbacks[] =
 {
-    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionMenu,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionSearchMenu,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
     [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_RegionMap,
@@ -117,76 +59,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[] =
         .isLoopTaskActive = IsRegionMapLoopedTaskActive,
         .free1 = FreeRegionMapSubstruct1,
         .free2 = FreeRegionMapSubstruct2,
-    },
-    [POKENAV_CONDITION_GRAPH_PARTY - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionGraph_Party,
-        .callback = GetConditionGraphMenuCallback,
-        .open = OpenConditionGraphMenu,
-        .createLoopTask = CreateConditionGraphMenuLoopedTask,
-        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
-        .free1 = FreeConditionGraphMenuSubstruct1,
-        .free2 = FreeConditionGraphMenuSubstruct2,
-    },
-    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionSearch,
-        .callback = GetConditionSearchResultsCallback,
-        .open = OpenConditionSearchResults,
-        .createLoopTask = CreateSearchResultsLoopedTask,
-        .isLoopTaskActive = IsSearchResultLoopedTaskActive,
-        .free1 = FreeSearchResultSubstruct1,
-        .free2 = FreeSearchResultSubstruct2,
-    },
-    [POKENAV_CONDITION_GRAPH_SEARCH - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionGraph_Search,
-        .callback = GetConditionGraphMenuCallback,
-        .open = OpenConditionGraphMenu,
-        .createLoopTask = CreateConditionGraphMenuLoopedTask,
-        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
-        .free1 = FreeConditionGraphMenuSubstruct1,
-        .free2 = FreeConditionGraphMenuSubstruct2,
-    },
-    [POKENAV_RETURN_CONDITION_SEARCH - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ReturnToMonSearchList,
-        .callback = GetConditionSearchResultsCallback,
-        .open = OpenConditionSearchListFromGraph,
-        .createLoopTask = CreateSearchResultsLoopedTask,
-        .isLoopTaskActive = IsSearchResultLoopedTaskActive,
-        .free1 = FreeSearchResultSubstruct1,
-        .free2 = FreeSearchResultSubstruct2,
-    },
-    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MonRibbonList,
-        .callback = GetRibbonsMonListCallback,
-        .open = OpenRibbonsMonList,
-        .createLoopTask = CreateRibbonsMonListLoopedTask,
-        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList,
-        .free2 = FreeRibbonsMonMenu,
-    },
-    [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RibbonsSummaryMenu,
-        .callback = GetRibbonsSummaryMenuCallback,
-        .open = OpenRibbonsSummaryMenu,
-        .createLoopTask = CreateRibbonsSummaryLoopedTask,
-        .isLoopTaskActive = IsRibbonsSummaryLoopedTaskActive,
-        .free1 = FreeRibbonsSummaryScreen1,
-        .free2 = FreeRibbonsSummaryScreen2,
-    },
-    [POKENAV_RIBBONS_RETURN_TO_MON_LIST - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RibbonsMonListFromSummary,
-        .callback = GetRibbonsMonListCallback,
-        .open = OpenRibbonsMonListFromRibbonsSummary,
-        .createLoopTask = CreateRibbonsMonListLoopedTask,
-        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList,
-        .free2 = FreeRibbonsMonMenu,
     },
 };
 
