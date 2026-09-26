@@ -1730,9 +1730,9 @@ static bool8 DisplayCancelChooseMonYesNo(u8 taskId)
 {
     const u8 *stringPtr = NULL;
 
-    if (gPartyMenu.menuType == PARTY_MENU_TYPE_CONTEST)
-        stringPtr = gText_CancelParticipation;
-    else if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
+    // Leaving the contest entry screen costs nothing: the reception script
+    // returns to the Contest choice, so there is no "Cancel participation?".
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
         stringPtr = GetFacilityCancelString();
 
     if (stringPtr == NULL)

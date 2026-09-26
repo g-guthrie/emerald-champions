@@ -105,11 +105,13 @@ LilycoveCity_ContestLobby_EventScript_CancelEnterContest:: @ 8279E09
 	release
 	end
 
+@ Exit or B at any step goes back one step: Pokemon -> Contest -> Rank ->
+@ Enter/Info/Exit, where it ends the conversation.
 LilycoveCity_ContestLobby_EventScript_ChooseContestMon:: @ 8279E13
 	msgbox LilycoveCity_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
 	choosecontestmon
 	compare VAR_0x8004, 255
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	special TryEnterContestMon
 	compare VAR_RESULT, CANT_ENTER_CONTEST
 	goto_if_eq LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
@@ -132,8 +134,8 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestRank:: @ 8279E62
 	case 1, LilycoveCity_ContestLobby_EventScript_EnterSuperRank
 	case 2, LilycoveCity_ContestLobby_EventScript_EnterHyperRank
 	case 3, LilycoveCity_ContestLobby_EventScript_EnterMasterRank
-	case 4, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
-	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	case 4, LilycoveCity_ContestLobby_EventScript_AskEnterContest
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_AskEnterContest
 	end
 
 LilycoveCity_ContestLobby_EventScript_EnterNormalRank:: @ 8279EB5
@@ -163,8 +165,8 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestType:: @ 8279EE1
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_TYPE, FALSE
 	switch VAR_RESULT
-	case 5, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
-	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+	case 5, LilycoveCity_ContestLobby_EventScript_ChooseContestRank
+	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_ChooseContestRank
 	copyvar VAR_CONTEST_CATEGORY, VAR_RESULT
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	end
