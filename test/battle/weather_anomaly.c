@@ -33,10 +33,11 @@ static void PrepareStorm(enum LegendarySignId sign)
         gMapHeader = *Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map), MAP_NUM(map));
         SetWeatherAnomalySlot(0, sign, 1500);
         SetSavedWeatherFromCurrMapHeader();
-        gWeatherPtr->currWeather = GetSavedWeather();
+        EXPECT_EQ(GetSavedWeather(), gLegendaryGates[sign].anomalyWeather);
+        SetCurrentAndNextWeather(GetSavedWeather());
     }
     else
-        gWeatherPtr->currWeather = WEATHER_SUNNY;
+        SetCurrentAndNextWeather(WEATHER_SUNNY);
 }
 
 SINGLE_BATTLE_TEST("Weather anomalies battle: rain, thunderstorm, fog and downpour initialize their real effects")
@@ -59,7 +60,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: rain, thunderstorm, fog and downpo
         EXPECT_EQ(gFieldTimers.terrainTimer, 0);
         EXPECT(!gBattleStruct->overworldWeatherPresent);
         ClearWeatherAnomalies();
-        gWeatherPtr->currWeather = WEATHER_NONE;
+        SetCurrentAndNextWeather(WEATHER_NONE);
     }
 }
 
@@ -79,7 +80,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: rain boosts Water damage by half",
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } THEN {
         ClearWeatherAnomalies();
-        gWeatherPtr->currWeather = WEATHER_NONE;
+        SetCurrentAndNextWeather(WEATHER_NONE);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damage, UQ_4_12(1.5), results[1].damage);
     }
@@ -99,7 +100,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: rain Thunder bypasses a failing ac
     } THEN {
         EXPECT(gBattleWeather & B_WEATHER_RAIN);
         ClearWeatherAnomalies();
-        gWeatherPtr->currWeather = WEATHER_NONE;
+        SetCurrentAndNextWeather(WEATHER_NONE);
     }
 }
 
@@ -119,7 +120,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: fog Misty Terrain stops grounded s
         EXPECT_EQ(opponent->status1 & STATUS1_PARALYSIS, species == SPECIES_PIDOVE ? STATUS1_PARALYSIS : 0);
         EXPECT_EQ(gBattleWeather & B_WEATHER_FOG, 0);
         ClearWeatherAnomalies();
-        gWeatherPtr->currWeather = WEATHER_NONE;
+        SetCurrentAndNextWeather(WEATHER_NONE);
     }
 }
 
@@ -138,6 +139,6 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: battle weather can replace storm r
         EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_ELECTRIC);
         EXPECT_EQ(gFieldTimers.terrainTimer, 0);
         ClearWeatherAnomalies();
-        gWeatherPtr->currWeather = WEATHER_NONE;
+        SetCurrentAndNextWeather(WEATHER_NONE);
     }
 }
