@@ -6,15 +6,18 @@ Route123_BerryMastersHouse_OnTransition: @ 826F841
 	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	end
 
+@ Each service returns to this menu; VAR_0x8008 puts the cursor back on it.
 Route123_BerryMastersHouse_EventScript_BerryMaster:: @ 826F845
 	lock
 	faceplayer
+	setvar VAR_0x8008, 0
+Route123_BerryMastersHouse_EventScript_BerryMasterMenu:
 	message Route123_BerryMastersHouse_Text_GardenWelcome
 	waitmessage
 	dynmultipush Route123_BerryMastersHouse_Text_BerryGifts, 0
 	dynmultipush Route123_BerryMastersHouse_Text_HarvestRewards, 1
 	dynmultipush Route123_BerryMastersHouse_Text_Leave, 2
-	dynmultistack 8, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 8, 1, FALSE, 3, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, 0, Route123_BerryMastersHouse_EventScript_DailyBerries
 	goto_if_eq VAR_RESULT, 1, Route123_BerryMastersHouse_EventScript_HarvestRewards
@@ -25,8 +28,8 @@ Route123_BerryMastersHouse_EventScript_BerryMaster:: @ 826F845
 Route123_BerryMastersHouse_EventScript_HarvestRewards:
 	setvar VAR_0x8009, 1
 	call EmeraldChampions_EventScript_HarvestMenu
-	release
-	end
+	setvar VAR_0x8008, 1
+	goto Route123_BerryMastersHouse_EventScript_BerryMasterMenu
 
 Route123_BerryMastersHouse_Text_GardenWelcome:
 	.string "A good garden always has something\n"
@@ -61,13 +64,13 @@ Route123_BerryMastersHouse_EventScript_DailyBerries:
 	giveitem VAR_0x8009
 	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
 	msgbox Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8008, 0
+	goto Route123_BerryMastersHouse_EventScript_BerryMasterMenu
 
 Route123_BerryMastersHouse_EventScript_ReceivedBerryToday:: @ 826F8B6
 	msgbox Route123_BerryMastersHouse_Text_DoneForToday, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8008, 0
+	goto Route123_BerryMastersHouse_EventScript_BerryMasterMenu
 
 Route123_BerryMastersHouse_EventScript_BerryMastersWife:: @ 826F8C0
 	lock

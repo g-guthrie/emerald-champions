@@ -362,9 +362,14 @@ EmeraldChampions_Text_BondingUnavailable:
 	.set CENTER_GUIDE_TOPIC_STORY, 2
 	.set CENTER_GUIDE_TOPIC_BYE, 3
 
+@ The list selects by topic, so VAR_0x8008 keeps the cursor on the topic last
+@ read (Where to Go first). VAR_0x8009 marks the legend warning as given, so
+@ it is said once per conversation.
 Common_EventScript_CenterLocalGuide::
 	lockall
 	faceplayer
+	setvar VAR_0x8008, CENTER_GUIDE_TOPIC_STORY
+	setvar VAR_0x8009, FALSE
 	msgbox EmeraldChampions_Text_CenterGuideHello, MSGBOX_DEFAULT
 
 EmeraldChampions_EventScript_CenterGuideMenu:
@@ -387,12 +392,15 @@ EmeraldChampions_EventScript_CenterGuideNoLegends:
 	dynmultipush EmeraldChampions_Text_CenterGuideThingsToDo, CENTER_GUIDE_TOPIC_TIPS
 EmeraldChampions_EventScript_CenterGuideNoTips:
 	dynmultipush EmeraldChampions_Text_CenterGuideBye, CENTER_GUIDE_TOPIC_BYE
-	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_CenterGuideGoodbye
+	copyvar VAR_0x8008, VAR_RESULT
 	switch VAR_RESULT
 	case CENTER_GUIDE_TOPIC_STORY, EmeraldChampions_EventScript_CenterGuideStory
 	case CENTER_GUIDE_TOPIC_LEGENDS, EmeraldChampions_EventScript_CenterGuideLegends
 	case CENTER_GUIDE_TOPIC_TIPS, EmeraldChampions_EventScript_CenterGuideTips
+EmeraldChampions_EventScript_CenterGuideGoodbye:
 	msgbox EmeraldChampions_Text_CenterGuideGoodbye, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -411,7 +419,10 @@ EmeraldChampions_EventScript_CenterGuideFinale:
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
 EmeraldChampions_EventScript_CenterGuideLegends:
+	goto_if_eq VAR_0x8009, TRUE, EmeraldChampions_EventScript_CenterGuideLegendPages
+	setvar VAR_0x8009, TRUE
 	msgbox EmeraldChampions_Text_CenterGuideSaveFirst, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_CenterGuideLegendPages:
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_LEGENDS
 	goto EmeraldChampions_EventScript_CenterGuideNextPage
@@ -482,9 +493,10 @@ EmeraldChampions_EventScript_HarvestMenuShow:
 	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_HarvestHelp
 	return
 
-@ VAR_0x800A holds the cursor row; berry IDs start at 1, rows at 0.
+@ VAR_0x800A holds the Berry ID under the cursor (the list selects by ID;
+@ Berry IDs start at 1 and Back is 0).
 EmeraldChampions_EventScript_HarvestListStart:
-	setvar VAR_0x800A, 0
+	setvar VAR_0x800A, 1
 EmeraldChampions_EventScript_HarvestList:
 	message EmeraldChampions_Text_HarvestList
 	waitmessage
@@ -495,7 +507,6 @@ EmeraldChampions_EventScript_HarvestList:
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_HarvestMenu
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestMenu
 	copyvar VAR_0x800A, VAR_RESULT
-	subvar VAR_0x800A, 1
 	goto EmeraldChampions_EventScript_HarvestList
 
 EmeraldChampions_EventScript_HarvestRequests:
