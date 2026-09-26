@@ -1251,7 +1251,86 @@ static bool32 IsHeadlessSummaryStateObserved(void)
     return FALSE;
 }
 
-void EmeraldChampionsHeadlessObserve(void)
+// Host queries are read-only and independent of battle automation. Run them
+// after the fixture observer so even observers with an early return can reply.
+static void ProcessHeadlessQuery(void)
+{
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_NONE
+     || gSaveBlock1Ptr == NULL || gSaveBlock2Ptr == NULL
+     || gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_NONE
+     || gEcHeadlessCampaignQueryKind > EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
+        return;
+
+    if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
+        gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
+        gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_SELL_PRICE)
+        gEcHeadlessCampaignQueryValue = GetItemSellPrice(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM_PRICE)
+        gEcHeadlessCampaignQueryValue = GetItemPrice(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
+        gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
+        gEcHeadlessCampaignQueryValue = gSaveBlock2Ptr->frontier.battlePoints;
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
+        gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
+            ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP)
+        gEcHeadlessCampaignQueryValue = GetPlayerLevelCapForSpecies(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
+        gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
+        gEcHeadlessCampaignQueryValue = CanAcquireLegendarySignSpecies(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
+        gEcHeadlessCampaignQueryValue = GetHarvestedBerryCount(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
+        gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
+    {
+        gEcHeadlessCampaignQueryValue = 0;
+        for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+            if (gSaveBlock1Ptr->pcItems[slot].itemId == gEcHeadlessCampaignQueryId)
+                gEcHeadlessCampaignQueryValue += gSaveBlock1Ptr->pcItems[slot].quantity;
+    }
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OBJECT
+          && gMain.callback2 == CB2_Overworld)
+    {
+        u8 objectEventId = GetObjectEventIdByLocalIdAndMap(
+            gEcHeadlessCampaignQueryId,
+            gSaveBlock1Ptr->location.mapNum,
+            gSaveBlock1Ptr->location.mapGroup
+        );
+
+        gEcHeadlessCampaignQueryObjectActive = objectEventId < OBJECT_EVENTS_COUNT
+            && gObjectEvents[objectEventId].active;
+        if (gEcHeadlessCampaignQueryObjectActive)
+        {
+            gEcHeadlessCampaignQueryObjectX =
+                gObjectEvents[objectEventId].currentCoords.x - MAP_OFFSET;
+            gEcHeadlessCampaignQueryObjectY =
+                gObjectEvents[objectEventId].currentCoords.y - MAP_OFFSET;
+        }
+        else
+        {
+            gEcHeadlessCampaignQueryObjectX = 0;
+            gEcHeadlessCampaignQueryObjectY = 0;
+        }
+        gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryObjectActive;
+    }
+    else
+    {
+        gEcHeadlessCampaignQueryValue = 0;
+        gEcHeadlessCampaignQueryObjectActive = FALSE;
+        gEcHeadlessCampaignQueryObjectX = 0;
+        gEcHeadlessCampaignQueryObjectY = 0;
+    }
+    // Publish the result before acknowledging. Hosts must not interpret an
+    // untouched result (often zero) as a successfully executed query.
+    gEcHeadlessCampaignQueryKind = EC_HEADLESS_CAMPAIGN_QUERY_NONE;
+}
+
+static void ObserveHeadlessFixture(void)
 {
     EmeraldChampionsStudioPoll();
     EmeraldChampionsAgentPrepPoll();
@@ -1413,70 +1492,6 @@ void EmeraldChampionsHeadlessObserve(void)
             sEcHeadlessAutoCaptureInProgress = FALSE;
         gEcHeadlessFixtureSetupResult = TRUE;
         gEcHeadlessCampaignInBattle = gMain.inBattle;
-        if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
-            gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
-            gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_SELL_PRICE)
-            gEcHeadlessCampaignQueryValue = GetItemSellPrice(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM_PRICE)
-            gEcHeadlessCampaignQueryValue = GetItemPrice(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
-            gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
-            gEcHeadlessCampaignQueryValue = gSaveBlock2Ptr->frontier.battlePoints;
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
-            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
-                ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP)
-            gEcHeadlessCampaignQueryValue = GetPlayerLevelCapForSpecies(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
-            gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
-            gEcHeadlessCampaignQueryValue = CanAcquireLegendarySignSpecies(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
-            gEcHeadlessCampaignQueryValue = GetHarvestedBerryCount(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
-            gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
-        {
-            gEcHeadlessCampaignQueryValue = 0;
-            for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
-                if (gSaveBlock1Ptr->pcItems[slot].itemId == gEcHeadlessCampaignQueryId)
-                    gEcHeadlessCampaignQueryValue += gSaveBlock1Ptr->pcItems[slot].quantity;
-        }
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OBJECT
-              && gMain.callback2 == CB2_Overworld)
-        {
-            u8 objectEventId = GetObjectEventIdByLocalIdAndMap(
-                gEcHeadlessCampaignQueryId,
-                gSaveBlock1Ptr->location.mapNum,
-                gSaveBlock1Ptr->location.mapGroup
-            );
-
-            gEcHeadlessCampaignQueryObjectActive = objectEventId < OBJECT_EVENTS_COUNT
-                && gObjectEvents[objectEventId].active;
-            if (gEcHeadlessCampaignQueryObjectActive)
-            {
-                gEcHeadlessCampaignQueryObjectX =
-                    gObjectEvents[objectEventId].currentCoords.x - MAP_OFFSET;
-                gEcHeadlessCampaignQueryObjectY =
-                    gObjectEvents[objectEventId].currentCoords.y - MAP_OFFSET;
-            }
-            else
-            {
-                gEcHeadlessCampaignQueryObjectX = 0;
-                gEcHeadlessCampaignQueryObjectY = 0;
-            }
-            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryObjectActive;
-        }
-        else
-        {
-            gEcHeadlessCampaignQueryValue = 0;
-            gEcHeadlessCampaignQueryObjectActive = FALSE;
-            gEcHeadlessCampaignQueryObjectX = 0;
-            gEcHeadlessCampaignQueryObjectY = 0;
-        }
 
         if (gMain.callback2 == CB2_Overworld)
         {
@@ -1999,6 +2014,12 @@ void EmeraldChampionsHeadlessObserve(void)
             gEcHeadlessFixtureObservedResult = TRUE;
         break;
     }
+}
+
+void EmeraldChampionsHeadlessObserve(void)
+{
+    ObserveHeadlessFixture();
+    ProcessHeadlessQuery();
 }
 
 void CB2_EmeraldChampionsHeadlessFixture(void)
