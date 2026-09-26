@@ -19,6 +19,10 @@
 #include "palette.h"
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
+// Latest map/script request beneath an anomaly. This survives menu and battle
+// returns; map loads and Continue initialize it explicitly.
+EWRAM_DATA static u8 sBaseWeather = WEATHER_NONE;
+EWRAM_DATA static u8 sAppliedAnomalyWeather = WEATHER_NONE;
 
 const u16 gCloudsWeatherPalette[] = INCGFX_U16("graphics/weather/cloud.png", ".gbapal");
 const u16 gSandstormWeatherPalette[] = INCGFX_U16("graphics/weather/sandstorm.png", ".gbapal");
@@ -2516,6 +2520,8 @@ void SetSavedWeather(enum OverworldWeather weather)
     // (cloud/sun triggers, rain cycles, cutscene resets) cannot clear it.
     u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
 
+    sBaseWeather = weather;
+    sAppliedAnomalyWeather = anomalyWeather;
     if (anomalyWeather != WEATHER_NONE && !IsTerrainWeather(weather))
         weather = anomalyWeather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
@@ -2529,16 +2535,36 @@ u8 GetSavedWeather(void)
 
 void SetSavedWeatherFromCurrMapHeader(void)
 {
-    enum OverworldWeather oldWeather = gSaveBlock1Ptr->weather;
-    enum OverworldWeather weather = gMapHeader.weather;
-    // A live weather anomaly replaces its home map's header weather while the
-    // map is loaded; the header itself never changes.
+    SetSavedWeather(gMapHeader.weather);
+}
+
+void InitWeatherAnomalyBaseFromSavedGame(void)
+{
+    u8 weather = GetSavedWeather();
     u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
 
-    if (anomalyWeather != WEATHER_NONE && !IsTerrainWeather(weather))
-        weather = anomalyWeather;
-    gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
-    UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
+    // Existing saves contain the effective weather, not the hidden base. If
+    // saved under a storm, recover the map baseline; resume scripts may refine
+    // it. Ordinary scripted weather and terrain remain exactly as saved.
+    if (anomalyWeather != WEATHER_NONE && weather == anomalyWeather)
+        weather = gMapHeader.weather;
+    SetSavedWeather(weather);
+}
+
+static bool32 RefreshSavedAnomalyWeather(void)
+{
+    u8 oldWeather = GetSavedWeather();
+
+    if (sAppliedAnomalyWeather == GetWeatherAnomalyWeatherForCurrentMap())
+        return FALSE;
+    SetSavedWeather(sBaseWeather);
+    return oldWeather != GetSavedWeather();
+}
+
+void UpdateWeatherAnomalyWeather(void)
+{
+    if (RefreshSavedAnomalyWeather())
+        DoCurrentWeather();
 }
 
 void SetWeather(enum OverworldWeather weather)
@@ -2549,7 +2575,10 @@ void SetWeather(enum OverworldWeather weather)
 
 void DoCurrentWeather(void)
 {
-    u8 weather = GetSavedWeather();
+    u8 weather;
+
+    RefreshSavedAnomalyWeather();
+    weather = GetSavedWeather();
 
     if (weather == WEATHER_ABNORMAL)
     {
@@ -2568,7 +2597,10 @@ void DoCurrentWeather(void)
 
 void ResumePausedWeather(void)
 {
-    u8 weather = GetSavedWeather();
+    u8 weather;
+
+    RefreshSavedAnomalyWeather();
+    weather = GetSavedWeather();
 
     if (weather == WEATHER_ABNORMAL)
     {
