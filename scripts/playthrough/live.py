@@ -74,6 +74,7 @@ class Harness:
         self.st = {}
         self.blocked = collections.defaultdict(set)  # map -> tiles we bumped into
         self.shot_serial = 0
+        self.view_jpeg, self.view_seq, self.view_t, self.viewers, self.view_polled = b'', 0, 0.0, 0, 0.0
         self.log_path = self.dir / 'log.jsonl'
         cache = self.dir / 'constants.json'
         if cache.exists() and json.loads(cache.read_text()).get('schema') == bd.CONSTANTS_SCHEMA:
@@ -119,6 +120,10 @@ class Harness:
     def ingest(self, packet):
         from scenes import packet_state
         self.packet = packet
+        if self.watched() and time.time() - self.view_t > 1 / 30:
+            self.view_t = time.time()
+            self.view_jpeg = self.frame_jpeg()
+            self.view_seq += 1
         self.st = packet_state(packet, self.decoder)
         self.st['map'] = self.cat.map_ids.get((self.st['group'], self.st['num']), '?')
         count = struct.unpack_from('<I', packet, 12)[0]
@@ -128,7 +133,7 @@ class Harness:
 
     async def tick(self, mask=0, frames=1):
         while frames > 0:
-            n = min(frames, 120)
+            n = min(frames, 10 if self.watched() else 120)  # a watched run shows ~6 frames a second
             self.ingest(await self.core.tick(mask, frames=n))
             frames -= n
 
@@ -220,6 +225,17 @@ class Harness:
         if extra:
             out.update(extra)
         return out
+
+    def watched(self):
+        return self.viewers > 0 or time.time() - self.view_polled < 2
+
+    def frame_jpeg(self, scale=3):
+        import io
+        from PIL import Image
+        img = Image.frombytes('RGBA', (240, 160), bytes(self.packet[16:153616])).convert('RGB')
+        buf = io.BytesIO()
+        img.resize((240 * scale, 160 * scale), Image.NEAREST).save(buf, 'JPEG', quality=85)
+        return buf.getvalue()
 
     async def shot(self, name=None, scale=2):
         from PIL import Image
@@ -1078,6 +1094,51 @@ async def serve(args):
             writer.close()
 
     srv = await asyncio.start_unix_server(client, path=str(sock))
+
+    page = (b'<!doctype html><title>Live run</title><body style="margin:0;background:#111;display:grid;'
+            b'place-items:center;height:100vh"><img id=f style="image-rendering:pixelated;width:min(100vw,150vh)">'
+            b'<script>const f=document.getElementById("f");let n=0;function next(){f.src="/frame.jpg?"+(n++)}'
+            b'f.onload=()=>setTimeout(next,120);f.onerror=()=>setTimeout(next,1000);next()</script></body>')
+
+    async def viewer(reader, writer):
+        # Watch-only MJPEG view of the running game: GET / (page) or GET /stream.
+        try:
+            path = (await reader.readline()).split()[1].decode()
+            while (await reader.readline()) not in (b'\r\n', b''):
+                pass
+            if path.startswith('/frame.jpg'):
+                h.view_polled = time.time()
+                jpg = h.view_jpeg or (h.frame_jpeg() if h.packet else b'')
+                writer.write(b'HTTP/1.1 200 OK\r\nCache-Control: no-store\r\nContent-Type: image/jpeg\r\n'
+                             b'Content-Length: %d\r\n\r\n' % len(jpg) + jpg)
+                await writer.drain()
+                return
+            if path != '/stream':
+                writer.write(b'HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: %d\r\n\r\n' % len(page) + page)
+                await writer.drain()
+                return
+            writer.write(b'HTTP/1.1 200 OK\r\nCache-Control: no-cache\r\n'
+                         b'Content-Type: multipart/x-mixed-replace; boundary=frame\r\n\r\n')
+            h.viewers += 1
+            if h.packet:
+                h.view_jpeg = h.frame_jpeg()
+            seq = -1
+            try:
+                while True:
+                    if h.view_seq != seq and h.view_jpeg:
+                        seq, jpg = h.view_seq, h.view_jpeg
+                        writer.write(b'--frame\r\nContent-Type: image/jpeg\r\nContent-Length: %d\r\n\r\n' % len(jpg) + jpg + b'\r\n')
+                        await writer.drain()
+                    await asyncio.sleep(1 / 30)
+            finally:
+                h.viewers -= 1
+        except (ConnectionError, IndexError):
+            pass
+        finally:
+            writer.close()
+
+    view_port = int(os.environ.get('LIVE_VIEW_PORT', '8977'))
+    view = await asyncio.start_server(viewer, '127.0.0.1', view_port)
     print(json.dumps(h.brief({'socket': str(sock)})), flush=True)
     async with srv:
         await stop.wait()
