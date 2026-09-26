@@ -317,6 +317,7 @@ static void TryGiveItemOrMailToSelectedMon(u8);
 static void SwitchSelectedMons(u8);
 static void TryEnterMonForMinigame(u8, u8);
 static void Task_TryCreateSelectionWindow(u8);
+static void Task_ReturnToItemSubmenu(u8);
 static void FinishTwoMonAction(u8);
 static void CancelParticipationPrompt(u8);
 static bool8 DisplayCancelChooseMonYesNo(u8);
@@ -526,6 +527,7 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nAbility to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
+static const u8 sText_WhichAbility[] = _("Which Ability?");
 static const u8 sText_DigThroughWall[] = _("Use Dig to open a passage\nthrough this wall?");
 static const u8 sText_LevelerComplete[] = _("Your party grew as high as your\nBadges allow: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
@@ -2928,6 +2930,20 @@ static u8 DisplaySelectionWindow(u8 windowType)
     return sPartyMenuInternal->windowId[0];
 }
 
+// Puts the open action menu's cursor on a row, when that row is listed.
+static bool32 MoveActionCursorTo(u8 action)
+{
+    for (u32 i = 0; i < sPartyMenuInternal->numActions; i++)
+    {
+        if (sPartyMenuInternal->actions[i] == action)
+        {
+            Menu_MoveCursorNoWrapAround(i);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 static void PrintMessage(const u8 *text)
 {
     DrawStdFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x4F, 13);
@@ -3156,6 +3172,22 @@ static void Task_TryCreateSelectionWindow(u8 taskId)
         gTasks[taskId].data[0] = 0xFF;
         gTasks[taskId].func = Task_HandleSelectionMenuInput;
     }
+}
+
+// Backing out of the Give bag returns one level, to Give/Take/Move.
+static void Task_ReturnToItemSubmenu(u8 taskId)
+{
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS)
+    {
+        Task_TryCreateSelectionWindow(taskId);
+        return;
+    }
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetPartyMonSelectionActions(gParties[B_TRAINER_PLAYER], gPartyMenu.slotId, ACTIONS_ITEM);
+    DisplaySelectionWindow(SELECTWINDOW_ITEM);
+    DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_ITEM);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
 }
 
 static void Task_HandleSelectionMenuInput(u8 taskId)
@@ -3555,7 +3587,7 @@ static void CB2_GiveHoldItem(void)
 {
     if (gSpecialVar_ItemId == ITEM_NONE)
     {
-        InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_NONE, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
+        InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_NONE, Task_ReturnToItemSubmenu, gPartyMenu.exitCallback);
     }
     else
     {
@@ -3950,6 +3982,9 @@ static void CursorCb_Cancel2(u8 taskId)
     if (gPartyMenu.menuType != PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS)
     {
         DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+        // Back one level lands on the row that opened the item submenu.
+        if (!MoveActionCursorTo(MENU_ITEM))
+            MoveActionCursorTo(MENU_MAIL);
         DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_MON);
     }
     else
@@ -7205,6 +7240,15 @@ static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialC
         sText_CancelTitleCase);
 
     InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], choiceCount, initialCursor, FALSE);
+
+    // Name the choice in the message box, as the Item submenu does. The box
+    // stops one frame short of the list however wide the Ability names make it.
+    SetWindowTemplateFields(&window, 2, 1, 17, 26 - windowWidth, 2, 15, sDoWhatWithMonMsgWindowTemplate.baseBlock);
+    sPartyMenuInternal->windowId[1] = AddWindow(&window);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[1], FALSE, 0x4F, 13);
+    AddTextPrinterParameterized(sPartyMenuInternal->windowId[1],
+                                GetFontIdToFit(sText_WhichAbility, FONT_NORMAL, 0, (26 - windowWidth) * 8),
+                                sText_WhichAbility, 0, 1, 0, 0);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -7216,6 +7260,7 @@ static void ReturnToPartyActionMenu(u8 taskId)
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
     SetPartyMonSelectionActions(gParties[B_TRAINER_PLAYER], gPartyMenu.slotId, GetPartyMenuActionsType(mon));
     DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    MoveActionCursorTo(MENU_OPEN_ABILITY);
     DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_MON);
     gTasks[taskId].data[0] = 0xFF;
     gTasks[taskId].func = Task_HandleSelectionMenuInput;
@@ -7284,6 +7329,7 @@ static void Task_HandleAbilitySelectionInput(u8 taskId)
         StringCopy(gStringVar2, gAbilitiesInfo[newAbility].name);
         StringExpandPlaceholders(gStringVar4, sText_doneText);
         PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
         PlaySE(SE_USE_ITEM);
         DisplayPartyMenuMessage(gStringVar4, FALSE);
         ScheduleBgCopyTilemapToVram(2);
