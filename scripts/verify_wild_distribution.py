@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Validate Emerald wild encounter tables against the rarity-ladder contract.
 
-Checks src/data/wild_encounters.json (gWildMonHeaders entries whose base_label
-is not a FireRed/LeafGreen table):
+Checks src/data/wild_encounters.json (gWildMonHeaders entries):
 
 1. Every land, water, Rock Smash, fishing and Honey table carries an explicit
    encounter_rates array with one weight per slot; each method totals 100 and
@@ -181,11 +180,6 @@ FLAG_FIELDS = ("isUltraBeast", "isRestrictedLegendary", "isSubLegendary", "isMyt
 FORM_TABLE = re.compile(r"static const u16 (s\w+FormSpeciesIdTable)\[\]\s*=\s*\{(.*?)\};", re.S)
 
 
-def is_emerald(entry):
-    label = entry.get("base_label", "")
-    return "FireRed" not in label and "LeafGreen" not in label
-
-
 def species_classes():
     """Return species -> restricted class, mirroring GetRestrictedPartyClass."""
     compiler = shutil.which("cc") or shutil.which("clang") or shutil.which("gcc")
@@ -317,7 +311,7 @@ def main():
     sources = {}
     payload = json.loads((ROOT / 'src/data/wild_encounters.json').read_text())
     group = next(g for g in payload['wild_encounter_groups'] if g['label'] == 'gWildMonHeaders')
-    emerald = [e for e in group['encounters'] if is_emerald(e)]
+    emerald = group['encounters']
     groups = json.loads((ROOT / 'data/maps/map_groups.json').read_text())
     map_rows = {}
     for name in (n for g in groups['group_order'] for n in groups[g]):

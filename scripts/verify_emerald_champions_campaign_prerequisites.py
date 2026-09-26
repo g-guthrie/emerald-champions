@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXCLUDED_SCRIPT_NAMES = {"debug.inc", "cable_club.inc", "cable_club_frlg.inc"}
+EXCLUDED_SCRIPT_NAMES = {"debug.inc", "cable_club.inc"}
 LABEL = re.compile(r"^([A-Za-z_]\w*)::?\s*$")
 
 SPECIAL_PARTY_GATES = {
@@ -42,9 +42,7 @@ def sources() -> list[Path]:
     result += sorted((ROOT / "data/scripts").glob("*.inc"))
     return [
         path for path in result
-        if "_Frlg" not in str(path)
-        and path.name not in EXCLUDED_SCRIPT_NAMES
-        and "frlg" not in path.name.lower()
+        if path.name not in EXCLUDED_SCRIPT_NAMES
     ]
 
 
@@ -124,7 +122,7 @@ def audit() -> dict[str, object]:
     handling = Counter(row["handling"] for row in rows)
     return {
         "schema_version": 1,
-        "scope": "live non-FRLG single-player map and common event scripts",
+        "scope": "live single-player map and common event scripts",
         "prerequisites": rows,
         "summary": {
             "total": len(rows),

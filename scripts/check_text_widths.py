@@ -269,8 +269,6 @@ def measure_line(line, font_state, tables, name_to_bytes, avg_widths):
 # File discovery (mirrors the original dialogue survey's scope notes)
 # ---------------------------------------------------------------------------
 
-EXCLUDE_MAP_NAME_RE = re.compile(r"(frlg|sevii|kanto)", re.IGNORECASE)
-
 BATTLE_FRONTIER_INTERIOR_RE = re.compile(
     r"^BattleFrontier_(BattlePike|BattleArena|BattleTower|BattleFactory|"
     r"BattleDome|BattlePalace|BattlePyramid)(Corridor|Lobby|BattleRoom|"
@@ -285,8 +283,6 @@ def discover_files():
 
     for path in sorted(glob.glob(os.path.join(ROOT, "data", "maps", "*", "scripts.inc"))):
         map_name = os.path.basename(os.path.dirname(path))
-        if EXCLUDE_MAP_NAME_RE.search(map_name):
-            continue
         if BATTLE_FRONTIER_INTERIOR_RE.match(map_name):
             continue
         if BATTLE_PYRAMID_SQUARE_RE.match(map_name):
@@ -294,9 +290,6 @@ def discover_files():
         files.append(path)
 
     for path in sorted(glob.glob(os.path.join(ROOT, "data", "scripts", "*.inc"))):
-        base = os.path.basename(path)
-        if "frlg" in base.lower():
-            continue
         files.append(path)
 
     return files

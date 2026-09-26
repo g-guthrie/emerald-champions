@@ -2,7 +2,7 @@
 """Require exact authoring/native-party/Hoenn battle-call identity agreement.
 
 Retired numeric IDs and empty metadata may remain for saves and Match Call;
-retired loadouts may not. Alternate FRLG maps/scripts are outside this build.
+retired loadouts may not.
 """
 from pathlib import Path
 import re
@@ -21,8 +21,6 @@ def main():
     calls = set()
     gym_calls = set()
     for path in [*(ROOT/'data/maps').rglob('scripts.inc'),*(ROOT/'data/scripts').rglob('*.inc')]:
-        if 'frlg' in str(path.relative_to(ROOT)).lower():
-            continue
         for line in strip_comments(path.read_text()).splitlines():
             if re.match(r'\s*(trainerbattle\w*|multi_\w*)\s',line):
                 ids = set(re.findall(r'\bTRAINER_\w+\b',line))

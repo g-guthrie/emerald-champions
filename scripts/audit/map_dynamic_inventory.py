@@ -160,7 +160,6 @@ def read_constants(root):
     for required in (
         "NUM_TILES_TOTAL",
         "NUM_TILES_IN_PRIMARY",
-        "NUM_TILES_IN_PRIMARY_FRLG",
         "TILE_SIZE_4BPP",
     ):
         if required not in constants or constants[required] <= 0:
@@ -482,8 +481,8 @@ def build_inventory(root=ROOT):
     }
 
 
-def filter_build_conditionals(text, *, is_frlg=False, source="", unresolved=None):
-    """Select known game-version branches, preserving line numbers and unknowns."""
+def filter_build_conditionals(text, *, source="", unresolved=None):
+    """Record build conditionals as unknowns, preserving line numbers."""
     if unresolved is None:
         unresolved = []
     output, stack = [], []
@@ -491,10 +490,6 @@ def filter_build_conditionals(text, *, is_frlg=False, source="", unresolved=None
 
     def condition(expression, line):
         expression = expression.strip().replace(" ", "")
-        if expression in ("IS_FRLG", "(IS_FRLG)"):
-            return is_frlg
-        if expression in ("!IS_FRLG", "(!IS_FRLG)"):
-            return not is_frlg
         unresolved.append({"source": source, "line": line, "condition": expression})
         return None
 
@@ -533,7 +528,7 @@ def filter_build_conditionals(text, *, is_frlg=False, source="", unresolved=None
     return "".join(output)
 
 
-def derive_script_contexts(root, maps, *, diagnostics=None, is_frlg=False, flow=None):
+def derive_script_contexts(root, maps, *, diagnostics=None, flow=None):
     """Associate labels with possible map-entry reachability, independent of file.
 
     This is a control-flow overapproximation: flag/variable conditions and switch
@@ -549,7 +544,6 @@ def derive_script_contexts(root, maps, *, diagnostics=None, is_frlg=False, flow=
         ambiguous_labels=[],
         duplicate_labels=[],
         unresolved_build_conditions=[],
-        is_frlg=is_frlg,
         association="possible_control_flow",
     )
     paths = sorted(
@@ -563,7 +557,6 @@ def derive_script_contexts(root, maps, *, diagnostics=None, is_frlg=False, flow=
     for path in paths:
         text = filter_build_conditionals(
             strip_comments(path.read_text()),
-            is_frlg=is_frlg,
             source=str(path.relative_to(root)),
             unresolved=diagnostics["unresolved_build_conditions"],
         )

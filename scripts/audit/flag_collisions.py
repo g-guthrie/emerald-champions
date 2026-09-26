@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 HEADER = ROOT / "include/constants/flags.h"
 SOURCE_DIRS = ("data", "src", "include", "test")
 SOURCE_SUFFIXES = (".inc", ".s", ".json", ".c", ".h", ".txt")
-IGNORED_FILES = ("flags.h", "flags_frlg.h", "events.inc")
+IGNORED_FILES = ("flags.h", "events.inc")
 CONSTS = {"MAX_TRAINERS_COUNT": 0x360}
 
 

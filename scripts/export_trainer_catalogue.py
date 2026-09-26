@@ -92,8 +92,6 @@ def source_references(ids):
     partners = []
     for path in sorted([*(ROOT/'data/maps').rglob('scripts.inc'), *(ROOT/'data/scripts').rglob('*.inc')]):
         rel = str(path.relative_to(ROOT))
-        if 'frlg' in rel.lower():
-            continue
         label = ''
         for number, raw in enumerate(clean(path.read_text()).splitlines(), 1):
             line = raw.strip()

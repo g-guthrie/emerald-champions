@@ -40,7 +40,7 @@ def line_width(text):
         else: w+=6
     return w
 worst=[]
-files=[f for f in glob.glob(f"{ROOT}/data/maps/*/scripts.inc") if "_Frlg" not in f]+glob.glob(f"{ROOT}/data/scripts/*.inc")+glob.glob(f"{ROOT}/data/text/*.inc")
+files=glob.glob(f"{ROOT}/data/maps/*/scripts.inc")+glob.glob(f"{ROOT}/data/scripts/*.inc")+glob.glob(f"{ROOT}/data/text/*.inc")
 for f in files:
     for n,line in enumerate(open(f,errors="ignore"),1):
         s=line.strip()

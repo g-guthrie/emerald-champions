@@ -28,7 +28,7 @@ VISUAL_FIELDS = (
     "movement_range_y",
 )
 REFERENCE_TO_CURRENT_GFX = {
-    # The dedicated Chansey graphics slot exists only in FRLG builds.
+    # Emerald has no dedicated Chansey graphics slot.
     "OBJ_EVENT_GFX_CHANSEY": "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
     "OBJ_EVENT_GFX_ARTICUNO": "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO",
     "OBJ_EVENT_GFX_ZAPDOS": "OBJ_EVENT_GFX_INCLEMENT_ZAPDOS",

@@ -794,18 +794,6 @@
 #define METATILE_Underwater_RockWall     0x21E
 
 // Other
-#define METATILE_GeneralFrlg_CalmWater               0x12B
-#define METATILE_GeneralFrlg_Door                    0x03D
-#define METATILE_GeneralFrlg_Plain_Grass             0x00D
-#define METATILE_GeneralFrlg_Plain_Mowed             0x001
-#define METATILE_GeneralFrlg_SlidingDoubleDoor       0x15B
-#define METATILE_GeneralFrlg_SlidingSingleDoor       0x062
-#define METATILE_GeneralFrlg_ThinTreeTop_Grass       0x00A
-#define METATILE_GeneralFrlg_ThinTreeTop_Mowed       0x013
-#define METATILE_GeneralFrlg_WideTreeTopLeft_Grass   0x00B
-#define METATILE_GeneralFrlg_WideTreeTopLeft_Mowed   0x00E
-#define METATILE_GeneralFrlg_WideTreeTopRight_Grass  0x00C
-#define METATILE_GeneralFrlg_WideTreeTopRight_Mowed  0x00F
 #define METATILE_RSCave_CrackedFloor                 0x22F
 #define METATILE_RSCave_CrackedFloor_Hole            0x206
 #define METATILE_RSMossdeepGym_RedArrow_Down         0x205

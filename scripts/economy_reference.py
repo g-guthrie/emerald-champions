@@ -211,7 +211,6 @@ def build_catalog(root=ROOT):
     variables=defaultdict(list);operations=defaultdict(list);native_roots={};shop_stock={};all_transfers=0
     for label,defs in blocks.items():
         for source,line_start,body in defs:
-            if 'frlg' in source.lower():continue
             conditions=[compact(l) for l in body.splitlines() if re.match(r'\s*(?:goto_if|call_if|case|check|switch|setflag|clearflag|remove|addmoney|addcoins)',l)]
             local_inputs={}
             for delta,raw in enumerate(body.splitlines()):
@@ -271,7 +270,7 @@ def build_catalog(root=ROOT):
                                 item=match[1];stock.append(item)
                         stock=[x for x in dict.fromkeys(stock) if x!='ITEM_NONE'];record['outputs']=stock;record['table']=table
                         if not stock:record['unresolved']='stock is dynamic/missing; inspect table '+table
-                record['entry_branches']=[dict(label=parent,source=ref(source_line,first),controls=[compact(x) for x in parent_body.splitlines() if re.match(r'\s*(?:goto_if|call_if|case|switch|check|setvar)',x)]) for parent in sorted(predecessors[label]) for source_line,first,parent_body in blocks[parent] if 'frlg' not in source_line.lower()]
+                record['entry_branches']=[dict(label=parent,source=ref(source_line,first),controls=[compact(x) for x in parent_body.splitlines() if re.match(r'\s*(?:goto_if|call_if|case|switch|check|setvar)',x)]) for parent in sorted(predecessors[label]) for source_line,first,parent_body in blocks[parent]]
                 records[rid]=record;operations[label].append(rid)
     def reachable(start):
         todo=[start];seen=set()
@@ -539,7 +538,7 @@ def render_catalog(catalog):
         'Operations without a map-entry association: '+', '.join(ids[k] for k in coverage['unbound_operations']),
         'Unresolved script graph edges (standard/native/callback paths need their linked owners):']
     for r in coverage['script_diagnostics']['unresolved_edges']:
-        if 'frlg' not in r.get('source','').lower():lines.append(compact(json.dumps(r,ensure_ascii=False)))
+        lines.append(compact(json.dumps(r,ensure_ascii=False)))
     lines.append('Unresolved build conditions / duplicate labels are alternatives, not combined offers:')
     for r in coverage['script_diagnostics']['unresolved_build_conditions']:lines.append(compact(json.dumps(r,ensure_ascii=False)))
     lines.append('Duplicate script labels: '+', '.join(coverage['script_diagnostics']['duplicate_labels']))

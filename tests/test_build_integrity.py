@@ -201,7 +201,7 @@ class PrerequisiteIntegrityTests(unittest.TestCase):
         start = makefile.index("ifeq ($(SETUP_PREREQS),1)")
         block = self.conditional_block(makefile, start)
         for command, label, status in (("$(MAKE) -f make_tools.mk", "tools", tools_status),
-                                       ("$(MAKE) MAP_VERSION=$(MAP_VERSION) generated", "generated", generated_status)):
+                                       ("$(MAKE) generated", "generated", generated_status)):
             self.assertIn(command, block)
             block = block.replace(command, f"sh -c 'echo {label}-ran; exit {status}'")
         # Import the actual shell configuration; never silently provide pipefail

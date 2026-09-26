@@ -1,24 +1,6 @@
-GAME_VERSION ?= EMERALD
 TITLE        ?= EM CHAMPIONS
 GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
-MAP_VERSION  ?= emerald
-
-ifeq (firered, $(or $(BUILD), $(MAKECMDGOALS)))
-  	GAME_VERSION 	:= FIRERED
-	TITLE       	:= POKEMON FIRE
-	GAME_CODE   	:= BPRE
-	BUILD_NAME  	:= firered
-	MAP_VERSION 	:= firered
-else
-ifeq (leafgreen, $(or $(BUILD), $(MAKECMDGOALS)))
-	GAME_VERSION 	:= LEAFGREEN
-	TITLE       	:= POKEMON LEAF
-	GAME_CODE   	:= BPGE
-	BUILD_NAME  	:= leafgreen
-	MAP_VERSION 	:= firered
-endif
-endif
 
 # GBA rom header
 MAKER_CODE  := 01
@@ -149,7 +131,7 @@ TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 SHELL := bash -o pipefail
 
 # Set flags for tools
-ASFLAGS := -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym $(GAME_VERSION)=1
+ASFLAGS := -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1
 
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
@@ -160,7 +142,7 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -std=gnu17
 CPPFLAGS += -DEC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)
 ifeq ($(RELEASE),1)
 ifneq ($(EC_HEADLESS_FIXTURES),0)
@@ -310,7 +292,7 @@ ifeq ($(SETUP_PREREQS),1)
     $(error Errors occurred while building tools. See error messages above for more details)
   endif
   # Oh and also generate mapjson sources before we use `SCANINC`.
-  GENERATED_SETUP_OUTPUT := $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g" && printf '\n__EC_PREREQUISITES_OK__')
+  GENERATED_SETUP_OUTPUT := $(shell $(MAKE) generated | sed "s/ /__SPACE__/g" && printf '\n__EC_PREREQUISITES_OK__')
   $(foreach line, $(filter-out __EC_PREREQUISITES_OK__,$(GENERATED_SETUP_OUTPUT)), $(info $(subst __SPACE__, ,$(line))))
   ifneq ($(lastword $(GENERATED_SETUP_OUTPUT)),__EC_PREREQUISITES_OK__)
     $(error Errors occurred while generating map-related sources. See error messages above for more details)
@@ -410,7 +392,6 @@ clean-assets:
 	rm -f $(MID_SUBDIR)/*.s
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc $(DATA_SRC_SUBDIR)/map_group_count.h
-	rm -f .map_version
 	find sound -iname '*.bin' -exec rm {} +
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.smol' -o -iname '*.fastSmol' -o -iname '*.smolTM' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
@@ -555,7 +536,7 @@ PROVENANCE_OBJ := $(OBJ_DIR)/ec_build_provenance.o
 PROVENANCE_OBJ_REL := $(patsubst $(OBJ_DIR)/%,%,$(PROVENANCE_OBJ))
 
 $(PROVENANCE_ASM): FORCE_BUILD_CONFIG
-	@python3 $(BUILD_PROVENANCE) prepare --asm $@ --json $(PROVENANCE_PREPARED) --value=$(call shell_quote,ROM=$(ROM)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --value=$(call shell_quote,GAME_VERSION=$(GAME_VERSION)) --value=$(call shell_quote,MAP_VERSION=$(MAP_VERSION)) --value=$(call shell_quote,MODES=RELEASE=$(RELEASE) DEBUG=$(DEBUG) TEST=$(TEST) LTO=$(LTO) EC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)) --value=$(call shell_quote,CPPFLAGS=$(CONFIG_CPPFLAGS)) --value=$(call shell_quote,CFLAGS=$(CONFIG_CFLAGS)) --value=$(call shell_quote,ASFLAGS=$(CONFIG_ASFLAGS)) --value=$(call shell_quote,LDFLAGS=$(LDFLAGS)) --tool=$(call shell_quote,$(CONFIG_ARMCC)) --tool=$(call shell_quote,$(CC1)) --tool=$(call shell_quote,$(CONFIG_AS)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(OBJCOPY)) --tool=$(call shell_quote,$(FIX)) --tool=$(call shell_quote,$(CONFIG_PREPROC))
+	@python3 $(BUILD_PROVENANCE) prepare --asm $@ --json $(PROVENANCE_PREPARED) --value=$(call shell_quote,ROM=$(ROM)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --value=$(call shell_quote,MODES=RELEASE=$(RELEASE) DEBUG=$(DEBUG) TEST=$(TEST) LTO=$(LTO) EC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)) --value=$(call shell_quote,CPPFLAGS=$(CONFIG_CPPFLAGS)) --value=$(call shell_quote,CFLAGS=$(CONFIG_CFLAGS)) --value=$(call shell_quote,ASFLAGS=$(CONFIG_ASFLAGS)) --value=$(call shell_quote,LDFLAGS=$(LDFLAGS)) --tool=$(call shell_quote,$(CONFIG_ARMCC)) --tool=$(call shell_quote,$(CC1)) --tool=$(call shell_quote,$(CONFIG_AS)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(OBJCOPY)) --tool=$(call shell_quote,$(FIX)) --tool=$(call shell_quote,$(CONFIG_PREPROC))
 
 $(PROVENANCE_OBJ): $(PROVENANCE_ASM)
 	$(AS) $(ASFLAGS) -o $@ - < $<
@@ -590,8 +571,6 @@ $(ROM): $(ELF)
 	@python3 $(BUILD_PROVENANCE) finalize --prepared $(PROVENANCE_PREPARED) --rom $@ --elf $< --out $(PROVENANCE) --cc=$(call shell_quote,$(ARMCC)) --objdump=$(call shell_quote,$(OBJDUMP)) --nm=$(call shell_quote,$(NM)) --flags=$(call shell_quote,$(CONFIG_CPPFLAGS) $(CONFIG_CFLAGS)) --work $(OBJ_DIR)/save-layout
 
 emerald: all
-firered: all
-leafgreen: all
 # Symbol file (`make syms`)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

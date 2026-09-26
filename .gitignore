@@ -48,8 +48,6 @@ prefabs.json
 *.sym
 *.js
 /pokeemerald-*.png
-/pokefirered-*.png
-/pokeleafgreen-*.png
 src/data/map_group_count.h
 include/constants/heal_locations.h
 include/constants/script_commands.h
@@ -67,7 +65,6 @@ tools/compresSmol/compresSmolTilemap
 tools/aif2pcm/aif2pcm
 *.Identifier
 __pycache__
-.map_version
 
 # Vendored mGBA source is retained for the deterministic harness, but its
 # multi-megabyte emulator conformance ROM corpus and local build trees are not.
