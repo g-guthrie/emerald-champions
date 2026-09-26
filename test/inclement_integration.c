@@ -410,11 +410,54 @@ TEST("Inclement integration: native stat reports and nature honor their script c
     gSpecialVar_0x8005 = 3; // Special Attack raised, Attack lowered: Modest.
     gSpecialVar_0x8006 = 0;
     ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HIDDEN_NATURE), NATURE_MODEST);
     EXPECT_LT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_ATK), oldAttack);
     EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPATK), oldSpAttack);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), originalNature);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_IV), 7);
+}
+
+extern void BufferChosenMonNature(void);
+
+TEST("Nature chef: the chosen stats name the Nature, and a choice that changes nothing is free")
+{
+    ZeroPlayerPartyMons();
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
+    u32 nature = NATURE_HARDY;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE, &nature);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+    gSpecialVar_0x8004 = 0;
+    BufferChosenMonNature();
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("Hardy")), 0);
+    EXPECT_EQ(StringCompare(gStringVar3, COMPOUND_STRING("leaves every stat as it is")), 0);
+
+    // Speed up, Sp. Atk down: Jolly, and the summary line says so.
+    gSpecialVar_0x8005 = 2;
+    gSpecialVar_0x8006 = 3;
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_JOLLY);
+    BufferChosenMonNature();
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("Jolly")), 0);
+    EXPECT_EQ(StringCompare(gStringVar3, COMPOUND_STRING("raises Speed and lowers Sp. Atk")), 0);
+
+    // Asking for the Nature it already has changes nothing.
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_JOLLY);
+
+    // The same stat twice gives a neutral Nature...
+    gSpecialVar_0x8005 = gSpecialVar_0x8006 = 3;
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_BASHFUL);
+    // ...and one neutral Nature for another would change no stat.
+    gSpecialVar_0x8005 = gSpecialVar_0x8006 = 0;
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_BASHFUL);
+    ZeroPlayerPartyMons();
 }
 
 extern void CheckChosenMonCanGainEVs(void);

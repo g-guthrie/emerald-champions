@@ -119,12 +119,15 @@ Nature_Down_SPDEF::
 	setvar VAR_0x8006, 4
 	goto Nature_Changer_Nature_Change
 
+@ The Nature changes first: VAR_RESULT is FALSE when the choice would change
+@ nothing, and then the Berries stay in the Bag and the player picks again.
 Nature_Changer_Nature_Change::
-	removeitem ITEM_ORAN_BERRY, NATURE_CHANGER_COST
 	bufferpartymonnick 0, VAR_0x8004
+	special ChangePokemonNature
+	goto_if_eq VAR_RESULT, FALSE, Nature_Changer_Same_Nature
+	removeitem ITEM_ORAN_BERRY, NATURE_CHANGER_COST
 	msgbox NatureChanger_Text_SpecialPokeblock, MSGBOX_DEFAULT
 	fadescreen 1
-	special ChangePokemonNature
 	special BufferChosenMonNature
 	specialvar VAR_0x8007, GetSelectedMonNicknameAndSpecies
 	waitse
@@ -140,27 +143,31 @@ Nature_Changer_Nature_Change::
 	releaseall
 	end
 
+Nature_Changer_Same_Nature::
+	msgbox NatureChanger_Text_SameNature, MSGBOX_DEFAULT
+	goto Nature_Changer_Stat_Up
+
 NatureChanger_Text_Intro:
 	.string "Ohohoho! You are a Trainer, yes?\p"
 	.string "I was once a great Pokéblock\n"
 	.string "chef in Kalos!\p"
-	.string "My special training Pokéblocks\n"
-	.string "adjust how a Pokémon's stats grow.\p"
-	.string "For five Oran Berries, I can\n"
-	.string "match that growth to a new Nature.$"
+	.string "A Pokémon's Nature raises one stat\n"
+	.string "and lowers another.\p"
+	.string "For five Oran Berries, my special\n"
+	.string "Pokéblock gives it a new Nature!$"
 
 NatureChanger_Text_ChoosePokemon:
 	.string "Which Pokémon shall try my\n"
-	.string "special training Pokéblocks?$"
+	.string "special Pokéblock?$"
 
 NatureChanger_Text_MonHasNature:
-	.string "Ohohoho! {STR_VAR_1}'s stats\n"
-	.string "currently grow like a\l"
-	.string "{STR_VAR_2} Nature.$"
+	.string "Ohohoho! {STR_VAR_1}'s Nature\n"
+	.string "is {STR_VAR_2}.\p"
+	.string "It {STR_VAR_3}.$"
 
 NatureChanger_Text_HowAboutIt:
-	.string "For five Oran Berries, shall I\n"
-	.string "adjust your Pokémon's stat growth?$"
+	.string "Shall I give it a new Nature\n"
+	.string "for five Oran Berries?$"
 
 NatureChanger_Text_SomeOtherTime:
 	.string "No?!\n"
@@ -168,24 +175,28 @@ NatureChanger_Text_SomeOtherTime:
 
 NatureChanger_Text_ThisIsEgg:
 	.string "This is but an Egg!\p"
-	.string "An Egg cannot use my\n"
-	.string "training Pokéblocks!$"
+	.string "An Egg cannot eat my\n"
+	.string "special Pokéblock!$"
 
 NatureChanger_Text_NeedMoreBerries:
 	.string "I need more Oran Berries than that.\n"
 	.string "Bring me five!$"
 
 NatureChanger_Text_WhichColorPrefer:
-	.string "Which Pokéblock color? Its stat\n"
-	.string "will receive a boost.$"
+	.string "Which stat should the new Nature\n"
+	.string "raise?$"
 
 NatureChanger_Text_WhichColorDislike:
-	.string "And which color's stat should\n"
-	.string "be reduced?$"
+	.string "And which stat should it lower?\n"
+	.string "The same stat twice cancels out.$"
+
+NatureChanger_Text_SameNature:
+	.string "Ohohoho! That would not change\n"
+	.string "{STR_VAR_1}'s stats. Choose again!$"
 
 NatureChanger_Text_SpecialPokeblock:
 	.string "Ohohoho! I will make a special\n"
-	.string "training Pokéblock from your Berries.\p"
+	.string "Pokéblock from your Berries.\p"
 	.string "Wait just a moment…$"
 
 NatureChanger_Text_Pause:
@@ -193,12 +204,12 @@ NatureChanger_Text_Pause:
 	.string "… … … … … …$"
 
 NatureChanger_Text_ItIsDone:
-	.string "Oho! The training is complete!\p"
+	.string "Oho! It is done!\p"
 	.string "May it help your partner\n"
 	.string "in the battles ahead!$"
 
 NatureChanger_Text_MonHasNature1:
 	.string "{STR_VAR_1} ate the special\n"
-	.string "training Pokéblock.\p"
-	.string "Its stats now grow like a\n"
-	.string "{STR_VAR_2} Nature!$"
+	.string "Pokéblock.\p"
+	.string "Its Nature is now {STR_VAR_2}!\n"
+	.string "It {STR_VAR_3}.$"

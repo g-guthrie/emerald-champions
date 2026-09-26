@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_message.h"
 #include "event_data.h"
 #include "field_specials.h"
 #include "international_string_util.h"
@@ -98,12 +99,26 @@ void BufferChosenMonIV(void)
     BufferStat(sIvData, 2);
 }
 
+// The chosen Pokemon's Nature in STR_VAR_2 and what it does in STR_VAR_3
+// ("raises Attack and lowers Sp. Atk"), for the Slateport nature chef.
 void BufferChosenMonNature(void)
 {
     struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     gStringVar2[0] = EOS;
-    if (mon != NULL)
-        StringCopy(gStringVar2, gNaturesInfo[GetMonData(mon, MON_DATA_HIDDEN_NATURE)].name);
+    gStringVar3[0] = EOS;
+    if (mon == NULL)
+        return;
+    const struct NatureInfo *info = &gNaturesInfo[GetMonData(mon, MON_DATA_HIDDEN_NATURE)];
+    StringCopy(gStringVar2, info->name);
+    if (info->statUp == info->statDown)
+    {
+        StringCopy(gStringVar3, COMPOUND_STRING("leaves every stat as it is"));
+        return;
+    }
+    u8 *end = StringCopy(gStringVar3, COMPOUND_STRING("raises "));
+    end = StringCopy(end, gStatNamesTable[info->statUp]);
+    end = StringCopy(end, COMPOUND_STRING(" and lowers "));
+    StringCopy(end, gStatNamesTable[info->statDown]);
 }
 
 // TRUE while the spread still has room for the requested amount. The
@@ -444,18 +459,28 @@ void ChangeChosenMonHiddenPower(void)
     CalculateMonStats(mon);
 }
 
+// VAR_0x8005 is the raised stat and VAR_0x8006 the lowered one, in Nature
+// order (Attack, Defense, Speed, Sp. Atk, Sp. Def). VAR_RESULT is FALSE when
+// nothing would change (the same Nature, or one neutral Nature for another),
+// so the player keeps the Berries.
 void ChangePokemonNature(void)
 {
     struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u32 raisedStat = gSpecialVar_0x8005;
     u32 loweredStat = gSpecialVar_0x8006;
 
+    gSpecialVar_Result = FALSE;
     if (mon == NULL || raisedStat >= NUM_STATS - 1 || loweredStat >= NUM_STATS - 1)
         return;
     u32 nature = raisedStat * (NUM_STATS - 1) + loweredStat;
+    u32 current = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
+    if (nature == current
+     || (raisedStat == loweredStat && gNaturesInfo[current].statUp == gNaturesInfo[current].statDown))
+        return;
     // Preserve personality; this is the effective nature used for stats.
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
     CalculateMonStats(mon);
+    gSpecialVar_Result = TRUE;
 }
 
 void BufferVarsForIVRater(void)
