@@ -48,7 +48,8 @@ LavaridgeTown_PokemonCenter_1F_EventScript_MoomooMilk::
 	lock
 	faceplayer
 	showmoneybox 0, 0
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk, MSGBOX_DEFAULT
+	message LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk
+	waitmessage
 	multichoice 16, 0, MULTI_MOOMOO_MILK, 0
 	switch VAR_RESULT
 	case 0, LavaridgeTown_PokemonCenter_1F_EventScript_Buy1MoomooMilk
@@ -229,10 +230,8 @@ LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye:
 	.string "Good-bye, for now…$"
 
 LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk:
-	.string "Moomoo Milk?\p"
-	.string "It's great before entering the\n"
-	.string "hot spring!\p"
-	.string "And even better afterward.\p"
+	.string "Moomoo Milk? It's great before the\n"
+	.string "hot spring, and even better after!\p"
 	.string "It's ¥500 a bottle, or ¥6,000\n"
 	.string "for a dozen. How about some?$"
 
