@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ability_text.h"
 #include "battle_main.h"
 #include "battle_util.h"
 #include "bg.h"
@@ -174,6 +175,7 @@ static const u32 sPokedexPlusHGSS_ScreenList_Tilemap[] = INCGFX_U32("graphics/po
 static const u32 sPokedexPlusHGSS_ScreenListUnderlay_Tilemap[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_list_screen_underlay.bin", ".smolTM");
 static const u32 sPokedexPlusHGSS_ScreenInfo_Tilemap[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_info_screen.bin", ".smolTM");
 static const u32 sPokedexPlusHGSS_ScreenStats_Tilemap[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_stats_screen.bin", ".smolTM");
+static const u32 sPokedexPlusHGSS_ScreenAbilities_Tilemap[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_abilities_screen.bin", ".smolTM");
 static const u32 sPokedexPlusHGSS_ScreenEvolution_Tilemap[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_evo_screen.bin", ".smolTM");
 static const u32 sPokedexPlusHGSS_ScreenEvolution_Tilemap_PE[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_evo_screen_PE.bin", ".smolTM");
 static const u32 sPokedexPlusHGSS_ScreenForms_Tilemap[] = INCGFX_U32("graphics/pokedex/hgss/tilemap_forms_screen.bin", ".smolTM");
@@ -219,6 +221,8 @@ static void PrintStatsScreen_Moves_Bottom(u8 taskId);
 static void PrintStatsScreen_Left(u8 taskId);
 static void PrintStatsScreen_Abilities(u8 taskId);
 static void PrintStatsScreen_Owner(u8 taskId);
+static void PrintAbilitiesPage(void);
+static void ToggleStatsAbilitiesPage(u8 taskId);
 static void PrintInfoScreenTextWhite(const u8* str, u8 left, u8 top);
 static void PrintInfoScreenTextSmall(const u8* str, u8 fontId, u8 left, u8 top);
 static void Task_LoadEvolutionScreen(u8 taskId);
@@ -439,7 +443,15 @@ enum
     WIN_STATS_ABILITIES,
     WIN_STATS_OWNER,
     WIN_STATS_OWNER_BUTTON,
+    WIN_STATS_ABILITIES_BUTTON,
 };
+
+// The Stats tab's Abilities page keeps the Stats page's first five windows
+// (top bar, side bar, name, left box, button bar); the left box holds the list
+// and one window fills the right column's tall box.
+#define WIN_ABILITIES_LIST   WIN_STATS_LEFT
+#define WIN_ABILITIES_DETAIL WIN_STATS_MOVES_TOP
+
 static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
 {
     [WIN_STATS_TOPBAR] =
@@ -460,7 +472,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 2,
         .height = 20,
         .paletteNum = 0,
-        .baseBlock = 1 + 60,
+        .baseBlock = 61,
     },
     [WIN_STATS_NAME_GENDER] =
     {
@@ -470,7 +482,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 12,
         .height = 4,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40,
+        .baseBlock = 101,
     },
     [WIN_STATS_LEFT] =
     {
@@ -480,7 +492,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 12,
         .height = 8,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48,
+        .baseBlock = 149,
     },
     [WIN_STATS_NAVIGATION_BUTTONS] =
     {
@@ -490,7 +502,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 12,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 1 + 60 + 40 + 48 + 96,
+        .baseBlock = 245,
     },
     [WIN_STATS_MOVES_TOP] =
     {
@@ -500,7 +512,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 18,
         .height = 4,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24,
+        .baseBlock = 269,
     },
     [WIN_STATS_MOVES_DESCRIPTION] =
     {
@@ -508,29 +520,30 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .tilemapLeft = 12,
         .tilemapTop = 6,
         .width = 18,
-        .height = 4,
+        .height = 6,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72,
+        .baseBlock = 341,
     },
     [WIN_STATS_MOVES_BOTTOM] =
     {
         .bg = 2,
         .tilemapLeft = 12,
-        .tilemapTop = 10,
+        .tilemapTop = 12,
         .width = 18,
         .height = 2,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72,
+        .baseBlock = 449,
     },
+    // The Abilities box: its title band and one line of names.
     [WIN_STATS_ABILITIES] =
     {
         .bg = 2,
         .tilemapLeft = 12,
-        .tilemapTop = 12,
+        .tilemapTop = 14,
         .width = 18,
-        .height = 8,
+        .height = 6,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36,
+        .baseBlock = 485,
     },
     // The foot of the base stats box: "Yours" and "Trainers'".
     [WIN_STATS_OWNER] =
@@ -541,9 +554,9 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 12,
         .height = 4,
         .paletteNum = 0,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36 + 144,
+        .baseBlock = 593,
     },
-    // START beside them, in the text box palette the keypad icons are drawn for.
+    // SELECT beside them, in the text box palette the keypad icons are drawn for.
     [WIN_STATS_OWNER_BUTTON] =
     {
         .bg = 2,
@@ -552,7 +565,83 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .width = 4,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36 + 144 + 48,
+        .baseBlock = 641,
+    },
+    // START at the right of the Abilities title band.
+    [WIN_STATS_ABILITIES_BUTTON] =
+    {
+        .bg = 2,
+        .tilemapLeft = 26,
+        .tilemapTop = 14,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 649,
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct WindowTemplate sAbilitiesScreen_WindowTemplates[] =
+{
+    [WIN_STATS_TOPBAR] =
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 1,
+    },
+    [WIN_STATS_SIDEBAR] =
+    {
+        .bg = 2,
+        .tilemapLeft = 30,
+        .tilemapTop = 0,
+        .width = 2,
+        .height = 20,
+        .paletteNum = 0,
+        .baseBlock = 61,
+    },
+    [WIN_STATS_NAME_GENDER] =
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 2,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 101,
+    },
+    [WIN_ABILITIES_LIST] =
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 6,
+        .width = 12,
+        .height = 12,
+        .paletteNum = 0,
+        .baseBlock = 149,
+    },
+    [WIN_STATS_NAVIGATION_BUTTONS] =
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 18,
+        .width = 12,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 293,
+    },
+    [WIN_ABILITIES_DETAIL] =
+    {
+        .bg = 2,
+        .tilemapLeft = 12,
+        .tilemapTop = 2,
+        .width = 18,
+        .height = 18,
+        .paletteNum = 0,
+        .baseBlock = 317,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1842,7 +1931,10 @@ static void LoadTilesetTilemapHGSS(u8 page)
         break;
     case STATS_SCREEN:
         DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_1_Gfx, 0x2000, 0, 0);
-        CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenStats_Tilemap, 0, 0);
+        if (sPokedexView->statsAbilitiesPage)
+            CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenAbilities_Tilemap, 0, 0);
+        else
+            CopyToBgTilemapBuffer(3, sPokedexPlusHGSS_ScreenStats_Tilemap, 0, 0);
         break;
     case EVO_SCREEN:
         DecompressAndLoadBgGfxUsingHeap(3, sPokedexPlusHGSS_Menu_2_Gfx, 0x2000, 0, 0);
@@ -1867,7 +1959,7 @@ static void LoadTilesetTilemapHGSS(u8 page)
 static u8 ShowCategoryIcon(enum DamageCategory category)
 {
     if (sPokedexView->categoryIconSpriteId == 0xFF)
-        sPokedexView->categoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 139, 90, 0);
+        sPokedexView->categoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 139, 106, 0);
 
     gSprites[sPokedexView->categoryIconSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sPokedexView->categoryIconSpriteId], category);
@@ -1903,13 +1995,19 @@ static void StatsPage_PrintNavigationButtons(void)
 
 static void ResetStatsWindows(void)
 {
-    u8 i;
+    const struct WindowTemplate *templates = sStatsScreen_WindowTemplates;
+    u32 i, count = ARRAY_COUNT(sStatsScreen_WindowTemplates) - 1;
 
+    if (sPokedexView->statsAbilitiesPage)
+    {
+        templates = sAbilitiesScreen_WindowTemplates;
+        count = ARRAY_COUNT(sAbilitiesScreen_WindowTemplates) - 1;
+    }
     ClearWindowTilemap(WIN_INFO);
     FreeAllWindowBuffers();
-    InitWindows(sStatsScreen_WindowTemplates);
+    InitWindows(templates);
 
-    for (i = 0; i < ARRAY_COUNT(sStatsScreen_WindowTemplates); i++)
+    for (i = 0; i < count; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
@@ -1917,12 +2015,12 @@ static void ResetStatsWindows(void)
     }
 }
 
-// Emerald Champions: A pages through the Stats page (battle facts, then breeding
-// and contest facts; the Abilities two at a time), and START switches the base
-// stats and Abilities between the player's own Pokemon, which use the Inclement
-// layer, and trainers' Pokemon, which never do.
-#define tStatsPage     data[5]
-#define tStatsTrainers data[7]
+// Emerald Champions: the Stats tab has two pages. On Stats, A flips between
+// battle facts and breeding/contest facts and SELECT switches the base stats
+// and Abilities between the player's own Pokemon, which use the Inclement
+// layer, and trainers' Pokemon, which never do. START opens the Abilities page:
+// every Ability of the species for that view, with its full description.
+#define tStatsPage data[5]
 
 // Text colors from the Pokedex's own background palette 0 (the same in every
 // Pokedex palette): red, blue and the mid gray of an unselected choice.
@@ -1930,44 +2028,48 @@ static void ResetStatsWindows(void)
 #define STATS_PAGE_COLOR_LOWER  13
 #define STATS_PAGE_COLOR_UNSELECTED 5
 
-// Every move the Stats page lists, egg moves first; see CalculateMoves.
+// Every move the Stats page lists; see CalculateMoves.
 static EWRAM_DATA u16 *sStatsPageMoves = NULL;
+
+struct StatsPageAbility
+{
+    enum Ability ability;
+    u8 slot; // 0-1 normal, 2 hidden, ABILITY_SLOT_INCLEMENT and up added
+};
 
 static bool32 IsStatsPageAlternate(u8 taskId)
 {
     return (gTasks[taskId].tStatsPage & 1) != 0;
 }
 
-static u32 GetStatsPageBaseStat(u8 taskId, enum Species species, u32 stat)
+static u32 GetStatsPageBaseStat(enum Species species, u32 stat)
 {
-    if (gTasks[taskId].tStatsTrainers)
+    if (sPokedexView->statsTrainersView)
         return GetSpeciesBaseStat(species, stat);
     return GetInclementSpeciesBaseStat(species, stat);
 }
 
-// Every distinct Ability, in the party menu's order (GetMonSelectableAbilitySlots):
-// normal slots, the Inclement slots (never for trainers), then the hidden slot.
-static u32 GetStatsPageAbilities(enum Species species, bool32 trainers, enum Ability *abilities)
+// Every distinct Ability: the official slots (normal, normal, hidden), then
+// the Inclement additions, which only the player's own Pokemon get.
+static u32 GetStatsPageAbilities(enum Species species, bool32 trainers, struct StatsPageAbility *abilities)
 {
-    u8 order[NUM_OWNER_ABILITY_SLOTS];
-    u32 count = 0, orderCount = 0;
+    u32 count = 0;
 
-    order[orderCount++] = 0;
-    order[orderCount++] = 1;
-    for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
-        order[orderCount++] = slot;
-    order[orderCount++] = 2;
-    for (u32 i = 0; i < orderCount; i++)
+    for (u32 slot = 0; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
     {
-        enum Ability ability = GetSpeciesAbilityForOwner(species, order[i], trainers);
+        enum Ability ability = GetSpeciesAbilityForOwner(species, slot, trainers);
         bool32 duplicate = FALSE;
 
         if (ability == ABILITY_NONE)
             continue;
         for (u32 j = 0; j < count; j++)
-            duplicate |= abilities[j] == ability;
+            duplicate |= abilities[j].ability == ability;
         if (!duplicate)
-            abilities[count++] = ability;
+        {
+            abilities[count].ability = ability;
+            abilities[count].slot = slot;
+            count++;
+        }
     }
     return count;
 }
@@ -1986,16 +2088,6 @@ static bool32 HasStatsPageTrainersView(enum Species species)
             return TRUE;
     }
     return FALSE;
-}
-
-// A always shows both halves of the page; a species with five Abilities
-// needs a third page for its last one.
-static u32 GetStatsPageCount(u8 taskId)
-{
-    enum Ability abilities[NUM_OWNER_ABILITY_SLOTS];
-    u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, gTasks[taskId].tStatsTrainers, abilities);
-
-    return max(2, (count + 1) / 2);
 }
 
 static void FreeStatsPageMoves(void)
@@ -2057,6 +2149,9 @@ static void Task_LoadStatsScreen(u8 taskId)
         {
             u16 r2;
 
+            sPokedexView->statsAbilitiesPage = FALSE;
+            sPokedexView->statsTrainersView = FALSE;
+            sPokedexView->statsAbilityCursor = 0;
             sPokedexView->currentPage = STATS_SCREEN;
             gPokedexVBlankCB = gMain.vblankCallback;
             SetVBlankCallback(NULL);
@@ -2118,7 +2213,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         break;
     case 6:
         gTasks[taskId].tStatsPage = 0;
-        gTasks[taskId].tStatsTrainers = FALSE;
+        sPokedexView->statsTrainersView = FALSE;
         PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE);
         PrintStatsScreen_Left(taskId);
         PrintStatsScreen_Abilities(taskId);
@@ -2176,22 +2271,49 @@ static void Task_HandleStatsScreenInput(u8 taskId)
 {
     bool32 redraw = FALSE;
 
-    if (JOY_NEW(A_BUTTON))
+    if (JOY_NEW(START_BUTTON) || (sPokedexView->statsAbilitiesPage && JOY_NEW(B_BUTTON)))
+    {
+        ToggleStatsAbilitiesPage(taskId);
+        return;
+    }
+    if (JOY_NEW(A_BUTTON) && !sPokedexView->statsAbilitiesPage)
     {
         PlaySE(SE_DEX_PAGE);
-        gTasks[taskId].tStatsPage = (gTasks[taskId].tStatsPage + 1) % GetStatsPageCount(taskId);
+        gTasks[taskId].tStatsPage ^= 1;
         redraw = TRUE;
     }
-    else if (JOY_NEW(START_BUTTON) && HasStatsPageTrainersView(sPokedexView->sPokemonStats.species))
+    else if (JOY_NEW(SELECT_BUTTON) && HasStatsPageTrainersView(sPokedexView->sPokemonStats.species))
     {
         PlaySE(SE_DEX_PAGE);
-        gTasks[taskId].tStatsTrainers = !gTasks[taskId].tStatsTrainers;
-        if (gTasks[taskId].tStatsPage >= GetStatsPageCount(taskId))
-            gTasks[taskId].tStatsPage = 0;
+        sPokedexView->statsTrainersView ^= 1;
+        sPokedexView->statsAbilityCursor = 0;
         redraw = TRUE;
     }
-    if (redraw)
+    if (sPokedexView->statsAbilitiesPage)
     {
+        struct StatsPageAbility abilities[NUM_OWNER_ABILITY_SLOTS];
+        u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, sPokedexView->statsTrainersView, abilities);
+        if (JOY_REPEAT(DPAD_UP) && sPokedexView->statsAbilityCursor > 0)
+        {
+            sPokedexView->statsAbilityCursor--;
+            redraw = TRUE;
+        }
+        else if (JOY_REPEAT(DPAD_DOWN) && sPokedexView->statsAbilityCursor + 1 < count)
+        {
+            sPokedexView->statsAbilityCursor++;
+            redraw = TRUE;
+        }
+        if (redraw)
+        {
+            PlaySE(SE_SELECT);
+            PrintAbilitiesPage();
+        }
+    }
+    else if (redraw)
+    {
+        PrintStatsScreen_DestroyMoveItemIcon(taskId);
+        FillWindowPixelBuffer(WIN_STATS_MOVES_TOP, PIXEL_FILL(0));
+        PrintStatsScreen_Moves_Top(taskId);
         FillWindowPixelBuffer(WIN_STATS_LEFT, PIXEL_FILL(0));
         PrintStatsScreen_Left(taskId);
 
@@ -2214,7 +2336,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
     }
 
     //Change moves
-    if (JOY_REPEAT(DPAD_UP) && sPokedexView->moveSelected > 0)
+    if (!sPokedexView->statsAbilitiesPage && JOY_REPEAT(DPAD_UP) && sPokedexView->moveSelected > 0)
     {
         sPokedexView->moveSelected -= 1;
         PlaySE(SE_SELECT);
@@ -2229,7 +2351,7 @@ static void Task_HandleStatsScreenInput(u8 taskId)
         FillWindowPixelRect(WIN_STATS_MOVES_BOTTOM, PIXEL_FILL(0), 120, 0, 20, 16);
         PrintStatsScreen_Moves_Bottom(taskId);
     }
-    if (JOY_REPEAT(DPAD_DOWN) && sPokedexView->moveSelected < sPokedexView->movesTotal -1 )
+    if (!sPokedexView->statsAbilitiesPage && JOY_REPEAT(DPAD_DOWN) && sPokedexView->moveSelected + 1 < sPokedexView->movesTotal)
     {
         sPokedexView->moveSelected = sPokedexView->moveSelected + 1;
         PlaySE(SE_SELECT);
@@ -2555,8 +2677,8 @@ static void PrintStatsScreen_Left(u8 taskId)
         for (u32 i = 0; i < NUM_STATS; i++)
         {
             u32 stat = sStatOrder[i];
-            u32 shown = GetStatsPageBaseStat(taskId, species, stat);
-            u32 other = gTasks[taskId].tStatsTrainers
+            u32 shown = GetStatsPageBaseStat(species, stat);
+            u32 other = sPokedexView->statsTrainersView
                       ? GetInclementSpeciesBaseStat(species, stat) : GetSpeciesBaseStat(species, stat);
             u8 color[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
             u8 y = base_y + base_y_offset * (i / 2);
@@ -2775,14 +2897,14 @@ static void PrintStatsScreen_Left(u8 taskId)
     PrintStatsScreen_Owner(taskId);
 }
 
-// Whose base stats and Abilities are shown, at the foot of the box, with START
+// Whose base stats and Abilities are shown, at the foot of the box, with SELECT
 // beside the two choices. Species Inclement never touched show neither.
 static void PrintStatsScreen_Owner(u8 taskId)
 {
-    static const u8 sText_Start[] = _("{START_BUTTON}");
+    static const u8 sText_Select[] = _("{SELECT_BUTTON}");
     u8 selected[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
     u8 unselected[3] = {TEXT_COLOR_TRANSPARENT, STATS_PAGE_COLOR_UNSELECTED, TEXT_COLOR_LIGHT_GRAY};
-    bool32 trainers = gTasks[taskId].tStatsTrainers;
+    bool32 trainers = sPokedexView->statsTrainersView;
 
     FillWindowPixelBuffer(WIN_STATS_OWNER, PIXEL_FILL(0));
     FillWindowPixelBuffer(WIN_STATS_OWNER_BUTTON, PIXEL_FILL(0));
@@ -2790,36 +2912,111 @@ static void PrintStatsScreen_Owner(u8 taskId)
     {
         AddTextPrinterParameterized4(WIN_STATS_OWNER, FONT_SMALL, 8, 7, 0, 0, trainers ? unselected : selected, 0, sText_Stats_Yours);
         AddTextPrinterParameterized4(WIN_STATS_OWNER, FONT_SMALL, 8, 18, 0, 0, trainers ? selected : unselected, 0, sText_Stats_Trainers);
-        AddTextPrinterParameterized3(WIN_STATS_OWNER_BUTTON, FONT_SMALL, 5, 4, sStatsPageNavigationTextColor, 0, sText_Start);
+        AddTextPrinterParameterized3(WIN_STATS_OWNER_BUTTON, FONT_SMALL, 5, 4, sStatsPageNavigationTextColor, 0, sText_Select);
     }
     CopyWindowToVram(WIN_STATS_OWNER, COPYWIN_GFX);
     CopyWindowToVram(WIN_STATS_OWNER_BUTTON, COPYWIN_GFX);
 }
 
-// Ability names and descriptions shrink to the box when they would overflow it.
-static void PrintStatsScreenAbility(enum Ability ability, u8 x, u8 y)
-{
-    static const u8 sNameColor[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6};
-    static const u8 sDescriptionColor[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
-    const u8 *name = gAbilitiesInfo[ability].name;
-    const u8 *description = gAbilitiesInfo[ability].description;
-    u32 width = WindowWidthPx(WIN_STATS_ABILITIES) - x - 1; // to the box's inner edge
-
-    AddTextPrinterParameterized4(WIN_STATS_ABILITIES, GetFontIdToFit(name, FONT_SMALL, 0, width), x, y, 0, 0, sNameColor, 0, name);
-    AddTextPrinterParameterized4(WIN_STATS_ABILITIES, GetFontIdToFit(description, FONT_SMALL, 0, width), x, y + 14, 0, 0, sDescriptionColor, 0, description);
-}
-
-// Two Abilities per half of the page, in the party menu's order; the
-// player's own Pokemon also list their Inclement Abilities.
+// The Stats page previews every name; START opens the full descriptions.
 static void PrintStatsScreen_Abilities(u8 taskId)
 {
-    enum Ability abilities[NUM_OWNER_ABILITY_SLOTS];
-    u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, gTasks[taskId].tStatsTrainers, abilities);
-    u32 pages = max(1, (count + 1) / 2);
-    u32 first = (gTasks[taskId].tStatsPage % pages) * 2;
+    static const u8 title[] = _("Abilities");
+    static const u8 start[] = _("{START_BUTTON}");
+    struct StatsPageAbility abilities[NUM_OWNER_ABILITY_SLOTS];
+    u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, sPokedexView->statsTrainersView, abilities);
 
-    for (u32 i = first; i < first + 2 && i < count; i++)
-        PrintStatsScreenAbility(abilities[i], 5, 3 + 30 * (i - first));
+    PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, title, 5, 3);
+    AddTextPrinterParameterized3(WIN_STATS_ABILITIES_BUTTON, FONT_SMALL, 5, 3, sStatsPageNavigationTextColor, 0, start);
+    // This is an overview; the full list and slot markers live on START.
+    for (u32 i = 0; i < min(count, 2); i++)
+    {
+        const u8 *name = gAbilitiesInfo[abilities[i].ability].name;
+        const u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
+        AddTextPrinterParameterized4(WIN_STATS_ABILITIES, GetFontIdToFit(name, FONT_SMALL, 0, 120), 5, 17 + 12 * i, 0, 0, color, 0, name);
+    }
+    if (count > 2)
+        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, sText_PlusSymbol, 130, 29);
+    CopyWindowToVram(WIN_STATS_ABILITIES_BUTTON, COPYWIN_GFX);
+}
+
+static void PrintAbilitiesPage(void)
+{
+    static const u8 marker[] = _(">");
+    static const u8 hidden[] = _("H");
+    static const u8 added[] = _("+");
+    static const u8 legend[] = _("H Hidden  + Inclement");
+    static const u8 yours[] = _("Yours");
+    static const u8 trainers[] = _("Trainers'");
+    static const u8 select[] = _("SELECT: Yours / Trainers'");
+    const u8 color[] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
+    struct StatsPageAbility abilities[NUM_OWNER_ABILITY_SLOTS];
+    u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, sPokedexView->statsTrainersView, abilities);
+    u32 cursor = sPokedexView->statsAbilityCursor;
+
+    if (cursor >= count)
+        cursor = sPokedexView->statsAbilityCursor = 0;
+    FillWindowPixelBuffer(WIN_ABILITIES_LIST, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_ABILITIES_DETAIL, PIXEL_FILL(0));
+    for (u32 i = 0; i < count; i++)
+    {
+        const u8 *name = gAbilitiesInfo[abilities[i].ability].name;
+        u32 y = 3 + i * 12;
+        AddTextPrinterParameterized4(WIN_ABILITIES_LIST, GetFontIdToFit(name, FONT_SMALL, 0, 70), 12, y, 0, 0, color, 0, name);
+        if (i == cursor)
+            PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, marker, 3, y);
+        if (abilities[i].slot == 2)
+            PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, hidden, 84, y);
+        else if (IS_INCLEMENT_ABILITY_SLOT(abilities[i].slot))
+            PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, added, 84, y);
+    }
+    AddTextPrinterParameterized4(WIN_ABILITIES_LIST, GetFontIdToFit(legend, FONT_SMALL, 0, 88), 5, 78, 0, 0, color, 0, legend);
+    PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, sPokedexView->statsTrainersView ? trainers : yours, 5, 88);
+    if (count)
+    {
+        enum Ability ability = abilities[cursor].ability;
+        const u8 *name = gAbilitiesInfo[ability].name;
+        const u8 titleColor[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6};
+        AddTextPrinterParameterized4(WIN_ABILITIES_DETAIL, GetFontIdToFit(name, FONT_SMALL, 0, 134), 5, 5, 0, 0, titleColor, 0, name);
+        AddTextPrinterParameterized4(WIN_ABILITIES_DETAIL, FONT_NARROW, 5, 25, 0, 0, color, 0, GetAbilityFullDescription(ability));
+    }
+    if (HasStatsPageTrainersView(sPokedexView->sPokemonStats.species))
+        PrintStatsScreenTextSmall(WIN_ABILITIES_DETAIL, select, 5, 130);
+    CopyWindowToVram(WIN_ABILITIES_LIST, COPYWIN_GFX);
+    CopyWindowToVram(WIN_ABILITIES_DETAIL, COPYWIN_GFX);
+}
+
+static void ToggleStatsAbilitiesPage(u8 taskId)
+{
+    static const u8 back[] = _("{B_BUTTON} Back");
+    PlaySE(SE_DEX_PAGE);
+    sPokedexView->statsAbilitiesPage ^= 1;
+    LoadTilesetTilemapHGSS(STATS_SCREEN);
+    ResetStatsWindows();
+    PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode != DEX_MODE_HOENN);
+    if (sPokedexView->statsAbilitiesPage)
+    {
+        SetSpriteInvisibility(0, TRUE);
+        SetSpriteInvisibility(1, TRUE);
+        gSprites[gTasks[taskId].data[3]].invisible = TRUE;
+        DestroyCategoryIcon();
+        PrintAbilitiesPage();
+        AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, FONT_SMALL, 9, 0, sStatsPageNavigationTextColor, 0, back);
+    }
+    else
+    {
+        PrintStatsScreen_DestroyMoveItemIcon(taskId);
+        PrintStatsScreen_Left(taskId);
+        PrintStatsScreen_Abilities(taskId);
+        PrintStatsScreen_Moves_Top(taskId);
+        PrintStatsScreen_Moves_Description(taskId);
+        PrintStatsScreen_Moves_BottomText(taskId);
+        PrintStatsScreen_Moves_Bottom(taskId);
+        StatsPage_PrintNavigationButtons();
+    }
+    CopyBgTilemapBufferToVram(2);
+    CopyBgTilemapBufferToVram(3);
+    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, COPYWIN_GFX);
 }
 
 static void Task_SwitchScreensFromStatsScreen(u8 taskId)
