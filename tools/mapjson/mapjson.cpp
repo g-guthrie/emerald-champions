@@ -773,6 +773,25 @@ void process_groups(string groups_filepath, vector<string> &map_filepaths, strin
     write_text_file(output_c + sep + "map_groups.h", map_header_text);
 }
 
+// Layout ids are persisted (SaveBlock1.mapLayoutId), so the ids of layouts
+// that were deleted stay reserved: gMapLayouts keeps a NULL for each of them and
+// no later layout is renumbered. layouts.json names the range as
+// "reserved_layout_ids": {"first": <id>, "count": <n>}.
+struct ReservedLayoutIds {
+    int first;
+    int count;
+};
+
+ReservedLayoutIds get_reserved_layout_ids(Json layouts_data) {
+    Json reserved = layouts_data["reserved_layout_ids"];
+    if (reserved.is_null())
+        return {0, 0};
+    if (!reserved["first"].is_number() || !reserved["count"].is_number()
+     || reserved["first"].int_value() < 1 || reserved["count"].int_value() < 0)
+        FATAL_ERROR("reserved_layout_ids needs a positive \"first\" and a non-negative \"count\"\n");
+    return {reserved["first"].int_value(), reserved["count"].int_value()};
+}
+
 string generate_layout_headers_text(Json layouts_data) {
     ostringstream text;
 
@@ -838,9 +857,17 @@ string generate_layouts_table_text(Json layouts_data) {
     text << "\t.align 2\n"
          << json_to_string(layouts_data, "layouts_table_label") << "::\n";
 
+    int id = 1;
+    ReservedLayoutIds reserved = get_reserved_layout_ids(layouts_data);
     for (auto &layout : layouts_data["layouts"].array_items()) {
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
+        if (id == reserved.first) {
+            for (int n = 0; n < reserved.count; n++)
+                text << "\t.4byte NULL\n";
+            id += reserved.count;
+        }
+        id++;
         string layout_version = json_to_string(layout, "layout_version", true);
         if (layout_version.empty()) {
             if (version == "emerald")
@@ -856,6 +883,8 @@ string generate_layouts_table_text(Json layouts_data) {
             text << "\t.4byte " << layout_name << "\n";
         }
     }
+    if (reserved.count > 0 && id <= reserved.first)
+        FATAL_ERROR("reserved_layout_ids must be followed by at least one layout\n");
 
     return text.str();
 }
@@ -884,9 +913,12 @@ string generate_layouts_constants_text(Json layouts_data) {
     text << get_include_guard_start(guard_name) << get_generated_warning("data/layouts/layouts.json", false);
 
     int i = 1;
+    ReservedLayoutIds reserved = get_reserved_layout_ids(layouts_data);
     for (auto &layout : layouts_data["layouts"].array_items()) {
         if (!std::filesystem::exists(json_to_string(layout, "border_filepath")))
             continue;
+        if (i == reserved.first)
+            i += reserved.count;
         if (layout != Json::object())
         {
             text << "#define " << json_to_string(layout, "id") << " " << i << "\n";

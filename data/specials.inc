@@ -596,7 +596,7 @@ gSpecials::
 	def_special SetPostgameFlags
 	def_special IsPlayerNotInTrainerTowerLobby
 	def_special BrailleCursorToggle
-	def_special EnterHallOfFame
+	def_special EnterHallOfFame, unused=1
 	def_special CB2_StartCreditsSequence
 	def_special DoPokemonLeagueLightingEffect
 	def_special GetStarterPokemon
