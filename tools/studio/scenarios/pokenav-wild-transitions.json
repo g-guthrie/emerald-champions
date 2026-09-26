@@ -1,0 +1,504 @@
+{
+  "name": "PokeNav Wild Pokemon: A and B transitions frame by frame",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_SYS_POKENAV_GET": true,
+      "FLAG_RECEIVED_POKENAV": true
+    }
+  },
+  "warp": {
+    "map": "Route114",
+    "x": 8,
+    "y": 64,
+    "facing": 1
+  },
+  "steps": [
+    {
+      "frames": 120,
+      "label": "Field"
+    },
+    {
+      "press": "START",
+      "frames": 90
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "Map open"
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "Zoom view"
+    },
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "A choice"
+    },
+    {
+      "press": "A",
+      "frames": 1,
+      "label": "A on Wild f1"
+    },
+    {
+      "frames": 1,
+      "label": "open f2"
+    },
+    {
+      "frames": 1,
+      "label": "open f3"
+    },
+    {
+      "frames": 1,
+      "label": "open f4"
+    },
+    {
+      "frames": 1,
+      "label": "open f5"
+    },
+    {
+      "frames": 1,
+      "label": "open f6"
+    },
+    {
+      "frames": 1,
+      "label": "open f7"
+    },
+    {
+      "frames": 1,
+      "label": "open f8"
+    },
+    {
+      "frames": 1,
+      "label": "open f9"
+    },
+    {
+      "frames": 1,
+      "label": "open f10"
+    },
+    {
+      "frames": 1,
+      "label": "open f11"
+    },
+    {
+      "frames": 1,
+      "label": "open f12"
+    },
+    {
+      "frames": 1,
+      "label": "open f13"
+    },
+    {
+      "frames": 1,
+      "label": "open f14"
+    },
+    {
+      "frames": 1,
+      "label": "open f15"
+    },
+    {
+      "frames": 1,
+      "label": "open f16"
+    },
+    {
+      "frames": 1,
+      "label": "open f17"
+    },
+    {
+      "frames": 1,
+      "label": "open f18"
+    },
+    {
+      "frames": 1,
+      "label": "open f19"
+    },
+    {
+      "frames": 1,
+      "label": "open f20"
+    },
+    {
+      "frames": 1,
+      "label": "open f21"
+    },
+    {
+      "frames": 1,
+      "label": "open f22"
+    },
+    {
+      "frames": 1,
+      "label": "open f23"
+    },
+    {
+      "frames": 1,
+      "label": "open f24"
+    },
+    {
+      "frames": 1,
+      "label": "open f25"
+    },
+    {
+      "frames": 1,
+      "label": "open f26"
+    },
+    {
+      "frames": 1,
+      "label": "open f27"
+    },
+    {
+      "frames": 1,
+      "label": "open f28"
+    },
+    {
+      "frames": 1,
+      "label": "open f29"
+    },
+    {
+      "frames": 1,
+      "label": "open f30"
+    },
+    {
+      "frames": 1,
+      "label": "open f31"
+    },
+    {
+      "frames": 1,
+      "label": "open f32"
+    },
+    {
+      "frames": 1,
+      "label": "open f33"
+    },
+    {
+      "frames": 1,
+      "label": "open f34"
+    },
+    {
+      "frames": 1,
+      "label": "open f35"
+    },
+    {
+      "frames": 1,
+      "label": "open f36"
+    },
+    {
+      "frames": 1,
+      "label": "open f37"
+    },
+    {
+      "frames": 1,
+      "label": "open f38"
+    },
+    {
+      "frames": 1,
+      "label": "open f39"
+    },
+    {
+      "frames": 1,
+      "label": "open f40"
+    },
+    {
+      "frames": 1,
+      "label": "open f41"
+    },
+    {
+      "frames": 1,
+      "label": "open f42"
+    },
+    {
+      "frames": 1,
+      "label": "open f43"
+    },
+    {
+      "frames": 1,
+      "label": "open f44"
+    },
+    {
+      "frames": 1,
+      "label": "open f45"
+    },
+    {
+      "frames": 1,
+      "label": "open f46"
+    },
+    {
+      "frames": 1,
+      "label": "open f47"
+    },
+    {
+      "frames": 1,
+      "label": "open f48"
+    },
+    {
+      "frames": 1,
+      "label": "open f49"
+    },
+    {
+      "frames": 1,
+      "label": "open f50"
+    },
+    {
+      "frames": 1,
+      "label": "open f51"
+    },
+    {
+      "frames": 1,
+      "label": "open f52"
+    },
+    {
+      "frames": 1,
+      "label": "open f53"
+    },
+    {
+      "frames": 1,
+      "label": "open f54"
+    },
+    {
+      "frames": 1,
+      "label": "open f55"
+    },
+    {
+      "frames": 1,
+      "label": "open f56"
+    },
+    {
+      "frames": 1,
+      "label": "open f57"
+    },
+    {
+      "frames": 1,
+      "label": "open f58"
+    },
+    {
+      "frames": 1,
+      "label": "open f59"
+    },
+    {
+      "frames": 1,
+      "label": "open f60"
+    },
+    {
+      "frames": 1,
+      "label": "open f61"
+    },
+    {
+      "frames": 1,
+      "label": "open f62"
+    },
+    {
+      "frames": 1,
+      "label": "open f63"
+    },
+    {
+      "frames": 1,
+      "label": "open f64"
+    },
+    {
+      "frames": 1,
+      "label": "open f65"
+    },
+    {
+      "frames": 1,
+      "label": "open f66"
+    },
+    {
+      "frames": 1,
+      "label": "open f67"
+    },
+    {
+      "frames": 1,
+      "label": "open f68"
+    },
+    {
+      "frames": 1,
+      "label": "open f69"
+    },
+    {
+      "frames": 1,
+      "label": "open f70"
+    },
+    {
+      "frames": 1,
+      "label": "open f71"
+    },
+    {
+      "frames": 1,
+      "label": "open f72"
+    },
+    {
+      "frames": 1,
+      "label": "open f73"
+    },
+    {
+      "frames": 1,
+      "label": "open f74"
+    },
+    {
+      "frames": 1,
+      "label": "open f75"
+    },
+    {
+      "frames": 1,
+      "label": "open f76"
+    },
+    {
+      "frames": 1,
+      "label": "open f77"
+    },
+    {
+      "frames": 1,
+      "label": "open f78"
+    },
+    {
+      "frames": 1,
+      "label": "open f79"
+    },
+    {
+      "frames": 1,
+      "label": "open f80"
+    },
+    {
+      "frames": 1,
+      "label": "open f81"
+    },
+    {
+      "frames": 1,
+      "label": "open f82"
+    },
+    {
+      "frames": 1,
+      "label": "open f83"
+    },
+    {
+      "frames": 1,
+      "label": "open f84"
+    },
+    {
+      "frames": 1,
+      "label": "open f85"
+    },
+    {
+      "frames": 60,
+      "label": "List settled"
+    },
+    {
+      "press": "B",
+      "frames": 1,
+      "label": "B f1"
+    },
+    {
+      "frames": 1,
+      "label": "close f2"
+    },
+    {
+      "frames": 1,
+      "label": "close f3"
+    },
+    {
+      "frames": 1,
+      "label": "close f4"
+    },
+    {
+      "frames": 1,
+      "label": "close f5"
+    },
+    {
+      "frames": 1,
+      "label": "close f6"
+    },
+    {
+      "frames": 1,
+      "label": "close f7"
+    },
+    {
+      "frames": 1,
+      "label": "close f8"
+    },
+    {
+      "frames": 1,
+      "label": "close f9"
+    },
+    {
+      "frames": 1,
+      "label": "close f10"
+    },
+    {
+      "frames": 1,
+      "label": "close f11"
+    },
+    {
+      "frames": 1,
+      "label": "close f12"
+    },
+    {
+      "frames": 1,
+      "label": "close f13"
+    },
+    {
+      "frames": 1,
+      "label": "close f14"
+    },
+    {
+      "frames": 1,
+      "label": "close f15"
+    },
+    {
+      "frames": 1,
+      "label": "close f16"
+    },
+    {
+      "frames": 1,
+      "label": "close f17"
+    },
+    {
+      "frames": 1,
+      "label": "close f18"
+    },
+    {
+      "frames": 1,
+      "label": "close f19"
+    },
+    {
+      "frames": 1,
+      "label": "close f20"
+    },
+    {
+      "frames": 1,
+      "label": "close f21"
+    },
+    {
+      "frames": 1,
+      "label": "close f22"
+    },
+    {
+      "frames": 1,
+      "label": "close f23"
+    },
+    {
+      "frames": 1,
+      "label": "close f24"
+    },
+    {
+      "frames": 1,
+      "label": "close f25"
+    },
+    {
+      "frames": 60,
+      "label": "Zoom settled"
+    }
+  ],
+  "expect": {
+    "battle": false
+  }
+}

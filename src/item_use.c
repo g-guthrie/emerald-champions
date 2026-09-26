@@ -1565,7 +1565,27 @@ static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
     return SPECIES_NONE;
 }
 
-static void PrepareFlightBeaconRider(void)
+// Why the Flight Beacon cannot fly the player from here, or NULL when it can.
+static const u8 *GetFlightBeaconRefusal(void)
+{
+    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
+        return sText_FlightBeaconLocked;
+    if (FindFlightBeaconRider(FALSE) == SPECIES_NONE)
+        return sText_FlightBeaconNeedsFlier;
+    if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
+     || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
+        return sText_FlightBeaconCantHere;
+    return NULL;
+}
+
+// Whether the player could fly from here with the Flight Beacon right now.
+// The PokeNav map offers Fly on exactly these terms.
+bool32 CanFlyWithFlightBeacon(void)
+{
+    return CheckBagHasItem(ITEM_FLIGHT_BEACON, 1) && GetFlightBeaconRefusal() == NULL;
+}
+
+void PrepareFlightBeaconRider(void)
 {
     enum Species rider = FindFlightBeaconRider(TRUE);
 
@@ -1610,15 +1630,7 @@ static void Task_OpenRegisteredFlightBeacon(u8 taskId)
 
 void ItemUseOutOfBattle_FlightBeacon(u8 taskId)
 {
-    const u8 *refusal = NULL;
-
-    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
-        refusal = sText_FlightBeaconLocked;
-    else if (FindFlightBeaconRider(FALSE) == SPECIES_NONE)
-        refusal = sText_FlightBeaconNeedsFlier;
-    else if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
-          || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
-        refusal = sText_FlightBeaconCantHere;
+    const u8 *refusal = GetFlightBeaconRefusal();
 
     if (refusal != NULL)
     {

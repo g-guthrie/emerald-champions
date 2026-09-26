@@ -4,5 +4,6 @@
 void ClearMirageTowerPulseBlendEffect(void);
 void ClearMirageTowerPulseBlend(void);
 void TryStartMirageTowerPulseBlendEffect(void);
+bool32 IsMirageTowerGone(void);
 
 #endif // GUARD_MIRAGE_TOWER_H
