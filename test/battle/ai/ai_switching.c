@@ -1904,7 +1904,11 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will consider choice-locked
     GIVEN {
         ASSUME(gItemsInfo[ITEM_CHOICE_BAND].holdEffect == HOLD_EFFECT_CHOICE_BAND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_LYCANROC) { Speed(5); Moves(MOVE_ACCELEROCK, MOVE_MIGHTY_CLEAVE); Item(item); }
+        // Pinned to the species' own line: the player's Inclement layer buffs Lycanroc.
+        PLAYER(SPECIES_LYCANROC) { Speed(5); Moves(MOVE_ACCELEROCK, MOVE_MIGHTY_CLEAVE); Item(item);
+                                   Attack(CalculateSpeciesStat(SPECIES_LYCANROC, NATURE_HARDY, STAT_ATK, 100, 0, MAX_PER_STAT_IVS));
+                                   Defense(CalculateSpeciesStat(SPECIES_LYCANROC, NATURE_HARDY, STAT_DEF, 100, 0, MAX_PER_STAT_IVS));
+                                   SpDefense(CalculateSpeciesStat(SPECIES_LYCANROC, NATURE_HARDY, STAT_SPDEF, 100, 0, MAX_PER_STAT_IVS)); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(4); HP(1); Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_DECIDUEYE_HISUI) { Speed(4); Moves(MOVE_LEAF_BLADE); }
         OPPONENT(SPECIES_PHEROMOSA) { Speed(6); HP(1); Moves(MOVE_EARTHQUAKE); }

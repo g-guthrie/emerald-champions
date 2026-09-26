@@ -2981,30 +2981,10 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     }
 }
 
+// Every distinct Ability the Pokemon can hold, the Inclement slot included.
 static u8 CollectSelectableAbilitySlots(struct Pokemon *mon, u8 *slots)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    enum Ability seen[NUM_ABILITY_SLOTS] = {ABILITY_NONE};
-    u8 count = 0;
-
-    for (u8 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
-    {
-        enum Ability ability = GetAbilityBySpecies(species, slot);
-        bool32 duplicate = FALSE;
-
-        if (ability == ABILITY_NONE)
-            continue;
-        for (u8 i = 0; i < count; i++)
-            duplicate |= seen[i] == ability;
-        if (!duplicate)
-        {
-            seen[count] = ability;
-            if (slots != NULL)
-                slots[count] = slot;
-            count++;
-        }
-    }
-    return count;
+    return GetMonSelectableAbilitySlots(mon, slots);
 }
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
@@ -5052,9 +5032,8 @@ void Task_AbilityCapsule(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (GetSpeciesAbility(tSpecies, 0) == GetSpeciesAbility(tSpecies, 1)
-            || GetSpeciesAbility(tSpecies, 1) == 0
-            || tAbilityNum > 1
+        // No other normal slot (the Inclement slot counts), or a hidden Ability.
+        if (tAbilityNum >= NUM_OWNER_ABILITY_SLOTS
             || !tSpecies)
         {
             gPartyMenuUseExitCallback = FALSE;
@@ -5066,7 +5045,7 @@ void Task_AbilityCapsule(u8 taskId)
         }
         gPartyMenuUseExitCallback = TRUE;
         GetMonNickname(&gParties[B_TRAINER_PLAYER][tMonId], gStringVar1);
-        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
+        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpeciesForOwner(tSpecies, tAbilityNum, IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][tMonId]))].name);
         StringExpandPlaceholders(gStringVar4, sText_askText);
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gStringVar4, 1);
@@ -5125,7 +5104,8 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_SPECIES);
-    tAbilityNum = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM) ^ 1;
+    // Cycles the normal slots: 0, 1, then the Inclement slot.
+    tAbilityNum = GetAbilityCapsuleTargetSlot(&gParties[B_TRAINER_PLAYER][tMonId]);
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityCapsule;
 }
@@ -5138,7 +5118,7 @@ void Task_AbilityPatch(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (GetSpeciesAbility(tSpecies, tAbilityNum) == 0
+        if (tAbilityNum >= NUM_OWNER_ABILITY_SLOTS
             || !tSpecies
             )
         {
@@ -5151,7 +5131,7 @@ void Task_AbilityPatch(u8 taskId)
         }
         gPartyMenuUseExitCallback = TRUE;
         GetMonNickname(&gParties[B_TRAINER_PLAYER][tMonId], gStringVar1);
-        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
+        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpeciesForOwner(tSpecies, tAbilityNum, IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][tMonId]))].name);
         StringExpandPlaceholders(gStringVar4, sText_askText);
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gStringVar4, 1);
@@ -5210,10 +5190,8 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_SPECIES);
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM) == 2)
-        tAbilityNum = 0;
-    else
-        tAbilityNum = 2;
+    // Toggles the hidden slot; any normal slot, the Inclement one included, goes to it.
+    tAbilityNum = GetAbilityPatchTargetSlot(&gParties[B_TRAINER_PLAYER][tMonId]);
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityPatch;
 }
@@ -7099,7 +7077,7 @@ static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialC
     // 10-tile action popup, and keep the right edge on column 29.
     for (u8 i = 0; i < count; i++)
     {
-        enum Ability ability = GetAbilityBySpecies(species, slots[i]);
+        enum Ability ability = GetAbilityBySpeciesForOwner(species, slots[i], IsMonTrainerOwned(mon));
         u32 labelWidth = GetStringWidth(FONT_NORMAL, gAbilitiesInfo[ability].name, letterSpacing);
 
         if (labelWidth > widestLabel)
@@ -7112,7 +7090,7 @@ static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialC
 
     for (u8 i = 0; i < count; i++)
     {
-        enum Ability ability = GetAbilityBySpecies(species, slots[i]);
+        enum Ability ability = GetAbilityBySpeciesForOwner(species, slots[i], IsMonTrainerOwned(mon));
 
         AddTextPrinterParameterized4(
             sPartyMenuInternal->windowId[0],
@@ -7166,7 +7144,7 @@ static void ReturnToPartyActionMenu(u8 taskId)
 static void CursorCb_OpenAbilityMenu(u8 taskId)
 {
     struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
-    u8 slots[NUM_ABILITY_SLOTS];
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
     u8 count = CollectSelectableAbilitySlots(mon, slots);
     enum Ability currentAbility = GetMonAbility(mon);
     u8 initialCursor = 0;
@@ -7178,7 +7156,7 @@ static void CursorCb_OpenAbilityMenu(u8 taskId)
     for (u8 i = 0; i < count; i++)
     {
         gTasks[taskId].data[i + 2] = slots[i];
-        if (GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), slots[i]) == currentAbility)
+        if (GetAbilityBySpeciesForOwner(GetMonData(mon, MON_DATA_SPECIES), slots[i], IsMonTrainerOwned(mon)) == currentAbility)
             initialCursor = i;
     }
 
@@ -7213,7 +7191,7 @@ static void Task_HandleAbilitySelectionInput(u8 taskId)
     {
         struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
         u8 newSlot = data[input + 2];
-        enum Ability newAbility = GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), newSlot);
+        enum Ability newAbility = GetAbilityBySpeciesForOwner(GetMonData(mon, MON_DATA_SPECIES), newSlot, IsMonTrainerOwned(mon));
 
         if (GetMonAbility(mon) == newAbility)
         {

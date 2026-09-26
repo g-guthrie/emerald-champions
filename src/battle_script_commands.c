@@ -1561,7 +1561,7 @@ static void Cmd_setadditionaleffects(void)
             // Various checks for if this move effect can be applied this turn
             if (CanApplyAdditionalEffect(additionalEffect))
             {
-                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, cv.abilities[cv.battlerAtk], additionalEffect);
+                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, cv.abilities[cv.battlerAtk], gCurrentMove, additionalEffect);
 
                 // Activate effect if it's primary (chance == 0) or if RNGesus says so
                 if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
@@ -2528,7 +2528,7 @@ static void Cmd_switchindataupdate(void)
     gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0);
     gBattleMons[battler].types[1] = GetSpeciesType(gBattleMons[battler].species, 1);
     gBattleMons[battler].types[2] = TYPE_MYSTERY;
-    gBattleMons[battler].ability = GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
+    gBattleMons[battler].ability = GetBattlerAbilityBySpecies(battler, gBattleMons[battler].species, gBattleMons[battler].abilityNum);
     #if TESTING
     if (gTestRunnerEnabled)
     {
@@ -5160,7 +5160,7 @@ static void Cmd_healpartystatus(void)
                 ability = GetBattlerAbility(partner);
             else
             {
-                ability = GetAbilityBySpecies(species, abilityNum);
+                ability = GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(&party[i]));
                 #if TESTING
                 if (gTestRunnerEnabled)
                 {
@@ -5443,7 +5443,10 @@ static void Cmd_recoverbasedonsunlight(void)
         s32 recoverAmount = 0;
         u32 weather = GetWeather();
         enum Ability ability = GetBattlerAbility(gBattlerAttacker);
-        u32 attackerWeather = GetAttackerWeather(GetBattlerHoldEffect(gBattlerAttacker), ability, weather);
+        // Shore Up follows sand, so only the sunlight moves see Chloroplast's sun.
+        u32 attackerWeather = GetMoveEffect(gCurrentMove) == EFFECT_SHORE_UP
+                            ? GetAttackerWeather(GetBattlerHoldEffect(gBattlerAttacker), ability, weather)
+                            : GetAttackerSunMoveWeather(GetBattlerHoldEffect(gBattlerAttacker), ability, weather);
         u32 healingWeather = attackerWeather & ~B_WEATHER_STRONG_WINDS;
         bool32 isAffectedByMegaSol = FALSE;
         if (GetMoveEffect(gCurrentMove) == EFFECT_SHORE_UP)
@@ -5458,7 +5461,7 @@ static void Cmd_recoverbasedonsunlight(void)
             if (attackerWeather & B_WEATHER_SUN)
             {
                 recoverAmount = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
-                if (ability == ABILITY_MEGA_SOL && !(weather & B_WEATHER_SUN))
+                if (IsSunlightMoveAbility(ability) && !(weather & B_WEATHER_SUN))
                     isAffectedByMegaSol = TRUE;
             }
             else if (!(healingWeather & B_WEATHER_ANY) || GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_UTILITY_UMBRELLA)
@@ -5493,7 +5496,7 @@ static void Cmd_recoverbasedonsunlight(void)
             if (attackerWeather & B_WEATHER_SUN)
             {
                 recoverAmount = healingModifier * GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-                if (ability == ABILITY_MEGA_SOL && !(weather & B_WEATHER_SUN))
+                if (IsSunlightMoveAbility(ability) && !(weather & B_WEATHER_SUN))
                     isAffectedByMegaSol = TRUE;
             }
             else if (!(healingWeather & B_WEATHER_ANY) || GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_UTILITY_UMBRELLA)
@@ -6234,7 +6237,7 @@ static void Cmd_pickup(void)
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
-            ability = GetSpeciesAbility(species, GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_ABILITY_NUM));
+            ability = GetAbilityBySpeciesForOwner(species, GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_ABILITY_NUM), IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][i]));
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
@@ -8732,7 +8735,7 @@ static void UpdatePokeFlutePartyStatus(struct Pokemon* party, enum BattlerPositi
         if (species != SPECIES_NONE
             && species != SPECIES_EGG
             && status & AILMENT_FNT
-            && GetAbilityBySpecies(species, abilityNum) != ABILITY_SOUNDPROOF)
+            && GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(&party[i])) != ABILITY_SOUNDPROOF)
             monToCheck |= (1 << i);
     }
     if (monToCheck)

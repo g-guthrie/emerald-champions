@@ -412,7 +412,7 @@ static u32 CalcBeatUpPower(void)
     // FIXME: Why call CalcBeatUpPower when 'beatUpSlot' is OOB?
     if (species == 0xFFFF)
         return 0;
-    return (GetSpeciesBaseAttack(species) / 10) + 5;
+    return (GetBattlerSpeciesBaseStat(gBattlerAttacker, species, STAT_ATK) / 10) + 5;
 }
 
 // Gen 3/4
@@ -422,11 +422,11 @@ static s32 CalcBeatUpDamage(struct DamageContext *ctx)
     struct Pokemon *party = GetBattlerParty(ctx->battlerAtk);
     enum Species species = GetMonData(&party[partyIndex], MON_DATA_SPECIES);
     u32 levelFactor = GetMonData(&party[partyIndex], MON_DATA_LEVEL) * 2 / 5 + 2;
-    s32 dmg = GetSpeciesBaseAttack(species);
+    s32 dmg = GetSpeciesBaseStatForOwner(species, STAT_ATK, IsMonTrainerOwned(&party[partyIndex]));
 
     dmg *= GetMovePower(ctx->move);
     dmg *= levelFactor;
-    dmg /= GetSpeciesBaseDefense(gBattleMons[ctx->battlerDef].species);
+    dmg /= GetBattlerSpeciesBaseStat(ctx->battlerDef, gBattleMons[ctx->battlerDef].species, STAT_DEF);
     dmg = (dmg / 50) + 2;
 
     if (gProtectStructs[ctx->battlerAtk].helpingHand)
@@ -2864,9 +2864,10 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
 
 static bool32 IsRestrictedAbility(enum BattlerId battler, enum Ability ability)
 {
-    return GetSpeciesAbility(gBattleMons[battler].species, 0) == ability
-        || GetSpeciesAbility(gBattleMons[battler].species, 1) == ability
-        || GetSpeciesAbility(gBattleMons[battler].species, 2) == ability;
+    return GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 0) == ability
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 1) == ability
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 2) == ability
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, ABILITY_SLOT_INCLEMENT) == ability;
 }
 
 static bool32 TryDancer(void)
@@ -6387,7 +6388,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
     }
     case EFFECT_SOLAR_BEAM:
     {
-        u32 weather = GetAttackerWeather(ctx->holdEffects[ctx->battlerAtk], ctx->abilities[ctx->battlerAtk], ctx->weather);
+        u32 weather = GetAttackerSunMoveWeather(ctx->holdEffects[ctx->battlerAtk], ctx->abilities[ctx->battlerAtk], ctx->weather);
         if ((GetConfig(B_SANDSTORM_SOLAR_BEAM) >= GEN_3 && weather & B_WEATHER_LOW_LIGHT)
             || weather & (B_WEATHER_RAIN | B_WEATHER_ICY_ANY | B_WEATHER_FOG)) // Excludes Sandstorm
             modifier = uq4_12_multiply(modifier, UQ_4_12(0.5));
@@ -6543,6 +6544,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
     case ABILITY_SHARPNESS:
         if (IsSlicingMove(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_KEEN_EDGE:
+        if (IsSlicingMove(move))
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
     case ABILITY_SUPREME_OVERLORD:
         modifier = uq4_12_multiply(modifier, GetSupremeOverlordModifier(battlerAtk));
@@ -6806,6 +6811,19 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         break;
     case ABILITY_OVERGROW:
         if (moveType == TYPE_GRASS && gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_VENGEANCE:
+        if (moveType == TYPE_GHOST)
+        {
+            if (gBattleMons[battlerAtk].hp <= (gBattleMons[battlerAtk].maxHP / 3))
+                modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+            else
+                modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.2));
+        }
+        break;
+    case ABILITY_WHITEOUT:
+        if (moveType == TYPE_ICE && ctx->weather & B_WEATHER_ICY_ANY)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
     case ABILITY_PLUS:
@@ -7869,7 +7887,7 @@ s32 CalcCritChanceStageGen1(struct DamageContext *ctx)
     s32 moveCritStage = GetMoveCriticalHitStage(ctx->move);
     s32 bonusCritStage = gBattleMons[ctx->battlerAtk].volatiles.bonusCritStages; // G-Max Chi Strike
     u32 holdEffectCritStage = GetHoldEffectCritChanceIncrease(ctx->battlerAtk, ctx->holdEffects[ctx->battlerAtk]);
-    u16 baseSpeed = GetSpeciesBaseSpeed(gBattleMons[ctx->battlerAtk].species);
+    u16 baseSpeed = GetBattlerSpeciesBaseStat(ctx->battlerAtk, gBattleMons[ctx->battlerAtk].species, STAT_SPEED);
 
     critChance = baseSpeed / 2;
 
@@ -9453,6 +9471,39 @@ u32 GetAttackerWeather(enum HoldEffect holdEffect, enum Ability ability, u32 wea
     return weather;
 }
 
+// Weather seen by the user's sunlight-dependent moves: Solar Beam and Solar
+// Blade (charge turn and power), Growth, and Synthesis, Moonlight and Morning
+// Sun. Chloroplast (Inclement) treats these as in harsh sunlight whatever the
+// weather; unlike Mega Sol it leaves Fire/Water damage, Weather Ball and
+// accuracy to the real weather.
+u32 GetAttackerSunMoveWeather(enum HoldEffect holdEffect, enum Ability ability, u32 weather)
+{
+    if (ability == ABILITY_CHLOROPLAST)
+        return B_WEATHER_SUN;
+    return GetAttackerWeather(holdEffect, ability, weather);
+}
+
+// Species data for a battler follows its party Pokemon's owner (IsMonTrainerOwned).
+enum Ability GetBattlerAbilityBySpecies(enum BattlerId battler, enum Species species, u8 abilityNum)
+{
+    return GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
+enum Ability GetBattlerSpeciesAbility(enum BattlerId battler, enum Species species, u8 slot)
+{
+    return GetSpeciesAbilityForOwner(species, slot, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
+u32 GetBattlerSpeciesBaseStat(enum BattlerId battler, enum Species species, u32 statIndex)
+{
+    return GetSpeciesBaseStatForOwner(species, statIndex, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
+bool32 IsSunlightMoveAbility(enum Ability ability)
+{
+    return ability == ABILITY_MEGA_SOL || ability == ABILITY_CHLOROPLAST;
+}
+
 
 bool32 IsBattlerWeatherAffected(enum HoldEffect holdEffect, u32 weather, u32 weatherFlags)
 {
@@ -9607,11 +9658,17 @@ bool32 AreBattlersOfSameGender(enum BattlerId battler1, enum BattlerId battler2)
     return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
 }
 
-u32 CalcSecondaryEffectChance(enum BattlerId battler, enum Ability battlerAbility, const struct AdditionalEffect *additionalEffect)
+u32 CalcSecondaryEffectChance(enum BattlerId battler, enum Ability battlerAbility, enum Move move, const struct AdditionalEffect *additionalEffect)
 {
     bool8 hasSereneGrace = (battlerAbility == ABILITY_SERENE_GRACE);
     bool8 hasRainbow = (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW) != 0;
     u16 secondaryEffectChance = additionalEffect->chance;
+
+    // Pyromancy (Inclement): a Fire move's burn chance is five times higher.
+    if (battlerAbility == ABILITY_PYROMANCY
+     && additionalEffect->moveEffect == MOVE_EFFECT_BURN
+     && GetMoveType(move) == TYPE_FIRE)
+        secondaryEffectChance *= 5;
 
     if (hasRainbow && hasSereneGrace && additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
         return secondaryEffectChance * 2;
@@ -9624,9 +9681,9 @@ u32 CalcSecondaryEffectChance(enum BattlerId battler, enum Ability battlerAbilit
     return secondaryEffectChance;
 }
 
-bool32 MoveEffectIsGuaranteed(enum BattlerId battler, enum Ability battlerAbility, const struct AdditionalEffect *additionalEffect)
+bool32 MoveEffectIsGuaranteed(enum BattlerId battler, enum Ability battlerAbility, enum Move move, const struct AdditionalEffect *additionalEffect)
 {
-    return additionalEffect->chance == 0 || CalcSecondaryEffectChance(battler, battlerAbility, additionalEffect) >= 100;
+    return additionalEffect->chance == 0 || CalcSecondaryEffectChance(battler, battlerAbility, move, additionalEffect) >= 100;
 }
 
 bool32 IsGen6ExpShareEnabled(void)
@@ -9708,8 +9765,7 @@ bool32 MoveIsAffectedBySheerForce(enum Move move)
 bool32 CanMonParticipateInSkyBattle(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    u32 monAbilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
-    enum Ability ability = GetSpeciesAbility(species, monAbilityNum);
+    enum Ability ability = GetMonAbility(mon);
 
     bool32 hasLevitateAbility = (ability == ABILITY_LEVITATE || ability == ABILITY_EELEVATE);
     bool32 isFlyingType = GetSpeciesType(species, 0) == TYPE_FLYING || GetSpeciesType(species, 1) == TYPE_FLYING;

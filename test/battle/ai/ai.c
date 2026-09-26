@@ -1694,8 +1694,10 @@ AI_DOUBLE_BATTLE_TEST("AI sees Dragon Darts damage redirecting if one target is 
     enum Ability ability;
     u32 hp;
 
-    // Wigglytuff's HP keeps Fire Punch a 3HKO rather than chip.
-    PARAMETRIZE { species = SPECIES_WIGGLYTUFF, ability = ABILITY_CONTRARY, hp = 150; }
+    // A low-Defense Fairy at 150 HP keeps Fire Punch a 3HKO rather than chip.
+    // Flabebe has no Inclement Ability, so the AI's guess at the player's
+    // Ability is its official set (a player Wigglytuff may now hold Fur Coat).
+    PARAMETRIZE { species = SPECIES_FLABEBE_RED, ability = ABILITY_CONTRARY, hp = 150; }
     PARAMETRIZE { species = SPECIES_SHEDINJA, ability = ABILITY_WONDER_GUARD, hp = 1; }
 
     GIVEN {

@@ -497,7 +497,7 @@ static void AddSearchWindowText(enum Species species, u8 proximity, u8 searchLev
         {
             // ability name
             // Long names drop to a narrower font rather than run into the chain count.
-            StringCopy(gStringVar1, gAbilitiesInfo[GetAbilityBySpecies(species, sDexNavSearchDataPtr->abilityNum)].name);
+            StringCopy(gStringVar1, gAbilitiesInfo[GetAbilityBySpeciesForOwner(species, sDexNavSearchDataPtr->abilityNum, FALSE)].name);
             AddTextPrinterParameterized3(windowId, GetFontIdToFit(gStringVar1, FONT_SMALL, 0, SEARCH_ABILITY_WIDTH),
                 WINDOW_COL_1 + 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar1);
 
@@ -1390,11 +1390,8 @@ static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel)
     }
     else
     {
-        //Pick a normal ability of that Pokemon
-        if (GetSpeciesAbility(species, 1) != ABILITY_NONE)
-            abilityNum = Random() & 1;
-        else
-            abilityNum = 0;
+        //Pick a normal ability of that Pokemon, the Inclement slot included
+        abilityNum = RollNormalAbilitySlot(species, Random());
     }
 
     return abilityNum;

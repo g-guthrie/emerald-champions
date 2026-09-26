@@ -410,6 +410,10 @@ enum GeneratedMonOrigin
 
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
+// Emerald Champions: an extra normal slot for the Inclement layer's Ability,
+// read only by Pokemon that are not trainer-owned (abilityNum is 2 bits wide).
+#define ABILITY_SLOT_INCLEMENT 3
+#define NUM_OWNER_ABILITY_SLOTS (ABILITY_SLOT_INCLEMENT + 1)
 #define NUM_HIDDEN_ABILITY_SLOTS 1
 
 // Used as a signal for givemon to generate a default ability by personality.

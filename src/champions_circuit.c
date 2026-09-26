@@ -1440,6 +1440,8 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
 
     // Never index a level-100 experience table with an overlevel opponent.
     CreateMon(mon, variant->partySpecies, min(level, MAX_LEVEL), Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
+    // Circuit teams are trainer-owned and never read the Inclement layer.
+    SetMonTrainerOwned(mon, TRUE);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &iv);

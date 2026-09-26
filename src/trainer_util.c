@@ -154,6 +154,8 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     CreateMon(mon, trainerMon->species,
               min(battleLevel, MAX_LEVEL),
               personality, trainer->otID);
+    // Trainer Pokemon never read the Inclement layer (IsMonTrainerOwned).
+    SetMonTrainerOwned(mon, TRUE);
     if (trainerMon->nickname != NULL)
         SetMonData(mon, MON_DATA_NICKNAME, trainerMon->nickname);
     if (trainerMon->ev) //ev in struct TrainerMon are stored in Showdown order not vanilla Emerald order

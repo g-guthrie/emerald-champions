@@ -2547,4 +2547,40 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+    [ABILITY_CHLOROPLAST] =
+    {
+        .name = _("Chloroplast"),
+        .description = COMPOUND_STRING("Sun moves work in any weather."),
+        .aiRating = 5,
+    },
+    [ABILITY_WHITEOUT] =
+    {
+        .name = _("Whiteout"),
+        .description = COMPOUND_STRING("Ups Ice moves in snow or hail."),
+        .aiRating = 5,
+    },
+    [ABILITY_PYROMANCY] =
+    {
+        .name = _("Pyromancy"),
+        .description = COMPOUND_STRING("Fire moves burn more often."),
+        .aiRating = 5,
+    },
+    [ABILITY_KEEN_EDGE] =
+    {
+        .name = _("Keen Edge"),
+        .description = COMPOUND_STRING("Boosts slicing moves."),
+        .aiRating = 6,
+    },
+    [ABILITY_RAMPAGE] =
+    {
+        .name = _("Rampage"),
+        .description = COMPOUND_STRING("No recharge after a KO."),
+        .aiRating = 5,
+    },
+    [ABILITY_VENGEANCE] =
+    {
+        .name = _("Vengeance"),
+        .description = COMPOUND_STRING("Ups Ghost moves in a pinch."),
+        .aiRating = 5,
+    },
 };

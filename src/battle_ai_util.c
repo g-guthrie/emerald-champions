@@ -404,9 +404,10 @@ void SetBattlerData(enum BattlerId battlerId)
         if (recordedAbility != ABILITY_NONE)
             gBattleMons[battlerId].ability = recordedAbility;
         // Check if mon can only have one ability.
-        else if (GetSpeciesAbility(species, 1) == ABILITY_NONE
-                || GetSpeciesAbility(species, 1) == GetSpeciesAbility(species, 0))
-            gBattleMons[battlerId].ability = GetSpeciesAbility(species, 0);
+        else if ((GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
+                || GetBattlerSpeciesAbility(battlerId, species, 1) == GetBattlerSpeciesAbility(battlerId, species, 0))
+              && GetBattlerSpeciesAbility(battlerId, species, ABILITY_SLOT_INCLEMENT) == ABILITY_NONE)
+            gBattleMons[battlerId].ability = GetBattlerSpeciesAbility(battlerId, species, 0);
         // The ability is unknown.
         else
             gBattleMons[battlerId].ability = ABILITY_NONE;
@@ -1946,6 +1947,9 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
                 }
                 break;
             case MOVE_EFFECT_RECHARGE:
+                // Rampage skips the recharge when this hit knocks the target out.
+                if (abilityAtk == ABILITY_RAMPAGE && noOfHitsToKo == 1)
+                    break;
                 return additionalEffect->self;
             default:
                 break;
@@ -2519,9 +2523,9 @@ enum Ability AI_DecideKnownAbilityForTurn(enum BattlerId battlerId)
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
         return knownAbility;
 
-    for (u32 abilityIndex = 0; abilityIndex < NUM_ABILITY_SLOTS; abilityIndex++)
+    for (u32 abilityIndex = 0; abilityIndex < NUM_OWNER_ABILITY_SLOTS; abilityIndex++)
     {
-        indexAbility = GetSpeciesAbility(gBattleMons[battlerId].species, abilityIndex);
+        indexAbility = GetBattlerSpeciesAbility(battlerId, gBattleMons[battlerId].species, abilityIndex);
         if (indexAbility != ABILITY_NONE)
         {
             abilityAiRatings[numValidAbilities] = gAbilitiesInfo[indexAbility].aiRating;
@@ -4044,7 +4048,7 @@ bool32 IsTwoTurnNotSemiInvulnerableMove(enum BattlerId battlerAtk, enum Move mov
     case EFFECT_TWO_TURNS_ATTACK:
     {
         u32 weather = AI_GetWeather();
-        u32 attackerWeather = GetAttackerWeather(gAiLogicData->holdEffects[battlerAtk], gAiLogicData->abilities[battlerAtk], weather);
+        u32 attackerWeather = GetAttackerSunMoveWeather(gAiLogicData->holdEffects[battlerAtk], gAiLogicData->abilities[battlerAtk], weather);
 
         enum BattleWeather moveAffectedByWeather = GetTwoTurnMoveWeather(move);
         enum BattleWeather weatherType = gBattleWeatherInfo[GetBattleWeather(weather)].type;
@@ -4582,7 +4586,7 @@ bool32 IsFlinchGuaranteed(enum BattlerId battlerAtk, enum BattlerId battlerDef, 
     {
         const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(move, effectIndex);
         // Only consider effects with a guaranteed chance to happen
-        if (!MoveEffectIsGuaranteed(battlerAtk, gAiLogicData->abilities[battlerAtk], additionalEffect))
+        if (!MoveEffectIsGuaranteed(battlerAtk, gAiLogicData->abilities[battlerAtk], move, additionalEffect))
             continue;
 
         if (additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
@@ -5712,7 +5716,7 @@ void IncreaseBurnScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
     {
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL)
             || (!(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects physical attacker
-                && GetSpeciesBaseAttack(gBattleMons[battlerDef].species) >= GetSpeciesBaseSpAttack(gBattleMons[battlerDef].species) + 10))
+                && GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_ATK) >= GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_SPATK) + 10))
         {
             enum Move defBestMoves[MAX_MON_MOVES] = {MOVE_NONE};
             bool32 hasPhysical = FALSE;
@@ -5833,7 +5837,7 @@ void IncreaseFrostbiteScore(enum BattlerId battlerAtk, enum BattlerId battlerDef
     {
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL)
             || (!(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects special attacker
-                && GetSpeciesBaseSpAttack(gBattleMons[battlerDef].species) >= GetSpeciesBaseAttack(gBattleMons[battlerDef].species) + 10))
+                && GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_SPATK) >= GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_ATK) + 10))
         {
             enum Move defBestMoves[MAX_MON_MOVES] = {MOVE_NONE};
             bool32 hasSpecial = FALSE;
@@ -6724,7 +6728,7 @@ bool32 ShouldFinalGambit(enum BattlerId battlerAtk, enum BattlerId battlerDef, b
             return TRUE;
     }
     else if (gAiLogicData->hpPercents[battlerAtk] >= gAiLogicData->hpPercents[battlerDef] // Consider using GetScaledHPFraction and moving B_HEALTHBAR_PIXELS define
-        && GetSpeciesBaseHP(gBattleMons[battlerAtk].species) >= GetSpeciesBaseHP(gBattleMons[battlerDef].species)
+        && GetBattlerSpeciesBaseStat(battlerAtk, gBattleMons[battlerAtk].species, STAT_HP) >= GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_HP)
         && aiIsFaster)
     {
         return TRUE;
@@ -7591,7 +7595,7 @@ s32 AI_GetAdjustedStatStage(enum BattlerId battler, enum Move move, s32 stage)
 {
     enum Ability ability = gAiLogicData->abilities[battler];
     bool32 growthInSun = GetMoveEffect(move) == EFFECT_GROWTH
-        && (GetAttackerWeather(gAiLogicData->holdEffects[battler], ability, AI_GetWeather()) & B_WEATHER_SUN);
+        && (GetAttackerSunMoveWeather(gAiLogicData->holdEffects[battler], ability, AI_GetWeather()) & B_WEATHER_SUN);
 
     return GetAdjustedStatStage(stage, ability, growthInSun);
 }
