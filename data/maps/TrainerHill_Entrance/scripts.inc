@@ -314,8 +314,7 @@ TrainerHill_Entrance_Text_ExplainTrainerHill: @ 82687C3
 	.string "the Time Board--try competing with\l"
 	.string "your friends.\p"
 	.string "In Trainer battles along the way,\n"
-	.string "neither Exp. Points nor money will\l"
-	.string "be awarded.$"
+	.string "no money will be awarded.$"
 
 @ Unused
 TrainerHill_Roof_Text_YouFinallyCameBravo: @ 8268986

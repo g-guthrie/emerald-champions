@@ -2108,21 +2108,12 @@ static void Cmd_jumpbasedontype(void)
 
 FEATURE_FLAG_ASSERT(I_EXP_SHARE_FLAG, YouNeedToSetTheExpShareFlagToAnUnusedFlag);
 
+// Emerald Champions battles never grant experience, for a knockout or a catch.
+// Levels come only from the Leveler (and Rare Candies), up to the live cap, so
+// no battle ever ends in an Exp. message, a level-up or a move prompt.
 static bool32 BattleTypeAllowsExp(void)
 {
-    if (RECORDED_WILD_BATTLE)
-        return TRUE;
-    else if (gBattleTypeFlags &
-              ( BATTLE_TYPE_LINK
-              | BATTLE_TYPE_RECORDED_LINK
-              | BATTLE_TYPE_TRAINER_HILL
-              | BATTLE_TYPE_FRONTIER
-              | BATTLE_TYPE_SAFARI
-              | BATTLE_TYPE_BATTLE_TOWER
-              | BATTLE_TYPE_EREADER_TRAINER))
-        return FALSE;
-    else
-        return TRUE;
+    return FALSE;
 }
 
 static enum HoldEffect GetMonHoldEffect(struct Pokemon *mon)

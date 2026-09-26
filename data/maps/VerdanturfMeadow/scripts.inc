@@ -65,11 +65,10 @@ VerdanturfMeadow_Text_PleaseTakePokemon:
 	.string "I'm giving them away to promote\n"
 	.string "Audino welfare!\p"
 	.string "Some Trainers use Audino like punching\n"
-	.string "bags for their Pokémon, just to make\l"
-	.string "their team grow quickly.\p"
+	.string "bags for their Pokémon.\p"
 	.string "This is not okay!\p"
 	.string "Please take this Audino to keep it safe\n"
-	.string "from Exp.-mad Trainers!$"
+	.string "from Trainers like that!$"
 
 VerdanturfMeadow_Text_PlayerReceivedAudino:
 	.string "{PLAYER} received Audino!$"

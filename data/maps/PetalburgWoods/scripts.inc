@@ -430,10 +430,8 @@ PetalburgWoods_Text_MiracleSeedExplanation: @ 822EB63
 
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "Trainer Tips\p"
-	.string "Healthy party members share battle\n"
-	.string "experience automatically.\p"
-	.string "Participants earn full experience;\n"
-	.string "those on the bench earn half.\p"
+	.string "Battles don't raise levels. Your\n"
+	.string "Pokémon grow with your Badges.\p"
 	.string "Your Pokémon can't grow any stronger\n"
 	.string "than your Badges allow. Earn more\l"
 	.string "Badges to let them grow again.\p"

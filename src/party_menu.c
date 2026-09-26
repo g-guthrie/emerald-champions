@@ -399,7 +399,6 @@ static void Task_LearnedMove(u8);
 static void Task_ReplaceMoveYesNo(u8);
 static void Task_DoLearnedMoveFanfareAfterText(u8);
 static void Task_LearnNextMoveOrClosePartyMenu(u8);
-static void Task_TryLearningNextMove(u8);
 static void Task_HandleReplaceMoveYesNoInput(u8);
 static void Task_ShowSummaryScreenToForgetMove(u8);
 static void StopLearningMovePrompt(u8);
@@ -411,14 +410,13 @@ static void Task_PartyMenuReplaceMove(u8);
 static void Task_HandleStopLearningMove(u8 taskId);
 static void Task_StopLearningMoveYesNo(u8);
 static void Task_HandleStopLearningMoveYesNoInput(u8);
-static void Task_TryLearningNextMoveAfterText(u8);
 static void BufferMonStatsToTaskData(struct Pokemon *, s16 *);
 static void UpdateMonDisplayInfoAfterRareCandy(u8, struct Pokemon *);
 static void Task_DisplayLevelUpStatsPg1(u8);
 static void DisplayLevelUpStatsPg1(u8);
 static void Task_DisplayLevelUpStatsPg2(u8);
 static void DisplayLevelUpStatsPg2(u8);
-static void Task_TryLearnNewMoves(u8);
+static void Task_FinishLevelUp(u8);
 static void PartyMenuTryEvolution(u8);
 static u8 FindNextLevelerSlot(void);
 static void CB2_ShowPartyMenuForLeveler(void);
@@ -426,8 +424,6 @@ static void Task_SetLevelerCB(u8 taskId);
 static void Task_ContinueLevelerAfterText(u8 taskId);
 static void Task_ShowLevelerComplete(u8 taskId);
 static void CB2_ContinueLevelerEvolution(void);
-static void DisplayMonNeedsToReplaceMove(u8);
-static void DisplayMonLearnedMove(u8, u16);
 static void UseSacredAsh(u8);
 static void Task_SacredAshLoop(u8);
 static void Task_SacredAshDisplayHPRestored(u8);
@@ -5621,16 +5617,9 @@ static void Task_LearnNextMoveOrClosePartyMenu(u8 taskId)
 {
     if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
-        if (gPartyMenu.learnMoveState == 1)
-        {
-            Task_TryLearningNextMove(taskId);
-        }
-        else
-        {
-            if (gPartyMenu.learnMoveState == 2)
-                gSpecialVar_Result = TRUE;
-            Task_ClosePartyMenu(taskId);
-        }
+        if (gPartyMenu.learnMoveState == 2)
+            gSpecialVar_Result = TRUE;
+        Task_ClosePartyMenu(taskId);
     }
 }
 
@@ -5739,12 +5728,7 @@ static void StopLearningMovePrompt(u8 taskId)
 static void Task_HandleStopLearningMove(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
-    {
-        if (gPartyMenu.learnMoveState == 1)
-            gTasks[taskId].func = Task_TryLearningNextMoveAfterText;
-        else
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-    }
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }
 
 static void Task_StopLearningMoveYesNo(u8 taskId)
@@ -5767,16 +5751,9 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
         StringCopy(gStringVar2, GetMoveName(gPartyMenu.data1));
         StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
         DisplayPartyMenuMessage(gStringVar4, TRUE);
-        if (gPartyMenu.learnMoveState == 1)
-        {
-            gTasks[taskId].func = Task_TryLearningNextMoveAfterText;
-        }
-        else
-        {
-            if (gPartyMenu.learnMoveState == 2) // never occurs
-                gSpecialVar_Result = FALSE;
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-        }
+        if (gPartyMenu.learnMoveState == 2) // never occurs
+            gSpecialVar_Result = FALSE;
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
         break;
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
@@ -5788,12 +5765,6 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
         gTasks[taskId].func = Task_ReplaceMoveYesNo;
         break;
     }
-}
-
-static void Task_TryLearningNextMoveAfterText(u8 taskId)
-{
-    if (IsPartyMenuTextPrinterActive() != TRUE)
-        Task_TryLearningNextMove(taskId);
 }
 
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
@@ -6056,8 +6027,7 @@ static void Task_DisplayLevelUpStatsPg2(u8 taskId)
     {
         PlaySE(SE_SELECT);
         DisplayLevelUpStatsPg2(taskId);
-        sInitialLevel += 1; // so the Pokemon doesn't learn a move meant for its previous level
-        gTasks[taskId].func = Task_TryLearnNewMoves;
+        gTasks[taskId].func = Task_FinishLevelUp;
     }
 }
 
@@ -6080,65 +6050,14 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
     ScheduleBgCopyTilemapToVram(2);
 }
 
-static void Task_TryLearnNewMoves(u8 taskId)
+// Leveling never teaches moves: a Pokémon keeps the moves it has, and the move
+// tutor teaches everything else. After the stat pages, only evolution is left.
+static void Task_FinishLevelUp(u8 taskId)
 {
-    u16 learnMove;
-
     if (WaitFanfare(FALSE) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         RemoveLevelUpStatsWindow();
-        for (; sInitialLevel <= sFinalLevel; sInitialLevel++)
-        {
-            SetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_LEVEL, &sInitialLevel);
-            learnMove = MonTryLearningNewMove(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], TRUE);
-            gPartyMenu.learnMoveState = 1;
-            switch (learnMove)
-            {
-            case 0: // No moves to learn
-                if (sInitialLevel >= sFinalLevel)
-                    PartyMenuTryEvolution(taskId);
-                break;
-            case MON_HAS_MAX_MOVES:
-                DisplayMonNeedsToReplaceMove(taskId);
-                break;
-            case MON_ALREADY_KNOWS_MOVE:
-                gTasks[taskId].func = Task_TryLearningNextMove;
-                break;
-            default:
-                DisplayMonLearnedMove(taskId, learnMove);
-                break;
-            }
-            if (learnMove)
-                break;
-        }
-    }
-}
-
-static void Task_TryLearningNextMove(u8 taskId)
-{
-    u16 result;
-    for (; sInitialLevel <= sFinalLevel; sInitialLevel++)
-    {
-        SetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_LEVEL, &sInitialLevel);
-        result = MonTryLearningNewMove(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], FALSE);
-        switch (result)
-        {
-        case 0: // No moves to learn
-            if (sInitialLevel >= sFinalLevel)
-                PartyMenuTryEvolution(taskId);
-            break;
-        case MON_HAS_MAX_MOVES:
-            DisplayMonNeedsToReplaceMove(taskId);
-            break;
-        case MON_ALREADY_KNOWS_MOVE:
-            gTasks[taskId].func = Task_TryLearningNextMove;
-            return;
-        default:
-            DisplayMonLearnedMove(taskId, result);
-            break;
-        }
-        if (result)
-            break;
+        PartyMenuTryEvolution(taskId);
     }
 }
 
@@ -6185,28 +6104,6 @@ static void PartyMenuTryEvolution(u8 taskId)
         else
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
-}
-
-static void DisplayMonNeedsToReplaceMove(u8 taskId)
-{
-    GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gStringVar1);
-    StringCopy(gStringVar2, GetMoveName(gMoveToLearn));
-    StringExpandPlaceholders(gStringVar4, gText_PkmnNeedsToReplaceMove);
-    DisplayPartyMenuMessage(gStringVar4, TRUE);
-    ScheduleBgCopyTilemapToVram(2);
-    gPartyMenu.data1 = gMoveToLearn;
-    gTasks[taskId].func = Task_ReplaceMoveYesNo;
-}
-
-static void DisplayMonLearnedMove(u8 taskId, u16 move)
-{
-    GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gStringVar1);
-    StringCopy(gStringVar2, GetMoveName(move));
-    StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
-    DisplayPartyMenuMessage(gStringVar4, TRUE);
-    ScheduleBgCopyTilemapToVram(2);
-    gPartyMenu.data1 = move;
-    gTasks[taskId].func = Task_DoLearnedMoveFanfareAfterText;
 }
 
 static void BufferMonStatsToTaskData(struct Pokemon *mon, s16 *data)

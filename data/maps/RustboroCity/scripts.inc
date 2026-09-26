@@ -1048,8 +1048,8 @@ RustboroCity_Text_CatchRarePokemonIfIGoToSchool: @ 81E1695
 	.string "to catch rare Pokémon easily?$"
 
 RustboroCity_Text_PokemonCanChangeLookFromExp: @ 81E16F4
-	.string "If a Pokémon gains experience in\n"
-	.string "battles, it can sometimes change in\l"
+	.string "When a Pokémon grows stronger,\n"
+	.string "it can sometimes change in\l"
 	.string "the way it looks.$"
 
 RustboroCity_Text_PokemonChangeShape: @ 81E174B
