@@ -158,15 +158,22 @@ bool32 IsPartyMenuHeadlessAwaitingSelection(void);
 #define PARTY_ABILITY_MENU_MAX_ROWS 9 // Two-tile rows between the top and bottom frames
 #define PARTY_ABILITY_MENU_MIN_WIDTH 10
 #define PARTY_ABILITY_MENU_MAX_WIDTH 17
+// The prompt box left of the list: widest beside the narrowest list, and
+// bottom-anchored, two tiles per line of wrapped text.
+#define PARTY_ABILITY_PROMPT_MAX_WIDTH (29 - PARTY_ABILITY_MENU_MIN_WIDTH - 3)
+#define PARTY_ABILITY_PROMPT_MAX_LINES 4
+#define PARTY_ABILITY_PROMPT_LENGTH 64 // Buffer for the wrapped text
 struct PartyAbilityMenuLayout
 {
     u8 x, y, width, height;
     u8 visibleRows;
     u8 textWidth; // Pixels available to a label after the cursor.
-    u8 promptX, promptWidth, promptFont;
+    u8 promptX, promptWidth;
 };
 u32 GetPartyAbilityMenuOptions(struct Pokemon *mon, u8 *slots, const u8 **labels);
 void GetPartyAbilityMenuLayout(const u8 *const *labels, u32 optionCount, struct PartyAbilityMenuLayout *layout);
 u32 GetPartyAbilityMenuLabelFont(const u8 *label, const struct PartyAbilityMenuLayout *layout);
+const u8 *GetPartyAbilityMenuPromptText(struct Pokemon *mon, u32 option);
+u32 WrapPartyAbilityMenuPrompt(const u8 *text, u32 widthPx, u8 *dest, u8 *fontId);
 
 #endif // GUARD_PARTY_MENU_H

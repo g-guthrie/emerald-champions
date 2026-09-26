@@ -7061,6 +7061,13 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer tr
 
 #define TAG_ABILITY_SCROLL_ARROWS 5427
 
+// BG2 tiles for the list and its prompt. The prompt reuses the default message
+// box's tiles (free while the list is open; they start where WIN_MSG's end)
+// and, at its widest and tallest, must stop short of the list's.
+#define ABILITY_PROMPT_BASE_BLOCK 0x24F
+#define ABILITY_LIST_BASE_BLOCK   0x2E9
+STATIC_ASSERT(ABILITY_PROMPT_BASE_BLOCK + PARTY_ABILITY_PROMPT_MAX_WIDTH * PARTY_ABILITY_PROMPT_MAX_LINES * 2 <= ABILITY_LIST_BASE_BLOCK, AbilityPromptTilesFitBeforeList);
+
 // The option labels for a Pokemon's Ability list: its Abilities, then Cancel.
 u32 GetPartyAbilityMenuOptions(struct Pokemon *mon, u8 *slots, const u8 **labels)
 {
@@ -7073,8 +7080,19 @@ u32 GetPartyAbilityMenuOptions(struct Pokemon *mon, u8 *slots, const u8 **labels
     return count + 1;
 }
 
-// Size and place the Ability list and its "Which Ability?" prompt. The list
-// is right-aligned against column 29 like the native action window: as wide
+// What the prompt says with the cursor on an option: that Ability's
+// description, or "Which Ability?" on Cancel.
+const u8 *GetPartyAbilityMenuPromptText(struct Pokemon *mon, u32 option)
+{
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+
+    if (option >= CollectSelectableAbilitySlots(mon, slots))
+        return sText_WhichAbility;
+    return gAbilitiesInfo[GetAbilityBySpeciesForOwner(GetMonData(mon, MON_DATA_SPECIES), slots[option], IsMonTrainerOwned(mon))].description;
+}
+
+// Size and place the Ability list and its prompt. The list is right-aligned
+// against column 29 like the native action window: as wide
 // as its widest label (never narrower than the 10-tile action popup, never
 // wider than PARTY_ABILITY_MENU_MAX_WIDTH), and as tall as its options up to
 // the screen's height, scrolling beyond that. A label still too wide falls
@@ -7096,7 +7114,58 @@ void GetPartyAbilityMenuLayout(const u8 *const *labels, u32 optionCount, struct 
     layout->textWidth = layout->width * 8 - cursorWidth;
     layout->promptX = 1;
     layout->promptWidth = layout->x - 3;
-    layout->promptFont = GetFontIdToFit(sText_WhichAbility, FONT_NORMAL, 0, layout->promptWidth * 8);
+}
+
+// Greedy word wrap: each space where the next word would run past widthPx
+// becomes a line break. A word wider than the box still gets its own line.
+static u32 WrapAbilityPromptText(u8 *text, u32 fontId, u32 widthPx)
+{
+    u32 letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    u8 *lineStart = text, *lastSpace = NULL, *end = text;
+    u32 lines = 1;
+
+    for (;;)
+    {
+        u8 next;
+
+        while (*end != CHAR_SPACE && *end != EOS)
+            end++;
+        next = *end;
+        *end = EOS;
+        if (lastSpace != NULL && GetStringWidth(fontId, lineStart, letterSpacing) > widthPx)
+        {
+            *lastSpace = CHAR_NEWLINE;
+            lineStart = lastSpace + 1;
+            lines++;
+        }
+        *end = next;
+        if (next == EOS)
+            return lines;
+        lastSpace = end++;
+    }
+}
+
+// Wrap the prompt into dest for a box widthPx wide, falling back to narrower
+// fonts (all 16 pixels tall) when it would need more than
+// PARTY_ABILITY_PROMPT_MAX_LINES lines or a word would not fit. Returns the
+// line count.
+u32 WrapPartyAbilityMenuPrompt(const u8 *text, u32 widthPx, u8 *dest, u8 *fontId)
+{
+    static const u8 fonts[] = {FONT_NORMAL, FONT_NARROW, FONT_NARROWER};
+    u32 length = min(StringLength(text), PARTY_ABILITY_PROMPT_LENGTH - 1);
+    u32 lines = 0;
+
+    for (u32 i = 0; i < ARRAY_COUNT(fonts); i++)
+    {
+        memcpy(dest, text, length);
+        dest[length] = EOS;
+        *fontId = fonts[i];
+        lines = WrapAbilityPromptText(dest, *fontId, widthPx);
+        if (lines <= PARTY_ABILITY_PROMPT_MAX_LINES
+         && GetStringWidth(*fontId, dest, GetFontAttribute(*fontId, FONTATTR_LETTER_SPACING)) <= widthPx)
+            break;
+    }
+    return min(lines, PARTY_ABILITY_PROMPT_MAX_LINES);
 }
 
 // A label too wide for the list falls back to a narrower font.
@@ -7149,6 +7218,26 @@ static void PrintAbilitySelectionOptions(u8 taskId)
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 
+// Show the prompt for the option under the cursor. The box keeps its left
+// and bottom edges and is rebuilt two tiles tall per line, so a shorter box
+// leaves no frame or text behind.
+static void PrintAbilityPrompt(u8 taskId, const struct PartyAbilityMenuLayout *layout)
+{
+    s16 *data = gTasks[taskId].data;
+    struct WindowTemplate window;
+    u8 text[PARTY_ABILITY_PROMPT_LENGTH];
+    u8 fontId;
+    u32 lines = WrapPartyAbilityMenuPrompt(GetPartyAbilityMenuPromptText(GetPartyMonFromPartyMenuId(gPartyMenu.slotId), tAbilityCursor),
+                                           layout->promptWidth * 8, text, &fontId);
+
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetWindowTemplateFields(&window, 2, layout->promptX, 19 - lines * 2, layout->promptWidth, lines * 2, 15, ABILITY_PROMPT_BASE_BLOCK);
+    sPartyMenuInternal->windowId[1] = AddWindow(&window);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[1], FALSE, 0x4F, 13);
+    AddTextPrinterParameterized(sPartyMenuInternal->windowId[1], fontId, text, 0, 1, 0, 0);
+    ScheduleBgCopyTilemapToVram(2);
+}
+
 // Keep the cursor inside the visible rows.
 static void ScrollAbilityListToCursor(s16 *data, u32 visibleRows)
 {
@@ -7170,7 +7259,7 @@ static void DisplayAbilitySelectionWindow(u8 taskId)
     u32 optionCount = GetPartyAbilityMenuOptions(mon, slots, labels);
 
     GetPartyAbilityMenuLayout(labels, optionCount, &layout);
-    SetWindowTemplateFields(&window, 2, layout.x, layout.y, layout.width, layout.height, 14, 0x2E9);
+    SetWindowTemplateFields(&window, 2, layout.x, layout.y, layout.width, layout.height, 14, ABILITY_LIST_BASE_BLOCK);
     sPartyMenuInternal->windowId[0] = AddWindow(&window);
     DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
 
@@ -7187,13 +7276,9 @@ static void DisplayAbilitySelectionWindow(u8 taskId)
             (u16 *)&tAbilityScroll);
     }
 
-    // Name the choice in the message box, as the Item submenu does. The box
-    // stops one frame short of the list however wide the Ability names make it.
-    SetWindowTemplateFields(&window, 2, layout.promptX, 17, layout.promptWidth, 2, 15, sDoWhatWithMonMsgWindowTemplate.baseBlock);
-    sPartyMenuInternal->windowId[1] = AddWindow(&window);
-    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[1], FALSE, 0x4F, 13);
-    AddTextPrinterParameterized(sPartyMenuInternal->windowId[1], layout.promptFont, sText_WhichAbility, 0, 1, 0, 0);
-    ScheduleBgCopyTilemapToVram(2);
+    // Explain the highlighted Ability in the message box. The box stops one
+    // frame short of the list however wide the Ability names make it.
+    PrintAbilityPrompt(taskId, &layout);
 }
 
 static void ReturnToPartyActionMenu(u8 taskId)
@@ -7257,6 +7342,7 @@ static void MoveAbilityCursor(u8 taskId, s32 delta)
     GetPartyAbilityMenuLayout(labels, GetPartyAbilityMenuOptions(mon, slots, labels), &layout);
     ScrollAbilityListToCursor(data, layout.visibleRows);
     PrintAbilitySelectionOptions(taskId);
+    PrintAbilityPrompt(taskId, &layout);
 }
 
 static void Task_HandleAbilitySelectionInput(u8 taskId)

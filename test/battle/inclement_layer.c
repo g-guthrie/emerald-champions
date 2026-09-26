@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "trainer_util.h"
 #include "party_menu.h"
+#include "string_util.h"
 #include "text.h"
 #include "test/battle.h"
 
@@ -489,10 +490,32 @@ static void ExpectAbilityMenuFits(const u8 *const *labels, u32 optionCount)
     for (u32 i = 0; i < optionCount; i++)
         EXPECT_LE(GetStringWidth(GetPartyAbilityMenuLabelFont(labels[i], &layout), labels[i], letterSpacing), layout.textWidth);
     // The prompt keeps clear of the list (its right frame sits left of the
-    // list's left frame) and its text fits.
+    // list's left frame) and never outgrows its tile budget.
+    EXPECT_GE(layout.promptX, 1);
     EXPECT_GE(layout.promptWidth, 1);
+    EXPECT_LE(layout.promptWidth, PARTY_ABILITY_PROMPT_MAX_WIDTH);
     EXPECT_LT(layout.promptX + layout.promptWidth, layout.x - 1);
-    EXPECT_LE(GetStringWidth(layout.promptFont, COMPOUND_STRING("Which Ability?"), 0), layout.promptWidth * 8);
+}
+
+// The prompt's wrapped text fits its box within the line cap, and the
+// bottom-anchored box and its frame stay on screen.
+static u32 ExpectAbilityPromptFits(const u8 *text, const struct PartyAbilityMenuLayout *layout)
+{
+    u8 wrapped[PARTY_ABILITY_PROMPT_LENGTH];
+    u8 fontId;
+    u32 lines, breaks = 0;
+
+    EXPECT(text != NULL);
+    EXPECT_LT(StringLength(text), PARTY_ABILITY_PROMPT_LENGTH);
+    lines = WrapPartyAbilityMenuPrompt(text, layout->promptWidth * 8, wrapped, &fontId);
+    for (u32 i = 0; wrapped[i] != EOS; i++)
+        breaks += (wrapped[i] == CHAR_NEWLINE);
+    EXPECT_GE(lines, 1);
+    EXPECT_LE(lines, PARTY_ABILITY_PROMPT_MAX_LINES);
+    EXPECT_EQ(lines, breaks + 1);
+    EXPECT_LE(GetStringWidth(fontId, wrapped, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING)), layout->promptWidth * 8);
+    EXPECT_GE(19 - (s32)lines * 2, 1);
+    return lines;
 }
 
 TEST("The party Ability list and its prompt fit on screen for every species and owner")
@@ -518,6 +541,78 @@ TEST("The party Ability list and its prompt fit on screen for every species and 
         }
     }
     EXPECT_LE(most, PARTY_ABILITY_MENU_MAX_OPTIONS);
+}
+
+TEST("The party Ability prompt explains every selectable Ability within its box")
+{
+    for (enum Species species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        for (u32 trainerOwned = 0; trainerOwned <= 1; trainerOwned++)
+        {
+            struct Pokemon mon;
+            u8 slots[NUM_OWNER_ABILITY_SLOTS];
+            const u8 *labels[PARTY_ABILITY_MENU_MAX_OPTIONS];
+            struct PartyAbilityMenuLayout layout;
+            u32 optionCount;
+
+            if (!IsSpeciesEnabled(species))
+                continue;
+            CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
+            SetMonTrainerOwned(&mon, trainerOwned);
+            optionCount = GetPartyAbilityMenuOptions(&mon, slots, labels);
+            GetPartyAbilityMenuLayout(labels, optionCount, &layout);
+            // Each Ability shows its owner-aware description; Cancel asks.
+            for (u32 option = 0; option < optionCount - 1; option++)
+            {
+                enum Ability ability = GetAbilityBySpeciesForOwner(species, slots[option], trainerOwned);
+                EXPECT(GetPartyAbilityMenuPromptText(&mon, option) == gAbilitiesInfo[ability].description);
+                ExpectAbilityPromptFits(GetPartyAbilityMenuPromptText(&mon, option), &layout);
+            }
+            EXPECT_EQ(StringCompare(GetPartyAbilityMenuPromptText(&mon, optionCount - 1), COMPOUND_STRING("Which Ability?")), 0);
+            EXPECT_EQ(ExpectAbilityPromptFits(GetPartyAbilityMenuPromptText(&mon, optionCount - 1), &layout), 1);
+        }
+    }
+}
+
+TEST("The party Ability prompt wraps by word and falls back to narrower fonts")
+{
+    struct PartyAbilityMenuLayout layout = {.promptX = 1, .promptWidth = PARTY_ABILITY_MENU_MIN_WIDTH};
+    u8 wrapped[PARTY_ABILITY_PROMPT_LENGTH];
+    u8 fontId;
+
+    const u8 *sentence = COMPOUND_STRING("Ups Ice moves in snow or hail.");
+    u32 breaks = 0;
+
+    // A sentence wider than the box wraps in the normal font, breaking only
+    // at spaces.
+    ASSUME(GetStringWidth(FONT_NORMAL, sentence, 0) > 80);
+    EXPECT_EQ(WrapPartyAbilityMenuPrompt(sentence, 80, wrapped, &fontId), 2);
+    EXPECT_EQ(fontId, FONT_NORMAL);
+    for (u32 i = 0; sentence[i] != EOS; i++)
+    {
+        if (wrapped[i] == CHAR_NEWLINE)
+        {
+            EXPECT_EQ(sentence[i], CHAR_SPACE);
+            breaks++;
+        }
+        else
+        {
+            EXPECT_EQ(wrapped[i], sentence[i]);
+        }
+    }
+    EXPECT_EQ(breaks, 1);
+    // A word too wide for the box, or text too long for the line cap, takes a
+    // narrower font rather than overflowing.
+    sentence = COMPOUND_STRING("Wwwwwwwwwwwwwww");
+    ASSUME(GetStringWidth(FONT_NORMAL, sentence, 0) > layout.promptWidth * 8);
+    ExpectAbilityPromptFits(sentence, &layout);
+    WrapPartyAbilityMenuPrompt(sentence, layout.promptWidth * 8, wrapped, &fontId);
+    EXPECT_NE(fontId, FONT_NORMAL);
+    sentence = COMPOUND_STRING("Mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm mmm");
+    ASSUME(GetStringWidth(FONT_NORMAL, sentence, 0) > PARTY_ABILITY_PROMPT_MAX_LINES * layout.promptWidth * 8);
+    ExpectAbilityPromptFits(sentence, &layout);
+    WrapPartyAbilityMenuPrompt(sentence, layout.promptWidth * 8, wrapped, &fontId);
+    EXPECT_NE(fontId, FONT_NORMAL);
 }
 
 TEST("The party Ability list scrolls and shrinks fonts for a hypothetical overlong list")
