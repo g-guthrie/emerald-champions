@@ -12,7 +12,7 @@
 // (ABILITY_SLOT_INCLEMENT + i), which are normal (non-hidden) slots. A Mega keeps
 // its official Ability; its added one applies only when the base Pokemon uses
 // the same added slot.
-// Not layered: official changes after Inclement (Cresselia, Shiftry, Zygarde),
+// Not layered: official changes after Inclement (Cresselia, Zygarde),
 // Pumpkaboo size stats, species this game authored itself, and the four
 // existing custom Abilities.
 #define INCLEMENT_BASE_STATS(hp, atk, def, spAtk, spDef, speed) \
@@ -126,6 +126,7 @@ static const struct InclementSpeciesLayer sInclementLayer[NUM_SPECIES] =
     [SPECIES_MIGHTYENA]         = { INCLEMENT_BASE_STATS( 70, 110,  70,  60,  60,  90) }, // was Atk 90, Spe 70; BST 420->460
     [SPECIES_LINOONE]           = { INCLEMENT_BASE_STATS( 78, 100,  61,  50,  61, 110) }, // was Atk 70, Spe 100; BST 420->460
     [SPECIES_WURMPLE]           = { .addedAbilities = { ABILITY_POISON_POINT } },
+    [SPECIES_SHIFTRY]           = { .addedAbilities = { ABILITY_EARLY_BIRD } }, // owner: keeps Inclement-era Early Bird beside Wind Rider
     [SPECIES_GARDEVOIR]         = { INCLEMENT_BASE_STATS( 68,  60,  65, 125, 115, 100) }, // was Atk 65, Spe 80; BST 518->533
     [SPECIES_GARDEVOIR_MEGA]    = { INCLEMENT_BASE_STATS( 68,  85,  80, 165, 135, 100) }, // was Def 65; BST 618->633
     [SPECIES_GALLADE]           = { INCLEMENT_BASE_STATS( 68, 125,  65,  60, 115, 100), .addedAbilities = { ABILITY_TRACE } }, // was SpA 65, Spe 80; BST 518->533
