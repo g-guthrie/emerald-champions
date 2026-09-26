@@ -92,9 +92,16 @@ FortreeCity_Gym_EventScript_GymGuide:: @ 8216732
 	goto_if_set FLAG_DEFEATED_FORTREE_GYM, FortreeCity_Gym_EventScript_GymGuidePostVictory
 	goto_if_set FLAG_MOVE_FORTREE_GYM_ENERGY_ROOT, FortreeCity_GymGuide_2
 	msgbox FortreeCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
-	giveitem ITEM_ENERGY_ROOT, 10
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+FortreeCity_Gym_EventScript_GymGuideGems::
+	@ Both Gems must fit before either is given (the check takes any item pair).
+	@ The flag keeps its old name; it records the guide's gift.
+	setvar VAR_0x8004, ITEM_ICE_GEM
+	setvar VAR_0x8005, ITEM_ELECTRIC_GEM
+	specialvar VAR_RESULT, CanReceiveBerryPair
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+FortreeCity_Gym_EventScript_GymGuideGiveGems::
+	giveitem ITEM_ICE_GEM
+	giveitem ITEM_ELECTRIC_GEM
 	setflag FLAG_MOVE_FORTREE_GYM_ENERGY_ROOT
 	msgbox FortreeCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -135,13 +142,18 @@ FortreeCity_Gym_EventScript_GymStatue:: @ 821677B
 FortreeCity_Gym_Text_GymGuideAdvice: @ 8216785
 	.string "Yo, how's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "Please, take these Energy Roots to\n"
-	.string "help with your challenge!$"
+	.string "Take these Gems for your challenge!\p"
+	.string "A partner holding one boosts a move\n"
+	.string "of that type once in every battle!$"
 
 
 FortreeCity_Gym_Text_GymGuideAdvice2:
 	.string "Fortree Gym Leader Winona is\n"
 	.string "a master of Flying-type Pokémon.\p"
+	.string "Ice moves hit most of her team hard,\n"
+	.string "her Dragon-types above all.\p"
+	.string "Electric moves handle the rest,\n"
+	.string "Mega Skarmory included!\p"
 	.string "She's waiting at the back of this Gym,\n"
 	.string "behind the rotating doors.\p"
 	.string "She's waiting for new challengers\n"

@@ -141,9 +141,16 @@ LavaridgeTown_Gym_1F_EventScript_GymGuide:: @ 81FE96C
 	goto_if_set FLAG_DEFEATED_LAVARIDGE_GYM, LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory
 	goto_if_set FLAG_LAVARIDGE_GYM_ENERGY_ROOTS, LavaridgeTown_Gym_1F_EventScript_GymGuide2
 	msgbox LavaridgeTown_Gym_1F_Text_GymGuideAdvice1, MSGBOX_DEFAULT
-	giveitem ITEM_ENERGY_ROOT, 15
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+LavaridgeTown_Gym_1F_EventScript_GymGuideGems::
+	@ Both Gems must fit before either is given (the check takes any item pair).
+	@ The flag keeps its old name; it records the guide's gift.
+	setvar VAR_0x8004, ITEM_ROCK_GEM
+	setvar VAR_0x8005, ITEM_FLYING_GEM
+	specialvar VAR_RESULT, CanReceiveBerryPair
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+LavaridgeTown_Gym_1F_EventScript_GymGuideGiveGems::
+	giveitem ITEM_ROCK_GEM
+	giveitem ITEM_FLYING_GEM
 	setflag FLAG_LAVARIDGE_GYM_ENERGY_ROOTS
 	msgbox LavaridgeTown_Gym_1F_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -184,8 +191,9 @@ LavaridgeTown_Gym_1F_EventScript_GymStatue:: @ 81FE9B5
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice1:
 	.string "Hey, how's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "Please, take this herbal medicine\n"
-	.string "to help with your challenge.$"
+	.string "Take these Gems for your challenge!\p"
+	.string "A partner holding one boosts a move\n"
+	.string "of that type once in every battle!$"
 
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice2: @ 81FE9BF
 	.string "Lavaridge's Gym Leader Flannery\n"
@@ -197,10 +205,14 @@ LavaridgeTown_Gym_1F_Text_GymGuideAdvice2: @ 81FE9BF
 	.string "hard as they can.\p"
 	.string "The hot-spring steam also fills\n"
 	.string "every battle here with Misty Terrain.\p"
-	.string "You might need some extra power to\n"
-	.string "keep up!\p"	
-	.string "Try buying some Gems from the local\n"
-	.string "Poké Mart to boost your attacks.$"
+	.string "Rock moves hit her Fire-types hard,\n"
+	.string "and her sun can't weaken them.\p"
+	.string "Flying moves take care of her\n"
+	.string "Lilligant.\p"
+	.string "Water moves hit hard too, but her\n"
+	.string "sun cuts their power in half.\p"
+	.string "The Poké Mart here sells more Gems\n"
+	.string "if you want spares!$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory: @ 81FEAB8
 	.string "Yow! That was a scorching-hot battle!$"

@@ -155,11 +155,13 @@ Rustboro_Gym_Guide_Trigger4::
 
 Rustboro_Gym_Guide_Speech::
 	msgbox RustboroCity_Gym_Text_Tips, MSGBOX_DEFAULT
+RustboroCity_Gym_EventScript_GymGuideGems::
 	@ Both Gems must fit before either is given (the check takes any item pair).
 	setvar VAR_0x8004, ITEM_GRASS_GEM
 	setvar VAR_0x8005, ITEM_STEEL_GEM
 	specialvar VAR_RESULT, CanReceiveBerryPair
 	goto_if_eq VAR_RESULT, FALSE, Rustboro_Gym_Guide_BagFull
+RustboroCity_Gym_EventScript_GymGuideGiveGems::
 	giveitem ITEM_GRASS_GEM
 	giveitem ITEM_STEEL_GEM
 	setvar VAR_RUSTBORO_CITY_STATE, 1

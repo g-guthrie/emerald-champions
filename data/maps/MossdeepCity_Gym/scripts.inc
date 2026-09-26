@@ -172,9 +172,16 @@ MossdeepCity_Gym_EventScript_GymGuide::
 	goto_if_set FLAG_DEFEATED_MOSSDEEP_GYM, MossdeepCity_Gym_EventScript_GymGuidePostVictory
 	goto_if_set FLAG_MOSSDEEP_GYM_REVIVAL_HERBS, MossdeepCity_Gym_Guide2
 	msgbox MossdeepCity_Gym_Text_Guide1, MSGBOX_DEFAULT
-	giveitem ITEM_REVIVAL_HERB, 10
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+MossdeepCity_Gym_EventScript_GymGuideGems::
+	@ Both Gems must fit before either is given (the check takes any item pair).
+	@ The flag keeps its old name; it records the guide's gift.
+	setvar VAR_0x8004, ITEM_GHOST_GEM
+	setvar VAR_0x8005, ITEM_DARK_GEM
+	specialvar VAR_RESULT, CanReceiveBerryPair
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+MossdeepCity_Gym_EventScript_GymGuideGiveGems::
+	giveitem ITEM_GHOST_GEM
+	giveitem ITEM_DARK_GEM
 	setflag FLAG_MOSSDEEP_GYM_REVIVAL_HERBS
 	msgbox MossdeepCity_Gym_Text_Guide2, MSGBOX_DEFAULT
 	release
@@ -276,8 +283,9 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch:: @ 8220CBF
 MossdeepCity_Gym_Text_Guide1: @ 8220CD5
 	.string "Yo, how's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "Please, take these Revival Herbs to\n"
-	.string "help with your challenge!$"
+	.string "Take these Gems for your challenge!\p"
+	.string "A partner holding one boosts a move\n"
+	.string "of that type once in every battle!$"
 
 MossdeepCity_Gym_Text_Guide2: @ 8220CD5
 	.string "The Gym Leaders here use\n"
@@ -285,6 +293,10 @@ MossdeepCity_Gym_Text_Guide2: @ 8220CD5
 	.string "They've also got psychic powers\n"
 	.string "themselves, which they'll use to\l"
 	.string "alter the battle field!\p"
+	.string "Ghost moves hit every Pokémon on\n"
+	.string "their team hard.\p"
+	.string "Dark moves hit most Psychic-types\n"
+	.string "here, too, but not the Fairy ones.\p"
 	.string "If you want to win, you'll need to show\n"
 	.string "them how tight you are with your\l"
 	.string "Pokémon. Go for it!$"

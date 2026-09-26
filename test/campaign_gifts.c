@@ -481,6 +481,72 @@ TEST("Campaign gifts: Kiri requires both berries to fit before spending the dail
     ClearBag();
 }
 
+extern const u8 RustboroCity_Gym_EventScript_GymGuideGems[];
+extern const u8 RustboroCity_Gym_EventScript_GymGuideGiveGems[];
+extern const u8 Rustboro_Gym_Guide_BagFull[];
+extern const u8 DewfordTown_Gym_EventScript_GymGuideGems[];
+extern const u8 DewfordTown_Gym_EventScript_GymGuideGiveGems[];
+extern const u8 MauvilleCity_Gym_EventScript_GymGuideGems[];
+extern const u8 MauvilleCity_Gym_EventScript_GymGuideGiveGems[];
+extern const u8 LavaridgeTown_Gym_1F_EventScript_GymGuideGems[];
+extern const u8 LavaridgeTown_Gym_1F_EventScript_GymGuideGiveGems[];
+extern const u8 FortreeCity_Gym_EventScript_GymGuideGems[];
+extern const u8 FortreeCity_Gym_EventScript_GymGuideGiveGems[];
+extern const u8 MossdeepCity_Gym_EventScript_GymGuideGems[];
+extern const u8 MossdeepCity_Gym_EventScript_GymGuideGiveGems[];
+
+// A Bag with room for one Gem gives neither and keeps the guide's gift pending.
+TEST("Campaign gifts: Gym guides give two different Gems only when both fit, and each unlocks its shelf")
+{
+    static const struct { const u8 *check, *give, *full; } guides[] = {
+        {RustboroCity_Gym_EventScript_GymGuideGems, RustboroCity_Gym_EventScript_GymGuideGiveGems, Rustboro_Gym_Guide_BagFull},
+        {DewfordTown_Gym_EventScript_GymGuideGems, DewfordTown_Gym_EventScript_GymGuideGiveGems, Common_EventScript_ShowBagIsFull},
+        {MauvilleCity_Gym_EventScript_GymGuideGems, MauvilleCity_Gym_EventScript_GymGuideGiveGems, Common_EventScript_ShowBagIsFull},
+        {LavaridgeTown_Gym_1F_EventScript_GymGuideGems, LavaridgeTown_Gym_1F_EventScript_GymGuideGiveGems, Common_EventScript_ShowBagIsFull},
+        {FortreeCity_Gym_EventScript_GymGuideGems, FortreeCity_Gym_EventScript_GymGuideGiveGems, Common_EventScript_ShowBagIsFull},
+        {MossdeepCity_Gym_EventScript_GymGuideGems, MossdeepCity_Gym_EventScript_GymGuideGiveGems, Common_EventScript_ShowBagIsFull},
+    };
+    u8 savedUnlocks[sizeof(gSaveBlock1Ptr->battleItemsUnlocked)];
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GRASS_GEM)];
+    memcpy(savedUnlocks, gSaveBlock1Ptr->battleItemsUnlocked, sizeof(savedUnlocks));
+    EXPECT_EQ(GetItemPocket(ITEM_LEFTOVERS), GetItemPocket(ITEM_GRASS_GEM));
+    for (u32 g = 0; g < ARRAY_COUNT(guides); g++)
+    for (u32 freeSlots = 0; freeSlots <= 2; freeSlots++)
+    {
+        ClearBag();
+        for (u32 slot = freeSlots; slot < pocket->capacity; slot++)
+            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_LEFTOVERS, MAX_BAG_ITEM_CAPACITY);
+        struct ScriptContext ctx;
+        InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
+        SetupBytecodeScript(&ctx, guides[g].check);
+        for (u32 step = 0; step < 8 && ctx.scriptPtr != guides[g].give && ctx.scriptPtr != guides[g].full; step++)
+        {
+            u8 command = *ctx.scriptPtr++;
+            EXPECT(!ctx.cmdTable[command](&ctx));
+        }
+        EXPECT_EQ(ctx.scriptPtr, freeSlots == 2 ? guides[g].give : guides[g].full);
+        enum Item first = gSpecialVar_0x8004, second = gSpecialVar_0x8005;
+        EXPECT_NE(first, second);
+        EXPECT_EQ(GetItemHoldEffect(first), HOLD_EFFECT_GEMS);
+        EXPECT_EQ(GetItemHoldEffect(second), HOLD_EFFECT_GEMS);
+        EXPECT_EQ(GetItemPocket(first), GetItemPocket(ITEM_GRASS_GEM));
+        EXPECT_EQ(GetItemPocket(second), GetItemPocket(ITEM_GRASS_GEM));
+        if (freeSlots == 2)
+        {
+            // Receiving a Gem stocks its type on the Center clerk's Gem shelf.
+            memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(savedUnlocks));
+            EXPECT(!IsEmeraldChampionsBattleItemUnlocked(first));
+            EXPECT(!IsEmeraldChampionsBattleItemUnlocked(second));
+            EXPECT(AddBagItem(first, 1));
+            EXPECT(AddBagItem(second, 1));
+            EXPECT(IsEmeraldChampionsBattleItemUnlocked(first));
+            EXPECT(IsEmeraldChampionsBattleItemUnlocked(second));
+        }
+    }
+    memcpy(gSaveBlock1Ptr->battleItemsUnlocked, savedUnlocks, sizeof(savedUnlocks));
+    ClearBag();
+}
+
 extern const u8 BerryBlender_EventScript_CheckSpareBerry1[];
 extern const u8 BerryBlender_EventScript_CheckSpareBerry2[];
 extern const u8 BerryBlender_EventScript_UseBerryBlender1[];
