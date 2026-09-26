@@ -996,6 +996,10 @@ class Harness:
             base = addr & ~3
             raw = await self.read(base, ((addr - base + size) + 3) & ~3)
             out = {'value': int.from_bytes(raw[addr - base:addr - base + size], 'little')}
+        elif op == 'pokeabs':
+            addr = int(req['addr']); size = int(req.get('size', 1)); value = int(req['value'])
+            await self.rmw_bytes(addr, {i: (value >> (8 * i)) & 0xFF for i in range(size)})
+            out = {'wrote': value}
         elif op == 'grass':
             kinds = tuple(req['mb'].split(',')) if req.get('mb') else None
             out = self.encounter_tiles(int(req.get('n', 12)), kinds)
