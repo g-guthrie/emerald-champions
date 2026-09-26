@@ -67,7 +67,6 @@ static bool8 sHyperCutTiles[CUT_HYPER_AREA];
 
 // EWRAM variables
 static EWRAM_DATA u8 *sCutGrassSpriteArrayPtr = NULL;
-static EWRAM_DATA bool8 sScheduleOpenDottedHole = FALSE;
 
 // const rom data
 static const struct HyperCutterUnk sHyperCutStruct[] =
@@ -144,15 +143,6 @@ bool32 SetUpFieldMove_Cut(void)
     enum Ability userAbility;
     bool8 cutTiles[CUT_NORMAL_AREA];
     bool8 ret;
-    sScheduleOpenDottedHole = FALSE;
-    if (CutMoveRuinValleyCheck() == TRUE)
-    {
-        sScheduleOpenDottedHole = TRUE;
-        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = FieldCallback_CutGrass;
-        return TRUE;
-    }
-
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE || CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG) == TRUE)
     {
         // Standing in front of cuttable tree.
@@ -319,10 +309,7 @@ bool8 FldEff_UseCutOnTree(void)
 static void StartCutGrassFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_GRASS);
-    if (sScheduleOpenDottedHole == TRUE)
-        CutMoveOpenDottedHoleDoor();
-    else
-        FieldEffectStart(FLDEFF_CUT_GRASS);
+    FieldEffectStart(FLDEFF_CUT_GRASS);
 }
 
 bool8 FldEff_CutGrass(void)

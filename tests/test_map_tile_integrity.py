@@ -119,13 +119,11 @@ class MapTileIntegrityTests(unittest.TestCase):
             any(e["compiled"] and e.get("layer") == 15 for e in report["errors"])
         )
 
-    def test_registered_but_dormant_warp_destination_is_rejected(self):
+    def test_unregistered_warp_destination_is_rejected(self):
         path = "data/maps/LittlerootTown/map.json"
         data = json.loads((ROOT / path).read_text())
-        data["warp_events"][0]["dest_map"] = self.baseline["maps"]["PalletTown_Frlg"][
-            "id"
-        ]
-        with self.assertRaisesRegex(audit.InvalidData, "active map targets dormant"):
+        data["warp_events"][0]["dest_map"] = "MAP_UNREGISTERED"
+        with self.assertRaisesRegex(audit.InvalidData, "missing destination MAP_UNREGISTERED"):
             self.mutated_text(path, json.dumps(data))
 
 

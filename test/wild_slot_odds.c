@@ -499,7 +499,7 @@ TEST("Honey habitats: every listed map layout has a usable encounter tile")
             u16 cell = layout->map[y * layout->width + x];
             if (!UNPACK_COLLISION(cell)
              && MetatileBehavior_IsLandWildEncounter(GetAttributeByMetatileIdAndMapLayout(
-                    UNPACK_METATILE(cell), METATILE_ATTRIBUTE_BEHAVIOR, layout->isFrlg)))
+                    UNPACK_METATILE(cell), METATILE_ATTRIBUTE_BEHAVIOR)))
                 found = TRUE;
         }
         if (!found)
@@ -544,7 +544,7 @@ TEST("Paradox habitats: every enabled species has a usable land encounter tile")
                 u16 cell = layout->map[y * layout->width + x];
                 if (!UNPACK_COLLISION(cell)
                  && MetatileBehavior_IsLandWildEncounter(GetAttributeByMetatileIdAndMapLayout(
-                        UNPACK_METATILE(cell), METATILE_ATTRIBUTE_BEHAVIOR, layout->isFrlg)))
+                        UNPACK_METATILE(cell), METATILE_ATTRIBUTE_BEHAVIOR)))
                     found = TRUE;
             }
         }
@@ -1031,8 +1031,6 @@ TEST("Wild tables: Legendary, Ultra Beast and Paradox slot odds follow the rarit
     {
         const struct WildPokemonHeader *wild = &gWildMonHeaders[header];
         const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(wild->mapGroup, wild->mapNum);
-        if (map->mapLayout != NULL && map->mapLayout->isFrlg)
-            continue;
         for (u32 time = 0; time < TIMES_OF_DAY_COUNT; time++)
         {
             const struct WildEncounterTypes *types = &wild->encounterTypes[time];

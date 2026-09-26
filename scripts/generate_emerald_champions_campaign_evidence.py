@@ -129,8 +129,6 @@ def clean_text(label: str, labels: dict[str, SourceBlock]) -> str | None:
 def trainer_occurrences(labels: dict[str, SourceBlock]) -> dict[str, list[TrainerOccurrence]]:
     result: dict[str, list[TrainerOccurrence]] = {}
     for script, block in labels.items():
-        if "_Frlg" in str(block.path):
-            continue
         for offset, raw_line in enumerate(block.lines, 1):
             line = raw_line.split("@", 1)[0].strip()
             if not line:

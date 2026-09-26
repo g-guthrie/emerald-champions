@@ -38,8 +38,8 @@ TEST("Overworld metadata: every mapped static graphics ID has usable sprite data
     {
         if (id == OBJ_EVENT_GFX_UNUSED_250)
             continue;
-        // This contiguous bank is deliberately not linked into Emerald builds.
-        if (!IS_FRLG && id >= OBJ_EVENT_GFX_RED_NORMAL && id <= OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG)
+        // This contiguous bank held FireRed/LeafGreen graphics; the ids stay reserved without data.
+        if (id >= OBJ_EVENT_GFX_RED_NORMAL && id <= OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG)
             continue;
         const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(id);
         EXPECT(info != NULL);

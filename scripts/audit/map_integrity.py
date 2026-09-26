@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Derive map/tile compatibility from production metadata; never infer playability.
 
-Every registered map and layout is inventoried. Emerald's compiled region/layout
-filters match mapjson; dormant data is reported separately. Packed placement cells
+Every registered map and layout is inventoried. Emerald's compiled region filter
+matches mapjson; dormant data is reported separately. Packed placement cells
 retain the engine's collision/elevation bits. Dynamic states not resolved by this
 checker are explicitly unknown and do not receive a visual-fidelity certificate.
 """
@@ -370,11 +370,6 @@ def inventory(root=ROOT, *, include_dynamic=True):
     }
     for name, data in maps.items():
         active = data.get("region", "REGION_HOENN") == "REGION_HOENN"
-        version = layouts[data["layout"]].get("layout_version", "emerald")
-        require(
-            not active or version == "emerald",
-            f"{name}: compiled map points to a dormant layout",
-        )
         report["maps"][name] = {
             "id": data["id"],
             "layout": data["layout"],
@@ -413,22 +408,8 @@ def inventory(root=ROOT, *, include_dynamic=True):
                 additions.setdefault(maps[owner]["layout"], set()).add(row["metatile"])
     for layout in rows:
         lid = layout["id"]
-        version = layout.get("layout_version", "emerald")
-        require(
-            version in ("emerald", "frlg"),
-            f"{lid}: unsupported layout version {version}",
-        )
-        frlg = version == "frlg"
-        partition = expression(
-            constants["NUM_TILES_IN_PRIMARY_FRLG" if frlg else "NUM_TILES_IN_PRIMARY"],
-            constants,
-        )
-        meta_partition = expression(
-            constants[
-                "NUM_METATILES_IN_PRIMARY_FRLG" if frlg else "NUM_METATILES_IN_PRIMARY"
-            ],
-            constants,
-        )
+        partition = expression(constants["NUM_TILES_IN_PRIMARY"], constants)
+        meta_partition = expression(constants["NUM_METATILES_IN_PRIMARY"], constants)
         w, h = (layout["width"], layout["height"])
         require(
             type(w) is int and type(h) is int and (w > 0) and (h > 0),
@@ -447,12 +428,7 @@ def inventory(root=ROOT, *, include_dynamic=True):
             )
         raw = raw[: w * h * 2]
         border_raw = (root / layout["border_filepath"]).read_bytes()
-        bw, bh = (
-            (layout.get("border_width", 2), layout.get("border_height", 2))
-            if frlg
-            else (2, 2)
-        )
-        require(len(border_raw) == bw * bh * 2, f"{lid}: border binary size mismatch")
+        require(len(border_raw) == 2 * 2 * 2, f"{lid}: border binary size mismatch")
         cells = words(raw, 2, lid)
         border = words(border_raw, 2, lid)
         used = set((v & 1023 for v in cells + border)) | additions.get(lid, set())
@@ -474,7 +450,7 @@ def inventory(root=ROOT, *, include_dynamic=True):
                 }
             )
             report["layouts"][lid] = {
-                "compiled": not frlg,
+                "compiled": True,
                 "width": w,
                 "height": h,
                 "status": "unresolved",
@@ -500,7 +476,7 @@ def inventory(root=ROOT, *, include_dynamic=True):
         for data in [primary, secondary]:
             values = words(
                 (root / data["attribute_source"]).read_bytes(),
-                4 if frlg else 2,
+                2,
                 data["attribute_source"],
             )
             require(
@@ -523,8 +499,8 @@ def inventory(root=ROOT, *, include_dynamic=True):
                 )
                 continue
             attribute = attrs[which][index]
-            behavior = attribute & (511 if frlg else 255)
-            layer = attribute >> (29 if frlg else 12) & (3 if frlg else 15)
+            behavior = attribute & 255
+            layer = attribute >> 12 & 15
             if behavior not in names or layer > 2:
                 report["errors"].append(
                     {
@@ -572,7 +548,7 @@ def inventory(root=ROOT, *, include_dynamic=True):
                 "components": refs,
             }
         report["layouts"][lid] = {
-            "compiled": not frlg,
+            "compiled": True,
             "width": w,
             "height": h,
             "primary": layout["primary_tileset"],
@@ -617,7 +593,7 @@ def inventory(root=ROOT, *, include_dynamic=True):
             )
             continue
         compiled_target = (
-            target_data.get("layout_version", "emerald") == "emerald"
+            True
             if state["command"] == "setmaplayoutindex"
             else target_data.get("region", "REGION_HOENN") == "REGION_HOENN"
         )

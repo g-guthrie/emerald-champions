@@ -14,8 +14,6 @@ def source(relative):
 def main():
     errors = []
     for path in (ROOT / 'data/maps').glob('*/scripts.inc'):
-        if 'Frlg' in path.parent.name:
-            continue
         for number, line in enumerate(re.sub(r'@[^\n]*', '', path.read_text()).splitlines(), 1):
             if BANNED.search(line):
                 errors.append(f'{path.relative_to(ROOT)}:{number}: optional rematch hook: {line.strip()}')

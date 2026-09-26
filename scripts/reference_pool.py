@@ -30,8 +30,8 @@ Reuse and provenance
   it is used (a direct hit is marked 'direct'). Maps with neither are
   'unmapped' and are excluded, not guessed at -- what remains unmapped after
   both steps is genuinely postgame/mystery-event/unused content (Battle
-  Frontier facility interiors and its own reception routing, FRLG twin
-  maps, Navel/Birth/Southern/Faraway Island, secret bases, unused/prototype
+  Frontier facility interiors and its own reception routing,
+  Navel/Birth/Southern/Faraway Island, secret bases, unused/prototype
   maps), not ordinary overworld content. See summary.md for the current
   list and mega_register.py's own docstring for the gate table and its
   documented judgment calls.
@@ -124,8 +124,7 @@ MEGA_RING_CAP = 24      # Brawly, fixed by the task
 LINKING_CORD_CAP = 14   # Rustboro Mart, fixed by the task
 
 # Good/Super Rod gift sources (giveitem, not givemon, so mega_register's
-# species_gift_maps() does not pick these up). Hoenn only; FRLG twins in
-# this tree (Fuchsia/Route12) are out of scope everywhere else here too.
+# species_gift_maps() does not pick these up).
 ROD_SOURCE_MAPS = {
     "good_rod": ["Route118", "Route114"],
     "super_rod": ["MossdeepCity_House3"],
@@ -294,8 +293,6 @@ def trade_roots(resolver: MapResolver) -> dict[str, tuple[int, str, str]]:
             trade_species[m[1]] = sp[1]
     roots: dict[str, tuple[int, str, str]] = {}
     for path in sorted(MAPS_DIR.glob("*/scripts.inc")):
-        if "frlg" in path.parent.name.lower():
-            continue
         text = path.read_text()
         for trade_id in re.findall(r"\bingame_trade\s+(INGAME_TRADE_\w+)", text):
             sp = trade_species.get(trade_id)

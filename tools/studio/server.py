@@ -125,7 +125,7 @@ class Catalogue:
         for g, group in enumerate(groups["group_order"]):
             for n, name in enumerate(groups[group]):
                 m = json.loads((ROOT / "data/maps" / name / "map.json").read_text())
-                if m.get("region", "REGION_KANTO" if name.endswith("_Frlg") else "REGION_HOENN") == "REGION_HOENN":
+                if m.get("region", "REGION_HOENN") == "REGION_HOENN":
                     self.maps[name] = dict(m, group=g, num=n)
         self.layouts = {x["id"]: x for x in json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]}
         self.map_ids = {(m["group"], m["num"]): name for name, m in self.maps.items()}
@@ -598,7 +598,7 @@ class Studio:
         try:
             env = os.environ.copy()
             toolchain = Path("/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload")
-            cmd = ["make", "-j6", "BUILD_NAME=emerald-headless", "MAP_VERSION=emerald", "EC_HEADLESS_FIXTURES=1", "TEST=0"]
+            cmd = ["make", "-j6", "BUILD_NAME=emerald-headless", "EC_HEADLESS_FIXTURES=1", "TEST=0"]
             if toolchain.exists(): cmd.append(f"DEVKITARM={toolchain}")
             cmd.append("pokeemerald-headless.gba")
             with (WORK / "latest-build.log").open("wb") as log:

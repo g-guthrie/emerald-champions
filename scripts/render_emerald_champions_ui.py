@@ -1090,7 +1090,7 @@ def load_hoenn_heal_fixtures() -> list[dict[str, object]]:
         1,
     ):
         respawn_map = maps.get(entry.get("respawn_map"))
-        if (respawn_map is None or respawn_map.get("region", "REGION_KANTO" if respawn_map["id"].endswith("_FRLG") else "REGION_HOENN") != "REGION_HOENN"):
+        if (respawn_map is None or respawn_map.get("region", "REGION_HOENN") != "REGION_HOENN"):
             continue
         if entry.get("respawn_npc") in (None, "LOCALID_NONE"):
             continue

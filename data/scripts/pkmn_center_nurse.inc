@@ -60,10 +60,8 @@ EventScript_PkmnCenterNurse_OfferHealAfterTools::
 
 EventScript_PkmnCenterNurse_Main::
 	setvar VAR_0x8004, 0
-.if !IS_FRLG
 	specialvar VAR_RESULT, CountPlayerTrainerStars
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
-.endif
 	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
 EventScript_PkmnCenterNurse_AnswerHeal::
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn

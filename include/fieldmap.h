@@ -1,10 +1,6 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
-#define NUM_TILES_IN_PRIMARY_FRLG 640
-#define NUM_METATILES_IN_PRIMARY_FRLG 640
-#define NUM_PALS_IN_PRIMARY_FRLG 7
-
 #define NUM_TILES_IN_PRIMARY 512
 #define NUM_METATILES_IN_PRIMARY 512
 #define NUM_PALS_IN_PRIMARY 6
@@ -40,9 +36,9 @@ void GetCameraCoords(u16 *x, u16 *y);
 u8 MapGridGetCollisionAt(s32 x, s32 y);
 enum Connection GetMapBorderIdAt(s32 x, s32 y);
 bool32 CanCameraMoveInDirection(enum Direction direction);
-u32 GetAttributeByMetatileIdAndMapLayout(u16 metatile, u8 attributeType, bool32 isFrlg);
+u32 GetAttributeByMetatileIdAndMapLayout(u16 metatile, u8 attributeType);
 void GetCameraFocusCoords(u16 *x, u16 *y);
-u32 ExtractMetatileAttribute(u32 attributes, u8 attributeType, bool32 isFrlg);
+u32 ExtractMetatileAttribute(u32 attributes, u8 attributeType);
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attributeType);
 u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y);
 u8 MapGridGetElevationAt(s32 x, s32 y);

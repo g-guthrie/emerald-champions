@@ -21,11 +21,7 @@
     "gMapGroup_EmeraldChampionsExpansion"
   ],
   "system_groups": [
-    "gMapGroup_IndoorRoute104Prototype",
-    "gMapGroup_Link_Frlg"
-  ],
-  "excluded_group_suffixes": [
-    "_Frlg"
+    "gMapGroup_IndoorRoute104Prototype"
   ],
   "generated_map_prefixes": [
     "BattlePyramidSquare"

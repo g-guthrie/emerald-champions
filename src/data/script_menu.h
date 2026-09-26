@@ -985,19 +985,11 @@ static const struct MenuAction sMultichoiceList_SeagallopVermilion[] = {
 const u8 sText_NoThanks[] = _("No Thanks");
 
 static const struct MenuAction sMultichoiceList_GameCornerPokemonPrizes[] = {
-#if defined(FIRERED)
-    {COMPOUND_STRING("Abra{CLEAR_TO 85}{FONT_SMALL} 180 Coins")},
-    {COMPOUND_STRING("Clefairy{CLEAR_TO 85}{FONT_SMALL} 500 Coins")},
-    {COMPOUND_STRING("Dratini{CLEAR_TO 75}{FONT_SMALL} 2,800 Coins")},
-    {COMPOUND_STRING("Scyther{CLEAR_TO 75}{FONT_SMALL} 5,500 Coins")},
-    {COMPOUND_STRING("Porygon{CLEAR_TO 75}{FONT_SMALL} 9,999 Coins")},
-#else
     {COMPOUND_STRING("Abra{CLEAR_TO 85}{FONT_SMALL} 120 Coins")},
     {COMPOUND_STRING("Clefairy{CLEAR_TO 85}{FONT_SMALL} 750 Coins")},
     {COMPOUND_STRING("Pinsir{CLEAR_TO 75}{FONT_SMALL} 2,500 Coins")},
     {COMPOUND_STRING("Dratini{CLEAR_TO 75}{FONT_SMALL} 4,600 Coins")},
     {COMPOUND_STRING("Porygon{CLEAR_TO 75}{FONT_SMALL} 6,500 Coins")},
-#endif
     {sText_NoThanks}
 };
 

@@ -55,7 +55,7 @@ def audit() -> dict[str, object]:
     rows: list[dict[str, object]] = []
     callback_consumers: list[dict[str, object]] = []
     failures: list[str] = []
-    parsed = {path: blocks(path) for path in paths if "_Frlg" not in str(path)}
+    parsed = {path: blocks(path) for path in paths}
 
     for path, source_blocks in parsed.items():
         for label, line, body in source_blocks:

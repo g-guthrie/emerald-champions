@@ -6,7 +6,7 @@
 #include "test/test.h"
 
 // Check the actual compiled map templates and renderer consumer. A valid enum
-// name can still address a null slot when its graphics are compiled only for FRLG.
+// name can still address a null slot in the graphics table.
 TEST("Emerald Chansey quest map objects resolve renderable graphics")
 {
     static const struct { u16 map; u8 localId; } objects[] =

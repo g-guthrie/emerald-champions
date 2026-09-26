@@ -291,10 +291,8 @@ def _trainer_cap_by_dir() -> dict[str, int]:
 # game together (18 distinct maps warp into MAP_TRADE_CENTER alone) -- not a
 # walkable path, so they are excluded from the graph entirely.
 HUB_EXCLUDE_MAPS = {
-    "TradeCenter", "TradeCenter_Frlg", "UnionRoom", "UnionRoom_Frlg",
-    "RecordCorner", "RecordCorner_Frlg",
-    "BattleColosseum_2P", "BattleColosseum_2P_Frlg",
-    "BattleColosseum_4P", "BattleColosseum_4P_Frlg",
+    "TradeCenter", "UnionRoom", "RecordCorner",
+    "BattleColosseum_2P", "BattleColosseum_4P",
 }
 
 
@@ -379,7 +377,7 @@ def map_cap_index() -> dict[str, int]:
     merely trainer presence. Maps unreachable from SEED_MAP_DIRS through
     this graph -- postgame/unused areas such as the Battle Frontier's own
     interior chain (reached only by a ferry ticket this index does not
-    model) and FRLG twin maps -- are not included."""
+    model) -- are not included."""
     windows, _trace = _reachability_windows()
     dir_to_id = map_dir_to_id()
     cap_by_map: dict[str, int] = {}
@@ -444,8 +442,7 @@ def species_wild_maps() -> dict[str, set[str]]:
 
 def species_gift_maps() -> dict[str, set[str]]:
     """SPECIES_x -> set of MAP_x ids where a givemon/giveegg script grants it
-    (Hoenn map-local scripts only; FRLG maps are out of scope elsewhere in
-    this tree). No Hoenn-side fossil-revival script pattern distinct from
+    (map-local scripts only). No Hoenn-side fossil-revival script pattern distinct from
     givemon was found under data/maps or data/scripts."""
     dir_to_id = map_dir_to_id()
     result: dict[str, set[str]] = defaultdict(set)

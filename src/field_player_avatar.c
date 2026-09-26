@@ -1133,10 +1133,7 @@ static void PlayerAvatarTransition_MachBike(struct ObjectEvent *objEvent)
 {
     ObjectEventSetGraphicsId(objEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_MACH_BIKE));
     ObjectEventTurn(objEvent, objEvent->movementDirection);
-    if (IS_FRLG)
-        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_BIKE);
-    else
-        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     BikeClearState(0, 0);
 }
 
@@ -1144,10 +1141,7 @@ static void PlayerAvatarTransition_AcroBike(struct ObjectEvent *objEvent)
 {
     ObjectEventSetGraphicsId(objEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
     ObjectEventTurn(objEvent, objEvent->movementDirection);
-    if (IS_FRLG)
-        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_BIKE);
-    else
-        SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ACRO_BIKE);
     BikeClearState(0, 0);
     Bike_HandleBumpySlopeJump();
 }
@@ -1562,10 +1556,7 @@ void StopPlayerAvatar(void)
 
 u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
 {
-    if (IS_FRLG)
-        return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gender);
-    else
-        return sRivalAvatarGfxIds[state][gender];
+    return sRivalAvatarGfxIds[state][gender];
 }
 
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, enum Gender gender)
@@ -1958,11 +1949,6 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct Objec
         DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
     }
     return FALSE;
-}
-
-void SeafoamIslandsB4F_CurrentDumpsPlayerOnLand(void)
-{
-    CreateStopSurfingTask(DIR_NORTH);
 }
 
 static void CreateStopSurfingTask(enum Direction direction)

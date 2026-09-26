@@ -4553,8 +4553,6 @@ u16 GetNationalPokedexCount(u8 caseID)
 
 u32 GetRegionalPokedexCount(u8 caseID)
 {
-    if (IS_FRLG)
-        return GetKantoPokedexCount(caseID);
     return GetHoennPokedexCount(caseID);
 }
 
@@ -4604,8 +4602,6 @@ u16 GetKantoPokedexCount(u8 caseID)
 
 bool16 HasAllRegionalMons(void)
 {
-    if (IS_FRLG)
-        return HasAllKantoMons();
     return HasAllHoennMons();
 }
 
@@ -4616,20 +4612,6 @@ bool16 HasAllHoennMons(void)
     for (i = 0; i < HOENN_DEX_COUNT - 1; i++)
     {
         j = HoennToNationalOrder(i + 1);
-        if (!(gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
-            return FALSE;
-    }
-    return TRUE;
-}
-
-bool16 HasAllKantoMons(void)
-{
-    u32 i, j;
-
-    // -1 excludes Mew
-    for (i = 0; i < KANTO_DEX_COUNT - 1; i++)
-    {
-        j = KantoToNationalOrder(i + 1);
         if (!(gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
             return FALSE;
     }

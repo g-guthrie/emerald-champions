@@ -92,8 +92,6 @@ def source_references(ids):
     partners = []
     for path in sorted([*(ROOT/'data/maps').rglob('scripts.inc'), *(ROOT/'data/scripts').rglob('*.inc')]):
         rel = str(path.relative_to(ROOT))
-        if 'frlg' in rel.lower():
-            continue
         label = ''
         for number, raw in enumerate(clean(path.read_text()).splitlines(), 1):
             line = raw.strip()
@@ -415,7 +413,7 @@ def main():
         w.line('BEGIN SOURCE: '+path);w.line(read(path));w.line('END SOURCE: '+path)
     w.heading('8. PROVENANCE AND VALIDATION SCOPE')
     w.prose('The exporter independently parsed native trainerproc input, validated every required mon field, compared every retained authored slot field, and asserted complete unique coverage of all native trainer IDs and all procedural templates. It reads source files, not screenshots or memory of an older build. It does not certify every script branch reachable, every move strategically sensible, every AI tactic implemented correctly, or the full game playtested.')
-    w.prose('Out-of-scope alternate games/providers: trainers_frlg.party belongs to the alternate FireRed/LeafGreen build selected by IS_FRLG; debug_trainers.party is development content. Retired original Battle Frontier facility tables, Trainer Hill, record-mixed Secret Base teams, link opponents and player-created teams do not constitute fixed current campaign encounters. The active Frontier desk boundary is the Champions Circuit. The complete active Hoenn trainers.party is included even for dormant or otherwise unclassified definitions.')
+    w.prose('Out-of-scope providers: debug_trainers.party is development content. Retired original Battle Frontier facility tables, Trainer Hill, record-mixed Secret Base teams, link opponents and player-created teams do not constitute fixed current campaign encounters. The active Frontier desk boundary is the Champions Circuit. The complete active Hoenn trainers.party is included even for dormant or otherwise unclassified definitions.')
     for path in (PARTY,
         'data/emerald_champions/emerald_champions_master_battle_design.txt',
         'src/data/emerald_champions_battle_plans.h','src/battle_setup.c','src/difficulty.c','include/data.h','src/trainer_util.c','src/pokemon.c',

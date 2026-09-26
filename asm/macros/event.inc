@@ -64,7 +64,6 @@
 	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
 	STD_PUT_ITEM_AWAY = 11
-	STD_RECEIVED_ITEM = 12
 
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
@@ -1775,23 +1774,6 @@
 	.2byte \box
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro textcolor color:req
-	.byte SCR_OP_TEXTCOLOR
-	.byte \color
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro loadhelp text:req
-	.byte SCR_OP_LOADHELP
-	.4byte \text
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro unloadhelp
-	.byte SCR_OP_UNLOADHELP
-	.endm
-
 	@ After using this command, all standard message boxes will use the signpost frame.
 	.macro signmsg
 	.byte SCR_OP_SIGNMSG
@@ -1800,13 +1782,6 @@
 	@ Ends the effects of signmsg, returning message box frames to normal.
 	.macro normalmsg
 	.byte SCR_OP_NORMALMSG
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro comparehiddenvar a:req, value:req
-	.byte SCR_OP_COMPAREHIDDENVAR
-	.byte \a
-	.4byte \value
 	.endm
 
 	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
@@ -1826,12 +1801,6 @@
 	@ ram script is invalid then this does nothing.
 	.macro trywondercardscript
 	.byte SCR_OP_TRYWONDERCARDSCRIPT
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro setworldmapflag worldmapflag:req
-	.byte SCR_OP_SETWORLDMAPFLAG
-	.2byte \worldmapflag
 	.endm
 
 	@ Warps the player to the specified map using a teleport effect. Effect is similar to warpteleport, but
@@ -2759,11 +2728,6 @@
 	.byte \selectionType
 	.endm
 
-	.macro mappreview duration:req
-	callnative MapPreviewScript
-	.2byte \duration
-	.endm
-
 	.macro tryspecialevo evoArg:req, canStopEvo=TRUE, tryMultiple=FALSE
 	setvar VAR_0x8000, \canStopEvo
 	setvar VAR_0x8005, \evoArg
@@ -2991,47 +2955,6 @@
 	.2byte \var
 	.byte \dataField
 	.endm
-
-@ FRLG
-
-
-	@ Prints the provided message after playing the fanfare music (can only be MUS_LEVEL_UP or MUS_RG_OBTAIN_KEY_ITEM).
-	@ It then prints the message shown by using putitemaway.
-	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
-	loadword 0, \msg
-	setorcopyvar VAR_0x8000, \item
-	setorcopyvar VAR_0x8001, \amount
-	setorcopyvar VAR_0x8002, \fanfare
-	callstd STD_RECEIVED_ITEM
-	.endm
-
-	@ Adds the specified item to the bag, then prints a message with fanfare. See description of msgreceiveditem.
-	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
-	additem \item, \amount
-	msgreceiveditem \msg, \item, \amount, \fanfare
-	.endm
-
-	@ Depends on the provided function. With the default argument, unlocks the specified entry in the Fame Checker.
-	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, \person
-	setvar VAR_0x8005, \index
-	special \function
-	.endm
-
-	@ Sets the 'defeated' flag for all trainers in the specified gym.
-	.macro set_gym_trainers_frlg gym:req
-	setvar VAR_0x8008, \gym
-	call Common_EventScript_SetGymTrainers_Frlg
-	.endm
-
-	@ Prints a braille message, then waits for users input.
-	.macro braillemessage_wait text:req
-	setvar VAR_0x8006, 0
-	braillemessage \text
-	getbraillestringwidth \text
-	call EventScript_BrailleCursorWaitButton
-	.endm
-
 
 @ Inclement Emerald compatibility
 @

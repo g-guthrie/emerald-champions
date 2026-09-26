@@ -33,7 +33,6 @@
 #include "item.h"
 #include "lilycove_lady.h"
 #include "main.h"
-#include "map_preview_screen.h"
 #include "menu.h"
 #include "money.h"
 #include "move.h"
@@ -3371,7 +3370,7 @@ bool8 ScrCmd_setworldmapflag(struct ScriptContext * ctx)
     u16 value = ScriptReadHalfword(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    MapPreview_SetFlag(value);
+    FlagSet(value);
     return FALSE;
 }
 

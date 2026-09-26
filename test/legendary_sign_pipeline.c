@@ -361,7 +361,7 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
 
 TEST("Regigigas wakes for the three Regis' Pokedex records, not a three-Legendary party")
 {
-    // Route roster signs must resolve in Emerald, not only in FireRed/LeafGreen.
+    // Route roster signs must resolve to real sign graphics.
     const struct ObjectEventGraphicsInfo *sign = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_SIGN);
     EXPECT(sign != NULL);
     EXPECT(sign->images != NULL);
@@ -668,9 +668,6 @@ TEST("Rare habitat: the Pokedex reflects unlocked and uncaught wild residents")
     UnlockLegendarySign(LEGENDARY_SIGN_MARSHADOW);
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_MARSHADOW));
     EXPECT(Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
-    gMapHeader.regionMapSectionId = MAPSEC_PALLET_TOWN;
-    EXPECT(!Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
-    gMapHeader.regionMapSectionId = MAPSEC_ROUTE_113;
     MarkLegendarySignCaughtBySpecies(SPECIES_MARSHADOW);
     EXPECT(!Test_PokedexAreaHasSection(SPECIES_MARSHADOW, MAPSEC_ROUTE_113));
     for (u32 badge = 0; badge < 3; badge++)
@@ -710,12 +707,6 @@ TEST("Rare habitat: native meadow residents disappear independently after captur
     ResetSignState();
 }
 
-static bool32 IsEmeraldWildHeader(u32 header)
-{
-    const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(gWildMonHeaders[header].mapGroup, gWildMonHeaders[header].mapNum);
-    return map->mapLayout == NULL || !map->mapLayout->isFrlg;
-}
-
 static bool32 WildTableHasSpecies(const struct WildPokemonInfo *info, u32 slots, enum Species species)
 {
     for (u32 slot = 0; info != NULL && slot < slots; slot++)
@@ -738,9 +729,8 @@ TEST("Gate table: every wild or quest row has a compiled slot and every wild leg
         for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED) && !found; header++)
         {
             const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
-            found = IsEmeraldWildHeader(header)
-                && (WildTableHasSpecies(types->landMonsInfo, NUM_LAND_MONS_ENCOUNTER_SLOTS, gate->species)
-                 || WildTableHasSpecies(types->waterMonsInfo, NUM_WATER_MONS_ENCOUNTER_SLOTS, gate->species));
+            found = WildTableHasSpecies(types->landMonsInfo, NUM_LAND_MONS_ENCOUNTER_SLOTS, gate->species)
+                 || WildTableHasSpecies(types->waterMonsInfo, NUM_WATER_MONS_ENCOUNTER_SLOTS, gate->species);
         }
         if (!found)
         {
@@ -752,8 +742,6 @@ TEST("Gate table: every wild or quest row has a compiled slot and every wild leg
     // ungated and uncatchable-once only by accident.
     for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
     {
-        if (!IsEmeraldWildHeader(header))
-            continue;
         const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
         const struct WildPokemonInfo *infos[] = {types->landMonsInfo, types->waterMonsInfo};
         const u32 slots[] = {NUM_LAND_MONS_ENCOUNTER_SLOTS, NUM_WATER_MONS_ENCOUNTER_SLOTS};

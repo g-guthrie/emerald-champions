@@ -37,8 +37,6 @@ void PreparePartyForSkyBattle(void);
 void GetObjectPosition(u16*, u16*, u32, u32);
 bool32 CheckObjectAtXY(u32, u32);
 bool32 CheckPartyHasSpecies(enum Species);
-bool8 CutMoveRuinValleyCheck(void);
-void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveFlowerShopBerryBundle(void);

@@ -222,10 +222,6 @@ EventScript_NoRoomForHiddenItem::
 	releaseall
 	end
 
-EventScript_RestorePrevTextColor::
-	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
-	return
-
 Std_PutItemAway::
 	bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000

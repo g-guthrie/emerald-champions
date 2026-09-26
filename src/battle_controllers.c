@@ -157,7 +157,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
 
     if (IsEmeraldChampionsBirchRescueBattle())
         CreateEmeraldChampionsBirchRescueParty();
-    else if (!IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         CreateWildMon(SPECIES_ZIGZAGOON, 2);
 }
 
@@ -279,9 +279,7 @@ static void InitBtlControllersInternal(void)
             else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                 gBattlerControllerFuncs[GetBattlerPosition(B_BATTLER_0)] = SetControllerToSafari;
             else if (gBattleTypeFlags & BATTLE_TYPE_CATCH_TUTORIAL)
-                gBattlerControllerFuncs[GetBattlerPosition(B_BATTLER_0)] = IS_FRLG ? SetControllerToOakOrOldMan : SetControllerToWally;
-            else if (IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
-                gBattlerControllerFuncs[gBattlerPositions[B_BATTLER_0]] = SetControllerToOakOrOldMan;
+                gBattlerControllerFuncs[GetBattlerPosition(B_BATTLER_0)] = SetControllerToWally;
             else if (isAIvsAI)
                 gBattlerControllerFuncs[GetBattlerPosition(B_BATTLER_0)] = SetControllerToPlayerPartner;
             else
@@ -439,11 +437,6 @@ static inline bool32 IsControllerPlayerPartner(enum BattlerId battler)
 static inline bool32 IsControllerWally(enum BattlerId battler)
 {
     return (gBattlerControllerEndFuncs[battler] == WallyBufferExecCompleted);
-}
-
-static inline bool32 IsControllerOakOldMan(u32 battler)
-{
-    return (gBattlerControllerEndFuncs[battler] == OakOldManBufferExecCompleted);
 }
 
 static inline bool32 IsControllerRecordedOpponent(enum BattlerId battler)
@@ -2060,15 +2053,7 @@ void Controller_WaitForHealthBar(enum BattlerId battler)
         if (IsOnPlayerSide(battler))
             HandleLowHpMusicChange(GetBattlerMon(battler), battler);
 
-        if (IS_FRLG && GetBattlerSide(battler) == B_SIDE_OPPONENT && !BtlCtrl_OakOldMan_TestState2Flag(1) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
-        {
-            BtlCtrl_OakOldMan_SetState2Flag(1);
-            gBattlerControllerFuncs[battler] = PrintOakText_InflictingDamageIsKey;
-        }
-        else
-        {
-            BtlController_Complete(battler);
-        }
+        BtlController_Complete(battler);
     }
 }
 
@@ -2484,7 +2469,7 @@ void BtlController_HandleBallThrowAnim(enum BattlerId battler)
         allowCriticalCapture = TRUE;
         target = gBattlerTarget;
     }
-    else if (IsControllerSafari(battler) || IsControllerWally(battler) || IsControllerOakOldMan(battler))
+    else if (IsControllerSafari(battler) || IsControllerWally(battler))
     {
         animId = B_ANIM_BALL_THROW_WITH_TRAINER;
     }
@@ -2539,19 +2524,6 @@ void BtlController_HandlePrintString(enum BattlerId battler)
     // else
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
-    {
-        switch (*stringId)
-        {
-        case STRINGID_TRAINER1WINTEXT:
-            gBattlerControllerFuncs[battler] = PrintOakText_HowDisappointing;
-            return;
-        case STRINGID_DONTLEAVEBIRCH:
-            gBattlerControllerFuncs[battler] = PrintOakText_OakNoRunningFromATrainer;
-            return;
-        }
-    }
-
     gBattlerControllerFuncs[battler] = Controller_WaitForString;
     if (ShouldUpdateTvData(battler))
         BattleTv_SetDataBasedOnString(*stringId);
@@ -2591,7 +2563,6 @@ void BtlController_HandleHealthBarUpdate(enum BattlerId battler)
         if (IsControllerPlayer(battler)
          || IsControllerRecordedPlayer(battler)
          || IsControllerRecordedPartner(battler)
-         || IsControllerOakOldMan(battler)
          || IsControllerWally(battler))
             UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, 0, maxHP);
         TestRunner_Battle_RecordHP(battler, curHP, 0);
@@ -2908,7 +2879,6 @@ void BtlController_HandleHidePartyStatusSummary(enum BattlerId battler)
 void BtlController_HandleBattleAnimation(enum BattlerId battler)
 {
     if ((gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_CATCH_TUTORIAL))
-        || IsControllerOakOldMan(battler)
         || !IsBattleSEPlaying(battler))
     {
         u8 animationId = gBattleResources->bufferA[battler][1];

@@ -85,7 +85,7 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_RockClimbDust             @ FLDEFF_ROCK_CLIMB_DUST
 	.4byte gFieldEffectScript_ORASDowse                 @ FLDEFF_ORAS_DOWSE
 	.4byte gFldEffScript_SmileyFaceIcon    		        @ FLDEFF_SMILEY_FACE_ICON
-	.4byte gFieldEffectScript_HallOfFameRecordFrlg      @ FLDEFF_HALL_OF_FAME_RECORD_FRLG
+	.4byte 0                                            @ 79, unused
 	.4byte gFldEffScript_PhotoFlash      		        @ FLDEFF_PHOTO_FLASH
 	.4byte gFieldEffectScript_OWE_SpawnAnim				@ FLDEFF_OW_ENCOUNTER_SPAWN_ANIM
 
@@ -406,11 +406,6 @@ gFieldEffectScript_ORASDowse::
 
 gFldEffScript_SmileyFaceIcon::
 	field_eff_callnative FldEff_SmileyFaceIcon
-	field_eff_end
-
-gFieldEffectScript_HallOfFameRecordFrlg::
-	field_eff_loadfadedpal gSpritePalette_PokeballGlow
-	field_eff_loadfadedpal_callnative gSpritePalette_HofMonitor_Frlg, FldEff_HallOfFameRecord
 	field_eff_end
 
 gFldEffScript_PhotoFlash::

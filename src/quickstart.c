@@ -19,13 +19,7 @@
 #define TAG_SKIP_INTRO 2000
 
 static const u32 gQuickstartHudGfx[] = INCGFX_U32("graphics/quickstart/quickstart_hud.png", ".4bpp.smol");
-#if FIRERED
-static const u16 gQuickstartHudPal[] = INCGFX_U16("graphics/quickstart/firered.pal", ".gbapal");
-#elif LEAFGREEN
-static const u16 gQuickstartHudPal[] = INCGFX_U16("graphics/quickstart/leafgreen.pal", ".gbapal");
-#else
 static const u16 gQuickstartHudPal[] = INCGFX_U16("graphics/quickstart/emerald.pal", ".gbapal");
-#endif
 
 static const struct OamData sQuickstartHudOam = {
     .y = DISPLAY_HEIGHT,
@@ -74,24 +68,14 @@ static inline enum Gender SetQuickstartPlayerGender()
 
 static void CB2_SkipToNewGame(void)
 {
-#if IS_FRLG
-    static const u8 sText_PlayerMale[] = _("Red");
-    static const u8 sText_PlayerFemale[] = _("Leaf");
-    static const u8 sText_Rival[] = _("Blue");
-#else
     static const u8 sText_PlayerMale[] = _("Brendan");
     static const u8 sText_PlayerFemale[] = _("May");
-#endif  // IS_FRLG
 
     if (!UpdatePaletteFade())
     {
         gSaveBlock2Ptr->playerGender = SetQuickstartPlayerGender();
         const u8* textPtr = gSaveBlock2Ptr->playerGender == FEMALE ? sText_PlayerFemale : sText_PlayerMale;
         StringCopy_PlayerName(gSaveBlock2Ptr->playerName, textPtr);
-
-#if IS_FRLG
-        StringCopy_PlayerName(gSaveBlock1Ptr->rivalName, sText_Rival);
-#endif  // IS_FRLG
 
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -124,4 +108,3 @@ void Quickstart(void)
         SetMainCallback2(CB2_SkipToNewGame);
     }
 }
-

@@ -54,7 +54,7 @@ TEST("Inclement integration: every HM needs badge, license, and a capable party 
         EXPECT_EQ(FieldMove_GetUserSlot(moves[i], TRUE), PARTY_SIZE);
         CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MEW, 5, 0, OTID_STRUCT_PLAYER_ID);
         FlagClear(licenses[i]);
-        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], FALSE), IS_FRLG ? 1 : PARTY_SIZE);
+        EXPECT_EQ(FieldMove_GetUserSlot(moves[i], FALSE), PARTY_SIZE);
         FlagClear(badge);
     }
     ZeroPlayerPartyMons();
@@ -478,26 +478,26 @@ TEST("Inclement integration: Flash uses the regional badge plus authorization")
     EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_FLASH));
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_RECEIVED_HM_FLASH);
-    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLASH), IS_FRLG);
+    EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_FLASH));
     FlagSet(FLAG_BADGE02_GET);
     EXPECT(IsFieldMoveUnlocked(FIELD_MOVE_FLASH));
     FlagClear(FLAG_RECEIVED_HM_FLASH);
-    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_FLASH), IS_FRLG);
+    EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_FLASH));
 }
 
 TEST("Inclement integration: locked field message distinguishes badge from authorization")
 {
-    u32 badgeFlag = IS_FRLG ? FLAG_BADGE06_GET : FLAG_BADGE03_GET;
+    u32 badgeFlag = FLAG_BADGE03_GET;
     FlagClear(badgeFlag);
     FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
     gSpecialVar_0x8004 = FIELD_MOVE_ROCK_SMASH;
     EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
     BufferFieldMoveUnlockRequirement();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
-    EXPECT_EQ(StringCompare(gStringVar2, IS_FRLG ? COMPOUND_STRING("Marsh Badge") : COMPOUND_STRING("Dynamo Badge")), 0);
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("Dynamo Badge")), 0);
     FlagSet(badgeFlag);
     FlagClear(FLAG_RECEIVED_HM_ROCK_SMASH);
-    EXPECT_EQ(IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH), IS_FRLG);
+    EXPECT(!IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
     BufferFieldMoveUnlockRequirement();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT(FlagGet(badgeFlag));

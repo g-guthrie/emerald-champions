@@ -48,7 +48,7 @@ static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 
     if (!FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET))
         return FALSE;
-    if (IS_FRLG || licenseFlag == 0)
+    if (licenseFlag == 0)
         return TRUE;
     return FlagGet(licenseFlag);
 }
@@ -58,13 +58,8 @@ static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 void BufferFieldMoveUnlockRequirement(void)
 {
     static const u8 badgeNames[][14] = {
-#if IS_FRLG
-        _("Boulder Badge"), _("Cascade Badge"), _("Thunder Badge"), _("Rainbow Badge"),
-        _("Soul Badge"), _("Marsh Badge"), _("Volcano Badge"), _("Earth Badge"),
-#else
         _("Stone Badge"), _("Knuckle Badge"), _("Dynamo Badge"), _("Heat Badge"),
         _("Balance Badge"), _("Feather Badge"), _("Mind Badge"), _("Rain Badge"),
-#endif
     };
     enum FieldMove fieldMove = gSpecialVar_0x8004;
     u32 badge = gFieldMoveInfo[fieldMove].arg;
@@ -178,7 +173,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_CUT,
         .partyMsgID = PARTY_MSG_NOTHING_TO_CUT,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE02_GET) : FLAG_TO_BADGE(FLAG_BADGE01_GET),
+        .arg = FLAG_TO_BADGE(FLAG_BADGE01_GET),
         .hideIfLocked = TRUE,
         .capabilityInPartyMenu = TRUE, // Optional grass clearing keeps Inclement's party-menu action.
     },
@@ -189,7 +184,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_FLASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE01_GET) : FLAG_TO_BADGE(FLAG_BADGE02_GET),
+        .arg = FLAG_TO_BADGE(FLAG_BADGE02_GET),
         .hideIfLocked = TRUE,
         .hideInPartyMenu = TRUE,
     },
@@ -200,7 +195,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_ROCK_SMASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE06_GET) : FLAG_TO_BADGE(FLAG_BADGE03_GET),
+        .arg = FLAG_TO_BADGE(FLAG_BADGE03_GET),
         .hideIfLocked = TRUE,
         .hideInPartyMenu = TRUE,
     },
@@ -233,7 +228,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_FLY,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE03_GET) : FLAG_TO_BADGE(FLAG_BADGE06_GET),
+        .arg = FLAG_TO_BADGE(FLAG_BADGE06_GET),
         .hideIfLocked = TRUE,
         // The Flight Beacon owns Fly: it is called from the Bag, never from a moveslot.
         .hideInPartyMenu = TRUE,
@@ -256,7 +251,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_WATERFALL,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE07_GET) : FLAG_TO_BADGE(FLAG_BADGE08_GET),
+        .arg = FLAG_TO_BADGE(FLAG_BADGE08_GET),
         .hideIfLocked = TRUE,
         .hideInPartyMenu = TRUE,
     },

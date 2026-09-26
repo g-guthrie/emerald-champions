@@ -52,7 +52,7 @@ def expected_starter_mega_stones(root: Path = ROOT) -> set[tuple[str, str]]:
 
 def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
     groups = json.loads((root / "data/maps/map_groups.json").read_text())
-    maps = {name for group, names in groups.items() if group != "group_order" and "_Frlg" not in group for name in names}
+    maps = {name for group, names in groups.items() if group != "group_order" for name in names}
     required = set(stones())
     rewards: dict[str, list[str]] = defaultdict(list)
     object_flags: dict[str, set[str]] = defaultdict(set)

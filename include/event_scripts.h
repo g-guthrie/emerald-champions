@@ -432,7 +432,6 @@ extern const u8 EventScript_UseCutGrass[];
 extern const u8 EventScript_UseDefog[];
 
 //player pc
-extern const u8 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC[];
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC[];
 
@@ -568,7 +567,6 @@ extern const u8 MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory[];
 
 extern const u8 LittlerootTown_BrendansHouse_2F_EventScript_PC[];
 extern const u8 LittlerootTown_MaysHouse_2F_EventScript_PC[];
-extern const u8 EventScript_PalletTown_PlayersHouse_2F_TurnOnPC[];
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_AccessPokemonBoxLink[];
 extern const u8 EventScript_TestSignpostMsg[];
@@ -654,7 +652,6 @@ extern const u8 EventScript_SelectWithoutRegisteredItem[];
 extern const u8 EventScript_WhiteOut[];
 extern const u8 EventScript_AfterWhiteOutMomHeal[];
 extern const u8 EventScript_AfterWhiteOutHeal[];
-extern const u8 EventScript_AfterWhiteOutHeal_Frlg[];
 extern const u8 EventScript_AfterWhiteOutHealMsgPreFirstBoss[];
 extern const u8 EventScript_ResetMrBriney[];
 extern const u8 EventScript_DoLinkRoomExit[];
@@ -782,34 +779,7 @@ extern const u8 gOakSpeech_Text_YourRivalsNameWhatWasIt[];
 extern const u8 gOakSpeech_Text_ConfirmRivalName[];
 extern const u8 gOakSpeech_Text_RememberRivalsName[];
 extern const u8 gOakSpeech_Text_LetsGo[];
-extern const u8 EventScript_Food[];
-extern const u8 EventScript_ImpressiveMachine[];
-extern const u8 EventScript_Blueprints[];
-extern const u8 EventScript_VideoGame[];
-extern const u8 EventScript_Burglary[];
-extern const u8 EventScript_Computer[];
-extern const u8 TrainerTower_EventScript_ShowTime[];
-extern const u8 EventScript_PlayerFacingTVScreen[];
-extern const u8 EventScript_Cabinet[];
-extern const u8 EventScript_Kitchen[];
-extern const u8 EventScript_Dresser[];
-extern const u8 EventScript_Snacks[];
-extern const u8 EventScript_Painting[];
-extern const u8 EventScript_PowerPlantMachine[];
-extern const u8 EventScript_Telephone[];
-extern const u8 EventScript_AdvertisingPoster[];
-extern const u8 EventScript_TastyFood[];
-extern const u8 EventScript_TrashBin[];
-extern const u8 EventScript_Cup[];
-extern const u8 EventScript_PolishedWindow[];
-extern const u8 EventScript_BeautifulSkyWindow[];
-extern const u8 EventScript_BlinkingLights[];
-extern const u8 EventScript_NeatlyLinedUpTools[];
-extern const u8 CableClub_EventScript_ShowWirelessCommunicationScreen_Frlg[];
 extern const u8 EventScript_Questionnaire[];
-extern const u8 CableClub_EventScript_ShowBattleRecords_Frlg[];
-extern const u8 EventScript_Indigo_UltimateGoal[];
-extern const u8 EventScript_Indigo_HighestAuthority[];
 
 extern const u8 TrainerHill_EventScript_GenerationFailed[];
 #endif // GUARD_EVENT_SCRIPTS_H

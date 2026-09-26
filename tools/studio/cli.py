@@ -37,7 +37,7 @@ def main():
         subprocess.run([sys.executable,"-m","venv",str(PYTHON.parent.parent)], check=True)
         subprocess.run([str(PYTHON),"-m","pip","install","-r",str(ROOT/"tools/studio/requirements.txt")], check=True)
     if not (ROOT/"pokeemerald-headless.gba").exists():
-        cmd=["make","-j6","BUILD_NAME=emerald-headless","MAP_VERSION=emerald","EC_HEADLESS_FIXTURES=1","TEST=0"]
+        cmd=["make","-j6","BUILD_NAME=emerald-headless","EC_HEADLESS_FIXTURES=1","TEST=0"]
         toolchain=Path.home()/".local/share/arm-gnu-toolchain-15.2-20260718/Payload"
         if toolchain.exists():cmd.append("DEVKITARM="+str(toolchain))
         subprocess.run(cmd+["pokeemerald-headless.gba"], cwd=ROOT, check=True)

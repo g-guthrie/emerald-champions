@@ -32,6 +32,20 @@
     ],
   "extraTutors":
     [
-      
+      "MOVE_BODY_SLAM",
+      "MOVE_COUNTER",
+      "MOVE_DOUBLE_EDGE",
+      "MOVE_DREAM_EATER",
+      "MOVE_EXPLOSION",
+      "MOVE_MEGA_KICK",
+      "MOVE_MEGA_PUNCH",
+      "MOVE_METRONOME",
+      "MOVE_MIMIC",
+      "MOVE_ROCK_SLIDE",
+      "MOVE_SEISMIC_TOSS",
+      "MOVE_SOFT_BOILED",
+      "MOVE_SUBSTITUTE",
+      "MOVE_SWORDS_DANCE",
+      "MOVE_THUNDER_WAVE"
     ]
 }

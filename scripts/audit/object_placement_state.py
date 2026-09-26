@@ -530,8 +530,6 @@ def reachable(source, root):
 def hoenn_maps():
     groups = json.loads((MAP_DIR / 'map_groups.json').read_text())
     for group in groups['group_order']:
-        if group.endswith('_Frlg'):
-            continue
         for name in groups[group]:
             if not name.startswith(NON_HOENN) and (MAP_DIR / name / 'map.json').exists():
                 yield name

@@ -17,16 +17,6 @@ REVIEWED_OFF_MAP_EVENTS = {
     ("BattleFrontier_BattleDomeCorridor", "warp_events", 7, 8): "off-map corridor staging",
     ("BattleFrontier_BattleDomePreBattleRoom", "warp_events", 6, 8): "off-map room staging",
     ("BattleFrontier_BattleDomePreBattleRoom", "warp_events", 7, 8): "off-map room staging",
-    ("CeruleanCity_Frlg", "object_events", 50, 18): "dormant FRLG connected-map object",
-    ("CeladonCity_Frlg", "object_events", -7, 21): "dormant FRLG connected-map object",
-    ("FiveIsland_Frlg", "object_events", 32, 9): "dormant FRLG connected-map object",
-    ("Route2_Frlg", "object_events", 6, 85): "dormant FRLG connected-map object",
-    ("Route4_Frlg", "object_events", 109, 3): "dormant FRLG connected-map object",
-    ("Route7_Frlg", "object_events", -8, 12): "dormant FRLG connected-map object",
-    ("Route15_Frlg", "object_events", 73, 7): "dormant FRLG connected-map object",
-    ("Route21_North_Frlg", "object_events", 13, -3): "dormant FRLG scene staging",
-    ("SevenIsland_SevaultCanyon_Entrance_Frlg", "object_events", 7, -2):
-        "dormant FRLG scene staging",
 }
 
 REVIEWED_DYNAMIC_SCRIPTED_WARPS = {

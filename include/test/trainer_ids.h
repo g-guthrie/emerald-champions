@@ -6,11 +6,7 @@
 #endif
 
 // Use two unoccupied trainer slots without moving campaign flags or partners.
-#if IS_FRLG
-#define TEST_TRAINER_IDS_START            TRAINERS_COUNT_FRLG
-#else
 #define TEST_TRAINER_IDS_START            TRAINERS_COUNT_EMERALD
-#endif
 #define TRAINER_RED_TEST                  (TEST_TRAINER_IDS_START + 0)
 #define TRAINER_LEAF_TEST                 (TEST_TRAINER_IDS_START + 1)
 #define TEST_TRAINERS_COUNT               (TEST_TRAINER_IDS_START + 2)

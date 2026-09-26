@@ -31,7 +31,7 @@ def load_json(path: Path) -> dict:
 
 
 def hoenn_map_names() -> list[str]:
-    return [name for name in registered_map_names() if "_Frlg" not in name]
+    return registered_map_names()
 
 
 def assembled_sources(map_names: list[str]) -> list[Path]:
@@ -41,7 +41,7 @@ def assembled_sources(map_names: list[str]) -> list[Path]:
     pending = [ROOT / "data/event_scripts.s"]
     while pending:
         path = pending.pop()
-        if path in result or "frlg" in path.name.lower():
+        if path in result:
             continue
         if path.parent.parent == MAPS_ROOT and path.parent.name not in map_names:
             continue

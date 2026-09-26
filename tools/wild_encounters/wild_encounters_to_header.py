@@ -177,13 +177,6 @@ class WildEncounterAssembler:
             encounter_data = map_data
             map_group = map_data["mapGroup"]
             map_num = map_data["mapNum"]
-            version = "EMERALD"
-            if "FireRed" in shared_label:
-                version = "FIRERED"
-            elif "LeafGreen" in shared_label:
-                version = "LEAFGREEN"
-            
-            self.WriteLine(f"#ifdef {version}")
 
             self.WriteLine("{", 1)
             self.WriteLine(f".mapGroup = {map_group},", 2)
@@ -209,7 +202,6 @@ class WildEncounterAssembler:
             
             self.WriteLine("},", 2)
             self.WriteLine("},", 1)
-            self.WriteLine(f"#endif")
         self.WriteTerminator()
         self.WriteLine("};")
 
@@ -250,12 +242,6 @@ class WildEncounterAssembler:
                 headers["data"][shared_label]["mapGroup"] = map_group
                 headers["data"][shared_label]["mapNum"] = map_num
 
-                version = "EMERALD"
-                if "FireRed" in shared_label:
-                    version = "FIRERED"
-                elif "LeafGreen" in shared_label:
-                    version = "LEAFGREEN"
-                self.WriteLine(f"#ifdef {version}")
                 for mon_type in self.config.mon_types:
                     if mon_type not in map_encounters:
                         headers["data"][shared_label][mon_type] = "NULL"
@@ -269,7 +255,6 @@ class WildEncounterAssembler:
                     self.WriteMonInfos(mon_array_name, mons, encounter_rate, mons_entry.get("encounter_rates"),
                         next((f.get("groups") for f in wild_encounter_group.get("fields", []) if f["type"] == mon_type), None))
                     headers["data"][shared_label][time][mon_type] = mon_array_name + "Info"
-                self.WriteLine(f"#endif")
 
             self.WritePokemonHeaders(headers)
 
