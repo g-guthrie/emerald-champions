@@ -62,7 +62,7 @@ Route111_OnTransition: @ 81F0D87
 	end
 
 Route111_EventScript_UpdateChanseyVisibility::
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_ShowChansey
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_NEEDS_HELP, Route111_EventScript_ShowChansey
 	setflag FLAG_HIDE_ROUTE111_CHANSEY
 	return
 
@@ -70,9 +70,10 @@ Route111_EventScript_ShowChansey:
 	clearflag FLAG_HIDE_ROUTE111_CHANSEY
 	return
 
-Route111_EventScript_UpdateNurseVisibility:
-	compare VAR_POKE_VIAL_MAX_CHARGES, 2
-	goto_if_lt Route111_EventScript_ShowNurse
+@ The nurse waits here until she has paid out the second dose.
+Route111_EventScript_UpdateNurseVisibility::
+	specialvar VAR_RESULT, IsChanseyVialRewardClaimed
+	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_ShowNurse
 	setflag FLAG_HIDE_ROUTE_111_NURSE
 	return
 
@@ -556,7 +557,7 @@ Route111_EventScript_ChanseyEscapeScene::
 	msgbox Route111_Text_DidYouSeeThat, MSGBOX_DEFAULT
 	giveitem ITEM_HEAL_BALL
 	msgbox Route111_Text_BlobGetInAnyHealBall, MSGBOX_DEFAULT
-	setvar VAR_CHANSEY_NURSE_STATE, 1
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ON_ROUTE112
 	removeobject LOCALID_CHANSEY
 	releaseall
 	end
@@ -634,20 +635,23 @@ Route111_Text_HealBallBagFull:
 	.string "a Heal Ball. Please make some space,\l"
 	.string "then come back!$"
 
+@ GetChanseyQuestStage is also what the Center local guide reads.
 Route111_EventScript_VialUpgradeNurse::
 	lockall
+Route111_EventScript_VialUpgradeNurseReply::
 	setvar VAR_0x8009, FALSE
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_CheckHealBallSpace
+	specialvar VAR_RESULT, GetChanseyQuestStage
+	goto_if_eq VAR_RESULT, CHANSEY_STAGE_NEEDS_HELP, Route111_EventScript_CheckHealBallSpace
 	faceplayer
-	compare VAR_CHANSEY_NURSE_STATE, 6
-	goto_if_eq Route111_EventScript_UpgradeVialHideNurse
+	goto_if_eq VAR_RESULT, CHANSEY_STAGE_CAUGHT, Route111_EventScript_UpgradeVialHideNurse
+Route111_EventScript_NurseAwaitsBlob::
 	msgbox Route111_Text_BringBlobBack, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route111_EventScript_UpgradeVialHideNurse::
 	msgbox Route111_Text_ThanksPlayer, MSGBOX_AUTOCLOSE
-	setvar VAR_POKE_VIAL_MAX_CHARGES, 2
+	setvar VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BLOB
 	setvar VAR_POKE_VIAL_CHARGES, 2
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 	compare VAR_RESULT, DIR_NORTH

@@ -6,8 +6,8 @@ Route133_MapScripts::
 	.byte 0
 
 Route133_OnTransition:
-	compare VAR_POKE_VIAL_MAX_CHARGES, 2
-	goto_if_eq Route133_ShowNurse
+	specialvar VAR_RESULT, IsRoute133VialUpgradeAvailable
+	goto_if_eq VAR_RESULT, TRUE, Route133_ShowNurse
 	goto Route133_HideNurse
 
 Route133_HideNurse:
@@ -68,7 +68,7 @@ Route133_EventScript_NurseGuideChansey::
 	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	msgbox Route133_Text_NurseDoneHaveVialUpgrade, MSGBOX_DEFAULT
-	setvar VAR_POKE_VIAL_MAX_CHARGES, 3
+	setvar VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_ROUTE133
 	setvar VAR_POKE_VIAL_CHARGES, 3
 	fadescreen FADE_TO_BLACK
 	waitse

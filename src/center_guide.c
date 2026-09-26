@@ -1,13 +1,11 @@
 #include "global.h"
 #include "center_guide.h"
 #include "event_data.h"
-#include "item.h"
 #include "overworld.h"
+#include "quest_states.h"
 #include "string_util.h"
 #include "constants/flags.h"
-#include "constants/items.h"
 #include "constants/region_map_sections.h"
-#include "constants/vars.h"
 
 // The Pokémon Center local guide is the game's built-in walkthrough: the
 // next story destination, the local side quests and (in legendary_signs.c)
@@ -57,27 +55,24 @@ static u32 CountGuideBadges(void)
     return count;
 }
 
+// Every quest state is read through include/quest_states.h, the same
+// predicates the quest scripts use, so the advice follows the quest.
 static bool32 IsGuideCheckActive(u8 check)
 {
-    u16 nurseState = VarGet(VAR_CHANSEY_NURSE_STATE);
-    u16 vialCharges = VarGet(VAR_POKE_VIAL_MAX_CHARGES);
-
     switch (check)
     {
     case CENTER_GUIDE_CHECK_BLOB_LOST:
-        return nurseState == 0 && vialCharges < 2;
+        return GetChanseyQuestStage() == CHANSEY_STAGE_NEEDS_HELP;
     case CENTER_GUIDE_CHECK_BLOB_CHASE:
-        return nurseState >= 1 && nurseState <= 5 && vialCharges < 2;
+        return GetChanseyQuestStage() == CHANSEY_STAGE_CHASE;
     case CENTER_GUIDE_CHECK_BLOB_FOUND:
-        return nurseState == 6 && vialCharges < 2;
+        return IsChanseyVialRewardAvailable();
     case CENTER_GUIDE_CHECK_VIAL_ROUTE133:
-        return vialCharges == 2;
+        return IsRoute133VialUpgradeAvailable();
     case CENTER_GUIDE_CHECK_TRICK_HOUSE:
-        return VarGet(VAR_TRICK_HOUSE_LEVEL) < 8;
+        return !IsTrickHouseComplete();
     case CENTER_GUIDE_CHECK_ODD_KEYSTONE:
-        // Picked up (its object flag is set) and no longer carried: spent.
-        return !FlagGet(FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE)
-            || CheckBagHasItem(ITEM_ODD_KEYSTONE, 1) || CheckPCHasItem(ITEM_ODD_KEYSTONE, 1);
+        return !IsOddKeystoneSpent();
     default:
         return TRUE;
     }
@@ -146,8 +141,8 @@ static const struct
     {FLAG_WALLACE_GOES_TO_SKY_PILLAR, COMPOUND_STRING("Sootopolis City sits inside the\ncrater on Route 126. Dive\lbelow it to find the way in.\pMeet Steven there, then find\nWallace in the Cave of Origin.")},
 };
 
-// Sky Pillar and the calm that follows: VAR_SOOTOPOLIS_CITY_STATE counts
-// Wallace's walk (3-4), Rayquaza's awakening (5) and Juan's badge (6).
+// Sky Pillar and the calm that follows (the Sootopolis crisis, see
+// SOOTOPOLIS_STATE_* in constants/quest_states.h).
 static const u8 sText_GuideSkyPillar[] = _("Wallace is waiting at Sky\nPillar on Route 131. Climb to\lthe top and wake Rayquaza.\pThe cracked floors inside call\nfor a Mach Bike.");
 static const u8 sText_GuideLeaders[] = _("Rayquaza calmed the skies!\nBack in Sootopolis, hear what\lMaxie and Archie have to say.");
 static const u8 sText_GuideWaterfall[] = _("Wallace is waiting for you in\nSootopolis City.");
@@ -161,7 +156,7 @@ static const u8 *GetCenterGuideStoryText(void)
         if (!FlagGet(sCenterGuideStory[i].flag))
             return sCenterGuideStory[i].text;
     }
-    if (VarGet(VAR_SOOTOPOLIS_CITY_STATE) < 5)
+    if (!HasRayquazaCalmedSootopolis())
         return sText_GuideSkyPillar;
     if (!FlagGet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE))
         return sText_GuideLeaders;

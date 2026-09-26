@@ -50,22 +50,22 @@ SootopolisCity_EventScript_LockGymDoor:: @ 81E56E5
 
 SootopolisCity_OnTransition: @ 81E56EF
 	setflag FLAG_VISITED_SOOTOPOLIS_CITY
-	compare VAR_SOOTOPOLIS_CITY_STATE, 1
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH
 	call_if_eq SootopolisCity_EventScript_HideMapNamePopup
 	compare VAR_SKY_PILLAR_STATE, 1
 	call_if_eq SootopolisCity_EventScript_HideMapNamePopup
 	call SootopolisCity_EventScript_SetWeather
 	call SootopolisCity_EventScript_SetLayout
 	call SootopolisCity_EventScript_SetBattleSpectators
-	compare VAR_SOOTOPOLIS_CITY_STATE, 2
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN
 	call_if_eq SootopolisCity_EventScript_CheckSetEnterCaveOfOriginObjPos
-	compare VAR_SOOTOPOLIS_CITY_STATE, 3
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_TO_SKY_PILLAR
 	call_if_eq SootopolisCity_EventScript_CheckSetEnterCaveOfOriginObjPos
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	call_if_eq SootopolisCity_EventScript_SetExitCaveOfOriginObjPos
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	call_if_eq SootopolisCity_EventScript_SetOutsideGymObjPos
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	call_if_eq SootopolisCity_EventScript_SetExpertUnblockCaveEntrance
 	end
 
@@ -74,8 +74,8 @@ SootopolisCity_EventScript_HideMapNamePopup:: @ 81E5781
 	return
 
 SootopolisCity_EventScript_SetBattleSpectators:: @ 81E5785
-	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 0, Common_EventScript_NopReturn
-	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, 6, Common_EventScript_NopReturn
+	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_CALM, Common_EventScript_NopReturn
+	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN, Common_EventScript_NopReturn
 SootopolisCity_EventScript_PlaceBattleSpectators::
 	setobjectxyperm LOCALID_KIRI, 13, 48
 	setobjectxyperm LOCALID_BOY_1, 46, 32
@@ -88,11 +88,11 @@ SootopolisCity_EventScript_PlaceBattleSpectators::
 	return
 
 SootopolisCity_EventScript_SetLayout:: @ 81E57B2
-	compare VAR_SOOTOPOLIS_CITY_STATE, 0
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_CALM
 	goto_if_eq SootopolisCity_EventScript_SetNormalLayout
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_SetNormalLayout
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	goto_if_le SootopolisCity_EventScript_SetLegendariesLayout
 	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_le SootopolisCity_EventScript_SetLegendariesLayout
@@ -106,11 +106,11 @@ SootopolisCity_EventScript_SetLegendariesLayout:: @ 81E5801
 	return
 
 SootopolisCity_EventScript_SetWeather:: @ 81E5805
-	compare VAR_SOOTOPOLIS_CITY_STATE, 0
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_CALM
 	goto_if_eq SootopolisCity_EventScript_SetNormalWeather
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_SetNormalWeather
-	compare VAR_SOOTOPOLIS_CITY_STATE, 1
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH
 	goto_if_eq SootopolisCity_EventScript_SetDownpour
 	compare VAR_SKY_PILLAR_STATE, 1
 	goto_if_eq SootopolisCity_EventScript_SetDownpour
@@ -173,7 +173,7 @@ SootopolisCity_EventScript_SetExpertUnblockCaveEntrance:: @ 81E58D3
 	return
 
 SootopolisCity_OnWarp: @ 81E58DB
-	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_PlayerFaceLegendaries
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE, SootopolisCity_EventScript_PlayerFaceLegendaries
 	.2byte 0
 
 SootopolisCity_EventScript_PlayerFaceLegendaries:: @ 81E58E5
@@ -197,7 +197,7 @@ SootopolisCity_OnResume: @ 81E590B
 	end
 
 SootopolisCity_OnFrame: @ 81E5914
-	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 1, SootopolisCity_EventScript_StartLegendariesScene
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH, SootopolisCity_EventScript_StartLegendariesScene
 	map_script_2 VAR_SKY_PILLAR_STATE, 1, SootopolisCity_EventScript_StartRayquazaScene
 	.2byte 0
 
@@ -276,7 +276,7 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanBackToPokeCenter
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_SOOTOPOLIS_CITY_STATE, 2
+	setvar VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	releaseall
 	end
@@ -375,7 +375,7 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanBackToDive
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_SOOTOPOLIS_CITY_STATE, 2
+	setvar VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	releaseall
 	end
@@ -657,11 +657,11 @@ SootopolisCity_Movement_PlayerApproachLegendaries: @ 81E5E68
 SootopolisCity_EventScript_CaveOfOriginExpert:: @ 81E5E8D
 	lock
 	faceplayer
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_ExpertPostLegendaries
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_ExpertLegendaries
-	compare VAR_SOOTOPOLIS_CITY_STATE, 2
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN
 	goto_if_ge SootopolisCity_EventScript_ExpertLeadToCave
 	msgbox SootopolisCity_Text_CaveOfOriginPleaseLeave, MSGBOX_DEFAULT
 	release
@@ -685,11 +685,11 @@ SootopolisCity_EventScript_ExpertLegendaries:: @ 81E5ECE
 SootopolisCity_EventScript_Kiri:: @ 81E5ED8
 	lock
 	faceplayer
-	compare VAR_SOOTOPOLIS_CITY_STATE, 1
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH
 	goto_if_le SootopolisCity_EventScript_KiriGiveBerry
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_KiriGiveBerry
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_KiriRayquaza
 	msgbox SootopolisCity_Text_BigPokemonFighting, MSGBOX_DEFAULT
 	closemessage
@@ -750,7 +750,7 @@ SootopolisCity_EventScript_Woman2:: @ 81E5FE2
 	lockall
 	applymovement LOCALID_WOMAN_2, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_Woman2Rayquaza
 	msgbox SootopolisCity_Text_WeatherWentWild, MSGBOX_DEFAULT
 	closemessage
@@ -767,7 +767,7 @@ SootopolisCity_EventScript_Woman2Rayquaza:: @ 81E600D
 SootopolisCity_EventScript_Man:: @ 81E6017
 	lock
 	faceplayer
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_ManPostLegendaries
 	msgbox SootopolisCity_Text_NoOrdinaryTourist, MSGBOX_DEFAULT
 	release
@@ -781,11 +781,11 @@ SootopolisCity_EventScript_ManPostLegendaries:: @ 81E602E
 SootopolisCity_EventScript_Woman1:: @ 81E6038
 	lock
 	faceplayer
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_Woman1PostLegendaries
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_Woman1Rayquaza
-	compare VAR_SOOTOPOLIS_CITY_STATE, 2
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN
 	goto_if_ge SootopolisCity_EventScript_Woman1Legendaries
 	msgbox SootopolisCity_Text_SootopolisSkyBeautiful, MSGBOX_DEFAULT
 	release
@@ -813,11 +813,11 @@ SootopolisCity_EventScript_NinjaBoy:: @ 81E608E
 	lockall
 	applymovement LOCALID_NINJA_BOY, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_NinjaBoyRayquaza
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_NinjaBoyNormal
-	compare VAR_SOOTOPOLIS_CITY_STATE, 1
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH
 	goto_if_le SootopolisCity_EventScript_NinjaBoyNormal
 	msgbox SootopolisCity_Text_ThisIsWicked, MSGBOX_DEFAULT
 	closemessage
@@ -840,12 +840,12 @@ SootopolisCity_EventScript_Boy1:: @ 81E60E3
 	lockall
 	applymovement LOCALID_BOY_1, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_Boy1Rayquaza
 	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_EventScript_Boy1GameClear
-	compare VAR_SOOTOPOLIS_CITY_STATE, 6
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN
 	goto_if_ge SootopolisCity_EventScript_Boy1Normal
-	compare VAR_SOOTOPOLIS_CITY_STATE, 1
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH
 	goto_if_le SootopolisCity_EventScript_Boy1Normal
 	msgbox SootopolisCity_Text_GiantPokemonSuddenlyAppeared, MSGBOX_DEFAULT
 	closemessage
@@ -886,11 +886,11 @@ SootopolisCity_EventScript_Steven:: @ 81E6166
 	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
 	call_if_unset FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN, SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin
-	compare VAR_SOOTOPOLIS_CITY_STATE, 2
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN
 	goto_if_eq SootopolisCity_EventScript_StevenHelpWallace
-	compare VAR_SOOTOPOLIS_CITY_STATE, 3
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_TO_SKY_PILLAR
 	goto_if_eq SootopolisCity_EventScript_StevenHelpedWallace
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	goto_if_eq SootopolisCity_EventScript_StevenHelpedWallace
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_StevenMaxieArchieLeft
 	msgbox SootopolisCity_Text_SoThatsRayquaza, MSGBOX_DEFAULT
@@ -1320,7 +1320,7 @@ SootopolisCity_EventScript_Boy2:: @ 81E635D
 	lockall
 	applymovement LOCALID_BOY_2, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_Boy2Rayquaza
 	msgbox SootopolisCity_Text_TwoPokemonArentAngry, MSGBOX_DEFAULT
 	closemessage
@@ -1337,7 +1337,7 @@ SootopolisCity_EventScript_Boy2Rayquaza:: @ 81E6388
 
 SootopolisCity_EventScript_BlackBelt:: @ 81E6393
 	lockall
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_BlackBeltRayquaza
 	msgbox SootopolisCity_Text_GoRedAndBlueMon, MSGBOX_DEFAULT
 	closemessage
@@ -1361,7 +1361,7 @@ SootopolisCity_EventScript_Girl:: @ 81E63DB
 	lockall
 	applymovement LOCALID_GIRL, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_GirlRayquaza
 	msgbox SootopolisCity_Text_SootopolisWillBeWrecked, MSGBOX_DEFAULT
 	closemessage
@@ -1380,7 +1380,7 @@ SootopolisCity_EventScript_Maniac:: @ 81E6411
 	lockall
 	applymovement LOCALID_MANIAC, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_ManiacRayquaza
 	msgbox SootopolisCity_Text_SeeingLegendWithOwnEyes, MSGBOX_DEFAULT
 	closemessage
@@ -1397,7 +1397,7 @@ SootopolisCity_EventScript_ManiacRayquaza:: @ 81E643C
 SootopolisCity_EventScript_Wallace:: @ 81E6446
 	lock
 	faceplayer
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	goto_if_eq SootopolisCity_EventScript_GoToSkyPillar
 	goto_if_set FLAG_RECEIVED_HM07, SootopolisCity_EventScript_GoToGym
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SootopolisCity_EventScript_GiveWaterfall
@@ -1455,7 +1455,7 @@ SootopolisCity_Movement_WallaceMoveFromGymWest: @ 81E64EF
 
 SootopolisCity_EventScript_Maxie:: @ 81E64F2
 	lockall
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_MaxieRayquaza
 	msgbox SootopolisCity_Text_GroudonPleaseStop, MSGBOX_DEFAULT
 	closemessage
@@ -1471,7 +1471,7 @@ SootopolisCity_EventScript_MaxieRayquaza:: @ 81E6509
 
 SootopolisCity_EventScript_Archie:: @ 81E651F
 	lockall
-	compare VAR_SOOTOPOLIS_CITY_STATE, 5
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE
 	goto_if_eq SootopolisCity_EventScript_ArchieRayquaza
 	msgbox SootopolisCity_Text_KyogreCalmDown, MSGBOX_DEFAULT
 	closemessage

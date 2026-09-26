@@ -854,7 +854,7 @@
       "y": 102,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "0",
+      "var_value": "CHANSEY_NURSE_NEEDS_HELP",
       "script": "Route111_EventScript_ChanseyBlob"
     },
     {
@@ -863,7 +863,7 @@
       "y": 102,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "0",
+      "var_value": "CHANSEY_NURSE_NEEDS_HELP",
       "script": "Route111_EventScript_ChanseyBlob"
     },
     {
@@ -872,7 +872,7 @@
       "y": 103,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "0",
+      "var_value": "CHANSEY_NURSE_NEEDS_HELP",
       "script": "Route111_EventScript_ChanseyBlob"
     },
     {
@@ -881,7 +881,7 @@
       "y": 101,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "0",
+      "var_value": "CHANSEY_NURSE_NEEDS_HELP",
       "script": "Route111_EventScript_ChanseyBlobGap"
     },
     {
@@ -890,7 +890,7 @@
       "y": 100,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "0",
+      "var_value": "CHANSEY_NURSE_NEEDS_HELP",
       "script": "Route111_EventScript_ChanseyBlobGap"
     }
   ],

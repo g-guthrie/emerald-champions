@@ -11,7 +11,7 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
 	giveitem ITEM_POKE_VIAL, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	setvar VAR_POKE_VIAL_MAX_CHARGES, 1
+	setvar VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE
 	setvar VAR_POKE_VIAL_CHARGES, 1
 	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1

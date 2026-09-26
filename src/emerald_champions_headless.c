@@ -22,6 +22,7 @@
 #include "item_use.h"
 #include "berry.h"
 #include "mega_stone_rewards.h"
+#include "constants/quest_states.h"
 #include "constants/berry.h"
 #include "load_save.h"
 #include "event_object_movement.h"
@@ -411,7 +412,7 @@ static void PrepareBookResearchScene(void)
     {
     case 0:
         FlagSet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
-        VarSet(VAR_CHANSEY_NURSE_STATE, 7);
+        VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_RETIRED);
         FlagClear(FLAG_EC_CAUGHT_MOLTRES);
         LoadHeadlessMap(MAP_EMBER_PATH, 21, 15);
         break;
@@ -439,7 +440,7 @@ static void PrepareBookResearchScene(void)
         LoadHeadlessMap(MAP_SLATEPORT_CITY_HARBOR, 6, 14);
         break;
     case 4:
-        VarSet(VAR_CHANSEY_NURSE_STATE, 7);
+        VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_RETIRED);
         FlagSet(FLAG_EC_RESOLVED_MOLTRES);
         if (!missing)
             FlagSet(FLAG_EC_SURVEYED_DESERT_DEPTHS);
@@ -544,7 +545,7 @@ static void PrepareBookResearchScene(void)
         AddBagItem(ITEM_LEVELER, 1);
         AddBagItem(ITEM_REPEL_SPRAY, 1);
         AddBagItem(ITEM_FLIGHT_BEACON, 1);
-        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+        VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
         LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 4);
         break;
     case 19:
@@ -629,7 +630,7 @@ static void PrepareBookResearchScene(void)
         if (!missing)
             for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
                 AddBagItem(tools[i], 1);
-        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+        VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
         FlagSet(FLAG_EC_EARNED_SS_TICKET);
         FlagSet(FLAG_EC_EARNED_EON_TICKET);
         FlagSet(FLAG_EC_EARNED_OLD_SEA_MAP);
@@ -2133,7 +2134,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             AddBagItem(ITEM_LEVELER, 1);
             AddBagItem(ITEM_REPEL_SPRAY, 1);
             AddBagItem(ITEM_FLIGHT_BEACON, 1);
-            VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+            VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
             VarSet(VAR_POKE_VIAL_CHARGES, 1);
             PrepareCircuitParty();
         }
@@ -2438,7 +2439,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 AddBagItem(ITEM_LEVELER, 1);
                 AddBagItem(ITEM_REPEL_SPRAY, 1);
                 AddBagItem(ITEM_FLIGHT_BEACON, 1);
-                VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+                VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
                 if (scene == 254 || scene == 255 || scene == 256 || scene == 270)
                 {
                     struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GREAT_BALL)];
@@ -2714,7 +2715,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE);
                 FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS);
                 FlagSet(FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE);
-                VarSet(VAR_SOOTOPOLIS_CITY_STATE, 6);
+                VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN);
                 VarSet(VAR_SKY_PILLAR_STATE, 3);
                 VarSet(VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE, 1);
                 if (param <= 242)
@@ -2770,32 +2771,32 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_MET_ARCHIE_SOOTOPOLIS);
                 FlagClear(FLAG_MET_MAXIE_SOOTOPOLIS);
                 FlagClear(FLAG_RECEIVED_HM_WATERFALL);
-                VarSet(VAR_SOOTOPOLIS_CITY_STATE, 1);
+                VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH);
                 VarSet(VAR_SKY_PILLAR_STATE, 0);
                 VarSet(VAR_SOOTOPOLIS_WALLACE_STATE, 0);
                 if (param <= 214)
                     LoadHeadlessMap(MAP_SOOTOPOLIS_CITY, param == 213 ? 29 : 43, param == 213 ? 53 : 32);
                 else if (param <= 216)
                 {
-                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 2);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN);
                     LoadHeadlessMap(MAP_SOOTOPOLIS_CITY, param == 215 ? 21 : 20, param == 215 ? 36 : 37);
                 }
                 else if (param == 217)
                 {
-                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 2);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN);
                     FlagClear(FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE);
                     LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_B1F, 9, 14);
                 }
                 else if (param == 218)
                 {
-                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 3);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_TO_SKY_PILLAR);
                     FlagSet(FLAG_WALLACE_GOES_TO_SKY_PILLAR);
                     FlagClear(FLAG_HIDE_SKY_PILLAR_WALLACE);
                     LoadHeadlessMap(MAP_SKY_PILLAR_OUTSIDE, 17, 14);
                 }
                 else if (param == 219)
                 {
-                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 4);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN);
                     VarSet(VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE, 0);
                     FlagClear(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA);
                     FlagSet(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL);
@@ -2803,7 +2804,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (param <= 223)
                 {
-                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 5);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_RAYQUAZA_AWAKE);
                     VarSet(VAR_SKY_PILLAR_STATE, param <= 221 ? 1 : 3);
                     FlagSet(FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN);
                     FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE);
@@ -2835,7 +2836,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 {
                     FlagClear(FLAG_SYS_CLOCK_SET);
                     FlagClear(FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY);
-                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 6);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_GYM_BEATEN);
                     if (param == 230)
                     {
                         struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_CHERI_BERRY)];
@@ -2910,7 +2911,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_HIDE_ROUTE_128_MAXIE);
                 VarSet(VAR_SEAFLOOR_CAVERN_STATE, 0);
                 VarSet(VAR_ROUTE128_STATE, 0);
-                VarSet(VAR_SOOTOPOLIS_CITY_STATE, 0);
+                VarSet(VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_CALM);
                 VarSet(VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 0);
                 ClearTrainerFlag(TRAINER_ARCHIE);
                 if (gEcHeadlessFixtureParam >= 200)
@@ -3087,7 +3088,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                             SetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HP, &hp);
                         }
                         AddBagItem(ITEM_POKE_VIAL, 1);
-                        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 2);
+                        VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BLOB);
                         VarSet(VAR_POKE_VIAL_CHARGES, 0);
                         SetTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_5);
                         SetTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_7);
@@ -3655,45 +3656,45 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 switch (gEcHeadlessFixtureParam)
                 {
                 case 49:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 0);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_NEEDS_HELP);
                     LoadHeadlessMap(MAP_ROUTE111, 19, 103);
                     break;
                 case 50:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 1);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ON_ROUTE112);
                     LoadHeadlessMap(MAP_ROUTE112, 25, 32);
                     break;
                 case 51:
                 case 54:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 2);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ON_JAGGED_PASS);
                     LoadHeadlessMap(MAP_JAGGED_PASS, gEcHeadlessFixtureParam == 51 ? 11 : 12,
                         gEcHeadlessFixtureParam == 51 ? 29 : 28);
                     break;
                 case 52:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 3);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_IN_ASHEN_WOODS);
                     LoadHeadlessMap(MAP_ASHEN_WOODS, 14, 30);
                     break;
                 case 53:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 4);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ASHEN_WOODS_WEST);
                     LoadHeadlessMap(MAP_ASHEN_WOODS, 7, 39);
                     break;
                 case 55:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 3);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_IN_ASHEN_WOODS);
                     LoadHeadlessMap(MAP_ASHEN_WOODS, 17, 29);
                     break;
                 case 56:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 4);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ASHEN_WOODS_WEST);
                     LoadHeadlessMap(MAP_ASHEN_WOODS, 6, 35);
                     break;
                 case 57:
                 case 58:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 5);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ASHEN_WOODS_EAST);
                     if (gEcHeadlessFixtureParam == 58)
                         RemoveBagItem(ITEM_HEAL_BALL, 1);
                     LoadHeadlessMap(MAP_ASHEN_WOODS, 27, 44);
                     break;
                 case 59:
-                    VarSet(VAR_CHANSEY_NURSE_STATE, 6);
-                    VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+                    VarSet(VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_CAUGHT);
+                    VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
                     VarSet(VAR_POKE_VIAL_CHARGES, 0);
                     LoadHeadlessMap(MAP_ROUTE111, 19, 102);
                     break;

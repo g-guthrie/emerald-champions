@@ -86,7 +86,16 @@ void TryGiveSelectedLegendarySignReward(void);
 void CreateEmeraldChampionsStaticLegendaryEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
 void BufferNextCenterLegendaryLead(void);
-u16 GetHeatranDiscoveryState(void);
+// Heatran in Scorched Slab. ScorchedSlab_HeatransRoom clears
+// FLAG_DEFEATED_HEATRAN (its object's hide flag) when the Magma Stone wakes
+// it and sets it again when the battle ends.
+enum HeatranDiscoveryState
+{
+    HEATRAN_DISCOVERY_DORMANT, // Not awake yet, or gone after its battle.
+    HEATRAN_DISCOVERY_AWAKE,
+    HEATRAN_DISCOVERY_CAUGHT,
+};
+enum HeatranDiscoveryState GetHeatranDiscoveryState(void);
 const u8 *GetLegendaryDisplayName(enum Species species);
 void TryUnlockLocalLegendaryDiscovery(void);
 void ResetLegendaryEncounterVisits(void);

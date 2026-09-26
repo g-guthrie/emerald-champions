@@ -14,7 +14,7 @@ Route129_OnLoad: @ 81F7294
 Route129_OnTransition: @ 81F72AB
 	compare VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	call_if_eq AbnormalWeather_EventScript_HideMapNamePopup
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	call_if_ge Route129_EventScript_CheckSetAbnormalWeather
 	compare VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_129_WEST
 	call_if_eq AbnormalWeather_StartKyogreWeather

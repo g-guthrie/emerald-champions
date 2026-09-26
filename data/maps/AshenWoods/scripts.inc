@@ -15,17 +15,22 @@ AshenWoods_OnTransition::
 	setflag FLAG_HIDE_ASHEN_WOODS_POKE_BALL
 	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call_if_eq AshenWoods_EventScript_SetWeatherAsh
-	goto_if_lt VAR_CHANSEY_NURSE_STATE, 3, AshenWoods_EventScript_HideChansey
-	goto_if_gt VAR_CHANSEY_NURSE_STATE, 5, AshenWoods_EventScript_HideChansey
-	clearflag FLAG_HIDE_ASHEN_WOODS_CHANSEY
+	call AshenWoods_EventScript_UpdateChanseyVisibility
 	switch VAR_CHANSEY_NURSE_STATE
-	case 4, AshenWoods_EventScript_ChanseySetPos1
-	case 5, AshenWoods_EventScript_ChanseySetPos2
+	case CHANSEY_NURSE_BLOB_ASHEN_WOODS_WEST, AshenWoods_EventScript_ChanseySetPos1
+	case CHANSEY_NURSE_BLOB_ASHEN_WOODS_EAST, AshenWoods_EventScript_ChanseySetPos2
 	end
+
+@ Blob is here from the woods' entrance until it is caught.
+AshenWoods_EventScript_UpdateChanseyVisibility::
+	goto_if_lt VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_IN_ASHEN_WOODS, AshenWoods_EventScript_HideChansey
+	goto_if_gt VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ASHEN_WOODS_EAST, AshenWoods_EventScript_HideChansey
+	clearflag FLAG_HIDE_ASHEN_WOODS_CHANSEY
+	return
 
 AshenWoods_EventScript_HideChansey:
 	setflag FLAG_HIDE_ASHEN_WOODS_CHANSEY
-	end
+	return
 
 AshenWoods_EventScript_SetWeatherAsh::
 	setweather WEATHER_VOLCANIC_ASH
@@ -53,7 +58,7 @@ AshenWoods_EventScript_ChanseyTrigger::
 	applymovement LOCALID_CHANSEY, AshenWoods_Movement_ChanseyEscape1
 	waitmovement 0
 	call AshenWoods_EventScript_ChanseySetPos1
-	setvar VAR_CHANSEY_NURSE_STATE, 4
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ASHEN_WOODS_WEST
 	releaseall
 	end
 
@@ -74,7 +79,7 @@ AshenWoods_EventScript_ChanseyTrigger2::
 	applymovement LOCALID_CHANSEY, AshenWoods_Movement_ChanseyEscape2
 	waitmovement 0
 	call AshenWoods_EventScript_ChanseySetPos2
-	setvar VAR_CHANSEY_NURSE_STATE, 5
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ASHEN_WOODS_EAST
 	releaseall
 	end
 
@@ -117,7 +122,7 @@ AshenWoods_EventScript_Chansey::
 	waitse
 	msgbox AshenWoods_Text_BlobCaught, MSGBOX_DEFAULT
 	removeobject LOCALID_POKE_BALL
-	setvar VAR_CHANSEY_NURSE_STATE, 6
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_CAUGHT
 	releaseall
 	end
 

@@ -26,7 +26,7 @@ JaggedPass_EventScript_SetReadyToOpenHideout:: @ 8230685
 JaggedPass_OnTransition: @ 823068B
 	compare VAR_JAGGED_PASS_ASH_WEATHER, 1
 	call_if_eq JaggedPass_EventScript_SetWeatherAsh
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 2, JaggedPass_EventScript_ShowChansey
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ON_JAGGED_PASS, JaggedPass_EventScript_ShowChansey
 	setflag FLAG_HIDE_JAGGED_PASS_CHANSEY
 	end
 
@@ -121,7 +121,7 @@ JaggedPass_EventScript_Chansey::
 	applymovement LOCALID_CHANSEY, JaggedPass_Movement_ChanseyEscape
 	waitmovement 0
 	removeObject LOCALID_CHANSEY
-	setvar VAR_CHANSEY_NURSE_STATE, 3
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_IN_ASHEN_WOODS
 	releaseall
 	end
 
@@ -138,7 +138,7 @@ JaggedPass_EventScript_ChanseyShove::
 	waitmovement 0
 	waitmovement LOCALID_CHANSEY
 	removeObject LOCALID_CHANSEY
-	setvar VAR_CHANSEY_NURSE_STATE, 3
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_IN_ASHEN_WOODS
 	releaseall
 	end
 

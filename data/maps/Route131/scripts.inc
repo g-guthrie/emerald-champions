@@ -3,7 +3,7 @@ Route131_MapScripts:: @ 81F7404
 	.byte 0
 
 Route131_OnTransition: @ 81F740A
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	call_if_ge Route131_EventScript_CheckSetAbnormalWeather
 	call Route131_EventScript_SetLayout
 	end

@@ -88,7 +88,7 @@
 #define VAR_FANCLUB_FAN_COUNTER                          0x4041
 #define VAR_FANCLUB_LOSE_FAN_TIMER                       0x4042
 #define VAR_DEPT_STORE_FLOOR                             0x4043
-#define VAR_TRICK_HOUSE_LEVEL                            0x4044
+#define VAR_TRICK_HOUSE_LEVEL                            0x4044 // Puzzles solved, up to TRICK_HOUSE_ALL_SOLVED (constants/quest_states.h)
 #define VAR_POKELOT_PRIZE_ITEM                           0x4045
 #define VAR_NATIONAL_DEX                                 0x4046
 #define VAR_SEEDOT_SIZE_RECORD                           0x4047
@@ -114,10 +114,10 @@
 #define VAR_FORTREE_CITY_STATE                           0x405B // Unused Var
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
-#define VAR_SOOTOPOLIS_CITY_STATE                        0x405E
+#define VAR_SOOTOPOLIS_CITY_STATE                        0x405E // SOOTOPOLIS_STATE_* (constants/quest_states.h)
 #define VAR_EVER_GRANDE_CITY_STATE                       0x405F // Unused Var
 #define VAR_ROUTE101_STATE                               0x4060
-#define VAR_CHANSEY_NURSE_STATE                          0x4061 // 0-6: Chansey chase, 7: second Vial charge claimed.
+#define VAR_CHANSEY_NURSE_STATE                          0x4061 // CHANSEY_NURSE_* (constants/quest_states.h)
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
 #define VAR_ROUTE105_STATE                               0x4064 // Unused Var
@@ -178,7 +178,7 @@
 #define VAR_PETALBURG_WOODS_STATE                        0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE                 0x4099
 #define VAR_RUSTURF_TUNNEL_STATE                         0x409A
-#define VAR_POKE_VIAL_MAX_CHARGES                        0x409B // Charges restored by a Pokémon Center.
+#define VAR_POKE_VIAL_MAX_CHARGES                        0x409B // Charges restored by a Pokémon Center: POKE_VIAL_CAPACITY_* (constants/quest_states.h)
 #define VAR_ELITE_4_STATE                                0x409C
 #define VAR_LEGENDARY_SIGNS_CAUGHT_4                     0x409D // Append-only Sign IDs 64-79.
 #define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE      0x409E

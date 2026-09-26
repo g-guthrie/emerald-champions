@@ -9,7 +9,7 @@ Route112_MapScripts:: @ 81F1DA8
 Route112_OnTransition: @ 81F1DAE
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
-	goto_if_eq VAR_CHANSEY_NURSE_STATE, 1, Route112_EventScript_ShowChansey
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ON_ROUTE112, Route112_EventScript_ShowChansey
 	setflag FLAG_HIDE_ROUTE112_CHANSEY
 	end
 
@@ -64,7 +64,7 @@ Route112_EventScript_ChanseyBlob::
 	waitmoncry
 	applymovement LOCALID_CHANSEY, Route112_Movement_ChanseyEscape
 	waitmovement 0
-	setvar VAR_CHANSEY_NURSE_STATE, 2
+	setvar VAR_CHANSEY_NURSE_STATE, CHANSEY_NURSE_BLOB_ON_JAGGED_PASS
 	removeobject LOCALID_CHANSEY
 	releaseall
 	end

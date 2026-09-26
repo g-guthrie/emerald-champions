@@ -869,3 +869,9 @@ gSpecials::
 	def_special CanReceiveBerryPair
 
 	def_special BufferWeatherAnomalyReport
+
+	def_special GetChanseyQuestStage
+
+	def_special IsChanseyVialRewardClaimed
+
+	def_special IsRoute133VialUpgradeAvailable
