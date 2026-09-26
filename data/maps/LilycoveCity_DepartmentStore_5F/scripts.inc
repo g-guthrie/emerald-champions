@@ -7,9 +7,9 @@ LilycoveCity_DepartmentStore_5F_MapScripts:: @ 821FF7A
 @ During the abnormal weather from Kyogre/Groudon awakening the dept store rooftop is inaccessible
 @ Likely done to avoid dealing with showing the weather. Technically the rooftop is indoors
 LilycoveCity_DepartmentStore_5F_OnWarp: @ 821FF80
-	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 1, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
-	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 2, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
-	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, 3, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_CLASH, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_LEGENDS_SEEN, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
+	map_script_2 VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_TO_SKY_PILLAR, LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs
 	.2byte 0
 
 LilycoveCity_DepartmentStore_5F_EventScript_BlockRoofStairs:: @ 821FF9A
@@ -129,9 +129,9 @@ LilycoveCity_DepartmentStore_5F_EventScript_Woman:: @ 8220075
 	lockall
 	applymovement LOCALID_WOMAN, Common_Movement_FacePlayer
 	waitmovement 0
-	compare VAR_SOOTOPOLIS_CITY_STATE, 0
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_CALM
 	goto_if_eq LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal
-	compare VAR_SOOTOPOLIS_CITY_STATE, 4
+	compare VAR_SOOTOPOLIS_CITY_STATE, SOOTOPOLIS_STATE_SKY_PILLAR_OPEN
 	goto_if_ge LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal
 	goto LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather
 	end

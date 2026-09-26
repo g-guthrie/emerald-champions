@@ -241,7 +241,7 @@
       "y": 31,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "1",
+      "var_value": "CHANSEY_NURSE_BLOB_ON_ROUTE112",
       "script": "Route112_EventScript_ChanseyBlob"
     },
     {
@@ -250,7 +250,7 @@
       "y": 30,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "1",
+      "var_value": "CHANSEY_NURSE_BLOB_ON_ROUTE112",
       "script": "Route112_EventScript_ChanseyBlob"
     },
     {
@@ -259,7 +259,7 @@
       "y": 30,
       "elevation": 0,
       "var": "VAR_CHANSEY_NURSE_STATE",
-      "var_value": "1",
+      "var_value": "CHANSEY_NURSE_BLOB_ON_ROUTE112",
       "script": "Route112_EventScript_ChanseyBlob"
     }
   ],

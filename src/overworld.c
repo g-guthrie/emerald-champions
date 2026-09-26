@@ -77,6 +77,7 @@
 #include "vs_seeker.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
+#include "constants/quest_states.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/layouts.h"
@@ -391,7 +392,7 @@ void DoWhiteOut(void)
 {
     RunScriptImmediately(EventScript_WhiteOut);
     HealPlayerParty();
-    if (VarGet(VAR_POKE_VIAL_MAX_CHARGES) != 0)
+    if (VarGet(VAR_POKE_VIAL_MAX_CHARGES) != POKE_VIAL_CAPACITY_NONE)
         VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_MAX_CHARGES));
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();
@@ -1151,7 +1152,7 @@ static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
         case MAP_NUM(MAP_ROUTE128):
             return TRUE;
         default:
-            if (VarGet(VAR_SOOTOPOLIS_CITY_STATE) < 4)
+            if (VarGet(VAR_SOOTOPOLIS_CITY_STATE) < SOOTOPOLIS_STATE_SKY_PILLAR_OPEN)
                 return FALSE;
             switch (warp->mapNum)
             {

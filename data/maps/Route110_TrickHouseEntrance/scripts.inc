@@ -37,7 +37,7 @@ Route110_TrickHouseEntrance_OnTransition: @ 8269A60
 
 Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward:: @ 8269AD7
 	setvar VAR_TRICK_HOUSE_BEING_WATCHED_STATE, 1
-	compare VAR_TRICK_HOUSE_LEVEL, 8
+	compare VAR_TRICK_HOUSE_LEVEL, TRICK_HOUSE_ALL_SOLVED
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_ReadyToGiveTentReward
 	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 2
 	end
@@ -68,7 +68,7 @@ Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle:: @ 8269B03
 	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle7
 	compare VAR_TRICK_HOUSE_LEVEL, 7
 	call_if_eq Route110_TrickHouseEntrance_EventScript_CheckReadyForPuzzle8
-	compare VAR_TRICK_HOUSE_LEVEL, 8
+	compare VAR_TRICK_HOUSE_LEVEL, TRICK_HOUSE_ALL_SOLVED
 	call_if_eq Route110_TrickHouseEntrance_EventScript_FinishedPuzzles
 	return
 
@@ -583,7 +583,7 @@ Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote:: @ 826A201
 	end
 
 Route110_TrickHouseEntrance_EventScript_CheckLevelForMessage:: @ 826A20B
-	compare VAR_TRICK_HOUSE_LEVEL, 8
+	compare VAR_TRICK_HOUSE_LEVEL, TRICK_HOUSE_ALL_SOLVED
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_LeftOnJourneyNote2
 	msgbox Route110_TrickHouseEntrance_Text_ItsAScroll, MSGBOX_DEFAULT
 	releaseall

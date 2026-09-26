@@ -782,12 +782,12 @@ static const struct
 
 // The object-hide flag starts set before awakening and is set again on
 // capture. The Dex record distinguishes those two states.
-u16 GetHeatranDiscoveryState(void)
+enum HeatranDiscoveryState GetHeatranDiscoveryState(void)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_HEATRAN), FLAG_GET_CAUGHT))
-        return 2;
+        return HEATRAN_DISCOVERY_CAUGHT;
     // The Magma Stone clears Heatran's object hide flag when it awakens.
-    return FlagGet(FLAG_DEFEATED_HEATRAN) ? 0 : 1;
+    return FlagGet(FLAG_DEFEATED_HEATRAN) ? HEATRAN_DISCOVERY_DORMANT : HEATRAN_DISCOVERY_AWAKE;
 }
 
 // Replaces a lead whose static Pokémon fainted in battle.
@@ -845,7 +845,7 @@ void BufferNextCenterLegendaryLead(void)
             // The Galarian resident shares Moltres's national Dex entry.
             bool32 caught = species == SPECIES_MOLTRES ? FlagGet(FLAG_EC_CAUGHT_MOLTRES)
                 : GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
-            if (species == SPECIES_HEATRAN && GetHeatranDiscoveryState() == 1)
+            if (species == SPECIES_HEATRAN && GetHeatranDiscoveryState() == HEATRAN_DISCOVERY_AWAKE)
                 StringCopy(gStringVar4, COMPOUND_STRING("Heatran is awake in the deepest\nroom of Scorched Slab.\pIf it fled after a battle, leave\nthat room and return to find it."));
             if (caught)
             {

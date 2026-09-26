@@ -46,6 +46,7 @@
 #include "constants/lilycove_lady.h"
 #include "constants/map_scripts.h"
 #include "constants/emerald_champions.h"
+#include "constants/quest_states.h"
 #include "constants/maps.h"
 #include "constants/mass_outbreak.h"
 #include "constants/mauville_old_man.h"
