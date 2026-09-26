@@ -2971,7 +2971,7 @@ static void PrintAbilitiesPage(void)
             PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, added, 84, y);
     }
     AddTextPrinterParameterized4(WIN_ABILITIES_LIST, GetFontIdToFit(legend, FONT_SMALL, 0, 88), 5, 78, 0, 0, color, 0, legend);
-    PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, sPokedexView->statsTrainersView ? trainers : yours, 5, 88);
+    PrintStatsScreenTextSmall(WIN_ABILITIES_LIST, sPokedexView->statsTrainersView ? trainers : yours, 5, 66);
     if (count)
     {
         enum Ability ability = abilities[cursor].ability;
@@ -2981,7 +2981,7 @@ static void PrintAbilitiesPage(void)
         AddTextPrinterParameterized4(WIN_ABILITIES_DETAIL, FONT_NARROW, 5, 25, 0, 0, color, 0, GetAbilityFullDescription(ability));
     }
     if (HasStatsPageTrainersView(sPokedexView->sPokemonStats.species))
-        PrintStatsScreenTextSmall(WIN_ABILITIES_DETAIL, select, 5, 130);
+        PrintStatsScreenTextSmall(WIN_ABILITIES_DETAIL, select, 5, 126);
     CopyWindowToVram(WIN_ABILITIES_LIST, COPYWIN_GFX);
     CopyWindowToVram(WIN_ABILITIES_DETAIL, COPYWIN_GFX);
 }
