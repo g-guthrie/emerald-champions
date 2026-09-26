@@ -119,12 +119,14 @@ FallarborTown_SuperTrainer::
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq SuperTraining_Egg
 	bufferpartymonnick 0, VAR_0x8004
+	setvar VAR_0x800A, 0
 	msgbox SuperTraining_Text_TakeALookatEVs, MSGBOX_DEFAULT
 	goto FallarborTown_SuperMainMenu
 
 FallarborTown_SuperMainMenu::
 	bufferpartymonnick 0, VAR_0x8004
-	msgbox SuperTraining_Text_HowCanIHelp, MSGBOX_DEFAULT
+	message SuperTraining_Text_HowCanIHelp
+	waitmessage
 	multichoice 0, 0, MULTI_SUPER_TRAINING_MENU, 0
 	switch VAR_RESULT
 	case 0, FallarborTown_ChangeEV
@@ -143,11 +145,33 @@ FallarborTown_Explain_EVs::
 	msgbox FallarborTown_Text_ExplainEvs, MSGBOX_DEFAULT
 	return
 
+@ Each row shows that stat's current EVs, so the list is the spread.
+@ VAR_0x800A keeps the cursor on the stat last trained.
 FallarborTown_ChangeEV::
 	bufferpartymonnick 0, VAR_0x8004
-	msgbox SuperTraining_Text_ThisIsMonsCurrentSpread, MSGBOX_DEFAULT
-	special BufferChosenMonAllEVs
-	multichoice 0, 0, MULTI_BASE_STATS, 0
+	message SuperTraining_Text_ThisIsMonsCurrentSpread
+	waitmessage
+	setvar VAR_0x8005, 0
+	special BufferChosenMonEV
+	dynmultipush SuperTraining_Text_RowHP, 0
+	setvar VAR_0x8005, 1
+	special BufferChosenMonEV
+	dynmultipush SuperTraining_Text_RowAttack, 1
+	setvar VAR_0x8005, 2
+	special BufferChosenMonEV
+	dynmultipush SuperTraining_Text_RowDefense, 2
+	setvar VAR_0x8005, 3
+	special BufferChosenMonEV
+	dynmultipush SuperTraining_Text_RowSpeed, 3
+	setvar VAR_0x8005, 4
+	special BufferChosenMonEV
+	dynmultipush SuperTraining_Text_RowSpAtk, 4
+	setvar VAR_0x8005, 5
+	special BufferChosenMonEV
+	dynmultipush SuperTraining_Text_RowSpDef, 5
+	dynmultistack 0, 0, FALSE, 6, 0, VAR_0x800A, DYN_MULTICHOICE_CB_NONE
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, FallarborTown_SuperMainMenu
+	copyvar VAR_0x800A, VAR_RESULT
 	switch VAR_RESULT
 	case 0, HyperTraining_EventScript_ChangeHPEV
 	case 1, FallarborTown_ChangeATKEV
@@ -166,7 +190,8 @@ HyperTraining_EventScript_ChangeHPEV::
 	buffernumberstring 1, VAR_0x8006
 	compare VAR_0x8006, 252
 	goto_if_eq FallarborTown_MaxEVs
-	msgbox SuperTraining_ReportHP
+	message SuperTraining_ReportHP
+	waitmessage
 	goto FallarborTown_ChooseNewEV
 
 FallarborTown_ChangeATKEV::
@@ -176,7 +201,8 @@ FallarborTown_ChangeATKEV::
 	buffernumberstring 1, VAR_0x8006
 	compare VAR_0x8006, 252
 	goto_if_eq FallarborTown_MaxEVs
-	msgbox SuperTraining_ReportAtk
+	message SuperTraining_ReportAtk
+	waitmessage
 	goto FallarborTown_ChooseNewEV
 
 FallarborTown_ChangeDEFEV::
@@ -186,7 +212,8 @@ FallarborTown_ChangeDEFEV::
 	buffernumberstring 1, VAR_0x8006
 	compare VAR_0x8006, 252
 	goto_if_eq FallarborTown_MaxEVs
-	msgbox SuperTraining_ReportDef
+	message SuperTraining_ReportDef
+	waitmessage
 	goto FallarborTown_ChooseNewEV
 
 FallarborTown_ChangeSPEEDEV::
@@ -196,7 +223,8 @@ FallarborTown_ChangeSPEEDEV::
 	buffernumberstring 1, VAR_0x8006
 	compare VAR_0x8006, 252
 	goto_if_eq FallarborTown_MaxEVs
-	msgbox SuperTraining_ReportSpeed
+	message SuperTraining_ReportSpeed
+	waitmessage
 	goto FallarborTown_ChooseNewEV
 
 FallarborTown_ChangeSPATKEV::
@@ -206,7 +234,8 @@ FallarborTown_ChangeSPATKEV::
 	buffernumberstring 1, VAR_0x8006
 	compare VAR_0x8006, 252
 	goto_if_eq FallarborTown_MaxEVs
-	msgbox SuperTraining_ReportSpAtk
+	message SuperTraining_ReportSpAtk
+	waitmessage
 	goto FallarborTown_ChooseNewEV
 
 FallarborTown_ChangeSPDEFEV::
@@ -216,7 +245,8 @@ FallarborTown_ChangeSPDEFEV::
 	buffernumberstring 1, VAR_0x8006
 	compare VAR_0x8006, 252
 	goto_if_eq FallarborTown_MaxEVs
-	msgbox SuperTraining_ReportSpDef
+	message SuperTraining_ReportSpDef
+	waitmessage
 	goto FallarborTown_ChooseNewEV
 
 FallarborTown_MaxEVs::
@@ -360,9 +390,26 @@ SuperTraining_Text_TakeALookatEVs:
 	.string "{STR_VAR_1}'s EVs.$"
 
 SuperTraining_Text_ThisIsMonsCurrentSpread:
-	.string "This is {STR_VAR_1}'s current EV\n"
-	.string "spread.\p"
+	.string "Here is {STR_VAR_1}'s EV spread.\n"
 	.string "Which stat would you like it to train?$"
+
+SuperTraining_Text_RowHP:
+	.string "HP{CLEAR_TO 0x34}{STR_VAR_2}$"
+
+SuperTraining_Text_RowAttack:
+	.string "Attack{CLEAR_TO 0x34}{STR_VAR_2}$"
+
+SuperTraining_Text_RowDefense:
+	.string "Defense{CLEAR_TO 0x34}{STR_VAR_2}$"
+
+SuperTraining_Text_RowSpeed:
+	.string "Speed{CLEAR_TO 0x34}{STR_VAR_2}$"
+
+SuperTraining_Text_RowSpAtk:
+	.string "Sp. Atk{CLEAR_TO 0x34}{STR_VAR_2}$"
+
+SuperTraining_Text_RowSpDef:
+	.string "Sp. Def{CLEAR_TO 0x34}{STR_VAR_2}$"
 
 SuperTraining_ReportHP:
 	.string "{STR_VAR_1} has {STR_VAR_2} HP EVs.\n"
@@ -440,7 +487,8 @@ FallarborTown_HyperTrainer::
 
 FallarborTown_HyperMainMenu::
 	bufferpartymonnick 0, VAR_0x8004
-	msgbox HyperTraining_Text_HowCanIHelp, MSGBOX_DEFAULT
+	message HyperTraining_Text_HowCanIHelp
+	waitmessage
 	multichoice 0, 0, MULTI_HYPER_TRAINING_MENU, 0
 	switch VAR_RESULT
 	case 0, HyperTraining_EventScript_ChangeIV
@@ -493,7 +541,8 @@ HyperTraining_EventScript_ChooseLevel::
 	goto HyperTraining_EventScript_DoHyperTraining
 
 HyperTraining_EventScript_ChangeHiddenPower::
-	msgbox HyperTraining_Text_ForThreeCapsChangeAllIVs, MSGBOX_DEFAULT
+	message HyperTraining_Text_ForThreeCapsChangeAllIVs
+	waitmessage
 	copyvar VAR_0x800A, VAR_0x8004
 	setvar VAR_0x8004, SCROLL_MULTI_HIDDEN_POWER
 	special ShowScrollableMultichoice
@@ -507,6 +556,7 @@ HyperTraining_EventScript_ChangeAllIVs::
 	compare VAR_RESULT, FALSE
 	goto_if_eq HyperTraining_EventScript_NotEnoughCaps
 	special ChangeChosenMonHiddenPower
+	copyvar VAR_0x8004, VAR_0x800A
 	msgbox HyperTraining_Text_PayThreeCaps, MSGBOX_DEFAULT
 	removeitem ITEM_BOTTLE_CAP, 3
 	goto HyperTraining_EventScript_DoHyperTraining
@@ -518,16 +568,13 @@ HyperTraining_EventScript_DoHyperTraining::
 	playfanfare 0x173
 	waitfanfare
 	fadescreen 0
-	msgbox HyperTraining_Text_HyperTrainingMadeMonStronger, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FallarborTown_HyperTrainer
-	releaseall
-	end
+	bufferpartymonnick 0, VAR_0x8004
+	msgbox HyperTraining_Text_HyperTrainingMadeMonStronger, MSGBOX_DEFAULT
+	goto FallarborTown_HyperMainMenu
 
 HyperTraining_EventScript_NotEnoughCaps::
 	msgbox HyperTraining_Text_NotEnoughCaps, MSGBOX_DEFAULT
-	releaseall
-	end
+	goto HyperTraining_EventScript_RebufferChosenMon
 
 HyperTraining_EventScript_RebufferChosenMon::
 	copyvar VAR_0x8004, VAR_0x800A
@@ -580,8 +627,7 @@ HyperTraining_ReportSpeed:
 
 HyperTraining_Text_HyperTrainingMadeMonStronger:
 	.string "The Hyper Training is complete\n"
-	.string "for {STR_VAR_1}.\p"
-	.string "Would you like to train some more?$"
+	.string "for {STR_VAR_1}.$"
 
 HyperTraining_Text_ForThreeCapsChangeAllIVs:
 	.string "For three Bottle Caps, I can change all\n"
@@ -595,10 +641,6 @@ HyperTraining_Text_HowCanIHelp:
 
 HyperTraining_Text_StartHyperTraining:
 	.string "Got it! Let's do some Hyper Training!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …$"
 

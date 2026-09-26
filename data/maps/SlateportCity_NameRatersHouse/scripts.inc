@@ -97,7 +97,7 @@ Nature_Changer_Stat_Down::
 	case 3, Nature_Down_SPDEF
 	case 4, Nature_Down_SPEED
 	case 5, Nature_Changer_No
-	case 127, Nature_Changer_No
+	case 127, Nature_Changer_Stat_Up
 
 Nature_Down_ATK::
 	setvar VAR_0x8006, 0
@@ -176,11 +176,11 @@ NatureChanger_Text_NeedMoreBerries:
 	.string "Bring me five!$"
 
 NatureChanger_Text_WhichColorPrefer:
-	.string "Which flavor's stat should\n"
-	.string "receive a boost?$"
+	.string "Which Pokéblock color? Its stat\n"
+	.string "will receive a boost.$"
 
 NatureChanger_Text_WhichColorDislike:
-	.string "And which flavor's stat should\n"
+	.string "And which color's stat should\n"
 	.string "be reduced?$"
 
 NatureChanger_Text_SpecialPokeblock:
@@ -189,10 +189,6 @@ NatureChanger_Text_SpecialPokeblock:
 	.string "Wait just a moment…$"
 
 NatureChanger_Text_Pause:
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …$"
 
