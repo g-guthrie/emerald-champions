@@ -27,7 +27,6 @@
 
 struct Pokenav_RegionMapMenu
 {
-    u8 unused[12];
     bool32 zoomDisabled;
     u32 (*callback)(struct Pokenav_RegionMapMenu *);
 };
@@ -214,8 +213,7 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
             return POKENAV_MAP_FUNC_ZOOM_IN;
         return POKENAV_MAP_FUNC_ZOOM_OUT;
     case MAP_INPUT_B_BUTTON:
-        // The map is the PokeNav's only screen: B switches it off.
-        return POKENAV_MENU_FUNC_EXIT;
+        return POKENAV_MAP_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
         if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER)
         && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
@@ -228,7 +226,7 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav_RegionMapMenu *state)
 {
     if (JOY_NEW(B_BUTTON))
-        return POKENAV_MENU_FUNC_EXIT;
+        return POKENAV_MAP_FUNC_EXIT;
 
     return POKENAV_MAP_FUNC_NONE;
 }
@@ -299,16 +297,12 @@ static bool8 ShouldOpenRegionMapZoomed(void)
 
 static u32 LoopedTask_OpenRegionMap(s32 taskState)
 {
-    int menuGfxId;
     struct RegionMap *regionMap;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
     {
     case 0:
         SetVBlankCallback_(NULL);
-        // The map is the first screen, so nothing has slid the header up to
-        // show the help bar yet. The screen is still black: set it directly.
-        ChangeBgY(0, 0x2000, BG_COORD_SET);
         HideBg(1);
         HideBg(2);
         HideBg(3);
@@ -349,7 +343,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
             return LT_PAUSE;
 
         UpdateMapSecInfoWindow(state);
-        FadeToBlackExceptPrimary();
+        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         return LT_INC_AND_PAUSE;
     case 5:
         if (IsDma3ManagerBusyWithBgCopy_(state))
@@ -360,20 +354,14 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
         SetVBlankCallback_(VBlankCB_RegionMap);
         return LT_INC_AND_PAUSE;
     case 6:
-        if (!ShouldOpenRegionMapZoomed())
-            menuGfxId = POKENAV_GFX_MAP_MENU_ZOOMED_OUT;
-        else
-            menuGfxId = POKENAV_GFX_MAP_MENU_ZOOMED_IN;
-
         UpdateRegionMapHelpBarText();
-        LoadLeftHeaderGfxForIndex(menuGfxId);
-        ShowLeftHeaderGfx(menuGfxId, TRUE, TRUE);
-        // Switching the PokeNav on: the header and spinning icon fade in too.
+        ShowMapHeader(IsRegionMapZoomed() ? POKENAV_HEADER_MAP_ZOOMED_IN : POKENAV_HEADER_MAP_ZOOMED_OUT);
+        // Switching the PokeNav on: the whole screen fades in from black.
         PlaySE(SE_POKENAV_ON);
-        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK_ALL);
+        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
         return LT_INC_AND_PAUSE;
     case 7:
-        if (IsPaletteFadeActive() || AreLeftHeaderSpritesMoving())
+        if (IsPaletteFadeActive() || IsMapHeaderMoving())
             return LT_PAUSE;
         return LT_INC_AND_CONTINUE;
     default:
@@ -418,7 +406,7 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
         if (WaitForHelpBar())
             return LT_PAUSE;
 
-        UpdateRegionMapRightHeaderTiles(POKENAV_GFX_MAP_MENU_ZOOMED_OUT);
+        UpdateMapHeader(POKENAV_HEADER_MAP_ZOOMED_OUT);
         break;
     }
 
@@ -451,7 +439,7 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
         if (WaitForHelpBar())
             return LT_PAUSE;
 
-        UpdateRegionMapRightHeaderTiles(POKENAV_GFX_MAP_MENU_ZOOMED_IN);
+        UpdateMapHeader(POKENAV_HEADER_MAP_ZOOMED_IN);
         break;
     }
 
@@ -738,7 +726,10 @@ void UpdateRegionMapHelpBarText(void)
 {
     struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
 
-    if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER)
+    // Off the map (on an event island) the map can't zoom: B is the only button.
+    if (GetZoomDisabled())
+        PrintHelpBarText(HELPBAR_MAP_ZOOM_DISABLED);
+    else if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER)
         && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
         if (IsRegionMapZoomed())
