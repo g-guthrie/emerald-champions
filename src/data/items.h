@@ -12620,9 +12620,9 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(
-            "Enables Pokémon\n"
-            "with Mega Stones\n"
-            "to Mega Evolve."),
+            "Press Start to Mega\n"
+            "Evolve a Pokémon\n"
+            "holding its Stone."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -12821,7 +12821,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BERRY_POUCH] =
     {
         .name = ITEM_NAME("Harvest Pouch"),
-        .pluralName = ITEM_PLURAL_NAME("Berry Pouches"),
+        .pluralName = ITEM_PLURAL_NAME("Harvest Pouches"),
         .price = 0,
         .description = COMPOUND_STRING(
             "Harvested Berries\n"
@@ -14662,9 +14662,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Leveler"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Raises the party\n"
-            "as high as your\n"
-            "Badges allow."),
+            "Raises your party\n"
+            "as Badges allow and\n"
+            "evolves ready ones."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
@@ -14710,9 +14710,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Regenerator"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Berries your team\n"
-            "eats return after\n"
-            "each battle."),
+            "A held Berry its\n"
+            "holder eats is back\n"
+            "after each battle."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
