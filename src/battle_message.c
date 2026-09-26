@@ -1474,6 +1474,8 @@ const u8 gText_WhatWillPkmnDo2[] = _("What will\n{B_PLAYER_NAME} do?");
 const u8 gText_WhatWillWallyDo[] = _("What will\nWally do?");
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
 const u8 gText_BattleMenu[] = _("Fight{CLEAR_TO 56}Bag\nPokémon{CLEAR_TO 56}Run");
+// Trainer battles never allow the Bag: its row is drawn in the shadow grey.
+const u8 gText_BattleMenuNoBag[] = _("Fight{CLEAR_TO 56}{COLOR_HIGHLIGHT_SHADOW 15 14 14}Bag{COLOR_HIGHLIGHT_SHADOW 13 14 15}\nPokémon{CLEAR_TO 56}Run");
 const u8 gText_SafariZoneMenu[] = _("Ball{CLEAR_TO 56}{FONT_NARROWER}Pokéblock{FONT_NORMAL}\nGo Near{CLEAR_TO 56}Run");
 const u8 gText_SafariZoneMenuFrlg[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Ball{CLEAR_TO 56}Bait\nRock{CLEAR_TO 56}Run");
 const u8 gText_MoveInterfacePP[] = _("PP ");
