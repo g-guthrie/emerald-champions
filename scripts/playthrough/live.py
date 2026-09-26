@@ -310,6 +310,16 @@ class Harness:
         except Exception:
             pass
 
+    async def refresh_player_elevation(self):
+        """The player object's current elevation (a bridge tile keeps the one it was entered at)."""
+        try:
+            raw = await self.read(self.syms['gPlayerAvatar'], 8)
+            addr = self.syms['gObjectEvents'] + raw[5] * 0x24 + 0x0B
+            word = await self.read(addr & ~3, 4)
+            self.player_z = word[addr & 3] & 0xF
+        except Exception:
+            self.player_z = None
+
     def grid(self, name):
         rg = getattr(self, '_runtime_grid', None)
         if rg and rg[0] == name:
@@ -345,6 +355,19 @@ class Harness:
             table, i = (prim, t) if t < 512 else (sec, t - 512)
             out.append(table[i] & 0xFF if i < len(table) else 0)
         cache[name] = (w, h, out)
+        return cache[name]
+
+    def rail_tiles(self, name):
+        """Acro Bike rails: impassable on foot or on the Mach Bike."""
+        import re
+        cache = getattr(self, '_rail_cache', {})
+        self._rail_cache = cache
+        if name not in cache:
+            text = (ROOT / 'include/constants/metatile_behaviors.h').read_text()
+            names = re.findall(r'^\s+(MB_\w+)', text.split('enum')[1], re.M)
+            rails = {i for i, n in enumerate(names) if n.endswith('_RAIL')}
+            w, h, beh = self.behaviors(name)
+            cache[name] = {(i % w, i // w) for i, b in enumerate(beh) if b in rails}
         return cache[name]
 
     def ledge_tiles(self, name):
@@ -442,45 +465,59 @@ class Harness:
         name = self.st['map']
         w, h, cells = self.grid(name)
         start = (self.st['x'], self.st['y'])
-        blocked = set(self.blocked[name]) | set(avoid)
+        blocked = set(self.blocked[name]) | set(avoid) | self.rail_tiles(name)
         for a in self.st['actors']:
             if not a['invisible'] and (a['x'], a['y']) != start:
                 blocked.add((a['x'], a['y']))
         blocked.discard(target)
         ledges = self.ledge_tiles(name)
-        q = collections.deque([start])
-        seen = {start: None}
+        # Search over (x, y, elevation): a bridge tile (15) keeps the walker's
+        # elevation, so the ground under a bridge does not connect to its deck.
+        # Elevation 0 (stairs, transitions) matches everything.
+        e0 = cells[start[1] * w + start[0]] >> 12
+        z0 = getattr(self, 'player_z', None)
+        s0 = (start[0], start[1], z0 if z0 is not None else (0 if e0 == 15 else e0))
+        q = collections.deque([s0])
+        seen = {s0: None}
+        goal = None
         while q:
             a = q.popleft()
-            if a == target:
+            if a[:2] == target:
+                goal = a
                 break
-            ae = cells[a[1] * w + a[0]] >> 12
+            z = a[2]
             for d, (dx, dy) in DIRS.items():
                 b = (a[0] + dx, a[1] + dy)
-                if not (0 <= b[0] < w and 0 <= b[1] < h) or b in seen or b in blocked:
+                if not (0 <= b[0] < w and 0 <= b[1] < h) or b in blocked:
                     continue
                 if b in ledges:
                     # A ledge is crossed only in its jump direction, landing past it.
                     land = (b[0] + dx, b[1] + dy)
-                    if ledges[b] != d or land in seen or land in blocked \
+                    if ledges[b] != d or land in blocked \
                        or not (0 <= land[0] < w and 0 <= land[1] < h) \
                        or cells[land[1] * w + land[0]] & 0xC00 or land in ledges:
                         continue
-                    seen[land] = (a, d)
-                    q.append(land)
+                    le = cells[land[1] * w + land[0]] >> 12
+                    nb = (land[0], land[1], z if le == 15 else le)
+                    if nb not in seen:
+                        seen[nb] = (a, d)
+                        q.append(nb)
                     continue
                 cell = cells[b[1] * w + b[0]]
                 if cell & 0xC00 and b != target:
                     continue
                 be = cell >> 12
-                if ae and be and ae != be and ae != 15 and be != 15:
+                if z and be and be != 15 and be != z:
                     continue
-                seen[b] = (a, d)
-                q.append(b)
-        if target not in seen:
+                nb = (b[0], b[1], z if be == 15 else be)
+                if nb in seen:
+                    continue
+                seen[nb] = (a, d)
+                q.append(nb)
+        if goal is None:
             return None
         steps = []
-        a = target
+        a = goal
         while seen[a]:
             a, d = seen[a]
             steps.append(d)
@@ -511,10 +548,18 @@ class Harness:
                 return self.brief({'stop': 'arrived', 'crossed_sight': crossing})
             sight = await self.sight_tiles() if avoid_trainers else set()
             sight.discard(target)
+            await self.refresh_player_elevation()
             steps = self.plan(target, sight)
             if steps is None and sight:
                 steps = self.plan(target)
                 crossing = True
+            if steps is None and self.blocked[self.st['map']]:
+                # Remembered bumps go stale (NPCs move, doors open); forget and retry.
+                self.blocked[self.st['map']].clear()
+                steps = self.plan(target, sight)
+                if steps is None and sight:
+                    steps = self.plan(target)
+                    crossing = True
             if steps is None:
                 return self.brief({'stop': 'no_path'})
             for d in steps:
@@ -847,6 +892,7 @@ class Harness:
         auto_arm = op in ('walk', 'goto', 'exit', 'advance', 'press', 'wait')
         if op in ('goto', 'exit', 'path', 'walk'):
             await self.refresh_runtime_grid()
+            await self.refresh_player_elevation()
             self.extra_block = {tuple(int(v) for v in t.split(',')) for t in req.pop('block', '').split(';') if t}
         if auto_arm and not self.st['battle'] and req.get('arm', '1') != '0':
             if not await self.armed() or self.st['ready']:
