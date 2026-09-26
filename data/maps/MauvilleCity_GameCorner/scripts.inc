@@ -176,7 +176,7 @@ MauvilleCity_GameCorner_EventScript_MudkipDoll:: @ 820FD83
 MauvilleCity_GameCorner_EventScript_ConfirmDollPrize:: @ 820FD91
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsX, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_GameCorner_EventScript_CancelDollSelect
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize
 	switch VAR_TEMP_1
 	case 1, MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll
 	case 2, MauvilleCity_GameCorner_EventScript_BuyTorchicDoll
@@ -263,7 +263,7 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichPokemon
 	waitmessage
 	setvar VAR_0x8004, 0
-	showcoinsbox 1, 1
+	showcoinsbox 0, 1
 	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize
 
 @ Back to the list after a refusal. The Coins box is already open; opening
@@ -373,7 +373,7 @@ MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	bufferspeciesname 0, VAR_TEMP_1
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsThePokemonX, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	checkcoins VAR_0x8007
 	compare VAR_0x8007, VAR_0x8006
 	goto_if_lt MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon
@@ -470,15 +470,16 @@ MauvilleCity_GameCorner_EventScript_ChooseStarterPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichStarterType
 	waitmessage
 	setvar VAR_0x8004, 0
-	showcoinsbox 1, 1
+	showcoinsbox 0, 1
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterType
 
 @ Back to the type menu after a refusal, without a second Coins box.
 MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize::
 	message MauvilleCity_GameCorner_Text_WhichStarterType
 	waitmessage
+@ On the right, clear of the Coins box.
 MauvilleCity_GameCorner_EventScript_ChooseStarterType::
-	multichoice 0, 0, MULTI_GRASS_FIRE_WATER, 0
+	multichoice 20, 0, MULTI_GRASS_FIRE_WATER, 0
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_ChooseGrassStarter
 	case 1, MauvilleCity_GameCorner_EventScript_ChooseFireStarter
@@ -502,8 +503,8 @@ MauvilleCity_GameCorner_EventScript_ChooseGrassStarter::
 	case 6, MauvilleCity_GameCorner_EventScript_Rowlet
 	case 7, MauvilleCity_GameCorner_EventScript_Grookey
 	case 8, MauvilleCity_GameCorner_EventScript_Sprigatito
-	case 9, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
-	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 9, MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
 	end
 	
 MauvilleCity_GameCorner_EventScript_ChooseFireStarter::
@@ -520,8 +521,8 @@ MauvilleCity_GameCorner_EventScript_ChooseFireStarter::
 	case 6, MauvilleCity_GameCorner_EventScript_Litten
 	case 7, MauvilleCity_GameCorner_EventScript_Scorbunny
 	case 8, MauvilleCity_GameCorner_EventScript_Fuecoco
-	case 9, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
-	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 9, MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
 	end
 	
 MauvilleCity_GameCorner_EventScript_ChooseWaterStarter::
@@ -538,8 +539,8 @@ MauvilleCity_GameCorner_EventScript_ChooseWaterStarter::
 	case 6, MauvilleCity_GameCorner_EventScript_Popplio
 	case 7, MauvilleCity_GameCorner_EventScript_Sobble
 	case 8, MauvilleCity_GameCorner_EventScript_Quaxly
-	case 9, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
-	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 9, MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
+	goto MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
 	end
 
 MauvilleCity_GameCorner_EventScript_Bulbasaur::
@@ -660,7 +661,7 @@ MauvilleCity_GameCorner_EventScript_ConfirmStarterPrize::
 	bufferspeciesname 0, VAR_TEMP_1
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsThePokemonX, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	goto_if_eq MauvilleCity_GameCorner_EventScript_ReturnToChooseStarterPrize
 	checkcoins VAR_0x8007
 	compare VAR_0x8007, VAR_0x8006
 	goto_if_lt MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForStarter
