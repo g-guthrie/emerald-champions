@@ -265,7 +265,10 @@ AI_SINGLE_BATTLE_TEST("AI_IsMoveEffectInPlus - AI should not see secondary effec
         ASSUME(GetMovePower(MOVE_PSYCHIC) == 90);
         ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_PSYCHIC, spDef: -1);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_STEELIX) { Level(100); Nature(NATURE_SASSY); Item(ITEM_STEELIXITE); Ability(ABILITY_STURDY); Speed(58); Moves(MOVE_GYRO_BALL); }
+        // Pinned to the species' own line: the player's Inclement layer buffs Steelix.
+        PLAYER(SPECIES_STEELIX) { Level(100); Nature(NATURE_SASSY); Item(ITEM_STEELIXITE); Ability(ABILITY_STURDY); Speed(58); Moves(MOVE_GYRO_BALL);
+                                  Attack(CalculateSpeciesStat(SPECIES_STEELIX, NATURE_SASSY, STAT_ATK, 100, 0, MAX_PER_STAT_IVS));
+                                  SpDefense(CalculateSpeciesStat(SPECIES_STEELIX, NATURE_SASSY, STAT_SPDEF, 100, 0, MAX_PER_STAT_IVS)); }
         OPPONENT(SPECIES_BRAVIARY_HISUI) { Level(100); Nature(NATURE_TIMID); Ability(ABILITY_SHEER_FORCE); Speed(251); Moves(MOVE_PSYCHIC, MOVE_NIGHT_SHADE); }
     } WHEN {
         TURN { MOVE(player, MOVE_GYRO_BALL); SCORE_EQ_VAL(opponent, MOVE_PSYCHIC, 101); SCORE_EQ_VAL(opponent, MOVE_NIGHT_SHADE, 101); }

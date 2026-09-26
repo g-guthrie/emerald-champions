@@ -174,7 +174,8 @@ SINGLE_BATTLE_TEST("Every Emerald Champions Mega transforms with its native requ
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, player);
     } THEN {
         EXPECT_EQ(player->species, mega);
-        EXPECT_EQ(player->ability, gSpeciesInfo[mega].abilities[0]);
+        // The player's Mega reads the Inclement layer (Mega Sceptile: Chloroplast).
+        EXPECT_EQ(player->ability, GetSpeciesAbilityForOwner(mega, 0, FALSE));
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), base);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), item);
     }

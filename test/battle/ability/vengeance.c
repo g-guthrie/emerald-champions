@@ -22,11 +22,11 @@ SINGLE_BATTLE_TEST("Vengeance boosts Ghost moves by 20%, or 50% at a third of HP
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
         // The boost scales the Attack stat, so allow the damage formula's
-        // intermediate rounding a couple of points either way.
-        EXPECT_GE(results[1].damage, results[0].damage * 12 / 10 - 2);
-        EXPECT_LE(results[1].damage, results[0].damage * 12 / 10 + 2);
-        EXPECT_GE(results[3].damage, results[2].damage * 15 / 10 - 2);
-        EXPECT_LE(results[3].damage, results[2].damage * 15 / 10 + 2);
+        // intermediate rounding (and its fixed +2) a couple of percent either way.
+        EXPECT_GE(results[1].damage * 100, results[0].damage * 118);
+        EXPECT_LE(results[1].damage * 100, results[0].damage * 121);
+        EXPECT_GE(results[3].damage * 100, results[2].damage * 147);
+        EXPECT_LE(results[3].damage * 100, results[2].damage * 151);
     }
 }
 
