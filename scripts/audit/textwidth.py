@@ -39,6 +39,8 @@ def line_width(text):
         if isinstance(code,int) and code<len(widths): w+=widths[code]
         else: w+=6
     return w
+BOX_WIDTH=27*8
+ARROW_WIDTH=8
 worst=[]
 files=[f for f in glob.glob(f"{ROOT}/data/maps/*/scripts.inc") if "_Frlg" not in f]+glob.glob(f"{ROOT}/data/scripts/*.inc")+glob.glob(f"{ROOT}/data/text/*.inc")
 for f in files:
@@ -47,14 +49,22 @@ for f in files:
         if not s.startswith(".string"): continue
         mm=re.match(r'\.string\s+"(.*)"',s)
         if not mm: continue
-        txt=mm.group(1).replace("$","")
-        for part in re.split(r"\\n|\\l|\\p",txt):
+        raw=mm.group(1)
+        # The field box is 27 tiles (216 px) and text starts at x 0. A line that
+        # ends a page (\p or the closing $) also carries the 8 px continue arrow.
+        pieces=re.split(r"(\\n|\\l|\\p)",raw)
+        for i in range(0,len(pieces),2):
+            part=pieces[i]
+            after=pieces[i+1] if i+1<len(pieces) else ("$" if part.endswith("$") else "")
+            ends_page=after in ("\\p","$")
+            part=part.replace("$","")
             # strip control codes like {COLOR X} which take no width
             part=re.sub(r"\{(COLOR|HIGHLIGHT|SHADOW|PAUSE|PAUSE_UNTIL_PRESS|FONT|SIZE|WAIT_SE|PLAY_BGM|PLAY_SE|CLEAR|SKIP|CLEAR_TO|MIN_LETTER_SPACING|RESET_SIZE|PAUSE_MUSIC|RESUME_MUSIC|DYNAMIC|KEYPAD_ICON|RIGHT_ARROW|ESCAPE|SHIFT_TEXT|SHIFT_DOWN|FILL_WINDOW|COLOR_HIGHLIGHT_SHADOW|CIRCLE_HOLLOW)[^}]*\}","",part)
             w=line_width(part)
-            if w>208: worst.append((w,f.replace(ROOT+"/",""),n,part))
+            limit=BOX_WIDTH-ARROW_WIDTH if ends_page else BOX_WIDTH
+            if w>limit: worst.append((w,f.replace(ROOT+"/",""),n,part,limit))
 worst.sort(reverse=True)
-print(len(worst),"lines wider than 208px")
-for w,f,n,p in worst[:80]:
+print(len(worst),"lines wider than the message box (216 px, or 208 px when the line ends a page)")
+for w,f,n,p,limit in worst[:80]:
     if "debug.inc" in f or "STR_VAR" in p: continue
-    print(w,f,n,p)
+    print(w,">",limit,f,n,p)
