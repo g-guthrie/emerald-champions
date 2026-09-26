@@ -3638,6 +3638,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             case ABILITY_BALL_FETCH:
                 if (!(gBattleTypeFlags & BATTLE_TYPE_RAID)
                  && gBattleMons[battler].item == ITEM_NONE
+                 // An item due back after battle still occupies this hand.
+                 && GetBattleRestoredHeldItem(GetBattlerTrainer(battler), gBattlerPartyIndexes[battler]) == ITEM_NONE
                  && gBattleResults.catchAttempts[ItemIdToBallId(gLastUsedBall)] >= 1
                  && !gHasFetchedBall)
                 {
@@ -3645,6 +3647,13 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     gBattleScripting.battler = battler;
                     gBattleMons[battler].item = gLastUsedItem;
                     GetBattlerPartyState(battler)->heldItemOrigin = 0;
+                    if (GetBattlerTrainer(battler) == B_TRAINER_PLAYER)
+                    {
+                        // Record the recovered Ball before the asynchronous
+                        // controller update so end-of-battle cleanup keeps it.
+                        SetMonData(GetBattlerMon(battler), MON_DATA_HELD_ITEM, &gLastUsedItem);
+                        RecordPlayerPartyMonHeldItemForRestoration(gBattlerPartyIndexes[battler]);
+                    }
                     BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedItem);
                     MarkBattlerForControllerExec(battler);
                     gHasFetchedBall = TRUE;
