@@ -310,17 +310,11 @@ void ShutdownPokenav(void)
     BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
 }
 
-bool32 WaitForPokenavShutdownFade(void)
+// Called once the shutdown fade has finished and the active screen is freed.
+void FreePokenavMainMenu(void)
 {
-    if (!gPaletteFade.active)
-    {
-        FreeMenuHandlerSubstruct2();
-        CleanupPokenavMainMenuResources();
-        FreeAllWindowBuffers();
-        return FALSE;
-    }
-
-    return TRUE;
+    CleanupPokenavMainMenuResources();
+    FreeAllWindowBuffers();
 }
 
 static u32 LoopedTask_InitPokenavMenu(s32 state)

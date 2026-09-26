@@ -51,7 +51,6 @@ struct CityMapEntry
 
 static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *);
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav_RegionMapMenu *);
-static u32 GetExitRegionMapMenuId(struct Pokenav_RegionMapMenu *);
 static u32 LoopedTask_OpenRegionMap(s32);
 static u32 LoopedTask_DecompressCityMaps(s32);
 static bool32 GetCurrentLoopedTaskActive(void);
@@ -75,7 +74,6 @@ static void SpriteCB_CityZoomText(struct Sprite *sprite);
 static u32 LoopedTask_UpdateInfoAfterCursorMove(s32);
 static u32 LoopedTask_RegionMapZoomOut(s32);
 static u32 LoopedTask_RegionMapZoomIn(s32);
-static u32 LoopedTask_ExitRegionMap(s32);
 static u32 LoopedTask_TreatAsPokeNavFlyMap(s32);
 
 extern const u16 gRegionMapCityZoomTiles_Pal[];
@@ -123,7 +121,6 @@ static const LoopedTask sRegionMapLoopTaskFuncs[] =
     [POKENAV_MAP_FUNC_CURSOR_MOVED] = LoopedTask_UpdateInfoAfterCursorMove,
     [POKENAV_MAP_FUNC_ZOOM_OUT]     = LoopedTask_RegionMapZoomOut,
     [POKENAV_MAP_FUNC_ZOOM_IN]      = LoopedTask_RegionMapZoomIn,
-    [POKENAV_MAP_FUNC_EXIT]         = LoopedTask_ExitRegionMap,
     [POKENAV_MAP_FUNC_FLY]          = LoopedTask_TreatAsPokeNavFlyMap,
 };
 
@@ -217,8 +214,8 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
             return POKENAV_MAP_FUNC_ZOOM_IN;
         return POKENAV_MAP_FUNC_ZOOM_OUT;
     case MAP_INPUT_B_BUTTON:
-        state->callback = GetExitRegionMapMenuId;
-        return POKENAV_MAP_FUNC_EXIT;
+        // The map is the PokeNav's only screen: B switches it off.
+        return POKENAV_MENU_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
         if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER)
         && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
@@ -231,17 +228,9 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav_RegionMapMenu *state)
 {
     if (JOY_NEW(B_BUTTON))
-    {
-        state->callback = GetExitRegionMapMenuId;
-        return POKENAV_MAP_FUNC_EXIT;
-    }
+        return POKENAV_MENU_FUNC_EXIT;
 
     return POKENAV_MAP_FUNC_NONE;
-}
-
-static u32 GetExitRegionMapMenuId(struct Pokenav_RegionMapMenu *state)
-{
-    return POKENAV_MAIN_MENU_CURSOR_ON_MAP;
 }
 
 bool32 GetZoomDisabled(void)
@@ -317,6 +306,9 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
     {
     case 0:
         SetVBlankCallback_(NULL);
+        // The map is the first screen, so nothing has slid the header up to
+        // show the help bar yet. The screen is still black: set it directly.
+        ChangeBgY(0, 0x2000, BG_COORD_SET);
         HideBg(1);
         HideBg(2);
         HideBg(3);
@@ -376,7 +368,9 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
         UpdateRegionMapHelpBarText();
         LoadLeftHeaderGfxForIndex(menuGfxId);
         ShowLeftHeaderGfx(menuGfxId, TRUE, TRUE);
-        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK);
+        // Switching the PokeNav on: the header and spinning icon fade in too.
+        PlaySE(SE_POKENAV_ON);
+        PokenavFadeScreen(POKENAV_FADE_FROM_BLACK_ALL);
         return LT_INC_AND_PAUSE;
     case 7:
         if (IsPaletteFadeActive() || AreLeftHeaderSpritesMoving())
@@ -459,34 +453,6 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
 
         UpdateRegionMapRightHeaderTiles(POKENAV_GFX_MAP_MENU_ZOOMED_IN);
         break;
-    }
-
-    return LT_FINISH;
-}
-
-static u32 LoopedTask_ExitRegionMap(s32 taskState)
-{
-    switch (taskState)
-    {
-    case 0:
-        PlaySE(SE_SELECT);
-        PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
-        return LT_INC_AND_PAUSE;
-    case 1:
-        if (IsPaletteFadeActive())
-            return LT_PAUSE;
-
-        SetLeftHeaderSpritesInvisibility();
-        SlideMenuHeaderDown();
-        return LT_INC_AND_PAUSE;
-    case 2:
-        if (MainMenuLoopedTaskIsBusy())
-            return LT_PAUSE;
-
-        HideBg(1);
-        HideBg(2);
-        HideBg(3);
-        return LT_INC_AND_PAUSE;
     }
 
     return LT_FINISH;

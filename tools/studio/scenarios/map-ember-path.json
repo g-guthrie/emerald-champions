@@ -38,10 +38,6 @@
     },
     {
       "press": "A",
-      "frames": 240
-    },
-    {
-      "press": "A",
       "frames": 240,
       "label": "Native regional map"
     },

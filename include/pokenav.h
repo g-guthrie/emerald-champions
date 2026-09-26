@@ -297,7 +297,6 @@ enum
     POKENAV_MAP_FUNC_CURSOR_MOVED,
     POKENAV_MAP_FUNC_ZOOM_OUT,
     POKENAV_MAP_FUNC_ZOOM_IN,
-    POKENAV_MAP_FUNC_EXIT,
     POKENAV_MAP_FUNC_FLY
 };
 
@@ -383,7 +382,7 @@ void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
 void SlideMenuHeaderUp(void);
 void PokenavFillPalette(u32 palIndex, u16 fillValue);
 u32 PokenavMainMenuLoopedTaskIsActive(void);
-bool32 WaitForPokenavShutdownFade(void);
+void FreePokenavMainMenu(void);
 void SetActiveMenuLoopTasks(void *createLoopTask, void *isLoopTaskActive); // Fix types later.
 void ShutdownPokenav(void);
 
