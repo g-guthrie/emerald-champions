@@ -61,13 +61,14 @@ ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
 static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}Toggle   {DPAD_UPDOWN}Moves");
 static const u8 sText_Stats_HP[] = _("HP");
-static const u8 sText_Stats_Attack[] = _("ATK");
-static const u8 sText_Stats_Defense[] = _("DEF");
-static const u8 sText_Stats_Speed[] = _("SPE");
-static const u8 sText_Stats_SpAttack[] = _("SP.A");
-static const u8 sText_Stats_SpDefense[] = _("SP.D");
+static const u8 sText_Stats_Attack[] = _("Atk");
+static const u8 sText_Stats_Defense[] = _("Def");
+static const u8 sText_Stats_Speed[] = _("Spe");
+static const u8 sText_Stats_SpAttack[] = _("SpA");
+static const u8 sText_Stats_SpDefense[] = _("SpD");
+static const u8 sText_Stats_Yours[] = _("Yours");
+static const u8 sText_Stats_Trainers[] = _("Trainers'");
 static const u8 sText_Stats_MoveSelectedMax[] = _("{STR_VAR_1} / {STR_VAR_2}");
-static const u8 sText_Stats_MoveLevel[] = _("Lv.");
 static const u8 sText_Stats_Gender_0[] = _("♂");
 static const u8 sText_Stats_Gender_12_5[] = _("♀ 1/7 ♂"); //_("♀ 12.5 / 87.5 ♂");
 static const u8 sText_Stats_Gender_25[] = _("♀ 1/3 ♂");     //_("♀ 25 / 75 ♂");
@@ -75,7 +76,7 @@ static const u8 sText_Stats_Gender_50[] = _("♀ 1/1 ♂");     //_("♀ 50 / 50
 static const u8 sText_Stats_Gender_75[] = _("♀ 3/1 ♂");     //_("♀ 75 / 25 ♂");
 static const u8 sText_Stats_Gender_87_5[] = _("♀ 7/1 ♂");
 static const u8 sText_Stats_Gender_100[] = _("♀");
-static const u8 sText_Stats_CatchRate[] = _("Catch{0x5B}: ");
+static const u8 sText_Stats_CatchRate[] = _("Catch: ");
 static const u8 sText_Stats_CatchRate_Legend[] = _("Legendary");
 static const u8 sText_Stats_CatchRate_VeryHard[] = _("Very Hard");
 static const u8 sText_Stats_CatchRate_Difficult[] = _("Difficult");
@@ -215,6 +216,7 @@ static void PrintStatsScreen_Moves_BottomText(u8 taskId);
 static void PrintStatsScreen_Moves_Bottom(u8 taskId);
 static void PrintStatsScreen_Left(u8 taskId);
 static void PrintStatsScreen_Abilities(u8 taskId);
+static void PrintStatsScreen_Owner(u8 taskId);
 static void PrintInfoScreenTextWhite(const u8* str, u8 left, u8 top);
 static void PrintInfoScreenTextSmall(const u8* str, u8 fontId, u8 left, u8 top);
 static void Task_LoadEvolutionScreen(u8 taskId);
@@ -433,6 +435,8 @@ enum
     WIN_STATS_MOVES_DESCRIPTION,
     WIN_STATS_MOVES_BOTTOM,
     WIN_STATS_ABILITIES,
+    WIN_STATS_OWNER,
+    WIN_STATS_OWNER_BUTTON,
 };
 static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
 {
@@ -525,6 +529,28 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .height = 8,
         .paletteNum = 0,
         .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36,
+    },
+    // The foot of the base stats box: "Yours" and "Trainers'".
+    [WIN_STATS_OWNER] =
+    {
+        .bg = 2,
+        .tilemapLeft = 0,
+        .tilemapTop = 14,
+        .width = 12,
+        .height = 4,
+        .paletteNum = 0,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36 + 144,
+    },
+    // START beside them, in the text box palette the keypad icons are drawn for.
+    [WIN_STATS_OWNER_BUTTON] =
+    {
+        .bg = 2,
+        .tilemapLeft = 8,
+        .tilemapTop = 15,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36 + 144 + 48,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1147,14 +1173,10 @@ static void CreateStatBar(u8 *dst, u32 y, u32 width)
         WritePixel(dst, STAT_BAR_X_OFFSET + i, y + 4, COLOR_ID_BAR_WHITE);
     }
 }
-static const u8 sBaseStatOffsets[] =
+// The list's bars, top to bottom (HP, AT, DE, SA, SD, SP on the art).
+static const u8 sStatBarOrder[NUM_STATS] =
 {
-    offsetof(struct SpeciesInfo, baseHP),
-    offsetof(struct SpeciesInfo, baseAttack),
-    offsetof(struct SpeciesInfo, baseDefense),
-    offsetof(struct SpeciesInfo, baseSpAttack),
-    offsetof(struct SpeciesInfo, baseSpDefense),
-    offsetof(struct SpeciesInfo, baseSpeed),
+    STAT_HP, STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED,
 };
 void TryDestroyStatBars(void)
 {
@@ -1196,7 +1218,8 @@ static void CreateStatBars(struct PokedexListItem *dexMon)
         memcpy(gfx, sStatBarsGfx, sizeof(sStatBarsGfx));
         for (i = 0; i < NUM_STATS; i++)
         {
-            statValue = *((u8*)(&gSpeciesInfo[species]) + sBaseStatOffsets[i]);
+            // The same line the Stats page opens on: the player's own (Inclement) stats.
+            statValue = GetInclementSpeciesBaseStat(species, sStatBarOrder[i]);
             if (statValue <= 100)
             {
                 width = statValue / 3;
@@ -1892,6 +1915,96 @@ static void ResetStatsWindows(void)
     }
 }
 
+// Emerald Champions: A pages through the Stats page (battle facts, then breeding
+// and contest facts; the Abilities two at a time), and START switches the base
+// stats and Abilities between the player's own Pokemon, which use the Inclement
+// layer, and trainers' Pokemon, which never do.
+#define tStatsPage     data[5]
+#define tStatsTrainers data[7]
+
+// Text colors from the Pokedex's own background palette 0 (the same in every
+// Pokedex palette): red, blue and the mid gray of an unselected choice.
+#define STATS_PAGE_COLOR_HIGHER 11
+#define STATS_PAGE_COLOR_LOWER  13
+#define STATS_PAGE_COLOR_UNSELECTED 5
+
+// Every move the Stats page lists, egg moves first; see CalculateMoves.
+static EWRAM_DATA u16 *sStatsPageMoves = NULL;
+
+static bool32 IsStatsPageAlternate(u8 taskId)
+{
+    return (gTasks[taskId].tStatsPage & 1) != 0;
+}
+
+static u32 GetStatsPageBaseStat(u8 taskId, enum Species species, u32 stat)
+{
+    if (gTasks[taskId].tStatsTrainers)
+        return GetSpeciesBaseStat(species, stat);
+    return GetInclementSpeciesBaseStat(species, stat);
+}
+
+// Every distinct Ability, in the party menu's order (GetMonSelectableAbilitySlots):
+// normal slots, the Inclement slots (never for trainers), then the hidden slot.
+static u32 GetStatsPageAbilities(enum Species species, bool32 trainers, enum Ability *abilities)
+{
+    u8 order[NUM_OWNER_ABILITY_SLOTS];
+    u32 count = 0, orderCount = 0;
+
+    order[orderCount++] = 0;
+    order[orderCount++] = 1;
+    for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+        order[orderCount++] = slot;
+    order[orderCount++] = 2;
+    for (u32 i = 0; i < orderCount; i++)
+    {
+        enum Ability ability = GetSpeciesAbilityForOwner(species, order[i], trainers);
+        bool32 duplicate = FALSE;
+
+        if (ability == ABILITY_NONE)
+            continue;
+        for (u32 j = 0; j < count; j++)
+            duplicate |= abilities[j] == ability;
+        if (!duplicate)
+            abilities[count++] = ability;
+    }
+    return count;
+}
+
+// Whether the player's Pokemon of this species differ from trainers' at all.
+static bool32 HasStatsPageTrainersView(enum Species species)
+{
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        if (GetSpeciesBaseStat(species, stat) != GetInclementSpeciesBaseStat(species, stat))
+            return TRUE;
+    }
+    for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+    {
+        if (GetInclementAddedAbility(species, slot) != ABILITY_NONE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// A always shows both halves of the page; a species with five Abilities
+// needs a third page for its last one.
+static u32 GetStatsPageCount(u8 taskId)
+{
+    enum Ability abilities[NUM_OWNER_ABILITY_SLOTS];
+    u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, gTasks[taskId].tStatsTrainers, abilities);
+
+    return max(2, (count + 1) / 2);
+}
+
+static void FreeStatsPageMoves(void)
+{
+    if (sStatsPageMoves != NULL)
+    {
+        Free(sStatsPageMoves);
+        sStatsPageMoves = NULL;
+    }
+}
+
 static void SaveMonDataInStruct(void)
 {
     enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
@@ -1916,13 +2029,6 @@ static void SaveMonDataInStruct(void)
 
     sPokedexView->sPokemonStats.species             = species;
     sPokedexView->sPokemonStats.genderRatio         = gSpeciesInfo[species].genderRatio;
-    // The Pokedex shows the player's own base stats (Inclement's rebalance).
-    sPokedexView->sPokemonStats.baseHP              = GetInclementSpeciesBaseStat(species, STAT_HP);
-    sPokedexView->sPokemonStats.baseSpeed           = GetInclementSpeciesBaseStat(species, STAT_SPEED);
-    sPokedexView->sPokemonStats.baseAttack          = GetInclementSpeciesBaseStat(species, STAT_ATK);
-    sPokedexView->sPokemonStats.baseSpAttack        = GetInclementSpeciesBaseStat(species, STAT_SPATK);
-    sPokedexView->sPokemonStats.baseDefense         = GetInclementSpeciesBaseStat(species, STAT_DEF);
-    sPokedexView->sPokemonStats.baseSpDefense       = GetInclementSpeciesBaseStat(species, STAT_SPDEF);
     sPokedexView->sPokemonStats.differentEVs        = differentEVs;
     sPokedexView->sPokemonStats.evYield_HP          = evs[STAT_HP];
     sPokedexView->sPokemonStats.evYield_Speed       = evs[STAT_ATK];
@@ -1935,9 +2041,6 @@ static void SaveMonDataInStruct(void)
     sPokedexView->sPokemonStats.eggGroup2           = gSpeciesInfo[species].eggGroups[1];
     sPokedexView->sPokemonStats.eggCycles           = gSpeciesInfo[species].eggCycles;
     sPokedexView->sPokemonStats.friendship          = gSpeciesInfo[species].friendship;
-    sPokedexView->sPokemonStats.ability0            = GetAbilityBySpecies(species, 0);
-    sPokedexView->sPokemonStats.ability1            = GetAbilityBySpecies(species, 1);
-    sPokedexView->sPokemonStats.abilityHidden       = GetAbilityBySpecies(species, 2);
 }
 
 #define tMonSpriteId data[4]
@@ -2012,7 +2115,8 @@ static void Task_LoadStatsScreen(u8 taskId)
         gMain.state++;
         break;
     case 6:
-        gTasks[taskId].data[5] = 0;
+        gTasks[taskId].tStatsPage = 0;
+        gTasks[taskId].tStatsTrainers = FALSE;
         PrintStatsScreen_NameGender(taskId, sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE);
         PrintStatsScreen_Left(taskId);
         PrintStatsScreen_Abilities(taskId);
@@ -2068,14 +2172,24 @@ static void Task_LoadStatsScreen(u8 taskId)
 
 static void Task_HandleStatsScreenInput(u8 taskId)
 {
+    bool32 redraw = FALSE;
+
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_DEX_PAGE);
-        if (gTasks[taskId].data[5] == 0)
-            gTasks[taskId].data[5] = 1;
-        else
-            gTasks[taskId].data[5] = 0;
-
+        gTasks[taskId].tStatsPage = (gTasks[taskId].tStatsPage + 1) % GetStatsPageCount(taskId);
+        redraw = TRUE;
+    }
+    else if (JOY_NEW(START_BUTTON) && HasStatsPageTrainersView(sPokedexView->sPokemonStats.species))
+    {
+        PlaySE(SE_DEX_PAGE);
+        gTasks[taskId].tStatsTrainers = !gTasks[taskId].tStatsTrainers;
+        if (gTasks[taskId].tStatsPage >= GetStatsPageCount(taskId))
+            gTasks[taskId].tStatsPage = 0;
+        redraw = TRUE;
+    }
+    if (redraw)
+    {
         FillWindowPixelBuffer(WIN_STATS_LEFT, PIXEL_FILL(0));
         PrintStatsScreen_Left(taskId);
 
@@ -2163,71 +2277,80 @@ static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId)
     DestroySprite(&gSprites[gTasks[taskId].data[3]]);       //Destroy item icon
 }
 
-static u32 CountSpeciesEggMoves(enum Species species)
+static bool32 StatsPageListsMove(u32 count, enum Move move)
 {
-    u32 numEggMoves = 0;
-    const u16 *eggMoveLearnset = GetSpeciesEggMoves(species);
-    for (u32 i = 0; eggMoveLearnset[i] != MOVE_UNAVAILABLE; i++)
-        numEggMoves++;
-
-    return numEggMoves;
+    for (u32 i = 0; i < count; i++)
+    {
+        if (sStatsPageMoves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
 }
 
+// Egg moves first (they keep the Lucky Egg), then every level-up and teachable
+// move once. Battles grant no experience and leveling never teaches a move,
+// so those are all learned from the Center's tutor and show no level.
 static bool8 CalculateMoves(void)
 {
     enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
-
-    u32 numEggMoves = 0;
-    u32 numLevelUpMoves = 0;
-    u32 numTeachableMoves = 0;
-    u32 i;
+    enum Species eggSpecies;
+    const u16 *eggMoves, *teachable;
+    const struct LevelUpMove *learnset;
+    u32 capacity = 0, count = 0, i;
 
     // Mega and Gmax Pokémon don't have distinct learnsets from their base form; so use base species for calculation
     if (gSpeciesInfo[species].isMegaEvolution || gSpeciesInfo[species].isGigantamax)
         species = GetFormSpeciesId(species, 0);
 
-    // Egg moves
+    eggSpecies = species;
     if (HGSS_SHOW_EGG_MOVES_FOR_EVOS)
-        numEggMoves = CountSpeciesEggMoves(GetEggSpecies(species));
-    else
-        numEggMoves = CountSpeciesEggMoves(species);
-
-    // Level up moves
-    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+    {
+        while (GetSpeciesPreEvolution(eggSpecies) != SPECIES_NONE)
+            eggSpecies = GetSpeciesPreEvolution(eggSpecies);
+    }
+    eggMoves = GetSpeciesEggMoves(eggSpecies);
+    learnset = GetSpeciesLevelUpLearnset(species);
+    teachable = GetSpeciesTeachableLearnset(species);
+    for (i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
+        capacity++;
     for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-        numLevelUpMoves++;
+        capacity++;
+    for (i = 0; teachable[i] != MOVE_UNAVAILABLE; i++)
+        capacity++;
 
-    // TM and Tutor moves
-    const u16 *teachableLearnset = GetSpeciesTeachableLearnset(species);
-    for (i = 0; teachableLearnset[i] != MOVE_UNAVAILABLE; i++)
-        numTeachableMoves++;
-
-    sPokedexView->numEggMoves = numEggMoves;
-    sPokedexView->numLevelUpMoves = numLevelUpMoves;
-    sPokedexView->numTeachableMoves = numTeachableMoves;
-    sPokedexView->movesTotal = (numEggMoves + numLevelUpMoves + numTeachableMoves);
+    FreeStatsPageMoves();
+    sStatsPageMoves = Alloc(max(capacity, 1) * sizeof(*sStatsPageMoves));
+    if (sStatsPageMoves != NULL)
+    {
+        for (i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
+        {
+            if (!StatsPageListsMove(count, eggMoves[i]))
+                sStatsPageMoves[count++] = eggMoves[i];
+        }
+        sPokedexView->numEggMoves = count;
+        for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+        {
+            if (!StatsPageListsMove(count, learnset[i].move))
+                sStatsPageMoves[count++] = learnset[i].move;
+        }
+        sPokedexView->numLevelUpMoves = count - sPokedexView->numEggMoves;
+        for (i = 0; teachable[i] != MOVE_UNAVAILABLE; i++)
+        {
+            if (!StatsPageListsMove(count, teachable[i]))
+                sStatsPageMoves[count++] = teachable[i];
+        }
+    }
+    sPokedexView->numTeachableMoves = count - sPokedexView->numEggMoves - sPokedexView->numLevelUpMoves;
+    sPokedexView->movesTotal = count;
 
     return TRUE;
 }
 
-static enum Move GetSelectedMove(enum Species species, u32 selected)
+static enum Move GetSelectedMove(u32 selected)
 {
-    if (selected < sPokedexView->numEggMoves)
-    {
-        if (!HGSS_SHOW_EGG_MOVES_FOR_EVOS)
-            return GetSpeciesEggMoves(species)[selected];
-        enum Species preSpecies = species;
-        while (GetSpeciesPreEvolution(preSpecies) != SPECIES_NONE)
-            preSpecies = GetSpeciesPreEvolution(preSpecies);
-        return GetSpeciesEggMoves(preSpecies)[selected];
-    }
-    selected -= sPokedexView->numEggMoves;
-    if (selected < sPokedexView->numLevelUpMoves)
-        return GetSpeciesLevelUpLearnset(species)[selected].move;
-    selected -= sPokedexView->numLevelUpMoves;
-    if (selected < sPokedexView->numTeachableMoves)
-        return GetSpeciesTeachableLearnset(species)[selected];
-    return MOVE_NONE; //It should never get here but it allows us to visually see errors
+    if (sStatsPageMoves == NULL || selected >= sPokedexView->movesTotal)
+        return MOVE_NONE;
+    return sStatsPageMoves[selected];
 }
 
 static void PrintStatsScreen_Moves_Top(u8 taskId)
@@ -2236,9 +2359,8 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     u8 moves_y = 3;
 
     enum Item item = ITEM_MASTER_BALL;
-    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
     u32 selected = sPokedexView->moveSelected;
-    enum Move move = GetSelectedMove(species, selected);
+    enum Move move = GetSelectedMove(selected);
     //Moves selected from move max
     ConvertIntToDecimalStringN(gStringVar1, (selected+1), STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, sPokedexView->movesTotal, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -2250,14 +2372,6 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
         item = ITEM_LUCKY_EGG;
-    }
-    else if (selected < (sPokedexView->numLevelUpMoves + sPokedexView->numEggMoves))
-    {
-        u32 level = GetSpeciesLevelUpLearnset(species)[selected - sPokedexView->numEggMoves].level;
-        ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_LEFT_ALIGN, 3); //Move learn lvl
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, sText_Stats_MoveLevel, moves_x + 113, moves_y + 3); //Level text
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 14); //Print level
-        item = ITEM_RARE_CANDY;
     }
     else if (move)
     {
@@ -2275,7 +2389,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar3, moves_x, moves_y + 17);
 
     //Draw move type icon
-    if (gTasks[taskId].data[5] == 0)
+    if (!IsStatsPageAlternate(taskId))
     {
         SetTypeIconPosAndPal(GetMoveType(move), moves_x + 146, moves_y + 17, 0);
         SetSpriteInvisibility(1, TRUE);
@@ -2299,11 +2413,10 @@ static void PrintStatsScreen_Moves_Description(u8 taskId)
     u8 moves_x = 5;
     u8 moves_y = 5;
 
-    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
-    enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
+    enum Move move = GetSelectedMove(sPokedexView->moveSelected);
 
     //Move description
-    if (gTasks[taskId].data[5] == 0)
+    if (!IsStatsPageAlternate(taskId))
     {
         StringCopy(gStringVar4, GetMoveDescription(move));
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_DESCRIPTION, gStringVar4, moves_x, moves_y);
@@ -2320,7 +2433,7 @@ static void PrintStatsScreen_Moves_BottomText(u8 taskId)
     u8 moves_x = 8;
     u8 moves_y = 3;
 
-    if (gTasks[taskId].data[5] == 0)
+    if (!IsStatsPageAlternate(taskId))
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Power,  moves_x, moves_y);
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_BOTTOM, gText_Accuracy2,  moves_x + 66, moves_y);
@@ -2342,11 +2455,10 @@ static void PrintStatsScreen_Moves_Bottom(u8 taskId)
     u8 contest_appeal = 0;
     u8 contest_jam = 0;
 
-    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
-    enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
+    enum Move move = GetSelectedMove(sPokedexView->moveSelected);
 
     //Power + Accuracy
-    if (gTasks[taskId].data[5] == 0)
+    if (!IsStatsPageAlternate(taskId))
     {
         //Power
         u32 power = GetMovePower(move);
@@ -2460,39 +2572,47 @@ static void PrintStatsScreen_Left(u8 taskId)
     u8 strEV[25];
     u8 strBase[14];
 
-    // Base stats on both toggle pages: battles grant no EVs, so there is no
-    // EV yield to show.
+    // Base stats on both halves of the page: battles grant no EVs, so there is
+    // no EV yield to show. A stat Inclement changes is marked red where the line
+    // shown is the higher one and blue where it is the lower.
     {
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_HP, base_x, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_first_row, base_y + base_y_offset*base_i);
+        static const u8 sStatOrder[NUM_STATS] =
+        {
+            STAT_HP, STAT_SPEED, STAT_ATK, STAT_SPATK, STAT_DEF, STAT_SPDEF,
+        };
+        static const u8 *const sStatLabels[NUM_STATS] =
+        {
+            [STAT_HP] = sText_Stats_HP,
+            [STAT_ATK] = sText_Stats_Attack,
+            [STAT_DEF] = sText_Stats_Defense,
+            [STAT_SPEED] = sText_Stats_Speed,
+            [STAT_SPATK] = sText_Stats_SpAttack,
+            [STAT_SPDEF] = sText_Stats_SpDefense,
+        };
+        enum Species species = sPokedexView->sPokemonStats.species;
 
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Speed, base_x+base_x_second_row, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseSpeed, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
+        for (u32 i = 0; i < NUM_STATS; i++)
+        {
+            u32 stat = sStatOrder[i];
+            u32 shown = GetStatsPageBaseStat(taskId, species, stat);
+            u32 other = gTasks[taskId].tStatsTrainers
+                      ? GetInclementSpeciesBaseStat(species, stat) : GetSpeciesBaseStat(species, stat);
+            u8 color[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
+            u8 y = base_y + base_y_offset * (i / 2);
 
-        base_i++;
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Attack, base_x, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_first_row, base_y + base_y_offset*base_i);
-
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_SpAttack, base_x+base_x_second_row, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseSpAttack, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
-
-        base_i++;
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Defense, base_x, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_first_row, base_y + base_y_offset*base_i);
-
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_SpDefense, base_x+base_x_second_row, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseSpDefense, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
-        base_i++;
+            if (shown > other)
+                color[1] = STATS_PAGE_COLOR_HIGHER;
+            else if (shown < other)
+                color[1] = STATS_PAGE_COLOR_LOWER;
+            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sStatLabels[stat], base_x + ((i & 1) ? base_x_second_row : 0), y);
+            ConvertIntToDecimalStringN(strBase, shown, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            AddTextPrinterParameterized4(WIN_STATS_LEFT, FONT_SMALL, base_x + ((i & 1) ? base_x_offset : base_x_first_row), y, 0, 0, color, 0, strBase);
+        }
+        base_i = NUM_STATS / 2;
     }
     //TOGGLE--------------------------------------
     // Battles give no experience: no Exp. Yield or growth-rate rows.
-    if (gTasks[taskId].data[5] == 0)
+    if (!IsStatsPageAlternate(taskId))
     {
         u32 catchRate = sPokedexView->sPokemonStats.catchRate;
 
@@ -2690,43 +2810,62 @@ static void PrintStatsScreen_Left(u8 taskId)
         }
         base_i++;
     }
+
+    PrintStatsScreen_Owner(taskId);
 }
 
+// Whose base stats and Abilities are shown, at the foot of the box, with START
+// beside the two choices. Species Inclement never touched show neither.
+static void PrintStatsScreen_Owner(u8 taskId)
+{
+    static const u8 sText_Start[] = _("{START_BUTTON}");
+    u8 selected[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
+    u8 unselected[3] = {TEXT_COLOR_TRANSPARENT, STATS_PAGE_COLOR_UNSELECTED, TEXT_COLOR_LIGHT_GRAY};
+    bool32 trainers = gTasks[taskId].tStatsTrainers;
+
+    FillWindowPixelBuffer(WIN_STATS_OWNER, PIXEL_FILL(0));
+    FillWindowPixelBuffer(WIN_STATS_OWNER_BUTTON, PIXEL_FILL(0));
+    if (HasStatsPageTrainersView(sPokedexView->sPokemonStats.species))
+    {
+        AddTextPrinterParameterized4(WIN_STATS_OWNER, FONT_SMALL, 8, 7, 0, 0, trainers ? unselected : selected, 0, sText_Stats_Yours);
+        AddTextPrinterParameterized4(WIN_STATS_OWNER, FONT_SMALL, 8, 18, 0, 0, trainers ? selected : unselected, 0, sText_Stats_Trainers);
+        AddTextPrinterParameterized3(WIN_STATS_OWNER_BUTTON, FONT_SMALL, 5, 4, sStatsPageNavigationTextColor, 0, sText_Start);
+    }
+    CopyWindowToVram(WIN_STATS_OWNER, COPYWIN_GFX);
+    CopyWindowToVram(WIN_STATS_OWNER_BUTTON, COPYWIN_GFX);
+}
+
+// Ability names and descriptions shrink to the box when they would overflow it.
+static void PrintStatsScreenAbility(enum Ability ability, u8 x, u8 y)
+{
+    static const u8 sNameColor[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6};
+    static const u8 sDescriptionColor[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY};
+    const u8 *name = gAbilitiesInfo[ability].name;
+    const u8 *description = gAbilitiesInfo[ability].description;
+    u32 width = WindowWidthPx(WIN_STATS_ABILITIES) - x - 1; // to the box's inner edge
+
+    AddTextPrinterParameterized4(WIN_STATS_ABILITIES, GetFontIdToFit(name, FONT_SMALL, 0, width), x, y, 0, 0, sNameColor, 0, name);
+    AddTextPrinterParameterized4(WIN_STATS_ABILITIES, GetFontIdToFit(description, FONT_SMALL, 0, width), x, y + 14, 0, 0, sDescriptionColor, 0, description);
+}
+
+// Two Abilities per half of the page, in the party menu's order; the
+// player's own Pokemon also list their Inclement Abilities.
 static void PrintStatsScreen_Abilities(u8 taskId)
 {
-    u8 abilities_x = 5;
-    u8 abilities_y = 3;
-    enum Ability ability0;
-    enum Ability ability1;
-    enum Ability abilityHidden;
+    enum Ability abilities[NUM_OWNER_ABILITY_SLOTS];
+    u32 count = GetStatsPageAbilities(sPokedexView->sPokemonStats.species, gTasks[taskId].tStatsTrainers, abilities);
+    u32 pages = max(1, (count + 1) / 2);
+    u32 first = (gTasks[taskId].tStatsPage % pages) * 2;
 
-    //Abilitie(s)
-
-    if (gTasks[taskId].data[5] == 0)
-    {
-        ability0 = sPokedexView->sPokemonStats.ability0;
-        PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilitiesInfo[ability0].name, abilities_x, abilities_y);
-        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilitiesInfo[ability0].description, abilities_x, abilities_y + 14);
-
-        ability1 = sPokedexView->sPokemonStats.ability1;
-        if (ability1 != ABILITY_NONE && ability1 != ability0)
-        {
-            PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilitiesInfo[ability1].name, abilities_x, abilities_y + 30);
-            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilitiesInfo[ability1].description, abilities_x, abilities_y + 44);
-        }
-    }
-    else //Hidden abilities
-    {
-        abilityHidden = sPokedexView->sPokemonStats.abilityHidden;
-        PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilitiesInfo[abilityHidden].name, abilities_x, abilities_y);
-        PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilitiesInfo[abilityHidden].description, abilities_x, abilities_y + 14);
-    }
+    for (u32 i = first; i < first + 2 && i < count; i++)
+        PrintStatsScreenAbility(abilities[i], 5, 3 + 30 * (i - first));
 }
 
 static void Task_SwitchScreensFromStatsScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        FreeStatsPageMoves();
         FreeSpriteTilesByTag(ITEM_TAG);                         //Destroy item icon
         FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]); //Destroy item icon
@@ -2761,6 +2900,7 @@ static void Task_ExitStatsScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        FreeStatsPageMoves();
         FreeSpriteTilesByTag(ITEM_TAG);                         //Destroy item icon
         FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]); //Destroy item icon
