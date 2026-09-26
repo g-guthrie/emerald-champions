@@ -732,7 +732,7 @@
       "x": 17,
       "y": 82,
       "elevation": 3,
-      "item": "ITEM_CALCIUM",
+      "item": "ITEM_UTILITY_UMBRELLA",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM"
     },
     {

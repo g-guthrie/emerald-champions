@@ -6,25 +6,22 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft:: @ 821FC65
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_PPBoosters
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
+	@ PP Boosters (the 1F floor sign): no other counter sells them for money.
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins: @ 821FC7C
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
+LilycoveCity_DepartmentStore_3F_Pokemart_PPBoosters:
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
 	.2byte ITEM_NONE
 	release
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM:: @ 821FCB6
-	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_3F_Text_PPUpForFewPPMoves, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_PokefanM:: @ 821FCBF
@@ -32,22 +29,24 @@ LilycoveCity_DepartmentStore_3F_EventScript_PokefanM:: @ 821FCBF
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_Woman:: @ 821FCC8
-	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_3F_Text_SwitchedAbilityForFree, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon: @ 821FCD1
-	.string "For quickly toughening up Pokémon,\n"
-	.string "items are the best.\p"
-	.string "Protein boosts Attack,\n"
-	.string "and Calcium raises Sp. Atk.$"
+LilycoveCity_DepartmentStore_3F_Text_PPUpForFewPPMoves:
+	.string "A PP Up lets a move be used a few\n"
+	.string "more times in every battle.\p"
+	.string "I save mine for strong moves that\n"
+	.string "run out of PP too fast!$"
 
-LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance: @ 821FD3B
+LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance:
 	.string "I want my Pokémon to have more\n"
 	.string "endurance.\p"
-	.string "I'm trying to decide whether to raise\n"
-	.string "Defense with Iron, or Sp. Def with Zinc.$"
+	.string "Should its EVs go into Defense,\n"
+	.string "or into Sp. Def?\p"
+	.string "The move tutor can always change\n"
+	.string "them later, so I can't go wrong!$"
 
-LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon: @ 821FDB4
-	.string "I gave a Carbos to my Pokémon,\n"
-	.string "and its Speed went up.$"
-
+LilycoveCity_DepartmentStore_3F_Text_SwitchedAbilityForFree:
+	.string "I switched my Pokémon's Ability\n"
+	.string "right from the party menu.\p"
+	.string "It didn't cost a thing!$"

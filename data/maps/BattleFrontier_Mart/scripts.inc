@@ -22,12 +22,6 @@ BattleFrontier_Mart_Pokemart: @ 8267AE4
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
 	.2byte ITEM_NONE
 	release
 	end
@@ -40,7 +34,7 @@ BattleFrontier_Mart_EventScript_OldWoman:: @ 8267B0B
 	lock
 	applymovement LOCALID_OLD_WOMAN, Common_Movement_FaceDown
 	waitmovement 0
-	msgbox BattleFrontier_Mart_Text_ProteinMakeNiceGift, MSGBOX_DEFAULT
+	msgbox BattleFrontier_Mart_Text_HyperPotionMakeNiceGift, MSGBOX_DEFAULT
 	release
 	end
 
@@ -54,10 +48,10 @@ BattleFrontier_Mart_Text_ChaperonGrandson: @ 8267B29
 	.string "But since we're here, we thought\n"
 	.string "we should get some souvenirs.$"
 
-BattleFrontier_Mart_Text_ProteinMakeNiceGift: @ 8267B8F
+BattleFrontier_Mart_Text_HyperPotionMakeNiceGift: @ 8267B8F
 	.string "Dear, what do you think of this?\n"
 	.string "Wouldn't this make a nice gift?\p"
-	.string "It's…Pro…Te…In?\n"
+	.string "It's…Hy…Per…Potion?\n"
 	.string "It sounds delicious, doesn't it?$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems: @ 8267C01

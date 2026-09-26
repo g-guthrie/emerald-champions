@@ -233,7 +233,7 @@ SlateportCity_PokemonFanClub_EventScript_Man:: @ 820A1E8
 	end
 
 SlateportCity_PokemonFanClub_EventScript_Twin:: @ 820A1F1
-	msgbox SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein, MSGBOX_NPC
+	msgbox SlateportCity_PokemonFanClub_Text_MonEnjoyedLuxuryBall, MSGBOX_NPC
 	end
 
 SlateportCity_PokemonFanClub_EventScript_Skitty:: @ 820A1FA
@@ -427,11 +427,11 @@ SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting: @ 820AC47
 	.string "In other words, it certainly won't\n"
 	.string "like you very much.$"
 
-SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein: @ 820ACF9
-	.string "Do Pokémon enjoy having items used\n"
-	.string "on them?\p"
-	.string "Mine acted really happy when I gave\n"
-	.string "it some Protein.$"
+SlateportCity_PokemonFanClub_Text_MonEnjoyedLuxuryBall:
+	.string "Do Pokémon remember how they were\n"
+	.string "caught?\p"
+	.string "Mine got friendly so quickly after\n"
+	.string "I caught it in a Luxury Ball.$"
 
 SlateportCity_PokemonFanClub_Text_Skitty: @ 820AD5A
 	.string "Skitty: Fffnyaaaah…$"
