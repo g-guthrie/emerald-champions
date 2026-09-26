@@ -9,6 +9,7 @@ LavaridgeTown_MapScripts:: @ 81EA4D3
 LavaridgeTown_OnTransition: @ 81EA4DE
 	setflag FLAG_VISITED_LAVARIDGE_TOWN
 	call_if_eq VAR_LAVARIDGE_TOWN_STATE, 3, LavaridgeTown_EventScript_ShowPendingGoggles
+	call_if_eq VAR_LAVARIDGE_TOWN_STATE, 4, LavaridgeTown_EventScript_ShowPendingGogglesByGym
 	call_if_set FLAG_WHITEOUT_TO_LAVARIDGE, LavaridgeTown_EventScript_ClearLavaridgeWhiteOut
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_ShowMtChimneyTrainers
 	call Common_EventScript_SetupRivalGfxId
@@ -67,7 +68,7 @@ LavaridgeTown_EventScript_RivalGiveGoGoggles:: @ 81EA551
 	call_if_ne LavaridgeTown_EventScript_RivalApproachPlayer2
 	specialvar VAR_RESULT, CanReceiveGoGogglesGift
 	compare VAR_RESULT, FALSE
-	goto_if_eq LavaridgeTown_EventScript_GogglesNoRoom
+	goto_if_eq LavaridgeTown_EventScript_SceneGogglesNoRoom
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq LavaridgeTown_EventScript_MayGiveGoGoggles
@@ -450,14 +451,57 @@ LavaridgeTown_Text_HerbShopSign: @ 81EB1CB
 	.string "“Bitter taste--better cure!”$"
 
 
-@ State 3 keeps the interrupted gift available without repeating the frame scene.
+@ States 3 and 4 keep the interrupted gift available without repeating the
+@ frame scene. Each puts the rival where that scene left her, so re-entry and
+@ Continue agree: 11,9 by the Center (3) or 6,16 by the Gym door (4).
 LavaridgeTown_EventScript_ShowPendingGoggles::
 	setobjectxyperm LOCALID_RIVAL, 11, 9
 	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL
 	return
 
-LavaridgeTown_EventScript_GogglesNoRoom::
+LavaridgeTown_EventScript_ShowPendingGogglesByGym::
+	setobjectxyperm LOCALID_RIVAL, 6, 16
+	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL
+	return
+
+LavaridgeTown_EventScript_SceneGogglesNoRoom::
 	setvar VAR_LAVARIDGE_TOWN_STATE, 3
+	call_if_ne VAR_0x8008, 9, LavaridgeTown_EventScript_WaitByGym
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
+	msgbox LavaridgeTown_Text_GogglesNoRoom, MSGBOX_DEFAULT
+	closemessage
+	call_if_eq VAR_0x8008, 9, LavaridgeTown_EventScript_RivalStepAsideFromCenter
+	call_if_ne VAR_0x8008, 9, LavaridgeTown_EventScript_RivalWaitByGym
+	copyobjectxytoperm LOCALID_RIVAL
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	releaseall
+	end
+
+LavaridgeTown_EventScript_WaitByGym::
+	setvar VAR_LAVARIDGE_TOWN_STATE, 4
+	return
+
+@ From 9,8, below a player at the Center door: out of the doorway to 11,9.
+LavaridgeTown_EventScript_RivalStepAsideFromCenter::
+	applymovement LOCALID_RIVAL, LavaridgeTown_Movement_RivalStepAsideFromCenter
+	waitmovement 0
+	return
+
+LavaridgeTown_EventScript_RivalWaitByGym::
+	applymovement LOCALID_RIVAL, Common_Movement_FaceDown
+	waitmovement 0
+	return
+
+LavaridgeTown_Movement_RivalStepAsideFromCenter:
+	walk_down
+	walk_right
+	walk_right
+	face_down
+	step_end
+
+@ Talking to the waiting rival: she stays where she is (state 3 or 4).
+LavaridgeTown_EventScript_GogglesNoRoom::
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	msgbox LavaridgeTown_Text_GogglesNoRoom, MSGBOX_DEFAULT
 	savebgm MUS_DUMMY
