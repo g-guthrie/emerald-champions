@@ -229,12 +229,12 @@ Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon:
 	.string "I'm the Day-Care Man.\p"
 	.string "I help take care of the precious\n"
 	.string "Pokémon of Trainers.\p"
-	.string "If you'd like me to raise your Pokémon,\n"
-	.string "have a word with my wife.$"
+	.string "If you'd like me to look after your\n"
+	.string "Pokémon, have a word with my wife.$"
 
 Route117_Text_DoYouWantEgg:
 	.string "Ah, it's you!\p"
-	.string "We were raising your Pokémon,\n"
+	.string "We were looking after your Pokémon,\n"
 	.string "and my goodness, were we surprised!\p"
 	.string "Your Pokémon had an Egg!\p"
 	.string "We don't know how it got there,\n"
@@ -277,21 +277,23 @@ Route117_Text_IWillKeepDoYouWantIt:
 
 Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon:
 	.string "I'm the Day-Care Lady.\p"
-	.string "We raise Pokémon free of charge.\p"
-	.string "Would you like us to raise one?$"
+	.string "We look after Pokémon free of charge.\p"
+	.string "They won't gain levels here, but\n"
+	.string "sometimes an Egg turns up!\p"
+	.string "Would you like us to look after one?$"
 
 Route117_PokemonDayCare_Text_WhichMonShouldWeRaise:
 	.string "Choose a Pokémon from your party\n"
-	.string "or PC for us to raise.$"
+	.string "or PC for us to look after.$"
 
 Route117_PokemonDayCare_Text_WellRaiseYourMon:
-	.string "Fine, we'll raise your {STR_VAR_1}\n"
-	.string "for a while.\p"
+	.string "Fine, we'll look after your\n"
+	.string "{STR_VAR_1} for a while.\p"
 	.string "Come back for it later.$"
 
 Route117_PokemonDayCare_Text_WeCanRaiseOneMore:
-	.string "We can raise two of your Pokémon.\n"
-	.string "Would you like us to raise one more?$"
+	.string "We can look after two Pokémon.\n"
+	.string "Would you like us to take one more?$"
 
 Route117_PokemonDayCare_Text_HusbandWasLookingForYou:
 	.string "My husband was looking for you.$"
@@ -326,8 +328,8 @@ Route117_PokemonDayCare_Text_YourTeamIsFull:
 	.string "Make room, then come see me.$"
 
 Route117_PokemonDayCare_Text_NoChargeTakeItBack:
-	.string "There is no charge for raising\n"
-	.string "{STR_VAR_1}.\p"
+	.string "There is no charge for looking\n"
+	.string "after {STR_VAR_1}.\p"
 	.string "Will you take it back?$"
 
 Route117_PokemonDayCare_Text_HeresYourMon:

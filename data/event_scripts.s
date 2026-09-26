@@ -995,8 +995,8 @@ gText_PokerusExplanation::
 	.string "Little is known about the Pokérus\n"
 	.string "except that they are microscopic life-\l"
 	.string "forms that attach to Pokémon.\p"
-	.string "While infected, Pokémon are said to\n"
-	.string "grow exceptionally well.$"
+	.string "It's harmless, and it doesn't change\n"
+	.string "how your Pokémon grow.$"
 
 	.include "data/text/surf.inc"
 

@@ -40,9 +40,10 @@ Route114_Text_CollectBattleBerries:
 
 Route114_Text_GrowBattleBerries:
 	.string "Plant a few to keep your supply up.\p"
-	.string "The Regenerator Key Item restores\n"
-	.string "held Berries after battle. Until\l"
-	.string "then, keep a few spares!$"
+	.string "Your Regenerator brings back a Berry\n"
+	.string "its own holder eats in battle.\p"
+	.string "But one a foe steals or burns is\n"
+	.string "gone for good!$"
 
 Route114_Text_ComeBackForBerries:
 	.string "I can share another Berry tomorrow.\p"

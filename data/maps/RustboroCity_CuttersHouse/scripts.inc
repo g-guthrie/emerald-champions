@@ -36,7 +36,7 @@ RustboroCity_CuttersHouse_Text_ExplainCut: @ 8215D33
 	.string "using Cut in the party menu.\p"
 	.string "One more thing: Pokémon nest in\n"
 	.string "thin trees, and some live nowhere\l"
-	.string "else. A route's sign lists them.$"
+	.string "else. Cut one, and one may pop out!$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees: @ 8215E39
 	.string "When they were expanding the city of\n"
