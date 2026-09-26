@@ -15,10 +15,14 @@
     },
     {
       "tap": "A",
-      "every": 120,
-      "frames": 3600,
+      "every": 30,
+      "frames": 17500,
       "label": "Catch tutorial begins",
       "until": "battle"
+    },
+    {
+      "frames": 300,
+      "label": "Tutorial battle visible"
     }
   ],
   "expect": {

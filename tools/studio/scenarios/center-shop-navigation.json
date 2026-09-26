@@ -1,0 +1,116 @@
+{
+  "name": "Center clerk: each shop returns to its parent menu",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS": true
+    },
+    "items": {
+      "ITEM_CHOICE_BAND": 1
+    }
+  },
+  "warp": {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "x": 2,
+    "y": 4,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Welcome page"
+    },
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Service menu"
+    },
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Supplies buy list"
+    },
+    {
+      "press": "B",
+      "frames": 500,
+      "label": "Back to service menu"
+    },
+    {
+      "press": "Down",
+      "frames": 30,
+      "label": "Held Items selected"
+    },
+    {
+      "press": "A",
+      "frames": 900,
+      "label": "Held Items welcome"
+    },
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Held Items shelves"
+    },
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Offense buy list"
+    },
+    {
+      "press": "B",
+      "frames": 500,
+      "label": "Back to shelves"
+    },
+    {
+      "press": "B",
+      "frames": 500,
+      "label": "Back to service menu"
+    },
+    {
+      "press": "Down",
+      "frames": 30,
+      "label": "Sell selected"
+    },
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Sell list"
+    },
+    {
+      "press": "B",
+      "frames": 500,
+      "label": "Back from Sell"
+    },
+    {
+      "press": "B",
+      "frames": 500,
+      "label": "Farewell"
+    },
+    {
+      "press": "A",
+      "frames": 500,
+      "label": "Controls restored"
+    }
+  ],
+  "expect": {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "ready": true,
+    "battle": false,
+    "queries": {
+      "service_cursor": 2,
+      "shelf_cursor": 0
+    }
+  },
+  "queries": {
+    "service_cursor": {
+      "kind": 2,
+      "id": 32777
+    },
+    "shelf_cursor": {
+      "kind": 2,
+      "id": 32776
+    }
+  }
+}

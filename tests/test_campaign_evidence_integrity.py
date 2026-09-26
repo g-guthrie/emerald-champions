@@ -175,7 +175,8 @@ class ProductionPolicyTests(unittest.TestCase):
     def test_actual_c_classifier_passes_declared_policy_cases(self):
         result = policy.audit()
         self.assertEqual(result["failures"], [])
-        self.assertEqual(len(result["flows"]), 29)
+        self.assertEqual([row["flow"] for row in result["flows"]],
+                         [case[0] for case in policy.CASES])
         self.assertEqual(result["evidence"]["mode"], "actual-production-C-host-execution")
         self.assertRegex(result["evidence"]["classifier_sha256"], r"^[0-9a-f]{64}$")
 

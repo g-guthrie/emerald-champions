@@ -89,6 +89,7 @@ static enum EmeraldChampionsHeadlessScenario gEcHeadlessFixtureActiveScenario;
 static unsigned partyCount;
 static unsigned gEcHeadlessCampaignForceLoss;
 static unsigned gEcHeadlessFixtureParam;
+static unsigned gEcHeadlessFixtureTrigger;
 static unsigned gEcHeadlessCampaignCaptureSerial;
 static unsigned gEcHeadlessCampaignBattleSerial;
 static unsigned CalculatePlayerPartyCount(void) { return partyCount; }

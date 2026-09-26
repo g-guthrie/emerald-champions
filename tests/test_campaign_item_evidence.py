@@ -19,7 +19,8 @@ class CampaignItemEvidence(unittest.TestCase):
     def test_actual_enum_includes_generated_members_and_aliases(self):
         self.assertGreater(self.constants['ITEM_LETTER'], 0)
         self.assertEqual(self.constants['ITEM_DEVON_GOODS'], self.constants['ITEM_DEVON_PARTS'])
-        self.assertIn('ITEM_TM01', self.constants)
+        self.assertIn('ITEM_LEVELER', self.constants)
+        self.assertNotIn('ITEM_TM01', self.constants)
         self.assertIn('FLAG_BADGE01_GET', self.constants)
 
     def test_item_manifest_validation(self):

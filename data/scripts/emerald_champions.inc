@@ -236,56 +236,6 @@ EmeraldChampions_Text_RepelSprayMistedAgain:
 	.string "Wild Pokémon will keep their distance\n"
 	.string "for the next 500 steps.$"
 
-@ These continuations run under their caller's lock and return to that caller.
-EmeraldChampions_EventScript_FormChooseMon:
-	msgbox EmeraldChampions_Text_FormChooseMon, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_ReturnService
-	copyvar VAR_0x800A, VAR_0x8004
-	special BuildEmeraldChampionsFormChoices
-	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_FormUnavailable
-	message EmeraldChampions_Text_FormChooseTarget
-	waitmessage
-	dynmultipush EmeraldChampions_Text_Back, 0
-	dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_FormChooseMon
-	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_FormChooseMon
-	copyvar VAR_0x8008, VAR_RESULT
-	special PrepareEmeraldChampionsFormSelection
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_FormChooseMon
-	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_CostumeChooseMove
-	goto EmeraldChampions_EventScript_FormPreview
-
-EmeraldChampions_EventScript_CostumeChooseMove:
-	msgbox EmeraldChampions_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
-	copyvar VAR_0x8004, VAR_0x800A
-	fadescreen FADE_TO_BLACK
-	special MoveDeleterChooseMoveToForget
-	fadescreen FADE_FROM_BLACK
-	goto_if_eq VAR_0x8005, MAX_MON_MOVES, EmeraldChampions_EventScript_FormChooseMon
-
-EmeraldChampions_EventScript_FormPreview:
-	special BufferEmeraldChampionsFormPreview
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_FormBlocked
-	msgbox gStringVar4, MSGBOX_DEFAULT
-	msgbox EmeraldChampions_Text_ConfirmFormChange, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_FormChooseMon
-	special ApplyEmeraldChampionsFormSelection
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_FormBlocked
-	playfanfare MUS_LEVEL_UP
-	waitfanfare
-	msgbox EmeraldChampions_Text_FormChanged, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_FormChooseMon
-
-EmeraldChampions_EventScript_FormBlocked:
-	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_FormChooseMon
-
-EmeraldChampions_EventScript_FormUnavailable:
-	msgbox EmeraldChampions_Text_FormUnavailable, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_FormChooseMon
-
 EmeraldChampions_EventScript_SpecialistBonding:
 	setvar VAR_0x800B, 1
 	call Common_EventScript_EmeraldChampionsBonding
@@ -299,19 +249,22 @@ Common_EventScript_EmeraldChampionsBonding::
 	setvar VAR_0x8008, 0
 	special BufferEmeraldChampionsBondingPreview
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_BondingUnavailable
+
+@ Declining a preview returns here with the cursor on the value just viewed.
+EmeraldChampions_EventScript_BondingValues:
 	message EmeraldChampions_Text_BondingValues
 	waitmessage
 	dynmultipush EmeraldChampions_Text_BondingLow, 0
 	dynmultipush EmeraldChampions_Text_BondingThreshold, 1
 	dynmultipush EmeraldChampions_Text_BondingMaximum, 2
 	dynmultipush EmeraldChampions_Text_Back, 3
-	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_ge VAR_RESULT, 3, Common_EventScript_EmeraldChampionsBonding
 	copyvar VAR_0x8008, VAR_RESULT
 	special BufferEmeraldChampionsBondingPreview
 	msgbox gStringVar4, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Common_EventScript_EmeraldChampionsBonding
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_BondingValues
 	special ApplyEmeraldChampionsBonding
 	msgbox EmeraldChampions_Text_BondingDone, MSGBOX_DEFAULT
 	goto Common_EventScript_EmeraldChampionsBonding
@@ -323,18 +276,6 @@ EmeraldChampions_EventScript_BondingUnavailable:
 EmeraldChampions_EventScript_ReturnService:
 	return
 
-EmeraldChampions_Text_FormChooseMon:
-	.string "Which partner would you like to study?$"
-EmeraldChampions_Text_FormChooseTarget:
-	.string "Which appearance or form?$"
-EmeraldChampions_Text_WhichMoveShouldBeForgotten:
-	.string "Which move should be forgotten?$"
-EmeraldChampions_Text_ConfirmFormChange:
-	.string "Make this change?$"
-EmeraldChampions_Text_FormChanged:
-	.string "Your partner's new look is ready!$"
-EmeraldChampions_Text_FormUnavailable:
-	.string "That Pokémon can't change its look\nhere. Please choose another.$"
 EmeraldChampions_Text_Bonding:
 	.string "Bonding$"
 EmeraldChampions_Text_BondingChooseMon:

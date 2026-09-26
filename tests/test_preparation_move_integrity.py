@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from verify_trainer_ability_legality import preprocess_species_info, SPECIES_MARKER
+from verify_emerald_champions_campaign_battle_policy import c_block
 
 
 class PreparationMoveIntegrity(unittest.TestCase):
@@ -36,8 +37,13 @@ class PreparationMoveIntegrity(unittest.TestCase):
         lookup = sets[sets.index("static bool32 IsValidBattleFormat("):
                       sets.index("static bool32 IsVisiblePreset(")]
         tutor = (ROOT / "src/move_relearner.c").read_text()
-        collector = sets[sets.index("const u16 *GetEmeraldChampionsPreparationMoves("):
-                         sets.index("bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(")]
+        # Extract the functions this fixture executes. Unrelated tutor modes
+        # can be inserted between them without becoming fixture dependencies.
+        collector = "\n".join(c_block(sets, signature) for signature in (
+            "const u16 *GetEmeraldChampionsPreparationMoves(enum Species species)",
+            "static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, bool8 *availableMoves)",
+            "u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)",
+        ))
         has_moves = tutor[tutor.rindex("static bool32 HasRelearnerAllMoves("):
                           tutor.rindex("static bool32 IsLevelUpMoveRelearnerActive(")]
 
