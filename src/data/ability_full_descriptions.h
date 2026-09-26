@@ -297,8 +297,7 @@
     [ABILITY_SAND_STREAM] = COMPOUND_STRING(
         "On entry, starts a sandstorm\n"
         "for five turns, or eight with\n"
-        "Smooth Rock. It cannot\n"
-        "replace map weather."),
+        "Smooth Rock."),
 
     [ABILITY_PRESSURE] = COMPOUND_STRING(
         "Moves that target it cost an\n"
@@ -761,8 +760,7 @@
     [ABILITY_SNOW_WARNING] = COMPOUND_STRING(
         "On entry, starts snow for\n"
         "five turns, or eight with Icy\n"
-        "Rock. It cannot replace map\n"
-        "weather. Snow does not cause\n"
+        "Rock. Snow does not cause\n"
         "hail damage."),
 
     [ABILITY_HONEY_GATHER] = COMPOUND_STRING(
@@ -1605,8 +1603,7 @@
         "When a damaging move hits it,\n"
         "starts a sandstorm for five\n"
         "turns, or eight with Smooth\n"
-        "Rock. It cannot replace map\n"
-        "weather."),
+        "Rock."),
 
     [ABILITY_ICE_SCALES] = COMPOUND_STRING(
         "Special attacks deal half\n"
