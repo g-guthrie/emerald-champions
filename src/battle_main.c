@@ -2930,7 +2930,7 @@ static void BattleStartClearSetData(void)
     gBattleStruct->safariPkblThrowCounter = 0;
     gBattleStruct->safariCatchFactor = gSpeciesInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES)].catchRate * 100 / 1275;
     gBattleStruct->safariEscapeFactor = 3;
-    gBattleStruct->wildVictorySong = 0;
+    gBattleStruct->victorySongStarted = FALSE;
     gBattleStruct->moneyMultiplier = 1;
     InitCampaignBattleReward();
     InitTrainerMoneyRewardEligibility();
@@ -5299,6 +5299,39 @@ static void RunTurnActionsFunctions(void)
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
 }
 
+// The victory tune for the trainer the player beat, by facility or class.
+u16 GetTrainerVictorySong(void)
+{
+    if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_EREADER_TRAINER))
+    {
+        if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_FRONTIER_BRAIN)
+            return MUS_VICTORY_GYM_LEADER;
+        return MUS_VICTORY_TRAINER;
+    }
+
+    // Secret base and link opponents have no trainer class to look up.
+    if (IsSpecialTrainer(TRAINER_BATTLE_PARAM.opponentA))
+        return MUS_VICTORY_TRAINER;
+
+    switch (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA))
+    {
+    case TRAINER_CLASS_ELITE_FOUR:
+    case TRAINER_CLASS_CHAMPION:
+        return MUS_VICTORY_LEAGUE;
+    case TRAINER_CLASS_TEAM_AQUA:
+    case TRAINER_CLASS_TEAM_MAGMA:
+    case TRAINER_CLASS_AQUA_ADMIN:
+    case TRAINER_CLASS_AQUA_LEADER:
+    case TRAINER_CLASS_MAGMA_ADMIN:
+    case TRAINER_CLASS_MAGMA_LEADER:
+        return MUS_VICTORY_AQUA_MAGMA;
+    case TRAINER_CLASS_LEADER:
+        return MUS_VICTORY_GYM_LEADER;
+    default:
+        return MUS_VICTORY_TRAINER;
+    }
+}
+
 static void HandleEndTurn_BattleWon(void)
 {
     gCurrentActionFuncId = 0;
@@ -5314,40 +5347,13 @@ static void HandleEndTurn_BattleWon(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_EREADER_TRAINER))
     {
-        BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
-
-        if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_FRONTIER_BRAIN)
-            PlayBGM(MUS_VICTORY_GYM_LEADER);
-        else
-            PlayBGM(MUS_VICTORY_TRAINER);
+        StartVictorySong(); // Usually already playing from the last knockout.
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-        BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
-
-        switch (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA))
-        {
-        case TRAINER_CLASS_ELITE_FOUR:
-        case TRAINER_CLASS_CHAMPION:
-            PlayBGM(MUS_VICTORY_LEAGUE);
-            break;
-        case TRAINER_CLASS_TEAM_AQUA:
-        case TRAINER_CLASS_TEAM_MAGMA:
-        case TRAINER_CLASS_AQUA_ADMIN:
-        case TRAINER_CLASS_AQUA_LEADER:
-        case TRAINER_CLASS_MAGMA_ADMIN:
-        case TRAINER_CLASS_MAGMA_LEADER:
-            PlayBGM(MUS_VICTORY_AQUA_MAGMA);
-            break;
-        case TRAINER_CLASS_LEADER:
-            PlayBGM(MUS_VICTORY_GYM_LEADER);
-            break;
-        default:
-            PlayBGM(MUS_VICTORY_TRAINER);
-            break;
-        }
+        StartVictorySong(); // Usually already playing from the last knockout.
     }
     else
     {
@@ -5397,6 +5403,10 @@ static void HandleEndTurn_BattleLost(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         }
         gBattlescriptCurrInstr = IsEmeraldChampionsBirchRescueBattle() ? BattleScript_RestartBattleNoPenalty : BattleScript_LocalBattleLost;
+        // The last foe fell but the player's side fell with it (recoil, Life
+        // Orb, weather): the victory tune that started with the knockout stops.
+        if (gBattleStruct->victorySongStarted)
+            FadeOutBGM(4);
     }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;

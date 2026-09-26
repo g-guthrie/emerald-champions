@@ -1958,6 +1958,7 @@ static const char *const sEventTypeMacros[] =
     [QUEUED_STATUS_EVENT] = "STATUS_ICON",
     [QUEUED_CATCH_CHANCE_EVENT] = "CATCH_CHANCE",
     [QUEUED_EFFECTIVENESS_EVENT] = "EFFECTIVENESS_SE",
+    [QUEUED_MUSIC_EVENT] = "MUSIC",
     [QUEUED_ITEM_POPUP_EVENT] = "ITEM_POPUP",
 };
 
@@ -3820,6 +3821,75 @@ void TestRunner_Battle_RecordEffectivenessSound(u32 battlerId, u32 soundId)
                 continue;
 
             if (TryEffectivenessSound(queuedEvent, event->groupSize, battlerId, soundId) != -1)
+                DATA.trial.queuedEvent = queuedEvent + event->groupSize;
+        } while (FALSE);
+        break;
+    }
+}
+
+void QueueMusic(u32 sourceLine, u32 songId)
+{
+    INVALID_IF(!STATE->runScene, "MUSIC outside of SCENE");
+    if (DATA.queuedEventsCount == MAX_QUEUED_EVENTS)
+        Test_ExitWithResult(TEST_RESULT_ERROR, sourceLine, "%s:%d: MUSIC exceeds MAX_QUEUED_EVENTS", gTestRunnerState.test->filename, sourceLine);
+    DATA.queuedEvents[DATA.queuedEventsCount++] = (struct QueuedEvent) {
+        .type = QUEUED_MUSIC_EVENT,
+        .sourceLineOffset = SourceLineOffset(sourceLine),
+        .groupType = QUEUE_GROUP_NONE,
+        .groupSize = 1,
+        .as = { .music = { .songId = songId } },
+    };
+}
+
+static s32 TryMusic(s32 i, s32 n, u32 songId)
+{
+    for (s32 iMax = i + n; i < iMax; i++)
+    {
+        if (DATA.queuedEvents[i].type == QUEUED_MUSIC_EVENT
+         && DATA.queuedEvents[i].as.music.songId == songId)
+            return i;
+    }
+    return -1;
+}
+
+// Called whenever a song starts on the BGM player during a battle test.
+void TestRunner_Battle_RecordMusic(u32 songId)
+{
+    s32 queuedEvent;
+    s32 match;
+    struct QueuedEvent *event;
+
+    if (!gMain.inBattle || DATA.trial.queuedEvent == DATA.queuedEventsCount)
+        return;
+
+    event = &DATA.queuedEvents[DATA.trial.queuedEvent];
+    switch (event->groupType)
+    {
+    case QUEUE_GROUP_NONE:
+    case QUEUE_GROUP_ONE_OF:
+        if (TryMusic(DATA.trial.queuedEvent, event->groupSize, songId) != -1)
+            DATA.trial.queuedEvent += event->groupSize;
+        break;
+    case QUEUE_GROUP_NONE_OF:
+        queuedEvent = DATA.trial.queuedEvent;
+        do
+        {
+            if ((match = TryMusic(queuedEvent, event->groupSize, songId)) != -1)
+            {
+                const char *filename = gTestRunnerState.test->filename;
+                u32 line = SourceLine(DATA.queuedEvents[match].sourceLineOffset);
+                Test_ExitWithResult(TEST_RESULT_FAIL, line, "%s:%d: Matched MUSIC", filename, line);
+            }
+
+            queuedEvent += event->groupSize;
+            if (queuedEvent == DATA.queuedEventsCount)
+                break;
+
+            event = &DATA.queuedEvents[queuedEvent];
+            if (event->groupType == QUEUE_GROUP_NONE_OF)
+                continue;
+
+            if (TryMusic(queuedEvent, event->groupSize, songId) != -1)
                 DATA.trial.queuedEvent = queuedEvent + event->groupSize;
         } while (FALSE);
         break;

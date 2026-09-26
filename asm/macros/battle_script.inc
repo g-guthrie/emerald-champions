@@ -1101,8 +1101,8 @@
 	.4byte \func
 	.endm
 
-	.macro trywildvictorysong
-	callnative BS_TryPlayWildVictorySong
+	.macro tryvictorysong
+	callnative BS_TryPlayVictorySong
 	.endm
 
 	.macro savetarget

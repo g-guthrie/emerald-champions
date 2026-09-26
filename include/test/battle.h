@@ -598,6 +598,7 @@ enum
     QUEUED_STATUS_EVENT,
     QUEUED_CATCH_CHANCE_EVENT,
     QUEUED_EFFECTIVENESS_EVENT,
+    QUEUED_MUSIC_EVENT,
     QUEUED_ITEM_POPUP_EVENT,
 };
 
@@ -605,6 +606,11 @@ struct QueuedEffectiveness
 {
     u8 battlerId;
     u16 soundId;
+};
+
+struct QueuedMusic
+{
+    u16 songId;
 };
 
 struct QueuedAbilityEvent
@@ -678,6 +684,7 @@ struct QueuedEvent
         struct QueuedStatusEvent status;
         struct QueuedCaptureEvent capture;
         struct QueuedEffectiveness eff_se;
+        struct QueuedMusic music;
     } as;
 };
 
@@ -1230,6 +1237,7 @@ void GivePlayerItem(u32 sourceLine, enum Item, u32 quantity);
                                      MESSAGE("Your opponent's weak! Get 'em, " name "!");   \
                                  }
 #define EFFECTIVENESS_SE(battler, ...) QueueEffectivenessSound(__LINE__, battler, (struct EffectivenessEventContext) { __VA_ARGS__ })
+#define MUSIC(songId) QueueMusic(__LINE__, songId)
 
 enum QueueGroupType
 {
@@ -1324,6 +1332,7 @@ void QueueMessage(u32 sourceLine, const u8 *pattern);
 void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEventContext);
 void QueueCatchingChance(u32 sourceLine, u32 *captureAdress);
 void QueueEffectivenessSound(u32 sourceLine, struct BattlePokemon *battler, struct EffectivenessEventContext);
+void QueueMusic(u32 sourceLine, u32 songId);
 void QueueItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemEventContext);
 
 /* Then */

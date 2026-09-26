@@ -1920,7 +1920,7 @@ bool32 NoAliveMonsForPlayer(void)
     return WillPlayerWhiteOutIfPartnerWinsAlone();
 }
 
-static bool32 NoAliveMonsForOpponent(void)
+bool32 NoAliveMonsForOpponent(void)
 {
     if (DoesPartyHaveBattleReadyMons(B_TRAINER_OPPONENT_A))
         return FALSE;
@@ -7890,10 +7890,10 @@ void RestoreTarget(void)
     gBattlerTarget = gBattleStruct->savedBattlerTarget[gBattleStruct->savedTargetCount];
 }
 
-void BS_TryPlayWildVictorySong(void)
+void BS_TryPlayVictorySong(void)
 {
     NATIVE_ARGS();
-    TryPlayWildVictorySong(gBattlerFainted);
+    TryPlayVictorySong(gBattlerFainted, TRUE);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
