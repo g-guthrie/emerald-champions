@@ -722,6 +722,8 @@ SootopolisCity_EventScript_KiriGiveBerry:: @ 81E5F1B
 SootopolisCity_EventScript_KiriChooseFigy::
 	setvar VAR_0x8009, ITEM_FIGY_BERRY
 SootopolisCity_EventScript_KiriCheckBerryPair::
+	copyvar VAR_0x8004, VAR_0x8008
+	copyvar VAR_0x8005, VAR_0x8009
 	specialvar VAR_RESULT, CanReceiveBerryPair
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 SootopolisCity_EventScript_KiriGiveBerryPair::

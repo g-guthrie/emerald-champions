@@ -6,19 +6,21 @@ Route123_BerryMastersHouse_OnTransition: @ 826F841
 	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	end
 
-@ Each service returns to this menu; VAR_0x8008 puts the cursor back on it.
+@ Each service returns to this menu; VAR_BERRY_MASTER_CURSOR puts the cursor
+@ back on it. Neither service touches it (include/constants/service_vars.h).
 Route123_BerryMastersHouse_EventScript_BerryMaster:: @ 826F845
 	lock
 	faceplayer
-	setvar VAR_0x8008, 0
+	setvar VAR_BERRY_MASTER_CURSOR, 0
 Route123_BerryMastersHouse_EventScript_BerryMasterMenu:
 	message Route123_BerryMastersHouse_Text_GardenWelcome
 	waitmessage
 	dynmultipush Route123_BerryMastersHouse_Text_BerryGifts, 0
 	dynmultipush Route123_BerryMastersHouse_Text_HarvestRewards, 1
 	dynmultipush Route123_BerryMastersHouse_Text_Leave, 2
-	dynmultistack 8, 1, FALSE, 3, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 8, 1, FALSE, 3, 0, VAR_BERRY_MASTER_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
+	copyvar VAR_BERRY_MASTER_CURSOR, VAR_RESULT
 	goto_if_eq VAR_RESULT, 0, Route123_BerryMastersHouse_EventScript_DailyBerries
 	goto_if_eq VAR_RESULT, 1, Route123_BerryMastersHouse_EventScript_HarvestRewards
 	release
@@ -26,9 +28,8 @@ Route123_BerryMastersHouse_EventScript_BerryMasterMenu:
 
 @ The Harvest Pouch sends players here to trade harvested berries for rewards.
 Route123_BerryMastersHouse_EventScript_HarvestRewards:
-	setvar VAR_0x8009, 1
+	setvar VAR_HARVEST_AT_BERRY_MASTER, TRUE
 	call EmeraldChampions_EventScript_HarvestMenu
-	setvar VAR_0x8008, 1
 	goto Route123_BerryMastersHouse_EventScript_BerryMasterMenu
 
 Route123_BerryMastersHouse_Text_GardenWelcome:
@@ -51,25 +52,25 @@ Route123_BerryMastersHouse_EventScript_DailyBerries:
 	random NUM_BERRY_MASTER_BERRIES
 	addvar VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	copyvar VAR_0x8008, VAR_RESULT
+	copyvar VAR_BERRY_GIFT_FIRST, VAR_RESULT
 	random NUM_BERRY_MASTER_BERRIES
 	addvar VAR_RESULT, NUM_BERRY_MASTER_BERRIES_SKIPPED
 	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	copyvar VAR_0x8009, VAR_RESULT
+	copyvar VAR_BERRY_GIFT_SECOND, VAR_RESULT
+	copyvar VAR_0x8004, VAR_BERRY_GIFT_FIRST
+	copyvar VAR_0x8005, VAR_BERRY_GIFT_SECOND
 	specialvar VAR_RESULT, CanReceiveBerryPair
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	giveitem VAR_0x8008
+	giveitem VAR_BERRY_GIFT_FIRST
 	msgbox Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother, MSGBOX_DEFAULT
-	giveitem VAR_0x8009
+	giveitem VAR_BERRY_GIFT_SECOND
 	setflag FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY
 	msgbox Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop, MSGBOX_DEFAULT
-	setvar VAR_0x8008, 0
 	goto Route123_BerryMastersHouse_EventScript_BerryMasterMenu
 
 Route123_BerryMastersHouse_EventScript_ReceivedBerryToday:: @ 826F8B6
 	msgbox Route123_BerryMastersHouse_Text_DoneForToday, MSGBOX_DEFAULT
-	setvar VAR_0x8008, 0
 	goto Route123_BerryMastersHouse_EventScript_BerryMasterMenu
 
 Route123_BerryMastersHouse_EventScript_BerryMastersWife:: @ 826F8C0

@@ -68,9 +68,12 @@ void BuildEmeraldChampionsHarvestChoices(void)
     }
 }
 
+// VAR_0x8004 is the reward row. Buffers its recipe into gStringVar4 and sets
+// VAR_RESULT TRUE when the reward is already claimed.
 void BufferEmeraldChampionsHarvestRecipe(void)
 {
     u32 choice = gSpecialVar_0x8004;
+    gSpecialVar_Result = FALSE;
     if (choice >= ARRAY_COUNT(sBerryStoneTrades))
         return;
     if (choice == 3)
@@ -92,8 +95,8 @@ void BufferEmeraldChampionsHarvestRecipe(void)
         ConvertIntToDecimalStringN(gStringVar2, part->count, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringAppend(gStringVar4, gStringVar2);
     }
-    gSpecialVar_0x800B = RewardClaimed(choice);
-    StringAppend(gStringVar4, gSpecialVar_0x800B
+    gSpecialVar_Result = RewardClaimed(choice);
+    StringAppend(gStringVar4, gSpecialVar_Result
         ? COMPOUND_STRING("\pYou've already claimed this reward.")
         : COMPOUND_STRING("\pShow your harvest to the Berry\nMaster on Route 123. Each reward\lcan be claimed once!"));
 }

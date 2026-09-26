@@ -193,10 +193,10 @@ RustboroCity_DevonCorp_2F_EventScript_ThatsNotAFossil::
 	release
 	end
 
-@ VAR_0x8006 is Pokemon species to restore
-@ VAR_0x8008 is the fossil that was chosen for restoration
+@ FossilToSpecies takes the fossil in VAR_0x8004 and leaves its species in
+@ VAR_0x8006.
 RustboroCity_DevonCorp_2F_EventScript_FossilMonReady::
-	copyvar VAR_0x8008, VAR_WHICH_FOSSIL_REVIVED
+	copyvar VAR_0x8004, VAR_WHICH_FOSSIL_REVIVED
 	special FossilToSpecies
 	bufferspeciesname 1, VAR_0x8006
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife, MSGBOX_DEFAULT

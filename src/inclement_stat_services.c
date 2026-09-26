@@ -105,20 +105,21 @@ void BufferChosenMonNature(void)
         StringCopy(gStringVar2, gNaturesInfo[GetMonData(mon, MON_DATA_HIDDEN_NATURE)].name);
 }
 
-// TRUE while the spread still has room for the requested amount.
+// TRUE while the spread still has room for the requested amount. The
+// spread's current total comes back in VAR_0x8007 for the refusal message.
 void CheckChosenMonCanGainEVs(void)
 {
     struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
     u32 stat = gSpecialVar_0x8005;
     u32 want = gSpecialVar_0x8006;
-    gSpecialVar_0x8008 = 0;
+    gSpecialVar_0x8007 = 0;
     gSpecialVar_Result = FALSE;
     if (mon == NULL || stat >= NUM_STATS)
         return;
     u32 current = GetMonData(mon, sStatData[stat]);
-    gSpecialVar_0x8008 = TotalEVs(mon);
+    gSpecialVar_0x8007 = TotalEVs(mon);
     gSpecialVar_Result = (current + want <= MAX_PER_STAT_EVS
-                       && gSpecialVar_0x8008 + want <= MAX_TOTAL_EVS);
+                       && gSpecialVar_0x8007 + want <= MAX_TOTAL_EVS);
 }
 
 bool8 Special_AreLeadMonEVsMaxedOut(void)
@@ -174,7 +175,7 @@ void ChangeChosenMonIVs(void)
     CalculateMonStats(mon);
 }
 
-// The native scroll menu saves the party slot in 800A and the type in 8007.
+// VAR_0x8004 is the party slot and VAR_0x8005 the Hidden Power type index.
 // Minimize Attack, then retain as many maximum remaining IVs as possible.
 void ChangeChosenMonHiddenPower(void)
 {
@@ -196,8 +197,8 @@ void ChangeChosenMonHiddenPower(void)
         {31, 0, 31, 31, 31, 31}, // Dragon
         {31, 1, 31, 31, 31, 31}, // Dark
     };
-    u32 slot = gSpecialVar_0x800A;
-    u32 type = gSpecialVar_0x8007;
+    u32 slot = gSpecialVar_0x8004;
+    u32 type = gSpecialVar_0x8005;
 
     struct Pokemon *mon = GetServiceMon(slot);
     if (mon == NULL || type >= ARRAY_COUNT(spreads))
