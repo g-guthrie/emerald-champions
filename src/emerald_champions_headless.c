@@ -1944,6 +1944,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 14, OTID_STRUCT_PLAYER_ID);
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 14, OTID_STRUCT_PLAYER_ID);
+        // Real partners arrive knowing their level-up moves; so do these.
+        GiveMonInitialMoveset(&gParties[B_TRAINER_PLAYER][0]);
+        GiveMonInitialMoveset(&gParties[B_TRAINER_PLAYER][1]);
         CalculatePlayerPartyCount();
         FlagSet(FLAG_SYS_POKEMON_GET);
         VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
