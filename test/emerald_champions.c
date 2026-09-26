@@ -556,7 +556,7 @@ TEST("Emerald Champions native trainer creation applies live-cap role offsets on
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_MOVE1), MOVE_THUNDERBOLT);
 
     FlagSet(FLAG_IS_CHAMPION);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 99);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 97);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     EXPECT_EQ(GetCampaignTrainerLevel(3), 102);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);

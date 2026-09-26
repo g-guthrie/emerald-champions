@@ -483,6 +483,11 @@ static s32 UIWaitConfirmation(void)
 
 static void UIPrintMessage(const u8 *message)
 {
+    // Canceling returns to the move list. The shared rejection text waits
+    // for another A/B press while leaving that list visible but unresponsive.
+    if (message == gText_MoveNotLearned)
+        return;
+
     StringExpandPlaceholders(gStringVar4, message);
     MoveRelearnerPrintMessage(gStringVar4);
 }

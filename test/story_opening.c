@@ -11,6 +11,26 @@
 
 extern const u8 RivalsHouse_EventScript_ApplyStarterRegion[];
 
+static void ExpectUntrainedOpeningMon(struct Pokemon *mon, u32 level)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), level);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_NONE);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV + stat), 0);
+    EXPECT_NE(GetMonData(mon, MON_DATA_MOVE1), MOVE_NONE);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + slot);
+        bool32 found = move == MOVE_NONE;
+        for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+            if (learnset[i].level > 0 && learnset[i].level <= level && learnset[i].move == move)
+                found = TRUE;
+        EXPECT(found);
+    }
+}
+
 TEST("Story opening: all region choices and cancel select the advertised region")
 {
     static const u8 *const names[] = {
@@ -53,6 +73,8 @@ TEST("Story opening: every region grants each distinct starter pair atomically")
                 EXPECT_EQ(CalculatePlayerPartyCount(), 2);
                 EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), GetStarterPokemon(first));
                 EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), GetStarterPokemon(second));
+                ExpectUntrainedOpeningMon(&gParties[B_TRAINER_PLAYER][0], 5);
+                ExpectUntrainedOpeningMon(&gParties[B_TRAINER_PLAYER][1], 5);
                 EXPECT_EQ(GetEmeraldChampionsRivalStarterIndex(), 3 - first - second);
                 EXPECT_EQ(VarGet(VAR_EC_OPENING_STATE), EC_OPENING_PAIR_GRANTED);
                 EXPECT(!GiveEmeraldChampionsStarterPair(first, second));
@@ -61,4 +83,15 @@ TEST("Story opening: every region grants each distinct starter pair atomically")
         }
     }
     ZeroPlayerPartyMons();
+}
+
+TEST("Story opening: Birch is chased by ordinary level-2 Poochyena and Zigzagoon")
+{
+    CreateEmeraldChampionsBirchRescueParty();
+    EXPECT_EQ(gPartiesCount[B_TRAINER_OPPONENT_A], 2);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_POOCHYENA);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    for (u32 slot = 0; slot < 2; slot++)
+        ExpectUntrainedOpeningMon(&gParties[B_TRAINER_OPPONENT_A][slot], 2);
+    ZeroEnemyPartyMons();
 }
