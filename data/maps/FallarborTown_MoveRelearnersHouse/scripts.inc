@@ -119,7 +119,7 @@ FallarborTown_SuperTrainer::
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq SuperTraining_Egg
 	bufferpartymonnick 0, VAR_0x8004
-	setvar VAR_0x800A, 0
+	setvar VAR_EV_TRAINING_CURSOR, 0
 	msgbox SuperTraining_Text_TakeALookatEVs, MSGBOX_DEFAULT
 	goto FallarborTown_SuperMainMenu
 
@@ -146,7 +146,7 @@ FallarborTown_Explain_EVs::
 	return
 
 @ Each row shows that stat's current EVs, so the list is the spread.
-@ VAR_0x800A keeps the cursor on the stat last trained.
+@ VAR_EV_TRAINING_CURSOR keeps the cursor on the stat last trained.
 FallarborTown_ChangeEV::
 	bufferpartymonnick 0, VAR_0x8004
 	message SuperTraining_Text_ThisIsMonsCurrentSpread
@@ -169,9 +169,9 @@ FallarborTown_ChangeEV::
 	setvar VAR_0x8005, 5
 	special BufferChosenMonEV
 	dynmultipush SuperTraining_Text_RowSpDef, 5
-	dynmultistack 0, 0, FALSE, 6, 0, VAR_0x800A, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_TRAINING_CURSOR, DYN_MULTICHOICE_CB_NONE
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, FallarborTown_SuperMainMenu
-	copyvar VAR_0x800A, VAR_RESULT
+	copyvar VAR_EV_TRAINING_CURSOR, VAR_RESULT
 	switch VAR_RESULT
 	case 0, HyperTraining_EventScript_ChangeHPEV
 	case 1, FallarborTown_ChangeATKEV
@@ -266,32 +266,32 @@ FallarborTown_ChooseNewEV::
 
 FallarborTown_ChangeEV4::
 	setvar VAR_0x8006, 4
-	setvar VAR_0x8009, 8
+	setvar VAR_EV_TRAINING_COST, 8
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV8::
 	setvar VAR_0x8006, 8
-	setvar VAR_0x8009, 16
+	setvar VAR_EV_TRAINING_COST, 16
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV12::
 	setvar VAR_0x8006, 12
-	setvar VAR_0x8009, 24
+	setvar VAR_EV_TRAINING_COST, 24
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV64::
 	setvar VAR_0x8006, 64
-	setvar VAR_0x8009, 128
+	setvar VAR_EV_TRAINING_COST, 128
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV128::
 	setvar VAR_0x8006, 128
-	setvar VAR_0x8009, 256
+	setvar VAR_EV_TRAINING_COST, 256
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV252::
 	setvar VAR_0x8006, 252
-	setvar VAR_0x8009, 504
+	setvar VAR_EV_TRAINING_COST, 504
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ResetEVs::
@@ -307,20 +307,20 @@ FallarborTown_DoSuperTraining::
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_CantExceedEVLimit
 	showmoneybox 15, 0
-	buffernumberstring 2, VAR_0x8009
+	buffernumberstring 2, VAR_EV_TRAINING_COST
 	msgbox SuperTraining_ShowPrice, MSGBOX_YESNO
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_WontPay
 	@ Native money opcodes take literals; reuse the variable-cost specials.
-	copyvar VAR_0x800B, VAR_0x8005
-	copyvar VAR_0x8005, VAR_0x8009
+	copyvar VAR_EV_TRAINING_STAT, VAR_0x8005
+	copyvar VAR_0x8005, VAR_EV_TRAINING_COST
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
-	copyvar VAR_0x8005, VAR_0x800B
+	copyvar VAR_0x8005, VAR_EV_TRAINING_STAT
 	compare VAR_RESULT, 0
 	goto_if_eq FallarborTown_CantAfford
-	copyvar VAR_0x8005, VAR_0x8009
+	copyvar VAR_0x8005, VAR_EV_TRAINING_COST
 	special SubtractMoneyFromVar0x8005
-	copyvar VAR_0x8005, VAR_0x800B
+	copyvar VAR_0x8005, VAR_EV_TRAINING_STAT
 	updatemoneybox
 	special IncreaseChosenMonEVs
 	bufferpartymonnick 0, VAR_0x8004
@@ -330,7 +330,7 @@ FallarborTown_DoSuperTraining::
 	goto FallarborTown_ChangeEV
 
 FallarborTown_CantExceedEVLimit::
-	buffernumberstring 1, VAR_0x8008
+	buffernumberstring 1, VAR_0x8007
 	msgbox SuperTraining_TooManyEVs, MSGBOX_DEFAULT
 	goto FallarborTown_ChangeEV
 
@@ -543,12 +543,13 @@ HyperTraining_EventScript_ChooseLevel::
 HyperTraining_EventScript_ChangeHiddenPower::
 	message HyperTraining_Text_ForThreeCapsChangeAllIVs
 	waitmessage
-	copyvar VAR_0x800A, VAR_0x8004
+	copyvar VAR_IV_TRAINING_MON, VAR_0x8004
 	setvar VAR_0x8004, SCROLL_MULTI_HIDDEN_POWER
 	special ShowScrollableMultichoice
 HyperTraining_EventScript_SelectHiddenPower::
 	goto_if_ge VAR_RESULT, 16, HyperTraining_EventScript_RebufferChosenMon
-	copyvar VAR_0x8007, VAR_RESULT
+	copyvar VAR_0x8004, VAR_IV_TRAINING_MON
+	copyvar VAR_0x8005, VAR_RESULT
 	goto HyperTraining_EventScript_ChangeAllIVs
 
 HyperTraining_EventScript_ChangeAllIVs::
@@ -556,7 +557,6 @@ HyperTraining_EventScript_ChangeAllIVs::
 	compare VAR_RESULT, FALSE
 	goto_if_eq HyperTraining_EventScript_NotEnoughCaps
 	special ChangeChosenMonHiddenPower
-	copyvar VAR_0x8004, VAR_0x800A
 	msgbox HyperTraining_Text_PayThreeCaps, MSGBOX_DEFAULT
 	removeitem ITEM_BOTTLE_CAP, 3
 	goto HyperTraining_EventScript_DoHyperTraining
@@ -577,7 +577,7 @@ HyperTraining_EventScript_NotEnoughCaps::
 	goto HyperTraining_EventScript_RebufferChosenMon
 
 HyperTraining_EventScript_RebufferChosenMon::
-	copyvar VAR_0x8004, VAR_0x800A
+	copyvar VAR_0x8004, VAR_IV_TRAINING_MON
 	goto FallarborTown_HyperMainMenu
 
 HyperTraining_Text_ChoosePokemon:

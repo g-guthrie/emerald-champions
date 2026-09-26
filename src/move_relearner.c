@@ -79,6 +79,15 @@ static EWRAM_DATA struct {
     u16 listRow;
 } sMoveRelearnerScrollState = {0};
 
+// Where the list resumes after the forget-a-move summary screen. The relearner
+// keeps this itself: the calling script owns VAR_0x8008-VAR_0x800B
+// (include/constants/service_vars.h) and may keep its menu state there.
+static EWRAM_DATA struct {
+    u16 partyIndex;
+    u16 move;
+    u16 category;
+} sMoveRelearnerResume = {0};
+
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
 
@@ -417,9 +426,9 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->mainTask = CreateTask(TaskDummy, 1);
     gTasks[sMoveRelearnerStruct->mainTask].tState = GetLearnMoveResumeAfterSummaryScreenState();
-    gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = gSpecialVar_0x8008;
-    gTasks[sMoveRelearnerStruct->mainTask].tMove = gSpecialVar_0x8009;
-    gTasks[sMoveRelearnerStruct->mainTask].tCategory = gSpecialVar_0x800A;
+    gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = sMoveRelearnerResume.partyIndex;
+    gTasks[sMoveRelearnerStruct->mainTask].tMove = sMoveRelearnerResume.move;
+    gTasks[sMoveRelearnerStruct->mainTask].tCategory = sMoveRelearnerResume.category;
     SetMainCallback2(CB2_InitLearnMove_Basic);
 }
 
@@ -485,9 +494,9 @@ static void UIPlayFanfare(u32 songId)
 
 static void UIShowMoveList(u8 taskId)
 {
-    gSpecialVar_0x8008 = gTasks[taskId].tPartyIndex;
-    gSpecialVar_0x8009 = gTasks[taskId].tMove;
-    gSpecialVar_0x800A = gTasks[taskId].tCategory;
+    sMoveRelearnerResume.partyIndex = gTasks[taskId].tPartyIndex;
+    sMoveRelearnerResume.move = gTasks[taskId].tMove;
+    sMoveRelearnerResume.category = gTasks[taskId].tCategory;
     ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_InitLearnMoveReturnFromSelectMove, gTasks[taskId].tMove);
     DestroyTask(taskId);
     FreeMoveRelearnerResources();

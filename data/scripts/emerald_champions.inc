@@ -1,17 +1,18 @@
 Common_EventScript_EmeraldChampionsMoveTutor::
 	lockall
 	faceplayer
-	setvar VAR_0x800B, 0
+	setvar VAR_TUTOR_CURSOR, 0
 	call_if_unset FLAG_EC_TUTOR_MACHINES_LINE_SEEN, EmeraldChampions_EventScript_MoveTutorNoMachines
 
-@ One menu; VAR_0x800B keeps the cursor on the service last used.
+@ One menu; VAR_TUTOR_CURSOR keeps the cursor on the service last used. The
+@ relearner and Bonding never touch it (include/constants/service_vars.h).
 EmeraldChampions_EventScript_MoveTutorMain:
 	message EmeraldChampions_Text_MoveTutorHowCanHelp
 	waitmessage
 	dynmultipush EmeraldChampions_Text_LearnMove, 0
 	dynmultipush EmeraldChampions_Text_Bonding, 1
 	dynmultipush EmeraldChampions_Text_Exit, 2
-	dynmultistack 30, 1, FALSE, 3, 0, VAR_0x800B, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 3, 0, VAR_TUTOR_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_OpenMoveRelearner
@@ -26,7 +27,7 @@ EmeraldChampions_EventScript_MoveTutorNoMachines:
 @ The party screen and the move list carry their own prompts. B in the list
 @ returns to the party screen; B there returns to the tutor's menu.
 EmeraldChampions_EventScript_OpenMoveRelearner:
-	setvar VAR_0x800B, 0
+	setvar VAR_TUTOR_CURSOR, 0
 	setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES
 	bufferstring STR_VAR_3, MoveRelearner_Text_MoveLWR
 
@@ -40,6 +41,8 @@ EmeraldChampions_EventScript_MoveRelearnerChooseMon:
 	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_MoveRelearnerEgg
 	special Special_HasMoveToRelearn
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MoveRelearnerNoMoves
+	@ Takes the Pokémon in VAR_0x8004 (or PC_MON_CHOSEN with the box
+	@ position); waits until the move list closes.
 	special TeachMoveRelearnerMove
 	goto EmeraldChampions_EventScript_MoveRelearnerChooseMon
 
@@ -81,8 +84,8 @@ EmeraldChampions_Text_StarterItemsBagFull:
 @ Held Items: pick a shelf, buy, and land back on the same shelf. B or Back
 @ returns to the clerk's service menu.
 EmeraldChampions_EventScript_HeldItems::
-	goto_if_ne VAR_0x800A, 0, EmeraldChampions_EventScript_BattleItemCategories
-	setvar VAR_0x800A, 1
+	goto_if_eq VAR_CLERK_HELD_ITEMS_GREETED, TRUE, EmeraldChampions_EventScript_BattleItemCategories
+	setvar VAR_CLERK_HELD_ITEMS_GREETED, TRUE
 	message EmeraldChampions_Text_BattleVendorWelcome
 	waitmessage
 	goto EmeraldChampions_EventScript_BattleItemCategoryChoices
@@ -100,12 +103,12 @@ EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	dynmultipush EmeraldChampions_Text_SpeciesItems, EC_BATTLE_ITEM_CATEGORY_SPECIES
 	dynmultipush EmeraldChampions_Text_Back, EC_BATTLE_ITEM_CATEGORY_COUNT
 	@ Five rows keep the lower scroll arrow clear of the message box.
-	dynmultistack 30, 1, FALSE, 5, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 5, 0, VAR_CLERK_SHELF_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, General_Mart_AnythingElse
 	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, General_Mart_AnythingElse
-	copyvar VAR_0x8008, VAR_RESULT
-	copyvar VAR_0x8004, VAR_RESULT
+	copyvar VAR_CLERK_SHELF_CURSOR, VAR_RESULT
+	copyvar VAR_0x8004, VAR_RESULT @ the shelf to stock
 	special BufferEmeraldChampionsBattleItemStock
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_BattleItemCategoryEmpty
 	special OpenEmeraldChampionsBattleItemMart
@@ -120,8 +123,8 @@ EmeraldChampions_EventScript_BattleItemCategoryEmpty:
 
 @ Form Items (Mega Ring holders): the explanation once per visit, then the list.
 EmeraldChampions_EventScript_FormItems::
-	goto_if_ne VAR_0x800B, 0, EmeraldChampions_EventScript_OpenEvolutionArchive
-	setvar VAR_0x800B, 1
+	goto_if_eq VAR_CLERK_FORM_ITEMS_GREETED, TRUE, EmeraldChampions_EventScript_OpenEvolutionArchive
+	setvar VAR_CLERK_FORM_ITEMS_GREETED, TRUE
 	msgbox EmeraldChampions_Text_BattleVendorCompleteWelcome, MSGBOX_DEFAULT
 EmeraldChampions_EventScript_OpenEvolutionArchive:
 	special OpenEmeraldChampionsEvolutionItemArchive
@@ -237,16 +240,20 @@ EmeraldChampions_Text_RepelSprayMistedAgain:
 	.string "for the next 500 steps.$"
 
 EmeraldChampions_EventScript_SpecialistBonding:
-	setvar VAR_0x800B, 1
+	setvar VAR_TUTOR_CURSOR, 1
 	call Common_EventScript_EmeraldChampionsBonding
 	goto EmeraldChampions_EventScript_MoveTutorMain
 
+@ Bonding keeps the chosen Pokémon in VAR_BONDING_MON and the value row in
+@ VAR_BONDING_CURSOR, and hands both to each special in VAR_0x8004/0x8005.
 Common_EventScript_EmeraldChampionsBonding::
 	msgbox EmeraldChampions_Text_BondingChooseMon, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_ReturnService
-	copyvar VAR_0x800A, VAR_0x8004
-	setvar VAR_0x8008, 0
+	copyvar VAR_BONDING_MON, VAR_0x8004
+	setvar VAR_BONDING_CURSOR, 0
+	copyvar VAR_0x8004, VAR_BONDING_MON
+	copyvar VAR_0x8005, VAR_BONDING_CURSOR
 	special BufferEmeraldChampionsBondingPreview
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_BondingUnavailable
 
@@ -258,13 +265,17 @@ EmeraldChampions_EventScript_BondingValues:
 	dynmultipush EmeraldChampions_Text_BondingThreshold, 1
 	dynmultipush EmeraldChampions_Text_BondingMaximum, 2
 	dynmultipush EmeraldChampions_Text_Back, 3
-	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_BONDING_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_ge VAR_RESULT, 3, Common_EventScript_EmeraldChampionsBonding
-	copyvar VAR_0x8008, VAR_RESULT
+	copyvar VAR_BONDING_CURSOR, VAR_RESULT
+	copyvar VAR_0x8004, VAR_BONDING_MON
+	copyvar VAR_0x8005, VAR_BONDING_CURSOR
 	special BufferEmeraldChampionsBondingPreview
 	msgbox gStringVar4, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_BondingValues
+	copyvar VAR_0x8004, VAR_BONDING_MON
+	copyvar VAR_0x8005, VAR_BONDING_CURSOR
 	special ApplyEmeraldChampionsBonding
 	msgbox EmeraldChampions_Text_BondingDone, MSGBOX_DEFAULT
 	goto Common_EventScript_EmeraldChampionsBonding
@@ -303,14 +314,14 @@ EmeraldChampions_Text_BondingUnavailable:
 	.set CENTER_GUIDE_TOPIC_STORY, 2
 	.set CENTER_GUIDE_TOPIC_BYE, 3
 
-@ The list selects by topic, so VAR_0x8008 keeps the cursor on the topic last
-@ read (Where to Go first). VAR_0x8009 marks the legend warning as given, so
-@ it is said once per conversation.
+@ The list selects by topic, so VAR_GUIDE_CURSOR keeps the cursor on the topic
+@ last read (Where to Go first). VAR_GUIDE_WARNED marks the legend warning as
+@ given, so it is said once per conversation.
 Common_EventScript_CenterLocalGuide::
 	lockall
 	faceplayer
-	setvar VAR_0x8008, CENTER_GUIDE_TOPIC_STORY
-	setvar VAR_0x8009, FALSE
+	setvar VAR_GUIDE_CURSOR, CENTER_GUIDE_TOPIC_STORY
+	setvar VAR_GUIDE_WARNED, FALSE
 	msgbox EmeraldChampions_Text_CenterGuideHello, MSGBOX_DEFAULT
 
 EmeraldChampions_EventScript_CenterGuideMenu:
@@ -318,25 +329,25 @@ EmeraldChampions_EventScript_CenterGuideMenu:
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_LEGENDS
 	special BufferNextCenterLegendaryLead
-	copyvar VAR_0x8006, VAR_RESULT
+	copyvar VAR_GUIDE_HAS_LEGENDS, VAR_RESULT
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_TIPS
 	special BufferNextCenterLegendaryLead
-	copyvar VAR_0x8007, VAR_RESULT
+	copyvar VAR_GUIDE_HAS_TIPS, VAR_RESULT
 	message EmeraldChampions_Text_CenterGuideAsk
 	waitmessage
 	dynmultipush EmeraldChampions_Text_CenterGuideWhereToGo, CENTER_GUIDE_TOPIC_STORY
-	goto_if_eq VAR_0x8006, FALSE, EmeraldChampions_EventScript_CenterGuideNoLegends
+	goto_if_eq VAR_GUIDE_HAS_LEGENDS, FALSE, EmeraldChampions_EventScript_CenterGuideNoLegends
 	dynmultipush EmeraldChampions_Text_CenterGuideRarePokemon, CENTER_GUIDE_TOPIC_LEGENDS
 EmeraldChampions_EventScript_CenterGuideNoLegends:
-	goto_if_eq VAR_0x8007, FALSE, EmeraldChampions_EventScript_CenterGuideNoTips
+	goto_if_eq VAR_GUIDE_HAS_TIPS, FALSE, EmeraldChampions_EventScript_CenterGuideNoTips
 	dynmultipush EmeraldChampions_Text_CenterGuideThingsToDo, CENTER_GUIDE_TOPIC_TIPS
 EmeraldChampions_EventScript_CenterGuideNoTips:
 	dynmultipush EmeraldChampions_Text_CenterGuideBye, CENTER_GUIDE_TOPIC_BYE
-	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_GUIDE_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_CenterGuideGoodbye
-	copyvar VAR_0x8008, VAR_RESULT
+	copyvar VAR_GUIDE_CURSOR, VAR_RESULT
 	switch VAR_RESULT
 	case CENTER_GUIDE_TOPIC_STORY, EmeraldChampions_EventScript_CenterGuideStory
 	case CENTER_GUIDE_TOPIC_LEGENDS, EmeraldChampions_EventScript_CenterGuideLegends
@@ -360,8 +371,8 @@ EmeraldChampions_EventScript_CenterGuideFinale:
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
 EmeraldChampions_EventScript_CenterGuideLegends:
-	goto_if_eq VAR_0x8009, TRUE, EmeraldChampions_EventScript_CenterGuideLegendPages
-	setvar VAR_0x8009, TRUE
+	goto_if_eq VAR_GUIDE_WARNED, TRUE, EmeraldChampions_EventScript_CenterGuideLegendPages
+	setvar VAR_GUIDE_WARNED, TRUE
 	msgbox EmeraldChampions_Text_CenterGuideSaveFirst, MSGBOX_DEFAULT
 EmeraldChampions_EventScript_CenterGuideLegendPages:
 	setvar VAR_0x8004, 0
@@ -409,7 +420,7 @@ EmeraldChampions_Text_CenterGuideGoodbye:
 
 EmeraldChampions_EventScript_UseHarvestPouch::
 	lockall
-	setvar VAR_0x8009, 0
+	setvar VAR_HARVEST_AT_BERRY_MASTER, FALSE
 	call EmeraldChampions_EventScript_HarvestMenu
 	releaseall
 	end
@@ -421,7 +432,7 @@ EmeraldChampions_EventScript_HarvestMenu::
 	dynmultipush EmeraldChampions_Text_HarvestRequests, 1
 	dynmultipush EmeraldChampions_Text_HarvestHelpChoice, 2
 	@ Opened from the Bag, this is the top menu; at the Berry Master's it is one of his.
-	goto_if_ne VAR_0x8009, 0, EmeraldChampions_EventScript_HarvestMenuBack
+	goto_if_eq VAR_HARVEST_AT_BERRY_MASTER, TRUE, EmeraldChampions_EventScript_HarvestMenuBack
 	dynmultipush EmeraldChampions_Text_Exit, 3
 	goto EmeraldChampions_EventScript_HarvestMenuShow
 EmeraldChampions_EventScript_HarvestMenuBack:
@@ -434,20 +445,20 @@ EmeraldChampions_EventScript_HarvestMenuShow:
 	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_HarvestHelp
 	return
 
-@ VAR_0x800A holds the Berry ID under the cursor (the list selects by ID;
-@ Berry IDs start at 1 and Back is 0).
+@ VAR_HARVEST_LIST_CURSOR holds the Berry ID under the cursor (the list
+@ selects by ID; Berry IDs start at 1 and Back is 0).
 EmeraldChampions_EventScript_HarvestListStart:
-	setvar VAR_0x800A, 1
+	setvar VAR_HARVEST_LIST_CURSOR, 1
 EmeraldChampions_EventScript_HarvestList:
 	message EmeraldChampions_Text_HarvestList
 	waitmessage
 	special BuildEmeraldChampionsHarvestChoices
 	dynmultipush EmeraldChampions_Text_Back, 0
-	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x800A, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_HARVEST_LIST_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_HarvestMenu
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_HarvestMenu
-	copyvar VAR_0x800A, VAR_RESULT
+	copyvar VAR_HARVEST_LIST_CURSOR, VAR_RESULT
 	goto EmeraldChampions_EventScript_HarvestList
 
 EmeraldChampions_EventScript_HarvestRequests:
@@ -461,15 +472,25 @@ EmeraldChampions_EventScript_HarvestRequests:
 	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_ge VAR_RESULT, 4, EmeraldChampions_EventScript_HarvestMenu
-	copyvar VAR_0x8004, VAR_RESULT
+	copyvar VAR_HARVEST_REWARD, VAR_RESULT
+	copyvar VAR_0x8004, VAR_HARVEST_REWARD
 	special BufferEmeraldChampionsHarvestRecipe
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_HarvestRecipeClaimed
 	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto_if_eq VAR_0x8009, 0, EmeraldChampions_EventScript_HarvestRequests
-	goto_if_eq VAR_0x8004, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
-	goto_if_eq VAR_0x800B, 1, EmeraldChampions_EventScript_HarvestAlready
+	goto_if_eq VAR_HARVEST_AT_BERRY_MASTER, FALSE, EmeraldChampions_EventScript_HarvestRequests
+	goto_if_eq VAR_HARVEST_REWARD, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
+	goto EmeraldChampions_EventScript_HarvestConfirm
+
+EmeraldChampions_EventScript_HarvestRecipeClaimed:
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto_if_eq VAR_HARVEST_AT_BERRY_MASTER, FALSE, EmeraldChampions_EventScript_HarvestRequests
+	goto_if_eq VAR_HARVEST_REWARD, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
+	goto EmeraldChampions_EventScript_HarvestAlready
+
 EmeraldChampions_EventScript_HarvestConfirm:
 	msgbox EmeraldChampions_Text_HarvestConfirm, MSGBOX_YESNO
 	goto_if_ne VAR_RESULT, YES, EmeraldChampions_EventScript_HarvestRequests
+	copyvar VAR_0x8004, VAR_HARVEST_REWARD
 	special TradeEmeraldChampionsGardenBerries
 	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_ALREADY_DONE, EmeraldChampions_EventScript_HarvestAlready
 	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_NOT_ENOUGH, EmeraldChampions_EventScript_HarvestNotEnough
@@ -478,7 +499,7 @@ EmeraldChampions_EventScript_HarvestConfirm:
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox EmeraldChampions_Text_HarvestReceived, MSGBOX_DEFAULT
 	waitfanfare
-	goto_if_eq VAR_0x8004, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
+	goto_if_eq VAR_HARVEST_REWARD, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
 	goto EmeraldChampions_EventScript_HarvestRequests
 
 EmeraldChampions_EventScript_HarvestCelebiCheck:
@@ -701,13 +722,13 @@ EmeraldChampions_Text_GuardianAncient:
 	.string "Will you be the one to catch it?$"
 
 EC_DeliverTravelDocuments::
-	setvar VAR_0x8009, 0
+	setvar VAR_TRAVEL_DOCS_PENDING, FALSE
 	call_if_set FLAG_EC_EARNED_SS_TICKET, EC_Deliver_SS_TICKET
 	call_if_set FLAG_EC_EARNED_EON_TICKET, EC_Deliver_EON_TICKET
 	call_if_set FLAG_EC_EARNED_OLD_SEA_MAP, EC_Deliver_OLD_SEA_MAP
 	call_if_set FLAG_EC_EARNED_AURORA_TICKET, EC_Deliver_AURORA_TICKET
 	call_if_set FLAG_ENABLE_SHIP_NAVEL_ROCK, EC_Deliver_MYSTIC_TICKET
-	call_if_eq VAR_0x8009, 1, EC_TravelDocumentsPending
+	call_if_eq VAR_TRAVEL_DOCS_PENDING, TRUE, EC_TravelDocumentsPending
 	return
 
 EC_Deliver_SS_TICKET::
@@ -776,7 +797,7 @@ EC_Received_MYSTIC_TICKET::
 	return
 
 EC_TravelDocumentFull::
-	setvar VAR_0x8009, 1
+	setvar VAR_TRAVEL_DOCS_PENDING, TRUE
 	return
 EC_TravelDocumentsPending::
 	msgbox EC_Text_TravelDocumentsPending, MSGBOX_DEFAULT

@@ -6,10 +6,12 @@ Common_EventScript_EmeraldChampionsBattleVendor::
 	lock
 	faceplayer
 	call EmeraldChampions_EventScript_TryStarterKit
-	setvar VAR_0x8008, 0 @ Held Items category cursor
-	setvar VAR_0x8009, 0 @ service menu cursor
-	setvar VAR_0x800A, 0 @ Held Items welcome given this visit
-	setvar VAR_0x800B, 0 @ Form Items welcome given this visit
+	@ The clerk's own state (include/constants/service_vars.h). Nothing the
+	@ counters call touches VAR_0x8008-VAR_0x800B.
+	setvar VAR_CLERK_SHELF_CURSOR, 0
+	setvar VAR_CLERK_SERVICE_CURSOR, 0
+	setvar VAR_CLERK_HELD_ITEMS_GREETED, FALSE
+	setvar VAR_CLERK_FORM_ITEMS_GREETED, FALSE
 	message gText_HowMayIServeYou
 	waitmessage
 General_Mart_ServiceMenu:
@@ -22,10 +24,10 @@ General_Mart_ServiceMenu:
 	dynmultipush EmeraldChampions_Text_HeldItems, 1
 	dynmultipush General_Mart_Text_Sell, 2
 	dynmultipush EmeraldChampions_Text_Exit, 3
-	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_CLERK_SERVICE_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, General_Mart_Exit
-	copyvar VAR_0x8009, VAR_RESULT
+	copyvar VAR_CLERK_SERVICE_CURSOR, VAR_RESULT
 	switch VAR_RESULT
 	case 0, General_Mart_Supplies
 	case 1, EmeraldChampions_EventScript_HeldItems
@@ -38,10 +40,10 @@ General_Mart_ServiceMenuWithForms:
 	dynmultipush EmeraldChampions_Text_EvolutionArchive, 2
 	dynmultipush General_Mart_Text_Sell, 3
 	dynmultipush EmeraldChampions_Text_Exit, 4
-	dynmultistack 30, 1, FALSE, 5, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 30, 1, FALSE, 5, 0, VAR_CLERK_SERVICE_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, General_Mart_Exit
-	copyvar VAR_0x8009, VAR_RESULT
+	copyvar VAR_CLERK_SERVICE_CURSOR, VAR_RESULT
 	switch VAR_RESULT
 	case 0, General_Mart_Supplies
 	case 1, EmeraldChampions_EventScript_HeldItems

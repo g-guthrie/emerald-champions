@@ -75,6 +75,7 @@
 #include "constants/tv.h"
 #include "constants/union_room.h"
 #include "constants/vars.h"
+#include "constants/service_vars.h"
 #include "constants/weather.h"
 #include "constants/speaker_names.h"
 	.include "asm/macros.inc"

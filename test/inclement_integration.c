@@ -360,12 +360,11 @@ TEST("Inclement integration: Hidden Power service selects the requested type on 
     ZeroPlayerPartyMons();
     CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID, 7);
     CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_POIPOLE, 20, 0, OTID_STRUCT_PLAYER_ID, 19);
-    gSpecialVar_0x8004 = 99; // Scroll menu has reused the original party variable.
-    gSpecialVar_0x8005 = STAT_SPEED; // Unrelated prior single-stat selection.
-    gSpecialVar_0x800A = 1;
+    gSpecialVar_0x8004 = 1;
+    gSpecialVar_0x800A = 0; // Script-owned vars are never read.
     for (u32 type = 0; type < ARRAY_COUNT(types); type++)
     {
-        gSpecialVar_0x8007 = type;
+        gSpecialVar_0x8005 = type;
         ChangeChosenMonHiddenPower();
         EXPECT_EQ(GetDynamicMoveType(&gParties[B_TRAINER_PLAYER][1], MOVE_HIDDEN_POWER,
             0, ABILITY_NONE, HOLD_EFFECT_NONE, MON_OUTSIDE_BATTLE), types[type]);
@@ -432,10 +431,12 @@ TEST("Inclement integration: EV service reports resulting stat and rejection tot
     gSpecialVar_0x8004 = 1;
     gSpecialVar_0x8005 = STAT_HP;
     gSpecialVar_0x8006 = 4;
-    gSpecialVar_0x8008 = 999;
+    gSpecialVar_0x8007 = 999;
+    gSpecialVar_0x8008 = 999; // Script-owned: must survive the call.
     CheckChosenMonCanGainEVs();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
-    EXPECT_EQ(gSpecialVar_0x8008, 64);
+    EXPECT_EQ(gSpecialVar_0x8007, 64);
+    EXPECT_EQ(gSpecialVar_0x8008, 999);
     IncreaseChosenMonEVs();
     EXPECT_EQ(gSpecialVar_0x8007, 68);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP_EV), 68);
@@ -447,7 +448,7 @@ TEST("Inclement integration: EV service reports resulting stat and rejection tot
     gSpecialVar_0x8005 = STAT_SPEED;
     CheckChosenMonCanGainEVs();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
-    EXPECT_EQ(gSpecialVar_0x8008, 510);
+    EXPECT_EQ(gSpecialVar_0x8007, 510);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPEED_EV), 0);
 }
 
@@ -596,8 +597,8 @@ TEST("Inclement integration: Hidden Power menu preserves every type index and ca
     {
         gSpecialVar_Result = results[i];
         gSpecialVar_0x8004 = 99;
+        gSpecialVar_0x8005 = 255;
         gSpecialVar_0x800A = 1;
-        gSpecialVar_0x8007 = 255;
         struct ScriptContext ctx;
         InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
         SetupBytecodeScript(&ctx, HyperTraining_EventScript_SelectHiddenPower);
@@ -611,14 +612,15 @@ TEST("Inclement integration: Hidden Power menu preserves every type index and ca
         if (results[i] < 16)
         {
             EXPECT_EQ(ctx.scriptPtr, HyperTraining_EventScript_ChangeAllIVs);
-            EXPECT_EQ(gSpecialVar_0x8007, results[i]);
-            EXPECT_EQ(gSpecialVar_0x800A, 1);
+            // The service's arguments: party slot and type.
+            EXPECT_EQ(gSpecialVar_0x8004, 1);
+            EXPECT_EQ(gSpecialVar_0x8005, results[i]);
         }
         else
         {
             EXPECT_EQ(ctx.scriptPtr, FallarborTown_HyperMainMenu);
             EXPECT_EQ(gSpecialVar_0x8004, 1);
-            EXPECT_EQ(gSpecialVar_0x8007, 255);
+            EXPECT_EQ(gSpecialVar_0x8005, 255);
         }
     }
 }

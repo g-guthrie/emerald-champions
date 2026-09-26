@@ -534,9 +534,10 @@ bool32 CanReceiveLanetteDolls(void)
     return GetNumOwnedDecorationsInCategory(DECORCAT_DOLL) + 2 <= gDecorationInventories[DECORCAT_DOLL].size;
 }
 
+// VAR_0x8004 and VAR_0x8005 are the two Berries.
 bool32 CanReceiveBerryPair(void)
 {
-    const struct ItemSlot gifts[] = {{gSpecialVar_0x8008, 1}, {gSpecialVar_0x8009, 1}};
+    const struct ItemSlot gifts[] = {{gSpecialVar_0x8004, 1}, {gSpecialVar_0x8005, 1}};
     return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
 }
 
@@ -5160,10 +5161,17 @@ static void UIEndTask(u8 taskId)
 #define tMove          data[2]
 #define tRecoverPp     data[3]
 
+// Where CanTeachMoveBoxMon resumes after the forget-a-move summary screen,
+// kept here rather than in the calling script's special vars.
+static EWRAM_DATA struct {
+    u16 partyIndex;
+    u16 move;
+} sFieldMoveTutorResume = {0};
+
 static void UIShowMoveList(u8 taskId)
 {
-    gSpecialVar_0x8000 = gTasks[taskId].tPartyIndex;
-    gSpecialVar_0x8001 = gTasks[taskId].tMove;
+    sFieldMoveTutorResume.partyIndex = gTasks[taskId].tPartyIndex;
+    sFieldMoveTutorResume.move = gTasks[taskId].tMove;
     DestroyTask(taskId);
     ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_ReturnToFieldWhileLearningMove, gTasks[taskId].tMove);
 }
@@ -5219,8 +5227,8 @@ static void Task_ReturnToFieldWhileLearningMove(u8 taskId)
     {
         gTasks[taskId].func = Task_LearnMove;
         gTasks[taskId].tState = GetLearnMoveResumeAfterSummaryScreenState();
-        gTasks[taskId].tPartyIndex = gSpecialVar_0x8000;
-        gTasks[taskId].tMove = gSpecialVar_0x8001;
+        gTasks[taskId].tPartyIndex = sFieldMoveTutorResume.partyIndex;
+        gTasks[taskId].tMove = sFieldMoveTutorResume.move;
     }
 }
 
@@ -6453,11 +6461,14 @@ void SetGraniteCaveFlashLevel(void)
 }
 
 
+// Bonding takes VAR_0x8004 = party slot and VAR_0x8005 = value row
+// (0 keeps its distance, 1 ready to evolve, 2 adores you). The script keeps
+// its own copies in VAR_BONDING_MON and VAR_BONDING_CURSOR.
 static struct Pokemon *GetEmeraldChampionsServiceMon(void)
 {
-    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
+    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
         return NULL;
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE
         || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
         return NULL;
@@ -6467,7 +6478,7 @@ static struct Pokemon *GetEmeraldChampionsServiceMon(void)
 void BufferEmeraldChampionsBondingPreview(void)
 {
     struct Pokemon *mon = GetEmeraldChampionsServiceMon();
-    gSpecialVar_Result = mon != NULL && gSpecialVar_0x8008 < 3;
+    gSpecialVar_Result = mon != NULL && gSpecialVar_0x8005 < 3;
     if (!gSpecialVar_Result)
         return;
     static const u8 *const sBondingPrompts[] =
@@ -6477,7 +6488,7 @@ void BufferEmeraldChampionsBondingPreview(void)
         COMPOUND_STRING("{STR_VAR_1} will adore you!\nIs that okay?"),
     };
     GetMonNickname(mon, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, sBondingPrompts[gSpecialVar_0x8008]);
+    StringExpandPlaceholders(gStringVar4, sBondingPrompts[gSpecialVar_0x8005]);
 }
 
 void ApplyEmeraldChampionsBonding(void)
@@ -6486,7 +6497,7 @@ void ApplyEmeraldChampionsBonding(void)
     if (gSpecialVar_Result)
     {
         static const u8 values[] = {0, FRIENDSHIP_EVO_THRESHOLD, 255};
-        SetMonData(GetEmeraldChampionsServiceMon(), MON_DATA_FRIENDSHIP, &values[gSpecialVar_0x8008]);
+        SetMonData(GetEmeraldChampionsServiceMon(), MON_DATA_FRIENDSHIP, &values[gSpecialVar_0x8005]);
     }
 }
 
@@ -6598,10 +6609,11 @@ bool8 DoesPlayerHaveFossil(void)
     return FALSE;
 }
 
-// Preserve the existing no-write result for an invalid fossil selection.
+// VAR_0x8004 is the fossil item; its species lands in VAR_0x8006. Preserve the
+// existing no-write result for an invalid fossil selection.
 void FossilToSpecies(void)
 {
-    enum Species species = GetFossilSpecies(gSpecialVar_0x8008);
+    enum Species species = GetFossilSpecies(gSpecialVar_0x8004);
     if (species != SPECIES_NONE)
         gSpecialVar_0x8006 = species;
 }

@@ -295,7 +295,7 @@ TEST("Campaign gifts: fossil acceptance bag detection and revival agree for ever
                 expected = fossils[i].species;
         gSpecialVar_ItemId = item;
         EXPECT_EQ(IsItemFossil(), expected != SPECIES_NONE);
-        gSpecialVar_0x8008 = item;
+        gSpecialVar_0x8004 = item;
         gSpecialVar_0x8006 = SPECIES_PIKACHU;
         FossilToSpecies();
         EXPECT_EQ(gSpecialVar_0x8006, expected == SPECIES_NONE ? SPECIES_PIKACHU : expected);
