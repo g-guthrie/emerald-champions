@@ -439,8 +439,18 @@ static void Task_Pokenav(u8 taskId)
         // Wait for LoopedTask_InitPokenavMenu to finish
         if (PokenavMainMenuLoopedTaskIsActive())
             break;
-        SetActivePokenavMenu(POKENAV_MAIN_MENU);
-        tState = 4;
+        // The PokeNav opens straight to its Hoenn map; B on the map switches
+        // the PokeNav off. The main menu (Map / Ribbons / Switch Off) is not
+        // an entry point.
+        if (SetActivePokenavMenu(POKENAV_REGION_MAP))
+        {
+            tState = 4;
+        }
+        else
+        {
+            ShutdownPokenav();
+            tState = 5;
+        }
         break;
     case 2:
         if (IsActiveMenuLoopTaskActive())
@@ -457,6 +467,7 @@ static void Task_Pokenav(u8 taskId)
         {
             PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free2();
             PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free1();
+            gPokenavResources->currentMenuCb1 = NULL;
             if (SetActivePokenavMenu(menuId))
             {
                 tState = 4;
@@ -479,11 +490,17 @@ static void Task_Pokenav(u8 taskId)
             tState = 3;
         break;
     case 5:
-        if (!WaitForPokenavShutdownFade())
+        if (!IsPaletteFadeActive())
         {
             bool32 calledFromScript = (gPokenavResources->mode != POKENAV_MODE_NORMAL);
 
-            FreeMenuHandlerSubstruct1();
+            // Free whichever screen was active when the PokeNav switched off.
+            if (gPokenavResources->currentMenuCb1 != NULL)
+            {
+                PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free2();
+                PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free1();
+            }
+            FreePokenavMainMenu();
             FreePokenavResources();
             if (calledFromScript)
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
