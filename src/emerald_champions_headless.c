@@ -1840,14 +1840,16 @@ void EmeraldChampionsHeadlessObserve(void)
         break;
     case EC_HEADLESS_SCENARIO_WILD_FOE_TYPES:
         if (gBattle_BG0_Y == DISPLAY_HEIGHT
-         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP) == 27
+         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP)
+            + GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_HEIGHT) == 33
          && gBattleStruct->descriptionSubmenu
          && gBattleStruct->foeTypesSubmenu)
             gEcHeadlessFixtureObservedResult = TRUE;
         break;
     case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
         if (gBattle_BG0_Y == DISPLAY_HEIGHT * 2
-         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP) == 47
+         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP)
+            + GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_HEIGHT) == 53
          && gBattleStruct->descriptionSubmenu
          && gBattleStruct->foeTypesSubmenu)
             gEcHeadlessFixtureObservedResult = TRUE;

@@ -85,6 +85,9 @@ static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayFoeTypes(enum BattlerId battler);
 static void OpenFoeTypesSubmenu(enum BattlerId battler);
+static void RestoreMoveDescriptionWindowSize(void);
+
+#define MOVE_DESCRIPTION_HEIGHT 6 // tiles; the foe-types panel shrinks it per foe
 static void WaitForMonSelection(enum BattlerId battler);
 static void CompleteWhenChoseItem(enum BattlerId battler);
 static void Task_LaunchLvlUpAnim(u8);
@@ -258,6 +261,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
             FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
             ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
             CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
+            RestoreMoveDescriptionWindowSize();
             SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 47);
             PlaySE(SE_SELECT);
             PlayerHandleChooseAction(battler);
@@ -948,6 +952,7 @@ void HandleInputChooseMove(enum BattlerId battler)
             FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
             ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
             CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
+            RestoreMoveDescriptionWindowSize();
             PlaySE(SE_SELECT);
             if (B_SHOW_EFFECTIVENESS)
                 MoveSelectionDisplayMoveEffectiveness(CheckTargetTypeEffectiveness(battler), battler);
@@ -1765,6 +1770,26 @@ static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler)
         MoveSelectionDisplayMoveDescription(battler);
 }
 
+// The foe list shares the move-description window, which is three lines tall.
+// It shrinks to one line per foe with its bottom edge kept in place, so a
+// single foe no longer draws a box over the player's HP box; closing restores it.
+// SetWindowAttribute cannot change a height, and a window may never grow past
+// the buffer it was created with, so only this helper resizes, and only within
+// the panel's own MOVE_DESCRIPTION_HEIGHT.
+static void SetMoveDescriptionWindowHeight(u32 height)
+{
+    struct WindowTemplate *window = &gWindows[B_WIN_MOVE_DESCRIPTION].window;
+
+    height = min(height, MOVE_DESCRIPTION_HEIGHT);
+    window->tilemapTop = window->tilemapTop + window->height - height;
+    window->height = height;
+}
+
+static void RestoreMoveDescriptionWindowSize(void)
+{
+    SetMoveDescriptionWindowHeight(MOVE_DESCRIPTION_HEIGHT);
+}
+
 static void OpenFoeTypesSubmenu(enum BattlerId battler)
 {
     gBattleStruct->descriptionSubmenu = TRUE;
@@ -1783,7 +1808,13 @@ static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
     static const u8 sText_TypeSlash[] = _("/");
     const u32 panelWidth = GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_WIDTH) * 8;
     u8 *text = gDisplayedStringBattle;
-    u32 lines = 0;
+    u32 lines = 0, foes = 0, height;
+
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        if (GetBattlerSide(foe) != GetBattlerSide(battler) && IsBattlerAlive(foe))
+            foes++;
+    height = max(foes, 1) * 2;
+    SetMoveDescriptionWindowHeight(height);
 
     LoadMessageBoxAndBorderGfx();
     DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
