@@ -100,7 +100,10 @@ TEST("Inclement integration: opening held items arrive together or not at all, n
     EXPECT(!FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS));
     // All or nothing: a full Bag hands over no part of the kit.
     for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+    {
         EXPECT_EQ(CountTotalItemQuantityInBag(items[i]), 0);
+        EXPECT(!IsEmeraldChampionsBattleItemUnlocked(items[i]));
+    }
     for (u32 i = 0; i < ARRAY_COUNT(items) - 2; i++)
         BagPocket_SetSlotItemIdAndCount(pocket, i, ITEM_NONE, 0);
     GiveEmeraldChampionsStarterBattleItems();
