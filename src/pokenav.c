@@ -5,8 +5,11 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "palette.h"
-#include "pokemon_storage_system.h"
 #include "pokenav.h"
+
+// The PokeNav is its Hoenn map. It opens straight to the map; B on the map
+// switches it off and returns to the start menu (or, when a script opened it,
+// to that script).
 
 #define LOOPED_TASK_DECODE_STATE(action) (action - 5)
 
@@ -16,28 +19,12 @@
 
 struct PokenavResources
 {
-    u32 (*currentMenuCb1)(void);
-    u32 currentMenuIndex;
-    u16 mode;
-    u16 conditionSearchId;
-    bool32 hasAnyRibbons;
+    bool32 calledFromScript;
+    bool32 mapOpen;
     void *substructPtrs[POKENAV_SUBSTRUCT_COUNT];
 };
 
-struct PokenavCallbacks
-{
-    bool32 (*init)(void);
-    u32 (*callback)(void);
-    bool32 (*open)(void);
-    void (*createLoopTask)(s32);
-    bool32 (*isLoopTaskActive)(void);
-    void (*free1)(void);
-    void (*free2)(void);
-};
-
-static u32 GetCurrentMenuCB(void);
-static bool32 SetActivePokenavMenu(u32);
-static bool32 AnyMonHasRibbon(void);
+static bool32 OpenMap(void);
 static void InitPokenavResources(struct PokenavResources *);
 static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
@@ -46,154 +33,9 @@ static void Task_RunLoopedTask_LinkMode(u8);
 static void Task_RunLoopedTask(u8);
 static void Task_Pokenav(u8);
 
-const struct PokenavCallbacks PokenavMenuCallbacks[] =
-{
-    [POKENAV_MAIN_MENU - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MAP - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMap,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_CONDITION_MENU - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionMenu,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_CONDITION_SEARCH_MENU - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionSearchMenu,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnMatchCall,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MainMenuCursorOnRibbons,
-        .callback = GetMenuHandlerCallback,
-        .open = OpenPokenavMenuNotInitial,
-        .createLoopTask = CreateMenuHandlerLoopedTask,
-        .isLoopTaskActive = IsMenuHandlerLoopedTaskActive,
-        .free1 = FreeMenuHandlerSubstruct1,
-        .free2 = FreeMenuHandlerSubstruct2,
-    },
-    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RegionMap,
-        .callback = GetRegionMapCallback,
-        .open = OpenPokenavRegionMap,
-        .createLoopTask = CreateRegionMapLoopedTask,
-        .isLoopTaskActive = IsRegionMapLoopedTaskActive,
-        .free1 = FreeRegionMapSubstruct1,
-        .free2 = FreeRegionMapSubstruct2,
-    },
-    [POKENAV_CONDITION_GRAPH_PARTY - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionGraph_Party,
-        .callback = GetConditionGraphMenuCallback,
-        .open = OpenConditionGraphMenu,
-        .createLoopTask = CreateConditionGraphMenuLoopedTask,
-        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
-        .free1 = FreeConditionGraphMenuSubstruct1,
-        .free2 = FreeConditionGraphMenuSubstruct2,
-    },
-    [POKENAV_CONDITION_SEARCH_RESULTS - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionSearch,
-        .callback = GetConditionSearchResultsCallback,
-        .open = OpenConditionSearchResults,
-        .createLoopTask = CreateSearchResultsLoopedTask,
-        .isLoopTaskActive = IsSearchResultLoopedTaskActive,
-        .free1 = FreeSearchResultSubstruct1,
-        .free2 = FreeSearchResultSubstruct2,
-    },
-    [POKENAV_CONDITION_GRAPH_SEARCH - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ConditionGraph_Search,
-        .callback = GetConditionGraphMenuCallback,
-        .open = OpenConditionGraphMenu,
-        .createLoopTask = CreateConditionGraphMenuLoopedTask,
-        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
-        .free1 = FreeConditionGraphMenuSubstruct1,
-        .free2 = FreeConditionGraphMenuSubstruct2,
-    },
-    [POKENAV_RETURN_CONDITION_SEARCH - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_ReturnToMonSearchList,
-        .callback = GetConditionSearchResultsCallback,
-        .open = OpenConditionSearchListFromGraph,
-        .createLoopTask = CreateSearchResultsLoopedTask,
-        .isLoopTaskActive = IsSearchResultLoopedTaskActive,
-        .free1 = FreeSearchResultSubstruct1,
-        .free2 = FreeSearchResultSubstruct2,
-    },
-    [POKENAV_RIBBONS_MON_LIST - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_MonRibbonList,
-        .callback = GetRibbonsMonListCallback,
-        .open = OpenRibbonsMonList,
-        .createLoopTask = CreateRibbonsMonListLoopedTask,
-        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList,
-        .free2 = FreeRibbonsMonMenu,
-    },
-    [POKENAV_RIBBONS_SUMMARY_SCREEN - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RibbonsSummaryMenu,
-        .callback = GetRibbonsSummaryMenuCallback,
-        .open = OpenRibbonsSummaryMenu,
-        .createLoopTask = CreateRibbonsSummaryLoopedTask,
-        .isLoopTaskActive = IsRibbonsSummaryLoopedTaskActive,
-        .free1 = FreeRibbonsSummaryScreen1,
-        .free2 = FreeRibbonsSummaryScreen2,
-    },
-    [POKENAV_RIBBONS_RETURN_TO_MON_LIST - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RibbonsMonListFromSummary,
-        .callback = GetRibbonsMonListCallback,
-        .open = OpenRibbonsMonListFromRibbonsSummary,
-        .createLoopTask = CreateRibbonsMonListLoopedTask,
-        .isLoopTaskActive = IsRibbonsMonListLoopedTaskActive,
-        .free1 = FreeRibbonsMonList,
-        .free2 = FreeRibbonsMonMenu,
-    },
-};
-
 EWRAM_DATA u8 gNextLoopedTaskId = 0;
 EWRAM_DATA struct PokenavResources *gPokenavResources = NULL;
 
-// code
 u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority)
 {
     u16 taskId;
@@ -299,32 +141,29 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
     }
 }
 
+static void StartPokenav(bool32 calledFromScript)
+{
+    InitPokenavResources(gPokenavResources);
+    gPokenavResources->calledFromScript = calledFromScript;
+    ResetTasks();
+    SetVBlankCallback(NULL);
+    CreateTask(Task_Pokenav, 0);
+    SetMainCallback2(CB2_Pokenav);
+    SetVBlankCallback(VBlankCB_Pokenav);
+}
+
 void CB2_InitPokeNav(void)
 {
     gPokenavResources = Alloc(sizeof(*gPokenavResources));
     if (gPokenavResources == NULL)
-    {
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-    }
     else
-    {
-        InitPokenavResources(gPokenavResources);
-        ResetTasks();
-        SetVBlankCallback(NULL);
-        CreateTask(Task_Pokenav, 0);
-        SetMainCallback2(CB2_Pokenav);
-        SetVBlankCallback(VBlankCB_Pokenav);
-    }
+        StartPokenav(FALSE);
 }
 
-// Opens the PokeNav from a script, for the Rustboro tutorial.
-//
-// The donor put the PokeNav straight onto the Match Call screen via
-// POKENAV_MODE_FORCE_CALL_READY. Match Call is deleted from this engine, so
-// that mode and that screen no longer exist; the tutorial now simply opens the
-// PokeNav. What matters for the script is the mode being something other than
-// POKENAV_MODE_NORMAL, which routes the shutdown below through
-// CB2_ReturnToFieldContinueScriptPlayMapMusic so the script's waitstate ends.
+// Opens the PokeNav from a script, for the Rustboro tutorial. Switching it off
+// returns through CB2_ReturnToFieldContinueScriptPlayMapMusic, which ends the
+// script's waitstate.
 static void CB2_InitPokenavForTutorial(void)
 {
     UpdatePaletteFade();
@@ -333,19 +172,9 @@ static void CB2_InitPokenavForTutorial(void)
 
     gPokenavResources = Alloc(sizeof(*gPokenavResources));
     if (gPokenavResources == NULL)
-    {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-    }
     else
-    {
-        InitPokenavResources(gPokenavResources);
-        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_READY;
-        ResetTasks();
-        SetVBlankCallback(NULL);
-        CreateTask(Task_Pokenav, 0);
-        SetMainCallback2(CB2_Pokenav);
-        SetVBlankCallback(VBlankCB_Pokenav);
-    }
+        StartPokenav(TRUE);
 }
 
 void OpenPokenavForTutorial(void)
@@ -372,39 +201,8 @@ static void InitPokenavResources(struct PokenavResources *resources)
     for (i = 0; i < POKENAV_SUBSTRUCT_COUNT; i++)
         resources->substructPtrs[i] = NULL;
 
-    resources->mode = POKENAV_MODE_NORMAL;
-    resources->currentMenuIndex = 0;
-    resources->hasAnyRibbons = AnyMonHasRibbon();
-    resources->currentMenuCb1 = NULL;
-}
-
-static bool32 AnyMonHasRibbon(void)
-{
-    int i, j;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i],  MON_DATA_SANITY_HAS_SPECIES)
-            && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_EGG)
-            && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_RIBBON_COUNT) != 0)
-        {
-            return TRUE;
-        }
-    }
-
-    for (j = 0; j < TOTAL_BOXES_COUNT; j++)
-    {
-        for (i = 0; i < IN_BOX_COUNT; i++)
-        {
-            if (CheckBoxMonSanityAt(j, i)
-                && GetBoxMonDataAt(j, i, MON_DATA_RIBBON_COUNT) != 0)
-            {
-                return TRUE;
-            }
-        }
-    }
-
-    return FALSE;
+    resources->calledFromScript = FALSE;
+    resources->mapOpen = FALSE;
 }
 
 static void CB2_Pokenav(void)
@@ -424,83 +222,67 @@ static void VBlankCB_Pokenav(void)
 
 #define tState data[0]
 
+enum {
+    STATE_LOAD_FRAME,
+    STATE_OPEN_MAP,
+    STATE_WAIT_MAP_TASK,
+    STATE_HANDLE_INPUT,
+    STATE_SWITCH_OFF,
+};
+
 static void Task_Pokenav(u8 taskId)
 {
-    u32 menuId;
+    u32 funcId;
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
     {
-    case 0:
-        InitPokenavMainMenu();
-        tState = 1;
+    case STATE_LOAD_FRAME:
+        InitPokenavFrame();
+        tState = STATE_OPEN_MAP;
         break;
-    case 1:
-        // Wait for LoopedTask_InitPokenavMenu to finish
-        if (PokenavMainMenuLoopedTaskIsActive())
+    case STATE_OPEN_MAP:
+        if (IsPokenavFrameLoading())
             break;
-        // The PokeNav opens straight to its Hoenn map; B on the map switches
-        // the PokeNav off. The main menu (Map / Ribbons / Switch Off) is not
-        // an entry point.
-        if (SetActivePokenavMenu(POKENAV_REGION_MAP))
+        if (OpenMap())
         {
-            tState = 4;
+            tState = STATE_WAIT_MAP_TASK;
         }
         else
         {
             ShutdownPokenav();
-            tState = 5;
+            tState = STATE_SWITCH_OFF;
         }
         break;
-    case 2:
-        if (IsActiveMenuLoopTaskActive())
+    case STATE_WAIT_MAP_TASK:
+        if (IsRegionMapLoopedTaskActive())
             break;
-        tState = 3;
-    case 3:
-        menuId = GetCurrentMenuCB();
-        if (menuId == POKENAV_MENU_FUNC_EXIT)
+        tState = STATE_HANDLE_INPUT;
+        // fallthrough
+    case STATE_HANDLE_INPUT:
+        funcId = GetRegionMapCallback();
+        if (funcId == POKENAV_MAP_FUNC_EXIT)
         {
             ShutdownPokenav();
-            tState = 5;
+            tState = STATE_SWITCH_OFF;
         }
-        else if (menuId >= POKENAV_MENU_IDS_START)
+        else if (funcId != POKENAV_MAP_FUNC_NONE)
         {
-            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free2();
-            PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free1();
-            gPokenavResources->currentMenuCb1 = NULL;
-            if (SetActivePokenavMenu(menuId))
-            {
-                tState = 4;
-            }
-            else
-            {
-                ShutdownPokenav();
-                tState = 5;
-            }
-        }
-        else if (menuId != 0)
-        {
-            RunMainMenuLoopedTask(menuId);
-            if (IsActiveMenuLoopTaskActive())
-                tState = 2;
+            CreateRegionMapLoopedTask(funcId);
+            tState = STATE_WAIT_MAP_TASK;
         }
         break;
-    case 4:
-        if (!IsActiveMenuLoopTaskActive())
-            tState = 3;
-        break;
-    case 5:
+    case STATE_SWITCH_OFF:
         if (!IsPaletteFadeActive())
         {
-            bool32 calledFromScript = (gPokenavResources->mode != POKENAV_MODE_NORMAL);
+            bool32 calledFromScript = gPokenavResources->calledFromScript;
 
-            // Free whichever screen was active when the PokeNav switched off.
-            if (gPokenavResources->currentMenuCb1 != NULL)
+            if (gPokenavResources->mapOpen)
             {
-                PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free2();
-                PokenavMenuCallbacks[gPokenavResources->currentMenuIndex].free1();
+                FreeRegionMapSubstruct2();
+                FreeRegionMapSubstruct1();
             }
-            FreePokenavMainMenu();
+            FreePokenavFrame();
             FreePokenavResources();
             if (calledFromScript)
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -513,29 +295,16 @@ static void Task_Pokenav(u8 taskId)
 
 #undef tState
 
-static bool32 SetActivePokenavMenu(u32 menuId)
+static bool32 OpenMap(void)
 {
-    u32 index = menuId - POKENAV_MENU_IDS_START;
-
-    // Subtraction is unsigned, so IDs below the menu base fail this bound too.
-    // Retired entries are holes in the stable ID table, not callable menus.
-    if (index >= ARRAY_COUNT(PokenavMenuCallbacks) || PokenavMenuCallbacks[index].init == NULL)
-        return FALSE;
     InitKeys();
-    if (!PokenavMenuCallbacks[index].init())
+    if (!PokenavCallback_Init_RegionMap())
         return FALSE;
-    if (!PokenavMenuCallbacks[index].open())
+    if (!OpenPokenavRegionMap())
         return FALSE;
 
-    SetActiveMenuLoopTasks(PokenavMenuCallbacks[index].createLoopTask, PokenavMenuCallbacks[index].isLoopTaskActive);
-    gPokenavResources->currentMenuCb1 = PokenavMenuCallbacks[index].callback;
-    gPokenavResources->currentMenuIndex = index;
+    gPokenavResources->mapOpen = TRUE;
     return TRUE;
-}
-
-static u32 GetCurrentMenuCB(void)
-{
-    return gPokenavResources->currentMenuCb1();
 }
 
 void SetVBlankCallback_(IntrCallback callback)
@@ -563,39 +332,3 @@ void FreePokenavSubstruct(u32 index)
 {
     TRY_FREE_AND_SET_NULL(gPokenavResources->substructPtrs[index]);
 }
-
-u32 GetPokenavMode(void)
-{
-    return gPokenavResources->mode;
-}
-
-void SetPokenavMode(u16 mode)
-{
-    gPokenavResources->mode = mode;
-}
-
-void SetSelectedConditionSearch(u32 cursorPos)
-{
-    u32 searchId = cursorPos;
-
-    if (searchId > POKENAV_MENUITEM_CONDITION_SEARCH_TOUGH - POKENAV_MENUITEM_CONDITION_SEARCH_COOL)
-        searchId = 0;
-    gPokenavResources->conditionSearchId = searchId;
-}
-
-u32 GetSelectedConditionSearch(void)
-{
-    return gPokenavResources->conditionSearchId;
-}
-
-bool32 CanViewRibbonsMenu(void)
-{
-    return gPokenavResources->hasAnyRibbons;
-}
-
-#if TESTING
-bool32 Test_SetActivePokenavMenu(u32 menuId)
-{
-    return SetActivePokenavMenu(menuId);
-}
-#endif

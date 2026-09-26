@@ -11,14 +11,12 @@ enum {
 };
 
 s32 GetRematchIdxByTrainerIdx(s32 trainerIdx);
+void SetMatchCallRegisteredFlag(void);
 void InitMatchCallCounters(void);
 bool32 TryStartMatchCall(void);
 bool32 IsMatchCallTaskActive(void);
 void StartMatchCallFromScript(const u8 *message);
-void BufferPokedexRatingForMatchCall(u8 *destStr);
 bool32 SelectMatchCallMessage(int trainerId, u8 *str);
-void LoadMatchCallWindowGfx(u32 windowId, u32 destOffset, u32 paletteId);
-void DrawMatchCallTextBoxBorder(u32 windowId, u32 tileOffset, u32 paletteId);
 void RedrawMatchCallTextBoxBorder(void);
 
 bool32 GetActiveTrainerRematches(u32 matchCallId);

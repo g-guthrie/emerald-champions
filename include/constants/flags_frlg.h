@@ -1762,7 +1762,7 @@
 // Flags for whether a rematchable trainer has been registered in the player's Match Call.
 // Most are used implicitly by adding their REMATCH_* id to TRAINER_REGISTERED_FLAGS_START.
 // Some Match Call entries (like those for gym leaders, Wally, and all non-trainer NPCs like Prof. Birch)
-// have their own separate flag that needs to be set to be enabled; see src/pokenav_match_call_data.c
+// have their own separate FLAG_ENABLE_*_MATCH_CALL flag instead.
 #define TRAINER_REGISTERED_FLAGS_START       0
 #define FLAG_REGISTERED_ROSE                 0
 #define FLAG_REGISTERED_ANDRES               0

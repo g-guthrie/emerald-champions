@@ -89,35 +89,6 @@ void CopyMonCategoryText(enum Species species, u8 *dest)
     StringCopy(str + 1, gText_Pokemon);
 }
 
-u8 *GetStringClearToWidth(u8 *dest, int fontId, const u8 *str, int totalStringWidth)
-{
-    u8 *buffer;
-    int width;
-    int clearWidth;
-
-    if (str)
-    {
-        buffer = StringCopy(dest, str);
-        width = GetStringWidth(fontId, str, 0);
-    }
-    else
-    {
-        buffer = dest;
-        width = 0;
-    }
-
-    clearWidth = totalStringWidth - width;
-    if (clearWidth > 0)
-    {
-        *(buffer++) = EXT_CTRL_CODE_BEGIN;
-        *(buffer++) = EXT_CTRL_CODE_CLEAR;
-        *(buffer++) = clearWidth;
-        *buffer = EOS;
-    }
-
-    return buffer;
-}
-
 void PadNameString(u8 *dest, u8 padChar)
 {
     u8 length;
@@ -211,22 +182,3 @@ enum Language GetNicknameLanguage(u8 *str)
         return LANGUAGE_ENGLISH;
 }
 
-// Used by Pokénav's Match Call to erase the previous trainer's flavor text when switching between their info pages.
-void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows)
-{
-    u8 *windowTileData;
-    int fillSize, windowRowSize, i;
-    struct Window *window = &gWindows[windowId];
-
-    fillSize = numFillTiles * TILE_SIZE_4BPP;
-    windowRowSize = window->window.width * TILE_SIZE_4BPP;
-    windowTileData = (u8 *)window->tileData + (rowStart * windowRowSize) + (columnStart * TILE_SIZE_4BPP);
-    if (numRows > 0)
-    {
-        for (i = numRows; i != 0; i--)
-        {
-            CpuFastFill8(0x11, windowTileData, fillSize);
-            windowTileData += windowRowSize;
-        }
-    }
-}
