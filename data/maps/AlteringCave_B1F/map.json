@@ -186,7 +186,7 @@
       "x": 6,
       "y": 12,
       "elevation": 3,
-      "item": "ITEM_CARBOS",
+      "item": "ITEM_SPELL_TAG",
       "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_CARBOS"
     },
     {
@@ -194,7 +194,7 @@
       "x": 8,
       "y": 12,
       "elevation": 3,
-      "item": "ITEM_CALCIUM",
+      "item": "ITEM_TWISTED_SPOON",
       "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_CALCIUM"
     }
   ]

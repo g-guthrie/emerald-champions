@@ -48,7 +48,7 @@ Route104_EventScript_ItemSootheBell:: @ 8290D26
 	end
 
 Route105_EventScript_ItemAbilityPatch:: @ 8290D33
-	finditem ITEM_ABILITY_PATCH
+	finditem ITEM_ADRENALINE_ORB
 	end
 
 Route106_EventScript_ItemKinglerite:: @ 8290D40
@@ -160,7 +160,7 @@ Route116_EventScript_ItemRepel:: @ 8290E92
 	end
 
 Route116_EventScript_ItemHPUp:: @ 8290E9F
-	finditem ITEM_HP_UP
+	finditem ITEM_MUSCLE_BAND
 	end
 
 Route116_EventScript_ItemBindingBand:: @ 8290EAC
@@ -232,7 +232,7 @@ Route120_EventScript_ItemRevive:: @ 8290F7C
 	end
 
 Route121_EventScript_ItemCarbos:: @ 8290F89
-	finditem ITEM_CARBOS
+	finditem ITEM_ABILITY_SHIELD
 	end
 
 Route121_EventScript_ItemRevive:: @ 8290F96
@@ -284,7 +284,7 @@ Route126_EventScript_ItemGreenShard:: @ 8291025
 	end
 
 Route127_EventScript_ItemZinc:: @ 8291032
-	finditem ITEM_ZINC
+	finditem ITEM_DRAGON_FANG
 	end
 
 Route127_EventScript_ItemLaprasite:: @ 829103F
@@ -300,7 +300,7 @@ Route132_EventScript_ItemRareCandy:: @ 8291059
 	end
 
 Route132_EventScript_ItemProtein:: @ 8291066
-	finditem ITEM_PROTEIN
+	finditem ITEM_SHARP_BEAK
 	end
 
 Route133_EventScript_ItemPearlString:: @ 8291073
@@ -316,7 +316,7 @@ Route133_EventScript_ItemMaxRevive:: @ 829108D
 	end
 
 Route134_EventScript_ItemCarbos:: @ 829109A
-	finditem ITEM_CARBOS
+	finditem ITEM_BLACK_BELT
 	end
 
 Route134_EventScript_ItemCometShard:: @ 82910A7
@@ -336,7 +336,7 @@ MauvilleCity_EventScript_ItemUltraBall:: @ 82910CE
 	end
 
 RustboroCity_EventScript_ItemAbilityCapsule:: @ 82910DB
-	finditem ITEM_ABILITY_CAPSULE
+	finditem ITEM_WISE_GLASSES
 	end
 
 LilycoveCity_EventScript_ItemLightClay:: @ 82910E8
@@ -632,11 +632,11 @@ VictoryRoad_B2F_EventScript_ItemFullHeal:: @ 82914B7
 	end
 
 ArtisanCave_B1F_EventScript_ItemHPUp:: @ 82914C4
-	finditem ITEM_HP_UP
+	finditem ITEM_COMET_SHARD
 	end
 
 ArtisanCave_1F_EventScript_ItemCarbos:: @ 82914D1
-	finditem ITEM_CARBOS
+	finditem ITEM_BIG_NUGGET
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy:: @ 82914DE

@@ -38,12 +38,11 @@ MauvilleCity_Mart_EventScript_Man:: @ 8211125
 	end
 
 MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats: @ 821112E
-	.string "There are items that raise the\n"
-	.string "stats of Pokémon for good.\p"
-	.string "The ones I know are Protein\n"
-	.string "and Iron…\p"
-	.string "I do believe that there are others\n"
-	.string "like them.$"
+	.string "Did you know every Pokémon joins you\n"
+	.string "already fully trained?\p"
+	.string "Battles won't change its training,\n"
+	.string "but the move tutor at a Pokémon\l"
+	.string "Center can plan a new spread.$"
 
 MauvilleCity_Mart_Text_DecisionsDetermineBattle: @ 82111D8
 	.string "Use a certain move, or use an item\n"

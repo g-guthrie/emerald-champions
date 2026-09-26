@@ -132,48 +132,34 @@ SlateportCity_Movement_ScottExit: @ 81DCDB4
 	walk_left
 	step_end
 
+@ The Energy Guru's stall (LOCALID_SLATEPORT_ENERGY_GURU) belongs to the
+@ Catching Guru, whose sale Pokémon News announces (data/text/pokemon_news.inc).
 SlateportCity_EventScript_EnergyGuru:: @ 81DCDBD
 	lock
 	faceplayer
-	message SlateportCity_Text_EnergyGuruSellWhatYouNeed
+	message SlateportCity_Text_CatchingGuruSellWhatYouNeed
 	waitmessage
-	pokemart SlateportCity_Pokemart_EnergyGuru
+	pokemart SlateportCity_Pokemart_CatchingGuru
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-SlateportCity_Pokemart_EnergyGuru: @ 81DCDD4
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_IRON
-	.2byte ITEM_CARBOS
-	.2byte ITEM_ZINC
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_HP_UP
+SlateportCity_Pokemart_CatchingGuru:
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_REPEAT_BALL
 	.2byte ITEM_NONE
 	release
 	end
 
+@ The old Power item stand. Battles give no EVs here, so he explains where
+@ training really comes from instead of selling anything.
 SlateportCity_EventScript_PowerItems::
-	lock
-	faceplayer
-	message SlateportCity_Text_PowerItemsSellWhatYouNeed
-	waitmessage
-	pokemart SlateportCity_Pokemart_PowerItems
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-SlateportCity_Pokemart_PowerItems::
-	.2byte ITEM_POWER_BRACER
-	.2byte ITEM_POWER_BELT
-	.2byte ITEM_POWER_LENS
-	.2byte ITEM_POWER_BAND
-	.2byte ITEM_POWER_ANKLET
-	.2byte ITEM_POWER_WEIGHT
-	.2byte ITEM_NONE
-	release
+	msgbox SlateportCity_Text_HowEVTrainingWorks, MSGBOX_NPC
 	end
 
 SlateportCity_EventScript_IncenseStand::
@@ -859,13 +845,14 @@ SlateportCity_EventScript_ChooseBerryPowderItem:: @ 81DD3CA
 	case 1, SlateportCity_EventScript_EnergyRoot
 	case 2, SlateportCity_EventScript_HealPowder
 	case 3, SlateportCity_EventScript_RevivalHerb
-	case 4, SlateportCity_EventScript_Protein
-	case 5, SlateportCity_EventScript_Iron
-	case 6, SlateportCity_EventScript_Carbos
-	case 7, SlateportCity_EventScript_Calcium
-	case 8, SlateportCity_EventScript_Zinc
-	case 9, SlateportCity_EventScript_HPUp
-	case 10, SlateportCity_EventScript_PPUp
+	@ Rows follow SCROLL_MULTI_BERRY_POWDER_VENDOR in src/field_specials.c.
+	case 4, SlateportCity_EventScript_Ether
+	case 5, SlateportCity_EventScript_MaxEther
+	case 6, SlateportCity_EventScript_Elixir
+	case 7, SlateportCity_EventScript_MaxElixir
+	case 8, SlateportCity_EventScript_PPUp
+	case 9, SlateportCity_EventScript_PPMax
+	case 10, SlateportCity_EventScript_SacredAsh
 	case 11, SlateportCity_EventScript_CancelPowderItemSelect
 	case MULTI_B_PRESSED, SlateportCity_EventScript_CancelPowderItemSelect
 	end
@@ -898,45 +885,31 @@ SlateportCity_EventScript_RevivalHerb:: @ 81DD4AA
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Protein:: @ 81DD4BE
-	bufferitemname 0, ITEM_PROTEIN
-	setvar VAR_0x8008, ITEM_PROTEIN
+SlateportCity_EventScript_Ether::
+	bufferitemname 0, ITEM_ETHER
+	setvar VAR_0x8008, ITEM_ETHER
+	setvar VAR_0x8009, 500
+	goto SlateportCity_EventScript_TryBuyBerryPowderItem
+	end
+
+SlateportCity_EventScript_MaxEther::
+	bufferitemname 0, ITEM_MAX_ETHER
+	setvar VAR_0x8008, ITEM_MAX_ETHER
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Iron:: @ 81DD4D2
-	bufferitemname 0, ITEM_IRON
-	setvar VAR_0x8008, ITEM_IRON
-	setvar VAR_0x8009, 1000
+SlateportCity_EventScript_Elixir::
+	bufferitemname 0, ITEM_ELIXIR
+	setvar VAR_0x8008, ITEM_ELIXIR
+	setvar VAR_0x8009, 1500
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Carbos:: @ 81DD4E6
-	bufferitemname 0, ITEM_CARBOS
-	setvar VAR_0x8008, ITEM_CARBOS
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_Calcium:: @ 81DD4FA
-	bufferitemname 0, ITEM_CALCIUM
-	setvar VAR_0x8008, ITEM_CALCIUM
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_Zinc:: @ 81DD50E
-	bufferitemname 0, ITEM_ZINC
-	setvar VAR_0x8008, ITEM_ZINC
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_HPUp:: @ 81DD522
-	bufferitemname 0, ITEM_HP_UP
-	setvar VAR_0x8008, ITEM_HP_UP
-	setvar VAR_0x8009, 1000
+SlateportCity_EventScript_MaxElixir::
+	bufferitemname 0, ITEM_MAX_ELIXIR
+	setvar VAR_0x8008, ITEM_MAX_ELIXIR
+	setvar VAR_0x8009, 3000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
@@ -944,6 +917,20 @@ SlateportCity_EventScript_PPUp:: @ 81DD536
 	bufferitemname 0, ITEM_PP_UP
 	setvar VAR_0x8008, ITEM_PP_UP
 	setvar VAR_0x8009, 3000
+	goto SlateportCity_EventScript_TryBuyBerryPowderItem
+	end
+
+SlateportCity_EventScript_PPMax::
+	bufferitemname 0, ITEM_PP_MAX
+	setvar VAR_0x8008, ITEM_PP_MAX
+	setvar VAR_0x8009, 9000
+	goto SlateportCity_EventScript_TryBuyBerryPowderItem
+	end
+
+SlateportCity_EventScript_SacredAsh::
+	bufferitemname 0, ITEM_SACRED_ASH
+	setvar VAR_0x8008, ITEM_SACRED_ASH
+	setvar VAR_0x8009, 12000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
@@ -1084,14 +1071,18 @@ SlateportCity_Text_LookingForBrawly:
 	.string "Gnarly! I'll head back to the Gym.\n"
 	.string "You better be ready to make a splash!$"
 
-SlateportCity_Text_EnergyGuruSellWhatYouNeed:
-	.string "I'm the Energy Guru! I'll go for it and\n"
-	.string "sell you what you need!$"
+SlateportCity_Text_CatchingGuruSellWhatYouNeed:
+	.string "I'm the Catching Guru! I stock\n"
+	.string "special Balls for every hunt.\p"
+	.string "The right Ball can turn a rare find\n"
+	.string "into your next teammate!$"
 
-SlateportCity_Text_PowerItemsSellWhatYouNeed:
-	.string "Need to boost your Pokémon's\n"
-	.string "training?\p"
-	.string "Give these a try!$"
+SlateportCity_Text_HowEVTrainingWorks:
+	.string "Battles don't train EVs, and every\n"
+	.string "Pokémon joins you fully trained.\p"
+	.string "Want a different spread? The move\n"
+	.string "tutor at any Pokémon Center plans\l"
+	.string "a new one for ¥500.$"
 
 SlateportCity_Text_IncenseStand:
 	.string "Wouldn't you like some fragrant\n"

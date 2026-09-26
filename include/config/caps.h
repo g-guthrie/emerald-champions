@@ -24,9 +24,9 @@
 #define EV_CAP_NO_GAIN                  3 // No EVs can be gained
 
 // EV Cap Configs
-#define B_EV_CAP_TYPE                   EV_CAP_NO_GAIN // Battles never train EVs. EVs come only from vitamins and Evie in Fallarbor, so a team's stats depend on choices, not grinding.
+#define B_EV_CAP_TYPE                   EV_CAP_NO_GAIN // Battles never train EVs. A Pokemon joins with the baseline spread (SetPlayerMonBaselineEVs); only Center EV Training and Evie in Fallarbor change it, so a team's stats depend on choices, not grinding.
 #define B_EV_CAP_VARIABLE               0 // unused unless B_EV_CAP_TYPE is EV_CAP_VARIABLE
 
-#define B_EV_ITEMS_CAP                  FALSE // Vitamins train to the ordinary 252/510 limits, as they do in Inclement.
+#define B_EV_ITEMS_CAP                  FALSE // Vitamins would train to the ordinary 252/510 limits; the game never hands one out (scripts/audit/written_out_items.py).
 
 #endif /* GUARD_CONFIG_CAPS_H */
