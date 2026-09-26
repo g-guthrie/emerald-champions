@@ -45,8 +45,8 @@ MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats: @ 821112E
 	.string "Center can plan a new spread.$"
 
 MauvilleCity_Mart_Text_DecisionsDetermineBattle: @ 82111D8
-	.string "Use a certain move, or use an item\n"
-	.string "instead…\p"
+	.string "Use a certain move, or switch to\n"
+	.string "another Pokémon instead…\p"
 	.string "The Trainer's decisions determine how\n"
 	.string "battles turn out, I think.$"
 

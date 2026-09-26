@@ -36,12 +36,10 @@ FortreeCity_PokemonCenter_1F_Text_GoToSafariZone: @ 8217410
 	.string "That's my suggestion.$"
 
 FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat: @ 821746D
-	.string "Have you done anything at\n"
-	.string "the Record Corner?\p"
-	.string "It's pretty neat. It mixes and matches\n"
-	.string "the records of Trainers.\p"
-	.string "I don't know quite how it works,\n"
-	.string "but it's cool. It's exciting, even!$"
+	.string "Have you tried the Move Tutor here?\p"
+	.string "It can teach a Pokémon any move it\n"
+	.string "can learn, no matter its level.\p"
+	.string "It's pretty neat. It's exciting, even!$"
 
 FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav: @ 821751F
 	.string "Oh, wow, you have a PokéNav!\n"

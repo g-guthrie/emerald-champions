@@ -25,8 +25,9 @@ PetalburgCity_Mart_Text_RepelIsUseful: @ 8207E60
 	.string "useful when you're in a hurry.$"
 
 PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou: @ 8207EB0
-	.string "Do you have any Antidotes with\n"
-	.string "you?\p"
 	.string "Poison keeps hurting a Pokémon\n"
 	.string "each turn it spends in battle.\p"
-	.string "Take some Antidotes with you.$"
+	.string "You can't open your Bag in a\n"
+	.string "Trainer battle, though.\p"
+	.string "So let a partner hold a Pecha Berry.\n"
+	.string "It cures poison all by itself!$"

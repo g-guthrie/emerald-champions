@@ -130,7 +130,11 @@ FortreeCity_Text_BugPokemonComeThroughWindow: @ 81E292E
 
 FortreeCity_Text_PokemonThatEvolveWhenTraded: @ 81E299D
 	.string "There are Pokémon that evolve when\n"
-	.string "you trade them! That's what I heard.$"
+	.string "you trade them!\p"
+	.string "No one to trade with? A Linking Cord\n"
+	.string "does the same job.\p"
+	.string "Lilycove's department store sells\n"
+	.string "them on its fourth floor!$"
 
 FortreeCity_Text_SomethingUnseeable: @ 81E29E5
 	.string "Something unseeable is in the way.$"

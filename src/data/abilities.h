@@ -1933,7 +1933,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STEAM_ENGINE] =
     {
         .name = _("Steam Engine"),
-        .description = COMPOUND_STRING("Fire/Water up Speed; no Water weakness."),
+        .description = COMPOUND_STRING("Fire/Water max Speed; Water not weak."),
         .aiRating = 3,
     },
 
@@ -2077,7 +2077,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_UNSEEN_FIST] =
     {
         .name = _("Unseen Fist"),
-        .description = COMPOUND_STRING("Contact evades protection."),
+        .description = COMPOUND_STRING("Contact chips past Protect."),
         .aiRating = 6,
     },
 
@@ -2477,7 +2477,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PIERCING_DRILL] =
     {
         .name = _("Piercing Drill"),
-        .description = COMPOUND_STRING("Contact evades protection."),
+        .description = COMPOUND_STRING("Contact chips past Protect."),
     },
 
     [ABILITY_DRAGONIZE] =
@@ -2543,7 +2543,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PRISM_SCALES] =
     {
         .name = _("Prism Scales"),
-        .description = COMPOUND_STRING("Reduces special damage by 30%."),
+        .description = COMPOUND_STRING("Takes less special damage."),
         .aiRating = 7,
         .breakable = TRUE,
     },
@@ -2580,7 +2580,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_VENGEANCE] =
     {
         .name = _("Vengeance"),
-        .description = COMPOUND_STRING("Ups Ghost moves in a pinch."),
+        .description = COMPOUND_STRING("Ups Ghost; more in a pinch."),
         .aiRating = 5,
     },
 };

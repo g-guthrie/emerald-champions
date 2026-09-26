@@ -1254,11 +1254,10 @@ SlateportCity_Text_BuyTooMuch: @ 81DE0D2
 	.string "away and buy too much.$"
 
 SlateportCity_Text_GetNameRaterToHelpYou: @ 81DE10E
-	.string "If you want to change your Pokémon's\n"
-	.string "nickname, you'll have to get a Name\l"
-	.string "Rater to help you.\p"
-	.string "You can find one in every Pokémon\n"
-	.string "Center.$"
+	.string "Once you give a Pokémon a nickname,\n"
+	.string "it keeps that name for good.\p"
+	.string "Nobody can change it after that,\n"
+	.string "so choose a name you love!$"
 
 SlateportCity_Text_CantChangeTradeMonName: @ 81DE16C
 	.string "Any Pokémon you get in a trade,\n"

@@ -122,8 +122,8 @@ FortreeCity_Mart_Text_StockUpOnItems: @ 8217715
 	.string "Better to be safe than sorry!$"
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow: @ 821778E
-	.string "A Rare Candy makes a Pokémon grow\n"
-	.string "immediately by one level.$"
+	.string "A Rare Candy raises a Pokémon one\n"
+	.string "level, as far as your Badges allow.$"
 
 FortreeCity_Mart_Movement_SpenserExitNorth:
 	walk_left

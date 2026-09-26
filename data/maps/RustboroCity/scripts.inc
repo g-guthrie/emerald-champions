@@ -1071,10 +1071,10 @@ RustboroCity_Text_PokemonChangeShape: @ 81E174B
 	.string "If one did that, I would be shocked!$"
 
 RustboroCity_Text_TradePokemonGrowFast: @ 81E1789
-	.string "A Pokémon you get in a trade from\n"
-	.string "someone grows fast.\p"
-	.string "But if you don't have certain Gym\n"
-	.string "Badges, it may not obey you…$"
+	.string "A Pokémon you get in a trade obeys\n"
+	.string "you right away, just like your own.\p"
+	.string "If it's behind the rest of your team,\n"
+	.string "your Leveler catches it up!$"
 
 RustboroCity_Text_OutOfTheWay: @ 81E17FE
 	.string "Get out!\n"
@@ -1246,9 +1246,7 @@ RustboroCity_Text_YouCanHave2On2Battle: @ 81E249D
 	.string "Did you know this?\p"
 	.string "Every Trainer battle here is a\n"
 	.string "Double Battle, two against two.\p"
-	.string "A Trainer will only battle you if\n"
-	.string "two of your Pokémon can fight.\p"
-	.string "But if one faints, the other takes\n"
-	.string "on both foes alone!\p"
+	.string "If only one of your Pokémon can\n"
+	.string "fight, it takes on both foes alone!\p"
 	.string "Don't you think it'd be cool to\n"
 	.string "win a battle like that?$"
