@@ -11833,7 +11833,7 @@ proposed_encounter_id: PHYSICAL_VICTORYROAD_1F_0089
 campaign_order: 498
 atlas_ordinal: 498
 chapter: Postgame Victory Road exhibition
-strict_cap: 100
+strict_cap: 85
 location: VictoryRoad_1F
 requirement: optional
 rematch_policy: first_campaign_encounter_only; later Match Call tiers excluded
@@ -11872,7 +11872,7 @@ proposed_encounter_id: BATTLE_191_TRICK_HOUSE_8_VINCENT
 campaign_order: 499
 atlas_ordinal: 499
 chapter: Postgame Trick House puzzle 8
-strict_cap: 100
+strict_cap: 85
 location: Route110_TrickHousePuzzle8
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -11910,7 +11910,7 @@ proposed_encounter_id: BATTLE_192_TRICK_HOUSE_8_KEIRA
 campaign_order: 500
 atlas_ordinal: 500
 chapter: Postgame Trick House puzzle 8
-strict_cap: 100
+strict_cap: 85
 location: Route110_TrickHousePuzzle8
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -11948,7 +11948,7 @@ proposed_encounter_id: BATTLE_193_TRICK_HOUSE_8_LEROY
 campaign_order: 501
 atlas_ordinal: 501
 chapter: Postgame Trick House puzzle 8
-strict_cap: 100
+strict_cap: 85
 location: Route110_TrickHousePuzzle8
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -11985,7 +11985,7 @@ proposed_encounter_id: PHYSICAL_SSTIDALROOMS_0032
 campaign_order: 504
 atlas_ordinal: 504
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: SSTidalRooms
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12023,7 +12023,7 @@ proposed_encounter_id: PHYSICAL_SSTIDALROOMS_0037
 campaign_order: 505
 atlas_ordinal: 505
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: SSTidalRooms
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12061,7 +12061,7 @@ proposed_encounter_id: PHYSICAL_SSTIDALROOMS_0042
 campaign_order: 506
 atlas_ordinal: 506
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: SSTidalRooms
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12100,7 +12100,7 @@ proposed_encounter_id: PHYSICAL_SSTIDALROOMS_0047
 campaign_order: 507
 atlas_ordinal: 507
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: SSTidalRooms
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12137,7 +12137,7 @@ proposed_encounter_id: PHYSICAL_SSTIDALROOMS_0062
 campaign_order: 509
 atlas_ordinal: 509
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: SSTidalRooms
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12175,7 +12175,7 @@ proposed_encounter_id: PHYSICAL_CAVE_OF_ORIGIN_DIANCIES_ROOM_WALLACE_EXHIBITION
 campaign_order: 510
 atlas_ordinal: 510
 chapter: Postgame Cave of Origin
-strict_cap: 100
+strict_cap: 85
 location: CaveOfOrigin_DianciesRoom
 requirement: optional postgame exhibition after becoming Champion
 status: master_audited_ready_for_implementation
@@ -12213,7 +12213,7 @@ proposed_encounter_id: PHYSICAL_ALTERINGCAVE_B1F_0055
 campaign_order: 511
 atlas_ordinal: 511
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: AlteringCave_B1F
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12251,7 +12251,7 @@ proposed_encounter_id: PHYSICAL_METEORFALLS_STEVENSCAVE_0021
 campaign_order: 512
 atlas_ordinal: 512
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: MeteorFalls_StevensCave
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -12289,7 +12289,7 @@ proposed_encounter_id: PHYSICAL_MOSSDEEPCITY_HOUSE1_0033
 campaign_order: 513
 atlas_ordinal: 513
 chapter: Postgame
-strict_cap: 100
+strict_cap: 85
 location: MossdeepCity_House1
 requirement: optional
 status: master_audited_ready_for_implementation

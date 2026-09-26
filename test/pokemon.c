@@ -293,14 +293,14 @@ TEST("togglegigantamaxfactor fails for Melmetal")
 TEST("givemon [simple]")
 {
     ZeroPlayerPartyMons();
-    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 85.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100;
     );
 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 85);
 }
 
 TEST("givemon respects FORM_CHANGE_ITEM_HOLD")
@@ -333,14 +333,14 @@ TEST("givemon respects FORM_CHANGE_ITEM_HOLD")
 TEST("givemon [moves]")
 {
     ZeroPlayerPartyMons();
-    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 85.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_NONE, move4=MOVE_NONE;
     );
 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 85);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_SCRATCH);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), MOVE_NONE);
@@ -354,7 +354,7 @@ TEST("givemon [moves]")
 TEST("givemon [moves (default)]")
 {
     ZeroPlayerPartyMons();
-    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 100.
+    FlagSet(FLAG_IS_CHAMPION); // Script gifts clamp to the level cap; the Champion cap is 85.
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_PYUKUMUKU, 100, move1=MOVE_DEFAULT, move2=MOVE_DEFAULT, move3=MOVE_DEFAULT;
@@ -367,7 +367,7 @@ TEST("givemon [moves (default)]")
         ; // we just want to get length of the learnset array
     }
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PYUKUMUKU);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 85);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), learnset[learnsetLength - 4].move);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), learnset[learnsetLength - 3].move);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), learnset[learnsetLength - 2].move);

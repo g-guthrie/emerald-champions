@@ -209,7 +209,7 @@ def map_dir_to_id() -> dict[str, str]:
 # Every window must be one of CAP_WINDOWS (src/caps.c's sCampaignMilestones
 # order, plus the 14 baseline before the first milestone).
 
-CAP_WINDOWS = [14, 20, 30, 40, 45, 55, 60, 65, 70, 80, 100]
+CAP_WINDOWS = [14, 20, 30, 40, 45, 55, 60, 65, 70, 80, 85]
 
 # The six early towns/routes every save starts able to walk between.
 SEED_MAP_DIRS = ["LittlerootTown", "Route101", "OldaleTown", "Route103", "Route102", "PetalburgCity"]

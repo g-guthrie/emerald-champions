@@ -301,7 +301,7 @@ def write_report() -> None:
         "After Feather Badge: cap 60",
         "After Mind Badge: cap 70",
         "After Rain Badge: cap 80",
-        "After becoming Champion: cap 100",
+        "After becoming Champion: cap 85",
         "Hard uses authored levels; Medium subtracts 2; Easy subtracts 4.",
         "",
         "PHYSICAL TRAINER ATLAS",

@@ -91,7 +91,7 @@ TEST("Wild levels: creation respects the current cap without raising low-level e
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 20);
     FlagSet(FLAG_IS_CHAMPION);
     CreateWildMon(SPECIES_EEVEE, 100);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 85);
     RestoreWildCapFlags(saved);
     ZeroEnemyPartyMons();
 }

@@ -254,7 +254,7 @@ HARD RULES THE COMPILER ENFORCES (a violation rejects the whole file)
   one encounter must share a class. Suggested level offsets by class:
   casual -3..-2 | regular -2..0 | grunt -1..+1 | gym -1..+1 | ace 0..+2 |
   brain +1..+3 | admin +1..+3 | rival +1..+3 (ace +3/+4) | leader +1..+5 |
-  elite +2..+6 | postgame (cap 100) 0.
+  elite +2..+6 | postgame (cap 85) 0.
 
 OUTPUT FORMAT (exact; this is the compiler's input format)
 -----------------------------------------------------------

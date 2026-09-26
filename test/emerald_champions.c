@@ -491,7 +491,7 @@ static const struct { u16 flag; u8 cap; } sCampaignCapExpectations[] =
     {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 65},
     {FLAG_BADGE07_GET, 70},
     {FLAG_BADGE08_GET, 80},
-    {FLAG_IS_CHAMPION, 100},
+    {FLAG_IS_CHAMPION, 85},
 };
 
 // Former milestone flags that no longer move the cap; cleared alongside the
@@ -556,11 +556,11 @@ TEST("Emerald Champions native trainer creation applies live-cap role offsets on
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_MOVE1), MOVE_THUNDERBOLT);
 
     FlagSet(FLAG_IS_CHAMPION);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 97);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 82);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 102);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 87);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 103);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 88);
     ResetCampaignCapMilestones();
     ZeroEnemyPartyMons();
 }

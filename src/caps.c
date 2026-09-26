@@ -27,7 +27,7 @@ static const struct { u16 flag; u8 cap; } sCampaignMilestones[] =
     {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, 65},
     {FLAG_BADGE07_GET, 70},
     {FLAG_BADGE08_GET, 80},
-    {FLAG_IS_CHAMPION, 100},
+    {FLAG_IS_CHAMPION, 85},
 };
 
 u32 GetCurrentLevelCap(void)

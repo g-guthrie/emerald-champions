@@ -87,7 +87,7 @@ MossdeepCity_StevensHouse_EventScript_LeaveMeltan:: @ 822285B
 
 MossdeepCity_StevensHouse_EventScript_GiveMeltan:: @ 8222865
 	setvar VAR_TEMP_1, SPECIES_MELTAN
-	@ Gift Pokemon arrive at the live level cap (Lv. 100 after the Hall of Fame).
+	@ Gift Pokemon arrive at the live level cap (Lv. 85 after the Hall of Fame).
 	special GetLevelCapForScriptedGift
 	givemon SPECIES_MELTAN, VAR_0x800A, ITEM_NONE
 	compare VAR_RESULT, 0
