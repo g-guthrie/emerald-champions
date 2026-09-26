@@ -5,16 +5,7 @@ Route101_MapScripts::
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
-	call_if_lt VAR_ROUTE101_STATE, 2, Route101_EventScript_HidePoochyenaBeforeChase
 	end
-
-@ Its map spot beside the bag shows at the top of the screen from the
-@ trigger row, then vanishes when the chase starts; wait off screen instead.
-@ Column 2 is the farthest west that still spawns (and stays spawned) for a
-@ player entering at x 10 or 11, and is eight or more tiles off screen.
-Route101_EventScript_HidePoochyenaBeforeChase:
-	setobjectxyperm LOCALID_ROUTE101_POOCHYENA, 2, 17
-	return
 
 Route101_OnFrame:
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
@@ -32,20 +23,16 @@ Route101_EventScript_StartBirchRescue::
 	closemessage
 	setobjectxy LOCALID_ROUTE101_BIRCH, 0, 15
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 0, 16
-	setobjectxy LOCALID_ROUTE101_POOCHYENA, 0, 17
 	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChase1
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChaseInCircles
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_ZigzagoonFaceBirch
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
@@ -224,7 +211,6 @@ Route101_EventScript_BirchsBag::
 	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_BattleRescue
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
-	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
@@ -235,7 +221,6 @@ Route101_EventScript_BirchsBag::
 Route101_EventScript_BattleRescue::
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
-	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	special StartEmeraldChampionsBirchRescue
 	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route101_EventScript_RescueLost
@@ -282,62 +267,16 @@ Route101_EventScript_ReturnToBag::
 	clearflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	addobject LOCALID_ROUTE101_BIRCH
 	addobject LOCALID_ROUTE101_ZIGZAGOON
-	addobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_ROUTE101_BIRCH, 4, 13
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 5, 13
-	setobjectxy LOCALID_ROUTE101_POOCHYENA, 6, 13
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_ROUTE101_POOCHYENA, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	setvar VAR_ROUTE101_STATE, 2
 	playbgm MUS_HELP, TRUE
 	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
-
-Route101_Movement_PoochyenaChase1:
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	step_end
-
-@ Follow Zigzagoon one step behind through the same turns.
-Route101_Movement_PoochyenaChaseInCircles:
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	walk_fast_left
-	walk_fast_left
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	walk_fast_left
-	walk_fast_left
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	step_end
 
 Route101_Text_RescueTryAgain:
 	.string "Your partners are safe.\p"
@@ -364,7 +303,7 @@ Route101_Text_HelpMe:
 
 Route101_Text_PleaseHelp:
 	.string "You there! Please help!\p"
-	.string "Two wild Pokémon are after me!\n"
+	.string "Wild Pokémon are after me!\n"
 	.string "Choose two Pokémon from my Bag!$"
 
 Route101_Text_DontLeaveMe:
