@@ -83,10 +83,58 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene:: @ 820C9F5
 	closemessage
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE
+	@ Every later visit puts Stern on 6,13 (map template). A save keeps live
+	@ coordinates, so he walks back there now; otherwise Continue would restore
+	@ him beside the player while re-entry used 6,13.
+	compare VAR_0x8008, 0
+	call_if_eq SlateportCity_Harbor_EventScript_SternReturnFromPlayer0
+	compare VAR_0x8008, 1
+	call_if_eq SlateportCity_Harbor_EventScript_SternReturnFromPlayer1
+	compare VAR_0x8008, 2
+	call_if_ge SlateportCity_Harbor_EventScript_SternReturnFromPlayer
 	copyobjectxytoperm LOCALID_CAPT_STERN
-	setobjectmovementtype LOCALID_CAPT_STERN, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectmovementtype LOCALID_CAPT_STERN, MOVEMENT_TYPE_LOOK_AROUND
 	releaseall
 	end
+
+SlateportCity_Harbor_EventScript_SternReturnFromPlayer0::
+	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternReturnFromPlayer0
+	waitmovement 0
+	return
+
+SlateportCity_Harbor_EventScript_SternReturnFromPlayer1::
+	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternReturnFromPlayer1
+	waitmovement 0
+	return
+
+SlateportCity_Harbor_EventScript_SternReturnFromPlayer::
+	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternReturnFromPlayer
+	waitmovement 0
+	return
+
+@ From 8,12, below a player on 8,11.
+SlateportCity_Harbor_Movement_SternReturnFromPlayer0:
+	walk_left
+	walk_left
+	walk_down
+	step_end
+
+@ From 9,12, right of a player on 8,12.
+SlateportCity_Harbor_Movement_SternReturnFromPlayer1:
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+@ From 9,13, right of a player on 8,13: around the front of the player.
+SlateportCity_Harbor_Movement_SternReturnFromPlayer:
+	walk_down
+	walk_left
+	walk_left
+	walk_up
+	walk_left
+	step_end
 
 SlateportCity_Harbor_EventScript_SternApproachPlayer0:: @ 820CA89
 	applymovement LOCALID_CAPT_STERN, SlateportCity_Harbor_Movement_SternApproachPlayer0
