@@ -86,24 +86,16 @@ static const u8 sText_Stats_CatchRate_Difficult[] = _("Difficult");
 static const u8 sText_Stats_CatchRate_Medium[] = _("Medium");
 static const u8 sText_Stats_CatchRate_Relaxed[] = _("Relaxed");
 static const u8 sText_Stats_CatchRate_Easy[] = _("Easy");
-static const u8 sText_Stats_ExpYield[] = _("Exp. Yield: ");
 static const u8 sText_Stats_EggCycles[] = _("Egg Steps:");
 static const u8 sText_Stats_EggCycles_VeryFast[] = _("{EMOJI_BOLT}{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Fast[] = _("{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Normal[] = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Slow[] = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
-static const u8 sText_Stats_Growthrate[] = _("Grow: ");
 static const u8 sText_Stats_Friendship[] = _("Friendship:");
 static const u8 sText_Stats_Friendship_BigAnger[] = _("{EMOJI_BIGANGER}");
 static const u8 sText_Stats_Friendship_Neutral[] = _("{EMOJI_NEUTRAL}");
 static const u8 sText_Stats_Friendship_Happy[] = _("{EMOJI_HAPPY}");
 static const u8 sText_Stats_Friendship_BigSmile[] = _("{EMOJI_BIGSMILE}");
-static const u8 sText_Stats_MEDIUM_FAST[] = _("Med. Fast");
-static const u8 sText_Stats_ERRATIC[] = _("Erratic");
-static const u8 sText_Stats_FLUCTUATING[] = _("Fluctuating");
-static const u8 sText_Stats_MEDIUM_SLOW[] = _("Med. Slow");
-static const u8 sText_Stats_FAST[] = _("Fast");
-static const u8 sText_Stats_SLOW[] = _("Slow");
 static const u8 sText_Stats_ContestHeart[] = _("H");
 static const u8 sText_Stats_Minus[] = _("-");
 static const u8 sText_Stats_eggGroup[] = _("Egg G1:");
@@ -1943,11 +1935,9 @@ static void SaveMonDataInStruct(void)
     sPokedexView->sPokemonStats.evYield_Defense     = evs[STAT_SPATK];
     sPokedexView->sPokemonStats.evYield_SpDefense   = evs[STAT_SPDEF];
     sPokedexView->sPokemonStats.catchRate           = gSpeciesInfo[species].catchRate;
-    sPokedexView->sPokemonStats.growthRate          = gSpeciesInfo[species].growthRate;
     sPokedexView->sPokemonStats.eggGroup1           = gSpeciesInfo[species].eggGroups[0];
     sPokedexView->sPokemonStats.eggGroup2           = gSpeciesInfo[species].eggGroups[1];
     sPokedexView->sPokemonStats.eggCycles           = gSpeciesInfo[species].eggCycles;
-    sPokedexView->sPokemonStats.expYield            = gSpeciesInfo[species].expYield;
     sPokedexView->sPokemonStats.friendship          = gSpeciesInfo[species].friendship;
     sPokedexView->sPokemonStats.ability0            = GetAbilityBySpecies(species, 0);
     sPokedexView->sPokemonStats.ability1            = GetAbilityBySpecies(species, 1);
@@ -2675,10 +2665,10 @@ static void PrintStatsScreen_Left(u8 taskId)
     }
 
     //TOGGLE--------------------------------------
+    // Battles give no experience: no Exp. Yield or growth-rate rows.
     if (gTasks[taskId].data[5] == 0)
     {
         u32 catchRate = sPokedexView->sPokemonStats.catchRate;
-        enum GrowthRate growthRate = sPokedexView->sPokemonStats.growthRate;
 
         //Catch rate
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate, base_x, base_y + base_y_offset*base_i);
@@ -2694,44 +2684,9 @@ static void PrintStatsScreen_Left(u8 taskId)
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Relaxed, base_x + x_offset_column, base_y + base_y_offset*base_i);
         else
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Easy, base_x + x_offset_column, base_y + base_y_offset*base_i);
-        base_i++;
-
-        //Growth rate
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Growthrate, base_x, base_y + base_y_offset*base_i);
-        switch (growthRate)
-        {
-        case GROWTH_MEDIUM_FAST:
-            StringCopy(strEV, sText_Stats_MEDIUM_FAST);
-            break;
-        case GROWTH_ERRATIC:
-            StringCopy(strEV, sText_Stats_ERRATIC);
-            break;
-        case GROWTH_FLUCTUATING:
-            StringCopy(strEV, sText_Stats_FLUCTUATING);
-            break;
-        case GROWTH_MEDIUM_SLOW:
-            StringCopy(strEV, sText_Stats_MEDIUM_SLOW);
-            break;
-        case GROWTH_FAST:
-            StringCopy(strEV, sText_Stats_FAST);
-            break;
-        case GROWTH_SLOW:
-            StringCopy(strEV, sText_Stats_SLOW);
-            break;
-        default:
-            break;
-        }
-        align_x = GetStringRightAlignXOffset(0, strEV, total_x);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strEV, align_x, base_y + base_y_offset*base_i);
     }
     else
     {
-        //Exp Yield
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_ExpYield, base_x, base_y + base_y_offset*base_i);
-        ConvertIntToDecimalStringN(gStringVar1, sPokedexView->sPokemonStats.expYield, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar1, base_x + base_x_offset, base_y + base_y_offset*base_i);
-        base_i++;
-
         //Friendship
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Friendship, base_x, base_y + base_y_offset*base_i);
         switch (sPokedexView->sPokemonStats.friendship)

@@ -1597,23 +1597,6 @@ u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, enum Move move)
     return MON_HAS_MAX_MOVES;
 }
 
-u16 GiveMoveToBattleMon(struct BattlePokemon *mon, enum Move move)
-{
-    s32 i;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (mon->moves[i] == MOVE_NONE)
-        {
-            mon->moves[i] = move;
-            mon->pp[i] = GetMoveMaxPP(move);
-            return move;
-        }
-    }
-
-    return MON_HAS_MAX_MOVES;
-}
-
 void SetMonMoveSlot(struct Pokemon *mon, enum Move move, u8 slot)
 {
     enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + slot);
@@ -1687,12 +1670,6 @@ static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, enum Move move, u8 slot)
 
     SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
     SetMonData(mon, MON_DATA_PP1 + slot, &finalPP);
-}
-
-void SetBattleMonMoveSlot(struct BattlePokemon *mon, enum Move move, u8 slot)
-{
-    mon->moves[slot] = move;
-    mon->pp[slot] = GetMoveMaxPP(move);
 }
 
 void GiveMonInitialMoveset(struct Pokemon *mon)
@@ -1806,11 +1783,6 @@ enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u3
     }
 
     return retVal;
-}
-
-enum Move MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
-{
-    return MonTryLearningNewMoveAtLevel(mon, firstMove, GetMonData(mon, MON_DATA_LEVEL));
 }
 
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, enum Move move)
@@ -3804,11 +3776,6 @@ void RemoveBoxMonPPBonus(struct BoxPokemon *mon, u8 moveIndex)
     SetBoxMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
-{
-    mon->ppBonuses &= gPPUpClearMask[moveIndex];
-}
-
 void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
 {
     s32 i;
@@ -4888,7 +4855,6 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
     switch (mode)
     {
     case EVO_MODE_NORMAL:
-    case EVO_MODE_BATTLE_ONLY:
     case EVO_MODE_BATTLE_READY:
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
@@ -4904,7 +4870,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                     conditionsMet = TRUE;
                 break;
             case EVO_LEVEL_BATTLE_ONLY:
-                if ((mode == EVO_MODE_BATTLE_ONLY || mode == EVO_MODE_BATTLE_READY) && evolutions[i].param <= level)
+                if (mode == EVO_MODE_BATTLE_READY && evolutions[i].param <= level)
                     conditionsMet = TRUE;
                 break;
             }
@@ -5054,33 +5020,6 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
     }
 
     return targetSpecies;
-}
-
-bool8 IsMonPastEvolutionLevel(struct Pokemon *mon)
-{
-    int i;
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
-
-    if (evolutions == NULL)
-        return FALSE;
-
-    for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
-    {
-        if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
-            continue;
-
-        switch (evolutions[i].method)
-        {
-        case EVO_LEVEL:
-            if (evolutions[i].param <= level)
-                return TRUE;
-            break;
-        }
-    }
-
-    return FALSE;
 }
 
 enum Species NationalPokedexNumToSpecies(enum NationalDexOrder nationalNum)
@@ -5335,44 +5274,6 @@ s32 CalculateFriendshipBonuses(struct Pokemon *mon, s32 modifier, enum HoldEffec
         bonus += ITEM_FRIENDSHIP_MAPSEC_BONUS;
 
     return bonus;
-}
-
-void MonGainEVs(struct Pokemon *mon, enum Species defeatedSpecies)
-{
-    const u8 yields[NUM_STATS] = {
-        [STAT_HP] = gSpeciesInfo[defeatedSpecies].evYield_HP,
-        [STAT_ATK] = gSpeciesInfo[defeatedSpecies].evYield_Attack,
-        [STAT_DEF] = gSpeciesInfo[defeatedSpecies].evYield_Defense,
-        [STAT_SPEED] = gSpeciesInfo[defeatedSpecies].evYield_Speed,
-        [STAT_SPATK] = gSpeciesInfo[defeatedSpecies].evYield_SpAttack,
-        [STAT_SPDEF] = gSpeciesInfo[defeatedSpecies].evYield_SpDefense,
-    };
-    u8 evs[NUM_STATS];
-    u32 totalEVs = 0;
-    u32 currentEVCap = GetCurrentEVCap();
-    enum Item heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
-    enum HoldEffect holdEffect = GetItemHoldEffect(heldItem);
-    u32 multiplier = CheckMonHasHadPokerus(mon) ? 2 : 1;
-
-    if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
-        multiplier *= 2;
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-    {
-        evs[stat] = GetMonData(mon, MON_DATA_HP_EV + stat);
-        totalEVs += evs[stat];
-    }
-    for (u32 stat = 0; stat < NUM_STATS && totalEVs < currentEVCap; stat++)
-    {
-        u32 gain = yields[stat];
-        if (holdEffect == HOLD_EFFECT_POWER_ITEM && GetItemSecondaryId(heldItem) == stat)
-            gain += GetItemHoldEffectParam(heldItem);
-        gain = min(gain * multiplier, currentEVCap - totalEVs);
-        u32 newEVs = min(evs[stat] + gain, MAX_PER_STAT_EVS);
-        // Preserve existing normalization of legacy over-stat-cap records,
-        // without expressing a negative adjustment through unsigned wraparound.
-        totalEVs = totalEVs - evs[stat] + newEVs;
-        SetMonData(mon, MON_DATA_HP_EV + stat, &newEVs);
-    }
 }
 
 u16 GetMonEVCount(struct Pokemon *mon)

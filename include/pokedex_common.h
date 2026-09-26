@@ -116,8 +116,6 @@ struct PokemonStats
     enum Ability ability0;
     enum Ability ability1;
     enum Ability abilityHidden;
-    enum GrowthRate growthRate;
-    u16 expYield;
     u8 genderRatio;
     u8 baseHP;
     u8 baseSpeed;

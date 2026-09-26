@@ -664,31 +664,6 @@ TEST("Inclement integration: EV mutation refuses over-cap spreads and saturates 
     ZeroPlayerPartyMons();
 }
 
-TEST("Emerald Champions: battles never train EVs; only Evie and vitamins do")
-{
-    static const struct {u16 item; u8 pokerus; u8 evs[NUM_STATS];} cases[] = {
-        {ITEM_NONE, 0, {0}},
-        {ITEM_MACHO_BRACE, 0, {0}},
-        {ITEM_NONE, 0x11, {0}},
-        {ITEM_POWER_LENS, 0x11, {0}},
-        {ITEM_NONE, 0, {252, 252, 0, 0, 5, 0}},
-        {ITEM_POWER_WEIGHT, 0, {251, 0, 0, 0, 0, 0}},
-    };
-    EXPECT_EQ(GetCurrentEVCap(), 0);
-    struct Pokemon mon;
-    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
-    {
-        CreateMonWithIVs(&mon, SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
-        SetMonData(&mon, MON_DATA_HELD_ITEM, &cases[i].item);
-        SetMonData(&mon, MON_DATA_POKERUS, &cases[i].pokerus);
-        for (u32 stat = 0; stat < NUM_STATS; stat++)
-            SetMonData(&mon, MON_DATA_HP_EV + stat, &cases[i].evs[stat]);
-        MonGainEVs(&mon, SPECIES_BUTTERFREE); // Authored yield: 2 Sp. Atk, 1 Sp. Def.
-        for (u32 stat = 0; stat < NUM_STATS; stat++)
-            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_EV + stat), cases[i].evs[stat]);
-    }
-}
-
 TEST("Inclement integration: lottery initializes prizes and matches party PC and leading-zero IDs")
 {
     const struct {u16 id, tier, prize;} cases[] = {
