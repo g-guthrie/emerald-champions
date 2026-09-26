@@ -1,10 +1,10 @@
 """Run the production tutor collector against the real generated move/preset tables.
 
-Only BoxPokemon storage is stubbed. Form pointers come from configured species
-data; this checks move access, not native menu rendering or move replacement.
+The whole of src/emerald_champions_battle_sets.c and src/move_relearner.c is
+compiled on the host. Only pokemon.c's boundary is stubbed: BoxPokemon storage
+accessors and the species form tables (taken from the configured species data).
+This checks move access, not native menu rendering or move replacement.
 """
-import re
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -12,94 +12,57 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-from verify_trainer_ability_legality import preprocess_species_info, SPECIES_MARKER
-from verify_emerald_champions_campaign_battle_policy import c_block
+sys.path.insert(0, str(ROOT / "tests"))
+import host_c
 
 
-class PreparationMoveIntegrity(unittest.TestCase):
-    def test_historical_and_preset_moves_are_individually_learnable(self):
-        subprocess.run([sys.executable, "tools/learnset_helpers/make_teachables.py", "--preparation"],
-                       cwd=ROOT, check=True, timeout=60)
-        species = preprocess_species_info().split("const struct SpeciesInfo gSpeciesInfo[]", 1)[1]
-        markers = list(SPECIES_MARKER.finditer(species))
-        pointers = []
-        for index, marker in enumerate(markers):
-            end = markers[index + 1].start() if index + 1 < len(markers) else len(species)
-            form = re.search(r"\.formSpeciesIdTable\s*=\s*(s\w+)", species[marker.end():end])
-            if form:
-                pointers.append(f"[{marker[1]}] = {{{form[1]}}},")
-
-        header = (ROOT / "include/emerald_champions_battle_sets.h").read_text()
-        structs = header[header.index("struct EmeraldChampionsBattleSet\n"):
-                         header.index("// EVs are shown")]
-        sets = (ROOT / "src/emerald_champions_battle_sets.c").read_text()
-        lookup = sets[sets.index("static bool32 IsValidBattleFormat("):
-                      sets.index("static bool32 IsVisiblePreset(")]
-        tutor = (ROOT / "src/move_relearner.c").read_text()
-        # Extract the functions this fixture executes. Unrelated tutor modes
-        # can be inserted between them without becoming fixture dependencies.
-        collector = "\n".join(c_block(sets, signature) for signature in (
-            "const u16 *GetEmeraldChampionsPreparationMoves(enum Species species)",
-            "static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, bool8 *availableMoves)",
-            "u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)",
-        ))
-        has_moves = tutor[tutor.rindex("static bool32 HasRelearnerAllMoves("):
-                          tutor.rindex("static bool32 IsLevelUpMoveRelearnerActive(")]
-
-        harness = r'''
-#include <assert.h>
-#include <stdint.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <string.h>
-typedef uint8_t u8, bool8;
-typedef uint16_t u16;
-typedef uint32_t u32, bool32;
-#define TRUE 1
-#define FALSE 0
-#define _(text) text
-#define STATIC_ASSERT(condition, name) _Static_assert(condition, #name)
-#include "constants/global.h"
-#include "constants/pokemon.h"
-#include "constants/species.h"
-#include "constants/moves.h"
-#include "constants/items.h"
-#include "constants/abilities.h"
-#include "constants/emerald_champions.h"
-#include "constants/move_relearner.h"
-#define FORM_SPECIES_END (0xffff)
-#include "data/pokemon/form_species_tables.h"
-struct BoxPokemon { enum Species species; u16 moves[MAX_MON_MOVES]; };
-#define MON_DATA_SPECIES 0
-static u32 GetBoxMonData(struct BoxPokemon *mon, u32 field) { return mon->species; }
-static bool32 BoxMonKnowsMove(struct BoxPokemon *mon, u16 move) {
-    for (u32 i = 0; i < MAX_MON_MOVES; i++) if (mon->moves[i] == move) return TRUE;
+# pokemon.c boundary: the harness owns each BoxPokemon's species and moves.
+BOUNDARY = r'''
+#include "host_mon.h"
+u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field)
+{
+    assert(field == MON_DATA_SPECIES);
+    return ((struct HostMon *)boxMon)->species;
+}
+bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move)
+{
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (((struct HostMon *)boxMon)->moves[i] == move)
+            return TRUE;
     return FALSE;
 }
 '''
-        harness += "static const struct { const u16 *formSpeciesIdTable; } gSpeciesInfo[NUM_SPECIES] = {\n"
-        harness += "\n".join(pointers) + "\n};\n"
-        harness += r'''
-#define GET_BASE_SPECIES_ID(s) (gSpeciesInfo[s].formSpeciesIdTable ? gSpeciesInfo[s].formSpeciesIdTable[0] : (s))
+
+HOST_MON = r'''
+#include <assert.h>
+struct HostMon { struct BoxPokemon box; enum Species species; u16 moves[MAX_MON_MOVES]; };
+bool32 HostHasRelearnerAllMoves(struct BoxPokemon *boxMon);
 '''
-        harness += structs
-        harness += '#include "data/pokemon/emerald_champions_battle_sets.h"\n'
-        harness += '#include "data/pokemon/emerald_champions_preparation_learnsets.h"\n'
-        harness += lookup + collector + has_moves
-        harness += r'''
+
+RELEARNER = r'''
+bool32 HostHasRelearnerAllMoves(struct BoxPokemon *boxMon)
+{
+    return HasRelearnerAllMoves(boxMon);
+}
+'''
+
+HARNESS = r'''
+#include <stdio.h>
+#include <string.h>
+#include "constants/move_relearner.h"
+#include "host_mon.h"
 static u16 moves[MAX_RELEARNER_MOVES];
 static bool8 offered[MOVES_COUNT_ALL];
-static u32 collect(struct BoxPokemon *mon) {
+static u32 collect(struct HostMon *mon) {
     memset(offered, 0, sizeof(offered));
-    u32 count = GetEmeraldChampionsPreparationMovesToLearn(mon, moves);
+    u32 count = GetEmeraldChampionsPreparationMovesToLearn(&mon->box, moves);
     assert(count <= MAX_RELEARNER_MOVES);
-    assert(count == GetEmeraldChampionsPreparationMovesToLearn(mon, NULL));
-    assert(HasRelearnerAllMoves(mon) == (count != 0));
+    assert(count == GetEmeraldChampionsPreparationMovesToLearn(&mon->box, NULL));
+    assert(HostHasRelearnerAllMoves(&mon->box) == (count != 0));
     for (u32 i = 0; i < count; i++) {
         assert(moves[i] > MOVE_NONE && moves[i] < MOVES_COUNT_ALL);
         assert(!offered[moves[i]]);
-        assert(!BoxMonKnowsMove(mon, moves[i]));
+        assert(!BoxMonKnowsMove(&mon->box, moves[i]));
         offered[moves[i]] = TRUE;
     }
     return count;
@@ -107,7 +70,7 @@ static u32 collect(struct BoxPokemon *mon) {
 int main(void) {
     u32 checked = 0;
     for (u32 species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++) {
-        struct BoxPokemon mon = {.species = species};
+        struct HostMon mon = {.species = species};
         bool8 expected[MOVES_COUNT_ALL] = {FALSE};
         const u16 *historical = GetEmeraldChampionsPreparationMoves(species);
         for (u32 i = 0; historical[i] != MOVE_UNAVAILABLE; i++) expected[historical[i]] = TRUE;
@@ -135,31 +98,39 @@ int main(void) {
         for (u32 slot = 0; slot < MAX_MON_MOVES && slot < count; slot++) mon.moves[slot] = moves[slot];
         collect(&mon);
         for (u32 move = 1; move < MOVES_COUNT_ALL; move++)
-            assert(offered[move] == (expected[move] && !BoxMonKnowsMove(&mon, move)));
+            assert(offered[move] == (expected[move] && !BoxMonKnowsMove(&mon.box, move)));
     }
-    struct BoxPokemon smeargle = {.species = SPECIES_SMEARGLE, .moves = {MOVE_SKETCH}};
+    struct HostMon smeargle = {.species = SPECIES_SMEARGLE, .moves = {MOVE_SKETCH}};
     collect(&smeargle);
-    assert(HasRelearnerAllMoves(&smeargle)); // Old has-moves path incorrectly returned FALSE.
+    assert(HostHasRelearnerAllMoves(&smeargle.box)); // Old has-moves path incorrectly returned FALSE.
     assert(offered[MOVE_SPORE] && offered[MOVE_GEOMANCY] && offered[MOVE_DECORATE]);
     assert(!offered[MOVE_SKETCH] && !offered[MOVE_THUNDERBOLT]);
-    struct BoxPokemon rotom = {.species = SPECIES_ROTOM_WASH};
+    struct HostMon rotom = {.species = SPECIES_ROTOM_WASH};
     collect(&rotom);
     assert(offered[MOVE_HYDRO_PUMP] && !offered[MOVE_OVERHEAT]);
-    struct BoxPokemon starmie = {.species = SPECIES_STARMIE};
+    struct HostMon starmie = {.species = SPECIES_STARMIE};
     collect(&starmie);
     assert(offered[MOVE_ICE_SPINNER]); // Mega preset move access does not require its item.
     printf("PASS: every species/form, %u direct presets, known-move filtering and Smeargle boundary\n", checked);
 }
 '''
-        compiler = shutil.which("cc")
-        self.assertIsNotNone(compiler, "host C compiler required")
+
+
+class PreparationMoveIntegrity(unittest.TestCase):
+    def test_historical_and_preset_moves_are_individually_learnable(self):
+        subprocess.run([sys.executable, "tools/learnset_helpers/make_teachables.py", "--preparation"],
+                       cwd=ROOT, check=True, timeout=60)
+        boundary = host_c.species_form_boundary() + BOUNDARY
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)
-            (path / "test.c").write_text(harness)
-            subprocess.run([compiler, "-std=c11", "-fsanitize=undefined", "-O1",
-                            "-I", str(ROOT / "include"), "-I", str(ROOT / "src"),
-                            str(path / "test.c"), "-o", str(path / "test")], check=True, timeout=60)
-            subprocess.run([str(path / "test")], check=True, timeout=60)
+            (path / "host_mon.h").write_text(HOST_MON)
+            executable = host_c.build(path, {
+                "battle_sets.c": host_c.production("src/emerald_champions_battle_sets.c") + HARNESS,
+                "move_relearner.c": host_c.production("src/move_relearner.c") + RELEARNER,
+                "pokemon_boundary.c": boundary,
+            }, flags=("-iquote", str(path)))
+            result = host_c.run(executable, timeout=120)
+            self.assertIn("PASS: every species/form", result.stdout)
 
 
 if __name__ == "__main__":

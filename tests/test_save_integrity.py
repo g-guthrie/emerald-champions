@@ -1,105 +1,155 @@
-"""Execute save/reload game functions with mocked flash and UI on the host.
+"""Execute save/reload game functions with emulated flash and stubbed UI on the host.
 
-These exercise actual status transitions and corrupt-sector decoding, not GBA
-flash timing, power loss, or emulator reload callbacks.
+The whole of src/save.c, src/start_menu.c and src/reload_save.c is compiled
+on the host, including the real write path; flash is a host byte array behind
+the agb_flash interface. These exercise actual status transitions and
+corrupt-sector decoding, not GBA flash timing, power loss, or emulator reload
+callbacks.
 """
 from pathlib import Path
-import re
-import shutil
-import subprocess
+import sys
 import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tests'))
+import host_c
 
-
-def declaration(source, signature):
-    """Extract a complete, brace-balanced declaration/function from game code."""
-    pattern = r"\s+".join(re.escape(part) for part in signature.split()) + r"\s*\{"
-    match = re.search(pattern, source)
-    if match is None:
-        raise AssertionError(f"cannot locate declaration: {signature}")
-    start = match.start()
-    opening = match.end() - 1
-    depth = 1
-    cursor = opening + 1
-    while depth:
-        depth += (source[cursor] == "{") - (source[cursor] == "}")
-        cursor += 1
-    if source[cursor:cursor + 1] == ";":
-        cursor += 1
-    return source[start:cursor] + "\n"
-
-
-def fixture_source():
-    save = (ROOT / 'src/save.c').read_text()
-    header = (ROOT / 'include/save.h').read_text()
-    constants = header[header.index('// Each 4 KiB'):header.index('extern u16')]
-    signatures = [
-        'static u16 CalculateChecksum(void *data, u16 size)',
-        'static bool32 IsSaveSlotSignature(u32 signature)',
-        'static u16 CalculateSaveSlotChecksum(struct SaveSector *sector, u16 legacySize)',
-        'static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)',
-        'static u8 ValidateSaveSlot(u16 slotOffset, const struct SaveSectorLocation *locations, u32 *counter)',
-        'static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)',
-        'static u8 TryLoadSaveSlot(u16 sectorId, struct SaveSectorLocation *locations)',
-        'u8 TrySavingData(u8 saveType)',
-    ]
-    return PREAMBLE + constants + ENVIRONMENT + ''.join(declaration(save, s) for s in signatures) + declaration(
-        (ROOT / 'src/start_menu.c').read_text(), 'static u8 SaveDoSaveCallback(void)'
-    ) + declaration((ROOT / 'src/reload_save.c').read_text(), 'bool32 CanReloadLastSave(void)') + SCENARIOS
-
-
-PREAMBLE = r'''
-#include <stdint.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef u8 bool8;
-typedef u32 bool32;
-#define TRUE 1
-#define FALSE 0
-#define SAVE_IN_PROGRESS 0
-#define GAME_STAT_SAVED_GAME 0
-#define CHECK(x) do { if (!(x)) { fprintf(stderr, "line %d: %s\n", __LINE__, #x); return 1; } } while (0)
+HOST_SAVE = r'''
+struct HostSave { bool8 writeFails, erasedHallOfFame; unsigned slotWrites; const u8 *lastMessage; };
+extern struct HostSave gHost;
+extern struct SaveSector gHostFlash[SECTORS_COUNT];
+u8 HostSaveDoSaveCallback(void);
 '''
 
-ENVIRONMENT = r'''
-static u16 gSaveFileStatus, gSaveAttemptStatus, gLastWrittenSector;
-static u32 gSaveCounter, gDamagedSaveSectors;
-static bool8 gDifferentSaveFile, gFlashMemoryPresent;
-static struct SaveSector gSaveDataBuffer, flash[NUM_SECTORS_PER_SLOT * NUM_SAVE_SLOTS];
-static struct SaveSector *gReadWriteSector = &gSaveDataBuffer;
+# Other units: flash chip, save blocks, game stats, message box and strings.
+BOUNDARY = r'''
+#include "global.h"
+#include "gba/flash_internal.h"
+#include "agb_flash.h"
+#include "battle_pyramid.h"
+#include "hall_of_fame.h"
+#include "load_save.h"
+#include "menu.h"
+#include "new_game.h"
+#include "overworld.h"
+#include "pokemon_storage_system.h"
+#include "save.h"
+#include "string_util.h"
+#include "strings.h"
+#include "trainer_hill.h"
+''' + host_c.ASSERTS + r'''
+#include "host_save.h"
+struct HostSave gHost;
+struct SaveSector gHostFlash[SECTORS_COUNT];
+static struct SaveBlock1 sSave1;
+static struct SaveBlock2 sSave2;
+static struct PokemonStorage sStorage;
+struct SaveBlock1 *gSaveBlock1Ptr = &sSave1;
+struct SaveBlock2 *gSaveBlock2Ptr = &sSave2;
+struct PokemonStorage *gPokemonStoragePtr = &sStorage;
+struct SaveBlock3 gSaveblock3;
+struct HallofFameTeam *gHoFSaveBuffer;
+u32 *gTrainerHillVBlankCounter;
+bool32 gFlashMemoryPresent;
+bool8 gDifferentSaveFile;
+u8 gStringVar4[0x3E8];
+const u8 gText_PlayerSavedGame[] = _("success");
+const u8 gText_SaveError[] = _("error");
+
+static u16 HostProgramFlashByte(u16 sector, u32 offset, u8 data)
+{
+    assert(sector < SECTORS_COUNT && offset < SECTOR_SIZE);
+    if (gHost.writeFails) return 1;
+    ((u8 *)&gHostFlash[sector])[offset] = data;
+    return 0;
+}
+static u16 HostEraseFlashSector(u16 sector)
+{
+    assert(sector < SECTORS_COUNT);
+    if (sector >= SECTOR_ID_HOF_1) gHost.erasedHallOfFame = TRUE;
+    memset(&gHostFlash[sector], 0xff, SECTOR_SIZE);
+    return 0;
+}
+u16 (*ProgramFlashByte)(u16, u32, u8) = HostProgramFlashByte;
+u16 (*EraseFlashSector)(u16) = HostEraseFlashSector;
+u32 ProgramFlashSectorAndVerify(u16 sector, u8 *src)
+{
+    assert(sector < SECTORS_COUNT);
+    if (sector < NUM_SECTORS_PER_SLOT * NUM_SAVE_SLOTS) gHost.slotWrites++;
+    if (gHost.writeFails) return 1;
+    memcpy(&gHostFlash[sector], src, SECTOR_SIZE);
+    return 0;
+}
+void ReadFlash(u16 sector, u32 offset, u8 *dest, u32 size)
+{
+    assert(sector < SECTORS_COUNT && offset + size <= SECTOR_SIZE);
+    memcpy(dest, (u8 *)&gHostFlash[sector] + offset, size);
+}
+void CopyPartyAndObjectsToSave(void) {}
+u32 GetGameStat(u8 index) { return 0; }
+void IncrementGameStat(u8 index) {}
+void PausePyramidChallenge(void) {}
+void DoSaveFailedScreen(u8 saveType) {}
+u8 *StringExpandPlaceholders(u8 *dest, const u8 *src) { gHost.lastMessage = src; return dest; }
+void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram) {}
+void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress) {}
+'''
+
+START_MENU = r'''
+u8 HostSaveDoSaveCallback(void) { return SaveDoSaveCallback(); }
+'''
+
+# Save/text callbacks registered for later frames; this fixture never runs them.
+UNCALLED = ('ClearStdWindowAndFrame', 'IsSEPlaying', 'IsTextPrinterActiveOnWindow', 'PlaySE', 'RemoveWindow', 'gMain')
+
+PRELUDE = r'''
+#include "reload_save.h"
+#include "strings.h"
+#include "host_save.h"
+#define CHECK(x) do { if (!(x)) { fprintf(stderr, "line %d: %s\n", __LINE__, #x); return 1; } } while (0)
+#define flash gHostFlash
 static u32 destinations[NUM_SECTORS_PER_SLOT];
 static struct SaveSectorLocation locations[NUM_SECTORS_PER_SLOT];
-static unsigned extraCopies;
-static u8 requestedSaveType;
-static bool8 writeFails;
-static const u8 gText_PlayerSavedGame[] = "success", gText_SaveError[] = "error";
-static const u8 *lastMessage;
-static void IncrementGameStat(unsigned stat) { (void)stat; }
-static void PausePyramidChallenge(void) {}
-static void SaveStartTimer(void) {}
-static u8 SaveSuccessCallback(void) { return 0; }
-static u8 SaveErrorCallback(void) { return 0; }
-static void ShowSaveMessage(const u8 *message, u8 (*callback)(void)) { lastMessage = message; (void)callback; }
-static void HandleSavingData(u8 type) { requestedSaveType = type; gDamagedSaveSectors = writeFails; }
-static void DoSaveFailedScreen(u8 type) { (void)type; }
-static bool8 ReadFlashSector(u8 sector, struct SaveSector *out) { *out = flash[sector]; return TRUE; }
-static void CopyToSaveBlock3(u16 id, struct SaveSector *sector) { (void)id; (void)sector; extraCopies++; }
+static void DoSave(void)
+{
+    gHost.erasedHallOfFame = FALSE;
+    gHost.slotWrites = 0;
+    HostSaveDoSaveCallback();
+}
+// SaveBlock3 chunks copied by the loader, observed through gSaveblock3.
+static unsigned SaveBlock3Sectors(void)
+{
+    unsigned sectors = 0;
+    for (u32 id = 0; id < NUM_SECTORS_PER_SLOT; id++) sectors += SaveBlock3Size(id) != 0;
+    return sectors;
+}
+static void ResetSaveBlock3(void)
+{
+    assert(SaveBlock3Sectors() != 0);
+    memset(&gSaveblock3, 0xee, sizeof(gSaveblock3));
+}
+static unsigned SaveBlock3Copies(void)
+{
+    unsigned copies = 0;
+    for (u32 id = 0; id < NUM_SECTORS_PER_SLOT; id++)
+    {
+        const u8 *chunk = (const u8 *)&gSaveblock3 + id * SAVE_BLOCK_3_CHUNK_SIZE;
+        bool32 copied = SaveBlock3Size(id) != 0;
+        for (u32 i = 0; i < SaveBlock3Size(id); i++) copied &= chunk[i] == 0;
+        copies += copied;
+    }
+    return copies;
+}
 '''
 
-SCENARIOS = r'''
+SCENARIOS = PRELUDE + r'''
 static void Reset(u16 status, bool8 different)
 {
     gSaveFileStatus = status;
     gDifferentSaveFile = different;
     gFlashMemoryPresent = TRUE;
-    writeFails = FALSE;
+    gHost.writeFails = FALSE;
     gDamagedSaveSectors = 0;
 }
 
@@ -110,32 +160,32 @@ static int Lifecycle(void)
     {
         Reset(invalid[i], TRUE);
         CHECK(!CanReloadLastSave());
-        writeFails = TRUE;
-        SaveDoSaveCallback();
+        gHost.writeFails = TRUE;
+        DoSave();
         CHECK(gDifferentSaveFile && gSaveFileStatus == invalid[i]);
-        CHECK(!CanReloadLastSave() && lastMessage == gText_SaveError);
-        CHECK(requestedSaveType == SAVE_OVERWRITE_DIFFERENT_FILE);
-        writeFails = FALSE;
-        SaveDoSaveCallback();
+        CHECK(!CanReloadLastSave() && gHost.lastMessage == gText_SaveError);
+        CHECK(gHost.erasedHallOfFame && gHost.slotWrites);
+        gHost.writeFails = FALSE;
+        DoSave();
         CHECK(!gDifferentSaveFile && gSaveFileStatus == SAVE_STATUS_OK);
-        CHECK(CanReloadLastSave() && lastMessage == gText_PlayerSavedGame);
-        CHECK(requestedSaveType == SAVE_OVERWRITE_DIFFERENT_FILE);
-        writeFails = TRUE;
-        SaveDoSaveCallback();
+        CHECK(CanReloadLastSave() && gHost.lastMessage == gText_PlayerSavedGame);
+        CHECK(gHost.erasedHallOfFame && gHost.slotWrites);
+        gHost.writeFails = TRUE;
+        DoSave();
         CHECK(CanReloadLastSave() && gSaveFileStatus == SAVE_STATUS_OK);
-        CHECK(!gDifferentSaveFile && requestedSaveType == SAVE_NORMAL);
-        CHECK(lastMessage == gText_SaveError);
+        CHECK(!gDifferentSaveFile && !gHost.erasedHallOfFame && gHost.slotWrites);
+        CHECK(gHost.lastMessage == gText_SaveError);
     }
     Reset(SAVE_STATUS_NO_FLASH, TRUE);
     gFlashMemoryPresent = FALSE;
-    SaveDoSaveCallback();
+    DoSave();
     CHECK(gDifferentSaveFile && !CanReloadLastSave());
     Reset(SAVE_STATUS_EMPTY, FALSE); // default/reset flag is not proof of a save
     CHECK(!CanReloadLastSave());
     Reset(SAVE_STATUS_ERROR, FALSE); // valid redundant slot recovered on load
     CHECK(CanReloadLastSave());
-    writeFails = TRUE;
-    SaveDoSaveCallback();
+    gHost.writeFails = TRUE;
+    DoSave();
     CHECK(CanReloadLastSave() && gSaveFileStatus == SAVE_STATUS_ERROR);
     return 0;
 }
@@ -168,7 +218,7 @@ static void SeedFlash(void)
         locations[id] = (struct SaveSectorLocation){&destinations[id], sizeof(u32)};
     }
     gSaveCounter = 0;
-    extraCopies = 0;
+    ResetSaveBlock3();
 }
 
 static void ValidSlot(unsigned slot)
@@ -246,7 +296,7 @@ static int Corruption(void)
 {
     SeedFlash();
     CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_EMPTY);
-    CHECK(extraCopies == 0);
+    CHECK(SaveBlock3Copies() == 0);
     for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) CHECK(destinations[i] == 0xdeadbeef);
     const u16 badIds[] = {NUM_SECTORS_PER_SLOT, 31, 32, 0xffff};
     for (unsigned bad = 0; bad < sizeof(badIds) / sizeof(*badIds); bad++)
@@ -257,10 +307,10 @@ static int Corruption(void)
             s->signature = SECTOR_SIGNATURE;
             s->id = badIds[bad];
             CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_CORRUPT);
-            CHECK(extraCopies == 0);
+            CHECK(SaveBlock3Copies() == 0);
             ValidSlot(1 - slot);
             CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_ERROR);
-            CHECK(gSaveCounter == 1 - slot && extraCopies == NUM_SECTORS_PER_SLOT);
+            CHECK(gSaveCounter == 1 - slot && SaveBlock3Copies() == SaveBlock3Sectors());
             for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) CHECK(destinations[i] == 100 + i);
         }
     // A valid sector ID/signature does not make a corrupt payload trustworthy.
@@ -280,20 +330,20 @@ static int Corruption(void)
             CHECK(destinations[0] == 0xdeadbeef);
             // The loader may copy individually valid sectors even when the
             // complete save is rejected. Only the damaged sector must not copy.
-            extraCopies = 0;
+            ResetSaveBlock3();
             for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) destinations[i] = 0xdeadbeef;
             // Recover only the intact alternate slot, not any of the invalid
             // slot's otherwise well-formed sectors or its damaged payload.
             ValidSlot(1 - slot);
             CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_ERROR);
-            CHECK(gSaveCounter == 1 - slot && extraCopies == NUM_SECTORS_PER_SLOT);
+            CHECK(gSaveCounter == 1 - slot && SaveBlock3Copies() == SaveBlock3Sectors());
             for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) CHECK(destinations[i] == 100 + i);
         }
     SeedFlash();
     ValidSlot(0);
     ValidSlot(1);
     CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_OK);
-    CHECK(gSaveCounter == 1 && extraCopies == NUM_SECTORS_PER_SLOT);
+    CHECK(gSaveCounter == 1 && SaveBlock3Copies() == SaveBlock3Sectors());
     return 0;
 }
 
@@ -312,25 +362,19 @@ int main(int argc, char **argv)
 class SaveIntegrityTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        compiler = shutil.which('cc')
-        if compiler is None:
-            raise AssertionError('host C compiler required')
         cls.directory = tempfile.TemporaryDirectory(prefix='ec-save-integrity-')
         cls.addClassCleanup(cls.directory.cleanup)
         directory = Path(cls.directory.name)
-        source = directory / 'save.c'
-        source.write_text(fixture_source())
-        cls.executable = directory / 'save'
-        result = subprocess.run([compiler, '-std=gnu11', '-Wall', '-Wextra',
-                                 '-Wno-unused-parameter', '-Wno-sign-compare',
-                                 '-fsanitize=undefined', '-fno-sanitize-recover=all',
-                                 str(source), '-o', str(cls.executable)], capture_output=True, text=True)
-        if result.returncode:
-            raise AssertionError(result.stdout + result.stderr)
+        (directory / 'host_save.h').write_text(HOST_SAVE)
+        cls.executable = host_c.build(directory, {
+            'save.c': host_c.production('src/save.c') + SCENARIOS,
+            'start_menu.c': host_c.production('src/start_menu.c') + START_MENU,
+            'reload_save.c': host_c.production('src/reload_save.c'),
+            'boundary.c': BOUNDARY,
+        }, name='save', flags=('-iquote', str(directory)), inert=UNCALLED)
 
     def scenario(self, name):
-        result = subprocess.run([str(self.executable), name], capture_output=True, text=True, timeout=20)
-        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        host_c.run(self.executable, name, timeout=20)
 
     def test_first_save_failure_success_repair_and_later_failure(self):
         self.scenario('lifecycle')

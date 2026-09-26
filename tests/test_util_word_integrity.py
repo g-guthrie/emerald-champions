@@ -1,40 +1,27 @@
-"""Exercise production halfword storage, including the original signed-shift bug."""
-import subprocess
+"""Exercise production halfword storage, including the original signed-shift bug.
+
+The whole of src/util.c is compiled on the host against the real headers.
+"""
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PREAMBLE = r'''
-#include <assert.h>
-#include <stdint.h>
-#include <string.h>
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef int16_t s16;
-'''
-
-
-def production_words():
-    source = (ROOT / 'src/util.c').read_text()
-    return source[source.index('void StoreWordInTwoHalfwords('):source.index('void SetBgAffineStruct(')]
+sys.path.insert(0, str(ROOT / 'tests'))
+import host_c
 
 
 def run_c(body):
     with tempfile.TemporaryDirectory() as temp:
-        path = Path(temp)
-        (path / 'test.c').write_text(PREAMBLE + body)
-        subprocess.run(['cc', '-O1', '-std=c11', '-Wall', '-Wextra', '-Werror',
-                        '-fsanitize=undefined', '-fno-sanitize-recover=undefined',
-                        str(path / 'test.c'), '-o', str(path / 'test')],
-                       check=True, timeout=30)
-        return subprocess.run([str(path / 'test')], capture_output=True, text=True, timeout=30)
+        executable = host_c.build(Path(temp), {'util.c': host_c.production('src/util.c') + '#include <string.h>\n' + body})
+        return host_c.run(executable)
 
 
 class UtilWordIntegrity(unittest.TestCase):
 
     def test_roundtrip_layout_and_defined_domain(self):
-        result = run_c(production_words() + r'''
+        run_c(r'''
 int main(void) {
     const unsigned lows[] = {0, 1, 0x7fff, 0x8000, 0xffff};
     s16 data[8]; // Sprite data: signed halfwords may alias their unsigned type.
@@ -73,7 +60,6 @@ int main(void) {
     return 0;
 }
 ''')
-        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == '__main__':
