@@ -10,7 +10,8 @@
 #include "constants/weather.h"
 
 // Enter battle from the actual visitor's map weather, rather than injecting
-// gBattleWeather or terrain. This exercises the overworld-to-battle handoff.
+// gBattleWeather or terrain. Use native wild battles: recorded-link battles
+// intentionally omit overworld weather. This exercises the real handoff.
 static void PrepareStorm(enum LegendarySignId sign)
 {
     for (u32 i = 0; i < 8; i++)
@@ -40,7 +41,7 @@ static void PrepareStorm(enum LegendarySignId sign)
         SetCurrentAndNextWeather(WEATHER_SUNNY);
 }
 
-SINGLE_BATTLE_TEST("Weather anomalies battle: rain, thunderstorm, fog and downpour initialize their real effects")
+WILD_BATTLE_TEST("Weather anomalies battle: rain, thunderstorm, fog and downpour initialize their real effects")
 {
     enum LegendarySignId sign;
     u32 weather, terrain;
@@ -64,7 +65,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: rain, thunderstorm, fog and downpo
     }
 }
 
-SINGLE_BATTLE_TEST("Weather anomalies battle: rain boosts Water damage by half", s16 damage)
+WILD_BATTLE_TEST("Weather anomalies battle: rain boosts Water damage by half", s16 damage)
 {
     bool32 rain;
     PARAMETRIZE { rain = FALSE; }
@@ -86,7 +87,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: rain boosts Water damage by half",
     }
 }
 
-SINGLE_BATTLE_TEST("Weather anomalies battle: rain Thunder bypasses a failing accuracy roll")
+WILD_BATTLE_TEST("Weather anomalies battle: rain Thunder bypasses a failing accuracy roll")
 {
     GIVEN {
         PrepareStorm(LEGENDARY_SIGN_TAPU_KOKO);
@@ -104,7 +105,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: rain Thunder bypasses a failing ac
     }
 }
 
-SINGLE_BATTLE_TEST("Weather anomalies battle: fog Misty Terrain stops grounded status but permits airborne status")
+WILD_BATTLE_TEST("Weather anomalies battle: fog Misty Terrain stops grounded status but permits airborne status")
 {
     enum Species species;
     PARAMETRIZE { species = SPECIES_WOBBUFFET; }
@@ -124,7 +125,7 @@ SINGLE_BATTLE_TEST("Weather anomalies battle: fog Misty Terrain stops grounded s
     }
 }
 
-SINGLE_BATTLE_TEST("Weather anomalies battle: battle weather can replace storm rain while its terrain remains")
+WILD_BATTLE_TEST("Weather anomalies battle: battle weather can replace storm rain while its terrain remains")
 {
     GIVEN {
         PrepareStorm(LEGENDARY_SIGN_TORNADUS);
