@@ -574,6 +574,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
 	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
+	@ Every later visit puts the rival on 7,4 (map template). A save keeps live
+	@ coordinates, so she steps back beside Birch before release.
+	closemessage
+	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalReturnBesideBirch
+	waitmovement 0
 	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
 	setvar VAR_OLDALE_TOWN_STATE, 1
@@ -630,6 +635,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls:: @ 81FA
 LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer: @ 81FA3E0
 	walk_down
 	walk_in_place_fast_left
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Movement_RivalReturnBesideBirch:
+	walk_up
+	face_down
 	step_end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Machine:: @ 81FA3E3
