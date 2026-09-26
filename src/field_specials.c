@@ -89,7 +89,6 @@
 #include "battle_util.h"
 #include "naming_screen.h"
 #include "chooseboxmon.h"
-#include "data/emerald_champions_forms.h"
 
 #define TAG_ITEM_ICON 5500
 
@@ -6454,13 +6453,6 @@ void SetGraniteCaveFlashLevel(void)
 }
 
 
-static void PushEmeraldChampionsServiceChoice(const u8 *name, u32 id)
-{
-    u8 *text = Alloc(StringLength(name) + 1);
-    StringCopy(text, name);
-    MultichoiceDynamic_PushElement((struct ListMenuItem){text, id});
-}
-
 static struct Pokemon *GetEmeraldChampionsServiceMon(void)
 {
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
@@ -6470,171 +6462,6 @@ static struct Pokemon *GetEmeraldChampionsServiceMon(void)
         || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
         return NULL;
     return mon;
-}
-
-static const struct EmeraldChampionsAppearance *GetEmeraldChampionsAppearance(enum Species species)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsAppearances); i++)
-        if (sEmeraldChampionsAppearances[i].species == species)
-            return &sEmeraldChampionsAppearances[i];
-    return NULL;
-}
-
-static const struct { enum Species species; enum Move move; const u8 *name; } sEmeraldChampionsCostumes[] =
-{
-    {SPECIES_PIKACHU_COSPLAY, MOVE_NONE, COMPOUND_STRING("Plain Cosplay")},
-    {SPECIES_PIKACHU_ROCK_STAR, MOVE_METEOR_MASH, COMPOUND_STRING("Rock Star")},
-    {SPECIES_PIKACHU_BELLE, MOVE_ICICLE_CRASH, COMPOUND_STRING("Belle")},
-    {SPECIES_PIKACHU_POP_STAR, MOVE_DRAINING_KISS, COMPOUND_STRING("Pop Star")},
-    {SPECIES_PIKACHU_PHD, MOVE_ELECTRIC_TERRAIN, COMPOUND_STRING("Ph. D.")},
-    {SPECIES_PIKACHU_LIBRE, MOVE_FLYING_PRESS, COMPOUND_STRING("Libre")},
-};
-
-static s32 GetEmeraldChampionsCostume(enum Species species)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsCostumes); i++)
-        if (sEmeraldChampionsCostumes[i].species == species)
-            return i;
-    return -1;
-}
-
-static const u8 *GetEmeraldChampionsServiceFormName(enum Species source, enum Species target, u32 mode)
-{
-    if (mode == 0)
-    {
-        const struct EmeraldChampionsAppearance *from = GetEmeraldChampionsAppearance(source);
-        const struct EmeraldChampionsAppearance *to = GetEmeraldChampionsAppearance(target);
-        if (from != NULL && to != NULL && from->group == to->group)
-            return to->name;
-    }
-    else if (mode == 1)
-    {
-        s32 to = GetEmeraldChampionsCostume(target);
-        if (GetEmeraldChampionsCostume(source) >= 0 && to >= 0)
-            return sEmeraldChampionsCostumes[to].name;
-    }
-    return NULL;
-}
-
-void BuildEmeraldChampionsFormChoices(void)
-{
-    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
-    gSpecialVar_Result = 0;
-    if (mon == NULL)
-        return;
-    enum Species source = GetMonData(mon, MON_DATA_SPECIES);
-    for (enum Species target = 1; target < NUM_SPECIES; target++)
-    {
-        const u8 *name = GetEmeraldChampionsServiceFormName(source, target, gSpecialVar_0x8006);
-        if (name != NULL)
-        {
-            PushEmeraldChampionsServiceChoice(name, target);
-            gSpecialVar_Result++;
-        }
-    }
-}
-
-void PrepareEmeraldChampionsFormSelection(void)
-{
-    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
-    gSpecialVar_Result = FALSE;
-    gSpecialVar_0x8005 = MAX_MON_MOVES;
-    if (mon == NULL)
-        return;
-    enum Species source = GetMonData(mon, MON_DATA_SPECIES);
-    enum Species target = gSpecialVar_0x8008;
-    if ((source == target && GET_BASE_SPECIES_ID(source) != SPECIES_FURFROU)
-        || GetEmeraldChampionsServiceFormName(source, target, gSpecialVar_0x8006) == NULL)
-        return;
-    gSpecialVar_Result = 1;
-    if (gSpecialVar_0x8006 != 1)
-        return;
-    enum Move oldMove = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(source)].move;
-    enum Move newMove = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(target)].move;
-    for (u32 i = 0; oldMove != MOVE_NONE && i < MAX_MON_MOVES; i++)
-        if (GetMonData(mon, MON_DATA_MOVE1 + i) == oldMove)
-        {
-            gSpecialVar_0x8005 = i;
-            return;
-        }
-    if (newMove == MOVE_NONE || MonKnowsMove(mon, newMove))
-        return;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        if (GetMonData(mon, MON_DATA_MOVE1 + i) == MOVE_NONE)
-        {
-            gSpecialVar_0x8005 = i;
-            return;
-        }
-    gSpecialVar_Result = 2; // Ask the native move-selection screen; nothing is changed yet.
-}
-
-// The costume's signature move replaces the chosen slot; costumes without one
-// clear it, except that a Pikachu is never left without a move (as in ORAS).
-static enum Move GetCostumeReplacementMove(struct Pokemon *mon, enum Species target)
-{
-    enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(target)].move;
-    u32 known = 0;
-
-    if (move != MOVE_NONE && !MonKnowsMove(mon, move))
-        return move;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        known += GetMonData(mon, MON_DATA_MOVE1 + i) != MOVE_NONE;
-    return known <= 1 ? MOVE_THUNDER_SHOCK : MOVE_NONE;
-}
-
-void BufferEmeraldChampionsFormPreview(void)
-{
-    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
-    gSpecialVar_Result = FALSE;
-    if (mon == NULL)
-        return;
-    const u8 *name = GetEmeraldChampionsServiceFormName(GetMonData(mon, MON_DATA_SPECIES),
-        gSpecialVar_0x8008, gSpecialVar_0x8006);
-    if (name == NULL)
-        return;
-    GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar2, name);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}: {STR_VAR_2}."));
-    if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
-    {
-        enum Move move = GetCostumeReplacementMove(mon, gSpecialVar_0x8008);
-        enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
-        StringCopy(gStringVar2, oldMove == MOVE_NONE ? COMPOUND_STRING("Empty slot") : GetMoveName(oldMove));
-        StringCopy(gStringVar3, move == MOVE_NONE ? COMPOUND_STRING("Empty slot") : GetMoveName(move));
-        u8 text[100];
-        StringExpandPlaceholders(text, COMPOUND_STRING("\p{STR_VAR_2} becomes\n{STR_VAR_3}."));
-        StringAppend(gStringVar4, text);
-    }
-    gSpecialVar_Result = TRUE;
-}
-
-void ApplyEmeraldChampionsFormSelection(void)
-{
-    BufferEmeraldChampionsFormPreview();
-    if (!gSpecialVar_Result)
-        return;
-    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
-    enum Species target = gSpecialVar_0x8008;
-    if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
-    {
-        enum Move move = GetCostumeReplacementMove(mon, target);
-        if (move == MOVE_NONE)
-        {
-            enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
-            DeleteMove(mon, oldMove);
-        }
-        else
-        {
-            RemoveMonPPBonus(mon, gSpecialVar_0x8005);
-            SetMonMoveSlot(mon, move, gSpecialVar_0x8005);
-        }
-    }
-    u16 hp = GetMonData(mon, MON_DATA_HP);
-    SetMonData(mon, MON_DATA_SPECIES, &target);
-    TrySetDayLimitToFormChange(mon);
-    CalculateMonStats(mon);
-    hp = min(hp, GetMonData(mon, MON_DATA_MAX_HP));
-    SetMonData(mon, MON_DATA_HP, &hp);
 }
 
 void BufferEmeraldChampionsBondingPreview(void)

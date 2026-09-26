@@ -59,10 +59,6 @@ u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
 #endif
 
 
-void BuildEmeraldChampionsFormChoices(void);
-void PrepareEmeraldChampionsFormSelection(void);
-void BufferEmeraldChampionsFormPreview(void);
-void ApplyEmeraldChampionsFormSelection(void);
 void BufferEmeraldChampionsBondingPreview(void);
 void ApplyEmeraldChampionsBonding(void);
 

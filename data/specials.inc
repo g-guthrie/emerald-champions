@@ -477,10 +477,11 @@ gSpecials::
 	def_special ChampionsTentEnd
 	def_special ChampionsTentTryGivePrize
 	def_special CheckChampionsLinkBattleParty
-	def_special BuildEmeraldChampionsFormChoices
-	def_special PrepareEmeraldChampionsFormSelection
-	def_special BufferEmeraldChampionsFormPreview
-	def_special ApplyEmeraldChampionsFormSelection
+	@ Retired appearance/costume service; slots reserved so later special IDs never move.
+	def_special Unused_EmeraldChampionsFormChoices, unused=1
+	def_special Unused_EmeraldChampionsFormSelection, unused=1
+	def_special Unused_EmeraldChampionsFormPreview, unused=1
+	def_special Unused_EmeraldChampionsFormApply, unused=1
 	def_special BufferEmeraldChampionsBondingPreview
 	def_special ApplyEmeraldChampionsBonding
 	def_special StartEmeraldChampionsBirchRescue, waitstate=1
