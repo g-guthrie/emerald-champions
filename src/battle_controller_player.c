@@ -96,6 +96,8 @@ static void ReloadMoveNames(enum BattlerId battler);
 static u32 CheckTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef);
 static u32 CheckTargetTypeEffectiveness(enum BattlerId battler);
 static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum BattlerId battler);
+static u32 CheckSeenTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef);
+static const u8 *GetFoeTypesPanelMark(u32 effectiveness);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
 {
@@ -1580,18 +1582,47 @@ static void OpenFoeTypesSubmenu(enum BattlerId battler)
     TryMoveSelectionDisplayMoveDescription(battler);
 }
 
+// Whether the player sees an Illusion disguise for this battler: its disguise
+// species, whose types show until the battler's own types change (the rule
+// the type icons follow).
+static bool32 IsBattlerSeenAsDisguise(enum BattlerId battler, enum Species *disguise)
+{
+    enum Species species = GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES);
+
+    *disguise = GetIllusionMonSpecies(battler);
+    return *disguise != SPECIES_NONE
+        && gBattleMons[battler].types[0] == GetSpeciesType(species, 0)
+        && gBattleMons[battler].types[1] == GetSpeciesType(species, 1);
+}
+
 // Emerald Champions: the same panel as the move description, listing each
-// opposing Pokémon and its current types ("Wingull        Water/Flying").
-// Opened with L during move selection (Birch mentions it). The types are
-// right-aligned to the panel edge: the panel is 144 px wide in FONT_NARROW,
-// the widest species name is 59 px and the widest type pair 82 px, so the
-// two never collide and nothing runs off the right side.
+// opposing Pokémon as the player sees it (an Illusion shows its disguise) with
+// its current types, a third one included ("Wingull        Water/Flying").
+// Opened with L from the action or move menu (Birch mentions it). From the
+// move menu each foe also carries the highlighted move's effectiveness mark
+// against it, in a column at the right edge. The types are right-aligned to
+// the panel edge or that column, in FONT_NARROW (the panel is 144 px, the
+// widest name 59 px, the widest type pair 82 px) or narrower when a long name
+// and a long type line would meet.
 static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
 {
     static const u8 sText_TypeSlash[] = _("/");
     const u32 panelWidth = GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_WIDTH) * 8;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
+    bool32 showMarks = B_SHOW_EFFECTIVENESS && gBattlerControllerFuncs[battler] == HandleInputChooseMove;
+    u32 markColumn = panelWidth, typesRight;
     u8 *text = gDisplayedStringBattle;
     u32 lines = 0, foes = 0, height;
+
+    if (showMarks)
+    {
+        u32 markWidth = 0;
+
+        for (u32 effectiveness = 0; effectiveness < 7; effectiveness++)
+            markWidth = max(markWidth, GetStringWidth(FONT_NARROW, GetFoeTypesPanelMark(effectiveness), 0));
+        markColumn = panelWidth - markWidth - 2;
+    }
+    typesRight = showMarks ? markColumn - 4 : panelWidth - 2;
 
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         if (GetBattlerSide(foe) != GetBattlerSide(battler) && IsBattlerAlive(foe))
@@ -1605,29 +1636,70 @@ static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
     {
         enum Type types[3];
-        u8 typeText[32];
-        u32 typeWidth, column;
+        enum Species species, disguise;
+        u8 typeText[48];
+        u32 nameWidth, typeFont, typeWidth, column;
 
         if (GetBattlerSide(foe) == GetBattlerSide(battler) || !IsBattlerAlive(foe))
             continue;
         GetBattlerTypes(foe, types);
+        species = gBattleMons[foe].species;
+        if (IsBattlerSeenAsDisguise(foe, &disguise))
+        {
+            species = disguise;
+            types[0] = GetSpeciesType(disguise, 0);
+            types[1] = GetSpeciesType(disguise, 1);
+        }
+        else if (disguise != SPECIES_NONE)
+        {
+            species = disguise;
+        }
         StringCopy(typeText, gTypesInfo[types[0]].name);
         if (types[1] != types[0] && types[1] != TYPE_MYSTERY)
         {
             StringAppend(typeText, sText_TypeSlash);
             StringAppend(typeText, gTypesInfo[types[1]].name);
         }
-        typeWidth = GetStringWidth(FONT_NARROW, typeText, 0);
-        column = panelWidth > typeWidth + 2 ? panelWidth - typeWidth - 2 : 0;
+        if (types[2] != TYPE_MYSTERY && types[2] != types[0] && types[2] != types[1])
+        {
+            StringAppend(typeText, sText_TypeSlash);
+            StringAppend(typeText, gTypesInfo[types[2]].name);
+        }
+        nameWidth = GetStringWidth(FONT_NARROW, GetSpeciesName(species), 0);
+        typeFont = GetFontIdToFit(typeText, FONT_NARROW, 0, typesRight > nameWidth + 4 ? typesRight - nameWidth - 4 : 0);
+        typeWidth = GetStringWidth(typeFont, typeText, 0);
+        column = typesRight > typeWidth ? typesRight - typeWidth : 0;
 
         if (lines++ > 0)
             text = StringAppend(text, gText_NewLine);
-        text = StringAppend(text, GetSpeciesName(gBattleMons[foe].species));
+        text = StringAppend(text, GetSpeciesName(species));
         *text++ = EXT_CTRL_CODE_BEGIN;
         *text++ = EXT_CTRL_CODE_CLEAR_TO;
         *text++ = column;
+        if (typeFont != FONT_NARROW)
+        {
+            *text++ = EXT_CTRL_CODE_BEGIN;
+            *text++ = EXT_CTRL_CODE_FONT;
+            *text++ = typeFont;
+        }
         *text = EOS;
         text = StringAppend(text, typeText);
+        if (typeFont != FONT_NARROW)
+        {
+            *text++ = EXT_CTRL_CODE_BEGIN;
+            *text++ = EXT_CTRL_CODE_FONT;
+            *text++ = FONT_NARROW;
+            *text = EOS;
+        }
+        // Status moves carry no mark, as in the PP window.
+        if (showMarks && !IsBattleMoveStatus(moveInfo->moves[gMoveSelectionCursor[battler]]))
+        {
+            *text++ = EXT_CTRL_CODE_BEGIN;
+            *text++ = EXT_CTRL_CODE_CLEAR_TO;
+            *text++ = markColumn;
+            *text = EOS;
+            text = StringAppend(text, GetFoeTypesPanelMark(CheckSeenTypeEffectiveness(battler, foe)));
+        }
     }
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
     CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_FULL);
@@ -2291,6 +2363,48 @@ static u32 CheckTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId batt
     else if (modifier >= UQ_4_12(2.0))
         return EFFECTIVENESS_SUPER_EFFECTIVE; // Super effective
     return EFFECTIVENESS_NORMAL; // Normal effectiveness
+}
+
+// Emerald Champions: the foe types panel's mark for one foe, against the foe
+// the player sees; an Illusion disguise's types stand in for the real ones.
+static u32 CheckSeenTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef)
+{
+    enum Species disguise;
+    enum Type types[2];
+    u32 effectiveness;
+
+    if (!IsBattlerSeenAsDisguise(battlerDef, &disguise))
+        return CheckTypeEffectiveness(battlerAtk, battlerDef);
+    types[0] = gBattleMons[battlerDef].types[0];
+    types[1] = gBattleMons[battlerDef].types[1];
+    gBattleMons[battlerDef].types[0] = GetSpeciesType(disguise, 0);
+    gBattleMons[battlerDef].types[1] = GetSpeciesType(disguise, 1);
+    effectiveness = CheckTypeEffectiveness(battlerAtk, battlerDef);
+    gBattleMons[battlerDef].types[0] = types[0];
+    gBattleMons[battlerDef].types[1] = types[1];
+    return effectiveness;
+}
+
+// The same marks as the PP window's; none for foes it can't show.
+static const u8 *GetFoeTypesPanelMark(u32 effectiveness)
+{
+    switch (effectiveness)
+    {
+    case EFFECTIVENESS_EXTREMELY_EFFECTIVE:
+        return COMPOUND_STRING("{STAR}");
+    case EFFECTIVENESS_SUPER_EFFECTIVE:
+        return COMPOUND_STRING("{CIRCLE_DOT}");
+    case EFFECTIVENESS_NORMAL:
+        return COMPOUND_STRING("{CIRCLE_HOLLOW}");
+    case EFFECTIVENESS_NOT_VERY_EFFECTIVE:
+        return COMPOUND_STRING("{TRIANGLE}");
+    case EFFECTIVENESS_MOSTLY_INEFFECTIVE:
+        return COMPOUND_STRING("{TRIANGLE_UPSIDE_DOWN}");
+    case EFFECTIVENESS_NO_EFFECT:
+        return COMPOUND_STRING("{BIG_MULT_X}");
+    default:
+        return COMPOUND_STRING("");
+    }
 }
 
 static u32 CheckTargetTypeEffectiveness(enum BattlerId battler)
