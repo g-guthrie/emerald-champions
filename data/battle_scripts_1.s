@@ -2679,7 +2679,7 @@ BattleScript_FaintBattler::
 	pause B_WAIT_TIME_LONG
 	dofaintanimation BS_FAINTED
 	copybyte sBATTLER, gBattlerFainted @ for message
-	trywildvictorysong @ the last wild foe's faint message plays over the victory tune
+	tryvictorysong @ the last foe's faint message plays over the victory tune
 	printstring STRINGID_BATTLERFAINTED
 	tryconfusionafterskydrop BS_FAINTED
 	cleareffectsonfaint BS_FAINTED

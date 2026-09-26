@@ -606,7 +606,7 @@ struct BattleStruct
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 faintCounter[MAX_BATTLE_TRAINERS]; // Supreme Overload / Last Respects
     u8 weatherDuration;
-    u8 wildVictorySong;
+    bool8 victorySongStarted;
     enum Type dynamicMoveType;
     enum BattlerId battlerPreventingSwitchout;
     u8 campaignLevelCap;

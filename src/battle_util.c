@@ -8,6 +8,8 @@
 #include "battle_environment.h"
 #include "battle_pyramid.h"
 #include "battle_util.h"
+#include "battle_script_commands.h"
+#include "battle_main.h"
 #include "caps.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -1774,22 +1776,82 @@ bool32 IsAbilityAndRecord(enum BattlerId battler, enum Ability battlerAbility, e
     return TRUE;
 }
 
-// Knocking out the last wild Pokémon starts the victory tune while the
-// player still has a Pokémon standing. The faint script starts it with the
-// "fainted!" message; the fainted-mon pass is the fallback.
-void TryPlayWildVictorySong(enum BattlerId faintedBattler)
+// Starts the victory tune once per battle: the wild tune, or the tune for
+// the trainer class that was beaten.
+void StartVictorySong(void)
 {
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-     && !IsOnPlayerSide(faintedBattler)
-     && !gBattleStruct->wildVictorySong
-     && (gBattleMons[0].hp || (IsDoubleBattle() && gBattleMons[2].hp))
-     && !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
-     && (!IsDoubleBattle() || !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))))
+    BattleStopLowHpSound();
+    if (gBattleStruct->victorySongStarted)
+        return;
+    PlayBGM(gBattleTypeFlags & BATTLE_TYPE_TRAINER ? GetTrainerVictorySong() : MUS_VICTORY_WILD);
+    gBattleStruct->victorySongStarted = TRUE;
+}
+
+// The attacker's recoil or Life Orb damage lands after its knockout. When the
+// attacker is the player's last Pokémon standing, that damage could still turn
+// the win into a draw, so the tune waits for the fainted-mon pass.
+static bool32 CouldAttackerStillFallThisMove(void)
+{
+    enum BattlerId battler = gBattlerAttacker;
+
+    if (battler >= gBattlersCount || !IsOnPlayerSide(battler) || !IsBattlerAlive(battler))
+        return FALSE;
+    if (!IsRecoilDamageEffect(GetMoveEffect(gCurrentMove))
+     && gCurrentMove != MOVE_STRUGGLE
+     && GetItemHoldEffect(gBattleMons[battler].item) != HOLD_EFFECT_LIFE_ORB)
+        return FALSE;
+
+    struct Pokemon *attackerMon = GetBattlerMon(battler);
+    for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
-        BattleStopLowHpSound();
-        PlayBGM(MUS_VICTORY_WILD);
-        gBattleStruct->wildVictorySong++;
+        if (trainer != B_TRAINER_PLAYER
+         && !(trainer == B_TRAINER_PARTNER && gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)))
+            continue;
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+        {
+            struct Pokemon *mon = &gParties[trainer][i];
+            if (mon != attackerMon
+             && GetMonData(mon, MON_DATA_SPECIES)
+             && !GetMonData(mon, MON_DATA_IS_EGG)
+             && GetMonData(mon, MON_DATA_HP) > 0)
+                return FALSE;
+        }
     }
+    return TRUE;
+}
+
+// Knocking out the opponents' last Pokémon starts the victory tune with its
+// "fainted!" message, as in the newer games, while the player still has a
+// Pokémon to fight with. A trainer battle waits until the whole opposing side,
+// both trainers in a two-trainer battle, has nothing left. The fainted-mon
+// pass is the fallback, and HandleEndTurn_BattleWon starts it for any other win.
+void TryPlayVictorySong(enum BattlerId faintedBattler, bool32 duringMove)
+{
+    if (IsOnPlayerSide(faintedBattler) || gBattleStruct->victorySongStarted)
+        return;
+
+    // A Destiny Bond knockout may still take the player's last Pokémon with it.
+    if (duringMove && (gBattleMons[faintedBattler].volatiles.destinyBond || CouldAttackerStillFallThisMove()))
+        return;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        // Link battles end on their own shared script, without this tune.
+        // (The test runner plays ordinary battles through the recorded-link
+        // path, so it is let through there.)
+        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK) && !gTestRunnerEnabled)
+            return;
+        if (!NoAliveMonsForOpponent() || NoAliveMonsForPlayer())
+            return;
+    }
+    else if (!(gBattleMons[0].hp || (IsDoubleBattle() && gBattleMons[2].hp))
+          || IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+          || (IsDoubleBattle() && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))))
+    {
+        return;
+    }
+
+    StartVictorySong();
 }
 
 bool32 HandleFaintedMonActions(void)
@@ -1816,7 +1878,7 @@ bool32 HandleFaintedMonActions(void)
                 gBattlerFainted = gBattlerTarget = gBattleStruct->eventState.faintedActionBattler;
                 if (gBattleMons[gBattlerFainted].hp == 0 && !(gAbsentBattlerFlags & (1u << gBattlerFainted)))
                 {
-                    TryPlayWildVictorySong(gBattlerFainted);
+                    TryPlayVictorySong(gBattlerFainted, FALSE);
                     // Don't switch mons until all Pokémon performed their actions or the battle's over.
                     if (B_FAINT_SWITCH_IN >= GEN_4
                         && gBattleOutcome == 0

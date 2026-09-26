@@ -542,6 +542,10 @@ static void RestoreBGMVolumeAfterPokemonCry(void)
 
 void PlayBGM(u16 songNum)
 {
+#if TESTING
+    if (gTestRunnerEnabled)
+        TestRunner_Battle_RecordMusic(songNum);
+#endif
     if (gDisableMusic)
         songNum = 0;
     if (songNum == MUS_NONE)
