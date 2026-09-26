@@ -904,7 +904,8 @@ static bool8 StartMenuSaveCallback(void)
 }
 
 // Reload flow. Reuses the save dialog machinery so it reads exactly like Save:
-// the menu stays up, a Yes/No confirms, and Yes fades out and reloads in place.
+// the menu steps aside for the prompt (its Yes/No would sit on the menu), a
+// Yes/No confirms, No brings the menu back, and Yes fades out and reloads.
 static bool8 StartMenuReloadSaveCallback(void)
 {
     gMenuCallback = ReloadSaveStartCallback;
@@ -937,6 +938,9 @@ static bool8 ReloadSaveCallback(void)
 
 static u8 ReloadSaveConfirmCallback(void)
 {
+    RemoveStartMenuScrollArrows();
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
+    RemoveStartMenuWindow();
     ShowSaveMessage(sText_ReloadLastSaveConfirm, ReloadSaveYesNoCallback);
     return SAVE_IN_PROGRESS;
 }
