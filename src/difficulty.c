@@ -34,7 +34,7 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
 }
 
 // Hard plays the roster exactly as authored against the cap. Medium and Easy
-// stagger it down by one and four levels. Facilities use the same reduction
+// stagger it down by one and six levels. Facilities use the same reduction
 // against their own base, so the three modes stay in step everywhere.
 // It never changes trainer AI: the player is meant to experiment with the
 // same authored teams and the same opponents at different level gaps.
@@ -48,7 +48,7 @@ u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty)
     switch (difficulty)
     {
     case DIFFICULTY_EASY:
-        return 6;
+        return 8;
     case DIFFICULTY_NORMAL:
         return 3;
     case DIFFICULTY_HARD:

@@ -548,8 +548,8 @@ TEST("Emerald Champions native trainer creation applies live-cap role offsets on
     EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 11);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
     CreateNPCTrainerPartyFromTrainer(party, &trainer);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 11);
-    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 8);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 9);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 6);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_PIKACHU);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_HELD_ITEM), ITEM_LIGHT_BALL);
@@ -1702,7 +1702,7 @@ TEST("Champions Circuit honors the live difficulty level reduction")
         DIFFICULTY_NORMAL,
         DIFFICULTY_EASY,
     };
-    static const u8 expectedLevels[] = {100, 99, 96};
+    static const u8 expectedLevels[] = {100, 99, 94};
 
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
