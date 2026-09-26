@@ -128,11 +128,16 @@ class Recorder:
                        for i,f in enumerate(frames)]
             images[0].save(self.directory/"motion.webp",save_all=True,append_images=images[1:],duration=durations,loop=0,lossless=True)
         result=dict(id=self.directory.name,name=self.name,frames=self.length-1,seconds=round((self.length-1)/59.7275,2),
-                    build=self.build["rom_sha256"],recording=str(self.directory/"recording.json"),
+                    build=self.build["rom_sha256"],provenance=provenance_short(self.build),
+                    recording=str(self.directory/"recording.json"),
                     sheets=sheets,motion=str(self.directory/"motion.webp") if len(frames)>1 else None,
                     outcome=outcome or {},scope=spec["scope"])
         (self.directory/"result.json").write_text(json.dumps(result,indent=2))
         return result
+
+def provenance_short(build):
+    """Compact provenance for a recorded build; recordings made before build stamps are legacy."""
+    return build.get("provenance_short") or "legacy provenance"
 
 def select_frames(frames,limit,directory=None):
     if directory and len(frames)>limit:
@@ -198,6 +203,7 @@ def compare(root,before,after,directory):
     sheets=make_sheets(root,directory,"Before / after · "+b["name"],build,panels,
                        "Left: original build. Right: revised build. Original pixels; changes need visual judgment.",2)
     result=dict(before=str(before),after=str(after),before_build=a["build"],after_build=b["build"],
+                before_provenance=provenance_short(a["build"]),after_provenance=provenance_short(b["build"]),
                 sheets=sheets,changes=changes,scope="Pixel differences locate changes; they do not decide visual quality.")
     (directory/"comparison.json").write_text(json.dumps(result,indent=2))
     return result

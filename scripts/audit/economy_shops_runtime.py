@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import render_emerald_champions_ui as ui
 import run_emerald_champions_campaign as c
 from rom_artifacts import verify_rom_elf_pair
+import build_provenance as provenance
 
 
 def main():
@@ -26,6 +27,7 @@ def main():
     for src, dst in [('pokeemerald-headless.gba', rom), ('pokeemerald-headless.elf', elf),
                      ('pokeemerald-headless.inputs.json', out / 'scene.inputs.json')]:
         shutil.copy2(ROOT / src, dst)
+    build_provenance = provenance.carry(ROOT / 'pokeemerald-headless.gba', rom, elf)
     constants = c.parse_numeric_constants()
     enum = (ROOT / 'include/emerald_champions_headless.h').read_text().split('enum EmeraldChampionsHeadlessScenario', 1)[1].split('};', 1)[0]
     scenario = re.findall(r'EC_HEADLESS_SCENARIO_\w+', enum).index('EC_HEADLESS_SCENARIO_ECONOMY_SHOPS')
@@ -36,7 +38,8 @@ def main():
     common = dict(runner=runner, rom=rom, state=state, addresses=addresses)
     trace, panels = [], []
     report = dict(status='running', scope='Synthetic shop prerequisites; native NPCs, menus and transactions. No earned traversal or battle acceptance.',
-                  build={f'{kind}_sha256': hashlib.sha256(path.read_bytes()).hexdigest() for kind, path in [('rom', rom), ('elf', elf)]}, trace=trace)
+                  build={**{f'{kind}_sha256': hashlib.sha256(path.read_bytes()).hexdigest() for kind, path in [('rom', rom), ('elf', elf)]},
+                         'provenance': build_provenance, 'provenance_short': provenance.short_label(build_provenance)}, trace=trace)
 
     def step(label, key=None, frames=100, panel=False):
         shot = out / f'{len(trace):03d}-{label}.png'

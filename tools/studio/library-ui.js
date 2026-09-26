@@ -16,7 +16,7 @@ async function refreshLibrary(){
   $("sceneCards").replaceChildren();$("compareBefore").replaceChildren();$("compareAfter").replaceChildren();
   for(const scene of result.scenes){
     const card=element("article",undefined,"scene-card");card.append(element("h3",scene.name));
-    card.append(element("p",scene.seconds+" seconds · build "+scene.build.slice(0,12),"hint"));
+    card.append(element("p",scene.seconds+" seconds · build "+scene.build.slice(0,12)+" · "+(scene.provenance||"legacy provenance"),"hint"));
     if(scene.sheets?.[0]){const img=element("img");img.src=artifactUrl(scene.sheets[0]);img.alt=scene.name+" contact sheet";const link=element("a");link.href=img.src;link.target="_blank";link.append(img);card.append(link);}
     const row=element("div",undefined,"library-actions");
     for(const[label,mode]of[["Replay original","exact"],["Test latest build","latest"]]){
@@ -84,7 +84,7 @@ action("searchHistory",async()=>{
 });
 action("buildHistory",async()=>{
   const r=await api("builds");$("historyResults").replaceChildren();
-  for(const b of r.builds){const item=element("article",undefined,"dialogue-result");item.append(element("h3",b.rom_sha256.slice(0,12)),element("p",b.created+" · base "+b.commit.slice(0,12),"hint"),element("pre",b.changed_files.join("\n")));$("historyResults").append(item);}
+  for(const b of r.builds){const item=element("article",undefined,"dialogue-result");item.append(element("h3",b.rom_sha256.slice(0,12)),element("p",b.created+" · "+b.provenance_label+(b.commit?" · base "+b.commit.slice(0,12):""),"hint"),element("pre",(b.changed_files||[]).join("\n")));$("historyResults").append(item);}
 });
 action("sceneGraph",async()=>{
   if(selectedNpc===null)throw Error("Select an NPC first.");

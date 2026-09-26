@@ -37,6 +37,7 @@ os.environ['PATH'] = str(Path.home() / '.local/share/arm-gnu-toolchain-15.2-2026
 sys.path.insert(0, str(ROOT / 'tools' / 'studio'))
 sys.path.insert(0, str(ROOT / 'scripts'))
 sys.path.insert(0, str(ROOT / 'scripts' / 'playthrough'))
+import build_provenance as provenance  # noqa: E402
 
 DIRS = {'UP': (0, -1), 'DOWN': (0, 1), 'LEFT': (-1, 0), 'RIGHT': (1, 0)}
 FACING = {1: 'DOWN', 2: 'UP', 3: 'LEFT', 4: 'RIGHT'}
@@ -784,11 +785,16 @@ async def serve(args):
         source = Path(args.build) / ('pokeemerald-headless' + Path(name).suffix)
         if not target.exists():
             shutil.copy2(source, target)
+    # The build's own stamp (not the current checkout) says what this ROM is.
+    build = provenance.carry(Path(args.build) / 'pokeemerald-headless.gba', run_dir / 'scene.gba', run_dir / 'scene.elf')
+    print('build provenance:', provenance.label(build), flush=True)
     meta = run_dir / 'session.json'
     if not meta.exists():
         meta.write_text(json.dumps({
             'rom_sha256': hashlib.sha256((run_dir / 'scene.gba').read_bytes()).hexdigest(),
             'elf_sha256': hashlib.sha256((run_dir / 'scene.elf').read_bytes()).hexdigest(),
+            'build_provenance': build,
+            'build_provenance_label': provenance.label(build),
             'parent_save': str(Path(args.save).resolve()) if args.save else None,
             'parent_save_sha256': hashlib.sha256(Path(args.save).read_bytes()).hexdigest() if args.save else None,
             'scope': 'Earned campaign continued by native Continue on the headless build of the same '

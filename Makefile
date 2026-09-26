@@ -83,6 +83,7 @@ endif
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
+NM := $(PREFIX)nm
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
 
@@ -128,6 +129,7 @@ endif
 ELF := $(ROM:.gba=.elf)
 UNFILTERED_TESTELF := $(OBJ_DIR)/$(notdir $(TESTELF))
 MAP := $(ROM:.gba=.map)
+PROVENANCE := $(ROM:.gba=.provenance.json)
 SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
@@ -416,7 +418,7 @@ clean-assets:
 tidy: tidymodern tidycheck tidydebug tidyrelease
 
 tidymodern:
-	rm -f poke*.gba poke*.elf poke*.map
+	rm -f poke*.gba poke*.elf poke*.map poke*.provenance.json
 	rm -rf $(OBJ_DIR_NAME)
 
 tidycheck:
@@ -428,9 +430,9 @@ tidydebug:
 
 tidyrelease:
 ifeq ($(RELEASE),1)
-	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
+	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME) $(PROVENANCE)
 else # Manually remove the release files on clean/tidy
-	rm -f $(FILE_NAME)-release.gba $(FILE_NAME)-release.elf $(FILE_NAME)-release.map
+	rm -f $(FILE_NAME)-release.gba $(FILE_NAME)-release.elf $(FILE_NAME)-release.map $(FILE_NAME)-release.provenance.json
 endif
 	rm -rf $(OBJ_DIR_NAME_RELEASE)
 
@@ -541,6 +543,23 @@ $(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.js
 # Linker script
 LD_SCRIPT := ld_script_modern.ld
 
+# Build provenance. One identifier for the source (commit plus uncommitted
+# build inputs), configuration and toolchain is assembled into the ROM as the
+# kept symbol gEcBuildProvenance; after the ROM exists the same script checks
+# the embedded identifier, fingerprints the compiled save layout and writes
+# $(PROVENANCE) beside the ROM. See scripts/build_provenance.py.
+BUILD_PROVENANCE := scripts/build_provenance.py
+PROVENANCE_PREPARED := $(OBJ_DIR)/.build-provenance.json
+PROVENANCE_ASM := $(OBJ_DIR)/ec_build_provenance.s
+PROVENANCE_OBJ := $(OBJ_DIR)/ec_build_provenance.o
+PROVENANCE_OBJ_REL := $(patsubst $(OBJ_DIR)/%,%,$(PROVENANCE_OBJ))
+
+$(PROVENANCE_ASM): FORCE_BUILD_CONFIG
+	@python3 $(BUILD_PROVENANCE) prepare --asm $@ --json $(PROVENANCE_PREPARED) --value=$(call shell_quote,ROM=$(ROM)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --value=$(call shell_quote,GAME_VERSION=$(GAME_VERSION)) --value=$(call shell_quote,MAP_VERSION=$(MAP_VERSION)) --value=$(call shell_quote,MODES=RELEASE=$(RELEASE) DEBUG=$(DEBUG) TEST=$(TEST) LTO=$(LTO) EC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)) --value=$(call shell_quote,CPPFLAGS=$(CONFIG_CPPFLAGS)) --value=$(call shell_quote,CFLAGS=$(CONFIG_CFLAGS)) --value=$(call shell_quote,ASFLAGS=$(CONFIG_ASFLAGS)) --value=$(call shell_quote,LDFLAGS=$(LDFLAGS)) --tool=$(call shell_quote,$(CONFIG_ARMCC)) --tool=$(call shell_quote,$(CC1)) --tool=$(call shell_quote,$(CONFIG_AS)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(OBJCOPY)) --tool=$(call shell_quote,$(FIX)) --tool=$(call shell_quote,$(CONFIG_PREPROC))
+
+$(PROVENANCE_OBJ): $(PROVENANCE_ASM)
+	$(AS) $(ASFLAGS) -o $@ - < $<
+
 # Final rules
 
 libagbsyscall:
@@ -550,23 +569,25 @@ libagbsyscall:
 ifneq ($(LTO),0)
 LDFLAGS := -march=armv4t -mabi=apcs-gnu -mcpu=arm7tdmi -Xlinker -Map=../../$(MAP) -Xlinker --print-memory-usage -Xassembler -meabi=5 -Xassembler -march=armv4t -Xassembler -mcpu=arm7tdmi -Xlinker --gc-sections
 LDFLAGS += -Xlinker -flto=auto
-$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json
+$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json $(PROVENANCE_OBJ)
 	@echo "cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs>"
-	+@cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(LIB)
+	+@cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(PROVENANCE_OBJ_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 else
 # Output .map file, memory usage readout and gc sections to clean-up unused data
 LDFLAGS = -Map ../../$(MAP) --print-memory-usage --gc-sections
-$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(LIB) | cat
+$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json $(PROVENANCE_OBJ)
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(PROVENANCE_OBJ_REL) $(LIB) | cat
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs> | cat"
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 endif
 
 # Builds the rom from the elf file
 $(ROM): $(ELF)
+	@rm -f $(PROVENANCE)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
+	@python3 $(BUILD_PROVENANCE) finalize --prepared $(PROVENANCE_PREPARED) --rom $@ --elf $< --out $(PROVENANCE) --cc=$(call shell_quote,$(ARMCC)) --objdump=$(call shell_quote,$(OBJDUMP)) --nm=$(call shell_quote,$(NM)) --flags=$(call shell_quote,$(CONFIG_CPPFLAGS) $(CONFIG_CFLAGS)) --work $(OBJ_DIR)/save-layout
 
 emerald: all
 firered: all

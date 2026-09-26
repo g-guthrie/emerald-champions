@@ -20,6 +20,7 @@ import render_emerald_champions_ui as ui
 import verify_emerald_champions_campaign_capture_paths as capture_paths
 import verify_emerald_champions_campaign_prerequisites as prerequisites
 from rom_artifacts import verify_rom_elf_pair
+import build_provenance as provenance
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -1682,6 +1683,10 @@ def main() -> int:
         verify_rom_elf_pair(rom, elf)
     except (ValueError, subprocess.TimeoutExpired) as error:
         fail(f"campaign ROM/ELF correspondence failed: {error}")
+    # What the ROM was built from comes from its build stamp, carried beside
+    # the content-addressed snapshot; unverified and legacy builds say so.
+    build_provenance = provenance.carry(source_rom, rom, elf)
+    print(f"build provenance: {provenance.label(build_provenance)}")
     if manifest_snapshot is None or manifest_artifact is None:
         fail("campaign manifest snapshot was not initialized")
     manifest_hash = str(manifest_artifact["snapshot_sha256"])
@@ -1851,6 +1856,7 @@ def main() -> int:
                 "rom_sha256": rom_hash,
                 "elf": str(elf),
                 "elf_sha256": elf_hash,
+                "build_provenance": build_provenance,
                 "artifact_evidence": final_artifact_evidence,
                 "native_save_import": save_import,
                 "segments": rows,
@@ -1888,6 +1894,7 @@ def main() -> int:
         "manifest_sha256": manifest_hash,
         "rom_sha256": rom_hash,
         "elf_sha256": elf_hash,
+        "build_provenance": provenance.label(build_provenance),
         "artifact_snapshots_verified_immutable": True,
         "segment_count": len(rows),
         "latest_run": str(latest_run),

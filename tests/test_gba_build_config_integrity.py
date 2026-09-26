@@ -40,7 +40,8 @@ class BuildConfigIntegrity(unittest.TestCase):
             shutil.copy2(p, self.root / p.name)
         for directory in ('scripts', 'src', 'test', 'include/config', 'data/maps', 'sound/songs/midi', 'bin', 'libagbsyscall'):
             (self.root / directory).mkdir(parents=True, exist_ok=True)
-        for p in [*(ROOT / 'scripts').glob('*build_config*.py'), ROOT / 'scripts/export_test_elf.py']:
+        for p in [*(ROOT / 'scripts').glob('*build_config*.py'), ROOT / 'scripts/export_test_elf.py',
+                  ROOT / 'scripts/build_provenance.py', ROOT / 'scripts/stamp_release_inputs.py']:
             shutil.copy2(p, self.root / 'scripts' / p.name)
         for path in ('src/main.c', 'src/librfu_intr.c', 'test/example.c', 'test/test_runner.c', 'test/test_runner_args.c', 'test/test_runner_battle.c'):
             (self.root / path).write_text('int fixture;\n')
@@ -81,6 +82,19 @@ class BuildConfigIntegrity(unittest.TestCase):
         self.make('pokeemerald.elf', 'LDFLAGS=--changed')
         self.assertEqual(len(self.calls('cc1')), compiles)
         self.assertEqual(len(self.calls('arm-none-eabi-ld')), links + 2)
+
+    def test_elf_links_one_provenance_object_whose_id_tracks_configuration(self):
+        self.make('pokeemerald.elf')
+        asm = self.root / 'build/emerald/ec_build_provenance.s'
+        first = asm.read_text()
+        self.assertRegex(first, r'gEcBuildProvenance:\n\t\.asciz "ECBUILD1:[0-9a-f]{64}"')
+        self.assertIn('ec_build_provenance.o', self.calls('arm-none-eabi-ld')[-1])
+        links = len(self.calls('arm-none-eabi-ld'))
+        self.make('pokeemerald.elf')
+        self.assertEqual((asm.read_text(), len(self.calls('arm-none-eabi-ld'))), (first, links))
+        self.make('pokeemerald.elf', 'LDFLAGS=--changed')
+        self.assertNotEqual(asm.read_text(), first)
+        self.assertEqual(len(self.calls('arm-none-eabi-ld')), links + 1)
 
     def test_test_elf_link_flags_are_separate(self):
         self.make('pokeemerald-test.elf', 'TEST=1')
