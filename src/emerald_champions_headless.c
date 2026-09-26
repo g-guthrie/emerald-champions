@@ -18,6 +18,7 @@
 #include "emerald_champions_agent_prep.h"
 #include "emerald_champions_agent_battle.h"
 #include "coins.h"
+#include "difficulty.h"
 #include "event_data.h"
 #include "item_use.h"
 #include "berry.h"
@@ -315,6 +316,9 @@ static void PrepareHeadlessNewGame(void)
 {
     SetSaveBlocksPointers(0);
     NewGameInitData();
+    // Moving the save blocks leaves no title-screen choice to carry; fixtures
+    // start on the default Medium, as a fresh cartridge does.
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     StringCopy(gSaveBlock2Ptr->playerName, sEcHeadlessPlayerName);
     gSaveBlock2Ptr->playerGender = MALE;
     gSaveBlock2Ptr->playerTrainerId[0] = 0x34;
@@ -737,6 +741,7 @@ static void PrepareMoveReplacement(void)
 #define EC_HEADLESS_POKEDEX_AREA_ASHEN_WOODS       20
 #define EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW    21
 #define EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW 22
+#define EC_HEADLESS_POKEDEX_EVOLUTION_REVIEW       30
 
 static void PrepareHeadlessPokedex(void)
 {
@@ -755,6 +760,16 @@ static void PrepareHeadlessPokedex(void)
         [EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW - 20] = SPECIES_PHEROMOSA,
         [EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW - 20] = SPECIES_ALCREMIE,
     };
+    // Hoenn-location evolutions for the regional forms and Runerigus, listed
+    // alphabetically so each base species is a few rows from the top.
+    static const enum Species evolutionReview[] =
+    {
+        SPECIES_CUBONE, SPECIES_MAROWAK,
+        SPECIES_EXEGGCUTE, SPECIES_EXEGGUTOR,
+        SPECIES_MIME_JR, SPECIES_MR_MIME,
+        SPECIES_PIKACHU, SPECIES_RAICHU,
+        SPECIES_YAMASK, SPECIES_COFAGRIGUS, SPECIES_RUNERIGUS,
+    };
     const enum Species *list = species;
     u32 count = ARRAY_COUNT(species);
     // High bits pick one owned species; the low bits keep naming the page.
@@ -770,6 +785,12 @@ static void PrepareHeadlessPokedex(void)
         list = &areaSpecies[gEcHeadlessFixtureParam - 20];
         count = 1;
     }
+    else if (gEcHeadlessFixtureParam == EC_HEADLESS_POKEDEX_EVOLUTION_REVIEW)
+    {
+        list = evolutionReview;
+        count = ARRAY_COUNT(evolutionReview);
+        gSaveBlock2Ptr->pokedex.order = ORDER_ALPHABETICAL;
+    }
 
     FlagSet(FLAG_SYS_POKEDEX_GET);
     EnableNationalPokedex();
@@ -778,7 +799,7 @@ static void PrepareHeadlessPokedex(void)
         enum NationalDexOrder dex = SpeciesToNationalPokedexNum(list[i]);
 
         GetSetPokedexFlag(dex, FLAG_SET_SEEN);
-        if (i != 2)
+        if (i != 2 || list == evolutionReview)
             GetSetPokedexFlag(dex, FLAG_SET_CAUGHT);
     }
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
@@ -2575,7 +2596,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 VarSet(VAR_PETALBURG_CITY_STATE, 3);
                 VarSet(VAR_PETALBURG_GYM_STATE, 2);
                 FlagClear(FLAG_EC_WOODS_GREAT_BALL_PENDING);
-                FlagClear(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
                 AddBagItem(ITEM_POKE_VIAL, 1);
                 AddBagItem(ITEM_LEVELER, 1);
                 AddBagItem(ITEM_REGENERATOR, 1);
@@ -2599,7 +2619,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else if (scene == 256 || scene == 257)
                 {
                     FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
-                    FlagSet(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
                     LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
                 }
                 else if (scene == 258 || scene == 259)
@@ -2694,11 +2713,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 {
                     FlagClear(FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE);
                     LoadHeadlessMap(MAP_PETALBURG_WOODS, 33, 7);
-                }
-                else if (scene == 274)
-                {
-                    FlagSet(FLAG_EC_BIRCH_GREAT_BALLS_PENDING);
-                    LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
                 }
                 else if (scene == 277 || scene == 278)
                 {

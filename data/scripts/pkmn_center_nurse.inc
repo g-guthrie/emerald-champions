@@ -3,9 +3,7 @@ Common_EventScript_PkmnCenterNurse::
 	faceplayer
 	call EC_DeliverTravelDocuments
 	call EventScript_PkmnCenterNurse_Itemfinder
-	call_if_set FLAG_EC_BIRCH_GREAT_BALLS_PENDING, EventScript_PkmnCenterNurse_BirchGift
 	call_if_set FLAG_EC_WOODS_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_WoodsGift
-	call_if_set FLAG_EC_RUSTBORO_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_RustboroGift
 	checkitem ITEM_POKE_VIAL, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_HasVial
 	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
@@ -180,21 +178,13 @@ Movement_PkmnCenterNurse_Bow:
 	delay_4
 	step_end
 
-@ Devon's two finite gifts are independent of story completion and healing.
+@ The Petalburg Woods researcher's Dusk Balls wait here when the Bag was full.
+@ It is independent of story completion and healing.
 EventScript_PkmnCenterNurse_WoodsGift::
 	msgbox Text_PkmnCenterNurse_WoodsGift, MSGBOX_DEFAULT
 	giveitem ITEM_DUSK_BALL, 3
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
 	clearflag FLAG_EC_WOODS_GREAT_BALL_PENDING
-	return
-EventScript_PkmnCenterNurse_RustboroGift::
-	call EventScript_PkmnCenterNurse_DevonGift
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
-	clearflag FLAG_EC_RUSTBORO_GREAT_BALL_PENDING
-	return
-EventScript_PkmnCenterNurse_DevonGift::
-	msgbox Text_PkmnCenterNurse_DevonGift, MSGBOX_DEFAULT
-	giveitem ITEM_GREAT_BALL
 	return
 EventScript_PkmnCenterNurse_KeepDevonGift::
 	msgbox Text_PkmnCenterNurse_KeepDevonGift, MSGBOX_DEFAULT
@@ -202,22 +192,9 @@ EventScript_PkmnCenterNurse_KeepDevonGift::
 Text_PkmnCenterNurse_WoodsGift:
 	.string "The Woods researcher left three\n"
 	.string "Dusk Balls for you. Here you are!$"
-Text_PkmnCenterNurse_DevonGift:
-	.string "A Devon researcher left a Great Ball\n"
-	.string "for you. Here you are!$"
 Text_PkmnCenterNurse_KeepDevonGift:
 	.string "Your Bag is still full. I'll keep it\n"
 	.string "safe. Make room and speak to me again.$"
-
-EventScript_PkmnCenterNurse_BirchGift::
-	msgbox Text_PkmnCenterNurse_BirchGift, MSGBOX_DEFAULT
-	giveitem ITEM_GREAT_BALL, 10
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
-	clearflag FLAG_EC_BIRCH_GREAT_BALLS_PENDING
-	return
-Text_PkmnCenterNurse_BirchGift:
-	.string "Prof. Birch left 10 Great Balls\n"
-	.string "for your journey. Here you are!$"
 
 EventScript_PkmnCenterNurse_ToolsPending::
 	msgbox gText_EmeraldChampionsToolsPending, MSGBOX_DEFAULT

@@ -1781,7 +1781,9 @@ static void CB2_HandleStartMultiBattle(void)
 // as an immediate win, so the campaign can be walked through without playing
 // every fight. Progression reads gBattleOutcome afterwards, so a trainer beaten
 // this way records as defeated exactly as if the battle had been fought.
-static bool32 EmeraldChampions_TryInstantWin(void)
+// Testing builds only (include/config/debug.h). Kept out of line so the
+// release verifier can prove its symbol is absent from the shipped ELF.
+static NOINLINE bool32 EmeraldChampions_TryInstantWin(void)
 {
     if ((gMain.heldKeys & EC_DEBUG_INSTANT_WIN_KEYS) != EC_DEBUG_INSTANT_WIN_KEYS)
         return FALSE;

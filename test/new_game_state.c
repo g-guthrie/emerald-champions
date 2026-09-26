@@ -1,4 +1,5 @@
 #include "global.h"
+#include "difficulty.h"
 #include "new_game.h"
 #include "main.h"
 #include "malloc.h"
@@ -123,6 +124,33 @@ TEST("New game: clears added campaign progress while preserving chosen identity 
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 6000);
     EXPECT_EQ(gSaveBlock2Ptr->playerName[0], 0xBB);
     EXPECT_EQ((u32)gSaveBlock2Ptr->optionsWindowFrameType, 3);
+}
+
+TEST("New game: keeps the difficulty chosen on the title screen's Option menu")
+{
+    enum DifficultyLevel saved = GetCurrentDifficultyLevel();
+    const enum DifficultyLevel choices[] = {DIFFICULTY_EASY, DIFFICULTY_HARD, DIFFICULTY_NORMAL};
+    for (u32 i = 0; i < ARRAY_COUNT(choices); i++)
+    {
+        SetCurrentDifficultyLevel(choices[i]);
+        NewGameInitData();
+        EXPECT_EQ(GetCurrentDifficultyLevel(), choices[i]);
+    }
+    SetCurrentDifficultyLevel(saved);
+}
+
+TEST("New game: a blank cartridge's Option menu starts on Medium, not Easy")
+{
+    struct SaveBlock2 *saved = Alloc(sizeof(struct SaveBlock2));
+    enum DifficultyLevel savedDifficulty = GetCurrentDifficultyLevel();
+    memcpy(saved, gSaveBlock2Ptr, sizeof(struct SaveBlock2));
+    // An erased save variable reads 0, which is Easy.
+    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
+    Sav2_ClearSetDefault();
+    EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_NORMAL);
+    memcpy(gSaveBlock2Ptr, saved, sizeof(struct SaveBlock2));
+    Free(saved);
+    SetCurrentDifficultyLevel(savedDifficulty);
 }
 
 extern void Test_ReadKeys(u16 keys);

@@ -839,9 +839,7 @@
 #define FLAG_SEASPRAY_CAVE_B1F_REVIVE 0x2AA // Formerly unused; old 0x43 belongs to the same-location Lure Ball.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
-#define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
-#define FLAG_EC_RUSTBORO_GREAT_BALL_PENDING    0x2B5 // Separate rescue reward entitlement.
-#define FLAG_EC_BIRCH_GREAT_BALLS_PENDING      0x2B6 // Ten-ball send-off gift; never locks Route102.
+#define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Petalburg Woods Dusk Balls held by the nurse; clear only on delivery.
 #define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
 // Hoenn starter Mega Stone receipts: Norman's Ring gift or his shown-partner gift (src/mega_stone_rewards.c).
 #define FLAG_EC_MEGA_GIFT_SCEPTILITE 0x2B8

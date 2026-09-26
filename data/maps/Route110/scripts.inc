@@ -149,9 +149,6 @@ Route110_EventScript_NoRecordSet:: @ 81EF3AD
 Route110_EventScript_ChallengeGuy:: @ 81EF3B7
 	lock
 	faceplayer
-	specialvar VAR_RESULT, GetPlayerAvatarBike
-	compare VAR_RESULT, 1
-	goto_if_eq Route110_EventScript_PlayerRidingAcroBike
 	compare VAR_CYCLING_CHALLENGE_STATE, 0
 	goto_if_eq Route110_EventScript_PlayerNotRidingBike
 	msgbox Route110_Text_AlwaysAimHigher, MSGBOX_DEFAULT
@@ -160,11 +157,6 @@ Route110_EventScript_ChallengeGuy:: @ 81EF3B7
 
 Route110_EventScript_PlayerNotRidingBike:: @ 81EF3DE
 	msgbox Route110_Text_RatedForNumberOfCollisions, MSGBOX_DEFAULT
-	release
-	end
-
-Route110_EventScript_PlayerRidingAcroBike:: @ 81EF3E8
-	msgbox Route110_Text_AcroBikesDoNotQualify, MSGBOX_DEFAULT
 	release
 	end
 
@@ -858,7 +850,7 @@ Route110_Text_ChallengeReactionWorst: @ 81F05CE
 Route110_Text_RatedForNumberOfCollisions: @ 81F0661
 	.string "This is Cycling Road.\p"
 	.string "If you were to ride from Mauville to\n"
-	.string "Slateport on a Mach Bike, you would\p"
+	.string "Slateport on a Bicycle, you would\p"
 	.string "be rated for the number of collisions\n"
 	.string "and your total time.$"
 
@@ -866,13 +858,6 @@ Route110_Text_AlwaysAimHigher: @ 81F06FB
 	.string "Regardless of the results, I count on\n"
 	.string "seeing more challenges from you.\l"
 	.string "Always aim higher!$"
-
-Route110_Text_AcroBikesDoNotQualify: @ 81F0755
-	.string "On this Cycling Road, those riding\n"
-	.string "Mach Bikes are rated for their number\l"
-	.string "of collisions and their total times.\p"
-	.string "Acro Bikes do not qualify for rating.\n"
-	.string "They are easy to turn, so it's not fair.$"
 
 Route110_Text_SlateportCitySign: @ 81F0812
 	.string "Route 110\n"

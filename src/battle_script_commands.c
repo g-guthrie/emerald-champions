@@ -6216,13 +6216,20 @@ static void Cmd_jumpifhasnohp(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+// An empty hand whose own item comes back when the battle ends (knocked off
+// for this battle, or a Berry the Regenerator returns) has nothing free to fill.
+static bool32 IsPartyMonHandFreeAfterBattle(u32 partySlot)
+{
+    return gBattleStruct == NULL || GetBattleRestoredHeldItem(B_TRAINER_PLAYER, partySlot) == ITEM_NONE;
+}
+
 static void Cmd_pickup(void)
 {
     CMD_ARGS();
 
     u32 i, j;
     enum Species species;
-    enum Item heldItem;
+    enum Item heldItem, startItem;
     u8 lvlDivBy10;
     enum Ability ability;
 
@@ -6232,7 +6239,7 @@ static void Cmd_pickup(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
-            heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM);
+            heldItem = startItem = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM);
             lvlDivBy10 = (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather.
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
@@ -6243,7 +6250,8 @@ static void Cmd_pickup(void)
                 && species != SPECIES_NONE
                 && species != SPECIES_EGG
                 && heldItem == ITEM_NONE
-                && (Random() % 10) == 0)
+                && RandomChance(RNG_PICKUP_AFTER_BATTLE, 1, 10)
+                && IsPartyMonHandFreeAfterBattle(i))
             {
                 if (isInPyramid)
                 {
@@ -6271,7 +6279,8 @@ static void Cmd_pickup(void)
                 && species != SPECIES_EGG
                 && heldItem == ITEM_NONE)
             {
-                if ((lvlDivBy10 + 1 ) * 5 > Random() % 100)
+                if (RandomPercentage(RNG_PICKUP_AFTER_BATTLE, (lvlDivBy10 + 1) * 5)
+                 && IsPartyMonHandFreeAfterBattle(i))
                 {
                     heldItem = ITEM_HONEY;
                     SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &heldItem);
@@ -6285,6 +6294,11 @@ static void Cmd_pickup(void)
                 heldItem = ITEM_BERRY_JUICE;
                 SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &heldItem);
             }
+
+            // Held-item restoration runs after this command. What was found or
+            // made here now belongs to the holder, so the restore keeps it.
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM) != startItem)
+                RecordPlayerPartyMonHeldItemForRestoration(i);
         }
     }
 

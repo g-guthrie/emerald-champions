@@ -225,7 +225,7 @@ JaggedPass_Text_EthanDefeat: @ 8230B50
 	.string "trying to find a good footing…$"
 
 JaggedPass_Text_EthanPostBattle: @ 8230B93
-	.string "If I had an Acro Bike, I'd be able to\n"
+	.string "If I had a Bicycle, I'd be able to\n"
 	.string "jump ledges.$"
 
 JaggedPass_Text_GruntIntro: @ 8230CCB

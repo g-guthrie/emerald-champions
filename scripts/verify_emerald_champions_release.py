@@ -55,10 +55,12 @@ def gba_header_checksum(data: bytes) -> int:
 def verify_release_symbols(symbols: str) -> None:
     # These compiled interfaces change boot behavior or permit fixture/agent
     # mutation. The ordinary release keeps only the disabled test-runner stub.
+    # The L+R instant win (EC_DEBUG_INSTANT_WIN) is a testing aid only.
     forbidden_prefixes = (
         "CB2_EmeraldChampionsHeadlessFixture", "EmeraldChampionsHeadlessObserve",
         "EmeraldChampionsAgentPrepPoll", "gEcHeadless", "gEcAgentPrep",
         "CB2_TestRunner", "gTestRunnerState", "gTestRunnerHeadless",
+        "EmeraldChampions_TryInstantWin",
     )
     names = re.findall(r"(?m)^[0-9a-fA-F]+\s+\w\s+(\S+)$", symbols)
     forbidden = sorted(name for name in names if name.startswith(forbidden_prefixes))
