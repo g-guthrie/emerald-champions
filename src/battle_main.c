@@ -4446,7 +4446,16 @@ static void HandleTurnActionSelectionState(void)
                     gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
                     break;
                 }
-                // No (or B): ask the usual forfeit question.
+                // B backs out to the action menu, like B everywhere else. The
+                // Yes/No box leaves the Run action in place only when B closed it.
+                if (gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
+                {
+                    gSelectionBattleScripts[battler] = NULL;
+                    RecordedBattle_ClearBattlerAction(battler, 1);
+                    gBattleCommunication[battler] = gBattleStruct->stateIdAfterSelScript[battler];
+                    break;
+                }
+                // No: ask the usual forfeit question.
                 gSelectionBattleScripts[battler] = BattleScript_QuestionForfeitBattle;
                 gBattleStruct->battlerState[battler].selectionScriptFinished = FALSE;
                 gBattleResources->bufferB[battler][1] = B_ACTION_RUN;

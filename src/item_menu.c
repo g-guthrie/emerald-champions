@@ -147,6 +147,7 @@ static void ReturnToItemList(u8);
 static void PrintItemQuantity(u8, s16);
 static u8 BagMenu_AddWindow(u8);
 static u8 GetSwitchBagPocketDirection(void);
+static u8 GetShownBagPocketCount(void);
 static void SwitchBagPocket(u8, s16, bool16);
 static bool8 CanSwapItems(void);
 static void StartItemSwap(u8 taskId);
@@ -668,6 +669,8 @@ void GoToBagMenu(u8 location, u8 pocket, MainCallback exitCallback)
         gBagPosition.exitCallback = exitCallback;
     if (pocket < POCKETS_COUNT)
         gBagPosition.pocket = pocket;
+    if (gBagPosition.pocket >= GetShownBagPocketCount())
+        gBagPosition.pocket = POCKET_ITEMS;
     if (gBagPosition.location == ITEMMENULOCATION_BERRY_TREE
      || gBagPosition.location == ITEMMENULOCATION_BERRY_BLENDER_CRUSH
      || gBagPosition.location == ITEMMENULOCATION_BERRY_TREE_MULCH
@@ -784,7 +787,7 @@ static bool8 SetupBagMenu(void)
         CopyPocketNameToWindow(0);
         // The modern five-pocket tilemap leaves the last squares blank.
         // Draw all seven explicitly to reproduce Inclement's indicator row.
-        for (i = 0; i < POCKETS_COUNT; i++)
+        for (i = 0; i < GetShownBagPocketCount(); i++)
             DrawPocketIndicatorSquare(i, i == gBagPosition.pocket);
         gMain.state++;
         break;
@@ -1369,18 +1372,31 @@ static u8 GetSwitchBagPocketDirection(void)
     return SWITCH_POCKET_NONE;
 }
 
+// Emerald Champions: nothing in Key Items or Mega Stones can be used in battle,
+// so the battle Bag ends at Poké Balls. They are the last two pockets, which
+// keeps the indicator squares of the shown pockets in their usual places.
+STATIC_ASSERT(POCKET_KEY_ITEMS == POCKETS_COUNT - 2 && POCKET_MEGA_STONES == POCKETS_COUNT - 1, BattleBagHidesLastTwoPockets)
+
+static u8 GetShownBagPocketCount(void)
+{
+    if (gBagPosition.location == ITEMMENULOCATION_BATTLE)
+        return POCKET_KEY_ITEMS;
+    return POCKETS_COUNT;
+}
+
 static void ChangeBagPocketId(u8 *bagPocketId, s8 deltaBagPocketId)
 {
-    if (deltaBagPocketId == MENU_CURSOR_DELTA_RIGHT && *bagPocketId == POCKETS_COUNT - 1)
-        *bagPocketId = 0;
-    else if (deltaBagPocketId == MENU_CURSOR_DELTA_LEFT && *bagPocketId == 0)
-        *bagPocketId = POCKETS_COUNT - 1;
-    else
-        *bagPocketId += deltaBagPocketId;
+    u8 count = GetShownBagPocketCount();
 
-    if (IsVictoryCatch() && *bagPocketId == POCKET_POKE_BALLS)
-        *bagPocketId += 1;
-
+    do
+    {
+        if (deltaBagPocketId == MENU_CURSOR_DELTA_RIGHT && *bagPocketId >= count - 1)
+            *bagPocketId = 0;
+        else if (deltaBagPocketId == MENU_CURSOR_DELTA_LEFT && *bagPocketId == 0)
+            *bagPocketId = count - 1;
+        else
+            *bagPocketId += deltaBagPocketId;
+    } while (IsVictoryCatch() && *bagPocketId == POCKET_POKE_BALLS);
 }
 
 static void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, bool16 skipEraseList)

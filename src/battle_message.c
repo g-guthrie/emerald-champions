@@ -71,7 +71,7 @@ static const u8 sText_EmptyString4[] = _("");
 
 const u8 gText_PkmnShroudedInMist[] = _("{B_ATK_NAME_WITH_PREFIX} surrounds itself with a protective mist!");
 const u8 gText_PkmnGettingPumped[] = _("{B_DEF_NAME_WITH_PREFIX} is getting pumped!");
-const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1} is preventing switching out with its {B_LAST_ABILITY} Ability!\p");
+const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching out!\p"); // Fits the party menu's two-line box.
 const u8 gText_StatSharply[] = _(" sharply");
 const u8 gText_StatRose[] = _("rose!");
 const u8 gText_StatFell[] = _("fell!");
@@ -858,7 +858,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_PKMNGIGANTAMAXED]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} grew huge into its Gigantamax form!"),
     [STRINGID_TIMETODYNAMAX]                        = COMPOUND_STRING("Time to Dynamax!"),
     [STRINGID_TIMETOGIGANTAMAX]                     = COMPOUND_STRING("Time to Gigantamax!"),
-    [STRINGID_QUESTIONFORFEITBATTLE]                = COMPOUND_STRING("Would you like to give up on this battle and quit now? Quitting the battle is the same as losing the battle."),
+    [STRINGID_QUESTIONFORFEITBATTLE]                = COMPOUND_STRING("Quitting now counts as a loss.\nGive up on this battle?"), // Two lines: the question stays on screen beside Yes/No.
     [STRINGID_QUESTIONRESTARTBATTLE]                 = COMPOUND_STRING("Restart this battle from the beginning?"),
     [STRINGID_POWERCONSTRUCTPRESENCEOFMANY]         = COMPOUND_STRING("You sense the presence of many!"),
     [STRINGID_POWERCONSTRUCTTRANSFORM]              = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} transformed into its Complete Forme!"),
@@ -1474,6 +1474,8 @@ const u8 gText_WhatWillPkmnDo2[] = _("What will\n{B_PLAYER_NAME} do?");
 const u8 gText_WhatWillWallyDo[] = _("What will\nWally do?");
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
 const u8 gText_BattleMenu[] = _("Fight{CLEAR_TO 56}Bag\nPokémon{CLEAR_TO 56}Run");
+// Trainer battles never allow the Bag: its row is drawn in the shadow grey.
+const u8 gText_BattleMenuNoBag[] = _("Fight{CLEAR_TO 56}{COLOR_HIGHLIGHT_SHADOW 15 14 14}Bag{COLOR_HIGHLIGHT_SHADOW 13 14 15}\nPokémon{CLEAR_TO 56}Run");
 const u8 gText_SafariZoneMenu[] = _("Ball{CLEAR_TO 56}{FONT_NARROWER}Pokéblock{FONT_NORMAL}\nGo Near{CLEAR_TO 56}Run");
 const u8 gText_SafariZoneMenuFrlg[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}Ball{CLEAR_TO 56}Bait\nRock{CLEAR_TO 56}Run");
 const u8 gText_MoveInterfacePP[] = _("PP ");
