@@ -78,7 +78,6 @@ enum {
 
 // IDs for messages to print with PrintMessage
 enum {
-    MSG_EXIT_BOX,
     MSG_WHAT_YOU_DO,
     MSG_PICK_A_THEME,
     MSG_PICK_A_WALLPAPER,
@@ -97,7 +96,6 @@ enum {
     MSG_HOLDING_POKE,
     MSG_WHICH_ONE_WILL_TAKE,
     MSG_CANT_RELEASE_EGG,
-    MSG_CONTINUE_BOX,
     MSG_CAME_BACK,
     MSG_WORRIED,
     MSG_SURPRISE,
@@ -1044,7 +1042,6 @@ static const u8 gText_PkmnIsSelected[] = _("{DYNAMIC 0} is selected.");
 
 static const struct StorageMessage sMessages[] =
 {
-    [MSG_EXIT_BOX]             = {COMPOUND_STRING("Exit from the Box?"),         MSG_VAR_NONE},
     [MSG_WHAT_YOU_DO]          = {COMPOUND_STRING("What do you want to do?"),    MSG_VAR_NONE},
     [MSG_PICK_A_THEME]         = {COMPOUND_STRING("Please pick a theme."),       MSG_VAR_NONE},
     [MSG_PICK_A_WALLPAPER]     = {COMPOUND_STRING("Pick the wallpaper."),        MSG_VAR_NONE},
@@ -1063,7 +1060,6 @@ static const struct StorageMessage sMessages[] =
     [MSG_HOLDING_POKE]         = {COMPOUND_STRING("You're holding a Pokémon!"),  MSG_VAR_NONE},
     [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("Which one will you take?"),   MSG_VAR_NONE},
     [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("You can't release an Egg."),  MSG_VAR_NONE},
-    [MSG_CONTINUE_BOX]         = {COMPOUND_STRING("Continue Box operations?"),   MSG_VAR_NONE},
     [MSG_CAME_BACK]            = {COMPOUND_STRING("{DYNAMIC 0} came back!"),     MSG_VAR_MON_NAME_1},
     [MSG_WORRIED]              = {COMPOUND_STRING("Was it worried about you?"),  MSG_VAR_NONE},
     [MSG_SURPRISE]             = {COMPOUND_STRING("… … … … !"),                  MSG_VAR_NONE},
@@ -3622,62 +3618,69 @@ static void Task_GiveItemFromBag(u8 taskId)
     }
 }
 
-static void Task_OnCloseBoxPressed(u8 taskId)
+// Leaving the Box loses nothing: every withdraw, deposit, move and release has
+// already been applied. So B and Close Box leave at once, with no question,
+// unless something is held. A held Pokémon has no slot until it is put down,
+// so both refuse with "You're holding a Pokémon!", the same stop Close Box
+// always gave, and the player places it first. A held item still asks whether
+// to put it in the Bag.
+enum {
+    EXITSTATE_START,
+    EXITSTATE_WAIT_MSG,
+    EXITSTATE_CLOSE_EFFECT,
+    EXITSTATE_WAIT_CLOSE_EFFECT,
+};
+
+static void DoExitBoxTask(bool8 closeBoxButton)
 {
     switch (sStorage->state)
     {
-    case 0:
+    case EXITSTATE_START:
         if (IsMonBeingMoved())
         {
-            PlaySE(SE_FAILURE);
-            PrintMessage(MSG_HOLDING_POKE);
-            sStorage->state = 1;
+            if (closeBoxButton || OW_PC_PRESS_B < GEN_4)
+            {
+                PlaySE(SE_FAILURE);
+                PrintMessage(MSG_HOLDING_POKE);
+                sStorage->state = EXITSTATE_WAIT_MSG;
+            }
+            else if (CanPlaceMon())
+            {
+                PlaySE(SE_SELECT);
+                SetPokeStorageTask(Task_PlaceMon);
+            }
+            else
+            {
+                SetPokeStorageTask(Task_PokeStorageMain);
+            }
         }
         else if (IsMovingItem())
         {
             SetPokeStorageTask(Task_CloseBoxWhileHoldingItem);
         }
+        else if (!PlayerPartyWithinRestrictedLimit())
+        {
+            PrintMessage(MSG_RESTRICTED_PARTY);
+            sStorage->state = EXITSTATE_WAIT_MSG;
+        }
         else
         {
-            PlaySE(SE_SELECT);
-            PrintMessage(MSG_EXIT_BOX);
-            ShowYesNoWindow(0);
-            sStorage->state = 2;
+            PlaySE(SE_PC_OFF);
+            sStorage->state = EXITSTATE_CLOSE_EFFECT;
         }
         break;
-    case 1:
+    case EXITSTATE_WAIT_MSG:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPokeStorageTask(Task_PokeStorageMain);
         }
         break;
-    case 2:
-        switch (Menu_ProcessInputNoWrapClearOnChoose())
-        {
-        case MENU_B_PRESSED:
-        case 1:
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_PokeStorageMain);
-            break;
-        case 0:
-            if (!PlayerPartyWithinRestrictedLimit())
-            {
-                PrintMessage(MSG_RESTRICTED_PARTY);
-                sStorage->state = 1;
-                break;
-            }
-            PlaySE(SE_PC_OFF);
-            ClearBottomWindow();
-            sStorage->state++;
-            break;
-        }
-        break;
-    case 3:
-        ComputerScreenCloseEffect(20, 0, 1);
+    case EXITSTATE_CLOSE_EFFECT:
+        ComputerScreenCloseEffect(20, 0, closeBoxButton);
         sStorage->state++;
         break;
-    case 4:
+    case EXITSTATE_WAIT_CLOSE_EFFECT:
         if (!IsComputerScreenCloseEffectActive())
         {
             UpdateBoxToSendMons();
@@ -3694,88 +3697,14 @@ static void Task_OnCloseBoxPressed(u8 taskId)
     }
 }
 
+static void Task_OnCloseBoxPressed(u8 taskId)
+{
+    DoExitBoxTask(TRUE);
+}
+
 static void Task_OnBPressed(u8 taskId)
 {
-    switch (sStorage->state)
-    {
-    case 0:
-        if (IsMonBeingMoved())
-        {
-            if (OW_PC_PRESS_B < GEN_4)
-            {
-                PlaySE(SE_FAILURE);
-                PrintMessage(MSG_HOLDING_POKE);
-                sStorage->state = 1;
-            }
-            else if (CanPlaceMon())
-            {
-                PlaySE(SE_SELECT);
-                SetPokeStorageTask(Task_PlaceMon);
-            }
-            else
-            {
-                SetPokeStorageTask(Task_PokeStorageMain);
-            }
-        }
-        else if (IsMovingItem())
-        {
-            SetPokeStorageTask(Task_CloseBoxWhileHoldingItem);
-        }
-        else
-        {
-            PlaySE(SE_SELECT);
-            PrintMessage(MSG_CONTINUE_BOX);
-            ShowYesNoWindow(0);
-            sStorage->state = 2;
-        }
-        break;
-    case 1:
-        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
-        {
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_PokeStorageMain);
-        }
-        break;
-    case 2:
-        switch (Menu_ProcessInputNoWrapClearOnChoose())
-        {
-        case 0:
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_PokeStorageMain);
-            break;
-        case 1:
-        case MENU_B_PRESSED:
-            if (!PlayerPartyWithinRestrictedLimit())
-            {
-                PrintMessage(MSG_RESTRICTED_PARTY);
-                sStorage->state = 1;
-                break;
-            }
-            PlaySE(SE_PC_OFF);
-            ClearBottomWindow();
-            sStorage->state++;
-            break;
-        }
-        break;
-    case 3:
-        ComputerScreenCloseEffect(20, 0, 0);
-        sStorage->state++;
-        break;
-    case 4:
-        if (!IsComputerScreenCloseEffectActive())
-        {
-            UpdateBoxToSendMons();
-            gPartiesCount[B_TRAINER_PLAYER] = CalculatePlayerPartyCount();
-            if (sStorage->boxOption == OPTION_SELECT_MON)
-            {
-                gSpecialVar_0x8004  = PARTY_NOTHING_CHOSEN;
-                gSpecialVar_Result  = FALSE;
-            }
-            sStorage->screenChangeType = SCREEN_CHANGE_EXIT_BOX;
-            SetPokeStorageTask(Task_ChangeScreen);
-        }
-        break;
-    }
+    DoExitBoxTask(FALSE);
 }
 
 static void Task_ChangeScreen(u8 taskId)

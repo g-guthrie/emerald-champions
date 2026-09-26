@@ -25,7 +25,7 @@
 #define GEN_6_ORAS GEN_COUNT + 1
 
 // PC settings
-#define OW_PC_PRESS_B               GEN_3 // Inclement's native PC interaction contract.
+#define OW_PC_PRESS_B               GEN_3 // B while holding a Pokémon: GEN_3 stops with "You're holding a Pokémon!" (as Close Box does); GEN_4+ drops it on an empty slot under the cursor. With nothing held, B and Close Box leave the Box without a question.
 #define OW_PC_JAPAN_WALDA_ICONS     TRUE       // In the US release of Emerald, the Cross, Bolt, and Plusle icons for Walda's wallpapers were left blank from the Japan release. Setting this to TRUE will restore them.
 #define OW_PC_HEAL                  GEN_3 // Preserve Inclement behavior.
 #define OW_PC_MOVE_ORDER            GEN_3 // Withdraw / Deposit / Move, exactly as Inclement.
