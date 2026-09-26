@@ -2992,47 +2992,6 @@
 	.byte \dataField
 	.endm
 
-@ FRLG
-
-
-	@ Prints the provided message after playing the fanfare music (can only be MUS_LEVEL_UP or MUS_RG_OBTAIN_KEY_ITEM).
-	@ It then prints the message shown by using putitemaway.
-	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
-	loadword 0, \msg
-	setorcopyvar VAR_0x8000, \item
-	setorcopyvar VAR_0x8001, \amount
-	setorcopyvar VAR_0x8002, \fanfare
-	callstd STD_RECEIVED_ITEM
-	.endm
-
-	@ Adds the specified item to the bag, then prints a message with fanfare. See description of msgreceiveditem.
-	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
-	additem \item, \amount
-	msgreceiveditem \msg, \item, \amount, \fanfare
-	.endm
-
-	@ Depends on the provided function. With the default argument, unlocks the specified entry in the Fame Checker.
-	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, \person
-	setvar VAR_0x8005, \index
-	special \function
-	.endm
-
-	@ Sets the 'defeated' flag for all trainers in the specified gym.
-	.macro set_gym_trainers_frlg gym:req
-	setvar VAR_0x8008, \gym
-	call Common_EventScript_SetGymTrainers_Frlg
-	.endm
-
-	@ Prints a braille message, then waits for users input.
-	.macro braillemessage_wait text:req
-	setvar VAR_0x8006, 0
-	braillemessage \text
-	getbraillestringwidth \text
-	call EventScript_BrailleCursorWaitButton
-	.endm
-
-
 @ Inclement Emerald compatibility
 @
 @ Map and field scripts restored from Inclement Emerald (v1.13, 2021 engine)

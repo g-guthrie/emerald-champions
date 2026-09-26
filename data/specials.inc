@@ -541,9 +541,9 @@ gSpecials::
 	def_special CanTeachMoveBoxMon
 	def_special ObjectEventInteractionGetApricornTreeData
 	def_special ObjectEventInteractionPickApricornTree
-	def_special GetFrlgPokedexCount
+	def_special GetFrlgPokedexCount, unused=1
 	def_special HasAllMons
-	def_special GetProfOaksRatingMessage
+	def_special GetProfOaksRatingMessage, unused=1
 	def_special UpdatePickStateFromSpecialVar8005
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special DisableMsgBoxWalkaway

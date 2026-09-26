@@ -10,13 +10,6 @@ Common_EventScript_SetGymTrainers::
 	case 8, SootopolisCity_Gym_SetGymTrainers
 	end
 
-@ Emerald Champions: the set_gym_trainers_frlg macro (asm/macros/event.inc) calls this
-@ from the Kanto gyms, but none of the eight EventScript_Set<City>GymTrainers targets
-@ exist in this tree. Kanto is out of scope for the Inclement merge, so this is an
-@ inert dispatcher: it returns without pre-setting any Kanto gym trainer flags.
-Common_EventScript_SetGymTrainers_Frlg::
-	end
-
 RustboroCity_Gym_SetGymTrainers::
 	settrainerflag TRAINER_JOSH
 	settrainerflag TRAINER_TOMMY

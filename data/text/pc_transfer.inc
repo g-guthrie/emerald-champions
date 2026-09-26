@@ -6,11 +6,7 @@ gText_PkmnTransferredSomeonesPC::
 
 gText_PkmnTransferredLanettesPC::
 	.string "{STR_VAR_2} was transferred to\n"
-#if IS_FRLG
-	.string "Bill's PC.\p"
-#else
 	.string "Lanette's PC.\p"
-#endif
 	.string "It was placed in\n"
 	.string "“{STR_VAR_1}.”$"
 
@@ -22,11 +18,7 @@ gText_PkmnTransferredSomeonesPCBoxFull::
 
 gText_PkmnTransferredLanettesPCBoxFull::
 	.string "“{STR_VAR_3}” on\n"
-#if IS_FRLG
-	.string "Bill's PC was full.\p"
-#else
 	.string "Lanette's PC was full.\p"
-#endif
 	.string "{STR_VAR_2} was transferred to\n"
 	.string "“{STR_VAR_1}.”$"
 

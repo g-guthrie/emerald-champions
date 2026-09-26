@@ -561,45 +561,13 @@ gStdScripts_End::
 	.include "data/maps/Route119_House/scripts.inc"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc"
 
-@ Emerald Champions: Petalburg City Pokemon Center (a Hoenn map) points an object at
-@ MysteryEventClub_EventScript_Man, so this cannot live inside the IS_FRLG gate.
 	.include "data/scripts/mystery_event_club.inc"
 
-.if IS_FRLG
-
-@ FRLG scripts
-
-	.include "data/scripts/trainer_tower.inc"
-	.include "data/scripts/fame_checker_frlg.inc"
-	.include "data/text/fame_checker_frlg.inc"
-	.include "data/scripts/item_ball_scripts_frlg.inc"
-	.include "data/scripts/silphco_doors.inc"
-	.include "data/scripts/move_tutors_frlg.inc"
-	.include "data/scripts/cable_club_frlg.inc"
-	.include "data/scripts/trainer_card_frlg.inc"
-	.include "data/text/trainer_card_frlg.inc"
-	.include "data/scripts/day_care_frlg.inc"
-	.include "data/text/day_care_frlg.inc"
-	.include "data/scripts/seagallop.inc"
-	.include "data/scripts/static_pokemon.inc"
-	.include "data/scripts/aide.inc"
-	.include "data/scripts/pokemon_mansion.inc"
-	.include "data/scripts/pokemon_league.inc"
-	.include "data/scripts/route23.inc"
-	.include "data/text/new_game_intro_frlg.inc"
-	.include "data/scripts/trainers_frlg.inc"
-	.include "data/text/trainers_frlg.inc"
-	.include "data/text/ingame_trade_frlg.inc"
-	.include "data/scripts/flavor_text.inc"
-	.include "data/scripts/pkmn_center_nurse_frlg.inc"
-
-.endif
 
 	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
-	.include "data/scripts/hall_of_fame_frlg.inc"
 
 	.include "data/scripts/config.inc"
 	.include "data/scripts/debug.inc"
@@ -1210,27 +1178,15 @@ EventScript_CableClub_SetVarResult0::
 	return
 
 Common_EventScript_UnionRoomAttendant::
-#if IS_FRLG
-	call CableClub_EventScript_UnionRoomAttendant_Frlg
-#else
 	call CableClub_EventScript_UnionRoomAttendant
-#endif
 	end
 
 Common_EventScript_WirelessClubAttendant::
-#if IS_FRLG
-	call CableClub_EventScript_WirelessClubAttendant_Frlg
-#else
 	call CableClub_EventScript_WirelessClubAttendant
-#endif
 	end
 
 Common_EventScript_DirectCornerAttendant::
-#if IS_FRLG
-	call CableClub_EventScript_DirectCornerAttendant_Frlg
-#else
 	call CableClub_EventScript_DirectCornerAttendant
-#endif
 	end
 
 Common_EventScript_RemoveStaticPokemon::
@@ -1255,62 +1211,6 @@ EventScript_VsSeekerChargingDone::
 	special VsSeekerResetObjectMovementAfterChargeComplete
 	releaseall
 	end
-
-@ FRLG scripts
-
-EventScript_SetExitingCyclingRoad::
-	lockall
-	clearflag FLAG_SYS_ON_CYCLING_ROAD
-	setvar VAR_MAP_SCENE_ROUTE16, 0
-	releaseall
-	end
-
-EventScript_SetEnteringCyclingRoad::
-	lockall
-	setvar VAR_MAP_SCENE_ROUTE16, 1
-	releaseall
-	end
-
-EventScript_TryDarkenRuins::
-	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, Common_EventScript_NopReturn
-	setweather WEATHER_SHADE
-	doweather
-	return
-
-Text_MonFlewAway::
-	.string "The {STR_VAR_1} is gone.\n"
-	.string "It will not return.$"
-
-@ Call for legendary bird trio
-Text_Gyaoo::
-	.string "Gyaoo!$"
-
-EventScript_BrailleCursorWaitButton::
-	special BrailleCursorToggle
-	waitbuttonpress
-	closebraillemessage
-	playse SE_SELECT
-	setvar VAR_0x8006, 1
-	special BrailleCursorToggle
-	return
-
-EventScript_PalletTown_PlayersHouse_2F_ShutDownPC::
-	setvar VAR_0x8004, PC_LOCATION_PLAYER_HOUSE_FRLG
-	playse SE_PC_OFF
-	special DoPCTurnOffEffect
-	releaseall
-	end
-
-EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
-	lockall
-	setvar VAR_0x8004, PC_LOCATION_PLAYER_HOUSE_FRLG
-	special DoPCTurnOnEffect
-	playse SE_PC_ON
-	msgbox gText_PlayerHouseBootPC
-	special BedroomPC
-	releaseall
-	end
-
 
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/questionnaire.inc"
@@ -1339,7 +1239,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/repel.inc"
 	.include "data/scripts/safari_zone.inc"
 	.include "data/scripts/roulette.inc"
-	.include "data/scripts/pokedex_rating.inc"
 	.include "data/text/pokedex_rating.inc"
 	.include "data/text/lottery_corner.inc"
 	.include "data/text/event_ticket_1.inc"
