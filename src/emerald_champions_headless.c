@@ -757,8 +757,15 @@ static void PrepareHeadlessPokedex(void)
     };
     const enum Species *list = species;
     u32 count = ARRAY_COUNT(species);
+    // High bits pick one owned species; the low bits keep naming the page.
+    enum Species chosen = SanitizeSpeciesId(gEcHeadlessFixtureParam >> 16);
 
-    if (gEcHeadlessFixtureParam >= 20 && gEcHeadlessFixtureParam < 20 + ARRAY_COUNT(areaSpecies))
+    if (chosen != SPECIES_NONE)
+    {
+        list = &chosen;
+        count = 1;
+    }
+    else if (gEcHeadlessFixtureParam >= 20 && gEcHeadlessFixtureParam < 20 + ARRAY_COUNT(areaSpecies))
     {
         list = &areaSpecies[gEcHeadlessFixtureParam - 20];
         count = 1;
@@ -1041,6 +1048,108 @@ static void PrepareHeadlessSafariBattle(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
+// Battle menus for UI captures (EC_HEADLESS_BATTLE_UI_* bits): wild or trainer,
+// singles or doubles. Every badge is set so the party obeys; the fixture only
+// builds the battle, and every menu after that is native input.
+static void PrepareHeadlessBattleUi(void)
+{
+    u32 param = gEcHeadlessFixtureParam;
+    bool32 isDouble = (param & EC_HEADLESS_BATTLE_UI_DOUBLE) != 0;
+    bool32 isTrainer = (param & EC_HEADLESS_BATTLE_UI_TRAINER) != 0;
+    struct Pokemon *player = gParties[B_TRAINER_PLAYER];
+    struct Pokemon *foes = gParties[B_TRAINER_OPPONENT_A];
+    enum Species foeSpecies[3];
+    u32 foeCount = 0;
+
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    SeedRng(0x1234);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+
+    if (param & EC_HEADLESS_BATTLE_UI_PIXILATE)
+    {
+        u32 hiddenSlot = 2;
+
+        CreateHealthyHeadlessMon(&player[0], SPECIES_SYLVEON, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonData(&player[0], MON_DATA_ABILITY_NUM, &hiddenSlot);
+        SetMonMoveSlot(&player[0], MOVE_HYPER_VOICE, 0);
+        SetMonMoveSlot(&player[0], MOVE_QUICK_ATTACK, 1);
+        SetMonMoveSlot(&player[0], MOVE_MOONBLAST, 2);
+        SetMonMoveSlot(&player[0], MOVE_PROTECT, 3);
+    }
+    else
+    {
+        CreateHealthyHeadlessMon(&player[0], SPECIES_GEODUDE, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&player[0], MOVE_EARTHQUAKE, 0);
+        SetMonMoveSlot(&player[0], MOVE_ROCK_SLIDE, 1);
+        SetMonMoveSlot(&player[0], MOVE_PROTECT, 2);
+        SetMonMoveSlot(&player[0], MOVE_WIDE_GUARD, 3);
+    }
+    if (isDouble)
+    {
+        CreateHealthyHeadlessMon(&player[1], SPECIES_GARDEVOIR, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&player[1], MOVE_DAZZLING_GLEAM, 0);
+        SetMonMoveSlot(&player[1], MOVE_PSYCHIC, 1);
+        SetMonMoveSlot(&player[1], MOVE_HELPING_HAND, 2);
+        SetMonMoveSlot(&player[1], MOVE_PROTECT, 3);
+    }
+    CalculatePlayerPartyCount();
+
+    // Illusion copies the last party member that is neither the user nor its partner.
+    if (isTrainer && (param & EC_HEADLESS_BATTLE_UI_ILLUSION))
+        foeSpecies[foeCount++] = SPECIES_ZOROARK;
+    if (isDouble)
+    {
+        foeSpecies[foeCount++] = SPECIES_VENUSAUR;
+        foeSpecies[foeCount++] = SPECIES_PIKACHU;
+    }
+    else
+    {
+        enum Species single = foeCount == 0 ? SPECIES_POOCHYENA : SPECIES_PIKACHU;
+        foeSpecies[foeCount++] = single;
+    }
+
+    if (isTrainer)
+    {
+        for (u32 i = 0; i < foeCount; i++)
+        {
+            CreateHealthyHeadlessMon(&foes[i], foeSpecies[i], 30, OTID_STRUCT_RANDOM_NO_SHINY);
+            SetMonTrainerOwned(&foes[i], TRUE);
+        }
+        memset(&gTrainerBattleParameter, 0, sizeof(gTrainerBattleParameter));
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_CALVIN_1;
+        TRAINER_BATTLE_PARAM.opponentB = 0xFFFF;
+        TRAINER_BATTLE_PARAM.isDoubleBattle = isDouble;
+        CalculateEnemyPartyCount();
+    }
+    else
+    {
+        CreateWildMon(isDouble ? SPECIES_POOCHYENA : foeSpecies[0], 30);
+        if (isDouble)
+            CreateHealthyHeadlessMon(&foes[1], SPECIES_PIKACHU, 30, OTID_STRUCT_RANDOM_NO_SHINY);
+    }
+
+    ClearBag();
+    AddBagItem(ITEM_QUICK_BALL, 10);
+    gLastThrownBall = ITEM_QUICK_BALL;
+    gBallToDisplay = ITEM_QUICK_BALL;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;
+    for (u32 battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    {
+        gActionSelectionCursor[battler] = 0;
+        gMoveSelectionCursor[battler] = 0;
+    }
+    gBattleTypeFlags = (isTrainer ? BATTLE_TYPE_TRAINER : 0) | (isDouble ? BATTLE_TYPE_DOUBLE : 0);
+    gBattleEnvironment = BattleSetup_GetEnvironmentId();
+    gMain.savedCallback = gInitialMainCB2;
+    gEcHeadlessFixtureSetupResult = TRUE;
+    SetMainCallback2(CB2_InitBattle);
+}
+
 static void PrepareHeadlessGoldTrainerCard(void)
 {
     SetGameStat(GAME_STAT_ENTERED_HOF, 1);
@@ -1077,7 +1186,7 @@ static void PrepareHeadlessFairySummary(void)
 
 static bool32 IsHeadlessPokedexStateObserved(void)
 {
-    switch (gEcHeadlessFixtureParam)
+    switch (gEcHeadlessFixtureParam & 0xFFFF)
     {
     case EC_HEADLESS_POKEDEX_LIST:
         return IsPokedexHeadlessOnScreen(PAGE_MAIN, AREA_SCREEN, FALSE);
@@ -1847,6 +1956,18 @@ void EmeraldChampionsHeadlessObserve(void)
          && gBattleStruct->descriptionSubmenu
          && gBattleStruct->foeTypesSubmenu)
             gEcHeadlessFixtureObservedResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_BATTLE_UI:
+        // Trick-or-Treat's third type, applied once the foe lead is out.
+        if (!(gEcHeadlessFixtureParam & EC_HEADLESS_BATTLE_UI_THIRD_TYPE))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        else if (gHealthboxSpriteIds[B_BATTLER_1] < MAX_SPRITES
+              && !gSprites[gHealthboxSpriteIds[B_BATTLER_1]].invisible
+              && ++sEcHeadlessObservedDelay >= 60)
+        {
+            gBattleMons[B_BATTLER_1].types[2] = TYPE_GHOST;
+            gEcHeadlessFixtureObservedResult = TRUE;
+        }
         break;
     case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
         if (gBattle_BG0_Y == DISPLAY_HEIGHT * 2
@@ -4201,6 +4322,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     case EC_HEADLESS_SCENARIO_SAFARI:
         PrepareHeadlessSafariBattle();
+        break;
+    case EC_HEADLESS_SCENARIO_BATTLE_UI:
+        PrepareHeadlessBattleUi();
         break;
     case EC_HEADLESS_SCENARIO_TITLE:
         SetMainCallback2(CB2_InitTitleScreen);
