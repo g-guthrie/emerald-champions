@@ -291,51 +291,16 @@ static void ShiftDaycareSlots(struct DayCare *daycare)
     }
 }
 
-static void ApplyDaycareExperience(struct Pokemon *mon)
-{
-    s32 i;
-    bool8 firstMove;
-    enum Move learnedMove;
-
-    for (i = 0; i < MAX_LEVEL; i++)
-    {
-        // Add the mon's gained daycare experience level by level until it can't level up anymore.
-        if (TryIncrementMonLevel(mon))
-        {
-            // Teach the mon new moves it learned while in the daycare.
-            firstMove = TRUE;
-            while ((learnedMove = MonTryLearningNewMove(mon, firstMove)) != 0)
-            {
-                firstMove = FALSE;
-                if (learnedMove == MON_HAS_MAX_MOVES)
-                    DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    // Re-calculate the mons stats at its new level.
-    CalculateMonStats(mon);
-}
-
-static void PrepareDaycareWithdrawal(struct Pokemon *mon, struct BoxPokemon *stored, u32 steps)
+// There is no experience anywhere in Emerald Champions, so the board raises
+// no levels: a Pokémon comes back at the level it was left at. Steps still
+// count for Eggs. Preview and withdrawal share this, including Hoopa's
+// withdrawal reversion.
+static void PrepareDaycareWithdrawal(struct Pokemon *mon, struct BoxPokemon *stored)
 {
     BoxMonToMon(stored, mon);
     TryFormChange(mon, FORM_CHANGE_WITHDRAW, B_TRAINER_PLAYER);
     ClampMonToPlayerLevelCap(mon);
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    u32 maximum = gExperienceTables[gSpeciesInfo[species].growthRate][GetPlayerLevelCapForSpecies(species)];
-    u32 experience = GetMonData(mon, MON_DATA_EXP);
-    // Saturate the gain before addition. Preview and withdrawal use the same
-    // resulting form and cap, including Hoopa's withdrawal reversion.
-    if (experience < maximum)
-    {
-        experience += min(steps, maximum - experience);
-        SetMonData(mon, MON_DATA_EXP, &experience);
-    }
+    CalculateMonStats(mon);
 }
 
 static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
@@ -343,8 +308,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     struct Pokemon pokemon;
 
     GetBoxMonNickname(&daycareMon->mon, gStringVar1);
-    PrepareDaycareWithdrawal(&pokemon, &daycareMon->mon, daycareMon->steps);
-    ApplyDaycareExperience(&pokemon);
+    PrepareDaycareWithdrawal(&pokemon, &daycareMon->mon);
 
     gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1] = pokemon;
     if (daycareMon->mail.message.itemId)
@@ -386,29 +350,20 @@ bool32 CanTakeDaycareMonWithinPartyRule(void)
     return CanAddRestrictedMonToParty(GetBoxMonData(&daycareMon->mon, MON_DATA_SPECIES), PARTY_SIZE);
 }
 
-static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
+static u8 GetDaycareWithdrawalLevel(struct BoxPokemon *mon)
 {
     struct Pokemon preview;
-    PrepareDaycareWithdrawal(&preview, mon, steps);
+    PrepareDaycareWithdrawal(&preview, mon);
     return GetLevelFromMonExp(&preview);
 }
 
-static u8 GetNumLevelsGainedFromSteps(struct DaycareMon *daycareMon)
-{
-    u8 levelBefore;
-    u8 levelAfter;
-
-    levelBefore = GetLevelFromBoxMonExp(&daycareMon->mon);
-    levelAfter = GetLevelAfterDaycareSteps(&daycareMon->mon, daycareMon->steps);
-    return levelAfter > levelBefore ? levelAfter - levelBefore : 0;
-}
-
+// The board raises no levels; this still buffers the nickname (STR_VAR_1)
+// and a zero gain (STR_VAR_2) for the scripts that read them.
 static u8 GetNumLevelsGainedForDaycareMon(struct DaycareMon *daycareMon)
 {
-    u8 numLevelsGained = GetNumLevelsGainedFromSteps(daycareMon);
-    ConvertIntToDecimalStringN(gStringVar2, numLevelsGained, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, 0, STR_CONV_MODE_LEFT_ALIGN, 2);
     GetBoxMonNickname(&daycareMon->mon, gStringVar1);
-    return numLevelsGained;
+    return 0;
 }
 
 void GetDaycareCostAndPrepareString(void)
@@ -1375,7 +1330,7 @@ static void DaycarePrintMonLvl(struct DayCare *daycare, u8 windowId, u32 daycare
     u8 intText[8];
 
     StringCopy(lvlText, gText_Lv);
-    level = GetLevelAfterDaycareSteps(&daycare->mons[daycareSlotId].mon, daycare->mons[daycareSlotId].steps);
+    level = GetDaycareWithdrawalLevel(&daycare->mons[daycareSlotId].mon);
     ConvertIntToDecimalStringN(intText, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(lvlText, intText);
     x = GetStringRightAlignXOffset(FONT_NORMAL, lvlText, 112);

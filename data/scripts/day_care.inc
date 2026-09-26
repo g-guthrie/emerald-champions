@@ -124,19 +124,8 @@ Route117_PokemonDayCare_EventScript_EggWaiting::
 	release
 	end
 
-Route117_PokemonDayCare_EventScript_YourMonHasGrownXLevels::
-	msgbox Route117_PokemonDayCare_Text_YourMonHasGrownXLevels, MSGBOX_DEFAULT
-	return
-
-Route117_PokemonDayCare_EventScript_DisplayLevelsGained::
-	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
-	call_if_ne VAR_RESULT, 0, Route117_PokemonDayCare_EventScript_YourMonHasGrownXLevels
-	return
-
 Route117_PokemonDayCare_EventScript_OneMonInDaycare::
 	msgbox Route117_PokemonDayCare_Text_GoodToSeeYou, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 0
-	call Route117_PokemonDayCare_EventScript_DisplayLevelsGained
 	msgbox Route117_PokemonDayCare_Text_WeCanRaiseOneMore, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_GiveMonToRaise
 	msgbox Route117_PokemonDayCare_Text_TakeYourMonBack, MSGBOX_YESNO
@@ -157,7 +146,7 @@ Route117_PokemonDayCare_EventScript_TryRetrieveMon::
 	end
 
 @ Emerald Champions (C7): board is free, so there is no fee prompt and no money check.
-@ GetDaycareCostAndPrepareString still buffers the nickname and the levels gained.
+@ GetDaycareCostAndPrepareString still buffers the nickname.
 Route117_PokemonDayCare_EventScript_CostPrompt::
 	@ VAR_0x8004 holds the board slot here. A PC Pokemon left on the board must
 	@ not bypass the party rule on its way back.
@@ -223,10 +212,6 @@ Route117_PokemonDayCare_Movement_RetrieveDaycareMon:
 
 Route117_PokemonDayCare_EventScript_TwoMonsInDaycare::
 	msgbox Route117_PokemonDayCare_Text_GoodToSeeYou, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 0
-	call Route117_PokemonDayCare_EventScript_DisplayLevelsGained
-	setvar VAR_0x8004, 1
-	call Route117_PokemonDayCare_EventScript_DisplayLevelsGained
 	msgbox Route117_PokemonDayCare_Text_TakeYourMonBack, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route117_PokemonDayCare_EventScript_TryRetrieveMon
 	msgbox Route117_PokemonDayCare_Text_ComeAgain, MSGBOX_DEFAULT
@@ -326,10 +311,6 @@ Route117_PokemonDayCare_Text_ComeAgain:
 Route117_PokemonDayCare_Text_GoodToSeeYou:
 	.string "Ah, it's you! Good to see you.\n"
 	.string "Your Pokémon can only be doing good!$"
-
-Route117_PokemonDayCare_Text_YourMonHasGrownXLevels:
-	.string "By level, your {STR_VAR_1} has\n"
-	.string "grown by {STR_VAR_2}.$"
 
 Route117_PokemonDayCare_Text_PartyRuleRefusal:
 	.string "Oh, dear. Your team already has one\n"
