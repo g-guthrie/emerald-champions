@@ -705,13 +705,11 @@ static void CreateStartMenuTask(TaskFunc followupFunc)
     SetTaskFuncWithFollowupFunc(taskId, StartMenuTask, followupFunc);
 }
 
+// The screen is black while the field reloads, so build the whole menu at once
+// and start the fade-in on this frame rather than one build step per frame.
 static bool8 FieldCB_ReturnToFieldStartMenu(void)
 {
-    if (InitStartMenuStep() == FALSE)
-    {
-        return FALSE;
-    }
-
+    InitStartMenu();
     ReturnToFieldOpenStartMenu();
     return TRUE;
 }
