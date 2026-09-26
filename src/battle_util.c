@@ -1775,8 +1775,9 @@ bool32 IsAbilityAndRecord(enum BattlerId battler, enum Ability battlerAbility, e
 }
 
 // Knocking out the last wild Pokémon starts the victory tune while the
-// player still has a Pokémon standing.
-static void TryPlayWildVictorySong(enum BattlerId faintedBattler)
+// player still has a Pokémon standing. The faint script starts it with the
+// "fainted!" message; the fainted-mon pass is the fallback.
+void TryPlayWildVictorySong(enum BattlerId faintedBattler)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      && !IsOnPlayerSide(faintedBattler)
@@ -4808,7 +4809,8 @@ enum Ability GetBattlerAbilityInternal(enum BattlerId battler, bool32 ignoreMold
     bool32 hasAbilityShield = !noAbilityShield && GetBattlerHoldEffectIgnoreAbility(battler) == HOLD_EFFECT_ABILITY_SHIELD;
     bool32 abilityCantBeSuppressed = gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed;
 
-    if (gBattleStruct->battlerState[battler].notOnField || gSpecialStatuses[battler].attackerInParty)
+    if (gBattleStruct->battlerState[battler].notOnField || gSpecialStatuses[battler].attackerInParty
+     || IsSpreadFaintPending(battler))
         return ABILITY_NONE;
 
     if (abilityCantBeSuppressed)
@@ -5639,7 +5641,7 @@ enum HoldEffect GetBattlerHoldEffectIgnoreAbility(enum BattlerId battler)
 
 enum HoldEffect GetBattlerHoldEffectInternal(enum BattlerId battler, enum Ability ability)
 {
-    if (gBattleStruct->battlerState[battler].notOnField)
+    if (gBattleStruct->battlerState[battler].notOnField || IsSpreadFaintPending(battler))
         return HOLD_EFFECT_NONE;
     if (gSpecialStatuses[battler].attackerInParty)
         return HOLD_EFFECT_NONE;
@@ -5660,7 +5662,7 @@ enum HoldEffect GetBattlerHoldEffectInternal(enum BattlerId battler, enum Abilit
 
 enum HoldEffect GetBattlerHoldEffectIgnoreNegation(enum BattlerId battler)
 {
-    if (gBattleStruct->battlerState[battler].notOnField)
+    if (gBattleStruct->battlerState[battler].notOnField || IsSpreadFaintPending(battler))
         return HOLD_EFFECT_NONE;
     if (gSpecialStatuses[battler].attackerInParty)
         return HOLD_EFFECT_NONE;

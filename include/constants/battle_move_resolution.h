@@ -104,6 +104,7 @@ enum FaintBlockStates
 {
     FAINT_BLOCK_FINAL_GAMBIT,
     FAINT_BLOCK_CHECK_TARGET_FAINTED, // Exits if target is not fainted
+    FAINT_BLOCK_MULTIHIT_STRINGS, // A multi-strike move reports its hits before the knockout
     FAINT_BLOCK_VICTORY_CATCH,
     FAINT_BLOCK_END_NEUTRALIZING_GAS,
     FAINT_BLOCK_DO_GRUDGE,

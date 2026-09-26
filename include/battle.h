@@ -729,7 +729,8 @@ struct BattleStruct
     u32 savedMoveResultFlags[MAX_BATTLERS_COUNT]; // for Bounced moves
     u8 numSpreadTargets:3;
     u8 moldBreakerActive:1;
-    u8 unused4:4;
+    u8 spreadFaintsPending:4; // Spread-move targets knocked out whose faint waits for the last target's messages
+
     struct MessageStatus slideMessageStatus;
     u8 trainerSlideSpriteIds[MAX_BATTLERS_COUNT];
     u8 hazardsQueue[NUM_BATTLE_SIDES][HAZARDS_MAX_COUNT];
@@ -747,7 +748,9 @@ struct BattleStruct
     u32 dancerSavedTarget:3;
     u32 statChangeBattler:3;
     u32 overworldWeatherPresent:1;
-    u32 padding5:4;
+    u32 spreadFaintPass:1; // Running the faint block for a deferred spread-move knockout
+    u32 spreadFaintLastTarget:3; // Target to restore once the deferred faints are done
+
     u8 statChangeMoveAnim:1;
     u8 tidyUpActivates:1;
     u8 positiveAnimPlayed:1;
@@ -1189,6 +1192,14 @@ static inline bool32 IsBattlerAlly(enum BattlerId battlerAtk, enum BattlerId bat
 static inline bool32 IsDoubleBattle(void)
 {
     return !!(gBattleTypeFlags & BATTLE_TYPE_MORE_THAN_TWO_BATTLERS);
+}
+
+// A spread-move target knocked out earlier in the move, whose faint waits
+// until every target has had its messages. Mechanically it is already gone:
+// its ability and held item do nothing for the rest of the move.
+static inline bool32 IsSpreadFaintPending(enum BattlerId battler)
+{
+    return (gBattleStruct->spreadFaintsPending & (1u << battler)) != 0;
 }
 
 static inline bool32 IsSpreadMove(enum MoveTarget moveTarget)
