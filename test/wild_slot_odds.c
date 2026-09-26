@@ -8,6 +8,7 @@
 #include "mass_outbreak.h"
 #include "roamer.h"
 #include "overworld.h"
+#include "pokedex.h"
 #include "constants/region_map_sections.h"
 #include "event_data.h"
 #include "field_specials.h"
@@ -631,11 +632,11 @@ TEST("Wild rarity: per-habitat odds and every rod preserve Lure RNG behavior")
         u8 count;
         u8 weights[5];
     } cases[] = {
-        {MAP_ROUTE108, 255, 4, {50, 30, 2, 18}},
-        {MAP_ROUTE111, 255, 4, {50, 30, 18, 2}},
+        {MAP_ROUTE108, 255, 4, {48, 30, 4, 18}},
+        {MAP_ROUTE111, 255, 4, {48, 30, 18, 4}},
         {MAP_ROUTE119, OLD_ROD, 2, {60, 40}},
         {MAP_ROUTE119, GOOD_ROD, 3, {60, 20, 20}},
-        {MAP_ROUTE119, SUPER_ROD, 5, {40, 30, 18, 10, 2}},
+        {MAP_ROUTE119, SUPER_ROD, 5, {38, 30, 18, 10, 4}},
         {MAP_PETALBURG_CITY, OLD_ROD, 2, {60, 40}},
         {MAP_PETALBURG_CITY, GOOD_ROD, 3, {60, 20, 20}},
         {MAP_PETALBURG_CITY, SUPER_ROD, 5, {40, 30, 15, 10, 5}},
@@ -719,7 +720,8 @@ TEST("Wild rarity: early Dreepy uses local land odds and Sweet Scent reverses th
     u8 weights[NUM_LAND_MONS_ENCOUNTER_SLOTS];
     for (u32 slot = 0; slot < NUM_LAND_MONS_ENCOUNTER_SLOTS; slot++)
         weights[slot] = GetWildSlotOdds(info, WILD_AREA_LAND, slot);
-    EXPECT_EQ(weights[0], 20); // The most common resident sets Dreepy's reversed share.
+    EXPECT_EQ(weights[0], 17);
+    EXPECT_EQ(weights[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1], 4); // Dreepy, at the floor.
     u16 savedRepel = VarGet(VAR_REPEL_STEP_COUNT);
     VarSet(VAR_REPEL_STEP_COUNT, 0);
     for (u32 seed = 0; seed < 512; seed++)
@@ -732,16 +734,16 @@ TEST("Wild rarity: early Dreepy uses local land odds and Sweet Scent reverses th
         SeedRng(seed);
         EXPECT_EQ(ChooseWildMonIndex_Land(info), expected);
     }
-    u32 dreepy = 0;
-    SET_RNG(RNG_WILD_MON_TARGET, 0);
+    // Under Sweet Scent the five rarest residents, Dreepy among them, all at
+    // the 4% floor, share the odds of the five most common ones.
+    u32 rarest = 0;
     for (u32 roll = 0; roll < 100; roll++)
     {
         SET_RNG(RNG_NONE, roll);
         u32 index = ChooseSweetScentWildMonIndex(info, WILD_AREA_LAND);
-        dreepy += info->wildPokemon[index].species == SPECIES_DREEPY;
+        rarest += weights[index] == 4;
     }
-    // The rarest resident gets the most common species'20% under Sweet Scent.
-    EXPECT_EQ(dreepy, 20);
+    EXPECT_EQ(rarest, weights[0] + weights[1] + weights[2] + weights[3] + weights[4]);
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
 }
 
@@ -844,9 +846,9 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
             EXPECT(level >= GetCurrentLevelCap() - 12 && level <= GetCurrentLevelCap() - 9);
         }
     }
-    // A default 4% slot, boosted x5 (capped +20 points): about a fifth.
-    EXPECT_GT(raikou, 64);
-    EXPECT_LT(raikou, 160);
+    // A default 4% slot meets the player at its table odds: no boost.
+    EXPECT_GT(raikou, 8);
+    EXPECT_LT(raikou, 40);
 
     // Caught: the slot is inert again.
     MarkLegendarySignCaughtBySpecies(SPECIES_RAIKOU);
@@ -889,21 +891,22 @@ static u32 CountSweetScentSlot(const struct WildPokemonInfo *info, u32 slot)
     return hits;
 }
 
-TEST("Sweet Scent: live legend slots get a storm's share, Ultra Beasts five times, capped at half")
+TEST("Sweet Scent: a live restricted slot is three times as likely, all of them together at most 30%")
 {
     bool8 saved[ARRAY_COUNT(sWildCapFlags)];
+    u8 dexCaught[NUM_DEX_FLAG_BYTES];
     SaveAndClearWildCapFlags(saved);
     ClearLegendCaughtBits();
+    memcpy(dexCaught, gSaveBlock1Ptr->dexCaught, sizeof(dexCaught));
     struct WildPokemon mons[NUM_WATER_MONS_ENCOUNTER_SLOTS] = {
         {5, 5, SPECIES_MAGIKARP}, {5, 5, SPECIES_GOLDEEN}, {5, 5, SPECIES_TENTACOOL}, {5, 5, SPECIES_SHAYMIN},
     };
-    static const u8 onePercent[] = {60, 90, 99, 100};
-    static const u8 threePercent[] = {60, 87, 97, 100};
+    static const u8 fivePercent[] = {60, 85, 95, 100};
     static const u8 heavy[] = {40, 60, 80, 100};
-    struct WildPokemonInfo info = {.wildPokemon = mons, .encounterBounds = onePercent};
+    struct WildPokemonInfo info = {.wildPokemon = mons, .encounterBounds = fivePercent};
 
-    // A 1% Legendary slot becomes 25%, a storm's share.
-    EXPECT_EQ(CountSweetScentSlot(&info, 3), 25);
+    // A 5% Legendary slot becomes 15%: a lure, not a guarantee.
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
     // Caught: inert, and the ordinary reversal takes every outcome.
     MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
@@ -912,30 +915,36 @@ TEST("Sweet Scent: live legend slots get a storm's share, Ultra Beasts five time
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
-    EXPECT_EQ(CountSweetScentSlot(&info, 3), 25);
-
-    // A 3% Ultra Beast slot becomes 15%.
-    mons[3].species = SPECIES_POIPOLE;
-    info.encounterBounds = threePercent;
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
 
-    // 60% of legend odds would boost to 300%: scaled down to 50%, shared
-    // by table odds, and the other half stays with the ordinary species.
+    // Ultra Beasts and Paradox Pokemon are lured the same way.
+    mons[3].species = SPECIES_POIPOLE;
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
+    mons[3].species = SPECIES_IRON_LEAVES;
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_IRON_LEAVES), FLAG_SET_CAUGHT);
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
+    memcpy(gSaveBlock1Ptr->dexCaught, dexCaught, sizeof(dexCaught));
+
+    // 60% of restricted odds would triple to 180%: held to 30%, shared by
+    // table odds, and the other 70% stays with the ordinary species.
     ClearLegendCaughtBits();
     mons[1].species = SPECIES_SHAYMIN;
     mons[2].species = SPECIES_MELTAN;
+    mons[3].species = SPECIES_POIPOLE;
     info.encounterBounds = heavy;
-    u32 legends = 0;
+    u32 restricted = 0;
     for (u32 slot = 1; slot < NUM_WATER_MONS_ENCOUNTER_SLOTS; slot++)
     {
         u32 hits = CountSweetScentSlot(&info, slot);
         EXPECT_GT(hits, 0);
-        legends += hits;
+        restricted += hits;
     }
-    EXPECT_EQ(legends, 50);
-    EXPECT_EQ(CountSweetScentSlot(&info, 0), 50);
+    EXPECT_EQ(restricted, 30);
+    EXPECT_EQ(CountSweetScentSlot(&info, 0), 70);
 
     ClearLegendCaughtBits();
+    memcpy(gSaveBlock1Ptr->dexCaught, dexCaught, sizeof(dexCaught));
     RestoreWildCapFlags(saved);
 }
 
@@ -1014,10 +1023,10 @@ TEST("Wild roamers: the roaming Lati starts at the current cap with its authored
 }
 
 // Data contract for src/data/wild_encounters.json (Emerald maps only):
-// Legendary-class slots are exactly 1%, Ultra Beast and Paradox slots 2-3%,
-// no ordinary slot is below 2%, a table holds at most two Legendary-class
-// slots, and each method (each rod) totals 100.
-TEST("Wild tables: Legendary, Ultra Beast and Paradox slot odds follow the rarity ladder")
+// Legendary-class, Ultra Beast and Paradox slots are exactly 5%, no ordinary
+// slot is below 4%, a table holds at most two Legendary-class slots, and each
+// method (each rod) totals 100.
+TEST("Wild tables: nothing is grind-rare: restricted slots at 5%, ordinary slots at least 4%")
 {
     static const struct { enum WildPokemonArea area; u8 count; } methods[] = {
         {WILD_AREA_LAND, NUM_LAND_MONS_ENCOUNTER_SLOTS},
@@ -1055,14 +1064,14 @@ TEST("Wild tables: Legendary, Ultra Beast and Paradox slot odds follow the rarit
                     case RESTRICTED_PARTY_LEGENDARY:
                         legends++;
                         legendSlots++;
-                        ok = odds == 1;
+                        ok = odds == 5;
                         break;
                     case RESTRICTED_PARTY_ULTRA_BEAST:
                     case RESTRICTED_PARTY_PARADOX:
-                        ok = odds >= 2 && odds <= 3;
+                        ok = odds == 5;
                         break;
                     default:
-                        ok = odds >= 2;
+                        ok = odds >= 4;
                         break;
                     }
                     if (!ok)

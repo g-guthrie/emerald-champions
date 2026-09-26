@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
-"""Validate Emerald wild encounter tables against the rarity-ladder contract.
+"""Validate Emerald wild encounter tables against the odds-floor contract.
 
 Checks src/data/wild_encounters.json (gWildMonHeaders entries):
 
 1. Every land, water, Rock Smash, fishing and Honey table carries an explicit
    encounter_rates array with one weight per slot; each method totals 100 and
    each fishing rod group (old, good, super) totals 100 on its own.
-2. Legendary-class slots are exactly 1%, Ultra Beast and Paradox slots are 2%
-   or 3%, ordinary slots are at least 2%, a table holds at most two
-   Legendary-class slots, and Rock Smash, fishing and Honey tables hold no
-   Legendary, Ultra Beast or Paradox species.
+2. Nothing is grind-rare: Legendary-class, Ultra Beast and Paradox slots are
+   exactly 5% and ordinary slots at least 4% of their method (Feebas keeps its
+   own hidden-spot odds), a table holds at most two Legendary-class slots, and
+   Rock Smash, fishing and Honey tables hold no Legendary, Ultra Beast or
+   Paradox species.
 3. Surf slots lie within levels 3-100 and every Surf and rod slot spans at most
    five levels.
 4. Land slot levels satisfy 1 <= min <= max <= 100.
 5. With --placement SPEC, each wild/quest placement appears exactly once on its
    map and method at its rate, and no restricted species appears elsewhere.
 6. The shared Cut-tree habitat (sCutTreeHabitat in src/wild_encounter.c) totals
-   100, follows the ordinary ladder, and is the only home of its species: none
+   100, keeps the ordinary floor, and is the only home of its species: none
    of them appears in any map table. It counts as a valid species home.
 
 Species classes follow GetRestrictedPartyClass in src/pokemon.c: the flags of
@@ -37,8 +38,8 @@ ORDINARY_METHODS = {"land_mons", "water_mons", "rock_smash_mons", "fishing_mons"
 # Tables that must never hold Legendary-class, Ultra Beast or Paradox species.
 UNRESTRICTED_ONLY_METHODS = {"rock_smash_mons", "fishing_mons", "honey_mons"}
 LEGENDARY, ULTRA_BEAST, PARADOX, ORDINARY = "legendary", "ub", "paradox", "none"
-RESTRICTED_RATES = {LEGENDARY: {1}, ULTRA_BEAST: {2, 3}, PARADOX: {2, 3}}
-MIN_ORDINARY_SLOT_PERCENT = 2
+RESTRICTED_RATES = {LEGENDARY: {5}, ULTRA_BEAST: {5}, PARADOX: {5}}
+MIN_ORDINARY_SLOT_PERCENT = 4
 MAX_LEGENDARY_SLOTS_PER_TABLE = 2
 WATER_LEVEL_BOUNDS = (3, 100)
 MAX_WATER_ROD_LEVEL_SPAN = 5
@@ -426,7 +427,7 @@ def main():
                 total = sum(rates[i] for i in indices)
                 if total != 100:
                     errors.append(f'{tag}/{method}: weights total {total}, expected 100')
-            # Rule 2: the rarity ladder, per slot.
+            # Rule 2: the odds floor, per slot.
             legendary_slots = 0
             for slot, mon in enumerate(mons):
                 species, rate = mon['species'], rates[slot]
@@ -484,7 +485,7 @@ def main():
         print(f'WARN: {warning}')
     if errors:
         raise SystemExit('\n'.join(errors))
-    print(f'PASS: {checked} Emerald encounter tables have explicit weights, the rarity ladder and valid level templates')
+    print(f'PASS: {checked} Emerald encounter tables have explicit weights, the odds floor and valid level templates')
     print(f'PASS: the shared Cut-tree habitat ({len(cut_slots)} species) totals 100 and is their only home')
     if placement_count is not None:
         print(f'PASS: {placement_count} wild/quest placements from {args.placement} match their map, method and rate')

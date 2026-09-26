@@ -10,7 +10,10 @@
 #include "wild_roster.h"
 #include "constants/map_types.h"
 
-// Rarity words by share of the method's battles.
+// Rarity words by share of the method's battles. Every table slot is at least
+// 4% (Legendary, Ultra Beast and Paradox slots 5%), so Very Rare is left for
+// Feebas's hidden spots and residents crowded out by a storm visitor, a
+// roamer or an outbreak.
 #define WILD_RARITY_COMMON_SHARE   1500 // 15% and up
 #define WILD_RARITY_UNCOMMON_SHARE  800 // 8% to 15%
 #define WILD_RARITY_RARE_SHARE      400 // 4% to 8%; below that, Very Rare

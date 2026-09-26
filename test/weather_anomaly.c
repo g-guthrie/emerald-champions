@@ -555,12 +555,12 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
         EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
     }
-    // Sweet Scent gives the inert visitor nothing (no fivefold boost).
-    static const u8 onePercent[] = {60, 90, 99, 100};
+    // Sweet Scent gives the inert visitor nothing.
+    static const u8 fivePercent[] = {60, 85, 95, 100};
     struct WildPokemon water[NUM_WATER_MONS_ENCOUNTER_SLOTS] = {
         {5, 5, SPECIES_MAGIKARP}, {5, 5, SPECIES_GOLDEEN}, {5, 5, SPECIES_TENTACOOL}, {5, 5, SPECIES_SUICUNE},
     };
-    struct WildPokemonInfo scent = {.wildPokemon = water, .encounterBounds = onePercent};
+    struct WildPokemonInfo scent = {.wildPokemon = water, .encounterBounds = fivePercent};
     u32 hits = 0;
     SET_RNG(RNG_WILD_MON_TARGET, 0);
     for (u32 roll = 0; roll < 100; roll++)
@@ -570,8 +570,8 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
     }
     EXPECT_EQ(hits, 0);
 
-    // After the window: an ordinary gated 1% resident, which Sweet Scent
-    // draws out at a storm's share.
+    // After the window: an ordinary gated 5% resident, which Sweet Scent
+    // makes three times as likely.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     EXPECT(!IsWeatherAnomalyVisitorSlotInert(SPECIES_TAPU_KOKO));
     hits = 0;
@@ -580,7 +580,7 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
         SET_RNG(RNG_NONE, roll);
         hits += ChooseSweetScentWildMonIndex(&scent, WILD_AREA_WATER) == 3;
     }
-    EXPECT_EQ(hits, 25);
+    EXPECT_EQ(hits, 15);
     ResetAnomalyState();
     gSaveBlock1Ptr->location = savedLocation;
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
@@ -612,9 +612,9 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), GetCurrentLevelCap());
         }
     }
-    // A default 4% slot, boosted x5 (capped +20 points) like any resident legend.
-    EXPECT_GT(koko, 64);
-    EXPECT_LT(koko, 160);
+    // A default 4% slot, met at its table odds like any resident legend.
+    EXPECT_GT(koko, 8);
+    EXPECT_LT(koko, 40);
     gSaveBlock1Ptr->location = savedLocation;
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
     ResetAnomalyState();

@@ -82,9 +82,25 @@ void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem)
     }
 }
 
+// Legendary, Mythical, Ultra Beast and Paradox Pokémon are one of a kind in
+// the wild: once the player has caught one, its slots go inert everywhere.
+// Legendary-class and Ultra Beast slots also wait for their gate, and their
+// Sign's caught bit is the record (it tells regional forms such as Galarian
+// Articuno apart, which share a Pokédex number). Paradox Pokémon have no gate
+// and answer to the Pokédex.
 bool32 IsWildSlotSpeciesAcquirable(enum Species species)
 {
-    return !IsLegendaryEncounterSpecies(species) || CanAcquireLegendarySignSpecies(species);
+    switch (GetRestrictedPartyClass(species))
+    {
+    case RESTRICTED_PARTY_NONE:
+        return TRUE;
+    case RESTRICTED_PARTY_PARADOX:
+        return !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+    default:
+        if (GetLegendarySignIdBySpecies(species) >= LEGENDARY_SIGN_COUNT)
+            return !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+        return CanAcquireLegendarySignSpecies(species);
+    }
 }
 
 static EWRAM_DATA u8 sRestingSigns[(LEGENDARY_SIGN_COUNT + 7) / 8];

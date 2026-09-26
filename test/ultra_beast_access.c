@@ -20,7 +20,7 @@ static const struct WildPokemonInfo *FindUltraBeastLandTable(u16 map)
     return NULL;
 }
 
-TEST("Ultra Beast access: every habitat has a 2-3% gated slot that spawns at the cap and closes on capture")
+TEST("Ultra Beast access: every habitat has a 5% gated slot that spawns at the cap and closes on capture")
 {
     static const struct { enum Species species; u16 map; } habitats[] = {
         {SPECIES_POIPOLE, MAP_SEASPRAY_CAVE_B1F},
@@ -55,7 +55,7 @@ TEST("Ultra Beast access: every habitat has a 2-3% gated slot that spawns at the
             if (land->wildPokemon[slot].species == species)
                 odds += GetWildSlotOdds(land, WILD_AREA_LAND, slot);
         Test_MgbaPrintf("Ultra Beast %d on map %d: %d percent", species, habitats[i].map, odds);
-        EXPECT(odds >= 2 && odds <= 3);
+        EXPECT_EQ(odds, 5);
 
         // Open every gate: all badges and the one milestone flag in use.
         for (u32 badge = 0; badge < NUM_BADGES; badge++)

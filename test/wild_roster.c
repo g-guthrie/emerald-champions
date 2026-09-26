@@ -4,6 +4,7 @@
 #include "fishing.h"
 #include "legendary_signs.h"
 #include "overworld.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
@@ -438,5 +439,94 @@ TEST("Wild roster: entries are grouped by method, most common first, with plain 
     count = GetWildRosterForMap(MAP_GROUP(MAP_SOOTOPOLIS_CITY), MAP_NUM(MAP_SOOTOPOLIS_CITY), roster, ARRAY_COUNT(roster));
     for (u32 i = 0; i < count; i++)
         EXPECT_NE(roster[i].method, WILD_ROSTER_SURFING);
+    RestoreRosterTestState(&state);
+}
+
+// Every map: with no storm, roamer or outbreak about, no listed species is
+// below 4% of its method's battles, and every Legendary, Ultra Beast and
+// Paradox Pokemon sits at exactly 5%: a gated neighbor's draws go to ordinary
+// residents, never to another restricted slot.
+static u32 CheckRosterFloors(void)
+{
+    u32 failures = 0;
+    for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
+    {
+        struct WildRosterEntry roster[WILD_ROSTER_MAX_ENTRIES];
+        u8 mapGroup = gWildMonHeaders[header].mapGroup, mapNum = gWildMonHeaders[header].mapNum;
+        u32 count = GetWildRosterForMap(mapGroup, mapNum, roster, ARRAY_COUNT(roster));
+        for (u32 i = 0; i < count; i++)
+        {
+            if (roster[i].method == WILD_ROSTER_FEEBAS)
+                continue;
+            bool32 restricted = GetRestrictedPartyClass(roster[i].species) != RESTRICTED_PARTY_NONE;
+            if (roster[i].share < 400 || (restricted && roster[i].share != 500))
+            {
+                Test_MgbaPrintf("Floor: map %d.%d method %d species %d share %d", mapGroup, mapNum,
+                    roster[i].method, roster[i].species, roster[i].share);
+                failures++;
+            }
+        }
+    }
+    return failures;
+}
+
+TEST("Wild roster: nothing is grind-rare: every species at least 4%, restricted ones at 5%")
+{
+    struct RosterTestState state;
+    SaveRosterTestState(&state);
+    EXPECT_EQ(CheckRosterFloors(), 0);
+    SetRosterBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
+    EXPECT_EQ(CheckRosterFloors(), 0);
+    SetRosterBadges(NUM_BADGES);
+    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
+    FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+    EXPECT_EQ(CheckRosterFloors(), 0);
+    RestoreRosterTestState(&state);
+}
+
+static bool32 EngineCanRoll(u16 map, enum Species species)
+{
+    u16 headerId = GetWildMonHeaderIdForMap(MAP_GROUP(map), MAP_NUM(map));
+    const struct WildPokemonInfo *land = gWildMonHeaders[headerId].encounterTypes[TIME_OF_DAY_DEFAULT].landMonsInfo;
+    SetRosterLocation(map);
+    for (u32 seed = 0; seed < 300; seed++)
+    {
+        SeedRng(seed);
+        if (TryGenerateWildMon(land, WILD_AREA_LAND, 0)
+         && GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) == species)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+TEST("Wild roster: a caught Legendary, Ultra Beast or Paradox Pokemon never appears in the wild again")
+{
+    struct RosterTestState state;
+    u8 dexCaught[NUM_DEX_FLAG_BYTES];
+    SaveRosterTestState(&state);
+    memcpy(dexCaught, gSaveBlock1Ptr->dexCaught, sizeof(dexCaught));
+    // Paradox: Iron Leaves in Verdanturf Meadow has no gate; the Pokedex
+    // record of a catch closes its slot.
+    EXPECT(RosterHas(MAP_VERDANTURF_MEADOW, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
+    EXPECT(EngineCanRoll(MAP_VERDANTURF_MEADOW, SPECIES_IRON_LEAVES));
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_IRON_LEAVES), FLAG_SET_CAUGHT);
+    EXPECT(!IsWildSlotSpeciesAcquirable(SPECIES_IRON_LEAVES));
+    EXPECT(!RosterHas(MAP_VERDANTURF_MEADOW, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
+    EXPECT(!EngineCanRoll(MAP_VERDANTURF_MEADOW, SPECIES_IRON_LEAVES));
+    // Ultra Beast: Poipole in Seaspray Cave B1F is ungated; its Sign closes it.
+    EXPECT(RosterHas(MAP_SEASPRAY_CAVE_B1F, WILD_ROSTER_LAND, SPECIES_POIPOLE));
+    MarkLegendarySignCaughtBySpecies(SPECIES_POIPOLE);
+    EXPECT(!RosterHas(MAP_SEASPRAY_CAVE_B1F, WILD_ROSTER_LAND, SPECIES_POIPOLE));
+    EXPECT(!EngineCanRoll(MAP_SEASPRAY_CAVE_B1F, SPECIES_POIPOLE));
+    // Legendary: Shaymin on Route 102 is ungated.
+    EXPECT(RosterHas(MAP_ROUTE102, WILD_ROSTER_LAND, SPECIES_SHAYMIN));
+    MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
+    EXPECT(!RosterHas(MAP_ROUTE102, WILD_ROSTER_LAND, SPECIES_SHAYMIN));
+    EXPECT(!EngineCanRoll(MAP_ROUTE102, SPECIES_SHAYMIN));
+    memcpy(gSaveBlock1Ptr->dexCaught, dexCaught, sizeof(dexCaught));
     RestoreRosterTestState(&state);
 }

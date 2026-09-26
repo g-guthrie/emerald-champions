@@ -2,15 +2,15 @@
 // A row only says when the species may be acquired: badge count, an optional
 // milestone flag and an optional family that must be caught in the Pokedex.
 // Where and how often it appears is decided elsewhere: wild residents are
-// ordinary slots in src/data/wild_encounters.json (Legendary 1%, Ultra Beast
-// 2-3%), statics/gifts/quests/prizes keep their own map scripts. `kind` is
+// ordinary 5% slots in src/data/wild_encounters.json (Legendary and Ultra
+// Beast alike), statics/gifts/quests/prizes keep their own map scripts. `kind` is
 // presentation only. Special discovery rules (Kyurem, Pecharunt, Regigigas and
 // the Meloetta/Landorus/Marshadow NPC quests) live in MeetsSignDiscovery.
 #define GATE(mon, badges, flag, reqMon, kind_) \
     [LEGENDARY_SIGN_##mon] = {SPECIES_##mon, flag, SPECIES_##reqMon, badges, LEGENDARY_KIND_##kind_}
 // Weather-anomaly visitors (src/weather_anomaly.c): wild only inside their own
 // anomaly on their home map from the Weather Institute rescue until the sky
-// calms in Sootopolis, then ordinary gated 1% residents of that map. `id` is
+// calms in Sootopolis, then ordinary gated 5% residents of that map. `id` is
 // the append-only save id packed into the anomaly vars (1-31); never renumber.
 #define VISITOR(mon, badges, flag, id, map, habitat, weather) \
     [LEGENDARY_SIGN_##mon] = {SPECIES_##mon, flag, SPECIES_NONE, badges, LEGENDARY_KIND_WILD, \

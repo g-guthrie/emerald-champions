@@ -164,8 +164,8 @@ TEST("Sweet Scent reverses species totals with duplicates and ties while preserv
     EXPECT_EQ(counts[1], 72);
     EXPECT_EQ(counts[2], 56);
 
-    // Legend slots and their five-fold Sweet Scent boost are covered in
-    // test/wild_slot_odds.c.
+    // Legendary, Ultra Beast and Paradox slots under Sweet Scent are
+    // covered in test/wild_slot_odds.c.
 }
 
 TEST("A caught gate row closes its wild slot")

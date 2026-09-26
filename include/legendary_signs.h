@@ -64,8 +64,9 @@ const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species spe
 bool32 IsLegendaryEncounterSpecies(enum Species species);
 u8 GetLegendaryEncounterLevel(enum Species species);
 void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem);
-// Legendary/UB slots are acquirable only while their gate is open and the
-// species is uncaught; everything else always is.
+// Legendary, Ultra Beast and Paradox slots are acquirable only until the
+// species is caught (one of each in the wild); Legendary and UB slots also
+// wait for their gate. Everything else always is.
 bool32 IsWildSlotSpeciesAcquirable(enum Species species);
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);

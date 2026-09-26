@@ -66,8 +66,8 @@ static bool32 IsCutTreeSpecies(enum Species species)
 TEST("Cut trees: one shared habitat with the owner's roster and odds")
 {
     static const struct { enum Species species; u8 odds; } expected[] = {
-        {SPECIES_SKWOVET, 40}, {SPECIES_PINECO, 30}, {SPECIES_AIPOM, 15},
-        {SPECIES_BURMY, 8}, {SPECIES_APPLIN, 5}, {SPECIES_PHANTUMP, 2},
+        {SPECIES_SKWOVET, 38}, {SPECIES_PINECO, 30}, {SPECIES_AIPOM, 15},
+        {SPECIES_BURMY, 8}, {SPECIES_APPLIN, 5}, {SPECIES_PHANTUMP, 4},
     };
     u32 rolled[ARRAY_COUNT(expected)] = {0};
 
