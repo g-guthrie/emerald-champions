@@ -190,7 +190,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveCosmog:
 	setvar VAR_TEMP_1, SPECIES_COSMOG
 	special GetStaticEncounterLevel
-	givemon SPECIES_COSMOG, VAR_0x800A, ITEM_LUCKY_EGG
+	givemon SPECIES_COSMOG, VAR_0x800A, ITEM_EVIOLITE
 	compare VAR_RESULT, 0
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogParty
 	compare VAR_RESULT, 1

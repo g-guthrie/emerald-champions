@@ -9,7 +9,7 @@ VerdanturfMeadow_EventScript_GiftAudino::
 	setvar VAR_TEMP_1, SPECIES_AUDINO
 	@ Gift Pokemon arrive at the current level cap.
 	special GetLevelCapForScriptedGift
-	givemon SPECIES_AUDINO, VAR_0x800A, ITEM_LUCKY_EGG
+	givemon SPECIES_AUDINO, VAR_0x800A, ITEM_SITRUS_BERRY
 	compare VAR_RESULT, 0
 	goto_if_eq VerdanturfMeadow_EventScript_ReceiveAudinoParty
 	compare VAR_RESULT, 1

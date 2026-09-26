@@ -2756,7 +2756,7 @@
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_EXPERT_BELT                     0x428 // shares 0x428 with FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_WOOD_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_ASSAULT_VEST                    0x429 // shares 0x429 with FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_MECH_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_6_MEWTWONITE_X                    0x42B // shares 0x42B with FLAG_ITEM_TRICK_HOUSE_PUZZLE_6_GLITTER_MAIL (dead: its map.json was overwritten)
-#define FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_LUCKY_EGG                       0x42C // shares 0x42C with FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL (dead: its map.json was overwritten)
+#define FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_BOTTLE_CAP                      0x42C // shares 0x42C with FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_DESTINY_KNOT                    0x42D // shares 0x42D with FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_BEAD_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_JAGGED_PASS_TM69_ROCK_POLISH                         0x42E // shares 0x42E with FLAG_ITEM_JAGGED_PASS_ABSOLITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_MT_PYRE_EXTERIOR_GENGARITE                           0x431 // shares 0x431 with FLAG_ITEM_MT_PYRE_EXTERIOR_MAX_POTION (dead: its map.json was overwritten)

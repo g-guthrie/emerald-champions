@@ -603,8 +603,8 @@ Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
 	finditem ITEM_MEWTWONITE_X
 	end
 
-Route110_TrickHousePuzzle7_EventScript_ItemLuckyEgg:: @ 8291469
-	finditem ITEM_LUCKY_EGG
+Route110_TrickHousePuzzle7_EventScript_ItemBottleCap:: @ 8291469
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route110_TrickHousePuzzle8_EventScript_ItemDestinyKnot:: @ 8291476
