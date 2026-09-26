@@ -140,6 +140,10 @@ EWRAM_DATA static struct DexNavSearch *sDexNavSearchDataPtr = NULL;
 EWRAM_DATA static struct DexNavGUI *sDexNavUiDataPtr = NULL;
 EWRAM_DATA static u8 *sBg1TilemapBuffer = NULL;
 EWRAM_DATA enum Species gDexNavSpecies = SPECIES_NONE;
+// Reopening the DexNav on the same map puts the cursor back on the last slot.
+EWRAM_DATA static u16 sDexNavCursorMap = 0; // map group/num + 1; 0 = none yet
+EWRAM_DATA static u8 sDexNavCursorRow = 0;
+EWRAM_DATA static u8 sDexNavCursorCol = 0;
 
 //// Function Declarations
 //GUI
@@ -1644,6 +1648,11 @@ static bool8 DexNav_LoadGraphics(void)
     return FALSE;
 }
 
+static u16 CurrentDexNavCursorMap(void)
+{
+    return ((gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum) + 1;
+}
+
 static void UpdateCursorPosition(void)
 {
     u16 x, y;
@@ -1676,6 +1685,9 @@ static void UpdateCursorPosition(void)
 
     gSprites[sDexNavUiDataPtr->cursorSpriteId].x = x;
     gSprites[sDexNavUiDataPtr->cursorSpriteId].y = y;
+    sDexNavCursorMap = CurrentDexNavCursorMap();
+    sDexNavCursorRow = sDexNavUiDataPtr->cursorRow;
+    sDexNavCursorCol = sDexNavUiDataPtr->cursorCol;
 
     PrintCurrentSpeciesInfo();
 }
@@ -2251,6 +2263,15 @@ static bool8 DexNav_DoGfxSetup(void)
         sDexNavUiDataPtr->cursorRow = ROW_LAND_TOP;
         sDexNavUiDataPtr->cursorCol = 0;
         sDexNavUiDataPtr->environment = ENCOUNTER_TYPE_LAND;
+        if (sDexNavCursorMap == CurrentDexNavCursorMap())
+        {
+            sDexNavUiDataPtr->cursorRow = sDexNavCursorRow;
+            sDexNavUiDataPtr->cursorCol = sDexNavCursorCol;
+            if (sDexNavCursorRow == ROW_WATER)
+                sDexNavUiDataPtr->environment = ENCOUNTER_TYPE_WATER;
+            else if (sDexNavCursorRow == ROW_HIDDEN)
+                sDexNavUiDataPtr->environment = ENCOUNTER_TYPE_HIDDEN;
+        }
         gMain.state++;
         break;
     case 7:

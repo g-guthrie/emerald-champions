@@ -6,6 +6,10 @@
 
 extern void (*gPokedexVBlankCB)(void);
 
+// An entry's pages are sibling tabs: B on any of them returns to the list.
+// Pages that hand off through screenSwitchState use this value for that exit.
+#define DEX_SCREEN_SWITCH_TO_LIST 4
+
 void ResetPokedex(void);
 u16 GetNationalPokedexCount(u8 caseID);
 u32 GetRegionalPokedexCount(u8 caseID);
