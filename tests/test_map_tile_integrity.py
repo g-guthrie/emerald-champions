@@ -122,8 +122,8 @@ class MapTileIntegrityTests(unittest.TestCase):
     def test_unregistered_warp_destination_is_rejected(self):
         path = "data/maps/LittlerootTown/map.json"
         data = json.loads((ROOT / path).read_text())
-        data["warp_events"][0]["dest_map"] = "MAP_PALLET_TOWN"
-        with self.assertRaisesRegex(audit.InvalidData, "missing destination MAP_PALLET_TOWN"):
+        data["warp_events"][0]["dest_map"] = "MAP_UNREGISTERED"
+        with self.assertRaisesRegex(audit.InvalidData, "missing destination MAP_UNREGISTERED"):
             self.mutated_text(path, json.dumps(data))
 
 

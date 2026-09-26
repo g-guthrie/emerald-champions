@@ -361,7 +361,7 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
 
 TEST("Regigigas wakes for the three Regis' Pokedex records, not a three-Legendary party")
 {
-    // Route roster signs must resolve in Emerald, not only in FireRed/LeafGreen.
+    // Route roster signs must resolve to real sign graphics.
     const struct ObjectEventGraphicsInfo *sign = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_SIGN);
     EXPECT(sign != NULL);
     EXPECT(sign->images != NULL);
