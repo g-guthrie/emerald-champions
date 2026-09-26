@@ -10,10 +10,11 @@
 #include "constants/weather.h"
 
 // Enter battle from the actual visitor's map weather, rather than injecting
-// gBattleWeather or terrain. Use native wild battles: recorded-link battles
-// intentionally omit overworld weather. This exercises the real handoff.
+// gBattleWeather or terrain. The runner replays even wild battles, so these
+// tests explicitly opt into field weather while exercising the real handoff.
 static void PrepareStorm(enum LegendarySignId sign)
 {
+    UseOverworldWeather();
     for (u32 i = 0; i < 8; i++)
         FlagSet(FLAG_BADGE01_GET + i);
     FlagSet(FLAG_VISITED_FORTREE_CITY);

@@ -780,6 +780,7 @@ struct BattleTestData
     enum Ability forcedAbilities[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     u8 chosenGimmick[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     u8 forcedEnvironment;
+    bool8 useOverworldWeather;
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
     u8 turnState;
@@ -1046,6 +1047,8 @@ struct moveWithPP {
 #define Shadow(isShadow) Shadow_(__LINE__, isShadow)
 #define Shiny(isShiny) Shiny_(__LINE__, isShiny)
 #define Environment(environment) Environment_(__LINE__, environment)
+// Explicitly exercise field weather; recorded test battles normally omit it.
+#define UseOverworldWeather() UseOverworldWeather_(__LINE__)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
 void SetVarForTest(u32 sourceLine, u16 varId, u16 value);
@@ -1089,6 +1092,7 @@ void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor);
 void Shadow_(u32 sourceLine, bool32 isShadow);
 void Shiny_(u32 sourceLine, bool32 isShiny);
 void Environment_(u32 sourceLine, u32 environment);
+void UseOverworldWeather_(u32 sourceLine);
 
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
 struct FourMoves

@@ -2784,7 +2784,11 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
         }
         break;
     case FIELD_EFFECT_OVERWORLD_WEATHER:
-        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
+        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+#if TESTING
+         || (gTestRunnerEnabled && TestRunner_Battle_UsesOverworldWeather())
+#endif
+        )
         {
             switch (GetCurrentWeather())
             {
