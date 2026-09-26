@@ -70,4 +70,3 @@ void ShowPokedexRatingMessage(void)
 {
     ShowFieldMessage(GetPokedexRatingText(gSpecialVar_0x8004));
 }
-

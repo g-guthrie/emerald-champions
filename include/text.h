@@ -230,7 +230,4 @@ u32 GetPlayerTextSpeedModifier(void);
 u32 GetPlayerTextScrollSpeed(void);
 bool32 IsPlayerTextSpeedInstant(void);
 
-u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
-void DestroyTextCursorSprite(u8 spriteId);
-
 #endif // GUARD_TEXT_H

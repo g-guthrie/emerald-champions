@@ -5,7 +5,6 @@
 #include "clock.h"
 #include "coins.h"
 #include "credits.h"
-#include "credits_frlg.h"
 #include "data.h"
 #include "daycare.h"
 #include "debug.h"
@@ -1504,26 +1503,6 @@ static const u16 sLocationFlags[] =
     FLAG_VISITED_EVER_GRANDE_CITY,
     FLAG_LANDMARK_POKEMON_LEAGUE,
     FLAG_LANDMARK_BATTLE_FRONTIER,
-    FLAG_WORLD_MAP_PALLET_TOWN,
-    FLAG_WORLD_MAP_VIRIDIAN_CITY,
-    FLAG_WORLD_MAP_PEWTER_CITY,
-    FLAG_WORLD_MAP_CERULEAN_CITY,
-    FLAG_WORLD_MAP_LAVENDER_TOWN,
-    FLAG_WORLD_MAP_VERMILION_CITY,
-    FLAG_WORLD_MAP_CELADON_CITY,
-    FLAG_WORLD_MAP_FUCHSIA_CITY,
-    FLAG_WORLD_MAP_CINNABAR_ISLAND,
-    FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR,
-    FLAG_WORLD_MAP_SAFFRON_CITY,
-    FLAG_WORLD_MAP_ONE_ISLAND,
-    FLAG_WORLD_MAP_TWO_ISLAND,
-    FLAG_WORLD_MAP_THREE_ISLAND,
-    FLAG_WORLD_MAP_FOUR_ISLAND,
-    FLAG_WORLD_MAP_FIVE_ISLAND,
-    FLAG_WORLD_MAP_SEVEN_ISLAND,
-    FLAG_WORLD_MAP_SIX_ISLAND,
-    FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F,
-    FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F,
 };
 
 static u32 Debug_CheckToggleFlags(u8 id)
@@ -1551,9 +1530,6 @@ static u32 Debug_CheckToggleFlags(u8 id)
         result = TRUE;
         for (u32 i = 0; i < ARRAY_COUNT(sLocationFlags); i++)
         {
-            if (sLocationFlags[i] == 0) // Location flags for Frlg are set to flag 0 in Emerald and vice versa
-                continue;
-
             if (!FlagGet(sLocationFlags[i]))
             {
                 result = FALSE;
@@ -3006,8 +2982,7 @@ static void DebugAction_FlagsVars_RunningShoes(u8 taskId)
 
 static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
 {
-    u32 checkedFlag = sLocationFlags[0] == 0 ? sLocationFlags[ARRAY_COUNT(sLocationFlags) - 1] : sLocationFlags[0];
-    if (FlagGet(checkedFlag))
+    if (FlagGet(sLocationFlags[0]))
     {
         PlaySE(SE_PC_OFF);
         for (u32 i = 0; i < ARRAY_COUNT(sLocationFlags); i++)

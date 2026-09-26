@@ -64,7 +64,6 @@
 	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
 	STD_PUT_ITEM_AWAY = 11
-	STD_RECEIVED_ITEM = 12
 
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
@@ -1775,23 +1774,6 @@
 	.2byte \box
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro textcolor color:req
-	.byte SCR_OP_TEXTCOLOR
-	.byte \color
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro loadhelp text:req
-	.byte SCR_OP_LOADHELP
-	.4byte \text
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro unloadhelp
-	.byte SCR_OP_UNLOADHELP
-	.endm
-
 	@ After using this command, all standard message boxes will use the signpost frame.
 	.macro signmsg
 	.byte SCR_OP_SIGNMSG
@@ -1800,13 +1782,6 @@
 	@ Ends the effects of signmsg, returning message box frames to normal.
 	.macro normalmsg
 	.byte SCR_OP_NORMALMSG
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro comparehiddenvar a:req, value:req
-	.byte SCR_OP_COMPAREHIDDENVAR
-	.byte \a
-	.4byte \value
 	.endm
 
 	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
@@ -1826,12 +1801,6 @@
 	@ ram script is invalid then this does nothing.
 	.macro trywondercardscript
 	.byte SCR_OP_TRYWONDERCARDSCRIPT
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro setworldmapflag worldmapflag:req
-	.byte SCR_OP_SETWORLDMAPFLAG
-	.2byte \worldmapflag
 	.endm
 
 	@ Warps the player to the specified map using a teleport effect. Effect is similar to warpteleport, but
@@ -2757,11 +2726,6 @@
 	.macro pickpartymon selectionType:req
 	callnative PickPartyMon
 	.byte \selectionType
-	.endm
-
-	.macro mappreview duration:req
-	callnative MapPreviewScript
-	.2byte \duration
 	.endm
 
 	.macro tryspecialevo evoArg:req, canStopEvo=TRUE, tryMultiple=FALSE

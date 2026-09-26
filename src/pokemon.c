@@ -5103,8 +5103,6 @@ enum Species NationalPokedexNumToSpecies(enum NationalDexOrder nationalNum)
 
 u32 NationalToRegionalOrder(enum NationalDexOrder nationalNum)
 {
-    if (IS_FRLG)
-        return NationalToKantoOrder(nationalNum);
     return NationalToHoennOrder(nationalNum);
 }
 
@@ -5139,8 +5137,6 @@ enum NationalDexOrder SpeciesToNationalPokedexNum(enum Species species)
 
 u32 SpeciesToRegionalPokedexNum(enum Species species)
 {
-    if (IS_FRLG)
-        return SpeciesToKantoPokedexNum(species);
     return SpeciesToHoennPokedexNum(species);
 }
 
@@ -5160,8 +5156,6 @@ enum HoennDexOrder SpeciesToHoennPokedexNum(enum Species species)
 
 enum NationalDexOrder RegionalToNationalOrder(u32 regionalNum)
 {
-    if (IS_FRLG)
-        return KantoToNationalOrder(regionalNum);
     return HoennToNationalOrder(regionalNum);
 }
 
@@ -5438,8 +5432,6 @@ u16 SpeciesToPokedexNum(enum Species species)
 
 bool32 IsSpeciesInRegionalDex(enum Species species)
 {
-    if (IS_FRLG)
-        return IsSpeciesInKantoDex(species);
     return IsSpeciesInHoennDex(species);
 }
 
@@ -6008,9 +6000,9 @@ enum TrainerPicID FacilityClassToPicIndex(u16 facilityClass)
 enum TrainerPicID PlayerGenderToFrontTrainerPicId(enum Gender playerGender)
 {
     if (playerGender != MALE)
-        return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_LEAF : FACILITY_CLASS_MAY);
+        return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
     else
-        return FacilityClassToPicIndex(IS_FRLG ? FACILITY_CLASS_RED : FACILITY_CLASS_BRENDAN);
+        return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
 }
 
 void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality)

@@ -2,7 +2,6 @@
 #define GUARD_CONSTANTS_OPPONENTS_H
 
 #include "constants/battle_partner.h"
-#include "constants/opponents_frlg.h"
 
 #define TRAINER_NONE                          0
 #define TRAINER_SAWYER_1                      1
@@ -889,10 +888,6 @@
 #define TRAINERS_COUNT_EMERALD     855
 #define MAX_TRAINERS_COUNT_EMERALD 864
 
-#if IS_FRLG
-#define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG
-#define MAX_TRAINERS_COUNT                  MAX_TRAINERS_COUNT_FRLG
-#else
 #define TRAINERS_COUNT                      TRAINERS_COUNT_EMERALD
 #define MAX_TRAINERS_COUNT                  MAX_TRAINERS_COUNT_EMERALD
 
@@ -905,8 +900,6 @@
 #undef TRAINERS_COUNT
 #define TRAINERS_COUNT TEST_TRAINERS_COUNT
 #endif
-
-#endif  // GUARD_CONSTANTS_OPPONENTS_H
 
 // Emerald Champions: Inclement Emerald's Elite Four / Champion rematch ladder is
 // restored in script, but its teams are not authored yet (the user is doing that

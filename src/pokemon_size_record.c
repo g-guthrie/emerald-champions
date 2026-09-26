@@ -176,31 +176,3 @@ void CompareLotadSize(void)
 
     gSpecialVar_Result = CompareMonSize(SPECIES_LOTAD, sizeRecord);
 }
-
-void GetHeracrossSizeRecordInfo(void)
-{
-    u16 *sizeRecord = GetVarPointer(VAR_HERACROSS_SIZE_RECORD);
-
-    GetMonSizeRecordInfo(SPECIES_HERACROSS, sizeRecord);
-}
-
-void CompareHeracrossSize(void)
-{
-    u16 *sizeRecord = GetVarPointer(VAR_HERACROSS_SIZE_RECORD);
-
-    gSpecialVar_Result = CompareMonSize(SPECIES_HERACROSS, sizeRecord);
-}
-
-void GetMagikarpSizeRecordInfo(void)
-{
-    u16 *sizeRecord = GetVarPointer(VAR_MAGIKARP_SIZE_RECORD);
-
-    GetMonSizeRecordInfo(SPECIES_MAGIKARP, sizeRecord);
-}
-
-void CompareMagikarpSize(void)
-{
-    u16 *sizeRecord = GetVarPointer(VAR_MAGIKARP_SIZE_RECORD);
-
-    gSpecialVar_Result = CompareMonSize(SPECIES_MAGIKARP, sizeRecord);
-}

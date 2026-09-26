@@ -23,7 +23,6 @@
 #include "gpu_regs.h"
 #include "constants/game_stat.h"
 #include "trainer_hill.h"
-#include "trainer_tower.h"
 #include "constants/rgb.h"
 
 static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
@@ -518,9 +517,7 @@ static void CB2_ShowTrainerHillRecords(void)
     case 7:
         SetDispcntReg();
         SetVBlankCallback(VblankCB_TrainerHillRecords);
-        if (gSpecialVar_0x8004)
-            PrintTrainerTowerRecords();
-        else
+        if (gSpecialVar_0x8004 == 0)
             PrintOnTrainerHillRecordsWindow();
         CreateTask(Task_TrainerHillWaitForPaletteFade, 8);
         SetMainCallback2(MainCB2_TrainerHillRecords);

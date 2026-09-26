@@ -4,8 +4,6 @@
 #include "global.h"
 #include "constants/regions.h"
 
-enum KantoSubRegion GetKantoSubregion(u32 mapSecId);
-
 static inline enum Region GetRegionForSectionId(u32 sectionId)
 {
     if (sectionId >= KANTO_MAPSEC_START && sectionId < MAPSEC_SPECIAL_AREA)

@@ -114,6 +114,7 @@ gSpecialVars::
 	.4byte gTrainerBattleParameter + 2 // gTrainerBattleParameter.params.opponentA
 
 	.purgem def_special
+	.purgem reserve_specials
 	.set ALLOCATE_SPECIAL_TABLE, 1
 	.include "data/specials.inc"
 
@@ -130,7 +131,6 @@ gStdScripts::
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_MsgboxPokenav           @ MSGBOX_POKENAV
 	.4byte Std_PutItemAway             @ STD_PUT_ITEM_AWAY
-	.4byte Std_ReceivedItem            @ STD_RECEIVED_ITEM
 gStdScripts_End::
 
 
@@ -599,7 +599,6 @@ EventScript_AfterWhiteOutHealMsg::
 
 EventScript_AfterWhiteOutMomHeal::
 	lockall
-	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox gText_HadQuiteAnExperienceTakeRest
@@ -741,7 +740,6 @@ Common_EventScript_BagIsFull::
 	return
 
 EventScript_BagIsFull::
-	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox gText_TooBadBagIsFull
 	release
 	end
@@ -1162,10 +1160,6 @@ EventScript_SetResultTrue::
 
 EventScript_SetResultFalse::
 	setvar VAR_RESULT, FALSE
-	return
-
-EventScript_GetElevatorFloor::
-	special GetElevatorFloor
 	return
 
 @ Unused

@@ -81,7 +81,7 @@
 #define FLDEFF_ROCK_CLIMB_DUST           76
 #define FLDEFF_ORAS_DOWSE                77
 #define FLDEFF_SMILEY_FACE_ICON          78
-#define FLDEFF_HALL_OF_FAME_RECORD_FRLG  79
+// 79 was FireRed/LeafGreen's Hall of Fame record effect; it stays unused so later ids keep their numbers.
 #define FLDEFF_PHOTO_FLASH               80
 #define FLDEFF_OW_ENCOUNTER_SPAWN_ANIM   81
 

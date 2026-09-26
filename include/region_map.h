@@ -10,10 +10,6 @@
 enum RegionMapType
 {
     REGION_MAP_HOENN,
-    REGION_MAP_KANTO,
-    REGION_MAP_SEVII123,
-    REGION_MAP_SEVII45,
-    REGION_MAP_SEVII67
 };
 
 enum

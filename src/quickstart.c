@@ -74,24 +74,14 @@ static inline enum Gender SetQuickstartPlayerGender()
 
 static void CB2_SkipToNewGame(void)
 {
-#if IS_FRLG
-    static const u8 sText_PlayerMale[] = _("Red");
-    static const u8 sText_PlayerFemale[] = _("Leaf");
-    static const u8 sText_Rival[] = _("Blue");
-#else
     static const u8 sText_PlayerMale[] = _("Brendan");
     static const u8 sText_PlayerFemale[] = _("May");
-#endif  // IS_FRLG
 
     if (!UpdatePaletteFade())
     {
         gSaveBlock2Ptr->playerGender = SetQuickstartPlayerGender();
         const u8* textPtr = gSaveBlock2Ptr->playerGender == FEMALE ? sText_PlayerFemale : sText_PlayerMale;
         StringCopy_PlayerName(gSaveBlock2Ptr->playerName, textPtr);
-
-#if IS_FRLG
-        StringCopy_PlayerName(gSaveBlock1Ptr->rivalName, sText_Rival);
-#endif  // IS_FRLG
 
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -124,4 +114,3 @@ void Quickstart(void)
         SetMainCallback2(CB2_SkipToNewGame);
     }
 }
-

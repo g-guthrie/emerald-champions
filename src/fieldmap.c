@@ -16,7 +16,6 @@
 #include "constants/rgb.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
-#include "constants/metatile_behaviors_frlg.h"
 #include "wild_encounter.h"
 
 struct ConnectionFlags
@@ -51,24 +50,6 @@ static bool8 IsCoordInIncomingConnectingMap(s32 coord, s32 srcMax, s32 destMax, 
 
 static inline u16 GetBorderBlockAt(int x, int y)
 {
-    const struct MapLayout *mapLayout = gMapHeader.mapLayout;
-
-    if (mapLayout->isFrlg)
-    {
-        s32 xprime;
-        s32 yprime;
-
-        xprime = x - MAP_OFFSET;
-        xprime += 8 * mapLayout->borderWidth;
-        xprime %= mapLayout->borderWidth;
-
-        yprime = y - MAP_OFFSET;
-        yprime += 8 * mapLayout->borderHeight;
-        yprime %= mapLayout->borderHeight;
-
-        return mapLayout->border[xprime + yprime * mapLayout->borderWidth] | MAPGRID_COLLISION_MASK;
-    }
-
     int i = (x + 1) & 1;
     i += ((y + 1) & 1) * 2;
     return gMapHeader.mapLayout->border[i] | MAPGRID_IMPASSABLE;
@@ -81,28 +62,6 @@ static inline u16 GetBorderBlockAt(int x, int y)
 // Masks/shifts for metatile attributes
 // This is the format of the data stored in each data/tilesets/*/*/metatile_attributes.bin file
 static const u32 sMetatileAttrMasks[METATILE_ATTRIBUTE_COUNT] = {
-    [METATILE_ATTRIBUTE_BEHAVIOR]       = METATILE_ATTR_BEHAVIOR_MASK_FRLG, // Bits 0-8
-    [METATILE_ATTRIBUTE_TERRAIN]        = 0x00003e00, // Bits 9-13
-    [METATILE_ATTRIBUTE_2]              = 0x0003c000, // Bits 14-17
-    [METATILE_ATTRIBUTE_3]              = 0x00fc0000, // Bits 18-23
-    [METATILE_ATTRIBUTE_ENCOUNTER_TYPE] = 0x07000000, // Bits 24-26
-    [METATILE_ATTRIBUTE_5]              = 0x18000000, // Bits 27-28
-    [METATILE_ATTRIBUTE_LAYER_TYPE]     = METATILE_ATTR_LAYER_MASK_FRLG, // Bits 29-30
-    [METATILE_ATTRIBUTE_7]              = 0x80000000  // Bit  31
-};
-
-static const u8 sMetatileAttrShifts[METATILE_ATTRIBUTE_COUNT] = {
-    [METATILE_ATTRIBUTE_BEHAVIOR]       = METATILE_ATTR_BEHAVIOR_SHIFT_FRLG,
-    [METATILE_ATTRIBUTE_TERRAIN]        = 9,
-    [METATILE_ATTRIBUTE_2]              = 14,
-    [METATILE_ATTRIBUTE_3]              = 18,
-    [METATILE_ATTRIBUTE_ENCOUNTER_TYPE] = 24,
-    [METATILE_ATTRIBUTE_5]              = 27,
-    [METATILE_ATTRIBUTE_LAYER_TYPE]     = METATILE_ATTR_LAYER_SHIFT_FRLG,
-    [METATILE_ATTRIBUTE_7]              = 31
-};
-
-static const u32 sMetatileAttrMasksEmerald[METATILE_ATTRIBUTE_COUNT] = {
 
     [METATILE_ATTRIBUTE_BEHAVIOR]       = METATILE_ATTR_BEHAVIOR_MASK,
     [METATILE_ATTRIBUTE_TERRAIN]        = 0xFFFFFFFF,
@@ -114,7 +73,7 @@ static const u32 sMetatileAttrMasksEmerald[METATILE_ATTRIBUTE_COUNT] = {
     [METATILE_ATTRIBUTE_7]              = 0xFFFFFFFF
 };
 
-static const u8 sMetatileAttrShiftsEmerald[METATILE_ATTRIBUTE_COUNT] = {
+static const u8 sMetatileAttrShifts[METATILE_ATTRIBUTE_COUNT] = {
 
     [METATILE_ATTRIBUTE_BEHAVIOR]       = METATILE_ATTR_BEHAVIOR_SHIFT,
     [METATILE_ATTRIBUTE_TERRAIN]        = 0,
@@ -408,17 +367,17 @@ u8 MapGridGetCollisionAt(s32 x, s32 y)
 
 u32 GetNumTilesInPrimary(struct MapLayout const *mapLayout)
 {
-    return mapLayout->isFrlg ? NUM_TILES_IN_PRIMARY_FRLG : NUM_TILES_IN_PRIMARY;
+    return NUM_TILES_IN_PRIMARY;
 }
 
 u32 GetNumMetatilesInPrimary(struct MapLayout const *mapLayout)
 {
-    return mapLayout->isFrlg ? NUM_METATILES_IN_PRIMARY_FRLG : NUM_METATILES_IN_PRIMARY;
+    return NUM_METATILES_IN_PRIMARY;
 }
 
 u32 GetNumPalsInPrimary(struct MapLayout const *mapLayout)
 {
-    return mapLayout->isFrlg ? NUM_PALS_IN_PRIMARY_FRLG : NUM_PALS_IN_PRIMARY;
+    return NUM_PALS_IN_PRIMARY;
 }
 
 u32 MapGridGetMetatileIdAt(s32 x, s32 y)
@@ -434,7 +393,7 @@ u32 MapGridGetMetatileIdAt(s32 x, s32 y)
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attributeType)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
-    return GetAttributeByMetatileIdAndMapLayout(metatileId, attributeType, gMapHeader.mapLayout->isFrlg);
+    return GetAttributeByMetatileIdAndMapLayout(metatileId, attributeType);
 }
 
 u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
@@ -465,45 +424,17 @@ void MapGridSetMetatileEntryAt(s32 x, s32 y, u16 metatile)
     }
 }
 
-u32 ExtractMetatileAttribute(u32 attributes, u8 attributeType, bool32 isFrlg)
+u32 ExtractMetatileAttribute(u32 attributes, u8 attributeType)
 {
     if (attributeType >= METATILE_ATTRIBUTE_COUNT) // Check for METATILE_ATTRIBUTES_ALL
         return attributes;
 
-    if (isFrlg)
-        return (attributes & sMetatileAttrMasks[attributeType]) >> sMetatileAttrShifts[attributeType];
-
-    return (attributes & sMetatileAttrMasksEmerald[attributeType]) >> sMetatileAttrShiftsEmerald[attributeType];
+    return (attributes & sMetatileAttrMasks[attributeType]) >> sMetatileAttrShifts[attributeType];
 }
 
-static u32 GetAttributeByMetatileIdAndMapLayoutFrlg(u16 metatile, u8 attributeType)
+u32 GetAttributeByMetatileIdAndMapLayout(u16 metatile, u8 attributeType)
 {
     u32 attribute;
-    if (metatile < GetNumMetatilesInPrimary(gMapHeader.mapLayout))
-    {
-        const u32 *attributes = (const u32*)gMapHeader.mapLayout->primaryTileset->metatileAttributes;
-        attribute = attributes[metatile];
-    }
-    else if (metatile < NUM_METATILES_TOTAL)
-    {
-        const u32 *attributes = (const u32*) gMapHeader.mapLayout->secondaryTileset->metatileAttributes;
-        metatile -= GetNumMetatilesInPrimary(gMapHeader.mapLayout);
-        attribute = attributes[metatile];
-    }
-    else
-    {
-        return MB_INVALID;
-    }
-
-    return ExtractMetatileAttribute(attribute, attributeType, TRUE);
-}
-
-u32 GetAttributeByMetatileIdAndMapLayout(u16 metatile, u8 attributeType, bool32 isFrlg)
-{
-    u32 attribute;
-
-    if (isFrlg)
-        return GetAttributeByMetatileIdAndMapLayoutFrlg(metatile, attributeType);
 
     if (metatile < GetNumMetatilesInPrimary(gMapHeader.mapLayout))
     {
@@ -521,7 +452,7 @@ u32 GetAttributeByMetatileIdAndMapLayout(u16 metatile, u8 attributeType, bool32 
         return MB_INVALID;
     }
 
-    return ExtractMetatileAttribute(attribute, attributeType, FALSE);
+    return ExtractMetatileAttribute(attribute, attributeType);
 }
 
 void SaveMapView(void)

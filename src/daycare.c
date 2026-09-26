@@ -1000,11 +1000,6 @@ static void _IncrementDaycareSteps(struct DayCare *daycare)
 
 void IncrementDaycareSteps(void)
 {
-#if IS_FRLG
-    if (GetBoxMonData(&gSaveBlock1Ptr->route5DayCareMon.mon, MON_DATA_SANITY_HAS_SPECIES))
-        gSaveBlock1Ptr->route5DayCareMon.steps++;
-#endif
-
     _IncrementDaycareSteps(&gSaveBlock1Ptr->daycare);
 }
 
@@ -1431,50 +1426,3 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
 }
 
 // Route 5 Daycare
-
-void PutMonInRoute5Daycare(void)
-{
-#if IS_FRLG
-    u8 monIdx = GetCursorSelectionMonId();
-    StorePokemonInDaycare(&gParties[B_TRAINER_PLAYER][monIdx], &gSaveBlock1Ptr->route5DayCareMon);
-#endif
-}
-
-void GetCostToWithdrawRoute5DaycareMon(void)
-{
-#if IS_FRLG
-    GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->route5DayCareMon);
-    u16 cost = 0;
-#else
-    u16 cost = 100;
-#endif
-    gSpecialVar_0x8005 = cost;
-}
-
-bool8 IsThereMonInRoute5Daycare(void)
-{
-#if IS_FRLG
-    if (GetBoxMonData(&gSaveBlock1Ptr->route5DayCareMon.mon, MON_DATA_SPECIES) != SPECIES_NONE)
-        return TRUE;
-#endif
-
-    return FALSE;
-}
-
-u8 GetNumLevelsGainedForRoute5DaycareMon(void)
-{
-#if IS_FRLG
-    return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->route5DayCareMon);
-#else
-    return 0;
-#endif
-}
-
-u16 TakePokemonFromRoute5Daycare(void)
-{
-#if IS_FRLG
-    return TakeSelectedPokemonFromDaycare(&gSaveBlock1Ptr->route5DayCareMon);
-#else
-    return SPECIES_NONE;
-#endif
-}

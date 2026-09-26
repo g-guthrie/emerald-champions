@@ -112,7 +112,7 @@ void BufferEmeraldChampionsRivalBranch(void)
 
 bool32 IsEmeraldChampionsBirchRescueBattle(void)
 {
-    return !IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    return (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         && VarGet(VAR_EC_OPENING_STATE) == EC_OPENING_PAIR_GRANTED;
 }
 

@@ -356,9 +356,7 @@ enum Species GetStarterPokemonForGeneration(u16 chosenStarterId, u16 starterGene
 {
     if (chosenStarterId >= STARTER_MON_COUNT)
         chosenStarterId = 0;
-    if (IS_FRLG)
-        starterGeneration = 1;
-    else if (starterGeneration >= ARRAY_COUNT(sStarterMons))
+    if (starterGeneration >= ARRAY_COUNT(sStarterMons))
         starterGeneration = 0;
     return sStarterMons[starterGeneration][chosenStarterId];
 }

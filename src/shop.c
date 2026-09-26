@@ -48,7 +48,7 @@
 
 #define MAX_ITEMS_SHOWN 8
 #define SHOP_ITEM_NAME_WIDTH_WITH_PRICE    84
-#define SHOP_MENU_PALETTE_ID (gMapHeader.mapLayout->isFrlg ? 11 : 12)
+#define SHOP_MENU_PALETTE_ID 12
 
 enum {
     WIN_BUY_SELL_QUIT,

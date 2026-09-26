@@ -24,8 +24,6 @@
 #include "event_data.h"
 #include "random.h"
 
-#if !IS_FRLG
-
 #define COLOR_DARK_GREEN RGB(7, 11, 6)
 #define COLOR_LIGHT_GREEN RGB(13, 20, 12)
 
@@ -1642,5 +1640,3 @@ u32 Test_DetermineCreditsMons(u16 *output, u32 capacity)
     return count;
 }
 #endif
-
-#endif // !IS_FRLG

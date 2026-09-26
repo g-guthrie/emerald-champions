@@ -238,7 +238,7 @@ TEST("Finale: cruise steps and route boundaries progress in both directions")
 
 TEST("Finale: Birth Island puzzle steps never wrap a long route back into a valid one")
 {
-    static const u16 maps[] = {MAP_BIRTH_ISLAND_EXTERIOR, MAP_BIRTH_ISLAND_EXTERIOR_FRLG};
+    static const u16 maps[] = {MAP_BIRTH_ISLAND_EXTERIOR};
     struct WarpData oldLocation = gSaveBlock1Ptr->location;
     u16 oldSteps = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
     for (u32 i = 0; i < ARRAY_COUNT(maps); i++)
