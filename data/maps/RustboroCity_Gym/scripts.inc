@@ -155,9 +155,13 @@ Rustboro_Gym_Guide_Trigger4::
 
 Rustboro_Gym_Guide_Speech::
 	msgbox RustboroCity_Gym_Text_Tips, MSGBOX_DEFAULT
-	giveitem ITEM_FRESH_WATER, 5
-	compare VAR_RESULT, FALSE
-	goto_if_eq Rustboro_Gym_Guide_BagFull
+	@ Both Gems must fit before either is given (the check takes any item pair).
+	setvar VAR_0x8004, ITEM_GRASS_GEM
+	setvar VAR_0x8005, ITEM_STEEL_GEM
+	specialvar VAR_RESULT, CanReceiveBerryPair
+	goto_if_eq VAR_RESULT, FALSE, Rustboro_Gym_Guide_BagFull
+	giveitem ITEM_GRASS_GEM
+	giveitem ITEM_STEEL_GEM
 	setvar VAR_RUSTBORO_CITY_STATE, 1
 	goto Rustboro_Gym_Guide_FinishSpeech
 
@@ -274,15 +278,16 @@ RustboroCity_Gym_Text_Tips::
 	.string "of Rock-type Pokémon.\p"
 	.string "She has a full team of six, with good\n"
 	.string "type variety.\p"
-	.string "Her Pokémon are a few levels above\n"
-	.string "what yours can reach for now, so\l"
-	.string "train yours as high as they'll go!\p"
+	.string "Her Pokémon won't be much above\n"
+	.string "your level cap, so bring your team\l"
+	.string "up to it with your Leveler first!\p"
 	.string "Grass and Steel moves hit most of\n"
 	.string "her team hard!\p"
 	.string "Come see me afterwards, if you beat\n"
 	.string "the Gym Leader.\p"
-	.string "Oh, and take these bottles of\n"
-	.string "Fresh Water for your challenge!$"
+	.string "Oh, and take these Gems! A partner\n"
+	.string "holding one boosts a move of that\l"
+	.string "type once in every battle!$"
 
 RustboroCity_Gym_Text_GymGuideAdvice::
 	.string "That's all I've got for now,\n"
