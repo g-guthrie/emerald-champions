@@ -1,0 +1,81 @@
+{
+  "name": "DexNav Route 110 with 3 Badges: search for Raikou",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_SYS_POKEDEX_GET": true,
+      "FLAG_RECEIVED_DEXNAV": true,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": false,
+      "FLAG_BADGE05_GET": false,
+      "FLAG_BADGE06_GET": false,
+      "FLAG_BADGE07_GET": false,
+      "FLAG_BADGE08_GET": false
+    }
+  },
+  "warp": {
+    "map": "Route110",
+    "x": 34,
+    "y": 67,
+    "facing": 1
+  },
+  "steps": [
+    {
+      "press": "START",
+      "frames": 40,
+      "label": "Start menu"
+    },
+    {
+      "press": "DOWN",
+      "frames": 20,
+      "label": "Cursor on DexNav"
+    },
+    {
+      "press": "A",
+      "frames": 160,
+      "label": "DexNav open"
+    },
+    {
+      "press": "RIGHT",
+      "frames": 30,
+      "label": "Right"
+    },
+    {
+      "press": "DOWN",
+      "frames": 40,
+      "label": "Raikou"
+    },
+    {
+      "press": "A",
+      "frames": 90,
+      "label": "A: search for Raikou"
+    },
+    {
+      "frames": 60,
+      "label": "Searching"
+    },
+    {
+      "hold": "A+RIGHT",
+      "frames": 96,
+      "label": "Creep east to search tile"
+    },
+    {
+      "hold": "A+UP",
+      "frames": 32,
+      "label": "Enter Raikou search tile"
+    },
+    {
+      "frames": 450,
+      "label": "Raikou encounter"
+    }
+  ],
+  "expect": {
+    "map": "Route110",
+    "battle": true,
+    "contains_text": "wild Raikou"
+  }
+}

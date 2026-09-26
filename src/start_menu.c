@@ -389,6 +389,9 @@ static void BuildSafariZoneStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
     AddStartMenuAction(MENU_ACTION_POKEDEX);
+    // Shows what lives here; the Safari Zone's own rules leave it unable to search.
+    if (DN_FLAG_DEXNAV_GET != 0 && FlagGet(DN_FLAG_DEXNAV_GET))
+        AddStartMenuAction(MENU_ACTION_DEXNAV);
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -758,14 +761,6 @@ static bool8 HandleStartMenuInput(void)
 
     if (JOY_NEW(A_BUTTON))
     {
-        // A map without wild Pokémon has nothing for the DexNav to show; answer
-        // with the same buzz the DexNav gives an unsearchable slot.
-        if (sCurrentStartMenuActions[sStartMenuCursorPos] == MENU_ACTION_DEXNAV
-          && MapHasNoEncounterData())
-        {
-            PlaySE(SE_FAILURE);
-            return FALSE;
-        }
         PlaySE(SE_SELECT);
         if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
         {

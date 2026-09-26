@@ -63,16 +63,6 @@ bool32 IsWildSlotLive(enum Species species)
     return IsWildSlotSpeciesAcquirable(species) && !IsWeatherAnomalyVisitorSlotInert(species);
 }
 
-// DexNav lists and searches a map's ordinary residents only. Legendary,
-// Mythical, Ultra Beast and Paradox slots keep their authored rarity, so
-// DexNav never targets them, live or not; the live-slot rule still applies.
-bool32 IsDexNavSearchableSpecies(enum Species species)
-{
-    return species != SPECIES_NONE && species < NUM_SPECIES
-        && GetRestrictedPartyClass(species) == RESTRICTED_PARTY_NONE
-        && IsWildSlotLive(species);
-}
-
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, enum Species species, enum WildPokemonArea area);
@@ -896,6 +886,19 @@ void CreateWildMon(enum Species species, u8 level)
     }
 }
 
+// How a wild table slot's Pokémon is made, whatever found it (a step in the
+// grass, a rod, a storm, a DexNav search): Legendary-class and Ultra Beast
+// Pokémon at the cap with their authored or competitive set, the rest at the
+// level given.
+void CreateWildSlotMon(enum Species species, u8 level)
+{
+    bool32 legendary = IsLegendaryEncounterSpecies(species);
+
+    CreateWildMon(species, legendary ? GetLegendaryEncounterLevel(species) : level);
+    if (legendary)
+        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], ITEM_NONE);
+}
+
 #ifdef BUGFIX
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)
 #else
@@ -988,9 +991,7 @@ CREATE:
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
-    CreateWildMon(species, level);
-    if (legendary)
-        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], ITEM_NONE);
+    CreateWildSlotMon(species, level);
     return TRUE;
 }
 
@@ -1009,9 +1010,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
         level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
     UpdateChainFishingStreak();
-    CreateWildMon(wildMonSpecies, level);
-    if (IsLegendaryEncounterSpecies(wildMonSpecies))
-        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], ITEM_NONE);
+    CreateWildSlotMon(wildMonSpecies, level);
     return wildMonSpecies;
 }
 
@@ -1740,9 +1739,4 @@ u32 ChooseHiddenMonIndex(void)
     #else
         return 0xFF;
     #endif
-}
-
-bool32 MapHasNoEncounterData(void)
-{
-    return (GetCurrentMapWildMonHeaderId() == HEADER_NONE);
 }
