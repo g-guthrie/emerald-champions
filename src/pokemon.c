@@ -3527,13 +3527,19 @@ enum Ability GetSpeciesAbilityForOwner(enum Species species, u8 slot, bool32 tra
 
 bool32 FindSpeciesAbilitySlotForOwner(enum Species species, enum Ability ability, bool32 trainerOwned, u32 *slot)
 {
-    for (u32 i = 0; i < NUM_OWNER_ABILITY_SLOTS; i++)
+    for (u32 i = 0; i < NUM_ABILITY_SLOTS; i++)
     {
-        if (GetSpeciesAbilityForOwner(species, i, trainerOwned) == ability)
+        if (GetSpeciesAbility(species, i) == ability)
         {
             *slot = i;
             return TRUE;
         }
+    }
+    // The Inclement slot only ever holds a real Ability, and never for a trainer.
+    if (ability != ABILITY_NONE && GetSpeciesAbilityForOwner(species, ABILITY_SLOT_INCLEMENT, trainerOwned) == ability)
+    {
+        *slot = ABILITY_SLOT_INCLEMENT;
+        return TRUE;
     }
     return FALSE;
 }
