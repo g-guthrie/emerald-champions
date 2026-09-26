@@ -37,7 +37,9 @@ Route104_EventScript_TrySetRivalPos:: @ 81ECC78
 	goto_if_ge Route104_EventScript_DontSetRivalPos
 	goto_if_set FLAG_MET_RIVAL_RUSTBORO, Route104_EventScript_DontSetRivalPos
 	goto_if_unset FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_DontSetRivalPos
-	setobjectxyperm LOCALID_RIVAL, 17, 52
+	@ Where the first meeting leaves her (beside a player on 17,52), so re-entry
+	@ agrees with Continue, which restores her live 16,52.
+	setobjectxyperm LOCALID_RIVAL, 16, 52
 	return
 
 Route104_EventScript_DontSetRivalPos:: @ 81ECC9D
