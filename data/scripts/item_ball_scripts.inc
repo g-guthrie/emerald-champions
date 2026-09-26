@@ -331,8 +331,8 @@ PetalburgCity_EventScript_ItemVenusaurite:: @ 82910C1
 	finditem ITEM_VENUSAURITE
 	end
 
-MauvilleCity_EventScript_ItemXSpeed:: @ 82910CE
-	finditem ITEM_X_SPEED
+MauvilleCity_EventScript_ItemUltraBall:: @ 82910CE
+	finditem ITEM_ULTRA_BALL
 	end
 
 RustboroCity_EventScript_ItemAbilityCapsule:: @ 82910DB
@@ -347,8 +347,8 @@ MossdeepCity_EventScript_ItemMiloticite:: @ 82910F5
 	finditem ITEM_MILOTICITE
 	end
 
-PetalburgWoods_EventScript_ItemXAttack:: @ 8291102
-	finditem ITEM_X_ATTACK
+PetalburgWoods_EventScript_ItemRevive:: @ 8291102
+	finditem ITEM_REVIVE
 	end
 
 PetalburgWoods_EventScript_ItemGreatBall:: @ 829110F

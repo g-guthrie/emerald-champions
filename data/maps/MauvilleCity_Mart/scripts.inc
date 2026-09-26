@@ -38,10 +38,10 @@ MauvilleCity_Mart_EventScript_Man:: @ 8211125
 	end
 
 MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats: @ 821112E
-	.string "There are items that temporarily\n"
-	.string "elevate the stats of Pokémon.\p"
-	.string "The ones I know you use in battle\n"
-	.string "are X Attack and X Defense…\p"
+	.string "There are items that raise the\n"
+	.string "stats of Pokémon for good.\p"
+	.string "The ones I know are Protein\n"
+	.string "and Iron…\p"
 	.string "I do believe that there are others\n"
 	.string "like them.$"
 

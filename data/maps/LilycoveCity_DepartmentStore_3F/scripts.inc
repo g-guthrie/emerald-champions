@@ -23,30 +23,6 @@ LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins: @ 821FC7C
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight:: @ 821FC8C
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters: @ 821FCA4
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_SP_DEF
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_NONE
-	release
-	end
-
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM:: @ 821FCB6
 	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
 	end

@@ -1,30 +1,6 @@
 VerdanturfTown_Mart_MapScripts:: @ 8202586
 	.byte 0
 
-VerdanturfTown_Mart_EventScript_Clerk:: @ 8202587
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart VerdanturfTown_Mart_Pokemart
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-VerdanturfTown_Mart_Pokemart:
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_SP_DEF
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_NONE
-	release
-	end
-
 VerdanturfTown_Mart_EventScript_Boy:: @ 82025BA
 	msgbox VerdanturfTown_Mart_Text_XSpecialIsCrucial, MSGBOX_NPC
 	end
@@ -63,10 +39,10 @@ VerdanturfTown_Mart_Text_HaveTM66:
 	.string "a level, as far as your Badges allow.$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
-	.string "For any Pokémon match, X Sp. Atk\n"
-	.string "is crucial.\p"
+	.string "For any Pokémon match, the right\n"
+	.string "held item is crucial.\p"
 	.string "It jacks up the power of some moves\n"
-	.string "even though it's only for one battle.$"
+	.string "for every battle it's held in.$"
 
 VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent: @ 820264C
 	.string "They don't seem to sell any winning\n"
