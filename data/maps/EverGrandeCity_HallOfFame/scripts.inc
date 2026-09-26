@@ -102,12 +102,17 @@ EverGrandeCity_HallOfFame_EventScript_FinaleInvitation::
 	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
+	@ The Champion's level cap (src/caps.c) is new with this first entry.
+	special GetLevelCapForScriptedGift
+	buffernumberstring STR_VAR_1, VAR_0x800A
 	msgbox EverGrandeCity_HallOfFame_Text_FinaleInvitation, MSGBOX_DEFAULT
 	closemessage
 	return
 
 EverGrandeCity_HallOfFame_Text_FinaleInvitation:
 	.string "Wallace: You are League Champion!\p"
+	.string "As Champion, your Pokémon can now\n"
+	.string "grow up to Lv. {STR_VAR_1}.\p"
 	.string "One final expedition awaits.\n"
 	.string "Wally has prepared a new team\l"
 	.string "at Victory Road's north exit.\p"

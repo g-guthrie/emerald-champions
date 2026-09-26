@@ -87,6 +87,11 @@ void TryGiveSelectedLegendarySignReward(void);
 void CreateEmeraldChampionsStaticLegendaryEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
 void BufferNextCenterLegendaryLead(void);
+void CenterGuideHasStaticLegendaryLead(void);
+#if TESTING
+u32 GetCenterLegendaryLeadCountForTesting(void);
+const u8 *GetCenterLegendaryLeadForTesting(u32 i, enum LegendarySignId *id, u16 *city);
+#endif
 // Heatran in Scorched Slab. ScorchedSlab_HeatransRoom clears
 // FLAG_DEFEATED_HEATRAN (its object's hide flag) when the Magma Stone wakes
 // it and sets it again when the battle ends.

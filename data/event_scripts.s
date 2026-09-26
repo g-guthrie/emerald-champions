@@ -577,36 +577,44 @@ EventScript_WhiteOut::
 	goto EventScript_ResetMrBriney
 	end
 
+@ A Trainer can walk into a Center and white out before ever speaking to
+@ the nurse, so the heal also hands over any tools still missing.
 EventScript_AfterWhiteOutHeal::
 	lockall
 	msgbox gText_FirstShouldRestoreMonsHealth
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-	call_if_unset FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsgPreFirstBoss
-	call_if_set FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsg
+	msgbox gText_MonsHealed
+	call EventScript_PkmnCenterNurse_GiveTools
+	call_if_unset FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealAdvice
+	msgbox gText_WeHopeYouExcel
 	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
 	fadedefaultbgm
 	releaseall
 	end
 
-EventScript_AfterWhiteOutHealMsgPreFirstBoss::
-	msgbox gText_MonsHealedShouldBuyPotions
+EventScript_AfterWhiteOutHealAdvice::
+	msgbox gText_WhiteOutAdvice
 	return
 
-EventScript_AfterWhiteOutHealMsg::
-	msgbox gText_MonsHealed
-	return
-
+@ Before the Oldale nurse, Mom points the way to the tools instead.
 EventScript_AfterWhiteOutMomHeal::
 	lockall
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox gText_HadQuiteAnExperienceTakeRest
 	call Common_EventScript_OutOfCenterPartyHeal
-	msgbox gText_MomExplainHPGetPotions
+	checkitem ITEM_LEVELER, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_AfterWhiteOutMomNoTools
+	msgbox gText_MomWhiteOutAdvice
+EventScript_AfterWhiteOutMomDone:
 	fadedefaultbgm
 	releaseall
 	end
+
+EventScript_AfterWhiteOutMomNoTools:
+	msgbox gText_MomSendToOldaleNurse
+	goto EventScript_AfterWhiteOutMomDone
 
 EventScript_ResetMrBriney::
 	goto_if_eq VAR_BRINEY_LOCATION, 1, EventScript_MoveMrBrineyToHouse
@@ -944,19 +952,18 @@ gText_FirstShouldRestoreMonsHealth::
 	.string "First, you should restore your\n"
 	.string "Pokémon to full health.$"
 
-gText_MonsHealedShouldBuyPotions::
-	.string "Your Pokémon have been healed\n"
-	.string "to perfect health.\p"
-	.string "If your Pokémon's energy, HP,\n"
-	.string "is down, please come see us.\p"
-	.string "If you're planning to go far in the\n"
-	.string "field, you should buy some Potions\l"
-	.string "at the Pokémon Mart.\p"
-	.string "We hope you excel!$"
-
 gText_MonsHealed::
 	.string "Your Pokémon have been healed\n"
-	.string "to perfect health.\p"
+	.string "to perfect health.$"
+
+gText_WhiteOutAdvice::
+	.string "If a battle is too tough, use your\n"
+	.string "Leveler, and ask our Move Tutor\l"
+	.string "for stronger moves.\p"
+	.string "You can also change the Difficulty\n"
+	.string "under Option in the Start menu.$"
+
+gText_WeHopeYouExcel::
 	.string "We hope you excel!$"
 
 gText_HadQuiteAnExperienceTakeRest::
@@ -967,18 +974,26 @@ gText_HadQuiteAnExperienceTakeRest::
 	.string "Maybe you should take a quick\n"
 	.string "rest.$"
 
-gText_MomExplainHPGetPotions::
+gText_MomWhiteOutAdvice::
 	.string "Mom: Oh, good! You and your\n"
 	.string "Pokémon are looking great.\p"
 	.string "I just heard from {STR_VAR_1}.\p"
-	.string "He said that Pokémon's energy is\n"
-	.string "measured in HP.\p"
-	.string "If your Pokémon lose their HP,\n"
-	.string "you can restore them at any\l"
-	.string "Pokémon Center.\p"
-	.string "If you're going to travel far away,\n"
-	.string "the smart Trainer stocks up on\l"
-	.string "Potions at the Pokémon Mart.\p"
+	.string "If a battle is too tough, use your\n"
+	.string "Leveler, and ask the Move Tutor at\l"
+	.string "any Pokémon Center for stronger moves.\p"
+	.string "You can also change the Difficulty\n"
+	.string "under Option in the Start menu.\p"
+	.string "Make me proud, honey!\p"
+	.string "Take care!$"
+
+gText_MomSendToOldaleNurse::
+	.string "Mom: Oh, good! You and your\n"
+	.string "Pokémon are looking great.\p"
+	.string "I just heard from {STR_VAR_1}.\p"
+	.string "The nurse at Oldale's Pokémon\n"
+	.string "Center has a Leveler for you.\p"
+	.string "Battles don't raise levels here,\n"
+	.string "so go and get it!\p"
 	.string "Make me proud, honey!\p"
 	.string "Take care!$"
 

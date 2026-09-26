@@ -10,8 +10,9 @@ OldaleTown_House2_EventScript_Man:: @ 81FBF64
 	end
 
 OldaleTown_House2_Text_PokemonLevelUp: @ 81FBF6D
-	.string "Battling makes Pokémon stronger,\n"
-	.string "as high as your Badges allow.\p"
+	.string "Battles don't make Pokémon stronger\n"
+	.string "here. Your Badges set how high\l"
+	.string "they can grow.\p"
 	.string "The nurse's Leveler can bring your\n"
 	.string "whole party up that high at once!$"
 

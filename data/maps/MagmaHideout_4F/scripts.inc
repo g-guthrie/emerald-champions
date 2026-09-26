@@ -83,6 +83,8 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
 	clearflag FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY
 	setvar VAR_SLATEPORT_CITY_STATE, 1
+	special GetLevelCapForScriptedGift
+	copyvar VAR_0x8008, VAR_0x800A
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setvar VAR_SLATEPORT_HARBOR_STATE, 1
 	fadescreen FADE_TO_BLACK
@@ -94,8 +96,23 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	removeobject LOCALID_EC_COURTNEY_MAGMA_HIDEOUT
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	fadescreen FADE_FROM_BLACK
+	call MagmaHideout_4F_EventScript_AnnounceLevelCap
 	releaseall
 	end
+
+@ The awakening is a level cap milestone (src/caps.c). It raises the cap only
+@ after Winona's Badge, so the line appears only when the cap actually rose.
+MagmaHideout_4F_EventScript_AnnounceLevelCap:
+	special GetLevelCapForScriptedGift
+	goto_if_le VAR_0x800A, VAR_0x8008, Common_EventScript_NopReturn
+	buffernumberstring STR_VAR_1, VAR_0x800A
+	msgbox MagmaHideout_4F_Text_LevelCapRaised, MSGBOX_DEFAULT
+	return
+
+MagmaHideout_4F_Text_LevelCapRaised:
+	.string "Groudon's awakening stirs your\n"
+	.string "Pokémon. They can now grow up\l"
+	.string "to Lv. {STR_VAR_1}!$"
 
 	@msgbox MagmaHideout_4F_Text_MaxieImGoingAfterGroudon, MSGBOX_DEFAULT
 	@closemessage

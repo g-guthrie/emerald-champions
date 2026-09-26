@@ -576,7 +576,7 @@ void GiveEmeraldChampionsStarterBattleItems(void)
 {
     static const enum Item items[] = {
         ITEM_CHOICE_BAND, ITEM_CHOICE_SPECS, ITEM_CHOICE_SCARF,
-        ITEM_FOCUS_SASH, ITEM_EVIOLITE,
+        ITEM_FOCUS_SASH, ITEM_EVIOLITE, ITEM_LEFTOVERS,
     };
 
     if (FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS))
@@ -5554,6 +5554,26 @@ bool8 CheckMagikarpBattle(void)
 void GetLevelCapForScriptedGift(void)
 {
     gSpecialVar_0x800A = GetCurrentLevelCap();
+}
+
+// VAR_RESULT: some party Pokémon (not an Egg) is still below its level cap,
+// so the Leveler has work to do. The Route 103 rival waits until it is used.
+void IsPlayerPartyBelowLevelCap(void)
+{
+    gSpecialVar_Result = FALSE;
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+        if (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(species))
+        {
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
 }
 
 // The same rule under its older name (fossils at Devon, Cosmog at Birch's Lab).

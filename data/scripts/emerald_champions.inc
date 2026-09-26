@@ -275,7 +275,7 @@ EmeraldChampions_Text_EVPlanClearedAll:
 EmeraldChampions_Text_EVPlanDiscard:
 	.string "Discard changes?$"
 
-@ The five held items a competitive set cannot function without are handed over
+@ The six held items a competitive set leans on most are handed over
 @ once, free. Everything else on the clerk's shelves is bought.
 @ A full Bag only postpones the kit; the counter's services stay open.
 EmeraldChampions_EventScript_TryStarterKit::
@@ -346,8 +346,11 @@ EmeraldChampions_EventScript_OpenEvolutionArchive:
 EmeraldChampions_Text_BattleVendorStarterKit:
 	.string "Before you shop, take these.\p"
 	.string "A Choice Band, Choice Specs,\n"
-	.string "a Choice Scarf, a Focus Sash\l"
-	.string "and an Eviolite.\p"
+	.string "a Choice Scarf, a Focus Sash,\l"
+	.string "an Eviolite and Leftovers.\p"
+	.string "Give them to your Pokémon from\n"
+	.string "the Pokémon menu. The Bag is\l"
+	.string "locked in Trainer battles.\p"
 	.string "These will help you get started.\n"
 	.string "The rest you buy like anyone else.$"
 
@@ -582,8 +585,12 @@ EmeraldChampions_EventScript_CenterGuideFinale:
 	call Common_EventScript_FinaleDirections
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
+@ The knockout warning comes once per conversation, before a list that
+@ includes a legend met face to face (a static encounter a knockout loses).
 EmeraldChampions_EventScript_CenterGuideLegends:
 	goto_if_eq VAR_GUIDE_WARNED, TRUE, EmeraldChampions_EventScript_CenterGuideLegendPages
+	special CenterGuideHasStaticLegendaryLead
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterGuideLegendPages
 	setvar VAR_GUIDE_WARNED, TRUE
 	msgbox EmeraldChampions_Text_CenterGuideSaveFirst, MSGBOX_DEFAULT
 EmeraldChampions_EventScript_CenterGuideLegendPages:
@@ -624,7 +631,10 @@ EmeraldChampions_Text_CenterGuideSaveFirst:
 	.string "is one of a kind. If it faints,\l"
 	.string "it's gone for good.\p"
 	.string "Save before you face one. You\n"
-	.string "can always run and try again.$"
+	.string "can always run and try again.\p"
+	.string "Your party can hold one Legendary\n"
+	.string "or Mythical, one Ultra Beast and\l"
+	.string "one Paradox Pokémon at a time.$"
 
 EmeraldChampions_Text_CenterGuideGoodbye:
 	.string "Come back whenever you feel\n"

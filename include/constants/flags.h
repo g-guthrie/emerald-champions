@@ -1697,7 +1697,7 @@
 // Reserved former Circuit lottery-ticket bit; the current lottery uses daily draws.
 #define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
 #define FLAG_EC_TUTOR_MACHINES_LINE_SEEN            (SYSTEM_FLAGS + 0xBB) // Emerald Champions: the Center tutor explained once that machines are gone
-#define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the five opening held items
+#define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the six opening held items
 #define FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
 #define FLAG_EC_FINALE_DEOXYS_RESOLVED              (SYSTEM_FLAGS + 0xBE) // Permanent expedition completion
 #define FLAG_ROUTE111_RIGHT_BREAKABLE_ROCK           0x91F // Persistent rock state; old 0x3B is a live legacy Helix Fossil receipt.

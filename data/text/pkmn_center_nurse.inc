@@ -1,4 +1,5 @@
 gText_EmeraldChampionsFirstCenterVisit::
+	.string "Battles give no experience here.\p"
 	.string "This is your first visit, isn't it?\p"
 	.string "We give every new Trainer five\n"
 	.string "tools for building teams quickly.\p"
@@ -20,12 +21,13 @@ gText_EmeraldChampionsExplainTools::
 	.string "The Poké Vial fully restores your\n"
 	.string "party outside battle. Every Center\l"
 	.string "refills your doses.\p"
-	.string "The Leveler raises your party as\n"
-	.string "high as your Badges allow, anytime.\p"
-	.string "The Move Tutor teaches moves for\n"
-	.string "free and trains EVs for a small fee.\p"
 	.string "Our shop clerk sells held items\n"
 	.string "you've found.$"
+
+gText_EmeraldChampionsLocalGuide::
+	.string "Feeling lost? Our local guide knows\n"
+	.string "where to go next.\l"
+	.string "Every Center has one.$"
 
 gText_EmeraldChampionsGiveMissingFlightBeacon::
 	.string "One more tool for you:\n"
@@ -51,7 +53,7 @@ gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "the Repel Spray!$"
 
 gText_EmeraldChampionsExplainRepelSpray::
-	.string "Mist the air and wild Pokémon keep\n"
+	.string "Your Repel Spray keeps wild Pokémon\n"
 	.string "away for a while. Fishing, Rock\l"
 	.string "Smash and Sweet Scent still work.$"
 
@@ -67,15 +69,27 @@ gText_EmeraldChampionsExplainRegenerator::
 	.string "With the Regenerator, a held Berry\n"
 	.string "your Pokémon eats in battle comes\l"
 	.string "back when the battle ends.\p"
-	.string "You still have to find each Berry.\n"
-	.string "One knocked off, stolen, burned or\l"
-	.string "eaten by a foe is gone for good.$"
+	.string "A Berry swapped away, burned or\n"
+	.string "eaten by a foe is gone for good.\p"
+	.string "Knock Off only takes an item for\n"
+	.string "that battle. Other used-up held\l"
+	.string "items come back afterward.\p"
+	.string "Thief and Covet can steal any\n"
+	.string "held item for good.$"
 
+@ STR_VAR_1 is the live level cap (EventScript_PkmnCenterNurse_ExplainLeveler).
 gText_EmeraldChampionsExplainLeveler::
-	.string "The Leveler raises your whole party\n"
-	.string "as high as your Badges allow.\p"
-	.string "It never runs out, and each new\n"
-	.string "Badge lets your Pokémon grow more.$"
+	.string "Battles give no experience here.\n"
+	.string "Your Leveler raises your whole\l"
+	.string "party to the level cap instead.\p"
+	.string "Right now the cap is Lv. {STR_VAR_1}.\n"
+	.string "Each new Badge raises it.\p"
+	.string "The Leveler also evolves Pokémon\n"
+	.string "that are ready, and it never\l"
+	.string "runs out.\p"
+	.string "Leveling and evolving never change\n"
+	.string "moves. Our Move Tutor teaches new\l"
+	.string "ones for free.$"
 
 gText_WouldYouLikeToRestYourPkmn::
 	.string "Hello, and welcome to\n"

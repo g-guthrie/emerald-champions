@@ -905,6 +905,48 @@ void BufferNextCenterLegendaryLead(void)
     gSpecialVar_Result = FALSE;
 }
 
+// A lead to a one-of-a-kind encounter: a static gate row, or a classic
+// resident met face to face (the islands' lead covers Mew, Lugia, Ho-Oh and
+// Deoxys). Only these can be lost to a knockout.
+static bool32 IsStaticLegendaryLead(u32 i)
+{
+    enum LegendarySignId id = sCenterLegendaryLeads[i].id;
+
+    if (id >= LEGENDARY_SIGN_COUNT)
+        return TRUE;
+    return gLegendaryGates[id].kind == LEGENDARY_KIND_STATIC;
+}
+
+// VAR_RESULT: this Center's Rare Pokémon list includes a static lead, so the
+// guide warns about knockouts before reading it.
+void CenterGuideHasStaticLegendaryLead(void)
+{
+    gSpecialVar_Result = FALSE;
+    for (u32 i = 0; i < ARRAY_COUNT(sCenterLegendaryLeads); i++)
+    {
+        if (sCenterLegendaryLeads[i].city == gMapHeader.regionMapSectionId
+         && IsStaticLegendaryLead(i))
+        {
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+}
+
+#if TESTING
+u32 GetCenterLegendaryLeadCountForTesting(void)
+{
+    return ARRAY_COUNT(sCenterLegendaryLeads);
+}
+
+const u8 *GetCenterLegendaryLeadForTesting(u32 i, enum LegendarySignId *id, u16 *city)
+{
+    *id = sCenterLegendaryLeads[i].id;
+    *city = sCenterLegendaryLeads[i].city;
+    return sCenterLegendaryLeads[i].lead;
+}
+#endif
+
 static bool32 ApplyNonMegaGiftSet(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);

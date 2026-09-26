@@ -103,7 +103,7 @@ static const u8 sText_PlayedPokeFlute[] = _("Played the Poké Flute.");
 static const u8 sText_PokeFluteAwakenedMon[] = _("The Poké Flute awakened sleeping\nPokémon.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_HoneyCantHere[] = _("Honey won't attract Pokémon\nhere.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!\pDoses left: {STR_VAR_1} of {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
@@ -1458,6 +1458,8 @@ static void ItemUseOnFieldCB_PokeVial(u8 taskId)
         HealPokemon(&gParties[B_TRAINER_PLAYER][i]);
 
     VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
+    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_POKE_VIAL_CHARGES), STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_POKE_VIAL_MAX_CHARGES), STR_CONV_MODE_LEFT_ALIGN, 2);
     DisplayItemMessageOnField(taskId, sText_UsedPokeVial, Task_CloseCantUseKeyItemMessage);
 }
 
