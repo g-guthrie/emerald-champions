@@ -344,10 +344,11 @@
 
     [ABILITY_PICKUP] = COMPOUND_STRING(
         "If empty-handed, may collect\n"
-        "another battler's used item\n"
-        "at turn's end. After battle,\n"
-        "has a 1 in 10 chance to find a\n"
-        "level-dependent item."),
+        "a used item each turn. After\n"
+        "battle, has a 1 in 10 chance\n"
+        "to find a level-based item if\n"
+        "empty-handed with no item\n"
+        "due back."),
 
     [ABILITY_TRUANT] = COMPOUND_STRING(
         "It can use a move only every\n"
@@ -1544,10 +1545,11 @@
         "Struggle does not trigger it."),
 
     [ABILITY_BALL_FETCH] = COMPOUND_STRING(
-        "Once per battle, if it holds\n"
-        "no item after a failed catch,\n"
-        "it retrieves a thrown Ball as\n"
-        "its held item."),
+        "Once per battle, retrieves a\n"
+        "failed catch's Ball if it\n"
+        "holds no item and no original\n"
+        "held item is due back after\n"
+        "battle."),
 
     [ABILITY_COTTON_DOWN] = COMPOUND_STRING(
         "When a damaging move hits it,\n"
