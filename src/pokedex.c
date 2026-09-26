@@ -3504,10 +3504,32 @@ void Task_WaitForAreaScreenInput(u8 taskId)
         gTasks[taskId].func = Task_SwitchScreensFromAreaScreen;
 }
 
+// B on the Area, Cry or Size page: back to the list, as from Info, Stats and Evo.
+static void Task_ExitSubScreenToList(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        FreeInfoScreenWindowAndBgBuffers();
+        DestroyTask(taskId);
+    }
+}
+
+static bool32 TryExitSubScreenToList(u8 taskId)
+{
+    if (sPokedexView->screenSwitchState != DEX_SCREEN_SWITCH_TO_LIST)
+        return FALSE;
+    // These pages fade everything but two palettes; black them too before the list loads.
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 16, RGB_BLACK);
+    gTasks[taskId].func = Task_ExitSubScreenToList;
+    return TRUE;
+}
+
 static void Task_SwitchScreensFromAreaScreen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        if (TryExitSubScreenToList(taskId))
+            return;
         if (TrySwitchScreensFromAreaScreen_HGSS(taskId))
             return;
 
@@ -3655,7 +3677,7 @@ void Task_HandleCryScreenInput(u8 taskId)
         {
             BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 0x10, RGB_BLACK);
             m4aMPlayContinue(&gMPlayInfo_BGM);
-            sPokedexView->screenSwitchState = 1;
+            sPokedexView->screenSwitchState = DEX_SCREEN_SWITCH_TO_LIST;
             gTasks[taskId].func = Task_SwitchScreensFromCryScreen;
             PlaySE(SE_PC_OFF);
             return;
@@ -3697,6 +3719,8 @@ static void Task_SwitchScreensFromCryScreen(u8 taskId)
         FreeCryScreen();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
+        if (TryExitSubScreenToList(taskId))
+            return;
         if (TrySwitchScreensFromCryScreen_HGSS(taskId))
             return;
 
@@ -3836,7 +3860,7 @@ void Task_HandleSizeScreenInput(u8 taskId)
     if (JOY_NEW(B_BUTTON))
     {
         BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 0x10, RGB_BLACK);
-        sPokedexView->screenSwitchState = 1;
+        sPokedexView->screenSwitchState = DEX_SCREEN_SWITCH_TO_LIST;
         gTasks[taskId].func = Task_SwitchScreensFromSizeScreen;
         PlaySE(SE_PC_OFF);
     }
@@ -3856,6 +3880,8 @@ static void Task_SwitchScreensFromSizeScreen(u8 taskId)
     {
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         FreeAndDestroyTrainerPicSprite(gTasks[taskId].tTrainerSpriteId);
+        if (TryExitSubScreenToList(taskId))
+            return;
         switch (sPokedexView->screenSwitchState)
         {
         default:
