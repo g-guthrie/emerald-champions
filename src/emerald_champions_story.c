@@ -15,24 +15,6 @@
 #include "constants/opponents.h"
 #include "constants/vars.h"
 
-static const struct EmeraldChampionsBattleSet sRescueSets[] =
-{
-    {
-        .moves = {MOVE_CRUNCH, MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_HELPING_HAND},
-        .item = ITEM_FOCUS_SASH,
-        .nature = NATURE_JOLLY,
-        .ability = ABILITY_INTIMIDATE,
-        .evs = {4, 252, 0, 0, 0, 252},
-    },
-    {
-        .moves = {MOVE_BELLY_DRUM, MOVE_EXTREME_SPEED, MOVE_SEED_BOMB, MOVE_PROTECT},
-        .item = ITEM_SITRUS_BERRY,
-        .nature = NATURE_ADAMANT,
-        .ability = ABILITY_GLUTTONY,
-        .evs = {4, 252, 0, 0, 0, 252},
-    },
-};
-
 static void GetOpeningStarterSet(enum Species species, struct EmeraldChampionsBattleSet *preset)
 {
     const struct EmeraldChampionsBattleSet *base = GetEmeraldChampionsRawBattleSet(species, 0);
@@ -53,14 +35,12 @@ static void GetOpeningStarterSet(enum Species species, struct EmeraldChampionsBa
     }
 }
 
+// The player's pair arrives like any wild Pokémon: its natural moves for
+// level 5 and no held item. (The rival's opening team keeps its authored set.)
 static bool32 CreateOpeningStarter(struct Pokemon *mon, u16 choice)
 {
-    enum Species species = GetStarterPokemon(choice);
-    struct EmeraldChampionsBattleSet preset;
-
-    GetOpeningStarterSet(species, &preset);
-    CreateRandomMonWithIVs(mon, species, 5, MAX_PER_STAT_IVS);
-    return ApplyEmeraldChampionsScriptedSet(mon, &preset) == EC_BATTLE_SET_SUCCESS;
+    CreateRandomMonWithIVs(mon, GetStarterPokemon(choice), 5, MAX_PER_STAT_IVS);
+    return TRUE;
 }
 
 bool32 GiveEmeraldChampionsStarterPair(u16 first, u16 second)
@@ -118,14 +98,12 @@ bool32 IsEmeraldChampionsBirchRescueBattle(void)
 
 void CreateEmeraldChampionsBirchRescueParty(void)
 {
-    static const enum Species sSpecies[] = {SPECIES_MIGHTYENA, SPECIES_ZIGZAGOON};
+    // The wild pair chasing Birch: plain level-2 Pokémon with their natural moves.
+    static const enum Species sSpecies[] = {SPECIES_POOCHYENA, SPECIES_ZIGZAGOON};
 
     ZeroEnemyPartyMons();
     for (u32 i = 0; i < ARRAY_COUNT(sSpecies); i++)
-    {
         CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 2, MAX_PER_STAT_IVS);
-        ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][i], &sRescueSets[i]);
-    }
     gPartiesCount[B_TRAINER_OPPONENT_A] = ARRAY_COUNT(sSpecies);
 }
 

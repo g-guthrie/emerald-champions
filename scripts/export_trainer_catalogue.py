@@ -376,9 +376,7 @@ def main():
     for ref in partnerrefs:w.prose(ref)
     w.line(read('src/data/battle_partners.party'))
     w.prose('Inferred ally plan: Metagross uses Assault Vest bulk and priority; Skarmory supplies Tailwind and Body Press pressure; Aggron attacks with Rock Head Head Smash and an Air Balloon. These are source-based observations, not verified ally behavior.')
-    w.prose('The Birch rescue is a scripted wild double battle, not a trainer ID. For completeness: level-2 Poochyena and Zigzagoon, both 31 IVs, with the exact scripted sets below. It is not part of the 369 combat-party count.')
-    src=read('src/emerald_champions_story.c')
-    w.line(src[src.index('static const struct EmeraldChampionsBattleSet sRescueSets'):src.index('static void GetOpeningStarterSet')])
+    w.prose('The Birch rescue is a scripted wild double battle, not a trainer ID: level-2 Poochyena and Zigzagoon with 31 IVs, their natural level-up moves and no held items. It is not part of the combat-party count.')
     w.heading('7. PROCEDURAL CIRCUIT / TENT / EXHIBITION OPPONENTS')
     w.prose('Locations: live Battle Frontier challenge desks feed the Champions Circuit; Battle Tent challenge desks use the same competition generator at their current Tent cap. Exhibition generation uses its supplied fixed level. Exact entrypoint script references are listed below. Each generated party has six Pokemon, max IVs, generated or explicitly authored EV/nature/item/ability/moves, family/role/dependency constraints and lead ordering. There is no fixed named party per opponent. Every available variant and template is listed below; full generating rules follow to specify fields decided at runtime.')
     for path in sorted([*(ROOT/'data/maps').rglob('scripts.inc'),*(ROOT/'data/scripts').rglob('*.inc')]):

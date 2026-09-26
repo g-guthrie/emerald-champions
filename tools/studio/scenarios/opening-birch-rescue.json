@@ -1,0 +1,83 @@
+{
+  "name": "Opening: choose a pair at Birch's bag, win the rescue, reach the lab",
+  "start": {
+    "chapter": 101
+  },
+  "steps": [
+    {
+      "frames": 90,
+      "label": "Arrive"
+    },
+    {
+      "press": "UP",
+      "frames": 30,
+      "label": "Face bag"
+    },
+    {
+      "press": "A",
+      "frames": 400,
+      "label": "Open bag"
+    },
+    {
+      "press": "A",
+      "frames": 200,
+      "label": "Pick Torchic"
+    },
+    {
+      "press": "A",
+      "frames": 200,
+      "label": "Yes"
+    },
+    {
+      "press": "RIGHT",
+      "frames": 60,
+      "label": "To Mudkip"
+    },
+    {
+      "press": "A",
+      "frames": 200,
+      "label": "Pick Mudkip"
+    },
+    {
+      "press": "A",
+      "frames": 200,
+      "label": "Yes 2"
+    },
+    {
+      "press": "A",
+      "frames": 300,
+      "label": "Confirm pair"
+    },
+    {
+      "tap": "A",
+      "every": 45,
+      "frames": 3000,
+      "until": "battle",
+      "label": "Into battle"
+    },
+    {
+      "frames": 900,
+      "label": "Battle start"
+    },
+    {
+      "tap": "A",
+      "every": 40,
+      "frames": 9000,
+      "label": "Fight"
+    },
+    {
+      "tap": "A",
+      "every": 60,
+      "frames": 3000,
+      "label": "After"
+    },
+    {
+      "frames": 100,
+      "label": "End"
+    }
+  ],
+  "expect": {
+    "map": "LittlerootTown_ProfessorBirchsLab",
+    "battle": false
+  }
+}

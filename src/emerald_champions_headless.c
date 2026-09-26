@@ -1942,6 +1942,18 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     {
         // An explicitly synthetic playground. Battles always resolve natively.
         gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
+        if (gEcHeadlessFixtureParam == 101)
+        {
+            // The real opening: empty party at Birch's bag, before the pair is chosen.
+            VarSet(VAR_ROUTE101_STATE, 2);
+            VarSet(VAR_EC_OPENING_STATE, EC_OPENING_UNSELECTED);
+            FlagClear(FLAG_HIDE_ROUTE_101_ZIGZAGOON);
+            FlagClear(FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE);
+            FlagClear(FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG);
+            FlagClear(FLAG_RESCUED_BIRCH);
+            LoadHeadlessMap(MAP_ROUTE101, 7, 15);
+            return;
+        }
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 14, OTID_STRUCT_PLAYER_ID);
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 14, OTID_STRUCT_PLAYER_ID);
         CalculatePlayerPartyCount();
