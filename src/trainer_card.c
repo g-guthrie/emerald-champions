@@ -72,6 +72,7 @@ struct TrainerCardData
     u8 textMegas[16];
     u8 textCircuitStreak[16];
     u8 textLevelCap[16];
+    u8 backStatRow; // next free row on the back; shown stats stack from the top
     u16 monIconPal[16 * PARTY_SIZE];
     s8 flipBlendY;
     bool8 timeColonNeedDraw;
@@ -140,7 +141,8 @@ static void PrintStickersOnCard(void);
 static void BufferTextsVarsForCardPage2(void);
 static void BufferNameForCardBack(void);
 static void BufferHofDebutTime(void);
-static void PrintStatOnBackOfCard(u8 top, const u8 *str1, u8 *str2, const u8 *color);
+static void PrintStatOnBackOfCard(const u8 *str1, u8 *str2, const u8 *color);
+static void HideUnusedBackStatRows(void);
 static u32 CountPlayerBadges(void);
 static u32 CountLeadersDefeated(void);
 static void BufferChampionsRecord(void);
@@ -947,6 +949,7 @@ static bool8 PrintAllOnCardBack(void)
     switch (sData->printState)
     {
     case 0:
+        sData->backStatRow = 0;
         PrintNameOnCardBack();
         break;
     case 1:
@@ -966,6 +969,9 @@ static bool8 PrintAllOnCardBack(void)
         break;
     case 6:
         PrintStickersOnCard();
+        break;
+    case 7:
+        HideUnusedBackStatRows();
         break;
     default:
         sData->printState = 0;
@@ -1175,10 +1181,13 @@ static void BufferHofDebutTime(void)
     }
 }
 
-static void PrintStatOnBackOfCard(u8 top, const u8 *statName, u8 *stat, const u8 *color)
+// Rows fill from the top in print order, so a stat that isn't shown yet
+// (Circuit streak, Hall of Fame debut) leaves no gap between the others.
+static void PrintStatOnBackOfCard(const u8 *statName, u8 *stat, const u8 *color)
 {
     static const u8 xOffsets[] = {8, 16};
     static const u8 widths[] = {216, 216};
+    u8 top = sData->backStatRow++;
 
     AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, xOffsets[sData->isHoenn], top * 16 + 33, sTrainerCardTextColors, TEXT_SKIP_DRAW, statName);
     AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, widths[sData->isHoenn]), top * 16 + 33, color, TEXT_SKIP_DRAW, stat);
@@ -1239,29 +1248,54 @@ static void BufferChampionsRecord(void)
 
 static void PrintBadgesAndLeadersOnCard(void)
 {
-    PrintStatOnBackOfCard(0, gText_TrainerCardBadges, sData->textBadges, sTrainerCardStatColors);
-    PrintStatOnBackOfCard(1, gText_TrainerCardLeadersDefeated, sData->textLeaders, sTrainerCardStatColors);
+    PrintStatOnBackOfCard(gText_TrainerCardBadges, sData->textBadges, sTrainerCardStatColors);
+    PrintStatOnBackOfCard(gText_TrainerCardLeadersDefeated, sData->textLeaders, sTrainerCardStatColors);
 }
 
 static void PrintMegasAndCircuitOnCard(void)
 {
-    PrintStatOnBackOfCard(2, gText_TrainerCardMegasWitnessed, sData->textMegas, sTrainerCardStatColors);
+    PrintStatOnBackOfCard(gText_TrainerCardMegasWitnessed, sData->textMegas, sTrainerCardStatColors);
     // The Champions Circuit desk (Battle Tower lobby) opens with the Frontier
     // after the Hall of Fame. From then on the row shows, even at 0, so the card
     // points the player to it; before that it appears only if a streak exists.
     if (FlagGet(FLAG_SYS_GAME_CLEAR) || VarGet(VAR_EC_CIRCUIT_BEST_WINS) != 0)
-        PrintStatOnBackOfCard(3, gText_TrainerCardCircuitBestStreak, sData->textCircuitStreak, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(gText_TrainerCardCircuitBestStreak, sData->textCircuitStreak, sTrainerCardStatColors);
 }
 
 static void PrintHofDebutTimeOnCard(void)
 {
     if (sData->hasHofResult)
-        PrintStatOnBackOfCard(4, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
 }
 
 static void PrintLevelCapOnCard(void)
 {
-    PrintStatOnBackOfCard(5, gText_TrainerCardLevelCap, sData->textLevelCap, sTrainerCardStatColors);
+    PrintStatOnBackOfCard(gText_TrainerCardLevelCap, sData->textLevelCap, sTrainerCardStatColors);
+}
+
+// The Hoenn back tilemap draws a bullet on each of its six stat rows (tile rows
+// 5, 7 ... 15, column 2). Rows left empty lose their bullet, keeping the underline.
+#define CARD_BACK_TILEMAP_WIDTH 30
+#define CARD_BACK_FIRST_ROW_Y   5
+#define CARD_BACK_BULLET_X      2
+#define CARD_BACK_STAT_ROWS     6
+#define TILE_CARD_ROW_FILL      0x001
+#define TILE_CARD_ROW_UNDERLINE 0x03D
+
+static void HideUnusedBackStatRows(void)
+{
+    u32 row;
+
+    if (sData->cardType == CARD_TYPE_FRLG)
+        return;
+    for (row = sData->backStatRow; row < CARD_BACK_STAT_ROWS; row++)
+    {
+        u16 *top = &sData->backTilemap[(CARD_BACK_FIRST_ROW_Y + row * 2) * CARD_BACK_TILEMAP_WIDTH + CARD_BACK_BULLET_X];
+        u16 *bottom = top + CARD_BACK_TILEMAP_WIDTH;
+
+        *top = (*top & ~0x3FF) | TILE_CARD_ROW_FILL;
+        *bottom = (*bottom & ~0x3FF) | TILE_CARD_ROW_UNDERLINE;
+    }
 }
 
 static void PrintPokemonIconsOnCard(void)
