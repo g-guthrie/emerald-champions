@@ -455,6 +455,9 @@ static void AddSearchWindow(u8 width)
 #define WINDOW_COL_1        (WINDOW_COL_0 + (GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_WIDTH) * (POKEMON_NAME_LENGTH)))
 #define WINDOW_MOVE_NAME_X  (WINDOW_COL_1 + (GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_WIDTH) * 6))
 #define SEARCH_ARROW_X      (WINDOW_MOVE_NAME_X + 90)
+// Room on the search window's second line: held item, then Ability, then chain.
+#define SEARCH_ITEM_WIDTH    (WINDOW_COL_1 + 16 - WINDOW_COL_0 - 4)
+#define SEARCH_ABILITY_WIDTH (SEARCH_ARROW_X - 16 - (WINDOW_COL_1 + 16) - 4)
 #define SEARCH_ARROW_Y      0
 
 static void AddSearchWindowText(enum Species species, u8 proximity, u8 searchLevel, bool8 hidden)
@@ -493,15 +496,18 @@ static void AddSearchWindowText(enum Species species, u8 proximity, u8 searchLev
         if (searchLevel > 2)
         {
             // ability name
+            // Long names drop to a narrower font rather than run into the chain count.
             StringCopy(gStringVar1, gAbilitiesInfo[GetAbilityBySpecies(species, sDexNavSearchDataPtr->abilityNum)].name);
-            AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_1 + 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar1);
+            AddTextPrinterParameterized3(windowId, GetFontIdToFit(gStringVar1, FONT_SMALL, 0, SEARCH_ABILITY_WIDTH),
+                WINDOW_COL_1 + 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar1);
 
             // item name
             if (sDexNavSearchDataPtr->heldItem)
             {
                 CopyItemName(sDexNavSearchDataPtr->heldItem, gStringVar1);
                 StringExpandPlaceholders(gStringVar4, sText_HeldItem);
-                AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
+                AddTextPrinterParameterized3(windowId, GetFontIdToFit(gStringVar4, FONT_SMALL, 0, SEARCH_ITEM_WIDTH),
+                    WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
             }
         }
     }
@@ -2155,7 +2161,11 @@ static void PrintCurrentSpeciesInfo(void)
     else if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
     {
         if (GetSpeciesAbility(species, 2) != ABILITY_NONE)
-            AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, HA_INFO_Y, sFontColor_Black, 0, gAbilitiesInfo[GetSpeciesAbility(species, 2)].name);
+        {
+            // The info column is 9 tiles wide; about 15 Ability names need the narrower font.
+            const u8 *name = gAbilitiesInfo[GetSpeciesAbility(species, 2)].name;
+            AddTextPrinterParameterized3(WINDOW_INFO, GetFontIdToFit(name, FONT_SMALL, 0, 9 * 8), 0, HA_INFO_Y, sFontColor_Black, 0, name);
+        }
         else
             AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, HA_INFO_Y, sFontColor_Black, 0, gText_None);
     }
