@@ -404,8 +404,9 @@ void SetBattlerData(enum BattlerId battlerId)
         if (recordedAbility != ABILITY_NONE)
             gBattleMons[battlerId].ability = recordedAbility;
         // Check if mon can only have one ability.
-        else if (GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
+        else if ((GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
                 || GetBattlerSpeciesAbility(battlerId, species, 1) == GetBattlerSpeciesAbility(battlerId, species, 0))
+              && GetBattlerSpeciesAbility(battlerId, species, ABILITY_SLOT_INCLEMENT) == ABILITY_NONE)
             gBattleMons[battlerId].ability = GetBattlerSpeciesAbility(battlerId, species, 0);
         // The ability is unknown.
         else
@@ -2522,7 +2523,7 @@ enum Ability AI_DecideKnownAbilityForTurn(enum BattlerId battlerId)
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
         return knownAbility;
 
-    for (u32 abilityIndex = 0; abilityIndex < NUM_ABILITY_SLOTS; abilityIndex++)
+    for (u32 abilityIndex = 0; abilityIndex < NUM_OWNER_ABILITY_SLOTS; abilityIndex++)
     {
         indexAbility = GetBattlerSpeciesAbility(battlerId, gBattleMons[battlerId].species, abilityIndex);
         if (indexAbility != ABILITY_NONE)

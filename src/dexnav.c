@@ -1382,7 +1382,7 @@ static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel)
     }
 
     if (genAbility
-            && GetSpeciesAbilityForOwner(species, 2, FALSE) != ABILITY_NONE
+            && GetSpeciesAbility(species, 2) != ABILITY_NONE
             && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         //Only give hidden ability if Pokemon has been caught before
@@ -1390,11 +1390,8 @@ static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel)
     }
     else
     {
-        //Pick a normal ability of that Pokemon
-        if (GetSpeciesAbilityForOwner(species, 1, FALSE) != ABILITY_NONE)
-            abilityNum = Random() & 1;
-        else
-            abilityNum = 0;
+        //Pick a normal ability of that Pokemon, the Inclement slot included
+        abilityNum = RollNormalAbilitySlot(species, Random());
     }
 
     return abilityNum;

@@ -654,7 +654,7 @@ void InheritAbility(struct Pokemon *egg, struct DayCare *daycare)
     u32 hiddenAbilityPercentChance = (GetConfig(ABILITY_INHERITANCE) == GEN_5) ? 80 : 60;
     if (inheritAbility == 2 && !RandomPercentage(RNG_DAYCARE_ABILITY_INHERITANCE, hiddenAbilityPercentChance))
         return;
-    if (inheritAbility < 2 && !RandomPercentage(RNG_DAYCARE_ABILITY_INHERITANCE, 80))
+    if (inheritAbility != 2 && !RandomPercentage(RNG_DAYCARE_ABILITY_INHERITANCE, 80))
         return;
     SetMonData(egg, MON_DATA_ABILITY_NUM, &inheritAbility);
 }

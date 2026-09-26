@@ -2912,7 +2912,8 @@ static bool32 IsRestrictedAbility(enum BattlerId battler, enum Ability ability)
 {
     return GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 0) == ability
         || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 1) == ability
-        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 2) == ability;
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 2) == ability
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, ABILITY_SLOT_INCLEMENT) == ability;
 }
 
 static bool32 TryDancer(void)

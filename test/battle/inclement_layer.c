@@ -43,17 +43,6 @@ static void GenerateTrainerMon(struct Pokemon *mon, enum Species species, enum A
     GenerateMonFromTrainerMon(mon, &trainerMon, &generator);
 }
 
-TEST("Inclement layer never lowers a base stat")
-{
-    for (enum Species species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
-    {
-        if (!IsSpeciesEnabled(species))
-            continue;
-        for (enum Stat stat = STAT_HP; stat < NUM_STATS; stat++)
-            EXPECT_GE(GetInclementSpeciesBaseStat(species, stat), GetSpeciesBaseStat(species, stat));
-    }
-}
-
 TEST("Inclement layer keeps each Mega's HP equal to its base form's")
 {
     ASSUME(GetInclementSpeciesBaseStat(SPECIES_CAMERUPT, STAT_HP) > GetSpeciesBaseStat(SPECIES_CAMERUPT, STAT_HP));
@@ -82,23 +71,6 @@ TEST("Player Pokemon use Inclement base stats; trainer Pokemon keep the species 
     EXPECT_GT(GetMonData(&player, MON_DATA_MAX_HP), ExpectedStat(&player, STAT_HP, TRUE));
 }
 
-TEST("Player and wild Absol have Keen Edge in slot 1; a trainer's Absol keeps Pressure")
-{
-    struct Pokemon player, trainer;
-    u32 slot = 0;
-
-    CreateMon(&player, SPECIES_ABSOL, 50, 0, OTID_STRUCT_PLAYER_ID);
-    SetMonData(&player, MON_DATA_ABILITY_NUM, &slot);
-    EXPECT_EQ(GetMonAbility(&player), ABILITY_KEEN_EDGE);
-
-    GenerateTrainerMon(&trainer, SPECIES_ABSOL, ABILITY_PRESSURE);
-    EXPECT_EQ(GetMonData(&trainer, MON_DATA_ABILITY_NUM), 0);
-    EXPECT_EQ(GetMonAbility(&trainer), ABILITY_PRESSURE);
-
-    // The Pokedex and gSpeciesInfo keep the species' own Abilities.
-    EXPECT_EQ(GetAbilityBySpecies(SPECIES_ABSOL, 0), ABILITY_PRESSURE);
-}
-
 TEST("Catching a wild Pokemon keeps the Inclement layer")
 {
     struct Pokemon *wild = &gParties[B_TRAINER_OPPONENT_A][0];
@@ -110,6 +82,7 @@ TEST("Catching a wild Pokemon keeps the Inclement layer")
     gBattleTypeFlags = 0;
     // Wild Pokemon are generated with the player's OT, as in CreateWildMon.
     CreateMon(wild, SPECIES_ABSOL, 30, 0, OTID_STRUCT_PLAYER_ID);
+    slot = ABILITY_SLOT_INCLEMENT;
     SetMonData(wild, MON_DATA_ABILITY_NUM, &slot);
     CalculateMonStats(wild);
     MarkTrainerBattlePartiesOwned();
@@ -143,33 +116,6 @@ TEST("A trainer battle marks both opponent parties and the partner party as trai
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP), GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MAX_HP));
     gBattleTypeFlags = 0;
     ZeroPartyMons(gParties[B_TRAINER_PARTNER]);
-}
-
-SINGLE_BATTLE_TEST("Player Absol battles with Keen Edge while a trainer's Absol keeps Pressure")
-{
-    GIVEN {
-        PLAYER(SPECIES_ABSOL);
-        OPPONENT(SPECIES_ABSOL);
-    } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-    } THEN {
-        EXPECT(!IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][0]));
-        EXPECT_EQ(player->ability, ABILITY_KEEN_EDGE);
-        EXPECT_EQ(opponent->ability, ABILITY_PRESSURE);
-    }
-}
-
-WILD_BATTLE_TEST("A wild Absol already has Keen Edge")
-{
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_ABSOL);
-    } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-    } THEN {
-        EXPECT(!IsMonTrainerOwned(&gParties[B_TRAINER_OPPONENT_A][0]));
-        EXPECT_EQ(opponent->ability, ABILITY_KEEN_EDGE);
-    }
 }
 
 SINGLE_BATTLE_TEST("Player and trainer Pokemon of the same species battle with their own base stats")
@@ -228,23 +174,181 @@ SINGLE_BATTLE_TEST("Mega Evolution uses each side's own stats")
     }
 }
 
-SINGLE_BATTLE_TEST("A trainer's Mega Sceptile keeps Lightning Rod while the player's gets Chloroplast")
+
+TEST("Inclement layer uses Inclement's exact line and never lowers base stat total")
+{
+    // Flareon's redistribution comes over whole, including the stats it lowers.
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_FLAREON, STAT_HP), 95);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_FLAREON, STAT_ATK), 130);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_FLAREON, STAT_DEF), 60);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_FLAREON, STAT_SPATK), 65);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_FLAREON, STAT_SPDEF), 65);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_FLAREON, STAT_SPEED), 110);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_GIGALITH, STAT_ATK), 60);
+    EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_GIGALITH, STAT_SPATK), 135);
+    for (enum Species species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        u32 layered = 0, current = 0;
+        if (!IsSpeciesEnabled(species))
+            continue;
+        for (enum Stat stat = STAT_HP; stat < NUM_STATS; stat++)
+        {
+            layered += GetInclementSpeciesBaseStat(species, stat);
+            current += GetSpeciesBaseStat(species, stat);
+        }
+        EXPECT_GE(layered, current);
+    }
+}
+
+TEST("Inclement Abilities are added in slot 3; slots 0-2 keep their meaning for everyone")
+{
+    struct Pokemon player, trainer;
+    u32 slot;
+
+    for (slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
+    {
+        EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, slot, FALSE), GetSpeciesAbility(SPECIES_ABSOL, slot));
+        EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, slot, TRUE), GetSpeciesAbility(SPECIES_ABSOL, slot));
+    }
+    EXPECT_EQ(GetSpeciesAbility(SPECIES_ABSOL, 0), ABILITY_PRESSURE);
+    EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, ABILITY_SLOT_INCLEMENT, FALSE), ABILITY_KEEN_EDGE);
+    EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, ABILITY_SLOT_INCLEMENT, TRUE), ABILITY_NONE);
+    EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_GALLADE, ABILITY_SLOT_INCLEMENT, FALSE), ABILITY_TRACE);
+    EXPECT_EQ(GetSpeciesAbility(SPECIES_GALLADE, 1), ABILITY_SHARPNESS);
+    EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_BANETTE, ABILITY_SLOT_INCLEMENT, FALSE), ABILITY_VENGEANCE);
+    EXPECT_EQ(GetSpeciesAbility(SPECIES_BANETTE, 1), ABILITY_FRISK);
+
+    CreateMon(&player, SPECIES_ABSOL, 50, 0, OTID_STRUCT_PLAYER_ID);
+    slot = ABILITY_SLOT_INCLEMENT;
+    SetMonData(&player, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetMonAbility(&player), ABILITY_KEEN_EDGE);
+
+    // A trainer can never hold the added slot: authoring Pressure picks slot 0,
+    // and a Pokemon that had slot 3 loses it when it becomes trainer-owned.
+    GenerateTrainerMon(&trainer, SPECIES_ABSOL, ABILITY_PRESSURE);
+    EXPECT_EQ(GetMonData(&trainer, MON_DATA_ABILITY_NUM), 0);
+    EXPECT(!FindSpeciesAbilitySlotForOwner(SPECIES_ABSOL, ABILITY_KEEN_EDGE, TRUE, &slot));
+    SetMonTrainerOwned(&player, TRUE);
+    EXPECT_NE(GetMonData(&player, MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
+    EXPECT_NE(GetMonAbility(&player), ABILITY_KEEN_EDGE);
+}
+
+TEST("A species without an Inclement Ability resolves slot 3 as slot 0")
+{
+    struct Pokemon mon;
+    u32 slot = ABILITY_SLOT_INCLEMENT;
+
+    ASSUME(GetInclementExtraAbility(SPECIES_WOBBUFFET) == ABILITY_NONE);
+    CreateMon(&mon, SPECIES_WOBBUFFET, 50, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetMonAbility(&mon), GetSpeciesAbility(SPECIES_WOBBUFFET, 0));
+}
+
+TEST("New Pokemon roll the Inclement slot like a normal slot; the hidden slot is never rolled")
+{
+    ASSUME(GetSpeciesAbility(SPECIES_ABSOL, 1) != ABILITY_NONE);
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_ABSOL, 0), 0);
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_ABSOL, 1), 1);
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_ABSOL, 2), ABILITY_SLOT_INCLEMENT);
+    // Species without an Inclement Ability keep the original personality bit.
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_WOBBUFFET, 5), GetSpeciesAbility(SPECIES_WOBBUFFET, 1) != ABILITY_NONE ? 1 : 0);
+    for (u32 personality = 0; personality < 12; personality++)
+        EXPECT_NE(RollNormalAbilitySlot(SPECIES_GALLADE, personality), 2);
+}
+
+TEST("The party Ability list offers every official Ability plus the Inclement one")
+{
+    struct Pokemon mon;
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+
+    CreateMon(&mon, SPECIES_GALLADE, 50, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(GetMonSelectableAbilitySlots(&mon, slots), 4);
+    EXPECT_EQ(slots[0], 0);
+    EXPECT_EQ(slots[1], 1);
+    EXPECT_EQ(slots[2], ABILITY_SLOT_INCLEMENT);
+    EXPECT_EQ(slots[3], 2);
+    SetMonTrainerOwned(&mon, TRUE);
+    EXPECT_EQ(GetMonSelectableAbilitySlots(&mon, slots), 3);
+}
+
+TEST("Ability Capsule cycles the normal slots, Inclement slot included; Ability Patch toggles hidden")
+{
+    struct Pokemon mon;
+    u32 slot = 0;
+
+    CreateMon(&mon, SPECIES_ABSOL, 50, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), 1);
+    slot = 1;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT);
+    slot = ABILITY_SLOT_INCLEMENT;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), 0);
+    EXPECT_EQ(GetAbilityPatchTargetSlot(&mon), 2);
+    slot = 2;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), NUM_OWNER_ABILITY_SLOTS);
+    EXPECT_EQ(GetAbilityPatchTargetSlot(&mon), 0);
+
+    // With one official normal Ability, the Inclement one makes the Capsule useful.
+    ASSUME(GetSpeciesAbility(SPECIES_GLACEON, 0) != GetSpeciesAbility(SPECIES_GLACEON, 1));
+    CreateMon(&mon, SPECIES_EXEGGUTOR, 50, 0, OTID_STRUCT_PLAYER_ID);
+    ASSUME(GetSpeciesAbility(SPECIES_EXEGGUTOR, 1) == ABILITY_NONE);
+    slot = 0;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT);
+}
+
+SINGLE_BATTLE_TEST("Player Absol battles with Keen Edge in slot 3 while a trainer's Absol keeps Pressure")
 {
     GIVEN {
+        PLAYER(SPECIES_ABSOL) { Ability(ABILITY_KEEN_EDGE); }
+        OPPONENT(SPECIES_ABSOL);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
+        EXPECT_EQ(player->ability, ABILITY_KEEN_EDGE);
+        EXPECT_EQ(opponent->ability, ABILITY_PRESSURE);
+    }
+}
+
+WILD_BATTLE_TEST("A wild Absol can already have Keen Edge")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ABSOL) { Ability(ABILITY_KEEN_EDGE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT(!IsMonTrainerOwned(&gParties[B_TRAINER_OPPONENT_A][0]));
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
+        EXPECT_EQ(opponent->ability, ABILITY_KEEN_EDGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("A trainer's Mega Sceptile keeps Lightning Rod; a player's Chloroplast Sceptile Mega-evolves with Chloroplast")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_OVERGROW; }
+    PARAMETRIZE { ability = ABILITY_CHLOROPLAST; }
+    GIVEN {
         ASSUME(GetSpeciesAbility(SPECIES_SCEPTILE_MEGA, 0) == ABILITY_LIGHTNING_ROD);
-        PLAYER(SPECIES_SCEPTILE) { Item(ITEM_SCEPTILITE); }
+        PLAYER(SPECIES_SCEPTILE) { Ability(ability); Item(ITEM_SCEPTILITE); }
         OPPONENT(SPECIES_SCEPTILE) { Item(ITEM_SCEPTILITE); }
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
     } THEN {
         EXPECT_EQ(player->species, SPECIES_SCEPTILE_MEGA);
         EXPECT_EQ(opponent->species, SPECIES_SCEPTILE_MEGA);
-        EXPECT_EQ(player->ability, ABILITY_CHLOROPLAST);
+        // A Mega keeps its official Ability unless the base Pokemon uses its Inclement slot.
+        EXPECT_EQ(player->ability, ability == ABILITY_CHLOROPLAST ? ABILITY_CHLOROPLAST : ABILITY_LIGHTNING_ROD);
         EXPECT_EQ(opponent->ability, ABILITY_LIGHTNING_ROD);
     }
 }
 
-WILD_BATTLE_TEST("A wild Glaceon reads its Inclement Ability slot")
+WILD_BATTLE_TEST("A wild Glaceon can have Whiteout alongside its official Abilities")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -252,9 +356,8 @@ WILD_BATTLE_TEST("A wild Glaceon reads its Inclement Ability slot")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        EXPECT(!IsMonTrainerOwned(&gParties[B_TRAINER_OPPONENT_A][0]));
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM), 1);
+        EXPECT_EQ(GetSpeciesAbility(SPECIES_GLACEON, 1), ABILITY_ICE_BODY);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
         EXPECT_EQ(opponent->ability, ABILITY_WHITEOUT);
     }
 }
-

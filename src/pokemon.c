@@ -124,14 +124,13 @@ u8 (*const gEnemyPartyCountPtr) = &gPartiesCount[B_TRAINER_OPPONENT_A];
 
 #include "data/abilities.h"
 
-// Inclement layer: Inclement Emerald's base stat buffs and Ability slots,
+// Inclement layer: Inclement Emerald's base stat changes and extra Abilities,
 // read only by Pokemon that are not trainer-owned (see IsMonTrainerOwned).
 struct InclementSpeciesLayer
 {
     bool8 hasBaseStats;
-    bool8 hasAbilities;
     u8 baseStats[NUM_STATS];
-    u16 abilities[NUM_ABILITY_SLOTS];
+    u16 extraAbility; // Offered as ABILITY_SLOT_INCLEMENT.
 };
 
 #include "data/pokemon/inclement_layer.h"
@@ -983,9 +982,11 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
-    value = boxMon->personality & 0x1;
-    //using gen 3-4 ability formula, it was changed in later gens
-    if (GetSpeciesAbilityForOwner(species, 1, FALSE))
+    // Gen 3-4 formula over the normal slots: slot 1 when the species has one,
+    // plus the Inclement slot. The hidden slot stays as rare as before; a
+    // trainer-owned Pokemon never keeps the Inclement slot (SetMonTrainerOwned).
+    value = RollNormalAbilitySlot(species, boxMon->personality);
+    if (value != 0)
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     SetBoxMonIVs(boxMon, MAX_PER_STAT_IVS);
 }
@@ -1487,6 +1488,12 @@ void SetMonTrainerOwned(struct Pokemon *mon, bool32 trainerOwned)
         return;
     mon->box.isTrainerOwned = (trainerOwned != FALSE);
     species = GetMonData(mon, MON_DATA_SPECIES);
+    // Trainer-owned Pokemon can never use the Inclement slot.
+    if (trainerOwned && GetMonData(mon, MON_DATA_ABILITY_NUM) == ABILITY_SLOT_INCLEMENT)
+    {
+        u32 slot = (GetSpeciesAbility(species, 1) != ABILITY_NONE) ? (mon->box.personality & 1) : 0;
+        SetMonData(mon, MON_DATA_ABILITY_NUM, &slot);
+    }
     maxHP = GetMonData(mon, MON_DATA_MAX_HP);
     // Nothing to redo before the first stat calculation or without a layered stat line.
     if (species == SPECIES_NONE || maxHP == 0 || !sInclementLayer[SanitizeSpeciesId(species)].hasBaseStats)
@@ -3348,12 +3355,23 @@ enum Ability GetAbilityBySpecies(enum Species species, u8 abilityNum)
     return GetAbilityBySpeciesForOwner(species, abilityNum, TRUE);
 }
 
+// Slots 0-2 always resolve through gSpeciesInfo exactly as before. Slot 3
+// (ABILITY_SLOT_INCLEMENT) is the species' Inclement extra Ability for a
+// Pokemon that is not trainer-owned; without one it resolves like slot 0.
 enum Ability GetAbilityBySpeciesForOwner(enum Species species, u8 abilityNum, bool32 trainerOwned)
 {
     int i;
 
+    if (abilityNum == ABILITY_SLOT_INCLEMENT && !trainerOwned)
+    {
+        gLastUsedAbility = GetInclementExtraAbility(species);
+        if (gLastUsedAbility != ABILITY_NONE)
+            return gLastUsedAbility;
+        abilityNum = 0;
+    }
+
     if (abilityNum < NUM_ABILITY_SLOTS)
-        gLastUsedAbility = GetSpeciesAbilityForOwner(species, abilityNum, trainerOwned);
+        gLastUsedAbility = GetSpeciesAbility(species, abilityNum);
     else
         gLastUsedAbility = ABILITY_NONE;
 
@@ -3361,13 +3379,13 @@ enum Ability GetAbilityBySpeciesForOwner(enum Species species, u8 abilityNum, bo
     {
         for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
         {
-            gLastUsedAbility = GetSpeciesAbilityForOwner(species, i, trainerOwned);
+            gLastUsedAbility = GetSpeciesAbility(species, i);
         }
     }
 
     for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
     {
-        gLastUsedAbility = GetSpeciesAbilityForOwner(species, i, trainerOwned);
+        gLastUsedAbility = GetSpeciesAbility(species, i);
     }
 
     return gLastUsedAbility;
@@ -3491,19 +3509,25 @@ enum Ability GetSpeciesAbility(enum Species species, u8 slot)
     return gSpeciesInfo[SanitizeSpeciesId(species)].abilities[slot];
 }
 
-// Slot numbers are shared: a Pokemon keeps its ability slot, and only the
-// Ability in that slot differs between gSpeciesInfo and the Inclement layer.
+enum Ability GetInclementExtraAbility(enum Species species)
+{
+    return sInclementLayer[SanitizeSpeciesId(species)].extraAbility;
+}
+
+// The Ability stored in a slot (0-2: gSpeciesInfo; 3: the Inclement extra,
+// which trainer-owned Pokemon never have). ABILITY_NONE when empty.
 enum Ability GetSpeciesAbilityForOwner(enum Species species, u8 slot, bool32 trainerOwned)
 {
-    species = SanitizeSpeciesId(species);
-    if (!trainerOwned && slot < NUM_ABILITY_SLOTS && sInclementLayer[species].hasAbilities)
-        return sInclementLayer[species].abilities[slot];
+    if (slot == ABILITY_SLOT_INCLEMENT)
+        return trainerOwned ? ABILITY_NONE : GetInclementExtraAbility(species);
+    if (slot >= NUM_ABILITY_SLOTS)
+        return ABILITY_NONE;
     return GetSpeciesAbility(species, slot);
 }
 
 bool32 FindSpeciesAbilitySlotForOwner(enum Species species, enum Ability ability, bool32 trainerOwned, u32 *slot)
 {
-    for (u32 i = 0; i < NUM_ABILITY_SLOTS; i++)
+    for (u32 i = 0; i < NUM_OWNER_ABILITY_SLOTS; i++)
     {
         if (GetSpeciesAbilityForOwner(species, i, trainerOwned) == ability)
         {
@@ -3512,6 +3536,101 @@ bool32 FindSpeciesAbilitySlotForOwner(enum Species species, enum Ability ability
         }
     }
     return FALSE;
+}
+
+// Normal (non-hidden) slots a Pokemon may hold, in cycle order: 0, then 1
+// when it names a different Ability, then the Inclement slot.
+static u32 GetNormalAbilitySlots(enum Species species, bool32 trainerOwned, u8 *slots)
+{
+    u32 count = 0;
+    enum Ability first = GetSpeciesAbility(species, 0);
+    enum Ability extraAbility = trainerOwned ? ABILITY_NONE : GetInclementExtraAbility(species);
+
+    slots[count++] = 0;
+    if (GetSpeciesAbility(species, 1) != ABILITY_NONE && GetSpeciesAbility(species, 1) != first)
+        slots[count++] = 1;
+    if (extraAbility != ABILITY_NONE)
+        slots[count++] = ABILITY_SLOT_INCLEMENT;
+    return count;
+}
+
+// Random normal slot for a new Pokemon. Without an Inclement slot this is the
+// original personality bit (slot 1 only when the species has one).
+u32 RollNormalAbilitySlot(enum Species species, u32 personality)
+{
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+    u32 count = 0;
+
+    slots[count++] = 0;
+    if (GetSpeciesAbility(species, 1) != ABILITY_NONE)
+        slots[count++] = 1;
+    if (GetInclementExtraAbility(species) != ABILITY_NONE)
+        slots[count++] = ABILITY_SLOT_INCLEMENT;
+    return slots[personality % count];
+}
+
+// Every distinct Ability a Pokemon may switch to (party menu Ability), in the
+// order normal slots, Inclement slot, hidden slot. Returns the count.
+u32 GetMonSelectableAbilitySlots(struct Pokemon *mon, u8 *slots)
+{
+    static const u8 sOrder[] = {0, 1, ABILITY_SLOT_INCLEMENT, 2};
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    bool32 trainerOwned = IsMonTrainerOwned(mon);
+    enum Ability seen[NUM_OWNER_ABILITY_SLOTS] = {ABILITY_NONE};
+    u32 count = 0;
+
+    for (u32 i = 0; i < ARRAY_COUNT(sOrder); i++)
+    {
+        enum Ability ability = GetSpeciesAbilityForOwner(species, sOrder[i], trainerOwned);
+        bool32 duplicate = FALSE;
+
+        if (ability == ABILITY_NONE)
+            continue;
+        for (u32 j = 0; j < count; j++)
+            duplicate |= seen[j] == ability;
+        if (duplicate)
+            continue;
+        seen[count] = ability;
+        if (slots != NULL)
+            slots[count] = sOrder[i];
+        count++;
+    }
+    return count;
+}
+
+// Ability Capsule: the next normal slot in the cycle (Inclement slot
+// included). NUM_OWNER_ABILITY_SLOTS when it has no effect (a hidden
+// Ability, or only one normal Ability).
+u32 GetAbilityCapsuleTargetSlot(struct Pokemon *mon)
+{
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 current = GetMonData(mon, MON_DATA_ABILITY_NUM);
+    u32 count = GetNormalAbilitySlots(species, IsMonTrainerOwned(mon), slots);
+
+    if (species == SPECIES_NONE || count < 2 || current == 2)
+        return NUM_OWNER_ABILITY_SLOTS;
+    for (u32 i = 0; i < count; i++)
+    {
+        if (slots[i] == current)
+            return slots[(i + 1) % count];
+    }
+    return slots[0];
+}
+
+// Ability Patch: hidden slot to slot 0, any normal slot (Inclement slot
+// included) to the hidden slot. NUM_OWNER_ABILITY_SLOTS when it has no effect.
+u32 GetAbilityPatchTargetSlot(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+    if (species == SPECIES_NONE)
+        return NUM_OWNER_ABILITY_SLOTS;
+    if (GetMonData(mon, MON_DATA_ABILITY_NUM) == 2)
+        return 0;
+    if (GetSpeciesAbility(species, 2) == ABILITY_NONE)
+        return NUM_OWNER_ABILITY_SLOTS;
+    return 2;
 }
 
 u32 GetSpeciesBaseHP(enum Species species)

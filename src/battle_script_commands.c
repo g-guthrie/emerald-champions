@@ -7353,7 +7353,7 @@ static void Cmd_pickup(void)
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
-            ability = GetSpeciesAbilityForOwner(species, GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_ABILITY_NUM), IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][i]));
+            ability = GetAbilityBySpeciesForOwner(species, GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_ABILITY_NUM), IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][i]));
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE

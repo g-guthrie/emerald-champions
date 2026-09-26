@@ -833,10 +833,8 @@ TEST("Emerald Champions exposes named Doubles and Singles sets for every direct 
                     EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), preset->nature);
                     EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), held);
                     EXPECT_NE(GetMonAbility(&mon), ABILITY_NONE);
-                    // Presets name gSpeciesInfo's Ability; a player Pokemon reads that
-                    // slot through the Inclement layer.
                     if (preset->requiredItem == ITEM_NONE && preset->requiredMove == MOVE_NONE)
-                        EXPECT_EQ(GetAbilityBySpecies(species, GetMonData(&mon, MON_DATA_ABILITY_NUM)), preset->ability);
+                        EXPECT_EQ(GetMonAbility(&mon), preset->ability);
                     for (u32 stat = 0; stat < NUM_STATS; stat++)
                     {
                         u32 points = GetMonData(&mon, EC_EV_DATA(stat));
@@ -1544,11 +1542,10 @@ TEST("Emerald Champions imported battle sets remain legal against current data")
              && preset->requiredItem == ITEM_NONE
              && preset->requiredMove == MOVE_NONE)
             {
-                // Compare in gSpeciesInfo's view; the Inclement layer may rename the slot.
-                if (GetAbilityBySpecies(species, GetMonData(&mon, MON_DATA_ABILITY_NUM)) != preset->ability)
+                if (GetMonAbility(&mon) != preset->ability)
                 {
                     Test_MgbaPrintf("preset ability fallback species=%d choice=%d expected=%d actual=%d",
-                                    species, choice, preset->ability, GetAbilityBySpecies(species, GetMonData(&mon, MON_DATA_ABILITY_NUM)));
+                                    species, choice, preset->ability, GetMonAbility(&mon));
                     abilityFallbacks++;
                 }
             }

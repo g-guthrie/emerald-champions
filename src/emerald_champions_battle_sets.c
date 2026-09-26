@@ -388,10 +388,9 @@ static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct Emeral
 
     if (actualAbility == preset->ability)
         return TRUE;
-    // Presets name gSpeciesInfo's Ability and apply its slot; the Pokemon's
-    // own view (the Inclement layer unless trainer-owned) decides that slot's Ability.
-    return FindPresetAbilitySlot(species, preset, &slot)
-        && actualAbility == GetAbilityBySpeciesForOwner(species, slot, IsMonTrainerOwned(mon));
+    return !FindAbilitySlot(species, preset->ability, &slot)
+        && FindPresetAbilitySlot(species, preset, &slot)
+        && actualAbility == GetAbilityBySpecies(species, slot);
 }
 
 const u8 gEmeraldChampionsEvOrder[NUM_STATS] =

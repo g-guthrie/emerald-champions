@@ -7297,7 +7297,7 @@ static bool32 PairMegaForfeitsSpeedBoost(enum BattlerId battler)
         mega = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, ABILITY_SPEED_BOOST);
     if (mega == gBattleMons[battler].species)
         return FALSE;
-    for (u32 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
+    for (u32 slot = 0; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
         if (GetBattlerSpeciesAbility(battler, mega, slot) == ABILITY_SPEED_BOOST)
             return FALSE;
     return TRUE;

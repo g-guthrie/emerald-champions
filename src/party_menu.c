@@ -2981,30 +2981,10 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     }
 }
 
+// Every distinct Ability the Pokemon can hold, the Inclement slot included.
 static u8 CollectSelectableAbilitySlots(struct Pokemon *mon, u8 *slots)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    enum Ability seen[NUM_ABILITY_SLOTS] = {ABILITY_NONE};
-    u8 count = 0;
-
-    for (u8 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
-    {
-        enum Ability ability = GetAbilityBySpeciesForOwner(species, slot, IsMonTrainerOwned(mon));
-        bool32 duplicate = FALSE;
-
-        if (ability == ABILITY_NONE)
-            continue;
-        for (u8 i = 0; i < count; i++)
-            duplicate |= seen[i] == ability;
-        if (!duplicate)
-        {
-            seen[count] = ability;
-            if (slots != NULL)
-                slots[count] = slot;
-            count++;
-        }
-    }
-    return count;
+    return GetMonSelectableAbilitySlots(mon, slots);
 }
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
@@ -5052,9 +5032,8 @@ void Task_AbilityCapsule(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (GetSpeciesAbilityForOwner(tSpecies, 0, IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][tMonId])) == GetSpeciesAbilityForOwner(tSpecies, 1, IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][tMonId]))
-            || GetSpeciesAbilityForOwner(tSpecies, 1, IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][tMonId])) == 0
-            || tAbilityNum > 1
+        // No other normal slot (the Inclement slot counts), or a hidden Ability.
+        if (tAbilityNum >= NUM_OWNER_ABILITY_SLOTS
             || !tSpecies)
         {
             gPartyMenuUseExitCallback = FALSE;
@@ -5125,7 +5104,8 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_SPECIES);
-    tAbilityNum = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM) ^ 1;
+    // Cycles the normal slots: 0, 1, then the Inclement slot.
+    tAbilityNum = GetAbilityCapsuleTargetSlot(&gParties[B_TRAINER_PLAYER][tMonId]);
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityCapsule;
 }
@@ -5138,7 +5118,7 @@ void Task_AbilityPatch(u8 taskId)
     {
     case 0:
         // Can't use.
-        if (GetSpeciesAbilityForOwner(tSpecies, tAbilityNum, IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][tMonId])) == 0
+        if (tAbilityNum >= NUM_OWNER_ABILITY_SLOTS
             || !tSpecies
             )
         {
@@ -5210,10 +5190,8 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
     tState = 0;
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_SPECIES);
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][tMonId], MON_DATA_ABILITY_NUM) == 2)
-        tAbilityNum = 0;
-    else
-        tAbilityNum = 2;
+    // Toggles the hidden slot; any normal slot, the Inclement one included, goes to it.
+    tAbilityNum = GetAbilityPatchTargetSlot(&gParties[B_TRAINER_PLAYER][tMonId]);
     SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
     gTasks[taskId].func = Task_AbilityPatch;
 }
@@ -7166,7 +7144,7 @@ static void ReturnToPartyActionMenu(u8 taskId)
 static void CursorCb_OpenAbilityMenu(u8 taskId)
 {
     struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
-    u8 slots[NUM_ABILITY_SLOTS];
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
     u8 count = CollectSelectableAbilitySlots(mon, slots);
     enum Ability currentAbility = GetMonAbility(mon);
     u8 initialCursor = 0;

@@ -16,7 +16,7 @@ TEST("Ambient cries: Swarm in any non-Egg party slot halves the repeat delay")
             PARAMETRIZE { swarmSlot = slot; egg = isEgg; }
     ZeroPlayerPartyMons();
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        CreateMon(&gParties[B_TRAINER_PLAYER][slot], slot == swarmSlot ? SPECIES_BEEDRILL : SPECIES_RATTATA, 20, 0, OTID_STRUCT_PLAYER_ID);
+        CreateMon(&gParties[B_TRAINER_PLAYER][slot], slot == swarmSlot ? SPECIES_LEDYBA : SPECIES_RATTATA, 20, 0, OTID_STRUCT_PLAYER_ID);
     if (swarmSlot < PARTY_SIZE)
     {
         u32 abilitySlot = 0;
