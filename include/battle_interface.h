@@ -20,12 +20,6 @@ enum
 
 enum
 {
-    HEALTH_BAR,
-    EXP_BAR
-};
-
-enum
-{
     HP_BAR_EMPTY,
     HP_BAR_RED,
     HP_BAR_YELLOW,
@@ -99,7 +93,6 @@ enum
     HEALTHBOX_LEVEL,
     HEALTHBOX_NICK,
     HEALTHBOX_HEALTH_BAR,
-    HEALTHBOX_EXP_BAR,
     HEALTHBOX_UNUSED_7,
     HEALTHBOX_UNUSED_8,
     HEALTHBOX_STATUS_ICON,
@@ -122,7 +115,7 @@ void SwapHpBarsWithHpText(void);
 u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart);
 void HidePartyStatusSummary(enum BattlerId battler);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
-s32 MoveBattleBar(enum BattlerId battler, u8 healthboxSpriteId, u8 whichBar, u8 unused);
+s32 MoveBattleBar(enum BattlerId battler, u8 healthboxSpriteId);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
 bool32 IsAnyAbilityPopUpActive(void);

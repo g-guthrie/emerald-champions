@@ -12,17 +12,9 @@
     F(B_WHITEOUT_MONEY,            whiteoutMoney,           (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(B_LIGHT_BALL_ATTACK_BOOST,   lightBallAttackBoost,    (u32, GEN_COUNT - 1)) \
     F(B_PARALYSIS_CHANCE,          paralysisChance,         (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
-    /* Experience settings */ \
-    F(B_EXP_CATCH,                 expCatch,                (u32, GEN_COUNT - 1)) \
-    F(B_TRAINER_EXP_MULTIPLIER,    trainerExpMultiplier,    (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
-    F(B_SPLIT_EXP,                 splitExp,                (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
-    F(B_SCALED_EXP,                scaledExp,               (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
-    F(B_UNEVOLVED_EXP_MULTIPLIER,  unevolvedExpMultiplier,  (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
-    F(B_LEVEL_UP_NOTIFICATION,     levelUpNotification,     (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     /* Stat settings */ \
     F(B_BADGE_BOOST,               badgeBoost,              (u32, GEN_COUNT - 1)) \
     F(B_FRIENDSHIP_BOOST,          friendshipBoost,         (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
-    F(B_MAX_LEVEL_EV_GAINS,        maxLevelEvGains,         (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(B_RECALCULATE_STATS,         recalculateStats,        (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     /* Damage settings */ \
     F(B_BURN_DAMAGE,               burnDamage,              (u32, GEN_COUNT - 1)) \
@@ -119,7 +111,6 @@
     F(B_TRANSFORM_SUBSTITUTE_FAIL, transformSubstituteFail, (u32, GEN_COUNT - 1)) \
     F(B_TRANSFORM_SHINY,           transformShiny,          (u32, GEN_COUNT - 1)) /* TODO: use in tests */ \
     F(B_TRANSFORM_CATCH_RATE,      transformCatchRewards,   (u32, GEN_COUNT - 1)) \
-    F(B_TRANSFORM_BATTLE_REWARDS,  transformBattleRewards,  (u32, GEN_COUNT - 1)) \
     F(B_TRANSFORM_FORM_CHANGES,    transformFormChanges,    (u32, GEN_COUNT - 1)) \
     F(B_WIDE_GUARD,                wideGuard,               (u32, GEN_COUNT - 1)) \
     F(B_QUICK_GUARD,               quickGuard,              (u32, GEN_COUNT - 1)) \

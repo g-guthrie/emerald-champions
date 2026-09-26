@@ -428,20 +428,6 @@
  *     ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
  * target can only be specified for ANIM_TYPE_MOVE.
  *
- * EXPERIENCE_BAR(battler, [exp: | captureGainedExp:])
- * If exp: is used, causes the test to fail if that amount of
- * experience is not gained, e.g.:
- *     EXPERIENCE_BAR(player, exp: 0);
- * If captureGainedExp: is used, causes the test to fail if
- * the Experience bar does not change, and then writes that change to the
- * pointer, e.g.:
- *     u32 exp;
- *     EXPERIENCE_BAR(player, captureGainedExp: &exp);
- * If none of the above are used, causes the test to fail if the Exp
- * does not change at all.
- * Please note that due to nature of tests, this command
- * is only usable in WILD_BATTLE_TEST and will fail elsewhere.
- *
  * HP_BAR(battler, [damage: | hp: | captureDamage: | captureHP:])
  * If hp: or damage: are used, causes the test to fail if that amount of
  * damage is not dealt, e.g.:
@@ -608,7 +594,6 @@ enum
     QUEUED_ANIMATION_EVENT,
     QUEUED_HP_EVENT,
     QUEUED_SUB_HIT_EVENT,
-    QUEUED_EXP_EVENT,
     QUEUED_MESSAGE_EVENT,
     QUEUED_STATUS_EVENT,
     QUEUED_CATCH_CHANCE_EVENT,
@@ -644,7 +629,6 @@ struct QueuedAnimationEvent
 };
 
 enum { HP_EVENT_NEW_HP, HP_EVENT_DELTA_HP };
-enum { EXP_EVENT_NEW_EXP, EXP_EVENT_DELTA_EXP };
 
 struct QueuedHPEvent
 {
@@ -659,13 +643,6 @@ struct QueuedSubHitEvent
     u32 checkBreak:1;
     u32 breakSub:1;
     u32 address:27;
-};
-
-struct QueuedExpEvent
-{
-    enum BattlerId battlerId:3;
-    u32 type:1;
-    u32 address:28;
 };
 
 struct QueuedMessageEvent
@@ -697,7 +674,6 @@ struct QueuedEvent
         struct QueuedAnimationEvent animation;
         struct QueuedHPEvent hp;
         struct QueuedSubHitEvent subHit;
-        struct QueuedExpEvent exp;
         struct QueuedMessageEvent message;
         struct QueuedStatusEvent status;
         struct QueuedCaptureEvent capture;
@@ -1232,7 +1208,6 @@ void GivePlayerItem(u32 sourceLine, enum Item, u32 quantity);
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })
 #define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define SUB_HIT(battler, ...) QueueSubHit(__LINE__, battler, (struct SubHitEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
-#define EXPERIENCE_BAR(battler, ...) QueueExp(__LINE__, battler, (struct ExpEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define MESSAGE(pattern) QueueMessage(__LINE__, COMPOUND_STRING(pattern))
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
 #define CATCHING_CHANCE(address) QueueCatchingChance(__LINE__, address)
@@ -1306,15 +1281,6 @@ struct SubHitEventContext
     bool8 explicitCaptureDamage;
 };
 
-struct ExpEventContext
-{
-    u8 _;
-    u32 exp;
-    bool8 explicitExp;
-    s32 *captureGainedExp;
-    bool8 explicitCaptureGainedExp;
-};
-
 struct StatusEventContext
 {
     u16 status1;
@@ -1354,7 +1320,6 @@ void QueueAbility(u32 sourceLine, struct BattlePokemon *battler, struct AbilityE
 void QueueAnimation(u32 sourceLine, u32 type, u32 id, struct AnimationEventContext);
 void QueueHP(u32 sourceLine, struct BattlePokemon *battler, struct HPEventContext);
 void QueueSubHit(u32 sourceLine, struct BattlePokemon *battler, struct SubHitEventContext);
-void QueueExp(u32 sourceLine, struct BattlePokemon *battler, struct ExpEventContext);
 void QueueMessage(u32 sourceLine, const u8 *pattern);
 void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEventContext);
 void QueueCatchingChance(u32 sourceLine, u32 *captureAdress);

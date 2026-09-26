@@ -1076,17 +1076,6 @@ void BtlController_EmitHealthBarUpdate(enum BattlerId battler, u32 bufferId, u16
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-void BtlController_EmitExpUpdate(enum BattlerId battler, u32 bufferId, u8 partyId, s32 expPoints)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_EXPUPDATE;
-    gBattleResources->transferBuffer[1] = partyId;
-    gBattleResources->transferBuffer[2] = expPoints;
-    gBattleResources->transferBuffer[3] = (expPoints & 0x0000FF00) >> 8;
-    gBattleResources->transferBuffer[4] = (expPoints & 0x00FF0000) >> 16;
-    gBattleResources->transferBuffer[5] = (expPoints & 0xFF000000) >> 24;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 6);
-}
-
 void BtlController_EmitStatusIconUpdate(enum BattlerId battler, u32 bufferId, u32 status)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_STATUSICONUPDATE;
@@ -2057,7 +2046,7 @@ static void Controller_HandleTrainerSlideBack(enum BattlerId battler)
 
 void Controller_WaitForHealthBar(enum BattlerId battler)
 {
-    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
+    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler]);
     struct Pokemon *mon = GetBattlerMon(battler);
     s32 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
 

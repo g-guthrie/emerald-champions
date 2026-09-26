@@ -584,17 +584,6 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_TRAINER1WINTEXT:
     case STRINGID_TRAINER2WINTEXT:
         break;
-    // Buffer Nickname with prefix to B_BUFF1, " a boosted" to B_BUFF2, "999999" to B_BUFF3
-    case STRINGID_PKMNGAINEDEXP:
-        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, 0);
-        PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_ABOOSTED); // 'gained a boosted'
-        PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, sixDigitNines);
-        break;
-    // Buffer Nickname with prefix to B_BUFF1, "100" to B_BUFF2
-    case STRINGID_PKMNGREWTOLV:
-        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, 0);
-        PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 3, 100);
-        break;
     // Buffer Nickname with prefix to B_BUFF1, move name to B_BUFF2
     case STRINGID_PKMNLEARNEDMOVE:
     case STRINGID_TRYTOLEARNMOVE1:

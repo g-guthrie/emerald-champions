@@ -1399,10 +1399,6 @@ BattleScript_EffectHealBlock::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectHitEscape::
-	jumpiffainted BS_TARGET, FALSE, BattleScript_HitEscapeSwitch
-	setbyte sGIVEEXP_STATE, 0
-	getexp BS_TARGET
-BattleScript_HitEscapeSwitch:
 	call BattleScript_MoveSwitchPursuitRet
 	return
 
@@ -2695,11 +2691,6 @@ BattleScript_FaintBattler::
 	trytrainerslidemsgfirstoff BS_FAINTED
 	return
 
-BattleScript_GiveExp::
-	setbyte sGIVEEXP_STATE, 0
-	getexp BS_TARGET
-	end
-
 BattleScript_HandleFaintedMon::
 	setbyte sSHIFT_SWITCHED, 0
 	checkteamslost BattleScript_HandleFaintedMonMultiple
@@ -2781,7 +2772,6 @@ BattleScript_FaintedMonShiftSwitched:
 	copybyte sSAVED_BATTLER, gBattlerTarget
 	switchineffects BS_ATTACKER
 	switchinevents
-	resetsentmonsvalue
 	copybyte gBattlerTarget, sSAVED_BATTLER
 	goto BattleScript_FaintedMonSendOutNewEnd
 
@@ -3037,45 +3027,6 @@ BattleScript_DoSwitchOut::
 
 BattleScript_Pausex20::
 	pause B_WAIT_TIME_SHORT
-	return
-
-BattleScript_LevelUp::
-	fanfare MUS_LEVEL_UP
-	printstring STRINGID_PKMNGREWTOLV
-	setbyte sLVLBOX_STATE, 0
-	drawlvlupbox
-	handlelearnnewmove BattleScript_LearnedNewMove, BattleScript_LearnMoveReturn, TRUE
-	goto BattleScript_AskToLearnMove
-BattleScript_TryLearnMoveLoop::
-	handlelearnnewmove BattleScript_LearnedNewMove, BattleScript_LearnMoveReturn, FALSE
-BattleScript_AskToLearnMove::
-	buffermovetolearn
-	printstring STRINGID_TRYTOLEARNMOVE1
-	printstring STRINGID_TRYTOLEARNMOVE2
-	printstring STRINGID_TRYTOLEARNMOVE3
-	waitstate
-	setbyte sLEARNMOVE_STATE, 0
-	yesnoboxlearnmove BattleScript_ForgotAndLearnedNewMove
-.if P_ASK_MOVE_CONFIRMATION == TRUE
-	printstring STRINGID_STOPLEARNINGMOVE
-	waitstate
-	setbyte sLEARNMOVE_STATE, 0
-	yesnoboxstoplearningmove BattleScript_AskToLearnMove
-.endif
-	printstring STRINGID_DIDNOTLEARNMOVE
-	goto BattleScript_TryLearnMoveLoop
-BattleScript_ForgotAndLearnedNewMove::
-	printstring STRINGID_123POOF
-	printstring STRINGID_PKMNFORGOTMOVE
-	printstring STRINGID_ANDELLIPSIS
-BattleScript_LearnedNewMove::
-	buffermovetolearn
-	fanfare MUS_LEVEL_UP
-	printstring STRINGID_PKMNLEARNEDMOVE
-	waitmessage B_WAIT_TIME_LONG
-	updatechoicemoveonlvlup
-	goto BattleScript_TryLearnMoveLoop
-BattleScript_LearnMoveReturn::
 	return
 
 BattleScript_WeatherAbilityActivates::

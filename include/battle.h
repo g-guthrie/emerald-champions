@@ -319,19 +319,11 @@ struct BattleCallbacksStack
     u8 size;
 };
 
-struct StatsArray
-{
-    u16 stats[NUM_STATS];
-    u16 level:15;
-    u16 learnMultipleMoves:1;
-};
-
 struct BattleResources
 {
     struct SecretBase *secretBase;
     struct BattleScriptsStack *battleScriptsStack;
     struct BattleCallbacksStack *battleCallbackStack;
-    struct StatsArray *beforeLvlUp;
     u8 bufferA[MAX_BATTLERS_COUNT][0x200];
     u8 bufferB[MAX_BATTLERS_COUNT][0x200];
     u8 transferBuffer[0x100];
@@ -613,16 +605,7 @@ struct BattleStruct
     struct Wish wish[MAX_BATTLERS_COUNT];
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 faintCounter[MAX_BATTLE_TRAINERS]; // Supreme Overload / Last Respects
-    u32 expShareExpValue;
-    u32 expValue;
     u8 weatherDuration;
-    u8 expGettersOrder[PARTY_SIZE]; // First battlers which were sent out, then via exp-share
-    u8 expGetterMonId;
-    u8 expOrderId:3;
-    u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
-    u8 padding0:4;
-    u8 givenExpMons[2]; // Bits for enemy party's Pokémon that gave exp to player's party.
-    u8 expSentInMons; // As bits for player party mons - not including exp share mons.
     u8 wildVictorySong;
     enum Type dynamicMoveType;
     enum BattlerId battlerPreventingSwitchout;
@@ -738,7 +721,6 @@ struct BattleStruct
     struct SleepClause monCausingSleepClause[NUM_BATTLE_SIDES]; // Stores which Pokémon on a given side is causing Sleep Clause to be active as the mon's index in the party
     u8 additionalEffectsCounter:4; // A counter for the additionalEffects applied by the current move in Cmd_setadditionaleffects
     u8 pursuitStoredSwitch:4; // Stored id for the Pursuit target's switch (value between 0 and PARTY_SIZE included)
-    s32 battlerExpReward;
     enum Species prevTurnSpecies[MAX_BATTLERS_COUNT]; // Stores species the AI has in play at start of turn
     s16 passiveHpUpdate[MAX_BATTLERS_COUNT]; // non-move damage and healing
     s16 moveDamage[MAX_BATTLERS_COUNT];
@@ -883,7 +865,7 @@ struct BattleScripting
     s32 unused_0x00;
     s32 unused_0x04;
     u8 multihitString[6];
-    bool8 expOnCatch;
+    u8 unused_0x0e;
     u8 unused2;
     u8 animArg1;
     u8 animArg2;
@@ -896,10 +878,10 @@ struct BattleScripting
     u8 animTargetsHit;
     u8 unused_0x1a;
     u8 unused_0x1b;
-    u8 getexpState;
+    u8 unused_0x1c;
     u8 battleStyle;
-    u8 drawlvlupboxState;
-    u8 learnMoveState;
+    u8 unused_0x1e;
+    u8 unused_0x1f;
     u8 savedBattler;
     u8 reshowMainState;
     u8 reshowHelperState;
@@ -1094,7 +1076,6 @@ extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 extern u16 gBattleWeather;
 extern u16 gIntroSlideFlags;
-extern u8 gSentPokesToOpponent[2];
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern struct BattleScripting gBattleScripting;
 extern struct BattleStruct *gBattleStruct;
@@ -1128,7 +1109,6 @@ extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattleMainFunc)(void);
 extern struct BattleResults gBattleResults;
-extern u8 gLeveledUpInBattle;
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;

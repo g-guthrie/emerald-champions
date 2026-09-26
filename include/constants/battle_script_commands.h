@@ -34,7 +34,7 @@ enum BattleScriptOpcode
     B_SCR_OP_JUMPIFSTAT,
     B_SCR_OP_JUMPIFSTATIGNORECONTRARY,
     B_SCR_OP_JUMPBASEDONTYPE,
-    B_SCR_OP_GETEXP,
+    B_SCR_OP_UNUSED_GETEXP,
     B_SCR_OP_CHECKTEAMSLOST,
     B_SCR_OP_GOTO,
     B_SCR_OP_JUMPIFBYTE,
@@ -83,9 +83,9 @@ enum BattleScriptOpcode
     B_SCR_OP_PLAYFAINTCRY,
     B_SCR_OP_ENDLINKBATTLE,
     B_SCR_OP_RETURNTOBALL,
-    B_SCR_OP_HANDLELEARNNEWMOVE,
-    B_SCR_OP_YESNOBOXLEARNMOVE,
-    B_SCR_OP_YESNOBOXSTOPLEARNINGMOVE,
+    B_SCR_OP_UNUSED_HANDLELEARNNEWMOVE,
+    B_SCR_OP_UNUSED_YESNOBOXLEARNMOVE,
+    B_SCR_OP_UNUSED_YESNOBOXSTOPLEARNINGMOVE,
     B_SCR_OP_HITANIMATION,
     B_SCR_OP_GETMONEYREWARD,
     B_SCR_OP_UPDATEBATTLERMOVES,
@@ -102,12 +102,12 @@ enum BattleScriptOpcode
     B_SCR_OP_SETGRAVITY,
     B_SCR_OP_REMOVEITEM,
     B_SCR_OP_ATKNAMEINBUFF1,
-    B_SCR_OP_DRAWLVLUPBOX,
-    B_SCR_OP_RESETSENTMONSVALUE,
+    B_SCR_OP_UNUSED_DRAWLVLUPBOX,
+    B_SCR_OP_UNUSED_RESETSENTMONSVALUE,
     B_SCR_OP_SETATKTOPLAYER0,
     B_SCR_OP_MAKEVISIBLE,
     B_SCR_OP_RECORDABILITY,
-    B_SCR_OP_BUFFERMOVETOLEARN,
+    B_SCR_OP_UNUSED_BUFFERMOVETOLEARN,
     B_SCR_OP_JUMPIFPLAYERRAN,
     B_SCR_OP_HPTHRESHOLDS,
     B_SCR_OP_HPTHRESHOLDS2,
@@ -266,7 +266,7 @@ enum BattleScriptOpcode
 #define sUNUSED_0x00                 (gBattleScripting + 0x00) // unused_0x00
 #define sUNUSED_0x04                 (gBattleScripting + 0x04) // unused_0x04
 #define sMULTIHIT_STRING             (gBattleScripting + 0x08) // multihitString
-#define sEXP_CATCH                   (gBattleScripting + 0x0E) // expOnCatch
+#define sUNUSED_0x0E                 (gBattleScripting + 0x0E) // unused_0x0e
 #define sUNUSED                      (gBattleScripting + 0x0F) // unused
 #define sB_ANIM_ARG1                 (gBattleScripting + 0x10) // animArg1
 #define sB_ANIM_ARG2                 (gBattleScripting + 0x11) // animArg2
@@ -279,10 +279,10 @@ enum BattleScriptOpcode
 #define sB_ANIM_TARGETS_HIT          (gBattleScripting + 0x19) // animTargetsHit
 #define sUNUSED_0x1A                 (gBattleScripting + 0x1A) // unused_0x1a
 #define sUNUSED_0x1B                 (gBattleScripting + 0x1B) // unused_0x1b
-#define sGIVEEXP_STATE               (gBattleScripting + 0x1C) // getexpState
+#define sUNUSED_0x1C                 (gBattleScripting + 0x1C) // unused_0x1c
 #define sBATTLE_STYLE                (gBattleScripting + 0x1D) // battleStyle
-#define sLVLBOX_STATE                (gBattleScripting + 0x1E) // drawlvlupboxState
-#define sLEARNMOVE_STATE             (gBattleScripting + 0x1F) // learnMoveState
+#define sUNUSED_0x1E                 (gBattleScripting + 0x1E) // unused_0x1e
+#define sUNUSED_0x1F                 (gBattleScripting + 0x1F) // unused_0x1f
 #define sSAVED_BATTLER               (gBattleScripting + 0x20) // savedBattler
 #define sRESHOW_MAIN_STATE           (gBattleScripting + 0x21) // reshowMainState
 #define sRESHOW_HELPER_STATE         (gBattleScripting + 0x22) // reshowHelperState

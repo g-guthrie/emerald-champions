@@ -1284,54 +1284,6 @@ void PrepareStringBattle(enum StringID stringId, enum BattlerId battler)
     MarkBattlerForControllerExec(battler);
 }
 
-void ResetSentPokesToOpponentValue(void)
-{
-    s32 i;
-    u32 bits = 0;
-
-    gSentPokesToOpponent[0] = 0;
-    gSentPokesToOpponent[1] = 0;
-
-    for (i = 0; i < gBattlersCount; i += 2)
-        bits |= 1u << gBattlerPartyIndexes[i];
-
-    for (i = 1; i < gBattlersCount; i += 2)
-        gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
-}
-
-void OpponentSwitchInResetSentPokesToOpponentValue(enum BattlerId battler)
-{
-    s32 i = 0;
-    u32 bits = 0;
-
-    if (!IsOnPlayerSide(battler))
-    {
-        u8 flank = ((battler & BIT_FLANK) >> 1);
-        gSentPokesToOpponent[flank] = 0;
-
-        for (i = 0; i < gBattlersCount; i += 2)
-        {
-            if (!(gAbsentBattlerFlags & (1u << i)))
-                bits |= 1u << gBattlerPartyIndexes[i];
-        }
-        gSentPokesToOpponent[flank] = bits;
-    }
-}
-
-void UpdateSentPokesToOpponentValue(enum BattlerId battler)
-{
-    if (!IsOnPlayerSide(battler))
-    {
-        OpponentSwitchInResetSentPokesToOpponentValue(battler);
-    }
-    else
-    {
-        s32 i;
-        for (i = 1; i < gBattlersCount; i++)
-            gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= 1u << gBattlerPartyIndexes[battler];
-    }
-}
-
 void BattleScriptPush(const u8 *bsPtr)
 {
     assertf(gBattleResources->battleScriptsStack->size < ARRAY_COUNT(gBattleResources->battleScriptsStack->ptr), "attempted to push a battle script, but battleScriptsStack is full!")
@@ -1822,6 +1774,23 @@ bool32 IsAbilityAndRecord(enum BattlerId battler, enum Ability battlerAbility, e
     return TRUE;
 }
 
+// Knocking out the last wild Pokémon starts the victory tune while the
+// player still has a Pokémon standing.
+static void TryPlayWildVictorySong(enum BattlerId faintedBattler)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     && !IsOnPlayerSide(faintedBattler)
+     && !gBattleStruct->wildVictorySong
+     && (gBattleMons[0].hp || (IsDoubleBattle() && gBattleMons[2].hp))
+     && !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+     && (!IsDoubleBattle() || !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))))
+    {
+        BattleStopLowHpSound();
+        PlayBGM(MUS_VICTORY_WILD);
+        gBattleStruct->wildVictorySong++;
+    }
+}
+
 bool32 HandleFaintedMonActions(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
@@ -1840,38 +1809,23 @@ bool32 HandleFaintedMonActions(void)
                     gAbsentBattlerFlags &= ~(1u << i);
             }
             // fall through
-        case FAINTED_ACTIONS_GIVE_EXP:
+        case FAINTED_ACTIONS_SET_ABSENT_FLAGS:
             do
             {
                 gBattlerFainted = gBattlerTarget = gBattleStruct->eventState.faintedActionBattler;
-                if (gBattleMons[gBattlerFainted].hp == 0
-                 && !(gBattleStruct->givenExpMons[GetBattlerTrainer(gBattlerFainted) & BIT_FLANK] & (1u << gBattlerPartyIndexes[gBattlerFainted]))
-                 && !(gAbsentBattlerFlags & (1u << gBattlerFainted)))
+                if (gBattleMons[gBattlerFainted].hp == 0 && !(gAbsentBattlerFlags & (1u << gBattlerFainted)))
                 {
-                    BattleScriptExecute(BattleScript_GiveExp);
-                    gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_SET_ABSENT_FLAGS;
-                    return TRUE;
+                    TryPlayWildVictorySong(gBattlerFainted);
+                    // Don't switch mons until all Pokémon performed their actions or the battle's over.
+                    if (B_FAINT_SWITCH_IN >= GEN_4
+                        && gBattleOutcome == 0
+                        && !NoAliveMonsForEitherParty()
+                        && gCurrentTurnActionNumber != gBattlersCount)
+                        gAbsentBattlerFlags |= 1u << gBattlerFainted;
                 }
             } while (++gBattleStruct->eventState.faintedActionBattler != gBattlersCount);
             gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_WAIT_STATE;
-            break;
-        case FAINTED_ACTIONS_SET_ABSENT_FLAGS:
-            OpponentSwitchInResetSentPokesToOpponentValue(gBattlerFainted);
-            if (++gBattleStruct->eventState.faintedActionBattler == gBattlersCount)
-                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_WAIT_STATE;
-            else
-                gBattleStruct->eventState.faintedAction = FAINTED_ACTIONS_GIVE_EXP;
-            // Don't switch mons until all Pokémon performed their actions or the battle's over.
-            if (B_FAINT_SWITCH_IN >= GEN_4
-                && gBattleOutcome == 0
-                && !NoAliveMonsForEitherParty()
-                && gCurrentTurnActionNumber != gBattlersCount)
-            {
-                gAbsentBattlerFlags |= 1u << gBattlerFainted;
-                if (gBattleStruct->eventState.faintedAction != FAINTED_ACTIONS_GIVE_EXP)
-                    return FALSE;
-            }
-            break;
+            // fall through
         case FAINTED_ACTIONS_WAIT_STATE:
             // Don't switch mons until all Pokémon performed their actions or the battle's over.
             if (B_FAINT_SWITCH_IN >= GEN_4
