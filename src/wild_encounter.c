@@ -58,7 +58,7 @@ static bool8 sGeneratingSecondWildMon = FALSE;
 
 // A table slot can yield its species: Legendary/UB gate and capture rules,
 // plus weather-anomaly visitors, whose own slot waits for the window to close.
-static bool32 IsWildSlotLive(enum Species species)
+bool32 IsWildSlotLive(enum Species species)
 {
     return IsWildSlotSpeciesAcquirable(species) && !IsWeatherAnomalyVisitorSlotInert(species);
 }
@@ -154,12 +154,19 @@ u32 ChooseCutTreeSlotFromRoll(u32 roll)
     return slot;
 }
 
-u8 GetCutTreeEncounterLevelFromRoll(u32 roll)
+void GetCutTreeEncounterLevelRange(u8 *minLevel, u8 *maxLevel)
 {
     u32 cap = GetCurrentLevelCap();
-    u32 low = cap > CUT_TREE_LEVELS_BELOW_CAP_MAX ? cap - CUT_TREE_LEVELS_BELOW_CAP_MAX : 1;
-    u32 high = cap > CUT_TREE_LEVELS_BELOW_CAP_MIN ? cap - CUT_TREE_LEVELS_BELOW_CAP_MIN : 1;
 
+    *minLevel = cap > CUT_TREE_LEVELS_BELOW_CAP_MAX ? cap - CUT_TREE_LEVELS_BELOW_CAP_MAX : 1;
+    *maxLevel = cap > CUT_TREE_LEVELS_BELOW_CAP_MIN ? cap - CUT_TREE_LEVELS_BELOW_CAP_MIN : 1;
+}
+
+u8 GetCutTreeEncounterLevelFromRoll(u32 roll)
+{
+    u8 low, high;
+
+    GetCutTreeEncounterLevelRange(&low, &high);
     return low + roll % (high - low + 1);
 }
 
@@ -220,6 +227,22 @@ static u16 GetFeebasFishingSpotId(s16 targetX, s16 targetY, u8 section)
     return spotId + 1;
 }
 
+// A cast from one of Feebas's hidden spots hooks it this often, with any rod.
+#define FEEBAS_SPOT_BITE_PERCENT 50
+
+bool32 MapHasFeebasSpots(u8 mapGroup, u8 mapNum)
+{
+    return mapGroup == MAP_GROUP(MAP_ROUTE119) && mapNum == MAP_NUM(MAP_ROUTE119);
+}
+
+// Feebas keeps its own rarity: the chance that a cast from a random Route 119
+// fishing spot hooks it (its hidden spots among every fishing spot, times its
+// bite chance there), in hundredths of a percent.
+u32 GetFeebasSpotShare(void)
+{
+    return NUM_FEEBAS_SPOTS * FEEBAS_SPOT_BITE_PERCENT * 100 / NUM_FISHING_SPOTS;
+}
+
 bool8 CheckFeebasAtCoords(s16 x, s16 y)
 {
     u8 i;
@@ -227,8 +250,7 @@ bool8 CheckFeebasAtCoords(s16 x, s16 y)
     u8 route119Section = 0;
     u16 spotId;
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE119))
+    if (MapHasFeebasSpots(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
     {
         x -= MAP_OFFSET;
         y -= MAP_OFFSET;
@@ -241,8 +263,8 @@ bool8 CheckFeebasAtCoords(s16 x, s16 y)
         if (y >= sRoute119WaterTileData[3 * 2 + 0] && y <= sRoute119WaterTileData[3 * 2 + 1])
             route119Section = 2;
 
-        // 50% chance of encountering Feebas (assuming this is a Feebas spot)
-        if (Random() % 100 > 49)
+        // Chance of encountering Feebas (assuming this is a Feebas spot)
+        if (Random() % 100 >= FEEBAS_SPOT_BITE_PERCENT)
             return FALSE;
 
         FeebasSeedRng(gSaveBlock1Ptr->dewfordTrends[0].rand);
@@ -308,10 +330,100 @@ static const u8 sHoneyEncounterBounds[] = {
     ENCOUNTER_CHANCE_HONEY_MONS_SLOT_2, ENCOUNTER_CHANCE_HONEY_MONS_SLOT_3,
     ENCOUNTER_CHANCE_HONEY_MONS_SLOT_4, ENCOUNTER_CHANCE_HONEY_MONS_SLOT_5,
 };
+// Each rod's cumulative odds restart at its first slot.
+static const u8 sFishingEncounterBounds[] = {
+    ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0, ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
+    ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
+    ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4,
+    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
+    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
+    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9,
+};
+static const u8 sRodFirstSlot[] = {[OLD_ROD] = 0, [GOOD_ROD] = 2, [SUPER_ROD] = 5};
+static const u8 sRodSlotCount[] = {[OLD_ROD] = 2, [GOOD_ROD] = 3, [SUPER_ROD] = 5};
 
 static const u8 *GetEncounterBounds(const struct WildPokemonInfo *info, const u8 *defaults)
 {
     return info != NULL && info->encounterBounds != NULL ? info->encounterBounds : defaults;
+}
+
+// A method's cumulative odds (the table's own, or the method defaults) and
+// its slot count. Hidden (DexNav) tables have no draw odds.
+static const u8 *GetWildAreaBounds(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 *count)
+{
+    switch (area)
+    {
+    case WILD_AREA_LAND:
+        *count = ARRAY_COUNT(sLandEncounterBounds);
+        return GetEncounterBounds(info, sLandEncounterBounds);
+    case WILD_AREA_WATER:
+        *count = ARRAY_COUNT(sWaterEncounterBounds);
+        return GetEncounterBounds(info, sWaterEncounterBounds);
+    case WILD_AREA_ROCKS:
+        *count = ARRAY_COUNT(sRockEncounterBounds);
+        return GetEncounterBounds(info, sRockEncounterBounds);
+    case WILD_AREA_HONEY:
+        *count = ARRAY_COUNT(sHoneyEncounterBounds);
+        return GetEncounterBounds(info, sHoneyEncounterBounds);
+    case WILD_AREA_FISHING:
+        *count = ARRAY_COUNT(sFishingEncounterBounds);
+        return GetEncounterBounds(info, sFishingEncounterBounds);
+    default:
+        *count = 0;
+        return NULL;
+    }
+}
+
+static u32 GetRodOfFishingSlot(u32 slot)
+{
+    return slot < sRodFirstSlot[GOOD_ROD] ? OLD_ROD : slot < sRodFirstSlot[SUPER_ROD] ? GOOD_ROD : SUPER_ROD;
+}
+
+// Where a draw that lands on `slot` ends up. A slot whose species cannot be
+// met right now (IsWildSlotLive: a gated or caught legend, or a weather
+// visitor's own slot) is inert and hands its draw to the next live slot of
+// the same table; a rod looks through its own slots first, then the whole
+// fishing table. WILD_SLOT_NONE: nothing in the table can be met. A rod
+// always hooks something, so a fishing table of inert slots keeps the drawn
+// one (fishing tables hold no legends: scripts/verify_wild_distribution.py).
+// The engine's slot choice and the wild roster both go through here.
+u32 GetLiveWildSlot(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 slot)
+{
+    const struct WildPokemon *mons = info->wildPokemon;
+    u32 count;
+
+    if (IsWildSlotLive(mons[slot].species))
+        return slot;
+    if (area == WILD_AREA_FISHING)
+    {
+        u32 rod = GetRodOfFishingSlot(slot);
+        u32 first = sRodFirstSlot[rod];
+
+        for (u32 i = 1; i < sRodSlotCount[rod]; i++)
+        {
+            u32 candidate = first + (slot - first + i) % sRodSlotCount[rod];
+            if (IsWildSlotLive(mons[candidate].species))
+                return candidate;
+        }
+        for (u32 i = 1; i < NUM_FISHING_MONS_ENCOUNTER_SLOTS; i++)
+        {
+            u32 candidate = (slot + i) % NUM_FISHING_MONS_ENCOUNTER_SLOTS;
+            if (IsWildSlotLive(mons[candidate].species))
+                return candidate;
+        }
+        return slot;
+    }
+    count = area == WILD_AREA_LAND ? NUM_LAND_MONS_ENCOUNTER_SLOTS
+          : area == WILD_AREA_WATER ? NUM_WATER_MONS_ENCOUNTER_SLOTS
+          : area == WILD_AREA_ROCKS ? NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS
+          : area == WILD_AREA_HONEY ? NUM_HONEY_MONS_ENCOUNTER_SLOTS : 1;
+    for (u32 i = 1; i < count; i++)
+    {
+        u32 candidate = (slot + i) % count;
+        if (IsWildSlotLive(mons[candidate].species))
+            return candidate;
+    }
+    return WILD_SLOT_NONE;
 }
 
 static u32 ChooseEncounterSlotFromRoll(const u8 *bounds, u32 count, u32 roll)
@@ -348,17 +460,26 @@ static bool32 IsResidentLegendSlot(enum Species species)
     return GetRestrictedPartyClass(species) == RESTRICTED_PARTY_LEGENDARY && IsWildSlotLive(species);
 }
 
+// The live resident-legend odds of a land or Surf table, and the part of all
+// draws (same units as the bounds) that goes straight to those legends.
+static u32 GetResidentLegendBoost(const struct WildPokemonInfo *info, const u8 *bounds, u32 slots, u32 *legendOdds)
+{
+    *legendOdds = 0;
+    for (u32 i = 0; i < slots; i++)
+        if (IsResidentLegendSlot(info->wildPokemon[i].species))
+            *legendOdds += bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+    return min(*legendOdds * RESIDENT_LEGEND_EXTRA_CHANCES, RESIDENT_LEGEND_EXTRA_CAP);
+}
+
 static u32 ChooseWildMonIndexWithResidentLegends(const struct WildPokemonInfo *info, const u8 *defaults, u32 slots)
 {
     const u8 *bounds = GetEncounterBounds(info, defaults);
-    u32 legendOdds = 0;
-    for (u32 i = 0; i < slots; i++)
-        if (IsResidentLegendSlot(info->wildPokemon[i].species))
-            legendOdds += bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+    u32 legendOdds;
+    u32 boost = GetResidentLegendBoost(info, bounds, slots, &legendOdds);
     if (legendOdds != 0)
     {
         u32 roll = Random() % bounds[slots - 1];
-        if (roll < min(legendOdds * RESIDENT_LEGEND_EXTRA_CHANCES, RESIDENT_LEGEND_EXTRA_CAP))
+        if (roll < boost)
         {
             u32 target = roll % legendOdds;
             for (u32 i = 0; i < slots; i++)
@@ -493,48 +614,59 @@ u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPo
 // The authored odds of one slot, in percent of its method (or rod) total.
 u32 GetWildSlotOdds(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 slot)
 {
-    static const u8 sFishingDefaults[] = {
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0, ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9,
-    };
-    const u8 *bounds;
     u32 count;
-    bool32 segmentStart = slot == 0;
+    const u8 *bounds = GetWildAreaBounds(info, area, &count);
+    bool32 segmentStart = slot == 0
+        || (area == WILD_AREA_FISHING && sRodFirstSlot[GetRodOfFishingSlot(slot)] == slot);
 
-    switch (area)
-    {
-    case WILD_AREA_LAND:
-        bounds = GetEncounterBounds(info, sLandEncounterBounds);
-        count = ARRAY_COUNT(sLandEncounterBounds);
-        break;
-    case WILD_AREA_WATER:
-        bounds = GetEncounterBounds(info, sWaterEncounterBounds);
-        count = ARRAY_COUNT(sWaterEncounterBounds);
-        break;
-    case WILD_AREA_ROCKS:
-        bounds = GetEncounterBounds(info, sRockEncounterBounds);
-        count = ARRAY_COUNT(sRockEncounterBounds);
-        break;
-    case WILD_AREA_HONEY:
-        bounds = GetEncounterBounds(info, sHoneyEncounterBounds);
-        count = ARRAY_COUNT(sHoneyEncounterBounds);
-        break;
-    case WILD_AREA_FISHING:
-        bounds = GetEncounterBounds(info, sFishingDefaults);
-        count = ARRAY_COUNT(sFishingDefaults);
-        // Each rod's cumulative odds restart at its first slot.
-        segmentStart = slot == 0 || slot == 2 || slot == 5;
-        break;
-    default:
-        return 0;
-    }
-    if (slot >= count)
+    if (bounds == NULL || slot >= count)
         return 0;
     return bounds[slot] - (segmentStart ? 0 : bounds[slot - 1]);
+}
+
+// The one share function: each slot's real share of its method's draws, in
+// hundredths of a percent (WILD_SLOT_SHARE_TOTAL), written to shares[] for
+// every slot of the table. A slot's share is its authored odds, plus the
+// draws inert slots hand it (GetLiveWildSlot), plus the resident-legend boost
+// the land and Surf choosers give live legends. For fishing, `rod` says whose
+// draws are shared out. Returns the table's slot count. The shares total
+// WILD_SLOT_SHARE_TOTAL (to rounding), or 0 when nothing can be met.
+// Lead Abilities, Lures and Sweet Scent bend a single draw and are not here.
+u32 GetWildSlotShares(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 rod, u16 *shares)
+{
+    u32 count, first = 0, drawn, total, boost = 0, legendOdds = 0;
+    const u8 *bounds = GetWildAreaBounds(info, area, &count);
+
+    if (bounds == NULL)
+        return 0;
+    for (u32 i = 0; i < count; i++)
+        shares[i] = 0;
+    drawn = count;
+    if (area == WILD_AREA_FISHING)
+    {
+        if (rod > SUPER_ROD)
+            return count;
+        first = sRodFirstSlot[rod];
+        drawn = sRodSlotCount[rod];
+    }
+    total = bounds[first + drawn - 1];
+    if (total == 0)
+        return count;
+    if (area == WILD_AREA_LAND || area == WILD_AREA_WATER)
+        boost = GetResidentLegendBoost(info, bounds, count, &legendOdds);
+    if (legendOdds == 0)
+        boost = 0;
+    for (u32 i = first; i < first + drawn; i++)
+    {
+        u32 weight = bounds[i] - (i == first ? 0 : bounds[i - 1]);
+        u32 target = GetLiveWildSlot(info, area, i);
+
+        if (target != WILD_SLOT_NONE)
+            shares[target] += weight * (total - boost) * WILD_SLOT_SHARE_TOTAL / (total * total);
+        if (boost != 0 && IsResidentLegendSlot(info->wildPokemon[i].species))
+            shares[i] += weight * boost * WILD_SLOT_SHARE_TOTAL / (total * legendOdds);
+    }
+    return count;
 }
 
 // Mostly equivalent to ChooseWildMonIndex_Land
@@ -568,19 +700,9 @@ static u32 ChooseWildMonIndex_Honey(const struct WildPokemonInfo *info)
 
 u32 ChooseWildMonIndex_Fishing(const struct WildPokemonInfo *info, u8 rod)
 {
-    static const u8 defaults[] = {
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0, ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7, ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9,
-    };
-    static const u8 starts[] = {0, 2, 5};
-    static const u8 counts[] = {2, 3, 5};
     if (rod > SUPER_ROD)
         return 0;
-    return starts[rod] + ChooseEncounterSlotWithLure(GetEncounterBounds(info, defaults) + starts[rod], counts[rod]);
+    return sRodFirstSlot[rod] + ChooseEncounterSlotWithLure(GetEncounterBounds(info, sFishingEncounterBounds) + sRodFirstSlot[rod], sRodSlotCount[rod]);
 }
 
 // Emerald Champions: a table authored for an early visit must not leave an
@@ -600,10 +722,42 @@ static u8 GetWildEvolutionFloor(enum Species species)
     return 1;
 }
 
+static u32 GetWildLevelFloor(void)
+{
+    u32 cap = GetCurrentLevelCap();
+    return cap > WILD_LEVELS_BELOW_CAP_FLOOR ? cap - WILD_LEVELS_BELOW_CAP_FLOOR : 1;
+}
+
+// The levels a slot's Pokémon can arrive at right now, from the same rules
+// as ChooseWildMonLevel and TryGenerateWildMon: Legendary-class and Ultra
+// Beast slots come at their cap, others at their table levels after the wild
+// level floor, the evolution floor and the cap. A Lure's +1 is not included.
+void GetWildSlotLevelRange(const struct WildPokemon *mon, u8 *minLevel, u8 *maxLevel)
+{
+    u32 low, high, floor = GetWildLevelFloor(), evolution, ceiling;
+
+    if (IsLegendaryEncounterSpecies(mon->species))
+    {
+        *minLevel = *maxLevel = GetLegendaryEncounterLevel(mon->species);
+        return;
+    }
+    low = min(mon->minLevel, mon->maxLevel);
+    high = max(mon->minLevel, mon->maxLevel);
+    if (low < floor)
+    {
+        low = floor;
+        high = max(high, floor + WILD_LEVEL_FLOOR_SPREAD - 1);
+    }
+    evolution = GetWildEvolutionFloor(mon->species);
+    ceiling = min(GetCurrentLevelCap(), MAX_LEVEL);
+    *minLevel = min(max(low, evolution), ceiling);
+    *maxLevel = min(max(high, evolution), ceiling);
+}
+
 u8 ApplyWildLevelFloor(enum Species species, u8 level)
 {
     u32 cap = GetCurrentLevelCap();
-    u32 floor = cap > WILD_LEVELS_BELOW_CAP_FLOOR ? cap - WILD_LEVELS_BELOW_CAP_FLOOR : 1;
+    u32 floor = GetWildLevelFloor();
     if (level < floor)
         level = floor + Random() % WILD_LEVEL_FLOOR_SPREAD;
     level = max(level, GetWildEvolutionFloor(species));
@@ -668,6 +822,11 @@ static u8 ChooseTableWildMonLevel(const struct WildPokemon *wildPokemon, u8 wild
 
 u16 GetCurrentMapWildMonHeaderId(void)
 {
+    return GetWildMonHeaderIdForMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+}
+
+u16 GetWildMonHeaderIdForMap(u8 mapGroup, u8 mapNum)
+{
     u16 i;
 
     for (i = 0; ; i++)
@@ -676,11 +835,9 @@ u16 GetCurrentMapWildMonHeaderId(void)
         if (wildHeader->mapGroup == MAP_GROUP(MAP_UNDEFINED))
             break;
 
-        if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
-            gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
+        if (gWildMonHeaders[i].mapGroup == mapGroup && gWildMonHeaders[i].mapNum == mapNum)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ALTERING_CAVE) &&
-                gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ALTERING_CAVE))
+            if (mapGroup == MAP_GROUP(MAP_ALTERING_CAVE) && mapNum == MAP_NUM(MAP_ALTERING_CAVE))
             {
                 u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
                 if (alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
@@ -796,6 +953,7 @@ void CreateWildMon(enum Species species, u8 level)
 bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPokemonArea area, u8 flags)
 {
     u8 wildMonIndex = 0;
+    u32 liveIndex;
     u8 level;
     enum Species species;
     bool32 legendary;
@@ -856,26 +1014,12 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
         break;
     }
 
+    // An inert slot (gated, caught or storm-held) hands its draw on.
+    liveIndex = GetLiveWildSlot(wildMonInfo, area, wildMonIndex);
+    if (liveIndex == WILD_SLOT_NONE)
+        return FALSE;
+    wildMonIndex = liveIndex;
     species = wildMonInfo->wildPokemon[wildMonIndex].species;
-    if (!IsWildSlotLive(species))
-    {
-        // A gated or caught Legendary/Ultra Beast slot is inert: the draw
-        // moves on to the next acquirable slot of the same table.
-        u32 slots = area == WILD_AREA_LAND ? NUM_LAND_MONS_ENCOUNTER_SLOTS
-                  : area == WILD_AREA_WATER ? NUM_WATER_MONS_ENCOUNTER_SLOTS
-                  : area == WILD_AREA_ROCKS ? NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS
-                  : area == WILD_AREA_HONEY ? NUM_HONEY_MONS_ENCOUNTER_SLOTS : 1;
-        u32 tried;
-        for (tried = 0; tried < slots; tried++)
-        {
-            wildMonIndex = (wildMonIndex + 1) % slots;
-            species = wildMonInfo->wildPokemon[wildMonIndex].species;
-            if (IsWildSlotLive(species))
-                break;
-        }
-        if (tried == slots)
-            return FALSE;
-    }
 
 CREATE:
     legendary = IsLegendaryEncounterSpecies(species);
@@ -898,36 +1042,15 @@ CREATE:
     return TRUE;
 }
 
-// Rods follow the same slot rule as every other method: an inert Legendary or
-// Ultra Beast slot passes to the next acquirable slot of the same rod, then of
-// the whole fishing table.
+// Rods follow the same slot rule as every other method (GetLiveWildSlot): an
+// inert slot passes to the next live slot of the same rod, then of the whole
+// fishing table.
 static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
-    static const u8 starts[] = {0, 2, 5};
-    static const u8 counts[] = {2, 3, 5};
-    u8 wildMonIndex = ChooseWildMonIndex_Fishing(wildMonInfo, rod);
+    u8 wildMonIndex = GetLiveWildSlot(wildMonInfo, WILD_AREA_FISHING, ChooseWildMonIndex_Fishing(wildMonInfo, rod));
     enum Species wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level;
 
-    if (!IsWildSlotLive(wildMonSpecies) && rod <= SUPER_ROD)
-    {
-        u32 candidate = wildMonIndex;
-        bool32 found = FALSE;
-        for (u32 i = 1; i < counts[rod] && !found; i++)
-        {
-            candidate = starts[rod] + (wildMonIndex - starts[rod] + i) % counts[rod];
-            found = IsWildSlotLive(wildMonInfo->wildPokemon[candidate].species);
-        }
-        for (u32 i = 1; i < NUM_FISHING_MONS_ENCOUNTER_SLOTS && !found; i++)
-        {
-            candidate = (wildMonIndex + i) % NUM_FISHING_MONS_ENCOUNTER_SLOTS;
-            found = IsWildSlotLive(wildMonInfo->wildPokemon[candidate].species);
-        }
-        // A table made only of inert legends keeps its drawn slot.
-        if (found)
-            wildMonIndex = candidate;
-        wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
-    }
     if (IsLegendaryEncounterSpecies(wildMonSpecies))
         level = GetLegendaryEncounterLevel(wildMonSpecies);
     else
@@ -1000,13 +1123,14 @@ static bool8 AllowWildCheckOnNewMetatile(void)
 
 bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_SOOTOPOLIS_CITY)
-     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_SOOTOPOLIS_CITY))
-    {
-        return FALSE;
-    }
+    return AreSurfEncountersBlockedOnMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+}
 
-    return FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
+// Sootopolis's water stays empty while Groudon and Kyogre clash there.
+bool32 AreSurfEncountersBlockedOnMap(u8 mapGroup, u8 mapNum)
+{
+    return mapGroup == MAP_GROUP(MAP_SOOTOPOLIS_CITY) && mapNum == MAP_NUM(MAP_SOOTOPOLIS_CITY)
+        && FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
 }
 
 // Imported underwater areas may author a full twelve-slot seabed roster.
@@ -1038,6 +1162,11 @@ static bool32 TryGenerateSecondWildMon(const struct WildPokemonInfo *info, enum 
 bool32 Test_TryGenerateSecondWildMon(const struct WildPokemonInfo *info, enum WildPokemonArea area, u8 flags)
 {
     return TryGenerateSecondWildMon(info, area, flags);
+}
+
+u16 Test_GenerateFishingWildMon(const struct WildPokemonInfo *info, u8 rod)
+{
+    return GenerateFishingWildMon(info, rod);
 }
 #endif
 

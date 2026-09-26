@@ -81,6 +81,23 @@ u16 GetCurrentMapWildMonHeaderId(void);
 u32 ChooseWildMonIndex_Land(const struct WildPokemonInfo *info);
 u32 ChooseSweetScentWildMonIndex(const struct WildPokemonInfo *info, enum WildPokemonArea area);
 u32 GetWildSlotOdds(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 slot);
+
+// Shared by the encounter engine and the wild roster (include/wild_roster.h),
+// so the two can never disagree about what a map holds.
+#define WILD_SLOT_NONE 0xFF
+#define WILD_SLOT_SHARE_TOTAL 10000 // Shares are hundredths of a percent.
+bool32 IsWildSlotLive(enum Species species);
+u32 GetLiveWildSlot(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 slot);
+u32 GetWildSlotShares(const struct WildPokemonInfo *info, enum WildPokemonArea area, u32 rod, u16 *shares);
+void GetWildSlotLevelRange(const struct WildPokemon *mon, u8 *minLevel, u8 *maxLevel);
+u16 GetWildMonHeaderIdForMap(u8 mapGroup, u8 mapNum);
+bool32 AreSurfEncountersBlockedOnMap(u8 mapGroup, u8 mapNum);
+bool32 MapHasFeebasSpots(u8 mapGroup, u8 mapNum);
+u32 GetFeebasSpotShare(void);
+u32 GetCutTreeSlotCount(void);
+enum Species GetCutTreeSlotSpecies(u32 slot);
+u32 GetCutTreeSlotOdds(u32 slot);
+void GetCutTreeEncounterLevelRange(u8 *minLevel, u8 *maxLevel);
 u32 ChooseWildMonIndex_Water(const struct WildPokemonInfo *info);
 u32 ChooseWildMonIndex_Rocks(const struct WildPokemonInfo *info);
 u32 ChooseHiddenMonIndex(void);

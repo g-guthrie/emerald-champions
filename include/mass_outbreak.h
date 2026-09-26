@@ -20,6 +20,9 @@ bool32 IsMassOutbreakActive(void);
 struct Pokemon;
 void ApplyMassOutbreakMoves(struct Pokemon *mon);
 bool8 SetUpMassOutbreakEncounter(u8 flags);
+// An outbreak is running on this map: it takes outbreakPokemonProbability
+// percent of land encounters there (DoMassOutbreakEncounterTest).
+bool32 IsMassOutbreakOnMap(u8 mapGroup, u8 mapNum);
 bool8 DoMassOutbreakEncounterTest(void);
 void StartStaticMassOutbreak(enum MassOutbreakIndex outbreakIdx);
 enum Species GetStaticOutbreakSpecies(enum MassOutbreakIndex outbreakIdx);

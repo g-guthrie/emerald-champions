@@ -325,19 +325,27 @@ bool32 IsWeatherAnomalyVisitorSlotInert(enum Species species)
         && !FlagGet(WEATHER_ANOMALY_WINDOW_END_FLAG);
 }
 
-enum Species TryRollWeatherAnomalyEncounter(enum WildPokemonArea area)
+enum Species GetWeatherAnomalyEncounterSpecies(u8 mapGroup, u8 mapNum, enum WildPokemonArea area)
 {
     enum LegendarySignId sign;
 
     if (area != WILD_AREA_LAND && area != WILD_AREA_WATER)
         return SPECIES_NONE;
-    sign = GetLiveWeatherAnomalyOnMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    sign = GetLiveWeatherAnomalyOnMap(mapGroup, mapNum);
     if (sign >= LEGENDARY_SIGN_COUNT || gLegendaryGates[sign].anomalyHabitat != area
      || !CanAcquireLegendarySignSpecies(gLegendaryGates[sign].species))
         return SPECIES_NONE;
-    if (Random() % 100 >= WEATHER_ANOMALY_ENCOUNTER_PERCENT)
-        return SPECIES_NONE;
     return gLegendaryGates[sign].species;
+}
+
+enum Species TryRollWeatherAnomalyEncounter(enum WildPokemonArea area)
+{
+    enum Species species = GetWeatherAnomalyEncounterSpecies(gSaveBlock1Ptr->location.mapGroup,
+                                                             gSaveBlock1Ptr->location.mapNum, area);
+
+    if (species == SPECIES_NONE || Random() % 100 >= WEATHER_ANOMALY_ENCOUNTER_PERCENT)
+        return SPECIES_NONE;
+    return species;
 }
 
 // Region-map names are stored in capitals; the scientist speaks in title case.

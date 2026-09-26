@@ -34,7 +34,11 @@ enum LegendarySignId GetLiveWeatherAnomalyOnMap(u8 mapGroup, u8 mapNum);
 u8 GetWeatherAnomalyWeatherForCurrentMap(void);
 // A visitor's own table slot is inert until the window has closed.
 bool32 IsWeatherAnomalyVisitorSlotInert(enum Species species);
-// The flat 20% visitor roll for a land/water encounter on the current map.
+// The visitor a land or Surf encounter on this map can meet right now (its
+// storm is live there, the habitat matches, it can still be acquired), or
+// SPECIES_NONE. TryRollWeatherAnomalyEncounter gives it
+// WEATHER_ANOMALY_ENCOUNTER_PERCENT of those encounters on the current map.
+enum Species GetWeatherAnomalyEncounterSpecies(u8 mapGroup, u8 mapNum, enum WildPokemonArea area);
 enum Species TryRollWeatherAnomalyEncounter(enum WildPokemonArea area);
 // Special: gStringVar4 = "{route}: {legend}" per live anomaly, VAR_RESULT = count.
 void BufferWeatherAnomalyReport(void);

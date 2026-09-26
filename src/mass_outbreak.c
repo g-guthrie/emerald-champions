@@ -122,12 +122,16 @@ bool8 SetUpMassOutbreakEncounter(u8 flags)
     return TRUE;
 }
 
+bool32 IsMassOutbreakOnMap(u8 mapGroup, u8 mapNum)
+{
+    return gSaveBlock1Ptr->outbreakDaysLeft != 0
+        && mapNum == gSaveBlock1Ptr->outbreakLocationMapNum
+        && mapGroup == gSaveBlock1Ptr->outbreakLocationMapGroup;
+}
+
 bool8 DoMassOutbreakEncounterTest(void)
 {
-    if (gSaveBlock1Ptr->outbreakDaysLeft == 0)
-        return FALSE;
-
-    if (gSaveBlock1Ptr->location.mapNum != gSaveBlock1Ptr->outbreakLocationMapNum || gSaveBlock1Ptr->location.mapGroup != gSaveBlock1Ptr->outbreakLocationMapGroup)
+    if (!IsMassOutbreakOnMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         return FALSE;
 
     return (RandomPercentage(RNG_NONE,  gSaveBlock1Ptr->outbreakPokemonProbability));
