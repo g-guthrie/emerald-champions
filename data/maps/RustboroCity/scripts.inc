@@ -408,12 +408,26 @@ RustboroCity_EventScript_EmployeeAskToGetGoods:: @ 81E0B2E
 	call_if_eq RustboroCity_EventScript_EmployeeApproachPlayerDown1
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
 	setvar VAR_RUSTBORO_CITY_STATE, 4
-	@ Keep his saved spot at 30,10. Every return trigger assumes it; a saved
-	@ 30,11 (after he steps down to meet the player) would walk him into a
-	@ player returning on 30,12.
 	msgbox RustboroCity_Text_HelpMeIWasRobbed, MSGBOX_DEFAULT
+	@ His spot is 30,10 in every later state (map template; every return trigger
+	@ assumes it). A save keeps live coordinates, so after stepping down to meet a
+	@ player on 30,12 he steps back, or Continue would restore him on 30,11.
+	compare VAR_TEMP_1, 3
+	call_if_eq RustboroCity_EventScript_EmployeeStepBackUp
 	releaseall
 	end
+
+RustboroCity_EventScript_EmployeeStepBackUp::
+	closemessage
+	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeStepBackUp
+	waitmovement 0
+	return
+
+RustboroCity_Movement_EmployeeStepBackUp:
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
+	step_end
 
 @ The below movement scripts are either partially or fully duplicated by the movement scripts when the player returns the goods
 RustboroCity_EventScript_EmployeeFacePlayerUp1:: @ 81E0B6F
