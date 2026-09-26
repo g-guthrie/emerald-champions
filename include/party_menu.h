@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "task.h"
+#include "constants/pokemon.h"
 
 enum PartyMenuLayout
 {
@@ -150,5 +151,22 @@ s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 choose
 #if EC_HEADLESS_FIXTURES
 bool32 IsPartyMenuHeadlessAwaitingSelection(void);
 #endif
+
+
+// Native party Ability list layout (tested against every species).
+#define PARTY_ABILITY_MENU_MAX_OPTIONS (NUM_OWNER_ABILITY_SLOTS + 1) // Abilities plus Cancel
+#define PARTY_ABILITY_MENU_MAX_ROWS 9 // Two-tile rows between the top and bottom frames
+#define PARTY_ABILITY_MENU_MIN_WIDTH 10
+#define PARTY_ABILITY_MENU_MAX_WIDTH 17
+struct PartyAbilityMenuLayout
+{
+    u8 x, y, width, height;
+    u8 visibleRows;
+    u8 textWidth; // Pixels available to a label after the cursor.
+    u8 promptX, promptWidth, promptFont;
+};
+u32 GetPartyAbilityMenuOptions(struct Pokemon *mon, u8 *slots, const u8 **labels);
+void GetPartyAbilityMenuLayout(const u8 *const *labels, u32 optionCount, struct PartyAbilityMenuLayout *layout);
+u32 GetPartyAbilityMenuLabelFont(const u8 *label, const struct PartyAbilityMenuLayout *layout);
 
 #endif // GUARD_PARTY_MENU_H

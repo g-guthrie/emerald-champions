@@ -406,7 +406,7 @@ void SetBattlerData(enum BattlerId battlerId)
         // Check if mon can only have one ability.
         else if ((GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
                 || GetBattlerSpeciesAbility(battlerId, species, 1) == GetBattlerSpeciesAbility(battlerId, species, 0))
-              && GetBattlerSpeciesAbility(battlerId, species, ABILITY_SLOT_INCLEMENT) == ABILITY_NONE)
+              && !HasBattlerInclementAbility(battlerId, species))
             gBattleMons[battlerId].ability = GetBattlerSpeciesAbility(battlerId, species, 0);
         // The ability is unknown.
         else

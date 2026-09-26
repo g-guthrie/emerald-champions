@@ -209,6 +209,7 @@ bool32 IsSunlightMoveAbility(enum Ability ability);
 enum Ability GetBattlerAbilityBySpecies(enum BattlerId battler, enum Species species, u8 abilityNum);
 enum Ability GetBattlerSpeciesAbility(enum BattlerId battler, enum Species species, u8 slot);
 u32 GetBattlerSpeciesBaseStat(enum BattlerId battler, enum Species species, u32 statIndex);
+bool32 HasBattlerInclementAbility(enum BattlerId battler, enum Species species);
 bool32 IsBattlerWeatherAffected(enum HoldEffect holdEffect, u32 weather, u32 weatherFlags);
 enum MoveTarget GetBattlerMoveSelectionTargetType(enum BattlerId battler, enum Move move);
 enum MoveTarget GetBattlerMoveTargetType(enum BattlerId battler, enum Move move);

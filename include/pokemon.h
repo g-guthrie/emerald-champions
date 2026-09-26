@@ -218,8 +218,7 @@ struct PokemonSubstruct3
     u32 earthRibbon:1;    // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
     u32 worldRibbon:1;    // Distributed during Pokémon Festa '04 and '05 to tournament winners.
     u32 isShadow:1;
-    u32 unused_0B:1;
-    u32 abilityNum:2;
+    u32 abilityNum:3; // 0-2 official slots; 3 and up Inclement added Abilities (ABILITY_SLOT_INCLEMENT).
 
     // The functionality of this bit changed in FRLG:
     // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
@@ -341,7 +340,7 @@ struct BattlePokemon
     u32 speedIV:5;
     u32 spAttackIV:5;
     u32 spDefenseIV:5;
-    u32 abilityNum:2;
+    u32 unusedIvPadding:2;
     s8 statStages[NUM_BATTLE_STATS];
     enum Ability ability;
     enum Type types[3];
@@ -362,6 +361,7 @@ struct BattlePokemon
     u8 metLevel:7;
     u8 isShiny:1;
     u8 affectionHearts;
+    u8 abilityNum; // Full ability slot, Inclement slots included; sits in former tail padding.
 };
 
 struct EvolutionParam
@@ -859,7 +859,7 @@ u32 GetSpeciesWeight(enum Species species);
 enum Type GetSpeciesType(enum Species species, u8 slot);
 enum Ability GetSpeciesAbility(enum Species species, u8 slot);
 enum Ability GetSpeciesAbilityForOwner(enum Species species, u8 slot, bool32 trainerOwned);
-enum Ability GetInclementExtraAbility(enum Species species);
+enum Ability GetInclementAddedAbility(enum Species species, u32 slot);
 u32 RollNormalAbilitySlot(enum Species species, u32 personality);
 u32 GetMonSelectableAbilitySlots(struct Pokemon *mon, u8 *slots);
 u32 GetAbilityCapsuleTargetSlot(struct Pokemon *mon);

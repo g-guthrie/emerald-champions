@@ -164,6 +164,10 @@ EWRAM_DATA enum BattlerId gBattlersByRawSpeed[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gCurrentTurnActionNumber = 0;
 EWRAM_DATA u8 gCurrentActionFuncId = 0;
 EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
+// Host tools (scripts/playthrough) read gBattleMons with a 140-byte stride.
+STATIC_ASSERT(sizeof(struct BattlePokemon) == 140, BattlePokemonLayoutIsStable);
+// The 3-bit stored ability number holds every official and Inclement slot.
+STATIC_ASSERT(NUM_OWNER_ABILITY_SLOTS <= 8, AbilityNumFitsThreeBits);
 EWRAM_DATA u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gCurrMovePos = 0;
 EWRAM_DATA u8 gChosenMovePos = 0;
