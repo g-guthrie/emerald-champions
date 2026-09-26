@@ -11,6 +11,7 @@ without reseeding RNG or touching difficulty.
 
     live.py serve --dir RUN --save FILE.sav      boot the save via native Continue
     live.py serve --dir RUN --resume             reload RUN/auto.ss1 (same ROM)
+    live.py serve --dir RUN --new                blank cartridge: title screen, New Game
     live.py <op> [key=value ...]                 talk to the running daemon
 
 Ops: status, shot, press, walk, goto, exit, advance, wait, battle, act, arm,
@@ -87,7 +88,7 @@ class Harness:
         return self.constants
 
     # -------------------------------------------------------------- core I/O
-    async def open(self, save=None, state=None):
+    async def open(self, save=None, state=None, new=False):
         rom, elf = self.dir / 'scene.gba', self.dir / 'scene.elf'
         self.core = await self.server.Core.open(rom, elf, save)
         self.syms = self.core.syms
@@ -100,9 +101,15 @@ class Harness:
         enum = re.findall(r'EC_HEADLESS_SCENARIO_\w+',
                           header.split('enum EmeraldChampionsHeadlessScenario')[1].split('};')[0])
         await self.core.tick(frames=60)
+        # A blank cartridge boots the real intro, title screen and Birch's
+        # speech (CAMPAIGN_NATIVE hands straight to gInitialMainCB2); a save
+        # resumes through native Continue.
+        scenario = 'EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE' if new else 'EC_HEADLESS_SCENARIO_STUDIO_RESUME'
         await self.core.write([(self.syms['gEcHeadlessFixtureParam'], 0),
-                               (self.syms['gEcHeadlessFixtureScenario'],
-                                enum.index('EC_HEADLESS_SCENARIO_STUDIO_RESUME'))])
+                               (self.syms['gEcHeadlessFixtureScenario'], enum.index(scenario))])
+        if new:
+            self.ingest(await self.core.tick(frames=60))
+            return
         for _ in range(60):
             self.ingest(await self.core.tick(frames=30))
             if self.st['ready']:
@@ -149,9 +156,9 @@ class Harness:
             pairs.append((word_addr, struct.unpack('<I', bytes(raw))[0]))
         await self.write(pairs)
 
-    async def arm(self):
+    async def arm(self, force=False):
         """Mirror EmeraldChampionsAgentBattleBegin's resets, minus RNG and difficulty."""
-        if self.st.get('battle'):
+        if self.st.get('battle') and not force:
             return False
         s = self.syms
         b = lambda name, size, value: {i: value for i in range(size)}
@@ -289,6 +296,45 @@ class Harness:
         data = (ROOT / layout['blockdata_filepath']).read_bytes()
         cells = struct.unpack('<' + 'H' * (len(data) // 2), data)
         return layout['width'], layout['height'], cells
+
+    def behaviors(self, name):
+        """Metatile behavior per cell of a map (attributes of its two tilesets)."""
+        import re
+        cache = getattr(self, '_behavior_cache', {})
+        self._behavior_cache = cache
+        if name in cache:
+            return cache[name]
+        m = self.cat.maps[name]
+        layout = self.cat.layouts[m['layout']]
+        headers = (ROOT / 'src/data/tilesets/headers.h').read_text()
+        metatiles = (ROOT / 'src/data/tilesets/metatiles.h').read_text()
+        def attrs(tileset):
+            block = headers.split(f'const struct Tileset {tileset} =')[1].split('};')[0]
+            sym = re.search(r'\.metatileAttributes = (\w+)', block)[1]
+            path = re.search(sym + r'\[\] = INCBIN_U16\("([^"]+)"', metatiles)[1]
+            data = (ROOT / path).read_bytes()
+            return struct.unpack('<' + 'H' * (len(data) // 2), data)
+        prim, sec = attrs(layout['primary_tileset']), attrs(layout['secondary_tileset'])
+        w, h, cells = self.grid(name)
+        out = []
+        for c in cells:
+            t = c & 0x3FF
+            table, i = (prim, t) if t < 512 else (sec, t - 512)
+            out.append(table[i] & 0xFF if i < len(table) else 0)
+        cache[name] = (w, h, out)
+        return cache[name]
+
+    def encounter_tiles(self, n=12, kinds=None):
+        text = (ROOT / 'include/constants/metatile_behaviors.h').read_text()
+        import re
+        names = re.findall(r'^\s+(MB_\w+)', text.split('enum')[1], re.M)
+        kinds = kinds or ('MB_TALL_GRASS', 'MB_LONG_GRASS', 'MB_LONG_GRASS_SOUTH_EDGE', 'MB_ASHGRASS', 'MB_CAVE')
+        want = {names.index(k) for k in kinds if k in names}
+        w, h, beh = self.behaviors(self.st['map'])
+        me = (self.st['x'], self.st['y'])
+        tiles = [(x, y) for y in range(h) for x in range(w) if beh[y * w + x] in want]
+        tiles.sort(key=lambda t: abs(t[0] - me[0]) + abs(t[1] - me[1]))
+        return {'count': len(tiles), 'nearest': tiles[:n]}
 
     def trainer_of(self, label, depth=0):
         import re
@@ -700,6 +746,51 @@ class Harness:
         await self.core.rpc(6, str(path).encode())
         return {'save': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
 
+    # --------------------------------------------------------------- tutor
+    async def tutor_list(self):
+        """The open move tutor list: move names in menu order and the cursor."""
+        ptr = (await self.read_words(self.syms['sMoveRelearnerStruct'], 1))[0]
+        if not 0x02000000 <= ptr < 0x02040000:
+            raise ValueError('the move list is not open')
+        n_all = 935  # MOVES_COUNT_ALL sizes the struct (include/constants/moves.h)
+        items = (16 + 2 * n_all + 3) & ~3
+        tail = items + 8 * (n_all + 1)
+        raw = await self.read(ptr + tail, 4)
+        count = struct.unpack_from('<H', raw, 2)[0]
+        task = raw[0]
+        func = (await self.read_words(self.syms['gTasks'] + 40 * task, 1))[0] & ~1
+        self.tutor_input = func == self.syms['Task_MoveRelearner_HandleInput'] & ~1
+        # menuItems is what the list shows (moves already known are left out).
+        raw = await self.read(ptr + items, 8 * count)
+        moves = [struct.unpack_from('<Ii', raw, 8 * i)[1] for i in range(count)]
+        scroll = await self.read_words(self.syms['sMoveRelearnerScrollState'], 1)
+        cursor = (scroll[0] & 0xFFFF) + (scroll[0] >> 16)
+        return [self.move_name(m) for m in moves], cursor
+
+    def move_name(self, move):
+        names = self.constants['move']['names']
+        return str(names.get(str(move), move)).replace('MOVE_', '')
+
+    async def tutor(self, move=None):
+        moves, cursor = await self.tutor_list()
+        if move is None:
+            return {'moves': moves, 'cursor': cursor, 'at': moves[cursor] if moves else None,
+                    'input': self.tutor_input}
+        want = move.upper().replace(' ', '_').replace('MOVE_', '')
+        if want not in moves:
+            raise ValueError(f'{want} not in this list')
+        target = moves.index(want)
+        for _ in range(8):
+            if cursor == target:
+                break
+            key = 'DOWN' if target > cursor else 'UP'
+            for _ in range(abs(target - cursor)):
+                await self.tick(mask_of(key), 1)
+                await self.tick(0, 3)
+            await self.tick(0, 6)
+            moves, cursor = await self.tutor_list()
+        return {'at': moves[cursor], 'cursor': cursor, 'target': target, 'input': self.tutor_input}
+
     # --------------------------------------------------------------- dispatch
     async def handle(self, req):
         op = req.pop('op')
@@ -744,7 +835,7 @@ class Harness:
         elif op == 'act':
             out = await self.act(req['cmds'].split())
         elif op == 'arm':
-            out = {'armed': await self.arm()}
+            out = {'armed': await self.arm(force=req.get('force') == '1')}
         elif op == 'disarm':
             await self.disarm()
             out = {'armed': False}
@@ -764,6 +855,48 @@ class Harness:
                              for w in m['warp_events']],
                    'connections': [f"{c['direction']}:{c['map'].replace('MAP_', '')}@{c['offset']}"
                                    for c in (m.get('connections') or [])]}
+        elif op == 'peek':
+            addr = self.syms[req['sym']] + int(req.get('off', 0))
+            size = int(req.get('size', 1))
+            base = addr & ~3
+            raw = await self.read(base, ((addr - base + size) + 3) & ~3)
+            out = {'value': int.from_bytes(raw[addr - base:addr - base + size], 'little', signed=req.get('signed') == '1')}
+        elif op == 'bag':
+            names = self.constants['item']['names']
+            out = {}
+            for pocket, label in enumerate(('items', 'medicine', 'held', 'berries', 'balls', 'key', 'mega')):
+                raw = await self.read(self.syms['gBagPockets'] + 12 * pocket, 12)
+                ptr, _, bits, prim = struct.unpack('<IIHH', raw)
+                cap = min(bits & 0x3FF, prim or (bits & 0x3FF))
+                slots = await self.read(ptr, 4 * cap) if cap else b''
+                items = []
+                for i in range(cap):
+                    item = struct.unpack_from('<H', slots, 4 * i)[0]
+                    if item:
+                        items.append(str(names.get(str(item), item)).replace('ITEM_', ''))
+                out[label] = items
+            pos = await self.read(self.syms['gBagPosition'] + 4, 32)
+            out['open_pocket'] = pos[1]
+            out['cursor'] = [struct.unpack_from('<H', pos, 4 + 2 * i)[0] + struct.unpack_from('<H', pos, 18 + 2 * i)[0] for i in range(7)]
+        elif op == 'trainers':
+            m = self.cat.maps[self.st['map']]
+            live_ids = {a['local_id']: a for a in self.st['actors']}
+            out = {'trainers': []}
+            for index, o in enumerate(m['object_events']):
+                trainer = self.trainer_of(o.get('script', ''))
+                if not trainer or trainer not in self.cat.constants:
+                    continue
+                flag = self.cat.constants['TRAINER_FLAGS_START'] + self.cat.constants[trainer]
+                beaten = bool(await self.query(1, flag))
+                a = live_ids.get(index + 1)
+                out['trainers'].append({'id': index + 1, 'trainer': trainer.replace('TRAINER_', ''),
+                                        'xy': [a['x'], a['y']] if a else [o['x'], o['y']],
+                                        'present': a is not None, 'beaten': beaten})
+        elif op == 'grass':
+            kinds = tuple(req['mb'].split(',')) if req.get('mb') else None
+            out = self.encounter_tiles(int(req.get('n', 12)), kinds)
+        elif op == 'tutor':
+            out = await self.tutor(req.get('move'))
         elif op == 'forget':
             self.blocked[self.st['map']].clear()
             out = {'ok': True}
@@ -803,6 +936,8 @@ async def serve(args):
         }, indent=2) + '\n')
     if args.resume:
         await h.open(save=None, state=run_dir / 'auto.ss1')
+    elif args.new:
+        await h.open(new=True)
     else:
         await h.open(save=Path(args.save).resolve())
     sock = run_dir / 'live.sock'
@@ -861,6 +996,7 @@ def main():
         p.add_argument('--dir', required=True)
         p.add_argument('--save')
         p.add_argument('--resume', action='store_true')
+        p.add_argument('--new', action='store_true', help='blank cartridge: title screen and new game')
         p.add_argument('--build', default=str(ROOT))
         asyncio.run(serve(p.parse_args()))
         return

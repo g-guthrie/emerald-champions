@@ -46,7 +46,9 @@ def find_mgba_prefix() -> Path:
 
 def mgba_flags() -> list[str]:
     pkg_config = shutil.which('pkg-config')
-    if pkg_config:
+    # An explicit prefix beats whatever pkg-config finds (Homebrew's bottle can
+    # lag its ffmpeg dependency and fail to load).
+    if pkg_config and not os.environ.get('MGBA_PREFIX'):
         try:
             flags = shlex.split(run([pkg_config, '--cflags', '--libs', 'mgba']).stdout)
             if flags:
