@@ -22,5 +22,8 @@ TEST("Ability names fit the summary, battle pop-up and Pokédex")
         EXPECT_LE(GetStringWidth(font, name, 0), 10 * 8);
         // Pokédex stats page: an 18-tile window, FONT_SMALL at x 5.
         EXPECT_LE(GetStringWidth(FONT_SMALL, name, 0), 18 * 8 - 5);
+        // Abilities page: cursor at x 3, name at x 12, slot marker at x 84.
+        font = GetFontIdToFit(name, FONT_SMALL, 0, 70);
+        EXPECT_LE(GetStringWidth(font, name, 0), 70);
     }
 }

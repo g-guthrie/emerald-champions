@@ -17,6 +17,8 @@ TEST("Full Ability descriptions fit the Pokédex Abilities box")
         u32 lines = 1;
 
         EXPECT(text != NULL);
+        // A short fallback is usable at runtime but is not authored coverage.
+        EXPECT(text != gAbilitiesInfo[ability].description);
         EXPECT_NE(text[0], EOS);
         for (const u8 *c = text; *c != EOS; c++)
         {
@@ -46,8 +48,8 @@ TEST("Short Ability descriptions fit the Summary on one line")
     }
 }
 
-TEST("Abilities without full text fall back to the short description")
+TEST("Invalid Abilities use the no-Ability full description")
 {
-    EXPECT_EQ(GetAbilityFullDescription(ABILITIES_COUNT), gAbilitiesInfo[ABILITY_NONE].description);
+    EXPECT_EQ(GetAbilityFullDescription(ABILITIES_COUNT), GetAbilityFullDescription(ABILITY_NONE));
     EXPECT(GetAbilityFullDescription(ABILITY_STEAM_ENGINE) != gAbilitiesInfo[ABILITY_STEAM_ENGINE].description);
 }
