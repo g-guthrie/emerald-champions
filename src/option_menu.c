@@ -28,11 +28,9 @@
 #define tSound data[3]
 #define tButtonMode data[4]
 #define tWindowFrameType data[5]
-#define tTextSpeed data[6]
 
 enum
 {
-    MENUITEM_TEXTSPEED,
     MENUITEM_DIFFICULTY,
     MENUITEM_BATTLESCENE,
     MENUITEM_SOUND,
@@ -45,11 +43,10 @@ enum
 enum
 {
     WIN_OPTIONS,
-    WIN_DESCRIPTION
 };
 
-// Both windows' tiles now run past the stock frame base, so the frame tiles
-// sit at the top of the shared char block instead.
+// The frame tiles sit at the top of the shared char block, clear of the
+// list's own tiles.
 #define TILE_FRAME_BASE   0x1E0
 #define TILE_TOP_CORNER_L (TILE_FRAME_BASE + 0)
 #define TILE_TOP_EDGE     (TILE_FRAME_BASE + 1)
@@ -60,7 +57,8 @@ enum
 #define TILE_BOT_EDGE     (TILE_FRAME_BASE + 7)
 #define TILE_BOT_CORNER_R (TILE_FRAME_BASE + 8)
 
-#define YPOS_TEXTSPEED    (MENUITEM_TEXTSPEED * 16)
+#define OPTIONS_TOP       ((20 - MENUITEM_COUNT * 2) / 2)
+
 #define YPOS_DIFFICULTY   (MENUITEM_DIFFICULTY * 16)
 #define YPOS_BATTLESCENE  (MENUITEM_BATTLESCENE * 16)
 #define YPOS_SOUND        (MENUITEM_SOUND * 16)
@@ -72,8 +70,6 @@ static void Task_OptionMenuProcessInput(u8 taskId);
 static void Task_OptionMenuSave(u8 taskId);
 static void Task_OptionMenuFadeOut(u8 taskId);
 static void HighlightOptionMenuItem(u8 selection);
-static u8 TextSpeed_ProcessInput(u8 selection);
-static void TextSpeed_DrawChoices(u8 selection);
 static u8 Difficulty_ProcessInput(u8 selection);
 static void Difficulty_DrawChoices(u8 selection);
 static u8 BattleScene_ProcessInput(u8 selection);
@@ -84,16 +80,11 @@ static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
 static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
-static void DrawDescriptionText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
 
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
 
-static const u8 gText_TextSpeedSlow[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Slow");
-static const u8 gText_TextSpeedMid[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Mid");
-static const u8 gText_TextSpeedFast[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Fast");
-static const u8 gText_TextSpeedInstant[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Instant");
 static const u8 gText_DifficultyHard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Hard");
 static const u8 gText_DifficultyMedium[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Medium");
 static const u8 gText_DifficultyEasy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Easy");
@@ -114,7 +105,6 @@ static const u8 sEqualSignGfx[] = INCGFX_U8("graphics/interface/option_menu_equa
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
-    [MENUITEM_TEXTSPEED]   = COMPOUND_STRING("Text speed"),
     [MENUITEM_DIFFICULTY]  = COMPOUND_STRING("Difficulty"),
     [MENUITEM_BATTLESCENE] = COMPOUND_STRING("Battle scene"),
     [MENUITEM_SOUND]       = COMPOUND_STRING("Sound"),
@@ -125,26 +115,15 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
-    // One framed panel: the seven rows, then the difficulty note under a
-    // rule. Both share bg0 so the note reads as part of the list, not a
-    // second menu underneath it.
+    // One framed panel, centred on the screen: a row per option.
     [WIN_OPTIONS] = {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 1,
+        .tilemapTop = OPTIONS_TOP,
         .width = 26,
-        .height = 14,
+        .height = MENUITEM_COUNT * 2,
         .paletteNum = 1,
         .baseBlock = 2
-    },
-    [WIN_DESCRIPTION] = {
-        .bg = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 15,
-        .width = 26,
-        .height = 4,
-        .paletteNum = 1,
-        .baseBlock = 2 + 26 * 14
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -213,7 +192,7 @@ void CB2_InitOptionMenu(void)
         ChangeBgX(3, 0, BG_COORD_SET);
         ChangeBgY(3, 0, BG_COORD_SET);
         InitWindows(sOptionMenuWinTemplates);
-        // Both windows live on bg0, so InitWindows leaves bg1 (the frame)
+        // The list lives on bg0, so InitWindows leaves bg1 (the frame)
         // without a tilemap buffer.
         SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
         DeactivateAllTextPrinters();
@@ -250,10 +229,6 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 6:
-        PutWindowTilemap(WIN_DESCRIPTION);
-        DrawDescriptionText();
-        gMain.state++;
-        break;
     case 7:
         gMain.state++;
         break;
@@ -275,9 +250,7 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
-        gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
 
-        TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         Difficulty_DrawChoices(gTasks[taskId].tDifficulty);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
         Sound_DrawChoices(gTasks[taskId].tSound);
@@ -336,13 +309,6 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
         switch (gTasks[taskId].tMenuSelection)
         {
-        case MENUITEM_TEXTSPEED:
-            previousOption = gTasks[taskId].tTextSpeed;
-            gTasks[taskId].tTextSpeed = TextSpeed_ProcessInput(gTasks[taskId].tTextSpeed);
-
-            if (previousOption != gTasks[taskId].tTextSpeed)
-                TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
-            break;
         case MENUITEM_DIFFICULTY:
             previousOption = gTasks[taskId].tDifficulty;
             gTasks[taskId].tDifficulty = Difficulty_ProcessInput(gTasks[taskId].tDifficulty);
@@ -398,7 +364,6 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
-    gSaveBlock2Ptr->optionsTextSpeed = gTasks[taskId].tTextSpeed;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -418,7 +383,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
 static void HighlightOptionMenuItem(u8 index)
 {
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(16, DISPLAY_WIDTH - 16));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(index * 16 + 8, index * 16 + 24));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(OPTIONS_TOP * 8 + index * 16, OPTIONS_TOP * 8 + index * 16 + 16));
 }
 
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
@@ -437,65 +402,6 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
     dst[i] = EOS;
     AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, dst, x, y + 1, TEXT_SKIP_DRAW, NULL);
-}
-
-// Four choices need the whole row, so they start left of the usual 104.
-#define TEXTSPEED_LEFT  72
-#define TEXTSPEED_RIGHT 198
-
-static u8 TextSpeed_ProcessInput(u8 selection)
-{
-    if (JOY_NEW(DPAD_RIGHT))
-    {
-        if (selection < OPTIONS_TEXT_SPEED_INSTANT)
-            selection++;
-        else
-            selection = OPTIONS_TEXT_SPEED_SLOW;
-
-        sArrowPressed = TRUE;
-    }
-    if (JOY_NEW(DPAD_LEFT))
-    {
-        if (selection != OPTIONS_TEXT_SPEED_SLOW)
-            selection--;
-        else
-            selection = OPTIONS_TEXT_SPEED_INSTANT;
-
-        sArrowPressed = TRUE;
-    }
-    return selection;
-}
-
-static void TextSpeed_DrawChoices(u8 selection)
-{
-    static const u8 *const choices[] =
-    {
-        [OPTIONS_TEXT_SPEED_SLOW]    = gText_TextSpeedSlow,
-        [OPTIONS_TEXT_SPEED_MID]     = gText_TextSpeedMid,
-        [OPTIONS_TEXT_SPEED_FAST]    = gText_TextSpeedFast,
-        [OPTIONS_TEXT_SPEED_INSTANT] = gText_TextSpeedInstant,
-    };
-    s32 widths[ARRAY_COUNT(choices)];
-    s32 total = 0;
-    s32 gap, x;
-    u32 i;
-
-    for (i = 0; i < ARRAY_COUNT(choices); i++)
-    {
-        widths[i] = GetStringWidth(FONT_NORMAL, choices[i], 0);
-        total += widths[i];
-    }
-
-    gap = (TEXTSPEED_RIGHT - TEXTSPEED_LEFT - total) / (s32)(ARRAY_COUNT(choices) - 1);
-    if (gap < 2)
-        gap = 2;
-
-    x = TEXTSPEED_LEFT;
-    for (i = 0; i < ARRAY_COUNT(choices); i++)
-    {
-        DrawOptionMenuChoice(choices[i], x, YPOS_TEXTSPEED, selection == i);
-        x += widths[i] + gap;
-    }
 }
 
 static u8 Difficulty_ProcessInput(u8 selection)
@@ -698,21 +604,6 @@ static void ButtonMode_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
 }
 
-static void DrawDescriptionText(void)
-{
-    u8 hard = GetTrainerLevelReductionFor(DIFFICULTY_HARD);
-
-    // The numbers come from GetTrainerLevelReductionFor, so they can't drift.
-    ConvertIntToDecimalStringN(gStringVar1, GetTrainerLevelReductionFor(DIFFICULTY_EASY) - hard, STR_CONV_MODE_LEFT_ALIGN, 2);
-    ConvertIntToDecimalStringN(gStringVar2, GetTrainerLevelReductionFor(DIFFICULTY_NORMAL) - hard, STR_CONV_MODE_LEFT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Easy: foes {STR_VAR_1} levels lower. Medium: {STR_VAR_2}."));
-    FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(1));
-    FillWindowPixelRect(WIN_DESCRIPTION, PIXEL_FILL(7), 4, 2, 26 * 8 - 8, 1);
-    AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, gStringVar4, 8, 6, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(WIN_DESCRIPTION, FONT_SMALL_NARROW, COMPOUND_STRING("Hard: as designed. Teams never change."), 8, 18, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(WIN_DESCRIPTION, COPYWIN_FULL);
-}
-
 static void DrawOptionMenuTexts(void)
 {
     u8 i;
@@ -725,16 +616,18 @@ static void DrawOptionMenuTexts(void)
 
 static void DrawBgWindowFrames(void)
 {
-    //                     bg, tile,              x, y, width, height, palNum
-    // One frame around the list and the note
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1, 18,  7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1, 18,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
+    u32 top = OPTIONS_TOP - 1, height = MENUITEM_COUNT * 2, bottom = OPTIONS_TOP + height;
+
+    //                     bg, tile,              x, y,       width, height, palNum
+    // One frame around the list
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1, top,         1,      1, 7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2, top,        26,      1, 7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28, top,         1,      1, 7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1, top + 1,     1, height, 7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28, top + 1,     1, height, 7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, bottom,      1,      1, 7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, bottom,     26,      1, 7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, bottom,      1,      1, 7);
 
     CopyBgTilemapBufferToVram(1);
 }

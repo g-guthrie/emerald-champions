@@ -365,22 +365,16 @@ TEST("Emerald Champions disables the Bag only in competitive trainer battles")
     EXPECT(IsAllowedToUseBag());
 }
 
-// E3 hands Text Speed back to the player, so the saved value is now obeyed
-// instead of being overridden to Instant; Instant is only the new-game default.
-TEST("Emerald Champions Options owns the text speed setting")
+// Text is always Instant: Options has no speed row, and whatever an older
+// save holds is ignored.
+TEST("Emerald Champions text is always Instant")
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_SLOW;
-    EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_SLOW);
-    EXPECT_EQ(GetPlayerTextSpeedDelay(), 8);
-    EXPECT(!IsPlayerTextSpeedInstant());
-
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
-    EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_FAST);
-    EXPECT(!IsPlayerTextSpeedInstant());
-
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
-    EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_INSTANT);
-    EXPECT(IsPlayerTextSpeedInstant());
+    for (u32 speed = OPTIONS_TEXT_SPEED_SLOW; speed <= OPTIONS_TEXT_SPEED_INSTANT; speed++)
+    {
+        gSaveBlock2Ptr->optionsTextSpeed = speed;
+        EXPECT_EQ(GetPlayerTextSpeed(), OPTIONS_TEXT_SPEED_INSTANT);
+        EXPECT(IsPlayerTextSpeedInstant());
+    }
 }
 
 TEST("Emerald Champions catch transfers preserve both held-item loadouts")
