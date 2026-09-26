@@ -3118,7 +3118,7 @@ static void Cmd_switchindataupdate(void)
     gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0);
     gBattleMons[battler].types[1] = GetSpeciesType(gBattleMons[battler].species, 1);
     gBattleMons[battler].types[2] = TYPE_MYSTERY;
-    gBattleMons[battler].ability = GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
+    gBattleMons[battler].ability = GetBattlerAbilityBySpecies(battler, gBattleMons[battler].species, gBattleMons[battler].abilityNum);
     #if TESTING
     if (gTestRunnerEnabled)
     {
@@ -6276,7 +6276,7 @@ static void Cmd_healpartystatus(void)
                 ability = GetBattlerAbility(partner);
             else
             {
-                ability = GetAbilityBySpecies(species, abilityNum);
+                ability = GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(&party[i]));
                 #if TESTING
                 if (gTestRunnerEnabled)
                 {
@@ -7353,7 +7353,7 @@ static void Cmd_pickup(void)
             if (lvlDivBy10 > 9)
                 lvlDivBy10 = 9;
 
-            ability = GetSpeciesAbility(species, GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_ABILITY_NUM));
+            ability = GetSpeciesAbilityForOwner(species, GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_ABILITY_NUM), IsMonTrainerOwned(&gParties[B_TRAINER_PLAYER][i]));
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
@@ -9882,7 +9882,7 @@ static void UpdatePokeFlutePartyStatus(struct Pokemon* party, enum BattlerPositi
         if (species != SPECIES_NONE
             && species != SPECIES_EGG
             && status & AILMENT_FNT
-            && GetAbilityBySpecies(species, abilityNum) != ABILITY_SOUNDPROOF)
+            && GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(&party[i])) != ABILITY_SOUNDPROOF)
             monToCheck |= (1 << i);
     }
     if (monToCheck)

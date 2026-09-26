@@ -124,6 +124,18 @@ u8 (*const gEnemyPartyCountPtr) = &gPartiesCount[B_TRAINER_OPPONENT_A];
 
 #include "data/abilities.h"
 
+// Inclement layer: Inclement Emerald's base stat buffs and Ability slots,
+// read only by Pokemon that are not trainer-owned (see IsMonTrainerOwned).
+struct InclementSpeciesLayer
+{
+    bool8 hasBaseStats;
+    bool8 hasAbilities;
+    u8 baseStats[NUM_STATS];
+    u16 abilities[NUM_ABILITY_SLOTS];
+};
+
+#include "data/pokemon/inclement_layer.h"
+
 // Used in an unreferenced function in RS.
 // Unreferenced here and in FRLG.
 struct CombinedMove
@@ -973,7 +985,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
 
     value = boxMon->personality & 0x1;
     //using gen 3-4 ability formula, it was changed in later gens
-    if (GetSpeciesAbility(species, 1))
+    if (GetSpeciesAbilityForOwner(species, 1, FALSE))
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     SetBoxMonIVs(boxMon, MAX_PER_STAT_IVS);
 }
@@ -1335,11 +1347,17 @@ static u16 CalculateBoxMonChecksumReencrypt(struct BoxPokemon *boxMon)
 // Shedinja. Party recalculation and facility previews use this same function.
 u32 CalculateSpeciesStat(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs, u32 iv)
 {
+    return CalculateSpeciesStatForOwner(species, nature, stat, level, evs, iv, TRUE);
+}
+
+// Trainer-owned Pokemon read gSpeciesInfo; everyone else reads the Inclement layer.
+u32 CalculateSpeciesStatForOwner(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs, u32 iv, bool32 trainerOwned)
+{
     u32 value;
 
     if (stat == STAT_HP && HasShedinjaHPHandling(species))
         return 1;
-    value = ((2 * GetSpeciesBaseStat(species, stat) + min(iv, MAX_PER_STAT_IVS) + evs / 4) * level) / 100;
+    value = ((2 * GetSpeciesBaseStatForOwner(species, stat, trainerOwned) + min(iv, MAX_PER_STAT_IVS) + evs / 4) * level) / 100;
     if (stat == STAT_HP)
         return value + level + 10;
     return ModifyStatByNature(nature, value + 5, stat);
@@ -1369,6 +1387,7 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
+    bool32 trainerOwned = IsMonTrainerOwned(mon);
 
     // Trainer/Circuit opponents have battle-only levels above the boxed EXP ceiling.
     // Preserve them through Mega/form stat recalculation without changing the
@@ -1399,8 +1418,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         if (i == STAT_HP)
             continue;
 
-        s32 n = CalculateSpeciesStat(species, nature, i, level, ev[i],
-                                     GetMonData(mon, MON_DATA_HP_IV + i));
+        s32 n = CalculateSpeciesStatForOwner(species, nature, i, level, ev[i],
+                                             GetMonData(mon, MON_DATA_HP_IV + i), trainerOwned);
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
         SetMonData(mon, MON_DATA_MAX_HP + i, &n);
@@ -1411,8 +1430,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         return;
 #endif
 
-    newMaxHP = CalculateSpeciesStat(species, nature, STAT_HP, level, ev[STAT_HP],
-                                    GetMonData(mon, MON_DATA_HP_IV));
+    newMaxHP = CalculateSpeciesStatForOwner(species, nature, STAT_HP, level, ev[STAT_HP],
+                                            GetMonData(mon, MON_DATA_HP_IV), trainerOwned);
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
     if (gBattleScripting.levelUpHP == 0)
@@ -1438,6 +1457,70 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         currentHP = newMaxHP;
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
+}
+
+// Ownership rule for species data. Trainer-owned Pokemon use gSpeciesInfo
+// exactly as before; every other Pokemon (the player's, wild ones, gifts,
+// eggs, trades) reads the Inclement layer (sInclementLayer). The trainer mark
+// is explicit, stored in the Pokemon, and set in three places only:
+// GenerateMonFromTrainerMon (every trainer and NPC partner party), Champions
+// Circuit team generation, and battle start, which marks both opponent
+// parties of a trainer or Circuit battle and any partner party. Wild
+// battles never mark, so a caught Pokemon simply keeps the layer. Anything
+// the player receives (GiveMonToPartyOrPC) is unmarked.
+bool32 IsBoxMonTrainerOwned(const struct BoxPokemon *boxMon)
+{
+    return boxMon->isTrainerOwned;
+}
+
+bool32 IsMonTrainerOwned(const struct Pokemon *mon)
+{
+    return mon->box.isTrainerOwned;
+}
+
+void SetMonTrainerOwned(struct Pokemon *mon, bool32 trainerOwned)
+{
+    enum Species species;
+    u32 hp, maxHP;
+
+    if (mon->box.isTrainerOwned == (trainerOwned != FALSE))
+        return;
+    mon->box.isTrainerOwned = (trainerOwned != FALSE);
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    // Nothing to redo before the first stat calculation or without a layered stat line.
+    if (species == SPECIES_NONE || maxHP == 0 || !sInclementLayer[SanitizeSpeciesId(species)].hasBaseStats)
+        return;
+    // A full-HP Pokemon stays at full HP; otherwise keep its HP within the new maximum.
+    hp = GetMonData(mon, MON_DATA_HP);
+    CalculateMonStats(mon);
+    if (hp == maxHP)
+        hp = GetMonData(mon, MON_DATA_MAX_HP);
+    else
+        hp = min(hp, GetMonData(mon, MON_DATA_MAX_HP));
+    SetMonData(mon, MON_DATA_HP, &hp);
+}
+
+static void MarkPartyTrainerOwned(enum BattleTrainer trainer)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[trainer][slot];
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+            SetMonTrainerOwned(mon, TRUE);
+    }
+}
+
+// Battle start: both opponent parties of a trainer (or Champions Circuit)
+// battle and any NPC partner party are trainer-owned. Wild foes are not.
+void MarkTrainerBattlePartiesOwned(void)
+{
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) || IsChampionsCircuitBattle())
+    {
+        MarkPartyTrainerOwned(B_TRAINER_OPPONENT_A);
+        MarkPartyTrainerOwned(B_TRAINER_OPPONENT_B);
+    }
+    MarkPartyTrainerOwned(B_TRAINER_PARTNER);
 }
 
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
@@ -3061,6 +3144,8 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
 {
     s32 i;
 
+    // Whatever the player receives is the player's, never trainer-owned.
+    SetMonTrainerOwned(mon, FALSE);
     ClampMonToPlayerLevelCap(mon);
     MaxPlayerMonIVs(mon);
 
@@ -3256,12 +3341,19 @@ u8 GetMonsStateToDoubles_2(void)
     return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
 }
 
+// gSpeciesInfo's Ability for a slot, as trainer-owned Pokemon and the
+// Pokedex use it. Pokemon-specific callers use GetMonAbility.
 enum Ability GetAbilityBySpecies(enum Species species, u8 abilityNum)
+{
+    return GetAbilityBySpeciesForOwner(species, abilityNum, TRUE);
+}
+
+enum Ability GetAbilityBySpeciesForOwner(enum Species species, u8 abilityNum, bool32 trainerOwned)
 {
     int i;
 
     if (abilityNum < NUM_ABILITY_SLOTS)
-        gLastUsedAbility = GetSpeciesAbility(species, abilityNum);
+        gLastUsedAbility = GetSpeciesAbilityForOwner(species, abilityNum, trainerOwned);
     else
         gLastUsedAbility = ABILITY_NONE;
 
@@ -3269,13 +3361,13 @@ enum Ability GetAbilityBySpecies(enum Species species, u8 abilityNum)
     {
         for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
         {
-            gLastUsedAbility = GetSpeciesAbility(species, i);
+            gLastUsedAbility = GetSpeciesAbilityForOwner(species, i, trainerOwned);
         }
     }
 
     for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
     {
-        gLastUsedAbility = GetSpeciesAbility(species, i);
+        gLastUsedAbility = GetSpeciesAbilityForOwner(species, i, trainerOwned);
     }
 
     return gLastUsedAbility;
@@ -3285,7 +3377,7 @@ enum Ability GetMonAbility(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
     u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
-    return GetAbilityBySpecies(species, abilityNum);
+    return GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(mon));
 }
 
 void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
@@ -3399,6 +3491,29 @@ enum Ability GetSpeciesAbility(enum Species species, u8 slot)
     return gSpeciesInfo[SanitizeSpeciesId(species)].abilities[slot];
 }
 
+// Slot numbers are shared: a Pokemon keeps its ability slot, and only the
+// Ability in that slot differs between gSpeciesInfo and the Inclement layer.
+enum Ability GetSpeciesAbilityForOwner(enum Species species, u8 slot, bool32 trainerOwned)
+{
+    species = SanitizeSpeciesId(species);
+    if (!trainerOwned && slot < NUM_ABILITY_SLOTS && sInclementLayer[species].hasAbilities)
+        return sInclementLayer[species].abilities[slot];
+    return GetSpeciesAbility(species, slot);
+}
+
+bool32 FindSpeciesAbilitySlotForOwner(enum Species species, enum Ability ability, bool32 trainerOwned, u32 *slot)
+{
+    for (u32 i = 0; i < NUM_ABILITY_SLOTS; i++)
+    {
+        if (GetSpeciesAbilityForOwner(species, i, trainerOwned) == ability)
+        {
+            *slot = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 u32 GetSpeciesBaseHP(enum Species species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].baseHP;
@@ -3447,6 +3562,21 @@ u32 GetSpeciesBaseStat(enum Species species, u32 statIndex)
         return GetSpeciesBaseSpDefense(species);
     }
     return 0;
+}
+
+// The base stat line of wild and player-owned Pokemon: gSpeciesInfo plus
+// Inclement's buffs.
+u32 GetInclementSpeciesBaseStat(enum Species species, u32 statIndex)
+{
+    species = SanitizeSpeciesId(species);
+    if (statIndex < NUM_STATS && sInclementLayer[species].hasBaseStats)
+        return sInclementLayer[species].baseStats[statIndex];
+    return GetSpeciesBaseStat(species, statIndex);
+}
+
+u32 GetSpeciesBaseStatForOwner(enum Species species, u32 statIndex, bool32 trainerOwned)
+{
+    return trainerOwned ? GetSpeciesBaseStat(species, statIndex) : GetInclementSpeciesBaseStat(species, statIndex);
 }
 
 u32 GetSpeciesBaseStatTotal(enum Species species)
@@ -3575,7 +3705,7 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->types[2] = TYPE_MYSTERY;
     dst->isShiny = IsMonShiny(src);
     dst->affectionHearts = GetMonAffectionHearts(src);
-    dst->ability = GetAbilityBySpecies(dst->species, dst->abilityNum);
+    dst->ability = GetAbilityBySpeciesForOwner(dst->species, dst->abilityNum, IsMonTrainerOwned(src));
     GetMonData(src, MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(dst->nickname, nickname);
     GetMonData(src, MON_DATA_OT_NAME, dst->otName);
@@ -5997,7 +6127,7 @@ static enum Species GetFormChangeTargetSpeciesBoxMonWithMove(struct BoxPokemon *
         .method = method,
         .currentSpecies = species,
         .heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM),
-        .ability = GetAbilityBySpecies(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM)),
+        .ability = GetAbilityBySpeciesForOwner(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM), IsBoxMonTrainerOwned(boxMon)),
         .partyItemUsed = gSpecialVar_ItemId,
         .multichoiceSelection = gSpecialVar_Result,
         .status = GetBoxMonData(boxMon, MON_DATA_STATUS),
@@ -6818,7 +6948,7 @@ bool32 HasShedinjaHPHandling(enum Species species)
 
 static u32 ResolveAbility(enum Species species, u32 abilityNum)
 {
-    assertf(abilityNum < NUM_ABILITY_SLOTS && GetAbilityBySpecies(species, abilityNum) != ABILITY_NONE,
+    assertf(abilityNum < NUM_ABILITY_SLOTS && GetAbilityBySpeciesForOwner(species, abilityNum, FALSE) != ABILITY_NONE,
             "invalid ability num %d for species %d", abilityNum, species)
     {
         return 0;

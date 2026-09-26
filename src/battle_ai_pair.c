@@ -7029,7 +7029,7 @@ static s32 PairRankReserve(enum BattlerId actor, u32 slot)
             for (u32 form = 0; form < (foeMega != SPECIES_NONE ? 2 : 1); form++)
             {
                 enum Species attacker = form ? foeMega : foeSpecies;
-                enum Ability attackerAbility = form ? GetSpeciesAbility(foeMega, 0) : foeAbility;
+                enum Ability attackerAbility = form ? GetBattlerSpeciesAbility(foe, foeMega, 0) : foeAbility;
                 u32 factor = PairReserveTypeFactor(foe, actor, move, species, attackerAbility, ability, item);
                 enum Type type = GetMoveType(move);
                 u32 power = max(40, GetMovePower(move));
@@ -7298,7 +7298,7 @@ static bool32 PairMegaForfeitsSpeedBoost(enum BattlerId battler)
     if (mega == gBattleMons[battler].species)
         return FALSE;
     for (u32 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
-        if (GetSpeciesAbility(mega, slot) == ABILITY_SPEED_BOOST)
+        if (GetBattlerSpeciesAbility(battler, mega, slot) == ABILITY_SPEED_BOOST)
             return FALSE;
     return TRUE;
 }
@@ -7318,7 +7318,7 @@ static bool32 PairMegaRestoresPlanWeather(enum BattlerId battler)
     if (mega == gBattleMons[battler].species)
         return FALSE;
     u32 plan = EmeraldChampions_GetBattlePlan(battler), weather;
-    switch (GetSpeciesAbility(mega, 0))
+    switch (GetBattlerSpeciesAbility(battler, mega, 0))
     {
     case ABILITY_DROUGHT: plan &= EC_BATTLE_PLAN_SUN; weather = B_WEATHER_SUN; break;
     case ABILITY_DRIZZLE: plan &= EC_BATTLE_PLAN_RAIN; weather = B_WEATHER_RAIN; break;

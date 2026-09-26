@@ -632,6 +632,9 @@ static void CB2_InitBattleInternal(void)
 
     gMain.inBattle = TRUE;
     gSaveBlock2Ptr->frontier.disableRecordBattle = FALSE;
+    // Trainer, facility and Circuit opponents and any NPC partner are
+    // trainer-owned (gSpeciesInfo only); wild foes keep the Inclement layer.
+    MarkTrainerBattlePartiesOwned();
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -3235,7 +3238,7 @@ static void DoBattleIntro(void)
                 gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0);
                 gBattleMons[battler].types[1] = GetSpeciesType(gBattleMons[battler].species, 1);
                 gBattleMons[battler].types[2] = TYPE_MYSTERY;
-                gBattleMons[battler].ability = GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
+                gBattleMons[battler].ability = GetBattlerAbilityBySpecies(battler, gBattleMons[battler].species, gBattleMons[battler].abilityNum);
                 gBattleStruct->battlerState[battler].hpOnSwitchout = gBattleMons[battler].hp;
                 memset(&gBattleMons[battler].volatiles, 0, sizeof(struct Volatiles));
                 for (i = 0; i < NUM_BATTLE_STATS; i++)

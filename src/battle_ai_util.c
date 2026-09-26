@@ -404,9 +404,9 @@ void SetBattlerData(enum BattlerId battlerId)
         if (recordedAbility != ABILITY_NONE)
             gBattleMons[battlerId].ability = recordedAbility;
         // Check if mon can only have one ability.
-        else if (GetSpeciesAbility(species, 1) == ABILITY_NONE
-                || GetSpeciesAbility(species, 1) == GetSpeciesAbility(species, 0))
-            gBattleMons[battlerId].ability = GetSpeciesAbility(species, 0);
+        else if (GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
+                || GetBattlerSpeciesAbility(battlerId, species, 1) == GetBattlerSpeciesAbility(battlerId, species, 0))
+            gBattleMons[battlerId].ability = GetBattlerSpeciesAbility(battlerId, species, 0);
         // The ability is unknown.
         else
             gBattleMons[battlerId].ability = ABILITY_NONE;
@@ -2524,7 +2524,7 @@ enum Ability AI_DecideKnownAbilityForTurn(enum BattlerId battlerId)
 
     for (u32 abilityIndex = 0; abilityIndex < NUM_ABILITY_SLOTS; abilityIndex++)
     {
-        indexAbility = GetSpeciesAbility(gBattleMons[battlerId].species, abilityIndex);
+        indexAbility = GetBattlerSpeciesAbility(battlerId, gBattleMons[battlerId].species, abilityIndex);
         if (indexAbility != ABILITY_NONE)
         {
             abilityAiRatings[numValidAbilities] = gAbilitiesInfo[indexAbility].aiRating;
@@ -5715,7 +5715,7 @@ void IncreaseBurnScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
     {
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL)
             || (!(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects physical attacker
-                && GetSpeciesBaseAttack(gBattleMons[battlerDef].species) >= GetSpeciesBaseSpAttack(gBattleMons[battlerDef].species) + 10))
+                && GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_ATK) >= GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_SPATK) + 10))
         {
             enum Move defBestMoves[MAX_MON_MOVES] = {MOVE_NONE};
             bool32 hasPhysical = FALSE;
@@ -5836,7 +5836,7 @@ void IncreaseFrostbiteScore(enum BattlerId battlerAtk, enum BattlerId battlerDef
     {
         if (HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_SPECIAL)
             || (!(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_OMNISCIENT) // Not Omniscient but expects special attacker
-                && GetSpeciesBaseSpAttack(gBattleMons[battlerDef].species) >= GetSpeciesBaseAttack(gBattleMons[battlerDef].species) + 10))
+                && GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_SPATK) >= GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_ATK) + 10))
         {
             enum Move defBestMoves[MAX_MON_MOVES] = {MOVE_NONE};
             bool32 hasSpecial = FALSE;
@@ -6727,7 +6727,7 @@ bool32 ShouldFinalGambit(enum BattlerId battlerAtk, enum BattlerId battlerDef, b
             return TRUE;
     }
     else if (gAiLogicData->hpPercents[battlerAtk] >= gAiLogicData->hpPercents[battlerDef] // Consider using GetScaledHPFraction and moving B_HEALTHBAR_PIXELS define
-        && GetSpeciesBaseHP(gBattleMons[battlerAtk].species) >= GetSpeciesBaseHP(gBattleMons[battlerDef].species)
+        && GetBattlerSpeciesBaseStat(battlerAtk, gBattleMons[battlerAtk].species, STAT_HP) >= GetBattlerSpeciesBaseStat(battlerDef, gBattleMons[battlerDef].species, STAT_HP)
         && aiIsFaster)
     {
         return TRUE;

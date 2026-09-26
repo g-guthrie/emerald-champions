@@ -412,7 +412,7 @@ static u32 CalcBeatUpPower(void)
     // FIXME: Why call CalcBeatUpPower when 'beatUpSlot' is OOB?
     if (species == 0xFFFF)
         return 0;
-    return (GetSpeciesBaseAttack(species) / 10) + 5;
+    return (GetBattlerSpeciesBaseStat(gBattlerAttacker, species, STAT_ATK) / 10) + 5;
 }
 
 // Gen 3/4
@@ -422,11 +422,11 @@ static s32 CalcBeatUpDamage(struct DamageContext *ctx)
     struct Pokemon *party = GetBattlerParty(ctx->battlerAtk);
     enum Species species = GetMonData(&party[partyIndex], MON_DATA_SPECIES);
     u32 levelFactor = GetMonData(&party[partyIndex], MON_DATA_LEVEL) * 2 / 5 + 2;
-    s32 dmg = GetSpeciesBaseAttack(species);
+    s32 dmg = GetSpeciesBaseStatForOwner(species, STAT_ATK, IsMonTrainerOwned(&party[partyIndex]));
 
     dmg *= GetMovePower(ctx->move);
     dmg *= levelFactor;
-    dmg /= GetSpeciesBaseDefense(gBattleMons[ctx->battlerDef].species);
+    dmg /= GetBattlerSpeciesBaseStat(ctx->battlerDef, gBattleMons[ctx->battlerDef].species, STAT_DEF);
     dmg = (dmg / 50) + 2;
 
     if (gProtectStructs[ctx->battlerAtk].helpingHand)
@@ -2910,9 +2910,9 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
 
 static bool32 IsRestrictedAbility(enum BattlerId battler, enum Ability ability)
 {
-    return GetSpeciesAbility(gBattleMons[battler].species, 0) == ability
-        || GetSpeciesAbility(gBattleMons[battler].species, 1) == ability
-        || GetSpeciesAbility(gBattleMons[battler].species, 2) == ability;
+    return GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 0) == ability
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 1) == ability
+        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 2) == ability;
 }
 
 static bool32 TryDancer(void)
@@ -7932,7 +7932,7 @@ s32 CalcCritChanceStageGen1(struct DamageContext *ctx)
     s32 moveCritStage = GetMoveCriticalHitStage(ctx->move);
     s32 bonusCritStage = gBattleMons[ctx->battlerAtk].volatiles.bonusCritStages; // G-Max Chi Strike
     u32 holdEffectCritStage = GetHoldEffectCritChanceIncrease(ctx->battlerAtk, ctx->holdEffects[ctx->battlerAtk]);
-    u16 baseSpeed = GetSpeciesBaseSpeed(gBattleMons[ctx->battlerAtk].species);
+    u16 baseSpeed = GetBattlerSpeciesBaseStat(ctx->battlerAtk, gBattleMons[ctx->battlerAtk].species, STAT_SPEED);
 
     critChance = baseSpeed / 2;
 
@@ -9528,6 +9528,22 @@ u32 GetAttackerSunMoveWeather(enum HoldEffect holdEffect, enum Ability ability, 
     return GetAttackerWeather(holdEffect, ability, weather);
 }
 
+// Species data for a battler follows its party Pokemon's owner (IsMonTrainerOwned).
+enum Ability GetBattlerAbilityBySpecies(enum BattlerId battler, enum Species species, u8 abilityNum)
+{
+    return GetAbilityBySpeciesForOwner(species, abilityNum, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
+enum Ability GetBattlerSpeciesAbility(enum BattlerId battler, enum Species species, u8 slot)
+{
+    return GetSpeciesAbilityForOwner(species, slot, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
+u32 GetBattlerSpeciesBaseStat(enum BattlerId battler, enum Species species, u32 statIndex)
+{
+    return GetSpeciesBaseStatForOwner(species, statIndex, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
 bool32 IsSunlightMoveAbility(enum Ability ability)
 {
     return ability == ABILITY_MEGA_SOL || ability == ABILITY_CHLOROPLAST;
@@ -9794,8 +9810,7 @@ bool32 MoveIsAffectedBySheerForce(enum Move move)
 bool32 CanMonParticipateInSkyBattle(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    u32 monAbilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
-    enum Ability ability = GetSpeciesAbility(species, monAbilityNum);
+    enum Ability ability = GetMonAbility(mon);
 
     bool32 hasLevitateAbility = (ability == ABILITY_LEVITATE || ability == ABILITY_EELEVATE);
     bool32 isFlyingType = GetSpeciesType(species, 0) == TYPE_FLYING || GetSpeciesType(species, 1) == TYPE_FLYING;

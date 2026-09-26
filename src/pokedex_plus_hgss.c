@@ -1928,12 +1928,13 @@ static void SaveMonDataInStruct(void)
 
     sPokedexView->sPokemonStats.species             = species;
     sPokedexView->sPokemonStats.genderRatio         = gSpeciesInfo[species].genderRatio;
-    sPokedexView->sPokemonStats.baseHP              = GetSpeciesBaseHP(species);
-    sPokedexView->sPokemonStats.baseSpeed           = GetSpeciesBaseSpeed(species);
-    sPokedexView->sPokemonStats.baseAttack          = GetSpeciesBaseAttack(species);
-    sPokedexView->sPokemonStats.baseSpAttack        = GetSpeciesBaseSpAttack(species);
-    sPokedexView->sPokemonStats.baseDefense         = GetSpeciesBaseDefense(species);
-    sPokedexView->sPokemonStats.baseSpDefense       = GetSpeciesBaseSpDefense(species);
+    // The Pokedex shows the player's own base stats (Inclement's rebalance).
+    sPokedexView->sPokemonStats.baseHP              = GetInclementSpeciesBaseStat(species, STAT_HP);
+    sPokedexView->sPokemonStats.baseSpeed           = GetInclementSpeciesBaseStat(species, STAT_SPEED);
+    sPokedexView->sPokemonStats.baseAttack          = GetInclementSpeciesBaseStat(species, STAT_ATK);
+    sPokedexView->sPokemonStats.baseSpAttack        = GetInclementSpeciesBaseStat(species, STAT_SPATK);
+    sPokedexView->sPokemonStats.baseDefense         = GetInclementSpeciesBaseStat(species, STAT_DEF);
+    sPokedexView->sPokemonStats.baseSpDefense       = GetInclementSpeciesBaseStat(species, STAT_SPDEF);
     sPokedexView->sPokemonStats.differentEVs        = differentEVs;
     sPokedexView->sPokemonStats.evYield_HP          = evs[STAT_HP];
     sPokedexView->sPokemonStats.evYield_Speed       = evs[STAT_ATK];

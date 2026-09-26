@@ -2425,6 +2425,12 @@ void OpenPokemon(u32 sourceLine, enum BattleTrainer trainer, enum Species specie
     (*partySize)++;
 
     CreateMon(DATA.currentMon, species, 100, 0, OTID_STRUCT_PRESET(0));
+    // As in the game (IsMonTrainerOwned), a trainer battle's opponents and any
+    // partner are trainer-owned; wild foes are not. Mark them now so the
+    // battle-start sweep never recalculates stats a test sets explicitly.
+    if (trainer == B_TRAINER_PARTNER
+     || (trainer != B_TRAINER_PLAYER && (DATA.recordedBattle.battleFlags & BATTLE_TYPE_TRAINER)))
+        SetMonTrainerOwned(DATA.currentMon, TRUE);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         data = MOVE_NONE;
@@ -2519,23 +2525,18 @@ void Nature_(u32 sourceLine, u32 nature)
 
 void Ability_(u32 sourceLine, enum Ability ability)
 {
-    s32 i;
+    u32 slot;
     enum Species species;
-    const struct SpeciesInfo *info;
     INVALID_IF(!DATA.currentMon, "Ability outside of PLAYER/OPPONENT");
     INVALID_IF(ability >= ABILITIES_COUNT, "Illegal ability id: %d", ability);
     species = GetMonData(DATA.currentMon, MON_DATA_SPECIES);
-    info = &gSpeciesInfo[species];
-    for (i = 0; i < NUM_ABILITY_SLOTS; i++)
+    // Resolve the slot in the owner's view (trainer-owned: gSpeciesInfo; otherwise the Inclement layer).
+    if (FindSpeciesAbilitySlotForOwner(species, ability, IsMonTrainerOwned(DATA.currentMon), &slot))
     {
-        if (info->abilities[i] == ability)
-        {
-            SetMonData(DATA.currentMon, MON_DATA_ABILITY_NUM, &i);
-            break;
-        }
+        SetMonData(DATA.currentMon, MON_DATA_ABILITY_NUM, &slot);
     }
     // Store forced ability to be set when the battle starts if invalid.
-    if (i == NUM_ABILITY_SLOTS)
+    else
     {
         DATA.forcedAbilities[DATA.battlerParty][DATA.currentPartyIndex] = ability;
     }
