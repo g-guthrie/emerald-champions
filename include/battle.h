@@ -696,13 +696,13 @@ struct BattleStruct
     u8 descriptionSubmenu:1; // For Move Description window in move selection screen
     u8 foeTypesSubmenu:1; // Emerald Champions: the description window is showing the foes' types (R)
     u8 restartQuestionPending:1; // Emerald Champions: Run in a trainer battle first asks to restart the battle
-    u8 throwBallFromMoveMenu:1; // Emerald Champions: L in the move menu of a wild battle throws the last used Ball
     u8 ackBallUseBtn:1; // Used for the last used ball feature
     u8 ballSwapped:1; // Used for the last used ball feature
     u8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 throwingPokeBall:1;
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 moveInfoSpriteId; // move info, window gfx
+    u8 foeTypesHintSpriteId; // Emerald Champions: the L hint beside the move info one
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     enum Species beatUpSpecies[PARTY_SIZE]; // Species for Gen5+ Beat Up, otherwise party indexes
     u8 beatUpSlot:3;

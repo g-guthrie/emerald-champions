@@ -275,18 +275,6 @@ static void HandleInputChooseAction(enum BattlerId battler)
         return;
     }
 
-    if (gBattleStruct->throwBallFromMoveMenu)
-    {
-        gBattleStruct->throwBallFromMoveMenu = FALSE;
-        if (CanThrowLastUsedBall())
-        {
-            TryHideLastUsedBall();
-            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_THROW_BALL, 0);
-            BtlController_Complete(battler);
-            return;
-        }
-    }
-
     if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
     && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
@@ -954,23 +942,12 @@ void HandleInputChooseMove(enum BattlerId battler)
             MoveSelectionDisplayMoveType(battler);
         }
     }
-    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && !gBattleStruct->zmove.viewing && CanThrowLastUsedBall()
-        && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
-    {
-        // Emerald Champions: in a wild battle R throws the last used Ball straight from
-        // the move menu. Cancel back to the action menu and let it perform the throw.
-        PlaySE(SE_SELECT);
-        gBattleStruct->throwBallFromMoveMenu = TRUE;
-        gBattleStruct->gimmick.playerSelect = FALSE;
-        BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, 0xFFFF);
-        HideGimmickTriggerSprite();
-        BtlController_Complete(battler);
-        TryToHideMoveInfoWindow();
-    }
+    // Emerald Champions: R throws the last used Ball from the action menu only;
+    // in the move menu it always opens move info, wild battles included.
     else if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) &&
         !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
-        // The R-button hint sprite overlaps the panel; hide it while the panel is up.
+        // The button hints overlap the panel; hide them while the panel is up.
         TryToHideMoveInfoWindow();
         gBattleStruct->descriptionSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);

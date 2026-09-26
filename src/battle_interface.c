@@ -692,6 +692,7 @@ u8 CreateBattlerHealthboxSprites(enum BattlerId battler)
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
     gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
+    gBattleStruct->foeTypesHintSpriteId = MAX_SPRITES;
 
     return healthboxLeftSpriteId;
 }
@@ -2695,6 +2696,17 @@ static const struct SpriteTemplate sSpriteTemplate_MoveInfoWindow =
     .callback = SpriteCB_MoveInfoWin
 };
 
+// Emerald Champions: the L hint (the foes' types) sits just above the R one.
+#define FOE_TYPES_WINDOW_TAG 0xE723
+
+static const struct SpriteTemplate sSpriteTemplate_FoeTypesWindow =
+{
+    .tileTag = FOE_TYPES_WINDOW_TAG,
+    .paletteTag = TAG_ABILITY_POP_UP,
+    .oam = &sOamData_MoveInfoWindow,
+    .callback = SpriteCB_MoveInfoWin
+};
+
 #if B_LAST_USED_BALL_BUTTON == R_BUTTON && B_LAST_USED_BALL_CYCLE == TRUE
     static const u8 ALIGNED(4) sLastUsedBallWindowGfx[] = INCGFX_U8("graphics/battle_interface/last_used_ball_r_cycle.png", ".4bpp");
 #elif B_LAST_USED_BALL_CYCLE == TRUE
@@ -2718,6 +2730,13 @@ static const u8 sMoveInfoWindowGfx[] = INCGFX_U8("graphics/battle_interface/move
 static const struct SpriteSheet sSpriteSheet_MoveInfoWindow =
 {
     sMoveInfoWindowGfx, sizeof(sMoveInfoWindowGfx), MOVE_INFO_WINDOW_TAG
+};
+
+static const u8 sFoeTypesWindowGfx[] = INCGFX_U8("graphics/battle_interface/foe_types_window_l.png", ".4bpp");
+
+static const struct SpriteSheet sSpriteSheet_FoeTypesWindow =
+{
+    sFoeTypesWindowGfx, sizeof(sFoeTypesWindowGfx), FOE_TYPES_WINDOW_TAG
 };
 
 #define LAST_USED_BALL_X_F    14
@@ -2795,19 +2814,35 @@ void TryAddLastUsedBallItemSprites(void)
                                                        LAST_BALL_WIN_X_0,
                                                        LAST_USED_WIN_Y, 5);
         gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;
-        if (gBattleStruct->moveInfoSpriteId != MAX_SPRITES)
-            gSprites[gBattleStruct->moveInfoSpriteId].sHide = TRUE;
+        TryToHideMoveInfoWindow();
         gLastUsedBallMenuPresent = TRUE;
     }
     if (B_LAST_USED_BALL_CYCLE == TRUE)
         ArrowsChangeColorLastBallCycle(0); //Default the arrows to be invisible
 }
 
+// The Ball shortcut's window and the move menu's button hints share the left
+// edge of the screen, so they take turns: freeing their shared palette waits
+// for the last of them, hints slide in only once the Ball window has left, and
+// the Ball slides back in only once any leaving hint has gone.
+static void TryFreeLeftEdgeWindowPalette(void)
+{
+    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF
+     && GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF
+     && GetSpriteTileStartByTag(FOE_TYPES_WINDOW_TAG) == 0xFFFF)
+        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+}
+
+static bool32 IsButtonHintLeaving(void)
+{
+    return (gBattleStruct->moveInfoSpriteId != MAX_SPRITES && gSprites[gBattleStruct->moveInfoSpriteId].sHide)
+        || (gBattleStruct->foeTypesHintSpriteId != MAX_SPRITES && gSprites[gBattleStruct->foeTypesHintSpriteId].sHide);
+}
+
 static void DestroyLastUsedBallWinGfx(struct Sprite *sprite)
 {
     FreeSpriteTilesByTag(TAG_LAST_BALL_WINDOW);
-    if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
-        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+    TryFreeLeftEdgeWindowPalette();
     DestroySprite(sprite);
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
 }
@@ -2820,6 +2855,26 @@ static void DestroyLastUsedBallGfx(struct Sprite *sprite)
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
 }
 
+static void TryToAddButtonHint(u8 *spriteId, const struct SpriteSheet *sheet, const struct SpriteTemplate *template, s16 y)
+{
+    if (GetSpriteTileStartByTag(sheet->tag) == 0xFFFF)
+        LoadSpriteSheet(sheet);
+
+    if (*spriteId == MAX_SPRITES)
+    {
+        *spriteId = CreateSprite(template, LAST_BALL_WIN_X_0, y, 6);
+        gSprites[*spriteId].sHide = FALSE;
+    }
+    else
+    {
+        // Still sliding out from a hide: bring it back instead of letting it destroy itself.
+        gSprites[*spriteId].sHide = FALSE;
+    }
+}
+
+// The move menu's hints: R for move info and, just above it, L for the foes'
+// types. R opens move info in every battle; only the action menu's R throws
+// the last used Ball.
 void TryToAddMoveInfoWindow(void)
 {
     if (!B_SHOW_MOVE_DESCRIPTION)
@@ -2828,40 +2883,34 @@ void TryToAddMoveInfoWindow(void)
     if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         return;
 
-    // Emerald Champions: in a wild battle the same button throws the last used Ball from
-    // the move menu, so the "L = move info" hint would lie; leave it off there.
-    if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_BUTTON == B_MOVE_DESCRIPTION_BUTTON && CanThrowLastUsedBall())
-        return;
-
     LoadSpritePalette(&sSpritePalette_AbilityPopUp);
-    if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
-        LoadSpriteSheet(&sSpriteSheet_MoveInfoWindow);
-
-    if (gBattleStruct->moveInfoSpriteId == MAX_SPRITES)
-    {
-        gBattleStruct->moveInfoSpriteId = CreateSprite(&sSpriteTemplate_MoveInfoWindow, LAST_BALL_WIN_X_0, LAST_USED_WIN_Y + 32, 6);
-        gSprites[gBattleStruct->moveInfoSpriteId].sHide = FALSE;
-    }
-    else
-    {
-        // Still sliding out from a hide: bring it back instead of letting it destroy itself.
-        gSprites[gBattleStruct->moveInfoSpriteId].sHide = FALSE;
-    }
+    TryToAddButtonHint(&gBattleStruct->moveInfoSpriteId, &sSpriteSheet_MoveInfoWindow,
+                       &sSpriteTemplate_MoveInfoWindow, LAST_USED_WIN_Y + 32);
+    // With L as A, L never opens the foes' types.
+    if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_L_EQUALS_A)
+        TryToAddButtonHint(&gBattleStruct->foeTypesHintSpriteId, &sSpriteSheet_FoeTypesWindow,
+                           &sSpriteTemplate_FoeTypesWindow, LAST_USED_WIN_Y + 32 - 29);
 }
 
 void TryToHideMoveInfoWindow(void)
 {
     if (gBattleStruct->moveInfoSpriteId != MAX_SPRITES)
         gSprites[gBattleStruct->moveInfoSpriteId].sHide = TRUE;
+    if (gBattleStruct->foeTypesHintSpriteId != MAX_SPRITES)
+        gSprites[gBattleStruct->foeTypesHintSpriteId].sHide = TRUE;
 }
 
 static void DestroyMoveInfoWinGfx(struct Sprite *sprite)
 {
-    FreeSpriteTilesByTag(MOVE_INFO_WINDOW_TAG);
-    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF)
-        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+    u16 tileTag = sprite->template->tileTag;
+
+    FreeSpriteTilesByTag(tileTag);
+    TryFreeLeftEdgeWindowPalette();
     DestroySprite(sprite);
-    gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
+    if (tileTag == FOE_TYPES_WINDOW_TAG)
+        gBattleStruct->foeTypesHintSpriteId = MAX_SPRITES;
+    else
+        gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
 }
 
 static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
@@ -2874,7 +2923,7 @@ static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
         if (sprite->x == LAST_BALL_WIN_X_0)
             DestroyLastUsedBallWinGfx(sprite);
     }
-    else
+    else if (!IsButtonHintLeaving())
     {
         if (sprite->x != LAST_BALL_WIN_X_F)
             sprite->x++;
@@ -2894,13 +2943,14 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
         if (sprite->x == LAST_USED_BALL_X_0)
             DestroyLastUsedBallGfx(sprite);
     }
-    else
+    else if (!IsButtonHintLeaving())
     {
         if (sprite->x != LAST_USED_BALL_X_F)
             sprite->x++;
     }
 }
 
+// Shared by the R (move info) and L (foes' types) hints.
 static void SpriteCB_MoveInfoWin(struct Sprite *sprite)
 {
     if (sprite->sHide)
@@ -2911,7 +2961,7 @@ static void SpriteCB_MoveInfoWin(struct Sprite *sprite)
         if (sprite->x == LAST_BALL_WIN_X_0)
             DestroyMoveInfoWinGfx(sprite);
     }
-    else
+    else if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES)
     {
         if (sprite->x != LAST_BALL_WIN_X_F)
             sprite->x++;
@@ -2963,6 +3013,8 @@ void TryRestoreLastUsedBall(void)
     if (B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         return;
 
+    // The move menu's hints never stay up beside the Ball shortcut.
+    TryToHideMoveInfoWindow();
     if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
         TryHideOrRestoreLastUsedBall(1);
     else
