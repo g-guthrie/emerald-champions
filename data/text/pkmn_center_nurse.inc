@@ -1,11 +1,14 @@
 gText_EmeraldChampionsFirstCenterVisit::
 	.string "This is your first visit, isn't it?\p"
-	.string "We give every new Trainer four\n"
+	.string "We give every new Trainer five\n"
 	.string "tools for building teams quickly.\p"
 	.string "First, take this Poké Vial!$"
 
 gText_EmeraldChampionsGiveLeveler::
 	.string "And here is your Leveler!$"
+
+gText_EmeraldChampionsGiveRegenerator::
+	.string "This is the Regenerator!$"
 
 gText_EmeraldChampionsGiveRepelSpray::
 	.string "Next, the Repel Spray!$"
@@ -20,8 +23,9 @@ gText_EmeraldChampionsExplainTools::
 	.string "The Leveler raises your party as\n"
 	.string "high as your Badges allow, anytime.\p"
 	.string "The Move Tutor teaches moves for\n"
-	.string "free, and our shop clerk sells\l"
-	.string "held items you've found.$"
+	.string "free and trains EVs for a small fee.\p"
+	.string "Our shop clerk sells held items\n"
+	.string "you've found.$"
 
 gText_EmeraldChampionsGiveMissingFlightBeacon::
 	.string "One more tool for you:\n"
@@ -54,6 +58,18 @@ gText_EmeraldChampionsExplainRepelSpray::
 gText_EmeraldChampionsGiveMissingLeveler::
 	.string "We have one more tool for you:\n"
 	.string "the Leveler!$"
+
+gText_EmeraldChampionsGiveMissingRegenerator::
+	.string "We have one more tool for you:\n"
+	.string "the Regenerator!$"
+
+gText_EmeraldChampionsExplainRegenerator::
+	.string "With the Regenerator, a held Berry\n"
+	.string "your Pokémon eats in battle comes\l"
+	.string "back when the battle ends.\p"
+	.string "You still have to find each Berry.\n"
+	.string "One knocked off, stolen, burned or\l"
+	.string "eaten by a foe is gone for good.$"
 
 gText_EmeraldChampionsExplainLeveler::
 	.string "The Leveler raises your whole party\n"

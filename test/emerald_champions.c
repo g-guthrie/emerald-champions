@@ -1214,7 +1214,9 @@ TEST("Emerald Champions Game Corner delivers a natural alternate starter transac
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_CHARMANDER);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), GetCurrentLevelCap());
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 0);
+    // Every Pokemon joins the player with the baseline spread (252 HP, 510 in all).
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), MAX_PER_STAT_EVS);
+    EXPECT_EQ(GetMonEVCount(&gParties[B_TRAINER_PLAYER][0]), MAX_TOTAL_EVS);
 }
 
 TEST("Emerald Champions Game Corner rejects a repeated archive claim")
@@ -1302,7 +1304,8 @@ TEST("Emerald Champions story gifts preserve natural builds and empty held items
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES), species[slot]);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL),
             min(levels[slot], GetPlayerLevelCapForSpecies(species[slot])));
-        EXPECT_EQ(GetMonEVCount(&gParties[B_TRAINER_PLAYER][slot]), 0);
+        EXPECT_EQ(GetMonEVCount(&gParties[B_TRAINER_PLAYER][slot]), MAX_TOTAL_EVS);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP_EV), MAX_PER_STAT_EVS);
         item = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM);
         EXPECT_EQ(item, ITEM_NONE);
         restorationItem = gBattleStruct->itemLost[B_TRAINER_PLAYER][slot].originalItem;
@@ -1339,8 +1342,8 @@ TEST("Emerald Champions prepared story gifts preserve PC delivery and no-room re
         SPECIES_BELDUM
     );
     EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HELD_ITEM), ITEM_NONE);
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HP_EV + stat), 0);
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HP_EV), MAX_PER_STAT_EVS);
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPEED_EV), 50);
 
     ZeroPlayerPartyMons();
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));

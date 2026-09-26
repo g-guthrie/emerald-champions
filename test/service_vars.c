@@ -5,7 +5,10 @@
 #include "legendary_signs.h"
 #include "mega_stone_rewards.h"
 #include "pokemon.h"
+#include "constants/characters.h"
+#include "string_util.h"
 #include "test/test.h"
+#include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/service_vars.h"
 
@@ -16,6 +19,13 @@
 extern void CheckChosenMonCanGainEVs(void);
 extern void ChangeChosenMonHiddenPower(void);
 extern void BufferEmeraldChampionsBattleItemStock(void);
+extern void StartPlannedEVSpread(void);
+extern void BufferPlannedEVRow(void);
+extern void AdjustPlannedEV(void);
+extern void ClearPlannedEVs(void);
+extern void CheckPlannedEVSpreadChanged(void);
+extern void BufferPlannedEVSummary(void);
+extern void ApplyPlannedEVSpread(void);
 
 static void SetScriptOwnedSentinels(void)
 {
@@ -42,6 +52,9 @@ TEST("Service vars: the aliases keep the documented special var layout")
     // The tutor calls Bonding: their state must not overlap.
     EXPECT_NE(VAR_TUTOR_CURSOR, VAR_BONDING_CURSOR);
     EXPECT_NE(VAR_TUTOR_CURSOR, VAR_BONDING_MON);
+    EXPECT_NE(VAR_TUTOR_CURSOR, VAR_EV_PLAN_CURSOR);
+    EXPECT_NE(VAR_TUTOR_CURSOR, VAR_EV_PLAN_MON);
+    EXPECT_NE(VAR_TUTOR_CURSOR, VAR_EV_PLAN_STEP);
     // The Berry Master calls the Harvest menu.
     EXPECT_NE(VAR_BERRY_MASTER_CURSOR, VAR_HARVEST_AT_BERRY_MASTER);
     EXPECT_NE(VAR_BERRY_MASTER_CURSOR, VAR_HARVEST_LIST_CURSOR);
@@ -128,4 +141,100 @@ TEST("Service vars: harvest, berry, fossil, stock and stat services leave script
 
     ZeroPlayerPartyMons();
     ClearBag();
+}
+
+static u32 PlanEVs(u32 stat, u32 step)
+{
+    gSpecialVar_0x8005 = stat;
+    gSpecialVar_0x8006 = step;
+    AdjustPlannedEV();
+    return gSpecialVar_Result;
+}
+
+static u32 PlannedEV(u32 stat)
+{
+    gSpecialVar_0x8005 = stat;
+    BufferPlannedEVRow();
+    u32 value = 0;
+    for (const u8 *c = gStringVar3; *c != EOS; c++)
+        value = value * 10 + (*c - CHAR_0);
+    return value;
+}
+
+TEST("Center EV training: a planned spread changes nothing until it is applied whole")
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][1];
+    u32 attack = 100;
+
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(mon, SPECIES_PICHU, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(mon, MON_DATA_ATK_EV, &attack);
+    CalculateMonStats(mon);
+    CalculatePlayerPartyCount();
+    u32 attackStat = GetMonData(mon, MON_DATA_ATK);
+
+    SetScriptOwnedSentinels();
+    gSpecialVar_0x8004 = 1;
+    StartPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(PlannedEV(STAT_ATK), 100);
+
+    // Confirming the unchanged spread is a no-op.
+    CheckPlannedEVSpreadChanged();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    // Steps clip to 252 per stat and 510 in all, and say which limit stopped them.
+    EXPECT_EQ(PlanEVs(STAT_ATK, EV_PLAN_STEP_ADD_MAX), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlannedEV(STAT_ATK), 252);
+    EXPECT_EQ(PlanEVs(STAT_ATK, EV_PLAN_STEP_ADD_4), EV_PLAN_STAT_FULL);
+    EXPECT_EQ(PlanEVs(STAT_SPEED, EV_PLAN_STEP_ADD_MAX), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlanEVs(STAT_HP, EV_PLAN_STEP_ADD_64), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlannedEV(STAT_HP), 6);
+    EXPECT_EQ(PlanEVs(STAT_DEF, EV_PLAN_STEP_ADD_4), EV_PLAN_TOTAL_FULL);
+    EXPECT_EQ(PlanEVs(STAT_HP, EV_PLAN_STEP_SUB_4), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlannedEV(STAT_HP), 2);
+    EXPECT_EQ(PlanEVs(STAT_HP, EV_PLAN_STEP_SUB_64), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlanEVs(STAT_HP, EV_PLAN_STEP_SUB_4), EV_PLAN_STAT_EMPTY);
+    EXPECT_EQ(PlanEVs(STAT_DEF, EV_PLAN_STEP_ADD_4), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlanEVs(STAT_DEF, EV_PLAN_STEP_CLEAR), EV_PLAN_CHANGED);
+    EXPECT_EQ(PlannedEV(STAT_DEF), 0);
+
+    // Nothing reached the Pokémon while planning.
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 100);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPEED_EV), 0);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK), attackStat);
+
+    // The confirmation lists the whole plan.
+    BufferPlannedEVSummary();
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("HP 0   Atk 252   Def 0")), 0);
+    EXPECT_EQ(StringCompare(gStringVar3, COMPOUND_STRING("Spe 252   SpA 0   SpD 0")), 0);
+
+    // Applying writes the whole spread at once.
+    CheckPlannedEVSpreadChanged();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    ApplyPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 252);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_SPEED_EV), 252);
+    EXPECT_GT(GetMonData(mon, MON_DATA_ATK), attackStat);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK_EV), 0);
+    CheckPlannedEVSpreadChanged();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    // Clear All empties the plan; a different Pokémon in the slot is refused.
+    ClearPlannedEVs();
+    EXPECT_EQ(PlannedEV(STAT_ATK), 0);
+    CreateMon(mon, SPECIES_PICHU, 20, 1, OTID_STRUCT_PLAYER_ID);
+    ApplyPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    ExpectScriptOwnedSentinels();
+
+    // Eggs cannot be trained.
+    bool8 isEgg = TRUE;
+    SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
+    gSpecialVar_0x8004 = 1;
+    StartPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    ZeroPlayerPartyMons();
 }

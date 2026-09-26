@@ -49,9 +49,10 @@ SINGLE_BATTLE_TEST("Regenerator: Cud Chew heals twice with or without the tool; 
     }
 }
 
-SINGLE_BATTLE_TEST("Regenerator: Knock Off returns a Recycled berry after battle")
+SINGLE_BATTLE_TEST("Regenerator: a Recycled berry knocked off is lost even with the tool")
 {
     GIVEN {
+        GIVE_PLAYER_ITEM(ITEM_REGENERATOR, 1);
         PLAYER(SPECIES_SNORLAX) { HP(120); MaxHP(200); Item(ITEM_SITRUS_BERRY); Moves(MOVE_SPLASH, MOVE_RECYCLE); }
         OPPONENT(SPECIES_WOBBUFFET) { Attack(1); Moves(MOVE_DRAGON_RAGE, MOVE_CELEBRATE, MOVE_KNOCK_OFF); }
     } WHEN {
@@ -61,11 +62,12 @@ SINGLE_BATTLE_TEST("Regenerator: Knock Off returns a Recycled berry after battle
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
         EXPECT(!GetBattlerPartyState(B_BATTLER_0)->originalBerryConsumed);
-        ClearBag();
+        EXPECT(GetBattlerPartyState(B_BATTLER_0)->originalBerryRemoved);
         u32 flags = gBattleTypeFlags;
         gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_SITRUS_BERRY);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_NONE);
         gBattleTypeFlags = flags;
+        ClearBag();
     }
 }
 
@@ -119,18 +121,18 @@ SINGLE_BATTLE_TEST("Regenerator: transferred berry recovery clears its original 
 {
     GIVEN {
         PLAYER(SPECIES_MEW) { HP(200); MaxHP(200); Item(ITEM_SITRUS_BERRY); Moves(MOVE_TRICK, MOVE_SPLASH); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); Attack(1); Moves(MOVE_CELEBRATE, MOVE_RECYCLE, MOVE_KNOCK_OFF); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(100); MaxHP(200); Moves(MOVE_CELEBRATE, MOVE_RECYCLE); }
     } WHEN {
         TURN { MOVE(player, MOVE_TRICK); MOVE(opponent, MOVE_CELEBRATE); }
         TURN { MOVE(player, MOVE_SPLASH); MOVE(opponent, MOVE_RECYCLE); }
         TURN { MOVE(player, MOVE_TRICK); MOVE(opponent, MOVE_CELEBRATE); }
-        TURN { MOVE(player, MOVE_SPLASH); MOVE(opponent, MOVE_KNOCK_OFF); }
     } THEN {
-        EXPECT_EQ(player->item, ITEM_NONE);
+        EXPECT_EQ(player->item, ITEM_SITRUS_BERRY);
         EXPECT(!GetBattlerPartyState(B_BATTLER_0)->originalBerryConsumed);
         ClearBag();
         u32 flags = gBattleTypeFlags;
         gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+        // Without the tool, only a cleared consumption record returns it.
         EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_SITRUS_BERRY);
         gBattleTypeFlags = flags;
     }
@@ -205,7 +207,7 @@ SINGLE_BATTLE_TEST("Regenerator: berry destruction respects Sticky Hold and acti
     }
 }
 
-SINGLE_BATTLE_TEST("Regenerator: Knock Off returns berries while theft and destruction remove them")
+SINGLE_BATTLE_TEST("Regenerator: Knock Off, theft and destruction remove berries even with the tool")
 {
     enum Move removal = MOVE_KNOCK_OFF;
     bool32 tool = FALSE;
@@ -218,20 +220,24 @@ SINGLE_BATTLE_TEST("Regenerator: Knock Off returns berries while theft and destr
         PARAMETRIZE { removal = MOVE_SWITCHEROO; tool = owned; }
         PARAMETRIZE { removal = MOVE_BUG_BITE; tool = owned; }
         PARAMETRIZE { removal = MOVE_PLUCK; tool = owned; }
+        PARAMETRIZE { removal = MOVE_INCINERATE; tool = owned; }
     }
     GIVEN {
         if (tool)
             GIVE_PLAYER_ITEM(ITEM_REGENERATOR, 1);
         PLAYER(SPECIES_SNORLAX) { HP(400); MaxHP(400); Item(ITEM_SITRUS_BERRY); Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_MEW) { Attack(1); Moves(removal); }
+        OPPONENT(SPECIES_MEW) { Attack(1); SpAttack(1); Moves(removal); }
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, removal); }
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
-        EXPECT_EQ((u32)GetBattlerPartyState(B_BATTLER_0)->originalBerryRemoved, removal != MOVE_KNOCK_OFF);
+        EXPECT_EQ((u32)GetBattlerPartyState(B_BATTLER_0)->originalBerryRemoved, removal != MOVE_INCINERATE);
+        EXPECT_EQ((u32)GetBattlerPartyState(B_BATTLER_0)->originalBerryDestroyed,
+                  removal == MOVE_INCINERATE || removal == MOVE_BUG_BITE || removal == MOVE_PLUCK);
+        EXPECT(!GetBattlerPartyState(B_BATTLER_0)->originalBerryConsumed);
         u32 flags = gBattleTypeFlags;
         gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), removal == MOVE_KNOCK_OFF ? ITEM_SITRUS_BERRY : ITEM_NONE);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_NONE);
         gBattleTypeFlags = flags;
     }
 }

@@ -7,6 +7,7 @@
 #include "strings.h"
 #include "text.h"
 #include "caps.h"
+#include "constants/field_specials.h"
 #include "constants/items.h"
 
 // Inclement Emerald's Super Training, Hyper Training and nature services,
@@ -160,6 +161,199 @@ void ResetChosenMonEVs(void)
     for (u32 i = 0; i < NUM_STATS; i++)
         SetMonData(mon, sStatData[i], &zero);
     CalculateMonStats(mon);
+}
+
+// The Center move tutor's EV editor plans a whole spread and applies it at
+// once on confirmation, so backing out never touches the Pokémon. Its scripts
+// pass the stat in VAR_0x8005 and an EV_PLAN_STEP_* in VAR_0x8006; the Pokémon
+// is fixed when planning starts.
+static EWRAM_DATA u8 sPlannedEVs[NUM_STATS] = {0};
+static EWRAM_DATA u32 sPlannedEVsPersonality = 0;
+static EWRAM_DATA u8 sPlannedEVsSlot = 0; // party slot + 1; 0 before planning
+
+static const u8 *const sPlannedEVStatNames[NUM_STATS] =
+{
+    COMPOUND_STRING("HP"), COMPOUND_STRING("Attack"), COMPOUND_STRING("Defense"),
+    COMPOUND_STRING("Speed"), COMPOUND_STRING("Sp. Atk"), COMPOUND_STRING("Sp. Def"),
+};
+
+static const u8 *const sPlannedEVShortNames[NUM_STATS] =
+{
+    COMPOUND_STRING("HP"), COMPOUND_STRING("Atk"), COMPOUND_STRING("Def"),
+    COMPOUND_STRING("Spe"), COMPOUND_STRING("SpA"), COMPOUND_STRING("SpD"),
+};
+
+static u32 PlannedEVTotal(void)
+{
+    u32 total = 0;
+    for (u32 i = 0; i < NUM_STATS; i++)
+        total += sPlannedEVs[i];
+    return total;
+}
+
+static struct Pokemon *GetPlannedEVsMon(void)
+{
+    struct Pokemon *mon = sPlannedEVsSlot != 0 ? GetServiceMon(sPlannedEVsSlot - 1) : NULL;
+    if (mon == NULL || GetMonData(mon, MON_DATA_PERSONALITY) != sPlannedEVsPersonality)
+        return NULL;
+    return mon;
+}
+
+// In VAR_0x8004 party slot; out VAR_RESULT FALSE for an Egg or empty slot.
+void StartPlannedEVSpread(void)
+{
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+
+    sPlannedEVsSlot = 0;
+    gSpecialVar_Result = FALSE;
+    if (mon == NULL)
+        return;
+    sPlannedEVsSlot = gSpecialVar_0x8004 + 1;
+    sPlannedEVsPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+    for (u32 i = 0; i < NUM_STATS; i++)
+        sPlannedEVs[i] = min(GetMonData(mon, sStatData[i]), MAX_PER_STAT_EVS);
+    gSpecialVar_Result = TRUE;
+}
+
+// One editor row: in VAR_0x8005 stat; out STR_VAR_2 its EVs now and
+// STR_VAR_3 its planned EVs.
+void BufferPlannedEVRow(void)
+{
+    struct Pokemon *mon = GetPlannedEVsMon();
+    u32 stat = min(gSpecialVar_0x8005, NUM_STATS - 1);
+
+    ConvertIntToDecimalStringN(gStringVar2, mon != NULL ? GetMonData(mon, sStatData[stat]) : 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, sPlannedEVs[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+// Out STR_VAR_3 the planned total.
+void BufferPlannedEVTotal(void)
+{
+    ConvertIntToDecimalStringN(gStringVar3, PlannedEVTotal(), STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+// The step menu's prompt for the stat in VAR_0x8005, in gStringVar4.
+void BufferPlannedEVStatPrompt(void)
+{
+    struct Pokemon *mon = GetPlannedEVsMon();
+    u32 stat = min(gSpecialVar_0x8005, NUM_STATS - 1);
+    u8 *dst = StringCopy(gStringVar4, sPlannedEVStatNames[stat]);
+
+    dst = StringCopy(dst, COMPOUND_STRING(": now "));
+    dst = ConvertIntToDecimalStringN(dst, mon != NULL ? GetMonData(mon, sStatData[stat]) : 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    dst = StringCopy(dst, COMPOUND_STRING(", planned "));
+    dst = ConvertIntToDecimalStringN(dst, sPlannedEVs[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
+    dst = StringCopy(dst, COMPOUND_STRING(".\nPlanned total: "));
+    dst = ConvertIntToDecimalStringN(dst, PlannedEVTotal(), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringCopy(dst, COMPOUND_STRING(" of 510."));
+}
+
+// In VAR_0x8005 stat, VAR_0x8006 an EV_PLAN_STEP_*. Adds as much as the
+// 252-per-stat and 510-total limits allow; out VAR_RESULT an EV_PLAN_*.
+void AdjustPlannedEV(void)
+{
+    u32 stat = gSpecialVar_0x8005;
+    u32 current, room;
+
+    gSpecialVar_Result = EV_PLAN_STAT_EMPTY;
+    if (stat >= NUM_STATS)
+        return;
+    current = sPlannedEVs[stat];
+    switch (gSpecialVar_0x8006)
+    {
+    case EV_PLAN_STEP_ADD_4:
+    case EV_PLAN_STEP_ADD_64:
+    case EV_PLAN_STEP_ADD_MAX:
+        if (current >= MAX_PER_STAT_EVS)
+        {
+            gSpecialVar_Result = EV_PLAN_STAT_FULL;
+            return;
+        }
+        room = min(MAX_PER_STAT_EVS - current, MAX_TOTAL_EVS - min(PlannedEVTotal(), MAX_TOTAL_EVS));
+        if (room == 0)
+        {
+            gSpecialVar_Result = EV_PLAN_TOTAL_FULL;
+            return;
+        }
+        if (gSpecialVar_0x8006 == EV_PLAN_STEP_ADD_4)
+            room = min(room, 4);
+        else if (gSpecialVar_0x8006 == EV_PLAN_STEP_ADD_64)
+            room = min(room, 64);
+        sPlannedEVs[stat] = current + room;
+        break;
+    case EV_PLAN_STEP_SUB_4:
+    case EV_PLAN_STEP_SUB_64:
+    case EV_PLAN_STEP_CLEAR:
+        if (current == 0)
+            return;
+        if (gSpecialVar_0x8006 == EV_PLAN_STEP_SUB_4)
+            sPlannedEVs[stat] = current - min(current, 4);
+        else if (gSpecialVar_0x8006 == EV_PLAN_STEP_SUB_64)
+            sPlannedEVs[stat] = current - min(current, 64);
+        else
+            sPlannedEVs[stat] = 0;
+        break;
+    default:
+        return;
+    }
+    gSpecialVar_Result = EV_PLAN_CHANGED;
+}
+
+// Clears every stat in the plan.
+void ClearPlannedEVs(void)
+{
+    for (u32 i = 0; i < NUM_STATS; i++)
+        sPlannedEVs[i] = 0;
+}
+
+// Out VAR_RESULT TRUE when the plan differs from the Pokémon's spread.
+void CheckPlannedEVSpreadChanged(void)
+{
+    struct Pokemon *mon = GetPlannedEVsMon();
+
+    gSpecialVar_Result = FALSE;
+    if (mon == NULL)
+        return;
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        if (GetMonData(mon, sStatData[i]) != sPlannedEVs[i])
+            gSpecialVar_Result = TRUE;
+    }
+}
+
+// The confirmation summary: out STR_VAR_2 and STR_VAR_3, three stats each.
+void BufferPlannedEVSummary(void)
+{
+    for (u32 line = 0; line < 2; line++)
+    {
+        u8 *dst = line == 0 ? gStringVar2 : gStringVar3;
+        for (u32 i = line * 3; i < line * 3 + 3; i++)
+        {
+            dst = StringCopy(dst, sPlannedEVShortNames[i]);
+            *dst++ = CHAR_SPACE;
+            dst = ConvertIntToDecimalStringN(dst, sPlannedEVs[i], STR_CONV_MODE_LEFT_ALIGN, 3);
+            if (i != line * 3 + 2)
+                dst = StringCopy(dst, COMPOUND_STRING("   "));
+        }
+        *dst = EOS;
+    }
+}
+
+// Writes the whole plan at once; out VAR_RESULT FALSE if the Pokémon is gone.
+void ApplyPlannedEVSpread(void)
+{
+    struct Pokemon *mon = GetPlannedEVsMon();
+
+    gSpecialVar_Result = FALSE;
+    if (mon == NULL || PlannedEVTotal() > MAX_TOTAL_EVS)
+        return;
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        u32 value = sPlannedEVs[i];
+        SetMonData(mon, sStatData[i], &value);
+    }
+    CalculateMonStats(mon);
+    gSpecialVar_Result = TRUE;
 }
 
 // The native menu permits low IVs as well as maximum IVs.

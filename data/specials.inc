@@ -596,6 +596,15 @@ gSpecials::
 	def_special Special_AreLeadMonEVsMaxedOut
 	def_special IncreaseChosenMonEVs
 	def_special ResetChosenMonEVs
+	def_special StartPlannedEVSpread
+	def_special BufferPlannedEVRow
+	def_special BufferPlannedEVTotal
+	def_special BufferPlannedEVStatPrompt
+	def_special AdjustPlannedEV
+	def_special ClearPlannedEVs
+	def_special CheckPlannedEVSpreadChanged
+	def_special BufferPlannedEVSummary
+	def_special ApplyPlannedEVSpread
 	def_special ChangeChosenMonIVs
 	def_special ChangeChosenMonHiddenPower
 	def_special ChangePokemonNature

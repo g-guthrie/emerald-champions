@@ -36,9 +36,17 @@ or data.
 - No Game Book, player guides, Center battle presets or Center stat editor. No
   new ground or hidden items: only replace original pickups or TM gifts.
 - No Terastallization anywhere.
-- Held items: consumed held Berries return after battle only once the
-  Regenerator Key Item arrives (Norman, after Badge 5). Knock Off removes an
-  item for the current battle; Thief and Covet transfer permanently.
+- Held items: the first Center nurse gives the Regenerator Key Item with the
+  Leveler. With it, a held Berry its own holder eats in battle returns after
+  battle. A Berry knocked off, stolen, eaten by a foe, burned or corroded is
+  gone. Knock Off removes other items for the current battle only; Thief and
+  Covet transfer permanently.
+- EVs: every Pokémon joining the player (catch, gift, starter, trade, hatch)
+  arrives with 252 HP / 52 Atk, Def, SpA, SpD / 50 Spe; owned Pokémon keep
+  their chosen spread. Every Center move tutor plans a whole spread and
+  applies it at once for a flat ¥500 (free when unchanged, nothing on
+  cancel). Evie in Fallarbor keeps her ¥2-per-EV service.
+- Steam Engine also makes Water never super effective on its holder.
 - AI: authored doubles teams and the shared planner are preserved. Opponents may
   know loadouts but never read the player's committed move, target, switch or
   replacement. Tune difficulty with levels, not by weakening sets or strategy.

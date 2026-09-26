@@ -1933,7 +1933,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STEAM_ENGINE] =
     {
         .name = _("Steam Engine"),
-        .description = COMPOUND_STRING("Fire & Water hits up Speed."),
+        .description = COMPOUND_STRING("Fire/Water up Speed; no Water weakness."),
         .aiRating = 3,
     },
 

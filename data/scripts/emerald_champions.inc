@@ -11,12 +11,14 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	waitmessage
 	dynmultipush EmeraldChampions_Text_LearnMove, 0
 	dynmultipush EmeraldChampions_Text_Bonding, 1
-	dynmultipush EmeraldChampions_Text_Exit, 2
-	dynmultistack 30, 1, FALSE, 3, 0, VAR_TUTOR_CURSOR, DYN_MULTICHOICE_CB_NONE
+	dynmultipush EmeraldChampions_Text_EVTraining, 2
+	dynmultipush EmeraldChampions_Text_Exit, 3
+	dynmultistack 30, 1, FALSE, 4, 0, VAR_TUTOR_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_OpenMoveRelearner
 	case 1, EmeraldChampions_EventScript_SpecialistBonding
+	case 2, EmeraldChampions_EventScript_EVTraining
 	goto EmeraldChampions_EventScript_MoveTutorExit
 
 EmeraldChampions_EventScript_MoveTutorNoMachines:
@@ -62,6 +64,201 @@ EmeraldChampions_EventScript_MoveTutorExit:
 	msgbox EmeraldChampions_Text_MoveTutorGoodbye, MSGBOX_DEFAULT
 	releaseall
 	end
+
+@ EV training: pick a Pokémon, plan its whole spread in the editor, then
+@ confirm to apply it at once for EV_PLAN_FEE (src/inclement_stat_services.c
+@ keeps the plan). B steps back one level; leaving the editor with changes
+@ asks first. Nothing is applied or charged until the player confirms.
+EmeraldChampions_EventScript_EVTraining:
+	setvar VAR_TUTOR_CURSOR, 2
+	msgbox EmeraldChampions_Text_EVTrainingIntro, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_EVTrainingChooseMon:
+	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, EmeraldChampions_EventScript_MoveTutorMain
+	copyvar VAR_EV_PLAN_MON, VAR_0x8004
+	special StartPlannedEVSpread
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVTrainingEgg
+	setvar VAR_EV_PLAN_CURSOR, 0
+	setvar VAR_EV_PLAN_STEP, 0
+
+@ The editor: every stat as "now > planned", then Clear All and Confirm.
+EmeraldChampions_EventScript_EVPlan:
+	bufferpartymonnick STR_VAR_1, VAR_EV_PLAN_MON
+	special BufferPlannedEVTotal
+	message EmeraldChampions_Text_EVPlanPrompt
+	waitmessage
+	@ Let the previous list window finish clearing before this one reuses
+	@ its BG tiles (see General_Mart_ServiceMenu).
+	delay 1
+	setvar VAR_0x8005, 0
+	special BufferPlannedEVRow
+	dynmultipush EmeraldChampions_Text_EVRowHP, 0
+	setvar VAR_0x8005, 1
+	special BufferPlannedEVRow
+	dynmultipush EmeraldChampions_Text_EVRowAttack, 1
+	setvar VAR_0x8005, 2
+	special BufferPlannedEVRow
+	dynmultipush EmeraldChampions_Text_EVRowDefense, 2
+	setvar VAR_0x8005, 3
+	special BufferPlannedEVRow
+	dynmultipush EmeraldChampions_Text_EVRowSpeed, 3
+	setvar VAR_0x8005, 4
+	special BufferPlannedEVRow
+	dynmultipush EmeraldChampions_Text_EVRowSpAtk, 4
+	setvar VAR_0x8005, 5
+	special BufferPlannedEVRow
+	dynmultipush EmeraldChampions_Text_EVRowSpDef, 5
+	dynmultipush EmeraldChampions_Text_EVPlanClearAll, 6
+	dynmultipush EmeraldChampions_Text_EVPlanConfirm, 7
+	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_PLAN_CURSOR, DYN_MULTICHOICE_CB_NONE
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EVPlanBack
+	copyvar VAR_EV_PLAN_CURSOR, VAR_RESULT
+	goto_if_eq VAR_RESULT, 7, EmeraldChampions_EventScript_EVPlanConfirm
+	goto_if_eq VAR_RESULT, 6, EmeraldChampions_EventScript_EVPlanClearAll
+
+@ One stat: stay here, step by step, until B returns to the editor.
+EmeraldChampions_EventScript_EVPlanStat:
+	copyvar VAR_0x8005, VAR_EV_PLAN_CURSOR
+	special BufferPlannedEVStatPrompt
+	message gStringVar4
+	waitmessage
+	delay 1
+	dynmultipush EmeraldChampions_Text_EVStepAdd4, EV_PLAN_STEP_ADD_4
+	dynmultipush EmeraldChampions_Text_EVStepAdd64, EV_PLAN_STEP_ADD_64
+	dynmultipush EmeraldChampions_Text_EVStepAddMax, EV_PLAN_STEP_ADD_MAX
+	dynmultipush EmeraldChampions_Text_EVStepSub4, EV_PLAN_STEP_SUB_4
+	dynmultipush EmeraldChampions_Text_EVStepSub64, EV_PLAN_STEP_SUB_64
+	dynmultipush EmeraldChampions_Text_EVStepClear, EV_PLAN_STEP_CLEAR
+	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_PLAN_STEP, DYN_MULTICHOICE_CB_NONE
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EVPlan
+	copyvar VAR_EV_PLAN_STEP, VAR_RESULT
+	copyvar VAR_0x8006, VAR_RESULT
+	copyvar VAR_0x8005, VAR_EV_PLAN_CURSOR
+	special AdjustPlannedEV
+	goto_if_eq VAR_RESULT, EV_PLAN_CHANGED, EmeraldChampions_EventScript_EVPlanStat
+	goto_if_eq VAR_RESULT, EV_PLAN_STAT_FULL, EmeraldChampions_EventScript_EVPlanStatFull
+	goto_if_eq VAR_RESULT, EV_PLAN_TOTAL_FULL, EmeraldChampions_EventScript_EVPlanTotalFull
+	msgbox EmeraldChampions_Text_EVPlanStatEmpty, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EVPlanStat
+
+EmeraldChampions_EventScript_EVPlanStatFull:
+	msgbox EmeraldChampions_Text_EVPlanStatFull, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EVPlanStat
+
+EmeraldChampions_EventScript_EVPlanTotalFull:
+	msgbox EmeraldChampions_Text_EVPlanTotalFull, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EVPlanStat
+
+EmeraldChampions_EventScript_EVPlanClearAll:
+	special ClearPlannedEVs
+	goto EmeraldChampions_EventScript_EVPlan
+
+EmeraldChampions_EventScript_EVPlanConfirm:
+	special CheckPlannedEVSpreadChanged
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVPlanUnchanged
+	@ The money box writes STR_VAR_1, so it opens before the name is buffered.
+	showmoneybox 0, 0
+	bufferpartymonnick STR_VAR_1, VAR_EV_PLAN_MON
+	special BufferPlannedEVSummary
+	msgbox EmeraldChampions_Text_EVPlanSummary, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EVPlanDecline
+	checkmoney EV_PLAN_FEE
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVPlanCantAfford
+	special ApplyPlannedEVSpread
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVPlanDecline
+	removemoney EV_PLAN_FEE
+	updatemoneybox
+	playse SE_SHOP
+	bufferpartymonnick STR_VAR_1, VAR_EV_PLAN_MON
+	msgbox EmeraldChampions_Text_EVPlanApplied, MSGBOX_DEFAULT
+	hidemoneybox
+	goto EmeraldChampions_EventScript_EVTrainingChooseMon
+
+EmeraldChampions_EventScript_EVPlanDecline:
+	hidemoneybox
+	goto EmeraldChampions_EventScript_EVPlan
+
+EmeraldChampions_EventScript_EVPlanCantAfford:
+	msgbox EmeraldChampions_Text_EVPlanCantAfford, MSGBOX_DEFAULT
+	hidemoneybox
+	goto EmeraldChampions_EventScript_EVPlan
+
+EmeraldChampions_EventScript_EVPlanUnchanged:
+	msgbox EmeraldChampions_Text_EVPlanUnchanged, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EVPlan
+
+@ B in the editor: straight back to the party when nothing is pending.
+EmeraldChampions_EventScript_EVPlanBack:
+	special CheckPlannedEVSpreadChanged
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVTrainingChooseMon
+	msgbox EmeraldChampions_Text_EVPlanDiscard, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EVPlan
+	goto EmeraldChampions_EventScript_EVTrainingChooseMon
+
+EmeraldChampions_EventScript_EVTrainingEgg:
+	msgbox EmeraldChampions_Text_EVTrainingEgg, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EVTrainingChooseMon
+
+EmeraldChampions_Text_EVTraining:
+	.string "EV Training$"
+EmeraldChampions_Text_EVTrainingIntro:
+	.string "Choose a Pokémon and plan its EVs.\n"
+	.string "A new spread costs ¥500 to apply.$"
+EmeraldChampions_Text_EVTrainingEgg:
+	.string "An Egg can't be trained yet.$"
+EmeraldChampions_Text_EVPlanPrompt:
+	.string "{STR_VAR_1}: {STR_VAR_3} of 510 EVs planned.\n"
+	.string "Each row shows now and planned.$"
+EmeraldChampions_Text_EVRowHP:
+	.string "HP{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVRowAttack:
+	.string "Attack{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVRowDefense:
+	.string "Defense{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVRowSpeed:
+	.string "Speed{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVRowSpAtk:
+	.string "Sp. Atk{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVRowSpDef:
+	.string "Sp. Def{CLEAR_TO 0x30}{STR_VAR_2}{CLEAR_TO 0x48}{RIGHT_ARROW}{CLEAR_TO 0x54}{STR_VAR_3}$"
+EmeraldChampions_Text_EVPlanClearAll:
+	.string "Clear All$"
+EmeraldChampions_Text_EVPlanConfirm:
+	.string "Confirm$"
+EmeraldChampions_Text_EVStepAdd4:
+	.string "+4$"
+EmeraldChampions_Text_EVStepAdd64:
+	.string "+64$"
+EmeraldChampions_Text_EVStepAddMax:
+	.string "Max$"
+EmeraldChampions_Text_EVStepSub4:
+	.string "-4$"
+EmeraldChampions_Text_EVStepSub64:
+	.string "-64$"
+EmeraldChampions_Text_EVStepClear:
+	.string "Clear$"
+EmeraldChampions_Text_EVPlanStatFull:
+	.string "That stat is at its limit of 252.$"
+EmeraldChampions_Text_EVPlanTotalFull:
+	.string "All 510 EVs are planned. Lower\n"
+	.string "another stat to make room.$"
+EmeraldChampions_Text_EVPlanStatEmpty:
+	.string "That stat has no EVs to remove.$"
+EmeraldChampions_Text_EVPlanSummary:
+	.string "{STR_VAR_2}\n"
+	.string "{STR_VAR_3}\p"
+	.string "Apply this spread to {STR_VAR_1}\n"
+	.string "for ¥500?$"
+EmeraldChampions_Text_EVPlanCantAfford:
+	.string "You need ¥500 for this training.\n"
+	.string "Nothing has changed.$"
+EmeraldChampions_Text_EVPlanApplied:
+	.string "{STR_VAR_1}'s new EV spread is set!$"
+EmeraldChampions_Text_EVPlanUnchanged:
+	.string "That's the spread it already has.\n"
+	.string "Change a stat first.$"
+EmeraldChampions_Text_EVPlanDiscard:
+	.string "Discard changes?$"
 
 @ The five held items a competitive set cannot function without are handed over
 @ once, free. Everything else on the clerk's shelves is bought.

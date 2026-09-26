@@ -3017,6 +3017,35 @@ void MaxPlayerMonIVs(struct Pokemon *mon)
     CalculateMonStats(mon);
 }
 
+// Emerald Champions: every Pokemon that joins the player arrives with a full
+// baseline spread and is re-specced at the Center move tutor. 252 HP; the
+// other 258 split as evenly as whole stat points allow (EVs count in fours):
+// 52 each to Attack, Defense, Sp. Atk and Sp. Def and 50 to Speed, 510 in
+// all. Only acquisition paths call this; a Pokemon already owned keeps the
+// spread the player chose. Trainer-owned Pokemon keep their authored EVs.
+static const u8 sPlayerBaselineEVs[NUM_STATS] =
+{
+    [STAT_HP] = MAX_PER_STAT_EVS,
+    [STAT_ATK] = 52,
+    [STAT_DEF] = 52,
+    [STAT_SPEED] = 50,
+    [STAT_SPATK] = 52,
+    [STAT_SPDEF] = 52,
+};
+STATIC_ASSERT(MAX_PER_STAT_EVS + 52 * 4 + 50 == MAX_TOTAL_EVS, PlayerBaselineEVsFillTheTotal);
+
+void SetPlayerMonBaselineEVs(struct Pokemon *mon)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
+        return;
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        u32 ev = sPlayerBaselineEVs[stat];
+        SetMonData(mon, MON_DATA_HP_EV + stat, &ev);
+    }
+    CalculateMonStats(mon);
+}
+
 // Saves from before the rule get one upgrade on load. New games set the flag
 // at once, so a Speed or Attack IV the player chose at Ivy's is never undone.
 void MaxPlayerIVsIfNeeded(void)
@@ -3127,6 +3156,7 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
     SetMonTrainerOwned(mon, FALSE);
     ClampMonToPlayerLevelCap(mon);
     MaxPlayerMonIVs(mon);
+    SetPlayerMonBaselineEVs(mon);
 
     if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), PARTY_SIZE))
         return CopyMonToPC(mon);
@@ -6941,6 +6971,7 @@ u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
 {
     u32 sentToPc;
     ClampMonToPlayerLevelCap(mon);
+    SetPlayerMonBaselineEVs(mon);
     if (slot < PARTY_SIZE)
     {
         if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), slot))

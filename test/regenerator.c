@@ -5,7 +5,7 @@
 #include "pokemon.h"
 #include "test/test.h"
 
-TEST("Regenerator: tool restores spent berries; Knock Off returns items after battle")
+TEST("Regenerator: tool restores spent berries; lost berries stay lost")
 {
     static EWRAM_DATA struct BattleStruct state;
     struct BattleStruct *saved = gBattleStruct;
@@ -29,9 +29,10 @@ TEST("Regenerator: tool restores spent berries; Knock Off returns items after ba
             SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &original);
             RecordPlayerPartyMonHeldItemForRestoration(0);
             SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &empty);
-            if (kind == 2) // Knock Off removes the item only for this battle.
+            if (kind == 2) // Knock Off: other items return, a Berry is lost.
             {
                 state.itemLost[B_TRAINER_PLAYER][0].stolen = TRUE;
+                RecordBerryRemoval(B_TRAINER_PLAYER * PARTY_SIZE + 1, original);
             }
             else if (kind == 3)
                 state.partyState[B_TRAINER_PLAYER][0].originalBerryDestroyed = TRUE;
@@ -39,7 +40,7 @@ TEST("Regenerator: tool restores spent berries; Knock Off returns items after ba
                 RecordConsumedHeldItem(B_BATTLER_0, original);
             // The same helper protects a mon boxed by catch-and-swap.
             RestorePlayerPartyMonHeldItem(0);
-            enum Item expected = !owned && (kind == 0 || kind == 3) ? ITEM_NONE : original;
+            enum Item expected = kind == 2 || kind == 3 || (!owned && kind == 0) ? ITEM_NONE : original;
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), expected);
             TryRestoreHeldItems();
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), expected);

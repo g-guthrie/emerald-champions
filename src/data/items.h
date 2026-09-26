@@ -14710,9 +14710,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Regenerator"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Used Berries return\n"
-            "after battle unless\n"
-            "stolen or eaten."),
+            "Berries your team\n"
+            "eats return after\n"
+            "each battle."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

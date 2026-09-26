@@ -16,6 +16,9 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	msgbox gText_EmeraldChampionsGiveRegenerator, MSGBOX_DEFAULT
+	giveitem ITEM_REGENERATOR, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
 	giveitem ITEM_REPEL_SPRAY, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
@@ -23,17 +26,28 @@ Common_EventScript_PkmnCenterNurse::
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
 	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
 	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
 
 EventScript_PkmnCenterNurse_HasVial::
 	checkitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRegenerator
 	msgbox gText_EmeraldChampionsGiveMissingLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
+
+@ Older saves reach here without the Regenerator; one in the PC counts.
+EventScript_PkmnCenterNurse_CheckRegenerator::
+	setvar VAR_0x8004, ITEM_REGENERATOR
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
+	msgbox gText_EmeraldChampionsGiveMissingRegenerator, MSGBOX_DEFAULT
+	giveitem ITEM_REGENERATOR, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
 
 @ Resume tool delivery if the Bag filled during an earlier visit.
 EventScript_PkmnCenterNurse_CheckRepelSpray::

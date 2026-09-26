@@ -318,6 +318,8 @@ static void AddHatchedMonToParty(u8 id)
 
     bool32 isEgg = FALSE;
     SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
+    // A hatchling joins the player like any other Pokémon: baseline EVs.
+    SetPlayerMonBaselineEVs(mon);
 
     species = GetMonData(mon, MON_DATA_SPECIES);
     memset(name, EOS, sizeof(name));

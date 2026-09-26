@@ -140,4 +140,19 @@ enum {
 #define EC_GAME_CORNER_PRIZE_SET_FAILED 3
 #define EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT 4
 
+// The Center move tutor's EV editor (src/inclement_stat_services.c).
+// AdjustPlannedEV takes one of these steps in VAR_0x8006 ...
+#define EV_PLAN_STEP_ADD_4      0
+#define EV_PLAN_STEP_ADD_64     1
+#define EV_PLAN_STEP_ADD_MAX    2
+#define EV_PLAN_STEP_SUB_4      3
+#define EV_PLAN_STEP_SUB_64     4
+#define EV_PLAN_STEP_CLEAR      5
+// ... and answers with one of these in VAR_RESULT.
+#define EV_PLAN_CHANGED         0
+#define EV_PLAN_STAT_FULL       1
+#define EV_PLAN_TOTAL_FULL      2
+#define EV_PLAN_STAT_EMPTY      3
+#define EV_PLAN_FEE             500
+
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

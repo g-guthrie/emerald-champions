@@ -543,6 +543,7 @@ static void PrepareBookResearchScene(void)
         AddBagItem(ITEM_POKE_BALL, 2);
         AddBagItem(ITEM_POKE_VIAL, 1);
         AddBagItem(ITEM_LEVELER, 1);
+        AddBagItem(ITEM_REGENERATOR, 1);
         AddBagItem(ITEM_REPEL_SPRAY, 1);
         AddBagItem(ITEM_FLIGHT_BEACON, 1);
         VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
@@ -625,7 +626,7 @@ static void PrepareBookResearchScene(void)
         break;
     case 28: // Finite travel-paper delivery without blocking Center healing.
     {
-        const enum Item tools[] = {ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REPEL_SPRAY, ITEM_FLIGHT_BEACON};
+        const enum Item tools[] = {ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REGENERATOR, ITEM_REPEL_SPRAY, ITEM_FLIGHT_BEACON};
         ClearBag();
         if (!missing)
             for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
@@ -1453,7 +1454,7 @@ void EmeraldChampionsHeadlessObserve(void)
             EC_CENTER_CHECK(3, FlagGet(FLAG_SYS_POKEMON_GET));
             EC_CENTER_CHECK(4, !FlagGet(FLAG_BADGE01_GET));
             EC_CENTER_CHECK(5, CheckBagHasItem(ITEM_POKE_VIAL, 1));
-            EC_CENTER_CHECK(6, CheckBagHasItem(ITEM_LEVELER, 1));
+            EC_CENTER_CHECK(6, CheckBagHasItem(ITEM_LEVELER, 1) && CheckBagHasItem(ITEM_REGENERATOR, 1));
             EC_CENTER_CHECK(7, CheckBagHasItem(ITEM_REPEL_SPRAY, 1));
             EC_CENTER_CHECK(8, CheckBagHasItem(ITEM_FLIGHT_BEACON, 1));
             EC_CENTER_CHECK(9, VarGet(VAR_POKE_VIAL_MAX_CHARGES) == 1);
@@ -2147,6 +2148,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             // the nurse's back-fill dialog would shift the scenario timeline.
             AddBagItem(ITEM_POKE_VIAL, 1);
             AddBagItem(ITEM_LEVELER, 1);
+            AddBagItem(ITEM_REGENERATOR, 1);
             AddBagItem(ITEM_REPEL_SPRAY, 1);
             AddBagItem(ITEM_FLIGHT_BEACON, 1);
             VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
@@ -2254,6 +2256,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &isEgg);
             CalculatePlayerPartyCount();
         }
+        // Param 3: too little money for the tutor's EV training fee.
+        if (gEcHeadlessFixtureParam == 3)
+            SetMoney(&gSaveBlock1Ptr->money, 100);
         if (gEcHeadlessFixtureParam == 2)
             LoadHeadlessMap(MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE, 7, 5);
         else
@@ -2452,6 +2457,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
                 AddBagItem(ITEM_POKE_VIAL, 1);
                 AddBagItem(ITEM_LEVELER, 1);
+                AddBagItem(ITEM_REGENERATOR, 1);
                 AddBagItem(ITEM_REPEL_SPRAY, 1);
                 AddBagItem(ITEM_FLIGHT_BEACON, 1);
                 VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);

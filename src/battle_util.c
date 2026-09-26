@@ -8138,6 +8138,28 @@ void UpdateMoveResultFlags(uq4_12_t modifier, u32 *resultFlags)
     }
 }
 
+// Emerald Champions: Steam Engine turns steam into armor. A Water move is
+// never super effective against its holder; resistances and immunities stay.
+// The holder's ability is already blanked by Gastro Acid, Neutralizing Gas or
+// a swap; Mold Breaker, Teravolt, Turboblaze and ability-ignoring moves
+// bypass it here without making the Speed trigger breakable.
+static bool32 SteamEngineCapsWater(const struct DamageContext *ctx, uq4_12_t modifier)
+{
+    enum Ability abilityAtk = ctx->abilities[ctx->battlerAtk];
+
+    if (ctx->moveType != TYPE_WATER
+     || modifier <= UQ_4_12(1.0)
+     || ctx->abilities[ctx->battlerDef] != ABILITY_STEAM_ENGINE
+     || MoveIgnoresTargetAbility(ctx->move))
+        return FALSE;
+    if (ctx->battlerAtk != ctx->battlerDef
+     && ctx->holdEffects[ctx->battlerDef] != HOLD_EFFECT_ABILITY_SHIELD
+     && !gBattleMons[ctx->battlerAtk].volatiles.gastroAcid
+     && (abilityAtk == ABILITY_MOLD_BREAKER || abilityAtk == ABILITY_TERAVOLT || abilityAtk == ABILITY_TURBOBLAZE))
+        return FALSE;
+    return TRUE;
+}
+
 static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageContext *ctx, uq4_12_t modifier)
 {
     enum Species illusionSpecies;
@@ -8151,6 +8173,12 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
         MulByTypeEffectiveness(ctx, &modifier, types[2]);
     if (ctx->moveType == TYPE_FIRE && gBattleMons[ctx->battlerDef].volatiles.tarShot)
         modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+    if (SteamEngineCapsWater(ctx, modifier))
+    {
+        modifier = UQ_4_12(1.0);
+        if (ctx->updateFlags)
+            RecordAbilityBattle(ctx->battlerDef, ABILITY_STEAM_ENGINE);
+    }
 
     if (ctx->updateFlags && (illusionSpecies = GetIllusionMonSpecies(ctx->battlerDef)))
         TryNoticeIllusionInTypeEffectiveness(ctx, modifier, illusionSpecies);
@@ -8279,6 +8307,8 @@ uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(enum Move move, enum Species sp
             modifier = UQ_4_12(0.0);
         if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && GetMovePower(move) != 0)
             modifier = UQ_4_12(0.0);
+        if (SteamEngineCapsWater(&ctx, modifier))
+            modifier = UQ_4_12(1.0);
     }
 
     return modifier;
@@ -8320,6 +8350,8 @@ uq4_12_t GetOverworldTypeEffectiveness(struct Pokemon *mon, enum Type moveType)
     MulByTypeEffectiveness(&ctx, &modifier, type1);
     if (type2 != type1)
         MulByTypeEffectiveness(&ctx, &modifier, type2);
+    if (SteamEngineCapsWater(&ctx, modifier))
+        modifier = UQ_4_12(1.0);
 
     if ((modifier <= UQ_4_12(1.0) && ctx.abilities[B_BATTLER_0] == ABILITY_WONDER_GUARD)
      || CanAbilityAbsorbMove(&ctx))
@@ -9259,10 +9291,11 @@ enum Item GetBattleRestoredHeldItem(enum BattleTrainer trainer, u32 partySlot)
     if (GetItemPocket(original) == POCKET_BERRIES)
     {
         const struct PartyState *state = &gBattleStruct->partyState[trainer][partySlot];
-        // Knock Off and theft are losses, not Regenerator-eligible consumption.
-        if (state->originalBerryRemoved)
+        // Only the holder's own use is refunded by the Regenerator. A Berry
+        // knocked off, stolen, eaten by a foe, burned or corroded is gone.
+        if (state->originalBerryRemoved || state->originalBerryDestroyed)
             return ITEM_NONE;
-        if ((state->originalBerryConsumed || state->originalBerryDestroyed)
+        if (state->originalBerryConsumed
          && !CheckBagHasItem(ITEM_REGENERATOR, 1)
          && !CheckPCHasItem(ITEM_REGENERATOR, 1))
             return ITEM_NONE;

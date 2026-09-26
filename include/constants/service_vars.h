@@ -32,6 +32,9 @@
 //   FossilToSpecies                   in 0x8004 fossil; out 0x8006 species
 //   CheckChosenMonCanGainEVs          in 0x8004 slot, 0x8005 stat, 0x8006
 //                                     amount; out VAR_RESULT, 0x8007 EV total
+//   StartPlannedEVSpread              in 0x8004 slot; out VAR_RESULT
+//   BufferPlannedEVRow / AdjustPlannedEV  in 0x8005 stat (, 0x8006 step);
+//                                     out VAR_RESULT an EV_PLAN_* result
 //   ChangeChosenMonHiddenPower        in 0x8004 slot, 0x8005 type
 //
 // The aliases below name each service's own state. Services that call one
@@ -45,8 +48,15 @@
 #define VAR_CLERK_HELD_ITEMS_GREETED    VAR_0x800A // Held Items welcome given this visit
 #define VAR_CLERK_FORM_ITEMS_GREETED    VAR_0x800B // Form Items explanation given this visit
 
-// Center move tutor. Its Bonding service uses 0x8008 and 0x800A below.
+// Center move tutor. Its Bonding and EV training services use 0x8008 and
+// 0x800A below.
 #define VAR_TUTOR_CURSOR                VAR_0x800B // service row last used
+
+// The tutor's EV training (called from the tutor, so never 0x800B). The
+// planned spread itself lives in src/inclement_stat_services.c.
+#define VAR_EV_PLAN_CURSOR              VAR_0x8008 // stat row last edited
+#define VAR_EV_PLAN_STEP                VAR_0x8009 // step row last used
+#define VAR_EV_PLAN_MON                 VAR_0x800A // party slot being planned
 
 // Bonding (called from the move tutor, so never 0x800B).
 #define VAR_BONDING_CURSOR              VAR_0x8008 // value row last viewed

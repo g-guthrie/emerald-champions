@@ -4265,6 +4265,8 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
 
                 gLastUsedItem = gBattleMons[battlerDef].item;
                 gBattleMons[battlerDef].item = ITEM_NONE;
+                // Other items return after battle; a knocked-off Berry is lost.
+                RecordBerryRemoval(GetBattlerPartyState(battlerDef)->heldItemOrigin, gLastUsedItem);
                 GetBattlerPartyState(battlerDef)->heldItemOrigin = 0;
                 if (gBattleMons[battlerDef].ability != ABILITY_GORILLA_TACTICS)
                     gBattleStruct->choicedMove[battlerDef] = MOVE_NONE;

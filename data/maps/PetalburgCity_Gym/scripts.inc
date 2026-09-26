@@ -345,7 +345,6 @@ PetalburgCity_Gym_EventScript_NormanFaceDoorEast:: @ 8204D7F
 	return
 
 PetalburgCity_Gym_EventScript_NormanPostBattle:: @ 8204D80
-	call PetalburgCity_Gym_EventScript_GiveRegenerator
 	call PetalburgCity_Gym_EventScript_NormanPartnerStones
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	compare VAR_RESULT, TRUE
@@ -458,7 +457,6 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
-	call PetalburgCity_Gym_EventScript_GiveRegenerator
 	special ResetHealLocationFromDewford
 	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
@@ -1737,36 +1735,3 @@ PetalburgCity_Gym_Text_GymStatueCertified: @ 8207467
 	.string "Petalburg City Pokémon Gym\p"
 	.string "Norman's Certified Trainers:\n"
 	.string "{PLAYER}$"
-
-PetalburgCity_Gym_EventScript_GiveRegenerator::
-	setvar VAR_0x8004, ITEM_REGENERATOR
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, Common_EventScript_NopReturn
-	msgbox PetalburgCity_Gym_Text_RegeneratorGift, MSGBOX_DEFAULT
-	giveitem ITEM_REGENERATOR
-	goto_if_eq VAR_RESULT, FALSE, PetalburgCity_Gym_EventScript_RegeneratorNoRoom
-	msgbox PetalburgCity_Gym_Text_RegeneratorExplanation, MSGBOX_DEFAULT
-	return
-
-PetalburgCity_Gym_EventScript_RegeneratorNoRoom::
-	msgbox PetalburgCity_Gym_Text_RegeneratorNoRoom, MSGBOX_DEFAULT
-	return
-
-PetalburgCity_Gym_Text_RegeneratorGift:
-	.string "Dad: You've come a long way.\p"
-	.string "As you head farther from home,\n"
-	.string "this will help your team recover.$"
-
-PetalburgCity_Gym_Text_RegeneratorExplanation:
-	.string "The Regenerator works automatically.\p"
-	.string "Held Berries used during battle\n"
-	.string "return when the battle ends.\p"
-	.string "Moves and Abilities still work\n"
-	.string "normally during battle.\p"
-	.string "Berries stolen or eaten by a\n"
-	.string "foe won't return.$"
-
-PetalburgCity_Gym_Text_RegeneratorNoRoom:
-	.string "Your Key Items pocket is full.\p"
-	.string "Make room and talk to me again.\n"
-	.string "I'll keep the Regenerator for you.$"
