@@ -257,6 +257,15 @@ static void HandleSetEffectRecharge(struct BattleCalcValues *cv, struct SetEffec
 {
     if (B_SKIP_RECHARGE == GEN_1 && !IsBattlerAlive(cv->battlerDef))  // Skip recharge if gen 1 and foe is KO'd
         return;
+    // Rampage (Inclement): knocking out the target skips the recharge turn
+    // while the battle goes on.
+    if (GetBattlerAbility(se->effectBattler) == ABILITY_RAMPAGE
+     && !IsBattlerAlive(cv->battlerDef)
+     && !NoAliveMonsForEitherParty())
+    {
+        gBattlescriptCurrInstr = se->script;
+        return;
+    }
 
     gBattleMons[se->effectBattler].volatiles.rechargeTimer = 2;
     gLockedMoves[se->effectBattler] = cv->move;

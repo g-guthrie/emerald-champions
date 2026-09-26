@@ -2534,7 +2534,7 @@ static s8 PairCacheTargetDrop(enum BattlerId actor, enum BattlerId target, enum 
         }
     }
     const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, 0);
-    if (!MoveEffectIsGuaranteed(actor, cv.abilities[actor], additional))
+    if (!MoveEffectIsGuaranteed(actor, cv.abilities[actor], move, additional))
         return 0;
     struct StatChange st = {.onlyChecking = TRUE, .stat = targetDropStat};
     st.stage = GetAdjustedStatStage(-GetStatStage(targetDropStat, additional), cv.abilities[target], FALSE);
@@ -2993,7 +2993,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
         return;
     if (paralysis)
         ev->paralysisChance[actor][index] = move == MOVE_BODY_SLAM
-            ? min(100, CalcSecondaryEffectChance(actor, gAiLogicData->abilities[actor], GetMoveAdditionalEffectById(move, 0)))
+            ? min(100, CalcSecondaryEffectChance(actor, gAiLogicData->abilities[actor], move, GetMoveAdditionalEffectById(move, 0)))
             : 100;
     for (enum BattlerId target = 0; target < gBattlersCount; target++)
     {
@@ -4475,7 +4475,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             continue;
         if (gBattleMoveEffects[effect].twoTurnEffect && !gBattleMons[actor].volatiles.multipleTurns
          && gAiLogicData->holdEffects[actor] != HOLD_EFFECT_POWER_HERB
-         && !(effect == EFFECT_SOLAR_BEAM && (GetAttackerWeather(gAiLogicData->holdEffects[actor], gAiLogicData->abilities[actor], weather) & B_WEATHER_SUN))
+         && !(effect == EFFECT_SOLAR_BEAM && (GetAttackerSunMoveWeather(gAiLogicData->holdEffects[actor], gAiLogicData->abilities[actor], weather) & B_WEATHER_SUN))
          && !(move == MOVE_ELECTRO_SHOT && (weather & B_WEATHER_RAIN)))
             continue;
         // Native spread damage is calculated for every target before damage
@@ -5390,7 +5390,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
              && !IsSheerForceAffected(move, gAiLogicData->abilities[actor]))
             {
                 const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, 0);
-                u32 chance = hitChance * CalcSecondaryEffectChance(actor, gAiLogicData->abilities[actor], additional) / 100;
+                u32 chance = hitChance * CalcSecondaryEffectChance(actor, gAiLogicData->abilities[actor], move, additional) / 100;
                 if (PairScreenEffectApplies(applyEffects, chance, effectChance))
                 {
                     enum Stat stat = move == MOVE_FIERY_DANCE ? STAT_SPATK : STAT_SPEED;

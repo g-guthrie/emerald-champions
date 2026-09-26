@@ -1946,6 +1946,9 @@ static bool32 AI_IsMoveEffectInMinus(enum BattlerId battlerAtk, enum BattlerId b
                 }
                 break;
             case MOVE_EFFECT_RECHARGE:
+                // Rampage skips the recharge when this hit knocks the target out.
+                if (abilityAtk == ABILITY_RAMPAGE && noOfHitsToKo == 1)
+                    break;
                 return additionalEffect->self;
             default:
                 break;
@@ -4044,7 +4047,7 @@ bool32 IsTwoTurnNotSemiInvulnerableMove(enum BattlerId battlerAtk, enum Move mov
     case EFFECT_TWO_TURNS_ATTACK:
     {
         u32 weather = AI_GetWeather();
-        u32 attackerWeather = GetAttackerWeather(gAiLogicData->holdEffects[battlerAtk], gAiLogicData->abilities[battlerAtk], weather);
+        u32 attackerWeather = GetAttackerSunMoveWeather(gAiLogicData->holdEffects[battlerAtk], gAiLogicData->abilities[battlerAtk], weather);
 
         enum BattleWeather moveAffectedByWeather = GetTwoTurnMoveWeather(move);
         enum BattleWeather weatherType = gBattleWeatherInfo[GetBattleWeather(weather)].type;
@@ -4582,7 +4585,7 @@ bool32 IsFlinchGuaranteed(enum BattlerId battlerAtk, enum BattlerId battlerDef, 
     {
         const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(move, effectIndex);
         // Only consider effects with a guaranteed chance to happen
-        if (!MoveEffectIsGuaranteed(battlerAtk, gAiLogicData->abilities[battlerAtk], additionalEffect))
+        if (!MoveEffectIsGuaranteed(battlerAtk, gAiLogicData->abilities[battlerAtk], move, additionalEffect))
             continue;
 
         if (additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
@@ -7591,7 +7594,7 @@ s32 AI_GetAdjustedStatStage(enum BattlerId battler, enum Move move, s32 stage)
 {
     enum Ability ability = gAiLogicData->abilities[battler];
     bool32 growthInSun = GetMoveEffect(move) == EFFECT_GROWTH
-        && (GetAttackerWeather(gAiLogicData->holdEffects[battler], ability, AI_GetWeather()) & B_WEATHER_SUN);
+        && (GetAttackerSunMoveWeather(gAiLogicData->holdEffects[battler], ability, AI_GetWeather()) & B_WEATHER_SUN);
 
     return GetAdjustedStatStage(stage, ability, growthInSun);
 }

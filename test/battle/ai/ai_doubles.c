@@ -3380,6 +3380,7 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: secondary paralysis earns probabilistic p
         EXPECT_EQ(gLastMoves[B_BATTLER_1], control == 2 ? MOVE_ROCK_SLIDE : MOVE_BODY_SLAM);
         u32 chance = CalcSecondaryEffectChance(B_BATTLER_1,
             control == 1 ? ABILITY_RUN_AWAY : ABILITY_SERENE_GRACE,
+            MOVE_BODY_SLAM,
             GetMoveAdditionalEffectById(MOVE_BODY_SLAM, 0));
         EXPECT_EQ(chance, control == 1 ? 30 : 60);
         if (control == 2)

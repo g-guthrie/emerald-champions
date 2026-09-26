@@ -784,7 +784,7 @@ static void AdjustStatStage(struct BattleCalcValues *cv, struct StatChange *st)
 {
     enum Ability ability = cv->abilities[cv->battlerDef];
     bool32 growthInSun = cv->moveEffect == EFFECT_GROWTH
-        && (GetAttackerWeather(cv->holdEffects[cv->battlerDef], ability, GetWeather()) & B_WEATHER_SUN);
+        && (GetAttackerSunMoveWeather(cv->holdEffects[cv->battlerDef], ability, GetWeather()) & B_WEATHER_SUN);
 
     st->stage = GetAdjustedStatStage(st->stage, ability, growthInSun);
     if (!st->onlyChecking && (ability == ABILITY_CONTRARY || ability == ABILITY_SIMPLE))

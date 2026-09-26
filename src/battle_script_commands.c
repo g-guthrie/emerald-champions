@@ -1830,7 +1830,7 @@ static void Cmd_setadditionaleffects(void)
             // Various checks for if this move effect can be applied this turn
             if (CanApplyAdditionalEffect(additionalEffect))
             {
-                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, cv.abilities[cv.battlerAtk], additionalEffect);
+                percentChance = CalcSecondaryEffectChance(gBattlerAttacker, cv.abilities[cv.battlerAtk], gCurrentMove, additionalEffect);
 
                 // Activate effect if it's primary (chance == 0) or if RNGesus says so
                 if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
@@ -6559,7 +6559,10 @@ static void Cmd_recoverbasedonsunlight(void)
         s32 recoverAmount = 0;
         u32 weather = GetWeather();
         enum Ability ability = GetBattlerAbility(gBattlerAttacker);
-        u32 attackerWeather = GetAttackerWeather(GetBattlerHoldEffect(gBattlerAttacker), ability, weather);
+        // Shore Up follows sand, so only the sunlight moves see Chloroplast's sun.
+        u32 attackerWeather = GetMoveEffect(gCurrentMove) == EFFECT_SHORE_UP
+                            ? GetAttackerWeather(GetBattlerHoldEffect(gBattlerAttacker), ability, weather)
+                            : GetAttackerSunMoveWeather(GetBattlerHoldEffect(gBattlerAttacker), ability, weather);
         u32 healingWeather = attackerWeather & ~B_WEATHER_STRONG_WINDS;
         bool32 isAffectedByMegaSol = FALSE;
         if (GetMoveEffect(gCurrentMove) == EFFECT_SHORE_UP)
@@ -6574,7 +6577,7 @@ static void Cmd_recoverbasedonsunlight(void)
             if (attackerWeather & B_WEATHER_SUN)
             {
                 recoverAmount = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
-                if (ability == ABILITY_MEGA_SOL && !(weather & B_WEATHER_SUN))
+                if (IsSunlightMoveAbility(ability) && !(weather & B_WEATHER_SUN))
                     isAffectedByMegaSol = TRUE;
             }
             else if (!(healingWeather & B_WEATHER_ANY) || GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_UTILITY_UMBRELLA)
@@ -6609,7 +6612,7 @@ static void Cmd_recoverbasedonsunlight(void)
             if (attackerWeather & B_WEATHER_SUN)
             {
                 recoverAmount = healingModifier * GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-                if (ability == ABILITY_MEGA_SOL && !(weather & B_WEATHER_SUN))
+                if (IsSunlightMoveAbility(ability) && !(weather & B_WEATHER_SUN))
                     isAffectedByMegaSol = TRUE;
             }
             else if (!(healingWeather & B_WEATHER_ANY) || GetBattlerHoldEffect(gBattlerAttacker) == HOLD_EFFECT_UTILITY_UMBRELLA)
