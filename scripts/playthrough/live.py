@@ -290,7 +290,30 @@ class Harness:
         return self.brief({'walked': done, 'stop': reason})
 
     # --------------------------------------------------------------- paths
+    async def refresh_runtime_grid(self):
+        """Read the live metatile grid (doors, switches and barriers change it at runtime)."""
+        name = self.st.get('map')
+        if name not in self.cat.maps:
+            return
+        try:
+            base = self.syms['gBackupMapLayout']
+            bw, bh, ptr = await self.read_words(base, 3)
+            m = self.cat.maps[name]
+            layout = self.cat.layouts[m['layout']]
+            w, h = layout['width'], layout['height']
+            if bw != w + 15 or bh != h + 14 or not 0x02000000 <= ptr < 0x02040000:
+                return
+            raw = await self.read(ptr, (bw * bh * 2 + 3) & ~3)
+            full = struct.unpack_from('<' + 'H' * (bw * bh), raw)
+            cells = tuple(full[(y + 7) * bw + x + 7] for y in range(h) for x in range(w))
+            self._runtime_grid = (name, w, h, cells)
+        except Exception:
+            pass
+
     def grid(self, name):
+        rg = getattr(self, '_runtime_grid', None)
+        if rg and rg[0] == name:
+            return rg[1], rg[2], rg[3]
         m = self.cat.maps[name]
         layout = self.cat.layouts[m['layout']]
         data = (ROOT / layout['blockdata_filepath']).read_bytes()
@@ -322,6 +345,20 @@ class Harness:
             table, i = (prim, t) if t < 512 else (sec, t - 512)
             out.append(table[i] & 0xFF if i < len(table) else 0)
         cache[name] = (w, h, out)
+        return cache[name]
+
+    def ledge_tiles(self, name):
+        """Ledge cells of a map and the direction each one is jumped."""
+        import re
+        cache = getattr(self, '_ledge_cache', {})
+        self._ledge_cache = cache
+        if name not in cache:
+            text = (ROOT / 'include/constants/metatile_behaviors.h').read_text()
+            names = re.findall(r'^\s+(MB_\w+)', text.split('enum')[1], re.M)
+            jump = {i: n[len('MB_JUMP_'):] for i, n in enumerate(names) if n.startswith('MB_JUMP_')}
+            jump = {i: {'SOUTH': 'DOWN', 'NORTH': 'UP', 'WEST': 'LEFT', 'EAST': 'RIGHT'}.get(v) for i, v in jump.items()}
+            w, h, beh = self.behaviors(name)
+            cache[name] = {(i % w, i // w): jump[b] for i, b in enumerate(beh) if jump.get(b)}
         return cache[name]
 
     def encounter_tiles(self, n=12, kinds=None):
@@ -400,6 +437,8 @@ class Harness:
         return tiles
 
     def plan(self, target, avoid=()):
+        # Tiles the caller asked to keep off (floor switches, ice, cracked floor).
+        avoid = set(avoid) | (set(getattr(self, 'extra_block', ())) - {tuple(target)})
         name = self.st['map']
         w, h, cells = self.grid(name)
         start = (self.st['x'], self.st['y'])
@@ -408,6 +447,7 @@ class Harness:
             if not a['invisible'] and (a['x'], a['y']) != start:
                 blocked.add((a['x'], a['y']))
         blocked.discard(target)
+        ledges = self.ledge_tiles(name)
         q = collections.deque([start])
         seen = {start: None}
         while q:
@@ -418,6 +458,16 @@ class Harness:
             for d, (dx, dy) in DIRS.items():
                 b = (a[0] + dx, a[1] + dy)
                 if not (0 <= b[0] < w and 0 <= b[1] < h) or b in seen or b in blocked:
+                    continue
+                if b in ledges:
+                    # A ledge is crossed only in its jump direction, landing past it.
+                    land = (b[0] + dx, b[1] + dy)
+                    if ledges[b] != d or land in seen or land in blocked \
+                       or not (0 <= land[0] < w and 0 <= land[1] < h) \
+                       or cells[land[1] * w + land[0]] & 0xC00 or land in ledges:
+                        continue
+                    seen[land] = (a, d)
+                    q.append(land)
                     continue
                 cell = cells[b[1] * w + b[0]]
                 if cell & 0xC00 and b != target:
@@ -795,6 +845,9 @@ class Harness:
     async def handle(self, req):
         op = req.pop('op')
         auto_arm = op in ('walk', 'goto', 'exit', 'advance', 'press', 'wait')
+        if op in ('goto', 'exit', 'path', 'walk'):
+            await self.refresh_runtime_grid()
+            self.extra_block = {tuple(int(v) for v in t.split(',')) for t in req.pop('block', '').split(';') if t}
         if auto_arm and not self.st['battle'] and req.get('arm', '1') != '0':
             if not await self.armed() or self.st['ready']:
                 await self.arm()
@@ -820,7 +873,7 @@ class Harness:
         elif op == 'exit':
             out = await self.exit(req['dir'], req.get('run', '1') != '0')
         elif op == 'path':
-            sight = await self.sight_tiles()
+            sight = await self.sight_tiles() if req.get('avoid', '1') != '0' else set()
             out = {'path': self.plan((int(req['x']), int(req['y'])), sight), 'sight': sorted(sight)}
         elif op == 'advance':
             out = await self.advance(int(req.get('max', 80)), int(req.get('wait', 14)),
@@ -892,6 +945,11 @@ class Harness:
                 out['trainers'].append({'id': index + 1, 'trainer': trainer.replace('TRAINER_', ''),
                                         'xy': [a['x'], a['y']] if a else [o['x'], o['y']],
                                         'present': a is not None, 'beaten': beaten})
+        elif op == 'peekabs':
+            addr = int(req['addr']); size = int(req.get('size', 1))
+            base = addr & ~3
+            raw = await self.read(base, ((addr - base + size) + 3) & ~3)
+            out = {'value': int.from_bytes(raw[addr - base:addr - base + size], 'little')}
         elif op == 'grass':
             kinds = tuple(req['mb'].split(',')) if req.get('mb') else None
             out = self.encounter_tiles(int(req.get('n', 12)), kinds)
