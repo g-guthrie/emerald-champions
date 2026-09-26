@@ -548,7 +548,7 @@ void HandleInputChooseTarget(enum BattlerId battler)
                     validTarget = FALSE;
 
                 if (B_SHOW_EFFECTIVENESS && validTarget)
-                    MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+                    MoveSelectionDisplayMoveEffectiveness(CheckSeenTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
 
             } while (!validTarget);
         }
@@ -597,7 +597,7 @@ void HandleInputChooseTarget(enum BattlerId battler)
                     break;
                 }
                 if (B_SHOW_EFFECTIVENESS)
-                    MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+                    MoveSelectionDisplayMoveEffectiveness(CheckSeenTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
 
                 if (!CanTargetBattler(battler, gMultiUsePlayerCursor, move)
                  || (moveTarget == TARGET_OPPONENT && IsOnPlayerSide(gMultiUsePlayerCursor)))
@@ -809,7 +809,7 @@ void HandleInputChooseMove(enum BattlerId battler)
             else
                 gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             if (B_SHOW_EFFECTIVENESS)
-                MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+                MoveSelectionDisplayMoveEffectiveness(CheckSeenTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
 
             gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
             break;
@@ -2367,15 +2367,17 @@ static u32 CheckTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId batt
     return EFFECTIVENESS_NORMAL; // Normal effectiveness
 }
 
-// Emerald Champions: the foe types panel's mark for one foe, against the foe
-// the player sees; an Illusion disguise's types stand in for the real ones.
+// Emerald Champions: every effectiveness mark (the PP window's, a chosen
+// target's, the foe types panel's) is against the foe the player sees; an
+// Illusion disguise's types stand in for the real ones.
 static u32 CheckSeenTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
     enum Species disguise;
     enum Type types[2];
     u32 effectiveness;
 
-    if (!IsBattlerSeenAsDisguise(battlerDef, &disguise))
+    // The player knows their own side's Pokémon.
+    if (GetBattlerSide(battlerDef) == GetBattlerSide(battlerAtk) || !IsBattlerSeenAsDisguise(battlerDef, &disguise))
         return CheckTypeEffectiveness(battlerAtk, battlerDef);
     types[0] = gBattleMons[battlerDef].types[0];
     types[1] = gBattleMons[battlerDef].types[1];
@@ -2412,12 +2414,12 @@ static const u8 *GetFoeTypesPanelMark(u32 effectiveness)
 static u32 CheckTargetTypeEffectiveness(enum BattlerId battler)
 {
     enum BattlerId battlerFoe = GetOppositeBattler(battler);
-    u32 foeEffectiveness = CheckTypeEffectiveness(battler, battlerFoe);
+    u32 foeEffectiveness = CheckSeenTypeEffectiveness(battler, battlerFoe);
 
     if (IsDoubleBattle())
     {
         enum BattlerId partnerFoe = GetPartnerBattler(battlerFoe);
-        u32 partnerFoeEffectiveness = CheckTypeEffectiveness(battler, partnerFoe);
+        u32 partnerFoeEffectiveness = CheckSeenTypeEffectiveness(battler, partnerFoe);
         if (!IsBattlerAlive(battlerFoe))
             return partnerFoeEffectiveness;
         if (IsBattlerAlive(battlerFoe) && IsBattlerAlive(partnerFoe)
