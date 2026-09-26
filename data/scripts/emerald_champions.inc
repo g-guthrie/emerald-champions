@@ -26,8 +26,11 @@ EmeraldChampions_EventScript_MoveTutorNoMachines:
 	msgbox EmeraldChampions_Text_MoveTutorNoMachines, MSGBOX_DEFAULT
 	return
 
-@ The party screen and the move list carry their own prompts. B in the list
-@ returns to the party screen; B there returns to the tutor's menu.
+@ The party screen and the move list carry their own prompts and open each
+@ other directly (ChooseMonForMoveRelearnerDirect): a Pokémon with moves to
+@ relearn goes to the list, and B in the list returns to the party screen.
+@ The script resumes only when the party screen closes: B returns to the
+@ tutor's menu; an Egg or a Pokémon with nothing to relearn gets its message.
 EmeraldChampions_EventScript_OpenMoveRelearner:
 	setvar VAR_TUTOR_CURSOR, 0
 	setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES
@@ -36,15 +39,16 @@ EmeraldChampions_EventScript_OpenMoveRelearner:
 EmeraldChampions_EventScript_MoveRelearnerChooseMon:
 	getpartysize
 	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_MoveRelearnerNoPokemon
-	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
+	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER_DIRECT
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain
 	special IsSelectedMonEgg
 	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_MoveRelearnerEgg
 	special Special_HasMoveToRelearn
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MoveRelearnerNoMoves
-	@ Takes the Pokémon in VAR_0x8004 (or PC_MON_CHOSEN with the box
-	@ position); waits until the move list closes.
+	@ Only a pick from the PC storage screen (OW_CHOOSE_FROM_PC_AND_PARTY)
+	@ reaches the list from here: the Pokémon in VAR_0x8004, or
+	@ PC_MON_CHOSEN with the box position. Waits until the list closes.
 	special TeachMoveRelearnerMove
 	goto EmeraldChampions_EventScript_MoveRelearnerChooseMon
 

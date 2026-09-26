@@ -29,6 +29,7 @@
 #include "money.h"
 #include "move_relearner.h"
 #include "overworld.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
@@ -281,6 +282,44 @@ TEST("Emerald Champions Center preparation lists are complete and isolated")
         EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_WILL_O_WISP);
         EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_PROTECT);
     }
+}
+
+TEST("Center tutor party picks skip the field only when the script has nothing to say")
+{
+    enum MoveRelearnerStates savedState = gMoveRelearnerState;
+    bool32 isEgg = TRUE;
+    bool32 direct[PARTY_SIZE];
+
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_DITTO, 14, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_TRANSFORM, 0);
+    CreateMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_TREECKO, 14, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_EGG, &isEgg);
+    CalculatePlayerPartyCount();
+    gMoveRelearnerState = MOVE_RELEARNER_ALL_MOVES;
+
+    // Each decision matches the script's own checks for that pick.
+    for (u32 slot = 0; slot < 3; slot++)
+    {
+        direct[slot] = CanPartyMonGoStraightToRelearner(slot);
+        gSpecialVar_0x8004 = slot;
+        IsSelectedMonEgg();
+        if (gSpecialVar_Result)
+        {
+            EXPECT(!direct[slot]);
+            continue;
+        }
+        Special_HasMoveToRelearn();
+        EXPECT_EQ(direct[slot], gSpecialVar_Result);
+    }
+    gMoveRelearnerState = savedState;
+
+    EXPECT(direct[0]);  // Moves to relearn: straight to the list
+    EXPECT(!direct[1]); // Ditto knows its only move: the field explains
+    EXPECT(!direct[2]); // An Egg: the field explains
+    EXPECT(!CanPartyMonGoStraightToRelearner(PARTY_SIZE + 1)); // Cancel
+    EXPECT(!CanPartyMonGoStraightToRelearner(PARTY_NOTHING_CHOSEN));
 }
 
 TEST("Emerald Champions preparation table covers every enabled species")

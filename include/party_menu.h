@@ -130,6 +130,8 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void);
 void ChooseContestMon(void);
 void ChoosePartyMon(void);
 void ChooseMonForMoveRelearner(void);
+void ChooseMonForMoveRelearnerDirect(void);
+void CB2_ReturnToMoveRelearnerPartyMenu(void);
 void BattlePyramidChooseMonHeldItems(void);
 void DoBattlePyramidMonsHaveHeldItem(void);
 void IsSelectedMonEgg(void);

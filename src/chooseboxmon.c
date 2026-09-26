@@ -53,6 +53,7 @@ static const struct PcMonSelection sPcMonSelectionTypes[] =
     [SELECT_PC_MON_MOVE_DELETER] = {ChoosePartyMon, ChooseBoxMon_CanMonDeleteMove, NULL, FALSE},
     [SELECT_PC_MON_MOVE_RELEARNER] = {ChooseMonForMoveRelearner, ChooseBoxMon_CanRelearnMoves, NULL, FALSE},
     [SELECT_PC_MON_EVOLUTION] = {ChoosePartyMon, ChooseBoxMon_CanEvolve, NULL, FALSE},
+    [SELECT_PC_MON_MOVE_RELEARNER_DIRECT] = {ChooseMonForMoveRelearnerDirect, ChooseBoxMon_CanRelearnMoves, NULL, FALSE},
 };
 
 static u32 ChooseBoxMon_NoFilter(struct BoxPokemon *boxmon)

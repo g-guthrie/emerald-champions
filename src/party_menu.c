@@ -461,6 +461,8 @@ static void CB2_ChooseContestMon(void);
 static void Task_ChoosePartyMon(u8 taskId);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
+static void Task_ChooseMonForMoveRelearnerDirect(u8);
+static void CB2_ChooseMonForMoveRelearnerDirect(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
 static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
@@ -8553,6 +8555,45 @@ static void CB2_ChooseMonForMoveRelearner(void)
     }
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
+}
+
+// The Center tutor's pick. A Pokémon with moves to relearn goes straight to
+// the move list, and B there comes straight back to this screen, so the
+// field only returns for a cancel or a Pokémon the script has to explain.
+void ChooseMonForMoveRelearnerDirect(void)
+{
+    gRelearnMode = RELEARN_MODE_SCRIPT;
+    LockPlayerFieldControls();
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_ChooseMonForMoveRelearnerDirect, 10);
+}
+
+static void Task_ChooseMonForMoveRelearnerDirect(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        InitPartyMenu(PARTY_MENU_TYPE_MOVE_RELEARNER, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearnerDirect);
+        DestroyTask(taskId);
+    }
+}
+
+// B in the move list; the script is still waiting on the first pick. The
+// cursor stays on the Pokémon that was just in the list.
+void CB2_ReturnToMoveRelearnerPartyMenu(void)
+{
+    gRelearnMode = RELEARN_MODE_SCRIPT;
+    gPartyMenu.slotId = gSpecialVar_0x8004;
+    InitPartyMenu(PARTY_MENU_TYPE_MOVE_RELEARNER, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearnerDirect);
+}
+
+static void CB2_ChooseMonForMoveRelearnerDirect(void)
+{
+    gSpecialVar_0x8004 = GetCursorSelectionMonId();
+    if (CanPartyMonGoStraightToRelearner(gSpecialVar_0x8004))
+        SetMainCallback2(CB2_InitLearnMoveFromPartyMenu);
+    else
+        CB2_ChooseMonForMoveRelearner();
 }
 
 void DoBattlePyramidMonsHaveHeldItem(void)

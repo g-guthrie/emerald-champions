@@ -1,0 +1,81 @@
+{
+  "name": "Center tutor: party and move list open each other without the field",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_TUTOR_MACHINES_LINE_SEEN": true
+    }
+  },
+  "party": [
+    "SPECIES_TREECKO",
+    "SPECIES_DITTO"
+  ],
+  "warp": {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "x": 13,
+    "y": 4,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "tutor menu"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Learn a Move -> party"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "pick Treecko -> move list"
+    },
+    {
+      "press": "B",
+      "frames": 150,
+      "label": "B in list -> party"
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "pick Ditto -> message"
+    },
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "message page 2"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "dismiss -> party"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "pick Treecko -> list again"
+    },
+    {
+      "press": "B",
+      "frames": 150,
+      "label": "B -> party"
+    },
+    {
+      "press": "B",
+      "frames": 150,
+      "label": "B on party -> tutor menu"
+    }
+  ],
+  "expect": {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "contains_text": "How can I help prepare your Pokémon?"
+  }
+}

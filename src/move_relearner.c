@@ -88,6 +88,10 @@ static EWRAM_DATA struct {
     u16 category;
 } sMoveRelearnerResume = {0};
 
+// Set when a Center tutor's party screen opened the list itself
+// (ChooseMonForMoveRelearnerDirect); B then returns to that party screen.
+static EWRAM_DATA bool8 sMoveRelearnerReturnToParty = FALSE;
+
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
 
@@ -417,7 +421,17 @@ void CB2_InitLearnMove(void)
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = CONTEST_INFO;
     else
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = BATTLE_INFO;
+    sMoveRelearnerReturnToParty = FALSE;
     SetMainCallback2(CB2_InitLearnMove_Basic);
+}
+
+// The Pokémon in VAR_0x8004 was picked on the tutor's party screen, which
+// stays the list's way out.
+void CB2_InitLearnMoveFromPartyMenu(void)
+{
+    gRelearnMode = RELEARN_MODE_SCRIPT;
+    CB2_InitLearnMove();
+    sMoveRelearnerReturnToParty = TRUE;
 }
 
 static void CB2_InitLearnMoveReturnFromSelectMove(void)
@@ -544,7 +558,11 @@ static void Task_MoveRelearner_Quit(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    if (gInitialSummaryScreenCallback != NULL)
+    if (sMoveRelearnerReturnToParty)
+    {
+        SetMainCallback2(CB2_ReturnToMoveRelearnerPartyMenu);
+    }
+    else if (gInitialSummaryScreenCallback != NULL)
     {
         if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
             ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_CONTEST, gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
@@ -558,6 +576,7 @@ static void Task_MoveRelearner_Quit(u8 taskId)
 
     FreeMoveRelearnerResources();
     gRelearnMode = RELEARN_MODE_NONE;
+    sMoveRelearnerReturnToParty = FALSE;
     DestroyTask(taskId);
 }
 
@@ -668,8 +687,8 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
     case LIST_CANCEL:
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
-        // A tutor's list costs nothing to leave: B goes straight back to the
-        // script, which returns to choosing a Pokémon.
+        // A tutor's list costs nothing to leave: B goes straight back to
+        // choosing a Pokémon, through the script or the tutor's party screen.
         if (gRelearnMode == RELEARN_MODE_SCRIPT)
         {
             gTasks[taskId].func = Task_MoveRelearner_Quit;
@@ -941,6 +960,20 @@ void Special_HasMoveToRelearn(void)
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
+}
+
+// The script's own checks (IsSelectedMonEgg, Special_HasMoveToRelearn) for a
+// party pick: TRUE opens the move list without returning to the field.
+bool32 CanPartyMonGoStraightToRelearner(u32 partyIndex)
+{
+    struct BoxPokemon *boxmon;
+
+    if (partyIndex >= PARTY_SIZE)
+        return FALSE;
+    boxmon = &gParties[B_TRAINER_PLAYER][partyIndex].box;
+    if (GetBoxMonData(boxmon, MON_DATA_IS_EGG))
+        return FALSE;
+    return HasMoveToRelearn(boxmon, gMoveRelearnerState);
 }
 
 bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates state)

@@ -1,0 +1,102 @@
+{
+  "name": "Center tutor: a lesson stays in the list; B returns to the party screen",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_EC_TUTOR_MACHINES_LINE_SEEN": true
+    }
+  },
+  "party": [
+    "SPECIES_TREECKO",
+    "SPECIES_DITTO"
+  ],
+  "warp": {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "x": 13,
+    "y": 4,
+    "facing": 2
+  },
+  "steps": [
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "tutor menu"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "party"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "move list"
+    },
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "Teach Absorb?"
+    },
+    {
+      "press": "A",
+      "frames": 90,
+      "label": "Yes -> wants to learn"
+    },
+    {
+      "press": "A",
+      "frames": 90,
+      "label": "knows four moves"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "replace? Yes/No"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Yes -> which move to forget"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "Summary: forget Swords Dance"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "confirm -> Poof"
+    },
+    {
+      "press": "A",
+      "frames": 150,
+      "label": "forgot Swords Dance"
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "learned Absorb"
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "back in the list"
+    },
+    {
+      "press": "B",
+      "frames": 150,
+      "label": "B in list -> party"
+    },
+    {
+      "press": "B",
+      "frames": 150,
+      "label": "B on party -> tutor menu"
+    }
+  ],
+  "expect": {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "contains_text": "How can I help prepare your Pokémon?"
+  }
+}
