@@ -493,8 +493,9 @@ DOUBLE_BATTLE_TEST("Spread Moves: Focus Sash activates correctly")
         MESSAGE("The opposing Wobbuffet hung on using its Focus Sash!");
         MESSAGE("The opposing Wynaut hung on using its Focus Sash!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
-        MESSAGE("The opposing Wobbuffet fainted!");
+        // Every target's hit is reported before the knocked-out targets faint.
         MESSAGE("Wynaut hung on using its Focus Sash!");
+        MESSAGE("The opposing Wobbuffet fainted!");
         MESSAGE("The opposing Wynaut fainted!");
     }
 }

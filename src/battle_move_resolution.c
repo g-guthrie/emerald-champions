@@ -3620,6 +3620,16 @@ static enum MoveEndResult MoveEndSubstitute(struct BattleCalcValues *cv)
     return result;
 }
 
+static void FinishFaintBlock(void)
+{
+    gBattleStruct->eventState.moveEndBlock = 0;
+    // A deferred spread-move faint goes straight back for the next one.
+    if (gBattleStruct->spreadFaintPass)
+        gBattleScripting.moveendState = MOVEEND_NEXT_TARGET;
+    else
+        gBattleScripting.moveendState++;
+}
+
 static enum MoveEndResult MoveEndFaintBlock(struct BattleCalcValues *cv)
 {
     enum MoveEndResult result = MOVEEND_RESULT_CONTINUE;
@@ -3645,10 +3655,40 @@ static enum MoveEndResult MoveEndFaintBlock(struct BattleCalcValues *cv)
              || (gAbsentBattlerFlags & 1u << cv->battlerDef)
              || gBattleStruct->battlerState[cv->battlerDef].notOnField)
             {
-                gBattleScripting.moveendState++;
+                FinishFaintBlock();
                 return MOVEEND_RESULT_CONTINUE;
             }
 
+            // A spread move reports every target's critical hit and
+            // effectiveness before anyone faints; the knockouts wait for
+            // the last target and then run in target order from
+            // MOVEEND_NEXT_TARGET.
+            if (!gBattleStruct->spreadFaintPass
+             && IsSpreadMove(GetBattlerMoveTargetType(cv->battlerAtk, cv->move))
+             && (gBattleStruct->spreadFaintsPending
+              || GetNextTarget(GetBattlerMoveTargetType(cv->battlerAtk, cv->move), TRUE) != MAX_BATTLERS_COUNT))
+            {
+                gBattleStruct->spreadFaintsPending |= 1u << cv->battlerDef;
+                FinishFaintBlock();
+                return MOVEEND_RESULT_CONTINUE;
+            }
+
+            gBattleStruct->eventState.moveEndBlock++;
+            break;
+        case FAINT_BLOCK_MULTIHIT_STRINGS:
+            // The knockout ends a multi-strike move early. Its effectiveness
+            // and hit count print now, before the faint, instead of from
+            // MOVEEND_MULTIHIT_MOVE over an empty field.
+            if (gMultiHitCounter
+             && !gBattleStruct->unableToUseMove
+             && !IsBattlerUnaffectedByMove(cv->battlerDef)
+             && GetBattlerMoveTargetType(cv->battlerAtk, cv->move) != TARGET_SMART) // Dragon Darts prints no hit count
+            {
+                gMultiHitCounter = 0;
+                gBattleScripting.multihitString[4]++;
+                BattleScriptCall(BattleScript_MultiHitPrintStrings);
+                result = MOVEEND_RESULT_RUN_SCRIPT;
+            }
             gBattleStruct->eventState.moveEndBlock++;
             break;
         case FAINT_BLOCK_VICTORY_CATCH:
@@ -3725,10 +3765,7 @@ static enum MoveEndResult MoveEndFaintBlock(struct BattleCalcValues *cv)
     } while (gBattleStruct->eventState.moveEndBlock < FAINT_BLOCK_COUNT);
 
     if (result == MOVEEND_RESULT_CONTINUE)
-    {
-        gBattleStruct->eventState.moveEndBlock = 0;
-        gBattleScripting.moveendState++;
-    }
+        FinishFaintBlock();
 
     return result;
 }
@@ -3883,6 +3920,29 @@ static enum MoveEndResult MoveEndNextTarget(struct BattleCalcValues *cv)
             gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
             return MOVEEND_RESULT_BREAK;
         }
+    }
+
+    // Every target has had its messages; now the deferred knockouts faint.
+    if (gBattleStruct->spreadFaintsPending)
+    {
+        enum BattlerId battler = 0;
+        while (!(gBattleStruct->spreadFaintsPending & (1u << battler)))
+            battler++;
+        gBattleStruct->spreadFaintsPending &= ~(1u << battler);
+        if (!gBattleStruct->spreadFaintPass)
+        {
+            gBattleStruct->spreadFaintPass = TRUE;
+            gBattleStruct->spreadFaintLastTarget = gBattlerTarget;
+        }
+        gBattlerTarget = cv->battlerDef = battler;
+        gBattleStruct->eventState.moveEndBlock = 0;
+        gBattleScripting.moveendState = MOVEEND_FAINT_BLOCK;
+        return MOVEEND_RESULT_CONTINUE;
+    }
+    if (gBattleStruct->spreadFaintPass)
+    {
+        gBattleStruct->spreadFaintPass = FALSE;
+        gBattlerTarget = cv->battlerDef = gBattleStruct->spreadFaintLastTarget;
     }
 
     RecordLastUsedMoveBy(gBattlerAttacker, gCurrentMove);
@@ -5146,6 +5206,9 @@ static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
     }
 
     ValidateBattlers();
+
+    gBattleStruct->spreadFaintsPending = 0;
+    gBattleStruct->spreadFaintPass = FALSE;
 
     enum Move originallyUsedMove = GetOriginallyUsedMove(gChosenMove);
     enum Type moveType = GetBattleMoveType(cv->move);
