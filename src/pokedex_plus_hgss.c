@@ -66,10 +66,6 @@ static const u8 sText_Stats_Defense[] = _("DEF");
 static const u8 sText_Stats_Speed[] = _("SPE");
 static const u8 sText_Stats_SpAttack[] = _("SP.A");
 static const u8 sText_Stats_SpDefense[] = _("SP.D");
-static const u8 sText_Stats_EV_Plus1[] = _("{UP_ARROW_2}");
-static const u8 sText_Stats_EV_Plus2[] = _("{UP_ARROW_2}{UP_ARROW_2}");
-static const u8 sText_Stats_EV_Plus3[] = _("{UP_ARROW_2}{UP_ARROW_2}{UP_ARROW_2}");
-static const u8 sText_Stats_EvStr1Str2[] = _("{STR_VAR_1}{STR_VAR_2}");
 static const u8 sText_Stats_MoveSelectedMax[] = _("{STR_VAR_1} / {STR_VAR_2}");
 static const u8 sText_Stats_MoveLevel[] = _("Lv.");
 static const u8 sText_Stats_Gender_0[] = _("♂");
@@ -2449,44 +2445,10 @@ static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value)
     }
 }
 
-static u8 PrintMonStatsToggle_DifferentEVsColumn(u8 differentEVs)
-{
-    if (differentEVs == 1 || differentEVs == 3)
-        return 0;
-    else
-        return 1;
-}
-
-static u8 PrintMonStatsToggle_DifferentEVsRow(u8 differentEVs)
-{
-    if (differentEVs == 1 || differentEVs == 2)
-        return 0;
-    else
-        return 1;
-}
-
-static u8* PrintMonStatsToggle_EV_Arrows(u8 *dest, u8 value)
-{
-    switch (value)
-    {
-    case 1:
-        StringCopy(dest, sText_Stats_EV_Plus1);
-        break;
-    case 2:
-        StringCopy(dest, sText_Stats_EV_Plus2);
-        break;
-    case 3:
-        StringCopy(dest, sText_Stats_EV_Plus3);
-        break;
-    }
-    return dest;
-}
-
 static void PrintStatsScreen_Left(u8 taskId)
 {
     u8 base_x = 8;
     u8 x_offset_column = 43;
-    u8 column = 0;
     u8 base_x_offset = 70;
     u8 base_x_first_row = 23;
     u8 base_x_second_row = 43;
@@ -2497,11 +2459,9 @@ static void PrintStatsScreen_Left(u8 taskId)
     u8 total_x = 93;
     u8 strEV[25];
     u8 strBase[14];
-    u8 EVs[6] = {sPokedexView->sPokemonStats.evYield_HP, sPokedexView->sPokemonStats.evYield_Speed, sPokedexView->sPokemonStats.evYield_Attack, sPokedexView->sPokemonStats.evYield_SpAttack, sPokedexView->sPokemonStats.evYield_Defense, sPokedexView->sPokemonStats.evYield_SpDefense};
-    u8 differentEVs = 0;
 
-    //Base stats
-    if (gTasks[taskId].data[5] == 0)
+    // Base stats on both toggle pages: battles grant no EVs, so there is no
+    // EV yield to show.
     {
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_HP, base_x, base_y + base_y_offset*base_i);
         ConvertIntToDecimalStringN(strBase, sPokedexView->sPokemonStats.baseHP, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -2530,140 +2490,6 @@ static void PrintStatsScreen_Left(u8 taskId)
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
         base_i++;
     }
-    else //EV increases
-    {
-        //If 1 or 2 EVs display with the same layout as the base stats
-        if (sPokedexView->sPokemonStats.differentEVs < 3)
-        {
-            differentEVs = 0;
-            //HP
-            if (EVs[0] > 0)
-            {
-                differentEVs++;
-                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                StringCopy(gStringVar1, sText_Stats_HP);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[0]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            }
-            //Speed
-            if (EVs[1]> 0)
-            {
-                differentEVs++;
-                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                StringCopy(gStringVar1, sText_Stats_Speed);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[1]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            }
-            //Attack
-            if (EVs[2] > 0)
-            {
-                differentEVs++;
-                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                StringCopy(gStringVar1, sText_Stats_Attack);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[2]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            }
-            //Special Attack
-            if (EVs[3] > 0)
-            {
-                differentEVs++;
-                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                StringCopy(gStringVar1, sText_Stats_SpAttack);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[3]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            }
-            //Defense
-            if (EVs[4] > 0)
-            {
-                differentEVs++;
-                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                StringCopy(gStringVar1, sText_Stats_Defense);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[4]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            }
-            //Special Defense
-            if (EVs[5] > 0)
-            {
-                differentEVs++;
-                column = PrintMonStatsToggle_DifferentEVsColumn(differentEVs);
-                base_i = PrintMonStatsToggle_DifferentEVsRow(differentEVs);
-                StringCopy(gStringVar1, sText_Stats_SpDefense);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[5]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + x_offset_column*column, base_y + base_y_offset*base_i);
-            }
-        }
-        else //3 different EVs in 1 row
-        {
-            column = 0;
-            //HP
-            if (EVs[0] > 0)
-            {
-                StringCopy(gStringVar1, sText_Stats_HP);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[0]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
-                column++;
-            }
-            //Speed
-            if (EVs[1] > 0)
-            {
-                StringCopy(gStringVar1, sText_Stats_Speed);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[1]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
-                column++;
-            }
-            //Attack
-            if (EVs[2] > 0)
-            {
-                StringCopy(gStringVar1, sText_Stats_Attack);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[2]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
-                column++;
-            }
-            //Special Attack
-            if (EVs[3] > 0)
-            {
-                StringCopy(gStringVar1, sText_Stats_SpAttack);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[3]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
-                column++;
-            }
-            //Defense
-            if (EVs[4] > 0)
-            {
-                StringCopy(gStringVar1, sText_Stats_Defense);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[4]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
-                column++;
-            }
-            //Special Defense
-            if (EVs[5] > 0)
-            {
-                StringCopy(gStringVar1, sText_Stats_SpDefense);
-                PrintMonStatsToggle_EV_Arrows(gStringVar2, EVs[5]);
-                StringExpandPlaceholders(gStringVar3, sText_Stats_EvStr1Str2);
-                PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x + 29*column, base_y + base_y_offset*base_i);
-                column++;
-            }
-        }
-        base_i++;
-    }
-
     //TOGGLE--------------------------------------
     // Battles give no experience: no Exp. Yield or growth-rate rows.
     if (gTasks[taskId].data[5] == 0)
