@@ -17,20 +17,13 @@
 #define B_LIGHT_BALL_ATTACK_BOOST   GEN_LATEST // In Gen4+, Light Ball doubles Attack in addition to Sp. Atk.
 #define B_PARALYSIS_CHANCE          GEN_LATEST // In Champions, paralysis has a 12.5% chance of not moving, instead of 25%.
 
-// Experience settings
+// Wild Pokémon settings
 #define B_EC_WILD_HELD_ITEMS        TRUE       // Preserve natural held-item acquisition from wild Pokemon.
 #define B_EC_WILD_BATTLE_SETS       FALSE      // Wild Pokemon use their natural level-up moves. The move tutor is where a team gets built.
-#define B_EXP_CATCH                 GEN_LATEST // In Gen6+, the party gains experience when the player catches another Pokémon.
-#define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, Trainer battles no longer increase total experience by 1.5x.
-#define B_SPLIT_EXP                 GEN_LATEST // In Gen6+, all Pokémon that participate in a battle gain full experience. In Gen5 and earlier, the total experience would be evenly split across them.
-#define B_SCALED_EXP                GEN_LATEST // In Gen5 and Gen7+, experience gain is weighted by the difference between the levels of the player's Pokémon and the target.
-#define B_UNEVOLVED_EXP_MULTIPLIER  GEN_LATEST // In Gen6+, if a Pokémon is at or past the level where it would be able to evolve, but it has not, it gains ~1.2x experience. This only applies to species with the EVO_LEVEL method.
-#define B_LEVEL_UP_NOTIFICATION     GEN_LATEST // In Gen9+, if a Pokémon gains enough experience to level up multiple times, a message is only displayed once.
 
 // Stat settings
 #define B_BADGE_BOOST               GEN_LATEST // In Gen4+, Gym Badges no longer boost a Pokémon's stats. (Setting this to GEN_2 does not include the additional boost to the type matching the Gym the Badge is from.)
 #define B_FRIENDSHIP_BOOST          FALSE      // In LGPE only, all stats except HP are boosted by up to 10% depending on on friendship. Unlike B_BADGE_BOOST, these boosts are accounted for when calculating base stats.
-#define B_MAX_LEVEL_EV_GAINS        GEN_LATEST // In Gen5+, level 100 Pokémon can obtain Effort Values from battles.
 #define B_RECALCULATE_STATS         GEN_LATEST // In Gen5+, the stats of Pokémon that participate in battle are recalculated at the end of battle, rather than upon level up or being deposited in the PC.
 
 // Damage settings
@@ -137,7 +130,6 @@
 #define B_TRANSFORM_USER_FAIL           GEN_LATEST // In Gen5+, Transform fails if the user is already transformed.
 #define B_TRANSFORM_SUBSTITUTE_FAIL     GEN_LATEST // In Gen5+, Transform fails if the target is behind a Substitute.
 #define B_TRANSFORM_SHINY               GEN_LATEST // In Gen4+, Transform will copy the Shininess of the opponent instead of maintaining its own Shininess.
-#define B_TRANSFORM_BATTLE_REWARDS      GEN_LATEST // In Gen3 and Gen 4, a Transform'ed Pokemon will give the xp and ev yield of its copied species whereas it gives the xp and ev yield of the original species in other gens
 #define B_TRANSFORM_CATCH_RATE          GEN_LATEST // In Gen3 and Geb 4, Transform'ed will have the catch rate of the tranformed species but they will keep their original catch rate in other generations
 #define B_TRANSFORM_FORM_CHANGES        GEN_LATEST // In Gen5+, Transformed Pokémon can no longer change forms.
 #define B_WIDE_GUARD                    GEN_LATEST // In Gen5 only, Wide Guard has a chance to fail if used consecutively.
@@ -353,7 +345,6 @@
 #define B_FAST_INTRO_PKMN_TEXT              TRUE       // If set to TRUE, battle intro text prints at the same time as the animation of Pokémon, as opposing to waiting for the animation to end.
 #define B_FAST_INTRO_NO_SLIDE               FALSE      // If set to TRUE, the slide animation that happens at the beginning of battles is skipped.
 #define B_FAST_HP_DRAIN                     TRUE       // If set to TRUE, HP bars will move faster.
-#define B_FAST_EXP_GROW                     TRUE       // If set to TRUE, EXP bars will move faster.
 #define B_SHOW_TARGETS                      TRUE       // If set to TRUE, all available targets will be shown before selecting a move in Double Battles.
 #define B_SHOW_CATEGORY_ICON                TRUE       // If set to TRUE, an icon in the summary and move relearner will show a move's category.
 #define B_HIDE_HEALTHBOX_IN_ANIMS           TRUE       // If set to TRUE, healthboxes will be hidden during move animations.

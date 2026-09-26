@@ -206,7 +206,6 @@ EWRAM_DATA struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gBattleWeather = 0;
 EWRAM_DATA u16 gIntroSlideFlags = 0;
-EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
 EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
 EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
@@ -248,7 +247,6 @@ EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 COMMON_DATA MainCallback gPreBattleCallback1 = NULL;
 COMMON_DATA void (*gBattleMainFunc)(void) = NULL;
 COMMON_DATA struct BattleResults gBattleResults = {0};
-COMMON_DATA u8 gLeveledUpInBattle = 0;
 COMMON_DATA u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT] = {0};
 COMMON_DATA u8 gMultiUsePlayerCursor = 0;
 COMMON_DATA u8 gNumberOfMovesToChoose = 0;
@@ -2845,7 +2843,6 @@ static void ClearSetBScriptingStruct(void)
     // Emerald Champions is permanently Set style. The campaign is authored as
     // a competitive puzzle, so free post-KO counter-picks are not an option.
     gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;
-    gBattleScripting.expOnCatch = (GetConfig(B_EXP_CATCH) >= GEN_6);
     gBattleScripting.specialTrainerBattleType = specialBattleType;
 }
 
@@ -2920,7 +2917,6 @@ static void BattleStartClearSetData(void)
 
     gPauseCounterBattle = 0;
     gIntroSlideFlags = 0;
-    gLeveledUpInBattle = 0;
     gAbsentBattlerFlags = 0;
     gBattleStruct->runTries = 0;
     gBattleStruct->safariGoNearCounter = 0;
@@ -2932,8 +2928,6 @@ static void BattleStartClearSetData(void)
     InitCampaignBattleReward();
     InitTrainerMoneyRewardEligibility();
 
-    gBattleStruct->givenExpMons[0] = 0;
-    gBattleStruct->givenExpMons[1] = 0;
     gBattleStruct->palaceFlags = 0;
 
     gBattleResults.shinyWildMon = IsMonShiny(&gParties[B_TRAINER_OPPONENT_A][0]);
@@ -3644,7 +3638,6 @@ static void TryDoEventsBeforeFirstTurn(void)
         SetShellSideArmCategory();
         SetAiLogicDataForTurn(gAiLogicData); // get assumed abilities, hold effects, etc of all battlers
         gBattleMainFunc = HandleTurnActionSelectionState;
-        ResetSentPokesToOpponentValue();
 
         for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
             gBattleCommunication[i] = 0;
@@ -5636,14 +5629,6 @@ static void TryEvolvePokemon(void)
             enum Species species = GetEvolutionTargetSpecies(&gParties[B_TRAINER_PLAYER][i], mode, evolutionItemArg, NULL, &canStopEvo, CHECK_EVO);
             gTriedEvolving |= 1u << i;
 
-            if (species == SPECIES_NONE && (gLeveledUpInBattle & (1u << i)))
-            {
-                gLeveledUpInBattle &= ~(1u << i);
-                mode = EVO_MODE_BATTLE_ONLY;
-                evolutionItemArg = gLeveledUpInBattle;
-                species = GetEvolutionTargetSpecies(&gParties[B_TRAINER_PLAYER][i], mode, evolutionItemArg, NULL, &canStopEvo, CHECK_EVO);
-            }
-
             if (species == SPECIES_NONE
              && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT)
              && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK
@@ -5668,7 +5653,6 @@ static void TryEvolvePokemon(void)
         }
     }
     gTriedEvolving = 0;
-    gLeveledUpInBattle = 0;
     gBattleMainFunc = ReturnFromBattleToOverworld;
 }
 

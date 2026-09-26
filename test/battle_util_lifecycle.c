@@ -84,7 +84,6 @@ TEST("Battle initialization: dirty global state resets and held-item origins mat
     gBattleWeather = 0xFFFF;
     gFieldStatuses = 0xFFFFFFFF;
     gBattleOutcome = B_OUTCOME_LOST;
-    gLeveledUpInBattle = 0x3F;
     gAbsentBattlerFlags = 0xF;
     gBattleControllerExecFlags = 0xFFFFFFFF;
     gPaydayMoney = 999;
@@ -100,7 +99,6 @@ TEST("Battle initialization: dirty global state resets and held-item origins mat
     EXPECT_EQ(gBattleWeather, 0);
     EXPECT_EQ(gFieldStatuses, 0);
     EXPECT_EQ(gBattleOutcome, 0);
-    EXPECT_EQ(gLeveledUpInBattle, 0);
     EXPECT_EQ(gAbsentBattlerFlags, 0);
     EXPECT_EQ(gBattleControllerExecFlags, 0);
     EXPECT_EQ(gPaydayMoney, 0);

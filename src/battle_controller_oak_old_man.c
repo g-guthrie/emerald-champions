@@ -86,7 +86,6 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(enum Battle
     [CONTROLLER_CHOOSEPOKEMON]            = OakOldManHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
-    [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,

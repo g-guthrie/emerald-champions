@@ -703,18 +703,6 @@ TEST("Emerald Champions candy and level increments stop at the campaign cap")
     ZeroPlayerPartyMons();
 }
 
-TEST("Emerald Champions strict EXP cap blocks gains at the milestone")
-{
-    FlagClear(FLAG_IS_CHAMPION);
-    for (u32 i = 0; i < NUM_BADGES; i++)
-        FlagClear(FLAG_BADGE01_GET + i);
-
-    EXPECT_EQ(GetCurrentLevelCap(), 14);
-    EXPECT_EQ(GetSoftLevelCapExpValue(13, 100), 100);
-    EXPECT_EQ(GetSoftLevelCapExpValue(14, 100), 0);
-    EXPECT_EQ(GetSoftLevelCapExpValue(15, 100), 0);
-}
-
 TEST("Emerald Champions leveling never interrupts a competitive moveset")
 {
     struct Pokemon mon;

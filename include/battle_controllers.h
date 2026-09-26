@@ -203,7 +203,6 @@ enum {
 #define PARTY_SUMM_SKIP_DRAW_DELAY (1 << 7)
 
 // Special return values in gBattleBufferB from Battle Controller functions.
-#define RET_VALUE_LEVELED_UP   11
 #define RET_GIMMICK            (1 << 7)
 
 struct UnusedControllerStruct
@@ -261,7 +260,6 @@ enum
     CONTROLLER_CHOOSEPOKEMON,
     CONTROLLER_23,
     CONTROLLER_HEALTHBARUPDATE,
-    CONTROLLER_EXPUPDATE,
     CONTROLLER_STATUSICONUPDATE,
     CONTROLLER_STATUSANIMATION,
     CONTROLLER_STATUSXOR,
@@ -337,7 +335,6 @@ void BtlController_EmitChooseMove(enum BattlerId battler, u32 bufferId, bool8 is
 void BtlController_EmitChooseItem(enum BattlerId battler, u32 bufferId, u8 *battlePartyOrder);
 void BtlController_EmitChoosePokemon(enum BattlerId battler, u32 bufferId, u8 caseId, u8 slotId, enum Ability abilityId, enum BattlerId battlerPreventingSwitchout, u8 *data);
 void BtlController_EmitHealthBarUpdate(enum BattlerId battler, u32 bufferId, u16 hpValue);
-void BtlController_EmitExpUpdate(enum BattlerId battler, u32 bufferId, u8 partyId, s32 expPoints);
 void BtlController_EmitStatusIconUpdate(enum BattlerId battler, u32 bufferId, u32 status);
 void BtlController_EmitStatusAnimation(enum BattlerId battler, u32 bufferId, bool8 isVolatile, u32 status);
 void BtlController_EmitDataTransfer(enum BattlerId battler, u32 bufferId, u16 size, void *data);
@@ -406,7 +403,6 @@ void BtlController_HandleBattleAnimation(enum BattlerId battler);
 void SetControllerToPlayer(enum BattlerId battler);
 void PlayerBufferExecCompleted(enum BattlerId battler);
 void SetBattleEndCallbacks(enum BattlerId battler);
-void PlayerHandleExpUpdate(enum BattlerId battler);
 enum TrainerPicID LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);

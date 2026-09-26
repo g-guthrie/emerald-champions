@@ -1651,118 +1651,6 @@ void TestRunner_Battle_CheckAiMoveScores(enum BattlerId battlerId)
     }
 }
 
-static s32 TryExp(s32 i, s32 n, enum BattlerId battlerId, u32 oldExp, u32 newExp)
-{
-    struct QueuedExpEvent *event;
-    s32 iMax = i + n;
-    for (; i < iMax; i++)
-    {
-        if (DATA.queuedEvents[i].type != QUEUED_EXP_EVENT)
-            continue;
-
-        event = &DATA.queuedEvents[i].as.exp;
-
-        if (event->battlerId == battlerId)
-        {
-            if (event->address <= 0xFFFF)
-            {
-                switch (event->type)
-                {
-                case EXP_EVENT_NEW_EXP:
-                    if (event->address == newExp)
-                        return i;
-                    break;
-                case EXP_EVENT_DELTA_EXP:
-                    if (event->address == 0)
-                        return i;
-                    else if ((s16)event->address == oldExp - newExp)
-                        return i;
-                    break;
-                }
-            }
-            else
-            {
-                switch (event->type)
-                {
-                case EXP_EVENT_NEW_EXP:
-                    *(u32 *)(u32)(event->address) = newExp;
-                    break;
-                case EXP_EVENT_DELTA_EXP:
-                    *(s32 *)(u32)(event->address) = oldExp - newExp;
-                    break;
-                }
-                return i;
-            }
-        }
-    }
-    return -1;
-}
-
-void TestRunner_Battle_RecordExp(enum BattlerId battlerId, u32 oldExp, u32 newExp)
-{
-    s32 queuedEvent;
-    s32 match;
-    struct QueuedEvent *event;
-
-    if (DATA.trial.queuedEvent == DATA.queuedEventsCount)
-        return;
-
-    event = &DATA.queuedEvents[DATA.trial.queuedEvent];
-    switch (event->groupType)
-    {
-    case QUEUE_GROUP_NONE:
-    case QUEUE_GROUP_ONE_OF:
-        if (TryExp(DATA.trial.queuedEvent, event->groupSize, battlerId, oldExp, newExp) != -1)
-        {
-            DATA.trial.queuedEvent += event->groupSize;
-        }
-        else if (DATA.trial.queuedEvent == DATA.queuedEventsFailIndex
-              && DATA.queuedEvents[DATA.queuedEventsFailIndex].type == QUEUED_EXP_EVENT)
-        {
-            const char *filename = gTestRunnerState.test->filename;
-            u32 line = SourceLine(event->sourceLineOffset);
-            switch (DATA.queuedEvents[DATA.queuedEventsFailIndex].as.exp.type)
-            {
-            case EXP_EVENT_NEW_EXP:
-                Test_MgbaPrintf("%s:%d: Did you mean: EXPERIENCE_BAR(%s, exp: %d)", filename, line, BattlerIdentifier(battlerId), newExp);
-                break;
-            case EXP_EVENT_DELTA_EXP:
-                if (DATA.queuedEvents[DATA.queuedEventsFailIndex].as.exp.address == 0)
-                    Test_MgbaPrintf("%s:%d: Did you mean: EXPERIENCE_BAR(%s)", filename, line, BattlerIdentifier(battlerId));
-                else
-                    Test_MgbaPrintf("%s:%d: Did you mean: EXPERIENCE_BAR(%s, captureGainedExp: %d)", filename, line, BattlerIdentifier(battlerId), oldExp - newExp);
-                break;
-            }
-        }
-        break;
-    case QUEUE_GROUP_NONE_OF:
-        queuedEvent = DATA.trial.queuedEvent;
-        do
-        {
-            if ((match = TryExp(queuedEvent, event->groupSize, battlerId, oldExp, newExp)) != -1)
-            {
-                const char *filename = gTestRunnerState.test->filename;
-                u32 line = SourceLine(DATA.queuedEvents[match].sourceLineOffset);
-                if (gTestRunnerState.expectedFailState == EXPECT_FAIL_SCENE_OPEN)
-                    gTestRunnerState.expectedFailState = EXPECT_FAIL_SUCCESS;
-                Test_ExitWithResult(TEST_RESULT_FAIL, line, "%s:%d: Matched EXPERIENCE_BAR", filename, line);
-            }
-
-            queuedEvent += event->groupSize;
-            if (queuedEvent == DATA.queuedEventsCount)
-                break;
-
-            event = &DATA.queuedEvents[queuedEvent];
-            if (event->groupType == QUEUE_GROUP_NONE_OF)
-                continue;
-
-            if (TryExp(queuedEvent, event->groupSize, battlerId, oldExp, newExp) != -1)
-                DATA.trial.queuedEvent = queuedEvent + event->groupSize;
-        } while (FALSE);
-        break;
-    }
-}
-
 static s32 TryMessage(s32 i, s32 n, const u8 *string)
 {
     s32 j, k;
@@ -2066,7 +1954,6 @@ static const char *const sEventTypeMacros[] =
     [QUEUED_ANIMATION_EVENT] = "ANIMATION",
     [QUEUED_HP_EVENT] = "HP_BAR",
     [QUEUED_SUB_HIT_EVENT] = "SUB_HIT",
-    [QUEUED_EXP_EVENT] = "EXPERIENCE_BAR",
     [QUEUED_MESSAGE_EVENT] = "MESSAGE",
     [QUEUED_STATUS_EVENT] = "STATUS_ICON",
     [QUEUED_CATCH_CHANCE_EVENT] = "CATCH_CHANCE",
@@ -3712,50 +3599,6 @@ void QueueSubHit(u32 sourceLine, struct BattlePokemon *battler, struct SubHitEve
             .battlerId = battlerId,
             .checkBreak = checkBreak,
             .breakSub = breakSub,
-            .address = address,
-        }},
-    };
-}
-
-void QueueExp(u32 sourceLine, struct BattlePokemon *battler, struct ExpEventContext ctx)
-{
-    enum BattlerId battlerId = battler - gBattleMons;
-    u32 type;
-    uintptr_t address;
-
-    if (gTestRunnerState.expectedFailState == EXPECT_FAIL_OPEN)
-        gTestRunnerState.expectedFailState = EXPECT_FAIL_SCENE_OPEN;
-
-    INVALID_IF(!STATE->runScene, "EXPERIENCE_BAR outside of SCENE");
-    if (DATA.queuedEventsCount == MAX_QUEUED_EVENTS)
-        Test_ExitWithResult(TEST_RESULT_ERROR, sourceLine, "%s:%d: EXPERIENCE_BAR exceeds MAX_QUEUED_EVENTS", gTestRunnerState.test->filename, sourceLine);
-
-    if (ctx.explicitExp)
-    {
-        type = EXP_EVENT_NEW_EXP;
-        address = (u32)ctx.exp;
-    }
-    else if (ctx.explicitCaptureGainedExp)
-    {
-        INVALID_IF(ctx.captureGainedExp == NULL, "captureGainedExp is NULL");
-        type = EXP_EVENT_DELTA_EXP;
-        *ctx.captureGainedExp = 0;
-        address = (uintptr_t)ctx.captureGainedExp;
-    }
-    else
-    {
-        type = EXP_EVENT_DELTA_EXP;
-        address = 0;
-    }
-
-    DATA.queuedEvents[DATA.queuedEventsCount++] = (struct QueuedEvent) {
-        .type = QUEUED_EXP_EVENT,
-        .sourceLineOffset = SourceLineOffset(sourceLine),
-        .groupType = QUEUE_GROUP_NONE,
-        .groupSize = 1,
-        .as = { .exp = {
-            .battlerId = battlerId,
-            .type = type,
             .address = address,
         }},
     };

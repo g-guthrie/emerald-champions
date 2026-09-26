@@ -72,7 +72,6 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(enum
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedOpponentHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
-    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = RecordedOpponentHandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,

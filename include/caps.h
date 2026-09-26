@@ -23,7 +23,6 @@
 u32 GetCurrentLevelCap(void);
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline);
 u32 GetPlayerLevelCapForSpecies(enum Species species);
-u32 GetSoftLevelCapExpValue(u32 level, u32 expValue);
 u32 GetCurrentEVCap(void);
 #if EC_HEADLESS_FIXTURES
 #endif

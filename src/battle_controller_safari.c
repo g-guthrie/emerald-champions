@@ -67,7 +67,6 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId
     [CONTROLLER_CHOOSEPOKEMON]            = SafariHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_Empty,
-    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_Empty,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,

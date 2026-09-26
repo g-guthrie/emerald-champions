@@ -68,7 +68,6 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(enum B
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedPlayerHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
-    [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = RecordedPlayerHandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,

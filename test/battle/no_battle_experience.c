@@ -24,10 +24,7 @@ WILD_BATTLE_TEST("No battle experience: a wild knockout grants no Exp. and no le
     } WHEN {
         TURN { MOVE(player, MOVE_DRAGON_RAGE); }
     } SCENE {
-        NONE_OF {
-            EXPERIENCE_BAR(player);
-            MESSAGE("Zigzagoon gained 0 Exp. Points!");
-        }
+        MESSAGE("The wild Magikarp fainted!");
     } THEN {
         for (u32 i = 0; i < 2; i++)
         {
@@ -49,7 +46,7 @@ SINGLE_BATTLE_TEST("No battle experience: a trainer knockout grants no Exp. and 
     } WHEN {
         TURN { MOVE(player, MOVE_DRAGON_RAGE); SEND_OUT(opponent, 1); }
     } SCENE {
-        NOT EXPERIENCE_BAR(player);
+        MESSAGE("The opposing Magikarp fainted!");
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 5);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP),
