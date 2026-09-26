@@ -20801,7 +20801,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_TYROGUE"
+                "species": "SPECIES_HITMONCHAN"
               },
               {
                 "min_level": 34,
@@ -20875,12 +20875,12 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_TYROGUE"
+                "species": "SPECIES_HITMONCHAN"
               },
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_TYROGUE"
+                "species": "SPECIES_HITMONCHAN"
               }
             ],
             "encounter_rates": [
