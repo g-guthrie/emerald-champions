@@ -38,7 +38,6 @@ POCKET_NAMES = ("items", "medicine", "battle", "tm_hm", "berries", "poke_balls",
 SERVICE_ITEMS = {
     "leveler": "ITEM_LEVELER",
     "move_tutor": "ITEM_MOVE_RELEARNER",
-    "ability_editor": "ITEM_ABILITY_CAPSULE",
     "flight_beacon": "ITEM_FLIGHT_BEACON",
     "portable_healing": "ITEM_POKE_VIAL",
 }
