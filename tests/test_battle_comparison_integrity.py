@@ -1,43 +1,28 @@
-"""Exercise production comparisons, typed bytecode decoding and Contrary boundaries."""
+"""Exercise production comparisons, typed bytecode decoding and Contrary boundaries.
+
+The whole of src/battle_script_commands.c, src/battle_util.c and
+src/battle_stat_change.c is compiled on the host into a library exporting only
+the harness entry points. The harness authors the script bytecode it decodes.
+"""
 import subprocess
 import sys
 import tempfile
 import unittest
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tests'))
+import host_c
 
 
-def function(source, name):
-    return re.search(r'(?:static )?(?:void|bool32) ' + name + r'\([^;]+?\)\n\{.*?\n\}', source, re.S)[0]
-
-
-def harness(commands, stats):
-    constants = '\n'.join(line for line in (ROOT / 'include/constants/battle_script_commands.h').read_text().splitlines() if line.startswith('#define CMP_'))
+def harness():
     code = r'''
-#include <stdint.h>
 #include <string.h>
-typedef uint8_t u8; typedef uint16_t u16; typedef uint32_t u32; typedef unsigned bool32;
-#define TRUE 1
-#define FALSE 0
-#define MIN_STAT_STAGE 0
-#define MAX_STAT_STAGE 12
-enum BattlerId { B0, B1, B2, B3 };
-enum Stat { STAT_HP, STAT_ATK };
-enum Ability { ABILITY_NONE, ABILITY_CONTRARY };
-static struct {int8_t statStages[8];} gBattleMons[4];
-static const u8 *gBattlescriptCurrInstr;
-#define CMD_ARGS(a,b,c,d) const struct __attribute__((packed)) {u8 opcode;a;b;c;d;const u8 nextInstr[0];} *const cmd = (const void *)gBattlescriptCurrInstr
-''' + constants + '\n'
-    code += function((ROOT / 'src/battle_util.c').read_text(), 'CompareBattleValues') + '\n'
-    for name in ('byte', 'halfword', 'word', 'arrayequal', 'arraynotequal'):
-        code += function(commands, 'Cmd_jumpif' + name) + '\n'
-    code += function(stats, 'CompareStat') + '\n'
+'''
     for name, typ in [('byte', 'u8'), ('halfword', 'u16'), ('word', 'u32')]:
         code += f'''
 struct __attribute__((packed)) Code_{name} {{u8 opcode,comparison; const {typ} *ptr; {typ} value; const u8 *jump; u8 next[1];}};
-u32 Run_{name}(u8 comparison, {typ} lhs, {typ} rhs) {{
+HOST_EXPORT u32 Run_{name}(u8 comparison, {typ} lhs, {typ} rhs) {{
     const u8 target[] = {{123}};
     struct Code_{name} code = {{.comparison=comparison,.ptr=comparison>CMP_BITMASK?0:&lhs,.value=rhs,.jump=target}};
     gBattlescriptCurrInstr=(const u8 *)&code;
@@ -49,7 +34,7 @@ u32 Run_{name}(u8 comparison, {typ} lhs, {typ} rhs) {{
 '''
     code += r'''
 struct __attribute__((packed)) ArrayCode {u8 opcode; const u8 *a, *b; u8 size; const u8 *jump; u8 next[1];};
-u32 RunArray(u32 unequal, const u8 *a, const u8 *b, u8 size) {
+HOST_EXPORT u32 RunArray(u32 unequal, const u8 *a, const u8 *b, u8 size) {
     const u8 target[] = {123};
     struct ArrayCode code = {.a=a,.b=b,.size=size,.jump=target};
     gBattlescriptCurrInstr=(const u8 *)&code;
@@ -58,7 +43,7 @@ u32 RunArray(u32 unequal, const u8 *a, const u8 *b, u8 size) {
     if(gBattlescriptCurrInstr==code.next) return 0;
     return 99;
 }
-u32 ReadOrder(void) {
+HOST_EXPORT u32 ReadOrder(void) {
     const u8 target[] = {123};
     struct Code_byte code = {.comparison=CMP_EQUAL,.ptr=(const u8 *)&gBattlescriptCurrInstr,.jump=target};
     const u8 *expected=code.next;
@@ -67,12 +52,22 @@ u32 ReadOrder(void) {
     Cmd_jumpifbyte();
     return gBattlescriptCurrInstr==target;
 }
-u32 RunStat(u32 value,u32 comparison,u32 rhs,u32 contrary) {
-    gBattleMons[B2].statStages[STAT_ATK]=value;
-    return CompareStat(B2,STAT_ATK,rhs,comparison,contrary?ABILITY_CONTRARY:ABILITY_NONE);
+HOST_EXPORT u32 RunStat(u32 value,u32 comparison,u32 rhs,u32 contrary) {
+    gBattleMons[2].statStages[STAT_ATK]=value;
+    return CompareStat(2,STAT_ATK,rhs,comparison,contrary?ABILITY_CONTRARY:ABILITY_NONE);
 }
 '''
     return code
+
+
+# battle_main.c boundary: the two globals these commands read and write.
+BOUNDARY = r'''
+#include "global.h"
+#include "battle.h"
+''' + host_c.ASSERTS + r'''
+const u8 *gBattlescriptCurrInstr;
+struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
+'''
 
 
 RUNNER = r'''
@@ -130,10 +125,12 @@ class BattleComparisonIntegrity(unittest.TestCase):
     def test_operations_decoding_and_stat_policy(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)
-            (path / 'test.c').write_text(harness((ROOT / 'src/battle_script_commands.c').read_text(), (ROOT / 'src/battle_stat_change.c').read_text()))
-            subprocess.run(['cc', '-O2', '-std=c11', '-Wall', '-Wextra', '-Werror', '-shared', '-fPIC',
-                            '-fsanitize=undefined', '-fno-sanitize-recover=undefined',
-                            str(path / 'test.c'), '-o', str(path / 'test.so')], check=True, timeout=30)
+            host_c.build(path, {
+                'battle_script_commands.c': host_c.production('src/battle_script_commands.c') + harness(),
+                'battle_util.c': host_c.production('src/battle_util.c'),
+                'battle_stat_change.c': host_c.production('src/battle_stat_change.c'),
+                'battle_main_boundary.c': BOUNDARY,
+            }, shared=True, optimize='-O2')
             result = subprocess.run([sys.executable, '-c', RUNNER, str(path / 'test.so')], capture_output=True, text=True, timeout=20)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn('cases passed', result.stdout)

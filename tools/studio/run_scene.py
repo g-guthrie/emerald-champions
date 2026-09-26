@@ -24,18 +24,23 @@ async def run(spec,out):
         if start.get("mode","exact")=="latest":
             portable=replay.get("portable")
             if not portable:raise ValueError("This recording began mid-interaction. Record from idle field to test a new build.")
-            if portable["abi"]!=latest["abi"]:raise ValueError("The recording's save layout differs from the latest build.")
+            problem=server.compatible_saves(portable["abi"],latest["abi"])
+            save_note=server.legacy_save_match(portable["abi"],latest) if problem else "compiled save layout matches"
+            if problem and not save_note:
+                if not str(portable["abi"]).startswith("layout1:"):
+                    problem+=" This recording's portable save predates compiled save-layout ids (legacy provenance) and its headers have changed; record it again from idle field."
+                raise ValueError("The recording's save cannot start the latest build. "+problem)
             build=latest
             studio.core,packet=await studio.boot(build,Path(portable["path"]))
         else:
-            build=dict(id=b["rom_sha256"],rom=Path(b["rom"]),elf=Path(b["elf"]),abi=b["abi"])
+            build=server.recorded_build(b)
             if server.sha(build["rom"])!=build["id"]:raise ValueError("Recorded ROM identity changed.")
             studio.core=await server.Core.open(build["rom"],build["elf"])
             await studio.core.rpc(3,replay["initial"]["state"].encode())
             packet=await studio.core.tick(frames=0)
     elif "snapshot" in start:
         cp=start["snapshot"];b=cp["build_info"]
-        build=dict(id=b["rom_sha256"],rom=Path(b["rom"]),elf=Path(b["elf"]),abi=b["abi"])
+        build=server.recorded_build(b)
         studio.core=await server.Core.open(build["rom"],build["elf"])
         await studio.core.rpc(3,cp["state"].encode());packet=await studio.core.tick(frames=0)
     else:
@@ -142,9 +147,13 @@ async def run(spec,out):
             old=Image.open(Path(start["recording"])/replay["captures"][-1]["path"]).convert("RGBA").tobytes()
             exact=old==studio.packet[16:153616]
             if not exact:failures.append("Recorded-build replay ended on different pixels.")
-        result=await asyncio.to_thread(recorder.finish,studio.packet,
-                 dict(passed=not failures,failures=failures,final=final,exact_replay_pixels=exact,
-                      battle_resolution=forced))
+        outcome=dict(passed=not failures,failures=failures,final=final,exact_replay_pixels=exact,
+                     battle_resolution=forced)
+        if replay:
+            # Recordings made before build stamps stay replayable; say so rather than imply proof.
+            outcome["parent_provenance"]=replay["build"].get("provenance_label") or server.provenance.label(None)
+            if start.get("mode","exact")=="latest":outcome["save_compatibility"]=save_note
+        result=await asyncio.to_thread(recorder.finish,studio.packet,outcome)
         (out/"recipe.json").write_text(json.dumps(spec,indent=2))
         return result
     finally:await studio.core.close()

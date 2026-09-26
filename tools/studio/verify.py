@@ -24,6 +24,12 @@ async def main():
     def record(name): checks.append(name); print("PASS", name, flush=True)
     await studio.start()
     try:
+        staged = studio.build["provenance"]
+        assert staged["status"] == "verified", server.provenance.label(staged)
+        assert studio.build["abi"] == staged["save_layout"] and studio.build["abi"].startswith("layout1:")
+        source = json.loads((studio.build["rom"].parent / "source.json").read_text())
+        assert source["provenance"]["build_id"] == staged["build_id"]
+        record("staged ROM provenance verifies; save id is the compiled layout")
         await studio.command(dict(op="chapter", value=3))
         assert studio.current_map == "OldaleTown_PokemonCenter_1F"
         assert studio.state[4:6] == [8,6]
@@ -99,7 +105,8 @@ async def main():
         import scenes
         trace=json.loads(Path(recorded["recording"]).read_text())
         assert sum(s["frames"] for s in trace["inputs"])==30
-        record("recorded input duration and native contact sheet generation")
+        assert trace["build"]["provenance"]["build_id"]==staged["build_id"] and recorded["provenance"].startswith("verified ")
+        record("recorded input duration, build provenance and native contact sheet generation")
         Image.frombytes("RGBA",(240,160),studio.packet[16:153616]).save(server.WORK/"c04.png")
         result=dict(checks=checks,rom=studio.build_id,native_frame_ms=dict(median=statistics.median(times),p95=sorted(times)[170],max=max(times)),
                     pcm_peak=max(peaks),scope="Synthetic native tool verification; no earned campaign progress")

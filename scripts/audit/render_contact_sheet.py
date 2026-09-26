@@ -60,7 +60,8 @@ def main():
     draw.text((gap, 12), spec['title'], font=font(24), fill='#172334')
     draw.text((gap, 44), spec['scope'], font=font(17), fill='#34455c')
     build = spec['build']
-    draw.text((gap, 70), f"ROM {build['rom_sha256'][:16]} | ELF {build['elf_sha256'][:16]} | Originals and evidence in sidecar", font=font(15), fill='#34455c')
+    provenance = f" | {build['provenance_short']}" if build.get('provenance_short') else ''
+    draw.text((gap, 70), f"ROM {build['rom_sha256'][:16]} | ELF {build['elf_sha256'][:16]}{provenance} | Originals and evidence in sidecar", font=font(15), fill='#34455c')
     records = []
     for index, (path, label, pixels, digest) in enumerate(frames):
         x = gap + (index % cols) * (cell_w + gap)

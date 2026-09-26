@@ -148,7 +148,7 @@ async function poll(){
     $("markScene").disabled=!state.recording;
     $("liveText").textContent=state.observed?.text||"No dialogue observed.";
     $("sceneJobs").textContent=(state.jobs||[]).map(j=>j.name+" · "+j.status+(j.error?" · "+j.error:"")).join("\n");
-    $("buildId").textContent="BUILD "+state.build;$("coords").textContent=state.map+" · "+state.x+", "+state.y;
+    $("buildId").textContent="BUILD "+state.build+(state.provenance?" · "+state.provenance:"");$("coords").textContent=state.map+" · "+state.x+", "+state.y;
     $("pause").textContent=state.paused?"▶ Resume":"Ⅱ Pause";$("build").disabled=$("applyDialogue").disabled=state.building;
     $("build").textContent=state.building?"Building…":"↻ Build & apply";$("buildLog").textContent=state.log||"No build running.";
     if(lastBuild&&state.build!==lastBuild&&npcData&&selectedNpc!==null){

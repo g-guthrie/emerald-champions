@@ -1,36 +1,40 @@
-"""Execute the actual Continue script refresher on minimal host map/save fixtures."""
+"""Execute the actual Continue script refresher on minimal host map/save fixtures.
+
+The whole of src/overworld.c is compiled on the host with the real map and
+object-template types; the harness supplies only the save block and the map
+group table of other units.
+"""
 from pathlib import Path
-import re
-import shutil
-import subprocess
+import sys
 import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-PRELUDE = r'''
-#include <assert.h>
-#include <stdint.h>
+sys.path.insert(0, str(ROOT / 'tests'))
+import host_c
+
+# load_save.c and generated map-group boundary: one target map at group 3, map 4.
+BOUNDARY = r'''
+#include "global.h"
+''' + host_c.ASSERTS + r'''
+static struct SaveBlock1 sSave;
+struct SaveBlock1 *gSaveBlock1Ptr = &sSave;
+struct MapHeader gMapHeader;
+struct MapHeader gHostTargetMap;
+static const struct MapHeader *const sGroup3[] = {NULL, NULL, NULL, NULL, &gHostTargetMap};
+const struct MapHeader *const *const gMapGroups[] = {NULL, NULL, NULL, sGroup3};
+'''
+
+CASES = r'''
 #include <stdlib.h>
 #include <string.h>
-typedef uint8_t u8;
-typedef uint32_t u32;
-typedef int32_t s32;
-#define OBJECT_EVENT_TEMPLATES_COUNT 64
-#define OBJ_KIND_CLONE 255
-struct ObjectEventTemplate {
-    u8 localId, kind, targetLocalId, targetMapNum, targetMapGroup, movementType;
-    int16_t x, y;
-    const unsigned char *script;
-};
-struct MapEvents { u32 objectEventCount; const struct ObjectEventTemplate *objectEvents; };
-struct MapHeader { const struct MapEvents *events; } gMapHeader, targetMap;
-struct Save { struct ObjectEventTemplate objectEventTemplates[64]; } save, *gSaveBlock1Ptr=&save;
+extern struct MapHeader gHostTargetMap;
 static const unsigned char currentScript[]="current", oldScript[]="old", poisonScript[]="poison", cloneScript[]="clone";
-static const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u8 group, u8 num) {
-    assert(group==3 && num==4); return &targetMap;
-}
-'''
-CASES = r'''
+#ifdef HOST_ORIGINAL
+#define Refresh OriginalLoadSaveblockObjEventScripts
+#else
+#define Refresh LoadSaveblockObjEventScripts
+#endif
 int main(int argc, char **argv) {
     unsigned count = (unsigned)atoi(argv[1]);
     int clone = argc > 2 && strcmp(argv[2], "-") != 0;
@@ -38,33 +42,40 @@ int main(int argc, char **argv) {
     // A short actual allocation also exercises zero/one-entry bounds below.
     unsigned allocated = count > 64 ? count : (argc > 3 ? 64 : count);
     struct ObjectEventTemplate *source = allocated ? calloc(allocated,sizeof(*source)) : NULL;
-    struct MapEvents events = {count,source};
+    struct MapEvents events = {.objectEventCount = count, .objectEvents = source};
     struct ObjectEventTemplate target = {.localId=7, .script=cloneScript};
-    struct MapEvents targetEvents = {1,&target};
-    struct ObjectEventTemplate preserved[64];
-    targetMap.events=&targetEvents; gMapHeader.events=&events;
+    struct MapEvents targetEvents = {.objectEventCount = 1, .objectEvents = &target};
+    struct ObjectEventTemplate preserved[OBJECT_EVENT_TEMPLATES_COUNT];
+    assert(OBJECT_EVENT_TEMPLATES_COUNT == 64);
+    gHostTargetMap.events=&targetEvents; gMapHeader.events=&events;
     for (unsigned i=0;i<allocated;i++) source[i].script = i<count ? currentScript : poisonScript;
     for (unsigned i=0;i<64;i++) {
-        save.objectEventTemplates[i]=(struct ObjectEventTemplate){
-            .localId=i+1,.kind=2,.movementType=10,.x=100+i,.y=-20,
-            .targetLocalId=8,.targetMapNum=9,.targetMapGroup=10,.script=oldScript};
+        gSaveBlock1Ptr->objectEventTemplates[i]=(struct ObjectEventTemplate){
+            .localId=i+1,.graphicsId=13,.kind=2,.x=100+i,.y=-20,.elevation=3,.movementType=10,
+            .trainerType=11,.trainerRange_berryTreeId=12,.flagId=14,.script=oldScript};
     }
     if (clone) {
         source[0].kind=OBJ_KIND_CLONE; source[0].targetMapGroup=3; source[0].targetMapNum=4;
         source[0].targetLocalId=(u8)atoi(argv[2]); source[0].script=poisonScript;
     }
-    memcpy(preserved,save.objectEventTemplates,sizeof(preserved));
-    LoadSaveblockObjEventScripts();
+    memcpy(preserved,gSaveBlock1Ptr->objectEventTemplates,sizeof(preserved));
+    Refresh();
     for (unsigned i=0;i<64;i++) {
         const unsigned char *expected=i<count ? currentScript : NULL;
         if (clone && i==0) expected=source[0].targetLocalId==1 ? cloneScript : NULL;
-        assert(save.objectEventTemplates[i].script==expected);
+        assert(gSaveBlock1Ptr->objectEventTemplates[i].script==expected);
         preserved[i].script=expected;
-        assert(memcmp(&preserved[i],&save.objectEventTemplates[i],sizeof(preserved[i]))==0);
+        assert(memcmp(&preserved[i],&gSaveBlock1Ptr->objectEventTemplates[i],sizeof(preserved[i]))==0);
     }
     free(source);return 0;
 }
 '''
+
+ORIGINAL = '''static void OriginalLoadSaveblockObjEventScripts(void) {
+    const struct ObjectEventTemplate *mapHeaderObjTemplates=gMapHeader.events->objectEvents;
+    struct ObjectEventTemplate *savObjTemplates=gSaveBlock1Ptr->objectEventTemplates;
+    for (s32 i=0;i<OBJECT_EVENT_TEMPLATES_COUNT;i++) savObjTemplates[i].script=mapHeaderObjTemplates[i].script;
+}'''
 
 
 class ContinueObjectScripts(unittest.TestCase):
@@ -73,24 +84,20 @@ class ContinueObjectScripts(unittest.TestCase):
         cls.temp = tempfile.TemporaryDirectory()
         cls.addClassCleanup(cls.temp.cleanup)
         cls.directory = Path(cls.temp.name)
-        source = (ROOT / 'src/overworld.c').read_text()
-        cls.function = re.search(r'void LoadSaveblockObjEventScripts\(void\)\n\{.*?\n\}', source, re.S)[0]
-        cls.fixed = cls.compile(cls.function, 'fixed')
+        cls.fixed = cls.compile('fixed')
 
     @classmethod
-    def compile(cls, function, name):
-        compiler = shutil.which('cc')
-        if compiler is None:
-            raise RuntimeError('host C compiler required')
-        source = cls.directory / (name + '.c')
-        executable = cls.directory / name
-        source.write_text(PRELUDE + function + CASES)
-        subprocess.run([compiler, '-std=c11', '-Wall', '-Wextra', str(source), '-o', str(executable)], check=True, capture_output=True)
-        return executable
+    def compile(cls, name, original=False):
+        directory = cls.directory / name
+        directory.mkdir()
+        # The pre-fix function runs against the same real types and globals.
+        return host_c.build(directory, {
+            'overworld.c': host_c.production('src/overworld.c') + ORIGINAL + CASES,
+            'boundary.c': BOUNDARY,
+        }, name=name, defines={'HOST_ORIGINAL': '1'} if original else None)
 
     def check(self, *args):
-        result = subprocess.run([str(self.fixed), *map(str,args)], capture_output=True, text=True, timeout=10)
-        self.assertEqual(result.returncode, 0, result.stderr)
+        host_c.run(self.fixed, *args, timeout=10)
 
     def test_zero_short_and_full_maps_preserve_non_script_state(self):
         for count in (0, 1, 2, 63, 64, 65):
@@ -105,17 +112,12 @@ class ContinueObjectScripts(unittest.TestCase):
         self.check(1, 2)
 
     def test_original_bug_reproduces_poison_from_beyond_declared_map_count(self):
-        old = '''void LoadSaveblockObjEventScripts(void) {
-            const struct ObjectEventTemplate *mapHeaderObjTemplates=gMapHeader.events->objectEvents;
-            struct ObjectEventTemplate *savObjTemplates=gSaveBlock1Ptr->objectEventTemplates;
-            for (s32 i=0;i<OBJECT_EVENT_TEMPLATES_COUNT;i++) savObjTemplates[i].script=mapHeaderObjTemplates[i].script;
-        }'''
-        executable = self.compile(old, 'original')
+        executable = self.compile('original', original=True)
         # Padded memory makes the wrong-read reproduction deterministic without
         # relying on a platform sanitizer runtime or undefined allocation bounds.
-        result = subprocess.run([str(executable), '1', '-', 'padded'], capture_output=True, text=True, timeout=10)
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn('assert', result.stderr.lower())
+        with self.assertRaises(AssertionError) as failure:
+            host_c.run(executable, '1', '-', 'padded', timeout=10)
+        self.assertIn('assert', str(failure.exception).lower())
 
 
 if __name__ == '__main__':

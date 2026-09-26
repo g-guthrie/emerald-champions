@@ -29,7 +29,7 @@ BUILD_STORE = WORK / "builds"
 sys.path.insert(0, str(ROOT / "scripts"))
 from native_tools import build_runner, symbols
 from rom_artifacts import verify_rom_elf_pair
-from stamp_release_inputs import digest_tree
+import build_provenance as provenance
 from scenes import Recorder,TextDecoder,packet_state,keys as button_mask,compare as compare_scenes
 from library import Library
 
@@ -38,6 +38,85 @@ U32 = struct.Struct("<I")
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def words(*values): return struct.pack("<" + "I" * len(values), *values)
 def title(name): return name.replace("SPECIES_", "").replace("_", " ").title()
+
+ROM_FILE, ELF_FILE = "pokeemerald-headless.gba", "pokeemerald-headless.elf"
+
+def load_build(rom, elf, identity=None):
+    """A build handle whose provenance is re-verified from the ROM, ELF and stamp on disk.
+
+    Only a verified stamp supplies a save-layout id. Unverified and legacy ROMs
+    get an id unique to their bytes, so saves never move between them and
+    another build on an unproven claim.
+    """
+    rom, elf = Path(rom), Path(elf)
+    summary = provenance.verify(rom, elf) if rom.is_file() and elf.is_file() else \
+        dict(status="unverified", reason="recorded ROM/ELF are missing")
+    identity = identity or summary.get("rom_sha256")
+    abi = summary.get("save_layout") if summary["status"] == "verified" else None
+    return dict(id=identity, rom=rom, elf=elf, abi=abi or "unproven:" + str(identity), provenance=summary)
+
+def recorded_build(info):
+    """Reopen the build a recording, snapshot or situation names (legacy records included)."""
+    return load_build(info["rom"], info["elf"], info["rom_sha256"])
+
+def record_build_source(dest, build):
+    """Describe what this ROM was built from, using only what its stamp proves."""
+    summary = build["provenance"]
+    record = dict(created=datetime.now(timezone.utc).isoformat(), rom_sha256=build["id"], elf_sha256=sha(build["elf"]),
+                  abi=build["abi"], provenance=summary, provenance_label=provenance.label(summary),
+                  commit=None, changed_files=[])
+    source = summary.get("source") or {}
+    if summary["status"] == "legacy":
+        record["scope"] = "Legacy provenance: this ROM predates build stamps, so its source is not recorded."
+    elif summary["status"] != "verified":
+        record["scope"] = ("Unverified build: its embedded id and stamp do not agree, so the current checkout "
+                           "is not recorded as its source. " + summary.get("reason", ""))
+    elif source.get("kind") == "tree":
+        record["scope"] = f"Stamped build source: whole-tree digest {source['inputs_sha256']} (built without Git)."
+    else:
+        dirty = source.get("dirty_inputs") or {}
+        record.update(commit=source["commit"], changed_files=sorted(dirty))
+        if not dirty:
+            record["scope"] = "Stamped build source: this Git commit, with no uncommitted build inputs."
+        elif provenance.source_identity(ROOT) == source:
+            paths = sorted(dirty)
+            (dest/"workspace.patch").write_bytes(subprocess.check_output(
+                ["git","diff","--no-ext-diff","--binary","HEAD","--",*paths],cwd=ROOT))
+            with zipfile.ZipFile(dest/"changed-source.zip","w",zipfile.ZIP_DEFLATED) as archive:
+                for name in paths:
+                    path=ROOT/name
+                    if path.is_file() and not path.is_symlink():archive.write(path,name)
+            record["scope"] = ("Stamped build source: Git commit plus the uncommitted build inputs archived here "
+                               "(byte-identical to the stamp).")
+        else:
+            record["scope"] = ("Stamped build source: Git commit plus uncommitted build inputs identified by SHA-256 "
+                               "in the stamp. The workspace changed after the build, so no copy was archived.")
+    (dest/"source.json").write_text(json.dumps(record, indent=2))
+
+def compatible_saves(a, b):
+    """Why a native save cannot move between two builds, or None when it can."""
+    if a == b: return None
+    if not (str(a).startswith("layout1:") and str(b).startswith("layout1:")):
+        return "Save layout changed or unproven: one build has no verified compiled save layout."
+    return "Save layout changed."
+
+# Before build stamps, a save's compatibility id hashed these headers' text.
+LEGACY_ABI_FILES = ("include/global.h", "include/global.fieldmap.h", "include/pokemon.h",
+                    "include/pokemon_storage_system.h", "include/constants/flags.h", "include/constants/vars.h")
+
+def legacy_save_match(recorded_abi, build):
+    """Accept a pre-stamp portable save only under its own (weaker) criterion, stated as such.
+
+    Holds when the build's verified stamp says it was built from the current
+    workspace and those headers still hash to the recorded value.
+    """
+    if re.fullmatch(r"[0-9a-f]{64}", str(recorded_abi)) is None or build["provenance"]["status"] != "verified":
+        return None
+    if provenance.source_identity(ROOT) != build["provenance"].get("source"):
+        return None
+    if hashlib.sha256(b"".join((ROOT / p).read_bytes() for p in LEGACY_ABI_FILES)).hexdigest() != recorded_abi:
+        return None
+    return "legacy header-text match; the recording's compiled save layout is not proven"
 
 class Catalogue:
     def __init__(self):
@@ -273,30 +352,21 @@ class Studio:
         for src in (rom, elf):
             target = dest / src.name
             if not target.exists(): shutil.copy2(src, target)
-        # Check save-struct layout separately from source/code addresses.
-        abi_files = ["include/global.h", "include/global.fieldmap.h", "include/pokemon.h",
-                     "include/pokemon_storage_system.h", "include/constants/flags.h", "include/constants/vars.h"]
-        abi = hashlib.sha256(b"".join((ROOT / p).read_bytes() for p in abi_files)).hexdigest()
-        (dest / "abi.json").write_text(json.dumps(dict(abi=abi)))
+        if sha(dest / rom.name) != identity:
+            raise ValueError("The ROM changed while it was being staged. Try again after the build finishes.")
+        # The stamp travels with the stored copy only when it proves that copy.
+        await asyncio.to_thread(provenance.carry, rom, dest / rom.name, dest / elf.name)
+        build = await asyncio.to_thread(load_build, dest / rom.name, dest / elf.name, identity)
         if not (dest/"source.json").exists():
-            commit=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
-            changed=subprocess.check_output(["git","diff","--name-only","HEAD"],cwd=ROOT,text=True).splitlines()
-            untracked=subprocess.check_output(["git","ls-files","--others","--exclude-standard"],cwd=ROOT,text=True).splitlines()
-            files=sorted(set(changed+untracked))
-            diff=subprocess.check_output(["git","diff","--no-ext-diff","--binary","HEAD"],cwd=ROOT)
-            (dest/"workspace.patch").write_bytes(diff)
-            with zipfile.ZipFile(dest/"changed-source.zip","w",zipfile.ZIP_DEFLATED) as archive:
-                for name in files:
-                    path=ROOT/name
-                    if path.is_file() and not path.is_symlink():archive.write(path,name)
-            (dest/"source.json").write_text(json.dumps(dict(commit=commit,created=datetime.now(timezone.utc).isoformat(),
-                changed_files=files,rom_sha256=identity,elf_sha256=sha(elf),abi=abi,
-                scope="Base Git commit plus workspace patch and changed/untracked source archive."),indent=2))
-        return dict(id=identity, rom=dest / rom.name, elf=dest / elf.name, abi=abi)
+            await asyncio.to_thread(record_build_source, dest, build)
+        return build
 
     def build_info(self):
+        summary = self.build.get("provenance")
         return dict(rom_sha256=self.build_id,elf_sha256=sha(self.build["elf"]),
-                    rom=str(self.build["rom"]),elf=str(self.build["elf"]),abi=self.build["abi"])
+                    rom=str(self.build["rom"]),elf=str(self.build["elf"]),abi=self.build["abi"],
+                    provenance=summary,provenance_label=provenance.label(summary),
+                    provenance_short=provenance.short_label(summary))
 
     async def scene_start_files(self,directory,save_portable=True):
         directory.mkdir(parents=True,exist_ok=True)
@@ -320,6 +390,7 @@ class Studio:
         result=[]
         for path in sorted((WORK/"scenes").glob("*/result.json"),key=lambda p:p.stat().st_mtime,reverse=True)[:20]:
             data=json.loads(path.read_text())
+            data.setdefault("provenance",provenance.short_label(None))
             result.append(data)
         return result
 
@@ -374,11 +445,8 @@ class Studio:
         previous = json.loads(restore.read_text()) if restore.exists() else None
         if previous and previous["build"] != self.build_id:
             saved_build = BUILD_STORE / previous["build"][:16]
-            if (saved_build / "pokeemerald-headless.elf").exists():
-                abi_file = saved_build / "abi.json"
-                self.build = dict(id=previous["build"], rom=saved_build/"pokeemerald-headless.gba",
-                                  elf=saved_build/"pokeemerald-headless.elf",
-                                  abi=json.loads(abi_file.read_text())["abi"] if abi_file.exists() else self.build["abi"])
+            if (saved_build / ELF_FILE).exists():
+                self.build = await asyncio.to_thread(load_build, saved_build/ROM_FILE, saved_build/ELF_FILE, previous["build"])
                 self.build_id = previous["build"]
         if previous and previous["build"] == self.build_id and Path(previous["state"]).exists():
             self.core = await Core.open(self.build["rom"], self.build["elf"])
@@ -420,9 +488,7 @@ class Studio:
             except Exception:
                 await new.close(); raise
             old=self.core; self.core=new
-            abi_file=dest/"abi.json"
-            self.build=dict(id=record["build"],rom=rom,elf=elf,
-                            abi=json.loads(abi_file.read_text())["abi"] if abi_file.exists() else "unknown")
+            self.build=await asyncio.to_thread(load_build,rom,elf,record["build"])
             self.build_id=record["build"];self.ingest(packet)
             await old.close()
             self.keys=self.key_pulses=0
@@ -436,6 +502,7 @@ class Studio:
     def info(self):
         avg = sum(self.frame_us) / max(1, len(self.frame_us))
         return dict(status=self.status, build=self.build_id[:12], building=self.building,
+                    provenance=provenance.short_label(self.build.get("provenance")) if hasattr(self, "build") else "",
                     paused=self.paused, map=self.current_map, x=self.state[4], y=self.state[5], facing=self.state[6],
                     ready=bool(self.state[0]), battle=bool(self.state[1]), npc=self.state[7],
                     cap=self.state[8], difficulty=self.state[9],
@@ -495,8 +562,9 @@ class Studio:
                     if not self.last_interaction: raise ValueError("Finish the current interaction first.")
                     await self.restore(self.last_interaction)
                 await self.wait_field()
-                if self.build["abi"] != build["abi"]:
-                    raise ValueError("Save layout changed. Start a new sandbox; current session is preserved.")
+                problem = compatible_saves(self.build["abi"], build["abi"])
+                if problem:
+                    raise ValueError(problem + " Start a new sandbox; current session is preserved.")
                 location = self.state[2:7]
                 self.ingest(await self.core.field_command(1))
                 save = WORK / ("reload-" + str(time.time_ns()) + ".sav")
@@ -528,7 +596,6 @@ class Studio:
     async def build_latest(self):
         self.building = True; self.status = "Building in background"; self.build_log = ""
         try:
-            source_before = await asyncio.to_thread(digest_tree)
             env = os.environ.copy()
             toolchain = Path("/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload")
             cmd = ["make", "-j6", "BUILD_NAME=emerald-headless", "MAP_VERSION=emerald", "EC_HEADLESS_FIXTURES=1", "TEST=0"]
@@ -539,8 +606,12 @@ class Studio:
                 while line := await proc.stdout.readline():
                     log.write(line); self.build_log = (self.build_log + line.decode(errors="replace"))[-12000:]
                 if await proc.wait(): raise ValueError("Build failed. The running game has not changed.")
-            if source_before != await asyncio.to_thread(digest_tree):
-                raise ValueError("Source changed during compilation. Build again; the running game is unchanged.")
+            # The Makefile stamps the ROM with its source identity and rechecks
+            # it after linking; an unverified stamp means the tree moved mid-build.
+            checked = await asyncio.to_thread(provenance.verify, ROOT/ROM_FILE, ROOT/ELF_FILE)
+            if checked["status"] != "verified":
+                raise ValueError("The new ROM's provenance does not verify (" + checked.get("reason", "") +
+                                 "). Build again; the running game is unchanged.")
             stamp = await asyncio.create_subprocess_exec(sys.executable, "scripts/stamp_release_inputs.py",
                 "--stamp", "pokeemerald-headless.inputs.json", cwd=ROOT,
                 stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
@@ -616,7 +687,7 @@ class Studio:
                 packet=self.packet
             return await asyncio.to_thread(recorder.finish,packet)
         if op=="builds":
-            return dict(builds=[dict(json.loads(p.read_text()),directory=str(p.parent))
+            return dict(builds=[dict({"provenance_label":provenance.label(None)},**json.loads(p.read_text()),directory=str(p.parent))
                                for p in sorted(BUILD_STORE.glob("*/source.json"),key=lambda p:p.stat().st_mtime,reverse=True)[:30]])
         if op == "build":
             if self.building: raise ValueError("A build is already running.")
@@ -687,7 +758,10 @@ class Studio:
                 if data.get("mode","exact")=="exact":await self.restore(saved["initial"])
                 else:
                     build=await self.stage()
-                    if not saved["portable"] or saved["portable"]["abi"]!=build["abi"]:raise ValueError("No compatible portable starting save.")
+                    if not saved["portable"]:raise ValueError("No compatible portable starting save.")
+                    problem=compatible_saves(saved["portable"]["abi"],build["abi"])
+                    if problem and not legacy_save_match(saved["portable"]["abi"],build):
+                        raise ValueError("No compatible portable starting save. "+problem)
                     new,packet=await self.boot(build,Path(saved["portable"]["path"]))
                     old=self.core;self.core=new;self.build=build;self.build_id=build["id"];self.ingest(packet);await old.close()
                 self.keys=self.key_pulses=0

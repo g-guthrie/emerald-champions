@@ -8,12 +8,14 @@ import hashlib
 import json
 import re
 from pathlib import Path
-import shutil
 import subprocess
+import sys
 import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "tests"))
+import host_c  # noqa: E402
 NATIVE = "native-flow-required"
 WIN = "auto-win"
 CAPTURE = "auto-capture"
@@ -57,51 +59,41 @@ def flag_values() -> dict[str, int]:
     }
 
 
-def c_block(source: str, signature: str) -> str:
-    start = source.index(signature + "\n{")
-    end = source.index("\n}", start) + 2
-    return source[start:end] + (";" if source[end:end + 1] == ";" else "") + "\n"
+# Other units' inputs to the classifier: battle flags and the party count.
+BOUNDARY = r"""
+#include "global.h"
+#include "battle.h"
+#include "pokemon.h"
+""" + host_c.ASSERTS + r"""
+u32 gBattleTypeFlags;
+unsigned gHostPartyCount;
+u8 CalculatePlayerPartyCount(void) { return gHostPartyCount; }
+"""
 
 
 def classify_cases(cases: list[tuple[int, int]], *, native: bool = False, force_loss: bool = False) -> tuple[list[str], str]:
     """Execute the production C decision function with explicit host inputs.
 
-    Party-count retrieval and explicit scenario/battle inputs are supplied by
-    the host fixture. This proves the classifier's decisions, not battle callbacks
-    or traversal. A compiler failure is a failed audit, never a Python fallback.
+    The whole of src/emerald_champions_headless.c is compiled on the host in
+    its fixture configuration; party-count retrieval and explicit
+    scenario/battle inputs are supplied by the host fixture. This proves the
+    classifier's decisions, not battle callbacks or traversal. A compiler
+    failure is a failed audit, never a Python fallback.
     """
-    compiler = shutil.which("cc")
-    if compiler is None:
-        raise RuntimeError("host C compiler required to verify the actual campaign battle policy")
-    source = (ROOT / "src/emerald_champions_headless.c").read_text()
-    header = (ROOT / "include/emerald_champions_headless.h").read_text()
-    function = c_block(source, "enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleResolution(void)")
-    declarations = c_block(header, "enum EmeraldChampionsHeadlessScenario")
-    declarations += c_block(header, "enum EmeraldChampionsHeadlessBattleResolution")
+    source = host_c.production("src/emerald_champions_headless.c")
     inputs = ",\n".join(f"{{{flags}u, {count}u}}" for flags, count in cases)
-    program = '''#include <stdint.h>
-#include <stdio.h>
-#include "constants/pokemon.h"
-#include "constants/battle.h"
-''' + declarations + '''
-static uint32_t gBattleTypeFlags;
-static enum EmeraldChampionsHeadlessScenario gEcHeadlessFixtureActiveScenario;
-static unsigned partyCount;
-static unsigned gEcHeadlessCampaignForceLoss;
-static unsigned gEcHeadlessFixtureParam;
-static unsigned gEcHeadlessFixtureTrigger;
-static unsigned gEcHeadlessCampaignCaptureSerial;
-static unsigned gEcHeadlessCampaignBattleSerial;
-static unsigned CalculatePlayerPartyCount(void) { return partyCount; }
-''' + function + '''
+    scenario = "EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE" if native else "EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN"
+    program = source + """
+extern unsigned gHostPartyCount;
 int main(void) {
     const unsigned inputs[][2] = {
-''' + inputs + '''
+""" + inputs + """
     };
-    gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN;
+    gEcHeadlessFixtureActiveScenario = """ + scenario + """;
+    gEcHeadlessCampaignForceLoss = """ + ("1" if force_loss else "0") + """;
     for (unsigned i = 0; i < sizeof(inputs) / sizeof(inputs[0]); i++) {
         gBattleTypeFlags = inputs[i][0];
-        partyCount = inputs[i][1];
+        gHostPartyCount = inputs[i][1];
         switch (EmeraldChampionsHeadlessGetBattleResolution()) {
         case EC_HEADLESS_BATTLE_NATIVE: puts("native-flow-required"); break;
         case EC_HEADLESS_BATTLE_WIN: puts("auto-win"); break;
@@ -111,27 +103,18 @@ int main(void) {
     }
     return 0;
 }
-'''
-    if native:
-        program = program.replace("= EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN;", "= EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;")
-    if force_loss:
-        program = program.replace("int main(void) {", "int main(void) { gEcHeadlessCampaignForceLoss = 1;")
+"""
     with tempfile.TemporaryDirectory(prefix="ec-campaign-policy-") as directory:
-        path = Path(directory)
-        fixture = path / "policy.c"
-        executable = path / "policy"
-        fixture.write_text(program)
-        compiled = subprocess.run(
-            [compiler, "-std=c11", "-Wall", "-Wextra", "-Werror", "-I", str(ROOT / "include"), str(fixture), "-o", str(executable)],
-            capture_output=True, text=True, timeout=30, check=False,
-        )
-        if compiled.returncode:
-            raise RuntimeError("actual C campaign policy failed to compile:\n" + compiled.stdout + compiled.stderr)
+        try:
+            executable = host_c.build(Path(directory), {"headless.c": program, "boundary.c": BOUNDARY},
+                                      name="policy", defines={"EC_HEADLESS_FIXTURES": "1", "RELEASE": None})
+        except host_c.HostBuildError as error:
+            raise RuntimeError(f"actual C campaign policy failed to build:\n{error}") from error
         result = subprocess.run([str(executable)], capture_output=True, text=True, timeout=10, check=False)
         decisions = result.stdout.splitlines()
         if result.returncode or len(decisions) != len(cases) or any(value not in (NATIVE, WIN, CAPTURE) for value in decisions):
             raise RuntimeError(f"actual C campaign policy produced invalid results (exit {result.returncode}): {result.stdout}{result.stderr}")
-    return decisions, hashlib.sha256(function.encode()).hexdigest()
+    return decisions, hashlib.sha256(source.encode()).hexdigest()
 
 
 def classify(flags: int, party_count: int, values: dict[str, int]) -> str:
@@ -164,7 +147,7 @@ def audit() -> dict[str, object]:
     return {
         "schema_version": 1, "flows": rows, "failures": failures,
         "evidence": {"mode": "actual-production-C-host-execution", "classifier_sha256": source_hash,
-                     "scope": "campaign scenario classifier; supplied party count; no battle callbacks"},
+                     "scope": "campaign scenario classifier (whole emerald_champions_headless.c); supplied party count; no battle callbacks"},
     }
 
 

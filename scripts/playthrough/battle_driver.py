@@ -30,6 +30,7 @@ sys.path.insert(0, str(ROOT / 'scripts' / 'playthrough'))
 import native_tools
 import render_emerald_champions_ui as ui
 from rom_artifacts import verify_rom_elf_pair
+import build_provenance as provenance
 from prepare_party import PREP_RESULTS, protocol as prepare_protocol
 
 RTC_EPOCH = '946684800'
@@ -1268,6 +1269,7 @@ def command_start(args):
     clone_file(rom, session.rom)
     clone_file(elf, session.elf)
     shutil.copy2(stamp, session.dir / 'inputs.json')
+    build_provenance = provenance.carry(rom, session.rom, session.elf)
 
     constants = build_constants()
     (session.dir / 'constants.json').write_text(json.dumps(constants) + '\n')
@@ -1291,6 +1293,7 @@ def command_start(args):
 
     session.meta = {
         'rom_sha256': rom_hash, 'elf_sha256': elf_hash, 'seed': args.seed,
+        'build_provenance': build_provenance, 'build_provenance_label': provenance.label(build_provenance),
         'trainer_a': name_a, 'trainer_b': name_b, 'partner': partner_name,
         'difficulty': args.difficulty, 'level_cap': args.cap,
         'party_manifest': str(Path(args.party).resolve()),

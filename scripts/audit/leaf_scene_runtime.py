@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import render_emerald_champions_ui as ui
 from rom_artifacts import verify_rom_elf_pair
+import build_provenance as provenance
 
 PREFIX = 'gEcHeadless'
 FIELDS = ['FixtureScenario', 'FixtureParam', 'FixtureTrigger', 'FixtureSetupResult',
@@ -59,6 +60,7 @@ def main():
     trace = []
     manifest = {'rom_sha256': hashlib.sha256(rom.read_bytes()).hexdigest(),
                 'elf_sha256': hashlib.sha256(elf.read_bytes()).hexdigest(),
+                'build_provenance': provenance.verify(rom, elf),
                 'evidence': 'real script traversal; synthetic setup; auto-resolved first battle',
                 'setup': {
                     'leaf': 'Badge 2 and HM Flash; parameterized completion/trainer/item capacity and one/two usable mons',
