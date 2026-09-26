@@ -68,6 +68,8 @@ const u16 *GetEmeraldChampionsPreparationMoves(enum Species species);
 // Existing preparation pool plus both preset formats, excluding known moves.
 // Pass NULL to count without writing a list.
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves);
+// The same pool for a species, known moves included (the Pokedex's moves page).
+u32 GetEmeraldChampionsPreparationMovesForSpecies(enum Species species, u16 *moves);
 bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move);
 u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves);
 bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(enum Species species, enum Move move);

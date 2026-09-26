@@ -283,7 +283,6 @@ static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 static void Task_MoveRelearner_HandleInput(u8 taskId);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
 static void Task_MoveRelearner_Quit(u8 taskId);
-static void SortMovesAlphabetically(u16 *moves, u32 numMoves);
 static void QuickSortMoves(u16 *moves, s32 left, s32 right);
 
 static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
@@ -893,7 +892,7 @@ static void QuickSortMoves(u16 *moves, s32 left, s32 right)
     QuickSortMoves(moves, i, right);
 }
 
-static void SortMovesAlphabetically(u16 *moves, u32 numMoves)
+void SortMovesAlphabetically(u16 *moves, u32 numMoves)
 {
     if (numMoves > 1)
         QuickSortMoves(moves, 0, numMoves - 1);

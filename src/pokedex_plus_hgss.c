@@ -8,6 +8,7 @@
 #include "daycare.h"
 #include "debug.h"
 #include "decompress.h"
+#include "emerald_champions_battle_sets.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -18,6 +19,7 @@
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
+#include "move_relearner.h"
 #include "m4a.h"
 #include "overworld.h"
 #include "palette.h"
@@ -2277,70 +2279,34 @@ static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId)
     DestroySprite(&gSprites[gTasks[taskId].data[3]]);       //Destroy item icon
 }
 
-static bool32 StatsPageListsMove(u32 count, enum Move move)
+// Exactly the moves the Center's All Legal Moves service teaches this species,
+// in the tutor's order. Battles grant no experience and leveling never teaches
+// a move, so the tutor is how every one of them is learned.
+u32 GetPokedexTutorMoves(enum Species species, u16 *moves)
 {
-    for (u32 i = 0; i < count; i++)
-    {
-        if (sStatsPageMoves[i] == move)
-            return TRUE;
-    }
-    return FALSE;
+    u32 count;
+
+    // Mega and Gmax Pokémon learn as their base form does.
+    if (gSpeciesInfo[species].isMegaEvolution || gSpeciesInfo[species].isGigantamax)
+        species = GetFormSpeciesId(species, 0);
+    count = GetEmeraldChampionsPreparationMovesForSpecies(species, moves);
+    if (moves != NULL && P_SORT_MOVES)
+        SortMovesAlphabetically(moves, count);
+    return count;
 }
 
-// Egg moves first (they keep the Lucky Egg), then every level-up and teachable
-// move once. Battles grant no experience and leveling never teaches a move,
-// so those are all learned from the Center's tutor and show no level.
 static bool8 CalculateMoves(void)
 {
     enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
-    enum Species eggSpecies;
-    const u16 *eggMoves, *teachable;
-    const struct LevelUpMove *learnset;
-    u32 capacity = 0, count = 0, i;
-
-    // Mega and Gmax Pokémon don't have distinct learnsets from their base form; so use base species for calculation
-    if (gSpeciesInfo[species].isMegaEvolution || gSpeciesInfo[species].isGigantamax)
-        species = GetFormSpeciesId(species, 0);
-
-    eggSpecies = species;
-    if (HGSS_SHOW_EGG_MOVES_FOR_EVOS)
-    {
-        while (GetSpeciesPreEvolution(eggSpecies) != SPECIES_NONE)
-            eggSpecies = GetSpeciesPreEvolution(eggSpecies);
-    }
-    eggMoves = GetSpeciesEggMoves(eggSpecies);
-    learnset = GetSpeciesLevelUpLearnset(species);
-    teachable = GetSpeciesTeachableLearnset(species);
-    for (i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
-        capacity++;
-    for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-        capacity++;
-    for (i = 0; teachable[i] != MOVE_UNAVAILABLE; i++)
-        capacity++;
+    u32 count = GetPokedexTutorMoves(species, NULL);
 
     FreeStatsPageMoves();
-    sStatsPageMoves = Alloc(max(capacity, 1) * sizeof(*sStatsPageMoves));
-    if (sStatsPageMoves != NULL)
-    {
-        for (i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
-        {
-            if (!StatsPageListsMove(count, eggMoves[i]))
-                sStatsPageMoves[count++] = eggMoves[i];
-        }
-        sPokedexView->numEggMoves = count;
-        for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-        {
-            if (!StatsPageListsMove(count, learnset[i].move))
-                sStatsPageMoves[count++] = learnset[i].move;
-        }
-        sPokedexView->numLevelUpMoves = count - sPokedexView->numEggMoves;
-        for (i = 0; teachable[i] != MOVE_UNAVAILABLE; i++)
-        {
-            if (!StatsPageListsMove(count, teachable[i]))
-                sStatsPageMoves[count++] = teachable[i];
-        }
-    }
-    sPokedexView->numTeachableMoves = count - sPokedexView->numEggMoves - sPokedexView->numLevelUpMoves;
+    sStatsPageMoves = Alloc(max(count, 1) * sizeof(*sStatsPageMoves));
+    if (sStatsPageMoves == NULL)
+        count = 0;
+    else
+        GetPokedexTutorMoves(species, sStatsPageMoves);
+    sPokedexView->numTeachableMoves = count;
     sPokedexView->movesTotal = count;
 
     return TRUE;
@@ -2367,13 +2333,8 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     StringExpandPlaceholders(gStringVar1, sText_Stats_MoveSelectedMax);
     PrintStatsScreenTextSmallWhite(WIN_STATS_MOVES_TOP, gStringVar1, moves_x-1, moves_y+1);
 
-    //Calculate and retrieve correct move from the arrays
-    if (selected < sPokedexView->numEggMoves)
-    {
-        PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
-        item = ITEM_LUCKY_EGG;
-    }
-    else if (move)
+    // Every listed move is taught by the Center's tutor.
+    if (move)
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
         item = ITEM_TEACHY_TV;

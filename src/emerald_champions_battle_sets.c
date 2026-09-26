@@ -730,6 +730,27 @@ u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves)
     return numMoves;
 }
 
+// Every move the All Legal Moves service offers this species, known or not
+// (the Pokedex lists these). Pass NULL to count without writing a list.
+u32 GetEmeraldChampionsPreparationMovesForSpecies(enum Species species, u16 *moves)
+{
+    bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
+    u32 numMoves = 0;
+    BuildEmeraldChampionsPreparationMoveAccess(species, availableMoves);
+
+    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
+    {
+        if (availableMoves[move])
+        {
+            if (moves != NULL)
+                moves[numMoves] = move;
+            numMoves++;
+        }
+    }
+
+    return numMoves;
+}
+
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
 {
     bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
