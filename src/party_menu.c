@@ -79,6 +79,7 @@
 #include "constants/form_change_types.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
+#include "list_menu.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
@@ -495,7 +496,7 @@ static void CursorCb_OpenAbilityMenu(u8);
 static void Task_HandleAbilitySelectionInput(u8);
 static void Task_ReturnToPartyActionsAfterAbilityText(u8);
 static u8 CollectSelectableAbilitySlots(struct Pokemon *, u8 *);
-static void DisplayAbilitySelectionWindow(u8, const u8 *, u8);
+static void DisplayAbilitySelectionWindow(u8);
 static void ReturnToPartyActionMenu(u8);
 void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer trainer);
 static void ShowMoveSelectWindow(u8 slot);
@@ -7061,69 +7062,148 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer tr
 #undef tAnimWait
 #undef tNextFunc
 
-static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialCursor)
+// Ability list task data.
+#define tAbilityCount   data[1]
+#define tAbilitySlots   2 // data[2] onward: one ability slot per option
+#define tAbilityCursor  data[12]
+#define tAbilityTop     data[13]
+#define tAbilityArrows  data[14]
+#define tAbilityScroll  data[15] // u16 scroll offset shown by the arrows
+
+#define TAG_ABILITY_SCROLL_ARROWS 5427
+
+// The option labels for a Pokemon's Ability list: its Abilities, then Cancel.
+u32 GetPartyAbilityMenuOptions(struct Pokemon *mon, u8 *slots, const u8 **labels)
 {
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 count = CollectSelectableAbilitySlots(mon, slots);
+
+    for (u32 i = 0; i < count; i++)
+        labels[i] = gAbilitiesInfo[GetAbilityBySpeciesForOwner(species, slots[i], IsMonTrainerOwned(mon))].name;
+    labels[count] = sText_CancelTitleCase;
+    return count + 1;
+}
+
+// Size and place the Ability list and its "Which Ability?" prompt. The list
+// is right-aligned against column 29 like the native action window: as wide
+// as its widest label (never narrower than the 10-tile action popup, never
+// wider than PARTY_ABILITY_MENU_MAX_WIDTH), and as tall as its options up to
+// the screen's height, scrolling beyond that. A label still too wide falls
+// back to a narrower font. The prompt sits to the left and stops one frame
+// short of the list.
+void GetPartyAbilityMenuLayout(const u8 *const *labels, u32 optionCount, struct PartyAbilityMenuLayout *layout)
+{
+    u32 cursorWidth = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
+    u32 letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
+    u32 widest = 0;
+
+    for (u32 i = 0; i < optionCount; i++)
+        widest = max(widest, GetStringWidth(FONT_NORMAL, labels[i], letterSpacing));
+    layout->width = min(PARTY_ABILITY_MENU_MAX_WIDTH, max(PARTY_ABILITY_MENU_MIN_WIDTH, (cursorWidth + widest + 7) / 8 + 1));
+    layout->visibleRows = min(optionCount, PARTY_ABILITY_MENU_MAX_ROWS);
+    layout->height = layout->visibleRows * 2;
+    layout->x = 29 - layout->width;
+    layout->y = 19 - layout->height;
+    layout->textWidth = layout->width * 8 - cursorWidth;
+    layout->promptX = 1;
+    layout->promptWidth = layout->x - 3;
+    layout->promptFont = GetFontIdToFit(sText_WhichAbility, FONT_NORMAL, 0, layout->promptWidth * 8);
+}
+
+// A label too wide for the list falls back to a narrower font.
+u32 GetPartyAbilityMenuLabelFont(const u8 *label, const struct PartyAbilityMenuLayout *layout)
+{
+    return GetFontIdToFit(label, FONT_NORMAL, GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING), layout->textWidth);
+}
+
+static void RemoveAbilityScrollArrows(u8 taskId)
+{
+    if (gTasks[taskId].tAbilityArrows != TASK_NONE)
+    {
+        RemoveScrollIndicatorArrowPair(gTasks[taskId].tAbilityArrows);
+        gTasks[taskId].tAbilityArrows = TASK_NONE;
+    }
+}
+
+static void CloseAbilitySelectionWindow(u8 taskId)
+{
+    RemoveAbilityScrollArrows(taskId);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+}
+
+// Draw the visible options from tAbilityTop with the cursor on tAbilityCursor.
+static void PrintAbilitySelectionOptions(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+    const u8 *labels[PARTY_ABILITY_MENU_MAX_OPTIONS];
+    struct PartyAbilityMenuLayout layout;
+    u32 optionCount = GetPartyAbilityMenuOptions(mon, slots, labels);
+    u32 cursorWidth = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
+    u8 letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
+    u8 windowId = sPartyMenuInternal->windowId[0];
+
+    GetPartyAbilityMenuLayout(labels, optionCount, &layout);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    for (u32 row = 0; row < layout.visibleRows; row++)
+    {
+        u32 option = tAbilityTop + row;
+        if (option >= optionCount)
+            break;
+        AddTextPrinterParameterized4(windowId, GetPartyAbilityMenuLabelFont(labels[option], &layout), cursorWidth, (row * 16) + 1,
+                                     letterSpacing, 0, sFontColorTable[3], TEXT_SKIP_DRAW, labels[option]);
+        if (option == (u32)tAbilityCursor)
+            AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SelectorArrow3, 0, (row * 16) + 1, TEXT_SKIP_DRAW, NULL);
+    }
+    CopyWindowToVram(windowId, COPYWIN_FULL);
+}
+
+// Keep the cursor inside the visible rows.
+static void ScrollAbilityListToCursor(s16 *data, u32 visibleRows)
+{
+    if (tAbilityCursor < tAbilityTop)
+        tAbilityTop = tAbilityCursor;
+    else if (tAbilityCursor >= tAbilityTop + (s32)visibleRows)
+        tAbilityTop = tAbilityCursor - visibleRows + 1;
+    tAbilityScroll = tAbilityTop;
+}
+
+static void DisplayAbilitySelectionWindow(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
     struct WindowTemplate window;
     struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    u8 choiceCount = count + 1;
-    u8 cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
-    u8 letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
-    u32 widestLabel = GetStringWidth(FONT_NORMAL, sText_CancelTitleCase, letterSpacing);
-    u8 windowWidth;
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+    const u8 *labels[PARTY_ABILITY_MENU_MAX_OPTIONS];
+    struct PartyAbilityMenuLayout layout;
+    u32 optionCount = GetPartyAbilityMenuOptions(mon, slots, labels);
 
-    // Size and right-align the list exactly like the native party action
-    // window: measure the widest Ability name, never narrower than the
-    // 10-tile action popup, and keep the right edge on column 29.
-    for (u8 i = 0; i < count; i++)
-    {
-        enum Ability ability = GetAbilityBySpeciesForOwner(species, slots[i], IsMonTrainerOwned(mon));
-        u32 labelWidth = GetStringWidth(FONT_NORMAL, gAbilitiesInfo[ability].name, letterSpacing);
-
-        if (labelWidth > widestLabel)
-            widestLabel = labelWidth;
-    }
-    windowWidth = min(17, max(10, (cursorDimension + widestLabel + 7) / 8 + 1));
-    SetWindowTemplateFields(&window, 2, 29 - windowWidth, 19 - (choiceCount * 2), windowWidth, choiceCount * 2, 14, 0x2E9);
+    GetPartyAbilityMenuLayout(labels, optionCount, &layout);
+    SetWindowTemplateFields(&window, 2, layout.x, layout.y, layout.width, layout.height, 14, 0x2E9);
     sPartyMenuInternal->windowId[0] = AddWindow(&window);
     DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
 
-    for (u8 i = 0; i < count; i++)
+    tAbilityTop = 0;
+    ScrollAbilityListToCursor(data, layout.visibleRows);
+    PrintAbilitySelectionOptions(taskId);
+
+    tAbilityArrows = TASK_NONE;
+    if (optionCount > layout.visibleRows)
     {
-        enum Ability ability = GetAbilityBySpeciesForOwner(species, slots[i], IsMonTrainerOwned(mon));
-
-        AddTextPrinterParameterized4(
-            sPartyMenuInternal->windowId[0],
-            FONT_NORMAL,
-            cursorDimension,
-            (i * 16) + 1,
-            letterSpacing,
-            0,
-            sFontColorTable[3],
-            0,
-            gAbilitiesInfo[ability].name);
+        tAbilityArrows = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP,
+            (layout.x * 8) + (layout.width * 4), (layout.y * 8) - 4, ((layout.y + layout.height) * 8) + 4,
+            optionCount - layout.visibleRows, TAG_ABILITY_SCROLL_ARROWS, TAG_ABILITY_SCROLL_ARROWS,
+            (u16 *)&tAbilityScroll);
     }
-    AddTextPrinterParameterized4(
-        sPartyMenuInternal->windowId[0],
-        FONT_NORMAL,
-        cursorDimension,
-        (count * 16) + 1,
-        letterSpacing,
-        0,
-        sFontColorTable[3],
-        0,
-        sText_CancelTitleCase);
-
-    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], choiceCount, initialCursor, FALSE);
 
     // Name the choice in the message box, as the Item submenu does. The box
     // stops one frame short of the list however wide the Ability names make it.
-    SetWindowTemplateFields(&window, 2, 1, 17, 26 - windowWidth, 2, 15, sDoWhatWithMonMsgWindowTemplate.baseBlock);
+    SetWindowTemplateFields(&window, 2, layout.promptX, 17, layout.promptWidth, 2, 15, sDoWhatWithMonMsgWindowTemplate.baseBlock);
     sPartyMenuInternal->windowId[1] = AddWindow(&window);
     DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[1], FALSE, 0x4F, 13);
-    AddTextPrinterParameterized(sPartyMenuInternal->windowId[1],
-                                GetFontIdToFit(sText_WhichAbility, FONT_NORMAL, 0, (26 - windowWidth) * 8),
-                                sText_WhichAbility, 0, 1, 0, 0);
+    AddTextPrinterParameterized(sPartyMenuInternal->windowId[1], layout.promptFont, sText_WhichAbility, 0, 1, 0, 0);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -7131,8 +7211,7 @@ static void ReturnToPartyActionMenu(u8 taskId)
 {
     struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
 
-    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
-    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    CloseAbilitySelectionWindow(taskId);
     SetPartyMonSelectionActions(gParties[B_TRAINER_PLAYER], gPartyMenu.slotId, GetPartyMenuActionsType(mon));
     DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
     MoveActionCursorTo(MENU_OPEN_ABILITY);
@@ -7143,46 +7222,83 @@ static void ReturnToPartyActionMenu(u8 taskId)
 
 static void CursorCb_OpenAbilityMenu(u8 taskId)
 {
+    s16 *data = gTasks[taskId].data;
     struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
     u8 slots[NUM_OWNER_ABILITY_SLOTS];
     u8 count = CollectSelectableAbilitySlots(mon, slots);
     enum Ability currentAbility = GetMonAbility(mon);
-    u8 initialCursor = 0;
 
     PlaySE(SE_SELECT);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
 
+    // The cursor starts on the Pokemon's current Ability.
+    tAbilityCursor = 0;
     for (u8 i = 0; i < count; i++)
     {
-        gTasks[taskId].data[i + 2] = slots[i];
+        data[tAbilitySlots + i] = slots[i];
         if (GetAbilityBySpeciesForOwner(GetMonData(mon, MON_DATA_SPECIES), slots[i], IsMonTrainerOwned(mon)) == currentAbility)
-            initialCursor = i;
+            tAbilityCursor = i;
     }
 
-    gTasks[taskId].data[1] = count;
-    DisplayAbilitySelectionWindow(count, slots, initialCursor);
+    tAbilityCount = count;
+    DisplayAbilitySelectionWindow(taskId);
     gTasks[taskId].func = Task_HandleAbilitySelectionInput;
+}
+
+static void MoveAbilityCursor(u8 taskId, s32 delta)
+{
+    s16 *data = gTasks[taskId].data;
+    s32 optionCount = tAbilityCount + 1;
+    s32 cursor = tAbilityCursor + delta;
+    struct PartyAbilityMenuLayout layout;
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+    u8 slots[NUM_OWNER_ABILITY_SLOTS];
+    const u8 *labels[PARTY_ABILITY_MENU_MAX_OPTIONS];
+
+    // Short lists stop at the ends, as the native menu does; longer ones wrap.
+    if (cursor < 0)
+        cursor = (optionCount <= 3) ? 0 : optionCount - 1;
+    else if (cursor >= optionCount)
+        cursor = (optionCount <= 3) ? optionCount - 1 : 0;
+    if (cursor == tAbilityCursor)
+        return;
+    PlaySE(SE_SELECT);
+    tAbilityCursor = cursor;
+    GetPartyAbilityMenuLayout(labels, GetPartyAbilityMenuOptions(mon, slots, labels), &layout);
+    ScrollAbilityListToCursor(data, layout.visibleRows);
+    PrintAbilitySelectionOptions(taskId);
 }
 
 static void Task_HandleAbilitySelectionInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u8 count = data[1];
-    s8 input;
+    u8 count = tAbilityCount;
+    s32 input;
 
-    if (count + 1 <= 3)
-        input = Menu_ProcessInputNoWrapAround_other();
-    else
-        input = ProcessMenuInput_other();
-
-    if (input == MENU_NOTHING_CHOSEN)
+    if (JOY_REPEAT(DPAD_UP))
+    {
+        MoveAbilityCursor(taskId, -1);
+        return;
+    }
+    if (JOY_REPEAT(DPAD_DOWN))
+    {
+        MoveAbilityCursor(taskId, 1);
+        return;
+    }
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ReturnToPartyActionMenu(taskId);
+        return;
+    }
+    if (!JOY_NEW(A_BUTTON))
         return;
 
-    if (input == MENU_B_PRESSED || input == count)
+    PlaySE(SE_SELECT);
+    input = tAbilityCursor;
+    if (input == count)
     {
-        if (input == MENU_B_PRESSED)
-            PlaySE(SE_SELECT);
         ReturnToPartyActionMenu(taskId);
         return;
     }
@@ -7190,7 +7306,7 @@ static void Task_HandleAbilitySelectionInput(u8 taskId)
     if (input >= 0 && input < count)
     {
         struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
-        u8 newSlot = data[input + 2];
+        u8 newSlot = data[tAbilitySlots + input];
         enum Ability newAbility = GetAbilityBySpeciesForOwner(GetMonData(mon, MON_DATA_SPECIES), newSlot, IsMonTrainerOwned(mon));
 
         if (GetMonAbility(mon) == newAbility)
@@ -7203,8 +7319,7 @@ static void Task_HandleAbilitySelectionInput(u8 taskId)
         GetMonNickname(mon, gStringVar1);
         StringCopy(gStringVar2, gAbilitiesInfo[newAbility].name);
         StringExpandPlaceholders(gStringVar4, sText_doneText);
-        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
-        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+        CloseAbilitySelectionWindow(taskId);
         PlaySE(SE_USE_ITEM);
         DisplayPartyMenuMessage(gStringVar4, FALSE);
         ScheduleBgCopyTilemapToVram(2);
@@ -7217,6 +7332,13 @@ static void Task_ReturnToPartyActionsAfterAbilityText(u8 taskId)
     if (!IsPartyMenuTextPrinterActive())
         ReturnToPartyActionMenu(taskId);
 }
+
+#undef tAbilityCount
+#undef tAbilitySlots
+#undef tAbilityCursor
+#undef tAbilityTop
+#undef tAbilityArrows
+#undef tAbilityScroll
 
 enum ItemEffectType GetItemEffectType(enum Item item)
 {

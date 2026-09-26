@@ -3,6 +3,8 @@
 #include "battle_util.h"
 #include "pokemon.h"
 #include "trainer_util.h"
+#include "party_menu.h"
+#include "text.h"
 #include "test/battle.h"
 
 // The Inclement layer (src/data/pokemon/inclement_layer.h) is read by wild and
@@ -238,7 +240,7 @@ TEST("A species without an Inclement Ability resolves slot 3 as slot 0")
     struct Pokemon mon;
     u32 slot = ABILITY_SLOT_INCLEMENT;
 
-    ASSUME(GetInclementExtraAbility(SPECIES_WOBBUFFET) == ABILITY_NONE);
+    ASSUME(GetInclementAddedAbility(SPECIES_WOBBUFFET, ABILITY_SLOT_INCLEMENT) == ABILITY_NONE);
     CreateMon(&mon, SPECIES_WOBBUFFET, 50, 0, OTID_STRUCT_PLAYER_ID);
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
     EXPECT_EQ(GetMonAbility(&mon), GetSpeciesAbility(SPECIES_WOBBUFFET, 0));
@@ -360,4 +362,183 @@ WILD_BATTLE_TEST("A wild Glaceon can have Whiteout alongside its official Abilit
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
         EXPECT_EQ(opponent->ability, ABILITY_WHITEOUT);
     }
+}
+
+TEST("Every Inclement added Ability is reachable by player and wild Pokemon and never by trainers")
+{
+    u32 added = 0, most = 0;
+
+    for (enum Species species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        struct Pokemon mon;
+        u8 slots[NUM_OWNER_ABILITY_SLOTS];
+        u32 perSpecies = 0;
+
+        if (!IsSpeciesEnabled(species))
+            continue;
+        for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+        {
+            enum Ability ability = GetInclementAddedAbility(species, slot);
+            u32 found, count, listed = FALSE;
+
+            if (ability == ABILITY_NONE)
+                continue;
+            added++;
+            perSpecies++;
+            EXPECT(FindSpeciesAbilitySlotForOwner(species, ability, FALSE, &found));
+            EXPECT_EQ(found, slot);
+            EXPECT(!FindSpeciesAbilitySlotForOwner(species, ability, TRUE, &found)
+                || found < NUM_ABILITY_SLOTS);
+            EXPECT_EQ(GetSpeciesAbilityForOwner(species, slot, TRUE), ABILITY_NONE);
+
+            CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
+            SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_ABILITY_NUM), slot);
+            EXPECT_EQ(GetMonAbility(&mon), ability);
+            count = GetMonSelectableAbilitySlots(&mon, slots);
+            for (u32 i = 0; i < count; i++)
+                listed |= slots[i] == slot;
+            EXPECT(listed);
+
+            // Becoming trainer-owned drops the added slot for an official one.
+            SetMonTrainerOwned(&mon, TRUE);
+            EXPECT_LT(GetMonData(&mon, MON_DATA_ABILITY_NUM), NUM_ABILITY_SLOTS);
+        }
+        most = max(most, perSpecies);
+    }
+    EXPECT_GT(added, 0);
+    EXPECT_EQ(most, NUM_INCLEMENT_ABILITY_SLOTS);
+}
+
+TEST("The stored ability number holds every slot without disturbing its neighbours")
+{
+    struct Pokemon mon;
+    u32 shadow = TRUE, fateful = TRUE;
+
+    CreateMon(&mon, SPECIES_DELPHOX, 50, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&mon, MON_DATA_IS_SHADOW, &shadow);
+    SetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
+    for (u32 slot = 0; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+    {
+        SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_ABILITY_NUM), slot);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_IS_SHADOW), TRUE);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER), TRUE);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_SANITY_IS_BAD_EGG), FALSE);
+    }
+    // Official slots keep their meaning for everyone.
+    for (u32 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
+    {
+        SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+        EXPECT_EQ(GetMonAbility(&mon), GetAbilityBySpecies(SPECIES_DELPHOX, slot));
+    }
+}
+
+TEST("Ability Capsule cycles every normal and added slot")
+{
+    struct Pokemon mon;
+    u32 slot = 0;
+
+    // Delphox: Blaze, then Inclement's Pyromancy and Magic Guard; Magician is hidden.
+    ASSUME(GetSpeciesAbility(SPECIES_DELPHOX, 1) == ABILITY_NONE);
+    ASSUME(GetInclementAddedAbility(SPECIES_DELPHOX, ABILITY_SLOT_INCLEMENT) == ABILITY_PYROMANCY);
+    ASSUME(GetInclementAddedAbility(SPECIES_DELPHOX, ABILITY_SLOT_INCLEMENT + 1) == ABILITY_MAGIC_GUARD);
+    CreateMon(&mon, SPECIES_DELPHOX, 50, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT);
+    slot = ABILITY_SLOT_INCLEMENT;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT + 1);
+    slot = ABILITY_SLOT_INCLEMENT + 1;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), 0);
+    EXPECT_EQ(GetAbilityPatchTargetSlot(&mon), 2);
+
+    // Persian: Limber, Technician, Super Luck, Sniper.
+    CreateMon(&mon, SPECIES_PERSIAN, 50, 0, OTID_STRUCT_PLAYER_ID);
+    slot = 1;
+    SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT);
+    SetMonTrainerOwned(&mon, TRUE);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), 0);
+}
+
+TEST("New Pokemon roll every added slot like a normal slot")
+{
+    // Persian's normal slots: 0, 1 and two Inclement ones.
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_PERSIAN, 0), 0);
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_PERSIAN, 1), 1);
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_PERSIAN, 2), ABILITY_SLOT_INCLEMENT);
+    EXPECT_EQ(RollNormalAbilitySlot(SPECIES_PERSIAN, 3), ABILITY_SLOT_INCLEMENT + 1);
+}
+
+static void ExpectAbilityMenuFits(const u8 *const *labels, u32 optionCount)
+{
+    struct PartyAbilityMenuLayout layout;
+    u32 letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
+
+    GetPartyAbilityMenuLayout(labels, optionCount, &layout);
+    // The list and its frame stay on the 30x20-tile screen.
+    EXPECT_GE(layout.x, 1);
+    EXPECT_LE(layout.x + layout.width, 29);
+    EXPECT_GE(layout.y, 1);
+    EXPECT_LE(layout.y + layout.height, 19);
+    EXPECT_LE(layout.visibleRows, PARTY_ABILITY_MENU_MAX_ROWS);
+    EXPECT_EQ(layout.visibleRows, min(optionCount, PARTY_ABILITY_MENU_MAX_ROWS));
+    // Every label fits in its font.
+    for (u32 i = 0; i < optionCount; i++)
+        EXPECT_LE(GetStringWidth(GetPartyAbilityMenuLabelFont(labels[i], &layout), labels[i], letterSpacing), layout.textWidth);
+    // The prompt keeps clear of the list (its right frame sits left of the
+    // list's left frame) and its text fits.
+    EXPECT_GE(layout.promptWidth, 1);
+    EXPECT_LT(layout.promptX + layout.promptWidth, layout.x - 1);
+    EXPECT_LE(GetStringWidth(layout.promptFont, COMPOUND_STRING("Which Ability?"), 0), layout.promptWidth * 8);
+}
+
+TEST("The party Ability list and its prompt fit on screen for every species and owner")
+{
+    u32 most = 0;
+
+    for (enum Species species = SPECIES_NONE + 1; species < NUM_SPECIES; species++)
+    {
+        for (u32 trainerOwned = 0; trainerOwned <= 1; trainerOwned++)
+        {
+            struct Pokemon mon;
+            u8 slots[NUM_OWNER_ABILITY_SLOTS];
+            const u8 *labels[PARTY_ABILITY_MENU_MAX_OPTIONS];
+            u32 optionCount;
+
+            if (!IsSpeciesEnabled(species))
+                continue;
+            CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
+            SetMonTrainerOwned(&mon, trainerOwned);
+            optionCount = GetPartyAbilityMenuOptions(&mon, slots, labels);
+            most = max(most, optionCount);
+            ExpectAbilityMenuFits(labels, optionCount);
+        }
+    }
+    EXPECT_LE(most, PARTY_ABILITY_MENU_MAX_OPTIONS);
+}
+
+TEST("The party Ability list scrolls and shrinks fonts for a hypothetical overlong list")
+{
+    const u8 *labels[16];
+    u32 widest = ABILITY_NONE + 1, widestWidth = 0;
+
+    for (u32 ability = ABILITY_NONE + 1; ability < ABILITIES_COUNT; ability++)
+    {
+        u32 width = GetStringWidth(FONT_NORMAL, gAbilitiesInfo[ability].name, 0);
+        if (width > widestWidth)
+        {
+            widestWidth = width;
+            widest = ability;
+        }
+    }
+    // Sixteen of the widest name: taller than the screen, so it scrolls.
+    for (u32 i = 0; i < ARRAY_COUNT(labels); i++)
+        labels[i] = gAbilitiesInfo[widest].name;
+    ExpectAbilityMenuFits(labels, ARRAY_COUNT(labels));
+    // A label far wider than the list falls back to a narrower font.
+    labels[0] = COMPOUND_STRING("Wwwwwwwwwwwwwwww");
+    ExpectAbilityMenuFits(labels, 2);
 }

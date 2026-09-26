@@ -2865,10 +2865,12 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
 
 static bool32 IsRestrictedAbility(enum BattlerId battler, enum Ability ability)
 {
-    return GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 0) == ability
-        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 1) == ability
-        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, 2) == ability
-        || GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, ABILITY_SLOT_INCLEMENT) == ability;
+    for (u32 slot = 0; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+    {
+        if (GetBattlerSpeciesAbility(battler, gBattleMons[battler].species, slot) == ability)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 static bool32 TryDancer(void)
@@ -9494,6 +9496,16 @@ enum Ability GetBattlerAbilityBySpecies(enum BattlerId battler, enum Species spe
 enum Ability GetBattlerSpeciesAbility(enum BattlerId battler, enum Species species, u8 slot)
 {
     return GetSpeciesAbilityForOwner(species, slot, IsMonTrainerOwned(GetBattlerMon(battler)));
+}
+
+bool32 HasBattlerInclementAbility(enum BattlerId battler, enum Species species)
+{
+    for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+    {
+        if (GetBattlerSpeciesAbility(battler, species, slot) != ABILITY_NONE)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 u32 GetBattlerSpeciesBaseStat(enum BattlerId battler, enum Species species, u32 statIndex)
