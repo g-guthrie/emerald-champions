@@ -45,6 +45,7 @@ jobs:
             binutils-arm-none-eabi \
             build-essential \
             gcc-arm-none-eabi \
+            libelf-dev \
             libmgba-dev \
             libnewlib-arm-none-eabi \
             libpng-dev \

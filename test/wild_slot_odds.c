@@ -1039,7 +1039,6 @@ TEST("Wild tables: nothing is grind-rare: restricted slots at 5%, ordinary slots
     for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
     {
         const struct WildPokemonHeader *wild = &gWildMonHeaders[header];
-        const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(wild->mapGroup, wild->mapNum);
         for (u32 time = 0; time < TIMES_OF_DAY_COUNT; time++)
         {
             const struct WildEncounterTypes *types = &wild->encounterTypes[time];
