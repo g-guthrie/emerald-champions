@@ -23,6 +23,7 @@ UNCALLED = (
     'InitAndLaunchSpecialAnimation', 'IsCryPlayingOrClearCrySongs', 'SetBattlerShadowSpriteCallback',
     'SetHealthboxSpriteVisible', 'SpriteCB_WaitForBattlerBallReleaseAnim', 'SpriteCallbackDummy_2',
     'StartHealthboxSlideIn', 'Task_PlayerController_RestoreBgmAfterCry', 'UpdateHealthboxAttribute',
+    'LinkOpponentBufferExecCompleted', 'RecordedOpponentBufferExecCompleted',
     'm4aMPlayVolumeControl', 'gMPlayInfo_BGM',
 )
 

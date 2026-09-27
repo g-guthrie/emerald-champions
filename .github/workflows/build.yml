@@ -78,12 +78,13 @@ jobs:
       - name: Build Emerald Champions release ROM
         run: make -j"$(nproc)" release
 
-      # Host tests compile real game sources and need the generated map headers.
-      - name: Run Python integrity tests
-        run: python3 -m unittest discover -s tests -v
-
       - name: Bind release artifacts to build inputs
         run: python3 scripts/stamp_release_inputs.py
+
+      # Host tests need generated map headers and may rewrite identical generated
+      # inputs. Bind the build first; the final release gates recheck all bytes.
+      - name: Run Python integrity tests
+        run: python3 -m unittest discover -s tests -v
 
       - name: Run native game tests
         run: make -j"$(nproc)" check
