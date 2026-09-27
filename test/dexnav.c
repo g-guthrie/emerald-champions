@@ -304,7 +304,7 @@ TEST("DexNav shows and searches a gated legend once its gate opens, and drops it
     gSaveBlock1Ptr->location = savedLocation;
 }
 
-TEST("DexNav shows a storm visitor only while its storm is on that map")
+TEST("DexNav storm guests stay visible but cannot bypass their ordinary encounter roll")
 {
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
 
@@ -317,13 +317,30 @@ TEST("DexNav shows a storm visitor only while its storm is on that map")
     EXPECT_EQ(Test_DexNavGenerateMonLevel(SPECIES_TAPU_KOKO, ENCOUNTER_TYPE_LAND), MON_LEVEL_NONEXISTENT);
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
     EXPECT(DexNavLists(SPECIES_TAPU_KOKO));
-    EXPECT_EQ(Test_DexNavGenerateMonLevel(SPECIES_TAPU_KOKO, ENCOUNTER_TYPE_LAND), GetLegendaryEncounterLevel(SPECIES_TAPU_KOKO));
+    struct WildRosterEntry list[WILD_ROSTER_MAX_ENTRIES];
+    u32 count = Test_DexNavGetList(list, ARRAY_COUNT(list));
+    u32 koko = FindEntry(list, count, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO);
+    EXPECT_NE(koko, NO_ENTRY);
+    EXPECT(!Test_DexNavCanSearchFor(&list[koko]));
+    EXPECT_EQ(StringCompare(Test_DexNavGetEntryHint(&list[koko]), COMPOUND_STRING("Storm guest.\nNo search.")), 0);
+    EXPECT_LE(GetStringWidth(FONT_SMALL, Test_DexNavGetEntryHint(&list[koko]), 0), DEXNAV_INFO_TEXT_WIDTH);
+    EXPECT_EQ(Test_DexNavGenerateMonLevel(SPECIES_TAPU_KOKO, ENCOUNTER_TYPE_LAND), MON_LEVEL_NONEXISTENT);
+    EXPECT(!Test_DexNavCreateSearchMon(SPECIES_TAPU_KOKO, ENCOUNTER_TYPE_LAND));
+    // The normal storm roll remains available, and other legends on the
+    // same route remain searchable.
+    EXPECT_EQ(GetWeatherAnomalyEncounterSpecies(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110), WILD_AREA_LAND), SPECIES_TAPU_KOKO);
+    EXPECT(Test_DexNavCreateSearchMon(SPECIES_RAIKOU, ENCOUNTER_TYPE_LAND));
     SetLocation(MAP_ROUTE111);
     EXPECT(!DexNavLists(SPECIES_TAPU_KOKO));
     SetLocation(MAP_ROUTE110);
     ClearWeatherAnomalies();
     EXPECT(!DexNavLists(SPECIES_TAPU_KOKO));
     EXPECT_EQ(Test_DexNavGenerateMonLevel(SPECIES_TAPU_KOKO, ENCOUNTER_TYPE_LAND), MON_LEVEL_NONEXISTENT);
+    // After the storm period, the ordinary resident slot follows the usual
+    // search rules; only the storm encounter was excluded.
+    FlagSet(WEATHER_ANOMALY_WINDOW_END_FLAG);
+    EXPECT(DexNavLists(SPECIES_TAPU_KOKO));
+    EXPECT(Test_DexNavCreateSearchMon(SPECIES_TAPU_KOKO, ENCOUNTER_TYPE_LAND));
     ResetWorld();
     FlagClear(FLAG_RECEIVED_DEXNAV);
     gSaveBlock1Ptr->location = savedLocation;

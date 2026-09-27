@@ -56,6 +56,7 @@
 #include "text_window.h"
 #include "wild_encounter.h"
 #include "wild_roster.h"
+#include "weather_anomaly.h"
 #include "window.h"
 #include "constants/species.h"
 #include "constants/maps.h"
@@ -1220,7 +1221,7 @@ static u8 DexNavGeneratePotential(u8 searchLevel)
 
 // Searches draw from the map's live roster (src/wild_roster.c), so they find
 // only what the encounter engine could produce here right now, at its
-// levels: gated, caught and storm-held slots are not in it.
+// levels. Searchability separately excludes storm guests and special methods.
 static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment)
 {
     struct WildRosterEntry roster[WILD_ROSTER_MAX_ENTRIES];
@@ -1372,6 +1373,7 @@ static const u8 sText_DexNavNoWildPokemon[] = _("No wild Pokémon live here.");
 static const u8 sText_DexNavLevel[] = _("Lv. {STR_VAR_1}");
 static const u8 sText_DexNavLevelRange[] = _("Lv. {STR_VAR_1}-{STR_VAR_2}");
 static const u8 sText_DexNavHintSearch[] = _("{A_BUTTON} Search\n{R_BUTTON} Register");
+static const u8 sText_DexNavStormGuest[] = _("Storm guest.\nNo search.");
 static const u8 sText_DexNavHowTallGrass[] = _("Walk in the\ntall grass.");
 static const u8 sText_DexNavHowCave[] = _("Walk around\nthis cave.");
 static const u8 sText_DexNavHowSeaweed[] = _("Swim through\nthe seaweed.");
@@ -1562,12 +1564,22 @@ static bool32 IsRoamingHere(enum Species species)
     return FALSE;
 }
 
+// A storm guest stays visible in the roster but must be met through the
+// storm's ordinary encounter roll. Once it becomes a resident after the
+// storm window, it follows the same search rules as other residents.
+static bool32 IsStormVisitorHere(enum Species species)
+{
+    enum LegendarySignId sign = GetLiveWeatherAnomalyOnMap(gSaveBlock1Ptr->location.mapGroup,
+                                                          gSaveBlock1Ptr->location.mapNum);
+    return sign < LEGENDARY_SIGN_COUNT && gLegendaryGates[sign].species == species;
+}
+
 // The search engine hides its Pokémon in tall grass, on cave floors or in
 // water the player can Surf (DexNavPickTile); seaweed is neither. Whatever
 // it finds is made as its wild slot would make it (CreateDexNavSearchMon).
 static bool32 IsDexNavSearchableEntry(const struct WildRosterEntry *entry)
 {
-    if (IsRoamingHere(entry->species))
+    if (IsRoamingHere(entry->species) || IsStormVisitorHere(entry->species))
         return FALSE;
     if (entry->method == WILD_ROSTER_SURFING)
         return TRUE;
@@ -1618,6 +1630,8 @@ static const u8 *GetDexNavMethodName(enum WildRosterMethod method)
 // search for it, otherwise how to find it here.
 static const u8 *GetDexNavEntryHint(const struct WildRosterEntry *entry)
 {
+    if (IsStormVisitorHere(entry->species))
+        return sText_DexNavStormGuest;
     if (CanDexNavSearchFor(entry))
         return sText_DexNavHintSearch;
 

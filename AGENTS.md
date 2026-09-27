@@ -63,4 +63,6 @@ or data.
 - DexNav and the PokéNav atlas share the native wild roster. Show every
   currently available species with its icon, without seen/caught discovery
   gating. Hide encounters until their actual unlock conditions are met.
-  Legend searching is allowed. Mirage Tower species may be missed.
+  Resident legend searching is allowed. Active storm guests stay visible but
+  require ordinary wild encounters; they cannot be searched or registered.
+  Mirage Tower species may be missed.
