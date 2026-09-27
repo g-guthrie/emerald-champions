@@ -15,6 +15,8 @@ or data.
 - Never load a savestate into a different ROM; move a save between builds with
   a native in-game save and a clean boot.
 - Codex owns overworld presentation (map.json objects, local ids).
+- UI changes require native screenshots of affected states and menu navigation:
+  opening, selection, page changes, cancellation and returned player control.
 
 ## Design rules (owner decisions)
 
@@ -68,3 +70,15 @@ or data.
   Resident legend searching is allowed. Active storm guests stay visible but
   require ordinary wild encounters; they cannot be searched or registered.
   Mirage Tower species may be missed.
+
+- DexNav chains are shiny/Pokérus hunting only. Above zero, search odds are
+  chain percent shiny and half-chain percent Pokérus (cap 100); independent
+  rolls. Zero uses base odds. No search deadline or level/egg-move/IV rewards.
+  Search HUD shows icon/name, direction, Hold A, and Chain only above zero.
+- Pokérus permanently doubles a beneficial nature modifier (+10% to +20%);
+  neutral natures and the -10% drawback stay unchanged. It grants no EV bonus.
+  Direct infections have two total transmissions, one adjacent recipient per
+  successful postbattle spread roll; recipients cannot spread. No daily decay.
+  The benefit follows future nature changes and survives recovery and boxing.
+  Summary stats use gold for the Pokérus-enhanced nature stat, retaining the
+  native active/recovered markers; no spread-count or boost-percentage text.

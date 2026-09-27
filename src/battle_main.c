@@ -5572,7 +5572,6 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         if (gDexNavSpecies && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
         {
             IncrementDexNavChain();
-            TryIncrementSpeciesSearchLevel();
         }
         else
             gSaveBlock3Ptr->dexNavChain = 0;

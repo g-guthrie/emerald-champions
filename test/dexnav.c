@@ -652,7 +652,7 @@ TEST("DexNav levels obey the live cap and the wild level floor")
         for (u32 c = 0; c < ARRAY_COUNT(cases); c++)
         {
             SetLocation(cases[c].map);
-            // No chain, a long chain (+20) and the 4% +10 roll all stay in range.
+            // Hunting chains must not change the normal wild-slot level roll.
             for (u32 chain = 0; chain <= DEXNAV_CHAIN_MAX; chain += DEXNAV_CHAIN_MAX)
             {
                 gSaveBlock3Ptr->dexNavChain = chain;
@@ -660,6 +660,10 @@ TEST("DexNav levels obey the live cap and the wild level floor")
                 {
                     SeedRng(seed);
                     u32 level = Test_DexNavGenerateMonLevel(cases[c].species, ENCOUNTER_TYPE_LAND);
+                    gSaveBlock3Ptr->dexNavChain = 0;
+                    SeedRng(seed);
+                    EXPECT_EQ(level, Test_DexNavGenerateMonLevel(cases[c].species, ENCOUNTER_TYPE_LAND));
+                    gSaveBlock3Ptr->dexNavChain = chain;
                     EXPECT_NE(level, MON_LEVEL_NONEXISTENT);
                     EXPECT_LE(level, cap);
                     EXPECT_GE(level, floor);

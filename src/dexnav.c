@@ -56,6 +56,8 @@
 #include "text_window.h"
 #include "wild_encounter.h"
 #include "wild_roster.h"
+#include "pokerus.h"
+#include "config/pokerus.h"
 #include "weather_anomaly.h"
 #include "window.h"
 #include "constants/species.h"
@@ -76,11 +78,6 @@ STATIC_ASSERT(DN_VAR_SPECIES != 0, DNVarSpecies_Must_Not_Be_Zero);
 struct DexNavSearch
 {
     enum Species species;
-    enum Move moves[MAX_MON_MOVES];
-    enum Item heldItem;
-    u8 abilityNum;
-    u8 potential;
-    u8 searchLevel;
     u8 monLevel;
     u8 proximity;
     u8 environment;
@@ -91,8 +88,6 @@ struct DexNavSearch
     u8 movementCount;
     u8 windowId;
     u8 iconSpriteId;
-    u8 itemSpriteId;
-    u8 starSpriteIds[3];
     u8 ownedIconSpriteId;
     u32 startingTime;
 };
@@ -108,18 +103,13 @@ static void Task_DexNavWaitFadeIn(u8 taskId);
 static void Task_DexNavMain(u8 taskId);
 // SEARCH
 static bool8 TryStartHiddenMonFieldEffect(enum EncounterType environment, u8 xSize, u8 ySize, bool8 smallScan);
-static void DexNavGenerateMoveset(enum Species species, u8 searchLevel, u8 encounterLevel, u16 *moveDst);
-static enum Item DexNavGenerateHeldItem(enum Species species, u8 searchLevel);
-static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel);
-static u8 DexNavGeneratePotential(u8 searchLevel);
 static u8 DexNavTryGenerateMonLevel(enum Species species, enum EncounterType environment);
 static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment);
-static void CreateDexNavWildMon(enum Species species, u8 potential, u8 level, u8 abilityNum, enum Item item, enum Move *moves);
 static u8 GetPlayerDistance(s16 x, s16 y);
 static u8 DexNavPickTile(enum EncounterType environment, u8 xSize, u8 ySize, bool8 smallScan);
 static void DexNavProximityUpdate(void);
 static void DexNavDrawIcons(void);
-static void DexNavUpdateSearchWindow(u8 proximity, u8 searchLevel);
+static void DexNavUpdateSearchWindow(void);
 static bool32 IsDexNavSearchableEntry(const struct WildRosterEntry *entry);
 
 //// Const Data
@@ -132,13 +122,9 @@ static const u16 sSelectionCursorPal[] = INCGFX_U16("graphics/dexnav/cursor.png"
 static const u32 sCaughtMarkGfx[] = INCGFX_U32("graphics/dexnav/caught.png", ".4bpp.smol");  //uses selection cursor pal
 
 // searching image data
-static const u32 sPotentialStarGfx[] = INCGFX_U32("graphics/dexnav/star.png", ".4bpp.smol");
 static const u32 sOwnedIconGfx[] = INCGFX_U32("graphics/dexnav/owned_icon.png", ".4bpp.smol");
 
 // strings
-static const u8 sText_MonLevel[] = _("{LV}. {STR_VAR_1}");
-static const u8 sText_EggMove[] = _("Move: {STR_VAR_1}");
-static const u8 sText_HeldItem[] = _("{STR_VAR_1}");
 
 static const u8 sText_ArrowLeft[] = _("{LEFT_ARROW}");
 static const u8 sText_ArrowRight[] = _("{RIGHT_ARROW}");
@@ -175,36 +161,6 @@ static const struct OamData sSelectionCursorOam =
     .affineParam = 0
 };
 
-static const struct OamData sSightOam =
-{
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .shape = SPRITE_SHAPE(16x8),
-    .size = SPRITE_SIZE(16x8),
-    .priority = 0,
-};
-static const union AnimCmd sAnimCmdSight0[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnimCmdSight1[] =
-{
-    ANIMCMD_FRAME(2, 1),
-    ANIMCMD_END
-};
-static const union AnimCmd sAnimCmdSight2[] =
-{
-    ANIMCMD_FRAME(4, 1),
-    ANIMCMD_END
-};
-static const union AnimCmd *const sAnimCmdTable_Sight[] =
-{
-    sAnimCmdSight0,
-    sAnimCmdSight1,
-    sAnimCmdSight2,
-};
-
 // gui sprite templates
 static const struct SpriteTemplate sSelectionCursorSpriteTemplate =
 {
@@ -215,20 +171,6 @@ static const struct SpriteTemplate sSelectionCursorSpriteTemplate =
 };
 
 // search window sprite templates
-static const struct SpriteTemplate sHeldItemTemplate =
-{
-    .tileTag = HELD_ITEM_TAG,
-    .paletteTag = 0xFFFF,
-    .oam = &sHeldItemOam,
-};
-
-static const struct SpriteTemplate sPotentialStarTemplate =
-{
-    .tileTag = LIT_STAR_TILE_TAG,
-    .paletteTag = 0xFFFF,   //held item pal
-    .oam = &sHeldItemOam,
-};
-
 static const struct SpriteTemplate sOwnedIconTemplate =
 {
     .tileTag = OWNED_ICON_TAG,
@@ -238,7 +180,6 @@ static const struct SpriteTemplate sOwnedIconTemplate =
 };
 
 // search sprite sheets
-static const struct CompressedSpriteSheet sPotentialStarSpriteSheet = {sPotentialStarGfx, (8 * 8) / 2, LIT_STAR_TILE_TAG};
 static const struct CompressedSpriteSheet sOwnedIconSpriteSheet = {sOwnedIconGfx, (8 * 8) / 2, OWNED_ICON_TAG};
 
 //// functions
@@ -285,67 +226,31 @@ static void AddSearchWindow(u8 width)
 }
 
 #define WINDOW_COL_0        (SPECIES_ICON_X + 4)
-#define WINDOW_COL_1        (WINDOW_COL_0 + (GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_WIDTH) * (POKEMON_NAME_LENGTH)))
-#define WINDOW_MOVE_NAME_X  (WINDOW_COL_1 + (GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_WIDTH) * 6))
-#define SEARCH_ARROW_X      (WINDOW_MOVE_NAME_X + 90)
-// Room on the search window's second line: held item, then Ability.
-#define SEARCH_ITEM_WIDTH    (WINDOW_COL_1 + 16 - WINDOW_COL_0 - 4)
-#define SEARCH_ABILITY_WIDTH (SEARCH_WINDOW_WIDTH * 8 - (WINDOW_COL_1 + 16) - 4)
+#define SEARCH_ARROW_X      208
 #define SEARCH_ARROW_Y      0
-#define SEARCH_WINDOW_WIDTH     28
+#define SEARCH_WINDOW_WIDTH 28
 
-static void AddSearchWindowText(enum Species species, u8 proximity, u8 searchLevel)
+static const u8 sText_SearchChain[] = _("Chain {STR_VAR_1}");
+static const u8 sText_SearchSneak[] = _("Hold {A_BUTTON} to sneak");
+
+static void AddSearchWindowText(enum Species species)
 {
     u8 windowId = sDexNavSearchDataPtr->windowId;
-
-    //species name - always present
-    StringCopy(gStringVar1, GetSpeciesName(species));
-    AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, FONT_SMALL, WINDOW_COL_0, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar1);
-
-    //level - always present
-    ConvertIntToDecimalStringN(gStringVar1, sDexNavSearchDataPtr->monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar4, sText_MonLevel);
-    AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, FONT_SMALL, WINDOW_COL_1, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
-
-    if (proximity <= SNEAKING_PROXIMITY)
+    AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_0, 0, sSearchFontColor, TEXT_SKIP_DRAW, GetSpeciesName(species));
+    AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, sText_SearchSneak);
+    if (GetDexNavChain())
     {
-        PlaySE(SE_POKENAV_ON);
-        // move
-        if (searchLevel > 1 && sDexNavSearchDataPtr->moves[0])
-        {
-            StringCopy(gStringVar1, GetMoveName(sDexNavSearchDataPtr->moves[0]));
-            StringExpandPlaceholders(gStringVar4, sText_EggMove);
-            AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_MOVE_NAME_X, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
-        }
-
-        if (searchLevel > 2)
-        {
-            // ability name
-            // Keep long names inside the search window.
-            StringCopy(gStringVar1, gAbilitiesInfo[GetAbilityBySpeciesForOwner(species, sDexNavSearchDataPtr->abilityNum, FALSE)].name);
-            AddTextPrinterParameterized3(windowId, GetFontIdToFit(gStringVar1, FONT_SMALL, 0, SEARCH_ABILITY_WIDTH),
-                WINDOW_COL_1 + 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar1);
-
-            // item name
-            if (sDexNavSearchDataPtr->heldItem)
-            {
-                CopyItemName(sDexNavSearchDataPtr->heldItem, gStringVar1);
-                StringExpandPlaceholders(gStringVar4, sText_HeldItem);
-                AddTextPrinterParameterized3(windowId, GetFontIdToFit(gStringVar4, FONT_SMALL, 0, SEARCH_ITEM_WIDTH),
-                    WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
-            }
-        }
+        ConvertIntToDecimalStringN(gStringVar1, GetDexNavChain(), STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, sText_SearchChain);
+        AddTextPrinterParameterized3(windowId, FONT_SMALL, 154, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
     }
-
-    CopyWindowToVram(sDexNavSearchDataPtr->windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
-static void DrawSearchWindow(enum Species species, u8 potential)
+static void DrawSearchWindow(enum Species species)
 {
-    u8 searchLevel = sDexNavSearchDataPtr->searchLevel;
-
     AddSearchWindow(SEARCH_WINDOW_WIDTH);
-    AddSearchWindowText(species, sDexNavSearchDataPtr->proximity, searchLevel);
+    AddSearchWindowText(species);
 }
 
 #undef SEARCH_WINDOW_WIDTH
@@ -355,20 +260,10 @@ static void RemoveDexNavWindowAndGfx(void)
     // try remove sprites
     if (sDexNavSearchDataPtr->iconSpriteId != MAX_SPRITES)
         DestroySprite(&gSprites[sDexNavSearchDataPtr->iconSpriteId]);
-    if (sDexNavSearchDataPtr->itemSpriteId != MAX_SPRITES)
-        DestroySprite(&gSprites[sDexNavSearchDataPtr->itemSpriteId]);
     if (sDexNavSearchDataPtr->ownedIconSpriteId != MAX_SPRITES)
         DestroySprite(&gSprites[sDexNavSearchDataPtr->ownedIconSpriteId]);
 
-    for (u32 i = 0; i < NELEMS(sDexNavSearchDataPtr->starSpriteIds); i++)
-    {
-        if (sDexNavSearchDataPtr->starSpriteIds[i] != MAX_SPRITES)
-            DestroySprite(&gSprites[sDexNavSearchDataPtr->starSpriteIds[i]]);
-    }
-
-    FreeSpriteTilesByTag(HELD_ITEM_TAG);
     FreeSpriteTilesByTag(OWNED_ICON_TAG);
-    FreeSpriteTilesByTag(LIT_STAR_TILE_TAG);
     FreeSpritePaletteByTag(HELD_ITEM_TAG);
     SafeFreeMonIconPalette(sDexNavSearchDataPtr->species);
 
@@ -582,85 +477,53 @@ static bool8 TryStartHiddenMonFieldEffect(enum EncounterType environment, u8 xSi
     return FALSE;
 }
 
-static void DrawDexNavSearchHeldItem(u8 *dst)
-{
-    *dst = CreateSprite(&sHeldItemTemplate, SPECIES_ICON_X + 6, GetSearchWindowY() + 18, 0);
-    if (*dst != MAX_SPRITES)
-        gSprites[*dst].invisible = TRUE;
-}
-
 static void LoadSearchIconData(void)
 {
     // palettes clash with mon icon, so must load manually
     LoadSpriteSheet(&gSpriteSheet_HeldItem);
     LoadPalette(gHeldItemPalette, OBJ_PLTT_ID(sHeldItemOam.paletteNum), PLTT_SIZE_4BPP);
-    LoadCompressedSpriteSheetUsingHeap(&sPotentialStarSpriteSheet);
-    //LoadCompressedSpriteSheetUsingHeap(&sSightSpriteSheet);   //eye replaced with arrow
     LoadCompressedSpriteSheetUsingHeap(&sOwnedIconSpriteSheet);
 }
 
-static u8 GetSearchLevel(enum Species species)
+// Chains affect only the two advertised encounter rolls. Species, moves,
+// levels, items and abilities retain their normal wild-slot behavior.
+u32 GetDexNavChain(void)
 {
-    u8 searchLevel;
-#if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    searchLevel = gSaveBlock3Ptr->dexNavSearchLevels[species];
-#else
-    searchLevel = 0;
-#endif
-    return searchLevel;
+    return min(gSaveBlock3Ptr->dexNavChain, DEXNAV_CHAIN_MAX);
 }
 
-// The egg move, item, Ability and potential an ordinary search can turn up.
-static void GenerateDexNavSearchTraits(void)
+void ApplyDexNavChainRewards(struct Pokemon *mon)
 {
-    enum Species species = sDexNavSearchDataPtr->species;
-    u8 searchLevel = GetSearchLevel(species);
-
-    sDexNavSearchDataPtr->searchLevel = searchLevel;
-    DexNavGenerateMoveset(species, searchLevel, sDexNavSearchDataPtr->monLevel, &sDexNavSearchDataPtr->moves[0]);
-    sDexNavSearchDataPtr->heldItem = DexNavGenerateHeldItem(species, searchLevel);
-    sDexNavSearchDataPtr->abilityNum = DexNavGetAbilityNum(species, searchLevel);
-    sDexNavSearchDataPtr->potential = DexNavGeneratePotential(searchLevel);
+    u32 chain = GetDexNavChain();
+    bool32 shiny = chain ? RandomUniform(RNG_DEXNAV_SHINY, 0, 99) < chain
+                        : RandomUniform(RNG_DEXNAV_SHINY, 0, MAX_u16) < SHINY_ODDS;
+    bool32 pokerus = chain ? RandomUniform(RNG_DEXNAV_POKERUS, 0, 199) < chain
+                          : RandomUniform(RNG_DEXNAV_POKERUS, 0, MAX_u16) < P_POKERUS_INFECTION_ODDS;
+    SetMonData(mon, MON_DATA_IS_SHINY, &shiny);
+    if (pokerus)
+        GiveMonPokerus(mon, TRUE);
 }
 
-// Makes the Pokémon a search found. A Legendary, Mythical, Ultra Beast or
-// Paradox Pokémon is made exactly as its wild slot makes it (at the cap with
-// its set, where it has one), without the DexNav's own traits or shiny
-// bonus; ordinary ones get the DexNav's traits.
 static void CreateDexNavSearchMon(void)
 {
     enum Species species = sDexNavSearchDataPtr->species;
-
-    if (GetRestrictedPartyClass(species) != RESTRICTED_PARTY_NONE)
-    {
-        CreateWildSlotMon(species, sDexNavSearchDataPtr->monLevel);
-        gDexNavSpecies = species;
-        return;
-    }
+    CreateWildSlotMon(species, sDexNavSearchDataPtr->monLevel);
+    ApplyDexNavChainRewards(&gParties[B_TRAINER_OPPONENT_A][0]);
     gDexNavSpecies = species;
-    CreateDexNavWildMon(species, sDexNavSearchDataPtr->potential, sDexNavSearchDataPtr->monLevel,
-                        sDexNavSearchDataPtr->abilityNum, sDexNavSearchDataPtr->heldItem, sDexNavSearchDataPtr->moves);
 }
 
 static void SetUpDexNavSearch(void)
 {
-    u8 searchLevel;
 
     // init sprites
     sDexNavSearchDataPtr->iconSpriteId = MAX_SPRITES;
-    sDexNavSearchDataPtr->itemSpriteId = MAX_SPRITES;
-    sDexNavSearchDataPtr->starSpriteIds[0] = MAX_SPRITES;
-    sDexNavSearchDataPtr->starSpriteIds[1] = MAX_SPRITES;
-    sDexNavSearchDataPtr->starSpriteIds[2] = MAX_SPRITES;
     sDexNavSearchDataPtr->ownedIconSpriteId = MAX_SPRITES;
 
-    GenerateDexNavSearchTraits();
-    searchLevel = sDexNavSearchDataPtr->searchLevel;
     DexNavProximityUpdate();
 
     LoadSearchIconData();
     DexNavDrawIcons();
-    DexNavUpdateSearchWindow(sDexNavSearchDataPtr->proximity, searchLevel);
+    DexNavUpdateSearchWindow();
 
     gPlayerAvatar.creeping = TRUE;  //initialize as true in case mon appears beside you
     sDexNavSearchDataPtr->proximity = gSprites[gPlayerAvatar.spriteId].x;
@@ -707,23 +570,6 @@ static bool8 InitDexNavSearch(enum Species species, u32 environment)
     return FALSE;
 }
 
-static void DexNavDrawPotentialStars(u8 potential, u8 *dst)
-{
-    u8 spriteId;
-    u32 i;
-
-    for (i = 0; i < NELEMS(sDexNavSearchDataPtr->starSpriteIds); i++)
-    {
-        spriteId = MAX_SPRITES;
-        if (potential > i)
-            spriteId = CreateSprite(&sPotentialStarTemplate, SPECIES_ICON_X - 20, GetSearchWindowY() + 4 + (i * 8), 0);
-
-        dst[i] = spriteId;
-        if (spriteId != MAX_SPRITES)
-            gSprites[spriteId].invisible = TRUE;
-    }
-}
-
 static void DexNavUpdateDirectionArrow(void)
 {
     u16 tileX = sDexNavSearchDataPtr->tileX;
@@ -763,10 +609,8 @@ static void DexNavDrawIcons(void)
 {
     enum Species species = sDexNavSearchDataPtr->species;
 
-    DrawSearchWindow(species, sDexNavSearchDataPtr->potential);
+    DrawSearchWindow(species);
     DrawDexNavSearchMonIcon(species, &sDexNavSearchDataPtr->iconSpriteId, GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT));
-    DrawDexNavSearchHeldItem(&sDexNavSearchDataPtr->itemSpriteId);
-    DexNavDrawPotentialStars(sDexNavSearchDataPtr->potential, &sDexNavSearchDataPtr->starSpriteIds[0]);
     DexNavUpdateDirectionArrow();
 }
 
@@ -816,16 +660,6 @@ static void EndDexNavSearchSetupScript(const u8 *script)
     ScriptContext_SetupScript(script);
 }
 
-static u8 GetMovementProximityBySearchLevel(void)
-{
-    if (sDexNavSearchDataPtr->searchLevel < 20)
-        return 2;
-    else if (sDexNavSearchDataPtr->searchLevel < 50)
-        return 3;
-    else
-        return 4;
-}
-
 bool32 OnStep_DexNavSearch(void)
 {
     if (!FlagGet(DN_FLAG_SEARCHING) || sDexNavSearchDataPtr == NULL)
@@ -833,7 +667,7 @@ bool32 OnStep_DexNavSearch(void)
 
     u32 frameCount = gMain.vblankCounter1 - sDexNavSearchDataPtr->startingTime;
     DexNavProximityUpdate();
-    DexNavUpdateSearchWindow(sDexNavSearchDataPtr->proximity, sDexNavSearchDataPtr->searchLevel);
+    DexNavUpdateSearchWindow();
 
     if (sDexNavSearchDataPtr->proximity > MAX_PROXIMITY)
     { // out of range
@@ -853,12 +687,6 @@ bool32 OnStep_DexNavSearch(void)
         return TRUE;
     }
 
-    if (frameCount > DEXNAV_TIMEOUT * 60)
-    { // player took too long
-        EndDexNavSearchSetupScript(EventScript_PokemonGotAway);
-        return TRUE;
-    }
-
     if (sDexNavSearchDataPtr->proximity < 1)
     {
         CreateDexNavSearchMon();
@@ -870,7 +698,7 @@ bool32 OnStep_DexNavSearch(void)
 
     //Caves and water the Pokémon moves around
     if ((sDexNavSearchDataPtr->environment == ENCOUNTER_TYPE_WATER || GetCurrentMapType() == MAP_TYPE_UNDERGROUND)
-        && sDexNavSearchDataPtr->proximity < GetMovementProximityBySearchLevel() && sDexNavSearchDataPtr->movementCount < 2)
+        && sDexNavSearchDataPtr->proximity < 2 && sDexNavSearchDataPtr->movementCount < 2)
     {
         FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
 
@@ -885,338 +713,16 @@ bool32 OnStep_DexNavSearch(void)
     return FALSE;
 }
 
-static void DexNavUpdateSearchWindow(u8 proximity, u8 searchLevel)
+static void DexNavUpdateSearchWindow(void)
 {
-    FillWindowPixelBuffer(sDexNavSearchDataPtr->windowId, PIXEL_FILL(1));   //clear window
-    AddSearchWindowText(sDexNavSearchDataPtr->species, proximity, searchLevel);
-
+    FillWindowPixelBuffer(sDexNavSearchDataPtr->windowId, PIXEL_FILL(1));
+    AddSearchWindowText(sDexNavSearchDataPtr->species);
     DexNavUpdateDirectionArrow();
-
-    //init hidden sprites
-    if (sDexNavSearchDataPtr->itemSpriteId != MAX_SPRITES)
-        gSprites[sDexNavSearchDataPtr->itemSpriteId].invisible = TRUE;
-    if (sDexNavSearchDataPtr->starSpriteIds[0] != MAX_SPRITES)
-        gSprites[sDexNavSearchDataPtr->starSpriteIds[0]].invisible = TRUE;
-    if (sDexNavSearchDataPtr->starSpriteIds[1] != MAX_SPRITES)
-        gSprites[sDexNavSearchDataPtr->starSpriteIds[1]].invisible = TRUE;
-    if (sDexNavSearchDataPtr->starSpriteIds[2] != MAX_SPRITES)
-        gSprites[sDexNavSearchDataPtr->starSpriteIds[2]].invisible = TRUE;
-
-    if (proximity <= SNEAKING_PROXIMITY)
-    {
-        if (searchLevel > 2 && sDexNavSearchDataPtr->heldItem)
-        {
-            // toggle item view
-            if (sDexNavSearchDataPtr->itemSpriteId != MAX_SPRITES)
-                gSprites[sDexNavSearchDataPtr->itemSpriteId].invisible = FALSE;
-        }
-
-        if (searchLevel > 4)
-        {
-            if (sDexNavSearchDataPtr->starSpriteIds[0] != MAX_SPRITES)
-                gSprites[sDexNavSearchDataPtr->starSpriteIds[0]].invisible = FALSE;
-
-            if (sDexNavSearchDataPtr->starSpriteIds[1] != MAX_SPRITES)
-                gSprites[sDexNavSearchDataPtr->starSpriteIds[1]].invisible = FALSE;
-
-            if (sDexNavSearchDataPtr->starSpriteIds[2] != MAX_SPRITES)
-                gSprites[sDexNavSearchDataPtr->starSpriteIds[2]].invisible = FALSE;
-        }
-    }
 }
 
-//////////////////////////////
-//// DEXNAV MON GENERATOR ////
-//////////////////////////////
-static void CreateDexNavWildMon(enum Species species, u8 potential, u8 level, u8 abilityNum, enum Item item, enum Move *moves)
-{
-    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
-
-    CreateWildMon(species, level);  // shiny rate bonus handled in CreateBoxMon
-
-    //Set ability
-    SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
-
-    // Set Held Item
-    if (item)
-        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
-
-    //Set moves
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(mon, moves[i], i);
-
-    CalculateMonStats(mon);
-}
-
-// A random level for a search on this map, or MON_LEVEL_NONEXISTENT when the
-// DexNav cannot search for the species here. The range is the roster's
-// (GetEncounterLevelFromMapData), which already applies the wild level floor
-// and the cap.
 static u8 DexNavTryGenerateMonLevel(enum Species species, enum EncounterType environment)
 {
-    u8 levelBase = GetEncounterLevelFromMapData(species, environment);
-    u8 levelBonus = gSaveBlock3Ptr->dexNavChain / 5;
-
-    if (levelBase == MON_LEVEL_NONEXISTENT)
-        return MON_LEVEL_NONEXISTENT;   //species not found in the area
-    // Legend-class Pokémon come at their slot's level (the cap, for all but
-    // Paradox Pokémon): no chain or lucky bonus.
-    if (GetRestrictedPartyClass(species) != RESTRICTED_PARTY_NONE)
-        return levelBase;
-
-    if (Random() % 100 < 4)
-        levelBonus += 10; //4% chance of having a +10 level
-
-    // The search preview and its generated moves must use the same level
-    // ceiling as the actual wild Pokemon, even after chain/rare bonuses.
-    return min(levelBase + levelBonus, min(MAX_LEVEL, GetCurrentLevelCap()));
-}
-
-static enum Move GetRandomEggMove(enum Species species)
-{
-    u32 numEggMoves = 0;
-    const u16 *eggMoveLearnset = GetSpeciesEggMoves(species);
-    for (u32 i = 0; eggMoveLearnset[i] != MOVE_UNAVAILABLE; i++)
-        numEggMoves++;
-
-    enum Move result = *(const u16 *)(RandomElementArray(RNG_DEXNAV_RANDOM_EGG_MOVE, eggMoveLearnset, sizeof(u16), numEggMoves));
-    return result;
-}
-
-static void DexNavGenerateMoveset(enum Species species, u8 searchLevel, u8 encounterLevel, u16 *moveDst)
-{
-    bool8 genMove = FALSE;
-    u16 randVal = Random() % 100;
-    u16 i;
-
-    // see if first move slot should be an egg move
-    if (searchLevel < 5)
-    {
-        if (SEARCHLEVEL0_MOVECHANCE != 0 && randVal < SEARCHLEVEL0_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 10)
-    {
-        if (SEARCHLEVEL5_MOVECHANCE != 0 && randVal < SEARCHLEVEL5_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 25)
-    {
-        if (SEARCHLEVEL10_MOVECHANCE != 0 && randVal < SEARCHLEVEL10_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 50)
-    {
-        if (SEARCHLEVEL25_MOVECHANCE != 0 && randVal < SEARCHLEVEL25_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 100)
-    {
-        if (SEARCHLEVEL50_MOVECHANCE != 0 && randVal < SEARCHLEVEL50_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else
-    {
-        if (SEARCHLEVEL100_MOVECHANCE != 0 && randVal < SEARCHLEVEL100_MOVECHANCE)
-            genMove = TRUE;
-    }
-
-    // Generate a wild mon just to get the initial moveset (later overwritten by CreateDexNavWildMon)
-    CreateWildMon(species, encounterLevel);
-
-    // Store generated mon moves into Dex Nav Struct
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        moveDst[i] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + i);
-
-    // set first move slot to a random egg move if search level is good enough
-    if (genMove)
-        moveDst[0] = GetRandomEggMove(GetEggSpecies(species));
-}
-
-static enum Item DexNavGenerateHeldItem(enum Species species, u8 searchLevel)
-{
-    u16 randVal = Random() % 100;
-    u8 searchLevelInfluence = searchLevel >> 1;
-    enum Item item1 = gSpeciesInfo[species].itemCommon;
-    enum Item item2 = gSpeciesInfo[species].itemRare;
-
-    // if both are the same, 100% to hold
-    if (item1 == item2)
-        return item1;
-
-    // if no items can be held, then yeah...no items
-    if (item2 == ITEM_NONE && item1 == ITEM_NONE)
-        return ITEM_NONE;
-
-    // if only one entry, 50% chance
-    if (item2 == ITEM_NONE && item1 != ITEM_NONE)
-        return (randVal < 50) ? item1 : ITEM_NONE;
-
-    // if both are distinct item1 = 50% + srclvl/2; item2 = 5% + srchlvl/2
-    if (randVal < (50 + searchLevelInfluence + 5 + searchLevel))
-        return (randVal > 5 + searchLevelInfluence) ? item1 : item2;
-    else
-        return ITEM_NONE;
-
-    return ITEM_NONE;
-}
-
-static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel)
-{
-    bool8 genAbility = FALSE;
-    u16 randVal = Random() % 100;
-    u8 abilityNum = 0;
-
-    if (searchLevel < 5)
-    {
-        #if (SEARCHLEVEL0_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL0_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 10)
-    {
-        #if (SEARCHLEVEL5_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL5_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 25)
-    {
-        #if (SEARCHLEVEL10_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL10_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 50)
-    {
-        #if (SEARCHLEVEL25_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL25_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 100)
-    {
-        #if (SEARCHLEVEL50_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL50_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else
-    {
-        #if (SEARCHLEVEL100_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL100_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-
-    if (genAbility
-            && GetSpeciesAbility(species, 2) != ABILITY_NONE
-            && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-    {
-        //Only give hidden ability if Pokemon has been caught before
-        abilityNum = 2;
-    }
-    else
-    {
-        //Pick a normal ability of that Pokemon, the Inclement slot included
-        abilityNum = RollNormalAbilitySlot(species, Random());
-    }
-
-    return abilityNum;
-}
-
-static u8 DexNavGeneratePotential(u8 searchLevel)
-{
-    u8 genChance = 0;
-    int randVal = Random() % 100;
-
-    if (searchLevel < 5)
-    {
-        genChance = SEARCHLEVEL0_ONESTAR + SEARCHLEVEL0_TWOSTAR + SEARCHLEVEL0_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL0_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL0_ONESTAR + SEARCHLEVEL0_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 10)
-    {
-        genChance = SEARCHLEVEL5_ONESTAR + SEARCHLEVEL5_TWOSTAR + SEARCHLEVEL5_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL5_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL5_ONESTAR + SEARCHLEVEL5_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 25)
-    {
-        genChance = SEARCHLEVEL10_ONESTAR + SEARCHLEVEL10_TWOSTAR + SEARCHLEVEL10_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL10_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL10_ONESTAR + SEARCHLEVEL10_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 50)
-    {
-        genChance = SEARCHLEVEL25_ONESTAR + SEARCHLEVEL25_TWOSTAR + SEARCHLEVEL25_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL25_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL25_ONESTAR + SEARCHLEVEL25_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 100)
-    {
-        genChance = SEARCHLEVEL50_ONESTAR + SEARCHLEVEL50_TWOSTAR + SEARCHLEVEL50_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL50_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL50_ONESTAR + SEARCHLEVEL50_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else
-    {
-        genChance = SEARCHLEVEL100_ONESTAR + SEARCHLEVEL100_TWOSTAR + SEARCHLEVEL100_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL100_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL100_ONESTAR + SEARCHLEVEL100_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-
-    return 0;   // No potential
+    return GetEncounterLevelFromMapData(species, environment);
 }
 
 // Searches draw from the map's live roster (src/wild_roster.c), so they find
@@ -1320,9 +826,10 @@ static const u8 sThemeColors[][2] =
 #define INFO_TEXT_WIDTH     (INFO_BOX_WIDTH - 8)
 #define INFO_NAME_WIDTH     (INFO_BOX_WIDTH - 18)   // leaves room for the caught mark
 #define INFO_TYPES_Y        (INFO_TOP + LIST_HEADER_HEIGHT + 3)
-#define INFO_METHOD_Y       (INFO_TYPES_Y + 19)
-#define INFO_RARITY_Y       (INFO_METHOD_Y + 16)
-#define INFO_LEVEL_Y        (INFO_RARITY_Y + 16)
+#define INFO_RARITY_Y       (INFO_TYPES_Y + 11)
+#define INFO_LEVEL_Y        (INFO_RARITY_Y + 12)
+#define INFO_SHINY_Y        (INFO_LEVEL_Y + 14)
+#define INFO_POKERUS_Y      (INFO_SHINY_Y + 20)
 #define INFO_HINT_Y         (INFO_BOTTOM - 28)
 #define INFO_RULE_Y         (INFO_HINT_Y - 4)
 
@@ -1840,6 +1347,35 @@ static bool32 ScrollDexNavToCursor(void)
 
 static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId);
 
+static const u8 sText_ShinyChance[] = _("Shiny");
+static const u8 sText_PokerusChance[] = _("Pokérus");
+static const u8 sText_ChancePercent[] = _("{STR_VAR_1}%");
+static const u8 sText_ChanceHalfPercent[] = _("{STR_VAR_1}.5%");
+static const u8 sText_ChanceFraction[] = _("{STR_VAR_2}/{STR_VAR_1}");
+static const u8 sText_NoSearchOdds[] = _("--");
+
+static void PrintSearchChance(bool32 pokerus, bool32 searchable)
+{
+    u32 chain = GetDexNavChain();
+    u32 y = pokerus ? INFO_POKERUS_Y : INFO_SHINY_Y;
+    const u8 *label = pokerus ? sText_PokerusChance : sText_ShinyChance;
+    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL_NARROW, INFO_TEXT_X, y, sBodyTextColors, TEXT_SKIP_DRAW, label);
+    if (!searchable)
+        StringCopy(gStringVar4, sText_NoSearchOdds);
+    else if (!chain)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, pokerus ? 65536 : 65536 / SHINY_ODDS, STR_CONV_MODE_LEFT_ALIGN, 5);
+        ConvertIntToDecimalStringN(gStringVar2, pokerus ? P_POKERUS_INFECTION_ODDS : 1, STR_CONV_MODE_LEFT_ALIGN, 2);
+        StringExpandPlaceholders(gStringVar4, sText_ChanceFraction);
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar1, pokerus ? chain / 2 : chain, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, pokerus && (chain & 1) ? sText_ChanceHalfPercent : sText_ChancePercent);
+    }
+    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL_NARROW, INFO_TEXT_X, y + 10, sBodyTextColors, TEXT_SKIP_DRAW, gStringVar4);
+}
+
 static void PrintDexNavInfo(void)
 {
     struct DexNavGUI *ui = sDexNavUiDataPtr;
@@ -1872,15 +1408,15 @@ static void PrintDexNavInfo(void)
     if (type2 != type1)
         SetTypeIconPosAndPal(type2, INFO_WINDOW_X + INFO_BOX_X + 2 + 32, LIST_WINDOW_Y + INFO_TYPES_Y, 1);
 
-    name = GetDexNavMethodName(entry->method);
-    AddTextPrinterParameterized3(WIN_INFO, GetFontIdToFit(name, FONT_NORMAL, 0, INFO_TEXT_WIDTH), INFO_TEXT_X, INFO_METHOD_Y,
-                                 sBodyTextColors, TEXT_SKIP_DRAW, name);
-    AddTextPrinterParameterized3(WIN_INFO, FONT_NORMAL, INFO_TEXT_X, INFO_RARITY_Y, sBodyTextColors, TEXT_SKIP_DRAW,
+    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_RARITY_Y, sBodyTextColors, TEXT_SKIP_DRAW,
                                  GetWildRosterRarityName(entry->rarity));
     ConvertIntToDecimalStringN(gStringVar1, entry->minLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, entry->maxLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, entry->minLevel == entry->maxLevel ? sText_DexNavLevel : sText_DexNavLevelRange);
-    AddTextPrinterParameterized3(WIN_INFO, FONT_NORMAL, INFO_TEXT_X, INFO_LEVEL_Y, sBodyTextColors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_LEVEL_Y, sBodyTextColors, TEXT_SKIP_DRAW, gStringVar4);
+
+    PrintSearchChance(FALSE, CanDexNavSearchFor(entry));
+    PrintSearchChance(TRUE, CanDexNavSearchFor(entry));
 
     FillWindowPixelRect(WIN_INFO, PIXEL_FILL(COLOR_SHADOW), INFO_TEXT_X, INFO_RULE_Y, INFO_TEXT_WIDTH, 1);
     AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_HINT_Y, sBodyTextColors, TEXT_SKIP_DRAW,
@@ -2358,24 +1894,6 @@ static void Task_DexNavMain(u8 taskId)
 /////////////////////////
 //// GENERAL UTILITY ////
 /////////////////////////
-u32 CalculateDexNavShinyRolls(void)
-{
-    u32 chainBonus, rndBonus;
-    u8 chain = gSaveBlock3Ptr->dexNavChain;
-
-    chainBonus = (chain >= 100) ? 10 : (chain >= 50) ? 5 : 0;
-    rndBonus = (Random() % 100 < 4) ? 4 : 0;
-    return chainBonus + rndBonus;
-}
-
-void TryIncrementSpeciesSearchLevel()
-{
-#if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER && gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies] < 255)
-        gSaveBlock3Ptr->dexNavSearchLevels[gDexNavSpecies]++;
-#endif
-}
-
 void ResetDexNavSearch(void)
 {
     gSaveBlock3Ptr->dexNavChain = 0;    //reset dex nav chaining on new map
@@ -2454,8 +1972,7 @@ bool32 Test_DexNavCreateSearchMon(enum Species species, enum EncounterType envir
     found = sDexNavSearchDataPtr->monLevel != MON_LEVEL_NONEXISTENT;
     if (found)
     {
-        GenerateDexNavSearchTraits();
-        CreateDexNavSearchMon();
+            CreateDexNavSearchMon();
     }
     gDexNavSpecies = SPECIES_NONE;
     Free(sDexNavSearchDataPtr);

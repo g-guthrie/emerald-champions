@@ -669,7 +669,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 6,
-        .paletteNum = 6,
+        .paletteNum = 9,
         .baseBlock = 507,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_RIGHT] = {
@@ -678,7 +678,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 3,
         .height = 6,
-        .paletteNum = 6,
+        .paletteNum = 9,
         .baseBlock = 543,
     },
     [PSS_DATA_WINDOW_EXP] = {
@@ -1458,6 +1458,9 @@ static bool8 DecompressGraphics(void)
     case 6:
         LoadPalette(gSummaryScreen_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
         LoadPalette(&gPPTextPalette, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
+        LoadPalette(gSummaryScreen_Pal + BG_PLTT_ID(6), BG_PLTT_ID(9), PLTT_SIZE_4BPP);
+        static const u16 gold[] = {RGB(12, 7, 0), RGB(25, 17, 0)};
+        LoadPalette(gold, BG_PLTT_ID(9) + 14, sizeof(gold));
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
@@ -3301,13 +3304,30 @@ static void PrintMonOTID(void)
 static void PrintMonAbilityName(void)
 {
     enum Ability ability = GetAbilityBySpeciesForOwner(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum, sMonSummaryScreen->summary.isTrainerOwned);
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
+    PrintTextOnWindowToFit(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
 }
+
+static u32 SummaryAbilityDescriptionFont(const u8 *text)
+{
+    u32 font = FONT_NORMAL;
+    for (const u8 *p = text; *p != EOS; p++)
+        if (*p == CHAR_NEWLINE)
+            font = FONT_SMALL_NARROW; // Two 8-pixel lines below the name.
+    return GetFontIdToFit(text, font, 0, 18 * 8);
+}
+
+#if TESTING
+u32 Test_SummaryAbilityDescriptionFont(const u8 *text)
+{
+    return SummaryAbilityDescriptionFont(text);
+}
+#endif
 
 static void PrintMonAbilityDescription(void)
 {
     enum Ability ability = GetAbilityBySpeciesForOwner(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum, sMonSummaryScreen->summary.isTrainerOwned);
-    PrintTextOnWindowToFit(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].description, 0, 17, 0, 0);
+    const u8 *text = gAbilitiesInfo[ability].description;
+    PrintTextOnWindowWithFont(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), text, 0, 16, 0, 0, SummaryAbilityDescriptionFont(text));
 }
 
 static void BufferMonTrainerMemo(void)
@@ -3602,15 +3622,17 @@ static void PrintRibbonCount(void)
 
 static void BufferStat(u8 *dst, enum Stat statIndex, u32 stat, u32 strId, u32 n)
 {
-    static const u8 sTextNatureDown[] = _("{COLOR}{08}");
-    static const u8 sTextNatureUp[] = _("{COLOR}{05}");
-    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
+    static const u8 sTextNatureDown[] = _("{COLOR}{08}{SHADOW}{02}");
+    static const u8 sTextNatureUp[] = _("{COLOR}{05}{SHADOW}{02}");
+    static const u8 sTextNaturePokerus[] = _("{COLOR DYNAMIC_COLOR6}{SHADOW DYNAMIC_COLOR5}");
+    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}{SHADOW}{02}");
     u8 *txtPtr;
 
     if (statIndex == 0 || !P_SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.nature].statUp == gNaturesInfo[sMonSummaryScreen->summary.nature].statDown)
         txtPtr = StringCopy(dst, sTextNatureNeutral);
     else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.nature].statUp)
-        txtPtr = StringCopy(dst, sTextNatureUp);
+        txtPtr = StringCopy(dst, sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_STATS
+            && IsPokerusNatureBoosted(&sMonSummaryScreen->currentMon, statIndex) ? sTextNaturePokerus : sTextNatureUp);
     else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.nature].statDown)
         txtPtr = StringCopy(dst, sTextNatureDown);
     else

@@ -32,9 +32,9 @@ enum EncounterType
 void EndDexNavSearch(void);
 void Task_OpenDexNavFromStartMenu(u8 taskId);
 bool32 TryStartDexNavSearch(void);
-void TryIncrementSpeciesSearchLevel(void);
 void ResetDexNavSearch(void);
-u32 CalculateDexNavShinyRolls(void);
+u32 GetDexNavChain(void);
+void ApplyDexNavChainRewards(struct Pokemon *mon);
 void IncrementDexNavChain(void);
 void GiveDexNavIfNeeded(void);
 bool32 OnStep_DexNavSearch(void);

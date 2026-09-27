@@ -15,6 +15,7 @@
 #include "main.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "dexnav.h"
 #include "save.h"
 #include "script.h"
 #include "script_pokemon_util.h"
@@ -157,6 +158,27 @@ void EmeraldChampionsStudioPoll(void)
         break;
     case 8:
         gEcStudioResult = AddBagItem(gEcStudioArgs[0], gEcStudioArgs[1]) ? 1 : 4;
+        break;
+    case 9: // Explicit hunt/summary fixture state; never compiled into releases.
+        if (gEcStudioArgs[0] > DEXNAV_CHAIN_MAX || gEcStudioArgs[1] >= PARTY_SIZE
+         || (gEcStudioArgs[2] != 0 && gEcStudioArgs[2] != 0xFC
+          && gEcStudioArgs[2] != 0xFD && gEcStudioArgs[2] != 0xFE)
+         || gEcStudioArgs[3] >= NUM_NATURES)
+        {
+            gEcStudioResult = 4;
+            break;
+        }
+        gSaveBlock3Ptr->dexNavChain = gEcStudioArgs[0];
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gEcStudioArgs[1]];
+            u32 pokerus = gEcStudioArgs[2], nature = gEcStudioArgs[3];
+            SetMonData(mon, MON_DATA_POKERUS, &pokerus);
+            SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
+            u32 status = gEcStudioArgs[4] & STATUS1_ANY;
+            SetMonData(mon, MON_DATA_STATUS, &status);
+            CalculateMonStats(mon);
+        }
+        gEcStudioResult = 1;
         break;
     default:
         gEcStudioResult = 4;

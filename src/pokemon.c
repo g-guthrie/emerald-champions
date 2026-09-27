@@ -894,9 +894,6 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 
     totalRerolls += CalculateChainFishingShinyRolls();
 
-    if (gDexNavSpecies)
-        totalRerolls += CalculateDexNavShinyRolls();
-
     while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
     {
         personality = Random32();
@@ -1421,6 +1418,11 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
 
         s32 n = CalculateSpeciesStatForOwner(species, nature, i, level, ev[i],
                                              GetMonData(mon, MON_DATA_HP_IV + i), trainerOwned);
+        // Recalculate from the unmodified stat, avoiding double rounding.
+        // The saved infection survives recovery, boxing and future nature changes.
+        if (IsPokerusNatureBoosted(mon, i))
+            n = CalculateSpeciesStatForOwner(species, NATURE_HARDY, i, level, ev[i],
+                                            GetMonData(mon, MON_DATA_HP_IV + i), trainerOwned) * 120 / 100;
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
         SetMonData(mon, MON_DATA_MAX_HP + i, &n);
