@@ -28,12 +28,13 @@ Route117_EventScript_DaycareAcceptEgg::
 	end
 
 Route117_EventScript_DaycareReceiveEgg::
+	specialvar VAR_RESULT, GiveEggFromDaycare
+	goto_if_eq VAR_RESULT, FALSE, Route117_PokemonDayCare_EventScript_PartyRuleRefusal
 	message Route117_Text_ReceivedEgg
 	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	waitbuttonpress
 	msgbox Route117_Text_TakeGoodCareOfIt, MSGBOX_DEFAULT
-	special GiveEggFromDaycare
 	release
 	end
 
@@ -315,11 +316,9 @@ Route117_PokemonDayCare_Text_GoodToSeeYou:
 	.string "Your Pokémon can only be doing good!$"
 
 Route117_PokemonDayCare_Text_PartyRuleRefusal:
-	.string "Oh, dear. Your team already has one\n"
-	.string "of that special kind with it.\p"
-	.string "A party may hold 1 Legendary or\n"
-	.string "Mythical, 1 Ultra Beast and\l"
-	.string "1 Paradox Pokémon.\p"
+	.string "Your special Pokémon slot is full.\p"
+	.string "Legendary, Mythical, Ultra Beast\n"
+	.string "or Paradox: one total per party.\p"
 	.string "Store that one in the PC first,\n"
 	.string "then come back for this one.$"
 

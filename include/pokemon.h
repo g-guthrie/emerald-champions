@@ -830,6 +830,7 @@ enum RestrictedPartyClass
 enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species);
 bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot);
 bool32 PlayerPartyWithinRestrictedLimit(void);
+s32 GetUniquePartyRestrictedSlot(void);
 bool32 PlayerPartyLeagueEligible(void);
 bool32 ClampMonToPlayerLevelCap(struct Pokemon *mon);
 void MaxPlayerMonIVs(struct Pokemon *mon);
@@ -837,6 +838,7 @@ void SetPlayerMonBaselineEVs(struct Pokemon *mon);
 void MaxPlayerIVsIfNeeded(void);
 bool32 ClampBoxMonToPlayerLevelCap(struct BoxPokemon *mon);
 u8 CopyMonToPC(struct Pokemon *mon);
+bool32 ReturnBoxMonHeldItemToBag(struct BoxPokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);
 u8 GetMonsStateToDoubles(void);

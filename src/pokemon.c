@@ -3118,7 +3118,7 @@ bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot)
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
         if ((s32)slot != replacedSlot
-         && GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) == kind)
+         && GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_NONE)
             return FALSE;
     }
     return TRUE;
@@ -3126,23 +3126,19 @@ bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot)
 
 bool32 PlayerPartyWithinRestrictedLimit(void)
 {
-    u8 legends = 0, ultraBeasts = 0, paradoxes = 0;
+    u32 restrictedCount = 0;
 
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        switch (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)))
-        {
-        case RESTRICTED_PARTY_LEGENDARY: legends++; break;
-        case RESTRICTED_PARTY_ULTRA_BEAST: ultraBeasts++; break;
-        case RESTRICTED_PARTY_PARADOX: paradoxes++; break;
-        default: break;
-        }
+        if (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_NONE
+         && ++restrictedCount > 1)
+            return FALSE;
     }
-    return legends <= 1 && ultraBeasts <= 1 && paradoxes <= 1;
+    return TRUE;
 }
 
 // The League door uses the same party rule as everywhere else: at most one
-// Legendary-class, one Ultra Beast and one Paradox Pokemon.
+// Legendary, Mythical, Ultra Beast or Paradox Pokemon in total.
 bool32 PlayerPartyLeagueEligible(void)
 {
     return PlayerPartyWithinRestrictedLimit();
@@ -3171,7 +3167,7 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
         return CopyMonToPC(mon);
 
     memcpy(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
-    gPartiesCount[B_TRAINER_PLAYER] = i + 1;
+    CalculatePlayerPartyCount();
     EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
     return MON_GIVEN_TO_PARTY;
 }
@@ -3182,6 +3178,21 @@ u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
     SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
     return GiveMonToPartyOrPC(mon);
+}
+
+bool32 ReturnBoxMonHeldItemToBag(struct BoxPokemon *mon)
+{
+    enum Item item = GetBoxMonData(mon, MON_DATA_HELD_ITEM);
+
+    // Mail needs its message preserved. If the Bag is full, keep the item
+    // with its holder instead of losing it or preventing a capture.
+    if (item == ITEM_NONE || ItemIsMail(item) || !AddBagItem(item, 1))
+        return FALSE;
+
+    item = ITEM_NONE;
+    SetBoxMonData(mon, MON_DATA_HELD_ITEM, &item);
+    TryBoxMonFormChange(mon, FORM_CHANGE_ITEM_HOLD);
+    return TRUE;
 }
 
 u8 CopyMonToPC(struct Pokemon *mon)
@@ -3202,6 +3213,7 @@ u8 CopyMonToPC(struct Pokemon *mon)
                 MonRestorePP(mon);
                 memcpy(checkingMon, &mon->box, sizeof(mon->box));
                 EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
+                ReturnBoxMonHeldItemToBag(checkingMon);
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (GetPCBoxToSendMon() != boxNo)
@@ -3219,12 +3231,12 @@ u8 CopyMonToPC(struct Pokemon *mon)
     return MON_CANT_GIVE;
 }
 
-static s32 GetUniquePartyLegendarySlot(void)
+s32 GetUniquePartyRestrictedSlot(void)
 {
     s32 found = PARTY_SIZE;
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        if (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_LEGENDARY)
+        if (GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) == RESTRICTED_PARTY_NONE)
             continue;
         if (found != PARTY_SIZE)
             return -1;
@@ -3233,7 +3245,7 @@ static s32 GetUniquePartyLegendarySlot(void)
     return found;
 }
 
-// A gift was already placed safely in the PC. Replacing the party Legendary
+// A gift was already placed safely in the PC. Replacing the party special Pokemon
 // swaps that exact box slot, so even a now-full PC cannot lose either Pokémon.
 u16 GetBoxedLegendaryGiftSwapStatus(void)
 {
@@ -3242,10 +3254,10 @@ u16 GetBoxedLegendaryGiftSwapStatus(void)
         return 0;
 
     struct BoxPokemon *gift = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
-    if (GetRestrictedPartyClass(GetBoxMonData(gift, MON_DATA_SPECIES)) != RESTRICTED_PARTY_LEGENDARY)
+    if (GetRestrictedPartyClass(GetBoxMonData(gift, MON_DATA_SPECIES)) == RESTRICTED_PARTY_NONE)
         return 0;
 
-    s32 slot = GetUniquePartyLegendarySlot();
+    s32 slot = GetUniquePartyRestrictedSlot();
     if (slot < 0 || slot >= PARTY_SIZE)
         return 0;
 
@@ -3259,7 +3271,7 @@ u16 SwapBoxedLegendaryGiftWithParty(void)
     if (GetBoxedLegendaryGiftSwapStatus() != 1)
         return FALSE;
 
-    s32 slot = GetUniquePartyLegendarySlot();
+    s32 slot = GetUniquePartyRestrictedSlot();
     struct BoxPokemon *giftBox = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
     struct Pokemon gift;
     struct Pokemon old = gParties[B_TRAINER_PLAYER][slot];
@@ -3268,6 +3280,7 @@ u16 SwapBoxedLegendaryGiftWithParty(void)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
     *giftBox = old.box;
+    ReturnBoxMonHeldItemToBag(giftBox);
     gParties[B_TRAINER_PLAYER][slot] = gift;
     CalculatePlayerPartyCount();
     return TRUE;

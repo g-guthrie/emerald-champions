@@ -298,6 +298,20 @@ static void Cmd_settypetoenvironment(void);
 static void Cmd_snatchsetbattlers(void);
 static void Cmd_handleballthrow(void);
 static void Cmd_givecaughtmon(void);
+#if TESTING
+void Test_GiveCaughtMonStep(u32 phase)
+{
+    // Exercise the native command without opening its yes/no window.
+    if (phase == 0)
+        gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_CHECK_PARTY_SIZE;
+    else if (phase == 1)
+        gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_HANDLE_CHOSEN_MON;
+    else
+        gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
+    Cmd_givecaughtmon();
+}
+#endif
+
 static void Cmd_trysetcaughtmondexflags(void);
 static void Cmd_displaydexinfo(void);
 static void Cmd_trygivecaughtmonnick(void);
@@ -6474,6 +6488,13 @@ u8 GetCatchingBattler(void)
         return GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
 }
 
+bool32 IsCaughtMonStorageFull(void)
+{
+    enum Species species = GetMonData(GetBattlerMon(GetCatchingBattler()), MON_DATA_SPECIES);
+    return (CalculatePlayerPartyCount() == PARTY_SIZE || !CanAddRestrictedMonToParty(species, PARTY_SIZE))
+        && IsPokemonStorageFull();
+}
+
 static void FinalizeCapture(void)
 {
     enum PokeBall ballId = ItemIdToBallId(gLastThrownBall);
@@ -6978,16 +6999,6 @@ static void Cmd_givecaughtmon(void)
     switch (state)
     {
     case GIVECAUGHTMON_CHECK_PARTY_SIZE:
-        // An extra Legendary or Ultra Beast goes directly to storage; the
-        // optional full-party swap must not put it beside one already active.
-        if (!CanAddRestrictedMonToParty(
-                GetMonData(GetBattlerMon(GetCatchingBattler()), MON_DATA_SPECIES),
-                PARTY_SIZE))
-        {
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NO_MESSAGE_SKIP;
-            gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
-            break;
-        }
 #if EC_HEADLESS_FIXTURES
         if (EmeraldChampionsHeadlessAutoCaptureActive())
         {
@@ -6998,7 +7009,22 @@ static void Cmd_givecaughtmon(void)
             break;
         }
 #endif
-        if (CalculatePlayerPartyCount() == PARTY_SIZE && B_CATCH_SWAP_INTO_PARTY >= GEN_7)
+        if (!CanAddRestrictedMonToParty(GetMonData(GetBattlerMon(GetCatchingBattler()), MON_DATA_SPECIES), PARTY_SIZE))
+        {
+            s32 slot = GetUniquePartyRestrictedSlot();
+            if (slot >= 0 && slot < PARTY_SIZE && B_CATCH_SWAP_INTO_PARTY >= GEN_7)
+            {
+                GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_NICKNAME, gStringVar1);
+                PrepareStringBattleWithWait(STRINGID_SWAPSPECIALMON, gBattlerAttacker);
+                gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_ASK_ADD_TO_PARTY;
+            }
+            else
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NO_MESSAGE_SKIP;
+                gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
+            }
+        }
+        else if (CalculatePlayerPartyCount() == PARTY_SIZE && B_CATCH_SWAP_INTO_PARTY >= GEN_7)
         {
             PrepareStringBattleWithWait(STRINGID_SENDCAUGHTMONPARTYORBOX, gBattlerAttacker);
             gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_ASK_ADD_TO_PARTY;
@@ -7036,7 +7062,17 @@ static void Cmd_givecaughtmon(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
-                gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_DO_CHOOSE_MON;
+                if (!CanAddRestrictedMonToParty(GetMonData(GetBattlerMon(GetCatchingBattler()), MON_DATA_SPECIES), PARTY_SIZE))
+                {
+                    // The prompt named this one occupied special slot. Do not
+                    // offer ordinary party members as invalid replacements.
+                    gSelectedMonPartyId = GetUniquePartyRestrictedSlot();
+                    gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_HANDLE_CHOSEN_MON;
+                }
+                else
+                {
+                    gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_DO_CHOOSE_MON;
+                }
             }
             else
             {
@@ -7119,6 +7155,7 @@ static void Cmd_givecaughtmon(void)
                 break;
         }
 
+        bool32 specialSlotFull = !CanAddRestrictedMonToParty(GetMonData(caughtMon, MON_DATA_SPECIES), PARTY_SIZE);
         u8 giveResult = GiveCapturedMonToPlayer(caughtMon);
         // A caught mon can occupy a slot that was empty at battle start (or
         // was cleared by catch-and-swap). Make its authored held item the new
@@ -7156,6 +7193,9 @@ static void Cmd_givecaughtmon(void)
             if (FlagGet(FLAG_SYS_PC_LANETTE))
                 gBattleCommunication[MULTISTRING_CHOOSER]++;
         }
+
+        if (specialSlotFull && giveResult == MON_GIVEN_TO_PC)
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SPECIAL_SENT_TO_PC;
 
         // Copy changedSpecies to allow caught mon to revert to its original species.
         if (emptySlot != PARTY_SIZE)

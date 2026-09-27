@@ -56,6 +56,7 @@ bool32 TryResetBattlerStatChanges(enum BattlerId battler);
 bool32 CanCamouflage(enum BattlerId battler);
 bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId battlerItem, enum Item itemOverride);
 u8 GetCatchingBattler(void);
+bool32 IsCaughtMonStorageFull(void);
 #if EC_HEADLESS_FIXTURES
 void BattleDebug_CaptureBattle(void);
 #endif

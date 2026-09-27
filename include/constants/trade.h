@@ -40,6 +40,7 @@ enum CanTradeMon
 #define PLAYER_MON_INVALID   0
 #define BOTH_MONS_VALID      1
 #define PARTNER_MON_INVALID  2
+#define TRADE_RESTRICTED_PARTY 3
 
 // Return values for GetGameProgressForLinkTrade
 #define TRADE_BOTH_PLAYERS_READY      0

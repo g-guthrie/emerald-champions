@@ -2,6 +2,7 @@
 #include "move.h"
 #include "item_use.h"
 #include "battle.h"
+#include "battle_script_commands.h"
 #include "battle_anim.h"
 #include "battle_stat_change.h"
 #include "battle_pyramid.h"
@@ -1110,7 +1111,7 @@ static u32 GetBallThrowableState(void)
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
      && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
         return BALL_THROW_UNABLE_TWO_MONS;
-    else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
+    else if (IsCaughtMonStorageFull() == TRUE)
         return BALL_THROW_UNABLE_NO_ROOM;
     else if (GetConfig(B_SEMI_INVULNERABLE_CATCH) >= GEN_4 &&  IsSemiInvulnerable(GetCatchingBattler(), CHECK_ALL))
         return BALL_THROW_UNABLE_SEMI_INVULNERABLE;

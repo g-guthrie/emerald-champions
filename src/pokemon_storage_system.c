@@ -1056,7 +1056,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_MARK_POKE]            = {COMPOUND_STRING("Mark your Pokémon."),         MSG_VAR_NONE},
     [MSG_LAST_POKE]            = {COMPOUND_STRING("That's your last Pokémon!"),  MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,                          MSG_VAR_NONE},
-    [MSG_RESTRICTED_PARTY]     = {COMPOUND_STRING("1 Legendary/Mythical, 1 Ultra\nBeast, 1 Paradox per party."), MSG_VAR_NONE},
+    [MSG_RESTRICTED_PARTY]     = {COMPOUND_STRING("Only 1 Legendary, Mythical,\nUltra Beast or Paradox total."), MSG_VAR_NONE},
     [MSG_HOLDING_POKE]         = {COMPOUND_STRING("You're holding a Pokémon!"),  MSG_VAR_NONE},
     [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("Which one will you take?"),   MSG_VAR_NONE},
     [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("You can't release an Egg."),  MSG_VAR_NONE},
@@ -6277,6 +6277,12 @@ static bool8 MonPlaceChange_Shift(void)
         {
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
             SetShiftedMonData(sStorage->shiftBoxId, sCursorPosition);
+            if (sStorage->shiftBoxId != TOTAL_BOXES_COUNT)
+            {
+                // Returning a held item can change the deposited mon's form.
+                DestroyBoxMonIconAtPosition(sCursorPosition);
+                CreateBoxMonIconAtPos(sCursorPosition);
+            }
             sStorage->monPlaceChangeState++;
         }
         break;
@@ -6426,6 +6432,9 @@ static void SetPlacedMonData(u8 boxId, u8 position)
     else
     {
         SetBoxMonAt(boxId, position, &sStorage->movingMon.box);
+        if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT
+         && ReturnBoxMonHeldItemToBag(&gPokemonStoragePtr->boxes[boxId][position]))
+            sRefreshDisplayMonGfx = TRUE;
         SetMonFormPSS(&gPokemonStoragePtr->boxes[boxId][position], FORM_CHANGE_DEPOSIT);
     }
 }
@@ -6584,6 +6593,21 @@ static bool32 AtLeastThreeUsableMons(void)
 }
 
 #if TESTING
+void Test_StoragePlaceMon(struct Pokemon *mon, bool32 fromParty, bool32 toParty)
+{
+    struct PokemonStorageSystemData *savedStorage = sStorage;
+    u8 savedOrigin = sMovingMonOrigBoxId;
+    bool8 savedRefresh = sRefreshDisplayMonGfx;
+    sStorage = AllocZeroed(sizeof(*sStorage));
+    sStorage->movingMon = *mon;
+    sMovingMonOrigBoxId = fromParty ? TOTAL_BOXES_COUNT : 0;
+    SetPlacedMonData(toParty ? TOTAL_BOXES_COUNT : 0, 0);
+    Free(sStorage);
+    sStorage = savedStorage;
+    sMovingMonOrigBoxId = savedOrigin;
+    sRefreshDisplayMonGfx = savedRefresh;
+}
+
 bool32 Test_StorageFailedSelection(void)
 {
     MainCallback callback = gMain.callback2;

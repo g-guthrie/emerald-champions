@@ -147,14 +147,41 @@ TEST("Nursery withdrawal obeys the party rule like a PC withdrawal")
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_GROUDON, 50, 0, OTID_STRUCT_PLAYER_ID);
     gPartiesCount[B_TRAINER_PLAYER] = 1;
     EXPECT(!CanTakeDaycareMonWithinPartyRule());
-    // An Ultra Beast is a different class and is still allowed.
+    // An Ultra Beast shares the same slot and is also refused.
     CreateMon(&mon, SPECIES_NIHILEGO, 50, 0, OTID_STRUCT_PLAYER_ID);
     gSaveBlock1Ptr->daycare.mons[0].mon = mon.box;
-    EXPECT(CanTakeDaycareMonWithinPartyRule());
+    EXPECT(!CanTakeDaycareMonWithinPartyRule());
     // An out-of-range slot never passes.
     gSpecialVar_0x8004 = 2;
     EXPECT(!CanTakeDaycareMonWithinPartyRule());
     gSpecialVar_0x8004 = 0;
     ZeroPlayerPartyMons();
+    ResetNursery();
+}
+
+TEST("Nursery Phione egg waits safely while the shared special slot is occupied")
+{
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_SHAYMIN; }
+    PARAMETRIZE { species = SPECIES_KARTANA; }
+    PARAMETRIZE { species = SPECIES_FLUTTER_MANE; }
+    struct Pokemon mon;
+    ResetNursery();
+    CreateMon(&mon, SPECIES_MANAPHY, 25, 0, OTID_STRUCT_PLAYER_ID);
+    gSaveBlock1Ptr->daycare.mons[0].mon = mon.box;
+    CreateMon(&mon, SPECIES_DITTO, 25, 0, OTID_STRUCT_PLAYER_ID);
+    gSaveBlock1Ptr->daycare.mons[1].mon = mon.box;
+    TriggerPendingDaycareEgg();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], species, 25, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT(!GiveEggFromDaycare());
+    EXPECT(FlagGet(FLAG_PENDING_DAYCARE_EGG));
+    EXPECT_EQ(CalculatePlayerPartyCount(), 1);
+    EXPECT(PlayerPartyWithinRestrictedLimit());
+    ZeroPlayerPartyMons();
+    EXPECT(GiveEggFromDaycare());
+    EXPECT(!FlagGet(FLAG_PENDING_DAYCARE_EGG));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PHIONE);
+    EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG));
+    EXPECT(!CanAddRestrictedMonToParty(species, PARTY_SIZE));
     ResetNursery();
 }

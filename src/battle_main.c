@@ -4097,7 +4097,7 @@ static void HandleTurnActionSelectionState(void)
                     MarkBattlerForControllerExec(battler);
                     break;
                 case B_ACTION_SAFARI_BALL:
-                    if (IsPlayerPartyAndPokemonStorageFull())
+                    if (IsCaughtMonStorageFull())
                     {
                         gSelectionBattleScripts[battler] = BattleScript_PrintFullBox;
                         gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;

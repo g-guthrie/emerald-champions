@@ -26,17 +26,24 @@ static bool32 StringVarIs(const u8 *buffer, u32 value)
     return StringCompare(buffer, expected) == 0;
 }
 
-TEST("Champions Circuit desk: entry enforces the one/one/one party rule")
+TEST("Champions Circuit desk: entry enforces the shared special Pokemon slot")
 {
     PrepareSixBulbasaur(20);
     ChampionsCircuitCanEnter();
     EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_OK);
 
-    // One of each restricted class is legal.
+    // One special Pokemon is legal.
     CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEWTWO, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
-    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_KARTANA, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
-    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][2], SPECIES_FLUTTER_MANE, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    ChampionsCircuitCanEnter();
     EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_OK);
+
+    // Mixing restricted classes still exceeds the shared slot.
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_KARTANA, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    ChampionsCircuitCanEnter();
+    EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_PARTY_RULE);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][2], SPECIES_FLUTTER_MANE, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    ChampionsCircuitCanEnter();
+    EXPECT_EQ(gSpecialVar_Result, CIRCUIT_ENTRY_PARTY_RULE);
 
     // A second Legendary closes the desk with the party-rule answer.
     CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][3], SPECIES_LUGIA, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);

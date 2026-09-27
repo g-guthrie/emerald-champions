@@ -288,9 +288,9 @@ BattleFrontier_BattleTowerLobby_Text_CircuitTakeChallenge:
 	.string "Champions Circuit?$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitRules:
-	.string "Bring six Pokémon and no Eggs. Only\n"
-	.string "one Legendary or Mythical, one Ultra\l"
-	.string "Beast and one Paradox may join.\p"
+	.string "Bring six Pokémon and no Eggs.\p"
+	.string "Legendary, Mythical, Ultra Beast\n"
+	.string "or Paradox: one total per party.\p"
 	.string "Every battle is a Double Battle at\n"
 	.string "Lv. 100. Your difficulty setting\l"
 	.string "decides how tough the first foe is.\p"
@@ -341,10 +341,9 @@ BattleFrontier_BattleTowerLobby_Text_CircuitLocked:
 	.string "have entered the Hall of Fame.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitPartyRule:
-	.string "The Circuit follows the party rule:\n"
-	.string "one Legendary or Mythical Pokémon,\l"
-	.string "one Ultra Beast and one Paradox\l"
-	.string "Pokémon at most.$"
+	.string "Choose one special Pokémon:\n"
+	.string "Legendary, Mythical, Ultra Beast\l"
+	.string "or Paradox. One total per party.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitNeedsParty:
 	.string "The Circuit needs six Pokémon able\n"

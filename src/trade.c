@@ -98,6 +98,7 @@ enum {
     MSG_MON_CANT_BE_TRADED,
     MSG_EGG_CANT_BE_TRADED,
     MSG_FRIENDS_MON_CANT_BE_TRADED,
+    MSG_RESTRICTED_PARTY,
 };
 
 // IDs for QueueAction
@@ -111,6 +112,7 @@ enum {
     QUEUE_MON_CANT_BE_TRADED,
     QUEUE_EGG_CANT_BE_TRADED,
     QUEUE_FRIENDS_MON_CANT_BE_TRADED,
+    QUEUE_RESTRICTED_PARTY,
 };
 
 #define QUEUE_DELAY_MSG   3
@@ -1551,7 +1553,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     partnerSpecies = GetMonData(&gParties[B_TRAINER_OPPONENT_A][partnerMonIdx], MON_DATA_SPECIES);
 
     if (!CanAddRestrictedMonToParty(partnerSpecies, playerMonIdx))
-        return PARTNER_MON_INVALID;
+        return TRADE_RESTRICTED_PARTY;
 
     // Can't trade specific species
     if (gSpeciesInfo[partnerSpecies].cannotBeTraded)
@@ -1591,6 +1593,9 @@ static bool32 CheckMonsBeforeTrade(void)
         QueueAction(QUEUE_DELAY_MSG, QUEUE_STANDBY);
         SetLinkData(LINKCMD_INIT_BLOCK, 0);
         break;
+    case TRADE_RESTRICTED_PARTY:
+        QueueAction(QUEUE_DELAY_MSG, QUEUE_RESTRICTED_PARTY);
+        return TRUE;
     case PARTNER_MON_INVALID:
         QueueAction(QUEUE_DELAY_MSG, QUEUE_FRIENDS_MON_CANT_BE_TRADED);
         return TRUE;
@@ -2182,6 +2187,9 @@ static void DoQueuedActions(void)
                     break;
                 case QUEUE_EGG_CANT_BE_TRADED:
                     PrintTradeMessage(MSG_EGG_CANT_BE_TRADED);
+                    break;
+                case QUEUE_RESTRICTED_PARTY:
+                    PrintTradeMessage(MSG_RESTRICTED_PARTY);
                     break;
                 case QUEUE_FRIENDS_MON_CANT_BE_TRADED:
                     PrintTradeMessage(MSG_FRIENDS_MON_CANT_BE_TRADED);
@@ -3354,6 +3362,13 @@ static void FinishInGameTrade(void)
 }
 
 #if TESTING
+u8 Test_CheckValidityOfTradeMons(u8 playerSlot, u8 partnerSlot)
+{
+    u8 aliveMons[PARTY_SIZE];
+    memset(aliveMons, TRUE, sizeof(aliveMons));
+    return CheckValidityOfTradeMons(aliveMons, CalculatePlayerPartyCount(), playerSlot, partnerSlot);
+}
+
 void Test_FinishInGameTrade(void)
 {
     MainCallback after = gCB2_AfterEvolution;

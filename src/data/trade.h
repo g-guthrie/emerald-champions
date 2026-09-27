@@ -380,7 +380,8 @@ static const u8 *const sMessages[] =
     [MSG_FRIEND_WANTS_TO_TRADE]      = sText_YourFriendWantsToTrade,
     [MSG_MON_CANT_BE_TRADED]         = gText_PkmnCantBeTradedNow,
     [MSG_EGG_CANT_BE_TRADED]         = gText_EggCantBeTradedNow,
-    [MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
+    [MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded,
+    [MSG_RESTRICTED_PARTY] = COMPOUND_STRING("Only 1 Legendary, Mythical,\nUltra Beast or Paradox total.")
 };
 
 static const u8 sTradeTextColors[] =

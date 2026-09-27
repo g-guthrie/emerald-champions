@@ -54,6 +54,7 @@ or data.
 - Wild legends: ordinary 1% slots (at most two per table), Ultra Beasts and
   Paradox 2-3%, ordinary slots never below 2%; gates in
   `src/data/pokemon/legendary_signs.h`. Legend-class spawns arrive at the
-  current cap with competitive sets. One Legendary/Mythical, one Ultra Beast and
-  one Paradox per party. Static legends are high stakes: a knockout loses one.
+  current cap with competitive sets. One Legendary, Mythical, Ultra Beast or
+  Paradox per party in total; ordinary and pseudo-legendary Pokemon have no
+  category limit. Static legends are high stakes: a knockout loses one.
   No percentages in dialogue.

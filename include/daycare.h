@@ -24,7 +24,7 @@ u8 GetNumLevelsGainedFromDaycare(void);
 void TriggerPendingDaycareEgg(void);
 void RejectEggFromDayCare(void);
 void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLocation);
-void GiveEggFromDaycare(void);
+bool32 GiveEggFromDaycare(void);
 bool8 ShouldEggHatch(void);
 enum Species GetSelectedMonNicknameAndSpecies(void);
 void GetDaycareMonNicknames(void);

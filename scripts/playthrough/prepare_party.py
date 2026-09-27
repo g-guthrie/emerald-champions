@@ -26,8 +26,8 @@ PREP_RESULTS = {
     10: 'ability not available to this species',
     11: 'bad held item',
     12: 'bad EV spread',
-    13: ('restricted party: the game allows one Legendary/Mythical, one Ultra Beast and one '
-         'Paradox Pokemon per party, and this is a second one of its class'),
+    13: ('restricted party: only one Legendary, Mythical, Ultra Beast or Paradox '
+         'Pokemon is allowed per party in total'),
 }
 
 

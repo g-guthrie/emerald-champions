@@ -44,6 +44,8 @@ Common_EventScript_LegendaryGiftSwapDone:
 	return
 
 Common_Text_ReplacePartyLegendary:
+	.string "Legendary, Mythical, Ultra Beast\n"
+	.string "or Paradox: one total per party.\p"
 	.string "Send {STR_VAR_1} to the PC and put\n"
 	.string "{STR_VAR_2} in your party?$"
 
@@ -53,6 +55,8 @@ Common_Text_SwappedPartyLegendary:
 	.string "{STR_VAR_3}.$"
 
 Common_Text_PartyLegendaryHasMail:
+	.string "Legendary, Mythical, Ultra Beast\n"
+	.string "or Paradox: one total per party.\p"
 	.string "{STR_VAR_1} has Mail attached.\n"
 	.string "Remove it before swapping.\p"
 	.string "Your gift is safe in the PC.$"

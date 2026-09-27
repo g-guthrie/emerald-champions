@@ -336,8 +336,8 @@ u16 TakePokemonFromDaycare(void)
     return TakeSelectedPokemonMonFromDaycareShiftSlots(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
-// Special: the party rule (one Legendary/Mythical, one Ultra Beast, one
-// Paradox) applies to a withdrawal from the board exactly as it does to a PC
+// Special: the shared slot for one Legendary, Mythical, Ultra Beast or
+// Paradox applies to a withdrawal from the board exactly as it does to a PC
 // withdrawal. gSpecialVar_0x8004 is the board slot; VAR_RESULT is TRUE when
 // the party can take it.
 bool32 CanTakeDaycareMonWithinPartyRule(void)
@@ -891,7 +891,7 @@ static enum Species DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u
     return eggSpecies;
 }
 
-static void _GiveEggFromDaycare(struct DayCare *daycare)
+static bool32 _GiveEggFromDaycare(struct DayCare *daycare)
 {
     struct Pokemon egg;
     enum Species species;
@@ -899,11 +899,15 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     bool8 isEgg;
 
     if (GetDaycareCompatibilityScore(daycare) == PARENTS_INCOMPATIBLE)
-        return;
+        return FALSE;
 
     species = DetermineEggSpeciesAndParentSlots(daycare, parentSlots);
     if (P_INCENSE_BREEDING < GEN_9)
         AlterEggSpeciesWithIncenseItem(&species, daycare);
+    // Phione eggs also occupy the shared special Pokemon slot. Keep the
+    // pending egg at the nursery until the player makes room.
+    if (CalculatePlayerPartyCount() >= PARTY_SIZE || !CanAddRestrictedMonToParty(species, PARTY_SIZE))
+        return FALSE;
     SetInitialEggData(&egg, species, daycare);
     InheritIVs(&egg, daycare);
     InheritPokeball(&egg, daycare);
@@ -916,6 +920,7 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     CompactPartySlots();
     CalculatePlayerPartyCount();
     RemoveEggFromDayCare(daycare);
+    return TRUE;
 }
 
 static void SetEggHatchCycles(struct Pokemon *mon, enum Species species)
@@ -970,9 +975,9 @@ static void SetInitialEggData(struct Pokemon *mon, enum Species species, struct 
     SetMonData(mon, MON_DATA_MET_LOCATION, &origin);
 }
 
-void GiveEggFromDaycare(void)
+bool32 GiveEggFromDaycare(void)
 {
-    _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
+    return _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
 }
 
 static void _IncrementDaycareSteps(struct DayCare *daycare)

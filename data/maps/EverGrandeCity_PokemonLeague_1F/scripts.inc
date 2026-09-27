@@ -193,10 +193,9 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth: @ 82297EF
 	.string "Pokémon, and go forth!$"
 
 EverGrandeCity_PokemonLeague_1F_Text_RestrictedParty::
-	.string "League rules allow one Legendary\n"
-	.string "or Mythical Pokémon per party,\p"
-	.string "plus one Ultra Beast and one\n"
-	.string "Paradox Pokémon.\p"
+	.string "Choose one special Pokémon:\n"
+	.string "Legendary, Mythical, Ultra Beast\l"
+	.string "or Paradox. One total per party.\p"
 	.string "Adjust your party at a PC,\n"
 	.string "then come back.$"
 

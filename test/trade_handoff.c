@@ -3,6 +3,7 @@
 #include "trade.h"
 #include "event_data.h"
 #include "constants/party_menu.h"
+#include "constants/trade.h"
 #include "test/test.h"
 
 extern void Test_FinishInGameTrade(void);
@@ -36,10 +37,14 @@ TEST("NPC trade handoff: selected party slot is independent of the authored trad
     ZeroEnemyPartyMons();
 }
 
-TEST("NPC trade handoff: Type Null cannot add a second Legendary to the party")
+TEST("NPC trade handoff: Type Null shares the special slot across categories")
 {
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_SHAYMIN; }
+    PARAMETRIZE { species = SPECIES_KARTANA; }
+    PARAMETRIZE { species = SPECIES_FLUTTER_MANE; }
     ZeroPlayerPartyMons();
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_SHAYMIN, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], species, 14, 0, OTID_STRUCT_PLAYER_ID);
     CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_SKITTY, 14, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     gSpecialVar_0x8005 = INGAME_TRADE_TYPE_NULL;
@@ -48,6 +53,19 @@ TEST("NPC trade handoff: Type Null cannot add a second Legendary to the party")
     gSpecialVar_0x8004 = PC_MON_CHOSEN;
     EXPECT(CanReceiveInGameTradePokemon());
     gSpecialVar_0x8004 = 0;
-    EXPECT(CanReceiveInGameTradePokemon()); // Swapping the current Legendary is legal.
+    EXPECT(CanReceiveInGameTradePokemon()); // Swapping the current special Pokemon is legal.
     ZeroPlayerPartyMons();
+}
+
+TEST("NPC trade handoff: link trades distinguish the shared-slot refusal from other failures")
+{
+    extern u8 Test_CheckValidityOfTradeMons(u8 playerSlot, u8 partnerSlot);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_KARTANA, 20, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_FLUTTER_MANE, 20, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(Test_CheckValidityOfTradeMons(1, 0), TRADE_RESTRICTED_PARTY);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
 }

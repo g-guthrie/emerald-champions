@@ -1504,8 +1504,8 @@ void ChampionsCircuitCanEnter(void)
             return;
         }
     }
-    // The campaign's party rule holds here too: one Legendary or Mythical,
-    // one Ultra Beast and one Paradox Pokemon at most.
+    // The campaign's party rule holds here too: one Legendary, Mythical,
+    // Ultra Beast or Paradox Pokemon in total.
     if (!PlayerPartyWithinRestrictedLimit())
         gSpecialVar_Result = CIRCUIT_ENTRY_PARTY_RULE;
 }
