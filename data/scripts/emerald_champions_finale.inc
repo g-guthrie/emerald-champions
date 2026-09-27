@@ -49,10 +49,18 @@ Common_Text_FinaleVoyage:
 	.string "Slateport and Lilycove.\p"
 	.string "Defeat Colton, Micah, Thomas, Naomi,\n"
 	.string "and the pair Lea and Jed aboard.\p"
-	.string "Use the cabin bed to heal. Then\n"
-	.string "seek Steven deep in Meteor Falls.$"
+	.string "Resting in your cabin bed heals your\n"
+	.string "team and brings the ship into port.\p"
+	.string "If anyone is left, board again to\n"
+	.string "finish. Then seek Steven deep in\l"
+	.string "Meteor Falls.$"
+@ His cave (MeteorFalls_1F_1R 4,2, open after the Hall of Fame) sits beside
+@ the top of B1F's western ladder; B1F is reached from the room above the falls.
 Common_Text_FinaleSteven:
 	.string "Visit Steven deep in Meteor Falls.\p"
+	.string "Climb the falls inside, go down a\n"
+	.string "ladder, then take the western ladder\l"
+	.string "up to his cave.\p"
 	.string "A victory there earns your Aurora\n"
 	.string "Ticket for the Lilycove ferry.\p"
 	.string "If your Bag was full, make room\n"

@@ -3,9 +3,16 @@ Common_EventScript_PkmnCenterNurse::
 	faceplayer
 	call EC_DeliverTravelDocuments
 	call EventScript_PkmnCenterNurse_Itemfinder
-	call_if_set FLAG_EC_BIRCH_GREAT_BALLS_PENDING, EventScript_PkmnCenterNurse_BirchGift
 	call_if_set FLAG_EC_WOODS_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_WoodsGift
-	call_if_set FLAG_EC_RUSTBORO_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_RustboroGift
+	call EventScript_PkmnCenterNurse_GiveTools
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_OfferHealAfterTools
+	goto EventScript_PkmnCenterNurse_Main
+
+@ Hands over whichever of the five tools are missing, with their lessons.
+@ The counter and the whiteout heal (EventScript_AfterWhiteOutHeal) share it.
+@ VAR_RESULT is TRUE when a tool arrived, FALSE when none was due or the Bag
+@ was full (the missing ones then wait for the next visit).
+EventScript_PkmnCenterNurse_GiveTools::
 	checkitem ITEM_POKE_VIAL, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_HasVial
 	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
@@ -13,59 +20,82 @@ Common_EventScript_PkmnCenterNurse::
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	setvar VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE
 	setvar VAR_POKE_VIAL_CHARGES, 1
+	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
 	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	call EventScript_PkmnCenterNurse_ExplainLeveler
 	msgbox gText_EmeraldChampionsGiveRegenerator, MSGBOX_DEFAULT
 	giveitem ITEM_REGENERATOR, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
 	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
 	giveitem ITEM_REPEL_SPRAY, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
-	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
-	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
-	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
+	msgbox gText_EmeraldChampionsLocalGuide, MSGBOX_DEFAULT
+	setvar VAR_RESULT, TRUE
+	return
 
-EventScript_PkmnCenterNurse_HasVial::
+@ The first lesson: no experience from battles, the live level cap, and moves.
+EventScript_PkmnCenterNurse_ExplainLeveler:
+	special GetLevelCapForScriptedGift
+	buffernumberstring STR_VAR_1, VAR_0x800A
+	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
+	return
+
+@ VAR_0x8009 remembers whether this visit handed anything over.
+EventScript_PkmnCenterNurse_HasVial:
+	setvar VAR_0x8009, FALSE
 	checkitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRegenerator
 	msgbox gText_EmeraldChampionsGiveMissingLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
+	setvar VAR_0x8009, TRUE
+	call EventScript_PkmnCenterNurse_ExplainLeveler
 
 @ Older saves reach here without the Regenerator; one in the PC counts.
-EventScript_PkmnCenterNurse_CheckRegenerator::
+EventScript_PkmnCenterNurse_CheckRegenerator:
 	setvar VAR_0x8004, ITEM_REGENERATOR
 	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
 	msgbox gText_EmeraldChampionsGiveMissingRegenerator, MSGBOX_DEFAULT
 	giveitem ITEM_REGENERATOR, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	setvar VAR_0x8009, TRUE
 	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
 
 @ Resume tool delivery if the Bag filled during an earlier visit.
-EventScript_PkmnCenterNurse_CheckRepelSpray::
+EventScript_PkmnCenterNurse_CheckRepelSpray:
 	checkitem ITEM_REPEL_SPRAY, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
 	msgbox gText_EmeraldChampionsGiveMissingRepelSpray, MSGBOX_DEFAULT
 	giveitem ITEM_REPEL_SPRAY, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	setvar VAR_0x8009, TRUE
 	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 
-EventScript_PkmnCenterNurse_CheckFlightBeacon::
+EventScript_PkmnCenterNurse_CheckFlightBeacon:
 	checkitem ITEM_FLIGHT_BEACON, 1
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_Main
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_ToolsDelivered
 	msgbox gText_EmeraldChampionsGiveMissingFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	setvar VAR_0x8009, TRUE
 	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
-	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
+EventScript_PkmnCenterNurse_ToolsDelivered:
+	call_if_eq VAR_0x8009, TRUE, EventScript_PkmnCenterNurse_LocalGuide
+	copyvar VAR_RESULT, VAR_0x8009
+	return
+
+EventScript_PkmnCenterNurse_LocalGuide:
+	msgbox gText_EmeraldChampionsLocalGuide, MSGBOX_DEFAULT
+	return
 
 EventScript_PkmnCenterNurse_OfferHealAfterTools::
 	setvar VAR_0x8004, 0
@@ -180,21 +210,13 @@ Movement_PkmnCenterNurse_Bow:
 	delay_4
 	step_end
 
-@ Devon's two finite gifts are independent of story completion and healing.
+@ The Petalburg Woods researcher's Dusk Balls wait here when the Bag was full.
+@ It is independent of story completion and healing.
 EventScript_PkmnCenterNurse_WoodsGift::
 	msgbox Text_PkmnCenterNurse_WoodsGift, MSGBOX_DEFAULT
 	giveitem ITEM_DUSK_BALL, 3
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
 	clearflag FLAG_EC_WOODS_GREAT_BALL_PENDING
-	return
-EventScript_PkmnCenterNurse_RustboroGift::
-	call EventScript_PkmnCenterNurse_DevonGift
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
-	clearflag FLAG_EC_RUSTBORO_GREAT_BALL_PENDING
-	return
-EventScript_PkmnCenterNurse_DevonGift::
-	msgbox Text_PkmnCenterNurse_DevonGift, MSGBOX_DEFAULT
-	giveitem ITEM_GREAT_BALL
 	return
 EventScript_PkmnCenterNurse_KeepDevonGift::
 	msgbox Text_PkmnCenterNurse_KeepDevonGift, MSGBOX_DEFAULT
@@ -202,26 +224,14 @@ EventScript_PkmnCenterNurse_KeepDevonGift::
 Text_PkmnCenterNurse_WoodsGift:
 	.string "The Woods researcher left three\n"
 	.string "Dusk Balls for you. Here you are!$"
-Text_PkmnCenterNurse_DevonGift:
-	.string "A Devon researcher left a Great Ball\n"
-	.string "for you. Here you are!$"
 Text_PkmnCenterNurse_KeepDevonGift:
 	.string "Your Bag is still full. I'll keep it\n"
 	.string "safe. Make room and speak to me again.$"
 
-EventScript_PkmnCenterNurse_BirchGift::
-	msgbox Text_PkmnCenterNurse_BirchGift, MSGBOX_DEFAULT
-	giveitem ITEM_GREAT_BALL, 10
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
-	clearflag FLAG_EC_BIRCH_GREAT_BALLS_PENDING
-	return
-Text_PkmnCenterNurse_BirchGift:
-	.string "Prof. Birch left 10 Great Balls\n"
-	.string "for your journey. Here you are!$"
-
 EventScript_PkmnCenterNurse_ToolsPending::
 	msgbox gText_EmeraldChampionsToolsPending, MSGBOX_DEFAULT
-	goto EventScript_PkmnCenterNurse_Main
+	setvar VAR_RESULT, FALSE
+	return
 
 gText_EmeraldChampionsToolsPending:
 	.string "Your Bag is full. We will hold\n"

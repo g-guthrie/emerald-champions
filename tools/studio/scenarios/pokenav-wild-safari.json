@@ -1,0 +1,174 @@
+{
+  "name": "PokeNav Wild Pokemon: the Safari Zone to its end",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_SYS_POKENAV_GET": true,
+      "FLAG_RECEIVED_POKENAV": true
+    }
+  },
+  "warp": {
+    "map": "SafariZone_South",
+    "x": 32,
+    "y": 32,
+    "facing": 1
+  },
+  "steps": [
+    {
+      "frames": 120,
+      "label": "Field"
+    },
+    {
+      "press": "START",
+      "frames": 90
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "Map open"
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "Zoom view"
+    },
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "A choice"
+    },
+    {
+      "press": "A",
+      "frames": 90,
+      "label": "Wild list"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 1"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 2"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 3"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 4"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 5"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 6"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 7"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 8"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 9"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 10"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 11"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 12"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 13"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 14"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 15"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 16"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 17"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 18"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 19"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 20"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 21"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "Down 22"
+    },
+    {
+      "press": "B",
+      "frames": 90,
+      "label": "Back"
+    }
+  ],
+  "expect": {
+    "battle": false
+  }
+}

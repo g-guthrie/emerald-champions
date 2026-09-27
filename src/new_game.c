@@ -101,6 +101,9 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
+    // A blank or corrupt cartridge opens the title Option menu on Medium, not
+    // on whatever the uninitialized save variable reads as (0 is Easy).
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
 }
 
 static void ClearPokedexFlags(void)
@@ -159,6 +162,10 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
+    // The title screen's Option menu sets the difficulty before this game
+    // exists, like the other options. Carry it through the clears below.
+    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
 
@@ -217,7 +224,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
+    SetCurrentDifficultyLevel(difficulty);
     ResetItemFlags();
     // Shoal Cave's tide is ordinary save state now. It starts high; the
     // Shoalmaster turns it on request.

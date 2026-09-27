@@ -218,6 +218,10 @@ struct PokedexView
     u8 numEggMoves;
     u8 numLevelUpMoves;
     u8 numPreEvolutions;
+    // Emerald Champions: the Stats tab's two pages and whose Pokémon they show.
+    bool8 statsAbilitiesPage:1; // START on Stats shows the Abilities page
+    bool8 statsTrainersView:1;  // SELECT: trainers' base stats and Abilities
+    u8 statsAbilityCursor;
 };
 
 extern const u8 sCaughtBall_Gfx[];

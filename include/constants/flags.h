@@ -839,9 +839,7 @@
 #define FLAG_SEASPRAY_CAVE_B1F_REVIVE 0x2AA // Formerly unused; old 0x43 belongs to the same-location Lure Ball.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
-#define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Devon gift; clear only on delivery.
-#define FLAG_EC_RUSTBORO_GREAT_BALL_PENDING    0x2B5 // Separate rescue reward entitlement.
-#define FLAG_EC_BIRCH_GREAT_BALLS_PENDING      0x2B6 // Ten-ball send-off gift; never locks Route102.
+#define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Petalburg Woods Dusk Balls held by the nurse; clear only on delivery.
 #define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
 // Hoenn starter Mega Stone receipts: Norman's Ring gift or his shown-partner gift (src/mega_stone_rewards.c).
 #define FLAG_EC_MEGA_GIFT_SCEPTILITE 0x2B8
@@ -1699,7 +1697,7 @@
 // Reserved former Circuit lottery-ticket bit; the current lottery uses daily draws.
 #define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
 #define FLAG_EC_TUTOR_MACHINES_LINE_SEEN            (SYSTEM_FLAGS + 0xBB) // Emerald Champions: the Center tutor explained once that machines are gone
-#define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the five opening held items
+#define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the six opening held items
 #define FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
 #define FLAG_EC_FINALE_DEOXYS_RESOLVED              (SYSTEM_FLAGS + 0xBE) // Permanent expedition completion
 #define FLAG_ROUTE111_RIGHT_BREAKABLE_ROCK           0x91F // Persistent rock state; old 0x3B is a live legacy Helix Fossil receipt.

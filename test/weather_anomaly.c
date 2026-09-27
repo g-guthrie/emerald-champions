@@ -50,6 +50,7 @@ static void ResetAnomalyState(void)
     for (u32 i = 0; i < ARRAY_COUNT(sProgressFlags); i++)
         FlagClear(sProgressFlags[i]);
     ClearWeatherAnomalies();
+    VarSet(VAR_WEATHER_ANOMALY_BASE, 0);
     SetGameStat(GAME_STAT_STEPS, 1);
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
@@ -713,5 +714,124 @@ TEST("Weather anomalies: Center leads follow the storms")
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("You're ready!")));
 
+    ResetAnomalyState();
+}
+
+TEST("Weather anomalies: same-map expiry restores the base sky without restarting unchanged weather")
+{
+    ResetAnomalyState();
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    SetLocation(MAP_ROUTE110);
+    SetSavedWeatherFromCurrMapHeader();
+    gWeatherPtr->currWeather = gWeatherPtr->nextWeather = WEATHER_SUNNY;
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 50);
+    UpdateWeatherAnomalyWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    EXPECT_EQ(gWeatherPtr->nextWeather, WEATHER_RAIN);
+    gWeatherPtr->finishStep = 77;
+    UpdateWeatherAnomalyWeather();
+    EXPECT_EQ(gWeatherPtr->finishStep, 77);
+
+    AlignToTick();
+    TakeSteps(1);
+    EXPECT(!IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_KOKO));
+    UpdateWeatherAnomalyWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY);
+    EXPECT_EQ(gWeatherPtr->nextWeather, WEATHER_SUNNY);
+    ResetAnomalyState();
+}
+
+TEST("Weather anomalies: expiry preserves scripted base weather and terrain")
+{
+    ResetAnomalyState();
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    SetLocation(MAP_ROUTE110);
+    SetSavedWeatherFromCurrMapHeader();
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    SetSavedWeather(WEATHER_SHADE);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    ClearWeatherAnomalies();
+    UpdateWeatherAnomalyWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SHADE);
+
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    SetSavedWeather(WEATHER_SANDSTORM);
+    ClearWeatherAnomalies();
+    UpdateWeatherAnomalyWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SANDSTORM);
+    ResetAnomalyState();
+}
+
+TEST("Weather anomalies: Continue initializes the base and capture clears weather on battle return")
+{
+    ResetAnomalyState();
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    SetLocation(MAP_ROUTE110);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    gSaveBlock1Ptr->weather = WEATHER_RAIN;
+    InitWeatherAnomalyBaseFromSavedGame();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    ResumePausedWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY);
+    EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY);
+    EXPECT_EQ(gWeatherPtr->nextWeather, WEATHER_SUNNY);
+
+    ClearWeatherAnomalies();
+    gSaveBlock1Ptr->weather = WEATHER_SHADE;
+    VarSet(VAR_WEATHER_ANOMALY_BASE, 0);
+    InitWeatherAnomalyBaseFromSavedGame();
+    ResumePausedWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SHADE);
+    ResetAnomalyState();
+}
+
+TEST("Weather anomalies: repeated quiet reports never advance empty-slot cooldowns")
+{
+    u16 vars[3];
+    ResetAnomalyState();
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_KOKO);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 50);
+    AlignToTick();
+    TakeSteps(1);
+    EXPECT_EQ(CountLive(), 0);
+    vars[0] = VarGet(VAR_WEATHER_ANOMALY_STATE_0);
+    vars[1] = VarGet(VAR_WEATHER_ANOMALY_STATE_1);
+    vars[2] = VarGet(VAR_WEATHER_ANOMALY_STATE_2);
+    for (u32 i = 0; i < 40; i++)
+    {
+        BufferWeatherAnomalyReport();
+        EXPECT_EQ(gSpecialVar_Result, 0);
+        EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_STATE_0), vars[0]);
+        EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_STATE_1), vars[1]);
+        EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_STATE_2), vars[2]);
+    }
+    ResetAnomalyState();
+}
+
+
+TEST("Weather anomalies: saved scripted weather survives Continue beneath a storm")
+{
+    ResetAnomalyState();
+    SetBadges(6);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    SetLocation(MAP_ROUTE120);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_CALYREX, 1500);
+    SetSavedWeather(WEATHER_SUNNY_CLOUDS);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_FOG_HORIZONTAL);
+    EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_BASE), WEATHER_SUNNY_CLOUDS + 1);
+    // Continue reconstructs the applied override from saved vars, without
+    // mistaking effective fog for the original position-based cloudy sky.
+    InitWeatherAnomalyBaseFromSavedGame();
+    ClearWeatherAnomalies();
+    ResumePausedWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY_CLOUDS);
+    EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY_CLOUDS);
     ResetAnomalyState();
 }

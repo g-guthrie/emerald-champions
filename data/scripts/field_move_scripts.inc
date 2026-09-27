@@ -604,9 +604,11 @@ Text_FieldMoveBadgeRequired:
 	.string "The {STR_VAR_2} is needed\n"
 	.string "to use {STR_VAR_1} here.$"
 
+@ STR_VAR_3 names where that license comes from (gFieldMoveLicenseGivers).
 Text_FieldMoveAuthorizationRequired:
 	.string "You need the {STR_VAR_1}\n"
-	.string "field license to use it here.$"
+	.string "field license to use it here.\p"
+	.string "{STR_VAR_3}$"
 
 Text_FieldMoveNeedsPokemon:
 	.string "A Pokémon in your party must be\n"

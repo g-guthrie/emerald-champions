@@ -13,12 +13,16 @@ TIP(PETALBURG_CITY, 0, 0, FLAG_RECEIVED_WAILMER_PAIL, NONE, COMPOUND_STRING("The
 
 TIP(RUSTBORO_CITY, 0, 0, 0, NONE, sTip_MoveTutor),
 TIP(RUSTBORO_CITY, 4, 0, 0, NONE, COMPOUND_STRING("Devon's lab on 2F can revive\nfossils. Many lie buried under\lthe Route 111 desert.")),
+TIP(RUSTBORO_CITY, 0, FLAG_IS_CHAMPION, 0, ARCEUS_GIFT, COMPOUND_STRING("You're the Champion now!\nDevon's dream researcher on 2F\lhas an extraordinary gift\lwaiting for you.")),
 
 TIP(SLATEPORT_CITY, 0, 0, FLAG_RECEIVED_6_SODA_POP, NONE, COMPOUND_STRING("Beat all three Trainers in the\nSeashore House on Route 109,\lsouth of town, and the owner\lwill treat you to Soda Pop.")),
 TIP(SLATEPORT_CITY, 0, 0, 0, TRICK_HOUSE, sTip_TrickHouse),
+TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("The Battle Tent here lends you\nPokémon for Double Battles.\pWin three in a row to earn an\nitem like a Metal Coat or a\lLinking Cord.")),
+TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("A retired Pokéblock chef lives\nhere in Slateport. For five Oran\lBerries, he'll give a Pokémon a\lnew Nature.")),
 TIP(SLATEPORT_CITY, 5, 0, 0, ODD_KEYSTONE, COMPOUND_STRING("An Odd Keystone lies in the\nruins beneath the Route 111 desert.\pToss it into the trash can in\nthe Abandoned Ship's storage\lroom on Route 108, with a\lLickitung or Slugma along.\pA Spiritomb will appear. If you\nrun from it, you keep the\lKeystone to try again.\pThe storage room's key lies in\nthe ship's captain's office.")),
 TIP(SLATEPORT_CITY, 7, 0, FLAG_EXCHANGED_SCANNER, NONE, COMPOUND_STRING("Dive beside the Abandoned Ship\non Route 108 to find its hidden floor.\pCapt. Stern at the harbor\ntrades Bottle Caps for the\lScanner you'll find there.")),
 
+TIP(MAUVILLE_CITY, 3, 0, FLAG_RECEIVED_HM06, NONE, COMPOUND_STRING("The Rock Smash Dude lives in a\nhouse here in Mauville. Visit\lhim for the Rock Smash license.")),
 TIP(MAUVILLE_CITY, 0, 0, 0, BLOB_LOST, sTip_BlobLost),
 TIP(MAUVILLE_CITY, 0, 0, 0, BLOB_CHASE, sTip_BlobChase),
 TIP(MAUVILLE_CITY, 0, 0, 0, BLOB_FOUND, sTip_BlobFound),
@@ -32,13 +36,14 @@ TIP(MAUVILLE_CITY, 4, 0, 0, NONE, sTip_Desert),
 
 TIP(VERDANTURF_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("The Day Care on Route 117, east\nof town, looks after two\lPokémon. A pair may even find\lan Egg.")),
 TIP(VERDANTURF_TOWN, 0, 0, FLAG_RECEIVED_AUDINO, NONE, COMPOUND_STRING("A girl in Verdanturf Meadow,\njust south of town, gives an\lAudino to caring Trainers.")),
-TIP(VERDANTURF_TOWN, 0, FLAG_RECEIVED_AUDINO, 0, NONE, COMPOUND_STRING("The Audino girl in Verdanturf\nMeadow knows every Pokémon\lthat lives there. Ask her!")),
+TIP(VERDANTURF_TOWN, 0, FLAG_RECEIVED_AUDINO, 0, NONE, COMPOUND_STRING("Verdanturf Meadow, just south\nof town, is home to many\lPsychic and Fairy Pokémon.")),
+TIP(VERDANTURF_TOWN, 0, 0, FLAG_RECEIVED_HM04, NONE, COMPOUND_STRING("Rusturf Tunnel, west of town,\nleads to Rustboro. Smash the\lrocks inside, and a man there\lwill grant you Strength.")),
 
 TIP(LAVARIDGE_TOWN, 0, 0, 0, BLOB_CHASE, sTip_BlobChase),
 TIP(LAVARIDGE_TOWN, 4, 0, 0, NONE, sTip_Desert),
 
 TIP(FALLARBOR_TOWN, 5, 0, 0, NONE, COMPOUND_STRING("After five Badges, the Fossil\nManiac's tunnel on Route 114\lopens into ruins under the\ldesert, full of fossils.\pDevon's lab in Rustboro can\nrevive them.")),
-TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. They raise EVs for\lmoney and change IVs for\lBottle Caps.")),
+TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. Evie raises EVs for\l¥2 each.\pIvy lowers Attack or Speed IVs\nfor free. For three Bottle Caps,\lshe changes Hidden Power's type.")),
 
 TIP(FORTREE_CITY, 0, FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, NONE, COMPOUND_STRING("Strange storms bring visiting\nlegends to some routes. The\lWeather Institute on Route 119\ltracks where they are.")),
 

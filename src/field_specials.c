@@ -574,9 +574,9 @@ bool32 CanReceiveGoGogglesGift(void)
 // skipped the Eviolite for a Torchic player whose starter merely held one.)
 void GiveEmeraldChampionsStarterBattleItems(void)
 {
-    static const enum Item items[] = {
-        ITEM_CHOICE_BAND, ITEM_CHOICE_SPECS, ITEM_CHOICE_SCARF,
-        ITEM_FOCUS_SASH, ITEM_EVIOLITE,
+    static const struct ItemSlot items[] = {
+        {ITEM_CHOICE_BAND, 1}, {ITEM_CHOICE_SPECS, 1}, {ITEM_CHOICE_SCARF, 1},
+        {ITEM_FOCUS_SASH, 1}, {ITEM_EVIOLITE, 1}, {ITEM_LEFTOVERS, 1},
     };
 
     if (FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS))
@@ -585,15 +585,12 @@ void GiveEmeraldChampionsStarterBattleItems(void)
         return;
     }
     gSpecialVar_Result = FALSE;
+    // AddBagItem also unlocks clerk stock. Check the whole kit before any
+    // addition, since removing an item cannot undo that permanent unlock.
+    if (!CheckBagHasSpaceForItemBundle(items, ARRAY_COUNT(items)))
+        return;
     for (u32 i = 0; i < ARRAY_COUNT(items); i++)
-    {
-        if (!AddBagItem(items[i], 1))
-        {
-            while (i > 0)
-                RemoveBagItem(items[--i], 1);
-            return;
-        }
-    }
+        AddBagItem(items[i].itemId, items[i].quantity);
     FlagSet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS);
     gSpecialVar_Result = TRUE;
 }
@@ -5554,6 +5551,26 @@ bool8 CheckMagikarpBattle(void)
 void GetLevelCapForScriptedGift(void)
 {
     gSpecialVar_0x800A = GetCurrentLevelCap();
+}
+
+// VAR_RESULT: some party Pokémon (not an Egg) is still below its level cap,
+// so the Leveler has work to do. The Route 103 rival waits until it is used.
+void IsPlayerPartyBelowLevelCap(void)
+{
+    gSpecialVar_Result = FALSE;
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+        if (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(species))
+        {
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
 }
 
 // The same rule under its older name (fossils at Devon, Cosmog at Birch's Lab).

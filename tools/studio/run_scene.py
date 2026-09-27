@@ -114,14 +114,19 @@ async def run(spec,out):
         query_values={}
         for name,query in spec.get("queries",{}).items():
             kind=int(query["kind"])
+            if kind <= 0:raise ValueError(f"Query {name!r} needs a positive kind.")
             ident=query.get("id",0)
             if isinstance(ident,str):ident=studio.cat.constants[ident]
             syms=studio.core.syms
-            await studio.core.write([(syms["gEcHeadlessCampaignQueryKind"],kind),
-                                     (syms["gEcHeadlessCampaignQueryId"],int(ident))])
+            await studio.core.write([(syms["gEcHeadlessCampaignQueryId"],int(ident)),
+                                     (syms["gEcHeadlessCampaignQueryKind"],kind)])
             for _ in range(3):
                 studio.ingest(await studio.core.tick(frames=1))
                 recorder.observe(studio.packet,0)
+                pending=await studio.core.rpc(4,server.words(syms["gEcHeadlessCampaignQueryKind"],4))
+                if struct.unpack("<I",pending)[0]==0:break
+            else:
+                raise RuntimeError(f"Native query {name!r} (kind {kind}) was not acknowledged; no result was accepted.")
             raw=await studio.core.rpc(4,server.words(syms["gEcHeadlessCampaignQueryValue"],4))
             query_values[name]=struct.unpack("<I",raw)[0]
         final["queries"]=query_values

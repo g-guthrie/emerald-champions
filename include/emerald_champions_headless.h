@@ -84,7 +84,16 @@ enum EmeraldChampionsHeadlessScenario
     EC_HEADLESS_SCENARIO_STUDIO_RESUME,
     EC_HEADLESS_SCENARIO_ECONOMY_SHOPS,
     EC_HEADLESS_SCENARIO_AGENT_BATTLE,
+    EC_HEADLESS_SCENARIO_BATTLE_UI,
 };
+
+// EC_HEADLESS_SCENARIO_BATTLE_UI parameter bits: which battle the menus are
+// captured in. Setup only; every menu, hint and panel is native input.
+#define EC_HEADLESS_BATTLE_UI_DOUBLE     (1 << 0)
+#define EC_HEADLESS_BATTLE_UI_TRAINER    (1 << 1)
+#define EC_HEADLESS_BATTLE_UI_ILLUSION   (1 << 2) // foe lead Zoroark, disguised as its last party member
+#define EC_HEADLESS_BATTLE_UI_PIXILATE   (1 << 3) // player lead Sylveon with Pixilate and Normal moves
+#define EC_HEADLESS_BATTLE_UI_THIRD_TYPE (1 << 4) // foe lead gains Ghost as a third type (Trick-or-Treat)
 
 enum EmeraldChampionsHeadlessLeafState
 {

@@ -4,6 +4,7 @@
 #include "landmark.h"
 #include "event_data.h"
 #include "field_effect.h"
+#include "item_use.h"
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"
@@ -16,6 +17,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
+#include "wild_places.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/region_map_sections.h"
@@ -25,10 +27,21 @@
 
 #define NUM_CITY_MAPS 22
 
+// What A offers on a place in the zoomed map.
+enum {
+    PLACE_CHOICE_WILD,
+    PLACE_CHOICE_FLY,
+    PLACE_CHOICE_FULL_MAP,
+    PLACE_CHOICE_CANCEL,
+    PLACE_CHOICE_COUNT,
+};
+
 struct Pokenav_RegionMapMenu
 {
     bool32 zoomDisabled;
     u32 (*callback)(struct Pokenav_RegionMapMenu *);
+    u8 choiceCount;
+    u8 choices[PLACE_CHOICE_COUNT];
 };
 
 struct Pokenav_RegionMapGfx
@@ -50,6 +63,10 @@ struct CityMapEntry
 
 static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *);
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav_RegionMapMenu *);
+static u32 HandlePlaceChoiceInput(struct Pokenav_RegionMapMenu *);
+static u32 HandleWildListInput_(struct Pokenav_RegionMapMenu *);
+static u32 LoopedTask_OpenPlaceChoice(s32);
+static bool32 CanFlyToCursor(struct RegionMap *);
 static u32 LoopedTask_OpenRegionMap(s32);
 static u32 LoopedTask_DecompressCityMaps(s32);
 static bool32 GetCurrentLoopedTaskActive(void);
@@ -73,7 +90,6 @@ static void SpriteCB_CityZoomText(struct Sprite *sprite);
 static u32 LoopedTask_UpdateInfoAfterCursorMove(s32);
 static u32 LoopedTask_RegionMapZoomOut(s32);
 static u32 LoopedTask_RegionMapZoomIn(s32);
-static u32 LoopedTask_TreatAsPokeNavFlyMap(s32);
 
 extern const u16 gRegionMapCityZoomTiles_Pal[];
 extern const u32 gRegionMapCityZoomText_Gfx[];
@@ -120,7 +136,18 @@ static const LoopedTask sRegionMapLoopTaskFuncs[] =
     [POKENAV_MAP_FUNC_CURSOR_MOVED] = LoopedTask_UpdateInfoAfterCursorMove,
     [POKENAV_MAP_FUNC_ZOOM_OUT]     = LoopedTask_RegionMapZoomOut,
     [POKENAV_MAP_FUNC_ZOOM_IN]      = LoopedTask_RegionMapZoomIn,
-    [POKENAV_MAP_FUNC_FLY]          = LoopedTask_TreatAsPokeNavFlyMap,
+    [POKENAV_MAP_FUNC_FLY]          = NULL, // Task_Pokenav switches off, then flies
+    [POKENAV_MAP_FUNC_OPEN_CHOICE]  = LoopedTask_OpenPlaceChoice,
+    [POKENAV_MAP_FUNC_OPEN_WILD_LIST]  = LoopedTask_OpenWildList,
+    [POKENAV_MAP_FUNC_CLOSE_WILD_LIST] = LoopedTask_CloseWildList,
+};
+
+static const u8 *const sPlaceChoiceTexts[PLACE_CHOICE_COUNT] =
+{
+    [PLACE_CHOICE_WILD]     = COMPOUND_STRING("Wild Pokémon"),
+    [PLACE_CHOICE_FLY]      = COMPOUND_STRING("Fly"),
+    [PLACE_CHOICE_FULL_MAP] = COMPOUND_STRING("Full Map"),
+    [PLACE_CHOICE_CANCEL]   = COMPOUND_STRING("Cancel"),
 };
 
 static const struct CompressedSpriteSheet sCityZoomTextSpriteSheet[1] =
@@ -200,6 +227,37 @@ u32 GetRegionMapCallback(void)
     return state->callback(state);
 }
 
+// Fly is offered on the terms of the Flight Beacon (CanFlyWithFlightBeacon),
+// to the places the fly map offers, and flies as the Beacon does.
+bool32 PokenavCanFlyTo(u8 mapSecType)
+{
+    return IsFlyMapDestination(mapSecType) && !IsPokenavOpenedByScript() && CanFlyWithFlightBeacon();
+}
+
+static bool32 CanFlyToCursor(struct RegionMap *regionMap)
+{
+    return PokenavCanFlyTo(regionMap->mapSecType);
+}
+
+void PrepareRegionMapFly(void)
+{
+    SetFlyDestination(GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP));
+    PrepareFlightBeaconRider();
+}
+
+// The choices A offers on the place under the zoomed cursor: its wild
+// Pokémon when it has any, Fly where R would fly, then the full map.
+static void SetPlaceChoices(struct Pokenav_RegionMapMenu *state, struct RegionMap *regionMap)
+{
+    state->choiceCount = 0;
+    if (WildPlaceCellHasPokemon(GetRegionMapCell(regionMap->mapSecId)))
+        state->choices[state->choiceCount++] = PLACE_CHOICE_WILD;
+    if (CanFlyToCursor(regionMap))
+        state->choices[state->choiceCount++] = PLACE_CHOICE_FLY;
+    state->choices[state->choiceCount++] = PLACE_CHOICE_FULL_MAP;
+    state->choices[state->choiceCount++] = PLACE_CHOICE_CANCEL;
+}
+
 static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
 {
     struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
@@ -211,16 +269,70 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
     case MAP_INPUT_A_BUTTON:
         if (!IsRegionMapZoomed())
             return POKENAV_MAP_FUNC_ZOOM_IN;
-        return POKENAV_MAP_FUNC_ZOOM_OUT;
+        // Off every place (open sea), A still returns to the full map.
+        if (regionMap->mapSecType == MAPSECTYPE_NONE)
+            return POKENAV_MAP_FUNC_ZOOM_OUT;
+        SetPlaceChoices(state, regionMap);
+        state->callback = HandlePlaceChoiceInput;
+        return POKENAV_MAP_FUNC_OPEN_CHOICE;
     case MAP_INPUT_B_BUTTON:
         return POKENAV_MAP_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
-        if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER)
-        && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        if (CanFlyToCursor(regionMap))
             return POKENAV_MAP_FUNC_FLY;
     }
 
     return POKENAV_MAP_FUNC_NONE;
+}
+
+static u32 HandlePlaceChoiceInput(struct Pokenav_RegionMapMenu *state)
+{
+    u32 cursor = Menu_GetCursorPos();
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        state->callback = HandleRegionMapInput;
+        switch (state->choices[cursor])
+        {
+        case PLACE_CHOICE_WILD:
+            state->callback = HandleWildListInput_;
+            return POKENAV_MAP_FUNC_OPEN_WILD_LIST;
+        case PLACE_CHOICE_FLY:
+            return POKENAV_MAP_FUNC_FLY;
+        case PLACE_CHOICE_FULL_MAP:
+            UpdateMapSecInfoWindow(GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM));
+            return POKENAV_MAP_FUNC_ZOOM_OUT;
+        default:
+            PlaySE(SE_SELECT);
+            return POKENAV_MAP_FUNC_CURSOR_MOVED;
+        }
+    }
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        state->callback = HandleRegionMapInput;
+        return POKENAV_MAP_FUNC_CURSOR_MOVED;
+    }
+    if (JOY_REPEAT(DPAD_UP) && cursor > 0)
+    {
+        PlaySE(SE_SELECT);
+        Menu_MoveCursor(-1);
+    }
+    else if (JOY_REPEAT(DPAD_DOWN) && cursor + 1 < state->choiceCount)
+    {
+        PlaySE(SE_SELECT);
+        Menu_MoveCursor(1);
+    }
+    return POKENAV_MAP_FUNC_NONE;
+}
+
+static u32 HandleWildListInput_(struct Pokenav_RegionMapMenu *state)
+{
+    u32 func = HandleWildListInput();
+
+    if (func == POKENAV_MAP_FUNC_CLOSE_WILD_LIST)
+        state->callback = HandleRegionMapInput;
+    return func;
 }
 
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav_RegionMapMenu *state)
@@ -446,21 +558,80 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_TreatAsPokeNavFlyMap(s32 taskState)
+#define INFO_WINDOW_WIDTH  (12 * 8)
+#define INFO_WINDOW_HEIGHT (13 * 8)
+#define INFO_LINE_HEIGHT   16
+
+// The choice fills the info window under the place's name and as many of its
+// landmarks as still fit above a rule.
+static void DrawPlaceChoice(struct Pokenav_RegionMapGfx *state, struct Pokenav_RegionMapMenu *menu)
 {
+    struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
+    u32 cursorWidth = GetMenuCursorDimensionByFont(FONT_NARROW, 0);
+    u32 menuHeight = menu->choiceCount * INFO_LINE_HEIGHT;
+    u32 lines, top, i;
+
+    SetCityZoomTextInvisibility(TRUE);
+    FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(state->infoWindowId);
+    AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
+    for (lines = 1; (lines + 1) * INFO_LINE_HEIGHT + 7 + menuHeight <= INFO_WINDOW_HEIGHT; lines++)
+    {
+        const u8 *landmarkName = GetLandmarkName(regionMap->mapSecId, regionMap->posWithinMapSec, lines - 1);
+        if (landmarkName == NULL)
+            break;
+        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, landmarkName, 0, lines * INFO_LINE_HEIGHT + 1, TEXT_SKIP_DRAW, NULL);
+    }
+    top = lines * INFO_LINE_HEIGHT + 3;
+    FillWindowPixelRect(state->infoWindowId, PIXEL_FILL(3), 2, top, INFO_WINDOW_WIDTH - 4, 1);
+    top += 3;
+    for (i = 0; i < menu->choiceCount; i++)
+        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, sPlaceChoiceTexts[menu->choices[i]], cursorWidth, top + i * INFO_LINE_HEIGHT, TEXT_SKIP_DRAW, NULL);
+    InitMenuNormal(state->infoWindowId, FONT_NARROW, 0, top, INFO_LINE_HEIGHT, menu->choiceCount, 0);
+    CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
+}
+
+static u32 LoopedTask_OpenPlaceChoice(s32 taskState)
+{
+    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
     {
     case 0:
         PlaySE(SE_SELECT);
-        struct RegionMap* regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
-        SetFlyDestination(regionMap);
-        gSkipShowMonAnim = TRUE;
-        ReturnToFieldFromFlyMapSelect();
-
-        return LT_FINISH;
+        DrawPlaceChoice(state, GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_STATE));
+        PrintHelpBarText(HELPBAR_MAP_PLACE_CHOICE);
+        return LT_INC_AND_PAUSE;
+    case 1:
+        if (IsDma3ManagerBusyWithBgCopy_(state))
+            return LT_PAUSE;
+        break;
     }
-
     return LT_FINISH;
+}
+
+// The Wild Pokemon list takes BG1 over: the info window, the city key and
+// the map's cursor and player icon go away while it shows.
+void HideRegionMapZoomView(void)
+{
+    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
+
+    SetCityZoomTextInvisibility(TRUE);
+    SetRegionMapIconsHidden(TRUE);
+    CpuFill16(0x1040, state->tilemapBuffer, BG_SCREEN_SIZE);
+}
+
+// Puts the zoomed map's BG1 back as LoadPokenavRegionMapGfx left it: the
+// city tiles the list drew over, the info window and its frame.
+void RestoreRegionMapZoomView(void)
+{
+    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
+
+    DecompressDataWithHeaderVram(sRegionMapCityZoomTiles_Gfx, (void *)BG_CHAR_ADDR(1));
+    CpuFill16(0x1040, state->tilemapBuffer, BG_SCREEN_SIZE);
+    DrawTextBorderOuter(state->infoWindowId, 0x42, 4);
+    UpdateMapSecInfoWindow(state);
+    CopyBgTilemapBufferToVram(1);
+    SetRegionMapIconsHidden(FALSE);
 }
 
 static void LoadCityZoomViewGfx(void)
@@ -729,19 +900,12 @@ void UpdateRegionMapHelpBarText(void)
     // Off the map (on an event island) the map can't zoom: B is the only button.
     if (GetZoomDisabled())
         PrintHelpBarText(HELPBAR_MAP_ZOOM_DISABLED);
-    else if (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY && FlagGet(OW_FLAG_POKE_RIDER)
-        && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
-    {
-        if (IsRegionMapZoomed())
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN_CANFLY);
-        else
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT_CANFLY);
-    }
+    else if (!IsRegionMapZoomed())
+        PrintHelpBarText(CanFlyToCursor(regionMap) ? HELPBAR_MAP_ZOOMED_OUT_CANFLY : HELPBAR_MAP_ZOOMED_OUT);
+    // Zoomed in, A on a place offers its choices; off every place it returns
+    // to the full map.
+    else if (regionMap->mapSecType == MAPSECTYPE_NONE)
+        PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
     else
-    {
-        if (IsRegionMapZoomed())
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
-        else
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT);
-    }
+        PrintHelpBarText(CanFlyToCursor(regionMap) ? HELPBAR_MAP_ZOOMED_IN_PLACE_CANFLY : HELPBAR_MAP_ZOOMED_IN_PLACE);
 }

@@ -18,6 +18,8 @@
 #include "field_specials.h"
 #include "field_move.h"
 #include "string_util.h"
+#include "text.h"
+#include "constants/characters.h"
 #include "item.h"
 #include "money.h"
 #include "legendary_signs.h"
@@ -80,22 +82,29 @@ TEST("Inclement integration: failed item delivery cannot unlock vendor stock")
 
 TEST("Inclement integration: opening held items arrive together or not at all, never twice")
 {
+    // The six-item kit the Center clerk hands over on the first visit. Each
+    // one also goes on sale at her counter, like any held item found.
     static const enum Item items[] = {ITEM_CHOICE_BAND, ITEM_CHOICE_SPECS,
-        ITEM_CHOICE_SCARF, ITEM_FOCUS_SASH, ITEM_EVIOLITE};
+        ITEM_CHOICE_SCARF, ITEM_FOCUS_SASH, ITEM_EVIOLITE, ITEM_LEFTOVERS};
     ClearBag();
     FlagClear(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS);
     memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
+    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+        EXPECT(!IsEmeraldChampionsBattleItemUnlocked(items[i]));
     struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_CHOICE_BAND)];
-    EXPECT_GT((u32)pocket->capacity, 6);
+    EXPECT_GT((u32)pocket->capacity, ARRAY_COUNT(items) + 1);
     for (u32 i = 0; i < pocket->capacity - 2; i++)
-        BagPocket_SetSlotItemIdAndCount(pocket, i, ITEM_LEFTOVERS, 1);
+        BagPocket_SetSlotItemIdAndCount(pocket, i, ITEM_LIFE_ORB, 1);
     GiveEmeraldChampionsStarterBattleItems();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
     EXPECT(!FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS));
     // All or nothing: a full Bag hands over no part of the kit.
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHOICE_BAND), 0);
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHOICE_SPECS), 0);
-    for (u32 i = 0; i < 3; i++)
+    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+    {
+        EXPECT_EQ(CountTotalItemQuantityInBag(items[i]), 0);
+        EXPECT(!IsEmeraldChampionsBattleItemUnlocked(items[i]));
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(items) - 2; i++)
         BagPocket_SetSlotItemIdAndCount(pocket, i, ITEM_NONE, 0);
     GiveEmeraldChampionsStarterBattleItems();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
@@ -106,6 +115,7 @@ TEST("Inclement integration: opening held items arrive together or not at all, n
         EXPECT_EQ(CountTotalItemQuantityInBag(items[i]), 1);
         EXPECT(IsEmeraldChampionsBattleItemUnlocked(items[i]));
     }
+    ClearBag();
 }
 
 TEST("Inclement integration: Leveler reaches the current cap and remains safe on repeated use")
@@ -410,11 +420,54 @@ TEST("Inclement integration: native stat reports and nature honor their script c
     gSpecialVar_0x8005 = 3; // Special Attack raised, Attack lowered: Modest.
     gSpecialVar_0x8006 = 0;
     ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HIDDEN_NATURE), NATURE_MODEST);
     EXPECT_LT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_ATK), oldAttack);
     EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPATK), oldSpAttack);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), originalNature);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_IV), 7);
+}
+
+extern void BufferChosenMonNature(void);
+
+TEST("Nature chef: the chosen stats name the Nature, and a choice that changes nothing is free")
+{
+    ZeroPlayerPartyMons();
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
+    u32 nature = NATURE_HARDY;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE, &nature);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+    gSpecialVar_0x8004 = 0;
+    BufferChosenMonNature();
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("Hardy")), 0);
+    EXPECT_EQ(StringCompare(gStringVar3, COMPOUND_STRING("leaves every stat as it is")), 0);
+
+    // Speed up, Sp. Atk down: Jolly, and the summary line says so.
+    gSpecialVar_0x8005 = 2;
+    gSpecialVar_0x8006 = 3;
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_JOLLY);
+    BufferChosenMonNature();
+    EXPECT_EQ(StringCompare(gStringVar2, COMPOUND_STRING("Jolly")), 0);
+    EXPECT_EQ(StringCompare(gStringVar3, COMPOUND_STRING("raises Speed and lowers Sp. Atk")), 0);
+
+    // Asking for the Nature it already has changes nothing.
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_JOLLY);
+
+    // The same stat twice gives a neutral Nature...
+    gSpecialVar_0x8005 = gSpecialVar_0x8006 = 3;
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_BASHFUL);
+    // ...and one neutral Nature for another would change no stat.
+    gSpecialVar_0x8005 = gSpecialVar_0x8006 = 0;
+    ChangePokemonNature();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HIDDEN_NATURE), NATURE_BASHFUL);
+    ZeroPlayerPartyMons();
 }
 
 extern void CheckChosenMonCanGainEVs(void);
@@ -506,6 +559,53 @@ TEST("Inclement integration: locked field message distinguishes badge from autho
     EXPECT(IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH));
     BufferFieldMoveUnlockRequirement();
     EXPECT_EQ(gSpecialVar_Result, 2);
+}
+
+TEST("Inclement integration: a missing field license says where to earn it")
+{
+    u32 rows = 0;
+
+    // Every HM license names its giver, in a message that fits the box.
+    for (enum FieldMove fieldMove = 0; fieldMove < FIELD_MOVES_COUNT; fieldMove++)
+    {
+        const u8 *giver = gFieldMoveLicenseGivers[fieldMove];
+        u8 line[64];
+        u32 length = 0;
+
+        if (!FieldMove_IsHM(fieldMove))
+            continue;
+        rows++;
+        EXPECT(giver != NULL);
+        if (giver == NULL)
+            continue;
+        EXPECT_GT(StringLength(giver), 0);
+        for (u32 i = 0, lines = 1; ; i++)
+        {
+            if (giver[i] == EOS || giver[i] == CHAR_NEWLINE)
+            {
+                line[length] = EOS;
+                EXPECT_LE(GetStringWidth(FONT_NORMAL, line, 0), 216);
+                length = 0;
+                if (giver[i] == EOS)
+                    break;
+                EXPECT_LT(++lines, 3);
+            }
+            else if (length < ARRAY_COUNT(line) - 1)
+            {
+                line[length++] = giver[i];
+            }
+        }
+    }
+    EXPECT_EQ(rows, 8);
+
+    // The locked obstacle hands the right line to the message.
+    FlagSet(FLAG_BADGE04_GET);
+    FlagClear(FLAG_RECEIVED_HM_STRENGTH);
+    gSpecialVar_0x8004 = FIELD_MOVE_STRENGTH;
+    BufferFieldMoveUnlockRequirement();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(StringCompare(gStringVar3, gFieldMoveLicenseGivers[FIELD_MOVE_STRENGTH]), 0);
+    FlagClear(FLAG_BADGE04_GET);
 }
 
 TEST("Inclement integration: HM convenience preserves the Regi puzzle conditions")

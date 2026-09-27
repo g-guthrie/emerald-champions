@@ -375,14 +375,10 @@ void BufferWeatherAnomalyReport(void)
 {
     u8 *dest = gStringVar4;
     u32 count = 0;
-    bool32 empty = TRUE;
 
-    // Right after the rescue no step has been taken yet: draw the first storms
-    // now so the scientist's first report is not "quiet" for one step.
-    for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
-        if (GetWeatherAnomalySlotSignId(slot) != WEATHER_ANOMALY_EMPTY)
-            empty = FALSE;
-    if (empty && IsWeatherAnomalyWindowOpen())
+    // Seed only an uninitialized window. Empty slots can be waiting out a
+    // cooldown: consulting a report must never count as another player step.
+    if (LoadState() == 0 && IsWeatherAnomalyWindowOpen())
         UpdateWeatherAnomaliesOnStep();
 
     *dest = EOS;

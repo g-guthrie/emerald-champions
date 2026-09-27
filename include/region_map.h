@@ -125,17 +125,23 @@ u8 *GetMapName(u8 *dest, mapsec_u16_t regionMapId, u16 padLength);
 u8 *GetMapNameGeneric(u8 *dest, mapsec_u16_t mapSecId);
 u8 *GetMapNameHandleAquaHideout(u8 *dest, mapsec_u16_t mapSecId);
 mapsec_u16_t CorrectSpecialMapSecId(mapsec_u16_t mapSecId);
+bool32 IsRegionMapCell(mapsec_u16_t mapSecId);
+mapsec_u16_t GetRegionMapCellByName(mapsec_u16_t mapSecId);
+mapsec_u16_t GetRegionMapCellByPosition(mapsec_u16_t mapSecId);
+mapsec_u16_t GetRegionMapCell(mapsec_u16_t mapSecId);
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap);
 void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
 void CB2_OpenFlyMap(void);
 void SetFlyMapCancelCallback(MainCallback callback);
 bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
+void SetRegionMapIconsHidden(bool32 hidden);
 void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
 enum RegionMapType GetRegionMapType(u32 mapSecId);
 
 //Pokenav Fly funcs
+bool32 IsFlyMapDestination(u8 mapSecType);
 u32 FilterFlyDestination(struct RegionMap* regionMap);
 void SetFlyDestination(struct RegionMap* regionMap);
 

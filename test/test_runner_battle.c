@@ -2253,6 +2253,17 @@ void SetVarForTest(u32 sourceLine, u16 varId, u16 value)
     VarSet(varId, value);
 }
 
+void UseOverworldWeather_(u32 sourceLine)
+{
+    INVALID_IF(!STATE->runGiven, "UseOverworldWeather outside of GIVEN");
+    DATA.useOverworldWeather = TRUE;
+}
+
+bool32 TestRunner_Battle_UsesOverworldWeather(void)
+{
+    return DATA.useOverworldWeather;
+}
+
 void TestSetConfig(u32 sourceLine, enum ConfigTag configTag, u32 value)
 {
     INVALID_IF(!STATE->runGiven, "WITH_CONFIG outside of GIVEN");

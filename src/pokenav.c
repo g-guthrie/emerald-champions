@@ -3,6 +3,7 @@
 #include "task.h"
 #include "main.h"
 #include "overworld.h"
+#include "field_effect.h"
 #include "field_weather.h"
 #include "palette.h"
 #include "pokenav.h"
@@ -21,6 +22,7 @@ struct PokenavResources
 {
     bool32 calledFromScript;
     bool32 mapOpen;
+    bool32 flyOnSwitchOff;
     void *substructPtrs[POKENAV_SUBSTRUCT_COUNT];
 };
 
@@ -203,6 +205,7 @@ static void InitPokenavResources(struct PokenavResources *resources)
 
     resources->calledFromScript = FALSE;
     resources->mapOpen = FALSE;
+    resources->flyOnSwitchOff = FALSE;
 }
 
 static void CB2_Pokenav(void)
@@ -261,7 +264,16 @@ static void Task_Pokenav(u8 taskId)
         // fallthrough
     case STATE_HANDLE_INPUT:
         funcId = GetRegionMapCallback();
-        if (funcId == POKENAV_MAP_FUNC_EXIT)
+        if (funcId == POKENAV_MAP_FUNC_FLY)
+        {
+            // The destination and the Beacon's rider are set while the map
+            // is still open; the flight starts once it has switched off.
+            PrepareRegionMapFly();
+            gPokenavResources->flyOnSwitchOff = TRUE;
+            ShutdownPokenav();
+            tState = STATE_SWITCH_OFF;
+        }
+        else if (funcId == POKENAV_MAP_FUNC_EXIT)
         {
             ShutdownPokenav();
             tState = STATE_SWITCH_OFF;
@@ -276,6 +288,7 @@ static void Task_Pokenav(u8 taskId)
         if (!IsPaletteFadeActive())
         {
             bool32 calledFromScript = gPokenavResources->calledFromScript;
+            bool32 fly = gPokenavResources->flyOnSwitchOff;
 
             if (gPokenavResources->mapOpen)
             {
@@ -284,7 +297,9 @@ static void Task_Pokenav(u8 taskId)
             }
             FreePokenavFrame();
             FreePokenavResources();
-            if (calledFromScript)
+            if (fly)
+                ReturnToFieldFromFlyMapSelect();
+            else if (calledFromScript)
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             else
                 SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
@@ -305,6 +320,12 @@ static bool32 OpenMap(void)
 
     gPokenavResources->mapOpen = TRUE;
     return TRUE;
+}
+
+// The Rustboro tutorial opens the PokeNav from a script that waits for it.
+bool32 IsPokenavOpenedByScript(void)
+{
+    return gPokenavResources != NULL && gPokenavResources->calledFromScript;
 }
 
 void SetVBlankCallback_(IntrCallback callback)

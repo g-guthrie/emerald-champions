@@ -828,3 +828,7 @@ gSpecials::
 	def_special IsChanseyVialRewardClaimed
 
 	def_special IsRoute133VialUpgradeAvailable
+
+	def_special CenterGuideHasStaticLegendaryLead
+
+	def_special IsPlayerPartyBelowLevelCap

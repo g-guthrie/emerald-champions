@@ -18,6 +18,7 @@
 #include "emerald_champions_agent_prep.h"
 #include "emerald_champions_agent_battle.h"
 #include "coins.h"
+#include "difficulty.h"
 #include "event_data.h"
 #include "item_use.h"
 #include "berry.h"
@@ -315,6 +316,9 @@ static void PrepareHeadlessNewGame(void)
 {
     SetSaveBlocksPointers(0);
     NewGameInitData();
+    // Moving the save blocks leaves no title-screen choice to carry; fixtures
+    // start on the default Medium, as a fresh cartridge does.
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     StringCopy(gSaveBlock2Ptr->playerName, sEcHeadlessPlayerName);
     gSaveBlock2Ptr->playerGender = MALE;
     gSaveBlock2Ptr->playerTrainerId[0] = 0x34;
@@ -737,6 +741,7 @@ static void PrepareMoveReplacement(void)
 #define EC_HEADLESS_POKEDEX_AREA_ASHEN_WOODS       20
 #define EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW    21
 #define EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW 22
+#define EC_HEADLESS_POKEDEX_EVOLUTION_REVIEW       30
 
 static void PrepareHeadlessPokedex(void)
 {
@@ -755,13 +760,36 @@ static void PrepareHeadlessPokedex(void)
         [EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW - 20] = SPECIES_PHEROMOSA,
         [EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW - 20] = SPECIES_ALCREMIE,
     };
+    // Hoenn-location evolutions for the regional forms and Runerigus, listed
+    // alphabetically so each base species is a few rows from the top.
+    static const enum Species evolutionReview[] =
+    {
+        SPECIES_CUBONE, SPECIES_MAROWAK,
+        SPECIES_EXEGGCUTE, SPECIES_EXEGGUTOR,
+        SPECIES_MIME_JR, SPECIES_MR_MIME,
+        SPECIES_PIKACHU, SPECIES_RAICHU,
+        SPECIES_YAMASK, SPECIES_COFAGRIGUS, SPECIES_RUNERIGUS,
+    };
     const enum Species *list = species;
     u32 count = ARRAY_COUNT(species);
+    // High bits pick one owned species; the low bits keep naming the page.
+    enum Species chosen = SanitizeSpeciesId(gEcHeadlessFixtureParam >> 16);
 
-    if (gEcHeadlessFixtureParam >= 20 && gEcHeadlessFixtureParam < 20 + ARRAY_COUNT(areaSpecies))
+    if (chosen != SPECIES_NONE)
+    {
+        list = &chosen;
+        count = 1;
+    }
+    else if (gEcHeadlessFixtureParam >= 20 && gEcHeadlessFixtureParam < 20 + ARRAY_COUNT(areaSpecies))
     {
         list = &areaSpecies[gEcHeadlessFixtureParam - 20];
         count = 1;
+    }
+    else if (gEcHeadlessFixtureParam == EC_HEADLESS_POKEDEX_EVOLUTION_REVIEW)
+    {
+        list = evolutionReview;
+        count = ARRAY_COUNT(evolutionReview);
+        gSaveBlock2Ptr->pokedex.order = ORDER_ALPHABETICAL;
     }
 
     FlagSet(FLAG_SYS_POKEDEX_GET);
@@ -771,7 +799,7 @@ static void PrepareHeadlessPokedex(void)
         enum NationalDexOrder dex = SpeciesToNationalPokedexNum(list[i]);
 
         GetSetPokedexFlag(dex, FLAG_SET_SEEN);
-        if (i != 2)
+        if (i != 2 || list == evolutionReview)
             GetSetPokedexFlag(dex, FLAG_SET_CAUGHT);
     }
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
@@ -1041,6 +1069,108 @@ static void PrepareHeadlessSafariBattle(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
+// Battle menus for UI captures (EC_HEADLESS_BATTLE_UI_* bits): wild or trainer,
+// singles or doubles. Every badge is set so the party obeys; the fixture only
+// builds the battle, and every menu after that is native input.
+static void PrepareHeadlessBattleUi(void)
+{
+    u32 param = gEcHeadlessFixtureParam;
+    bool32 isDouble = (param & EC_HEADLESS_BATTLE_UI_DOUBLE) != 0;
+    bool32 isTrainer = (param & EC_HEADLESS_BATTLE_UI_TRAINER) != 0;
+    struct Pokemon *player = gParties[B_TRAINER_PLAYER];
+    struct Pokemon *foes = gParties[B_TRAINER_OPPONENT_A];
+    enum Species foeSpecies[3];
+    u32 foeCount = 0;
+
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    SeedRng(0x1234);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+
+    if (param & EC_HEADLESS_BATTLE_UI_PIXILATE)
+    {
+        u32 hiddenSlot = 2;
+
+        CreateHealthyHeadlessMon(&player[0], SPECIES_SYLVEON, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonData(&player[0], MON_DATA_ABILITY_NUM, &hiddenSlot);
+        SetMonMoveSlot(&player[0], MOVE_HYPER_VOICE, 0);
+        SetMonMoveSlot(&player[0], MOVE_QUICK_ATTACK, 1);
+        SetMonMoveSlot(&player[0], MOVE_MOONBLAST, 2);
+        SetMonMoveSlot(&player[0], MOVE_PROTECT, 3);
+    }
+    else
+    {
+        CreateHealthyHeadlessMon(&player[0], SPECIES_GEODUDE, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&player[0], MOVE_EARTHQUAKE, 0);
+        SetMonMoveSlot(&player[0], MOVE_ROCK_SLIDE, 1);
+        SetMonMoveSlot(&player[0], MOVE_PROTECT, 2);
+        SetMonMoveSlot(&player[0], MOVE_WIDE_GUARD, 3);
+    }
+    if (isDouble)
+    {
+        CreateHealthyHeadlessMon(&player[1], SPECIES_GARDEVOIR, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&player[1], MOVE_DAZZLING_GLEAM, 0);
+        SetMonMoveSlot(&player[1], MOVE_PSYCHIC, 1);
+        SetMonMoveSlot(&player[1], MOVE_HELPING_HAND, 2);
+        SetMonMoveSlot(&player[1], MOVE_PROTECT, 3);
+    }
+    CalculatePlayerPartyCount();
+
+    // Illusion copies the last party member that is neither the user nor its partner.
+    if (isTrainer && (param & EC_HEADLESS_BATTLE_UI_ILLUSION))
+        foeSpecies[foeCount++] = SPECIES_ZOROARK;
+    if (isDouble)
+    {
+        foeSpecies[foeCount++] = SPECIES_VENUSAUR;
+        foeSpecies[foeCount++] = SPECIES_PIKACHU;
+    }
+    else
+    {
+        enum Species single = foeCount == 0 ? SPECIES_POOCHYENA : SPECIES_PIKACHU;
+        foeSpecies[foeCount++] = single;
+    }
+
+    if (isTrainer)
+    {
+        for (u32 i = 0; i < foeCount; i++)
+        {
+            CreateHealthyHeadlessMon(&foes[i], foeSpecies[i], 30, OTID_STRUCT_RANDOM_NO_SHINY);
+            SetMonTrainerOwned(&foes[i], TRUE);
+        }
+        memset(&gTrainerBattleParameter, 0, sizeof(gTrainerBattleParameter));
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_CALVIN_1;
+        TRAINER_BATTLE_PARAM.opponentB = 0xFFFF;
+        TRAINER_BATTLE_PARAM.isDoubleBattle = isDouble;
+        CalculateEnemyPartyCount();
+    }
+    else
+    {
+        CreateWildMon(isDouble ? SPECIES_POOCHYENA : foeSpecies[0], 30);
+        if (isDouble)
+            CreateHealthyHeadlessMon(&foes[1], SPECIES_PIKACHU, 30, OTID_STRUCT_RANDOM_NO_SHINY);
+    }
+
+    ClearBag();
+    AddBagItem(ITEM_QUICK_BALL, 10);
+    gLastThrownBall = ITEM_QUICK_BALL;
+    gBallToDisplay = ITEM_QUICK_BALL;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;
+    for (u32 battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+    {
+        gActionSelectionCursor[battler] = 0;
+        gMoveSelectionCursor[battler] = 0;
+    }
+    gBattleTypeFlags = (isTrainer ? BATTLE_TYPE_TRAINER : 0) | (isDouble ? BATTLE_TYPE_DOUBLE : 0);
+    gBattleEnvironment = BattleSetup_GetEnvironmentId();
+    gMain.savedCallback = gInitialMainCB2;
+    gEcHeadlessFixtureSetupResult = TRUE;
+    SetMainCallback2(CB2_InitBattle);
+}
+
 static void PrepareHeadlessGoldTrainerCard(void)
 {
     SetGameStat(GAME_STAT_ENTERED_HOF, 1);
@@ -1077,7 +1207,7 @@ static void PrepareHeadlessFairySummary(void)
 
 static bool32 IsHeadlessPokedexStateObserved(void)
 {
-    switch (gEcHeadlessFixtureParam)
+    switch (gEcHeadlessFixtureParam & 0xFFFF)
     {
     case EC_HEADLESS_POKEDEX_LIST:
         return IsPokedexHeadlessOnScreen(PAGE_MAIN, AREA_SCREEN, FALSE);
@@ -1121,7 +1251,86 @@ static bool32 IsHeadlessSummaryStateObserved(void)
     return FALSE;
 }
 
-void EmeraldChampionsHeadlessObserve(void)
+// Host queries are read-only and independent of battle automation. Run them
+// after the fixture observer so even observers with an early return can reply.
+static void ProcessHeadlessQuery(void)
+{
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_NONE
+     || gSaveBlock1Ptr == NULL || gSaveBlock2Ptr == NULL
+     || gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_NONE
+     || gEcHeadlessCampaignQueryKind > EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
+        return;
+
+    if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
+        gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
+        gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_SELL_PRICE)
+        gEcHeadlessCampaignQueryValue = GetItemSellPrice(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM_PRICE)
+        gEcHeadlessCampaignQueryValue = GetItemPrice(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
+        gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
+        gEcHeadlessCampaignQueryValue = gSaveBlock2Ptr->frontier.battlePoints;
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
+        gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
+            ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP)
+        gEcHeadlessCampaignQueryValue = GetPlayerLevelCapForSpecies(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
+        gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
+        gEcHeadlessCampaignQueryValue = CanAcquireLegendarySignSpecies(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
+        gEcHeadlessCampaignQueryValue = GetHarvestedBerryCount(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
+        gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
+    {
+        gEcHeadlessCampaignQueryValue = 0;
+        for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+            if (gSaveBlock1Ptr->pcItems[slot].itemId == gEcHeadlessCampaignQueryId)
+                gEcHeadlessCampaignQueryValue += gSaveBlock1Ptr->pcItems[slot].quantity;
+    }
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OBJECT
+          && gMain.callback2 == CB2_Overworld)
+    {
+        u8 objectEventId = GetObjectEventIdByLocalIdAndMap(
+            gEcHeadlessCampaignQueryId,
+            gSaveBlock1Ptr->location.mapNum,
+            gSaveBlock1Ptr->location.mapGroup
+        );
+
+        gEcHeadlessCampaignQueryObjectActive = objectEventId < OBJECT_EVENTS_COUNT
+            && gObjectEvents[objectEventId].active;
+        if (gEcHeadlessCampaignQueryObjectActive)
+        {
+            gEcHeadlessCampaignQueryObjectX =
+                gObjectEvents[objectEventId].currentCoords.x - MAP_OFFSET;
+            gEcHeadlessCampaignQueryObjectY =
+                gObjectEvents[objectEventId].currentCoords.y - MAP_OFFSET;
+        }
+        else
+        {
+            gEcHeadlessCampaignQueryObjectX = 0;
+            gEcHeadlessCampaignQueryObjectY = 0;
+        }
+        gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryObjectActive;
+    }
+    else
+    {
+        gEcHeadlessCampaignQueryValue = 0;
+        gEcHeadlessCampaignQueryObjectActive = FALSE;
+        gEcHeadlessCampaignQueryObjectX = 0;
+        gEcHeadlessCampaignQueryObjectY = 0;
+    }
+    // Publish the result before acknowledging. Hosts must not interpret an
+    // untouched result (often zero) as a successfully executed query.
+    gEcHeadlessCampaignQueryKind = EC_HEADLESS_CAMPAIGN_QUERY_NONE;
+}
+
+static void ObserveHeadlessFixture(void)
 {
     EmeraldChampionsStudioPoll();
     EmeraldChampionsAgentPrepPoll();
@@ -1283,70 +1492,6 @@ void EmeraldChampionsHeadlessObserve(void)
             sEcHeadlessAutoCaptureInProgress = FALSE;
         gEcHeadlessFixtureSetupResult = TRUE;
         gEcHeadlessCampaignInBattle = gMain.inBattle;
-        if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
-            gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
-            gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_SELL_PRICE)
-            gEcHeadlessCampaignQueryValue = GetItemSellPrice(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM_PRICE)
-            gEcHeadlessCampaignQueryValue = GetItemPrice(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
-            gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
-            gEcHeadlessCampaignQueryValue = gSaveBlock2Ptr->frontier.battlePoints;
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
-            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
-                ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP)
-            gEcHeadlessCampaignQueryValue = GetPlayerLevelCapForSpecies(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
-            gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
-            gEcHeadlessCampaignQueryValue = CanAcquireLegendarySignSpecies(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
-            gEcHeadlessCampaignQueryValue = GetHarvestedBerryCount(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
-            gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
-        {
-            gEcHeadlessCampaignQueryValue = 0;
-            for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
-                if (gSaveBlock1Ptr->pcItems[slot].itemId == gEcHeadlessCampaignQueryId)
-                    gEcHeadlessCampaignQueryValue += gSaveBlock1Ptr->pcItems[slot].quantity;
-        }
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OBJECT
-              && gMain.callback2 == CB2_Overworld)
-        {
-            u8 objectEventId = GetObjectEventIdByLocalIdAndMap(
-                gEcHeadlessCampaignQueryId,
-                gSaveBlock1Ptr->location.mapNum,
-                gSaveBlock1Ptr->location.mapGroup
-            );
-
-            gEcHeadlessCampaignQueryObjectActive = objectEventId < OBJECT_EVENTS_COUNT
-                && gObjectEvents[objectEventId].active;
-            if (gEcHeadlessCampaignQueryObjectActive)
-            {
-                gEcHeadlessCampaignQueryObjectX =
-                    gObjectEvents[objectEventId].currentCoords.x - MAP_OFFSET;
-                gEcHeadlessCampaignQueryObjectY =
-                    gObjectEvents[objectEventId].currentCoords.y - MAP_OFFSET;
-            }
-            else
-            {
-                gEcHeadlessCampaignQueryObjectX = 0;
-                gEcHeadlessCampaignQueryObjectY = 0;
-            }
-            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryObjectActive;
-        }
-        else
-        {
-            gEcHeadlessCampaignQueryValue = 0;
-            gEcHeadlessCampaignQueryObjectActive = FALSE;
-            gEcHeadlessCampaignQueryObjectX = 0;
-            gEcHeadlessCampaignQueryObjectY = 0;
-        }
 
         if (gMain.callback2 == CB2_Overworld)
         {
@@ -1848,6 +1993,18 @@ void EmeraldChampionsHeadlessObserve(void)
          && gBattleStruct->foeTypesSubmenu)
             gEcHeadlessFixtureObservedResult = TRUE;
         break;
+    case EC_HEADLESS_SCENARIO_BATTLE_UI:
+        // Trick-or-Treat's third type, applied once the foe lead is out.
+        if (!(gEcHeadlessFixtureParam & EC_HEADLESS_BATTLE_UI_THIRD_TYPE))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        else if (gHealthboxSpriteIds[B_BATTLER_1] < MAX_SPRITES
+              && !gSprites[gHealthboxSpriteIds[B_BATTLER_1]].invisible
+              && ++sEcHeadlessObservedDelay >= 60)
+        {
+            gBattleMons[B_BATTLER_1].types[2] = TYPE_GHOST;
+            gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        break;
     case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
         if (gBattle_BG0_Y == DISPLAY_HEIGHT * 2
          && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP)
@@ -1857,6 +2014,12 @@ void EmeraldChampionsHeadlessObserve(void)
             gEcHeadlessFixtureObservedResult = TRUE;
         break;
     }
+}
+
+void EmeraldChampionsHeadlessObserve(void)
+{
+    ObserveHeadlessFixture();
+    ProcessHeadlessQuery();
 }
 
 void CB2_EmeraldChampionsHeadlessFixture(void)
@@ -2454,7 +2617,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 VarSet(VAR_PETALBURG_CITY_STATE, 3);
                 VarSet(VAR_PETALBURG_GYM_STATE, 2);
                 FlagClear(FLAG_EC_WOODS_GREAT_BALL_PENDING);
-                FlagClear(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
                 AddBagItem(ITEM_POKE_VIAL, 1);
                 AddBagItem(ITEM_LEVELER, 1);
                 AddBagItem(ITEM_REGENERATOR, 1);
@@ -2478,7 +2640,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else if (scene == 256 || scene == 257)
                 {
                     FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
-                    FlagSet(FLAG_EC_RUSTBORO_GREAT_BALL_PENDING);
                     LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
                 }
                 else if (scene == 258 || scene == 259)
@@ -2573,11 +2734,6 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 {
                     FlagClear(FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE);
                     LoadHeadlessMap(MAP_PETALBURG_WOODS, 33, 7);
-                }
-                else if (scene == 274)
-                {
-                    FlagSet(FLAG_EC_BIRCH_GREAT_BALLS_PENDING);
-                    LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
                 }
                 else if (scene == 277 || scene == 278)
                 {
@@ -4201,6 +4357,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     case EC_HEADLESS_SCENARIO_SAFARI:
         PrepareHeadlessSafariBattle();
+        break;
+    case EC_HEADLESS_SCENARIO_BATTLE_UI:
+        PrepareHeadlessBattleUi();
         break;
     case EC_HEADLESS_SCENARIO_TITLE:
         SetMainCallback2(CB2_InitTitleScreen);

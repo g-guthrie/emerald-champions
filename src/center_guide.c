@@ -1,6 +1,7 @@
 #include "global.h"
 #include "center_guide.h"
 #include "event_data.h"
+#include "legendary_signs.h"
 #include "overworld.h"
 #include "quest_states.h"
 #include "string_util.h"
@@ -21,6 +22,7 @@ enum CenterGuideCheck
     CENTER_GUIDE_CHECK_VIAL_ROUTE133, // second Poké Vial upgrade is waiting
     CENTER_GUIDE_CHECK_TRICK_HOUSE,   // the last puzzle is still unsolved
     CENTER_GUIDE_CHECK_ODD_KEYSTONE,  // the Keystone has not been spent yet
+    CENTER_GUIDE_CHECK_ARCEUS_GIFT,   // Devon's Arceus is still waiting
 };
 
 struct CenterGuideTip
@@ -73,6 +75,8 @@ static bool32 IsGuideCheckActive(u8 check)
         return !IsTrickHouseComplete();
     case CENTER_GUIDE_CHECK_ODD_KEYSTONE:
         return !IsOddKeystoneSpent();
+    case CENTER_GUIDE_CHECK_ARCEUS_GIFT:
+        return !IsLegendarySignCaught(LEGENDARY_SIGN_ARCEUS);
     default:
         return TRUE;
     }
@@ -131,19 +135,19 @@ static const struct
     {FLAG_KECLEON_FLED_FORTREE, COMPOUND_STRING("Use the Devon Scope on what\nblocks the Fortree Gym. Then\lchallenge Winona!")},
     {FLAG_BADGE06_GET, COMPOUND_STRING("Winona leads the Fortree Gym.\nWin your sixth Badge there!")},
     {FLAG_RECEIVED_RED_OR_BLUE_ORB, COMPOUND_STRING("Teams Aqua and Magma are after\nsomething on Mt. Pyre, south of\lRoute 121. Hurry to the summit!")},
-    {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, COMPOUND_STRING("The Magma Emblem opens Team\nMagma's hideout. Look for it\lon Jagged Pass.")},
+    {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, COMPOUND_STRING("The Magma Emblem opens Team\nMagma's hideout. Look for it\lon Jagged Pass.\pIts boulders need Strength. The\nman in Rusturf Tunnel grants it\lonce its rocks are smashed.")},
     {FLAG_MET_TEAM_AQUA_HARBOR, COMPOUND_STRING("Team Aqua is after Capt.\nStern's submarine. Hurry to\lSlateport's harbor!")},
     {FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, COMPOUND_STRING("Team Aqua's hideout is in the\ncove on Lilycove City's east\lside. Surf there and stop them!")},
     {FLAG_BADGE07_GET, COMPOUND_STRING("Surf east from Lilycove to\nMossdeep City. Tate and Liza\llead the Gym there.")},
     {FLAG_DEFEATED_MAGMA_SPACE_CENTER, COMPOUND_STRING("Team Magma is storming the\nMossdeep Space Center! Hurry\land help Steven.")},
     {FLAG_RECEIVED_HM08, COMPOUND_STRING("Steven is waiting for you at\nhis house in Mossdeep City.")},
-    {FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, COMPOUND_STRING("Team Aqua's submarine went\nunder Route 128. Dive there to\lreach the Seafloor Cavern.")},
+    {FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, COMPOUND_STRING("Team Aqua's submarine went\nunder Route 128. Dive there to\lreach the Seafloor Cavern.\pBring Strength and Rock Smash.")},
     {FLAG_WALLACE_GOES_TO_SKY_PILLAR, COMPOUND_STRING("Sootopolis City sits inside the\ncrater on Route 126. Dive\lbelow it to find the way in.\pMeet Steven there, then find\nWallace in the Cave of Origin.")},
 };
 
 // Sky Pillar and the calm that follows (the Sootopolis crisis, see
 // SOOTOPOLIS_STATE_* in constants/quest_states.h).
-static const u8 sText_GuideSkyPillar[] = _("Wallace is waiting at Sky\nPillar on Route 131. Climb to\lthe top and wake Rayquaza.\pThe cracked floors inside call\nfor a Mach Bike.");
+static const u8 sText_GuideSkyPillar[] = _("Wallace is waiting at Sky\nPillar on Route 131. Climb to\lthe top and wake Rayquaza.");
 static const u8 sText_GuideLeaders[] = _("Rayquaza calmed the skies!\nBack in Sootopolis, hear what\lMaxie and Archie have to say.");
 static const u8 sText_GuideWaterfall[] = _("Wallace is waiting for you in\nSootopolis City.");
 static const u8 sText_GuideJuan[] = _("Juan leads the Sootopolis Gym.\nWin your last Badge there!");

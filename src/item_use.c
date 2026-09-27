@@ -104,7 +104,7 @@ static const u8 sText_PlayedPokeFlute[] = _("Played the Poké Flute.");
 static const u8 sText_PokeFluteAwakenedMon[] = _("The Poké Flute awakened sleeping\nPokémon.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_HoneyCantHere[] = _("Honey won't attract Pokémon\nhere.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!\pDoses left: {STR_VAR_1} of {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
@@ -1459,6 +1459,8 @@ static void ItemUseOnFieldCB_PokeVial(u8 taskId)
         HealPokemon(&gParties[B_TRAINER_PLAYER][i]);
 
     VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
+    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_POKE_VIAL_CHARGES), STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_POKE_VIAL_MAX_CHARGES), STR_CONV_MODE_LEFT_ALIGN, 2);
     DisplayItemMessageOnField(taskId, sText_UsedPokeVial, Task_CloseCantUseKeyItemMessage);
 }
 
@@ -1566,7 +1568,27 @@ static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
     return SPECIES_NONE;
 }
 
-static void PrepareFlightBeaconRider(void)
+// Why the Flight Beacon cannot fly the player from here, or NULL when it can.
+static const u8 *GetFlightBeaconRefusal(void)
+{
+    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
+        return sText_FlightBeaconLocked;
+    if (FindFlightBeaconRider(FALSE) == SPECIES_NONE)
+        return sText_FlightBeaconNeedsFlier;
+    if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
+     || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
+        return sText_FlightBeaconCantHere;
+    return NULL;
+}
+
+// Whether the player could fly from here with the Flight Beacon right now.
+// The PokeNav map offers Fly on exactly these terms.
+bool32 CanFlyWithFlightBeacon(void)
+{
+    return CheckBagHasItem(ITEM_FLIGHT_BEACON, 1) && GetFlightBeaconRefusal() == NULL;
+}
+
+void PrepareFlightBeaconRider(void)
 {
     enum Species rider = FindFlightBeaconRider(TRUE);
 
@@ -1611,15 +1633,7 @@ static void Task_OpenRegisteredFlightBeacon(u8 taskId)
 
 void ItemUseOutOfBattle_FlightBeacon(u8 taskId)
 {
-    const u8 *refusal = NULL;
-
-    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
-        refusal = sText_FlightBeaconLocked;
-    else if (FindFlightBeaconRider(FALSE) == SPECIES_NONE)
-        refusal = sText_FlightBeaconNeedsFlier;
-    else if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
-          || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
-        refusal = sText_FlightBeaconCantHere;
+    const u8 *refusal = GetFlightBeaconRefusal();
 
     if (refusal != NULL)
     {

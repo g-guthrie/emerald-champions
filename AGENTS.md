@@ -33,7 +33,7 @@ or data.
   never change. Difficulty offsets live in `GetTrainerLevelReduction`; any
   text quoting them derives the numbers from it. Text is always Instant; there
   is no text speed option.
-- No Game Book, player guides, Center battle presets or Center stat editor. No
+- No Game Book, player guides or Center battle presets. No
   new ground or hidden items: only replace original pickups or TM gifts.
 - No Terastallization anywhere.
 - Held items: the first Center nurse gives the Regenerator Key Item with the
@@ -51,10 +51,16 @@ or data.
   know loadouts but never read the player's committed move, target, switch or
   replacement. Tune difficulty with levels, not by weakening sets or strategy.
 - Every trainer must be beatable by a stage-legal team.
-- Wild legends: ordinary 1% slots (at most two per table), Ultra Beasts and
-  Paradox 2-3%, ordinary slots never below 2%; gates in
-  `src/data/pokemon/legendary_signs.h`. Legend-class spawns arrive at the
-  current cap with competitive sets. One Legendary, Mythical, Ultra Beast or
+- Wild encounters: ordinary table slots are at least 4%; Legendary/Mythical,
+  Ultra Beast and Paradox slots are 5%. Feebas keeps its native tile rule.
+  Storm visitors take their own share, reducing the normal table's share.
+  Caught legend-class species stop spawning. Gates live in
+  `src/data/pokemon/legendary_signs.h`; legend-class spawns arrive at the
+  current cap with authored sets. One Legendary, Mythical, Ultra Beast or
   Paradox per party in total; ordinary and pseudo-legendary Pokemon have no
   category limit. Static legends are high stakes: a knockout loses one.
   No percentages in dialogue.
+- DexNav and the PokéNav atlas share the native wild roster. Show every
+  currently available species with its icon, without seen/caught discovery
+  gating. Hide encounters until their actual unlock conditions are met.
+  Legend searching is allowed. Mirage Tower species may be missed.

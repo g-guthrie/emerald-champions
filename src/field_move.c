@@ -36,6 +36,20 @@ static const u16 sEmeraldHiddenMoveLicenses[FIELD_MOVES_COUNT] =
     [FIELD_MOVE_WATERFALL]  = FLAG_RECEIVED_HM_WATERFALL,
 };
 
+// Where each field license comes from, told when a locked obstacle is tried.
+// Every HM above needs a row (test/inclement_integration.c checks).
+const u8 *const gFieldMoveLicenseGivers[FIELD_MOVES_COUNT] =
+{
+    [FIELD_MOVE_CUT]        = COMPOUND_STRING("The Cutter grants it. His house\nis west of Rustboro's Center."),
+    [FIELD_MOVE_FLASH]      = COMPOUND_STRING("Ask the Hiker in Granite Cave,\nnorth of Dewford, to earn it."),
+    [FIELD_MOVE_ROCK_SMASH] = COMPOUND_STRING("Visit the Rock Smash Dude in\nMauville to earn it."),
+    [FIELD_MOVE_STRENGTH]   = COMPOUND_STRING("Smash the rocks in Rusturf\nTunnel to earn it."),
+    [FIELD_MOVE_SURF]       = COMPOUND_STRING("Beat Norman, then visit Wally's\nhouse in Petalburg to earn it."),
+    [FIELD_MOVE_FLY]        = COMPOUND_STRING("Beat your rival on Route 119\nto earn it."),
+    [FIELD_MOVE_DIVE]       = COMPOUND_STRING("Steven grants it at his house\nin Mossdeep."),
+    [FIELD_MOVE_WATERFALL]  = COMPOUND_STRING("Wallace grants it in Sootopolis\nonce the skies calm."),
+};
+
 bool32 FieldMove_IsHM(enum FieldMove fieldMove)
 {
     return (u32)fieldMove < ARRAY_COUNT(sEmeraldHiddenMoveLicenses)
@@ -66,6 +80,8 @@ void BufferFieldMoveUnlockRequirement(void)
 
     StringCopy(gStringVar1, GetMoveName(FieldMove_GetMoveId(fieldMove)));
     StringCopy(gStringVar2, badgeNames[badge]);
+    StringCopy(gStringVar3, gFieldMoveLicenseGivers[fieldMove] != NULL
+                            ? gFieldMoveLicenseGivers[fieldMove] : gText_EmptyString2);
     if (!FlagGet(FLAG_BADGE01_GET + badge))
         gSpecialVar_Result = 0;
     else if (!IsFieldMoveUnlocked(fieldMove))

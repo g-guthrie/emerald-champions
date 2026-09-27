@@ -63,11 +63,14 @@ static const struct WindowTemplate sHelpBarWindowTemplate[] =
 
 static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 {
-    [HELPBAR_MAP_ZOOMED_OUT]        = COMPOUND_STRING("{A_BUTTON}Zoom {B_BUTTON}Close"),
-    [HELPBAR_MAP_ZOOMED_IN]         = COMPOUND_STRING("{A_BUTTON}Full {B_BUTTON}Close"),
-    [HELPBAR_MAP_ZOOMED_OUT_CANFLY] = COMPOUND_STRING("{A_BUTTON}Zoom {B_BUTTON}Close {R_BUTTON}Fly"),
-    [HELPBAR_MAP_ZOOMED_IN_CANFLY]  = COMPOUND_STRING("{A_BUTTON}Full {B_BUTTON}Close {R_BUTTON}Fly"),
-    [HELPBAR_MAP_ZOOM_DISABLED]     = COMPOUND_STRING("{B_BUTTON}Close"),
+    [HELPBAR_MAP_ZOOMED_OUT]              = COMPOUND_STRING("{A_BUTTON}Zoom {B_BUTTON}Close"),
+    [HELPBAR_MAP_ZOOMED_IN]               = COMPOUND_STRING("{A_BUTTON}Full {B_BUTTON}Close"),
+    [HELPBAR_MAP_ZOOMED_OUT_CANFLY]       = COMPOUND_STRING("{A_BUTTON}Zoom {B_BUTTON}Close {R_BUTTON}Fly"),
+    [HELPBAR_MAP_ZOOM_DISABLED]           = COMPOUND_STRING("{B_BUTTON}Close"),
+    [HELPBAR_MAP_ZOOMED_IN_PLACE]         = COMPOUND_STRING("{A_BUTTON}Select {B_BUTTON}Close"),
+    [HELPBAR_MAP_ZOOMED_IN_PLACE_CANFLY]  = COMPOUND_STRING("{A_BUTTON}Select {B_BUTTON}Close {R_BUTTON}Fly"),
+    [HELPBAR_MAP_PLACE_CHOICE]            = COMPOUND_STRING("{A_BUTTON}Choose {B_BUTTON}Back"),
+    [HELPBAR_WILD_LIST]                   = COMPOUND_STRING("{DPAD_NONE}Pick {L_BUTTON}{R_BUTTON}Area {B_BUTTON}Back"),
 };
 
 static const u8 sHelpBarTextColors[3] =
@@ -308,6 +311,16 @@ void ShowMapHeader(u32 headerId)
         frame->headerSprites[i]->y = 16;
         MoveMapHeader(frame->headerSprites[i], 256, 160, 12);
     }
+}
+
+// Slides the title off the right edge, for a screen that covers the map.
+void HideMapHeader(void)
+{
+    s32 i;
+    struct Pokenav_Frame *frame = GetSubstructPtr(POKENAV_SUBSTRUCT_FRAME);
+
+    for (i = 0; i < (s32)ARRAY_COUNT(frame->headerSprites); i++)
+        MoveMapHeader(frame->headerSprites[i], frame->headerSprites[i]->x, 288, 12);
 }
 
 bool32 IsMapHeaderMoving(void)

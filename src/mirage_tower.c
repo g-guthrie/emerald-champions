@@ -295,6 +295,12 @@ void ClearMirageTowerPulseBlendEffect(void)
     FREE_AND_SET_NULL(sMirageTowerPulseBlend);
 }
 
+// The tower falls when its fossil is taken, and no way leads back in.
+bool32 IsMirageTowerGone(void)
+{
+    return VarGet(VAR_MIRAGE_TOWER_STATE) != 0;
+}
+
 void SetMirageTowerVisibility(void)
 {
     if (VarGet(VAR_MIRAGE_TOWER_STATE) >= 2)

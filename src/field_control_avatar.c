@@ -41,6 +41,7 @@
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "weather_anomaly.h"
+#include "field_weather.h"
 #include "constants/field_poison.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
@@ -178,6 +179,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         IncrementGameStat(GAME_STAT_STEPS);
         UpdateWeatherAnomaliesOnStep();
+        UpdateWeatherAnomalyWeather();
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
         if (FindTaskIdByFunc(Task_FollowerNPCOutOfDoor) == TASK_NONE && TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
@@ -225,9 +227,6 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
-
-    if (input->tookStep && TryFindHiddenPokemon())
-        return TRUE;
 
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField(REGISTER_BUTTON_SELECT) == TRUE)
         return TRUE;

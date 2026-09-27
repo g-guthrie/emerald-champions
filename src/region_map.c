@@ -158,7 +158,8 @@ static const mapsec_u16_t sRegionMap_SpecialPlaceLocations[][2] =
     {MAPSEC_TRAINER_HILL,               MAPSEC_ROUTE_111},
     {MAPSEC_DESERT_UNDERPASS,           MAPSEC_ROUTE_114},
     {MAPSEC_ALTERING_CAVE,              MAPSEC_ROUTE_103},
-    {MAPSEC_ARTISAN_CAVE,               MAPSEC_ROUTE_103},
+    // Entered from the Battle Frontier, where its region map position is.
+    {MAPSEC_ARTISAN_CAVE,               MAPSEC_BATTLE_FRONTIER},
     {MAPSEC_ABANDONED_SHIP,             MAPSEC_ROUTE_108},
     {MAPSEC_SEASPRAY_CAVE,              MAPSEC_ROUTE_115},
     {MAPSEC_EMBER_PATH,                 MAPSEC_JAGGED_PASS},
@@ -1339,6 +1340,81 @@ mapsec_u16_t CorrectSpecialMapSecId(mapsec_u16_t mapSecId)
     return CorrectSpecialMapSecId_Internal(mapSecId);
 }
 
+// A cell is a map section drawn on the region map, the thing the cursor names.
+bool32 IsRegionMapCell(mapsec_u16_t mapSecId)
+{
+    u32 x, y;
+
+    if (mapSecId >= MAPSEC_NONE)
+        return FALSE;
+    for (y = 0; y < MAP_HEIGHT; y++)
+    {
+        for (x = 0; x < MAP_WIDTH; x++)
+        {
+            if (sRegionMap_MapSectionLayout[y][x] == mapSecId)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// The cell the map names a section by: its special-place entry above,
+// followed until it reaches a drawn section (Ember Path -> Jagged Pass ->
+// Route 112). MAPSEC_NONE when the section has no entry or the chain ends
+// off the map.
+mapsec_u16_t GetRegionMapCellByName(mapsec_u16_t mapSecId)
+{
+    u32 hops, i;
+
+    for (hops = 0; hops < ARRAY_COUNT(sRegionMap_SpecialPlaceLocations) && !IsRegionMapCell(mapSecId); hops++)
+    {
+        for (i = 0; sRegionMap_SpecialPlaceLocations[i][0] != MAPSEC_NONE; i++)
+        {
+            if (sRegionMap_SpecialPlaceLocations[i][0] == mapSecId)
+                break;
+        }
+        mapSecId = sRegionMap_SpecialPlaceLocations[i][1];
+        if (mapSecId == MAPSEC_NONE)
+            return MAPSEC_NONE;
+    }
+    return IsRegionMapCell(mapSecId) ? mapSecId : MAPSEC_NONE;
+}
+
+// The cell under a section's own region map position, where the player icon
+// stands while inside it. MAPSEC_NONE when it has no position on the map.
+mapsec_u16_t GetRegionMapCellByPosition(mapsec_u16_t mapSecId)
+{
+    const struct RegionMapLocation *entry;
+
+    if (mapSecId >= MAPSEC_NONE)
+        return MAPSEC_NONE;
+    entry = &gRegionMapEntries[mapSecId];
+    if (entry->width == 0 || entry->height == 0 || entry->x >= MAP_WIDTH || entry->y >= MAP_HEIGHT)
+        return MAPSEC_NONE;
+    return sRegionMap_MapSectionLayout[entry->y][entry->x];
+}
+
+// The cell a section belongs to: itself when drawn, else the cell the map
+// names it by, else the cell under its position. Terra and Marine Cave move
+// with the abnormal weather, as the map shows them.
+mapsec_u16_t GetRegionMapCell(mapsec_u16_t mapSecId)
+{
+    mapsec_u16_t cell;
+    u32 i;
+
+    if (IsRegionMapCell(mapSecId))
+        return mapSecId;
+    for (i = 0; i < ARRAY_COUNT(sMarineCaveMapSecIds); i++)
+    {
+        if (sMarineCaveMapSecIds[i] == mapSecId)
+            return GetTerraOrMarineCaveMapSecId();
+    }
+    cell = GetRegionMapCellByName(mapSecId);
+    if (cell == MAPSEC_NONE)
+        cell = GetRegionMapCellByPosition(mapSecId);
+    return cell;
+}
+
 static void GetPositionOfCursorWithinMapSec(void)
 {
     u16 x;
@@ -1552,6 +1628,17 @@ static void UnhideRegionMapPlayerIcon(void)
             sRegionMap->playerIconSprite->invisible = FALSE;
         }
     }
+}
+
+// For a screen drawn over the zoomed map (the PokeNav's Wild Pokemon list).
+void SetRegionMapIconsHidden(bool32 hidden)
+{
+    if (sRegionMap->cursorSprite != NULL)
+        sRegionMap->cursorSprite->invisible = hidden;
+    if (hidden)
+        HideRegionMapPlayerIcon();
+    else
+        UnhideRegionMapPlayerIcon();
 }
 
 #define sY       data[0]
@@ -2107,7 +2194,7 @@ static void CB_HandleFlyMapInput(void)
             DrawFlyDestTextWindow();
             break;
         case MAP_INPUT_A_BUTTON:
-            if (sFlyMap->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY || sFlyMap->regionMap.mapSecType == MAPSECTYPE_BATTLE_FRONTIER)
+            if (IsFlyMapDestination(sFlyMap->regionMap.mapSecType))
             {
                 m4aSongNumStart(SE_SELECT);
                 sFlyMap->choseFlyLocation = TRUE;
@@ -2157,6 +2244,12 @@ static void CB_ExitFlyMap(void)
         }
         break;
     }
+}
+
+// A place the fly map lets the player choose (and so the PokeNav's Fly).
+bool32 IsFlyMapDestination(u8 mapSecType)
+{
+    return mapSecType == MAPSECTYPE_CITY_CANFLY || mapSecType == MAPSECTYPE_BATTLE_FRONTIER;
 }
 
 u32 FilterFlyDestination(struct RegionMap* regionMap)

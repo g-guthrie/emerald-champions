@@ -857,10 +857,12 @@ static void AcroBikeTransition_Moving(enum Direction direction)
     }
     else
     {
+        // The one Bicycle rides at the Mach Bike's top speed from the first
+        // pedal, so a cracked floor breaks behind it instead of under it.
         if (ObjectMovingOnRockStairs(playerObjEvent, direction))
             PlayerWalkFast(direction);
         else
-            PlayerRideWaterCurrent(direction);
+            PlayerWalkFaster(direction);
     }
 }
 
@@ -1334,9 +1336,10 @@ enum PlayerSpeed GetPlayerSpeed(void)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         return machSpeeds[gPlayerAvatar.bikeFrameCounter];
-    // Emerald Champions (C10): there is one Bicycle. It is the Acro frame, so it keeps
-    // the rails, wheelies and hops, and it rides at the Mach bike's top speed so that
-    // ForcedMovement_MuddySlope lets it climb sandy and muddy slopes instead of sliding.
+    // Emerald Champions: there is one Bicycle. It is the Acro frame, so it keeps the
+    // rails, wheelies and hops, and it rides at the Mach bike's top speed
+    // (AcroBikeTransition_Moving), so ForcedMovement_MuddySlope lets it climb sandy
+    // and muddy slopes and CrackedFloorPerStepCallback lets it cross cracked floors.
     else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
         return PLAYER_SPEED_FASTEST;
     else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_DASH))

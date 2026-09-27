@@ -288,6 +288,7 @@ static const struct { u16 species; u8 level; } sWildEvolutionFloors[] =
     {SPECIES_RHYDON, 42},
     {SPECIES_RIBOMBEE, 25},
     {SPECIES_RILLABOOM, 35},
+    {SPECIES_RUNERIGUS, 34},
     {SPECIES_SALAMENCE, 50},
     {SPECIES_SALAZZLE, 33},
     {SPECIES_SAMUROTT, 36},

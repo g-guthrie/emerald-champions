@@ -12,6 +12,8 @@ bool32 CanPartyMonGoStraightToRelearner(u32 partyIndex);
 void Special_HasMoveToRelearn(void);
 bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
 bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
+// By move name, as the tutor lists them (also the Pokedex's moves page).
+void SortMovesAlphabetically(u16 *moves, u32 numMoves);
 
 extern enum MoveRelearnerStates gMoveRelearnerState;
 extern enum RelearnMode gRelearnMode;

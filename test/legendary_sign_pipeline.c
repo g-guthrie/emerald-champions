@@ -943,3 +943,155 @@ TEST("Center guide: side quests appear with their gates and retire when done")
     VarSet(VAR_CHANSEY_NURSE_STATE, 0);
     gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
 }
+
+// The lead's text with its line and page breaks read as spaces.
+static void NormalizeLeadText(u8 *dest, const u8 *lead)
+{
+    u32 i;
+    for (i = 0; lead[i] != EOS && i < sizeof(gStringVar4) - 1; i++)
+    {
+        u8 c = lead[i];
+        dest[i] = (c == CHAR_NEWLINE || c == CHAR_PROMPT_SCROLL || c == CHAR_PROMPT_CLEAR) ? CHAR_SPACE : c;
+    }
+    dest[i] = EOS;
+}
+
+static bool32 LeadTextContains(const u8 *text, const u8 *needle)
+{
+    u32 length = StringLength(text);
+    u32 needleLength = StringLength(needle);
+    for (u32 i = 0; i + needleLength <= length; i++)
+        if (StringCompareN(text + i, needle, needleLength) == 0)
+            return TRUE;
+    return FALSE;
+}
+
+// The Badge count a lead states in prose ("five Badges", "all eight Gym
+// Badges"), or 0 when it states none.
+static u32 GetLeadStatedBadges(const u8 *text)
+{
+    static const u8 *const numbers[][2] = {
+        {COMPOUND_STRING("one "), COMPOUND_STRING("One ")},
+        {COMPOUND_STRING("two "), COMPOUND_STRING("Two ")},
+        {COMPOUND_STRING("three "), COMPOUND_STRING("Three ")},
+        {COMPOUND_STRING("four "), COMPOUND_STRING("Four ")},
+        {COMPOUND_STRING("five "), COMPOUND_STRING("Five ")},
+        {COMPOUND_STRING("six "), COMPOUND_STRING("Six ")},
+        {COMPOUND_STRING("seven "), COMPOUND_STRING("Seven ")},
+        {COMPOUND_STRING("eight "), COMPOUND_STRING("Eight ")},
+    };
+    const u8 *gym = COMPOUND_STRING("Gym ");
+    const u8 *badge = COMPOUND_STRING("Badge");
+
+    for (u32 i = 0; text[i] != EOS; i++)
+    {
+        if (i > 0 && text[i - 1] != CHAR_SPACE)
+            continue;
+        for (u32 n = 0; n < ARRAY_COUNT(numbers); n++)
+        {
+            for (u32 form = 0; form < 2; form++)
+            {
+                const u8 *word = numbers[n][form];
+                u32 at = i + StringLength(word);
+                if (StringCompareN(text + i, word, StringLength(word)) != 0)
+                    continue;
+                if (StringCompareN(text + at, gym, StringLength(gym)) == 0)
+                    at += StringLength(gym);
+                if (StringCompareN(text + at, badge, StringLength(badge)) == 0)
+                    return n + 1;
+            }
+        }
+    }
+    return 0;
+}
+
+static bool32 IsBadgeFlag(u16 flag)
+{
+    return flag >= FLAG_BADGE01_GET && flag <= FLAG_BADGE08_GET;
+}
+
+// Each Rare Pokémon lead tells the player its gate in prose. The gate row in
+// src/data/pokemon/legendary_signs.h is the truth: a stated Badge count must
+// match it, a Badge-only gate must be stated, a story gate must be named and
+// a required catch must be named. Edit a gate row and its lead must follow.
+TEST("Center guide: every legendary lead states the gate its row enforces")
+{
+    u8 text[sizeof(gStringVar4)];
+    u32 failures = 0;
+
+    for (u32 i = 0; i < GetCenterLegendaryLeadCountForTesting(); i++)
+    {
+        enum LegendarySignId id;
+        u16 city;
+        const u8 *lead = GetCenterLegendaryLeadForTesting(i, &id, &city);
+        const struct LegendaryGate *gate;
+        bool32 namesHallOfFame;
+        bool32 ok = TRUE;
+        u32 stated;
+
+        NormalizeLeadText(text, lead);
+        stated = GetLeadStatedBadges(text);
+        // Classic residents (Jirachi, the Regis, the weather trio...) follow
+        // their own scripted gates rather than a gate row.
+        if (id >= LEGENDARY_SIGN_COUNT)
+            continue;
+        gate = &gLegendaryGates[id];
+        namesHallOfFame = LeadTextContains(text, COMPOUND_STRING("Hall of Fame"))
+                       || LeadTextContains(text, COMPOUND_STRING("Champion"));
+
+        if (stated != 0)
+        {
+            ok &= stated == gate->minimumBadges;
+        }
+        else if (gate->minimumBadges > 0)
+        {
+            // An unstated count is fine only when a named milestone implies it.
+            bool32 implied = (gate->unlockFlag != 0 && !IsBadgeFlag(gate->unlockFlag))
+                          || namesHallOfFame;
+            if (gate->requiredSpecies != SPECIES_NONE)
+            {
+                enum LegendarySignId required = GetLegendarySignIdBySpecies(gate->requiredSpecies);
+                if (required < LEGENDARY_SIGN_COUNT
+                 && gLegendaryGates[required].minimumBadges >= gate->minimumBadges)
+                    implied = TRUE;
+            }
+            ok &= implied;
+        }
+
+        if (IsBadgeFlag(gate->unlockFlag))
+            ok &= stated == gate->unlockFlag - FLAG_BADGE01_GET + 1;
+        else if (gate->requiredSpecies != SPECIES_NONE
+              && GetLegendarySignIdBySpecies(gate->requiredSpecies) < LEGENDARY_SIGN_COUNT
+              && gLegendaryGates[GetLegendarySignIdBySpecies(gate->requiredSpecies)].unlockFlag == gate->unlockFlag)
+            ; // The required catch already waits for the same milestone.
+        else if (gate->unlockFlag == FLAG_IS_CHAMPION || gate->unlockFlag == FLAG_SYS_GAME_CLEAR)
+            ok &= namesHallOfFame;
+        else if (gate->unlockFlag == FLAG_RECEIVED_RED_OR_BLUE_ORB)
+            ok &= LeadTextContains(text, COMPOUND_STRING("Magma Emblem"))
+               || LeadTextContains(text, COMPOUND_STRING("Mt. Pyre"));
+        else if (gate->unlockFlag == FLAG_VISITED_FORTREE_CITY)
+            ok &= LeadTextContains(text, COMPOUND_STRING("Weather Institute"));
+        else if (gate->unlockFlag == FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)
+            ok &= LeadTextContains(text, COMPOUND_STRING("Kyogre"));
+        else if (gate->unlockFlag == FLAG_GOT_TM24_FROM_WATTSON)
+            ok &= LeadTextContains(text, COMPOUND_STRING("Wattson"));
+        else if (gate->unlockFlag == FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE)
+            ok &= LeadTextContains(text, COMPOUND_STRING("crisis"))
+               || LeadTextContains(text, COMPOUND_STRING("skies calm"));
+        else if (gate->unlockFlag == FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT)
+            ok &= LeadTextContains(text, COMPOUND_STRING("Maxie"));
+        else if (gate->unlockFlag != 0)
+            ok = FALSE; // A new story gate: teach this test the words its lead uses.
+
+        if (gate->requiredSpecies != SPECIES_NONE)
+            ok &= LeadTextContains(text, GetSpeciesName(gate->requiredSpecies));
+
+        if (!ok)
+        {
+            Test_MgbaPrintf("Lead %d (sign %d) disagrees with its gate: states %d, gate %d Badges, flag 0x%x",
+                i, id, stated, gate->minimumBadges, gate->unlockFlag);
+            failures++;
+        }
+    }
+    EXPECT_EQ(failures, 0);
+}

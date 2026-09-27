@@ -6154,7 +6154,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .teachableLearnset = sYamaskGalarTeachableLearnset,
         .eggMoveLearnset = sYamaskGalarEggMoveLearnset,
         .formSpeciesIdTable = sYamaskFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_SCRIPT_TRIGGER, EVO_TRIGGER_TABLET_CURSE, SPECIES_RUNERIGUS, CONDITIONS({IF_CURRENT_DAMAGE_GE, 49})}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_RUNERIGUS, CONDITIONS({IF_IN_MAPSEC, MAPSEC_ROUTE_111})}),
     },
 
     [SPECIES_RUNERIGUS] =

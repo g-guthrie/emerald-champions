@@ -223,9 +223,16 @@ MauvilleCity_Gym_EventScript_GymGuide::
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_GymGuidePostVictory
 	goto_if_set FLAG_MAUVILLE_GYM_MOOMOOMILK, MauvilleCity_GymGuide_2
 	msgbox MauvilleCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
-	giveitem ITEM_MOOMOO_MILK, 12
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+MauvilleCity_Gym_EventScript_GymGuideGems::
+	@ Both Gems must fit before either is given (the check takes any item pair).
+	@ The flag keeps its old name; it records the guide's gift.
+	setvar VAR_0x8004, ITEM_GROUND_GEM
+	setvar VAR_0x8005, ITEM_ROCK_GEM
+	specialvar VAR_RESULT, CanReceiveBerryPair
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+MauvilleCity_Gym_EventScript_GymGuideGiveGems::
+	giveitem ITEM_GROUND_GEM
+	giveitem ITEM_ROCK_GEM
 	setflag FLAG_MAUVILLE_GYM_MOOMOOMILK
 	msgbox MauvilleCity_Gym_Text_GymGuideAdvice2, MSGBOX_DEFAULT
 	release
@@ -266,9 +273,12 @@ MauvilleCity_Gym_EventScript_GymStatue:: @ 820E175
 MauvilleCity_Gym_Text_GymGuideAdvice2:
 	.string "Wattson, the Leader of Mauville\n"
 	.string "Gym, uses Electric-type Pokémon.\p"
-	.string "He's prepared for Ground and Grass-type\n"
-	.string "Pokémon, so you should have a backup\l"
-	.string "plan if you want to beat him!\p"
+	.string "Ground moves hit most of his team\n"
+	.string "hard, but some of them float.\p"
+	.string "Flying types, Levitate and Air\n"
+	.string "Balloons all dodge Ground moves.\p"
+	.string "Rock moves hit those fliers and his\n"
+	.string "Bug-types instead!\p"
 	.string "And, he's put in switch-controlled\n"
 	.string "doors all over his Gym! Eccentric!\p"
 	.string "Hey, go for it!$"
@@ -276,8 +286,9 @@ MauvilleCity_Gym_Text_GymGuideAdvice2:
 MauvilleCity_Gym_Text_GymGuideAdvice:
 	.string "Hey, how's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "Please, take this Moomoo Milk to\n"
-	.string "help with your challenge!$"
+	.string "Take these Gems for your challenge!\p"
+	.string "A partner holding one boosts a move\n"
+	.string "of that type once in every battle!$"
 
 MauvilleCity_Gym_Text_GymGuidePostVictory: @ 820E283
 	.string "Whoa, you're electrifying!\n"

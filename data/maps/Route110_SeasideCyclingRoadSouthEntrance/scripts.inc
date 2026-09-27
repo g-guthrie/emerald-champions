@@ -23,18 +23,14 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_Clerk:: @ 826EBC4
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_BikeCheck:: @ 826EBD0
 	lockall
 	specialvar VAR_RESULT, GetPlayerAvatarBike
-	compare VAR_RESULT, 2
-	call_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_OnMachBike
 	compare VAR_RESULT, 0
 	goto_if_eq Route110_SeasideCyclingRoadSouthEntrance_EventScript_NoBike
+	@ Any Bicycle is rated; there is only the one frame now.
+	setvar VAR_CYCLING_CHALLENGE_STATE, 1
 	setflag FLAG_SYS_CYCLING_ROAD
 	setvar VAR_TEMP_1, 1
 	releaseall
 	end
-
-Route110_SeasideCyclingRoadSouthEntrance_EventScript_OnMachBike:: @ 826EBF6
-	setvar VAR_CYCLING_CHALLENGE_STATE, 1
-	return
 
 Route110_SeasideCyclingRoadSouthEntrance_EventScript_NoBike:: @ 826EBFC
 	msgbox Route110_SeasideCyclingRoadSouthEntrance_Text_TooDangerousToWalk, MSGBOX_DEFAULT

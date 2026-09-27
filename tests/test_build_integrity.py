@@ -258,11 +258,42 @@ class ReleaseVariantIntegrityTests(unittest.TestCase):
         for name in ("CB2_EmeraldChampionsHeadlessFixture", "gEcHeadlessFixtureScenario",
                      "EmeraldChampionsHeadlessObserve",
                      "EmeraldChampionsAgentPrepPoll", "gEcAgentPrepCommand",
-                     "CB2_TestRunner", "gTestRunnerState", "gTestRunnerHeadless"):
+                     "CB2_TestRunner", "gTestRunnerState", "gTestRunnerHeadless",
+                     "EmeraldChampions_TryInstantWin", "EmeraldChampions_TryInstantWin.lto_priv.0"):
             with self.subTest(name=name):
                 release.verify_release_symbols("08001000 T __rom_end\n")
                 with self.assertRaisesRegex(SystemExit, "test/fixture interfaces"):
                     release.verify_release_symbols("08000100 T " + name + "\n")
+
+    def preprocess_instant_win(self, *defines, include_first=None):
+        compiler = shutil.which("cc")
+        self.assertIsNotNone(compiler, "host C preprocessor required for the release config gate")
+        with tempfile.TemporaryDirectory(prefix="ec-instant-win-") as temp:
+            source = Path(temp) / "probe.c"
+            source.write_text('#include "gba/defines.h"\n#include "constants/global.h"\nEC_INSTANT_WIN_VALUE = EC_DEBUG_INSTANT_WIN\n')
+            quote = ([f"-iquote{include_first}"] if include_first else []) + [f"-iquote{ROOT / 'include'}"]
+            return subprocess.run([compiler, "-E", "-P", *quote, *defines, str(source)],
+                                  text=True, capture_output=True, timeout=30)
+
+    def test_instant_win_is_a_testing_build_aid_only(self):
+        testing = self.preprocess_instant_win()
+        self.assertEqual(testing.returncode, 0, testing.stderr)
+        self.assertIn("EC_INSTANT_WIN_VALUE = 1", testing.stdout)
+        shipped = self.preprocess_instant_win("-DRELEASE")
+        self.assertEqual(shipped.returncode, 0, shipped.stderr)
+        self.assertIn("EC_INSTANT_WIN_VALUE = 0", shipped.stdout)
+
+    def test_release_build_refuses_a_forced_instant_win(self):
+        with tempfile.TemporaryDirectory(prefix="ec-instant-win-config-") as overlay:
+            config = Path(overlay) / "config"
+            config.mkdir()
+            text = (ROOT / "include/config/debug.h").read_text()
+            forced = re.sub(r"(#define EC_DEBUG_INSTANT_WIN\s+)DISABLED_ON_RELEASE", r"\1TRUE", text)
+            self.assertNotEqual(forced, text, "debug.h no longer declares the instant win as DISABLED_ON_RELEASE")
+            (config / "debug.h").write_text(forced)
+            result = self.preprocess_instant_win("-DRELEASE", include_first=overlay)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("EC_DEBUG_INSTANT_WIN must be off in a release build", result.stderr)
 
 
 class HydraProcessIntegrityTests(unittest.TestCase):

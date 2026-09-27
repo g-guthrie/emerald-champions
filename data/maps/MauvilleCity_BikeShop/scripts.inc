@@ -1,186 +1,123 @@
+@ One Bicycle. Rydel gives ITEM_ACRO_BIKE, shown as the Bicycle; src/bike.c rides it
+@ at the Mach Bike's top speed, so the one frame climbs sandy slopes and crosses
+@ cracked floors as well as riding rails and hopping. There is nothing to choose or
+@ swap. A save that already holds a Mach Bike trades it in for the Bicycle.
 MauvilleCity_BikeShop_MapScripts:: @ 820EBBB
 	.byte 0
 
 MauvilleCity_BikeShop_EventScript_Rydel:: @ 820EBBC
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_AskSwitchBikes
+	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_AlreadyHasBike
 	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_SkipGreeting
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
-	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MauvilleCity_BikeShop_EventScript_YesFar
-	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_BikeShop_EventScript_NotFar
-	end
-
 MauvilleCity_BikeShop_EventScript_SkipGreeting:: @ 820EBF7
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MauvilleCity_BikeShop_EventScript_YesFar
-	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_BikeShop_EventScript_NotFar
-	end
-
-MauvilleCity_BikeShop_EventScript_ChooseBike:: @ 820EC16
-	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
-	waitmessage
-	multichoice 21, 8, MULTI_BIKE, TRUE
-	switch VAR_RESULT
-	case 0, MauvilleCity_BikeShop_EventScript_GetMachBike
-	case 1, MauvilleCity_BikeShop_EventScript_GetAcroBike
-	end
-
-MauvilleCity_BikeShop_EventScript_NotFar:: @ 820EC3D
+	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_GiveBike
 	setflag FLAG_DECLINED_BIKE
 	msgbox MauvilleCity_BikeShop_Text_GuessYouDontNeedBike, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_BikeShop_EventScript_YesFar:: @ 820EC4A
-	goto MauvilleCity_BikeShop_EventScript_ChooseBike
-	end
-
-MauvilleCity_BikeShop_EventScript_GetMachBike:: @ 820EC53
-	msgbox MauvilleCity_BikeShop_Text_ChoseMachBike, MSGBOX_DEFAULT
-	giveitem ITEM_MACH_BIKE
-	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
-	end
-
-MauvilleCity_BikeShop_EventScript_GetAcroBike:: @ 820EC6D
-	msgbox MauvilleCity_BikeShop_Text_ChoseAcroBike, MSGBOX_DEFAULT
+MauvilleCity_BikeShop_EventScript_GiveBike::
+	msgbox MauvilleCity_BikeShop_Text_TakeThisBicycle, MSGBOX_DEFAULT
 	giveitem ITEM_ACRO_BIKE
-	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
-	end
-
-MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes:: @ 820EC87
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_BIKE
-	msgbox MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes, MSGBOX_DEFAULT
-	special SwapRegisteredBike
+	msgbox MauvilleCity_BikeShop_Text_OneFrameDoesItAll, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_BikeShop_EventScript_AskSwitchBikes:: @ 820EC94
-	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq MauvilleCity_BikeShop_EventScript_SwitchBikes
-	compare VAR_RESULT, NO
-	goto_if_eq MauvilleCity_BikeShop_EventScript_KeepBike
-	end
-
-@ If the player does not have a bike on them Rydel assumes its stored in the PC
-MauvilleCity_BikeShop_EventScript_SwitchBikes:: @ 820ECB3
-	msgbox MauvilleCity_BikeShop_Text_IllSwitchBikes, MSGBOX_DEFAULT
-	checkitem ITEM_ACRO_BIKE, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq MauvilleCity_BikeShop_EventScript_SwitchAcroForMach
-	checkitem ITEM_MACH_BIKE, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq MauvilleCity_BikeShop_EventScript_SwitchMachForAcro
-	msgbox MauvilleCity_BikeShop_Text_OhYourBikeIsInPC, MSGBOX_DEFAULT
-	release
-	end
-
-MauvilleCity_BikeShop_EventScript_KeepBike:: @ 820ECE5
+MauvilleCity_BikeShop_EventScript_AlreadyHasBike::
+	checkitem ITEM_MACH_BIKE
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_TradeInMachBike
 	msgbox MauvilleCity_BikeShop_Text_HappyYouLikeIt, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_BikeShop_EventScript_SwitchAcroForMach:: @ 820ECEF
-	incrementgamestat GAME_STAT_TRADED_BIKES
-	msgbox MauvilleCity_BikeShop_Text_ExchangedAcroForMach, MSGBOX_DEFAULT
-	removeitem ITEM_ACRO_BIKE
-	giveitem ITEM_MACH_BIKE
-	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
-	end
-
-MauvilleCity_BikeShop_EventScript_SwitchMachForAcro:: @ 820ED10
-	incrementgamestat GAME_STAT_TRADED_BIKES
-	msgbox MauvilleCity_BikeShop_Text_ExchangedMachForAcro, MSGBOX_DEFAULT
+MauvilleCity_BikeShop_EventScript_TradeInMachBike::
+	msgbox MauvilleCity_BikeShop_Text_TradeInMachBike, MSGBOX_DEFAULT
+	special SwapRegisteredBike
 	removeitem ITEM_MACH_BIKE
 	giveitem ITEM_ACRO_BIKE
-	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
+	msgbox MauvilleCity_BikeShop_Text_OneFrameDoesItAll, MSGBOX_DEFAULT
+	release
 	end
 
 MauvilleCity_BikeShop_EventScript_Assistant:: @ 820ED31
 	msgbox MauvilleCity_BikeShop_Text_HandbooksAreInBack, MSGBOX_NPC
 	end
 
+@ Two shelves, one Bicycle: riding on the left, tricks on the right.
 MauvilleCity_BikeShop_EventScript_MachBikeHandbook:: @ 820ED3A
-	message MauvilleCity_BikeShop_Text_MachHandbookWhichPage
+	message MauvilleCity_BikeShop_Text_RidingHandbookWhichPage
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseRidingHandbookPage
 	end
 
-MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage:: @ 820ED46
+MauvilleCity_BikeShop_EventScript_ChooseRidingHandbookPage::
 	multichoice 0, 0, MULTI_MACH_BIKE_INFO, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_HowToRide
-	case 1, MauvilleCity_BikeShop_EventScript_HowToTurn
-	case 2, MauvilleCity_BikeShop_EventScript_SandySlopes
-	case 3, MauvilleCity_BikeShop_EventScript_ExitMachHandbook
-	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ExitMachHandbook
+	case 1, MauvilleCity_BikeShop_EventScript_SandySlopes
+	case 2, MauvilleCity_BikeShop_EventScript_CrackedFloors
+	case 3, MauvilleCity_BikeShop_EventScript_ExitHandbook
+	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ExitHandbook
 	end
 
 MauvilleCity_BikeShop_EventScript_HowToRide:: @ 820ED88
-	message MauvilleCity_BikeShop_Text_HowToRideMachBike
+	message MauvilleCity_BikeShop_Text_HowToRide
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
-	end
-
-MauvilleCity_BikeShop_EventScript_HowToTurn:: @ 820ED94
-	message MauvilleCity_BikeShop_Text_HowToTurnMachBike
-	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseRidingHandbookPage
 	end
 
 MauvilleCity_BikeShop_EventScript_SandySlopes:: @ 820EDA0
 	message MauvilleCity_BikeShop_Text_SandySlopes
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseRidingHandbookPage
 	end
 
-MauvilleCity_BikeShop_EventScript_ExitMachHandbook:: @ 820EDAC
-	release
+MauvilleCity_BikeShop_EventScript_CrackedFloors::
+	message MauvilleCity_BikeShop_Text_CrackedFloors
+	waitmessage
+	goto MauvilleCity_BikeShop_EventScript_ChooseRidingHandbookPage
 	end
 
 MauvilleCity_BikeShop_EventScript_AcroBikeHandbook:: @ 820EDAE
-	message MauvilleCity_BikeShop_Text_AcroHandbookWhichPage
+	message MauvilleCity_BikeShop_Text_TricksHandbookWhichPage
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseTricksHandbookPage
 	end
 
-MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage:: @ 820EDBA
+MauvilleCity_BikeShop_EventScript_ChooseTricksHandbookPage::
 	multichoice 0, 0, MULTI_ACRO_BIKE_INFO, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_Wheelies
 	case 1, MauvilleCity_BikeShop_EventScript_BunnyHops
 	case 2, MauvilleCity_BikeShop_EventScript_Jumps
-	case 3, MauvilleCity_BikeShop_EventScript_ExitAcroHandbook
-	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ExitAcroHandbook
+	case 3, MauvilleCity_BikeShop_EventScript_ExitHandbook
+	case MULTI_B_PRESSED, MauvilleCity_BikeShop_EventScript_ExitHandbook
 	end
 
 MauvilleCity_BikeShop_EventScript_Wheelies:: @ 820EDFC
 	message MauvilleCity_BikeShop_Text_Wheelies
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseTricksHandbookPage
 	end
 
 MauvilleCity_BikeShop_EventScript_BunnyHops:: @ 820EE08
 	message MauvilleCity_BikeShop_Text_BunnyHops
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseTricksHandbookPage
 	end
 
 MauvilleCity_BikeShop_EventScript_Jumps:: @ 820EE14
 	message MauvilleCity_BikeShop_Text_Jumps
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
+	goto MauvilleCity_BikeShop_EventScript_ChooseTricksHandbookPage
 	end
 
-MauvilleCity_BikeShop_EventScript_ExitAcroHandbook:: @ 820EE20
+MauvilleCity_BikeShop_EventScript_ExitHandbook::
 	release
 	end
 
@@ -198,97 +135,55 @@ MauvilleCity_BikeShop_Text_DidYouComeFromFarAway: @ 820EE99
 MauvilleCity_BikeShop_Text_GuessYouDontNeedBike: @ 820EEE8
 	.string "Rydel: Is that right?\p"
 	.string "Then, I guess you have no need for\n"
-	.string "any of my Bikes.$"
+	.string "my Bicycle.$"
 
-MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne: @ 820EF32
+MauvilleCity_BikeShop_Text_TakeThisBicycle:
 	.string "Rydel: Hm, hm… … … … …\p"
 	.string "You're saying that you came all this\n"
 	.string "way from Littleroot?\p"
 	.string "My goodness!\n"
 	.string "That's ridiculously far!\p"
-	.string "If you had one of my Bikes, you could\n"
-	.string "go anywhere easily while feeling the\l"
-	.string "gentle caress of the wind!\p"
+	.string "With one of my Bikes, you could go\n"
+	.string "anywhere with the wind at your back!\p"
 	.string "I'll tell you what!\n"
-	.string "I'll give you a Bike!\p"
-	.string "Oh, wait a second!\p"
-	.string "I forgot to tell you that there are\n"
-	.string "two kinds of Bikes!\p"
-	.string "They are the Mach Bike and\n"
-	.string "the Acro Bike!\p"
-	.string "The Mach Bike is for cyclists who want\n"
-	.string "to feel the wind with their bodies!\p"
-	.string "And an Acro Bike is for those who\n"
-	.string "prefer technical rides!\p"
-	.string "I'm a real sweetheart, so you can\n"
-	.string "have whichever one you like!\p"
-	.string "Which one will you choose?$"
+	.string "Take my Bicycle!$"
 
-MauvilleCity_BikeShop_Text_ChoseMachBike: @ 820F18D
-	.string "{PLAYER} chose the Mach Bike.$"
+MauvilleCity_BikeShop_Text_OneFrameDoesItAll:
+	.string "Rydel: One frame does it all.\p"
+	.string "It's fast enough to climb sandy\n"
+	.string "slopes and cross cracked floors.\p"
+	.string "Hold the B Button for wheelies and\n"
+	.string "hops, and it rides narrow rails.\p"
+	.string "The handbooks in the back tell you\n"
+	.string "the rest. Enjoy the ride!$"
 
-MauvilleCity_BikeShop_Text_ChoseAcroBike: @ 820F1A5
-	.string "{PLAYER} chose the Acro Bike.$"
-
-MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes: @ 820F1BD
-	.string "Rydel: If you get the urge to switch\n"
-	.string "Bikes, just come see me!$"
-
-MauvilleCity_BikeShop_Text_WantToSwitchBikes: @ 820F1FB
-	.string "Rydel: Oh? Were you thinking about\n"
-	.string "switching Bikes?$"
-
-MauvilleCity_BikeShop_Text_IllSwitchBikes: @ 820F22F
-	.string "Rydel: Okay, no problem!\n"
-	.string "I'll switch Bikes for you!$"
-
-MauvilleCity_BikeShop_Text_ExchangedMachForAcro: @ 820F263
-	.string "{PLAYER} got the Mach Bike exchanged\n"
-	.string "for an Acro Bike.$"
-
-MauvilleCity_BikeShop_Text_ExchangedAcroForMach: @ 820F294
-	.string "{PLAYER} got the Acro Bike exchanged\n"
-	.string "for a Mach Bike.$"
+MauvilleCity_BikeShop_Text_TradeInMachBike:
+	.string "Rydel: Oh! That's one of my old\n"
+	.string "Mach Bikes.\p"
+	.string "I only build one Bicycle now.\n"
+	.string "Let me swap it for you!$"
 
 MauvilleCity_BikeShop_Text_HappyYouLikeIt: @ 820F2C4
 	.string "Rydel: Good, good!\n"
 	.string "I'm happy that you like it!$"
 
-MauvilleCity_BikeShop_Text_OhYourBikeIsInPC: @ 820F2F3
-	.string "Oh? What happened to that Bike\n"
-	.string "I gave you?\p"
-	.string "Oh, I get it, you stored it using your PC.\p"
-	.string "Well, take it out of PC storage,\n"
-	.string "and I'll be happy to exchange it!\p"
-	.string "May the wind always be at your back\n"
-	.string "on your adventure!$"
-
 MauvilleCity_BikeShop_Text_HandbooksAreInBack: @ 820F3C3
 	.string "I'm learning about Bikes while\n"
 	.string "I work here.\p"
 	.string "If you need advice on how to ride your\n"
-	.string "Bike, there're a couple handbooks in\l"
+	.string "Bicycle, there're two handbooks in\l"
 	.string "the back.$"
 
-MauvilleCity_BikeShop_Text_MachHandbookWhichPage: @ 820F445
-	.string "It's a handbook on the Mach Bike.\p"
+MauvilleCity_BikeShop_Text_RidingHandbookWhichPage:
+	.string "It's a handbook on riding the\n"
+	.string "Bicycle.\p"
 	.string "Which page do you want to read?$"
 
-MauvilleCity_BikeShop_Text_HowToRideMachBike: @ 820F487
-	.string "A Bike moves in the direction that\n"
+MauvilleCity_BikeShop_Text_HowToRide: @ 820F487
+	.string "The Bicycle moves in the direction\n"
 	.string "the + Control Pad is pressed.\p"
-	.string "It will speed up once it gets rolling.\p"
-	.string "To stop, release the + Control Pad.\n"
-	.string "The Bike will slow to a stop.\p"
-	.string "Want to read a different page?$"
-
-MauvilleCity_BikeShop_Text_HowToTurnMachBike: @ 820F550
-	.string "A Mach Bike is speedy, but it can't\n"
-	.string "stop very quickly.\p"
-	.string "It gets a little tricky to get around\n"
-	.string "a corner.\p"
-	.string "Release the + Control Pad a little\n"
-	.string "before the corner and slow down.\p"
+	.string "It rides at full speed right away.\n"
+	.string "Release the + Control Pad to stop.\p"
 	.string "Want to read a different page?$"
 
 MauvilleCity_BikeShop_Text_SandySlopes: @ 820F61A
@@ -296,12 +191,19 @@ MauvilleCity_BikeShop_Text_SandySlopes: @ 820F61A
 	.string "throughout the Hoenn region.\p"
 	.string "The loose, crumbly sand makes it\n"
 	.string "impossible to climb normally.\p"
-	.string "But if you have a Mach Bike, you can\n"
-	.string "zip up a sandy slope.\p"
+	.string "But if you ride straight up on the\n"
+	.string "Bicycle, you can zip up a sandy slope.\p"
 	.string "Want to read a different page?$"
 
-MauvilleCity_BikeShop_Text_AcroHandbookWhichPage: @ 820F6ED
-	.string "It's a handbook on the Acro Bike.\p"
+MauvilleCity_BikeShop_Text_CrackedFloors:
+	.string "Some old floors are cracked. Walk\n"
+	.string "on one and you'll fall right through.\p"
+	.string "Ride over it on the Bicycle, and\n"
+	.string "it only gives way behind you.\p"
+	.string "Want to read a different page?$"
+
+MauvilleCity_BikeShop_Text_TricksHandbookWhichPage:
+	.string "It's a handbook on Bicycle tricks.\p"
 	.string "Which page do you want to read?$"
 
 MauvilleCity_BikeShop_Text_Wheelies: @ 820F72F
@@ -314,7 +216,7 @@ MauvilleCity_BikeShop_Text_Wheelies: @ 820F72F
 
 MauvilleCity_BikeShop_Text_BunnyHops: @ 820F7F5
 	.string "Keeping the B Button pressed,\n"
-	.string "your Bike can hop on the spot.\p"
+	.string "your Bicycle can hop on the spot.\p"
 	.string "This technique is called a bunny hop.\p"
 	.string "You can ride while hopping, too.\p"
 	.string "Want to read a different page?$"
@@ -324,6 +226,7 @@ MauvilleCity_BikeShop_Text_Jumps: @ 820F898
 	.string "Pad at the same time to jump.\p"
 	.string "Press the + Control Pad to the side\n"
 	.string "to jump sideways.\p"
-	.string "Press it backwards to make the Bike\n"
-	.string "change directions while jumping.\p"
+	.string "Press it backwards to make the\n"
+	.string "Bicycle change directions while\l"
+	.string "jumping.\p"
 	.string "Want to read a different page?$"

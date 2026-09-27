@@ -629,7 +629,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RIVALRY] =
     {
         .name = _("Rivalry"),
-        .description = COMPOUND_STRING("Strong vs. opposite gender."),
+        .description = COMPOUND_STRING("Strong vs. same gender."),
         .aiRating = 1,
     },
 
@@ -787,7 +787,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STALL] =
     {
         .name = _("Stall"),
-        .description = COMPOUND_STRING("Always last to use moves."),
+        .description = COMPOUND_STRING("Moves last at same priority."),
         .aiRating = -1,
     },
 
@@ -1081,7 +1081,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TOXIC_BOOST] =
     {
         .name = _("Toxic Boost"),
-        .description = COMPOUND_STRING("Boosts Attack if poisoned."),
+        .description = COMPOUND_STRING("Poison boosts physical moves."),
         .aiRating = 6,
     },
 
@@ -1933,7 +1933,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STEAM_ENGINE] =
     {
         .name = _("Steam Engine"),
-        .description = COMPOUND_STRING("Fire/Water max Speed; Water not weak."),
+        .description = COMPOUND_STRING("Fire/Water: Speed +6; Water not weak."),
         .aiRating = 3,
     },
 
@@ -1972,11 +1972,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Ice Face"),
         .description = COMPOUND_STRING(
         #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_HAIL
-            "Hail renews one free hit."),
+            "Hail renews physical shield."),
         #elif B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW
-            "Snow renews one free hit."),
+            "Snow renews physical shield."),
         #else
-            "Hail & snow renew free hit."),
+            "Ice weather renews physical shield."),
         #endif
         .aiRating = 4,
         .cantBeCopied = TRUE,
@@ -2077,7 +2077,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_UNSEEN_FIST] =
     {
         .name = _("Unseen Fist"),
-        .description = COMPOUND_STRING("Contact chips past Protect."),
+        .description = COMPOUND_STRING("Contact chips through shields."),
         .aiRating = 6,
     },
 
@@ -2477,7 +2477,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PIERCING_DRILL] =
     {
         .name = _("Piercing Drill"),
-        .description = COMPOUND_STRING("Contact chips past Protect."),
+        .description = COMPOUND_STRING("Contact chips through shields."),
     },
 
     [ABILITY_DRAGONIZE] =

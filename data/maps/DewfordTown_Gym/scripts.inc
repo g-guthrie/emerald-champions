@@ -257,9 +257,16 @@ DewfordTown_Gym_EventScript_GymGuide::
 	goto_if_set FLAG_DEFEATED_DEWFORD_GYM, DewfordTown_Gym_EventScript_GymGuidePostVictory
 	goto_if_set FLAG_DEWFORD_GYM_FRESHWATER, DewfordTown_Gym_Guide2
 	msgbox DewfordTown_Gym_Text_Guide1, MSGBOX_DEFAULT
-	giveitem ITEM_FRESH_WATER, 10
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+DewfordTown_Gym_EventScript_GymGuideGems::
+	@ Both Gems must fit before either is given (the check takes any item pair).
+	@ The flag keeps its old name; it records the guide's gift.
+	setvar VAR_0x8004, ITEM_FLYING_GEM
+	setvar VAR_0x8005, ITEM_GROUND_GEM
+	specialvar VAR_RESULT, CanReceiveBerryPair
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+DewfordTown_Gym_EventScript_GymGuideGiveGems::
+	giveitem ITEM_FLYING_GEM
+	giveitem ITEM_GROUND_GEM
 	setflag FLAG_DEWFORD_GYM_FRESHWATER
 	msgbox DewfordTown_Gym_Text_Guide2, MSGBOX_DEFAULT
 	release
@@ -300,14 +307,19 @@ DewfordTown_Gym_EventScript_GymStatue:: @ 81FC9CC
 DewfordTown_Gym_Text_Guide1::
 	.string "Hey, how's it going, Champion-\n"
 	.string "bound {PLAYER}?\p"
-	.string "Please, take this Fresh Water to\n"
-	.string "help with your challenge!$"
+	.string "Take these Gems for your challenge!\p"
+	.string "A partner holding one boosts a move\n"
+	.string "of that type once in every battle!$"
 
 DewfordTown_Gym_Text_Guide2::
 	.string "Dewford's Gym Leader Brawly commands\n"
 	.string "Fighting-type Pokémon.\p"
 	.string "Watch out for his Mega Heracross!\n"
 	.string "His partners can help protect it.\p"
+	.string "Flying moves hit most of his team\n"
+	.string "hard, Mega Heracross above all.\p"
+	.string "Ground moves handle the rest: his\n"
+	.string "Pachirisu and Cobalion.\p"
 	.string "Bringing a Ghost-type Pokémon\n"
 	.string "could give you an advantage.\p"
 	.string "You can find some in Granite Cave,\n"

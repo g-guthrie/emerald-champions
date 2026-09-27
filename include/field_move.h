@@ -38,6 +38,7 @@ struct FieldMoveInfo
 
 extern const struct FieldMoveInfo gFieldMoveInfo[];
 extern const struct FieldMoveUnlock gFieldMoveUnlocks[];
+extern const u8 *const gFieldMoveLicenseGivers[FIELD_MOVES_COUNT];
 
 u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck);
 bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move);

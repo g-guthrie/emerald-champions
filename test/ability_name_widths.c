@@ -6,7 +6,7 @@
 // Every Ability name must fit wherever it is drawn. Widths are the native
 // windows' pixel widths; sites that shrink long names use GetFontIdToFit,
 // and the check measures the font that call would pick.
-TEST("Ability names fit the summary, battle pop-up, Pokédex and DexNav")
+TEST("Ability names fit the summary, battle pop-up and Pokédex")
 {
     for (u32 ability = ABILITY_NONE + 1; ability < ABILITIES_COUNT; ability++)
     {
@@ -22,8 +22,8 @@ TEST("Ability names fit the summary, battle pop-up, Pokédex and DexNav")
         EXPECT_LE(GetStringWidth(font, name, 0), 10 * 8);
         // Pokédex stats page: an 18-tile window, FONT_SMALL at x 5.
         EXPECT_LE(GetStringWidth(FONT_SMALL, name, 0), 18 * 8 - 5);
-        // DexNav info column: a 9-tile window, shrinks to fit.
-        font = GetFontIdToFit(name, FONT_SMALL, 0, 9 * 8);
-        EXPECT_LE(GetStringWidth(font, name, 0), 9 * 8);
+        // Abilities page: cursor at x 3, name at x 12, slot marker at x 84.
+        font = GetFontIdToFit(name, FONT_SMALL, 0, 70);
+        EXPECT_LE(GetStringWidth(font, name, 0), 70);
     }
 }

@@ -39,7 +39,12 @@ Route103_EventScript_RivalMay:: @ 81EC3DA
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	call Route103_EventScript_CheckLeveler
+	goto_if_eq VAR_RESULT, FALSE, Route103_EventScript_MayNeedsLeveler
+	special IsPlayerPartyBelowLevelCap
+	goto_if_eq VAR_RESULT, TRUE, Route103_EventScript_MayNeedsLeveling
 	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
+	msgbox Route103_Text_RivalBattleTips, MSGBOX_DEFAULT
 	@ The rival keeps the starter the player left behind (the player takes two).
 	special BufferEmeraldChampionsRivalBranch
 	switch VAR_RESULT
@@ -59,13 +64,48 @@ Route103_EventScript_RivalBrendan:: @ 81EC434
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
+	call Route103_EventScript_CheckLeveler
+	goto_if_eq VAR_RESULT, FALSE, Route103_EventScript_BrendanNeedsLeveler
+	special IsPlayerPartyBelowLevelCap
+	goto_if_eq VAR_RESULT, TRUE, Route103_EventScript_BrendanNeedsLeveling
 	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
+	msgbox Route103_Text_RivalBattleTips, MSGBOX_DEFAULT
 	@ The rival keeps the starter the player left behind (the player takes two).
 	special BufferEmeraldChampionsRivalBranch
 	switch VAR_RESULT
 	case 0, Route103_EventScript_StartBrendanBattleTreecko
 	case 1, Route103_EventScript_StartBrendanBattleTorchic
 	case 2, Route103_EventScript_StartBrendanBattleMudkip
+	end
+
+@ Battles give no experience: without the Oldale nurse's Leveler the partners
+@ are still at their starting levels, so the rival sends the player back first,
+@ and again while any partner is below the level cap.
+Route103_EventScript_CheckLeveler:
+	setvar VAR_0x8004, ITEM_LEVELER
+	special CheckEmeraldChampionsHandoffItem
+	return
+
+Route103_EventScript_MayNeedsLeveler:
+	msgbox Route103_Text_MayNeedsLeveler, MSGBOX_DEFAULT
+	goto Route103_EventScript_RivalWaits
+
+Route103_EventScript_MayNeedsLeveling:
+	msgbox Route103_Text_MayNeedsLeveling, MSGBOX_DEFAULT
+	goto Route103_EventScript_RivalWaits
+
+Route103_EventScript_BrendanNeedsLeveling:
+	msgbox Route103_Text_BrendanNeedsLeveling, MSGBOX_DEFAULT
+	goto Route103_EventScript_RivalWaits
+
+Route103_EventScript_BrendanNeedsLeveler:
+	msgbox Route103_Text_BrendanNeedsLeveler, MSGBOX_DEFAULT
+Route103_EventScript_RivalWaits:
+	closemessage
+	applymovement LOCALID_RIVAL, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	fadedefaultbgm
+	releaseall
 	end
 
 Route103_EventScript_StartMayBattleTreecko:: @ 81EC48E
@@ -296,6 +336,35 @@ Route103_Text_MayLetsBattle: @ 81EC7DE
 	.string "I'll give you a taste of what being\n"
 	.string "a Trainer is like.$"
 
+Route103_Text_MayNeedsLeveler:
+	.string "Oh, hi, {PLAYER}{KUN}!\p"
+	.string "Your partners are still tiny!\n"
+	.string "Battles don't raise levels here.\p"
+	.string "The nurse in Oldale has a Leveler\n"
+	.string "for you. Get it, then come back\l"
+	.string "and we'll battle!$"
+
+Route103_Text_MayNeedsLeveling:
+	.string "Oh, hi, {PLAYER}{KUN}!\p"
+	.string "Your partners are still tiny!\n"
+	.string "Battles don't raise levels here.\p"
+	.string "Use your Leveler from the Bag's\n"
+	.string "Key Items first, then come back\l"
+	.string "and we'll battle!$"
+
+Route103_Text_RivalBattleTips:
+	.string "Here are some tips first!\p"
+	.string "In battle, press L to see the foes'\n"
+	.string "types, and R on a move for its\l"
+	.string "details.\p"
+	.string "If it goes badly, choose Run.\n"
+	.string "It restarts a Trainer battle.\p"
+	.string "The mark by a move's PP shows how\n"
+	.string "well it hits the foe:\p"
+	.string "{CIRCLE_DOT} super effective, {STAR} doubly so,\n"
+	.string "{TRIANGLE} not very, {TRIANGLE_UPSIDE_DOWN} barely, {BIG_MULT_X} not at all,\l"
+	.string "{CIRCLE_HOLLOW} normal.$"
+
 Route103_Text_MayDefeated: @ 81EC881
 	.string "Wow! That's great!\n"
 	.string "{PLAYER}{KUN}, you're pretty good!$"
@@ -321,6 +390,21 @@ Route103_Text_BrendanLetsBattle: @ 81EC9CE
 	.string "battle?\p"
 	.string "I'll teach you what being a Trainer's\n"
 	.string "about!$"
+
+Route103_Text_BrendanNeedsLeveler:
+	.string "Hey, it's {PLAYER}!\p"
+	.string "Your partners are still tiny!\n"
+	.string "Battles don't raise levels here.\p"
+	.string "The nurse in Oldale has a Leveler\n"
+	.string "for you. Go get it, then we'll\l"
+	.string "battle!$"
+
+Route103_Text_BrendanNeedsLeveling:
+	.string "Hey, it's {PLAYER}!\p"
+	.string "Your partners are still tiny!\n"
+	.string "Battles don't raise levels here.\p"
+	.string "Use your Leveler from the Bag's\n"
+	.string "Key Items first. Then we'll battle!$"
 
 Route103_Text_BrendanDefeated: @ 81ECA59
 	.string "Huh, {PLAYER}, you're not too shabby.$"

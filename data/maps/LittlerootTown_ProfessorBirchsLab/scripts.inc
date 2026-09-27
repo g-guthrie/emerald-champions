@@ -788,8 +788,8 @@ LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon: @ 81FA8B1
 	.string "give a nickname to that {STR_VAR_1}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival: @ 81FA8F6
-	.string "Prof. Birch: If you work at Pokémon\n"
-	.string "and gain experience, I think you'll make\l"
+	.string "Prof. Birch: Keep working with your\n"
+	.string "partners, and I think you'll make\l"
 	.string "an extremely good Trainer.\p"
 	.string "My kid, {RIVAL}, is also studying\n"
 	.string "Pokémon while helping me out.\p"
@@ -799,11 +799,12 @@ LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival: @ 81FA8F6
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou: @ 81FA9D5
 	.string "Prof. Birch: Great! {RIVAL} is on\n"
 	.string "Route 103, north of Oldale Town.\p"
-	.string "Oldale's Pokémon Center sells Balls.\n"
-	.string "Catch more partners on the way\l"
-	.string "before you challenge {RIVAL}!\p"
-	.string "The Pokémon Center can help you\n"
-	.string "prepare your whole team.$"
+	.string "Stop at Oldale's Pokémon Center\n"
+	.string "first. The nurse there has tools\l"
+	.string "for every new Trainer.\p"
+	.string "Then see the Move Tutor and the\n"
+	.string "clerk. The clerk sells Balls, so\l"
+	.string "catch more partners on the way!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay: @ 81FAA35
 	.string "Prof. Birch: Oh, don't be that way.\n"
@@ -812,10 +813,9 @@ LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay: @ 81FAA35
 LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome: @ 81FAA74
 	.string "Prof. Birch: Look for {RIVAL} on\n"
 	.string "Route 103, north of Oldale Town.\p"
-	.string "Buy Poké Balls at Oldale's Center\n"
-	.string "and catch partners along the way.\p"
-	.string "The Pokémon Center will help\n"
-	.string "you prepare for the battle.$"
+	.string "See the nurse at Oldale's Pokémon\n"
+	.string "Center first. Then the Move Tutor\l"
+	.string "and the clerk will help you prepare.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex: @ 81FAB22
 	.string "Prof. Birch: Oh, hi, {PLAYER}{KUN}!\p"
@@ -845,7 +845,11 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex: @ 81FAC4B
 
 LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav:
 	.string "Prof. Birch: I built a DexNav into it,\n"
-	.string "too. It shows which Pokémon live\l"
+	.string "too. Open it from the Start menu.\p"
+	.string "It shows every Pokémon living\n"
+	.string "where you stand.\p"
+	.string "Pick one from the grass or water\n"
+	.string "and press A to search for it\l"
 	.string "nearby. Perfect for fieldwork!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait: @ 81FAD6F
