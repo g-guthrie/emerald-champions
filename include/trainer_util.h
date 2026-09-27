@@ -6,7 +6,7 @@ struct TrainerGenerator
     u8 gender:6;
     u8 isFrontier:1;
     u8 trainerClass;
-    u8 padding;
+    bool8 easyLevelReduction;
     u8 name[TRAINER_NAME_LENGTH + 1];
     struct OriginalTrainerId otID;
     rng_value_t localRngState;

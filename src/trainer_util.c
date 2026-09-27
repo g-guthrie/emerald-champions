@@ -14,7 +14,10 @@
 
 rng_value_t GeneratePartySeed(const struct Trainer *trainer)
 {
-    u32 seed = Crc32B((const u8 *)trainer, sizeof(struct Trainer)) ^ READ_OTID_FROM_SAVE;
+    // Level tuning must not reroll party selection or personalities on other modes.
+    struct Trainer seedTrainer = *trainer;
+    seedTrainer.easyLevelReduction = FALSE;
+    u32 seed = Crc32B((const u8 *)&seedTrainer, sizeof(seedTrainer)) ^ READ_OTID_FROM_SAVE;
     return LocalRandomSeed(seed);
 }
 
@@ -117,6 +120,7 @@ void MakeTrainerGenerator(struct TrainerGenerator *trainerGen, const struct Trai
 {
     trainerGen->gender = trainer->gender;
     trainerGen->isFrontier = FALSE;
+    trainerGen->easyLevelReduction = trainer->easyLevelReduction;
     StringCopyN(trainerGen->name, trainer->trainerName, TRAINER_NAME_LENGTH + 1);
     trainerGen->trainerClass = trainer->trainerClass;
     trainerGen->otID = OTID_STRUCT_RANDOM_NO_SHINY;
@@ -127,6 +131,7 @@ void MakePartnerGenerator(struct TrainerGenerator *trainerGen, const struct Trai
 {
     u32 otID;
     trainerGen->gender = partner->gender;
+    trainerGen->easyLevelReduction = FALSE;
     trainerGen->isFrontier = FALSE;
     StringCopyN(trainerGen->name, partner->trainerName, TRAINER_NAME_LENGTH + 1);
     trainerGen->trainerClass = partner->trainerClass;
@@ -141,6 +146,8 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     u32 personality = (LocalRandom32(&trainer->localRngState) & 0xFFFFDF00) + 0x1000;
     u32 genderValue = 0;
     u8 battleLevel = trainerMon->useLevelOffset ? GetCampaignTrainerLevel(trainerMon->levelOffset) : trainerMon->lvl;
+    if (trainer->easyLevelReduction && GetCurrentDifficultyLevel() == DIFFICULTY_EASY)
+        battleLevel = max(1, battleLevel - 1);
     if (trainerMon->gender == TRAINER_MON_RANDOM_GENDER)
         genderValue = LocalRandom32(&trainer->localRngState) & 0x000000FF;
     else if (trainerMon->gender == TRAINER_MON_MALE)

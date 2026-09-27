@@ -71,6 +71,7 @@ class Design:
     ai_extra: list[str]
     mons: list[Mon]
     prize_multiplier: int
+    easy_level_reduction: bool
     field: list[str]
 
 
@@ -129,7 +130,7 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
                 rate = 50
             field_line = line_value(branch, "field")
             field = [value.strip() for value in field_line.split(",") if value.strip()] if field_line else []
-            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons, rate, field)
+            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons, rate, cls in {"casual", "regular"}, field)
     return designs
 
 
@@ -177,6 +178,7 @@ def rewrite_trainer_block(block: str, design: Design) -> str:
     header = replace_attribute(header, "Double Battle", "Yes" if design.format in ("double", "multi") else "No")
     header = replace_attribute(header, "AI", ai_flags(design))
     header = replace_attribute(header, "Prize Multiplier", str(design.prize_multiplier))
+    header = replace_attribute(header, "Easy Level Reduction", str(int(design.easy_level_reduction)))
     # A re-implemented design must not inherit a retirement's "Party Size: 0"
     # stamp: trainerproc would compile the authored party as an empty battle.
     header = re.sub(r"(?m)^Party Size:.*\n?", "", header)

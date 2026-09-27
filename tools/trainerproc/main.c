@@ -117,6 +117,8 @@ struct Trainer
 
     struct String class;
     int class_line;
+    int easy_level_reduction;
+    int easy_level_reduction_line;
     int prize_multiplier;
     int prize_multiplier_line;
 
@@ -1220,6 +1222,16 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             trainer->class_line = value.location.line;
             trainer->class = token_string(&value);
         }
+        else if (is_literal_token(&key, "Easy Level Reduction"))
+        {
+            if (trainer->easy_level_reduction_line)
+                any_error = !set_show_parse_error(p, key.location, "duplicate 'Easy Level Reduction'");
+            trainer->easy_level_reduction_line = value.location.line;
+            if (!token_int(p, &value, &trainer->easy_level_reduction))
+                any_error = !show_parse_error(p);
+            else if (trainer->easy_level_reduction < 0 || trainer->easy_level_reduction > 1)
+                any_error = !set_show_parse_error(p, value.location, "Easy Level Reduction must be 0 or 1");
+        }
         else if (is_literal_token(&key, "Prize Multiplier"))
         {
             if (trainer->prize_multiplier_line)
@@ -1858,6 +1870,8 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
+        if (trainer->easy_level_reduction_line)
+            fprintf(f, "        .easyLevelReduction = %d,\n", trainer->easy_level_reduction);
         if (trainer->prize_multiplier_line)
             fprintf(f, "        .prizeMultiplier = %d,\n", trainer->prize_multiplier);
 

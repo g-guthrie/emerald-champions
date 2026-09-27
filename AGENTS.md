@@ -30,7 +30,9 @@ or data.
   Native ability switching.
 - Inclement's stat buffs and ability changes apply to player-owned and wild
   Pokémon only, never lowering a stat; trainer-owned Pokémon and tuned teams
-  never change. Difficulty offsets live in `GetTrainerLevelReduction`; any
+  never change. On Easy only, authored Casual and Regular teams lose one
+  additional level (minimum 1); other categories retain their levels. Base
+  difficulty offsets live in `GetTrainerLevelReduction`; any
   text quoting them derives the numbers from it. Text is always Instant; there
   is no text speed option.
 - No Game Book, player guides or Center battle presets. No
