@@ -54,9 +54,6 @@ jobs:
       - name: Check authored trainer materialization
         run: python3 scripts/emerald_champions_teams.py --check
 
-      - name: Run Python integrity tests
-        run: python3 -m unittest discover -s tests -v
-
       - name: Cache native build tools
         uses: actions/cache@v6
         with:
@@ -80,6 +77,10 @@ jobs:
 
       - name: Build Emerald Champions release ROM
         run: make -j"$(nproc)" release
+
+      # Host tests compile real game sources and need the generated map headers.
+      - name: Run Python integrity tests
+        run: python3 -m unittest discover -s tests -v
 
       - name: Bind release artifacts to build inputs
         run: python3 scripts/stamp_release_inputs.py
