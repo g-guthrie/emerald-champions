@@ -63,7 +63,8 @@ or data.
   current cap with authored sets. One Legendary, Mythical, Ultra Beast or
   Paradox per party in total; ordinary and pseudo-legendary Pokemon have no
   category limit. Static legends are high stakes: a knockout loses one.
-  No percentages in dialogue.
+  No wild-table percentages in dialogue; Birch explains the DexNav chain
+  odds explicitly during its handoff.
 - DexNav and the PokéNav atlas share the native wild roster. Show every
   currently available species with its icon, without seen/caught discovery
   gating. Hide encounters until their actual unlock conditions are met.

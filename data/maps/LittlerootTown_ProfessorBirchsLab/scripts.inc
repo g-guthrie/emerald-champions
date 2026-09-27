@@ -563,7 +563,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav, MSGBOX_DEFAULT
+	call LittlerootTown_ProfessorBirchsLab_EventScript_ExplainDexNav
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
@@ -586,6 +586,17 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
 	releaseall
 	end
+
+@ Keep each section below the message buffer limit; this lesson runs only
+@ inside the one-time handoff. Repeat visits retain their normal dialogue.
+LittlerootTown_ProfessorBirchsLab_EventScript_ExplainDexNav::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavSearching, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavMethods, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavChains, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavPokerus, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavSpread, MSGBOX_DEFAULT
+	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls:: @ 81FA352
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
@@ -844,13 +855,114 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex: @ 81FAC4B
 	.string "doing fieldwork, and shows me.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav:
-	.string "Prof. Birch: I built a DexNav into it,\n"
-	.string "too. Open it from the Start menu.\p"
-	.string "It shows every Pokémon living\n"
-	.string "where you stand.\p"
-	.string "Pick one from the grass or water\n"
-	.string "and press A to search for it\l"
-	.string "nearby. Perfect for fieldwork!$"
+	.string "Prof. Birch: I built a DexNav into\n"
+	.string "your Pokédex. Let me show you!\p"
+	.string "Open DexNav from the Start menu\n"
+	.string "to see what lives where you stand.\p"
+	.string "Every available Pokémon has an icon.\n"
+	.string "You needn't see or catch it first!\p"
+	.string "As you travel and unlock encounters,\n"
+	.string "the list changes to match the area.\p"
+	.string "Scroll down to see each method:\n"
+	.string "grass, water, fishing and more.\p"
+	.string "Choose an icon to see its rarity,\n"
+	.string "level range and how to encounter it.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_DexNavSearching:
+	.string "If the panel says A Search, press A\n"
+	.string "to track that Pokémon nearby.\p"
+	.string "Grass, cave floors and Surf water\n"
+	.string "can provide searchable encounters.\p"
+	.string "Press R on an entry to register it.\n"
+	.string "Then R in the field starts a search.\p"
+	.string "An item assigned to R takes priority.\n"
+	.string "Use the DexNav menu in that case.\p"
+	.string "Follow the arrow to the moving spot.\n"
+	.string "Step onto it to start the battle!\p"
+	.string "Hold A while using the directions.\n"
+	.string "That makes you sneak toward it.\p"
+	.string "Don't run or cycle near the spot.\n"
+	.string "Even walking scares it up close!\p"
+	.string "There's no countdown. Take your time,\n"
+	.string "but don't wander out of range.\p"
+	.string "In caves or water, it may move twice.\n"
+	.string "Follow the arrow to its new spot.\p"
+	.string "If nothing is found nearby, move\n"
+	.string "closer to its habitat and try again.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_DexNavMethods:
+	.string "Cut trees, Rock Smash, Honey and\n"
+	.string "fishing keep their own methods.\p"
+	.string "Those entries cannot be searched.\n"
+	.string "Read their instructions instead.\p"
+	.string "Storm visitors appear in the list,\n"
+	.string "but cannot be searched or registered.\p"
+	.string "Meet those guests through ordinary\n"
+	.string "wild encounters during their storm.\p"
+	.string "Other available resident legends\n"
+	.string "can be searched where permitted.\p"
+	.string "Ordinary wild encounters still use\n"
+	.string "the area's normal encounter chances.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_DexNavChains:
+	.string "Now for the exciting part: chains!\n"
+	.string "Catch or defeat a searched Pokémon.\p"
+	.string "That adds one to your chain. Search\n"
+	.string "again here to keep building it.\p"
+	.string "You can change species. The chain\n"
+	.string "counts searched battles, not species.\p"
+	.string "Running, losing, scaring a target\n"
+	.string "or losing its signal breaks the chain.\p"
+	.string "Other battles and changing areas\n"
+	.string "also end it. Reloading resets it too.\p"
+	.string "A chain raises shiny and Pokérus\n"
+	.string "chances, not levels or other rewards.\p"
+	.string "The shiny percentage equals your\n"
+	.string "chain. Pokérus gets half that chance.\p"
+	.string "At chain 50, shiny chance is 50%.\n"
+	.string "Pokérus chance is half that: 25%.\p"
+	.string "The chain stops rising at 100.\n"
+	.string "That's 100% shiny and 50% Pokérus!\p"
+	.string "Each is rolled separately, so your\n"
+	.string "find can be both shiny and infected.\p"
+	.string "These odds apply to your searches,\n"
+	.string "not to ordinary wild encounters.\p"
+	.string "Before a chain, both are very rare.\n"
+	.string "DexNav shows your current odds.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_DexNavPokerus:
+	.string "Shininess changes a Pokémon's look.\n"
+	.string "Pokérus enhances its nature instead.\p"
+	.string "A positive nature bonus doubles:\n"
+	.string "+10% becomes +20%.\p"
+	.string "The lowered stat still gets -10%.\n"
+	.string "Neutral natures gain no bonus.\p"
+	.string "That benefit lasts after recovery\n"
+	.string "and follows any future nature change.\p"
+	.string "On the Summary's Skills page, the\n"
+	.string "enhanced nature stat is colored gold.\p"
+	.string "PKRS marks a contagious Pokémon.\n"
+	.string "A tiny dot marks a recovered one.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_DexNavSpread:
+	.string "An original carrier can infect just\n"
+	.string "two other Pokémon in its lifetime.\p"
+	.string "Put an uninfected Pokémon beside\n"
+	.string "the carrier in your party and battle.\p"
+	.string "After battle, there's about a\n"
+	.string "one-in-three chance to spread it.\p"
+	.string "One neighbor can be infected per\n"
+	.string "battle. It uses one transmission.\p"
+	.string "Only successful spread uses one.\n"
+	.string "Eggs and infected Pokémon can't get it.\p"
+	.string "Recipients keep the nature benefit,\n"
+	.string "but cannot pass Pokérus on.\p"
+	.string "After two spreads, the original\n"
+	.string "carrier keeps its benefit as well.\p"
+	.string "There's no calendar deadline, and\n"
+	.string "PC storage keeps its progress.\p"
+	.string "Take your time, sneak up gently,\n"
+	.string "and build a chain. Happy fieldwork!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait: @ 81FAD6F
 	.string "Prof. Birch: Countless Pokémon\n"
