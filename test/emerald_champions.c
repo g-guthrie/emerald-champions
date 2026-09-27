@@ -137,31 +137,6 @@ static bool32 MonMatchesEmeraldChampionsNonMegaPreset(struct Pokemon *mon)
     return FALSE;
 }
 
-static bool32 BoxMonMatchesEmeraldChampionsNonMegaPreset(struct BoxPokemon *mon)
-{
-    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
-
-    for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
-    {
-        const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, choice);
-        bool32 matches = TRUE;
-
-        if (preset == NULL || preset->requiredItem != ITEM_NONE)
-            continue;
-        matches &= GetBoxMonData(mon, MON_DATA_HIDDEN_NATURE) == preset->nature;
-        matches &= GetAbilityBySpecies(
-            species,
-            GetBoxMonData(mon, MON_DATA_ABILITY_NUM)
-        ) == preset->ability;
-        matches &= GetBoxMonData(mon, MON_DATA_HELD_ITEM) == preset->item;
-        for (u32 move = 0; move < MAX_MON_MOVES; move++)
-            matches &= GetBoxMonData(mon, MON_DATA_MOVE1 + move) == preset->moves[move];
-        if (matches)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 static bool32 SpeciesCanAccessEmeraldChampionsPresetMove(enum Species species, enum Move move)
 {
     enum Species current = species;
@@ -459,6 +434,7 @@ TEST("Emerald Champions captured prepared sets survive party PC and no-room tran
 {
     struct Pokemon caughtMon;
 
+    ClearBag();
     ZeroPlayerPartyMons();
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
     SeedRng(19);
@@ -466,20 +442,33 @@ TEST("Emerald Champions captured prepared sets survive party PC and no-room tran
     EXPECT_EQ(ApplyEmeraldChampionsRandomWildSet(&caughtMon), EC_BATTLE_SET_SUCCESS);
     EXPECT_EQ(GiveCapturedMonToPlayer(&caughtMon), MON_GIVEN_TO_PARTY);
     EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_PLAYER][0]));
+    EXPECT_EQ(CountTotalItemQuantityInBag(GetMonData(&caughtMon, MON_DATA_HELD_ITEM)), 0);
 
     for (u32 slot = 1; slot < PARTY_SIZE; slot++)
         CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_RATTATA, 5, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     CreateMon(&caughtMon, SPECIES_CHARMANDER, 14, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(ApplyEmeraldChampionsRandomWildSet(&caughtMon), EC_BATTLE_SET_SUCCESS);
+    enum Item storedItem = GetMonData(&caughtMon, MON_DATA_HELD_ITEM);
+    u32 storedItemCount = CountTotalItemQuantityInBag(storedItem);
     EXPECT_EQ(GiveCapturedMonToPlayer(&caughtMon), MON_GIVEN_TO_PC);
-    EXPECT(BoxMonMatchesEmeraldChampionsNonMegaPreset(&gPokemonStoragePtr->boxes[0][0]));
+    EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&caughtMon));
+    // Boxing returns the held item to the Bag; the prepared Pokémon otherwise
+    // keeps its exact data, including the acquisition EV/IV normalization.
+    struct BoxPokemon expectedBoxMon = caughtMon.box;
+    enum Item noItem = ITEM_NONE;
+    SetBoxMonData(&expectedBoxMon, MON_DATA_HELD_ITEM, &noItem);
+    EXPECT_EQ(memcmp(&gPokemonStoragePtr->boxes[0][0], &expectedBoxMon, sizeof(expectedBoxMon)), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(storedItem), storedItemCount + (storedItem != ITEM_NONE));
 
     FillEmeraldChampionsPokemonStorage();
     CreateMon(&caughtMon, SPECIES_SQUIRTLE, 14, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(ApplyEmeraldChampionsRandomWildSet(&caughtMon), EC_BATTLE_SET_SUCCESS);
+    enum Item refusedItem = GetMonData(&caughtMon, MON_DATA_HELD_ITEM);
+    u32 refusedItemCount = CountTotalItemQuantityInBag(refusedItem);
     EXPECT_EQ(GiveCapturedMonToPlayer(&caughtMon), MON_CANT_GIVE);
     EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&caughtMon));
+    EXPECT_EQ(CountTotalItemQuantityInBag(refusedItem), refusedItemCount);
 }
 
 TEST("Emerald Champions custom Megas retain complete native assets")

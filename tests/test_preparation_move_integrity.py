@@ -1,10 +1,11 @@
 """Run the production tutor collector against the real generated move/preset tables.
 
-The whole of src/emerald_champions_battle_sets.c and src/move_relearner.c is
-compiled on the host. Only pokemon.c's boundary is stubbed: BoxPokemon storage
-accessors and the species form tables (taken from the configured species data).
+The whole of emerald_champions_battle_sets.c, move_relearner.c and daycare.c is compiled on the
+host. Only pokemon.c's boundary is stubbed: BoxPokemon storage accessors and
+species form/evolution data taken from the configured species tables.
 This checks move access, not native menu rendering or move replacement.
 """
+import re
 import subprocess
 import sys
 import tempfile
@@ -16,13 +17,21 @@ sys.path.insert(0, str(ROOT / "tests"))
 import host_c
 
 
-# pokemon.c boundary: the harness owns each BoxPokemon's species and moves.
+# pokemon.c boundary: the harness owns each BoxPokemon's stored fields.
 BOUNDARY = r'''
 #include "host_mon.h"
 u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field)
 {
-    assert(field == MON_DATA_SPECIES);
-    return ((struct HostMon *)boxMon)->species;
+    const struct HostMon *mon = (struct HostMon *)boxMon;
+    if (field == MON_DATA_SPECIES) return mon->species;
+    if (field == MON_DATA_ICONIC_MOVES) return mon->receipts;
+    assert(field >= MON_DATA_MOVE1 && field <= MON_DATA_MOVE4);
+    return mon->moves[field - MON_DATA_MOVE1];
+}
+void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *value)
+{
+    assert(field == MON_DATA_ICONIC_MOVES);
+    ((struct HostMon *)boxMon)->receipts = *(const u32 *)value;
 }
 bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move)
 {
@@ -33,9 +42,46 @@ bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move)
 }
 '''
 
+
+def evolution_boundary():
+    """Feed native GetEggSpecies the configured ancestry edges it actually reads.
+
+    Breeding ancestry ignores evolution conditions and methods other than the
+    terminator. Keep its production traversal, including numeric species order,
+    while providing only the target data needed at the pokemon.c boundary.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from verify_trainer_ability_legality import SPECIES_MARKER, preprocess_species_info
+
+    table = preprocess_species_info().split("const struct SpeciesInfo gSpeciesInfo[]", 1)[1]
+    markers = list(SPECIES_MARKER.finditer(table))
+    rows = []
+    for index, marker in enumerate(markers):
+        end = markers[index + 1].start() if index + 1 < len(markers) else len(table)
+        block = table[marker.end():end]
+        if ".evolutions" not in block:
+            continue
+        targets = re.findall(r"\{\s*EVO_[A-Z0-9_]+\s*,[^,]*,\s*(SPECIES_[A-Z0-9_]+)",
+                             block.split(".evolutions", 1)[1])
+        if not targets:
+            continue
+        entries = ", ".join("{.method = EVO_LEVEL, .targetSpecies = " + target + "}" for target in targets)
+        rows.append(f"    [{marker[1]}] = (const struct Evolution[]) {{{entries}, {{.method = EVOLUTIONS_END}}}},")
+    if len(rows) < 300:
+        raise host_c.HostBuildError(f"configured species data exposes only {len(rows)} evolution families")
+    return ('static const struct Evolution *const sHostEvolutions[NUM_SPECIES] = {\n'
+            + "\n".join(rows) + '\n};\n'
+            'const struct Evolution *GetSpeciesEvolutions(enum Species species) {\n'
+            '    assert(species < NUM_SPECIES); return sHostEvolutions[species];\n}\n'
+            'bool32 IsSpeciesEnabled(enum Species species) {\n'
+            '    assert(species < NUM_SPECIES); return sHostEvolutions[species] != NULL;\n}\n'
+            'enum Species SanitizeSpeciesId(enum Species species) {\n'
+            '    assert(species < NUM_SPECIES); return species;\n}\n')
+
+
 HOST_MON = r'''
 #include <assert.h>
-struct HostMon { struct BoxPokemon box; enum Species species; u16 moves[MAX_MON_MOVES]; };
+struct HostMon { struct BoxPokemon box; enum Species species; u16 moves[MAX_MON_MOVES]; u32 receipts; };
 bool32 HostHasRelearnerAllMoves(struct BoxPokemon *boxMon);
 '''
 
@@ -111,6 +157,22 @@ int main(void) {
     struct HostMon starmie = {.species = SPECIES_STARMIE};
     collect(&starmie);
     assert(offered[MOVE_ICE_SPINNER]); // Mega preset move access does not require its item.
+    // Inspecting a known legacy iconic move records it before it is forgotten,
+    // without broadening the Center collector's ordinary move access.
+    struct HostMon eevee = {.species = SPECIES_EEVEE, .moves = {MOVE_SPARKLY_SWIRL}, .receipts = 1u};
+    collect(&eevee);
+    assert(eevee.receipts == ((1u << 8) | 1u));
+    assert(IsIconicMoveUnlocked(&eevee.box, MOVE_SPARKLY_SWIRL));
+    eevee.moves[0] = MOVE_NONE;
+    eevee.species = SPECIES_SYLVEON;
+    collect(&eevee);
+    assert(eevee.receipts == ((1u << 8) | 1u));
+    assert(IsIconicMoveUnlocked(&eevee.box, MOVE_SPARKLY_SWIRL));
+    assert(!offered[MOVE_SPARKLY_SWIRL]);
+    struct HostMon unrelated = {.species = SPECIES_PIKACHU, .moves = {MOVE_SPARKLY_SWIRL}};
+    collect(&unrelated);
+    assert(unrelated.receipts == 0);
+    assert(!IsIconicMoveUnlocked(&unrelated.box, MOVE_SPARKLY_SWIRL));
     printf("PASS: every species/form, %u direct presets, known-move filtering and Smeargle boundary\n", checked);
 }
 '''
@@ -120,13 +182,14 @@ class PreparationMoveIntegrity(unittest.TestCase):
     def test_historical_and_preset_moves_are_individually_learnable(self):
         subprocess.run([sys.executable, "tools/learnset_helpers/make_teachables.py", "--preparation"],
                        cwd=ROOT, check=True, timeout=60)
-        boundary = host_c.species_form_boundary() + BOUNDARY
+        boundary = host_c.species_form_boundary() + evolution_boundary() + BOUNDARY
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)
             (path / "host_mon.h").write_text(HOST_MON)
             executable = host_c.build(path, {
                 "battle_sets.c": host_c.production("src/emerald_champions_battle_sets.c") + HARNESS,
                 "move_relearner.c": host_c.production("src/move_relearner.c") + RELEARNER,
+                "daycare.c": host_c.production("src/daycare.c"),
                 "pokemon_boundary.c": boundary,
             }, flags=("-iquote", str(path)))
             result = host_c.run(executable, timeout=120)

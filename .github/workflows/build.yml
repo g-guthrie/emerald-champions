@@ -54,8 +54,8 @@ jobs:
       - name: Check authored trainer materialization
         run: python3 scripts/emerald_champions_teams.py --check
 
-      - name: Check source-reference extraction regressions
-        run: python3 -m unittest discover -s tests -p 'test_*reference.py' -v
+      - name: Run Python integrity tests
+        run: python3 -m unittest discover -s tests -v
 
       - name: Cache native build tools
         uses: actions/cache@v6
@@ -83,6 +83,12 @@ jobs:
 
       - name: Bind release artifacts to build inputs
         run: python3 scripts/stamp_release_inputs.py
+
+      - name: Run native game tests
+        run: make -j"$(nproc)" check
+
+      - name: Verify release gates
+        run: python3 scripts/verify_emerald_champions_release.py
 
       - name: Report ROM identity
         run: |
