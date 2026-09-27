@@ -1,0 +1,20 @@
+{
+  "name": "C04 — Wally catches Ralts and demonstrates the Leveler",
+  "start": {"chapter": 4},
+  "steps": [
+    {"hold": "UP", "frames": 1},
+    {"press": "A", "frames": 120, "label": "Norman greeting"},
+    {"tap": "A", "every": 30, "frames": 6000, "until": "battle", "label": "Native Wally catch begins"},
+    {"tap": "A", "every": 90, "frames": 9000, "until": "idle", "label": "Catch, Leveler and return to Norman"}
+  ],
+  "queries": {
+    "city_state": {"kind": 2, "id": "VAR_PETALBURG_CITY_STATE"},
+    "gym_state": {"kind": 2, "id": "VAR_PETALBURG_GYM_STATE"}
+  },
+  "expect": {
+    "ready": true,
+    "battle": false,
+    "map": "PetalburgCity_Gym",
+    "queries": {"city_state": 3, "gym_state": 2}
+  }
+}

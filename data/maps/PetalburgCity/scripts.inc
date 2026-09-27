@@ -48,6 +48,10 @@ PetalburgCity_EventScript_WallyTutorial:: @ 81DC32E
 	msgbox Route102_Text_WatchMeCatchPokemon, MSGBOX_DEFAULT
 	special StartWallyTutorialBattle
 	msgbox Route102_Text_WallyIDidIt, MSGBOX_DEFAULT
+	msgbox PetalburgCity_Text_WallyLeveler, MSGBOX_DEFAULT
+	closemessage
+	special StartWallyLevelerTutorial
+	msgbox PetalburgCity_Text_WallyLevelerDone, MSGBOX_DEFAULT
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestLeft, MAP_PETALBURG_CITY
 	waitmovement LOCALID_WALLY, MAP_PETALBURG_CITY
 	msgbox Route102_Text_LetsGoBack, MSGBOX_DEFAULT
@@ -62,6 +66,19 @@ PetalburgCity_EventScript_WallyTutorial:: @ 81DC32E
 	waitstate
 	releaseall
 	end
+
+PetalburgCity_Text_WallyLeveler:
+	.string "Wally: The nurse lent me a Leveler,\n"
+	.string "too. Let me try it on Ralts!\p"
+	.string "It's in the Bag's Key Items pocket.\n"
+	.string "I'll choose it and select Use.$"
+
+PetalburgCity_Text_WallyLevelerDone:
+	.string "Wally: Ralts caught up already!\n"
+	.string "The Leveler raises your whole party\l"
+	.string "as high as your Badges allow.\p"
+	.string "I'll use it after catching Pokémon\n"
+	.string "and earning a new Badge!$"
 
 PetalburgCity_EventScript_WalkToWallyHouse:: @ 81DC390
 	lockall

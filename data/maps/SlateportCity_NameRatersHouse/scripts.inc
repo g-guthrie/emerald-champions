@@ -1,4 +1,4 @@
-.set NATURE_CHANGER_COST, 5
+.set NATURE_CHANGER_COST, 1
 
 SlateportCity_NameRatersHouse_MapScripts::
 	.byte 0
@@ -7,6 +7,9 @@ SlateportCity_NameRatersHouse_NatureChanger::
 	lockall
 	faceplayer
 	call_if_unset FLAG_MET_NATURE_CHANGER, SlateportCity_NameRatersHouse_NatureChangerIntro
+	specialvar VAR_0x8008, GetNatureChangerBerry
+	bufferitemname 0, VAR_0x8008
+	msgbox NatureChanger_Text_DailyBerry, MSGBOX_DEFAULT
 	msgbox NatureChanger_Text_ChoosePokemon, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	compare VAR_0x8004, PARTY_SIZE
@@ -25,6 +28,8 @@ SlateportCity_NameRatersHouse_NatureChangerIntro::
 	return
 
 NatureChanger_2::
+	specialvar VAR_0x8008, GetNatureChangerBerry
+	bufferitemname 1, VAR_0x8008
 	msgbox NatureChanger_Text_HowAboutIt, MSGBOX_YESNO
 	compare VAR_RESULT, 1
 	goto_if_eq Nature_Changer_Yes
@@ -32,7 +37,7 @@ NatureChanger_2::
 	goto_if_eq Nature_Changer_No
 
 Nature_Changer_Yes::
-	checkitem ITEM_ORAN_BERRY, NATURE_CHANGER_COST
+	checkitem VAR_0x8008, NATURE_CHANGER_COST
 	compare VAR_RESULT, 1
 	goto_if_eq Nature_Changer_Stat_Up
 	compare VAR_RESULT, 0
@@ -125,7 +130,7 @@ Nature_Changer_Nature_Change::
 	bufferpartymonnick 0, VAR_0x8004
 	special ChangePokemonNature
 	goto_if_eq VAR_RESULT, FALSE, Nature_Changer_Same_Nature
-	removeitem ITEM_ORAN_BERRY, NATURE_CHANGER_COST
+	removeitem VAR_0x8008, NATURE_CHANGER_COST
 	msgbox NatureChanger_Text_SpecialPokeblock, MSGBOX_DEFAULT
 	fadescreen 1
 	special BufferChosenMonNature
@@ -153,8 +158,14 @@ NatureChanger_Text_Intro:
 	.string "chef in Kalos!\p"
 	.string "A Pokémon's Nature raises one stat\n"
 	.string "and lowers another.\p"
-	.string "For five Oran Berries, my special\n"
+	.string "For just one Berry, my special\n"
 	.string "Pokéblock gives it a new Nature!$"
+
+NatureChanger_Text_DailyBerry:
+	.string "Today's ingredient is\n"
+	.string "one {STR_VAR_1}!\p"
+	.string "I pick a Berry type at random\n"
+	.string "each day. Collect all kinds!$"
 
 NatureChanger_Text_ChoosePokemon:
 	.string "Which Pokémon shall try my\n"
@@ -167,7 +178,7 @@ NatureChanger_Text_MonHasNature:
 
 NatureChanger_Text_HowAboutIt:
 	.string "Shall I give it a new Nature\n"
-	.string "for five Oran Berries?$"
+	.string "for one {STR_VAR_2}?$"
 
 NatureChanger_Text_SomeOtherTime:
 	.string "No?!\n"
@@ -179,8 +190,8 @@ NatureChanger_Text_ThisIsEgg:
 	.string "special Pokéblock!$"
 
 NatureChanger_Text_NeedMoreBerries:
-	.string "I need more Oran Berries than that.\n"
-	.string "Bring me five!$"
+	.string "You need one {STR_VAR_2}.\n"
+	.string "Bring one for my Pokéblock!$"
 
 NatureChanger_Text_WhichColorPrefer:
 	.string "Which stat should the new Nature\n"
@@ -196,7 +207,7 @@ NatureChanger_Text_SameNature:
 
 NatureChanger_Text_SpecialPokeblock:
 	.string "Ohohoho! I will make a special\n"
-	.string "Pokéblock from your Berries.\p"
+	.string "Pokéblock from your Berry.\p"
 	.string "Wait just a moment…$"
 
 NatureChanger_Text_Pause:

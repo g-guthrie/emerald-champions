@@ -102,7 +102,7 @@ FallarborTown_Text_AnnoyingIntroPart8:
 	.string "Ivy: Your Pokémon already have perfect\n"
 	.string "IVs, so I'll only lower them on request.\p"
 	.string "I'll set Speed or Attack as low or as\n"
-	.string "high as you like, free of charge.\p"
+	.string "high as you like for one Bottle Cap.\p"
 	.string "Also, for three Bottle Caps, I'll give\n"
 	.string "a Pokémon a new Hidden Power type.$"
 
@@ -537,7 +537,10 @@ HyperTraining_EventScript_ChooseLevel::
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, HyperTraining_EventScript_ChangeIV
 	copyvar VAR_0x8006, VAR_RESULT
-	special ChangeChosenMonIVs
+	special PayForChosenMonIVChange
+	goto_if_eq VAR_RESULT, 0, HyperTraining_EventScript_Unchanged
+	goto_if_eq VAR_RESULT, 2, HyperTraining_EventScript_IVCapsPoor
+	msgbox HyperTraining_Text_PayOneCap, MSGBOX_DEFAULT
 	goto HyperTraining_EventScript_DoHyperTraining
 
 HyperTraining_EventScript_ChangeHiddenPower::
@@ -553,13 +556,19 @@ HyperTraining_EventScript_SelectHiddenPower::
 	goto HyperTraining_EventScript_ChangeAllIVs
 
 HyperTraining_EventScript_ChangeAllIVs::
-	checkitem ITEM_BOTTLE_CAP, 3
-	compare VAR_RESULT, FALSE
-	goto_if_eq HyperTraining_EventScript_NotEnoughCaps
-	special ChangeChosenMonHiddenPower
+	special PayForChosenMonHiddenPower
+	goto_if_eq VAR_RESULT, 0, HyperTraining_EventScript_Unchanged
+	goto_if_eq VAR_RESULT, 2, HyperTraining_EventScript_IVCapsPoor
 	msgbox HyperTraining_Text_PayThreeCaps, MSGBOX_DEFAULT
-	removeitem ITEM_BOTTLE_CAP, 3
 	goto HyperTraining_EventScript_DoHyperTraining
+
+HyperTraining_EventScript_IVCapsPoor::
+	msgbox HyperTraining_Text_NotEnoughCaps, MSGBOX_DEFAULT
+	goto FallarborTown_HyperMainMenu
+
+HyperTraining_EventScript_Unchanged::
+	msgbox HyperTraining_Text_Unchanged, MSGBOX_DEFAULT
+	goto FallarborTown_HyperMainMenu
 
 HyperTraining_EventScript_DoHyperTraining::
 	setflag FLAG_EC_PLAYER_IVS_MAXED
@@ -619,11 +628,11 @@ HyperTraining_Text_Highest:
 
 HyperTraining_ReportAtk:
 	.string "{STR_VAR_1}'s Attack IV is {STR_VAR_2}.\n"
-	.string "What should I set it to?$"
+	.string "One Bottle Cap per change. Set it to?$"
 
 HyperTraining_ReportSpeed:
 	.string "{STR_VAR_1}'s Speed IV is {STR_VAR_2}.\n"
-	.string "What should I set it to?$"
+	.string "One Bottle Cap per change. Set it to?$"
 
 HyperTraining_Text_HyperTrainingMadeMonStronger:
 	.string "The Hyper Training is complete\n"
@@ -649,3 +658,9 @@ HyperTraining_Text_NotEnoughCaps:
 
 HyperTraining_Text_PayThreeCaps:
 	.string "{PLAYER} handed over three Bottle Caps.$"
+
+HyperTraining_Text_PayOneCap:
+	.string "{PLAYER} handed over one Bottle Cap.$"
+HyperTraining_Text_Unchanged:
+	.string "Nothing would change.\n"
+	.string "Keep your Bottle Caps!$"

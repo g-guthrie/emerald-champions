@@ -106,6 +106,10 @@ MauvilleCity_House2_Text_IconicTutorIntro:
 	.string "Dragon Rage… I know them all.\p"
 	.string "The wilder ones I only share with\n"
 	.string "Trainers who have proven themselves.\p"
+	.string "Each move costs 10 Bottle Caps\n"
+	.string "or one Gold Bottle Cap.\p"
+	.string "That Pokémon can relearn its purchased\n"
+	.string "moves here for free, even if it evolves!\p"
 	.string "Shall I teach one of yours?$"
 
 MauvilleCity_House2_Text_IconicTutorNothing:

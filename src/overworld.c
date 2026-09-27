@@ -1,4 +1,5 @@
 #include "global.h"
+#include "guided_tutorial.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1609,7 +1610,15 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 void CB1_Overworld(void)
 {
     if (gMain.callback2 == CB2_Overworld)
-        DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
+    {
+        if (IsRivalDexNavTutorialActive())
+        {
+            RivalTutorialFieldStep();
+            DoCB1_Overworld(0, 0);
+        }
+        else
+            DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
+    }
 }
 
 #define TINT_NIGHT Q_8_8(0.456) | Q_8_8(0.456) << 8 | Q_8_8(0.615) << 16

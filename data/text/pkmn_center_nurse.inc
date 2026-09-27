@@ -1,8 +1,6 @@
 gText_EmeraldChampionsFirstCenterVisit::
-	.string "Battles give no experience here.\p"
-	.string "This is your first visit, isn't it?\p"
 	.string "We give every new Trainer five\n"
-	.string "tools for building teams quickly.\p"
+	.string "tools for the journey.\p"
 	.string "First, take this Poké Vial!$"
 
 gText_EmeraldChampionsGiveLeveler::
@@ -29,41 +27,19 @@ gText_EmeraldChampionsLocalGuide::
 	.string "where to go next.\l"
 	.string "Every Center has one.$"
 
-gText_EmeraldChampionsGiveMissingFlightBeacon::
-	.string "One more tool for you:\n"
-	.string "the Flight Beacon!$"
-
 gText_EmeraldChampionsHealAfterTools::
 	.string "Well, now that you're here, would\n"
 	.string "you also like to heal your Pokémon?$"
 
 gText_EmeraldChampionsExplainFlightBeacon::
-	.string "With the Feather Badge and a Fly\n"
-	.string "license, the Flight Beacon can call\l"
-	.string "a flier from your party or PC.\p"
-	.string "Cut, Surf and the rest work the same:\n"
-	.string "earn the Badge and license, and bring\l"
-	.string "a Pokémon that could learn the move.\p"
-	.string "Press A at an obstacle to use one.\n"
-	.string "Flash lights caves by itself, and\l"
-	.string "B takes you up from underwater.$"
-
-gText_EmeraldChampionsGiveMissingRepelSpray::
-	.string "One more tool for you:\n"
-	.string "the Repel Spray!$"
+	.string "Keep the Flight Beacon for later.\n"
+	.string "It needs the Feather Badge, a Fly\l"
+	.string "license and a flier in your party or PC.$"
 
 gText_EmeraldChampionsExplainRepelSpray::
 	.string "Your Repel Spray keeps wild Pokémon\n"
 	.string "away for a while. Fishing, Rock\l"
 	.string "Smash and Sweet Scent still work.$"
-
-gText_EmeraldChampionsGiveMissingLeveler::
-	.string "We have one more tool for you:\n"
-	.string "the Leveler!$"
-
-gText_EmeraldChampionsGiveMissingRegenerator::
-	.string "We have one more tool for you:\n"
-	.string "the Regenerator!$"
 
 gText_EmeraldChampionsExplainRegenerator::
 	.string "With the Regenerator, a held Berry\n"

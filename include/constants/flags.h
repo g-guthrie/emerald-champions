@@ -840,6 +840,9 @@
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
 #define FLAG_EC_WOODS_GREAT_BALL_PENDING       0x2B4 // Petalburg Woods Dusk Balls held by the nurse; clear only on delivery.
+#define FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE 0x2B5 // Oldale nurse and clerk introduction; also hides visiting nurse.
+#define FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE 0x2B6
+#define FLAG_HIDE_ROUTE101_DEXNAV_RIVAL 0x2BF
 #define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
 // Hoenn starter Mega Stone receipts: Norman's Ring gift or his shown-partner gift (src/mega_stone_rewards.c).
 #define FLAG_EC_MEGA_GIFT_SCEPTILITE 0x2B8

@@ -40,6 +40,8 @@
 #define NUM_FORCED_MOVEMENTS 22
 #define NUM_ACRO_BIKE_COLLISIONS 5
 
+static u8 sSneakStepDelay;
+
 enum SpinDirection
 {
     SPIN_DIRECTION_NONE,
@@ -362,6 +364,9 @@ void PlayerStep(enum Direction direction, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
+    if ((heldKeys & (A_BUTTON | B_BUTTON)) != A_BUTTON || direction == DIR_NONE)
+        sSneakStepDelay = 0;
+
     HideShowWarpArrow(playerObjEvent);
     if (gPlayerAvatar.preventStep == FALSE && !TryUpdatePlayerSpinDirection())
     {
@@ -444,6 +449,15 @@ static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
 
 static void MovePlayerAvatarUsingKeypadInput(enum Direction direction, u16 newKeys, u16 heldKeys)
 {
+    // The completed movement was cleared before this point, so the pause
+    // cannot count as another tile step or defer interactions and menus.
+    if (!(gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_ON_FOOT | PLAYER_AVATAR_FLAG_SURFING)))
+        sSneakStepDelay = 0;
+    if (sSneakStepDelay != 0)
+    {
+        sSneakStepDelay--;
+        return;
+    }
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         MovePlayerOnBike(direction, newKeys, heldKeys);
     else
@@ -895,10 +909,11 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
     gPlayerAvatar.creeping = FALSE;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     {
-        if (FlagGet(DN_FLAG_SEARCHING) && (heldKeys & A_BUTTON))
+        if (FlagGet(DN_FLAG_SEARCHING) && (heldKeys & (A_BUTTON | B_BUTTON)) == A_BUTTON)
         {
             gPlayerAvatar.creeping = TRUE;
             PlayerWalkSlow(direction);
+            sSneakStepDelay = SNEAK_STEP_PAUSE_FRAMES;
         }
         else
         {
@@ -908,8 +923,15 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
         return;
     }
 
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER)
-     && (heldKeys & B_BUTTON)
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT)
+     && (heldKeys & (A_BUTTON | B_BUTTON)) == A_BUTTON)
+    {
+        gPlayerAvatar.creeping = TRUE;
+        PlayerWalkSlow(direction);
+        sSneakStepDelay = SNEAK_STEP_PAUSE_FRAMES;
+    }
+    else if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER)
+     && (heldKeys & (A_BUTTON | B_BUTTON)) == B_BUTTON
      && FlagGet(FLAG_SYS_B_DASH)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0
      && !FollowerNPCComingThroughDoor()
@@ -922,11 +944,6 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
 
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         return;
-    }
-    else if (FlagGet(DN_FLAG_SEARCHING) && (heldKeys & A_BUTTON))
-    {
-        gPlayerAvatar.creeping = TRUE;
-        PlayerWalkSlow(direction);
     }
     else
     {
@@ -1638,6 +1655,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
 void ClearPlayerAvatarInfo(void)
 {
     memset(&gPlayerAvatar, 0, sizeof(struct PlayerAvatar));
+    sSneakStepDelay = 0;
 }
 
 void SetPlayerAvatarStateMask(u8 flags)

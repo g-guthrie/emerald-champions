@@ -1,4 +1,5 @@
 #include "global.h"
+#include "guided_tutorial.h"
 #include "reshow_battle_screen.h"
 #include "battle.h"
 #include "palette.h"
@@ -25,7 +26,7 @@ static void CreateHealthboxSprite(enum BattlerId battler);
 static void ClearBattleBgCntBaseBlocks(void);
 static void CreateCaughtMonSprite(void);
 
-#define CATCH_TUTORIAL_TRAINER_PIC TRAINER_PIC_WALLY
+#define CATCH_TUTORIAL_TRAINER_PIC RivalTutorialTrainerPic()
 
 void ReshowBattleScreenDummy(void)
 {

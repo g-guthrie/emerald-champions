@@ -1,4 +1,5 @@
 #include "global.h"
+#include "guided_tutorial.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_record.h"
@@ -2795,6 +2796,11 @@ void BufferStringBattle(enum StringID stringID, enum BattlerId battler)
             }
         }
         break;
+    case STRINGID_YOUTHROWABALLNOWRIGHT:
+        stringPtr = IsRivalDexNavTutorialActive()
+            ? COMPOUND_STRING("I'll use a Poké Ball now.\nWatch the Bag!")
+            : gBattleStringsTable[stringID];
+        break;
     case STRINGID_TRAINERSLIDE:
         stringPtr = gBattleStruct->trainerSlideMsg;
         break;
@@ -3521,7 +3527,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 toCpy = textStart;
                 if (gBattleTypeFlags & BATTLE_TYPE_CATCH_TUTORIAL)
                 {
-                    textStart = StringCopy(textStart, COMPOUND_STRING("Wally"));
+                    textStart = StringCopy(textStart, RivalTutorialTrainerName());
                 }
                 else if (GetBattlerPosition(gBattlerAttacker) == B_POSITION_PLAYER_LEFT)
                 {

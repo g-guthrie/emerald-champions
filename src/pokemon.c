@@ -2292,6 +2292,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_MET_GAME:
             retVal = GetSubstruct3(boxMon)->metGame;
             break;
+        case MON_DATA_ICONIC_MOVES:
+            retVal = GetSubstruct0(boxMon)->iconicMovesLow | (GetSubstruct0(boxMon)->iconicMovesHigh << 6);
+            break;
         case MON_DATA_POKEBALL:
             retVal = GetSubstruct0(boxMon)->pokeball;
             break;
@@ -2787,6 +2790,10 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_MET_GAME:
             SET8(GetSubstruct3(boxMon)->metGame);
+            break;
+        case MON_DATA_ICONIC_MOVES:
+            GetSubstruct0(boxMon)->iconicMovesLow = data[0] & 0x3F;
+            GetSubstruct0(boxMon)->iconicMovesHigh = ((data[0] >> 6) | (data[1] << 2)) & 7;
             break;
         case MON_DATA_POKEBALL:
             SET8(GetSubstruct0(boxMon)->pokeball);

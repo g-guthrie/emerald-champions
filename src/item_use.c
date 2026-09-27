@@ -97,8 +97,6 @@ static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe Dowsing Machine is shaking
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CoinCase[] = _("Your Coins:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PowderQty[] = _("Powder Qty: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
-static const u8 sText_UsedVar2WildLured[] = _("{PLAYER} used the\n{STR_VAR_2}.\pWild Pokémon will be lured.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_UsedVar2WildRepelled[] = _("{PLAYER} used the\n{STR_VAR_2}.\pWild Pokémon will be repelled.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PlayedPokeFluteCatchy[] = _("Played the Poké Flute.\pNow, that's a catchy tune!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PlayedPokeFlute[] = _("Played the Poké Flute.");
 static const u8 sText_PokeFluteAwakenedMon[] = _("The Poké Flute awakened sleeping\nPokémon.{PAUSE_UNTIL_PRESS}");
@@ -1022,39 +1020,6 @@ static void Task_UseLure(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
-}
-
-static void Task_UsedBlackWhiteFlute(u8 taskId)
-{
-    if (++gTasks[taskId].data[8] > 7)
-    {
-        PlaySE(SE_GLASS_FLUTE);
-        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
-        else
-            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
-    }
-}
-
-void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
-{
-    CopyItemName(gSpecialVar_ItemId, gStringVar2);
-    if (gSpecialVar_ItemId == ITEM_WHITE_FLUTE)
-    {
-        FlagSet(FLAG_SYS_ENC_UP_ITEM);
-        FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
-        StringExpandPlaceholders(gStringVar4, sText_UsedVar2WildLured);
-        if (TryEndRepelSprayForAttractant())
-            StringAppend(gStringVar4, sText_RepelSprayEnded);
-    }
-    else
-    {
-        FlagSet(FLAG_SYS_ENC_DOWN_ITEM);
-        FlagClear(FLAG_SYS_ENC_UP_ITEM);
-        StringExpandPlaceholders(gStringVar4, sText_UsedVar2WildRepelled);
-    }
-    gTasks[taskId].data[8] = 0;
-    gTasks[taskId].func = Task_UsedBlackWhiteFlute;
 }
 
 void Task_UseDigEscapeRopeOnField(u8 taskId)

@@ -8,6 +8,9 @@
 #include "strings.h"
 #include "text.h"
 #include "caps.h"
+#include "clock.h"
+#include "item.h"
+#include "random.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
 
@@ -459,6 +462,15 @@ void ChangeChosenMonHiddenPower(void)
     CalculateMonStats(mon);
 }
 
+// Reuse the saved daily seed so visits and reloads keep the same request.
+// The e-Reader placeholder is not an obtainable berry.
+u16 GetNatureChangerBerry(void)
+{
+    DoTimeBasedEvents();
+    rng_value_t rng = LocalRandomSeed(gSaveBlock1Ptr->dailySeed ^ 0x4E415455);
+    return FIRST_BERRY_INDEX + LocalRandom32(&rng) % (ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX + 1);
+}
+
 // VAR_0x8005 is the raised stat and VAR_0x8006 the lowered one, in Nature
 // order (Attack, Defense, Speed, Sp. Atk, Sp. Def). VAR_RESULT is FALSE when
 // nothing would change (the same Nature, or one neutral Nature for another),
@@ -505,4 +517,67 @@ void BufferVarsForIVRater(void)
     gSpecialVar_0x8005 = total;
     gSpecialVar_0x8006 = bestStat;
     gSpecialVar_0x8007 = best;
+}
+
+// VAR_0x8004: 1, 5, or 9 (all affordable). No debit until delivery succeeds.
+void ExchangeSootForCaps(void)
+{
+    u32 soot = VarGet(VAR_ASH_GATHER_COUNT);
+    u32 count = gSpecialVar_0x8004;
+    gSpecialVar_Result = 0;
+    if (count == 9)
+        count = soot / 1000;
+    else if (count != 1 && count != 5)
+        return;
+    if (count == 0 || count * 1000 > soot)
+        return;
+    if (!AddBagItem(ITEM_BOTTLE_CAP, count))
+    {
+        gSpecialVar_Result = 2;
+        return;
+    }
+    VarSet(VAR_ASH_GATHER_COUNT, soot - count * 1000);
+    ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEFT_ALIGN, 2);
+    gSpecialVar_Result = 1;
+}
+
+// These script transactions charge only for changed IVs. Failed delivery
+// restores the complete mon, including calculated stats and current HP.
+static void PayForIvyService(bool32 hiddenPower)
+{
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+    gSpecialVar_Result = 0;
+    if (mon == NULL)
+        return;
+    struct Pokemon before = *mon;
+    if (hiddenPower)
+        ChangeChosenMonHiddenPower();
+    else
+    {
+        if (gSpecialVar_0x8005 != STAT_ATK && gSpecialVar_0x8005 != STAT_SPEED)
+            return;
+        ChangeChosenMonIVs();
+    }
+    bool32 changed = FALSE;
+    for (u32 i = 0; i < NUM_STATS; i++)
+        changed |= GetMonData(mon, sIvData[i]) != GetMonData(&before, sIvData[i]);
+    if (!changed)
+        return;
+    if (!RemoveBagItem(ITEM_BOTTLE_CAP, hiddenPower ? 3 : 1))
+    {
+        *mon = before;
+        gSpecialVar_Result = 2;
+        return;
+    }
+    gSpecialVar_Result = 1;
+}
+
+void PayForChosenMonIVChange(void)
+{
+    PayForIvyService(FALSE);
+}
+
+void PayForChosenMonHiddenPower(void)
+{
+    PayForIvyService(TRUE);
 }

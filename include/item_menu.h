@@ -110,6 +110,8 @@ bool8 UseRegisteredKeyItemOnField(enum RegisterButton button);
 void CB2_GoToSellMenu(void);
 void GoToBagMenu(u8 location, u8 pocket, MainCallback exitCallback);
 void DoWallyTutorialBagMenu(void);
+void ShowTutorialBagItem(enum Item item, MainCallback callback);
+void StartInitialToolsBagTutorial(void);
 void InitOldManBag(void);
 void ResetBagScrollPositions(void);
 void ChooseBerryForMachine(MainCallback exitCallback);

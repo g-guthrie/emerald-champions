@@ -832,3 +832,19 @@ gSpecials::
 	def_special CenterGuideHasStaticLegendaryLead
 
 	def_special IsPlayerPartyBelowLevelCap
+
+	def_special GetNatureChangerBerry
+
+	def_special StartInitialToolsBagTutorial, waitstate=1
+	def_special StartWallyLevelerTutorial, waitstate=1
+	def_special PrepareRivalDexNavTutorial
+	def_special StartRivalDexNavTutorial, waitstate=1
+	def_special ShowRivalPokerusTutorial, waitstate=1
+	def_special FinishRivalDexNavTutorial
+
+	def_special ExchangeSootForCaps
+
+	def_special PayForChosenMonIVChange
+	def_special PayForChosenMonHiddenPower
+
+	def_special WarpToRivalTutorialSpot, waitstate=1

@@ -37,6 +37,7 @@ LittlerootTown_MapScripts:: @ 81E7DCB
 	@ 2: Entered Rival's bedroom
 	@ 3: Met Rival
 	@ 4: Received Pokedex
+	@ 5: Received Pokedex; rival demonstration pending on Route101
 
 
 LittlerootTown_OnTransition: @ 81E7DDB

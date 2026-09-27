@@ -548,6 +548,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting:: @ 81FA294
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister:: @ 81FA29E
+	goto_if_unset FLAG_RECEIVED_DEXNAV, LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OfferDexNavRefresher, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit
+	call LittlerootTown_ProfessorBirchsLab_EventScript_ExplainDexNav
+	release
+	end
+LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit:
 	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
 	goto_if_eq ProfBirch_EventScript_RatePokedexOrRegister
@@ -563,7 +570,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ExplainDexNav
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavBrief, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
@@ -574,15 +581,16 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
 	compare VAR_RESULT, FEMALE
 	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
-	@ Every later visit puts the rival on 7,4 (map template). A save keeps live
-	@ coordinates, so she steps back beside Birch before release.
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_RivalDexNavInvite, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalReturnBesideBirch
+	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalLeaveForDemo
 	waitmovement 0
+	removeobject LOCALID_RIVAL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
 	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
 	setvar VAR_OLDALE_TOWN_STATE, 1
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 5 @ Pending Route 101 demonstration; preserves Mom's normal exit event.
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
 	releaseall
 	end
@@ -1213,3 +1221,30 @@ LittlerootTown_ProfessorBirchsLab_Text_CosmogNoRoom:
 	.string "Your party and Boxes are full.\p"
 	.string "Make room, then speak to me.\n"
 	.string "I'll keep Cosmog here for you!$"
+
+LittlerootTown_ProfessorBirchsLab_Movement_RivalLeaveForDemo:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+LittlerootTown_ProfessorBirchsLab_Text_DexNavBrief:
+	.string "Prof. Birch: DexNav shows the Pokémon\n"
+	.string "available where you're standing.\p"
+	.string "Open it from the Start menu.\n"
+	.string "You needn't see a Pokémon first!\p"
+	.string "{RIVAL} can show you a search. Ask me\n"
+	.string "any time for the detailed lesson.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_RivalDexNavInvite:
+	.string "{RIVAL}: Come on! I'll meet you at the\n"
+	.string "grass on Route 101 and show you.\p"
+	.string "Say goodbye to your mom first.\n"
+	.string "I'll be waiting just up the road!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OfferDexNavRefresher:
+	.string "Would you like my detailed lesson\n"
+	.string "on DexNav, chains and Pokérus?$"

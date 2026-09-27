@@ -8,89 +8,86 @@ Common_EventScript_PkmnCenterNurse::
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_OfferHealAfterTools
 	goto EventScript_PkmnCenterNurse_Main
 
-@ Hands over whichever of the five tools are missing, with their lessons.
-@ The counter and the whiteout heal (EventScript_AfterWhiteOutHeal) share it.
-@ VAR_RESULT is TRUE when a tool arrived, FALSE when none was due or the Bag
-@ was full (the missing ones then wait for the next visit).
+@ Both Center nurses and the Oldale Mart visitor use the same per-item checks.
+@ VAR_RESULT reports a new handout; VAR_0x8007 reports that none are pending.
+@ The Mart gives its lesson in the native Bag, so it skips the counter lectures.
 EventScript_PkmnCenterNurse_GiveTools::
-	checkitem ITEM_POKE_VIAL, 1
+	setvar VAR_0x8008, FALSE
+	goto EventScript_PkmnCenterNurse_CheckTools
+
+EventScript_PkmnCenterNurse_GiveToolsForTour::
+	setvar VAR_0x8008, TRUE
+
+EventScript_PkmnCenterNurse_CheckTools:
+	setvar VAR_0x8009, FALSE
+	setvar VAR_0x8007, FALSE
+	setvar VAR_0x8004, ITEM_POKE_VIAL
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_HasVial
 	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
 	giveitem ITEM_POKE_VIAL, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
+	setvar VAR_0x8009, TRUE
 	setvar VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE
 	setvar VAR_POKE_VIAL_CHARGES, 1
+	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_HasVial
 	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
+
+EventScript_PkmnCenterNurse_HasVial:
+	setvar VAR_0x8004, ITEM_LEVELER
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRegenerator
 	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	call EventScript_PkmnCenterNurse_ExplainLeveler
-	msgbox gText_EmeraldChampionsGiveRegenerator, MSGBOX_DEFAULT
-	giveitem ITEM_REGENERATOR, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
-	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
-	giveitem ITEM_REPEL_SPRAY, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
-	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
-	giveitem ITEM_FLIGHT_BEACON, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
-	msgbox gText_EmeraldChampionsLocalGuide, MSGBOX_DEFAULT
-	setvar VAR_RESULT, TRUE
-	return
-
-@ The first lesson: no experience from battles, the live level cap, and moves.
-EventScript_PkmnCenterNurse_ExplainLeveler:
-	special GetLevelCapForScriptedGift
-	buffernumberstring STR_VAR_1, VAR_0x800A
-	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
-	return
-
-@ VAR_0x8009 remembers whether this visit handed anything over.
-EventScript_PkmnCenterNurse_HasVial:
-	setvar VAR_0x8009, FALSE
-	checkitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRegenerator
-	msgbox gText_EmeraldChampionsGiveMissingLeveler, MSGBOX_DEFAULT
-	giveitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	setvar VAR_0x8009, TRUE
-	call EventScript_PkmnCenterNurse_ExplainLeveler
+	call_if_eq VAR_0x8008, FALSE, EventScript_PkmnCenterNurse_ExplainLeveler
 
-@ Older saves reach here without the Regenerator; one in the PC counts.
 EventScript_PkmnCenterNurse_CheckRegenerator:
 	setvar VAR_0x8004, ITEM_REGENERATOR
 	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
-	msgbox gText_EmeraldChampionsGiveMissingRegenerator, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsGiveRegenerator, MSGBOX_DEFAULT
 	giveitem ITEM_REGENERATOR, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	setvar VAR_0x8009, TRUE
+	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
 	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
 
-@ Resume tool delivery if the Bag filled during an earlier visit.
 EventScript_PkmnCenterNurse_CheckRepelSpray:
-	checkitem ITEM_REPEL_SPRAY, 1
+	setvar VAR_0x8004, ITEM_REPEL_SPRAY
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
-	msgbox gText_EmeraldChampionsGiveMissingRepelSpray, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
 	giveitem ITEM_REPEL_SPRAY, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	setvar VAR_0x8009, TRUE
+	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
 	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 
 EventScript_PkmnCenterNurse_CheckFlightBeacon:
-	checkitem ITEM_FLIGHT_BEACON, 1
+	setvar VAR_0x8004, ITEM_FLIGHT_BEACON
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_ToolsDelivered
-	msgbox gText_EmeraldChampionsGiveMissingFlightBeacon, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
 	setvar VAR_0x8009, TRUE
+	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_ToolsDelivered
 	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
+
 EventScript_PkmnCenterNurse_ToolsDelivered:
+	setvar VAR_0x8007, TRUE
+	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_ReturnToolsResult
 	call_if_eq VAR_0x8009, TRUE, EventScript_PkmnCenterNurse_LocalGuide
+EventScript_PkmnCenterNurse_ReturnToolsResult:
 	copyvar VAR_RESULT, VAR_0x8009
+	return
+
+EventScript_PkmnCenterNurse_ExplainLeveler:
+	special GetLevelCapForScriptedGift
+	buffernumberstring STR_VAR_1, VAR_0x800A
+	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
 	return
 
 EventScript_PkmnCenterNurse_LocalGuide:
@@ -229,6 +226,7 @@ Text_PkmnCenterNurse_KeepDevonGift:
 	.string "safe. Make room and speak to me again.$"
 
 EventScript_PkmnCenterNurse_ToolsPending::
+	setvar VAR_0x8007, FALSE
 	msgbox gText_EmeraldChampionsToolsPending, MSGBOX_DEFAULT
 	setvar VAR_RESULT, FALSE
 	return
@@ -236,8 +234,8 @@ EventScript_PkmnCenterNurse_ToolsPending::
 gText_EmeraldChampionsToolsPending:
 	.string "Your Bag is full. We will hold\n"
 	.string "the missing tools for you.\p"
-	.string "Healing is still available. Make\n"
-	.string "room and return for the tools\l"
+	.string "The Center can still heal your team.\n"
+	.string "Make room and return for the tools\l"
 	.string "whenever you are ready.$"
 
 @ Route110 completion records entitlement; ownership includes deposited items.

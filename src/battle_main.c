@@ -5606,6 +5606,17 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         // The ZeroEnemyPartyMons() call happens in SaveXXXChallenge function (eg. SaveFactoryChallenge)
         if (!(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_ROAMER)))
         {
+            // Guided catching scenes keep the actual catch for their next
+            // demonstration. Their map script owns the saved player party.
+            // Cleanup can run again while fading, after the enemy is cleared.
+            if ((gBattleTypeFlags & BATTLE_TYPE_CATCH_TUTORIAL)
+             && gBattleOutcome == B_OUTCOME_CAUGHT
+             && GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) != SPECIES_NONE)
+            {
+                ZeroPlayerPartyMons();
+                gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_OPPONENT_A][0];
+                gPartiesCount[B_TRAINER_PLAYER] = 1;
+            }
             ZeroEnemyPartyMons();
         }
         ResetDynamicAiFunctions();

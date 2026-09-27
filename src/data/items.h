@@ -2094,16 +2094,16 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Blue Flute"),
         .price = 20,
         .description = COMPOUND_STRING(
-            "A glass flute that\n"
-            "awakens sleeping\n"
-            "Pokémon."),
+            "Held: protects both\n"
+            "active allies from\n"
+            "sleep. Reusable."),
         .notConsumed = TRUE,
+        .holdEffect = HOLD_EFFECT_FLUTE,
+        .holdEffectParam = FLUTE_SLEEP,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_FLUTE,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
-        .battleUsage = EFFECT_ITEM_CURE_STATUS,
-        .effect = gItemEffect_Awakening,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
         .iconPic = gItemIcon_Flute,
         .iconPalette = gItemIconPalette_BlueFlute,
@@ -2114,16 +2114,16 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Yellow Flute"),
         .price = 20,
         .description = COMPOUND_STRING(
-            "A glass flute that\n"
-            "snaps Pokémon\n"
-            "out of confusion."),
+            "Held: protects both\n"
+            "active allies from\n"
+            "confusion. Reusable."),
         .notConsumed = TRUE,
+        .holdEffect = HOLD_EFFECT_FLUTE,
+        .holdEffectParam = FLUTE_CONFUSION,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_FLUTE,
-        .type = ITEM_USE_PARTY_MENU,
+        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .battleUsage = EFFECT_ITEM_CURE_STATUS,
-        .effect = gItemEffect_YellowFlute,
         .flingPower = 30,
         .iconPic = gItemIcon_Flute,
         .iconPalette = gItemIconPalette_YellowFlute,
@@ -2134,22 +2134,22 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Red Flute"),
         .price = 20,
         .description = COMPOUND_STRING(
-            "A glass flute that\n"
-            "snaps Pokémon\n"
-            "out of attraction."),
+            "Held: protects both\n"
+            "allies from Taunt\n"
+            "and Encore."),
         .notConsumed = TRUE,
+        .holdEffect = HOLD_EFFECT_FLUTE,
+        .holdEffectParam = FLUTE_MENTAL,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_FLUTE,
-        .type = ITEM_USE_PARTY_MENU,
+        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .battleUsage = EFFECT_ITEM_CURE_STATUS,
-        .effect = gItemEffect_RedFlute,
         .flingPower = 30,
         .iconPic = gItemIcon_Flute,
         .iconPalette = gItemIconPalette_RedFlute,
     },
 
-// Encounter-modifying Flutes
+// Retired flute ids are kept for old saves, with no usable effect.
 
     [ITEM_BLACK_FLUTE] =
     {
@@ -2157,14 +2157,14 @@ const struct ItemInfo gItemsInfo[] =
         .price = 20,
         .holdEffectParam = 50,
         .description = COMPOUND_STRING(
-            "A glass flute that\n"
-            "keeps away wild\n"
-            "Pokémon."),
+            "An old glass flute.\n"
+            "It no longer has\n"
+            "a special effect."),
         .notConsumed = TRUE,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_FLUTE,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_BlackWhiteFlute,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
         .iconPic = gItemIcon_Flute,
         .iconPalette = gItemIconPalette_BlackFlute,
@@ -2176,13 +2176,14 @@ const struct ItemInfo gItemsInfo[] =
         .price = 20,
         .holdEffectParam = 150,
         .description = COMPOUND_STRING(
-            "A glass flute that\n"
-            "lures wild Pokémon."),
+            "An old glass flute.\n"
+            "It no longer has\n"
+            "a special effect."),
         .notConsumed = TRUE,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_FLUTE,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_BlackWhiteFlute,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
         .iconPic = gItemIcon_Flute,
         .iconPalette = gItemIconPalette_WhiteFlute,

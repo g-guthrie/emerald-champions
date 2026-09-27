@@ -231,6 +231,7 @@ static EWRAM_DATA u8 sLevelerNextSlot = 0;
 static EWRAM_DATA enum Species sLevelerEvolutionSpecies = SPECIES_NONE;
 static EWRAM_DATA MainCallback sLevelerExitCallback = NULL;
 static EWRAM_DATA bool8 sLevelerRaisedParty = FALSE;
+static EWRAM_DATA u16 sLevelerPreviewFrames = 0;
 
 // IWRAM common
 COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
@@ -5904,7 +5905,15 @@ void StartLevelerPartySequence(MainCallback exitCallback)
     sLevelerEvolutionSpecies = SPECIES_NONE;
     sLevelerExitCallback = exitCallback;
     sLevelerRaisedParty = FALSE;
+    sLevelerPreviewFrames = 0;
     SetMainCallback2(CB2_ShowPartyMenuForLeveler);
+}
+
+void StartLevelerTutorialSequence(MainCallback exitCallback)
+{
+    StartLevelerPartySequence(exitCallback);
+    // Show the caught Pokémon's original level after the native menu is ready.
+    sLevelerPreviewFrames = 90;
 }
 
 static void CB2_ShowPartyMenuForLeveler(void)
@@ -5934,8 +5943,14 @@ static void CB2_ShowPartyMenuForLeveler(void)
 
 static void Task_SetLevelerCB(u8 taskId)
 {
-    if (!gPaletteFade.active)
-        ItemUseCB_RareCandy(taskId, Task_ClosePartyMenuAfterText);
+    if (gPaletteFade.active)
+        return;
+    if (sLevelerPreviewFrames != 0)
+    {
+        sLevelerPreviewFrames--;
+        return;
+    }
+    ItemUseCB_RareCandy(taskId, Task_ClosePartyMenuAfterText);
 }
 
 static void Task_ContinueLevelerAfterText(u8 taskId)

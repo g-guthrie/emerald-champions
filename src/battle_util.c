@@ -5092,6 +5092,18 @@ enum Stat GetParadoxBoostedStatId(enum BattlerId battler)
     return gBattleMons[battler].volatiles.paradoxBoostedStat;
 }
 
+bool32 IsFluteProtected(enum BattlerId battler, u32 protection)
+{
+    for (u32 i = 0; i < gBattlersCount; i++)
+    {
+        if (GetBattlerSide(i) == GetBattlerSide(battler) && IsBattlerAlive(i)
+         && GetBattlerHoldEffect(i) == HOLD_EFFECT_FLUTE
+         && GetBattlerHoldEffectParam(i) == protection)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 bool32 CanBeSlept(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef, enum SleepClauseBlock isBlockedBySleepClause)
 {
     if (IsSleepClauseActiveForSide(GetBattlerSide(battlerDef)) && isBlockedBySleepClause != NOT_BLOCKED_BY_SLEEP_CLAUSE)
@@ -5250,7 +5262,11 @@ bool32 CanSetNonVolatileStatus(enum BattlerId battlerAtk, enum BattlerId battler
         }
         break;
     case MOVE_EFFECT_SLEEP:
-        if (gBattleMons[battlerDef].status1 & STATUS1_SLEEP)
+        if (IsFluteProtected(battlerDef, FLUTE_SLEEP))
+        {
+            battleScript = BattleScript_ButItFailed;
+        }
+        else if (gBattleMons[battlerDef].status1 & STATUS1_SLEEP)
         {
             battleScript = BattleScript_AlreadyAsleep;
         }
@@ -5394,7 +5410,8 @@ bool32 CanBeConfused(enum BattlerId battlerAtk, enum BattlerId effectBattler)
 {
     enum Ability effectAbility = GetBattlerAbility(effectBattler);
 
-    if (gBattleMons[effectBattler].volatiles.confusionTimer > 0
+    if (IsFluteProtected(effectBattler, FLUTE_CONFUSION)
+     || gBattleMons[effectBattler].volatiles.confusionTimer > 0
      || IsSafeguardProtected(battlerAtk, effectBattler, GetBattlerAbility(battlerAtk))
      || IsMistyTerrainAffected(effectBattler, effectAbility, GetBattlerHoldEffect(effectBattler), gFieldTimers.terrain)
      || IsAbilityAndRecord(effectBattler, effectAbility, ABILITY_OWN_TEMPO))

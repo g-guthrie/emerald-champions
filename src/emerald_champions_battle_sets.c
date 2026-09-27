@@ -1,6 +1,7 @@
 #include "global.h"
 #include "move.h"
 #include "data.h"
+#include "daycare.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
 #include "item.h"
@@ -711,17 +712,70 @@ bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum M
     return availableMoves[move];
 }
 
+static u32 IconicMoveReceipt(struct BoxPokemon *mon, enum Move move)
+{
+    enum Species species = GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES));
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+    {
+        const struct EmeraldChampionsIconicMove *entry = &sEmeraldChampionsIconicMoves[i];
+        if (entry->move == move && GetEggSpecies(entry->species) == GetEggSpecies(species))
+            return 1u << entry->receiptBit;
+    }
+    return 0;
+}
+
+static void RememberKnownIconicMoves(struct BoxPokemon *mon)
+{
+    u32 receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        receipts |= IconicMoveReceipt(mon, GetBoxMonData(mon, MON_DATA_MOVE1 + slot));
+    SetBoxMonData(mon, MON_DATA_ICONIC_MOVES, &receipts);
+}
+
+bool32 IsIconicMoveUnlocked(struct BoxPokemon *mon, enum Move move)
+{
+    return (GetBoxMonData(mon, MON_DATA_ICONIC_MOVES) & IconicMoveReceipt(mon, move)) != 0;
+}
+
+// Called only after a successful lesson; the UI checked funds before teaching.
+// Free lessons still use this path so cancellation can never buy a receipt.
+bool32 PayForIconicMove(struct BoxPokemon *mon, enum Move move, enum Item payment)
+{
+    u32 bit = IconicMoveReceipt(mon, move);
+    u32 receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
+    if (!bit || !BoxMonKnowsMove(mon, move))
+        return FALSE;
+    if (receipts & bit)
+        return TRUE;
+    if (payment != ITEM_BOTTLE_CAP && payment != ITEM_GOLD_BOTTLE_CAP)
+        return FALSE;
+    if (!RemoveBagItem(payment, payment == ITEM_BOTTLE_CAP ? 10 : 1))
+        return FALSE;
+    receipts |= bit;
+    SetBoxMonData(mon, MON_DATA_ICONIC_MOVES, &receipts);
+    return TRUE;
+}
+
 u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves)
 {
     enum Species species = GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES));
     u32 badges = CountIconicTutorBadges();
+    u32 receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
     u32 numMoves = 0;
+    bool8 offered[MOVES_COUNT_ALL] = {FALSE};
 
+    // Credit existing lessons from older saves before a move can be forgotten.
+    RememberKnownIconicMoves(mon);
+    receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
     {
         const struct EmeraldChampionsIconicMove *entry = &sEmeraldChampionsIconicMoves[i];
-        if (entry->species == species && entry->badges <= badges && !BoxMonKnowsMove(mon, entry->move))
+        bool32 purchased = GetEggSpecies(entry->species) == GetEggSpecies(species)
+            && (receipts & (1u << entry->receiptBit));
+        if (((entry->species == species && entry->badges <= badges) || purchased)
+         && !offered[entry->move] && !BoxMonKnowsMove(mon, entry->move))
         {
+            offered[entry->move] = TRUE;
             if (moves != NULL)
                 moves[numMoves] = entry->move;
             numMoves++;
@@ -753,6 +807,7 @@ u32 GetEmeraldChampionsPreparationMovesForSpecies(enum Species species, u16 *mov
 
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
 {
+    RememberKnownIconicMoves(mon);
     bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
     u32 numMoves = 0;
     BuildEmeraldChampionsPreparationMoveAccess(GetBoxMonData(mon, MON_DATA_SPECIES), availableMoves);

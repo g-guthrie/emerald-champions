@@ -1,4 +1,5 @@
 #include "global.h"
+#include "guided_tutorial.h"
 #include "caps.h"
 #include "data.h"
 #include "difficulty.h"
@@ -502,6 +503,15 @@ void StartWallyTutorialBattle(void)
 
 void BattleSetup_StartScriptedWildBattle(void)
 {
+    if (IsRivalDexNavTutorialActive())
+    {
+        RivalTutorialBattleStarted();
+        LockPlayerFieldControls();
+        gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+        gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;
+        CreateBattleStartTask(B_TRANSITION_SLICE, 0);
+        return;
+    }
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;

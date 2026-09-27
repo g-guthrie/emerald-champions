@@ -4459,7 +4459,8 @@ bool32 AI_CanParalyze(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum
 
 bool32 AI_CanBeConfused(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Ability abilityDef)
 {
-    if (gBattleMons[battlerDef].volatiles.confusionTimer > 0
+    if (IsFluteProtected(battlerDef, FLUTE_CONFUSION)
+     || gBattleMons[battlerDef].volatiles.confusionTimer > 0
      || (abilityDef == ABILITY_OWN_TEMPO && !DoesBattlerIgnoreAbilityChecks(battlerAtk, gAiLogicData->abilities[battlerAtk], move))
      || IsMistyTerrainAffected(battlerDef, abilityDef, gAiLogicData->holdEffects[battlerDef], gFieldTimers.terrain)
      || IsSafeguardProtected(battlerAtk, battlerDef, gAiLogicData->abilities[battlerAtk])
@@ -7449,7 +7450,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
         return gBattleMons[battlerDef].volatiles.yawn
             || !CanSetNonVolatileStatus(battlerAtk, battlerDef, abilityAtk, abilityDef, MOVE_EFFECT_SLEEP, CHECK_TRIGGER);
     case EFFECT_CONFUSE:
-        return gBattleMons[battlerDef].volatiles.confusionTimer
+        return IsFluteProtected(battlerDef, FLUTE_CONFUSION)
+            || gBattleMons[battlerDef].volatiles.confusionTimer
             || abilityDef == ABILITY_OWN_TEMPO
             || IsSafeguardProtected(battlerAtk, battlerDef, abilityAtk)
             || IsMistyTerrainAffected(battlerDef, abilityDef, aiData->holdEffects[battlerDef], gFieldTimers.terrain);
@@ -7461,7 +7463,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     case EFFECT_LEECH_SEED:
         return gBattleMons[battlerDef].volatiles.leechSeed || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS);
     case EFFECT_ENCORE:
-        return gBattleMons[battlerDef].volatiles.encoredMove != MOVE_NONE
+        return IsFluteProtected(battlerDef, FLUTE_MENTAL)
+            || gBattleMons[battlerDef].volatiles.encoredMove != MOVE_NONE
             || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move)
             || (!AI_HasUsableLastMove(battlerDef, TRUE) && AI_TargetActsAfterMove(battlerAtk, battlerDef, move));
     case EFFECT_DISABLE:
@@ -7469,7 +7472,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
             || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move)
             || (!AI_HasUsableLastMove(battlerDef, FALSE) && AI_TargetActsAfterMove(battlerAtk, battlerDef, move));
     case EFFECT_TAUNT:
-        return gBattleMons[battlerDef].volatiles.tauntTimer
+        return IsFluteProtected(battlerDef, FLUTE_MENTAL)
+            || gBattleMons[battlerDef].volatiles.tauntTimer
             || (GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && abilityDef == ABILITY_OBLIVIOUS)
             || AI_IsAromaVeilProtected(battlerAtk, battlerDef, move);
     case EFFECT_TORMENT:

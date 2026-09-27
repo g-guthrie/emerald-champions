@@ -30,6 +30,7 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/party_menu.h"
+#include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -91,6 +92,8 @@ static EWRAM_DATA struct {
 // Set when a Center tutor's party screen opened the list itself
 // (ChooseMonForMoveRelearnerDirect); B then returns to that party screen.
 static EWRAM_DATA bool8 sMoveRelearnerReturnToParty = FALSE;
+
+static EWRAM_DATA enum Item sIconicPayment = ITEM_NONE;
 
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
@@ -535,7 +538,11 @@ static void RedrawMoveList(void)
 static void UIEndTask(u8 taskId)
 {
     if (gSpecialVar_Result == TRUE)
+    {
+        if (gMoveRelearnerState == MOVE_RELEARNER_ICONIC_MOVES)
+            PayForIconicMove(GetSelectedBoxMonFromPcOrParty(), gTasks[taskId].tMove, sIconicPayment);
         RedrawMoveList();
+    }
     else
         ShowTeachMoveText();
     AddScrollArrows();
@@ -634,6 +641,54 @@ static bool32 UpdateMoveRelearnerState(void)
     return FALSE;
 }
 
+static void Task_IconicNoFunds(u8 taskId)
+{
+    if (!IsTextPrinterActiveOnWindow(RELEARNERWIN_MSG) && JOY_NEW(A_BUTTON | B_BUTTON))
+    {
+        ShowTeachMoveText();
+        AddScrollArrows();
+        gTasks[taskId].func = Task_MoveRelearner_HandleInput;
+    }
+}
+
+static void Task_IconicPayment(u8 taskId)
+{
+    if (IsTextPrinterActiveOnWindow(RELEARNERWIN_MSG))
+        return;
+    if (gTasks[taskId].tState == 0)
+    {
+        MoveRelearnerCreateYesNoMenu();
+        gTasks[taskId].tState = 1;
+        return;
+    }
+    s32 answer = Menu_ProcessInputNoWrapClearOnChoose();
+    if (answer == MENU_NOTHING_CHOSEN)
+        return;
+    if (answer == 1 && sIconicPayment == ITEM_BOTTLE_CAP)
+    {
+        sIconicPayment = ITEM_GOLD_BOTTLE_CAP;
+        UIPrintMessage(COMPOUND_STRING("Use one Gold Bottle Cap instead?"));
+        gTasks[taskId].tState = 0;
+        return;
+    }
+    if (answer != 0)
+    {
+        ShowTeachMoveText();
+        AddScrollArrows();
+        gTasks[taskId].func = Task_MoveRelearner_HandleInput;
+        return;
+    }
+    if (!CheckBagHasItem(sIconicPayment, sIconicPayment == ITEM_BOTTLE_CAP ? 10 : 1))
+    {
+        UIPrintMessage(COMPOUND_STRING("Not enough Bottle Caps."));
+        gTasks[taskId].func = Task_IconicNoFunds;
+        return;
+    }
+    gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
+    UIPrintMessage(gText_MoveRelearnerTeachMoveConfirm);
+    gTasks[taskId].func = Task_MoveRelearner_LearnMove;
+}
+
 static void Task_MoveRelearner_HandleInput(u8 taskId)
 {
     s32 itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
@@ -704,8 +759,21 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
         StringCopy(gStringVar2, GetMoveName(itemId));
         gTasks[taskId].func = Task_MoveRelearner_LearnMove;
         gTasks[taskId].tMove = GetCurrentSelectedMove();
-        gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
-        UIPrintMessage(gText_MoveRelearnerTeachMoveConfirm);
+        gSpecialVar_Result = FALSE;
+        sIconicPayment = ITEM_NONE;
+        if (gMoveRelearnerState == MOVE_RELEARNER_ICONIC_MOVES
+         && !IsIconicMoveUnlocked(GetSelectedBoxMonFromPcOrParty(), gTasks[taskId].tMove))
+        {
+            sIconicPayment = ITEM_BOTTLE_CAP;
+            gTasks[taskId].tState = 0;
+            gTasks[taskId].func = Task_IconicPayment;
+            UIPrintMessage(COMPOUND_STRING("Pay 10 Bottle Caps?\nNo: use a Gold Bottle Cap."));
+        }
+        else
+        {
+            gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
+            UIPrintMessage(gText_MoveRelearnerTeachMoveConfirm);
+        }
         break;
     }
 }

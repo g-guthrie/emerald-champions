@@ -4834,7 +4834,8 @@ static void Cmd_trysetencore(void)
         }
     }
 
-    if (gLastMoves[gBattlerTarget] == MOVE_NONE
+    if (IsFluteProtected(gBattlerTarget, FLUTE_MENTAL)
+     || gLastMoves[gBattlerTarget] == MOVE_NONE
      || gLastMoves[gBattlerTarget] == MOVE_UNAVAILABLE
      || IsMoveEncoreBanned(gLastMoves[gBattlerTarget])
      || i == MAX_MON_MOVES
@@ -5655,7 +5656,11 @@ static void Cmd_settaunt(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
+    if (IsFluteProtected(gBattlerTarget, FLUTE_MENTAL))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else if (GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
         gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_DOESNT_AFFECT_FOE;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "guided_tutorial.h"
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
@@ -120,6 +121,29 @@ struct TempWallyBag {
     u16 pocket;
 };
 
+struct TutorialBag
+{
+    struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
+    struct BagPosition position;
+    MainCallback callback;
+    enum Item selectedItem;
+    u16 frames;
+    u8 itemCount;
+    u8 index;
+    bool8 contextOpen;
+    bool8 reportResult;
+    bool8 completed;
+};
+
+static const enum Item sInitialTutorialItems[] = {
+    ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REGENERATOR, ITEM_REPEL_SPRAY, ITEM_FLIGHT_BEACON,
+};
+
+static void Task_TutorialBag(u8 taskId);
+static void CB2_EndTutorialBag(void);
+static void FreeBagMenu(void);
+static void OpenContextMenu(u8 taskId);
+static void RemoveContextWindow(void);
 static void CB2_Bag(void);
 static bool8 SetupBagMenu(void);
 static void BagMenu_InitBGs(void);
@@ -563,6 +587,7 @@ static EWRAM_DATA struct ListBuffer1 *sListBuffer1 = 0;
 static EWRAM_DATA struct ListBuffer2 *sListBuffer2 = 0;
 EWRAM_DATA enum Item gSpecialVar_ItemId = 0;
 static EWRAM_DATA struct TempWallyBag *sTempWallyBag = 0;
+static EWRAM_DATA struct TutorialBag *sTutorialBag = NULL;
 
 void ResetBagScrollPositions(void)
 {
@@ -776,6 +801,14 @@ static bool8 SetupBagMenu(void)
         break;
     case 11:
         AllocateBagItemListBuffers();
+        if (sTutorialBag != NULL && (sListBuffer1 == NULL || sListBuffer2 == NULL))
+        {
+            FreeBagMenu();
+            gBagMenu = NULL;
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            SetMainCallback2(CB2_EndTutorialBag);
+            return TRUE;
+        }
         gMain.state++;
         break;
     case 12:
@@ -846,6 +879,9 @@ static void BagMenu_InitBGs(void)
 
 static bool8 LoadBagMenu_Graphics(void)
 {
+    bool32 maleBag = IsWallysBag()
+        ? (!IsRivalDexNavTutorialActive() || gSaveBlock2Ptr->playerGender == FEMALE)
+        : gSaveBlock2Ptr->playerGender == MALE;
     switch (gBagMenu->graphicsLoadState)
     {
     case 0:
@@ -861,14 +897,14 @@ static bool8 LoadBagMenu_Graphics(void)
         }
         break;
     case 2:
-        if (!IsWallysBag() && gSaveBlock2Ptr->playerGender != MALE)
+        if (!maleBag)
             LoadPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         else
             LoadPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         gBagMenu->graphicsLoadState++;
         break;
     case 3:
-        if (IsWallysBag() == TRUE || gSaveBlock2Ptr->playerGender == MALE)
+        if (maleBag)
             LoadCompressedSpriteSheet(&gBagMaleSpriteSheet);
         else
             LoadCompressedSpriteSheet(&gBagFemaleSpriteSheet);
@@ -889,7 +925,9 @@ static bool8 LoadBagMenu_Graphics(void)
 static u8 CreateBagInputHandlerTask(u8 location)
 {
     u8 taskId;
-    if (location == ITEMMENULOCATION_WALLY)
+    if (sTutorialBag != NULL)
+        taskId = CreateTask(Task_TutorialBag, 0);
+    else if (location == ITEMMENULOCATION_WALLY)
         taskId = CreateTask(Task_WallyTutorialBagMenu, 0);
     else
         taskId = CreateTask(Task_BagMenu_HandleInput, 0);
@@ -898,8 +936,16 @@ static u8 CreateBagInputHandlerTask(u8 location)
 
 static void AllocateBagItemListBuffers(void)
 {
-    sListBuffer1 = Alloc(sizeof(*sListBuffer1));
-    sListBuffer2 = Alloc(sizeof(*sListBuffer2));
+    if (sTutorialBag != NULL)
+    {
+        sListBuffer1 = AllocUnchecked(sizeof(*sListBuffer1));
+        sListBuffer2 = AllocUnchecked(sizeof(*sListBuffer2));
+    }
+    else
+    {
+        sListBuffer1 = Alloc(sizeof(*sListBuffer1));
+        sListBuffer2 = Alloc(sizeof(*sListBuffer2));
+    }
 }
 
 static void LoadBagItemListBuffers(u8 pocketId)
@@ -1176,6 +1222,12 @@ void UpdatePocketItemList(enum Pocket pocketId)
 static void UpdatePocketItemLists(void)
 {
     u8 i;
+    // A presentation must not compact or sort the player's other pockets.
+    if (sTutorialBag != NULL)
+    {
+        UpdatePocketItemList(POCKET_KEY_ITEMS);
+        return;
+    }
     for (i = 0; i < POCKETS_COUNT; i++)
         UpdatePocketItemList(i);
 }
@@ -2492,6 +2544,131 @@ static void WaitDepositErrorMessage(u8 taskId)
         ReturnToItemList(taskId);
     }
 }
+
+static bool32 PrepareTutorialBag(const enum Item *items, u8 count, MainCallback callback, bool32 reportResult)
+{
+    sTutorialBag = AllocZeroedUnchecked(sizeof(*sTutorialBag));
+    if (sTutorialBag == NULL)
+        return FALSE;
+
+    sTutorialBag->position = gBagPosition;
+    sTutorialBag->selectedItem = gSpecialVar_ItemId;
+    sTutorialBag->callback = callback;
+    sTutorialBag->itemCount = count;
+    sTutorialBag->reportResult = reportResult;
+    for (u32 slot = 0; slot < BAG_KEYITEMS_COUNT; slot++)
+    {
+        sTutorialBag->keyItems[slot] = GetBagItemIdAndQuantity(POCKET_KEY_ITEMS, slot);
+        BagPocket_SetSlotItemIdAndCount(&gBagPockets[POCKET_KEY_ITEMS], slot,
+                                      slot < count ? items[slot] : ITEM_NONE, slot < count ? 1 : 0);
+    }
+    ResetBagScrollPositions();
+    return TRUE;
+}
+
+static MainCallback RestoreTutorialBag(void)
+{
+    MainCallback callback = sTutorialBag->callback;
+    for (u32 slot = 0; slot < BAG_KEYITEMS_COUNT; slot++)
+        BagPocket_SetSlotData(&gBagPockets[POCKET_KEY_ITEMS], slot, sTutorialBag->keyItems[slot]);
+    gBagPosition = sTutorialBag->position;
+    gSpecialVar_ItemId = sTutorialBag->selectedItem;
+    if (sTutorialBag->reportResult)
+        gSpecialVar_Result = sTutorialBag->completed;
+    FREE_AND_SET_NULL(sTutorialBag);
+    return callback;
+}
+
+static void CB2_EndTutorialBag(void)
+{
+    // Task_CloseBagMenu has destroyed the list and freed its windows first.
+    SetMainCallback2(RestoreTutorialBag());
+}
+
+void ShowTutorialBagItem(enum Item item, MainCallback callback)
+{
+    if (!PrepareTutorialBag(&item, 1, callback, FALSE))
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+    GoToBagMenu(ITEMMENULOCATION_FIELD, POCKET_KEY_ITEMS, CB2_EndTutorialBag);
+}
+
+void StartInitialToolsBagTutorial(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (!PrepareTutorialBag(sInitialTutorialItems, ARRAY_COUNT(sInitialTutorialItems), CB2_ReturnToFieldContinueScript, TRUE))
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        return;
+    }
+    GoToBagMenu(ITEMMENULOCATION_FIELD, POCKET_KEY_ITEMS, CB2_EndTutorialBag);
+}
+
+static void Task_TutorialBag(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (gPaletteFade.active || MenuHelpers_ShouldWaitForLinkRecv())
+        return;
+
+    // This task only runs after native Bag setup. Holds are reading time,
+    // never guesses about when another menu or fade will become ready.
+    if (++sTutorialBag->frames < 150)
+        return;
+    sTutorialBag->frames = 0;
+    if (!sTutorialBag->contextOpen && GetBagItemId(POCKET_KEY_ITEMS, sTutorialBag->index) == ITEM_LEVELER)
+    {
+        PlaySE(SE_SELECT);
+        tListPosition = sTutorialBag->index;
+        tQuantity = 1;
+        gSpecialVar_ItemId = ITEM_LEVELER;
+        BagDestroyPocketScrollArrowPair();
+        BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
+        OpenContextMenu(taskId);
+        gTasks[taskId].func = Task_TutorialBag;
+        sTutorialBag->contextOpen = TRUE;
+        return;
+    }
+    if (sTutorialBag->contextOpen)
+    {
+        RemoveContextWindow();
+        BagMenu_PrintCursor(tListTaskId, COLORID_NORMAL);
+        sTutorialBag->contextOpen = FALSE;
+    }
+    if (++sTutorialBag->index == sTutorialBag->itemCount)
+    {
+        sTutorialBag->completed = TRUE;
+        PlaySE(SE_SELECT);
+        Task_FadeAndCloseBagMenu(taskId);
+        return;
+    }
+
+    // Reuse the real list cursor, description, item icon, and sound callback.
+    // Scope the simulated key to this one call; never leak it to other tasks.
+    u16 newKeys = gMain.newKeys;
+    u16 repeatedKeys = gMain.newAndRepeatedKeys;
+    gMain.newKeys = DPAD_DOWN;
+    gMain.newAndRepeatedKeys = DPAD_DOWN;
+    ListMenu_ProcessInput(tListTaskId);
+    gMain.newKeys = newKeys;
+    gMain.newAndRepeatedKeys = repeatedKeys;
+    ListMenuGetScrollAndRow(tListTaskId, &gBagPosition.scrollPosition[POCKET_KEY_ITEMS], &gBagPosition.cursorPosition[POCKET_KEY_ITEMS]);
+    CreatePocketScrollArrowPair();
+}
+
+#ifdef TESTING
+bool32 Test_PrepareInitialToolsBagTutorial(void)
+{
+    return PrepareTutorialBag(sInitialTutorialItems, ARRAY_COUNT(sInitialTutorialItems), CB2_ReturnToFieldContinueScript, TRUE);
+}
+
+void Test_RestoreTutorialBag(bool32 completed)
+{
+    sTutorialBag->completed = completed;
+    RestoreTutorialBag();
+}
+#endif
 
 static bool8 IsWallysBag(void)
 {

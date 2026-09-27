@@ -1289,7 +1289,9 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
         }
         break;
     case EFFECT_REST:
-        if (IsAsleepOrComatose(cv->battlerDef, cv->abilities[cv->battlerDef]))
+        if (IsFluteProtected(cv->battlerAtk, FLUTE_SLEEP))
+            battleScript = BattleScript_ButItFailed;
+        else if (IsAsleepOrComatose(cv->battlerDef, cv->abilities[cv->battlerDef]))
             battleScript = BattleScript_RestIsAlreadyAsleep;
         else if (gBattleMons[cv->battlerAtk].hp == gBattleMons[cv->battlerAtk].maxHP)
             battleScript = BattleScript_AlreadyAtFullHp;

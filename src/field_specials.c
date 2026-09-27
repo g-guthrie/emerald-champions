@@ -2963,7 +2963,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
-        task->tNumItems = 8; // Five flutes, two furnishings, Exit.
+        task->tNumItems = 7; // Three flutes, caps, two furnishings, Exit.
         task->tLeft = 1;
         task->tTop = 1;
         task->tWidth = 9;
@@ -3245,8 +3245,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Blue Flute"),
         COMPOUND_STRING("Yellow Flute"),
         COMPOUND_STRING("Red Flute"),
-        COMPOUND_STRING("White Flute"),
-        COMPOUND_STRING("Black Flute"),
+        COMPOUND_STRING("Bottle Caps"),
         COMPOUND_STRING("Pretty Chair"),
         COMPOUND_STRING("Pretty Desk"),
         gText_Exit,
@@ -5392,6 +5391,19 @@ void ConvertEmeraldChampionsFiniteReward(void)
 void PutZigzagoonInPlayerParty(void)
 {
     LoadWallyZigzagoon();
+}
+
+static void CB2_WallyLevelerFromBag(void)
+{
+    gSpecialVar_ItemId = ITEM_LEVELER;
+    StartLevelerTutorialSequence(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+void StartWallyLevelerTutorial(void)
+{
+    // Battle cleanup kept Wally's actual catch in the temporary party. The map
+    // script restores the player's saved party after this demonstration.
+    ShowTutorialBagItem(ITEM_LEVELER, CB2_WallyLevelerFromBag);
 }
 
 // Fossil IDs are not contiguous; acceptance and revival share this mapping.

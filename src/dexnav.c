@@ -57,6 +57,7 @@
 #include "wild_encounter.h"
 #include "wild_roster.h"
 #include "pokerus.h"
+#include "guided_tutorial.h"
 #include "config/pokerus.h"
 #include "weather_anomaly.h"
 #include "window.h"
@@ -231,13 +232,14 @@ static void AddSearchWindow(u8 width)
 #define SEARCH_WINDOW_WIDTH 28
 
 static const u8 sText_SearchChain[] = _("Chain {STR_VAR_1}");
-static const u8 sText_SearchSneak[] = _("Hold {A_BUTTON} to sneak");
+static const u8 sText_SearchSneak[] = _("Hold A to sneak");
+static const u8 sText_TutorialSneak[] = _("Holding A to sneak");
 
 static void AddSearchWindowText(enum Species species)
 {
     u8 windowId = sDexNavSearchDataPtr->windowId;
     AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_0, 0, sSearchFontColor, TEXT_SKIP_DRAW, GetSpeciesName(species));
-    AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, sText_SearchSneak);
+    AddTextPrinterParameterized3(windowId, FONT_SMALL, WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, IsRivalDexNavTutorialActive() ? sText_TutorialSneak : sText_SearchSneak);
     if (GetDexNavChain())
     {
         ConvertIntToDecimalStringN(gStringVar1, GetDexNavChain(), STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -279,8 +281,10 @@ static void RemoveDexNavWindowAndGfx(void)
 //////////////////////
 static u8 GetPlayerDistance(s16 x, s16 y)
 {
-    u16 deltaX = abs(x - (gSaveBlock1Ptr->pos.x + 7));
-    u16 deltaY = abs(y - (gSaveBlock1Ptr->pos.y + 7));
+    s16 originX = gSaveBlock1Ptr->pos.x + MAP_OFFSET, originY = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
+    RivalTutorialGetSearchOrigin(&originX, &originY);
+    u16 deltaX = abs(x - originX);
+    u16 deltaY = abs(y - originY);
     return deltaX + deltaY;
 }
 
@@ -415,8 +419,18 @@ static bool8 TryStartHiddenMonFieldEffect(enum EncounterType environment, u8 xSi
 {
     enum MapType currMapType = GetCurrentMapType();
     u8 fldEffId = 0;
+    bool32 placed;
+    if (IsRivalDexNavTutorialActive())
+    {
+        sDexNavSearchDataPtr->tileX = RIVAL_TUTORIAL_TARGET_X + MAP_OFFSET;
+        sDexNavSearchDataPtr->tileY = RIVAL_TUTORIAL_TARGET_Y + MAP_OFFSET;
+        placed = MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(sDexNavSearchDataPtr->tileX, sDexNavSearchDataPtr->tileY))
+            && !MapGridGetCollisionAt(sDexNavSearchDataPtr->tileX, sDexNavSearchDataPtr->tileY);
+    }
+    else
+        placed = DexNavPickTile(environment, xSize, ySize, smallScan);
 
-    if (DexNavPickTile(environment, xSize, ySize, smallScan))
+    if (placed)
     {
         u8 metatileBehaviour = MapGridGetMetatileBehaviorAt(sDexNavSearchDataPtr->tileX, sDexNavSearchDataPtr->tileY);
 
@@ -510,6 +524,8 @@ static void CreateDexNavSearchMon(void)
     CreateWildSlotMon(species, sDexNavSearchDataPtr->monLevel);
     ApplyDexNavChainRewards(&gParties[B_TRAINER_OPPONENT_A][0]);
     gDexNavSpecies = species;
+    if (IsRivalDexNavTutorialActive())
+        PrepareRivalTutorialCatch(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 
 static void SetUpDexNavSearch(void)
@@ -536,7 +552,11 @@ static void DexNavSearchBail(const u8 *script)
     TRY_FREE_AND_SET_NULL(sDexNavSearchDataPtr);
     FlagClear(DN_FLAG_SEARCHING);
     FreeMonIconPalettes();
-    ScriptContext_SetupScript(script);
+    extern const u8 EC_RivalDexNavTutorial_Abort[];
+    bool32 tutorial = IsRivalDexNavTutorialActive();
+    if (tutorial)
+        FinishRivalDexNavTutorial();
+    ScriptContext_SetupScript(tutorial ? EC_RivalDexNavTutorial_Abort : script);
 }
 
 static bool8 InitDexNavSearch(enum Species species, u32 environment)
@@ -567,6 +587,8 @@ static bool8 InitDexNavSearch(enum Species species, u32 environment)
     }
 
     SetUpDexNavSearch();
+    if (IsRivalDexNavTutorialActive())
+        RivalTutorialSearchStarted();
     return FALSE;
 }
 
@@ -574,8 +596,9 @@ static void DexNavUpdateDirectionArrow(void)
 {
     u16 tileX = sDexNavSearchDataPtr->tileX;
     u16 tileY = sDexNavSearchDataPtr->tileY;
-    u16 playerX = gSaveBlock1Ptr->pos.x + MAP_OFFSET;
-    u16 playerY = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
+    s16 playerX = gSaveBlock1Ptr->pos.x + MAP_OFFSET;
+    s16 playerY = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
+    RivalTutorialGetSearchOrigin(&playerX, &playerY);
     u16 deltaX = abs(tileX - playerX);
     u16 deltaY = abs(tileY - playerY);
     const u8 *str;
@@ -657,7 +680,11 @@ static void EndDexNavSearchSetupScript(const u8 *script)
 {
     gSaveBlock3Ptr->dexNavChain = 0;   //reset chain
     EndDexNavSearch();
-    ScriptContext_SetupScript(script);
+    extern const u8 EC_RivalDexNavTutorial_Abort[];
+    bool32 tutorial = IsRivalDexNavTutorialActive();
+    if (tutorial)
+        FinishRivalDexNavTutorial();
+    ScriptContext_SetupScript(tutorial ? EC_RivalDexNavTutorial_Abort : script);
 }
 
 bool32 OnStep_DexNavSearch(void)
@@ -681,7 +708,7 @@ bool32 OnStep_DexNavSearch(void)
         return TRUE;
     }
 
-    if (sDexNavSearchDataPtr->proximity <= SNEAKING_PROXIMITY && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_BIKE))
+    if (!IsRivalDexNavTutorialActive() && sDexNavSearchDataPtr->proximity <= SNEAKING_PROXIMITY && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_BIKE))
     { // running/biking too close
         EndDexNavSearchSetupScript(EventScript_MovedTooFast);
         return TRUE;
@@ -690,7 +717,8 @@ bool32 OnStep_DexNavSearch(void)
     if (sDexNavSearchDataPtr->proximity < 1)
     {
         CreateDexNavSearchMon();
-        ScriptContext_SetupScript(EventScript_StartDexNavBattle);
+        extern const u8 EC_RivalDexNavTutorial_Capture[];
+        ScriptContext_SetupScript(IsRivalDexNavTutorialActive() ? EC_RivalDexNavTutorial_Capture : EventScript_StartDexNavBattle);
         FREE_AND_SET_NULL(sDexNavSearchDataPtr);
         FlagClear(DN_FLAG_SEARCHING);
         return TRUE;
@@ -1477,14 +1505,15 @@ static void RestoreDexNavCursor(void)
 
     ui->cursorRow = 0;
     ui->cursorCol = 0;
-    if (sDexNavCursorMap != CurrentDexNavCursorMap())
+    if (!IsRivalDexNavTutorialActive() && sDexNavCursorMap != CurrentDexNavCursorMap())
         return;
     for (u32 row = 0; row < ui->rowCount; row++)
     {
         for (u32 col = 0; col < ui->rows[row].count; col++)
         {
             const struct WildRosterEntry *entry = &ui->roster[ui->rows[row].first + col];
-            if (entry->species == sDexNavCursorSpecies && entry->method == sDexNavCursorMethod)
+            if (entry->species == (IsRivalDexNavTutorialActive() ? SPECIES_ZIGZAGOON : sDexNavCursorSpecies)
+             && entry->method == (IsRivalDexNavTutorialActive() ? WILD_ROSTER_LAND : sDexNavCursorMethod))
             {
                 ui->cursorRow = row;
                 ui->cursorCol = col;
@@ -1780,6 +1809,22 @@ static void DexNavGuiInit(MainCallback callback)
     SetMainCallback2(DexNav_RunSetup);
 }
 
+static void Task_OpenRivalTutorialDexNav(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        DexNavGuiInit(CB2_ReturnToFieldContinueScript);
+        DestroyTask(taskId);
+    }
+}
+
+void OpenRivalTutorialDexNav(void)
+{
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(Task_OpenRivalTutorialDexNav, 0);
+}
+
 void Task_OpenDexNavFromStartMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -1827,7 +1872,10 @@ static void Task_DexNavMain(u8 taskId)
     if (IsSEPlaying())
         return;
 
-    if (JOY_NEW(B_BUTTON))
+    u16 pressed = IsRivalDexNavTutorialActive() ? RivalTutorialDexNavKeys() : gMain.newKeys;
+    u16 repeated = IsRivalDexNavTutorialActive() ? 0 : gMain.newAndRepeatedKeys;
+
+    if (pressed & B_BUTTON)
     {
         PlaySE(SE_POKENAV_OFF);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -1836,30 +1884,36 @@ static void Task_DexNavMain(u8 taskId)
     }
 
     entry = GetSelectedDexNavEntry();
+    if (IsRivalDexNavTutorialActive() && (entry == NULL || !CanDexNavSearchFor(entry)))
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+        task->func = Task_DexNavFadeAndExit;
+        return;
+    }
     if (entry == NULL)
     {
-        if (JOY_NEW(A_BUTTON | R_BUTTON))
+        if ((pressed & (A_BUTTON | R_BUTTON)))
             PlaySE(SE_FAILURE);
         return;
     }
 
-    if (JOY_REPEAT(DPAD_UP))
+    if ((repeated & (DPAD_UP)))
     {
         MoveDexNavCursor(-1, 0);
     }
-    else if (JOY_REPEAT(DPAD_DOWN))
+    else if ((repeated & (DPAD_DOWN)))
     {
         MoveDexNavCursor(1, 0);
     }
-    else if (JOY_REPEAT(DPAD_LEFT))
+    else if ((repeated & (DPAD_LEFT)))
     {
         MoveDexNavCursor(0, -1);
     }
-    else if (JOY_REPEAT(DPAD_RIGHT))
+    else if ((repeated & (DPAD_RIGHT)))
     {
         MoveDexNavCursor(0, 1);
     }
-    else if (JOY_NEW(R_BUTTON))
+    else if ((pressed & (R_BUTTON)))
     {
         // Register the Pokémon for R in the field.
         if (CanDexNavSearchFor(entry))
@@ -1873,7 +1927,7 @@ static void Task_DexNavMain(u8 taskId)
             PlaySE(SE_FAILURE);
         }
     }
-    else if (JOY_NEW(A_BUTTON))
+    else if ((pressed & (A_BUTTON)))
     {
         // The panel already says how to find the ones it cannot search for.
         if (CanDexNavSearchFor(entry))
@@ -1919,6 +1973,11 @@ void GiveDexNavIfNeeded(void)
 }
 
 #if TESTING
+void Test_DexNavTutorialSearchFailure(void)
+{
+    DexNavSearchBail(EventScript_NotFoundNearby);
+}
+
 // The level a search would use on the current map, or MON_LEVEL_NONEXISTENT.
 u8 Test_DexNavGenerateMonLevel(enum Species species, enum EncounterType environment)
 {

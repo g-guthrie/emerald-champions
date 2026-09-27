@@ -332,11 +332,11 @@ OldaleTown_Text_IWorkAtPokemonMart: @ 81E91C0
 OldaleTown_Text_ThisIsAPokemonMart:
 	.string "This is a Poké Mart.\n"
 	.string "Just look for our blue roof.\p"
-	.string "We sell a variety of consumable items\n"
-	.string "that Pokémon can hold in battle, as\l"
-	.string "well as items like evolution stones.\p"
-	.string "Here, I'd like you to have this as\n"
-	.string "a promotional item.$"
+	.string "We sell items for Pokémon to hold.\n"
+	.string "We help new Trainers get ready\l"
+	.string "for their journey.\p"
+	.string "Here, take a Focus Sash for\n"
+	.string "your first shopping trip!$"
 
 OldaleTown_Text_PotionExplanation: @ 81E92AF
 	.string "If you're after Potions or Poké Balls,\n"

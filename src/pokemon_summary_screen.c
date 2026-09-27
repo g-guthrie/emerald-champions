@@ -1,4 +1,5 @@
 #include "global.h"
+#include "guided_tutorial.h"
 #include "caps.h"
 #include "move.h"
 #include "main.h"
@@ -1740,23 +1741,24 @@ static void Task_HandleInput(u8 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
-        if (JOY_NEW(DPAD_UP))
+        u16 pressed = IsRivalDexNavTutorialActive() ? RivalTutorialSummaryKeys(sMonSummaryScreen->currPageIndex) : gMain.newKeys;
+        if ((pressed & (DPAD_UP)))
         {
             ChangeSummaryPokemon(taskId, -1);
         }
-        else if (JOY_NEW(DPAD_DOWN))
+        else if ((pressed & (DPAD_DOWN)))
         {
             ChangeSummaryPokemon(taskId, 1);
         }
-        else if (JOY_NEW(DPAD_LEFT))
+        else if ((pressed & (DPAD_LEFT)))
         {
             ChangePage(taskId, -1);
         }
-        else if (JOY_NEW(DPAD_RIGHT))
+        else if ((pressed & (DPAD_RIGHT)))
         {
             ChangePage(taskId, 1);
         }
-        else if (JOY_NEW(A_BUTTON))
+        else if ((pressed & (A_BUTTON)))
         {
             if (sMonSummaryScreen->currPageIndex != PSS_PAGE_SKILLS)
             {
@@ -1796,13 +1798,13 @@ static void Task_HandleInput(u8 taskId)
                 }
             }
         }
-        else if (JOY_NEW(B_BUTTON))
+        else if ((pressed & (B_BUTTON)))
         {
             StopPokemonAnimations();
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
-        else if (DEBUG_POKEMON_SPRITE_VISUALIZER && JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
+        else if (DEBUG_POKEMON_SPRITE_VISUALIZER && (pressed & (SELECT_BUTTON)) && !gMain.inBattle)
         {
             sMonSummaryScreen->callback = CB2_Pokemon_Sprite_Visualizer;
             StopPokemonAnimations();
@@ -3405,6 +3407,9 @@ static void GetMetLevelString(u8 *output)
 
 static bool8 DoesMonOTMatchOwner(void)
 {
+    // The viewer of this borrowed tutorial card is the rival who just caught it.
+    if (IsRivalDexNavTutorialActive())
+        return TRUE;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     u32 trainerId;
     u8 gender;

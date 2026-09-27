@@ -126,6 +126,7 @@ enum MonData {
     MON_DATA_DYNAMAX_LEVEL,
     MON_DATA_GIGANTAMAX_FACTOR,
     MON_DATA_EVOLUTION_TRACKER,
+    MON_DATA_ICONIC_MOVES,
 };
 
 #define BLOCK_AI_DYNAMAX 15 // Used as dynamax level value by the AI to indicate this mon shouldn't dynamax
@@ -135,10 +136,10 @@ struct PokemonSubstruct0
     enum Species species:11; // 2047 species.
     u16 reserved_00:5; // Reserved; keeps the saved substruct layout stable.
     enum Item heldItem:10; // 1023 items.
-    u16 unused_02:6;
+    u16 iconicMovesLow:6; // Permanent tutor receipts, bits 0-5.
     u32 experience:21;
     u32 nickname11:8; // 11th character of nickname.
-    u32 unused_04:3;
+    u32 iconicMovesHigh:3; // Receipt bits 6-8; existing save layout.
     u8 ppBonuses;
     u8 friendship;
     u16 pokeball:6; // 63 balls.

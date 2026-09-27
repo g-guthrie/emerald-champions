@@ -5,9 +5,16 @@ Route101_MapScripts::
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
+	call Common_EventScript_SetupRivalGfxId
+	setflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
+	goto_if_unset FLAG_RECEIVED_DEXNAV, Route101_TutorialVisibilityDone
+	goto_if_set FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE, Route101_TutorialVisibilityDone
+	clearflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
+Route101_TutorialVisibilityDone:
 	end
 
 Route101_OnFrame:
+	map_script_2 VAR_LITTLEROOT_RIVAL_STATE, 5, EC_RivalDexNavTutorial_Begin
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
 	.2byte 0
 

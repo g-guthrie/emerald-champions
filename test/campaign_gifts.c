@@ -164,8 +164,6 @@ TEST("Campaign gifts: Chansey intro requires room for its Heal Ball before the e
 extern const u8 Route113_GlassWorkshop_EventScript_BlueFlute[];
 extern const u8 Route113_GlassWorkshop_EventScript_YellowFlute[];
 extern const u8 Route113_GlassWorkshop_EventScript_RedFlute[];
-extern const u8 Route113_GlassWorkshop_EventScript_WhiteFlute[];
-extern const u8 Route113_GlassWorkshop_EventScript_BlackFlute[];
 extern const u8 Route113_GlassWorkshop_EventScript_PrettyChair[];
 extern const u8 Route113_GlassWorkshop_EventScript_PrettyDesk[];
 extern const u8 Route113_GlassWorkshop_EventScript_ConfirmGlassItem[];
@@ -191,8 +189,6 @@ TEST("Campaign gifts: glass orders share prices and preserve pending receipts wi
         {Route113_GlassWorkshop_EventScript_BlueFlute, ITEM_BLUE_FLUTE, 250, FALSE},
         {Route113_GlassWorkshop_EventScript_YellowFlute, ITEM_YELLOW_FLUTE, 500, FALSE},
         {Route113_GlassWorkshop_EventScript_RedFlute, ITEM_RED_FLUTE, 500, FALSE},
-        {Route113_GlassWorkshop_EventScript_WhiteFlute, ITEM_WHITE_FLUTE, 1000, FALSE},
-        {Route113_GlassWorkshop_EventScript_BlackFlute, ITEM_BLACK_FLUTE, 1000, FALSE},
         {Route113_GlassWorkshop_EventScript_PrettyChair, DECOR_PRETTY_CHAIR, 6000, TRUE},
         {Route113_GlassWorkshop_EventScript_PrettyDesk, DECOR_PRETTY_DESK, 8000, TRUE},
     };
@@ -223,7 +219,7 @@ TEST("Campaign gifts: glass orders share prices and preserve pending receipts wi
             Route113_GlassWorkshop_EventScript_MakeGlassItem);
         EXPECT_EQ(ctx.scriptPtr, scenario == 1 ? Route113_GlassWorkshop_EventScript_ChooseDifferentItem
             : Route113_GlassWorkshop_EventScript_MakeGlassItem);
-        EXPECT_EQ(VarGet(VAR_GLASS_WORKSHOP_STATE), scenario == 1 ? 2 : 10 + order);
+        EXPECT_EQ(VarGet(VAR_GLASS_WORKSHOP_STATE), scenario == 1 ? 2 : 10 + order + (order >= 3 ? 2 : 0));
         EXPECT_EQ(VarGet(VAR_ASH_GATHER_COUNT), scenario == 1 ? balance : 17);
         EXPECT_EQ(VarGet(VAR_EC_SOOT_PROGRESS), 9999);
         if (scenario == 1)
@@ -237,7 +233,7 @@ TEST("Campaign gifts: glass orders share prices and preserve pending receipts wi
         EXPECT_EQ(gSpecialVar_0x8008, orders[order].item);
         EXPECT_EQ(gSpecialVar_0x8009, orders[order].decor);
         EXPECT_EQ(VarGet(VAR_ASH_GATHER_COUNT), 17);
-        EXPECT_EQ(VarGet(VAR_GLASS_WORKSHOP_STATE), 10 + order);
+        EXPECT_EQ(VarGet(VAR_GLASS_WORKSHOP_STATE), 10 + order + (order >= 3 ? 2 : 0));
     }
 }
 

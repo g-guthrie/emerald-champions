@@ -53,6 +53,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "OldaleTown_Mart_EventScript_Boy",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_OLDALE_MART_VISITING_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "OldaleTown_Mart_EventScript_Nurse",
+      "flag": "FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE"
     }
   ],
   "warp_events": [
@@ -71,6 +85,25 @@
       "dest_warp_id": 3
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "OldaleTown_Mart_EventScript_FirstShopping"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "OldaleTown_Mart_EventScript_FirstShopping"
+    }
+  ],
   "bg_events": []
 }

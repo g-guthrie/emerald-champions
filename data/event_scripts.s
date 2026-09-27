@@ -1422,3 +1422,5 @@ Common_EventScript_TryRemoveMon::
 	.include "data/scripts/battle_pike.inc"
 
 	.include "data/scripts/trainer_hill.inc"
+
+	.include "data/scripts/guided_tutorials.inc"

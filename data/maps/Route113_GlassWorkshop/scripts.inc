@@ -5,8 +5,6 @@ Route113_GlassWorkshop_MapScripts:: @ 826ED03
 	.set BLUE_FLUTE_PRICE,   250
 	.set YELLOW_FLUTE_PRICE, 500
 	.set RED_FLUTE_PRICE,    500
-	.set WHITE_FLUTE_PRICE,  1000
-	.set BLACK_FLUTE_PRICE,  1000
 	.set PRETTY_CHAIR_PRICE, 6000
 	.set PRETTY_DESK_PRICE,  8000
 	.set LOWEST_ASH_PRICE,   BLUE_FLUTE_PRICE
@@ -71,11 +69,10 @@ Route113_GlassWorkshop_EventScript_ChooseGlassItem:: @ 826EDA7
 	case 0, Route113_GlassWorkshop_EventScript_BlueFlute
 	case 1, Route113_GlassWorkshop_EventScript_YellowFlute
 	case 2, Route113_GlassWorkshop_EventScript_RedFlute
-	case 3, Route113_GlassWorkshop_EventScript_WhiteFlute
-	case 4, Route113_GlassWorkshop_EventScript_BlackFlute
-	case 5, Route113_GlassWorkshop_EventScript_PrettyChair
-	case 6, Route113_GlassWorkshop_EventScript_PrettyDesk
-	case 7, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect
+	case 3, Route113_GlassWorkshop_EventScript_Caps
+	case 4, Route113_GlassWorkshop_EventScript_PrettyChair
+	case 5, Route113_GlassWorkshop_EventScript_PrettyDesk
+	case 6, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect
 	case MULTI_B_PRESSED, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect
 	end
 
@@ -95,18 +92,6 @@ Route113_GlassWorkshop_EventScript_RedFlute::
 	setvar VAR_0x8008, ITEM_RED_FLUTE
 	setvar VAR_0x800A, RED_FLUTE_PRICE
 	setvar VAR_0x800B, 12
-	goto Route113_GlassWorkshop_EventScript_PrepareFlute
-
-Route113_GlassWorkshop_EventScript_WhiteFlute::
-	setvar VAR_0x8008, ITEM_WHITE_FLUTE
-	setvar VAR_0x800A, WHITE_FLUTE_PRICE
-	setvar VAR_0x800B, 13
-	goto Route113_GlassWorkshop_EventScript_PrepareFlute
-
-Route113_GlassWorkshop_EventScript_BlackFlute::
-	setvar VAR_0x8008, ITEM_BLACK_FLUTE
-	setvar VAR_0x800A, BLACK_FLUTE_PRICE
-	setvar VAR_0x800B, 14
 	goto Route113_GlassWorkshop_EventScript_PrepareFlute
 
 Route113_GlassWorkshop_EventScript_PrettyChair::
@@ -205,8 +190,8 @@ Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom:: @ 826F090
 	case 10, Route113_GlassWorkshop_EventScript_GiveBlueFlute
 	case 11, Route113_GlassWorkshop_EventScript_GiveYellowFlute
 	case 12, Route113_GlassWorkshop_EventScript_GiveRedFlute
-	case 13, Route113_GlassWorkshop_EventScript_GiveWhiteFlute
-	case 14, Route113_GlassWorkshop_EventScript_GiveBlackFlute
+	case 13, Route113_GlassWorkshop_EventScript_GiveRetiredFluteOrder
+	case 14, Route113_GlassWorkshop_EventScript_GiveRetiredFluteOrder
 	case 15, Route113_GlassWorkshop_EventScript_GivePrettyChair
 	case 16, Route113_GlassWorkshop_EventScript_GivePrettyDesk
 	end
@@ -232,19 +217,12 @@ Route113_GlassWorkshop_EventScript_GiveRedFlute:: @ 826F10B
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveWhiteFlute:: @ 826F11F
+@ Old saves may have paid 1,000 soot for a removed flute; honor it as a cap.
+Route113_GlassWorkshop_EventScript_GiveRetiredFluteOrder::
 	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_WHITE_FLUTE
+	setvar VAR_0x8008, ITEM_BOTTLE_CAP
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
-	end
-
-Route113_GlassWorkshop_EventScript_GiveBlackFlute:: @ 826F133
-	setvar VAR_0x8009, 0
-	setvar VAR_0x8008, ITEM_BLACK_FLUTE
-	bufferitemname 0, VAR_0x8008
-	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
-	end
 
 Route113_GlassWorkshop_EventScript_GivePrettyChair:: @ 826F147
 	setvar VAR_0x8009, 1
@@ -288,7 +266,12 @@ Route113_GlassWorkshop_Text_ExplainSootSack: @ 826F252
 	.string "And it will fill up with the volcanic ash,\n"
 	.string "huff-puff.\p"
 	.string "Once you think you've collected a good\n"
-	.string "amount, come see me, huff-puff.$"
+	.string "amount, come see me, huff-puff.\p"
+	.string "Held flutes protect both active allies!\n"
+	.string "Blue blocks sleep; Yellow, confusion.\p"
+	.string "Red blocks Taunt and Encore.\n"
+	.string "The flutes are never used up!\p"
+	.string "Or trade 1,000 soot for a Bottle Cap.$"
 
 Route113_GlassWorkshop_Text_LetsSeeCollectedAshes: @ 826F312
 	.string "Have you collected ashes, huff-puff?\n"
@@ -370,3 +353,39 @@ Route113_GlassWorkshop_Text_FoundMarshadow:
 	.string "Look for it in Route 113's ash grass!\p"
 	.string "Your soot total is never spent on\n"
 	.string "this discovery, huff-puff.$"
+
+Route113_GlassWorkshop_EventScript_Caps::
+	buffernumberstring 0, VAR_ASH_GATHER_COUNT
+	msgbox Route113_GlassWorkshop_Text_CapPrice, MSGBOX_DEFAULT
+	dynmultipush Route113_GlassWorkshop_Text_OneCap, 1
+	dynmultipush Route113_GlassWorkshop_Text_FiveCaps, 5
+	dynmultipush Route113_GlassWorkshop_Text_AllCaps, 9
+	dynmultipush EmeraldChampions_Text_Back, 127
+	dynmultistack 0, 0, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	goto_if_eq VAR_RESULT, 127, Route113_GlassWorkshop_EventScript_ChooseGlassItem
+	copyvar VAR_0x8004, VAR_RESULT
+	special ExchangeSootForCaps
+	goto_if_eq VAR_RESULT, 0, Route113_GlassWorkshop_EventScript_CapsPoor
+	goto_if_eq VAR_RESULT, 2, Common_EventScript_ShowBagIsFull
+	msgbox Route113_GlassWorkshop_Text_CapsReceived, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_ChooseGlassItem
+
+Route113_GlassWorkshop_EventScript_CapsPoor::
+	msgbox Route113_GlassWorkshop_Text_CapsPoor, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_ChooseGlassItem
+
+Route113_GlassWorkshop_Text_CapPrice:
+	.string "You have {STR_VAR_1} soot.\p"
+	.string "I'll trade one Bottle Cap for\n"
+	.string "every 1,000 soot, huff-puff!$"
+Route113_GlassWorkshop_Text_OneCap:
+	.string "1 Cap: 1,000 soot$"
+Route113_GlassWorkshop_Text_FiveCaps:
+	.string "5 Caps: 5,000 soot$"
+Route113_GlassWorkshop_Text_AllCaps:
+	.string "As many as possible$"
+Route113_GlassWorkshop_Text_CapsReceived:
+	.string "You received {STR_VAR_1} Bottle Caps!$"
+Route113_GlassWorkshop_Text_CapsPoor:
+	.string "Not enough soot for that trade,\n"
+	.string "huff-puff!$"

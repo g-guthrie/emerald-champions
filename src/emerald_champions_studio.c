@@ -16,10 +16,12 @@
 #include "overworld.h"
 #include "pokemon.h"
 #include "dexnav.h"
+#include "guided_tutorial.h"
 #include "save.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "item.h"
+#include "string_util.h"
 #include "constants/event_objects.h"
 #include "constants/characters.h"
 #include "constants/opponents.h"
@@ -53,7 +55,7 @@ void EmeraldChampionsStudioPoll(void)
     if (gSaveBlock1Ptr == NULL || gSaveBlock2Ptr == NULL)
         return;
     bool32 field = gMain.callback2 == CB2_Overworld && !gMain.inBattle;
-    bool32 ready = field && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled() && IsPlayerStandingStill();
+    bool32 ready = field && !IsRivalDexNavTutorialActive() && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled() && IsPlayerStandingStill();
     s16 x = 0, y = 0;
     if (field)
     {
@@ -102,6 +104,14 @@ void EmeraldChampionsStudioPoll(void)
     if (!gEcStudioCommand)
         return;
     gEcStudioResult = 0;
+    // Explicit fault injection for native tutorial recovery audits only.
+    if (gEcStudioCommand == 10 && field && IsRivalDexNavTutorialActive())
+    {
+        RemoveObjectEventByLocalIdAndMap(RIVAL_TUTORIAL_LOCAL_ID, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        gEcStudioResult = 1;
+        gEcStudioCommand = 0;
+        return;
+    }
     if (!ready)
         gEcStudioResult = 2;
     else switch (gEcStudioCommand)
@@ -178,6 +188,16 @@ void EmeraldChampionsStudioPoll(void)
             SetMonData(mon, MON_DATA_STATUS, &status);
             CalculateMonStats(mon);
         }
+        gEcStudioResult = 1;
+        break;
+    case 11: // Gender variant prerequisite; next warp refreshes the avatar.
+        if (gEcStudioArgs[0] > FEMALE)
+        {
+            gEcStudioResult = 4;
+            break;
+        }
+        gSaveBlock2Ptr->playerGender = gEcStudioArgs[0];
+        StringCopy(gSaveBlock2Ptr->playerName, gEcStudioArgs[0] == FEMALE ? COMPOUND_STRING("May") : COMPOUND_STRING("Brendan"));
         gEcStudioResult = 1;
         break;
     default:

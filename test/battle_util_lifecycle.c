@@ -8,6 +8,8 @@
 #include "dexnav.h"
 #include "emerald_champions_opening.h"
 #include "field_specials.h"
+#include "load_save.h"
+#include "caps.h"
 #include "event_data.h"
 #include "pokemon.h"
 #include "starter_choose.h"
@@ -69,6 +71,59 @@ TEST("Battle cleanup: completed fade still releases resources when evolution is 
 }
 
 extern void BeginBattleIntro(void);
+
+TEST("Battle cleanup: Wally keeps his exact catch without changing the saved player party")
+{
+    u32 savedFlags = gBattleTypeFlags;
+    u8 savedOutcome = gBattleOutcome;
+    bool32 savedFade = gPaletteFade.active;
+    enum Item berry = ITEM_SITRUS_BERRY;
+    u32 status = STATUS1_POISON;
+    u32 hp = 1;
+    u32 pokerus = 0x12;
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 8, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 9, 0, OTID_STRUCT_PLAYER_ID);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][1]);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &berry);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS, &status);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    SavePlayerParty();
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 7, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_RALTS, 5);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_POKERUS, &pokerus);
+    struct Pokemon caught = gParties[B_TRAINER_OPPONENT_A][0];
+    gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;
+    gBattleOutcome = B_OUTCOME_CAUGHT;
+    gPaletteFade.active = FALSE;
+    gDexNavSpecies = SPECIES_NONE;
+    AllocateBattleResources();
+    Test_FinishBattleResourceCleanup();
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &caught, sizeof(caught)), 0);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_NONE);
+    Test_FinishBattleResourceCleanup();
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &caught, sizeof(caught)), 0);
+    EXPECT(RaiseMonToLevelerTarget(&gParties[B_TRAINER_PLAYER][0]));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), GetPlayerLevelCapForSpecies(SPECIES_RALTS));
+    LoadPlayerParty();
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_EEVEE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 8);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), berry);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS), status);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), hp);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_MUDKIP);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 9);
+    ZeroPlayerPartyMons();
+    gBattleTypeFlags = savedFlags;
+    gBattleOutcome = savedOutcome;
+    gPaletteFade.active = savedFade;
+}
 
 TEST("Battle initialization: dirty global state resets and held-item origins match the new parties")
 {

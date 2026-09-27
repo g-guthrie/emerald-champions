@@ -63,7 +63,6 @@ bool32 IsWildSlotLive(enum Species species)
     return IsWildSlotSpeciesAcquirable(species) && !IsWeatherAnomalyVisitorSlotInert(species);
 }
 
-static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, enum Species species, enum WildPokemonArea area);
 #ifdef BUGFIX
@@ -1028,7 +1027,6 @@ static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
     encounterRate *= 16;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         encounterRate = encounterRate * 80 / 100;
-    ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
     if (LURE_STEP_COUNT != 0)
         encounterRate *= 2;
@@ -1693,14 +1691,6 @@ static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildM
 #else
     return TryGetRandomWildMonIndexByType(wildMon, type, NUM_LAND_MONS_ENCOUNTER_SLOTS, monIndex);
 #endif
-}
-
-static void ApplyFluteEncounterRateMod(u32 *encRate)
-{
-    if (FlagGet(FLAG_SYS_ENC_UP_ITEM) == TRUE)
-        *encRate += *encRate / 2;
-    else if (FlagGet(FLAG_SYS_ENC_DOWN_ITEM) == TRUE)
-        *encRate = *encRate / 2;
 }
 
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
