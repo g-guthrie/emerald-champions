@@ -1,7 +1,6 @@
 #ifndef GUARD_GUIDED_TUTORIAL_H
 #define GUARD_GUIDED_TUTORIAL_H
 
-#define RIVAL_TUTORIAL_LOCAL_ID 7 // Route101's authored tutorial actor.
 #define RIVAL_TUTORIAL_TARGET_X 14
 #define RIVAL_TUTORIAL_TARGET_Y 12
 
@@ -21,6 +20,5 @@ void RivalTutorialBattleStarted(void);
 void ShowRivalPokerusTutorial(void);
 void FinishRivalDexNavTutorial(void);
 void PrepareRivalTutorialCatch(struct Pokemon *mon);
-void OpenRivalTutorialDexNav(void);
 
 #endif

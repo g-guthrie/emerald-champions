@@ -552,7 +552,6 @@ static void DexNavSearchBail(const u8 *script)
     TRY_FREE_AND_SET_NULL(sDexNavSearchDataPtr);
     FlagClear(DN_FLAG_SEARCHING);
     FreeMonIconPalettes();
-    extern const u8 EC_RivalDexNavTutorial_Abort[];
     bool32 tutorial = IsRivalDexNavTutorialActive();
     if (tutorial)
         FinishRivalDexNavTutorial();
@@ -680,7 +679,6 @@ static void EndDexNavSearchSetupScript(const u8 *script)
 {
     gSaveBlock3Ptr->dexNavChain = 0;   //reset chain
     EndDexNavSearch();
-    extern const u8 EC_RivalDexNavTutorial_Abort[];
     bool32 tutorial = IsRivalDexNavTutorialActive();
     if (tutorial)
         FinishRivalDexNavTutorial();
@@ -717,7 +715,6 @@ bool32 OnStep_DexNavSearch(void)
     if (sDexNavSearchDataPtr->proximity < 1)
     {
         CreateDexNavSearchMon();
-        extern const u8 EC_RivalDexNavTutorial_Capture[];
         ScriptContext_SetupScript(IsRivalDexNavTutorialActive() ? EC_RivalDexNavTutorial_Capture : EventScript_StartDexNavBattle);
         FREE_AND_SET_NULL(sDexNavSearchDataPtr);
         FlagClear(DN_FLAG_SEARCHING);

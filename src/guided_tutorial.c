@@ -5,6 +5,7 @@
 #include "dexnav.h"
 #include "emerald_champions_opening.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
@@ -31,7 +32,6 @@ static EWRAM_DATA u8 sRivalSummaryPage = 0;
 static EWRAM_DATA u8 sRivalSavedChain = 0;
 static EWRAM_DATA u16 sRivalSavedRegistration = 0;
 static EWRAM_DATA bool8 sReturnRivalToLab = FALSE;
-extern const u8 EC_RivalDexNavTutorial_Abort[];
 
 bool32 IsRivalDexNavTutorialActive(void)
 {
@@ -59,7 +59,6 @@ void PrepareRivalDexNavTutorial(void)
 
 static void FieldCB_RivalTutorialWarp(void)
 {
-    extern const u8 EC_RivalDexNavTutorial_AtGrass[];
     // A full map load resets the old script context. Establish the authored
     // continuation before the standard fade callback resumes it.
     ScriptContext_SetupScript(EC_RivalDexNavTutorial_AtGrass);
@@ -102,7 +101,7 @@ bool32 RivalTutorialGetSearchOrigin(s16 *x, s16 *y)
 {
     u8 id;
     if (!IsRivalDexNavTutorialActive()
-     || TryGetObjectEventIdByLocalIdAndMap(RIVAL_TUTORIAL_LOCAL_ID, MAP_NUM(MAP_ROUTE101), MAP_GROUP(MAP_ROUTE101), &id))
+     || TryGetObjectEventIdByLocalIdAndMap(LOCALID_ROUTE101_RIVAL_TUTORIAL, MAP_NUM(MAP_ROUTE101), MAP_GROUP(MAP_ROUTE101), &id))
         return FALSE;
     *x = gObjectEvents[id].currentCoords.x;
     *y = gObjectEvents[id].currentCoords.y;
@@ -115,7 +114,7 @@ void RivalTutorialFieldStep(void)
     if (sRivalTutorialPhase != DEMO_SEARCH || ScriptContext_IsEnabled())
         return;
     if (!FlagGet(DN_FLAG_SEARCHING)
-     || TryGetObjectEventIdByLocalIdAndMap(RIVAL_TUTORIAL_LOCAL_ID, MAP_NUM(MAP_ROUTE101), MAP_GROUP(MAP_ROUTE101), &id))
+     || TryGetObjectEventIdByLocalIdAndMap(LOCALID_ROUTE101_RIVAL_TUTORIAL, MAP_NUM(MAP_ROUTE101), MAP_GROUP(MAP_ROUTE101), &id))
     {
         ScriptContext_SetupScript(EC_RivalDexNavTutorial_Abort);
         return;

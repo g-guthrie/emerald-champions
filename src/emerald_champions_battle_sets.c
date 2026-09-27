@@ -749,7 +749,7 @@ bool32 PayForIconicMove(struct BoxPokemon *mon, enum Move move, enum Item paymen
         return TRUE;
     if (payment != ITEM_BOTTLE_CAP && payment != ITEM_GOLD_BOTTLE_CAP)
         return FALSE;
-    if (!RemoveBagItem(payment, payment == ITEM_BOTTLE_CAP ? 10 : 1))
+    if (!RemoveBagItem(payment, payment == ITEM_BOTTLE_CAP ? EC_ICONIC_MOVE_CAP_COST : EC_ICONIC_MOVE_GOLD_CAP_COST))
         return FALSE;
     receipts |= bit;
     SetBoxMonData(mon, MON_DATA_ICONIC_MOVES, &receipts);

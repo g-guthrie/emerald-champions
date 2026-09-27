@@ -678,7 +678,7 @@ static void Task_IconicPayment(u8 taskId)
         gTasks[taskId].func = Task_MoveRelearner_HandleInput;
         return;
     }
-    if (!CheckBagHasItem(sIconicPayment, sIconicPayment == ITEM_BOTTLE_CAP ? 10 : 1))
+    if (!CheckBagHasItem(sIconicPayment, sIconicPayment == ITEM_BOTTLE_CAP ? EC_ICONIC_MOVE_CAP_COST : EC_ICONIC_MOVE_GOLD_CAP_COST))
     {
         UIPrintMessage(COMPOUND_STRING("Not enough Bottle Caps."));
         gTasks[taskId].func = Task_IconicNoFunds;
@@ -767,7 +767,7 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
             sIconicPayment = ITEM_BOTTLE_CAP;
             gTasks[taskId].tState = 0;
             gTasks[taskId].func = Task_IconicPayment;
-            UIPrintMessage(COMPOUND_STRING("Pay 10 Bottle Caps?\nNo: use a Gold Bottle Cap."));
+            UIPrintMessage(COMPOUND_STRING("Pay " STR(EC_ICONIC_MOVE_CAP_COST) " Bottle Caps?\nNo: use a Gold Bottle Cap."));
         }
         else
         {

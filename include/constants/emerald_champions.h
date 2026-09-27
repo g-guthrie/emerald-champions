@@ -16,6 +16,31 @@
 #define EC_SOOT_CORD_RECEIVED 0x8000 // Reserved receipt bit from the retired soot reward tiers.
 #define EC_SOOT_MARSHADOW_TARGET 250
 
+// Bottle Cap services. The scripts and native payment checks share these values.
+#define EC_SOOT_PER_CAP                     1000
+#define EC_SOOT_CAP_BATCH                      5
+#define EC_SOOT_EXCHANGE_ALL                   9 // Menu selection, not a quantity.
+#define EC_IV_CHANGE_CAP_COST                  1
+#define EC_HIDDEN_POWER_CAP_COST               3
+#define EC_ICONIC_MOVE_CAP_COST               10
+#define EC_ICONIC_MOVE_GOLD_CAP_COST            1
+#define EC_EVIE_PRICE_PER_EV                   2
+
+#define EC_SOOT_EXCHANGE_REFUSED               0
+#define EC_SOOT_EXCHANGE_DELIVERED             1
+#define EC_SOOT_EXCHANGE_BAG_FULL              2
+#define EC_IV_SERVICE_UNCHANGED                0
+#define EC_IV_SERVICE_CHANGED                  1
+#define EC_IV_SERVICE_NOT_ENOUGH_CAPS          2
+
+// Preserve fixed-width, spelled-out, and comma-formatted price text.
+// Repricing must update that wording as well as the transaction constants.
+#if EC_SOOT_PER_CAP != 1000 || EC_SOOT_CAP_BATCH != 5
+#error "Update the Glass Workshop's formatted soot prices when repricing."
+#endif
+#if EC_IV_CHANGE_CAP_COST != 1 || EC_HIDDEN_POWER_CAP_COST != 3 || EC_ICONIC_MOVE_GOLD_CAP_COST != 1 || EC_EVIE_PRICE_PER_EV != 2
+#error "Update the service dialogue's fixed price wording when repricing."
+#endif
 
 #define EC_BATTLE_SET_FAILED                 0
 #define EC_BATTLE_SET_SUCCESS                1

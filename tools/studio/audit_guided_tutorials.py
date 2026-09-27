@@ -4,12 +4,12 @@
 Uses synthetic prerequisites, real menu and battle execution, and no victory
 shortcut. Captures meaningful visual changes plus party and phase transitions.
 """
-import asyncio, hashlib, json, struct, sys, subprocess
+import asyncio, json, sys, subprocess
 from pathlib import Path
 from PIL import Image, ImageChops
 sys.path.insert(0,str(Path('tools/studio').resolve()))
 import server
-from native_tools import find_nm
+from native_tools import find_nm, read_game_query
 from scenes import keys, packet_state, TextDecoder
 MODE=sys.argv[1]; VARIANT=sys.argv[3] if len(sys.argv)>3 else 'normal'; OUT=Path(sys.argv[2]).resolve();OUT.mkdir(parents=True,exist_ok=True)
 server.WORK=OUT;server.BUILD_STORE=OUT/'builds'
@@ -32,13 +32,7 @@ async def main():
    part=min(n,120);s.ingest(await s.core.tick(keys=button,frames=part));n-=part
  async def query(kind,ident):
   ident=s.cat.constants[ident] if isinstance(ident,str) else ident
-  names=s.core.syms
-  await s.core.write([(names['gEcHeadlessCampaignQueryId'],ident),(names['gEcHeadlessCampaignQueryKind'],kind)])
-  for _ in range(6):
-   await tick(1)
-   if struct.unpack('<I',await s.core.rpc(4,server.words(names['gEcHeadlessCampaignQueryKind'],4)))[0]==0:break
-  else:raise AssertionError('Native query unacknowledged')
-  return struct.unpack('<I',await s.core.rpc(4,server.words(names['gEcHeadlessCampaignQueryValue'],4)))[0]
+  return await read_game_query(s.core,kind,ident,lambda: tick(1))
  def capture(label,force=False):
   nonlocal last,last_state
   state=packet_state(s.packet,decoder);state['party']=list(s.state[12:30])
@@ -75,14 +69,14 @@ async def main():
    s.ingest(await s.core.field_command(1));await s.core.rpc(6,str(OUT/'before-scene.sav').encode())
    await tick(1,keys('UP'));await tick(30);await tick(1,keys('A'))
   completed=False
-  receipt=False
   injected=False
   for frames in range(0,18000,30):
    await tick(1,keys('A') if frames%90==0 and (MODE=='wally' or s.state[11]) else 0);await tick(29)
    capture(f'frame-{frames:05d}')
    if MODE=='rival' and VARIANT=='abort' and not injected:
-    phase=(await s.core.rpc(4,server.words(s.core.syms['sRivalTutorialPhase'],1)))[0]
-    if phase==3:
+    state=packet_state(s.packet)
+    # Menus report no field facing; wait for the live search, not a private phase number.
+    if state['facing'] and not state['script'] and await query(1,'FLAG_DEXNAV_SEARCHING'):
      s.ingest(await s.core.field_command(10));injected=True;capture('missing-actor-injected',True)
    if frames>180 and s.state[0]:
     if MODE=='rival':completed=(await query(1,'FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE')==0 and injected) if VARIANT=='abort' else await query(1,'FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE')==1

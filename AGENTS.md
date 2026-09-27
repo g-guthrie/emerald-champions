@@ -17,6 +17,8 @@ or data.
 - Codex owns overworld presentation (map.json objects, local ids).
 - UI changes require native screenshots of affected states and menu navigation:
   opening, selection, page changes, cancellation and returned player control.
+- Studio instructions live in `tools/studio/skill/SKILL.md`; prefer this
+  checked-in source over installed copies.
 
 ## Design rules (owner decisions)
 
@@ -40,8 +42,9 @@ or data.
 - No Game Book, player guides or Center battle presets. No
   new ground or hidden items: only replace original pickups or TM gifts.
 - No Terastallization anywhere.
-- Held items: the first Center nurse gives the Regenerator Key Item with the
-  Leveler. With it, a held Berry its own holder eats in battle returns after
+- Held items: Center nurses and the visiting Oldale Mart nurse share the
+  initial tool handoff, including the Regenerator and Leveler. With the
+  Regenerator, a held Berry its own holder eats in battle returns after
   battle. A Berry stolen, swapped away, eaten by a foe, burned or corroded is
   gone. Knock Off removes an item, Berries included, for the current battle
   only; Thief and Covet transfer permanently.
@@ -63,8 +66,8 @@ or data.
   current cap with authored sets. One Legendary, Mythical, Ultra Beast or
   Paradox per party in total; ordinary and pseudo-legendary Pokemon have no
   category limit. Static legends are high stakes: a knockout loses one.
-  No wild-table percentages in dialogue; Birch explains the DexNav chain
-  odds explicitly during its handoff.
+  No wild-table percentages in dialogue. The rival demonstrates DexNav after
+  Birch's gift; Birch offers the detailed hunting lesson on request.
 - DexNav and the PokéNav atlas share the native wild roster. Show every
   currently available species with its icon, without seen/caught discovery
   gating. Hide encounters until their actual unlock conditions are met.

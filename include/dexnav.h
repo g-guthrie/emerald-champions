@@ -31,6 +31,7 @@ enum EncounterType
 
 void EndDexNavSearch(void);
 void Task_OpenDexNavFromStartMenu(u8 taskId);
+void OpenRivalTutorialDexNav(void);
 bool32 TryStartDexNavSearch(void);
 void ResetDexNavSearch(void);
 u32 GetDexNavChain(void);

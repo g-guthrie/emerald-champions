@@ -1,4 +1,4 @@
-"""Native mGBA runner construction and ARM ELF symbols for both test pipelines."""
+"""Shared native runner construction, ELF symbols, and read-only game queries."""
 from __future__ import annotations
 
 import hashlib
@@ -9,11 +9,28 @@ import re
 import shlex
 import shutil
 import subprocess
+import struct
 import tempfile
 
 
 class NativeToolError(RuntimeError):
     pass
+
+
+async def read_game_query(core, kind: int, ident: int, advance):
+    """Read an acknowledged query; the caller records each frame via advance()."""
+    if kind <= 0:
+        raise ValueError("Native queries need a positive kind")
+    pending = core.syms["gEcHeadlessCampaignQueryKind"]
+    value = core.syms["gEcHeadlessCampaignQueryValue"]
+    await core.write([(core.syms["gEcHeadlessCampaignQueryId"], ident), (pending, kind)])
+    for _ in range(6):
+        await advance()
+        raw = await core.rpc(4, struct.pack("<II", pending, 4))
+        if struct.unpack("<I", raw)[0] == 0:
+            raw = await core.rpc(4, struct.pack("<II", value, 4))
+            return struct.unpack("<I", raw)[0]
+    raise NativeToolError(f"Native query (kind {kind}, id {ident}) was not acknowledged; no result was accepted")
 
 
 def run(command: list[str]) -> subprocess.CompletedProcess[str]:

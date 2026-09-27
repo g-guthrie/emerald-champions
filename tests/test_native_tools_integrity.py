@@ -1,15 +1,50 @@
 """Native build cache, failure preservation, and ELF parser regressions."""
 import os
+import struct
 import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import AsyncMock, call, patch
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import native_tools as native
+
+
+class NativeQueryIntegrity(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.core = SimpleNamespace(
+            syms={"gEcHeadlessCampaignQueryId": 100, "gEcHeadlessCampaignQueryKind": 104,
+                  "gEcHeadlessCampaignQueryValue": 108},
+            write=AsyncMock(), rpc=AsyncMock())
+        self.advance = AsyncMock()
+
+    async def test_waits_for_acknowledgment_and_records_each_frame(self):
+        self.core.rpc.side_effect = [struct.pack("<I", value) for value in (1, 0, 42)]
+        self.assertEqual(await native.read_game_query(self.core, 4, 19, self.advance), 42)
+        self.core.write.assert_awaited_once_with([(100, 19), (104, 4)])
+        self.assertEqual(self.advance.await_count, 2)
+        self.assertEqual(self.core.rpc.await_args_list, [
+            call(4, struct.pack("<II", 104, 4)),
+            call(4, struct.pack("<II", 104, 4)),
+            call(4, struct.pack("<II", 108, 4)),
+        ])
+
+    async def test_missing_acknowledgment_never_accepts_old_result(self):
+        self.core.rpc.return_value = struct.pack("<I", 1)
+        with self.assertRaisesRegex(native.NativeToolError, "not acknowledged"):
+            await native.read_game_query(self.core, 1, 19, self.advance)
+        self.assertEqual(self.advance.await_count, 6)
+        self.assertEqual(self.core.rpc.await_args_list, [call(4, struct.pack("<II", 104, 4))] * 6)
+
+    async def test_none_query_cannot_masquerade_as_an_acknowledged_result(self):
+        with self.assertRaises(ValueError):
+            await native.read_game_query(self.core, 0, 0, self.advance)
+        self.core.write.assert_not_awaited()
+        self.advance.assert_not_awaited()
 
 
 class NativeToolsIntegrity(unittest.TestCase):

@@ -107,7 +107,7 @@ void EmeraldChampionsStudioPoll(void)
     // Explicit fault injection for native tutorial recovery audits only.
     if (gEcStudioCommand == 10 && field && IsRivalDexNavTutorialActive())
     {
-        RemoveObjectEventByLocalIdAndMap(RIVAL_TUTORIAL_LOCAL_ID, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        RemoveObjectEventByLocalIdAndMap(LOCALID_ROUTE101_RIVAL_TUTORIAL, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
         gEcStudioResult = 1;
         gEcStudioCommand = 0;
         return;

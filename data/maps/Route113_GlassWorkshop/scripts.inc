@@ -358,15 +358,15 @@ Route113_GlassWorkshop_EventScript_Caps::
 	buffernumberstring 0, VAR_ASH_GATHER_COUNT
 	msgbox Route113_GlassWorkshop_Text_CapPrice, MSGBOX_DEFAULT
 	dynmultipush Route113_GlassWorkshop_Text_OneCap, 1
-	dynmultipush Route113_GlassWorkshop_Text_FiveCaps, 5
-	dynmultipush Route113_GlassWorkshop_Text_AllCaps, 9
+	dynmultipush Route113_GlassWorkshop_Text_FiveCaps, EC_SOOT_CAP_BATCH
+	dynmultipush Route113_GlassWorkshop_Text_AllCaps, EC_SOOT_EXCHANGE_ALL
 	dynmultipush EmeraldChampions_Text_Back, 127
 	dynmultistack 0, 0, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
 	goto_if_eq VAR_RESULT, 127, Route113_GlassWorkshop_EventScript_ChooseGlassItem
 	copyvar VAR_0x8004, VAR_RESULT
 	special ExchangeSootForCaps
-	goto_if_eq VAR_RESULT, 0, Route113_GlassWorkshop_EventScript_CapsPoor
-	goto_if_eq VAR_RESULT, 2, Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, EC_SOOT_EXCHANGE_REFUSED, Route113_GlassWorkshop_EventScript_CapsPoor
+	goto_if_eq VAR_RESULT, EC_SOOT_EXCHANGE_BAG_FULL, Common_EventScript_ShowBagIsFull
 	msgbox Route113_GlassWorkshop_Text_CapsReceived, MSGBOX_DEFAULT
 	goto Route113_GlassWorkshop_EventScript_ChooseGlassItem
 

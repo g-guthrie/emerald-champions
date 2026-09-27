@@ -4,6 +4,8 @@
 // prose; the guide never appends generated lines. Keep every line within
 // 200px (test/legendary_sign_pipeline.c measures them).
 
+#include "constants/emerald_champions.h"
+
 #define TIP(city, badges, required, done, check_, text_) \
     {MAPSEC_##city, required, done, badges, CENTER_GUIDE_CHECK_##check_, text_}
 
@@ -43,7 +45,7 @@ TIP(LAVARIDGE_TOWN, 0, 0, 0, BLOB_CHASE, sTip_BlobChase),
 TIP(LAVARIDGE_TOWN, 4, 0, 0, NONE, sTip_Desert),
 
 TIP(FALLARBOR_TOWN, 5, 0, 0, NONE, COMPOUND_STRING("After five Badges, the Fossil\nManiac's tunnel on Route 114\lopens into ruins under the\ldesert, full of fossils.\pDevon's lab in Rustboro can\nrevive them.")),
-TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. Evie raises EVs for\l¥2 each.\pIvy lowers Attack or Speed IVs\nfor free. For three Bottle Caps,\lshe changes Hidden Power's type.")),
+TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. Evie raises EVs for\l¥" STR(EC_EVIE_PRICE_PER_EV) " each.\pIvy lowers Attack or Speed IVs\nfor " STR(EC_IV_CHANGE_CAP_COST) " Bottle Cap. For " STR(EC_HIDDEN_POWER_CAP_COST) " Caps,\lshe changes Hidden Power's type.")),
 
 TIP(FORTREE_CITY, 0, FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, NONE, COMPOUND_STRING("Strange storms bring visiting\nlegends to some routes. The\lWeather Institute on Route 119\ltracks where they are.")),
 

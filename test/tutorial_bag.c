@@ -1,14 +1,69 @@
 #include "global.h"
+#include "battle.h"
+#include "battle_controllers.h"
 #include "event_data.h"
 #include "item.h"
 #include "item_menu.h"
+#include "palette.h"
+#include "task.h"
 #include "test/test.h"
 
 extern bool32 Test_PrepareInitialToolsBagTutorial(void);
 extern void Test_RestoreTutorialBag(bool32 completed);
+extern u8 Test_BeginWallyBagClose(u8 *listTaskId);
 
 static void TutorialBagTestCallback(void)
 {
+}
+
+TEST("Guided Bag: catching restores original cursors only after native list teardown")
+{
+    MainCallback savedCallback = gMain.callback2;
+    struct PaletteFadeControl savedFade = gPaletteFade;
+    enum Item savedItem = gSpecialVar_ItemId;
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_POKE_BALL, 9));
+    EXPECT(AddBagItem(ITEM_GREAT_BALL, 2));
+    gBagPosition.location = ITEMMENULOCATION_SHOP;
+    gBagPosition.pocket = POCKET_MEDICINE;
+    gBagPosition.exitCallback = TutorialBagTestCallback;
+    gBagPosition.pocketSwitchArrowPos = 3;
+    for (u32 pocket = 0; pocket < POCKETS_COUNT; pocket++)
+    {
+        gBagPosition.cursorPosition[pocket] = pocket + 1;
+        gBagPosition.scrollPosition[pocket] = pocket + 4;
+    }
+    struct BagPosition position = gBagPosition;
+    gSpecialVar_ItemId = ITEM_POTION;
+    u8 listTaskId;
+    u8 taskId = Test_BeginWallyBagClose(&listTaskId);
+    gPaletteFade.active = FALSE;
+    gTasks[taskId].func(taskId);
+    // Starting the fade must not destroy the list or restore the Bag early.
+    EXPECT(gTasks[listTaskId].isActive);
+    EXPECT_EQ(gBagPosition.location, ITEMMENULOCATION_WALLY);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 0);
+    gPaletteFade.active = TRUE;
+    gTasks[taskId].func(taskId);
+    EXPECT(gTasks[listTaskId].isActive);
+    gPaletteFade.active = FALSE;
+    gTasks[taskId].func(taskId);
+    EXPECT(!gTasks[listTaskId].isActive);
+    EXPECT(!gTasks[taskId].isActive);
+    EXPECT_EQ(gBagPosition.location, ITEMMENULOCATION_WALLY);
+    // Run the actual post-close callback, stopping before battle re-entry.
+    gMain.callback2();
+    EXPECT_EQ(memcmp(&gBagPosition, &position, sizeof(position)), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 9);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GREAT_BALL), 2);
+    EXPECT_EQ(gSpecialVar_ItemId, ITEM_POKE_BALL);
+    EXPECT_EQ(gMain.callback2, CB2_SetUpReshowBattleScreenAfterMenu2);
+    ClearBag();
+    memset(&gBagPosition, 0, sizeof(gBagPosition));
+    gMain.callback2 = savedCallback;
+    gPaletteFade = savedFade;
+    gSpecialVar_ItemId = savedItem;
 }
 
 TEST("Guided Bag: completion and abort restore full pockets, cursors and selection")

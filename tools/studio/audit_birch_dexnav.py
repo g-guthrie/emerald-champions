@@ -6,13 +6,13 @@ The setup represents the first Route 103 rival victory; it is not a player save.
 """
 import asyncio
 import json
-import struct
 import sys
 from pathlib import Path
 from PIL import Image
 sys.path.insert(0, str(Path('tools/studio').resolve()))
 import server
 from scenes import keys, packet_state
+from native_tools import read_game_query
 
 OUT = Path(sys.argv[1]).resolve()
 OUT.mkdir(parents=True, exist_ok=True)
@@ -40,12 +40,7 @@ async def main():
         Image.frombytes('RGBA', (240,160), studio.packet[16:153616]).save(path)
         captures.append({'name':name, 'file':str(path), 'state':packet_state(studio.packet)})
     async def query(kind, name):
-        syms = studio.core.syms
-        await studio.core.write([(syms['gEcHeadlessCampaignQueryId'], studio.cat.constants[name]),
-                                 (syms['gEcHeadlessCampaignQueryKind'], kind)])
-        await tick(3)
-        raw = await studio.core.rpc(4,server.words(syms['gEcHeadlessCampaignQueryValue'],4))
-        return struct.unpack('<I',raw)[0]
+        return await read_game_query(studio.core, kind, studio.cat.constants[name], lambda: tick(1))
     setup = {
         'vars':{'VAR_BIRCH_LAB_STATE':4, 'VAR_DEX_UPGRADE_JOHTO_STARTER_STATE':0,
                 'VAR_BIRCH_STATE':0, 'VAR_PETALBURG_GYM_STATE':0},

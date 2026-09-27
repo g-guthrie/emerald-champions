@@ -115,10 +115,7 @@ struct ListBuffer2 {
 
 struct TempWallyBag {
     struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    u16 cursorPosition[POCKETS_COUNT];
-    u16 scrollPosition[POCKETS_COUNT];
-    u16 unused;
-    u16 pocket;
+    struct BagPosition position;
 };
 
 struct TutorialBag
@@ -2620,13 +2617,10 @@ static void Task_TutorialBag(u8 taskId)
     if (!sTutorialBag->contextOpen && GetBagItemId(POCKET_KEY_ITEMS, sTutorialBag->index) == ITEM_LEVELER)
     {
         PlaySE(SE_SELECT);
-        tListPosition = sTutorialBag->index;
-        tQuantity = 1;
         gSpecialVar_ItemId = ITEM_LEVELER;
         BagDestroyPocketScrollArrowPair();
         BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
         OpenContextMenu(taskId);
-        gTasks[taskId].func = Task_TutorialBag;
         sTutorialBag->contextOpen = TRUE;
         return;
     }
@@ -2687,12 +2681,7 @@ static void PrepareBagForWallyTutorial(void)
         sTempWallyBag->bagPocket_PokeBalls[i] = GetBagItemIdAndQuantity(POCKET_POKE_BALLS, i);
         BagPocket_SetSlotData(&gBagPockets[POCKET_POKE_BALLS], i, (struct ItemSlot) {0});
     }
-    sTempWallyBag->pocket = gBagPosition.pocket;
-    for (i = 0; i < POCKETS_COUNT; i++)
-    {
-        sTempWallyBag->cursorPosition[i] = gBagPosition.cursorPosition[i];
-        sTempWallyBag->scrollPosition[i] = gBagPosition.scrollPosition[i];
-    }
+    sTempWallyBag->position = gBagPosition;
     ResetBagScrollPositions();
 }
 
@@ -2702,13 +2691,16 @@ static void RestoreBagAfterWallyTutorial(void)
 
     for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
         BagPocket_SetSlotData(&gBagPockets[POCKET_POKE_BALLS], i, sTempWallyBag->bagPocket_PokeBalls[i]);
-    gBagPosition.pocket = sTempWallyBag->pocket;
-    for (i = 0; i < POCKETS_COUNT; i++)
-    {
-        gBagPosition.cursorPosition[i] = sTempWallyBag->cursorPosition[i];
-        gBagPosition.scrollPosition[i] = sTempWallyBag->scrollPosition[i];
-    }
-    Free(sTempWallyBag);
+    gBagPosition = sTempWallyBag->position;
+    FREE_AND_SET_NULL(sTempWallyBag);
+}
+
+static void CB2_ReturnFromWallyTutorialBag(void)
+{
+    // Native closure writes the demonstration cursor before freeing its UI.
+    // Restore afterward, retaining ITEM_POKE_BALL for the battle controller.
+    RestoreBagAfterWallyTutorial();
+    SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 void DoWallyTutorialBagMenu(void)
@@ -2719,7 +2711,7 @@ void DoWallyTutorialBagMenu(void)
     // the Poké Ball, so open on the pocket immediately left of Poké Balls.
     // Opening on Poké Balls directly made Wally scroll into Key Items and
     // "throw" from the wrong pocket.
-    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS - 1, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS - 1, CB2_ReturnFromWallyTutorialBag);
 }
 
 void InitOldManBag(void)
@@ -2753,8 +2745,6 @@ static void Task_WallyTutorialBagMenu(u8 taskId)
         case WALLY_BAG_DELAY * 3:
             PlaySE(SE_SELECT);
             RemoveContextWindow();
-            DestroyListMenuTask(tListTaskId, 0, 0);
-            RestoreBagAfterWallyTutorial();
             Task_FadeAndCloseBagMenu(taskId);
             break;
         default:
@@ -2765,6 +2755,28 @@ static void Task_WallyTutorialBagMenu(u8 taskId)
 }
 
 #undef tTimer
+
+#ifdef TESTING
+u8 Test_BeginWallyBagClose(u8 *listTaskId)
+{
+    DoWallyTutorialBagMenu();
+    // Supply the native close task with a list that needs no rendered cursor.
+    // The test drives the real Wally exit, fade wait, list teardown and callback.
+    sListBuffer1 = NULL;
+    sListBuffer2 = NULL;
+    gBagPosition.pocket = POCKET_POKE_BALLS;
+    gSpecialVar_ItemId = ITEM_POKE_BALL;
+    *listTaskId = CreateTask(TaskDummy, 0);
+    struct ListMenu *list = (void *)gTasks[*listTaskId].data;
+    list->taskId = TASK_NONE;
+    list->scrollOffset = 0;
+    list->selectedRow = 0;
+    u8 taskId = CreateTask(Task_WallyTutorialBagMenu, 0);
+    gTasks[taskId].tListTaskId = *listTaskId;
+    gTasks[taskId].data[8] = WALLY_BAG_DELAY * 3;
+    return taskId;
+}
+#endif
 
 // This action is used to show the Apprentice an item when
 // they ask what item they should make their Pokémon hold

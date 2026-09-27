@@ -13,6 +13,7 @@
 #include "random.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
+#include "constants/emerald_champions.h"
 
 // Inclement Emerald's Super Training, Hyper Training and nature services,
 // written against this engine rather than lifted from its 2021 source. The
@@ -519,26 +520,27 @@ void BufferVarsForIVRater(void)
     gSpecialVar_0x8007 = best;
 }
 
-// VAR_0x8004: 1, 5, or 9 (all affordable). No debit until delivery succeeds.
+// VAR_0x8004: one cap, EC_SOOT_CAP_BATCH, or EC_SOOT_EXCHANGE_ALL.
+// No debit until delivery succeeds.
 void ExchangeSootForCaps(void)
 {
     u32 soot = VarGet(VAR_ASH_GATHER_COUNT);
     u32 count = gSpecialVar_0x8004;
-    gSpecialVar_Result = 0;
-    if (count == 9)
-        count = soot / 1000;
-    else if (count != 1 && count != 5)
+    gSpecialVar_Result = EC_SOOT_EXCHANGE_REFUSED;
+    if (count == EC_SOOT_EXCHANGE_ALL)
+        count = soot / EC_SOOT_PER_CAP;
+    else if (count != 1 && count != EC_SOOT_CAP_BATCH)
         return;
-    if (count == 0 || count * 1000 > soot)
+    if (count == 0 || count * EC_SOOT_PER_CAP > soot)
         return;
     if (!AddBagItem(ITEM_BOTTLE_CAP, count))
     {
-        gSpecialVar_Result = 2;
+        gSpecialVar_Result = EC_SOOT_EXCHANGE_BAG_FULL;
         return;
     }
-    VarSet(VAR_ASH_GATHER_COUNT, soot - count * 1000);
+    VarSet(VAR_ASH_GATHER_COUNT, soot - count * EC_SOOT_PER_CAP);
     ConvertIntToDecimalStringN(gStringVar1, count, STR_CONV_MODE_LEFT_ALIGN, 2);
-    gSpecialVar_Result = 1;
+    gSpecialVar_Result = EC_SOOT_EXCHANGE_DELIVERED;
 }
 
 // These script transactions charge only for changed IVs. Failed delivery
@@ -546,7 +548,7 @@ void ExchangeSootForCaps(void)
 static void PayForIvyService(bool32 hiddenPower)
 {
     struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
-    gSpecialVar_Result = 0;
+    gSpecialVar_Result = EC_IV_SERVICE_UNCHANGED;
     if (mon == NULL)
         return;
     struct Pokemon before = *mon;
@@ -563,13 +565,13 @@ static void PayForIvyService(bool32 hiddenPower)
         changed |= GetMonData(mon, sIvData[i]) != GetMonData(&before, sIvData[i]);
     if (!changed)
         return;
-    if (!RemoveBagItem(ITEM_BOTTLE_CAP, hiddenPower ? 3 : 1))
+    if (!RemoveBagItem(ITEM_BOTTLE_CAP, hiddenPower ? EC_HIDDEN_POWER_CAP_COST : EC_IV_CHANGE_CAP_COST))
     {
         *mon = before;
-        gSpecialVar_Result = 2;
+        gSpecialVar_Result = EC_IV_SERVICE_NOT_ENOUGH_CAPS;
         return;
     }
-    gSpecialVar_Result = 1;
+    gSpecialVar_Result = EC_IV_SERVICE_CHANGED;
 }
 
 void PayForChosenMonIVChange(void)

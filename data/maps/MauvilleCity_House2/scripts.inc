@@ -48,6 +48,7 @@ MauvilleCity_House2_EventScript_DeclineTrade:: @ 8210CE4
 MauvilleCity_House2_EventScript_Tutor::
 	lock
 	faceplayer
+	buffernumberstring STR_VAR_1, EC_ICONIC_MOVE_CAP_COST
 	msgbox MauvilleCity_House2_Text_IconicTutorIntro, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_House2_EventScript_IconicTutorDeclined
 	setmoverelearnerstate MOVE_RELEARNER_ICONIC_MOVES
@@ -106,7 +107,7 @@ MauvilleCity_House2_Text_IconicTutorIntro:
 	.string "Dragon Rage… I know them all.\p"
 	.string "The wilder ones I only share with\n"
 	.string "Trainers who have proven themselves.\p"
-	.string "Each move costs 10 Bottle Caps\n"
+	.string "Each move costs {STR_VAR_1} Bottle Caps\n"
 	.string "or one Gold Bottle Cap.\p"
 	.string "That Pokémon can relearn its purchased\n"
 	.string "moves here for free, even if it evolves!\p"

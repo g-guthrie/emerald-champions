@@ -266,32 +266,32 @@ FallarborTown_ChooseNewEV::
 
 FallarborTown_ChangeEV4::
 	setvar VAR_0x8006, 4
-	setvar VAR_EV_TRAINING_COST, 8
+	setvar VAR_EV_TRAINING_COST, (4 * EC_EVIE_PRICE_PER_EV)
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV8::
 	setvar VAR_0x8006, 8
-	setvar VAR_EV_TRAINING_COST, 16
+	setvar VAR_EV_TRAINING_COST, (8 * EC_EVIE_PRICE_PER_EV)
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV12::
 	setvar VAR_0x8006, 12
-	setvar VAR_EV_TRAINING_COST, 24
+	setvar VAR_EV_TRAINING_COST, (12 * EC_EVIE_PRICE_PER_EV)
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV64::
 	setvar VAR_0x8006, 64
-	setvar VAR_EV_TRAINING_COST, 128
+	setvar VAR_EV_TRAINING_COST, (64 * EC_EVIE_PRICE_PER_EV)
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV128::
 	setvar VAR_0x8006, 128
-	setvar VAR_EV_TRAINING_COST, 256
+	setvar VAR_EV_TRAINING_COST, (128 * EC_EVIE_PRICE_PER_EV)
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ChangeEV252::
 	setvar VAR_0x8006, 252
-	setvar VAR_EV_TRAINING_COST, 504
+	setvar VAR_EV_TRAINING_COST, (252 * EC_EVIE_PRICE_PER_EV)
 	goto FallarborTown_DoSuperTraining
 
 FallarborTown_ResetEVs::
@@ -538,8 +538,8 @@ HyperTraining_EventScript_ChooseLevel::
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, HyperTraining_EventScript_ChangeIV
 	copyvar VAR_0x8006, VAR_RESULT
 	special PayForChosenMonIVChange
-	goto_if_eq VAR_RESULT, 0, HyperTraining_EventScript_Unchanged
-	goto_if_eq VAR_RESULT, 2, HyperTraining_EventScript_IVCapsPoor
+	goto_if_eq VAR_RESULT, EC_IV_SERVICE_UNCHANGED, HyperTraining_EventScript_Unchanged
+	goto_if_eq VAR_RESULT, EC_IV_SERVICE_NOT_ENOUGH_CAPS, HyperTraining_EventScript_IVCapsPoor
 	msgbox HyperTraining_Text_PayOneCap, MSGBOX_DEFAULT
 	goto HyperTraining_EventScript_DoHyperTraining
 
@@ -557,8 +557,8 @@ HyperTraining_EventScript_SelectHiddenPower::
 
 HyperTraining_EventScript_ChangeAllIVs::
 	special PayForChosenMonHiddenPower
-	goto_if_eq VAR_RESULT, 0, HyperTraining_EventScript_Unchanged
-	goto_if_eq VAR_RESULT, 2, HyperTraining_EventScript_IVCapsPoor
+	goto_if_eq VAR_RESULT, EC_IV_SERVICE_UNCHANGED, HyperTraining_EventScript_Unchanged
+	goto_if_eq VAR_RESULT, EC_IV_SERVICE_NOT_ENOUGH_CAPS, HyperTraining_EventScript_IVCapsPoor
 	msgbox HyperTraining_Text_PayThreeCaps, MSGBOX_DEFAULT
 	goto HyperTraining_EventScript_DoHyperTraining
 
