@@ -7,6 +7,7 @@
 #include "legendary_signs.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "pokedex.h"
 #include "random.h"
 #include "roamer.h"
 #include "safari_zone.h"
@@ -210,6 +211,42 @@ static void CheckDexNavAgainstRosterAt(u32 when)
     FlagClear(FLAG_RECEIVED_DEXNAV);
     VarSet(VAR_ALTERING_CAVE_WILD_SET, savedCave);
     gSaveBlock1Ptr->location = savedLocation;
+}
+
+TEST("DexNav reveals Route 103 residents with an entirely unseen Pokedex")
+{
+    struct WarpData savedLocation = gSaveBlock1Ptr->location;
+    struct MapHeader savedHeader = gMapHeader;
+    bool32 hadDexNav = FlagGet(FLAG_RECEIVED_DEXNAV);
+    u8 seen[sizeof(gSaveBlock1Ptr->dexSeen)];
+    u8 caught[sizeof(gSaveBlock1Ptr->dexCaught)];
+    struct WildRosterEntry unseen[WILD_ROSTER_MAX_ENTRIES], known[WILD_ROSTER_MAX_ENTRIES];
+    memcpy(seen, gSaveBlock1Ptr->dexSeen, sizeof(seen));
+    memcpy(caught, gSaveBlock1Ptr->dexCaught, sizeof(caught));
+    memset(gSaveBlock1Ptr->dexSeen, 0, sizeof(seen));
+    memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(caught));
+    ResetWorld();
+    FlagSet(FLAG_RECEIVED_DEXNAV);
+    SetLocation(MAP_ROUTE103);
+
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_SEEN), 0);
+    u32 count = Test_DexNavGetList(unseen, ARRAY_COUNT(unseen));
+    EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_WINGULL), count);
+    EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_TOXEL), count);
+    EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_SNUBBULL), count);
+    EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_PACHIRISU), count);
+
+    for (u32 dex = 1; dex <= NATIONAL_DEX_COUNT; dex++)
+        GetSetPokedexFlag(dex, FLAG_SET_SEEN);
+    EXPECT_EQ(Test_DexNavGetList(known, ARRAY_COUNT(known)), count);
+    EXPECT_EQ(memcmp(unseen, known, count * sizeof(unseen[0])), 0);
+
+    memcpy(gSaveBlock1Ptr->dexSeen, seen, sizeof(seen));
+    memcpy(gSaveBlock1Ptr->dexCaught, caught, sizeof(caught));
+    if (!hadDexNav)
+        FlagClear(FLAG_RECEIVED_DEXNAV);
+    gSaveBlock1Ptr->location = savedLocation;
+    gMapHeader = savedHeader;
 }
 
 // Before the gates open, most legend slots are inert and hand their draws on.
