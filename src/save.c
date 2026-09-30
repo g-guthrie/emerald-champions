@@ -867,6 +867,10 @@ u8 LoadGameSave(u8 saveType)
         {
             MigrateBagPocketsIfNeeded();
             MaxPlayerIVsIfNeeded();
+            // A continued run retains its difficulty. Updated progression caps
+            // also apply before the player opens menus or uses the Leveler.
+            for (u32 slot = 0; slot < gPartiesCount[B_TRAINER_PLAYER]; slot++)
+                ClampMonToPlayerLevelCap(&gParties[B_TRAINER_PLAYER][slot]);
             GiveDexNavIfNeeded();
         }
         gSaveFileStatus = status;

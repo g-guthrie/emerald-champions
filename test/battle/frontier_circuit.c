@@ -18,14 +18,14 @@ static void PrepareCircuitBattleLevel(u8 level)
     *recorded = *opponent;
 }
 
-DOUBLE_BATTLE_TEST("Champions Circuit level 255 reaches the damage engine through battle controllers")
+DOUBLE_BATTLE_TEST("Champions Circuit level 100 reaches the damage engine through battle controllers")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_MACHAMP) { Moves(MOVE_SEISMIC_TOSS); }
         OPPONENT(SPECIES_WOBBUFFET);
-        PrepareCircuitBattleLevel(255);
+        PrepareCircuitBattleLevel(100);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE);
@@ -34,22 +34,22 @@ DOUBLE_BATTLE_TEST("Champions Circuit level 255 reaches the damage engine throug
             MOVE(opponentRight, MOVE_CELEBRATE);
         }
     } SCENE {
-        HP_BAR(playerLeft, damage: 255);
+        HP_BAR(playerLeft, damage: 100);
     } THEN {
-        EXPECT_EQ(opponentLeft->level, 255);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 255);
+        EXPECT_EQ(opponentLeft->level, 100);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 100);
         VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
     }
 }
 
-DOUBLE_BATTLE_TEST("Champions Circuit Mega Evolution retains the overlevel battle handicap")
+DOUBLE_BATTLE_TEST("Champions Circuit Mega Evolution retains level 100")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GARCHOMP) { Item(ITEM_GARCHOMPITE); Moves(MOVE_CELEBRATE); }
         OPPONENT(SPECIES_WOBBUFFET);
-        PrepareCircuitBattleLevel(150);
+        PrepareCircuitBattleLevel(100);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE);
@@ -59,8 +59,8 @@ DOUBLE_BATTLE_TEST("Champions Circuit Mega Evolution retains the overlevel battl
         }
     } THEN {
         EXPECT_EQ(opponentLeft->species, SPECIES_GARCHOMP_MEGA);
-        EXPECT_EQ(opponentLeft->level, 150);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 150);
+        EXPECT_EQ(opponentLeft->level, 100);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 100);
         VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
     }
 }

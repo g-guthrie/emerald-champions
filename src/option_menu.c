@@ -85,6 +85,8 @@ static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
 
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
+EWRAM_DATA static bool8 sChoosingNewGame = FALSE;
+EWRAM_DATA static void (*sNewGameCancelCallback)(void) = NULL;
 
 static const u8 gText_DifficultyHard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Hard");
 static const u8 gText_DifficultyMedium[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Medium");
@@ -172,6 +174,14 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
+void ChooseNewGameDifficulty(void (*cancelCallback)(void))
+{
+    sChoosingNewGame = TRUE;
+    sNewGameCancelCallback = cancelCallback;
+    gMain.savedCallback = CB2_NewGame;
+    SetMainCallback2(CB2_InitOptionMenu);
+}
+
 void CB2_InitOptionMenu(void)
 {
     switch (gMain.state)
@@ -250,7 +260,7 @@ void CB2_InitOptionMenu(void)
         u8 taskId = CreateTask(Task_OptionMenuFadeIn, 0);
 
         gTasks[taskId].tMenuSelection = 0;
-        gTasks[taskId].tDifficulty = GetCurrentDifficultyLevel();
+        gTasks[taskId].tDifficulty = sChoosingNewGame ? DIFFICULTY_NORMAL : GetCurrentDifficultyLevel();
         gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
@@ -290,7 +300,18 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        gTasks[taskId].func = Task_OptionMenuSave;
+        if (sChoosingNewGame)
+        {
+            // All choices remain in this task until Begin run; cancellation
+            // leaves the loaded run's difficulty and options untouched.
+            gMain.savedCallback = sNewGameCancelCallback;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_OptionMenuFadeOut;
+        }
+        else
+        {
+            gTasks[taskId].func = Task_OptionMenuSave;
+        }
     }
     else if (JOY_NEW(DPAD_UP))
     {
@@ -363,7 +384,8 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
 static void Task_OptionMenuSave(u8 taskId)
 {
-    SetCurrentDifficultyLevel(gTasks[taskId].tDifficulty);
+    if (sChoosingNewGame)
+        SetNewGameDifficultyLevel(gTasks[taskId].tDifficulty);
     gSaveBlock2Ptr->optionsBattleSceneOff = gTasks[taskId].tBattleSceneOff;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
@@ -381,6 +403,8 @@ static void Task_OptionMenuFadeOut(u8 taskId)
         DestroyTask(taskId);
         Free(GetBgTilemapBuffer(1));
         FreeAllWindowBuffers();
+        sChoosingNewGame = FALSE;
+        sNewGameCancelCallback = NULL;
         SetMainCallback2(gMain.savedCallback);
     }
 }
@@ -411,6 +435,8 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
 static u8 Difficulty_ProcessInput(u8 selection)
 {
+    if (!sChoosingNewGame)
+        return selection;
     if (JOY_NEW(DPAD_RIGHT))
     {
         if (selection == DIFFICULTY_HARD)
@@ -445,30 +471,35 @@ static void Difficulty_DrawChoices(u8 selection)
     styles[1] = selection == DIFFICULTY_NORMAL;
     styles[2] = selection == DIFFICULTY_EASY;
 
-    DrawOptionMenuChoice(gText_DifficultyHard, 104, YPOS_DIFFICULTY, styles[0]);
-
-    widthHard = GetStringWidth(FONT_NORMAL, gText_DifficultyHard, 0);
-    widthMedium = GetStringWidth(FONT_NORMAL, gText_DifficultyMedium, 0);
-    widthEasy = GetStringWidth(FONT_NORMAL, gText_DifficultyEasy, 0);
-
-    widthMedium -= 94;
-    xMedium = (widthHard - widthMedium - widthEasy) / 2 + 104;
-    DrawOptionMenuChoice(gText_DifficultyMedium, xMedium, YPOS_DIFFICULTY, styles[1]);
-
-    DrawOptionMenuChoice(gText_DifficultyEasy, GetStringRightAlignXOffset(FONT_NORMAL, gText_DifficultyEasy, 198), YPOS_DIFFICULTY, styles[2]);
-    u32 difference = GetTrainerLevelReductionFor(selection) - GetTrainerLevelReductionFor(DIFFICULTY_HARD);
-    ConvertIntToDecimalStringN(gStringVar1, difference, STR_CONV_MODE_LEFT_ALIGN, 2);
+    if (sChoosingNewGame)
+    {
+        DrawOptionMenuChoice(gText_DifficultyHard, 104, YPOS_DIFFICULTY, styles[0]);
+        widthHard = GetStringWidth(FONT_NORMAL, gText_DifficultyHard, 0);
+        widthMedium = GetStringWidth(FONT_NORMAL, gText_DifficultyMedium, 0);
+        widthEasy = GetStringWidth(FONT_NORMAL, gText_DifficultyEasy, 0);
+        widthMedium -= 94;
+        xMedium = (widthHard - widthMedium - widthEasy) / 2 + 104;
+        DrawOptionMenuChoice(gText_DifficultyMedium, xMedium, YPOS_DIFFICULTY, styles[1]);
+        DrawOptionMenuChoice(gText_DifficultyEasy, GetStringRightAlignXOffset(FONT_NORMAL, gText_DifficultyEasy, 198), YPOS_DIFFICULTY, styles[2]);
+    }
+    else
+    {
+        const u8 *name = selection == DIFFICULTY_HARD ? gText_DifficultyHard
+            : selection == DIFFICULTY_EASY ? gText_DifficultyEasy : gText_DifficultyMedium;
+        DrawOptionMenuChoice(name, 104, YPOS_DIFFICULTY, 1);
+    }
+    ConvertIntToDecimalStringN(gStringVar1, GetTrainerLevelLeadPercentFor(selection), STR_CONV_MODE_LEFT_ALIGN, 3);
     const u8 *description = selection == DIFFICULTY_HARD
-        ? COMPOUND_STRING("Hard: extreme challenge.\nStandard opponent levels.")
+        ? COMPOUND_STRING("Hard: foes scout your whole team.\nThey keep their full level lead\nover your level cap.")
         : selection == DIFFICULTY_NORMAL
-        ? COMPOUND_STRING("Medium: expert campaign.\nOpponents {STR_VAR_1} level below Hard.")
-        : COMPOUND_STRING("Easy: more room for mistakes.\nOpponents {STR_VAR_1} levels below Hard.");
+        ? COMPOUND_STRING("Medium: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead\nover your level cap.")
+        : COMPOUND_STRING("Easy: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead\nover your level cap.");
     StringExpandPlaceholders(gStringVar4, description);
     FillWindowPixelBuffer(WIN_DIFFICULTY_HELP, PIXEL_FILL(1));
     const u8 helpColors[] = {1, 6, 7}; // White and gray in the Options palette.
     AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 0, helpColors, TEXT_SKIP_DRAW, gStringVar4);
-    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 28, helpColors, TEXT_SKIP_DRAW,
-        COMPOUND_STRING("Same teams and strategy in every mode."));
+    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 36, helpColors, TEXT_SKIP_DRAW,
+        sChoosingNewGame ? COMPOUND_STRING("Choose now; fixed for this run.") : COMPOUND_STRING("Difficulty is fixed for this run."));
     PutWindowTilemap(WIN_DIFFICULTY_HELP);
     CopyWindowToVram(WIN_DIFFICULTY_HELP, COPYWIN_FULL);
 }
@@ -630,7 +661,11 @@ static void DrawOptionMenuTexts(void)
 
     FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
-        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+    {
+        const u8 *name = sChoosingNewGame && i == MENUITEM_CANCEL
+            ? COMPOUND_STRING("Begin run") : sOptionMenuItemsNames[i];
+        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, name, 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+    }
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
 

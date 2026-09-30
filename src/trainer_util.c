@@ -135,7 +135,8 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     u32 data;
     u32 personality = (LocalRandom32(&trainer->localRngState) & 0xFFFFDF00) + 0x1000;
     u32 genderValue = 0;
-    u8 battleLevel = trainerMon->useLevelOffset ? GetCampaignTrainerLevel(trainerMon->levelOffset) : trainerMon->lvl;
+    u8 battleLevel = trainerMon->useLevelOffset ? GetCampaignTrainerLevel(trainerMon->levelOffset)
+        : max(1, min(MAX_LEVEL, trainerMon->lvl));
     if (trainer->easyLevelReduction)
         battleLevel = max(1, battleLevel - 1);
     if (trainerMon->gender == TRAINER_MON_RANDOM_GENDER)
@@ -227,8 +228,6 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
         SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &data);
     }
 
-    // EXP tables stop at 100; the opponent level is a transient battle stat.
-    SetMonData(mon, MON_DATA_LEVEL, &battleLevel);
     CalculateMonStats(mon);
     SetMonData(mon, MON_DATA_OT_NAME, trainer->name);
     data = trainer->gender;

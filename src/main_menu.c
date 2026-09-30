@@ -225,6 +225,7 @@ static void Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint(u8);
 static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8);
 static void Task_NewGameBirchSpeech_StartNamingScreen(u8);
 static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void);
+static void CB2_CancelNewGameDifficulty(void);
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8);
 static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8);
 void CreateYesNoMenuParameterized(u8, u8, u16, u16, u8, u8);
@@ -630,6 +631,18 @@ static u32 InitMainMenu(bool8 returningFromOptionsMenu)
     CreateTask(Task_MainMenuCheckSaveFile, 0);
 
     return 0;
+}
+
+// Birch's introduction edits identity before the save reset. Returning from
+// the difficulty choice to Continue must restore the loaded run's identity.
+EWRAM_DATA static u8 sPreviousPlayerName[PLAYER_NAME_LENGTH + 1] = {0};
+EWRAM_DATA static u8 sPreviousPlayerGender = MALE;
+
+static void CB2_CancelNewGameDifficulty(void)
+{
+    memcpy(gSaveBlock2Ptr->playerName, sPreviousPlayerName, sizeof(sPreviousPlayerName));
+    gSaveBlock2Ptr->playerGender = sPreviousPlayerGender;
+    CB2_ReinitMainMenu();
 }
 
 #define tMenuType data[0]
@@ -1076,6 +1089,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
         {
         case ACTION_NEW_GAME:
         default:
+            memcpy(sPreviousPlayerName, gSaveBlock2Ptr->playerName, sizeof(sPreviousPlayerName));
+            sPreviousPlayerGender = gSaveBlock2Ptr->playerGender;
             gPlttBufferUnfaded[0] = RGB_BLACK;
             gPlttBufferFaded[0] = RGB_BLACK;
             gTasks[taskId].func = Task_NewGameBirchSpeech_Init;
@@ -1801,8 +1816,8 @@ static void Task_NewGameBirchSpeech_Cleanup(u8 taskId)
         FreeAllWindowBuffers();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tLotadSpriteId);
         ResetAllPicSprites();
-        SetMainCallback2(CB2_NewGame);
         DestroyTask(taskId);
+        ChooseNewGameDifficulty(CB2_CancelNewGameDifficulty);
     }
 }
 

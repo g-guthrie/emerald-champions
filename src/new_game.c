@@ -162,9 +162,9 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
-    // The title screen's Option menu sets the difficulty before this game
-    // exists, like the other options. Carry it through the clears below.
-    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+    // The required New Game menu holds its choice apart from the loaded save.
+    // Direct development fixtures retain their explicit override.
+    enum DifficultyLevel difficulty = ConsumeNewGameDifficultyLevel();
 
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();

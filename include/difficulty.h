@@ -7,9 +7,14 @@
 struct Pokemon;
 
 enum DifficultyLevel GetCurrentDifficultyLevel(void);
+// Trusted development/fixture override; ordinary play chooses at New Game.
 void SetCurrentDifficultyLevel(enum DifficultyLevel);
+void SetNewGameDifficultyLevel(enum DifficultyLevel difficulty);
+enum DifficultyLevel ConsumeNewGameDifficultyLevel(void);
 u8 GetTrainerLevelReduction(void);
 u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty);
+u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty);
+u8 GetCampaignTrainerLevelFor(enum DifficultyLevel difficulty, s16 offset);
 u8 GetCampaignTrainerLevel(s16 offset);
 
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16);

@@ -177,19 +177,9 @@ bool32 IsChampionsCircuitBattle(void)
     return VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE) != 0 && gMain.inBattle;
 }
 
-bool32 IsChampionsCircuitOpponent(const struct Pokemon *mon)
-{
-    if (!VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE))
-        return FALSE;
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        if (mon == &gParties[B_TRAINER_OPPONENT_A][slot])
-            return TRUE;
-    return FALSE;
-}
-
 u8 GetChampionsCircuitOpponentLevel(u16 wins, u32 slot)
 {
-    // Mirrors campaign difficulty: Hard as designed, Medium -1, Easy -3.
+    // Shared level reduction, with the ordinary level-100 ceiling.
     u32 level = CIRCUIT_BASE_LEVEL + 2 - GetTrainerLevelReduction()
               + wins / PARTY_SIZE + (slot < wins % PARTY_SIZE);
     return min(CHAMPIONS_CIRCUIT_MAX_LEVEL, level);
@@ -1430,11 +1420,9 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
     u32 abilitySlot = 0;
     u8 nature = set->nature;
 
-    // Never index a level-100 experience table with an overlevel opponent.
     CreateMon(mon, variant->partySpecies, min(level, MAX_LEVEL), Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
     // Circuit teams share species buffs and retain explicit trainer ownership.
     SetMonTrainerOwned(mon, TRUE);
-    SetMonData(mon, MON_DATA_LEVEL, &level);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &iv);
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
@@ -1586,7 +1574,8 @@ void ChampionsTentBegin(void)
 
 void ChampionsTentGenerateOpponent(void)
 {
-    GenerateCompetitionOpponent(sTentWins, max(1, sTentCap + 2 - GetTrainerLevelReduction()));
+    GenerateCompetitionOpponent(sTentWins, max(1, min(MAX_LEVEL,
+        GetCurrentLevelCap() + 2 - GetTrainerLevelReduction())));
 }
 
 void ChampionsTentHandleBattleResult(void)

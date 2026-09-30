@@ -562,33 +562,37 @@ TEST("Emerald Champions native trainer creation applies live-cap role offsets on
     ResetCampaignCapMilestones();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     CreateNPCTrainerPartyFromTrainer(party, &trainer);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 15);
-    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 12);
+    // Hard keeps the full lead (offset + 2); Medium 60% and Easy 25% of it.
+    // A member at or below the cap is the same in every mode.
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 17);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 14);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     CreateNPCTrainerPartyFromTrainer(party, &trainer);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 14);
-    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 11);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 16);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 14);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
     CreateNPCTrainerPartyFromTrainer(party, &trainer);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 9);
-    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 6);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 15);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 14);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_PIKACHU);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_HELD_ITEM), ITEM_LIGHT_BALL);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_MOVE1), MOVE_THUNDERBOLT);
 
     FlagSet(FLAG_IS_CHAMPION);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 82);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 86);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    EXPECT_EQ(GetCampaignTrainerLevel(3), 87);
-    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     EXPECT_EQ(GetCampaignTrainerLevel(3), 88);
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 90);
     ResetCampaignCapMilestones();
     ZeroEnemyPartyMons();
 }
 
 TEST("Emerald Champions level caps follow every campaign milestone")
 {
+    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     ResetCampaignCapMilestones();
     EXPECT_EQ(GetCurrentLevelCap(), 14);
     for (u32 i = 0; i < ARRAY_COUNT(sCampaignCapExpectations); i++)
@@ -597,6 +601,7 @@ TEST("Emerald Champions level caps follow every campaign milestone")
         EXPECT_EQ(GetCurrentLevelCap(), sCampaignCapExpectations[i].cap);
     }
     ResetCampaignCapMilestones();
+    SetCurrentDifficultyLevel(difficulty);
 }
 
 TEST("Emerald Champions all species use the same campaign level cap")
@@ -1832,64 +1837,15 @@ TEST("Champions Circuit assembles complete competitive sets across 2048 seeds")
     }
 }
 
-TEST("Champions Circuit levels add one point per win and saturate without wrapping")
+TEST("Champions Circuit opponent levels saturate at 100 without wrapping")
 {
     static const u16 streaks[] = {0, 1, 5, 6, 7, 929, 930, 931, 65535};
+    enum DifficultyLevel saved = GetCurrentDifficultyLevel();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     for (u32 index = 0; index < ARRAY_COUNT(streaks); index++)
-    {
-        u32 total = 0;
         for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        {
-            u32 level = GetChampionsCircuitOpponentLevel(streaks[index], slot);
-            EXPECT_GE(level, 100);
-            EXPECT_LE(level, 255);
-            total += level;
-        }
-        EXPECT_EQ(total, min(600 + streaks[index], 1530));
-    }
-}
-
-TEST("Champions Circuit overlevel stats survive form recalculation without changing EXP")
-{
-    struct Pokemon *opponent = &gParties[B_TRAINER_OPPONENT_A][0];
-    static const u8 levels[] = {101, 150, 255};
-    enum Species mega = SPECIES_GARCHOMP_MEGA;
-    u32 exp, previousStats[NUM_STATS];
-
-    CreateMonWithIVs(opponent, SPECIES_GARCHOMP, 100, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
-    exp = GetMonData(opponent, MON_DATA_EXP);
-    for (u32 field = MON_DATA_MAX_HP; field <= MON_DATA_SPDEF; field++)
-        previousStats[field - MON_DATA_MAX_HP] = GetMonData(opponent, field);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
-    for (u32 i = 0; i < ARRAY_COUNT(levels); i++)
-    {
-        SetMonData(opponent, MON_DATA_LEVEL, &levels[i]);
-        CalculateMonStats(opponent);
-        EXPECT_EQ(GetMonData(opponent, MON_DATA_LEVEL), levels[i]);
-        EXPECT_EQ(GetMonData(opponent, MON_DATA_EXP), exp);
-        for (u32 field = MON_DATA_MAX_HP; field <= MON_DATA_SPDEF; field++)
-        {
-            u32 stat = GetMonData(opponent, field);
-            EXPECT_GT(stat, previousStats[field - MON_DATA_MAX_HP]);
-            previousStats[field - MON_DATA_MAX_HP] = stat;
-        }
-        CalculateMonStats(opponent);
-        for (u32 field = MON_DATA_MAX_HP; field <= MON_DATA_SPDEF; field++)
-            EXPECT_EQ(GetMonData(opponent, field), previousStats[field - MON_DATA_MAX_HP]);
-    }
-    SetMonData(opponent, MON_DATA_SPECIES, &mega);
-    CalculateMonStats(opponent);
-    EXPECT_EQ(GetMonData(opponent, MON_DATA_LEVEL), 255);
-    EXPECT_EQ(GetMonData(opponent, MON_DATA_EXP), exp);
-
-    // The same cached level in the player's party cannot bypass progression.
-    gParties[B_TRAINER_PLAYER][0] = *opponent;
-    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
-    CalculateMonStats(opponent);
-    EXPECT_EQ(GetMonData(opponent, MON_DATA_LEVEL), 100);
+            EXPECT_EQ(GetChampionsCircuitOpponentLevel(streaks[index], slot), MAX_LEVEL);
+    SetCurrentDifficultyLevel(saved);
 }
 
 TEST("Champions Circuit variant families are contiguous and retain a base form")

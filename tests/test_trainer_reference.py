@@ -20,8 +20,14 @@ class TrainerReferenceTests(unittest.TestCase):
         # Hard has the smallest reduction, so its ace is the highest level.
         root=Path(__file__).resolve().parents[1]
         top_cap=max(int(c) for c in re.findall(r'\{FLAG_\w+, (\d+)\}', (root/'src/caps.c').read_text().split('sCampaignMilestones[]',1)[1].split('};',1)[0]))
-        body=(root/'src/difficulty.c').read_text().split('u8 GetTrainerLevelReductionFor(',1)[1].split('\n}',1)[0]
-        smallest=min(int(n) for n in re.findall(r'return (\d+);', body))
-        for trainer,data in export.parse_parties().items():
-            for mon in data['mons']:
-                self.assertLessEqual(top_cap+mon['offset']+2-smallest,100,(trainer,mon['species'],mon['offset']))
+        from battle_campaign_arsenal import _level_rows
+        parties=export.parse_parties()
+        offsets=tuple(sorted({mon['offset'] for data in parties.values() for mon in data['mons']}))
+        source=(root/'src/difficulty.c').read_text()
+        # Execute the actual native level function, including its ceiling.
+        # An authored offset may exceed 100 before that clamp is applied.
+        for mode in range(3):
+            levels=_level_rows(source,mode,top_cap,offsets,0)
+            for offset,level in zip(offsets,levels):
+                self.assertGreaterEqual(level,1,(mode,offset))
+                self.assertLessEqual(level,100,(mode,offset))

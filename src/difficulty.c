@@ -7,6 +7,9 @@
 #include "script.h"
 #include "constants/battle.h"
 
+EWRAM_DATA static bool8 sHasNewGameDifficulty = FALSE;
+EWRAM_DATA static enum DifficultyLevel sNewGameDifficulty = 0;
+
 enum DifficultyLevel GetCurrentDifficultyLevel(void)
 {
     u16 difficulty;
@@ -33,11 +36,24 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 
-// Hard plays the roster exactly as authored against the cap. Medium and Easy
-// stagger it down by one and six levels. Facilities use the same reduction
-// against their own base, so the three modes stay in step everywhere.
-// It never changes trainer AI: the player is meant to experiment with the
-// same authored teams and the same opponents at different level gaps.
+// A pending New Game choice must not change the loaded save when the player
+// cancels the introduction. Consume it only after the new game's reset begins.
+void SetNewGameDifficultyLevel(enum DifficultyLevel difficulty)
+{
+    sNewGameDifficulty = min(difficulty, DIFFICULTY_HARD);
+    sHasNewGameDifficulty = TRUE;
+}
+
+enum DifficultyLevel ConsumeNewGameDifficultyLevel(void)
+{
+    enum DifficultyLevel difficulty = sHasNewGameDifficulty
+        ? sNewGameDifficulty : GetCurrentDifficultyLevel();
+    sHasNewGameDifficulty = FALSE;
+    return difficulty;
+}
+
+// Facilities (Circuit, Tent, Trainer Hill) lower their own fixed base by a
+// flat number of levels. Campaign trainers use the lead scaling below.
 u8 GetTrainerLevelReduction(void)
 {
     return GetTrainerLevelReductionFor(GetCurrentDifficultyLevel());
@@ -53,16 +69,43 @@ u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty)
         return 3;
     case DIFFICULTY_HARD:
     default:
-        return 2;
+        return 0;
     }
+}
+
+// Hard fights at the full authored lead over the campaign cap (offset + 2).
+// Medium and Easy keep only a share of each opponent's lead, so the gap
+// between modes follows the size of the fight's spike: a rival eight levels
+// over the cap at cap 14 and an Elite sixteen over at cap 80 both shrink in
+// proportion, rather than losing the same flat number of levels. Opponents
+// at or below the cap are the same in every mode. Teams, strategy and the
+// shared planner never change between modes.
+u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty)
+{
+    switch (difficulty)
+    {
+    case DIFFICULTY_EASY:
+        return 25;
+    case DIFFICULTY_NORMAL:
+        return 60;
+    case DIFFICULTY_HARD:
+    default:
+        return 100;
+    }
+}
+
+u8 GetCampaignTrainerLevelFor(enum DifficultyLevel difficulty, s16 offset)
+{
+    s32 lead = offset + 2;
+    if (lead > 0)
+        lead = (lead * GetTrainerLevelLeadPercentFor(difficulty) + 50) / 100;
+    s32 level = (s32)GetCurrentLevelCap() + lead;
+    return max(1, min(MAX_LEVEL, level));
 }
 
 u8 GetCampaignTrainerLevel(s16 offset)
 {
-    // Authoring uses Normal. Opponents may exceed level 100; 255 is the
-    // existing native u8 battle-level representation, not a difficulty policy.
-    s32 level = (s32)GetCurrentLevelCap() + offset + 2 - GetTrainerLevelReduction();
-    return max(1, min(255, level));
+    return GetCampaignTrainerLevelFor(GetCurrentDifficultyLevel(), offset);
 }
 
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)
@@ -100,37 +143,24 @@ enum DifficultyLevel GetTrainerDifficultyLevel(u16 trainerId)
 
 void Script_IncreaseDifficulty(void)
 {
-    enum DifficultyLevel currentDifficulty;
-
-    if (!B_VAR_DIFFICULTY)
-        return;
-
-    currentDifficulty = GetCurrentDifficultyLevel();
-
-    currentDifficulty++;
-
+#if TESTING || EC_HEADLESS_FIXTURES
     Script_RequestEffects(SCREFF_V1);
     Script_RequestWriteVar(B_VAR_DIFFICULTY);
-
-    SetCurrentDifficultyLevel(currentDifficulty);
+    SetCurrentDifficultyLevel(min(GetCurrentDifficultyLevel() + 1, DIFFICULTY_HARD));
+#endif
 }
 
 void Script_DecreaseDifficulty(void)
 {
-    enum DifficultyLevel currentDifficulty;
-
-    if (!B_VAR_DIFFICULTY)
-        return;
-
-    currentDifficulty = GetCurrentDifficultyLevel();
-
-    if (!currentDifficulty)
-        return;
-
-    Script_RequestEffects(SCREFF_V1);
-    Script_RequestWriteVar(B_VAR_DIFFICULTY);
-
-    SetCurrentDifficultyLevel(--currentDifficulty);
+#if TESTING || EC_HEADLESS_FIXTURES
+    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+    if (difficulty > DIFFICULTY_EASY)
+    {
+        Script_RequestEffects(SCREFF_V1);
+        Script_RequestWriteVar(B_VAR_DIFFICULTY);
+        SetCurrentDifficultyLevel(difficulty - 1);
+    }
+#endif
 }
 
 void Script_GetDifficulty(void)
@@ -143,8 +173,13 @@ void Script_SetDifficulty(struct ScriptContext *ctx)
 {
     enum DifficultyLevel desiredDifficulty = ScriptReadByte(ctx);
 
+    // Release scripts cannot change the difficulty of an existing run. Still
+    // consume the operand so legacy script bytecode advances correctly.
+#if TESTING || EC_HEADLESS_FIXTURES
     Script_RequestEffects(SCREFF_V1);
     Script_RequestWriteVar(B_VAR_DIFFICULTY);
-
     SetCurrentDifficultyLevel(desiredDifficulty);
+#else
+    (void)desiredDifficulty;
+#endif
 }

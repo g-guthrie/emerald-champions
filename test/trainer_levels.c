@@ -11,7 +11,43 @@
 #include "constants/opponents.h"
 #include "trainer_util.h"
 
-TEST("EC trainer levels: wide offsets survive creation, Mega stats and both opponent owners")
+TEST("EC trainer levels: modes scale the lead over the shared cap and Hard remains capped at 100")
+{
+    enum DifficultyLevel oldDifficulty = GetCurrentDifficultyLevel();
+    bool32 wasChampion = FlagGet(FLAG_IS_CHAMPION);
+    FlagSet(FLAG_IS_CHAMPION);
+    // Offset 0 is a two-level lead: Hard keeps it, Medium and Easy keep one.
+    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
+    EXPECT_EQ(GetCampaignTrainerLevel(0), 86);
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
+    EXPECT_EQ(GetCampaignTrainerLevel(0), 86);
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    EXPECT_EQ(GetCampaignTrainerLevel(0), 87);
+    EXPECT_EQ(GetCampaignTrainerLevel(20), 100);
+    EXPECT_EQ(GetCurrentLevelCap(), 85);
+    if (!wasChampion)
+        FlagClear(FLAG_IS_CHAMPION);
+    SetCurrentDifficultyLevel(oldDifficulty);
+}
+
+TEST("EC trainer levels: creation and cached level writes cannot exceed 100")
+{
+    struct Pokemon mon;
+    u8 invalidLevel = 255;
+    CreateMon(&mon, SPECIES_GARCHOMP, invalidLevel, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), MAX_LEVEL);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_EXP),
+        gExperienceTables[gSpeciesInfo[SPECIES_GARCHOMP].growthRate][MAX_LEVEL]);
+    SetMonData(&mon, MON_DATA_LEVEL, &invalidLevel);
+    EXPECT_EQ(mon.level, MAX_LEVEL);
+    // A legacy or corrupt cache is normalized by the ordinary EXP/stat path.
+    mon.level = invalidLevel;
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), MAX_LEVEL);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(mon.level, MAX_LEVEL);
+}
+
+TEST("EC trainer levels: offsets cap at 100 through creation and Mega stats for both opponents")
 {
     static const struct TrainerMon mons[] = {
         {.species = SPECIES_GARCHOMP, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = 50,
@@ -21,8 +57,9 @@ TEST("EC trainer levels: wide offsets survive creation, Mega stats and both oppo
          .gender = TRAINER_MON_RANDOM_GENDER, .moves = {MOVE_SEISMIC_TOSS}},
         {.species = SPECIES_EEVEE, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = -20,
          .gender = TRAINER_MON_RANDOM_GENDER},
+        {.species = SPECIES_EEVEE, .lvl = 255, .gender = TRAINER_MON_RANDOM_GENDER},
     };
-    static const struct Trainer trainer = {.party = mons, .partySize = 3};
+    static const struct Trainer trainer = {.party = mons, .partySize = 4};
     u32 oldFlags = gBattleTypeFlags;
     bool32 wasChampion = FlagGet(FLAG_IS_CHAMPION);
     enum DifficultyLevel oldDifficulty = GetCurrentDifficultyLevel();
@@ -36,30 +73,26 @@ TEST("EC trainer levels: wide offsets survive creation, Mega stats and both oppo
     {
         struct Pokemon *party = gParties[owners[i]];
         CreateNPCTrainerPartyFromTrainer(party, &trainer);
-        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 134);
-        EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 234);
-        EXPECT_EQ(GetMonData(&party[2], MON_DATA_LEVEL), 64);
+        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 100);
+        EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 100);
+        EXPECT_EQ(GetMonData(&party[2], MON_DATA_LEVEL), 67);
+        EXPECT_EQ(GetMonData(&party[3], MON_DATA_LEVEL), 100);
         EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
         EXPECT_EQ(GetMonData(&party[1], MON_DATA_MOVE1), MOVE_SEISMIC_TOSS);
         u32 exp = GetMonData(&party[0], MON_DATA_EXP);
         u32 attack = GetMonData(&party[0], MON_DATA_ATK);
         SetMonData(&party[0], MON_DATA_SPECIES, &mega);
         CalculateMonStats(&party[0]);
-        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 134);
+        EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 100);
         EXPECT_EQ(GetMonData(&party[0], MON_DATA_EXP), exp);
         EXPECT_GT(GetMonData(&party[0], MON_DATA_ATK), attack);
     }
-    EXPECT_EQ(GetCampaignTrainerLevel(254), 255);
+    EXPECT_EQ(GetCampaignTrainerLevel(254), 100);
     EXPECT_EQ(GetCampaignTrainerLevel(-254), 1);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    EXPECT_EQ(GetCampaignTrainerLevel(50), 135);
+    EXPECT_EQ(GetCampaignTrainerLevel(50), 100);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignTrainerLevel(50), 129);
-    // A transient opponent level must not leak into saved player progression.
-    gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_OPPONENT_A][0];
-    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
-    ZeroPlayerPartyMons();
+    EXPECT_EQ(GetCampaignTrainerLevel(50), 98);
     ZeroEnemyPartyMons();
     if (!wasChampion)
         FlagClear(FLAG_IS_CHAMPION);
@@ -146,5 +179,25 @@ TEST("EC trainer levels: routine reduction floors at one and does not affect par
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_LEVEL), 5);
     }
     ZeroEnemyPartyMons();
+    SetCurrentDifficultyLevel(oldDifficulty);
+}
+
+TEST("EC caps: every difficulty shares the player cap while opponents scale their lead")
+{
+    bool32 wasChampion = FlagGet(FLAG_IS_CHAMPION);
+    enum DifficultyLevel oldDifficulty = GetCurrentDifficultyLevel();
+    const enum DifficultyLevel modes[] = {DIFFICULTY_EASY, DIFFICULTY_NORMAL, DIFFICULTY_HARD};
+    // Offset 3 is a five-level lead: Easy keeps 25%, Medium 60%, Hard all.
+    const u32 opponents[] = {86, 88, 90};
+    FlagSet(FLAG_IS_CHAMPION);
+    for (u32 i = 0; i < ARRAY_COUNT(modes); i++)
+    {
+        SetCurrentDifficultyLevel(modes[i]);
+        EXPECT_EQ(GetCurrentLevelCap(), 85);
+        EXPECT_EQ(GetPlayerLevelCapForSpecies(SPECIES_MEWTWO), 85);
+        EXPECT_EQ(GetCampaignTrainerLevel(3), opponents[i]);
+    }
+    if (!wasChampion)
+        FlagClear(FLAG_IS_CHAMPION);
     SetCurrentDifficultyLevel(oldDifficulty);
 }

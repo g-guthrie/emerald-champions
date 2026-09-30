@@ -16,7 +16,7 @@ battle_frontier_boundary: every live Frontier challenge desk enters the single e
 
 DESIGN THESIS
 Every campaign battle is a bespoke, legal, readable puzzle. The player receives competitive Pokemon, moves, abilities, natures, EVs, and free ordinary held items; difficulty comes from decisions rather than grinding.
-All campaign trainers use the live chapter cap plus their authored offset on Normal; Hard adds 2 and Easy subtracts 2, represented in the native 1..255 battle-level range; no level-100 opponent ceiling. Gyms and the opening doubles are included. Teams and expert AI stay identical across difficulty settings.
+All campaign trainers fight at the live chapter cap plus a lead of their authored offset + 2: Hard keeps the whole lead, Medium 60% and Easy 25% (src/difficulty.c), bounded to level 100; the player's cap is the same on every difficulty. Gyms and the opening doubles are included. Teams and strategy stay identical across difficulty settings; Hard's AI also knows the player's full team from the start.
 Mega Evolution is the only selectable gimmick. Player Mega access begins with Steven's post-Brawly bracelet/Aerodactylite handoff. Roxanne's explicitly authored Mega Aerodactyl is the earlier opponent-only introduction. Primals remain approved automatic forms.
 
 STATIC SOURCE AUDIT — NOT FULL PLAYTEST ACCEPTANCE

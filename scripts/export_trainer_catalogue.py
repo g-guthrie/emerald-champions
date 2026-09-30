@@ -22,15 +22,13 @@ STATS = ('HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe')
 PARTY = 'src/data/trainers.party'
 
 
-WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
 
 
-def difficulty_offsets():
-    """Levels below Hard for Medium and Easy, read from GetTrainerLevelReductionFor."""
-    body = (ROOT / 'src/difficulty.c').read_text().split('u8 GetTrainerLevelReductionFor(', 1)[1].split('\n}', 1)[0]
+def difficulty_lead_percents():
+    """Share of Hard's level lead kept by Medium and Easy, read from GetTrainerLevelLeadPercentFor."""
+    body = (ROOT / 'src/difficulty.c').read_text().split('u8 GetTrainerLevelLeadPercentFor(', 1)[1].split('\n}', 1)[0]
     returns = dict(re.findall(r'case (DIFFICULTY_\w+):\s*return (\d+);', body))
-    hard = int(re.search(r'default:\s*return (\d+);', body)[1])
-    return int(returns['DIFFICULTY_NORMAL']) - hard, int(returns['DIFFICULTY_EASY']) - hard
+    return int(returns['DIFFICULTY_NORMAL']), int(returns['DIFFICULTY_EASY'])
 
 
 def read(path):
@@ -279,8 +277,8 @@ def main():
     w.heading('1. FINDINGS, AUTHORING COMPARISON, AND READING GUIDE')
     findings=[
         f'LOADOUT AGREEMENT: all {len(branches)} retained authored variants and {checked} Pokemon slots match native source for species, order, items, abilities, natures, EVs, IVs, moves, friendship and level offsets. Separate generator verification checks generated encounter/AI tables. Agreement is not proof that every tactical idea works or every battle has been played.',
-        f'LEVELS: actual campaign level = live player cap + authored offset + difficulty adjustment, with a floor of 1 and the existing native byte representation bound of 255. Only the Champions Circuit goes past 100. Hard plays the roster as authored against the cap; Medium is {WORDS[difficulty_offsets()[0]]} level(s) below and Easy {WORDS[difficulty_offsets()[1]]}. The cap ladder is Inclement Emerald Strict, badge-indexed, with one extra step at the Groudon awakening: 14, 20, 30, 40, 45, 55, 60, 65, 70, 80, then 85 as Champion, so no campaign trainer passes 100 on Hard. The printed absolute Level in trainers.party is a Hard-difficulty preview rendered against the authored strict_cap, not a stored encounter level.',
-        'LEVEL LIMIT REPAIRED: this audit exposed the old signed four-bit (-8..+7) offset restriction and level-100 clamp. Trainer offsets now use signed 16-bit storage and authoring accepts -254..+254. Trainer creation uses bounded EXP plus transient opponent levels; stat recalculation preserves overlevel trainer opponents, including Mega forms and either opponent owner. The native battle/controller level fields remain one byte (1..255); this is a technical representation bound, not a prescribed difficulty cap. No blanket party-level increase was applied.',
+        f'LEVELS: actual campaign level = live cap + a lead of authored offset + 2, bounded to 1..100. Hard keeps the whole lead; Medium keeps {difficulty_lead_percents()[0]}% and Easy {difficulty_lead_percents()[1]}% of it (rounded), so a member at or below the cap is the same in every mode. The player shares the same cap on every difficulty. Printed trainer levels are bounded previews; native progression controls actual battle levels.',
+        'LEVEL LIMIT: every Pokemon is limited to 100. Wide signed offsets are authoring inputs; native trainer creation and ordinary cached-level/stat paths enforce the same ceiling through Mega and other form changes.',
         'DWAYNE IS AN EXPERIMENT: the exported working tree currently uses Magmar, Jynx, Electabuzz and Monferno. The original Magby/Smoochum/Elekid/Monferno battle was won in four turns with zero faints. The evolved-team retest is paused mid-battle; it is not an accepted final composition or completed difficulty benchmark. The user clarified that level tuning should preserve deliberate low-stat themes.',
         'RUNTIME RIVALS: native Hoenn trainer blocks are seeds. Nonmatching regional starters replace the first Hoenn starter slot using the selected generation and unchosen starter index, preserving its level and using the matching evolution stage. Appendix 5 gives the complete alternative sets; printing only the seeds would be incomplete.',
         'PROCEDURAL OPPONENTS: the Champions Circuit, live Battle Tents and exhibition provider generate teams. There is no finite list of fixed six-Pokemon parties for them. Appendix 7 includes every native variant/template plus the exact local generator source, rather than inventing deterministic teams.',
@@ -300,7 +298,7 @@ def main():
         w.prose(f'{pretty(token)}: {len(owners)} variants. ' + ', '.join(owners))
     w.prose('These counts locate design-review work; an ability or item alone is not proof of a supported activation engine. In particular, Justified users are not automatically Beat Up teams, and Perish Song users need their actual trap/protection plan examined.')
     w.line()
-    w.prose('Focused native validation: wide trainer offsets produce levels 150 and 250, preserve levels and bounded EXP through Mega stat recalculation for both opponent owners, and leave player progression capped. Existing native Circuit controller tests also pass level-255 Seismic Toss damage and a level-150 Mega transformation. These are mechanic regressions, not difficulty simulations or new earned wins.')
+    w.prose('Native trainer-level regressions cover the level-100 ceiling through creation, cached writes and Mega recalculation for both opponent owners. These checks establish mechanics; they do not certify campaign difficulty or stage-legal wins.')
     w.heading('2. RETAINED CAMPAIGN INDEX')
     for b in branches:
         h=parties[b.trainer]['header'];m=meta[b.encounter]
@@ -374,7 +372,7 @@ def main():
     for ref in partnerrefs:w.prose(ref)
     w.line(read('src/data/battle_partners.party'))
     w.prose('Inferred ally plan: Metagross uses Assault Vest bulk and priority; Skarmory supplies Tailwind and Body Press pressure; Aggron attacks with Rock Head Head Smash and an Air Balloon. These are source-based observations, not verified ally behavior.')
-    w.prose('The Birch rescue is a scripted wild double battle, not a trainer ID: level-2 Poochyena and Zigzagoon with 31 IVs, their natural level-up moves and no held items. It is not part of the combat-party count.')
+    w.prose('The Birch rescue is a scripted wild double battle, not a trainer ID: level-2 Poochyena and Zigzagoon with 31 IVs and their natural level-up moves. The factory starts them empty-handed; native controller initialization then rolls their species wild held items. It is not part of the combat-party count.')
     w.heading('7. PROCEDURAL CIRCUIT / TENT / EXHIBITION OPPONENTS')
     w.prose('Locations: live Battle Frontier challenge desks feed the Champions Circuit; Battle Tent challenge desks use the same competition generator at their current Tent cap. Exhibition generation uses its supplied fixed level. Exact entrypoint script references are listed below. Each generated party has six Pokemon, max IVs, generated or explicitly authored EV/nature/item/ability/moves, family/role/dependency constraints and lead ordering. There is no fixed named party per opponent. Every available variant and template is listed below; full generating rules follow to specify fields decided at runtime.')
     for path in sorted([*(ROOT/'data/maps').rglob('scripts.inc'),*(ROOT/'data/scripts').rglob('*.inc')]):

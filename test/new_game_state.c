@@ -126,15 +126,21 @@ TEST("New game: clears added campaign progress while preserving chosen identity 
     EXPECT_EQ((u32)gSaveBlock2Ptr->optionsWindowFrameType, 3);
 }
 
-TEST("New game: keeps the difficulty chosen on the title screen's Option menu")
+TEST("New game: commits the chosen run difficulty only when resetting the run")
 {
     enum DifficultyLevel saved = GetCurrentDifficultyLevel();
     const enum DifficultyLevel choices[] = {DIFFICULTY_EASY, DIFFICULTY_HARD, DIFFICULTY_NORMAL};
     for (u32 i = 0; i < ARRAY_COUNT(choices); i++)
     {
-        SetCurrentDifficultyLevel(choices[i]);
+        SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
+        SetNewGameDifficultyLevel(choices[i]);
+        EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_NORMAL);
         NewGameInitData();
         EXPECT_EQ(GetCurrentDifficultyLevel(), choices[i]);
+        // No stale pending choice can overwrite a subsequent fixture reset.
+        SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+        NewGameInitData();
+        EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_HARD);
     }
     SetCurrentDifficultyLevel(saved);
 }

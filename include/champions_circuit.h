@@ -5,8 +5,7 @@
 
 struct Pokemon;
 #define CHAMPIONS_CIRCUIT_BASE_LEVEL 100
-// Transient opponent levels fit both party and battle-controller byte fields.
-#define CHAMPIONS_CIRCUIT_MAX_LEVEL 255
+#define CHAMPIONS_CIRCUIT_MAX_LEVEL 100
 
 // ChampionsCircuitCanEnter results. The desk script in
 // data/maps/BattleFrontier_BattleTowerLobby/scripts.inc uses these numbers.
@@ -14,7 +13,6 @@ struct Pokemon;
 #define CIRCUIT_ENTRY_OK         1
 #define CIRCUIT_ENTRY_PARTY_RULE 2 // More than one Legendary, Ultra Beast or Paradox.
 
-bool32 IsChampionsCircuitOpponent(const struct Pokemon *mon);
 u8 GetChampionsCircuitOpponentLevel(u16 wins, u32 slot);
 bool32 IsChampionsCircuitBattle(void);
 void ChampionsCircuitCanEnter(void);
