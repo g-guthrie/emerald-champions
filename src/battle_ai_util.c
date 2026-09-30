@@ -7082,19 +7082,78 @@ static u32 AI_AttackingStatsUsed(enum BattlerId battler)
     return used;
 }
 
+#define AI_HITS_DEFENSE   (1u << 0)
+#define AI_HITS_SPDEFENSE (1u << 1)
+
+// Which of its target's defences a damaging move is dealt against.
+static u32 AI_DefensesHitByMove(enum Move move)
+{
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsBattleMoveStatus(move) || IsFixedDamageMove(move))
+        return 0;
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_PHOTON_GEYSER:
+    case EFFECT_SHELL_SIDE_ARM:
+        return AI_HITS_DEFENSE | AI_HITS_SPDEFENSE;
+    case EFFECT_PSYSHOCK:
+        return AI_HITS_DEFENSE;
+    default:
+        return IsBattleMovePhysical(move) ? AI_HITS_DEFENSE : AI_HITS_SPDEFENSE;
+    }
+}
+
+// Which foe defences this side can still hit with anything: the moves of each
+// member still standing, on the field or in reserve. A human ally's moves are
+// not the AI's to read, and Wonder Room swaps the two, so either counts as
+// hitting both.
+static u32 AI_SideDefensesHit(enum BattlerId battlerAtk)
+{
+    struct Pokemon *counted = NULL;
+    u32 hit = 0;
+    if (gFieldStatuses & STATUS_FIELD_WONDER_ROOM)
+        return AI_HITS_DEFENSE | AI_HITS_SPDEFENSE;
+    for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+    {
+        if (!IsBattlerAlly(battlerAtk, ally))
+            continue;
+        if (!BattlerHasAi(ally))
+            return AI_HITS_DEFENSE | AI_HITS_SPDEFENSE;
+        if (IsBattlerAlive(ally))
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+                hit |= AI_DefensesHitByMove(gBattleMons[ally].moves[i]);
+        struct Pokemon *party = GetBattlerParty(ally);
+        if (party == counted)
+            continue;
+        counted = party;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            struct Pokemon *mon = &party[slot];
+            if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG)
+             || GetMonData(mon, MON_DATA_HP) == 0)
+                continue;
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+                hit |= AI_DefensesHitByMove(GetMonData(mon, MON_DATA_MOVE1 + i));
+        }
+    }
+    return hit;
+}
+
 // A foe-targeting stat-drop move that the engine performs but that changes
-// nothing the target can use: every stat it moves is an Attack the target
-// never attacks with, a Sp. Atk it never attacks with, or a stage already at
-// the floor. Defense, Sp. Def, Speed, accuracy and evasion always count (the
-// AI's side, turn order and later turns can use them). A moveset the AI has
-// not fully seen, or an Eject Pack the drop would fire, is never judged.
+// nothing anyone can use: every stat it moves is an Attack the target never
+// attacks with, a Sp. Atk it never attacks with, a Defense or Sp. Def nothing
+// left on this side can hit, or a stage already at the floor. Skitty kept
+// Faking Tears after Swirlix, its side's only special attacker, had fainted.
+// Speed, accuracy and evasion always count (turn order and later turns use
+// them). A target's attacking stats are judged only from a moveset the AI has
+// fully seen, and a drop that would fire an Eject Pack is never judged.
 static bool32 AI_IsStatDropUselessOn(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
     if (!IsBattlerAlive(battlerDef) || IsBattlerAlly(battlerAtk, battlerDef)
-     || !AI_KnowsWholeMoveset(battlerDef)
      || gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_EJECT_PACK)
         return FALSE;
-    u32 used = AI_AttackingStatsUsed(battlerDef);
+    u32 used = AI_KnowsWholeMoveset(battlerDef) ? AI_AttackingStatsUsed(battlerDef) : AI_USES_ATTACK | AI_USES_SPATK;
+    u32 hit = 0;
+    bool32 hitKnown = FALSE;
     bool32 changesAny = FALSE;
     for (u32 effectIndex = 0; effectIndex < GetMoveAdditionalEffectCount(move); effectIndex++)
     {
@@ -7110,6 +7169,16 @@ static bool32 AI_IsStatDropUselessOn(enum BattlerId battlerAtk, enum BattlerId b
                 continue;
             if (stat == STAT_SPATK && !(used & AI_USES_SPATK))
                 continue;
+            if (stat == STAT_DEF || stat == STAT_SPDEF)
+            {
+                if (!hitKnown)
+                {
+                    hit = AI_SideDefensesHit(battlerAtk);
+                    hitKnown = TRUE;
+                }
+                if (!(hit & (stat == STAT_DEF ? AI_HITS_DEFENSE : AI_HITS_SPDEFENSE)))
+                    continue;
+            }
             if (gBattleMons[battlerDef].statStages[stat] <= MIN_STAT_STAGE)
                 continue;
             return FALSE;
@@ -7487,6 +7556,10 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
             || gBattleMons[battlerAtk].hp <= max(1, GetNonDynamaxMaxHP(battlerAtk) / 4);
     case EFFECT_FOCUS_ENERGY:
         return gBattleMons[battlerAtk].volatiles.focusEnergy || gBattleMons[battlerAtk].volatiles.dragonCheer;
+    case EFFECT_INGRAIN:
+        return gBattleMons[battlerAtk].volatiles.root;
+    case EFFECT_AQUA_RING:
+        return gBattleMons[battlerAtk].volatiles.aquaRing;
     case EFFECT_HAZE:
         return AI_HazeResetsNothing(battlerAtk);
     case EFFECT_FAIRY_LOCK:
@@ -7621,6 +7694,9 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     case EFFECT_NIGHTMARE:
         return gBattleMons[battlerDef].volatiles.nightmare
             || (!(gBattleMons[battlerDef].status1 & STATUS1_SLEEP) && abilityDef != ABILITY_COMATOSE);
+    case EFFECT_CURSE:
+        // Only a Ghost's Curse is aimed at a foe; a second one fails.
+        return gBattleMons[battlerDef].volatiles.cursed;
     case EFFECT_STAT_CHANGE:
         return foe && !AI_CanAnyStatChange(battlerAtk, battlerDef, move);
     default:

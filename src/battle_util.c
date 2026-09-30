@@ -2107,6 +2107,12 @@ static void ForewarnChooseMove(enum BattlerId battler)
 
 bool32 ChangeTypeBasedOnTerrain(enum BattlerId battler)
 {
+    // Without terrain Mimicry keeps the species' own types: they are what a
+    // Pokemon enters with, and TryToRevertMimicryAndFlags restores them when
+    // a terrain ends. There is nothing to change or announce.
+    if (gFieldTimers.terrain == B_TERRAIN_NONE)
+        return FALSE;
+
     enum Type battlerType = gBattleTerrainInfo[gFieldTimers.terrain].type;
 
     SET_BATTLER_TYPE(battler, battlerType);

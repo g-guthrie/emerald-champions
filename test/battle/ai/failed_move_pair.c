@@ -1,5 +1,8 @@
 #include "global.h"
 #include "test/battle.h"
+#include "battle_ai_util.h"
+
+extern void (*gTestAiTurnSetupHook)(void);
 
 // Moves the doubles AI chose that the battle engine then refused: a side
 // condition already up, a Choice lock into an immune target, a reflection
@@ -582,5 +585,119 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: a self-boost scores as a failure on a bo
             TURN { MOVE(player, MOVE_PROTECT); SCORE_EQ_VAL(opponent, MOVE_IRON_DEFENSE, 0); }
         else
             TURN { MOVE(player, MOVE_PROTECT); SCORE_GT_VAL(opponent, MOVE_IRON_DEFENSE, 0); }
+    }
+}
+
+// E0001 a05 turn 4 as it stood: Lucario seeded the turn before, and Electric
+// Terrain keeping Spore off both grounded foes.
+static void SeededLucarioBoard(void)
+{
+    gBattleMons[B_BATTLER_0].volatiles.leechSeed = LEECHSEEDED_BY(B_BATTLER_3);
+    gFieldTimers.terrain = B_TERRAIN_ELECTRIC;
+    gFieldTimers.terrainTimer = 3;
+}
+
+// Brendan's Shroomish aimed Leech Seed at a Naganadel that its faster Taillow
+// was knocking out. The Seed then fell, as native targeting has it, on the
+// Lucario beside it, which it had seeded the turn before: a sure failure the
+// pair chose together.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Leech Seed is not aimed where the partner's knockout hands it to a seeded foe")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_LUCARIO) { Level(14); Speed(40); Moves(MOVE_EXTREME_SPEED, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_ICE_PUNCH); }
+        PLAYER(SPECIES_NAGANADEL) { Level(14); HP(1); Speed(45); Moves(MOVE_SLUDGE_BOMB, MOVE_HEAT_WAVE, MOVE_DRAGON_PULSE, MOVE_THUNDERBOLT); }
+        OPPONENT(SPECIES_TAILLOW) {
+            Level(20); Speed(60); Item(ITEM_TOXIC_ORB); Ability(ABILITY_GUTS); Nature(NATURE_JOLLY);
+            Moves(MOVE_FACADE, MOVE_BRAVE_BIRD, MOVE_QUICK_ATTACK, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_SHROOMISH) {
+            Level(21); Speed(20); Item(ITEM_EVIOLITE); Ability(ABILITY_EFFECT_SPORE); Nature(NATURE_BOLD);
+            Moves(MOVE_SPORE, MOVE_LEECH_SEED, MOVE_GIGA_DRAIN, MOVE_PROTECT);
+        }
+        gTestAiTurnSetupHook = SeededLucarioBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_EXTREME_SPEED, target: opponentLeft);
+            MOVE(playerRight, MOVE_SLUDGE_BOMB, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_LEECH_SEED);
+        }
+    }
+}
+
+// E0005: Tiana's Skitty kept Faking Tears after Swirlix, her only special
+// attacker, had fainted. Eevee and Buneary hit Defense, so a Sp. Def drop
+// buys nothing; a Defense drop still does.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a Sp. Def drop is not spent when nothing left on the side attacks Sp. Def")
+{
+    u32 swirlixHp;
+    PARAMETRIZE { swirlixHp = 0; }
+    PARAMETRIZE { swirlixHp = 40; }
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_UMBREON) { Level(20); Speed(30); Moves(MOVE_FOUL_PLAY, MOVE_WISH, MOVE_PROTECT, MOVE_YAWN); }
+        PLAYER(SPECIES_SYLVEON) { Level(20); Speed(35); Moves(MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_CALM_MIND, MOVE_WISH); }
+        OPPONENT(SPECIES_SKITTY) {
+            Level(20); Speed(60); Item(ITEM_FOCUS_SASH); Ability(ABILITY_WONDER_SKIN); Nature(NATURE_JOLLY);
+            Moves(MOVE_FAKE_OUT, MOVE_FAKE_TEARS, MOVE_HELPING_HAND, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_EEVEE) {
+            Level(21); Speed(50); Item(ITEM_EVIOLITE); Ability(ABILITY_ADAPTABILITY); Nature(NATURE_ADAMANT);
+            Moves(MOVE_QUICK_ATTACK, MOVE_DOUBLE_EDGE, MOVE_WISH, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_SWIRLIX) {
+            Level(20); HP(swirlixHp); Speed(40); Item(ITEM_SITRUS_BERRY); Ability(ABILITY_UNBURDEN); Nature(NATURE_MODEST);
+            Moves(MOVE_DRAINING_KISS, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_BUNEARY) {
+            Level(20); Speed(55); Item(ITEM_FLAME_ORB); Ability(ABILITY_KLUTZ); Nature(NATURE_JOLLY);
+            Moves(MOVE_FAKE_OUT, MOVE_SWITCHEROO, MOVE_ENCORE, MOVE_DRAIN_PUNCH);
+        }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT); }
+        if (swirlixHp == 0)
+            TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_CALM_MIND); NOT_EXPECT_MOVE(opponentLeft, MOVE_FAKE_TEARS); }
+        else
+            TURN { MOVE(playerLeft, MOVE_FOUL_PLAY, target: opponentRight); MOVE(playerRight, MOVE_CALM_MIND); }
+    } THEN {
+        EXPECT_EQ((bool32)AI_IsFoeStatDropUseless(B_BATTLER_1, B_BATTLER_2, MOVE_FAKE_TEARS), swirlixHp == 0);
+        EXPECT(!AI_IsFoeStatDropUseless(B_BATTLER_1, B_BATTLER_2, MOVE_SCREECH));
+    }
+}
+
+static void RootedRingedCursedBoard(void)
+{
+    gBattleMons[B_BATTLER_1].volatiles.root = TRUE;
+    gBattleMons[B_BATTLER_1].volatiles.aquaRing = TRUE;
+    gBattleMons[B_BATTLER_0].volatiles.cursed = TRUE;
+}
+
+// A second Ingrain, Aqua Ring or Ghost Curse on the same body fails in view.
+AI_SINGLE_BATTLE_TEST("EC failed moves: Ingrain, Aqua Ring and a Ghost's Curse are not set again")
+{
+    bool32 set;
+    PARAMETRIZE { set = FALSE; }
+    PARAMETRIZE { set = TRUE; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_ALAKAZAM) { Speed(30); Moves(MOVE_CALM_MIND, MOVE_PROTECT); }
+        OPPONENT(SPECIES_DUSKNOIR) { Speed(20); Moves(MOVE_INGRAIN, MOVE_AQUA_RING, MOVE_CURSE, MOVE_SHADOW_SNEAK); }
+        if (set)
+            gTestAiTurnSetupHook = RootedRingedCursedBoard;
+    } WHEN {
+        if (set)
+            TURN {
+                MOVE(player, MOVE_CALM_MIND);
+                SCORE_EQ_VAL(opponent, MOVE_INGRAIN, 0);
+                SCORE_EQ_VAL(opponent, MOVE_AQUA_RING, 0);
+                SCORE_EQ_VAL(opponent, MOVE_CURSE, 0);
+            }
+        else
+            TURN {
+                MOVE(player, MOVE_CALM_MIND);
+                SCORE_GT_VAL(opponent, MOVE_INGRAIN, 0);
+                SCORE_GT_VAL(opponent, MOVE_AQUA_RING, 0);
+                SCORE_GT_VAL(opponent, MOVE_CURSE, 0);
+            }
     }
 }

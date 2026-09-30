@@ -3917,6 +3917,25 @@ static bool32 PairBoostOutrun(enum BattlerId actor, const struct PairAction *act
     return FALSE;
 }
 
+// The share of a single-target status move aimed at a foe that reaches a
+// body it can affect. A target the turn has already removed hands the move to
+// its partner, as native targeting does, and where that partner is certain to
+// refuse it the move lands on nothing: Shroomish aimed Leech Seed at the
+// Naganadel its Taillow knocked out first, and the Seed fell on the Lucario it
+// had seeded the turn before.
+static u32 PairStatusLandingChance(enum BattlerId actor, const struct PairAction *action, const u32 *hp, const u32 *survival)
+{
+    enum BattlerId target = action->target;
+    if (target >= gBattlersCount || IsBattlerAlly(actor, target)
+     || AI_GetBattlerMoveTargetType(actor, action->executedMove) != TARGET_SELECTED)
+        return 100;
+    u32 standing = hp[target] ? survival[target] : 0;
+    enum BattlerId fallback = GetPartnerBattler(target);
+    if (standing < 100 && hp[fallback] && !AI_IsMoveCertainToFail(actor, fallback, action->executedMove))
+        return 100;
+    return standing;
+}
+
 static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *effectChance)
 {
     struct PairAction actions[MAX_BATTLERS_COUNT];
@@ -4188,7 +4207,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (statusReward && IsStatRaisingMove(move) && AI_GetBattlerMoveTargetType(actor, move) == TARGET_USER)
                 setupReward[actor] += statusReward;
             else if (statusReward)
-                score += statusReward * (s32)(survival[actor] * actionChance[actor] / 10000) / 100;
+                score += statusReward * (s32)(survival[actor] * actionChance[actor] / 10000) / 100
+                    * (s32)PairStatusLandingChance(actor, action, hp, survival) / 100;
         }
         if (effect == EFFECT_BELLY_DRUM)
         {
