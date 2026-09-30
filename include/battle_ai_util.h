@@ -9,6 +9,11 @@
 #define MIN_ROLL_PERCENTAGE DMG_ROLL_PERCENT_LO
 #define DMG_ROLL_PERCENTAGE ((MAX_ROLL_PERCENTAGE + MIN_ROLL_PERCENTAGE + 1) / 2) // Controls the damage roll the AI sees for the median roll. By default the 9th roll is seen
 
+// A held item the AI assumes but has not identified. This ordinary item has
+// no hold effect, Berry pocket or species tie: presence checks (Poltergeist,
+// Knock Off, Bestow) see a held item, and damage and effect checks see none.
+#define ITEM_AI_UNIDENTIFIED ITEM_STRANGE_SOUVENIR
+
 enum DamageRollType
 {
     DMG_ROLL_LOWEST,
@@ -120,12 +125,23 @@ enum MoveTarget AI_GetBattlerMoveTargetType(enum BattlerId battler, enum Move mo
 enum Ability AI_GetMoldBreakerSanitizedAbility(enum BattlerId battlerAtk, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectDef, enum Move move);
 u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveIndex, enum DamageCalcContext calcContext, struct AiLogicData *aiData);
 bool32 IsAiFlagPresent(u64 flag);
+bool32 IsAiFlagPresentAgainst(enum BattlerId battler, u64 flag);
+// Temporarily present earned loadouts to planners that read BattlePokemon
+// directly. Restore the returned token in LIFO order. Its low battler bits
+// identify the masked mons; snapshots live in EWRAM, outside the tiny stack.
+u32 AI_MaskUnknownBattlers(void);
+void AI_RestoreMaskedBattlers(u32 token);
+#if TESTING
+u32 AI_TestVisibilityDepth(void);
+#endif
 bool32 IsAiBattlerAware(enum BattlerId battlerId);
+bool32 AI_IsBattlerPlannedToSwitch(enum BattlerId battler);
 bool32 IsAiBattlerAssumingStab(enum BattlerId battlerId);
 bool32 IsAiBattlerAssumingStatusMoves(enum BattlerId battlerId);
 bool32 IsAiBattlerPredictingAbility(enum BattlerId battlerId);
 bool32 ShouldRecordStatusMove(enum Move move);
 void SaveBattlerData(enum BattlerId battlerId);
+enum Item AI_GetPerceivedItem(enum BattlerId battlerId);
 void SetBattlerData(enum BattlerId battlerId);
 void SetBattlerAiData(enum BattlerId battler, struct AiLogicData *aiData);
 void RestoreBattlerData(enum BattlerId battlerId);
@@ -393,6 +409,7 @@ s32 CountUsablePartyMons(enum BattlerId battlerId);
 s32 CountUsableSideMons(enum BattlerId battlerId);
 bool32 IsPartyFullyHealedExceptBattler(enum BattlerId battler);
 s32 GetAILastPartyIndex(enum BattlerId battler);
+bool32 AI_IsPartyMonKnown(enum BattlerId battler, u32 partyIndex);
 u32 GetActiveBattlerIds(enum BattlerId battler, enum BattlerId *battlerIn1, enum BattlerId *battlerIn2);
 bool32 IsPartyMonOnFieldOrChosenToSwitch(enum BattlerId battler, u32 partyIndex, enum BattlerId battlerIn1, enum BattlerId battlerIn2);
 bool32 IsPartyMonPlannedToBeSwitchedInByPartner(u32 partyIndex, enum BattlerId battler);

@@ -2478,18 +2478,21 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Piercing Drill"),
         .description = COMPOUND_STRING("Contact chips through shields."),
+        .aiRating = 6,
     },
 
     [ABILITY_DRAGONIZE] =
     {
         .name = _("Dragonize"),
         .description = COMPOUND_STRING("Normal moves turn Dragon."),
+        .aiRating = 8,
     },
 
     [ABILITY_EELEVATE] =
     {
         .name = _("Eelevate"),
         .description = COMPOUND_STRING("Levitate and Beast Boost."),
+        .aiRating = 8,
     },
 
     [ABILITY_314] =
@@ -2502,12 +2505,14 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Mega Sol"),
         .description = COMPOUND_STRING("Acts like under sun."),
+        .aiRating = 7,
     },
 
     [ABILITY_FIRE_MANE] =
     {
         .name = _("Fire Mane"),
         .description = COMPOUND_STRING("Ups Fire-type moves."),
+        .aiRating = 6,
     },
 
     [ABILITY_317] =
@@ -2520,6 +2525,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Spicy Spray"),
         .description = COMPOUND_STRING("Burns the foe when damaged."),
+        .aiRating = 6,
     },
 
     [ABILITY_BLITZ_BOXER] =

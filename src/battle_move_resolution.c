@@ -1387,6 +1387,7 @@ static enum CancelerResult CancelerMoveEffectFailureTarget(struct BattleCalcValu
         case EFFECT_POLTERGEIST:
             if (gBattleMons[battlerDef].item == ITEM_NONE)
             {
+                RecordEmptyHandBattle(battlerDef);
                 battleScript = BattleScript_ButItFailed;
             }
             else

@@ -16,6 +16,7 @@
 #include "battle_setup.h"
 #include "battle_z_move.h"
 #include "data.h"
+#include "difficulty.h"
 #include "debug.h"
 #include "event_data.h"
 #include "item.h"
@@ -30,6 +31,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
 #include "constants/items.h"
+#include "constants/party_menu.h"
 #include "constants/trainers.h"
 
 #if TESTING
@@ -307,7 +309,23 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
         else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
         else
+        {
             flags = GetTrainerAIFlagsFromId(trainerId);
+            // Information is the sole AI difference between campaign modes.
+            // The shared planner, prediction and authored strategy flags stay.
+            // Apply this to partners too: awareness flags are shared by the
+            // turn cache and would otherwise reveal the human's set to foes.
+            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+            {
+                const u64 scouting = AI_FLAG_OMNISCIENT | AI_FLAG_KNOW_OPPONENT_PARTY
+                    | AI_FLAG_ABILITY_OMNISCIENCE | AI_FLAG_ITEM_OMNISCIENCE | AI_FLAG_MOVE_OMNISCIENCE;
+                if (GetCurrentDifficultyLevel() == DIFFICULTY_HARD)
+                    flags |= AI_FLAG_OMNISCIENT | AI_FLAG_KNOW_OPPONENT_PARTY;
+                else
+                    flags &= ~scouting;
+            }
+        }
     }
 
     if (IsDoubleBattle() && flags != 0)
@@ -405,10 +423,12 @@ bool32 BattlerChooseNonMoveAction(void)
 
 void SetupAIPredictionData(enum BattlerId battler, enum SwitchType switchType)
 {
+    // Forecast this battler from what its foes could know, never its real set.
+    u32 visibility = AI_MaskUnknownBattlers();
     gAiLogicData->aiPredictionInProgress = TRUE;
 
     // Switch prediction
-    if (IsAiFlagPresent(AI_FLAG_PREDICT_SWITCH))
+    if (IsAiFlagPresentAgainst(battler, AI_FLAG_PREDICT_SWITCH))
     {
         enum SwitchType switchType = (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_RISKY) ? SWITCH_AFTER_KO : SWITCH_MID_BATTLE_OPTIONAL; // Risky AI switches aggressively even mid battle
         gAiLogicData->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, switchType);
@@ -418,7 +438,7 @@ void SetupAIPredictionData(enum BattlerId battler, enum SwitchType switchType)
     }
 
     // Move prediction
-    if (IsAiFlagPresent(AI_FLAG_PREDICT_MOVE))
+    if (IsAiFlagPresentAgainst(battler, AI_FLAG_PREDICT_MOVE))
     {
         gAiBattleData->chosenMoveIndex[battler] = BattleAI_ChooseMoveIndex(battler);
         gAiLogicData->predictedMove[battler] = gBattleMons[battler].moves[gAiBattleData->chosenMoveIndex[battler]];
@@ -426,10 +446,12 @@ void SetupAIPredictionData(enum BattlerId battler, enum SwitchType switchType)
     }
 
     gAiLogicData->aiPredictionInProgress = FALSE;
+    AI_RestoreMaskedBattlers(visibility);
 }
 
 void ComputeAiBattlerDecisions(enum BattlerId battler)
 {
+    u32 visibility = AI_MaskUnknownBattlers();
     gAiLogicData->aiCalcInProgress = TRUE;
     // Charge native setup, but not intervening UI/controller frames, against
     // this side's coordinated decision budget. The budget covers the complete
@@ -444,6 +466,7 @@ void ComputeAiBattlerDecisions(enum BattlerId battler)
     {
         AIDebugTimerEnd();
         gAiLogicData->aiCalcInProgress = FALSE;
+        AI_RestoreMaskedBattlers(visibility);
         return;
     }
 
@@ -473,6 +496,7 @@ void ComputeAiBattlerDecisions(enum BattlerId battler)
         AIDebugTimerEnd();
 
     gAiLogicData->aiCalcInProgress = FALSE;
+    AI_RestoreMaskedBattlers(visibility);
 }
 
 void ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
@@ -562,6 +586,26 @@ void AI_TrySwitchOrUseItem(enum BattlerId battler)
     BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, GetOppositeBattler(battler) << 8);
 }
 
+// The engine refused this AI's switch: a trap its plan missed. Nothing may
+// leave a trap, so drop the switch and choose a move for the turn instead;
+// the engine then asks for this battler's action again.
+bool32 AI_CancelRefusedSwitch(enum BattlerId battler)
+{
+    u32 partyAction = gBattleResources->bufferA[battler][1];
+    if (partyAction != PARTY_ACTION_CANT_SWITCH && partyAction != PARTY_ACTION_ABILITY_PREVENTS)
+        return FALSE;
+
+    gAiLogicData->shouldSwitch &= ~(1u << battler);
+    gAiLogicData->monToSwitchInId[battler] = PARTY_SIZE;
+    gBattleStruct->AI_monToSwitchIntoId[battler] = PARTY_SIZE;
+    gBattleStruct->monToSwitchIntoId[battler] = PARTY_SIZE;
+    u32 visibility = AI_MaskUnknownBattlers();
+    BattleAI_SetupAIData(0xF, battler);
+    gAiBattleData->chosenMoveIndex[battler] = BattleAI_ChooseMoveIndex(battler);
+    AI_RestoreMaskedBattlers(visibility);
+    return TRUE;
+}
+
 u32 BattleAI_ChooseMoveIndex(enum BattlerId battler)
 {
     SetAIUsingGimmick(battler, USE_GIMMICK);
@@ -637,7 +681,10 @@ void Ai_InitPartyStruct(void)
                     gAiPartyData->mons[trainer][monIndex].isFainted = TRUE;
 
                 if (isOmniscient || hasPartyKnowledge)
+                {
                     gAiPartyData->mons[trainer][monIndex].species = GetMonData(mon, MON_DATA_SPECIES);
+                    gAiPartyData->mons[trainer][monIndex].level = GetMonData(mon, MON_DATA_LEVEL);
+                }
 
                 if (isOmniscient || isAbilityOmniscient)
                     gAiPartyData->mons[trainer][monIndex].ability = GetMonAbility(mon);
@@ -713,8 +760,8 @@ void SetBattlerAiData(enum BattlerId battler, struct AiLogicData *aiData)
     enum HoldEffect holdEffect;
 
     ability = aiData->abilities[battler] = AI_DecideKnownAbilityForTurn(battler);
-    aiData->items[battler] = gBattleMons[battler].item;
     holdEffect = aiData->holdEffects[battler] = AI_DecideHoldEffectForTurn(battler);
+    aiData->items[battler] = AI_GetPerceivedItem(battler);
     aiData->lastUsedMove[battler] = (gLastMoves[battler] == MOVE_UNAVAILABLE) ? MOVE_NONE : gLastMoves[battler];
     aiData->hpPercents[battler] = GetHealthPercentage(battler);
     aiData->moveLimitations[battler] = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
@@ -2386,7 +2433,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
           // Wide Guard can still need cover against single-target attacks.
           || (GetMoveEffect(aiData->partnerMove) == EFFECT_PROTECT
               && GetProtectType(GetMoveProtectMethod(aiData->partnerMove)) == PROTECT_TYPE_SINGLE)
-          || gBattleStruct->monToSwitchIntoId[GetPartnerBattler(battlerAtk)] != PARTY_SIZE)
+          || AI_IsBattlerPlannedToSwitch(GetPartnerBattler(battlerAtk)))
             ADJUST_SCORE(-20);
         break;
     case EFFECT_HELPING_HAND:
@@ -2394,7 +2441,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
           || DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove)
           || aiData->abilities[GetPartnerBattler(battlerAtk)] == ABILITY_GOOD_AS_GOLD
           || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove))
-          || gBattleStruct->monToSwitchIntoId[GetPartnerBattler(battlerAtk)] != PARTY_SIZE) //Partner is switching out.
+          || AI_IsBattlerPlannedToSwitch(GetPartnerBattler(battlerAtk))) //Partner is switching out.
             ADJUST_SCORE(-20);
         break;
     case EFFECT_TRICK:

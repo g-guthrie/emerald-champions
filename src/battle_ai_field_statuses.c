@@ -333,6 +333,11 @@ static bool32 HasLightSensitiveMove(enum BattlerId battler)
 {
     enum Move *moves = GetMovesArray(battler);
 
+    // Chloroplast and Mega Sol keep these moves in harsh sunlight whatever
+    // the weather, so weather neither helps nor hampers them.
+    if (IsSunlightMoveAbility(gAiLogicData->abilities[battler]))
+        return FALSE;
+
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
         if (moves[moveIndex] != MOVE_NONE && moves[moveIndex] != MOVE_UNAVAILABLE && IsLightSensitiveMove(moves[moveIndex]))
@@ -667,6 +672,18 @@ static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler)
     return FIELD_EFFECT_NEUTRAL;
 }
 
+// A foe's weather-dependent healing (and, for rain, Solar Beam) that a new
+// weather would cut. Chloroplast and Mega Sol keep those moves sunlit.
+static bool32 HasWeatherHamperedSunMove(enum BattlerId battler, bool32 solarBeam)
+{
+    if (IsSunlightMoveAbility(gAiLogicData->abilities[battler]))
+        return FALSE;
+    return HasMoveWithEffect(battler, EFFECT_MORNING_SUN)
+        || HasMoveWithEffect(battler, EFFECT_SYNTHESIS)
+        || HasMoveWithEffect(battler, EFFECT_MOONLIGHT)
+        || (solarBeam && HasMoveWithEffect(battler, EFFECT_SOLAR_BEAM));
+}
+
 s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, struct AiLogicData *aiData)
 {
     s32 score = 0;
@@ -682,10 +699,8 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_DAMP_ROCK)
                 score += WEAK_EFFECT;
-            if (HasBattlerSideMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
-             || HasBattlerSideMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
-             || HasBattlerSideMoveWithEffect(battlerDef, EFFECT_SOLAR_BEAM)
-             || HasBattlerSideMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
+            if (HasWeatherHamperedSunMove(battlerDef, TRUE)
+             || (HasPartnerIgnoreFlags(battlerDef) && HasWeatherHamperedSunMove(GetPartnerBattler(battlerDef), TRUE)))
                 score += WEAK_EFFECT;
             if (HasDamagingMoveOfType(battlerDef, TYPE_FIRE) || HasDamagingMoveOfType(GetPartnerBattler(battlerDef), TYPE_FIRE))
                 score += WEAK_EFFECT;
@@ -715,9 +730,7 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_SMOOTH_ROCK)
                 score += WEAK_EFFECT;
-            if (HasMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
-             || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
-             || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
+            if (HasWeatherHamperedSunMove(battlerDef, FALSE))
                 score += WEAK_EFFECT;
         }
         break;
@@ -732,9 +745,7 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ICY_ROCK)
                 score += WEAK_EFFECT;
-            if (HasMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
-             || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
-             || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
+            if (HasWeatherHamperedSunMove(battlerDef, FALSE))
                 score += WEAK_EFFECT;
         }
         break;
@@ -749,9 +760,7 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ICY_ROCK)
                 score += WEAK_EFFECT;
-            if (HasMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
-             || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
-             || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
+            if (HasWeatherHamperedSunMove(battlerDef, FALSE))
                 score += WEAK_EFFECT;
         }
         break;

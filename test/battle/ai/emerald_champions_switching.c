@@ -436,10 +436,13 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Jocelyn's Crabominable leaves a useless loc
 AI_DOUBLE_BATTLE_TEST("EC switching: Shawn's Jolteon keeps a resisted lock that still threatens Duraludon")
 {
     GIVEN {
-        PLAYER(SPECIES_GYARADOS) { Level(30); HP(80); Ability(ABILITY_MOXIE); Speed(1); Moves(MOVE_CELEBRATE); }
-        PLAYER(SPECIES_FLYGON) { Level(30); Ability(ABILITY_LEVITATE); Speed(1); Moves(MOVE_CELEBRATE); }
-        SwitchPlayer(SPECIES_DURALUDON, 30, 0, SHAWN_DURALUDON_SET);
-        SwitchPlayer(SPECIES_LANTURN, 30, 112, SHAWN_LANTURN_SET);
+        // Medium's scaled leads put Pawmot and Jolteon two levels above the
+        // benchmark's; the player's side is raised to match, keeping the
+        // board's level gap.
+        PLAYER(SPECIES_GYARADOS) { Level(32); HP(80); Ability(ABILITY_MOXIE); Speed(1); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_FLYGON) { Level(32); Ability(ABILITY_LEVITATE); Speed(1); Moves(MOVE_CELEBRATE); }
+        SwitchPlayer(SPECIES_DURALUDON, 32, 0, SHAWN_DURALUDON_SET);
+        SwitchPlayer(SPECIES_LANTURN, 32, 112, SHAWN_LANTURN_SET);
         sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_ELECTRODE_HISUI, 0};
         sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_BELLIBOLT, 0};
         sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_ROTOM_WASH, 0};

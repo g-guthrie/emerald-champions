@@ -84,6 +84,13 @@ void RecordItemEffectBattle(enum BattlerId battlerId, enum HoldEffect itemEffect
     GetBattlerAiPartyMon(battlerId)->heldEffect = itemEffect;
 }
 
+// Every held-item loss is announced, and a Poltergeist that finds nothing
+// fails in view, so both show that this Pokemon holds no item.
+void RecordEmptyHandBattle(enum BattlerId battlerId)
+{
+    GetBattlerAiPartyMon(battlerId)->seenWithoutItem = TRUE;
+}
+
 void ClearBattlerMoveHistory(enum BattlerId battlerId)
 {
     memset(gBattleHistory->usedMoves[battlerId], 0, sizeof(gBattleHistory->usedMoves[battlerId]));

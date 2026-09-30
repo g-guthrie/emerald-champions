@@ -511,6 +511,14 @@ static void OpponentHandleChoosePokemon(enum BattlerId battler)
     s32 chosenMonId;
     enum SwitchType switchType = SWITCH_AFTER_KO;
 
+    // The engine refused a switch: a trapped battler never leaves.
+    if (AI_CancelRefusedSwitch(battler))
+    {
+        BtlController_EmitChosenMonReturnValue(battler, B_COMM_TO_ENGINE, PARTY_SIZE, NULL);
+        BtlController_Complete(battler);
+        return;
+    }
+
     // Choosing Revival Blessing target
     if (gBattleResources->bufferA[battler][1] == PARTY_ACTION_CHOOSE_FAINTED_MON)
     {

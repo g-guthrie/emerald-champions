@@ -1672,9 +1672,9 @@ DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or ra
         EXPECT_EQ(opponentRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
         EXPECT_EQ(opponentLeft->species, SPECIES_TORKOAL);
         EXPECT_EQ(opponentRight->species, SPECIES_LILLIGANT);
-        // Badge3 cap40, authored offsets +2/+1, Normal difficulty -1.
-        EXPECT_EQ(opponentLeft->level, 41);
-        EXPECT_EQ(opponentRight->level, 40);
+        // Badge3 cap40, authored offsets +2/+1 (leads 4/3); Normal keeps 60%.
+        EXPECT_EQ(opponentLeft->level, 42);
+        EXPECT_EQ(opponentRight->level, 42);
     }
 }
 
@@ -2000,9 +2000,9 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
         {
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_1), ABILITY_PRISM_SCALES);
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_HUGE_POWER);
-            // Badge8 cap80, authored offsets +9/+8, Normal difficulty -1.
-            EXPECT_EQ(opponentLeft->level, 88);
-            EXPECT_EQ(opponentRight->level, 87);
+            // Badge8 cap80, authored offsets +9/+8 (leads 11/10); Normal keeps 60%.
+            EXPECT_EQ(opponentLeft->level, 87);
+            EXPECT_EQ(opponentRight->level, 86);
         }
         gBattleTypeFlags = savedFlags;
     }
@@ -2376,9 +2376,11 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Ben's Charjabug does not Discharge 
         // The benchmark line: Charjabug at 15 HP beside Eelektross, facing
         // Gastrodon and Diggersby. Discharge touched neither foe and took
         // 6 HP from the Levitate Eelektross, twice.
-        PreparedPlayer(SPECIES_GASTRODON_WEST, 30, &sBenFoeGastrodon);
-        PreparedPlayer(SPECIES_DIGGERSBY, 30, &sBenFoeDiggersby);
+        PreparedPlayer(SPECIES_GASTRODON_WEST, 31, &sBenFoeGastrodon);
+        PreparedPlayer(SPECIES_DIGGERSBY, 31, &sBenFoeDiggersby);
         // Route 117's Youngster Ben is met after the second badge: cap30.
+        // Medium's scaled leads put Charjabug a level above the benchmark's;
+        // the player's side is raised to match, keeping the board's gap.
         // Lanturn and Vikavolt had already fallen.
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_CHARJABUG, 15};
         sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANTURN, 0};

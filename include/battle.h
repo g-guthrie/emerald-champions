@@ -208,7 +208,8 @@ struct AiPartyMon
     u8 gender:2;
     u8 isFainted:1;
     u8 wasSentInBattle:1;
-    u8 padding:4;
+    u8 seenWithoutItem:1; // Publicly lost its item, or a Poltergeist found none.
+    u8 padding:3;
 };
 
 struct AiPartyData // Opposing battlers - party mons.
@@ -262,6 +263,11 @@ struct AiLogicData
     u8 mostSuitableMonId[MAX_BATTLERS_COUNT]; // Stores result of GetMostSuitableMonToSwitchInto, which decides which generic mon the AI would switch into if they decide to switch. This can be overruled by specific mons found in ShouldSwitch; the final resulting mon is stored in AI_monToSwitchIntoId.
     enum Move predictedMove[MAX_BATTLERS_COUNT];
     u8 resistBerryAffected[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // Tracks whether currently calc'd move is affected by a resist berry into given target
+    // This turn's guess at each battler's unrevealed ability, for the party
+    // slot (plus one; zero is none) and species it was made for.
+    enum Ability abilityGuess[MAX_BATTLERS_COUNT];
+    enum Species abilityGuessSpecies[MAX_BATTLERS_COUNT];
+    u8 abilityGuessSlot[MAX_BATTLERS_COUNT];
 
     // Flags
     u32 ejectButtonSwitch:1; // Tracks whether current switch out was from Eject Button

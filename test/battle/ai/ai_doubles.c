@@ -1363,7 +1363,10 @@ AI_DOUBLE_BATTLE_TEST("AI considers status orbs and abilities for Trick/Bestow")
     GIVEN {
         ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
         ASSUME(gItemsInfo[ITEM_FLAME_ORB].holdEffect == HOLD_EFFECT_FLAME_ORB);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        // Bestow needs an empty hand the AI knows about; an unrevealed item is
+        // assumed held.
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+            | (move == MOVE_BESTOW ? AI_FLAG_ITEM_OMNISCIENCE : 0));
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); Item(item); Moves(move, MOVE_SCRATCH); Status1(status); }

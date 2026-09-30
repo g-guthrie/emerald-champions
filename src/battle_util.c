@@ -10871,8 +10871,10 @@ void RemoveRuinAbilityFlags(enum BattlerId battler)
     }
 }
 
+// Every held-item loss runs through here.
 void CheckSetUnburden(enum BattlerId battler)
 {
+    RecordEmptyHandBattle(battler);
     if (!(gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
         && !gBattleMons[battler].volatiles.embargoTimer
         && IsAbilityAndRecord(battler, GetBattlerAbility(battler), ABILITY_UNBURDEN))

@@ -61,6 +61,8 @@ static u32 GetSwitchinCandidate(u32 switchinCategory, enum BattlerId battler, in
 
 static enum Ability GetPartyMonAbilityForSwitchCalc(enum BattlerId battler, u32 monIndex, struct Pokemon *mon)
 {
+    if (!IsAiBattlerAware(battler) && !IsAiFlagPresent(AI_FLAG_ABILITY_OMNISCIENCE))
+        return gAiPartyData->mons[GetBattlerTrainer(battler)][monIndex].ability;
     enum Ability ability = GetMonAbility(mon);
 
 #if TESTING
@@ -74,6 +76,13 @@ static enum Ability GetPartyMonAbilityForSwitchCalc(enum BattlerId battler, u32 
 #endif
 
     return ability;
+}
+
+static enum Move GetPartyMonMoveForSwitchCalc(enum BattlerId battler, u32 monIndex, u32 moveIndex, struct Pokemon *mon)
+{
+    if (!IsAiBattlerAware(battler) && !IsAiFlagPresent(AI_FLAG_MOVE_OMNISCIENCE))
+        return gAiPartyData->mons[GetBattlerTrainer(battler)][monIndex].moves[moveIndex];
+    return GetMonData(mon, MON_DATA_MOVE1 + moveIndex);
 }
 
 struct SwitchCandidateSnapshot
@@ -302,6 +311,15 @@ static void PrepareSwitchCandidateMon(enum BattlerId battler, u32 monIndex, stru
     memset(&gProtectStructs[battler], 0, sizeof(gProtectStructs[battler]));
     memset(&gSpecialStatuses[battler], 0, sizeof(gSpecialStatuses[battler]));
     CopyMonAbilityAndTypesToBattleMon(battler, mon);
+    if (!IsAiBattlerAware(battler))
+    {
+        // Loading a hypothetical human reserve must not undo the outer
+        // visibility scope: its entry follows the AI's belief about an
+        // unrevealed ability, never the real one.
+        SaveBattlerData(battler);
+        SetBattlerData(battler);
+        gAiThinkingStruct->saved[battler].saved = FALSE;
+    }
     if (gBattleMons[battler].ability == ABILITY_NEUTRALIZING_GAS)
     {
         for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
@@ -309,7 +327,8 @@ static void PrepareSwitchCandidateMon(enum BattlerId battler, u32 monIndex, stru
                 RemoveRuinAbilityFlags(actor);
         gBattleMons[battler].volatiles.neutralizingGas = TRUE;
     }
-    gAiThinkingStruct->saved[battler].saved = TRUE;
+    if (IsAiBattlerAware(battler))
+        gAiThinkingStruct->saved[battler].saved = TRUE;
     gAiBattleData->aiUsingGimmick &= ~(1u << battler);
     RefreshSwitchCandidateData();
     if (gBattleWeather & B_WEATHER_PRIMAL_ANY)
@@ -824,7 +843,7 @@ static u32 FindMonWithMoveOfEffectiveness(struct SwitchAiContext *switchContext,
 
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
-            move = GetMonData(&switchContext->party[monIndex], MON_DATA_MOVE1 + moveIndex);
+            move = GetPartyMonMoveForSwitchCalc(switchContext->battler, monIndex, moveIndex, &switchContext->party[monIndex]);
             if (move != MOVE_NONE && AI_GetMoveEffectiveness(move, switchContext->battler, switchContext->opposingBattler) >= effectiveness && GetMovePower(move) != 0)
             {
                 superEffectiveIds |= (1u << monIndex);
@@ -1530,7 +1549,7 @@ static bool32 CanMonSurviveHazardSwitchin(struct SwitchAiContext *switchContext)
 
             for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
             {
-                aiMove = GetMonData(&switchContext->party[monIndex], MON_DATA_MOVE1 + moveIndex);
+                aiMove = GetPartyMonMoveForSwitchCalc(switchContext->battler, monIndex, moveIndex, &switchContext->party[monIndex]);
                 if (IsHazardClearingMove(aiMove)) // Have a mon that can clear the hazards, so switching out is okay
                     return TRUE;
             }
@@ -1762,7 +1781,8 @@ void GetShouldSwitchPartyMonEligibility(struct SwitchAiContext *switchContext)
 {
     for (u32 monIndex = 0; monIndex < switchContext->lastId; monIndex++)
     {
-        if (!IsValidForBattle(&switchContext->party[monIndex]))
+        if (!AI_IsPartyMonKnown(switchContext->battler, monIndex)
+         || !IsValidForBattle(&switchContext->party[monIndex]))
             continue;
         if (IsPartyMonOnFieldOrChosenToSwitch(switchContext->battler, monIndex, switchContext->battlerIn1, switchContext->battlerIn2))
             continue;
@@ -2552,7 +2572,7 @@ static u32 GetBestMonIntegrated(struct Pokemon *party, int lastId, enum BattlerI
     {
         AI_RestoreCandidateState(baseline);
         // Check mon validity
-        if (!IsValidForBattle(&party[monIndex]))
+        if (!AI_IsPartyMonKnown(battler, monIndex) || !IsValidForBattle(&party[monIndex]))
             continue;
         // Check if mon is already in play or being sent in
         if (IsPartyMonOnFieldOrChosenToSwitch(battler, monIndex, battlerIn1, battlerIn2))
@@ -2790,7 +2810,7 @@ static u32 GetBestMonVanilla(struct Pokemon *party, int lastId, enum BattlerId b
     {
         AI_RestoreCandidateState(baseline);
         // Check mon validity
-        if (!IsValidForBattle(&party[monIndex]))
+        if (!AI_IsPartyMonKnown(battler, monIndex) || !IsValidForBattle(&party[monIndex]))
             continue;
         // Check if mon is already in play or being sent in
         if (IsPartyMonOnFieldOrChosenToSwitch(battler, monIndex, battlerIn1, battlerIn2))
@@ -2867,7 +2887,7 @@ static u32 GetNextMonInParty(struct Pokemon *party, int lastId, enum BattlerId b
     for (u32 monIndex = 0; monIndex < lastId; monIndex++)
     {
         // Check mon validity
-        if (!IsValidForBattle(&party[monIndex]))
+        if (!AI_IsPartyMonKnown(battler, monIndex) || !IsValidForBattle(&party[monIndex]))
         {
             continue;
         }
@@ -2891,6 +2911,7 @@ static bool32 IsLegalDoublesReserve(enum BattlerId battler, u32 slot)
     enum BattlerId first, second;
     GetActiveBattlerIds(battler, &first, &second);
     return slot < GetAILastPartyIndex(battler)
+        && AI_IsPartyMonKnown(battler, slot)
         && IsValidForBattle(&GetBattlerParty(battler)[slot])
         && !IsPartyMonOnFieldOrChosenToSwitch(battler, slot, first, second)
         && !IsPartyMonPlannedToBeSwitchedInByPartner(slot, battler);
@@ -2975,7 +2996,7 @@ static u32 GetBestMonDoubles(enum BattlerId battler, enum SwitchType switchType)
     return best;
 }
 
-u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switchType)
+static u32 ChooseMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switchType)
 {
     enum BattlerId opposingBattler = 0;
     u32 bestMonId = PARTY_SIZE;
@@ -2983,7 +3004,9 @@ u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switc
     s32 lastId = GetAILastPartyIndex(battler); // + 1
     struct Pokemon *party;
 
-    if (gBattleStruct->monToSwitchIntoId[battler] != PARTY_SIZE)
+    // An AI can coordinate its own planned entry. A human's selected slot
+    // is private, including when this function predicts a switch/replacement.
+    if (BattlerHasAi(battler) && gBattleStruct->monToSwitchIntoId[battler] != PARTY_SIZE)
         return gBattleStruct->monToSwitchIntoId[battler];
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return gBattlerPartyIndexes[battler] + 1;
@@ -3014,6 +3037,14 @@ u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switc
     }
 }
 
+u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switchType)
+{
+    u32 visibility = AI_MaskUnknownBattlers();
+    u32 chosen = ChooseMostSuitableMonToSwitchInto(battler, switchType);
+    AI_RestoreMaskedBattlers(visibility);
+    return chosen;
+}
+
 u32 AI_SelectRevivalBlessingMon(enum BattlerId battler)
 {
     s32 lastId = GetAILastPartyIndex(battler); // + 1
@@ -3033,6 +3064,8 @@ u32 AI_SelectRevivalBlessingMon(enum BattlerId battler)
         opposingBattler = GetOppositeBattler(battler);
     }
 
+    // The controller asks outside any decision; judge the foe as it is known.
+    u32 visibility = AI_MaskUnknownBattlers();
     // Save existing battler data
     struct SwitchCandidateSnapshot *baseline = AI_SaveCandidateState();
 
@@ -3085,6 +3118,7 @@ u32 AI_SelectRevivalBlessingMon(enum BattlerId battler)
     // Restore battler data
     AI_RestoreCandidateState(baseline);
     AI_FreeCandidateState(baseline);
+    AI_RestoreMaskedBattlers(visibility);
 
     if (bestMonId == PARTY_SIZE)
         bestMonId = GetFirstFaintedPartyIndex(battler);

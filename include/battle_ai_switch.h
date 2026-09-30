@@ -78,6 +78,7 @@ typedef bool32 (*AiSwitchFunc)(struct SwitchAiContext*);
 extern AiSwitchFunc gDynamicAiSwitchFunc;
 
 struct SwitchCandidateSnapshot;
+void GetShouldSwitchPartyMonEligibility(struct SwitchAiContext *switchContext);
 struct SwitchCandidateSnapshot *AI_SaveCandidateState(void);
 void AI_CaptureCandidateState(struct SwitchCandidateSnapshot *state);
 void AI_RestoreCandidateState(const struct SwitchCandidateSnapshot *state);

@@ -164,6 +164,15 @@ bool32 IsAiFlagPresent(u64 flag)
     return FALSE;
 }
 
+bool32 AI_IsBattlerPlannedToSwitch(enum BattlerId battler)
+{
+    // Own AI actions may be coordinated. A human's choice remains private;
+    // forecasting that side uses only the planner's predicted switch.
+    if (BattlerHasAi(battler))
+        return gBattleStruct->monToSwitchIntoId[battler] != PARTY_SIZE;
+    return (gAiLogicData->shouldSwitch & (1u << battler)) != 0;
+}
+
 bool32 IsAiBattlerAware(enum BattlerId battlerId)
 {
     if (IsAiFlagPresent(AI_FLAG_OMNISCIENT))
@@ -172,28 +181,41 @@ bool32 IsAiBattlerAware(enum BattlerId battlerId)
     return BattlerHasAi(battlerId);
 }
 
-bool32 IsAiBattlerAssumingStab(enum BattlerId battlerId)
+bool32 AI_IsPartyMonKnown(enum BattlerId battler, u32 partyIndex)
 {
-    if (IsAiFlagPresent(AI_FLAG_ASSUME_STAB))
-        return TRUE;
+    if (partyIndex >= PARTY_SIZE)
+        return FALSE;
+    return IsAiBattlerAware(battler) || IsAiFlagPresent(AI_FLAG_KNOW_OPPONENT_PARTY)
+        || gAiPartyData->mons[GetBattlerTrainer(battler)][partyIndex].species != SPECIES_NONE;
+}
+
+// Knowledge about a battler, and forecasts of its turn, belong to the AIs
+// that oppose it. An in-game partner's flags aim at the foes; they never
+// hand the human it fights beside to the other side.
+bool32 IsAiFlagPresentAgainst(enum BattlerId battler, u64 flag)
+{
+    for (enum BattlerId ai = 0; ai < gBattlersCount; ai++)
+    {
+        if (!IsBattlerAlly(ai, battler) && (gAiThinkingStruct->aiFlags[ai] & flag))
+            return TRUE;
+    }
 
     return FALSE;
+}
+
+bool32 IsAiBattlerAssumingStab(enum BattlerId battlerId)
+{
+    return IsAiFlagPresentAgainst(battlerId, AI_FLAG_ASSUME_STAB);
 }
 
 bool32 IsAiBattlerAssumingStatusMoves(enum BattlerId battlerId)
 {
-    if (IsAiFlagPresent(AI_FLAG_ASSUME_STATUS_MOVES))
-        return TRUE;
-
-    return FALSE;
+    return IsAiFlagPresentAgainst(battlerId, AI_FLAG_ASSUME_STATUS_MOVES);
 }
 
 bool32 IsAiBattlerPredictingAbility(enum BattlerId battlerId)
 {
-    if (IsAiFlagPresent(AI_FLAG_WEIGH_ABILITY_PREDICTION))
-        return TRUE;
-
-    return FALSE;
+    return IsAiFlagPresentAgainst(battlerId, AI_FLAG_WEIGH_ABILITY_PREDICTION);
 }
 
 bool32 IsBattlerPredictedToSwitch(enum BattlerId battler)
@@ -377,12 +399,32 @@ static bool32 ShouldFailForIllusion(enum Species illusionSpecies, enum BattlerId
     return TRUE;
 }
 
+static inline bool32 IsAlwaysKnownTrapAbility(enum Ability ability)
+{
+    return ability == ABILITY_SHADOW_TAG || ability == ABILITY_MAGNET_PULL || ability == ABILITY_ARENA_TRAP;
+}
+
+// A hidden battler's held item as the AI sees it. An identified item is
+// itself. Otherwise the slot is assumed filled - most competitive Pokemon
+// hold something - by an item that has no effect the AI may simulate, until
+// the Pokemon is seen empty-handed while it still holds nothing.
+enum Item AI_GetPerceivedItem(enum BattlerId battlerId)
+{
+    const struct AiPartyMon *aiMon = GetBattlerAiPartyMon(battlerId);
+    enum Item item = gBattleMons[battlerId].item;
+
+    if (IsAiBattlerAware(battlerId) || IsAiFlagPresent(AI_FLAG_ITEM_OMNISCIENCE) || aiMon->heldEffect != HOLD_EFFECT_NONE)
+        return item;
+    if (item == ITEM_NONE && aiMon->seenWithoutItem)
+        return ITEM_NONE;
+    return ITEM_AI_UNIDENTIFIED;
+}
+
 void SetBattlerData(enum BattlerId battlerId)
 {
     if (!BattlerHasAi(battlerId) && gAiThinkingStruct->saved[battlerId].saved)
     {
         enum Species species, illusionSpecies;
-        const struct AiPartyMon *aiMon = GetBattlerAiPartyMon(battlerId);
 
         // Simulate Illusion
         species = gBattleMons[battlerId].species;
@@ -403,17 +445,21 @@ void SetBattlerData(enum BattlerId battlerId)
         enum Ability recordedAbility = GetRecordedAbility(battlerId);
         if (recordedAbility != ABILITY_NONE)
             gBattleMons[battlerId].ability = recordedAbility;
-        // Check if mon can only have one ability.
-        else if ((GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
-                || GetBattlerSpeciesAbility(battlerId, species, 1) == GetBattlerSpeciesAbility(battlerId, species, 0))
-              && !HasBattlerInclementAbility(battlerId, species))
-            gBattleMons[battlerId].ability = GetBattlerSpeciesAbility(battlerId, species, 0);
-        // The ability is unknown.
-        else
-            gBattleMons[battlerId].ability = ABILITY_NONE;
+        // The game announces a trap as soon as it stops a switch, so a
+        // trapping ability stays known like in AI_DecideKnownAbilityForTurn.
+        else if (!IsAlwaysKnownTrapAbility(gBattleMons[battlerId].ability))
+        {
+            // Check if mon can only have one ability.
+            if ((GetBattlerSpeciesAbility(battlerId, species, 1) == ABILITY_NONE
+                    || GetBattlerSpeciesAbility(battlerId, species, 1) == GetBattlerSpeciesAbility(battlerId, species, 0))
+                  && !HasBattlerInclementAbility(battlerId, species))
+                gBattleMons[battlerId].ability = GetBattlerSpeciesAbility(battlerId, species, 0);
+            // The ability is unknown.
+            else
+                gBattleMons[battlerId].ability = ABILITY_NONE;
+        }
 
-        if (aiMon->heldEffect == 0)
-            gBattleMons[battlerId].item = ITEM_NONE;
+        gBattleMons[battlerId].item = AI_GetPerceivedItem(battlerId);
 
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
@@ -437,6 +483,76 @@ void RestoreBattlerData(enum BattlerId battlerId)
     gBattleMons[battlerId].types[0] = gAiThinkingStruct->saved[battlerId].types[0];
     gBattleMons[battlerId].types[1] = gAiThinkingStruct->saved[battlerId].types[1];
 }
+
+// Scopes open in ComputeAiBattlerDecisions, SetupAIPredictionData,
+// GetMostSuitableMonToSwitchInto, AI_SelectRevivalBlessingMon and a refused
+// switch. The first two can reach the third, which re-enters nothing, so two
+// snapshots cover the native call graph. Keeping these 1120 bytes in EWRAM
+// avoids exhausting the system's roughly 4 KiB stack. A deeper scope still
+// masks, in place: it runs inside a masked scope, so it only re-hides what is
+// already hidden, and the outer snapshot restores the real board.
+struct AiVisibilitySnapshot
+{
+    struct BattlePokemon mons[MAX_BATTLERS_COUNT];
+    u32 token;
+};
+static EWRAM_DATA struct AiVisibilitySnapshot sAiVisibility[2] = {0};
+static EWRAM_DATA u32 sAiVisibilityDepth = 0;
+static EWRAM_DATA u32 sAiVisibilitySerial = 0;
+
+u32 AI_MaskUnknownBattlers(void)
+{
+    struct AiVisibilitySnapshot *snapshot = NULL;
+    if (sAiVisibilityDepth < ARRAY_COUNT(sAiVisibility))
+        snapshot = &sAiVisibility[sAiVisibilityDepth];
+    sAiVisibilityDepth++;
+    u32 mask = 0;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (IsAiBattlerAware(battler))
+            continue;
+        if (snapshot != NULL)
+        {
+            snapshot->mons[battler] = gBattleMons[battler];
+            mask |= 1u << battler;
+        }
+        SaveBattlerData(battler);
+        SetBattlerData(battler);
+        // Nested damage/candidate snapshots now see the perceived loadout as
+        // their baseline, so their restore cannot re-expose an unknown set.
+        gAiThinkingStruct->saved[battler].saved = FALSE;
+    }
+    sAiVisibilitySerial += 1u << MAX_BATTLERS_COUNT;
+    if (sAiVisibilitySerial == 0)
+        sAiVisibilitySerial += 1u << MAX_BATTLERS_COUNT;
+    if (snapshot == NULL)
+        return sAiVisibilitySerial;
+    return snapshot->token = sAiVisibilitySerial | mask;
+}
+
+void AI_RestoreMaskedBattlers(u32 token)
+{
+    // A scope past the snapshots has nothing of its own to restore.
+    if (sAiVisibilityDepth > ARRAY_COUNT(sAiVisibility))
+    {
+        sAiVisibilityDepth--;
+        return;
+    }
+    fatal_assertf(sAiVisibilityDepth != 0
+        && sAiVisibility[sAiVisibilityDepth - 1].token == token, "AI visibility restore out of order");
+    struct AiVisibilitySnapshot *snapshot = &sAiVisibility[--sAiVisibilityDepth];
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (token & (1u << battler))
+            gBattleMons[battler] = snapshot->mons[battler];
+    snapshot->token = 0;
+}
+
+#if TESTING
+u32 AI_TestVisibilityDepth(void)
+{
+    return sAiVisibilityDepth;
+}
+#endif
 
 u32 GetHealthPercentage(enum BattlerId battlerId)
 {
@@ -2498,11 +2614,12 @@ bool32 AI_IsAbilityOnSide(enum BattlerId battlerId, enum Ability ability)
 // does NOT include ability suppression checks
 enum Ability AI_DecideKnownAbilityForTurn(enum BattlerId battlerId)
 {
-    enum Ability validAbilities[NUM_ABILITY_SLOTS];
-    u8 numValidAbilities = 0;
+    enum Ability validAbilities[NUM_OWNER_ABILITY_SLOTS];
+    u16 abilityWeights[NUM_OWNER_ABILITY_SLOTS];
+    u32 numValidAbilities = 0, weightSum = 0;
     enum Ability knownAbility = GetBattlerAbilityIgnoreMoldBreaker(battlerId);
-    enum Ability indexAbility;
-    enum Ability abilityAiRatings[NUM_ABILITY_SLOTS] = {0};
+    enum Ability indexAbility, guess;
+    enum Species species = gBattleMons[battlerId].species;
 
     // We've had ability overwritten by e.g. Worry Seed. It is not part of gAiPartyData in case of switching
     if (gBattleMons[battlerId].volatiles.overwrittenAbility)
@@ -2512,34 +2629,50 @@ enum Ability AI_DecideKnownAbilityForTurn(enum BattlerId battlerId)
     if (IsAiBattlerAware(battlerId) || (IsAiBattlerAssumingStab(battlerId) && ASSUME_STAB_SEES_ABILITY) || IsAiFlagPresent(AI_FLAG_ABILITY_OMNISCIENCE))
         return knownAbility;
 
-    // Check neutralizing gas, gastro acid
-    if (knownAbility == ABILITY_NONE)
+    // Gastro Acid and Neutralizing Gas are announced, so a suppressed ability
+    // is known to be none. An ability the visibility mask hides is merely
+    // unknown and still gets the guess below.
+    if (knownAbility == ABILITY_NONE
+     && (gBattleMons[battlerId].volatiles.gastroAcid || IsNeutralizingGasOnField()
+      || gBattleStruct->battlerState[battlerId].notOnField))
         return knownAbility;
 
     if (GetRecordedAbility(battlerId) != ABILITY_NONE)
         return GetRecordedAbility(battlerId);
 
     // Abilities that prevent fleeing - treat as always known
-    if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
+    if (IsAlwaysKnownTrapAbility(knownAbility))
         return knownAbility;
+
+    // One belief per Pokemon per turn, so every board the AI builds this turn
+    // - masked, switch or Mega - reads the same guess.
+    if (gAiLogicData->abilityGuessSlot[battlerId] == gBattlerPartyIndexes[battlerId] + 1
+     && gAiLogicData->abilityGuessSpecies[battlerId] == species)
+        return gAiLogicData->abilityGuess[battlerId];
 
     for (u32 abilityIndex = 0; abilityIndex < NUM_OWNER_ABILITY_SLOTS; abilityIndex++)
     {
-        indexAbility = GetBattlerSpeciesAbility(battlerId, gBattleMons[battlerId].species, abilityIndex);
+        indexAbility = GetBattlerSpeciesAbility(battlerId, species, abilityIndex);
         if (indexAbility != ABILITY_NONE)
         {
-            abilityAiRatings[numValidAbilities] = gAbilitiesInfo[indexAbility].aiRating;
+            abilityWeights[numValidAbilities] = max(0, gAbilitiesInfo[indexAbility].aiRating);
+            weightSum += abilityWeights[numValidAbilities];
             validAbilities[numValidAbilities++] = indexAbility;
         }
     }
 
-    if (numValidAbilities > 0 && IsAiBattlerPredictingAbility(battlerId))
-        return validAbilities[RandomWeighted(RNG_AI_PREDICT_ABILITY, abilityAiRatings[0], abilityAiRatings[1], abilityAiRatings[2])];
+    if (numValidAbilities == 0)
+        return ABILITY_NONE; // Unknown.
 
-    if (numValidAbilities > 0)
-        return validAbilities[RandomUniform(RNG_AI_ABILITY, 0, numValidAbilities - 1)];
+    if (weightSum > 0 && IsAiBattlerPredictingAbility(battlerId))
+        guess = validAbilities[RandomWeightedArray(RNG_AI_PREDICT_ABILITY, weightSum, numValidAbilities, abilityWeights)];
+    else
+        guess = validAbilities[RandomUniform(RNG_AI_ABILITY, 0, numValidAbilities - 1)];
 
-    return ABILITY_NONE; // Unknown.
+    gAiLogicData->abilityGuessSlot[battlerId] = gBattlerPartyIndexes[battlerId] + 1;
+    gAiLogicData->abilityGuessSpecies[battlerId] = species;
+    gAiLogicData->abilityGuess[battlerId] = guess;
+    return guess;
 }
 
 enum HoldEffect AI_DecideHoldEffectForTurn(enum BattlerId battlerId)
@@ -3352,7 +3485,7 @@ bool32 CanIndexMoveFaintTarget(enum BattlerId battlerAtk, enum BattlerId battler
 
 enum Move *GetMovesArray(enum BattlerId battler)
 {
-    if (IsAiBattlerAware(battler) || IsAiBattlerAware(GetPartnerBattler(battler)) || IsAiFlagPresent(AI_FLAG_MOVE_OMNISCIENCE))
+    if (IsAiBattlerAware(battler) || IsAiFlagPresent(AI_FLAG_MOVE_OMNISCIENCE))
         return gBattleMons[battler].moves;
     else
         return gBattleHistory->usedMoves[battler];
@@ -3401,7 +3534,7 @@ bool32 ShouldBeatUpForJustified(enum BattlerId battlerAtk, enum BattlerId battle
     enum Ability atkPartnerAbility = aiData->abilities[battlerAtkPartner];
 
     if (wouldPartnerFaint
-     || gBattleStruct->monToSwitchIntoId[battlerAtkPartner] != PARTY_SIZE)
+     || AI_IsBattlerPlannedToSwitch(battlerAtkPartner))
         return FALSE;
 
     if (atkPartnerAbility != ABILITY_JUSTIFIED
@@ -3418,7 +3551,7 @@ bool32 ShouldBeatUpForJustified(enum BattlerId battlerAtk, enum BattlerId battle
 bool32 ShouldBeatUpForRageFist(enum BattlerId battlerAtk, enum BattlerId battlerAtkPartner, enum Move move, bool32 wouldPartnerFaint, struct AiLogicData *aiData)
 {
     if (wouldPartnerFaint
-     || gBattleStruct->monToSwitchIntoId[battlerAtkPartner] != PARTY_SIZE)
+     || AI_IsBattlerPlannedToSwitch(battlerAtkPartner))
         return FALSE;
 
     if (IsBattleMoveStatus(move)
@@ -3449,7 +3582,7 @@ bool32 ShouldTriggerSpicySprayForBurn(enum BattlerId battlerAtk, enum Move move,
     enum BattlerId partner = GetPartnerBattler(battlerAtk);
 
     if (!HasPartner(battlerAtk)
-     || gBattleStruct->monToSwitchIntoId[partner] != PARTY_SIZE
+     || AI_IsBattlerPlannedToSwitch(partner)
      || aiData->abilities[partner] != ABILITY_SPICY_SPRAY)
         return FALSE;
 
@@ -7581,8 +7714,8 @@ bool32 IsPartyMonOnFieldOrChosenToSwitch(enum BattlerId battler, u32 partyIndex,
     if ((partyIndex == gBattlerPartyIndexes[battlerIn1] && BattlersShareParty(battler, battlerIn1))
             || (partyIndex == gBattlerPartyIndexes[battlerIn2] && BattlersShareParty(battler, battlerIn2)))
         return TRUE;
-    if ((partyIndex == gBattleStruct->monToSwitchIntoId[battlerIn1] && BattlersShareParty(battler, battlerIn1))
-            || (partyIndex == gBattleStruct->monToSwitchIntoId[battlerIn2] && BattlersShareParty(battler, battlerIn2)))
+    if ((BattlerHasAi(battlerIn1) && partyIndex == gBattleStruct->monToSwitchIntoId[battlerIn1] && BattlersShareParty(battler, battlerIn1))
+            || (BattlerHasAi(battlerIn2) && partyIndex == gBattleStruct->monToSwitchIntoId[battlerIn2] && BattlersShareParty(battler, battlerIn2)))
         return TRUE;
     return FALSE;
 }

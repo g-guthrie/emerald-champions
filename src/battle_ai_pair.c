@@ -431,6 +431,7 @@ static void SavePairBoard(struct PairBoard *board, enum BattleSide evaluatingSid
 {
     u8 scoreLimit[MAX_BATTLE_TRAINERS] = {0};
     u8 ownerSide[MAX_BATTLE_TRAINERS] = {0};
+    u32 hiddenOwners = 0;
     board->activeMask = 0;
     memset(board->reserveValue, 0, sizeof(board->reserveValue));
     memset(board->healthValue, 100, sizeof(board->healthValue));
@@ -446,6 +447,8 @@ static void SavePairBoard(struct PairBoard *board, enum BattleSide evaluatingSid
         board->side[actor] = GetBattlerSide(actor);
         scoreLimit[board->owner[actor]] = GetAILastPartyIndex(actor);
         ownerSide[board->owner[actor]] = board->side[actor];
+        if (!IsAiBattlerAware(actor))
+            hiddenOwners |= 1u << board->owner[actor];
     }
     // Reserve contributions cannot change inside a one-turn trial. Read and
     // decrypt each owned party slot once, then only active HP is dynamic.
@@ -476,12 +479,28 @@ static void SavePairBoard(struct PairBoard *board, enum BattleSide evaluatingSid
             if (slot < scoreLimit[trainer])
             {
                 u32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+                // The party balls show which members stand, not their health.
+                // A reserve never sent out is counted as healthy.
+                if ((hiddenOwners & (1u << trainer)) && !gAiPartyData->mons[trainer][slot].wasSentInBattle)
+                    hp = maxHp;
                 board->reserveValue[ownerSide[trainer]] += PairMonValue(board, trainer, hp, maxHp);
                 if (species == SPECIES_PALAFIN_HERO)
                     board->reserveValue[ownerSide[trainer]] += 10;
             }
         }
 }
+
+#if TESTING
+// The standing value the planner gives one side's reserves.
+s32 AI_TestPairReserveValue(enum BattleSide evaluatingSide, enum BattleSide side)
+{
+    struct PairBoard *board = AllocZeroed(sizeof(*board));
+    SavePairBoard(board, evaluatingSide);
+    s32 value = board->reserveValue[side];
+    Free(board);
+    return value;
+}
+#endif
 
 static bool32 PairSupport(enum Move move)
 {
@@ -716,6 +735,7 @@ static bool32 PairHasWishProtectOption(enum BattlerId actor)
 
 // Scoring is deliberately bounded: cached native damage, four actions and
 // explicit partner coordination. Never run the battle engine for every pair.
+// The weather a move sets. Hail damages; snow only raises Ice Defense.
 static u32 PairWeatherMask(enum Move move)
 {
     switch (GetMoveWeatherType(move))
@@ -723,11 +743,26 @@ static u32 PairWeatherMask(enum Move move)
     case BATTLE_WEATHER_RAIN: return B_WEATHER_RAIN;
     case BATTLE_WEATHER_SUN: return B_WEATHER_SUN;
     case BATTLE_WEATHER_SANDSTORM: return B_WEATHER_SANDSTORM;
-    case BATTLE_WEATHER_HAIL:
-    case BATTLE_WEATHER_SNOW: return B_WEATHER_ICY_ANY;
+    case BATTLE_WEATHER_HAIL: return B_WEATHER_HAIL;
+    case BATTLE_WEATHER_SNOW: return B_WEATHER_SNOW;
     default: return 0;
     }
 }
+
+// Weather that already serves a move's plan: either icy weather covers an
+// icy plan, so the AI never trades one for the other.
+static u32 PairWeatherActiveMask(enum Move move)
+{
+    u32 weather = PairWeatherMask(move);
+    return (weather & B_WEATHER_ICY_ANY) ? B_WEATHER_ICY_ANY : weather;
+}
+
+#if TESTING
+u32 AI_TestPairWeatherMask(enum Move move)
+{
+    return PairWeatherMask(move);
+}
+#endif
 
 static u32 PairWeatherPlan(enum Move move)
 {
@@ -1825,7 +1860,7 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     }
     if (effect == EFFECT_WEATHER)
     {
-        if ((gBattleWeather & PairWeatherMask(move)) || (gBattleWeather & B_WEATHER_PRIMAL_ANY))
+        if ((gBattleWeather & PairWeatherActiveMask(move)) || (gBattleWeather & B_WEATHER_PRIMAL_ANY))
             return -10000;
         if (HasWeatherEffect() && (plan & PairWeatherPlan(move)) && ShouldSetWeather(actor, PairWeatherMask(move)))
             return 90;
@@ -6730,6 +6765,7 @@ static bool32 PairLegalReserve(enum BattlerId actor, u32 slot)
     enum BattlerId first, second;
     GetActiveBattlerIds(actor, &first, &second);
     return slot < GetAILastPartyIndex(actor) && IsValidForBattle(&GetBattlerParty(actor)[slot])
+        && AI_IsPartyMonKnown(actor, slot)
         && !IsPartyMonOnFieldOrChosenToSwitch(actor, slot, first, second)
         && !IsPartyMonPlannedToBeSwitchedInByPartner(slot, actor);
 }

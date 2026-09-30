@@ -103,6 +103,10 @@ void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void ComputeAiBattlerDecisions(enum BattlerId battler);
 bool32 AI_ComputeDoublesDecisions(enum BattlerId battler);
+#if TESTING
+s32 AI_TestPairReserveValue(enum BattleSide evaluatingSide, enum BattleSide side);
+u32 AI_TestPairWeatherMask(enum Move move);
+#endif
 s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask);
 // Candidate scoring mutates the temporary board. The caller owns a snapshot
 // and must restore it before another candidate and before returning to play.
@@ -116,6 +120,7 @@ void Ai_UpdateFaintData(enum BattlerId battler);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
 void ResetDynamicAiFunctions(void);
 void AI_TrySwitchOrUseItem(enum BattlerId battler);
+bool32 AI_CancelRefusedSwitch(enum BattlerId battler);
 void CalcBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 weather, enum BattleTerrain terrain);
 void AIDebugTimerStart(void);
 void AIDebugTimerEnd(void);

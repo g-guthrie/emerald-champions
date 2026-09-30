@@ -460,7 +460,10 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 501-600")
     }
 
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        // Bestow needs an empty hand the AI knows about; an unrevealed item is
+        // assumed held.
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+            | (GetMoveEffect(move) == EFFECT_BESTOW ? AI_FLAG_ITEM_OMNISCIENCE : 0));
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
