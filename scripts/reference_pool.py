@@ -137,8 +137,8 @@ def player_rules() -> dict:
 
 
 def friendship_model(story: mr.Story) -> dict:
-    """Friendship facts (B_AFFECTION_MECHANICS is TRUE) and the per-window
-    maximum. Center Bonding sets any party Pokemon to 0, 160 or 255 for free
+    """Friendship facts and the per-window maximum. B_AFFECTION_MECHANICS is
+    FALSE (owner, Sept 30 2026), so friendship grants no battle luck. Center Bonding sets any party Pokemon to 0, 160 or 255 for free
     from the first Center, so 255 is reachable in every window."""
     ec = SCRIPTS_DIR / "emerald_champions.inc"
     oldale = MAPS_DIR / "OldaleTown_PokemonCenter_1F/map.json"
@@ -160,10 +160,8 @@ def friendship_model(story: mr.Story) -> dict:
             {"how": "EV-reducing Berries (Route 104 flower shop daily bundle)", "cite": [cite(FIELD_SPECIALS, "GiveFlowerShopBerryBundle")]},
             {"how": "Soothe Bell x1.5 (Route 104 item ball, Slateport Fan Club), Luxury Ball +1", "cite": [rel(MAPS_DIR / "Route104/map.json")]},
         ],
-        "affection": {"hearts": "80=1, 130=2, 180=3, 220=4, 255=5",
-                      "effects": "5 hearts: +2 crit stages, foe accuracy x0.9; 3-5 hearts: 10/15/20% endure; 4+: 20% status cure",
-                      "cite": [cite(ROOT / "include/config/battle.h", "B_AFFECTION_MECHANICS"),
-                               cite(ROOT / "src/pokemon.c", "GetMonAffectionHearts")]},
+        "affection": {"effects": "none: affection battle effects are disabled",
+                      "cite": [cite(ROOT / "include/config/battle.h", "B_AFFECTION_MECHANICS")]},
         "per_window": {w: 255 for w in story.window_names()},
     }
 
