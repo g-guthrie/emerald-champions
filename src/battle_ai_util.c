@@ -6980,9 +6980,18 @@ static bool32 AI_TargetActsAfterMove(enum BattlerId battlerAtk, enum BattlerId b
 {
     enum Move *moves = GetMovesArray(battlerDef);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        // A shield raised first gives the target a last move but also blocks
+        // this one, so it never lets an Encore or Disable land. Takao's
+        // Wobbuffet Encored three fresh switch-ins whose only faster move was
+        // Protect.
+        if (GetMoveEffect(moves[i]) == EFFECT_PROTECT
+         && GetProtectType(GetMoveProtectMethod(moves[i])) == PROTECT_TYPE_SINGLE)
+            continue;
         if (moves[i] != MOVE_NONE && moves[i] != MOVE_UNAVAILABLE
          && !AI_IsFaster(battlerAtk, battlerDef, move, moves[i], CONSIDER_PRIORITY))
             return FALSE;
+    }
     return TRUE;
 }
 
@@ -7243,6 +7252,61 @@ static bool32 AI_FoeTakesNothingFrom(enum BattlerId battlerAtk, enum BattlerId b
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
     return nothing;
+}
+
+// What a held item is worth to its holder: working for it (1), dead weight
+// (0), or working against it (-1) - an Orb that would status a body that gains
+// nothing from it, a Sticky Barb, Iron Ball, Lagging Tail or Ring Target. A
+// Klutz holder carries anything harmlessly and to no effect.
+s32 AI_HeldItemValueFor(enum BattlerId holder, enum Item item)
+{
+    enum Ability ability = gAiLogicData->abilities[holder];
+    if (item == ITEM_NONE || ability == ABILITY_KLUTZ)
+        return 0;
+    switch (GetItemHoldEffect(item))
+    {
+    case HOLD_EFFECT_NONE:
+        return 0;
+    case HOLD_EFFECT_FLAME_ORB:
+        if ((gBattleMons[holder].status1 & STATUS1_ANY) || !CanBeBurned(holder, holder, ability))
+            return 0;
+        return ShouldBurn(holder, holder, ability) ? 1 : -1;
+    case HOLD_EFFECT_TOXIC_ORB:
+        if ((gBattleMons[holder].status1 & STATUS1_ANY) || !CanBePoisoned(holder, holder, ability, ability))
+            return 0;
+        return ShouldPoison(holder, holder) ? 1 : -1;
+    case HOLD_EFFECT_STICKY_BARB:
+    case HOLD_EFFECT_IRON_BALL:
+    case HOLD_EFFECT_LAGGING_TAIL:
+    case HOLD_EFFECT_RING_TARGET:
+        return -1;
+    default:
+        return 1;
+    }
+}
+
+// How much better equipped a pair ends up after one partner's Trick,
+// Switcheroo or Bestow into the other: positive only when the swap itself
+// helps. Undoing a swap can never help as well, so a pair swaps once: Tiana's
+// Klutz Buneary passed its Flame Orb and Eevee's Eviolite back and forth for
+// ten turns.
+s32 AI_AllyItemSwapGain(enum BattlerId battlerAtk, enum BattlerId ally, enum Move move)
+{
+    enum Item mine = gBattleMons[battlerAtk].item;
+    enum Item theirs = gBattleMons[ally].item;
+    enum Item kept = GetMoveEffect(move) == EFFECT_BESTOW ? ITEM_NONE : theirs;
+    s32 before = AI_HeldItemValueFor(battlerAtk, mine) + AI_HeldItemValueFor(ally, theirs);
+    s32 after = AI_HeldItemValueFor(battlerAtk, kept) + AI_HeldItemValueFor(ally, mine);
+    return after - before;
+}
+
+// Whether a damaging move visibly does nothing to this foe: a type or ability
+// immunity, an ability that absorbs it, or a priority block - Queenly Majesty,
+// Dazzling or Armor Tail on its side, or Psychic Terrain under a grounded foe.
+bool32 AI_IsAttackUselessAgainstFoe(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    return AI_FoeTakesNothingFrom(battlerAtk, battlerDef, move)
+        || Ai_IsPriorityBlocked(battlerAtk, battlerDef, move, gAiLogicData);
 }
 
 // The partner is the point of the hit: an ability that turns this move into
@@ -7509,6 +7573,89 @@ static bool32 AI_HazeResetsNothing(enum BattlerId battlerAtk)
 // does nothing (AI_IsFoeStatDropUseless), as does a self-boost that nothing
 // can cash (AI_IsSelfBoostWithoutPayoff). By owner rule, healing at full HP
 // and a Trick Room under the side's own room count as failures as well.
+// Whether any foe can still give this side a status Safeguard would stop: a
+// status move, or an attack that can burn, freeze, paralyse, poison, put to
+// sleep or confuse. Only a foe side whose loadouts the AI fully knows (Hard)
+// is judged; otherwise an unseen move may do it.
+static bool32 AI_MoveInflictsStatus(enum Move move)
+{
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
+        return FALSE;
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_NON_VOLATILE_STATUS:
+    case EFFECT_YAWN:
+    case EFFECT_CONFUSE:
+    case EFFECT_SWAGGER: // and Flatter
+    case EFFECT_PSYCHO_SHIFT:
+        return TRUE;
+    default:
+        break;
+    }
+    for (u32 i = 0; i < GetMoveAdditionalEffectCount(move); i++)
+    {
+        const struct AdditionalEffect *additional = GetMoveAdditionalEffectById(move, i);
+        if (!additional->self && ((additional->moveEffect >= MOVE_EFFECT_SLEEP && additional->moveEffect <= MOVE_EFFECT_CONFUSION)
+                               || additional->moveEffect == MOVE_EFFECT_RANDOM_FROM_LIST))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static bool32 AI_CanFoesInflictStatus(enum BattlerId battlerAtk)
+{
+    struct Pokemon *counted = NULL;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (IsBattlerAlly(battlerAtk, foe))
+            continue;
+        if (!IsAiBattlerAware(foe))
+            return TRUE;
+        if (IsBattlerAlive(foe))
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+                if (AI_MoveInflictsStatus(gBattleMons[foe].moves[i]))
+                    return TRUE;
+        struct Pokemon *party = GetBattlerParty(foe);
+        if (party == counted)
+            continue;
+        counted = party;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            struct Pokemon *mon = &party[slot];
+            if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG)
+             || GetMonData(mon, MON_DATA_HP) == 0)
+                continue;
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+                if (AI_MoveInflictsStatus(GetMonData(mon, MON_DATA_MOVE1 + i)))
+                    return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Follow Me and Rage Powder draw attacks away from a partner. With no partner
+// on the field there is nothing to draw them from, and a foe that ignores the
+// pull - Stalwart, Propeller Tail, or a Grass type, Overcoat or Safety Goggles
+// against Rage Powder - is not drawn. Eddie's Carnivine Rage Powdered a lone
+// Iron Leaves.
+static bool32 AI_IsRedirectionUseless(enum BattlerId battlerAtk, enum Move move)
+{
+    if (!IsBattlerAlive(GetPartnerBattler(battlerAtk)))
+        return TRUE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battlerAtk, foe))
+            continue;
+        enum Ability ability = gAiLogicData->abilities[foe];
+        if (ability == ABILITY_STALWART || ability == ABILITY_PROPELLER_TAIL)
+            continue;
+        if (IsPowderMove(move) && !IsAffectedByPowderMove(foe, ability, gAiLogicData->holdEffects[foe]))
+            continue;
+        return FALSE;
+    }
+    return TRUE;
+}
+
 bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
     struct AiLogicData *aiData = gAiLogicData;
@@ -7523,7 +7670,9 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     switch (effect)
     {
     case EFFECT_SAFEGUARD:
-        return (gSideStatuses[side] & SIDE_STATUS_SAFEGUARD) != 0;
+        return (gSideStatuses[side] & SIDE_STATUS_SAFEGUARD) != 0 || !AI_CanFoesInflictStatus(battlerAtk);
+    case EFFECT_FOLLOW_ME:
+        return GetMoveTarget(move) == TARGET_USER && AI_IsRedirectionUseless(battlerAtk, move);
     case EFFECT_TAILWIND:
         return (gSideStatuses[side] & SIDE_STATUS_TAILWIND) != 0;
     case EFFECT_REFLECT:
@@ -7697,6 +7846,12 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     case EFFECT_CURSE:
         // Only a Ghost's Curse is aimed at a foe; a second one fails.
         return gBattleMons[battlerDef].volatiles.cursed;
+    case EFFECT_TRICK:
+        // Two empty hands have nothing to exchange.
+        return gBattleMons[battlerAtk].item == ITEM_NONE && aiData->items[battlerDef] == ITEM_NONE;
+    case EFFECT_BESTOW:
+        return gBattleMons[battlerAtk].item == ITEM_NONE
+            || (aiData->items[battlerDef] != ITEM_NONE && aiData->items[battlerDef] != ITEM_AI_UNIDENTIFIED);
     case EFFECT_STAT_CHANGE:
         return foe && !AI_CanAnyStatChange(battlerAtk, battlerDef, move);
     default:

@@ -644,7 +644,8 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
             {
                 if (!IsBattleMoveStatus(action->executedMove)
                  && !(ev->soakable & ((1u << actor) | (1u << action->target)))
-                 && gAiLogicData->effectiveness[actor][action->target][action->index] == UQ_4_12(0.0))
+                 && (gAiLogicData->effectiveness[actor][action->target][action->index] == UQ_4_12(0.0)
+                  || AI_IsAttackUselessAgainstFoe(actor, action->target, action->executedMove)))
                     continue;
             }
             ev->choices[actor][useful++] = *action;
@@ -2079,6 +2080,9 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
             return value;
         }
     }
+    if ((effect == EFFECT_TRICK || effect == EFFECT_BESTOW) && action->target != actor
+     && IsBattlerAlive(action->target) && IsBattlerAlly(actor, action->target))
+        return AI_AllyItemSwapGain(actor, action->target, move) > 0 ? 25 : -80;
     if ((effect == EFFECT_TRICK || effect == EFFECT_BESTOW) && IsBattlerAlive(action->target)
      && !IsBattlerAlly(actor, action->target)
      && gAiLogicData->abilities[action->target] != ABILITY_STICKY_HOLD
@@ -2099,6 +2103,11 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
         // a real cost to it even when the item itself is nothing to us.
         if (IsHoldEffectChoice(mine) && IsBattlerItemEnabled(action->target))
             return 30;
+        // So does an item that works against its new holder: an Orb on a body
+        // that gains nothing from the status, or a Sticky Barb. A Klutz
+        // Buneary's Flame Orb is the only thing that can finish a Shedinja.
+        if (AI_HeldItemValueFor(action->target, gAiLogicData->items[actor]) < 0)
+            return 45;
         if (junkToThem && theirsWorthTaking)
             return 45;
         if (theirsWorthTaking && mine != theirs)
@@ -6821,9 +6830,14 @@ static bool32 PairLockedMoveUseless(enum BattlerId actor, enum Move locked)
         return FALSE;
     if (IsBattleMoveStatus(locked) || IsMoveUnusable(index, locked, gAiLogicData->moveLimitations[actor]))
         return TRUE;
+    // A foe the move cannot touch at all - an absorbing ability, a priority
+    // block - counts like an immune one: Wattson's Specs Galvantula kept
+    // Thundering into a Lightning Rod beside a Ground type, Elliot's Band
+    // Corphish kept Aqua Jetting into Queenly Majesty.
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
         if (IsBattlerAlive(foe) && !IsBattlerAlly(actor, foe)
-         && gAiLogicData->effectiveness[actor][foe][index] * PairLockStageShare(actor, foe, locked) / 100 > UQ_4_12(0.5))
+         && gAiLogicData->effectiveness[actor][foe][index] * PairLockStageShare(actor, foe, locked) / 100 > UQ_4_12(0.5)
+         && !AI_IsAttackUselessAgainstFoe(actor, foe, locked))
             return FALSE;
     return TRUE;
 }

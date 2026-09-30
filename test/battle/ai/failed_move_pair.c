@@ -125,14 +125,15 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Counter and Mirror Coat are not aimed ba
     // Counter is Fighting, so a Ghost's physical hit cannot be returned.
     // Mirror Coat is Psychic, so a Dark body's special hit cannot either.
     // With Safeguard already up and a fresh partner beside it that has not
-    // moved, Encore on the attacker is the working turn.
+    // moved, Encore on the attacker is the working turn. The Clefairy's
+    // Thunder Wave is what makes the Safeguard worth setting.
     PARAMETRIZE { attacker = SPECIES_SABLEYE; attack = MOVE_SHADOW_CLAW; reflect = MOVE_COUNTER; }
     PARAMETRIZE { attacker = SPECIES_HOUNDOOM; attack = MOVE_DARK_PULSE; reflect = MOVE_MIRROR_COAT; }
     GIVEN {
         AI_FLAGS(FAIL_FLAGS);
         PLAYER(attacker) { HP(300); MaxHP(300); Attack(200); SpAttack(200); Speed(100); Moves(attack); }
         PLAYER(SPECIES_MAGIKARP) { HP(300); MaxHP(300); Speed(90); Moves(MOVE_CELEBRATE); }
-        PLAYER(SPECIES_CLEFAIRY) { HP(300); MaxHP(300); Speed(90); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_CLEFAIRY) { HP(300); MaxHP(300); Speed(90); Moves(MOVE_CELEBRATE, MOVE_THUNDER_WAVE); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); Speed(50); Moves(MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_ENCORE, MOVE_SAFEGUARD); }
         OPPONENT(SPECIES_MAGIKARP) { Speed(40); Moves(MOVE_CELEBRATE); }
     } WHEN {
@@ -699,5 +700,211 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: Ingrain, Aqua Ring and a Ghost's Curse a
                 SCORE_GT_VAL(opponent, MOVE_AQUA_RING, 0);
                 SCORE_GT_VAL(opponent, MOVE_CURSE, 0);
             }
+    }
+}
+
+// E0004 a06 turn 2: Paras aimed Spore at the Froslass its Pikachu knocked out
+// first, and the Spore fell on Grass-type Shaymin: "It doesn't affect
+// Shaymin". The Spore's value only counts where it can land.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Spore is not aimed where the partner's knockout hands it to a Grass foe")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_SHAYMIN_LAND) { Level(14); Speed(40); Moves(MOVE_SEED_FLARE, MOVE_EARTH_POWER, MOVE_TAILWIND, MOVE_PROTECT); }
+        PLAYER(SPECIES_FROSLASS) { Level(14); HP(1); Speed(45); Moves(MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_ICE_BEAM, MOVE_PROTECT); }
+        OPPONENT(SPECIES_PIKACHU) {
+            Level(20); Speed(60); Item(ITEM_LIGHT_BALL); Ability(ABILITY_LIGHTNING_ROD); Nature(NATURE_JOLLY);
+            Moves(MOVE_FAKE_OUT, MOVE_VOLT_TACKLE, MOVE_ELECTROWEB, MOVE_QUICK_ATTACK);
+        }
+        OPPONENT(SPECIES_PARAS) {
+            Level(20); Speed(20); Item(ITEM_EVIOLITE); Ability(ABILITY_DRY_SKIN); Nature(NATURE_ADAMANT);
+            Moves(MOVE_SPORE, MOVE_LEECH_LIFE, MOVE_WIDE_GUARD, MOVE_PROTECT);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_EARTH_POWER, target: opponentLeft);
+            MOVE(playerRight, MOVE_SHADOW_BALL, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_SPORE);
+        }
+    }
+}
+
+static void TianaEndgameBoard(void)
+{
+    gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_3].isFirstTurn = 0;
+}
+
+// E0005 h16: burned Eevee and Klutz Buneary could not touch a Wonder Guard
+// Shedinja. Buneary spent ten turns swapping its Flame Orb and Eevee's
+// Eviolite back and forth. The Orb in Shedinja's hands is the only way to win,
+// and the swap with Eevee helps nobody.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Klutz Buneary hands its Flame Orb to the Shedinja, not back and forth to Eevee")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_GENGAR) { Level(14); Status1(STATUS1_PARALYSIS); Speed(10); Moves(MOVE_SHADOW_BALL, MOVE_PROTECT); }
+        PLAYER(SPECIES_SHEDINJA) { Level(14); Ability(ABILITY_WONDER_GUARD); Speed(20); Moves(MOVE_POLTERGEIST, MOVE_SHADOW_SNEAK, MOVE_WILL_O_WISP, MOVE_PROTECT); }
+        OPPONENT(SPECIES_EEVEE) {
+            Level(25); Status1(STATUS1_BURN); Item(ITEM_EVIOLITE); Ability(ABILITY_ADAPTABILITY); Speed(40);
+            Moves(MOVE_QUICK_ATTACK, MOVE_DOUBLE_EDGE, MOVE_WISH, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_BUNEARY) {
+            Level(24); Status1(STATUS1_BURN); Item(ITEM_FLAME_ORB); Ability(ABILITY_KLUTZ); Speed(50);
+            Moves(MOVE_FAKE_OUT, MOVE_SWITCHEROO, MOVE_ENCORE, MOVE_DRAIN_PUNCH);
+        }
+        gTestAiTurnSetupHook = TianaEndgameBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_SHADOW_SNEAK, target: opponentLeft);
+            EXPECT_MOVE(opponentRight, MOVE_SWITCHEROO, target: playerRight);
+        }
+    } THEN {
+        EXPECT_EQ(playerRight->item, ITEM_FLAME_ORB);
+        // Handing Eevee the Orb costs the pair its Eviolite; handing the
+        // Eviolite back is worth one swap, and the swap after that is not.
+        EXPECT_LT(AI_AllyItemSwapGain(B_BATTLER_3, B_BATTLER_1, MOVE_SWITCHEROO), 0);
+        opponentRight->item = ITEM_EVIOLITE;
+        opponentLeft->item = ITEM_FLAME_ORB;
+        EXPECT_GT(AI_AllyItemSwapGain(B_BATTLER_3, B_BATTLER_1, MOVE_SWITCHEROO), 0);
+        opponentRight->item = ITEM_FLAME_ORB;
+        opponentLeft->item = ITEM_EVIOLITE;
+        EXPECT_LT(AI_AllyItemSwapGain(B_BATTLER_3, B_BATTLER_1, MOVE_SWITCHEROO), 0);
+        // Two empty hands have nothing to exchange.
+        opponentRight->item = ITEM_NONE;
+        EXPECT(AI_IsMoveCertainToFail(B_BATTLER_3, B_BATTLER_0, MOVE_SWITCHEROO));
+    }
+}
+
+static void GalvantulaLockBoard(void)
+{
+    gBattleStruct->choicedMove[B_BATTLER_1] = MOVE_THUNDER;
+    gLastMoves[B_BATTLER_1] = MOVE_THUNDER;
+}
+
+// E0092 a02: Wattson's Specs Galvantula, locked into Thunder, fired it twice
+// into a Lightning Rod Marowak beside a Ground-type Clodsire. Each Thunder
+// only raised Marowak's Sp. Atk; the lock does nothing on either target.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into Lightning Rod and a Ground type is left")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_MAROWAK_ALOLA) { Level(40); Speed(40); Ability(ABILITY_LIGHTNING_ROD); Moves(MOVE_FLARE_BLITZ, MOVE_SHADOW_BONE, MOVE_BONEMERANG, MOVE_PROTECT); }
+        PLAYER(SPECIES_CLODSIRE) { Level(40); Speed(20); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_EARTHQUAKE, MOVE_POISON_JAB, MOVE_RECOVER, MOVE_PROTECT); }
+        OPPONENT(SPECIES_GALVANTULA) {
+            Level(40); Speed(100); Item(ITEM_CHOICE_SPECS); Ability(ABILITY_COMPOUND_EYES); Nature(NATURE_TIMID);
+            Moves(MOVE_THUNDER, MOVE_BUG_BUZZ, MOVE_ENERGY_BALL, MOVE_STICKY_WEB);
+        }
+        OPPONENT(SPECIES_MANECTRIC) { Level(40); Speed(90); Moves(MOVE_OVERHEAT, MOVE_SNARL, MOVE_PROTECT, MOVE_THUNDERBOLT); }
+        OPPONENT(SPECIES_VIKAVOLT) { Level(40); Speed(30); Moves(MOVE_BUG_BUZZ, MOVE_ENERGY_BALL, MOVE_THUNDERBOLT, MOVE_PROTECT); }
+        gTestAiTurnSetupHook = GalvantulaLockBoard;
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT); }
+    } THEN {
+        EXPECT_NE(opponentLeft->species, SPECIES_GALVANTULA);
+    }
+}
+
+static void CorphishLockBoard(void)
+{
+    gBattleStruct->choicedMove[B_BATTLER_1] = MOVE_AQUA_JET;
+    gLastMoves[B_BATTLER_1] = MOVE_AQUA_JET;
+}
+
+// E0034 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
+// Tsareena's Queenly Majesty, which stops priority against its whole side.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is left")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_TSAREENA) { Level(40); Speed(60); Ability(ABILITY_QUEENLY_MAJESTY); Moves(MOVE_TROP_KICK, MOVE_HIGH_JUMP_KICK, MOVE_RAPID_SPIN, MOVE_PROTECT); }
+        PLAYER(SPECIES_ARCANINE) { Level(40); Speed(70); Ability(ABILITY_INTIMIDATE); Moves(MOVE_FLARE_BLITZ, MOVE_EXTREME_SPEED, MOVE_WILD_CHARGE, MOVE_PROTECT); }
+        OPPONENT(SPECIES_CORPHISH) {
+            Level(40); Speed(40); Item(ITEM_CHOICE_BAND); Ability(ABILITY_ADAPTABILITY); Nature(NATURE_ADAMANT);
+            Moves(MOVE_AQUA_JET, MOVE_CRABHAMMER, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE);
+        }
+        OPPONENT(SPECIES_PELIPPER) { Level(40); Speed(50); Ability(ABILITY_DRIZZLE); Moves(MOVE_HURRICANE, MOVE_SCALD, MOVE_TAILWIND, MOVE_PROTECT); }
+        OPPONENT(SPECIES_WHISCASH) { Level(40); Speed(30); Moves(MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_PROTECT, MOVE_DRAGON_DANCE); }
+        gTestAiTurnSetupHook = CorphishLockBoard;
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT); }
+    } THEN {
+        EXPECT_NE(opponentLeft->species, SPECIES_CORPHISH);
+    }
+}
+
+// E0037: Takao's Wobbuffet Encored fresh switch-ins that had not moved yet and
+// would only have moved first by raising Protect, which blocks the Encore.
+AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a fresh switch-in whose only faster move is Protect")
+{
+    bool32 hasProtect;
+    PARAMETRIZE { hasProtect = TRUE; }
+    PARAMETRIZE { hasProtect = FALSE; }
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS & ~AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_SYLVEON) { Speed(30); Moves(MOVE_HYPER_VOICE, MOVE_PROTECT); }
+        PLAYER(SPECIES_QUAGSIRE) {
+            Speed(10);
+            if (hasProtect)
+                Moves(MOVE_HIGH_HORSEPOWER, MOVE_LIQUIDATION, MOVE_RECOVER, MOVE_PROTECT);
+            else
+                Moves(MOVE_HIGH_HORSEPOWER, MOVE_LIQUIDATION, MOVE_RECOVER, MOVE_AQUA_JET);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD); }
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+        if (hasProtect)
+            TURN { MOVE(player, MOVE_HIGH_HORSEPOWER); SCORE_EQ_VAL(opponent, MOVE_ENCORE, 0); }
+        else
+            TURN { MOVE(player, MOVE_HIGH_HORSEPOWER); SCORE_GT_VAL(opponent, MOVE_ENCORE, 0); }
+    }
+}
+
+// E0056 a03: Eddie's Carnivine used Rage Powder when every foe was a Grass
+// type, which the powder cannot draw. Follow Me still draws them; with no
+// partner on the field, neither has anyone to draw attacks away from.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: redirection is useless when no foe is drawn or no partner is left to cover")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_IRON_LEAVES) { Level(40); Speed(90); Moves(MOVE_LEAF_BLADE, MOVE_PSYBLADE, MOVE_CLOSE_COMBAT, MOVE_PROTECT); }
+        PLAYER(SPECIES_VENUSAUR) { Level(40); Speed(50); Moves(MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_PROTECT); }
+        OPPONENT(SPECIES_CARNIVINE) { Level(40); Speed(30); Moves(MOVE_RAGE_POWDER, MOVE_FOLLOW_ME, MOVE_KNOCK_OFF, MOVE_POWER_WHIP); }
+        OPPONENT(SPECIES_GLIGAR) { Level(40); Speed(60); Item(ITEM_EVIOLITE); Moves(MOVE_ACROBATICS, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_KNOCK_OFF); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_PROTECT);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_RAGE_POWDER);
+        }
+    } THEN {
+        EXPECT(AI_IsMoveCertainToFail(B_BATTLER_1, B_BATTLER_0, MOVE_RAGE_POWDER));
+        EXPECT(!AI_IsMoveCertainToFail(B_BATTLER_1, B_BATTLER_0, MOVE_FOLLOW_ME));
+        opponentRight->hp = 0;
+        EXPECT(AI_IsMoveCertainToFail(B_BATTLER_1, B_BATTLER_0, MOVE_FOLLOW_ME));
+    }
+}
+
+// E0063: Jaclyn's Wobbuffet set Safeguard, and set it again, against a party
+// with no way to inflict a status. Hard knows every foe loadout; on the other
+// modes an unseen move may still bring one.
+AI_SINGLE_BATTLE_TEST("EC failed moves: Safeguard is useless against a known party with no status to give")
+{
+    u64 information;
+    enum Move reserveMove;
+    PARAMETRIZE { information = AI_FLAG_OMNISCIENT; reserveMove = MOVE_CLOSE_COMBAT; }
+    PARAMETRIZE { information = AI_FLAG_OMNISCIENT; reserveMove = MOVE_SCALD; }
+    PARAMETRIZE { information = 0; reserveMove = MOVE_CLOSE_COMBAT; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | information);
+        PLAYER(SPECIES_LUCARIO) { Speed(40); Moves(MOVE_METEOR_MASH, MOVE_SWORDS_DANCE); }
+        PLAYER(SPECIES_POLIWRATH) { Speed(30); Moves(reserveMove, MOVE_WATERFALL); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_SAFEGUARD, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_ENCORE); }
+    } WHEN {
+        if (information && reserveMove == MOVE_CLOSE_COMBAT)
+            TURN { MOVE(player, MOVE_SWORDS_DANCE); SCORE_EQ_VAL(opponent, MOVE_SAFEGUARD, 0); }
+        else
+            TURN { MOVE(player, MOVE_SWORDS_DANCE); SCORE_GT_VAL(opponent, MOVE_SAFEGUARD, 0); }
     }
 }

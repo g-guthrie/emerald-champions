@@ -1723,7 +1723,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             }
             break;
         case ABILITY_WONDER_GUARD:
-            if (effectiveness < UQ_4_12(2.0))
+            // Wonder Guard stops damage, as native typing has it; a status
+            // move (Switcheroo's Flame Orb, Will-O-Wisp) passes through.
+            if (effectiveness < UQ_4_12(2.0) && GetMovePower(move) != 0)
                 RETURN_SCORE_MINUS(20);
             break;
         case ABILITY_JUSTIFIED:
@@ -4149,6 +4151,11 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             case EFFECT_AFTER_YOU:
                 if (AI_AfterYouImprovesPartnerOrder(battlerAtk, battlerAtkPartner, move, aiData))
                     ADJUST_SCORE(GOOD_EFFECT);
+                break;
+            case EFFECT_TRICK:
+            case EFFECT_BESTOW:
+                if (AI_AllyItemSwapGain(battlerAtk, battlerAtkPartner, move) > 0)
+                    RETURN_SCORE_PLUS(DECENT_EFFECT);
                 break;
             case EFFECT_HEAL_PULSE:
             case EFFECT_HIT_ENEMY_HEAL_ALLY:
