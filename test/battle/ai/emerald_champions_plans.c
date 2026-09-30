@@ -2183,10 +2183,12 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Jaclyn's Wobbuffet never Encores it
             {.moves = {MOVE_DARK_PULSE, MOVE_HEAT_WAVE, MOVE_NASTY_PLOT, MOVE_PROTECT}, .item = ITEM_CHOICE_SPECS, .nature = NATURE_TIMID, .ability = ABILITY_FLASH_FIRE},
             {.moves = {MOVE_IRON_HEAD, MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_PROTECT}, .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_INTIMIDATE},
         };
-        PreparedPlayer(SPECIES_SABLEYE, 30, &sets[0]);
-        PreparedPlayer(SPECIES_HOUNDOOM, 30, &sets[1]);
-        PreparedPlayer(SPECIES_MAWILE, 30, &sets[2]);
-        // Route117 is available before Wattson: two badges, cap30.
+        // Route117 is available before Wattson: two badges, cap30. The
+        // player side sits six levels up to keep the benchmark board after
+        // Jaclyn's Hard tuning raised her team by ten (six on Medium).
+        PreparedPlayer(SPECIES_SABLEYE, 36, &sets[0]);
+        PreparedPlayer(SPECIES_HOUNDOOM, 36, &sets[1]);
+        PreparedPlayer(SPECIES_MAWILE, 36, &sets[2]);
         AuthoredOpponent(TRAINER_JACLYN, 2, FALSE);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentRight); MOVE(playerRight, MOVE_DARK_PULSE, target: opponentRight); }

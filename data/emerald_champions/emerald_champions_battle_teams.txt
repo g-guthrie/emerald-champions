@@ -8,110 +8,110 @@ strategy: SETUP
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 6 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 4 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 3 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 8 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_TORCHIC class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 4 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 4 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 3 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 6 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_TREECKO class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 4 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 4 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 3 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 6 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_MAY_ROUTE_103_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 6 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 4 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 3 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 8 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_MAY_ROUTE_103_TORCHIC class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 4 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 4 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 3 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 6 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_MAY_ROUTE_103_TREECKO class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 4 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 4 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 3 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 6 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0002 TRAINER_CALVIN_1 class=regular
 strategy: SETUP,TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Poochyena uses Taunt or Helping Hand according to whether denying setup or securing damage matters more; Zigzagoon drums only when its post-cost HP and legal Gluttony/Figy recovery survive the opposing pair. On the next turn, cash in with Extreme Speed rather than continue setting up. Alternate deployment: Hoothoot Tailwind plus Starly gives an immediate attacking mode without Belly Drum. Reserves & disruption: If Drum is unsafe, attack with Zigzagoon or move to the bird pair. Figy is compatible with Adamant; Unnerve, item suppression or removal can deny recovery. Rattled is an opponent-dependent bonus, not an activation plan. Counterplay & audit: Priority immunity/denial, Fake Out on the support, physical mitigation, berry denial or focused damage before Drum resolves. Disposition: RETAIN; Figy replaces Sitrus to make Gluttony meaningful. Benchmark the first forced route fight against multiple starter pairs, not just a compliant setup fixture.
 crack: Priority immunity/denial, Fake Out on the support, physical mitigation, berry denial or focused damage before Drum resolves. Disposition: RETAIN; Figy replaces Sitrus to make Gluttony meaningful. Benchmark the first forced route fight against multiple starter pairs, not just a compliant setup fixture.
-POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 6 | CRUNCH, TAUNT, SUCKER_PUNCH, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-ZIGZAGOON @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 6 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-HOOTHOOT @EVIOLITE TINTED_LENS MODEST 164/0/8/204/0/132 6 | AIR_SLASH, HYPER_VOICE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-STARLY @LIFE_ORB RECKLESS JOLLY 4/252/0/0/0/252 6 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 10 | CRUNCH, TAUNT, SUCKER_PUNCH, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+ZIGZAGOON @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 10 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+HOOTHOOT @EVIOLITE TINTED_LENS MODEST 164/0/8/204/0/132 10 | AIR_SLASH, HYPER_VOICE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+STARLY @LIFE_ORB RECKLESS JOLLY 4/252/0/0/0/252 10 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0003 TRAINER_RICK class=regular
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Scarf Spinarak chooses String Shot when the two-stage Speed drops let Dwebble or Karrablast act usefully before the player; Electroweb offers damaging one-stage control when that is enough. Turn two switches Spinarak when its locked support action no longer produces value. Alternate deployment: Fast control beside Karrablast creates stronger immediate offensive conversion. Reserves & disruption: Dewpider supplies the special Water lane when physical attacks are contained. Do not let a Choice-locked utility move become repeated empty turns. Re-evaluate both targets, turn order, protection, stat-loss immunity, Contrary and retaliatory abilities. Counterplay & audit: Ground immunity blocks Electroweb damage but does not inherently block String Shot. Taunt, Magic Bounce, Clear Amulet, White Herb, speed reversal and punishing switches offer counterplay. Disposition: RETAIN; String Shot replaces Toxic Thread for direct paired speed control, while the Scarf control-and-switch identity remains.
 crack: Ground immunity blocks Electroweb damage but does not inherently block String Shot. Taunt, Magic Bounce, Clear Amulet, White Herb, speed reversal and punishing switches offer counterplay. Disposition: RETAIN; String Shot replaces Toxic Thread for direct paired speed control, while the Scarf control-and-switch identity remains.
-SPINARAK @CHOICE_SCARF INSOMNIA JOLLY 252/0/4/0/0/252 5 | ELECTROWEB, STRING_SHOT, POISON_JAB, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-DWEBBLE @EVIOLITE STURDY ADAMANT 68/252/0/0/0/188 2 | ROCK_SLIDE, X_SCISSOR, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-KARRABLAST @LIFE_ORB NO_GUARD ADAMANT 4/252/0/0/0/252 2 | MEGAHORN, DRILL_RUN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DEWPIDER @SITRUS_BERRY WATER_BUBBLE MODEST 252/0/4/252/0/0 3 | SCALD, BUG_BUZZ, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SPINARAK @CHOICE_SCARF INSOMNIA JOLLY 252/0/4/0/0/252 9 | ELECTROWEB, STRING_SHOT, POISON_JAB, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+DWEBBLE @EVIOLITE STURDY ADAMANT 68/252/0/0/0/188 6 | ROCK_SLIDE, X_SCISSOR, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KARRABLAST @LIFE_ORB NO_GUARD ADAMANT 4/252/0/0/0/252 6 | MEGAHORN, DRILL_RUN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DEWPIDER @SITRUS_BERRY WATER_BUBBLE MODEST 252/0/4/252/0/0 7 | SCALD, BUG_BUZZ, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0004 TRAINER_ALLEN class=regular
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu can buy Paras a Spore or use its own damage while Paras selects Wide Guard against real spread pressure. On turn two, attack or reposition; do not automatically shield both supports. Alternate deployment: Pikachu and Bunnelby create a faster damage-focused opening; Mienfoo can supply Fake Out while Paras acts or pressure Rock/Steel targets that resist Bunnelby's Normal attacks. Reserves & disruption: Mienfoo's Eviolite and Regenerator support repeatable U-turn positioning with Bunnelby. Choose a legal useful reserve, account for entry hazards and the incoming attack, and credit Regenerator only when a switch actually occurs. Drain Punch supplies an attacking recovery line; Knock Off disrupts equipment. Paras is not protected from single-target double targeting by Wide Guard. Counterplay & audit: Powder immunity, spread-versus-targeted mix-ups, Ghost immunity to Fake Out/Fighting attacks, Psychic/Fairy pressure on Mienfoo, trapping and punishing the incoming reserve. Disposition: RETAIN; Mienfoo replaces the unsupported Truant/Choice Band Slakoth role. Preserve Bunnelby's Frustration friendship zero. Do not force switches or Fake Out when an immediate attack is better.
 crack: Powder immunity, spread-versus-targeted mix-ups, Ghost immunity to Fake Out/Fighting attacks, Psychic/Fairy pressure on Mienfoo, trapping and punishing the incoming reserve. Disposition: RETAIN; Mienfoo replaces the unsupported Truant/Choice Band Slakoth role. Preserve Bunnelby's Frustration friendship zero. Do not force switches or Fake Out when an immediate attack is better.
-PIKACHU @LIGHT_BALL LIGHTNING_ROD JOLLY 4/252/0/0/0/252 3 | FAKE_OUT, VOLT_TACKLE, ELECTROWEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PARAS @EVIOLITE DRY_SKIN ADAMANT 252/252/4/0/0/0 3 | SPORE, WIDE_GUARD, LEECH_LIFE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MIENFOO @EVIOLITE REGENERATOR JOLLY 4/252/0/0/0/252 3 | DRAIN_PUNCH, KNOCK_OFF, U_TURN, FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
-BUNNELBY @SITRUS_BERRY HUGE_POWER ADAMANT 4/252/0/0/0/252 2 | QUICK_ATTACK, FRUSTRATION, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=0
+PIKACHU @LIGHT_BALL LIGHTNING_ROD JOLLY 4/252/0/0/0/252 4 | FAKE_OUT, VOLT_TACKLE, ELECTROWEB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PARAS @EVIOLITE DRY_SKIN ADAMANT 252/252/4/0/0/0 4 | SPORE, WIDE_GUARD, LEECH_LIFE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MIENFOO @EVIOLITE REGENERATOR JOLLY 4/252/0/0/0/252 4 | DRAIN_PUNCH, KNOCK_OFF, U_TURN, FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
+BUNNELBY @SITRUS_BERRY HUGE_POWER ADAMANT 4/252/0/0/0/252 3 | QUICK_ATTACK, FRUSTRATION, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=0
 
 ## E0005 TRAINER_TIANA class=casual
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Skitty chooses Fake Out when interruption is necessary, or timely Fake Tears on the same target Swirlix can exploit with special damage; Helping Hand remains the damage-support alternative when defense drops are blocked or less useful. Do not spend a turn lowering Special Defense after the relevant partner attack has already happened. Alternate deployment: Buneary threatens Klutz-assisted Flame Orb Switcheroo while Swirlix attacks. Reserves & disruption: Eevee can receive a Wish on a planned switch or keep itself alive for another attack. An unconsumed Sitrus does not grant Unburden, and switching removes the earned speed bonus. Fake Tears must respect protection, reflection, stat-loss immunity, Contrary, White Herb and retaliatory abilities; it does not help Eevee's physical attacks. Counterplay & audit: Taunt, Magic Bounce, Clear Amulet, status immunity, item protection where supported, and burst damage before Wish resolves. Disposition: RETAIN; Fake Tears replaces Sing to give the whimsical support core a reliable special-damage partnership. No automatic credit for Unburden or guaranteed Orb disruption.
 crack: Taunt, Magic Bounce, Clear Amulet, status immunity, item protection where supported, and burst damage before Wish resolves. Disposition: RETAIN; Fake Tears replaces Sing to give the whimsical support core a reliable special-damage partnership. No automatic credit for Unburden or guaranteed Orb disruption.
-SKITTY @FOCUS_SASH WONDER_SKIN JOLLY 252/0/4/0/0/252 3 | FAKE_OUT, FAKE_TEARS, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 3 | DRAINING_KISS, DAZZLING_GLEAM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-EEVEE @EVIOLITE ADAPTABILITY ADAMANT 252/252/4/0/0/0 4 | QUICK_ATTACK, DOUBLE_EDGE, WISH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BUNEARY @FLAME_ORB KLUTZ JOLLY 4/252/0/0/0/252 3 | FAKE_OUT, SWITCHEROO, ENCORE, DRAIN_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+SKITTY @FOCUS_SASH WONDER_SKIN JOLLY 252/0/4/0/0/252 8 | FAKE_OUT, FAKE_TEARS, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 8 | DRAINING_KISS, DAZZLING_GLEAM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+EEVEE @EVIOLITE ADAPTABILITY ADAMANT 252/252/4/0/0/0 9 | QUICK_ATTACK, DOUBLE_EDGE, WISH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BUNEARY @FLAME_ORB KLUTZ JOLLY 4/252/0/0/0/252 8 | FAKE_OUT, SWITCHEROO, ENCORE, DRAIN_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0006 TRAINER_BILLY class=regular
 strategy: RAIN
 mega_slots: NONE
 plan: First two useful turns: Lotad chooses Rain Dance only when Ducklett's next attack and its own rain turns repay the support action; Ducklett can use Icy Wind or a safe attack while weather is established. Turn two exploits rain instead of resetting it unnecessarily. Alternate deployment: Lotad and Tandemaus combine weather pressure with Encore/Population Bomb rather than another Water attacker. Reserves & disruption: Ditto is a reactive reserve, not an arbitrary turn-one transformation. Ducklett Surf still hits Lotad despite its resistance; use a safe attack when ally damage loses the exchange. Counterplay & audit: Weather replacement, Wide Guard, Grass/Electric pressure, and denying a favorable Ditto target. Disposition: Preserve the rain lesson; attach an ally-damage decision to Surf rather than claiming rain partners are immune.
 crack: Weather replacement, Wide Guard, Grass/Electric pressure, and denying a favorable Ditto target. Disposition: Preserve the rain lesson; attach an ally-damage decision to Surf rather than claiming rain partners are immune.
-LOTAD @EVIOLITE SWIFT_SWIM TIMID 4/0/0/252/0/252 3 | RAIN_DANCE, MUDDY_WATER, GIGA_DRAIN, ICE_BEAM | ivs=31/31/31/31/31/31 | friendship=255
-DUCKLETT @EVIOLITE HYDRATION MODEST 252/0/4/252/0/0 3 | HURRICANE, SURF, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 1 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
-TANDEMAUS @WIDE_LENS OWN_TEMPO JOLLY 4/252/0/0/0/252 3 | POPULATION_BOMB, SUPER_FANG, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+LOTAD @EVIOLITE SWIFT_SWIM TIMID 4/0/0/252/0/252 8 | RAIN_DANCE, MUDDY_WATER, GIGA_DRAIN, ICE_BEAM | ivs=31/31/31/31/31/31 | friendship=255
+DUCKLETT @EVIOLITE HYDRATION MODEST 252/0/4/252/0/0 8 | HURRICANE, SURF, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 6 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
+TANDEMAUS @WIDE_LENS OWN_TEMPO JOLLY 4/252/0/0/0/252 8 | POPULATION_BOMB, SUPER_FANG, ENCORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0007 TRAINER_DARIAN class=regular
 strategy: SETUP,PRESSURE
@@ -119,10 +119,10 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Chinchou's Discharge is a safe ally line beside Ground-type Barboach while Barboach either attacks or uses Dragon Dance behind adequate survival. Turn two evaluates the new speed order before spending another setup turn. Alternate deployment: Tentacool resists neither Ground nor Electric but takes Grass neutrally and threatens Grass attackers with Sludge Bomb. Acid Spray supports an actual special follow-up from Chinchou or Clamperl; value same-turn support only when it lands before the partner attack. Clamperl retains the special Shell Smash mode. Reserves & disruption: Eviolite gives Tentacool working bulk; Liquid Ooze punishes eligible draining attacks, not all Grass damage. Muddy Water attacks both opponents without allied damage. Discharge damages Tentacool and Clamperl: re-evaluate every switch and choose a safer action when warranted. Counterplay & audit: Ground/Electric pressure on Tentacool, Grass pressure on the other three, Taunt, immediate damage and revenge priority. Disposition: Approved Corphish replacement removes the universal Grass weakness while preserving the Chinchou/Barboach engine and marine theme. Shared support forecasts honor order and stat-drop blockers; no forced Acid Spray or Discharge script.
 crack: Ground/Electric pressure on Tentacool, Grass pressure on the other three, Taunt, immediate damage and revenge priority. Disposition: Approved Corphish replacement removes the universal Grass weakness while preserving the Chinchou/Barboach engine and marine theme. Shared support forecasts honor order and stat-drop blockers; no forced Acid Spray or Discharge script.
-CHINCHOU @SITRUS_BERRY VOLT_ABSORB MODEST 252/0/4/252/0/0 3 | THUNDER_WAVE, MUDDY_WATER, DISCHARGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BARBOACH @EVIOLITE OBLIVIOUS ADAMANT 252/252/4/0/0/0 4 | DRAGON_DANCE, WATERFALL, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TENTACOOL @EVIOLITE LIQUID_OOZE MODEST 252/0/4/252/0/0 3 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CLAMPERL @DEEP_SEA_TOOTH SHELL_ARMOR MODEST 252/0/4/252/0/0 2 | SHELL_SMASH, MUDDY_WATER, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+CHINCHOU @SITRUS_BERRY VOLT_ABSORB MODEST 252/0/4/252/0/0 7 | THUNDER_WAVE, MUDDY_WATER, DISCHARGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BARBOACH @EVIOLITE OBLIVIOUS ADAMANT 252/252/4/0/0/0 8 | DRAGON_DANCE, WATERFALL, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TENTACOOL @EVIOLITE LIQUID_OOZE MODEST 252/0/4/252/0/0 7 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+CLAMPERL @DEEP_SEA_TOOTH SHELL_ARMOR MODEST 252/0/4/252/0/0 6 | SHELL_SMASH, MUDDY_WATER, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0008 TRAINER_CINDY_1 class=regular
 strategy: NONE
@@ -130,40 +130,40 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Snubbull's Intimidate softens eligible attackers while Milcery selects Helping Hand or an active Fairy attack. Turn two should exploit a damage threshold or heal a relevant slot, not maintain two harmless supports. Alternate deployment: Snubbull and Furfrou offer a physical-pressure mode with U-turn positioning. Reserves & disruption: Slakoth is a one-hit reserve with an exit; Aroma Veil protects only its enumerated effects and is not a blanket anti-disruption shield. Counterplay & audit: Special offense, Defiant/Competitive, Taunt outside Aroma Veil's protected set, and targeting Milcery. Disposition: Keep the species identity; reject any AI trace that values pure durability above protecting an actual threat.
 crack: Special offense, Defiant/Competitive, Taunt outside Aroma Veil's protected set, and targeting Milcery. Disposition: Keep the species identity; reject any AI trace that values pure durability above protecting an actual threat.
-SNUBBULL @LUM_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 4 | PLAY_ROUGH, FIRE_PUNCH, THUNDER_WAVE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-MILCERY @EVIOLITE AROMA_VEIL BOLD 252/0/8/124/124/0 5 | DRAINING_KISS, DAZZLING_GLEAM, HELPING_HAND, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
-FURFROU @SITRUS_BERRY FUR_COAT CAREFUL 252/0/4/0/252/0 3 | DOUBLE_EDGE, U_TURN, SUCKER_PUNCH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
-SLAKOTH @CHOICE_BAND TRUANT ADAMANT 252/252/4/0/0/0 6 | BODY_SLAM, HAMMER_ARM, RETALIATE, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+SNUBBULL @LUM_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 6 | PLAY_ROUGH, FIRE_PUNCH, THUNDER_WAVE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+MILCERY @EVIOLITE AROMA_VEIL BOLD 252/0/8/124/124/0 7 | DRAINING_KISS, DAZZLING_GLEAM, HELPING_HAND, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
+FURFROU @SITRUS_BERRY FUR_COAT CAREFUL 252/0/4/0/252/0 5 | DOUBLE_EDGE, U_TURN, SUCKER_PUNCH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
+SLAKOTH @CHOICE_BAND TRUANT ADAMANT 252/252/4/0/0/0 8 | BODY_SLAM, HAMMER_ARM, RETALIATE, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0009 TRAINER_LYLE class=casual
 strategy: PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Nymble uses First Impression only on its eligible entry turn and otherwise attacks or pivots; Sewaddle supplies Bug/Grass damage or Struggle Bug mitigation. The second turn must account for Nymble's entry-only restriction. Alternate deployment: Dottler Reflect or Helping Hand supports Anorith's Rock pressure. Reserves & disruption: U-turn can renew a later First Impression opportunity only through a real switch and re-entry. Anorith handles targets that resist the Bug opening. Counterplay & audit: Protect on the entry burst, priority denial, Fire attacks, and forcing inefficient pivots. Disposition: Keep; First Impression availability and the cost of recycling it are the defining intent.
 crack: Protect on the entry burst, priority denial, Fire attacks, and forcing inefficient pivots. Disposition: Keep; First Impression availability and the cost of recycling it are the defining intent.
-NYMBLE @FOCUS_SASH TINTED_LENS JOLLY 4/252/0/0/0/252 6 | FIRST_IMPRESSION, LEECH_LIFE, SUCKER_PUNCH, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-SEWADDLE @EVIOLITE OVERCOAT ADAMANT 252/252/4/0/0/0 6 | BUG_BITE, SEED_BOMB, STRUGGLE_BUG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ANORITH @LIFE_ORB BATTLE_ARMOR JOLLY 4/252/0/0/0/252 5 | ROCK_BLAST, X_SCISSOR, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DOTTLER @LEFTOVERS SWARM MODEST 252/0/4/252/0/0 5 | PSYCHIC, STRUGGLE_BUG, REFLECT, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+NYMBLE @FOCUS_SASH TINTED_LENS JOLLY 4/252/0/0/0/252 11 | FIRST_IMPRESSION, LEECH_LIFE, SUCKER_PUNCH, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+SEWADDLE @EVIOLITE OVERCOAT ADAMANT 252/252/4/0/0/0 11 | BUG_BITE, SEED_BOMB, STRUGGLE_BUG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ANORITH @LIFE_ORB BATTLE_ARMOR JOLLY 4/252/0/0/0/252 10 | ROCK_BLAST, X_SCISSOR, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DOTTLER @LEFTOVERS SWARM MODEST 252/0/4/252/0/0 10 | PSYCHIC, STRUGGLE_BUG, REFLECT, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0010 TRAINER_GRUNT_PETALBURG_WOODS class=grunt
 strategy: PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Carvanha attacks or protects only if the earned Speed Boost changes a relevant matchup; Wailmer selects Water Spout using its HP at execution. Turn two converts the speed gain or shifts to Scald/Icy Wind after damage. Alternate deployment: Poochyena's Snarl/Helping Hand supports Grimer's physical pressure. Reserves & disruption: Do not sacrifice Wailmer merely to preserve Carvanha at full HP. Grimer and the support reserve must provide a useful line when Water pressure is resisted. Counterplay & audit: Early Electric/Grass tools, priority, special mitigation, and damaging Wailmer before it attacks. Disposition: Keep the mandatory encounter, with a paired Protect/partner-loss benchmark.
 crack: Early Electric/Grass tools, priority, special mitigation, and damaging Wailmer before it attacks. Disposition: Keep the mandatory encounter, with a paired Protect/partner-loss benchmark.
-CARVANHA @FOCUS_SASH SPEED_BOOST ADAMANT 4/252/0/0/0/252 1 | CRUNCH, AQUA_JET, WATERFALL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-WAILMER @SITRUS_BERRY OBLIVIOUS MODEST 148/0/8/252/0/100 3 | WATER_SPOUT, SCALD, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GRIMER @EVIOLITE POISON_TOUCH ADAMANT 252/252/4/0/0/0 3 | POISON_JAB, DRAIN_PUNCH, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-POOCHYENA @EVIOLITE RATTLED CALM 252/0/4/0/152/100 4 | FOUL_PLAY, HELPING_HAND, SNARL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+CARVANHA @FOCUS_SASH SPEED_BOOST ADAMANT 4/252/0/0/0/252 3 | CRUNCH, AQUA_JET, WATERFALL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WAILMER @SITRUS_BERRY OBLIVIOUS MODEST 148/0/8/252/0/100 5 | WATER_SPOUT, SCALD, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GRIMER @EVIOLITE POISON_TOUCH ADAMANT 252/252/4/0/0/0 5 | POISON_JAB, DRAIN_PUNCH, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+POOCHYENA @EVIOLITE RATTLED CALM 252/0/4/0/152/100 6 | FOUL_PLAY, HELPING_HAND, SNARL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0011 TRAINER_JAMES_1 class=regular
 strategy: RAIN,PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Surskit can set rain while Dewpider applies immediate Water pressure; if rain would be denied or unnecessary, use Icy Wind/Struggle Bug instead. Turn two attacks through the created opening rather than repeatedly rebuilding weather. Alternate deployment: Surskit control plus Kricketune Taunt prevents the opponent from freely setting up. Reserves & disruption: Venipede converts Speed Boost into Poison Jab/Bug Bite pressure; Struggle Bug is special mitigation, not its main damage lane. Counterplay & audit: Weather control, Water immunity, Taunt and focused attacks on the rain lead. Disposition: Keep the aquatic woodland insects and Technician Kricketune; no hazard turn is required.
 crack: Weather control, Water immunity, Taunt and focused attacks on the rain lead. Disposition: Keep the aquatic woodland insects and Technician Kricketune; no hazard turn is required.
-SURSKIT @FOCUS_SASH SWIFT_SWIM TIMID 4/0/0/252/0/252 3 | STRUGGLE_BUG, RAIN_DANCE, HYDRO_PUMP, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
-DEWPIDER @EVIOLITE WATER_BUBBLE ADAMANT 252/252/4/0/0/0 3 | LIQUIDATION, LUNGE, LEECH_LIFE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-VENIPEDE @EVIOLITE SPEED_BOOST JOLLY 156/156/0/0/56/140 5 | PROTECT, POISON_JAB, STRUGGLE_BUG, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
-KRICKETUNE @LIFE_ORB TECHNICIAN JOLLY 4/252/0/0/0/252 3 | BUG_BITE, AERIAL_ACE, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SURSKIT @FOCUS_SASH SWIFT_SWIM TIMID 4/0/0/252/0/252 4 | STRUGGLE_BUG, RAIN_DANCE, HYDRO_PUMP, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
+DEWPIDER @EVIOLITE WATER_BUBBLE ADAMANT 252/252/4/0/0/0 4 | LIQUIDATION, LUNGE, LEECH_LIFE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+VENIPEDE @EVIOLITE SPEED_BOOST JOLLY 156/156/0/0/56/140 6 | PROTECT, POISON_JAB, STRUGGLE_BUG, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
+KRICKETUNE @LIFE_ORB TECHNICIAN JOLLY 4/252/0/0/0/252 4 | BUG_BITE, AERIAL_ACE, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0012 TRAINER_WINSTON_1 class=regular
 strategy: TRICK_ROOM,SETUP,PRESSURE
@@ -232,10 +232,10 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Roggenrola and Archen lead. Use Wide Guard only against meaningful spread pressure while itemless Acrobatics or Rock Slide converts the protection into damage; otherwise Roggenrola should attack or make a worthwhile Iron Defense play. Alternate deployment: Geodude supplies direct Rock Head offense; Mudbray supplies Stamina-backed physical pressure. Body Press belongs to Roggenrola, not Mudbray. Reserves & disruption: Preserve Archen above its Defeatist threshold where useful, but switching does not heal it. Stamina boosts Defense only after a surviving hit; Rock Head prevents Double Edge recoil, not Life Orb damage. Counterplay & audit: Special attacks, Water/Grass coverage and targeted attacks around Wide Guard. Disposition: Retain the independent single-owner battle; revised Archen opening and individual levels await native difficulty calibration.
 crack: Special attacks, Water/Grass coverage and targeted attacks around Wide Guard. Disposition: Retain the independent single-owner battle; revised Archen opening and individual levels await native difficulty calibration.
-ROGGENROLA @EVIOLITE STURDY IMPISH 252/0/252/0/4/0 5 | WIDE_GUARD, ROCK_SLIDE, IRON_DEFENSE, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
-ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 5 | ROCK_SLIDE, ACROBATICS, PROTECT, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-GEODUDE @LIFE_ORB ROCK_HEAD ADAMANT 4/252/0/0/0/252 5 | ROCK_TOMB, DOUBLE_EDGE, STOMPING_TANTRUM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MUDBRAY @SITRUS_BERRY STAMINA ADAMANT 252/252/4/0/0/0 5 | HIGH_HORSEPOWER, ROCK_TOMB, HEAVY_SLAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ROGGENROLA @EVIOLITE STURDY IMPISH 252/0/252/0/4/0 12 | WIDE_GUARD, ROCK_SLIDE, IRON_DEFENSE, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
+ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 12 | ROCK_SLIDE, ACROBATICS, PROTECT, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+GEODUDE @LIFE_ORB ROCK_HEAD ADAMANT 4/252/0/0/0/252 12 | ROCK_TOMB, DOUBLE_EDGE, STOMPING_TANTRUM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUDBRAY @SITRUS_BERRY STAMINA ADAMANT 252/252/4/0/0/0 12 | HIGH_HORSEPOWER, ROCK_TOMB, HEAVY_SLAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0023 TRAINER_JOHNSON class=regular
 strategy: TAILWIND,PRESSURE
@@ -253,20 +253,20 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Hippopotas establishes sand on entry and can use Yawn/Helping Hand while Drilbur attacks in the speed window. On turn two, keep sand only if its remaining turns are worth more than an attack or reposition. Alternate deployment: Hippopotas and Aron are a slower defensive response when speed alone does not solve the board. Reserves & disruption: Sandile cleans after a KO opportunity; Moxie does not grant a free opening boost. All replacements must tolerate the sand chip or justify it. Counterplay & audit: Weather replacement, Water/Grass pressure, priority and Trick Room. Disposition: Keep the clean early Sand Stream/Sand Rush lesson.
 crack: Weather replacement, Water/Grass pressure, priority and Trick Room. Disposition: Keep the clean early Sand Stream/Sand Rush lesson.
-HIPPOPOTAS @EVIOLITE SAND_STREAM IMPISH 252/0/252/0/4/0 3 | YAWN, HIGH_HORSEPOWER, SLACK_OFF, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-DRILBUR @LIFE_ORB SAND_RUSH ADAMANT 4/252/0/0/0/252 3 | DRILL_RUN, ROCK_SLIDE, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ARON @EVIOLITE STURDY ADAMANT 252/252/4/0/0/0 4 | IRON_HEAD, ROCK_SLIDE, BODY_PRESS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SANDILE @EVIOLITE MOXIE JOLLY 4/252/0/0/0/252 4 | STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+HIPPOPOTAS @EVIOLITE SAND_STREAM IMPISH 252/0/252/0/4/0 7 | YAWN, HIGH_HORSEPOWER, SLACK_OFF, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+DRILBUR @LIFE_ORB SAND_RUSH ADAMANT 4/252/0/0/0/252 7 | DRILL_RUN, ROCK_SLIDE, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ARON @EVIOLITE STURDY ADAMANT 252/252/4/0/0/0 8 | IRON_HEAD, ROCK_SLIDE, BODY_PRESS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SANDILE @EVIOLITE MOXIE JOLLY 4/252/0/0/0/252 8 | STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0025 TRAINER_DAWSON class=regular
 strategy: TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
 crack: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
-MEOWTH_GALAR @EVIOLITE TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 2 | FAKE_OUT, IRON_HEAD, KNOCK_OFF, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-ROOKIDEE @EVIOLITE KEEN_EYE JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, TAILWIND, TAUNT, ROOST | ivs=31/31/31/31/31/31 | friendship=255
-WOOLOO @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 6 | DOUBLE_EDGE, WILD_CHARGE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MINCCINO @WIDE_LENS SKILL_LINK JOLLY 4/252/0/0/0/252 3 | TAIL_SLAP, KNOCK_OFF, U_TURN, ENCORE | ivs=31/31/31/31/31/31 | friendship=255
+MEOWTH_GALAR @EVIOLITE TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 6 | FAKE_OUT, IRON_HEAD, KNOCK_OFF, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+ROOKIDEE @EVIOLITE KEEN_EYE JOLLY 4/252/0/0/0/252 8 | BRAVE_BIRD, TAILWIND, TAUNT, ROOST | ivs=31/31/31/31/31/31 | friendship=255
+WOOLOO @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 10 | DOUBLE_EDGE, WILD_CHARGE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MINCCINO @WIDE_LENS SKILL_LINK JOLLY 4/252/0/0/0/252 7 | TAIL_SLAP, KNOCK_OFF, U_TURN, ENCORE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0025 TRAINER_SARAH class=regular
 strategy: TRICK_ROOM
@@ -274,20 +274,20 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Spritzee sets Trick Room only after checking survival and legal disruption; Gothita attacks or uses priority Helping Hand for a useful partner damage threshold. All four members have zero Speed IVs; room is an intentional slow mode rather than merely a tagged move. Aroma Veil blocks eligible disruption, not attacks. Convert the room into attacks rather than unnecessary repeated support. Alternate deployment: Trapinch and Baltoy are the physical slow mode. Zero-Speed Brave Trapinch uses Life Orb Earthquake while airborne Levitate Baltoy supplies special damage or necessary Trick Room renewal. Arena Trap restricts eligible grounded foes, not Flying/Levitate or other valid escape routes. Reserves & disruption: Earthquake must be reappraised beside Spritzee/Gothita or a grounded/ability-suppressed Baltoy; Protect is conditional, not an automatic ally-damage excuse. First Impression works only on Trapinch's entry turn. Helping Hand supports both Trapinch's physical attacks and the special partners, regardless of their relative Speed; it does not make Earthquake safe for Gothita. The old slower-than-Spritzee Fake Tears line under Trick Room is retired. Baltoy remains a second setter if Spritzee falls. Counterplay & audit: Concentrated attacks, Dark/Ghost coverage, slower opposing threats, grounding/suppression and disruption outside Aroma Veil. Disposition: Approved Trapinch replaces Fidough; preserve separate single-owner doubles and actual per-slot Speed IVs. Individual levels await native difficulty calibration.
 crack: Concentrated attacks, Dark/Ghost coverage, slower opposing threats, grounding/suppression and disruption outside Aroma Veil. Disposition: Approved Trapinch replaces Fidough; preserve separate single-owner doubles and actual per-slot Speed IVs. Individual levels await native difficulty calibration.
-SPRITZEE @EVIOLITE AROMA_VEIL RELAXED 252/0/252/0/4/0 4 | TRICK_ROOM, MOONBLAST, PSYCHIC, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-GOTHITA @EVIOLITE COMPETITIVE QUIET 252/0/4/252/0/0 4 | PSYCHIC, ENERGY_BALL, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-TRAPINCH @LIFE_ORB ARENA_TRAP BRAVE 252/252/4/0/0/0 1 | EARTHQUAKE, FIRST_IMPRESSION, CRUNCH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-BALTOY @EVIOLITE LEVITATE QUIET 252/0/4/252/0/0 4 | EARTH_POWER, PSYCHIC, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+SPRITZEE @EVIOLITE AROMA_VEIL RELAXED 252/0/252/0/4/0 9 | TRICK_ROOM, MOONBLAST, PSYCHIC, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+GOTHITA @EVIOLITE COMPETITIVE QUIET 252/0/4/252/0/0 9 | PSYCHIC, ENERGY_BALL, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+TRAPINCH @LIFE_ORB ARENA_TRAP BRAVE 252/252/4/0/0/0 6 | EARTHQUAKE, FIRST_IMPRESSION, CRUNCH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+BALTOY @EVIOLITE LEVITATE QUIET 252/0/4/252/0/0 9 | EARTH_POWER, PSYCHIC, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
 ## E0026 TRAINER_JANICE class=casual
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Togedemaru uses Fake Out or Nuzzle to enable Marill's immediate Huge Power damage, or Iron Head when direct pressure is better. Lightning Rod protects eligible Water partners from Electric attacks; it does not protect Togedemaru from Ground damage. Spiky Shield requires useful partner action or an actual survival payoff. Alternate deployment: Togedemaru plus Chewtle supplies an alternate physical attacking pair; choose the partner for the current coverage and incoming threats rather than blindly preserving the lead. Reserves & disruption: Swirlix uses Flamethrower for Grass/Steel coverage without feeding its own Togedemaru's Lightning Rod, Dazzling Gleam for foe-only spread damage and receives Unburden only after its Sitrus Berry is consumed. Togedemaru's Sitrus is recovery, not an Unburden trigger. Ground immunity/paralysis eligibility and opposing priority denial invalidate some support lines. Counterplay & audit: Severe Ground pressure against Togedemaru, Grass pressure against the Water attackers, special attacks and denied priority. Disposition: Approved Togedemaru replaces Pichu and Dazzling Gleam replaces Swirlix's unsupported Moonblast; Janice retains her independent four-member doubles battle. Thunderbolt is retired because allied Lightning Rod redirects it away from the intended foe and Togedemaru has no special attack to exploit the boost. Levels await native calibration.
 crack: Severe Ground pressure against Togedemaru, Grass pressure against the Water attackers, special attacks and denied priority. Disposition: Approved Togedemaru replaces Pichu and Dazzling Gleam replaces Swirlix's unsupported Moonblast; Janice retains her independent four-member doubles battle. Thunderbolt is retired because allied Lightning Rod redirects it away from the intended foe and Togedemaru has no special attack to exploit the boost. Levels await native calibration.
-TOGEDEMARU @SITRUS_BERRY LIGHTNING_ROD JOLLY 252/0/4/0/0/252 0 | FAKE_OUT, NUZZLE, IRON_HEAD, SPIKY_SHIELD | ivs=31/31/31/31/31/31 | friendship=255
-MARILL @EVIOLITE HUGE_POWER ADAMANT 252/252/4/0/0/0 4 | AQUA_JET, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 3 | DAZZLING_GLEAM, ENERGY_BALL, FLAMETHROWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CHEWTLE @EVIOLITE STRONG_JAW ADAMANT 232/252/0/0/0/24 4 | LIQUIDATION, CRUNCH, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TOGEDEMARU @SITRUS_BERRY LIGHTNING_ROD JOLLY 252/0/4/0/0/252 5 | FAKE_OUT, NUZZLE, IRON_HEAD, SPIKY_SHIELD | ivs=31/31/31/31/31/31 | friendship=255
+MARILL @EVIOLITE HUGE_POWER ADAMANT 252/252/4/0/0/0 9 | AQUA_JET, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 8 | DAZZLING_GLEAM, ENERGY_BALL, FLAMETHROWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+CHEWTLE @EVIOLITE STRONG_JAW ADAMANT 232/252/0/0/0/24 9 | LIQUIDATION, CRUNCH, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0026 TRAINER_JERRY_1 class=casual
 strategy: PRESSURE
@@ -295,10 +295,10 @@ mega_slots: NONE
 ai: Conservative
 plan: First two useful turns: Magnemite supplies useful Thunder Wave or immediate special pressure while fast Varoom uses Acid Spray before a useful special partner attack, attacks directly or Taunts. Jolly maximum Speed puts Varoom ahead of Magnemite and Skrelp at these opening levels; recheck order after speed control. Acid Spray is the industrial chemistry partnership, not a compulsory turn-one action. Volt Switch should introduce Skrelp's Adaptability/Choice Specs pressure or Koffing's useful physical mitigation only when the incoming board improves. Alternate deployment: Magnemite and Koffing combine speed control with burn support; Koffing's Levitate provides a Ground-safe pivot while it remains airborne and unsuppressed. Reserves & disruption: Varoom's Air Balloon is temporary Ground immunity. Skrelp chooses Muddy Water for foe-only spread damage, Hydro Pump for concentrated damage, or the appropriate Poison/Electric coverage before honoring its Choice lock; switching must be legal. Acid Spray must target the foe the surviving special partner can exploit, respecting Steel immunity, protection, Substitute and stat-drop prevention/reversal. Its low damage is not itself the payoff. Do not invent a Scald burn after the move replacement. Counterplay & audit: Ground damage after Balloon removal, special pressure, Choice-lock exploitation and immunity-aware positioning. Disposition: Approved Muddy Water replaces unsupported Scald; fast Acid Spray replaces the redundant Gunk Shot role. All four species and Jerry's separate receipt remain. Individual levels await native difficulty calibration.
 crack: Ground damage after Balloon removal, special pressure, Choice-lock exploitation and immunity-aware positioning. Disposition: Approved Muddy Water replaces unsupported Scald; fast Acid Spray replaces the redundant Gunk Shot role. All four species and Jerry's separate receipt remain. Individual levels await native difficulty calibration.
-MAGNEMITE @EVIOLITE STURDY MODEST 4/0/0/252/0/252 3 | THUNDERBOLT, FLASH_CANNON, THUNDER_WAVE, VOLT_SWITCH | ivs=31/31/31/31/31/31 | friendship=255
-VAROOM @AIR_BALLOON OVERCOAT JOLLY 4/252/0/0/0/252 4 | IRON_HEAD, ACID_SPRAY, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SKRELP @CHOICE_SPECS ADAPTABILITY TIMID 4/0/0/252/0/252 2 | MUDDY_WATER, SLUDGE_BOMB, HYDRO_PUMP, THUNDERBOLT | ivs=31/31/31/31/31/31 | friendship=255
-KOFFING @EVIOLITE LEVITATE BOLD 252/0/252/0/4/0 4 | SLUDGE_BOMB, FLAMETHROWER, WILL_O_WISP, PAIN_SPLIT | ivs=31/31/31/31/31/31 | friendship=255
+MAGNEMITE @EVIOLITE STURDY MODEST 4/0/0/252/0/252 11 | THUNDERBOLT, FLASH_CANNON, THUNDER_WAVE, VOLT_SWITCH | ivs=31/31/31/31/31/31 | friendship=255
+VAROOM @AIR_BALLOON OVERCOAT JOLLY 4/252/0/0/0/252 12 | IRON_HEAD, ACID_SPRAY, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SKRELP @CHOICE_SPECS ADAPTABILITY TIMID 4/0/0/252/0/252 10 | MUDDY_WATER, SLUDGE_BOMB, HYDRO_PUMP, THUNDERBOLT | ivs=31/31/31/31/31/31 | friendship=255
+KOFFING @EVIOLITE LEVITATE BOLD 252/0/252/0/4/0 12 | SLUDGE_BOMB, FLAMETHROWER, WILL_O_WISP, PAIN_SPLIT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0027 TRAINER_JOSH class=gym
 strategy: SETUP,PRESSURE
@@ -331,12 +331,12 @@ strategy: SNOW,SETUP,PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Amaura establishes snow; Power Spot Stonjourner strengthens its actual attacks. Choose Aurora Veil only when it completes and improves the exchange more than Blizzard/Icy Wind. Stonjourner attacks, uses Wide Guard against a real spread threat, or Protects for useful partner pressure. Alternate deployment: Tyrunt can use Dragon Dance behind a real opportunity, then Rock Slide or Strong Jaw biting coverage. Archen supplies itemless Acrobatics while healthy. Do not treat snow as a teamwide Rock-defense boost. Reserves & disruption: Klawf needs an actual Anger Shell trigger and berry recovery; Cranidos obeys Choice Scarf lock and pays Head Smash recoil despite Mold Breaker. Switching does not heal Defeatist. Protect replaces Stealth Rock and Amaura now has special-offense investment. Counterplay & audit: Weather replacement before Veil, special focus fire, screen removal and priority. Disposition: Preserve all six species and sharpen their prehistoric/Power Spot plan; individual levels await native calibration.
 crack: Weather replacement before Veil, special focus fire, screen removal and priority. Disposition: Preserve all six species and sharpen their prehistoric/Power Spot plan; individual levels await native calibration.
-AMAURA @FOCUS_SASH SNOW_WARNING TIMID 4/0/0/252/0/252 4 | AURORA_VEIL, BLIZZARD, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-STONJOURNER @RINDO_BERRY POWER_SPOT ADAMANT 252/252/4/0/0/0 1 | ROCK_SLIDE, HIGH_HORSEPOWER, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TYRUNT @EVIOLITE STRONG_JAW JOLLY 4/252/0/0/0/252 3 | ROCK_SLIDE, CRUNCH, ICE_FANG, DRAGON_DANCE | ivs=31/31/31/31/31/31 | friendship=255
-KLAWF @SITRUS_BERRY ANGER_SHELL ADAMANT 252/252/4/0/0/0 1 | ROCK_SLIDE, CRABHAMMER, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 2 | ROCK_SLIDE, ACROBATICS, DRAGON_CLAW, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-CRANIDOS @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 2 | HEAD_SMASH, STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+AMAURA @FOCUS_SASH SNOW_WARNING TIMID 4/0/0/252/0/252 10 | AURORA_VEIL, BLIZZARD, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+STONJOURNER @RINDO_BERRY POWER_SPOT ADAMANT 252/252/4/0/0/0 5 | ROCK_SLIDE, HIGH_HORSEPOWER, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TYRUNT @EVIOLITE STRONG_JAW JOLLY 4/252/0/0/0/252 7 | ROCK_SLIDE, CRUNCH, ICE_FANG, DRAGON_DANCE | ivs=31/31/31/31/31/31 | friendship=255
+KLAWF @SITRUS_BERRY ANGER_SHELL ADAMANT 252/252/4/0/0/0 5 | ROCK_SLIDE, CRABHAMMER, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 6 | ROCK_SLIDE, ACROBATICS, DRAGON_CLAW, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+CRANIDOS @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 6 | HEAD_SMASH, STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0030 TRAINER_ROXANNE_1 class=leader
 strategy: TAILWIND,PRESSURE,MEGA_REVEAL
@@ -344,7 +344,7 @@ mega_slots: 1
 plan: First two useful turns: Aerodactyl and Carbink lead. Aerodactyl is the sole Mega-eligible slot and reveals Mega Aerodactyl before the player's Ring unlock. MEGA_REVEAL evaluates a legal first-entry Mega board first and retains that transformation once a valid board exists; moves/targets remain evaluated normally. The directive does not grant eligibility or override forced escape. Choose immediate Rock Slide or Tough Claws Dual Wingbeat when stronger than Tailwind. Carbink selects the relevant screen, Rock Tomb or Body Press; never waste successive screen turns against the wrong damage profile. Alternate deployment: This is a fast fossil-offense team, with NO Trick Room move or intent. Speed-invested Relicanth and Omastar exploit Tailwind; Tyrantrum's Assault Vest/Rock Head build supplies immediate attacks, not Dragon Dance. Aerodactyl and Bombirdier are airborne partners for Tyrantrum's Earthquake; recheck grounding and the actual partner before every spread attack. Reserves & disruption: Bombirdier provides a second Tailwind source and Rocky Payload attacks. Relicanth honors Choice Band; Tyrantrum has no status move through Assault Vest. Rock Head blocks move recoil, not Life Orb damage on Omastar. Mega Aerodactyl's Tough Claws boosts contact Dual Wingbeat, not noncontact Rock Slide. Do not count base Unnerve after Mega transformation. Counterplay & audit: Opposing speed reversal, priority, Intimidate, Wide Guard, Steel/Water pressure and removal of screens. Disposition: User selected Mega Aerodactyl and rejected the hybrid Trick Room proposal. Larvitar/Sudowoodo/Nosepass are replaced by Tyrantrum/Aerodactyl/Omastar. Regirock remains reserved for a later desert/ruins showcase. Native first-Mega/scene checks are separate from full difficulty calibration.
 crack: Opposing speed reversal, priority, Intimidate, Wide Guard, Steel/Water pressure and removal of screens. Disposition: User selected Mega Aerodactyl and rejected the hybrid Trick Room proposal. Larvitar/Sudowoodo/Nosepass are replaced by Tyrantrum/Aerodactyl/Omastar. Regirock remains reserved for a later desert/ruins showcase. Native first-Mega/scene checks are separate from full difficulty calibration.
 AERODACTYL @AERODACTYLITE UNNERVE JOLLY 4/252/0/0/0/252 1 | ROCK_SLIDE, DUAL_WINGBEAT, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-CARBINK @LIGHT_CLAY STURDY IMPISH 252/0/252/0/4/0 0 | REFLECT, LIGHT_SCREEN, BODY_PRESS, ROCK_TOMB | ivs=31/31/31/31/31/31 | friendship=255
+CARBINK @LIGHT_CLAY STURDY IMPISH 252/0/252/0/4/0 1 | REFLECT, LIGHT_SCREEN, BODY_PRESS, ROCK_TOMB | ivs=31/31/31/31/31/31 | friendship=255
 RELICANTH @CHOICE_BAND ROCK_HEAD ADAMANT 4/252/0/0/0/252 0 | HEAD_SMASH, STOMPING_TANTRUM, LIQUIDATION, DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 TYRANTRUM @ASSAULT_VEST ROCK_HEAD JOLLY 4/252/0/0/0/252 0 | HEAD_SMASH, DRAGON_CLAW, EARTHQUAKE, FIRE_FANG | ivs=31/31/31/31/31/31 | friendship=255
 OMASTAR @LIFE_ORB SHELL_ARMOR MODEST 4/0/0/252/0/252 1 | MUDDY_WATER, ICE_BEAM, EARTH_POWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
@@ -355,75 +355,75 @@ strategy: TAILWIND,PRESSURE
 mega_slots: NONE
 plan: The cave smuggler leads Alolan Grimer and Qwilfish: Eviolite bulk and Intimidate support immediate Knock Off/Poison/Water pressure. Power of Alchemy copies a fainted active ally's eligible ability only while Grimer survives beside it. Qwilfish can leave a second Intimidate activation; Skrelp can leave Adaptability for Grimer's STAB; Noibat can leave Infiltrator. None requires sacrificing a healthy partner. Noibat is the sonar-cave Tailwind reserve and special Fire/Dragon coverage; it replaces Zubat's unsupported Tailwind role. Skrelp keeps the special Water/Poison lane. Acid Spray is useful only when a subsequent special attack benefits: the usually faster Noibat cannot receive a retroactive same-turn boost. Re-evaluate every inherited ability and every switch. Do not value Power of Alchemy as an ability that stacks or persists through an ordinary switch. Counterplay: special focus fire, Psychic pressure on Qwilfish, Ground pressure on the grounded Poison members, Ice/Rock pressure on Noibat, status and denying the inheritance by removing Grimer first. Design: preserve Aqua's marine/Poison identity while replacing the repeated Mightyena with the campaign's first Alolan Grimer; chosen individual levels are initial Medium seeds, not calibrated difficulty.
 crack: Remove Grimer before its ally, exploit special or Ground pressure, or disrupt Tailwind; inheritance is conditional and switching ends the copied ability.
-GRIMER_ALOLA @EVIOLITE POWER_OF_ALCHEMY ADAMANT 252/252/4/0/0/0 2 | KNOCK_OFF, POISON_JAB, DRAIN_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-QWILFISH @BLACK_SLUDGE INTIMIDATE ADAMANT 252/252/4/0/0/0 2 | WATERFALL, POISON_JAB, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SKRELP @EVIOLITE ADAPTABILITY MODEST 252/0/0/168/0/88 2 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-NOIBAT @EVIOLITE INFILTRATOR TIMID 4/0/0/252/0/252 3 | TAILWIND, HEAT_WAVE, DRAGON_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GRIMER_ALOLA @EVIOLITE POWER_OF_ALCHEMY ADAMANT 252/252/4/0/0/0 7 | KNOCK_OFF, POISON_JAB, DRAIN_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+QWILFISH @BLACK_SLUDGE INTIMIDATE ADAMANT 252/252/4/0/0/0 7 | WATERFALL, POISON_JAB, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SKRELP @EVIOLITE ADAPTABILITY MODEST 252/0/0/168/0/88 7 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NOIBAT @EVIOLITE INFILTRATOR TIMID 4/0/0/252/0/252 8 | TAILWIND, HEAT_WAVE, DRAGON_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0032 TRAINER_BRENDAN_RUSTBORO_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
 crack: Physical pressure, powder immunity, stat-drop prevention, priority and punishing a passive Orb turn; each regional starter changes the matchup.
-TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 8 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 8 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 7 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 7 | LEAF_BLADE, DRAIN_PUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 14 | LEAF_BLADE, DRAIN_PUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ## E0032 TRAINER_BRENDAN_RUSTBORO_TORCHIC class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
 crack: Physical pressure, powder immunity, stat-drop prevention, priority and punishing a passive Orb turn; each regional starter changes the matchup.
-TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 8 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 8 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 7 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 7 | WATERFALL, EARTHQUAKE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 14 | WATERFALL, EARTHQUAKE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ## E0032 TRAINER_BRENDAN_RUSTBORO_TREECKO class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
 crack: Physical pressure, powder immunity, stat-drop prevention, priority and punishing a passive Orb turn; each regional starter changes the matchup.
-TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 8 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 8 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 7 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-COMBUSKEN @EVIOLITE SPEED_BOOST JOLLY 4/252/0/0/0/252 7 | FIRE_PUNCH, BRICK_BREAK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+COMBUSKEN @EVIOLITE SPEED_BOOST JOLLY 4/252/0/0/0/252 14 | FIRE_PUNCH, BRICK_BREAK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ## E0032 TRAINER_MAY_RUSTBORO_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
 crack: Physical pressure, powder immunity, stat-drop prevention, priority and punishing a passive Orb turn; each regional starter changes the matchup.
-TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 8 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 8 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 7 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 7 | LEAF_BLADE, DRAIN_PUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 14 | LEAF_BLADE, DRAIN_PUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ## E0032 TRAINER_MAY_RUSTBORO_TORCHIC class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
 crack: Physical pressure, powder immunity, stat-drop prevention, priority and punishing a passive Orb turn; each regional starter changes the matchup.
-TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 8 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 8 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 7 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 7 | WATERFALL, EARTHQUAKE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 14 | WATERFALL, EARTHQUAKE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ## E0032 TRAINER_MAY_RUSTBORO_TREECKO class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
 crack: Physical pressure, powder immunity, stat-drop prevention, priority and punishing a passive Orb turn; each regional starter changes the matchup.
-TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 8 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 8 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 7 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-COMBUSKEN @EVIOLITE SPEED_BOOST JOLLY 4/252/0/0/0/252 7 | FIRE_PUNCH, BRICK_BREAK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+COMBUSKEN @EVIOLITE SPEED_BOOST JOLLY 4/252/0/0/0/252 14 | FIRE_PUNCH, BRICK_BREAK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ## E0033 TRAINER_NED class=regular
 strategy: TAILWIND
 mega_slots: NONE
 ai: Conservative
 plan: A sea-breeze fisherman leads fast Finneon and Wind Power Wattrel. Finneon's Tailwind can charge Wattrel before Thunderbolt; actual execution order, not a flag, determines same-turn benefit. Soak converts an eligible foe to pure Water before Wattrel attacks, including removal of a Ground typing, but does not remove abilities, bypass Substitute/protection or guarantee success through redirection. Attack directly when the conversion has no payoff, and never soak a foe merely to weaken Arrokuda's Water damage. Finneon has Storm Drain rather than unused Swift Swim. Mantyke supplies the alternate Surf/Storm Drain lane, Wide Guard and backup Tailwind; Surf must be reconsidered beside every other partner. Arrokuda uses Propeller Tail to ignore eligible redirection while applying physical Water/Fighting/Dark pressure; it does not bypass the intended target's absorption/immunity. This replaces the earlier ordinary rain quartet and duplicated Tentacool support with a distinctive coastal wind-and-current team. Ground/Electric immunity must be recalculated after Soak, and Wind Power must be gained and consumed natively. Counterplay: disrupt Finneon, reverse speed, use Water/Electric absorption or appropriate redirection, deny spread moves, or pressure Wattrel with Rock/Ice. Individual Medium levels are design seeds; complete battles and timing remain to be checked.
 crack: Deny Finneon's useful turn, preserve absorption abilities through Soak, change turn order, or punish the bird; Surf is safe only with the right partner.
-FINNEON @EVIOLITE STORM_DRAIN TIMID 4/0/0/252/0/252 6 | TAILWIND, SOAK, HYDRO_PUMP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-WATTREL @LIFE_ORB WIND_POWER MODEST 4/0/0/252/0/252 5 | THUNDERBOLT, AIR_SLASH, VOLT_SWITCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANTYKE @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 5 | SURF, AIR_SLASH, WIDE_GUARD, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
-ARROKUDA @MYSTIC_WATER PROPELLER_TAIL ADAMANT 4/252/0/0/0/252 4 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FINNEON @EVIOLITE STORM_DRAIN TIMID 4/0/0/252/0/252 10 | TAILWIND, SOAK, HYDRO_PUMP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WATTREL @LIFE_ORB WIND_POWER MODEST 4/0/0/252/0/252 9 | THUNDERBOLT, AIR_SLASH, VOLT_SWITCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANTYKE @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 9 | SURF, AIR_SLASH, WIDE_GUARD, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
+ARROKUDA @MYSTIC_WATER PROPELLER_TAIL ADAMANT 4/252/0/0/0/252 8 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0034 TRAINER_ELLIOT_1 class=regular
 strategy: SETUP
@@ -431,10 +431,10 @@ mega_slots: NONE
 ai: Conservative
 plan: Elliot's sea-and-stream collection retains Specs Mega Launcher Clauncher, Frillish, Skill Link Shellder and Band Adaptability Corphish. Clauncher is the immediate pulse cannon; Mega Launcher is its normal ability, not Mega Evolution. Frillish replaces unsupported Helping Hand with Will-O-Wisp and trades redundant Scald for Hex: burn can weaken physical attackers before a later hit, Icy Wind can open a relevant speed window, and Recover must preserve useful support. Cursed Body replaces unexploited Water Absorb; a disable is a probabilistic native response, never an assumed outcome. Frillish supports a safe Shellder Shell Smash or a direct attack, while Corphish provides priority Aqua Jet and item removal if setup is denied. Its Ghost identity complements the crustacean/shellfish attackers and separates this fisherman's plan from Ned's wind engine. Respect Choice locks, Focus Sash disruption and the cost of setup. Counterplay: Grass/Electric offense, special pressure through burn, status prevention, Water absorption and priority into a damaged Shellder. Individual Medium level seeds reflect the actual items and roles; native difficulty and full Protect cadence remain pending.
 crack: Special/Grass/Electric pressure, Water absorption, denied status, Choice-lock exploitation, and priority after Sash or Shell Smash.
-CLAUNCHER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 4 | WATER_PULSE, DRAGON_PULSE, DARK_PULSE, AURA_SPHERE | ivs=31/31/31/31/31/31 | friendship=255
-FRILLISH @EVIOLITE CURSED_BODY BOLD 252/0/252/0/4/0 5 | HEX, ICY_WIND, WILL_O_WISP, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
-SHELLDER @FOCUS_SASH SKILL_LINK JOLLY 4/252/0/0/0/252 5 | SHELL_SMASH, ICICLE_SPEAR, ROCK_BLAST, RAZOR_SHELL | ivs=31/31/31/31/31/31 | friendship=255
-CORPHISH @CHOICE_BAND ADAPTABILITY ADAMANT 4/252/0/0/0/252 4 | CRABHAMMER, KNOCK_OFF, AQUA_JET, X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
+CLAUNCHER @CHOICE_SPECS MEGA_LAUNCHER MODEST 4/0/0/252/0/252 14 | WATER_PULSE, DRAGON_PULSE, DARK_PULSE, AURA_SPHERE | ivs=31/31/31/31/31/31 | friendship=255
+FRILLISH @EVIOLITE CURSED_BODY BOLD 252/0/252/0/4/0 13 | HEX, ICY_WIND, WILL_O_WISP, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
+SHELLDER @FOCUS_SASH SKILL_LINK JOLLY 4/252/0/0/0/252 13 | SHELL_SMASH, ICICLE_SPEAR, ROCK_BLAST, RAZOR_SHELL | ivs=31/31/31/31/31/31 | friendship=255
+CORPHISH @CHOICE_BAND ADAPTABILITY ADAMANT 4/252/0/0/0/252 12 | CRABHAMMER, KNOCK_OFF, AQUA_JET, X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0035 TRAINER_LAURA class=gym
 strategy: SETUP
@@ -453,9 +453,9 @@ strategy: SETUP
 mega_slots: NONE
 plan: Brenden's sailor-coach team converts Prankster Riolu Coaching into an actual later physical attack, especially Scarf Mold Breaker Sawk. Native order, the Choice lock and survival determine the payoff; do not repeatedly coach an unavailable or protected attack. No Guard Machop and Inner Focus Throh supply separate anti-evasion, anti-flinch/Intimidate and critical-hit lines. Stufful's unsupported Drain Punch becomes Brick Break, adding screen removal to the Fluffy/Bulk Up reserve. Monferno uses Iron Fist Fire Punch/Mach Punch, Close Combat and U-turn rather than duplicating Brick Break. This remains a purposeful physical school, with special offense provided by other Gym rooms. Medium levels22/25/23/25/25/24 at cap20 are initial seeds. Keep this six-member battle independent of neighboring Lilith; an overlap is not a twelve-member merged party.
 crack: Special damage bypasses Coaching's Defense gain; priority denial, Ghost typing, Choice-lock pressure and timely status can interrupt the lesson.
-SAWK @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 2 | CLOSE_COMBAT, ROCK_SLIDE, POISON_JAB, ICE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+SAWK @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 4 | CLOSE_COMBAT, ROCK_SLIDE, POISON_JAB, ICE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 RIOLU @FOCUS_SASH PRANKSTER JOLLY 252/0/4/0/0/252 5 | COACHING, DRAIN_PUNCH, BULLET_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-THROH @LEFTOVERS INNER_FOCUS ADAMANT 252/252/4/0/0/0 3 | STORM_THROW, BODY_SLAM, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+THROH @LEFTOVERS INNER_FOCUS ADAMANT 252/252/4/0/0/0 4 | STORM_THROW, BODY_SLAM, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MACHOP @EVIOLITE NO_GUARD ADAMANT 252/252/4/0/0/0 5 | DYNAMIC_PUNCH, KNOCK_OFF, BULLET_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 STUFFUL @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 5 | BRICK_BREAK, PAYBACK, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MONFERNO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 4 | FIRE_PUNCH, MACH_PUNCH, CLOSE_COMBAT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
@@ -465,10 +465,10 @@ strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
 plan: Lilith's footwork is a relay, and it now carries answers to the Flying and Fairy types it used to have none for. First two useful turns: Hitmontop's Intimidate and Fake Out or Feint opens a useful Scraggy Dragon Dance or attack; Moxie requires a real knockout. Hitmontop's Rock Slide replaces Helping Hand: after the Fake Out turn it hits both foes, hits Flying types for super-effective damage and can flinch slower targets. Alternate deployment: Pancham's Parting Shot can bring in Costar Flamigo beside the boosted partner. Costar copies the active ally's current stat stages on entry, including harmful drops; it is not Dancer and does not copy a later dance. Pancham's Gunk Shot replaces Crunch, whose Ghost coverage Scrappy already provides, so the relay now hits Fairy types for super-effective damage. Reserves & disruption: Meditite remains the Pure Power breaker, with Zen Headbutt for Poison and Fighting foes; Technician Clobbopus uses Feint or Circle Throw only when it changes the actual board. Never force a switch just to show off Costar, or spend a good turn copying neutral stages.
 crack: Deny Scraggy's setup or its Moxie knockout, and remove or weaken the partner before the relay. Gunk Shot can miss and Rock Slide only has one user, so a second Flying or Fairy attacker, special pressure and Intimidate still tax a purely physical team; punish a bad Parting Shot target.
-HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 2 | FAKE_OUT, CLOSE_COMBAT, FEINT, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 4 | FAKE_OUT, CLOSE_COMBAT, FEINT, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 SCRAGGY @EVIOLITE MOXIE ADAMANT 4/252/0/0/0/252 4 | KNOCK_OFF, DRAIN_PUNCH, DRAGON_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 PANCHAM @EVIOLITE SCRAPPY ADAMANT 4/252/0/0/0/252 4 | PARTING_SHOT, BRICK_BREAK, GUNK_SHOT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-FLAMIGO @SITRUS_BERRY COSTAR JOLLY 4/252/0/0/0/252 2 | BRAVE_BIRD, CLOSE_COMBAT, THROAT_CHOP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FLAMIGO @SITRUS_BERRY COSTAR JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, CLOSE_COMBAT, THROAT_CHOP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MEDITITE @EVIOLITE PURE_POWER ADAMANT 4/252/0/0/0/252 4 | ZEN_HEADBUTT, DRAIN_PUNCH, FAKE_OUT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CLOBBOPUS @EVIOLITE TECHNICIAN ADAMANT 252/252/4/0/0/0 5 | CIRCLE_THROW, FEINT, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
@@ -477,11 +477,11 @@ strategy: NONE
 mega_slots: NONE
 plan: Takao keeps the island grappler/counterpunch identity. Grapploct Octolock and Wobbuffet Shadow Tag restrict eligible exits, while the end-turn Defense/Special Defense drops must lead to useful damage rather than two passive slots. Wobbuffet's unsupported Helping Hand becomes Safeguard; Counter/Mirror Coat must match actual incoming hits, and Encore must have a useful target. Special Life Orb Poliwrath now exploits Octolock's Special Defense side and gives the room an answer to physical walls. Hitmonlee's White Herb/Close Combat activates Unburden through a real drop; Passimian supplies Scarf Defiant pressure, and Pawmo contributes priority/electric control. The copied or suppressed ability, Ghost escape rules, turn order and guard decisions remain native. There is no invented Perish Song. Medium levels22/22/22/22/22/25 are initial seeds.
 crack: Remove the trapper, use eligible Ghost/escape routes, attack from the right category, deny status, and punish wasted reactive moves or an unsafe setup.
-GRAPPLOCT @LEFTOVERS LIMBER ADAMANT 252/252/4/0/0/0 3 | OCTOLOCK, DRAIN_PUNCH, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-WOBBUFFET @SITRUS_BERRY SHADOW_TAG BOLD 252/0/252/0/4/0 3 | COUNTER, MIRROR_COAT, ENCORE, SAFEGUARD | ivs=31/31/31/31/31/31 | friendship=255
-HITMONLEE @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, FAKE_OUT, KNOCK_OFF, BLAZE_KICK | ivs=31/31/31/31/31/31 | friendship=255
-POLIWRATH @LIFE_ORB WATER_ABSORB MODEST 252/0/4/252/0/0 3 | HYDRO_PUMP, VACUUM_WAVE, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PASSIMIAN @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 2 | CLOSE_COMBAT, KNOCK_OFF, U_TURN, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
+GRAPPLOCT @LEFTOVERS LIMBER ADAMANT 252/252/4/0/0/0 4 | OCTOLOCK, DRAIN_PUNCH, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WOBBUFFET @SITRUS_BERRY SHADOW_TAG BOLD 252/0/252/0/4/0 4 | COUNTER, MIRROR_COAT, ENCORE, SAFEGUARD | ivs=31/31/31/31/31/31 | friendship=255
+HITMONLEE @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 4 | CLOSE_COMBAT, FAKE_OUT, KNOCK_OFF, BLAZE_KICK | ivs=31/31/31/31/31/31 | friendship=255
+POLIWRATH @LIFE_ORB WATER_ABSORB MODEST 252/0/4/252/0/0 4 | HYDRO_PUMP, VACUUM_WAVE, ICE_BEAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PASSIMIAN @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, KNOCK_OFF, U_TURN, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 PAWMO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 5 | MACH_PUNCH, THUNDER_PUNCH, NUZZLE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0038 TRAINER_CRISTIAN class=gym
@@ -496,9 +496,9 @@ crack: Fake Out or remove Falinks, deny the receiver's attack, use appropriate N
 FALINKS @FOCUS_SASH DEFIANT JOLLY 252/0/4/0/0/252 3 | BEAT_UP, PROTECT, CLOSE_COMBAT, COACHING | ivs=31/31/31/31/31/31 | friendship=255
 GALLADE @LIFE_ORB JUSTIFIED ADAMANT 36/252/0/0/0/220 1 | CLOSE_COMBAT, PSYCHO_CUT, PROTECT, DRAIN_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 ANNIHILAPE @LEFTOVERS VITAL_SPIRIT ADAMANT 252/252/4/0/0/0 0 | RAGE_FIST, BULK_UP, DRAIN_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-LUCARIO @EXPERT_BELT JUSTIFIED ADAMANT 112/252/0/0/0/144 1 | CLOSE_COMBAT, BULLET_PUNCH, EXTREME_SPEED, CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
+LUCARIO @EXPERT_BELT JUSTIFIED ADAMANT 112/252/0/0/0/144 2 | CLOSE_COMBAT, BULLET_PUNCH, EXTREME_SPEED, CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
 HITMONCHAN @ASSAULT_VEST BLITZ_BOXER ADAMANT 252/252/4/0/0/0 2 | DRAIN_PUNCH, MACH_PUNCH, ICE_PUNCH, THUNDER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-MACHAMP @CHOICE_BAND NO_GUARD ADAMANT 252/252/4/0/0/0 1 | DYNAMIC_PUNCH, KNOCK_OFF, HIGH_HORSEPOWER, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
+MACHAMP @CHOICE_BAND NO_GUARD ADAMANT 252/252/4/0/0/0 2 | DYNAMIC_PUNCH, KNOCK_OFF, HIGH_HORSEPOWER, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0039 TRAINER_JOCELYN class=gym
 strategy: SETUP,TAILWIND,ALLY_COMBO
@@ -531,10 +531,10 @@ strategy: SETUP
 mega_slots: NONE
 plan: Hailey's beach play pairs Flaaffy's screens and Electroweb with White Herb Wartortle's Shell Smash. Choose the relevant protection or immediate damage, then exploit the opening rather than automatically spending two turns on screens. Huge Power Marill is the physical priority alternative; Water Absorb Palpitoad supplies Ground coverage and an Electric immunity. Keep all four species and the actual loadouts. Stats: role-aligned. Flaaffy has mixed bulk for screens; Wartortle has fast special offense for Smash; Marill has bulky physical investment and Aqua Jet; Palpitoad has bulky special offense. No Trick Room is assumed. Could it be cooler? Retain the sheltered shell-breaker: it distinguishes this tuber from the next sailor's immediate offense without another weather setter. Medium arrival seeds26/25/29/26 give the small supporters and Marill individual compensation against the cap24 player pool, including Mega Aerodactyl and reachable legends. Taunt, screen removal, Grass pressure and priority after setup remain weaknesses; these are design seeds, not new battle calibration. Overrepresented? Wartortle, Flaaffy and Palpitoad each occur in one authored E group; Marill in two, including nearby Janice. Shell Smash also appears earlier on Darian's Clamperl, Josh's Dwebble and Elliot's Shellder, so no extra Smash recipient is added: Flaaffy screens/White Herb is this team's distinction. Retain, with setup pacing to revisit in the campaign pass. Historical pre-revision evidence only: Earned audit (2026-09-13): Hailey defeated first attempt in9 turns at cap24, with two player faints. Source/team/intent review covered screens, White Herb, Water Absorb and shared pair selection. Wartortle's opening Protect bought Thunderbolt damage; Flaaffy supported Wartortle's Ice Beam with Electroweb rather than screens into Taunt. Marill's Protect bought a Hydro Pump into redirected Pachirisu; Palpitoad's first Protect bought Aerodactyl's knockout. Its consecutive attempt failed; Sableye entry plus Giga Drain closed the fight. Wartortle's terminal Shell Smash selection never executed before its knockout and is not evidence of successful setup. No level/party change warranted. Six sampled complete decisions max43 native frames (~0.72s), including setup; this is sampled timing, not a universal maximum. Native settlement restored Pachirisu's consumed Sitrus. Evidence: work/v4-c14-common-singers-play steps039–064, work/hailey-decision-timing.json, work/contact-sheets/hailey-earned.png.
 crack: Taunt or break screens, concentrate on Wartortle before it converts setup, and threaten the three Water types with Grass attacks. White Herb is one-use during battle.
-FLAAFFY @LIGHT_CLAY STATIC BOLD 252/0/116/0/140/0 3 | LIGHT_SCREEN, REFLECT, ELECTROWEB, THUNDERBOLT | ivs=31/0/31/31/31/31 | friendship=255
-WARTORTLE @WHITE_HERB TORRENT MODEST 4/0/0/252/0/252 3 | SHELL_SMASH, HYDRO_PUMP, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MARILL @SITRUS_BERRY HUGE_POWER ADAMANT 252/252/4/0/0/0 5 | AQUA_JET, PLAY_ROUGH, BRICK_BREAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PALPITOAD @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 3 | MUDDY_WATER, EARTH_POWER, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+FLAAFFY @LIGHT_CLAY STATIC BOLD 252/0/116/0/140/0 10 | LIGHT_SCREEN, REFLECT, ELECTROWEB, THUNDERBOLT | ivs=31/0/31/31/31/31 | friendship=255
+WARTORTLE @WHITE_HERB TORRENT MODEST 4/0/0/252/0/252 10 | SHELL_SMASH, HYDRO_PUMP, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+MARILL @SITRUS_BERRY HUGE_POWER ADAMANT 252/252/4/0/0/0 12 | AQUA_JET, PLAY_ROUGH, BRICK_BREAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PALPITOAD @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 10 | MUDDY_WATER, EARTH_POWER, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 
 
@@ -543,10 +543,10 @@ strategy: TAILWIND
 mega_slots: NONE
 plan: Edmond's sailor team pairs a protective manta with a hard-hitting crab. Mantyke keeps Tailwind and Helping Hand but replaces personal Protect with Wide Guard against Rock Slide and other spread pressure; Krabby trades Eviolite for Life Orb, combining Sheer Force Liquidation/Rock Slide with direct damage instead of another shell setup. Only moves with eligible secondary effects receive Sheer Force and its Life Orb recoil interaction; X-Scissor does not. Levitate Koffing supplies burns, Clear Smog and a Grass-resistant switch; Reckless Staravia supplies fast physical pressure under Tailwind and a pivot. Stats: role-aligned. Mantyke invests in special bulk and protects against physical spread moves; Krabby and Staravia invest in Attack/Speed to exploit Tailwind; Koffing invests in physical bulk. Krabby trades bulk for Sheer Force/Life Orb pressure. Could it be cooler? Yes: spread protection plus the offensive crab makes the manta partnership distinct from Ned's Soak/Wind Power shoreline team, despite reusing Mantyke. Medium seeds26/25/26/26; Krabby's offensive item earns a lower level than its bulky alternative. Electric attacks, Taunt, priority and special pressure remain cracks; Wide Guard does not stop single-target Electric attacks. Overrepresented? Mantyke appears in two E groups, Ned and Edmond, close enough to require different jobs: Soak/Wind Power/Surf at Ned versus Wide Guard/Helping Hand for Sheer Force Krabby here. Koffing repeats Jerry's defensive species but not his Acid Spray chemistry opening. Tailwind is common campaign-wide; keep it as support, not the whole identity. Historical pre-revision evidence only: Earned pre-fix audit (2026-09-13): Edmond defeated first attempt in12 turns at cap24; five player faints, Azumarill20/104 sole survivor. Native steps079–106 in work/v4-c14-common-singers-play and work/contact-sheets/edmond-earned.png. Mantyke attempted Tailwind into faster Taunt on turn1, leading to the shared repair and retrospective/forward index above. Elsewhere Krabby switched to Grass-resistant Staravia, Mantyke's Helping Hand enabled Staravia's full-health Sableye knockout, and Koffing's Protect bought partner damage and a knockout. Jigglypuff's Fake Out enabled Liquidation pressure; Azumarill finished with Play Rough. Six sampled pre-fix decisions max44frames (~0.74s), including setup, in work/edmond-decision-timing.json. This was a close win, so no level increase or roster change is proposed. Apply the shared bug repair going forward; no compulsory replay of this earned clear.
 crack: Single-target Electric attacks bypass Wide Guard; deny Tailwind or use priority. Life Orb Krabby sacrifices Eviolite bulk, and Staravia pays recoil.
-MANTYKE @EVIOLITE WATER_ABSORB CALM 252/0/4/0/252/0 3 | SCALD, TAILWIND, HELPING_HAND, WIDE_GUARD | ivs=31/0/31/31/31/31 | friendship=255
-KRABBY @LIFE_ORB SHEER_FORCE ADAMANT 4/252/0/0/0/252 2 | LIQUIDATION, ROCK_SLIDE, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-KOFFING @EVIOLITE LEVITATE BOLD 252/0/252/0/4/0 2 | SLUDGE_BOMB, WILL_O_WISP, CLEAR_SMOG, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-STARAVIA @EVIOLITE RECKLESS ADAMANT 4/252/0/0/0/252 2 | BRAVE_BIRD, DOUBLE_EDGE, U_TURN, QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
+MANTYKE @EVIOLITE WATER_ABSORB CALM 252/0/4/0/252/0 15 | SCALD, TAILWIND, HELPING_HAND, WIDE_GUARD | ivs=31/0/31/31/31/31 | friendship=255
+KRABBY @LIFE_ORB SHEER_FORCE ADAMANT 4/252/0/0/0/252 14 | LIQUIDATION, ROCK_SLIDE, X_SCISSOR, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KOFFING @EVIOLITE LEVITATE BOLD 252/0/252/0/4/0 14 | SLUDGE_BOMB, WILL_O_WISP, CLEAR_SMOG, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+STARAVIA @EVIOLITE RECKLESS ADAMANT 4/252/0/0/0/252 14 | BRAVE_BIRD, DOUBLE_EDGE, U_TURN, QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
 
 
 
@@ -555,10 +555,10 @@ strategy: TAILWIND
 mega_slots: NONE
 plan: A tuber's pool party on the Route 109 beach: four little Water Pokemon, one speed engine, and a Soul-Heart cleaner. First two useful turns: Focus Sash Ducklett is guaranteed to get Tailwind up, then uses Helping Hand on the partner's knockout hit or Scald for chip; it must not reset Tailwind while the first one is still running. Goldeen attacks beside it: Megahorn hits the Grass types that beat a Water team, Knock Off strips an item, and Lightning Rod pulls single-target Electric attacks away from its partners and absorbs them. Alternate deployment: Eviolite Seel is the physical reserve - Fake Out buys a turn for Tailwind or Luvdisc, Drill Run answers the Electric types, and Aqua Jet picks off a weakened target. Reserves & disruption: Luvdisc keeps the Soul-Heart cleanup mode - every knockout on either side raises its Special Attack - with Icy Wind speed control, Draining Kiss sustain and Charm against physical attackers. Stats: Timid HP/Speed Ducklett is a support setter, not an attacker; Goldeen and Seel are Eviolite physical attackers. Could it be cooler? Lola used to be a sun garden - Cherrim, Leafeon and Ponyta - with Luvdisc the only Water type on a Tuber. Each slot keeps its job in the water: Ducklett takes Cherrim's support-setter role with Tailwind in place of Sunny Day, Goldeen takes Leafeon's physical attacker slot, and Seel takes Ponyta's Eviolite reserve. Tailwind rather than rain keeps her a separate fight from Chandler's rain team next door. Level offsets carried by role: Ducklett takes Cherrim's +1 on the same Focus Sash, Goldeen +2 as an Eviolite pre-evolution in Leafeon's slot, Luvdisc +4 and Seel +3 unchanged.
 crack: Electric and Grass attacks answer the team - but aim Electric at the side Goldeen is not on, or remove Goldeen first, because Lightning Rod redirects it. Electric hits Ducklett four times over and Rock double, and Fake Out or a multi-hit move breaks its Focus Sash. Taunt stops Tailwind and Helping Hand; outlast the four Tailwind turns behind Protect, and keep Luvdisc from collecting knockouts.
-DUCKLETT @FOCUS_SASH BIG_PECKS TIMID 252/0/4/0/0/252 3 | TAILWIND, HELPING_HAND, SCALD, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GOLDEEN @EVIOLITE LIGHTNING_ROD ADAMANT 4/252/0/0/0/252 4 | WATERFALL, MEGAHORN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-LUVDISC @FOCUS_SASH SOUL_HEART TIMID 4/0/0/252/0/252 5 | ICY_WIND, DRAINING_KISS, CHARM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-SEEL @EVIOLITE THICK_FAT JOLLY 68/188/0/0/0/252 4 | FAKE_OUT, AQUA_JET, DRILL_RUN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DUCKLETT @FOCUS_SASH BIG_PECKS TIMID 252/0/4/0/0/252 6 | TAILWIND, HELPING_HAND, SCALD, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GOLDEEN @EVIOLITE LIGHTNING_ROD ADAMANT 4/252/0/0/0/252 7 | WATERFALL, MEGAHORN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+LUVDISC @FOCUS_SASH SOUL_HEART TIMID 4/0/0/252/0/252 8 | ICY_WIND, DRAINING_KISS, CHARM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+SEEL @EVIOLITE THICK_FAT JOLLY 68/188/0/0/0/252 7 | FAKE_OUT, AQUA_JET, DRILL_RUN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 
 
@@ -567,10 +567,10 @@ strategy: RAIN
 mega_slots: NONE
 plan: Chandler answers Lola's sun with manual rain from a Tuber's seal. First two useful turns: Dewgong sets Rain Dance when the lead pair can afford the turn, or attacks at once with Hydro Pump or Ice Beam when setup is unsafe; Joltik's Compound Eyes Thunder reaches full accuracy only in that rain, and Swift Swim Buizel doubles its Speed there for Liquidation and Aqua Jet. Turn two spends the rain on damage rather than resetting it. Roles: Dewgong is the weather setter and bulky special Water/Ice attacker, its Speed EVs moved into HP; under rain Hydration clears status at the end of each turn, so Rest becomes a one-turn full heal. Joltik is fast special Electric/Bug, Buizel fast physical Water with priority, and Unaware Quagsire the bulky answer to boosted or Mega attackers, ignoring their stat changes while it trades Liquidation and High Horsepower and Recovers. Ice Beam from Dewgong and Ice Punch from Buizel are the team's answer to the Grass attacker that would otherwise walk through three Water bodies, and rain halves the Fire damage aimed at Joltik. Route 109 adjacency: Lola and Chandler share a lane and are earned back to back; losing this fight must not erase Lola.
 crack: Grass damage focused on Dewgong or Quagsire before rain matters; replace the weather or Taunt Dewgong before Rain Dance; Ground attacks and Electric immunity blank Joltik; concentrated damage on Dewgong while it Rests. Hydration only cures at the end of a rain turn, so Rest outside rain leaves Dewgong asleep.
-DEWGONG @SITRUS_BERRY HYDRATION MODEST 252/0/4/252/0/0 1 | RAIN_DANCE, HYDRO_PUMP, ICE_BEAM, REST | ivs=31/0/31/31/31/31 | friendship=255
-JOLTIK @EVIOLITE COMPOUND_EYES MODEST 4/0/0/252/0/252 4 | THUNDER, BUG_BUZZ, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BUIZEL @EVIOLITE SWIFT_SWIM JOLLY 4/252/0/0/0/252 3 | LIQUIDATION, AQUA_JET, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-QUAGSIRE @LEFTOVERS UNAWARE IMPISH 252/0/252/0/4/0 0 | LIQUIDATION, HIGH_HORSEPOWER, YAWN, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
+DEWGONG @SITRUS_BERRY HYDRATION MODEST 252/0/4/252/0/0 3 | RAIN_DANCE, HYDRO_PUMP, ICE_BEAM, REST | ivs=31/0/31/31/31/31 | friendship=255
+JOLTIK @EVIOLITE COMPOUND_EYES MODEST 4/0/0/252/0/252 6 | THUNDER, BUG_BUZZ, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BUIZEL @EVIOLITE SWIFT_SWIM JOLLY 4/252/0/0/0/252 5 | LIQUIDATION, AQUA_JET, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+QUAGSIRE @LEFTOVERS UNAWARE IMPISH 252/0/252/0/4/0 2 | LIQUIDATION, HIGH_HORSEPOWER, YAWN, RECOVER | ivs=31/31/31/31/31/31 | friendship=255
 
 
 
@@ -614,22 +614,22 @@ strategy: NONE
 mega_slots: NONE
 plan: Alolan Rattata and Wailmer lead the museum ambush. Rattata's Super Fang can lower a suitable target before Wailmer attacks; choose immediate damage or disruption when percentage damage is unhelpful, inaccurate or immune. Zubat and Carvanha are reserves for Taunt/pivoting and Speed Boost physical cleanup. Rattata's native unmodified55 Speed precedes Wailmer45 at these seeds, but faster opposing attacks can interrupt the sequence. This keeps Carvanha as Aqua continuity while avoiding the proposed third recent Skrelp. It differs from Archie's following manual rain opening and the Woods thug's healthy Water Spout lead. Preserve the grunt's independent win and the scripted recovery exit before Archie. Stats: Rattata remains a bulky percentage-damage user, Wailmer bulky special offense, Zubat fast physical disruption and Carvanha fast physical cleanup. Could it be cooler? Yes: reorder the existing crew around percentage damage into an attack, retaining the believable marine roster. Overrepresented? Reject the third Skrelp proposal. Carvanha/Wailmer are deliberate Aqua continuity, with a different opening from the Woods thug and Archie. Medium incoming cap24 levels29/27/27/28 are unplayed design seeds.
 crack: Ghost immunity to Super Fang, faster concentrated damage, Grass/Electric pressure and choosing around Wailmer spread versus single-target attacks.
-RATTATA_ALOLA @FIGY_BERRY GLUTTONY IMPISH 252/4/252/0/0/0 5 | SUPER_FANG, CRUNCH, SUCKER_PUNCH, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
-WAILMER @SITRUS_BERRY WATER_VEIL MODEST 252/0/4/252/0/0 5 | HYDRO_PUMP, ICY_WIND, HYPER_VOICE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-ZUBAT @EVIOLITE INNER_FOCUS JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-CARVANHA @LIFE_ORB SPEED_BOOST ADAMANT 4/252/0/0/0/252 5 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+RATTATA_ALOLA @FIGY_BERRY GLUTTONY IMPISH 252/4/252/0/0/0 17 | SUPER_FANG, CRUNCH, SUCKER_PUNCH, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
+WAILMER @SITRUS_BERRY WATER_VEIL MODEST 252/0/4/252/0/0 17 | HYDRO_PUMP, ICY_WIND, HYPER_VOICE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+ZUBAT @EVIOLITE INNER_FOCUS JOLLY 4/252/0/0/0/252 16 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+CARVANHA @LIFE_ORB SPEED_BOOST ADAMANT 4/252/0/0/0/252 17 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0052 TRAINER_ARCHIE_SLATEPORT class=leader
 strategy: RAIN,SETUP
 mega_slots: NONE
 plan: Wingull Rain Dance with Lombre Fake Out only when rain pays; otherwise attack. Turn two Swift Swim Lombre attacks. Golbat/Lombre gives direct denial, Tentacool repairs weather if worthwhile, Corphish Dragon Dance/Aqua Jet and Carvanha are separate physical closers. No forced setup turn. Stats: Defensive Wingull61 Speed precedes unboosted Lombre59; rain doubles Lombre speed after it exists. Physical finishers and special supports keep role-aligned investment. Could it be cooler? Retain the small six-member marine crew and its manual-weather decision. Overrepresented? Intentional villain escalation after Billy/James/Chandler rain; do not describe weather alone as a unique mechanic. Medium incoming cap24 levels28/28/29/28/25/28 are unplayed design seeds.
 crack: Weather denial, Taunt, strong Grass/Electric pressure and interrupting the setter before the return on rain.
-WINGULL @DAMP_ROCK RAIN_DISH BOLD 252/0/4/0/252/0 5 | RAIN_DANCE, HURRICANE, ICY_WIND, ROOST | ivs=31/0/31/31/31/31 | friendship=255
-LOMBRE @SITRUS_BERRY SWIFT_SWIM MODEST 4/0/0/252/0/252 4 | FAKE_OUT, HYDRO_PUMP, GIGA_DRAIN, ICE_BEAM | ivs=31/31/31/31/31/31 | friendship=255
-CORPHISH @FOCUS_SASH ADAPTABILITY ADAMANT 4/252/0/0/0/252 5 | CRABHAMMER, KNOCK_OFF, AQUA_JET, DRAGON_DANCE | ivs=31/31/31/31/31/31 | friendship=255
-TENTACOOL @BLACK_SLUDGE CLEAR_BODY TIMID 4/0/0/252/0/252 4 | HYDRO_PUMP, ICY_WIND, RAIN_DANCE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GOLBAT @SITRUS_BERRY INNER_FOCUS JOLLY 4/252/0/0/0/252 2 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-CARVANHA @EXPERT_BELT SPEED_BOOST ADAMANT 4/252/0/0/0/252 4 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WINGULL @DAMP_ROCK RAIN_DISH BOLD 252/0/4/0/252/0 15 | RAIN_DANCE, HURRICANE, ICY_WIND, ROOST | ivs=31/0/31/31/31/31 | friendship=255
+LOMBRE @SITRUS_BERRY SWIFT_SWIM MODEST 4/0/0/252/0/252 14 | FAKE_OUT, HYDRO_PUMP, GIGA_DRAIN, ICE_BEAM | ivs=31/31/31/31/31/31 | friendship=255
+CORPHISH @FOCUS_SASH ADAPTABILITY ADAMANT 4/252/0/0/0/252 15 | CRABHAMMER, KNOCK_OFF, AQUA_JET, DRAGON_DANCE | ivs=31/31/31/31/31/31 | friendship=255
+TENTACOOL @BLACK_SLUDGE CLEAR_BODY TIMID 4/0/0/252/0/252 14 | HYDRO_PUMP, ICY_WIND, RAIN_DANCE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GOLBAT @SITRUS_BERRY INNER_FOCUS JOLLY 4/252/0/0/0/252 12 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+CARVANHA @EXPERT_BELT SPEED_BOOST ADAMANT 4/252/0/0/0/252 14 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0053 TRAINER_GRETA_SLATEPORT class=brain
 strategy: NONE
@@ -651,7 +651,7 @@ crack: Spread attacks bypass redirection; Ground/Fire pressure threatens Mawile;
 DELCATTY @SITRUS_BERRY NORMALIZE JOLLY 4/252/0/0/0/252 2 | FAKE_OUT, DOUBLE_EDGE, THUNDER_WAVE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 DUNSPARCE @EVIOLITE SERENE_GRACE ADAMANT 252/252/4/0/0/0 2 | GLARE, HEADBUTT, DRILL_RUN, ROOST | ivs=31/31/31/31/31/31 | friendship=255
 CLEFABLE @SITRUS_BERRY MAGIC_GUARD BOLD 252/0/4/0/252/0 0 | MOONBLAST, FOLLOW_ME, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MAWILE @LIFE_ORB SHEER_FORCE ADAMANT 252/252/4/0/0/0 3 | IRON_HEAD, PLAY_ROUGH, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MAWILE @LIFE_ORB HUGE_POWER ADAMANT 252/252/4/0/0/0 3 | IRON_HEAD, PLAY_ROUGH, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0054 TRAINER_KALEB class=regular
 strategy: SETUP
@@ -659,136 +659,136 @@ mega_slots: NONE
 ai: Conservative
 plan: Audino Helping Hand with Granbull attack is the default; Life Dew only changes survival. Dachsbun/Granbull is a Howl alternative; Boltund provides immediate speed, Audino can regenerate on a useful switch. Howl buffs Attack, not Body Press; no friendly Fire activation is authored. Stats: Audino now has physical bulk. Dachsbun73 precedes Granbull56 for Howl; Boltund115 benefits on later actions/turns. Body Press uses Defense, not Howl-boosted Attack. Could it be cooler? Yes: Dachsbun adds a specific pack-support role as this independent battle fourth member. Overrepresented? The Howl dog pack differs from Isabel physical control; Dachsbun had no prior authored campaign owner. Medium incoming cap30 levels31/32/30/31 are unplayed design seeds.
 crack: Special Poison pressure, Taunt, Ground coverage and removing the damage dealer. Well-Baked Body is reactive, not an authored guaranteed Fire loop.
-AUDINO @LEFTOVERS REGENERATOR BOLD 252/0/252/0/4/0 3 | HYPER_VOICE, LIFE_DEW, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GRANBULL @SITRUS_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 4 | PLAY_ROUGH, CLOSE_COMBAT, FIRE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BOLTUND @LIFE_ORB STRONG_JAW JOLLY 4/252/0/0/0/252 3 | THUNDER_FANG, CRUNCH, FIRE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DACHSBUN @SITRUS_BERRY WELL_BAKED_BODY IMPISH 252/0/252/0/4/0 4 | HOWL, BODY_PRESS, PLAY_ROUGH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
+AUDINO @LEFTOVERS REGENERATOR BOLD 252/0/252/0/4/0 6 | HYPER_VOICE, LIFE_DEW, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GRANBULL @SITRUS_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 7 | PLAY_ROUGH, CLOSE_COMBAT, FIRE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BOLTUND @LIFE_ORB STRONG_JAW JOLLY 4/252/0/0/0/252 6 | THUNDER_FANG, CRUNCH, FIRE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DACHSBUN @SITRUS_BERRY WELL_BAKED_BODY IMPISH 252/0/252/0/4/0 7 | HOWL, BODY_PRESS, PLAY_ROUGH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0055 TRAINER_SALLY class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Lopunny and Kirlia lead the Trick House control puzzle. Scrappy Fake Out can buy Kirlia a useful Imprison turn; Kirlia can instead attack when the opponent has no worthwhile shared moves or the support turn is unsafe. Imprison denies opposing Psychic, Dazzling Gleam and Protect while Kirlia remains active. It does not cancel a Protect that already executed before this priority-zero action, and switching/fainting ends the lock. Floragato supplies physical attacks/pivoting, and Whimsicott's Encore punishes a suitable remaining choice. Kirlia is Timid252HP/4SpAttack/252Speed, unmodified79 Speed at35, rather than another Calm Mind recipient. Lopunny's108 Speed and Fake Out support the opening; no guarantee against Covert Cloak, priority denial, spread attacks or faster disruption is implied. Keep Wally's separate Kirlia growth/setup role. Stats: Timid HP/Speed Kirlia79 now supports move denial rather than maximizing Calm Mind offense. Lopunny108 and fast physical Floragato provide pressure; Sitrus Whimsicott is bulky/fast utility. Could it be cooler? Yes: Fake Out into a useful matching-move lock makes the Trick House cast distinct; Kirlia attacks when no useful lock exists. Overrepresented? Sally no longer duplicates Wally Calm Mind/Psychic/Dazzling Gleam/Protect Kirlia. The species callback remains, with a different job and opening. Medium incoming cap30 levels31/35/32/30 are unplayed design seeds.
 crack: Nonmatching moves, Taunt, spread damage, Covert Cloak/priority denial and removing Kirlia. Imprison is not retroactive against an already executed Protect.
-LOPUNNY @SITRUS_BERRY SCRAPPY JOLLY 4/252/0/0/0/252 2 | HIGH_JUMP_KICK, ICE_PUNCH, FAKE_OUT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-KIRLIA @EVIOLITE TRACE TIMID 252/0/0/4/0/252 5 | IMPRISON, PSYCHIC, DAZZLING_GLEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-FLORAGATO @EVIOLITE PROTEAN JOLLY 4/252/0/0/0/252 3 | SEED_BOMB, PLAY_ROUGH, U_TURN, QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
-WHIMSICOTT @SITRUS_BERRY PRANKSTER TIMID 252/0/4/0/0/252 1 | MOONBLAST, LEECH_SEED, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+LOPUNNY @SITRUS_BERRY SCRAPPY JOLLY 4/252/0/0/0/252 5 | HIGH_JUMP_KICK, ICE_PUNCH, FAKE_OUT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KIRLIA @EVIOLITE TRACE TIMID 252/0/0/4/0/252 10 | IMPRISON, PSYCHIC, DAZZLING_GLEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+FLORAGATO @EVIOLITE PROTEAN JOLLY 4/252/0/0/0/252 6 | SEED_BOMB, PLAY_ROUGH, U_TURN, QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
+WHIMSICOTT @SITRUS_BERRY PRANKSTER TIMID 252/0/4/0/0/252 4 | MOONBLAST, LEECH_SEED, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0056 TRAINER_EDDIE class=regular
 strategy: REDIRECTION
 mega_slots: NONE
 plan: Dugtrio Earthquake with airborne Misdreavus attacking/burning; on next turn reassess trapping and immunities. Carnivine can redirect or Stun Spore for a surviving attacker; Gligar is a fast Ground-immune pivot. No ally is presumed immune once grounded/suppressed. Stats: Keep Sash physical Dugtrio, Eviolite special Misdreavus, physical/support Carnivine and Flying Gem Acrobatics Gligar. Could it be cooler? Keep the underground/hovering trap formation; replace unsupported Carnivine Helping Hand with legal Stun Spore. Overrepresented? Eddie develops Sarah alternate Arena Trap/Levitate Earthquake into a full fast team; this accepted overlap remains a pacing watch item. Medium incoming cap30 levels30/32/32/32 are unplayed design seeds.
 crack: Eligible escape/pivot routes, Flying/Levitate/Ghost rules, powder immunity, Water/Grass pressure and grounding or suppressing an ally.
-DUGTRIO @FOCUS_SASH ARENA_TRAP JOLLY 4/252/0/0/0/252 1 | EARTHQUAKE, ROCK_SLIDE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MISDREAVUS @EVIOLITE LEVITATE TIMID 4/0/0/252/0/252 2 | SHADOW_BALL, THUNDERBOLT, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-CARNIVINE @SITRUS_BERRY LEVITATE ADAMANT 252/252/4/0/0/0 3 | POWER_WHIP, KNOCK_OFF, RAGE_POWDER, STUN_SPORE | ivs=31/31/31/31/31/31 | friendship=255
-GLIGAR @FLYING_GEM IMMUNITY JOLLY 4/252/0/0/0/252 2 | ACROBATICS, HIGH_HORSEPOWER, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DUGTRIO @FOCUS_SASH ARENA_TRAP JOLLY 4/252/0/0/0/252 4 | EARTHQUAKE, ROCK_SLIDE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MISDREAVUS @EVIOLITE LEVITATE TIMID 4/0/0/252/0/252 5 | SHADOW_BALL, THUNDERBOLT, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+CARNIVINE @SITRUS_BERRY LEVITATE ADAMANT 252/252/4/0/0/0 6 | POWER_WHIP, KNOCK_OFF, RAGE_POWDER, STUN_SPORE | ivs=31/31/31/31/31/31 | friendship=255
+GLIGAR @FLYING_GEM IMMUNITY JOLLY 4/252/0/0/0/252 5 | ACROBATICS, HIGH_HORSEPOWER, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0058 TRAINER_TIMMY class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Stunky Taunt/Helping Hand enables Heliolisk immediate damage; Volt Switch only buys a worthwhile entry. Herdier Intimidate supplies physical mitigation and Double-Edge. Ditto is a matchup-dependent revenge entry, not an automatic opener. Dry Skin does not create rain. Stats: Keep fast special Heliolisk, physical Herdier and HP-focused Scarf Ditto. Herdier Double-Edge is an explicit valid custom, not an illegal move. Could it be cooler? Retain the opportunistic roadside team, with Imposter as its unusual reserve. Overrepresented? Billy Ditto serves rain; Timmy serves direct disruption/offense. Later Ben Heliolisk has different special support. Medium incoming cap30 levels33/30/33/30 are unplayed design seeds.
 crack: Ground attacks, special mitigation, denied transformation targets and removing the offensive partner. Dry Skin does not invent rain.
-STUNKY @EVIOLITE AFTERMATH JOLLY 4/252/0/0/0/252 3 | SUCKER_PUNCH, POISON_JAB, HELPING_HAND, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
-HELIOLISK @LIFE_ORB DRY_SKIN TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, HYPER_VOICE, GRASS_KNOT, VOLT_SWITCH | ivs=31/0/31/31/31/31 | friendship=255
-HERDIER @SITRUS_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 4 | DOUBLE_EDGE, CRUNCH, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 1 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
+STUNKY @EVIOLITE AFTERMATH JOLLY 4/252/0/0/0/252 7 | SUCKER_PUNCH, POISON_JAB, HELPING_HAND, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
+HELIOLISK @LIFE_ORB DRY_SKIN TIMID 4/0/0/252/0/252 6 | THUNDERBOLT, HYPER_VOICE, GRASS_KNOT, VOLT_SWITCH | ivs=31/0/31/31/31/31 | friendship=255
+HERDIER @SITRUS_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 9 | DOUBLE_EDGE, CRUNCH, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DITTO @CHOICE_SCARF IMPOSTER RELAXED 252/0/252/0/4/0 4 | TRANSFORM | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_BRENDAN_ROUTE_110_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: Swellow activates Flame Orb with Protect only if Manectric contributes safely; otherwise attack. Then use Guts damage and one useful pivot. Breloom Spore/priority is the alternate partner. Fourth slot retains the branch support, fifth is the actual regional starter and its native resolved set; no all-starters party. Stats: Keep specialized builds. Mature core30, branch support33 and actual middle starter34; regional replacements inherit the slot level but retain their native resolved builds. Could it be cooler? Retain recognizable growth of Taillow/Shroomish and the unchosen starter, rather than erase the rival relationship. Overrepresented? Recurring rival species are intentional. Six gender/Hoenn aliases and24 regional alternatives are not extra battles or one all-starters party. Medium incoming cap30 levels30/30/30/33/34 are unplayed design seeds.
 crack: Powder immunity, priority, Ground pressure and denying a useful Orb/Protect turn or pivot.
-SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 2 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 1 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-NUZLEAF @SITRUS_BERRY PICKPOCKET ADAMANT 4/252/0/0/0/252 3 | FAKE_OUT, LEAF_BLADE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 4 | LEAF_BLADE, X_SCISSOR, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 7 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 5 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 5 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NUZLEAF @SITRUS_BERRY PICKPOCKET ADAMANT 4/252/0/0/0/252 7 | FAKE_OUT, LEAF_BLADE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 9 | LEAF_BLADE, X_SCISSOR, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_BRENDAN_ROUTE_110_TORCHIC class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: Swellow activates Flame Orb with Protect only if Manectric contributes safely; otherwise attack. Then use Guts damage and one useful pivot. Breloom Spore/priority is the alternate partner. Fourth slot retains the branch support, fifth is the actual regional starter and its native resolved set; no all-starters party. Stats: Keep specialized builds. Mature core30, branch support33 and actual middle starter34; regional replacements inherit the slot level but retain their native resolved builds. Could it be cooler? Retain recognizable growth of Taillow/Shroomish and the unchosen starter, rather than erase the rival relationship. Overrepresented? Recurring rival species are intentional. Six gender/Hoenn aliases and24 regional alternatives are not extra battles or one all-starters party. Medium incoming cap30 levels30/30/30/33/34 are unplayed design seeds.
 crack: Powder immunity, priority, Ground pressure and denying a useful Orb/Protect turn or pivot.
-SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 1 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 0 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-LOMBRE @EVIOLITE OWN_TEMPO BOLD 252/0/4/0/252/0 3 | FAKE_OUT, GIGA_DRAIN, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 4 | WATERFALL, ROCK_SLIDE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 6 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 5 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+LOMBRE @EVIOLITE OWN_TEMPO BOLD 252/0/4/0/252/0 7 | FAKE_OUT, GIGA_DRAIN, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 9 | WATERFALL, ROCK_SLIDE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_BRENDAN_ROUTE_110_TREECKO class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: Swellow activates Flame Orb with Protect only if Manectric contributes safely; otherwise attack. Then use Guts damage and one useful pivot. Breloom Spore/priority is the alternate partner. Fourth slot retains the branch support, fifth is the actual regional starter and its native resolved set; no all-starters party. Stats: Keep specialized builds. Mature core30, branch support33 and actual middle starter34; regional replacements inherit the slot level but retain their native resolved builds. Could it be cooler? Retain recognizable growth of Taillow/Shroomish and the unchosen starter, rather than erase the rival relationship. Overrepresented? Recurring rival species are intentional. Six gender/Hoenn aliases and24 regional alternatives are not extra battles or one all-starters party. Medium incoming cap30 levels30/30/30/33/34 are unplayed design seeds.
 crack: Powder immunity, priority, Ground pressure and denying a useful Orb/Protect turn or pivot.
-SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 1 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 0 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-NUMEL @SITRUS_BERRY OBLIVIOUS QUIET 252/0/4/252/0/0 3 | HEAT_WAVE, EARTH_POWER, YAWN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-COMBUSKEN @LIFE_ORB SPEED_BOOST JOLLY 4/252/0/0/0/252 4 | FIRE_PUNCH, LOW_KICK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 6 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 5 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NUMEL @SITRUS_BERRY OBLIVIOUS QUIET 252/0/4/252/0/0 7 | HEAT_WAVE, EARTH_POWER, YAWN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+COMBUSKEN @LIFE_ORB SPEED_BOOST JOLLY 4/252/0/0/0/252 9 | FIRE_PUNCH, LOW_KICK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_MAY_ROUTE_110_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: Swellow activates Flame Orb with Protect only if Manectric contributes safely; otherwise attack. Then use Guts damage and one useful pivot. Breloom Spore/priority is the alternate partner. Fourth slot retains the branch support, fifth is the actual regional starter and its native resolved set; no all-starters party. Stats: Keep specialized builds. Mature core30, branch support33 and actual middle starter34; regional replacements inherit the slot level but retain their native resolved builds. Could it be cooler? Retain recognizable growth of Taillow/Shroomish and the unchosen starter, rather than erase the rival relationship. Overrepresented? Recurring rival species are intentional. Six gender/Hoenn aliases and24 regional alternatives are not extra battles or one all-starters party. Medium incoming cap30 levels30/30/30/33/34 are unplayed design seeds.
 crack: Powder immunity, priority, Ground pressure and denying a useful Orb/Protect turn or pivot.
-SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 1 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 0 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-NUZLEAF @SITRUS_BERRY PICKPOCKET ADAMANT 4/252/0/0/0/252 3 | FAKE_OUT, LEAF_BLADE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 4 | LEAF_BLADE, X_SCISSOR, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 6 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 5 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NUZLEAF @SITRUS_BERRY PICKPOCKET ADAMANT 4/252/0/0/0/252 7 | FAKE_OUT, LEAF_BLADE, SUCKER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 9 | LEAF_BLADE, X_SCISSOR, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_MAY_ROUTE_110_TORCHIC class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: Swellow activates Flame Orb with Protect only if Manectric contributes safely; otherwise attack. Then use Guts damage and one useful pivot. Breloom Spore/priority is the alternate partner. Fourth slot retains the branch support, fifth is the actual regional starter and its native resolved set; no all-starters party. Stats: Keep specialized builds. Mature core30, branch support33 and actual middle starter34; regional replacements inherit the slot level but retain their native resolved builds. Could it be cooler? Retain recognizable growth of Taillow/Shroomish and the unchosen starter, rather than erase the rival relationship. Overrepresented? Recurring rival species are intentional. Six gender/Hoenn aliases and24 regional alternatives are not extra battles or one all-starters party. Medium incoming cap30 levels30/30/30/33/34 are unplayed design seeds.
 crack: Powder immunity, priority, Ground pressure and denying a useful Orb/Protect turn or pivot.
-SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 1 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 0 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-LOMBRE @EVIOLITE OWN_TEMPO BOLD 252/0/4/0/252/0 3 | FAKE_OUT, GIGA_DRAIN, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 4 | WATERFALL, ROCK_SLIDE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 6 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 5 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+LOMBRE @EVIOLITE OWN_TEMPO BOLD 252/0/4/0/252/0 7 | FAKE_OUT, GIGA_DRAIN, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 9 | WATERFALL, ROCK_SLIDE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0059 TRAINER_MAY_ROUTE_110_TREECKO class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: Swellow activates Flame Orb with Protect only if Manectric contributes safely; otherwise attack. Then use Guts damage and one useful pivot. Breloom Spore/priority is the alternate partner. Fourth slot retains the branch support, fifth is the actual regional starter and its native resolved set; no all-starters party. Stats: Keep specialized builds. Mature core30, branch support33 and actual middle starter34; regional replacements inherit the slot level but retain their native resolved builds. Could it be cooler? Retain recognizable growth of Taillow/Shroomish and the unchosen starter, rather than erase the rival relationship. Overrepresented? Recurring rival species are intentional. Six gender/Hoenn aliases and24 regional alternatives are not extra battles or one all-starters party. Medium incoming cap30 levels30/30/30/33/34 are unplayed design seeds.
 crack: Powder immunity, priority, Ground pressure and denying a useful Orb/Protect turn or pivot.
-SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 1 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 1 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 0 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-NUMEL @SITRUS_BERRY OBLIVIOUS QUIET 252/0/4/252/0/0 3 | HEAT_WAVE, EARTH_POWER, YAWN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-COMBUSKEN @LIFE_ORB SPEED_BOOST JOLLY 4/252/0/0/0/252 4 | FIRE_PUNCH, LOW_KICK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWELLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 6 | FACADE, BRAVE_BIRD, U_TURN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANECTRIC @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 5 | THUNDERBOLT, VOLT_SWITCH, SNARL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | SPORE, MACH_PUNCH, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+NUMEL @SITRUS_BERRY OBLIVIOUS QUIET 252/0/4/252/0/0 7 | HEAT_WAVE, EARTH_POWER, YAWN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+COMBUSKEN @LIFE_ORB SPEED_BOOST JOLLY 4/252/0/0/0/252 9 | FIRE_PUNCH, LOW_KICK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0063 TRAINER_JACLYN class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Jaclyn keeps the trapped-Encore, Simple Stored Power puzzle and now has a Psychic that Dark types cannot wall. First two useful turns: Wobbuffet uses Encore to lock in a completed support move, or Safeguard against a relevant status line, while Swoobat safely uses Calm Mind or attacks. Simple doubles Calm Mind to +2 Special Attack and Special Defense, and Stored Power then attacks; Shadow Tag traps non-Ghost foes but never redirects attacks. Counter and Mirror Coat punish the foe that hits Wobbuffet hardest. Alternate deployment: Kadabra gives immediate fast pressure, with Dazzling Gleam for Dark and Fighting foes. Reserves & disruption: Gallade replaces Musharna, the overlap with Brandi. Justified raises its Attack when a Dark move hits it, so the Knock Offs, Foul Plays and Sucker Punches that answer the other three feed it; Sacred Sword hits Dark and Steel foes for super-effective damage and ignores their stat boosts, Psycho Cut handles Fighting and Poison foes, and Knock Off punishes Ghosts. Lum Berry cures the Will-O-Wisp or sleep a Dark/Ghost support would use to neutralize it.
 crack: Flying, Ghost and Fairy attacks hit Gallade for super-effective damage, and a Ghost type that never uses a Dark move gives Justified nothing. Taunt stops Wobbuffet's Encore and Swoobat's setup; Dark types remain immune to Stored Power; focus Swoobat before Calm Mind stacks, and remove or ignore the trapper.
-WOBBUFFET @SITRUS_BERRY SHADOW_TAG CALM 4/0/252/0/252/0 2 | COUNTER, MIRROR_COAT, ENCORE, SAFEGUARD | ivs=31/0/31/31/31/31 | friendship=255
-SWOOBAT @SITRUS_BERRY SIMPLE TIMID 4/0/0/252/0/252 2 | CALM_MIND, STORED_POWER, AIR_SLASH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-KADABRA @FOCUS_SASH MAGIC_GUARD TIMID 4/0/0/252/0/252 2 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GALLADE @LUM_BERRY JUSTIFIED ADAMANT 252/252/4/0/0/0 2 | SACRED_SWORD, PSYCHO_CUT, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WOBBUFFET @SITRUS_BERRY SHADOW_TAG CALM 4/0/252/0/252/0 12 | COUNTER, MIRROR_COAT, ENCORE, SAFEGUARD | ivs=31/0/31/31/31/31 | friendship=255
+SWOOBAT @SITRUS_BERRY SIMPLE TIMID 4/0/0/252/0/252 12 | CALM_MIND, STORED_POWER, AIR_SLASH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+KADABRA @FOCUS_SASH MAGIC_GUARD TIMID 4/0/0/252/0/252 12 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GALLADE @LUM_BERRY JUSTIFIED ADAMANT 252/252/4/0/0/0 12 | SACRED_SWORD, PSYCHO_CUT, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0064 TRAINER_ANTHONY class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Doduo attacks or uses one supported Swords Dance while Zebstrika threatens coverage/pivot. Linoone now supplies immediate Choice Band Extreme Speed or a useful Switcheroo; Magneton can Reflect against physical pressure then attack. No Belly Drum turn or Gluttony trigger is planned. Stats: Fast physical Band Linoone matches priority/coverage; Gluttony is dormant while Band remains. Physical Zebstrika still has uninvested Overheat coverage. Could it be cooler? Yes: item trading adds a road-race trick while Doduo keeps optional Swords Dance offense. Overrepresented? Johnson Doduo is Sash/Endeavor. Removing this Drum is a local differentiation choice, not a campaign ban on evolutionary callbacks. Medium incoming cap30 levels34/31/32/30 are unplayed design seeds.
 crack: Choice-lock exploitation, priority denial, Fighting/Ground pressure and Intimidate; Switcheroo needs a legal useful item exchange.
-DODUO @EVIOLITE EARLY_BIRD JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
-ZEBSTRIKA @LIFE_ORB SAP_SIPPER NAIVE 4/252/0/0/0/252 1 | WILD_CHARGE, OVERHEAT, HIGH_HORSEPOWER, VOLT_SWITCH | ivs=31/31/31/31/31/31 | friendship=255
-LINOONE @CHOICE_BAND GLUTTONY ADAMANT 4/252/0/0/0/252 2 | EXTREME_SPEED, THROAT_CHOP, SEED_BOMB, SWITCHEROO | ivs=31/31/31/31/31/31 | friendship=255
-MAGNETON @AIR_BALLOON ANALYTIC MODEST 4/0/0/252/0/252 1 | THUNDERBOLT, FLASH_CANNON, VOLT_SWITCH, REFLECT | ivs=31/0/31/31/31/31 | friendship=255
+DODUO @EVIOLITE EARLY_BIRD JOLLY 4/252/0/0/0/252 10 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, SWORDS_DANCE | ivs=31/31/31/31/31/31 | friendship=255
+ZEBSTRIKA @LIFE_ORB SAP_SIPPER NAIVE 4/252/0/0/0/252 7 | WILD_CHARGE, OVERHEAT, HIGH_HORSEPOWER, VOLT_SWITCH | ivs=31/31/31/31/31/31 | friendship=255
+LINOONE @CHOICE_BAND GLUTTONY ADAMANT 4/252/0/0/0/252 8 | EXTREME_SPEED, THROAT_CHOP, SEED_BOMB, SWITCHEROO | ivs=31/31/31/31/31/31 | friendship=255
+MAGNETON @AIR_BALLOON ANALYTIC MODEST 4/0/0/252/0/252 7 | THUNDERBOLT, FLASH_CANNON, VOLT_SWITCH, REFLECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0067 TRAINER_JASMINE class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Thwackey Fake Out supports Quaxwell attack or fresh Quilava Eruption; turn two use terrain priority when grounded. Brionne supplies a Water-typed Liquid Voice/Throat Spray special alternative. Preserve meaningful coverage when HP makes Eruption weak. No manual weather implied. Stats: Physical Thwackey/Quaxwell and special Quilava/Brionne fit. Specs Eruption needs preserved HP; other Fire moves remain useful after damage. Could it be cooler? Replace unsupported Scorching Sands with Eruption, giving Fake Out a clear alternate payoff without evolving away the starter collection. Overrepresented? Terrain/Moxie/sound pressure differs from Dwayne elemental redirection and Simon Battery; regional starter appearances are alternatives. Medium incoming cap30 levels33/34/33/34 are unplayed design seeds.
 crack: Terrain denial, Flying pressure, Wide Guard and damaging Quilava before Eruption; no weather engine is implied.
-THWACKEY @EVIOLITE GRASSY_SURGE ADAMANT 4/252/0/0/0/252 4 | GRASSY_GLIDE, KNOCK_OFF, WOOD_HAMMER, FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
-QUAXWELL @LIFE_ORB MOXIE JOLLY 4/252/0/0/0/252 5 | AQUA_CUTTER, BRAVE_BIRD, LOW_KICK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-QUILAVA @CHOICE_SPECS BLAZE TIMID 4/0/0/252/0/252 4 | HEAT_WAVE, FLAMETHROWER, EXTRASENSORY, ERUPTION | ivs=31/0/31/31/31/31 | friendship=255
-BRIONNE @THROAT_SPRAY LIQUID_VOICE MODEST 4/0/0/252/0/252 4 | HYPER_VOICE, MOONBLAST, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+THWACKEY @EVIOLITE GRASSY_SURGE ADAMANT 4/252/0/0/0/252 9 | GRASSY_GLIDE, KNOCK_OFF, WOOD_HAMMER, FAKE_OUT | ivs=31/31/31/31/31/31 | friendship=255
+QUAXWELL @LIFE_ORB MOXIE JOLLY 4/252/0/0/0/252 10 | AQUA_CUTTER, BRAVE_BIRD, LOW_KICK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+QUILAVA @CHOICE_SPECS BLAZE TIMID 4/0/0/252/0/252 9 | HEAT_WAVE, FLAMETHROWER, EXTRASENSORY, ERUPTION | ivs=31/0/31/31/31/31 | friendship=255
+BRIONNE @THROAT_SPRAY LIQUID_VOICE MODEST 4/0/0/252/0/252 9 | HYPER_VOICE, MOONBLAST, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0068 TRAINER_JACOB class=regular
 strategy: NONE
@@ -806,10 +806,10 @@ mega_slots: NONE
 ai: Conservative
 plan: Swablu chooses Tailwind/Helping Hand beside Kirlia one Calm Mind or attack. Turn two use real speed advantage. Roselia offers sleep/STAB and Magneton Sturdy plus temporary Balloon immunity. Swablu cannot guarantee two setup turns; reject passive dual-support endings. Stats: Young Swablu/Kirlia receive individual levels. Swablu50 moves after Kirlia61, so a fresh Tailwind generally benefits the following exchange; preserve the first turn. Could it be cooler? Keep the childhood team and vulnerable support turn; no forced early evolution. Overrepresented? Sally Kirlia now denies matching moves instead of duplicating Calm Mind. Daisy Roselia feeds Deerling rather than supplying sleep. Medium incoming cap30 levels35/35/32/30 are unplayed design seeds.
 crack: Taunt, powder immunity, spread attacks, speed reversal and breaking Magneton temporary Air Balloon immunity.
-SWABLU @EVIOLITE NATURAL_CURE BOLD 252/0/252/0/4/0 5 | HYPER_VOICE, ROOST, TAILWIND, HELPING_HAND | ivs=31/0/31/31/31/31 | friendship=255
-KIRLIA @EVIOLITE TRACE MODEST 140/0/0/252/0/116 5 | PSYCHIC, DAZZLING_GLEAM, CALM_MIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 2 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MAGNETON @AIR_BALLOON STURDY MODEST 4/0/0/252/0/252 0 | THUNDERBOLT, FLASH_CANNON, VOLT_SWITCH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+SWABLU @EVIOLITE NATURAL_CURE BOLD 252/0/252/0/4/0 14 | HYPER_VOICE, ROOST, TAILWIND, HELPING_HAND | ivs=31/0/31/31/31/31 | friendship=255
+KIRLIA @EVIOLITE TRACE MODEST 140/0/0/252/0/116 15 | PSYCHIC, DAZZLING_GLEAM, CALM_MIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 10 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+MAGNETON @AIR_BALLOON STURDY MODEST 4/0/0/252/0/252 8 | THUNDERBOLT, FLASH_CANNON, VOLT_SWITCH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0070 TRAINER_ANNA_AND_MEG_1 class=regular
 strategy: NONE
@@ -849,10 +849,10 @@ strategy: NONE
 mega_slots: NONE
 plan: The bagworm family keeps its three cloak-and-moth jobs, but trades Plant Wormadam (4x weak to Fire) for an Araquanid that shuts down Fire attacks. First two useful turns: Araquanid and Sandy lead. Water Bubble halves Fire damage and prevents burns, so Bug/Water Araquanid takes half damage from Fire; its doubled Liquidation hits Fire, Rock and Ground types for super-effective damage. Wide Guard blocks the spread Heat Wave, Rock Slide and Air Cutter that punish a Bug team, and it also shields its own side from Sandy's Earthquake, so Sandy can attack freely that turn. Sandy's Assault Vest Earthquake, Rock Blast and Sucker Punch are the physical lane; Rock Blast also hits Fire and Flying types for super-effective damage. Alternate deployment: Trash Wormadam uses the damage it actually received for Metal Burst, or Toxic an appropriate wall; its zero Speed IV is deliberate. Specs Tinted Lens Mothim provides fast special damage and a U-turn pivot, and is immune to Sandy's Earthquake. Reserves & disruption: Leech Life keeps Araquanid healthy against Grass and Psychic foes. Metal Burst does not use Trash's Attack stat, and an Earthquake beside an unshielded Trash still hits it.
 crack: Electric and Flying attacks threaten Araquanid, and Rock attacks threaten Mothim. Once Araquanid is down, Fire attacks again hit Trash for 4x damage and Sandy and Mothim for 2x. Single-target Fire attacks bypass Wide Guard. Taunt, special attacks into Sandy, and giving Trash no hit to return with Metal Burst also work.
-ARAQUANID @SITRUS_BERRY WATER_BUBBLE ADAMANT 252/252/4/0/0/0 4 | LIQUIDATION, LEECH_LIFE, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-WORMADAM_SANDY @ASSAULT_VEST OVERCOAT ADAMANT 252/252/4/0/0/0 4 | EARTHQUAKE, ROCK_BLAST, SUCKER_PUNCH, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
-WORMADAM_TRASH @ROCKY_HELMET OVERCOAT SASSY 252/0/252/0/4/0 4 | FLASH_CANNON, METAL_BURST, TOXIC, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
-MOTHIM @CHOICE_SPECS TINTED_LENS TIMID 4/0/0/252/0/252 4 | BUG_BUZZ, AIR_SLASH, GIGA_DRAIN, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+ARAQUANID @SITRUS_BERRY WATER_BUBBLE ADAMANT 252/252/4/0/0/0 8 | LIQUIDATION, LEECH_LIFE, WIDE_GUARD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+WORMADAM_SANDY @ASSAULT_VEST OVERCOAT ADAMANT 252/252/4/0/0/0 8 | EARTHQUAKE, ROCK_BLAST, SUCKER_PUNCH, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
+WORMADAM_TRASH @ROCKY_HELMET OVERCOAT SASSY 252/0/252/0/4/0 7 | FLASH_CANNON, METAL_BURST, TOXIC, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
+MOTHIM @CHOICE_SPECS TINTED_LENS TIMID 4/0/0/252/0/252 7 | BUG_BUZZ, AIR_SLASH, GIGA_DRAIN, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0075 TRAINER_LYDIA_1 class=ace
 strategy: NONE
@@ -873,10 +873,10 @@ mega_slots: NONE
 tactic: ACTIVATE THROH STORM_THROW TAUROS_PALDEA_COMBAT
 plan: Throh's Storm Throw always lands a critical hit, so it can activate Paldean Tauros' Anger Point - maximum Attack at once - whenever Tauros survives the throw. Throh has zero Attack IV and no Attack investment so the friendly critical stays small, and Tauros has zero Speed so Throh's max-Speed throw lands before Tauros acts. Inner Focus stops a Fake Out from interrupting the activation. Hitmontop trades Helping Hand for Wide Guard to protect the boosted Tauros from relevant spread moves; Hariyama supplies its own Fake Out/physical line. Attack rather than repeat activation when Tauros is already boosted. Stats: Tauros has HP and Attack; Hariyama's split defenses complement its large HP. Could it be cooler? A Battle Girl had Froslass and Tauros - half her team not Fighting. The critical-hit partnership is kept on Fighting bodies: Throh, the judo Pokemon, replaces Froslass as the activator, and Paldea's Combat Breed Tauros keeps the same species, the same Anger Point and the same job while becoming a Fighting type. Close Combat replaces Double-Edge as its Fighting STAB. Overrepresented? Neither Throh nor Combat Tauros appears nearby; shared Hitmontop support is justified by this different centerpiece. Level offsets unchanged at +1.
 crack: Remove or disable the activator, stop the boost or its recipient, exploit critical-hit prevention - Battle Armor and Shell Armor blank Storm Throw's guaranteed critical - use special pressure, or bypass the selected guard. Every member is Fighting, so Psychic, Flying and Fairy attacks all hit super-effectively; Clear Amulet blocks Intimidate on Tauros, so answer a boosted Tauros with Protect, a faster knockout or a burn.
-THROH @LEFTOVERS INNER_FOCUS JOLLY 252/0/4/0/0/252 3 | STORM_THROW, KNOCK_OFF, WIDE_GUARD, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-TAUROS_PALDEA_COMBAT @CLEAR_AMULET ANGER_POINT BRAVE 252/252/0/0/4/0 3 | CLOSE_COMBAT, HIGH_HORSEPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
-HARIYAMA @SITRUS_BERRY THICK_FAT ADAMANT 4/252/124/0/128/0 3 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, BULLET_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
-HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 3 | FAKE_OUT, CLOSE_COMBAT, FEINT, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
+THROH @LEFTOVERS INNER_FOCUS JOLLY 252/0/4/0/0/252 5 | STORM_THROW, KNOCK_OFF, WIDE_GUARD, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+TAUROS_PALDEA_COMBAT @CLEAR_AMULET ANGER_POINT BRAVE 252/252/0/0/4/0 6 | CLOSE_COMBAT, HIGH_HORSEPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
+HARIYAMA @SITRUS_BERRY THICK_FAT ADAMANT 4/252/124/0/128/0 5 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, BULLET_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 5 | FAKE_OUT, CLOSE_COMBAT, FEINT, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0076 TRAINER_BRANDI class=casual
 strategy: TRICK_ROOM
@@ -915,20 +915,20 @@ mega_slots: NONE
 ai: Ace Pokemon
 plan: Lilligant's Quiver Dance/Petal Dance partnership with Dancer Oricorio remains. Own Tempo handles Lilligant's confusion risk; successful copied moves do not spend Oricorio's selected action. Blissey trades Thunder Wave for Helping Hand, and Roserade supplies independent special offense. Stats: Lilligant acts before bulky Oricorio at these seeds. Blissey remains physically reinforced; its extra support must buy actual damage rather than a passive ending. Could it be cooler? Keep the special dance variation rather than replace a strong themed partnership. Overrepresented? Jocelyn emphasizes physical Victory Dance and mixed Oricorio. Removing Bianca's Lilligant and Rose's Roserade reduces immediate species crowding. Medium cap30 levels29/29/28/29 are initial design seeds; no new battle validation is claimed.
 crack: Disrupt either dancer, use the relevant immunities/absorbers, spread damage or special mitigation; Petal Dance target/lock rules still apply.
-LILLIGANT @MIRACLE_SEED OWN_TEMPO MODEST 4/0/0/252/0/252 0 | PETAL_DANCE, QUIVER_DANCE, POLLEN_PUFF, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-ORICORIO @SITRUS_BERRY DANCER MODEST 252/0/4/252/0/0 0 | REVELATION_DANCE, AIR_SLASH, ROOST, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BLISSEY @LIGHT_CLAY NATURAL_CURE BOLD 252/0/252/0/4/0 1 | SOFT_BOILED, SEISMIC_TOSS, HELPING_HAND, LIGHT_SCREEN | ivs=31/0/31/31/31/31 | friendship=255
-ROSERADE @BLACK_SLUDGE NATURAL_CURE TIMID 4/0/0/252/0/252 1 | LEAF_STORM, SLUDGE_BOMB, SHADOW_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+LILLIGANT @MIRACLE_SEED OWN_TEMPO MODEST 4/0/0/252/0/252 5 | PETAL_DANCE, QUIVER_DANCE, POLLEN_PUFF, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+ORICORIO @SITRUS_BERRY DANCER MODEST 252/0/4/252/0/0 4 | REVELATION_DANCE, AIR_SLASH, ROOST, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BLISSEY @LIGHT_CLAY NATURAL_CURE BOLD 252/0/252/0/4/0 4 | SOFT_BOILED, SEISMIC_TOSS, HELPING_HAND, LIGHT_SCREEN | ivs=31/0/31/31/31/31 | friendship=255
+ROSERADE @BLACK_SLUDGE NATURAL_CURE TIMID 4/0/0/252/0/252 5 | LEAF_STORM, SLUDGE_BOMB, SHADOW_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0079 TRAINER_VIVI class=ace
 strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
 plan: Vibrava's legal Bulldoze can damage foes and turn the resisted friendly Speed drop into a Contrary boost for Fomantis. Fomantis's Leaf Storm similarly raises its own special offense. Virizion uses Quick Guard instead of another Swords Dance; Quagsire supplies a physical Unaware alternative. Stats: Fast special Fomantis64 Speed becomes96 after one actual boost; Vibrava92 moves before it initially. The friendly hit still costs HP and is unsafe when the recipient cannot survive. Keep the Speed investment for this purpose. Could it be cooler? The tiny plant turns both offensive and speed drawbacks into growth, giving the four a real interaction. Overrepresented? Distinct from Daisy's Sap Sipper Attack boost. Fomantis is unique; Virizion has another later owner. Do not carry the named Bulldoze benefit over to incompatible allies. Medium cap30 levels36/29/28/34 are initial design seeds; no new battle validation is claimed.
 crack: Flying immunity to Bulldoze, priority, removing the recipient, ability suppression and unsafe friendly damage beside Quagsire or Virizion.
-FOMANTIS @EVIOLITE CONTRARY MODEST 4/0/0/252/0/252 6 | LEAF_STORM, GIGA_DRAIN, SYNTHESIS, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-VIBRAVA @EVIOLITE LEVITATE JOLLY 4/252/0/0/0/252 4 | DRAGON_CLAW, BULLDOZE, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
-VIRIZION @LIFE_ORB JUSTIFIED JOLLY 4/252/0/0/0/252 0 | LEAF_BLADE, CLOSE_COMBAT, STONE_EDGE, QUICK_GUARD | ivs=31/31/31/31/31/31 | friendship=255
-QUAGSIRE @RINDO_BERRY UNAWARE ADAMANT 252/252/4/0/0/0 1 | LIQUIDATION, ICE_PUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FOMANTIS @EVIOLITE CONTRARY MODEST 4/0/0/252/0/252 12 | LEAF_STORM, GIGA_DRAIN, SYNTHESIS, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+VIBRAVA @EVIOLITE LEVITATE JOLLY 4/252/0/0/0/252 10 | DRAGON_CLAW, BULLDOZE, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+VIRIZION @LIFE_ORB JUSTIFIED JOLLY 4/252/0/0/0/252 8 | LEAF_BLADE, CLOSE_COMBAT, STONE_EDGE, QUICK_GUARD | ivs=31/31/31/31/31/31 | friendship=255
+QUAGSIRE @RINDO_BERRY UNAWARE ADAMANT 252/252/4/0/0/0 8 | LIQUIDATION, ICE_PUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0080 TRAINER_VICKY class=ace
 strategy: REDIRECTION
@@ -936,20 +936,20 @@ mega_slots: NONE
 ai: Ace Pokemon
 plan: Pawmot/Machamp now lead with immediate Fake Out and No Guard pressure. Pawmot gains Double Shock; Machamp trades Bulk Up for Wide Guard. Togetic remains a reserve protector and Sawk an independent physical finisher. Stats: Physical leads and physically bulky Togetic fit. Double Shock removes Electric typing until reset, changing both available moves and defensive matchups; No Guard does not make confusion a guaranteed lost turn. Could it be cooler? Close the family sequence with coordinated attacks rather than another redirector-plus-setup opening. Overrepresented? Reduces the resemblance to Isaac/Amy-Liv leads. Shawn's Pawmot is a Choice Band attacker with a different role. Medium cap30 levels29/28/33/29 are initial design seeds; no new battle validation is claimed.
 crack: Deny the selected priority/guard, exploit typing after Double Shock, use special pressure and punish a mismatched protection action.
-PAWMOT @FOCUS_SASH IRON_FIST JOLLY 4/252/0/0/0/252 -1 | FAKE_OUT, DOUBLE_SHOCK, MACH_PUNCH, CLOSE_COMBAT | ivs=31/31/31/31/31/31 | friendship=255
-MACHAMP @LEFTOVERS NO_GUARD ADAMANT 252/252/4/0/0/0 -2 | DYNAMIC_PUNCH, STONE_EDGE, KNOCK_OFF, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
-TOGETIC @EVIOLITE SERENE_GRACE BOLD 252/0/252/0/4/0 3 | FOLLOW_ME, DAZZLING_GLEAM, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-SAWK @FIGHTING_GEM STURDY ADAMANT 4/252/0/0/0/252 -2 | CLOSE_COMBAT, ROCK_SLIDE, POISON_JAB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+PAWMOT @FOCUS_SASH IRON_FIST JOLLY 4/252/0/0/0/252 1 | FAKE_OUT, DOUBLE_SHOCK, MACH_PUNCH, CLOSE_COMBAT | ivs=31/31/31/31/31/31 | friendship=255
+MACHAMP @LEFTOVERS NO_GUARD ADAMANT 252/252/4/0/0/0 1 | DYNAMIC_PUNCH, STONE_EDGE, KNOCK_OFF, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
+TOGETIC @EVIOLITE SERENE_GRACE BOLD 252/0/252/0/4/0 4 | FOLLOW_ME, DAZZLING_GLEAM, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+SAWK @FIGHTING_GEM STURDY ADAMANT 4/252/0/0/0/252 0 | CLOSE_COMBAT, ROCK_SLIDE, POISON_JAB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0082 TRAINER_BIANCA class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Sudowoodo supplies recoil-free physical power; Pumpkaboo disrupts, Skiddo sustains physically, and Bellossom replaces Lilligant with Pollen Puff/Helping Hand support. Insomnia gives Pumpkaboo a real non-powder sleep defense instead of information the AI already knows. Stats: Physical attackers retain appropriate investment, Pumpkaboo is bulky, and Bellossom uses HP/special defense. Healer is chance-based and does not promise an immediate cure. Could it be cooler? Keep the strange forest and add a genuine healer instead of another Quiver Dance user. Overrepresented? Removes Lilligant immediately before Victoria. Bellossom has a later owner but differs from Rose's offensive Sunflora. Medium cap30 levels30/35/35/31 are initial design seeds; no new battle validation is claimed.
 crack: Fire/Poison pressure, Taunt, powerful special attacks and denying meaningful healing or setup turns.
-SUDOWOODO @CHOICE_BAND ROCK_HEAD ADAMANT 252/252/4/0/0/0 6 | HEAD_SMASH, WOOD_HAMMER, SUCKER_PUNCH, LOW_KICK | ivs=31/31/31/31/31/31 | friendship=255
-PUMPKABOO @EVIOLITE INSOMNIA IMPISH 252/0/252/0/4/0 7 | LEECH_SEED, WILL_O_WISP, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SKIDDO @EVIOLITE SAP_SIPPER ADAMANT 252/252/4/0/0/0 7 | HORN_LEECH, BULK_UP, MILK_DRINK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BELLOSSOM @SITRUS_BERRY HEALER CALM 252/0/4/0/252/0 6 | POLLEN_PUFF, GIGA_DRAIN, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+SUDOWOODO @CHOICE_BAND ROCK_HEAD ADAMANT 252/252/4/0/0/0 9 | HEAD_SMASH, WOOD_HAMMER, SUCKER_PUNCH, LOW_KICK | ivs=31/31/31/31/31/31 | friendship=255
+PUMPKABOO @EVIOLITE INSOMNIA IMPISH 252/0/252/0/4/0 9 | LEECH_SEED, WILL_O_WISP, SHADOW_SNEAK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SKIDDO @EVIOLITE SAP_SIPPER ADAMANT 252/252/4/0/0/0 9 | HORN_LEECH, BULK_UP, MILK_DRINK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BELLOSSOM @SITRUS_BERRY HEALER CALM 252/0/4/0/252/0 8 | POLLEN_PUFF, GIGA_DRAIN, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0083 TRAINER_TYRON class=regular
 strategy: PRESSURE
@@ -966,20 +966,20 @@ strategy: TAILWIND
 mega_slots: NONE
 plan: Vespiquen's supported custom Tailwind can precede slow Specs Sunflora; Ribombee supplies Pollen Puff or direct Fairy pressure. Trevenant is the physical reserve with Occa Berry/Harvest against Fire pressure. Clear weather does not guarantee Harvest or create sunlight. Stats: Vespiquen39 Speed precedes Sunflora35 at these seeds. Ribombee stays fast; Sunflora is HP/special offense. Native preset permission retains Vespiquen Tailwind, and reviewed access retains Sunflora Overheat. Could it be cooler? Replace Roserade/Floette with the queen, pollinator, sunflower and old tree garden. Fire remains a weakness with named counterplay rather than imaginary immunity. Overrepresented? Removes another Roselia/Floette-family core near Daisy/Wally. Sunflora and Ribombee have later owners; their roles, not uniqueness, earn retention. Medium cap30 levels31/34/31/31 are initial design seeds; no new battle validation is claimed.
 crack: Fire and Rock pressure, denying Tailwind/healing, removing the berry, and exploiting Harvest's actual probability or Poltergeist's item requirement.
-VESPIQUEN @SITRUS_BERRY INTIMIDATE IMPISH 252/0/4/0/252/0 4 | ATTACK_ORDER, TAILWIND, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SUNFLORA @CHOICE_SPECS EARLY_BIRD MODEST 252/0/4/252/0/0 6 | GIGA_DRAIN, EARTH_POWER, OVERHEAT, SLUDGE_BOMB | ivs=31/0/31/31/31/31 | friendship=255
-RIBOMBEE @FOCUS_SASH SHIELD_DUST TIMID 4/0/0/252/0/252 3 | POLLEN_PUFF, MOONBLAST, STUN_SPORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-TREVENANT @OCCA_BERRY HARVEST ADAMANT 252/252/4/0/0/0 4 | HORN_LEECH, POLTERGEIST, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+VESPIQUEN @SITRUS_BERRY INTIMIDATE IMPISH 252/0/4/0/252/0 11 | ATTACK_ORDER, TAILWIND, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SUNFLORA @CHOICE_SPECS EARLY_BIRD MODEST 252/0/4/252/0/0 13 | GIGA_DRAIN, EARTH_POWER, OVERHEAT, SLUDGE_BOMB | ivs=31/0/31/31/31/31 | friendship=255
+RIBOMBEE @FOCUS_SASH SHIELD_DUST TIMID 4/0/0/252/0/252 10 | POLLEN_PUFF, MOONBLAST, STUN_SPORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+TREVENANT @OCCA_BERRY HARVEST ADAMANT 252/252/4/0/0/0 11 | HORN_LEECH, POLTERGEIST, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0088 TRAINER_DEANDRE class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Krokorok supplies Intimidate and physical attacks; Vullaby, not Krokorok, owns Taunt/Snarl. Simisear supplies special offense and Gastrodon can redirect eligible Water attacks into Storm Drain. Introduce an attacker when further mitigation is unnecessary. Stats: The physical attacker, defensive Foul Play user and special reserves fit. Vullaby's zero Attack IV does not weaken Foul Play's borrowed target Attack. Could it be cooler? Retain a well-composed balanced-control encounter between more elaborate engines. Overrepresented? Gastrodon has other owners, but this is defensive Water coverage rather than another ally-triggered Storm Drain engine. Medium cap30 levels33/34/30/29 are initial design seeds; no new battle validation is claimed.
 crack: Fairy/Water pressure, Taunt, special damage, relevant ability bypass and exploiting a passive opening.
-KROKOROK @LIFE_ORB INTIMIDATE JOLLY 4/252/0/0/0/252 3 | CRUNCH, STOMPING_TANTRUM, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-VULLABY @EVIOLITE OVERCOAT BOLD 252/0/252/0/4/0 4 | FOUL_PLAY, SNARL, ROOST, TAUNT | ivs=31/0/31/31/31/31 | friendship=255
-SIMISEAR @SITRUS_BERRY BLAZE TIMID 4/0/0/252/0/252 1 | HEAT_WAVE, GRASS_KNOT, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-GASTRODON @RINDO_BERRY STORM_DRAIN MODEST 252/0/4/252/0/0 0 | EARTH_POWER, ICE_BEAM, RECOVER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+KROKOROK @LIFE_ORB INTIMIDATE JOLLY 4/252/0/0/0/252 8 | CRUNCH, STOMPING_TANTRUM, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+VULLABY @EVIOLITE OVERCOAT BOLD 252/0/252/0/4/0 9 | FOUL_PLAY, SNARL, ROOST, TAUNT | ivs=31/0/31/31/31/31 | friendship=255
+SIMISEAR @SITRUS_BERRY BLAZE TIMID 4/0/0/252/0/252 6 | HEAT_WAVE, GRASS_KNOT, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+GASTRODON @RINDO_BERRY STORM_DRAIN MODEST 252/0/4/252/0/0 5 | EARTH_POWER, ICE_BEAM, RECOVER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0089 TRAINER_KIRK class=gym
 strategy: ALLY_COMBO
@@ -1011,10 +1011,10 @@ strategy: ALLY_COMBO
 mega_slots: NONE
 plan: Battery supports special attacks, with Discharge beside Volt Absorb Lanturn or Lanturn Surf beside Dry Skin Heliolisk as distinct safe pairings. Physical Assault Vest Eelektross replaces Jolteon here; Jolteon moves to Shawn. Other Electric or airborne partners are not automatically immune to friendly spread attacks. Stats: Calm Charjabug removes an unnecessary Speed penalty while retaining special bulk. Eelektross has physical investment and four attacks; Flamethrower is uninvested targeted coverage. Vikavolt remains the airborne special cannon. Could it be cooler? Develop the storage/healing circuit while giving the special-heavy room a physical answer to special walls. Overrepresented? Simon shows basic Battery offense; Ben adds absorption decisions and a larger roster. Moving Eelektross/Jolteon avoids creating an extra duplicate slot between rooms. Medium cap30 levels35/32/32/31/30/30 are initial design seeds; no new battle validation is claimed.
 crack: Ground pressure where applicable, Wide Guard, removing Battery, special or physical mitigation against the chosen mode, and unsafe friendly fire.
-CHARJABUG @EVIOLITE BATTERY CALM 252/0/252/0/4/0 3 | DISCHARGE, BUG_BITE, EERIE_IMPULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-LANTURN @LEFTOVERS VOLT_ABSORB MODEST 164/0/92/252/0/0 1 | THUNDERBOLT, SURF, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-STUNFISK @SITRUS_BERRY STATIC MODEST 252/0/4/252/0/0 2 | DISCHARGE, EARTH_POWER, YAWN, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-EELEKTROSS @ASSAULT_VEST LEVITATE ADAMANT 252/252/0/0/4/0 0 | WILD_CHARGE, DRAIN_PUNCH, KNOCK_OFF, FLAMETHROWER | ivs=31/31/31/31/31/31 | friendship=255
+CHARJABUG @EVIOLITE BATTERY CALM 252/0/252/0/4/0 2 | DISCHARGE, BUG_BITE, EERIE_IMPULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+LANTURN @LEFTOVERS VOLT_ABSORB MODEST 164/0/92/252/0/0 0 | THUNDERBOLT, SURF, ICE_BEAM, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+STUNFISK @SITRUS_BERRY STATIC MODEST 252/0/4/252/0/0 1 | DISCHARGE, EARTH_POWER, YAWN, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+EELEKTROSS @ASSAULT_VEST LEVITATE ADAMANT 252/252/0/0/4/0 -1 | WILD_CHARGE, DRAIN_PUNCH, KNOCK_OFF, FLAMETHROWER | ivs=31/31/31/31/31/31 | friendship=255
 HELIOLISK @FOCUS_SASH DRY_SKIN TIMID 4/0/0/252/0/252 0 | THUNDERBOLT, GRASS_KNOT, HYPER_VOICE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 VIKAVOLT @ASSAULT_VEST LEVITATE MODEST 252/0/4/252/0/0 0 | THUNDERBOLT, BUG_BUZZ, ENERGY_BALL, VOLT_SWITCH | ivs=31/0/31/31/31/31 | friendship=255
 
@@ -1024,11 +1024,11 @@ mega_slots: NONE
 plan: Wattrel/Kilowattrel now both use Wind Power. A successful useful Tailwind charges both: Kilowattrel can spend its charge in its following action, while Wattrel can store its own for a later Electric attack. Joltik trades Electroweb for Energy Ball; Rotom/Toxtricity/Luxray supply distinct reserves. Stats: Wattrel94 Speed deliberately precedes bulky Modest Kilowattrel89. Charge is a single stored boost, not stacking multipliers; fresh Tailwind cannot be assumed to happen before faster enemy actions. Could it be cooler? One wind action powers two different attack timings, giving the bird pair a clear Gym partnership. Overrepresented? Ned showed one Wind Power recipient plus Soak. This expands wind charging without repeating Soak; the same species family is intentional inside this named pairing. Medium cap30 levels35/30/35/31/31/31 are initial design seeds; no new battle validation is claimed.
 crack: Deny the caster, use Ground immunity or relevant coverage, reverse speed, use Wide Guard where applicable, and punish pointless Tailwind renewal.
 WATTREL @FOCUS_SASH WIND_POWER TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, AIR_SLASH, TAILWIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-KILOWATTREL @CHOICE_SPECS WIND_POWER MODEST 252/0/4/252/0/0 0 | THUNDERBOLT, AIR_SLASH, VOLT_SWITCH, HURRICANE | ivs=31/0/31/31/31/31 | friendship=255
+KILOWATTREL @CHOICE_SPECS WIND_POWER MODEST 252/0/4/252/0/0 3 | THUNDERBOLT, AIR_SLASH, VOLT_SWITCH, HURRICANE | ivs=31/0/31/31/31/31 | friendship=255
 JOLTIK @EVIOLITE COMPOUND_EYES TIMID 4/0/0/252/0/252 2 | THUNDER, BUG_BUZZ, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-ROTOM @SITRUS_BERRY LEVITATE MODEST 4/0/0/252/0/252 1 | THUNDERBOLT, SHADOW_BALL, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-TOXTRICITY @THROAT_SPRAY PUNK_ROCK MODEST 4/0/0/252/0/252 1 | OVERDRIVE, SNARL, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-LUXRAY @CHOICE_BAND INTIMIDATE ADAMANT 4/252/0/0/0/252 1 | WILD_CHARGE, CRUNCH, PLAY_ROUGH, ICE_FANG | ivs=31/31/31/31/31/31 | friendship=255
+ROTOM @SITRUS_BERRY LEVITATE MODEST 4/0/0/252/0/252 3 | THUNDERBOLT, SHADOW_BALL, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+TOXTRICITY @THROAT_SPRAY PUNK_ROCK MODEST 4/0/0/252/0/252 2 | OVERDRIVE, SNARL, SLUDGE_BOMB, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+LUXRAY @CHOICE_BAND INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | WILD_CHARGE, CRUNCH, PLAY_ROUGH, ICE_FANG | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0091 TRAINER_SHAWN class=gym
 strategy: ALLY_COMBO
@@ -1117,10 +1117,10 @@ mega_slots: NONE
 ai: Conservative
 plan: Gigalith supplies real sand and chooses Body Press, direct damage or useful Iron Defense. Graveler's Wide Guard supports the active partner; Primeape supplies speed and Donphan priority/coverage. Sand comes from the Pokemon, not an assumption about cave weather. Stats: Graveler shifts to Defense investment and Impish for Body Press. Primeape stays fast physical; Donphan remains bulky physical. Sand Veil is a chance interaction, not reliable protection. Could it be cooler? Retain the dusty tunnel defense formation; its four roles already fit the setting. Overrepresented? Devan's sand is a Sand Rush offense lesson, whereas Mike emphasizes rock durability and retaliation. Later Gigalith owners remain separate contexts. Medium cap30 levels29/34/31/30 are initial design seeds; no new battle validation is claimed.
 crack: Weather removal, special Water/Grass pressure, targeted attacks around Wide Guard and physical mitigation.
-GIGALITH @SMOOTH_ROCK SAND_STREAM IMPISH 252/0/252/0/4/0 0 | STONE_EDGE, STOMPING_TANTRUM, IRON_DEFENSE, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
-GRAVELER @EVIOLITE STURDY IMPISH 252/4/252/0/0/0 4 | STONE_EDGE, STOMPING_TANTRUM, WIDE_GUARD, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
-PRIMEAPE @PAYAPA_BERRY DEFIANT JOLLY 4/252/0/0/0/252 1 | CLOSE_COMBAT, STONE_EDGE, U_TURN, BULK_UP | ivs=31/31/31/31/31/31 | friendship=255
-DONPHAN @ROCKY_HELMET SAND_VEIL ADAMANT 252/252/4/0/0/0 1 | HIGH_HORSEPOWER, ICE_SPINNER, KNOCK_OFF, ICE_SHARD | ivs=31/31/31/31/31/31 | friendship=255
+GIGALITH @SMOOTH_ROCK SAND_STREAM IMPISH 252/0/252/0/4/0 9 | STONE_EDGE, STOMPING_TANTRUM, IRON_DEFENSE, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
+GRAVELER @EVIOLITE STURDY IMPISH 252/4/252/0/0/0 13 | STONE_EDGE, STOMPING_TANTRUM, WIDE_GUARD, BODY_PRESS | ivs=31/31/31/31/31/31 | friendship=255
+PRIMEAPE @PAYAPA_BERRY DEFIANT JOLLY 4/252/0/0/0/252 10 | CLOSE_COMBAT, STONE_EDGE, U_TURN, BULK_UP | ivs=31/31/31/31/31/31 | friendship=255
+DONPHAN @ROCKY_HELMET SAND_VEIL ADAMANT 252/252/4/0/0/0 10 | HIGH_HORSEPOWER, ICE_SPINNER, KNOCK_OFF, ICE_SHARD | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0104 TRAINER_TRAVIS class=regular
 strategy: NONE
@@ -1907,20 +1907,20 @@ strategy: ALLY_COMBO
 mega_slots: NONE
 plan: Roselia Petal Blizzard can damage foes and feed slower Sap Sipper Deerling before its physical attack. Recheck board: otherwise Roselia uses special STAB. Flabebe supports Grass allies with Flower Veil/Helping Hand or Pollen Puff healing; do not hit Flabebe with Petal Blizzard for a nonexistent immunity. Lileep is the garden's answer to the Fire and Flying types every Grass team invites: Rock/Grass takes Fire attacks at neutral, Earth Power hits Fire types super-effectively and Ancient Power hits both Fire and Flying, and Eviolite plus Recover keep the sea lily standing long enough to trade with a Heat Wave user. Lileep takes neutral chip from Petal Blizzard, so it partners Flabebe or relieves Deerling rather than standing beside a Blizzard turn. Stats: Fast special Roselia precedes bulky physical Deerling; Modest Lileep is slow and bulky by design. Petal Blizzard is deliberately low-damage support; tiny Flabebe and Lileep receive Eviolite. Could it be cooler? Yes: a second Grass/Poison Gloom duplicated Roselia and gave a Fire lead nothing to fear, so it became an ancient sea lily - still a flower, and the one body that turns the counter's turn into a trade. Overrepresented? Lileep appears nowhere else in the campaign; Petal Blizzard feeds Sap Sipper Deerling; Flower Veil Flabebe protects Grass allies; Roselia overlaps Wally in a different role.
 crack: Remove Lileep first with Fighting, Steel, Bug or Ice attacks, then Fire/Flying/Poison pressure sweeps the other three. Hostile Grass or wind absorption, spread damage and removing the useful Petal Blizzard recipient still work; do not use Petal Blizzard freely beside vulnerable Flabebe.
-ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 8 | PETAL_BLIZZARD, SLUDGE_BOMB, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DEERLING @SITRUS_BERRY SAP_SIPPER ADAMANT 252/252/4/0/0/0 8 | DOUBLE_EDGE, SEED_BOMB, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-FLABEBE @EVIOLITE FLOWER_VEIL BOLD 252/0/252/0/4/0 8 | MOONBLAST, POLLEN_PUFF, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-LILEEP @EVIOLITE STORM_DRAIN MODEST 252/0/4/252/0/0 8 | EARTH_POWER, ANCIENT_POWER, RECOVER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 13 | PETAL_BLIZZARD, SLUDGE_BOMB, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DEERLING @SITRUS_BERRY SAP_SIPPER ADAMANT 252/252/4/0/0/0 13 | DOUBLE_EDGE, SEED_BOMB, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+FLABEBE @EVIOLITE FLOWER_VEIL BOLD 252/0/252/0/4/0 13 | MOONBLAST, POLLEN_PUFF, HELPING_HAND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+LILEEP @EVIOLITE STORM_DRAIN MODEST 252/0/4/252/0/0 14 | EARTH_POWER, ANCIENT_POWER, RECOVER, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0211 TRAINER_AMY_AND_LIV_1 class=ace
 strategy: REDIRECTION
 mega_slots: 3
 plan: Togetic redirects for Wigglytuff Hyper Voice and Throat Spray; turn two cash the boost or apply meaningful Icy Wind. Mega Alakazam is the fast single-target alternative. Blissey screens/paralyzes only relevant targets and can finish with Seismic Toss. Do not stall with both passive supports. Stats: Togetic/Blissey gain physical bulk; Wigglytuff trades Speed for HP; Mega Alakazam receives a lower individual level seed. Could it be cooler? Retain nurturing support into two special threats; Seismic Toss gives Blissey a useful finishing action. Overrepresented? Isabel loses Wigglytuff, reducing the direct copy. Johanna sound support remains nearby but lacks this fast Mega alternative. Medium incoming cap30 levels32/32/29/30 are unplayed design seeds.
 crack: Wide Guard, spread damage, physical offense, Taunt and removing the actual attacker before two supports prolong the ending.
-TOGETIC @EVIOLITE SERENE_GRACE BOLD 252/0/252/0/4/0 4 | FOLLOW_ME, DAZZLING_GLEAM, THUNDER_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-WIGGLYTUFF @THROAT_SPRAY COMPETITIVE MODEST 252/0/4/252/0/0 4 | HYPER_VOICE, DAZZLING_GLEAM, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-ALAKAZAM @ALAKAZITE MAGIC_GUARD TIMID 4/0/0/252/0/252 -1 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-BLISSEY @LIGHT_CLAY NATURAL_CURE BOLD 252/0/252/0/4/0 2 | SOFT_BOILED, SEISMIC_TOSS, THUNDER_WAVE, LIGHT_SCREEN | ivs=31/0/31/31/31/31 | friendship=255
+TOGETIC @EVIOLITE SERENE_GRACE BOLD 252/0/252/0/4/0 7 | FOLLOW_ME, DAZZLING_GLEAM, THUNDER_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+WIGGLYTUFF @THROAT_SPRAY FUR_COAT MODEST 252/0/4/252/0/0 8 | HYPER_VOICE, DAZZLING_GLEAM, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+ALAKAZAM @ALAKAZITE MAGIC_GUARD TIMID 4/0/0/252/0/252 5 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+BLISSEY @LIGHT_CLAY NATURAL_CURE BOLD 252/0/252/0/4/0 5 | SOFT_BOILED, SEISMIC_TOSS, THUNDER_WAVE, LIGHT_SCREEN | ivs=31/0/31/31/31/31 | friendship=255
 
 ## E0213 TRAINER_MIGUEL_1 class=casual
 strategy: NONE
@@ -1928,10 +1928,10 @@ mega_slots: NONE
 ai: Conservative
 plan: Delcatty Fake Out/Helping Hand beside Stantler attack/Psyshield Bash; next turn cash defense/control into damage. Hisuian Zoroark is the household's answer to the Fighting type every Normal team invites: Illusion shows it as Munchlax, so the Close Combat or Drain Punch the player aims at the "snack" passes straight through a Normal/Ghost body that is immune to both Fighting and Normal. It then punishes the attacker - Flamethrower for the Steel/Fighting Lucario and Cobalion lines, Psychic for pure Fighting types like Hariyama, and Bitter Malice's Attack drop to blunt whichever physical brawler is left. Focus Sash covers the Dark and Ghost coverage Fighting types carry for exactly this. Munchlax replaces Curse with consumed-berry Recycle, only when it creates another useful attack; its Fire Punch is the second Steel/Fighting answer. Stats: Timid Zoroark outspeeds the Fighting types it is there to punish; Adamant/Gluttony/Figy Munchlax fits consumed-berry Recycle, retaining attacks. Could it be cooler? Yes: four Normal pets folded to one Fighting player, so the passive Eviolite Lickitung became a ghost-fox in the family's clothes, which keeps the Normal theme and turns the obvious counter into the player's worst turn. Overrepresented? Hisuian Zoroark appears nowhere else in the campaign; Delcatty remains near Isabel with a different ability and supporting cast; Munchlax differs from Isaac's protected Curse nursery.
 crack: Break the illusion with a spread move or a Dark/Ghost hit before committing Fighting attacks; Knock Off or Shadow Ball removes Zoroark through its Sash on the second hit. Once it is gone, Fighting pressure beats the three Normal types, with Taunt denying Recycle.
-DELCATTY @SITRUS_BERRY WONDER_SKIN JOLLY 4/252/0/0/0/252 4 | FAKE_OUT, THUNDER_WAVE, DOUBLE_EDGE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-STANTLER @CLEAR_AMULET INTIMIDATE JOLLY 4/252/0/0/0/252 4 | DOUBLE_EDGE, PSYSHIELD_BASH, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-ZOROARK_HISUI @FOCUS_SASH ILLUSION TIMID 4/0/0/252/0/252 3 | BITTER_MALICE, FLAMETHROWER, PSYCHIC, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
-MUNCHLAX @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 4 | BODY_SLAM, FIRE_PUNCH, ICE_PUNCH, RECYCLE | ivs=31/31/31/31/31/31 | friendship=255
+DELCATTY @SITRUS_BERRY WONDER_SKIN JOLLY 4/252/0/0/0/252 6 | FAKE_OUT, THUNDER_WAVE, DOUBLE_EDGE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+STANTLER @CLEAR_AMULET INTIMIDATE JOLLY 4/252/0/0/0/252 6 | DOUBLE_EDGE, PSYSHIELD_BASH, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+ZOROARK_HISUI @FOCUS_SASH ILLUSION TIMID 4/0/0/252/0/252 5 | BITTER_MALICE, FLAMETHROWER, PSYCHIC, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
+MUNCHLAX @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 6 | BODY_SLAM, FIRE_PUNCH, ICE_PUNCH, RECYCLE | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0218 TRAINER_TIMOTHY_1 class=ace
 strategy: TRICK_ROOM
