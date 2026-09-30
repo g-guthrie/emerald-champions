@@ -12,6 +12,50 @@
 #include "text.h"
 #include "constants/characters.h"
 #include "constants/species.h"
+#include "constants/flags.h"
+#include "pokemon_storage_system.h"
+
+TEST("Hunt preparation: boxed donors allow six isolated direct infections before the Pokedex")
+{
+    static EWRAM_DATA struct BoxPokemon originalBox[PARTY_SIZE];
+    bool32 hadPokedex = FlagGet(FLAG_SYS_POKEDEX_GET);
+    FlagClear(FLAG_SYS_POKEDEX_GET);
+    ZeroPlayerPartyMons();
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+        originalBox[i] = *GetBoxedMonPtr(0, i);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 14, 0, OTID_STRUCT_PLAYER_ID, 31);
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        EXPECT(!IsPokerusInParty());
+        SET_RNG(RNG_POKERUS_INFECTION, 0);
+        SET_RNG(RNG_POKERUS_PARTY_MEMBER, 0);
+        RandomlyGivePartyPokerus();
+        PartySpreadPokerus(); // The isolated donor has no eligible neighbour.
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_POKERUS), 0xFE);
+        // Withdraw the next eligible member before depositing the donor;
+        // the real PC forbids depositing the last usable party member.
+        if (i + 1 < PARTY_SIZE)
+        {
+            CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][1], SPECIES_EEVEE, 14, i + 1, OTID_STRUCT_PLAYER_ID, 31);
+            SetBoxMonAt(0, i, &gParties[B_TRAINER_PLAYER][0].box);
+            gParties[B_TRAINER_PLAYER][0] = gParties[B_TRAINER_PLAYER][1];
+        }
+        ZeroMonData(&gParties[B_TRAINER_PLAYER][1]);
+    }
+    // Keep the last donor in the party and withdraw the five parked donors.
+    for (u32 i = 0; i + 1 < PARTY_SIZE; i++)
+        BoxMonToMon(GetBoxedMonPtr(0, i), &gParties[B_TRAINER_PLAYER][i + 1]);
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_POKERUS), 0xFE);
+        EXPECT_EQ(GetPokerusSpreadsLeft(&gParties[B_TRAINER_PLAYER][i]), 2);
+        SetBoxMonAt(0, i, &originalBox[i]);
+    }
+    EXPECT(IsPokerusInParty());
+    ZeroPlayerPartyMons();
+    if (hadPokedex)
+        FlagSet(FLAG_SYS_POKEDEX_GET);
+}
 
 TEST("Hunt rewards: exact independent shiny and Pokerus chain thresholds")
 {

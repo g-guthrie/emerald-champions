@@ -104,7 +104,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
     if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
-        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
+        // The unified Bicycle retains top-speed capability even at rest.
+        // Lock interaction/menu keys only while actually riding at that speed.
+        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST
+         || (IsPlayerStandingStill() && runningState != MOVING))
         {
             if (newKeys & START_BUTTON)
                 input->pressedStartButton = TRUE;
