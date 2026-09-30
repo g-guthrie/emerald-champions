@@ -211,6 +211,59 @@ class DriverViewTests(unittest.TestCase):
             {'battler': 1, 'ability': trial, 'message_index': 0}]}, turn_resolved=0)
         self.assertIn('ability Intimidate', driver.render_brief(session, state, [], heading='Start'))
 
+    def replaced(self, state):
+        """The same board after battler 1 fainted and party index 2 replaced it."""
+        after = json.loads(json.dumps(state))
+        after['actives'][1].update(species='SPECIES_ZIGZAGOON', party_slot=2, item='ITEM_LEFTOVERS',
+                                   ability='ABILITY_PICKUP', hp=66, max_hp=66, moves=[])
+        return after
+
+    def test_a_fainted_foes_reveal_stays_with_that_pokemon(self):
+        _, state = self.decoded()
+        state['actives'][1]['ability'] = 'ABILITY_RATTLED'
+        session = FakeSession(self.constants, {'trainer_a': 'TRAINER_CALVIN_1'})
+        driver.update_tracking(session, None, state, {'messages': [], 'popups': []}, turn_resolved=0)
+        after = self.replaced(state)
+        messages = ['The opposing Poochyena used Crunch!', 'The opposing Poochyena fainted!',
+                    'Youngster Calvin sent out Zigzagoon!']
+        popups = [{'battler': 1, 'item': 'ITEM_FOCUS_SASH', 'message_index': 1},       # old (value match)
+                  {'battler': 1, 'ability': 'ABILITY_INTIMIDATE', 'message_index': 1},  # neither: ordering
+                  {'battler': 1, 'ability': 'ABILITY_PICKUP', 'message_index': 3}]     # new (value match)
+        driver.update_tracking(session, state, after, {'messages': messages, 'popups': popups}, turn_resolved=1)
+        revealed = session.meta['brief']['revealed']
+        self.assertEqual(revealed['opponent_a:0'], {'item': 'ITEM_FOCUS_SASH', 'ability': 'ABILITY_INTIMIDATE'})
+        self.assertEqual(revealed['opponent_a:2'], {'ability': 'ABILITY_PICKUP'})
+        text = driver.render_brief(session, after, [], heading='Resolved turn 1')
+        self.assertIn('[1] FOE Zigzagoon L21 100% Normal | item ?, ability Pickup', text)
+        self.assertNotIn('Focus Sash', text)
+
+    def test_hp_changes_become_log_lines(self):
+        _, state = self.decoded()
+        after = json.loads(json.dumps(state))
+        after['actives'][0]['hp'] = 28
+        after['actives'][3]['hp'] = 41
+        log = {'messages': ['The opposing Zigzagoon used Extreme Speed!', 'Pachirisu used Bullet Seed!',
+                            'Hit 2 time(s)!'],
+               'hp_changes': [
+                   {'battler': 0, 'hp_before': 44, 'hp_after': 28, 'message_index': 1,
+                    'attacker': 3, 'move': 'MOVE_EXTREME_SPEED', 'cause': 'move'},
+                   {'battler': 3, 'hp_before': 66, 'hp_after': 54, 'message_index': 2,
+                    'attacker': 2, 'move': 'MOVE_BULLET_SEED', 'cause': 'move'},
+                   {'battler': 3, 'hp_before': 54, 'hp_after': 41, 'message_index': 2,
+                    'attacker': 2, 'move': 'MOVE_BULLET_SEED', 'cause': 'move'}]}
+        lines = driver.narrated(log, state, after)
+        self.assertEqual(lines, ['The opposing Zigzagoon used Extreme Speed!',
+                                 'Sylveon lost 25% (44\u219228)',
+                                 'Pachirisu used Bullet Seed!',
+                                 'opposing Zigzagoon lost 38% (2 hits)',
+                                 'Hit 2 time(s)!'])
+        # A replacement's HP is named after the Pokemon that actually took it.
+        replaced = self.replaced(state)
+        log = {'messages': ['The opposing Poochyena fainted!', 'Youngster Calvin sent out Zigzagoon!'],
+               'hp_changes': [{'battler': 1, 'hp_before': 26, 'hp_after': 0, 'message_index': 0,
+                               'cause': 'move', 'attacker': 0, 'move': 'MOVE_HYPER_VOICE'}]}
+        self.assertEqual(driver.narrated(log, state, replaced)[0], 'opposing Poochyena lost 50%')
+
     def test_witness_commands_round_trip_through_the_act_parser(self):
         submitted = {'0': {'action': 'move', 'index': 1, 'move': 'MOVE_PSYSHOCK', 'target': 3, 'mega': True},
                      '2': {'action': 'switch', 'slot': 4},

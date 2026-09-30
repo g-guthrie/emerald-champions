@@ -1608,7 +1608,7 @@ def command_start(args):
     applied = session.meta['level_delta']['applied']
     trials = session.meta['ability_trial']['applied']
     if getattr(args, 'brief', False):
-        text = render_brief(session, state, log['messages'], heading='Battle start')
+        text = render_brief(session, state, narrated(log, None, state), heading='Battle start')
         notes = ''
         if applied:
             notes += ('\nOpposing level deltas (authored member order): '
@@ -2144,7 +2144,7 @@ def command_act(args):
         if getattr(args, 'brief', False):
             drop_committed_slots(session, after)
             annotate_field(session, after)
-            output = render_brief(session, after, log['messages'],
+            output = render_brief(session, after, narrated(log, state, after),
                                   heading=f'Resolved turn {state["turn"]}')
     except Exception as error:  # noqa: BLE001 - report, never lose the act
         print(f'battle_driver: warning: brief view failed ({error!r}); printing the JSON '
@@ -2439,6 +2439,95 @@ def text_subject(text, position, candidates):
     return best
 
 
+# Battle text that sends a Pokemon out (src/battle_message.c): foes and the
+# partner are "sent out"; the player's own lines vary.
+SEND_OUT_TEXT = {'opponent': ('sent out ',),
+                 'player': ('go! ', "you're in charge, ", 'go for it, ', "get 'em, ", ', go, ',
+                            'sent out ')}
+
+
+def send_out_index(messages, active):
+    """Index of the first message that sends `active` out, or None."""
+    forms = name_forms(active['species'])
+    for index, message in enumerate(messages):
+        text = clean_text(message).lower()
+        for phrase in SEND_OUT_TEXT[active['side']]:
+            at = text.find(phrase)
+            if at >= 0 and any(form in text[at:] for form in forms):
+                return index
+    return None
+
+
+def occupant_at(battler, message_index, before, after, messages, value=None):
+    """(state, active) for whoever stood in `battler` when the log record placed
+    before messages[message_index] happened.
+
+    Within one call a slot can change hands (a faint and its replacement, a
+    U-turn). A pop-up's own item/ability decides when only one of the two
+    Pokemon has it; otherwise the send-out message orders the two."""
+    old = next((a for a in (before or {}).get('actives', []) if a['battler'] == battler), None)
+    new = next((a for a in after['actives'] if a['battler'] == battler), None)
+    if old is None or old['species'] in (None, 'SPECIES_NONE'):
+        return after, new
+    if new is None or occupant_key(before, old) == occupant_key(after, new):
+        return (after, new) if new is not None else (before, old)
+    if value:
+        had_old = value in (old['item'], old['ability'])
+        had_new = value in (new['item'], new['ability'])
+        if had_old != had_new:
+            return (before, old) if had_old else (after, new)
+    entry = send_out_index(messages, new)
+    if entry is None or message_index <= entry:
+        return before, old
+    return after, new
+
+
+def narrated(log, before, after):
+    """The call's battle text with concise HP-change lines woven in.
+
+    The ROM prints nothing for a plain damaging hit, so each HP event from the
+    log becomes a line where it happened: exact HP for the player's Pokemon,
+    the battle's percentage only for foes. Consecutive hits of one multi-hit
+    move are merged."""
+    messages = list(log.get('messages', []))
+    merged = []
+    for change in log.get('hp_changes', []):
+        last = merged[-1] if merged else None
+        if last and change['battler'] == last['battler'] \
+                and change['message_index'] == last['message_index'] \
+                and change.get('move') == last.get('move') and change.get('move') \
+                and change.get('attacker') == last.get('attacker') \
+                and change['hp_before'] == last['hp_after']:
+            last['hp_after'] = change['hp_after']
+            last['hits'] += 1
+            continue
+        merged.append({**change, 'hits': 1})
+    inserts = {}
+    for change in merged:
+        delta = change['hp_after'] - change['hp_before']
+        if not delta:
+            continue
+        _, active = occupant_at(change['battler'], change['message_index'], before, after, messages)
+        if active is None or active['species'] in (None, 'SPECIES_NONE'):
+            continue
+        verb = 'lost' if delta < 0 else 'gained'
+        percent = max(1, round(100 * abs(delta) / max(active['max_hp'], 1)))
+        hits = f" ({change['hits']} hits)" if change['hits'] > 1 else ''
+        if active['side'] == 'player':
+            line = (f"{pretty(active['species'])} {verb} {percent}% "
+                    f"({change['hp_before']}\u2192{change['hp_after']}){hits}")
+        else:
+            line = f"opposing {pretty(active['species'])} {verb} {percent}%{hits}"
+        inserts.setdefault(change['message_index'], []).append(line)
+    out = []
+    for index, message in enumerate(messages):
+        out += inserts.get(index, [])
+        out.append(message)
+    for index in sorted(key for key in inserts if key >= len(messages)):
+        out += inserts[index]
+    return out
+
+
 def update_tracking(session, before, after, log, turn_resolved):
     """Remember what the battle has shown the player so far.
 
@@ -2463,13 +2552,19 @@ def update_tracking(session, before, after, log, turn_resolved):
         if active['side'] == 'opponent':
             held.setdefault(key, set()).update(
                 {('item', active['item']), ('ability', active['ability'])})
-    positions = {active['battler']: occupant_key(after, active) for active in after['actives']}
+    messages = log.get('messages', [])
     for popup in log.get('popups', []):
-        key = positions.get(popup['battler'])
-        if key and key.startswith('opponent'):
-            for field in ('item', 'ability'):
-                if field in popup:
-                    revealed.setdefault(key, {})[field] = popup[field]
+        # Keyed by the Pokemon (owner and party index), resolved to whoever
+        # stood in that slot when the pop-up fired: a foe that faints and is
+        # replaced within one call must not pass its reveal to the replacement.
+        state, active = occupant_at(popup['battler'], popup['message_index'], before, after,
+                                    messages, popup.get('item') or popup.get('ability'))
+        if active is None or active['side'] != 'opponent':
+            continue
+        key = occupant_key(state, active)
+        for field in ('item', 'ability'):
+            if field in popup:
+                revealed.setdefault(key, {})[field] = popup[field]
     for message in log.get('messages', []):
         text = clean_text(message).lower()
         for key, side, forms in candidates:
