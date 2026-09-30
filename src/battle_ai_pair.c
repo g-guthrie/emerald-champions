@@ -4213,11 +4213,17 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                         damageOpinion = opinion;
                 }
             }
+            // A status move our own partner's knockout is certain to hand to a
+            // body that refuses it (Safety Goggles, Overcoat, a Grass type
+            // under Spore) is a failed move, not merely a worthless one.
+            u32 landing = statusPayoff ? PairStatusLandingChance(actor, action, hp, survival) : 100;
+            if (landing == 0)
+                return -10000;
             if (statusReward && IsStatRaisingMove(move) && AI_GetBattlerMoveTargetType(actor, move) == TARGET_USER)
                 setupReward[actor] += statusReward;
             else if (statusReward)
                 score += statusReward * (s32)(survival[actor] * actionChance[actor] / 10000) / 100
-                    * (s32)PairStatusLandingChance(actor, action, hp, survival) / 100;
+                    * (s32)landing / 100;
         }
         if (effect == EFFECT_BELLY_DRUM)
         {
@@ -4650,11 +4656,14 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             else if (original != selectedTarget && (original != fallback || !fallbackChance))
                 continue;
             enum BattlerId target = original;
+            // A forecast foe's Sucker Punch or Thunderclap is not a command:
+            // against our status move its user picks another attack, so the
+            // hit still lands. Only our own is judged by what the target chose.
             if (effect == EFFECT_SUCKER_PUNCH
              && ((acted & (1u << target)) || actions[target].index == PAIR_IDLE
                  // Native Sucker Punch reads the original selected slot, even
                  // when Encore will replace that command at execution time.
-                 || IsBattleMoveStatus(ev->action[target].move)))
+                 || (sign > 0 && IsBattleMoveStatus(ev->action[target].move))))
                 continue;
             if (!MoveIgnoresProtect(move))
             {
@@ -4695,6 +4704,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             if (!guardHitChance)
                 continue;
+            // A status move takes hold only on a body still standing when it
+            // lands; the share an earlier hit this turn removed goes to the
+            // fallback. Damage weighs the same survival in affectedChance.
+            // Sophie's Parasect was credited a full sleep on the Arcanine its
+            // Sawsbuck was knocking out, and the Spore fell on Goggles.
+            u32 statusHitChance = guardHitChance * survival[target] / 100;
             if (move == MOVE_SOAK)
             {
                 if (!(ev->soakTargets[actor][action->index] & (1u << target)) || (soaked & (1u << target)))
@@ -4707,7 +4722,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (redirected)
                     continue;
                 u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
-                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                    * survival[actor] * statusHitChance / 10000 * actionChance[actor] / 10000;
                 if (PairScreenEffectApplies(applyEffects, chance, effectChance))
                 {
                     // Unlike Tailwind, Soak is absent from the ordinary pass;
@@ -4722,7 +4737,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (!(ev->tauntTargets[actor][action->index] & (1u << target)))
                     continue;
                 u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
-                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                    * survival[actor] * statusHitChance / 10000 * actionChance[actor] / 10000;
                 if (!chance)
                     continue;
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
@@ -4746,7 +4761,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                  || (acted & (1u << target)))
                     continue;
                 u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
-                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                    * survival[actor] * statusHitChance / 10000 * actionChance[actor] / 10000;
                 if (!chance)
                     continue;
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
@@ -4761,7 +4776,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                  || ((newBurnTargets | newParalysisTargets | newSleepTargets) & (1u << target)))
                     continue;
                 u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
-                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                    * survival[actor] * statusHitChance / 10000 * actionChance[actor] / 10000;
                 if (!chance)
                     continue;
                 newBurnTargets |= 1u << target;
@@ -4798,7 +4813,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (redirected)
                     continue;
                 u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
-                    * survival[actor] * guardHitChance / 10000;
+                    * survival[actor] * statusHitChance / 10000;
                 if (!chance)
                     continue;
                 newParalysisTargets |= 1u << target;
@@ -4826,7 +4841,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 enum Move forcedMove = gBattleMons[target].moves[slot];
                 if (actions[target].move == forcedMove)
                     continue;
-                u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index]) * survival[actor] * guardHitChance / 10000;
+                u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index]) * survival[actor] * statusHitChance / 10000;
                 if (!chance)
                     continue;
                 // Only guard replacements are modeled: their self/side target
@@ -4850,21 +4865,20 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (!chance || ((newBurnTargets | newSleepTargets | newParalysisTargets) & (1u << target))
                  || (ev->sleepClause && (newSleepSides & (1u << side))))
                     continue;
+                chance = chance * min(100, gAiLogicData->moveAccuracy[actor][target][action->index]) * survival[actor] / 10000;
+                chance = chance * statusHitChance / 100;
+                if (!chance)
+                    continue;
                 // Landing sleep claims its target/clause even if that target
                 // already acted or can use its chosen move while asleep.
                 newSleepTargets |= 1u << target;
                 newSleepSides |= 1u << side;
-                chance = chance * min(100, gAiLogicData->moveAccuracy[actor][target][action->index]) * survival[actor] / 10000;
-                chance = chance * guardHitChance / 100;
-                if (chance)
-                {
-                    // Sleep still affects later turns if the target already
-                    // acted (or used Sleep Talk). Keep that state's value even
-                    // when there is no current action left to deny.
-                    *effectChance = *effectChance ? min(*effectChance, chance) : chance;
-                    if (!(acted & (1u << target)) && !IsUsableWhileAsleepEffect(GetMoveEffect(actions[target].move)))
-                        stopped |= 1u << target;
-                }
+                // Sleep still affects later turns if the target already
+                // acted (or used Sleep Talk). Keep that state's value even
+                // when there is no current action left to deny.
+                *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                if (!(acted & (1u << target)) && !IsUsableWhileAsleepEffect(GetMoveEffect(actions[target].move)))
+                    stopped |= 1u << target;
                 continue;
             }
             // Thread shares targeting/protection and cached Speed handling,

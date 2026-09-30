@@ -9990,6 +9990,12 @@ void BS_TryInstruct(void)
         }
         else
         {
+            // The instructed move ends as its own user's move, so Instruct
+            // never reaches the instructor's move end. Clear the instructor's
+            // per-target flags here, or they outlive the turn and its next
+            // move skips those targets without a word: Eli's Oranguru.
+            memset(gBattleStruct->battlerState[gBattlerAttacker].targetsDone, 0,
+                sizeof(gBattleStruct->battlerState[gBattlerAttacker].targetsDone));
             gCurrMovePos = moveIndex;
             gEffectBattler = gBattleStruct->battlerState[gBattlerTarget].lastMoveTarget;
             PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget]);

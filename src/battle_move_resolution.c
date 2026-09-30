@@ -866,6 +866,9 @@ static bool32 HandleMoveTargetRedirection(struct BattleCalcValues *cv, enum Move
      && moveTarget != TARGET_USER
      && moveTarget != TARGET_ALL_BATTLERS
      && moveTarget != TARGET_FIELD
+     // Lightning Rod and Storm Drain draw single-target moves only; a spread
+     // move still reaches every target, so there is nothing to announce.
+     && !IsSpreadMove(moveTarget)
      && cv->moveEffect != EFFECT_TEATIME
      && cv->moveEffect != EFFECT_SNIPE_SHOT
      && cv->moveEffect != EFFECT_PLEDGE)

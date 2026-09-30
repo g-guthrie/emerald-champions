@@ -729,6 +729,45 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Spore is not aimed where the partner's k
     }
 }
 
+// E0116 a01 turn 2: Parasect aimed Spore at the Arcanine its faster Sawsbuck
+// was knocking out, and the Spore fell on Entei in Safety Goggles: "But it
+// failed!". Only a High Horsepower miss leaves Arcanine there to sleep, and
+// that share is all the sleep is worth.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Spore is not aimed where the partner's knockout hands it to a Safety Goggles foe")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_ENTEI) {
+            Level(40); MaxHP(154); HP(154); Speed(122); Item(ITEM_SAFETY_GOGGLES); Ability(ABILITY_INNER_FOCUS); Nature(NATURE_ADAMANT);
+            Moves(MOVE_SACRED_FIRE, MOVE_EXTREME_SPEED, MOVE_IRON_TAIL, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_ARCANINE_HISUI) {
+            Level(40); MaxHP(138); HP(92); Speed(114); Item(ITEM_LIFE_ORB); Ability(ABILITY_INTIMIDATE); Nature(NATURE_ADAMANT);
+            Moves(MOVE_ROCK_SLIDE, MOVE_FLARE_BLITZ, MOVE_EXTREME_SPEED, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_INCINEROAR) { Level(40); Speed(70); Item(ITEM_SAFETY_GOGGLES); Ability(ABILITY_INTIMIDATE); Moves(MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT); }
+        PLAYER(SPECIES_CHANDELURE) { Level(40); Speed(117); HP(23); Item(ITEM_CHOICE_SPECS); Ability(ABILITY_FLASH_FIRE); Moves(MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_FLAMETHROWER); }
+        PLAYER(SPECIES_HOUNDOOM) { Level(40); Speed(130); Item(ITEM_LIFE_ORB); Ability(ABILITY_FLASH_FIRE); Moves(MOVE_DARK_PULSE, MOVE_HEAT_WAVE, MOVE_SLUDGE_BOMB, MOVE_PROTECT); }
+        PLAYER(SPECIES_AMOONGUSS) { Level(40); Speed(40); Item(ITEM_LEFTOVERS); Ability(ABILITY_REGENERATOR); Moves(MOVE_RAGE_POWDER, MOVE_SPORE, MOVE_POLLEN_PUFF, MOVE_PROTECT); }
+        OPPONENT(SPECIES_PARASECT) {
+            Level(45); MaxHP(169); HP(169); Speed(46); Item(ITEM_FOCUS_SASH); Ability(ABILITY_DRY_SKIN); Nature(NATURE_CAREFUL);
+            Moves(MOVE_SPORE, MOVE_WIDE_GUARD, MOVE_LEECH_LIFE, MOVE_RAGE_POWDER);
+        }
+        OPPONENT(SPECIES_SAWSBUCK_SPRING) {
+            Level(43); MaxHP(135); HP(135); Speed(139); Item(ITEM_COBA_BERRY); Ability(ABILITY_SAP_SIPPER); Nature(NATURE_JOLLY);
+            Moves(MOVE_HORN_LEECH, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_HIGH_HORSEPOWER);
+        }
+        OPPONENT(SPECIES_DELPHOX) { Level(42); Speed(145); Item(ITEM_LIFE_ORB); Ability(ABILITY_BLAZE); Moves(MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_PROTECT); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SACRED_FIRE, target: opponentLeft);
+            MOVE(playerRight, MOVE_FLARE_BLITZ, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_SPORE);
+            SEND_OUT(playerRight, 2);
+        }
+    }
+}
+
 static void TianaEndgameBoard(void)
 {
     gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
@@ -906,5 +945,47 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: Safeguard is useless against a known par
             TURN { MOVE(player, MOVE_SWORDS_DANCE); SCORE_EQ_VAL(opponent, MOVE_SAFEGUARD, 0); }
         else
             TURN { MOVE(player, MOVE_SWORDS_DANCE); SCORE_GT_VAL(opponent, MOVE_SAFEGUARD, 0); }
+    }
+}
+
+static void MagikarpGuyBoard(void)
+{
+    for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+        gBattleStruct->battlerState[battler].isFirstTurn = 0;
+    gFieldTimers.terrain = B_TERRAIN_GRASSY;
+    gFieldTimers.terrainTimer = 3;
+}
+
+// E0227 a02-a04: Magikarp Guy's Gyarados Dragon Danced in front of Raging
+// Bolt, whose Thunderbolt knocks it out through any boost, and was knocked out
+// every time. The forecast's Thunderclap fails into a status move, but on the
+// board the foe picks Thunderbolt.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a setup move is not spent in front of a known knockout")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_RAGING_BOLT) {
+            Level(55); Nature(NATURE_MODEST); Item(ITEM_LIFE_ORB); Ability(ABILITY_PROTOSYNTHESIS);
+            Moves(MOVE_THUNDERCLAP, MOVE_THUNDERBOLT, MOVE_DRACO_METEOR, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_RILLABOOM) {
+            Level(55); Nature(NATURE_ADAMANT); Item(ITEM_MIRACLE_SEED); Ability(ABILITY_GRASSY_SURGE);
+            Moves(MOVE_FAKE_OUT, MOVE_WOOD_HAMMER, MOVE_GRASSY_GLIDE, MOVE_KNOCK_OFF);
+        }
+        OPPONENT(SPECIES_GYARADOS) {
+            Level(66); HP(149); Nature(NATURE_ADAMANT); Item(ITEM_MYSTIC_WATER); Ability(ABILITY_INTIMIDATE);
+            Moves(MOVE_WATERFALL, MOVE_BOUNCE, MOVE_DRAGON_DANCE, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_WISHIWASHI) {
+            Level(65); Nature(NATURE_BOLD); Item(ITEM_LEFTOVERS); Ability(ABILITY_SCHOOLING);
+            Moves(MOVE_LIQUIDATION, MOVE_AQUA_RING, MOVE_HELPING_HAND, MOVE_PROTECT);
+        }
+        gTestAiTurnSetupHook = MagikarpGuyBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            MOVE(playerRight, MOVE_GRASSY_GLIDE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_DRAGON_DANCE);
+        }
     }
 }

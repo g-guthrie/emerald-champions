@@ -703,3 +703,28 @@ DOUBLE_BATTLE_TEST("Spread Moves: Results aren't printed for battlers not presen
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
     }
 }
+
+DOUBLE_BATTLE_TEST("Spread Moves: Storm Drain does not announce taking a spread move")
+{
+    enum Move move;
+    PARAMETRIZE { move = MOVE_PROTECT; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
+    GIVEN {
+        ASSUME(GetMoveTarget(MOVE_SURF) == TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_SIMIPOUR);
+        OPPONENT(SPECIES_MARACTUS) { Ability(ABILITY_STORM_DRAIN); }
+    } WHEN {
+        TURN { MOVE(opponentRight, move); MOVE(opponentLeft, MOVE_SURF); }
+    } SCENE {
+        NONE_OF { MESSAGE("The opposing Maractus took the attack!"); }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, opponentLeft);
+        HP_BAR(playerLeft);
+        HP_BAR(playerRight);
+    } THEN {
+        // The Surf still reaches Maractus: it absorbs it unless it is protecting.
+        EXPECT_EQ(opponentRight->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + (move == MOVE_CELEBRATE));
+    }
+}

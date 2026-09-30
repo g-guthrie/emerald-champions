@@ -1214,10 +1214,17 @@ AI_DOUBLE_BATTLE_TEST("EC doubles budget: initial Mega and full benches stay bel
         EXPECT(gBattleStruct->aiDelayFrames <= 72);
     }
 }
+extern void (*gTestAiTurnSetupHook)(void);
+
+static void BurnedDugtrioBoard(void)
+{
+    gBattleMons[B_BATTLER_0].status1 = STATUS1_BURN;
+}
+
 AI_DOUBLE_BATTLE_TEST("EC status legality: a spent burn is not a substitute for an action")
 {
     GIVEN {
-        // Frozen pre-authoring reproduction: first burn succeeds, then a
+        // Frozen pre-authoring reproduction: Dugtrio already burned, and a
         // Sucker Punch threat made the failed repeat beat real attacks.
         const enum Species species[] = {SPECIES_DUGTRIO, SPECIES_XATU, SPECIES_SHEDINJA, SPECIES_VENOMOTH};
         const struct EmeraldChampionsBattleSet sets[] = {
@@ -1230,6 +1237,7 @@ AI_DOUBLE_BATTLE_TEST("EC status legality: a spent burn is not a substitute for 
             | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS
             | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE);
         gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_LUNG;
+        gTestAiTurnSetupHook = BurnedDugtrioBoard;
         for (u32 i = 0; i < ARRAY_COUNT(species); i++) {
             struct Pokemon mon;
             CreateRandomMonWithIVs(&mon, species[i], i < 2 ? 40 : 38, MAX_PER_STAT_IVS);
@@ -1255,8 +1263,7 @@ AI_DOUBLE_BATTLE_TEST("EC status legality: a spent burn is not a substitute for 
             MOVE(playerRight, MOVE_AIR_SLASH, target: opponentRight, hit: TRUE, criticalHit: FALSE, secondaryEffect: FALSE);
         }
     } THEN {
-        EXPECT_EQ(playerLeft->status1, STATUS1_BURN);
-        EXPECT_EQ(opponentLeft->pp[3], 14);
+        EXPECT_EQ(opponentLeft->pp[3], GetMovePP(MOVE_WILL_O_WISP));
     }
 }
 
