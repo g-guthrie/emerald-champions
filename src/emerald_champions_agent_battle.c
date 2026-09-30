@@ -19,9 +19,13 @@
 #include "difficulty.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "field_specials.h"
+#include "frontier_util.h"
 #include "main.h"
 #include "load_save.h"
 #include "pokemon.h"
+#include "emerald_champions_opening.h"
+#include "starter_choose.h"
 #include "random.h"
 #include "constants/battle.h"
 #include "constants/battle_partner.h"
@@ -29,12 +33,17 @@
 #include "constants/opponents.h"
 #include "constants/party_menu.h"
 #include "constants/characters.h"
+#include "constants/vars.h"
+#include "constants/script_commands.h"
 
 // Headless agent battle bridge. A host process starts one authored trainer
 // battle, then answers every player decision point from this mailbox. Opponent
 // battlers keep the ordinary AI, its ordinary turn-start timing and its ordinary
 // party knowledge; nothing here is available in the release ROM.
 
+EWRAM_DATA volatile u32 gEcAgentBattleKind = EC_AGENT_BATTLE_TRAINER;
+EWRAM_DATA volatile u32 gEcAgentBattleFirstStarter = 0;
+EWRAM_DATA volatile u32 gEcAgentBattleSecondStarter = 0;
 EWRAM_DATA volatile u32 gEcAgentBattleCommand = 0;
 EWRAM_DATA volatile u32 gEcAgentBattleResult = EC_AGENT_BATTLE_PENDING;
 EWRAM_DATA volatile u32 gEcAgentBattleTrainerA = TRAINER_NONE;
@@ -43,6 +52,9 @@ EWRAM_DATA volatile u32 gEcAgentBattlePartner = PARTNER_NONE;
 EWRAM_DATA volatile u32 gEcAgentBattlePhase = EC_AGENT_BATTLE_PHASE_IDLE;
 EWRAM_DATA volatile u32 gEcAgentBattleSerial = 0;
 EWRAM_DATA volatile u32 gEcAgentBattleSeed = 0;
+EWRAM_DATA volatile s32 gEcAgentBattleLevelDelta[PARTY_SIZE * 2] = {0};
+EWRAM_DATA volatile u32 gEcAgentBattleAbilityTrial[PARTY_SIZE * 2] = {0};
+EWRAM_DATA volatile u32 gEcAgentBattleTrialRejected = 0;
 // One word the host can stop on: the ROM is parked and waiting for the host.
 EWRAM_DATA volatile u32 gEcAgentBattleHalted = 0;
 EWRAM_DATA volatile u32 gEcAgentBattleNeedMask = 0;
@@ -53,11 +65,16 @@ EWRAM_DATA volatile u32 gEcAgentBattleMega[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleSwitchSlot[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleView[EC_AGENT_BATTLE_VIEW_WORDS] = {0};
 EWRAM_DATA volatile u8 gEcAgentBattleLog[EC_AGENT_BATTLE_LOG_BYTES] = {0};
+EWRAM_DATA volatile u32 gEcAgentBattleOpponentRoster[EC_AGENT_BATTLE_ROSTER_WORDS] = {0};
+EWRAM_DATA volatile u32 gEcAgentBattlePlayerFactory[EC_AGENT_BATTLE_FACTORY_WORDS] = {0};
+STATIC_ASSERT(EC_AGENT_BATTLE_ROSTER_WORDS <= 500, AgentOpponentRosterFitsReadBatch);
 EWRAM_DATA volatile u32 gEcAgentBattleMapWeather = 0;
 EWRAM_DATA volatile u32 gEcAgentBattleEnvironment = 0;
 
 static EWRAM_DATA bool8 sBridgeArmed = FALSE;
 static EWRAM_DATA bool8 sBattleSeen = FALSE;
+static EWRAM_DATA bool8 sRescueAuditPending = FALSE;
+static const u8 sAgentBattleResumeScript[] = {SCR_OP_RELEASEALL, SCR_OP_END};
 static EWRAM_DATA u8 sLastAction[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sLastMovePos[MAX_BATTLERS_COUNT] = {0};
 static EWRAM_DATA u8 sLastTarget[MAX_BATTLERS_COUNT] = {0};
@@ -107,8 +124,14 @@ bool32 EmeraldChampionsAgentBattleActive(void)
 // table in caps.c; this never introduces a second level formula.
 void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
 {
+    gEcAgentBattleKind = EC_AGENT_BATTLE_TRAINER;
+    gEcAgentBattleFirstStarter = 0;
+    gEcAgentBattleSecondStarter = 1;
     sBridgeArmed = TRUE;
     sBattleSeen = FALSE;
+    sRescueAuditPending = FALSE;
+    gEcAgentBattlePlayerFactory[0] = 0;
+    gEcAgentBattleOpponentRoster[0] = 0;
     sLastTurn = 0xFFFF;
     sAiDecisionFrames = 0;
     sAiSetupFrames = 0;
@@ -666,6 +689,7 @@ static u32 AuthoredFieldMask(u32 trainerId)
 static void WriteView(void)
 {
     u32 liveFoes = 0;
+    bool32 live = gMain.inBattle && gBattleStruct != NULL;
 
     gEcAgentBattleView[0] = 3; // schema: native targets and completed snapshot publication
     gEcAgentBattleView[1] = gEcAgentBattlePhase;
@@ -674,14 +698,14 @@ static void WriteView(void)
     gEcAgentBattleView[4] = gBattleTypeFlags;
     gEcAgentBattleView[5] = gBattleWeather;
     gEcAgentBattleView[6] = gFieldStatuses;
-    gEcAgentBattleView[7] = gMain.inBattle ? gBattleOutcome : sFinalOutcome;
+    gEcAgentBattleView[7] = live ? gBattleOutcome : sFinalOutcome;
     gEcAgentBattleView[8] = gEcAgentBattleNeedMask;
     gEcAgentBattleView[9] = sAiDecisionFrames;
     gEcAgentBattleView[10] = sAiSetupFrames;
     gEcAgentBattleView[11] = (gBattleStruct != NULL) ? (u32)gBattleStruct->aiDelayFrames : 0;
     gEcAgentBattleView[12] = gAbsentBattlerFlags;
     gEcAgentBattleView[13] = gBattlersCount;
-    if (gMain.inBattle)
+    if (live)
     {
         bool32 twoOwners = (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) != 0;
         if (PartyPopulated(B_TRAINER_PLAYER))
@@ -707,7 +731,7 @@ static void WriteView(void)
     gEcAgentBattleView[22] = GetCurrentLevelCap();
     gEcAgentBattleView[23] = GetCurrentDifficultyLevel();
     gEcAgentBattleView[24] = gMain.inBattle;
-    for (u32 battler = 0; battler < gBattlersCount; battler++)
+    for (u32 battler = 0; live && battler < gBattlersCount; battler++)
     {
         if (GetBattlerSide(battler) != B_SIDE_PLAYER && IsBattlerAlive(battler))
             liveFoes |= 1u << battler;
@@ -718,7 +742,7 @@ static void WriteView(void)
     gEcAgentBattleView[28] = sLevelCap;
     gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 0] = AuthoredFieldMask(gEcAgentBattleTrainerA);
     gEcAgentBattleView[EC_AGENT_BATTLE_FIELD_BASE + 1] = AuthoredFieldMask(gEcAgentBattleTrainerB);
-    if (gMain.inBattle && gBattleTurnCounter == 0)
+    if (live && gBattleTurnCounter == 0)
     {
         sOpeningTerrain = gFieldTimers.terrain;
         sOpeningWeather = gBattleWeather;
@@ -748,16 +772,192 @@ static void WriteView(void)
         gEcAgentBattleView[base + 2] = sPrevTarget[battler];
         gEcAgentBattleView[base + 3] = sPrevMove[battler];
     }
-    WriteBattlers();
-    WritePlayerParty();
-    WriteRevealedOpponents();
-    WriteLegality();
+    gEcAgentBattleView[EC_AGENT_BATTLE_LAST_LIVE_WORD] = !live && sBattleSeen;
+    if (live)
+    {
+        WriteBattlers();
+        WritePlayerParty();
+        WriteRevealedOpponents();
+        WriteLegality();
+    }
+    else
+    {
+        // Cleanup frees gimmick/AI state and may restore a partner's party or
+        // heal after a loss. Retain the last live board and faint counters;
+        // never query freed battle helpers or relabel healed HP as a margin.
+        for (u32 word = EC_AGENT_BATTLE_LEGAL_BASE; word < EC_AGENT_BATTLE_MSG_BASE; word++)
+            gEcAgentBattleView[word] = 0;
+    }
 }
 
 // ------------------------------------------------------------------- the poll
 
+static void WriteRosterMon(volatile u32 *row, struct Pokemon *mon)
+{
+    static const u8 evFields[] = {MON_DATA_HP_EV, MON_DATA_ATK_EV, MON_DATA_DEF_EV,
+        MON_DATA_SPATK_EV, MON_DATA_SPDEF_EV, MON_DATA_SPEED_EV};
+    static const u8 ivFields[] = {MON_DATA_HP_IV, MON_DATA_ATK_IV, MON_DATA_DEF_IV,
+        MON_DATA_SPATK_IV, MON_DATA_SPDEF_IV, MON_DATA_SPEED_IV};
+    for (u32 word = 0; word < EC_AGENT_BATTLE_ROSTER_MON_SIZE; word++)
+        row[word] = 0;
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+        return;
+    row[0] = GetMonData(mon, MON_DATA_SPECIES);
+    row[1] = GetMonData(mon, MON_DATA_LEVEL);
+    row[2] = GetMonData(mon, MON_DATA_HELD_ITEM);
+    row[3] = GetMonAbility(mon);
+    row[4] = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
+    row[5] = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    for (u32 stat = 0; stat < ARRAY_COUNT(evFields); stat++)
+    {
+        row[6 + stat] = GetMonData(mon, evFields[stat]);
+        row[12 + stat] = GetMonData(mon, ivFields[stat]);
+    }
+    for (u32 move = 0; move < MAX_MON_MOVES; move++)
+        row[18 + move] = GetMonData(mon, MON_DATA_MOVE1 + move);
+}
+
+static void WriteOpponentRoster(void)
+{
+    static const enum BattleTrainer owners[] = {B_TRAINER_OPPONENT_A, B_TRAINER_OPPONENT_B};
+    gEcAgentBattleOpponentRoster[0] = 0; // Publish schema only after every member.
+    gEcAgentBattleOpponentRoster[3] = VarGet(VAR_STARTER_GEN);
+    gEcAgentBattleOpponentRoster[4] = GetEmeraldChampionsRivalStarterIndex();
+    gEcAgentBattleOpponentRoster[5] = GetStarterPokemonForGeneration(
+        gEcAgentBattleOpponentRoster[4], gEcAgentBattleOpponentRoster[3]);
+    gEcAgentBattleOpponentRoster[6] = gBattleTypeFlags;
+    gEcAgentBattleOpponentRoster[7] = gEcAgentBattleTrainerA;
+    gEcAgentBattleOpponentRoster[8] = gEcAgentBattleTrainerB;
+    for (u32 owner = 0; owner < ARRAY_COUNT(owners); owner++)
+    {
+        u32 count = 0;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            struct Pokemon *mon = &gParties[owners[owner]][slot];
+            u32 base = EC_AGENT_BATTLE_ROSTER_HEADER
+                     + (owner * PARTY_SIZE + slot) * EC_AGENT_BATTLE_ROSTER_MON_SIZE;
+            WriteRosterMon(&gEcAgentBattleOpponentRoster[base], mon);
+            count += GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE;
+
+        }
+        gEcAgentBattleOpponentRoster[1 + owner] = count;
+    }
+    gEcAgentBattleOpponentRoster[0] = EC_AGENT_BATTLE_ROSTER_SCHEMA;
+}
+
+static void WriteRescuePlayerFactory(void)
+{
+    gEcAgentBattlePlayerFactory[0] = 0;
+    gEcAgentBattlePlayerFactory[1] = CalculatePlayerPartyCount();
+    gEcAgentBattlePlayerFactory[2] = VarGet(VAR_STARTER_GEN);
+    gEcAgentBattlePlayerFactory[3] = VarGet(VAR_STARTER_MON);
+    gEcAgentBattlePlayerFactory[4] = GetEmeraldChampionsSecondStarterIndex();
+    gEcAgentBattlePlayerFactory[5] = gSaveBlock2Ptr->playerGender;
+    gEcAgentBattlePlayerFactory[6] = VarGet(VAR_EC_OPENING_STATE);
+    for (u32 slot = 0; slot < 2; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        WriteRosterMon(&gEcAgentBattlePlayerFactory[EC_AGENT_BATTLE_FACTORY_HEADER
+                       + slot * EC_AGENT_BATTLE_ROSTER_MON_SIZE], mon);
+        u32 extra = EC_AGENT_BATTLE_FACTORY_HEADER + 2 * EC_AGENT_BATTLE_ROSTER_MON_SIZE + slot * 3;
+        gEcAgentBattlePlayerFactory[extra] = GetMonData(mon, MON_DATA_POKERUS);
+        gEcAgentBattlePlayerFactory[extra + 1] = GetMonData(mon, MON_DATA_PP_BONUSES);
+        gEcAgentBattlePlayerFactory[extra + 2] = GetMonData(mon, MON_DATA_STATUS);
+
+    }
+    gEcAgentBattlePlayerFactory[0] = 1;
+}
+
+// These are two concrete campaign encounters, not generic wild fabrication.
+// The bridge still returns only after the normal battle/field lifecycle.
+static void PrepareScriptedBattleResume(void)
+{
+    ScriptContext_SetupScript(sAgentBattleResumeScript);
+    ScriptContext_Stop();
+}
+
+static void StartRequestedScriptedWildBattle(void)
+{
+    if (gMain.inBattle || gMain.callback2 != CB2_Overworld
+     || ArePlayerFieldControlsLocked() || ScriptContext_IsEnabled())
+    {
+        gEcAgentBattleResult = EC_AGENT_BATTLE_NOT_READY;
+        gEcAgentBattleCommand = 0;
+        return;
+    }
+    gEcAgentBattleTrainerA = TRAINER_NONE;
+    gEcAgentBattleTrainerB = TRAINER_NONE;
+    gEcAgentBattlePartner = PARTNER_NONE;
+    memset(&gTrainerBattleParameter, 0, sizeof(gTrainerBattleParameter));
+    TRAINER_BATTLE_PARAM.opponentB = 0xFFFF;
+    gEcAgentBattleOpponentRoster[0] = 0;
+    if (gEcAgentBattleKind == EC_AGENT_BATTLE_BIRCH_RESCUE)
+    {
+        // Before any Center/tutor preparation: real level-five starters with
+        // natural moves, initial player EVs and no held items.
+        if (gEcAgentBattleFirstStarter >= 3
+         || gEcAgentBattleSecondStarter >= 3
+         || gEcAgentBattleFirstStarter == gEcAgentBattleSecondStarter)
+        {
+            gEcAgentBattleResult = EC_AGENT_BATTLE_BAD_PARTY;
+            gEcAgentBattleCommand = 0;
+            return;
+        }
+        ZeroPlayerPartyMons();
+        ZeroEnemyPartyMons();
+        VarSet(VAR_EC_OPENING_STATE, 0);
+        if (!GiveEmeraldChampionsStarterPair(gEcAgentBattleFirstStarter, gEcAgentBattleSecondStarter))
+        {
+            gEcAgentBattleResult = EC_AGENT_BATTLE_BAD_PARTY;
+            gEcAgentBattleCommand = 0;
+            return;
+        }
+        // The real opponent factory runs inside InitBattleControllers. Do not
+        // call it early too: doing so consumes extra RNG and fabricates a set.
+        WriteRescuePlayerFactory();
+        sRescueAuditPending = TRUE;
+        // These real callbacks resume a paused script. Own a tiny safe context
+        // instead of reviving an unrelated/stale map script from the sandbox.
+        PrepareScriptedBattleResume();
+        StartEmeraldChampionsBirchRescue();
+    }
+    else if (gEcAgentBattleKind == EC_AGENT_BATTLE_BIRTH_ISLAND_DEOXYS)
+    {
+        if (CalculatePlayerPartyCount() < 1)
+        {
+            gEcAgentBattleResult = EC_AGENT_BATTLE_BAD_PARTY;
+            gEcAgentBattleCommand = 0;
+            return;
+        }
+        // Match BirthIsland_Exterior/scripts.inc. Legendary level/loadout is
+        // determined by the shared factory, including random eligible set.
+        gSpecialVar_0x8004 = SPECIES_DEOXYS;
+        gSpecialVar_0x8005 = GetHighestLevelInPlayerParty();
+        gSpecialVar_0x8006 = ITEM_NONE;
+        CreateEventLegalEnemyMon();
+        PrepareScriptedBattleResume();
+        BattleSetup_StartLegendaryBattle(); // Native single format/random AI.
+        WriteOpponentRoster();
+    }
+    else
+    {
+        gEcAgentBattleResult = EC_AGENT_BATTLE_BAD_COMMAND;
+        gEcAgentBattleCommand = 0;
+        return;
+    }
+    sBattleSeen = FALSE;
+    gEcAgentBattlePhase = EC_AGENT_BATTLE_PHASE_STARTING;
+    gEcAgentBattleResult = EC_AGENT_BATTLE_OK;
+    gEcAgentBattleCommand = 0;
+}
+
 static void StartRequestedBattle(void)
 {
+    if (gEcAgentBattleKind != EC_AGENT_BATTLE_TRAINER)
+    {
+        StartRequestedScriptedWildBattle();
+        return;
+    }
     u32 trainerA = gEcAgentBattleTrainerA;
     u32 trainerB = gEcAgentBattleTrainerB;
     u32 partner = gEcAgentBattlePartner;
@@ -794,11 +994,9 @@ static void StartRequestedBattle(void)
     TRAINER_BATTLE_PARAM.opponentA = trainerA;
     TRAINER_BATTLE_PARAM.opponentB = 0xFFFF;
     TRAINER_BATTLE_PARAM.isDoubleBattle = TRUE;
-    CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_OPPONENT_A], GetTrainerStructFromId(trainerA));
     if (trainerB != TRAINER_NONE)
     {
         TRAINER_BATTLE_PARAM.opponentB = trainerB;
-        CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_OPPONENT_B], GetTrainerStructFromId(trainerB));
         gBattleTypeFlags |= BATTLE_TYPE_TWO_OPPONENTS;
     }
     if (partner != PARTNER_NONE)
@@ -813,6 +1011,10 @@ static void StartRequestedBattle(void)
         }
         FillPartnerParty(gPartnerTrainerId);
     }
+    // Use the campaign factory, including trainer overrides, regional rival
+    // conversion and two-owner sizing. Restart already exposes this path.
+    EmeraldChampions_RebuildTrainerBattleParties();
+    WriteOpponentRoster();
     gBattleEnvironment = BattleSetup_GetEnvironmentId();
     CalculateEnemyPartyCount();
     BattleSetup_StartTrainerBattle_Debug();
@@ -842,7 +1044,14 @@ void EmeraldChampionsAgentBattlePoll(void)
     if (!gMain.inBattle || gBattleStruct == NULL)
     {
         if (sBattleSeen)
-            gEcAgentBattlePhase = EC_AGENT_BATTLE_PHASE_ENDED;
+        {
+            // A released allocation is not returned player control. Let the
+            // normal fade/evolution/field callback finish before halting.
+            bool32 fieldReady = !gMain.inBattle && gMain.callback2 == CB2_Overworld
+                                && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled();
+            gEcAgentBattlePhase = fieldReady ? EC_AGENT_BATTLE_PHASE_ENDED : EC_AGENT_BATTLE_PHASE_RUNNING;
+            gEcAgentBattleNeedMask = 0;
+        }
         WriteView();
         gEcAgentBattleHalted = (gEcAgentBattlePhase == EC_AGENT_BATTLE_PHASE_ENDED);
         return;
@@ -947,8 +1156,41 @@ void EmeraldChampionsAgentBattlePoll(void)
          && gBattleStruct->illusion[battler].state == ILLUSION_OFF)
             sRevealed[GetBattlerTrainer(battler)] |= 1u << gBattlerPartyIndexes[battler];
     }
+    if (sRescueAuditPending && gEcAgentBattleNeedMask != 0)
+    {
+        // Factory and battle initialization have now finished. Retain the
+        // actual random nature/ability and fixed level-two natural moves.
+        WriteOpponentRoster();
+        sRescueAuditPending = FALSE;
+    }
     WriteView();
     gEcAgentBattleHalted = (gEcAgentBattleNeedMask != 0);
+}
+
+void EmeraldChampionsAgentTrialMember(struct Pokemon *mon, bool32 ownerB, u32 memberIndex)
+{
+    if (memberIndex >= PARTY_SIZE)
+        return;
+    u32 index = (ownerB ? PARTY_SIZE : 0) + memberIndex;
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Ability ability = gEcAgentBattleAbilityTrial[index];
+    if (ability != ABILITY_NONE)
+    {
+        u32 abilitySlot;
+        if (FindSpeciesAbilitySlotForOwner(species, ability, TRUE, &abilitySlot))
+            SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
+        else
+            gEcAgentBattleTrialRejected |= 1u << index;
+    }
+    s32 delta = gEcAgentBattleLevelDelta[index];
+    if (delta == 0)
+        return;
+    s32 level = max(1, min(MAX_LEVEL, (s32)GetMonData(mon, MON_DATA_LEVEL) + delta));
+    u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
+    SetMonData(mon, MON_DATA_EXP, &exp);
+    CalculateMonStats(mon);
+    u32 hp = GetMonData(mon, MON_DATA_MAX_HP);
+    SetMonData(mon, MON_DATA_HP, &hp);
 }
 
 #endif

@@ -103,7 +103,7 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
                 offset = int(match.group(3))
                 if not -254 <= offset <= 254:
                     raise ValueError(f"{trainer}: level offset {offset} is outside the native -254..254 representation")
-                level = min(255, max(1, cap + offset))
+                level = min(100, max(1, cap + offset))
                 mons.append(Mon(
                     species=match.group(1),
                     item=match.group(2),

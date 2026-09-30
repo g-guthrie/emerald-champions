@@ -102,14 +102,34 @@ struct Options
 static bool ParseUnsigned(const char *text, uint32_t *value);
 static bool IsValidWidth(unsigned width);
 
-static void QuietLog(struct mLogger *logger, int category, enum mLogLevel level,
-                     const char *format, va_list args)
+static unsigned sDiagnosticCount;
+static bool sNativeAssertion;
+static bool sNativeFatal;
+static char sNativeFailure[1024];
+
+static void DiagnosticLog(struct mLogger *logger, int category, enum mLogLevel level,
+                          const char *format, va_list args)
 {
     (void)logger;
-    (void)category;
-    (void)level;
-    (void)format;
-    (void)args;
+    char message[1024];
+    vsnprintf(message, sizeof(message), format, args);
+    bool assertion = strstr(message, "ASSERTION FAILED") != NULL;
+    if (assertion)
+        sNativeAssertion = true;
+    if (level & mLOG_FATAL)
+        sNativeFatal = true;
+    if (assertion || (level & mLOG_FATAL))
+        snprintf(sNativeFailure, sizeof(sNativeFailure), "%s", message);
+    if (!assertion && !(level & (mLOG_FATAL | mLOG_ERROR | mLOG_GAME_ERROR)))
+        return;
+    // Preserve the first errors and every assertion. Flooding unmapped-memory
+    // diagnostics must not hide the specific assertion that caused a failure.
+    if (sDiagnosticCount < 32 || assertion)
+        fprintf(stderr, "MGBA_DIAGNOSTIC category=%s level=%u: %s\n",
+                mLogCategoryName(category) ? mLogCategoryName(category) : "unknown", (unsigned)level, message);
+    else if (sDiagnosticCount == 32)
+        fprintf(stderr, "MGBA_DIAGNOSTIC further repeated emulator errors suppressed\n");
+    sDiagnosticCount++;
 }
 
 static void Usage(const char *program)
@@ -543,7 +563,7 @@ static uint64_t HashVideo(const color_t *pixels, size_t count, size_t *nonzeroOu
 int main(int argc, char **argv)
 {
     struct Options options;
-    struct mLogger logger = { .log = QuietLog };
+    struct mLogger logger = { .log = DiagnosticLog };
     struct mCore *core = NULL;
     unsigned width = 240;
     unsigned height = 160;
@@ -622,6 +642,10 @@ int main(int argc, char **argv)
         result = 9;
         goto cleanup;
     }
+    // The ROM's MgbaOpen handshake runs at boot. The debug extension is
+    // frontend state, so a fresh core restoring a state must enable it again
+    // to retain native assertion text before the ROM executes its stop SWI.
+    core->busWrite16(core, 0x04FFF780, 0xC0DE);
     for (i = 0; i < options.screenshotWatchCount; i++)
         options.screenshotWatches[i].lastValue = ReadMemory(
             core,
@@ -646,6 +670,11 @@ int main(int argc, char **argv)
         core->setKeys(core, keys);
         core->runFrame(core);
         framesRun = frame + 1;
+        if (sNativeAssertion || sNativeFatal)
+        {
+            result = 11;
+            break;
+        }
 
         for (i = 0; i < options.screenshotEventCount; i++)
         {
@@ -723,14 +752,20 @@ int main(int argc, char **argv)
 
     printf("RESULT frames=%u stop_matched=%u pc=%08" PRIx32
            " rtc=%" PRId64 " width=%u height=%u"
-           " video_hash=%016" PRIx64 " nonzero_pixels=%zu save_bytes=%zu\n",
+           " video_hash=%016" PRIx64 " nonzero_pixels=%zu save_bytes=%zu"
+           " native_assertion=%u native_fatal=%u\n",
            framesRun, stopMatched, pc, options.rtcEpoch, width, height,
-           videoHash, nonzeroPixels, saveSize);
+           videoHash, nonzeroPixels, saveSize, sNativeAssertion, sNativeFatal);
     for (i = 0; i < options.readCount; i++)
     {
         uint32_t value = ReadMemory(core, options.reads[i].width, options.reads[i].address);
         printf("READ width=%u address=%08" PRIx32 " value=%08" PRIx32 "\n",
                options.reads[i].width, options.reads[i].address, value);
+    }
+    if (sNativeAssertion || sNativeFatal)
+    {
+        fflush(stdout);
+        fprintf(stderr, "MGBA_NATIVE_FAILURE: %s\n", sNativeFailure);
     }
 
 cleanup:

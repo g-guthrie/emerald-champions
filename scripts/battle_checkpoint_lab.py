@@ -18,7 +18,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_emerald_champions_campaign as campaign
 import render_emerald_champions_ui as ui
 import native_tools
-from item_catalog import free_vendor_items
 from emerald_champions_evs import EV_PER_STAT_MAX, EV_TOTAL_MAX
 
 
@@ -122,11 +121,12 @@ def center_services(map_names: list[str]) -> tuple[list[dict[str, str]], list[Pa
         rows["level_to_cap"] = {"service": "level_to_cap", "source": "data/scripts/pkmn_center_nurse.inc"}
         for obj in data.get("object_events", []):
             script = str(obj.get("script", ""))
-            if "BattleVendor" in script:
-                for service in ("preset", "nature", "ability", "held_item", "evs"):
+            if "BattleVendor" in script or script == "General_Mart_Script":
+                for service in ("paid_held_items",):
                     rows[service] = {"service": service, "source": map_json.relative_to(ROOT).as_posix(), "script": script}
             if "MoveTutor" in script:
-                rows["moves"] = {"service": "moves", "source": map_json.relative_to(ROOT).as_posix(), "script": script}
+                for service in ("moves", "bonding", "evs"):
+                    rows[service] = {"service": service, "source": map_json.relative_to(ROOT).as_posix(), "script": script}
     return [rows[key] for key in sorted(rows)], sources
 
 
@@ -194,14 +194,15 @@ def materialize_legal_arsenal(map_names: list[str], cap: int, party: list[dict[s
                 {"kind": "gift_or_static", "map": data["id"], "source": script.relative_to(ROOT).as_posix()})
 
     field_specials = ROOT / "src/field_specials.c"
-    held_items = sorted(free_vendor_items(ROOT)) \
-        if any(row["service"] == "held_item" for row in center_rows) else []
     item_by_id = explicit_enum_values(ROOT / "include/constants/items.h", "ITEM_")
     owned_items = {item_by_id.get(int(row["item_id"]), f"ITEM_ID_{row['item_id']}") for row in inventory}
+    held_items = sorted(owned_items)
     mega_access = "ITEM_MEGA_RING" in owned_items
-    mega_items = sorted(set(re.findall(r"ITEM_[A-Z0-9_]+", (ROOT / "src/data/emerald_champions_mega_stones.h").read_text()))) if mega_access else []
-    evolution_items = sorted(set(re.findall(r"ITEM_[A-Z0-9_]+", (ROOT / "src/data/emerald_champions_evolution_items.h").read_text()))) if mega_access else []
-    available_evolution_items = owned_items | set(evolution_items)
+    mega_catalogue = set(re.findall(r"ITEM_[A-Z0-9_]+", (ROOT / "src/data/emerald_champions_mega_stones.h").read_text()))
+    evolution_catalogue = set(re.findall(r"ITEM_[A-Z0-9_]+", (ROOT / "src/data/emerald_champions_evolution_items.h").read_text()))
+    mega_items = sorted(owned_items & mega_catalogue)
+    evolution_items = sorted(owned_items & evolution_catalogue)
+    available_evolution_items = owned_items
 
     family_paths = sorted((ROOT / "src/data/pokemon/species_info").glob("*families.h"))
     evolution_edges: list[dict[str, Any]] = []
@@ -265,8 +266,10 @@ def materialize_legal_arsenal(map_names: list[str], cap: int, party: list[dict[s
                ROOT / "include/constants/species.h", ROOT / "include/constants/items.h",
                ROOT / "src/data/emerald_champions_mega_stones.h", ROOT / "src/data/emerald_champions_evolution_items.h",
                *family_paths, *map_sources]
-    return {"reachable_maps": map_names, "encounter_method_access": method_access or {},
-            "chronology": "first_pass_campaign_order_no_future_resources",
+    return {"legality_status": "unresolved", "kind": "checkpoint_acquisition_candidates",
+            "scope": "Legacy chronology and script references are candidate evidence only; use a source-certified battle_arsenal scenario for legal-win calibration.",
+            "reachable_maps": map_names, "encounter_method_access": method_access or {},
+            "chronology": "descriptive_first_pass_not_reachability_proof",
             "pokemon": result_species, "held_items": held_items,
             "mega_access": mega_access, "mega_stones": mega_items, "evolution_items": evolution_items,
             "evolution_edges": evolution_edges, "natures": natures,

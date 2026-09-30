@@ -1,42 +1,46 @@
 #!/usr/bin/env python3
-"""Generate the opponent half of every independent trainer-battle puzzle.
+"""Export exact authored opponents and explicitly certified preparation scenarios.
 
-The source-derived arsenal is intentionally a separate required input: this
-tool will not invent reachability from the opponent chronology.  Its producer
-must bind each arsenal to the same source fingerprint and campaign order.
+Encounter chronology and historical strict_cap are descriptive only. Availability
+comes from the separate source-backed arsenal producer; missing certificates stay
+unresolved and cannot be used as legal-win evidence.
 """
-
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[2]
-MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
-ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
-BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
-MON_RE = re.compile(
-    r"(?m)^  (\d+)\. (SPECIES_[A-Z0-9_]+) @ (ITEM_[A-Z0-9_]+) \| "
-    r"level_offset=(-?\d+) \| ability=(ABILITY_[A-Z0-9_]+) \| "
-    r"nature=(NATURE_[A-Z0-9_]+) \| evs=([0-9/]+) \| "
-    r"moves=(MOVE_[A-Z0-9_]+(?:,MOVE_[A-Z0-9_]+){0,3})$"
-)
-INPUTS = (
-    "data/emerald_champions/emerald_champions_master_battle_design.txt",
-    "data/emerald_champions/emerald_champions_battle_teams.txt",
-    "src/data/trainers.party",
-    "data/emerald_champions/emerald_champions_hand_audited_battle_sets.json",
-    "data/emerald_champions/emerald_champions_move_access_review.json",
-    "data/emerald_champions/showdown_champions_learnsets.json",
-    "src/data/wild_encounters.json",
-    "include/constants/event_objects.h",
-    "include/constants/items.h",
-    "include/constants/opponents.h",
+sys.path.insert(0, str(ROOT / "scripts"))
+import emerald_champions_teams as teams
+import stamp_release_inputs as build_inputs
+
+MASTER = teams.MASTER
+ENCOUNTER_RE = teams.ENCOUNTER_RE
+BRANCH_RE = teams.BRANCH_RE
+# Include the authority for extraction, move legality, preparation and playback,
+# in addition to every native build input (AI/mechanics/species/caps/progression).
+HARNESS_INPUTS = (
+    "scripts/emerald_champions_teams.py", "scripts/ec_moves.py",
+    "scripts/emerald_champions_evs.py", "scripts/build_provenance.py",
+    "scripts/playthrough/battle_driver.py", "scripts/playthrough/prepare_party.py",
+    "scripts/native_tools.py", "scripts/render_emerald_champions_ui.py",
+    "scripts/rom_artifacts.py", "scripts/verify_trainer_ability_legality.py",
+    "tests/headless/emerald_champions_mgba_runner.c",
+    "tools/agent_player/generate_battle_suite.py",
+    "tools/agent_player/battle_calibration.py", "scripts/battle_arsenal.py",
+    "tools/agent_player/battle_batch.py",
+    "tools/agent_player/doubles_policy.py", "tools/agent_player/battle_search.py",
+    "scripts/battle_opening_arsenal.py", "tools/agent_player/export_opening_batch.py",
+    "scripts/battle_campaign_arsenal.py",
+    "scripts/battle_scripted_wild_arsenal.py",
+    "scripts/economy_reference.py", "scripts/item_catalog.py",
+    "scripts/audit/map_dynamic_inventory.py",
 )
 
 
@@ -63,95 +67,123 @@ def split_blocks(text: str, pattern: re.Pattern[str]) -> list[tuple[str, str]]:
 
 
 def input_hashes() -> dict[str, str]:
-    result = {}
-    for relative in INPUTS:
+    # Reuse the build's input authority instead of maintaining an incomplete
+    # second list. New files and deleted files both change this tree digest.
+    digest, _ = build_inputs.digest_tree()
+    result = {"native_build_inputs": digest}
+    for relative in HARNESS_INPUTS:
         path = ROOT / relative
-        if not path.is_file():
-            raise SystemExit(f"missing suite input: {relative}")
-        result[relative] = digest_file(path)
-    # Map scripts own trainer reachability and gift/static/item gates. Aggregate
-    # them canonically so any map-side change invalidates all derived arsenals.
-    map_rows = [(str(path.relative_to(ROOT)), digest_file(path)) for path in sorted((ROOT / "data/maps").glob("*/scripts.inc"))]
-    result["data/maps/*/scripts.inc"] = digest_bytes(canonical(map_rows))
+        result[relative] = digest_file(path) if path.is_file() else "missing"
     return result
 
 
-def load_arsenals(path: Path, fingerprint: str) -> dict[str, Any]:
+def source_fingerprint() -> str:
+    return digest_bytes(canonical(input_hashes()))
+
+
+def load_arsenals(path: Path, fingerprint: str) -> list[dict[str, Any]]:
     data = json.loads(path.read_text())
-    if data.get("schema_version") != 1 or data.get("source_generated") is not True:
-        raise SystemExit("arsenal index must be schema 1 and source_generated=true")
+    if data.get("schema_version") != 2 or data.get("source_generated") is not True:
+        raise ValueError("arsenal index must be schema 2 and source_generated=true")
     if data.get("source_fingerprint") != fingerprint:
-        raise SystemExit("arsenal index is stale for current trainer/reachability sources")
-    entries = data.get("by_campaign_order")
-    if not isinstance(entries, dict):
-        raise SystemExit("arsenal index needs by_campaign_order")
-    return entries
+        raise ValueError("arsenal index is stale for current native and harness sources")
+    scenarios = data.get("scenarios")
+    if not isinstance(scenarios, list):
+        raise ValueError("arsenal index needs explicit scenarios")
+    seen = set()
+    for scenario in scenarios:
+        key = (scenario.get("trainer_id"), scenario.get("scenario_id"), scenario.get("difficulty"))
+        if any(not value for value in key) or key in seen:
+            raise ValueError(f"missing or duplicate scenario identity: {key}")
+        if scenario["difficulty"] not in {"easy", "medium", "hard"}:
+            raise ValueError(f"unknown difficulty: {key}")
+        if scenario.get("legality_status") not in {"proven", "unresolved"}:
+            raise ValueError(f"scenario requires an explicit legality_status: {key}")
+        seen.add(key)
+    return scenarios
 
 
-def generate(arsenal_index: Path) -> dict[str, Any]:
-    hashes = input_hashes()
+def opponent_catalogue() -> list[dict[str, Any]]:
+    metadata = {int(number): block for number, block in split_blocks(MASTER.read_text(), ENCOUNTER_RE)}
+    opponents = []
+    for branch in teams.read_teams():
+        encounter = metadata.get(branch.encounter, "")
+        branch_metadata = dict(split_blocks(encounter, BRANCH_RE)).get(branch.trainer, "")
+        members = [{
+            "slot": index, "species": "SPECIES_" + mon.species,
+            "item": "ITEM_" + mon.item, "level_offset": mon.offset,
+            "ability": "ABILITY_" + mon.ability, "nature": "NATURE_" + mon.nature,
+            "evs": [int(value) for value in mon.evs.split("/")],
+            "ivs": [int(value) for value in mon.ivs.split("/")],
+            "friendship": mon.friendship, "moves": ["MOVE_" + move for move in mon.moves],
+        } for index, mon in enumerate(branch.mons, 1)]
+        opponents.append({
+            "opponent_id": f"E{branch.encounter:04d}-{branch.trainer}",
+            "encounter": branch.encounter, "trainer_id": branch.trainer,
+            "class": branch.cls, "format": field(branch_metadata, "format"),
+            "ai_profile": teams.CLASSES[branch.cls], "ai_extra": branch.ai,
+            "strategy": branch.strategy, "tactics": branch.tactics,
+            "field": branch.field, "mega_slots": branch.mega_slots,
+            "plan": branch.plan, "counterplay": branch.crack, "team": members,
+            "descriptive_metadata": {key: field(encounter, key) for key in
+                ("campaign_order", "strict_cap", "chapter", "location")},
+            "source": str(teams.TEAMS.relative_to(ROOT)),
+        })
+    return opponents
+
+
+def generate(arsenal_index: Path | None = None, *, internal_inputs=None) -> dict[str, Any]:
+    # Trusted in-process export only; public CLI supplies no frozen inputs.
+    hashes = internal_inputs if internal_inputs is not None else input_hashes()
     fingerprint = digest_bytes(canonical(hashes))
-    arsenals = load_arsenals(arsenal_index, fingerprint)
-    text = MASTER.read_text()
+    opponents = opponent_catalogue()
+    by_trainer = {opponent["trainer_id"]: opponent for opponent in opponents}
+    scenarios = load_arsenals(arsenal_index, fingerprint) if arsenal_index else []
     puzzles = []
-    missing = set()
-    for encounter_number, encounter in split_blocks(text, ENCOUNTER_RE):
-        order = int(field(encounter, "campaign_order"))
-        arsenal = arsenals.get(str(order))
-        if arsenal is None:
-            missing.add(order)
-            continue
-        branch_marks = list(BRANCH_RE.finditer(encounter))
-        for index, mark in enumerate(branch_marks):
-            branch = encounter[mark.start():branch_marks[index + 1].start() if index + 1 < len(branch_marks) else len(encounter)]
-            team = []
-            for row in MON_RE.finditer(branch):
-                team.append({
-                    "slot": int(row.group(1)), "species": row.group(2), "item": row.group(3),
-                    "level": int(field(encounter, "strict_cap")) + int(row.group(4)),
-                    "ability": row.group(5), "nature": row.group(6),
-                    "evs": [int(value) for value in row.group(7).split("/")],
-                    "moves": row.group(8).split(","),
-                })
-            dossier = {
-                "trainer_id": field(branch, "trainer_id") or mark.group(1),
-                "format": field(branch, "format"),
-                "ai_profile": field(encounter, "ai_profile"),
-                "ai_extra": field(branch, "ai_extra"),
-                "team": team,
-            }
-            puzzle = {
-                "puzzle_id": f"E{encounter_number}-{dossier['trainer_id']}",
-                "encounter": int(encounter_number), "campaign_order": order,
-                "chapter": field(encounter, "chapter"), "location": field(encounter, "location"),
-                "strict_cap": int(field(encounter, "strict_cap")),
-                "opponent_dossier": dossier, "legal_arsenal": arsenal,
-                "provenance": {"opponent": "data/emerald_champions/emerald_champions_master_battle_design.txt", "arsenal_index": str(arsenal_index)},
-            }
-            puzzle["content_sha256"] = digest_bytes(canonical(puzzle))
-            puzzles.append(puzzle)
-    if missing:
-        sample = ", ".join(map(str, sorted(missing)[:12]))
-        raise SystemExit(f"arsenal index incomplete; missing campaign orders: {sample} ({len(missing)} total)")
+    for scenario in scenarios:
+        trainer = scenario["trainer_id"]
+        if scenario.get('battle_kind') == 'birch_rescue':
+            import battle_scripted_wild_arsenal as wild
+            wild.certify_scenario(scenario, internal_fingerprint=fingerprint)
+            dossier = {'opponent_id': 'BIRCH_RESCUE', 'battle_kind': 'birch_rescue',
+                       'format': 'native_first_battle_doubles',
+                       'source_member_domains': scenario['expected_scripted_wild']['source_member_domains']}
+        elif trainer not in by_trainer:
+            raise ValueError(f"scenario references unauthored trainer: {trainer}")
+        else:
+            dossier = by_trainer[trainer]
+        expected = scenario.get("expected_opponent")
+        if expected is not None:
+            if not isinstance(expected, dict) or expected.get("trainer_id") != trainer:
+                raise ValueError("scenario opponent identity does not match its trainer")
+            dossier = {**dossier, "authored_team": dossier["team"],
+                       "team": expected["team"], "regional_replacement": expected["regional_replacement"],
+                       "expected_combat_sha256": expected["combat_sha256"]}
+        puzzle = {
+            "puzzle_id": f"{dossier['opponent_id']}-{scenario['scenario_id']}-{scenario['difficulty']}",
+            "opponent_dossier": dossier, "scenario": scenario,
+            "provenance": {"arsenal_index": str(arsenal_index)},
+        }
+        puzzle["content_sha256"] = digest_bytes(canonical(puzzle))
+        puzzles.append(puzzle)
     return {
-        "schema_version": 1,
-        "kind": "emerald_champions_independent_trainer_battle_suite",
-        "source_fingerprint": fingerprint,
-        "inputs": hashes,
-        "puzzle_count": len(puzzles),
-        "puzzles": puzzles,
+        "schema_version": 2, "kind": "emerald_champions_independent_native_battle_suite",
+        "source_fingerprint": fingerprint, "inputs": hashes,
+        "opponent_count": len(opponents), "opponents": opponents,
+        "puzzle_count": len(puzzles), "puzzles": puzzles,
+        "unbound_trainers": sorted(set(by_trainer) - {scenario["trainer_id"] for scenario in scenarios}),
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--arsenal-index", type=Path, required=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--arsenal-index", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     suite = generate(args.arsenal_index)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(suite, indent=2, sort_keys=True) + "\n")
-    print(f"generated {suite['puzzle_count']} independent trainer battle puzzles: {args.out}")
+    print(f"generated {suite['opponent_count']} opponents and {suite['puzzle_count']} scenario puzzles: {args.out}")
     return 0
 
 

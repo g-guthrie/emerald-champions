@@ -32,6 +32,8 @@ SPECIES_ALIAS = re.compile(
 )
 ABILITY_LIST = re.compile(r"\.abilities\s*=\s*\{([^}]*)\}", re.DOTALL)
 ABILITY_TOKEN = re.compile(r"ABILITY_[A-Z0-9_]+")
+INCLEMENT_LAYER = ROOT / "src/data/pokemon/inclement_layer.h"
+INCLEMENT_ADDED = re.compile(r"\[(SPECIES_\w+)\]\s*=\s*\{[^\n]*?\.addedAbilities\s*=\s*\{([^}]*)\}")
 
 
 @dataclass(frozen=True)
@@ -104,6 +106,10 @@ def configured_species_abilities() -> dict[str, frozenset[str]]:
             if match is not None
             else frozenset()
         )
+    # Inclement's added Abilities are ordinary slots for every owner
+    # (GetSpeciesAbilityForOwner in src/pokemon.c), trainers included.
+    for species, added in INCLEMENT_ADDED.findall(INCLEMENT_LAYER.read_text()):
+        abilities[species] = abilities.get(species, frozenset()) | frozenset(ABILITY_TOKEN.findall(added))
     aliases = species_aliases()
     normalized = dict(abilities)
     for species, legal in abilities.items():

@@ -29,6 +29,16 @@
 #define EC_AGENT_BATTLE_LOG_HEAD_WORD 492 // bytes ever written to the event log
 #define EC_AGENT_BATTLE_LOG_SIZE_WORD 493 // the log's capacity in bytes
 #define EC_AGENT_BATTLE_MAP_FIELD_WORD 494 // applied map weather/environment
+#define EC_AGENT_BATTLE_LAST_LIVE_WORD 495 // board retained safely after resources are released
+
+// Private benchmark input audit, separate from player-policy observations.
+// Header: schema, owner A/B counts, raw generation, unchosen index/species,
+// battle flags, trainer A/B ids. Members: species, level, item, ability,
+// nature, friendship, six EVs, six IVs (HP/Atk/Def/SpA/SpD/Spe), four moves.
+#define EC_AGENT_BATTLE_ROSTER_SCHEMA 1
+#define EC_AGENT_BATTLE_ROSTER_HEADER 9
+#define EC_AGENT_BATTLE_ROSTER_MON_SIZE 22
+#define EC_AGENT_BATTLE_ROSTER_WORDS (EC_AGENT_BATTLE_ROSTER_HEADER + 2 * PARTY_SIZE * EC_AGENT_BATTLE_ROSTER_MON_SIZE)
 
 // The complete battle event log: every battle message, every move use and
 // every HP change, as a byte ring the host reads by range after each decision.
@@ -55,6 +65,17 @@ enum EmeraldChampionsAgentBattlePhase
     EC_AGENT_BATTLE_PHASE_AWAIT_SWITCH,
     EC_AGENT_BATTLE_PHASE_ENDED,
 };
+
+enum EmeraldChampionsAgentBattleKind
+{
+    EC_AGENT_BATTLE_TRAINER,
+    EC_AGENT_BATTLE_BIRCH_RESCUE,
+    EC_AGENT_BATTLE_BIRTH_ISLAND_DEOXYS,
+};
+
+extern volatile u32 gEcAgentBattleKind;
+extern volatile u32 gEcAgentBattleFirstStarter;
+extern volatile u32 gEcAgentBattleSecondStarter;
 
 enum EmeraldChampionsAgentBattleResult
 {
@@ -102,6 +123,11 @@ extern volatile u32 gEcAgentBattleMega[MAX_BATTLERS_COUNT];
 extern volatile u32 gEcAgentBattleSwitchSlot[MAX_BATTLERS_COUNT];
 extern volatile u32 gEcAgentBattleView[EC_AGENT_BATTLE_VIEW_WORDS];
 extern volatile u8 gEcAgentBattleLog[EC_AGENT_BATTLE_LOG_BYTES];
+extern volatile u32 gEcAgentBattleOpponentRoster[EC_AGENT_BATTLE_ROSTER_WORDS];
+// Two original starter inputs, captured before battle init adjusts friendship.
+#define EC_AGENT_BATTLE_FACTORY_HEADER 7
+#define EC_AGENT_BATTLE_FACTORY_WORDS (EC_AGENT_BATTLE_FACTORY_HEADER + 2 * EC_AGENT_BATTLE_ROSTER_MON_SIZE + 6)
+extern volatile u32 gEcAgentBattlePlayerFactory[EC_AGENT_BATTLE_FACTORY_WORDS];
 // Written by the host before the start command. 0 keeps the headless room's
 // own value; otherwise the value is the OVERWORLD weather / environment + 1.
 extern volatile u32 gEcAgentBattleMapWeather;
@@ -119,8 +145,20 @@ void EmeraldChampionsAgentBattlePopUp(u32 battler, bool32 isItem, u32 id);
 void EmeraldChampionsAgentBattleChooseAction(enum BattlerId battler);
 void EmeraldChampionsAgentBattleChooseMove(enum BattlerId battler);
 void EmeraldChampionsAgentBattleChoosePokemon(enum BattlerId battler);
+// Benchmark-only trials per authored opponent member (owner A members 0-5,
+// owner B members 6-11), so a tuning agent can try a change without a
+// rebuild: a signed level delta applied after the difficulty formula, and an
+// Ability the species may legally hold (0 keeps the authored one). An illegal
+// Ability leaves the member unchanged and sets its bit in the rejection mask.
+extern volatile s32 gEcAgentBattleLevelDelta[PARTY_SIZE * 2];
+extern volatile u32 gEcAgentBattleAbilityTrial[PARTY_SIZE * 2];
+extern volatile u32 gEcAgentBattleTrialRejected;
+void EmeraldChampionsAgentTrialMember(struct Pokemon *mon, bool32 ownerB, u32 memberIndex);
 
 #else
+
+struct Pokemon;
+static inline void EmeraldChampionsAgentTrialMember(struct Pokemon *mon, bool32 ownerB, u32 memberIndex) { (void)mon; (void)ownerB; (void)memberIndex; }
 
 static inline void EmeraldChampionsAgentBattlePoll(void) {}
 static inline void EmeraldChampionsAgentBattleText(const u8 *text) { (void)text; }

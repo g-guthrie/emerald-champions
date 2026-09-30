@@ -1,0 +1,576 @@
+{
+  "phase": "await_action",
+  "turn": 2,
+  "actives": [
+    {
+      "ability": "ABILITY_PIXILATE",
+      "absent": false,
+      "active_gimmick": "none",
+      "agent_controlled": true,
+      "alive": true,
+      "battler": 0,
+      "hp": 63,
+      "item": "ITEM_CHOICE_SPECS",
+      "level": 14,
+      "max_hp": 63,
+      "mega_already_used": false,
+      "mega_evolved": false,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_HYPER_VOICE",
+          "pp": 10
+        },
+        {
+          "index": 1,
+          "move": "MOVE_PSYSHOCK",
+          "pp": 12
+        },
+        {
+          "index": 2,
+          "move": "MOVE_SHADOW_BALL",
+          "pp": 16
+        },
+        {
+          "index": 3,
+          "move": "MOVE_MYSTICAL_FIRE",
+          "pp": 12
+        }
+      ],
+      "party_slot": 0,
+      "side": "player",
+      "species": "SPECIES_SYLVEON",
+      "stat_stages": {
+        "acc": 0,
+        "atk": 0,
+        "def": 0,
+        "eva": 0,
+        "hp": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 0
+      },
+      "status": [],
+      "types": [
+        "TYPE_FAIRY",
+        "TYPE_FAIRY",
+        "TYPE_MYSTERY"
+      ],
+      "usable_gimmick": "none"
+    },
+    {
+      "ability": "ABILITY_EFFECT_SPORE",
+      "absent": false,
+      "active_gimmick": "none",
+      "agent_controlled": false,
+      "alive": true,
+      "battler": 1,
+      "hp": 36,
+      "item": "ITEM_EVIOLITE",
+      "level": 18,
+      "max_hp": 66,
+      "mega_already_used": false,
+      "mega_evolved": false,
+      "moves": [
+        {
+          "index": 1,
+          "move": "MOVE_LEECH_SEED",
+          "pp": 11
+        }
+      ],
+      "party_slot": 2,
+      "side": "opponent",
+      "species": "SPECIES_SHROOMISH",
+      "stat_stages": {
+        "acc": 0,
+        "atk": 0,
+        "def": 0,
+        "eva": 0,
+        "hp": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 0
+      },
+      "status": [],
+      "types": [
+        "TYPE_GRASS",
+        "TYPE_GRASS",
+        "TYPE_MYSTERY"
+      ],
+      "usable_gimmick": "none"
+    },
+    {
+      "ability": "ABILITY_VOLT_ABSORB",
+      "absent": false,
+      "active_gimmick": "none",
+      "agent_controlled": true,
+      "alive": true,
+      "battler": 2,
+      "hp": 17,
+      "item": "ITEM_LEFTOVERS",
+      "level": 14,
+      "max_hp": 53,
+      "mega_already_used": false,
+      "mega_evolved": false,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_FOLLOW_ME",
+          "pp": 18
+        },
+        {
+          "index": 1,
+          "move": "MOVE_SUPER_FANG",
+          "pp": 12
+        },
+        {
+          "index": 2,
+          "move": "MOVE_NUZZLE",
+          "pp": 20
+        },
+        {
+          "index": 3,
+          "move": "MOVE_PROTECT",
+          "pp": 8
+        }
+      ],
+      "party_slot": 1,
+      "side": "player",
+      "species": "SPECIES_PACHIRISU",
+      "stat_stages": {
+        "acc": 0,
+        "atk": 0,
+        "def": 0,
+        "eva": 0,
+        "hp": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 0
+      },
+      "status": [],
+      "types": [
+        "TYPE_ELECTRIC",
+        "TYPE_ELECTRIC",
+        "TYPE_MYSTERY"
+      ],
+      "usable_gimmick": "none"
+    },
+    {
+      "ability": "ABILITY_GUTS",
+      "absent": false,
+      "active_gimmick": "none",
+      "agent_controlled": false,
+      "alive": true,
+      "battler": 3,
+      "hp": 46,
+      "item": "ITEM_TOXIC_ORB",
+      "level": 17,
+      "max_hp": 46,
+      "mega_already_used": false,
+      "mega_evolved": false,
+      "moves": [
+        {
+          "index": 3,
+          "move": "MOVE_PROTECT",
+          "pp": 7
+        }
+      ],
+      "party_slot": 3,
+      "side": "opponent",
+      "species": "SPECIES_TAILLOW",
+      "stat_stages": {
+        "acc": 0,
+        "atk": 0,
+        "def": 0,
+        "eva": 0,
+        "hp": 0,
+        "spa": 0,
+        "spd": 0,
+        "spe": 0
+      },
+      "status": [
+        "STATUS1_TOXIC_POISON"
+      ],
+      "types": [
+        "TYPE_NORMAL",
+        "TYPE_FLYING",
+        "TYPE_MYSTERY"
+      ],
+      "usable_gimmick": "none"
+    }
+  ],
+  "pending_decision": [
+    {
+      "awaiting_now": true,
+      "battler": 0,
+      "may_switch": true,
+      "moves": [
+        {
+          "blocked_by": [],
+          "index": 0,
+          "legal": true,
+          "move": "MOVE_HYPER_VOICE",
+          "target_type": "both",
+          "targets": [
+            1
+          ]
+        },
+        {
+          "blocked_by": [
+            "MOVE_LIMITATION_CHOICE_ITEM"
+          ],
+          "index": 1,
+          "legal": false,
+          "move": "MOVE_PSYSHOCK",
+          "target_type": "selected",
+          "targets": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "blocked_by": [
+            "MOVE_LIMITATION_CHOICE_ITEM"
+          ],
+          "index": 2,
+          "legal": false,
+          "move": "MOVE_SHADOW_BALL",
+          "target_type": "selected",
+          "targets": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "blocked_by": [
+            "MOVE_LIMITATION_CHOICE_ITEM"
+          ],
+          "index": 3,
+          "legal": false,
+          "move": "MOVE_MYSTICAL_FIRE",
+          "target_type": "selected",
+          "targets": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ],
+      "must_struggle": false,
+      "replacing": false,
+      "species": "SPECIES_SYLVEON",
+      "switch_blocked_by": [],
+      "switch_last_refused": null,
+      "switch_slots": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "awaiting_now": false,
+      "battler": 2,
+      "may_switch": true,
+      "moves": [
+        {
+          "blocked_by": [],
+          "index": 0,
+          "legal": true,
+          "move": "MOVE_FOLLOW_ME",
+          "target_type": "user",
+          "targets": [
+            2
+          ]
+        },
+        {
+          "blocked_by": [],
+          "index": 1,
+          "legal": true,
+          "move": "MOVE_SUPER_FANG",
+          "target_type": "selected",
+          "targets": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "blocked_by": [],
+          "index": 2,
+          "legal": true,
+          "move": "MOVE_NUZZLE",
+          "target_type": "selected",
+          "targets": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "blocked_by": [],
+          "index": 3,
+          "legal": true,
+          "move": "MOVE_PROTECT",
+          "target_type": "user",
+          "targets": [
+            2
+          ]
+        }
+      ],
+      "must_struggle": false,
+      "replacing": false,
+      "species": "SPECIES_PACHIRISU",
+      "switch_blocked_by": [],
+      "switch_last_refused": null,
+      "switch_slots": [
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "player_reserves": [
+    {
+      "ability": "ABILITY_PIXILATE",
+      "hp": 63,
+      "item": "ITEM_CHOICE_SPECS",
+      "level": 14,
+      "max_hp": 63,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_HYPER_VOICE",
+          "pp": 10
+        },
+        {
+          "index": 1,
+          "move": "MOVE_PSYSHOCK",
+          "pp": 12
+        },
+        {
+          "index": 2,
+          "move": "MOVE_SHADOW_BALL",
+          "pp": 16
+        },
+        {
+          "index": 3,
+          "move": "MOVE_MYSTICAL_FIRE",
+          "pp": 12
+        }
+      ],
+      "slot": 0,
+      "species": "SPECIES_SYLVEON",
+      "status": []
+    },
+    {
+      "ability": "ABILITY_VOLT_ABSORB",
+      "hp": 17,
+      "item": "ITEM_LEFTOVERS",
+      "level": 14,
+      "max_hp": 53,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_FOLLOW_ME",
+          "pp": 18
+        },
+        {
+          "index": 1,
+          "move": "MOVE_SUPER_FANG",
+          "pp": 12
+        },
+        {
+          "index": 2,
+          "move": "MOVE_NUZZLE",
+          "pp": 20
+        },
+        {
+          "index": 3,
+          "move": "MOVE_PROTECT",
+          "pp": 8
+        }
+      ],
+      "slot": 1,
+      "species": "SPECIES_PACHIRISU",
+      "status": []
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "hp": 49,
+      "item": "ITEM_NONE",
+      "level": 14,
+      "max_hp": 49,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_PROTECT",
+          "pp": 8
+        },
+        {
+          "index": 1,
+          "move": "MOVE_HELPING_HAND",
+          "pp": 20
+        },
+        {
+          "index": 2,
+          "move": "MOVE_FEATHER_DANCE",
+          "pp": 16
+        },
+        {
+          "index": 3,
+          "move": "MOVE_WILL_O_WISP",
+          "pp": 16
+        }
+      ],
+      "slot": 2,
+      "species": "SPECIES_TORCHIC",
+      "status": []
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "hp": 50,
+      "item": "ITEM_NONE",
+      "level": 14,
+      "max_hp": 50,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_SLEEP_POWDER",
+          "pp": 16
+        },
+        {
+          "index": 1,
+          "move": "MOVE_HURRICANE",
+          "pp": 12
+        },
+        {
+          "index": 2,
+          "move": "MOVE_BUG_BUZZ",
+          "pp": 12
+        },
+        {
+          "index": 3,
+          "move": "MOVE_PROTECT",
+          "pp": 8
+        }
+      ],
+      "slot": 3,
+      "species": "SPECIES_VIVILLON_ICY_SNOW",
+      "status": []
+    },
+    {
+      "ability": "ABILITY_UNAWARE",
+      "hp": 59,
+      "item": "ITEM_FOCUS_SASH",
+      "level": 14,
+      "max_hp": 59,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_QUIVER_DANCE",
+          "pp": 20
+        },
+        {
+          "index": 1,
+          "move": "MOVE_BUG_BUZZ",
+          "pp": 12
+        },
+        {
+          "index": 2,
+          "move": "MOVE_SLUDGE_BOMB",
+          "pp": 12
+        },
+        {
+          "index": 3,
+          "move": "MOVE_PROTECT",
+          "pp": 8
+        }
+      ],
+      "slot": 4,
+      "species": "SPECIES_DUSTOX",
+      "status": []
+    },
+    {
+      "ability": "ABILITY_UNBURDEN",
+      "hp": 48,
+      "item": "ITEM_EVIOLITE",
+      "level": 14,
+      "max_hp": 48,
+      "moves": [
+        {
+          "index": 0,
+          "move": "MOVE_SWORDS_DANCE",
+          "pp": 20
+        },
+        {
+          "index": 1,
+          "move": "MOVE_BULLET_SEED",
+          "pp": 20
+        },
+        {
+          "index": 2,
+          "move": "MOVE_DRAIN_PUNCH",
+          "pp": 12
+        },
+        {
+          "index": 3,
+          "move": "MOVE_ACROBATICS",
+          "pp": 16
+        }
+      ],
+      "slot": 5,
+      "species": "SPECIES_TREECKO",
+      "status": []
+    }
+  ],
+  "previous_turn": [
+    {
+      "action": "use_move",
+      "battler": 0,
+      "move": "MOVE_HYPER_VOICE",
+      "move_index": 0,
+      "target": 1,
+      "target_kind": "foe"
+    },
+    {
+      "action": "use_move",
+      "battler": 1,
+      "move": "MOVE_LEECH_SEED",
+      "move_index": 1,
+      "target": 0,
+      "target_kind": "foe"
+    },
+    {
+      "action": "use_move",
+      "battler": 2,
+      "move": "MOVE_FOLLOW_ME",
+      "move_index": 0,
+      "target": 2,
+      "target_kind": "self"
+    },
+    {
+      "action": "use_move",
+      "battler": 3,
+      "move": "MOVE_PROTECT",
+      "move_index": 3,
+      "target": 3,
+      "target_kind": "self"
+    }
+  ],
+  "sides": {
+    "opponent": [],
+    "player": []
+  },
+  "field": [
+    "none"
+  ]
+}

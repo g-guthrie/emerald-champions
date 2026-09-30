@@ -10,6 +10,7 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
+#include "emerald_champions_agent_battle.h"
 #include "battle_partner.h"
 #include "battle_tower.h"
 #include "battle_transition.h"
@@ -2233,6 +2234,7 @@ void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Traine
     {
         u32 monIndex = monIndices[i];
         GenerateMonFromTrainerMon(&party[i], &trainer->party[monIndex], &trainerGen);
+        EmeraldChampionsAgentTrialMember(&party[i], party == gParties[B_TRAINER_OPPONENT_B], monIndex);
     }
 }
 

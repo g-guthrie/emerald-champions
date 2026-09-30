@@ -28,6 +28,10 @@ PREP_RESULTS = {
     12: 'bad EV spread',
     13: ('restricted party: only one Legendary, Mythical, Ultra Beast or Paradox '
          'Pokemon is allowed per party in total'),
+    14: 'bad IV spread (each IV must be between 0 and 31)',
+    15: 'bad friendship (must be between 0 and 255)',
+    16: 'bad native Pokerus byte (must be between 0 and 255)',
+    17: 'bad native PP bonuses byte (must be between 0 and 255)',
 }
 
 
@@ -40,6 +44,8 @@ def protocol(path, root):
         raise ValueError('Prepare one to six Pokemon.')
     names = set()
     for mon in party:
+        if 'personality' in mon or 'ot_id' in mon:
+            raise ValueError('Fixed NPC identity requires the pending native preparation identity protocol.')
         if not mon.get('availability') or not mon.get('role'):
             raise ValueError('Every member needs acquisition evidence and a role.')
         for key, prefix in [('species', 'SPECIES_'), ('nature', 'NATURE_'),
@@ -57,6 +63,12 @@ def protocol(path, root):
         evs = mon['evs']
         if len(evs) != 6 or any(type(n) is not int or not 0 <= n <= 252 for n in evs) or sum(evs) > 510:
             raise ValueError('Invalid EV spread (HP/Atk/Def/SpA/SpD/Spe).')
+        ivs = mon.get('ivs', [31] * 6)
+        if len(ivs) != 6 or any(type(n) is not int or not 0 <= n <= 31 for n in ivs):
+            raise ValueError('Invalid IV spread (HP/Atk/Def/SpA/SpD/Spe).')
+        for key in ('friendship', 'pokerus', 'pp_bonuses'):
+            if key in mon and (type(mon[key]) is not int or not 0 <= mon[key] <= 255):
+                raise ValueError(f'Invalid native {key} value.')
     source = '#include <stdio.h>\n'
     source += ''.join(f'#include "constants/{header}.h"\n'
                       for header in ['species', 'moves', 'abilities', 'items', 'pokemon'])
@@ -69,7 +81,8 @@ def protocol(path, root):
                        input=source, cwd=root, text=True, check=True, capture_output=True)
         output = subprocess.run([exe], text=True, check=True, capture_output=True).stdout
     constants = {name: int(value) for name, value in (line.split() for line in output.splitlines())}
-    words = [('gEcAgentPrepResult', 0, 0), ('gEcAgentPrepPartyCount', 0, len(party))]
+    words = [('gEcAgentPrepResult', 0, 0), ('gEcAgentPrepPartyCount', 0, len(party)),
+             ('gEcAgentPrepExtended', 0, 1)]
     for slot, mon in enumerate(party):
         for field, value in [('Species', constants[mon['species']]), ('Preset', KEEP),
                              ('Format', 0), ('Level', KEEP), ('Nature', constants[mon['nature']]),
@@ -79,4 +92,8 @@ def protocol(path, root):
             words.append(('gEcAgentPrepMoves', 4 * (slot * 4 + i), constants[move]))
         for i, ev in enumerate(mon['evs']):
             words.append(('gEcAgentPrepEvs', 4 * (slot * 6 + i), ev))
+        for i, iv in enumerate(mon.get('ivs', [31] * 6)):
+            words.append(('gEcAgentPrepIvs', 4 * (slot * 6 + i), iv))
+        for field, key in [('Friendship', 'friendship'), ('Pokerus', 'pokerus'), ('PpBonuses', 'pp_bonuses')]:
+            words.append(('gEcAgentPrep' + field, 4 * slot, mon.get(key, 0 if key == 'pp_bonuses' else KEEP)))
     return spec, words

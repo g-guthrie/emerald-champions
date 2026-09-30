@@ -26,12 +26,17 @@ enum EmeraldChampionsAgentPrepResult
     EC_AGENT_PREP_BAD_ITEM,
     EC_AGENT_PREP_BAD_EVS,
     EC_AGENT_PREP_RESTRICTED_PARTY, // a second Legendary/Mythical, Ultra Beast or Paradox
+    EC_AGENT_PREP_BAD_IVS,
+    EC_AGENT_PREP_BAD_FRIENDSHIP,
+    EC_AGENT_PREP_BAD_POKERUS,
+    EC_AGENT_PREP_BAD_PP_BONUSES,
 };
 
 extern volatile u32 gEcAgentPrepCommand;
 extern volatile u32 gEcAgentPrepResult;
 extern volatile u32 gEcAgentPrepErrorSlot;
 extern volatile u32 gEcAgentPrepPartyCount;
+extern volatile u32 gEcAgentPrepExtended;
 extern volatile u32 gEcAgentPrepSpecies[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepPreset[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepFormat[EC_AGENT_PREP_PARTY_SIZE];
@@ -41,7 +46,12 @@ extern volatile u32 gEcAgentPrepNature[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepAbility[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepItem[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepEvs[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT];
-
+// Raw native values. Acquisition/service availability is checked by the host
+// arsenal before preparation; KEEP retains the native creation defaults.
+extern volatile u32 gEcAgentPrepIvs[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT];
+extern volatile u32 gEcAgentPrepFriendship[EC_AGENT_PREP_PARTY_SIZE];
+extern volatile u32 gEcAgentPrepPokerus[EC_AGENT_PREP_PARTY_SIZE];
+extern volatile u32 gEcAgentPrepPpBonuses[EC_AGENT_PREP_PARTY_SIZE];
 void EmeraldChampionsAgentPrepPoll(void);
 
 #else

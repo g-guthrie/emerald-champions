@@ -21,6 +21,7 @@ EWRAM_DATA volatile u32 gEcAgentPrepCommand = 0;
 EWRAM_DATA volatile u32 gEcAgentPrepResult = EC_AGENT_PREP_PENDING;
 EWRAM_DATA volatile u32 gEcAgentPrepErrorSlot = 0;
 EWRAM_DATA volatile u32 gEcAgentPrepPartyCount = 0;
+EWRAM_DATA volatile u32 gEcAgentPrepExtended = 0;
 EWRAM_DATA volatile u32 gEcAgentPrepSpecies[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepPreset[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepFormat[EC_AGENT_PREP_PARTY_SIZE] = {0};
@@ -30,6 +31,10 @@ EWRAM_DATA volatile u32 gEcAgentPrepNature[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepAbility[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepItem[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepEvs[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT] = {{0}};
+EWRAM_DATA volatile u32 gEcAgentPrepIvs[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT] = {{0}};
+EWRAM_DATA volatile u32 gEcAgentPrepFriendship[EC_AGENT_PREP_PARTY_SIZE] = {0};
+EWRAM_DATA volatile u32 gEcAgentPrepPokerus[EC_AGENT_PREP_PARTY_SIZE] = {0};
+EWRAM_DATA volatile u32 gEcAgentPrepPpBonuses[EC_AGENT_PREP_PARTY_SIZE] = {0};
 
 static EWRAM_DATA struct Pokemon sEcAgentPreparedParty[PARTY_SIZE] = {0};
 
@@ -38,25 +43,23 @@ static void Fail(enum EmeraldChampionsAgentPrepResult result, u32 slot)
     gEcAgentPrepResult = result;
     gEcAgentPrepErrorSlot = slot;
     gEcAgentPrepCommand = 0;
+    gEcAgentPrepExtended = 0;
 }
 
+// The player's Pokemon may hold any slot the party menu offers, the
+// Inclement added slots included.
 static bool32 FindAbility(enum Species species, enum Ability ability, u8 *slotOut)
 {
-    for (u32 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
-    {
-        if (GetSpeciesAbility(species, slot) == ability)
-        {
-            *slotOut = slot;
-            return TRUE;
-        }
-    }
-    return FALSE;
+    u32 slot;
+    if (!FindSpeciesAbilitySlotForOwner(species, ability, FALSE, &slot))
+        return FALSE;
+    *slotOut = slot;
+    return TRUE;
 }
 
 static enum EmeraldChampionsAgentPrepResult ApplyOverrides(struct Pokemon *mon, u32 slot)
 {
-    u8 perfectIv = MAX_PER_STAT_IVS;
-    u8 ppBonuses = 0xFF;
+    u8 ppBonuses = 0;
     u32 total = 0;
 
     for (u32 moveSlot = 0; moveSlot < MAX_MON_MOVES; moveSlot++)
@@ -117,9 +120,35 @@ static enum EmeraldChampionsAgentPrepResult ApplyOverrides(struct Pokemon *mon, 
             SetMonData(mon, EC_EV_DATA(stat), &points);
         }
     }
+    if (gEcAgentPrepExtended && gEcAgentPrepPpBonuses[slot] != EC_AGENT_PREP_KEEP)
+    {
+        if (gEcAgentPrepPpBonuses[slot] > UINT8_MAX)
+            return EC_AGENT_PREP_BAD_PP_BONUSES;
+        ppBonuses = gEcAgentPrepPpBonuses[slot];
+    }
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
-        SetMonData(mon, MON_DATA_HP_IV + stat, &perfectIv);
+    {
+        u32 requested = gEcAgentPrepExtended ? gEcAgentPrepIvs[slot][stat] : EC_AGENT_PREP_KEEP;
+        u8 iv = requested == EC_AGENT_PREP_KEEP ? MAX_PER_STAT_IVS : requested;
+        if (requested != EC_AGENT_PREP_KEEP && requested > MAX_PER_STAT_IVS)
+            return EC_AGENT_PREP_BAD_IVS;
+        SetMonData(mon, EC_IV_DATA(stat), &iv);
+    }
+    if (gEcAgentPrepExtended && gEcAgentPrepFriendship[slot] != EC_AGENT_PREP_KEEP)
+    {
+        u8 friendship = gEcAgentPrepFriendship[slot];
+        if (gEcAgentPrepFriendship[slot] > MAX_FRIENDSHIP)
+            return EC_AGENT_PREP_BAD_FRIENDSHIP;
+        SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+    }
+    if (gEcAgentPrepExtended && gEcAgentPrepPokerus[slot] != EC_AGENT_PREP_KEEP)
+    {
+        u8 pokerus = gEcAgentPrepPokerus[slot];
+        if (gEcAgentPrepPokerus[slot] > UINT8_MAX)
+            return EC_AGENT_PREP_BAD_POKERUS;
+        SetMonData(mon, MON_DATA_POKERUS, &pokerus);
+    }
     CalculateMonStats(mon);
     MonRestorePP(mon);
     return EC_AGENT_PREP_SUCCESS;
@@ -207,6 +236,7 @@ void EmeraldChampionsAgentPrepPoll(void)
     gEcAgentPrepResult = EC_AGENT_PREP_SUCCESS;
     gEcAgentPrepErrorSlot = EC_AGENT_PREP_KEEP;
     gEcAgentPrepCommand = 0;
+    gEcAgentPrepExtended = 0;
 }
 
 #endif
