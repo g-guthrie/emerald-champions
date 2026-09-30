@@ -13,6 +13,7 @@
 #include "gpu_regs.h"
 #include "item.h"
 #include "move_relearner.h"
+#include "move.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "menu.h"
@@ -73,6 +74,8 @@ static EWRAM_DATA struct
     u8 moveDisplayArrowTask;
     u16 scrollOffset;
     u8 categoryIconSpriteId;
+    u8 typeFilter, categoryFilter;
+    u8 filterRow, pendingTypeFilter, pendingCategoryFilter;
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
@@ -87,6 +90,7 @@ static EWRAM_DATA struct {
     u16 partyIndex;
     u16 move;
     u16 category;
+    u8 typeFilter, categoryFilter;
 } sMoveRelearnerResume = {0};
 
 // Set when a Center tutor's party screen opened the list itself
@@ -94,6 +98,7 @@ static EWRAM_DATA struct {
 static EWRAM_DATA bool8 sMoveRelearnerReturnToParty = FALSE;
 
 static EWRAM_DATA enum Item sIconicPayment = ITEM_NONE;
+static EWRAM_DATA u8 sIconicPaymentWindow = 0;
 
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
@@ -284,6 +289,8 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
+static void Task_MoveRelearner_Filters(u8 taskId);
+static void ShowTutorFilters(void);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
 static void Task_MoveRelearner_Quit(u8 taskId);
 static void QuickSortMoves(u16 *moves, s32 left, s32 right);
@@ -412,6 +419,7 @@ static void CB2_InitLearnMove_Basic(void)
 void CB2_InitLearnMove(void)
 {
     ResetTasks();
+    sIconicPaymentWindow = WINDOW_NONE;
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->mainTask = CreateTask(TaskDummy, 1);
     sMoveRelearnerScrollState.listOffset = 0;
@@ -445,6 +453,8 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = sMoveRelearnerResume.partyIndex;
     gTasks[sMoveRelearnerStruct->mainTask].tMove = sMoveRelearnerResume.move;
     gTasks[sMoveRelearnerStruct->mainTask].tCategory = sMoveRelearnerResume.category;
+    sMoveRelearnerStruct->typeFilter = sMoveRelearnerResume.typeFilter;
+    sMoveRelearnerStruct->categoryFilter = sMoveRelearnerResume.categoryFilter;
     SetMainCallback2(CB2_InitLearnMove_Basic);
 }
 
@@ -492,9 +502,16 @@ static void UIAskConfirmation(void)
     MoveRelearnerCreateYesNoMenu();
 }
 
-static s32 UIWaitConfirmation(void)
+static s32 UIWaitConfirmation(bool32 keepOnNo)
 {
-    return Menu_ProcessInputNoWrapClearOnChoose();
+    s32 result = Menu_ProcessInputNoWrap();
+    if (result == MENU_NOTHING_CHOSEN)
+        return result;
+    if (keepOnNo && (result == 1 || result == MENU_B_PRESSED))
+        Menu_MoveCursorNoWrapAround(-1); // The follow-up question defaults to Yes.
+    else
+        EraseYesNoWindow();
+    return result;
 }
 
 static void UIPrintMessage(const u8 *message)
@@ -518,6 +535,8 @@ static void UIShowMoveList(u8 taskId)
     sMoveRelearnerResume.partyIndex = gTasks[taskId].tPartyIndex;
     sMoveRelearnerResume.move = gTasks[taskId].tMove;
     sMoveRelearnerResume.category = gTasks[taskId].tCategory;
+    sMoveRelearnerResume.typeFilter = sMoveRelearnerStruct->typeFilter;
+    sMoveRelearnerResume.categoryFilter = sMoveRelearnerStruct->categoryFilter;
     ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_InitLearnMoveReturnFromSelectMove, gTasks[taskId].tMove);
     DestroyTask(taskId);
     FreeMoveRelearnerResources();
@@ -551,6 +570,7 @@ static void UIEndTask(u8 taskId)
 
 static const struct MoveLearnUI sMoveLearnUI =
 {
+    .concise = TRUE,
     .askConfirmation = UIAskConfirmation,
     .waitConfirmation = UIWaitConfirmation,
     .printMessage = UIPrintMessage,
@@ -657,35 +677,54 @@ static void Task_IconicPayment(u8 taskId)
         return;
     if (gTasks[taskId].tState == 0)
     {
-        MoveRelearnerCreateYesNoMenu();
+        static const struct WindowTemplate paymentWindow = {
+            .bg = 0, .tilemapLeft = 15, .tilemapTop = 5,
+            .width = 14, .height = 6, .paletteNum = 15, .baseBlock = 0x25A,
+        };
+        static const struct MenuAction choices[] = {
+            {COMPOUND_STRING(STR(EC_ICONIC_MOVE_CAP_COST) " Bottle Caps"), {.void_u8 = NULL}},
+            {COMPOUND_STRING("1 Gold Bottle Cap"), {.void_u8 = NULL}},
+            {gText_Cancel, {.void_u8 = NULL}},
+        };
+        sIconicPaymentWindow = AddWindow(&paymentWindow);
+        if (sIconicPaymentWindow == WINDOW_NONE)
+        {
+            UIPrintMessage(COMPOUND_STRING("Couldn't open payment choices."));
+            gTasks[taskId].func = Task_IconicNoFunds;
+            return;
+        }
+        DrawStdFrameWithCustomTileAndPalette(sIconicPaymentWindow, FALSE, 1, 0xE);
+        PrintMenuTable(sIconicPaymentWindow, ARRAY_COUNT(choices), choices);
+        u32 cursor = !CheckBagHasItem(ITEM_BOTTLE_CAP, EC_ICONIC_MOVE_CAP_COST)
+            && CheckBagHasItem(ITEM_GOLD_BOTTLE_CAP, EC_ICONIC_MOVE_GOLD_CAP_COST) ? 1 : 0;
+        InitMenuInUpperLeftCorner(sIconicPaymentWindow, ARRAY_COUNT(choices), cursor, TRUE);
+        PutWindowTilemap(sIconicPaymentWindow);
+        CopyWindowToVram(sIconicPaymentWindow, COPYWIN_FULL);
         gTasks[taskId].tState = 1;
         return;
     }
-    s32 answer = Menu_ProcessInputNoWrapClearOnChoose();
+    s32 answer = Menu_ProcessInputNoWrap();
     if (answer == MENU_NOTHING_CHOSEN)
         return;
-    if (answer == 1 && sIconicPayment == ITEM_BOTTLE_CAP)
-    {
-        sIconicPayment = ITEM_GOLD_BOTTLE_CAP;
-        UIPrintMessage(COMPOUND_STRING("Use one Gold Bottle Cap instead?"));
-        gTasks[taskId].tState = 0;
-        return;
-    }
-    if (answer != 0)
+    ClearStdWindowAndFrameToTransparent(sIconicPaymentWindow, TRUE);
+    RemoveWindow(sIconicPaymentWindow);
+    sIconicPaymentWindow = WINDOW_NONE;
+    PlaySE(SE_SELECT);
+    if (answer != 0 && answer != 1)
     {
         ShowTeachMoveText();
         AddScrollArrows();
         gTasks[taskId].func = Task_MoveRelearner_HandleInput;
         return;
     }
+    sIconicPayment = answer == 0 ? ITEM_BOTTLE_CAP : ITEM_GOLD_BOTTLE_CAP;
     if (!CheckBagHasItem(sIconicPayment, sIconicPayment == ITEM_BOTTLE_CAP ? EC_ICONIC_MOVE_CAP_COST : EC_ICONIC_MOVE_GOLD_CAP_COST))
     {
         UIPrintMessage(COMPOUND_STRING("Not enough Bottle Caps."));
         gTasks[taskId].func = Task_IconicNoFunds;
         return;
     }
-    gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
-    UIPrintMessage(gText_MoveRelearnerTeachMoveConfirm);
+    gTasks[taskId].tState = GetLearnMoveStartAfterConfirmationState();
     gTasks[taskId].func = Task_MoveRelearner_LearnMove;
 }
 
@@ -697,7 +736,16 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
     switch (itemId)
     {
     case LIST_NOTHING_CHOSEN:
-        if (JOY_NEW(SELECT_BUTTON) && gRelearnMode != RELEARN_MODE_SCRIPT)
+        if (JOY_NEW(START_BUTTON))
+        {
+            RemoveScrollArrows();
+            sMoveRelearnerStruct->pendingTypeFilter = sMoveRelearnerStruct->typeFilter;
+            sMoveRelearnerStruct->pendingCategoryFilter = sMoveRelearnerStruct->categoryFilter;
+            sMoveRelearnerStruct->filterRow = 0;
+            gTasks[taskId].func = Task_MoveRelearner_Filters;
+            ShowTutorFilters();
+        }
+        else if (JOY_NEW(SELECT_BUTTON) && gRelearnMode != RELEARN_MODE_SCRIPT)
         {
             if (UpdateMoveRelearnerState())
             {
@@ -713,7 +761,8 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
         }
         else if (!C_HIDE_CONTEST_DATA)
         {
-            if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
+            if (gRelearnMode == RELEARN_MODE_SCRIPT ? !JOY_NEW(SELECT_BUTTON)
+                : !(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
                 break;
 
             PlaySE(SE_SELECT);
@@ -767,7 +816,9 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
             sIconicPayment = ITEM_BOTTLE_CAP;
             gTasks[taskId].tState = 0;
             gTasks[taskId].func = Task_IconicPayment;
-            UIPrintMessage(COMPOUND_STRING("Pay " STR(EC_ICONIC_MOVE_CAP_COST) " Bottle Caps?\nNo: use a Gold Bottle Cap."));
+            ConvertIntToDecimalStringN(gStringVar1, CountTotalItemQuantityInBag(ITEM_BOTTLE_CAP), STR_CONV_MODE_LEFT_ALIGN, 6);
+            ConvertIntToDecimalStringN(gStringVar3, CountTotalItemQuantityInBag(ITEM_GOLD_BOTTLE_CAP), STR_CONV_MODE_LEFT_ALIGN, 6);
+            UIPrintMessage(COMPOUND_STRING("{STR_VAR_1} Caps / {STR_VAR_3} Gold\nPay for {STR_VAR_2}?"));
         }
         else
         {
@@ -785,9 +836,16 @@ static s32 GetCurrentSelectedMove(void)
 
 static void ShowTeachMoveText(void)
 {
-    StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+    GetBoxMonData(GetSelectedBoxMonFromPcOrParty(), MON_DATA_NICKNAME, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gRelearnMode == RELEARN_MODE_SCRIPT
+        ? COMPOUND_STRING("{STR_VAR_1}: choose a move.") : gText_TeachWhichMoveToPkmn);
     FillWindowPixelBuffer(RELEARNERWIN_MSG, 0x11);
-    AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_MSG, GetFontIdToFit(gStringVar4, FONT_NORMAL, 0, WindowWidthPx(RELEARNERWIN_MSG)), gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
+    if (gRelearnMode == RELEARN_MODE_SCRIPT)
+        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_SMALL_NARROW,
+            C_HIDE_CONTEST_DATA ? COMPOUND_STRING("{DPAD_LEFTRIGHT} Page  {START_BUTTON} Filter")
+                : COMPOUND_STRING("{DPAD_LEFTRIGHT} Page  {START_BUTTON} Filter"), 0, 16, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(RELEARNERWIN_MSG, COPYWIN_GFX);
 }
 
 static void CreateUISprites(void)
@@ -819,7 +877,7 @@ static void CreateUISprites(void)
 
 static void AddScrollArrows(void)
 {
-    if (!C_HIDE_CONTEST_DATA && sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
+    if (!C_HIDE_CONTEST_DATA && gRelearnMode != RELEARN_MODE_SCRIPT && sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
         sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
 
     if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
@@ -845,6 +903,77 @@ static void RemoveScrollArrows(void)
     }
 }
 
+static const enum Type sTutorFilterTypes[] = {
+    TYPE_NORMAL, TYPE_FIGHTING, TYPE_FLYING, TYPE_POISON, TYPE_GROUND,
+    TYPE_ROCK, TYPE_BUG, TYPE_GHOST, TYPE_STEEL, TYPE_FIRE, TYPE_WATER,
+    TYPE_GRASS, TYPE_ELECTRIC, TYPE_PSYCHIC, TYPE_ICE, TYPE_DRAGON,
+    TYPE_DARK, TYPE_FAIRY,
+};
+static const u8 *const sTutorCategories[] = {
+    COMPOUND_STRING("All"), COMPOUND_STRING("Physical"),
+    COMPOUND_STRING("Special"), COMPOUND_STRING("Status"),
+};
+
+bool32 MoveMatchesTutorFilters(enum Move move, u32 typeFilter, u32 categoryFilter)
+{
+    return move != MOVE_NONE && move < MOVES_COUNT
+        && typeFilter <= ARRAY_COUNT(sTutorFilterTypes) && categoryFilter < ARRAY_COUNT(sTutorCategories)
+        && (!typeFilter || GetMoveType(move) == sTutorFilterTypes[typeFilter - 1])
+        && (!categoryFilter || GetMoveCategory(move) == categoryFilter);
+}
+
+static void ShowTutorFilters(void)
+{
+    PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
+    FillWindowPixelBuffer(RELEARNERWIN_DESC_BATTLE, PIXEL_FILL(1));
+    if (sMoveRelearnerStruct->categoryIconSpriteId != 0xFF)
+        gSprites[sMoveRelearnerStruct->categoryIconSpriteId].invisible = TRUE;
+    for (u32 i = 0; i < ARRAY_COUNT(sMoveRelearnerStruct->heartSpriteIds); i++)
+        gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
+    const u8 *type = sMoveRelearnerStruct->pendingTypeFilter
+        ? gTypesInfo[sTutorFilterTypes[sMoveRelearnerStruct->pendingTypeFilter - 1]].name : sTutorCategories[0];
+    StringCopy(gStringVar1, type);
+    StringCopy(gStringVar2, sTutorCategories[sMoveRelearnerStruct->pendingCategoryFilter]);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Type: {STR_VAR_1}\nKind: {STR_VAR_2}\n\nUP/DOWN: row\nLEFT/RIGHT: choice\nA: apply  B: cancel"));
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL, gStringVar4, 10, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL, COMPOUND_STRING(">"), 0,
+        1 + sMoveRelearnerStruct->filterRow * 12, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(RELEARNERWIN_DESC_BATTLE, COPYWIN_FULL);
+}
+
+static void Task_MoveRelearner_Filters(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON))
+    {
+        if (JOY_NEW(A_BUTTON))
+        {
+            sMoveRelearnerStruct->typeFilter = sMoveRelearnerStruct->pendingTypeFilter;
+            sMoveRelearnerStruct->categoryFilter = sMoveRelearnerStruct->pendingCategoryFilter;
+            sMoveRelearnerScrollState.listOffset = sMoveRelearnerScrollState.listRow = 0;
+        }
+        RedrawMoveList();
+        if (gTasks[taskId].tCategory == CONTEST_INFO)
+            PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
+        MoveRelearnerShowHideCategoryIcon(GetCurrentSelectedMove());
+        MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
+        AddScrollArrows();
+        gTasks[taskId].func = Task_MoveRelearner_HandleInput;
+        return;
+    }
+    if (JOY_NEW(DPAD_UP | DPAD_DOWN))
+        sMoveRelearnerStruct->filterRow ^= 1;
+    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        u8 *value = sMoveRelearnerStruct->filterRow ? &sMoveRelearnerStruct->pendingCategoryFilter : &sMoveRelearnerStruct->pendingTypeFilter;
+        u32 count = sMoveRelearnerStruct->filterRow ? ARRAY_COUNT(sTutorCategories) : ARRAY_COUNT(sTutorFilterTypes) + 1;
+        *value = (*value + count + (JOY_NEW(DPAD_RIGHT) ? 1 : -1)) % count;
+    }
+    else
+        return;
+    PlaySE(SE_SELECT);
+    ShowTutorFilters();
+}
+
 static void CreateLearnableMovesList(void)
 {
     s32 i;
@@ -852,6 +981,15 @@ static void CreateLearnableMovesList(void)
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
     if (gRelearnMode == RELEARN_MODE_SCRIPT || sRelearnTypes[gMoveRelearnerState].isActive())
         sMoveRelearnerStruct->numMenuChoices = sRelearnTypes[gMoveRelearnerState].getMoves(boxmon, sMoveRelearnerStruct->movesToLearn);
+
+    u32 kept = 0;
+    for (u32 j = 0; j < sMoveRelearnerStruct->numMenuChoices; j++)
+    {
+        enum Move move = sMoveRelearnerStruct->movesToLearn[j];
+        if (MoveMatchesTutorFilters(move, sMoveRelearnerStruct->typeFilter, sMoveRelearnerStruct->categoryFilter))
+            sMoveRelearnerStruct->movesToLearn[kept++] = move;
+    }
+    sMoveRelearnerStruct->numMenuChoices = kept;
 
     if (P_SORT_MOVES)
         SortMovesAlphabetically(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices);

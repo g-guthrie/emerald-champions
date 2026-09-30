@@ -34,7 +34,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_PACIFIDLOG_TOWN_POKEMON_CENTER_1_F, PacifidlogTown_PokemonCenter_1F_EventScript_HaveExplosion
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_PACIFIDLOG_TOWN_POKEMON_CENTER_1_F
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion, MSGBOX_DEFAULT
@@ -67,9 +67,9 @@ PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats: @ 820356F
 
 PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion: @ 82C7CFA
 	.string "Out here on the sea, we look after\n"
-	.string "travelers. Take this Rare Candy!$"
+	.string "travelers. Take this Nugget!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion: @ 82C7E7A
-	.string "I will become a star one day.\n"
-	.string "May that candy help your partner\l"
-	.string "shine, too!$"
+	.string "I will become a star one day.\p"
+	.string "Sell that Nugget for ¥2,500.\n"
+	.string "May it help your next adventure shine!$"

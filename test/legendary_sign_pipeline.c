@@ -1,5 +1,7 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_setup.h"
+#include "constants/trainers.h"
 #include "script.h"
 #include "caps.h"
 #include "center_guide.h"
@@ -300,6 +302,12 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     BufferNextCenterLegendaryLead();
     EXPECT(GuideTextContains(COMPOUND_STRING("Shaymin")));
     EXPECT(!GuideTextContains(COMPOUND_STRING("%")));
+    BufferNextCenterLegendaryLead();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT(GuideTextContains(COMPOUND_STRING("Cosmog")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("Birch")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("Hall of")));
+    EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_COSMOG));
     BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
     MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
@@ -739,7 +747,8 @@ TEST("Gate table: every wild or quest row has a compiled slot and every wild leg
         }
     }
     // A Legendary or Ultra Beast in a wild table without a row would be
-    // ungated and uncatchable-once only by accident.
+    // ungated and uncatchable-once only by accident. Paradox slots intentionally
+    // have no Sign rows; their Pokedex records retire them after capture.
     for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
     {
         const struct WildEncounterTypes *types = &gWildMonHeaders[header].encounterTypes[TIME_OF_DAY_DEFAULT];
@@ -749,7 +758,9 @@ TEST("Gate table: every wild or quest row has a compiled slot and every wild leg
         for (u32 slot = 0; infos[method] != NULL && slot < slots[method]; slot++)
         {
             enum Species species = infos[method]->wildPokemon[slot].species;
-            if (IsLegendaryEncounterSpecies(species) && GetLegendarySignIdBySpecies(species) >= LEGENDARY_SIGN_COUNT)
+            if (IsLegendaryEncounterSpecies(species)
+             && GetRestrictedPartyClass(species) != RESTRICTED_PARTY_PARADOX
+             && GetLegendarySignIdBySpecies(species) >= LEGENDARY_SIGN_COUNT)
             {
                 Test_MgbaPrintf("Wild legend without a gate row: map %d.%d species %d",
                     gWildMonHeaders[header].mapGroup, gWildMonHeaders[header].mapNum, species);
@@ -811,15 +822,26 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
         FLAG_DEFEATED_RIVAL_ROUTE103, FLAG_ADVENTURE_STARTED, FLAG_BADGE01_GET,
         FLAG_RECOVERED_DEVON_GOODS, FLAG_RETURNED_DEVON_GOODS, FLAG_RECEIVED_POKENAV,
         FLAG_DELIVERED_STEVEN_LETTER, FLAG_DELIVERED_DEVON_GOODS, FLAG_HIDE_SLATEPORT_CITY_BRAWLY,
-        FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_MET_ARCHIE_METEOR_FALLS,
+        FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_RECEIVED_HM06, FLAG_MET_ARCHIE_METEOR_FALLS,
         FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FLAG_BADGE04_GET, FLAG_BADGE05_GET,
-        FLAG_HIDE_ROUTE_119_TEAM_AQUA, FLAG_RECEIVED_DEVON_SCOPE, FLAG_KECLEON_FLED_FORTREE,
-        FLAG_BADGE06_GET, FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,
+        FLAG_RECEIVED_HM03, FLAG_HIDE_ROUTE_119_TEAM_AQUA, FLAG_RECEIVED_DEVON_SCOPE, FLAG_KECLEON_FLED_FORTREE,
+        FLAG_BADGE06_GET, FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_RECEIVED_HM04, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,
         FLAG_MET_TEAM_AQUA_HARBOR, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, FLAG_BADGE07_GET,
         FLAG_DEFEATED_MAGMA_SPACE_CENTER, FLAG_RECEIVED_HM08, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
         FLAG_WALLACE_GOES_TO_SKY_PILLAR,
     };
     u8 last[sizeof(gStringVar4)];
+
+    // Test the rival destination with the actual required Leveler owned.
+    AddBagItem(ITEM_LEVELER, 1);
+    ZeroPlayerPartyMons();
+    ClearTrainerFlag(TRAINER_GRUNT_RUSTURF_TUNNEL);
+    ClearTrainerFlag(TRAINER_WALLY_VR_2);
+    FlagClear(FLAG_SYS_RECEIVED_KEYSTONE);
+    FlagClear(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
+    FlagClear(FLAG_MET_MAXIE_SOOTOPOLIS);
+    FlagClear(FLAG_MET_ARCHIE_SOOTOPOLIS);
+    VarSet(VAR_PETALBURG_WOODS_STATE, 0);
 
     for (u32 i = 0; i < ARRAY_COUNT(sStory); i++)
         FlagClear(sStory[i]);
@@ -827,6 +849,11 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
     FlagClear(FLAG_RECEIVED_HM07);
     FlagClear(FLAG_BADGE08_GET);
     FlagClear(FLAG_SYS_GAME_CLEAR);
+    FlagClear(FLAG_DEFEATED_WALLY_MAUVILLE);
+    VarSet(VAR_PETALBURG_GYM_STATE, 0);
+    VarSet(VAR_ROUTE110_STATE, 0);
+    VarSet(VAR_ROUTE119_STATE, 0);
+    VarSet(VAR_MT_PYRE_STATE, 0);
     VarSet(VAR_SOOTOPOLIS_CITY_STATE, 0);
     gMapHeader.regionMapSectionId = MAPSEC_OLDALE_TOWN;
     gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_STORY;
@@ -842,11 +869,81 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
         EXPECT_EQ(gSpecialVar_Result, TRUE);
         ExpectCenterGuidePageFits();
         EXPECT_NE(StringCompare(last, gStringVar4), 0);
+        if (sStory[i] == FLAG_ADVENTURE_STARTED)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("Norman")));
+            VarSet(VAR_PETALBURG_GYM_STATE, 2);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("researcher")));
+            VarSet(VAR_PETALBURG_WOODS_STATE, 1);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Roxanne")));
+        }
+        else if (sStory[i] == FLAG_BADGE01_GET)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("thief")));
+            SetTrainerFlag(TRAINER_GRUNT_RUSTURF_TUNNEL);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Make room")));
+            EXPECT(GuideTextContains(COMPOUND_STRING("Peeko")));
+        }
+        else if (sStory[i] == FLAG_BADGE04_GET)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("Mega")));
+            FlagSet(FLAG_SYS_RECEIVED_KEYSTONE);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Norman")));
+            EXPECT(!GuideTextContains(COMPOUND_STRING("Mega")));
+        }
+        else if (sStory[i] == FLAG_BADGE02_GET)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("rival")));
+            VarSet(VAR_ROUTE110_STATE, 1);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Wally")));
+            FlagSet(FLAG_DEFEATED_WALLY_MAUVILLE);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Wattson")));
+        }
+        else if (sStory[i] == FLAG_BADGE03_GET)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("Rock Smash license")));
+        }
+        else if (sStory[i] == FLAG_BADGE05_GET)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("Surf license")));
+        }
+        else if (sStory[i] == FLAG_HIDE_ROUTE_119_TEAM_AQUA)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("rival")));
+            VarSet(VAR_ROUTE119_STATE, 1);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Steven")));
+        }
+        else if (sStory[i] == FLAG_BADGE06_GET)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("summit")));
+            VarSet(VAR_MT_PYRE_STATE, 1);
+            BufferNextCenterLegendaryLead();
+            EXPECT(GuideTextContains(COMPOUND_STRING("Bag was full")));
+        }
+        else if (sStory[i] == FLAG_RECEIVED_RED_OR_BLUE_ORB)
+        {
+            EXPECT(GuideTextContains(COMPOUND_STRING("Strength license")));
+        }
+        ExpectCenterGuidePageFits();
     }
     EXPECT(GuideTextContains(COMPOUND_STRING("Sky")));
     VarSet(VAR_SOOTOPOLIS_CITY_STATE, 5);
     BufferNextCenterLegendaryLead();
-    EXPECT(GuideTextContains(COMPOUND_STRING("Maxie")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("both")));
+    FlagSet(FLAG_MET_MAXIE_SOOTOPOLIS);
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Speak to Archie")));
+    FlagClear(FLAG_MET_MAXIE_SOOTOPOLIS);
+    FlagSet(FLAG_MET_ARCHIE_SOOTOPOLIS);
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Speak to Maxie")));
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     BufferNextCenterLegendaryLead();
     EXPECT(GuideTextContains(COMPOUND_STRING("Wallace")));
@@ -857,10 +954,16 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
     BufferNextCenterLegendaryLead();
     EXPECT(GuideTextContains(COMPOUND_STRING("Victory Road")));
     ExpectCenterGuidePageFits();
-    // After the Hall of Fame the shared finale directions take over.
+    EXPECT(GuideTextContains(COMPOUND_STRING("Wally")));
+    FlagSet(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
+    BufferNextCenterLegendaryLead();
+    EXPECT(!GuideTextContains(COMPOUND_STRING("Wally")));
+    // Shared finale callers and the Center use exactly this same tree.
     FlagSet(FLAG_SYS_GAME_CLEAR);
     BufferNextCenterLegendaryLead();
-    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT(GuideTextContains(COMPOUND_STRING("Wally")));
+    ExpectCenterGuidePageFits();
 
     for (u32 i = 0; i < ARRAY_COUNT(sStory); i++)
         FlagClear(sStory[i]);
@@ -868,8 +971,144 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
     FlagClear(FLAG_RECEIVED_HM07);
     FlagClear(FLAG_BADGE08_GET);
     FlagClear(FLAG_SYS_GAME_CLEAR);
+    FlagClear(FLAG_DEFEATED_WALLY_MAUVILLE);
+    VarSet(VAR_PETALBURG_GYM_STATE, 0);
+    VarSet(VAR_ROUTE110_STATE, 0);
+    VarSet(VAR_ROUTE119_STATE, 0);
+    VarSet(VAR_MT_PYRE_STATE, 0);
     VarSet(VAR_SOOTOPOLIS_CITY_STATE, 0);
+    VarSet(VAR_PETALBURG_WOODS_STATE, 0);
+    FlagClear(FLAG_SYS_RECEIVED_KEYSTONE);
+    FlagClear(FLAG_DEFEATED_WALLY_VICTORY_ROAD);
+    FlagClear(FLAG_MET_MAXIE_SOOTOPOLIS);
+    FlagClear(FLAG_MET_ARCHIE_SOOTOPOLIS);
+    ClearTrainerFlag(TRAINER_GRUNT_RUSTURF_TUNNEL);
+    RemoveBagItem(ITEM_LEVELER, 1);
     gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_LEGENDS;
+}
+
+TEST("Center guide: finale names the next unbeaten cabin and pending tickets")
+{
+    static const u16 trainers[] = {TRAINER_WALLY_VR_2, TRAINER_COLTON, TRAINER_MICAH,
+        TRAINER_THOMAS, TRAINER_LEA_AND_JED, TRAINER_NAOMI, TRAINER_STEVEN, TRAINER_BUFFEL};
+    static const u8 *const names[] = {COMPOUND_STRING("Colton"), COMPOUND_STRING("Micah"),
+        COMPOUND_STRING("Thomas"), COMPOUND_STRING("Lea"), COMPOUND_STRING("Naomi")};
+    for (u32 i = 0; i < ARRAY_COUNT(trainers); i++)
+        ClearTrainerFlag(trainers[i]);
+    FlagSet(FLAG_SYS_GAME_CLEAR);
+    FlagClear(FLAG_RECEIVED_SS_TICKET);
+    FlagClear(FLAG_EC_EARNED_SS_TICKET);
+    FlagClear(FLAG_RECEIVED_AURORA_TICKET);
+    FlagClear(FLAG_EC_FINALE_DEOXYS_RESOLVED);
+    FlagClear(FLAG_BATTLED_DEOXYS);
+    FlagClear(FLAG_DEFEATED_DEOXYS);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Wally")));
+    SetTrainerFlag(TRAINER_WALLY_VR_2);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("your own house")));
+    FlagSet(FLAG_EC_EARNED_SS_TICKET);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Center nurse")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("Colton")));
+    ExpectCenterGuidePageFits();
+    // A delivered ticket in PC storage is usable even before a nurse has
+    // repaired an older save's receipt flag. Advice must not mutate that flag.
+    AddPCItem(ITEM_SS_TICKET, 1);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(names[0]));
+    EXPECT_EQ(FlagGet(FLAG_RECEIVED_SS_TICKET), FALSE);
+    for (u32 i = 0; i < PC_ITEMS_COUNT; i++)
+        if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_SS_TICKET)
+            RemovePCItem(i, 1);
+    FlagSet(FLAG_RECEIVED_SS_TICKET);
+    // Completion can happen in any order: an unfinished earlier cabin stays.
+    SetTrainerFlag(TRAINER_NAOMI);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(names[0]));
+    ClearTrainerFlag(TRAINER_NAOMI);
+    for (u32 i = 0; i < ARRAY_COUNT(names); i++)
+    {
+        BufferCenterGuideDirections();
+        EXPECT(GuideTextContains(names[i]));
+        EXPECT(GuideTextContains(COMPOUND_STRING("door")));
+        EXPECT(GuideTextContains(COMPOUND_STRING("Cabin 2")));
+        EXPECT(!GuideTextContains(COMPOUND_STRING("Steven")));
+        ExpectCenterGuidePageFits();
+        SetTrainerFlag(trainers[i + 1]);
+    }
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Steven")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("far-west ladder")));
+    SetTrainerFlag(TRAINER_STEVEN);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("still has your Aurora")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("choose Birth Island")));
+    ExpectCenterGuidePageFits();
+    FlagSet(FLAG_RECEIVED_AURORA_TICKET);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("choose Birth Island")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("Left 3, down 1")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("knockout loses it forever")));
+    ExpectCenterGuidePageFits();
+    BufferCenterGuideObjective();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Birth")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("triangle")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("Left 3")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("Right 6")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("knockout loses it forever")));
+    ExpectCenterGuidePageFits();
+    // Both capture and permanent knockout retire the same mandatory encounter.
+    FlagSet(FLAG_BATTLED_DEOXYS);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Buffel")));
+    FlagClear(FLAG_BATTLED_DEOXYS);
+    FlagSet(FLAG_DEFEATED_DEOXYS);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Buffel")));
+    ExpectCenterGuidePageFits();
+    SetTrainerFlag(TRAINER_BUFFEL);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("completed")));
+    ExpectCenterGuidePageFits();
+    for (u32 i = 0; i < ARRAY_COUNT(trainers); i++)
+        ClearTrainerFlag(trainers[i]);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    FlagClear(FLAG_RECEIVED_SS_TICKET);
+    FlagClear(FLAG_EC_EARNED_SS_TICKET);
+    FlagClear(FLAG_RECEIVED_AURORA_TICKET);
+    FlagClear(FLAG_DEFEATED_DEOXYS);
+}
+
+TEST("Center guide: Route 103 directs refused beginners to tools and leveling")
+{
+    FlagClear(FLAG_DEFEATED_RIVAL_ROUTE103);
+    FlagClear(FLAG_SYS_GAME_CLEAR);
+    RemoveBagItem(ITEM_LEVELER, 1);
+    // Existing tests leave no Leveler in the PC; a real under-cap partner
+    // distinguishes the level refusal from simply repeating the destination.
+    ZeroPlayerPartyMons();
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Poké Mart")));
+    AddBagItem(ITEM_LEVELER, 1);
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 1, 0, OTID_STRUCT_PLAYER_ID);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("USE")));
+    ExpectCenterGuidePageFits();
+    RemoveBagItem(ITEM_LEVELER, 1);
+    AddPCItem(ITEM_LEVELER, 1);
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Withdraw Item")));
+    ExpectCenterGuidePageFits();
+    for (u32 i = 0; i < PC_ITEMS_COUNT; i++)
+        if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_LEVELER)
+            RemovePCItem(i, 1);
+    AddBagItem(ITEM_LEVELER, 1);
+    ZeroPlayerPartyMons();
+    BufferCenterGuideDirections();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Route 103")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("USE")));
+    RemoveBagItem(ITEM_LEVELER, 1);
 }
 
 TEST("Center guide: side quests appear with their gates and retire when done")
@@ -927,12 +1166,18 @@ TEST("Center guide: side quests appear with their gates and retire when done")
     EXPECT(CenterGuideTipsMention(MAPSEC_MOSSDEEP_CITY, COMPOUND_STRING("Meltan")));
     FlagClear(FLAG_SYS_GAME_CLEAR);
     EXPECT(!CenterGuideTipsMention(MAPSEC_MOSSDEEP_CITY, COMPOUND_STRING("Meltan")));
-    // Dewford has no side quest of its own; the menu then omits the topic.
-    gMapHeader.regionMapSectionId = MAPSEC_DEWFORD_TOWN;
-    gSpecialVar_0x8005 = CENTER_GUIDE_TOPIC_TIPS;
-    gSpecialVar_0x8004 = 0;
-    BufferNextCenterLegendaryLead();
-    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    // Local stone leads retire independently when their pickups are claimed.
+    FlagClear(FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE);
+    FlagClear(FLAG_ITEM_ROUTE_106_KINGLERITE);
+    EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Butterfree")));
+    EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Kingler")));
+    FlagSet(FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Butterfree")));
+    EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Kingler")));
+    FlagSet(FLAG_ITEM_ROUTE_106_KINGLERITE);
+    EXPECT(!CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("")));
+    FlagClear(FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE);
+    FlagClear(FLAG_ITEM_ROUTE_106_KINGLERITE);
 
     for (u32 badge = 0; badge < 8; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
@@ -1070,7 +1315,7 @@ TEST("Center guide: every legendary lead states the gate its row enforces")
             ok &= LeadTextContains(text, COMPOUND_STRING("Magma Emblem"))
                || LeadTextContains(text, COMPOUND_STRING("Mt. Pyre"));
         else if (gate->unlockFlag == FLAG_VISITED_FORTREE_CITY)
-            ok &= LeadTextContains(text, COMPOUND_STRING("Weather Institute"));
+            ok &= LeadTextContains(text, COMPOUND_STRING("first Fortree visit"));
         else if (gate->unlockFlag == FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN)
             ok &= LeadTextContains(text, COMPOUND_STRING("Kyogre"));
         else if (gate->unlockFlag == FLAG_GOT_TM24_FROM_WATTSON)

@@ -76,7 +76,7 @@ OldaleTown_EventScript_ExplainPokemonMart:: @ 81E8F8C
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
 
 OldaleTown_EventScript_GivePromotionalItem::
-	giveitem ITEM_FOCUS_SASH
+	giveitem ITEM_POKE_BALL, 5
 	compare VAR_RESULT, FALSE
 	goto_if_eq OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
@@ -335,8 +335,8 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "We sell items for Pokémon to hold.\n"
 	.string "We help new Trainers get ready\l"
 	.string "for their journey.\p"
-	.string "Here, take a Focus Sash for\n"
-	.string "your first shopping trip!$"
+	.string "Here, take five Poké Balls\n"
+	.string "to help you catch your first partners!$"
 
 OldaleTown_Text_PotionExplanation: @ 81E92AF
 	.string "If you're after Potions or Poké Balls,\n"

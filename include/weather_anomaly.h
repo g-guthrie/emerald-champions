@@ -3,14 +3,16 @@
 
 #include "legendary_signs.h"
 
-// Weather anomalies: from the Weather Institute rescue until the sky calms in
+// Weather anomalies: from the first Fortree visit until the sky calms in
 // Sootopolis, up to four visiting legends are wild on their home maps, each
-// for about 1500 steps under its own weather. See src/weather_anomaly.c.
+// for about 1500 steps under its own weather or randomly chosen snow.
+// The weather choice is saved until that slot turns over. See src/weather_anomaly.c.
 #define WEATHER_ANOMALY_SLOT_COUNT        4
 #define WEATHER_ANOMALY_DURATION_STEPS    1500
 #define WEATHER_ANOMALY_TICK_STEPS        50
 #define WEATHER_ANOMALY_DURATION_TICKS    (WEATHER_ANOMALY_DURATION_STEPS / WEATHER_ANOMALY_TICK_STEPS)
 #define WEATHER_ANOMALY_ENCOUNTER_PERCENT 25
+#define WEATHER_ANOMALY_SNOW_PERCENT      25
 #define WEATHER_ANOMALY_EMPTY             0xFF
 
 #define WEATHER_ANOMALY_WINDOW_START_FLAG FLAG_VISITED_FORTREE_CITY // Every player arrives here after Route 119; the Institute rescue can be skipped by Surf.

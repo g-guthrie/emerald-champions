@@ -18,7 +18,7 @@ RustboroCity_Mart_EventScript_FalseSwipeTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_RUSTBORO_CITY_MART, RustboroCity_Mart_EventScript_ReceivedTM98
 	msgbox RustboroCity_Mart_Text_ExcuseMeTrainer, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_RUSTBORO_CITY_MART
 	msgbox RustboroCity_Mart_Text_HaveTM98, MSGBOX_DEFAULT
@@ -38,14 +38,13 @@ RustboroCity_Mart_Text_ExcuseMeTrainer:
 	.string "when you're trying to catch one.\p"
 	.string "The Move Tutor can teach it\n"
 	.string "to any Pokémon that can learn it.\p"
-	.string "Here's a Rare Candy to help\n"
-	.string "your new partners grow!$"
+	.string "Here's a Nugget to help\n"
+	.string "pay for your catching supplies!$"
 
 RustboroCity_Mart_Text_HaveTM98:
-	.string "Use that Rare Candy to help a\n"
-	.string "partner grow one level.\p"
-	.string "It won't raise a Pokémon past\n"
-	.string "the level your Badges allow, though.$"
+	.string "Sell that Nugget for ¥2,500.\p"
+	.string "Poké Balls and held items can help\n"
+	.string "you bring new partners onto the team!$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
 	.string "I buy Paralyze Heals and Antidotes\n"

@@ -17,7 +17,7 @@
 #define EC_SOOT_MARSHADOW_TARGET 250
 
 // Bottle Cap services. The scripts and native payment checks share these values.
-#define EC_SOOT_PER_CAP                     1000
+#define EC_SOOT_PER_CAP                      500
 #define EC_SOOT_CAP_BATCH                      5
 #define EC_SOOT_EXCHANGE_ALL                   9 // Menu selection, not a quantity.
 #define EC_IV_CHANGE_CAP_COST                  1
@@ -35,7 +35,7 @@
 
 // Preserve fixed-width, spelled-out, and comma-formatted price text.
 // Repricing must update that wording as well as the transaction constants.
-#if EC_SOOT_PER_CAP != 1000 || EC_SOOT_CAP_BATCH != 5
+#if EC_SOOT_PER_CAP != 500 || EC_SOOT_CAP_BATCH != 5
 #error "Update the Glass Workshop's formatted soot prices when repricing."
 #endif
 #if EC_IV_CHANGE_CAP_COST != 1 || EC_HIDDEN_POWER_CAP_COST != 3 || EC_ICONIC_MOVE_GOLD_CAP_COST != 1 || EC_EVIE_PRICE_PER_EV != 2

@@ -1,9 +1,6 @@
 .set LOCALID_AIDE, 1
 .set LOCALID_BIRCH, 2
 .set LOCALID_RIVAL, 3
-.set LOCALID_BALL_CYNDAQUIL, 4
-.set LOCALID_BALL_TOTODILE, 5
-.set LOCALID_BALL_CHIKORITA, 6
 
 LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
@@ -15,9 +12,9 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	@ 1: Beat Elite Four, Dex upgrade ready
 	@ 2: Received National Dex
 	@ 3: Left lab after receiving National Dex
-	@ 4: Entered lab after catching all Hoenn mons
-	@ 5: Birch told player to choose Johto starter
-	@ 6: Chose Johto starter
+	@ 4: Entered lab after catching all Hoenn mons; completion gift ready
+	@ 5: Completion gift pending (also migrates an old pending Johto choice)
+	@ 6: Claimed completion gift (or a Johto starter on an older save)
 
 	@ State descriptions for VAR_BIRCH_LAB_STATE
 	@ 1: Never occurs
@@ -29,32 +26,36 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 LittlerootTown_ProfessorBirchsLab_OnTransition: @ 81F9CA1
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
+	@ Retire the old starter display, including pending choices on old saves.
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_KeepCosmogPending
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout
+	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterDexRewardLayout
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
+	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_SetDexRewardLayout
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForDexReward
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter:: @ 81F9CCD
+LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForDexReward:: @ 81F9CCD
 	specialvar VAR_RESULT, HasAllHoennMons
 	compare VAR_RESULT, TRUE
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForDexReward
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_RIVAL, 5, 10
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter:: @ 81F9CE9
+LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForDexReward:: @ 81F9CE9
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetDexRewardLayout
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout:: @ 81F9CF3
+LittlerootTown_ProfessorBirchsLab_EventScript_SetDexRewardLayout:: @ 81F9CF3
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout:: @ 81F9CF7
+LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterDexRewardLayout:: @ 81F9CF7
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_RIVAL, 5, 10
@@ -67,8 +68,8 @@ LittlerootTown_ProfessorBirchsLab_OnWarp: @ 81F9D06
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexReward
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexReward
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter:: @ 81F9D40
@@ -91,17 +92,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject:: @ 81F9D71
 	addobject LOCALID_RIVAL
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters:: @ 81F9D75
-	addobject LOCALID_BALL_CYNDAQUIL
-	addobject LOCALID_BALL_TOTODILE
-	addobject LOCALID_BALL_CHIKORITA
+LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexReward::
 	addobject LOCALID_RIVAL
-	turnobject LOCALID_BALL_CYNDAQUIL, DIR_SOUTH
-	setobjectxy LOCALID_BALL_CYNDAQUIL, 8, 4
-	turnobject LOCALID_BALL_TOTODILE, DIR_SOUTH
-	setobjectxy LOCALID_BALL_TOTODILE, 9, 4
-	turnobject LOCALID_BALL_CHIKORITA, DIR_SOUTH
-	setobjectxy LOCALID_BALL_CHIKORITA, 10, 4
 	turnobject LOCALID_BIRCH, DIR_SOUTH
 	setobjectxy LOCALID_BIRCH, 6, 4
 	turnobject LOCALID_RIVAL, DIR_EAST
@@ -112,7 +104,7 @@ LittlerootTown_ProfessorBirchsLab_OnFrame: @ 81F9DB9
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
 	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexRewardEvent
 	.2byte 0
 
 @ Both partners were granted atomically on Route 101. Confirm ownership and
@@ -188,39 +180,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	applymovement LOCALID_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchGiveCosmogs
 	waitmovement 0
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveCosmog:
-	setvar VAR_TEMP_1, SPECIES_COSMOG
-	special GetStaticEncounterLevel
-	givemon SPECIES_COSMOG, VAR_0x800A, ITEM_EVIOLITE
-	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogParty
-	compare VAR_RESULT, 1
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_CosmogNoRoom
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogParty::
+	callnative GiveBirchCosmogPair
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_CosmogNoRoom
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCosmogFanfare
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_RivalCosmog
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CosmogPairStorage, MSGBOX_DEFAULT
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_RivalCosmog
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceiveCosmogPC::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCosmogFanfare
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendCosmogToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_SendCosmogToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendCosmogToPC:: @ 82700D0
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_RivalCosmog
-	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCosmogFanfare:: @ 82700DB
 	playfanfare MUS_OBTAIN_ITEM
@@ -269,14 +233,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_BrendanUpgradeComment:: @ 81F9F3C
 	closemessage
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter:: @ 81F9F62
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexRewardEvent:: @ 81F9F62
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForDexReward
 	waitmovement 0
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexReward, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
-	releaseall
-	end
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexReward
 
 LittlerootTown_ProfessorBirchsLab_Movement_RivalLeaves:
 	walk_down
@@ -300,7 +263,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_BirchGiveCosmogs:
 	delay_16
 	step_end
 
-LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter: @ 81F9F7C
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForDexReward: @ 81F9F7C
 	walk_up
 	walk_up
 	walk_up
@@ -331,216 +294,50 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter:: @ 81F9FB1
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil:: @ 81F9FBB
-	release
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFastestRight
-	waitmovement 0
-	showmonpic SPECIES_CYNDAQUIL, 10, 3
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil
-	end
+@ Retained map-script labels for the retired display objects.
+LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil::
+LittlerootTown_ProfessorBirchsLab_EventScript_Totodile::
+LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita::
+	lockall
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexReward
 
-LittlerootTown_ProfessorBirchsLab_EventScript_Totodile:: @ 81F9FEF
-	release
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFastestRight
-	waitmovement 0
-	showmonpic SPECIES_TOTODILE, 10, 3
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita:: @ 81FA023
-	release
-	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFastestRight
-	waitmovement 0
-	showmonpic SPECIES_CHIKORITA, 10, 3
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter:: @ 81FA057
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone, MSGBOX_DEFAULT
-	releaseall
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime:: @ 81FA061
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable, MSGBOX_DEFAULT
-	releaseall
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil:: @ 81FA06C
-	bufferspeciesname 0, SPECIES_CYNDAQUIL
-	setvar VAR_TEMP_1, SPECIES_CYNDAQUIL
-	special GetLevelCapForScriptedGift
-	givemon SPECIES_CYNDAQUIL, VAR_0x800A, ITEM_NONE
-	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty
-	compare VAR_RESULT, 1
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC
-	hidemonpic
-	goto Common_EventScript_NoMoreRoomForPokemon
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty:: @ 81FA0A1
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BALL_CYNDAQUIL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC:: @ 81FA0CC
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BALL_CYNDAQUIL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC:: @ 81FA0F2
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil:: @ 81FA0FD
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexReward::
+	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_DexRewardDone
+	goto_if_lt VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_DexRewardDone
+LittlerootTown_ProfessorBirchsLab_EventScript_DeliverDexReward::
+	@ AddBagItem preflights the whole quantity; failure changes no items.
+	additem ITEM_GOLD_BOTTLE_CAP, PARTY_SIZE
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_DexRewardBagFull
+	@ Record delivery before the presentation so retries cannot duplicate it.
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+LittlerootTown_ProfessorBirchsLab_EventScript_DexRewardReceived::
+	setvar VAR_0x8000, ITEM_GOLD_BOTTLE_CAP
+	setvar VAR_0x8001, PARTY_SIZE
+	setvar VAR_0x8007, TRUE
+	call EventScript_ObtainItemMessage
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexRewardUses, MSGBOX_DEFAULT
+LittlerootTown_ProfessorBirchsLab_EventScript_DexRewardDone::
 	releaseall
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile:: @ 81FA10D
-	bufferspeciesname 0, SPECIES_TOTODILE
-	setvar VAR_TEMP_1, SPECIES_TOTODILE
-	special GetLevelCapForScriptedGift
-	givemon SPECIES_TOTODILE, VAR_0x800A, ITEM_NONE
-	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty
-	compare VAR_RESULT, 1
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC
-	hidemonpic
-	goto Common_EventScript_NoMoreRoomForPokemon
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty:: @ 81FA142
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BALL_TOTODILE
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC:: @ 81FA16D
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BALL_TOTODILE
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC:: @ 81FA193
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile:: @ 81FA19E
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+LittlerootTown_ProfessorBirchsLab_EventScript_DexRewardBagFull::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexRewardBagFull, MSGBOX_DEFAULT
 	releaseall
 	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita:: @ 81FA1AE
-	bufferspeciesname 0, SPECIES_CHIKORITA
-	setvar VAR_TEMP_1, SPECIES_CHIKORITA
-	special GetLevelCapForScriptedGift
-	givemon SPECIES_CHIKORITA, VAR_0x800A, ITEM_NONE
-	compare VAR_RESULT, 0
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty
-	compare VAR_RESULT, 1
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC
-	hidemonpic
-	goto Common_EventScript_NoMoreRoomForPokemon
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty:: @ 81FA1E3
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BALL_CHIKORITA
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC:: @ 81FA20E
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BALL_CHIKORITA
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC:: @ 81FA234
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita:: @ 81FA23F
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	releaseall
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter:: @ 81FA24F
-	playfanfare MUS_OBTAIN_ITEM
-	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
-	waitmessage
-	waitfanfare
-	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch:: @ 81FA25A
 	lock
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_PendingDexReward
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon:: @ 81FA28A
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon, MSGBOX_DEFAULT
-	release
-	end
+LittlerootTown_ProfessorBirchsLab_EventScript_PendingDexReward::
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexReward
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting:: @ 81FA294
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting2, MSGBOX_DEFAULT
@@ -871,6 +668,8 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav:
 	.string "You needn't see or catch it first!\p"
 	.string "As you travel and unlock encounters,\n"
 	.string "the list changes to match the area.\p"
+	.string "Rods, Honey and field licenses\n"
+	.string "open more encounter methods.\p"
 	.string "Scroll down to see each method:\n"
 	.string "grass, water, fishing and more.\p"
 	.string "Choose an icon to see its rarity,\n"
@@ -881,8 +680,8 @@ LittlerootTown_ProfessorBirchsLab_Text_DexNavSearching:
 	.string "to track that Pokémon nearby.\p"
 	.string "Grass, cave floors and Surf water\n"
 	.string "can provide searchable encounters.\p"
-	.string "Press R on an entry to register it.\n"
-	.string "Then R in the field starts a search.\p"
+	.string "Your last search is remembered.\n"
+	.string "R in the field repeats that search.\p"
 	.string "An item assigned to R takes priority.\n"
 	.string "Use the DexNav menu in that case.\p"
 	.string "Follow the arrow to the moving spot.\n"
@@ -891,8 +690,11 @@ LittlerootTown_ProfessorBirchsLab_Text_DexNavSearching:
 	.string "That makes you sneak toward it.\p"
 	.string "Don't run or cycle near the spot.\n"
 	.string "Even walking scares it up close!\p"
-	.string "There's no countdown. Take your time,\n"
-	.string "but don't wander out of range.\p"
+	.string "You have 15 seconds to reach it.\n"
+	.string "Watch the countdown: it turns red\l"
+	.string "in the last five seconds.\p"
+	.string "Take too long and it gets away,\n"
+	.string "ending your chain. Stay in range!\p"
 	.string "In caves or water, it may move twice.\n"
 	.string "Follow the arrow to its new spot.\p"
 	.string "If nothing is found nearby, move\n"
@@ -904,9 +706,11 @@ LittlerootTown_ProfessorBirchsLab_Text_DexNavMethods:
 	.string "Those entries cannot be searched.\n"
 	.string "Read their instructions instead.\p"
 	.string "Storm visitors appear in the list,\n"
-	.string "but cannot be searched or registered.\p"
+	.string "but cannot be searched with DexNav.\p"
 	.string "Meet those guests through ordinary\n"
 	.string "wild encounters during their storm.\p"
+	.string "Their unusual weather may bring\n"
+	.string "snow, too. Check Institute reports!\p"
 	.string "Other available resident legends\n"
 	.string "can be searched where permitted.\p"
 	.string "Ordinary wild encounters still use\n"
@@ -941,16 +745,19 @@ LittlerootTown_ProfessorBirchsLab_Text_DexNavChains:
 LittlerootTown_ProfessorBirchsLab_Text_DexNavPokerus:
 	.string "Shininess changes a Pokémon's look.\n"
 	.string "Pokérus enhances its nature instead.\p"
-	.string "A positive nature bonus doubles:\n"
-	.string "+10% becomes +20%.\p"
-	.string "The lowered stat still gets -10%.\n"
+	.string "Pokérus adds five percentage points:\n"
+	.string "+10% becomes +15%.\p"
+	.string "Normally, the penalty stays -10%.\n"
 	.string "Neutral natures gain no bonus.\p"
 	.string "That benefit lasts after recovery\n"
 	.string "and follows any future nature change.\p"
 	.string "On the Summary's Skills page, the\n"
 	.string "enhanced nature stat is colored gold.\p"
 	.string "PKRS marks a contagious Pokémon.\n"
-	.string "A tiny dot marks a recovered one.$"
+	.string "A tiny dot marks a recovered one.\p"
+	.string "Lavaridge's hot spring offers a\n"
+	.string "treatment for any past infection.\l"
+	.string "The bathers there can explain it!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DexNavSpread:
 	.string "An original carrier can infect just\n"
@@ -969,7 +776,7 @@ LittlerootTown_ProfessorBirchsLab_Text_DexNavSpread:
 	.string "carrier keeps its benefit as well.\p"
 	.string "There's no calendar deadline, and\n"
 	.string "PC storage keeps its progress.\p"
-	.string "Take your time, sneak up gently,\n"
+	.string "Keep moving, sneak up gently,\n"
 	.string "and build a chain. Happy fieldwork!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait: @ 81FAD6F
@@ -1043,11 +850,11 @@ LittlerootTown_ProfessorBirchsLab_Text_OtherDimensionsTakeCosmog:
 	.string "It appears that in the Hoenn region,\n"
 	.string "there are also Pokémon from other\l"
 	.string "dimensions!\p"
-	.string "So far I've only identified one of\n"
-	.string "them: Cosmog!\p"
-	.string "It seems to be pretty weak, but maybe\n"
-	.string "you'll be able to draw out its power.\p"
-	.string "Here, I've got one for each of you.$"
+	.string "I've been raising two Cosmog.\n"
+	.string "I'd like you to have both!\p"
+	.string "They seem weak now, but their\n"
+	.string "evolutions follow the sun and moon.\p"
+	.string "You can raise one of each!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayUpgradeSoCool: @ 81FB30F
 	.string "May: Eheheh!\p"
@@ -1080,73 +887,28 @@ LittlerootTown_ProfessorBirchsLab_Text_BrendanGoRoute103: @ 81FB58A
 	.string "Route 103 for a while.\p"
 	.string "Maybe I'll see you there, {PLAYER}?$"
 
-LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon: @ 81FB5F9
+LittlerootTown_ProfessorBirchsLab_Text_CompletedDexReward:
 	.string "Prof. Birch: Oh, {PLAYER}{KUN}!\n"
-	.string "Let's have a look at your Pokédex.\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "Yes, there's no doubt about it.\p"
-	.string "You really have completed the Hoenn\n"
-	.string "region's Pokédex.\p"
-	.string "That's more than just impressive.\p"
-	.string "I have a gift for you.\p"
-	.string "Consider it my show of appreciation\n"
-	.string "for the fantastic work you've done.\p"
-	.string "My gift is a rare Pokémon only found\n"
-	.string "in another region!\p"
-	.string "You can have any one of these\n"
-	.string "three Pokémon!$"
+	.string "You've completed the Hoenn Pokédex!\p"
+	.string "Your fieldwork deserves something\n"
+	.string "special: six Gold Bottle Caps.\p"
+	.string "One for each partner on your team!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon: @ 81FB787
-	.string "Prof. Birch: These are rare Pokémon\n"
-	.string "only found in another region!\p"
-	.string "You can have any one of these\n"
-	.string "three Pokémon!$"
+LittlerootTown_ProfessorBirchsLab_Text_DexRewardUses:
+	.string "Prof. Birch: A Gold Bottle Cap pays\n"
+	.string "for an iconic move lesson at a Center.\p"
+	.string "Teach your partners something special\n"
+	.string "for the challenges still ahead!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil: @ 81FB7F6
-	.string "Prof. Birch: The Fire-type Pokémon\n"
-	.string "Cyndaquil caught your eye!\p"
-	.string "You're as sharp as ever!\p"
-	.string "So the Cyndaquil is your choice?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile: @ 81FB869
-	.string "Prof. Birch: The Water-type Pokémon\n"
-	.string "Totodile is your choice!\p"
-	.string "You know how to pick a good one.\p"
-	.string "So, you'll take the Totodile?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita: @ 81FB8E0
-	.string "Prof. Birch: The Grass-type Pokémon\n"
-	.string "Chikorita is your choice!\p"
-	.string "You sure know what you're doing.\p"
-	.string "So, you'll take the Chikorita?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable: @ 81FB959
-	.string "Prof. Birch: Take your time before\n"
-	.string "you decide.\p"
-	.string "They're all invaluable Pokémon.$"
+LittlerootTown_ProfessorBirchsLab_Text_DexRewardBagFull:
+	.string "Prof. Birch: Make room in your Bag\n"
+	.string "for all six Gold Bottle Caps.\p"
+	.string "I'll keep them safe. Come back and\n"
+	.string "talk to me when you're ready!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedCosmog:
-	.string "{PLAYER} received the Cosmog\n"
+	.string "{PLAYER} received two Cosmog\n"
 	.string "from Prof. Birch!$"
-
-LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter: @ 81FB9D7
-	.string "{PLAYER} received the {STR_VAR_1}\n"
-	.string "from Prof. Birch!$"
-
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting: @ 81FBA2C
-	.string "Prof. Birch: Listen, {PLAYER}{KUN}.\n"
-	.string "You've completed the Hoenn Pokédex,\l"
-	.string "but your Pokémon journey isn't over.\p"
-	.string "There is no end to the road\n"
-	.string "that is Pokémon.\p"
-	.string "Somewhere, there is a grassy patch\n"
-	.string "that's waiting for you!$"
-
-LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone: @ 81FBAF8
-	.string "You received the promised Pokémon.\n"
-	.string "Better leave the others alone.$"
 
 @ Unused
 LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere: @ 81FBB68
@@ -1218,9 +980,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CosmogNoRoom::
 	end
 
 LittlerootTown_ProfessorBirchsLab_Text_CosmogNoRoom:
-	.string "Your party and Boxes are full.\p"
-	.string "Make room, then speak to me.\n"
-	.string "I'll keep Cosmog here for you!$"
+	.string "Prof. Birch: Both Cosmog need homes.\p"
+	.string "Your party can hold one special\n"
+	.string "Pokémon; the other needs a PC slot.\p"
+	.string "Make room in your Boxes, then\n"
+	.string "speak to me. I'll keep them safe!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_CosmogPairStorage:
+	.string "Prof. Birch: I've sent any Cosmog\n"
+	.string "that couldn't join your party to PC.\p"
+	.string "Name them in your party or the PC.\p"
+	.string "Cosmoem evolves into Solgaleo by day\n"
+	.string "or Lunala at night. Raise both!$"
 
 LittlerootTown_ProfessorBirchsLab_Movement_RivalLeaveForDemo:
 	walk_down

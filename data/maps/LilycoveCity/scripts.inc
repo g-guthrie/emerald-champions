@@ -453,7 +453,7 @@ LilycoveCity_EventScript_NotAltaria::
 
 LilycoveCity_EventScript_YesAltaria::
 	msgbox LilycoveCity_Text_YesAltaria, MSGBOX_DEFAULT
-	giveitem ITEM_ALTARIANITE
+	giveuniqueitem ITEM_ALTARIANITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_ITEM_LILYCOVE_CITY_ALTARIANITE

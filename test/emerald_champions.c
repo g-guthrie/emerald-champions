@@ -2737,6 +2737,7 @@ TEST("Emerald Champions paired prizes use incoming cap once and exclude replays"
     memset(&sEmeraldChampionsTestBattleStruct, 0, sizeof(sEmeraldChampionsTestBattleStruct));
     gBattleStruct = &sEmeraldChampionsTestBattleStruct;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
+    gBattleStruct->moneyMultiplier = 1;
     InitTrainerBattleParameter();
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_MAXIE_MOSSDEEP;
     TRAINER_BATTLE_PARAM.opponentB = TRAINER_COURTNEY_MOSSDEEP;
@@ -2809,6 +2810,7 @@ TEST("Emerald Champions v4 final reporter battle pays first-clear money once")
     TrainerBattleParameter savedParams = gTrainerBattleParameter;
     memset(&sEmeraldChampionsTestBattleStruct, 0, sizeof(sEmeraldChampionsTestBattleStruct));
     gBattleStruct = &sEmeraldChampionsTestBattleStruct;
+    gBattleStruct->moneyMultiplier = 1;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
     InitTrainerBattleParameter();
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_GABBY_AND_TY_6;

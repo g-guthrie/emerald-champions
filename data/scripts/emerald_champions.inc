@@ -76,9 +76,11 @@ EmeraldChampions_EventScript_MoveTutorExit:
 EmeraldChampions_EventScript_EVTraining:
 	setvar VAR_TUTOR_CURSOR, 2
 	msgbox EmeraldChampions_Text_EVTrainingIntro, MSGBOX_DEFAULT
+	setvar VAR_0x8004, FALSE
+	special SetPlannedEVPricing
 EmeraldChampions_EventScript_EVTrainingChooseMon:
 	special ChoosePartyMon
-	goto_if_ge VAR_0x8004, PARTY_SIZE, EmeraldChampions_EventScript_MoveTutorMain
+	goto_if_ge VAR_0x8004, PARTY_SIZE, EmeraldChampions_EventScript_EVTrainingExit
 	copyvar VAR_EV_PLAN_MON, VAR_0x8004
 	special StartPlannedEVSpread
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVTrainingEgg
@@ -116,7 +118,7 @@ EmeraldChampions_EventScript_EVPlan:
 	dynmultipush EmeraldChampions_Text_EVPlanUndo, 6
 	dynmultipush EmeraldChampions_Text_EVPlanClearAll, 7
 	dynmultipush EmeraldChampions_Text_EVPlanConfirm, 8
-	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_PLAN_CURSOR, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_PLAN_CURSOR, DYN_MULTICHOICE_CB_EV_PLAN
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EVPlanBack
 	copyvar VAR_EV_PLAN_CURSOR, VAR_RESULT
 	goto_if_eq VAR_RESULT, 8, EmeraldChampions_EventScript_EVPlanConfirm
@@ -174,14 +176,11 @@ EmeraldChampions_EventScript_EVPlanConfirm:
 	@ The money box writes STR_VAR_1, so it opens before the name is buffered.
 	showmoneybox 0, 0
 	bufferpartymonnick STR_VAR_1, VAR_EV_PLAN_MON
-	special BufferPlannedEVSummary
-	msgbox EmeraldChampions_Text_EVPlanSummary, MSGBOX_YESNO
+	special BufferPlannedEVConfirmation
+	msgbox gStringVar4, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EVPlanDecline
-	checkmoney EV_PLAN_FEE
+	special PayForPlannedEVSpread
 	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVPlanCantAfford
-	special ApplyPlannedEVSpread
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EVPlanDecline
-	removemoney EV_PLAN_FEE
 	updatemoneybox
 	playse SE_SHOP
 	bufferpartymonnick STR_VAR_1, VAR_EV_PLAN_MON
@@ -214,13 +213,21 @@ EmeraldChampions_EventScript_EVTrainingEgg:
 	msgbox EmeraldChampions_Text_EVTrainingEgg, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_EVTrainingChooseMon
 
+EmeraldChampions_EventScript_EVTrainingExit:
+	special IsEvieEVPlan
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MoveTutorMain
+	releaseall
+	end
+
 EmeraldChampions_Text_EVTraining:
 	.string "EV Training$"
 EmeraldChampions_Text_EVTrainingIntro:
 	.string "Choose a Pokémon and plan its EVs.\n"
 	.string "A new spread costs ¥500 to apply.\p"
-	.string "Undo Changes puts the plan back.\n"
-	.string "Clear All plans 0 in every stat.$"
+	.string "LEFT/RIGHT changes a row by 4.\n"
+	.string "L/R changes it by 64.\p"
+	.string "SELECT clears a row; START fills it.\n"
+	.string "Nothing changes until you confirm.$"
 EmeraldChampions_Text_EVTrainingEgg:
 	.string "An Egg can't be trained yet.$"
 EmeraldChampions_Text_EVPlanPrompt:
@@ -253,13 +260,8 @@ EmeraldChampions_Text_EVPlanTotalFull:
 	.string "another stat to make room.$"
 EmeraldChampions_Text_EVPlanStatEmpty:
 	.string "That stat has no EVs to remove.$"
-EmeraldChampions_Text_EVPlanSummary:
-	.string "{STR_VAR_2}\n"
-	.string "{STR_VAR_3}\p"
-	.string "Apply this spread to {STR_VAR_1}\n"
-	.string "for ¥500?$"
 EmeraldChampions_Text_EVPlanCantAfford:
-	.string "You need ¥500 for this training.\n"
+	.string "This training costs ¥{STR_VAR_1}.\n"
 	.string "Nothing has changed.$"
 EmeraldChampions_Text_EVPlanApplied:
 	.string "{STR_VAR_1}'s new EV spread is set!$"
@@ -357,6 +359,8 @@ EmeraldChampions_Text_BattleVendorStarterKit:
 EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Find a held item on your journey,\n"
 	.string "and I'll sell you more of it here.\p"
+	.string "Some special gear is stocked once\n"
+	.string "you've caught its Pokémon user.\p"
 	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
@@ -380,7 +384,8 @@ EmeraldChampions_Text_BattleItemCategoryPrompt:
 
 EmeraldChampions_Text_BattleItemCategoryEmpty:
 	.string "None of those are in stock yet.\n"
-	.string "Find one on your journey first!$"
+	.string "Earn Badges or discover more\l"
+	.string "items and Pokémon on your journey.$"
 
 EmeraldChampions_Text_OffenseItems:
 	.string "Offense$"
@@ -404,9 +409,12 @@ EmeraldChampions_Text_MoveTutorHowCanHelp:
 	.string "How can I help prepare your Pokémon?$"
 
 EmeraldChampions_Text_MoveTutorNoMachines:
-	.string "No need for machines anymore!\p"
-	.string "Bring me any Pokémon, and I'll teach\n"
-	.string "it any move it can learn.$"
+	.string "I teach any legal move for free.\n"
+	.string "No machines needed!\p"
+	.string "New partners have full EV training.\n"
+	.string "EV Training reshapes it for ¥500.\p"
+	.string "Change Abilities for free from\n"
+	.string "a Pokémon's party menu.$"
 
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
@@ -520,7 +528,7 @@ EmeraldChampions_Text_BondingUnavailable:
 	.string "Please choose a Pokémon, not an Egg.$"
 
 @ The Pokémon Center local guide: the game's built-in walkthrough. The
-@ special BufferNextCenterLegendaryLead reads the topic from VAR_0x8005
+@ special BufferNextCenterLegendaryLead reads local topics from VAR_0x8005
 @ (values match include/center_guide.h) and a cursor from VAR_0x8004, and
 @ fills gStringVar4. msgbox expands into gStringVar4, so every page is
 @ buffered again right before it is shown.
@@ -528,6 +536,8 @@ EmeraldChampions_Text_BondingUnavailable:
 	.set CENTER_GUIDE_TOPIC_TIPS, 1
 	.set CENTER_GUIDE_TOPIC_STORY, 2
 	.set CENTER_GUIDE_TOPIC_BYE, 3
+	.set CENTER_GUIDE_TOPIC_HELP, 4
+	.set CENTER_GUIDE_TOPIC_DETAILS, 5
 
 @ The list selects by topic, so VAR_GUIDE_CURSOR keeps the cursor on the topic
 @ last read (Where to Go first). VAR_GUIDE_WARNED marks the legend warning as
@@ -537,7 +547,8 @@ Common_EventScript_CenterLocalGuide::
 	faceplayer
 	setvar VAR_GUIDE_CURSOR, CENTER_GUIDE_TOPIC_STORY
 	setvar VAR_GUIDE_WARNED, FALSE
-	msgbox EmeraldChampions_Text_CenterGuideHello, MSGBOX_DEFAULT
+	special BufferCenterGuideObjective
+	msgbox gStringVar4, MSGBOX_DEFAULT
 
 EmeraldChampions_EventScript_CenterGuideMenu:
 	@ Offer a topic only when this city has something to say about it.
@@ -552,12 +563,14 @@ EmeraldChampions_EventScript_CenterGuideMenu:
 	message EmeraldChampions_Text_CenterGuideAsk
 	waitmessage
 	dynmultipush EmeraldChampions_Text_CenterGuideWhereToGo, CENTER_GUIDE_TOPIC_STORY
+	dynmultipush EmeraldChampions_Text_CenterGuideExactlyHow, CENTER_GUIDE_TOPIC_DETAILS
 	goto_if_eq VAR_GUIDE_HAS_LEGENDS, FALSE, EmeraldChampions_EventScript_CenterGuideNoLegends
 	dynmultipush EmeraldChampions_Text_CenterGuideRarePokemon, CENTER_GUIDE_TOPIC_LEGENDS
 EmeraldChampions_EventScript_CenterGuideNoLegends:
 	goto_if_eq VAR_GUIDE_HAS_TIPS, FALSE, EmeraldChampions_EventScript_CenterGuideNoTips
 	dynmultipush EmeraldChampions_Text_CenterGuideThingsToDo, CENTER_GUIDE_TOPIC_TIPS
 EmeraldChampions_EventScript_CenterGuideNoTips:
+	dynmultipush EmeraldChampions_Text_CenterGuideHowThingsWork, CENTER_GUIDE_TOPIC_HELP
 	dynmultipush EmeraldChampions_Text_CenterGuideBye, CENTER_GUIDE_TOPIC_BYE
 	dynmultistack 30, 1, FALSE, 4, 0, VAR_GUIDE_CURSOR, DYN_MULTICHOICE_CB_NONE
 	closemessage
@@ -567,22 +580,21 @@ EmeraldChampions_EventScript_CenterGuideNoTips:
 	case CENTER_GUIDE_TOPIC_STORY, EmeraldChampions_EventScript_CenterGuideStory
 	case CENTER_GUIDE_TOPIC_LEGENDS, EmeraldChampions_EventScript_CenterGuideLegends
 	case CENTER_GUIDE_TOPIC_TIPS, EmeraldChampions_EventScript_CenterGuideTips
+	case CENTER_GUIDE_TOPIC_HELP, EmeraldChampions_EventScript_CenterGuideHelp
+	case CENTER_GUIDE_TOPIC_DETAILS, EmeraldChampions_EventScript_CenterGuideDetails
 EmeraldChampions_EventScript_CenterGuideGoodbye:
 	msgbox EmeraldChampions_Text_CenterGuideGoodbye, MSGBOX_DEFAULT
 	releaseall
 	end
 
 EmeraldChampions_EventScript_CenterGuideStory:
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, CENTER_GUIDE_TOPIC_STORY
-	special BufferNextCenterLegendaryLead
-	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterGuideFinale
+	special BufferCenterGuideObjective
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
-@ After the Hall of Fame the shared finale directions say where to go.
-EmeraldChampions_EventScript_CenterGuideFinale:
-	call Common_EventScript_FinaleDirections
+EmeraldChampions_EventScript_CenterGuideDetails:
+	special BufferCenterGuideDirections
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
 @ The knockout warning comes once per conversation, before a list that
@@ -607,15 +619,239 @@ EmeraldChampions_EventScript_CenterGuideNextPage:
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_CenterGuideNextPage
 
-EmeraldChampions_Text_CenterGuideHello:
-	.string "Hello! I'm the local guide.\n"
-	.string "I know this area inside out.$"
+@ Optional lessons remain available after the first tool handoff.
+EmeraldChampions_EventScript_CenterGuideHelp:
+	message EmeraldChampions_Text_CenterGuideAsk
+	waitmessage
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic0, 0
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic1, 1
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic2, 2
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic3, 3
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic4, 4
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic5, 5
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic6, 6
+	dynmultipush EmeraldChampions_Text_CenterHelpTopic7, 7
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, EmeraldChampions_EventScript_CenterHelp0
+	case 1, EmeraldChampions_EventScript_CenterHelp1
+	case 2, EmeraldChampions_EventScript_CenterHelp2
+	case 3, EmeraldChampions_EventScript_CenterHelp3
+	case 4, EmeraldChampions_EventScript_CenterHelp4
+	case 5, EmeraldChampions_EventScript_CenterHelp5
+	case 6, EmeraldChampions_EventScript_CenterHelp6
+	goto EmeraldChampions_EventScript_CenterGuideMenu
+
+EmeraldChampions_EventScript_CenterHelp0:
+	msgbox EmeraldChampions_Text_CenterHelpLesson0, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_EventScript_CenterHelp1:
+	call EventScript_PkmnCenterNurse_ExplainLeveler
+	msgbox EmeraldChampions_Text_CenterHelpLesson1, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_EventScript_CenterHelp2:
+	msgbox EmeraldChampions_Text_CenterHelpLesson2, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_EventScript_CenterHelp3:
+	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
+	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_EventScript_CenterHelp4:
+	msgbox EmeraldChampions_Text_CenterHelpLesson4, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_EventScript_CenterHelp5:
+	msgbox EmeraldChampions_Text_CenterHelpLesson5, MSGBOX_DEFAULT
+	msgbox EmeraldChampions_Text_CenterHelpLegends, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_EventScript_CenterHelp6:
+	msgbox EmeraldChampions_Text_CenterHelpLesson6, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterGuideHelp
+
+EmeraldChampions_Text_CenterGuideHowThingsWork:
+	.string "How Things Work$"
+
+EmeraldChampions_Text_CenterHelpTopic0:
+	.string "Moves & HMs$"
+
+EmeraldChampions_Text_CenterHelpTopic1:
+	.string "Levels & Stats$"
+
+EmeraldChampions_Text_CenterHelpTopic2:
+	.string "Shops & Held Items$"
+
+EmeraldChampions_Text_CenterHelpTopic3:
+	.string "Travel Tools$"
+
+EmeraldChampions_Text_CenterHelpTopic4:
+	.string "Megas & Forms$"
+
+EmeraldChampions_Text_CenterHelpTopic5:
+	.string "Finding Pokémon$"
+
+EmeraldChampions_Text_CenterHelpTopic6:
+	.string "Berries & Harvest$"
+
+EmeraldChampions_Text_CenterHelpTopic7:
+	.string "Back$"
+
+EmeraldChampions_Text_CenterHelpLesson0:
+	.string "Our Move Tutor teaches any move\n"
+	.string "your Pokémon can legally learn,\l"
+	.string "for free. No machines needed!\p"
+	.string "For special moves other tutors\n"
+	.string "can't teach, visit the Iconic\l"
+	.string "Move Tutor in Mauville. His\l"
+	.string "neighbor has the full catalogue.\p"
+	.string "In a move list, START opens\n"
+	.string "type and category filters.\l"
+	.string "A applies; B cancels the filter.\p"
+	.string "Leveling and evolving never\n"
+	.string "change moves. Visit the tutor\l"
+	.string "whenever you change your team.\p"
+	.string "For field HMs, earn the license\n"
+	.string "and Badge, and bring a Pokémon\l"
+	.string "able to learn that move.\p"
+	.string "It needn't know the move. Your\n"
+	.string "four battle moves stay free!$"
+
+EmeraldChampions_Text_CenterHelpLesson1:
+	.string "EVs strengthen a Pokémon's stats.\n"
+	.string "New partners arrive with a full,\l"
+	.string "balanced spread, so no grinding!\p"
+	.string "They start with most in HP and\n"
+	.string "the rest across the other stats.\l"
+	.string "Battling won't add more.\p"
+	.string "Our tutor lets you plan a whole\n"
+	.string "spread for ¥500. Unchanged plans\l"
+	.string "are free; cancelling costs nothing.\p"
+	.string "UP/DOWN picks a row. LEFT/RIGHT\n"
+	.string "adjusts by 4; L/R adjusts by 64.\p"
+	.string "SELECT clears; START fills a row.\n"
+	.string "Watch the real stat preview,\l"
+	.string "then confirm the whole spread.\p"
+	.string "Each stat can hold 252 EVs;\n"
+	.string "all six share a limit of 510.\p"
+	.string "Switch Abilities for free in\n"
+	.string "the Pokémon party menu.\p"
+	.string "New partners start with perfect\n"
+	.string "IVs. Ivy in Fallarbor\l"
+	.string "can lower Attack or Speed, or\l"
+	.string "change Hidden Power's type.\p"
+	.string "Bring Bottle Caps for Ivy.\n"
+	.string "Slateport's Pokéblock chef can\l"
+	.string "change Nature for one Berry\l"
+	.string "of the kind he requests.$"
+
+EmeraldChampions_Text_CenterHelpLesson2:
+	.string "Our shop clerk sells Poké Balls\n"
+	.string "and medicine under Supplies.\l"
+	.string "Stock grows with your Badges.\p"
+	.string "Choose Held Items for equipment.\n"
+	.string "Find an item on your journey,\l"
+	.string "and the clerk sells more.\p"
+	.string "Catching certain Pokémon also\n"
+	.string "unlocks their special equipment.\p"
+	.string "Give held items to your Pokémon\n"
+	.string "before battle. You can't open\l"
+	.string "the Bag in Trainer battles.$"
+
+EmeraldChampions_Text_CenterHelpLesson4:
+	.string "Norman gives the Mega Ring when\n"
+	.string "you have four Badges and visit\l"
+	.string "him to challenge his Gym.\p"
+	.string "Give a Pokémon its matching\n"
+	.string "Mega Stone. In battle, press\l"
+	.string "START before choosing its move.\p"
+	.string "You can Mega Evolve one Pokémon\n"
+	.string "per battle. Its form lasts\l"
+	.string "until the battle ends.\p"
+	.string "Butterfree, Flygon and Milotic\n"
+	.string "can Mega Evolve here, too!\l"
+	.string "Ask about local Things to Do\l"
+	.string "and explore for their stones.\p"
+	.string "Baxcalibur and Dragonite have\n"
+	.string "Mega forms here, too. The Berry\l"
+	.string "Master on Route 123 rewards\l"
+	.string "tree harvests with their stones.\p"
+	.string "With a Mega Ring, our clerk\n"
+	.string "opens Form Items. Tools are\l"
+	.string "free; held form items go on\l"
+	.string "sale once you catch the Pokémon.\p"
+	.string "Some forms use an item; others\n"
+	.string "use the party menu. Read each\l"
+	.string "tool's description.$"
+
+EmeraldChampions_Text_CenterHelpLesson5:
+	.string "DexNav and the PokéNav atlas\n"
+	.string "show the Pokémon available now,\l"
+	.string "even ones you haven't seen.\p"
+	.string "Story progress opens new\n"
+	.string "encounters. Check again after\l"
+	.string "earning Badges and helping people.\p"
+	.string "Tools and field licenses open\n"
+	.string "more methods. Bring a partner\l"
+	.string "able to use the needed field move.\p"
+	.string "A started search is remembered.\n"
+	.string "R repeats it in the field, unless\l"
+	.string "an item is assigned to R.\p"
+	.string "The 15-second countdown turns\n"
+	.string "red in the last five seconds.\p"
+	.string "DexNav chains improve shiny and\n"
+	.string "Pokérus chances, not levels,\l"
+	.string "IVs or moves. Birch can repeat\l"
+	.string "his hunting lesson at his lab.$"
+
+EmeraldChampions_Text_CenterHelpLegends:
+	.string "Storm visitors appear on the\n"
+	.string "roster, but can't be searched\l"
+	.string "with DexNav.\p"
+	.string "Meet them through ordinary\n"
+	.string "wild encounters. The Weather\l"
+	.string "Institute tracks the storms.\p"
+	.string "Your party can hold only one\n"
+	.string "Legendary, Mythical, Ultra Beast\l"
+	.string "or Paradox Pokémon in total.\p"
+	.string "Once you catch one, that Pokémon\n"
+	.string "stops appearing in the wild.\p"
+	.string "A legend met face to face is\n"
+	.string "one of a kind. Save first! If\l"
+	.string "it faints, it's gone for good.\p"
+	.string "Running lets you return later.\n"
+	.string "Ask about Rare Pokémon for\l"
+	.string "local leads.$"
+
+EmeraldChampions_Text_CenterHelpLesson6:
+	.string "The flower shop on Route 104\n"
+	.string "gives a Wailmer Pail and a\l"
+	.string "Harvest Pouch.\p"
+	.string "The pouch shows your harvest\n"
+	.string "and each reward's requirements.\l"
+	.string "Show it to the Berry Master\l"
+	.string "on Route 123 to claim rewards.\p"
+	.string "Only Berries picked from trees\n"
+	.string "add harvest credit. Bought\l"
+	.string "Berries can be planted first.\p"
+	.string "Rewards use the pouch's count;\n"
+	.string "the Berries in your Bag stay\l"
+	.string "safe.$"
 
 EmeraldChampions_Text_CenterGuideAsk:
 	.string "What would you like to know?$"
 
 EmeraldChampions_Text_CenterGuideWhereToGo:
-	.string "Where to Go$"
+	.string "Repeat Next Step$"
+
+EmeraldChampions_Text_CenterGuideExactlyHow:
+	.string "Tell Me Exactly How$"
 
 EmeraldChampions_Text_CenterGuideRarePokemon:
 	.string "Rare Pokémon$"
@@ -808,8 +1044,10 @@ EmeraldChampions_Text_HarvestMeetCelebi:
 	.string "can come back without more Berries.\p"
 	.string "Would you like to meet it now?$"
 EmeraldChampions_Text_HarvestHelp:
-	.string "Shop clerks sell every Berry. They\n"
-	.string "work when a Pokémon holds them.\p"
+	.string "Find Berry seeds on your journey.\n"
+	.string "The flower shop gives some daily.\p"
+	.string "Berries work when a Pokémon\n"
+	.string "holds them in battle.\p"
 	.string "Each Berry you pick from a tree goes\n"
 	.string "into your Bag and this pouch's count.\p"
 	.string "Trees ripen within four hours and\n"

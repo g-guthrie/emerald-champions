@@ -231,6 +231,13 @@ LavaridgeTown_EventScript_EnteredHotSprings:: @ 81EA70B
 	incrementgamestat GAME_STAT_ENTERED_HOT_SPRINGS
 	end
 
+LavaridgeTown_EventScript_PokerusSoakComplete::
+	lockall
+	playse SE_USE_ITEM
+	msgbox LavaridgeTown_Text_PokerusSoakComplete, MSGBOX_DEFAULT
+	releaseall
+	end
+
 LavaridgeTown_EventScript_ExpertM:: @ 81EA70E
 	msgbox LavaridgeTown_Text_HotSpringsNeverRunDry, MSGBOX_NPC
 	end
@@ -248,7 +255,27 @@ LavaridgeTown_EventScript_HotSpringsOldWoman1:: @ 81EA729
 	end
 
 LavaridgeTown_EventScript_HotSpringsOldWoman2:: @ 81EA732
-	msgbox LavaridgeTown_Text_HotSpringsClaims, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox LavaridgeTown_Text_HotSpringsClaims, MSGBOX_DEFAULT
+LavaridgeTown_EventScript_ChooseSpringPartner:
+	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, LavaridgeTown_EventScript_SpringExit
+	copyvar VAR_0x8008, VAR_0x8004
+	special BufferHotSpringPokerusPreview
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_SpringNotReady
+	msgbox gStringVar4, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_ChooseSpringPartner
+	copyvar VAR_0x8004, VAR_0x8008
+	special ApplyHotSpringPokerusTreatment
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_SpringNotReady
+	msgbox LavaridgeTown_Text_PokerusTreatmentDone, MSGBOX_DEFAULT
+	goto LavaridgeTown_EventScript_ChooseSpringPartner
+LavaridgeTown_EventScript_SpringNotReady:
+	msgbox LavaridgeTown_Text_PokerusNotReady, MSGBOX_DEFAULT
+	goto LavaridgeTown_EventScript_ChooseSpringPartner
+LavaridgeTown_EventScript_SpringExit:
+	release
 	end
 
 LavaridgeTown_EventScript_ExpertF:: @ 81EA73B
@@ -424,17 +451,44 @@ LavaridgeTown_Text_BatheInHotSpringsEveryDay: @ 81EAF9B
 	.string "Gym Leader like Flannery.$"
 
 LavaridgeTown_Text_IfPokemonInHotSprings: @ 81EB003
-	.string "If people put Pokémon in hot springs,\n"
-	.string "it might be seriously strange.\p"
-	.string "Why, it might be an electric bath, or\n"
-	.string "a bubble bath, or even a lava bath…$"
+	.string "My grandmother brought me here\n"
+	.string "when I was no taller than you.\p"
+	.string "We'd sit until the stars came out.\n"
+	.string "She always wanted a little longer.\p"
+	.string "Now I'm the one who never wants\n"
+	.string "to get out.$"
 
 LavaridgeTown_Text_HotSpringsClaims: @ 81EB092
-	.string "They're claiming that these hot springs\n"
-	.string "are good for calming nervous tension\l"
-	.string "and relieving aching muscles.\p"
-	.string "And for solving romantic problems,\n"
-	.string "and even attracting money…$"
+	.string "Any partner that has had Pokérus\n"
+	.string "can prepare for my treatment.\p"
+	.string "Walk 25 steps in the warm water\n"
+	.string "without stepping out, then return.\p"
+	.string "I'll show its stats before you choose.\n"
+	.string "Treatment ends spreading forever.$"
+
+LavaridgeTown_Text_PokerusSoakComplete:
+	.string "Your partners with past Pokérus\n"
+	.string "are ready for treatment!\p"
+	.string "Speak to the woman on the right\n"
+	.string "inside the spring. She'll preview\l"
+	.string "each partner before you choose.\p"
+	.string "Soaking hasn't changed their stats\n"
+	.string "or remaining chances to spread.$"
+
+LavaridgeTown_Text_PokerusNotReady:
+	.string "Choose a partner that has had Pokérus\n"
+	.string "and finished its 25-step soak.\p"
+	.string "Already treated partners need\n"
+	.string "no further treatment.$"
+
+LavaridgeTown_Text_PokerusTreatmentDone:
+	.string "Treatment complete! Its Nature's\n"
+	.string "favored stat keeps its 15% bonus.\p"
+	.string "The stat its Nature normally lowers\n"
+	.string "now gets a 5% bonus instead.\p"
+	.string "Both affected stats are gold.\n"
+	.string "Neutral Natures stay neutral.\l"
+	.string "Its recovered mark is red now.$"
 
 LavaridgeTown_Text_TownSign: @ 81EB12B
 	.string "Lavaridge Town\p"

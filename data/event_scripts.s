@@ -1006,9 +1006,9 @@ gText_ComeBackWithSecretPower::
 
 gText_PokerusExplanation::
 	.string "Your Pokémon has Pokérus!\n"
-	.string "Its nature boost is now doubled.\p"
+	.string "Its nature bonus is now stronger.\p"
 	.string "A helpful nature raises its stat\n"
-	.string "by 20% instead of 10%.\p"
+	.string "by 15% instead of 10%.\p"
 	.string "The lowered stat stays the same.\n"
 	.string "Neutral natures gain no boost.\p"
 	.string "This lasts after recovery and\n"

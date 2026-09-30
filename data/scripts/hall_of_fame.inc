@@ -1,7 +1,7 @@
 EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 	special SetChampionSaveWarp
 	setflag FLAG_IS_CHAMPION
-	call EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries
+	call EverGrandeCity_HallOfFame_EventScript_RecordDeoxysClearance
 	compare VAR_FOSSIL_MANIAC_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady
 	clearflag FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS
@@ -28,11 +28,9 @@ EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent
 	return
 
-EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
+EverGrandeCity_HallOfFame_EventScript_RecordDeoxysClearance:: @ 8271829
 	call_if_set FLAG_DEFEATED_DEOXYS, Common_EventScript_RecordDeoxysFinale
-	@ Only Deoxys stirs again after a League win (finale retry); a knocked-out
-	@ island legend stays lost, as in the vanilla games.
-	clearflag FLAG_DEFEATED_DEOXYS
+	@ Preserve a knockout on League reentry; it still clears the finale step.
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ReadyCynthiaEvent::

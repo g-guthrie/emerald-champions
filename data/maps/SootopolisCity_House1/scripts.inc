@@ -6,7 +6,7 @@ SootopolisCity_House1_EventScript_BrickBreakBlackBelt:: @ 822694D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM75, SootopolisCity_House1_EventScript_ReceivedBrickBreak
 	msgbox SootopolisCity_House1_Text_DevelopedThisTM, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM75
@@ -31,11 +31,11 @@ SootopolisCity_House1_EventScript_Kecleon:: @ 822698E
 
 SootopolisCity_House1_Text_DevelopedThisTM: @ 82269A1
 	.string "Hm! You carry yourself like a\n"
-	.string "fighter. Take this Rare Candy!$"
+	.string "fighter. Take this Nugget!$"
 
 SootopolisCity_House1_Text_ExplainBrickBreak: @ 8226A13
-	.string "One candy, one level. No higher\n"
-	.string "than your Badges allow!\p"
+	.string "Sell that Nugget for ¥2,500.\n"
+	.string "Spend it on equipment for your team!\p"
 	.string "For new techniques, visit the\n"
 	.string "Move Tutor. Hwah!$"
 

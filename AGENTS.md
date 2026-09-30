@@ -1,4 +1,4 @@
-# Emerald Champions — standing rules
+# Inclement Emerald 2 — standing rules
 
 Source and native runtime behavior are the only ground truth. This repository
 keeps no docs, ledgers, handoffs or progress notes: they drift. Do not create
@@ -32,9 +32,9 @@ or data.
   Fly-capable Pokémon from party or PC. Leveler raises the party to the current
   cap. Battles grant no experience; leveling and evolving never change moves.
   Native ability switching.
-- Inclement's stat buffs and ability changes apply to player-owned and wild
-  Pokémon only, never lowering a stat; trainer-owned Pokémon and tuned teams
-  never change. On Easy only, authored Casual and Regular teams lose one
+- Inclement's species stat buffs and additional Ability slots apply to
+  player, wild, trainer and partner Pokémon alike. Existing authored teams
+  keep their chosen Abilities until deliberately retuned in playtesting. On every difficulty, authored Casual and Regular teams lose one
   additional level (minimum 1); other categories retain their levels. Base
   difficulty offsets live in `GetTrainerLevelReduction`; any
   text quoting them derives the numbers from it. Text is always Instant; there
@@ -52,7 +52,8 @@ or data.
   arrives with 252 HP / 52 Atk, Def, SpA, SpD / 50 Spe; owned Pokémon keep
   their chosen spread. Every Center move tutor plans a whole spread and
   applies it at once for a flat ¥500 (free when unchanged, nothing on
-  cancel). Evie in Fallarbor keeps her ¥2-per-EV service.
+  cancel). Evie in Fallarbor uses the same editor at ¥2 per added EV, with free
+  reductions. Both editors show real stat previews and direct row adjustment.
 - Steam Engine also makes Water never super effective on its holder.
 - AI: authored doubles teams and the shared planner are preserved. Opponents may
   know loadouts but never read the player's committed move, target, switch or
@@ -60,7 +61,8 @@ or data.
 - Every trainer must be beatable by a stage-legal team.
 - Wild encounters: ordinary table slots are at least 4%; Legendary/Mythical,
   Ultra Beast and Paradox slots are 5%. Feebas keeps its native tile rule.
-  Storm visitors take their own share, reducing the normal table's share.
+  Active storm visitors have a 25% encounter roll, reducing the normal table's
+  share. After they settle, their ordinary resident slots are 5%.
   Caught legend-class species stop spawning. Gates live in
   `src/data/pokemon/legendary_signs.h`; legend-class spawns arrive at the
   current cap with authored sets. One Legendary, Mythical, Ultra Beast or
@@ -77,12 +79,23 @@ or data.
 
 - DexNav chains are shiny/Pokérus hunting only. Above zero, search odds are
   chain percent shiny and half-chain percent Pokérus (cap 100); independent
-  rolls. Zero uses base odds. No search deadline or level/egg-move/IV rewards.
-  Search HUD shows icon/name, direction, Hold A, and Chain only above zero.
-- Pokérus permanently doubles a beneficial nature modifier (+10% to +20%);
-  neutral natures and the -10% drawback stay unchanged. It grants no EV bonus.
+  rolls. Zero uses base odds. Searches expire after 15 seconds, with a visible countdown
+  that turns red in the last five seconds. No level/egg-move/IV rewards.
+  Search HUD shows icon/name, direction, remaining seconds, Hold A, and Chain
+  only above zero.
+- Pokérus adds five percentage points to a beneficial nature modifier
+  (+10% to +15%);
+  ordinary recovery retains the -10% drawback. It grants no EV bonus.
   Direct infections have two total transmissions, one adjacent recipient per
   successful postbattle spread roll; recipients cannot spread. No daily decay.
   The benefit follows future nature changes and survives recovery and boxing.
   Summary stats use gold for the Pokérus-enhanced nature stat, retaining the
   native active/recovered markers; no spread-count or boost-percentage text.
+  After 25 consecutive steps in Lavaridge's hot-spring water, any party
+  Pokémon that has had Pokérus can receive treatment from the spring NPC.
+  Soaking preserves stats and transmission budgets; treatment is chosen per
+  Pokémon after an actual-stat preview. Special recovery gives the favored
+  nature stat +15% and the other nature stat +5%, both gold; its recovered
+  mark is red. Neutral natures
+  gain no bonus. Leaving the water resets soak progress. Special recovery ends
+  spreading and follows later nature changes, boxing and saving.

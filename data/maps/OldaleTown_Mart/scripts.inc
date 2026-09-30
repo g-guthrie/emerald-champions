@@ -56,6 +56,8 @@ OldaleTown_Mart_EventScript_FirstShopping::
 	closemessage
 	special StartInitialToolsBagTutorial
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Mart_EventScript_TourPending
+	call EventScript_PkmnCenterNurse_ExplainLeveler
+	msgbox gText_EmeraldChampionsLocalGuide, MSGBOX_DEFAULT
 	msgbox OldaleTown_Mart_Text_VisitCounter, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_OLDALE_MART_VISITING_NURSE, OldaleTown_Mart_Movement_ToCounter
@@ -142,6 +144,11 @@ OldaleTown_Mart_Text_ClerkLesson:
 	.string "its holder from Taunt.\p"
 	.string "Choose an item in your Bag, then\n"
 	.string "GIVE it to a Pokémon before battle.\p"
+	.string "With your Regenerator, a held Berry\n"
+	.string "its own holder eats in battle comes\l"
+	.string "back afterward.\p"
+	.string "Knock Off lasts only that battle.\n"
+	.string "Thief and Covet steal for good.\p"
 	.string "Browse an item's description before\n"
 	.string "buying. You can press B to leave.\p"
 	.string "For Poké Balls, medicine, or more\n"

@@ -783,7 +783,8 @@
       "x": 26,
       "y": 120,
       "elevation": 3,
-      "item": "ITEM_FULL_HEAL",
+      "item": "ITEM_NET_BALL",
+      "quantity": 3,
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_FULL_HEAL"
     },
     {

@@ -207,7 +207,7 @@ Route128_Text_MaxieResposibilityFallsToArchieAndMe: @ 81F6F1E
 	.string "But neither can we stand by and\n"
 	.string "just watch helplessly.\p"
 	.string "The responsibility for putting an end\n"
-	.string "to this falls to Archie and I…$"
+	.string "to this falls to Archie and me…$"
 
 Route128_Text_MaxieThisDefiesBelief: @ 81F704F
 	.string "Maxie: This defies belief…\p"

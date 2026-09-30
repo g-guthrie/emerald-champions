@@ -137,6 +137,7 @@ int main(void) {
                 for (u32 slot = 0; slot < MAX_MON_MOVES; slot++) expected[preset->moves[slot]] = TRUE;
             }
         }
+        if (expected[MOVE_HAIL]) expected[MOVE_SNOWSCAPE] = TRUE;
         expected[MOVE_NONE] = FALSE;
         u32 count = collect(&mon);
         for (u32 move = 1; move < MOVES_COUNT_ALL; move++) assert(offered[move] == expected[move]);

@@ -67,7 +67,7 @@ VerdanturfTown_WandasHouse_EventScript_WandaGardevoirite::
 	applymovement 5, Common_Movement_Delay48
 	waitmovement 0
 	msgbox VerdanturfTown_WandasHouse_Text_ReceiveGardevoirite, MSGBOX_DEFAULT
-	giveitem ITEM_GARDEVOIRITE
+	giveuniqueitem ITEM_GARDEVOIRITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_WANDA_GARDEVOIRITE

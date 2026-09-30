@@ -45,6 +45,7 @@ bool32 CanReceiveLanetteDolls(void);
 bool32 CanReceiveBerryPair(void);
 bool32 CanReceiveFrontierReward(void);
 bool32 CanReceiveLatiStones(void);
+bool32 CanReceiveShellBellReward(void);
 bool32 CanReceiveNormanMegaGift(void);
 bool32 CanReceiveGoGogglesGift(void);
 void GiveEmeraldChampionsStarterBattleItems(void);
@@ -59,6 +60,9 @@ u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
 
 void BufferEmeraldChampionsBondingPreview(void);
 void ApplyEmeraldChampionsBonding(void);
+void BufferChosenMonHiddenPowerPreview(void);
+void ShowChosenMonHiddenPowerPreview(void);
+void HideChosenMonHiddenPowerPreview(void);
 
 bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item);
 
@@ -93,5 +97,16 @@ u8 CountPlayerMuseumPaintings(void);
 bool32 IsTrainerRegistered(void);
 
 void CheckPlayerCaughtSpecies(void);
+
+void BufferPlannedEVRow(void);
+void BufferPlannedEVStatPrompt(void);
+void AdjustPlannedEV(void);
+void BufferPlannedEVSummary(void);
+void CheckPlannedEVSpreadChanged(void);
+void ApplyPlannedEVSpread(void);
+void SetPlannedEVPricing(void);
+void IsEvieEVPlan(void);
+void BufferPlannedEVConfirmation(void);
+void PayForPlannedEVSpread(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

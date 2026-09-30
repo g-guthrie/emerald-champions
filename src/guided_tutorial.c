@@ -30,7 +30,7 @@ static EWRAM_DATA u8 sRivalTutorialPhase = DEMO_NONE;
 static EWRAM_DATA u16 sRivalTutorialFrames = 0;
 static EWRAM_DATA u8 sRivalSummaryPage = 0;
 static EWRAM_DATA u8 sRivalSavedChain = 0;
-static EWRAM_DATA u16 sRivalSavedRegistration = 0;
+static EWRAM_DATA u16 sRivalSavedSearchTarget = 0;
 static EWRAM_DATA bool8 sReturnRivalToLab = FALSE;
 
 bool32 IsRivalDexNavTutorialActive(void)
@@ -45,7 +45,7 @@ void PrepareRivalDexNavTutorial(void)
     SavePlayerParty();
     sReturnRivalToLab = VarGet(VAR_PETALBURG_GYM_STATE) == 0;
     sRivalSavedChain = gSaveBlock3Ptr->dexNavChain;
-    sRivalSavedRegistration = VarGet(DN_VAR_SPECIES);
+    sRivalSavedSearchTarget = VarGet(DN_VAR_SPECIES);
     gSaveBlock3Ptr->dexNavChain = 0;
     ZeroPlayerPartyMons();
     enum Species species = GetStarterPokemon(GetEmeraldChampionsRivalStarterIndex());
@@ -217,7 +217,7 @@ void FinishRivalDexNavTutorial(void)
     EndDexNavSearch();
     LoadPlayerParty();
     gSaveBlock3Ptr->dexNavChain = sRivalSavedChain;
-    VarSet(DN_VAR_SPECIES, sRivalSavedRegistration);
+    VarSet(DN_VAR_SPECIES, sRivalSavedSearchTarget);
     gDexNavSpecies = SPECIES_NONE;
     gPlayerAvatar.creeping = FALSE;
     if (sReturnRivalToLab && FlagGet(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE))

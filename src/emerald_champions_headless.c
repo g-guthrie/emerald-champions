@@ -22,6 +22,7 @@
 #include "event_data.h"
 #include "item_use.h"
 #include "berry.h"
+#include "berry_powder.h"
 #include "mega_stone_rewards.h"
 #include "constants/quest_states.h"
 #include "constants/berry.h"
@@ -87,6 +88,7 @@
 #include "constants/pokedex.h"
 #include "constants/region_map_sections.h"
 #include "constants/species.h"
+#include "constants/tv.h"
 
 EWRAM_DATA volatile u32 gEcHeadlessFixtureScenario = EC_HEADLESS_SCENARIO_NONE;
 EWRAM_DATA volatile u32 gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_NONE;
@@ -1251,6 +1253,60 @@ static bool32 IsHeadlessSummaryStateObserved(void)
     return FALSE;
 }
 
+// Synthetic Pokémon-economy prerequisites; all gifts still run through NPC
+// input. 0: Cosmog pair, 1: pair with full PC, 2: pending pair with two free PC
+// slots, 3: Hoenn Dex completion, 4: pending completion gift with a full pocket.
+static void PrepareHeadlessEconomyPokemon(void)
+{
+    ClearBag();
+    ZeroPlayerPartyMons();
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    for (u32 badge = 0; badge < 8; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_SYS_GAME_CLEAR);
+    FlagSet(FLAG_IS_CHAMPION);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_ADVENTURE_STARTED);
+    FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
+    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
+    VarSet(VAR_BIRCH_LAB_STATE, 5);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 85, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    if (gEcHeadlessFixtureParam <= 2)
+    {
+        VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, gEcHeadlessFixtureParam == 2 ? 7 : 1);
+        if (gEcHeadlessFixtureParam == 1 || gEcHeadlessFixtureParam == 2)
+        {
+            for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+                for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+                    gPokemonStoragePtr->boxes[box][slot] = gParties[B_TRAINER_PLAYER][0].box;
+            if (gEcHeadlessFixtureParam == 2)
+                for (u32 slot = 0; slot < 2; slot++)
+                    memset(&gPokemonStoragePtr->boxes[TOTAL_BOXES_COUNT - 1][IN_BOX_COUNT - 1 - slot], 0, sizeof(struct BoxPokemon));
+        }
+    }
+    else
+    {
+        // Follow the native Hoenn-to-National conversion, never guessed save
+        // offsets or a flag pretending to mean "completed collection".
+        for (u32 dex = 1; dex < HOENN_DEX_COUNT; dex++)
+        {
+            enum NationalDexOrder national = HoennToNationalOrder(dex);
+            GetSetPokedexFlag(national, FLAG_SET_SEEN);
+            GetSetPokedexFlag(national, FLAG_SET_CAUGHT);
+        }
+        VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, gEcHeadlessFixtureParam == 4 ? 5 : 3);
+        if (gEcHeadlessFixtureParam == 4)
+        {
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GOLD_BOTTLE_CAP)];
+            for (u32 slot = 0; slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_BOTTLE_CAP, MAX_BAG_ITEM_CAPACITY);
+        }
+    }
+    LoadHeadlessMap(MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, gEcHeadlessFixtureParam == 3 ? 12 : 5);
+}
+
 // Host queries are read-only and independent of battle automation. Run them
 // after the fixture observer so even observers with an early return can reply.
 static void ProcessHeadlessQuery(void)
@@ -1258,7 +1314,7 @@ static void ProcessHeadlessQuery(void)
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_NONE
      || gSaveBlock1Ptr == NULL || gSaveBlock2Ptr == NULL
      || gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_NONE
-     || gEcHeadlessCampaignQueryKind > EC_HEADLESS_CAMPAIGN_QUERY_HARVEST)
+     || gEcHeadlessCampaignQueryKind > EC_HEADLESS_CAMPAIGN_QUERY_COINS)
         return;
 
     if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
@@ -1271,11 +1327,25 @@ static void ProcessHeadlessQuery(void)
         gEcHeadlessCampaignQueryValue = GetItemPrice(gEcHeadlessCampaignQueryId);
     else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
         gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_COINS)
+        gEcHeadlessCampaignQueryValue = GetCoins();
     else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
         gEcHeadlessCampaignQueryValue = gSaveBlock2Ptr->frontier.battlePoints;
     else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
         gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
             ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_COUNT)
+        gEcHeadlessCampaignQueryValue = CalculatePlayerPartyCount();
+    else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OWNED_SPECIES_COUNT)
+    {
+        gEcHeadlessCampaignQueryValue = 0;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            gEcHeadlessCampaignQueryValue += GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == gEcHeadlessCampaignQueryId;
+        if (gPokemonStoragePtr != NULL)
+            for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+                for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+                    gEcHeadlessCampaignQueryValue += GetBoxMonDataAt(box, slot, MON_DATA_SPECIES) == gEcHeadlessCampaignQueryId;
+    }
     else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP)
         gEcHeadlessCampaignQueryValue = GetPlayerLevelCapForSpecies(gEcHeadlessCampaignQueryId);
     else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
@@ -1335,6 +1405,19 @@ static void ObserveHeadlessFixture(void)
     EmeraldChampionsStudioPoll();
     EmeraldChampionsAgentPrepPoll();
     EmeraldChampionsAgentBattlePoll();
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ECONOMY_POKEMON
+     && gEcHeadlessFixtureTrigger == 2 && gMain.callback2 == CB2_Overworld
+     && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+    {
+        // Diagnostic room-making only; preserve the actual pending receipt
+        // and let the next face-to-face NPC interaction deliver the reward.
+        if (gEcHeadlessFixtureParam == 1)
+            for (u32 slot = 0; slot < 2; slot++)
+                memset(&gPokemonStoragePtr->boxes[TOTAL_BOXES_COUNT - 1][IN_BOX_COUNT - 1 - slot], 0, sizeof(struct BoxPokemon));
+        else if (gEcHeadlessFixtureParam == 4)
+            BagPocket_SetSlotItemIdAndCount(&gBagPockets[GetItemPocket(ITEM_GOLD_BOTTLE_CAP)], 0, ITEM_NONE, 0);
+        gEcHeadlessFixtureTrigger = 0;
+    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
      && (gEcHeadlessFixtureParam == 275 || gEcHeadlessFixtureParam == 276)
      && gMain.callback2 == CB2_Overworld && !gEcHeadlessFixtureObservedResult)
@@ -2363,11 +2446,75 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_OPTIONS:
         SetMainCallback2(CB2_InitOptionMenu);
         break;
+    case EC_HEADLESS_SCENARIO_ECONOMY_POKEMON:
+        PrepareHeadlessEconomyPokemon();
+        break;
     case EC_HEADLESS_SCENARIO_ECONOMY_SHOPS:
         // Synthetic shop prerequisites; all purchases use native NPC/menu input.
         ClearBag();
         memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
         SetMoney(&gSaveBlock1Ptr->money, gEcHeadlessFixtureParam == 0 ? 6000 : 20000);
+        if (gEcHeadlessFixtureParam == 14 || gEcHeadlessFixtureParam == 15)
+        {
+            // A fresh optional starter receipt with enough Coins for two;
+            // native NPC interaction must charge once and refuse the repeat.
+            ZeroPlayerPartyMons();
+            memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 30, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            FlagSet(FLAG_BADGE01_GET);
+            FlagSet(FLAG_BADGE02_GET);
+            FlagClear(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
+            FlagClear(FLAG_RECEIVED_GAME_CORNER_GENESECT);
+            VarSet(VAR_STARTER_GEN, 3);
+            VarSet(VAR_STARTER_MON, 0);
+            VarSet(VAR_EC_SECOND_STARTER, 2);
+            VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
+            if (gEcHeadlessFixtureParam == 15)
+                for (u32 badge = 0; badge < 8; badge++)
+                    FlagSet(FLAG_BADGE01_GET + badge);
+            SetCoins(gEcHeadlessFixtureParam == 15 ? 6000 : 1000);
+            AddBagItem(ITEM_COIN_CASE, 1);
+            LoadHeadlessMap(MAP_MAUVILLE_CITY_GAME_CORNER,
+                gEcHeadlessFixtureParam == 15 ? 14 : 12, 4);
+            break;
+        }
+        if (gEcHeadlessFixtureParam == 12 || gEcHeadlessFixtureParam == 13)
+        {
+            // Species-equipment first stock, before/after its native caught
+            // records. The clerk and every purchase remain normal NPC input.
+            memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
+            memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
+            FlagSet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS);
+            if (gEcHeadlessFixtureParam == 12)
+            {
+                GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_CHANSEY), FLAG_SET_CAUGHT);
+                GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_SILVALLY), FLAG_SET_CAUGHT);
+            }
+            LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 12, 7);
+            break;
+        }
+        if (gEcHeadlessFixtureParam >= 9 && gEcHeadlessFixtureParam <= 11)
+        {
+            // Explicit TV-sale prerequisites; the actual NPC, prices and
+            // transactions still run through normal field and Mart input.
+            memset(gSaveBlock1Ptr->pokeNews, 0, sizeof(gSaveBlock1Ptr->pokeNews));
+            gSaveBlock1Ptr->pokeNews[0].kind = POKENEWS_SLATEPORT;
+            gSaveBlock1Ptr->pokeNews[0].state = gEcHeadlessFixtureParam == 9
+                ? POKENEWS_STATE_ACTIVE : POKENEWS_STATE_INACTIVE;
+            FlagClear(FLAG_SYS_CLOCK_SET);
+            VarSet(VAR_SLATEPORT_CITY_STATE, 0);
+            VarSet(VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 0);
+            if (gEcHeadlessFixtureParam == 11)
+            {
+                GiveBerryPowder(1000);
+                LoadHeadlessMap(MAP_SLATEPORT_CITY, 10, 37);
+            }
+            else
+                LoadHeadlessMap(MAP_SLATEPORT_CITY, 5, 48);
+            break;
+        }
         if (gEcHeadlessFixtureParam == 0)
             LoadHeadlessMap(MAP_RUSTBORO_CITY_MART, 5, 3);
         else
@@ -4396,11 +4543,12 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     // Field moves without a taught HM: the party member could learn the move
     // but does not know it, the badge and HM flags are set, and
-    // the player stands facing the obstacle. The scenario taps UP, A, then A on
+    // the player stands beside the obstacle. The scenario faces it, then taps A on
     // the Yes/No, and the observer latches the "used <move>!" showcase.
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_CUT:
         PrepareHeadlessFieldMoveParty(SPECIES_ZIGZAGOON, FLAG_BADGE01_GET, FLAG_RECEIVED_HM_CUT);
-        LoadHeadlessMap(MAP_ROUTE104, 35, 23);
+        // West of the tree; the tile south of it is an impassable tree canopy.
+        LoadHeadlessMap(MAP_ROUTE104, 34, 22);
         break;
     case EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH:
         PrepareHeadlessFieldMoveParty(SPECIES_ZIGZAGOON, FLAG_BADGE03_GET, FLAG_RECEIVED_HM_ROCK_SMASH);

@@ -709,7 +709,7 @@ Route113_Text_ToriDefeat:
 
 Route113_Text_ToriPostBattle:
 	.string "Tori: How much ash do we have?\n"
-	.string "Enough for a White Flute, I hope.$"
+	.string "Enough for a Yellow Flute, I hope.$"
 
 Route113_Text_ToriNotEnoughMons:
 	.string "Tori: We want to battle 2-on-2.\n"
@@ -725,7 +725,7 @@ Route113_Text_TiaDefeat:
 
 Route113_Text_TiaPostBattle:
 	.string "Tia: We have a lot of ashes!\n"
-	.string "I think enough for a White Flute!$"
+	.string "I think enough for a Yellow Flute!$"
 
 Route113_Text_TiaNotEnoughMons:
 	.string "Tia: We want to battle 2-on-2.\n"

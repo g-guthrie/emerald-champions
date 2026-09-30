@@ -23,7 +23,6 @@
 #include "ow_abilities.h"
 #include "item.h"
 #include "regions.h"
-#include "malloc.h"
 #include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -109,7 +108,8 @@ static const u8 *const sCompatibilityMessages[] =
     gDaycareText_PlayOther
 };
 
-static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in Japanese)
+// MON_DATA_NICKNAME reads the full field, including bytes after EOS.
+static const u8 sJapaneseEggNickname[POKEMON_NAME_BUFFER_SIZE] = _("タマゴ");
 
 u8 *GetMonNicknameVanilla(struct Pokemon *mon, u8 *dest)
 {
@@ -244,34 +244,28 @@ void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon)
     CalculatePlayerPartyCount();
 }
 
-static void StorePokemonInEmptyDaycareSlot(struct Pokemon *mon, struct DayCare *daycare)
-{
-    s8 slotId = Daycare_FindEmptySpot(daycare);
-    assertf(slotId >= 0, "Trying to store pokemon in already full daycare")
-    {
-        return;
-    }
-    StorePokemonInDaycare(mon, &daycare->mons[slotId]);
-    // Transfer egg moves if there are at least 2 pokemon in the daycare
-    if (GetConfig(EGG_MOVE_TRANSFER) >= GEN_8 && slotId >= 1)
-        TransferEggMoves(daycare);
-}
-
 void StoreSelectedPokemonInDaycare(void)
 {
+    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
+    s8 slotId = Daycare_FindEmptySpot(daycare);
+    struct Pokemon boxedMon;
     struct Pokemon *mon;
+
+    // Check the destination before removing a selected Pokemon from the PC.
+    if (slotId < 0)
+        return;
     if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
     {
-        mon = Alloc(sizeof(struct Pokemon));
+        mon = &boxedMon;
         RemoveSelectedPcMon(mon);
     }
     else
     {
         mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
     }
-    StorePokemonInEmptyDaycareSlot(mon, &gSaveBlock1Ptr->daycare);
-    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
-        Free(mon);
+    StorePokemonInDaycare(mon, &daycare->mons[slotId]);
+    if (GetConfig(EGG_MOVE_TRANSFER) >= GEN_8 && slotId >= 1)
+        TransferEggMoves(daycare);
 }
 
 // Shifts the second daycare Pokémon slot into the first slot.
@@ -324,16 +318,12 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     return GetMonData(&pokemon, MON_DATA_SPECIES);
 }
 
-static u16 TakeSelectedPokemonMonFromDaycareShiftSlots(struct DayCare *daycare, u8 slotId)
-{
-    enum Species species = TakeSelectedPokemonFromDaycare(&daycare->mons[slotId]);
-    ShiftDaycareSlots(daycare);
-    return species;
-}
-
 u16 TakePokemonFromDaycare(void)
 {
-    return TakeSelectedPokemonMonFromDaycareShiftSlots(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    struct DayCare *daycare = &gSaveBlock1Ptr->daycare;
+    enum Species species = TakeSelectedPokemonFromDaycare(&daycare->mons[gSpecialVar_0x8004]);
+    ShiftDaycareSlots(daycare);
+    return species;
 }
 
 // Special: the shared slot for one Legendary, Mythical, Ultra Beast or

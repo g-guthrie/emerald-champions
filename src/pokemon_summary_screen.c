@@ -108,6 +108,7 @@
 
 #define MOVE_SELECTOR_SPRITES_COUNT 10
 #define TYPE_ICON_SPRITE_COUNT (MAX_MON_MOVES + 1)
+#define PSS_PAL_HOT_SPRING_POKERUS 10
 // for the spriteIds field in PokemonSummaryScreenData
 enum
 {
@@ -1462,6 +1463,9 @@ static bool8 DecompressGraphics(void)
         LoadPalette(gSummaryScreen_Pal + BG_PLTT_ID(6), BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         static const u16 gold[] = {RGB(12, 7, 0), RGB(25, 17, 0)};
         LoadPalette(gold, BG_PLTT_ID(9) + 14, sizeof(gold));
+        // Keep the recovered marker's background, changing only its ink to nature red.
+        LoadPalette(gSummaryScreen_Pal, BG_PLTT_ID(PSS_PAL_HOT_SPRING_POKERUS), PLTT_SIZE_4BPP);
+        LoadPalette(gSummaryScreen_Pal + BG_PLTT_ID(6) + 5, BG_PLTT_ID(PSS_PAL_HOT_SPRING_POKERUS) + 1, PLTT_SIZEOF(1));
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
@@ -2852,16 +2856,16 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
 
 static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mon has been cured of pokerus
 {
+    u16 tile = 0x81A;
+
     if (ShouldPokemonShowCuredPokerus(mon))
     {
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x2C;
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x2C;
+        tile = 0x2C;
+        if (HasHotSpringPokerus(mon))
+            tile |= PSS_PAL_HOT_SPRING_POKERUS << 12;
     }
-    else
-    {
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x81A;
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x81A;
-    }
+    sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = tile;
+    sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = tile;
     ScheduleBgCopyTilemapToVram(3);
 }
 
@@ -3635,9 +3639,11 @@ static void BufferStat(u8 *dst, enum Stat statIndex, u32 stat, u32 strId, u32 n)
 
     if (statIndex == 0 || !P_SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.nature].statUp == gNaturesInfo[sMonSummaryScreen->summary.nature].statDown)
         txtPtr = StringCopy(dst, sTextNatureNeutral);
+    else if (sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_STATS
+        && IsPokerusNatureBoosted(&sMonSummaryScreen->currentMon, statIndex))
+        txtPtr = StringCopy(dst, sTextNaturePokerus);
     else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.nature].statUp)
-        txtPtr = StringCopy(dst, sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_STATS
-            && IsPokerusNatureBoosted(&sMonSummaryScreen->currentMon, statIndex) ? sTextNaturePokerus : sTextNatureUp);
+        txtPtr = StringCopy(dst, sTextNatureUp);
     else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.nature].statDown)
         txtPtr = StringCopy(dst, sTextNatureDown);
     else

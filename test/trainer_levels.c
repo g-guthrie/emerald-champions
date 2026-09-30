@@ -67,7 +67,7 @@ TEST("EC trainer levels: wide offsets survive creation, Mega stats and both oppo
     gBattleTypeFlags = oldFlags;
 }
 
-TEST("EC trainer levels: Easy lowers every Casual and Regular party member only")
+TEST("EC trainer levels: every difficulty lowers Casual and Regular party members only")
 {
     static const struct { u16 id; bool8 reduced; } cases[] = {
         {TRAINER_TIANA, TRUE}, // Casual
@@ -101,7 +101,7 @@ TEST("EC trainer levels: Easy lowers every Casual and Regular party member only"
                 {
                     const struct TrainerMon *mon = &trainer->party[slot];
                     s32 expected = mon->useLevelOffset ? GetCampaignTrainerLevel(mon->levelOffset) : mon->lvl;
-                    if (difficulty == DIFFICULTY_EASY && cases[i].reduced)
+                    if (cases[i].reduced)
                         expected = max(1, expected - 1);
                     EXPECT_EQ(GetMonData(&party[slot], MON_DATA_LEVEL), expected);
                     EXPECT_EQ(GetMonData(&party[slot], MON_DATA_SPECIES), mon->species);
@@ -119,7 +119,7 @@ TEST("EC trainer levels: Easy lowers every Casual and Regular party member only"
     gBattleTypeFlags = oldFlags;
 }
 
-TEST("EC trainer levels: Easy reduction floors at one and does not affect partners")
+TEST("EC trainer levels: routine reduction floors at one and does not affect partners")
 {
     static const struct TrainerMon mons[] = {
         {.species = SPECIES_EEVEE, .lvl = 1, .gender = TRAINER_MON_RANDOM_GENDER},
@@ -133,15 +133,18 @@ TEST("EC trainer levels: Easy reduction floors at one and does not affect partne
     rng_value_t originalSeed = GeneratePartySeed(&withoutReduction);
     rng_value_t reducedSeed = GeneratePartySeed(&trainer);
     EXPECT_EQ(memcmp(&originalSeed, &reducedSeed, sizeof(originalSeed)), 0);
-    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    MakeTrainerGenerator(&generator, &trainer);
-    GenerateMonFromTrainerMon(&gParties[B_TRAINER_OPPONENT_A][0], &mons[0], &generator);
-    GenerateMonFromTrainerMon(&gParties[B_TRAINER_OPPONENT_A][1], &mons[1], &generator);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 1);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_LEVEL), 4);
-    MakePartnerGenerator(&generator, &trainer);
-    GenerateMonFromTrainerMon(&gParties[B_TRAINER_OPPONENT_A][1], &mons[1], &generator);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_LEVEL), 5);
+    for (u32 difficulty = DIFFICULTY_EASY; difficulty <= DIFFICULTY_HARD; difficulty++)
+    {
+        SetCurrentDifficultyLevel(difficulty);
+        MakeTrainerGenerator(&generator, &trainer);
+        GenerateMonFromTrainerMon(&gParties[B_TRAINER_OPPONENT_A][0], &mons[0], &generator);
+        GenerateMonFromTrainerMon(&gParties[B_TRAINER_OPPONENT_A][1], &mons[1], &generator);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), 1);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_LEVEL), 4);
+        MakePartnerGenerator(&generator, &trainer);
+        GenerateMonFromTrainerMon(&gParties[B_TRAINER_OPPONENT_A][1], &mons[1], &generator);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_LEVEL), 5);
+    }
     ZeroEnemyPartyMons();
     SetCurrentDifficultyLevel(oldDifficulty);
 }

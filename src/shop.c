@@ -42,6 +42,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/tv.h"
 
 #define TAG_SCROLL_ARROW   2100
 #define TAG_ITEM_ICON_BASE 9110 // immune to time blending
@@ -667,6 +668,12 @@ static u32 GetShopItemPrice(enum Item item)
 {
     if (IsEmeraldChampionsFreeCatalogueItem(item))
         return 0;
+    // The news advertises these two Balls at the Catching Guru's stall.
+    // IsPokeNewsActive also checks the map and clerk, so other shops keep
+    // their normal prices. Resale remains a quarter of the base price.
+    if ((item == ITEM_NET_BALL || item == ITEM_DIVE_BALL)
+        && IsPokeNewsActive(POKENEWS_SLATEPORT))
+        return GetItemPrice(item) / 2;
     return GetItemPrice(item);
 }
 

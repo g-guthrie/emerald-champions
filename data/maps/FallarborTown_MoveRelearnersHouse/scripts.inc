@@ -95,8 +95,11 @@ FallarborTown_Text_AnnoyingIntroPart6:
 	.string "Do you want me to explain them?$"
 
 FallarborTown_Text_AnnoyingIntroPart7:
-	.string "Evie: Right, here's the deal. For ¥2,\n"
-	.string "I'll increase a Pokémon's EVs by one.$"
+	.string "Evie: Adjust your partner's EV rows\n"
+	.string "and watch the actual stat previews.\p"
+	.string "I'll apply the whole spread together.\n"
+	.string "Added EVs cost ¥2 each;\l"
+	.string "reductions are free.$"
 
 FallarborTown_Text_AnnoyingIntroPart8:
 	.string "Ivy: Your Pokémon already have perfect\n"
@@ -109,241 +112,29 @@ FallarborTown_Text_AnnoyingIntroPart8:
 @@@@@@@@@@@@@@@@ Super Training Script @@@@@@@@@@@@@@@@
 
 FallarborTown_SuperTrainer::
-	lock
+	lockall
 	faceplayer
-	msgbox SuperTraining_Text_ChoosePokemon, MSGBOX_DEFAULT
-	special ChoosePartyMon
-	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge SuperTraining_Refuse
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq SuperTraining_Egg
-	bufferpartymonnick 0, VAR_0x8004
-	setvar VAR_EV_TRAINING_CURSOR, 0
-	msgbox SuperTraining_Text_TakeALookatEVs, MSGBOX_DEFAULT
-	goto FallarborTown_SuperMainMenu
+	msgbox FallarborTown_Text_SharedEVEditor, MSGBOX_DEFAULT
+	setvar VAR_0x8004, TRUE
+	special SetPlannedEVPricing
+	goto EmeraldChampions_EventScript_EVTrainingChooseMon
 
-FallarborTown_SuperMainMenu::
-	bufferpartymonnick 0, VAR_0x8004
-	message SuperTraining_Text_HowCanIHelp
-	waitmessage
-	multichoice 0, 0, MULTI_SUPER_TRAINING_MENU, 0
-	switch VAR_RESULT
-	case 0, FallarborTown_ChangeEV
-	case 1, FallarborTown_ResetEVs
-	case 2, Call_FallarborTown_Explain_EVs
-	case 3, HyperTraining_EventScript_DoNothing
-	case 127, HyperTraining_EventScript_DoNothing
-	releaseall
-	end
-
-Call_FallarborTown_Explain_EVs::
-	call FallarborTown_Explain_EVs
-	goto FallarborTown_SuperMainMenu
+FallarborTown_Text_SharedEVEditor:
+	.string "Choose a partner, then adjust its\n"
+	.string "EV rows and watch the stat previews.\p"
+	.string "Confirm to apply the whole spread.\n"
+	.string "I charge ¥2 for each added EV.\l"
+	.string "Lowering EVs is free.\p"
+	.string "LEFT/RIGHT: 4. L/R: 64.\n"
+	.string "SELECT: clear. START: fill.\l"
+	.string "Cancel leaves everything as it was.$"
 
 FallarborTown_Explain_EVs::
 	msgbox FallarborTown_Text_ExplainEvs, MSGBOX_DEFAULT
 	return
 
-@ Each row shows that stat's current EVs, so the list is the spread.
-@ VAR_EV_TRAINING_CURSOR keeps the cursor on the stat last trained.
-FallarborTown_ChangeEV::
-	bufferpartymonnick 0, VAR_0x8004
-	message SuperTraining_Text_ThisIsMonsCurrentSpread
-	waitmessage
-	setvar VAR_0x8005, 0
-	special BufferChosenMonEV
-	dynmultipush SuperTraining_Text_RowHP, 0
-	setvar VAR_0x8005, 1
-	special BufferChosenMonEV
-	dynmultipush SuperTraining_Text_RowAttack, 1
-	setvar VAR_0x8005, 2
-	special BufferChosenMonEV
-	dynmultipush SuperTraining_Text_RowDefense, 2
-	setvar VAR_0x8005, 3
-	special BufferChosenMonEV
-	dynmultipush SuperTraining_Text_RowSpeed, 3
-	setvar VAR_0x8005, 4
-	special BufferChosenMonEV
-	dynmultipush SuperTraining_Text_RowSpAtk, 4
-	setvar VAR_0x8005, 5
-	special BufferChosenMonEV
-	dynmultipush SuperTraining_Text_RowSpDef, 5
-	dynmultistack 0, 0, FALSE, 6, 0, VAR_EV_TRAINING_CURSOR, DYN_MULTICHOICE_CB_NONE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, FallarborTown_SuperMainMenu
-	copyvar VAR_EV_TRAINING_CURSOR, VAR_RESULT
-	switch VAR_RESULT
-	case 0, HyperTraining_EventScript_ChangeHPEV
-	case 1, FallarborTown_ChangeATKEV
-	case 2, FallarborTown_ChangeDEFEV
-	case 3, FallarborTown_ChangeSPEEDEV
-	case 4, FallarborTown_ChangeSPATKEV
-	case 5, FallarborTown_ChangeSPDEFEV
-	case 127, FallarborTown_SuperMainMenu
-	releaseall
-	end
-
-HyperTraining_EventScript_ChangeHPEV::
-	setvar VAR_0x8005, 0
-	special BufferChosenMonEV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	compare VAR_0x8006, 252
-	goto_if_eq FallarborTown_MaxEVs
-	message SuperTraining_ReportHP
-	waitmessage
-	goto FallarborTown_ChooseNewEV
-
-FallarborTown_ChangeATKEV::
-	setvar VAR_0x8005, 1
-	special BufferChosenMonEV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	compare VAR_0x8006, 252
-	goto_if_eq FallarborTown_MaxEVs
-	message SuperTraining_ReportAtk
-	waitmessage
-	goto FallarborTown_ChooseNewEV
-
-FallarborTown_ChangeDEFEV::
-	setvar VAR_0x8005, 2
-	special BufferChosenMonEV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	compare VAR_0x8006, 252
-	goto_if_eq FallarborTown_MaxEVs
-	message SuperTraining_ReportDef
-	waitmessage
-	goto FallarborTown_ChooseNewEV
-
-FallarborTown_ChangeSPEEDEV::
-	setvar VAR_0x8005, 3
-	special BufferChosenMonEV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	compare VAR_0x8006, 252
-	goto_if_eq FallarborTown_MaxEVs
-	message SuperTraining_ReportSpeed
-	waitmessage
-	goto FallarborTown_ChooseNewEV
-
-FallarborTown_ChangeSPATKEV::
-	setvar VAR_0x8005, 4
-	special BufferChosenMonEV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	compare VAR_0x8006, 252
-	goto_if_eq FallarborTown_MaxEVs
-	message SuperTraining_ReportSpAtk
-	waitmessage
-	goto FallarborTown_ChooseNewEV
-
-FallarborTown_ChangeSPDEFEV::
-	setvar VAR_0x8005, 5
-	special BufferChosenMonEV
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8006
-	compare VAR_0x8006, 252
-	goto_if_eq FallarborTown_MaxEVs
-	message SuperTraining_ReportSpDef
-	waitmessage
-	goto FallarborTown_ChooseNewEV
-
-FallarborTown_MaxEVs::
-	msgbox SuperTraining_ReportMaxEVs
-	goto FallarborTown_ChangeEV
-
-FallarborTown_ChooseNewEV::
-	multichoice 0, 0, MULTI_EV_MENU, 0
-	switch VAR_RESULT
-	case 0, FallarborTown_ChangeEV4
-	case 1, FallarborTown_ChangeEV8
-	case 2, FallarborTown_ChangeEV12
-	case 3, FallarborTown_ChangeEV64
-	case 4, FallarborTown_ChangeEV128
-	case 5, FallarborTown_ChangeEV252
-	case 127, FallarborTown_ChangeEV
-
-FallarborTown_ChangeEV4::
-	setvar VAR_0x8006, 4
-	setvar VAR_EV_TRAINING_COST, (4 * EC_EVIE_PRICE_PER_EV)
-	goto FallarborTown_DoSuperTraining
-
-FallarborTown_ChangeEV8::
-	setvar VAR_0x8006, 8
-	setvar VAR_EV_TRAINING_COST, (8 * EC_EVIE_PRICE_PER_EV)
-	goto FallarborTown_DoSuperTraining
-
-FallarborTown_ChangeEV12::
-	setvar VAR_0x8006, 12
-	setvar VAR_EV_TRAINING_COST, (12 * EC_EVIE_PRICE_PER_EV)
-	goto FallarborTown_DoSuperTraining
-
-FallarborTown_ChangeEV64::
-	setvar VAR_0x8006, 64
-	setvar VAR_EV_TRAINING_COST, (64 * EC_EVIE_PRICE_PER_EV)
-	goto FallarborTown_DoSuperTraining
-
-FallarborTown_ChangeEV128::
-	setvar VAR_0x8006, 128
-	setvar VAR_EV_TRAINING_COST, (128 * EC_EVIE_PRICE_PER_EV)
-	goto FallarborTown_DoSuperTraining
-
-FallarborTown_ChangeEV252::
-	setvar VAR_0x8006, 252
-	setvar VAR_EV_TRAINING_COST, (252 * EC_EVIE_PRICE_PER_EV)
-	goto FallarborTown_DoSuperTraining
-
-FallarborTown_ResetEVs::
-	msgbox SuperTraining_Text_ICanResetEVs, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_SuperMainMenu
-	special ResetChosenMonEVs
-	msgbox SuperTraining_Text_EVsReset, MSGBOX_DEFAULT
-	goto FallarborTown_SuperMainMenu
-	
-FallarborTown_DoSuperTraining::
-	special CheckChosenMonCanGainEVs
-	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_CantExceedEVLimit
-	showmoneybox 15, 0
-	buffernumberstring 2, VAR_EV_TRAINING_COST
-	msgbox SuperTraining_ShowPrice, MSGBOX_YESNO
-	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_WontPay
-	@ Native money opcodes take literals; reuse the variable-cost specials.
-	copyvar VAR_EV_TRAINING_STAT, VAR_0x8005
-	copyvar VAR_0x8005, VAR_EV_TRAINING_COST
-	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
-	copyvar VAR_0x8005, VAR_EV_TRAINING_STAT
-	compare VAR_RESULT, 0
-	goto_if_eq FallarborTown_CantAfford
-	copyvar VAR_0x8005, VAR_EV_TRAINING_COST
-	special SubtractMoneyFromVar0x8005
-	copyvar VAR_0x8005, VAR_EV_TRAINING_STAT
-	updatemoneybox
-	special IncreaseChosenMonEVs
-	bufferpartymonnick 0, VAR_0x8004
-	buffernumberstring 1, VAR_0x8007
-	msgbox SuperTraining_Text_EVsHaveIncreased
-	hidemoneybox
-	goto FallarborTown_ChangeEV
-
-FallarborTown_CantExceedEVLimit::
-	buffernumberstring 1, VAR_0x8007
-	msgbox SuperTraining_TooManyEVs, MSGBOX_DEFAULT
-	goto FallarborTown_ChangeEV
-
-FallarborTown_WontPay::
-	hidemoneybox
-	goto FallarborTown_ChangeEV
-
-FallarborTown_CantAfford::
-	msgbox FallarborTown_CantAfford_String, MSGBOX_DEFAULT
-	hidemoneybox
-	goto FallarborTown_ChangeEV
-
 HyperTraining_EventScript_DoNothing::
+	closemessage
 	releaseall
 	end
 
@@ -383,91 +174,6 @@ FallarborTown_Text_ExplainEvs:
 	.string "It's normally good to put 252 EVs in\n"
 	.string "two of your Pokémon's best stats,\l"
 	.string "but you can get creative with EVs too!$"
-
-SuperTraining_Text_TakeALookatEVs:
-	.string "Okay! Again, I charge ¥2 per EV\n"
-	.string "added. Now let's take a look at your\l"
-	.string "{STR_VAR_1}'s EVs.$"
-
-SuperTraining_Text_ThisIsMonsCurrentSpread:
-	.string "Here is {STR_VAR_1}'s EV spread.\n"
-	.string "Which stat would you like it to train?$"
-
-SuperTraining_Text_RowHP:
-	.string "HP{CLEAR_TO 0x34}{STR_VAR_2}$"
-
-SuperTraining_Text_RowAttack:
-	.string "Attack{CLEAR_TO 0x34}{STR_VAR_2}$"
-
-SuperTraining_Text_RowDefense:
-	.string "Defense{CLEAR_TO 0x34}{STR_VAR_2}$"
-
-SuperTraining_Text_RowSpeed:
-	.string "Speed{CLEAR_TO 0x34}{STR_VAR_2}$"
-
-SuperTraining_Text_RowSpAtk:
-	.string "Sp. Atk{CLEAR_TO 0x34}{STR_VAR_2}$"
-
-SuperTraining_Text_RowSpDef:
-	.string "Sp. Def{CLEAR_TO 0x34}{STR_VAR_2}$"
-
-SuperTraining_ReportHP:
-	.string "{STR_VAR_1} has {STR_VAR_2} HP EVs.\n"
-	.string "How many EVs would you like to add?$"
-
-SuperTraining_ReportAtk:
-	.string "{STR_VAR_1} has {STR_VAR_2} Attack EVs.\n"
-	.string "How many EVs would you like to add?$"
-
-SuperTraining_ReportDef:
-	.string "{STR_VAR_1} has {STR_VAR_2} Defense EVs.\n"
-	.string "How many EVs would you like to add?$"
-
-SuperTraining_ReportSpeed:
-	.string "{STR_VAR_1} has {STR_VAR_2} Speed EVs.\n"
-	.string "How many EVs would you like to add?$"
-
-SuperTraining_ReportSpAtk:
-	.string "{STR_VAR_1} has {STR_VAR_2} Sp. Atk EVs.\n"
-	.string "How many EVs would you like to add?$"
-
-SuperTraining_ReportSpDef:
-	.string "{STR_VAR_1} has {STR_VAR_2} Sp. Def EVs.\n"
-	.string "How many EVs would you like to add?$"
-
-SuperTraining_Text_EVsHaveIncreased:
-	.string "{STR_VAR_1}'s EVs in that stat have\n"
-	.string "increased to {STR_VAR_2}!$"
-
-SuperTraining_Text_ICanResetEVs:
-	.string "I can completely reset your\n"
-	.string "{STR_VAR_1}'s EVs for free!\p"
-	.string "This will remove all of its EVs, so\n"
-	.string "you can add more to the stats you want\l"
-	.string "{STR_VAR_1} to focus on.\p"
-	.string "Would you like me to reset\n"
-	.string "{STR_VAR_1}'s EVs?$"
-
-SuperTraining_Text_HowCanIHelp:
-	.string "How can I help {STR_VAR_1} today?$"
-	
-SuperTraining_Text_EVsReset::
-	.string "{STR_VAR_1}'s EVs have been reset!$"
-
-SuperTraining_ReportMaxEVs:
-	.string "{STR_VAR_1} has 252 EVs in that stat!\n"
-	.string "It can't gain any more!$"
-
-SuperTraining_TooManyEVs:
-	.string "{STR_VAR_1} already has\n"
-	.string "{STR_VAR_2} EVs in total!\p"
-	.string "It can't gain that many more!$"
-
-SuperTraining_ShowPrice:
-	.string "That'll cost ¥{STR_VAR_3}. Is that okay?$"
-
-FallarborTown_CantAfford_String:
-	.string "You don't have the money.$"
 
 @@@@@@@@@@@@@@@@ Hyper Training Script @@@@@@@@@@@@@@@@
 
@@ -540,7 +246,6 @@ HyperTraining_EventScript_ChooseLevel::
 	special PayForChosenMonIVChange
 	goto_if_eq VAR_RESULT, EC_IV_SERVICE_UNCHANGED, HyperTraining_EventScript_Unchanged
 	goto_if_eq VAR_RESULT, EC_IV_SERVICE_NOT_ENOUGH_CAPS, HyperTraining_EventScript_IVCapsPoor
-	msgbox HyperTraining_Text_PayOneCap, MSGBOX_DEFAULT
 	goto HyperTraining_EventScript_DoHyperTraining
 
 HyperTraining_EventScript_ChangeHiddenPower::
@@ -551,15 +256,27 @@ HyperTraining_EventScript_ChangeHiddenPower::
 	special ShowScrollableMultichoice
 HyperTraining_EventScript_SelectHiddenPower::
 	goto_if_ge VAR_RESULT, 16, HyperTraining_EventScript_RebufferChosenMon
+	copyvar VAR_IV_TRAINING_TYPE, VAR_RESULT
 	copyvar VAR_0x8004, VAR_IV_TRAINING_MON
-	copyvar VAR_0x8005, VAR_RESULT
+	copyvar VAR_0x8005, VAR_IV_TRAINING_TYPE
+HyperTraining_EventScript_PreviewHiddenPower::
+	closemessage
+	delay 1
+	special ShowChosenMonHiddenPowerPreview
+	goto_if_eq VAR_RESULT, FALSE, HyperTraining_EventScript_RebufferChosenMon
+	msgbox HyperTraining_Text_ConfirmHiddenPower, MSGBOX_YESNO
+	special HideChosenMonHiddenPowerPreview
+	closemessage
+	delay 1
+	goto_if_eq VAR_RESULT, NO, HyperTraining_EventScript_RebufferChosenMon
+	copyvar VAR_0x8004, VAR_IV_TRAINING_MON
+	copyvar VAR_0x8005, VAR_IV_TRAINING_TYPE
 	goto HyperTraining_EventScript_ChangeAllIVs
 
 HyperTraining_EventScript_ChangeAllIVs::
 	special PayForChosenMonHiddenPower
 	goto_if_eq VAR_RESULT, EC_IV_SERVICE_UNCHANGED, HyperTraining_EventScript_Unchanged
 	goto_if_eq VAR_RESULT, EC_IV_SERVICE_NOT_ENOUGH_CAPS, HyperTraining_EventScript_IVCapsPoor
-	msgbox HyperTraining_Text_PayThreeCaps, MSGBOX_DEFAULT
 	goto HyperTraining_EventScript_DoHyperTraining
 
 HyperTraining_EventScript_IVCapsPoor::
@@ -572,11 +289,7 @@ HyperTraining_EventScript_Unchanged::
 
 HyperTraining_EventScript_DoHyperTraining::
 	setflag FLAG_EC_PLAYER_IVS_MAXED
-	msgbox HyperTraining_Text_StartHyperTraining, MSGBOX_AUTOCLOSE
-	fadescreen 1
-	playfanfare 0x173
-	waitfanfare
-	fadescreen 0
+	playse SE_SHOP
 	bufferpartymonnick 0, VAR_0x8004
 	msgbox HyperTraining_Text_HyperTrainingMadeMonStronger, MSGBOX_DEFAULT
 	goto FallarborTown_HyperMainMenu
@@ -639,28 +352,19 @@ HyperTraining_Text_HyperTrainingMadeMonStronger:
 	.string "for {STR_VAR_1}.$"
 
 HyperTraining_Text_ForThreeCapsChangeAllIVs:
-	.string "For three Bottle Caps, I can change all\n"
-	.string "of a Pokémon's IVs at once to give them\l"
-	.string "a new Hidden Power type.\p"
-	.string "Would you like to change {STR_VAR_1}'s\n"
-	.string "Hidden Power to one of these types?$"
+	.string "Choose a Hidden Power type.\n"
+	.string "I'll show the IV changes first.$"
+
+HyperTraining_Text_ConfirmHiddenPower:
+	.string "Apply for three Bottle Caps?\n"
+	.string "Unchanged IVs are free.$"
 
 HyperTraining_Text_HowCanIHelp:
 	.string "How can I help {STR_VAR_1} today?$"
 
-HyperTraining_Text_StartHyperTraining:
-	.string "Got it! Let's do some Hyper Training!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …$"
-
 HyperTraining_Text_NotEnoughCaps:
 	.string "You don't have enough Bottle Caps.$"
 
-HyperTraining_Text_PayThreeCaps:
-	.string "{PLAYER} handed over three Bottle Caps.$"
-
-HyperTraining_Text_PayOneCap:
-	.string "{PLAYER} handed over one Bottle Cap.$"
 HyperTraining_Text_Unchanged:
 	.string "Nothing would change.\n"
 	.string "Keep your Bottle Caps!$"

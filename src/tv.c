@@ -1406,12 +1406,16 @@ void TryPutSmartShopperOnAir(void)
                 show->smartshopperShow.kind = TVSHOW_SMART_SHOPPER;
                 show->smartshopperShow.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
                 show->smartshopperShow.shopLocation = gMapHeader.regionMapSectionId;
+                show->smartshopperShow.priceReduced = FALSE;
                 for (i = 0; i < SMARTSHOPPER_NUM_ITEMS; i++)
                 {
                     show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
                     show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
+                    if ((gMartPurchaseHistory[i].itemId == ITEM_NET_BALL
+                         || gMartPurchaseHistory[i].itemId == ITEM_DIVE_BALL)
+                        && IsPokeNewsActive(POKENEWS_SLATEPORT))
+                        show->smartshopperShow.priceReduced = TRUE;
                 }
-                show->smartshopperShow.priceReduced = IsPokeNewsActive(POKENEWS_SLATEPORT);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
                 StorePlayerIdInRecordMixShow(show);
                 show->smartshopperShow.language = gGameLanguage;
@@ -2607,14 +2611,17 @@ static void SmartShopper_BufferPurchaseTotal(u8 varIdx, TVShow *show)
     int price = 0;
     for (i = 0; i < SMARTSHOPPER_NUM_ITEMS; i++)
     {
-        if (show->smartshopperShow.itemIds[i] != ITEM_NONE)
-            price += GetItemPrice(show->smartshopperShow.itemIds[i]) * show->smartshopperShow.itemAmounts[i];
+        u16 item = show->smartshopperShow.itemIds[i];
+        if (item != ITEM_NONE)
+        {
+            u32 itemPrice = GetItemPrice(item);
+            if (show->smartshopperShow.priceReduced
+                && (item == ITEM_NET_BALL || item == ITEM_DIVE_BALL))
+                itemPrice /= 2;
+            price += itemPrice * show->smartshopperShow.itemAmounts[i];
+        }
     }
-
-    if (show->smartshopperShow.priceReduced == TRUE)
-        ConvertIntToDecimalString(varIdx, price >> 1);
-    else
-        ConvertIntToDecimalString(varIdx, price);
+    ConvertIntToDecimalString(varIdx, price);
 }
 
 static bool8 IsRecordMixShowAlreadySpawned(u8 kind, bool8 delete)

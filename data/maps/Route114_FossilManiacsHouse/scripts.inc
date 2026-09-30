@@ -11,7 +11,7 @@ Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother:: @ 822AD3A
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_ReceivedDig
 	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM28
@@ -35,14 +35,14 @@ Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother: @ 822AD85
 	.string "My big brother's the Fossil Maniac…\n"
 	.string "He's a nice guy who loves Fossils…\p"
 	.string "He dug this hole by himself…\p"
-	.string "Here's a Rare Candy to help\n"
-	.string "your Pokémon grow a level…$"
+	.string "He found this Nugget underground.\n"
+	.string "Sell it to help fund your journey!$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance: @ 822AE48
 	.string "The Move Tutor can teach Dig\n"
 	.string "to Pokémon that can learn it…\p"
-	.string "A Rare Candy raises a level…\n"
-	.string "as far as your Badges allow…$"
+	.string "A Nugget sells for ¥2,500…\n"
+	.string "That's plenty for supplies…$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase: @ 822AE92
 	.string "Rocks in peculiar shapes fill\n"

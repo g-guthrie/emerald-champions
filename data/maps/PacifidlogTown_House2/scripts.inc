@@ -22,7 +22,7 @@ PacifidlogTown_House2_EventScript_GiveDiancite::
 	applymovement 1, Common_Movement_Delay48
 	waitmovement 0
 	msgbox PacifidlogTown_House2_Text_DiancieLikesYou, MSGBOX_DEFAULT
-	giveitem ITEM_DIANCITE
+	giveuniqueitem ITEM_DIANCITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_DIANCITE

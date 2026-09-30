@@ -220,7 +220,7 @@ Route118_EventScript_CheckParty::
 	trainerbattle_no_intro_double TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat
 Route118_EventScript_GiveGyaradosite::
 	msgbox Route118_Text_TakeGyaradosite, MSGBOX_DEFAULT
-	giveitem ITEM_GYARADOSITE
+	giveuniqueitem ITEM_GYARADOSITE
 Route118_EventScript_CheckGyaradositeReceipt::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_ROUTE118_GYARADOSITE

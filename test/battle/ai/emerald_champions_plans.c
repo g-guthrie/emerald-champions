@@ -628,26 +628,29 @@ AI_DOUBLE_BATTLE_TEST("EC Soak anchors: hypothetical types and charge preserve b
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC Soak forecast: a flinched conversion is not assumed to have happened")
+DOUBLE_BATTLE_TEST("EC shoreline mechanics: flinched Soak preserves Ground immunity")
 {
     GIVEN {
-        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(55); Speed(25); Ability(ABILITY_IRON_BARBS); Moves(MOVE_PROTECT, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_MIENFOO) { Level(20); Speed(30); Ability(ABILITY_REGENERATOR); Moves(MOVE_PROTECT, MOVE_FAKE_OUT); }
-        AuthoredOpponent(TRAINER_NED, 1, FALSE);
+        PLAYER(SPECIES_GOLEM) { Level(30); HP(200); MaxHP(200); Speed(40); Ability(ABILITY_STURDY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MIENFOO) { Level(30); Speed(30); Ability(ABILITY_REGENERATOR); Moves(MOVE_FAKE_OUT); }
+        OPPONENT(SPECIES_FINNEON) { Level(30); Speed(100); Ability(ABILITY_STORM_DRAIN); Moves(MOVE_SOAK); }
+        OPPONENT(SPECIES_WATTREL) { Level(30); Speed(80); Ability(ABILITY_WIND_POWER); Moves(MOVE_THUNDERBOLT); }
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE);
             MOVE(playerRight, MOVE_FAKE_OUT, target: opponentLeft);
-            // The Fake Out that flinches Finneon is a pending command, so the
-            // conversion is a plan the AI is entitled to make, not a fiction:
-            // Soak the Steel/Grass flank and aim the Electric attack at it.
+            MOVE(opponentLeft, MOVE_SOAK, target: playerLeft);
+            MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerLeft);
         }
+    } SCENE {
+        MESSAGE("The opposing Finneon flinched and couldn't move!");
+        MESSAGE("It doesn't affect Golem…");
     } THEN {
-        EXPECT_EQ(gChosenMoveByBattler[B_BATTLER_3], MOVE_THUNDERBOLT);
-        EXPECT_EQ(gBattleStruct->moveTarget[B_BATTLER_3], B_BATTLER_0);
+        EXPECT_EQ(playerLeft->types[0], TYPE_ROCK);
+        EXPECT_EQ(playerLeft->types[1], TYPE_GROUND);
+        EXPECT_EQ(playerLeft->hp, 200);
     }
 }
-
 
 
 DOUBLE_BATTLE_TEST("EC pivot cleanup: exhausted bench does not skip the next target")

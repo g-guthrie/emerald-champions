@@ -147,8 +147,8 @@ SouthernIsland_Interior_EventScript_GiveLatiStones::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
-	giveitem ITEM_LATIOSITE
-	giveitem ITEM_LATIASITE
+	giveuniqueitem ITEM_LATIOSITE
+	giveuniqueitem ITEM_LATIASITE
 	setflag FLAG_RECEIVED_LATI_STONES
 	releaseall
 	end

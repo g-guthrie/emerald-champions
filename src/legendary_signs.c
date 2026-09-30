@@ -55,7 +55,7 @@ const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species spe
 bool32 IsLegendaryEncounterSpecies(enum Species species)
 {
     enum RestrictedPartyClass kind = GetRestrictedPartyClass(species);
-    return kind == RESTRICTED_PARTY_LEGENDARY || kind == RESTRICTED_PARTY_ULTRA_BEAST;
+    return kind != RESTRICTED_PARTY_NONE;
 }
 
 u8 GetLegendaryEncounterLevel(enum Species species)
@@ -63,7 +63,7 @@ u8 GetLegendaryEncounterLevel(enum Species species)
     return GetLevelCapForSpecies(species, GetCurrentLevelCap());
 }
 
-// One rule for every Legendary-class or Ultra Beast encounter: the authored
+// One rule for every Legendary, Mythical, Ultra Beast or Paradox encounter: the authored
 // set when the species has one, otherwise a random non-Mega competitive set.
 // A caller-supplied held item survives only when the set leaves the mon empty-handed.
 void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem)
@@ -810,7 +810,7 @@ enum HeatranDiscoveryState GetHeatranDiscoveryState(void)
 static void BufferLostLegendaryLead(enum Species species)
 {
     StringCopy(gStringVar2, GetLegendaryDisplayName(species));
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} fainted in a battle\nwith you and vanished.\pA fainted legend never returns."));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} fainted in a battle\nwith you and vanished.\pThis Pokémon never returns."));
 }
 
 // The Center local guide's one special. VAR_0x8005 picks the topic (see

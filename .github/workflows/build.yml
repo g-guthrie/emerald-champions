@@ -76,7 +76,7 @@ jobs:
             tools/wav2agb/wav2agb
           key: emerald-champions-tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
-      - name: Build Emerald Champions release ROM
+      - name: Build Inclement Emerald 2 release ROM
         run: make -j"$(nproc)" release
 
       - name: Bind release artifacts to build inputs

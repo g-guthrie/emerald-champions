@@ -225,22 +225,22 @@ RustboroCity_PokemonSchool_Text_ExplainParalysis: @ 82141D8
 	.string "Cure it using a Paralyze Heal.$"
 
 RustboroCity_PokemonSchool_Text_ExplainSleep: @ 821427D
-	.string "If a Pokémon falls asleep, it will be\n"
-	.string "unable to attack.\p"
+	.string "A sleeping Pokémon can't use most\n"
+	.string "moves. Snore and Sleep Talk still work.\p"
 	.string "A Pokémon may wake up on its own,\n"
 	.string "but if a battle ends while it is\l"
 	.string "sleeping, it will stay asleep.\p"
 	.string "Wake it up using an Awakening.$"
 
 RustboroCity_PokemonSchool_Text_ExplainBurn: @ 8214336
-	.string "A burn reduces Attack power, and it\n"
-	.string "steadily reduces the victim's HP.\p"
+	.string "A burn usually weakens physical\n"
+	.string "attacks and drains HP in battle.\p"
 	.string "A burn lingers after battle.\n"
 	.string "Cure a burn using a Burn Heal.$"
 
 RustboroCity_PokemonSchool_Text_ExplainFreeze: @ 82143B8
-	.string "If a Pokémon is frozen, it becomes\n"
-	.string "completely helpless.\p"
+	.string "A frozen Pokémon usually can't move.\n"
+	.string "Some moves, like Scald, can thaw it.\p"
 	.string "It will remain frozen after battle.\n"
 	.string "Thaw it out using an Ice Heal.$"
 

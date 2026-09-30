@@ -60,6 +60,6 @@ SouthernIsland_Exterior_EventScript_Sign:: @ 8242A3C
 SouthernIsland_Exterior_Text_SailBack:
 	.string "Aye, mate, this island has a quiet\n"
 	.string "all its own.\p"
-	.string "Sailors say a legend that faints\n"
-	.string "in battle is gone. Mind yourself.\p"
+	.string "Sailors say this island's legend\n"
+	.string "is lost if it faints here. Be wary.\p"
 	.string "Ready to sail back to Lilycove?$"

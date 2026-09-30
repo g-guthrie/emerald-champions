@@ -494,7 +494,7 @@ LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest: @ 821C445
 
 LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn: @ 821C4B1
 	.string "Ohh, seeing all these cute Pokémon,\n"
-	.string "they make we want to get my own!\p"
+	.string "they make me want to get my own!\p"
 	.string "I'm going to go catch some!$"
 
 LilycoveCity_ContestHall_Text_BeautyContestStage: @ 821C512

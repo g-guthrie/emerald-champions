@@ -259,7 +259,7 @@ DewfordTown_Hall_EventScript_SludgeBombMan:: @ 81FD7DA
 	call Common_EventScript_BufferTrendyPhrase
 	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
 	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
@@ -528,8 +528,8 @@ DewfordTown_Hall_Text_GiveYouSludgeBomb: @ 81FE142
 	.string "of popularity. It's the one.\p"
 	.string "Ask the Move Tutor if your\n"
 	.string "Pokémon can learn it.\p"
-	.string "Take this Rare Candy, too.\n"
-	.string "A little growth never goes out of style!$"
+	.string "Take this Nugget, too.\n"
+	.string "Sell it for your next shopping trip!$"
 
 DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo: @ 81FE1ED
 	.string "I love Sludge Bomb.\p"

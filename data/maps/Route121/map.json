@@ -459,7 +459,8 @@
       "x": 72,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_FULL_HEAL",
+      "item": "ITEM_ULTRA_BALL",
+      "quantity": 3,
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_FULL_HEAL"
     },
     {

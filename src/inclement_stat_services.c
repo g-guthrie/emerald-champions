@@ -1,19 +1,27 @@
 #include "global.h"
 #include "battle_message.h"
+#include "battle_main.h"
+#include "data.h"
 #include "event_data.h"
 #include "field_specials.h"
 #include "international_string_util.h"
 #include "pokemon.h"
+#include "money.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
 #include "caps.h"
 #include "clock.h"
 #include "item.h"
+#include "menu.h"
+#include "money.h"
+#include "window.h"
 #include "random.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/emerald_champions.h"
+#include "pokerus.h"
+#include "field_specials.h"
 
 // Inclement Emerald's Super Training, Hyper Training and nature services,
 // written against this engine rather than lifted from its 2021 source. The
@@ -121,7 +129,7 @@ void BufferChosenMonNature(void)
     }
     u8 *end = StringCopy(gStringVar3, COMPOUND_STRING("raises "));
     end = StringCopy(end, gStatNamesTable[info->statUp]);
-    end = StringCopy(end, COMPOUND_STRING(" and lowers "));
+    end = StringCopy(end, HasHotSpringPokerus(mon) ? COMPOUND_STRING(" and raises ") : COMPOUND_STRING(" and lowers "));
     StringCopy(end, gStatNamesTable[info->statDown]);
 }
 
@@ -187,6 +195,7 @@ void ResetChosenMonEVs(void)
 // pass the stat in VAR_0x8005 and an EV_PLAN_STEP_* in VAR_0x8006; the Pokémon
 // is fixed when planning starts.
 static EWRAM_DATA u8 sPlannedEVs[NUM_STATS] = {0};
+static EWRAM_DATA bool8 sEvieEVPricing = FALSE;
 static EWRAM_DATA u32 sPlannedEVsPersonality = 0;
 static EWRAM_DATA u8 sPlannedEVsSlot = 0; // party slot + 1; 0 before planning
 
@@ -283,20 +292,85 @@ void BufferPlannedEVTotal(void)
     ConvertIntToDecimalStringN(gStringVar3, PlannedEVTotal(), STR_CONV_MODE_LEFT_ALIGN, 3);
 }
 
-// The step menu's prompt for the stat in VAR_0x8005, in gStringVar4.
+// Preview the actual stat on a copy; planning never changes the partner.
 void BufferPlannedEVStatPrompt(void)
 {
     struct Pokemon *mon = GetPlannedEVsMon();
     u32 stat = min(gSpecialVar_0x8005, NUM_STATS - 1);
     u8 *dst = StringCopy(gStringVar4, sPlannedEVStatNames[stat]);
-
-    dst = StringCopy(dst, COMPOUND_STRING(": now "));
+    dst = StringCopy(dst, COMPOUND_STRING(" EVs: "));
     dst = ConvertIntToDecimalStringN(dst, mon != NULL ? GetMonData(mon, sStatData[stat]) : 0, STR_CONV_MODE_LEFT_ALIGN, 3);
-    dst = StringCopy(dst, COMPOUND_STRING(", planned "));
+    dst = StringCopy(dst, COMPOUND_STRING(" > "));
     dst = ConvertIntToDecimalStringN(dst, sPlannedEVs[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
-    dst = StringCopy(dst, COMPOUND_STRING(".\nPlanned total: "));
+    dst = StringCopy(dst, COMPOUND_STRING("\nStat: "));
+    if (mon != NULL)
+    {
+        struct Pokemon preview = *mon;
+        for (u32 i = 0; i < NUM_STATS; i++)
+        {
+            u32 value = sPlannedEVs[i];
+            SetMonData(&preview, sStatData[i], &value);
+        }
+        CalculateMonStats(&preview);
+        dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, MON_DATA_MAX_HP + stat), STR_CONV_MODE_LEFT_ALIGN, 3);
+        dst = StringCopy(dst, COMPOUND_STRING(" > "));
+        dst = ConvertIntToDecimalStringN(dst, GetMonData(&preview, MON_DATA_MAX_HP + stat), STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+    dst = StringCopy(dst, COMPOUND_STRING("  Total: "));
     dst = ConvertIntToDecimalStringN(dst, PlannedEVTotal(), STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringCopy(dst, COMPOUND_STRING(" of 510."));
+    StringCopy(dst, COMPOUND_STRING("/510"));
+}
+
+void SetPlannedEVPricing(void)
+{
+    sEvieEVPricing = gSpecialVar_0x8004 != 0;
+}
+
+void IsEvieEVPlan(void)
+{
+    gSpecialVar_Result = sEvieEVPricing;
+}
+
+static u32 PlannedEVFee(void)
+{
+    struct Pokemon *mon = GetPlannedEVsMon();
+    u32 gained = 0;
+    if (mon == NULL)
+        return 0;
+    if (!sEvieEVPricing)
+        return EV_PLAN_FEE;
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        u32 original = GetMonData(mon, sStatData[i]);
+        if (sPlannedEVs[i] > original)
+            gained += sPlannedEVs[i] - original;
+    }
+    return gained * EC_EVIE_PRICE_PER_EV;
+}
+
+void BufferPlannedEVConfirmation(void)
+{
+    BufferPlannedEVSummary();
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}\n{STR_VAR_3}\p"));
+    u8 *dst = gStringVar4 + StringLength(gStringVar4);
+    dst = StringCopy(dst, COMPOUND_STRING("Apply this spread for ¥"));
+    dst = ConvertIntToDecimalStringN(dst, PlannedEVFee(), STR_CONV_MODE_LEFT_ALIGN, 4);
+    StringCopy(dst, COMPOUND_STRING("?"));
+}
+
+void PayForPlannedEVSpread(void)
+{
+    CheckPlannedEVSpreadChanged();
+    u32 fee = gSpecialVar_Result ? PlannedEVFee() : 0;
+    ConvertIntToDecimalStringN(gStringVar1, fee, STR_CONV_MODE_LEFT_ALIGN, 4);
+    if (GetMoney(&gSaveBlock1Ptr->money) < fee)
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+    ApplyPlannedEVSpread();
+    if (gSpecialVar_Result)
+        RemoveMoney(&gSaveBlock1Ptr->money, fee);
 }
 
 // In VAR_0x8005 stat, VAR_0x8006 an EV_PLAN_STEP_*. Adds as much as the
@@ -430,11 +504,9 @@ void ChangeChosenMonIVs(void)
     CalculateMonStats(mon);
 }
 
-// VAR_0x8004 is the party slot and VAR_0x8005 the Hidden Power type index.
-// Minimize Attack, then retain as many maximum remaining IVs as possible.
-void ChangeChosenMonHiddenPower(void)
-{
-    static const u8 spreads[16][NUM_STATS] = {
+// Shared by the preview and transaction: minimize Attack, then retain as
+// many maximum remaining IVs as possible, including Speed.
+static const u8 sHiddenPowerSpreads[16][NUM_STATS] = {
         {31, 0, 30, 30, 30, 30}, // Fighting
         {31, 0, 31, 30, 30, 30}, // Flying
         {31, 0, 30, 31, 30, 30}, // Poison
@@ -451,25 +523,106 @@ void ChangeChosenMonHiddenPower(void)
         {31, 0, 30, 31, 31, 31}, // Ice
         {31, 0, 31, 31, 31, 31}, // Dragon
         {31, 1, 31, 31, 31, 31}, // Dark
-    };
+};
+
+static EWRAM_DATA u8 sHiddenPowerPreviewWindow = 0; // Window id + 1; zero means closed.
+
+// VAR_0x8004 party slot, VAR_0x8005 type index. Buffers only; no payment or
+// mutation, even for a proposed spread that is already the current spread.
+void BufferChosenMonHiddenPowerPreview(void)
+{
+    struct Pokemon *mon = GetServiceMon(gSpecialVar_0x8004);
+    u32 type = gSpecialVar_0x8005;
+    u8 *dst = gStringVar4;
+
+    gSpecialVar_Result = FALSE;
+    gStringVar1[0] = gStringVar4[0] = EOS;
+    if (mon == NULL || type >= ARRAY_COUNT(sHiddenPowerSpreads))
+        return;
+    StringCopy(gStringVar1, gTypesInfo[type < 8 ? type + TYPE_FIGHTING : type + TYPE_FIRE - 8].name);
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        dst = StringCopy(dst, sPlannedEVStatNames[i]);
+        *dst++ = EXT_CTRL_CODE_BEGIN;
+        *dst++ = EXT_CTRL_CODE_CLEAR_TO;
+        *dst++ = 58;
+        dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, sIvData[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
+        *dst++ = EXT_CTRL_CODE_BEGIN;
+        *dst++ = EXT_CTRL_CODE_CLEAR_TO;
+        *dst++ = 76;
+        *dst++ = CHAR_RIGHT_ARROW;
+        *dst++ = EXT_CTRL_CODE_BEGIN;
+        *dst++ = EXT_CTRL_CODE_CLEAR_TO;
+        *dst++ = 94;
+        dst = ConvertIntToDecimalStringN(dst, sHiddenPowerSpreads[type][i], STR_CONV_MODE_LEFT_ALIGN, 2);
+        *dst++ = i == NUM_STATS - 1 ? EOS : CHAR_NEWLINE;
+    }
+    gSpecialVar_Result = TRUE;
+}
+
+void HideChosenMonHiddenPowerPreview(void)
+{
+    if (sHiddenPowerPreviewWindow == 0)
+        return;
+    ClearStdWindowAndFrameToTransparent(sHiddenPowerPreviewWindow - 1, TRUE);
+    RemoveWindow(sHiddenPowerPreviewWindow - 1);
+    sHiddenPowerPreviewWindow = 0;
+}
+
+void ShowChosenMonHiddenPowerPreview(void)
+{
+    // Tiles 100..286 leave the Yes/No window (0x125) and dialogue (0x194)
+    // free. All six rows remain visible while the player confirms below.
+    struct WindowTemplate template = CreateWindowTemplate(0, 1, 1, 17, 11, 15, 100);
+    u8 title[40];
+    u8 window;
+
+    HideChosenMonHiddenPowerPreview();
+    BufferChosenMonHiddenPowerPreview();
+    if (!gSpecialVar_Result)
+        return;
+    window = AddWindow(&template);
+    if (window == WINDOW_NONE)
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+    sHiddenPowerPreviewWindow = window + 1;
+    StringCopy(title, COMPOUND_STRING("Hidden Power: "));
+    StringAppend(title, gStringVar1);
+    SetStandardWindowBorderStyle(window, FALSE);
+    AddTextPrinterParameterized(window, FONT_SMALL, title, 0, 0, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(window, FONT_SMALL, gStringVar4, 0, 14, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(window, COPYWIN_FULL);
+}
+
+// VAR_0x8004 is the party slot and VAR_0x8005 the Hidden Power type index.
+void ChangeChosenMonHiddenPower(void)
+{
     u32 slot = gSpecialVar_0x8004;
     u32 type = gSpecialVar_0x8005;
 
     struct Pokemon *mon = GetServiceMon(slot);
-    if (mon == NULL || type >= ARRAY_COUNT(spreads))
+    if (mon == NULL || type >= ARRAY_COUNT(sHiddenPowerSpreads))
         return;
     for (u32 i = 0; i < NUM_STATS; i++)
-        SetMonData(mon, sIvData[i], &spreads[type][i]);
+        SetMonData(mon, sIvData[i], &sHiddenPowerSpreads[type][i]);
     CalculateMonStats(mon);
 }
 
 // Reuse the saved daily seed so visits and reloads keep the same request.
-// The e-Reader placeholder is not an obtainable berry.
+// All five ingredients grow on ripe trees on Routes 102, 103, 104 or 116
+// before Slateport. The flower shop's random gift alone is not enough to
+// guarantee every basic Berry has been available on the first visit.
 u16 GetNatureChangerBerry(void)
 {
+    static const enum Item ingredients[] = {
+        ITEM_CHERI_BERRY, ITEM_CHESTO_BERRY, ITEM_PECHA_BERRY,
+        ITEM_LEPPA_BERRY, ITEM_ORAN_BERRY,
+    };
     DoTimeBasedEvents();
     rng_value_t rng = LocalRandomSeed(gSaveBlock1Ptr->dailySeed ^ 0x4E415455);
-    return FIRST_BERRY_INDEX + LocalRandom32(&rng) % (ITEM_MARANGA_BERRY - FIRST_BERRY_INDEX + 1);
+    return ingredients[LocalRandom32(&rng) % ARRAY_COUNT(ingredients)];
 }
 
 // VAR_0x8005 is the raised stat and VAR_0x8006 the lowered one, in Nature

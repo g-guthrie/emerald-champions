@@ -13,7 +13,7 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 GraniteCave_StevensRoom_EventScript_GiveReward::
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_EXPERT_BELT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
@@ -88,9 +88,9 @@ GraniteCave_StevensRoom_Text_ImStevenLetterForMe: @ 822DD5A
 GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "Steven: Thank you for delivering\n"
 	.string "the letter.\p"
-	.string "Please take this Rare Candy.\p"
-	.string "If you'd like to learn my favorite\n"
-	.string "move, Steel Wing, ask the Move Tutor.$"
+	.string "Please take this Expert Belt.\p"
+	.string "It strengthens super-effective\n"
+	.string "attacks. Pick your targets carefully!$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
 	.string "Steven: Your Pokémon appear quite\n"

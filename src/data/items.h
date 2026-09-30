@@ -1376,13 +1376,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_PP_UP] =
     {
         .name = ITEM_NAME("PP Up"),
-    #if I_PRICE >= GEN_7
-        .price = 10000,
-    #elif I_PRICE >= GEN_2
-        .price = 10000,
-    #else
-        .price = 10000,
-    #endif
+        .price = 3000,
         .description = COMPOUND_STRING(
             "Raises the maximum\n"
             "PP of a selected\n"
@@ -1958,7 +1952,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Raises a Pokémon\n"
             "by one level, up to\n"
-            "what Badges allow."),
+            "the current cap."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_LEVEL_UP_ITEM,
         .type = ITEM_USE_PARTY_MENU,
@@ -2609,9 +2603,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Bottle Cap"),
         .price = 5000,
         .description = COMPOUND_STRING(
-            "A beautiful bottle\n"
-            "cap that gives off\n"
-            "a silver gleam."),
+            "Funds IV changes,\n"
+            "Hidden Power and\n"
+            "iconic move lessons."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -2626,9 +2620,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Gold Bottle Cap"),
         .price = 10000,
         .description = COMPOUND_STRING(
-            "A beautiful bottle\n"
-            "cap that gives off\n"
-            "a golden gleam."),
+            "Pays for one iconic\n"
+            "move lesson. Later\n"
+            "relearning is free."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -14664,7 +14658,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Raises your party\n"
-            "as Badges allow and\n"
+            "to the level cap;\n"
             "evolves ready ones."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,

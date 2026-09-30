@@ -334,18 +334,35 @@ Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather: @ 82706FE
 	.string "That Pokémon changes shape according\n"
 	.string "to the weather conditions.\p"
 	.string "There're plenty of them in the\n"
-	.string "Institute--go ahead and take it.$"
+	.string "Institute--go ahead and take it.\p"
+	.string "Strange storms are carrying rare\n"
+	.string "Pokémon into the wild. Meet them\l"
+	.string "through ordinary wild encounters.\p"
+	.string "DexNav lists these storm guests,\n"
+	.string "but can't search for them.\p"
+	.string "Our scientist tracks their locations.\n"
+	.string "Ask him for a storm report!$"
 
 Route119_WeatherInstitute_2F_Text_AnomalyReportIntro:
 	.string "Ever since Team Aqua broke in, our\n"
 	.string "instruments have picked up storms\l"
 	.string "where no storm should be.\p"
+	.string "Some bring snow instead of rain\n"
+	.string "or fog, even in warm places!\p"
 	.string "Rare Pokémon seem to travel inside\n"
 	.string "them. Here is what we're tracking:$"
 
 Route119_WeatherInstitute_2F_Text_AnomalyReportOutro:
 	.string "They never last long.\n"
-	.string "If you want to see one, hurry.$"
+	.string "If you want to see one, hurry.\p"
+	.string "Meet these guests in the grass\n"
+	.string "or while Surfing in their home areas.\p"
+	.string "DexNav can show a storm guest,\n"
+	.string "but can't search for it.\p"
+	.string "Once the sky calms in Sootopolis,\n"
+	.string "they settle into their home areas.\p"
+	.string "Then DexNav can search for them\n"
+	.string "once their own requirements are met.$"
 
 Route119_WeatherInstitute_2F_Text_AnomalyReportNone:
 	.string "Our instruments are quiet right now.\n"
@@ -377,4 +394,3 @@ Route119_WeatherInstitute_2F_Text_NoAbnormalWeather: @ 82708FC
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"
 	.string "really.$"
-

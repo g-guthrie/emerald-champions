@@ -4,6 +4,22 @@ MauvilleCity_House2_MapScripts:: @ 8210C5C
 MauvilleCity_House2_EventScript_Woman:: @ 8210C5D
 	lock
 	faceplayer
+MauvilleCity_House2_EventScript_WomanMenu:
+	message MauvilleCity_House2_Text_WomanOffer
+	waitmessage
+	dynmultichoice 30, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, MauvilleCity_House2_Text_Catalogue, MauvilleCity_House2_Text_CoinCase, MauvilleCity_House2_Text_IconicTutorExit
+	goto_if_eq VAR_RESULT, 0, MauvilleCity_House2_EventScript_TutorCatalogue
+	goto_if_eq VAR_RESULT, 1, MauvilleCity_House2_EventScript_CoinCase
+	closemessage
+	release
+	end
+
+MauvilleCity_House2_EventScript_TutorCatalogue:
+	closemessage
+	special ShowIconicTutorCatalogue
+	goto MauvilleCity_House2_EventScript_WomanMenu
+
+MauvilleCity_House2_EventScript_CoinCase:
 	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_ReceivedCoinCase
 	msgbox MauvilleCity_House2_Text_BuyIceStoneAtSlateport, MSGBOX_DEFAULT
 	checkitem ITEM_ICE_STONE, 1
@@ -49,14 +65,30 @@ MauvilleCity_House2_EventScript_Tutor::
 	lock
 	faceplayer
 	buffernumberstring STR_VAR_1, EC_ICONIC_MOVE_CAP_COST
-	msgbox MauvilleCity_House2_Text_IconicTutorIntro, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_House2_EventScript_IconicTutorDeclined
+	goto_if_set FLAG_MET_MAUVILLE_ICONIC_MOVE_TUTOR, MauvilleCity_House2_EventScript_IconicTutorMenu
+	msgbox MauvilleCity_House2_Text_IconicTutorIntro, MSGBOX_DEFAULT
+	setflag FLAG_MET_MAUVILLE_ICONIC_MOVE_TUTOR
+
+MauvilleCity_House2_EventScript_IconicTutorMenu:
+	message MauvilleCity_House2_Text_IconicTutorOffer
+	waitmessage
+	dynmultichoice 30, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, MauvilleCity_House2_Text_IconicTutorTeach, MauvilleCity_House2_Text_IconicTutorAbout, MauvilleCity_House2_Text_IconicTutorExit
+	goto_if_eq VAR_RESULT, 0, MauvilleCity_House2_EventScript_IconicTutorStart
+	goto_if_eq VAR_RESULT, 1, MauvilleCity_House2_EventScript_IconicTutorAbout
+	goto MauvilleCity_House2_EventScript_IconicTutorDeclined
+
+MauvilleCity_House2_EventScript_IconicTutorAbout:
+	msgbox MauvilleCity_House2_Text_IconicTutorIntro, MSGBOX_DEFAULT
+	goto MauvilleCity_House2_EventScript_IconicTutorMenu
+
+MauvilleCity_House2_EventScript_IconicTutorStart:
+	closemessage
 	setmoverelearnerstate MOVE_RELEARNER_ICONIC_MOVES
 	bufferstring STR_VAR_3, MoveRelearner_Text_MoveLWR
 @ The party screen and move list carry their own prompts. B in the list
 @ returns to the party screen; B there ends the lesson.
 MauvilleCity_House2_EventScript_IconicTutorChooseMon:
-	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
+	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER_DIRECT
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MauvilleCity_House2_EventScript_IconicTutorDeclined
 	special IsSelectedMonEgg
@@ -72,7 +104,7 @@ MauvilleCity_House2_EventScript_IconicTutorNothing:
 
 MauvilleCity_House2_EventScript_IconicTutorDeclined:
 	setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES
-	msgbox MauvilleCity_House2_Text_IconicTutorDeclined, MSGBOX_DEFAULT
+	closemessage
 	release
 	end
 
@@ -105,18 +137,35 @@ MauvilleCity_House2_Text_IconicTutorIntro:
 	.string "nobody else will ever teach them.\p"
 	.string "A flying Pikachu, a Magikarp with\n"
 	.string "Dragon Rage… I know them all.\p"
-	.string "The wilder ones I only share with\n"
-	.string "Trainers who have proven themselves.\p"
+	.string "More Badges unlock more lessons.\n"
+	.string "My neighbor has the catalogue.\p"
 	.string "Each move costs {STR_VAR_1} Bottle Caps\n"
 	.string "or one Gold Bottle Cap.\p"
 	.string "That Pokémon can relearn its purchased\n"
-	.string "moves here for free, even if it evolves!\p"
-	.string "Shall I teach one of yours?$"
+	.string "moves here for free, even if it evolves!$"
 
 MauvilleCity_House2_Text_IconicTutorNothing:
 	.string "Hmm… I have nothing for that one.\n"
 	.string "Or perhaps you need more Badges.$"
 
-MauvilleCity_House2_Text_IconicTutorDeclined:
-	.string "Come back whenever a legend\n"
-	.string "needs its signature move.$"
+MauvilleCity_House2_Text_IconicTutorOffer:
+	.string "What would you like?$"
+
+MauvilleCity_House2_Text_IconicTutorTeach:
+	.string "Teach a move$"
+
+MauvilleCity_House2_Text_IconicTutorAbout:
+	.string "About lessons$"
+
+MauvilleCity_House2_Text_IconicTutorExit:
+	.string "Exit$"
+
+MauvilleCity_House2_Text_WomanOffer:
+	.string "Browse the special move catalogue?\n"
+	.string "Regional forms share the lessons.$"
+
+MauvilleCity_House2_Text_Catalogue:
+	.string "Move catalogue$"
+
+MauvilleCity_House2_Text_CoinCase:
+	.string "Coin Case$"

@@ -406,9 +406,10 @@ BattleFrontier_BattlePikeLobby_Text_ExplainPokenavBagRules: @ 825C644
 	.string "during a Battle Choice challenge.$"
 
 BattleFrontier_BattlePikeLobby_Text_ExplainHeldItemRules: @ 825C68A
-	.string "During a Battle Choice challenge,\n"
-	.string "any Berry or Herb held by Pokémon\l"
-	.string "will be effective only once.$"
+	.string "A held Berry or Herb is used up\n"
+	.string "when it takes effect in battle.\p"
+	.string "It returns after that battle, ready\n"
+	.string "for the next room.$"
 
 BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules: @ 825C6EB
 	.string "During a Battle Choice challenge,\n"

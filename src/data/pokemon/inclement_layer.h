@@ -1,7 +1,6 @@
 // Inclement layer: Inclement Emerald's deliberate base stat changes and its
-// extra Abilities, read only by Pokemon that are not trainer-owned (wild,
-// player-owned, gifts, eggs; see IsMonTrainerOwned). Trainer, partner, facility
-// and Champions Circuit Pokemon never read it.
+// extra Abilities, shared by player, wild, trainer, partner, facility
+// and Champions Circuit Pokemon.
 //
 // Base stats: the whole line in HP/Atk/Def/SpA/SpD/Spe order, using Inclement's
 // exact value for every stat it deliberately changed (raised or lowered) and

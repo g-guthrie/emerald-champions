@@ -518,9 +518,10 @@ static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_WhichAbility[] = _("Which Ability?");
 static const u8 sText_DigThroughWall[] = _("Use Dig to open a passage\nthrough this wall?");
-static const u8 sText_LevelerComplete[] = _("Your party grew as high as your\nBadges allow: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerComplete[] = _("Your party grew to the current\nlevel cap: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CannotSendMonToBoxMail[] = _("Please remove the Mail\nbefore sending this Pokémon to a Box.{PAUSE_UNTIL_PRESS}");
 
 // static const data
 #include "data/party_menu.h"
@@ -1648,6 +1649,13 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
                 // Can't select if mon doesn't belong to you
                 PlaySE(SE_FAILURE);
                 DisplayPartyMenuMessage(sText_CannotSendMonToBoxPartner, FALSE);
+                ScheduleBgCopyTilemapToVram(2);
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            }
+            else if (ItemIsMail(GetMonData(GetPartyMonFromPartyMenuId(*slotPtr), MON_DATA_HELD_ITEM)))
+            {
+                PlaySE(SE_FAILURE);
+                DisplayPartyMenuMessage(sText_CannotSendMonToBoxMail, FALSE);
                 ScheduleBgCopyTilemapToVram(2);
                 gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
             }

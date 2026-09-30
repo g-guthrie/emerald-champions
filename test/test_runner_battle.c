@@ -2429,7 +2429,7 @@ void Ability_(u32 sourceLine, enum Ability ability)
     INVALID_IF(!DATA.currentMon, "Ability outside of PLAYER/OPPONENT");
     INVALID_IF(ability >= ABILITIES_COUNT, "Illegal ability id: %d", ability);
     species = GetMonData(DATA.currentMon, MON_DATA_SPECIES);
-    // Resolve the slot in the owner's view (trainer-owned: gSpeciesInfo; otherwise the Inclement layer).
+    // Resolve the shared official and Inclement Ability slots.
     if (FindSpeciesAbilitySlotForOwner(species, ability, IsMonTrainerOwned(DATA.currentMon), &slot))
     {
         SetMonData(DATA.currentMon, MON_DATA_ABILITY_NUM, &slot);

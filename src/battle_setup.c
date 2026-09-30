@@ -1155,7 +1155,7 @@ static void BattleSetup_ConfigureTrainerBattle(TrainerBattleParameter *battlePar
 
     if (battleParams->params.isDoubleBattle
      && !(battleParams->params.rivalBattleFlags & TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES)
-     && !HasEnoughMonsForDoubleBattle2())
+     && GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS)
     {
         PUSH(EventSnippet_NotEnoughMonsForDoubleBattle)
         return;
@@ -2412,7 +2412,8 @@ void RecordCampaignPrizePaid(void)
 u32 GetCampaignBattleMoneyReward(void)
 {
     return gBattleStruct->campaignRewardEligible
-        ? gBattleStruct->campaignLevelCap * gBattleStruct->campaignPrizeMultiplier : 0;
+        ? gBattleStruct->campaignLevelCap * gBattleStruct->campaignPrizeMultiplier
+            * gBattleStruct->moneyMultiplier : 0;
 }
 
 // Emerald Champions: any money a battle pays out answers to the same eligibility as the

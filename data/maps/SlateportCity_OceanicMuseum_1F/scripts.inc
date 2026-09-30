@@ -153,7 +153,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt:: @ 820AEF8
 	applymovement LOCALID_FAMILIAR_GRUNT, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
 	setflag FLAG_RECEIVED_TM46
@@ -305,8 +305,8 @@ SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis: @ 820B3AB
 	.string "You have to forgive me!$"
 
 SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain: @ 820B449
-	.string "That Rare Candy suits you more\n"
-	.string "than me.\p"
+	.string "Sell that Nugget and buy yourself\n"
+	.string "something useful.\p"
 	.string "I hope I never see you again!\n"
 	.string "Wahahaha!$"
 
@@ -356,8 +356,8 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2: @ 820B81F
 	.string "“Oceanic Minifact 2\n"
 	.string "Why is the sea salty?\p"
 	.string "“Seawater contains dissolved salt in\n"
-	.string "the form of sodium and chlorine ions.\p"
-	.string "“These ions leech out of rocks\n"
+	.string "the form of sodium and chloride ions.\p"
+	.string "“These ions leach out of rocks\n"
 	.string "and are carried out to sea by rain.\p"
 	.string "“The concentration of dissolved salt\n"
 	.string "makes the sea salty.”$"
@@ -384,4 +384,3 @@ SlateportCity_OceanicMuseum_1F_Text_DepthMeasuringMachine: @ 820BA9C
 	.string "a glass dome.\p"
 	.string "Maybe it's for measuring the depth\n"
 	.string "of something…$"
-

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/test.h"
 #include "pokemon.h"
+#include "event_data.h"
 #include "pokerus.h"
 #include "party_menu.h"
 #include "constants/party_menu.h"
@@ -69,7 +70,7 @@ TEST("Hunt rewards: Pokerus follows nature changes, recovery and boxed saves")
                 u32 expected = base;
                 if (gNaturesInfo[nature].statUp != gNaturesInfo[nature].statDown)
                 {
-                    if (stat == gNaturesInfo[nature].statUp) expected = base * 120 / 100;
+                    if (stat == gNaturesInfo[nature].statUp) expected = base * 115 / 100;
                     if (stat == gNaturesInfo[nature].statDown) expected = base * 90 / 100;
                 }
                 EXPECT_EQ(IsPokerusNatureBoosted(&mon, stat),
@@ -146,6 +147,138 @@ TEST("Hunt rewards: legacy Pokerus retains its benefit without acquiring a sprea
     GiveMonPokerus(&mon, TRUE);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_POKERUS), oldStatus);
     EXPECT_EQ(GetPokerusSpreadsLeft(&mon), 0);
+}
+
+TEST("Hot spring Pokerus: any infected partner can prepare without changing stats or transmission budget")
+{
+    static const u8 statuses[PARTY_SIZE] = {0xFE, 0xFD, 0xFC, 0xF4, 0, 0xFE};
+    struct Pokemon unchanged[PARTY_SIZE];
+    ZeroPlayerPartyMons();
+    EXPECT(!PreparePartyPokerusInHotSpring());
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        CreateMonWithIVs(mon, SPECIES_EEVEE, 50, 0, OTID_STRUCT_PLAYER_ID, 31);
+        u32 value = statuses[i];
+        SetMonData(mon, MON_DATA_POKERUS, &value);
+        value = i == PARTY_SIZE - 1;
+        SetMonData(mon, MON_DATA_IS_EGG, &value);
+        CalculateMonStats(mon);
+        unchanged[i] = *mon;
+    }
+    EXPECT(PreparePartyPokerusInHotSpring());
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        EXPECT_EQ(IsMonReadyForHotSpringTreatment(mon), i < 4);
+        EXPECT(!HasHotSpringPokerus(mon));
+        EXPECT_EQ(GetMonData(mon, MON_DATA_ATK), GetMonData(&unchanged[i], MON_DATA_ATK));
+        EXPECT_EQ(GetPokerusSpreadsLeft(mon), GetPokerusSpreadsLeft(&unchanged[i]));
+        EXPECT_EQ(RecoverMonPokerusInHotSpring(mon), i < 4);
+        EXPECT_EQ(HasHotSpringPokerus(mon), i < 4);
+        EXPECT_EQ(GetPokerusSpreadsLeft(mon), i < 4 ? 0 : GetPokerusSpreadsLeft(&unchanged[i]));
+        if (i >= 4)
+            EXPECT_EQ(memcmp(mon, &unchanged[i], sizeof(*mon)), 0);
+    }
+    EXPECT(!PreparePartyPokerusInHotSpring());
+    ZeroPlayerPartyMons();
+}
+
+TEST("Hot spring Pokerus: preview is read-only and treatment requires a prepared selected partner")
+{
+    ZeroPlayerPartyMons();
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    CreateMonWithIVs(mon, SPECIES_EEVEE, 50, 0, OTID_STRUCT_PLAYER_ID, 31);
+    CalculatePlayerPartyCount();
+    GiveMonPokerus(mon, FALSE);
+    gSpecialVar_0x8004 = 0;
+    EXPECT(!RecoverMonPokerusInHotSpring(mon));
+    EXPECT(PreparePartyPokerusInHotSpring());
+    struct Pokemon before = *mon;
+    BufferHotSpringPokerusPreview();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(memcmp(mon, &before, sizeof(*mon)), 0);
+    ApplyHotSpringPokerusTreatment();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT(HasHotSpringPokerus(mon));
+    EXPECT(!RecoverMonPokerusInHotSpring(mon));
+    ZeroPlayerPartyMons();
+}
+
+TEST("Hot spring Pokerus: nature stats gain fifteen and five percent across all natures, nature changes and boxed saves")
+{
+    ZeroPlayerPartyMons();
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    struct Pokemon restored;
+    CreateMonWithIVs(mon, SPECIES_EEVEE, 50, 0, OTID_STRUCT_PLAYER_ID, 31);
+    for (u32 stat = STAT_HP; stat < NUM_STATS; stat++)
+    {
+        u32 ev = 0;
+        SetMonData(mon, MON_DATA_HP_EV + stat, &ev);
+    }
+    u32 nature = NATURE_LONELY;
+    SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
+    GiveMonPokerus(mon, TRUE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK), 86);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_DEF), 63);
+    EXPECT(PreparePartyPokerusInHotSpring());
+    EXPECT(RecoverMonPokerusInHotSpring(mon));
+    // Recovery recalculates immediately; it replaces the penalty from the
+    // neutral baseline rather than multiplying the already-reduced stat.
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK), 86);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_DEF), 73);
+    for (nature = 0; nature < NUM_NATURES; nature++)
+    {
+        SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
+        CalculateMonStats(mon);
+        struct BoxPokemon saved = mon->box;
+        BoxMonToMon(&saved, &restored);
+        EXPECT_EQ(GetBoxMonData(&saved, MON_DATA_POKERUS), 0xFB);
+        EXPECT(HasHotSpringPokerus(&restored));
+        EXPECT(!CheckMonPokerus(&restored));
+        u32 boosts = 0;
+        for (u32 stat = STAT_HP; stat < NUM_STATS; stat++)
+        {
+            bool32 boosted = stat != STAT_HP
+                && gNaturesInfo[nature].statUp != gNaturesInfo[nature].statDown
+                && (stat == gNaturesInfo[nature].statUp || stat == gNaturesInfo[nature].statDown);
+            u32 base = CalculateSpeciesStatForOwner(SPECIES_EEVEE, NATURE_HARDY, stat, 50, 0, 31, FALSE);
+            u32 expected = !boosted ? base : base * (stat == gNaturesInfo[nature].statUp ? 115 : 105) / 100;
+            EXPECT_EQ(IsPokerusNatureBoosted(mon, stat), boosted);
+            EXPECT_EQ(IsPokerusNatureBoosted(&restored, stat), boosted);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP + stat), expected);
+            EXPECT_EQ(GetMonData(&restored, MON_DATA_MAX_HP + stat), expected);
+            EXPECT_EQ(GetMonData(&restored, MON_DATA_HP_EV + stat), 0);
+            boosts += boosted;
+        }
+        EXPECT_EQ(boosts, nature % 6 == 0 ? 0 : 2);
+    }
+    ZeroPlayerPartyMons();
+}
+
+TEST("Hot spring Pokerus: trainer-owned Pokemon never gain the upgrade or enhanced nature stats")
+{
+    ZeroPlayerPartyMons();
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    CreateMonWithIVs(mon, SPECIES_EEVEE, 50, 0, OTID_STRUCT_PLAYER_ID, 31);
+    u32 nature = NATURE_LONELY;
+    SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
+    GiveMonPokerus(mon, TRUE);
+    SetMonTrainerOwned(mon, TRUE);
+    EXPECT(!PreparePartyPokerusInHotSpring());
+    EXPECT_EQ(GetMonData(mon, MON_DATA_POKERUS), 0xFE);
+    // A stored marker must also confer no stat benefit on a trainer opponent.
+    u32 status = 0xFB;
+    SetMonData(mon, MON_DATA_POKERUS, &status);
+    CalculateMonStats(mon);
+    for (u32 stat = STAT_ATK; stat < NUM_STATS; stat++)
+    {
+        EXPECT(!IsPokerusNatureBoosted(mon, stat));
+        u32 expected = CalculateSpeciesStatForOwner(SPECIES_EEVEE, nature, stat, 50,
+                            GetMonData(mon, MON_DATA_HP_EV + stat), 31, TRUE);
+        EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP + stat), expected);
+    }
+    ZeroPlayerPartyMons();
 }
 
 TEST("Hunt rewards: Pokerus indicators preserve battle-status priority")

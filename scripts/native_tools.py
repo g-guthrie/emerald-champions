@@ -45,6 +45,7 @@ def run(command: list[str]) -> subprocess.CompletedProcess[str]:
 
 def find_mgba_prefix() -> Path:
     candidates = [Path(os.environ['MGBA_PREFIX'])] if os.environ.get('MGBA_PREFIX') else []
+    candidates.append(Path.home() / '.local/share/mgba-prefix')
     brew = shutil.which('brew')
     if brew:
         try:
@@ -65,7 +66,9 @@ def mgba_flags() -> list[str]:
     pkg_config = shutil.which('pkg-config')
     # An explicit prefix beats whatever pkg-config finds (Homebrew's bottle can
     # lag its ffmpeg dependency and fail to load).
-    if pkg_config and not os.environ.get('MGBA_PREFIX'):
+    # The local native build avoids that FFmpeg dependency entirely.
+    local_library = Path.home() / '.local/share/mgba-prefix/lib/libmgba.dylib'
+    if pkg_config and not os.environ.get('MGBA_PREFIX') and not local_library.is_file():
         try:
             flags = shlex.split(run([pkg_config, '--cflags', '--libs', 'mgba']).stdout)
             if flags:

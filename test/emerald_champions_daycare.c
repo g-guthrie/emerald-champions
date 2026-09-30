@@ -2,7 +2,10 @@
 #include "daycare.h"
 #include "event_data.h"
 #include "item.h"
+#include "malloc.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
+#include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "random.h"
 #include "test/overworld_script.h"
@@ -13,6 +16,117 @@ static void ResetNursery(void)
     ZeroPlayerPartyMons();
     memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
     FlagClear(FLAG_PENDING_DAYCARE_EGG);
+}
+
+TEST("Nursery deposit: party and PC transfers preserve Pokemon without free heap space")
+{
+    bool32 fromPc;
+    PARAMETRIZE { fromPc = FALSE; }
+    PARAMETRIZE { fromPc = TRUE; }
+    ResetNursery();
+    ResetPokemonStorageSystem();
+    struct Pokemon original;
+    CreateMonWithIVs(&original, SPECIES_EEVEE, 5, 12345, OTID_STRUCT_PLAYER_ID, 7);
+    SetMonMoveSlot(&original, MOVE_QUICK_ATTACK, 0);
+    u32 pp = 3, ev = 200, item = ITEM_LEFTOVERS;
+    SetMonData(&original, MON_DATA_PP1, &pp);
+    SetMonData(&original, MON_DATA_SPEED_EV, &ev);
+    SetMonData(&original, MON_DATA_HELD_ITEM, &item);
+    CalculateMonStats(&original);
+    CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_WINGULL, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
+    struct Pokemon companion = gParties[B_TRAINER_PLAYER][0];
+    if (fromPc)
+    {
+        SetBoxMonAt(0, 0, &original.box);
+        gSpecialVar_MonBoxId = gSpecialVar_MonBoxPos = 0;
+        gSpecialVar_0x8004 = PC_MON_CHOSEN;
+    }
+    else
+    {
+        gParties[B_TRAINER_PLAYER][1] = original;
+        gSpecialVar_0x8004 = 1;
+    }
+    CalculatePlayerPartyCount();
+    void *blocks[64];
+    u32 count = 0;
+    const struct MemBlock *head = HeapHead(), *block = head;
+    do
+    {
+        if (!block->allocated)
+        {
+            ASSUME(count < ARRAY_COUNT(blocks));
+            blocks[count++] = AllocUnchecked(block->size);
+        }
+        block = block->next;
+    } while (block != head);
+    StoreSelectedPokemonInDaycare();
+    for (u32 i = 0; i < count; i++)
+        Free(blocks[i]);
+    EXPECT_EQ(memcmp(&gSaveBlock1Ptr->daycare.mons[0].mon, &original.box, sizeof(original.box)), 0);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &companion, sizeof(companion)), 0);
+    EXPECT_EQ(CalculatePlayerPartyCount(), 1);
+    EXPECT_EQ(GetBoxMonDataAt(0, 0, MON_DATA_SPECIES), SPECIES_NONE);
+    EXPECT_EQ(CountPokemonInDaycare(&gSaveBlock1Ptr->daycare), 1);
+    ResetNursery();
+    ResetPokemonStorageSystem();
+}
+
+TEST("Nursery egg names: gift and bred eggs store only the padded nickname")
+{
+    bool32 bred;
+    PARAMETRIZE { bred = FALSE; }
+    PARAMETRIZE { bred = TRUE; }
+    static const u8 expectedName[POKEMON_NAME_BUFFER_SIZE] = _("タマゴ");
+    struct Pokemon egg, expected;
+    ResetNursery();
+    if (bred)
+    {
+        CreateMonWithIVs(&egg, SPECIES_BULBASAUR, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
+        gSaveBlock1Ptr->daycare.mons[0].mon = egg.box;
+        CreateMonWithIVs(&egg, SPECIES_DITTO, 5, 0, OTID_STRUCT_PLAYER_ID, 31);
+        gSaveBlock1Ptr->daycare.mons[1].mon = egg.box;
+        TriggerPendingDaycareEgg();
+        EXPECT(GiveEggFromDaycare());
+        egg = gParties[B_TRAINER_PLAYER][0];
+    }
+    else
+        CreateEgg(&egg, SPECIES_BULBASAUR, TRUE);
+    expected = egg;
+    SetMonData(&expected, MON_DATA_NICKNAME, expectedName);
+    EXPECT_EQ(memcmp(&egg, &expected, sizeof(egg)), 0);
+    EXPECT(GetMonData(&egg, MON_DATA_IS_EGG));
+    ResetNursery();
+}
+
+TEST("Nursery deposit: a full Day Care leaves both the selection and its occupants untouched")
+{
+    bool32 fromPc;
+    PARAMETRIZE { fromPc = FALSE; }
+    PARAMETRIZE { fromPc = TRUE; }
+    ResetNursery();
+    ResetPokemonStorageSystem();
+    struct Pokemon original;
+    CreateMonWithIVs(&original, SPECIES_EEVEE, 5, 12345, OTID_STRUCT_PLAYER_ID, 7);
+    for (u32 i = 0; i < DAYCARE_MON_COUNT; i++)
+    {
+        gSaveBlock1Ptr->daycare.mons[i].mon = original.box;
+        gSaveBlock1Ptr->daycare.mons[i].steps = 100 + i;
+    }
+    struct DayCare saved = gSaveBlock1Ptr->daycare;
+    gSpecialVar_MonBoxId = gSpecialVar_MonBoxPos = 0;
+    if (fromPc)
+        SetBoxMonAt(0, 0, &original.box);
+    else
+        gParties[B_TRAINER_PLAYER][0] = original;
+    CalculatePlayerPartyCount();
+    gSpecialVar_0x8004 = fromPc ? PC_MON_CHOSEN : 0;
+    StoreSelectedPokemonInDaycare();
+    const struct BoxPokemon *selected = fromPc ? GetBoxedMonPtr(0, 0) : &gParties[B_TRAINER_PLAYER][0].box;
+    EXPECT_EQ(memcmp(selected, &original.box, sizeof(original.box)), 0);
+    EXPECT_EQ(memcmp(&gSaveBlock1Ptr->daycare, &saved, sizeof(saved)), 0);
+    EXPECT_EQ(CalculatePlayerPartyCount(), fromPc ? 0 : 1);
+    ResetNursery();
+    ResetPokemonStorageSystem();
 }
 
 TEST("Nursery parents produce the baby species without Incense")

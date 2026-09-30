@@ -481,7 +481,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	end
 
 PetalburgCity_Gym_EventScript_GiveFacade:: @ 8204ED2
-	giveitem ITEM_PYROARITE
+	giveuniqueitem ITEM_PYROARITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM42

@@ -14,7 +14,7 @@
 
 rng_value_t GeneratePartySeed(const struct Trainer *trainer)
 {
-    // Level tuning must not reroll party selection or personalities on other modes.
+    // Level tuning must not reroll party selection or personalities.
     struct Trainer seedTrainer = *trainer;
     seedTrainer.easyLevelReduction = FALSE;
     u32 seed = Crc32B((const u8 *)&seedTrainer, sizeof(seedTrainer)) ^ READ_OTID_FROM_SAVE;
@@ -96,22 +96,12 @@ void Test_ModifyTrainerPersonalityForNature(u32 *personality, u32 nature)
 
 static bool32 SetCorrectAbilityNum(struct Pokemon *mon, enum Species species, enum Ability ability)
 {
-    const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[species];
     u32 abilityNum;
-    u32 maxAbilityNum = ARRAY_COUNT(speciesInfo->abilities);
-    for (abilityNum = 0; abilityNum < maxAbilityNum; ++abilityNum)
-    {
-        if (speciesInfo->abilities[abilityNum] == ability)
-            break;
-    }
-    // An authored Ability mismatch changes the designed battle if we recover
-    // through the generic slot-zero fallback.  Make it fatal in every build;
-    // the release verifier catches the same condition before a ROM ships.
-    fatal_assertf(abilityNum < maxAbilityNum, "illegal ability %S for %S", gAbilitiesInfo[ability].name, speciesInfo->speciesName);
-    if (abilityNum >= maxAbilityNum)
-    {
+    bool32 found = FindSpeciesAbilitySlotForOwner(species, ability, TRUE, &abilityNum);
+    // An authored mismatch must fail, never silently change the designed team.
+    fatal_assertf(found, "illegal ability %S for %S", gAbilitiesInfo[ability].name, GetSpeciesName(species));
+    if (!found)
         return FALSE;
-    }
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
     return TRUE;
 }
@@ -146,7 +136,7 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     u32 personality = (LocalRandom32(&trainer->localRngState) & 0xFFFFDF00) + 0x1000;
     u32 genderValue = 0;
     u8 battleLevel = trainerMon->useLevelOffset ? GetCampaignTrainerLevel(trainerMon->levelOffset) : trainerMon->lvl;
-    if (trainer->easyLevelReduction && GetCurrentDifficultyLevel() == DIFFICULTY_EASY)
+    if (trainer->easyLevelReduction)
         battleLevel = max(1, battleLevel - 1);
     if (trainerMon->gender == TRAINER_MON_RANDOM_GENDER)
         genderValue = LocalRandom32(&trainer->localRngState) & 0x000000FF;
@@ -161,7 +151,7 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     CreateMon(mon, trainerMon->species,
               min(battleLevel, MAX_LEVEL),
               personality, trainer->otID);
-    // Trainer Pokemon never read the Inclement layer (IsMonTrainerOwned).
+    // Species buffs are shared; ownership preserves trainer-specific mechanics.
     SetMonTrainerOwned(mon, TRUE);
     if (trainerMon->nickname != NULL)
         SetMonData(mon, MON_DATA_NICKNAME, trainerMon->nickname);

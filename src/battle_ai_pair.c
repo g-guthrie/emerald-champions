@@ -7307,7 +7307,7 @@ static bool32 PairMegaForfeitsSpeedBoost(enum BattlerId battler)
 // built on. The trial prices this turn inside the new weather, but the five
 // turns after it - Slush Rush, a sure Blizzard, the foe's sun gone - are the
 // reason the form exists, and a one-turn board never sees them.
-static bool32 PairMegaRestoresPlanWeather(enum BattlerId battler)
+static u32 PairMegaPlanWeatherHorizon(enum BattlerId battler)
 {
     if (!IsBattlerAlive(battler) || (gBattleWeather & B_WEATHER_PRIMAL_ANY))
         return FALSE;
@@ -7326,7 +7326,18 @@ static bool32 PairMegaRestoresPlanWeather(enum BattlerId battler)
     case ABILITY_SNOW_WARNING: plan &= EC_BATTLE_PLAN_SNOW; weather = B_WEATHER_ICY_ANY; break;
     default: return FALSE;
     }
-    return plan != 0 && !(gBattleWeather & weather);
+    if (plan == 0 || (gBattleWeather & weather))
+        return 0;
+    u32 value = PAIR_SETUP_HORIZON;
+    enum BattlerId partner = GetPartnerBattler(battler);
+    // Restoring the weather also buys the living partner future turns of
+    // its weather Speed Ability. The trial only prices that Speed this turn;
+    // unlike an Icy Wind drop, it had no value for the turns that follow.
+    if (IsBattlerAlive(partner) && !(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+     && PairWeatherSpeed(gAiLogicData->abilities[partner], gAiLogicData->holdEffects[partner], weather)
+     && !PairWeatherSpeed(gAiLogicData->abilities[partner], gAiLogicData->holdEffects[partner], gBattleWeather))
+        value += PAIR_SETUP_HORIZON;
+    return value;
 }
 
 bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
@@ -7423,12 +7434,13 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
         }
     bool32 bothMegaLegal = canMega == 3
         && !(IsPartnerMonFromSameTrainer(actor) && GetRemainingMegaEvolutions(actor) < 2);
-    bool32 boostBeforeMega[2] = {FALSE, FALSE}, megaWeather[2] = {FALSE, FALSE};
+    bool32 boostBeforeMega[2] = {FALSE, FALSE};
+    u32 megaWeatherValue[2] = {0, 0};
     for (u32 index = 0; index < 2; index++)
         if (canMega & (1u << index))
         {
             boostBeforeMega[index] = PairMegaForfeitsSpeedBoost(actors[index]);
-            megaWeather[index] = PairMegaRestoresPlanWeather(actors[index]);
+            megaWeatherValue[index] = PairMegaPlanWeatherHorizon(actors[index]);
         }
     for (u32 index = 0; index < 2; index++)
         if (PairCanSwitch(actors[index]))
@@ -7642,7 +7654,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
                     for (u32 index = 0; index < 2; index++)
                         if (mega & (1u << index))
                             score += (boostBeforeMega[index] ? -PAIR_SETUP_HORIZON : PAIR_MEGA_HORIZON)
-                                + (megaWeather[index] ? PAIR_SETUP_HORIZON : 0);
+                                + (s32)megaWeatherValue[index];
                     gAiPairMegaTrace[actor] |= AI_PAIR_MEGA_SCORED;
                 }
                 // Demand a meaningful improvement before voluntarily giving up

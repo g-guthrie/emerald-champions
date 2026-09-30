@@ -106,6 +106,7 @@ static const struct CutTreeHabitatSlot
 };
 
 extern const u8 EventScript_CutTree[];
+extern const u8 EventScript_RockSmash[];
 
 u32 GetCutTreeSlotCount(void)
 {
@@ -161,7 +162,7 @@ u8 GetCutTreeEncounterLevelFromRoll(u32 roll)
 
 // Does this map have a Cut tree? The Pokedex area page marks the tree
 // habitat wherever one grows.
-bool32 MapHeaderHasCutTrees(const struct MapHeader *header)
+static bool32 MapHeaderHasEncounterObject(const struct MapHeader *header, const u8 *script)
 {
     const struct MapEvents *events = header->events;
 
@@ -169,10 +170,20 @@ bool32 MapHeaderHasCutTrees(const struct MapHeader *header)
         return FALSE;
     for (u32 i = 0; i < events->objectEventCount; i++)
     {
-        if (events->objectEvents[i].script == EventScript_CutTree)
+        if (events->objectEvents[i].script == script)
             return TRUE;
     }
     return FALSE;
+}
+
+bool32 MapHeaderHasCutTrees(const struct MapHeader *header)
+{
+    return MapHeaderHasEncounterObject(header, EventScript_CutTree);
+}
+
+bool32 MapHeaderHasRockSmash(const struct MapHeader *header)
+{
+    return MapHeaderHasEncounterObject(header, EventScript_RockSmash);
 }
 
 const struct WildPokemon gWildFeebas = {20, 25, SPECIES_FEEBAS};

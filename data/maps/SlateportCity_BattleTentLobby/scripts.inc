@@ -196,7 +196,7 @@ SlateportCity_BattleTentLobby_EventScript_TormentGiver:: @ 8208A3D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM41
@@ -281,9 +281,9 @@ SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe: @ 8208B4E
 	.string "Just, you know, take this!$"
 
 SlateportCity_BattleTentLobby_Text_ExplainTorment: @ 8208C5C
-	.string "That's, like, a Rare Candy!\p"
-	.string "It, like, raises a Pokémon a level,\n"
-	.string "as far as your Badges allow.\p"
+	.string "That's, like, a Nugget!\p"
+	.string "Sell it for ¥2,500 and buy\n"
+	.string "something your team needs.\p"
 	.string "Hey, now, you listen here, like,\n"
 	.string "I'm not laying a torment on you!$"
 

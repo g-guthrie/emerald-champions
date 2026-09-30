@@ -437,6 +437,8 @@ u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
 
 // The catalogue's flat index for an item, or -1 if it is not vendor stock.
 // Berries are deliberately outside this: the harvest economy governs them.
+static enum Species GetFormEquipmentSpecies(enum Item item);
+
 static s32 EmeraldChampionsBattleItemIndex(enum Item item)
 {
     s32 index = 0;
@@ -486,6 +488,12 @@ bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
 
     // Anything outside the catalogue is not gated at all.
     if (index < 0)
+        return TRUE;
+    // Species equipment must have a first source even when no world pickup
+    // exists. Catching its user introduces these paid shelves.
+    enum Species equipmentSpecies = GetFormEquipmentSpecies(item);
+    if (equipmentSpecies != SPECIES_NONE
+        && GetSetPokedexFlag(SpeciesToNationalPokedexNum(equipmentSpecies), FLAG_GET_CAUGHT))
         return TRUE;
     if (IsBattleItemStockedByBadges(item))
         return TRUE;
@@ -557,8 +565,24 @@ bool32 CanReceiveFrontierReward(void)
 
 bool32 CanReceiveLatiStones(void)
 {
-    static const struct ItemSlot gifts[] = {{ITEM_LATIOSITE, 1}, {ITEM_LATIASITE, 1}};
-    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
+    struct ItemSlot gifts[2];
+    u32 count = 0;
+
+    if (!GetFiniteDuplicateRewardValue(ITEM_LATIOSITE))
+        gifts[count++] = (struct ItemSlot){ITEM_LATIOSITE, 1};
+    if (!GetFiniteDuplicateRewardValue(ITEM_LATIASITE))
+        gifts[count++] = (struct ItemSlot){ITEM_LATIASITE, 1};
+    return count == 0 || CheckBagHasSpaceForItemBundle(gifts, count);
+}
+
+bool32 CanReceiveShellBellReward(void)
+{
+    struct ItemSlot gifts[2] = {{ITEM_SHELL_BELL, 1}};
+    u32 count = 1;
+
+    if (!FlagGet(FLAG_SHOALCAVE_SLOWBRONITE) && !GetFiniteDuplicateRewardValue(ITEM_SLOWBRONITE))
+        gifts[count++] = (struct ItemSlot){ITEM_SLOWBRONITE, 1};
+    return CheckBagHasSpaceForItemBundle(gifts, count);
 }
 
 // CanReceiveNormanMegaGift lives in mega_stone_rewards.c beside the starter stone table.
@@ -665,8 +689,11 @@ void TakeEmeraldChampionsHandoffItem(void)
 
 static enum Species GetFormEquipmentSpecies(enum Item item)
 {
+    if (gItemsInfo[item].sortType == ITEM_TYPE_MEMORY)
+        return SPECIES_SILVALLY;
     switch (item)
     {
+    case ITEM_LUCKY_PUNCH: return SPECIES_CHANSEY;
     case ITEM_ADAMANT_CRYSTAL: return SPECIES_DIALGA;
     case ITEM_LUSTROUS_GLOBE: return SPECIES_PALKIA;
     case ITEM_GRISEOUS_CORE: return SPECIES_GIRATINA;
@@ -3198,46 +3225,46 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Raichu{CLEAR_TO 72}4,500 Coins"),
         COMPOUND_STRING("Marowak{CLEAR_TO 72}4,500 Coins"),
         COMPOUND_STRING("Exeggutor{CLEAR_TO 72}4,500 Coins"),
-        COMPOUND_STRING("Genesect{CLEAR_TO 72}9,999 Coins"),
+        COMPOUND_STRING("Genesect{CLEAR_TO 72}5,000 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
     {
-        COMPOUND_STRING("Bulbasaur{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Chikorita{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Treecko{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Turtwig{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Snivy{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Chespin{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Rowlet{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Grookey{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Sprigatito{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Bulbasaur{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Chikorita{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Treecko{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Turtwig{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Snivy{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Chespin{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Rowlet{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Grookey{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Sprigatito{CLEAR_TO 72}500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
     {
-        COMPOUND_STRING("Charmander{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Cyndaquil{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Torchic{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Chimchar{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Tepig{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Fennekin{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Litten{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Scorbunny{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Fuecoco{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Charmander{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Cyndaquil{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Torchic{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Chimchar{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Tepig{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Fennekin{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Litten{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Scorbunny{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Fuecoco{CLEAR_TO 72}500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
     {
-        COMPOUND_STRING("Squirtle{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Totodile{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Mudkip{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Piplup{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Oshawott{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Froakie{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Popplio{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Sobble{CLEAR_TO 72}2,500 Coins"),
-        COMPOUND_STRING("Quaxly{CLEAR_TO 72}2,500 Coins"),
+        COMPOUND_STRING("Squirtle{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Totodile{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Mudkip{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Piplup{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Oshawott{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Froakie{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Popplio{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Sobble{CLEAR_TO 72}500 Coins"),
+        COMPOUND_STRING("Quaxly{CLEAR_TO 72}500 Coins"),
         gText_Exit,
     },
     [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
@@ -5080,9 +5107,16 @@ static void UIAskConfirmation(void)
     DisplayYesNoMenuDefaultYes();
 }
 
-static s32 UIWaitConfirmation(void)
+static s32 UIWaitConfirmation(bool32 keepOnNo)
 {
-    return Menu_ProcessInputNoWrapClearOnChoose();
+    s32 result = Menu_ProcessInputNoWrap();
+    if (result == MENU_NOTHING_CHOSEN)
+        return result;
+    if (keepOnNo && (result == 1 || result == MENU_B_PRESSED))
+        Menu_MoveCursorNoWrapAround(-1); // The follow-up question defaults to Yes.
+    else
+        EraseYesNoWindow();
+    return result;
 }
 
 static void UIPrintMessage(const u8 *message)
@@ -5612,36 +5646,60 @@ void CreateEventLegalEnemyMon(void)
         ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], gSpecialVar_0x8006);
 }
 
-// Rolls the Day Care's gift egg: a random species from the table, plus one of
-// that species' three egg moves. 0x8004 takes the species, 0x8005 the move.
+// Repeat Day Care eggs supplement habitats that are already accessible.
+// The first, guaranteed Togepi stays in the map script. Feebas remains a
+// Route 119 tile discovery. 0x8004 takes the species, 0x8005 the egg move.
 void SetSpeciesAndEggMove(void)
 {
-    static const u16 sEggMoves[][4] =
+    static const struct
     {
-        {SPECIES_BAGON,     MOVE_DRAGON_DANCE,  MOVE_DRAGON_RUSH,   MOVE_THRASH},
-        {SPECIES_SHUPPET,   MOVE_GUNK_SHOT,     MOVE_DESTINY_BOND,  MOVE_PHANTOM_FORCE},
-        {SPECIES_SNEASEL,   MOVE_FAKE_OUT,      MOVE_ICICLE_CRASH,  MOVE_BITE},
-        {SPECIES_CORPHISH,  MOVE_DRAGON_DANCE,  MOVE_AQUA_JET,      MOVE_BODY_SLAM},
-        {SPECIES_MARILL,    MOVE_BELLY_DRUM,    MOVE_AQUA_JET,      MOVE_PERISH_SONG},
-        {SPECIES_EMOLGA,    MOVE_ROOST,         MOVE_AIR_SLASH,     MOVE_BATON_PASS},
-        {SPECIES_GOOMY,     MOVE_ACID_ARMOR,    MOVE_POISON_TAIL,   MOVE_IRON_TAIL},
-        {SPECIES_RHYHORN,   MOVE_CRUNCH,        MOVE_METAL_BURST,   MOVE_DRAGON_RUSH},
-        {SPECIES_GASTLY,    MOVE_PERISH_SONG,   MOVE_DISABLE,       MOVE_CLEAR_SMOG},
-        {SPECIES_PICHU,     MOVE_SURF,          MOVE_FLY,           MOVE_EXTREME_SPEED},
-        {SPECIES_WIMPOD,    MOVE_SPIKES,        MOVE_AQUA_JET,      MOVE_METAL_CLAW},
-        {SPECIES_PONYTA,    MOVE_HYPNOSIS,      MOVE_MORNING_SUN,   MOVE_HIGH_HORSEPOWER},
-        {SPECIES_SNOVER,    MOVE_LEECH_SEED,    MOVE_AVALANCHE,     MOVE_SEED_BOMB},
-        {SPECIES_FERROSEED, MOVE_SPIKES,        MOVE_LEECH_SEED,    MOVE_ACID_SPRAY},
-        {SPECIES_TAILLOW,   MOVE_BOOMBURST,     MOVE_BOOMBURST,     MOVE_BOOMBURST},
-        {SPECIES_DRATINI,   MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED},
-        {SPECIES_FEEBAS,    MOVE_HAZE,          MOVE_HYPNOSIS,      MOVE_MIRROR_COAT},
+        u16 species;
+        u16 moves[3];
+        u16 licenseFlag;
+        u16 badgeFlag;
+        bool8 needsBike;
+    } sEggGifts[] =
+    {
+        {SPECIES_BAGON,     {MOVE_DRAGON_DANCE,  MOVE_DRAGON_RUSH,   MOVE_THRASH}, FLAG_RECEIVED_HM_WATERFALL, FLAG_BADGE08_GET, FALSE},
+        {SPECIES_SHUPPET,   {MOVE_GUNK_SHOT,     MOVE_DESTINY_BOND,  MOVE_PHANTOM_FORCE}, FLAG_RECEIVED_HM_SURF, FLAG_BADGE05_GET, FALSE},
+        {SPECIES_SNEASEL,   {MOVE_FAKE_OUT,      MOVE_ICICLE_CRASH,  MOVE_BITE}, 0, 0, TRUE},
+        {SPECIES_CORPHISH,  {MOVE_DRAGON_DANCE,  MOVE_AQUA_JET,      MOVE_BODY_SLAM}, 0, 0, FALSE},
+        {SPECIES_MARILL,    {MOVE_BELLY_DRUM,    MOVE_AQUA_JET,      MOVE_PERISH_SONG}, 0, 0, FALSE},
+        {SPECIES_EMOLGA,    {MOVE_ROOST,         MOVE_AIR_SLASH,     MOVE_BATON_PASS}, FLAG_RECEIVED_HM_CUT, FLAG_BADGE01_GET, FALSE},
+        {SPECIES_GOOMY,     {MOVE_ACID_ARMOR,    MOVE_POISON_TAIL,   MOVE_IRON_TAIL}, FLAG_RECEIVED_HM_CUT, FLAG_BADGE01_GET, FALSE},
+        {SPECIES_RHYHORN,   {MOVE_CRUNCH,        MOVE_METAL_BURST,   MOVE_DRAGON_RUSH}, FLAG_RECEIVED_HM_SURF, FLAG_BADGE05_GET, TRUE},
+        {SPECIES_GASTLY,    {MOVE_PERISH_SONG,   MOVE_DISABLE,       MOVE_CLEAR_SMOG}, 0, 0, FALSE},
+        {SPECIES_PICHU,     {MOVE_SURF,          MOVE_FLY,           MOVE_EXTREME_SPEED}, 0, 0, FALSE},
+        {SPECIES_WIMPOD,    {MOVE_SPIKES,        MOVE_AQUA_JET,      MOVE_METAL_CLAW}, FLAG_RECEIVED_HM_ROCK_SMASH, FLAG_BADGE03_GET, FALSE},
+        {SPECIES_PONYTA,    {MOVE_HYPNOSIS,      MOVE_MORNING_SUN,   MOVE_HIGH_HORSEPOWER}, 0, FLAG_BADGE03_GET, FALSE},
+        {SPECIES_SNOVER,    {MOVE_LEECH_SEED,    MOVE_AVALANCHE,     MOVE_SEED_BOMB}, 0, 0, TRUE},
+        {SPECIES_FERROSEED, {MOVE_SPIKES,        MOVE_LEECH_SEED,    MOVE_ACID_SPRAY}, FLAG_MET_ARCHIE_METEOR_FALLS, 0, FALSE},
+        {SPECIES_TAILLOW,   {MOVE_BOOMBURST,     MOVE_BOOMBURST,     MOVE_BOOMBURST}, 0, 0, FALSE},
+        {SPECIES_DRATINI,   {MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED}, FLAG_RECEIVED_HM_SURF, FLAG_BADGE05_GET, FALSE},
     };
+    u8 eligible[ARRAY_COUNT(sEggGifts)];
+    u32 count = 0;
+    // Old saves may still carry either retired bicycle id.
+    bool32 hasBike = CheckBagHasItem(ITEM_BICYCLE, 1)
+                  || CheckBagHasItem(ITEM_MACH_BIKE, 1)
+                  || CheckBagHasItem(ITEM_ACRO_BIKE, 1);
 
-    u32 randSpecies = Random() % ARRAY_COUNT(sEggMoves);
-    u32 randEggMove = (Random() % 3) + 1; // columns 1..3 are the egg moves
+    for (u32 i = 0; i < ARRAY_COUNT(sEggGifts); i++)
+    {
+        if (sEggGifts[i].licenseFlag && !FlagGet(sEggGifts[i].licenseFlag))
+            continue;
+        if (sEggGifts[i].badgeFlag && !FlagGet(sEggGifts[i].badgeFlag))
+            continue;
+        if (sEggGifts[i].needsBike && !hasBike)
+            continue;
+        eligible[count++] = i;
+    }
 
-    gSpecialVar_0x8004 = sEggMoves[randSpecies][0];
-    gSpecialVar_0x8005 = sEggMoves[randSpecies][randEggMove];
+    u32 randSpecies = eligible[Random() % count]; // five ungated species always fit
+    u32 randEggMove = Random() % 3;
+
+    gSpecialVar_0x8004 = sEggGifts[randSpecies].species;
+    gSpecialVar_0x8005 = sEggGifts[randSpecies].moves[randEggMove];
 }
 
 // Teaches the gift egg the move SetSpeciesAndEggMove rolled.

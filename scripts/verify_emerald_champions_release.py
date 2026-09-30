@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the deterministic release gates for an Emerald Champions ROM."""
+"""Run the deterministic release gates for an Inclement Emerald 2 ROM."""
 
 from __future__ import annotations
 
@@ -92,7 +92,7 @@ def verify_rom(rom: Path, elf: Path) -> None:
     require(elf.is_file(), f"release ELF is missing: {elf}")
     verify_rom_elf_pair(rom, elf)
     data = rom.read_bytes()
-    require(data[0xA0:0xAC] == b"EM CHAMPIONS", f"wrong ROM title: {data[0xA0:0xAC]!r}")
+    require(data[0xA0:0xAC] == b"INCLEMENT E2", f"wrong ROM title: {data[0xA0:0xAC]!r}")
     require(data[0xAC:0xB0] == b"BPEE", f"wrong ROM game code: {data[0xAC:0xB0]!r}")
     require(data[0xB0:0xB2] == b"01", f"wrong ROM maker code: {data[0xB0:0xB2]!r}")
     require(data[0xBD] == gba_header_checksum(data), "GBA header checksum is invalid")
@@ -169,7 +169,7 @@ def main() -> None:
     verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)
     verify_build_freshness(args.rom.resolve(), args.elf.resolve())
     verify_rom(args.rom.resolve(), args.elf.resolve())
-    print("\nEMERALD CHAMPIONS RELEASE GATES: PASS")
+    print("\nINCLEMENT EMERALD 2 RELEASE GATES: PASS")
 
 
 if __name__ == "__main__":

@@ -1258,7 +1258,9 @@ static u8 SaveYesNoCallback(void)
 
 static u8 SaveConfirmInputCallback(void)
 {
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    // The overwrite question reuses this box. Only remove it when leaving
+    // the confirmation flow, rather than flashing it off between questions.
+    switch (Menu_ProcessInputNoWrap())
     {
     case 0: // Yes
         switch (gSaveFileStatus)
@@ -1271,17 +1273,22 @@ static u8 SaveConfirmInputCallback(void)
                 return SAVE_IN_PROGRESS;
             }
 
+            EraseYesNoWindow();
             sSaveDialogCallback = SaveSavingMessageCallback;
             return SAVE_IN_PROGRESS;
         default:
             if (SKIP_SAVE_CONFIRMATION)
+            {
+                EraseYesNoWindow();
                 sSaveDialogCallback = SaveSavingMessageCallback;
+            }
             else
                 sSaveDialogCallback = SaveFileExistsCallback;
             return SAVE_IN_PROGRESS;
         }
     case MENU_B_PRESSED:
     case 1: // No
+        EraseYesNoWindow();
         HideSaveInfoWindow();
         HideSaveMessageWindow();
         return SAVE_CANCELED;
@@ -1307,14 +1314,14 @@ static u8 SaveFileExistsCallback(void)
 
 static u8 SaveConfirmOverwriteDefaultNoCallback(void)
 {
-    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
+    Menu_MoveCursorNoWrapAround(1); // Retain the box; default to No for a different save.
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveConfirmOverwriteCallback(void)
 {
-    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
+    // Yes is still selected from the first question.
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }

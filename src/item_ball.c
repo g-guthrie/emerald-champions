@@ -1,11 +1,32 @@
 #include "global.h"
 #include "item_ball.h"
 #include "event_data.h"
+#include "script.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "constants/flags.h"
 
 static u32 GetItemBallAmountFromTemplate(u32);
 static u32 GetItemBallIdFromTemplate(u32);
+
+// A standard pickup can use a custom script and need not carry an item in its
+// template. Only its persistent object flag makes duplicate compensation finite.
+void CheckItemBallHasPermanentReceipt(void)
+{
+    Script_RequestEffects(SCREFF_V1);
+    gSpecialVar_Result = FALSE;
+    if (gMapHeader.events == NULL)
+        return;
+    for (u32 i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        const struct ObjectEventTemplate *object = &gMapHeader.events->objectEvents[i];
+        if (object->localId == gSpecialVar_LastTalked)
+        {
+            gSpecialVar_Result = object->flagId > TEMP_FLAGS_END;
+            return;
+        }
+    }
+}
 
 static u32 GetItemBallAmountFromTemplate(u32 itemBallId)
 {

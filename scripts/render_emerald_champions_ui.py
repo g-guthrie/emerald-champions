@@ -956,11 +956,11 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
     # Field moves without HM carriers: a Zigzagoon that could learn the move
-    # (but does not know it) performs it once the badge is held. UP turns to
-    # face the obstacle; a steady A advances the obstacle text, confirms Yes,
+    # (but does not know it) performs it once the badge and license are held.
+    # The direction press faces the obstacle; A advances the text, confirms Yes,
     # and dismisses the used-move text; the run stops at the showcase.
     "field-move-cut-fallback": {
-        "id": scenario_id("FIELD_MOVE_CUT"), "frames": 1500, "keys": [(200, 2, "UP")],
+        "id": scenario_id("FIELD_MOVE_CUT"), "frames": 1500, "keys": [(200, 2, "RIGHT")],
         "repeat_key": (260, 1400, 80, 2, "A"),
         "verify": True, "stop_on_observed": True,
     },

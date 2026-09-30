@@ -49,13 +49,13 @@ FortreeCity_Mart_EventScript_SpenserBattle::
 	msgbox FortreeCity_Mart_Text_SpenserBeforeBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat
 FortreeCity_Mart_EventScript_SpenserReward::
-	setvar VAR_0x8004, ITEM_CHOICE_SCARF
+	setvar VAR_0x8004, ITEM_ASSAULT_VEST
 	setvar VAR_0x8005, 3
 	specialvar VAR_RESULT, CanReceiveFrontierReward
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox FortreeCity_Mart_Text_SpenserGiveChoiceScarf, MSGBOX_DEFAULT
-	giveitem ITEM_CHOICE_SCARF
+	msgbox FortreeCity_Mart_Text_SpenserGiveAssaultVest, MSGBOX_DEFAULT
+	giveitem ITEM_ASSAULT_VEST
 	giveitem ITEM_BOTTLE_CAP, 3
 	msgbox FortreeCity_Mart_Text_SpenserFarewell, MSGBOX_AUTOCLOSE
 	switch VAR_FACING
@@ -100,10 +100,12 @@ FortreeCity_Mart_Text_SpenserBeforeBattle:
 FortreeCity_Mart_Text_SpenserDefeat:
 	.string "Gwahahah!$"
 
-FortreeCity_Mart_Text_SpenserGiveChoiceScarf:
+FortreeCity_Mart_Text_SpenserGiveAssaultVest:
 	.string "Hahahaha! Saw right through my\n"
 	.string "bluster, did you?\p"
-	.string "Here, take these things!$"
+	.string "An Assault Vest and three Caps!\p"
+	.string "The Vest boosts Sp. Def, but its\n"
+	.string "holder can only use attacking moves.$"
 
 FortreeCity_Mart_Text_SpenserFarewell:
 	.string "I look forward to our next battle.\n"
@@ -122,8 +124,10 @@ FortreeCity_Mart_Text_StockUpOnItems: @ 8217715
 	.string "Better to be safe than sorry!$"
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow: @ 821778E
-	.string "A Rare Candy raises a Pokémon one\n"
-	.string "level, as far as your Badges allow.$"
+	.string "The Leveler brings your team up to\n"
+	.string "the current level cap.\p"
+	.string "Save your money for equipment\n"
+	.string "that suits their battle plans!$"
 
 FortreeCity_Mart_Movement_SpenserExitNorth:
 	walk_left

@@ -25,6 +25,26 @@ static void SetCaptureBoard(enum Species species)
         FlagSet(flag);
 }
 
+TEST("Battle script capture: extra 35 percent stacks after existing ball and status bonuses")
+{
+    enum Item item;
+    u32 status, expected;
+    PARAMETRIZE { item = ITEM_POKE_BALL; status = 0; expected = 24; }
+    PARAMETRIZE { item = ITEM_GREAT_BALL; status = 0; expected = 36; }
+    PARAMETRIZE { item = ITEM_ULTRA_BALL; status = 0; expected = 49; }
+    PARAMETRIZE { item = ITEM_PREMIER_BALL; status = 0; expected = 24; }
+    PARAMETRIZE { item = ITEM_POKE_BALL; status = STATUS1_SLEEP; expected = 62; }
+    PARAMETRIZE { item = ITEM_ULTRA_BALL; status = STATUS1_SLEEP; expected = 125; }
+    PARAMETRIZE { item = ITEM_POKE_BALL; status = STATUS1_PARALYSIS; expected = 36; }
+    SetCaptureBoard(SPECIES_BULBASAUR);
+    ASSUME(gSpeciesInfo[SPECIES_BULBASAUR].catchRate == 45);
+    gLastUsedItem = item;
+    gBattleMons[1].status1 = status;
+    // Full HP gives 45 / 3 = 15 before ball/status modifiers. Keep the existing
+    // 125% stage, then apply 135%, with the engine's integer rounding per stage.
+    EXPECT_EQ(Test_ComputeCaptureOdds(1, 0), expected);
+}
+
 TEST("Battle script capture: Heavy Ball penalties cannot wrap into guaranteed catches")
 {
     SetCaptureBoard(SPECIES_AZELF);

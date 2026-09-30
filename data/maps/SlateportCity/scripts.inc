@@ -684,13 +684,13 @@ SlateportCity_EventScript_Greta::
 	msgbox SlateportCity_Text_GretaLetsBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat
 SlateportCity_EventScript_GretaReward::
-	setvar VAR_0x8004, ITEM_CHOICE_SPECS
+	setvar VAR_0x8004, ITEM_WEAKNESS_POLICY
 	setvar VAR_0x8005, 6
 	specialvar VAR_RESULT, CanReceiveFrontierReward
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SlateportCity_Text_GretaHereHaveStuff, MSGBOX_AUTOCLOSE
-	giveitem ITEM_CHOICE_SPECS
+	giveitem ITEM_WEAKNESS_POLICY
 	giveitem ITEM_BOTTLE_CAP, 6
 	setflag FLAG_DEFEATED_SLATEPORT_GRETA
 SlateportCity_EventScript_GretaDefeated::
@@ -807,32 +807,37 @@ SlateportCity_EventScript_Man3:: @ 81DD365
 	msgbox SlateportCity_Text_WonderIfLighthouseStartlesPokemon, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_BerryPowderClerk:: @ 81DD36E
+@ The former multiplayer Powder counter sells practical field medicine.
+SlateportCity_EventScript_BerryPowderClerk::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
-	msgbox SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT
-	giveitem ITEM_POWDER_JAR
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_POWDER_JAR
-	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
-	release
-	end
-
-SlateportCity_EventScript_ReceivedPowderJar:: @ 81DD39A
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, HasEnoughBerryPowder
-	compare VAR_RESULT, FALSE
-	goto_if_eq SlateportCity_EventScript_ExplainBerryPowder
-	msgbox SlateportCity_Text_BroughtMeSomeBerryPowder, MSGBOX_DEFAULT
-	special DisplayBerryPowderVendorMenu
-	goto SlateportCity_EventScript_ChooseBerryPowderItem
+	goto_if_eq VAR_RESULT, TRUE, SlateportCity_EventScript_OfferEarnedPowder
+
+SlateportCity_EventScript_HerbalMedicine::
+	message SlateportCity_Text_HerbalMedicine
+	waitmessage
+	pokemart SlateportCity_Pokemart_HerbalMedicine
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
 	end
 
-SlateportCity_EventScript_ExplainBerryPowder:: @ 81DD3C0
-	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
-	release
+	.align 2
+SlateportCity_Pokemart_HerbalMedicine:
+	.2byte ITEM_ENERGY_POWDER
+	.2byte ITEM_ENERGY_ROOT
+	.2byte ITEM_HEAL_POWDER
+	.2byte ITEM_REVIVAL_HERB
+	.2byte ITEM_NONE
+
+@ Powder is an optional multiplayer reward. Players who have never earned
+@ any go directly to the ordinary money shop without an extra menu.
+SlateportCity_EventScript_OfferEarnedPowder::
+	msgbox SlateportCity_Text_OfferEarnedPowder, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_HerbalMedicine
+	special DisplayBerryPowderVendorMenu
+	goto SlateportCity_EventScript_ChooseBerryPowderItem
 	end
 
 SlateportCity_EventScript_ChooseBerryPowderItem:: @ 81DD3CA
@@ -1419,35 +1424,18 @@ SlateportCity_Text_NameRatersHouseSign: @ 81DEBA0
 	.string "Pokémon Chef's House\n"
 	.string "“Change your Pokémon's Nature!”$"
 
-SlateportCity_Text_ExplainBerries: @ 81DEBCE
-	.string "If a wild Pokémon gets hurt, it heals\n"
-	.string "itself by chewing on Berries.\p"
-	.string "Did you know that?\p"
-	.string "Somebody saw that and got the idea\n"
-	.string "of making medicine from Berries.\p"
-	.string "Did you know that?\p"
-	.string "To turn Berries into medicine,\n"
-	.string "they must be crushed into powder.\p"
-	.string "Did you know that?\p"
-	.string "You seem to have an interest\n"
-	.string "in Berries!\p"
-	.string "I've got something good for someone\n"
-	.string "like you.$"
+SlateportCity_Text_HerbalMedicine:
+	.string "I sell bitter herbal medicine.\n"
+	.string "Pay with money, like any shop.\p"
+	.string "It heals your Pokémon, but lowers\n"
+	.string "friendship. Use it thoughtfully!\p"
+	.string "Keep your Berries for planting\n"
+	.string "and the Pokémon Chef's Pokéblocks.$"
 
-SlateportCity_Text_ExplainBerryPowder: @ 81DED27
-	.string "I recently had machines installed at\n"
-	.string "Pokémon Centers for crushing Berries.\p"
-	.string "The Berry Crush machines are at\n"
-	.string "the Direct Corner upstairs.\p"
-	.string "Did you know?\p"
-	.string "Could you make Berry Powder for\n"
-	.string "me using those machines?\p"
-	.string "I can make you all sorts of medicine\n"
-	.string "if you bring me lots of Berry Powder.$"
-
-SlateportCity_Text_BroughtMeSomeBerryPowder: @ 81DEE40
-	.string "Have you brought me some\n"
-	.string "Berry Powder?$"
+SlateportCity_Text_OfferEarnedPowder:
+	.string "You've earned some Berry Powder!\n"
+	.string "Would you like to exchange it\l"
+	.string "for medicine instead of paying money?$"
 
 SlateportCity_Text_ExchangeWhatWithIt: @ 81DEE67
 	.string "What would you like to exchange\n"
@@ -1543,7 +1531,9 @@ SlateportCity_Text_GretaDefeat:
 SlateportCity_Text_GretaHereHaveStuff:
 	.string "Hey, not bad! {PLAYER}, was it?\n"
 	.string "I'll remember that.\p"
-	.string "Here, take these with you!$"
+	.string "A Weakness Policy and six Caps!\p"
+	.string "Hold the Policy: a super-effective\n"
+	.string "hit boosts both your attacking stats.$"
 
 SlateportCity_Text_GretaDefeated:
 	.string "That was a blast! Nobody's pushed me\n"

@@ -93,5 +93,6 @@
 // Ivy's Hidden Power (Fallarbor): the party slot, while the scroll menu
 // borrows VAR_0x8004 for its menu id.
 #define VAR_IV_TRAINING_MON             VAR_0x800A
+#define VAR_IV_TRAINING_TYPE            VAR_0x8009 // selected type through confirmation
 
 #endif // GUARD_CONSTANTS_SERVICE_VARS_H

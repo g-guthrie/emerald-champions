@@ -50,8 +50,8 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Granite_Cave_B2F_TM31_Brick_Break",
-      "flag": "FLAG_GRANITE_CAVE_BRICK_BREAK"
+      "script": "GraniteCave_B2F_EventScript_ItemGoldBottleCap",
+      "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_GOLD_BOTTLE_CAP"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",

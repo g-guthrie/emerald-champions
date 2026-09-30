@@ -370,7 +370,7 @@
 #define FLAG_MET_BATTLE_FRONTIER_GAMBLER     0x157
 #define FLAG_NURSE_MENTIONS_GOLD_CARD        0x159
 #define FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR  0x15A
-#define FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR 0x15B
+#define FLAG_MET_MAUVILLE_ICONIC_MOVE_TUTOR  0x15B // Reuses the unreferenced Frontier swimmer tutor flag.
 
 // Flags for whether a rematchable trainer has been registered in the player's Match Call.
 // Most are used implicitly by adding their REMATCH_* id to TRAINER_REGISTERED_FLAGS_START.
@@ -644,7 +644,7 @@
 #define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_ROOMS_B1F_BOTTLE_CAP                   (FLAG_HIDDEN_ITEMS_START + 0x70)
 #define FLAG_HIDDEN_ITEM_ALTERING_CAVE_CALCIUM                                 (FLAG_HIDDEN_ITEMS_START + 0x71)
 #define FLAG_HIDDEN_ITEM_ALTERING_CAVE_CARBOS                                  (FLAG_HIDDEN_ITEMS_START + 0x72)
-#define FLAG_HIDDEN_ITEM_ALTERING_CAVE_GOLD_BOTTLE_CAP                         (FLAG_HIDDEN_ITEMS_START + 0x73)
+#define FLAG_ITEM_GRANITE_CAVE_B2F_GOLD_BOTTLE_CAP                            (FLAG_HIDDEN_ITEMS_START + 0x73) // Former Altering Cave Gold Cap receipt; keep the saved bit.
 #define FLAG_HIDDEN_ITEM_ALTERING_CAVE_MAX_REVIVE                              (FLAG_HIDDEN_ITEMS_START + 0x74)
 #define FLAG_HIDDEN_ITEM_AQUA_HIDEOUT_B1F_BOTTLE_CAP1                          (FLAG_HIDDEN_ITEMS_START + 0x75)
 #define FLAG_HIDDEN_ITEM_AQUA_HIDEOUT_B1F_BOTTLE_CAP2                          (FLAG_HIDDEN_ITEMS_START + 0x76)
@@ -1917,7 +1917,7 @@
 #define FLAG_SEASPRAY_CAVE_STEALTH_ROCK                                0x2C // shares 0x2C with FLAG_EC_ITEM_EMBER_MAGMARIZER (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_WATER_PULSE                                 0x2D // shares 0x2D with FLAG_EC_ITEM_EMBER_MASTER_BALL (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_LURE_BALL                                   FLAG_EC_ITEM_SEASPRAY_LURE_BALL
-#define FLAG_GRANITE_CAVE_BRICK_BREAK                                  0x30 // shares 0x30 with FLAG_EC_ITEM_WOODS3_BEEDRILLITE (dead: its map.json was overwritten)
+#define FLAG_GRANITE_CAVE_BRICK_BREAK                                  0x30 // Retired Granite Cave Candy/Brick Break receipt; keep the saved bit.
 #define FLAG_SEASPRAY_CAVE_STONE_EDGE                                  0x40 // shares 0x40 with FLAG_EC_ITEM_SCORCHED_BEAST_BALL (dead: its map.json was overwritten)
 #define FLAG_SEASPRAY_CAVE_B1F_KINGS_ROCK                              FLAG_EC_ITEM_SEASPRAY_KINGS_ROCK
 #define FLAG_EMBER_PATH_SMACK_DOWN                                     0x45 // shares 0x45 with FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE (dead: its map.json was overwritten)

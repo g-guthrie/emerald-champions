@@ -251,7 +251,7 @@ LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts: @ 82193B4
 	.string "the fine arts.$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration: @ 821941A
-	.string "This artists Museum… Well, you could\n"
+	.string "This Art Museum… Well, you can\n"
 	.string "see many fantastic paintings.\p"
 	.string "And the Curator is a wonderful person.\p"
 	.string "Among artists like myself, this Museum\n"

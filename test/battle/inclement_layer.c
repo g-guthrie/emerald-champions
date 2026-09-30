@@ -9,7 +9,7 @@
 #include "test/battle.h"
 
 // The Inclement layer (src/data/pokemon/inclement_layer.h) is read by wild and
-// player-owned Pokemon; trainer-owned Pokemon read gSpeciesInfo only.
+// player-owned and trainer-owned Pokemon alike.
 
 static u32 ExpectedSpeciesStat(struct Pokemon *mon, enum Species species, enum Stat stat, bool32 trainerOwned)
 {
@@ -53,7 +53,7 @@ TEST("Inclement layer keeps each Mega's HP equal to its base form's")
     EXPECT_EQ(GetInclementSpeciesBaseStat(SPECIES_MEOWSTIC_M_MEGA, STAT_HP), GetInclementSpeciesBaseStat(SPECIES_MEOWSTIC_M, STAT_HP));
 }
 
-TEST("Player Pokemon use Inclement base stats; trainer Pokemon keep the species data")
+TEST("Player and trainer Pokemon share Inclement base stats")
 {
     struct Pokemon player, trainer;
 
@@ -71,7 +71,8 @@ TEST("Player Pokemon use Inclement base stats; trainer Pokemon keep the species 
         EXPECT_EQ(GetMonData(&player, MON_DATA_MAX_HP + stat), ExpectedStat(&player, stat, FALSE));
         EXPECT_EQ(GetMonData(&trainer, MON_DATA_MAX_HP + stat), ExpectedStat(&trainer, stat, TRUE));
     }
-    EXPECT_GT(GetMonData(&player, MON_DATA_MAX_HP), ExpectedStat(&player, STAT_HP, TRUE));
+    EXPECT_EQ(GetSpeciesBaseStatForOwner(SPECIES_ARBOK, STAT_HP, TRUE), 80);
+    EXPECT_EQ(GetSpeciesBaseStatForOwner(SPECIES_ARBOK, STAT_HP, FALSE), 80);
 }
 
 TEST("Catching a wild Pokemon keeps the Inclement layer")
@@ -121,7 +122,7 @@ TEST("A trainer battle marks both opponent parties and the partner party as trai
     ZeroPartyMons(gParties[B_TRAINER_PARTNER]);
 }
 
-SINGLE_BATTLE_TEST("Player and trainer Pokemon of the same species battle with their own base stats")
+SINGLE_BATTLE_TEST("Player and trainer Pokemon of the same species battle with shared base stats")
 {
     GIVEN {
         PLAYER(SPECIES_ARBOK);
@@ -153,11 +154,11 @@ WILD_BATTLE_TEST("A wild foe battles with Inclement base stats")
         EXPECT_EQ(opponent->maxHP, ExpectedStat(wildMon, STAT_HP, FALSE));
         EXPECT_EQ(opponent->attack, ExpectedStat(wildMon, STAT_ATK, FALSE));
         EXPECT_EQ(opponent->defense, ExpectedStat(wildMon, STAT_DEF, FALSE));
-        EXPECT_GT(opponent->maxHP, ExpectedStat(wildMon, STAT_HP, TRUE));
+        EXPECT_EQ(opponent->maxHP, ExpectedStat(wildMon, STAT_HP, TRUE));
     }
 }
 
-SINGLE_BATTLE_TEST("Mega Evolution uses each side's own stats")
+SINGLE_BATTLE_TEST("Mega Evolution uses shared Inclement stats on both sides")
 {
     GIVEN {
         ASSUME(GetInclementSpeciesBaseStat(SPECIES_CAMERUPT_MEGA, STAT_DEF) > GetSpeciesBaseStat(SPECIES_CAMERUPT_MEGA, STAT_DEF));
@@ -215,7 +216,7 @@ TEST("Inclement Abilities are added in slot 3; slots 0-2 keep their meaning for 
     }
     EXPECT_EQ(GetSpeciesAbility(SPECIES_ABSOL, 0), ABILITY_PRESSURE);
     EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, ABILITY_SLOT_INCLEMENT, FALSE), ABILITY_KEEN_EDGE);
-    EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, ABILITY_SLOT_INCLEMENT, TRUE), ABILITY_NONE);
+    EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_ABSOL, ABILITY_SLOT_INCLEMENT, TRUE), ABILITY_KEEN_EDGE);
     EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_GALLADE, ABILITY_SLOT_INCLEMENT, FALSE), ABILITY_TRACE);
     EXPECT_EQ(GetSpeciesAbility(SPECIES_GALLADE, 1), ABILITY_SHARPNESS);
     EXPECT_EQ(GetSpeciesAbilityForOwner(SPECIES_BANETTE, ABILITY_SLOT_INCLEMENT, FALSE), ABILITY_VENGEANCE);
@@ -226,14 +227,17 @@ TEST("Inclement Abilities are added in slot 3; slots 0-2 keep their meaning for 
     SetMonData(&player, MON_DATA_ABILITY_NUM, &slot);
     EXPECT_EQ(GetMonAbility(&player), ABILITY_KEEN_EDGE);
 
-    // A trainer can never hold the added slot: authoring Pressure picks slot 0,
-    // and a Pokemon that had slot 3 loses it when it becomes trainer-owned.
+    // Authored official Abilities retain their slots; added Abilities also
+    // remain valid when a Pokemon becomes trainer-owned.
     GenerateTrainerMon(&trainer, SPECIES_ABSOL, ABILITY_PRESSURE);
     EXPECT_EQ(GetMonData(&trainer, MON_DATA_ABILITY_NUM), 0);
-    EXPECT(!FindSpeciesAbilitySlotForOwner(SPECIES_ABSOL, ABILITY_KEEN_EDGE, TRUE, &slot));
+    EXPECT(FindSpeciesAbilitySlotForOwner(SPECIES_ABSOL, ABILITY_KEEN_EDGE, TRUE, &slot));
+    EXPECT_EQ(slot, ABILITY_SLOT_INCLEMENT);
     SetMonTrainerOwned(&player, TRUE);
-    EXPECT_NE(GetMonData(&player, MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
-    EXPECT_NE(GetMonAbility(&player), ABILITY_KEEN_EDGE);
+    EXPECT_EQ(GetMonData(&player, MON_DATA_ABILITY_NUM), ABILITY_SLOT_INCLEMENT);
+    EXPECT_EQ(GetMonAbility(&player), ABILITY_KEEN_EDGE);
+    GenerateTrainerMon(&trainer, SPECIES_ABSOL, ABILITY_KEEN_EDGE);
+    EXPECT_EQ(GetMonAbility(&trainer), ABILITY_KEEN_EDGE);
 }
 
 TEST("A species without an Inclement Ability resolves slot 3 as slot 0")
@@ -271,7 +275,7 @@ TEST("The party Ability list offers every official Ability plus the Inclement on
     EXPECT_EQ(slots[2], ABILITY_SLOT_INCLEMENT);
     EXPECT_EQ(slots[3], 2);
     SetMonTrainerOwned(&mon, TRUE);
-    EXPECT_EQ(GetMonSelectableAbilitySlots(&mon, slots), 3);
+    EXPECT_EQ(GetMonSelectableAbilitySlots(&mon, slots), 4);
 }
 
 TEST("Ability Capsule cycles the normal slots, Inclement slot included; Ability Patch toggles hidden")
@@ -365,7 +369,7 @@ WILD_BATTLE_TEST("A wild Glaceon can have Whiteout alongside its official Abilit
     }
 }
 
-TEST("Every Inclement added Ability is reachable by player and wild Pokemon and never by trainers")
+TEST("Every Inclement added Ability is reachable by players, wild Pokemon and trainers")
 {
     u32 added = 0, most = 0;
 
@@ -388,9 +392,8 @@ TEST("Every Inclement added Ability is reachable by player and wild Pokemon and 
             perSpecies++;
             EXPECT(FindSpeciesAbilitySlotForOwner(species, ability, FALSE, &found));
             EXPECT_EQ(found, slot);
-            EXPECT(!FindSpeciesAbilitySlotForOwner(species, ability, TRUE, &found)
-                || found < NUM_ABILITY_SLOTS);
-            EXPECT_EQ(GetSpeciesAbilityForOwner(species, slot, TRUE), ABILITY_NONE);
+            EXPECT(FindSpeciesAbilitySlotForOwner(species, ability, TRUE, &found));
+            EXPECT_EQ(GetSpeciesAbilityForOwner(species, slot, TRUE), ability);
 
             CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
             SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
@@ -401,9 +404,9 @@ TEST("Every Inclement added Ability is reachable by player and wild Pokemon and 
                 listed |= slots[i] == slot;
             EXPECT(listed);
 
-            // Becoming trainer-owned drops the added slot for an official one.
+            // Becoming trainer-owned preserves the selected added Ability.
             SetMonTrainerOwned(&mon, TRUE);
-            EXPECT_LT(GetMonData(&mon, MON_DATA_ABILITY_NUM), NUM_ABILITY_SLOTS);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_ABILITY_NUM), slot);
         }
         most = max(most, perSpecies);
     }
@@ -461,7 +464,7 @@ TEST("Ability Capsule cycles every normal and added slot")
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &slot);
     EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT);
     SetMonTrainerOwned(&mon, TRUE);
-    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), 0);
+    EXPECT_EQ(GetAbilityCapsuleTargetSlot(&mon), ABILITY_SLOT_INCLEMENT);
 }
 
 TEST("New Pokemon roll every added slot like a normal slot")

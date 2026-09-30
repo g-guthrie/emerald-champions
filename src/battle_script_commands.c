@@ -6845,6 +6845,7 @@ static u32 ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler)
     // Emerald Champions: a flat boost on top of everything above, so every
     // ball and every status still matter in the same proportion.
     odds = odds * B_EC_CATCH_ODDS_PERCENT / 100;
+    odds = odds * B_EC_FINAL_CATCH_ODDS_PERCENT / 100;
 
     // The shake formula divides by these odds. Small ball/HP multipliers may
     // round below one; retain the smallest representable nonzero chance.
@@ -7031,7 +7032,8 @@ static void Cmd_givecaughtmon(void)
         if (!CanAddRestrictedMonToParty(GetMonData(GetBattlerMon(GetCatchingBattler()), MON_DATA_SPECIES), PARTY_SIZE))
         {
             s32 slot = GetUniquePartyRestrictedSlot();
-            if (slot >= 0 && slot < PARTY_SIZE && B_CATCH_SWAP_INTO_PARTY >= GEN_7)
+            if (slot >= 0 && slot < PARTY_SIZE && B_CATCH_SWAP_INTO_PARTY >= GEN_7
+             && !ItemIsMail(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM)))
             {
                 GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_NICKNAME, gStringVar1);
                 PrepareStringBattleWithWait(STRINGID_SWAPSPECIALMON, gBattlerAttacker);
@@ -7117,9 +7119,11 @@ static void Cmd_givecaughtmon(void)
     case GIVECAUGHTMON_HANDLE_CHOSEN_MON:
         if (gSelectedMonPartyId != PARTY_SIZE)
         {
-            if (gSelectedMonPartyId > PARTY_SIZE)
+            if (gSelectedMonPartyId > PARTY_SIZE
+             || ItemIsMail(GetMonData(&gParties[B_TRAINER_PLAYER][gSelectedMonPartyId], MON_DATA_HELD_ITEM)))
             {
-                // Choosing Pokemon was cancelled
+                // Mail's message index exists only on the party Pokemon.
+                // Keep its holder intact and store the catch, as on cancel.
                 gSelectedMonPartyId = PARTY_SIZE;
                 gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
             }

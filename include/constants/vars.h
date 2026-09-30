@@ -140,7 +140,7 @@
 #define VAR_ROUTE123_STATE                               0x4076 // Unused Var
 #define VAR_IVY_EVIE_HOUSE_STATE                               0x4077  // Restored from Inclement Emerald. Reclaimed the
         // id of VAR_ROUTE124_STATE, which had zero references in data/, src/ or include/.
-#define VAR_ROUTE125_STATE                               0x4078 // Unused Var
+#define VAR_WEATHER_ANOMALY_SNOW_MASK                     0x4078 // One saved snow bit per storm slot; reclaimed unused VAR_ROUTE125_STATE.
 #define VAR_ROUTE126_STATE                               0x4079 // Unused Var
 #define VAR_LEAF_STATE                               0x407A  // Restored from Inclement Emerald. Reclaimed the
         // id of VAR_ROUTE127_STATE, which had zero references in data/, src/ or include/.

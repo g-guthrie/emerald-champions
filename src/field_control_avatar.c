@@ -28,6 +28,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "pokerus.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -44,12 +45,14 @@
 #include "field_weather.h"
 #include "constants/field_poison.h"
 #include "constants/layouts.h"
+#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
+static EWRAM_DATA u8 sHotSpringPokerusSteps = 0;
 
 COMMON_DATA u8 gSelectedObjectEvent = 0;
 
@@ -182,6 +185,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         UpdateWeatherAnomalyWeather();
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
+        if (UpdateHotSpringPokerusSteps(metatileBehavior))
+        {
+            ScriptContext_SetupScript(LavaridgeTown_EventScript_PokerusSoakComplete);
+            return TRUE;
+        }
         if (FindTaskIdByFunc(Task_FollowerNPCOutOfDoor) == TASK_NONE && TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
@@ -705,6 +713,28 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
         return FALSE;
     }
     return FALSE;
+}
+
+void ResetHotSpringPokerusSteps(void)
+{
+    sHotSpringPokerusSteps = 0;
+}
+
+bool32 UpdateHotSpringPokerusSteps(u16 metatileBehavior)
+{
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_LAVARIDGE_TOWN)
+     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_LAVARIDGE_TOWN)
+     || !MetatileBehavior_IsHotSprings(metatileBehavior))
+    {
+        ResetHotSpringPokerusSteps();
+        return FALSE;
+    }
+
+    if (++sHotSpringPokerusSteps < 25)
+        return FALSE;
+
+    ResetHotSpringPokerusSteps();
+    return PreparePartyPokerusInHotSpring();
 }
 
 static bool8 TryStartStepCountScript(u16 metatileBehavior)

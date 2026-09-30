@@ -2,22 +2,12 @@ Common_EventScript_FindItem::
 	callnative GetItemBallIdAndAmountFromTemplate
 	copyvar VAR_0x8000, VAR_RESULT
 	copyvar VAR_0x8001, VAR_0x8009
-	goto_if_eq VAR_0x800A, FALSE, Common_EventScript_FindOrdinaryItem
-	special ConvertEmeraldChampionsFiniteReward
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_FindOrdinaryItem
-	lock
-	faceplayer
-	removeobject VAR_LAST_TALKED
-	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
-	release
-	end
-
 Common_EventScript_FindOrdinaryItem::
 	finditem VAR_0x8000, VAR_0x8001
 	end
 
-@ Inclement Emerald's item ball scripts. The wrapper above keeps the
-@ finite-reward conversion in front of every ordinary pickup.
+@ Inclement Emerald's item ball scripts share Std_FindItem's finite reward
+@ conversion, so both the generic wrapper and authored pickups use it.
 
 Route102_EventScript_ItemPotion:: @ 8290CD8
 	finditem ITEM_POTION
@@ -68,7 +58,7 @@ Route109_EventScript_ItemZoomLens:: @ 8290D67
 	end
 
 Route110_EventScript_ItemRareCandy:: @ 8290D74
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route110_EventScript_ItemManectite:: @ 8290D81
@@ -112,7 +102,7 @@ Route113_EventScript_ItemHyperPotion:: @ 8290DF6
 	end
 
 Route114_EventScript_ItemRareCandy:: @ 8290E03
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route114_EventScript_ItemTM54Psyshock:: @ 8290E10
@@ -196,7 +186,7 @@ Route119_EventScript_ItemTM84_Poison_Jab:: @ 8290F07
 	end
 
 Route119_EventScript_ItemRareCandy:: @ 8290F14
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route119_EventScript_ItemHyperPotion:: @ 8290F21
@@ -292,11 +282,11 @@ Route127_EventScript_ItemLaprasite:: @ 829103F
 	end
 
 Route127_EventScript_ItemRareCandy:: @ 829104C
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route132_EventScript_ItemRareCandy:: @ 8291059
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 Route132_EventScript_ItemProtein:: @ 8291066
@@ -360,7 +350,7 @@ PetalburgWoods_EventScript_ItemEther:: @ 829111C
 	end
 
 PetalburgWoods_EventScript_ItemParalyzeHeal:: @ 8291129
-	finditem ITEM_PARALYZE_HEAL
+	finditem ITEM_NUGGET
 	end
 
 RusturfTunnel_EventScript_ItemPokeBall:: @ 8291136
@@ -384,7 +374,7 @@ GraniteCave_B2F_EventScript_ItemSteelixite:: @ 829116A
 	end
 
 GraniteCave_B2F_EventScript_ItemRareCandy:: @ 8291177
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 JaggedPass_EventScript_ItemTM69RockPolish:: @ 8291184
@@ -432,7 +422,7 @@ NewMauville_Inside_EventScript_ItemAmpharosite:: @ 8291206
 	end
 
 NewMauville_Inside_EventScript_ItemFullHeal:: @ 8291213
-	finditem ITEM_FULL_HEAL
+	finditem ITEM_DUSK_BALL, 3
 	end
 
 NewMauville_Inside_EventScript_ItemElectirizer:: @ 8291220
@@ -520,7 +510,7 @@ MtPyre_5F_EventScript_ItemLaxIncense:: @ 8291324
 	end
 
 MtPyre_6F_EventScript_ItemTM30:: @ 8291331
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 MtPyre_Exterior_EventScript_ItemGengarite:: @ 829133E
@@ -556,7 +546,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_ItemBigPearl:: @ 82913C0
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy:: @ 82913CD
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemTM70AuroraVeil::
@@ -628,7 +618,7 @@ VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
 	end
 
 VictoryRoad_B2F_EventScript_ItemFullHeal:: @ 82914B7
-	finditem ITEM_FULL_HEAL
+	finditem ITEM_DUSK_BALL, 5
 	end
 
 ArtisanCave_B1F_EventScript_ItemHPUp:: @ 82914C4
@@ -640,7 +630,7 @@ ArtisanCave_1F_EventScript_ItemCarbos:: @ 82914D1
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy:: @ 82914DE
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 MagmaHideout_2F_2R_EventScript_ItemMaxElixir:: @ 82914EB
@@ -723,8 +713,8 @@ Seaspray_Cave_B1F_ItemKingsRock::
 	finditem ITEM_KINGS_ROCK
 	end
 
-Granite_Cave_B2F_TM31_Brick_Break::
-	finditem ITEM_RARE_CANDY
+GraniteCave_B2F_EventScript_ItemGoldBottleCap::
+	finditem ITEM_GOLD_BOTTLE_CAP
 	end
 
 Ember_Path_ItemSmack_Down::
@@ -864,7 +854,7 @@ DewfordMeadow_EventScript_RingTarget::
 	end
 
 DewfordManor_EventScript_TM100Curse::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_NUGGET
 	end
 
 DewfordManor_EventScript_Banettite::

@@ -280,6 +280,7 @@ AI_DOUBLE_BATTLE_TEST("EC Mega: Glacia's Froslass evolves into Mega Charizard's 
         }
     } THEN {
         EXPECT_EQ(opponentLeft->species, SPECIES_FROSLASS_MEGA);
+        EXPECT(gBattleWeather & B_WEATHER_ICY_ANY);
     }
 }
 

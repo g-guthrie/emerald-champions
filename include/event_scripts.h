@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENT_SCRIPTS_H
 #define GUARD_EVENT_SCRIPTS_H
 
+extern const u8 LavaridgeTown_EventScript_PokerusSoakComplete[];
+
 extern const u8 EC_RivalDexNavTutorial_Abort[];
 extern const u8 EC_RivalDexNavTutorial_AtGrass[];
 extern const u8 EC_RivalDexNavTutorial_Capture[];
@@ -34,22 +36,12 @@ extern const u8 EnterPokeballMovement[];
 
 extern const u8 EventScript_TestSignpostMsg[];
 extern const u8 EventScript_TryGetTrainerScript[];
-extern const u8 EventScript_StartTrainerApproach[];
-extern const u8 EventScript_DoNoIntroTrainerBattle[];
-extern const u8 EventScript_TryDoDoubleTrainerBattle[];
-extern const u8 EventScript_TryDoNormalTrainerBattle[];
-extern const u8 EventScript_TryDoDoubleRematchBattle[];
-extern const u8 EventScript_TryDoRematchBattle[];
 extern const u8 EventScript_ObjectApproachPlayer[];
-extern const u8 EventScript_ShowTrainerIntroMsg[];
-extern const u8 EventScript_NotEnoughMonsForDoubleBattle[];
 
 extern const u8 EventSnippet_Lock[];
 extern const u8 EventSnippet_FacePlayer[];
 extern const u8 EventSnippet_StartTrainerApproach[];
-extern const u8 EventSnippet_TryDoNormalTrainerBattle[];
 extern const u8 EventSnippet_RevealTrainer[];
-extern const u8 EventSnippet_GetTrainerFlag[];
 extern const u8 EventSnippet_PlayTrainerEncounterMusic[];
 extern const u8 EventSnippet_SetTrainerFacingDirection[];
 extern const u8 EventSnippet_TrainerApproach[];
@@ -431,6 +423,7 @@ extern const u8 EventScript_BrailleRockSmash[];
 extern const u8 EventScript_BrailleFlash[];
 extern const u8 EventScript_UseCut[];
 extern const u8 EventScript_UseRockSmash[];
+extern const u8 EventScript_RockSmash[];
 extern const u8 EventScript_UseDig[];
 extern const u8 EventScript_UseCutGrass[];
 extern const u8 EventScript_UseDefog[];
@@ -715,6 +708,11 @@ extern const u8 EventScript_PokemonGotAway[];
 extern const u8 EventScript_LostSignal[];
 extern const u8 EventScript_TooDark[];
 extern const u8 EventScript_MovedTooFast[];
+extern const u8 EventScript_DexNavNotAvailable[];
+extern const u8 EventScript_DexNavStartSurfing[];
+extern const u8 EventScript_DexNavStepOnLand[];
+extern const u8 EventScript_DexNavGetOffBike[];
+extern const u8 EventScript_DexNavTimedOut[];
 
 extern const u8 MoveTutor_AfterChooseBoxMon[];
 

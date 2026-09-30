@@ -15083,6 +15083,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 395 : 255,
         .evYield_HP = 2,
         .itemCommon = ITEM_OVAL_STONE,
+        .itemRare = ITEM_LUCKY_PUNCH,
         .genderRatio = MON_FEMALE,
         .eggCycles = 40,
         .friendship = 140,

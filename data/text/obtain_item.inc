@@ -42,7 +42,7 @@ gText_FoundXCoins::
 
 gText_FoundXItems::
 	.string "{PLAYER} found\n"
-	.string "{STR_VAR_1} {STR_VAR_2}(s)!$"
+	.string "{STR_VAR_1} {STR_VAR_2}!$"
 
 gText_CoinCaseIsFull::
 	.string "Too bad!\n"

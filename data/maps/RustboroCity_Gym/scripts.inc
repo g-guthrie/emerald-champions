@@ -28,7 +28,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
-	giveitem ITEM_DELPHOXITE
+	giveuniqueitem ITEM_DELPHOXITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39

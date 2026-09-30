@@ -18,7 +18,7 @@ VerdanturfTown_Mart_EventScript_PaybackTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_VERDANTURF_TOWN_MART, VerdanturfTown_Mart_EventScript_ReceivedTM66
 	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_VERDANTURF_TOWN_MART
 	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
@@ -32,11 +32,11 @@ VerdanturfTown_Mart_EventScript_ReceivedTM66::
 
 VerdanturfTown_Mart_Text_SlowPokemon:
 	.string "You've come such a long way!\n"
-	.string "Please take this Rare Candy!$"
+	.string "Please take this Nugget!$"
 
 VerdanturfTown_Mart_Text_HaveTM66:
-	.string "A Rare Candy helps a Pokémon grow\n"
-	.string "a level, as far as your Badges allow.$"
+	.string "Sell that Nugget for ¥2,500.\n"
+	.string "Put it toward your next team purchase!$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
 	.string "For any Pokémon match, the right\n"

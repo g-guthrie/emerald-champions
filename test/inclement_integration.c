@@ -62,6 +62,35 @@ TEST("Inclement integration: every HM needs badge, license, and a capable party 
     ZeroPlayerPartyMons();
 }
 
+TEST("Inclement integration: signature Fly capability preserves licenses, badges, and Egg exclusion")
+{
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIKACHU, 30, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_RAICHU_ALOLA, 30, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT(SpeciesCanLearnFieldMove(SPECIES_PICHU, MOVE_FLY));
+    EXPECT(SpeciesCanLearnFieldMove(SPECIES_PIKACHU, MOVE_FLY));
+    EXPECT(SpeciesCanLearnFieldMove(SPECIES_RAICHU_ALOLA, MOVE_FLY));
+    EXPECT(!SpeciesCanLearnFieldMove(SPECIES_MAGIKARP, MOVE_FLY));
+    FlagClear(FLAG_BADGE06_GET);
+    FlagSet(FLAG_RECEIVED_HM_FLY);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, FALSE), PARTY_SIZE);
+    FlagSet(FLAG_BADGE06_GET);
+    FlagClear(FLAG_RECEIVED_HM_FLY);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, FALSE), PARTY_SIZE);
+    FlagSet(FLAG_RECEIVED_HM_FLY);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_FLY, 0);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 1);
+    u32 isEgg = TRUE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &isEgg);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 0);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG, &isEgg);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), PARTY_SIZE);
+    FlagClear(FLAG_BADGE06_GET);
+    FlagClear(FLAG_RECEIVED_HM_FLY);
+    ZeroPlayerPartyMons();
+}
+
 TEST("Inclement integration: failed item delivery cannot unlock vendor stock")
 {
     ClearBag();
@@ -297,7 +326,7 @@ static bool32 sLearnMoveTestEnded;
 static void LearnMoveTestTask(u8 taskId) {}
 static void LearnMoveTestAsk(void) {}
 static void LearnMoveTestPrint(const u8 *message) {}
-static s32 LearnMoveTestConfirm(void) { return 0; }
+static s32 LearnMoveTestConfirm(bool32 keepOnNo) { return 0; }
 static void LearnMoveTestFanfare(u32 songId) { PlayFanfare(songId); }
 static void LearnMoveTestEnd(u8 taskId) { sLearnMoveTestEnded = TRUE; }
 
@@ -333,6 +362,56 @@ TEST("Inclement integration: empty-slot tutor waits for fanfare before UI teardo
     for (u32 step = 0; step < 3 && !sLearnMoveTestEnded; step++)
         gTasks[taskId].data[0] = LearnMove(&ui, taskId);
     EXPECT(sLearnMoveTestEnded);
+    DestroyTask(taskId);
+}
+
+static u8 sTutorConfirmationCount;
+static u8 sTutorQuestionBoxCount;
+static u8 sTutorRetainedBoxMask;
+
+static void TutorTransitionAsk(void)
+{
+    sTutorQuestionBoxCount++;
+}
+
+static s32 TutorTransitionConfirm(bool32 keepOnNo)
+{
+    u8 question = sTutorConfirmationCount++;
+    if (keepOnNo)
+        sTutorRetainedBoxMask |= 1 << question;
+    return question == 1 ? 1 : 0; // Teach: Yes. Replace: No. Stop learning: Yes.
+}
+
+TEST("Inclement integration: tutor reuses confirmation after declining replacement")
+{
+    static const struct MoveLearnUI ui = {
+        .askConfirmation = TutorTransitionAsk,
+        .waitConfirmation = TutorTransitionConfirm,
+        .printMessage = LearnMoveTestPrint,
+        .endTask = LearnMoveTestEnd,
+    };
+    const enum Move original[] = {MOVE_TACKLE, MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_HEADBUTT};
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], original[slot], slot);
+    CalculatePlayerPartyCount();
+    u8 taskId = CreateTask(LearnMoveTestTask, 0);
+    EXPECT_NE(taskId, TASK_NONE);
+    gTasks[taskId].data[0] = GetLearnMoveStartAfterPromptState();
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = MOVE_SURF;
+    sTutorConfirmationCount = sTutorQuestionBoxCount = sTutorRetainedBoxMask = 0;
+    sLearnMoveTestEnded = FALSE;
+    for (u32 step = 0; step < 30 && !sLearnMoveTestEnded; step++)
+        gTasks[taskId].data[0] = LearnMove(&ui, taskId);
+    EXPECT(sLearnMoveTestEnded);
+    EXPECT_EQ(sTutorConfirmationCount, 3);
+    EXPECT_EQ(sTutorQuestionBoxCount, 2);
+    EXPECT_EQ(sTutorRetainedBoxMask, 1 << 1);
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1 + slot), original[slot]);
     DestroyTask(taskId);
 }
 
@@ -686,6 +765,7 @@ TEST("Inclement integration: Regenerator restores consumed berries after battle"
 
 extern const u8 HyperTraining_EventScript_SelectHiddenPower[];
 extern const u8 HyperTraining_EventScript_ChangeAllIVs[];
+extern const u8 HyperTraining_EventScript_PreviewHiddenPower[];
 extern const u8 FallarborTown_HyperMainMenu[];
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -703,7 +783,7 @@ TEST("Inclement integration: Hidden Power menu preserves every type index and ca
         InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
         SetupBytecodeScript(&ctx, HyperTraining_EventScript_SelectHiddenPower);
         for (u32 step = 0; step < 6
-          && ctx.scriptPtr != HyperTraining_EventScript_ChangeAllIVs
+          && ctx.scriptPtr != HyperTraining_EventScript_PreviewHiddenPower
           && ctx.scriptPtr != FallarborTown_HyperMainMenu; step++)
         {
             u8 command = *ctx.scriptPtr++;
@@ -711,10 +791,11 @@ TEST("Inclement integration: Hidden Power menu preserves every type index and ca
         }
         if (results[i] < 16)
         {
-            EXPECT_EQ(ctx.scriptPtr, HyperTraining_EventScript_ChangeAllIVs);
+            EXPECT_EQ(ctx.scriptPtr, HyperTraining_EventScript_PreviewHiddenPower);
             // The service's arguments: party slot and type.
             EXPECT_EQ(gSpecialVar_0x8004, 1);
             EXPECT_EQ(gSpecialVar_0x8005, results[i]);
+            EXPECT_EQ(gSpecialVar_0x8009, results[i]); // retained through Yes/No's VAR_RESULT
         }
         else
         {

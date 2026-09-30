@@ -61,7 +61,7 @@ Route116_EventScript_DevonEmployee:: @ 81F2CA2
 
 Route116_EventScript_GiveAggronite:: @ 81F2CBB
 	setflag FLAG_MET_DEVON_EMPLOYEE
-	giveitem ITEM_AGGRONITE
+	giveuniqueitem ITEM_AGGRONITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route116_EventScript_NoRoomForAggronite
 	msgbox Route116_Text_AlsoNeedKeystone, MSGBOX_DEFAULT

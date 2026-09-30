@@ -7,6 +7,9 @@ ScorchedSlab_HeatransRoom_MapScripts::
 ScorchedSlab_HeatransRoom_EventScript_Heatran::
 	lock
 	faceplayer
+	setvar VAR_0x8004, LEGENDARY_SIGN_HEATRAN
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_LegendaryNotReady
 	waitse
 	playmoncry SPECIES_HEATRAN, 2
 	delay 40
@@ -45,6 +48,10 @@ ScorchedSlab_HeatransRoom_EventScript_MagmaStone::
 	end
 
 ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone::
+	@ Do not consume the Stone before Heatran's progression gate opens.
+	setvar VAR_0x8004, LEGENDARY_SIGN_HEATRAN
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_LegendaryNotReady
 	msgbox ScorchedSlab_HeatransRoom_Text_PlaceMagmaStone, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd

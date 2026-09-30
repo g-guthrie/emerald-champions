@@ -26,7 +26,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_XscissorTM::
 	compare VAR_RESULT, NO
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_DontLikeBugs
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_GiveTM81, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_HaveTM81, MSGBOX_DEFAULT
@@ -76,11 +76,11 @@ VerdanturfTown_PokemonCenter_1F_Text_DoYouLikeBugs:
 
 VerdanturfTown_PokemonCenter_1F_Text_GiveTM81:
 	.string "Yeah! You get it! That means you\n"
-	.string "get this Rare Candy!$"
+	.string "get this Nugget!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_HaveTM81:
-	.string "Give it to a Bug Pokémon! It'll grow\n"
-	.string "a level, if your Badges allow it.\p"
+	.string "Sell it for ¥2,500 and get your\n"
+	.string "Bug Pokémon some useful supplies!\p"
 	.string "Want it to learn cool moves, too?\n"
 	.string "Ask the Move Tutor right here!$"
 

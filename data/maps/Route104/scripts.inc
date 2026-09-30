@@ -322,7 +322,7 @@ Route104_EventScript_Boy2:: @ 81ED057
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
@@ -902,18 +902,17 @@ Route104_Text_ImNotATrainer: @ 81ED7A2
 Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 	.string "I like filling my mouth with seeds,\n"
 	.string "then spitting them out fast!\p"
-	.string "Here, have a Rare Candy for\n"
-	.string "your Pokémon!\p"
-	.string "It helps one grow a level, as far\n"
-	.string "as your Badges allow.$"
+	.string "Here, have a Nugget for\n"
+	.string "your journey!\p"
+	.string "It sells for ¥2,500. That'll buy\n"
+	.string "some supplies for your Pokémon!$"
 
 Route104_Text_TMsAreOneTimeUse:
 	.string "The Move Tutor will teach your\n"
 	.string "Pokémon any move it can learn,\l"
 	.string "for free!\p"
-	.string "And that Rare Candy will help one\n"
-	.string "grow a level, as far as your\l"
-	.string "Badges allow.$"
+	.string "Sell that Nugget when you want\n"
+	.string "to buy supplies or held items.$"
 
 Route104_Text_DontNeedThisTakeIt: @ 81ED96A
 	.string "This Flower Shop started selling\n"

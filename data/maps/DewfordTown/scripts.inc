@@ -87,7 +87,7 @@ DewfordTown_EventScript_OldRodFisherman::
 	faceplayer
 	goto_if_set FLAG_DEWFORD_EVIOLITE, DewfordTown_EventScript_ReceivedEviolite
 	msgbox DewfordTown_Text_FishedUpEviolite
-	giveitem ITEM_EVIOLITE
+	giveitem ITEM_BIG_PEARL
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Text_ReceivedEviolite, MSGBOX_DEFAULT
@@ -748,16 +748,16 @@ DewfordTown_Text_YeahDefinitionOfInRightNow: @ 81EA491
 	.string "definition of “in” right now.$"
 
 DewfordTown_Text_FishedUpEviolite:
-	.string "I fished up this strange rock the other\n"
+	.string "I fished up this big pearl the other\n"
 	.string "day.\p"
-	.string "It's of no use to me, so here,\n"
+	.string "It's of no use as bait, so here,\n"
 	.string "you take it!$"
 
 DewfordTown_Text_ReceivedEviolite:
-	.string "Eviolite boosts both defenses for\n"
-	.string "Pokémon that can still evolve.\p"
-	.string "A spare lets another partner benefit\n"
-	.string "at the same time. No good as bait!$"
+	.string "A Big Pearl fetches a good price\n"
+	.string "at a shop.\p"
+	.string "Use the money for catching supplies\n"
+	.string "or equipment for your partners!$"
 
 DewfordTown_Text_BrawlyInSlateport:
 	.string "Hey, Champ-to-be!\p"

@@ -64,35 +64,9 @@ static void HealPlayerBoxes(void)
 u8 ScriptGiveEgg(enum Species species)
 {
     struct Pokemon mon;
-    u8 isEgg;
 
     CreateEgg(&mon, species, TRUE);
-    isEgg = TRUE;
-    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
-
     return GiveCapturedMonToPlayer(&mon);
-}
-
-// TODO verify that this is really always the same output as the script special variant
-u8 HasEnoughMonsForDoubleBattle2(void)
-{
-    return GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS; 
-}
-
-void HasEnoughMonsForDoubleBattle(void)
-{
-    switch (GetMonsStateToDoubles())
-    {
-    case PLAYER_HAS_TWO_USABLE_MONS:
-        gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
-        break;
-    case PLAYER_HAS_ONE_MON:
-        gSpecialVar_Result = PLAYER_HAS_ONE_MON;
-        break;
-    case PLAYER_HAS_ONE_USABLE_MON:
-        gSpecialVar_Result = PLAYER_HAS_ONE_USABLE_MON;
-        break;
-    }
 }
 
 static bool32 CheckPartyMonHasHeldItem(enum Item item)
@@ -366,6 +340,42 @@ u32 ScriptGiveMon(enum Species species, u8 level, enum Item item)
     if (giveResult != MON_CANT_GIVE)
         MarkLegendarySignCaughtBySpecies(species);
     return giveResult;
+}
+
+// Birch's single entitlement preserves both Cosmoem evolution branches.
+// Only one Cosmog can join a legal party; the other always needs a PC slot.
+void GiveBirchCosmogPair(struct ScriptContext *ctx)
+{
+    (void)ctx;
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    gSpecialVar_Result = FALSE;
+    u16 state = VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE);
+    if ((state != 1 && state != 7) || gPokemonStoragePtr == NULL)
+        return;
+
+    u32 neededBoxSlots = 2;
+    if (CalculatePlayerPartyCount() < PARTY_SIZE
+     && CanAddRestrictedMonToParty(SPECIES_COSMOG, PARTY_SIZE))
+        neededBoxSlots--;
+    u32 freeBoxSlots = 0;
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT && freeBoxSlots < neededBoxSlots; box++)
+        freeBoxSlots += IN_BOX_COUNT - CountMonsInBox(box);
+    if (freeBoxSlots < neededBoxSlots)
+        return;
+
+    // The same preflight and transfer search all boxes. Nothing can mutate
+    // party/storage between these two synchronous transfers.
+    for (u32 i = 0; i < 2; i++)
+    {
+        u32 result = ScriptGiveMon(SPECIES_COSMOG, GetCurrentLevelCap(), i == 0 ? ITEM_EVIOLITE : ITEM_NONE);
+        assertf(result != MON_CANT_GIVE, "preflighted Birch Cosmog pair failed")
+        {
+            return;
+        }
+    }
+    // Retain the save's existing gift receipt, before any presentation.
+    VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
+    gSpecialVar_Result = TRUE;
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)

@@ -30,12 +30,46 @@ static void ExpectNoEVs(struct Pokemon *mon)
         EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV + stat), 0);
 }
 
+TEST("Player acquisition: fixed-slot and automatic gifts apply the same ownership and IV rules")
+{
+    u32 destination;
+    PARAMETRIZE { destination = 0; }
+    PARAMETRIZE { destination = PARTY_SIZE; }
+    PARAMETRIZE { destination = 1; }
+    struct Pokemon gift, received;
+    ZeroPlayerPartyMons();
+    ResetPokemonStorageSystem();
+    if (destination == 1)
+        CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_KARTANA, 10, 0, OTID_STRUCT_PLAYER_ID, 31);
+    CreateMonWithIVs(&gift, SPECIES_MEWTWO, 10, 12345, OTID_STRUCT_PLAYER_ID, 0);
+    SetMonTrainerOwned(&gift, TRUE);
+    SetMonMoveSlot(&gift, MOVE_CONFUSION, 0);
+    u32 status = STATUS1_PARALYSIS;
+    SetMonData(&gift, MON_DATA_STATUS, &status);
+    EXPECT_EQ(GiveScriptedMonToPlayer(&gift, destination), destination == 1 ? MON_GIVEN_TO_PC : MON_GIVEN_TO_PARTY);
+    if (destination == 1)
+        BoxMonAtToMon(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, &received);
+    else
+        received = gParties[B_TRAINER_PLAYER][0];
+    EXPECT(!IsMonTrainerOwned(&received));
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        EXPECT_EQ(GetMonData(&received, MON_DATA_HP_IV + stat), MAX_PER_STAT_IVS);
+    ExpectBaselineEVs(&received);
+    EXPECT_EQ(GetMonData(&received, MON_DATA_PERSONALITY), 12345);
+    EXPECT_EQ(GetMonData(&received, MON_DATA_MOVE1), MOVE_CONFUSION);
+    EXPECT_EQ(GetMonData(&received, MON_DATA_STATUS), status);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    ZeroPlayerPartyMons();
+    ResetPokemonStorageSystem();
+}
+
 TEST("Baseline EVs: catches, gifts and starters arrive with the full spread")
 {
     struct Pokemon mon;
     u32 authored = MAX_PER_STAT_EVS;
 
     ZeroPlayerPartyMons();
+    ResetPokemonStorageSystem();
     // A caught Pokemon's wild or legendary set EVs give way to the baseline.
     CreateMon(&mon, SPECIES_ZIGZAGOON, 10, 0, OTID_STRUCT_PLAYER_ID);
     SetMonData(&mon, MON_DATA_SPEED_EV, &authored);
@@ -98,6 +132,7 @@ TEST("Baseline EVs: storage never resets a spread the player chose")
     u32 zero = 0, max = MAX_PER_STAT_EVS;
 
     ZeroPlayerPartyMons();
+    ResetPokemonStorageSystem();
     CreateMon(&mon, SPECIES_RALTS, 10, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(GiveCapturedMonToPlayer(&mon), MON_GIVEN_TO_PARTY);
     struct Pokemon *owned = &gParties[B_TRAINER_PLAYER][0];

@@ -23,8 +23,8 @@ gText_EmeraldChampionsExplainTools::
 	.string "you've found.$"
 
 gText_EmeraldChampionsLocalGuide::
-	.string "Feeling lost? Our local guide knows\n"
-	.string "where to go next.\l"
+	.string "Our guide beside the PC can explain\n"
+	.string "our tools and where to go next.\l"
 	.string "Every Center has one.$"
 
 gText_EmeraldChampionsHealAfterTools::
@@ -34,7 +34,7 @@ gText_EmeraldChampionsHealAfterTools::
 gText_EmeraldChampionsExplainFlightBeacon::
 	.string "Keep the Flight Beacon for later.\n"
 	.string "It needs the Feather Badge, a Fly\l"
-	.string "license and a flier in your party or PC.$"
+	.string "license, plus a flier in party or PC.$"
 
 gText_EmeraldChampionsExplainRepelSpray::
 	.string "Your Repel Spray keeps wild Pokémon\n"
@@ -45,8 +45,9 @@ gText_EmeraldChampionsExplainRegenerator::
 	.string "With the Regenerator, a held Berry\n"
 	.string "your Pokémon eats in battle comes\l"
 	.string "back when the battle ends.\p"
-	.string "A Berry swapped away, burned or\n"
-	.string "eaten by a foe is gone for good.\p"
+	.string "A Berry swapped away, burned,\n"
+	.string "corroded or eaten by a foe is\l"
+	.string "gone for good.\p"
 	.string "Knock Off only takes an item for\n"
 	.string "that battle. Other used-up held\l"
 	.string "items come back afterward.\p"

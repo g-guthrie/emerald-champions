@@ -8,10 +8,11 @@
 #define DN_FLAG_SEARCHING             FLAG_DEXNAV_SEARCHING     // Searching for mon
 #define DN_FLAG_DEXNAV_GET            FLAG_RECEIVED_DEXNAV      // DexNav shows in start menu
 #define DN_FLAG_DETECTOR_MODE         FLAG_DEXNAV_DETECTOR_MODE // Allow player to find hidden mons
-#define DN_VAR_SPECIES                VAR_DEXNAV_SPECIES        // Registered DexNav species
+#define DN_VAR_SPECIES                VAR_DEXNAV_SPECIES        // Last DexNav search target
 #define DN_VAR_STEP_COUNTER           VAR_DEXNAV_STEP_COUNTER   // Steps for finding hidden Pokémon
 
 // Search parameters
+#define DEXNAV_TIMEOUT                  15  // Seconds; the HUD counts down and warns during the last five.
 #define SNEAKING_PROXIMITY              4   // Tile amount
 #define CREEPING_PROXIMITY              2
 #define MAX_PROXIMITY                   20

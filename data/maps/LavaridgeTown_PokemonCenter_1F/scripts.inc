@@ -129,14 +129,14 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
-	setvar VAR_0x8004, ITEM_CHOICE_BAND
+	setvar VAR_0x8004, ITEM_TOXIC_ORB
 	setvar VAR_0x8005, 3
 	specialvar VAR_RESULT, CanReceiveFrontierReward
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_LAVARIDGE_LUCY_STATE, 2
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand, MSGBOX_DEFAULT
-	giveitem ITEM_CHOICE_BAND
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveToxicOrb, MSGBOX_DEFAULT
+	giveitem ITEM_TOXIC_ORB
 	giveitem ITEM_BOTTLE_CAP, 3
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE
 	waitmessage
@@ -220,9 +220,11 @@ LavaridgeTown_PokemonCenter_1F_Text_LucyBattle:
 	.string "Lucy: Ready? Good.\n"
 	.string "Let's make this quick…$"
 
-LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand:
+LavaridgeTown_PokemonCenter_1F_Text_LucyGiveToxicOrb:
 	.string "Lucy: You were lucky, this time…\n"
-	.string "Here. Take these…$"
+	.string "Take this Toxic Orb and three Caps.\p"
+	.string "The Orb poisons its holder…\n"
+	.string "Poison Heal turns that into healing.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye:
 	.string "Lucy: Perhaps we'll meet again…\n"
@@ -253,8 +255,8 @@ LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether: @ 81FFB37
 LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate: @ 81FFBAD
 	.string "It's sort of magical how just sitting\n"
 	.string "in a hot-spring pool can invigorate.\p"
-	.string "I wish I could let my Pokémon\n"
-	.string "soak, too.$"
+	.string "My Pokémon soak with me while\n"
+	.string "I walk through the spring water.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo: @ 81FFC21
 	.string "Hohoho! Hey, kid, you can reach\n"

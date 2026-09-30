@@ -434,17 +434,10 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
 };
 
 // code
-bool8 CheckForTrainersWantingBattle(void)
+static u8 GetSortedTrainerObjects(u8 *trainerObjects)
 {
     u8 i;
-    u8 trainerObjects[OBJECT_EVENTS_COUNT] = {0};
     u8 trainerObjectsCount = 0;
-
-    if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
-        return FALSE;
-
-    gNoOfApproachingTrainers = 0;
-    gApproachingTrainerId = 0;
 
     // Adds trainers wanting to battle to array
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -457,7 +450,7 @@ bool8 CheckForTrainersWantingBattle(void)
     }
 
     // Sorts array by localId
-    for (i = 1; i <= trainerObjectsCount; i++)
+    for (i = 1; i < trainerObjectsCount; i++)
     {
         u8 x = trainerObjects[i];
         u8 j = i;
@@ -469,7 +462,28 @@ bool8 CheckForTrainersWantingBattle(void)
         trainerObjects[j] = x;
     }
 
-    for (i = 0; i <= trainerObjectsCount; i++)
+    return trainerObjectsCount;
+}
+
+#if TESTING
+u8 Test_GetSortedTrainerObjects(u8 *trainerObjects)
+{
+    return GetSortedTrainerObjects(trainerObjects);
+}
+#endif
+
+bool8 CheckForTrainersWantingBattle(void)
+{
+    u8 trainerObjects[OBJECT_EVENTS_COUNT];
+
+    if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
+        return FALSE;
+
+    gNoOfApproachingTrainers = 0;
+    gApproachingTrainerId = 0;
+    u8 trainerObjectsCount = GetSortedTrainerObjects(trainerObjects);
+
+    for (u32 i = 0; i < trainerObjectsCount; i++)
     {
         u8 numTrainers;
         numTrainers = CheckTrainer(trainerObjects[i]);
@@ -999,18 +1013,6 @@ void PrepareSecondApproachingTrainer(void)
     else
     {
         gApproachingTrainerId = 0;
-        gSpecialVar_Result = FALSE;
-    }
-}
-
-void TryPrepareSecondApproachingTrainer(void)
-{
-    if (gNoOfApproachingTrainers == 2)
-    {
-        PrepareSecondApproachingTrainer();
-    }
-    else
-    {
         gSpecialVar_Result = FALSE;
     }
 }

@@ -7,11 +7,21 @@ public `REBALANCED_VERSION` species tables at commit
 `93e96730fb3c771f7f08f9623ae36f0643c52d3d`:
 https://github.com/jrci-dev/inclementemerald
 
-Emerald Champions ports only the relevant Ability identities into its current
+Inclement Emerald 2 ports only the relevant Ability identities into its current
 Pokemon Champions-oriented species data; it does not import Inclement
 Emerald's battle-engine source. Inclement Emerald is credited to its project
 authors and contributors. Its repository does not publish a standalone license
 file, so this notice makes no additional license claim.
+
+## Inclement Emerald title artwork
+
+The regenerated title banner uses BuffelSaft's original Inclement Emerald pixel lettering
+from `graphics/title_screen/emerald_version.png` at commit
+`cf41a95b68a39ca74fefeb934c460f6f47eb0b3b` as its reference:
+https://github.com/BuffelSaft/pokeemerald
+
+The reference artwork is credited to the Inclement Emerald project authors
+and contributors.
 
 ## Pokemon Showdown
 

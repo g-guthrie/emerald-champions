@@ -877,6 +877,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetDexNavSearch();
+    ResetHotSpringPokerusSteps();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
 
@@ -939,6 +940,7 @@ static void LoadMapFromWarp(bool32 a1)
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetDexNavSearch();
+    ResetHotSpringPokerusSteps();
     // reset hours override on every warp
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
@@ -1786,6 +1788,7 @@ u8 UpdateSpritePaletteWithTime(u8 paletteNum)
 
 static void OverworldBasic(void)
 {
+    UpdateDexNavSearchTimer();
     ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();

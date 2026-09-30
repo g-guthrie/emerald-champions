@@ -107,7 +107,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
-	giveitem ITEM_RAICHUNITE_X
+	giveuniqueitem ITEM_RAICHUNITE_X
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -116,7 +116,7 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
-	giveitem ITEM_RAICHUNITE_X
+	giveuniqueitem ITEM_RAICHUNITE_X
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT

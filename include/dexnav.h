@@ -39,6 +39,7 @@ void ApplyDexNavChainRewards(struct Pokemon *mon);
 void IncrementDexNavChain(void);
 void GiveDexNavIfNeeded(void);
 bool32 OnStep_DexNavSearch(void);
+void UpdateDexNavSearchTimer(void);
 
 extern enum Species gDexNavSpecies;
 

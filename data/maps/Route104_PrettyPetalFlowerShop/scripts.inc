@@ -97,7 +97,11 @@ Route104_PrettyPetalFlowerShop_EventScript_HarvestPouchDone::
 Route104_PrettyPetalFlowerShop_Text_TakeHarvestPouch:
 	.string "Take this Harvest Pouch, too.\n"
 	.string "It counts every Berry you pick\l"
-	.string "from a tree, kind by kind.$"
+	.string "from a tree, kind by kind.\p"
+	.string "Use it in your Key Items pocket\n"
+	.string "to check your harvest and rewards.\p"
+	.string "The Berry Master on Route 123\n"
+	.string "trades your harvest for those rewards!$"
 
 Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl:: @ 822A442
 	lock

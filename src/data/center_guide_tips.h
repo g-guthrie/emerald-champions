@@ -20,7 +20,7 @@ TIP(RUSTBORO_CITY, 0, FLAG_IS_CHAMPION, 0, ARCEUS_GIFT, COMPOUND_STRING("You're 
 TIP(SLATEPORT_CITY, 0, 0, FLAG_RECEIVED_6_SODA_POP, NONE, COMPOUND_STRING("Beat all three Trainers in the\nSeashore House on Route 109,\lsouth of town, and the owner\lwill treat you to Soda Pop.")),
 TIP(SLATEPORT_CITY, 0, 0, 0, TRICK_HOUSE, sTip_TrickHouse),
 TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("The Battle Tent here lends you\nPokémon for Double Battles.\pWin three in a row to earn an\nitem like a Metal Coat or a\lLinking Cord.")),
-TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("A retired Pokéblock chef lives\nhere in Slateport. For five Oran\lBerries, he'll give a Pokémon a\lnew Nature.")),
+TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("A retired Pokéblock chef lives\nin the Name Rater's house. Bring\lone Berry of the kind he asks\lfor to change a Pokémon's Nature.")),
 TIP(SLATEPORT_CITY, 5, 0, 0, ODD_KEYSTONE, COMPOUND_STRING("An Odd Keystone lies in the\nruins beneath the Route 111 desert.\pToss it into the trash can in\nthe Abandoned Ship's storage\lroom on Route 108, with a\lLickitung or Slugma along.\pA Spiritomb will appear. If you\nrun from it, you keep the\lKeystone to try again.\pThe storage room's key lies in\nthe ship's captain's office.")),
 TIP(SLATEPORT_CITY, 7, 0, FLAG_EXCHANGED_SCANNER, NONE, COMPOUND_STRING("Dive beside the Abandoned Ship\non Route 108 to find its hidden floor.\pCapt. Stern at the harbor\ntrades Bottle Caps for the\lScanner you'll find there.")),
 
@@ -31,6 +31,7 @@ TIP(MAUVILLE_CITY, 0, 0, 0, BLOB_FOUND, sTip_BlobFound),
 TIP(MAUVILLE_CITY, 0, 0, FLAG_RECEIVED_LIFE_ORB, NONE, COMPOUND_STRING("The Winstrate family lives on\nRoute 111. Beat all four of\lthem in a row, and they'll\lreward you at their house.")),
 TIP(MAUVILLE_CITY, 0, 0, 0, NONE, COMPOUND_STRING("The Game Corner trades Coins\nfor rare Pokémon, including\lstarters from every region.\pYou'll need a Coin Case. The\nlady next door trades one for\lan Ice Stone from Slateport.")),
 TIP(MAUVILLE_CITY, 0, 0, 0, TRICK_HOUSE, sTip_TrickHouse),
+TIP(MAUVILLE_CITY, 0, 0, 0, NONE, COMPOUND_STRING("Mauville's Iconic Move Tutor\nis in the house west of the Mart.\pHe teaches special moves that\nother tutors can't. More Badges\lopen more lessons.\pHis neighbor has a catalogue\nlisting each Pokémon's lessons\land the Badges they require.")),
 TIP(MAUVILLE_CITY, 5, 0, FLAG_GOT_TM24_FROM_WATTSON, NONE, COMPOUND_STRING("After your fifth Badge, Wattson\nwaits outside his Gym. He needs\lhelp with New Mauville's generator.\pNew Mauville is a short Surf\nfrom Route 110. A Rotom lives\linside, so save before you go.")),
 TIP(MAUVILLE_CITY, 5, 0, FLAG_ROUTE118_GYARADOSITE, NONE, COMPOUND_STRING("A fisherman across the river\non Route 118 loves Magikarp.\pBeat his team with a party of\nsix Magikarp, and he'll give\lyou a Gyaradosite.")),
 TIP(MAUVILLE_CITY, 5, 0, 0, NONE, sTip_BerryMaster),
@@ -43,9 +44,10 @@ TIP(VERDANTURF_TOWN, 0, 0, FLAG_RECEIVED_HM04, NONE, COMPOUND_STRING("Rusturf Tu
 
 TIP(LAVARIDGE_TOWN, 0, 0, 0, BLOB_CHASE, sTip_BlobChase),
 TIP(LAVARIDGE_TOWN, 4, 0, 0, NONE, sTip_Desert),
+TIP(LAVARIDGE_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Any partner that has had Pokérus\ncan soak for 25 consecutive steps\lin the hot-spring water.\pThen speak to the woman inside.\nShe previews a permanent treatment\lthat ends spreading.\pIts favored Nature stat keeps\n15%; the other gains 5%.\lNeutral Natures stay neutral.")),
 
 TIP(FALLARBOR_TOWN, 5, 0, 0, NONE, COMPOUND_STRING("After five Badges, the Fossil\nManiac's tunnel on Route 114\lopens into ruins under the\ldesert, full of fossils.\pDevon's lab in Rustboro can\nrevive them.")),
-TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie and Ivy live here in\nFallarbor. Evie raises EVs for\l¥" STR(EC_EVIE_PRICE_PER_EV) " each.\pIvy lowers Attack or Speed IVs\nfor " STR(EC_IV_CHANGE_CAP_COST) " Bottle Cap. For " STR(EC_HIDDEN_POWER_CAP_COST) " Caps,\lshe changes Hidden Power's type.")),
+TIP(FALLARBOR_TOWN, 0, 0, 0, NONE, COMPOUND_STRING("Evie in Fallarbor previews\nand adjusts a whole EV spread.\lAdded EVs cost ¥" STR(EC_EVIE_PRICE_PER_EV) " each;\llowering is free.\pIvy lowers Attack or Speed IVs\nfor " STR(EC_IV_CHANGE_CAP_COST) " Bottle Cap. For " STR(EC_HIDDEN_POWER_CAP_COST) " Caps,\lshe changes Hidden Power's type.")),
 
 TIP(FORTREE_CITY, 0, FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, NONE, COMPOUND_STRING("Strange storms bring visiting\nlegends to some routes. The\lWeather Institute on Route 119\ltracks where they are.")),
 
@@ -63,5 +65,11 @@ TIP(SOOTOPOLIS_CITY, 0, FLAG_SYS_GAME_CLEAR, 0, NONE, COMPOUND_STRING("Wallace w
 TIP(PACIFIDLOG_TOWN, 0, 0, 0, VIAL_ROUTE133, COMPOUND_STRING("Blob's nurse is on Route 133,\nwest of town. Help Blob cross\lthe currents, and your Poké\lVial will hold another dose.")),
 
 TIP(EVER_GRANDE_CITY, 0, FLAG_SYS_GAME_CLEAR, 0, NONE, COMPOUND_STRING("The Elite Four are always ready\nfor another match. Challenge\lthem whenever you like.")),
+
+TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE, NONE, COMPOUND_STRING("Butterfree can Mega Evolve!\nIts stone lies in Dewford\lMeadow. Keep it until Norman\lgives you a Mega Ring.")),
+TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_ROUTE_106_KINGLERITE, NONE, COMPOUND_STRING("Kingler can Mega Evolve, too!\nLook for its Mega Stone on\lRoute 106, north of Dewford.")),
+TIP(FALLARBOR_TOWN, 5, 0, FLAG_ITEM_DESERT_UNDERPASS_FLYGONITE, NONE, COMPOUND_STRING("Flygon's Mega Stone lies in the\nDesert Underpass. After five\lBadges, explore the Fossil\lManiac's tunnel on Route 114.")),
+TIP(MOSSDEEP_CITY, 0, 0, FLAG_ITEM_MOSSDEEP_CITY_MILOTICITE, NONE, COMPOUND_STRING("Milotic can Mega Evolve here!\nIts Mega Stone lies in Mossdeep.\lGive it to Milotic, then use\lyour Mega Ring in battle.")),
+TIP(LILYCOVE_CITY, 0, 0, FLAG_ITEM_ROUTE_121_MACHAMPITE, NONE, COMPOUND_STRING("Machamp can Mega Evolve here!\nIts stone lies on Route 121,\lwest of Lilycove. Give it to\lMachamp for your Mega Ring.")),
 
 #undef TIP

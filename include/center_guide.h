@@ -12,8 +12,10 @@
 // VAR_0x8004 is the cursor (start at 0). Fills gStringVar4 with the next
 // local side-quest tip for this city; VAR_RESULT = FALSE when none remain.
 void BufferNextCenterGuideTip(void);
-// Fills gStringVar4 with the next mandatory destination; VAR_RESULT = FALSE
-// after the Hall of Fame, where Common_EventScript_FinaleDirections speaks.
+// Fills gStringVar4 with the next mandatory destination; VAR_RESULT = TRUE
+// for all campaign and finale stages. Shared finale callers use the same tree.
 void BufferCenterGuideDirections(void);
+// Brief next objective from the same progression tree; no puzzle solution.
+void BufferCenterGuideObjective(void);
 
 #endif // GUARD_CENTER_GUIDE_H

@@ -27,6 +27,8 @@ void FieldClearPlayerInput(struct FieldInput *pStruct);
 void FieldGetPlayerInput(struct FieldInput *pStruct, u16 keys, u16 heldKeys);
 int ProcessPlayerFieldInput(struct FieldInput *pStruct);
 void RestartWildEncounterImmunitySteps(void);
+void ResetHotSpringPokerusSteps(void);
+bool32 UpdateHotSpringPokerusSteps(u16 metatileBehavior);
 const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 bool8 TryDoDiveWarp(struct MapPosition *position, u16 metatileBehavior);
 int SetCableClubWarp(void);

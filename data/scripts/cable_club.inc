@@ -947,9 +947,6 @@ CableClub_EventScript_DirectCornerAttendant::
 	end
 
 CableClub_EventScript_DirectCornerSelectService::
-	checkitem ITEM_POWDER_JAR, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq CableClub_EventScript_DirectCornerNoBerry
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_DirectCornerSelectAllServices
 	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD, FALSE
 	switch VAR_RESULT
@@ -968,26 +965,6 @@ CableClub_EventScript_DirectCornerSelectAllServices::
 	case 2, CableClub_EventScript_WirelessRecordMix
 	case 3, CableClub_EventScript_WirelessBerryCrush
 	case 4, CableClub_EventScript_AbortLink
-	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
-	end
-
-CableClub_EventScript_DirectCornerNoBerry::
-	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_DirectCornerHasRecordMix
-	multichoice 0, 0, MULTI_WIRELESS_NO_RECORD_BERRY, FALSE
-	switch VAR_RESULT
-	case 0, CableClub_EventScript_WirelessTrade
-	case 1, CableClub_EventScript_WirelessBattleSelect
-	case 2, CableClub_EventScript_AbortLink
-	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
-	end
-
-CableClub_EventScript_DirectCornerHasRecordMix::
-	multichoice 0, 0, MULTI_WIRELESS_NO_BERRY, FALSE
-	switch VAR_RESULT
-	case 0, CableClub_EventScript_WirelessTrade
-	case 1, CableClub_EventScript_WirelessBattleSelect
-	case 2, CableClub_EventScript_WirelessRecordMix
-	case 3, CableClub_EventScript_AbortLink
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
 	end
 
@@ -1055,6 +1032,13 @@ CableClub_EventScript_WirelessBerryCrush::
 	special HasAtLeastOneBerry
 	compare VAR_RESULT, FALSE
 	goto_if_eq CableClub_EventScript_NeedBerryForBerryCrush
+	checkitem ITEM_POWDER_JAR, 1
+	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_StartWirelessBerryCrush
+	giveitem ITEM_POWDER_JAR
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_POWDER_JAR
+
+CableClub_EventScript_StartWirelessBerryCrush::
 	setvar VAR_0x8004, LINK_GROUP_BERRY_CRUSH
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end

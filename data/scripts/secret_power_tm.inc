@@ -3,7 +3,7 @@ Route111_Text_MakingRoomUseTMToMakeYourOwn: @ 82762C9
 	.string "What am I doing?\p"
 	.string "I'm thinking about making my own room\n"
 	.string "here using a Pokémon move.\p"
-	.string "A Rare Candy will help you prepare.\n"
+	.string "Sell this Nugget for travel funds.\n"
 	.string "Would you like it?$"
 
 Route111_Text_ExplainSecretPower: @ 827636E
@@ -36,7 +36,7 @@ Route111_EventScript_SecretPowerMan:: @ 82765FF
 	end
 
 Route111_EventScript_GiveSecretPower:: @ 827661E
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route111_EventScript_NoRoomForSecretPower
 	msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT

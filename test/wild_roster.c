@@ -2,6 +2,8 @@
 #include "caps.h"
 #include "event_data.h"
 #include "fishing.h"
+#include "field_move.h"
+#include "item.h"
 #include "legendary_signs.h"
 #include "overworld.h"
 #include "pokedex.h"
@@ -32,6 +34,7 @@ static const u16 sRosterProgressFlags[] = {
     FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
     FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, FLAG_GOT_TM24_FROM_WATTSON,
     FLAG_LEGENDARIES_IN_SOOTOPOLIS,
+    FLAG_RECEIVED_HM_CUT, FLAG_RECEIVED_HM_SURF, FLAG_RECEIVED_HM_ROCK_SMASH,
 };
 
 struct RosterTestState
@@ -165,6 +168,10 @@ static u32 CheckRosterAgainstEngine(u16 map, u32 draws)
                 failures++;
             continue;
         }
+        // A table alone does not enable the method. The independent access
+        // tests below cover the positive and negative tool/license cases.
+        if (listed == 0 && methods[m].method != WILD_ROSTER_LAND)
+            continue;
         for (u32 seed = 0; seed < draws; seed++)
         {
             enum Species species;
@@ -217,6 +224,14 @@ static void CheckRosterAgainstEngineAt(u16 map, bool32 late)
 {
     struct RosterTestState state;
     SaveRosterTestState(&state);
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_OLD_ROD, 1));
+    EXPECT(AddBagItem(ITEM_GOOD_ROD, 1));
+    EXPECT(AddBagItem(ITEM_SUPER_ROD, 1));
+    EXPECT(AddBagItem(ITEM_HONEY, 1));
+    FlagSet(FLAG_RECEIVED_HM_CUT);
+    FlagSet(FLAG_RECEIVED_HM_SURF);
+    FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
     if (late)
     {
         SetRosterBadges(NUM_BADGES);
@@ -344,7 +359,7 @@ TEST("Wild roster: a storm visitor is listed only while its storm is on that map
     EXPECT(!RosterHas(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
     EXPECT(RosterHas(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
-    EXPECT_EQ(GetRosterShare(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO), WEATHER_ANOMALY_ENCOUNTER_PERCENT * 100);
+    EXPECT_EQ(GetRosterShare(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO), 2500);
     EXPECT(!RosterHas(MAP_ROUTE110, WILD_ROSTER_SURFING, SPECIES_TAPU_KOKO));
     EXPECT(!RosterHas(MAP_ROUTE111, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
     // The engine agrees while the storm rages, storm share included.
@@ -362,6 +377,8 @@ TEST("Wild roster: roamers and outbreaks take their part of the land draws")
     struct RosterTestState state;
     u8 mapGroup, mapNum;
     SaveRosterTestState(&state);
+    FlagSet(FLAG_BADGE05_GET);
+    FlagSet(FLAG_RECEIVED_HM_SURF);
     gSpecialVar_0x8004 = 0;
     InitRoamer();
     GetRoamerLocation(0, &mapGroup, &mapNum);
@@ -391,6 +408,10 @@ TEST("Wild roster: Feebas keeps its hidden spots and Cut trees their habitat")
 {
     struct RosterTestState state;
     SaveRosterTestState(&state);
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_OLD_ROD, 1));
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_RECEIVED_HM_CUT);
     struct WildRosterEntry roster[WILD_ROSTER_MAX_ENTRIES];
     u32 count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
     u32 feebas = FindRosterEntry(roster, count, WILD_ROSTER_FEEBAS, SPECIES_FEEBAS);
@@ -404,6 +425,75 @@ TEST("Wild roster: Feebas keeps its hidden spots and Cut trees their habitat")
         EXPECT(RosterHas(MAP_PETALBURG_WOODS, WILD_ROSTER_CUT_TREES, GetCutTreeSlotSpecies(slot)));
         EXPECT(!RosterHas(MAP_ROUTE101, WILD_ROSTER_CUT_TREES, GetCutTreeSlotSpecies(slot)));
     }
+    RestoreRosterTestState(&state);
+}
+
+TEST("Wild roster: rods and field licenses expose only their usable methods")
+{
+    struct RosterTestState state;
+    SaveRosterTestState(&state);
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    EXPECT(!RosterHas(MAP_ROUTE119, WILD_ROSTER_FEEBAS, SPECIES_FEEBAS));
+    struct WildRosterEntry roster[WILD_ROSTER_MAX_ENTRIES];
+    u32 count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
+    for (u32 i = 0; i < count; i++)
+    {
+        EXPECT_NE(roster[i].method, WILD_ROSTER_SURFING);
+        EXPECT_NE(roster[i].method, WILD_ROSTER_OLD_ROD);
+        EXPECT_NE(roster[i].method, WILD_ROSTER_GOOD_ROD);
+        EXPECT_NE(roster[i].method, WILD_ROSTER_SUPER_ROD);
+        EXPECT_NE(roster[i].method, WILD_ROSTER_HONEY);
+        EXPECT_NE(roster[i].method, WILD_ROSTER_CUT_TREES);
+    }
+    EXPECT(AddBagItem(ITEM_OLD_ROD, 1));
+    EXPECT(RosterHas(MAP_ROUTE119, WILD_ROSTER_FEEBAS, SPECIES_FEEBAS));
+    count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
+    u32 oldRod = 0, goodRod = 0;
+    for (u32 i = 0; i < count; i++)
+    {
+        oldRod += roster[i].method == WILD_ROSTER_OLD_ROD;
+        goodRod += roster[i].method == WILD_ROSTER_GOOD_ROD;
+    }
+    EXPECT_GT(oldRod, 0);
+    EXPECT_EQ(goodRod, 0);
+    EXPECT(AddPCItem(ITEM_GOOD_ROD, 1));
+    count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
+    goodRod = 0;
+    for (u32 i = 0; i < count; i++)
+        goodRod += roster[i].method == WILD_ROSTER_GOOD_ROD;
+    EXPECT_GT(goodRod, 0);
+
+    FlagSet(FLAG_BADGE05_GET);
+    count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
+    for (u32 i = 0; i < count; i++)
+        EXPECT_NE(roster[i].method, WILD_ROSTER_SURFING);
+    FlagSet(FLAG_RECEIVED_HM_SURF);
+    count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
+    u32 surf = 0;
+    for (u32 i = 0; i < count; i++)
+        surf += roster[i].method == WILD_ROSTER_SURFING;
+    EXPECT_GT(surf, 0);
+
+    EXPECT(!RosterHas(MAP_PETALBURG_WOODS, WILD_ROSTER_CUT_TREES, SPECIES_SKWOVET));
+    FlagSet(FLAG_BADGE01_GET);
+    EXPECT(!RosterHas(MAP_PETALBURG_WOODS, WILD_ROSTER_CUT_TREES, SPECIES_SKWOVET));
+    FlagSet(FLAG_RECEIVED_HM_CUT);
+    EXPECT(RosterHas(MAP_PETALBURG_WOODS, WILD_ROSTER_CUT_TREES, SPECIES_SKWOVET));
+    EXPECT(!RosterHas(MAP_ROUTE106, WILD_ROSTER_ROCK_SMASH, SPECIES_DWEBBLE));
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
+    EXPECT(RosterHas(MAP_ROUTE106, WILD_ROSTER_ROCK_SMASH, SPECIES_DWEBBLE));
+    EXPECT(!MapHeaderHasRockSmash(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE109), MAP_NUM(MAP_ROUTE109))));
+    EXPECT(!RosterHas(MAP_ROUTE109, WILD_ROSTER_ROCK_SMASH, SPECIES_DWEBBLE));
+    EXPECT(AddBagItem(ITEM_HONEY, 1));
+    count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), roster, ARRAY_COUNT(roster));
+    u32 honey = 0;
+    for (u32 i = 0; i < count; i++)
+        honey += roster[i].method == WILD_ROSTER_HONEY;
+    EXPECT_GT(honey, 0);
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
     RestoreRosterTestState(&state);
 }
 
@@ -435,6 +525,8 @@ TEST("Wild roster: entries are grouped by method, most common first, with plain 
     EXPECT_EQ(GetWildRosterRarity(400), WILD_RARITY_RARE);
     EXPECT_EQ(GetWildRosterRarity(399), WILD_RARITY_VERY_RARE);
     // Sootopolis's water is empty while Groudon and Kyogre clash.
+    FlagSet(FLAG_BADGE05_GET);
+    FlagSet(FLAG_RECEIVED_HM_SURF);
     FlagSet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
     count = GetWildRosterForMap(MAP_GROUP(MAP_SOOTOPOLIS_CITY), MAP_NUM(MAP_SOOTOPOLIS_CITY), roster, ARRAY_COUNT(roster));
     for (u32 i = 0; i < count; i++)
@@ -474,6 +566,14 @@ TEST("Wild roster: nothing is grind-rare: every species at least 4%, restricted 
 {
     struct RosterTestState state;
     SaveRosterTestState(&state);
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_OLD_ROD, 1));
+    EXPECT(AddBagItem(ITEM_GOOD_ROD, 1));
+    EXPECT(AddBagItem(ITEM_SUPER_ROD, 1));
+    EXPECT(AddBagItem(ITEM_HONEY, 1));
+    FlagSet(FLAG_RECEIVED_HM_CUT);
+    FlagSet(FLAG_RECEIVED_HM_SURF);
+    FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
     EXPECT_EQ(CheckRosterFloors(), 0);
     SetRosterBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);

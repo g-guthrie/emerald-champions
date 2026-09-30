@@ -171,7 +171,7 @@ void EmeraldChampionsStudioPoll(void)
         break;
     case 9: // Explicit hunt/summary fixture state; never compiled into releases.
         if (gEcStudioArgs[0] > DEXNAV_CHAIN_MAX || gEcStudioArgs[1] >= PARTY_SIZE
-         || (gEcStudioArgs[2] != 0 && gEcStudioArgs[2] != 0xFC
+         || (gEcStudioArgs[2] != 0 && gEcStudioArgs[2] != 0xF8 && gEcStudioArgs[2] != 0xF9 && gEcStudioArgs[2] != 0xFA && gEcStudioArgs[2] != 0xFB && gEcStudioArgs[2] != 0xFC
           && gEcStudioArgs[2] != 0xFD && gEcStudioArgs[2] != 0xFE)
          || gEcStudioArgs[3] >= NUM_NATURES)
         {

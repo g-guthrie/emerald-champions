@@ -603,7 +603,7 @@ MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs: @ 8232CA6
 MtPyre_Summit_Text_SuperAncientPokemonTaughtUs: @ 8232D1E
 	.string "The embodiments of the land, sea,\n"
 	.string "and the sky…\p"
-	.string "That is said to be the identities of\n"
+	.string "Those are said to be the identities of\n"
 	.string "the super-ancient Pokémon…\p"
 	.string "In the same way that we humans and\n"
 	.string "Pokémon have life, our world, too,\l"

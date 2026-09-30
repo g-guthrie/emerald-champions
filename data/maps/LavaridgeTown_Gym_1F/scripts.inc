@@ -80,7 +80,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
-	giveitem ITEM_CHANDELURITE
+	giveuniqueitem ITEM_CHANDELURITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -203,8 +203,8 @@ LavaridgeTown_Gym_1F_Text_GymGuideAdvice2: @ 81FE9BF
 	.string "She likes to battle in the sun, and\n"
 	.string "her Pokémon are all trained to hit as\l"
 	.string "hard as they can.\p"
-	.string "The hot-spring steam also fills\n"
-	.string "every battle here with Misty Terrain.\p"
+	.string "Hot-spring steam fills her battle\n"
+	.string "with Misty Terrain from the start.\p"
 	.string "Rock moves hit her Fire-types hard,\n"
 	.string "and her sun can't weaken them.\p"
 	.string "Flying moves take care of her\n"

@@ -10,7 +10,15 @@ Route101_OnTransition:
 	goto_if_unset FLAG_RECEIVED_DEXNAV, Route101_TutorialVisibilityDone
 	goto_if_set FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE, Route101_TutorialVisibilityDone
 	clearflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
+	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 5, Route101_RivalWaitingAtEntrance
+	setobjectxyperm LOCALID_ROUTE101_RIVAL_TUTORIAL, 11, 12
+	setobjectmovementtype LOCALID_ROUTE101_RIVAL_TUTORIAL, MOVEMENT_TYPE_FACE_LEFT
 Route101_TutorialVisibilityDone:
+	end
+
+Route101_RivalWaitingAtEntrance:
+	setobjectxyperm LOCALID_ROUTE101_RIVAL_TUTORIAL, 10, 14
+	setobjectmovementtype LOCALID_ROUTE101_RIVAL_TUTORIAL, MOVEMENT_TYPE_FACE_DOWN
 	end
 
 Route101_OnFrame:

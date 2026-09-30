@@ -139,7 +139,7 @@ $("trainer").onchange=()=>{const t=selectedTrainer();$("trainerTeam").textConten
 action("startBattle",async()=>{const t=selectedTrainer();if(!t)throw Error("Choose a trainer from the list.");await api("trainer",{id:t.id});$("screen").focus();});
 async function poll(){
   try{state=await(await fetch("/api/state")).json();
-    $("location").textContent=nice(state.map||"Emerald Champions");$("status").textContent=state.status;
+    $("location").textContent=nice(state.map||"Inclement Emerald 2");$("status").textContent=state.status;
     $("gameState").textContent=state.paused?"PAUSED":state.battle?"IN BATTLE":state.ready?"EXPLORING":"INTERACTION";
     $("details").textContent="Level cap "+state.cap+" · "+(["Easy","Medium","Hard"][state.difficulty]||"Medium")+" · Automatic checkpoint before each interaction";
     $("performance").textContent=state.native_ms+" ms / frame";

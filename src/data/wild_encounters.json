@@ -2633,7 +2633,7 @@
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_COSMOG"
+                "species": "SPECIES_CUTIEFLY"
               },
               {
                 "min_level": 42,
@@ -8790,37 +8790,6 @@
               10,
               5
             ]
-          },
-          "rock_smash_mons": {
-            "encounter_rate": 20,
-            "mons": [
-              {
-                "min_level": 14,
-                "max_level": 18,
-                "species": "SPECIES_SANDYGAST"
-              },
-              {
-                "min_level": 14,
-                "max_level": 18,
-                "species": "SPECIES_DWEBBLE"
-              },
-              {
-                "min_level": 14,
-                "max_level": 18,
-                "species": "SPECIES_KRABBY"
-              },
-              {
-                "min_level": 14,
-                "max_level": 18,
-                "species": "SPECIES_BINACLE"
-              }
-            ],
-            "encounter_rates": [
-              60,
-              30,
-              5,
-              5
-            ]
           }
         },
         {
@@ -10251,7 +10220,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_TYPE_NULL"
+                "species": "SPECIES_WOOLOO"
               },
               {
                 "min_level": 25,
@@ -12898,7 +12867,7 @@
               {
                 "min_level": 9,
                 "max_level": 9,
-                "species": "SPECIES_MELTAN"
+                "species": "SPECIES_WHISMUR"
               },
               {
                 "min_level": 8,

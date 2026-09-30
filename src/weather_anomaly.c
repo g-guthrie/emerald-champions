@@ -27,6 +27,8 @@
 //   bits 10*i .. 10*i+4 : slot i visitor save id (gate anomalyId, 0 = empty)
 //   bits 10*i+5 .. +9   : slot i ticks remaining (1 tick = 50 steps, 30 = 1500)
 //   bits 40..44         : cooldown visitor save id (0 = none)
+// VAR_WEATHER_ANOMALY_SNOW_MASK saves one snow bit per slot independently;
+// existing saves have zero there and keep their current visitors' weather.
 // Ticks fall on steps where GAME_STAT_STEPS is a multiple of 50, so a fresh
 // anomaly lasts 1451-1500 steps.
 
@@ -165,14 +167,15 @@ static u32 DrawVisitor(u64 state, u32 excluded)
 void UpdateWeatherAnomaliesOnStep(void)
 {
     u64 state = LoadState();
+    u16 snow = VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK);
     u32 expiredSlots = 0, expiredIds = 0, newCooldown = 0, excluded;
     bool32 tick, cooldownLapsed = FALSE;
     bool32 seeding = state == 0;
 
     if (!IsWeatherAnomalyWindowOpen())
     {
-        if (state != 0)
-            StoreState(0);
+        if (state != 0 || snow != 0)
+            ClearWeatherAnomalies();
         return;
     }
 
@@ -236,10 +239,16 @@ void UpdateWeatherAnomaliesOnStep(void)
         {
             u32 ticks = seeding ? WEATHER_ANOMALY_DURATION_TICKS * (slot + 1) / WEATHER_ANOMALY_SLOT_COUNT
                                 : WEATHER_ANOMALY_DURATION_TICKS;
-            state = SetSlot(state, slot, DrawVisitor(state, excluded), ticks);
+            u32 id = DrawVisitor(state, excluded);
+            snow &= ~(1u << slot);
+            // Keep weather selection off the visitor-selection RNG stream.
+            if (id != 0 && Random2() % 100 < WEATHER_ANOMALY_SNOW_PERCENT)
+                snow |= 1u << slot;
+            state = SetSlot(state, slot, id, ticks);
         }
     }
     StoreState(state);
+    VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, snow);
 }
 
 u8 GetWeatherAnomalySlotSignId(u32 slot)
@@ -267,6 +276,7 @@ void SetWeatherAnomalySlot(u32 slot, u8 signId, u16 steps)
     if (slot >= WEATHER_ANOMALY_SLOT_COUNT)
         return;
     StoreState(SetSlot(LoadState(), slot, id, min(ticks, TICK_MASK)));
+    VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK) & ~(1u << slot));
 }
 
 u8 GetWeatherAnomalyCooldownSignId(void)
@@ -278,6 +288,7 @@ u8 GetWeatherAnomalyCooldownSignId(void)
 void ClearWeatherAnomalies(void)
 {
     StoreState(0);
+    VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 0);
 }
 
 bool32 IsWeatherAnomalyLive(enum LegendarySignId signId)
@@ -304,7 +315,7 @@ enum LegendarySignId GetLiveWeatherAnomalyOnMap(u8 mapGroup, u8 mapNum)
 static bool32 IsAllowedAnomalyWeather(u8 weather)
 {
     return weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM
-        || weather == WEATHER_DOWNPOUR || weather == WEATHER_FOG_HORIZONTAL;
+        || weather == WEATHER_DOWNPOUR || weather == WEATHER_FOG_HORIZONTAL || weather == WEATHER_SNOW;
 }
 
 u8 GetWeatherAnomalyWeatherForCurrentMap(void)
@@ -314,6 +325,9 @@ u8 GetWeatherAnomalyWeatherForCurrentMap(void)
 
     if (sign >= LEGENDARY_SIGN_COUNT || !IsAllowedAnomalyWeather(gLegendaryGates[sign].anomalyWeather))
         return WEATHER_NONE;
+    for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
+        if (GetWeatherAnomalySlotSignId(slot) == sign && (VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK) & (1u << slot)))
+            return WEATHER_SNOW;
     return gLegendaryGates[sign].anomalyWeather;
 }
 

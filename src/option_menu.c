@@ -43,6 +43,7 @@ enum
 enum
 {
     WIN_OPTIONS,
+    WIN_DIFFICULTY_HELP,
 };
 
 // The frame tiles sit at the top of the shared char block, clear of the
@@ -57,7 +58,7 @@ enum
 #define TILE_BOT_EDGE     (TILE_FRAME_BASE + 7)
 #define TILE_BOT_CORNER_R (TILE_FRAME_BASE + 8)
 
-#define OPTIONS_TOP       ((20 - MENUITEM_COUNT * 2) / 2)
+#define OPTIONS_TOP       1
 
 #define YPOS_DIFFICULTY   (MENUITEM_DIFFICULTY * 16)
 #define YPOS_BATTLESCENE  (MENUITEM_BATTLESCENE * 16)
@@ -124,6 +125,10 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .height = MENUITEM_COUNT * 2,
         .paletteNum = 1,
         .baseBlock = 2
+    },
+    [WIN_DIFFICULTY_HELP] = {
+        .bg = 0, .tilemapLeft = 2, .tilemapTop = 14,
+        .width = 26, .height = 6, .paletteNum = 1, .baseBlock = 314
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -451,6 +456,21 @@ static void Difficulty_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_DifficultyMedium, xMedium, YPOS_DIFFICULTY, styles[1]);
 
     DrawOptionMenuChoice(gText_DifficultyEasy, GetStringRightAlignXOffset(FONT_NORMAL, gText_DifficultyEasy, 198), YPOS_DIFFICULTY, styles[2]);
+    u32 difference = GetTrainerLevelReductionFor(selection) - GetTrainerLevelReductionFor(DIFFICULTY_HARD);
+    ConvertIntToDecimalStringN(gStringVar1, difference, STR_CONV_MODE_LEFT_ALIGN, 2);
+    const u8 *description = selection == DIFFICULTY_HARD
+        ? COMPOUND_STRING("Hard: extreme challenge.\nStandard opponent levels.")
+        : selection == DIFFICULTY_NORMAL
+        ? COMPOUND_STRING("Medium: expert campaign.\nOpponents {STR_VAR_1} level below Hard.")
+        : COMPOUND_STRING("Easy: more room for mistakes.\nOpponents {STR_VAR_1} levels below Hard.");
+    StringExpandPlaceholders(gStringVar4, description);
+    FillWindowPixelBuffer(WIN_DIFFICULTY_HELP, PIXEL_FILL(1));
+    const u8 helpColors[] = {1, 6, 7}; // White and gray in the Options palette.
+    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 0, helpColors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 28, helpColors, TEXT_SKIP_DRAW,
+        COMPOUND_STRING("Same teams and strategy in every mode."));
+    PutWindowTilemap(WIN_DIFFICULTY_HELP);
+    CopyWindowToVram(WIN_DIFFICULTY_HELP, COPYWIN_FULL);
 }
 
 static u8 BattleScene_ProcessInput(u8 selection)

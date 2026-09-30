@@ -433,7 +433,7 @@ MtChimney_Text_MagmaOutnumbersUs: @ 822FD1F
 
 MtChimney_Text_LessHabitatForWaterPokemon: @ 822FD5B
 	.string "If they expand the land, there'll be\n"
-	.string "less habitats for Water Pokémon!$"
+	.string "fewer habitats for Water Pokémon!$"
 
 MtChimney_Text_MagmasNameSimilar: @ 822FDA1
 	.string "We're Team Aqua!\p"

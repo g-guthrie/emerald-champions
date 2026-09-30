@@ -38,7 +38,7 @@ MtPyre_1F_Text_ExplainCleanseTag: @ 8231005
 	.string "It will help ward off wild Pokémon.$"
 
 MtPyre_1F_Text_ComeToPayRespects: @ 823104F
-	.string "Did you come to pay your respect\n"
+	.string "Did you come to pay your respects\n"
 	.string "to the spirits of departed Pokémon?\p"
 	.string "You must care for your Pokémon a lot.$"
 

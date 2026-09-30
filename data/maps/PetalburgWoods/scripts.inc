@@ -430,13 +430,11 @@ PetalburgWoods_Text_MiracleSeedExplanation: @ 822EB63
 
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "Trainer Tips\p"
-	.string "Battles don't raise levels. Your\n"
-	.string "Pokémon grow with your Badges.\p"
-	.string "Your Pokémon can't grow any stronger\n"
-	.string "than your Badges allow. Earn more\l"
-	.string "Badges to let them grow again.\p"
-	.string "Use the Leveler to raise your party\n"
-	.string "that high anytime!$"
+	.string "Battles don't raise levels. Use\n"
+	.string "the Leveler to raise your party\l"
+	.string "to the current level cap!\p"
+	.string "Earn Badges and keep exploring\n"
+	.string "Hoenn to raise that cap.$"
 
 PetalburgWoods_Text_TrainerTipsPP: @ 822ED07
 	.string "Trainer Tips\p"

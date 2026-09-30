@@ -864,14 +864,14 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
     SeedRng(1);
     EXPECT(!TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
 
-    // Paradox slots are not legend slots: no gate, and the ordinary wild
-    // level floor (not the cap) applies to their table level.
+    // Paradox slots have no gate but share the cap-level encounter rule.
     for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         mons[i] = (struct WildPokemon){9, 9, SPECIES_IRON_LEAVES};
     SeedRng(2);
     EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
     u32 paradoxLevel = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL);
-    EXPECT(paradoxLevel >= GetCurrentLevelCap() - 12 && paradoxLevel <= GetCurrentLevelCap() - 9);
+    EXPECT_EQ(paradoxLevel, GetCurrentLevelCap());
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPEED_IV), MAX_PER_STAT_IVS);
 
     ClearLegendCaughtBits();
     RestoreWildCapFlags(saved);
@@ -930,7 +930,9 @@ TEST("Sweet Scent: a live restricted slot is three times as likely, all of them 
     // table odds, and the other 70% stays with the ordinary species.
     ClearLegendCaughtBits();
     mons[1].species = SPECIES_SHAYMIN;
-    mons[2].species = SPECIES_MELTAN;
+    // Meltan is now a post-League gift. Use the already-unlocked wild
+    // Cobalion so all three slots genuinely participate in this cap test.
+    mons[2].species = SPECIES_COBALION;
     mons[3].species = SPECIES_POIPOLE;
     info.encounterBounds = heavy;
     u32 restricted = 0;

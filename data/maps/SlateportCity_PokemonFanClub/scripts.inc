@@ -271,7 +271,7 @@ SlateportCity_PokemonFanClub_EventScript_EndureTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
 	msgbox SlateportCity_PokemonFanClub_Text_GiveTM58, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB
 	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
@@ -287,11 +287,11 @@ SlateportCity_PokemonFanClub_EventScript_ReceivedTM58::
 
 SlateportCity_PokemonFanClub_Text_GiveTM58:
 	.string "Your Pokémon look so happy with you!\n"
-	.string "Here, have a Rare Candy!$"
+	.string "Here, have a Nugget!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
-	.string "A Rare Candy lets a partner grow a\n"
-	.string "level, as far as your Badges allow.\p"
+	.string "A Nugget sells for ¥2,500.\n"
+	.string "Give your partners a useful treat!\p"
 	.string "And the Move Tutor can teach Endure!\n"
 	.string "It helps a partner hang on through\l"
 	.string "a powerful attack.$"

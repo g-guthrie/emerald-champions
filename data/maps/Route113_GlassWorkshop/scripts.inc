@@ -271,7 +271,7 @@ Route113_GlassWorkshop_Text_ExplainSootSack: @ 826F252
 	.string "Blue blocks sleep; Yellow, confusion.\p"
 	.string "Red blocks Taunt and Encore.\n"
 	.string "The flutes are never used up!\p"
-	.string "Or trade 1,000 soot for a Bottle Cap.$"
+	.string "Or trade 500 soot for a Bottle Cap.$"
 
 Route113_GlassWorkshop_Text_LetsSeeCollectedAshes: @ 826F312
 	.string "Have you collected ashes, huff-puff?\n"
@@ -377,11 +377,11 @@ Route113_GlassWorkshop_EventScript_CapsPoor::
 Route113_GlassWorkshop_Text_CapPrice:
 	.string "You have {STR_VAR_1} soot.\p"
 	.string "I'll trade one Bottle Cap for\n"
-	.string "every 1,000 soot, huff-puff!$"
+	.string "every 500 soot, huff-puff!$"
 Route113_GlassWorkshop_Text_OneCap:
-	.string "1 Cap: 1,000 soot$"
+	.string "1 Cap: 500 soot$"
 Route113_GlassWorkshop_Text_FiveCaps:
-	.string "5 Caps: 5,000 soot$"
+	.string "5 Caps: 2,500 soot$"
 Route113_GlassWorkshop_Text_AllCaps:
 	.string "As many as possible$"
 Route113_GlassWorkshop_Text_CapsReceived:

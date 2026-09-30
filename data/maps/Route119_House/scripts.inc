@@ -18,7 +18,7 @@ Route119_House_EventScript_Wingull:: @ 827096F
 Route119_House_Text_RumorAboutCaveOfOrigin: @ 8270982
 	.string "I heard about a cave called the Cave\n"
 	.string "of Origin.\p"
-	.string "People rumor that the spirits of\n"
+	.string "People say that the spirits of\n"
 	.string "Pokémon are revived there. Could\l"
 	.string "something like that really happen?$"
 

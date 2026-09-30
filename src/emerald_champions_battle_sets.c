@@ -1,7 +1,6 @@
 #include "global.h"
 #include "move.h"
 #include "data.h"
-#include "daycare.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
 #include "item.h"
@@ -677,6 +676,9 @@ static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, boo
         }
     }
 
+    // The snow counterpart is available wherever the tutor offers Hail.
+    if (availableMoves[MOVE_HAIL])
+        availableMoves[MOVE_SNOWSCAPE] = TRUE;
 }
 
 static u32 CountIconicTutorBadges(void)
@@ -685,6 +687,44 @@ static u32 CountIconicTutorBadges(void)
     for (u32 flag = FLAG_BADGE01_GET; flag <= FLAG_BADGE08_GET; flag++)
         badges += FlagGet(flag);
     return badges;
+}
+
+enum Species GetEmeraldChampionsIconicTutorSpecies(u32 index)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+    {
+        enum Species species = sEmeraldChampionsIconicMoves[i].species;
+        bool32 duplicate = FALSE;
+        if (!IsSpeciesEnabled(species))
+            continue;
+        for (u32 j = 0; j < i; j++)
+            if (sEmeraldChampionsIconicMoves[j].species == species)
+                duplicate = TRUE;
+        if (!duplicate && index-- == 0)
+            return species;
+    }
+    return SPECIES_NONE;
+}
+
+bool32 GetEmeraldChampionsIconicTutorLesson(enum Species species, u32 index, enum Move *move, u8 *badges)
+{
+    species = GET_BASE_SPECIES_ID(species);
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+    {
+        const struct EmeraldChampionsIconicMove *entry = &sEmeraldChampionsIconicMoves[i];
+        if (entry->species != species || index-- != 0)
+            continue;
+        if (move != NULL)
+            *move = entry->move;
+        if (badges != NULL)
+            *badges = entry->badges;
+        return TRUE;
+    }
+    if (move != NULL)
+        *move = MOVE_NONE;
+    if (badges != NULL)
+        *badges = 0;
+    return FALSE;
 }
 
 // Iconic moves stay legal once taught; only the tutor checks badges.
@@ -712,36 +752,78 @@ bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum M
     return availableMoves[move];
 }
 
-static u32 IconicMoveReceipt(struct BoxPokemon *mon, enum Move move)
+// Walk only an authored iconic family, rather than reverse-scanning every
+// species for every lesson. The existing Egg lookup also follows at most five
+// evolution steps; none of these families needs more than two.
+static bool32 IsIconicEvolutionFamily(enum Species family, enum Species species, u32 depth)
 {
-    enum Species species = GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES));
+    if (family == species)
+        return TRUE;
+    if (depth == 0)
+        return FALSE;
+    const struct Evolution *evolutions = GetSpeciesEvolutions(family);
+    if (evolutions == NULL)
+        return FALSE;
+    for (u32 i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+    {
+        enum Species evolution = SanitizeSpeciesId(evolutions[i].targetSpecies);
+        if (IsSpeciesEnabled(evolution) && IsIconicEvolutionFamily(evolution, species, depth - 1))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static enum Species IconicTutorFamily(enum Species species)
+{
+    // Every species with its own lesson resolves immediately. The forward
+    // walk also preserves receipts on relatives without an authored lesson.
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+        if (sEmeraldChampionsIconicMoves[i].species == species)
+            return sEmeraldChampionsIconicMoves[i].family;
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
+    {
+        enum Species family = sEmeraldChampionsIconicMoves[i].family;
+        if (i != 0 && family == sEmeraldChampionsIconicMoves[i - 1].family)
+            continue;
+        if (IsIconicEvolutionFamily(family, species, 5))
+            return family;
+    }
+    return SPECIES_NONE;
+}
+
+static u32 IconicMoveReceipt(enum Species family, enum Move move)
+{
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
     {
         const struct EmeraldChampionsIconicMove *entry = &sEmeraldChampionsIconicMoves[i];
-        if (entry->move == move && GetEggSpecies(entry->species) == GetEggSpecies(species))
+        if (entry->move == move && entry->family == family)
             return 1u << entry->receiptBit;
     }
     return 0;
 }
 
-static void RememberKnownIconicMoves(struct BoxPokemon *mon)
+static void RememberKnownIconicMoves(struct BoxPokemon *mon, enum Species family)
 {
     u32 receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
+    u32 remembered = receipts;
     for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-        receipts |= IconicMoveReceipt(mon, GetBoxMonData(mon, MON_DATA_MOVE1 + slot));
-    SetBoxMonData(mon, MON_DATA_ICONIC_MOVES, &receipts);
+        remembered |= IconicMoveReceipt(family, GetBoxMonData(mon, MON_DATA_MOVE1 + slot));
+    if (remembered != receipts)
+        SetBoxMonData(mon, MON_DATA_ICONIC_MOVES, &remembered);
 }
 
 bool32 IsIconicMoveUnlocked(struct BoxPokemon *mon, enum Move move)
 {
-    return (GetBoxMonData(mon, MON_DATA_ICONIC_MOVES) & IconicMoveReceipt(mon, move)) != 0;
+    enum Species family = IconicTutorFamily(GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES)));
+    return (GetBoxMonData(mon, MON_DATA_ICONIC_MOVES) & IconicMoveReceipt(family, move)) != 0;
 }
 
 // Called only after a successful lesson; the UI checked funds before teaching.
 // Free lessons still use this path so cancellation can never buy a receipt.
 bool32 PayForIconicMove(struct BoxPokemon *mon, enum Move move, enum Item payment)
 {
-    u32 bit = IconicMoveReceipt(mon, move);
+    enum Species family = IconicTutorFamily(GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES)));
+    u32 bit = IconicMoveReceipt(family, move);
     u32 receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
     if (!bit || !BoxMonKnowsMove(mon, move))
         return FALSE;
@@ -759,19 +841,19 @@ bool32 PayForIconicMove(struct BoxPokemon *mon, enum Move move, enum Item paymen
 u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves)
 {
     enum Species species = GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES));
+    enum Species family = IconicTutorFamily(species);
     u32 badges = CountIconicTutorBadges();
-    u32 receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
+    u32 receipts;
     u32 numMoves = 0;
     bool8 offered[MOVES_COUNT_ALL] = {FALSE};
 
     // Credit existing lessons from older saves before a move can be forgotten.
-    RememberKnownIconicMoves(mon);
+    RememberKnownIconicMoves(mon, family);
     receipts = GetBoxMonData(mon, MON_DATA_ICONIC_MOVES);
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsIconicMoves); i++)
     {
         const struct EmeraldChampionsIconicMove *entry = &sEmeraldChampionsIconicMoves[i];
-        bool32 purchased = GetEggSpecies(entry->species) == GetEggSpecies(species)
-            && (receipts & (1u << entry->receiptBit));
+        bool32 purchased = (receipts & (1u << entry->receiptBit)) && entry->family == family;
         if (((entry->species == species && entry->badges <= badges) || purchased)
          && !offered[entry->move] && !BoxMonKnowsMove(mon, entry->move))
         {
@@ -807,7 +889,7 @@ u32 GetEmeraldChampionsPreparationMovesForSpecies(enum Species species, u16 *mov
 
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
 {
-    RememberKnownIconicMoves(mon);
+    RememberKnownIconicMoves(mon, IconicTutorFamily(GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES))));
     bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
     u32 numMoves = 0;
     BuildEmeraldChampionsPreparationMoveAccess(GetBoxMonData(mon, MON_DATA_SPECIES), availableMoves);

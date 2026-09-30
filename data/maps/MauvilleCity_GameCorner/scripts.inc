@@ -14,8 +14,8 @@ MauvilleCity_GameCorner_MapScripts:: @ 820FBB8
 	.set RAICHU_COINS,  	4500
 	.set MAROWAK_COINS,  	4500
 	.set EXEGGUTOR_COINS,  	4500
-	.set STARTER_COINS, 	2500
-	.set GENESECT_COINS, 	9999
+	.set STARTER_COINS, 	500
+	.set GENESECT_COINS, 	5000
 	.set DOLL_COINS,  		1000
 
 	.set COINS_PRICE_50,    500

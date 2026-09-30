@@ -131,7 +131,7 @@ SealedChamber_InnerRoom_Text_RegigigasStatue:
 	.string "It's a statue of a Pokémon.\n"
 	.string "It exudes tremendous power…\p"
 	.string "Trainers say a legend that faints\n"
-	.string "in battle never returns.\p"
+	.string "here never returns.\p"
 	.string "There's something engraved on it…$"
 
 SealedChamber_InnerRoom_Text_RegigigasStatueSilent:

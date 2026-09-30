@@ -1048,11 +1048,12 @@ SmartShopper_Text_ClerkNormal::
 
 SmartShopper_Text_RandomComment1::
 	.string "Interviewer: The Trainer bought\n"
-	.string "{STR_VAR_3} {STR_VAR_2}S? That's a haul!\p"
+	.string "{STR_VAR_3} of the item {STR_VAR_2}!\l"
+	.string "That's a haul!\p"
 	.string "If I may say so, {STR_VAR_1} must have\n"
 	.string "been stocking up for a long journey\l"
 	.string "to far-off places.\p"
-	.string "For traveling, {STR_VAR_2}S are so\n"
+	.string "For traveling, {STR_VAR_2} can be so\n"
 	.string "important!$"
 
 SmartShopper_Text_RandomComment2::
@@ -1115,9 +1116,9 @@ SmartShopper_Text_ClerkMax::
 	.string "Recently, a Trainer named {STR_VAR_1}\n"
 	.string "bought the item {STR_VAR_2} in bulk.\p"
 	.string "The Trainer almost cleared out our\n"
-	.string "entire stock of {STR_VAR_2}S.\p"
+	.string "entire stock of {STR_VAR_2}.\p"
 	.string "I never dreamt that any customer\n"
-	.string "would ever need so many {STR_VAR_2}S.\l"
+	.string "would ever need so many of that item.\l"
 	.string "It's just unheard of!\p"
 	.string "Interviewer: So that would be like 100\n"
 	.string "or 200 sold?\p"
@@ -1311,8 +1312,8 @@ gTVHoennTreasureInvestigatorsText01::
 	.string "The Trainer found the item\n"
 	.string "{STR_VAR_1}. It made me envious.\p"
 	.string "…Well, good going, {STR_VAR_2}!\p"
-	.string "Viewers, let that motivate you to\n"
-	.string "fire up your ItemfinderS and search!\p"
+	.string "Viewers, get your Dowsing Machines\n"
+	.string "ready and search for hidden items!\p"
 	.string "I'll be waiting for exciting news\n"
 	.string "from all of you!$"
 
@@ -1325,8 +1326,8 @@ gTVHoennTreasureInvestigatorsText02::
 	.string "The Trainer found the item\n"
 	.string "{STR_VAR_1}. It made me envious.\p"
 	.string "…Well, good going, {STR_VAR_2}!\p"
-	.string "Viewers, let that motivate you to\n"
-	.string "fire up your ItemfinderS and search!\p"
+	.string "Viewers, get your Dowsing Machines\n"
+	.string "ready and search for hidden items!\p"
 	.string "I'll be waiting for exciting news\n"
 	.string "from all of you!$"
 

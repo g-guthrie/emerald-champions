@@ -105,7 +105,7 @@ SootopolisCity_Gym_1F_EventScript_JuanTakeThis:
 @ hands Feraligite to a Totodile pair, which closes Juan's copy.
 SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
 	goto_if_set FLAG_RECEIVED_TM03, Common_EventScript_NopReturn
-	giveitem ITEM_FERALIGITE
+	giveuniqueitem ITEM_FERALIGITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT

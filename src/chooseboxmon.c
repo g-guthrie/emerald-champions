@@ -255,7 +255,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         ui->askConfirmation();
         return PROMPT_BEFORE_LEARNING_2;
     case PROMPT_BEFORE_LEARNING_2:
-        switch (ui->waitConfirmation())
+        switch (ui->waitConfirmation(FALSE))
         {
         case 0: // Yes
             return LEARN_MOVE;
@@ -289,7 +289,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
             return LEARNED_MOVE_1;
         }
         else
-            return ASK_REPLACEMENT_1;
+            return ui->concise ? WANT_REPLACE_2 : ASK_REPLACEMENT_1;
     case ASK_REPLACEMENT_1:
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(move));
@@ -299,13 +299,16 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         ui->askConfirmation();
         return ASK_REPLACEMENT_3;
     case ASK_REPLACEMENT_3:
-        switch (ui->waitConfirmation())
+        switch (ui->waitConfirmation(TRUE))
         {
         case 0: // Yes
             return WANT_REPLACE_1;
         case 1: // No
         case MENU_B_PRESSED:
-            return REFUSE_REPLACE_1;
+            // Reuse the existing box for the immediate stop-learning question.
+            StringCopy(gStringVar2, GetMoveName(move));
+            ui->printMessage(gText_StopLearningMove2);
+            return REFUSE_REPLACE_3;
         }
         return state;
     case REFUSE_REPLACE_1:
@@ -316,7 +319,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         ui->askConfirmation();
         return REFUSE_REPLACE_3;
     case REFUSE_REPLACE_3:
-        switch (ui->waitConfirmation())
+        switch (ui->waitConfirmation(FALSE))
         {
         case 0: // Yes
             return DID_NOT_LEARN_1;
@@ -333,7 +336,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         return WANT_REPLACE_3;
     case WANT_REPLACE_3:
         if (GetMoveSlotToReplace() == MAX_MON_MOVES)
-            return REFUSE_REPLACE_1;
+            return ui->concise ? DID_NOT_LEARN_1 : REFUSE_REPLACE_1;
         else
             return FORGOT_MOVE_1;
     case LEARNED_MOVE_1:
@@ -350,6 +353,8 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         // paused map music before its task can be destroyed by UI teardown.
         return IsFanfareTaskInactive() ? LEARN_MOVE_END : WAIT_LEARNED_MOVE_FANFARE;
     case FORGOT_MOVE_1:
+        if (ui->concise)
+            return REPLACE_MOVE_1;
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(GetBoxMonData(boxmon, MON_DATA_MOVE1 + GetMoveSlotToReplace())));
         ui->printMessage(gText_12PoofForgotMove);
@@ -394,6 +399,12 @@ s32 GetLearnMoveStartState(void)
 s32 GetLearnMoveStartAfterPromptState(void)
 {
     return PROMPT_BEFORE_LEARNING_1;
+}
+
+// Payment choice already approved this lesson; do not ask to teach it again.
+s32 GetLearnMoveStartAfterConfirmationState(void)
+{
+    return LEARN_MOVE;
 }
 
 //At the time of writing code for this, there was no prescribed way to make a task persist between scenes

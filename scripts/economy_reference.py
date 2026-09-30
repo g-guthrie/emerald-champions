@@ -162,7 +162,8 @@ def game_corner_offers(root,blocks,arrays):
                 if args[0]=='VAR_0x8006':
                     cost=constants.get(args[1],int(args[1]) if args[1].isdigit() else None)
                     if cost is None:raise ValueError('Unresolved Pokemon price: '+args[1])
-            if command=='givemon' and args and args[0]=='VAR_TEMP_1' and mon:
+            if mon and ((command=='givemon' and args and args[0]=='VAR_TEMP_1')
+                        or (command=='special' and args and args[0]=='GiveEmeraldChampionsGameCornerPokemon')):
                 if cost is None:continue
                 previous=offers.get(mon)
                 if previous and previous['coins']!=cost:raise ValueError('Ambiguous Pokemon price: '+mon)
@@ -240,11 +241,11 @@ def build_catalog(root=ROOT):
                         record['outputs']=[item for item in paid_items if (prices[item]['sort']=='ITEM_TYPE_EVOLUTION_STONE')==(mode=='0')]
                         record['cost_rule']='base cash price; native shop discounts and ownership checks apply'
                     elif target=='OpenEmeraldChampionsEvolutionItemArchive':
-                        record['kind']='native free shop';record['outputs']=form_items;record['cost_rule']='free; form-use prerequisites remain separate'
+                        record['kind']='native form shop';record['outputs']=form_items;record['cost_rule']='Mega Ring menu access; free form tools and paid species equipment; species/discovery conditions apply'
                     elif target=='OpenEmeraldChampionsBattleItemMart':
                         mode=local_inputs.get('VAR_0x8004')
-                        record['kind']='native free shop';record['outputs']=list(free.get(mode,dict.fromkeys(x for row in free.values() for x in row)))
-                        record['cost_rule']='free category selector; union of selectable categories when selection is dynamic'
+                        record['kind']='native paid held shop';record['outputs']=list(free.get(mode,dict.fromkeys(x for row in free.values() for x in row)))
+                        record['cost_rule']='base cash prices; discovered, badge-stocked or species-equipment shelves only; category union is potential stock'
 
                 else:
                     rid='script '+where
@@ -394,7 +395,7 @@ def build_catalog(root=ROOT):
             if item not in {'ITEM_NONE','SPECIES_NONE'}:reverse[item].add('native-table '+key)
     free=battle_item_categories(root)
     for category,items in free.items():
-        for item in items:reverse[item].add('free-category '+category)
+        for item in items:reverse[item].add('conditional-paid-held-category '+category)
     global_functions={r['function'] for r in native_sinks if r['function'] and r['source'] not in native_covered}
     used_functions.update(global_functions)
     core_names={'SetWildMonHeldItem','CanFirstMonBoostHeldItemRarity','Cmd_pickup','Cmd_getmoneyreward','Cmd_givepaydaymoney','NewGameInitPCItems','NewGameInitData','GetItemPrice','GetItemSellPrice','IsItemProtectedFromLoss','IsEmeraldChampionsFreeCatalogueItem','IsEmeraldChampionsFreePresetItem','GetShopItemPrice','CalcBerryYield','CalcBerryYieldInternal','GetBerryTreeAge','PickBerryTree','BerryTreeGrow','GiveEggFromDaycare','_GiveEggFromDaycare','TrySpawnObjectEventTemplate','GetItemBallIdAndAmountFromTemplate'}
@@ -421,7 +422,7 @@ def build_catalog(root=ROOT):
         body=berry_source[m.end():marks[i+1].start() if i+1<len(marks) else len(berry_source)]
         values={name:compact(value) for name,value in re.findall(r'\.(minYield|maxYield|growthDuration|stageDuration|hoursPerStage)\s*=\s*([^\n]+)',body)}
         if values:berry_profiles[m[1]]=dict(values,source=ref('src/berry.c',berry_source.count('\n',0,m.start())+1))
-    return dict(game_corner_offers=corner_offers,circuit_bp_pokemon_offers=bp_pokemon_offers,economic_constants=economic_constants,berry_profiles=berry_profiles,core_functions=sorted(core_functions),maps=by_map,records=records,prices=prices,free_categories=free,providers=providers,
+    return dict(game_corner_offers=corner_offers,circuit_bp_pokemon_offers=bp_pokemon_offers,economic_constants=economic_constants,berry_profiles=berry_profiles,core_functions=sorted(core_functions),maps=by_map,records=records,prices=prices,held_categories=free,providers=providers,
         native_functions={k:native[k] for k in sorted(used_functions)},native_tables={k:arrays[k] for k in sorted(used_tables)},
         native_effect_calls=native_sinks,reward_sources={k:sorted(v) for k,v in sorted(reverse.items())},
         coverage=dict(maps=len(maps),interaction_entries=actors,script_transfer_sites=all_transfers,
@@ -504,8 +505,8 @@ def render_catalog(catalog):
         lines += [f"\n{table_ids[key]} {key} | {r['source']}",r['body']]
     lines+=['\nECONOMIC CONSTANTS — source expressions; conditional configuration must be respected']
     for row in catalog['economic_constants']:lines.append(row['name']+' = '+row['expression']+' | '+row['source'])
-    lines+=['\nFREE CENTER STOCK — price0 at the free category service, not every vendor']
-    for category,items in catalog['free_categories'].items():lines.append(category+': '+', '.join(items))
+    lines+=['\nPAID CENTER HELD STOCK — conditional acquisition, badge or species unlocks apply']
+    for category,items in catalog['held_categories'].items():lines.append(category+': '+', '.join(items))
     lines+=['\nBERRY YIELD/GROWTH INPUTS — base table expressions; native growth/yield rules below apply']
     for berry,row in catalog['berry_profiles'].items():lines.append(berry+': '+compact(json.dumps(row)))
     lines+=['\nNATIVE ECONOMY FUNCTIONS — source conditions and formulas; each body appears once',
@@ -518,8 +519,8 @@ def render_catalog(catalog):
         'Transfer/shop calls are source write sites, not distinct rewards. Cost/state writes include storage transfers, restoration, temporary parties and consumed-item updates. A function without an NPC association can be a battle, new-game or minigame hook, or dormant legacy code.']
     for r in catalog['native_effect_calls']:
         lines.append(r['source']+' | '+str(r['function'])+' | '+r['kind']+' | '+r['operation']+'('+', '.join(r['arguments'])+')')
-    lines+=['\nC4. REVERSE REWARD INDEX — every identified literal/table/free-stock source',
-        'R = location or script operation; T = native data selector; free-category = free equipment service. Native-table and possible-script references are conditional candidates, not guaranteed sources. Variable native results must also be checked in C2/C3.']
+    lines+=['\nC4. REVERSE REWARD INDEX — every identified literal/table/conditional held-stock source',
+        'R = location or script operation; T = native data selector; conditional-paid-held-category requires an actual unlock. Native-table and possible-script references are conditional candidates, not guaranteed sources. Variable native results must also be checked in C2/C3.']
     for item,keys in catalog['reward_sources'].items():
         out=[]
         for k in keys:
@@ -542,7 +543,7 @@ def render_catalog(catalog):
     lines.append('Unresolved build conditions / duplicate labels are alternatives, not combined offers:')
     for r in coverage['script_diagnostics']['unresolved_build_conditions']:lines.append(compact(json.dumps(r,ensure_ascii=False)))
     lines.append('Duplicate script labels: '+', '.join(coverage['script_diagnostics']['duplicate_labels']))
-    lines.append('Configured item/decor entries without a mapped literal/table/free-category source (not proof of unobtainability; variable providers and dormant definitions must be distinguished): '+', '.join(coverage['configured_entries_without_fixed_source']))
+    lines.append('Configured item/decor entries without a mapped literal/table/held-category source (not proof of unobtainability; variable providers and dormant definitions must be distinguished): '+', '.join(coverage['configured_entries_without_fixed_source']))
     return lines
 
 

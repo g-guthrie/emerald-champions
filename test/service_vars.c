@@ -8,6 +8,8 @@
 #include "constants/characters.h"
 #include "string_util.h"
 #include "test/test.h"
+#include "money.h"
+#include "move_relearner.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/service_vars.h"
@@ -244,5 +246,62 @@ TEST("Center EV training: a planned spread changes nothing until it is applied w
     gSpecialVar_0x8004 = 1;
     StartPlannedEVSpread();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
+    ZeroPlayerPartyMons();
+}
+
+TEST("Tutor filters combine type and category without hiding cancellation behind an empty list")
+{
+    EXPECT(MoveMatchesTutorFilters(MOVE_PROTECT, 0, 0));
+    EXPECT(MoveMatchesTutorFilters(MOVE_PROTECT, 1, 3)); // Normal / Status.
+    EXPECT(!MoveMatchesTutorFilters(MOVE_PROTECT, 1, 1));
+    EXPECT(MoveMatchesTutorFilters(MOVE_SURF, 11, 2)); // Water / Special.
+    EXPECT(!MoveMatchesTutorFilters(MOVE_SURF, 10, 2));
+    EXPECT(!MoveMatchesTutorFilters(MOVE_NONE, 0, 0));
+    EXPECT(!MoveMatchesTutorFilters(MOVE_SURF, 99, 0));
+}
+
+TEST("EV editor prices Center and Evie plans atomically and refuses insufficient funds")
+{
+    ZeroPlayerPartyMons();
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    CreateMonWithIVs(mon, SPECIES_EEVEE, 50, 0, OTID_STRUCT_PLAYER_ID, 31);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        u32 zero = 0;
+        SetMonData(mon, MON_DATA_HP_EV + stat, &zero);
+    }
+    CalculatePlayerPartyCount();
+    CalculateMonStats(mon);
+    gSpecialVar_0x8004 = FALSE;
+    SetPlannedEVPricing();
+    gSpecialVar_0x8004 = 0;
+    StartPlannedEVSpread();
+    EXPECT_EQ(PlanEVs(STAT_ATK, EV_PLAN_STEP_ADD_64), EV_PLAN_CHANGED);
+    SetMoney(&gSaveBlock1Ptr->money, 499);
+    PayForPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 0);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 499);
+    SetMoney(&gSaveBlock1Ptr->money, 500);
+    PayForPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 64);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 0);
+    gSpecialVar_0x8004 = TRUE;
+    SetPlannedEVPricing();
+    gSpecialVar_0x8004 = 0;
+    StartPlannedEVSpread();
+    EXPECT_EQ(PlanEVs(STAT_ATK, EV_PLAN_STEP_ADD_4), EV_PLAN_CHANGED);
+    SetMoney(&gSaveBlock1Ptr->money, 8);
+    PayForPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 68);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 0);
+    EXPECT_EQ(PlanEVs(STAT_ATK, EV_PLAN_STEP_SUB_4), EV_PLAN_CHANGED);
+    PayForPlannedEVSpread();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 64);
+    gSpecialVar_0x8004 = FALSE;
+    SetPlannedEVPricing();
     ZeroPlayerPartyMons();
 }

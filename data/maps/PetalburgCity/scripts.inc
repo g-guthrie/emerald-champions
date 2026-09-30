@@ -71,7 +71,7 @@ PetalburgCity_Text_WallyLeveler:
 PetalburgCity_Text_WallyLevelerDone:
 	.string "Wally: Ralts caught up already!\n"
 	.string "The Leveler raises your whole party\l"
-	.string "as high as your Badges allow.\p"
+	.string "to the current level cap.\p"
 	.string "I'll use it after catching Pokémon\n"
 	.string "and earning a new Badge!$"
 

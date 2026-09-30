@@ -35,14 +35,6 @@ static void GetOpeningStarterSet(enum Species species, struct EmeraldChampionsBa
     }
 }
 
-// The player's pair arrives like any wild Pokémon: its natural moves for
-// level 5 and no held item. (The rival's opening team keeps its authored set.)
-static bool32 CreateOpeningStarter(struct Pokemon *mon, u16 choice)
-{
-    CreateRandomMonWithIVs(mon, GetStarterPokemon(choice), 5, MAX_PER_STAT_IVS);
-    return TRUE;
-}
-
 bool32 GiveEmeraldChampionsStarterPair(u16 first, u16 second)
 {
     struct Pokemon pair[2];
@@ -50,8 +42,9 @@ bool32 GiveEmeraldChampionsStarterPair(u16 first, u16 second)
     // Commit both choices together before starting the rescue.
     if (first >= 3 || second >= 3 || first == second || CalculatePlayerPartyCount() != 0)
         return FALSE;
-    if (!CreateOpeningStarter(&pair[0], first) || !CreateOpeningStarter(&pair[1], second))
-        return FALSE;
+    // Natural level-5 moves, no held item; acquisition applies player stats.
+    CreateRandomMonWithIVs(&pair[0], GetStarterPokemon(first), 5, MAX_PER_STAT_IVS);
+    CreateRandomMonWithIVs(&pair[1], GetStarterPokemon(second), 5, MAX_PER_STAT_IVS);
 
     GiveScriptedMonToPlayer(&pair[0], 0);
     GiveScriptedMonToPlayer(&pair[1], 1);

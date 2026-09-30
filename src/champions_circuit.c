@@ -1419,15 +1419,7 @@ static bool32 GenerateShowdownTeam(struct CircuitTeamState *team)
 
 static bool32 FindAbilitySlot(enum Species species, enum Ability ability, u32 *slot)
 {
-    for (u32 i = 0; i < NUM_ABILITY_SLOTS; i++)
-    {
-        if (gSpeciesInfo[species].abilities[i] == ability)
-        {
-            *slot = i;
-            return TRUE;
-        }
-    }
-    return FALSE;
+    return FindSpeciesAbilitySlotForOwner(species, ability, TRUE, slot);
 }
 
 static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedSet *set, u8 level)
@@ -1440,7 +1432,7 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
 
     // Never index a level-100 experience table with an overlevel opponent.
     CreateMon(mon, variant->partySpecies, min(level, MAX_LEVEL), Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
-    // Circuit teams are trainer-owned and never read the Inclement layer.
+    // Circuit teams share species buffs and retain explicit trainer ownership.
     SetMonTrainerOwned(mon, TRUE);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     for (u32 stat = 0; stat < NUM_STATS; stat++)

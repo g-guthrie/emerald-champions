@@ -1,9 +1,15 @@
 #include "global.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "bg.h"
 #include "caps.h"
 #include "dexnav.h"
 #include "event_data.h"
+#include "field_effect.h"
+#include "fieldmap.h"
+#include "main.h"
+#include "item.h"
+#include "malloc.h"
 #include "legendary_signs.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -11,15 +17,20 @@
 #include "random.h"
 #include "roamer.h"
 #include "safari_zone.h"
+#include "script.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "text.h"
 #include "weather_anomaly.h"
 #include "wild_encounter.h"
 #include "wild_roster.h"
+#include "window.h"
+#include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/metatile_labels.h"
 #include "constants/vars.h"
 #include "test/test.h"
 
@@ -30,6 +41,94 @@ extern bool32 Test_DexNavCreateSearchMon(enum Species species, enum EncounterTyp
 extern const u8 *Test_DexNavGetEntryHint(const struct WildRosterEntry *entry);
 extern bool32 Test_DexNavIsUsableHere(void);
 extern void Test_DexNavGetIconLayout(u32 *pitch, u32 *rowHeight, s32 *spriteTop);
+extern bool32 Test_DexNavStartTimedSearch(u32 startingTime, u8 windowId, u8 spriteId);
+extern bool32 Test_DexNavHasSearchData(void);
+
+static u8 BeginTimedSearch(u32 startingTime)
+{
+    static const struct BgTemplate bg = {.bg = 0, .charBaseIndex = 0, .mapBaseIndex = 31};
+    static const struct WindowTemplate windows[] = {
+        {.bg = 0, .tilemapLeft = 1, .tilemapTop = 16, .width = 28, .height = 3, .paletteNum = 14, .baseBlock = 8},
+        DUMMY_WIN_TEMPLATE,
+    };
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, &bg, 1);
+    EXPECT(InitWindows(windows));
+    ResetSpriteData();
+    u8 spriteId = CreateSprite(&gDummySpriteTemplate, 0, 0, 0);
+    EXPECT_NE(spriteId, MAX_SPRITES);
+    EXPECT(Test_DexNavStartTimedSearch(startingTime, 0, spriteId));
+    gSaveBlock3Ptr->dexNavChain = 73;
+    ScriptContext_Init();
+    return spriteId;
+}
+
+TEST("DexNav timeout: the visible 15-second limit cancels on the next step and frees the search")
+{
+    u32 startingTime;
+    PARAMETRIZE { startingTime = 1000; }
+    PARAMETRIZE { startingTime = 0xFFFFFE00; }
+    u32 savedTime = gMain.vblankCounter1;
+    u8 savedChain = gSaveBlock3Ptr->dexNavChain;
+    u8 spriteId = BeginTimedSearch(startingTime);
+
+    // Fix the expected historical duration independently of the config macro.
+    gMain.vblankCounter1 = startingTime + 899;
+    EXPECT(!OnStep_DexNavSearch());
+    EXPECT(FlagGet(DN_FLAG_SEARCHING));
+    gMain.vblankCounter1 = startingTime + 900;
+    EXPECT(!OnStep_DexNavSearch());
+    EXPECT_EQ(gSaveBlock3Ptr->dexNavChain, 73);
+    EXPECT(!ScriptContext_IsEnabled());
+    gMain.vblankCounter1 = startingTime + 901;
+    EXPECT(OnStep_DexNavSearch());
+    EXPECT(!FlagGet(DN_FLAG_SEARCHING));
+    EXPECT(!Test_DexNavHasSearchData());
+    EXPECT_EQ(gSaveBlock3Ptr->dexNavChain, 0);
+    EXPECT(!gSprites[spriteId].inUse);
+    EXPECT(!FieldEffectActiveListContains(FLDEFF_SPARKLE));
+    EXPECT(gWindows[0].tileData == NULL);
+    EXPECT(ScriptContext_IsEnabled());
+    EXPECT(!OnStep_DexNavSearch());
+
+    ScriptContext_Init();
+    FreeAllWindowBuffers();
+    gMain.vblankCounter1 = savedTime;
+    gSaveBlock3Ptr->dexNavChain = savedChain;
+}
+
+TEST("DexNav timeout: cancellation clears the old deadline and a new search gets its full duration")
+{
+    u32 savedTime = gMain.vblankCounter1;
+    u8 savedChain = gSaveBlock3Ptr->dexNavChain;
+    u8 spriteId = BeginTimedSearch(1000);
+    gMain.vblankCounter1 = 1900;
+    ResetDexNavSearch();
+    EXPECT(!FlagGet(DN_FLAG_SEARCHING));
+    EXPECT(!Test_DexNavHasSearchData());
+    EXPECT_EQ(gSaveBlock3Ptr->dexNavChain, 0);
+    EXPECT(!gSprites[spriteId].inUse);
+    EXPECT(!FieldEffectActiveListContains(FLDEFF_SPARKLE));
+    EXPECT(gWindows[0].tileData == NULL);
+    gMain.vblankCounter1 = 1901;
+    EXPECT(!OnStep_DexNavSearch());
+    EXPECT(!ScriptContext_IsEnabled());
+    FreeAllWindowBuffers();
+
+    BeginTimedSearch(1901);
+    gMain.vblankCounter1 = 2801;
+    EXPECT(!OnStep_DexNavSearch());
+    EXPECT(FlagGet(DN_FLAG_SEARCHING));
+    gMain.vblankCounter1 = 2802;
+    EXPECT(OnStep_DexNavSearch());
+    EXPECT(!Test_DexNavHasSearchData());
+    EXPECT_EQ(gSaveBlock3Ptr->dexNavChain, 0);
+
+    ScriptContext_Init();
+    FreeAllWindowBuffers();
+    gMain.vblankCounter1 = savedTime;
+    gSaveBlock3Ptr->dexNavChain = savedChain;
+}
 
 // The info panel's text column: a 68-pixel box less its padding.
 #define DEXNAV_INFO_TEXT_WIDTH 60
@@ -294,7 +393,7 @@ TEST("DexNav shows and searches a gated legend once its gate opens, and drops it
     u32 raikou = FindEntry(list, count, WILD_ROSTER_LAND, SPECIES_RAIKOU);
     EXPECT_NE(raikou, NO_ENTRY);
     EXPECT(Test_DexNavCanSearchFor(&list[raikou]));
-    EXPECT_EQ(StringCompare(Test_DexNavGetEntryHint(&list[raikou]), COMPOUND_STRING("{A_BUTTON} Search\n{R_BUTTON} Register")), 0);
+    EXPECT_EQ(StringCompare(Test_DexNavGetEntryHint(&list[raikou]), COMPOUND_STRING("{A_BUTTON} Search\n{B_BUTTON} Back")), 0);
     MarkLegendarySignCaughtBySpecies(SPECIES_RAIKOU);
     EXPECT(!Test_DexNavCreateSearchMon(SPECIES_RAIKOU, ENCOUNTER_TYPE_LAND));
     EXPECT(!DexNavLists(SPECIES_RAIKOU));
@@ -475,9 +574,26 @@ TEST("DexNav shows every method: rods, Rock Smash, Honey, Cut trees and Feebas s
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     struct WildRosterEntry list[WILD_ROSTER_MAX_ENTRIES];
     bool8 seen[WILD_ROSTER_METHOD_COUNT] = {0};
+    const u16 licenses[] = {FLAG_RECEIVED_HM_SURF, FLAG_RECEIVED_HM_ROCK_SMASH, FLAG_RECEIVED_HM_CUT};
+    const enum Item tools[] = {ITEM_OLD_ROD, ITEM_GOOD_ROD, ITEM_SUPER_ROD, ITEM_HONEY};
+    bool8 savedLicenses[ARRAY_COUNT(licenses)], addedTools[ARRAY_COUNT(tools)];
 
     FlagSet(FLAG_RECEIVED_DEXNAV);
     ResetWorld();
+    // Every method is tested after its real license, badge and tool gates
+    // are met. An early-game roster deliberately hides locked methods.
+    SetMilestones(ARRAY_COUNT(sCapFlags));
+    for (u32 i = 0; i < ARRAY_COUNT(licenses); i++)
+    {
+        savedLicenses[i] = FlagGet(licenses[i]);
+        FlagSet(licenses[i]);
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
+    {
+        addedTools[i] = !CheckBagHasItem(tools[i], 1) && !CheckPCHasItem(tools[i], 1);
+        if (addedTools[i])
+            EXPECT(AddBagItem(tools[i], 1));
+    }
     for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
     {
         SetLocation((gWildMonHeaders[header].mapGroup << 8) | gWildMonHeaders[header].mapNum);
@@ -498,6 +614,12 @@ TEST("DexNav shows every method: rods, Rock Smash, Honey, Cut trees and Feebas s
     EXPECT_NE(feebas, NO_ENTRY);
     EXPECT_EQ(StringCompare(Test_DexNavGetEntryHint(&list[feebas]), COMPOUND_STRING("Bites at only\nsix spots.")), 0);
     ResetWorld();
+    for (u32 i = 0; i < ARRAY_COUNT(licenses); i++)
+        if (!savedLicenses[i])
+            FlagClear(licenses[i]);
+    for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
+        if (addedTools[i])
+            RemoveBagItem(tools[i], 1);
     FlagClear(FLAG_RECEIVED_DEXNAV);
     gSaveBlock1Ptr->location = savedLocation;
 }
@@ -721,4 +843,78 @@ TEST("DexNav arrives once on saves that already hold the Pokedex")
     FlagClear(FLAG_SYS_POKEDEX_GET);
     FlagClear(FLAG_RECEIVED_DEXNAV);
     VarSet(VAR_DEXNAV_SPECIES, SPECIES_NONE);
+}
+
+
+extern bool32 Test_DexNavPickTile(enum EncounterType environment, bool32 relocating, u32 startingTime, s16 *x, s16 *y);
+
+TEST("DexNav placement always finds reachable habitat and excludes sealed pockets and active objects")
+{
+    struct MapHeader savedHeader = gMapHeader;
+    struct WarpData savedLocation = gSaveBlock1Ptr->location;
+    struct Coords16 savedPosition = gSaveBlock1Ptr->pos;
+    struct BackupMapLayout savedGrid = gBackupMapLayout;
+    struct PlayerAvatar savedAvatar = gPlayerAvatar;
+    struct ObjectEvent savedObjects[OBJECT_EVENTS_COUNT];
+    u32 savedTime = gMain.vblankCounter1;
+    memcpy(savedObjects, gObjectEvents, sizeof(savedObjects));
+    u16 *grid = Alloc(40 * 40 * sizeof(u16));
+    EXPECT(grid != NULL);
+    SetLocation(MAP_ROUTE103);
+    gBackupMapLayout = (struct BackupMapLayout){.width = 40, .height = 40, .map = grid};
+    for (u32 i = 0; i < 40 * 40; i++)
+        grid[i] = METATILE_General_Grass | (3 << 12);
+    memset(gObjectEvents, 0, sizeof(gObjectEvents));
+    gPlayerAvatar.objectEventId = 0;
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    gObjectEvents[0].active = TRUE;
+    gObjectEvents[0].currentElevation = 3;
+    gObjectEvents[0].currentCoords = (struct Coords16){14, 14};
+    gSaveBlock1Ptr->pos = (struct Coords16){14 - MAP_OFFSET, 14 - MAP_OFFSET};
+    s16 x, y;
+    // The only usable grass tile is three ordinary steps east. A second
+    // pocket, five steps north, is sealed on all four sides.
+    MapGridSetMetatileIdAt(17, 14, METATILE_General_TallGrass);
+    MapGridSetMetatileIdAt(14, 9, METATILE_General_TallGrass);
+    MapGridSetMetatileImpassabilityAt(13, 9, TRUE);
+    MapGridSetMetatileImpassabilityAt(15, 9, TRUE);
+    MapGridSetMetatileImpassabilityAt(14, 8, TRUE);
+    MapGridSetMetatileImpassabilityAt(14, 10, TRUE);
+    for (u32 i = 0; i < 128; i++)
+    {
+        EXPECT(Test_DexNavPickTile(ENCOUNTER_TYPE_LAND, FALSE, 0, &x, &y));
+        EXPECT_EQ(x, 17);
+        EXPECT_EQ(y, 14);
+    }
+    MapGridSetMetatileIdAt(17, 14, METATILE_General_Grass);
+    EXPECT(!Test_DexNavPickTile(ENCOUNTER_TYPE_LAND, FALSE, 0, &x, &y));
+    MapGridSetMetatileIdAt(17, 14, METATILE_General_TallGrass);
+    gObjectEvents[1].active = TRUE;
+    gObjectEvents[1].currentElevation = 3;
+    gObjectEvents[1].currentCoords = (struct Coords16){17, 14};
+    gObjectEvents[1].previousCoords = (struct Coords16){17, 14};
+    EXPECT(!Test_DexNavPickTile(ENCOUNTER_TYPE_LAND, FALSE, 0, &x, &y));
+    gObjectEvents[1].active = FALSE;
+    EXPECT(Test_DexNavPickTile(ENCOUNTER_TYPE_LAND, FALSE, 0, &x, &y));
+    // A relocation must leave time for the slow native approach. The
+    // three-step target takes 120 frames including the sneak pauses.
+    gMain.vblankCounter1 = 1781;
+    EXPECT(!Test_DexNavPickTile(ENCOUNTER_TYPE_LAND, TRUE, 1000, &x, &y));
+    gMain.vblankCounter1 = 1780;
+    EXPECT(Test_DexNavPickTile(ENCOUNTER_TYPE_LAND, TRUE, 1000, &x, &y));
+    // Surf targets are reachable only from water in the same movement mode.
+    MapGridSetMetatileIdAt(17, 14, METATILE_General_CalmWater);
+    EXPECT(!Test_DexNavPickTile(ENCOUNTER_TYPE_WATER, FALSE, 0, &x, &y));
+    for (u32 i = 0; i < 40 * 40; i++)
+        grid[i] = METATILE_General_CalmWater | (3 << 12);
+    gPlayerAvatar.flags = PLAYER_AVATAR_FLAG_SURFING;
+    EXPECT(Test_DexNavPickTile(ENCOUNTER_TYPE_WATER, FALSE, 0, &x, &y));
+    Free(grid);
+    gBackupMapLayout = savedGrid;
+    gPlayerAvatar = savedAvatar;
+    gMapHeader = savedHeader;
+    gSaveBlock1Ptr->location = savedLocation;
+    gSaveBlock1Ptr->pos = savedPosition;
+    gMain.vblankCounter1 = savedTime;
+    memcpy(gObjectEvents, savedObjects, sizeof(savedObjects));
 }

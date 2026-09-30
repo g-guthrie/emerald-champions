@@ -1,4 +1,4 @@
-# Emerald Champions
+# Inclement Emerald 2
 
 A native Game Boy Advance campaign combining Inclement Emerald's world and
 progression with authored doubles battles and shared battle AI.

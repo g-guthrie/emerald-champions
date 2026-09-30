@@ -124,8 +124,7 @@ u8 (*const gEnemyPartyCountPtr) = &gPartiesCount[B_TRAINER_OPPONENT_A];
 
 #include "data/abilities.h"
 
-// Inclement layer: Inclement Emerald's base stat changes and extra Abilities,
-// read only by Pokemon that are not trainer-owned (see IsMonTrainerOwned).
+// Shared Inclement species stats and additional Ability slots.
 struct InclementSpeciesLayer
 {
     bool8 hasBaseStats;
@@ -855,12 +854,9 @@ void CreateRandomMonWithIVs(struct Pokemon *mon, enum Species species, u8 level,
 
 void CreateMon(struct Pokemon *mon, enum Species species, u8 level, u32 personality, struct OriginalTrainerId trainerId)
 {
-    u32 mail;
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, personality, trainerId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
-    mail = MAIL_NONE;
-    SetMonData(mon, MON_DATA_MAIL, &mail);
 }
 
 void CreateMonWithIVs(struct Pokemon *mon, enum Species species, u8 level, u32 personality, struct OriginalTrainerId trainerId, u8 fixedIV)
@@ -981,7 +977,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
 
     // Gen 3-4 formula over the normal slots: slot 1 when the species has one,
     // plus the Inclement slot. The hidden slot stays as rare as before; a
-    // trainer-owned Pokemon never keeps the Inclement slot (SetMonTrainerOwned).
+    // authored trainer Abilities are assigned explicitly during generation.
     value = RollNormalAbilitySlot(species, boxMon->personality);
     if (value != 0)
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
@@ -1348,7 +1344,7 @@ u32 CalculateSpeciesStat(enum Species species, u32 nature, enum Stat stat, u32 l
     return CalculateSpeciesStatForOwner(species, nature, stat, level, evs, iv, TRUE);
 }
 
-// Trainer-owned Pokemon read gSpeciesInfo; everyone else reads the Inclement layer.
+// Ownership does not change a species' base stats.
 u32 CalculateSpeciesStatForOwner(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs, u32 iv, bool32 trainerOwned)
 {
     u32 value;
@@ -1422,7 +1418,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         // The saved infection survives recovery, boxing and future nature changes.
         if (IsPokerusNatureBoosted(mon, i))
             n = CalculateSpeciesStatForOwner(species, NATURE_HARDY, i, level, ev[i],
-                                            GetMonData(mon, MON_DATA_HP_IV + i), trainerOwned) * 120 / 100;
+                                            GetMonData(mon, MON_DATA_HP_IV + i), trainerOwned)
+                * GetPokerusNatureModifier(mon, i) / 100;
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
         SetMonData(mon, MON_DATA_MAX_HP + i, &n);
@@ -1462,9 +1459,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     SetMonData(mon, MON_DATA_HP, &currentHP);
 }
 
-// Ownership rule for species data. Trainer-owned Pokemon use gSpeciesInfo
-// exactly as before; every other Pokemon (the player's, wild ones, gifts,
-// eggs, trades) reads the Inclement layer (sInclementLayer). The trainer mark
+// Species stats and Ability slots are shared. The trainer mark remains
+// explicit for acquisition and player-only mechanics such as Pokerus. It
 // is explicit, stored in the Pokemon, and set in three places only:
 // GenerateMonFromTrainerMon (every trainer and NPC partner party), Champions
 // Circuit team generation, and battle start, which marks both opponent
@@ -1490,15 +1486,9 @@ void SetMonTrainerOwned(struct Pokemon *mon, bool32 trainerOwned)
         return;
     mon->box.isTrainerOwned = (trainerOwned != FALSE);
     species = GetMonData(mon, MON_DATA_SPECIES);
-    // Trainer-owned Pokemon can never use an Inclement slot.
-    if (trainerOwned && GetMonData(mon, MON_DATA_ABILITY_NUM) >= ABILITY_SLOT_INCLEMENT)
-    {
-        u32 slot = (GetSpeciesAbility(species, 1) != ABILITY_NONE) ? (mon->box.personality & 1) : 0;
-        SetMonData(mon, MON_DATA_ABILITY_NUM, &slot);
-    }
     maxHP = GetMonData(mon, MON_DATA_MAX_HP);
     // Nothing to redo before the first stat calculation or without a layered stat line.
-    if (species == SPECIES_NONE || maxHP == 0 || !sInclementLayer[SanitizeSpeciesId(species)].hasBaseStats)
+    if (species == SPECIES_NONE || maxHP == 0)
         return;
     // A full-HP Pokemon stays at full HP; otherwise keep its HP within the new maximum.
     hp = GetMonData(mon, MON_DATA_HP);
@@ -3153,9 +3143,9 @@ bool32 PlayerPartyLeagueEligible(void)
     return PlayerPartyWithinRestrictedLimit();
 }
 
-static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
+static u8 GiveMonToPartyOrPC(struct Pokemon *mon, u8 slot)
 {
-    s32 i;
+    u8 result;
 
     // Whatever the player receives is the player's, never trainer-owned.
     SetMonTrainerOwned(mon, FALSE);
@@ -3163,22 +3153,25 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
     MaxPlayerMonIVs(mon);
     SetPlayerMonBaselineEVs(mon);
 
-    if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), PARTY_SIZE))
-        return CopyMonToPC(mon);
-
-    for (i = 0; i < PARTY_SIZE; i++)
+    if (slot >= PARTY_SIZE)
     {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) == SPECIES_NONE)
-            break;
+        for (slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == SPECIES_NONE)
+                break;
+        }
     }
 
-    if (i >= PARTY_SIZE)
-        return CopyMonToPC(mon);
-
-    memcpy(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
+    if (slot >= PARTY_SIZE || !CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), slot))
+        result = CopyMonToPC(mon);
+    else
+    {
+        gParties[B_TRAINER_PLAYER][slot] = *mon;
+        EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
+        result = MON_GIVEN_TO_PARTY;
+    }
     CalculatePlayerPartyCount();
-    EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
-    return MON_GIVEN_TO_PARTY;
+    return result;
 }
 
 u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
@@ -3186,7 +3179,7 @@ u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
     SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
-    return GiveMonToPartyOrPC(mon);
+    return GiveMonToPartyOrPC(mon, PARTY_SIZE);
 }
 
 bool32 ReturnBoxMonHeldItemToBag(struct BoxPokemon *mon)
@@ -3381,13 +3374,13 @@ enum Ability GetAbilityBySpecies(enum Species species, u8 abilityNum)
 
 // Slots 0-2 always resolve through gSpeciesInfo exactly as before. Slots 3
 // and up (ABILITY_SLOT_INCLEMENT + i) are the species' Inclement added
-// Abilities for a Pokemon that is not trainer-owned; an empty one resolves
+// Abilities for every Pokemon; an empty one resolves
 // like slot 0.
 enum Ability GetAbilityBySpeciesForOwner(enum Species species, u8 abilityNum, bool32 trainerOwned)
 {
     int i;
 
-    if (abilityNum >= ABILITY_SLOT_INCLEMENT && !trainerOwned)
+    if (abilityNum >= ABILITY_SLOT_INCLEMENT)
     {
         gLastUsedAbility = GetInclementAddedAbility(species, abilityNum);
         if (gLastUsedAbility != ABILITY_NONE)
@@ -3543,11 +3536,11 @@ enum Ability GetInclementAddedAbility(enum Species species, u32 slot)
 }
 
 // The Ability stored in a slot (0-2: gSpeciesInfo; 3: the Inclement extra,
-// which trainer-owned Pokemon never have). ABILITY_NONE when empty.
+// shared by all owners). ABILITY_NONE when empty.
 enum Ability GetSpeciesAbilityForOwner(enum Species species, u8 slot, bool32 trainerOwned)
 {
     if (slot >= ABILITY_SLOT_INCLEMENT)
-        return trainerOwned ? ABILITY_NONE : GetInclementAddedAbility(species, slot);
+        return GetInclementAddedAbility(species, slot);
     if (slot >= NUM_ABILITY_SLOTS)
         return ABILITY_NONE;
     return GetSpeciesAbility(species, slot);
@@ -3563,7 +3556,7 @@ bool32 FindSpeciesAbilitySlotForOwner(enum Species species, enum Ability ability
             return TRUE;
         }
     }
-    // Inclement slots only ever hold a real Ability, and never for a trainer.
+    // Inclement slots only ever hold a real Ability.
     for (u32 i = ABILITY_SLOT_INCLEMENT; ability != ABILITY_NONE && i < NUM_OWNER_ABILITY_SLOTS; i++)
     {
         if (GetSpeciesAbilityForOwner(species, i, trainerOwned) == ability)
@@ -3585,7 +3578,7 @@ static u32 GetNormalAbilitySlots(enum Species species, bool32 trainerOwned, u8 *
     slots[count++] = 0;
     if (GetSpeciesAbility(species, 1) != ABILITY_NONE && GetSpeciesAbility(species, 1) != first)
         slots[count++] = 1;
-    for (u32 slot = ABILITY_SLOT_INCLEMENT; !trainerOwned && slot < NUM_OWNER_ABILITY_SLOTS; slot++)
+    for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)
     {
         if (GetInclementAddedAbility(species, slot) != ABILITY_NONE)
             slots[count++] = slot;
@@ -3731,7 +3724,7 @@ u32 GetSpeciesBaseStat(enum Species species, u32 statIndex)
     return 0;
 }
 
-// The base stat line of wild and player-owned Pokemon: gSpeciesInfo plus
+// The shared species base stat line: gSpeciesInfo plus
 // Inclement's buffs.
 u32 GetInclementSpeciesBaseStat(enum Species species, u32 statIndex)
 {
@@ -3743,7 +3736,7 @@ u32 GetInclementSpeciesBaseStat(enum Species species, u32 statIndex)
 
 u32 GetSpeciesBaseStatForOwner(enum Species species, u32 statIndex, bool32 trainerOwned)
 {
-    return trainerOwned ? GetSpeciesBaseStat(species, statIndex) : GetInclementSpeciesBaseStat(species, statIndex);
+    return GetInclementSpeciesBaseStat(species, statIndex);
 }
 
 u32 GetSpeciesBaseStatTotal(enum Species species)
@@ -5711,8 +5704,8 @@ static inline bool32 CanFirstMonBoostHeldItemRarity(void)
 
 void SetWildMonHeldItem(void)
 {
-    // Emerald Champions: a wild Pokemon carries nothing. Held items are found,
-    // bought or earned, so catching one is never a way to acquire one.
+    // Natural held items are acquisition sources alongside gifts, pickups
+    // and trainer theft. Capturing one also unlocks its restock shelf.
     if (!B_EC_WILD_HELD_ITEMS)
         return;
 
@@ -6991,31 +6984,13 @@ struct BoxPokemon *GetSelectedBoxMonFromPcOrParty(void)
 
 u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
 {
-    u32 sentToPc;
-    ClampMonToPlayerLevelCap(mon);
-    SetPlayerMonBaselineEVs(mon);
-    if (slot < PARTY_SIZE)
+    u32 result = GiveMonToPartyOrPC(mon, slot);
+    if (result != MON_CANT_GIVE)
     {
-        if (!CanAddRestrictedMonToParty(GetMonData(mon, MON_DATA_SPECIES), slot))
-            sentToPc = CopyMonToPC(mon);
-        else
-        {
-            memcpy(&gParties[B_TRAINER_PLAYER][slot], mon, sizeof(struct Pokemon));
-            sentToPc = MON_GIVEN_TO_PARTY;
-        }
-    }
-    else
-    {
-        sentToPc = GiveMonToPartyOrPC(mon);
-    }
-    if (sentToPc != MON_CANT_GIVE)
-    {
-        EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
         HandleSetPokedexFlagFromMon(mon, FLAG_SET_SEEN);
         HandleSetPokedexFlagFromMon(mon, FLAG_SET_CAUGHT);
     }
-    CalculatePlayerPartyCount();
-    return sentToPc;
+    return result;
 }
 
 void ChangePokemonNicknameWithCallback(void (*callback)(void))

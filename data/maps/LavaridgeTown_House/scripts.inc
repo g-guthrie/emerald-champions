@@ -19,11 +19,11 @@ LavaridgeTown_House_EventScript_SuckerPunchTM::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE, LavaridgeTown_House_EventScript_ReceivedTM94
-	msgbox LavaridgeTown_House_Text_OfferCandy, MSGBOX_YESNO
+	msgbox LavaridgeTown_House_Text_OfferNugget, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq LavaridgeTown_House_EventScript_DeclineCandy
+	goto_if_eq LavaridgeTown_House_EventScript_DeclineNugget
 	msgbox LavaridgeTown_House_Text_GiveTM94, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE
 	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
@@ -36,8 +36,8 @@ LavaridgeTown_House_EventScript_ReceivedTM94::
 	end
 
 LavaridgeTown_House_Text_HaveTM94::
-	.string "One candy, one level. But it won't\n"
-	.string "go past what your Badges allow!\p"
+	.string "A Nugget sells for ¥2,500.\n"
+	.string "Choose something useful for your team!\p"
 	.string "For new techniques, see the Move\n"
 	.string "Tutor at the Pokémon Center!$"
 
@@ -54,16 +54,16 @@ LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
 LavaridgeTown_House_Text_Zigzagoon: @ 81FF9BB
 	.string "Zigzagoon: Pshoo!$"
 
-LavaridgeTown_House_EventScript_DeclineCandy::
-	msgbox LavaridgeTown_House_Text_DeclineCandy, MSGBOX_DEFAULT
+LavaridgeTown_House_EventScript_DeclineNugget::
+	msgbox LavaridgeTown_House_Text_DeclineNugget, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_House_Text_OfferCandy:
+LavaridgeTown_House_Text_OfferNugget:
 	.string "Training near a volcano is hard\n"
 	.string "work, isn't it?\p"
-	.string "Would you like a Rare Candy\n"
-	.string "to help one of your partners grow?$"
-LavaridgeTown_House_Text_DeclineCandy:
+	.string "Would you like a Nugget\n"
+	.string "to help pay for your supplies?$"
+LavaridgeTown_House_Text_DeclineNugget:
 	.string "I'll keep it for you. Come back\n"
 	.string "if you change your mind!$"

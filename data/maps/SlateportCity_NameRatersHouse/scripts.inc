@@ -156,16 +156,20 @@ NatureChanger_Text_Intro:
 	.string "Ohohoho! You are a Trainer, yes?\p"
 	.string "I was once a great Pokéblock\n"
 	.string "chef in Kalos!\p"
-	.string "A Pokémon's Nature raises one stat\n"
-	.string "and lowers another.\p"
+	.string "Most Natures raise one stat and\n"
+	.string "lower another. Neutral ones don't.\p"
+	.string "Pokérus can change those effects.\n"
+	.string "Its benefit follows a new Nature!\p"
 	.string "For just one Berry, my special\n"
 	.string "Pokéblock gives it a new Nature!$"
 
 NatureChanger_Text_DailyBerry:
 	.string "Today's ingredient is\n"
 	.string "one {STR_VAR_1}!\p"
-	.string "I pick a Berry type at random\n"
-	.string "each day. Collect all kinds!$"
+	.string "My ingredients grow on Routes\n"
+	.string "102, 103, 104 and 116.\p"
+	.string "Today's choice stays the same\n"
+	.string "all day. Grow a few of each!$"
 
 NatureChanger_Text_ChoosePokemon:
 	.string "Which Pokémon shall try my\n"
@@ -198,7 +202,8 @@ NatureChanger_Text_WhichColorPrefer:
 	.string "raise?$"
 
 NatureChanger_Text_WhichColorDislike:
-	.string "And which stat should it lower?\n"
+	.string "Choose its other Nature stat.\n"
+	.string "Spring treatment boosts it instead.\p"
 	.string "The same stat twice cancels out.$"
 
 NatureChanger_Text_SameNature:

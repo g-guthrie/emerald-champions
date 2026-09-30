@@ -227,9 +227,14 @@ TEST("Weather anomalies: none before the window opens or after it closes")
 {
     ResetAnomalyState();
     SetBadges(5);
+    // Rescuing the Institute alone does not start the visitor window.
+    bool32 savedRescue = FlagGet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
     TakeSteps(200);
     EXPECT_EQ(CountLive(), 0);
     EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_STATE_0) | VarGet(VAR_WEATHER_ANOMALY_STATE_1) | VarGet(VAR_WEATHER_ANOMALY_STATE_2), 0);
+    if (!savedRescue)
+        FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
 
     // The first step inside the window fills all four slots.
     FlagSet(FLAG_VISITED_FORTREE_CITY);
@@ -833,5 +838,100 @@ TEST("Weather anomalies: saved scripted weather survives Continue beneath a stor
     ResumePausedWeather();
     EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY_CLOUDS);
     EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY_CLOUDS);
+    ResetAnomalyState();
+}
+
+TEST("Weather anomalies: new storms can choose snow and keep their saved weather")
+{
+    struct WarpData savedLocation = gSaveBlock1Ptr->location;
+    struct MapHeader savedHeader = gMapHeader;
+    u32 snowy = 0;
+
+    for (u32 seed = 0; seed < 256; seed++)
+    {
+        ResetAnomalyState();
+        SetBadges(5);
+        FlagSet(FLAG_VISITED_FORTREE_CITY);
+        SeedRng(seed);
+        SeedRng2(seed);
+        TakeSteps(1);
+        u16 mask = VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK);
+        EXPECT_LT(mask, 1u << WEATHER_ANOMALY_SLOT_COUNT);
+        for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
+        {
+            u8 sign = GetWeatherAnomalySlotSignId(slot);
+            EXPECT_NE(sign, WEATHER_ANOMALY_EMPTY);
+            SetLocation(gLegendaryGates[sign].anomalyMap);
+            bool32 snow = (mask & (1u << slot)) != 0;
+            snowy += snow;
+            EXPECT_EQ(GetWeatherAnomalyWeatherForCurrentMap(), snow ? WEATHER_SNOW : gLegendaryGates[sign].anomalyWeather);
+        }
+        // Ordinary steps, repeated queries and report reads cannot reroll it.
+        TakeSteps(10);
+        BufferWeatherAnomalyReport();
+        EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK), mask);
+    }
+    Test_MgbaPrintf("Snow choices: %d/1024", snowy);
+    EXPECT_GT(snowy, 192);
+    EXPECT_LT(snowy, 320);
+    ResetAnomalyState();
+    gSaveBlock1Ptr->location = savedLocation;
+    gMapHeader = savedHeader;
+}
+
+TEST("Weather anomalies: saved snow respects terrain and restores the base after capture")
+{
+    struct WarpData savedLocation = gSaveBlock1Ptr->location;
+    struct MapHeader savedHeader = gMapHeader;
+    ResetAnomalyState();
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    SetLocation(MAP_ROUTE110);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 1);
+    SetSavedWeather(WEATHER_SUNNY_CLOUDS);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SNOW);
+    EXPECT_EQ(GetWeatherAnomalyEncounterSpecies(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110), WILD_AREA_LAND), SPECIES_TAPU_KOKO);
+
+    InitWeatherAnomalyBaseFromSavedGame();
+    ResumePausedWeather();
+    EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SNOW);
+    EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK), 1);
+    EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_BASE), WEATHER_SUNNY_CLOUDS + 1);
+    SetSavedWeather(WEATHER_SUNNY);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SNOW);
+    SetSavedWeather(WEATHER_SANDSTORM);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SANDSTORM);
+    SetSavedWeather(WEATHER_VOLCANIC_ASH);
+    EXPECT_EQ(GetSavedWeather(), WEATHER_VOLCANIC_ASH);
+    SetSavedWeather(WEATHER_SUNNY_CLOUDS);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    ResumePausedWeather();
+    EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY_CLOUDS);
+    EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY_CLOUDS);
+    ResetAnomalyState();
+    gSaveBlock1Ptr->location = savedLocation;
+    gMapHeader = savedHeader;
+}
+
+TEST("Weather anomalies: empty replacements and the window end clear snow choices")
+{
+    ResetAnomalyState();
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_KOKO);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 50);
+    VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 1);
+    AlignToTick();
+    TakeSteps(1);
+    EXPECT_EQ(CountLive(), 0);
+    EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK), 0);
+
+    // Clear even a stale snow bit when the packed visitor state is empty.
+    ClearWeatherAnomalies();
+    VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 8);
+    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+    TakeSteps(1);
+    EXPECT_EQ(VarGet(VAR_WEATHER_ANOMALY_SNOW_MASK), 0);
     ResetAnomalyState();
 }

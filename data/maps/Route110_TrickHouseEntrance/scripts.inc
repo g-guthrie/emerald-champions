@@ -364,7 +364,7 @@ Route110_TrickHouseEntrance_EventScript_GiveReward:: @ 8269E8F
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward:: @ 8269EEF
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BOTTLE_CAP, 2
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
 	compare VAR_RESULT, FALSE
@@ -384,7 +384,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward:: @ 8269F1B
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward:: @ 8269F47
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BOTTLE_CAP, 4
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
 	compare VAR_RESULT, FALSE
@@ -404,7 +404,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward:: @ 8269F73
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward:: @ 8269F9F
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BOTTLE_CAP, 6
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
 	compare VAR_RESULT, FALSE

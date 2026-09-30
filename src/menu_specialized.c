@@ -734,6 +734,8 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
     gMultiuseListMenuTemplate = sMoveRelearnerMovesListTemplate;
     gMultiuseListMenuTemplate.totalItems = numChoices;
     gMultiuseListMenuTemplate.items = items;
+    if (gRelearnMode == RELEARN_MODE_SCRIPT)
+        gMultiuseListMenuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
 
     if (numChoices < 6)
         gMultiuseListMenuTemplate.maxShowed = numChoices;

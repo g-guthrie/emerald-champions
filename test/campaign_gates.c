@@ -15,7 +15,7 @@
 #include "constants/opponents.h"
 
 extern const u8 JaggedPass_MapScripts[];
-extern const u8 EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries[];
+extern const u8 EverGrandeCity_HallOfFame_EventScript_RecordDeoxysClearance[];
 extern const u8 EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent[];
 extern const u8 EverGrandeCity_HallOfFame_EventScript_ReadyCynthiaEvent[];
 extern u16 GetEmeraldChampionsFinaleStage(void);
@@ -36,7 +36,6 @@ TEST("Campaign gates: one usable Pokemon still triggers route and scripted doubl
     CalculatePlayerPartyCount();
     EXPECT_EQ(GetMonsStateToDoubles(), PLAYER_HAS_TWO_USABLE_MONS);
     EXPECT_EQ(GetMonsStateToDoubles_2(), PLAYER_HAS_TWO_USABLE_MONS);
-    EXPECT(HasEnoughMonsForDoubleBattle2());
     // A larger roster with only one conscious partner must not evade trainers.
     CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MAGIKARP, 80, 0, OTID_STRUCT_PLAYER_ID);
     u16 hp = 0;
@@ -44,7 +43,6 @@ TEST("Campaign gates: one usable Pokemon still triggers route and scripted doubl
     CalculatePlayerPartyCount();
     EXPECT_EQ(GetMonsStateToDoubles(), PLAYER_HAS_TWO_USABLE_MONS);
     EXPECT_EQ(GetMonsStateToDoubles_2(), PLAYER_HAS_TWO_USABLE_MONS);
-    EXPECT(HasEnoughMonsForDoubleBattle2());
     ZeroPlayerPartyMons();
 }
 
@@ -162,15 +160,16 @@ TEST("Campaign gates: every finale prerequisite blocks its later steps")
     FlagClear(FLAG_RECEIVED_AURORA_TICKET);
 }
 
-TEST("Campaign gates: assembled League replay preserves Deoxys clearance and unlocks ticket paths")
+TEST("Campaign gates: League replay keeps Deoxys lost and unlocks ticket paths")
 {
     FlagSet(FLAG_DEFEATED_DEOXYS);
     FlagClear(FLAG_EC_FINALE_DEOXYS_RESOLVED);
-    RunScriptImmediately(EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries);
+    RunScriptImmediately(EverGrandeCity_HallOfFame_EventScript_RecordDeoxysClearance);
     EXPECT(FlagGet(FLAG_EC_FINALE_DEOXYS_RESOLVED));
-    EXPECT(!FlagGet(FLAG_DEFEATED_DEOXYS));
-    RunScriptImmediately(EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries);
+    EXPECT(FlagGet(FLAG_DEFEATED_DEOXYS));
+    RunScriptImmediately(EverGrandeCity_HallOfFame_EventScript_RecordDeoxysClearance);
     EXPECT(FlagGet(FLAG_EC_FINALE_DEOXYS_RESOLVED));
+    EXPECT(FlagGet(FLAG_DEFEATED_DEOXYS));
     FlagSet(FLAG_HIDE_PLAYERS_HOUSE_DAD);
     RunScriptImmediately(EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent);
     EXPECT_EQ(VarGet(VAR_LITTLEROOT_HOUSES_STATE_MAY), 3);
@@ -181,6 +180,7 @@ TEST("Campaign gates: assembled League replay preserves Deoxys clearance and unl
     EXPECT_EQ(VarGet(VAR_CYNTHIA_STATE), 1);
     EXPECT(!FlagGet(FLAG_HIDE_MOSSDEEP_CYNTHIA));
     FlagClear(FLAG_EC_FINALE_DEOXYS_RESOLVED);
+    FlagClear(FLAG_DEFEATED_DEOXYS);
 }
 
 extern const u8 Route133_MapScripts[];

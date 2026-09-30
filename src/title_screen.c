@@ -69,7 +69,7 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCGFX_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCGFX_U32("graphics/title_screen/logo_shine.png", ".4bpp.smol");
 static const u32 sTitleScreenCloudsGfx[] = INCGFX_U32("graphics/title_screen/clouds.png", ".4bpp.smol");
 
-// Used to blend "Emerald Champions" as it passes over the Pokémon banner.
+// Used to blend "Inclement Emerald 2" as it passes over the Pokémon banner.
 // Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear
 const u16 gTitleScreenAlphaBlend[64] =
 {
@@ -607,7 +607,8 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+        // The regenerated Inclement Emerald 2 banner uses 17 colors.
+        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), 17 * sizeof(u16));
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;

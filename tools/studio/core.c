@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 #include <mgba/core/core.h>
 #include <mgba/core/config.h>
 #include <mgba/core/log.h>
@@ -120,10 +121,29 @@ int main(int argc, char **argv)
             break;
         case 6: { // Export native flash, after the ROM has completed a save.
             struct GBASavedata *save = &((struct GBA *)core->board)->memory.savedata;
-            struct VFile *file = VFileOpen((char *)payload, O_WRONLY | O_CREAT | O_TRUNC);
-            status = !file || !GBASavedataSize(save);
-            if (!status) status = !GBASavedataClone(save, file);
-            if (file && !file->close(file)) status = 1;
+            // The destination may back mGBA's mapped flash. Never truncate it
+            // before cloning: replace its directory entry only after close.
+            if (!payload[0] || !GBASavedataSize(save)) { status = 1; break; }
+            size_t length = strlen((char *)payload) + sizeof(".XXXXXX");
+            char *temporary = malloc(length);
+            if (!temporary) { status = 1; break; }
+            snprintf(temporary, length, "%s.XXXXXX", (char *)payload);
+            int fd = mkstemp(temporary);
+            if (fd < 0) { free(temporary); status = 1; break; }
+            struct VFile *file = VFileFromFD(fd);
+            if (!file)
+            {
+                close(fd);
+                status = 1;
+            }
+            else
+            {
+                status = !GBASavedataClone(save, file);
+                if (!file->close(file)) status = 1;
+            }
+            if (!status && rename(temporary, (char *)payload)) status = 1;
+            if (status) unlink(temporary);
+            free(temporary);
             break;
         }
         default: status = 1;

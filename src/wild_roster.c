@@ -1,6 +1,8 @@
 #include "global.h"
 #include "caps.h"
 #include "fishing.h"
+#include "field_move.h"
+#include "item.h"
 #include "legendary_signs.h"
 #include "mass_outbreak.h"
 #include "overworld.h"
@@ -9,6 +11,8 @@
 #include "wild_encounter.h"
 #include "wild_roster.h"
 #include "constants/map_types.h"
+#include "constants/items.h"
+#include "constants/pokemon.h"
 
 // Rarity words by share of the method's battles. Every table slot is at least
 // 4% (Legendary, Ultra Beast and Paradox slots 5%), so Very Rare is left for
@@ -173,6 +177,11 @@ static void AddRosterFeebas(struct RosterBuild *build)
         build->entries[i].rarity = GetWildRosterRarity(build->entries[i].share);
 }
 
+static bool32 OwnsRosterTool(enum Item item)
+{
+    return CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1);
+}
+
 u32 GetWildRosterForMap(u8 mapGroup, u8 mapNum, struct WildRosterEntry *entries, u32 max)
 {
     struct RosterBuild build = {.count = 0};
@@ -190,7 +199,8 @@ u32 GetWildRosterForMap(u8 mapGroup, u8 mapNum, struct WildRosterEntry *entries,
                    overlays, GetRosterOverlays(mapGroup, mapNum, WILD_AREA_LAND, overlays));
 
     // Underwater, every encounter tile uses the seabed's land table.
-    if (!AreSurfEncountersBlockedOnMap(mapGroup, mapNum)
+    if (IsFieldMoveUnlocked(FIELD_MOVE_SURF)
+     && !AreSurfEncountersBlockedOnMap(mapGroup, mapNum)
      && !(mapHeader->mapType == MAP_TYPE_UNDERWATER && land != NULL))
     {
         AddRosterTable(&build, WILD_ROSTER_SURFING, types[GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER)].waterMonsInfo,
@@ -198,16 +208,34 @@ u32 GetWildRosterForMap(u8 mapGroup, u8 mapNum, struct WildRosterEntry *entries,
     }
 
     const struct WildPokemonInfo *fishing = types[GetTimeOfDayForEncounters(headerId, WILD_AREA_FISHING)].fishingMonsInfo;
-    AddRosterTable(&build, WILD_ROSTER_OLD_ROD, fishing, WILD_AREA_FISHING, OLD_ROD, NULL, 0);
-    AddRosterTable(&build, WILD_ROSTER_GOOD_ROD, fishing, WILD_AREA_FISHING, GOOD_ROD, NULL, 0);
-    AddRosterTable(&build, WILD_ROSTER_SUPER_ROD, fishing, WILD_AREA_FISHING, SUPER_ROD, NULL, 0);
-    AddRosterTable(&build, WILD_ROSTER_ROCK_SMASH, types[GetTimeOfDayForEncounters(headerId, WILD_AREA_ROCKS)].rockSmashMonsInfo,
-                   WILD_AREA_ROCKS, 0, NULL, 0);
-    AddRosterTable(&build, WILD_ROSTER_HONEY, types[GetTimeOfDayForEncounters(headerId, WILD_AREA_HONEY)].honeyMonsInfo,
-                   WILD_AREA_HONEY, 0, NULL, 0);
-    if (MapHeaderHasCutTrees(mapHeader))
+    bool32 hasRod = FALSE;
+    if (fishing != NULL)
+    {
+        if (OwnsRosterTool(ITEM_OLD_ROD))
+        {
+            AddRosterTable(&build, WILD_ROSTER_OLD_ROD, fishing, WILD_AREA_FISHING, OLD_ROD, NULL, 0);
+            hasRod = TRUE;
+        }
+        if (OwnsRosterTool(ITEM_GOOD_ROD))
+        {
+            AddRosterTable(&build, WILD_ROSTER_GOOD_ROD, fishing, WILD_AREA_FISHING, GOOD_ROD, NULL, 0);
+            hasRod = TRUE;
+        }
+        if (OwnsRosterTool(ITEM_SUPER_ROD))
+        {
+            AddRosterTable(&build, WILD_ROSTER_SUPER_ROD, fishing, WILD_AREA_FISHING, SUPER_ROD, NULL, 0);
+            hasRod = TRUE;
+        }
+    }
+    if (IsFieldMoveUnlocked(FIELD_MOVE_ROCK_SMASH) && MapHeaderHasRockSmash(mapHeader))
+        AddRosterTable(&build, WILD_ROSTER_ROCK_SMASH, types[GetTimeOfDayForEncounters(headerId, WILD_AREA_ROCKS)].rockSmashMonsInfo,
+                       WILD_AREA_ROCKS, 0, NULL, 0);
+    if (OwnsRosterTool(ITEM_HONEY) || FieldMove_GetUserSlot(FIELD_MOVE_SWEET_SCENT, TRUE) != PARTY_SIZE)
+        AddRosterTable(&build, WILD_ROSTER_HONEY, types[GetTimeOfDayForEncounters(headerId, WILD_AREA_HONEY)].honeyMonsInfo,
+                       WILD_AREA_HONEY, 0, NULL, 0);
+    if (IsFieldMoveUnlocked(FIELD_MOVE_CUT) && MapHeaderHasCutTrees(mapHeader))
         AddRosterCutTrees(&build);
-    if (fishing != NULL && MapHasFeebasSpots(mapGroup, mapNum))
+    if (hasRod && MapHasFeebasSpots(mapGroup, mapNum))
         AddRosterFeebas(&build);
 
     for (u32 i = 0; entries != NULL && i < build.count && i < max; i++)

@@ -23,6 +23,7 @@
 #include "constants/script_menu.h"
 #include "constants/seagallop.h"
 #include "constants/songs.h"
+#include "constants/emerald_champions.h"
 
 #include "data/script_menu.h"
 
@@ -74,8 +75,12 @@ static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicLis
 static void MultichoiceDynamicEventShowPkmn_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowSprite_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
 
+static void EVPlanSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
+static bool32 HandleEVPlanAdjustment(u8 taskId);
+
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
+    [DYN_MULTICHOICE_CB_EV_PLAN] = {.OnSelectionChanged = EVPlanSelectionChanged},
     [DYN_MULTICHOICE_CB_DEBUG] =
     {
         .OnInit = MultichoiceDynamicEventDebug_OnInit,
@@ -462,9 +467,70 @@ static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, 
     DrawLinkServicesMultichoiceMenu(multichoiceId);
 }
 
+static void EVPlanSelectionChanged(struct DynamicListMenuEventArgs *eventArgs)
+{
+    if (eventArgs->selectedItem < NUM_STATS)
+    {
+        gSpecialVar_0x8005 = eventArgs->selectedItem;
+        BufferPlannedEVStatPrompt();
+    }
+    else
+        StringCopy(gStringVar4, COMPOUND_STRING("LEFT/RIGHT: 4   L/R: 64\nSELECT: clear   START: fill"));
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    AddTextPrinterParameterized(0, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(0, COPYWIN_GFX);
+}
+
+static bool32 HandleEVPlanAdjustment(u8 taskId)
+{
+    u16 item;
+    ListMenuGetCurrentItemArrayId(gTasks[taskId].data[0], &item);
+    if (item >= NUM_STATS)
+        return FALSE;
+    u32 keys = gMain.newAndRepeatedKeys;
+    u32 step;
+    if (keys & DPAD_RIGHT) step = EV_PLAN_STEP_ADD_4;
+    else if (keys & DPAD_LEFT) step = EV_PLAN_STEP_SUB_4;
+    else if (keys & R_BUTTON) step = EV_PLAN_STEP_ADD_64;
+    else if (keys & L_BUTTON) step = EV_PLAN_STEP_SUB_64;
+    else if (JOY_NEW(SELECT_BUTTON)) step = EV_PLAN_STEP_CLEAR;
+    else if (JOY_NEW(START_BUTTON)) step = EV_PLAN_STEP_ADD_MAX;
+    else return FALSE;
+    gSpecialVar_0x8005 = item;
+    gSpecialVar_0x8006 = step;
+    AdjustPlannedEV();
+    PlaySE(gSpecialVar_Result == EV_PLAN_CHANGED ? SE_SELECT : SE_FAILURE);
+    struct ListMenuItem *items;
+    u16 offset, row;
+    ListMenuGetScrollAndRow(gTasks[taskId].data[0], &offset, &row);
+    LoadWordFromTwoHalfwords((u16 *)&gTasks[taskId].data[3], (u32 *)&items);
+    DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
+    for (u32 i = 0; i < NUM_STATS; i++)
+    {
+        gSpecialVar_0x8005 = i;
+        BufferPlannedEVRow();
+        Free((void *)items[i].name);
+        u8 *name = Alloc(StringLength(gStringVar2) + 1);
+        StringCopy(name, gStringVar2);
+        items[i].name = name;
+    }
+    gMultiuseListMenuTemplate = sScriptableListMenuTemplate;
+    gMultiuseListMenuTemplate.windowId = gTasks[taskId].data[2];
+    gMultiuseListMenuTemplate.items = items;
+    gMultiuseListMenuTemplate.totalItems = gTasks[taskId].data[5];
+    gMultiuseListMenuTemplate.maxShowed = gTasks[taskId].data[7];
+    gMultiuseListMenuTemplate.moveCursorFunc = MultichoiceDynamic_MoveCursor;
+    gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, offset, row);
+    struct DynamicListMenuEventArgs args = {.selectedItem = item};
+    EVPlanSelectionChanged(&args);
+    return TRUE;
+}
+
 static void Task_HandleScrollingMultichoiceInput(u8 taskId)
 {
     bool32 done = FALSE;
+    if (sDynamicMenuEventId == DYN_MULTICHOICE_CB_EV_PLAN && HandleEVPlanAdjustment(taskId))
+        return;
     s32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
 
     switch (input)

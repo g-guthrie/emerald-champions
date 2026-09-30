@@ -14,6 +14,7 @@ bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates
 bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
 // By move name, as the tutor lists them (also the Pokedex's moves page).
 void SortMovesAlphabetically(u16 *moves, u32 numMoves);
+bool32 MoveMatchesTutorFilters(enum Move move, u32 typeFilter, u32 categoryFilter);
 
 extern enum MoveRelearnerStates gMoveRelearnerState;
 extern enum RelearnMode gRelearnMode;

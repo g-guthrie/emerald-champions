@@ -1,4 +1,4 @@
-TITLE        ?= EM CHAMPIONS
+TITLE        ?= INCLEMENT E2
 GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
 

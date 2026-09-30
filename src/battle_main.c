@@ -1783,20 +1783,43 @@ static void CB2_HandleStartMultiBattle(void)
 // this way records as defeated exactly as if the battle had been fought.
 // Testing builds only (include/config/debug.h). Kept out of line so the
 // release verifier can prove its symbol is absent from the shipped ELF.
+static EWRAM_DATA bool8 sInstantWinRequested = FALSE;
+static EWRAM_DATA bool8 sInstantWinIntroComplete = FALSE;
+
 static NOINLINE bool32 EmeraldChampions_TryInstantWin(void)
 {
-    if ((gMain.heldKeys & EC_DEBUG_INSTANT_WIN_KEYS) != EC_DEBUG_INSTANT_WIN_KEYS)
-        return FALSE;
 
     // A link or recorded battle has to stay in step with the other side, and the
     // test runner supplies its own outcomes.
     if (TESTING || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_RECORDED))
         return FALSE;
 
-    // Only once, only after the intro has handed control to the turn loop, and
-    // only while no controller is mid-animation, so nothing is cut off partway.
-    if (gBattleOutcome != 0 || gBattleMainFunc == DoBattleIntro || gBattleControllerExecFlags != 0)
+    if ((gMain.heldKeys & EC_DEBUG_INSTANT_WIN_KEYS) == EC_DEBUG_INSTANT_WIN_KEYS)
+        sInstantWinRequested = TRUE;
+    if (!sInstantWinRequested || gBattleOutcome != 0)
         return FALSE;
+
+    // Accept the chord during the opening text. Finish controller setup before
+    // using the normal victory scripts, without ever choosing a player move.
+    if (!sInstantWinIntroComplete)
+    {
+        gMain.newKeys |= A_BUTTON;
+        gMain.heldKeys |= A_BUTTON;
+        return FALSE;
+    }
+    if (gBattleControllerExecFlags != 0)
+    {
+        if (gBattleMainFunc != HandleTurnActionSelectionState)
+        {
+            gMain.newKeys |= A_BUTTON;
+            return FALSE;
+        }
+        // A choice screen is waiting for input, not an animation to finish.
+        for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+            gBattlerControllerFuncs[battler] = BattleControllerDummy;
+        gBattleControllerExecFlags = 0;
+    }
+    sInstantWinRequested = FALSE;
 
     BattleStopLowHpSound();
     gBattleOutcome = B_OUTCOME_WON;
@@ -1812,10 +1835,6 @@ void BattleMainCB2(void)
     RunTextPrinters();
     UpdatePaletteFade();
     RunTasks();
-
-#if EC_DEBUG_INSTANT_WIN
-    EmeraldChampions_TryInstantWin();
-#endif
 
     if (JOY_HELD(B_BUTTON) && gBattleTypeFlags & BATTLE_TYPE_RECORDED && RecordedBattle_CanStopPlayback())
     {
@@ -2836,6 +2855,9 @@ void BeginBattleIntro(void)
 
 static void BattleMainCB1(void)
 {
+#if EC_DEBUG_INSTANT_WIN
+    EmeraldChampions_TryInstantWin();
+#endif
     gBattleMainFunc();
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
         gBattlerControllerFuncs[battler](battler);
@@ -2858,6 +2880,10 @@ static void ClearSetBScriptingStruct(void)
 static void BattleStartClearSetData(void)
 {
     s32 i;
+#if EC_DEBUG_INSTANT_WIN
+    sInstantWinRequested = FALSE;
+    sInstantWinIntroComplete = FALSE;
+#endif
 
     TurnValuesCleanUp(FALSE);
     memset(&gSpecialStatuses, 0, sizeof(gSpecialStatuses));
@@ -3510,6 +3536,9 @@ static void DoBattleIntro(void)
                     statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
             }
             STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
+#if EC_DEBUG_INSTANT_WIN
+            sInstantWinIntroComplete = TRUE;
+#endif
             gBattleMainFunc = TryDoEventsBeforeFirstTurn;
         }
         break;

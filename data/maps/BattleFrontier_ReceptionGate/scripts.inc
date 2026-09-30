@@ -425,9 +425,10 @@ BattleFrontier_ReceptionGate_Text_LearnAboutWhat: @ 8266EE0
 	.string "What would you like to learn about?$"
 
 BattleFrontier_ReceptionGate_Text_LevelModeInfo: @ 8266F04
-	.string "All the challenges at the Battle\n"
-	.string "Frontier's facilities come in\l"
-	.string "two courses--Level 50 and Open Level.$"
+	.string "Most Frontier challenges offer\n"
+	.string "Level 50 and Open Level courses.\p"
+	.string "The Champions Circuit instead\n"
+	.string "sets your team to Lv. 100.$"
 
 BattleFrontier_ReceptionGate_Text_Level50Info: @ 8266F69
 	.string "The Level 50 course is open to Pokémon\n"
@@ -451,23 +452,24 @@ BattleFrontier_ReceptionGate_Text_OpenLevelInfo: @ 8267080
 	.string "have any Pokémon below Level 60.$"
 
 BattleFrontier_ReceptionGate_Text_MonEntryInfo: @ 826716A
-	.string "Virtually any kind of Pokémon may take\n"
-	.string "on the challenges at all facilities.\p"
+	.string "Most Frontier challenges accept\n"
+	.string "many kinds of Pokémon.\p"
 	.string "Eggs and certain kinds of Pokémon,\n"
 	.string "however, are not permitted.\p"
 	.string "The numbers of Pokémon required for\n"
 	.string "challenges will depend on the facility.\p"
-	.string "At all facilities, however, two or more\n"
-	.string "of the same kind of Pokémon are not\l"
-	.string "permitted.$"
+	.string "Most challenges forbid two or more\n"
+	.string "of the same kind of Pokémon.\p"
+	.string "The Champions Circuit accepts six\n"
+	.string "Pokémon, with no Eggs and only one\l"
+	.string "Legendary, Mythical, Ultra Beast\l"
+	.string "or Paradox in total.$"
 
 BattleFrontier_ReceptionGate_Text_HoldItemsInfo: @ 8267298
-	.string "When entering a challenge at a Battle\n"
-	.string "Frontier facility, Pokémon may not\l"
-	.string "be holding the same kind of item.\p"
-	.string "Please make sure that all Pokémon\n"
-	.string "entering a challenge are holding\l"
-	.string "different items.$"
+	.string "Most Frontier challenges require\n"
+	.string "different held items on your team.\p"
+	.string "The Champions Circuit lets your\n"
+	.string "Pokémon hold the same kind of item.$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass: @ 8267357
 	.string "I'm your guide to the Frontier Pass.$"

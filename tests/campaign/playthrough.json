@@ -7002,7 +7002,7 @@
             26
           ],
           "press_frames": 12,
-          "screenshot": "paralyze-heal-message"
+          "screenshot": "nugget-message"
         },
         {
           "type": "advance_dialogue",
@@ -7010,7 +7010,7 @@
         },
         {
           "type": "screenshot",
-          "name": "paralyze-heal-collected"
+          "name": "nugget-collected"
         }
       ],
       "coverage": {
@@ -7034,7 +7034,7 @@
           "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL"
         ],
         "items": [
-          "ITEM_PARALYZE_HEAL"
+          "ITEM_NUGGET"
         ],
         "labels": [
           "petalburg_woods_first_pass",

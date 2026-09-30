@@ -823,19 +823,26 @@ class Harness:
 
     async def party_detail(self):
         """The bridge publishes the full party in the field while armed."""
-        if not await self.armed():
+        was_armed = await self.armed()
+        if not was_armed:
+            if self.st['battle']:
+                raise ValueError('party detail is unavailable during a manual battle')
             await self.arm()
-        await self.tick(0, 2)
-        words = await self.view()
-        state = self.bd.decode_state(self, words)
-        out = []
-        for p in state['player_reserves']:
-            out.append(f"{p['slot']}:{p['species'].replace('SPECIES_', '')} L{p['level']} "
-                       f"{p['hp']}/{p['max_hp']} {p['ability'].replace('ABILITY_', '')} "
-                       f"@{p['item'].replace('ITEM_', '')} "
-                       + '/'.join(m['move'].replace('MOVE_', '') for m in p['moves'])
-                       + (' ' + ','.join(p['status']) if p['status'] else ''))
-        return out
+        try:
+            await self.tick(0, 2)
+            words = await self.view()
+            state = self.bd.decode_state(self, words)
+            out = []
+            for p in state['player_reserves']:
+                out.append(f"{p['slot']}:{p['species'].replace('SPECIES_', '')} L{p['level']} "
+                           f"{p['hp']}/{p['max_hp']} {p['ability'].replace('ABILITY_', '')} "
+                           f"@{p['item'].replace('ITEM_', '')} "
+                           + '/'.join(m['move'].replace('MOVE_', '') for m in p['moves'])
+                           + (' ' + ','.join(p['status']) if p['status'] else ''))
+            return out
+        finally:
+            if not was_armed:
+                await self.disarm()
 
     # --------------------------------------------------------------- persistence
     async def snap(self, name='auto'):

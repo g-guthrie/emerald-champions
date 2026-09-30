@@ -5,6 +5,7 @@
 #include "fldeff_misc.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "emerald_champions_battle_sets.h"
 #include "constants/battle.h"
 #include "strings.h"
 #include "string_util.h"
@@ -125,7 +126,9 @@ bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
         if (learnset[i].move == move)
             return TRUE;
     }
-    return FALSE;
+    // Include legal preparation and signature lessons, such as Flying Pikachu.
+    // Field licenses still own access; the battle move need not be taught.
+    return CanSpeciesUseEmeraldChampionsPreparationMove(species, move);
 }
 
 u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)

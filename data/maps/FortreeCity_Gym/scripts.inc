@@ -40,7 +40,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	end
 
 FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
-	giveitem ITEM_STARAPTITE
+	giveuniqueitem ITEM_STARAPTITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
@@ -49,7 +49,7 @@ FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
 	end
 
 FortreeCity_Gym_EventScript_GiveRoost:: @ 821666A
-	giveitem ITEM_STARAPTITE
+	giveuniqueitem ITEM_STARAPTITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT

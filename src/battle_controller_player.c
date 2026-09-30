@@ -1450,7 +1450,10 @@ static void PlayerHandleYesNoInput(enum BattlerId battler)
     }
     if (JOY_NEW(A_BUTTON))
     {
-        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+        // Declining Restart immediately asks about forfeiting in the same box.
+        // Keep it visible while that selection script replaces the question.
+        if (!gBattleStruct->restartQuestionPending || gMultiUsePlayerCursor == 0)
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         PlaySE(SE_SELECT);
 
         if (gMultiUsePlayerCursor != 0)

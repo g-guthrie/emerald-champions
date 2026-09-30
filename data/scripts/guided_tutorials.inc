@@ -13,11 +13,13 @@ EC_RivalDexNavTutorial_Begin::
 	goto EC_RivalDexNavTutorial_AtGrass
 
 EC_RivalDexNavTutorial_FromEntrance:
-	setobjectxy LOCALID_ROUTE101_RIVAL_TUTORIAL, 10, 17
-	turnobject LOCALID_ROUTE101_RIVAL_TUTORIAL, DIR_SOUTH
+	call_if_eq VAR_0x8004, 9, EC_RivalDexNavTutorial_JoinPath
+	call_if_eq VAR_0x8004, 11, EC_RivalDexNavTutorial_JoinPathFromEast
+	@ The rival waits beyond the entering camera's edge, already placed by the map.
+	applymovement OBJ_EVENT_ID_PLAYER, EC_RivalDexNavTutorial_Movement_Approach
+	waitmovement 0
 	msgbox EC_RivalDexNavTutorial_Text_ComeAlong, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8004, 9, EC_RivalDexNavTutorial_JoinPath
 	applymovement LOCALID_ROUTE101_RIVAL_TUTORIAL, EC_RivalDexNavTutorial_Movement_Lead
 	applymovement OBJ_EVENT_ID_PLAYER, EC_RivalDexNavTutorial_Movement_Follow
 	waitmovement 0
@@ -99,7 +101,7 @@ EC_RivalDexNavTutorial_Text_Caught:
 
 EC_RivalDexNavTutorial_Text_Gold:
 	.string "Its Adamant nature raises Attack.\n"
-	.string "Pokérus doubles that bonus, so the\l"
+	.string "Pokérus adds to that bonus, so the\l"
 	.string "Attack number is gold.\p"
 	.string "The benefit stays after recovery,\n"
 	.string "even if its nature changes later.\p"
@@ -115,8 +117,11 @@ EC_RivalDexNavTutorial_Text_Chain:
 	.string "Run, lose, scare the target or leave\n"
 	.string "the area, and the chain ends. Other\l"
 	.string "battles break it too.\p"
-	.string "There's no search time limit.\n"
-	.string "Keep holding A and follow the arrow.\p"
+	.string "You have 15 seconds to reach it.\n"
+	.string "The countdown turns red when\l"
+	.string "only five seconds remain.\p"
+	.string "Take too long and your chain ends.\n"
+	.string "Hold A and follow the arrow promptly.\p"
 	.string "Birch can explain all the details\n"
 	.string "again if you want. Happy hunting!$"
 
@@ -133,27 +138,49 @@ EC_RivalDexNavTutorial_JoinPath:
 	waitmovement 0
 	return
 
+EC_RivalDexNavTutorial_JoinPathFromEast:
+	applymovement OBJ_EVENT_ID_PLAYER, EC_RivalDexNavTutorial_Movement_JoinPathFromEast
+	waitmovement 0
+	return
+
+@ The ledge spans x8-11 at y13. Walk around its west end at x7.
+EC_RivalDexNavTutorial_Movement_Approach:
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
 EC_RivalDexNavTutorial_Movement_Lead:
+	walk_left
+	walk_left
+	walk_left
 	walk_up
 	walk_up
-	walk_up
-	walk_up
-	walk_up
+	walk_right
+	walk_right
+	walk_right
 	walk_right
 	face_left
 	step_end
 
 EC_RivalDexNavTutorial_Movement_Follow:
+	walk_left
+	walk_left
+	walk_left
 	walk_up
 	walk_up
 	walk_up
 	walk_up
-	walk_up
-	walk_up
-	walk_up
+	walk_right
+	walk_right
+	walk_right
 	face_right
 	step_end
 
 EC_RivalDexNavTutorial_Movement_JoinPath:
 	walk_right
+	step_end
+
+EC_RivalDexNavTutorial_Movement_JoinPathFromEast:
+	walk_left
 	step_end

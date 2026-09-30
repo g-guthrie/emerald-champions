@@ -230,7 +230,7 @@ VerdanturfTown_BattleTentLobby_EventScript_AttractGiver:: @ 8201A7B
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM45
@@ -354,8 +354,8 @@ VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep: @ 8201D9E
 	.string "The attraction runs deep…\p"
 	.string "Oh, hi, you didn't see that, did you?\n"
 	.string "Well, it doesn't matter.\p"
-	.string "How about this Rare Candy for\n"
-	.string "your Pokémon?$"
+	.string "How about this Nugget for\n"
+	.string "your next shopping trip?$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionMutual: @ 8201E43
 	.string "My feelings toward my Pokémon…\n"

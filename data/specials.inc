@@ -90,7 +90,7 @@ gSpecials::
 	def_special IsTrainerReadyForRematch
 	def_special BattleSetup_StartRematchBattle, waitstate=1
 	def_special ShowPokemonStorageSystemPC, waitstate=1
-	def_special HasEnoughMonsForDoubleBattle
+	def_special Unused_HasEnoughMonsForDoubleBattle, unused=1
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -519,7 +519,7 @@ gSpecials::
 	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford
 	def_special CountPartyAliveNonEggMons
-	def_special TryPrepareSecondApproachingTrainer
+	def_special Unused_TryPrepareSecondApproachingTrainer, unused=1
 	def_special PrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
@@ -812,6 +812,7 @@ gSpecials::
 	def_special CanReceiveFrontierReward
 
 	def_special CanReceiveLatiStones
+	def_special CanReceiveShellBellReward
 
 	def_special CanReceiveNormanMegaGift
 
@@ -830,6 +831,8 @@ gSpecials::
 	def_special IsRoute133VialUpgradeAvailable
 
 	def_special CenterGuideHasStaticLegendaryLead
+	def_special BufferCenterGuideDirections
+	def_special BufferCenterGuideObjective
 
 	def_special IsPlayerPartyBelowLevelCap
 
@@ -848,3 +851,15 @@ gSpecials::
 	def_special PayForChosenMonHiddenPower
 
 	def_special WarpToRivalTutorialSpot, waitstate=1
+
+	def_special ShowChosenMonHiddenPowerPreview
+	def_special HideChosenMonHiddenPowerPreview
+	def_special ShowIconicTutorCatalogue, waitstate=1
+
+	def_special BufferHotSpringPokerusPreview
+	def_special ApplyHotSpringPokerusTreatment
+
+	def_special SetPlannedEVPricing
+	def_special IsEvieEVPlan
+	def_special BufferPlannedEVConfirmation
+	def_special PayForPlannedEVSpread

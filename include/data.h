@@ -137,7 +137,7 @@ struct Trainer
     u16 battleType:2;
     u16 mugshotColor:3;
     u16 partySize:3;
-    u16 easyLevelReduction:1; // Casual/Regular campaign teams lose one extra level on Easy.
+    u16 easyLevelReduction:1; // Legacy field name: Casual/Regular teams lose one extra level in every difficulty.
     u16 padding:1;
     enum TrainerPicID trainerPic;
     u8 trainerName[TRAINER_NAME_LENGTH + 1];

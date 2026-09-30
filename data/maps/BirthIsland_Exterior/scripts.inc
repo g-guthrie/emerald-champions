@@ -102,7 +102,7 @@ BirthIsland_Exterior_EventScript_DeoxysLeaves::
 	fadescreenswapbuffers FADE_FROM_BLACK
 	return
 
-@ A defeat resolves the finale; the triangle stays quiet until the next League win.
+@ A knockout resolves the finale and loses this encounter permanently.
 BirthIsland_Exterior_EventScript_DefeatedDeoxys:: @ 826803B
 	setflag FLAG_EC_FINALE_DEOXYS_RESOLVED
 	setflag FLAG_DEFEATED_DEOXYS
@@ -121,8 +121,8 @@ BirthIsland_Exterior_EventScript_RanFromDeoxys:: @ 8268049
 BirthIsland_Exterior_Text_DeoxysVanished:
 	.string "Deoxys vanished into the sky.\n"
 	.string "The strange stone has gone quiet.\p"
-	.string "Perhaps it will stir again after\n"
-	.string "your next League victory.$"
+	.string "Deoxys will not return. This part\n"
+	.string "of your final expedition is complete.$"
 
 BirthIsland_Exterior_Movement_DeoxysApproach: @ 8268054
 	walk_slow_down

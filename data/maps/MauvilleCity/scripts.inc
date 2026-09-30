@@ -27,7 +27,7 @@ MauvilleCity_EventScript_GyroBallTM::
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_MAUVILLE_CITY, MauvilleCity_EventScript_ReceivedTM74
 	msgbox MauvilleCity_Text_GiveTM74, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_MAUVILLE_CITY
 	msgbox MauvilleCity_Text_HaveTM74, MSGBOX_DEFAULT
@@ -665,10 +665,10 @@ MauvilleCity_Text_BeenCheckingOutTV: @ 81E0699
 
 MauvilleCity_Text_GiveTM74:
 	.string "Hey there! You look like you could\n"
-	.string "use a treat. Have a Rare Candy!$"
+	.string "use some travel money. Have a Nugget!$"
 
 MauvilleCity_Text_HaveTM74:
-	.string "Just one level per candy, mind you.\n"
-	.string "Your Badges decide how high it goes.\p"
+	.string "Sell that Nugget for ¥2,500, then\n"
+	.string "choose supplies for your team.\p"
 	.string "Want new moves? The Move Tutor at\n"
 	.string "the Pokémon Center teaches them!$"

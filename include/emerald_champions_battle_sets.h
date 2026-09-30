@@ -74,6 +74,9 @@ bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum M
 bool32 IsIconicMoveUnlocked(struct BoxPokemon *mon, enum Move move);
 bool32 PayForIconicMove(struct BoxPokemon *mon, enum Move move, enum Item payment);
 u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves);
+// Read-only catalogue of all authored lessons, including those still badge-gated.
+enum Species GetEmeraldChampionsIconicTutorSpecies(u32 index);
+bool32 GetEmeraldChampionsIconicTutorLesson(enum Species species, u32 index, enum Move *move, u8 *badges);
 bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(enum Species species, enum Move move);
 
 #endif // GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H

@@ -258,6 +258,7 @@ enum
     DYN_MULTICHOICE_CB_DEBUG,
     DYN_MULTICHOICE_CB_SHOW_ITEM,
     DYN_MULTICHOICE_CB_SHOW_PKMN,
+    DYN_MULTICHOICE_CB_EV_PLAN,
     //add new callback choices after this comment!
     
     DYN_MULTICHOICE_CB_NONE,

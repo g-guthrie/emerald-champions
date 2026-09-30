@@ -118,6 +118,13 @@ Std_FindItem::
 	lock
 	faceplayer
 	waitse
+	@ Location-specific and generic item balls share this finite receipt path.
+EventScript_CheckFiniteItem::
+	callnative CheckItemBallHasPermanentReceipt, requests_effects=1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_FindOrdinaryItem
+	special ConvertEmeraldChampionsFiniteReward
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpDuplicateFiniteItem
+EventScript_FindOrdinaryItem::
 	copyvar VAR_0x8006, ITEMID
 	copyvar VAR_0x8004, ITEMID
 	copyvar VAR_0x8005, AMOUNT
@@ -128,6 +135,13 @@ Std_FindItem::
 	call EventScript_BufferPocketNameAndTryFanfare
 	call_if_eq VAR_0x8007, TRUE, EventScript_PickUpItem
 	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomToPickUpItem
+	release
+	return
+
+EventScript_PickUpDuplicateFiniteItem::
+	removeobject VAR_LAST_TALKED
+	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
+	setvar VAR_RESULT, TRUE
 	release
 	return
 
@@ -168,6 +182,12 @@ EventScript_HiddenItemScript::
 	lockall
 	waitse
 	goto_if_eq VAR_0x8005, 0, EventScript_TryPickUpHiddenCoins
+	goto_if_le VAR_0x8004, TEMP_FLAGS_END, EventScript_FindOrdinaryHiddenItem
+	copyvar VAR_0x8000, VAR_0x8005
+	copyvar VAR_0x8001, VAR_0x8009
+	special ConvertEmeraldChampionsFiniteReward
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpDuplicateFiniteHiddenItem
+EventScript_FindOrdinaryHiddenItem::
 	copyvar VAR_0x8006, VAR_0x8005
 	additem VAR_0x8005, VAR_0x8009
 	copyvar VAR_0x8007, VAR_RESULT
@@ -176,6 +196,15 @@ EventScript_HiddenItemScript::
 	call EventScript_BufferPocketNameAndTryFanfare
 	goto_if_eq VAR_0x8007, TRUE, EventScript_PickUpHiddenItem
 	goto_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForHiddenItem
+	end
+
+EventScript_PickUpDuplicateFiniteHiddenItem::
+	callnative Script_ClearDowsingColor
+	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
+	special SetHiddenItemFlag
+	callnative Script_UpdateDowseState
+	setvar VAR_RESULT, TRUE
+	releaseall
 	end
 
 EventScript_PickUpHiddenItem::
@@ -196,6 +225,7 @@ EventScript_FoundSingleItem::
 
 EventScript_FoundMultipleItems::
 	buffernumberstring STR_VAR_1, VAR_0x8009
+	bufferitemnameplural STR_VAR_2, VAR_0x8005, VAR_0x8009
 	message gText_FoundXItems
 	return
 
@@ -205,7 +235,7 @@ EventScript_PutHiddenItemInPocket::
 	showitemdescription
 	waitmessage
 	waitfanfare
-	bufferitemnameplural STR_VAR_2, VAR_0x8004, 1
+	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8009
 	copyvar VAR_0x8004, VAR_0x8008
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
@@ -216,7 +246,10 @@ EventScript_PutHiddenItemInPocket::
 	end
 
 EventScript_NoRoomForHiddenItem::
-	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
+	call_if_eq VAR_0x8009, 1, EventScript_FoundSingleItem
+	call_if_ne VAR_0x8009, 1, EventScript_FoundMultipleItems
+	waitmessage
+	waitbuttonpress
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	releaseall

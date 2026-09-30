@@ -229,7 +229,7 @@ Route110_EventScript_ChallengeReactionBest:: @ 81EF6FD
 	msgbox Route110_Text_ChallengeReactionBest, MSGBOX_DEFAULT
 	goto_if_set FLAG_RECEIVED_ROUTE110_CYCLING_REWARD, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM93, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BOTTLE_CAP, 2
 	goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_RewardNoRoom
 	setflag FLAG_RECEIVED_ROUTE110_CYCLING_REWARD
 	goto Route110_EventScript_EndChallenge
@@ -239,7 +239,7 @@ Route110_EventScript_ChallengeReactionGood:: @ 81EF70B
 	msgbox Route110_Text_ChallengeReactionGood, MSGBOX_DEFAULT
 	goto_if_set FLAG_EC_GIFT_ROUTE110, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM83, MSGBOX_DEFAULT
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_BOTTLE_CAP
 	goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_RewardNoRoom
 	setflag FLAG_EC_GIFT_ROUTE110
 	goto Route110_EventScript_EndChallenge
@@ -817,7 +817,7 @@ Route110_Text_ChallengeReactionBest: @ 81F0431
 
 Route110_Text_GiveTM93:
 	.string "Such a ride deserves a reward.\n"
-	.string "Please accept this Rare Candy!$"
+	.string "Please accept these two Bottle Caps!$"
 
 Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "Your technique is remarkable.\p"
@@ -826,7 +826,7 @@ Route110_Text_ChallengeReactionGood: @ 81F04A4
 
 Route110_Text_GiveTM83:
 	.string "Still, a fine effort deserves\n"
-	.string "something. Take this Rare Candy.$"
+	.string "something. Take this Bottle Cap.$"
 
 Route110_Text_ChallengeReactionOk: @ 81F0500
 	.string "I would consider you a work in\n"
