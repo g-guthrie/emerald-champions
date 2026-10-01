@@ -32,10 +32,28 @@ EWRAM_DATA static u8 sSwitchSwap[2] = {0};
 // The species a board led with, brought to the front in this order.
 EWRAM_DATA static enum Species sSwitchLeadSpecies[2] = {0};
 EWRAM_DATA static struct SwitchInjury sSwitchInjuries[6] = {0};
+// A board built before a level re-tune: every member's authored level offset
+// moved by this much, so the fixture keeps the levels its decision was
+// measured at. Consumed by the next authored build.
+EWRAM_DATA static s8 sSwitchOffsetShift = 0;
+EWRAM_DATA static struct Trainer sSwitchShiftedTrainer = {0};
+EWRAM_DATA static struct TrainerMon sSwitchShiftedParty[PARTY_SIZE] = {0};
 
 static void BuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
 {
     const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    if (sSwitchOffsetShift != 0)
+    {
+        sSwitchShiftedTrainer = *trainer;
+        for (u32 i = 0; i < trainer->partySize && i < PARTY_SIZE; i++)
+        {
+            sSwitchShiftedParty[i] = trainer->party[i];
+            sSwitchShiftedParty[i].levelOffset += sSwitchOffsetShift;
+        }
+        sSwitchShiftedTrainer.party = sSwitchShiftedParty;
+        trainer = &sSwitchShiftedTrainer;
+        sSwitchOffsetShift = 0;
+    }
     u32 savedFlags = gBattleTypeFlags;
     enum DifficultyLevel savedDifficulty = GetCurrentDifficultyLevel();
     bool8 savedBadges[8];
@@ -293,7 +311,10 @@ AI_DOUBLE_BATTLE_TEST("EC Mega: Glacia's Froslass evolves into Mega Charizard's 
 // Both reserves are Wallace's aces. As on the benchmark board, Miraidon has
 // spent a Draco Meteor, and neither ace falls to its Electro Drift on arrival.
 // At full Special Attack that Electro Drift removes either one, and Kyogre
-// waits the Encore out rather than hand an ace over for it.
+// waits the Encore out rather than hand an ace over for it. The team is held
+// at the levels this was measured at, before the October ceiling raise (+7
+// offset): the turn-one Water Spout only sets up the Encore board, and a
+// higher Kyogre rightly prefers Ice Beam into Whimsicott.
 AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves a useless Encore for an ace only when the ace survives entry")
 {
     bool32 dracoSpent;
@@ -308,6 +329,7 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Wallace's Kyogre leaves a useless Encore fo
         // the ace Marshadow is the only exit, as on the benchmark board.
         sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_ZYGARDE, 0};
         SwitchLeads(0, 3);
+        sSwitchOffsetShift = -7;
         SwitchAuthoredOpponent(TRAINER_WALLACE_DOUBLES_LEGENDS, 8);
     } WHEN {
         TURN {
