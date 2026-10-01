@@ -3806,6 +3806,41 @@ static u32 PairBoostWorth(enum BattlerId actor, enum Move move)
     return any ? best : 100;
 }
 
+// A purely offensive boost - Attack, Sp. Atk or Speed and nothing defensive -
+// pays through a hit worth boosting. A body whose every attack the foes left
+// standing blank or resist gains little from raising it, short of a reserve
+// that changes the board later, so the raise keeps only a modest share:
+// Aaron's Mega Dragonite danced twice in front of a Flutter Mane its Dragon
+// Claw and Extreme Speed cannot touch and a Kingambit that resists both.
+#define PAIR_DEAD_SETUP_SHARE 25
+static u32 PairOffenseBoostShare(enum BattlerId actor, enum Move move, const u32 *hp)
+{
+    s32 speedStages;
+    u32 raised = PairSelfBoostRaises(actor, move, &speedStages);
+    bool32 attack = (raised & (1u << 0)) != 0, spAttack = (raised & (1u << 3)) != 0;
+    if ((raised & ((1u << 1) | (1u << 2))) || (!attack && !spAttack && !speedStages))
+        return 100;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!hp[foe] || !IsBattlerAlive(foe) || IsBattlerAlly(actor, foe))
+            continue;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            enum Move known = gBattleMons[actor].moves[slot];
+            if (known == MOVE_NONE || IsBattleMoveStatus(known)
+             || IsMoveUnusable(slot, known, gAiLogicData->moveLimitations[actor]))
+                continue;
+            bool32 physical = IsBattleMovePhysical(known);
+            if ((attack || spAttack) && !(physical ? attack : spAttack))
+                continue;
+            if (gAiLogicData->effectiveness[actor][foe][slot] >= UQ_4_12(1.0)
+             && gAiLogicData->simulatedDmg[actor][foe][slot].maximum)
+                return 100;
+        }
+    }
+    return PAIR_DEAD_SETUP_SHARE;
+}
+
 // A boost that only raises Defense or Sp. Def pays through the foes it is
 // raised against: those still standing after this turn with a hit of that
 // category worth trimming (an eighth of the user's HP), or, for Defense, a foe
@@ -5816,7 +5851,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (setupReward[actor] && hp[actor] && !(outrun & (1u << actor)))
             score += setupReward[actor] * (s32)survival[actor] / 100
                 * (s32)PairBoostWorth(actor, actions[actor].executedMove) / 100
-                * (s32)PairDefenseBoostShare(actor, actions[actor].executedMove, hp, survival) / 100;
+                * (s32)PairDefenseBoostShare(actor, actions[actor].executedMove, hp, survival) / 100
+                * (s32)PairOffenseBoostShare(actor, actions[actor].executedMove, hp) / 100;
     // Next-turn value that a one-turn board cannot see. Each term is paid only
     // when the effect actually landed in this trial and its owner or victim is
     // still standing at the end of it, so a boost that gets its user killed and
@@ -5862,7 +5898,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         if (raised)
             score += sign * PAIR_SETUP_HORIZON * (s32)survival[actor] / 100
                 * (s32)PairBoostWorth(actor, action->executedMove) / 100
-                * (s32)PairDefenseBoostShare(actor, action->executedMove, hp, survival) / 100;
+                * (s32)PairDefenseBoostShare(actor, action->executedMove, hp, survival) / 100
+                * (s32)PairOffenseBoostShare(actor, action->executedMove, hp) / 100;
     }
     for (enum BattlerId target = 0; target < gBattlersCount; target++)
     {

@@ -727,7 +727,17 @@ bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
         return TRUE;
 
     // Limited to Lighning Rod and Storm Drain because otherwise the AI would consider Water Absorb, etc...
-    if (partnerDefAbility == ABILITY_LIGHTNING_ROD || partnerDefAbility == ABILITY_STORM_DRAIN)
+    // The partner draws only a single-target move, and never its own
+    // partner's: a spread move still reaches this target, and the attacker's
+    // own Storm Drain does not take its own Surf. Connie's Lumineon was told
+    // its Surf missed its Magmar, and knocked the Magmar out with it.
+    enum BattlerId defPartner = GetPartnerBattler(ctx->battlerDef);
+    enum BattleMoveEffects moveEffect = GetMoveEffect(ctx->move);
+    if ((partnerDefAbility == ABILITY_LIGHTNING_ROD || partnerDefAbility == ABILITY_STORM_DRAIN)
+     && defPartner != ctx->battlerAtk && IsBattlerAlive(defPartner)
+     && !IsSpreadMove(GetBattlerMoveTargetType(ctx->battlerAtk, ctx->move))
+     && moveEffect != EFFECT_SNIPE_SHOT && moveEffect != EFFECT_PLEDGE && moveEffect != EFFECT_TEATIME
+     && ctx->abilities[ctx->battlerAtk] != ABILITY_PROPELLER_TAIL && ctx->abilities[ctx->battlerAtk] != ABILITY_STALWART)
     {
         u32 originalTarget = ctx->battlerDef; // Need to preserve origin target;
         ctx->battlerDef = GetPartnerBattler(ctx->battlerDef);
@@ -7725,8 +7735,47 @@ static bool32 AI_IsRedirectionUseless(enum BattlerId battlerAtk, enum Move move)
     return TRUE;
 }
 
+// The battler that draws a single-target Electric or Water move away from
+// its chosen target, as HandleMoveTargetRedirection does: a Lightning Rod or
+// Storm Drain anywhere else on the field, unless Follow Me holds the target
+// side or the attacker ignores redirection. MAX_BATTLERS_COUNT when the move
+// reaches its target.
+enum BattlerId AI_GetAbilityRedirector(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    if (!IsDoubleBattle() || battlerDef >= gBattlersCount || battlerDef == battlerAtk)
+        return MAX_BATTLERS_COUNT;
+    enum Type type = GetDynamicMoveType(GetBattlerMon(battlerAtk), move, battlerAtk,
+        gAiLogicData->abilities[battlerAtk], gAiLogicData->holdEffects[battlerAtk], MON_IN_BATTLE);
+    if (type == TYPE_NONE)
+        type = GetMoveType(move);
+    enum Ability absorbs = type == TYPE_ELECTRIC ? ABILITY_LIGHTNING_ROD
+                         : type == TYPE_WATER ? ABILITY_STORM_DRAIN : ABILITY_NONE;
+    enum MoveTarget target = AI_GetBattlerMoveTargetType(battlerAtk, move);
+    enum BattleMoveEffects effect = GetMoveEffect(move);
+    enum Ability abilityAtk = gAiLogicData->abilities[battlerAtk];
+    if (absorbs == ABILITY_NONE || gAiLogicData->abilities[battlerDef] == absorbs
+     || target == TARGET_USER || target == TARGET_ALL_BATTLERS || target == TARGET_FIELD || IsSpreadMove(target)
+     || effect == EFFECT_TEATIME || effect == EFFECT_SNIPE_SHOT || effect == EFFECT_PLEDGE
+     || abilityAtk == ABILITY_PROPELLER_TAIL || abilityAtk == ABILITY_STALWART
+     || gSideTimers[GetBattlerSide(battlerAtk) ^ BIT_SIDE].followmeTimer)
+        return MAX_BATTLERS_COUNT;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (battler != battlerAtk && battler != battlerDef && IsBattlerAlive(battler)
+         && (B_REDIRECT_ABILITY_ALLIES >= GEN_4 || !IsBattlerAlly(battlerAtk, battler))
+         && gAiLogicData->abilities[battler] == absorbs)
+            return battler;
+    return MAX_BATTLERS_COUNT;
+}
+
 bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
+    // A Storm Drain or Lightning Rod elsewhere on the field takes the move,
+    // immune, and keeps the Sp. Atk boost: Susie's Mantine aimed Scald at its
+    // Water Absorb partner twice beside the player's known Storm Drain
+    // Gastrodon, which drew it both times. The AI's own picks only.
+    if (GetConfig(B_REDIRECT_ABILITY_IMMUNITY) >= GEN_5 && BattlerHasAi(battlerAtk)
+     && AI_GetAbilityRedirector(battlerAtk, battlerDef, move) != MAX_BATTLERS_COUNT)
+        return TRUE;
     struct AiLogicData *aiData = gAiLogicData;
     enum BattleMoveEffects effect = GetMoveEffect(move);
     enum BattleSide side = GetBattlerSide(battlerAtk);

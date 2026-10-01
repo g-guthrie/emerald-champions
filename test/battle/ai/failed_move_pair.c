@@ -1158,3 +1158,142 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: Quick Guard reads Grassy Glide's priorit
         }
     }
 }
+
+// E0423 a03 turns 3-4 as they stood: Mantine's own Tailwind with a turn left.
+static void SusieMantineBoard(void)
+{
+    gSideStatuses[B_SIDE_OPPONENT] |= SIDE_STATUS_TAILWIND;
+    gSideTimers[B_SIDE_OPPONENT].tailwindTimer = 1;
+    for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+        gBattleStruct->battlerState[battler].isFirstTurn = 0;
+}
+
+// Susie's Mantine aimed Scald at its Water Absorb partner twice, and the
+// player's known Storm Drain Gastrodon drew it both times: "Gastrodon took
+// the attack! Gastrodon's Sp. Atk rose!". Any single-target Water move on
+// this board ends in the Gastrodon.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a Water move a foe's Storm Drain draws away is not aimed")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_GASTRODON_EAST) {
+            Level(55); MaxHP(238); HP(238); Nature(NATURE_MODEST); Ability(ABILITY_STORM_DRAIN); Item(ITEM_SITRUS_BERRY);
+            Moves(MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_KARTANA) {
+            Level(55); Nature(NATURE_JOLLY); Ability(ABILITY_BEAST_BOOST); Item(ITEM_CHOICE_SCARF);
+            Moves(MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_SMART_STRIKE, MOVE_NIGHT_SLASH);
+        }
+        PLAYER(SPECIES_RILLABOOM) { Level(55); Nature(NATURE_ADAMANT); Ability(ABILITY_GRASSY_SURGE); Item(ITEM_MIRACLE_SEED); Moves(MOVE_FAKE_OUT, MOVE_WOOD_HAMMER, MOVE_GRASSY_GLIDE, MOVE_KNOCK_OFF); }
+        PLAYER(SPECIES_GHOLDENGO) { Level(55); Nature(NATURE_MODEST); Ability(ABILITY_GOOD_AS_GOLD); Item(ITEM_LIFE_ORB); Moves(MOVE_MAKE_IT_RAIN, MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_PROTECT); }
+        OPPONENT(SPECIES_SEISMITOAD) {
+            Level(60); MaxHP(252); HP(188); Nature(NATURE_CALM); Ability(ABILITY_WATER_ABSORB); Item(ITEM_SITRUS_BERRY);
+            Moves(MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_SCALD, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_MANTINE) {
+            Level(60); MaxHP(228); HP(134); Nature(NATURE_CALM); Ability(ABILITY_WATER_ABSORB); Item(ITEM_LEFTOVERS);
+            Moves(MOVE_TAILWIND, MOVE_WIDE_GUARD, MOVE_SCALD, MOVE_ROOST);
+        }
+        OPPONENT(SPECIES_INTELEON) { Level(60); Nature(NATURE_TIMID); Ability(ABILITY_SNIPER); Item(ITEM_SCOPE_LENS); Moves(MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_AIR_SLASH, MOVE_PROTECT); }
+        OPPONENT(SPECIES_PRIMARINA) { Level(60); Nature(NATURE_MODEST); Ability(ABILITY_LIQUID_VOICE); Item(ITEM_THROAT_SPRAY); Moves(MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_CALM_MIND, MOVE_PROTECT); }
+        gTestAiTurnSetupHook = SusieMantineBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_ICE_BEAM, target: opponentRight);
+            MOVE(playerRight, MOVE_LEAF_BLADE, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_SCALD);
+        }
+    }
+}
+
+// E0462 a01 turn 2 as it stood: Grassy Terrain, both player Pokemon a stage
+// slower from Icy Wind, Rillaboom burned by Flame Body, Magmar's Eviolite
+// knocked off, Incineroar fresh.
+static void ConnieLumineonBoard(void)
+{
+    gFieldTimers.terrain = B_TERRAIN_GRASSY;
+    gFieldTimers.terrainTimer = 3;
+    gBattleMons[B_BATTLER_0].statStages[STAT_SPEED] = DEFAULT_STAT_STAGE - 1;
+    gBattleMons[B_BATTLER_2].statStages[STAT_SPEED] = DEFAULT_STAT_STAGE - 1;
+    gBattleStruct->battlerState[B_BATTLER_0].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_3].isFirstTurn = 0;
+}
+
+// Lumineon used Surf beside its own Magmar at 53%, super effective on it, and
+// knocked it out: the damage calculation took Lumineon's own Storm Drain for
+// a redirector that drew the hit away from its partner.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a spread move is not aimed through the partner it knocks out")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_RILLABOOM) {
+            Level(70); MaxHP(285); HP(233); Attack(269); Defense(152); SpAttack(99); SpDefense(125); Speed(145);
+            Nature(NATURE_ADAMANT); Ability(ABILITY_GRASSY_SURGE); Item(ITEM_ASSAULT_VEST); Status1(STATUS1_BURN);
+            Moves(MOVE_FAKE_OUT, MOVE_GRASSY_GLIDE, MOVE_WOOD_HAMMER, MOVE_KNOCK_OFF);
+        }
+        PLAYER(SPECIES_INCINEROAR) {
+            Level(70); MaxHP(278); HP(240); Attack(188); Defense(152); SpAttack(124); SpDefense(215); Speed(110);
+            Nature(NATURE_CAREFUL); Ability(ABILITY_INTIMIDATE); Item(ITEM_SITRUS_BERRY);
+            Moves(MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT);
+        }
+        PLAYER(SPECIES_KARTANA) { Level(70); Speed(245); Nature(NATURE_JOLLY); Ability(ABILITY_BEAST_BOOST); Item(ITEM_FOCUS_SASH); Moves(MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_SMART_STRIKE, MOVE_PROTECT); }
+        PLAYER(SPECIES_GHOLDENGO) { Level(70); Speed(188); Nature(NATURE_MODEST); Ability(ABILITY_GOOD_AS_GOLD); Item(ITEM_CHOICE_SPECS); Moves(MOVE_MAKE_IT_RAIN, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_DAZZLING_GLEAM); }
+        OPPONENT(SPECIES_MAGMAR) {
+            Level(81); MaxHP(272); HP(143); Attack(165); Defense(123); SpAttack(267); SpDefense(167); Speed(180);
+            Nature(NATURE_MODEST); Ability(ABILITY_FLAME_BODY); Attack(148);
+            Moves(MOVE_FOLLOW_ME, MOVE_HEAT_WAVE, MOVE_WILL_O_WISP, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_LUMINEON) {
+            Level(80); MaxHP(275); HP(275); Attack(126); Defense(152); SpAttack(204); SpDefense(167); Speed(247);
+            Nature(NATURE_TIMID); Ability(ABILITY_STORM_DRAIN); Item(ITEM_SITRUS_BERRY);
+            Moves(MOVE_SURF, MOVE_ICY_WIND, MOVE_TAILWIND, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_GASTRODON_WEST) { Level(80); Speed(92); Nature(NATURE_CALM); Ability(ABILITY_STORM_DRAIN); Item(ITEM_LEFTOVERS); Moves(MOVE_SURF, MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_RECOVER); }
+        OPPONENT(SPECIES_SEAKING) { Level(80); Speed(186); Nature(NATURE_ADAMANT); Ability(ABILITY_LIGHTNING_ROD); Item(ITEM_CHOICE_BAND); Moves(MOVE_WATERFALL, MOVE_MEGAHORN, MOVE_DRILL_RUN, MOVE_ICY_WIND); }
+        gTestAiTurnSetupHook = ConnieLumineonBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_WOOD_HAMMER, target: opponentRight);
+            MOVE(playerRight, MOVE_FAKE_OUT, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentRight, MOVE_SURF);
+        }
+    }
+}
+
+// E0446 a03 turn 4 as it stood: Mega Dragonite at +1 Speed after its first
+// Dance and Parting Shot's drops, Druddigon's Haban Berry knocked off, Aaron's
+// Tailwind with a turn left.
+static void AaronDragoniteBoard(void)
+{
+    SetActiveGimmick(B_BATTLER_1, GIMMICK_MEGA);
+    SetGimmickAsActivated(B_BATTLER_1, GIMMICK_MEGA);
+    gBattleMons[B_BATTLER_1].statStages[STAT_SPEED] = DEFAULT_STAT_STAGE + 1;
+    gBattleMons[B_BATTLER_1].statStages[STAT_SPATK] = DEFAULT_STAT_STAGE - 1;
+    gSideStatuses[B_SIDE_OPPONENT] |= SIDE_STATUS_TAILWIND;
+    gSideTimers[B_SIDE_OPPONENT].tailwindTimer = 1;
+    gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
+    gBattleStruct->battlerState[B_BATTLER_3].isFirstTurn = 0;
+}
+
+// Mega Dragonite danced again in front of a Flutter Mane its Dragon Claw and
+// Extreme Speed cannot touch and a Kingambit that resists both. With no foe to
+// spend it on, the boost is worth little.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a boost with no attack to spend it on is not the turn")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_FLUTTER_MANE) { Level(55); MaxHP(143); HP(143); SpAttack(205); SpDefense(170); Speed(225); Nature(NATURE_TIMID); Ability(ABILITY_PROTOSYNTHESIS); Item(ITEM_CHOICE_SPECS); Moves(MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_MYSTICAL_FIRE); }
+        PLAYER(SPECIES_KINGAMBIT) { Level(55); MaxHP(226); HP(226); Attack(225); Defense(154); Speed(77); Nature(NATURE_ADAMANT); Ability(ABILITY_SUPREME_OVERLORD); Item(ITEM_BLACK_GLASSES); Moves(MOVE_KOWTOW_CLEAVE, MOVE_SUCKER_PUNCH, MOVE_IRON_HEAD, MOVE_PROTECT); }
+        PLAYER(SPECIES_INCINEROAR) { Level(55); Speed(88); Nature(NATURE_ADAMANT); Ability(ABILITY_INTIMIDATE); Item(ITEM_SITRUS_BERRY); Moves(MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT); }
+        OPPONENT(SPECIES_DRAGONITE_MEGA) { Level(71); MaxHP(232); HP(232); Attack(271); Defense(190); SpAttack(208); SpDefense(204); Speed(213); Nature(NATURE_ADAMANT); Ability(ABILITY_MULTISCALE); Item(ITEM_DRAGONINITE); Moves(MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_EXTREME_SPEED, MOVE_PROTECT); }
+        OPPONENT(SPECIES_DRUDDIGON) { Level(71); MaxHP(285); HP(154); Attack(266); Defense(155); Speed(95); Nature(NATURE_ADAMANT); Ability(ABILITY_SHEER_FORCE); Moves(MOVE_DRAGON_CLAW, MOVE_FIRE_PUNCH, MOVE_IRON_HEAD, MOVE_PROTECT); }
+        gTestAiTurnSetupHook = AaronDragoniteBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_MOONBLAST, target: opponentLeft);
+            MOVE(playerRight, MOVE_SUCKER_PUNCH, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_DRAGON_DANCE);
+        }
+    }
+}
