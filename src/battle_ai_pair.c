@@ -2263,13 +2263,110 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
 
 // The authored trigger must actually reach the authored recipient this turn:
 // a single-target activation aimed elsewhere is not the interaction.
+// What an authored activation can still give its recipient, as a share of
+// the trigger's full effect: the stat stages its ability would add that the
+// recipient still has room for, or the HP an absorbing ability would restore.
+// A recipient already at the ceiling gains nothing: Tabitha's Salandit
+// Embered a Coalossal whose Steam Engine a foe's Liquidation had already
+// taken to +6 Speed. A trigger this does not price keeps its full reward.
+static u32 PairActivationGainShare(enum BattlerId actor, enum BattlerId partner, enum Move move)
+{
+    enum Type type = GetDynamicMoveType(GetBattlerMon(actor), move, actor,
+        gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor], MON_IN_BATTLE);
+    if (type == TYPE_NONE)
+        type = GetMoveType(move);
+    bool32 damaging = !IsBattleMoveStatus(move);
+    enum Stat stat = NUM_BATTLE_STATS;
+    s32 stages = 0;
+    switch (gAiLogicData->abilities[partner])
+    {
+    case ABILITY_STEAM_ENGINE:
+        if (damaging && (type == TYPE_FIRE || type == TYPE_WATER))
+            stat = STAT_SPEED, stages = 6;
+        break;
+    case ABILITY_WEAK_ARMOR:
+        if (damaging && IsBattleMovePhysical(move))
+            stat = STAT_SPEED, stages = GetConfig(B_WEAK_ARMOR_SPEED) >= GEN_7 ? 2 : 1;
+        break;
+    case ABILITY_JUSTIFIED:
+        if (damaging && type == TYPE_DARK)
+            stat = STAT_ATK, stages = 1;
+        break;
+    case ABILITY_WATER_COMPACTION:
+        if (damaging && type == TYPE_WATER)
+            stat = STAT_DEF, stages = 2;
+        break;
+    case ABILITY_STAMINA:
+        if (damaging)
+            stat = STAT_DEF, stages = 1;
+        break;
+    case ABILITY_THERMAL_EXCHANGE:
+        if (damaging && type == TYPE_FIRE)
+            stat = STAT_ATK, stages = 1;
+        break;
+    case ABILITY_RATTLED:
+        if (damaging && (type == TYPE_BUG || type == TYPE_GHOST || type == TYPE_DARK))
+            stat = STAT_SPEED, stages = 1;
+        break;
+    case ABILITY_ANGER_POINT:
+        if (damaging)
+            stat = STAT_ATK, stages = MAX_STAT_STAGE - DEFAULT_STAT_STAGE;
+        break;
+    case ABILITY_MOTOR_DRIVE:
+        if (type == TYPE_ELECTRIC)
+            stat = STAT_SPEED, stages = 1;
+        break;
+    case ABILITY_LIGHTNING_ROD:
+        if (type == TYPE_ELECTRIC)
+            stat = STAT_SPATK, stages = 1;
+        break;
+    case ABILITY_STORM_DRAIN:
+        if (type == TYPE_WATER)
+            stat = STAT_SPATK, stages = 1;
+        break;
+    case ABILITY_SAP_SIPPER:
+        if (type == TYPE_GRASS)
+            stat = STAT_ATK, stages = 1;
+        break;
+    case ABILITY_WELL_BAKED_BODY:
+        if (type == TYPE_FIRE)
+            stat = STAT_DEF, stages = 2;
+        break;
+    case ABILITY_WIND_RIDER:
+        if (IsWindMove(move))
+            stat = STAT_ATK, stages = 1;
+        break;
+    case ABILITY_DEFIANT:
+        if (IsStatLoweringMove(move))
+            stat = STAT_ATK, stages = 2;
+        break;
+    case ABILITY_COMPETITIVE:
+        if (IsStatLoweringMove(move))
+            stat = STAT_SPATK, stages = 2;
+        break;
+    case ABILITY_VOLT_ABSORB:
+    case ABILITY_WATER_ABSORB:
+    case ABILITY_DRY_SKIN:
+    case ABILITY_EARTH_EATER:
+        return gBattleMons[partner].hp < gBattleMons[partner].maxHP ? 100 : 0;
+    default:
+        break;
+    }
+    if (stat == NUM_BATTLE_STATS)
+        return 100;
+    s32 room = MAX_STAT_STAGE - gBattleMons[partner].statStages[stat];
+    if (room <= 0)
+        return 0;
+    return min(100, room * 100 / stages);
+}
+
 static s32 PairTacticScore(enum BattlerId actor, const struct PairAction *action)
 {
     enum BattlerId partner = GetPartnerBattler(actor);
     if (action->index == PAIR_IDLE || !IsBattlerAlive(actor) || !IsBattlerAlive(partner))
         return 0;
-    if (!(EmeraldChampions_GetTacticKind(actor, partner, action->move)
-          & (EC_BATTLE_TACTIC_ACTIVATE | EC_BATTLE_TACTIC_AFTER_YOU | EC_BATTLE_TACTIC_INSTRUCT)))
+    u32 kind = EmeraldChampions_GetTacticKind(actor, partner, action->move);
+    if (!(kind & (EC_BATTLE_TACTIC_ACTIVATE | EC_BATTLE_TACTIC_AFTER_YOU | EC_BATTLE_TACTIC_INSTRUCT)))
         return 0;
     // A trigger that can be aimed at a single foe has to be aimed at the
     // authored recipient. A side or field trigger - Darius's Tailwind into
@@ -2310,6 +2407,8 @@ static s32 PairTacticScore(enum BattlerId actor, const struct PairAction *action
          || cost >= gBattleMons[partner].hp)
             return 0;
     }
+    if (kind & EC_BATTLE_TACTIC_ACTIVATE)
+        return PAIR_TACTIC_REWARD * (s32)PairActivationGainShare(actor, partner, action->executedMove) / 100;
     return PAIR_TACTIC_REWARD;
 }
 

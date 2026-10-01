@@ -50,10 +50,12 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_TABITHA_MAGMA_HIDEOUT;
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_DRAGAPULT, SPECIES_COALOSSAL), 0);
     EXPECT(!(EmeraldChampions_GetBattlePlan(B_BATTLER_1) & EC_BATTLE_PLAN_ALLY_COMBO));
-    TRAINER_BATTLE_PARAM.opponentA = TRAINER_DARIUS;
-    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_CHATOT, SPECIES_KILOWATTREL), EC_BATTLE_TACTIC_ACTIVATE);
-    TRAINER_BATTLE_PARAM.opponentA = TRAINER_NATE;
-    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_ORANGURU, SPECIES_DELPHOX), EC_BATTLE_TACTIC_INSTRUCT);
+    // Darius and Nate were re-authored without partner tactics; Wattson's
+    // Discharge into Motor Drive and Eli's Instruct loop are the owners now.
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_WATTSON_1;
+    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_ELECTRODE, SPECIES_ELECTIVIRE), EC_BATTLE_TACTIC_ACTIVATE);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_ELI;
+    EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_ORANGURU, SPECIES_FERROTHORN), EC_BATTLE_TACTIC_INSTRUCT);
     TRAINER_BATTLE_PARAM.opponentA = TRAINER_CRISTIAN;
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_1, SPECIES_VOLCANION, SPECIES_COALOSSAL), 0);
     EXPECT_EQ(EmeraldChampions_GetPartnerTactics(B_BATTLER_3, SPECIES_DRAGAPULT, SPECIES_COALOSSAL), 0);
@@ -112,6 +114,25 @@ EWRAM_DATA static const struct Trainer *sAuthoredTrainer = NULL;
     { .species = _species, .gender = TRAINER_MON_RANDOM_GENDER, .heldItem = _item, .ev = _evs, .iv = _ivs, \
       .ability = _ability, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = _offset, .ball = POKEBALL_COUNT, \
       .friendship = 255, .nature = _nature, .dynamaxLevel = MAX_DYNAMAX_LEVEL, .moves = {m1, m2, m3, m4} }
+
+// Any other former team: the trainer's live header (class, field, plan) with
+// the old party and the AI flags it was authored with.
+EWRAM_DATA static struct Trainer sFormerTrainer = {0};
+
+static const struct Trainer *FormerTeam(u16 trainerId, u64 aiFlags, const struct TrainerMon *party, u32 partySize)
+{
+    sFormerTrainer = gTrainers[DIFFICULTY_NORMAL][trainerId];
+    sFormerTrainer.aiFlags = aiFlags;
+    sFormerTrainer.party = party;
+    sFormerTrainer.partySize = partySize;
+    sFormerTrainer.poolSize = 0;
+    sFormerTrainer.overrideTrainer = 0;
+    return &sFormerTrainer;
+}
+
+#define FORMER_AI_FLAGS (AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING \
+    | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO \
+    | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY)
 
 // Use the compiled campaign loadouts and production stat/level generation,
 // including reserves, rather than a second hand-maintained copy of the team.
@@ -1067,7 +1088,34 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker preserves a nonimmune reserv
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC authored strategy: Darius charges Wind Power with the authored Tailwind")
+// Darius's Fortree team before the Corviknight redesign: Chatot's Tailwind
+// was authored to charge Kilowattrel's Wind Power. The redesign keeps neither
+// the pair nor the tactic, so this board keeps the old sets, and the planner's
+// own Wind Power reading now has to find the Tailwind without the authored
+// reward.
+static const struct TrainerMon sDariusBeforeCorviknight[] =
+{
+    FORMER_MON(SPECIES_CHATOT, ITEM_MENTAL_HERB, ABILITY_BIG_PECKS, NATURE_TIMID, 0,
+        TRAINER_PARTY_EVS(252, 0, 4, 252, 0, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_TAILWIND, MOVE_HURRICANE, MOVE_TAUNT, MOVE_PROTECT),
+    FORMER_MON(SPECIES_BRAVIARY_HISUI, ITEM_CHOICE_SPECS, ABILITY_SHEER_FORCE, NATURE_MODEST, 2,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_HURRICANE, MOVE_ESPER_WING, MOVE_HEAT_WAVE, MOVE_U_TURN),
+    FORMER_MON(SPECIES_KILOWATTREL, ITEM_LIFE_ORB, ABILITY_WIND_POWER, NATURE_TIMID, 2,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_THUNDERBOLT, MOVE_HURRICANE, MOVE_VOLT_SWITCH, MOVE_PROTECT),
+    FORMER_MON(SPECIES_UNFEZANT, ITEM_SCOPE_LENS, ABILITY_SUPER_LUCK, NATURE_JOLLY, 3,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_FOCUS_ENERGY, MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_PROTECT),
+    FORMER_MON(SPECIES_TOGEKISS, ITEM_LEFTOVERS, ABILITY_SERENE_GRACE, NATURE_MODEST, 2,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_AIR_SLASH, MOVE_DAZZLING_GLEAM, MOVE_THUNDER_WAVE, MOVE_PROTECT),
+    FORMER_MON(SPECIES_AERODACTYL, ITEM_AERODACTYLITE, ABILITY_PRESSURE, NATURE_JOLLY, -1,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_ROCK_SLIDE, MOVE_DUAL_WINGBEAT, MOVE_EARTHQUAKE, MOVE_PROTECT),
+};
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Darius's former Chatot charges Wind Power with Tailwind")
 {
     GIVEN {
         // Bulky, harmless leads: nothing on the board can be knocked out, so
@@ -1076,6 +1124,8 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Darius charges Wind Power with the 
         PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
         PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
         // Kilowattrel is the authored Wind Power recipient.
+        sAuthoredTrainer = FormerTeam(TRAINER_DARIUS, FORMER_AI_FLAGS | AI_FLAG_ACE_POKEMON,
+            sDariusBeforeCorviknight, ARRAY_COUNT(sDariusBeforeCorviknight));
         AuthoredOpponentWithPartner(TRAINER_DARIUS, 6, FALSE, 2);
     } WHEN {
         TURN {
@@ -1094,13 +1144,32 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Darius charges Wind Power with the 
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC authored strategy: Nate instructs the Delphox that already attacked")
+static void AuthoredMistyGymOpponent(u16 trainerId);
+extern void (*gTestAiTurnSetupHook)(void);
+
+// Eli's room is up, so slow Ferrothorn moves before the Oranguru that repeats
+// it, and both foes already carry Ferrothorn's Leech Seed.
+static void EliSeededFoesBoard(void)
+{
+    gFieldStatuses |= STATUS_FIELD_TRICK_ROOM;
+    gFieldTimers.trickRoomTimer = 4;
+    gFieldTimers.trickRoomSetter = 1 + B_SIDE_OPPONENT;
+    gBattleMons[B_BATTLER_0].volatiles.leechSeed = LEECHSEEDED_BY(B_BATTLER_3);
+    gBattleMons[B_BATTLER_2].volatiles.leechSeed = LEECHSEEDED_BY(B_BATTLER_3);
+}
+
+// Nate's Instruct Delphox was re-authored away; Eli's Oranguru now owns the
+// authored Instruct, with Ferrothorn beside it as the lead recipient. Under
+// Eli's own room the slow Ferrothorn acts first, and Oranguru repeats it.
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Eli's Oranguru instructs the Ferrothorn that already attacked")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
         PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
-        // Delphox is the authored Instruct recipient.
-        AuthoredOpponentWithPartner(TRAINER_NATE, 6, FALSE, 1);
+        // Ferrothorn is the authored Instruct recipient. Both foes already
+        // carry its Leech Seed, so its first action is an attack to repeat.
+        AuthoredMistyGymOpponent(TRAINER_ELI);
+        gTestAiTurnSetupHook = EliSeededFoesBoard;
     } WHEN {
         // Instruct only repeats a move the recipient has already used, so the
         // first turn establishes it and the second is the authored repeat.
@@ -1116,8 +1185,46 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Nate instructs the Delphox that alr
     } THEN {
         EXPECT_EQ(opponentLeft->species, SPECIES_ORANGURU);
         EXPECT(opponentRight->hp > 0);
-        Test_MgbaPrintf("NATE_INSTRUCT_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
+        Test_MgbaPrintf("ELI_INSTRUCT_DECISION_FRAMES=%d", gBattleStruct->aiDelayFrames);
         EXPECT(gBattleStruct->aiDelayFrames <= 72);
+    }
+}
+
+// E0131 (persona med-b3) turn 1: a foe's Liquidation had already set off
+// Coalossal's Steam Engine, +6 Speed, and Salandit still spent its turn on the
+// authored Ember into it - nothing left to gain, and chip on its own partner.
+EWRAM_DATA static u8 sTabithaCoalossalSpeed = 0;
+
+static void TabithaChimneyBoard(void)
+{
+    gBattleMons[B_BATTLER_3].statStages[STAT_SPEED] = sTabithaCoalossalSpeed;
+}
+
+AI_DOUBLE_BATTLE_TEST("EC authored strategy: Tabitha's Salandit Embers Steam Engine only while Speed can rise")
+{
+    u8 speedStage = 0;
+    PARAMETRIZE { speedStage = DEFAULT_STAT_STAGE; }
+    PARAMETRIZE { speedStage = MAX_STAT_STAGE; }
+    GIVEN {
+        // Bulky, harmless leads, as for the other authored activations: the
+        // Ember is chosen for what it does to Coalossal or not at all.
+        PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(20); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(45); HP(600); MaxHP(600); Defense(200); SpDefense(200); Speed(10); Moves(MOVE_CELEBRATE); }
+        AuthoredOpponent(TRAINER_TABITHA_MT_CHIMNEY, 3, FALSE);
+        sTabithaCoalossalSpeed = speedStage;
+        gTestAiTurnSetupHook = TabithaChimneyBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            if (speedStage == DEFAULT_STAT_STAGE)
+                EXPECT_MOVE(opponentLeft, MOVE_EMBER, target: opponentRight);
+            else
+                NOT_EXPECT_MOVE(opponentLeft, MOVE_EMBER);
+        }
+    } THEN {
+        EXPECT_EQ(opponentLeft->species, SPECIES_SALANDIT);
+        EXPECT_EQ(opponentRight->species, SPECIES_COALOSSAL);
     }
 }
 
@@ -1147,11 +1254,12 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Maura escapes her countdown while r
         // the singer can legally leave. The authored preference is to go one
         // turn earlier, while the partner still holds the trap.
         EXPECT_NE(opponentLeft->species, SPECIES_JYNX);
+        // Shadow Tag moved from Gothitelle to Wobbuffet in the redesign.
         if (turns == 3)
-            EXPECT_EQ(opponentRight->species, SPECIES_GOTHITELLE);
+            EXPECT_EQ(opponentRight->species, SPECIES_WOBBUFFET);
         else
         {
-            EXPECT_NE(opponentRight->species, SPECIES_GOTHITELLE);
+            EXPECT_NE(opponentRight->species, SPECIES_WOBBUFFET);
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), 0);
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP), 0);
         }
@@ -2558,6 +2666,31 @@ static const struct EmeraldChampionsBattleSet sBlakeFoeIncineroar = {
     .item = ITEM_SITRUS_BERRY, .nature = NATURE_CAREFUL, .ability = ABILITY_INTIMIDATE, .evs = {252, 0, 4, 0, 252, 0},
 };
 
+// Blake's Mossdeep team before the Mega Starmie redesign: Meowstic-F carried
+// Helping Hand beside the screen-setting Meowstic-M. The redesign drops the
+// Helping Hand, so this board keeps the old sets.
+static const struct TrainerMon sBlakeBeforeStarmite[] =
+{
+    FORMER_MON(SPECIES_MEOWSTIC_M, ITEM_LIGHT_CLAY, ABILITY_PRANKSTER, NATURE_TIMID, 4,
+        TRAINER_PARTY_EVS(252, 0, 4, 252, 0, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_THUNDER_WAVE, MOVE_PSYCHIC),
+    FORMER_MON(SPECIES_MEOWSTIC_F, ITEM_SITRUS_BERRY, ABILITY_COMPETITIVE, NATURE_TIMID, 4,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_PSYCHIC, MOVE_PSYSHOCK, MOVE_HELPING_HAND, MOVE_PROTECT),
+    FORMER_MON(SPECIES_FARIGIRAF, ITEM_ASSAULT_VEST, ABILITY_ARMOR_TAIL, NATURE_QUIET, 4,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 0, 31, 31),
+        MOVE_PSYCHIC, MOVE_HYPER_VOICE, MOVE_ENERGY_BALL, MOVE_TRICK_ROOM),
+    FORMER_MON(SPECIES_MR_MIME, ITEM_FOCUS_SASH, ABILITY_FILTER, NATURE_TIMID, 4,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_ICY_WIND),
+    FORMER_MON(SPECIES_MR_RIME, ITEM_LEFTOVERS, ABILITY_SCREEN_CLEANER, NATURE_MODEST, 4,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_FREEZE_DRY, MOVE_PROTECT),
+    FORMER_MON(SPECIES_STARMIE, ITEM_LIFE_ORB, ABILITY_ANALYTIC, NATURE_TIMID, 5,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_PSYCHIC, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_THUNDERBOLT),
+};
+
 AI_DOUBLE_BATTLE_TEST("EC no payoff: Blake's Meowstic does not Helping Hand a partner's screen")
 {
     GIVEN {
@@ -2567,6 +2700,8 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Blake's Meowstic does not Helping Hand a pa
         PreparedPlayer(SPECIES_YVELTAL, 65, &sBlakeFoeYveltal);
         PreparedPlayer(SPECIES_INCINEROAR, 65, &sBlakeFoeIncineroar);
         // Psychic Blake is met with six badges: cap65.
+        sAuthoredTrainer = FormerTeam(TRAINER_BLAKE, FORMER_AI_FLAGS,
+            sBlakeBeforeStarmite, ARRAY_COUNT(sBlakeBeforeStarmite));
         AuthoredOpponent(TRAINER_BLAKE, 6, FALSE);
     } WHEN {
         TURN {
