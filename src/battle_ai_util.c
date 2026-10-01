@@ -7535,6 +7535,36 @@ bool32 AI_WillFaintFromResidual(enum BattlerId battler)
     return damage != 0 && damage >= gBattleMons[battler].hp;
 }
 
+// Wide Guard stops only moves that reach more than one target. A foe whose
+// whole set the AI knows (Hard knows every loadout) and whose set has none,
+// beside a partner with no move that also hits its own side, leaves it
+// nothing to stop: Matt's Pelipper raised it in front of Rillaboom and a
+// Raging Bolt whose Thunderbolt took it out, and never set its Tailwind. A
+// foe with unrevealed moves keeps Wide Guard to the forecast's pricing.
+static bool32 AI_IsWideGuardUseless(enum BattlerId battlerAtk)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (battler == battlerAtk || !IsBattlerAlive(battler))
+            continue;
+        bool32 ally = IsBattlerAlly(battlerAtk, battler);
+        if (!ally && !IsAiBattlerAware(battler))
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+                if (GetRecordedMove(battler, slot) == MOVE_NONE)
+                    return FALSE;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            enum Move move = gBattleMons[battler].moves[slot];
+            if (move == MOVE_NONE)
+                continue;
+            enum MoveTarget target = AI_GetBattlerMoveTargetType(battler, move);
+            if (target == TARGET_FOES_AND_ALLY || (!ally && target == TARGET_BOTH))
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+
 // Haze resets every stat stage on the field, which buys something only when a
 // foe holds a raised stage or one of ours holds a lowered stage it has a use
 // for. Otherwise the turn resets nothing that matters: Winona's Altaria Hazed a
@@ -7711,6 +7741,10 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
         return gBattleMons[battlerAtk].volatiles.aquaRing;
     case EFFECT_HAZE:
         return AI_HazeResetsNothing(battlerAtk);
+    case EFFECT_PROTECT:
+        if (GetMoveProtectMethod(move) == PROTECT_WIDE_GUARD && GetConfig(B_WIDE_GUARD) >= GEN_6)
+            return AI_IsWideGuardUseless(battlerAtk);
+        break;
     case EFFECT_FAIRY_LOCK:
         return (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK) != 0;
     case EFFECT_PERISH_SONG:

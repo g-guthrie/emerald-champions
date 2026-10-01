@@ -1202,14 +1202,22 @@ static void HandleSetEffectBreakScreen(struct BattleCalcValues *cv, struct SetEf
 
         if (!failed)
         {
-            if (gSideTimers[side].reflectTimer)
-                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << 0;
-            if (gSideTimers[side].lightscreenTimer)
-                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << 1;
-            if (gSideTimers[side].auroraVeilTimer)
-                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << 2;
+            // Name only the screens this hit removes. The chooser still held
+            // the last message's index, and a screen's timer outlived its
+            // removal, so a lone Light Screen was announced as Aurora Veil
+            // too, and a broken Reflect wore off again at its old end turn.
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+            if (gSideStatuses[side] & SIDE_STATUS_REFLECT)
+                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << B_MSG_BREAK_REFLECT;
+            if (gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN)
+                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << B_MSG_BREAK_LIGHT_SCREEN;
+            if (gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
+                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << B_MSG_BREAK_AURORA_VEIL;
 
             gSideStatuses[side] &= ~SIDE_STATUS_SCREEN_ANY;
+            gSideTimers[side].reflectTimer = 0;
+            gSideTimers[side].lightscreenTimer = 0;
+            gSideTimers[side].auroraVeilTimer = 0;
             gBattleScripting.animTurn = 1;
             gBattleScripting.animTargetsHit = 1;
             gBattleStruct->attackAnimPlayed = TRUE; // The whole brick break animation is covered by the move so don't play twice

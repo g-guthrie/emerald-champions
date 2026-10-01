@@ -2410,6 +2410,16 @@ static enum CancelerResult CancelerSubstitute(struct BattleCalcValues *cv)
      || (cv->moveEffect == EFFECT_TRANSFORM && GetConfig(B_TRANSFORM_SUBSTITUTE_FAIL) < GEN_5))
         return CANCELER_RESULT_SUCCESS;
 
+    // Every target already turned the move aside (Protect, a miss, an
+    // immunity) and said so. "But it failed!" belongs to a Substitute block
+    // below, not to a Will-O-Wisp that a Protect has just stopped.
+    if (!IsAnyTargetAffected())
+    {
+        gBattlescriptCurrInstr = BattleScript_MoveEnd;
+        gBattleStruct->eventState.atkCanceler = CANCELER_END;
+        return CANCELER_RESULT_END;
+    }
+
     for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
         if (ShouldSkipFailureCheckOnBattler(cv->battlerAtk, cv->battlerDef))

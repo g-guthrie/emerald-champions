@@ -185,3 +185,38 @@ DOUBLE_BATTLE_TEST("Unseen Fist shows its ability pop-up on each affected target
         }
     }
 }
+
+// E0342: a hit on a foe whose partner used Protect announced breaking a
+// Protect the target never used.
+DOUBLE_BATTLE_TEST("Unseen Fist announces only a Protect its target used")
+{
+    bool32 targetProtects;
+    PARAMETRIZE { targetProtects = FALSE; }
+    PARAMETRIZE { targetProtects = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_URSHIFU) { Ability(ABILITY_UNSEEN_FIST); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_BARBARACLE);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(targetProtects ? opponentLeft : opponentRight, MOVE_PROTECT);
+            MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
+        HP_BAR(opponentLeft);
+        if (targetProtects)
+        {
+            ABILITY_POPUP(playerLeft, ABILITY_UNSEEN_FIST);
+            MESSAGE("The opposing Barbaracle couldn't fully protect itself and got hurt!");
+        }
+        else
+        {
+            NONE_OF {
+                ABILITY_POPUP(playerLeft, ABILITY_UNSEEN_FIST);
+                MESSAGE("The opposing Barbaracle couldn't fully protect itself and got hurt!");
+            }
+        }
+    }
+}

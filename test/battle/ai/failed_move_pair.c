@@ -1036,3 +1036,30 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a setup move is not spent in front of a 
         }
     }
 }
+
+// E0320 turn 0, every attempt: Matt's Pelipper raised Wide Guard against
+// Rillaboom and Raging Bolt, neither of which carries a move that hits more
+// than one target, and Raging Bolt's Thunderbolt took it out before its
+// Tailwind ever came. Hard knows both sets, so the guard has nothing to stop.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Wide Guard is not raised against foes with no spread move")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_RILLABOOM) { Level(55); Nature(NATURE_ADAMANT); Ability(ABILITY_GRASSY_SURGE); Item(ITEM_ASSAULT_VEST); Moves(MOVE_FAKE_OUT, MOVE_GRASSY_GLIDE, MOVE_WOOD_HAMMER, MOVE_KNOCK_OFF); }
+        PLAYER(SPECIES_RAGING_BOLT) { Level(55); Nature(NATURE_MODEST); Ability(ABILITY_PROTOSYNTHESIS); Item(ITEM_BOOSTER_ENERGY); Moves(MOVE_THUNDERCLAP, MOVE_THUNDERBOLT, MOVE_DRACO_METEOR, MOVE_PROTECT); }
+        PLAYER(SPECIES_ARCHALUDON) { Level(55); Nature(NATURE_MODEST); Ability(ABILITY_STAMINA); Item(ITEM_LIFE_ORB); Moves(MOVE_ELECTRO_SHOT, MOVE_FLASH_CANNON, MOVE_DRACO_METEOR, MOVE_PROTECT); }
+        PLAYER(SPECIES_GARDEVOIR) { Level(55); Nature(NATURE_TIMID); Ability(ABILITY_TRACE); Item(ITEM_GARDEVOIRITE); Moves(MOVE_HYPER_VOICE, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_PROTECT); }
+        OPPONENT(SPECIES_PELIPPER) { Level(58); Nature(NATURE_BOLD); Ability(ABILITY_DRIZZLE); Item(ITEM_DAMP_ROCK); Moves(MOVE_WEATHER_BALL, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_WIDE_GUARD); }
+        OPPONENT(SPECIES_ARAQUANID) { Level(59); Nature(NATURE_ADAMANT); Ability(ABILITY_WATER_BUBBLE); Item(ITEM_LIFE_ORB); Moves(MOVE_LIQUIDATION, MOVE_LEECH_LIFE, MOVE_POISON_JAB, MOVE_PROTECT); }
+        OPPONENT(SPECIES_OKIDOGI) { Level(59); Nature(NATURE_ADAMANT); Ability(ABILITY_GUARD_DOG); Item(ITEM_CLEAR_AMULET); Moves(MOVE_DRAIN_PUNCH, MOVE_POISON_JAB, MOVE_KNOCK_OFF, MOVE_PROTECT); }
+        OPPONENT(SPECIES_LUDICOLO) { Level(58); Nature(NATURE_MODEST); Ability(ABILITY_SWIFT_SWIM); Item(ITEM_FOCUS_SASH); Moves(MOVE_FAKE_OUT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_GIGA_DRAIN); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentRight);
+            MOVE(playerRight, MOVE_THUNDERBOLT, target: opponentLeft);
+        }
+    } THEN {
+        // Pelipper may switch out to keep its rain for later, or act; it never spends Wide Guard.
+        EXPECT_EQ(GetMonData(&GetBattlerParty(B_BATTLER_1)[0], MON_DATA_PP4), GetMovePP(MOVE_WIDE_GUARD));
+    }
+}
