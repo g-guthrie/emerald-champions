@@ -53,7 +53,11 @@
 // our side keeps spread moves in hand: the guard never fails on repeat, so the
 // player loses nothing by holding it up. Maxie's Torkoal and Camerupt fed Heat
 // Wave and Eruption into a visible Pelipper's Wide Guard on six of seven turns.
+// Each further raise among its last three moves makes the pattern likelier
+// still: Tate and Liza's Mega Gardevoir Hyper Voiced into a Bastiodon's Wide
+// Guard that went up nine turns running, priced every turn at an even chance.
 #define PAIR_FORECAST_WIDE_GUARD 50
+#define PAIR_FORECAST_WIDE_GUARD_REPEAT 20
 // A redirector drawing a hit it is immune to or absorbs gives up nothing by
 // drawing it again, so it is the likeliest pattern, not an alternative.
 #define PAIR_FORECAST_REDIRECT_SAFE 60
@@ -1196,10 +1200,10 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
     for (u32 foe = 0; foe < ARRAY_COUNT(foes) && ourSpread && count < PAIR_FORECASTS; foe++)
     {
         enum BattlerId guard = foes[foe];
-        bool32 raised = FALSE;
+        u32 raised = 0;
         for (u32 index = 0; index < AI_MOVE_HISTORY_COUNT; index++)
             if (gBattleHistory->moveHistory[guard][index] == MOVE_WIDE_GUARD)
-                raised = TRUE;
+                raised++;
         if (!raised || !IsBattlerAlive(guard) || IsBattlerIncapacitated(guard, gAiLogicData->abilities[guard]))
             continue;
         for (u32 choice = 0; choice < ev->count[guard]; choice++)
@@ -1213,7 +1217,7 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
             {
                 forecasts[count][0] = guarded[0];
                 forecasts[count][1] = guarded[1];
-                weights[count] = PAIR_FORECAST_WIDE_GUARD;
+                weights[count] = PAIR_FORECAST_WIDE_GUARD + PAIR_FORECAST_WIDE_GUARD_REPEAT * (raised - 1);
                 count++;
             }
             break;

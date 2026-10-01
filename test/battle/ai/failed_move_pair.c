@@ -1336,3 +1336,34 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a boost with no attack to spend it on is
         }
     }
 }
+
+// rv3 v032/E0400 a04, a05, a07: Tate and Liza's Mega Gardevoir Hyper Voiced
+// into a Bastiodon's Wide Guard on up to nine turns running. The guard never
+// fails on repeat, yet each raise was priced at the same even chance as the
+// first. Once it has gone up turn after turn, the single-target moves win.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a spread attacker stops feeding a Wide Guard raised turn after turn")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_CHI_YU) { Level(55); Nature(NATURE_TIMID); Ability(ABILITY_BEADS_OF_RUIN); Item(ITEM_CHOICE_SPECS); Moves(MOVE_DARK_PULSE, MOVE_HEAT_WAVE, MOVE_OVERHEAT, MOVE_PSYCHIC); }
+        PLAYER(SPECIES_BASTIODON) { Level(55); MaxHP(204); HP(108); Nature(NATURE_SASSY); Ability(ABILITY_STURDY); Item(ITEM_LEFTOVERS); Moves(MOVE_WIDE_GUARD, MOVE_IRON_HEAD, MOVE_METAL_BURST, MOVE_PROTECT); }
+        PLAYER(SPECIES_PRIMARINA) { Level(55); Nature(NATURE_MODEST); Ability(ABILITY_LIQUID_VOICE); Item(ITEM_CHOICE_SPECS); Moves(MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_PSYCHIC, MOVE_ENERGY_BALL); }
+        PLAYER(SPECIES_INCINEROAR) { Level(55); Nature(NATURE_SASSY); Ability(ABILITY_INTIMIDATE); Item(ITEM_SITRUS_BERRY); Moves(MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT); }
+        OPPONENT(SPECIES_GARDEVOIR_MEGA) { Level(67); Nature(NATURE_QUIET); Ability(ABILITY_PIXILATE); Item(ITEM_GARDEVOIRITE); Moves(MOVE_HYPER_VOICE, MOVE_EXPANDING_FORCE, MOVE_MYSTICAL_FIRE, MOVE_PROTECT); }
+        OPPONENT(SPECIES_CRESSELIA) { Level(67); Nature(NATURE_SASSY); Ability(ABILITY_LEVITATE); Item(ITEM_SITRUS_BERRY); Moves(MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_MOONBLAST, MOVE_LUNAR_BLESSING); }
+        OPPONENT(SPECIES_CLAYDOL) { Level(66); Nature(NATURE_QUIET); Ability(ABILITY_LEVITATE); Item(ITEM_MENTAL_HERB); Moves(MOVE_TRICK_ROOM, MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_PROTECT); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentRight); MOVE(playerRight, MOVE_WIDE_GUARD); }
+        TURN { MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentRight); MOVE(playerRight, MOVE_WIDE_GUARD); }
+        TURN {
+            MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentRight);
+            MOVE(playerRight, MOVE_WIDE_GUARD);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_HYPER_VOICE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_DARK_PULSE, target: opponentRight);
+            MOVE(playerRight, MOVE_WIDE_GUARD);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_HYPER_VOICE);
+        }
+    }
+}
