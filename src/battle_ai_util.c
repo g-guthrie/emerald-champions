@@ -9,6 +9,7 @@
 #include "battle_ai_main.h"
 #include "battle_main.h"
 #include "battle_ai_record.h"
+#include "battle_script_commands.h"
 #include "battle_stat_change.h"
 #include "battle_controllers.h"
 #include "battle_factory.h"
@@ -4512,6 +4513,44 @@ static inline bool32 DoesBattlerBenefitFromAllVolatileStatus(enum BattlerId batt
     return FALSE;
 }
 
+// A status landed on our own partner is the foe's job, not ours. Only a
+// partner that puts the status to work (Guts, Quick Feet, Marvel Scale,
+// Facade, Flare Boost under a burn, Poison Heal or Toxic Boost under poison)
+// or an authored activation is a target: Winona's Altaria burned her own Mega
+// Skarmory when neither foe could take Will-O-Wisp.
+bool32 AI_IsHarmfulToPartner(enum BattlerId battlerAtk, enum BattlerId partner, enum Move move)
+{
+    // The rule governs the AI's own choices; the human's forecast keeps
+    // whatever the human could select.
+    if (partner == battlerAtk || !IsBattlerAlly(battlerAtk, partner) || !BattlerHasAi(battlerAtk)
+     || EmeraldChampions_GetTacticKind(battlerAtk, partner, move))
+        return FALSE;
+    enum Ability ability = gAiLogicData->abilities[partner];
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_NON_VOLATILE_STATUS:
+        if (DoesBattlerBenefitFromAllVolatileStatus(partner, ability))
+            return GetMoveNonVolatileStatus(move) == MOVE_EFFECT_SLEEP;
+        switch (GetMoveNonVolatileStatus(move))
+        {
+        case MOVE_EFFECT_BURN:
+            return !(ability == ABILITY_FLARE_BOOST && HasMoveWithCategory(partner, DAMAGE_CATEGORY_SPECIAL));
+        case MOVE_EFFECT_POISON:
+        case MOVE_EFFECT_TOXIC:
+            return !(ability == ABILITY_POISON_HEAL
+                  || (ability == ABILITY_TOXIC_BOOST && HasMoveWithCategory(partner, DAMAGE_CATEGORY_PHYSICAL)));
+        default:
+            return TRUE;
+        }
+    case EFFECT_YAWN:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_CONFUSE:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 bool32 ShouldPoison(enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
     enum Ability abilityDef = gAiLogicData->abilities[battlerDef];
@@ -7741,6 +7780,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
         return gBattleMons[battlerAtk].volatiles.aquaRing;
     case EFFECT_HAZE:
         return AI_HazeResetsNothing(battlerAtk);
+    case EFFECT_REVIVAL_BLESSING:
+        return GetFirstFaintedPartyIndex(battlerAtk) == PARTY_SIZE;
     case EFFECT_PROTECT:
         if (GetMoveProtectMethod(move) == PROTECT_WIDE_GUARD && GetConfig(B_WIDE_GUARD) >= GEN_6)
             return AI_IsWideGuardUseless(battlerAtk);
@@ -7798,6 +7839,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     enum Ability abilityDef = AI_GetMoldBreakerSanitizedAbility(battlerAtk, abilityAtk,
         aiData->abilities[battlerDef], aiData->holdEffects[battlerDef], move);
     bool32 foe = !IsBattlerAlly(battlerAtk, battlerDef);
+    if (AI_IsHarmfulToPartner(battlerAtk, battlerDef, move))
+        return TRUE;
 
     // What stops any status move at the target: an absorbing or blocking
     // ability (Good as Gold, Soundproof, Overcoat and powder, Psychic

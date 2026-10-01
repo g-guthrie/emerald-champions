@@ -2659,7 +2659,10 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             switch (protectMethod)
             {
             case PROTECT_QUICK_GUARD:
-                if (GetMovePriority(incomingMove) <= 0)
+                // The priority the foe's move has here: Grassy Glide in
+                // Grassy Terrain, Prankster, Gale Wings and Triage included.
+                if (incomingMove == MOVE_NONE || incomingMove == MOVE_UNAVAILABLE
+                 || AI_GetMovePriority(battlerDef, aiData->abilities[battlerDef], incomingMove) <= 0)
                 {
                     ADJUST_SCORE(-10);
                     decreased = TRUE;
@@ -5176,7 +5179,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         switch (protectMethod)
         {
         case PROTECT_QUICK_GUARD:
-            if (incomingMove != MOVE_NONE && GetMovePriority(incomingMove) > 0)
+            if (incomingMove != MOVE_NONE && AI_GetMovePriority(battlerDef, aiData->abilities[battlerDef], incomingMove) > 0)
             {
                 ADJUST_SCORE(ProtectChecks(battlerAtk, battlerDef, move, incomingMove));
             }
@@ -6187,7 +6190,14 @@ static s32 AI_CalcAdditionalEffectScore(enum BattlerId battlerAtk, enum BattlerI
                     if (stage < 0)
                         continue;
 
-                    ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, stat, stage));
+                    // The stage is already the one this user receives, so a
+                    // Contrary Superpower is the boost it reads as here. The
+                    // plain helper refuses every Contrary user outright, and
+                    // Hannah's Malamar never valued its own win condition.
+                    if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
+                        ADJUST_SCORE(IncreaseStatUpScoreContrary(battlerAtk, battlerDef, stat, stage));
+                    else
+                        ADJUST_SCORE(IncreaseStatUpScore(battlerAtk, battlerDef, stat, stage));
                 }
                 break;
             case MOVE_EFFECT_ORDER_UP:

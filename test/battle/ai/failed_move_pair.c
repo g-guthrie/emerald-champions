@@ -1063,3 +1063,98 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Wide Guard is not raised against foes wi
         EXPECT_EQ(GetMonData(&GetBattlerParty(B_BATTLER_1)[0], MON_DATA_PP4), GetMovePP(MOVE_WIDE_GUARD));
     }
 }
+
+// E0289 (build-G a04) turn 5 as it stood: Winona's own Tailwind with a turn
+// left, Kilowattrel already burned beside a Fire-type Hisuian Typhlosion.
+static void WinonaAltariaBoard(void)
+{
+    gSideStatuses[B_SIDE_OPPONENT] |= SIDE_STATUS_TAILWIND;
+    gSideTimers[B_SIDE_OPPONENT].tailwindTimer = 1;
+}
+
+// Neither foe could take Will-O-Wisp, and Altaria aimed it at its own Mega
+// Skarmory instead: "The opposing Skarmory was burned!".
+AI_DOUBLE_BATTLE_TEST("EC failed moves: a status no foe can take is not aimed at the partner")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_KILOWATTREL) {
+            Level(55); MaxHP(159); HP(150); Nature(NATURE_TIMID); Ability(ABILITY_WIND_POWER); Item(ITEM_FOCUS_SASH);
+            Status1(STATUS1_BURN); Moves(MOVE_TAILWIND, MOVE_THUNDERBOLT, MOVE_HURRICANE, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_TYPHLOSION_HISUI) {
+            Level(55); Nature(NATURE_TIMID); Ability(ABILITY_BLAZE); Item(ITEM_CHOICE_SPECS);
+            Moves(MOVE_FLAMETHROWER, MOVE_SHADOW_BALL, MOVE_FOCUS_BLAST, MOVE_OVERHEAT);
+        }
+        OPPONENT(SPECIES_SKARMORY_MEGA) {
+            Level(64); MaxHP(217); HP(85); Nature(NATURE_IMPISH); Ability(ABILITY_STURDY); Item(ITEM_SKARMORITE);
+            Moves(MOVE_BRAVE_BIRD, MOVE_BODY_PRESS, MOVE_ROOST, MOVE_IRON_DEFENSE);
+        }
+        OPPONENT(SPECIES_ALTARIA) {
+            Level(66); Nature(NATURE_BOLD); Ability(ABILITY_NATURAL_CURE); Item(ITEM_LEFTOVERS);
+            Moves(MOVE_TAILWIND, MOVE_WILL_O_WISP, MOVE_HAZE, MOVE_ROOST);
+        }
+        gTestAiTurnSetupHook = WinonaAltariaBoard;
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_FLAMETHROWER, target: opponentRight); }
+    } THEN {
+        EXPECT_EQ(opponentLeft->status1, STATUS1_NONE);
+    }
+}
+
+// E0391 a01 turns 3-7: Hannah's Rabsca stood beside three fallen members and
+// shielded or attacked every turn; Revival Blessing had no value on the
+// one-turn board. A first shield against Talonflame's Brave Bird is fair; the
+// turn after, the revival is worth more than another chip.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Revival Blessing is worth a fallen member")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_TALONFLAME) { Level(55); MaxHP(168); HP(168); Attack(145); Defense(100); SpAttack(92); SpDefense(97); Speed(214); Nature(NATURE_JOLLY); Ability(ABILITY_GALE_WINGS); Item(ITEM_SHARP_BEAK); Moves(MOVE_BRAVE_BIRD, MOVE_FLARE_BLITZ, MOVE_U_TURN, MOVE_PROTECT); }
+        PLAYER(SPECIES_GHOLDENGO) { Level(55); MaxHP(212); HP(212); Attack(79); Defense(126); SpAttack(223); SpDefense(122); Speed(114); Nature(NATURE_MODEST); Ability(ABILITY_GOOD_AS_GOLD); Item(ITEM_LIFE_ORB); Moves(MOVE_MAKE_IT_RAIN, MOVE_SHADOW_BALL, MOVE_FOCUS_BLAST, MOVE_PROTECT); }
+        PLAYER(SPECIES_SCIZOR_MEGA) { Level(55); Speed(93); Nature(NATURE_ADAMANT); Ability(ABILITY_TECHNICIAN); Item(ITEM_SCIZORITE); Moves(MOVE_BULLET_PUNCH, MOVE_U_TURN, MOVE_KNOCK_OFF, MOVE_PROTECT); }
+        PLAYER(SPECIES_AZUMARILL) { Level(55); Speed(77); Nature(NATURE_ADAMANT); Ability(ABILITY_HUGE_POWER); Item(ITEM_CHOICE_BAND); Moves(MOVE_PLAY_ROUGH, MOVE_AQUA_JET, MOVE_LIQUIDATION, MOVE_SUPERPOWER); }
+        PLAYER(SPECIES_INCINEROAR) { HP(0); Speed(88); }
+        PLAYER(SPECIES_FLUTTER_MANE) { HP(0); Speed(225); }
+        OPPONENT(SPECIES_ESPATHRA) { Level(58); MaxHP(196); HP(196); Attack(82); Defense(92); SpAttack(176); SpDefense(92); Speed(199); Nature(NATURE_TIMID); Ability(ABILITY_SPEED_BOOST); Item(ITEM_FOCUS_SASH); Moves(MOVE_LUMINA_CRASH, MOVE_DAZZLING_GLEAM, MOVE_ROOST, MOVE_PROTECT); }
+        OPPONENT(SPECIES_RABSCA) { Level(58); MaxHP(209); HP(209); Attack(72); Defense(122); SpAttack(211); SpDefense(138); Speed(75); Nature(NATURE_MODEST); Ability(ABILITY_SYNCHRONIZE); Item(ITEM_SITRUS_BERRY); Moves(MOVE_REVIVAL_BLESSING, MOVE_BUG_BUZZ, MOVE_PSYCHIC, MOVE_PROTECT); }
+        OPPONENT(SPECIES_GALLADE) { Level(59); Speed(178); Nature(NATURE_ADAMANT); Ability(ABILITY_SHARPNESS); Item(ITEM_GALLADITE); Moves(MOVE_PSYCHO_CUT, MOVE_CLOSE_COMBAT, MOVE_LEAF_BLADE, MOVE_PROTECT); }
+        OPPONENT(SPECIES_MALAMAR) { HP(0); Speed(107); Ability(ABILITY_CONTRARY); Moves(MOVE_SUPERPOWER, MOVE_PSYCHO_CUT, MOVE_KNOCK_OFF, MOVE_PROTECT); }
+        OPPONENT(SPECIES_VELUZA) { HP(0); Speed(140); Moves(MOVE_AQUA_CUTTER, MOVE_PSYCHO_CUT, MOVE_NIGHT_SLASH, MOVE_FINAL_GAMBIT); }
+        OPPONENT(SPECIES_BRUXISH) { HP(0); Speed(182); Moves(MOVE_PSYCHIC_FANGS, MOVE_LIQUIDATION, MOVE_CRUNCH, MOVE_AQUA_JET); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_BRAVE_BIRD, target: opponentRight); MOVE(playerRight, MOVE_SHADOW_BALL, target: opponentLeft); }
+        TURN {
+            MOVE(playerLeft, MOVE_FLARE_BLITZ, target: opponentRight);
+            MOVE(playerRight, MOVE_SHADOW_BALL, target: opponentLeft);
+            EXPECT_MOVE(opponentRight, MOVE_REVIVAL_BLESSING);
+            SEND_OUT(playerLeft, 2);
+        }
+    }
+}
+
+
+// E0243: Crobat never Quick Guarded a known Grassy Glide. The guard was marked
+// down as useless because Grassy Glide's base priority is 0; in Grassy
+// Terrain it moves first, which is exactly what Quick Guard stops.
+AI_SINGLE_BATTLE_TEST("EC failed moves: Quick Guard reads Grassy Glide's priority in Grassy Terrain")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_GRASSY_SURGE; }
+    PARAMETRIZE { ability = ABILITY_OVERGROW; }
+    GIVEN {
+        ASSUME(GetMovePriority(MOVE_GRASSY_GLIDE) == 0);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_RILLABOOM) { Ability(ability); Moves(MOVE_GRASSY_GLIDE); }
+        OPPONENT(SPECIES_CROBAT) { HP(400); MaxHP(400); Moves(MOVE_QUICK_GUARD, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GRASSY_GLIDE); }
+        TURN {
+            MOVE(player, MOVE_GRASSY_GLIDE);
+            if (ability == ABILITY_GRASSY_SURGE)
+                SCORE_GT_VAL(opponent, MOVE_QUICK_GUARD, AI_SCORE_DEFAULT - 10);
+            else
+                SCORE_EQ_VAL(opponent, MOVE_QUICK_GUARD, AI_SCORE_DEFAULT - 10);
+        }
+    }
+}

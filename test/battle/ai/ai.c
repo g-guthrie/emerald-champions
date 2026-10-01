@@ -571,6 +571,32 @@ AI_SINGLE_BATTLE_TEST("AI will choose Superpower over Outrage with Contrary")
     }
 }
 
+// E0391: Hannah's Contrary Malamar valued Superpower as a plain hit. Its
+// Attack and Defense "drops" are the boosts it plays for; against a foe whose
+// item Knock Off would remove, that is what puts Superpower ahead.
+AI_SINGLE_BATTLE_TEST("AI values a Contrary user's Superpower drops as boosts")
+{
+    enum Ability ability;
+
+    PARAMETRIZE { ability = ABILITY_SUCTION_CUPS; }
+    PARAMETRIZE { ability = ABILITY_CONTRARY; }
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_SUPERPOWER) == TYPE_FIGHTING);
+        ASSUME(GetMoveEffect(MOVE_KNOCK_OFF) == EFFECT_KNOCK_OFF);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_VAPOREON) { Item(ITEM_LEFTOVERS); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_MALAMAR) { Ability(ability); Moves(MOVE_SUPERPOWER, MOVE_KNOCK_OFF); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_CELEBRATE);
+            if (ability == ABILITY_CONTRARY)
+                EXPECT_MOVE(opponent, MOVE_SUPERPOWER);
+            else
+                EXPECT_MOVE(opponent, MOVE_KNOCK_OFF);
+        }
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("AI calculates guaranteed criticals and detects critical immunity")
 {
     enum Ability ability;

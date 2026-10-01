@@ -591,6 +591,11 @@ static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u3
                         }
                     }
                 }
+                // A status meant for a foe is never aimed at the partner
+                // instead, even when no foe can take it: that is a failed
+                // move, not a target.
+                if (AI_IsHarmfulToPartner(actor, target, executedMove))
+                    continue;
                 gAiLogicData->partnerMove = MOVE_NONE;
                 // Opposing actions are damage forecasts, not a second full AI
                 // decision. Rescoring the human's entire menu on every switch
@@ -1835,6 +1840,16 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     if (AI_IsMoveCertainToFail(actor, action->target, action->executedMove)
      || AI_IsSpreadMoveWasted(actor, action->executedMove))
         return -10000;
+    // Revival Blessing returns a fallen member at half health: the board
+    // gains that member as a reserve, worth what any half-health member is
+    // worth, paid only where its user lives to act. With no value in the
+    // trial, Hannah's Rabsca stood beside two to four fallen members for
+    // turns and attacked or shielded instead.
+    if (effect == EFFECT_REVIVAL_BLESSING)
+    {
+        u32 healthValue = (plan & EC_BATTLE_PLAN_PRESSURE) ? 25 : 100;
+        return 180 - healthValue + healthValue / 2;
+    }
     // The board a visible Mega leaves is the one this turn's moves most
     // likely meet. A move that fails there is priced as the failure it will
     // almost always be, short of the certain-failure veto.
