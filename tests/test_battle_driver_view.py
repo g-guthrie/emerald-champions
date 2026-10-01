@@ -264,6 +264,26 @@ class DriverViewTests(unittest.TestCase):
                                'cause': 'move', 'attacker': 0, 'move': 'MOVE_HYPER_VOICE'}]}
         self.assertEqual(driver.narrated(log, state, replaced)[0], 'opposing Poochyena lost 50%')
 
+    def test_first_turn_only_moves_explain_the_native_block(self):
+        _, state = self.decoded()
+        session = FakeSession(self.constants, {'trainer_a': 'TRAINER_CALVIN_1'})
+        entry = next(e for e in state['pending_decision'] if e['battler'] == 0)
+        state['actives'][0]['moves'][0].update(move='MOVE_FAKE_OUT')
+        entry['moves'][0].update(move='MOVE_FAKE_OUT', legal=True, blocked_by=[])
+        self.assertIn('move0 Fake Out 9pp @1/3 [first turn out only]',
+                      driver.render_brief(session, state, [], heading='Start'))
+        # Choice-locked into Fake Out after the first turn: this ROM's own mask
+        # blocks every slot, so Struggle (or a switch) is the real game's answer.
+        entry['moves'][0].update(legal=False, blocked_by=['MOVE_LIMITATION_UNUSABLE'])
+        entry['moves'][1].update(legal=False, blocked_by=['MOVE_LIMITATION_CHOICE_ITEM'])
+        entry['must_struggle'] = True
+        text = driver.render_brief(session, state, [], heading='Start')
+        self.assertIn('0 Sylveon: 0:struggle only', text)
+        entry['must_struggle'] = False
+        text = driver.render_brief(session, state, [], heading='Start')
+        self.assertIn('Fake Out 9pp BLOCKED(unusable: not first turn out)', text)
+        self.assertIn('BLOCKED(choice_item)', text)
+
     def test_witness_commands_round_trip_through_the_act_parser(self):
         submitted = {'0': {'action': 'move', 'index': 1, 'move': 'MOVE_PSYSHOCK', 'target': 3, 'mega': True},
                      '2': {'action': 'switch', 'slot': 4},

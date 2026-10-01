@@ -2399,6 +2399,11 @@ TARGET_LABELS = {'both': 'both foes', 'foes_and_ally': 'all others', 'all_battle
                  'user': 'self', 'ally': 'ally', 'user_and_ally': 'own side',
                  'field': 'field', 'opponents_field': 'foe side', 'random': 'random foe'}
 DIFFICULTY_NAMES = {0: 'Easy', 1: 'Medium', 2: 'Hard'}
+# EFFECT_FIRST_TURN_ONLY moves. This ROM uses the Champions rule
+# (B_FIRST_TURN_MOVE, include/config/battle.h): they are selectable only on the
+# user's first turn out (a replacement's first turn counts), then the native
+# legality mask blocks them as "unusable", even under a Choice lock.
+FIRST_TURN_ONLY_MOVES = {'MOVE_FAKE_OUT', 'MOVE_FIRST_IMPRESSION'}
 
 
 def clean_text(text):
@@ -2760,11 +2765,14 @@ def render_brief(session, state, messages, heading):
         options = []
         for move in entry['moves']:
             label = f"move{move['index']} {pretty(move['move'])} {pp.get(move['index'], '?')}pp"
+            first_turn = move['move'] in FIRST_TURN_ONLY_MOVES
             if not move['legal']:
-                reasons = ','.join(b.replace('MOVE_LIMITATION_', '').lower() for b in move['blocked_by'])
+                reasons = ','.join(('unusable: not first turn out' if first_turn and b == 'MOVE_LIMITATION_UNUSABLE'
+                                    else b.replace('MOVE_LIMITATION_', '').lower()) for b in move['blocked_by'])
                 options.append(f'{label} BLOCKED({reasons or "blocked"})')
             else:
-                options.append(f"{label} {targets_text(move, battler)}")
+                options.append(f"{label} {targets_text(move, battler)}"
+                               + (' [first turn out only]' if first_turn else ''))
         if entry['must_struggle']:
             options = [f'{battler}:struggle only']
         lines.append(f"  {battler} {pretty(entry['species'])}{now}: " + ' | '.join(options))
