@@ -185,6 +185,59 @@ bool32 WeatherChecker(enum BattlerId battler, u32 weather, enum FieldEffectOutco
     return partnerResult == desiredResult;
 }
 
+// Whether a member waiting in this battler's party, off the field, is built
+// for the weather: its ability, a move the weather powers or makes sure, or
+// the typing the weather defends. The field check above reads only the two
+// bodies on the field, so an authored setter leading beside a partner the
+// weather does nothing for never set it for the back line it exists for:
+// Archie's Prankster Sableye opens beside Mightyena so that its Damp Rock rain
+// carries Swift Swim Eelektrik and Lombre.
+bool32 AI_ReserveBenefitsFromWeather(enum BattlerId battler, u32 weather)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+    u32 onField = gBattlerPartyIndexes[battler];
+    u32 partnerOnField = IsDoubleBattle() ? gBattlerPartyIndexes[GetPartnerBattler(battler)] : onField;
+    s32 lastId = GetAILastPartyIndex(battler);
+    for (s32 index = 0; index < lastId; index++)
+    {
+        struct Pokemon *mon = &party[index];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+        if ((u32)index == onField || (u32)index == partnerOnField || species == SPECIES_NONE
+         || species == SPECIES_EGG || GetMonData(mon, MON_DATA_HP) == 0)
+            continue;
+        enum Ability ability = GetMonAbility(mon);
+        if ((weather & (B_WEATHER_RAIN | B_WEATHER_SUN)) && ability != ABILITY_PROTOSYNTHESIS
+         && GetItemHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_UTILITY_UMBRELLA)
+            continue;
+        if (DoesAbilityBenefitFromWeather(ability, weather))
+            return TRUE;
+        bool32 rock = GetSpeciesType(species, 0) == TYPE_ROCK || GetSpeciesType(species, 1) == TYPE_ROCK;
+        bool32 ice = GetSpeciesType(species, 0) == TYPE_ICE || GetSpeciesType(species, 1) == TYPE_ICE;
+        if (((weather & B_WEATHER_SANDSTORM) && rock) || ((weather & B_WEATHER_ICY_ANY) && ice))
+            return TRUE;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            enum Move move = GetMonData(mon, MON_DATA_MOVE1 + slot);
+            if (move == MOVE_NONE)
+                continue;
+            enum BattleMoveEffects effect = GetMoveEffect(move);
+            bool32 damaging = !IsBattleMoveStatus(move);
+            if (effect == EFFECT_WEATHER_BALL)
+                return TRUE;
+            if ((weather & B_WEATHER_RAIN)
+             && ((damaging && GetMoveType(move) == TYPE_WATER) || MoveAlwaysHitsInRain(move) || move == MOVE_ELECTRO_SHOT))
+                return TRUE;
+            if ((weather & B_WEATHER_SUN)
+             && ((damaging && GetMoveType(move) == TYPE_FIRE) || effect == EFFECT_HYDRO_STEAM
+                 || (IsLightSensitiveMove(move) && !IsSunlightMoveAbility(ability))))
+                return TRUE;
+            if ((weather & B_WEATHER_ICY_ANY) && (MoveAlwaysHitsInHailSnow(move) || effect == EFFECT_AURORA_VEIL))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum FieldEffectOutcome desiredResult)
 {
     enum FieldEffectOutcome result = FIELD_EFFECT_NEUTRAL;

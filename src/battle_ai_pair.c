@@ -1878,7 +1878,12 @@ static s32 PairPlanScoreInner(enum BattlerId actor, const struct PairAction *act
     {
         if ((gBattleWeather & PairWeatherActiveMask(move)) || (gBattleWeather & B_WEATHER_PRIMAL_ANY))
             return -10000;
-        if (HasWeatherEffect() && (plan & PairWeatherPlan(move)) && ShouldSetWeather(actor, PairWeatherMask(move)))
+        // An authored weather is set for the back line too, when neither
+        // body on the field is worse off under it.
+        if (HasWeatherEffect() && (plan & PairWeatherPlan(move))
+         && (ShouldSetWeather(actor, PairWeatherMask(move))
+             || (!ShouldClearWeather(actor, PairWeatherMask(move))
+                 && AI_ReserveBenefitsFromWeather(actor, PairWeatherMask(move)))))
             return 90;
     }
     if (effect == EFFECT_TAILWIND)

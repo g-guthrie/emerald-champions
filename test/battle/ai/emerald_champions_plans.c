@@ -3015,3 +3015,42 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: a search the clock cuts short still sta
         gTestPairBudgetSpent = FALSE;
     }
 }
+
+// rv2 v002/E0052, every attempt: Archie's plan opens with Sableye's Prankster
+// Rain Dance so the Damp Rock rain carries the Swift Swim back line, but the
+// rain was priced only for the two bodies on the field. Neither Sableye nor
+// Mightyena gains from rain, so Sableye used Knock Off or Will-O-Wisp and the
+// rain came late or never.
+AI_DOUBLE_BATTLE_TEST("EC weather plan: Archie's Sableye sets rain on turn one for the Swift Swim back line")
+{
+    u32 lead;
+    PARAMETRIZE { lead = 0; }
+    PARAMETRIZE { lead = 1; }
+    GIVEN {
+        if (lead == 0)
+        {
+            PLAYER(SPECIES_INDEEDEE_M) { Level(30); Speed(71); Ability(ABILITY_PSYCHIC_SURGE); Item(ITEM_LIFE_ORB); Nature(NATURE_MODEST); Moves(MOVE_EXPANDING_FORCE, MOVE_ENERGY_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT); }
+            PLAYER(SPECIES_GASTRODON_WEST) { Level(30); Speed(37); Ability(ABILITY_STORM_DRAIN); Item(ITEM_LEFTOVERS); Nature(NATURE_MODEST); Moves(MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT); }
+        }
+        else
+        {
+            PLAYER(SPECIES_FLOETTE_ETERNAL) { Level(30); Speed(77); Ability(ABILITY_FLOWER_VEIL); Item(ITEM_LIFE_ORB); Nature(NATURE_MODEST); Moves(MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_GIGA_DRAIN, MOVE_PROTECT); }
+            PLAYER(SPECIES_HARIYAMA) { Level(30); Speed(44); Ability(ABILITY_THICK_FAT); Item(ITEM_EXPERT_BELT); Nature(NATURE_ADAMANT); Moves(MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT); }
+        }
+        AuthoredOpponent(TRAINER_ARCHIE_SLATEPORT, 2, FALSE);
+    } WHEN {
+        TURN {
+            if (lead == 0)
+            {
+                MOVE(playerLeft, MOVE_DAZZLING_GLEAM);
+                MOVE(playerRight, MOVE_EARTH_POWER, target: opponentRight);
+            }
+            else
+            {
+                MOVE(playerLeft, MOVE_MOONBLAST, target: opponentRight);
+                MOVE(playerRight, MOVE_FAKE_OUT, target: opponentRight);
+            }
+            EXPECT_MOVE(opponentLeft, MOVE_RAIN_DANCE);
+        }
+    }
+}
