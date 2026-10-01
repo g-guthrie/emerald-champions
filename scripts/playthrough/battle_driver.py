@@ -13,7 +13,8 @@ no screenshots, no story receipts. It never earns campaign progress.
     act     validate and submit this decision point's commands, advance, report
     result  print the final outcome
     replay  witness check: re-run a finished run's seed, party, level deltas,
-            ability trials and command log in a fresh run dir; report if identical
+            ability trials, proposed foe teams and command log in a fresh run
+            dir; report if identical
 
 start/state/act --brief print the compact per-turn player view instead of JSON.
 Nothing printed before the player commits shows the AI's pending action, and
@@ -1352,7 +1353,7 @@ def command_start(args):
     # `replay` can re-run the same battle. The seed itself stays in session.json.
     start_args = {key: getattr(args, key, None) for key in (
         'battle_kind', 'trainer', 'trainer2', 'partner', 'difficulty', 'cap', 'baseline',
-        'map', 'weather', 'level_delta', 'ability_trial')}
+        'map', 'weather', 'level_delta', 'ability_trial', 'foe_team', 'foe_team_b')}
     level_delta = parse_level_delta(getattr(args, 'level_delta', None))
     session.dir.mkdir(parents=True, exist_ok=True)
     # A concurrent session may rebuild the root ROM at any moment, so a stamped
@@ -1393,6 +1394,7 @@ def command_start(args):
         fail(f'unknown trainer identifier: {name_b}')
     partners = resolve_defines([('constants/battle_partner.h', partner_name)])
     difficulty = {'easy': 0, 'medium': 1, 'normal': 1, 'hard': 2}[args.difficulty]
+    foe_blocks = load_foe_blocks(args, kind, name_a, name_b, constants)
     source_scenario = json.loads(Path(args.scenario).read_text()) if args.scenario else None
     if kind != 'trainer' and source_scenario.get('battle_kind') != kind:
         fail('scripted wild scenario disagrees with requested native battle kind')
@@ -1430,6 +1432,7 @@ def command_start(args):
         'level_delta': {'spec': start_args['level_delta'], 'applied': level_delta_labels(level_delta)},
         'ability_trial': {'spec': start_args['ability_trial'],
                           'applied': ability_trial_labels(ability_trial, constants)},
+        'foe_team': {block['owner']: block['record'] for block in foe_blocks.values()},
         'scope': ('Synthetic headless benchmark: native debug trainer lifecycle, native AI, '
                   'user-authorized stage-legal preparation. Not earned campaign play.'),
     }
@@ -1442,6 +1445,9 @@ def command_start(args):
             if source != target.resolve():
                 shutil.copy2(source, target)
             session.meta[key] = copy_name
+    for owner, block in foe_blocks.items():
+        # The exact block text is the run's input; replay reads this copy.
+        (session.dir / FOE_TEAM_COPIES[owner]).write_text(block['text'])
     if kind != 'trainer':
         session.meta['scope'] = (f'Synthetic headless {kind} fixture using actual native factory/format/callback; '
                                  'defeat-only actions. No capture, acquisition or earned campaign-progress claim.')
@@ -1529,6 +1535,17 @@ def command_start(args):
         battle_writes.append((syms['gEcAgentBattleTrialRejected'], 0))
     elif any(ability_trial):
         fail('this build predates gEcAgentBattleAbilityTrial; --ability-trial needs a newer headless ROM')
+    # A proposed teams-file block per opposing owner (--foe-team), armed in the
+    # same frame-0 writes as the start command: an extra emulated frame would
+    # shift the RNG and make the battle incomparable with an ordinary start.
+    # The mailbox is zero after the clean boot, so only nonzero words are sent.
+    if foe_blocks:
+        if 'gEcAgentBattleFoeTeam' not in syms:
+            fail('this build predates gEcAgentBattleFoeTeam; --foe-team needs a newer headless ROM')
+        base = syms['gEcAgentBattleFoeTeam']
+        battle_writes += [(base + 4 * (owner * FOE_TEAM_WORDS + index), value)
+                          for owner, block in foe_blocks.items()
+                          for index, value in enumerate(block['words']) if value]
     if 'gEcAgentBattleKind' in syms:
         battle_writes.append((syms['gEcAgentBattleKind'], BATTLE_KINDS[kind]))
     elif kind != 'trainer':
@@ -1580,7 +1597,14 @@ def command_start(args):
     # The authored party exists once the bridge accepts the battle (the roster
     # audit reads it here too); checked again at the first decision point.
     check_trials()
-    if kind != 'birch_rescue':
+    if foe_blocks:
+        check_foe_teams(session, foe_blocks, constants)
+    if kind != 'birch_rescue' and foe_blocks:
+        # The source certificate describes the authored party, which the
+        # proposed block replaced; the read-back is checked against the block.
+        audit_opponent_roster(session, None)
+        session.meta['opponent_identity'] = verify_foe_roster(session, foe_blocks, ability_trial, constants)
+    elif kind != 'birch_rescue':
         session.meta['opponent_identity'] = audit_opponent_roster(session, source_scenario)
     view, frames_run, stopped = advance_to_halt(
         session, [], png=(session.dir / 'start.png') if args.png else None)
@@ -1607,9 +1631,14 @@ def command_start(args):
     # and knowing it would let a caller rehearse the same RNG stream.
     applied = session.meta['level_delta']['applied']
     trials = session.meta['ability_trial']['applied']
+    foe_teams = {owner: {key: record[key] for key in ('file', 'trainer', 'encounter', 'members', 'sha256')}
+                 for owner, record in session.meta['foe_team'].items()}
     if getattr(args, 'brief', False):
         text = render_brief(session, state, narrated(log, None, state), heading='Battle start')
         notes = ''
+        for owner, record in foe_teams.items():
+            notes += (f"\nProposed foe team {owner}: {record['file']} ({record['encounter']} "
+                      f"{pretty(record['trainer'])}, {record['members']} members, sha {record['sha256'][:12]})")
         if applied:
             notes += ('\nOpposing level deltas (authored member order): '
                       + ', '.join(f'{k}{v:+d}' for k, v in applied.items()))
@@ -1620,7 +1649,8 @@ def command_start(args):
     else:
         # Deltas and trials are the caller's own tuning choice, not hidden
         # information about the battle.
-        print(json.dumps({**state, 'level_delta': applied, 'ability_trial': trials}, indent=2))
+        print(json.dumps({**state, 'level_delta': applied, 'ability_trial': trials,
+                          'foe_team': foe_teams}, indent=2))
 
 
 BATTLE_START_OK = 1
@@ -2208,6 +2238,219 @@ def command_result(args):
     (session.dir / 'result.json').write_text(
         json.dumps({**result, 'seed': session.meta['seed']}, indent=2) + '\n')
     print(json.dumps(result, indent=2))
+
+
+# ------------------------------------------------------- proposed foe teams
+
+# Mirrors struct EcAgentFoeTeam (include/emerald_champions_agent_battle.h):
+# 11 header words, 8 tactics of 4 words, then 6 members of 22 words.
+FOE_TEAM_SCHEMA, FOE_TEAM_HEADER, FOE_TEAM_TACTICS, FOE_TEAM_MEMBER_WORDS = 1, 11, 8, 22
+FOE_TEAM_WORDS = FOE_TEAM_HEADER + 4 * FOE_TEAM_TACTICS + FOE_TEAM_MEMBER_WORDS * 6
+FOE_TEAM_COPIES = ('foe-team-A.txt', 'foe-team-B.txt')
+
+
+def resolve_wide(header, names):
+    """64-bit constants (AI_FLAG_* are u64 bits) by compiling them."""
+    source = ('#include <stdio.h>\n#include <stdint.h>\ntypedef uint64_t u64;\n'
+              f'#include "{header}"\nint main(void) {{\n'
+              + ''.join(f'printf("{name} %llu\\n", (unsigned long long)({name}));\n' for name in names)
+              + 'return 0; }\n')
+    with tempfile.TemporaryDirectory(prefix='ec-battle-') as tmp:
+        exe = str(Path(tmp) / 'constants')
+        built = subprocess.run([shutil.which('cc'), '-Iinclude', '-x', 'c', '-', '-o', exe],
+                               input=source, cwd=ROOT, text=True, capture_output=True)
+        if built.returncode:
+            unknown = sorted(name for name in names if name in built.stderr)
+            fail(f'unknown constant(s) in {header}: {", ".join(unknown) or built.stderr.strip()[:300]}')
+        out = subprocess.run([exe], text=True, check=True, capture_output=True).stdout
+    return {name: int(value) for name, value in (line.split() for line in out.splitlines())}
+
+
+def plan_constants():
+    """{'EC_BATTLE_PLAN_RAIN': 2, 'EC_BATTLE_TACTIC_ACTIVATE': 1, ...} from the plan header."""
+    text = (ROOT / 'include/emerald_champions_battle_plan.h').read_text()
+    return {name: 1 << int(bit) for name, bit in
+            re.findall(r'\b(EC_BATTLE_(?:PLAN|TACTIC)_[A-Z0-9_]+)\s*=\s*1\s*<<\s*(\d+)', text)}
+
+
+def starting_status_indices():
+    """enum StartingStatus values: the order of STARTING_STATUS_DEFINITIONS."""
+    text = (ROOT / 'include/constants/battle.h').read_text()
+    body = text[text.index('#define STARTING_STATUS_DEFINITIONS(F)'):]
+    body = body[:body.index('\n\n')]
+    return {name: index for index, name in enumerate(re.findall(r'F\((STARTING_STATUS_[A-Z0-9_]+),', body))}
+
+
+def foe_ai_flag_names(branch):
+    """The AI flags trainers.party compiles for this block (implement script)."""
+    import emerald_champions_teams as teams
+    import implement_emerald_champions_master_battles as implement
+    flags = list(implement.AI_PROFILES[teams.CLASSES[branch.cls]])
+    for trait in branch.ai:
+        if trait not in flags:
+            flags.append(trait)
+    if {'MOVE_' + move for mon in branch.mons for move in mon.moves} & implement.SUICIDE_MOVES \
+            and 'Will Suicide' not in flags:
+        flags.append('Will Suicide')
+    return ['AI_FLAG_' + flag.upper().replace(' ', '_') for flag in flags]
+
+
+def foe_constant(constants, table, prefix, name, where):
+    token = name if name.startswith(prefix) else prefix + name
+    value = constants[table]['values'].get(token)
+    if value is None:
+        fail(f'{where}: unknown {table} {token}')
+    return value
+
+
+def encode_foe_team(branch, trainer_id, constants):
+    """The block as the native mailbox words (struct EcAgentFoeTeam)."""
+    where = f'E{branch.encounter:04d} {branch.trainer}'
+    flags = resolve_wide('constants/battle_ai.h', foe_ai_flag_names(branch))
+    ai = 0
+    for value in flags.values():
+        ai |= value
+    plans = plan_constants()
+    statuses = starting_status_indices()
+    status_mask = 0
+    for name in branch.field:
+        index = statuses.get('STARTING_STATUS_' + name)
+        if index is None:
+            fail(f'{where}: unknown starting field {name}')
+        status_mask |= 1 << index
+    words = [FOE_TEAM_SCHEMA, trainer_id, len(branch.mons),
+             int(branch.cls in {'casual', 'regular'}),
+             ai & 0xFFFFFFFF, ai >> 32,
+             sum(plans['EC_BATTLE_PLAN_' + name] for name in branch.strategy),
+             0x80 | branch.mega_slots if branch.mega_slots is not None else 0,
+             status_mask & 0xFFFFFFFF, status_mask >> 32, len(branch.tactics)]
+    if len(branch.tactics) > FOE_TEAM_TACTICS:
+        fail(f'{where}: at most {FOE_TEAM_TACTICS} tactics fit the native override')
+    tactics = []
+    for kind, actor, move, recipient in branch.tactics:
+        tactics += [foe_constant(constants, 'species', 'SPECIES_', actor, where),
+                    foe_constant(constants, 'species', 'SPECIES_', recipient, where),
+                    0 if move == 'NONE' else foe_constant(constants, 'move', 'MOVE_', move, where),
+                    plans['EC_BATTLE_TACTIC_' + kind]]
+    words += tactics + [0] * (4 * FOE_TEAM_TACTICS - len(tactics))
+    for mon in branch.mons:
+        moves = [foe_constant(constants, 'move', 'MOVE_', move, where) for move in mon.moves]
+        words += [foe_constant(constants, 'species', 'SPECIES_', mon.species, where),
+                  foe_constant(constants, 'item', 'ITEM_', mon.item, where),
+                  foe_constant(constants, 'ability', 'ABILITY_', mon.ability, where),
+                  foe_constant(constants, 'nature', 'NATURE_', mon.nature, where),
+                  mon.offset & 0xFFFFFFFF, mon.friendship,
+                  *[int(value) for value in mon.ivs.split('/')],
+                  *[int(value) for value in mon.evs.split('/')],
+                  *moves, *[0] * (4 - len(moves))]
+    words += [0] * (FOE_TEAM_WORDS - len(words))
+    return words, sorted(flags)
+
+
+def load_foe_blocks(args, kind, name_a, name_b, constants):
+    """{owner: block} for --foe-team / --foe-team-b, parsed and checked as the
+    teams file's own --check does (move legality, strategy coherence, EVs, IVs,
+    tactics, Mega slots against stone holders). Abilities, species, items and
+    moves are validated again natively (gEcAgentBattleFoeTeamRejected)."""
+    import emerald_champions_teams as teams
+    wanted = [(0, getattr(args, 'foe_team', None), name_a), (1, getattr(args, 'foe_team_b', None), name_b)]
+    blocks = {}
+    for owner, path, trainer in wanted:
+        if not path:
+            continue
+        flag = '--foe-team' + ('-b' if owner else '')
+        if kind != 'trainer':
+            fail(f'{flag} replaces an authored trainer party; this battle kind has none')
+        if trainer is None:
+            fail(f'{flag}: this battle has no second opposing trainer')
+        try:
+            branches = teams.read_teams(Path(path))
+        except SystemExit as error:
+            fail(f'{flag} {path}: {error}')
+        if len(branches) != 1:
+            fail(f'{flag} {path}: expected exactly one ## E#### TRAINER_X block, found {len(branches)}')
+        branch = branches[0]
+        if branch.trainer != trainer:
+            fail(f'{flag} {path}: the block is for {branch.trainer}, but this battle\'s owner '
+                 f'{"B" if owner else "A"} is {trainer}')
+        blocks[owner] = {'owner': 'AB'[owner], 'branch': branch, 'path': Path(path),
+                         'text': Path(path).read_text()}
+    if not blocks:
+        return {}
+    branches = [block['branch'] for block in blocks.values()]
+    violations, _notes = teams.check_move_legality(branches)
+    violations += teams.check_strategy_coherence(branches)
+    if violations:
+        fail('--foe-team is not legal:\n  ' + '\n  '.join(violations))
+    for owner, block in blocks.items():
+        branch = block['branch']
+        words, flags = encode_foe_team(branch, constants['trainers'][branch.trainer], constants)
+        block['words'] = words
+        block['record'] = {
+            'file': FOE_TEAM_COPIES[owner], 'source': str(block['path'].resolve()),
+            'sha256': hashlib.sha256(block['text'].encode()).hexdigest(),
+            'trainer': branch.trainer, 'encounter': f'E{branch.encounter:04d}', 'class': branch.cls,
+            'members': len(branch.mons), 'ai_flags': flags, 'strategy': branch.strategy,
+            'mega_slots': branch.mega_slots, 'tactics': [list(t) for t in branch.tactics],
+            'field': branch.field,
+        }
+    return blocks
+
+
+def check_foe_teams(session, blocks, constants):
+    """Fail loudly unless the ROM armed every proposed block."""
+    syms = session.syms
+    addresses = [syms['gEcAgentBattleFoeTeamApplied'], syms['gEcAgentBattleFoeTeamRejected']]
+    values, _, _ = session.run(frames=1, reads=addresses, advance=False)
+    applied, rejected = (values[address] for address in addresses)
+    problems = []
+    for owner, block in blocks.items():
+        branch = block['branch']
+        bad = [f"member {index + 1} {branch.mons[index].species}" for index in range(len(branch.mons))
+               if rejected >> (owner * 6 + index) & 1]
+        if bad:
+            problems.append(f"owner {'AB'[owner]}: native validation refused " + ', '.join(bad)
+                            + ' (species, item, nature, Ability for the species, move or IV/EV range)')
+        if rejected >> (12 + owner) & 1:
+            problems.append(f"owner {'AB'[owner]}: armed for a different trainer or a bad member count")
+        if not applied >> owner & 1 and not bad:
+            problems.append(f"owner {'AB'[owner]}: the proposed team was not applied")
+    session.meta['foe_team_native'] = {'applied': applied, 'rejected': rejected}
+    session.meta_path.write_text(json.dumps(session.meta, indent=2) + '\n')
+    if problems:
+        fail('--foe-team refused: ' + '; '.join(problems))
+
+
+def verify_foe_roster(session, blocks, ability_trial, constants):
+    """The party the ROM generated, read back, must be the proposed block."""
+    roster = json.loads((session.dir / 'opponent-roster.json').read_text())
+    species_values = constants['species']['values']
+    owners = {}
+    for owner, block in blocks.items():
+        branch = block['branch']
+        team = roster['owners'][owner]['team']
+        if not team or len(team) > len(branch.mons):
+            fail(f"--foe-team read-back: owner {'AB'[owner]} has {len(team)} members for a "
+                 f"{len(branch.mons)}-member block")
+        for index, (mon, native) in enumerate(zip(branch.mons, team)):
+            trial = ability_trial[owner * 6 + index]
+            expected = {
+                'species': 'SPECIES_' + mon.species, 'item': 'ITEM_' + mon.item,
+                'ability': name_of(constants['ability'], trial, 'ABILITY_') if trial else 'ABILITY_' + mon.ability,
+                'nature': 'NATURE_' + mon.nature, 'friendship': mon.friendship,
+                'evs': [int(value) for value in mon.evs.split('/')],
+                'ivs': [int(value) for value in mon.ivs.split('/')],
+                'moves': ['MOVE_' + move for move in mon.moves] + ['MOVE_NONE'] * (4 - len(mon.moves)),
+            }
+            for key, value in expected.items():
+                same = (same_species_identity(value, native[key], species_values) if key == 'species'
+                        else value == native[key])
+                if not same:
+                    fail(f"--foe-team read-back: owner {'AB'[owner]} member {index + 1} {key} is "
+                         f"{native[key]}, the block says {value}")
+        owners['AB'[owner]] = [{'species': native['species'], 'level': native['level']} for native in team]
+    return {'status': 'foe_team_override', 'owners': owners, 'roster_sha256': hashlib.sha256(
+        (session.dir / 'opponent-roster.json').read_bytes()).hexdigest()}
 
 
 # ------------------------------------------------------------ level deltas
@@ -2882,6 +3125,15 @@ def replay_start_args(meta, source, target):
         party = copy if copy.is_file() else Path(meta.get('party_manifest') or '')
         if not party.is_file() or hashlib.sha256(party.read_bytes()).hexdigest() != meta['party_sha256']:
             fail('the original party manifest is missing or changed since that battle started')
+    for owner, key in ((0, 'foe_team'), (1, 'foe_team_b')):
+        record = (meta.get('foe_team') or {}).get('AB'[owner])
+        if record:
+            copy = source / FOE_TEAM_COPIES[owner]
+            if not copy.is_file() or hashlib.sha256(copy.read_bytes()).hexdigest() != record['sha256']:
+                fail(f'the original proposed foe team {owner and "B" or "A"} is missing or changed')
+            arguments[key] = str(copy)
+        else:
+            arguments[key] = None
     scenario = None
     if meta.get('scenario') is not None:
         copy = source / meta.get('scenario_copy', SCENARIO_COPY)
@@ -2961,6 +3213,7 @@ def command_replay(args):
         'start_arguments': basis,
         'level_delta': (meta.get('level_delta') or {}).get('applied', {}),
         'ability_trial': (meta.get('ability_trial') or {}).get('applied', {}),
+        'foe_team': {owner: record.get('file') for owner, record in (meta.get('foe_team') or {}).items()},
         'build': "the original run's pinned ROM/ELF (" + str(meta.get('rom_sha256', ''))[:12] + ')',
         'original_run': str(source), 'replay_run': str(target),
     }
@@ -3010,6 +3263,12 @@ def main():
                        help='opposing per-member trial abilities in AUTHORED member order: e.g. '
                             'A2=ABILITY_RAMPAGE,B0=ABILITY_SNOW_WARNING; refused natively (and the '
                             'start fails) when not legal for that species')
+    start.add_argument('--foe-team', dest='foe_team',
+                       help='play a proposed team: one authored teams-file block (## E#### TRAINER_X '
+                            'header, strategy/mega_slots/ai/plan/crack and member lines) that replaces '
+                            "owner A's party, AI flags, plan, Mega slots, tactics and field for this battle")
+    start.add_argument('--foe-team-b', dest='foe_team_b',
+                       help='the same for the second opposing owner (two-opponent and multi battles)')
     start.add_argument('--png', action='store_true')
     start.add_argument('--brief', action='store_true', help=BRIEF_HELP)
     start.set_defaults(func=command_start)

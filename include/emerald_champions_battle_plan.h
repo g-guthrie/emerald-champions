@@ -43,6 +43,13 @@ struct EmeraldChampionsBattleTactic
 u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler);
 bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler);
 u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler);
+#if EC_HEADLESS_FIXTURES
+// The compiled plan, Mega permissions and tactics of one trainer, for the
+// headless benchmark's per-battle copy (emerald_champions_agent_battle.c).
+// Returns the trainer's tactic count, which may exceed maxTactics.
+u32 EmeraldChampions_GetCompiledPlan(u32 trainer, u32 *plan, u32 *megaPermissions,
+                                     struct EmeraldChampionsBattleTactic *tactics, u32 maxTactics);
+#endif
 // Cheap reserve-pair screening. A match only opens a candidate for evaluation;
 // native legality, activation survival and resulting payoff still decide it.
 u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species species, enum Species partnerSpecies);

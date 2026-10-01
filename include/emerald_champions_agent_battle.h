@@ -155,10 +155,78 @@ extern volatile u32 gEcAgentBattleAbilityTrial[PARTY_SIZE * 2];
 extern volatile u32 gEcAgentBattleTrialRejected;
 void EmeraldChampionsAgentTrialMember(struct Pokemon *mon, bool32 ownerB, u32 memberIndex);
 
+// Benchmark-only proposed team: one authored teams-file block per opposing
+// owner (0 = A, 1 = B), written by the host before the battle starts. When
+// armed for the started trainer it replaces that owner's party for this battle
+// only, through the same GenerateMonFromTrainerMon path, and stands in for the
+// trainer's compiled AI flags, battle plan, Mega permissions, tactics and
+// starting field. Every field is a u32 so the host can address it by word
+// (scripts/playthrough/battle_driver.py FOE_TEAM_*); the layout is asserted.
+#define EC_AGENT_FOE_TEAM_SCHEMA  1
+#define EC_AGENT_FOE_TEAM_TACTICS 8
+struct EcAgentFoeTeamMember
+{
+    u32 species;
+    u32 heldItem;
+    u32 ability;
+    u32 nature;
+    s32 levelOffset;
+    u32 friendship;
+    u32 ivs[6]; // HP, Atk, Def, SpA, SpD, Spe (the teams-file order)
+    u32 evs[6]; // HP, Atk, Def, SpA, SpD, Spe
+    u32 moves[MAX_MON_MOVES];
+};
+struct EcAgentFoeTeamTactic
+{
+    u32 actor;
+    u32 recipient;
+    u32 move;
+    u32 kind;
+};
+struct EcAgentFoeTeam
+{
+    u32 schema;             // EC_AGENT_FOE_TEAM_SCHEMA arms it; 0 leaves the authored party
+    u32 trainer;            // must be the started owner's trainer
+    u32 count;              // 1..PARTY_SIZE members
+    u32 easyLevelReduction; // the block's class (casual/regular), as trainers.party
+    u32 aiFlags[2];         // low, high words of the trainer's compiled aiFlags
+    u32 plan;               // EC_BATTLE_PLAN_* bits
+    u32 megaPermissions;    // 0x80 | party-slot bits, or 0 for native eligibility
+    u32 startingStatus[2];  // bit n = enum StartingStatus n
+    u32 tacticCount;
+    struct EcAgentFoeTeamTactic tactics[EC_AGENT_FOE_TEAM_TACTICS];
+    struct EcAgentFoeTeamMember members[PARTY_SIZE];
+};
+extern volatile struct EcAgentFoeTeam gEcAgentBattleFoeTeam[2];
+// Bits 0-5 owner A members, 6-11 owner B members that failed native validation
+// (species, item, nature, Ability for the species, move, IV/EV/friendship
+// range); bit 12/13 owner A/B armed for a different trainer or a bad count.
+// A rejected owner keeps its authored party and the host refuses the run.
+extern volatile u32 gEcAgentBattleFoeTeamRejected;
+extern volatile u32 gEcAgentBattleFoeTeamApplied; // bit 0 owner A, bit 1 owner B
+struct Trainer;
+struct StartingStatuses;
+struct EmeraldChampionsBattleTactic;
+bool32 EmeraldChampionsAgentFoeTeamParty(struct Pokemon *party, const struct Trainer *trainer);
+u64 EmeraldChampionsAgentFoeAiFlags(u32 trainer, u64 compiled);
+void EmeraldChampionsAgentFoeStartingStatus(u32 trainer, struct StartingStatuses *statuses);
+void EmeraldChampionsAgentFoePlan(u32 trainer, u32 *plan);
+void EmeraldChampionsAgentFoeMegaPermissions(u32 trainer, u32 *permissions);
+void EmeraldChampionsAgentFoeTactics(u32 trainer, const struct EmeraldChampionsBattleTactic **table, u32 *count);
+
 #else
 
 struct Pokemon;
+struct Trainer;
+struct StartingStatuses;
+struct EmeraldChampionsBattleTactic;
 static inline void EmeraldChampionsAgentTrialMember(struct Pokemon *mon, bool32 ownerB, u32 memberIndex) { (void)mon; (void)ownerB; (void)memberIndex; }
+static inline bool32 EmeraldChampionsAgentFoeTeamParty(struct Pokemon *party, const struct Trainer *trainer) { (void)party; (void)trainer; return FALSE; }
+static inline u64 EmeraldChampionsAgentFoeAiFlags(u32 trainer, u64 compiled) { (void)trainer; return compiled; }
+static inline void EmeraldChampionsAgentFoeStartingStatus(u32 trainer, struct StartingStatuses *statuses) { (void)trainer; (void)statuses; }
+static inline void EmeraldChampionsAgentFoePlan(u32 trainer, u32 *plan) { (void)trainer; (void)plan; }
+static inline void EmeraldChampionsAgentFoeMegaPermissions(u32 trainer, u32 *permissions) { (void)trainer; (void)permissions; }
+static inline void EmeraldChampionsAgentFoeTactics(u32 trainer, const struct EmeraldChampionsBattleTactic **table, u32 *count) { (void)trainer; (void)table; (void)count; }
 
 static inline void EmeraldChampionsAgentBattlePoll(void) {}
 static inline void EmeraldChampionsAgentBattleText(const u8 *text) { (void)text; }

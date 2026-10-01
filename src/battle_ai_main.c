@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_agent_battle.h"
 #include "emerald_champions_opening.h"
 #include "main.h"
 #include "malloc.h"
@@ -310,7 +311,7 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
         else
         {
-            flags = GetTrainerAIFlagsFromId(trainerId);
+            flags = EmeraldChampionsAgentFoeAiFlags(trainerId, GetTrainerAIFlagsFromId(trainerId));
             // Information is the sole AI difference between campaign modes.
             // The shared planner, prediction and authored strategy flags stay.
             // Apply this to partners too: awareness flags are shared by the

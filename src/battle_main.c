@@ -1,5 +1,6 @@
 #include "global.h"
 #include "move.h"
+#include "emerald_champions_agent_battle.h"
 #include "emerald_champions_opening.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -3534,6 +3535,13 @@ static void DoBattleIntro(void)
                 statusesOpponentA = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentA);
                 if (TRAINER_BATTLE_PARAM.opponentB != 0xFFFF)
                     statusesOpponentB = GetTrainerStartingStatusFromId(TRAINER_BATTLE_PARAM.opponentB);
+#if EC_HEADLESS_FIXTURES
+                // Benchmark-only proposed team field (compiled out of release
+                // so the release intro code is unchanged byte for byte).
+                EmeraldChampionsAgentFoeStartingStatus(TRAINER_BATTLE_PARAM.opponentA, &statusesOpponentA);
+                if (TRAINER_BATTLE_PARAM.opponentB != 0xFFFF)
+                    EmeraldChampionsAgentFoeStartingStatus(TRAINER_BATTLE_PARAM.opponentB, &statusesOpponentB);
+#endif
             }
             STARTING_STATUS_DEFINITIONS(UNPACK_STARTING_STATUS_TO_BATTLE);
 #if EC_DEBUG_INSTANT_WIN

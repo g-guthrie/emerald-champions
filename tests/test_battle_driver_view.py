@@ -5,8 +5,10 @@ selection progress and slot-mismatched opposing PP stay out of the printed
 state), the compact --brief view, --level-delta parsing, and the witness
 replay's command reconstruction. No ROM is needed; boards are synthetic views.
 """
+import hashlib
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
@@ -304,6 +306,127 @@ class DriverViewTests(unittest.TestCase):
         session = FakeSession(self.constants, {'trainer_a': 'TRAINER_SHELBY_1'})
         after['actives'][1]['alive'] = False
         self.assertIn('[1] FOE Aegislash fainted', driver.render_brief(session, after, [], heading='T'))
+
+    BLOCK = """## E0493 TRAINER_SIDNEY class=elite
+strategy: MEGA_REVEAL
+mega_slots: 2
+field: GRASSY_TERRAIN
+ai: Ace Pokemon
+plan: A proposed draft.
+crack: Its weaknesses.
+tactic: ACTIVATE INCINEROAR FAKE_OUT KANGASKHAN
+INCINEROAR @SITRUS_BERRY INTIMIDATE CAREFUL 252/0/4/0/252/0 -3 | FAKE_OUT, FLARE_BLITZ, KNOCK_OFF, PARTING_SHOT | ivs=31/31/31/31/31/31 | friendship=255
+KANGASKHAN @KANGASKHANITE SCRAPPY JOLLY PS 15 | FAKE_OUT, DOUBLE_EDGE, SUCKER_PUNCH, PROTECT | ivs=31/0/31/31/31/31 | friendship=200
+"""
+
+    def write_block(self, folder, text=None, name='block.txt'):
+        path = Path(folder) / name
+        path.write_text(self.BLOCK if text is None else text)
+        return path
+
+    def test_foe_team_block_encodes_the_native_mailbox(self):
+        import emerald_champions_teams as teams
+        with tempfile.TemporaryDirectory() as folder:
+            branch = teams.read_teams(self.write_block(folder))[0]
+        words, flags = driver.encode_foe_team(branch, 1234, self.constants)
+        self.assertEqual(len(words), driver.FOE_TEAM_WORDS)
+        self.assertEqual(driver.FOE_TEAM_WORDS, 175)  # sizeof(struct EcAgentFoeTeam) / 4
+        plans = driver.plan_constants()
+        statuses = driver.starting_status_indices()
+        ai = driver.resolve_wide('constants/battle_ai.h', flags)
+        self.assertEqual(words[:4], [driver.FOE_TEAM_SCHEMA, 1234, 2, 0])  # elite: no easy reduction
+        self.assertEqual(words[4] | words[5] << 32, sum(ai.values()))
+        self.assertIn('AI_FLAG_ACE_POKEMON', flags)
+        self.assertEqual(words[6], plans['EC_BATTLE_PLAN_MEGA_REVEAL'])
+        self.assertEqual(words[7], 0x80 | 0b10)
+        self.assertEqual(words[8] | words[9] << 32, 1 << statuses['STARTING_STATUS_GRASSY_TERRAIN'])
+        self.assertEqual(words[10], 1)
+        values = lambda table, name: self.constants[table]['values'][name]
+        self.assertEqual(words[11:15], [values('species', 'SPECIES_INCINEROAR'), values('species', 'SPECIES_KANGASKHAN'),
+                                        values('move', 'MOVE_FAKE_OUT'), plans['EC_BATTLE_TACTIC_ACTIVATE']])
+        first = driver.FOE_TEAM_HEADER + 4 * driver.FOE_TEAM_TACTICS
+        second = first + driver.FOE_TEAM_MEMBER_WORDS
+        self.assertEqual(words[first:first + 6], [values('species', 'SPECIES_INCINEROAR'),
+                                                  values('item', 'ITEM_SITRUS_BERRY'),
+                                                  values('ability', 'ABILITY_INTIMIDATE'),
+                                                  values('nature', 'NATURE_CAREFUL'), (-3) & 0xFFFFFFFF, 255])
+        self.assertEqual(words[second + 6:second + 18], [31, 0, 31, 31, 31, 31, 4, 252, 0, 0, 0, 252])
+        self.assertEqual(words[second + 5], 200)
+        self.assertEqual(words[second + 18:second + 22], [values('move', 'MOVE_' + m) for m in
+                                                          ('FAKE_OUT', 'DOUBLE_EDGE', 'SUCKER_PUNCH', 'PROTECT')])
+        self.assertEqual(words[second + driver.FOE_TEAM_MEMBER_WORDS:], [0] * (len(words) - second - driver.FOE_TEAM_MEMBER_WORDS))
+
+    def test_foe_team_mirrors_every_authored_trainers_compiled_plan_and_ai(self):
+        # The same derivation the teams file's own --write performs, checked for
+        # every authored branch: AI flags as trainers.party compiles them, plan
+        # bits, Mega permission and tactic kinds all resolve.
+        import emerald_champions_teams as teams
+        import implement_emerald_champions_master_battles as implement
+        branches = teams.read_teams()
+        master = teams.compile_master(branches, teams.retain_authored_encounters(teams.MASTER.read_text(), branches))
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'master.txt'
+            path.write_text(master)
+            designs = implement.read_designs(path)
+        plans = driver.plan_constants()
+        names = set()
+        for branch in branches:
+            expected = ['AI_FLAG_' + flag.upper().replace(' ', '_')
+                        for flag in implement.ai_flags(designs[branch.trainer]).split(' / ')]
+            self.assertEqual(driver.foe_ai_flag_names(branch), expected, branch.trainer)
+            names.update(expected)
+            for strategy in branch.strategy:
+                self.assertIn('EC_BATTLE_PLAN_' + strategy, plans)
+            for kind, *_ in branch.tactics:
+                self.assertIn('EC_BATTLE_TACTIC_' + kind, plans)
+            self.assertLessEqual(len(branch.tactics), driver.FOE_TEAM_TACTICS)
+        resolved = driver.resolve_wide('constants/battle_ai.h', sorted(names))
+        self.assertTrue(all(value for value in resolved.values()))
+        self.assertEqual(set(teams.STRATEGIES), {name[len('EC_BATTLE_PLAN_'):] for name in plans if name.startswith('EC_BATTLE_PLAN_')})
+        statuses = driver.starting_status_indices()
+        self.assertEqual(statuses['STARTING_STATUS_ELECTRIC_TERRAIN'], 0)
+        self.assertLessEqual(max(statuses.values()), 63)
+        self.assertTrue(teams.starting_statuses() <= {name[len('STARTING_STATUS_'):] for name in statuses})
+
+    def test_foe_team_refuses_illegal_or_mismatched_blocks(self):
+        with tempfile.TemporaryDirectory() as folder:
+            def refused(text, trainer='TRAINER_SIDNEY'):
+                path = self.write_block(folder, text, name=f'b{hash(text) & 0xFFFF}.txt')
+                args = SimpleNamespace(foe_team=str(path), foe_team_b=None)
+                with self.assertRaises(SystemExit) as caught:
+                    driver.load_foe_blocks(args, 'trainer', trainer, None, self.constants)
+                return str(caught.exception)
+            self.assertIn('the block is for TRAINER_SIDNEY', refused(self.BLOCK, 'TRAINER_PHOEBE'))
+            self.assertIn('exactly one', refused(self.BLOCK + self.BLOCK.replace('TRAINER_SIDNEY', 'TRAINER_PHOEBE')))
+            self.assertIn('not pinned-legal', refused(self.BLOCK.replace('DOUBLE_EDGE', 'SPORE')))
+            self.assertIn('mega_slots', refused(self.BLOCK.replace('mega_slots: 2', 'mega_slots: 1')))
+            self.assertIn('no member knows Tailwind', refused(self.BLOCK.replace('strategy: MEGA_REVEAL', 'strategy: TAILWIND')))
+            self.assertIn('Invalid EV spread', refused(self.BLOCK.replace('252/0/4/0/252/0', '252/252/252/0/0/0')))
+            path = self.write_block(folder)
+            with self.assertRaises(SystemExit):
+                driver.load_foe_blocks(SimpleNamespace(foe_team=None, foe_team_b=str(path)),
+                                       'trainer', 'TRAINER_SIDNEY', None, self.constants)
+            blocks = driver.load_foe_blocks(SimpleNamespace(foe_team=str(path), foe_team_b=None),
+                                            'trainer', 'TRAINER_SIDNEY', None, self.constants)
+        record = blocks[0]['record']
+        self.assertEqual((record['file'], record['trainer'], record['members'], record['mega_slots']),
+                         ('foe-team-A.txt', 'TRAINER_SIDNEY', 2, 0b10))
+        self.assertEqual(record['sha256'], hashlib.sha256(self.BLOCK.encode()).hexdigest())
+
+    def test_replay_reuses_the_pinned_foe_team_copy(self):
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder)
+            (source / 'foe-team-A.txt').write_text(self.BLOCK)
+            meta = {'battle_kind': 'trainer', 'trainer_a': 'TRAINER_SIDNEY', 'difficulty': 'hard', 'level_cap': 80,
+                    'start_args': {'battle_kind': 'trainer', 'trainer': 'TRAINER_SIDNEY', 'difficulty': 'hard',
+                                   'cap': 80, 'weather': 'map', 'foe_team': '/elsewhere/draft.txt'},
+                    'foe_team': {'A': {'file': 'foe-team-A.txt',
+                                       'sha256': hashlib.sha256(self.BLOCK.encode()).hexdigest()}}}
+            arguments, _, _, _ = driver.replay_start_args(meta, source, source)
+            self.assertEqual((arguments['foe_team'], arguments['foe_team_b']), (str(source / 'foe-team-A.txt'), None))
+            (source / 'foe-team-A.txt').write_text(self.BLOCK.replace('-3 |', '-2 |'))
+            with self.assertRaises(SystemExit):
+                driver.replay_start_args(meta, source, source)
 
     def test_witness_commands_round_trip_through_the_act_parser(self):
         submitted = {'0': {'action': 'move', 'index': 1, 'move': 'MOVE_PSYSHOCK', 'target': 3, 'mega': True},

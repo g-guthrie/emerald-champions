@@ -7,11 +7,29 @@
 #include "constants/battle_move_effects.h"
 #include "battle_controllers.h"
 #include "battle_setup.h"
+#include "emerald_champions_agent_battle.h"
 #include "emerald_champions_battle_plan.h"
 #include "pokemon.h"
 #include "constants/moves.h"
 #include "constants/opponents.h"
 #include "data/emerald_champions_battle_plans.h"
+
+// The tactic rows a trainer's lookups scan. The headless benchmark reads them
+// through a per-battle copy that a proposed team can replace
+// (emerald_champions_agent_battle.c). The release build expands to the
+// compiled table exactly as written before, so its code is unchanged.
+#if EC_HEADLESS_FIXTURES
+#define EC_TACTIC_TABLE(trainer)                                                         \
+    const struct EmeraldChampionsBattleTactic *ecTactics = sEmeraldChampionsBattleTactics; \
+    u32 ecTacticCount = ARRAY_COUNT(sEmeraldChampionsBattleTactics);                     \
+    EmeraldChampionsAgentFoeTactics(trainer, &ecTactics, &ecTacticCount);
+#define EC_TACTICS ecTactics
+#define EC_TACTIC_COUNT ecTacticCount
+#else
+#define EC_TACTIC_TABLE(trainer)
+#define EC_TACTICS sEmeraldChampionsBattleTactics
+#define EC_TACTIC_COUNT ARRAY_COUNT(sEmeraldChampionsBattleTactics)
+#endif
 
 static u32 GetCampaignTrainer(enum BattlerId battler)
 {
@@ -37,8 +55,34 @@ static u32 GetCampaignTrainer(enum BattlerId battler)
 u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler)
 {
     u32 trainer = GetCampaignTrainer(battler);
+#if EC_HEADLESS_FIXTURES
+    u32 plan = trainer < ARRAY_COUNT(sEmeraldChampionsBattlePlans) ? sEmeraldChampionsBattlePlans[trainer] : 0;
+    EmeraldChampionsAgentFoePlan(trainer, &plan);
+    return plan;
+#else
     return trainer < ARRAY_COUNT(sEmeraldChampionsBattlePlans) ? sEmeraldChampionsBattlePlans[trainer] : 0;
+#endif
 }
+
+#if EC_HEADLESS_FIXTURES
+u32 EmeraldChampions_GetCompiledPlan(u32 trainer, u32 *plan, u32 *megaPermissions,
+                                     struct EmeraldChampionsBattleTactic *tactics, u32 maxTactics)
+{
+    u32 count = 0;
+    *plan = trainer < ARRAY_COUNT(sEmeraldChampionsBattlePlans) ? sEmeraldChampionsBattlePlans[trainer] : 0;
+    *megaPermissions = trainer < ARRAY_COUNT(sEmeraldChampionsMegaPermissions)
+        ? sEmeraldChampionsMegaPermissions[trainer] : 0;
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
+    {
+        if (sEmeraldChampionsBattleTactics[i].trainer != trainer)
+            continue;
+        if (count < maxTactics)
+            tactics[count] = sEmeraldChampionsBattleTactics[i];
+        count++;
+    }
+    return count;
+}
+#endif
 
 bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
 {
@@ -53,6 +97,9 @@ bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
     u32 trainer = GetCampaignTrainer(battler);
     u32 permissions = trainer < ARRAY_COUNT(sEmeraldChampionsMegaPermissions)
         ? sEmeraldChampionsMegaPermissions[trainer] : 0;
+#if EC_HEADLESS_FIXTURES
+    EmeraldChampionsAgentFoeMegaPermissions(trainer, &permissions);
+#endif
 
     // Unauthored/facility/player parties retain native eligibility. Authored
     // slots only grant permission; the native item/form/owner checks still apply.
@@ -74,6 +121,9 @@ u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler)
     u32 trainer = GetCampaignTrainer(battler);
     u32 permissions = trainer < ARRAY_COUNT(sEmeraldChampionsMegaPermissions)
         ? sEmeraldChampionsMegaPermissions[trainer] : 0;
+#if EC_HEADLESS_FIXTURES
+    EmeraldChampionsAgentFoeMegaPermissions(trainer, &permissions);
+#endif
     u32 slots, limit;
 
     // Unauthored/facility/player parties keep the native one-per-side rule.
@@ -94,9 +144,10 @@ u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species spec
         return 0;
     species = GET_BASE_SPECIES_ID(species);
     partnerSpecies = GET_BASE_SPECIES_ID(partnerSpecies);
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
+    EC_TACTIC_TABLE(trainer)
+    for (u32 i = 0; i < EC_TACTIC_COUNT; i++)
     {
-        const struct EmeraldChampionsBattleTactic *tactic = &sEmeraldChampionsBattleTactics[i];
+        const struct EmeraldChampionsBattleTactic *tactic = &EC_TACTICS[i];
         enum Species actor = GET_BASE_SPECIES_ID(tactic->actor);
         enum Species recipient = GET_BASE_SPECIES_ID(tactic->recipient);
         if (tactic->trainer == trainer
@@ -115,9 +166,10 @@ u32 EmeraldChampions_GetTacticKind(enum BattlerId actor, enum BattlerId recipien
     enum Species species = GET_BASE_SPECIES_ID(gBattleMons[actor].species);
     enum Species recipientSpecies = GET_BASE_SPECIES_ID(gBattleMons[recipient].species);
     u32 kinds = 0;
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
+    EC_TACTIC_TABLE(trainer)
+    for (u32 i = 0; i < EC_TACTIC_COUNT; i++)
     {
-        const struct EmeraldChampionsBattleTactic *tactic = &sEmeraldChampionsBattleTactics[i];
+        const struct EmeraldChampionsBattleTactic *tactic = &EC_TACTICS[i];
         // Authored entries may name a regional form (Paldean Tauros); the
         // battlers are compared by base species, so the entries must be too.
         if (tactic->trainer == trainer && GET_BASE_SPECIES_ID(tactic->actor) == species
@@ -133,10 +185,11 @@ bool32 EmeraldChampions_HasTacticActor(enum BattlerId actor, u32 kind)
     if (trainer == TRAINER_NONE || trainer >= TRAINERS_COUNT)
         return FALSE;
     enum Species species = GET_BASE_SPECIES_ID(gBattleMons[actor].species);
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsBattleTactics); i++)
-        if (sEmeraldChampionsBattleTactics[i].trainer == trainer
-         && GET_BASE_SPECIES_ID(sEmeraldChampionsBattleTactics[i].actor) == species
-         && (sEmeraldChampionsBattleTactics[i].kind & kind))
+    EC_TACTIC_TABLE(trainer)
+    for (u32 i = 0; i < EC_TACTIC_COUNT; i++)
+        if (EC_TACTICS[i].trainer == trainer
+         && GET_BASE_SPECIES_ID(EC_TACTICS[i].actor) == species
+         && (EC_TACTICS[i].kind & kind))
             return TRUE;
     return FALSE;
 }

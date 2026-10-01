@@ -16,6 +16,8 @@
 #include "party_menu.h"
 #include "script.h"
 #include "caps.h" // GetCurrentLevelCap for the observation view
+#include "emerald_champions_battle_plan.h"
+#include "trainer_util.h"
 #include "difficulty.h"
 #include "event_data.h"
 #include "field_weather.h"
@@ -55,6 +57,29 @@ EWRAM_DATA volatile u32 gEcAgentBattleSeed = 0;
 EWRAM_DATA volatile s32 gEcAgentBattleLevelDelta[PARTY_SIZE * 2] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleAbilityTrial[PARTY_SIZE * 2] = {0};
 EWRAM_DATA volatile u32 gEcAgentBattleTrialRejected = 0;
+EWRAM_DATA volatile struct EcAgentFoeTeam gEcAgentBattleFoeTeam[2] = {0};
+EWRAM_DATA volatile u32 gEcAgentBattleFoeTeamRejected = 0;
+EWRAM_DATA volatile u32 gEcAgentBattleFoeTeamApplied = 0;
+// What a TrainerMon points at: EVs in TrainerMon order, and the tactic rows
+// the plan module reads in place of the compiled table for that trainer.
+static EWRAM_DATA u8 sFoeTeamEvs[2][PARTY_SIZE][6] = {0};
+static EWRAM_DATA struct EmeraldChampionsBattleTactic sFoeTeamTactics[2][EC_AGENT_FOE_TEAM_TACTICS] = {0};
+// The armed values, decoded once when the party is created. The hooks below
+// run inside the AI's scoring loops and the per-frame view, so they read these
+// plain copies rather than re-decoding the volatile mailbox on every call.
+struct EcAgentFoeTeamLive
+{
+    u64 aiFlags;
+    struct StartingStatuses statuses;
+    u32 plan;
+    u32 megaPermissions;
+    u16 trainer;
+    u8 tacticCount;
+    bool8 live;
+};
+static EWRAM_DATA struct EcAgentFoeTeamLive sFoeTeamLive[2] = {0};
+STATIC_ASSERT(sizeof(struct EcAgentFoeTeamMember) == 22 * sizeof(u32), FoeTeamMemberWords);
+STATIC_ASSERT(sizeof(struct EcAgentFoeTeam) == (11 + 4 * EC_AGENT_FOE_TEAM_TACTICS + 22 * PARTY_SIZE) * sizeof(u32), FoeTeamWords);
 // One word the host can stop on: the ROM is parked and waiting for the host.
 EWRAM_DATA volatile u32 gEcAgentBattleHalted = 0;
 EWRAM_DATA volatile u32 gEcAgentBattleNeedMask = 0;
@@ -130,6 +155,9 @@ void EmeraldChampionsAgentBattleBegin(u32 levelCap, u32 difficulty)
     sBridgeArmed = TRUE;
     sBattleSeen = FALSE;
     sRescueAuditPending = FALSE;
+    gEcAgentBattleFoeTeamApplied = 0;
+    gEcAgentBattleFoeTeamRejected = 0;
+    memset(sFoeTeamLive, 0, sizeof(sFoeTeamLive));
     gEcAgentBattlePlayerFactory[0] = 0;
     gEcAgentBattleOpponentRoster[0] = 0;
     sLastTurn = 0xFFFF;
@@ -662,6 +690,7 @@ static u32 AuthoredFieldMask(u32 trainerId)
         return 0;
 
     struct StartingStatuses authored = GetTrainerStartingStatusFromId(trainerId);
+    EmeraldChampionsAgentFoeStartingStatus(trainerId, &authored);
     u32 mask = 0;
 
     if (authored.electricTerrain)          mask |= 1u << 0;
@@ -1191,6 +1220,194 @@ void EmeraldChampionsAgentTrialMember(struct Pokemon *mon, bool32 ownerB, u32 me
     CalculateMonStats(mon);
     u32 hp = GetMonData(mon, MON_DATA_MAX_HP);
     SetMonData(mon, MON_DATA_HP, &hp);
+}
+
+static bool32 FoeTeamMemberValid(volatile const struct EcAgentFoeTeamMember *member)
+{
+    u32 slot;
+    if (member->species == SPECIES_NONE || member->species >= NUM_SPECIES || !IsSpeciesEnabled(member->species)
+     || member->heldItem >= ITEMS_COUNT || member->nature >= NUM_NATURES
+     || member->ability >= ABILITIES_COUNT || member->friendship > 255)
+        return FALSE;
+    // GenerateMonFromTrainerMon treats an Ability the species cannot hold as a
+    // fatal authoring error; refuse it here so the host can report it.
+    if (member->ability != ABILITY_NONE && !FindSpeciesAbilitySlotForOwner(member->species, member->ability, TRUE, &slot))
+        return FALSE;
+    for (u32 stat = 0; stat < 6; stat++)
+    {
+        if (member->ivs[stat] > MAX_PER_STAT_IVS || member->evs[stat] > MAX_PER_STAT_EVS)
+            return FALSE;
+    }
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (member->moves[i] >= MOVES_COUNT)
+            return FALSE;
+    }
+    return member->moves[0] != MOVE_NONE;
+}
+
+// The owner whose proposed team is live for this trainer, or -1.
+static s32 FoeTeamOwner(u32 trainer)
+{
+    if (sFoeTeamLive[0].live && sFoeTeamLive[0].trainer == trainer)
+        return 0;
+    if (sFoeTeamLive[1].live && sFoeTeamLive[1].trainer == trainer)
+        return 1;
+    return -1;
+}
+
+// Every agent battle reads its opposing plan data through the same per-battle
+// copy, proposed or compiled, so a proposed block identical to the authored one
+// spends the same cycles in the AI's scoring loops and replays the same RNG
+// timeline as an ordinary start. Values are the trainer's own compiled data.
+static void FoeTeamLiveFromCompiled(u32 owner, u32 trainerId, const struct Trainer *trainer)
+{
+    struct EcAgentFoeTeamLive *live = &sFoeTeamLive[owner];
+    u32 plan, megaPermissions, count;
+
+    memset(live, 0, sizeof(*live));
+    if (trainerId == TRAINER_NONE || trainerId >= TRAINERS_COUNT)
+        return;
+    count = EmeraldChampions_GetCompiledPlan(trainerId, &plan, &megaPermissions,
+                                             sFoeTeamTactics[owner], EC_AGENT_FOE_TEAM_TACTICS);
+    if (count > EC_AGENT_FOE_TEAM_TACTICS)
+        return; // the hooks then fall through to the compiled tables
+    live->aiFlags = trainer->aiFlags;
+    live->statuses = trainer->startingStatus;
+    live->plan = plan;
+    live->megaPermissions = megaPermissions;
+    live->trainer = trainerId;
+    live->tacticCount = count;
+    live->live = TRUE;
+}
+
+// Called from CreateNPCTrainerPartyFromTrainer after ZeroPartyMons. Generates
+// the proposed members exactly as an authored party: the original trainer's
+// generator (same personality stream), the campaign level offset through
+// GetCampaignTrainerLevel, then the existing per-member level/Ability trials.
+bool32 EmeraldChampionsAgentFoeTeamParty(struct Pokemon *party, const struct Trainer *trainer)
+{
+    u32 owner = (party == gParties[B_TRAINER_OPPONENT_B]) ? 1 : 0;
+    volatile struct EcAgentFoeTeam *team = &gEcAgentBattleFoeTeam[owner];
+    u32 trainerId = owner ? TRAINER_BATTLE_PARAM.opponentB : TRAINER_BATTLE_PARAM.opponentA;
+    u32 count = team->count, rejected = 0;
+
+    if (!sBridgeArmed)
+        return FALSE;
+    FoeTeamLiveFromCompiled(owner, trainerId, trainer);
+    if (team->schema != EC_AGENT_FOE_TEAM_SCHEMA)
+        return FALSE;
+    if (team->trainer != trainerId || count == 0 || count > PARTY_SIZE
+     || team->tacticCount > EC_AGENT_FOE_TEAM_TACTICS)
+    {
+        gEcAgentBattleFoeTeamRejected |= 1u << (12 + owner);
+        return FALSE;
+    }
+    for (u32 i = 0; i < count; i++)
+    {
+        if (!FoeTeamMemberValid(&team->members[i]))
+            rejected |= 1u << i;
+    }
+    if (rejected)
+    {
+        gEcAgentBattleFoeTeamRejected |= rejected << (owner * PARTY_SIZE);
+        return FALSE;
+    }
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && (B_MULTI_HALF_TEAMS || trainer->multiTeamSize == MULTI_TEAM_SIZE_HALF))
+        count = min(count, PARTY_SIZE / 2);
+
+    struct TrainerGenerator generator = {0};
+    MakeTrainerGenerator(&generator, trainer);
+    generator.easyLevelReduction = team->easyLevelReduction != 0;
+    for (u32 i = 0; i < count; i++)
+    {
+        volatile struct EcAgentFoeTeamMember *member = &team->members[i];
+        struct TrainerMon mon = {0};
+        u8 *evs = sFoeTeamEvs[owner][i];
+        // TrainerMon EV order (include/data.h TRAINER_PARTY_EVS) is the
+        // teams-file order HP, Atk, Def, SpA, SpD, Spe.
+        for (u32 stat = 0; stat < 6; stat++)
+            evs[stat] = member->evs[stat];
+        mon.species = member->species;
+        mon.heldItem = member->heldItem;
+        mon.ability = member->ability;
+        mon.nature = member->nature;
+        mon.ev = evs;
+        mon.iv = TRAINER_PARTY_IVS(member->ivs[0], member->ivs[1], member->ivs[2],
+                                   member->ivs[5], member->ivs[3], member->ivs[4]);
+        for (u32 move = 0; move < MAX_MON_MOVES; move++)
+            mon.moves[move] = member->moves[move];
+        mon.lvl = 1;
+        mon.useLevelOffset = TRUE;
+        mon.levelOffset = member->levelOffset;
+        mon.ball = POKEBALL_COUNT;
+        mon.friendship = member->friendship;
+        mon.gender = TRAINER_MON_RANDOM_GENDER;
+        mon.dynamaxLevel = MAX_DYNAMAX_LEVEL;
+        GenerateMonFromTrainerMon(&party[i], &mon, &generator);
+        EmeraldChampionsAgentTrialMember(&party[i], owner == 1, i);
+    }
+    for (u32 i = 0; i < team->tacticCount; i++)
+    {
+        struct EmeraldChampionsBattleTactic *tactic = &sFoeTeamTactics[owner][i];
+        tactic->trainer = trainerId;
+        tactic->actor = team->tactics[i].actor;
+        tactic->recipient = team->tactics[i].recipient;
+        tactic->move = team->tactics[i].move;
+        tactic->kind = team->tactics[i].kind;
+    }
+
+    struct EcAgentFoeTeamLive *live = &sFoeTeamLive[owner];
+    u64 statusMask = team->startingStatus[0] | ((u64)team->startingStatus[1] << 32);
+    memset(live, 0, sizeof(*live));
+#define FOE_TEAM_STATUS(_enum, _fieldName, ...) if ((statusMask >> (_enum)) & 1) live->statuses._fieldName = 1;
+    STARTING_STATUS_DEFINITIONS(FOE_TEAM_STATUS)
+#undef FOE_TEAM_STATUS
+    live->aiFlags = team->aiFlags[0] | ((u64)team->aiFlags[1] << 32);
+    live->plan = team->plan;
+    live->megaPermissions = team->megaPermissions;
+    live->trainer = trainerId;
+    live->tacticCount = team->tacticCount;
+    live->live = TRUE;
+    gEcAgentBattleFoeTeamApplied |= 1u << owner;
+    return TRUE;
+}
+
+u64 EmeraldChampionsAgentFoeAiFlags(u32 trainer, u64 compiled)
+{
+    s32 owner = FoeTeamOwner(trainer);
+    return owner < 0 ? compiled : sFoeTeamLive[owner].aiFlags;
+}
+
+void EmeraldChampionsAgentFoeStartingStatus(u32 trainer, struct StartingStatuses *statuses)
+{
+    s32 owner = FoeTeamOwner(trainer);
+    if (owner >= 0)
+        *statuses = sFoeTeamLive[owner].statuses;
+}
+
+void EmeraldChampionsAgentFoePlan(u32 trainer, u32 *plan)
+{
+    s32 owner = FoeTeamOwner(trainer);
+    if (owner >= 0)
+        *plan = sFoeTeamLive[owner].plan;
+}
+
+void EmeraldChampionsAgentFoeMegaPermissions(u32 trainer, u32 *permissions)
+{
+    s32 owner = FoeTeamOwner(trainer);
+    if (owner >= 0)
+        *permissions = sFoeTeamLive[owner].megaPermissions;
+}
+
+void EmeraldChampionsAgentFoeTactics(u32 trainer, const struct EmeraldChampionsBattleTactic **table, u32 *count)
+{
+    s32 owner = FoeTeamOwner(trainer);
+    if (owner < 0)
+        return;
+    *table = sFoeTeamTactics[owner];
+    *count = sFoeTeamLive[owner].tacticCount;
 }
 
 #endif

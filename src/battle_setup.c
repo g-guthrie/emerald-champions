@@ -2217,6 +2217,9 @@ void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Traine
     u8 monsCount;
 
     ZeroPartyMons(party);
+    // Headless benchmark only: a proposed teams-file block for this owner.
+    if (EmeraldChampionsAgentFoeTeamParty(party, trainer))
+        return;
 
     monsCount = trainer->partySize;
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && (B_MULTI_HALF_TEAMS || trainer->multiTeamSize == MULTI_TEAM_SIZE_HALF))
