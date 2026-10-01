@@ -2176,9 +2176,9 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
         {
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_1), ABILITY_PRISM_SCALES);
             EXPECT_EQ(GetBattlerAbility(B_BATTLER_3), ABILITY_HUGE_POWER);
-            // Badge8 cap80, authored offsets +9/+8 (leads 11/10); Normal keeps 60%.
-            EXPECT_EQ(opponentLeft->level, 87);
-            EXPECT_EQ(opponentRight->level, 86);
+            // Badge8 cap80, authored offsets +13/+12 (leads 15/14); Normal keeps 60%.
+            EXPECT_EQ(opponentLeft->level, 89);
+            EXPECT_EQ(opponentRight->level, 88);
         }
         gBattleTypeFlags = savedFlags;
     }
