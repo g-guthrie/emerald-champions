@@ -6060,6 +6060,12 @@ void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler, enum Ability
 {
     enum Item heldItem = gBattleMons[battler].item;
 
+    // The type this move has for this battler, not whatever the last dynamic
+    // move left behind. Only a dynamic type is written below, so without the
+    // reset an AI that had just weighed Oricorio's Psychic Revelation Dance
+    // judged every later move Psychic: its Air Slash and its partner's Triple
+    // Arrows looked useless into a Dark type, and Protect was all that was left.
+    gBattleStruct->dynamicMoveType = TYPE_NONE;
     gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
     gBattleStruct->battlerState[battler].ateBoost = FALSE;
     gSpecialStatuses[battler].gemBoost = FALSE;

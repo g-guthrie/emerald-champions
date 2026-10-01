@@ -311,3 +311,126 @@ AI_DOUBLE_BATTLE_TEST("EC Protect cadence: Wide Guard rests on a live spread thr
         }
     }
 }
+
+extern void (*gTestAiTurnSetupHook)(void);
+
+static void ShieldedLastTurn(enum BattlerId battler)
+{
+    gBattleMons[battler].volatiles.consecutiveMoveUses = 1;
+    gLastMoves[battler] = gLastResultingMoves[battler] = gLastLandedMoves[battler] = MOVE_PROTECT;
+}
+
+static void JaredShieldedPairBoard(void)
+{
+    ShieldedLastTurn(B_BATTLER_1);
+    ShieldedLastTurn(B_BATTLER_3);
+    gBattleMons[B_BATTLER_1].statStages[STAT_SPATK] = DEFAULT_STAT_STAGE + 1;
+    gBattleMons[B_BATTLER_1].statStages[STAT_SPDEF] = DEFAULT_STAT_STAGE + 1;
+    gBattleMons[B_BATTLER_1].statStages[STAT_SPEED] = DEFAULT_STAT_STAGE + 1;
+}
+
+// E0283 a02 turns 9-12: Oricorio and Decidueye shielded four turns running in
+// front of a lone Kingambit, three of the shields failing. Weighing Oricorio's
+// Revelation Dance left the move type Psychic for every later check, so each
+// attack of both - Triple Arrows included, four times effective - was dropped
+// as useless into a Dark type, and Protect was the only action left.
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a Revelation Dance does not turn every later attack Psychic")
+{
+    GIVEN {
+        AI_FLAGS(CADENCE_FLAGS);
+        PLAYER(SPECIES_KINGAMBIT) {
+            Level(55); MaxHP(226); HP(109); Attack(225); Defense(154); SpAttack(79); SpDefense(115); Speed(77);
+            Nature(NATURE_ADAMANT); Ability(ABILITY_DEFIANT); Item(ITEM_LEFTOVERS);
+            Moves(MOVE_KOWTOW_CLEAVE, MOVE_SUCKER_PUNCH, MOVE_IRON_HEAD, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_GARCHOMP) { HP(0); Speed(1); }
+        OPPONENT(SPECIES_ORICORIO_PAU) {
+            Level(63); MaxHP(187); HP(129); Attack(100); Defense(112); SpAttack(200); SpDefense(112); Speed(213);
+            Nature(NATURE_TIMID); Ability(ABILITY_DANCER); Item(ITEM_LIFE_ORB);
+            Moves(MOVE_REVELATION_DANCE, MOVE_AIR_SLASH, MOVE_QUIVER_DANCE, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_DECIDUEYE_HISUI) {
+            Level(62); MaxHP(200); HP(82); Attack(222); Defense(123); SpAttack(127); SpDefense(142); Speed(137);
+            Nature(NATURE_ADAMANT); Ability(ABILITY_SCRAPPY); Item(ITEM_YACHE_BERRY);
+            Moves(MOVE_TRIPLE_ARROWS, MOVE_LEAF_BLADE, MOVE_SWORDS_DANCE, MOVE_PROTECT);
+        }
+        gTestAiTurnSetupHook = JaredShieldedPairBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SUCKER_PUNCH, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
+            EXPECT_MOVE(opponentRight, MOVE_TRIPLE_ARROWS, target: playerLeft);
+        }
+    }
+}
+
+static void ColinShieldedOricorioBoard(void)
+{
+    ShieldedLastTurn(B_BATTLER_3);
+}
+
+static void ColinLoneOricorioBoard(void)
+{
+    ShieldedLastTurn(B_BATTLER_1);
+}
+
+// E0253 (a01-a05): Oricorio-Pa'u shielded nearly every turn in front of Mega
+// Tyranitar and Incineroar, often into its own failure, and never used Air
+// Slash or Quiver Dance. Its Psychic Revelation Dance cannot touch either Dark
+// type; the stale Psychic type made Air Slash look just as useless. It now
+// takes the knockout on the worn-down Incineroar, beside Braviary and alone.
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a shield is not repeated over Air Slash beside an immune Revelation Dance")
+{
+    bool32 alone;
+    PARAMETRIZE { alone = FALSE; }
+    PARAMETRIZE { alone = TRUE; }
+    GIVEN {
+        AI_FLAGS(CADENCE_FLAGS);
+        PLAYER(SPECIES_TYRANITAR_MEGA) {
+            Level(55); MaxHP(226); HP(226); Attack(260); Defense(187); SpAttack(113); SpDefense(154); Speed(100);
+            Nature(NATURE_ADAMANT); Ability(ABILITY_SAND_STREAM); Item(ITEM_TYRANITARITE);
+            Moves(MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_LOW_KICK, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_INCINEROAR) {
+            Level(55); MaxHP(221); HP(alone ? 25 : 38); Attack(149); Defense(121); SpAttack(99); SpDefense(170); Speed(88);
+            Nature(NATURE_CAREFUL); Ability(ABILITY_INTIMIDATE);
+            Moves(MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT);
+        }
+        PLAYER(SPECIES_FLUTTER_MANE) { Level(55); Speed(225); Nature(NATURE_TIMID); Ability(ABILITY_PROTOSYNTHESIS); Item(ITEM_CHOICE_SPECS); Moves(MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT); }
+        PLAYER(SPECIES_GHOLDENGO) { Level(55); Speed(114); Nature(NATURE_MODEST); Ability(ABILITY_GOOD_AS_GOLD); Item(ITEM_LIFE_ORB); Moves(MOVE_MAKE_IT_RAIN, MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_PROTECT); }
+        if (alone)
+        {
+            OPPONENT(SPECIES_ORICORIO_PAU) {
+                Level(67); MaxHP(198); HP(18); Attack(107); Defense(119); SpAttack(212); SpDefense(119); Speed(226);
+                Nature(NATURE_TIMID); Ability(ABILITY_DANCER); Item(ITEM_WISE_GLASSES);
+                Moves(MOVE_REVELATION_DANCE, MOVE_AIR_SLASH, MOVE_QUIVER_DANCE, MOVE_PROTECT);
+            }
+            OPPONENT(SPECIES_BRAVIARY_HISUI) { HP(0); Speed(155); }
+            gTestAiTurnSetupHook = ColinLoneOricorioBoard;
+        }
+        else
+        {
+            OPPONENT(SPECIES_BRAVIARY_HISUI) {
+                Level(67); MaxHP(245); HP(245); Attack(122); Defense(119); SpAttack(239); SpDefense(119); Speed(155);
+                Nature(NATURE_MODEST); Ability(ABILITY_SHEER_FORCE); Item(ITEM_CHOICE_SPECS);
+                Moves(MOVE_HURRICANE, MOVE_ESPER_WING, MOVE_HEAT_WAVE, MOVE_U_TURN);
+            }
+            OPPONENT(SPECIES_ORICORIO_PAU) {
+                Level(67); MaxHP(198); HP(186); Attack(107); Defense(119); SpAttack(212); SpDefense(119); Speed(226);
+                Nature(NATURE_TIMID); Ability(ABILITY_DANCER); Item(ITEM_WISE_GLASSES);
+                Moves(MOVE_REVELATION_DANCE, MOVE_AIR_SLASH, MOVE_QUIVER_DANCE, MOVE_PROTECT);
+            }
+            gTestAiTurnSetupHook = ColinShieldedOricorioBoard;
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, alone ? MOVE_KNOCK_OFF : MOVE_ROCK_SLIDE, target: opponentLeft);
+            MOVE(playerRight, MOVE_KNOCK_OFF, target: opponentLeft);
+            if (alone)
+                EXPECT_MOVE(opponentLeft, MOVE_AIR_SLASH, target: playerRight);
+            else
+                EXPECT_MOVE(opponentRight, MOVE_AIR_SLASH, target: playerRight);
+            SEND_OUT(playerRight, 2);
+        }
+    }
+}

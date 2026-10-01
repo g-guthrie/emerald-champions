@@ -768,6 +768,53 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Spore is not aimed where the partner's k
     }
 }
 
+// E0249 a06 turn 9, in Route 119's rain: Breloom aimed Spore at the Gyarados
+// that Blaziken's Thunder Punch knocked out first, and the Spore fell on
+// Amoonguss: "It doesn't affect Amoonguss...".
+static void BrendanRoute119Board(void)
+{
+    gBattleMons[B_BATTLER_1].statStages[STAT_ATK] = DEFAULT_STAT_STAGE - 1;
+    gBattleWeather = B_WEATHER_RAIN_NORMAL;
+    gBattleStruct->weatherDuration = 0;
+}
+
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Spore is not aimed where the partner's Thunder Punch hands it to Amoonguss")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_GYARADOS) {
+            Level(55); MaxHP(221); HP(161); Attack(213); Defense(108); SpAttack(79); SpDefense(132); Speed(111);
+            Nature(NATURE_ADAMANT); Ability(ABILITY_INTIMIDATE); Item(ITEM_LEFTOVERS);
+            Moves(MOVE_WATERFALL, MOVE_ICE_FANG, MOVE_THUNDER_WAVE, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_AMOONGUSS) {
+            Level(55); MaxHP(242); HP(242); Attack(115); Defense(146); SpAttack(115); SpDefense(110); Speed(49);
+            Nature(NATURE_RELAXED); Ability(ABILITY_REGENERATOR); Item(ITEM_ROCKY_HELMET);
+            Moves(MOVE_RAGE_POWDER, MOVE_SPORE, MOVE_POLLEN_PUFF, MOVE_PROTECT);
+        }
+        PLAYER(SPECIES_SWAMPERT) { Level(55); Speed(88); Nature(NATURE_ADAMANT); Ability(ABILITY_TORRENT); Item(ITEM_SWAMPERTITE); Moves(MOVE_WATERFALL, MOVE_HIGH_HORSEPOWER, MOVE_ICE_PUNCH, MOVE_PROTECT); }
+        PLAYER(SPECIES_TORNADUS_INCARNATE) { Level(55); Speed(195); Nature(NATURE_TIMID); Ability(ABILITY_PRANKSTER); Item(ITEM_SITRUS_BERRY); Moves(MOVE_HURRICANE, MOVE_TAILWIND, MOVE_TAUNT, MOVE_PROTECT); }
+        OPPONENT(SPECIES_BRELOOM) {
+            Level(63); MaxHP(168); HP(73); Attack(228); Defense(125); SpAttack(90); SpDefense(100); Speed(167);
+            Nature(NATURE_JOLLY); Ability(ABILITY_POISON_HEAL); Item(ITEM_TOXIC_ORB); Status1(STATUS1_TOXIC_POISON);
+            Moves(MOVE_SPORE, MOVE_MACH_PUNCH, MOVE_SEED_BOMB, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_BLAZIKEN) {
+            Level(65); MaxHP(200); HP(200); Attack(201); Defense(104); SpAttack(188); SpDefense(116); Speed(187);
+            Nature(NATURE_HASTY); Ability(ABILITY_SPEED_BOOST); Item(ITEM_LIFE_ORB);
+            Moves(MOVE_HEAT_WAVE, MOVE_CLOSE_COMBAT, MOVE_THUNDER_PUNCH, MOVE_PROTECT);
+        }
+        gTestAiTurnSetupHook = BrendanRoute119Board;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_ICE_FANG, target: opponentLeft);
+            MOVE(playerRight, MOVE_SPORE, target: opponentRight);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_SPORE);
+            SEND_OUT(playerLeft, 2);
+        }
+    }
+}
+
 static void TianaEndgameBoard(void)
 {
     gBattleStruct->battlerState[B_BATTLER_1].isFirstTurn = 0;
