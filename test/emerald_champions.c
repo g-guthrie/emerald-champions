@@ -2443,14 +2443,18 @@ TEST("Emerald Champions authored Coalossal keeps its deliberate zero Attack IV")
 {
     // Authored IVs must reach the native party exactly: Tabitha's Magma
     // Hideout Coalossal is a special attacker built with a 0 Attack IV.
+    // The member is found by species: redesigns reorder the team.
     struct Pokemon *party = gParties[B_TRAINER_OPPONENT_A];
     ResetCampaignCapMilestones();
     CreateNPCTrainerPartyFromTrainer(party, &gTrainers[DIFFICULTY_NORMAL][TRAINER_TABITHA_MAGMA_HIDEOUT]);
-    EXPECT_EQ(GetMonData(&party[2], MON_DATA_SPECIES), SPECIES_COALOSSAL);
-    EXPECT_EQ(GetMonData(&party[2], MON_DATA_ATK_IV), 0);
-    EXPECT_EQ(GetMonData(&party[2], MON_DATA_SPATK_IV), 31);
-    EXPECT_EQ(GetMonData(&party[2], MON_DATA_FRIENDSHIP), 255);
-    EXPECT_EQ(GetMonData(&party[2], MON_DATA_MOVE1), MOVE_HEAT_WAVE);
+    u32 slot = 0;
+    while (slot < PARTY_SIZE && GetMonData(&party[slot], MON_DATA_SPECIES) != SPECIES_COALOSSAL)
+        slot++;
+    EXPECT_LT(slot, PARTY_SIZE);
+    EXPECT_EQ(GetMonData(&party[slot], MON_DATA_ATK_IV), 0);
+    EXPECT_EQ(GetMonData(&party[slot], MON_DATA_SPATK_IV), 31);
+    EXPECT_EQ(GetMonData(&party[slot], MON_DATA_FRIENDSHIP), 255);
+    EXPECT_EQ(GetMonData(&party[slot], MON_DATA_MOVE1), MOVE_HEAT_WAVE);
     ZeroEnemyPartyMons();
 }
 

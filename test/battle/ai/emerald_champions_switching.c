@@ -400,8 +400,11 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Jocelyn's Crabominable leaves a useless loc
     PARAMETRIZE { aceHp = 0; }
     PARAMETRIZE { aceHp = 12; }
     GIVEN {
-        SwitchPlayer(SPECIES_BRONZOR, 20, 0, SET(MOVE_TRICK_ROOM, MOVE_GYRO_BALL, MOVE_PSYCHIC, MOVE_PROTECT, NATURE_RELAXED, ABILITY_LEVITATE, ITEM_EVIOLITE, 0, 0, 0, 0, 0, 0));
-        PLAYER(SPECIES_TROPIUS) { Level(20); HP(30); Speed(200); Moves(MOVE_AIR_SLASH); }
+        // Medium's scaled leads put Crabominable, Breloom and Sirfetch'd two
+        // levels above the benchmark's (offsets +3 each, at 60%); the
+        // player's side is raised to match, keeping the board's level gap.
+        SwitchPlayer(SPECIES_BRONZOR, 22, 0, SET(MOVE_TRICK_ROOM, MOVE_GYRO_BALL, MOVE_PSYCHIC, MOVE_PROTECT, NATURE_RELAXED, ABILITY_LEVITATE, ITEM_EVIOLITE, 0, 0, 0, 0, 0, 0));
+        PLAYER(SPECIES_TROPIUS) { Level(22); HP(30); Speed(200); Moves(MOVE_AIR_SLASH); }
         sSwitchInjuries[0] = (struct SwitchInjury){SPECIES_LILLIGANT_HISUI, 0};
         sSwitchInjuries[1] = (struct SwitchInjury){SPECIES_ORICORIO_POM_POM, 0};
         sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_WHIMSICOTT, 10};

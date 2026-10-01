@@ -1011,10 +1011,13 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker repeats Earthquake safely th
         // Arm. Speed 84 is attainable by a Jolly, Speed-invested Lv45 Coalossal.
         PLAYER(SPECIES_COALOSSAL) { Level(45); Ability(ABILITY_FLAME_BODY); Item(ITEM_FOCUS_SASH); Speed(84); Moves(MOVE_PROTECT, MOVE_TACKLE); }
         PLAYER(SPECIES_COALOSSAL) { Level(45); Ability(ABILITY_FLAME_BODY); Item(ITEM_FOCUS_SASH); Speed(84); Moves(MOVE_PROTECT, MOVE_TACKLE); }
-        // Parker's room was re-authored: Farigiraf now leads beside Oranguru
-        // and Lickilicky is the Earthquake the room Instructs. Deploy the
-        // recipient this fixture is about.
-        AuthoredOpponentWithPartner(TRAINER_PARKER, 4, FALSE, 2);
+        // Parker's room was re-authored again: Farigiraf and Stantler lead,
+        // and the Telepathy Oranguru and Choice Band Lickilicky Instruct loop
+        // waits in the back. Bring that pair forward; it is what this
+        // fixture is about.
+        sAuthoredLeads[0] = SPECIES_ORANGURU;
+        sAuthoredLeads[1] = SPECIES_LICKILICKY;
+        AuthoredOpponent(TRAINER_PARKER, 4, FALSE);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PROTECT); MOVE(playerRight, MOVE_PROTECT);
@@ -1037,24 +1040,30 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker repeats Earthquake safely th
     }
 }
 
+// Lickilicky's Choice Band Earthquake hits both Tyranitar super effectively,
+// and beside the Telepathy Oranguru it costs nothing. Beside a partner that
+// is not immune - Wigglytuff at 1 HP here - the same Earthquake would knock
+// the partner out, so the pair keeps it standing.
 AI_DOUBLE_BATTLE_TEST("EC authored strategy: Parker preserves a nonimmune reserve beside Earthquake")
 {
     GIVEN {
         PLAYER(SPECIES_TYRANITAR) { Level(45); Ability(ABILITY_UNNERVE); Speed(115); Moves(MOVE_TACKLE); }
         PLAYER(SPECIES_TYRANITAR) { Level(45); Ability(ABILITY_UNNERVE); Speed(115); Moves(MOVE_TACKLE); }
+        // The redesign leads Farigiraf and Stantler; Lickilicky and the
+        // nonimmune Wigglytuff (no Telepathy) are brought to the front.
+        sAuthoredLeads[0] = SPECIES_WIGGLYTUFF;
+        sAuthoredLeads[1] = SPECIES_LICKILICKY;
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_WIGGLYTUFF, 1};
         AuthoredOpponent(TRAINER_PARKER, 4, FALSE);
-        gBattleTestRunnerState->data.currentMonIndexes[B_BATTLER_1] = 5; // Girafarig, not Telepathy Oranguru.
-        u32 hp = 1;
-        SetMonData(&OPPONENT_PARTY[5], MON_DATA_HP, &hp);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
             MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
         }
     } THEN {
-        EXPECT(GetMonData(&gParties[B_TRAINER_OPPONENT_A][5], MON_DATA_HP) > 0);
-        if (opponentLeft->species == SPECIES_GIRAFARIG)
-            EXPECT(opponentLeft->hp > 0);
+        EXPECT_EQ(opponentLeft->species, SPECIES_WIGGLYTUFF);
+        EXPECT_EQ(opponentRight->species, SPECIES_LICKILICKY);
+        EXPECT(opponentLeft->hp > 0);
     }
 }
 
@@ -1728,9 +1737,10 @@ DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or ra
         EXPECT_EQ(opponentRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
         EXPECT_EQ(opponentLeft->species, SPECIES_TORKOAL);
         EXPECT_EQ(opponentRight->species, SPECIES_LILLIGANT);
-        // Badge3 cap40, authored offsets +2/+1 (leads 4/3); Normal keeps 60%.
-        EXPECT_EQ(opponentLeft->level, 42);
-        EXPECT_EQ(opponentRight->level, 42);
+        // Badge3 cap40, authored offsets +6/+5 (leads 8/7); Normal keeps 60%,
+        // rounded: 40 + 5 and 40 + 4.
+        EXPECT_EQ(opponentLeft->level, 45);
+        EXPECT_EQ(opponentRight->level, 44);
     }
 }
 
@@ -2572,6 +2582,46 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Blake's Meowstic does not Helping Hand a pa
     }
 }
 
+// Juan's Sootopolis team before the Empoleon redesign: Cloud Nine Altaria
+// beside the rain, Manaphy with Protect, Specs Kingdra with Muddy Water. These
+// benchmark boards are built on Altaria, so they keep the old sets rather than
+// the authored team.
+static const struct TrainerMon sJuanBeforeEmpoleon[] =
+{
+    FORMER_MON(SPECIES_POLITOED, ITEM_DAMP_ROCK, ABILITY_DRIZZLE, NATURE_CALM, 5,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_ENCORE, MOVE_PROTECT),
+    FORMER_MON(SPECIES_LANDORUS_THERIAN, ITEM_CHOICE_SCARF, ABILITY_INTIMIDATE, NATURE_JOLLY, 5,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_STOMPING_TANTRUM, MOVE_SUPERPOWER, MOVE_ROCK_SLIDE, MOVE_U_TURN),
+    FORMER_MON(SPECIES_ALTARIA, ITEM_LEFTOVERS, ABILITY_CLOUD_NINE, NATURE_MODEST, 4,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_FLAMETHROWER, MOVE_ICE_BEAM, MOVE_WILL_O_WISP, MOVE_PROTECT),
+    FORMER_MON(SPECIES_MANAPHY, ITEM_SITRUS_BERRY, ABILITY_HYDRATION, NATURE_MODEST, 5,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_SCALD, MOVE_ENERGY_BALL, MOVE_TAIL_GLOW, MOVE_PROTECT),
+    FORMER_MON(SPECIES_KINGDRA, ITEM_CHOICE_SPECS, ABILITY_SWIFT_SWIM, NATURE_MODEST, 6,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_HYDRO_PUMP, MOVE_DRACO_METEOR, MOVE_ICE_BEAM, MOVE_MUDDY_WATER),
+    FORMER_MON(SPECIES_GYARADOS, ITEM_GYARADOSITE, ABILITY_INTIMIDATE, NATURE_ADAMANT, 7,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_WATERFALL, MOVE_CRUNCH, MOVE_PROTECT, MOVE_DRAGON_DANCE),
+};
+EWRAM_DATA static struct Trainer sJuanBeforeEmpoleonTrainer = {0};
+
+static const struct Trainer *JuanBeforeEmpoleon(void)
+{
+    sJuanBeforeEmpoleonTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_JUAN_1];
+    sJuanBeforeEmpoleonTrainer.aiFlags = AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+        | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO
+        | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_ACE_POKEMON;
+    sJuanBeforeEmpoleonTrainer.party = sJuanBeforeEmpoleon;
+    sJuanBeforeEmpoleonTrainer.partySize = ARRAY_COUNT(sJuanBeforeEmpoleon);
+    sJuanBeforeEmpoleonTrainer.poolSize = 0;
+    sJuanBeforeEmpoleonTrainer.overrideTrainer = 0;
+    return &sJuanBeforeEmpoleonTrainer;
+}
+
 static const struct EmeraldChampionsBattleSet sJuanFoeMiraidon = {
     .moves = {MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
     .item = ITEM_LIFE_ORB, .nature = NATURE_TIMID, .ability = ABILITY_HADRON_ENGINE, .evs = {4, 0, 0, 252, 0, 252},
@@ -2593,6 +2643,7 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Juan's Manaphy does not Tail Glow into the 
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
         sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANDORUS_THERIAN, 0};
         sAuthoredLeadSlot = 2;
+        sAuthoredTrainer = JuanBeforeEmpoleon();
         AuthoredOpponentWithPartner(TRAINER_JUAN_1, 7, FALSE, 3);
     } WHEN {
         TURN {
@@ -2788,6 +2839,7 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: Juan's Specs Kingdra does not open with
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
         sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANDORUS_THERIAN, 0};
         sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_MANAPHY, 0};
+        sAuthoredTrainer = JuanBeforeEmpoleon();
         AuthoredOpponent(TRAINER_JUAN_1, 7, FALSE);
     } WHEN {
         TURN {
@@ -2815,6 +2867,7 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: a search the clock cuts short still sta
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_POLITOED, 0};
         sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_LANDORUS_THERIAN, 0};
         sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_MANAPHY, 0};
+        sAuthoredTrainer = JuanBeforeEmpoleon();
         AuthoredOpponent(TRAINER_JUAN_1, 7, FALSE);
         gTestPairBudgetSpent = TRUE;
     } WHEN {

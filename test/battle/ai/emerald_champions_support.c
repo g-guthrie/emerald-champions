@@ -33,10 +33,18 @@ EWRAM_DATA static struct SupportMember sSupportMembers[6] = {0};
 EWRAM_DATA static enum Species sSupportLeads[2] = {0};
 // A milestone past the badges that sets the fight's level cap.
 EWRAM_DATA static u16 sSupportMilestone = 0;
+// A team as it stood before an authored redesign, generated through the same
+// production path as the live one. Consumed by the next SupportOpponent.
+EWRAM_DATA static const struct Trainer *sSupportTrainer = NULL;
+
+#define FORMER_MON(_species, _item, _ability, _nature, _offset, _evs, _ivs, m1, m2, m3, m4) \
+    { .species = _species, .gender = TRAINER_MON_RANDOM_GENDER, .heldItem = _item, .ev = _evs, .iv = _ivs, \
+      .ability = _ability, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = _offset, .ball = POKEBALL_COUNT, \
+      .friendship = 255, .nature = _nature, .dynamaxLevel = MAX_DYNAMAX_LEVEL, .moves = {m1, m2, m3, m4} }
 
 static void SupportAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party)
 {
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = sSupportTrainer ? sSupportTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
     u32 savedFlags = gBattleTypeFlags;
     enum DifficultyLevel savedDifficulty = GetCurrentDifficultyLevel();
     bool8 savedBadges[8];
@@ -98,7 +106,7 @@ static void SupportDeclareMon(struct Pokemon *mon)
 // HP and the board's leads in front.
 static void SupportOpponent(u16 trainerId, u32 badges)
 {
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = sSupportTrainer ? sSupportTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     SupportAuthoredParty(trainerId, badges, party);
     for (u32 lead = 0; lead < ARRAY_COUNT(sSupportLeads); lead++)
@@ -125,6 +133,7 @@ static void SupportOpponent(u16 trainerId, u32 badges)
     }
     memset(sSupportMembers, 0, sizeof(sSupportMembers));
     sSupportMilestone = 0;
+    sSupportTrainer = NULL;
     Free(party);
 }
 
@@ -169,6 +178,46 @@ static void SupportPastFirstTurn(void)
 #define TYRANITAR_SET SET(MOVE_ROCK_SLIDE, MOVE_CRUNCH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, NATURE_ADAMANT, ABILITY_SAND_STREAM, ITEM_TYRANITARITE, 252, 252, 4, 0, 0, 0)
 #define INCINEROAR_ADAMANT SET(MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, NATURE_ADAMANT, ABILITY_INTIMIDATE, ITEM_SITRUS_BERRY, 252, 252, 4, 0, 0, 0)
 
+// Juan's Sootopolis team before the Empoleon redesign: Cloud Nine Altaria
+// beside the rain, Manaphy with Protect, Specs Kingdra with Muddy Water. These
+// benchmark boards are built on Altaria, so they keep the old sets rather than
+// the authored team.
+static const struct TrainerMon sJuanBeforeEmpoleon[] =
+{
+    FORMER_MON(SPECIES_POLITOED, ITEM_DAMP_ROCK, ABILITY_DRIZZLE, NATURE_CALM, 5,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_ENCORE, MOVE_PROTECT),
+    FORMER_MON(SPECIES_LANDORUS_THERIAN, ITEM_CHOICE_SCARF, ABILITY_INTIMIDATE, NATURE_JOLLY, 5,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_STOMPING_TANTRUM, MOVE_SUPERPOWER, MOVE_ROCK_SLIDE, MOVE_U_TURN),
+    FORMER_MON(SPECIES_ALTARIA, ITEM_LEFTOVERS, ABILITY_CLOUD_NINE, NATURE_MODEST, 4,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_FLAMETHROWER, MOVE_ICE_BEAM, MOVE_WILL_O_WISP, MOVE_PROTECT),
+    FORMER_MON(SPECIES_MANAPHY, ITEM_SITRUS_BERRY, ABILITY_HYDRATION, NATURE_MODEST, 5,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_SCALD, MOVE_ENERGY_BALL, MOVE_TAIL_GLOW, MOVE_PROTECT),
+    FORMER_MON(SPECIES_KINGDRA, ITEM_CHOICE_SPECS, ABILITY_SWIFT_SWIM, NATURE_MODEST, 6,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_HYDRO_PUMP, MOVE_DRACO_METEOR, MOVE_ICE_BEAM, MOVE_MUDDY_WATER),
+    FORMER_MON(SPECIES_GYARADOS, ITEM_GYARADOSITE, ABILITY_INTIMIDATE, NATURE_ADAMANT, 7,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_WATERFALL, MOVE_CRUNCH, MOVE_PROTECT, MOVE_DRAGON_DANCE),
+};
+EWRAM_DATA static struct Trainer sJuanBeforeEmpoleonTrainer = {0};
+
+static const struct Trainer *JuanBeforeEmpoleon(void)
+{
+    sJuanBeforeEmpoleonTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_JUAN_1];
+    sJuanBeforeEmpoleonTrainer.aiFlags = AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+        | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO
+        | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_ACE_POKEMON;
+    sJuanBeforeEmpoleonTrainer.party = sJuanBeforeEmpoleon;
+    sJuanBeforeEmpoleonTrainer.partySize = ARRAY_COUNT(sJuanBeforeEmpoleon);
+    sJuanBeforeEmpoleonTrainer.poolSize = 0;
+    sJuanBeforeEmpoleonTrainer.overrideTrainer = 0;
+    return &sJuanBeforeEmpoleonTrainer;
+}
+
 // k3/juan-1 turn 2 as it stood: Politoed's rain under Altaria's Cloud Nine,
 // Miraidon's Electric Terrain with three turns left, and Iron Hands past its
 // Fake Out.
@@ -204,6 +253,7 @@ AI_DOUBLE_BATTLE_TEST("EC support: Juan's Manaphy does not Tail Glow into Iron H
         sSupportMembers[3] = (struct SupportMember){.species = SPECIES_MANAPHY, .hp = 301, .level = 74};
         sSupportLeads[0] = SPECIES_ALTARIA;
         sSupportLeads[1] = SPECIES_MANAPHY;
+        sSupportTrainer = JuanBeforeEmpoleon();
         SupportOpponent(TRAINER_JUAN_1, 7);
         gTestAiTurnSetupHook = JuanBoard;
     } WHEN {
