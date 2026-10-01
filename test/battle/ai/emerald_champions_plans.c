@@ -104,12 +104,21 @@ EWRAM_DATA static struct AuthoredInjury sAuthoredInjuries[4] = {0};
 // places with slot 0. Consumed like the injuries.
 EWRAM_DATA static u8 sAuthoredLeadSlot = 0;
 EWRAM_DATA static enum Species sAuthoredLeads[2] = {0};
+// A team as it stood before an authored redesign, generated through the same
+// production path as the live one. Consumed by the next authored build.
+EWRAM_DATA static const struct Trainer *sAuthoredTrainer = NULL;
+
+#define FORMER_MON(_species, _item, _ability, _nature, _offset, _evs, _ivs, m1, m2, m3, m4) \
+    { .species = _species, .gender = TRAINER_MON_RANDOM_GENDER, .heldItem = _item, .ev = _evs, .iv = _ivs, \
+      .ability = _ability, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = _offset, .ball = POKEBALL_COUNT, \
+      .friendship = 255, .nature = _nature, .dynamaxLevel = MAX_DYNAMAX_LEVEL, .moves = {m1, m2, m3, m4} }
 
 // Use the compiled campaign loadouts and production stat/level generation,
 // including reserves, rather than a second hand-maintained copy of the team.
 static void AuthoredOpponentWithPartner(u16 trainerId, u32 badges, bool32 injuredCoalossal, u32 partnerSlot)
 {
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = sAuthoredTrainer ? sAuthoredTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    sAuthoredTrainer = NULL;
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     u32 savedFlags = gBattleTypeFlags;
     enum DifficultyLevel savedDifficulty = GetCurrentDifficultyLevel();
@@ -1651,6 +1660,46 @@ static void AuthoredMistyGymOpponent(u16 trainerId)
         FlagClear(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
 }
 
+// Jace's Lavaridge team before the haunted tea room redesign: Defog Drifblim
+// beside Corrosion Salazzle. The redesign carries no status move, so these
+// boards keep the mist-venting coverage on the old sets rather than on the
+// authored team.
+static const struct TrainerMon sJaceBeforeTeaRoom[] =
+{
+    FORMER_MON(SPECIES_DRIFBLIM, ITEM_FLAME_ORB, ABILITY_FLARE_BOOST, NATURE_TIMID, 3,
+        TRAINER_PARTY_EVS(252, 0, 0, 252, 4, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_DEFOG, MOVE_HEX, MOVE_AIR_SLASH, MOVE_PROTECT),
+    FORMER_MON(SPECIES_SALAZZLE, ITEM_FOCUS_SASH, ABILITY_CORROSION, NATURE_MODEST, 1,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_FLAMETHROWER, MOVE_SLUDGE_BOMB, MOVE_TOXIC, MOVE_PROTECT),
+    FORMER_MON(SPECIES_LARVESTA, ITEM_EVIOLITE, ABILITY_FLAME_BODY, NATURE_ADAMANT, 6,
+        TRAINER_PARTY_EVS(252, 252, 4, 0, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_FLARE_BLITZ, MOVE_BUG_BITE, MOVE_MORNING_SUN, MOVE_PROTECT),
+    FORMER_MON(SPECIES_MAROWAK_ALOLA, ITEM_THICK_CLUB, ABILITY_LIGHTNING_ROD, NATURE_ADAMANT, -2,
+        TRAINER_PARTY_EVS(252, 252, 4, 0, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_SHADOW_BONE, MOVE_FLARE_BLITZ, MOVE_BONEMERANG, MOVE_PROTECT),
+    FORMER_MON(SPECIES_ARCANINE_HISUI, ITEM_CHOICE_BAND, ABILITY_INTIMIDATE, NATURE_ADAMANT, -1,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_EXTREME_SPEED, MOVE_CRUNCH),
+    FORMER_MON(SPECIES_TYPHLOSION_HISUI, ITEM_LIFE_ORB, ABILITY_BLAZE, NATURE_TIMID, 0,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_INFERNAL_PARADE, MOVE_WILL_O_WISP, MOVE_FLAMETHROWER, MOVE_PROTECT),
+};
+EWRAM_DATA static struct Trainer sJaceBeforeTeaRoomTrainer = {0};
+
+static void UseJaceBeforeTeaRoom(void)
+{
+    sJaceBeforeTeaRoomTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_JACE];
+    sJaceBeforeTeaRoomTrainer.aiFlags = AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+        | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO
+        | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_ACE_POKEMON;
+    sJaceBeforeTeaRoomTrainer.party = sJaceBeforeTeaRoom;
+    sJaceBeforeTeaRoomTrainer.partySize = ARRAY_COUNT(sJaceBeforeTeaRoom);
+    sJaceBeforeTeaRoomTrainer.poolSize = 0;
+    sJaceBeforeTeaRoomTrainer.overrideTrainer = 0;
+    sAuthoredTrainer = &sJaceBeforeTeaRoomTrainer;
+}
+
 DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or rain")
 {
     bool32 rain;
@@ -1696,6 +1745,7 @@ DOUBLE_BATTLE_TEST("EC misty gym: Defog opens Corrosion while the airborne Orb w
         gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
         PLAYER(SPECIES_REGISTEEL) { HP(600); MaxHP(600); Speed(10); }
+        UseJaceBeforeTeaRoom();
         AuthoredMistyGymOpponent(TRAINER_JACE);
     } WHEN {
         TURN {
@@ -1773,6 +1823,7 @@ AI_DOUBLE_BATTLE_TEST("EC misty gym AI: vents blocked status but preserves usefu
             PLAYER(SPECIES_DRAGONITE) { HP(600); MaxHP(600); SpDefense(250); Speed(10); Moves(MOVE_DRAGON_BREATH); }
             PLAYER(SPECIES_DRAGONITE) { HP(600); MaxHP(600); SpDefense(250); Speed(10); Moves(MOVE_DRAGON_BREATH); }
         }
+        UseJaceBeforeTeaRoom();
         AuthoredMistyGymOpponent(TRAINER_JACE);
     } WHEN {
         TURN {

@@ -27,10 +27,18 @@ EWRAM_DATA static struct ForecastInjury sForecastInjuries[6] = {0};
 // A milestone past the badges that sets the fight's level cap. Consumed by the
 // next authored build.
 EWRAM_DATA static u16 sForecastMilestone = 0;
+// A team as it stood before an authored redesign, generated through the same
+// production path as the live one. Consumed by the next authored build.
+EWRAM_DATA static const struct Trainer *sForecastTrainer = NULL;
+
+#define FORMER_MON(_species, _item, _ability, _nature, _offset, _evs, _ivs, m1, m2, m3, m4) \
+    { .species = _species, .gender = TRAINER_MON_RANDOM_GENDER, .heldItem = _item, .ev = _evs, .iv = _ivs, \
+      .ability = _ability, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = _offset, .ball = POKEBALL_COUNT, \
+      .friendship = 255, .nature = _nature, .dynamaxLevel = MAX_DYNAMAX_LEVEL, .moves = {m1, m2, m3, m4} }
 
 static void ForecastBuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
 {
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = sForecastTrainer ? sForecastTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
     u32 savedFlags = gBattleTypeFlags;
     enum DifficultyLevel savedDifficulty = GetCurrentDifficultyLevel();
     bool8 savedBadges[8];
@@ -74,7 +82,7 @@ static void ForecastBuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon
 // the board's injuries applied.
 static void ForecastAuthoredOpponent(u16 trainerId, u32 badges)
 {
-    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = sForecastTrainer ? sForecastTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     ForecastBuildAuthoredParty(trainerId, badges, party, BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE);
     if (IsAITest())
@@ -107,6 +115,7 @@ static void ForecastAuthoredOpponent(u16 trainerId, u32 badges)
     }
     memset(sForecastInjuries, 0, sizeof(sForecastInjuries));
     sForecastMilestone = 0;
+    sForecastTrainer = NULL;
     Free(party);
 }
 
@@ -322,6 +331,45 @@ AI_DOUBLE_BATTLE_TEST("EC charge: Maxie's Torkoal does not Solar Beam in the rai
     }
 }
 
+// Winona's team before the Celesteela redesign, in its old order: Noivern,
+// the Specs partner on this board, left the team. Skarmory keeps the sixth
+// slot, where her authored Mega permission is.
+static const struct TrainerMon sWinonaBeforeCelesteela[] =
+{
+    FORMER_MON(SPECIES_ZAPDOS, ITEM_SITRUS_BERRY, ABILITY_STATIC, NATURE_TIMID, 2,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_THUNDERBOLT, MOVE_HURRICANE, MOVE_ROOST, MOVE_HEAT_WAVE),
+    FORMER_MON(SPECIES_ALTARIA, ITEM_LEFTOVERS, ABILITY_NATURAL_CURE, NATURE_BOLD, 3,
+        TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_HAZE, MOVE_ROOST, MOVE_HELPING_HAND, MOVE_TAILWIND),
+    FORMER_MON(SPECIES_ENAMORUS, ITEM_LIFE_ORB, ABILITY_CONTRARY, NATURE_NAIVE, 2,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_PLAY_ROUGH, MOVE_EARTH_POWER, MOVE_SUPERPOWER, MOVE_PROTECT),
+    FORMER_MON(SPECIES_TALONFLAME, ITEM_CHOICE_BAND, ABILITY_GALE_WINGS, NATURE_JOLLY, 3,
+        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_BRAVE_BIRD, MOVE_FLARE_BLITZ, MOVE_U_TURN, MOVE_STEEL_WING),
+    FORMER_MON(SPECIES_NOIVERN, ITEM_CHOICE_SPECS, ABILITY_INFILTRATOR, NATURE_TIMID, 3,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_DRACO_METEOR, MOVE_HURRICANE, MOVE_FLAMETHROWER, MOVE_U_TURN),
+    FORMER_MON(SPECIES_SKARMORY, ITEM_SKARMORITE, ABILITY_STURDY, NATURE_IMPISH, 1,
+        TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_BRAVE_BIRD, MOVE_BODY_PRESS, MOVE_ROOST, MOVE_IRON_DEFENSE),
+};
+EWRAM_DATA static struct Trainer sWinonaBeforeCelesteelaTrainer = {0};
+
+static void UseWinonaBeforeCelesteela(void)
+{
+    sWinonaBeforeCelesteelaTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_WINONA_1];
+    sWinonaBeforeCelesteelaTrainer.aiFlags = AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
+        | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO
+        | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_ACE_POKEMON;
+    sWinonaBeforeCelesteelaTrainer.party = sWinonaBeforeCelesteela;
+    sWinonaBeforeCelesteelaTrainer.partySize = ARRAY_COUNT(sWinonaBeforeCelesteela);
+    sWinonaBeforeCelesteelaTrainer.poolSize = 0;
+    sWinonaBeforeCelesteelaTrainer.overrideTrainer = 0;
+    sForecastTrainer = &sWinonaBeforeCelesteelaTrainer;
+}
+
 #define WINONA_LANTURN SET(MOVE_SCALD, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_PROTECT, NATURE_MODEST, ABILITY_VOLT_ABSORB, ITEM_SITRUS_BERRY, 252, 0, 4, 252, 0, 0)
 
 // l1/win-1 turn 7 as it stood: the player's last Pokemon, a full Lanturn,
@@ -347,6 +395,7 @@ AI_DOUBLE_BATTLE_TEST("EC setup: Winona's Skarmory does not Iron Defense against
         sForecastInjuries[2] = (struct ForecastInjury){SPECIES_ENAMORUS, 0};
         sForecastInjuries[3] = (struct ForecastInjury){SPECIES_TALONFLAME, 0};
         ForecastLeads(4, 5);
+        UseWinonaBeforeCelesteela();
         ForecastAuthoredOpponent(TRAINER_WINONA_1, 5);
         gTestAiTurnSetupHook = WinonaSkarmoryBoard;
     } WHEN {

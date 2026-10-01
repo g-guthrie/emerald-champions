@@ -21,6 +21,10 @@ extern u8 gTestPairBudgetPairs;
 
 struct ChoiceMember { enum Species species; u16 hp; enum Item item; u32 status; };
 EWRAM_DATA static struct ChoiceMember sChoiceMembers[8] = {0};
+// Members that stood on the field at the board, brought to the front slots
+// when the authored order no longer leads with them. Consumed like the
+// members above; callers leave the Mega slot where its permission is.
+EWRAM_DATA static enum Species sChoiceLeads[2] = {0};
 
 // The campaign cap is read from the milestone flags, exactly as the benchmark
 // driver sets them.
@@ -74,6 +78,20 @@ static void ChoiceOpponent(u16 trainerId, u32 left, u32 right, u32 formSlot, enu
     CreateNPCTrainerPartyFromTrainer(party, trainer);
     gBattleTypeFlags = savedFlags;
     SetCurrentDifficultyLevel(savedDifficulty);
+    for (u32 lead = 0; lead < ARRAY_COUNT(sChoiceLeads); lead++)
+    {
+        if (sChoiceLeads[lead] == SPECIES_NONE)
+            continue;
+        for (u32 i = 0; i < trainer->partySize; i++)
+            if (GetMonData(&party[i], MON_DATA_SPECIES) == sChoiceLeads[lead])
+            {
+                struct Pokemon swap = party[lead];
+                party[lead] = party[i];
+                party[i] = swap;
+                break;
+            }
+    }
+    memset(sChoiceLeads, 0, sizeof(sChoiceLeads));
     if (IsAITest())
         AI_FLAGS(trainer->aiFlags | AI_FLAG_DOUBLE_BATTLE);
     gBattleTestRunnerState->data.recordedBattle.opponentA = trainerId;
@@ -136,6 +154,10 @@ AI_DOUBLE_BATTLE_TEST("EC move choice: Winona's Zapdos hits a Sitrus Incineroar 
         ChoicePlayer(SPECIES_METAGROSS, 55, &sWinonaFoes[4], FULL, 0);
         ChoicePlayer(SPECIES_GARDEVOIR, 55, &sWinonaFoes[5], FULL, 0);
         ChoiceMilestones(sFiveBadges, ARRAY_COUNT(sFiveBadges));
+        // The redesign leads Enamorus and Celesteela; the board is Zapdos
+        // beside Altaria.
+        sChoiceLeads[0] = SPECIES_ZAPDOS;
+        sChoiceLeads[1] = SPECIES_ALTARIA;
         ChoiceOpponent(TRAINER_WINONA_1, 0, 1, PARTY_SIZE, SPECIES_NONE, ABILITY_NONE);
     } WHEN {
         TURN {

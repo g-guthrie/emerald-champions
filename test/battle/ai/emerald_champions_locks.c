@@ -27,6 +27,10 @@ EWRAM_DATA static struct LockInjury sLockInjuries[6] = {0};
 // A milestone past the badges that sets the fight's level cap. Consumed by the
 // next authored build.
 EWRAM_DATA static u16 sLockMilestone = 0;
+// A member that came in during the fight: the party slot it trades places
+// with, so the engine sends it out beside the lead. Consumed like the
+// injuries. {0, 0} keeps the authored order.
+EWRAM_DATA static u8 sLockSwap[2] = {0};
 
 static void LockBuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
 {
@@ -77,6 +81,12 @@ static void LockAuthoredOpponent(u16 trainerId, u32 badges)
     const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     LockBuildAuthoredParty(trainerId, badges, party, BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE);
+    if (sLockSwap[0] != sLockSwap[1])
+    {
+        struct Pokemon swap = party[sLockSwap[0]];
+        party[sLockSwap[0]] = party[sLockSwap[1]];
+        party[sLockSwap[1]] = swap;
+    }
     if (IsAITest())
         AI_FLAGS(trainer->aiFlags | AI_FLAG_DOUBLE_BATTLE);
     gBattleTestRunnerState->data.recordedBattle.opponentA = trainerId;
@@ -106,6 +116,7 @@ static void LockAuthoredOpponent(u16 trainerId, u32 badges)
         }
     }
     memset(sLockInjuries, 0, sizeof(sLockInjuries));
+    memset(sLockSwap, 0, sizeof(sLockSwap));
     sLockMilestone = 0;
     Free(party);
 }
@@ -279,7 +290,11 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: Winona does not send both attackers at 
         sLockInjuries[1] = (struct LockInjury){SPECIES_ALTARIA, 0};
         sLockInjuries[2] = (struct LockInjury){SPECIES_ENAMORUS, 150};
         sLockInjuries[3] = (struct LockInjury){SPECIES_TALONFLAME, 132};
-        LockLeads(2, 3);
+        // The redesign leads Enamorus beside Celesteela; Talonflame (slot 5)
+        // came in beside Enamorus, with Celesteela and Skarmory in the back.
+        sLockSwap[0] = 1;
+        sLockSwap[1] = 4;
+        LockLeads(0, 1);
         LockAuthoredOpponent(TRAINER_WINONA_1, 5);
         gTestAiTurnSetupHook = WinonaBoard;
     } WHEN {
