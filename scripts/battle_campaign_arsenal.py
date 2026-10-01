@@ -721,7 +721,7 @@ def _replace_owned_species(base,target,proof,roster,state,r,owned_id=None):
 
 @lru_cache(maxsize=64)
 def _level_rows(source,difficulty,cap,offsets,reduction):
-    functions='\n'.join(c_function(source,name) for name in ('GetTrainerLevelLeadPercentFor','GetCampaignTrainerLevelFor','GetCampaignTrainerLevel'))
+    functions='\n'.join(c_function(source,name) for name in ('GetTrainerLevelLeadPercentFor','GetTrainerLevelCapDropPercentFor','GetCampaignTrainerLevelFor','GetCampaignTrainerLevel'))
     program='''#include <stdio.h>
 #include <stdint.h>
 typedef uint8_t u8;typedef int16_t s16;typedef int32_t s32;typedef uint32_t u32;

@@ -7,6 +7,7 @@
 #include "battle_gimmick.h"
 #include "battle_z_move.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "main.h"
@@ -315,9 +316,36 @@ static u32 BattleTest_EstimateCost(void *data)
     return cost;
 }
 
+// World state a test may change in GIVEN and put back in THEN. A test that
+// stops before THEN - INVALID, a failed EXPECT, a crash - never puts it back,
+// and the next test in the same worker inherits it: fog left by an aborted
+// misty-gym fixture started every later battle in Misty Terrain, so status
+// moves failed in tests that never asked for mist. The runner restores it.
+static EWRAM_DATA struct
+{
+    u8 overworldWeather;
+    u8 flags[NUM_FLAG_BYTES];
+    u16 vars[VARS_COUNT];
+} sWorldBeforeTest = {0};
+
+static void SaveWorldBeforeTest(void)
+{
+    sWorldBeforeTest.overworldWeather = gWeatherPtr->currWeather;
+    memcpy(sWorldBeforeTest.flags, gSaveBlock1Ptr->flags, sizeof(sWorldBeforeTest.flags));
+    memcpy(sWorldBeforeTest.vars, gSaveBlock1Ptr->vars, sizeof(sWorldBeforeTest.vars));
+}
+
+static void RestoreWorldAfterTest(void)
+{
+    gWeatherPtr->currWeather = sWorldBeforeTest.overworldWeather;
+    memcpy(gSaveBlock1Ptr->flags, sWorldBeforeTest.flags, sizeof(sWorldBeforeTest.flags));
+    memcpy(gSaveBlock1Ptr->vars, sWorldBeforeTest.vars, sizeof(sWorldBeforeTest.vars));
+}
+
 static void BattleTest_SetUp(void *data)
 {
     const struct BattleTest *test = data;
+    SaveWorldBeforeTest();
     memset(STATE, 0, sizeof(*STATE));
     InitTestBattlers(test);
     InvokeTestFunction(test);
@@ -2129,6 +2157,7 @@ static void BattleTest_TearDown(void *data)
         TearDownBattle();
         STATE->hasTornDownBattle = TRUE;
     }
+    RestoreWorldAfterTest();
 }
 
 static bool32 BattleTest_CheckProgress(void *data)

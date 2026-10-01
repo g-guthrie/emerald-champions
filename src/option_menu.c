@@ -489,11 +489,12 @@ static void Difficulty_DrawChoices(u8 selection)
         DrawOptionMenuChoice(name, 104, YPOS_DIFFICULTY, 1);
     }
     ConvertIntToDecimalStringN(gStringVar1, GetTrainerLevelLeadPercentFor(selection), STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, GetTrainerLevelCapDropPercentFor(selection), STR_CONV_MODE_LEFT_ALIGN, 3);
     const u8 *description = selection == DIFFICULTY_HARD
         ? COMPOUND_STRING("Hard: foes scout your whole team.\nThey keep their full level lead\nover your level cap.")
         : selection == DIFFICULTY_NORMAL
         ? COMPOUND_STRING("Medium: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead\nover your level cap.")
-        : COMPOUND_STRING("Easy: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead\nover your level cap.");
+        : COMPOUND_STRING("Easy: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead,\nthen drop {STR_VAR_2}% of your level cap.");
     StringExpandPlaceholders(gStringVar4, description);
     FillWindowPixelBuffer(WIN_DIFFICULTY_HELP, PIXEL_FILL(1));
     const u8 helpColors[] = {1, 6, 7}; // White and gray in the Options palette.

@@ -14,6 +14,7 @@ enum DifficultyLevel ConsumeNewGameDifficultyLevel(void);
 u8 GetTrainerLevelReduction(void);
 u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty);
 u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty);
+u8 GetTrainerLevelCapDropPercentFor(enum DifficultyLevel difficulty);
 u8 GetCampaignTrainerLevelFor(enum DifficultyLevel difficulty, s16 offset);
 u8 GetCampaignTrainerLevel(s16 offset);
 

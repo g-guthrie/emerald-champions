@@ -77,9 +77,10 @@ u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty)
 // Medium and Easy keep only a share of each opponent's lead, so the gap
 // between modes follows the size of the fight's spike: a rival eight levels
 // over the cap at cap 14 and an Elite sixteen over at cap 80 both shrink in
-// proportion, rather than losing the same flat number of levels. Opponents
-// at or below the cap are the same in every mode. Teams, strategy and the
-// shared planner never change between modes.
+// proportion, rather than losing the same flat number of levels. Easy also
+// sits a share of the cap lower, so the same relief applies at every stage;
+// perfect sets and doubles AI beat an ordinary team even at the cap. Teams,
+// strategy and the shared planner never change between modes.
 u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty)
 {
     switch (difficulty)
@@ -94,12 +95,18 @@ u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty)
     }
 }
 
+u8 GetTrainerLevelCapDropPercentFor(enum DifficultyLevel difficulty)
+{
+    return difficulty == DIFFICULTY_EASY ? 15 : 0;
+}
+
 u8 GetCampaignTrainerLevelFor(enum DifficultyLevel difficulty, s16 offset)
 {
+    s32 cap = GetCurrentLevelCap();
     s32 lead = offset + 2;
     if (lead > 0)
         lead = (lead * GetTrainerLevelLeadPercentFor(difficulty) + 50) / 100;
-    s32 level = (s32)GetCurrentLevelCap() + lead;
+    s32 level = cap + lead - (cap * GetTrainerLevelCapDropPercentFor(difficulty) + 50) / 100;
     return max(1, min(MAX_LEVEL, level));
 }
 
