@@ -7614,6 +7614,50 @@ static bool32 AI_IsWideGuardUseless(enum BattlerId battlerAtk)
     return TRUE;
 }
 
+// Quick Guard stops only moves that go first by priority and reach this side.
+// A foe whose whole set the AI knows, with no such move it can still use this
+// turn (its Fake Out spent, Gale Wings off at less than full HP, no terrain for
+// Grassy Glide), leaves it nothing to stop: Winona's Talonflame raised it in
+// front of a Zeraora past its first turn and a Mega Gengar. A foe with
+// unrevealed moves, or one that can still Mega Evolve into a new ability,
+// keeps the guard to the ordinary pricing.
+static bool32 AI_IsQuickGuardUseless(enum BattlerId battlerAtk)
+{
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (!IsBattlerAlive(foe) || IsBattlerAlly(battlerAtk, foe))
+            continue;
+        if (CanMegaEvolve(foe))
+            return FALSE;
+        if (!IsAiBattlerAware(foe))
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+                if (GetRecordedMove(foe, slot) == MOVE_NONE)
+                    return FALSE;
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        {
+            enum Move move = gBattleMons[foe].moves[slot];
+            if (move == MOVE_NONE || IsMoveUnusable(slot, move, gAiLogicData->moveLimitations[foe]))
+                continue;
+            switch (AI_GetBattlerMoveTargetType(foe, move))
+            {
+            case TARGET_USER:
+            case TARGET_ALLY:
+            case TARGET_USER_AND_ALLY:
+            case TARGET_USER_OR_ALLY:
+            case TARGET_FIELD:
+            case TARGET_OPPONENTS_FIELD:
+            case TARGET_ALL_BATTLERS:
+                continue;
+            default:
+                break;
+            }
+            if (AI_GetMovePriority(foe, gAiLogicData->abilities[foe], move) > 0)
+                return FALSE;
+        }
+    }
+    return TRUE;
+}
+
 // Haze resets every stat stage on the field, which buys something only when a
 // foe holds a raised stage or one of ours holds a lowered stage it has a use
 // for. Otherwise the turn resets nothing that matters: Winona's Altaria Hazed a
@@ -7834,6 +7878,8 @@ bool32 AI_IsMoveCertainToFail(enum BattlerId battlerAtk, enum BattlerId battlerD
     case EFFECT_PROTECT:
         if (GetMoveProtectMethod(move) == PROTECT_WIDE_GUARD && GetConfig(B_WIDE_GUARD) >= GEN_6)
             return AI_IsWideGuardUseless(battlerAtk);
+        if (GetMoveProtectMethod(move) == PROTECT_QUICK_GUARD && GetConfig(B_QUICK_GUARD) >= GEN_6)
+            return AI_IsQuickGuardUseless(battlerAtk);
         break;
     case EFFECT_FAIRY_LOCK:
         return (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK) != 0;

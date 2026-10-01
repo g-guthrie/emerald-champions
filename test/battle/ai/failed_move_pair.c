@@ -1136,7 +1136,8 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Revival Blessing is worth a fallen membe
 
 // E0243: Crobat never Quick Guarded a known Grassy Glide. The guard was marked
 // down as useless because Grassy Glide's base priority is 0; in Grassy
-// Terrain it moves first, which is exactly what Quick Guard stops.
+// Terrain it moves first, which is exactly what Quick Guard stops. Without the
+// terrain the known set has nothing that goes first, and the guard is a no-op.
 AI_SINGLE_BATTLE_TEST("EC failed moves: Quick Guard reads Grassy Glide's priority in Grassy Terrain")
 {
     enum Ability ability;
@@ -1154,7 +1155,45 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: Quick Guard reads Grassy Glide's priorit
             if (ability == ABILITY_GRASSY_SURGE)
                 SCORE_GT_VAL(opponent, MOVE_QUICK_GUARD, AI_SCORE_DEFAULT - 10);
             else
-                SCORE_EQ_VAL(opponent, MOVE_QUICK_GUARD, AI_SCORE_DEFAULT - 10);
+                SCORE_EQ_VAL(opponent, MOVE_QUICK_GUARD, 0);
+        }
+    }
+}
+
+// The Zeraora's Fake Out was spent on an earlier turn.
+static void SpentFakeOutBoard(void)
+{
+    gBattleStruct->battlerState[B_BATTLER_0].isFirstTurn = 0;
+}
+
+// E0289 (rv2 v003 a03) turn 1: Winona's Talonflame, hurt and off Gale Wings,
+// raised Quick Guard in front of a Zeraora whose Fake Out was spent and a Mega
+// Gengar with no priority move. Hard knows both sets: the guard had nothing to
+// stop. A live Fake Out or a Weavile's Ice Shard keeps it worth pricing.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: Quick Guard scores as a failure against foes with no usable priority")
+{
+    bool32 spent;
+    enum Species species;
+    enum Move first;
+    PARAMETRIZE { spent = TRUE; species = SPECIES_GENGAR_MEGA; first = MOVE_SLUDGE_BOMB; }
+    PARAMETRIZE { spent = FALSE; species = SPECIES_GENGAR_MEGA; first = MOVE_SLUDGE_BOMB; }
+    PARAMETRIZE { spent = TRUE; species = SPECIES_WEAVILE; first = MOVE_ICE_SHARD; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_ZERAORA) { Level(55); Nature(NATURE_JOLLY); Ability(ABILITY_VOLT_ABSORB); Item(ITEM_FOCUS_SASH); Moves(MOVE_FAKE_OUT, MOVE_PLASMA_FISTS, MOVE_KNOCK_OFF, MOVE_PROTECT); }
+        PLAYER(species) { Level(55); Nature(NATURE_TIMID); Moves(first, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_PROTECT); }
+        OPPONENT(SPECIES_TALONFLAME) { Level(60); MaxHP(182); HP(145); Nature(NATURE_JOLLY); Ability(ABILITY_GALE_WINGS); Item(ITEM_COVERT_CLOAK); Moves(MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_FLARE_BLITZ, MOVE_QUICK_GUARD); }
+        OPPONENT(SPECIES_CELESTEELA) { Level(59); Nature(NATURE_ADAMANT); Ability(ABILITY_BEAST_BOOST); Item(ITEM_WACAN_BERRY); Moves(MOVE_WIDE_GUARD, MOVE_HEAVY_SLAM, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE); }
+        if (spent)
+            gTestAiTurnSetupHook = SpentFakeOutBoard;
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PLASMA_FISTS, target: opponentLeft);
+            MOVE(playerRight, MOVE_THUNDERBOLT, target: opponentRight);
+            if (spent && species == SPECIES_GENGAR_MEGA)
+                SCORE_EQ_VAL(opponentLeft, MOVE_QUICK_GUARD, 0, target: playerLeft);
+            else
+                SCORE_GT_VAL(opponentLeft, MOVE_QUICK_GUARD, 0, target: playerLeft);
         }
     }
 }
