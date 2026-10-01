@@ -56,8 +56,9 @@
 // Each further raise among its last three moves makes the pattern likelier
 // still: Tate and Liza's Mega Gardevoir Hyper Voiced into a Bastiodon's Wide
 // Guard that went up nine turns running, priced every turn at an even chance.
+// A repeated Follow Me or Rage Powder grows the same way.
 #define PAIR_FORECAST_WIDE_GUARD 50
-#define PAIR_FORECAST_WIDE_GUARD_REPEAT 20
+#define PAIR_FORECAST_REPEAT 20
 // A redirector drawing a hit it is immune to or absorbs gives up nothing by
 // drawing it again, so it is the likeliest pattern, not an alternative.
 #define PAIR_FORECAST_REDIRECT_SAFE 60
@@ -1173,6 +1174,15 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
                     break;
                 }
             }
+        // Like a repeated Wide Guard, a redirection raised turn after turn
+        // is the likelier pattern each time: Kathleen's Mimikyu Drain Punched
+        // into a Togekiss's Follow Me five turns running for a quarter damage.
+        u32 raised = 0;
+        for (u32 index = 0; index < AI_MOVE_HISTORY_COUNT; index++)
+            if (gBattleHistory->moveHistory[redirector][index] == previous)
+                raised++;
+        if (raised > 1)
+            weight += PAIR_FORECAST_REPEAT * (raised - 1);
         for (u32 choice = 0; choice < ev->count[redirector]; choice++)
         {
             const struct PairAction *action = &ev->choices[redirector][choice];
@@ -1217,7 +1227,7 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
             {
                 forecasts[count][0] = guarded[0];
                 forecasts[count][1] = guarded[1];
-                weights[count] = PAIR_FORECAST_WIDE_GUARD + PAIR_FORECAST_WIDE_GUARD_REPEAT * (raised - 1);
+                weights[count] = PAIR_FORECAST_WIDE_GUARD + PAIR_FORECAST_REPEAT * (raised - 1);
                 count++;
             }
             break;

@@ -1367,3 +1367,27 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a spread attacker stops feeding a Wide G
         }
     }
 }
+
+// rv3 v031/E0399 a02 turns 1-5: Kathleen's Mimikyu aimed Drain Punch at
+// Kingambit five turns running while Togekiss used Follow Me every turn, and
+// each hit went into the Togekiss for a quarter damage. The redirection was
+// priced at the same minority chance however often it had been raised.
+AI_DOUBLE_BATTLE_TEST("EC failed moves: an attacker stops feeding a Follow Me raised turn after turn")
+{
+    GIVEN {
+        AI_FLAGS(FAIL_FLAGS);
+        PLAYER(SPECIES_TOGEKISS) { Level(55); Nature(NATURE_CALM); Ability(ABILITY_SERENE_GRACE); Item(ITEM_SITRUS_BERRY); Moves(MOVE_FOLLOW_ME, MOVE_DAZZLING_GLEAM, MOVE_AIR_SLASH, MOVE_PROTECT); }
+        PLAYER(SPECIES_KINGAMBIT) { Level(55); Nature(NATURE_ADAMANT); Ability(ABILITY_SUPREME_OVERLORD); Item(ITEM_BLACK_GLASSES); Moves(MOVE_KOWTOW_CLEAVE, MOVE_SUCKER_PUNCH, MOVE_IRON_HEAD, MOVE_PROTECT); }
+        PLAYER(SPECIES_SYLVEON) { Level(55); Nature(NATURE_MODEST); Ability(ABILITY_PIXILATE); Item(ITEM_CHOICE_SPECS); Moves(MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_PROTECT); }
+        OPPONENT(SPECIES_MIMIKYU) { Level(59); Nature(NATURE_JOLLY); Ability(ABILITY_DISGUISE); Item(ITEM_LIFE_ORB); Moves(MOVE_PLAY_ROUGH, MOVE_DRAIN_PUNCH, MOVE_SHADOW_SNEAK, MOVE_PROTECT); }
+        OPPONENT(SPECIES_DUSKNOIR) { Level(59); Nature(NATURE_ADAMANT); Ability(ABILITY_IRON_FIST); Item(ITEM_LEFTOVERS); Moves(MOVE_FIRE_PUNCH, MOVE_SHADOW_PUNCH, MOVE_LEECH_LIFE, MOVE_PROTECT); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FOLLOW_ME); MOVE(playerRight, MOVE_PROTECT); }
+        TURN { MOVE(playerLeft, MOVE_FOLLOW_ME); MOVE(playerRight, MOVE_PROTECT); }
+        TURN {
+            MOVE(playerLeft, MOVE_FOLLOW_ME);
+            MOVE(playerRight, MOVE_IRON_HEAD, target: opponentLeft);
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_DRAIN_PUNCH);
+        }
+    }
+}
