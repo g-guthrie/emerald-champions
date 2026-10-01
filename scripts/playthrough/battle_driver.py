@@ -2422,6 +2422,48 @@ def pretty(name):
     return name.replace('_', ' ').title()
 
 
+SPECIES_NAME_RE = re.compile(r'\.speciesName\s*=\s*_\("([^"]*)"\)')
+_SPECIES_DISPLAY = {}
+
+
+def species_display_names():
+    """{SPECIES_*: the battle's own name} from the species tables, read once.
+
+    The in-game name is form-neutral (both Aegislash formes print "Aegislash",
+    a Mega keeps its base name), exactly as battle text names the Pokemon."""
+    if not _SPECIES_DISPLAY:
+        names = {}
+        for path in sorted((ROOT / 'src/data/pokemon/species_info').glob('gen_*_families.h')):
+            text = path.read_text(errors='replace')
+            marks = list(re.finditer(r'\[(SPECIES_\w+)\]\s*=\s*\{', text))
+            for index, mark in enumerate(marks):
+                end = marks[index + 1].start() if index + 1 < len(marks) else len(text)
+                found = SPECIES_NAME_RE.search(text, mark.end(), end)
+                if found:
+                    names.setdefault(mark[1], found[1])
+        _SPECIES_DISPLAY.update(names or {'': ''})
+    return _SPECIES_DISPLAY
+
+
+def display_species(species):
+    """Form-neutral battle name for log lines about an event that already
+    happened: the view reads species after the call, and a form changer may
+    since have changed back (Aegislash reverts to Shield Forme on fainting,
+    likewise Mimikyu, Minior, Palafin, Morpeko, Eiscue, Darmanitan Zen)."""
+    if not species or str(species).endswith('_NONE'):
+        return '-'
+    names = species_display_names()
+    if species in names:
+        return names[species]
+    # Forms built by a shared macro (Vivillon patterns, Minior cores) carry no
+    # literal name; any sibling form, else the base word, names them.
+    stem = str(species)[len('SPECIES_'):].split('_')[0] if str(species).startswith('SPECIES_') else str(species)
+    for key, value in names.items():
+        if key == 'SPECIES_' + stem or key.startswith('SPECIES_' + stem + '_'):
+            return value
+    return stem.title()
+
+
 def name_forms(species):
     """How battle text names a species: the full form name, then its base name."""
     full = pretty(species).lower()
@@ -2518,11 +2560,11 @@ def narrated(log, before, after):
         verb = 'lost' if delta < 0 else 'gained'
         percent = max(1, round(100 * abs(delta) / max(active['max_hp'], 1)))
         hits = f" ({change['hits']} hits)" if change['hits'] > 1 else ''
+        name = display_species(active['species'])
         if active['side'] == 'player':
-            line = (f"{pretty(active['species'])} {verb} {percent}% "
-                    f"({change['hp_before']}\u2192{change['hp_after']}){hits}")
+            line = f"{name} {verb} {percent}% ({change['hp_before']}\u2192{change['hp_after']}){hits}"
         else:
-            line = f"opposing {pretty(active['species'])} {verb} {percent}%{hits}"
+            line = f"opposing {name} {verb} {percent}%{hits}"
         inserts.setdefault(change['message_index'], []).append(line)
     out = []
     for index, message in enumerate(messages):
@@ -2706,7 +2748,8 @@ def render_brief(session, state, messages, heading):
         who = ('YOU' if active['agent_controlled'] else 'PARTNER') if mine else 'FOE'
         if not active['alive']:
             gone = 'fainted' if active['hp'] == 0 and active['species'] not in (None, 'SPECIES_NONE') else 'empty'
-            lines.append(f"  [{battler}] {who} {pretty(active['species'])} {gone}")
+            # A fainted form changer has already reverted; name it form-neutrally.
+            lines.append(f"  [{battler}] {who} {display_species(active['species'])} {gone}")
             continue
         extra = volatiles.get(key, [])
         tail = (f" | {', '.join(extra)}" if extra else '') + f" | in since T{entered.get(key, '?')}"

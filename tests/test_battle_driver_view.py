@@ -284,6 +284,27 @@ class DriverViewTests(unittest.TestCase):
         self.assertIn('Fake Out 9pp BLOCKED(unusable: not first turn out)', text)
         self.assertIn('BLOCKED(choice_item)', text)
 
+    def test_log_lines_name_form_changers_form_neutrally(self):
+        for species, name in (('SPECIES_AEGISLASH_SHIELD', 'Aegislash'), ('SPECIES_AEGISLASH_BLADE', 'Aegislash'),
+                              ('SPECIES_MIMIKYU_BUSTED', 'Mimikyu'), ('SPECIES_PALAFIN_HERO', 'Palafin'),
+                              ('SPECIES_MORPEKO_HANGRY', 'Morpeko'), ('SPECIES_EISCUE_NOICE', 'Eiscue'),
+                              ('SPECIES_DARMANITAN_GALAR_ZEN', 'Darmanitan'), ('SPECIES_MINIOR_CORE_RED', 'Minior'),
+                              ('SPECIES_VIVILLON_ICY_SNOW', 'Vivillon'), ('SPECIES_CHARIZARD_MEGA_X', 'Charizard')):
+            self.assertEqual(driver.display_species(species), name)
+        # Blade Forme took the knockout hit; the view (read afterwards) shows
+        # the Shield Forme it reverted to on fainting.
+        _, state = self.decoded()
+        state['actives'][1]['species'] = 'SPECIES_AEGISLASH_BLADE'
+        after = json.loads(json.dumps(state))
+        after['actives'][1].update(species='SPECIES_AEGISLASH_SHIELD', hp=0)
+        log = {'messages': ['Sylveon used Shadow Ball!', 'The opposing Aegislash fainted!'],
+               'hp_changes': [{'battler': 1, 'hp_before': 26, 'hp_after': 0, 'message_index': 1,
+                               'attacker': 0, 'move': 'MOVE_SHADOW_BALL', 'cause': 'move'}]}
+        self.assertEqual(driver.narrated(log, state, after)[1], 'opposing Aegislash lost 50%')
+        session = FakeSession(self.constants, {'trainer_a': 'TRAINER_SHELBY_1'})
+        after['actives'][1]['alive'] = False
+        self.assertIn('[1] FOE Aegislash fainted', driver.render_brief(session, after, [], heading='T'))
+
     def test_witness_commands_round_trip_through_the_act_parser(self):
         submitted = {'0': {'action': 'move', 'index': 1, 'move': 'MOVE_PSYSHOCK', 'target': 3, 'mega': True},
                      '2': {'action': 'switch', 'slot': 4},
