@@ -12,6 +12,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
+import export_trainer_catalogue as catalogue
 import reference_pool as rp
 import manifest_battle_progression as bp
 import manifest_item_sources as item_sources
@@ -73,6 +74,9 @@ def load_model(quick=False):
                  'FLAG_DEFEATED_ELITE_4_GLACIA','FLAG_DEFEATED_ELITE_4_DRAKE',
                  'FLAG_EC_FINALE_DEOXYS_RESOLVED','FLAG_RECEIVED_SS_TICKET','FLAG_RECEIVED_AURORA_TICKET'})
     keys.add('FLAG_KECLEON_FLED_FORTREE') # FortreeCity/scripts.inc:84 opens the Gym approach.
+    # Steven's guidance moves the expert off the Cave of Origin door
+    # (SootopolisCity/scripts.inc:128-135); no battle condition reads it.
+    keys.add('FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN')
     # Story NPCs can open the next scene without a battle of their own (Stern's
     # interview opens the submarine scene). Their visibility writes are part
     # of access, even when no trainer script reads those flags directly.
@@ -193,6 +197,7 @@ def build(world,battles,events,items,limit=80):
                      unplaced_battles=[n['site_id'] for n in world.battles if n['site_id'] not in placed],
                      unplaced_trainers=sorted(authored-included))
     branch_data={b.trainer:b for b in rp.teams.read_teams()}
+    rules=catalogue.difficulty_level_rules()
     encounter_order=[]
     earliest={n:i for i,p in enumerate(periods) for n in p['battles']}
     for node in sorted(world.battles,key=lambda n:(earliest.get(n['site_id'],9999),min((branch_data[t].encounter for t in n['trainers'] if t in branch_data),default=9999),n['site_id'])):
@@ -205,13 +210,11 @@ def build(world,battles,events,items,limit=80):
         node['team']=[]
         for branch in branches:
             for mon in branch.mons:
-                def level(percent,drop):
-                    lead=mon.offset+2
-                    if lead>0:lead=(lead*percent+50)//100
-                    return max(1,min(100,cap+lead-(cap*drop+50)//100)-(branch.cls in ('regular','casual')))
+                def level(mode):
+                    return max(1,catalogue.campaign_level(cap,mon.offset,mode,rules)-(branch.cls in ('regular','casual')))
                 node['team'].append(dict(species='SPECIES_'+mon.species,item='ITEM_'+mon.item,
                     ability='ABILITY_'+mon.ability,nature='NATURE_'+mon.nature,
-                    moves=['MOVE_'+m for m in mon.moves],levels=[level(25,15),level(60,0),level(100,0)],offset=mon.offset))
+                    moves=['MOVE_'+m for m in mon.moves],levels=[level('DIFFICULTY_EASY'),level('DIFFICULTY_NORMAL'),level('DIFFICULTY_HARD')],offset=mon.offset))
         node['level_note']='Levels shown for the earliest available cap; delayed fights scale with the current cap.'
         if any('_ROUTE_103_' in t or '_ROUTE_110_' in t or '_ROUTE_119_' in t for t in node['trainers']):
             node['regional_note']='The rival retains the regional starter left unchosen by your pair; non-Hoenn choices use the native regional starter set.'
@@ -290,10 +293,16 @@ def running_ledger(manifest):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--quick',action='store_true');p.add_argument('--limit',type=int,default=80)
-    args=p.parse_args();faulthandler.dump_traceback_later(60,repeat=True);args.out.mkdir(parents=True,exist_ok=True)
+    p.add_argument('--trace-stalls',action='store_true',help='dump stacks every 60 s (can crash CPython 3.11 mid-parse)')
+    args=p.parse_args()
+    if args.trace_stalls:faulthandler.dump_traceback_later(60,repeat=True)
+    args.out.mkdir(parents=True,exist_ok=True)
     world,battles,events,items=load_model(args.quick)
     manifest=build(world,battles,events,items,args.limit)
     manifest['qualification']='development probe' if args.quick else 'source progression analysis'
+    # The full progression keeps derivations and per-victory boundaries that
+    # the compact ledger drops; manifest_text.py renders from it.
+    (args.out/'progression.pickle').write_bytes(pickle.dumps(manifest))
     ledger=running_ledger(manifest)
     (args.out/'manifest.json').write_text(json.dumps(ledger,separators=(',',':'),default=serial))
     (args.out/'source-state.pickle').write_bytes(pickle.dumps(world.last_state))

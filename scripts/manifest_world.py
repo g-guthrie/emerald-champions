@@ -269,6 +269,16 @@ class World:
         if row.get('ownership_condition')=='successful_capture' and not any(s in state['captured_battle_sites'] for s in row.get('capture_sites',[])):return False
         if row.get('kind') == 'starter':
             if row.get('starter_region') != state['starter_generation'] or row.get('species',row.get('key')) not in state.get('starter_species',{'SPECIES_TREECKO','SPECIES_MUDKIP'}):return False
+        stone=row.get('starter_stone_species')
+        if stone:
+            # Norman's Ring gift holds only the selected pair's stones; a Hoenn
+            # partner's stone waits until after his battle for that line to be
+            # shown (src/mega_stone_rewards.c, PetalburgCity_Gym NormanPostBattle).
+            sd=self.pokemon.sd
+            pair=state.get('starter_species',{'SPECIES_TREECKO','SPECIES_MUDKIP'})
+            if not any(stone in sd.family(s) for s in pair):
+                if stone not in ('SPECIES_SCEPTILE','SPECIES_BLAZIKEN','SPECIES_SWAMPERT'):return False
+                if 'TRAINER_NORMAN_1' not in state['defeated'] or not any(stone in sd.family(s) for s in state['species']):return False
         if not self.reachable(row.get('where'),state) or not self.requirements(row.get('requires'),state): return False
         if any(x not in state['species'] for x in row.get('needs_species',[])): return False
         if any(x not in state['items'] for x in row.get('needs_items',[])): return False
@@ -353,9 +363,25 @@ class World:
             allowed=all(self.token(t,state) for t in needed) and any(self.pokemon.can_learn_field(s,move) for s in state['species'])
             if allowed: state['flags'].add(key)
             else: state['flags'].discard(key)
+        self.rusturf_rock_smash(state)
         for item, token in [('ITEM_OLD_ROD','HAS_OLD_ROD'),('ITEM_GOOD_ROD','HAS_GOOD_ROD'),('ITEM_SUPER_ROD','HAS_SUPER_ROD')]:
             if item in state['items']: state['flags'].add(token)
         state['cap']=mr.cap_of_flags(state['flags'])
+
+    def rusturf_rock_smash(self,state):
+        # Smashing a tunnel rock runs the native hook TryUpdateRusturfTunnelState
+        # (data/scripts/field_move_scripts.inc:177, src/field_specials.c:2022).
+        # The script graph cannot see it, yet it is what raises the tunnel state
+        # for RusturfTunnel_OnFrame's ClearTunnelScene: the Strength license.
+        if ('CAN_ROCK_SMASH' not in state['flags'] or mr.canon('FLAG_RUSTURF_TUNNEL_OPENED') in state['flags']
+                or state['vars'].get('VAR_RUSTURF_TUNNEL_STATE',0) in (4,5)):return
+        for rock in self.geo.maps['RusturfTunnel'].get('object_events',[]):
+            flag=str(rock.get('flag'))
+            if rock.get('script')!='EventScript_RockSmash' or not flag.startswith('FLAG_HIDE_RUSTURF_TUNNEL_ROCK_'):continue
+            if mr.canon(flag) in state['flags'] or not set(self.geo.near('RusturfTunnel',rock['x'],rock['y']))&state['reached']:continue
+            state['flags'].add(mr.canon(flag))
+            state['vars']['VAR_RUSTURF_TUNNEL_STATE']=4 if flag.endswith('_1') else 5
+            return
 
     def apply(self, effects, state, assignments=None, conditions=None, map_=None,entry=None):
         actors=self.geo._objects_by_script.get((map_,entry),[])
@@ -450,8 +476,20 @@ class World:
                 if i in live_pokemon:continue
                 if self.source_live(row,state):
                     live_pokemon.add(i);state['species'].add(row['species']);state['caught'].add(row['species'])
+            # Breeding asks whether each owned species can be caught twice.
+            # Index wild sources once and answer each species once per pass.
+            if not hasattr(self,'_wild_by_species'):
+                self._wild_by_species={}
+                for r in self.pokemon.sources:
+                    if r.kind=='wild':self._wild_by_species.setdefault(r.key,[]).append(r)
+            repeatable={}
+            def can_repeat(s):
+                if s not in repeatable:
+                    repeatable[s]=any(self.reachable(r.where,state) and self.requirements(r.requires,state)
+                                      for r in self._wild_by_species.get(s,()))
+                return repeatable[s]
             deriv=self.pokemon.derive(state['species'],state['items'],state['cap'],lambda w:self.reachable(w,state),state['flags'],
-                {'repeatable':lambda s:any(r.kind=='wild' and r.key==s and self.reachable(r.where,state) and self.requirements(r.requires,state) for r in self.pokemon.sources),
+                {'repeatable':can_repeat,
                  'knows_move':self.pokemon.can_learn,'friendship_max':255 if 'OldaleTown_PokemonCenter_1F' in state['maps'] else 0})
             state['species'].update(deriv['species']);state['caught'].update(deriv['species'])
             for event in self.events:

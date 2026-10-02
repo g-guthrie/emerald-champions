@@ -1264,6 +1264,10 @@ def _scratch_output(args,state,constants):
     if args.get('function')=='GetLevelCapForScriptedGift' and args.get('variable')=='VAR_0x800A':
         return {state['cap']} if 'cap' in state else None
     function=args.get('function');variable=args.get('variable')
+    # The player's tile (src/field_specials.c StorePlayerCoordsInVars). Arrival
+    # scenes branch on it only for camera framing, e.g. Sootopolis' legends.
+    if function=='StorePlayerCoordsInVars' and variable in ('VAR_0x8004','VAR_0x8005'):
+        return set(range(256))
     if function=='ShowEasyChatScreen' and variable=='VAR_0x8004':
         mode=_token(_arg(args,'VAR_0x8004',state,constants),'EASY_CHAT_TYPE_',constants)
         # Token can remain literal when constants are not supplied.

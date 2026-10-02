@@ -124,6 +124,8 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
             row['controls'] = _controls(builder, label)
             row['repeatability'] = 'receipt flags and daily checks retained in controls; bag-space failures leave unreceived rewards retryable where source permits'
         if "Norman's starter-pair Mega Stone" in source.detail:
+            table=(rp.ROOT/'src/mega_stone_rewards.c').read_text().split('sStarterMegaStones[] =',1)[1].split('};',1)[0]
+            row['starter_stone_species']=dict((i,sp) for sp,i in re.findall(r'\{(SPECIES_\w+),\s*(ITEM_\w+)',table))[source.key]
             row['selection']='only selected starter-pair final-form stones; Swampertite fallback if that pair has no Mega; other Hoenn stones require showing Norman the corresponding starter line'
             row['native_conditions']=['src/mega_stone_rewards.c:sStarterMegaStones','src/mega_stone_rewards.c:IsNormanStarterMegaStone','src/mega_stone_rewards.c:GetNormanStarterMegaStone']
         if source.kind == 'hidden':

@@ -195,7 +195,9 @@ class ManifestGeometry(mr.Geometry):
         prior_effects=set(EFFECTS)
         EFFECTS.update(warp_ops)
         try:
-            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym'}):
+            # Story maps whose only entrance is a scripted walk-in: Steven leads
+            # the player into the Cave of Origin (SootopolisCity/scripts.inc:917-946).
+            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity'}):
                 if d not in self.maps: continue
                 entries=[]
                 for category in ('bg_events','coord_events','object_events'):

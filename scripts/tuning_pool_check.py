@@ -37,6 +37,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 POOLS = ROOT / "work/tuning-20260930/pools"
+PROGRESSION = ROOT / "work/progression-manifest/progression.pickle"
 
 
 def load_pool(milestone: str, pools_dir: Path = POOLS) -> dict:
@@ -211,6 +212,36 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
     return problems
 
 
+def narrow_to_progression(pool: dict, trainer: str, path: Path) -> tuple[dict, str]:
+    """Keep only what the battle-ordered progression has opened before this
+    battle. The milestone pool is a broad upper bound; the progression orders
+    every victory, so it withholds resources a same-cap later fight opens."""
+    import pickle
+    from manifest_text import resources_before
+    have = resources_before(pickle.loads(path.read_bytes()), trainer)
+    if have["cap"] != pool["cap"]:
+        pool = dict(pool, cap=have["cap"])
+    # The progression follows the Treecko + Mudkip reference pick. Any other
+    # starter line may stand in for those two at the same evolution stage.
+    from reference_pool import SpeciesData
+    sd = SpeciesData()
+
+    def stage(sp):
+        depth, cur = 0, sp
+        while sd.pre_evo.get(cur):
+            cur, depth = sorted(sd.pre_evo[cur])[0], depth + 1
+        return depth
+    reference = sd.family("SPECIES_TREECKO") | sd.family("SPECIES_MUDKIP")
+    stages = {stage(sp) for sp in have["species"] & reference}
+    starter_species = {sp for line in (pool.get("starter_lines") or {}).values() for sp in line.get("species", [])}
+
+    def keep(sp):
+        return sp in have["species"] or (sp in starter_species and stage(sp) in stages)
+    pool = dict(pool, species=[s for s in pool["species"] if keep(s["species"])],
+                items=[i for i in pool["items"] if i["item"] in have["items"]])
+    return pool, f" (progression battle #{have['number']}, cap {have['cap']})"
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("party", type=Path, help="party manifest (scripts/playthrough/prepare_party.py format)")
@@ -219,6 +250,8 @@ def main(argv=None) -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--trainer", help="TRAINER_* whose victory/resources must remain unavailable")
     mode.add_argument("--window-only", action="store_true", help="screen a broad inventory pool; not encounter legality proof")
+    parser.add_argument("--progression", type=Path, default=PROGRESSION,
+                        help="battle-ordered progression from manifest_campaign.py (default: %(default)s)")
     args = parser.parse_args(argv)
     manifest = json.loads(args.party.read_text())
     trainer = args.trainer or manifest.get("trainer")
@@ -237,13 +270,19 @@ def main(argv=None) -> int:
         except ValueError as exc:
             print(f"FAIL: {exc}")
             return 1
+    narrowed = ""
+    if trainer and not args.window_only:
+        if not args.progression.exists():
+            print(f"FAIL: {args.progression} is missing; run scripts/manifest_campaign.py first")
+            return 1
+        pool, narrowed = narrow_to_progression(pool, trainer, args.progression)
     problems = check(manifest, pool, species_aliases())
     if problems:
         print(f"FAIL {args.party} vs {pool['milestone']} (cap {pool['cap']}):")
         for p in problems:
             print(f"  - {p}")
         return 1
-    scope = "WINDOW INVENTORY ONLY" if args.window_only else f"before {trainer} (source upper bound)"
+    scope = "WINDOW INVENTORY ONLY" if args.window_only else f"before {trainer}{narrowed}"
     print(f"PASS {args.party} vs {pool['milestone']} (cap {pool['cap']}): {len(manifest['party'])} members; {scope}")
     return 0
 
