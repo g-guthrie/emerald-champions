@@ -281,6 +281,9 @@ Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon:
 	.string "We look after Pokémon free of charge.\p"
 	.string "They won't gain levels here, but\n"
 	.string "sometimes an Egg turns up!\p"
+	.string "Hatchlings learn from their parents.\n"
+	.string "Some old families hand down a move\l"
+	.string "you won't find anywhere else!\p"
 	.string "Would you like us to look after one?$"
 
 Route117_PokemonDayCare_Text_WhichMonShouldWeRaise:

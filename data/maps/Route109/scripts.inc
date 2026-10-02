@@ -540,5 +540,5 @@ Route109_Text_TrainerTipsSign: @ 81EF1D5
 	.string "Trainer Tips\p"
 	.string "Pokémon at the same level may not\n"
 	.string "always have identical stats.\p"
-	.string "Pokémon raised by Trainers are said\n"
-	.string "to grow stronger than wild Pokémon.$"
+	.string "Natures and EV training shape them.\n"
+	.string "A Center's Move Tutor plans EVs.$"

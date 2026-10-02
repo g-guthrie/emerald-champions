@@ -38,16 +38,23 @@ Route101_EventScript_StartBirchRescue::
 	closemessage
 	setobjectxy LOCALID_ROUTE101_BIRCH, 0, 15
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 0, 16
+	@ Poochyena runs two tiles behind Zigzagoon, replaying its path two steps
+	@ late: their 32-pixel sprites keep a full empty square between them. When
+	@ they corner Birch it steps up beside Zigzagoon.
+	setobjectxy LOCALID_ROUTE101_POOCHYENA, 0, 18
 	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChase1
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChaseInCircles
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaFlankZigzagoon
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
@@ -140,6 +147,55 @@ Route101_Movement_ZigzagoonChase1:
 @ Leftover data? This command is unused.
 	step_end
 
+Route101_Movement_PoochyenaChase1:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+Route101_Movement_PoochyenaChaseInCircles:
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	step_end
+
+Route101_Movement_PoochyenaFlankZigzagoon:
+	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_in_place_fast_left
+	step_end
+
 Route101_Movement_ZigzagoonFaceBirch:
 	walk_in_place_fast_left
 	walk_in_place_fast_left
@@ -224,8 +280,12 @@ Route101_EventScript_BirchsBag::
 	faceplayer
 	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, Route101_EventScript_FinishRescue
 	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_BattleRescue
+	@ Birch's doubles cue, while both wild Pokémon are still in view.
+	msgbox Route101_Text_TwoOfThem, MSGBOX_DEFAULT
+	closemessage
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
+	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
@@ -236,6 +296,7 @@ Route101_EventScript_BirchsBag::
 Route101_EventScript_BattleRescue::
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
+	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	special StartEmeraldChampionsBirchRescue
 	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route101_EventScript_RescueLost
@@ -282,16 +343,25 @@ Route101_EventScript_ReturnToBag::
 	clearflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	addobject LOCALID_ROUTE101_BIRCH
 	addobject LOCALID_ROUTE101_ZIGZAGOON
+	addobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_ROUTE101_BIRCH, 4, 13
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 5, 13
+	setobjectxy LOCALID_ROUTE101_POOCHYENA, 5, 12
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE101_POOCHYENA, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	setvar VAR_ROUTE101_STATE, 2
 	playbgm MUS_HELP, TRUE
 	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
+
+Route101_Text_TwoOfThem:
+	.string "Prof. Birch: Take two from my bag!\n"
+	.string "There's more than one!\p"
+	.string "Both partners fight! Pick a move\n"
+	.string "and a target for each one!$"
 
 Route101_Text_RescueTryAgain:
 	.string "Your partners are safe.\p"

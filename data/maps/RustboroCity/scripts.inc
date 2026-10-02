@@ -1235,7 +1235,8 @@ RustboroCity_Text_DevelopedNewPokenavFeature:
 RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
 	.string "The Hoenn Map shows where you are\n"
 	.string "and the places you can explore.\p"
-	.string "Press A to zoom in and out.\n"
+	.string "Press A to zoom in. Zoomed in,\n"
+	.string "A on a place lists its wild Pokémon.\p"
 	.string "Press B to close it when you're done.$"
 
 RustboroCity_Text_IdBetterGetBackToWork: @ 81E2464

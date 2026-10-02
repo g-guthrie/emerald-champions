@@ -285,6 +285,8 @@ RustboroCity_Gym_Text_Tips::
 	.string "up to it with your Leveler first!\p"
 	.string "Grass and Steel moves hit most of\n"
 	.string "her team hard!\p"
+	.string "And if a fight goes sideways, Run!\n"
+	.string "You'll start over with a new plan.\p"
 	.string "Come see me afterwards, if you beat\n"
 	.string "the Gym Leader.\p"
 	.string "Oh, and take these Gems! A partner\n"
