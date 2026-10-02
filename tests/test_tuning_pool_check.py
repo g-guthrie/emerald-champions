@@ -175,7 +175,8 @@ class EncounterAvailabilityTests(unittest.TestCase):
             self.assertNotIn(flag, pool["story_flags"])
         self.assertFalse(pool["hot_spring_available"])
         species = {s["species"] for s in pool["species"]}
-        self.assertIn("SPECIES_EEVEE", species)
+        self.assertIn("SPECIES_FIDOUGH", species)
+        self.assertNotIn("SPECIES_EEVEE", species)  # Route 117 only.
         self.assertIn("SPECIES_PACHIRISU", species)
         self.assertNotIn("SPECIES_LUCARIO", species)
         self.assertNotIn("SPECIES_NAGANADEL", species)

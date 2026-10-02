@@ -3,13 +3,15 @@
 import copy
 import json
 import unittest
-from battle_campaign_arsenal import _campaign_scenario, certify_scenario, profile, EarlyGeometry
-from battle_opening_arsenal import _opening_scenario
+from battle_campaign_arsenal import _campaign_scenario, certify_scenario, profile, EarlyGeometry, campaign_evolution
+from battle_opening_arsenal import _opening_scenario, number, rules
+
+def nature_id(nature):return number('include/constants/pokemon.h',nature)
 
 class CampaignArsenalTests(unittest.TestCase):
     def test_source_profiles_preserve_earlier_resources_and_real_early_caps(self):
-        args={'generation':3,'first':0,'second':1,'captures':['SPECIES_EEVEE'],
-              'evolutions':{'SPECIES_EEVEE':'SPECIES_SYLVEON'}}
+        args={'generation':3,'first':0,'second':1,'captures':['SPECIES_WURMPLE'],
+              'evolutions':{'SPECIES_WURMPLE':'SPECIES_BEAUTIFLY'}}
         opening=_opening_scenario('hard',**args)
         for stage,trainer in [('after_rival','TRAINER_CALVIN_1'),('after_wally','TRAINER_BILLY'),
                               ('after_wally','TRAINER_GRUNT_PETALBURG_WOODS'),('after_woods','TRAINER_ROXANNE_1')]:
@@ -47,15 +49,26 @@ class CampaignArsenalTests(unittest.TestCase):
             with self.assertRaises(ValueError):certify_scenario(s)
 
     def test_reached_counter_captures_and_map_evolution_have_finite_joint_ownership(self):
-        preparation={'evolutions':{'SPECIES_EEVEE':'SPECIES_LEAFEON'},'captures':[
+        # Eevee is a Route 117 encounter, outside these early maps. The retained
+        # branching evolver is an opening Wurmple: its personality branch must
+        # agree with the retained nature roll.
+        preparation={'evolutions':{'SPECIES_WURMPLE':'SPECIES_BEAUTIFLY'},'captures':[
             {'species':'SPECIES_RIOLU','map':'Route116','xy':[4,13],'nature':'NATURE_MODEST','evolved_to':'SPECIES_LUCARIO'},
             {'species':'SPECIES_WOOBAT','map':'Seaspray_Cave','xy':[9,30],'evolved_to':'SPECIES_SWOOBAT'}]}
+        opening={'captures':['SPECIES_WURMPLE'],'natures':{'SPECIES_WURMPLE':'NATURE_CALM'}}
         s=_campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',
-                            opening_parameters={'captures':['SPECIES_EEVEE']},campaign_preparation=preparation)
+                            opening_parameters=opening,campaign_preparation=preparation)
         state=s['acquisition_states'][0]
-        self.assertTrue({'SPECIES_LEAFEON','SPECIES_LUCARIO','SPECIES_SWOOBAT'}<=set(s['candidate_roster']))
-        self.assertFalse({'SPECIES_EEVEE','SPECIES_RIOLU','SPECIES_WOOBAT'}&set(state['resources']))
-        self.assertEqual(state['pokemon_defaults']['SPECIES_LEAFEON']['friendship'],0)
+        self.assertTrue({'SPECIES_BEAUTIFLY','SPECIES_LUCARIO','SPECIES_SWOOBAT'}<=set(s['candidate_roster']))
+        self.assertFalse({'SPECIES_WURMPLE','SPECIES_SILCOON','SPECIES_RIOLU','SPECIES_WOOBAT'}&set(state['resources']))
+        retained=[p['evolution'] for p in state['campaign_acquisition_proofs'] if p['method']=='retained_evolution']
+        self.assertEqual([p['target_species'] for p in retained],['SPECIES_BEAUTIFLY'])
+        witness=retained[0]['personality_witness']
+        self.assertEqual(witness%nature_id('NUM_NATURES'),nature_id('NATURE_CALM'))
+        self.assertGreater((witness>>16)%10,4) # Silcoon, never Cascoon.
+        self.assertEqual(state['pokemon_defaults']['SPECIES_BEAUTIFLY']['nature'],'NATURE_CALM')
+        self.assertEqual(state['pokemon_defaults']['SPECIES_LUCARIO']['friendship'],255)
+        self.assertEqual(state['pokemon_defaults']['SPECIES_SWOOBAT']['friendship'],255)
         self.assertEqual(state['pokemon_defaults']['SPECIES_LUCARIO']['nature'],'NATURE_MODEST')
         self.assertEqual(s['economy']['purchased_poke_balls'],3)
         self.assertEqual(s['economy']['capture_cost'],600)
@@ -66,6 +79,22 @@ class CampaignArsenalTests(unittest.TestCase):
         certify_scenario(json.loads(json.dumps(s)))
         altered=copy.deepcopy(s);altered['acquisition_states'][0]['resources']['ITEM_ICE_STONE']=1
         with self.assertRaises(ValueError):certify_scenario(altered)
+        # Woods Leafeon still needs an owned Eevee, which these stages cannot hold.
+        with self.assertRaisesRegex(ValueError,'owned Eevee'):
+            _campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',opening_parameters=opening,
+                               campaign_preparation={'evolutions':{'SPECIES_WURMPLE':'SPECIES_LEAFEON'}})
+        # Once Mauville (Route 117's gateway) is reached at the Knuckle Badge
+        # cap, Eevee's map evolution is a Leveler step on a reached Woods tile.
+        access=profile('after_route110',_opening_scenario('hard'));geometry=EarlyGeometry('after_route110',access)
+        self.assertTrue(any(node[0]=='MauvilleCity' for node in geometry.reached))
+        leafeon=campaign_evolution('SPECIES_EEVEE','SPECIES_LEAFEON','NATURE_HARDY',rules(),geometry,access)
+        self.assertEqual(leafeon['leveler_at_cap'],30)
+        self.assertEqual(leafeon['friendship'],0)
+        self.assertEqual(leafeon['evolution_map'],'PetalburgWoods')
+        self.assertIn(('PetalburgWoods',*leafeon['evolution_xy']),geometry.reached)
+        self.assertEqual(leafeon['steps'][0]['conditions'],[['IF_IN_MAP','MAP_PETALBURG_WOODS']])
+        with self.assertRaisesRegex(ValueError,'No audited cap-legal evolution path'):
+            campaign_evolution('SPECIES_EEVEE','SPECIES_GLACEON','NATURE_HARDY',rules(),geometry,access)
         item_capture=_campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',campaign_preparation={'captures':[
             {'species':'SPECIES_PARAS','map':'PetalburgWoods','xy':[4,10],'held_item':'ITEM_BIG_MUSHROOM'}]})
         self.assertEqual(item_capture['acquisition_states'][0]['resources']['ITEM_BIG_MUSHROOM'],1)
@@ -78,15 +107,17 @@ class CampaignArsenalTests(unittest.TestCase):
         for capture in captures:
             with self.subTest(capture=capture),self.assertRaises(ValueError):
                 _campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',campaign_preparation={'captures':[capture]})
-        with self.assertRaises(ValueError):
-            _campaign_scenario('TRAINER_CALVIN_1','hard',stage='after_rival',opening_parameters={'captures':['SPECIES_EEVEE']},
-                               campaign_preparation={'evolutions':{'SPECIES_EEVEE':'SPECIES_LEAFEON'}})
-        with self.assertRaises(ValueError):
-            _campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',opening_parameters={'captures':['SPECIES_EEVEE']},
-                               campaign_preparation={'evolutions':{'SPECIES_EEVEE':'SPECIES_GLACEON'}})
-        with self.assertRaises(ValueError):
+        # No early stage owns an Eevee (Route 117), so its map/stone rules are
+        # checked directly: no Woods before Wally, no audited Glaceon route.
+        r=rules();opening=_opening_scenario('hard')
+        for stage,target,reason in [('after_rival','SPECIES_LEAFEON','Petalburg Woods evolution map is not reached'),
+                                    ('after_woods','SPECIES_GLACEON','No audited cap-legal evolution path')]:
+            access=profile(stage,opening);geometry=EarlyGeometry(stage,access)
+            with self.subTest(stage=stage,target=target),self.assertRaisesRegex(ValueError,reason):
+                campaign_evolution('SPECIES_EEVEE',target,'NATURE_HARDY',r,geometry,access)
+        with self.assertRaisesRegex(ValueError,'exceed retained cash'):
             _campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',
-                opening_parameters={'captures':['SPECIES_EEVEE','SPECIES_WURMPLE','SPECIES_SCATTERBUG','SPECIES_PACHIRISU']},
+                opening_parameters={'captures':['SPECIES_KRICKETOT','SPECIES_WURMPLE','SPECIES_SCATTERBUG','SPECIES_PACHIRISU']},
                 campaign_preparation={'captures':[{'species':s,'map':'Route116','xy':[4,13]}
                     for s in ['SPECIES_RIOLU','SPECIES_MAREEP','SPECIES_ROOKIDEE','SPECIES_JOLTIK']]})
 
@@ -110,27 +141,32 @@ class CampaignArsenalTests(unittest.TestCase):
         self.assertEqual(own_win['battle_access_status'],'unresolved')
 
     def test_farm_ownership_ids_survive_evolution_and_stage_fees_are_funded(self):
-        opening={'preparation':{'captures':[
-            {'id':'leaf','species':'SPECIES_EEVEE','nature':'NATURE_ADAMANT'},
-            {'id':'farmer','species':'SPECIES_EEVEE','nature':'NATURE_MODEST'}],
-            'selected':['starter-0','starter-1','leaf'],'pay_day_wins':1,'pay_day_farmer':'farmer',
-            'pokerus':{'direct':['leaf']}}}
-        prep={'evolutions':{'leaf':'SPECIES_LEAFEON'},'captures':[
+        # Litten (Gen 7 pair) is the only opening Pay Day learner; it farms,
+        # is boxed, then joins the stage pool. Two Wurmple share a species but
+        # keep distinct IDs when one evolves at the stage.
+        opening={'generation':7,'first':0,'second':1,'preparation':{'captures':[
+            {'id':'moth','species':'SPECIES_WURMPLE','nature':'NATURE_ADAMANT'},
+            {'id':'twin','species':'SPECIES_WURMPLE','nature':'NATURE_MODEST'}],
+            'selected':['starter-0','moth','twin'],'pay_day_wins':1,'pay_day_farmer':'starter-1',
+            'pokerus':{'direct':['moth']}}}
+        prep={'evolutions':{'moth':'SPECIES_DUSTOX'},'captures':[
             {'id':'steel','species':'SPECIES_RIOLU','map':'Route116','xy':[4,13],'evolved_to':'SPECIES_LUCARIO'}],
-            'selected':['leaf','steel','farmer']}
+            'selected':['moth','steel','starter-1']}
         s=_campaign_scenario('TRAINER_ROXANNE_1','hard',stage='after_woods',
                             opening_parameters=opening,campaign_preparation=prep)
         state=s['acquisition_states'][0]
-        self.assertEqual(state['owned_monsters']['leaf']['species'],'SPECIES_LEAFEON')
-        self.assertEqual(state['owned_monsters']['farmer']['species'],'SPECIES_EEVEE')
-        self.assertEqual(state['resources']['SPECIES_EEVEE'],1)
-        self.assertEqual(state['pokemon_defaults_by_id']['leaf']['nature'],'NATURE_ADAMANT')
-        self.assertEqual(state['pokemon_defaults_by_id']['leaf']['pokerus'],0xFE)
+        self.assertEqual(state['owned_monsters']['moth']['species'],'SPECIES_DUSTOX')
+        self.assertEqual(state['owned_monsters']['twin']['species'],'SPECIES_WURMPLE')
+        self.assertEqual(state['owned_monsters']['starter-1']['species'],'SPECIES_LITTEN')
+        self.assertEqual(state['resources']['SPECIES_WURMPLE'],1)
+        self.assertEqual(state['pokemon_defaults_by_id']['moth']['nature'],'NATURE_ADAMANT')
+        self.assertEqual(state['pokemon_defaults_by_id']['twin']['nature'],'NATURE_MODEST')
+        self.assertEqual(state['pokemon_defaults_by_id']['moth']['pokerus'],0xFE)
         self.assertEqual(state['owned_monsters']['steel']['species'],'SPECIES_LUCARIO')
-        self.assertEqual(state['selected_owned_ids'],['leaf','steel','farmer'])
+        self.assertEqual(state['selected_owned_ids'],['moth','steel','starter-1'])
         self.assertEqual(s['economy']['ev_fee_reserve'],2500) # old three + capture + boxed farmer
         self.assertEqual(s['economy']['cash_remaining_minimum'],2970)
-        self.assertEqual(s['candidate_roster'],['SPECIES_LEAFEON','SPECIES_LUCARIO','SPECIES_EEVEE'])
+        self.assertEqual(s['candidate_roster'],['SPECIES_DUSTOX','SPECIES_LUCARIO','SPECIES_LITTEN'])
         certify_scenario(json.loads(json.dumps(s)))
 
     def test_native_validated_letter_ferry_and_brawly_blocker_have_distinct_profiles(self):

@@ -13,13 +13,16 @@ class SortedCertificateTests(unittest.TestCase):
     def test_sorted_evolution_mapping_preserves_certificate_and_rejects_forged_grant(self):
         fingerprint = 'internal-frozen-source-test'
         scenario = opening._opening_scenario('hard', generation=3, first=0, second=1,
-            captures=['SPECIES_EEVEE', 'SPECIES_WURMPLE', 'SPECIES_SCATTERBUG', 'SPECIES_PACHIRISU'],
-            evolutions={'SPECIES_EEVEE': 'SPECIES_SYLVEON', 'SPECIES_WURMPLE': 'SPECIES_DUSTOX',
+            captures=['SPECIES_KRICKETOT', 'SPECIES_WURMPLE', 'SPECIES_SCATTERBUG', 'SPECIES_PACHIRISU'],
+            evolutions={'SPECIES_KRICKETOT': 'SPECIES_KRICKETUNE', 'SPECIES_WURMPLE': 'SPECIES_DUSTOX',
                         'SPECIES_SCATTERBUG': 'SPECIES_VIVILLON'}, _fingerprint=fingerprint)
+        # Capture order deliberately differs from sorted key order.
+        self.assertNotEqual(list(scenario['opening_parameters']['evolutions']),
+                            sorted(scenario['opening_parameters']['evolutions']))
         stored = json.loads(json.dumps(scenario, sort_keys=True))
         opening.certify_scenario(stored, internal_fingerprint=fingerprint)
         self.assertEqual([p['base_species'] for p in stored['acquisition_states'][0]['evolution_proofs']],
-                         ['SPECIES_EEVEE', 'SPECIES_WURMPLE', 'SPECIES_SCATTERBUG'])
+                         ['SPECIES_KRICKETOT', 'SPECIES_WURMPLE', 'SPECIES_SCATTERBUG'])
         forged = copy.deepcopy(stored)
         forged['acquisition_states'][0]['resources']['SPECIES_DUSTOX'] += 1
         with self.assertRaisesRegex(ValueError, 'acquisition_states'):

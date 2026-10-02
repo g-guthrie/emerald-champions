@@ -2,41 +2,54 @@
 """Opening certificates must reject impossible and externally forged grants."""
 import copy
 import unittest
-from battle_opening_arsenal import _opening_scenario, evolution_path, rules, build_opening_scenario, candidate_party, certify_scenario, certify_opening_manifest
+from battle_opening_arsenal import _opening_scenario, evolution_path, rules, build_opening_scenario, candidate_party, certify_scenario, certify_opening_manifest, number
+from verify_trainer_ability_legality import resolve_species
+
+def nature_id(nature):return number('include/constants/pokemon.h',nature)
 
 class OpeningArsenalTests(unittest.TestCase):
     def test_boxing_duplicate_captures_keep_independent_ownership_and_rolls(self):
+        # Wurmple (Route 101) branches on personality, so each owned roll matters.
         scenario=build_opening_scenario(preparation={'captures':[
-            {'id':'eevee-timid','species':'SPECIES_EEVEE','nature':'NATURE_TIMID','evolved_to':'SPECIES_SYLVEON'},
-            {'id':'eevee-bold','species':'SPECIES_EEVEE','nature':'NATURE_BOLD'}],
-            'selected':['eevee-timid','eevee-bold']})
+            {'id':'wurmple-timid','species':'SPECIES_WURMPLE','nature':'NATURE_TIMID','evolved_to':'SPECIES_BEAUTIFLY'},
+            {'id':'wurmple-bold','species':'SPECIES_WURMPLE','nature':'NATURE_BOLD'}],
+            'selected':['wurmple-timid','wurmple-bold']})
         state=scenario['acquisition_states'][0]
-        self.assertEqual(scenario['candidate_roster'],['SPECIES_SYLVEON','SPECIES_EEVEE'])
-        self.assertEqual(state['pokemon_defaults_by_id']['eevee-timid']['nature'],'NATURE_TIMID')
-        self.assertEqual(state['pokemon_defaults_by_id']['eevee-bold']['nature'],'NATURE_BOLD')
-        self.assertEqual(state['resources']['SPECIES_EEVEE'],1)
+        self.assertEqual(scenario['candidate_roster'],['SPECIES_BEAUTIFLY','SPECIES_WURMPLE'])
+        self.assertEqual(state['pokemon_defaults_by_id']['wurmple-timid']['nature'],'NATURE_TIMID')
+        self.assertEqual(state['pokemon_defaults_by_id']['wurmple-bold']['nature'],'NATURE_BOLD')
+        self.assertEqual(state['resources']['SPECIES_WURMPLE'],1)
+        self.assertEqual([p['owned_mon_id'] for p in state['evolution_proofs']],['wurmple-timid'])
+        self.assertEqual(state['evolution_proofs'][0]['personality_witness']%nature_id('NUM_NATURES'),nature_id('NATURE_TIMID'))
         manifest=candidate_party(scenario)
-        self.assertEqual([m['availability']['owned_mon_id'] for m in manifest['party']],['eevee-timid','eevee-bold'])
+        self.assertEqual([m['availability']['owned_mon_id'] for m in manifest['party']],['wurmple-timid','wurmple-bold'])
         for change in (lambda p:p[0]['availability'].pop('owned_mon_id'),
-                       lambda p:p[1]['availability'].update(owned_mon_id='eevee-timid'),
+                       lambda p:p[1]['availability'].update(owned_mon_id='wurmple-timid'),
                        lambda p:p[0]['availability'].update(owned_mon_id='starter-0')):
             forged=copy.deepcopy(manifest);change(forged['party'])
             with self.assertRaises(ValueError):certify_opening_manifest(scenario,forged)
 
     def test_finite_pay_day_funds_paid_copies_and_native_money_ceiling(self):
-        preparation={'captures':[{'id':'cash','species':'SPECIES_EEVEE'}],
-                     'selected':['starter-0','starter-1','cash'],
-                     'purchases':{'ITEM_CHOICE_SPECS':5},'pay_day_farmer':'cash','pay_day_wins':100}
-        scenario=build_opening_scenario(preparation=preparation)
+        # No Route 101/103 capture learns Pay Day; the Gen 7 pair's Litten is
+        # the opening's only learner (Meowth/Eevee live on later routes).
+        pair={'generation':7,'first':0,'second':1}
+        preparation={'captures':[{'id':'spare','species':'SPECIES_FIDOUGH'}],
+                     'selected':['starter-0','starter-1','spare'],
+                     'purchases':{'ITEM_CHOICE_SPECS':5},'pay_day_farmer':'starter-1','pay_day_wins':100}
+        scenario=build_opening_scenario(**pair,preparation=preparation)
+        self.assertEqual(scenario['acquisition_states'][0]['owned_monsters']['starter-1']['species'],'SPECIES_LITTEN')
         self.assertEqual(scenario['acquisition_states'][0]['resources']['ITEM_CHOICE_SPECS'],6)
         self.assertEqual(scenario['economy']['cash_remaining_minimum'],3800)
         unfunded=copy.deepcopy(preparation);unfunded['pay_day_wins']=0
-        with self.assertRaises(ValueError):build_opening_scenario(preparation=unfunded)
+        with self.assertRaises(ValueError):build_opening_scenario(**pair,preparation=unfunded)
+        for farmer in ('spare','starter-0','not-owned'):
+            forged=copy.deepcopy(preparation);forged['pay_day_farmer']=farmer
+            with self.assertRaisesRegex(ValueError,'Pay Day learner'):build_opening_scenario(**pair,preparation=forged)
         for item,count in [('ITEM_CHOICE_SPECS',6),('ITEM_LIFE_ORB',1),('ITEM_MEGA_RING',1)]:
             forged=copy.deepcopy(preparation);forged['purchases']={item:count}
-            with self.assertRaises(ValueError):build_opening_scenario(preparation=forged)
+            with self.assertRaises(ValueError):build_opening_scenario(**pair,preparation=forged)
         preparation['pay_day_wins']=1000000
-        self.assertEqual(build_opening_scenario(preparation=preparation)['economy']['cash_remaining_minimum'],999999-7500-1500)
+        self.assertEqual(build_opening_scenario(**pair,preparation=preparation)['economy']['cash_remaining_minimum'],999999-7500-1500)
 
     def test_pickup_has_actual_level_table_and_consumed_sales(self):
         preparation={'captures':[{'id':'loot','species':'SPECIES_ZIGZAGOON'}],
@@ -135,8 +148,10 @@ class OpeningArsenalTests(unittest.TestCase):
         with self.assertRaises(ValueError):certify_opening_manifest(scenario,manifest)
 
     def test_evolution_paths_consume_one_base_and_preserve_nature(self):
-        for base,target in [('SPECIES_EEVEE','SPECIES_SYLVEON'),('SPECIES_EEVEE','SPECIES_ESPEON'),
-                            ('SPECIES_EEVEE','SPECIES_UMBREON'),('SPECIES_WURMPLE','SPECIES_BEAUTIFLY'),
+        r=rules()
+        silcoon={'SPECIES_SILCOON','SPECIES_BEAUTIFLY'};cascoon={'SPECIES_CASCOON','SPECIES_DUSTOX'}
+        for base,target in [('SPECIES_KRICKETOT','SPECIES_KRICKETUNE'),('SPECIES_WURMPLE','SPECIES_SILCOON'),
+                            ('SPECIES_WURMPLE','SPECIES_CASCOON'),('SPECIES_WURMPLE','SPECIES_BEAUTIFLY'),
                             ('SPECIES_WURMPLE','SPECIES_DUSTOX'),('SPECIES_SCATTERBUG','SPECIES_VIVILLON')]:
             scenario=_opening_scenario(captures=[base],natures={base:'NATURE_TIMID'},evolutions={base:target})
             # Certificates must survive serialization; tuples in native parsed
@@ -148,9 +163,31 @@ class OpeningArsenalTests(unittest.TestCase):
             self.assertEqual(state['resources'][target],1)
             self.assertEqual(state['pokemon_defaults'][target]['nature'],'NATURE_TIMID')
             self.assertEqual(sum(state['resources'].get(s,0) for s in scenario['candidate_roster']),3)
-            if base=='SPECIES_EEVEE':self.assertEqual(state['pokemon_defaults'][target]['friendship'],255)
+            proof=state['evolution_proofs'][0]
+            # No opening-cap edge needs bonding, so the base friendship is kept.
+            self.assertNotIn('friendship',proof)
+            self.assertEqual(state['pokemon_defaults'][target]['friendship'],r['friendship'][resolve_species(base,r['aliases'])])
+            if target in silcoon|cascoon:
+                # The personality witness keeps the rolled nature and picks the branch.
+                witness=proof['personality_witness']
+                self.assertEqual(witness%nature_id('NUM_NATURES'),nature_id('NATURE_TIMID'))
+                self.assertEqual((witness>>16)%10>4,target in silcoon)
+        with self.assertRaisesRegex(ValueError,'absent'):_opening_scenario(captures=['SPECIES_EEVEE'])
         for base,target in [('SPECIES_EEVEE','SPECIES_LEAFEON'),('SPECIES_EEVEE','SPECIES_GLACEON'),
-                            ('SPECIES_PAWMI','SPECIES_PAWMO'),('SPECIES_TREECKO','SPECIES_GROVYLE')]:
-            with self.assertRaises(ValueError):evolution_path(base,target,'NATURE_HARDY',rules())
+                            ('SPECIES_PAWMI','SPECIES_PAWMO'),('SPECIES_TREECKO','SPECIES_GROVYLE'),
+                            ('SPECIES_SEWADDLE','SPECIES_LEAVANNY')]:
+            with self.assertRaises(ValueError):evolution_path(base,target,'NATURE_HARDY',r)
+        # Friendship edges: Route 101 Sewaddle reaches Leavanny at the Stone
+        # Badge cap; Eevee (Route 117) branches at the Knuckle Badge cap.
+        leavanny=evolution_path('SPECIES_SEWADDLE','SPECIES_LEAVANNY','NATURE_TIMID',{**r,'cap':20})
+        self.assertEqual([s['to_species'] for s in leavanny['steps']],['SPECIES_SWADLOON','SPECIES_LEAVANNY'])
+        self.assertEqual(leavanny['friendship'],255)
+        for target,key,value in [('SPECIES_SYLVEON','teach_before_evolution','MOVE_BABY_DOLL_EYES'),
+                                 ('SPECIES_ESPEON','time','TIME_DAY'),('SPECIES_UMBREON','time','TIME_NIGHT')]:
+            proof=evolution_path('SPECIES_EEVEE',target,'NATURE_TIMID',{**r,'cap':30})
+            self.assertEqual(proof['friendship'],255)
+            self.assertEqual(proof[key],value)
+        for target in ('SPECIES_LEAFEON','SPECIES_GLACEON'):
+            with self.assertRaises(ValueError):evolution_path('SPECIES_EEVEE',target,'NATURE_HARDY',{**r,'cap':30})
 
 if __name__=='__main__':unittest.main()

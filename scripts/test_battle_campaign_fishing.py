@@ -58,15 +58,15 @@ class CampaignFishingTests(unittest.TestCase):
         with patch.object(draft,'_species_acquisition_metadata',restricted),self.assertRaises(ValueError):
             self.make({'mom_old_rod':True,'captures':[self.capture()]})
     def test_owned_ids_and_infection_budget_remain_exact(self):
-        opening={'preparation':{'captures':[{'id':'eevee','species':'SPECIES_EEVEE','nature':'NATURE_TIMID'}],
-                 'selected':['starter-0','starter-1'],'pokerus':{'direct':['eevee']}}}
-        plan={'mom_old_rod':True,'captures':[self.capture('SPECIES_CORPHISH',id='fish')], 'selected':['eevee','fish']}
+        opening={'preparation':{'captures':[{'id':'pachi','species':'SPECIES_PACHIRISU','nature':'NATURE_TIMID'}],
+                 'selected':['starter-0','starter-1'],'pokerus':{'direct':['pachi']}}}
+        plan={'mom_old_rod':True,'captures':[self.capture('SPECIES_CORPHISH',id='fish')], 'selected':['pachi','fish']}
         s=self.make(plan,opening_parameters=opening);state=s['acquisition_states'][0]
-        self.assertEqual(state['pokemon_defaults_by_id']['eevee']['pokerus'],254)
+        self.assertEqual(state['pokemon_defaults_by_id']['pachi']['pokerus'],254)
         self.assertEqual(state['pokemon_defaults_by_id']['fish']['pokerus'],0)
         self.assertEqual(state['owned_monsters']['fish']['method'],'old_rod_capture')
-        self.assertEqual(state['selected_owned_ids'],['eevee','fish'])
-        for ident in ['eevee',None]:
+        self.assertEqual(state['selected_owned_ids'],['pachi','fish'])
+        for ident in ['pachi',None]:
             forged=copy.deepcopy(plan);forged['captures'][0]['id']=ident
             with self.assertRaises(ValueError):self.make(forged,opening_parameters=opening)
         forged=copy.deepcopy(plan);forged['captures'][0]['pokerus']=254
@@ -79,8 +79,8 @@ class CampaignFishingTests(unittest.TestCase):
                        lambda s:s['progression_flags'].update(FLAG_BADGE01_GET=True)]:
             forged=copy.deepcopy(s);change(forged)
             with self.assertRaises(ValueError):draft.certify_scenario(forged)
-        with self.assertRaises(ValueError):self.make({'mom_old_rod':True,'captures':[self.capture('SPECIES_CORPHISH'),self.capture(),self.capture('SPECIES_REMORAID','Route103',(21,8)),self.capture('SPECIES_SKRELP','Route104',(14,55),'DOWN')]},
-            opening_parameters={'captures':['SPECIES_EEVEE','SPECIES_WURMPLE','SPECIES_SCATTERBUG','SPECIES_PACHIRISU']},stage='after_woods')
+        with self.assertRaisesRegex(ValueError,'exceed retained cash'):self.make({'mom_old_rod':True,'captures':[self.capture('SPECIES_CORPHISH'),self.capture(),self.capture('SPECIES_REMORAID','Route103',(21,8)),self.capture('SPECIES_SKRELP','Route104',(14,55),'DOWN')]},
+            opening_parameters={'captures':['SPECIES_KRICKETOT','SPECIES_WURMPLE','SPECIES_SCATTERBUG','SPECIES_PACHIRISU']},stage='after_woods')
     def test_default_land_capture_does_not_acquire_rod_or_expand_return_maps(self):
         s=self.make({'captures':[{'species':'SPECIES_RIOLU','map':'Route116','xy':[4,13]}]},stage='after_woods')
         state=s['acquisition_states'][0]
