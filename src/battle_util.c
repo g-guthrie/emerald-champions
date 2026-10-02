@@ -9304,37 +9304,19 @@ void RecordConsumedHeldItem(enum BattlerId battler, enum Item item)
     state->usedHeldItem = item;
     state->usedHeldItemOrigin = state->heldItemOrigin;
     state->heldItemOrigin = 0;
+    // A borrowed trainer Berry stays its owner's: the owner's loan record
+    // returns it after battle, and its borrower gains no Regenerator refund.
     if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
-    {
         owner->originalBerryConsumed = TRUE;
-        struct LostItem *original = &gBattleStruct->itemLost[(state->usedHeldItemOrigin - 1) / PARTY_SIZE][(state->usedHeldItemOrigin - 1) % PARTY_SIZE];
-        if (original->temporaryTheft)
-        {
-            // An eaten loan no longer exists to return. Regeneration belongs
-            // to the Pokemon that actually ate it, without discovering stock.
-            original->originalItem = ITEM_NONE;
-            original->temporaryTheft = FALSE;
-            enum BattleTrainer trainer = GetBattlerTrainer(battler);
-            u32 slot = gBattlerPartyIndexes[battler];
-            gBattleStruct->itemLost[trainer][slot].originalItem = item;
-            gBattleStruct->itemLost[trainer][slot].temporaryTheft = FALSE;
-            state->originalBerryConsumed = TRUE;
-            state->originalBerryDestroyed = FALSE;
-            state->originalBerryRemoved = FALSE;
-            state->usedHeldItemOrigin = trainer * PARTY_SIZE + slot + 1;
-        }
-    }
 }
 
 void RecordDestroyedHeldItem(enum BattlerId battler, enum Item item)
 {
     struct PartyState *state = GetBattlerPartyState(battler);
     struct PartyState *owner = GetHeldItemOriginState(state->heldItemOrigin, item);
+    // A destroyed trainer loan keeps its record and still returns to its owner.
     if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
-    {
         owner->originalBerryDestroyed = TRUE;
-        gBattleStruct->itemLost[(state->heldItemOrigin - 1) / PARTY_SIZE][(state->heldItemOrigin - 1) % PARTY_SIZE].temporaryTheft = FALSE;
-    }
     state->heldItemOrigin = 0;
 }
 
