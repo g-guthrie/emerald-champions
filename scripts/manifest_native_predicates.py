@@ -694,7 +694,10 @@ def evaluate(key,state,constants=None):
     if name=='DoDeoxysRockInteraction':
         if _flag(state,'FLAG_DEOXYS_ROCK_COMPLETE',constants):return {3}
         level=_number(state.get('vars',{}).get('VAR_DEOXYS_ROCK_LEVEL',0 if state.get('zero_unset_vars') else None),constants)
-        if level is not None:return {0,2} if level==10 else {0,1}
+        # Each visit resets the level (BirthIsland_Exterior/scripts.inc:17-18),
+        # but touching the triangle where it moves walks levels 0-10 within that
+        # visit, so the solving touch is always one walk away.
+        if level is not None:return {0,1,2}
         return {0,1,2} if state.get('preparation_possible') else None
     if name=='CheckEmeraldChampionsGardenCelebi':
         if _sign_sets(state,'legend_caught','LEGENDARY_SIGN_CELEBI'):return {2}
