@@ -145,7 +145,7 @@ class ProgressionParser:
     query. Each path carries all script effects before its encounter; callers
     decide which are free events and which belong to prior victorious battles.
     """
-    def __init__(self, scripts, max_steps=2000, max_paths=512):
+    def __init__(self, scripts, max_steps=2000, max_paths=1024):  # Contest Hall prizes enumerate 864 paths.
         augment_script_index(scripts)
         self.scripts = scripts
         self.max_steps = max_steps
