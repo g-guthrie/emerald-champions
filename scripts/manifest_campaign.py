@@ -62,6 +62,28 @@ def battle_items():
     return held
 
 
+def layout_keys(scripts):
+    """Flags and vars a map's load/transition/resume scripts test.
+
+    Those callbacks place NPCs, swap metatiles and layouts (Wallace in front
+    of Juan's Gym, the Cave of Origin expert, locked doors). A scene that only
+    writes such a key still changes where the player can walk, even though no
+    battle reads it, so the story closure must follow it.
+    """
+    keys=set()
+    for path in (ROOT/'data/maps').glob('*/scripts.inc'):
+        stack=re.findall(r'map_script\s+MAP_SCRIPT_ON_(?:LOAD|TRANSITION|RESUME)\s*,\s*(\w+)',path.read_text())
+        seen=set()
+        while stack:
+            label=stack.pop()
+            if label in seen or label not in scripts.labels:continue
+            seen.add(label)
+            for _n,text in scripts.labels[label]['body']:
+                if re.match(r'(compare|goto_if|call_if)',text):keys.update(re.findall(r'\b(?:FLAG|VAR)_\w+',text))
+                stack.extend(x for x in re.findall(r'\b([A-Za-z_]\w*)\b',text) if x in scripts.labels)
+    return {k for k in keys if not k.startswith(('VAR_TEMP','VAR_0x8','FLAG_TEMP','VAR_RESULT','VAR_FACING'))}
+
+
 def load_model(quick=False):
     print('Loading source index',flush=True)
     b=rp.Builder();parser=bp.ProgressionParser(b.scripts)
@@ -74,9 +96,6 @@ def load_model(quick=False):
                  'FLAG_DEFEATED_ELITE_4_GLACIA','FLAG_DEFEATED_ELITE_4_DRAKE',
                  'FLAG_EC_FINALE_DEOXYS_RESOLVED','FLAG_RECEIVED_SS_TICKET','FLAG_RECEIVED_AURORA_TICKET'})
     keys.add('FLAG_KECLEON_FLED_FORTREE') # FortreeCity/scripts.inc:84 opens the Gym approach.
-    # Steven's guidance moves the expert off the Cave of Origin door
-    # (SootopolisCity/scripts.inc:128-135); no battle condition reads it.
-    keys.add('FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN')
     # Talking to both leaders after Rayquaza unlocks Juan's Gym; each talk
     # records only its own meeting (SootopolisCity/scripts.inc:1458-1500).
     keys.update({'FLAG_MET_MAXIE_SOOTOPOLIS','FLAG_MET_ARCHIE_SOOTOPOLIS'})
@@ -95,6 +114,7 @@ def load_model(quick=False):
         text=path.read_text()
         keys.update(re.findall(r'map_script_2\s+(VAR_\w+)',text))
     keys.add('FLAG_DOCK_REJECTED_DEVON_GOODS')
+    keys.update(layout_keys(b.scripts))
     keys={k for k in keys if k not in ('VAR_RESULT','VAR_FACING')
           and not k.startswith(('VAR_0x8','VAR_CONTEST','VAR_BATTLE_FRONTIER','VAR_CABLE_CLUB','VAR_UNION_ROOM'))}
     print('Extracting completed story events',len(keys),flush=True)
