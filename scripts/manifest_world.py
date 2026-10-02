@@ -206,7 +206,7 @@ class World:
             if key in domains:
                 domain=domains[key]
             elif key == 'VAR_FACING':
-                domain={1,2,3,4}
+                domain=set(state.get('facing_domain') or {1,2,3,4})
             else:
                 domain = {left} if left is not None else native.evaluate(key,state,self.names)
             if domain is None or right_domain is None:
@@ -235,6 +235,19 @@ class World:
                            for x,y in state.get('_geometry_object_positions',{}).get(f"{event[0]}:{actor['id']}",[]))
         where=(event[0],event[1],event[2]) if event[1] is not None else event[0]
         return self.reachable(where,state)
+
+    def facing_domain(self,event,entry,state):
+        """Directions the player can face an NPC from (DIR_SOUTH=1, NORTH=2,
+        WEST=3, EAST=4; include/constants/global.h). Only reached neighbour
+        tiles count: nobody talks to Wallace from Juan's Gym door."""
+        if event[3]!='object':return None
+        actors=self.geo._objects_by_script.get((event[0],entry),[])
+        result=set()
+        for actor in actors:
+            for x,y in state.get('_geometry_object_positions',{}).get(f"{event[0]}:{actor['id']}",[]):
+                for dx,dy,facing in ((0,1,2),(0,-1,1),(1,0,3),(-1,0,4)):
+                    if set(self.geo.tile_nodes.get((event[0],x+dx,y+dy),[]))&state['reached']:result.add(facing)
+        return result or None
 
     @staticmethod
     def battles_completed(prerequisites,state):
@@ -496,7 +509,8 @@ class World:
                 if event['id'] in state['event_history']:continue
                 if not self.event_reachable(event['event'],event['entry'],state):continue
                 if not self.battles_completed(event.get('prior_battles',[]),state):continue
-                if not self.conditions(event['conditions'],state,event['source']):continue
+                facing=self.facing_domain(event['event'],event['entry'],state)
+                if not self.conditions(event['conditions'],dict(state,facing_domain=facing) if facing else state,event['source']):continue
                 effects=event['effects']
                 if event.get('prior_battles'):
                     prior=set(part for battle in event['prior_battles'] for part in battle.split('|'))
