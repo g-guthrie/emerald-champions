@@ -5970,7 +5970,8 @@ static enum Move GetMirrorMoveMove(void)
 static bool32 InvalidMetronomeMove(u32 move)
 {
     return GetMoveEffect(move) == EFFECT_PLACEHOLDER
-        || IsMoveMetronomeBanned(move);
+        || IsMoveMetronomeBanned(move)
+        || IsMoveRemovedFromGame(move);
 }
 
 static enum Move GetMetronomeMove(void)

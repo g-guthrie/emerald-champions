@@ -4023,11 +4023,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .name = COMPOUND_STRING("Spore"),
         .description = COMPOUND_STRING(
             "Scatters a cloud of spores\n"
-            "that always induce sleep."),
+            "that put the target to sleep."),
         .effect = EFFECT_NON_VOLATILE_STATUS,
         .power = 0,
         .type = TYPE_GRASS,
-        .accuracy = 100,
+        .accuracy = 90, // Owner balance: Spore stays the best powder but can miss.
         .pp = 15,
         .target = TARGET_SELECTED,
         .priority = 0,

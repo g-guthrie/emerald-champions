@@ -679,6 +679,10 @@ static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, boo
     // The snow counterpart is available wherever the tutor offers Hail.
     if (availableMoves[MOVE_HAIL])
         availableMoves[MOVE_SNOWSCAPE] = TRUE;
+
+    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
+        if (availableMoves[move] && IsMoveRemovedFromGame(move))
+            availableMoves[move] = FALSE;
 }
 
 static u32 CountIconicTutorBadges(void)

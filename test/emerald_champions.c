@@ -238,10 +238,12 @@ TEST("Emerald Champions Center preparation lists are complete and isolated")
     EXPECT(!CanLearnTeachableMove(SPECIES_MEW, MOVE_TAILWIND));
     EXPECT(!CanLearnTeachableMove(SPECIES_MEW, MOVE_WILL_O_WISP));
 
+    // The tutor withholds the moves removed from the game (Double Team,
+    // Fissure and Horn Drill are on Mew's list): 371 - 3.
     CreateMon(&mon, SPECIES_MEW, 50, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(
         GetEmeraldChampionsPreparationMovesToLearn(&mon.box, sEmeraldChampionsPreparationMoveBuffer),
-        371);
+        368);
 
     SetMonMoveSlot(&mon, MOVE_PSYCHIC, 0);
     SetMonMoveSlot(&mon, MOVE_TAILWIND, 1);
@@ -249,8 +251,8 @@ TEST("Emerald Champions Center preparation lists are complete and isolated")
     SetMonMoveSlot(&mon, MOVE_PROTECT, 3);
     EXPECT_EQ(
         GetEmeraldChampionsPreparationMovesToLearn(&mon.box, sEmeraldChampionsPreparationMoveBuffer),
-        367);
-    for (u32 i = 0; i < 367; i++)
+        364);
+    for (u32 i = 0; i < 364; i++)
     {
         EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_PSYCHIC);
         EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_TAILWIND);

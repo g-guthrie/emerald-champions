@@ -1118,7 +1118,7 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
             if (learnset[i].level > level)
                 break;
 
-            if (BoxMonKnowsMove(mon, learnset[i].move))
+            if (BoxMonKnowsMove(mon, learnset[i].move) || IsMoveRemovedFromGame(learnset[i].move))
                 continue;
 
             bool32 alreadyInList = FALSE;
@@ -1151,7 +1151,7 @@ static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves)
 
     for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
     {
-        if (!BoxMonKnowsMove(mon, eggMoves[i]))
+        if (!BoxMonKnowsMove(mon, eggMoves[i]) && !IsMoveRemovedFromGame(eggMoves[i]))
             moves[numMoves++] = eggMoves[i];
     }
 

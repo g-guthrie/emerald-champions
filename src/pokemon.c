@@ -1647,6 +1647,25 @@ static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, enum Move move, u8 slot)
     SetMonData(mon, MON_DATA_PP1 + slot, &finalPP);
 }
 
+// Owner decision: evasion boosts and one-hit KOs are out of the game. They
+// turn a fight into a dice roll that no team or AI can plan around, so no
+// tutor, relearner, starting moveset or Metronome produces them.
+bool32 IsMoveRemovedFromGame(enum Move move)
+{
+    switch (move)
+    {
+    case MOVE_DOUBLE_TEAM:
+    case MOVE_MINIMIZE:
+    case MOVE_FISSURE:
+    case MOVE_SHEER_COLD:
+    case MOVE_GUILLOTINE:
+    case MOVE_HORN_DRILL:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 void GiveMonInitialMoveset(struct Pokemon *mon)
 {
     GiveBoxMonInitialMoveset(&mon->box);
@@ -1668,7 +1687,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon) //Credit: AsparagusEdua
 
         if (learnset[i].level > level)
             break;
-        if (learnset[i].level == 0)
+        if (learnset[i].level == 0 || IsMoveRemovedFromGame(learnset[i].move))
             continue;
 
         for (j = 0; j < addedMoves; j++)
