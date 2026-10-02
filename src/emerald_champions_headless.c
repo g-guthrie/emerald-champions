@@ -2444,7 +2444,15 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         PrepareAbilityMenu();
         break;
     case EC_HEADLESS_SCENARIO_OPTIONS:
-        SetMainCallback2(CB2_InitOptionMenu);
+        // Param 1-3 shows a run fixed at Easy/Medium/Hard; 4 opens the
+        // New Game chooser itself (cancel returns to the title screen).
+        if (gEcHeadlessFixtureParam >= 1 && gEcHeadlessFixtureParam <= 3)
+            SetCurrentDifficultyLevel(gEcHeadlessFixtureParam == 1 ? DIFFICULTY_EASY
+                : gEcHeadlessFixtureParam == 2 ? DIFFICULTY_NORMAL : DIFFICULTY_HARD);
+        if (gEcHeadlessFixtureParam == 4)
+            ChooseNewGameDifficulty(CB2_InitTitleScreen);
+        else
+            SetMainCallback2(CB2_InitOptionMenu);
         break;
     case EC_HEADLESS_SCENARIO_ECONOMY_POKEMON:
         PrepareHeadlessEconomyPokemon();

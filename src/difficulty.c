@@ -74,19 +74,17 @@ u8 GetTrainerLevelReductionFor(enum DifficultyLevel difficulty)
 }
 
 // Hard fights at the full authored lead over the campaign cap (offset + 2).
-// Medium and Easy keep only a share of each opponent's lead, so the gap
-// between modes follows the size of the fight's spike: a rival eight levels
-// over the cap at cap 14 and an Elite sixteen over at cap 80 both shrink in
-// proportion, rather than losing the same flat number of levels. Easy also
-// sits a share of the cap lower, so the same relief applies at every stage;
-// perfect sets and doubles AI beat an ordinary team even at the cap. Teams,
+// Medium keeps a share of each opponent's lead, so the gap between modes
+// follows the size of the fight's spike. Easy keeps no lead and sits a share
+// of the cap lower: perfect sets and doubles AI beat an ordinary team even a
+// few levels under the cap, so Easy needs a real deficit at every stage. Teams,
 // strategy and the shared planner never change between modes.
 u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty)
 {
     switch (difficulty)
     {
     case DIFFICULTY_EASY:
-        return 25;
+        return 0;
     case DIFFICULTY_NORMAL:
         return 60;
     case DIFFICULTY_HARD:
@@ -97,7 +95,16 @@ u8 GetTrainerLevelLeadPercentFor(enum DifficultyLevel difficulty)
 
 u8 GetTrainerLevelCapDropPercentFor(enum DifficultyLevel difficulty)
 {
-    return difficulty == DIFFICULTY_EASY ? 15 : 0;
+    switch (difficulty)
+    {
+    case DIFFICULTY_EASY:
+        return 20;
+    case DIFFICULTY_NORMAL:
+        return 0;
+    case DIFFICULTY_HARD:
+    default:
+        return 0;
+    }
 }
 
 u8 GetCampaignTrainerLevelFor(enum DifficultyLevel difficulty, s16 offset)

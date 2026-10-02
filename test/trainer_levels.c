@@ -16,10 +16,10 @@ TEST("EC trainer levels: modes scale the lead over the shared cap and Hard remai
     enum DifficultyLevel oldDifficulty = GetCurrentDifficultyLevel();
     bool32 wasChampion = FlagGet(FLAG_IS_CHAMPION);
     FlagSet(FLAG_IS_CHAMPION);
-    // Offset 0 is a two-level lead: Hard keeps it, Medium and Easy keep one,
-    // and Easy then drops 15% of the cap (13 levels at 85).
+    // Offset 0 is a two-level lead: Hard keeps it, Medium keeps one, and
+    // Easy keeps none and drops 20% of the cap (17 levels at 85).
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignTrainerLevel(0), 73);
+    EXPECT_EQ(GetCampaignTrainerLevel(0), 68);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     EXPECT_EQ(GetCampaignTrainerLevel(0), 86);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
@@ -93,7 +93,7 @@ TEST("EC trainer levels: offsets cap at 100 through creation and Mega stats for 
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     EXPECT_EQ(GetCampaignTrainerLevel(50), 100);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    EXPECT_EQ(GetCampaignTrainerLevel(50), 85);
+    EXPECT_EQ(GetCampaignTrainerLevel(50), 68);
     ZeroEnemyPartyMons();
     if (!wasChampion)
         FlagClear(FLAG_IS_CHAMPION);
@@ -188,9 +188,9 @@ TEST("EC caps: every difficulty shares the player cap while opponents scale thei
     bool32 wasChampion = FlagGet(FLAG_IS_CHAMPION);
     enum DifficultyLevel oldDifficulty = GetCurrentDifficultyLevel();
     const enum DifficultyLevel modes[] = {DIFFICULTY_EASY, DIFFICULTY_NORMAL, DIFFICULTY_HARD};
-    // Offset 3 is a five-level lead: Easy keeps 25% and drops 15% of the
-    // cap, Medium keeps 60%, Hard all.
-    const u32 opponents[] = {73, 88, 90};
+    // Offset 3 is a five-level lead: Easy keeps none and drops 20% of the
+    // cap, Medium keeps 60%, Hard keeps all.
+    const u32 opponents[] = {68, 88, 90};
     FlagSet(FLAG_IS_CHAMPION);
     for (u32 i = 0; i < ARRAY_COUNT(modes); i++)
     {

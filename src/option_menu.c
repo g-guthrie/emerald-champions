@@ -494,6 +494,8 @@ static void Difficulty_DrawChoices(u8 selection)
         ? COMPOUND_STRING("Hard: foes scout your whole team.\nThey keep their full level lead\nover your level cap.")
         : selection == DIFFICULTY_NORMAL
         ? COMPOUND_STRING("Medium: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead\nover your level cap.")
+        : GetTrainerLevelLeadPercentFor(selection) == 0
+        ? COMPOUND_STRING("Easy: foes learn your team in battle.\nThey have no level lead and sit\n{STR_VAR_2}% below your level cap.")
         : COMPOUND_STRING("Easy: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead,\nthen drop {STR_VAR_2}% of your level cap.");
     StringExpandPlaceholders(gStringVar4, description);
     FillWindowPixelBuffer(WIN_DIFFICULTY_HELP, PIXEL_FILL(1));

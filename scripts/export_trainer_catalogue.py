@@ -24,11 +24,25 @@ PARTY = 'src/data/trainers.party'
 
 
 
-def difficulty_lead_percents():
-    """Share of Hard's level lead kept by Medium and Easy, read from GetTrainerLevelLeadPercentFor."""
-    body = (ROOT / 'src/difficulty.c').read_text().split('u8 GetTrainerLevelLeadPercentFor(', 1)[1].split('\n}', 1)[0]
-    returns = dict(re.findall(r'case (DIFFICULTY_\w+):\s*return (\d+);', body))
-    return int(returns['DIFFICULTY_NORMAL']), int(returns['DIFFICULTY_EASY'])
+def difficulty_level_rules():
+    """{mode: (lead percent kept, cap percent dropped)} read from src/difficulty.c."""
+    text = (ROOT / 'src/difficulty.c').read_text()
+    rules = {}
+    for index, name in enumerate(('GetTrainerLevelLeadPercentFor', 'GetTrainerLevelCapDropPercentFor')):
+        body = text.split(f'u8 {name}(', 1)[1].split('\n}', 1)[0]
+        returns = dict(re.findall(r'case (DIFFICULTY_\w+):\s*(?:default:\s*)?return (\d+);', body))
+        for mode in ('DIFFICULTY_EASY', 'DIFFICULTY_NORMAL', 'DIFFICULTY_HARD'):
+            rules.setdefault(mode, [0, 0])[index] = int(returns[mode])
+    return {mode: tuple(value) for mode, value in rules.items()}
+
+
+def campaign_level(cap, offset, mode, rules=None):
+    """GetCampaignTrainerLevelFor in Python, before the Casual/Regular level."""
+    lead_percent, drop_percent = (rules or difficulty_level_rules())[mode]
+    lead = offset + 2
+    if lead > 0:
+        lead = (lead * lead_percent + 50) // 100
+    return max(1, min(100, cap + lead - (cap * drop_percent + 50) // 100))
 
 
 def read(path):
@@ -277,7 +291,7 @@ def main():
     w.heading('1. FINDINGS, AUTHORING COMPARISON, AND READING GUIDE')
     findings=[
         f'LOADOUT AGREEMENT: all {len(branches)} retained authored variants and {checked} Pokemon slots match native source for species, order, items, abilities, natures, EVs, IVs, moves, friendship and level offsets. Separate generator verification checks generated encounter/AI tables. Agreement is not proof that every tactical idea works or every battle has been played.',
-        f'LEVELS: actual campaign level = live cap + a lead of authored offset + 2, bounded to 1..100. Hard keeps the whole lead; Medium keeps {difficulty_lead_percents()[0]}% and Easy {difficulty_lead_percents()[1]}% of it (rounded), so a member at or below the cap is the same in every mode. The player shares the same cap on every difficulty. Printed trainer levels are bounded previews; native progression controls actual battle levels.',
+        f'LEVELS: actual campaign level = live cap + a lead of authored offset + 2, bounded to 1..100. Hard keeps the whole lead; Medium keeps {difficulty_level_rules()["DIFFICULTY_NORMAL"][0]}% of it (rounded) and then drops {difficulty_level_rules()["DIFFICULTY_NORMAL"][1]}% of the cap; Easy keeps {difficulty_level_rules()["DIFFICULTY_EASY"][0]}% and drops {difficulty_level_rules()["DIFFICULTY_EASY"][1]}% of the cap. Casual and Regular members then lose one more level. The player shares the same cap on every difficulty. Printed trainer levels are bounded previews; native progression controls actual battle levels.',
         'LEVEL LIMIT: every Pokemon is limited to 100. Wide signed offsets are authoring inputs; native trainer creation and ordinary cached-level/stat paths enforce the same ceiling through Mega and other form changes.',
         'DWAYNE IS AN EXPERIMENT: the exported working tree currently uses Magmar, Jynx, Electabuzz and Monferno. The original Magby/Smoochum/Elekid/Monferno battle was won in four turns with zero faints. The evolved-team retest is paused mid-battle; it is not an accepted final composition or completed difficulty benchmark. The user clarified that level tuning should preserve deliberate low-stat themes.',
         'RUNTIME RIVALS: native Hoenn trainer blocks are seeds. Nonmatching regional starters replace the first Hoenn starter slot using the selected generation and unchosen starter index, preserving its level and using the matching evolution stage. Appendix 5 gives the complete alternative sets; printing only the seeds would be incomplete.',
