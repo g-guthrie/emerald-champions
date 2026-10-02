@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at 2f7d93955e by scripts/manifest_text.py. 299 battles, PARTIAL: the progression did not reach Buffel.
+Generated from source at e3d30a77e0 by scripts/manifest_text.py. 299 battles, PARTIAL: the progression did not reach Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -28,7 +28,7 @@ STEP 1 - level cap 14
         Espeon (from Eevee), Kricketune (from Kricketot), Silcoon (from Wurmple),
         Spewpa (Icy Snow) (from Scatterbug (Icy Snow)), Sylveon (from Eevee), Umbreon (from Eevee),
         Vivillon (Icy Snow) (from Spewpa (Icy Snow))
-  New held items (9): Cell Battery (buy, Oldale Town Mart),
+  New held items (9): Cell Battery (buy, Oldale Town Pokemon Center 1F),
       Choice Band (buy, Oldale Town Pokemon Center 1F),
       Choice Scarf (buy, Oldale Town Pokemon Center 1F),
       Choice Specs (buy, Oldale Town Pokemon Center 1F),

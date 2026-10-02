@@ -427,7 +427,9 @@ class World:
             op,args=effect['op'],effect['args']
             if op=='setflag':state['flags'].add(mr.canon(args[0]))
             elif op=='clearflag':state['flags'].discard(mr.canon(args[0]))
-            elif op in ('setvar','copyvar','addvar','subvar') and not args[0].startswith('VAR_0x8'):
+            # Temp vars reset on every map change, so one scene's guard (the
+            # Champion's room VAR_TEMP_1) never blocks the next map's arrival.
+            elif op in ('setvar','copyvar','addvar','subvar') and not args[0].startswith(('VAR_0x8','VAR_TEMP_')):
                 v=value(args[1],state,self.names)
                 if v is not None:
                     if op=='addvar':v+=state['vars'].get(args[0],0)

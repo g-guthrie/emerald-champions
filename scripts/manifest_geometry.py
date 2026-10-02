@@ -205,7 +205,7 @@ class ManifestGeometry(mr.Geometry):
             for name,body in re.findall(r'\[(HEAL_LOCATION_\w+) - 1\]\s*=\s*\{(.*?)\}',(mr.ROOT/'src/data/heal_locations.h').read_text(),re.S):
                 m=re.search(r'MAP_GROUP\((MAP_\w+)\).*?\.x\s*=\s*(\d+).*?\.y\s*=\s*(\d+)',body,re.S)
                 if m and name not in heal:heal[name]=(m[1],int(m[2]),int(m[3]))
-            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity','Route121_SafariZoneEntrance','EverGrandeCity_HallOfFame'}):
+            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity','Route121_SafariZoneEntrance','EverGrandeCity_ChampionsRoom','EverGrandeCity_HallOfFame'}):
                 if d not in self.maps: continue
                 entries=[]
                 for category in ('bg_events','coord_events','object_events'):
@@ -215,7 +215,12 @@ class ManifestGeometry(mr.Geometry):
                                             ev.get('flag') if category=='object_events' and ev.get('flag') not in (None,'0','FLAG_NONE') else None))
                 script=mr.MAPS_DIR/d/'scripts.inc'
                 if script.exists():
-                    entries.extend((label,(d,None,None),'callback',None) for label in re.findall(r'map_script\s+MAP_SCRIPT_ON_(?:LOAD|TRANSITION|RESUME),\s*(\w+)',script.read_text()))
+                    text=script.read_text()
+                    entries.extend((label,(d,None,None),'callback',None) for label in re.findall(r'map_script\s+MAP_SCRIPT_ON_(?:LOAD|TRANSITION|RESUME),\s*(\w+)',text))
+                    # Arrival scenes run from the frame table, e.g. the Hall of
+                    # Fame induction (EverGrandeCity_HallOfFame/scripts.inc:15-54).
+                    # Temp vars reset on entry, so their own guard always holds.
+                    entries.extend((label,(d,None,None),'callback',None) for label in re.findall(r'map_script\s+MAP_SCRIPT_ON_FRAME_TABLE,\s*(\w+)',text))
                 for label,origin,kind,visible in entries:
                     for path in parser.walk(label):
                         if not path.get('completed'): continue
