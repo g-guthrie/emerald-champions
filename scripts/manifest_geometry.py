@@ -196,8 +196,10 @@ class ManifestGeometry(mr.Geometry):
         EFFECTS.update(warp_ops)
         try:
             # Story maps whose only entrance is a scripted walk-in: Steven leads
-            # the player into the Cave of Origin (SootopolisCity/scripts.inc:917-946).
-            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity'}):
+            # the player into the Cave of Origin (SootopolisCity/scripts.inc:917-946),
+            # and the Safari Zone counter warps a paying player inside
+            # (Route121_SafariZoneEntrance/scripts.inc:59-80).
+            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity','Route121_SafariZoneEntrance'}):
                 if d not in self.maps: continue
                 entries=[]
                 for category in ('bg_events','coord_events','object_events'):

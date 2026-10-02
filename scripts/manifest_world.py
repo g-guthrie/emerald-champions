@@ -32,6 +32,14 @@ def constants():
                 name, value = match.groups()
                 result[name] = value or f'({previous}+1)'
                 previous = name
+    # Script-local numeric `.set` constants (STARTER_COINS in the Game Corner).
+    # A name set to different values in different files stays unresolved.
+    local={}
+    for path in sorted((mr.ROOT/'data').rglob('*.inc')):
+        for name, expr in re.findall(r'^\s*\.set\s+(\w+)\s*,\s*(-?\d+)\s*$', path.read_text(), re.M):
+            local.setdefault(name,set()).add(int(expr))
+    for name, values in local.items():
+        if len(values)==1 and name not in result: result[name]=next(iter(values))
     resolved={}
     def number(name,seen=frozenset()):
         if name in resolved:return resolved[name]

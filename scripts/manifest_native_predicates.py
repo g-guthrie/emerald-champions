@@ -29,6 +29,7 @@ CITATIONS = {
  'GetLeadMonFriendshipScore':('src/pokemon.c:6698','lead friendship threshold score; legal walking/bonding preparation'),
  'GiveEmeraldChampionsStarterBattleItems':('src/field_specials.c:599','atomic six-item kit and saved receipt'),
  'PlayerPartyLeagueEligible':('src/pokemon.c:3144','at most one restricted-class member; the player arranges the party'),
+ 'IsItemFossil':('src/field_specials.c','VAR_ITEM_ID is a revivable fossil'),
  'DoesPlayerHaveFossil':('src/field_specials.c:5476','any revivable fossil in the Bag'),
  'StartInitialToolsBagTutorial':('src/item_menu.c:2595','asynchronous completed demonstration; original bag restored'),
  'ExchangeSootForCaps':('src/inclement_stat_services.c:678','500 gathered ash per cap; delivery before debit'),
@@ -412,6 +413,12 @@ def evaluate(key,state,constants=None):
             return {int(balance>=maximum) if op=='addcoins' else int(balance<amount)
                     for balance in balances for amount in amounts}
         if op in ('msgbox','yesnobox'):return {0,1}
+        # dynmultichoice left, top, ignoreBPress, maxBeforeScroll, initial,
+        # callback, option... (asm/macros/event.inc): one row per option.
+        if op=='dynmultichoice' and len(args)>6:
+            result=set(range(len(args)-6))
+            if args[2] not in ('TRUE','1'):result.add(127)
+            return result
         if op.startswith('multichoice') and len(args)>2:
             count=_menu_rows(args[2])
             if count is None:return None
@@ -448,6 +455,11 @@ def evaluate(key,state,constants=None):
     if name=='NativeScratchOutput':return _scratch_output(args,state,constants)
     # Party composition is a player choice; an eligible party always exists.
     if name=='PlayerPartyLeagueEligible':return {0,1}
+    # The Bag choice it tests is a free player pick: TRUE whenever a fossil is held.
+    if name=='IsItemFossil':
+        text=(ROOT/'src/field_specials.c').read_text().split('sRevivableFossils[]',1)[1].split('};',1)[0]
+        held=any(item in state.get('items',()) for item in re.findall(r'\{(ITEM_\w+),',text))
+        return {0,1} if held else {0}
     if name=='DoesPlayerHaveFossil':
         text=(ROOT/'src/field_specials.c').read_text().split('sRevivableFossils[]',1)[1].split('};',1)[0]
         return {int(any(item in state.get('items',()) for item in re.findall(r'\{(ITEM_\w+),',text)))}
@@ -965,6 +977,8 @@ def _native_function_index():
             writes=bool(re.search(r'\b(?:FlagSet|FlagClear|VarSet|AddBagItem|AddPCItem|RemoveBagItem|RemovePCItem|GiveMonToPartyOrPC|GiveScriptedMonToPlayer|SetMonData|SetBoxMonData|SetMoney|RemoveMoney|AddMoney|SetCoins|AddCoins|RemoveCoins)\s*\(',body) or re.search(r'\b(?:gSaveBlock[123]Ptr|gParties|gPokemonStoragePtr)\b[^;\n]*?(?:=(?!=)|\+\+|--|[+|&-]=)',body))
             refs=set(re.findall(r'\b[A-Za-z_]\w*\b',body))
             outputs={'VAR_'+v for v in re.findall(r'\bgSpecialVar_(0x800[0-9A-Fa-f])\s*(?:=(?!=)|[+|&-]=|\+\+|--)',body)}
+            # The Bag's chosen item (gSpecialVar_ItemId is VAR_ITEM_ID).
+            if re.search(r'\bgSpecialVar_ItemId\s*=(?!=)',body):outputs.add('VAR_ITEM_ID')
             functions[match[1]]={'reads':reads,'outputs':outputs,'calls':calls,'refs':refs,'writes':writes,'result_writes':bool(re.search(r'\bgSpecialVar_Result\s*(?:=(?!=)|[+|&-]=|\+\+|--)',body)),'source':f'{path.relative_to(ROOT)}:{raw.count(chr(10),0,match.start())+1}'}
     return functions
 
@@ -1289,6 +1303,12 @@ def _scratch_output(args,state,constants):
     if function=='GetContestWinnerId' and variable=='VAR_0x8005':return evaluate('SPECIAL:ContestWinnerId()',state,constants)
     if function=='GetContestPlayerId' and variable=='VAR_0x8004':return evaluate('SPECIAL:ContestPlayerId()',state,constants)
     if function=='BufferQuizPrizeItem' and variable=='VAR_0x8005':return evaluate('SPECIAL:QuizPrizeItem()',state,constants)
+    # The Bag picker: any item the player holds, or ITEM_NONE on cancel.
+    if variable=='VAR_ITEM_ID' and function in ('Bag_ChooseItem','ChooseItem'):
+        items=state.get('items')
+        if items is None:return None
+        numbers={_number(item,constants) for item in items}
+        return ({0}|numbers) if None not in numbers else None
     if function=='ChoosePartyMon' and variable=='VAR_0x8004':
         party=state.get('party')
         if party is not None:return set(range(len(party)))|{255}
@@ -1322,7 +1342,8 @@ def _scratch_output(args,state,constants):
 @lru_cache(None)
 def _scroll_menu_rows(menu):
     text=(ROOT/'src/field_specials.c').read_text().split('void ShowScrollableMultichoice(void)',1)[1].split('static const u8 *const sScrollableMultichoiceOptions',1)[0]
-    match=re.search(r'case\s+'+re.escape(menu)+r'\s*:(.*?)(?:break;|case\s+)',text,re.S)
+    # Shared bodies: `case A: case B: case C: body` (the Game Corner starters).
+    match=re.search(r'case\s+'+re.escape(menu)+r'\s*:(?:\s*case\s+\w+\s*:)*(.*?)(?:break;|case\s+)',text,re.S)
     count=re.search(r'tNumItems\s*=\s*(\d+)',match[1]) if match else None
     return int(count[1]) if count else None
 

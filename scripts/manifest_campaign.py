@@ -114,6 +114,9 @@ def load_model(quick=False):
         text=path.read_text()
         keys.update(re.findall(r'map_script_2\s+(VAR_\w+)',text))
     keys.add('FLAG_DOCK_REJECTED_DEVON_GOODS')
+    # Fossil revival: handing one over sets 1, returning to Devon 2F sets 2,
+    # and the scientist's gift needs 2 (RustboroCity_DevonCorp_2F/scripts.inc).
+    keys.add('VAR_FOSSIL_RESURRECTION_STATE')
     keys.update(layout_keys(b.scripts))
     keys={k for k in keys if k not in ('VAR_RESULT','VAR_FACING')
           and not k.startswith(('VAR_0x8','VAR_CONTEST','VAR_BATTLE_FRONTIER','VAR_CABLE_CLUB','VAR_UNION_ROOM'))}
