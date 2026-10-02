@@ -77,6 +77,9 @@ def load_model(quick=False):
     # Steven's guidance moves the expert off the Cave of Origin door
     # (SootopolisCity/scripts.inc:128-135); no battle condition reads it.
     keys.add('FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN')
+    # Talking to both leaders after Rayquaza unlocks Juan's Gym; each talk
+    # records only its own meeting (SootopolisCity/scripts.inc:1458-1500).
+    keys.update({'FLAG_MET_MAXIE_SOOTOPOLIS','FLAG_MET_ARCHIE_SOOTOPOLIS'})
     # Story NPCs can open the next scene without a battle of their own (Stern's
     # interview opens the submarine scene). Their visibility writes are part
     # of access, even when no trainer script reads those flags directly.
