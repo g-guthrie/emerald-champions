@@ -531,6 +531,14 @@ u32 AI_MaskUnknownBattlers(void)
     return snapshot->token = sAiVisibilitySerial | mask;
 }
 
+// No scope survives into a new battle. A battle (or test) that ended while
+// the AI was mid-decision must not leave the next one reading a masked board.
+void AI_ResetVisibility(void)
+{
+    sAiVisibilityDepth = 0;
+    memset(sAiVisibility, 0, sizeof(sAiVisibility));
+}
+
 void AI_RestoreMaskedBattlers(u32 token)
 {
     // A scope past the snapshots has nothing of its own to restore.

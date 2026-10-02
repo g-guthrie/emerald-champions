@@ -423,6 +423,27 @@ static void ResetTestInventory()
         if (DATA.inventory[i].itemId != ITEM_NONE)
             AddBagItem(DATA.inventory[i].itemId, DATA.inventory[i].quantity);
     }
+    // A full pocket must be rebuilt here: GIVEN-time Bag edits are cleared above.
+    if (DATA.fullPocket[0].itemId != ITEM_NONE)
+    {
+        struct BagPocket *pocket = &gBagPockets[GetItemPocket(DATA.fullPocket[0].itemId)];
+        AddBagItemWithoutDiscovery(DATA.fullPocket[0].itemId, MAX_BAG_ITEM_CAPACITY);
+        for (u32 slot = 0; slot < pocket->capacity; slot++)
+            if (BagPocket_GetSlotData(pocket, slot).itemId == ITEM_NONE)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, DATA.fullPocket[1].itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+void FillPlayerBagPocket(u32 sourceLine, enum Item item, enum Item filler)
+{
+    // Default filler: the first other item sorted into the same Bag pocket.
+    for (enum Item other = ITEM_NONE + 1; filler == ITEM_NONE && other < ITEMS_COUNT; other++)
+        if (other != item && GetItemPocket(other) == GetItemPocket(item))
+            filler = other;
+    INVALID_IF(GetItemPocket(item) != GetItemPocket(filler) || item == filler, "Filler must be another item from the same pocket");
+    DATA.explicitInventory = TRUE;
+    DATA.fullPocket[0].itemId = item;
+    DATA.fullPocket[1].itemId = filler;
 }
 
 static void StartBattle(void)

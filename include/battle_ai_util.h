@@ -131,6 +131,7 @@ bool32 IsAiFlagPresentAgainst(enum BattlerId battler, u64 flag);
 // identify the masked mons; snapshots live in EWRAM, outside the tiny stack.
 u32 AI_MaskUnknownBattlers(void);
 void AI_RestoreMaskedBattlers(u32 token);
+void AI_ResetVisibility(void);
 #if TESTING
 u32 AI_TestVisibilityDepth(void);
 #endif

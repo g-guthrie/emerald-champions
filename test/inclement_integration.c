@@ -216,10 +216,15 @@ TEST("Inclement integration: owned captured and boxed held items unlock paid cop
     EXPECT(!IsEmeraldChampionsBattleItemUnlocked(item));
     EXPECT_EQ(GiveCapturedMonToPlayer(&mon), MON_GIVEN_TO_PARTY);
     EXPECT(IsEmeraldChampionsBattleItemUnlocked(item));
+    // A catch sent to the PC is an acquisition. Boxing a Pokemon already
+    // owned is a transfer: a stolen or Pickup item it holds stays undiscovered.
     item = ITEM_ASSAULT_VEST;
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
-    EXPECT(!IsEmeraldChampionsBattleItemUnlocked(item));
     EXPECT_EQ(CopyMonToPC(&mon), MON_GIVEN_TO_PC);
+    EXPECT(!IsEmeraldChampionsBattleItemUnlocked(item));
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+        CreateRandomMon(&gParties[B_TRAINER_PLAYER][i], SPECIES_ZIGZAGOON, 5);
+    EXPECT_EQ(GiveCapturedMonToPlayer(&mon), MON_GIVEN_TO_PC);
     EXPECT(IsEmeraldChampionsBattleItemUnlocked(item));
     EXPECT_GT(GetItemPrice(ITEM_ADAMANT_CRYSTAL), 0);
     EXPECT(!IsEmeraldChampionsFreeCatalogueItem(ITEM_ADAMANT_CRYSTAL));

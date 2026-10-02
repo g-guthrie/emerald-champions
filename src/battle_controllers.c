@@ -154,6 +154,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     ClearBattleAnimationVars();
     BattleAI_SetupItems();
     BattleAI_SetupFlags();
+    AI_ResetVisibility();
 
     if (IsEmeraldChampionsBirchRescueBattle())
         CreateEmeraldChampionsBirchRescueParty();

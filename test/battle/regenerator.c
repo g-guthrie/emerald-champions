@@ -371,15 +371,7 @@ WILD_BATTLE_TEST("Item theft: wild Magician and Pickpocket deliver permanent Bag
         ClearBag();
         memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
         if (fullBag)
-        {
-            EXPECT(AddBagItemWithoutDiscovery(item, MAX_BAG_ITEM_CAPACITY));
-            struct BagPocket *pocket = &gBagPockets[GetItemPocket(item)];
-            enum Item filler = item == ITEM_SITRUS_BERRY ? ITEM_ORAN_BERRY : ITEM_POTION;
-            for (u32 slot = 0; slot < pocket->capacity; slot++)
-                if (BagPocket_GetSlotData(pocket, slot).itemId == ITEM_NONE)
-                    BagPocket_SetSlotItemIdAndCount(pocket, slot, filler, MAX_BAG_ITEM_CAPACITY);
-            EXPECT(!CheckBagHasSpace(item, 1));
-        }
+            FILL_PLAYER_BAG_POCKET(item, ITEM_NONE);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ability); HP(400); MaxHP(400); Attack(1); Moves(MOVE_CELEBRATE, MOVE_TACKLE); }
         // Wild opponents choose randomly even in recorded test battles. One
         // contact move makes Pickpocket's trigger an observable certainty.
