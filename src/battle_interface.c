@@ -2874,10 +2874,12 @@ static void TryToAddButtonHint(u8 *spriteId, const struct SpriteSheet *sheet, co
 
 // The move menu's hints: R for move info and, just above it, L for the foes'
 // types. R opens move info in every battle; only the action menu's R throws
-// the last used Ball.
+// the last used Ball. Owner decision: the buttons work but their hints are
+// not drawn (EC_SHOW_MOVE_MENU_BUTTON_HINTS); the wild Ball window stays.
+#define EC_SHOW_MOVE_MENU_BUTTON_HINTS FALSE
 void TryToAddMoveInfoWindow(void)
 {
-    if (!B_SHOW_MOVE_DESCRIPTION)
+    if (!B_SHOW_MOVE_DESCRIPTION || !EC_SHOW_MOVE_MENU_BUTTON_HINTS)
         return;
 
     if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)

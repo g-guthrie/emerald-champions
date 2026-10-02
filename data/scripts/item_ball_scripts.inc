@@ -13,8 +13,8 @@ Route102_EventScript_ItemPotion:: @ 8290CD8
 	finditem ITEM_POTION
 	end
 
-Route103_EventScript_ItemTM40AerialAce:: @ 8290CE5
-	finditem ITEM_STARMINITE
+Route103_EventScript_ItemPearlString:: @ 8290CE5
+	finditem ITEM_PEARL_STRING
 	end
 
 Route103_EventScript_ItemPPUp:: @ 8290CF2
@@ -265,8 +265,8 @@ Route124_EventScript_ItemYellowShard:: @ 829100B
 	finditem ITEM_YELLOW_SHARD
 	end
 
-Route125_EventScript_ItemBigPearl:: @ 8291018
-	finditem ITEM_BIG_PEARL
+Route125_EventScript_ItemMawilite:: @ 8291018
+	finditem ITEM_MAWILITE
 	end
 
 Route126_EventScript_ItemGreenShard:: @ 8291025
@@ -293,12 +293,12 @@ Route132_EventScript_ItemProtein:: @ 8291066
 	finditem ITEM_SHARP_BEAK
 	end
 
-Route133_EventScript_ItemPearlString:: @ 8291073
-	finditem ITEM_PEARL_STRING
+Route133_EventScript_ItemStarminite:: @ 8291073
+	finditem ITEM_STARMINITE
 	end
 
-Route133_EventScript_ItemCometShard:: @ 8291080
-	finditem ITEM_COMET_SHARD
+Route133_EventScript_ItemMedichamite:: @ 8291080
+	finditem ITEM_MEDICHAMITE
 	end
 
 Route133_EventScript_ItemMaxRevive:: @ 829108D
@@ -797,8 +797,8 @@ MtPyre_Summit_EventScript_ItemTM61_WillOWisp::
 	finditem ITEM_STAR_PIECE
 	end
 
-Route111_RuinsExterior_EventScript_ItemMedichamite::
-	finditem ITEM_MEDICHAMITE
+Route111_RuinsExterior_EventScript_ItemCometShard::
+	finditem ITEM_COMET_SHARD
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemGlalitite::
@@ -829,8 +829,8 @@ GraniteCave_B1F_EventScript_ItemTM65ShadowClaw::
 	finditem ITEM_MEGANIUMITE
 	end
 
-Route117_EventScript_Mawilite::
-	finditem ITEM_MAWILITE
+Route117_EventScript_ItemBigPearl::
+	finditem ITEM_BIG_PEARL
 	end
 
 Meteor_Falls1F_2R_EventScript_Salamencite::

@@ -2517,7 +2517,7 @@
               {
                 "min_level": 41,
                 "max_level": 41,
-                "species": "SPECIES_GOLETT"
+                "species": "SPECIES_MAWILE"
               },
               {
                 "min_level": 40,
@@ -3212,7 +3212,7 @@
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_KLEFKI"
               },
               {
                 "min_level": 13,
@@ -3300,7 +3300,7 @@
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_MAWILE"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 13,
