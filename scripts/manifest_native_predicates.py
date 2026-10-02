@@ -28,6 +28,8 @@ CITATIONS = {
  'NativeScratchOutput':('src/easy_chat.c:2920','native output variable domain; unsupported outputs stay unresolved'),
  'GetLeadMonFriendshipScore':('src/pokemon.c:6698','lead friendship threshold score; legal walking/bonding preparation'),
  'GiveEmeraldChampionsStarterBattleItems':('src/field_specials.c:599','atomic six-item kit and saved receipt'),
+ 'PlayerPartyLeagueEligible':('src/pokemon.c:3144','at most one restricted-class member; the player arranges the party'),
+ 'DoesPlayerHaveFossil':('src/field_specials.c:5476','any revivable fossil in the Bag'),
  'StartInitialToolsBagTutorial':('src/item_menu.c:2595','asynchronous completed demonstration; original bag restored'),
  'ExchangeSootForCaps':('src/inclement_stat_services.c:678','500 gathered ash per cap; delivery before debit'),
  'GetTraderTradedFlag':('src/trader.c:139','saved decoration trade receipt'),
@@ -444,6 +446,11 @@ def evaluate(key,state,constants=None):
                   and any(_base_species(s) in r['family'] for s in state.get('species',()))]
         return {_number(r['item'],constants) for r in partners} or {_number('ITEM_NONE',constants)}
     if name=='NativeScratchOutput':return _scratch_output(args,state,constants)
+    # Party composition is a player choice; an eligible party always exists.
+    if name=='PlayerPartyLeagueEligible':return {0,1}
+    if name=='DoesPlayerHaveFossil':
+        text=(ROOT/'src/field_specials.c').read_text().split('sRevivableFossils[]',1)[1].split('};',1)[0]
+        return {int(any(item in state.get('items',()) for item in re.findall(r'\{(ITEM_\w+),',text)))}
     if name=='GiveEmeraldChampionsStarterBattleItems':
         return {1} if _flag(state,'FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS',constants) else _capacity(state)
     if name=='StartInitialToolsBagTutorial':
