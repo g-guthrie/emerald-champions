@@ -113,6 +113,13 @@ class World:
         self.story = mr.Story(self.geo)
         self.pokemon, self.items = pokemon, item_data['sources']
         self.battles, self.events = battle_data['battles'], event_data['transitions']
+        # Branches of one scene exclude each other once one sets its receipt.
+        # The player chooses facing and answers, so try the branch that
+        # changes the most state first (Wallace's Waterfall gift moves him off
+        # Juan's door only on the branches that also set his position).
+        first={}
+        for i,event in enumerate(self.events):first.setdefault((event['entry'],tuple(event['event'])),i)
+        self.events=sorted(self.events,key=lambda e:(first[(e['entry'],tuple(e['event']))],-len(e.get('final_writes',{}))))
         self.activities={}
         for activity in item_data.get('activities',[]):
             if activity.get('kind')!='three_battle_challenge':continue
