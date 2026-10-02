@@ -518,17 +518,10 @@ static void Difficulty_DrawChoices(u8 selection)
         line = end + 1;
         y += GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_HEIGHT);
     }
-    // The native font has a star icon, but no asterisk. Draw this footnote's
-    // small asterisk locally so other text and battle icons stay unchanged.
-    static const u8 asterisk[] = {0x04, 0x15, 0x0E, 0x15, 0x04};
-    for (u32 pass = 0; pass < 2; pass++)
-        for (u32 row = 0; row < ARRAY_COUNT(asterisk); row++)
-            for (u32 column = 0; column < 5; column++)
-                if (asterisk[row] & (1 << column))
-                    FillWindowPixelRect(WIN_DIFFICULTY_HELP, PIXEL_FILL(helpColors[pass ? 1 : 2]),
-                        8 + column + !pass, 39 + row + !pass, 1, 1);
-    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 16, 36, helpColors, TEXT_SKIP_DRAW,
-        COMPOUND_STRING("Difficulty is fixed for this run."));
+    const u8 *footnote = sChoosingNewGame ? COMPOUND_STRING("Choose now; fixed for this run.")
+                                          : COMPOUND_STRING("Difficulty is fixed for this run.");
+    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL,
+        GetStringCenterAlignXOffset(FONT_SMALL, footnote, helpWidth), 36, helpColors, TEXT_SKIP_DRAW, footnote);
     PutWindowTilemap(WIN_DIFFICULTY_HELP);
     CopyWindowToVram(WIN_DIFFICULTY_HELP, COPYWIN_FULL);
 }
