@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at e3d30a77e0 by scripts/manifest_text.py. 299 battles, PARTIAL: the progression did not reach Buffel.
+Generated from source at fd7a11f404 by scripts/manifest_text.py. 316 battles, through Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -18,17 +18,16 @@ HOW TO USE
 ====================================================================================================
 STEP 1 - level cap 14
   Start of the game
-  New Pokemon (32):
+  New Pokemon (29):
     Starter - Littleroot Town: Mudkip, Treecko
-    Wild - Route 101: Eevee, Lillipup, Mimikyu (Disguised), Pawmi, Poochyena, Scatterbug (Icy Snow),
-        Sewaddle, Wurmple, Zigzagoon, Zorua
+    Wild - Route 101: Fidough, Lillipup, Mimikyu (Disguised), Pawmi, Poochyena,
+        Scatterbug (Icy Snow), Sewaddle, Wurmple, Zigzagoon, Zorua
     Wild - Route 103: Blitzle, Grubbin, Kricketot, Pachirisu, Rockruff, Shellos (West), Shinx,
         Snubbull, Toxel, Wingull
     Evolve: Beautifly (from Silcoon), Cascoon (from Wurmple), Dustox (from Cascoon),
-        Espeon (from Eevee), Kricketune (from Kricketot), Silcoon (from Wurmple),
-        Spewpa (Icy Snow) (from Scatterbug (Icy Snow)), Sylveon (from Eevee), Umbreon (from Eevee),
-        Vivillon (Icy Snow) (from Spewpa (Icy Snow))
-  New held items (9): Cell Battery (buy, Oldale Town Pokemon Center 1F),
+        Kricketune (from Kricketot), Silcoon (from Wurmple),
+        Spewpa (Icy Snow) (from Scatterbug (Icy Snow)), Vivillon (Icy Snow) (from Spewpa (Icy Snow))
+  New held items (9): Cell Battery (buy, Oldale Town Mart),
       Choice Band (buy, Oldale Town Pokemon Center 1F),
       Choice Scarf (buy, Oldale Town Pokemon Center 1F),
       Choice Specs (buy, Oldale Town Pokemon Center 1F),
@@ -53,13 +52,13 @@ STEP 2 - level cap 14
 ====================================================================================================
 STEP 3 - level cap 14
   After beating: Youngster Calvin (#2)
-  New Pokemon (30):
+  New Pokemon (29):
     Wild - Petalburg City: Marill
     Wild - Route 102: Bidoof, Gothita, Happiny, Lechonk, Lotad, Meowth, Nymble, Ralts, Seedot,
         Surskit, Toedscool, Tympole
     Wild - Route 104: Azurill, Budew, Bunnelby, Charcadet, Flabébé, Fletchling, Ledyba, Litleo,
         Sandygast, Sentret, Skrelp, Smoliv, Taillow
-    Evolve: Leafeon (from Eevee), Lombre (from Lotad), Nuzleaf (from Seedot), Roselia (from Budew)
+    Evolve: Lombre (from Lotad), Nuzleaf (from Seedot), Roselia (from Budew)
   New held items (2): Oran Berry (berry tree, Route 102), Pecha Berry (berry tree, Route 102)
   Battles that open here:
     #3 Bug Catcher Rick - Route 102
@@ -104,7 +103,7 @@ STEP 4 - level cap 14
 ====================================================================================================
 STEP 5 - level cap 14
   After beating: Twins Gina & Mia (#13)
-  New Pokemon (37):
+  New Pokemon (35):
     Wild - Route 115: Wailmer
     Wild - Route 116: Dreepy, Gimmighoul (Roaming), Houndour, Joltik, Mareep, Nickit, Nincada,
         Riolu, Rookidee, Skiddo, Skitty, Starly
@@ -112,9 +111,8 @@ STEP 5 - level cap 14
         Woobat, Wooper, Zubat
     Wild - Seaspray Cave B1F: Bergmite, Frigibax, Seel, Smoochum, Sneasel, Snorunt, Spheal, Swinub,
         Vanillite
-    In-game trade - Rustboro City House 1: Fidough
-    Evolve: Froslass (from Snorunt), Glaceon (from Eevee), Lucario (from Riolu),
-        Staravia (from Starly), Swoobat (from Woobat)
+    Evolve: Froslass (from Snorunt), Lucario (from Riolu), Staravia (from Starly),
+        Swoobat (from Woobat)
   New held items (7): Float Stone (buy, Oldale Town Pokemon Center 1F),
       Grass Gem (buy, Oldale Town Pokemon Center 1F), Icicle Plate (Seaspray Cave B1F),
       Kings Rock (Seaspray Cave B1F), Quick Claw (buy, Petalburg City Pokemon Center 1F),
@@ -185,7 +183,7 @@ STEP 6 - level cap 20
 ====================================================================================================
 STEP 7 - level cap 20
   After beating: Team Aqua Grunt (#24)
-  New Pokemon (97):
+  New Pokemon (94):
     Wild - Dewford Manor 1F: Drowzee, Gastly, Glameow, Hoothoot, Litwick, Mime Jr., Rattata,
         Sinistea (Phony), Slowpoke (Galar), Solosis
     Wild - Dewford Meadow: Combee, Cutiefly, Flabébé, Flabébé, Flabébé, Milcery, Oricorio (Baile),
@@ -205,13 +203,12 @@ STEP 7 - level cap 20
     In-game trade - Dewford Town Hall: Bombirdier
     Evolve: Blissey (from Chansey), Carkol (from Rolycoly), Chansey (from Happiny),
         Crabominable (from Crabrawler), Delcatty (from Skitty), Exeggutor (from Exeggcute),
-        Exeggutor (Alola) (from Exeggcute), Flareon (from Eevee), Floette (Orange) (from Flabébé),
-        Floette (Red) (from Flabébé), Floette (Yellow) (from Flabébé), Jolteon (from Eevee),
-        Kadabra (from Abra), Ludicolo (from Lombre), Mantine (from Mantyke), Metang (from Beldum),
+        Exeggutor (Alola) (from Exeggcute), Floette (Orange) (from Flabébé),
+        Floette (Red) (from Flabébé), Floette (Yellow) (from Flabébé), Kadabra (from Abra),
+        Ludicolo (from Lombre), Mantine (from Mantyke), Metang (from Beldum),
         Mr. Mime (from Mime Jr.), Noctowl (from Hoothoot), Raichu (from Pikachu),
         Raticate (from Rattata), Shiftry (from Nuzleaf), Simipour (from Panpour),
-        Simisage (from Pansage), Simisear (from Pansear), Vaporeon (from Eevee),
-        Vikavolt (from Charjabug)
+        Simisage (from Pansage), Simisear (from Pansear), Vikavolt (from Charjabug)
     Form change: Oricorio (Pom Pom) (from Oricorio (Baile))
   New held items (19): Dread Plate (Dewford Manor 1F), Everstone (Granite Cave B2F),
       Expert Belt (buy, Oldale Town Pokemon Center 1F), Fairy Gem (Dewford Meadow),
@@ -459,13 +456,16 @@ STEP 17 - level cap 30
 STEP 18 - level cap 30
   After beating: Winstrate Victor (#64), Psychic Brandi (#63), Youngster Deandre (#68),
     Hiker Mike (#69), Verdanturf Battle Tent — fight 1 of 3 (#70)
-  New Pokemon (20):
-    Wild - Route 117: Deerling (Spring), Farfetch'd, Farfetch'd (Galar), Gossifleur, Illumise,
-        Karrablast, Minccino, Petilil, Shelmet, Volbeat, Wooloo
+  New Pokemon (29):
+    Wild - Route 117: Deerling (Spring), Eevee, Farfetch'd, Farfetch'd (Galar), Gossifleur,
+        Illumise, Karrablast, Minccino, Petilil, Shelmet, Volbeat, Wooloo
     Wild - Route 118: Carvanha
     Evolve: Accelgor (from Shelmet), Dubwool (from Wooloo), Eldegoss (from Gossifleur),
-        Escavalier (from Karrablast), Lilligant (from Petilil), Lilligant (Hisui) (from Petilil),
-        Sharpedo (from Carvanha), Sirfetch'd (from Farfetch'd (Galar))
+        Escavalier (from Karrablast), Espeon (from Eevee), Flareon (from Eevee),
+        Glaceon (from Eevee), Jolteon (from Eevee), Leafeon (from Eevee), Lilligant (from Petilil),
+        Lilligant (Hisui) (from Petilil), Sharpedo (from Carvanha),
+        Sirfetch'd (from Farfetch'd (Galar)), Sylveon (from Eevee), Umbreon (from Eevee),
+        Vaporeon (from Eevee)
   New held items (1): Life Orb (buy, Dewford Town Pokemon Center 1F)
   New Mega Stones (no Mega Ring yet): Sablenite
   Battles that open here:
@@ -781,7 +781,7 @@ STEP 27 - level cap 55
       Misty Seed (buy, Dewford Town Pokemon Center 1F),
       Psychic Seed (buy, Dewford Town Pokemon Center 1F),
       Throat Spray (buy, Dewford Town Pokemon Center 1F),
-      Toxic Orb (buy, Verdanturf Town Pokemon Center 1F), Utility Umbrella (Route 119)
+      Toxic Orb (buy, Slateport City Pokemon Center 1F), Utility Umbrella (Route 119)
   New Mega Stones: Ampharosite, Baxcalibrite, Blastoisinite, Blazikenite, Dragalgite, Dragoninite,
       Eelektrossite, Flygonite, Garchompite Z, Greninjite, Hawluchanite, Heracronite, Kinglerite,
       Lopunnite, Magearnite, Pyroarite, Scizorite, Venusaurite
@@ -921,7 +921,7 @@ STEP 32 - level cap 55
   New held items (18): Bug Memory (buy, Oldale Town Pokemon Center 1F),
       Dark Memory (buy, Dewford Town Pokemon Center 1F),
       Dragon Memory (buy, Dewford Town Pokemon Center 1F),
-      Electric Memory (buy, Fortree City Pokemon Center 1F),
+      Electric Memory (buy, Fallarbor Town Pokemon Center 1F),
       Fairy Memory (buy, Dewford Town Pokemon Center 1F),
       Fighting Memory (buy, Oldale Town Pokemon Center 1F),
       Fire Memory (buy, Oldale Town Pokemon Center 1F),
@@ -1351,7 +1351,7 @@ STEP 57 - level cap 70
   New held items (7): Figy Berry (Sootopolis City),
       Hard Stone (buy, Dewford Town Pokemon Center 1F), Iapapa Berry (Sootopolis City),
       Iron Plate (Underwater Route 126), Mind Plate (Underwater Route 127),
-      Pixie Plate (Underwater Route 124), Poison Barb (buy, Pacifidlog Town Pokemon Center 1F)
+      Pixie Plate (Underwater Route 124), Poison Barb (buy, Mossdeep City Pokemon Center 1F)
   New Mega Stones: Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite
   Battles that open here:
     #262 Swimmer F Brenda - Route 126
@@ -1390,7 +1390,7 @@ STEP 59 - level cap 70
     Storm visitor - Route 126: Tapu Fini [L]
     Form change: Keldeo (Resolute) [L] (from Keldeo (Ordinary)), Palkia (Origin) [L] (from Palkia)
     Other: Phione [L]
-  New held items (1): Lustrous Globe (buy, Lilycove City Department Store 2F)
+  New held items (1): Lustrous Globe (buy, Lavaridge Town Pokemon Center 1F)
   Battles that open here:
     #270 Beauty Connie - Sootopolis City Gym B1F
         foe levels Easy 56 / Med 77-78 / Hard 81-83
@@ -1524,9 +1524,108 @@ STEP 68 - level cap 80
         foe levels Easy 64 / Med 84-86 / Hard 87-90
 
 ====================================================================================================
-STEP 69 - level cap 80
+STEP 69 - level cap 85
   After beating: Elite Four Drake (#298)
+  New Pokemon (40):
+    Wild - Altering Cave: Smeargle
+    Wild - Altering Cave 1F: Hoopa (Confined) [L]
+    Wild - Altering Cave B1F: Guzzlord [L]
+    Wild - Meteor Falls Stevens Cave: Iron Boulder [L], Iron Crown [L]
+    Storm visitor - Route 121: Xerneas (Neutral) [L]
+    Gift - Littleroot Town Professor Birchs Lab: Cosmog [L]
+    Gift - Mossdeep City Stevens House: Meltan [L]
+    Gift - Rustboro City Devon Corp 2F: Arceus (Normal) [L]
+    Evolve: Cosmoem [L] (from Cosmog), Lunala [L] (from Cosmoem), Melmetal [L] (from Meltan),
+        Solgaleo [L] (from Cosmoem)
+    Form change: Arceus (Bug) [L] (from Arceus (Dark)), Arceus (Dark) [L] (from Arceus (Bug)),
+        Arceus (Dragon) [L] (from Arceus (Bug)), Arceus (Electric) [L] (from Arceus (Bug)),
+        Arceus (Fairy) [L] (from Arceus (Bug)), Arceus (Fighting) [L] (from Arceus (Bug)),
+        Arceus (Fire) [L] (from Arceus (Bug)), Arceus (Flying) [L] (from Arceus (Bug)),
+        Arceus (Ghost) [L] (from Arceus (Bug)), Arceus (Grass) [L] (from Arceus (Bug)),
+        Arceus (Ground) [L] (from Arceus (Bug)), Arceus (Ice) [L] (from Arceus (Bug)),
+        Arceus (Poison) [L] (from Arceus (Bug)), Arceus (Psychic) [L] (from Arceus (Bug)),
+        Arceus (Rock) [L] (from Arceus (Bug)), Arceus (Steel) [L] (from Arceus (Bug)),
+        Arceus (Water) [L] (from Arceus (Bug)), Calyrex (Ice) [L] (from Calyrex),
+        Calyrex (Shadow) [L] (from Calyrex), Hoopa (Unbound) [L] (from Hoopa (Confined)),
+        Necrozma (Dawn Wings) [L] (from Necrozma), Necrozma (Dusk Mane) [L] (from Necrozma),
+        Zygarde (10 Aura Break) [L] (from Zygarde (10 Power Construct)),
+        Zygarde (10 Power Construct) [L] (from Zygarde (10 Aura Break)),
+        Zygarde (50 Power Construct) [L] (from Zygarde (10 Aura Break))
+    Roamer - Route 101: Latias [L], Latios [L]
+  New held items (1): Destiny Knot (buy, Verdanturf Town Pokemon Center 1F)
   Battles that open here:
-    #299 Champion Wallace - Ever Grande City Champions Room
-        foe levels Easy 64 / Med 88-90 / Hard 94-97
+    #299 Rival Wally - Victory Road 1F
+        foe levels Easy 68 / Med 94-95 / Hard 100
+    #300 Cooltrainer Vincent - Route 110 Trick House Puzzle 8
+        foe levels Easy 68 / Med 87 / Hard 88-89
+    #301 Cooltrainer Keira - Route 110 Trick House Puzzle 8
+        foe levels Easy 68 / Med 87 / Hard 88-89
+    #302 Cooltrainer Leroy - Route 110 Trick House Puzzle 8
+        foe levels Easy 68 / Med 88-89 / Hard 90-91
+    #303 Champion Wallace - Cave Of Origin Diancies Room
+        foe levels Easy 68 / Med 94 / Hard 100
+    #304 Rival Green - Altering Cave B1F
+        foe levels Easy 68 / Med 87-88 / Hard 89-90
+    #305 Champion Cynthia - Mossdeep City House 1
+        foe levels Easy 68 / Med 90 / Hard 93-94
+
+====================================================================================================
+STEP 70 - level cap 85
+  After beating: Rival Green (#304)
+  New held items (2): Spell Tag (buy, Dewford Town Pokemon Center 1F),
+      Twisted Spoon (Altering Cave B1F)
+  Battles that open here:
+    #306 Wild Mewtwo [L] - Altering Cave B1F
+
+====================================================================================================
+STEP 71 - level cap 85
+  After beating: Champion Cynthia (#305)
+  Battles that open here:
+    #307 Wild Lugia [L] - Navel Rock Bottom
+    #308 Wild Ho-Oh [L] - Navel Rock Top
+
+====================================================================================================
+STEP 72 - level cap 85
+  After beating: Rival Wally (#299)
+  Battles that open here:
+    #309 Pokefan Colton - SSTidal Rooms
+        foe levels Easy 68 / Med 94 / Hard 100
+    #310 Gentleman Micah - SSTidal Rooms
+        foe levels Easy 67 / Med 89 / Hard 92-93
+    #311 Gentleman Thomas - SSTidal Rooms
+        foe levels Easy 67 / Med 87-88 / Hard 89-90
+    #312 Young Couple Lea & Jed - SSTidal Rooms
+        foe levels Easy 67 / Med 88 / Hard 90-91
+    #313 Lady Naomi - SSTidal Rooms
+        foe levels Easy 67 / Med 88-89 / Hard 91-92
+
+====================================================================================================
+STEP 73 - level cap 85
+  After beating: Wild Mewtwo [L] (#306), Wild Lugia [L] (#307), Wild Ho-Oh [L] (#308),
+    Lady Naomi (#313)
+  New Pokemon (3):
+    Static encounter - Altering Cave B1F: Mewtwo [L]
+    Static encounter - Navel Rock Bottom: Lugia [L]
+    Static encounter - Navel Rock Top: Ho-Oh [L]
+  Battles that open here:
+    #314 Rival Steven - Meteor Falls Stevens Cave
+        foe levels Easy 68 / Med 89-90 / Hard 92-94
+
+====================================================================================================
+STEP 74 - level cap 85
+  After beating: Rival Steven (#314)
+  Battles that open here:
+    #315 Wild Deoxys (Normal) [L] - Birth Island Exterior
+
+====================================================================================================
+STEP 75 - level cap 85
+  After beating: Wild Deoxys (Normal) [L] (#315)
+  New Pokemon (5):
+    Static encounter - Birth Island Exterior: Deoxys (Normal) [L]
+    Form change: Deoxys (Attack) [L] (from Deoxys (Normal)),
+        Deoxys (Defense) [L] (from Deoxys (Normal)), Deoxys (Normal) [L] (from Deoxys (Normal)),
+        Deoxys (Speed) [L] (from Deoxys (Normal))
+  Battles that open here:
+    #316 Expert Buffel - Lilycove City Cove Lily Motel 2F
+        foe levels Easy 68 / Med 89-90 / Hard 92-94
 
