@@ -384,6 +384,14 @@ class World:
             if allowed: state['flags'].add(key)
             else: state['flags'].discard(key)
         self.rusturf_rock_smash(state)
+        # Admission walks the door guards aside and saves that spot
+        # (EverGrandeCity_PokemonLeague_1F/scripts.inc:56-71, copyobjectxytoperm);
+        # later visits step them aside again. The tile model cannot follow
+        # scripted walking, so the admitted door is clear.
+        if mr.canon('FLAG_ENTERED_ELITE_FOUR') in state['flags']:
+            for record in self.geo.object_records:
+                if record['map']=='EverGrandeCity_PokemonLeague_1F' and record['script']=='EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard':
+                    for x,y in record['positions']:state['flags'].add(self.geo.token(record['map'],record['id'],x,y))
         for item, token in [('ITEM_OLD_ROD','HAS_OLD_ROD'),('ITEM_GOOD_ROD','HAS_GOOD_ROD'),('ITEM_SUPER_ROD','HAS_SUPER_ROD')]:
             if item in state['items']: state['flags'].add(token)
         state['cap']=mr.cap_of_flags(state['flags'])
