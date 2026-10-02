@@ -89,6 +89,12 @@ class TuningPoolCheckTests(unittest.TestCase):
         for needle in ("level 46 must equal", "friendship 256", "not a party-menu Ability", "missing `availability`"):
             self.assertIn(needle, joined)
 
+    def test_one_hit_kos_and_evasion_boosts_are_never_tuned_for(self):
+        problems = self.check(mon("SPECIES_GARCHOMP", moves=["MOVE_FISSURE", "MOVE_A", "MOVE_DOUBLE_TEAM", "MOVE_B"]))
+        self.assertEqual(len(problems), 2)
+        self.assertIn("MOVE_FISSURE is never tuned for", problems[0])
+        self.assertIn("MOVE_DOUBLE_TEAM is never tuned for", problems[1])
+
     def test_evs_bounds(self):
         problems = self.check(mon("SPECIES_AGGRON", evs=[252, 252, 252, 0, 0, 0]))
         self.assertTrue(any("EVs" in p for p in problems), problems)

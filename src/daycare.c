@@ -649,7 +649,7 @@ void InheritAbility(struct Pokemon *egg, struct DayCare *daycare)
     SetMonData(egg, MON_DATA_ABILITY_NUM, &inheritAbility);
 }
 
-#define ADD_OR_REPLACE_MOVE(move) if (GiveMoveToMon(egg, move) == MON_HAS_MAX_MOVES) {DeleteFirstMoveAndGiveMoveToMon(egg, move);}
+#define ADD_OR_REPLACE_MOVE(move) if (!IsMoveRemovedFromGame(move) && GiveMoveToMon(egg, move) == MON_HAS_MAX_MOVES) {DeleteFirstMoveAndGiveMoveToMon(egg, move);}
 
 static void GiveParentEggMoves(struct Pokemon *egg, enum Move *parentMoves, enum Species species)
 {

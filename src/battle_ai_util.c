@@ -1292,18 +1292,14 @@ static u32 AI_GetContextAccuracy(struct DamageContext *ctx)
         return 0;
     if (cv.moveEffect == EFFECT_OHKO)
     {
-        if (gBattleMons[ctx->battlerDef].level > gBattleMons[ctx->battlerAtk].level
-            || ctx->abilities[ctx->battlerDef] == ABILITY_STURDY
+        if (ctx->abilities[ctx->battlerDef] == ABILITY_STURDY
             || GetActiveGimmick(ctx->battlerDef) == GIMMICK_DYNAMAX)
             return 0;
         if (ctx->abilities[ctx->battlerAtk] == ABILITY_NO_GUARD || ctx->abilities[ctx->battlerDef] == ABILITY_NO_GUARD
             || gBattleMons[ctx->battlerAtk].volatiles.battlerWithSureHit == ctx->battlerDef + 1
             || gBattleMons[ctx->battlerDef].volatiles.glaiveRush)
             return 100;
-        u32 accuracy = GetMoveAccuracy(ctx->move) + gBattleMons[ctx->battlerAtk].level - gBattleMons[ctx->battlerDef].level;
-        if (MoveDecreasesAccIfUserNotSameType(ctx->move) && !IS_BATTLER_OF_TYPE(ctx->battlerAtk, ctx->moveType))
-            accuracy -= 10;
-        return min(100, accuracy);
+        return GetOHKOMoveOdds(ctx->battlerAtk, ctx->battlerDef, ctx->move, ctx->moveType);
     }
     if (CanMoveSkipAccuracyCalc(&cv, ctx->weather, AI_CHECK))
         return 100;
@@ -3026,7 +3022,6 @@ bool32 IsMoveRedirectionPrevented(enum BattlerId battlerAtk, enum Move move, enu
 bool32 ShouldTryOHKO(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability atkAbility, enum Ability defAbility, enum Move move)
 {
     enum HoldEffect holdEffect = gAiLogicData->holdEffects[battlerDef];
-    u32 accuracy = gAiLogicData->moveAccuracy[battlerAtk][battlerDef][gAiThinkingStruct->movesetIndex];
 
     gPotentialItemEffectBattler = battlerDef;
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < GetBattlerHoldEffectParam(battlerDef))
@@ -3038,19 +3033,10 @@ bool32 ShouldTryOHKO(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
         return FALSE;
 
     bool32 sureHit = (gBattleMons[battlerAtk].volatiles.battlerWithSureHit == battlerDef + 1) || atkAbility == ABILITY_NO_GUARD || defAbility == ABILITY_NO_GUARD;
-    if (sureHit && gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level)
-    {
+    if (sureHit)
         return TRUE;
-    }
-    else    // test the odds
-    {
-        u32 odds = accuracy + (gBattleMons[battlerAtk].level - gBattleMons[battlerDef].level);
-        if (MoveDecreasesAccIfUserNotSameType(move) && !IS_BATTLER_OF_TYPE(battlerAtk, GetMoveType(move)))
-            odds -= 10;
-        if (Random() % 100 + 1 < odds && gBattleMons[battlerAtk].level >= gBattleMons[battlerDef].level)
-            return TRUE;
-    }
-    return FALSE;
+    // A higher-level target is only harder to hit (GetOHKOMoveOdds), never immune.
+    return (Random() % 100) < GetOHKOMoveOdds(battlerAtk, battlerDef, move, GetMoveType(move));
 }
 
 bool32 ShouldRaiseAnyStat(enum BattlerId battlerAtk, enum BattlerId battlerDef)

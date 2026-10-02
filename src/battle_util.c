@@ -10696,6 +10696,17 @@ u32 GetTotalAccuracy(struct BattleCalcValues *cv, u32 weather)
     return calc;
 }
 
+// Owner rule: base accuracy plus one point per level the user leads by, or
+// minus one per level it trails (Sheer Cold loses 10 more for a non-Ice
+// user). A target above the user is harder to hit, never immune.
+u32 GetOHKOMoveOdds(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Type moveType)
+{
+    s32 odds = GetMoveAccuracy(move) + (s32)gBattleMons[battlerAtk].level - (s32)gBattleMons[battlerDef].level;
+    if (MoveDecreasesAccIfUserNotSameType(move) && !IS_BATTLER_OF_TYPE(battlerAtk, moveType))
+        odds -= 10;
+    return min(100, max(0, odds));
+}
+
 bool32 DoesOHKOMoveMissTarget(struct BattleCalcValues *cv)
 {
     enum OHKOResult {
@@ -10711,12 +10722,8 @@ bool32 DoesOHKOMoveMissTarget(struct BattleCalcValues *cv)
         return TRUE;
     }
 
-    if (gBattleMons[cv->battlerDef].level > gBattleMons[cv->battlerAtk].level)
-    {
-        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_ONE_HIT_KO_NO_AFFECT;
-        return TRUE;
-    }
-
+    // A higher-level target no longer blocks the move outright; each level of
+    // difference costs one point of accuracy instead (GetOHKOMoveOdds).
     if (cv->abilities[cv->battlerDef] == ABILITY_STURDY)
     {
         gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_ONE_HIT_KO_STURDY;
@@ -10737,18 +10744,12 @@ bool32 DoesOHKOMoveMissTarget(struct BattleCalcValues *cv)
         lands = CALC_ACC;
     }
 
-    if (lands == CALC_ACC)
-    {
-        u32 odds = GetMoveAccuracy(cv->move) + (gBattleMons[cv->battlerAtk].level - gBattleMons[cv->battlerDef].level);
-        if (MoveDecreasesAccIfUserNotSameType(cv->move) && !IS_BATTLER_OF_TYPE(cv->battlerAtk, GetBattleMoveType(cv->move)))
-            odds -= 10;
-        if (RandomPercentage(RNG_ACCURACY, odds) && gBattleMons[cv->battlerAtk].level >= gBattleMons[cv->battlerDef].level)
-            lands = SURE_HIT;
-    }
+    if (lands == CALC_ACC && RandomPercentage(RNG_ACCURACY, GetOHKOMoveOdds(cv->battlerAtk, cv->battlerDef, cv->move, GetBattleMoveType(cv->move))))
+        lands = SURE_HIT;
 
     if (lands == SURE_HIT)
     {
-        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_ONE_HIT_KO_NO_AFFECT;
+        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_ONE_HIT_KO;
         return FALSE;
     }
 

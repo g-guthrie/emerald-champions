@@ -1144,10 +1144,15 @@ static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves)
     while (GetSpeciesPreEvolution(species) != SPECIES_NONE)
         species = GetSpeciesPreEvolution(species);
 
+    // A hatchling of an iconic family can always relearn its one-hit KO.
+    enum Move iconic = GetBoxMonIconicOhkoMove(mon);
+    if (iconic != MOVE_NONE && !BoxMonKnowsMove(mon, iconic))
+        moves[numMoves++] = iconic;
+
     const u16 *eggMoves = GetSpeciesEggMoves(species);
 
     if (eggMoves[0] == MOVE_UNAVAILABLE)
-        return 0;
+        return numMoves;
 
     for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
     {
@@ -1195,6 +1200,11 @@ bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates stat
     return sRelearnTypes[state].hasMoveToRelearn(boxMon);
 }
 
+u32 GetMovesToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state, u16 *moves)
+{
+    return sRelearnTypes[state].getMoves(boxMon, moves);
+}
+
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon)
 {
     enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
@@ -1223,6 +1233,9 @@ static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon)
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon)
 {
     enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    enum Move iconic = GetBoxMonIconicOhkoMove(boxMon);
+    if (iconic != MOVE_NONE && !BoxMonKnowsMove(boxMon, iconic))
+        return TRUE;
     while (GetSpeciesPreEvolution(species) != SPECIES_NONE)
         species = GetSpeciesPreEvolution(species);
 
@@ -1233,7 +1246,7 @@ static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon)
 
     for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
     {
-        if (!BoxMonKnowsMove(boxMon, eggMoves[i]))
+        if (!BoxMonKnowsMove(boxMon, eggMoves[i]) && !IsMoveRemovedFromGame(eggMoves[i]))
             return TRUE;
     }
 

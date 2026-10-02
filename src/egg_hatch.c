@@ -343,6 +343,7 @@ static void AddHatchedMonToParty(u8 id)
     // A met level of 0 is interpreted on the summary screen as "hatched at"
     metLevel = 0;
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
+    TeachHatchedIconicOhkoMove(mon);
 
     metLocation = GetCurrentRegionMapSectionId();
     SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);

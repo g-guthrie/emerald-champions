@@ -12,7 +12,8 @@ citation; species/form is in the pool; a Mega Stone needs its Mega form in
 the pool and the Mega Ring (the party carries base forms, prepare_party
 does not accept Mega species); held items are in the pool, and a
 non-restocking item is not held twice; the Ability is one the party menu
-offers; one Legendary/Mythical/Ultra Beast/Paradox in total; level equals
+offers; one Legendary/Mythical/Ultra Beast/Paradox in total; no one-hit KO
+or evasion boost (never tuned for); level equals
 the cap when given; friendship does not exceed the milestone maximum;
 IV/EV bounds; the opening starter pick rule before the Game Corner.
 
@@ -38,6 +39,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 POOLS = ROOT / "work/tuning-20260930/pools"
 PROGRESSION = ROOT / "work/progression-manifest/progression.pickle"
+# Owner rule: the iconic one-hit KOs (hatched Lapras, Spheal, Rhyhorn, Krabby,
+# Diglett and Swinub lines only) are outliers the campaign is never tuned
+# around; the evasion boosts are out of the game (src/pokemon.c
+# IsMoveRemovedFromGame).
+UNTUNED_MOVES = {"MOVE_SHEER_COLD", "MOVE_HORN_DRILL", "MOVE_GUILLOTINE", "MOVE_FISSURE",
+                 "MOVE_DOUBLE_TEAM", "MOVE_MINIMIZE"}
 
 
 def load_pool(milestone: str, pools_dir: Path = POOLS) -> dict:
@@ -162,6 +169,10 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
                                     f"{pool.get('mega_ring', {}).get('gate')}")
                 elif not forms:
                     problems.append(f"{tag}: {item} does not Mega Evolve {sp} in this pool (no such Mega by {milestone})")
+        for move in mon.get("moves") or []:
+            if move in UNTUNED_MOVES:
+                problems.append(f"{tag}: {move} is never tuned for (one-hit KOs are hatchling-only outliers; "
+                                "evasion boosts are removed)")
         level = mon.get("level")
         if level is not None and level != cap:
             problems.append(f"{tag}: level {level} must equal the {milestone} cap {cap}")

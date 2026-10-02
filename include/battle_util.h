@@ -294,6 +294,7 @@ bool32 IsHazardOnSideAndClear(enum BattleSide side, enum Hazards hazardType);
 void RemoveHazardFromField(enum BattleSide side, enum Hazards hazardType);
 bool32 CanMoveSkipAccuracyCalc(struct BattleCalcValues *cv, u32 weather, enum ResultOption option);
 u32 GetTotalAccuracy(struct BattleCalcValues *cv, u32 weather);
+u32 GetOHKOMoveOdds(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Type moveType);
 bool32 DoesOHKOMoveMissTarget(struct BattleCalcValues *cv);
 bool32 DoesMoveMissTarget(struct BattleCalcValues *cv);
 bool32 IsSemiInvulnerable(enum BattlerId battler, enum SemiInvulnerableExclusion excludeCommander);

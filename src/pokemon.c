@@ -1649,7 +1649,8 @@ static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, enum Move move, u8 slot)
 
 // Owner decision: evasion boosts and one-hit KOs are out of the game. They
 // turn a fight into a dice roll that no team or AI can plan around, so no
-// tutor, relearner, starting moveset or Metronome produces them.
+// tutor, relearner, starting moveset or Metronome produces them. The one
+// exception is each iconic family's own one-hit KO below, learned by hatching.
 bool32 IsMoveRemovedFromGame(enum Move move)
 {
     switch (move)
@@ -1664,6 +1665,56 @@ bool32 IsMoveRemovedFromGame(enum Move move)
     default:
         return FALSE;
     }
+}
+
+// Iconic one-hit KO moves survive only in their own families, and only for
+// Pokemon that hatched: every hatchling knows its family's move, and the egg
+// relearner returns it if forgotten. Campaign tuning never assumes them.
+static const struct { u16 eggSpecies; u16 move; } sIconicOhkoFamilies[] =
+{
+    {SPECIES_LAPRAS,  MOVE_SHEER_COLD},
+    {SPECIES_SPHEAL,  MOVE_SHEER_COLD},
+    {SPECIES_RHYHORN, MOVE_HORN_DRILL},
+    {SPECIES_KRABBY,  MOVE_GUILLOTINE},
+    {SPECIES_DIGLETT, MOVE_FISSURE},
+    {SPECIES_SWINUB,  MOVE_FISSURE},
+};
+
+enum Move GetIconicOhkoMove(enum Species species)
+{
+    species = GET_BASE_SPECIES_ID(species);
+    for (u32 depth = 0; depth < 4; depth++)
+    {
+        for (u32 i = 0; i < ARRAY_COUNT(sIconicOhkoFamilies); i++)
+            if (sIconicOhkoFamilies[i].eggSpecies == species)
+                return sIconicOhkoFamilies[i].move;
+        enum Species previous = GetSpeciesPreEvolution(species);
+        if (previous == SPECIES_NONE)
+            break;
+        species = GET_BASE_SPECIES_ID(previous);
+    }
+    return MOVE_NONE;
+}
+
+// A met level of 0 marks a hatchling (AddHatchedMonToParty).
+enum Move GetBoxMonIconicOhkoMove(struct BoxPokemon *boxMon)
+{
+    if (GetBoxMonData(boxMon, MON_DATA_IS_EGG) || GetBoxMonData(boxMon, MON_DATA_MET_LEVEL) != 0)
+        return MOVE_NONE;
+    return GetIconicOhkoMove(GetBoxMonData(boxMon, MON_DATA_SPECIES));
+}
+
+void TeachHatchedIconicOhkoMove(struct Pokemon *mon)
+{
+    enum Move move = GetBoxMonIconicOhkoMove(&mon->box);
+    u32 slot;
+
+    if (move == MOVE_NONE || MonKnowsMove(mon, move))
+        return;
+    for (slot = 0; slot < MAX_MON_MOVES - 1; slot++)
+        if (GetMonData(mon, MON_DATA_MOVE1 + slot) == MOVE_NONE)
+            break;
+    SetMonMoveSlot(mon, move, slot);
 }
 
 void GiveMonInitialMoveset(struct Pokemon *mon)

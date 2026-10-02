@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daycare.h"
+#include "egg_hatch.h"
 #include "event_data.h"
 #include "item.h"
 #include "malloc.h"
@@ -297,5 +298,37 @@ TEST("Nursery Phione egg waits safely while the shared special slot is occupied"
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_PHIONE);
     EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG));
     EXPECT(!CanAddRestrictedMonToParty(species, PARTY_SIZE));
+    ResetNursery();
+}
+
+TEST("Nursery eggs never inherit a one-hit KO; hatching teaches only the family's own")
+{
+    // Spheal can inherit Fissure as an egg move, and either parent passes egg
+    // moves. A hatched Dugtrio's Fissure must still stay in its own family.
+    ResetNursery();
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_DUGTRIO, 30, gender=MON_MALE, move1=MOVE_FISSURE, move2=MOVE_NONE, move3=MOVE_NONE, move4=MOVE_NONE;
+        givemon SPECIES_SPHEAL, 30, gender=MON_FEMALE, move1=MOVE_FISSURE, move2=MOVE_NONE, move3=MOVE_NONE, move4=MOVE_NONE;
+    );
+    StorePokemonInDaycare(&gParties[B_TRAINER_PLAYER][0], &gSaveBlock1Ptr->daycare.mons[0]);
+    StorePokemonInDaycare(&gParties[B_TRAINER_PLAYER][0], &gSaveBlock1Ptr->daycare.mons[1]);
+    EXPECT_NE(GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare), 0);
+    TriggerPendingDaycareEgg();
+    GiveEggFromDaycare();
+
+    struct Pokemon *egg = &gParties[B_TRAINER_PLAYER][0];
+    EXPECT_EQ(GetMonData(egg, MON_DATA_SPECIES), SPECIES_SPHEAL);
+    EXPECT(GetMonData(egg, MON_DATA_IS_EGG));
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        EXPECT(!IsMoveRemovedFromGame(GetMonData(egg, MON_DATA_MOVE1 + slot)));
+
+    gSpecialVar_0x8004 = 0;
+    ScriptHatchMon();
+    EXPECT(!GetMonData(egg, MON_DATA_IS_EGG));
+    EXPECT(MonKnowsMove(egg, MOVE_SHEER_COLD));
+    EXPECT(!MonKnowsMove(egg, MOVE_FISSURE));
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+        if (GetMonData(egg, MON_DATA_MOVE1 + slot) == MOVE_SHEER_COLD)
+            EXPECT_GT(GetMonData(egg, MON_DATA_PP1 + slot), 0);
     ResetNursery();
 }
