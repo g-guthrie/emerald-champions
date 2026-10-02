@@ -203,17 +203,25 @@ class ManifestGeometry(mr.Geometry):
                 for category in ('bg_events','coord_events','object_events'):
                     for ev in self.maps[d].get(category,[]) or []:
                         if isinstance(ev.get('x'),int) and ev.get('script'):
-                            entries.append((ev['script'],(d,ev['x'],ev['y']),category))
+                            entries.append((ev['script'],(d,ev['x'],ev['y']),category,
+                                            ev.get('flag') if category=='object_events' and ev.get('flag') not in (None,'0','FLAG_NONE') else None))
                 script=mr.MAPS_DIR/d/'scripts.inc'
                 if script.exists():
-                    entries.extend((label,(d,None,None),'callback') for label in re.findall(r'map_script\s+MAP_SCRIPT_ON_(?:LOAD|TRANSITION|RESUME),\s*(\w+)',script.read_text()))
-                for label,origin,kind in entries:
+                    entries.extend((label,(d,None,None),'callback',None) for label in re.findall(r'map_script\s+MAP_SCRIPT_ON_(?:LOAD|TRANSITION|RESUME),\s*(\w+)',script.read_text()))
+                for label,origin,kind,visible in entries:
                     for path in parser.walk(label):
                         if not path.get('completed'): continue
                         env=path.get('assignments',{})
+                        # A first-time guard the scene itself writes (Steven's
+                        # FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN) only says the walk-in
+                        # has not played yet; afterwards the same place stays open.
+                        written={e['args'][0] for e in path.get('effects',[]) if e['op'] in ('setflag','clearflag','setvar') and e.get('args')}
+                        conditions=[c for c in path['conditions'] if c[0] not in written]
+                        # An NPC's script runs only while that NPC is present.
+                        if visible:conditions=[[visible,'eq','FALSE']]+conditions
                         for effect in path.get('effects',[]):
                             op,args=effect['op'],effect.get('args',[])
-                            record=dict(origin=origin,kind=kind,entry=label,conditions=path['conditions'],prior_battles=path.get('prior_battles',[]),source=effect['source'])
+                            record=dict(origin=origin,kind=kind,entry=label,conditions=conditions,prior_battles=path.get('prior_battles',[]),source=effect['source'])
                             if op=='setmetatile' and len(args)>=4 and args[3] in ('0','FALSE'):
                                 try: x,y=int(args[0]),int(args[1])
                                 except ValueError: continue
