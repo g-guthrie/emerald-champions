@@ -1940,7 +1940,7 @@ static void RecoverStorageCursorOnInitFailure(bool32 reopening)
     }
     if (sMovingItemId != ITEM_NONE)
     {
-        bool32 restored = AddBagItem(sMovingItemId, 1) || AddPCItem(sMovingItemId, 1);
+        bool32 restored = AddBagItemWithoutDiscovery(sMovingItemId, 1) || AddPCItemWithoutDiscovery(sMovingItemId, 1);
         // Picking up an item leaves an empty holder, even after item swaps.
         // This final sink also works when both inventories are full.
         for (u32 i = 0; i < PARTY_SIZE + TOTAL_BOXES_COUNT * IN_BOX_COUNT && !restored; i++)
@@ -3153,7 +3153,7 @@ static void Task_ItemToBag(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        if (!AddBagItem(sStorage->displayMonItemId, 1))
+        if (!AddBagItemWithoutDiscovery(sStorage->displayMonItemId, 1))
         {
             PlaySE(SE_FAILURE);
             PrintMessage(MSG_BAG_FULL);
@@ -3302,7 +3302,7 @@ static void Task_CloseBoxWhileHoldingItem(u8 taskId)
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
         case 0:// Yes
-            if (AddBagItem(sStorage->movingItemId, 1) == TRUE)
+            if (AddBagItemWithoutDiscovery(sStorage->movingItemId, 1) == TRUE)
             {
                 ClearBottomWindow();
                 sStorage->state = 3;
@@ -6548,7 +6548,7 @@ static void ReleaseMon(void)
 
         PurgeMonOrBoxMon(boxId, sCursorPosition);
         if (item != ITEM_NONE)
-            AddBagItem(item, 1);
+            AddBagItemWithoutDiscovery(item, 1);
     }
     TryRefreshDisplayMon();
 }

@@ -2,6 +2,8 @@
 #include "test/battle.h"
 #include "item.h"
 #include "battle_util.h"
+#include "event_data.h"
+#include "field_specials.h"
 
 ASSUMPTIONS
 {
@@ -221,5 +223,38 @@ WILD_BATTLE_TEST("Thief and Covet leave the wild held item intact when the Bag i
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SITRUS_BERRY), MAX_BAG_ITEM_CAPACITY);
         EXPECT_EQ(GetBattlerPartyState(B_BATTLER_1)->heldItemOrigin, B_TRAINER_OPPONENT_A * PARTY_SIZE + 1);
         ClearBag();
+    }
+}
+
+WILD_BATTLE_TEST("Thief and Covet give usable wild gear without discovering vendor stock")
+{
+    enum Move move;
+    bool32 previouslyDiscovered;
+    for (u32 discovered = 0; discovered < 2; discovered++)
+    {
+        PARAMETRIZE { move = MOVE_THIEF; previouslyDiscovered = discovered; }
+        PARAMETRIZE { move = MOVE_COVET; previouslyDiscovered = discovered; }
+    }
+    GIVEN {
+        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
+        ClearBag();
+        memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
+        if (previouslyDiscovered)
+            EmeraldChampions_UnlockBattleItem(ITEM_THROAT_SPRAY);
+        PLAYER(SPECIES_WOBBUFFET) { Attack(1); Moves(move); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(200); MaxHP(200); Item(ITEM_THROAT_SPRAY); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, move); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
+    } THEN {
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_THROAT_SPRAY), 1);
+        EXPECT_EQ(player->item, ITEM_NONE);
+        EXPECT_EQ(opponent->item, ITEM_NONE);
+        EXPECT_EQ(IsEmeraldChampionsBattleItemUnlocked(ITEM_THROAT_SPRAY), previouslyDiscovered);
+        ClearBag();
+        memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
     }
 }

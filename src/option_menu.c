@@ -498,9 +498,35 @@ static void Difficulty_DrawChoices(u8 selection)
     StringExpandPlaceholders(gStringVar4, description);
     FillWindowPixelBuffer(WIN_DIFFICULTY_HELP, PIXEL_FILL(1));
     const u8 helpColors[] = {1, 6, 7}; // White and gray in the Options palette.
-    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 0, helpColors, TEXT_SKIP_DRAW, gStringVar4);
-    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 0, 36, helpColors, TEXT_SKIP_DRAW,
-        sChoosingNewGame ? COMPOUND_STRING("Choose now; fixed for this run.") : COMPOUND_STRING("Difficulty is fixed for this run."));
+    u32 helpWidth = GetWindowAttribute(WIN_DIFFICULTY_HELP, WINDOW_WIDTH) * 8;
+    u8 *line = gStringVar4;
+    u32 y = 0;
+    while (TRUE)
+    {
+        u8 *end = line;
+        while (*end != CHAR_NEWLINE && *end != EOS)
+            end++;
+        u8 separator = *end;
+        *end = EOS;
+        AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL,
+            GetStringCenterAlignXOffset(FONT_SMALL, line, helpWidth), y, helpColors, TEXT_SKIP_DRAW, line);
+        *end = separator;
+        if (separator == EOS)
+            break;
+        line = end + 1;
+        y += GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_HEIGHT);
+    }
+    // The native font has a star icon, but no asterisk. Draw this footnote's
+    // small asterisk locally so other text and battle icons stay unchanged.
+    static const u8 asterisk[] = {0x04, 0x15, 0x0E, 0x15, 0x04};
+    for (u32 pass = 0; pass < 2; pass++)
+        for (u32 row = 0; row < ARRAY_COUNT(asterisk); row++)
+            for (u32 column = 0; column < 5; column++)
+                if (asterisk[row] & (1 << column))
+                    FillWindowPixelRect(WIN_DIFFICULTY_HELP, PIXEL_FILL(helpColors[pass ? 1 : 2]),
+                        8 + column + !pass, 39 + row + !pass, 1, 1);
+    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL, 16, 36, helpColors, TEXT_SKIP_DRAW,
+        COMPOUND_STRING("Difficulty is fixed for this run."));
     PutWindowTilemap(WIN_DIFFICULTY_HELP);
     CopyWindowToVram(WIN_DIFFICULTY_HELP, COPYWIN_FULL);
 }

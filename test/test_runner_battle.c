@@ -324,6 +324,7 @@ static u32 BattleTest_EstimateCost(void *data)
 static EWRAM_DATA struct
 {
     u8 overworldWeather;
+    u8 nextOverworldWeather;
     u8 flags[NUM_FLAG_BYTES];
     u16 vars[VARS_COUNT];
 } sWorldBeforeTest = {0};
@@ -331,6 +332,7 @@ static EWRAM_DATA struct
 static void SaveWorldBeforeTest(void)
 {
     sWorldBeforeTest.overworldWeather = gWeatherPtr->currWeather;
+    sWorldBeforeTest.nextOverworldWeather = gWeatherPtr->nextWeather;
     memcpy(sWorldBeforeTest.flags, gSaveBlock1Ptr->flags, sizeof(sWorldBeforeTest.flags));
     memcpy(sWorldBeforeTest.vars, gSaveBlock1Ptr->vars, sizeof(sWorldBeforeTest.vars));
 }
@@ -338,6 +340,7 @@ static void SaveWorldBeforeTest(void)
 static void RestoreWorldAfterTest(void)
 {
     gWeatherPtr->currWeather = sWorldBeforeTest.overworldWeather;
+    gWeatherPtr->nextWeather = sWorldBeforeTest.nextOverworldWeather;
     memcpy(gSaveBlock1Ptr->flags, sWorldBeforeTest.flags, sizeof(sWorldBeforeTest.flags));
     memcpy(gSaveBlock1Ptr->vars, sWorldBeforeTest.vars, sizeof(sWorldBeforeTest.vars));
 }

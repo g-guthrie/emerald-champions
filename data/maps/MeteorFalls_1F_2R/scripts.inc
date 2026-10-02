@@ -85,4 +85,7 @@ MoveTutor_Text_DragonAscentTaught:
 	.string "only Rayquaza can use.\p"
 	.string "They say its power is so strong that\n"
 	.string "even a huge meteoroid can be broken\l"
-	.string "into pieces with one attack.$"
+	.string "into pieces with one attack.\p"
+	.string "With your Mega Ring, Rayquaza can\n"
+	.string "Mega Evolve using Dragon Ascent\l"
+	.string "after you enter the Hall of Fame.$"

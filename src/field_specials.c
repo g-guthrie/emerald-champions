@@ -459,7 +459,7 @@ static s32 EmeraldChampionsBattleItemIndex(enum Item item)
 
 // Items no pickup or gift hands over: the vendor stocks them once the Trainer
 // has enough Badges, so nothing competitive depends on a lucky wild held item.
-// Holding one earlier still unlocks it the ordinary way.
+// A world pickup, gift or purchase still unlocks one before its Badge floor.
 static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
 {
     {ITEM_LOADED_DICE,      2},
@@ -500,9 +500,9 @@ bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
     return (gSaveBlock1Ptr->battleItemsUnlocked[index / 8] >> (index % 8)) & 1;
 }
 
-// Called the first time the player actually holds one. The world teaches you
-// an item exists; the vendor then keeps you supplied with as many as a team
-// needs. Successful captures, gifts and trades also record held-item acquisition.
+// World pickups, gifts and purchases introduce permanent vendor stock.
+// Successful captures, gifts and trades also record held-item acquisition.
+// Battle theft, Pickup and transfers between owned inventories do not.
 void EmeraldChampions_UnlockBattleItem(enum Item item)
 {
     s32 index = EmeraldChampionsBattleItemIndex(item);

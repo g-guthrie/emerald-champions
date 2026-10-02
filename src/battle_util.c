@@ -2475,6 +2475,10 @@ static bool32 SetStartingWeatherStatus(enum BattleWeather weather, bool32 isPerm
 bool32 TryFieldEffects(enum FieldEffectCases caseId)
 {
     bool32 effect = FALSE;
+    // A step or coordinate trigger can change the sky just as battle starts.
+    // The transition freezes the rendered weather before its cleanup finishes,
+    // so battle effects must use the selected weather, not the old sprites.
+    u8 overworldWeather = gWeatherPtr->nextWeather;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return FALSE;
@@ -2769,7 +2773,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
     case FIELD_EFFECT_OVERWORLD_TERRAIN:   // terrain starting from overworld weather
         if (B_THUNDERSTORM_TERRAIN == TRUE
          && gFieldTimers.terrain != B_TERRAIN_ELECTRIC
-         && GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM)
+         && overworldWeather == WEATHER_RAIN_THUNDERSTORM)
         {
             // overworld weather started rain, so just do electric terrain anim
             gFieldTimers.terrain = B_TERRAIN_ELECTRIC;
@@ -2779,7 +2783,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
             effect = TRUE;
         }
         else if (B_OVERWORLD_FOG >= GEN_8
-              && (GetCurrentWeather() == WEATHER_FOG_HORIZONTAL || GetCurrentWeather() == WEATHER_FOG_DIAGONAL)
+              && (overworldWeather == WEATHER_FOG_HORIZONTAL || overworldWeather == WEATHER_FOG_DIAGONAL)
               && gFieldTimers.terrain != B_TERRAIN_MISTY)
         {
             gFieldTimers.terrain = B_TERRAIN_MISTY;
@@ -2796,7 +2800,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
 #endif
         )
         {
-            switch (GetCurrentWeather())
+            switch (overworldWeather)
             {
             case WEATHER_RAIN:
             case WEATHER_RAIN_THUNDERSTORM:
@@ -2855,7 +2859,7 @@ bool32 TryFieldEffects(enum FieldEffectCases caseId)
         {
             if (GetConfig(B_OVERWORLD_WEATHER_OVERRIDE) >= GEN_9)
                 gBattleStruct->overworldWeatherPresent = TRUE;
-            gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
+            gBattleCommunication[MULTISTRING_CHOOSER] = overworldWeather;
             BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
         }
         break;
@@ -4426,7 +4430,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                         break;
                     }
 
-                    if (!StealTargetItem(battler, targetBattler, ITEM_NONE))
+                    if (!StealTargetItem(battler, targetBattler, ITEM_NONE, TRUE))
                         continue;
                     gBattlerAbility = battler;
                     gEffectBattler = targetBattler;
@@ -9205,6 +9209,7 @@ void SortBattlersBySpeed(enum BattlerId *battlers, bool32 slowToFast)
 }
 
 STATIC_ASSERT(MAX_BATTLE_TRAINERS * PARTY_SIZE < 256, HeldItemOriginFitsByte);
+STATIC_ASSERT(ITEMS_COUNT <= (1u << 14), LostItemIdFits);
 
 static struct PartyState *GetHeldItemOriginState(u8 origin, enum Item item)
 {
@@ -9217,10 +9222,8 @@ static struct PartyState *GetHeldItemOriginState(u8 origin, enum Item item)
     return &gBattleStruct->partyState[trainer][slot];
 }
 
-void RecordHeldItemSentToBag(enum BattlerId battler, enum Item item)
+void RecordHeldItemSentToBag(u8 origin, enum Item item)
 {
-    struct PartyState *holder = GetBattlerPartyState(battler);
-    u8 origin = holder->heldItemOrigin;
     // An extracted item already exists in inventory; capture/end-of-battle
     // restoration must not create another copy at its original slot.
     struct PartyState *owner = GetHeldItemOriginState(origin, item);
@@ -9230,7 +9233,6 @@ void RecordHeldItemSentToBag(enum BattlerId battler, enum Item item)
         owner->originalBerryConsumed = FALSE;
         owner->originalBerryDestroyed = FALSE;
     }
-    holder->heldItemOrigin = 0;
 }
 
 void RecordBerryRemoval(u8 origin, enum Item item)
@@ -9246,7 +9248,10 @@ void SetHeldItemOrigin(enum BattlerId battler, u8 origin)
     state->heldItemOrigin = origin;
     // A genuinely recovered original item is no longer lost.
     if (origin == GetBattlerTrainer(battler) * PARTY_SIZE + gBattlerPartyIndexes[battler] + 1)
+    {
         state->originalBerryRemoved = FALSE;
+        gBattleStruct->itemLost[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]].temporaryTheft = FALSE;
+    }
 }
 
 void TransferHeldItemOrigin(enum BattlerId source, enum BattlerId recipient)
@@ -9255,31 +9260,41 @@ void TransferHeldItemOrigin(enum BattlerId source, enum BattlerId recipient)
     GetBattlerPartyState(source)->heldItemOrigin = 0;
 }
 
-void RecordPermanentHeldItemTheft(enum BattlerId source, enum BattlerId recipient, enum Item item)
+void RecordHeldItemTheft(enum BattlerId recipient, enum Item item)
 {
-    enum BattleTrainer sourceTrainer = GetBattlerTrainer(source);
     enum BattleTrainer recipientTrainer = GetBattlerTrainer(recipient);
-    u32 sourceSlot = gBattlerPartyIndexes[source];
     u32 recipientSlot = gBattlerPartyIndexes[recipient];
+    struct PartyState *holder = GetBattlerPartyState(recipient);
+    u8 origin = holder->heldItemOrigin;
+    struct PartyState *owner = GetHeldItemOriginState(origin, item);
 
-    // Ordinary trainer battles keep Thief/Covet transfers. Temporary battle
-    // parties retain their existing end-of-battle item restoration.
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-     || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_FRONTIER
-                          | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE
-                          | BATTLE_TYPE_EREADER_TRAINER)
-     || sourceTrainer == recipientTrainer)
+    // Moving an item within one trainer's own party is not a trainer loan.
+    // Only the original holder's own Berry consumption can regenerate it.
+    if (owner != NULL && (origin - 1) / PARTY_SIZE == recipientTrainer)
         return;
 
-    // The controller has already moved the item. Make that transfer the new
-    // restoration baseline so cleanup cannot return it to the victim.
-    gBattleStruct->itemLost[sourceTrainer][sourceSlot].originalItem = ITEM_NONE;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        // Trainer gear is borrowed. Later consumption or destruction by its
+        // temporary holder cannot turn this theft into a permanent loss.
+        if (owner != NULL)
+            gBattleStruct->itemLost[(origin - 1) / PARTY_SIZE][(origin - 1) % PARTY_SIZE].temporaryTheft = TRUE;
+        return;
+    }
+
+    // The current wild-stealing rule sends gear to the Bag. Older configured
+    // rules attach it instead: preserve that transfer when restoring or boxing
+    // a mon, without putting a duplicate on the wild mon if it is caught.
+    if (recipientTrainer != B_TRAINER_PLAYER)
+        return;
+    if (owner != NULL)
+        gBattleStruct->itemLost[(origin - 1) / PARTY_SIZE][(origin - 1) % PARTY_SIZE].originalItem = ITEM_NONE;
     gBattleStruct->itemLost[recipientTrainer][recipientSlot].originalItem = item;
-    GetBattlerPartyState(source)->heldItemOrigin = 0;
-    GetBattlerPartyState(recipient)->heldItemOrigin = recipientTrainer * PARTY_SIZE + recipientSlot + 1;
-    GetBattlerPartyState(recipient)->originalBerryConsumed = FALSE;
-    GetBattlerPartyState(recipient)->originalBerryDestroyed = FALSE;
-    GetBattlerPartyState(recipient)->originalBerryRemoved = FALSE;
+    gBattleStruct->itemLost[recipientTrainer][recipientSlot].temporaryTheft = FALSE;
+    holder->heldItemOrigin = recipientTrainer * PARTY_SIZE + recipientSlot + 1;
+    holder->originalBerryConsumed = FALSE;
+    holder->originalBerryDestroyed = FALSE;
+    holder->originalBerryRemoved = FALSE;
 }
 
 void RecordConsumedHeldItem(enum BattlerId battler, enum Item item)
@@ -9290,7 +9305,25 @@ void RecordConsumedHeldItem(enum BattlerId battler, enum Item item)
     state->usedHeldItemOrigin = state->heldItemOrigin;
     state->heldItemOrigin = 0;
     if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
+    {
         owner->originalBerryConsumed = TRUE;
+        struct LostItem *original = &gBattleStruct->itemLost[(state->usedHeldItemOrigin - 1) / PARTY_SIZE][(state->usedHeldItemOrigin - 1) % PARTY_SIZE];
+        if (original->temporaryTheft)
+        {
+            // An eaten loan no longer exists to return. Regeneration belongs
+            // to the Pokemon that actually ate it, without discovering stock.
+            original->originalItem = ITEM_NONE;
+            original->temporaryTheft = FALSE;
+            enum BattleTrainer trainer = GetBattlerTrainer(battler);
+            u32 slot = gBattlerPartyIndexes[battler];
+            gBattleStruct->itemLost[trainer][slot].originalItem = item;
+            gBattleStruct->itemLost[trainer][slot].temporaryTheft = FALSE;
+            state->originalBerryConsumed = TRUE;
+            state->originalBerryDestroyed = FALSE;
+            state->originalBerryRemoved = FALSE;
+            state->usedHeldItemOrigin = trainer * PARTY_SIZE + slot + 1;
+        }
+    }
 }
 
 void RecordDestroyedHeldItem(enum BattlerId battler, enum Item item)
@@ -9298,7 +9331,10 @@ void RecordDestroyedHeldItem(enum BattlerId battler, enum Item item)
     struct PartyState *state = GetBattlerPartyState(battler);
     struct PartyState *owner = GetHeldItemOriginState(state->heldItemOrigin, item);
     if (owner != NULL && GetItemPocket(item) == POCKET_BERRIES)
+    {
         owner->originalBerryDestroyed = TRUE;
+        gBattleStruct->itemLost[(state->heldItemOrigin - 1) / PARTY_SIZE][(state->heldItemOrigin - 1) % PARTY_SIZE].temporaryTheft = FALSE;
+    }
     state->heldItemOrigin = 0;
 }
 
@@ -9327,6 +9363,10 @@ enum Item GetBattleRestoredHeldItem(enum BattleTrainer trainer, u32 partySlot)
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_FRONTIER
                          | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE
                          | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_CATCH_TUTORIAL))
+        return original;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+     && gBattleStruct->itemLost[trainer][partySlot].temporaryTheft)
         return original;
 
     if (GetItemPocket(original) == POCKET_BERRIES)
@@ -9365,6 +9405,7 @@ void RecordPlayerPartyMonHeldItemForRestoration(u32 partySlot)
 
     gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].originalItem =
         GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM);
+    gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].temporaryTheft = FALSE;
     gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].originalBerryConsumed = FALSE;
     gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].originalBerryDestroyed = FALSE;
     gBattleStruct->partyState[B_TRAINER_PLAYER][partySlot].originalBerryRemoved = FALSE;
@@ -9382,7 +9423,19 @@ void TryRestoreHeldItems(void)
     if (GEN_LATEST == GEN_CHAMPIONS)
     {
         for (u32 i = 0; i < PARTY_SIZE; i++)
+        {
             RestorePlayerPartyMonHeldItem(i);
+            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            {
+                for (enum BattleTrainer trainer = B_TRAINER_PLAYER + 1; trainer < MAX_BATTLE_TRAINERS; trainer++)
+                {
+                    if (GetMonData(&gParties[trainer][i], MON_DATA_SPECIES) == SPECIES_NONE)
+                        continue;
+                    enum Item item = GetBattleRestoredHeldItem(trainer, i);
+                    SetMonData(&gParties[trainer][i], MON_DATA_HELD_ITEM, &item);
+                }
+            }
+        }
         return;
     }
 

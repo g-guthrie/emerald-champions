@@ -471,7 +471,7 @@ static enum ItemEffect TryStickyBarbOnTargetHit(enum BattlerId battlerDef, enum 
      && gBattleMons[battlerAtk].item == ITEM_NONE)
     {
         // No sticky hold checks.
-        if (!StealTargetItem(battlerAtk, battlerDef, ITEM_NONE))
+        if (!StealTargetItem(battlerAtk, battlerDef, ITEM_NONE, FALSE))
             return ITEM_NO_EFFECT;
         gEffectBattler = battlerDef;
         BattleScriptCall(BattleScript_StickyBarbTransfer);

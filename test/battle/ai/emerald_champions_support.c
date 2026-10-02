@@ -411,6 +411,41 @@ AI_DOUBLE_BATTLE_TEST("EC guard: Wattson's Manectric does not shield in a loop a
     }
 }
 
+// Pre-recovery source loadout from commit 86d382eaa4.
+// Retained only for the measured regression board, never for the campaign.
+static const struct TrainerMon sPhoebeBeforeRecoveryParty[] =
+{
+    FORMER_MON(SPECIES_GIRATINA, ITEM_LEFTOVERS, ABILITY_PRESSURE, NATURE_IMPISH, 11,
+        TRAINER_PARTY_EVS(252, 0, 252, 0, 4, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_POLTERGEIST, MOVE_ICY_WIND, MOVE_WILL_O_WISP, MOVE_PROTECT),
+    FORMER_MON(SPECIES_LUNALA, ITEM_COVERT_CLOAK, ABILITY_SHADOW_SHIELD, NATURE_TIMID, 11,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+        MOVE_MOONGEIST_BEAM, MOVE_MOONBLAST, MOVE_WIDE_GUARD, MOVE_PROTECT),
+    FORMER_MON(SPECIES_GENGAR, ITEM_GENGARITE, ABILITY_CURSED_BODY, NATURE_TIMID, 10,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_SHADOW_BALL, MOVE_SLUDGE_BOMB, MOVE_ICY_WIND, MOVE_PROTECT),
+    FORMER_MON(SPECIES_BANETTE, ITEM_BANETTITE, ABILITY_INSOMNIA, NATURE_ADAMANT, 14,
+        TRAINER_PARTY_EVS(252, 252, 0, 0, 4, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_POLTERGEIST, MOVE_ENCORE, MOVE_WILL_O_WISP, MOVE_PROTECT),
+    FORMER_MON(SPECIES_MARSHADOW, ITEM_LIFE_ORB, ABILITY_TECHNICIAN, NATURE_JOLLY, 10,
+        TRAINER_PARTY_EVS(4, 252, 0, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_SPECTRAL_THIEF, MOVE_CLOSE_COMBAT, MOVE_SHADOW_SNEAK, MOVE_PROTECT),
+    FORMER_MON(SPECIES_SPECTRIER, ITEM_CHOICE_SPECS, ABILITY_GRIM_NEIGH, NATURE_TIMID, 11,
+        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+        MOVE_SHADOW_BALL, MOVE_DARK_PULSE, MOVE_PSYCHIC, MOVE_HEX),
+};
+EWRAM_DATA static struct Trainer sPhoebeBeforeRecoveryTrainer = {0};
+
+static const struct Trainer *PhoebeBeforeRecovery(void)
+{
+    sPhoebeBeforeRecoveryTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_PHOEBE];
+    sPhoebeBeforeRecoveryTrainer.party = sPhoebeBeforeRecoveryParty;
+    sPhoebeBeforeRecoveryTrainer.partySize = ARRAY_COUNT(sPhoebeBeforeRecoveryParty);
+    sPhoebeBeforeRecoveryTrainer.poolSize = 0;
+    sPhoebeBeforeRecoveryTrainer.overrideTrainer = 0;
+    return &sPhoebeBeforeRecoveryTrainer;
+}
+
 // k4/pho2 turn 5 as it stood: Banette in the Mega form it took on turn
 // three, Tyranitar's sand on its last turn, Marshadow at -1 Defense and Sp.
 // Def from Close Combat, and Incineroar at -1 Speed with its Sitrus Berry
@@ -435,7 +470,7 @@ static void PhoebeBoard(void)
 // k4/pho2 turn 5: Mega Banette at 9 of 299 HP in a sandstorm whose end-of-turn
 // damage is certain to finish it. It shielded - saving nothing, since the sand
 // ended it anyway - instead of spending its last turn.
-AI_DOUBLE_BATTLE_TEST("EC guard: Phoebe's Banette does not shield on the turn the sand ends it")
+AI_DOUBLE_BATTLE_TEST("EC guard: former Phoebe team's Banette does not shield on the turn the sand ends it")
 {
     GIVEN {
         SupportPlayer(SPECIES_KINGAMBIT, 80, 0, SET(MOVE_KOWTOW_CLEAVE, MOVE_SUCKER_PUNCH, MOVE_IRON_HEAD, MOVE_PROTECT, NATURE_ADAMANT, ABILITY_SUPREME_OVERLORD, ITEM_LIFE_ORB, 252, 252, 4, 0, 0, 0));
@@ -448,7 +483,11 @@ AI_DOUBLE_BATTLE_TEST("EC guard: Phoebe's Banette does not shield on the turn th
         sSupportMembers[5] = (struct SupportMember){.species = SPECIES_SPECTRIER, .hp = FULL_HP, .level = 87};
         sSupportLeads[0] = SPECIES_MARSHADOW;
         sSupportLeads[1] = SPECIES_BANETTE;
+        sSupportTrainer = PhoebeBeforeRecovery();
         SupportOpponent(TRAINER_PHOEBE, 8);
+        // Sawyer is a named, unmanaged owner; the explicit former loadout and
+        // AI profile use native eligibility without today's changed tactic/slots.
+        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SAWYER_1;
         gTestAiTurnSetupHook = PhoebeBoard;
     } WHEN {
         TURN {

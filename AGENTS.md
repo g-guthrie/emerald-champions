@@ -45,9 +45,12 @@ or data.
 - Held items: Center nurses and the visiting Oldale Mart nurse share the
   initial tool handoff, including the Regenerator and Leveler. With the
   Regenerator, a held Berry its own holder eats in battle returns after
-  battle. A Berry stolen, swapped away, eaten by a foe, burned or corroded is
-  gone. Knock Off removes an item, Berries included, for the current battle
-  only; Thief and Covet transfer permanently.
+  battle. A Berry swapped away, eaten directly by a foe, burned or corroded
+  is gone. Knock Off removes an item, Berries included, for the current battle
+  only. Thief and Covet theft is temporary in Trainer battles: both sides'
+  stolen items return to their original owners afterward, including a stolen
+  Berry later eaten or destroyed. Wild theft remains permanent. Items acquired
+  through theft or Pickup never unlock vendor stock.
 - EVs: every Pokémon joining the player (catch, gift, starter, trade, hatch)
   arrives with 252 HP / 52 Atk, Def, SpA, SpD / 50 Spe; owned Pokémon keep
   their chosen spread. Every Center move tutor plans a whole spread and

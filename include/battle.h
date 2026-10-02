@@ -497,8 +497,9 @@ struct BattleGimmickData
 
 struct LostItem
 {
-    enum Item originalItem:15;
+    enum Item originalItem:14;
     u16 stolen:1;
+    u16 temporaryTheft:1;
 };
 
 struct BattleVideo {

@@ -5,6 +5,7 @@
 #include "overworld.h"
 #include "weather_anomaly.h"
 #include "constants/flags.h"
+#include "constants/game_stat.h"
 #include "constants/maps.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
@@ -61,6 +62,74 @@ WILD_BATTLE_TEST("Weather anomalies battle: rain, thunderstorm, fog and downpour
         EXPECT_EQ(gFieldTimers.terrain, terrain);
         EXPECT_EQ(gFieldTimers.terrainTimer, 0);
         EXPECT(!gBattleStruct->overworldWeatherPresent);
+        ClearWeatherAnomalies();
+        SetCurrentAndNextWeather(WEATHER_NONE);
+    }
+}
+
+WILD_BATTLE_TEST("Weather anomalies battle: a pending storm starts battle under the selected sky")
+{
+    enum LegendarySignId sign;
+    bool32 snow;
+    u32 weather, terrain;
+    PARAMETRIZE { sign = LEGENDARY_SIGN_TAPU_KOKO; snow = FALSE; weather = B_WEATHER_RAIN_NORMAL; terrain = B_TERRAIN_NONE; }
+    PARAMETRIZE { sign = LEGENDARY_SIGN_TORNADUS; snow = FALSE; weather = B_WEATHER_RAIN_NORMAL; terrain = B_TERRAIN_ELECTRIC; }
+    PARAMETRIZE { sign = LEGENDARY_SIGN_YVELTAL; snow = FALSE; weather = B_WEATHER_NONE; terrain = B_TERRAIN_MISTY; }
+    PARAMETRIZE { sign = LEGENDARY_SIGN_TAPU_KOKO; snow = TRUE; weather = B_WEATHER_SNOW; terrain = B_TERRAIN_NONE; }
+    GIVEN {
+        PrepareStorm(sign);
+        // As on the step the storm arrives, its weather is selected while
+        // the clear sky's sprites have not finished transitioning yet.
+        SetCurrentAndNextWeather(WEATHER_SUNNY);
+        if (snow)
+            VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 1);
+        SetSavedWeatherFromCurrMapHeader();
+        DoCurrentWeather();
+        EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY);
+        EXPECT_NE(gWeatherPtr->nextWeather, WEATHER_SUNNY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(gBattleWeather, weather);
+        EXPECT_EQ(gFieldTimers.terrain, terrain);
+        ClearWeatherAnomalies();
+        SetCurrentAndNextWeather(WEATHER_NONE);
+    }
+}
+
+WILD_BATTLE_TEST("Weather anomalies battle: expiry clears battle effects before the old sky finishes")
+{
+    enum LegendarySignId sign;
+    bool32 snow;
+    PARAMETRIZE { sign = LEGENDARY_SIGN_TAPU_KOKO; snow = FALSE; }
+    PARAMETRIZE { sign = LEGENDARY_SIGN_TORNADUS; snow = FALSE; }
+    PARAMETRIZE { sign = LEGENDARY_SIGN_YVELTAL; snow = FALSE; }
+    PARAMETRIZE { sign = LEGENDARY_SIGN_TAPU_KOKO; snow = TRUE; }
+    GIVEN {
+        PrepareStorm(sign);
+        // No replacement can mask the expiry under test.
+        for (enum LegendarySignId visitor = 0; visitor < LEGENDARY_SIGN_COUNT; visitor++)
+            if (visitor != sign && IsWeatherAnomalyVisitor(visitor))
+                MarkLegendarySignCaughtBySpecies(gLegendaryGates[visitor].species);
+        SetWeatherAnomalySlot(0, sign, WEATHER_ANOMALY_TICK_STEPS);
+        if (snow)
+            VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 1);
+        SetSavedWeatherFromCurrMapHeader();
+        SetCurrentAndNextWeather(GetSavedWeather());
+        SetGameStat(GAME_STAT_STEPS, WEATHER_ANOMALY_TICK_STEPS);
+        UpdateWeatherAnomaliesOnStep();
+        UpdateWeatherAnomalyWeather();
+        EXPECT_NE(gWeatherPtr->currWeather, WEATHER_SUNNY);
+        EXPECT_EQ(gWeatherPtr->nextWeather, WEATHER_SUNNY);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(gBattleWeather, B_WEATHER_NONE);
+        EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_NONE);
         ClearWeatherAnomalies();
         SetCurrentAndNextWeather(WEATHER_NONE);
     }

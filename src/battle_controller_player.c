@@ -408,7 +408,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
             // Return item to bag if partner had selected one (if consumable).
             if (gBattleResources->bufferA[battler][1] == B_ACTION_USE_ITEM && GetItemConsumability(itemId))
             {
-                AddBagItem(itemId, 1);
+                AddBagItemWithoutDiscovery(itemId, 1);
             }
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_CANCEL_PARTNER, 0);

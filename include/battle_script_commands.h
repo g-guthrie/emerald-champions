@@ -54,7 +54,7 @@ bool32 IsShieldsDownProtected(enum BattlerId battler, enum Ability ability);
 u32 IsAbilityStatusProtected(enum BattlerId battler, enum Ability ability);
 bool32 TryResetBattlerStatChanges(enum BattlerId battler);
 bool32 CanCamouflage(enum BattlerId battler);
-bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId battlerItem, enum Item itemOverride);
+bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId battlerItem, enum Item itemOverride, bool32 isTheft);
 u8 GetCatchingBattler(void);
 bool32 IsCaughtMonStorageFull(void);
 #if EC_HEADLESS_FIXTURES

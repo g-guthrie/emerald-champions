@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check a tuning party manifest against a milestone availability pool.
+"""Check a tuning party against resources available before its trainer battle.
 
 The manifest uses the scripts/playthrough/prepare_party.py format:
   {"encounter": ..., "availability_audit": ..., "party": [
@@ -16,8 +16,14 @@ offers; one Legendary/Mythical/Ultra Beast/Paradox in total; level equals
 the cap when given; friendship does not exceed the milestone maximum;
 IV/EV bounds; the opening starter pick rule before the Game Corner.
 
-  python3 scripts/tuning_pool_check.py party.json --milestone badge3
-  python3 scripts/tuning_pool_check.py party.json --milestone 40
+  python3 scripts/tuning_pool_check.py party.json --milestone start --trainer TRAINER_BRENDAN_ROUTE_103_MUDKIP
+  python3 scripts/tuning_pool_check.py party.json --milestone badge3 --window-only
+
+Encounter checks compute a fresh pool from source with the battle's victory
+flags withheld. --window-only is inventory screening, not pre-battle proof.
+Source pools are upper bounds; they do not prove finite preparation, compatible
+story choices or earned progress. Use battle_opening_arsenal certificates for
+the first rival's concrete preparation and regional starter branch.
 Prints PASS, or FAIL with one line per problem (exit status 1).
 """
 from __future__ import annotations
@@ -66,6 +72,34 @@ def resolve(species: str, aliases: dict[str, str]) -> str:
     return species
 
 
+def ivy_iv_spreads() -> set[tuple[int, ...]]:
+    """Only spreads reachable through the actual IV/Hidden Power menus.
+
+    Player acquisitions start at 31; Ivy offers 0/31 Attack and Speed, plus
+    the authored Hidden Power templates. Other arbitrary IVs cannot be set.
+    Templates use native stat order; manifests use display order
+    HP, Attack, Defense, Sp. Attack, Sp. Defense, Speed (EC_IV_DATA).
+    """
+    text = (ROOT / "src/inclement_stat_services.c").read_text()
+    body = text.split("sHiddenPowerSpreads[16][NUM_STATS] = {", 1)[1].split("};", 1)[0]
+    seeds = [(31,) * 6] + [tuple(map(int, row.split(",")))
+                              for row in re.findall(r"\{([\d, ]+)\}", body)]
+    order_text = (ROOT / "src/emerald_champions_battle_sets.c").read_text()
+    order_body = order_text.split("gEmeraldChampionsEvOrder[NUM_STATS] =", 1)[1].split("};", 1)[0]
+    native_order = ["STAT_HP", "STAT_ATK", "STAT_DEF", "STAT_SPEED", "STAT_SPATK", "STAT_SPDEF"]
+    order = [native_order.index(stat) for stat in re.findall(r"STAT_\w+", order_body)]
+    attack_index, speed_index = order.index(1), order.index(3)
+    result = set()
+    for native_seed in seeds:
+        seed = tuple(native_seed[i] for i in order)
+        for attack in {seed[attack_index], 0, 31}:
+            for speed in {seed[speed_index], 0, 31}:
+                row = list(seed)
+                row[attack_index], row[speed_index] = attack, speed
+                result.add(tuple(row))
+    return result
+
+
 def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> list[str]:
     aliases = aliases or {}
     problems: list[str] = []
@@ -80,6 +114,16 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
     items = {i["item"]: i for i in pool["items"]}
     fmax = pool.get("friendship", {}).get("max_this_milestone", 255)
     all_mega_stones = set(pool.get("all_mega_stones", [])) | set(megas_by_stone)
+    iv_spreads = None
+    if "iv_service_available" in pool:
+        iv_spreads = ivy_iv_spreads() if pool["iv_service_available"] else {(31,) * 6}
+
+    encounter = str(manifest.get("encounter", ""))
+    claimed_trainer = manifest.get("trainer") or (encounter if encounter.startswith("TRAINER_") else None)
+    if pool.get("trainer") and claimed_trainer and claimed_trainer != pool["trainer"]:
+        problems.append(f"manifest names {claimed_trainer}, not the checked trainer {pool['trainer']}")
+    if pool.get("encounter") and re.fullmatch(r"E\d{4}", encounter) and encounter != pool["encounter"]:
+        problems.append(f"manifest names {encounter}, not the checked encounter {pool['encounter']}")
 
     if not 1 <= len(party) <= 6:
         problems.append(f"party has {len(party)} members (prepare one to six)")
@@ -126,6 +170,17 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         ivs = mon.get("ivs", [31] * 6)
         if len(ivs) != 6 or any(type(v) is not int or not 0 <= v <= 31 for v in ivs):
             problems.append(f"{tag}: IVs must be six values 0-31")
+        elif iv_spreads is not None and tuple(ivs) not in iv_spreads:
+            problems.append(f"{tag}: IV spread is not obtainable through acquisition or Ivy before this encounter")
+        if "hot_spring_available" in pool:
+            pokerus = mon.get("pokerus", 0)
+            # New infections use FC/FD/FE; soaking and treatment use F8..FB.
+            # These are the saved-byte states authored in src/pokerus.c.
+            allowed = {0, 0xFC, 0xFD, 0xFE}
+            if pool["hot_spring_available"]:
+                allowed |= {0xF8, 0xF9, 0xFA, 0xFB}
+            if type(pokerus) is not int or pokerus not in allowed:
+                problems.append(f"{tag}: Pokérus state is not obtainable before this encounter (hot-spring access required for F8..FB)")
         evs = mon.get("evs", [])
         if len(evs) != 6 or any(type(v) is not int or not 0 <= v <= 252 for v in evs) or sum(evs) > 510:
             problems.append(f"{tag}: EVs must be six values 0-252 totalling at most 510")
@@ -140,6 +195,8 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
     gc = pool.get("game_corner_gate")
     order = pool.get("milestone_order") or []
     before_gc = gc is None or (order and milestone in order and gc in order and order.index(milestone) < order.index(gc))
+    if "game_corner_available" in pool:
+        before_gc = not pool["game_corner_available"]
     lines = pool.get("starter_lines") or {}
     if before_gc and lines:
         used = {}
@@ -159,16 +216,35 @@ def main(argv=None) -> int:
     parser.add_argument("party", type=Path, help="party manifest (scripts/playthrough/prepare_party.py format)")
     parser.add_argument("--milestone", required=True, help="start, badge1..badge8, groudon, champion, or a cap")
     parser.add_argument("--pools", type=Path, default=POOLS, help="pool directory (default: %(default)s)")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--trainer", help="TRAINER_* whose victory/resources must remain unavailable")
+    mode.add_argument("--window-only", action="store_true", help="screen a broad inventory pool; not encounter legality proof")
     args = parser.parse_args(argv)
     manifest = json.loads(args.party.read_text())
-    pool = load_pool(args.milestone, args.pools)
+    trainer = args.trainer or manifest.get("trainer")
+    if args.window_only:
+        pool = load_pool(args.milestone, args.pools)
+    else:
+        if not trainer:
+            encounter = str(manifest.get("encounter", ""))
+            trainer = encounter if encounter.startswith("TRAINER_") else None
+        if not trainer:
+            print("FAIL: name --trainer for encounter availability; --window-only is inventory screening only")
+            return 1
+        from reference_pool import encounter_pool
+        try:
+            pool = encounter_pool(trainer, args.milestone)
+        except ValueError as exc:
+            print(f"FAIL: {exc}")
+            return 1
     problems = check(manifest, pool, species_aliases())
     if problems:
         print(f"FAIL {args.party} vs {pool['milestone']} (cap {pool['cap']}):")
         for p in problems:
             print(f"  - {p}")
         return 1
-    print(f"PASS {args.party} vs {pool['milestone']} (cap {pool['cap']}): {len(manifest['party'])} members")
+    scope = "WINDOW INVENTORY ONLY" if args.window_only else f"before {trainer} (source upper bound)"
+    print(f"PASS {args.party} vs {pool['milestone']} (cap {pool['cap']}): {len(manifest['party'])} members; {scope}")
     return 0
 
 

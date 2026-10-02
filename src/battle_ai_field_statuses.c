@@ -196,7 +196,10 @@ bool32 AI_ReserveBenefitsFromWeather(enum BattlerId battler, u32 weather)
 {
     struct Pokemon *party = GetBattlerParty(battler);
     u32 onField = gBattlerPartyIndexes[battler];
-    u32 partnerOnField = IsDoubleBattle() ? gBattlerPartyIndexes[GetPartnerBattler(battler)] : onField;
+    // A partner's slot is on this party's field only when both battlers
+    // share the party. Campaign multi battles give each owner a separate one.
+    u32 partnerOnField = IsDoubleBattle() && GetBattlerParty(GetPartnerBattler(battler)) == party
+        ? gBattlerPartyIndexes[GetPartnerBattler(battler)] : onField;
     s32 lastId = GetAILastPartyIndex(battler);
     for (s32 index = 0; index < lastId; index++)
     {

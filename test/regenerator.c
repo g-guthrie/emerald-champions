@@ -87,7 +87,7 @@ TEST("Regenerator: tool restores spent berries; Knock Off returns items; burned 
     ZeroPlayerPartyMons();
 }
 
-TEST("Ordinary Thief and Covet transfers survive held-item cleanup")
+TEST("Item theft: trainer loans return both owners' loadouts even after consumption or destruction")
 {
     static EWRAM_DATA struct BattleStruct state;
     struct BattleStruct *saved = gBattleStruct;
@@ -95,39 +95,85 @@ TEST("Ordinary Thief and Covet transfers survive held-item cleanup")
     u8 savedPlayerSlot = gBattlerPartyIndexes[B_BATTLER_0];
     u8 savedOpponentSlot = gBattlerPartyIndexes[B_BATTLER_1];
     enum Item empty = ITEM_NONE;
-    enum Item item = ITEM_FOCUS_SASH;
 
     gBattleStruct = &state;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gBattlerPartyIndexes[B_BATTLER_0] = gBattlerPartyIndexes[B_BATTLER_1] = 0;
     ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 10, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_EEVEE, 10, 0, OTID_STRUCT_PLAYER_ID);
 
+    for (u32 fromPlayer = 0; fromPlayer < 2; fromPlayer++)
+    {
+        enum BattleTrainer sourceTrainer = fromPlayer ? B_TRAINER_PLAYER : B_TRAINER_OPPONENT_A;
+        enum BattleTrainer recipientTrainer = fromPlayer ? B_TRAINER_OPPONENT_A : B_TRAINER_PLAYER;
+        enum BattlerId source = fromPlayer ? B_BATTLER_0 : B_BATTLER_1;
+        enum BattlerId recipient = fromPlayer ? B_BATTLER_1 : B_BATTLER_0;
+        for (u32 kind = 0; kind < 4; kind++)
+        {
+            enum Item item = kind == 0 ? ITEM_FOCUS_SASH : ITEM_SITRUS_BERRY;
+            memset(&state, 0, sizeof(state));
+            state.itemLost[sourceTrainer][0].originalItem = item;
+            state.partyState[sourceTrainer][0].heldItemOrigin = sourceTrainer * PARTY_SIZE + 1;
+            SetMonData(&gParties[sourceTrainer][0], MON_DATA_HELD_ITEM, &empty);
+            SetMonData(&gParties[recipientTrainer][0], MON_DATA_HELD_ITEM, &item);
+            TransferHeldItemOrigin(source, recipient);
+            RecordHeldItemTheft(recipient, item);
+            EXPECT(state.itemLost[sourceTrainer][0].temporaryTheft);
+            if (kind >= 2)
+            {
+                if (kind == 2)
+                    RecordConsumedHeldItem(recipient, item);
+                else
+                    RecordDestroyedHeldItem(recipient, item);
+                SetMonData(&gParties[recipientTrainer][0], MON_DATA_HELD_ITEM, &empty);
+            }
+            EXPECT_EQ(GetBattleRestoredHeldItem(sourceTrainer, 0), item);
+            EXPECT_EQ(GetBattleRestoredHeldItem(recipientTrainer, 0), ITEM_NONE);
+            RestorePlayerPartyMonHeldItem(0);
+            TryRestoreHeldItems();
+            EXPECT_EQ(GetMonData(&gParties[sourceTrainer][0], MON_DATA_HELD_ITEM), item);
+            EXPECT_EQ(GetMonData(&gParties[recipientTrainer][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+        }
+    }
+
+    gBattlerPartyIndexes[B_BATTLER_0] = savedPlayerSlot;
+    gBattlerPartyIndexes[B_BATTLER_1] = savedOpponentSlot;
+    gBattleTypeFlags = savedFlags;
+    gBattleStruct = saved;
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+}
+
+TEST("Item theft: legacy wild held gear survives boxing cleanup without duplicating on capture")
+{
+    static EWRAM_DATA struct BattleStruct state;
+    struct BattleStruct *saved = gBattleStruct;
+    u32 savedFlags = gBattleTypeFlags;
+    u8 savedPlayerSlot = gBattlerPartyIndexes[B_BATTLER_0];
+    u8 savedOpponentSlot = gBattlerPartyIndexes[B_BATTLER_1];
+    enum Item item = ITEM_SITRUS_BERRY;
+    enum Item empty = ITEM_NONE;
+    gBattleStruct = &state;
+    gBattleTypeFlags = 0;
+    gBattlerPartyIndexes[B_BATTLER_0] = gBattlerPartyIndexes[B_BATTLER_1] = 0;
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 10, 0, OTID_STRUCT_PLAYER_ID);
     memset(&state, 0, sizeof(state));
-    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
-    RecordPlayerPartyMonHeldItemForRestoration(0);
+    state.itemLost[B_TRAINER_OPPONENT_A][0].originalItem = item;
+    state.partyState[B_TRAINER_OPPONENT_A][0].heldItemOrigin = B_TRAINER_OPPONENT_A * PARTY_SIZE + 1;
+    TransferHeldItemOrigin(B_BATTLER_1, B_BATTLER_0);
+    RecordHeldItemTheft(B_BATTLER_0, item);
+    // This helper runs before catch-and-swap boxes the recipient.
+    RestorePlayerPartyMonHeldItem(0);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), item);
+    EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_NONE);
+    RecordConsumedHeldItem(B_BATTLER_0, item);
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &empty);
-    RecordPermanentHeldItemTheft(B_BATTLER_0, B_BATTLER_1, item);
-    EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_NONE);
     TryRestoreHeldItems();
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
-
-    memset(&state, 0, sizeof(state));
-    RecordPlayerPartyMonHeldItemForRestoration(0);
-    state.itemLost[B_TRAINER_OPPONENT_A][0].originalItem = item;
-    RecordPermanentHeldItemTheft(B_BATTLER_1, B_BATTLER_0, item);
-    EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), item);
     EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_NONE);
-    TryRestoreHeldItems();
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), item);
-
-    // Knock Off has no permanent-theft record, so cleanup returns the item.
-    memset(&state, 0, sizeof(state));
-    RecordPlayerPartyMonHeldItemForRestoration(0);
-    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &empty);
-    TryRestoreHeldItems();
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), item);
-
     gBattlerPartyIndexes[B_BATTLER_0] = savedPlayerSlot;
     gBattlerPartyIndexes[B_BATTLER_1] = savedOpponentSlot;
     gBattleTypeFlags = savedFlags;

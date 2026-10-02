@@ -2511,7 +2511,7 @@ static void TryDepositItem(u8 taskId)
         BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, sText_CantStoreImportantItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
         gTasks[taskId].func = WaitDepositErrorMessage;
     }
-    else if (AddPCItem(gSpecialVar_ItemId, tItemCount) == TRUE)
+    else if (AddPCItemWithoutDiscovery(gSpecialVar_ItemId, tItemCount) == TRUE)
     {
         // Successfully deposited
         u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);

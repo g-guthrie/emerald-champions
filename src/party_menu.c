@@ -2156,7 +2156,7 @@ static enum TryTakeMonItemResult TryTakeMonItem(struct Pokemon *mon)
     if (item == ITEM_NONE)
         return TAKE_NO_ITEM;
 
-    if (!AddBagItem(item, 1))
+    if (!AddBagItemWithoutDiscovery(item, 1))
         return TAKE_NO_BAG_SPACE;
 
     item = ITEM_NONE;
@@ -3630,9 +3630,9 @@ static void Task_HandleSwitchItemsYesNoInput(u8 taskId)
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
         // No room to return held item to bag
-        if (AddBagItem(sPartyMenuItemId, 1) == FALSE)
+        if (AddBagItemWithoutDiscovery(sPartyMenuItemId, 1) == FALSE)
         {
-            AddBagItem(gSpecialVar_ItemId, 1);
+            AddBagItemWithoutDiscovery(gSpecialVar_ItemId, 1);
             BufferBagFullCantTakeItemMessage();
             DisplayPartyMenuMessage(gStringVar4, FALSE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
@@ -3697,7 +3697,7 @@ static void CB2_ReturnToPartyMenuFromWritingMail(void)
     {
         RestoreHeldItemAfterCanceledMail(mon, sPartyMenuItemId);
         RemoveBagItem(sPartyMenuItemId, 1);
-        AddBagItem(item, 1);
+        AddBagItemWithoutDiscovery(item, 1);
         InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_CHOOSE_MON, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
     }
     // Wrote mail
@@ -3926,7 +3926,7 @@ static void Task_HandleLoseMailMessageYesNoInput(u8 taskId)
     {
     case 0: // Yes, lose mail message
         item = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_HELD_ITEM);
-        if (AddBagItem(item, 1) == TRUE)
+        if (AddBagItemWithoutDiscovery(item, 1) == TRUE)
         {
             TakeMailFromMon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]);
             DisplayPartyMenuMessage(gText_MailTakenFromPkmn, FALSE);
@@ -7667,7 +7667,7 @@ static void Task_HandleSwitchItemsFromBagYesNoInput(u8 taskId)
     case 0: // Yes, switch items
         item = gPartyMenu.bagItem;
         RemoveBagItem(item, 1);
-        if (AddBagItem(sPartyMenuItemId, 1) == FALSE)
+        if (AddBagItemWithoutDiscovery(sPartyMenuItemId, 1) == FALSE)
         {
             ReturnGiveItemToBagOrPC(item);
             BufferBagFullCantTakeItemMessage();
@@ -7707,9 +7707,9 @@ static void DisplayItemMustBeRemovedFirstMessage(u8 taskId)
 static bool8 ReturnGiveItemToBagOrPC(enum Item item)
 {
     if (gPartyMenu.action == PARTY_ACTION_GIVE_ITEM)
-        return AddBagItem(item, 1);
+        return AddBagItemWithoutDiscovery(item, 1);
     else
-        return AddPCItem(item, 1);
+        return AddPCItemWithoutDiscovery(item, 1);
 }
 
 void ChooseMonToGiveMailFromMailbox(void)
@@ -8984,6 +8984,11 @@ void Test_RestoreHeldItemAfterCanceledMail(struct Pokemon *mon, enum Item item)
 bool32 Test_TrySwapPartyHeldItems(struct Pokemon *first, struct Pokemon *second)
 {
     return TrySwapPartyHeldItems(first, second);
+}
+
+bool32 Test_TryTakeMonItem(struct Pokemon *mon)
+{
+    return TryTakeMonItem(mon) == TAKE_OK;
 }
 
 s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 chooseHalf, u8 lastSelectedSlot)

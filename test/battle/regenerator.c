@@ -2,6 +2,7 @@
 #include "battle_util.h"
 #include "test/battle.h"
 #include "item.h"
+#include "field_specials.h"
 
 SINGLE_BATTLE_TEST("Regenerator: destroyed berries are tracked without enabling Recycle")
 {
@@ -159,7 +160,7 @@ SINGLE_BATTLE_TEST("Regenerator: destroying a transferred berry charges its orig
     }
 }
 
-SINGLE_BATTLE_TEST("Regenerator: stealing and eating a berry records the opposing original owner")
+SINGLE_BATTLE_TEST("Regenerator: a stolen trainer berry returns even after its borrower eats it")
 {
     enum Move move;
     PARAMETRIZE { move = MOVE_THIEF; }
@@ -177,7 +178,7 @@ SINGLE_BATTLE_TEST("Regenerator: stealing and eating a berry records the opposin
         ClearBag();
         u32 flags = gBattleTypeFlags;
         gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_NONE);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_SITRUS_BERRY);
         gBattleTypeFlags = flags;
     }
 }
@@ -205,7 +206,7 @@ SINGLE_BATTLE_TEST("Regenerator: berry destruction respects Sticky Hold and acti
     }
 }
 
-SINGLE_BATTLE_TEST("Regenerator: Knock Off returns berries while theft and destruction remove them")
+SINGLE_BATTLE_TEST("Regenerator: Knock Off and trainer theft return berries while direct destruction loses them")
 {
     enum Move removal = MOVE_KNOCK_OFF;
     bool32 tool = FALSE;
@@ -236,7 +237,8 @@ SINGLE_BATTLE_TEST("Regenerator: Knock Off returns berries while theft and destr
                   removal == MOVE_INCINERATE || removal == MOVE_BUG_BITE || removal == MOVE_PLUCK);
         u32 flags = gBattleTypeFlags;
         gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), removal == MOVE_KNOCK_OFF ? ITEM_SITRUS_BERRY : ITEM_NONE);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0),
+                  removal == MOVE_KNOCK_OFF || removal == MOVE_THIEF || removal == MOVE_COVET ? ITEM_SITRUS_BERRY : ITEM_NONE);
         gBattleTypeFlags = flags;
     }
 }
@@ -298,7 +300,7 @@ SINGLE_BATTLE_TEST("Regenerator: a foe's Pickup keeps an eaten berry from regene
     }
 }
 
-SINGLE_BATTLE_TEST("Regenerator: Magician and Pickpocket take a berry for good, even with the tool")
+SINGLE_BATTLE_TEST("Regenerator: Magician and Pickpocket borrow trainer berries until cleanup")
 {
     enum Ability ability;
     PARAMETRIZE { ability = ABILITY_MAGICIAN; }
@@ -318,7 +320,197 @@ SINGLE_BATTLE_TEST("Regenerator: Magician and Pickpocket take a berry for good, 
         EXPECT(GetBattlerPartyState(B_BATTLER_0)->originalBerryRemoved);
         u32 flags = gBattleTypeFlags;
         gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_SITRUS_BERRY);
+        gBattleTypeFlags = flags;
+    }
+}
+
+SINGLE_BATTLE_TEST("Item theft: destroying a borrowed trainer berry still returns it to its owner")
+{
+    enum Move theft, destroy;
+    for (u32 i = 0; i < 2; i++)
+    {
+        PARAMETRIZE { theft = i ? MOVE_COVET : MOVE_THIEF; destroy = MOVE_INCINERATE; }
+        PARAMETRIZE { theft = i ? MOVE_COVET : MOVE_THIEF; destroy = MOVE_BUG_BITE; }
+        PARAMETRIZE { theft = i ? MOVE_COVET : MOVE_THIEF; destroy = MOVE_CORROSIVE_GAS; }
+    }
+    GIVEN {
+        PLAYER(SPECIES_MEW) { HP(400); MaxHP(400); Attack(1); Moves(theft, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Attack(1); SpAttack(1); Item(ITEM_SITRUS_BERRY); Moves(MOVE_CELEBRATE, destroy); }
+    } WHEN {
+        TURN { MOVE(player, theft); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, destroy); }
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_NONE);
+        EXPECT_EQ(opponent->item, ITEM_NONE);
+        u32 flags = gBattleTypeFlags;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER;
         EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_NONE);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_SITRUS_BERRY);
+        TryRestoreHeldItems();
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_SITRUS_BERRY);
+        gBattleTypeFlags = flags;
+    }
+}
+
+WILD_BATTLE_TEST("Item theft: wild Magician and Pickpocket deliver permanent Bag loot without shop discovery")
+{
+    enum Ability ability;
+    enum Item item;
+    bool32 fullBag;
+    for (u32 full = 0; full < 2; full++)
+    {
+        PARAMETRIZE { ability = ABILITY_MAGICIAN; item = ITEM_THROAT_SPRAY; fullBag = full; }
+        PARAMETRIZE { ability = ABILITY_PICKPOCKET; item = ITEM_THROAT_SPRAY; fullBag = full; }
+        PARAMETRIZE { ability = ABILITY_MAGICIAN; item = ITEM_SITRUS_BERRY; fullBag = full; }
+        PARAMETRIZE { ability = ABILITY_PICKPOCKET; item = ITEM_SITRUS_BERRY; fullBag = full; }
+    }
+    GIVEN {
+        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
+        ClearBag();
+        memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
+        if (fullBag)
+        {
+            EXPECT(AddBagItemWithoutDiscovery(item, MAX_BAG_ITEM_CAPACITY));
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(item)];
+            enum Item filler = item == ITEM_SITRUS_BERRY ? ITEM_ORAN_BERRY : ITEM_POTION;
+            for (u32 slot = 0; slot < pocket->capacity; slot++)
+                if (BagPocket_GetSlotData(pocket, slot).itemId == ITEM_NONE)
+                    BagPocket_SetSlotItemIdAndCount(pocket, slot, filler, MAX_BAG_ITEM_CAPACITY);
+            EXPECT(!CheckBagHasSpace(item, 1));
+        }
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ability); HP(400); MaxHP(400); Attack(1); Moves(MOVE_CELEBRATE, MOVE_TACKLE); }
+        // Wild opponents choose randomly even in recorded test battles. One
+        // contact move makes Pickpocket's trigger an observable certainty.
+        OPPONENT(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Attack(1); Item(item); Moves(MOVE_TACKLE); }
+    } WHEN {
+        if (ability == ABILITY_MAGICIAN)
+            TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_TACKLE); }
+        else
+            TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        if (ability == ABILITY_MAGICIAN)
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+            HP_BAR(opponent);
+        }
+        else
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+            HP_BAR(player);
+        }
+        if (fullBag)
+            NOT ABILITY_POPUP(player, ability);
+        else
+            ABILITY_POPUP(player, ability);
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_NONE);
+        EXPECT_EQ(opponent->item, fullBag ? item : ITEM_NONE);
+        EXPECT_EQ(CountTotalItemQuantityInBag(item), fullBag ? MAX_BAG_ITEM_CAPACITY : 1);
+        EXPECT_EQ(IsEmeraldChampionsBattleItemUnlocked(item), item == ITEM_SITRUS_BERRY);
+        for (u32 byte = 0; byte < sizeof(gSaveBlock1Ptr->battleItemsUnlocked); byte++)
+            EXPECT_EQ(gSaveBlock1Ptr->battleItemsUnlocked[byte], 0);
+        u32 flags = gBattleTypeFlags;
+        gBattleTypeFlags = 0;
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), fullBag ? item : ITEM_NONE);
+        TryRestoreHeldItems();
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+        gBattleTypeFlags = flags;
+        ClearBag();
+    }
+}
+
+WILD_BATTLE_TEST("Item theft: wild ability loot preserves the Regenerator's previously consumed original berry")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_MAGICIAN; }
+    PARAMETRIZE { ability = ABILITY_PICKPOCKET; }
+    GIVEN {
+        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
+        ASSUME(MoveMakesContact(MOVE_SEISMIC_TOSS));
+        GIVE_PLAYER_ITEM(ITEM_REGENERATOR, 1);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ability); HP(120); MaxHP(200); Attack(1); Item(ITEM_SITRUS_BERRY); Moves(MOVE_CELEBRATE, MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(50); HP(400); MaxHP(400); Item(ITEM_THROAT_SPRAY); Moves(MOVE_SEISMIC_TOSS); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_SEISMIC_TOSS); }
+        if (ability == ABILITY_MAGICIAN)
+            TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_SEISMIC_TOSS); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SEISMIC_TOSS, opponent);
+        HP_BAR(player);
+        ABILITY_POPUP(player, ability);
+    } THEN {
+        EXPECT(GetBattlerPartyState(B_BATTLER_0)->originalBerryConsumed);
+        EXPECT_EQ(player->item, ITEM_NONE);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_THROAT_SPRAY), 1);
+        u32 flags = gBattleTypeFlags;
+        gBattleTypeFlags = 0;
+        TryRestoreHeldItems();
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_SITRUS_BERRY);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_NONE);
+        gBattleTypeFlags = flags;
+    }
+}
+
+WILD_BATTLE_TEST("Item theft: Sticky Barb contact remains attached instead of becoming Bag loot")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_TELEPATHY; }
+    PARAMETRIZE { ability = ABILITY_MAGICIAN; }
+    PARAMETRIZE { ability = ABILITY_PICKPOCKET; }
+    GIVEN {
+        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
+        ClearBag();
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ability); HP(400); MaxHP(400); Attack(1); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Item(ITEM_STICKY_BARB); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_STICKY_BARB);
+        EXPECT_EQ(opponent->item, ITEM_NONE);
+        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_STICKY_BARB), 0);
+        u32 flags = gBattleTypeFlags;
+        gBattleTypeFlags = 0;
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_NONE);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_STICKY_BARB);
+        gBattleTypeFlags = flags;
+    }
+}
+
+DOUBLE_BATTLE_TEST("Item theft: eating an owned partner's berry does not create a trainer loan refund")
+{
+    enum Move theft;
+    bool32 tool;
+    for (u32 owned = 0; owned < 2; owned++)
+    {
+        PARAMETRIZE { theft = MOVE_THIEF; tool = owned; }
+        PARAMETRIZE { theft = MOVE_COVET; tool = owned; }
+    }
+    GIVEN {
+        if (tool)
+            GIVE_PLAYER_ITEM(ITEM_REGENERATOR, 1);
+        PLAYER(SPECIES_MEW) { HP(100); MaxHP(200); Attack(1); Moves(theft); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Item(ITEM_SITRUS_BERRY); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, theft, target: playerRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } THEN {
+        EXPECT_EQ(playerLeft->hp, 150);
+        EXPECT_EQ(playerLeft->item, ITEM_NONE);
+        EXPECT_EQ(playerRight->item, ITEM_NONE);
+        u32 flags = gBattleTypeFlags;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 0), ITEM_NONE);
+        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_PLAYER, 1), ITEM_NONE);
+        TryRestoreHeldItems();
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HELD_ITEM), ITEM_NONE);
         gBattleTypeFlags = flags;
     }
 }

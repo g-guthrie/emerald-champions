@@ -2,8 +2,8 @@
 """Headless per-turn battle driver for the authored campaign trainers.
 
 Synthetic benchmark evidence only. This starts one trainer battle in the
-EC_HEADLESS_FIXTURES ROM through the native debug battle lifecycle, prepares a
-user-authorized stage-legal party through the existing native preparation API,
+EC_HEADLESS_FIXTURES ROM through the native debug battle lifecycle, screens a
+prepared party's source availability and uses the native preparation API,
 and then answers every player decision point from a memory mailbox. No buttons,
 no screenshots, no story receipts. It never earns campaign progress.
 
@@ -1336,6 +1336,36 @@ def advance_to_halt(session, writes, png=None):
     return view, total, False
 
 
+def preparation_availability(args):
+    """Screen new trainer preparations before spending any native frames.
+
+    This is a source upper bound, not a finite acquisition certificate. A
+    historical replay must preserve the original experiment even when today's
+    source rejects its old party; it cannot acquire a new legality claim.
+    """
+    if getattr(args, '_historical_replay', False):
+        return {'status': 'historical_replay', 'scope': 'Availability was not revalidated against current source.'}
+    if getattr(args, 'allow_unverified_party', False):
+        return {'status': 'unverified_experiment', 'scope': 'Explicit fixture override; not stage-availability evidence.'}
+    if getattr(args, 'baseline', None) not in (None, args.cap):
+        fail('different trainer/player caps are an experiment, not source-stage availability; '
+             'use --allow-unverified-party for that fixture')
+    from reference_pool import encounter_pool
+    from tuning_pool_check import check, species_aliases
+    try:
+        pool = encounter_pool(args.trainer, str(args.cap))
+        manifest = json.loads(Path(args.party).read_text())
+        problems = check(manifest, pool, species_aliases())
+    except ValueError as exc:
+        problems = [str(exc)]
+    if problems:
+        fail('party is unavailable before this trainer:\n  - ' + '\n  - '.join(problems)
+             + '\nUse --allow-unverified-party only for experiments, not stage-legal balance evidence.')
+    return {'status': 'source_upper_bound_passed', 'trainer': pool['trainer'],
+            'milestone': pool['milestone'], 'cap': pool['cap'], 'source_head': pool['source_head'],
+            'excluded_victory_flags': pool['excluded_victory_flags'], 'scope': pool['scope']}
+
+
 def command_start(args):
     kind = getattr(args, 'battle_kind', 'trainer')
     if kind not in BATTLE_KINDS:
@@ -1346,6 +1376,8 @@ def command_start(args):
         fail('trainer/Deoxys fixtures need a validated prepared-party manifest')
     if kind != 'trainer' and (not args.scenario or args.trainer2 or args.partner):
         fail('scripted wild fixtures need an explicit scenario and no trainer/partner override')
+    availability = (preparation_availability(args) if kind == 'trainer'
+                    else {'status': 'scripted_factory', 'scope': 'Separate scripted-wild source certificate.'})
     session = Session(args.run_dir)
     if session.meta_path.exists():
         fail('use a fresh --run-dir for each battle')
@@ -1353,7 +1385,7 @@ def command_start(args):
     # `replay` can re-run the same battle. The seed itself stays in session.json.
     start_args = {key: getattr(args, key, None) for key in (
         'battle_kind', 'trainer', 'trainer2', 'partner', 'difficulty', 'cap', 'baseline',
-        'map', 'weather', 'level_delta', 'ability_trial', 'foe_team', 'foe_team_b')}
+        'map', 'weather', 'level_delta', 'ability_trial', 'foe_team', 'foe_team_b', 'allow_unverified_party')}
     level_delta = parse_level_delta(getattr(args, 'level_delta', None))
     session.dir.mkdir(parents=True, exist_ok=True)
     # A concurrent session may rebuild the root ROM at any moment, so a stamped
@@ -1433,8 +1465,9 @@ def command_start(args):
         'ability_trial': {'spec': start_args['ability_trial'],
                           'applied': ability_trial_labels(ability_trial, constants)},
         'foe_team': {block['owner']: block['record'] for block in foe_blocks.values()},
+        'preparation_availability': availability,
         'scope': ('Synthetic headless benchmark: native debug trainer lifecycle, native AI, '
-                  'user-authorized stage-legal preparation. Not earned campaign play.'),
+                  f"prepared party ({availability['status']}). Not earned campaign play."),
     }
     # Pin the exact inputs next to the pinned build, so a witness replay never
     # depends on a manifest or scenario file that was edited afterwards.
@@ -1494,7 +1527,8 @@ def command_start(args):
         if values[syms['gEcStudioResult']] != 1:
             fail('native rescue gender setup was refused')
 
-    # 3. The existing native preparation API owns party legality.
+    # 3. The native API owns move/ability/stat legality. Source availability
+    # was screened separately; finite acquisition still needs a certificate.
     if kind != 'birch_rescue':
         spec, words = prepare_protocol(Path(args.party), ROOT)
         writes = [(syms[name] + offset, value) for name, offset, value in words]
@@ -2230,6 +2264,7 @@ def command_result(args):
         'ai_decision_frames': ai_frames,
         'rom_sha256': session.meta['rom_sha256'],
         'elf_sha256': session.meta['elf_sha256'],
+        'preparation_availability': session.meta.get('preparation_availability', {'status': 'unverified_legacy_run'}),
         'scope': session.meta['scope'],
     }
     session.log({'event': 'result', 'result': result})
@@ -3172,7 +3207,7 @@ def command_replay(args):
     start = SimpleNamespace(**arguments, seed=meta['seed'], run_dir=str(target),
                             party=str(party) if party else None,
                             scenario=str(scenario) if scenario else None,
-                            build_dir=str(build), png=False, brief=False)
+                            build_dir=str(build), png=False, brief=False, _historical_replay=True)
     failure, step = None, 'start'
     with contextlib.redirect_stdout(io.StringIO()):
         try:
@@ -3214,6 +3249,7 @@ def command_replay(args):
         'level_delta': (meta.get('level_delta') or {}).get('applied', {}),
         'ability_trial': (meta.get('ability_trial') or {}).get('applied', {}),
         'foe_team': {owner: record.get('file') for owner, record in (meta.get('foe_team') or {}).items()},
+        'original_preparation_availability': meta.get('preparation_availability', {'status': 'unverified_legacy_run'}),
         'build': "the original run's pinned ROM/ELF (" + str(meta.get('rom_sha256', ''))[:12] + ')',
         'original_run': str(source), 'replay_run': str(target),
     }
@@ -3238,6 +3274,8 @@ def main():
     start.add_argument('--trainer2', help='second owner; normally taken from the map script')
     start.add_argument('--partner', help='PARTNER_* for a multi; normally from the map script')
     start.add_argument('--party', help='validated preparation manifest; omit for actual level-five rescue starters')
+    start.add_argument('--allow-unverified-party', action='store_true',
+                       help='explicit experiment with unverified availability; cannot establish stage-legal balance')
     start.add_argument('--seed', type=lambda v: int(v, 0), required=True)
     start.add_argument('--difficulty', default='medium',
                        choices=['easy', 'medium', 'normal', 'hard'])

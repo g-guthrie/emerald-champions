@@ -95,12 +95,12 @@ AI_DOUBLE_BATTLE_TEST("EC Mega election: the stone is spent on a status turn as 
 // the Mega as usable and never evolving. One activation marks both partner
 // slots as having used the gimmick, and the gate the AI controller consults on
 // its way to executing a choice asked only that, never the trainer's allowance.
-// Drake is the cheap board for it: his authored stones are party slots 1 and 6,
+// Glacia supplies the current allowance: her authored stones are slots 1 and 6,
 // so the lead evolves immediately and the reserve has to evolve after it.
 AI_DOUBLE_BATTLE_TEST("EC Mega budget: a licensed trainer's reserve still evolves after its partner")
 {
     GIVEN {
-        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_DRAKE;
+        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_GLACIA;
         AI_FLAGS(MEGA_ELECTION_FLAGS);
         PLAYER(SPECIES_WEAVILE) {
             Level(50); HP(400); MaxHP(400); Attack(60); Defense(200);

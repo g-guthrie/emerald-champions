@@ -287,8 +287,9 @@ STORY_EVENTS: list[tuple] = [
      "MossdeepCity_StevensHouse/scripts.inc:29-44 (VAR_STEVENS_HOUSE_STATE 1, SpaceCenter_2F:316)"),
     ("FLAG_RECEIVED_HM07", "SootopolisCity", None, "FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE", "SootopolisCity/scripts.inc:1412"),
     *[(k, None, None, v, "src/field_move.c:28-69") for k, v in FIELD_MOVES.items()],
-    # Rods (no conditions).
-    ("HAS_OLD_ROD", "LittlerootTown", None, None, "LittlerootTown/scripts.inc:955-956 (Mom)"),
+    # Mom gives the Old Rod with the shoes after Birch's post-rival sendoff
+    # (VAR_LITTLEROOT_TOWN_STATE = 3), not on the first visit to Littleroot.
+    ("HAS_OLD_ROD", "LittlerootTown", None, "FLAG_ADVENTURE_STARTED", "LittlerootTown/scripts.inc:951-959 (Mom)"),
     ("HAS_GOOD_ROD", "Route114", None, None, "Route114/scripts.inc:35-38"),
     ("HAS_SUPER_ROD", "MossdeepCity_House3", None, None, "MossdeepCity_House3/scripts.inc:12-15"),
     # Opening and badge 1.

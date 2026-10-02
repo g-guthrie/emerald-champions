@@ -12,6 +12,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -68,6 +69,38 @@ def board(constants, *, latch=(0, 2, 0), opposing_selection=4):
     words[31] = 2 | (opposing_selection << 8) | (1 << 16) | (1 << 24)
     words[9], words[10], words[11] = 60, 6, 0
     return words
+
+
+class PreparationAvailabilityTests(unittest.TestCase):
+    def test_unavailable_party_is_refused_before_native_start(self):
+        pool = dict(trainer='TRAINER_BRENDAN_ROUTE_103_MUDKIP', milestone='start', cap=14,
+                    source_head='test', excluded_victory_flags=['FLAG_DEFEATED_RIVAL_ROUTE103'],
+                    scope='Source upper bound', species=[], items=[], megas=[])
+        with tempfile.TemporaryDirectory() as folder:
+            party = Path(folder) / 'party.json'
+            party.write_text(json.dumps({'encounter': pool['trainer'], 'availability_audit': 'test',
+                'party': [{'species': 'SPECIES_NAGANADEL', 'availability': 'Seaspray Cave',
+                           'evs': [252, 0, 0, 252, 0, 0]}]}))
+            args = SimpleNamespace(trainer=pool['trainer'], cap=14, baseline=None, party=str(party),
+                                   battle_kind='trainer', scenario=None, trainer2=None, partner=None)
+            with patch('reference_pool.encounter_pool', return_value=pool), patch('battle_driver.Session') as session:
+                with self.assertRaisesRegex(SystemExit, 'SPECIES_NAGANADEL is not obtainable'):
+                    driver.command_start(args)
+                session.assert_not_called()
+
+    def test_experiments_and_historical_replays_do_not_claim_source_legality(self):
+        with patch('reference_pool.encounter_pool') as pool:
+            experimental = driver.preparation_availability(SimpleNamespace(allow_unverified_party=True))
+            historical = driver.preparation_availability(SimpleNamespace(_historical_replay=True))
+            self.assertEqual(experimental['status'], 'unverified_experiment')
+            self.assertEqual(historical['status'], 'historical_replay')
+            pool.assert_not_called()
+
+    def test_cannot_borrow_a_later_trainer_cap_for_early_party_resources(self):
+        with patch('reference_pool.encounter_pool') as pool:
+            with self.assertRaisesRegex(SystemExit, 'different trainer/player caps'):
+                driver.preparation_availability(SimpleNamespace(cap=14, baseline=85))
+            pool.assert_not_called()
 
 
 class DriverViewTests(unittest.TestCase):

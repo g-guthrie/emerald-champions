@@ -285,7 +285,7 @@ static const u8 *GetCenterGuideFinaleText(bool32 detailed)
         {
             if (!FlagGet(FLAG_EC_EARNED_SS_TICKET))
                 return COMPOUND_STRING("Return to your own house in\nLittleroot. Go downstairs to\lreceive the S.S. Ticket from\lyour father.");
-            return COMPOUND_STRING("Your S.S. Ticket is still\nwaiting for room. Make room\lin your Bag's Key Items, then\lspeak to any Center nurse.\pShe delivers your earned\ntravel documents when you heal.");
+            return COMPOUND_STRING("Your S.S. Ticket is still\nwaiting for room. Make room\lin your Bag's Key Items, then\lspeak to any Center nurse.\pSpeak to her for your earned\ntravel documents.");
         }
         if (!detailed)
         {

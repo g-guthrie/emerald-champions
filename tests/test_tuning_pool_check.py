@@ -116,8 +116,101 @@ class TuningPoolCheckTests(unittest.TestCase):
             good.write_text(json.dumps(manifest(mon("SPECIES_AGGRON", "ITEM_LIFE_ORB"))))
             bad = Path(tmp) / "bad.json"
             bad.write_text(json.dumps(manifest(mon("SPECIES_DRAGAPULT"))))
-            self.assertEqual(checker.main([str(good), "--milestone", "badge4", "--pools", tmp]), 0)
-            self.assertEqual(checker.main([str(bad), "--milestone", "45", "--pools", tmp]), 1)
+            self.assertEqual(checker.main([str(good), "--milestone", "badge4", "--pools", tmp, "--window-only"]), 0)
+            self.assertEqual(checker.main([str(bad), "--milestone", "45", "--pools", tmp, "--window-only"]), 1)
+            self.assertEqual(checker.main([str(good), "--milestone", "badge4", "--pools", tmp]), 1)
+
+    def test_acquisition_ivs_and_ivy_menu_limits(self):
+        pool = copy.deepcopy(POOL)
+        pool["iv_service_available"] = False
+        self.assertEqual(self.check(mon("SPECIES_AGGRON"), pool=pool), [])
+        self.assertTrue(any("IV spread" in p for p in self.check(
+            mon("SPECIES_AGGRON", ivs=[31, 0, 31, 31, 31, 0]), pool=pool)))
+        pool["iv_service_available"] = True
+        self.assertEqual(self.check(mon("SPECIES_AGGRON", ivs=[31, 0, 31, 31, 31, 0]), pool=pool), [])
+        # Display index 3 is Sp. Attack, not the native Speed stat id.
+        self.assertTrue(any("IV spread" in p for p in self.check(
+            mon("SPECIES_AGGRON", ivs=[31, 0, 31, 0, 31, 31]), pool=pool)))
+        # The native Fighting Hidden Power preset remains available.
+        self.assertEqual(self.check(mon("SPECIES_AGGRON", ivs=[31, 0, 30, 30, 30, 30]), pool=pool), [])
+
+    def test_encounter_game_corner_access_overrides_broad_window(self):
+        pool = copy.deepcopy(POOL)
+        pool["game_corner_available"] = False
+        self.assertTrue(any("starter pick" in p for p in self.check(
+            mon("SPECIES_TREECKO"), mon("SPECIES_CHIKORITA"), pool=pool)))
+
+    def test_hot_spring_pokerus_needs_actual_access(self):
+        pool = copy.deepcopy(POOL)
+        pool["hot_spring_available"] = False
+        self.assertEqual(self.check(mon("SPECIES_AGGRON", pokerus=0xFE), pool=pool), [])
+        self.assertTrue(any("Pokérus state" in p for p in self.check(
+            mon("SPECIES_AGGRON", pokerus=0xFB), pool=pool)))
+        pool["hot_spring_available"] = True
+        self.assertEqual(self.check(mon("SPECIES_AGGRON", pokerus=0xFB), pool=pool), [])
+
+
+class EncounterAvailabilityTests(unittest.TestCase):
+    """Exercise the actual world graph, including the reported false witness."""
+    @classmethod
+    def setUpClass(cls):
+        import reference_pool as reference
+        cls.reference = reference
+        cls.builder = reference.Builder()
+        cls.encounters = reference.Encounters(cls.builder)
+
+    def pool(self, trainer, milestone):
+        return self.reference.encounter_pool(trainer, milestone,
+            builder=self.builder, encounters=self.encounters)
+
+    def test_first_rival_cannot_use_post_rival_resources(self):
+        pool = self.pool("TRAINER_BRENDAN_ROUTE_103_MUDKIP", "start")
+        for flag in ("FLAG_DEFEATED_RIVAL_ROUTE103", "FLAG_ADVENTURE_STARTED", "HAS_OLD_ROD"):
+            self.assertNotIn(flag, pool["story_flags"])
+        self.assertFalse(pool["hot_spring_available"])
+        species = {s["species"] for s in pool["species"]}
+        self.assertIn("SPECIES_EEVEE", species)
+        self.assertIn("SPECIES_PACHIRISU", species)
+        self.assertNotIn("SPECIES_LUCARIO", species)
+        self.assertNotIn("SPECIES_NAGANADEL", species)
+        old = ROOT / "work/tuning-20260930/runs/c000/E0001/party_f0.json"
+        if old.exists():
+            problems = checker.check(json.loads(old.read_text()), pool, checker.species_aliases())
+            self.assertTrue(any("SPECIES_LUCARIO is not obtainable" in p for p in problems), problems)
+            self.assertTrue(any("SPECIES_NAGANADEL is not obtainable" in p for p in problems), problems)
+
+    def test_cannot_check_manifest_for_a_different_trainer(self):
+        pool = self.pool("TRAINER_BRENDAN_ROUTE_103_MUDKIP", "start")
+        m = manifest(mon("SPECIES_PACHIRISU", ability="ABILITY_PICKUP"))
+        m["encounter"] = "TRAINER_ROXANNE_1"
+        self.assertTrue(any("not the checked trainer" in p for p in checker.check(m, pool)))
+
+    def test_post_rival_resources_still_available_before_roxanne(self):
+        pool = self.pool("TRAINER_ROXANNE_1", "start")
+        self.assertIn("HAS_OLD_ROD", pool["story_flags"])
+        self.assertIn("SPECIES_LUCARIO", {s["species"] for s in pool["species"]})
+        self.assertNotIn("FLAG_BADGE01_GET", pool["story_flags"])
+
+    def test_norman_pre_battle_mega_gift_is_available(self):
+        pool = self.pool("TRAINER_NORMAN_1", "badge4")
+        # Norman gives the Ring before launching his battle, not on victory.
+        self.assertTrue(pool["mega_ring"]["available"])
+        self.assertTrue(pool["megas"])
+        self.assertNotIn("FLAG_BADGE05_GET", pool["story_flags"])
+
+    def test_flannery_pre_battle_hot_spring_is_available(self):
+        pool = self.pool("TRAINER_FLANNERY_1", "badge3")
+        self.assertTrue(pool["hot_spring_available"])
+        self.assertNotIn("FLAG_BADGE04_GET", pool["story_flags"])
+
+    def test_earned_mega_rayquaza_remains_available_in_finale(self):
+        pool = self.pool("TRAINER_STEVEN", "champion")
+        self.assertTrue(pool["mega_ring"]["available"])
+        self.assertIn("SPECIES_RAYQUAZA_MEGA", {s["species"] for s in pool["megas"]})
+
+    def test_reject_wrong_post_victory_window(self):
+        with self.assertRaisesRegex(ValueError, "cannot still be pending"):
+            self.pool("TRAINER_ROXANNE_1", "badge1")
 
 
 if __name__ == "__main__":

@@ -4321,11 +4321,8 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
             }
             else
             {
-                if (!StealTargetItem(cv->battlerAtk, battlerDef, ITEM_NONE))
+                if (!StealTargetItem(cv->battlerAtk, battlerDef, ITEM_NONE, TRUE))
                     continue;
-                if (GEN_LATEST == GEN_CHAMPIONS)
-                    RecordPermanentHeldItemTheft(battlerDef, cv->battlerAtk, gLastUsedItem);
-
                 gEffectBattler = cv->battlerDef;
                 if (IsBattlerAlive(cv->battlerAtk))
                     BattleScriptCall(BattleScript_ItemSteal);
@@ -4867,14 +4864,22 @@ static enum MoveEndResult MoveEndPickpocket(struct BattleCalcValues *cv)
                 {
                     if (originalAttackerOnField)
                     {
-                        StealTargetItem(battlerDef, cv->battlerAtk, ITEM_NONE);  // Target takes attacker's item
+                        if (!StealTargetItem(battlerDef, cv->battlerAtk, ITEM_NONE, TRUE))
+                            continue;
                     }
                     else
                     {
-                        StealTargetItem(battlerDef, cv->battlerAtk, itemToSteal); // Don't change cv->battlerAtk's item
+                        if (!StealTargetItem(battlerDef, cv->battlerAtk, itemToSteal, TRUE))
+                            continue;
                         struct PartyState *originalHolder = &gBattleStruct->partyState[GetBattlerTrainer(cv->battlerAtk)][originalAttackerPartyId];
                         RecordBerryRemoval(originalHolder->heldItemOrigin, itemToSteal);
-                        SetHeldItemOrigin(battlerDef, originalHolder->heldItemOrigin);
+                        if (gBattleMons[battlerDef].item == ITEM_NONE)
+                            RecordHeldItemSentToBag(originalHolder->heldItemOrigin, itemToSteal);
+                        else
+                        {
+                            SetHeldItemOrigin(battlerDef, originalHolder->heldItemOrigin);
+                            RecordHeldItemTheft(battlerDef, itemToSteal);
+                        }
                         originalHolder->heldItemOrigin = 0;
 
                         PREPARE_MON_NICK_WITH_PREFIX_LOWER_BUFFER(gBattleTextBuff2, cv->battlerAtk, originalAttackerPartyId);

@@ -1165,7 +1165,7 @@ def form_changes(sd: SpeciesData) -> list[tuple[str, str, str, str]]:
 
 
 class Pools:
-    def __init__(self, b: Builder, enc: "Encounters"):
+    def __init__(self, b: Builder, enc: "Encounters", *, compute_windows=True):
         self.b = b
         self.enc = enc
         self.story = b.story
@@ -1179,27 +1179,32 @@ class Pools:
         for s in b.species_sources:
             self.by_key_species[s.key].append(s)
         self.windows = self.story.window_names()
-        self.result = {w: self.compute(w) for w in self.windows}
+        self.result = {w: self.compute(w) for w in self.windows} if compute_windows else {}
 
-    def live(self, w: str, src: Source) -> bool:
+    def live(self, w: str, src: Source, closure=None, pending=frozenset()) -> bool:
         for alt in src.requires:
             flags, beaten, at = split_tokens(alt)
             if "OUT_OF_SCOPE" in flags:
                 continue
-            if not self.story.reachable(w, src.where, (flags,) if flags else None):
+            if not self.story.reachable(w, src.where, (flags,) if flags else None, closure=closure):
                 continue
-            if all(self.story.reachable(w, m) for m in at) and all(self.enc.defeated_by(t, w) for t in beaten):
+            if (all(self.story.reachable(w, m, closure=closure) for m in at)
+                    and all(t not in pending and self.enc.defeated_by(t, w, closure=closure) for t in beaten)):
                 return True
         return False
 
-    def compute(self, w: str) -> dict:
+    def compute(self, w: str, *, closure=None, pending=frozenset()) -> dict:
         story, sd, b = self.story, self.sd, self.b
         cap = story.cap(w)
-        flags = story.closure[w]["flags"]
+        closure = closure if closure is not None else story.closure[w]
+        flags = closure["flags"]
         species: dict[str, dict] = {}
         items: dict[str, dict] = {}
-        live_species_src = [s for s in b.species_sources if self.live(w, s)]
-        live_item_src = [s for s in b.item_sources if self.live(w, s)]
+        live_species_src = [s for s in b.species_sources if self.live(w, s, closure, pending)]
+        live_item_src = [s for s in b.item_sources if self.live(w, s, closure, pending)]
+
+        def reachable(where):
+            return story.reachable(w, where, closure=closure)
 
         def have(sp_expr: str) -> bool:
             return any(sd.resolve(x) in species or any(m in species for m in sd.family(x)) for x in sp_expr.split("|"))
@@ -1219,10 +1224,10 @@ class Pools:
 
         def map_ok(token: str) -> bool:
             d = self.story.geo.id_to_dir.get(token)
-            return d is not None and story.reachable(w, d)
+            return d is not None and reachable(d)
 
         def mapsec_ok(token: str) -> bool:
-            return any(sec == token and story.reachable(w, d) for d, sec in self.mapsec.items())
+            return any(sec == token and reachable(d) for d, sec in self.mapsec.items())
 
         changed = True
         while changed:
@@ -1250,7 +1255,7 @@ class Pools:
                 for item in re.findall(r"ITEM_\w+_PLATE", "".join(RELIC_PLATES)):
                     changed |= add_item(item, dict(kind="relic", detail="plates with Arceus", cite="src/legendary_signs.c:433-468"))
             # Fossils revived at Devon Corp 2F.
-            if story.reachable(w, "RustboroCity_DevonCorp_2F"):
+            if reachable("RustboroCity_DevonCorp_2F"):
                 for item, sp in b.fossils.items():
                     if item in items:
                         changed |= add_species(sp, dict(kind="fossil", detail=f"revived from {item} at Devon Corp 2F",
@@ -1267,7 +1272,7 @@ class Pools:
                                                             cite="gSpeciesInfo evolutions (src/data/pokemon/species_info)"))
             # Breeding at the Route 117 Day-Care (src/daycare.c): the egg is the
             # mother's lowest pre-evolution; Undiscovered cannot breed; Manaphy -> Phione.
-            if story.reachable(w, "Route117_PokemonDayCare"):
+            if reachable("Route117_PokemonDayCare"):
                 for sp in list(species):
                     info = sd.info.get(sp, {})
                     if info.get("egg_group") in (None, "EGG_GROUP_NO_EGGS_DISCOVERED") or sd.restricted_class(sp) and sd.base(sp) != "SPECIES_MANAPHY":
@@ -1277,7 +1282,7 @@ class Pools:
                         changed |= add_species(egg, dict(kind="breeding", detail=f"Day-Care egg from {sd.name(sp)}",
                                                          cite="src/daycare.c; data/scripts/day_care.inc"))
             # Cozmo swaps Deoxys forms (FallarborTown_CozmosHouse/scripts.inc:116-131).
-            if "SPECIES_DEOXYS" in species and story.reachable(w, "FallarborTown_CozmosHouse"):
+            if "SPECIES_DEOXYS" in species and reachable("FallarborTown_CozmosHouse"):
                 for form in ("SPECIES_DEOXYS_ATTACK", "SPECIES_DEOXYS_DEFENSE", "SPECIES_DEOXYS_SPEED"):
                     changed |= add_species(form, dict(kind="form", detail="Cozmo's meteorite form change",
                                                       cite="data/maps/FallarborTown_CozmosHouse/scripts.inc:116-131"))
@@ -1542,7 +1547,7 @@ class Encounters:
         ws = self.fightable.get(trainer)
         return ws[0] if ws else None
 
-    def defeated_by(self, trainer: str, window: str) -> bool:
+    def defeated_by(self, trainer: str, window: str, *, closure=None) -> bool:
         """DEFEATED:<trainer> can hold in `window`: fought then or earlier,
         and the flags its victory sets (a badge, for a leader) fit the
         window. Non-campaign trainers are unconstrained."""
@@ -1551,7 +1556,7 @@ class Encounters:
         ws = self.fightable[trainer]
         if not ws or self.window_index[ws[0]] > self.window_index[window]:
             return False
-        flags = self.story.closure[window]["flags"]
+        flags = (closure if closure is not None else self.story.closure[window])["flags"]
         return all(mr.canon(f) in flags for f in ENCOUNTER_CONSEQUENCES.get(trainer, []))
 
     def build(self) -> list[dict]:
@@ -1668,6 +1673,59 @@ def species_row(b: Builder, sp: str, how: dict, gate: str) -> dict:
     return dict(species=sp, name=sd.name(sp), gate=gate, bst=sd.bst(sp), stats=sd.stats(sp),
                 abilities=sd.abilities(sp), restricted_class=sd.restricted_class(sp),
                 source=dict(kind=how.get("kind"), detail=how.get("detail"), where=how.get("where"), cite=how.get("cite")))
+
+
+def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=None) -> dict:
+    """Fresh source upper bound while this battle is still pending.
+
+    Reuse the existing story graph, but withhold this encounter's victory and
+    disappearance flags. In particular, a cap-14 rival cannot borrow resources
+    from the post-rival part of the same cap window. Optional detours and earned
+    Legendary counters remain available. This is not an earned-save receipt.
+    """
+    b = builder if builder is not None else Builder()
+    enc = encounters if encounters is not None else Encounters(b)
+    story = b.story
+    windows = story.window_names()
+    if milestone not in windows and milestone.isdigit():
+        milestone = next((w for w in windows if story.cap(w) == int(milestone)), milestone)
+    if milestone not in windows:
+        raise ValueError(f"unknown milestone {milestone!r}")
+    if trainer not in enc.team_trainers:
+        raise ValueError(f"unknown authored trainer {trainer!r}")
+    if milestone not in enc.fightable[trainer]:
+        raise ValueError(f"{trainer} cannot still be pending in {milestone}")
+
+    # Both enemy owners must remain undefeated for a multi-trainer battle.
+    pending = {trainer}
+    for call in enc.calls.get(trainer, []):
+        pending.update(a for a in call["args"] if a.startswith("TRAINER_"))
+    forbid = frozenset(mr.canon(f) for t in pending
+                       for f in ENCOUNTER_CONSEQUENCES.get(t, []) + enc.vanish.get(t, []))
+    closure = story.close(story.cap(milestone), forbid)
+    if not story.realizes(milestone, story.flag_of(milestone), closure["flags"]):
+        raise ValueError(f"{milestone} requires defeating {trainer}")
+    p = Pools(b, enc, compute_windows=False)
+    r = p.compute(milestone, closure=closure, pending=frozenset(pending))
+    unlimited_kinds = {"vendor_kit", "vendor_badge_stock", "vendor_form_items", "vendor_species", "mart"}
+    species = [species_row(b, sp, how, milestone) for sp, how in sorted(r["species"].items())
+               if how.get("kind") != "mega"]
+    items = [dict(item=it, unlimited=it in b.vendor_items or how.get("kind") in unlimited_kinds,
+                  source=dict(kind=how.get("kind"), detail=how.get("detail"), cite=how.get("cite")))
+             for it, how in sorted(r["items"].items())]
+    return dict(
+        trainer=trainer, encounter=next(f"E{br.encounter:04d}" for br in enc.branches if br.trainer == trainer),
+        pending_trainers=sorted(pending), excluded_victory_flags=sorted(forbid),
+        milestone=milestone, cap=r["cap"], source_head=git_head(), story_flags=sorted(r["flags"]),
+        scope="Source upper bound before this encounter; optional detours, money and RNG are unconstrained.",
+        species=species, items=items, megas=r["megas"], all_mega_stones=sorted(p.megas),
+        mega_ring=dict(available=r["ring"], gate="Norman's pre-battle gift after four Gym wins"),
+        friendship=dict(max_this_milestone=255),
+        game_corner_available=story.reachable(milestone, "MauvilleCity_GameCorner", closure=closure),
+        starter_lines=starter_lines(b, r),
+        iv_service_available=story.reachable(milestone, "FallarborTown_MoveRelearnersHouse", closure=closure),
+        hot_spring_available=story.reachable(milestone, "LavaridgeTown", closure=closure),
+    )
 
 
 def write_outputs(result: dict) -> list[str]:

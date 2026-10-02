@@ -5158,9 +5158,9 @@ void ReturnInGameTradeHeldItem(void)
         gSpecialVar_Result = 4;
         return;
     }
-    if (AddBagItem(item, 1))
+    if (AddBagItemWithoutDiscovery(item, 1))
         gSpecialVar_Result = 2;
-    else if (AddPCItem(item, 1))
+    else if (AddPCItemWithoutDiscovery(item, 1))
         gSpecialVar_Result = 3;
     else
     {

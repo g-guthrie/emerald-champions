@@ -1314,16 +1314,15 @@ u32 GetBattlerRawSpeedOrder(enum BattlerId battler)
 }
 
 // battlerStealer steals the item of itemBattler
-bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, enum Item itemOverride)
+bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler, enum Item itemOverride, bool32 isTheft)
 {
     enum Item item = itemOverride != ITEM_NONE ? itemOverride : gBattleMons[itemBattler].item;
-    bool32 sendToBag = GetConfig(B_STEAL_WILD_ITEMS) >= GEN_9
+    bool32 sendToBag = isTheft && GetConfig(B_STEAL_WILD_ITEMS) >= GEN_9
         && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE))
-        && GetMoveEffect(gCurrentMove) == EFFECT_STEAL_ITEM
-        && battlerStealer == gBattlerAttacker;
+        && IsOnPlayerSide(battlerStealer);
 
     // Do not remove the item or announce success unless the Bag accepted it.
-    if (sendToBag && !AddBagItem(item, 1))
+    if (sendToBag && !AddBagItemWithoutDiscovery(item, 1))
         return FALSE;
     gLastUsedItem = item;
     if (itemOverride == ITEM_NONE)
@@ -1332,13 +1331,24 @@ bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId itemBattler
         gBattleMons[itemBattler].item = ITEM_NONE;
     }
     if (sendToBag)
-        RecordHeldItemSentToBag(itemBattler, item);
+    {
+        // An off-field Pickpocket source supplies its actual party origin below.
+        if (itemOverride == ITEM_NONE)
+        {
+            RecordHeldItemSentToBag(GetBattlerPartyState(itemBattler)->heldItemOrigin, item);
+            GetBattlerPartyState(itemBattler)->heldItemOrigin = 0;
+        }
+    }
     else
     {
         RecordItemEffectBattle(battlerStealer, GetItemHoldEffect(gLastUsedItem));
         gBattleMons[battlerStealer].item = gLastUsedItem;
         if (itemOverride == ITEM_NONE)
+        {
             TransferHeldItemOrigin(itemBattler, battlerStealer);
+            if (isTheft)
+                RecordHeldItemTheft(battlerStealer, item);
+        }
         else
             GetBattlerPartyState(battlerStealer)->heldItemOrigin = 0; // Delayed Pickpocket supplies the original slot below.
 

@@ -200,7 +200,12 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
                     continue;
                 hasTable = TRUE;
                 for (u32 slot = 0; slot < slots; slot++)
-                    hasSlot |= info->wildPokemon[slot].species == gate->species;
+                {
+                    if (info->wildPokemon[slot].species != gate->species)
+                        continue;
+                    hasSlot = TRUE;
+                    EXPECT_EQ(GetWildSlotOdds(info, gate->anomalyHabitat, slot), 5);
+                }
             }
         }
         if (!hasTable || !hasSlot)
@@ -442,6 +447,41 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     ResetAnomalyState();
 }
 
+TEST("Weather anomalies: active visitor roll accepts exactly 25 of 100 draws")
+{
+    ResetAnomalyState();
+    struct WarpData savedLocation = gSaveBlock1Ptr->location;
+    SetBadges(5);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    SetLocation(MAP_ROUTE110);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
+    // Replay one real seed for each possible encounter roll. Random() is
+    // untagged, so SET_RNG cannot rig this path.
+    bool8 seen[100] = {0};
+    u32 draws = 0, hits = 0;
+    for (u32 seed = 0; seed < 10000 && draws < 100; seed++)
+    {
+        SeedRng(seed);
+        u32 roll = Random() % 100;
+        if (seen[roll])
+            continue;
+        seen[roll] = TRUE;
+        draws++;
+        SeedRng(seed);
+        hits += TryRollWeatherAnomalyEncounter(WILD_AREA_LAND) == SPECIES_TAPU_KOKO;
+    }
+    EXPECT_EQ(draws, 100);
+    EXPECT_EQ(hits, 25);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    for (u32 roll = 0; roll < 100; roll++)
+    {
+        SeedRng(roll);
+        EXPECT_EQ(TryRollWeatherAnomalyEncounter(WILD_AREA_LAND), SPECIES_NONE);
+    }
+    gSaveBlock1Ptr->location = savedLocation;
+    ResetAnomalyState();
+}
+
 TEST("Weather anomalies: the visitor takes a quarter of encounters on its own map only")
 {
     ResetAnomalyState();
@@ -606,10 +646,20 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
     for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         mons[i] = (struct WildPokemon){5, 5, SPECIES_ZIGZAGOON};
     mons[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1].species = SPECIES_TAPU_KOKO;
-    const struct WildPokemonInfo land = {.encounterRate = 20, .wildPokemon = mons};
-    u32 koko = 0;
-    for (u32 seed = 0; seed < 512; seed++)
+    // Keep ordinary slots at least 4%, with exactly 5% for the resident.
+    static const u8 bounds[] = {18, 36, 46, 56, 65, 73, 78, 83, 87, 91, 95, 100};
+    const struct WildPokemonInfo land = {.encounterRate = 20, .wildPokemon = mons, .encounterBounds = bounds};
+    EXPECT_EQ(GetWildSlotOdds(&land, WILD_AREA_LAND, NUM_LAND_MONS_ENCOUNTER_SLOTS - 1), 5);
+    bool8 seen[100] = {0};
+    u32 draws = 0, koko = 0;
+    for (u32 seed = 0; seed < 10000 && draws < 100; seed++)
     {
+        SeedRng(seed);
+        u32 roll = Random() % 100;
+        if (seen[roll])
+            continue;
+        seen[roll] = TRUE;
+        draws++;
         SeedRng(seed);
         EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
         if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) == SPECIES_TAPU_KOKO)
@@ -618,9 +668,17 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), GetCurrentLevelCap());
         }
     }
-    // A default 4% slot, met at its table odds like any resident legend.
-    EXPECT_GT(koko, 8);
-    EXPECT_LT(koko, 40);
+    // All 100 draws traverse the encounter engine: exactly five meet the resident.
+    EXPECT_EQ(draws, 100);
+    EXPECT_EQ(koko, 5);
+    // Capturing the resident retires the same slot permanently.
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    for (u32 seed = 0; seed < 512; seed++)
+    {
+        SeedRng(seed);
+        EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    }
     gSaveBlock1Ptr->location = savedLocation;
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
     ResetAnomalyState();

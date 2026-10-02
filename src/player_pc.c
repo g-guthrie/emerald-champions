@@ -853,7 +853,7 @@ static void Mailbox_HandleConfirmMoveToBag(u8 taskId)
 static void Mailbox_DoMailMoveToBag(u8 taskId)
 {
     struct Mail *mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
-    if (!AddBagItem(mail->itemId, 1))
+    if (!AddBagItemWithoutDiscovery(mail->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);
     }
@@ -1385,7 +1385,7 @@ static void ItemStorage_DoItemWithdraw(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
-    if (AddBagItem(gSaveBlock1Ptr->pcItems[pos].itemId, tQuantity) == TRUE)
+    if (AddBagItemWithoutDiscovery(gSaveBlock1Ptr->pcItems[pos].itemId, tQuantity) == TRUE)
     {
         // Item withdrawn
         u8 *end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, tQuantity);

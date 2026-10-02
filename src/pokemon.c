@@ -3151,9 +3151,10 @@ static u8 GiveMonToPartyOrPC(struct Pokemon *mon, u8 slot)
     else
     {
         gParties[B_TRAINER_PLAYER][slot] = *mon;
-        EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
         result = MON_GIVEN_TO_PARTY;
     }
+    if (result == MON_GIVEN_TO_PARTY || result == MON_GIVEN_TO_PC)
+        EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
     CalculatePlayerPartyCount();
     return result;
 }
@@ -3172,7 +3173,7 @@ bool32 ReturnBoxMonHeldItemToBag(struct BoxPokemon *mon)
 
     // Mail needs its message preserved. If the Bag is full, keep the item
     // with its holder instead of losing it or preventing a capture.
-    if (item == ITEM_NONE || ItemIsMail(item) || !AddBagItem(item, 1))
+    if (item == ITEM_NONE || ItemIsMail(item) || !AddBagItemWithoutDiscovery(item, 1))
         return FALSE;
 
     item = ITEM_NONE;
@@ -3198,7 +3199,6 @@ u8 CopyMonToPC(struct Pokemon *mon)
             {
                 MonRestorePP(mon);
                 memcpy(checkingMon, &mon->box, sizeof(mon->box));
-                EmeraldChampions_UnlockBattleItem(GetMonData(mon, MON_DATA_HELD_ITEM));
                 ReturnBoxMonHeldItemToBag(checkingMon);
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;

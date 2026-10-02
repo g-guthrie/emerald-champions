@@ -462,7 +462,7 @@ bool32 CheckBagHasSpaceForItemBundle(const struct ItemSlot *items, u32 count)
     return TRUE;
 }
 
-bool32 AddBagItem(enum Item itemId, u16 count)
+static bool32 AddBagItemInternal(enum Item itemId, u16 count, bool32 discover)
 {
     itemId = SanitizeBagItemId(itemId);
     if (itemId == ITEM_NONE || count == 0)
@@ -474,8 +474,19 @@ bool32 AddBagItem(enum Item itemId, u16 count)
 
     if (!BagPocket_AddItem(&gBagPockets[GetItemPocket(itemId)], itemId, count))
         return FALSE;
-    EmeraldChampions_UnlockBattleItem(itemId);
+    if (discover)
+        EmeraldChampions_UnlockBattleItem(itemId);
     return TRUE;
+}
+
+bool32 AddBagItem(enum Item itemId, u16 count)
+{
+    return AddBagItemInternal(itemId, count, TRUE);
+}
+
+bool32 AddBagItemWithoutDiscovery(enum Item itemId, u16 count)
+{
+    return AddBagItemInternal(itemId, count, FALSE);
 }
 
 static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, enum Item itemId, u16 count)
@@ -559,14 +570,25 @@ bool32 CheckPCHasItem(enum Item itemId, u16 count)
     return BagPocket_CheckHasItem(&dummyPocket, itemId, count);
 }
 
-bool32 AddPCItem(enum Item itemId, u16 count)
+static bool32 AddPCItemInternal(enum Item itemId, u16 count, bool32 discover)
 {
     struct BagPocket dummyPocket = DUMMY_PC_BAG_POCKET;
     if (itemId == ITEM_NONE || itemId >= ITEMS_COUNT || count == 0
      || !BagPocket_AddItem(&dummyPocket, itemId, count))
         return FALSE;
-    EmeraldChampions_UnlockBattleItem(itemId);
+    if (discover)
+        EmeraldChampions_UnlockBattleItem(itemId);
     return TRUE;
+}
+
+bool32 AddPCItem(enum Item itemId, u16 count)
+{
+    return AddPCItemInternal(itemId, count, TRUE);
+}
+
+bool32 AddPCItemWithoutDiscovery(enum Item itemId, u16 count)
+{
+    return AddPCItemInternal(itemId, count, FALSE);
 }
 
 static void NONNULL BagPocket_CompactItems(struct BagPocket *pocket)

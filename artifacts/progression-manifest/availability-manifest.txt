@@ -1,0 +1,608 @@
+INCLEMENT EMERALD 2 — AVAILABILITY BEFORE EACH BATTLE
+PARTIAL — through Tate & Liza and the level-70 boundary. Remaining campaign, League and finale are unfinished.
+Read downward. Each entry adds Pokémon and items to the running collection.
+For a battle, use everything listed up to its FIRST entry, inclusive; use nothing from later entries.
+Treecko + Mudkip reference. Rival starter/gender alternatives share their battle number.
+Wild held items, theft and Pickup rewards are excluded.
+Evolutions/forms still require their level, item, friendship, time or other source conditions.
+Items are types available by gift, pickup or purchase; quantities and prices still apply.
+
+ENTRY 1 | LEVEL CAP 14
+NEW ACCESS: LittlerootTown, LittlerootTown_BrendansHouse_1F, LittlerootTown_BrendansHouse_2F, LittlerootTown_MaysHouse_1F, LittlerootTown_MaysHouse_2F, LittlerootTown_ProfessorBirchsLab, OldaleTown, OldaleTown_House1, OldaleTown_House2, OldaleTown_Mart, OldaleTown_PokemonCenter_1F, Route101, Route103
+ADD POKEMON: Beautifly, Blitzle, Cascoon, Dustox, Eevee, Espeon, Grubbin, Kricketot, Kricketune, Lillipup, Mudkip, Pachirisu, Pawmi, Poochyena, Scatterbug Icy Snow, Sewaddle, Shellos West, Shinx, Silcoon, Snubbull, Spewpa Icy Snow, Sylveon, Toxel, Treecko, Umbreon, Vivillon Icy Snow, Wingull, Wurmple, Zigzagoon, Zorua
+ADD ITEMS: Antidote, Awakening, Cell Battery, Choice Band, Choice Scarf, Choice Specs, Eviolite, Flight Beacon, Focus Sash, Leftovers, Leveler, Mental Herb, Paralyze Heal, Poke Ball, Poke Vial, Potion, Red Card, Regenerator, Repel Spray
+POSSIBLE BATTLE 1: May Route 103 Treecko — Route103
+AVAILABLE SO FAR: 30 Pokémon/forms; 19 item/decorations types.
+
+ENTRY 2 | LEVEL CAP 14
+NEW ACCESS: Route102
+ADD POKEMON: Corphish, Goldeen, Magikarp, Remoraid
+ADD ITEMS: Cherish Ball, Old Rod
+POSSIBLE BATTLE 2: Calvin 1 — Route102
+AVAILABLE SO FAR: 34 Pokémon/forms; 21 item/decorations types.
+
+ENTRY 3 | LEVEL CAP 14
+NEW ACCESS: PetalburgCity, PetalburgCity_Gym, PetalburgCity_House1, PetalburgCity_House2, PetalburgCity_Mart, PetalburgCity_PokemonCenter_1F, PetalburgCity_WallysHouse, PetalburgWoods, Route104, Route104_MrBrineysHouse
+ADD POKEMON: Azurill, Bidoof, Budew, Bunnelby, Flabebe White, Fletchling, Gothita, Happiny, Leafeon, Lechonk, Ledyba, Litleo, Lombre, Lotad, Marill, Meowth, Nuzleaf, Nymble, Ralts, Roselia, Sandygast, Seedot, Sentret, Shaymin Land, Skrelp, Smoliv, Surskit, Taillow, Tympole
+ADD ITEMS: Bottle Cap, Friend Ball, Great Ball, Nugget, Oran Berry, Pecha Berry
+POSSIBLE BATTLE 3: Grunt Petalburg Woods — PetalburgWoods
+POSSIBLE BATTLE 4: Lyle — PetalburgWoods
+POSSIBLE BATTLE 6: Rick — Route102
+POSSIBLE BATTLE 7: Tiana — Route102
+POSSIBLE BATTLE 5: Allen — Route102
+POSSIBLE BATTLE 8: Billy — Route104
+POSSIBLE BATTLE 9: Cindy 1 — Route104
+POSSIBLE BATTLE 10: Darian — Route104
+AVAILABLE SO FAR: 63 Pokémon/forms; 27 item/decorations types.
+
+ENTRY 4 | LEVEL CAP 14
+NEW ACCESS: Route104_PrettyPetalFlowerShop
+ADD POKEMON: Blipbug, Buneary, Butterfree, Caterpie, Dottler, Foongus, Lopunny, Metapod, Paras, Pichu, Pikachu, Shroomish, Slakoth
+ADD ITEMS: Decor Big Plant, Decor Colorful Plant, Decor Gorgeous Plant, Decor Pretty Flowers, Decor Red Plant, Decor Tropical Plant, Aspear Berry, Berry Pouch, Cheri Berry, Chesto Berry, Dusk Ball, Ether, Grepa Berry, Hondew Berry, Kelpsy Berry, Leppa Berry, Persim Berry, Pomeg Berry, Qualot Berry, Rawst Berry, Soothe Bell, Super Potion, Tamato Berry, Wailmer Pail
+POSSIBLE BATTLE 11: James 1 — PetalburgWoods
+POSSIBLE BATTLE 13: Winston 1 — Route104
+POSSIBLE BATTLE 12: Gina And Mia 1 — Route104
+AVAILABLE SO FAR: 76 Pokémon/forms; 51 item/decorations types.
+
+ENTRY 14 | LEVEL CAP 14
+NEW ACCESS: Route115, Route116, RustboroCity, RustboroCity_CuttersHouse, RustboroCity_DevonCorp_1F, RustboroCity_Flat1_1F, RustboroCity_Flat1_2F, RustboroCity_Flat2_1F, RustboroCity_Flat2_2F, RustboroCity_Flat2_3F, RustboroCity_Gym, RustboroCity_House1, RustboroCity_House2, RustboroCity_House3, RustboroCity_Mart, RustboroCity_PokemonCenter_1F, RustboroCity_PokemonSchool, Seaspray_Cave, Seaspray_Cave_B1F
+ADD POKEMON: Bergmite, Dreepy, Frigibax, Froslass, Gimmighoul Roaming, Glaceon, Houndour, Joltik, Krabby, Lucario, Mareep, Naganadel, Nickit, Nincada, Poipole, Psyduck, Riolu, Rookidee, Seel, Skiddo, Skitty, Smoochum, Sneasel, Snorunt, Spheal, Staravia, Starly, Stunfisk, Stunfisk Galar, Swinub, Swoobat, Tynamo, Vanillite, Wailmer, Wishiwashi Solo, Woobat, Wooper, Zubat
+ADD ITEMS: Abomasite, Absolite Z, Dawn Stone, Float Stone, Golurkite, Grass Gem, Ice Stone, Icicle Plate, Kings Rock, Lure Ball, Nest Ball, Premier Ball, Quick Claw, Repeat Ball, Repel, Revive, Steel Gem, Timer Ball, Wise Glasses
+POSSIBLE BATTLE 16: Joey — Route116
+POSSIBLE BATTLE 17: Jose — Route116
+POSSIBLE BATTLE 14: Clark — Route116
+POSSIBLE BATTLE 15: Devan — Route116
+POSSIBLE BATTLE 20: Roxanne 1 — RustboroCity_Gym
+POSSIBLE BATTLE 18: Josh — RustboroCity_Gym
+POSSIBLE BATTLE 21: Tommy — RustboroCity_Gym
+POSSIBLE BATTLE 19: Marc — RustboroCity_Gym
+AVAILABLE SO FAR: 114 Pokémon/forms; 70 item/decorations types.
+
+ENTRY 18 | LEVEL CAP 14
+NEW ACCESS: RusturfTunnel
+ADD POKEMON: Chimecho, Chingling, Drilbur, Dudunsparce Three Segment, Dudunsparce Two Segment, Dunsparce, Larvitar, Machop, Noibat, Roggenrola, Teddiursa, Whismur
+ADD ITEMS: Chimechite
+AVAILABLE SO FAR: 126 Pokémon/forms; 71 item/decorations types.
+
+ENTRY 20 | LEVEL CAP 20
+NEW ACCESS: PetalburgWoods_2, PetalburgWoods_3
+ADD POKEMON: Aipom, Ambipom, Applin, Audino, Azumarill, Beedrill, Bellsprout, Bibarel, Bounsweet, Burmy Plant, Charjabug, Cherubi, Corvisquire, Croagunk, Cryogonal, Cubchoo, Delibird, Dewpider, Diggersby, Emolga, Flaaffy, Fletchinder, Floette White, Furret, Gallade, Goomy, Grovyle, Gumshoos, Gyarados, Herdier, Impidimp, Kakuna, Kirlia, Leavanny, Ledian, Liepard, Linoone, Loudred, Luxio, Marshtomp, Mightyena, Misdreavus, Morelull, Mothim Plant, Murkrow, Ninjask, Oddish, Oinkologne F, Oinkologne M, Pancham, Panpour, Pansage, Pansear, Patrat, Pawmo, Pawmot, Phantump, Pidgeotto, Pidgey, Pikipek, Pineco, Poliwag, Purrloin, Quagsire, Shedinja, Skwovet, Slowking, Slowpoke, Snover, Steenee, Swadloon, Thievul, Trumbeak, Tsareena, Venipede, Vigoroth, Watchog, Weedle, Wormadam Plant, Yanma, Yanmega, Yungoos
+ADD ITEMS: Absorb Bulb, Audinite, Big Root, Delphoxite, Eject Button, Heal Ball, Honey, Insect Plate, Miracle Seed, Pinap Berry, Tiny Mushroom
+POSSIBLE BATTLE 22: Jerry 1 — Route116
+POSSIBLE BATTLE 23: Sarah — Route116
+POSSIBLE BATTLE 24: Grunt Rusturf Tunnel — RusturfTunnel
+AVAILABLE SO FAR: 208 Pokémon/forms; 82 item/decorations types.
+
+ENTRY 23 | LEVEL CAP 20
+POSSIBLE BATTLE 23: Dawson — Route116
+AVAILABLE SO FAR: 208 Pokémon/forms; 82 item/decorations types.
+
+ENTRY 24 | LEVEL CAP 20
+NEW ACCESS: Route116_TunnelersRestHouse, RustboroCity_DevonCorp_2F, RustboroCity_DevonCorp_3F
+ADD POKEMON: Abra, Aron, Arrokuda, Axew, Beldum, Blissey, Bronzor, Buizel, Carbink, Carkol, Chansey, Chatot, Clauncher, Combee, Crabominable, Crabrawler, Cubone, Cutiefly, Delcatty, Doduo, Drowzee, Duraludon, Ekans, Electrike, Exeggcute, Exeggutor, Exeggutor Alola, Finneon, Flabebe Orange, Flabebe Red, Flabebe Yellow, Flareon, Floette Orange, Floette Red, Floette Yellow, Frillish, Gastly, Geodude, Glameow, Glimmet, Gulpin, Hoothoot, Horsea, Inkay, Jolteon, Kadabra, Kubfu, Litwick, Ludicolo, Luvdisc, Magnemite, Makuhita, Mantine, Mantyke, Mawile, Metang, Milcery, Mime Jr, Minun, Mr Mime, Nacli, Noctowl, Onix, Oricorio Baile, Oricorio Pom Pom, Pidove, Plusle, Raichu, Raticate, Rattata, Rolycoly, Sableye, Shiftry, Shroodle, Simipour, Simisage, Simisear, Sinistea Phony, Slowpoke Galar, Solosis, Spritzee, Stunky, Swirlix, Timburr, Tinkatink, Trubbish, Vaporeon, Varoom, Vikavolt, Yamper
+ADD ITEMS: Decor Azurill Doll, Decor Marill Doll, Decor Skitty Doll, Alakazite, Banettite, Big Pearl, Butterfrenite, Devon Goods, Dive Ball, Dread Plate, Dream Ball, Escape Rope, Everstone, Expert Belt, Fairy Gem, Fire Stone, Floettite, Fluffy Tail, Full Incense, Gold Bottle Cap, Lax Incense, Leaf Stone, Letter, Love Ball, Lucky Punch, Luck Incense, Meganiumite, Moon Stone, Net Ball, Odd Incense, Oval Stone, Prism Scale, Pure Incense, Red Nectar, Ring Target, Rock Incense, Rose Incense, Scope Lens, Sea Incense, Silk Scarf, Soft Sand, Steelixite, Sun Stone, Thunder Stone, Water Stone, Wave Incense, Yellow Nectar, Zoom Lens
+POSSIBLE BATTLE 25: May Rustboro Treecko — Route104
+AVAILABLE SO FAR: 298 Pokémon/forms; 130 item/decorations types.
+
+ENTRY 25 | LEVEL CAP 20
+POSSIBLE BATTLE 25: May Rustboro Torchic — Route104
+AVAILABLE SO FAR: 298 Pokémon/forms; 130 item/decorations types.
+
+ENTRY 26 | LEVEL CAP 20
+NEW ACCESS: DewfordManor_1F, DewfordMeadow, DewfordTown, DewfordTown_Gym, DewfordTown_Hall, DewfordTown_House1, DewfordTown_House2, DewfordTown_PokemonCenter_1F, GraniteCave_1F, GraniteCave_B1F, GraniteCave_B2F, GraniteCave_StevensRoom, Route106, Route107, Route109, Route109_SeashoreHouse, Route110, Route110_SeasideCyclingRoadNorthEntrance, SlateportCity, SlateportCity_BattleTentLobby, SlateportCity_Harbor, SlateportCity_House, SlateportCity_Mart, SlateportCity_NameRatersHouse, SlateportCity_PokemonCenter_1F, SlateportCity_PokemonFanClub, SlateportCity_SternsShipyard_1F, SlateportCity_SternsShipyard_2F
+ADD ITEMS: Flying Gem, Ground Gem
+POSSIBLE BATTLE 26: Brawly 1 — DewfordTown_Gym
+POSSIBLE BATTLE 31: Takao — DewfordTown_Gym
+POSSIBLE BATTLE 28: Jocelyn — DewfordTown_Gym
+POSSIBLE BATTLE 29: Laura — DewfordTown_Gym
+POSSIBLE BATTLE 27: Cristian — DewfordTown_Gym
+POSSIBLE BATTLE 30: Lilith — DewfordTown_Gym
+POSSIBLE BATTLE 32: Elliot 1 — Route106
+POSSIBLE BATTLE 33: Ned — Route106
+POSSIBLE BATTLE 35: Edmond — Route109
+POSSIBLE BATTLE 37: Lola 1 — Route109
+POSSIBLE BATTLE 34: Chandler — Route109
+POSSIBLE BATTLE 36: Hailey — Route109
+POSSIBLE BATTLE 38: Dwayne — Route109_SeashoreHouse
+POSSIBLE BATTLE 39: Johanna — Route109_SeashoreHouse
+POSSIBLE BATTLE 40: Simon — Route109_SeashoreHouse
+POSSIBLE BATTLE 41: Slateport Battle Tent — fight 1 of 3 — SlateportCity_BattleTentLobby
+AVAILABLE SO FAR: 298 Pokémon/forms; 132 item/decorations types.
+
+ENTRY 27 | LEVEL CAP 20
+ADD ITEMS: Binding Band
+AVAILABLE SO FAR: 298 Pokémon/forms; 133 item/decorations types.
+
+ENTRY 28 | LEVEL CAP 30
+NEW ACCESS: SlateportCity_OceanicMuseum_1F, SlateportCity_OceanicMuseum_2F
+ADD POKEMON: Alcremie Strawberry Vanilla Cream, Ampharos, Araquanid, Arbok, Barraskewda, Bellossom, Boldore, Boltund, Breloom, Cherrim Overcast, Cobalion, Crawdaunt, Crobat, Dolliv, Floatzel, Gardevoir, Gastrodon West, Gloom, Golbat, Grafaiai, Granbull, Graveler, Greedent, Gurdurr, Hariyama, Haunter, Houndoom, Hypno, Jynx, Kingler, Lokix, Luxray, Machoke, Magneton, Magnezone, Malamar, Manectric, Marowak, Masquerain, Meloetta Aria, Naclstack, Octillery, Orbeetle, Palpitoad, Parasect, Pelipper, Persian, Politoed, Poliwhirl, Poliwrath, Pupitar, Ribombee, Scolipede, Shiinotic, Swalot, Swellow, Tinkatuff, Toucannon, Toxtricity Amped, Toxtricity Low Key, Tranquill, Ursaring, Vespiquen, Victreebel, Vileplume, Weepinbell, Whirlipede, Zebstrika, Zoroark
+ADD ITEMS: Emboarite, Hyper Potion, Loaded Dice, Snowball, Super Repel, White Herb
+POSSIBLE BATTLE 42: Grunt Museum 1 — SlateportCity_OceanicMuseum_2F
+AVAILABLE SO FAR: 367 Pokémon/forms; 139 item/decorations types.
+
+ENTRY 37 | LEVEL CAP 30
+ADD ITEMS: Soda Pop
+AVAILABLE SO FAR: 367 Pokémon/forms; 140 item/decorations types.
+
+ENTRY 38 | LEVEL CAP 30
+POSSIBLE BATTLE 43: Slateport Battle Tent — fight 2 of 3 — SlateportCity_BattleTentLobby
+AVAILABLE SO FAR: 367 Pokémon/forms; 140 item/decorations types.
+
+ENTRY 39 | LEVEL CAP 30
+POSSIBLE BATTLE 44: Archie Slateport — SlateportCity_OceanicMuseum_2F
+AVAILABLE SO FAR: 367 Pokémon/forms; 140 item/decorations types.
+
+ENTRY 40 | LEVEL CAP 30
+POSSIBLE BATTLE 45: Slateport Battle Tent — fight 3 of 3 — SlateportCity_BattleTentLobby
+AVAILABLE SO FAR: 367 Pokémon/forms; 140 item/decorations types.
+
+ENTRY 41 | LEVEL CAP 30
+ADD ITEMS: Aggronite
+POSSIBLE BATTLE 46: Isabel 1 — Route110
+AVAILABLE SO FAR: 367 Pokémon/forms; 141 item/decorations types.
+
+ENTRY 42 | LEVEL CAP 30
+ADD POKEMON: Alakazam, Conkeldurr, Gengar, Gigalith, Golem, Machamp, Steelix, Trevenant, Weavile
+ADD ITEMS: Deep Sea Scale, Deep Sea Tooth, Dragon Scale, Dubious Disc, Electirizer, Linking Cord, Magmarizer, Metal Coat, Protector, Razor Claw, Razor Fang, Reaper Cloth, Upgrade
+AVAILABLE SO FAR: 376 Pokémon/forms; 154 item/decorations types.
+
+ENTRY 43 | LEVEL CAP 30
+POSSIBLE BATTLE 46: Kaleb — Route110
+AVAILABLE SO FAR: 376 Pokémon/forms; 154 item/decorations types.
+
+ENTRY 44 | LEVEL CAP 30
+NEW ACCESS: Route110_TrickHouseEntrance, Route110_TrickHousePuzzle1
+ADD POKEMON: Bellibolt, Chinchou, Lanturn, Tadbulb
+ADD ITEMS: Pp Up, Quick Ball, Starminite
+POSSIBLE BATTLE 48: Daisy — Route103
+POSSIBLE BATTLE 47: Amy And Liv 1 — Route103
+POSSIBLE BATTLE 49: Miguel 1 — Route103
+POSSIBLE BATTLE 51: Timmy — Route110
+POSSIBLE BATTLE 50: May Route 110 Treecko — Route110
+POSSIBLE BATTLE 52: Sally — Route110_TrickHousePuzzle1
+AVAILABLE SO FAR: 380 Pokémon/forms; 157 item/decorations types.
+
+ENTRY 45 | LEVEL CAP 30
+POSSIBLE BATTLE 50: May Route 110 Torchic — Route110
+AVAILABLE SO FAR: 380 Pokémon/forms; 157 item/decorations types.
+
+ENTRY 50 | LEVEL CAP 30
+NEW ACCESS: MauvilleCity, MauvilleCity_BikeShop, MauvilleCity_GameCorner, MauvilleCity_House1, MauvilleCity_House2, MauvilleCity_Mart, MauvilleCity_PokemonCenter_1F, Route110_SeasideCyclingRoadSouthEntrance, Route111, Route117, Route117_PokemonDayCare, Route118, VerdanturfMeadow, VerdanturfTown, VerdanturfTown_BattleTentLobby, VerdanturfTown_FriendshipRatersHouse, VerdanturfTown_House, VerdanturfTown_Mart, VerdanturfTown_PokemonCenter_1F, VerdanturfTown_WandasHouse
+ADD POKEMON: Aromatisse, Barboach, Bewear, Clodsire, Cottonee, Espurr, Flabebe Blue, Floette Blue, Floette Eternal, Hatenna, Indeedee M, Iron Leaves, Meowstic F, Meowstic M, Munna, Musharna, Oricorio Pau, Oricorio Sensu, Ponyta Galar, Scatterbug Pokeball, Slurpuff, Spewpa Pokeball, Stufful, Togepi, Togetic, Vivillon Pokeball, Whimsicott, Whiscash, Wooper Paldea
+ADD ITEMS: Decor Ball Cushion, Decor Duskull Doll, Decor Tire, Decor Treecko Doll, Acro Bike, Black Glasses, Bright Powder, Elixir, Itemfinder, Leek, Light Ball, Luxury Ball, Manectite, Mawilite, Metal Powder, Muscle Band, Nanab Berry, Pink Nectar, Purple Nectar, Sachet, Sitrus Berry, Skarmorite, Thick Club, Ultra Ball, Wepear Berry, Whipped Dream
+POSSIBLE BATTLE 53: Wally Mauville — MauvilleCity
+POSSIBLE BATTLE 55: Jaclyn — Route110
+POSSIBLE BATTLE 56: Jacob — Route110
+POSSIBLE BATTLE 54: Anthony — Route110
+POSSIBLE BATTLE 57: Jasmine — Route110
+POSSIBLE BATTLE 58: Victor — Route111
+POSSIBLE BATTLE 59: Bianca — Route111
+POSSIBLE BATTLE 60: Tyron — Route111
+POSSIBLE BATTLE 64: Isaac 1 — Route117
+POSSIBLE BATTLE 65: Lydia 1 — Route117
+POSSIBLE BATTLE 66: Maria 1 — Route117
+POSSIBLE BATTLE 63: Derek — Route117
+POSSIBLE BATTLE 62: Anna And Meg 1 — Route117
+POSSIBLE BATTLE 61: Melina — Route117
+POSSIBLE BATTLE 68: Rose 1 — Route118
+POSSIBLE BATTLE 67: Deandre — Route118
+POSSIBLE BATTLE 69: Mike 2 — RusturfTunnel
+POSSIBLE BATTLE 70: Verdanturf Battle Tent — fight 1 of 3 — VerdanturfTown_BattleTentLobby
+AVAILABLE SO FAR: 409 Pokémon/forms; 183 item/decorations types.
+
+ENTRY 51 | LEVEL CAP 30
+POSSIBLE BATTLE 71: Eddie — Route110_TrickHousePuzzle1
+AVAILABLE SO FAR: 409 Pokémon/forms; 183 item/decorations types.
+
+ENTRY 52 | LEVEL CAP 30
+NEW ACCESS: MauvilleCity_Gym
+ADD ITEMS: Rock Gem
+POSSIBLE BATTLE 75: Wattson 1 — MauvilleCity_Gym
+POSSIBLE BATTLE 74: Kirk — MauvilleCity_Gym
+POSSIBLE BATTLE 72: Shawn — MauvilleCity_Gym
+POSSIBLE BATTLE 73: Ben — MauvilleCity_Gym
+AVAILABLE SO FAR: 409 Pokémon/forms; 184 item/decorations types.
+
+ENTRY 58 | LEVEL CAP 30
+NEW ACCESS: Route111_WinstrateFamilysHouse
+ADD ITEMS: Life Orb
+AVAILABLE SO FAR: 409 Pokémon/forms; 185 item/decorations types.
+
+ENTRY 67 | LEVEL CAP 30
+ADD POKEMON: Accelgor, Deerling Spring, Dubwool, Eldegoss, Escavalier, Farfetchd, Farfetchd Galar, Gossifleur, Illumise, Karrablast, Lilligant, Lilligant Hisui, Minccino, Petilil, Shelmet, Sirfetchd, Volbeat, Wooloo
+AVAILABLE SO FAR: 427 Pokémon/forms; 185 item/decorations types.
+
+ENTRY 70 | LEVEL CAP 30
+ADD POKEMON: Carvanha, Sharpedo
+AVAILABLE SO FAR: 429 Pokémon/forms; 185 item/decorations types.
+
+ENTRY 71 | LEVEL CAP 30
+ADD ITEMS: Sablenite
+AVAILABLE SO FAR: 429 Pokémon/forms; 186 item/decorations types.
+
+ENTRY 72 | LEVEL CAP 30
+POSSIBLE BATTLE 76: Verdanturf Battle Tent — fight 2 of 3 — VerdanturfTown_BattleTentLobby
+AVAILABLE SO FAR: 429 Pokémon/forms; 186 item/decorations types.
+
+ENTRY 73 | LEVEL CAP 40
+NEW ACCESS: FallarborTown, FallarborTown_BattleTentLobby, FallarborTown_CozmosHouse, FallarborTown_Mart, FallarborTown_MoveRelearnersHouse, FallarborTown_PokemonCenter_1F, FieryPath, Route110_TrickHouseCorridor, Route110_TrickHouseEnd, Route110_TrickHousePuzzle2, Route111_OldLadysRestStop, Route112, Route113, Route113_GlassWorkshop, Route114, Route114_FossilManiacsHouse, Route114_FossilManiacsTunnel, Route114_LanettesHouse
+ADD POKEMON: Abomasnow, Altaria, Amoonguss, Arboliva, Arctibax, Avalugg, Barbaracle, Basculin Red Striped, Beartic, Binacle, Bouffalant, Bronzong, Camerupt, Centiskorch, Charcadet, Chewtle, Cinccino, Clamperl, Clawitzer, Cloyster, Coalossal, Corviknight, Crustle, Dewgong, Diglett, Dodrio, Donphan, Drapion, Drednaw, Ducklett, Dugtrio, Duosion, Durant, Dwebble, Eelektrik, Eelektross, Entei, Excadrill, Exploud, Falinks, Florges Blue, Florges Orange, Florges Red, Florges White, Florges Yellow, Forretress, Fraxure, Galvantula, Garbodor, Garganacl, Glimmora, Gogoat, Golduck, Golisopod, Gorebyss, Gothorita, Grimer, Grumpig, Hattrem, Heatmor, Hitmonchan, Hitmonlee, Hitmontop, Honchkrow, Huntail, Jellicent, Kingdra, Klawf, Klefki, Koffing, Lairon, Lumineon, Magby, Magcargo, Magmar, Magmortar, Mamoswine, Mienfoo, Mismagius, Morgrem, Muk, Nosepass, Numel, Pangoro, Pawniard, Phanpy, Pidgeot, Piloswine, Ponyta, Probopass, Purugly, Pyroar, Qwilfish, Raikou, Rapidash, Rapidash Galar, Relicanth, Revavroom, Roserade, Rufflet, Sawk, Sawsbuck Spring, Sceptile, Scrafty, Scraggy, Seadra, Seaking, Sealeo, Seismitoad, Seviper, Shellder, Shuckle, Sizzlipede, Skarmory, Skorupi, Skuntank, Slaking, Sliggoo, Slowbro, Slugma, Spinda, Spoink, Staraptor, Starmie, Staryu, Stoutland, Swablu, Swampert, Swanna, Talonflame, Tauros Paldea Combat, Throh, Tinkaton, Togekiss, Torkoal, Toxicroak, Tyrogue, Unfezant, Vanillish, Vullaby, Wailord, Weezing, Weezing Galar, Wimpod, Zangoose, Zapdos Galar
+ADD ITEMS: Decor A Note Mat, Decor Blue Balloon, Decor Blue Brick, Decor B Note Mat, Decor C High Note Mat, Decor C Low Note Mat, Decor D Note Mat, Decor E Note Mat, Decor F Note Mat, Decor G Note Mat, Decor Red Balloon, Decor Red Brick, Decor Yellow Balloon, Decor Yellow Brick, Bluk Berry, Chilan Berry, Drampanite, Dusk Stone, Eject Pack, Full Heal, Good Rod, Heavy Ball, Luminous Moss, Max Ether, Max Repel, Punching Glove, Raichunite X, Razz Berry, Shiny Stone, Tatsugirinite
+POSSIBLE BATTLE 79: Ted — Route110_TrickHousePuzzle2
+POSSIBLE BATTLE 78: Georgia — Route110_TrickHousePuzzle2
+POSSIBLE BATTLE 81: Travis — Route111
+POSSIBLE BATTLE 82: Wilton 1 — Route111
+POSSIBLE BATTLE 80: Brooke 1 — Route111
+POSSIBLE BATTLE 83: Brice — Route112
+POSSIBLE BATTLE 84: Bryant — Route112
+POSSIBLE BATTLE 87: Jaylen — Route113
+POSSIBLE BATTLE 86: Dillon — Route113
+POSSIBLE BATTLE 88: Lung — Route113
+POSSIBLE BATTLE 89: Tori And Tia — Route113
+POSSIBLE BATTLE 85: Sophie — Route113
+POSSIBLE BATTLE 91: Lucas 1 — Route114
+POSSIBLE BATTLE 92: Steve 1 — Route114
+POSSIBLE BATTLE 90: Charlotte — Route114
+POSSIBLE BATTLE 77: Gabby And Ty 1 — Route111
+AVAILABLE SO FAR: 575 Pokémon/forms; 216 item/decorations types.
+
+ENTRY 74 | LEVEL CAP 40
+POSSIBLE BATTLE 93: Verdanturf Battle Tent — fight 3 of 3 — VerdanturfTown_BattleTentLobby
+AVAILABLE SO FAR: 575 Pokémon/forms; 216 item/decorations types.
+
+ENTRY 89 | LEVEL CAP 40
+POSSIBLE BATTLE 88: Lawrence — Route113
+AVAILABLE SO FAR: 575 Pokémon/forms; 216 item/decorations types.
+
+ENTRY 90 | LEVEL CAP 40
+NEW ACCESS: MeteorFalls_1F_1R
+ADD POKEMON: Dragonair, Dratini, Sliggoo Hisui
+ADD ITEMS: Comet Shard
+POSSIBLE BATTLE 94: Courtney Meteor Falls, Grunt Meteor Falls — MeteorFalls_1F_1R
+POSSIBLE BATTLE 95: Lenny — Route114
+AVAILABLE SO FAR: 578 Pokémon/forms; 217 item/decorations types.
+
+ENTRY 92 | LEVEL CAP 40
+ADD ITEMS: Protective Pads
+POSSIBLE BATTLE 90: Kai — Route114
+AVAILABLE SO FAR: 578 Pokémon/forms; 218 item/decorations types.
+
+ENTRY 95 | LEVEL CAP 40
+POSSIBLE BATTLE 94: Courtney Meteor Falls, Grunt Meteor Falls — MeteorFalls_1F_1R
+AVAILABLE SO FAR: 578 Pokémon/forms; 218 item/decorations types.
+
+ENTRY 96 | LEVEL CAP 40
+NEW ACCESS: MtChimney, MtChimney_CableCarStation, Route112_CableCarStation
+ADD ITEMS: Draco Plate, Raichunite Y
+POSSIBLE BATTLE 96: Grunt Mt Chimney 1 — MtChimney
+POSSIBLE BATTLE 97: Cyndy 1 — Route115
+POSSIBLE BATTLE 98: Marlene — Route115
+AVAILABLE SO FAR: 578 Pokémon/forms; 220 item/decorations types.
+
+ENTRY 100 | LEVEL CAP 40
+POSSIBLE BATTLE 99: Tabitha Mt Chimney — MtChimney
+AVAILABLE SO FAR: 578 Pokémon/forms; 220 item/decorations types.
+
+ENTRY 103 | LEVEL CAP 40
+POSSIBLE BATTLE 100: Maxie Mt Chimney — MtChimney
+AVAILABLE SO FAR: 578 Pokémon/forms; 220 item/decorations types.
+
+ENTRY 104 | LEVEL CAP 40
+NEW ACCESS: AshenWoods, EmberPath, JaggedPass, LavaridgeTown, LavaridgeTown_Gym_1F, LavaridgeTown_Gym_B1F, LavaridgeTown_HerbShop, LavaridgeTown_House, LavaridgeTown_Mart, LavaridgeTown_PokemonCenter_1F
+ADD POKEMON: Annihilape, Arcanine, Arcanine Hisui, Blacephalon, Brute Bonnet, Buzzwole, Chandelure, Fearow, Gligar, Gliscor, Growlithe, Growlithe Hisui, Hakamo O, Heracross, Jangmo O, Larvesta, Mankey, Mudbray, Mudsdale, Pinsir, Primeape, Salandit, Salazzle, Scizor, Scyther, Slither Wing, Spearow, Tauros Paldea Blaze, Turtonator, Ursaluna Bloodmoon, Wobbuffet, Wynaut
+ADD ITEMS: Balm Mushroom, Charcoal, Chesnaughtite, Crabominite, Falinksite, Flame Orb, Flame Plate, Galladite, Houndoominite, Lava Cookie, Level Ball, Meteorite, Moomoo Milk, Pinsirite, Pp Max, Star Piece
+POSSIBLE BATTLE 101: Alannah — AshenWoods
+POSSIBLE BATTLE 103: Roman — AshenWoods
+POSSIBLE BATTLE 102: Elmer — AshenWoods
+POSSIBLE BATTLE 107: Grunt Jagged Pass — JaggedPass
+POSSIBLE BATTLE 105: Diana 1 — JaggedPass
+POSSIBLE BATTLE 106: Ethan 1 — JaggedPass
+POSSIBLE BATTLE 104: Julio — JaggedPass
+POSSIBLE BATTLE 111: Flannery 1 — LavaridgeTown_Gym_1F
+POSSIBLE BATTLE 109: Cole — LavaridgeTown_Gym_1F
+POSSIBLE BATTLE 108: Axle — LavaridgeTown_Gym_1F
+POSSIBLE BATTLE 114: Keegan — LavaridgeTown_Gym_B1F
+POSSIBLE BATTLE 110: Danielle — LavaridgeTown_Gym_1F
+POSSIBLE BATTLE 112: Jace — LavaridgeTown_Gym_B1F
+POSSIBLE BATTLE 113: Jeff — LavaridgeTown_Gym_B1F
+POSSIBLE BATTLE 115: Lucy Lavaridge — LavaridgeTown_PokemonCenter_1F
+POSSIBLE BATTLE 116: Shelby 1 — MtChimney
+POSSIBLE BATTLE 117: Shirley — MtChimney
+AVAILABLE SO FAR: 610 Pokémon/forms; 236 item/decorations types.
+
+ENTRY 113 | LEVEL CAP 45
+NEW ACCESS: MirageTower_1F, MirageTower_2F, MirageTower_3F, MirageTower_4F, MirageTower_B1F, Route110_TrickHousePuzzle3, Route111_RuinsExterior, SandstrewnRuins, SandstrewnRuins_2F, SandstrewnRuins_3F, SandstrewnRuins_B1F
+ADD POKEMON: Abomasnow Mega, Aegislash Shield, Aggron, Aggron Mega, Alakazam Mega, Audino Mega, Baltoy, Brambleghast, Bramblin, Butterfree Mega, Cacnea, Cacturne, Capsakid, Celebi, Chandelure Mega, Chimecho Mega, Chi Yu, Claydol, Cofagrigus, Crabominable Mega, Darmanitan Standard, Darumaka, Doublade, Falinks Mega, Farigiraf, Floette Mega, Flygon, Gabite, Gallade Mega, Gholdengo, Gible, Gimmighoul Chest, Girafarig, Glalie, Golett, Golurk, Golurk Mega, Gothitelle, Great Tusk, Grimmsnarl, Hatterene, Hawlucha, Heliolisk, Helioptile, Hippopotas, Hippowdon, Honedge, Hoppip, Houndoom Mega, Iron Treads, Jumpluff, Kommo O, Krokorok, Krookodile, Lampent, Lycanroc Dusk, Lycanroc Midday, Lycanroc Midnight, Manectric Mega, Maractus, Mawile Mega, Medicham, Medicham Mega, Meditite, Metagross, Natu, Orthworm, Palossand, Pinsir Mega, Rabsca, Raichu Mega X, Raichu Mega Y, Rellor, Reuniclus, Rockruff, Rockruff Own Tempo, Sableye Mega, Sandaconda, Sandile, Sandshrew, Sandslash, Sandy Shocks, Sceptile Mega, Scovillain, Shaymin Sky, Sigilyph, Silicobra, Skarmory Mega, Skiploom, Spiritomb, Stakataka, Starmie Mega, Steelix Mega, Stonjourner, Swampert Mega, Trapinch, Unown, Vibrava, Virizion, Walrein, Xatu, Yamask
+ADD ITEMS: Aerodactylite, Air Balloon, Armor Fossil, Big Nugget, Blastoisinite, Blazikenite, Blue Shard, Blunder Policy, Chandelurite, Charizardite X, Charizardite Y, Clear Amulet, Cover Fossil, Darkranite, Dome Fossil, Earth Plate, Feraligite, Garchompite, Go Goggles, Gracidea, Green Shard, Greninjite, Heavy Duty Boots, Helix Fossil, Jaw Fossil, Max Potion, Medichamite, Mega Ring, Old Amber, Plume Fossil, Power Herb, Red Shard, Rotom Catalog, Safety Goggles, Sail Fossil, Sceptilite, Skull Fossil, Swampertite, Venusaurite, Yellow Shard, Zygardite
+POSSIBLE BATTLE 123: Norman 1 — PetalburgCity_Gym
+POSSIBLE BATTLE 125: Randall — PetalburgCity_Gym
+POSSIBLE BATTLE 124: Parker — PetalburgCity_Gym
+POSSIBLE BATTLE 120: George — PetalburgCity_Gym
+POSSIBLE BATTLE 119: Berke — PetalburgCity_Gym
+POSSIBLE BATTLE 122: Mary — PetalburgCity_Gym
+POSSIBLE BATTLE 118: Alexia — PetalburgCity_Gym
+POSSIBLE BATTLE 121: Jody — PetalburgCity_Gym
+POSSIBLE BATTLE 126: Justin — Route110_TrickHousePuzzle3
+POSSIBLE BATTLE 128: Drew — Route111
+POSSIBLE BATTLE 130: Heidi — Route111
+POSSIBLE BATTLE 127: Beau — Route111
+POSSIBLE BATTLE 129: Dusty 1 — Route111
+AVAILABLE SO FAR: 712 Pokémon/forms; 277 item/decorations types.
+
+ENTRY 114 | LEVEL CAP 45
+ADD ITEMS: Toxic Orb
+AVAILABLE SO FAR: 712 Pokémon/forms; 278 item/decorations types.
+
+ENTRY 117 | LEVEL CAP 55
+NEW ACCESS: AbandonedShip_CaptainsOffice, AbandonedShip_Corridors_1F, AbandonedShip_Corridors_B1F, AbandonedShip_Deck, AbandonedShip_Room_B1F, AbandonedShip_Rooms2_1F, AbandonedShip_Rooms2_B1F, AbandonedShip_Rooms_1F, AbandonedShip_Rooms_B1F, DesertUnderpass, NewMauville_Entrance, NewMauville_Inside, Route105, Route108, Route110_TrickHousePuzzle4, Route119, Route119_House, Route119_WeatherInstitute_1F, Route123, Route123_BerryMastersHouse, Route134
+ADD POKEMON: Ampharos Mega, Arctovish, Arctozolt, Articuno Galar, Baxcalibur, Baxcalibur Mega, Bisharp, Braviary, Carnivine, Comfey, Corsola, Cramorant, Dedenne, Dhelmise, Ditto, Dracovish, Dracozolt, Dragalge, Dragalge Mega, Dragonite, Dragonite Mega, Drakloak, Eelektross Mega, Electabuzz, Electivire, Electrode, Electrode Hisui, Elekid, Espathra, Feebas, Flittle, Flygon Mega, Garchomp, Garchomp Mega, Garchomp Mega Z, Gastrodon East, Goodra, Goodra Hisui, Hawlucha Mega, Haxorus, Heracross Mega, Iron Hands, Iron Thorns, Kartana, Kecleon, Kilowattrel, Kingler Mega, Klang, Klink, Klinklang, Landorus Incarnate, Lapras, Lickilicky, Lickitung, Linoone Galar, Lopunny Mega, Mabosstiff, Mandibuzz, Mareanie, Maschiff, Mesprit, Mienshao, Milotic, Noivern, Obstagoon, Oranguru, Passimian, Pheromosa, Pincurchin, Porygon, Porygon2, Porygon Z, Pyroar Mega, Pyukumuku, Raging Bolt, Scizor Mega, Shellos East, Squawkabilly Green, Tauros Paldea Aqua, Tentacool, Tentacruel, Ting Lu, Toedscool, Toedscruel, Togedemaru, Toxapex, Tropius, Tyranitar, Vanilluxe, Voltorb, Voltorb Hisui, Wattrel, Wiglett, Wo Chien, Wugtrio, Zigzagoon Galar, Zygarde 50
+ADD ITEMS: Adrenaline Orb, Ampharosite, Basement Key, Baxcalibrite, Booster Energy, Cornn Berry, Covert Cloak, Dragalgite, Dragoninite, Eelektrossite, Electric Seed, Fast Ball, Fist Plate, Flygonite, Full Restore, Garchompite Z, Grassy Seed, Hawluchanite, Heracronite, Kinglerite, Lopunnite, Lum Berry, Magearnite, Magost Berry, Max Revive, Mirror Herb, Misty Seed, Moon Ball, Nomel Berry, Odd Keystone, Psychic Seed, Pyroarite, Rabuta Berry, Scizorite, Spelon Berry, Storage Key, Throat Spray, Utility Umbrella
+POSSIBLE BATTLE 131: Duncan — AbandonedShip_Corridors_B1F
+POSSIBLE BATTLE 133: Jani — AbandonedShip_Rooms2_1F
+POSSIBLE BATTLE 132: Garrison — AbandonedShip_Rooms2_1F
+POSSIBLE BATTLE 137: Rotom — NewMauville_Inside
+POSSIBLE BATTLE 134: Electrode — NewMauville_Inside
+POSSIBLE BATTLE 135: Electrode — NewMauville_Inside
+POSSIBLE BATTLE 136: Electrode — NewMauville_Inside
+POSSIBLE BATTLE 138: Zapdos — NewMauville_Inside
+POSSIBLE BATTLE 139: Foster — Route105
+POSSIBLE BATTLE 141: Luis — Route105
+POSSIBLE BATTLE 140: Josue — Route105
+POSSIBLE BATTLE 142: Darrin — Route107
+POSSIBLE BATTLE 144: Tara — Route108
+POSSIBLE BATTLE 143: Carolina — Route108
+POSSIBLE BATTLE 145: Mel And Paul — Route109
+POSSIBLE BATTLE 147: Timothy 1 — Route115
+POSSIBLE BATTLE 146: Alix — Route115
+POSSIBLE BATTLE 148: Magikarp Guy — Route118
+POSSIBLE BATTLE 150: Donald — Route119
+POSSIBLE BATTLE 154: Taylor — Route119
+POSSIBLE BATTLE 151: Doug — Route119
+POSSIBLE BATTLE 152: Jackson 1 — Route119
+POSSIBLE BATTLE 149: Catherine 1 — Route119
+POSSIBLE BATTLE 153: Phil — Route119
+POSSIBLE BATTLE 155: Grunt Weather Inst 1 — Route119_WeatherInstitute_1F
+POSSIBLE BATTLE 156: Grunt Weather Inst 4 — Route119_WeatherInstitute_1F
+POSSIBLE BATTLE 158: Miu And Yuki — Route123
+POSSIBLE BATTLE 157: Jazmyn — Route123
+AVAILABLE SO FAR: 809 Pokémon/forms; 316 item/decorations types.
+
+ENTRY 118 | LEVEL CAP 55
+POSSIBLE BATTLE 160: Martha — Route110_TrickHousePuzzle3
+POSSIBLE BATTLE 159: Alan — Route110_TrickHousePuzzle3
+AVAILABLE SO FAR: 809 Pokémon/forms; 316 item/decorations types.
+
+ENTRY 126 | LEVEL CAP 55
+ADD POKEMON: Rotom, Rotom Fan, Rotom Frost, Rotom Heat, Rotom Mow, Rotom Wash, Xurkitree, Zeraora
+AVAILABLE SO FAR: 817 Pokémon/forms; 316 item/decorations types.
+
+ENTRY 130 | LEVEL CAP 55
+ADD POKEMON: Zapdos
+AVAILABLE SO FAR: 818 Pokémon/forms; 316 item/decorations types.
+
+ENTRY 140 | LEVEL CAP 55
+ADD POKEMON: Clefable, Clefairy, Cleffa, Fomantis, Furfrou Natural, Igglybuff, Jigglypuff, Lurantis, Maushold Four, Maushold Three, Morpeko Full Belly, Munchlax, Snorlax, Tandemaus, Wigglytuff
+AVAILABLE SO FAR: 833 Pokémon/forms; 316 item/decorations types.
+
+ENTRY 142 | LEVEL CAP 55
+ADD POKEMON: Gyarados Mega
+ADD ITEMS: Gyaradosite
+AVAILABLE SO FAR: 834 Pokémon/forms; 317 item/decorations types.
+
+ENTRY 149 | LEVEL CAP 55
+NEW ACCESS: Route119_WeatherInstitute_2F
+ADD POKEMON: Castform Normal
+ADD ITEMS: Mystic Water
+POSSIBLE BATTLE 162: Grunt Weather Inst 5 — Route119_WeatherInstitute_2F
+POSSIBLE BATTLE 161: Grunt Weather Inst 2 — Route119_WeatherInstitute_2F
+AVAILABLE SO FAR: 835 Pokémon/forms; 318 item/decorations types.
+
+ENTRY 154 | LEVEL CAP 55
+POSSIBLE BATTLE 163: Grunt Weather Inst 3 — Route119_WeatherInstitute_2F
+POSSIBLE BATTLE 164: Shelly Weather Institute — Route119_WeatherInstitute_2F
+AVAILABLE SO FAR: 835 Pokémon/forms; 318 item/decorations types.
+
+ENTRY 156 | LEVEL CAP 55
+ADD POKEMON: Scrafty Mega
+ADD ITEMS: Damp Rock, Heat Rock, Icy Rock, Scraftinite, Smooth Rock, Zap Plate
+POSSIBLE BATTLE 165: May Route 119 Treecko — Route119
+AVAILABLE SO FAR: 836 Pokémon/forms; 324 item/decorations types.
+
+ENTRY 157 | LEVEL CAP 55
+POSSIBLE BATTLE 165: May Route 119 Torchic — Route119
+AVAILABLE SO FAR: 836 Pokémon/forms; 324 item/decorations types.
+
+ENTRY 158 | LEVEL CAP 55
+NEW ACCESS: FortreeCity, FortreeCity_DecorationShop, FortreeCity_House1, FortreeCity_House2, FortreeCity_House3, FortreeCity_House4, FortreeCity_House5, FortreeCity_Mart, FortreeCity_PokemonCenter_1F, Route120
+ADD POKEMON: Absol, Absol Mega Z, Celesteela, Enamorus Incarnate, Gourgeist Average, Gourgeist Large, Gourgeist Small, Ogerpon Cornerstone, Ogerpon Hearthflame, Ogerpon Teal, Ogerpon Wellspring, Pumpkaboo Average, Pumpkaboo Large, Pumpkaboo Small, Tangela, Tangrowth, Tapu Koko, Thundurus Incarnate, Tornadus Incarnate, Venomoth, Venonat, Zarude
+ADD ITEMS: Decor Brick Chair, Decor Brick Desk, Decor Camp Chair, Decor Camp Desk, Decor Comfort Chair, Decor Comfort Desk, Decor Hard Chair, Decor Hard Desk, Decor Heavy Chair, Decor Heavy Desk, Decor Pokemon Chair, Decor Pokemon Desk, Decor Ragged Chair, Decor Ragged Desk, Decor Small Chair, Decor Small Desk, Cornerstone Mask, Hearthflame Mask, Toxic Plate, Wellspring Mask
+POSSIBLE BATTLE 166: Spenser Fortree — FortreeCity_Mart
+POSSIBLE BATTLE 167: Hideo — Route119
+POSSIBLE BATTLE 168: Kecleon — Route120
+AVAILABLE SO FAR: 858 Pokémon/forms; 344 item/decorations types.
+
+ENTRY 159 | LEVEL CAP 55
+ADD ITEMS: Assault Vest
+POSSIBLE BATTLE 169: Greta Slateport — SlateportCity
+AVAILABLE SO FAR: 858 Pokémon/forms; 345 item/decorations types.
+
+ENTRY 161 | LEVEL CAP 55
+NEW ACCESS: AquaHideout_1F, FortreeCity_Gym, LilycoveCity, LilycoveCity_ContestHall, LilycoveCity_ContestLobby, LilycoveCity_CoveLilyMotel_1F, LilycoveCity_CoveLilyMotel_2F, LilycoveCity_Harbor, LilycoveCity_House1, LilycoveCity_House2, LilycoveCity_House3, LilycoveCity_House4, LilycoveCity_LilycoveMuseum_1F, LilycoveCity_LilycoveMuseum_2F, LilycoveCity_MoveDeletersHouse, LilycoveCity_PokemonCenter_1F, LilycoveCity_PokemonTrainerFanClub, MtPyre_1F, MtPyre_2F, MtPyre_3F, MtPyre_4F, MtPyre_5F, MtPyre_6F, MtPyre_Exterior, MtPyre_Summit, Route121, Route121_SafariZoneEntrance, Route122
+ADD POKEMON: Alomomola, Banette, Banette Mega, Beheeyem, Braviary Hisui, Bruxish, Corsola Galar, Cursola, Drifblim, Drifloon, Dusclops, Dusknoir, Duskull, Elgyem, Flamigo, Flutter Mane, Gengar Mega, Gourgeist Super, Greavard, Houndstone, Komala, Lucario Mega Z, Machamp Mega, Marowak Alola, Mimikyu Disguised, Moltres Galar, Ninetales, Pidgeot Mega, Poltchageist Artisan, Poltchageist Counterfeit, Pumpkaboo Super, Runerigus, Shuppet, Sinistcha Unremarkable, Sinistea Antique, Spidops, Sunflora, Sunkern, Tapu Bulu, Tapu Lele, Tarountula, Vulpix, Yamask Galar, Zoroark Hisui, Zorua Hisui
+ADD ITEMS: Ability Shield, Bead Mail, Belue Berry, Black Sludge, Cleanse Tag, Devon Scope, Durin Berry, Electric Gem, Fairy Feather, Gengarite, Glitter Mail, Heart Scale, Ice Gem, Light Clay, Lucarionite Z, Machampite, Meadow Plate, Pearl, Pidgeotite, Pokeblock Case, Room Service, Tropic Mail, Watmel Berry, Wide Lens
+POSSIBLE BATTLE 174: Jared — FortreeCity_Gym
+POSSIBLE BATTLE 172: Flint — FortreeCity_Gym
+POSSIBLE BATTLE 171: Ashley — FortreeCity_Gym
+POSSIBLE BATTLE 173: Humberto — FortreeCity_Gym
+POSSIBLE BATTLE 175: May Lilycove Treecko — LilycoveCity
+POSSIBLE BATTLE 176: Gabrielle 1 — MtPyre_3F
+POSSIBLE BATTLE 177: Grunt Mt Pyre 1 — MtPyre_Summit
+POSSIBLE BATTLE 178: Grunt Mt Pyre 2 — MtPyre_Summit
+POSSIBLE BATTLE 179: Grunt Mt Pyre 3 — MtPyre_Summit
+POSSIBLE BATTLE 180: Colin — Route120
+POSSIBLE BATTLE 183: Lorenzo — Route120
+POSSIBLE BATTLE 181: Jenna — Route120
+POSSIBLE BATTLE 182: Jennifer — Route120
+POSSIBLE BATTLE 186: Myles — Route121
+POSSIBLE BATTLE 187: Pat — Route121
+POSSIBLE BATTLE 185: Marcel — Route121
+POSSIBLE BATTLE 184: Cristin 1 — Route121
+POSSIBLE BATTLE 191: Wendy — Route123
+POSSIBLE BATTLE 188: Braxton — Route123
+POSSIBLE BATTLE 189: Fredrick — Route123
+POSSIBLE BATTLE 190: Kayley — Route123
+POSSIBLE BATTLE 170: Kecleon — Route120
+AVAILABLE SO FAR: 903 Pokémon/forms; 369 item/decorations types.
+
+ENTRY 162 | LEVEL CAP 55
+POSSIBLE BATTLE 175: May Lilycove Torchic — LilycoveCity
+AVAILABLE SO FAR: 903 Pokémon/forms; 369 item/decorations types.
+
+ENTRY 164 | LEVEL CAP 55
+POSSIBLE BATTLE 192: Edwardo — FortreeCity_Gym
+AVAILABLE SO FAR: 903 Pokémon/forms; 369 item/decorations types.
+
+ENTRY 167 | LEVEL CAP 55
+NEW ACCESS: LilycoveCity_DepartmentStoreElevator, LilycoveCity_DepartmentStoreRooftop, LilycoveCity_DepartmentStore_1F, LilycoveCity_DepartmentStore_2F, LilycoveCity_DepartmentStore_3F, LilycoveCity_DepartmentStore_4F, LilycoveCity_DepartmentStore_5F
+ADD POKEMON: Appletun, Archaludon, Armarouge, Ceruledge, Dipplin, Flapple, Hydrapple, Kingambit, Kleavor, Polteageist Antique, Polteageist Phony, Sinistcha Masterpiece, Slowbro Galar, Slowking Galar, Ursaluna, Urshifu Rapid Strike, Urshifu Single Strike
+ADD ITEMS: Decor Attract Mat, Decor Ball Poster, Decor Baltoy Doll, Decor Blue Poster, Decor Breakable Door, Decor Cute Poster, Decor Cute Tv, Decor Diamond Cushion, Decor Fence Length, Decor Fence Width, Decor Fire Blast Mat, Decor Fire Cushion, Decor Fissure Mat, Decor Glitter Mat, Decor Grass Cushion, Decor Green Poster, Decor Gulpin Doll, Decor Jigglypuff Doll, Decor Jump Mat, Decor Kecleon Doll, Decor Long Poster, Decor Mud Ball, Decor Pichu Doll, Decor Pikachu Doll, Decor Pika Cushion, Decor Pika Poster, Decor Powder Snow Mat, Decor Red Poster, Decor Rhydon Doll, Decor Round Cushion, Decor Round Tv, Decor Sand Ornament, Decor Sea Poster, Decor Sky Poster, Decor Slide, Decor Solid Board, Decor Spikes Mat, Decor Spin Cushion, Decor Spin Mat, Decor Stand, Decor Surf Mat, Decor Swablu Doll, Decor Thunder Mat, Decor Tv, Decor Wailmer Doll, Decor Water Cushion, Decor Wynaut Doll, Decor Zigzag Cushion, Auspicious Armor, Black Augurite, Chipped Pot, Cracked Pot, Fresh Water, Galarica Cuff, Galarica Wreath, Leaders Crest, Lemonade, Malicious Armor, Masterpiece Teacup, Master Ball, Metal Alloy, Peat Block, Scroll Of Darkness, Scroll Of Waters, Sweet Apple, Syrupy Apple, Tart Apple, Type Evolution Stone, Unremarkable Teacup
+AVAILABLE SO FAR: 920 Pokémon/forms; 438 item/decorations types.
+
+ENTRY 171 | LEVEL CAP 55
+POSSIBLE BATTLE 193: Grunt Mt Pyre 4 — MtPyre_Summit
+AVAILABLE SO FAR: 920 Pokémon/forms; 438 item/decorations types.
+
+ENTRY 184 | LEVEL CAP 55
+ADD ITEMS: Weakness Policy
+AVAILABLE SO FAR: 920 Pokémon/forms; 439 item/decorations types.
+
+ENTRY 186 | LEVEL CAP 55
+POSSIBLE BATTLE 194: Darius — FortreeCity_Gym
+AVAILABLE SO FAR: 920 Pokémon/forms; 439 item/decorations types.
+
+ENTRY 187 | LEVEL CAP 55
+POSSIBLE BATTLE 195: Matt Mt Pyre — MtPyre_Summit
+AVAILABLE SO FAR: 920 Pokémon/forms; 439 item/decorations types.
+
+ENTRY 188 | LEVEL CAP 55
+POSSIBLE BATTLE 196: Winona 1 — FortreeCity_Gym
+AVAILABLE SO FAR: 920 Pokémon/forms; 439 item/decorations types.
+
+ENTRY 189 | LEVEL CAP 55
+NEW ACCESS: MagmaHideout_1F, MagmaHideout_2F_1R, MagmaHideout_2F_2R, MagmaHideout_2F_3R, MagmaHideout_3F_1R, MagmaHideout_3F_3R, MagmaHideout_4F
+ADD ITEMS: Magma Emblem, Spooky Plate
+POSSIBLE BATTLE 197: Grunt Magma Hideout 1 — MagmaHideout_1F
+POSSIBLE BATTLE 198: Grunt Magma Hideout 2 — MagmaHideout_1F
+POSSIBLE BATTLE 199: Grunt Magma Hideout 14 — MagmaHideout_2F_1R
+POSSIBLE BATTLE 200: Grunt Magma Hideout 3 — MagmaHideout_2F_1R
+POSSIBLE BATTLE 201: Grunt Magma Hideout 4 — MagmaHideout_2F_1R
+POSSIBLE BATTLE 202: Grunt Magma Hideout 5 — MagmaHideout_2F_1R
+POSSIBLE BATTLE 203: Grunt Magma Hideout 6 — MagmaHideout_2F_2R
+POSSIBLE BATTLE 204: Grunt Magma Hideout 7 — MagmaHideout_2F_2R
+POSSIBLE BATTLE 205: Grunt Magma Hideout 9 — MagmaHideout_3F_1R
+POSSIBLE BATTLE 206: Maxie Magma Hideout — MagmaHideout_4F
+AVAILABLE SO FAR: 920 Pokémon/forms; 441 item/decorations types.
+
+ENTRY 190 | LEVEL CAP 60
+NEW ACCESS: Route110_TrickHousePuzzle5
+ADD POKEMON: Calyrex, Dragapult, Fezandipiti, Giratina Altered, Giratina Origin, Koraidon, Miraidon, Munkidori, Okidogi, Reshiram, Spectrier, Staraptor Mega, Volcarona, Yveltal, Zekrom
+ADD ITEMS: Griseous Core, Staraptite, Terrain Extender
+POSSIBLE BATTLE 207: Legendary Sign Darkrai — MtPyre_Summit
+AVAILABLE SO FAR: 935 Pokémon/forms; 444 item/decorations types.
+
+ENTRY 197 | LEVEL CAP 60
+POSSIBLE BATTLE 208: Grunt Magma Hideout 15 — MagmaHideout_2F_2R
+AVAILABLE SO FAR: 935 Pokémon/forms; 444 item/decorations types.
+
+ENTRY 198 | LEVEL CAP 60
+POSSIBLE BATTLE 209: Grunt Magma Hideout 8 — MagmaHideout_2F_2R
+AVAILABLE SO FAR: 935 Pokémon/forms; 444 item/decorations types.
+
+ENTRY 199 | LEVEL CAP 60
+NEW ACCESS: MagmaHideout_3F_2R
+POSSIBLE BATTLE 210: Grunt Magma Hideout 16 — MagmaHideout_3F_1R
+POSSIBLE BATTLE 211: Grunt Magma Hideout 10 — MagmaHideout_3F_2R
+AVAILABLE SO FAR: 935 Pokémon/forms; 444 item/decorations types.
+
+ENTRY 200 | LEVEL CAP 65
+NEW ACCESS: AquaHideout_B1F
+ADD POKEMON: Barbaracle Mega, Camerupt Mega, Gouging Fire, Sharpedo Mega, Volcanion
+ADD ITEMS: Barbaracite, Cameruptite, Magma Stone, Max Elixir, Sharpedonite
+POSSIBLE BATTLE 212: Grunt Aqua Hideout 1 — AquaHideout_1F
+POSSIBLE BATTLE 213: Electrode — AquaHideout_B1F
+POSSIBLE BATTLE 214: Grunt Aqua Hideout 2 — AquaHideout_B1F
+POSSIBLE BATTLE 215: Grunt Aqua Hideout 5 — AquaHideout_B1F
+POSSIBLE BATTLE 216: Grunt Aqua Hideout 7 — AquaHideout_B1F
+AVAILABLE SO FAR: 940 Pokémon/forms; 449 item/decorations types.
+
+ENTRY 205 | LEVEL CAP 65
+NEW ACCESS: AquaHideout_B2F
+POSSIBLE BATTLE 217: Grunt Aqua Hideout 3 — AquaHideout_B1F
+POSSIBLE BATTLE 218: Grunt Aqua Hideout 4 — AquaHideout_B2F
+POSSIBLE BATTLE 219: Grunt Aqua Hideout 6 — AquaHideout_B2F
+POSSIBLE BATTLE 220: Grunt Aqua Hideout 8 — AquaHideout_B2F
+AVAILABLE SO FAR: 940 Pokémon/forms; 449 item/decorations types.
+
+ENTRY 206 | LEVEL CAP 65
+ADD POKEMON: Darkrai, Darkrai Mega
+AVAILABLE SO FAR: 942 Pokémon/forms; 449 item/decorations types.
+
+ENTRY 210 | LEVEL CAP 65
+POSSIBLE BATTLE 221: Matt — AquaHideout_B2F
+AVAILABLE SO FAR: 942 Pokémon/forms; 449 item/decorations types.
+
+ENTRY 211 | LEVEL CAP 65
+NEW ACCESS: EverGrandeCity, MossdeepCity, MossdeepCity_GameCorner_1F, MossdeepCity_Gym, MossdeepCity_House1, MossdeepCity_House2, MossdeepCity_House3, MossdeepCity_House4, MossdeepCity_Mart, MossdeepCity_PokemonCenter_1F, MossdeepCity_SpaceCenter_1F, MossdeepCity_SpaceCenter_2F, MossdeepCity_StevensHouse, PacifidlogTown, PacifidlogTown_House1, PacifidlogTown_House2, PacifidlogTown_House3, PacifidlogTown_House4, PacifidlogTown_House5, PacifidlogTown_PokemonCenter_1F, Route124, Route124_DivingTreasureHuntersHouse, Route125, Route126, Route127, Route128, Route129, Route130, Route131, Route132, Route133, ShoalCave_LowTideEntranceRoom, ShoalCave_LowTideInnerRoom, ShoalCave_LowTideLowerRoom, ShoalCave_LowTideStairsRoom, SkyPillar_Entrance, SkyPillar_Outside
+ADD POKEMON: Basculegion F, Basculegion M, Basculin Blue Striped, Basculin White Striped, Cetitan, Cetoddle, Chien Pao, Darmanitan Galar Standard, Darumaka Galar, Eiscue Ice, Finizen, Frosmoth, Glastrier, Milotic Mega, Mr Mime Galar, Mr Rime, Omanyte, Omastar, Overqwil, Palafin Zero, Qwilfish Hisui, Raichu Alola, Sandshrew Alola, Sandslash Alola, Snom, Suicune
+ADD ITEMS: Dark Gem, Dragon Fang, Focus Band, Ghost Gem, Miloticite, Shoal Salt, Sky Plate, Splash Plate, Super Rod
+POSSIBLE BATTLE 223: Preston — MossdeepCity_Gym
+POSSIBLE BATTLE 222: Maura — MossdeepCity_Gym
+POSSIBLE BATTLE 224: Lila And Roy 1 — Route124
+POSSIBLE BATTLE 225: Auron — Route125
+POSSIBLE BATTLE 226: Nikki — Route126
+POSSIBLE BATTLE 228: Roger — Route127
+POSSIBLE BATTLE 227: Athena — Route127
+POSSIBLE BATTLE 230: Katelyn 1 — Route128
+POSSIBLE BATTLE 229: Alexa — Route128
+POSSIBLE BATTLE 231: Ruben — Route128
+POSSIBLE BATTLE 232: Santiago — Route130
+POSSIBLE BATTLE 233: Herman — Route131
+POSSIBLE BATTLE 235: Susie — Route131
+POSSIBLE BATTLE 234: Kara — Route131
+POSSIBLE BATTLE 236: Linda — Route133
+AVAILABLE SO FAR: 968 Pokémon/forms; 458 item/decorations types.
+
+ENTRY 212 | LEVEL CAP 65
+POSSIBLE BATTLE 237: Clifford — MossdeepCity_Gym
+POSSIBLE BATTLE 238: Kathleen — MossdeepCity_Gym
+AVAILABLE SO FAR: 968 Pokémon/forms; 458 item/decorations types.
+
+ENTRY 213 | LEVEL CAP 65
+POSSIBLE BATTLE 246: Virgil — MossdeepCity_Gym
+POSSIBLE BATTLE 239: Blake — MossdeepCity_Gym
+POSSIBLE BATTLE 240: Hannah — MossdeepCity_Gym
+POSSIBLE BATTLE 244: Samantha — MossdeepCity_Gym
+POSSIBLE BATTLE 245: Sylvia — MossdeepCity_Gym
+POSSIBLE BATTLE 242: Nate — MossdeepCity_Gym
+POSSIBLE BATTLE 241: Macey — MossdeepCity_Gym
+POSSIBLE BATTLE 243: Nicholas — MossdeepCity_Gym
+AVAILABLE SO FAR: 968 Pokémon/forms; 458 item/decorations types.
+
+ENTRY 233 | LEVEL CAP 65
+POSSIBLE BATTLE 247: Tate And Liza 1 — MossdeepCity_Gym
+AVAILABLE SO FAR: 968 Pokémon/forms; 458 item/decorations types.
+
+ENTRY 237 | LEVEL CAP 70
+NEW ACCESS: Route110_TrickHousePuzzle6
+ADD POKEMON: Meowstic F Mega, Meowstic M Mega
+ADD ITEMS: Meowsticite, Mewtwonite X
+POSSIBLE BATTLE 249: Grunt Space Center 3 — MossdeepCity_SpaceCenter_1F
+POSSIBLE BATTLE 248: Grunt Space Center 1 — MossdeepCity_SpaceCenter_1F
+POSSIBLE BATTLE 250: Grunt Space Center 4 — MossdeepCity_SpaceCenter_1F
+POSSIBLE BATTLE 252: Sophia — Route110_TrickHousePuzzle6
+POSSIBLE BATTLE 251: Sebastian — Route110_TrickHousePuzzle6
+AVAILABLE SO FAR: 970 Pokémon/forms; 460 item/decorations types.
+
+ENTRY 240 | LEVEL CAP 70
+POSSIBLE BATTLE 253: Grunt Space Center 2 — MossdeepCity_SpaceCenter_1F
+AVAILABLE SO FAR: 970 Pokémon/forms; 460 item/decorations types.

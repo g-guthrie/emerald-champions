@@ -42,8 +42,10 @@ Route114_Text_GrowBattleBerries:
 	.string "Plant a few to keep your supply up.\p"
 	.string "Your Regenerator brings back a Berry\n"
 	.string "its own holder eats in battle.\p"
-	.string "But one a foe steals or burns is\n"
-	.string "gone for good!$"
+	.string "Thief and Covet return stolen\n"
+	.string "items after Trainer battles.\p"
+	.string "Wild theft is permanent.\n"
+	.string "Burned Berries are gone, too.$"
 
 Route114_Text_ComeBackForBerries:
 	.string "I can share another Berry tomorrow.\p"
