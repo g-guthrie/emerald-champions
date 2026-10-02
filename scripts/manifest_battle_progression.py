@@ -573,6 +573,10 @@ class ProgressionParser:
                 input_names=native_input_names(name)
                 native_inputs={k:v for k,v in env.items() if k in input_names} if input_names is not None else {k:v for k,v in env.items() if k.startswith('VAR_0x800')}
                 effects=effects+({'op':'native_call','args':[name], 'inputs':native_inputs, 'source':_cite(self.scripts,label,line)},)
+                # GameClear (src/post_battle_event_funcs.c) records the first
+                # clear itself; the Hall of Fame script only sets FLAG_IS_CHAMPION.
+                if name=='GameClear':
+                    effects=effects+({'op':'setflag','args':['FLAG_SYS_GAME_CLEAR'],'source':'src/post_battle_event_funcs.c:30'},)
                 # Native UI callbacks and gift helpers also write scratch
                 # outputs. Keeping their old input literals can falsely prune
                 # legal branches (Easy Chat type 13 becomes a phrase id 0..5).

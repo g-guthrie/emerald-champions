@@ -193,13 +193,19 @@ class ManifestGeometry(mr.Geometry):
         from manifest_battle_progression import EFFECTS
         warp_ops={'warpdoor','warp','warpsilent','warpteleport'}
         prior_effects=set(EFFECTS)
-        EFFECTS.update(warp_ops)
+        EFFECTS.update(warp_ops|{'setrespawn'})
         try:
             # Story maps whose only entrance is a scripted walk-in: Steven leads
             # the player into the Cave of Origin (SootopolisCity/scripts.inc:917-946),
             # and the Safari Zone counter warps a paying player inside
             # (Route121_SafariZoneEntrance/scripts.inc:59-80).
-            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity','Route121_SafariZoneEntrance'}):
+            # GameClear in the Hall of Fame sends the new Champion home to the
+            # respawn the script just set (src/post_battle_event_funcs.c:35-40).
+            heal={}
+            for name,body in re.findall(r'\[(HEAL_LOCATION_\w+) - 1\]\s*=\s*\{(.*?)\}',(mr.ROOT/'src/data/heal_locations.h').read_text(),re.S):
+                m=re.search(r'MAP_GROUP\((MAP_\w+)\).*?\.x\s*=\s*(\d+).*?\.y\s*=\s*(\d+)',body,re.S)
+                if m and name not in heal:heal[name]=(m[1],int(m[2]),int(m[3]))
+            for d in sorted(mr.PUZZLE_MAPS|{'PetalburgCity_Gym','SootopolisCity','Route121_SafariZoneEntrance','EverGrandeCity_HallOfFame'}):
                 if d not in self.maps: continue
                 entries=[]
                 for category in ('bg_events','coord_events','object_events'):
@@ -234,6 +240,12 @@ class ManifestGeometry(mr.Geometry):
                                 self.tile_gates.setdefault((d,x,y),((token,),))
                                 self.tile_gate_cites.setdefault((d,x,y),effect['source'])
                                 record.update(token=token,target=(d,x,y),action='open')
+                            elif op=='native_call' and args and args[0]=='GameClear':
+                                respawn=[e.get('args',[None])[0] for e in path.get('effects',[]) if e['op']=='setrespawn']
+                                spot=heal.get(respawn[-1]) if respawn else None
+                                dest=self.id_to_dir.get(spot[0]) if spot else None
+                                if not dest: continue
+                                record.update(token=f'SCRIPT_WARP:{len(self.puzzle_transitions)}',target=(dest,spot[1],spot[2]),action='warp')
                             elif op in warp_ops and len(args)>=4:
                                 dest=self.id_to_dir.get(args[0])
                                 try: x,y=int(env.get(args[2],args[2])),int(env.get(args[3],args[3]))

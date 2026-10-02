@@ -685,7 +685,9 @@ def evaluate(key,state,constants=None):
     if name=='ScriptGetPokedexInfo':
         if not _flag(state,'FLAG_SYS_NATIONAL_DEX',constants):return {0}
         magic=state.get('national_magic'); var=_number(state.get('vars',{}).get('VAR_NATIONAL_DEX'),constants)
-        if magic is None or var is None:return None
+        # It only picks Birch's rating lines; when the save magic is unknown
+        # either answer leads on to the same scene.
+        if magic is None or var is None:return {0,1}
         return {int(magic==0xDA and var==0x302)}
     if name=='ShouldTryGetTrainerScript':
         count=state.get('trainer_return_script_count');return {int(count>1)} if count is not None else None
@@ -998,6 +1000,13 @@ def native_input_names(name):
     return frozenset(reads)
 
 
+# Exact outputs where the call-graph closure over-approximates. The party
+# picker (PARTY_ACTION_CHOOSE_AND_CLOSE) returns only the chosen slot through
+# BufferMonSelection (src/party_menu.c); the closure also reaches unrelated
+# menu modes and would erase a trade's VAR_0x8005 index and VAR_0x8009 species.
+NATIVE_OUTPUT_OVERRIDES={'ChoosePartyMon':frozenset({'VAR_0x8004'})}
+
+
 @lru_cache(None)
 def native_output_names(name):
     """Scratch writes from C bodies and referenced callback/helper bodies.
@@ -1005,6 +1014,7 @@ def native_output_names(name):
     This conservative may-write set invalidates stale parser inputs. A matching
     native output domain is a separate proof, never inferred from a write.
     """
+    if name in NATIVE_OUTPUT_OVERRIDES:return NATIVE_OUTPUT_OVERRIDES[name]
     index=_native_function_index()
     if name not in index:return None
     outputs=set();seen=set();queue=[name]
