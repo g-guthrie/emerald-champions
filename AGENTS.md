@@ -67,8 +67,10 @@ or data.
 - Every trainer must be beatable by a stage-legal team: one the player can
   hold before that battle per the progression manifest
   (`artifacts/progression-manifest/`, checked by `scripts/tuning_pool_check.py
-  --trainer`), not merely anything inside its level-cap window. One-hit KO
-  moves and evasion boosts are never tuned for.
+  --trainer`), not merely anything inside its level-cap window. Hard is
+  tuned against that team fully kitted: complete EV spreads, best natures,
+  perfect IVs and its best legal items. One-hit KO moves and evasion boosts
+  are never tuned for.
 - Wild encounters: ordinary table slots are at least 4%; Legendary/Mythical,
   Ultra Beast and Paradox slots are 5%. Feebas keeps its native tile rule.
   Active storm visitors have a 25% encounter roll, reducing the normal table's
