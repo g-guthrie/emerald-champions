@@ -145,18 +145,11 @@ def load_model(quick=False):
         events=bp.extract_completed_event_transitions(b.scripts,keys,maps=story_maps,progress=progress)
         event_cache.write_bytes(pickle.dumps({'signature':digest,'events':events}))
     print('Loading Pokemon sources',flush=True)
+    # Pokemon and item sources are always rebuilt from source: unsigned
+    # caches here once let stale availability outlive wild and item edits.
     pokemon=pokemon_sources.PokemonSources(b)
-    pcache=ROOT/'work/progression-manifest/cache/pokemon.enriched.json'
-    if pcache.exists():
-        pdata=json.loads(pcache.read_text());pokemon.rows=pdata['sources']
-    elif not quick:pokemon.enrich_eligibility(parser)
-    raw=ROOT/'work/progression-manifest/cache/items.raw.json'
-    final_items=ROOT/'work/progression-manifest/cache/items.enriched.json'
-    if quick and raw.exists():items=json.loads(raw.read_text())
-    elif not quick and final_items.exists():
-        items=json.loads(final_items.read_text())
-        if not items.get('fully_certified'):raise RuntimeError('Item source cache is not certified')
-    else:items=item_sources.build_item_sources(b,parser=parser,enrich=not quick)
+    if not quick:pokemon.enrich_eligibility(parser)
+    items=item_sources.build_item_sources(b,parser=parser,enrich=not quick)
     print('Compacting item eligibility',flush=True)
     for row in items['sources']:
         row.pop('controls',None)

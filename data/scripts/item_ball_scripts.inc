@@ -13,8 +13,8 @@ Route102_EventScript_ItemPotion:: @ 8290CD8
 	finditem ITEM_POTION
 	end
 
-Route103_EventScript_ItemPearlString:: @ 8290CE5
-	finditem ITEM_PEARL_STRING
+Route103_EventScript_ItemPearl:: @ 8290CE5
+	finditem ITEM_PEARL
 	end
 
 Route103_EventScript_ItemPPUp:: @ 8290CF2
@@ -797,8 +797,8 @@ MtPyre_Summit_EventScript_ItemTM61_WillOWisp::
 	finditem ITEM_STAR_PIECE
 	end
 
-Route111_RuinsExterior_EventScript_ItemCometShard::
-	finditem ITEM_COMET_SHARD
+Route111_RuinsExterior_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemGlalitite::
@@ -829,8 +829,8 @@ GraniteCave_B1F_EventScript_ItemTM65ShadowClaw::
 	finditem ITEM_MEGANIUMITE
 	end
 
-Route117_EventScript_ItemBigPearl::
-	finditem ITEM_BIG_PEARL
+Route117_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
 	end
 
 Meteor_Falls1F_2R_EventScript_Salamencite::
