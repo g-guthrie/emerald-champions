@@ -60,8 +60,15 @@ or data.
 - Steam Engine also makes Water never super effective on its holder.
 - AI: authored doubles teams and the shared planner are preserved. Opponents may
   know loadouts but never read the player's committed move, target, switch or
-  replacement. Tune difficulty with levels, not by weakening sets or strategy.
-- Every trainer must be beatable by a stage-legal team.
+  replacement. Tune difficulty with levels first. When levels alone cannot
+  make a fight fair on every difficulty, tuning may also change a trainer's
+  team, sets or items, keeping the fight's authored doubles plan and never
+  weakening the AI's reasoning.
+- Every trainer must be beatable by a stage-legal team: one the player can
+  hold before that battle per the progression manifest
+  (`artifacts/progression-manifest/`, checked by `scripts/tuning_pool_check.py
+  --trainer`), not merely anything inside its level-cap window. One-hit KO
+  moves and evasion boosts are never tuned for.
 - Wild encounters: ordinary table slots are at least 4%; Legendary/Mythical,
   Ultra Beast and Paradox slots are 5%. Feebas keeps its native tile rule.
   Active storm visitors have a 25% encounter roll, reducing the normal table's
