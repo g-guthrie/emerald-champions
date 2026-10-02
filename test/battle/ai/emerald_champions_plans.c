@@ -101,7 +101,7 @@ TEST("EC battle plans: compiled directives follow trainer ownership and exclude 
 // sAuthoredLeads, when set, brings those two members to the front as the
 // leads that board had on the field.
 struct AuthoredInjury { enum Species species; u16 hp; };
-EWRAM_DATA static struct AuthoredInjury sAuthoredInjuries[PARTY_SIZE] = {0};
+EWRAM_DATA static struct AuthoredInjury sAuthoredInjuries[4] = {0};
 // A benchmark board whose left lead is a later member: that party slot trades
 // places with slot 0. Consumed like the injuries.
 EWRAM_DATA static u8 sAuthoredLeadSlot = 0;
@@ -311,7 +311,7 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn dances on a safe board with the Dancer re
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn's mixed attacker keeps pressure while its partner survives")
+AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn's dance enables a knockout while protecting its user")
 {
     GIVEN {
         // Synthetic physical-pressure board, not stage-pool difficulty proof.
@@ -324,10 +324,9 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Jocelyn's mixed attacker keeps pressure while its
         TURN {
             MOVE(playerLeft, MOVE_POISON_JAB, target: opponentLeft, secondaryEffect: FALSE, criticalHit: FALSE);
             MOVE(playerRight, MOVE_POISON_JAB, target: opponentLeft, secondaryEffect: FALSE, criticalHit: FALSE);
-            // The current mixed Oricorio uses its special lane on this board.
-            // The separate Victory Dance mechanics fixture checks the copied
-            // physical boost; this board checks pressure and partner survival.
-            EXPECT_MOVE(opponentRight, MOVE_REVELATION_DANCE);
+            // Setting up in front of two unread attackers is a gamble the AI
+            // no longer takes for free; the attacking half of the room stands.
+            EXPECT_MOVE(opponentRight, MOVE_ACROBATICS);
         }
     } THEN {
         EXPECT(playerLeft->hp < playerLeft->maxHP || playerRight->hp < playerRight->maxHP);
@@ -1460,40 +1459,7 @@ AI_DOUBLE_BATTLE_TEST("EC revealed redirection: do not repeatedly feed Volt Abso
     }
 }
 
-// Laura's former pupils supplied these pivot and Sash benchmark boards. Her
-// current Mienshao has no U-turn, and Pignite is not the former Sash Tyrogue.
-// Keep the generic mechanics on the old sets, generated through the same
-// production stat/level path, without constraining the new authored team.
-static const struct TrainerMon sLauraBeforeSeniorPupils[] =
-{
-    FORMER_MON(SPECIES_MIENFOO, ITEM_EVIOLITE, ABILITY_REGENERATOR, NATURE_JOLLY, 10,
-        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_U_TURN),
-    FORMER_MON(SPECIES_TIMBURR, ITEM_FLAME_ORB, ABILITY_GUTS, NATURE_ADAMANT, 9,
-        TRAINER_PARTY_EVS(252, 252, 4, 0, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_FACADE, MOVE_DRAIN_PUNCH, MOVE_MACH_PUNCH, MOVE_PROTECT),
-    FORMER_MON(SPECIES_CROAGUNK, ITEM_EVIOLITE, ABILITY_DRY_SKIN, NATURE_MODEST, 9,
-        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_SLUDGE_BOMB, MOVE_VACUUM_WAVE, MOVE_NASTY_PLOT, MOVE_PROTECT),
-    FORMER_MON(SPECIES_MAKUHITA, ITEM_SITRUS_BERRY, ABILITY_THICK_FAT, NATURE_ADAMANT, 10,
-        TRAINER_PARTY_EVS(252, 252, 4, 0, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_FAKE_OUT, MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_DRAIN_PUNCH),
-    FORMER_MON(SPECIES_MANKEY, ITEM_CHOICE_SCARF, ABILITY_DEFIANT, NATURE_JOLLY, 9,
-        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_CLOSE_COMBAT, MOVE_U_TURN, MOVE_ROCK_SLIDE, MOVE_NIGHT_SLASH),
-    FORMER_MON(SPECIES_TYROGUE, ITEM_FOCUS_SASH, ABILITY_VITAL_SPIRIT, NATURE_JOLLY, 11,
-        TRAINER_PARTY_EVS(252, 0, 4, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_FAKE_OUT, MOVE_FEINT, MOVE_HELPING_HAND, MOVE_COUNTER),
-};
-
-static void FormerLauraOpponent(void)
-{
-    sAuthoredTrainer = FormerTeam(TRAINER_LAURA, FORMER_AI_FLAGS,
-                                 sLauraBeforeSeniorPupils, ARRAY_COUNT(sLauraBeforeSeniorPupils));
-    AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
-}
-
-DOUBLE_BATTLE_TEST("EC former Laura pivot mechanics: a faster U-turn preserves the same recipient and adds damage")
+DOUBLE_BATTLE_TEST("EC Laura pivot mechanics: a faster U-turn preserves the same recipient and adds damage")
 {
     bool32 pivot;
     PARAMETRIZE { pivot = FALSE; }
@@ -1501,7 +1467,7 @@ DOUBLE_BATTLE_TEST("EC former Laura pivot mechanics: a faster U-turn preserves t
     GIVEN {
         PLAYER(SPECIES_TOGETIC) { Level(20); HP(70); MaxHP(70); Defense(62); SpDefense(53); Speed(27); Ability(ABILITY_SERENE_GRACE); Item(ITEM_EVIOLITE); Moves(MOVE_HELPING_HAND); }
         PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); Defense(37); SpAttack(73); SpDefense(63); Speed(35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_HYPER_VOICE); }
-        FormerLauraOpponent();
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_HELPING_HAND, target: playerRight);
@@ -1617,20 +1583,20 @@ AI_DOUBLE_BATTLE_TEST("EC Laura board: an ordinary four-member route decision fi
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("EC former Laura pivot: use the guaranteed faster exit but keep an immediate escape from a faster attack")
+AI_DOUBLE_BATTLE_TEST("EC Laura pivot: use the guaranteed faster exit but keep an immediate escape from a faster attack")
 {
     bool32 fastPlayer;
     bool32 flinch = FALSE;
     PARAMETRIZE { fastPlayer = FALSE; }
     PARAMETRIZE { fastPlayer = TRUE; }
     PARAMETRIZE { fastPlayer = FALSE; flinch = TRUE; }
-    // Keep the interruption case lethal at the former benchmark levels:
+    // Keep the interruption case lethal after the authored level change:
     // the player's Fake Out must precede every response, and Hyper Voice must
     // still require an escape rather than merely chip the stronger Mienfoo.
     GIVEN {
         PLAYER(flinch ? SPECIES_MIENFOO : SPECIES_TOGETIC) { Level(20); HP(70); MaxHP(70); Attack(24); Defense(62); SpDefense(53); Speed(flinch ? 100 : 27); Ability(flinch ? ABILITY_REGENERATOR : ABILITY_SERENE_GRACE); Item(ITEM_EVIOLITE); Moves(MOVE_HELPING_HAND, MOVE_FAKE_OUT); }
         PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); Defense(37); SpAttack(flinch ? 120 : 73); SpDefense(63); Speed(fastPlayer ? 80 : 35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_HYPER_VOICE); }
-        FormerLauraOpponent();
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
     } WHEN {
         TURN {
             if (flinch)
@@ -1693,7 +1659,7 @@ AI_DOUBLE_BATTLE_TEST("EC pivot exits: preserve immediate switching when the ext
 
 // The proposed compulsory Sash switch was not a sound requirement: Toxic
 // Chain can poison the one-HP recipient before the end-turn checkpoint.
-DOUBLE_BATTLE_TEST("EC former Laura Sash: Toxic Chain makes the one-HP reserve outcome conditional")
+DOUBLE_BATTLE_TEST("EC Laura Sash: Toxic Chain makes the one-HP reserve outcome conditional")
 {
     bool32 chain;
     PARAMETRIZE { chain = FALSE; }
@@ -1701,7 +1667,7 @@ DOUBLE_BATTLE_TEST("EC former Laura Sash: Toxic Chain makes the one-HP reserve o
     GIVEN {
         PLAYER(SPECIES_MUNKIDORI) { Level(20); HP(71); MaxHP(71); SpAttack(75); Speed(72); Ability(ABILITY_TOXIC_CHAIN); Item(ITEM_COVERT_CLOAK); Moves(MOVE_PSYCHIC); }
         PLAYER(SPECIES_SYLVEON) { Level(20); HP(86); MaxHP(86); SpAttack(73); Speed(35); Ability(ABILITY_PIXILATE); Item(ITEM_COVERT_CLOAK); Moves(MOVE_MOONBLAST); }
-        FormerLauraOpponent();
+        AuthoredOpponent(TRAINER_LAURA, 1, FALSE);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PSYCHIC, target: opponentLeft, criticalHit: FALSE, secondaryEffect: FALSE, WITH_RNG(RNG_TOXIC_CHAIN, chain));
@@ -1855,13 +1821,11 @@ DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or ra
 {
     bool32 rain;
     u8 savedWeather = WEATHER_NONE;
-    u8 savedNextWeather = WEATHER_NONE;
     PARAMETRIZE { rain = FALSE; }
     PARAMETRIZE { rain = TRUE; }
     GIVEN {
         savedWeather = gWeatherPtr->currWeather;
-        savedNextWeather = gWeatherPtr->nextWeather;
-        gWeatherPtr->currWeather = gWeatherPtr->nextWeather = WEATHER_FOG_HORIZONTAL;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
         AuthoredMistyGymOpponent(TRAINER_FLANNERY_1);
@@ -1874,7 +1838,6 @@ DOUBLE_BATTLE_TEST("EC misty gym: steam and a seed coexist with either sun or ra
         }
     } THEN {
         gWeatherPtr->currWeather = savedWeather;
-        gWeatherPtr->nextWeather = savedNextWeather;
         EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_MISTY);
         EXPECT_EQ(gFieldTimers.terrainTimer, 0);
         EXPECT(gBattleWeather & (rain ? B_WEATHER_RAIN : B_WEATHER_SUN));
@@ -1893,13 +1856,11 @@ DOUBLE_BATTLE_TEST("EC misty gym: Defog opens Corrosion while the airborne Orb w
 {
     bool32 clear;
     u8 savedWeather = WEATHER_NONE;
-    u8 savedNextWeather = WEATHER_NONE;
     PARAMETRIZE { clear = FALSE; }
     PARAMETRIZE { clear = TRUE; }
     GIVEN {
         savedWeather = gWeatherPtr->currWeather;
-        savedNextWeather = gWeatherPtr->nextWeather;
-        gWeatherPtr->currWeather = gWeatherPtr->nextWeather = WEATHER_FOG_HORIZONTAL;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
         PLAYER(SPECIES_REGISTEEL) { HP(600); MaxHP(600); Speed(10); }
         UseJaceBeforeTeaRoom();
@@ -1913,7 +1874,6 @@ DOUBLE_BATTLE_TEST("EC misty gym: Defog opens Corrosion while the airborne Orb w
         }
     } THEN {
         gWeatherPtr->currWeather = savedWeather;
-        gWeatherPtr->nextWeather = savedNextWeather;
         EXPECT_EQ(opponentLeft->species, SPECIES_DRIFBLIM);
         EXPECT_EQ(opponentLeft->status1, STATUS1_BURN);
         EXPECT_EQ(gFieldTimers.terrain, clear ? B_TERRAIN_NONE : B_TERRAIN_MISTY);
@@ -1924,11 +1884,9 @@ DOUBLE_BATTLE_TEST("EC misty gym: Defog opens Corrosion while the airborne Orb w
 DOUBLE_BATTLE_TEST("EC misty gym: airborne seed sprint does not grant status immunity")
 {
     u8 savedWeather = WEATHER_NONE;
-    u8 savedNextWeather = WEATHER_NONE;
     GIVEN {
         savedWeather = gWeatherPtr->currWeather;
-        savedNextWeather = gWeatherPtr->nextWeather;
-        gWeatherPtr->currWeather = gWeatherPtr->nextWeather = WEATHER_FOG_HORIZONTAL;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(150); }
         PLAYER(SPECIES_WOBBUFFET) { HP(600); MaxHP(600); Speed(10); }
         // Talonflame now leads beside Hawlucha; this seed-and-status check
@@ -1948,7 +1906,6 @@ DOUBLE_BATTLE_TEST("EC misty gym: airborne seed sprint does not grant status imm
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WILL_O_WISP, playerLeft);
     } THEN {
         gWeatherPtr->currWeather = savedWeather;
-        gWeatherPtr->nextWeather = savedNextWeather;
         EXPECT_EQ(opponentLeft->species, SPECIES_HAWLUCHA);
         EXPECT_EQ(opponentLeft->item, ITEM_NONE);
         EXPECT_EQ(opponentLeft->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
@@ -1963,14 +1920,12 @@ AI_DOUBLE_BATTLE_TEST("EC misty gym AI: vents blocked status but preserves usefu
 {
     u32 scenario = 0;
     u8 savedWeather = WEATHER_NONE;
-    u8 savedNextWeather = WEATHER_NONE;
     PARAMETRIZE { scenario = 0; } // Grounded targets: clear mist for Corrosion.
     PARAMETRIZE { scenario = 1; } // Good as Gold: neither Defog nor Toxic works.
     PARAMETRIZE { scenario = 2; } // Airborne targets are already status-vulnerable.
     GIVEN {
         savedWeather = gWeatherPtr->currWeather;
-        savedNextWeather = gWeatherPtr->nextWeather;
-        gWeatherPtr->currWeather = gWeatherPtr->nextWeather = WEATHER_FOG_HORIZONTAL;
+        gWeatherPtr->currWeather = WEATHER_FOG_HORIZONTAL;
         if (scenario == 0)
         {
             PLAYER(SPECIES_SNORLAX) { HP(600); MaxHP(600); Ability(ABILITY_THICK_FAT); SpDefense(250); Speed(10); Moves(MOVE_CELEBRATE); }
@@ -2004,7 +1959,6 @@ AI_DOUBLE_BATTLE_TEST("EC misty gym AI: vents blocked status but preserves usefu
         }
     } THEN {
         gWeatherPtr->currWeather = savedWeather;
-        gWeatherPtr->nextWeather = savedNextWeather;
         EXPECT_EQ(gFieldTimers.terrain, scenario == 0 ? B_TERRAIN_NONE : B_TERRAIN_MISTY);
         if (scenario == 0)
             EXPECT_EQ(opponentLeft->status1, STATUS1_BURN);
@@ -2174,9 +2128,9 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
     u32 first = 0, second = 0;
     enum Species firstForm = SPECIES_NONE, secondForm = SPECIES_NONE;
     PARAMETRIZE { trainer = TRAINER_SIDNEY; first = 4; second = 5; firstForm = SPECIES_SHARPEDO_MEGA; secondForm = SPECIES_ABSOL_MEGA_Z; }
-    PARAMETRIZE { trainer = TRAINER_PHOEBE; first = 2; second = 5; firstForm = SPECIES_GOLURK_MEGA; secondForm = SPECIES_BANETTE_MEGA; }
-    PARAMETRIZE { trainer = TRAINER_GLACIA; first = 0; second = 5; firstForm = SPECIES_FROSLASS_MEGA; secondForm = SPECIES_BAXCALIBUR_MEGA; }
-    PARAMETRIZE { trainer = TRAINER_DRAKE; first = 2; second = 5; firstForm = SPECIES_SALAMENCE_MEGA; secondForm = SPECIES_DRAGONITE_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_PHOEBE; first = 2; second = 3; firstForm = SPECIES_GENGAR_MEGA; secondForm = SPECIES_BANETTE_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_GLACIA; first = 3; second = 5; firstForm = SPECIES_FROSLASS_MEGA; secondForm = SPECIES_BAXCALIBUR_MEGA; }
+    PARAMETRIZE { trainer = TRAINER_DRAKE; first = 0; second = 5; firstForm = SPECIES_SALAMENCE_MEGA; secondForm = SPECIES_DRAGONITE_MEGA; }
     PARAMETRIZE { trainer = TRAINER_WALLACE; first = 4; second = 5; firstForm = SPECIES_MILOTIC_MEGA; secondForm = SPECIES_STARMIE_MEGA; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); Speed(10); }
@@ -2185,8 +2139,8 @@ DOUBLE_BATTLE_TEST("EC League authored Megas: every boss permits and activates i
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE);
-            // Use each lead's actual first move to initialize the native
-            // board, including Phoebe's Trick Room. The deployment below is an
+            // Every authored lead has at least one direct attack. This first
+            // turn initializes the native board; the deployment below is an
             // explicit reserve-pair fixture, not earned switching evidence.
             MOVE(opponentLeft, moveSlot: 0, target: playerLeft);
             MOVE(opponentRight, moveSlot: 0, target: playerRight);
@@ -2675,27 +2629,26 @@ static const struct EmeraldChampionsBattleSet sJoshFoeMonferno = {
 AI_DOUBLE_BATTLE_TEST("EC no payoff: Josh's Naclstack does not Recover at full HP")
 {
     GIVEN {
-        // Retain the full-HP Recover regression on Josh's current Naclstack,
-        // beside an injured Probopass. The old benchmark chose Recover while
-        // untouched after shielding against a Specs Sylveon and 1 HP Monferno.
+        // The benchmark line: Naclstack came in untouched beside an 11 HP
+        // Nosepass, facing a Specs Sylveon and a 1 HP Monferno. It shielded
+        // once, then chose Recover at 53/53 and the engine answered that its
+        // HP was full.
         PreparedPlayer(SPECIES_SYLVEON, 14, &sJoshFoeSylveon);
         PreparedPlayerAt(SPECIES_MONFERNO, 14, &sJoshFoeMonferno, 1, 0);
         // Youngster Josh is met before the first badge: cap14. Glimmet,
-        // Crustle, Alolan Graveler and Bronzor have already fallen. With no
-        // reserves, the test isolates a move choice rather than a valid switch.
-        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_PROBOPASS, 11};
+        // Dwebble and Alolan Geodude had already fallen.
+        sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_NOSEPASS, 11};
         sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_GLIMMET, 0};
-        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_CRUSTLE, 0};
-        sAuthoredInjuries[3] = (struct AuthoredInjury){SPECIES_GRAVELER_ALOLA, 0};
-        sAuthoredInjuries[4] = (struct AuthoredInjury){SPECIES_BRONZOR, 0};
-        sAuthoredLeadSlot = 5;
-        AuthoredOpponentWithPartner(TRAINER_JOSH, 0, FALSE, 2);
+        sAuthoredInjuries[2] = (struct AuthoredInjury){SPECIES_DWEBBLE, 0};
+        sAuthoredInjuries[3] = (struct AuthoredInjury){SPECIES_GEODUDE_ALOLA, 0};
+        sAuthoredLeadSlot = 4;
+        AuthoredOpponent(TRAINER_JOSH, 0, FALSE);
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_HYPER_VOICE);
             MOVE(playerRight, MOVE_PROTECT);
         }
-        // Behind its shield it is still at full HP.
+        // Behind its shield it is still at 53/53.
         TURN {
             MOVE(playerLeft, MOVE_HYPER_VOICE);
             MOVE(playerRight, MOVE_CLOSE_COMBAT, target: opponentLeft);

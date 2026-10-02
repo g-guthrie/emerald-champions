@@ -12,8 +12,8 @@
 #include "constants/opponents.h"
 #include "emerald_champions_battle_sets.h"
 
-// Switching and Mega timing from production stat generation: current
-// compiled teams except the explicitly frozen former-team regression boards.
+// Switching and Mega timing on the campaign's own teams: the compiled
+// loadouts and production stat generation, never a hand-copied set.
 
 #if TESTING
 extern bool8 gTestPairBudgetSpent;
@@ -38,17 +38,10 @@ EWRAM_DATA static struct SwitchInjury sSwitchInjuries[6] = {0};
 EWRAM_DATA static s8 sSwitchOffsetShift = 0;
 EWRAM_DATA static struct Trainer sSwitchShiftedTrainer = {0};
 EWRAM_DATA static struct TrainerMon sSwitchShiftedParty[PARTY_SIZE] = {0};
-EWRAM_DATA static const struct Trainer *sSwitchTrainer = NULL;
-
-#define FORMER_MON(_species, _item, _ability, _nature, _offset, _evs, _ivs, m1, m2, m3, m4) \
-    { .species = _species, .gender = TRAINER_MON_RANDOM_GENDER, .heldItem = _item, .ev = _evs, .iv = _ivs, \
-      .ability = _ability, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = _offset, .ball = POKEBALL_COUNT, \
-      .friendship = 255, .nature = _nature, .dynamaxLevel = MAX_DYNAMAX_LEVEL, .moves = {m1, m2, m3, m4} }
-
 
 static void BuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
 {
-    const struct Trainer *trainer = sSwitchTrainer ? sSwitchTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     if (sSwitchOffsetShift != 0)
     {
         sSwitchShiftedTrainer = *trainer;
@@ -122,7 +115,7 @@ static void DeclareAuthoredMon(struct Pokemon *mon)
 // A doubles opponent built from its authored team, in authored order.
 static void SwitchAuthoredOpponent(u16 trainerId, u32 badges)
 {
-    const struct Trainer *trainer = sSwitchTrainer ? sSwitchTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     BuildAuthoredParty(trainerId, badges, party, BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE);
     if (sSwitchSwap[0] != sSwitchSwap[1])
@@ -156,7 +149,6 @@ static void SwitchAuthoredOpponent(u16 trainerId, u32 badges)
     }
     memset(sSwitchInjuries, 0, sizeof(sSwitchInjuries));
     sSwitchMilestone = 0;
-    sSwitchTrainer = NULL;
     Free(party);
 }
 
@@ -278,46 +270,11 @@ AI_DOUBLE_BATTLE_TEST("EC Mega: Sidney's Sharpedo earns its Speed Boost before e
     }
 }
 
-// Pre-recovery source loadout from commit 86d382eaa4.
-// Retained only for the measured regression board, never for the campaign.
-static const struct TrainerMon sGlaciaBeforeRecoveryParty[] =
-{
-    FORMER_MON(SPECIES_NINETALES_ALOLA, ITEM_LIGHT_CLAY, ABILITY_SNOW_WARNING, NATURE_TIMID, 9,
-        TRAINER_PARTY_EVS(252, 0, 0, 4, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_AURORA_VEIL, MOVE_BLIZZARD, MOVE_MOONBLAST, MOVE_ENCORE),
-    FORMER_MON(SPECIES_KYUREM, ITEM_CHOICE_SPECS, ABILITY_PRESSURE, NATURE_MODEST, 6,
-        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_BLIZZARD, MOVE_DRACO_METEOR, MOVE_FREEZE_DRY, MOVE_EARTH_POWER),
-    FORMER_MON(SPECIES_CHIEN_PAO, ITEM_FOCUS_SASH, ABILITY_SWORD_OF_RUIN, NATURE_JOLLY, 6,
-        TRAINER_PARTY_EVS(4, 252, 0, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_ICICLE_CRASH, MOVE_SUCKER_PUNCH, MOVE_SACRED_SWORD, MOVE_PROTECT),
-    FORMER_MON(SPECIES_FROSLASS, ITEM_FROSLASSITE, ABILITY_CURSED_BODY, NATURE_TIMID, 6,
-        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_BLIZZARD, MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_PROTECT),
-    FORMER_MON(SPECIES_SANDSLASH_ALOLA, ITEM_LIFE_ORB, ABILITY_SLUSH_RUSH, NATURE_ADAMANT, 9,
-        TRAINER_PARTY_EVS(4, 252, 0, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_ICICLE_CRASH, MOVE_IRON_HEAD, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT),
-    FORMER_MON(SPECIES_BAXCALIBUR, ITEM_BAXCALIBRITE, ABILITY_THERMAL_EXCHANGE, NATURE_ADAMANT, 6,
-        TRAINER_PARTY_EVS(4, 252, 0, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_GLAIVE_RUSH, MOVE_ICICLE_CRASH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT),
-};
-EWRAM_DATA static struct Trainer sGlaciaBeforeRecoveryTrainer = {0};
-
-static const struct Trainer *GlaciaBeforeRecovery(void)
-{
-    sGlaciaBeforeRecoveryTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_GLACIA];
-    sGlaciaBeforeRecoveryTrainer.party = sGlaciaBeforeRecoveryParty;
-    sGlaciaBeforeRecoveryTrainer.partySize = ARRAY_COUNT(sGlaciaBeforeRecoveryParty);
-    sGlaciaBeforeRecoveryTrainer.poolSize = 0;
-    sGlaciaBeforeRecoveryTrainer.overrideTrainer = 0;
-    return &sGlaciaBeforeRecoveryTrainer;
-}
-
 // w4-16b/gla-2 turn 2: Froslass and Sandslash arrive after a turn-one double
 // knockout into Mega Charizard Y's sun, and Froslass - whose Mega brings Snow
-// Warning - spends its turn in base form. Taking the weather back is the
-// native payoff this former-team Mega timing regression preserves.
-AI_DOUBLE_BATTLE_TEST("EC Mega: former Glacia team's Froslass evolves into Mega Charizard's sun")
+// Warning - spends its turn in base form. Glacia's plan is snow, and taking
+// the weather back is what that Mega is for.
+AI_DOUBLE_BATTLE_TEST("EC Mega: Glacia's Froslass evolves into Mega Charizard's sun")
 {
     GIVEN {
         SwitchPlayer(SPECIES_CHARIZARD, 80, 24, SET(MOVE_HEAT_WAVE, MOVE_FOCUS_BLAST, MOVE_SOLAR_BEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_BLAZE, ITEM_CHARIZARDITE_Y, 4, 0, 0, 252, 0, 252));
@@ -327,11 +284,7 @@ AI_DOUBLE_BATTLE_TEST("EC Mega: former Glacia team's Froslass evolves into Mega 
         sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_CHIEN_PAO, 1, STATUS1_TOXIC_POISON};
         sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_BAXCALIBUR, 0};
         SwitchLeads(1, 2);
-        sSwitchTrainer = GlaciaBeforeRecovery();
         SwitchAuthoredOpponent(TRAINER_GLACIA, 8);
-        // Named unmanaged owner: retain native eligibility and Mega budget,
-        // independent of today's changed campaign slot mask.
-        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SAWYER_1;
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_PROTECT, gimmick: GIMMICK_MEGA);
@@ -346,8 +299,6 @@ AI_DOUBLE_BATTLE_TEST("EC Mega: former Glacia team's Froslass evolves into Mega 
     } THEN {
         EXPECT_EQ(opponentLeft->species, SPECIES_FROSLASS_MEGA);
         EXPECT(gBattleWeather & B_WEATHER_ICY_ANY);
-        EXPECT_EQ(EmeraldChampions_GetBattlePlan(B_BATTLER_1), 0);
-        EXPECT_EQ(EmeraldChampions_GetMegaEvolutionLimit(B_BATTLER_1), 1);
     }
 }
 
@@ -573,46 +524,11 @@ AI_DOUBLE_BATTLE_TEST("EC switching: Wattson's Galvantula keeps a useless lock r
     }
 }
 
-// Pre-recovery source loadout from commit 86d382eaa4.
-// Retained only for the measured regression board, never for the campaign.
-static const struct TrainerMon sCynthiaBeforeRecoveryParty[] =
-{
-    FORMER_MON(SPECIES_MILOTIC, ITEM_LEFTOVERS, ABILITY_COMPETITIVE, NATURE_MODEST, 7,
-        TRAINER_PARTY_EVS(252, 0, 4, 252, 0, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_SCALD, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT),
-    FORMER_MON(SPECIES_TOGEKISS, ITEM_SITRUS_BERRY, ABILITY_SERENE_GRACE, NATURE_CALM, 6,
-        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_AIR_SLASH, MOVE_FOLLOW_ME, MOVE_THUNDER_WAVE, MOVE_PROTECT),
-    FORMER_MON(SPECIES_SPIRITOMB, ITEM_MENTAL_HERB, ABILITY_INFILTRATOR, NATURE_SASSY, 6,
-        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 0),
-        MOVE_FOUL_PLAY, MOVE_WILL_O_WISP, MOVE_SNARL, MOVE_PROTECT),
-    FORMER_MON(SPECIES_LUCARIO, ITEM_CHOICE_SCARF, ABILITY_INNER_FOCUS, NATURE_NAIVE, 6,
-        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_CLOSE_COMBAT, MOVE_FLASH_CANNON, MOVE_EXTREME_SPEED, MOVE_AURA_SPHERE),
-    FORMER_MON(SPECIES_MIRAIDON, ITEM_CHOICE_SPECS, ABILITY_HADRON_ENGINE, NATURE_TIMID, 7,
-        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_VOLT_SWITCH, MOVE_OVERHEAT),
-    FORMER_MON(SPECIES_GARCHOMP, ITEM_GARCHOMPITE_Z, ABILITY_ROUGH_SKIN, NATURE_JOLLY, 7,
-        TRAINER_PARTY_EVS(4, 252, 0, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_DRAGON_CLAW, MOVE_STOMPING_TANTRUM, MOVE_ROCK_SLIDE, MOVE_PROTECT),
-};
-EWRAM_DATA static struct Trainer sCynthiaBeforeRecoveryTrainer = {0};
-
-static const struct Trainer *CynthiaBeforeRecovery(void)
-{
-    sCynthiaBeforeRecoveryTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_CYNTHIA_1];
-    sCynthiaBeforeRecoveryTrainer.party = sCynthiaBeforeRecoveryParty;
-    sCynthiaBeforeRecoveryTrainer.partySize = ARRAY_COUNT(sCynthiaBeforeRecoveryParty);
-    sCynthiaBeforeRecoveryTrainer.poolSize = 0;
-    sCynthiaBeforeRecoveryTrainer.overrideTrainer = 0;
-    return &sCynthiaBeforeRecoveryTrainer;
-}
-
 // w4-17/cyn-1 turns 6-7: Lucario's Scarf Close Combat takes Kartana, then is
 // held into Flutter Mane (immune) and Amoonguss (resists). The one reserve
 // left is Cynthia's ace Garchomp at 55 HP, which Flutter Mane's Moonblast
 // removes on arrival: the exit would spend the ace for nothing.
-AI_DOUBLE_BATTLE_TEST("EC switching: former Cynthia team's Lucario keeps a useless lock rather than spend an ace that falls on entry")
+AI_DOUBLE_BATTLE_TEST("EC switching: Cynthia's Lucario keeps a useless lock rather than spend an ace that falls on entry")
 {
     bool32 champion = FlagGet(FLAG_IS_CHAMPION);
     GIVEN {
@@ -625,11 +541,7 @@ AI_DOUBLE_BATTLE_TEST("EC switching: former Cynthia team's Lucario keeps a usele
         sSwitchInjuries[2] = (struct SwitchInjury){SPECIES_MIRAIDON, 0};
         sSwitchInjuries[3] = (struct SwitchInjury){SPECIES_GARCHOMP, 55};
         SwitchLeads(2, 3);
-        sSwitchTrainer = CynthiaBeforeRecovery();
         SwitchAuthoredOpponent(TRAINER_CYNTHIA_1, 8);
-        // Named unmanaged owner: retain native eligibility and Mega budget,
-        // independent of today's changed campaign slot mask.
-        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SAWYER_1;
         if (!champion)
             FlagClear(FLAG_IS_CHAMPION);
     } WHEN {

@@ -150,9 +150,9 @@ FortreeCity_Gym_Text_GymGuideAdvice: @ 8216785
 FortreeCity_Gym_Text_GymGuideAdvice2:
 	.string "Fortree Gym Leader Winona is\n"
 	.string "a master of Flying-type Pokémon.\p"
-	.string "Ice moves hit Altaria, Zapdos\n"
-	.string "and Enamorus hard.\p"
-	.string "Electric moves hit her other fliers,\n"
+	.string "Ice moves hit most of her team hard,\n"
+	.string "her Dragon-types above all.\p"
+	.string "Electric moves handle the rest,\n"
 	.string "Mega Skarmory included!\p"
 	.string "She's waiting at the back of this Gym,\n"
 	.string "behind the rotating doors.\p"

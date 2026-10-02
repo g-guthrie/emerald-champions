@@ -14,9 +14,9 @@
 #include "emerald_champions_battle_sets.h"
 
 // Locks, switch-ins, move and target choice replayed from the build-k
-// benchmark boards: current compiled teams except explicitly named former
-// boards, production stat generation, and each board's in-battle state
-// restored before the AI reads it.
+// benchmark boards: the campaign's own compiled teams, production stat
+// generation, and each board's in-battle state restored before the AI reads
+// it.
 
 extern void (*gTestAiTurnSetupHook)(void);
 
@@ -31,18 +31,10 @@ EWRAM_DATA static u16 sLockMilestone = 0;
 // with, so the engine sends it out beside the lead. Consumed like the
 // injuries. {0, 0} keeps the authored order.
 EWRAM_DATA static u8 sLockSwap[2] = {0};
-// Consumed by the next former-board construction.
-EWRAM_DATA static const struct Trainer *sLockTrainer = NULL;
-
-#define FORMER_MON(_species, _item, _ability, _nature, _offset, _evs, _ivs, m1, m2, m3, m4) \
-    { .species = _species, .gender = TRAINER_MON_RANDOM_GENDER, .heldItem = _item, .ev = _evs, .iv = _ivs, \
-      .ability = _ability, .lvl = 1, .useLevelOffset = TRUE, .levelOffset = _offset, .ball = POKEBALL_COUNT, \
-      .friendship = 255, .nature = _nature, .dynamaxLevel = MAX_DYNAMAX_LEVEL, .moves = {m1, m2, m3, m4} }
-
 
 static void LockBuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *party, u32 flags)
 {
-    const struct Trainer *trainer = sLockTrainer ? sLockTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     u32 savedFlags = gBattleTypeFlags;
     enum DifficultyLevel savedDifficulty = GetCurrentDifficultyLevel();
     bool8 savedBadges[8];
@@ -86,7 +78,7 @@ static void LockBuildAuthoredParty(u16 trainerId, u32 badges, struct Pokemon *pa
 // the board's injuries applied.
 static void LockAuthoredOpponent(u16 trainerId, u32 badges)
 {
-    const struct Trainer *trainer = sLockTrainer ? sLockTrainer : &gTrainers[DIFFICULTY_NORMAL][trainerId];
+    const struct Trainer *trainer = &gTrainers[DIFFICULTY_NORMAL][trainerId];
     struct Pokemon *party = AllocZeroed(sizeof(struct Pokemon) * PARTY_SIZE);
     LockBuildAuthoredParty(trainerId, badges, party, BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE);
     if (sLockSwap[0] != sLockSwap[1])
@@ -126,7 +118,6 @@ static void LockAuthoredOpponent(u16 trainerId, u32 badges)
     memset(sLockInjuries, 0, sizeof(sLockInjuries));
     memset(sLockSwap, 0, sizeof(sLockSwap));
     sLockMilestone = 0;
-    sLockTrainer = NULL;
     Free(party);
 }
 
@@ -179,41 +170,6 @@ static void LockUsed(enum BattlerId battler, enum Move move, bool32 last)
 
 // k4/cyn1 turn 1 as it stood: Togekiss shielded last turn and Milotic
 // flinched, Groudon has shown Heat Crash and Incineroar Fake Out.
-// Pre-recovery source loadout from commit 86d382eaa4.
-// Retained only for the measured regression board, never for the campaign.
-static const struct TrainerMon sCynthiaBeforeRecoveryParty[] =
-{
-    FORMER_MON(SPECIES_MILOTIC, ITEM_LEFTOVERS, ABILITY_COMPETITIVE, NATURE_MODEST, 7,
-        TRAINER_PARTY_EVS(252, 0, 4, 252, 0, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_SCALD, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT),
-    FORMER_MON(SPECIES_TOGEKISS, ITEM_SITRUS_BERRY, ABILITY_SERENE_GRACE, NATURE_CALM, 6,
-        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_AIR_SLASH, MOVE_FOLLOW_ME, MOVE_THUNDER_WAVE, MOVE_PROTECT),
-    FORMER_MON(SPECIES_SPIRITOMB, ITEM_MENTAL_HERB, ABILITY_INFILTRATOR, NATURE_SASSY, 6,
-        TRAINER_PARTY_EVS(252, 0, 4, 0, 252, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 0),
-        MOVE_FOUL_PLAY, MOVE_WILL_O_WISP, MOVE_SNARL, MOVE_PROTECT),
-    FORMER_MON(SPECIES_LUCARIO, ITEM_CHOICE_SCARF, ABILITY_INNER_FOCUS, NATURE_NAIVE, 6,
-        TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_CLOSE_COMBAT, MOVE_FLASH_CANNON, MOVE_EXTREME_SPEED, MOVE_AURA_SPHERE),
-    FORMER_MON(SPECIES_MIRAIDON, ITEM_CHOICE_SPECS, ABILITY_HADRON_ENGINE, NATURE_TIMID, 7,
-        TRAINER_PARTY_EVS(4, 0, 0, 252, 0, 252), TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-        MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_VOLT_SWITCH, MOVE_OVERHEAT),
-    FORMER_MON(SPECIES_GARCHOMP, ITEM_GARCHOMPITE_Z, ABILITY_ROUGH_SKIN, NATURE_JOLLY, 7,
-        TRAINER_PARTY_EVS(4, 252, 0, 0, 0, 252), TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-        MOVE_DRAGON_CLAW, MOVE_STOMPING_TANTRUM, MOVE_ROCK_SLIDE, MOVE_PROTECT),
-};
-EWRAM_DATA static struct Trainer sCynthiaBeforeRecoveryTrainer = {0};
-
-static const struct Trainer *CynthiaBeforeRecovery(void)
-{
-    sCynthiaBeforeRecoveryTrainer = gTrainers[DIFFICULTY_NORMAL][TRAINER_CYNTHIA_1];
-    sCynthiaBeforeRecoveryTrainer.party = sCynthiaBeforeRecoveryParty;
-    sCynthiaBeforeRecoveryTrainer.partySize = ARRAY_COUNT(sCynthiaBeforeRecoveryParty);
-    sCynthiaBeforeRecoveryTrainer.poolSize = 0;
-    sCynthiaBeforeRecoveryTrainer.overrideTrainer = 0;
-    return &sCynthiaBeforeRecoveryTrainer;
-}
-
 static void CynthiaTogekissBoard(void)
 {
     LockNotFirstTurn();
@@ -228,7 +184,7 @@ static void CynthiaTogekissBoard(void)
 // - just as it landed, and Garchomp arrived at 42%. The body it relieved was
 // full, so the entry cost only ever charged a super-effective hit worth more
 // than a whole Togekiss; a hit the outgoing body was immune to was free.
-AI_DOUBLE_BATTLE_TEST("EC switching: former Cynthia team's Togekiss does not hand Garchomp a Precipice Blades it is immune to")
+AI_DOUBLE_BATTLE_TEST("EC switching: Cynthia's Togekiss does not hand Garchomp a Precipice Blades it is immune to")
 {
     bool32 champion = FlagGet(FLAG_IS_CHAMPION);
     GIVEN {
@@ -238,10 +194,7 @@ AI_DOUBLE_BATTLE_TEST("EC switching: former Cynthia team's Togekiss does not han
         LockPlayer(SPECIES_FLUTTER_MANE, 100, 0, SET(MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, NATURE_TIMID, ABILITY_PROTOSYNTHESIS, ITEM_BOOSTER_ENERGY, 4, 0, 0, 252, 0, 252));
         LockPlayer(SPECIES_KARTANA, 100, 0, SET(MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_SMART_STRIKE, MOVE_PROTECT, NATURE_JOLLY, ABILITY_BEAST_BOOST, ITEM_LIFE_ORB, 4, 252, 0, 0, 0, 252));
         sLockInjuries[0] = (struct LockInjury){SPECIES_MILOTIC, 381};
-        sLockTrainer = CynthiaBeforeRecovery();
         LockAuthoredOpponent(TRAINER_CYNTHIA_1, 8);
-        // Named unmanaged owner for the explicit former-team regression board.
-        gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SAWYER_1;
         if (!champion)
             FlagClear(FLAG_IS_CHAMPION);
         gTestAiTurnSetupHook = CynthiaTogekissBoard;

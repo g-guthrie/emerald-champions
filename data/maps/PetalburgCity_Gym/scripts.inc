@@ -1520,9 +1520,9 @@ PetalburgCity_Gym_Text_GymGuideAdvice2:
 	.string "Whoops! The doors in this room are\n"
 	.string "already open, so don't attack me!\p"
 	.string "The door at the left leads to\n"
-	.string "the Multi-Hit Room.\p"
+	.string "the Speed Room.\p"
 	.string "The door at the right leads to\n"
-	.string "the Risk Room.\p"
+	.string "the Accuracy Room.\p"
 	.string "The room's name will be on\n"
 	.string "the door, so choose carefully.\p"
 	.string "Once you've chosen the door…\n"
@@ -1537,9 +1537,10 @@ PetalburgCity_Gym_Text_GymGuidePostVictory: @ 82066F3
 	.string "What a stunning turn of events!$"
 
 PetalburgCity_Gym_Text_RandallIntro: @ 820674F
-	.string "One attack, many hits!\n"
-	.string "Can your partners withstand\l"
-	.string "the whole swarm?$"
+	.string "The ability to attack before the\n"
+	.string "opponent…\p"
+	.string "Just that alone puts me at a great\n"
+	.string "advantage, don't you agree?$"
 
 PetalburgCity_Gym_Text_RandallDefeat: @ 82067B9
 	.string "That was a magnificent battle!$"
@@ -1547,8 +1548,8 @@ PetalburgCity_Gym_Text_RandallDefeat: @ 82067B9
 PetalburgCity_Gym_Text_RandallPostBattle: @ 82067D8
 	.string "Go on to the next room where a new\n"
 	.string "challenge awaits you.\p"
-	.string "At the left is the Trick Room.\p"
-	.string "The right door leads to the Power\n"
+	.string "At the left is the Confusion Room.\p"
+	.string "The right door leads to the Defense\n"
 	.string "Room.$"
 
 PetalburgCity_Gym_Text_RandallPostBadge: @ 820685E
@@ -1559,14 +1560,13 @@ PetalburgCity_Gym_Text_RandallPostBadge: @ 820685E
 	.string "Gym Leader is all about.$"
 
 PetalburgCity_Gym_Text_ParkerIntro: @ 82068FD
-	.string "This is the Trick Room.\p"
-	.string "Trick Room lets slow partners\n"
-	.string "move first. Can you turn the\l"
-	.string "tables on my team?$"
+	.string "This is the Confusion Room.\p"
+	.string "Let me see how well bonded you are\n"
+	.string "with your Pokémon!$"
 
 PetalburgCity_Gym_Text_ParkerDefeat: @ 820694F
-	.string "You found your way through\n"
-	.string "my twisted room!$"
+	.string "I couldn't confuse your team enough…\n"
+	.string "You share a strong bond together.$"
 
 PetalburgCity_Gym_Text_ParkerPostBattle: @ 8206996
 	.string "The next room is the Strength Room.\n"
@@ -1595,7 +1595,7 @@ PetalburgCity_Gym_Text_GeorgePostBattle: @ 8206AE9
 	.string "earned only through effort.\p"
 	.string "I lost because my own efforts\n"
 	.string "weren't enough.\p"
-	.string "Go on! The Pressure Room is next.$"
+	.string "Go on! The One-Hit KO Room is next.$"
 
 PetalburgCity_Gym_Text_GeorgePostBadge: @ 8206BB1
 	.string "I'm going to keep training at Gyms.\n"
@@ -1604,8 +1604,8 @@ PetalburgCity_Gym_Text_GeorgePostBadge: @ 8206BB1
 PetalburgCity_Gym_Text_BerkeIntro: @ 8206BF4
 	.string "I'm not going to take it easy just\n"
 	.string "because you're our Leader's kid.\p"
-	.string "My partners keep the pressure on\n"
-	.string "with powerful attacks!$"
+	.string "I'll show you how horrid it is for\n"
+	.string "a Pokémon to take a critical hit!$"
 
 PetalburgCity_Gym_Text_BerkeDefeat: @ 8206C7D
 	.string "Your power…\n"
@@ -1626,10 +1626,9 @@ PetalburgCity_Gym_Text_BerkePostBadge: @ 8206D56
 
 PetalburgCity_Gym_Text_MaryIntro: @ 8206DB2
 	.string "Giggle…\n"
-	.string "This is the Risk Room.\p"
-	.string "My partners risk misses, recoil\n"
-	.string "and even their own HP for power.\p"
-	.string "Can you make those risks backfire?$"
+	.string "This is the Accuracy Room.\p"
+	.string "It's pretty nasty when every attack\n"
+	.string "lands without fail.$"
 
 PetalburgCity_Gym_Text_MaryDefeat: @ 8206E0D
 	.string "You were a cut above me…$"
@@ -1637,7 +1636,7 @@ PetalburgCity_Gym_Text_MaryDefeat: @ 8206E0D
 PetalburgCity_Gym_Text_MaryPostBattle: @ 8206E26
 	.string "There are some even stronger\n"
 	.string "Trainers waiting for you.\p"
-	.string "The left is the Power Room, and\n"
+	.string "The left is the Defense Room, and\n"
 	.string "the right is the Recovery Room.\p"
 	.string "Your Pokémon's Attack power will be\n"
 	.string "on trial either way.$"
@@ -1649,11 +1648,11 @@ PetalburgCity_Gym_Text_MaryPostBadge: @ 8206ED8
 	.string "with our Pokémon.$"
 
 PetalburgCity_Gym_Text_AlexiaIntro: @ 8206F44
-	.string "Status and stat boosts give my\n"
-	.string "partners fearsome Attack power!$"
+	.string "The higher the Defense, the more\n"
+	.string "reckless I can be in attack.$"
 
 PetalburgCity_Gym_Text_AlexiaDefeat: @ 8206F82
-	.string "Our power wasn't enough…$"
+	.string "Our defenses weren't enough…$"
 
 PetalburgCity_Gym_Text_AlexiaPostBattle: @ 8206F9F
 	.string "I think you've taught me a valuable\n"
@@ -1661,7 +1660,7 @@ PetalburgCity_Gym_Text_AlexiaPostBattle: @ 8206F9F
 	.string "Now, go on! The left door goes to\n"
 	.string "the Strength Room.\p"
 	.string "The right door opens to\n"
-	.string "the Pressure Room.\p"
+	.string "the One-Hit KO Room.\p"
 	.string "Both of them have Trainers who are\n"
 	.string "skilled at offense.$"
 
@@ -1695,20 +1694,20 @@ PetalburgCity_Gym_Text_DoorAppearsLocked: @ 82071F4
 	.string "right now…$"
 
 PetalburgCity_Gym_Text_EnterSpeedRoom: @ 820721E
-	.string "“Multi-Hit Room,” the sign says.\p"
+	.string "“Speed Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 @ Unused
 PetalburgCity_Gym_Text_EnterAccuracyRoom: @ 8207280
-	.string "“Risk Room,” the sign says.\p"
+	.string "“Accuracy Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterConfusionRoom: @ 82072BB
-	.string "“Trick Room,” the sign says.\p"
+	.string "“Confusion Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterDefenseRoom: @ 82072F7
-	.string "“Power Room,” the sign says.\p"
+	.string "“Defense Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterRecoveryRoom: @ 8207331
@@ -1720,7 +1719,7 @@ PetalburgCity_Gym_Text_EnterStrengthRoom: @ 820736C
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterOHKORoom: @ 82073A7
-	.string "“Pressure Room,” the sign says.\p"
+	.string "“One-Hit KO Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterGymLeadersRoom: @ 82073E4
