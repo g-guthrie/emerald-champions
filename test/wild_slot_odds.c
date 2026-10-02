@@ -899,7 +899,7 @@ TEST("Sweet Scent: a live restricted slot is three times as likely, all of them 
     ClearLegendCaughtBits();
     memcpy(dexCaught, gSaveBlock1Ptr->dexCaught, sizeof(dexCaught));
     struct WildPokemon mons[NUM_WATER_MONS_ENCOUNTER_SLOTS] = {
-        {5, 5, SPECIES_MAGIKARP}, {5, 5, SPECIES_GOLDEEN}, {5, 5, SPECIES_TENTACOOL}, {5, 5, SPECIES_SHAYMIN},
+        {5, 5, SPECIES_MAGIKARP}, {5, 5, SPECIES_GOLDEEN}, {5, 5, SPECIES_TENTACOOL}, {5, 5, SPECIES_KUBFU},
     };
     static const u8 fivePercent[] = {60, 85, 95, 100};
     static const u8 heavy[] = {40, 60, 80, 100};
@@ -908,7 +908,7 @@ TEST("Sweet Scent: a live restricted slot is three times as likely, all of them 
     // A 5% Legendary slot becomes 15%: a lure, not a guarantee.
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
     // Caught: inert, and the ordinary reversal takes every outcome.
-    MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
+    MarkLegendarySignCaughtBySpecies(SPECIES_KUBFU);
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
     // Gated: Cobalion waits for Badge 2, so its slot is inert too.
     mons[3].species = SPECIES_COBALION;
@@ -917,7 +917,11 @@ TEST("Sweet Scent: a live restricted slot is three times as likely, all of them 
     FlagSet(FLAG_BADGE02_GET);
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
 
-    // Ultra Beasts and Paradox Pokemon are lured the same way.
+    // Ultra Beasts and Paradox Pokemon are lured the same way. Poipole and
+    // Shaymin open at five and four Badges.
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_BADGE04_GET);
+    FlagSet(FLAG_BADGE05_GET);
     mons[3].species = SPECIES_POIPOLE;
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
     mons[3].species = SPECIES_IRON_LEAVES;

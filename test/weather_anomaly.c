@@ -36,11 +36,11 @@ static const u16 sProgressFlags[] = {
     FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, FLAG_IS_CHAMPION,
 };
 
-// The eight visitors of the Weather Institute rescue (five badges).
+// The six visitors of the Weather Institute rescue (five badges). Tapu Koko
+// and Tapu Lele wait for Groudon's awakening with the box legends.
 static const enum LegendarySignId sFirstVisitors[] = {
-    LEGENDARY_SIGN_TAPU_KOKO, LEGENDARY_SIGN_TAPU_BULU, LEGENDARY_SIGN_TAPU_LELE,
-    LEGENDARY_SIGN_TORNADUS, LEGENDARY_SIGN_THUNDURUS, LEGENDARY_SIGN_ENAMORUS,
-    LEGENDARY_SIGN_ZARUDE, LEGENDARY_SIGN_SUICUNE,
+    LEGENDARY_SIGN_TAPU_BULU, LEGENDARY_SIGN_TORNADUS, LEGENDARY_SIGN_THUNDURUS,
+    LEGENDARY_SIGN_ENAMORUS, LEGENDARY_SIGN_ZARUDE, LEGENDARY_SIGN_SUICUNE,
 };
 
 static void ResetAnomalyState(void)
@@ -222,8 +222,10 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
     // Downpour visitors wait for Kyogre's awakening, which precedes the window end.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_FINI].unlockFlag, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KELDEO].minimumBadges, 7);
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_VISITED_FORTREE_CITY);
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_BADGE06_GET);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_BULU].unlockFlag, FLAG_VISITED_FORTREE_CITY);
+    // Tapu Koko, Tapu Lele and the box legends storm from Groudon's awakening.
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     // Geomancy Xerneas swept the Elite Four: it waits for the Hall of Fame.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_IS_CHAMPION);
 }
@@ -294,22 +296,24 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
     EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), first[0]);
     EXPECT_EQ(CountLive(), WEATHER_ANOMALY_SLOT_COUNT);
     EXPECT(LiveSlotsAreDistinct());
-    // By the end of the first full cycle every opening visitor has rotated
-    // out and the other four eligible visitors hold the slots.
+    // Through the first full cycle the slots stay full and distinct, every
+    // eligible visitor takes a turn, and only eligible visitors appear.
+    bool8 seen[LEGENDARY_SIGN_COUNT] = {0};
+    for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
+        seen[first[slot]] = TRUE;
     while (steps < WEATHER_ANOMALY_DURATION_STEPS)
     {
         TakeSteps(1);
         steps++;
         EXPECT_EQ(CountLive(), WEATHER_ANOMALY_SLOT_COUNT);
+        for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
+            seen[GetWeatherAnomalySlotSignId(slot)] = TRUE;
     }
     EXPECT(LiveSlotsAreDistinct());
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
-    {
-        u8 now = GetWeatherAnomalySlotSignId(slot);
-        EXPECT(IsFirstVisitor(now));
-        for (u32 old = 0; old < WEATHER_ANOMALY_SLOT_COUNT; old++)
-            EXPECT_NE(now, first[old]);
-    }
+        EXPECT(IsFirstVisitor(GetWeatherAnomalySlotSignId(slot)));
+    for (u32 i = 0; i < ARRAY_COUNT(sFirstVisitors); i++)
+        EXPECT(seen[sFirstVisitors[i]]);
     EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), first[WEATHER_ANOMALY_SLOT_COUNT - 1]);
 
     // Every visitor eligible: shared home maps (Route 118, 121, 123, Mt. Pyre)
@@ -317,6 +321,7 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
     SetBadges(8);
     FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
     FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
+    FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     u32 seenVisitors = 0;
     for (u32 round = 0; round < 200; round++)
     {
@@ -357,19 +362,19 @@ TEST("Weather anomalies: an empty pool leaves slots empty until a cycle passes")
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_KOKO);
+    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_BULU);
     TakeSteps(1);
     EXPECT_EQ(CountLive(), 1);
-    EXPECT(IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_KOKO));
+    EXPECT(IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_BULU));
 
     // Koko expires: it is on cooldown and nothing else is eligible.
     for (u32 slot = 0; slot < WEATHER_ANOMALY_SLOT_COUNT; slot++)
-        if (GetWeatherAnomalySlotSignId(slot) == LEGENDARY_SIGN_TAPU_KOKO)
-            SetWeatherAnomalySlot(slot, LEGENDARY_SIGN_TAPU_KOKO, 1);
+        if (GetWeatherAnomalySlotSignId(slot) == LEGENDARY_SIGN_TAPU_BULU)
+            SetWeatherAnomalySlot(slot, LEGENDARY_SIGN_TAPU_BULU, 1);
     AlignToTick();
     TakeSteps(1);
     EXPECT_EQ(CountLive(), 0);
-    EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), LEGENDARY_SIGN_TAPU_KOKO);
+    EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), LEGENDARY_SIGN_TAPU_BULU);
     // When an empty slot has waited out its cycle, the cooldown lapses and
     // Koko returns. The opening fill is staggered, so the first empty slot
     // (slot 1) waits half a cycle; never sooner than that, never later.
@@ -384,7 +389,7 @@ TEST("Weather anomalies: an empty pool leaves slots empty until a cycle passes")
     EXPECT_GE(waited, emptyWait - WEATHER_ANOMALY_TICK_STEPS);
     EXPECT_LE(waited, emptyWait);
     EXPECT_EQ(CountLive(), 1);
-    EXPECT(IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_KOKO));
+    EXPECT(IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_BULU));
     EXPECT_EQ(GetWeatherAnomalyCooldownSignId(), WEATHER_ANOMALY_EMPTY);
     ResetAnomalyState();
 }
@@ -396,18 +401,18 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     struct MapHeader savedHeader = gMapHeader;
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
     SetWeatherAnomalySlot(1, LEGENDARY_SIGN_TAPU_FINI, WEATHER_ANOMALY_DURATION_STEPS); // Gate closed: never live.
 
-    u8 route110Weather = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110))->weather;
-    EXPECT_NE(route110Weather, WEATHER_RAIN);
-    SetLocation(MAP_ROUTE110);
+    u8 route123Weather = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE123), MAP_NUM(MAP_ROUTE123))->weather;
+    EXPECT_NE(route123Weather, WEATHER_RAIN);
+    SetLocation(MAP_ROUTE123);
     EXPECT_EQ(GetWeatherAnomalyWeatherForCurrentMap(), WEATHER_RAIN);
     SetSavedWeatherFromCurrMapHeader();
     EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
     // The header is never rewritten.
-    EXPECT_EQ(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110))->weather, route110Weather);
-    EXPECT_EQ(gMapHeader.weather, route110Weather);
+    EXPECT_EQ(Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_ROUTE123), MAP_NUM(MAP_ROUTE123))->weather, route123Weather);
+    EXPECT_EQ(gMapHeader.weather, route123Weather);
 
     // Scripted sky weather on the home map (a transition's setweather, a
     // cloud/sun trigger) cannot clear the storm; terrain weather (desert
@@ -433,14 +438,14 @@ TEST("Weather anomalies: the anomaly weather replaces the header only on its hom
     SetLocation(MAP_ROUTE126);
     EXPECT_EQ(GetWeatherAnomalyWeatherForCurrentMap(), WEATHER_NONE);
 
-    // Back on Route 110 after the window closes: the header weather again.
-    SetLocation(MAP_ROUTE110);
+    // Back on Route 123 after the window closes: the header weather again.
+    SetLocation(MAP_ROUTE123);
     SetSavedWeatherFromCurrMapHeader();
     EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     EXPECT_EQ(GetWeatherAnomalyWeatherForCurrentMap(), WEATHER_NONE);
     SetSavedWeatherFromCurrMapHeader();
-    EXPECT_EQ(GetSavedWeather(), route110Weather);
+    EXPECT_EQ(GetSavedWeather(), route123Weather);
 
     gSaveBlock1Ptr->location = savedLocation;
     gMapHeader = savedHeader;
@@ -453,8 +458,8 @@ TEST("Weather anomalies: active visitor roll accepts exactly 25 of 100 draws")
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetLocation(MAP_ROUTE110);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
+    SetLocation(MAP_ROUTE123);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
     // Replay one real seed for each possible encounter roll. Random() is
     // untagged, so SET_RNG cannot rig this path.
     bool8 seen[100] = {0};
@@ -468,11 +473,11 @@ TEST("Weather anomalies: active visitor roll accepts exactly 25 of 100 draws")
         seen[roll] = TRUE;
         draws++;
         SeedRng(seed);
-        hits += TryRollWeatherAnomalyEncounter(WILD_AREA_LAND) == SPECIES_TAPU_KOKO;
+        hits += TryRollWeatherAnomalyEncounter(WILD_AREA_LAND) == SPECIES_TAPU_BULU;
     }
     EXPECT_EQ(draws, 100);
     EXPECT_EQ(hits, 25);
-    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_BULU);
     for (u32 roll = 0; roll < 100; roll++)
     {
         SeedRng(roll);
@@ -490,7 +495,7 @@ TEST("Weather anomalies: the visitor takes a quarter of encounters on its own ma
     VarSet(VAR_REPEL_STEP_COUNT, 0);
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
     SetWeatherAnomalySlot(1, LEGENDARY_SIGN_SUICUNE, WEATHER_ANOMALY_DURATION_STEPS);
 
     struct WildPokemon mons[NUM_LAND_MONS_ENCOUNTER_SLOTS];
@@ -499,14 +504,14 @@ TEST("Weather anomalies: the visitor takes a quarter of encounters on its own ma
     const struct WildPokemonInfo table = {.encounterRate = 20, .wildPokemon = mons};
     struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
 
-    // Route 110 grass: about 25%, at the cap.
-    SetLocation(MAP_ROUTE110);
+    // Route 123 grass: about 25%, at the cap.
+    SetLocation(MAP_ROUTE123);
     u32 koko = 0;
     for (u32 seed = 0; seed < 1000; seed++)
     {
         SeedRng(seed);
         EXPECT(TryGenerateWildMon(&table, WILD_AREA_LAND, 0));
-        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_TAPU_KOKO)
+        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_TAPU_BULU)
         {
             koko++;
             EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetCurrentLevelCap());
@@ -516,7 +521,7 @@ TEST("Weather anomalies: the visitor takes a quarter of encounters on its own ma
     EXPECT_GT(koko, 200);
     EXPECT_LT(koko, 300);
 
-    // Surf, Rock Smash and Honey on Route 110 never meet the land visitor.
+    // Surf, Rock Smash and Honey on Route 123 never meet the land visitor.
     for (u32 seed = 0; seed < 200; seed++)
     {
         static const enum WildPokemonArea others[] = {WILD_AREA_WATER, WILD_AREA_ROCKS, WILD_AREA_HONEY};
@@ -551,8 +556,8 @@ TEST("Weather anomalies: the visitor takes a quarter of encounters on its own ma
         EXPECT_EQ(GetMonData(mon, MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
     }
     // Caught: its anomaly no longer yields it on its own map either.
-    SetLocation(MAP_ROUTE110);
-    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    SetLocation(MAP_ROUTE123);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_BULU);
     for (u32 seed = 0; seed < 200; seed++)
     {
         SeedRng(seed);
@@ -563,7 +568,7 @@ TEST("Weather anomalies: the visitor takes a quarter of encounters on its own ma
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     for (u32 seed = 0; seed < 200; seed++)
     {
@@ -589,12 +594,12 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
     struct WildPokemon mons[NUM_LAND_MONS_ENCOUNTER_SLOTS];
     for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         mons[i] = (struct WildPokemon){5, 5, SPECIES_ZIGZAGOON};
-    mons[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1].species = SPECIES_TAPU_KOKO;
+    mons[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1].species = SPECIES_TAPU_BULU;
     const struct WildPokemonInfo land = {.encounterRate = 20, .wildPokemon = mons};
 
     // Window open, gate met, not live here: the slot rerolls.
-    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_TAPU_KOKO));
-    EXPECT(IsWeatherAnomalyVisitorSlotInert(SPECIES_TAPU_KOKO));
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_TAPU_BULU));
+    EXPECT(IsWeatherAnomalyVisitorSlotInert(SPECIES_TAPU_BULU));
     for (u32 seed = 0; seed < 512; seed++)
     {
         SeedRng(seed);
@@ -619,7 +624,7 @@ TEST("Weather anomalies: a visitor's own slot is inert until the window closes, 
     // After the window: an ordinary gated 5% resident, which Sweet Scent
     // makes three times as likely.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
-    EXPECT(!IsWeatherAnomalyVisitorSlotInert(SPECIES_TAPU_KOKO));
+    EXPECT(!IsWeatherAnomalyVisitorSlotInert(SPECIES_TAPU_BULU));
     hits = 0;
     for (u32 roll = 0; roll < 100; roll++)
     {
@@ -641,11 +646,11 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
-    SetLocation(MAP_ROUTE110);
+    SetLocation(MAP_ROUTE123);
     struct WildPokemon mons[NUM_LAND_MONS_ENCOUNTER_SLOTS];
     for (u32 i = 0; i < NUM_LAND_MONS_ENCOUNTER_SLOTS; i++)
         mons[i] = (struct WildPokemon){5, 5, SPECIES_ZIGZAGOON};
-    mons[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1].species = SPECIES_TAPU_KOKO;
+    mons[NUM_LAND_MONS_ENCOUNTER_SLOTS - 1].species = SPECIES_TAPU_BULU;
     // Keep ordinary slots at least 4%, with exactly 5% for the resident.
     static const u8 bounds[] = {18, 36, 46, 56, 65, 73, 78, 83, 87, 91, 95, 100};
     const struct WildPokemonInfo land = {.encounterRate = 20, .wildPokemon = mons, .encounterBounds = bounds};
@@ -662,7 +667,7 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
         draws++;
         SeedRng(seed);
         EXPECT(TryGenerateWildMon(&land, WILD_AREA_LAND, 0));
-        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) == SPECIES_TAPU_KOKO)
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) == SPECIES_TAPU_BULU)
         {
             koko++;
             EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL), GetCurrentLevelCap());
@@ -672,7 +677,7 @@ TEST("Weather anomalies: the resident visitor slot rolls like any legend after t
     EXPECT_EQ(draws, 100);
     EXPECT_EQ(koko, 5);
     // Capturing the resident retires the same slot permanently.
-    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_BULU);
     for (u32 seed = 0; seed < 512; seed++)
     {
         SeedRng(seed);
@@ -709,14 +714,14 @@ TEST("Weather anomalies: the Institute report lists each live anomaly and counts
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("%")));
 
     ClearWeatherAnomalies();
-    SetWeatherAnomalySlot(2, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
+    SetWeatherAnomalySlot(2, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
     SetWeatherAnomalySlot(3, LEGENDARY_SIGN_SUICUNE, WEATHER_ANOMALY_DURATION_STEPS);
     BufferWeatherAnomalyReport();
     EXPECT_EQ(gSpecialVar_Result, 2);
     u8 expected[64];
     // Map names print in title case, not the region map's capitals.
-    u8 *end = StringCopy(expected, COMPOUND_STRING("Route 110: "));
-    StringCopy(end, GetSpeciesName(SPECIES_TAPU_KOKO));
+    u8 *end = StringCopy(expected, COMPOUND_STRING("Route 123: "));
+    StringCopy(end, GetSpeciesName(SPECIES_TAPU_BULU));
     EXPECT(BufferContains(gStringVar4, expected));
     EXPECT(GetStringWidth(FONT_NORMAL, expected, 0) <= 200);
 
@@ -756,13 +761,13 @@ TEST("Weather anomalies: Center leads follow the storms")
     FlagSet(FLAG_VISITED_FORTREE_CITY);
 
     // Window open, no storm: the lead points at the Weather Institute.
-    EXPECT(FindCenterLead(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Tapu Koko")));
+    EXPECT(FindCenterLead(MAPSEC_LILYCOVE_CITY, COMPOUND_STRING("Tapu Bulu")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("You're ready!")));
 
     // Its storm is live: the lead sends the player there.
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
-    EXPECT(FindCenterLead(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Tapu Koko")));
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
+    EXPECT(FindCenterLead(MAPSEC_LILYCOVE_CITY, COMPOUND_STRING("Tapu Bulu")));
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("Its storm is raging")));
 
@@ -773,7 +778,7 @@ TEST("Weather anomalies: Center leads follow the storms")
     // Window closed: the ordinary resident line.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     ClearWeatherAnomalies();
-    EXPECT(FindCenterLead(MAPSEC_MAUVILLE_CITY, COMPOUND_STRING("Tapu Koko")));
+    EXPECT(FindCenterLead(MAPSEC_LILYCOVE_CITY, COMPOUND_STRING("Tapu Bulu")));
     EXPECT(!BufferContains(gStringVar4, COMPOUND_STRING("It rides the weather anomalies.")));
     EXPECT(BufferContains(gStringVar4, COMPOUND_STRING("You're ready!")));
 
@@ -785,10 +790,10 @@ TEST("Weather anomalies: same-map expiry restores the base sky without restartin
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetLocation(MAP_ROUTE110);
+    SetLocation(MAP_ROUTE123);
     SetSavedWeatherFromCurrMapHeader();
     gWeatherPtr->currWeather = gWeatherPtr->nextWeather = WEATHER_SUNNY;
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 50);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 50);
     UpdateWeatherAnomalyWeather();
     EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
     EXPECT_EQ(gWeatherPtr->nextWeather, WEATHER_RAIN);
@@ -798,7 +803,7 @@ TEST("Weather anomalies: same-map expiry restores the base sky without restartin
 
     AlignToTick();
     TakeSteps(1);
-    EXPECT(!IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_KOKO));
+    EXPECT(!IsWeatherAnomalyLive(LEGENDARY_SIGN_TAPU_BULU));
     UpdateWeatherAnomalyWeather();
     EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY);
     EXPECT_EQ(gWeatherPtr->nextWeather, WEATHER_SUNNY);
@@ -810,16 +815,16 @@ TEST("Weather anomalies: expiry preserves scripted base weather and terrain")
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetLocation(MAP_ROUTE110);
+    SetLocation(MAP_ROUTE123);
     SetSavedWeatherFromCurrMapHeader();
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 1500);
     SetSavedWeather(WEATHER_SHADE);
     EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
     ClearWeatherAnomalies();
     UpdateWeatherAnomalyWeather();
     EXPECT_EQ(GetSavedWeather(), WEATHER_SHADE);
 
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 1500);
     SetSavedWeather(WEATHER_SANDSTORM);
     ClearWeatherAnomalies();
     UpdateWeatherAnomalyWeather();
@@ -832,12 +837,12 @@ TEST("Weather anomalies: Continue initializes the base and capture clears weathe
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetLocation(MAP_ROUTE110);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    SetLocation(MAP_ROUTE123);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 1500);
     gSaveBlock1Ptr->weather = WEATHER_RAIN;
     InitWeatherAnomalyBaseFromSavedGame();
     EXPECT_EQ(GetSavedWeather(), WEATHER_RAIN);
-    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_BULU);
     ResumePausedWeather();
     EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY);
     EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY);
@@ -858,8 +863,8 @@ TEST("Weather anomalies: repeated quiet reports never advance empty-slot cooldow
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_KOKO);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 50);
+    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_BULU);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 50);
     AlignToTick();
     TakeSteps(1);
     EXPECT_EQ(CountLive(), 0);
@@ -944,12 +949,12 @@ TEST("Weather anomalies: saved snow respects terrain and restores the base after
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    SetLocation(MAP_ROUTE110);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 1500);
+    SetLocation(MAP_ROUTE123);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 1500);
     VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 1);
     SetSavedWeather(WEATHER_SUNNY_CLOUDS);
     EXPECT_EQ(GetSavedWeather(), WEATHER_SNOW);
-    EXPECT_EQ(GetWeatherAnomalyEncounterSpecies(MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110), WILD_AREA_LAND), SPECIES_TAPU_KOKO);
+    EXPECT_EQ(GetWeatherAnomalyEncounterSpecies(MAP_GROUP(MAP_ROUTE123), MAP_NUM(MAP_ROUTE123), WILD_AREA_LAND), SPECIES_TAPU_BULU);
 
     InitWeatherAnomalyBaseFromSavedGame();
     ResumePausedWeather();
@@ -963,7 +968,7 @@ TEST("Weather anomalies: saved snow respects terrain and restores the base after
     SetSavedWeather(WEATHER_VOLCANIC_ASH);
     EXPECT_EQ(GetSavedWeather(), WEATHER_VOLCANIC_ASH);
     SetSavedWeather(WEATHER_SUNNY_CLOUDS);
-    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_KOKO);
+    MarkLegendarySignCaughtBySpecies(SPECIES_TAPU_BULU);
     ResumePausedWeather();
     EXPECT_EQ(GetSavedWeather(), WEATHER_SUNNY_CLOUDS);
     EXPECT_EQ(gWeatherPtr->currWeather, WEATHER_SUNNY_CLOUDS);
@@ -977,8 +982,8 @@ TEST("Weather anomalies: empty replacements and the window end clear snow choice
     ResetAnomalyState();
     SetBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_KOKO);
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, 50);
+    MarkAllVisitorsCaughtExcept(LEGENDARY_SIGN_TAPU_BULU);
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, 50);
     VarSet(VAR_WEATHER_ANOMALY_SNOW_MASK, 1);
     AlignToTick();
     TakeSteps(1);

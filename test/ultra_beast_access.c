@@ -61,6 +61,7 @@ TEST("Ultra Beast access: every habitat has a 5% gated slot that spawns at the c
         for (u32 badge = 0; badge < NUM_BADGES; badge++)
             FlagSet(FLAG_BADGE01_GET + badge);
         FlagSet(FLAG_GOT_TM24_FROM_WATTSON);
+        FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
         EXPECT(CanAcquireLegendarySignSpecies(species));
         u32 hits = 0;
         for (u32 seed = 0; seed < 2048 && hits == 0; seed++)
@@ -105,8 +106,8 @@ TEST("Ultra Beast access: badge gates keep Ultra Beast slots inert until their m
     }
     for (u32 v = 0; v < ARRAY_COUNT(sUltraBeastCaughtVars); v++)
         VarSet(sUltraBeastCaughtVars[v], 0);
-    // Poipole is the ungated first hint; Buzzwole waits for three badges.
-    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_POIPOLE));
+    // Buzzwole waits for three badges; Poipole, once an early hint, for five.
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_POIPOLE));
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_BUZZWOLE));
     EXPECT(!IsWildSlotSpeciesAcquirable(SPECIES_BUZZWOLE));
     FlagSet(FLAG_BADGE01_GET);
@@ -114,11 +115,15 @@ TEST("Ultra Beast access: badge gates keep Ultra Beast slots inert until their m
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_BUZZWOLE));
     FlagSet(FLAG_BADGE03_GET);
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_BUZZWOLE));
-    // Kartana also needs the fifth badge's own flag, not just a count.
+    // Kartana also needs Groudon's awakening, not just a badge count.
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_KARTANA));
     FlagSet(FLAG_BADGE04_GET);
     FlagSet(FLAG_BADGE05_GET);
+    FlagSet(FLAG_BADGE06_GET);
+    EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_KARTANA));
+    FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_KARTANA));
+    FlagClear(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     // Paradox Pokemon have no gate row and are always acquirable.
     EXPECT(IsWildSlotSpeciesAcquirable(SPECIES_IRON_LEAVES));
     for (u32 badge = 0; badge < NUM_BADGES; badge++)

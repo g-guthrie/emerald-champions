@@ -253,8 +253,8 @@ Route123_EventScript_ItemTM99DazzlingGleam:: @ 8290FE4
 	finditem ITEM_HAWLUCHANITE
 	end
 
-Route124_EventScript_ItemRedShard:: @ 8290FF1
-	finditem ITEM_RED_SHARD
+Route124_EventScript_ItemFloettite:: @ 8290FF1
+	finditem ITEM_FLOETTITE
 	end
 
 Route124_EventScript_ItemBlueShard:: @ 8290FFE
@@ -845,8 +845,8 @@ TrickHouse5_EventScript_TerrainExtender::
 	finditem ITEM_TERRAIN_EXTENDER
 	end
 
-DewfordMeadow_EventScript_TM95Snarl::
-	finditem ITEM_FLOETTITE
+DewfordMeadow_EventScript_ItemRedShard::
+	finditem ITEM_RED_SHARD
 	end
 
 DewfordMeadow_EventScript_RingTarget::

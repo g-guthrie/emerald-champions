@@ -246,8 +246,10 @@ TEST("Rare wild NPC discovery requires local help and survives depositing the pa
     TryUnlockLocalLegendaryDiscovery();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
-    for (u32 badge = 0; badge < 5; badge++)
+    // Landorus's quest opens with Groudon's awakening.
+    for (u32 badge = 0; badge < 6; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     gSpecialVar_0x8004 = LEGENDARY_SIGN_LANDORUS;
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_CASTFORM, 25, 0, OTID_STRUCT_PLAYER_ID);
     TryUnlockLocalLegendaryDiscovery();
@@ -258,6 +260,7 @@ TEST("Rare wild NPC discovery requires local help and survives depositing the pa
     EXPECT(IsLegendarySignUnlocked(LEGENDARY_SIGN_LANDORUS));
     ZeroPlayerPartyMons();
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_LANDORUS));
+    FlagClear(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
 }
 
 static bool32 GuideTextContains(const u8 *needle)
@@ -300,9 +303,6 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     gMapHeader.regionMapSectionId = MAPSEC_OLDALE_TOWN;
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
-    EXPECT(GuideTextContains(COMPOUND_STRING("Shaymin")));
-    EXPECT(!GuideTextContains(COMPOUND_STRING("%")));
-    BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT(GuideTextContains(COMPOUND_STRING("Cosmog")));
     EXPECT(GuideTextContains(COMPOUND_STRING("Birch")));
@@ -310,6 +310,12 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_COSMOG));
     BufferNextCenterLegendaryLead();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
+    // Shaymin's lead moved to Verdanturf with its Route 117 home.
+    gMapHeader.regionMapSectionId = MAPSEC_VERDANTURF_TOWN;
+    gSpecialVar_0x8004 = 0;
+    BufferNextCenterLegendaryLead();
+    EXPECT(GuideTextContains(COMPOUND_STRING("Shaymin")));
+    EXPECT(!GuideTextContains(COMPOUND_STRING("%")));
     MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();

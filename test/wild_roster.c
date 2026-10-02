@@ -353,22 +353,22 @@ TEST("Wild roster: a storm visitor is listed only while its storm is on that map
     SaveRosterTestState(&state);
     SetRosterBadges(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    // Tapu Koko's home is Route 110. With the window open and no storm, its
+    // Tapu Bulu's home is Route 123. With the window open and no storm, its
     // own slot waits: it is not listed anywhere.
-    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_TAPU_KOKO));
-    EXPECT(!RosterHas(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
-    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_KOKO, WEATHER_ANOMALY_DURATION_STEPS);
-    EXPECT(RosterHas(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
-    EXPECT_EQ(GetRosterShare(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO), 2500);
-    EXPECT(!RosterHas(MAP_ROUTE110, WILD_ROSTER_SURFING, SPECIES_TAPU_KOKO));
-    EXPECT(!RosterHas(MAP_ROUTE111, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
+    EXPECT(CanAcquireLegendarySignSpecies(SPECIES_TAPU_BULU));
+    EXPECT(!RosterHas(MAP_ROUTE123, WILD_ROSTER_LAND, SPECIES_TAPU_BULU));
+    SetWeatherAnomalySlot(0, LEGENDARY_SIGN_TAPU_BULU, WEATHER_ANOMALY_DURATION_STEPS);
+    EXPECT(RosterHas(MAP_ROUTE123, WILD_ROSTER_LAND, SPECIES_TAPU_BULU));
+    EXPECT_EQ(GetRosterShare(MAP_ROUTE123, WILD_ROSTER_LAND, SPECIES_TAPU_BULU), 2500);
+    EXPECT(!RosterHas(MAP_ROUTE123, WILD_ROSTER_SURFING, SPECIES_TAPU_BULU));
+    EXPECT(!RosterHas(MAP_ROUTE111, WILD_ROSTER_LAND, SPECIES_TAPU_BULU));
     // The engine agrees while the storm rages, storm share included.
-    EXPECT_EQ(CheckRosterAgainstEngine(MAP_ROUTE110, 400), 0);
+    EXPECT_EQ(CheckRosterAgainstEngine(MAP_ROUTE123, 400), 0);
     ClearWeatherAnomalies();
-    EXPECT(!RosterHas(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
+    EXPECT(!RosterHas(MAP_ROUTE123, WILD_ROSTER_LAND, SPECIES_TAPU_BULU));
     // After the sky calms in Sootopolis, it is an ordinary resident.
     FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
-    EXPECT(RosterHas(MAP_ROUTE110, WILD_ROSTER_LAND, SPECIES_TAPU_KOKO));
+    EXPECT(RosterHas(MAP_ROUTE123, WILD_ROSTER_LAND, SPECIES_TAPU_BULU));
     RestoreRosterTestState(&state);
 }
 
@@ -617,16 +617,18 @@ TEST("Wild roster: a caught Legendary, Ultra Beast or Paradox Pokemon never appe
     EXPECT(!IsWildSlotSpeciesAcquirable(SPECIES_IRON_LEAVES));
     EXPECT(!RosterHas(MAP_VERDANTURF_MEADOW, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
     EXPECT(!EngineCanRoll(MAP_VERDANTURF_MEADOW, SPECIES_IRON_LEAVES));
-    // Ultra Beast: Poipole in Seaspray Cave B1F is ungated; its Sign closes it.
+    // Ultra Beast: Poipole in Seaspray Cave B1F opens at five badges; its Sign
+    // closes it.
+    SetRosterBadges(5);
     EXPECT(RosterHas(MAP_SEASPRAY_CAVE_B1F, WILD_ROSTER_LAND, SPECIES_POIPOLE));
     MarkLegendarySignCaughtBySpecies(SPECIES_POIPOLE);
     EXPECT(!RosterHas(MAP_SEASPRAY_CAVE_B1F, WILD_ROSTER_LAND, SPECIES_POIPOLE));
     EXPECT(!EngineCanRoll(MAP_SEASPRAY_CAVE_B1F, SPECIES_POIPOLE));
-    // Legendary: Shaymin on Route 102 is ungated.
-    EXPECT(RosterHas(MAP_ROUTE102, WILD_ROSTER_LAND, SPECIES_SHAYMIN));
+    // Legendary: Shaymin on Route 117 opens at four badges.
+    EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_LAND, SPECIES_SHAYMIN));
     MarkLegendarySignCaughtBySpecies(SPECIES_SHAYMIN);
-    EXPECT(!RosterHas(MAP_ROUTE102, WILD_ROSTER_LAND, SPECIES_SHAYMIN));
-    EXPECT(!EngineCanRoll(MAP_ROUTE102, SPECIES_SHAYMIN));
+    EXPECT(!RosterHas(MAP_ROUTE117, WILD_ROSTER_LAND, SPECIES_SHAYMIN));
+    EXPECT(!EngineCanRoll(MAP_ROUTE117, SPECIES_SHAYMIN));
     memcpy(gSaveBlock1Ptr->dexCaught, dexCaught, sizeof(dexCaught));
     RestoreRosterTestState(&state);
 }

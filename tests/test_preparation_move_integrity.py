@@ -40,6 +40,18 @@ bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move)
             return TRUE;
     return FALSE;
 }
+// Same list as pokemon.c's IsMoveRemovedFromGame.
+bool32 IsMoveRemovedFromGame(enum Move move)
+{
+    return move == MOVE_DOUBLE_TEAM || move == MOVE_MINIMIZE || move == MOVE_FISSURE
+        || move == MOVE_SHEER_COLD || move == MOVE_GUILLOTINE || move == MOVE_HORN_DRILL;
+}
+// Harness Pokemon are never hatchlings, so no iconic one-hit KO applies.
+enum Move GetBoxMonIconicOhkoMove(struct BoxPokemon *boxMon)
+{
+    (void)boxMon;
+    return MOVE_NONE;
+}
 '''
 
 
@@ -139,6 +151,8 @@ int main(void) {
         }
         if (expected[MOVE_HAIL]) expected[MOVE_SNOWSCAPE] = TRUE;
         expected[MOVE_NONE] = FALSE;
+        // Moves removed from the game are never offered (IsMoveRemovedFromGame).
+        for (u32 move = 1; move < MOVES_COUNT_ALL; move++) if (IsMoveRemovedFromGame(move)) expected[move] = FALSE;
         u32 count = collect(&mon);
         for (u32 move = 1; move < MOVES_COUNT_ALL; move++) assert(offered[move] == expected[move]);
         // Learning any four offered moves must remove only those four entries.

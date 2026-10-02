@@ -3184,7 +3184,7 @@
               {
                 "min_level": 12,
                 "max_level": 14,
-                "species": "SPECIES_TIMBURR"
+                "species": "SPECIES_HAWLUCHA"
               }
             ],
             "encounter_rates": [
@@ -3262,12 +3262,12 @@
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_CUBONE"
+                "species": "SPECIES_DITTO"
               },
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_BRONZOR"
+                "species": "SPECIES_SNEASEL_HISUI"
               }
             ],
             "encounter_rates": [
@@ -3345,12 +3345,12 @@
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_CUBONE"
+                "species": "SPECIES_BAGON"
               },
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_CUBONE"
+                "species": "SPECIES_GIBLE"
               }
             ],
             "encounter_rates": [
@@ -6121,9 +6121,9 @@
             "encounter_rate": 10,
             "mons": [
               {
-                "min_level": 51,
-                "max_level": 51,
-                "species": "SPECIES_FLUTTER_MANE"
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GREAVARD"
               },
               {
                 "min_level": 48,
@@ -7430,7 +7430,7 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SHAYMIN"
+                "species": "SPECIES_TOEDSCOOL"
               },
               {
                 "min_level": 3,
@@ -10220,7 +10220,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_WOOLOO"
+                "species": "SPECIES_SHAYMIN"
               },
               {
                 "min_level": 25,
@@ -10676,9 +10676,9 @@
                 "species": "SPECIES_TORNADUS"
               },
               {
-                "min_level": 51,
-                "max_level": 51,
-                "species": "SPECIES_RAGING_BOLT"
+                "min_level": 41,
+                "max_level": 41,
+                "species": "SPECIES_KECLEON"
               },
               {
                 "min_level": 41,
@@ -16470,7 +16470,7 @@
               {
                 "min_level": 65,
                 "max_level": 65,
-                "species": "SPECIES_GOLURK"
+                "species": "SPECIES_FLUTTER_MANE"
               },
               {
                 "min_level": 66,
@@ -16553,7 +16553,7 @@
               {
                 "min_level": 66,
                 "max_level": 66,
-                "species": "SPECIES_BANETTE"
+                "species": "SPECIES_RAGING_BOLT"
               },
               {
                 "min_level": 64,

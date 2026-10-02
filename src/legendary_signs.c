@@ -834,13 +834,6 @@ void BufferNextCenterLegendaryLead(void)
         enum LegendarySignId id = sCenterLegendaryLeads[i].id;
         gSpecialVar_0x8004 = i + 1;
         StringCopy(gStringVar4, sCenterLegendaryLeads[i].lead);
-        if (id == LEGENDARY_SIGN_SHAYMIN && !FlagGet(FLAG_ADVENTURE_STARTED) && !IsLegendarySignCaught(id))
-        {
-            // The west exit is still closed: no "search there now" line yet.
-            StringCopy(gStringVar4, COMPOUND_STRING("After you battle the Prof.'s kid,\nreturn to Birch for your send-off.\pThen head west to Route 102.\nShaymin lives in its grass."));
-            gSpecialVar_Result = TRUE;
-            return;
-        }
         if (id >= LEGENDARY_SIGN_COUNT)
         {
             enum Species species = sCenterLegendaryLeads[i].classicSpecies;
