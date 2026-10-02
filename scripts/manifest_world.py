@@ -383,7 +383,9 @@ class World:
         state['flags']={f for f in state['flags'] if not f.startswith(('OBJECT_CLEAR:','SCRIPT_'))}
         state['_geometry_clearance']=self.geo.flags_for_state(state,self.names)
         state['flags'].update(state['_geometry_clearance'])
-        state['funding_possible']='SPECIES_EEVEE' in state['species'] and self.pokemon.can_learn('SPECIES_EEVEE','MOVE_PAY_DAY') and 'OldaleTown_PokemonCenter_1F' in state['maps']
+        # Pay Day farming: the Oldale Center tutor teaches it to any owned
+        # learner (Meowth on Route 102, Eevee from Route 117).
+        state['funding_possible']='OldaleTown_PokemonCenter_1F' in state['maps'] and any(self.pokemon.can_learn(s,'MOVE_PAY_DAY') for s in state['species'])
         state['collectable_ash']='ITEM_SOOT_SACK' in state['items'] and bool(self.ash_nodes & state['reached'])
         state['decoration_trade_possible']=native.decoration_trade_possible(state)
         for key, needed in mr.FIELD_MOVES.items():

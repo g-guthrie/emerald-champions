@@ -533,11 +533,11 @@ def _expanded_opening_scenario(difficulty, *, generation,first,second,captures,n
     pay_wins=_finite_quantity(preparation.get('pay_day_wins',0),'Pay Day wins')
     if pay_wins:
         farmer=preparation.get('pay_day_farmer')
-        if farmer not in owned or owned[farmer]['species']!='SPECIES_EEVEE':
-            raise ValueError('Pay Day farming requires an owned unevolved Eevee')
+        if farmer not in owned:
+            raise ValueError('Pay Day farming requires an owned Pay Day learner')
         from ec_moves import legal_moves_with_rom_union
-        if 'MOVE_PAY_DAY' not in legal_moves_with_rom_union('SPECIES_EEVEE')[0]:
-            raise ValueError('Source Pay Day access changed')
+        if 'MOVE_PAY_DAY' not in legal_moves_with_rom_union(owned[farmer]['species'])[0]:
+            raise ValueError('Pay Day farming requires an owned Pay Day learner')
     pickups=preparation.get('pickup_items',{});sales=preparation.get('sell_pickup',{})
     purchases=preparation.get('purchases',{})
     for group in (pickups,sales,purchases):
