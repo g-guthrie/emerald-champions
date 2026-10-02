@@ -6873,7 +6873,7 @@
               {
                 "min_level": 6,
                 "max_level": 8,
-                "species": "SPECIES_BLIPBUG"
+                "species": "SPECIES_LARVESTA"
               },
               {
                 "min_level": 6,
@@ -7344,7 +7344,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SEWADDLE"
+                "species": "SPECIES_MIMIKYU_DISGUISED"
               },
               {
                 "min_level": 3,
@@ -7709,7 +7709,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_GRUBBIN"
+                "species": "SPECIES_ROCKRUFF"
               }
             ],
             "encounter_rates": [
@@ -7928,7 +7928,7 @@
               {
                 "min_level": 5,
                 "max_level": 7,
-                "species": "SPECIES_FLETCHLING"
+                "species": "SPECIES_CHARCADET"
               },
               {
                 "min_level": 5,

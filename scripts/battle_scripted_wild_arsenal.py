@@ -49,7 +49,7 @@ def rules(fingerprint):
     demand('src/pokemon.c', ('SetPlayerMonBaselineEVs(mon);', 'MaxPlayerMonIVs(mon);',
         'CreateMonWithIVs(mon, species, level, Random32()', 'GiveMonInitialMoveset(mon);',
         'value = RollNormalAbilitySlot(species, boxMon->personality);',
-        'if (learnset[i].level == 0)', 'moves[j] = moves[j + 1];',
+        'if (learnset[i].level == 0 || IsMoveRemovedFromGame(learnset[i].move))', 'moves[j] = moves[j + 1];',
         'slots[count++] = 0;', 'slots[count++] = 1;',
         'for (u32 slot = ABILITY_SLOT_INCLEMENT; slot < NUM_OWNER_ABILITY_SLOTS; slot++)',
         'return slots[personality % count];'))
@@ -85,8 +85,12 @@ def rules(fingerprint):
     if len(natures) != 25: raise ValueError('Native nature domain unresolved')
     learnsets = {name: re.findall(r'\.move\s*=\s*(MOVE_\w+),\s*\.level\s*=\s*(\d+)', body)
                 for name, body in re.findall(r'static const struct LevelUpMove (\w+)\[\]\s*=\s*\{(.*?)\};', native, re.S)}
+    # Moves the owner removed from the game never enter a starting moveset.
+    removed_body = (ROOT / 'src/pokemon.c').read_text().split('bool32 IsMoveRemovedFromGame(enum Move move)', 1)[1].split('\n}', 1)[0]
+    removed = set(re.findall(r'case (MOVE_\w+):', removed_body))
+    if not removed: raise ValueError('Removed-move list unresolved')
     return dict(learnsets=learnsets, species=species, starters=starters, added=added, evs=evs,
-                natures=natures, aliases=aliases)
+                natures=natures, aliases=aliases, removed=removed)
 
 def factory_member(r, species, slot, level, player=False):
     block = r['species'][species]
@@ -94,7 +98,7 @@ def factory_member(r, species, slot, level, player=False):
     moves = []
     for move, learned in r['learnsets'][natural]:
         if int(learned) > level: break
-        if int(learned) and move not in moves: moves = (moves + [move])[-4:]
+        if int(learned) and move not in r['removed'] and move not in moves: moves = (moves + [move])[-4:]
     abilities = re.findall(r'ABILITY_\w+', re.search(r'\.abilities\s*=\s*\{([^}]+)', block)[1])[:2]
     abilities += r['added'].get(species, [])
     # Hidden slot 2 is excluded by RollNormalAbilitySlot. All allowed normal
