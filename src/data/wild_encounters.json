@@ -15531,7 +15531,7 @@
               {
                 "min_level": 10,
                 "max_level": 12,
-                "species": "SPECIES_STUNFISK"
+                "species": "SPECIES_PSYDUCK"
               },
               {
                 "min_level": 10,
@@ -15546,7 +15546,7 @@
               {
                 "min_level": 10,
                 "max_level": 12,
-                "species": "SPECIES_STUNFISK"
+                "species": "SPECIES_ZUBAT"
               }
             ],
             "encounter_rates": [

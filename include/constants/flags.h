@@ -769,7 +769,7 @@
 #define FLAG_PETALBURG_WOODS_INSECT_PLATE                                      (FLAG_HIDDEN_ITEMS_START + 0x2c6) // relocated 0x2dc -> 0x4ba (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_SANDSTREWN_RUINS_BIG_NUGGET                                       (FLAG_HIDDEN_ITEMS_START + 0x2c8) // relocated 0x2dd -> 0x4bc (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_SANDSTREWN_RUINS_PROTECTOR                                        (FLAG_HIDDEN_ITEMS_START + 0x2ca) // relocated 0x2de -> 0x4be (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_SEASPRAY_CAVE_DAWN_STONE                                          (FLAG_HIDDEN_ITEMS_START + 0x2cb) // relocated 0x2df -> 0x4bf (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_SEASPRAY_CAVE_NEVER_MELT_ICE                                          (FLAG_HIDDEN_ITEMS_START + 0x2cb) // relocated 0x2df -> 0x4bf (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_SEASPRAY_CAVE_RARE_CANDY                                          (FLAG_HIDDEN_ITEMS_START + 0x2d6) // relocated 0x2e0 -> 0x4ca (Sept 23 2026: bit was shared with a live flag)
 
 #define FLAG_EC_ITEM_SEASPRAY_CAVE_B1F_QUICK_BALL 0x264

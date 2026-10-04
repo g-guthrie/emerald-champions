@@ -149,8 +149,8 @@
       "x": 36,
       "y": 22,
       "elevation": 4,
-      "item": "ITEM_DAWN_STONE",
-      "flag": "FLAG_SEASPRAY_CAVE_DAWN_STONE"
+      "item": "ITEM_NEVER_MELT_ICE",
+      "flag": "FLAG_SEASPRAY_CAVE_NEVER_MELT_ICE"
     },
     {
       "type": "hidden_item",
