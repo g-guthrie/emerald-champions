@@ -480,14 +480,18 @@ STORY_WARP_GATES: dict[tuple[str, str], tuple] = {
     # Norman's gym rooms: the doors run `compare VAR_PETALBURG_GYM_STATE, 6`
     # (four gym wins) and warp inside the same map (PetalburgCity_Gym/scripts.inc:812-890).
     ("PetalburgCity_Gym", "PetalburgCity_Gym"): ("FLAG_BADGE04_GET", "PetalburgCity_Gym/scripts.inc:812-846"),
-    # Each Elite Four room's exit opens when its member is beaten; the run
-    # starts at the eight-badge door (EverGrandeCity_PokemonLeague_1F/scripts.inc:45-52).
-    **{(a, b): ("BADGES>=8", "Elite Four room exits (EverGrandeCity_*Room scripts)")
-       for a, b in (("EverGrandeCity_SidneysRoom", "EverGrandeCity_Hall1"),
-                    ("EverGrandeCity_PhoebesRoom", "EverGrandeCity_Hall2"),
-                    ("EverGrandeCity_GlaciasRoom", "EverGrandeCity_Hall3"),
-                    ("EverGrandeCity_DrakesRoom", "EverGrandeCity_Hall4"),
-                    ("EverGrandeCity_ChampionsRoom", "EverGrandeCity_HallOfFame"))},
+    # Each Elite Four room's exit opens when its own member is beaten
+    # (setflag FLAG_DEFEATED_ELITE_4_x in EverGrandeCity_<Member>sRoom/scripts.inc);
+    # the run starts at the eight-badge door (EverGrandeCity_PokemonLeague_1F/scripts.inc:45-52).
+    **{(f"EverGrandeCity_{room}sRoom", hall): (f"FLAG_DEFEATED_ELITE_4_{room.upper()}",
+                                               f"EverGrandeCity_{room}sRoom/scripts.inc (exit after the battle)")
+       for room, hall in (("Sidney", "EverGrandeCity_Hall1"), ("Phoebe", "EverGrandeCity_Hall2"),
+                          ("Glacia", "EverGrandeCity_Hall3"), ("Drake", "EverGrandeCity_Hall4"))},
+    # The Champion's door is the one Wallace's defeat script opens and walks the
+    # player through (EverGrandeCity_ChampionsRoom/scripts.inc:51-54, 144); the
+    # manifest clears this token only once that script's battle is won.
+    ("EverGrandeCity_ChampionsRoom", "EverGrandeCity_HallOfFame"): (
+        "SCRIPT_OPEN:EverGrandeCity_ChampionsRoom:6:2", "EverGrandeCity_ChampionsRoom/scripts.inc:51-54"),
 }
 
 # Whole-map entry requirements. (map prefix match) -> (requirement, citation).
