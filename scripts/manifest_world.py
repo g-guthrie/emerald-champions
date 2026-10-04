@@ -241,7 +241,14 @@ class World:
             self.approaches[where] = self.story.locate(where)
         return any(n in state['reached'] for n in self.approaches[where])
 
+    # Maps entered only by a scripted walk-in after a battle. The Hall of Fame
+    # opens when Wallace falls (EverGrandeCity_ChampionsRoom/scripts.inc:47-144);
+    # its arrival scene must never run before the Champion battle.
+    SCRIPTED_ENTRY_AFTER = {'EverGrandeCity_HallOfFame': ('TRAINER_WALLACE',)}
+
     def event_reachable(self,event,entry,state):
+        needed=self.SCRIPTED_ENTRY_AFTER.get(event[0])
+        if needed and not all(t in state['defeated'] for t in needed): return False
         if event[3]=='object':
             actors=self.geo._objects_by_script.get((event[0],entry),[])
             if actors:
