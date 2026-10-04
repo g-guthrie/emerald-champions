@@ -349,6 +349,11 @@ STORY_EVENTS: list[tuple] = [
     ("FLAG_BADGE08_GET", "SootopolisCity_Gym_1F", None, None,
      "SootopolisCity_Gym_1F/scripts.inc:72-86 (no badge-6 check before the battle)"),
     ("FLAG_DEFEATED_WALLY_VICTORY_ROAD", "VictoryRoad_1F", None, None, "VictoryRoad_1F/scripts.inc:46-50"),
+    # Each Elite Four battle sets its member's flag, which opens that room's
+    # exit (STORY_WARP_GATES below).
+    *[(f"FLAG_DEFEATED_ELITE_4_{room.upper()}", f"EverGrandeCity_{room}sRoom", None, "BADGES>=8",
+       f"EverGrandeCity_{room}sRoom/scripts.inc (setflag after the battle)")
+      for room in ("Sidney", "Phoebe", "Glacia", "Drake")],
     ("FLAG_IS_CHAMPION", "EverGrandeCity_ChampionsRoom", None, "BADGES>=8",
      "data/scripts/hall_of_fame.inc:3 (FLAG_SYS_GAME_CLEAR: src/post_battle_event_funcs.c:30)"),
     ("FLAG_SYS_GAME_CLEAR", None, None, "FLAG_IS_CHAMPION", "src/post_battle_event_funcs.c:30 (same Hall of Fame)"),
