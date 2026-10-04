@@ -177,7 +177,8 @@ class EncounterAvailabilityTests(unittest.TestCase):
         species = {s["species"] for s in pool["species"]}
         self.assertIn("SPECIES_FIDOUGH", species)
         self.assertNotIn("SPECIES_EEVEE", species)  # Route 117 only.
-        self.assertIn("SPECIES_PACHIRISU", species)
+        self.assertIn("SPECIES_SHINX", species)
+        self.assertNotIn("SPECIES_PACHIRISU", species)
         self.assertNotIn("SPECIES_LUCARIO", species)
         self.assertNotIn("SPECIES_NAGANADEL", species)
         old = ROOT / "work/tuning-20260930/runs/c000/E0001/party_f0.json"
@@ -195,7 +196,9 @@ class EncounterAvailabilityTests(unittest.TestCase):
     def test_post_rival_resources_still_available_before_roxanne(self):
         pool = self.pool("TRAINER_ROXANNE_1", "start")
         self.assertIn("HAS_OLD_ROD", pool["story_flags"])
-        self.assertIn("SPECIES_LUCARIO", {s["species"] for s in pool["species"]})
+        species = {s["species"] for s in pool["species"]}
+        self.assertNotIn("SPECIES_LUCARIO", species)
+        self.assertIn("SPECIES_TOGETIC", species)  # Friendship assumed despite the native Bonding lock.
         self.assertNotIn("FLAG_BADGE01_GET", pool["story_flags"])
 
     def test_norman_pre_battle_mega_gift_is_available(self):

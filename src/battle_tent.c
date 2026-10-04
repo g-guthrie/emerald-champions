@@ -115,6 +115,23 @@ static const u16 sSlateportTentRewards[] = {
     ITEM_LINKING_CORD,
 };
 
+// Before Wattson, clears pay held gear rather than trade-evolution items.
+static const u16 sSlateportTentEarlyRewards[] = {
+    ITEM_CHARCOAL, ITEM_MYSTIC_WATER, ITEM_MIRACLE_SEED, ITEM_MAGNET,
+    ITEM_SOFT_SAND, ITEM_HARD_STONE,
+};
+
+static const u16 *GetSlateportTentRewards(u32 *count)
+{
+    if (FlagGet(FLAG_BADGE03_GET))
+    {
+        *count = ARRAY_COUNT(sSlateportTentRewards);
+        return sSlateportTentRewards;
+    }
+    *count = ARRAY_COUNT(sSlateportTentEarlyRewards);
+    return sSlateportTentEarlyRewards;
+}
+
 // code
 void CallVerdanturfTentFunction(void)
 {
@@ -269,7 +286,9 @@ static void SaveSlateportTentChallenge(void)
 
 static void SetRandomSlateportTentPrize(void)
 {
-    gSaveBlock2Ptr->frontier.slateportTentPrize = sSlateportTentRewards[Random() % ARRAY_COUNT(sSlateportTentRewards)];
+    u32 count;
+    const u16 *rewards = GetSlateportTentRewards(&count);
+    gSaveBlock2Ptr->frontier.slateportTentPrize = rewards[Random() % count];
 }
 
 static void GiveSlateportTentPrize(void)
@@ -461,8 +480,7 @@ void SetChampionsTentPrize(u8 tent)
         return;
     if (tent == 0)
     {
-        rewards = sSlateportTentRewards;
-        count = ARRAY_COUNT(sSlateportTentRewards);
+        rewards = GetSlateportTentRewards(&count);
     }
     else if (tent == 1)
     {

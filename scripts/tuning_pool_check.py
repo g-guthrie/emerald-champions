@@ -34,6 +34,7 @@ import json
 import re
 import sys
 from collections import Counter
+import evolution_move_gate
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -170,6 +171,8 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
                 elif not forms:
                     problems.append(f"{tag}: {item} does not Mega Evolve {sp} in this pool (no such Mega by {milestone})")
         for move in mon.get("moves") or []:
+            if not evolution_move_gate.ready(sp, move, mon.get("level", cap), pool.get("story_flags", [])):
+                problems.append(f"{tag}: {move} is an evolution trigger locked at this level and badge count")
             if move in UNTUNED_MOVES:
                 problems.append(f"{tag}: {move} is never tuned for (one-hit KOs are hatchling-only outliers; "
                                 "evasion boosts are removed)")

@@ -464,8 +464,8 @@ EmeraldChampions_Text_RepelSprayMistedAgain:
 	.string "Wild Pokémon will keep their distance\n"
 	.string "for the next 500 steps.$"
 
-@ Bonding opens with the first Gym Badge, so friendship evolutions wait
-@ until after Roxanne.
+@ Bonding service opens with the first Gym Badge. Friendship can also rise
+@ through walking.
 EmeraldChampions_EventScript_SpecialistBonding:
 	setvar VAR_TUTOR_CURSOR, 1
 	goto_if_unset FLAG_BADGE01_GET, EmeraldChampions_EventScript_BondingLocked

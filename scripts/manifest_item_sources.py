@@ -108,7 +108,7 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
         rows.append(row)
         return row
     for source in builder.item_sources:
-        if source.kind in EXCLUDED_KINDS or 'wild_held' in source.kind: continue
+        if source.kind in EXCLUDED_KINDS or source.kind=='tent_prize' or 'wild_held' in source.kind: continue
         # Static marts are rebuilt below from their actual call sites; keeping
         # the older table-only rows would bypass exact branch conditions.
         if source.kind=='mart' and source.detail!='Lilycove Dept. Store 4F evolution specialist':continue
@@ -318,12 +318,16 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
         cost_rule='500 gathered ash units per cap; debit only after successful bag delivery',
         native_conditions=['include/constants/emerald_champions.h:20'])
     tent=(ROOT/'src/battle_tent.c').read_text()
-    for town in ('Slateport','Verdanturf','Fallarbor'):
-        table='s'+town+'TentRewards'
+    for town in ('Slateport','Verdanturf','Fallarbor','SlateportEarly'):
+        early=town=='SlateportEarly'
+        town='Slateport' if early else town
+        table='sSlateportTentEarlyRewards' if early else 's'+town+'TentRewards'
         body=re.search(table+r'\[\]\s*=\s*\{(.*?)\};',tent,re.S)[1]
         for item in re.findall(r'ITEM_\w+',body):
             row=add(item,'tent_prize',town+('Town' if town!='Slateport' else 'City')+'_BattleTentLobby',
-                _ref('src/battle_tent.c',table),detail='random Tent completion prize after three wins',quantity=1,repeatable=True,
+                _ref('src/battle_tent.c',table),
+                requires=[['!FLAG_BADGE03_GET' if early else 'FLAG_BADGE03_GET']] if town=='Slateport' else None,
+                detail='random Tent completion prize after three wins',quantity=1,repeatable=True,
                 selection='one randomly selected reward after completing the local tent battle run',
                 activity_requirement={'kind':'tent_battle_run','town':town,'wins':3,'source':f'data/maps/{town+("Town" if town!="Slateport" else "City")}_BattleTentBattleRoom/scripts.inc'},
                 native_conditions=[f'data/maps/{town+("Town" if town!="Slateport" else "City")}_BattleTentLobby/scripts.inc','src/battle_tent.c:SetRandom'+town+'TentPrize'],
@@ -392,6 +396,7 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
             if prices.get(item,{}).get('sort')=='ITEM_TYPE_MEMORY':species='SPECIES_SILVALLY'
             add(item,'vendor_species' if species else 'vendor_restock','OldaleTown_PokemonCenter_1F',
                 'src/field_specials.c:485; src/field_specials.c:506; src/field_specials.c:627',
+                requires=[['FLAG_BADGE04_GET']] if item=='ITEM_THICK_CLUB' else None,
                 detail=f'Center catalogue category {category}',needs_species=[species] if species else [],
                 needs_items=[] if species else [item],stock_condition='caught equipment species or previously acquired item' if species else 'first legitimate acquisition permanently unlocks paid duplicates')
     # Harvest-pouch Mega rewards spend recorded harvested quantities, not gifted

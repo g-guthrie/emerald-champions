@@ -239,6 +239,10 @@ TEST("Rare wild NPC discovery requires local help and survives depositing the pa
     EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_MELOETTA));
     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_SING, 0);
     TryUnlockLocalLegendaryDiscovery();
+    EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_MELOETTA));
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_BADGE04_GET);
+    TryUnlockLocalLegendaryDiscovery();
     EXPECT(IsLegendarySignUnlocked(LEGENDARY_SIGN_MELOETTA));
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     ZeroPlayerPartyMons();

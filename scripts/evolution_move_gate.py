@@ -19,6 +19,15 @@ BADGE4 = "FLAG_BADGE04_GET"
 
 
 @lru_cache(maxsize=None)
+def _trigger_moves() -> dict[str, set[str]]:
+    out = {}
+    for path in sorted(SPECIES_INFO.glob("*.h")):
+        for species, body in re.findall(r"\[(SPECIES_\w+)\]\s*=\s*\{(.*?)\n    \},", path.read_text(), re.S):
+            out[species] = set(re.findall(r"\{IF_KNOWS_MOVE,\s*(MOVE_\w+)", body))
+    return out
+
+
+@lru_cache(maxsize=None)
 def _learnset_symbols() -> dict[str, str]:
     """SPECIES_X -> its level-up learnset array name."""
     out = {}
@@ -51,6 +60,8 @@ def natural_level(species: str, move: str) -> int | None:
 
 def ready(species: str, move: str, level: int, flags) -> bool:
     """Can a `level` Pokemon of `species` be taught the trigger `move`?"""
+    if move not in _trigger_moves().get(species, set()):
+        return True
     natural = natural_level(species, move)
     if natural is None:
         return BADGE4 in flags

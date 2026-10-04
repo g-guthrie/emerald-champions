@@ -20,6 +20,16 @@ import host_c
 # pokemon.c boundary: the harness owns each BoxPokemon's stored fields.
 BOUNDARY = r'''
 #include "host_mon.h"
+// This harness checks the fully unlocked move catalogue. Evolution-trigger
+// level/badge boundaries are exercised by test/evolution_move_gate.c.
+u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon) { return MAX_LEVEL; }
+bool8 FlagGet(u16 flag) { return TRUE; }
+const struct LevelUpMove *GetSpeciesLevelUpLearnset(enum Species species)
+{
+    // The ancestry-only evolution boundary below intentionally has no params.
+    assert(FALSE);
+    return NULL;
+}
 u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field)
 {
     const struct HostMon *mon = (struct HostMon *)boxMon;

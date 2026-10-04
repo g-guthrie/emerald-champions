@@ -129,6 +129,7 @@ def load_model(quick=False):
                 and not any(t in m for t in ('BattleTent','ContestHall','ContestLobby',
                                              'PokemonCenter_2F','CableClub','UnionRoom'))}
     event_cache=ROOT/'work/progression-manifest/cache/story.completed.pickle'
+    event_cache.parent.mkdir(parents=True,exist_ok=True)
     signature=hashlib.sha256()
     cache_sources={x['file'] for x in b.scripts.labels.values()}|{Path(bp.__file__)}
     cache_sources.update((ROOT/'data/maps').glob('*/map.json'))

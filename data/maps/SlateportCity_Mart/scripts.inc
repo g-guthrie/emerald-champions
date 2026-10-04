@@ -4,6 +4,7 @@ SlateportCity_Mart_MapScripts:: @ 820DC48
 SlateportCity_Mart_EventScript_Clerk:: @ 820DC49
 	lock
 	faceplayer
+	goto_if_unset FLAG_BADGE02_GET, SlateportCity_Mart_EventScript_StonesLocked
 	message gText_HowMayIServeYou
 	waitmessage
 	pokemart SlateportCity_Mart_Pokemart
@@ -45,3 +46,13 @@ SlateportCity_Mart_Text_GreatBallIsBetter: @ 820DCF8
 	.string "With this, I should be able to get that\n"
 	.string "elusive Pokémon…$"
 
+
+SlateportCity_Mart_EventScript_StonesLocked::
+	msgbox SlateportCity_Mart_Text_StonesLocked, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_Mart_Text_StonesLocked:
+	.string "Our evolution stones arrive after\n"
+	.string "you earn Brawly’s Gym Badge.\p"
+	.string "Come back once you have it!$"

@@ -23,7 +23,7 @@ import generate_battle_suite as suite_tools
 import ec_moves
 from doubles_policy import source_metadata
 
-CAPTURES = ('SPECIES_KRICKETOT','SPECIES_WURMPLE','SPECIES_SCATTERBUG','SPECIES_PACHIRISU')
+CAPTURES = ('SPECIES_KRICKETOT','SPECIES_WURMPLE','SPECIES_SCATTERBUG','SPECIES_SHINX')
 EVOLUTIONS = dict(zip(CAPTURES[:3], ('SPECIES_KRICKETUNE','SPECIES_DUSTOX','SPECIES_VIVILLON')))
 SUPPORT = {
     'SPECIES_KRICKETUNE': ('NATURE_MODEST','ABILITY_TECHNICIAN',[252,0,4,252,0,0],
@@ -32,8 +32,8 @@ SUPPORT = {
                       ['MOVE_QUIVER_DANCE','MOVE_BUG_BUZZ','MOVE_SLUDGE_BOMB','MOVE_PROTECT'],'ITEM_FOCUS_SASH'),
     'SPECIES_VIVILLON': ('NATURE_TIMID','ABILITY_COMPOUND_EYES',[4,0,0,252,0,252],
                         ['MOVE_SLEEP_POWDER','MOVE_HURRICANE','MOVE_BUG_BUZZ','MOVE_PROTECT'],'ITEM_NONE'),
-    'SPECIES_PACHIRISU': ('NATURE_BOLD','ABILITY_VOLT_ABSORB',[252,0,252,0,4,0],
-                         ['MOVE_FOLLOW_ME','MOVE_SUPER_FANG','MOVE_NUZZLE','MOVE_PROTECT'],'ITEM_LEFTOVERS'),
+    'SPECIES_SHINX': ('NATURE_BOLD','ABILITY_INTIMIDATE',[252,0,252,0,4,0],
+                         ['MOVE_HELPING_HAND','MOVE_EERIE_IMPULSE','MOVE_THUNDER_WAVE','MOVE_PROTECT'],'ITEM_LEFTOVERS'),
 }
 
 
@@ -227,7 +227,7 @@ def export_batch(output, *, all_genders=False):
                 starters=[r['starters'][generation][i] for i in (a,b)]
                 natures={s:raw[s]['nature'] for s in starters}
                 natures.update({base:SUPPORT[target][0] for base,target in EVOLUTIONS.items()})
-                natures['SPECIES_PACHIRISU']=SUPPORT['SPECIES_PACHIRISU'][0]
+                natures['SPECIES_SHINX']=SUPPORT['SPECIES_SHINX'][0]
                 candidates=[]
                 for gender in ('male','female'):
                     scenario=opening._opening_scenario(difficulty,generation=generation,first=a,second=b,captures=CAPTURES,natures=natures,

@@ -295,11 +295,13 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	end
 
 MauvilleCity_GameCorner_EventScript_Porygon::
+	goto_if_unset FLAG_BADGE03_GET, MauvilleCity_GameCorner_EventScript_PrizeLocked
 	setvar VAR_TEMP_1, SPECIES_PORYGON
 	setvar VAR_0x8006, PORYGON_COINS
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 	
 MauvilleCity_GameCorner_EventScript_Munchlax::
+	goto_if_unset FLAG_BADGE03_GET, MauvilleCity_GameCorner_EventScript_PrizeLocked
 	setvar VAR_TEMP_1, SPECIES_MUNCHLAX
 	setvar VAR_0x8006, MUNCHLAX_COINS
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
@@ -1137,3 +1139,11 @@ MauvilleCity_GameCorner_Text_GenesectClaimed::
 MauvilleCity_GameCorner_Text_StarterClaimed::
 	.string "{STR_VAR_1} was already claimed.\n"
 	.string "Each starter is a one-time prize.$"
+
+MauvilleCity_GameCorner_EventScript_PrizeLocked::
+	msgbox MauvilleCity_GameCorner_Text_PrizeLocked, MSGBOX_DEFAULT
+	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+
+MauvilleCity_GameCorner_Text_PrizeLocked:
+	.string "Porygon and Munchlax prizes open\n"
+	.string "after you earn Wattson’s Gym Badge.$"

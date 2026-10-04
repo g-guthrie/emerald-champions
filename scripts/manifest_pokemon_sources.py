@@ -375,16 +375,16 @@ class PokemonSources:
             if cond == 'IF_IN_MAP': return reachable(self.builder.geo.id_to_dir.get(arg, arg))
             if cond == 'IF_IN_MAPSEC': return any(m.get('region_map_section') == arg and reachable(d) for d,m in self.builder.geo.maps.items())
             if cond == 'IF_TYPE_IN_PARTY': return any(arg in self.breeding.get(s,{}).get('types',[]) for s in have)
-            # Center Bonding (the only practical way to evolution friendship) opens with
-            # the first badge; the caller passes 255 once it is open.
-            if cond == 'IF_MIN_FRIENDSHIP': return context.get('friendship_max',0) >= 160
+            # Tuning assumes walking can reach evolution friendship before Bonding opens.
+            if cond == 'IF_MIN_FRIENDSHIP': return reachable('OldaleTown_PokemonCenter_1F') or context.get('friendship_max',0) >= int(arg)
             if cond in ('IF_TIME','IF_NOT_TIME') or cond.startswith('IF_PID_'): return True
             if cond == 'IF_GENDER':
                 gender = self.breeding.get(sp,{}).get('gender','')
                 return gender == arg or gender not in ('MON_GENDERLESS','MON_MALE','MON_FEMALE')
             if cond in ('IF_NATURE','IF_AMPED_NATURE','IF_LOW_KEY_NATURE'):
                 return True  # Feasible random starting nature; caller retains the condition
-            if cond == 'IF_KNOWS_MOVE': return context.get('knows_move',self.can_learn)(sp,arg)
+            if cond == 'IF_KNOWS_MOVE': return (context.get('knows_move',self.can_learn)(sp,arg)
+                and context.get('evolution_move_ready',lambda s,m: True)(sp,arg))
             if cond == 'IF_KNOWS_MOVE_TYPE': return context.get('knows_move_type',self.can_learn_type)(sp,arg)
             if cond == 'IF_WEATHER':
                 def native_weather(token):

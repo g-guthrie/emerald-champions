@@ -13,7 +13,7 @@ class SortedCertificateTests(unittest.TestCase):
     def test_sorted_evolution_mapping_preserves_certificate_and_rejects_forged_grant(self):
         fingerprint = 'internal-frozen-source-test'
         scenario = opening._opening_scenario('hard', generation=3, first=0, second=1,
-            captures=['SPECIES_KRICKETOT', 'SPECIES_WURMPLE', 'SPECIES_SCATTERBUG', 'SPECIES_PACHIRISU'],
+            captures=['SPECIES_KRICKETOT', 'SPECIES_WURMPLE', 'SPECIES_SCATTERBUG', 'SPECIES_SHINX'],
             evolutions={'SPECIES_KRICKETOT': 'SPECIES_KRICKETUNE', 'SPECIES_WURMPLE': 'SPECIES_DUSTOX',
                         'SPECIES_SCATTERBUG': 'SPECIES_VIVILLON'}, _fingerprint=fingerprint)
         # Capture order deliberately differs from sorted key order.

@@ -3335,7 +3335,7 @@
               {
                 "min_level": 13,
                 "max_level": 15,
-                "species": "SPECIES_DURALUDON"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 13,
@@ -4429,7 +4429,7 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_DRUDDIGON"
+                "species": "SPECIES_RIOLU"
               },
               {
                 "min_level": 35,
@@ -4439,7 +4439,7 @@
               {
                 "min_level": 35,
                 "max_level": 35,
-                "species": "SPECIES_FERROSEED"
+                "species": "SPECIES_WOOBAT"
               }
             ],
             "encounter_rates": [
@@ -6853,7 +6853,7 @@
               {
                 "min_level": 6,
                 "max_level": 8,
-                "species": "SPECIES_BUNEARY"
+                "species": "SPECIES_TOGEPI"
               },
               {
                 "min_level": 7,
@@ -7324,7 +7324,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SEWADDLE"
+                "species": "SPECIES_WURMPLE"
               },
               {
                 "min_level": 3,
@@ -7398,7 +7398,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SEWADDLE"
+                "species": "SPECIES_WURMPLE"
               },
               {
                 "min_level": 3,
@@ -7704,7 +7704,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_PACHIRISU"
+                "species": "SPECIES_SHINX"
               },
               {
                 "min_level": 2,
@@ -8993,7 +8993,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_PACHIRISU"
               },
               {
                 "min_level": 13,
@@ -10114,7 +10114,7 @@
               {
                 "min_level": 8,
                 "max_level": 10,
-                "species": "SPECIES_RIOLU"
+                "species": "SPECIES_STARLY"
               },
               {
                 "min_level": 8,
@@ -10454,7 +10454,7 @@
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_LINOONE"
+                "species": "SPECIES_SEWADDLE"
               },
               {
                 "min_level": 24,
@@ -10469,7 +10469,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_RATICATE"
+                "species": "SPECIES_CHINGLING"
               },
               {
                 "min_level": 26,
@@ -10479,7 +10479,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_LIEPARD"
+                "species": "SPECIES_BUNEARY"
               },
               {
                 "min_level": 26,
@@ -10678,7 +10678,7 @@
               {
                 "min_level": 41,
                 "max_level": 41,
-                "species": "SPECIES_KECLEON"
+                "species": "SPECIES_IRON_LEAVES"
               },
               {
                 "min_level": 41,
@@ -12902,7 +12902,7 @@
               {
                 "min_level": 8,
                 "max_level": 10,
-                "species": "SPECIES_CHINGLING"
+                "species": "SPECIES_NOIBAT"
               },
               {
                 "min_level": 8,
@@ -15511,7 +15511,7 @@
               {
                 "min_level": 10,
                 "max_level": 12,
-                "species": "SPECIES_WOOBAT"
+                "species": "SPECIES_ZUBAT"
               },
               {
                 "min_level": 10,
@@ -15526,7 +15526,7 @@
               {
                 "min_level": 10,
                 "max_level": 12,
-                "species": "SPECIES_WOOBAT"
+                "species": "SPECIES_TYNAMO"
               },
               {
                 "min_level": 10,
@@ -15536,12 +15536,12 @@
               {
                 "min_level": 10,
                 "max_level": 12,
-                "species": "SPECIES_WOOBAT"
+                "species": "SPECIES_WOOPER"
               },
               {
                 "min_level": 10,
                 "max_level": 12,
-                "species": "SPECIES_WOOBAT"
+                "species": "SPECIES_PSYDUCK"
               },
               {
                 "min_level": 10,
@@ -17152,7 +17152,7 @@
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_IRON_LEAVES"
+                "species": "SPECIES_KECLEON"
               },
               {
                 "min_level": 41,

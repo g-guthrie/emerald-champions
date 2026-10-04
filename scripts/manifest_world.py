@@ -11,6 +11,7 @@ from functools import lru_cache
 from pathlib import Path
 
 import mega_register as mr
+import evolution_move_gate
 import manifest_native_predicates as native
 from manifest_geometry import ManifestGeometry
 
@@ -530,7 +531,9 @@ class World:
                 return repeatable[s]
             deriv=self.pokemon.derive(state['species'],state['items'],state['cap'],lambda w:self.reachable(w,state),state['flags'],
                 {'repeatable':can_repeat,
-                 'knows_move':self.pokemon.can_learn,'friendship_max':255 if 'OldaleTown_PokemonCenter_1F' in state['maps'] and mr.canon('FLAG_BADGE01_GET') in state['flags'] else 0})
+                 'knows_move':self.pokemon.can_learn,
+                 'evolution_move_ready':lambda s,m: evolution_move_gate.ready(s,m,state['cap'],state['flags']),
+                 'friendship_max':255 if 'OldaleTown_PokemonCenter_1F' in state['maps'] else 0})
             state['species'].update(deriv['species']);state['caught'].update(deriv['species'])
             for event in self.events:
                 if event['id'] in state['event_history']:continue

@@ -734,7 +734,7 @@
 #define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_RED_SHARD                            (FLAG_HIDDEN_ITEMS_START + 0x4f) // relocated 0x2be -> 0x243 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_YELLOW_SHARD                         (FLAG_HIDDEN_ITEMS_START + 0x50) // relocated 0x2bf -> 0x244 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_SCORCHED_SLAB_STONE_PLATE                             (FLAG_HIDDEN_ITEMS_START + 0x54) // relocated 0x2c0 -> 0x248 (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICE_STONE                           (FLAG_HIDDEN_ITEMS_START + 0x56) // relocated 0x2c1 -> 0x24a (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICY_ROCK                           (FLAG_HIDDEN_ITEMS_START + 0x56) // relocated 0x2c1 -> 0x24a (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICICLE_PLATE                        (FLAG_HIDDEN_ITEMS_START + 0x58) // relocated 0x2c2 -> 0x24c (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_SKY_PILLAR_SKY_PLATE                                  (FLAG_HIDDEN_ITEMS_START + 0x59) // relocated 0x2c3 -> 0x24d (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_LEFTOVERS                         (FLAG_HIDDEN_ITEMS_START + 0x5a) // relocated 0x2c4 -> 0x24e (Sept 23 2026: bit was shared with a live flag)

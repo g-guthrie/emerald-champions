@@ -486,6 +486,10 @@ bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
 {
     s32 index = EmeraldChampionsBattleItemIndex(item);
 
+    // Thick Club waits for four badges even if acquired or its user is caught.
+    if (item == ITEM_THICK_CLUB && !FlagGet(FLAG_BADGE04_GET))
+        return FALSE;
+
     // Anything outside the catalogue is not gated at all.
     if (index < 0)
         return TRUE;

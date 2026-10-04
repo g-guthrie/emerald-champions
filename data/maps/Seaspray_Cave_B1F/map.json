@@ -98,8 +98,8 @@
       "x": 25,
       "y": 20,
       "elevation": 3,
-      "item": "ITEM_ICE_STONE",
-      "flag": "FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICE_STONE"
+      "item": "ITEM_ICY_ROCK",
+      "flag": "FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_B1F_ICY_ROCK"
     }
   ]
 }

@@ -53,6 +53,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import emerald_champions_teams as teams
+import evolution_move_gate
 import mega_register as mr
 from item_catalog import battle_item_categories
 from verify_trainer_ability_legality import preprocess_species_info, resolve_species, species_aliases
@@ -114,7 +115,7 @@ def player_rules() -> dict:
                   "cite": [cite(ROOT / "src/caps.c", "sCampaignMilestones"), cite(pc, "RaiseMonToLevelerTarget"),
                            cite(ROOT / "src/battle_script_commands.c", "B_SCR_OP_UNUSED_GETEXP")]},
         "evolution": {"rule": "Level evolutions at or below the cap (Leveler triggers them); friendship evolutions via Center Bonding "
-                              "(sets 160; opens with the first badge); item evolutions once the item is buyable/found; trade evolutions only through their "
+                              "(sets 160; opens with the first badge; tuning assumes friendship evolutions as soon as the base is legal); item evolutions once the item is buyable/found; trade evolutions only through their "
                               "EVO_ITEM alternative (Linking Cord or the held item used as an item).",
                       "cite": [cite(pc, "IsMonEligibleForLeveler"), cite(fs, "ApplyEmeraldChampionsBonding"),
                                "src/data/pokemon/species_info/gen_1_families.h (EVO_ITEM ITEM_LINKING_CORD)"]},
@@ -139,8 +140,8 @@ def player_rules() -> dict:
 def friendship_model(story: mr.Story) -> dict:
     """Friendship facts and the per-window maximum. B_AFFECTION_MECHANICS is
     FALSE (owner, Sept 30 2026), so friendship grants no battle luck. Center Bonding sets any party Pokemon to 0, 160 or 255 for free,
-    but only once the first badge is won; before that, walking alone cannot reach
-    the evolution threshold, so the start window's maximum is a fresh catch's."""
+    after the first badge. Tuning assumes walking reaches evolution friendship
+    as soon as the base form is legal, including the start window."""
     ec = SCRIPTS_DIR / "emerald_champions.inc"
     oldale = MAPS_DIR / "OldaleTown_PokemonCenter_1F/map.json"
     return {
@@ -163,7 +164,7 @@ def friendship_model(story: mr.Story) -> dict:
         ],
         "affection": {"effects": "none: affection battle effects are disabled",
                       "cite": [cite(ROOT / "include/config/battle.h", "B_AFFECTION_MECHANICS")]},
-        "per_window": {w: 50 if w == "start" else 255 for w in story.window_names()},
+        "per_window": {w: 255 for w in story.window_names()},
     }
 
 
@@ -840,6 +841,8 @@ class Builder:
             req, needs, note = self.legend_requirement(sp)
             if sp == "SPECIES_GENESECT":
                 req = sorted(set(req) | {"FLAG_BADGE08_GET"})
+            elif sp in ("SPECIES_PORYGON", "SPECIES_MUNCHLAX"):
+                req = sorted(set(req) | {"FLAG_BADGE03_GET"})
             self.species_sources.append(Source("game_corner", self.S(sp), "MauvilleCity_GameCorner", req,
                                                "Mauville Game Corner prize (coins bought with money)",
                                                cite(path, f"setvar VAR_TEMP_1, {sp}"), needs))
@@ -984,6 +987,15 @@ class Builder:
                 for req, w in self.scripted(label, n, MART_REQUIREMENTS.get(m[2])):
                     for item in items:
                         self.item_sources.append(Source("mart", item, w, req, f"{m[2]}", f"{rel(info['file'])}:{n}"))
+        tent = (ROOT / "src/battle_tent.c").read_text()
+        for town, table, req in [("SlateportCity", "sSlateportTentRewards", ["FLAG_BADGE03_GET"]),
+                                 ("SlateportCity", "sSlateportTentEarlyRewards", ["!FLAG_BADGE03_GET"]),
+                                 ("VerdanturfTown", "sVerdanturfTentRewards", [])]:
+            body = re.search(table + r"\[\]\s*=\s*\{(.*?)\};", tent, re.S)[1]
+            for item in re.findall(r"ITEM_\w+", body):
+                self.item_sources.append(Source("tent_prize", item, town + "_BattleTentLobby", req,
+                                                "random prize after three Tent wins",
+                                                cite(ROOT / "src/battle_tent.c", table)))
         # Lilycove Department Store 4F evolution specialists (field_specials.c
         # OpenEmeraldChampionsEvolutionSpecialist): every stone and paid item.
         paid = (ROOT / "src/data/emerald_champions_paid_evolution_items.h").read_text()
@@ -1243,6 +1255,8 @@ class Pools:
                 changed |= add_item(s.key, dict(kind=s.kind, detail=s.detail, where=s.as_dict()["where"], cite=s.cite))
             # Vendor species equipment and relics.
             for item, sp in EQUIPMENT_SPECIES.items():
+                if item == "ITEM_THICK_CLUB" and "FLAG_BADGE04_GET" not in flags:
+                    continue
                 if have(sp) and item not in items:
                     if item in ("ITEM_LUCKY_PUNCH",) or "FLAG_SYS_RECEIVED_KEYSTONE" in flags:
                         changed |= add_item(item, dict(kind="vendor_species", detail=f"shelf opens once {sd.name(sp)} is caught",
@@ -1268,7 +1282,7 @@ class Pools:
                     if target in species:
                         continue
                     ok, label = self.evo_ok(method, param, conds, cap, items, have, map_ok, mapsec_ok,
-                                            bonding="FLAG_BADGE01_GET" in flags)
+                                            evolution_move_ready=lambda move: evolution_move_gate.ready(sp, move, cap, flags))
                     if ok:
                         changed |= add_species(target, dict(kind="evolution", detail=f"{label} from {sd.name(sp)}",
                                                             cite="gSpeciesInfo evolutions (src/data/pokemon/species_info)"))
@@ -1318,7 +1332,7 @@ class Pools:
         return dict(species=species, items=items, megas=megas, ring=ring, flags=flags, cap=cap)
 
     @staticmethod
-    def evo_ok(method, param, conds, cap, items, have, map_ok, mapsec_ok, bonding=True) -> tuple[bool, str]:
+    def evo_ok(method, param, conds, cap, items, have, map_ok, mapsec_ok, evolution_move_ready=lambda move: True) -> tuple[bool, str]:
         if method in ("EVO_TRADE", "EVO_NONE", "EVO_LEVEL_BATTLE_ONLY"):
             # No link trades; no battle EXP (battle-only level-ups never happen).
             return False, method
@@ -1352,9 +1366,10 @@ class Pools:
                     return False, method
             elif cond == "IF_TRADE_PARTNER_SPECIES":
                 return False, method
-            elif cond == "IF_MIN_FRIENDSHIP":
-                if not bonding:
+            elif cond == "IF_KNOWS_MOVE":
+                if not evolution_move_ready(arg):
                     return False, method
+            elif cond == "IF_MIN_FRIENDSHIP":
                 label += " (Bonding)"
         return True, label
 
@@ -1724,7 +1739,7 @@ def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=Non
         scope="Source upper bound before this encounter; optional detours, money and RNG are unconstrained.",
         species=species, items=items, megas=r["megas"], all_mega_stones=sorted(p.megas),
         mega_ring=dict(available=r["ring"], gate="Norman's pre-battle gift after four Gym wins"),
-        friendship=dict(max_this_milestone=255 if "FLAG_BADGE01_GET" in r["flags"] else 50),
+        friendship=dict(max_this_milestone=255),
         game_corner_available=story.reachable(milestone, "MauvilleCity_GameCorner", closure=closure),
         starter_lines=starter_lines(b, r),
         iv_service_available=story.reachable(milestone, "FallarborTown_MoveRelearnersHouse", closure=closure),
