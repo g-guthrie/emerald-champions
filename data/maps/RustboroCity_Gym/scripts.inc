@@ -383,6 +383,8 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
 	.string "It also lets you use Cut. The Cutter\n"
 	.string "beside the Pokémon Center has\l"
 	.string "the license.\p"
+	.string "And Pokémon Center tutors can now\n"
+	.string "help your Pokémon with Bonding.\p"
 	.string "Please take this Mega Stone, too.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1

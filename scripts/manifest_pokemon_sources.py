@@ -375,7 +375,9 @@ class PokemonSources:
             if cond == 'IF_IN_MAP': return reachable(self.builder.geo.id_to_dir.get(arg, arg))
             if cond == 'IF_IN_MAPSEC': return any(m.get('region_map_section') == arg and reachable(d) for d,m in self.builder.geo.maps.items())
             if cond == 'IF_TYPE_IN_PARTY': return any(arg in self.breeding.get(s,{}).get('types',[]) for s in have)
-            if cond == 'IF_MIN_FRIENDSHIP': return reachable('OldaleTown_PokemonCenter_1F') or context.get('friendship_max',0) >= int(arg)
+            # Center Bonding (the only practical way to evolution friendship) opens with
+            # the first badge; the caller passes 255 once it is open.
+            if cond == 'IF_MIN_FRIENDSHIP': return context.get('friendship_max',0) >= 160
             if cond in ('IF_TIME','IF_NOT_TIME') or cond.startswith('IF_PID_'): return True
             if cond == 'IF_GENDER':
                 gender = self.breeding.get(sp,{}).get('gender','')

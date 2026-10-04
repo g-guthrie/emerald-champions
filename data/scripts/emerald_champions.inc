@@ -414,7 +414,9 @@ EmeraldChampions_Text_MoveTutorNoMachines:
 	.string "New partners have full EV training.\n"
 	.string "EV Training reshapes it for ¥500.\p"
 	.string "Change Abilities for free from\n"
-	.string "a Pokémon's party menu.$"
+	.string "a Pokémon's party menu.\p"
+	.string "Bonding opens once you've earned\n"
+	.string "your first Gym Badge.$"
 
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
@@ -462,9 +464,16 @@ EmeraldChampions_Text_RepelSprayMistedAgain:
 	.string "Wild Pokémon will keep their distance\n"
 	.string "for the next 500 steps.$"
 
+@ Bonding opens with the first Gym Badge, so friendship evolutions wait
+@ until after Roxanne.
 EmeraldChampions_EventScript_SpecialistBonding:
 	setvar VAR_TUTOR_CURSOR, 1
+	goto_if_unset FLAG_BADGE01_GET, EmeraldChampions_EventScript_BondingLocked
 	call Common_EventScript_EmeraldChampionsBonding
+	goto EmeraldChampions_EventScript_MoveTutorMain
+
+EmeraldChampions_EventScript_BondingLocked:
+	msgbox EmeraldChampions_Text_BondingLocked, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_MoveTutorMain
 
 @ Bonding keeps the chosen Pokémon in VAR_BONDING_MON and the value row in
@@ -524,6 +533,10 @@ EmeraldChampions_Text_BondingMaximum:
 	.string "Adores You$"
 EmeraldChampions_Text_BondingDone:
 	.string "All done! If it's ready to evolve,\nyour Leveler can help it along.$"
+EmeraldChampions_Text_BondingLocked:
+	.string "Bonding is for Trainers with a Gym\n"
+	.string "Badge. Come back once you've beaten\l"
+	.string "Roxanne in Rustboro!$"
 EmeraldChampions_Text_BondingUnavailable:
 	.string "Please choose a Pokémon, not an Egg.$"
 
