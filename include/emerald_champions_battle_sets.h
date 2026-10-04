@@ -65,6 +65,8 @@ bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species);
 
 // Preparation move policy is shared by the tutor and form-change consumers.
 const u16 *GetEmeraldChampionsPreparationMoves(enum Species species);
+// A move that would evolve its learner waits for its natural level (or badge 4).
+bool32 IsEmeraldChampionsEvolutionMoveLocked(enum Species species, enum Move move, u32 level);
 // Existing preparation pool plus both preset formats, excluding known moves.
 // Pass NULL to count without writing a list.
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves);

@@ -891,16 +891,45 @@ u32 GetEmeraldChampionsPreparationMovesForSpecies(enum Species species, u16 *mov
     return numMoves;
 }
 
+// A move that would evolve its learner (Yanma's Ancient Power, Aipom's
+// Double Hit) waits until the level at which the species learns it
+// naturally. A trigger move it never learns by level waits for the fourth
+// Gym Badge. scripts/evolution_move_gate.py mirrors this rule.
+bool32 IsEmeraldChampionsEvolutionMoveLocked(enum Species species, enum Move move, u32 level)
+{
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+    for (u32 i = 0; evolutions != NULL && evolutions[i].method != EVOLUTIONS_END; i++)
+    {
+        const struct EvolutionParam *params = evolutions[i].params;
+        for (u32 j = 0; params != NULL && params[j].condition != CONDITIONS_END; j++)
+        {
+            if (params[j].condition != IF_KNOWS_MOVE || params[j].arg1 != move)
+                continue;
+            const struct LevelUpMove *levelMoves = GetSpeciesLevelUpLearnset(species);
+            for (u32 k = 0; levelMoves[k].move != LEVEL_UP_MOVE_END; k++)
+            {
+                if (levelMoves[k].move == move)
+                    return level < levelMoves[k].level;
+            }
+            return !FlagGet(FLAG_BADGE04_GET);
+        }
+    }
+    return FALSE;
+}
+
 u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
 {
-    RememberKnownIconicMoves(mon, IconicTutorFamily(GET_BASE_SPECIES_ID(GetBoxMonData(mon, MON_DATA_SPECIES))));
+    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
+    u32 level = GetLevelFromBoxMonExp(mon);
+    RememberKnownIconicMoves(mon, IconicTutorFamily(GET_BASE_SPECIES_ID(species)));
     bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
     u32 numMoves = 0;
-    BuildEmeraldChampionsPreparationMoveAccess(GetBoxMonData(mon, MON_DATA_SPECIES), availableMoves);
+    BuildEmeraldChampionsPreparationMoveAccess(species, availableMoves);
 
     for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
     {
-        if (availableMoves[move] && !BoxMonKnowsMove(mon, move))
+        if (availableMoves[move] && !BoxMonKnowsMove(mon, move)
+         && !IsEmeraldChampionsEvolutionMoveLocked(species, move, level))
         {
             if (moves != NULL)
                 moves[numMoves] = move;
