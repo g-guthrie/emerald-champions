@@ -240,7 +240,11 @@ class ManifestGeometry(mr.Geometry):
                                 except ValueError: continue
                                 # Base-open tiles already participate in the
                                 # physical graph; decorative updates add no edge.
-                                if self.kind(d,x,y) is not None: continue
+                                # A warp door the script opens is the exception:
+                                # the Champion's door to the Hall of Fame opens
+                                # only after Wallace (EverGrandeCity_ChampionsRoom/scripts.inc:51-54).
+                                door=(x,y) in {(w['x'],w['y']) for w in self.maps[d].get('warp_events',[]) or []}
+                                if self.kind(d,x,y) is not None and not door: continue
                                 token=f'SCRIPT_OPEN:{d}:{x}:{y}'
                                 self.tile_gates.setdefault((d,x,y),((token,),))
                                 self.tile_gate_cites.setdefault((d,x,y),effect['source'])
