@@ -12,8 +12,10 @@ Route102_Text_CalvinPostBattle:
 	.string "you should have told me before!$"
 
 Route102_Text_AllenIntro:
-	.string "Did you just become a Trainer?\n"
-	.string "We're both beginners!$"
+	.string "I haven't won a single battle yet,\n"
+	.string "and my Pokémon are fed up!\p"
+	.string "Try to weaken them, and they\n"
+	.string "just get madder!$"
 
 Route102_Text_AllenDefeated:
 	.string "I called you because I thought\n"
