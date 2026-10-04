@@ -5,6 +5,8 @@ Every agent writes only inside its own work/retune/NN-TRAINER_X/ directory
 (draft.json, a party file with "cap" and "plan", from the ledger drafter; party.json/design.md from prep or
 battle agents, receipt.json when benchmarked). This script reads them all,
 in play order from work/retune/order.json, and writes work/retune/LEDGER.md.
+It ends with a running tally of the species in each cap window's finished
+benchmark parties, as information for balance review (it changes nothing).
 
   python3 scripts/retune_ledger.py            # write LEDGER.md and print the summary
   python3 scripts/retune_ledger.py --cap 14   # only that cap window
@@ -83,7 +85,39 @@ def rows(cap_filter: int | None = None) -> list[dict]:
     return out
 
 
-def render(table: list[dict]) -> str:
+def usage(cap_filter: int | None = None) -> dict[int, tuple[int, list[tuple[str, int]]]]:
+    """cap -> (finished battles, [(species, battles using it)]) from receipts' parties."""
+    by_cap: dict[int, dict[str, int]] = {}
+    battles: dict[int, int] = {}
+    for paths in battle_dirs().values():
+        for path in paths:
+            receipt = _load(path / "receipt.json")
+            if not receipt or (cap_filter is not None and receipt.get("cap") != cap_filter):
+                continue
+            named = receipt.get("party")
+            party = _load(ROOT / named if named and not Path(named).is_absolute() else Path(named)) if named else None
+            party = party or _load(path / "party.json")
+            if not party:
+                continue
+            cap = receipt.get("cap")
+            battles[cap] = battles.get(cap, 0) + 1
+            counts = by_cap.setdefault(cap, {})
+            for species in {m.get("species", "?") for m in party.get("party", [])}:
+                counts[species] = counts.get(species, 0) + 1
+    return {cap: (battles[cap], sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
+            for cap, counts in sorted(by_cap.items())}
+
+
+def render_usage(tally: dict[int, tuple[int, list[tuple[str, int]]]]) -> list[str]:
+    lines = ["", "## Species in finished benchmark parties", "",
+             "Running tally per cap window, for balance review only."]
+    for cap, (total, counts) in tally.items():
+        shown = ", ".join(f"{s.removeprefix('SPECIES_').replace('_', ' ').title()} {n}/{total}" for s, n in counts)
+        lines += ["", f"- Cap {cap} ({total} battles): {shown}"]
+    return lines
+
+
+def render(table: list[dict], tally: dict | None = None) -> str:
     counts: dict[str, int] = {}
     for r in table:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
@@ -97,6 +131,8 @@ def render(table: list[dict]) -> str:
             continue
         lines.append(f"| {r['n']} | {r['trainer'].removeprefix('TRAINER_')} | {r['cap'] or ''} | {r['status']} | "
                      f"{r['d_star']} | {r['confirmed']} | {r['flag']} | {r['team']} |")
+    if tally:
+        lines += render_usage(tally)
     return "\n".join(lines) + "\n"
 
 
@@ -105,7 +141,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--cap", type=int)
     args = parser.parse_args(argv)
     table = rows(args.cap)
-    text = render(table)
+    text = render(table, usage(args.cap))
     (RETUNE / "LEDGER.md").write_text(text)
     print(text.splitlines()[2])
     return 0
