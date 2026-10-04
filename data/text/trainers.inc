@@ -1,7 +1,9 @@
 Route102_Text_CalvinIntro:
 	.string "If you have Pokémon with you, then\n"
 	.string "you're an official Pokémon Trainer!\l"
-	.string "You can't say no to my challenge!$"
+	.string "You can't say no to my challenge!\p"
+	.string "Once my Zigzagoon drums its belly,\n"
+	.string "nothing can outrun it!$"
 
 Route102_Text_CalvinDefeated:
 	.string "Arrgh, I lost…\n"
@@ -39,6 +41,8 @@ Route102_Text_RickPostBattle:
 Route102_Text_TianaIntro:
 	.string "I'm going to keep winning and aim\n"
 	.string "to be the best Trainer.\p"
+	.string "My Buneary will hand your Pokémon\n"
+	.string "a Flame Orb, and you can't refuse!\p"
 	.string "Help me further my career!$"
 
 Route102_Text_TianaDefeated:
@@ -143,7 +147,9 @@ Route104_Text_MiaPostBattle::
 
 Route104_Text_BillyIntro:
 	.string "Leaving footprints in the sand is\n"
-	.string "so fun!$"
+	.string "so fun! Rain's even better!\p"
+	.string "And my Ditto turns into a copy of\n"
+	.string "your Pokémon the moment it's out!$"
 
 Route104_Text_BillyDefeat:
 	.string "Waah! I got sand in my runners!\n"
