@@ -64,6 +64,10 @@ or data.
   make a fight fair on every difficulty, tuning may also change a trainer's
   team, sets or items, keeping the fight's authored doubles plan and never
   weakening the AI's reasoning.
+- Rare ability and item combinations on trainer Pokemon (e.g. Joey's Scrappy
+  Galarian Farfetch'd with a Leek) are the point of their fights. Never remove
+  one to balance a fight: lower that member's level instead, and let the
+  trainer's dialogue warn the player about it.
 - Every trainer must be beatable by a stage-legal team: one the player can
   hold before that battle per the progression manifest
   (`artifacts/progression-manifest/`, checked by `scripts/tuning_pool_check.py

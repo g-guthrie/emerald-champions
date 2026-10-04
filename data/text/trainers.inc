@@ -925,8 +925,10 @@ Route116_Text_ClarkPostBattle:
 	.string "To a Hiker, mountains are roads!$"
 
 Route116_Text_JoeyIntro:
-	.string "My Pokémon rule!\n"
-	.string "Check them out!$"
+	.string "My Farfetch'd is real scrappy!\n"
+	.string "Its Leek always finds a weak spot!\p"
+	.string "Scary faces don't scare it, and\n"
+	.string "Ghosts can't dodge it either!$"
 
 Route116_Text_JoeyDefeat:
 	.string "Ouch! A scrape!\n"

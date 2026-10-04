@@ -39,20 +39,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AbandonedShip_Rooms_1F_EventScript_ItemLopunnite",
       "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_LOPUNNITE"
-    },
-    {
-      "local_id": "LOCALID_EC_MIMIKYU_DOLL",
-      "graphics_id": "OBJ_EVENT_GFX_PIKACHU_DOLL",
-      "x": 6,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms_1F_EventScript_MimikyuDoll",
-      "flag": "FLAG_HIDE_ABANDONED_SHIP_MIMIKYU"
     }
   ],
   "warp_events": [
