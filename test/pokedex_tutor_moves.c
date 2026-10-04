@@ -4,16 +4,20 @@
 #include "pokedex_plus_hgss.h"
 #include "move_relearner.h"
 #include "pokemon.h"
+#include "event_data.h"
 
 // The Pokedex's moves page and the Center's All Legal Moves service must list
 // the same moves: the page reads GetPokedexTutorMoves, the tutor collects for a
-// Pokemon that knows no moves yet.
+// fully unlocked Pokemon that knows no moves yet. Evolution trigger
+// timing is tested separately in evolution_move_gate.c.
 TEST("Pokédex moves page lists exactly the Center tutor's moves for every species")
 {
     static EWRAM_DATA u16 dexMoves[MOVES_COUNT_ALL];
     static EWRAM_DATA u16 centerMoves[MOVES_COUNT_ALL];
     static EWRAM_DATA bool8 offered[MOVES_COUNT_ALL];
     struct BoxPokemon mon;
+    bool32 hadBadge4 = FlagGet(FLAG_BADGE04_GET);
+    FlagSet(FLAG_BADGE04_GET);
 
     for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
     {
@@ -23,7 +27,7 @@ TEST("Pokédex moves page lists exactly the Center tutor's moves for every speci
          || gSpeciesInfo[species].isMegaEvolution
          || gSpeciesInfo[species].isGigantamax)
             continue;
-        CreateBoxMon(&mon, species, 5, 0, OTID_STRUCT_PLAYER_ID);
+        CreateBoxMon(&mon, species, MAX_LEVEL, 0, OTID_STRUCT_PLAYER_ID);
         for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
             SetBoxMonMoveSlot(&mon, MOVE_NONE, slot);
 
@@ -36,6 +40,8 @@ TEST("Pokédex moves page lists exactly the Center tutor's moves for every speci
         for (u32 i = 0; i < dexCount; i++)
             EXPECT(offered[dexMoves[i]]);
     }
+    if (!hadBadge4)
+        FlagClear(FLAG_BADGE04_GET);
 }
 
 TEST("Double Team, Minimize and one-hit KO moves are removed from every source a player uses")

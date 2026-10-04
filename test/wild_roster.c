@@ -609,14 +609,14 @@ TEST("Wild roster: a caught Legendary, Ultra Beast or Paradox Pokemon never appe
     u8 dexCaught[NUM_DEX_FLAG_BYTES];
     SaveRosterTestState(&state);
     memcpy(dexCaught, gSaveBlock1Ptr->dexCaught, sizeof(dexCaught));
-    // Paradox: Iron Leaves in Verdanturf Meadow has no gate; the Pokedex
+    // Paradox: Iron Leaves on Route 119 has no gate; the Pokedex
     // record of a catch closes its slot.
-    EXPECT(RosterHas(MAP_VERDANTURF_MEADOW, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
-    EXPECT(EngineCanRoll(MAP_VERDANTURF_MEADOW, SPECIES_IRON_LEAVES));
+    EXPECT(RosterHas(MAP_ROUTE119, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
+    EXPECT(EngineCanRoll(MAP_ROUTE119, SPECIES_IRON_LEAVES));
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_IRON_LEAVES), FLAG_SET_CAUGHT);
     EXPECT(!IsWildSlotSpeciesAcquirable(SPECIES_IRON_LEAVES));
-    EXPECT(!RosterHas(MAP_VERDANTURF_MEADOW, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
-    EXPECT(!EngineCanRoll(MAP_VERDANTURF_MEADOW, SPECIES_IRON_LEAVES));
+    EXPECT(!RosterHas(MAP_ROUTE119, WILD_ROSTER_LAND, SPECIES_IRON_LEAVES));
+    EXPECT(!EngineCanRoll(MAP_ROUTE119, SPECIES_IRON_LEAVES));
     // Ultra Beast: Poipole in Seaspray Cave B1F opens at five badges; its Sign
     // closes it.
     SetRosterBadges(5);

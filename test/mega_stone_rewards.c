@@ -171,16 +171,16 @@ enum { GIFT_SEVERAL, GIFT_ONE, GIFT_FALLBACK, GIFT_ALREADY_HELD };
 static const struct { u16 item; u16 flag; bool8 hoenn; } sStarterStones[] =
 {
     {ITEM_VENUSAURITE,    FLAG_ITEM_PETALBURG_CITY_VENUSAURITE, FALSE},
-    {ITEM_CHARIZARDITE_X, FLAG_ITEM_FIERY_PATH_CHARIZARDITE_X,  FALSE},
-    {ITEM_CHARIZARDITE_Y, FLAG_EMBER_PATH_CHARIZARDITE_Y,       FALSE},
+    {ITEM_CHARIZARDITE_X, FLAG_ITEM_MAGMA_HIDEOUT_4_F_CHARIZARDITE_X,  FALSE},
+    {ITEM_CHARIZARDITE_Y, FLAG_ITEM_VICTORY_ROAD_B1_F_CHARIZARDITE_Y,       FALSE},
     {ITEM_BLASTOISINITE,  FLAG_SEASPRAY_CAVE_BLASTOISINITE,     FALSE},
-    {ITEM_MEGANIUMITE,    FLAG_ITEM_GRANITE_CAVE_B1F_TM65,      FALSE},
+    {ITEM_MEGANIUMITE,    FLAG_ITEM_ROUTE120_MEGANIUMITE,      FALSE},
     {ITEM_FERALIGITE,     FLAG_RECEIVED_TM03,                   FALSE},
     {ITEM_SCEPTILITE,     FLAG_EC_MEGA_GIFT_SCEPTILITE,         TRUE},
     {ITEM_BLAZIKENITE,    FLAG_EC_MEGA_GIFT_BLAZIKENITE,        TRUE},
     {ITEM_SWAMPERTITE,    FLAG_EC_MEGA_GIFT_SWAMPERTITE,        TRUE},
     {ITEM_EMBOARITE,      FLAG_RECEIVED_TM08,                   FALSE},
-    {ITEM_CHESNAUGHTITE,  FLAG_EMBER_PATH_SMACK_DOWN,           FALSE},
+    {ITEM_CHESNAUGHTITE,  FLAG_ITEM_MAGMA_HIDEOUT_1_F_CHESNAUGHTITE,           FALSE},
     {ITEM_DELPHOXITE,     FLAG_RECEIVED_TM39,                   FALSE},
     {ITEM_GRENINJITE,     FLAG_ITEM_ROUTE_119_TM62_ACROBATICS,  FALSE},
 };
@@ -281,6 +281,10 @@ TEST("Norman's Mega gift: a Charizard pair receives Charizardite X and Y")
     PARAMETRIZE { partner = 0; stone = ITEM_VENUSAURITE; }
     PARAMETRIZE { partner = 2; stone = ITEM_BLASTOISINITE; }
     SaveStarterVars();
+    bool8 hadMistySeed = FlagGet(FLAG_ITEM_FIERY_PATH_MISTY_SEED);
+    bool8 hadElectricSeed = FlagGet(FLAG_ITEM_EMBER_PATH_ELECTRIC_SEED);
+    FlagClear(FLAG_ITEM_FIERY_PATH_MISTY_SEED);
+    FlagClear(FLAG_ITEM_EMBER_PATH_ELECTRIC_SEED);
     ResetStarterStones(1, 1, partner);
     EXPECT_EQ(RunNormanGift(), GIFT_SEVERAL);
     EXPECT_EQ(StoneCount(ITEM_CHARIZARDITE_X), 1);
@@ -288,11 +292,18 @@ TEST("Norman's Mega gift: a Charizard pair receives Charizardite X and Y")
     EXPECT_EQ(StoneCount(stone), 1);
     EXPECT_EQ(StoneCount(ITEM_SWAMPERTITE), 0);
     EXPECT_EQ(StoneCount(ITEM_SCEPTILITE) + StoneCount(ITEM_BLAZIKENITE), 0);
-    // Norman's copies close the Fiery Path and Ember Path sparkles.
-    EXPECT(FlagGet(FLAG_ITEM_FIERY_PATH_CHARIZARDITE_X));
-    EXPECT(FlagGet(FLAG_EMBER_PATH_CHARIZARDITE_Y));
+    // Norman’s copies close the relocated Magma Hideout and Victory Road sparkles.
+    // Their old homes now hold useful gear and must remain claimable.
+    EXPECT(FlagGet(FLAG_ITEM_MAGMA_HIDEOUT_4_F_CHARIZARDITE_X));
+    EXPECT(FlagGet(FLAG_ITEM_VICTORY_ROAD_B1_F_CHARIZARDITE_Y));
+    EXPECT(!FlagGet(FLAG_ITEM_FIERY_PATH_MISTY_SEED));
+    EXPECT(!FlagGet(FLAG_ITEM_EMBER_PATH_ELECTRIC_SEED));
     EXPECT_EQ(FlagGet(FLAG_ITEM_PETALBURG_CITY_VENUSAURITE), stone == ITEM_VENUSAURITE);
     EXPECT_EQ(FlagGet(FLAG_SEASPRAY_CAVE_BLASTOISINITE), stone == ITEM_BLASTOISINITE);
+    if (hadMistySeed)
+        FlagSet(FLAG_ITEM_FIERY_PATH_MISTY_SEED);
+    if (hadElectricSeed)
+        FlagSet(FLAG_ITEM_EMBER_PATH_ELECTRIC_SEED);
     RestoreStarterVars();
 }
 

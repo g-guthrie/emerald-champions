@@ -66,7 +66,7 @@ TIP(PACIFIDLOG_TOWN, 0, 0, 0, VIAL_ROUTE133, COMPOUND_STRING("Blob's nurse is on
 
 TIP(EVER_GRANDE_CITY, 0, FLAG_SYS_GAME_CLEAR, 0, NONE, COMPOUND_STRING("The Elite Four are always ready\nfor another match. Challenge\lthem whenever you like.")),
 
-TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE, NONE, COMPOUND_STRING("Butterfree can Mega Evolve!\nIts stone lies in Dewford\lMeadow. Keep it until Norman\lgives you a Mega Ring.")),
+TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_ROUTE119_BUTTERFRENITE, NONE, COMPOUND_STRING("Butterfree can Mega Evolve!\nLook for its stone on Route 119\lafter Norman gives you the\lMega Ring.")),
 TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_ROUTE_106_KINGLERITE, NONE, COMPOUND_STRING("Kingler can Mega Evolve, too!\nLook for its Mega Stone on\lRoute 106, north of Dewford.")),
 TIP(FALLARBOR_TOWN, 5, 0, FLAG_ITEM_DESERT_UNDERPASS_FLYGONITE, NONE, COMPOUND_STRING("Flygon's Mega Stone lies in the\nDesert Underpass. After five\lBadges, explore the Fossil\lManiac's tunnel on Route 114.")),
 TIP(MOSSDEEP_CITY, 0, 0, FLAG_ITEM_MOSSDEEP_CITY_MILOTICITE, NONE, COMPOUND_STRING("Milotic can Mega Evolve here!\nIts Mega Stone lies in Mossdeep.\lGive it to Milotic, then use\lyour Mega Ring in battle.")),

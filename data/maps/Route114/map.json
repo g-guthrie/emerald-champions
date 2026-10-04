@@ -117,17 +117,17 @@
       "flag": "FLAG_ITEM_ROUTE_114_RARE_CANDY"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 37,
       "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route114_EventScript_ItemTM54Psyshock",
-      "flag": "FLAG_ITEM_ROUTE_114_TM53_PSYSHOCK"
+      "flag": "FLAG_ITEM_ROUTE114_WEAKNESS_POLICY"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",

@@ -16,6 +16,7 @@ TEST("Restricted party: special categories share one slot, including forms and l
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_FLUTTER_MANE), RESTRICTED_PARTY_PARADOX);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_ROARING_MOON), RESTRICTED_PARTY_PARADOX);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA_BLOODMOON), RESTRICTED_PARTY_NONE);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA), RESTRICTED_PARTY_NONE);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_GARCHOMP), RESTRICTED_PARTY_NONE);
     static const enum Species special[] = {
         SPECIES_SHAYMIN_SKY, SPECIES_MEWTWO, SPECIES_NAGANADEL, SPECIES_FLUTTER_MANE,

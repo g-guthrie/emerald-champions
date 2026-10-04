@@ -1815,7 +1815,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "species": "SPECIES_URSARING"
               }
             ],
             "encounter_rates": [
@@ -3101,7 +3101,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_HEATMOR"
+                "species": "SPECIES_WOOBAT"
               }
             ],
             "encounter_rates": [
@@ -3547,7 +3547,7 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_TURTONATOR"
+                "species": "SPECIES_RIOLU"
               }
             ],
             "encounter_rates": [
@@ -4429,7 +4429,7 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_RIOLU"
+                "species": "SPECIES_DRUDDIGON"
               },
               {
                 "min_level": 35,
@@ -4439,7 +4439,7 @@
               {
                 "min_level": 35,
                 "max_level": 35,
-                "species": "SPECIES_WOOBAT"
+                "species": "SPECIES_FERROSEED"
               }
             ],
             "encounter_rates": [
@@ -10412,12 +10412,12 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_CHINGLING"
               },
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_SHELMET"
+                "species": "SPECIES_SEWADDLE"
               },
               {
                 "min_level": 26,
@@ -10454,7 +10454,7 @@
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_SEWADDLE"
+                "species": "SPECIES_LINOONE"
               },
               {
                 "min_level": 24,
@@ -10469,7 +10469,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_CHINGLING"
+                "species": "SPECIES_RATICATE"
               },
               {
                 "min_level": 26,
@@ -10479,7 +10479,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_BUNEARY"
+                "species": "SPECIES_LIEPARD"
               },
               {
                 "min_level": 26,
@@ -17152,7 +17152,7 @@
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_KECLEON"
+                "species": "SPECIES_BUNEARY"
               },
               {
                 "min_level": 41,
@@ -17323,7 +17323,7 @@
               {
                 "min_level": 74,
                 "max_level": 74,
-                "species": "SPECIES_LAIRON"
+                "species": "SPECIES_URSALUNA_BLOODMOON"
               }
             ],
             "encounter_rates": [

@@ -289,12 +289,14 @@ TEST("Center local guide reflects quest progress without unlocking discoveries")
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT(GuideTextContains(COMPOUND_STRING("Sing")));
     // The lead states its badge requirement in prose; nothing is appended.
-    EXPECT(GuideTextContains(COMPOUND_STRING("After two")));
+    EXPECT(GuideTextContains(COMPOUND_STRING("After four")));
     EXPECT(!GuideTextContains(COMPOUND_STRING("Gym Badges required")));
     EXPECT(!GuideTextContains(COMPOUND_STRING("You're ready!")));
     EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_MELOETTA));
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_BADGE04_GET);
     UnlockLegendarySign(LEGENDARY_SIGN_MELOETTA);
     gSpecialVar_0x8004 = 0;
     BufferNextCenterLegendaryLead();
@@ -1177,16 +1179,19 @@ TEST("Center guide: side quests appear with their gates and retire when done")
     FlagClear(FLAG_SYS_GAME_CLEAR);
     EXPECT(!CenterGuideTipsMention(MAPSEC_MOSSDEEP_CITY, COMPOUND_STRING("Meltan")));
     // Local stone leads retire independently when their pickups are claimed.
-    FlagClear(FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE);
+    FlagClear(FLAG_ITEM_ROUTE119_BUTTERFRENITE);
     FlagClear(FLAG_ITEM_ROUTE_106_KINGLERITE);
     EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Butterfree")));
     EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Kingler")));
-    FlagSet(FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE);
+    FlagSet(FLAG_ITEM_DEWFORD_MEADOW_HEAT_ROCK);
+    EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Butterfree")));
+    FlagClear(FLAG_ITEM_DEWFORD_MEADOW_HEAT_ROCK);
+    FlagSet(FLAG_ITEM_ROUTE119_BUTTERFRENITE);
     EXPECT(!CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Butterfree")));
     EXPECT(CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("Kingler")));
     FlagSet(FLAG_ITEM_ROUTE_106_KINGLERITE);
     EXPECT(!CenterGuideTipsMention(MAPSEC_DEWFORD_TOWN, COMPOUND_STRING("")));
-    FlagClear(FLAG_ITEM_DEWFORD_MEADOW_BUTTERFRENITE);
+    FlagClear(FLAG_ITEM_ROUTE119_BUTTERFRENITE);
     FlagClear(FLAG_ITEM_ROUTE_106_KINGLERITE);
 
     for (u32 badge = 0; badge < 8; badge++)

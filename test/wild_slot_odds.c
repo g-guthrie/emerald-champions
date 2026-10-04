@@ -735,7 +735,8 @@ TEST("Wild rarity: early Dreepy uses local land odds and Sweet Scent reverses th
         EXPECT_EQ(ChooseWildMonIndex_Land(info), expected);
     }
     // Under Sweet Scent the five rarest residents, Dreepy among them, all at
-    // the 4% floor, share the odds of the five most common ones.
+    // the 4% floor, share the reversed species odds. The two Starly slots
+    // combine into 26%, so five rare species share 26+16+15+10+8 = 75%.
     u32 rarest = 0;
     for (u32 roll = 0; roll < 100; roll++)
     {
@@ -743,7 +744,7 @@ TEST("Wild rarity: early Dreepy uses local land odds and Sweet Scent reverses th
         u32 index = ChooseSweetScentWildMonIndex(info, WILD_AREA_LAND);
         rarest += weights[index] == 4;
     }
-    EXPECT_EQ(rarest, weights[0] + weights[1] + weights[2] + weights[3] + weights[4]);
+    EXPECT_EQ(rarest, 75);
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
 }
 
@@ -910,11 +911,14 @@ TEST("Sweet Scent: a live restricted slot is three times as likely, all of them 
     // Caught: inert, and the ordinary reversal takes every outcome.
     MarkLegendarySignCaughtBySpecies(SPECIES_KUBFU);
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
-    // Gated: Cobalion waits for Badge 2, so its slot is inert too.
+    // Gated: Cobalion waits for Badge 4, so its slot is inert too.
     mons[3].species = SPECIES_COBALION;
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
+    EXPECT_EQ(CountSweetScentSlot(&info, 3), 0);
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_BADGE04_GET);
     EXPECT_EQ(CountSweetScentSlot(&info, 3), 15);
 
     // Ultra Beasts and Paradox Pokemon are lured the same way. Poipole and

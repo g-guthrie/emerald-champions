@@ -333,7 +333,7 @@ TEST("DexNav reveals Route 103 residents with an entirely unseen Pokedex")
     EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_WINGULL), count);
     EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_TOXEL), count);
     EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_SNUBBULL), count);
-    EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_PACHIRISU), count);
+    EXPECT_LT(FindEntry(unseen, count, WILD_ROSTER_LAND, SPECIES_SHINX), count);
 
     for (u32 dex = 1; dex <= NATIONAL_DEX_COUNT; dex++)
         GetSetPokedexFlag(dex, FLAG_SET_SEEN);

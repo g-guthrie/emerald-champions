@@ -9,7 +9,7 @@
     {MAPSEC_RUSTBORO_CITY, LEGENDARY_SIGN_POIPOLE, COMPOUND_STRING("With five Badges, Poipole, an\nUltra Beast, hides in Seaspray\lCave B1F off Route 115.\pOnce you own a Bicycle, ride\nit up the cave's muddy slope."), SPECIES_NONE},
     {MAPSEC_RUSTBORO_CITY, LEGENDARY_SIGN_MAGEARNA, COMPOUND_STRING("Devon's dream researcher on 2F\nhas a Magearna prototype.\lEarn eight Badges and catch\lDiancie before visiting him."), SPECIES_NONE},
     {MAPSEC_RUSTBORO_CITY, LEGENDARY_SIGN_ARCEUS, COMPOUND_STRING("Devon's dream researcher on 2F\nalso senses Arceus. Enter the\lHall of Fame, then visit him\lto receive it."), SPECIES_NONE},
-    {MAPSEC_DEWFORD_TOWN, LEGENDARY_SIGN_MELOETTA, COMPOUND_STRING("Meloetta answers songs in\nDewford Meadow. After two\lBadges, bring a partner with\lSing to the warden there."), SPECIES_NONE},
+    {MAPSEC_DEWFORD_TOWN, LEGENDARY_SIGN_MELOETTA, COMPOUND_STRING("Meloetta answers songs in\nDewford Meadow. After four\lBadges, bring a partner with\lSing to the warden there."), SPECIES_NONE},
     {MAPSEC_OLDALE_TOWN, LEGENDARY_SIGN_COSMOG, COMPOUND_STRING("After you enter the Hall of\nFame, visit Prof. Birch in\lhis Littleroot lab. He has\ltwo Cosmog for you to raise."), SPECIES_NONE},
     {MAPSEC_DEWFORD_TOWN, LEGENDARY_SIGN_KUBFU, COMPOUND_STRING("Kubfu trains on Granite Cave\n1F, north of Dewford."), SPECIES_NONE},
     {MAPSEC_SLATEPORT_CITY, LEGENDARY_SIGN_MEWTWO, COMPOUND_STRING("Altering Cave on Route 103\nopens after you enter the\lHall of Fame. Surf there;\lMewtwo waits on B1F."), SPECIES_NONE},
@@ -79,7 +79,7 @@
     // told by the Center nearest its home, with its gate stated in prose.
     {MAPSEC_PETALBURG_CITY, LEGENDARY_SIGN_KARTANA, COMPOUND_STRING("With six Badges and Maxie\nstopped at the Magma Hideout,\lKartana, an Ultra Beast,\lcuts through Petalburg Woods'\lthird area."), SPECIES_NONE},
     {MAPSEC_PETALBURG_CITY, LEGENDARY_SIGN_WO_CHIEN, COMPOUND_STRING("Wo-Chien creeps through the\nsecond area of Petalburg Woods\lonce you have five Badges."), SPECIES_NONE},
-    {MAPSEC_DEWFORD_TOWN, LEGENDARY_SIGN_COBALION, COMPOUND_STRING("Cobalion stands guard on\nGranite Cave B2F once you have\ltwo Badges."), SPECIES_NONE},
+    {MAPSEC_DEWFORD_TOWN, LEGENDARY_SIGN_COBALION, COMPOUND_STRING("Cobalion stands guard on\nGranite Cave B2F once you have\lfour Badges."), SPECIES_NONE},
     {MAPSEC_DEWFORD_TOWN, LEGENDARY_SIGN_PHEROMOSA, COMPOUND_STRING("With six Badges and Maxie\nstopped at the Magma Hideout,\lPheromosa, an Ultra Beast,\ldances in Dewford Meadow."), SPECIES_NONE},
     {MAPSEC_SLATEPORT_CITY, LEGENDARY_SIGN_HOOPA, COMPOUND_STRING("Hoopa plays tricks on Altering\nCave 1F, off Route 103. The\lcave opens after you enter\lthe Hall of Fame."), SPECIES_NONE},
     {MAPSEC_SLATEPORT_CITY, LEGENDARY_SIGN_GUZZLORD, COMPOUND_STRING("Guzzlord, an Ultra Beast, eats\nits way through Altering Cave\lB1F, off Route 103, after you\lenter the Hall of Fame."), SPECIES_NONE},
