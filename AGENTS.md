@@ -65,9 +65,12 @@ or data.
   team, sets or items, keeping the fight's authored doubles plan and never
   weakening the AI's reasoning.
 - Rare ability and item combinations on trainer Pokemon (e.g. Joey's Scrappy
-  Galarian Farfetch'd with a Leek) are the point of their fights. Never remove
-  one to balance a fight: lower that member's level instead, and let the
-  trainer's dialogue warn the player about it.
+  Galarian Farfetch'd with a Leek) are the point of their fights. Tune around
+  them rather than through them, and use judgment: when one member decides
+  the fight on its own, look at that member (its level, its enablers, a
+  non-signature move) before moving the whole team. Changing the combo itself
+  is a last resort to raise with the user. Let the trainer's dialogue warn the
+  player about it.
 - Every trainer must be beatable by a stage-legal team: one the player can
   hold before that battle per the progression manifest
   (`artifacts/progression-manifest/`, checked by `scripts/tuning_pool_check.py
