@@ -57,6 +57,19 @@ async def run(spec,out):
                                      (studio.core.syms["gEcHeadlessFixtureScenario"],enums.index(ident))])
             for _ in range(int(start.get("settle_frames",360))//30):
                 packet=await studio.core.tick(frames=30)
+        elif start.get("cold_boot"):
+            # A real new game: power on to the title screen with no fixture at all.
+            studio.core=await server.Core.open(build["rom"],build["elf"])
+            packet=await studio.core.tick(frames=int(start.get("settle_frames",120)))
+        elif "save" in start:
+            # Continue a playthrough from the save an earlier leg ended on.
+            # Boot a private copy: the core writes the save back in place, and the
+            # previous leg's end.sav must never change.
+            import shutil
+            out.mkdir(parents=True,exist_ok=True)
+            source_save=out/"from-previous-leg.sav"
+            shutil.copy2(start["save"],source_save)
+            studio.core,packet=await studio.boot(build,source_save)
         else:
             studio.core,packet=await studio.boot(build,chapter=int(start.get("chapter",3)))
     studio.build,studio.build_id=build,build["id"];studio.ingest(packet)
@@ -88,7 +101,48 @@ async def run(spec,out):
         markers={m["frame"]:m["label"] for m in replay["markers"]} if replay else {}
         steps=spec.get("steps",replay["inputs"] if replay else [])
         total=0
+        walk_failure=None
         for step in steps:
+            if "walk" in step and walk_failure is None:
+                # Closed-loop walking: hold each direction until the game reports one tile of
+                # progress (position or map changed). A tile that never comes is a failure.
+                async def settle_scene(label):
+                    # A script took control (trigger, trainer, gift): tap A through it, then
+                    # wait for twelve idle frames. Battles resolve per battle_resolution.
+                    nonlocal total
+                    recorder.mark(label,studio.packet);idle=0
+                    for f in range(12000):
+                        m=keys("A") if f%30==0 else 0
+                        studio.ingest(await studio.core.tick(m,frames=1));recorder.observe(studio.packet,m);total+=1
+                        idle=idle+1 if studio.state[0] else 0
+                        if idle>=12:break
+                    recorder.mark("Scene over",studio.packet)
+                for i,d in enumerate(step["walk"]):
+                    mask=keys(d.split("*")[0]);before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
+                    moved=False
+                    for attempt in range(2):
+                        for f in range(int(step.get("tile_limit",90))):
+                            studio.ingest(await studio.core.tick(mask,frames=1));recorder.observe(studio.packet,mask);total+=1
+                            if (studio.state[2],studio.state[3],studio.state[4],studio.state[5])!=before:moved=True;break
+                            if not studio.state[0] and f>4:break
+                        if moved:break
+                        if not studio.state[0]:
+                            await settle_scene(f"Scene during {d} at {before[2]},{before[3]}")
+                            before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
+                    if not moved:
+                        walk_failure=f"walk {step.get('label','')}: move {i+1} ({d}) made no progress at {before[2]},{before[3]}"
+                        recorder.mark("STUCK "+d,studio.packet);break
+                    # let the tile finish so the next input starts from rest; a script the
+                    # step triggered (coord event, trainer sight) is played through
+                    for f in range(16):
+                        studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
+                        if studio.state[0] and f>=2:break
+                    if not studio.state[0]:
+                        await settle_scene(f"Scene after {d} at {studio.state[4]},{studio.state[5]}")
+                if step.get("label"):recorder.mark(step["label"],studio.packet)
+                if total>18000:raise ValueError("A scene may run at most 18,000 frames.")
+                continue
+            if walk_failure is not None:break
             frames=int(step.get("frames",120))
             if not 0<=frames<=18000 or total+frames>18000:raise ValueError("A scene may run at most 18,000 frames.")
             hold=keys(step.get("hold",step.get("keys",0)));press=keys(step.get("press",0))
@@ -111,6 +165,11 @@ async def run(spec,out):
             if step.get("label"):recorder.mark(step["label"],studio.packet)
         final=packet_state(studio.packet,recorder.decoder)
         final["map"]=studio.current_map
+        if studio.state[0]:
+            # The next leg of a playthrough starts from this save.
+            studio.ingest(await studio.core.field_command(1))
+            await studio.core.rpc(6,str(out/"end.sav").encode())
+            final["end_save"]=str(out/"end.sav")
         query_values={}
         async def advance_query():
             studio.ingest(await studio.core.tick(frames=1))
@@ -121,7 +180,7 @@ async def run(spec,out):
             if isinstance(ident,str):ident=studio.cat.constants[ident]
             query_values[name]=await read_game_query(studio.core,kind,int(ident),advance_query)
         final["queries"]=query_values
-        failures=[]
+        failures=[walk_failure] if walk_failure else []
         for field,wanted in spec.get("expect",{}).items():
             if field=="contains_text":
                 if wanted not in final["text"]:failures.append("Displayed text did not contain "+repr(wanted))

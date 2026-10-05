@@ -2195,6 +2195,13 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     {
         // An explicitly synthetic playground. Battles always resolve natively.
         gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;
+        if (gEcHeadlessFixtureParam == 100)
+        {
+            // A real new game: the cartridge's own CB2_NewGame (truck sequence and all
+            // story state), skipping only the title screen and Birch's naming speech.
+            SetMainCallback2(CB2_NewGame);
+            return;
+        }
         if (gEcHeadlessFixtureParam == 101)
         {
             // The real opening: empty party at Birch's bag, before the pair is chosen.
