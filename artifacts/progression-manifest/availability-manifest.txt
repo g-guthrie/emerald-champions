@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at e630758d20 by scripts/manifest_text.py. 328 battles, through Buffel.
+Generated from source at 09f9e46197 by scripts/manifest_text.py. 328 battles, through Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -40,7 +40,7 @@ STEP 1 - level cap 14
       Red Card (buy, Oldale Town Pokemon Center 1F)
   Battles that open here:
     #1 Rival May - Route 103
-        foe levels Easy 11 / Med 18-19 / Hard 20-23
+        foe levels Easy 9-11 / Med 12-15 / Hard 12-15
 
 ====================================================================================================
 STEP 2 - level cap 14
@@ -107,10 +107,11 @@ STEP 4 - level cap 14
 STEP 5 - level cap 14
   After beating: Twins Gina & Mia (#13)
   New Pokemon (28):
-    Wild - Route 115: Wailmer, Wishiwashi (Solo)
+    Wild - Route 115: Wailmer
     Wild - Route 116: Dreepy, Houndour, Joltik, Mareep, Nickit, Nincada, Rookidee, Skiddo, Skitty,
         Starly
-    Wild - Seaspray Cave: Krabby, Psyduck, Stunfisk (Galar), Tynamo, Wooper, Zubat
+    Wild - Seaspray Cave: Krabby, Psyduck, Stunfisk (Galar), Tynamo, Wishiwashi (Solo), Wooper,
+        Zubat
     Wild - Seaspray Cave B1F: Bergmite, Frigibax, Seel, Smoochum, Sneasel, Snorunt, Spheal, Swinub,
         Vanillite
     Evolve: Staravia (from Starly)
@@ -143,13 +144,13 @@ STEP 5 - level cap 14
 ====================================================================================================
 STEP 6 - level cap 20
   After beating: Hiker Devan (#17), Leader Roxanne (#21)
-  New Pokemon (85):
-    Wild - Petalburg Woods: Cherubi, Pidgey, Pikipek
+  New Pokemon (86):
+    Wild - Petalburg Woods: Cherubi, Combee, Pidgey, Pikipek
     Wild - Petalburg Woods 2: Beedrill, Bounsweet, Kakuna, Morelull, Panpour, Pansage, Pansear,
         Venipede, Weedle
     Wild - Petalburg Woods 3: Bellsprout, Croagunk, Dewpider, Emolga, Goomy, Impidimp, Misdreavus,
         Murkrow, Oddish, Poliwag, Slowpoke, Yanma
-    Wild - Route 103: Audino
+    Wild - Route 103: Cutiefly
     Wild - Route 104: Patrat, Yungoos
     Wild - Route 116: Pancham, Purrloin
     Wild - Rusturf Tunnel: Drilbur, Dunsparce, Larvitar, Machop, Noibat, Roggenrola, Teddiursa,
@@ -188,11 +189,10 @@ STEP 6 - level cap 20
 ====================================================================================================
 STEP 7 - level cap 20
   After beating: Team Aqua Grunt (#24)
-  New Pokemon (80):
+  New Pokemon (78):
     Wild - Dewford Manor 1F: Drowzee, Gastly, Glameow, Hoothoot, Litwick, Mime Jr., Rattata,
         Sinistea (Phony), Slowpoke (Galar), Solosis
-    Wild - Dewford Meadow: Combee, Cutiefly, Flabébé, Flabébé, Flabébé, Milcery, Oricorio (Baile),
-        Spritzee, Swirlix
+    Wild - Dewford Meadow: Flabébé, Flabébé, Flabébé, Milcery, Oricorio (Baile), Spritzee, Swirlix
     Wild - Dewford Town: Mantyke
     Wild - Granite Cave 1F: Abra, Aron, Axew, Geodude, Glimmet, Hawlucha, Kubfu [R], Nacli,
         Rolycoly, Timburr
@@ -221,7 +221,7 @@ STEP 7 - level cap 20
       Rose Incense (buy, Slateport City), Scope Lens (buy, Oldale Town Pokemon Center 1F),
       Sea Incense (buy, Slateport City), Silk Scarf (buy, Dewford Town Pokemon Center 1F),
       Soft Sand (buy, Dewford Town Pokemon Center 1F),
-      Throat Spray (buy, Petalburg City Pokemon Center 1F), Wave Incense (buy, Slateport City),
+      Throat Spray (buy, Dewford Town Pokemon Center 1F), Wave Incense (buy, Slateport City),
       Zoom Lens (Route 109)
   Battles that open here:
     #25 Rival May - Route 104
@@ -359,11 +359,12 @@ STEP 14 - level cap 30
 ====================================================================================================
 STEP 15 - level cap 30
   After beating: Rival May (#49)
-  New Pokemon (92):
+  New Pokemon (93):
     Wild - Route 111: Barboach
     Wild - Route 117: Wooper (Paldea)
     Wild - Verdanturf Meadow: Buneary, Cottonee, Espurr, Flabébé, Floette (Eternal), Hatenna,
         Indeedee (M), Munna, Ponyta (Galar), Stufful, Vivillon (Pokeball)
+    Gift - Verdanturf Meadow: Audino
     Game Corner - Mauville City Game Corner: Bulbasaur, Charmander, Chespin, Chikorita, Chimchar,
         Cyndaquil, Diglett (Alola), Fennekin, Froakie, Fuecoco, Geodude (Alola), Grimer (Alola),
         Grookey, Litten, Marowak (Alola), Meowth (Alola), Oshawott, Piplup, Popplio, Quaxly,
@@ -441,7 +442,7 @@ STEP 16 - level cap 30
 ====================================================================================================
 STEP 17 - level cap 30
   After beating: Rival Wally (#57)
-  New held items (1): Rock Gem (buy, Dewford Town Pokemon Center 1F)
+  New held items (1): Rock Gem (buy, Oldale Town Pokemon Center 1F)
   Battles that open here:
     #72 Guitarist Kirk - Mauville City Gym
         foe levels Easy 24 / Med 31-34 / Hard 31-36
@@ -474,19 +475,18 @@ STEP 18 - level cap 30
 ====================================================================================================
 STEP 19 - level cap 40
   After beating: Leader Wattson (#75)
-  New Pokemon (196):
+  New Pokemon (198):
     Wild - Fiery Path: Diglett, Durant, Entei [R], Grimer, Heatmor, Koffing, Magby, Sizzlipede,
         Slugma, Torkoal, Woobat
     Wild - Granite Cave B2F: Nosepass
     Wild - Route 103: Clamperl, Qwilfish, Staryu
     Wild - Route 106: Binacle, Dwebble, Shellder, Wimpod
     Wild - Route 110: Raikou [R]
-    Wild - Route 111: Basculin (Red Striped), Drednaw
-    Wild - Route 112: Hitmonchan, Klawf, Numel, Ponyta, Rufflet, Sawk, Tauros (Paldea Combat),
-        Throh, Vullaby, Zapdos (Galar) [R]
+    Wild - Route 111: Basculin (Red Striped), Drednaw, Shuckle
+    Wild - Route 112: Heracross, Hitmonchan, Klawf, Numel, Pinsir, Ponyta, Rufflet, Sawk,
+        Tauros (Paldea Combat), Throh, Vullaby, Zapdos (Galar) [R]
     Wild - Route 113: Bouffalant, Falinks, Mienfoo, Pawniard, Scraggy, Skarmory, Spinda, Spoink
-    Wild - Route 114: Ducklett, Golduck, Phanpy, Probopass, Seviper, Shuckle, Skorupi, Swablu,
-        Zangoose
+    Wild - Route 114: Ducklett, Golduck, Phanpy, Probopass, Seviper, Skorupi, Swablu, Zangoose
     Wild - Seaspray Cave: Relicanth
     Game Corner - Mauville City Game Corner: Munchlax, Porygon
     Evolve: Abomasnow (from Snover), Accelgor (from Shelmet), Alakazam (from Kadabra),
@@ -603,7 +603,7 @@ STEP 21 - level cap 40
 STEP 22 - level cap 40
   After beating: Magma Admin Courtney + Team Magma Grunt (#95)
   New held items (2): Draco Plate (Meteor Falls 1F 1R),
-      Fairy Feather (buy, Petalburg City Pokemon Center 1F)
+      Fairy Feather (buy, Mauville City Pokemon Center 1F)
   Battles that open here:
     #96 Battle Girl Cyndy - Route 115
         foe levels Easy 31 / Med 46-47 / Hard 50-52
@@ -629,9 +629,9 @@ STEP 24 - level cap 40
 ====================================================================================================
 STEP 25 - level cap 40
   After beating: Magma Leader Maxie (#100)
-  New Pokemon (32):
-    Wild - Ashen Woods: Brute Bonnet [R], Buzzwole [R], Growlithe, Growlithe (Hisui), Heracross,
-        Pinsir, Salandit, Salazzle, Scyther
+  New Pokemon (30):
+    Wild - Ashen Woods: Brute Bonnet [R], Buzzwole [R], Growlithe, Growlithe (Hisui), Salandit,
+        Salazzle, Scyther
     Wild - Ember Path: Blacephalon [R], Chandelure, Slither Wing [R], Tauros (Paldea Blaze)
     Wild - Jagged Pass: Fearow, Gligar, Jangmo-o, Mudbray, Mudsdale, Primeape, Riolu, Turtonator
     Gift egg - Lavaridge Town: Wynaut
@@ -770,15 +770,14 @@ STEP 27 - level cap 55
     Wild - New Mauville Inside: Electabuzz, Iron Hands [R], Wattrel
     Wild - Petalburg Woods 2: Wo-Chien [R]
     Wild - Route 104: Tentacruel
-    Wild - Route 105: Cramorant
     Wild - Route 106: Wiglett
     Wild - Route 108: Dragalge, Lapras
     Wild - Route 109: Pincurchin
     Wild - Route 114: Mesprit [R]
     Wild - Route 118: Carnivine, Dedenne, Kecleon, Lickilicky, Lickitung, Squawkabilly (Green),
         Tauros (Paldea Aqua), Zigzagoon (Galar)
-    Wild - Route 119: Articuno (Galar) [R], Comfey, Feebas, Gastrodon (East), Iron Leaves [R],
-        Oranguru, Passimian, Tropius, Voltorb (Hisui)
+    Wild - Route 119: Articuno (Galar) [R], Comfey, Cramorant, Feebas, Gastrodon (East),
+        Iron Leaves [R], Oranguru, Passimian, Tropius, Voltorb (Hisui)
     Wild - Seaspray Cave B1F: Poipole [R]
     Wild - Slateport City: Pyukumuku, Tentacool
     Evolve: Baxcalibur (from Arctibax), Bisharp (from Pawniard), Braviary (from Rufflet),
@@ -941,7 +940,7 @@ STEP 32 - level cap 55
       Fire Memory (buy, Oldale Town Pokemon Center 1F),
       Flying Memory (buy, Oldale Town Pokemon Center 1F),
       Ghost Memory (buy, Oldale Town Pokemon Center 1F),
-      Grass Memory (buy, Fallarbor Town Pokemon Center 1F),
+      Grass Memory (buy, Dewford Town Pokemon Center 1F),
       Ground Memory (buy, Oldale Town Pokemon Center 1F),
       Ice Memory (buy, Dewford Town Pokemon Center 1F),
       Poison Memory (buy, Oldale Town Pokemon Center 1F),
@@ -1221,10 +1220,10 @@ STEP 47 - level cap 65
     Wild - Route 128: Finizen
     Wild - Route 129: Basculegion (M)
     Wild - Route 130: Qwilfish (Hisui)
-    Wild - Shoal Cave Low Tide Entrance Room: Cetoddle, Eiscue (Ice), Snom
+    Wild - Shoal Cave Low Tide Entrance Room: Cetoddle, Eiscue (Ice)
     Wild - Shoal Cave Low Tide Ice Room: Azelf [R], Iron Bundle [R], Mr. Mime (Galar)
     Wild - Shoal Cave Low Tide Inner Room: Darumaka (Galar)
-    Wild - Shoal Cave Low Tide Lower Room: Chien-Pao [R]
+    Wild - Shoal Cave Low Tide Lower Room: Chien-Pao [R], Snom
     Wild - Shoal Cave Low Tide Stairs Room: Glastrier [R]
     Storm visitor - Route 125: Suicune [R]
     Evolve: Avalugg (Hisui) (from Bergmite), Basculegion (F) (from Basculin (White Striped)),
@@ -1404,10 +1403,10 @@ STEP 58 - level cap 70
     Wild - Underwater Route 124: Dondozo
     Wild - Underwater Seafloor Cavern: Nihilego [R], Tatsugiri (Curly), Tatsugiri (Droopy),
         Tatsugiri (Stretchy), Veluza
-  New held items (7): Figy Berry (Sootopolis City), Hard Stone (Underwater Route 127),
-      Iapapa Berry (Sootopolis City), Iron Plate (Underwater Route 126),
-      Mind Plate (Underwater Route 127), Pixie Plate (Underwater Route 124),
-      Poison Barb (buy, Dewford Town Pokemon Center 1F)
+  New held items (7): Figy Berry (Sootopolis City),
+      Hard Stone (buy, Verdanturf Town Pokemon Center 1F), Iapapa Berry (Sootopolis City),
+      Iron Plate (Underwater Route 126), Mind Plate (Underwater Route 127),
+      Pixie Plate (Underwater Route 124), Poison Barb (buy, Dewford Town Pokemon Center 1F)
   New Mega Stones: Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite
   Battles that open here:
     #273 Swimmer F Brenda - Route 126
@@ -1600,7 +1599,7 @@ STEP 72 - level cap 85
     Wild - Altering Cave 1F: Hoopa (Confined) [R]
     Wild - Altering Cave B1F: Guzzlord [R]
     Wild - Meteor Falls Stevens Cave: Iron Boulder [R], Iron Crown [R]
-    Wild - Route 121: Xerneas (Neutral) [R]
+    Storm visitor - Route 121: Xerneas (Neutral) [R]
     Gift - Littleroot Town Professor Birchs Lab: Cosmog [R]
     Gift - Mossdeep City Stevens House: Meltan [R]
     Gift - Rustboro City Devon Corp 2F: Arceus (Normal) [R]

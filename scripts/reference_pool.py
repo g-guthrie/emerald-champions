@@ -1086,6 +1086,9 @@ GIFT_REQUIREMENTS: dict = {
     # (case 7/8), which the path scan does not track.
     "PetalburgCity_Gym_EventScript_GiveFacade": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:100-107,346-352,469"),
     "PetalburgCity_Gym_EventScript_GiveEnigmaBerry": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:346-350"),
+    # The gym guide is hidden by FLAG_HIDE_PETALBURG_GYM_GREETER until VAR_PETALBURG_GYM_STATE
+    # reaches 6 (fourth badge; data/event_scripts.s Common_EventScript_ReadyPetalburgGymForBattle).
+    "PetalburgCity_Gym_EventScript_GymGuide": (["FLAG_BADGE04_GET"], "PetalburgCity_Gym/map.json greeter flag"),
     "MauvilleCity_Gym_EventScript_GiveMegaRing": (["FLAG_BADGE03_GET"], "MauvilleCity_Gym/scripts.inc (Wattson victory or owed Ring retry)"),
     "PetalburgCity_Gym_EventScript_NormanStarterGift": (["FLAG_BADGE05_GET"], "PetalburgCity_Gym/scripts.inc (after Norman victory)"),
     **{f"Route110_TrickHouseEnd_EventScript_CompletedPuzzle{n}": (
@@ -1281,7 +1284,9 @@ class Pools:
             for item, sp in EQUIPMENT_SPECIES.items():
                 if item == "ITEM_THICK_CLUB" and "FLAG_BADGE04_GET" not in flags:
                     continue
-                if have(sp) and item not in items:
+                # IsEmeraldChampionsBattleItemUnlocked checks the exact species'
+                # Pokedex caught flag (field_specials.c), not its family.
+                if sd.resolve(sp) in species and item not in items:
                     if item in ("ITEM_LUCKY_PUNCH",) or "FLAG_SYS_RECEIVED_KEYSTONE" in flags:
                         changed |= add_item(item, dict(kind="vendor_species", detail=f"shelf opens once {sd.name(sp)} is caught",
                                                        cite="src/field_specials.c:490-497,690-706"))
