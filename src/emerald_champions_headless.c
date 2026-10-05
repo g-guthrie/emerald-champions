@@ -1665,10 +1665,10 @@ static void ObserveHeadlessFixture(void)
                 && gEcHeadlessCampaignLastResolution == EC_HEADLESS_BATTLE_WIN
                 && FlagGet(FLAG_BADGE01_GET)
                 && FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)
-                && FlagGet(FLAG_RECEIVED_TM39) // Roxanne's Delphoxite receipt
+                && FlagGet(FLAG_RECEIVED_TM39) // Roxanne's Glimmoranite receipt
                 && HasTrainerBeenFought(TRAINER_ROXANNE_1)
                 && GetCurrentLevelCap() == 20
-                && CheckBagHasItem(ITEM_DELPHOXITE, 1)
+                && CheckBagHasItem(ITEM_GLIMMORANITE, 1)
                 && VarGet(VAR_RUSTBORO_CITY_STATE) == 2
                 && !gMain.inBattle
                 && gMain.callback2 == CB2_Overworld

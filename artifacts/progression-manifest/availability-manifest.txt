@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at 2360b3c2f5 by scripts/manifest_text.py. 328 battles, through Buffel.
+Generated from source at e630758d20 by scripts/manifest_text.py. 328 battles, through Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -176,7 +176,7 @@ STEP 6 - level cap 20
       Shell Bell (buy, Petalburg City Pokemon Center 1F),
       Toxic Orb (buy, Petalburg City Pokemon Center 1F),
       Wide Lens (buy, Oldale Town Pokemon Center 1F)
-  New Mega Stones (no Mega Ring yet): Delphoxite
+  New Mega Stones (no Mega Ring yet): Glimmoranite
   Battles that open here:
     #22 Lady Sarah - Route 116
         foe levels Easy 15 / Med 21-23 / Hard 22-25
@@ -304,7 +304,7 @@ STEP 9 - level cap 30
       Loaded Dice (buy, Oldale Town Pokemon Center 1F),
       Lucky Punch (buy, Dewford Town Pokemon Center 1F),
       Snowball (buy, Oldale Town Pokemon Center 1F), White Herb (buy, Oldale Town Pokemon Center 1F)
-  New Mega Stones (no Mega Ring yet): Emboarite
+  New Mega Stones (no Mega Ring yet): Machampite
   Battles that open here:
     #42 Team Aqua Grunt - Slateport City Oceanic Museum 2F
         foe levels Easy 24 / Med 34 / Hard 36-37
@@ -996,9 +996,9 @@ STEP 34 - level cap 55
       Electric Gem (buy, Oldale Town Pokemon Center 1F),
       Ice Gem (buy, Oldale Town Pokemon Center 1F), Meadow Plate (Route 123),
       Metronome (buy, Oldale Town Pokemon Center 1F)
-  New Mega Stones: Absolite, Absolite Z, Altarianite, Banettite, Chimechite, Gengarite,
-      Glimmoranite, Golisopite, Lucarionite Z, Machampite, Malamarite, Meganiumite, Pidgeotite,
-      Pinsirite, Sablenite
+  New Mega Stones: Absolite, Absolite Z, Altarianite, Banettite, Chimechite, Delphoxite, Emboarite,
+      Gengarite, Golisopite, Lucarionite Z, Malamarite, Meganiumite, Pidgeotite, Pinsirite,
+      Sablenite
   Battles that open here:
     #172 Bird Keeper Colin - Route 120
         foe levels Easy 43 / Med 58 / Hard 60

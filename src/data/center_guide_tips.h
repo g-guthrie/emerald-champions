@@ -70,6 +70,6 @@ TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_ROUTE119_BUTTERFRENITE, NONE, COMPOUND_STRING(
 TIP(DEWFORD_TOWN, 0, 0, FLAG_ITEM_ROUTE_106_KINGLERITE, NONE, COMPOUND_STRING("Kingler can Mega Evolve, too!\nLook for its Mega Stone on\lRoute 106, north of Dewford.")),
 TIP(FALLARBOR_TOWN, 5, 0, FLAG_ITEM_DESERT_UNDERPASS_FLYGONITE, NONE, COMPOUND_STRING("Flygon's Mega Stone lies in the\nDesert Underpass. After five\lBadges, explore the Fossil\lManiac's tunnel on Route 114.")),
 TIP(MOSSDEEP_CITY, 0, 0, FLAG_ITEM_MOSSDEEP_CITY_MILOTICITE, NONE, COMPOUND_STRING("Milotic can Mega Evolve here!\nIts Mega Stone lies in Mossdeep.\lGive it to Milotic, then use\lyour Mega Ring in battle.")),
-TIP(LILYCOVE_CITY, 0, 0, FLAG_ITEM_ROUTE_121_MACHAMPITE, NONE, COMPOUND_STRING("Machamp can Mega Evolve here!\nIts stone lies on Route 121,\lwest of Lilycove. Give it to\lMachamp for your Mega Ring.")),
+TIP(LILYCOVE_CITY, 0, 0, FLAG_ITEM_ROUTE_121_EMBOARITE, NONE, COMPOUND_STRING("Emboar can Mega Evolve, too!\nIts stone lies on Route 121,\lwest of Lilycove. Give it to\lEmboar for your Mega Ring.")),
 
 #undef TIP

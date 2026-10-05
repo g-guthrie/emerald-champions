@@ -164,8 +164,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	@ FLAG_RECEIVED_TM08 is Emboarite's only receipt (Norman may give it
-	@ to a Tepig pair); see src/mega_stone_rewards.c.
+	@ Brawly's Machampite is not a starter stone, so every pair gets it.
 	call_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp
 	closemessage
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
@@ -175,7 +174,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
-	giveuniqueitem ITEM_EMBOARITE
+	giveuniqueitem ITEM_MACHAMPITE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -183,7 +182,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
-	giveuniqueitem ITEM_EMBOARITE
+	giveuniqueitem ITEM_MACHAMPITE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -442,7 +441,7 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "Take this Mega Stone as well.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181
-	.string "This is Emboarite. An Emboar\n"
+	.string "This is Machampite. A Machamp\n"
 	.string "holding it can Mega Evolve once\l"
 	.string "you have a Mega Ring.$"
 

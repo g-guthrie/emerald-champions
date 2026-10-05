@@ -230,8 +230,8 @@ Route121_EventScript_ItemRevive:: @ 8290F96
 	finditem ITEM_SKARMORITE
 	end
 
-Route121_EventScript_ItemMachampite:: @ 8290FA3
-	finditem ITEM_MACHAMPITE
+Route121_EventScript_ItemEmboarite:: @ 8290FA3
+	finditem ITEM_EMBOARITE
 	end
 
 Route123_EventScript_ItemWideLens:: @ 8290FB0
@@ -492,7 +492,7 @@ SafariZone_Northeast_EventScript_ItemKangaskhanite:: @ 82912E3
 	end
 
 SafariZone_Southeast_EventScript_ItemTM53EnergyBall:: @ 82912F0
-	finditem ITEM_GLIMMORANITE
+	finditem ITEM_DELPHOXITE
 	end
 
 MtPyre_2F_EventScript_ItemUltraBall:: @ 82912FD

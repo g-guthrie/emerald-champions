@@ -210,8 +210,10 @@ u32 EmeraldChampions_CountMegasWitnessed(void)
 
 // Starter Mega Stones follow the starter pair. Each stone has exactly one
 // receipt flag, shared by every place that can hand it over:
-// - Norman gives, after his victory, the stones of the pair's final forms that
-//   have not reached the player yet (Swampertite when the pair has none);
+// - Norman gives, after his victory, one stone per partner that has not
+//   reached the player yet: the partner's own (Charizard's X and Y both), or,
+//   for a line with no Mega, the Hoenn stone of the same starter type - every
+//   pair leaves with a Mega for each partner slot it set out with;
 // - a stone with a world home (a sparkle or a Gym Leader's gift) is handed over
 //   there otherwise; the sparkle's object flag or the Leader's receipt is the
 //   same flag, so Norman's copy closes that home and a home's copy closes his;
@@ -235,9 +237,9 @@ static const struct
     {SPECIES_SCEPTILE,   ITEM_SCEPTILITE,     FLAG_EC_MEGA_GIFT_SCEPTILITE},
     {SPECIES_BLAZIKEN,   ITEM_BLAZIKENITE,    FLAG_EC_MEGA_GIFT_BLAZIKENITE},
     {SPECIES_SWAMPERT,   ITEM_SWAMPERTITE,    FLAG_EC_MEGA_GIFT_SWAMPERTITE},
-    {SPECIES_EMBOAR,     ITEM_EMBOARITE,      FLAG_RECEIVED_TM08},  // Brawly
+    {SPECIES_EMBOAR,     ITEM_EMBOARITE,      FLAG_ITEM_ROUTE_121_EMBOARITE},
     {SPECIES_CHESNAUGHT, ITEM_CHESNAUGHTITE,  FLAG_ITEM_MAGMA_HIDEOUT_1_F_CHESNAUGHTITE},
-    {SPECIES_DELPHOX,    ITEM_DELPHOXITE,     FLAG_RECEIVED_TM39},  // Roxanne
+    {SPECIES_DELPHOX,    ITEM_DELPHOXITE,     FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL},
     {SPECIES_GRENINJA,   ITEM_GRENINJITE,     FLAG_ITEM_ROUTE_119_TM62_ACROBATICS},
 };
 
@@ -274,22 +276,44 @@ static bool32 IsStarterPairForm(u32 i)
             GetStarterPokemonForGeneration(GetEmeraldChampionsSecondStarterIndex(), generation));
 }
 
-static bool32 StarterPairHasMegaStone(void)
+// TRUE when the final form of this generation's starter index has its own stone.
+static bool32 StarterIndexHasMegaStone(u16 index, u16 generation)
 {
+    enum Species final = GetFinalEvolutionForStarter(GetStarterPokemonForGeneration(index, generation));
+
     for (u32 i = 0; i < ARRAY_COUNT(sStarterMegaStones); i++)
     {
-        if (IsStarterPairForm(i))
+        if (sStarterMegaStones[i].species == final)
             return TRUE;
     }
     return FALSE;
 }
 
+// A Hoenn stone standing in for a partner of the same type (Grass, Fire,
+// Water by starter index) whose own line cannot Mega Evolve.
+static bool32 IsSubstituteStarterMegaStone(u32 i)
+{
+    u16 generation = VarGet(VAR_STARTER_GEN);
+    u16 hoennIndex;
+
+    if (!IsHoennStarterMegaStone(i))
+        return FALSE;
+    for (hoennIndex = 0; hoennIndex < 3; hoennIndex++)
+    {
+        if (GetFinalEvolutionForStarter(GetStarterPokemonForGeneration(hoennIndex, 3)) == sStarterMegaStones[i].species)
+            break;
+    }
+    if (VarGet(VAR_STARTER_MON) == hoennIndex && !StarterIndexHasMegaStone(hoennIndex, generation))
+        return TRUE;
+    return HasEmeraldChampionsSecondStarter()
+        && GetEmeraldChampionsSecondStarterIndex() == hoennIndex
+        && !StarterIndexHasMegaStone(hoennIndex, generation);
+}
+
 // Norman's share for this save, delivered or not.
 static bool32 IsNormanStarterMegaStone(u32 i)
 {
-    if (StarterPairHasMegaStone())
-        return IsStarterPairForm(i);
-    return sStarterMegaStones[i].item == ITEM_SWAMPERTITE;
+    return IsStarterPairForm(i) || IsSubstituteStarterMegaStone(i);
 }
 
 // Next stone Norman still owes after his victory, or ITEM_NONE.
@@ -311,16 +335,20 @@ void BufferNormanStarterMegaStone(void)
 // Which line Norman says before handing stones over.
 void BufferNormanMegaGiftKind(void)
 {
-    u32 pending = 0;
+    u32 pending = 0, substitutes = 0;
 
     for (u32 i = 0; i < ARRAY_COUNT(sStarterMegaStones); i++)
     {
         if (IsNormanStarterMegaStone(i) && !StarterMegaStoneDelivered(i))
+        {
             pending++;
+            if (IsSubstituteStarterMegaStone(i))
+                substitutes++;
+        }
     }
     if (pending == 0)
         gSpecialVar_Result = NORMAN_MEGA_GIFT_ALREADY_HELD;
-    else if (!StarterPairHasMegaStone())
+    else if (substitutes != 0)
         gSpecialVar_Result = NORMAN_MEGA_GIFT_FALLBACK;
     else
         gSpecialVar_Result = pending == 1 ? NORMAN_MEGA_GIFT_ONE : NORMAN_MEGA_GIFT_SEVERAL;

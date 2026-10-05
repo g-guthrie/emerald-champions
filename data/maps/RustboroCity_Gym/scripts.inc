@@ -21,14 +21,13 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	call Common_EventScript_SetGymTrainers
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
-	@ FLAG_RECEIVED_TM39 is Delphoxite's only receipt (Norman may give it
-	@ to a Fennekin pair); see src/mega_stone_rewards.c.
+	@ Roxanne's Glimmoranite is not a starter stone, so every pair gets it.
 	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
 	release
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
-	giveuniqueitem ITEM_DELPHOXITE
+	giveuniqueitem ITEM_GLIMMORANITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
@@ -388,8 +387,8 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
 	.string "Please take this Mega Stone, too.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
-	.string "This is Delphoxite. Give it to\n"
-	.string "Delphox to Mega Evolve once you\l"
+	.string "This is Glimmoranite. Give it to\n"
+	.string "Glimmora to Mega Evolve once you\l"
 	.string "have a Mega Ring.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle: @ 82139A7

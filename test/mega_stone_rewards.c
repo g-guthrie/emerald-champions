@@ -180,9 +180,9 @@ static const struct { u16 item; u16 flag; bool8 hoenn; } sStarterStones[] =
     {ITEM_SCEPTILITE,     FLAG_EC_MEGA_GIFT_SCEPTILITE,         TRUE},
     {ITEM_BLAZIKENITE,    FLAG_EC_MEGA_GIFT_BLAZIKENITE,        TRUE},
     {ITEM_SWAMPERTITE,    FLAG_EC_MEGA_GIFT_SWAMPERTITE,        TRUE},
-    {ITEM_EMBOARITE,      FLAG_RECEIVED_TM08,                   FALSE},
+    {ITEM_EMBOARITE,      FLAG_ITEM_ROUTE_121_EMBOARITE,        FALSE},
     {ITEM_CHESNAUGHTITE,  FLAG_ITEM_MAGMA_HIDEOUT_1_F_CHESNAUGHTITE,           FALSE},
-    {ITEM_DELPHOXITE,     FLAG_RECEIVED_TM39,                   FALSE},
+    {ITEM_DELPHOXITE,     FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL, FALSE},
     {ITEM_GRENINJITE,     FLAG_ITEM_ROUTE_119_TM62_ACROBATICS,  FALSE},
 };
 
@@ -330,7 +330,10 @@ TEST("Norman's Mega gift: a Hoenn pair receives both stones and the third waits 
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: a pair without Mega Stones receives Swampertite")
+// Hoenn stones by starter index: Grass, Fire, Water.
+static const u16 sHoennStoneByIndex[] = {ITEM_SCEPTILITE, ITEM_BLAZIKENITE, ITEM_SWAMPERTITE};
+
+TEST("Norman's Mega gift: a partner without a Mega receives the Hoenn stone of its type")
 {
     u16 generation, first, second;
     PARAMETRIZE { generation = 4; first = 0; second = 2; }
@@ -341,42 +344,57 @@ TEST("Norman's Mega gift: a pair without Mega Stones receives Swampertite")
     SaveStarterVars();
     ResetStarterStones(generation, first, second);
     EXPECT_EQ(RunNormanGift(), GIFT_FALLBACK);
-    EXPECT_EQ(StoneCount(ITEM_SWAMPERTITE), 1);
     for (u32 i = 0; i < ARRAY_COUNT(sStarterStones); i++)
     {
-        if (sStarterStones[i].item != ITEM_SWAMPERTITE)
-            EXPECT_EQ(StoneCount(sStarterStones[i].item), 0);
+        bool32 owed = sStarterStones[i].item == sHoennStoneByIndex[first]
+                   || sStarterStones[i].item == sHoennStoneByIndex[second];
+        EXPECT_EQ(StoneCount(sStarterStones[i].item), owed ? 1 : 0);
     }
-    // Swampertite is spent; a Mudkip earns nothing more, the other two do.
+    // The third Hoenn stone still waits for its partner.
     static const u16 partners[] = {SPECIES_MUDKIP, SPECIES_TREECKO, SPECIES_TORCHIC};
     SetParty(partners, ARRAY_COUNT(partners));
-    EXPECT_EQ(RunNormanPartnerGifts(), 2);
+    EXPECT_EQ(RunNormanPartnerGifts(), 1);
     EXPECT_EQ(StoneCount(ITEM_SWAMPERTITE), 1);
     EXPECT_EQ(StoneCount(ITEM_SCEPTILITE), 1);
     EXPECT_EQ(StoneCount(ITEM_BLAZIKENITE), 1);
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a Leader's earlier copy closes his")
+TEST("Norman's Mega gift: Cyndaquil and Totodile receive Blazikenite and Feraligite")
 {
     SaveStarterVars();
-    // Totodile + Cyndaquil: Norman gives Feraligite and sets Juan's receipt.
-    ResetStarterStones(2, 2, 1);
-    EXPECT_EQ(RunNormanGift(), GIFT_ONE);
+    ResetStarterStones(2, 1, 2);
+    EXPECT_EQ(RunNormanGift(), GIFT_FALLBACK);
     EXPECT_EQ(StoneCount(ITEM_FERALIGITE), 1);
+    EXPECT_EQ(StoneCount(ITEM_BLAZIKENITE), 1);
+    EXPECT_EQ(StoneCount(ITEM_MEGANIUMITE), 0);
+    EXPECT_EQ(StoneCount(ITEM_SWAMPERTITE), 0);
+    RestoreStarterVars();
+}
+
+TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a home's earlier copy closes his")
+{
+    SaveStarterVars();
+    // Totodile + Cyndaquil: Norman gives Feraligite (setting Juan's receipt)
+    // and Blazikenite for Typhlosion.
+    ResetStarterStones(2, 2, 1);
+    EXPECT_EQ(RunNormanGift(), GIFT_FALLBACK);
+    EXPECT_EQ(StoneCount(ITEM_FERALIGITE), 1);
+    EXPECT_EQ(StoneCount(ITEM_BLAZIKENITE), 1);
     EXPECT(FlagGet(FLAG_RECEIVED_TM03));
 
-    // Tepig + Snivy after Brawly handed over Emboarite: nothing is owed.
+    // Tepig + Snivy after the Route 121 Emboarite: only Snivy's Sceptilite.
     ResetStarterStones(5, 1, 0);
-    FlagSet(FLAG_RECEIVED_TM08);
+    FlagSet(FLAG_ITEM_ROUTE_121_EMBOARITE);
     EXPECT(AddBagItem(ITEM_EMBOARITE, 1));
-    EXPECT_EQ(RunNormanGift(), GIFT_ALREADY_HELD);
+    EXPECT_EQ(RunNormanGift(), GIFT_FALLBACK);
     EXPECT_EQ(StoneCount(ITEM_EMBOARITE), 1);
+    EXPECT_EQ(StoneCount(ITEM_SCEPTILITE), 1);
     EXPECT_EQ(StoneCount(ITEM_SWAMPERTITE), 0);
 
-    // Fennekin + Froakie after Roxanne's Delphoxite: only Greninjite.
+    // Fennekin + Froakie after the Safari Zone Delphoxite: only Greninjite.
     ResetStarterStones(6, 1, 2);
-    FlagSet(FLAG_RECEIVED_TM39);
+    FlagSet(FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL);
     EXPECT(AddBagItem(ITEM_DELPHOXITE, 1));
     EXPECT_EQ(RunNormanGift(), GIFT_ONE);
     EXPECT_EQ(StoneCount(ITEM_DELPHOXITE), 1);

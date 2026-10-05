@@ -2048,7 +2048,7 @@
 #define FLAG_ITEM_ROUTE_115_HERACRONITE                                0x478 // shares 0x478 with FLAG_ITEM_ROUTE_115_AUDINITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_TM97_DARK_PULSE                     0x479 // shares 0x479 with FLAG_UNUSED_0x479 (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_116_BINDING_BAND                               0x47A // shares 0x47A with FLAG_ITEM_ROUTE_116_MEOWSTICITE (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_121_MACHAMPITE                                 0x47E // shares 0x47E with FLAG_ITEM_ROUTE_121_REPEAT_BALL (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_121_EMBOARITE                                 0x47E // shares 0x47E with FLAG_ITEM_ROUTE_121_REPEAT_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_MAGMA_HIDEOUT_1_F_CHESNAUGHTITE                          0x47F // shares 0x47F with FLAG_ITEM_MAGMA_HIDEOUT_1F_ULTRA_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_123_TM99_DAZZLING_GLEAM                        0x481 // shares 0x481 with FLAG_ITEM_ROUTE_123_REVIVAL_HERB (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_125_BIG_PEARL                                  0x482 // shares 0x482 with FLAG_ITEM_ROUTE_125_DEEP_SEA_SCALE (dead: its map.json was overwritten)

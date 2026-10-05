@@ -1395,10 +1395,11 @@ PetalburgCity_Gym_Text_NormanStarterStone:
 	.string "partners you set out with. Here.$"
 
 PetalburgCity_Gym_Text_NormanFallbackStone:
-	.string "Your partners can't Mega Evolve,\n"
-	.string "I'm afraid.\p"
-	.string "Take this one anyway. A Swampert\n"
-	.string "could use it, if one joins you.$"
+	.string "I kept a Mega Stone for each partner\n"
+	.string "you set out with.\p"
+	.string "Where a partner can't Mega Evolve,\n"
+	.string "I chose the Hoenn starter of its\l"
+	.string "type instead. Raise one, and it can.$"
 
 PetalburgCity_Gym_Text_NormanStonesAlreadyHeld:
 	.string "I see you already have Mega Stones\n"
