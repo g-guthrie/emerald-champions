@@ -412,9 +412,8 @@ AI_DOUBLE_BATTLE_TEST("EC guard: Wattson's Manectric does not shield in a loop a
 }
 
 // k4/pho2 turn 5 as it stood: Banette in the Mega form it took on turn
-// three, Tyranitar's sand on its last turn, Marshadow at -1 Defense and Sp.
-// Def from Close Combat, and Incineroar at -1 Speed with its Sitrus Berry
-// eaten.
+// three, Tyranitar's sand on its last turn, Flutter Mane just past a
+// Moonblast, and Incineroar at -1 Speed with its Sitrus Berry eaten.
 static void PhoebeBoard(void)
 {
     SupportPastFirstTurn();
@@ -425,10 +424,8 @@ static void PhoebeBoard(void)
     gBattleMons[B_BATTLER_3].hp = 9;
     gBattleWeather = B_WEATHER_SANDSTORM;
     gBattleStruct->weatherDuration = 1;
-    gBattleMons[B_BATTLER_1].statStages[STAT_DEF] = DEFAULT_STAT_STAGE - 1;
-    gBattleMons[B_BATTLER_1].statStages[STAT_SPDEF] = DEFAULT_STAT_STAGE - 1;
     gBattleMons[B_BATTLER_2].statStages[STAT_SPEED] = DEFAULT_STAT_STAGE - 1;
-    gLastMoves[B_BATTLER_1] = gLastResultingMoves[B_BATTLER_1] = MOVE_CLOSE_COMBAT;
+    gLastMoves[B_BATTLER_1] = gLastResultingMoves[B_BATTLER_1] = MOVE_MOONBLAST;
     gLastMoves[B_BATTLER_3] = gLastResultingMoves[B_BATTLER_3] = MOVE_POLTERGEIST;
 }
 
@@ -443,10 +440,10 @@ AI_DOUBLE_BATTLE_TEST("EC guard: Phoebe's Banette does not shield on the turn th
         sSupportMembers[0] = (struct SupportMember){SPECIES_GIRATINA, 0};
         sSupportMembers[1] = (struct SupportMember){SPECIES_LUNALA, 0};
         sSupportMembers[2] = (struct SupportMember){SPECIES_GENGAR, 0};
-        sSupportMembers[3] = (struct SupportMember){.species = SPECIES_MARSHADOW, .hp = 234, .level = 86};
+        sSupportMembers[3] = (struct SupportMember){.species = SPECIES_FLUTTER_MANE, .hp = 150, .level = 86};
         sSupportMembers[4] = (struct SupportMember){.species = SPECIES_BANETTE, .hp = FULL_HP, .level = 90};
         sSupportMembers[5] = (struct SupportMember){.species = SPECIES_SPECTRIER, .hp = FULL_HP, .level = 87};
-        sSupportLeads[0] = SPECIES_MARSHADOW;
+        sSupportLeads[0] = SPECIES_FLUTTER_MANE;
         sSupportLeads[1] = SPECIES_BANETTE;
         SupportOpponent(TRAINER_PHOEBE, 8);
         gTestAiTurnSetupHook = PhoebeBoard;
