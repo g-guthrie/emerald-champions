@@ -108,7 +108,8 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
         rows.append(row)
         return row
     for source in builder.item_sources:
-        if source.kind in EXCLUDED_KINDS or source.kind=='tent_prize' or 'wild_held' in source.kind: continue
+        if source.kind in EXCLUDED_KINDS or source.kind in ('tent_prize','harvest_trade') or 'wild_held' in source.kind: continue
+        # Harvest trades are rebuilt below with their recipe and receipt.
         # Static marts are rebuilt below from their actual call sites; keeping
         # the older table-only rows would bypass exact branch conditions.
         if source.kind=='mart' and source.detail!='Lilycove Dept. Store 4F evolution specialist':continue

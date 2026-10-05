@@ -89,7 +89,7 @@ or data.
   Paradox Pokémon per party in total. Ordinary and pseudo-legendary
   Pokémon have no category limit. Player Mega Evolution uses that same slot;
   a restricted member may Mega Evolve itself, but other party members cannot
-  while it is present.
+  while it is present; their Mega Stones may stay held.
   Opponents and AI partners are exempt. Wattson awards the Mega Ring after badge three; Norman awards
   starter-pair stones after badge five. Static legends are high stakes: a knockout loses one.
   No wild-table percentages in dialogue. The rival demonstrates DexNav after

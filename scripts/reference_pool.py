@@ -1037,7 +1037,8 @@ class Builder:
         for d, m in self.geo.maps.items():
             for o in m.get("object_events") or []:
                 if o.get("script") == "BerryTreeScript":
-                    tree = tree_ids.get(str(o.get("trainer_sight_or_berry_tree_id")))
+                    tree_token = str(o.get("trainer_sight_or_berry_tree_id"))
+                    tree = tree_token if tree_token in tree_berry else tree_ids.get(tree_token)
                     berry = tree_berry.get(tree)
                     if berry:
                         self.item_sources.append(Source("berry_tree", f"ITEM_{berry}_BERRY", (d, o["x"], o["y"]), None,
@@ -1415,7 +1416,7 @@ ENCOUNTER_REQUIREMENTS: dict[str, tuple[list[str], str]] = {
     "TRAINER_CYNTHIA_1": (["FLAG_SYS_GAME_CLEAR"], "MossdeepCity_House1/scripts.inc:13-25"),
     "TRAINER_LEAF_ALTERING_CAVE": (["FLAG_SYS_GAME_CLEAR"], "Altering Cave opens on FLAG_SYS_GAME_CLEAR (Route103/scripts.inc:13-19)"),
     "TRAINER_WALLACE_DOUBLES_LEGENDS": (["FLAG_SYS_GAME_CLEAR"], "CaveOfOrigin_DianciesRoom/scripts.inc:40"),
-    "TRAINER_NORMAN_1": (["FLAG_BADGE04_GET", "FLAG_SYS_RECEIVED_KEYSTONE"], "PetalburgCity_Gym/scripts.inc:100-107,394-409"),
+    "TRAINER_NORMAN_1": (["FLAG_BADGE04_GET"], "PetalburgCity_Gym/scripts.inc:PetalburgCity_Gym_EventScript_Norman (state 6)"),
     **{f"TRAINER_{r}_RUSTBORO_{st}": (["FLAG_RECEIVED_POKENAV"],
                                        "Route104 rival: VAR_ROUTE104_STATE 1 from the PokeNav scientist (RustboroCity/scripts.inc:61-85)")
        for r in ("BRENDAN", "MAY") for st in ("MUDKIP", "TORCHIC", "TREECKO")},
@@ -1805,7 +1806,7 @@ def write_outputs(result: dict) -> list[str]:
             story_flags=sorted(r["flags"]),
             player_rules=rules,
             friendship=dict(friendship, max_this_milestone=friendship["per_window"][w]),
-            mega_ring=dict(available=r["ring"], gate=ring_gate, cite="data/maps/PetalburgCity_Gym/scripts.inc:100-107,394-401; src/battle_util.c:8503-8508"),
+            mega_ring=dict(available=r["ring"], gate=ring_gate, cite="data/maps/MauvilleCity_Gym/scripts.inc:MauvilleCity_Gym_EventScript_GiveMegaRing; src/battle_util.c"),
             starter_rule=("At most two starters, both from the region picked at the start, until the Mauville Game Corner "
                           "starter archive is reachable (then any starter for 500 coins). src/emerald_champions_story.c "
                           "GiveEmeraldChampionsStarterPair; src/field_specials.c sEmeraldChampionsGameCornerPokemonPrizes"),

@@ -223,11 +223,46 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_FINI].unlockFlag, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KELDEO].minimumBadges, 7);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_BULU].unlockFlag, FLAG_VISITED_FORTREE_CITY);
-    // Tapu Koko, Tapu Lele and the box legends storm from Groudon's awakening.
+    // Tapu Koko, Tapu Lele, Reshiram and Zekrom storm from Groudon's awakening.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_TAPU_KOKO].unlockFlag, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
-    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_RESHIRAM].unlockFlag, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+    // Orichalcum Pulse and Hadron Engine bring their own weather and terrain: they wait a stage.
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_BADGE07_GET);
+    EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_MIRAIDON].unlockFlag, FLAG_BADGE07_GET);
     // Geomancy Xerneas swept the Elite Four: it waits for the Hall of Fame.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_IS_CHAMPION);
+}
+
+TEST("Weather anomalies: Koraidon and Miraidon wait for Tate and Liza at cap 70")
+{
+    static const enum LegendarySignId dragons[] = {
+        LEGENDARY_SIGN_KORAIDON, LEGENDARY_SIGN_MIRAIDON,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(dragons); i++)
+    {
+        enum LegendarySignId sign = dragons[i];
+        enum Species species = gLegendaryGates[sign].species;
+        ResetAnomalyState();
+        SetBadges(6);
+        FlagSet(FLAG_VISITED_FORTREE_CITY);
+        FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+        MarkAllVisitorsCaughtExcept(sign);
+        EXPECT_EQ(GetCurrentLevelCap(), 65);
+        EXPECT(!CanAcquireLegendarySignSpecies(species));
+        TakeSteps(1);
+        EXPECT_EQ(CountLive(), 0);
+
+        SetBadges(7);
+        EXPECT_EQ(GetCurrentLevelCap(), 70);
+        EXPECT(CanAcquireLegendarySignSpecies(species));
+        // Empty slots retain their normal storm-cycle timer after a new unlock.
+        for (u32 steps = 0; steps < WEATHER_ANOMALY_DURATION_STEPS && !IsWeatherAnomalyLive(sign); steps++)
+            TakeSteps(1);
+        EXPECT(IsWeatherAnomalyLive(sign));
+        EXPECT_EQ(CountLive(), 1);
+    }
+    ResetAnomalyState();
 }
 
 TEST("Weather anomalies: none before the window opens or after it closes")

@@ -215,6 +215,11 @@ class EncounterAvailabilityTests(unittest.TestCase):
         self.assertIn("SPECIES_TOGETIC", species)  # Friendship assumed despite the native Bonding lock.
         self.assertNotIn("FLAG_BADGE01_GET", pool["story_flags"])
 
+    def test_wattson_cannot_use_his_own_victory_mega_reward(self):
+        pool = self.pool("TRAINER_WATTSON_1", "badge2")
+        self.assertFalse(pool["mega_ring"]["available"])
+        self.assertNotIn("ITEM_MEGA_RING", {row["item"] for row in pool["items"]})
+
     def test_norman_has_wattson_ring_but_no_norman_starter_gifts(self):
         pool = self.pool("TRAINER_NORMAN_1", "badge4")
         # Wattson has awarded the Ring, while Norman’s starter stones await victory.
@@ -229,6 +234,15 @@ class EncounterAvailabilityTests(unittest.TestCase):
         pool = self.pool("TRAINER_FLANNERY_1", "badge3")
         self.assertTrue(pool["hot_spring_available"])
         self.assertNotIn("FLAG_BADGE04_GET", pool["story_flags"])
+
+    def test_harvest_stones_follow_cap70_gate_and_real_berry_seeds(self):
+        pools = self.reference.Pools(self.builder, self.encounters, compute_windows=False)
+        stones = {"ITEM_BAXCALIBRITE", "ITEM_DRAGONINITE", "ITEM_TYRANITARITE"}
+        self.assertFalse(stones & pools.compute("badge6")["items"].keys())
+        available = pools.compute("badge7")["items"]
+        self.assertTrue(stones <= available.keys())
+        for berry in ("BLUK", "NANAB", "WEPEAR"):
+            self.assertIn(f"ITEM_{berry}_BERRY", available)
 
     def test_earned_mega_rayquaza_remains_available_in_finale(self):
         pool = self.pool("TRAINER_STEVEN", "champion")

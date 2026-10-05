@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at c956acb3e7 by scripts/manifest_text.py. 328 battles, through Buffel.
+Generated from source at 6656d32b24 by scripts/manifest_text.py. 328 battles, through Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -121,8 +121,7 @@ STEP 5 - level cap 14
       Never Melt Ice (Seaspray Cave), Quick Claw (buy, Petalburg City Pokemon Center 1F),
       Rocky Helmet (buy, Oldale Town Pokemon Center 1F),
       Smooth Rock (buy, Petalburg City Pokemon Center 1F),
-      Steel Gem (buy, Petalburg City Pokemon Center 1F),
-      Wise Glasses (buy, Rustboro City Pokemon Center 1F)
+      Steel Gem (buy, Petalburg City Pokemon Center 1F), Wise Glasses (Rustboro City)
   Battles that open here:
     #14 Youngster Joey - Route 116
         foe levels Easy 10 / Med 16-17 / Hard 18-19
@@ -169,9 +168,10 @@ STEP 6 - level cap 20
         Steenee (from Bounsweet), Thievul (from Nickit), Trumbeak (from Pikipek),
         Vigoroth (from Slakoth), Watchog (from Patrat), Wormadam (Plant) (from Burmy (Plant))
     Cut-tree habitat - Petalburg Woods: Aipom, Applin, Burmy (Plant), Phantump, Pineco, Skwovet
-  New held items (9): Absorb Bulb (buy, Oldale Town Mart),
-      Big Root (buy, Petalburg City Pokemon Center 1F), Eject Button (buy, Oldale Town Mart),
-      Insect Plate (Petalburg Woods 3), Luminous Moss (buy, Oldale Town Pokemon Center 1F),
+  New held items (9): Absorb Bulb (buy, Petalburg City Pokemon Center 1F),
+      Big Root (buy, Petalburg City Pokemon Center 1F),
+      Eject Button (buy, Petalburg City Pokemon Center 1F), Insect Plate (Petalburg Woods 3),
+      Luminous Moss (buy, Oldale Town Pokemon Center 1F),
       Miracle Seed (buy, Petalburg City Pokemon Center 1F),
       Shell Bell (buy, Petalburg City Pokemon Center 1F),
       Toxic Orb (buy, Petalburg City Pokemon Center 1F),
@@ -212,17 +212,16 @@ STEP 7 - level cap 20
     Form change: Oricorio (Pom Pom) (from Oricorio (Baile))
   New held items (23): Air Balloon (buy, Oldale Town Pokemon Center 1F),
       Dread Plate (Dewford Manor 1F), Everstone (Granite Cave B2F),
-      Expert Belt (buy, Dewford Town Pokemon Center 1F),
-      Fairy Gem (buy, Slateport City Pokemon Center 1F), Full Incense (buy, Slateport City),
-      Heat Rock (buy, Dewford Town Pokemon Center 1F), Lax Incense (buy, Slateport City),
-      Light Clay (buy, Dewford Town Pokemon Center 1F), Luck Incense (buy, Slateport City),
-      Odd Incense (buy, Slateport City), Protective Pads (buy, Oldale Town Pokemon Center 1F),
-      Pure Incense (buy, Slateport City), Ring Target (buy, Oldale Town Pokemon Center 1F),
-      Rock Incense (buy, Slateport City), Rose Incense (buy, Slateport City),
-      Scope Lens (buy, Oldale Town Pokemon Center 1F), Sea Incense (buy, Slateport City),
-      Silk Scarf (buy, Dewford Town Pokemon Center 1F),
+      Expert Belt (buy, Dewford Town Pokemon Center 1F), Fairy Gem (Dewford Meadow),
+      Full Incense (buy, Slateport City), Heat Rock (buy, Dewford Town Pokemon Center 1F),
+      Lax Incense (buy, Slateport City), Light Clay (buy, Dewford Town Pokemon Center 1F),
+      Luck Incense (buy, Slateport City), Odd Incense (buy, Slateport City),
+      Protective Pads (buy, Oldale Town Pokemon Center 1F), Pure Incense (buy, Slateport City),
+      Ring Target (buy, Oldale Town Pokemon Center 1F), Rock Incense (buy, Slateport City),
+      Rose Incense (buy, Slateport City), Scope Lens (buy, Oldale Town Pokemon Center 1F),
+      Sea Incense (buy, Slateport City), Silk Scarf (buy, Dewford Town Pokemon Center 1F),
       Soft Sand (buy, Dewford Town Pokemon Center 1F),
-      Throat Spray (buy, Dewford Town Pokemon Center 1F), Wave Incense (buy, Slateport City),
+      Throat Spray (buy, Petalburg City Pokemon Center 1F), Wave Incense (buy, Slateport City),
       Zoom Lens (Route 109)
   Battles that open here:
     #25 Rival May - Route 104
@@ -231,8 +230,8 @@ STEP 7 - level cap 20
 ====================================================================================================
 STEP 8 - level cap 20
   After beating: Rival May (#25)
-  New held items (2): Flying Gem (buy, Oldale Town Pokemon Center 1F),
-      Ground Gem (buy, Oldale Town Pokemon Center 1F)
+  New held items (2): Flying Gem (buy, Dewford Town Pokemon Center 1F),
+      Ground Gem (buy, Petalburg City Pokemon Center 1F)
   Battles that open here:
     #26 Fisherman Ned - Route 106
         foe levels Easy 15 / Med 23-24 / Hard 25-27
@@ -301,7 +300,7 @@ STEP 9 - level cap 30
         Victreebel (from Weepinbell), Vikavolt (from Charjabug), Vileplume (from Gloom),
         Weepinbell (from Bellsprout), Whirlipede (from Venipede), Zebstrika (from Blitzle),
         Zoroark (from Zorua)
-  New held items (5): Binding Band (buy, Oldale Town Pokemon Center 1F),
+  New held items (5): Binding Band (buy, Petalburg City Pokemon Center 1F),
       Loaded Dice (buy, Oldale Town Pokemon Center 1F),
       Lucky Punch (buy, Dewford Town Pokemon Center 1F),
       Snowball (buy, Oldale Town Pokemon Center 1F), White Herb (buy, Oldale Town Pokemon Center 1F)
@@ -389,9 +388,9 @@ STEP 15 - level cap 30
     Form change: Oricorio (Pau) (from Oricorio (Baile)), Oricorio (Sensu) (from Oricorio (Baile))
     Breed: Scatterbug (Pokeball) (egg from Spewpa (Pokeball))
   New held items (9): Assault Vest (Route 110), Black Glasses (Route 116),
-      Bright Powder (Route 117), Leek (buy, Dewford Town Pokemon Center 1F),
-      Light Ball (buy, Dewford Town Pokemon Center 1F), Lum Berry (Verdanturf Meadow),
-      Metal Powder (buy, Dewford Town Pokemon Center 1F), Muscle Band (Route 116),
+      Bright Powder (Route 117), Leek (buy, Mauville City Mart),
+      Light Ball (buy, Mauville City Mart), Lum Berry (Verdanturf Meadow),
+      Metal Powder (buy, Mauville City Mart), Muscle Band (Route 116),
       Sitrus Berry (Verdanturf Meadow)
   Battles that open here:
     #53 Psychic Jaclyn - Route 110
@@ -467,8 +466,8 @@ STEP 18 - level cap 30
         Lilligant (Hisui) (from Petilil), Sharpedo (from Carvanha),
         Sirfetch'd (from Farfetch'd (Galar)), Swadloon (from Sewaddle), Sylveon (from Eevee),
         Umbreon (from Eevee), Vaporeon (from Eevee)
-  New held items (2): Eject Pack (buy, Mauville City Pokemon Center 1F),
-      Life Orb (buy, Mauville City Pokemon Center 1F)
+  New held items (2): Eject Pack (buy, Petalburg City Pokemon Center 1F),
+      Life Orb (buy, Petalburg City Pokemon Center 1F)
   Battles that open here:
     #76 Verdanturf Battle Tent — fight 2 of 3 - Verdanturf Town Battle Tent Lobby
 
@@ -540,7 +539,7 @@ STEP 19 - level cap 40
         Weezing (Galar) (from Koffing), Yanmega (from Yanma)
     Breed: Chewtle (egg from Drednaw), Tyrogue (egg from Hitmonchan)
   New held items (9): Chilan Berry (Petalburg City Gym),
-      Covert Cloak (buy, Dewford Town Pokemon Center 1F),
+      Covert Cloak (buy, Oldale Town Pokemon Center 1F),
       Deep Sea Scale (Slateport City Battle Tent Lobby),
       Deep Sea Tooth (Slateport City Battle Tent Lobby),
       Metal Coat (Slateport City Battle Tent Lobby), Punching Glove (Route 114),
@@ -604,7 +603,7 @@ STEP 21 - level cap 40
 STEP 22 - level cap 40
   After beating: Magma Admin Courtney + Team Magma Grunt (#95)
   New held items (2): Draco Plate (Meteor Falls 1F 1R),
-      Fairy Feather (buy, Mauville City Pokemon Center 1F)
+      Fairy Feather (buy, Petalburg City Pokemon Center 1F)
   Battles that open here:
     #96 Battle Girl Cyndy - Route 115
         foe levels Easy 31 / Med 46-47 / Hard 50-52
@@ -721,12 +720,13 @@ STEP 26 - level cap 45
     Breed: Girafarig (egg from Farigiraf), Natu (egg from Xatu)
   New held items (12): Ability Shield (buy, Oldale Town Pokemon Center 1F),
       Blunder Policy (Route 111), Earth Plate (Route 111),
-      Electric Seed (buy, Mauville City Pokemon Center 1F),
+      Electric Seed (buy, Dewford Town Pokemon Center 1F),
       Ghost Gem (buy, Oldale Town Pokemon Center 1F),
-      Misty Seed (buy, Mauville City Pokemon Center 1F),
+      Misty Seed (buy, Dewford Town Pokemon Center 1F),
       Power Herb (buy, Oldale Town Pokemon Center 1F),
       Room Service (buy, Dewford Town Pokemon Center 1F), Safety Goggles (Lavaridge Town),
-      Terrain Extender (Fiery Path), Thick Club (buy, Oldale Town Pokemon Center 1F),
+      Terrain Extender (buy, Dewford Town Pokemon Center 1F),
+      Thick Club (buy, Oldale Town Pokemon Center 1F),
       Utility Umbrella (buy, Oldale Town Pokemon Center 1F)
   New Mega Stones: Chandelurite
   Battles that open here:
@@ -941,7 +941,7 @@ STEP 32 - level cap 55
       Fire Memory (buy, Oldale Town Pokemon Center 1F),
       Flying Memory (buy, Oldale Town Pokemon Center 1F),
       Ghost Memory (buy, Oldale Town Pokemon Center 1F),
-      Grass Memory (buy, Dewford Town Pokemon Center 1F),
+      Grass Memory (buy, Fallarbor Town Pokemon Center 1F),
       Ground Memory (buy, Oldale Town Pokemon Center 1F),
       Ice Memory (buy, Dewford Town Pokemon Center 1F),
       Poison Memory (buy, Oldale Town Pokemon Center 1F),
@@ -992,7 +992,7 @@ STEP 34 - level cap 55
         Zoroark (Hisui) (from Zorua (Hisui))
     Breed: Nidoran♀ (egg from Nidoqueen), Nidoran♂ (egg from Nidoking), Spinarak (egg from Ariados),
         Sunkern (egg from Sunflora), Tarountula (egg from Spidops)
-  New held items (6): Black Sludge (Route 123), Cleanse Tag (Mt Pyre 1F),
+  New held items (6): Black Sludge (buy, Oldale Town Pokemon Center 1F), Cleanse Tag (Mt Pyre 1F),
       Electric Gem (buy, Oldale Town Pokemon Center 1F),
       Ice Gem (buy, Oldale Town Pokemon Center 1F), Meadow Plate (Route 123),
       Metronome (buy, Oldale Town Pokemon Center 1F)
@@ -1156,7 +1156,7 @@ STEP 43 - level cap 60
 ====================================================================================================
 STEP 44 - level cap 65
   After beating: Magma Leader Maxie (#208)
-  New Pokemon (19):
+  New Pokemon (17):
     Wild - Dewford Meadow: Pheromosa [R]
     Wild - Magma Hideout 4F: Gouging Fire [R], Volcanion [R]
     Wild - Petalburg Woods 3: Kartana [R]
@@ -1165,9 +1165,7 @@ STEP 44 - level cap 65
     Storm visitor - Mt Pyre Exterior: Giratina (Altered) [R], Tapu Lele [R]
     Storm visitor - Route 110: Tapu Koko [R]
     Storm visitor - Route 112: Zekrom [R]
-    Storm visitor - Route 114: Koraidon [R]
     Storm visitor - Route 115: Reshiram [R]
-    Storm visitor - Route 118: Miraidon [R]
     Storm visitor - Route 121: Yveltal [R]
     Evolve: Hydreigon (from Zweilous)
     Form change: Giratina (Origin) [R] (from Giratina (Altered)),
@@ -1305,7 +1303,7 @@ STEP 49 - level cap 65
 ====================================================================================================
 STEP 50 - level cap 65
   After beating: Fisherman Ronald (#238)
-  New held items (1): Sharp Beak (buy, Fallarbor Town Pokemon Center 1F)
+  New held items (1): Sharp Beak (buy, Lavaridge Town Pokemon Center 1F)
   New Mega Stones: Starminite
   Battles that open here:
     #251 Expert Paxton - Route 132
@@ -1341,7 +1339,10 @@ STEP 51 - level cap 65
 ====================================================================================================
 STEP 52 - level cap 70
   After beating: Leader Tate&Liza (#261)
-  New Mega Stones: Baxcalibrite, Dragoninite, Meowsticite, Mewtwonite X, Tyranitarite
+  New Pokemon (2):
+    Storm visitor - Route 114: Koraidon [R]
+    Storm visitor - Route 118: Miraidon [R]
+  New Mega Stones: Baxcalibrite, Dragoninite, Meowsticite, Mewtwonite X
   Battles that open here:
     #262 Team Magma Grunt - Mossdeep City Space Center 1F
         foe levels Easy 56 / Med 72-73 / Hard 74-75
@@ -1402,7 +1403,7 @@ STEP 58 - level cap 70
     Wild - Underwater Seafloor Cavern: Nihilego [R], Tatsugiri (Curly), Tatsugiri (Droopy),
         Tatsugiri (Stretchy), Veluza
   New held items (7): Figy Berry (Sootopolis City),
-      Hard Stone (buy, Dewford Town Pokemon Center 1F), Iapapa Berry (Sootopolis City),
+      Hard Stone (buy, Verdanturf Town Pokemon Center 1F), Iapapa Berry (Sootopolis City),
       Iron Plate (Underwater Route 126), Mind Plate (Underwater Route 127),
       Pixie Plate (Underwater Route 124), Poison Barb (buy, Dewford Town Pokemon Center 1F)
   New Mega Stones: Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite
@@ -1571,8 +1572,9 @@ STEP 68 - level cap 80
 
 ====================================================================================================
 STEP 69 - level cap 80
-  After beating: Cooltrainer Samuel (#297), Cooltrainer Shannon (#307), Elite Four Glacia (#308)
-  New Mega Stones: Charizardite Y, Metagrossite
+  After beating: Cooltrainer Samuel (#297), Cooltrainer Shannon (#307), Cooltrainer Vito (#301),
+    Elite Four Glacia (#308)
+  New Mega Stones: Charizardite Y, Metagrossite, Tyranitarite
   Battles that open here:
     #309 Elite Four Drake - Ever Grande City Drakes Room
         foe levels Easy 64 / Med 84-86 / Hard 87-90
