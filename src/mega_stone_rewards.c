@@ -112,6 +112,12 @@ void TradeEmeraldChampionsGardenBerries(void)
         gSpecialVar_Result = EC_MEGA_BERRY_TRADE_ALREADY_DONE;
         return;
     }
+    // The Mind Badge opens cap 70 and the same stones' world pickups.
+    if (choice != 3 && !FlagGet(FLAG_BADGE07_GET))
+    {
+        gSpecialVar_Result = EC_MEGA_BERRY_TRADE_LOCKED;
+        return;
+    }
     for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades[choice].recipe); i++)
     {
         const struct HarvestIngredient *part = &sBerryStoneTrades[choice].recipe[i];

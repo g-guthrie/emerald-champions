@@ -102,7 +102,7 @@ PetalburgCity_Gym_EventScript_Norman:: @ 82049F1
 	case 3, PetalburgCity_Gym_EventScript_NormanOneBadge
 	case 4, PetalburgCity_Gym_EventScript_NormanTwoBadges
 	case 5, PetalburgCity_Gym_EventScript_NormanThreeBadges
-	case 6, PetalburgCity_Gym_EventScript_NormanGiveKeystone
+	case 6, PetalburgCity_Gym_EventScript_NormanBattle
 	case 7, PetalburgCity_Gym_EventScript_NormanPostBattle
 	case 8, PetalburgCity_Gym_EventScript_NormanPostBattle
 	msgbox PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon, MSGBOX_DEFAULT
@@ -388,13 +388,7 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry:: @ 8204E1D
 	release
 	end
 
-@ The Ring comes with the Mega Stones of the starter pair's final forms that
-@ have not reached the player yet, or Swampertite when the pair has none
-@ (src/mega_stone_rewards.c). The Bag check covers the Ring and every stone.
-PetalburgCity_Gym_EventScript_NormanGiveKeystone::
-	goto PetalburgCity_Gym_EventScript_NormanBattle
-
-@ The Hoenn stones Norman did not give with the Ring wait here until the
+@ The Hoenn stones Wattson did not give with the Ring wait here until the
 @ player shows him that partner's line; each is handed over once.
 PetalburgCity_Gym_EventScript_NormanPartnerStones::
 	callnative BufferNormanPartnerMegaStone

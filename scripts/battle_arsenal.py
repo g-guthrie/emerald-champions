@@ -236,7 +236,7 @@ def validate_party(scenario: dict, manifest: dict, *, internal_fingerprint=None,
             d.get('friendship'),
         } for m, d in zip(party, defaults)):
             continue
-        if set(needed) & mega_stones and resources.get('ITEM_MEGA_RING', 0) < 1:
+        if any(m.get('item') in mega_stones and m.get('mega_disabled') is not True for m in party) and resources.get('ITEM_MEGA_RING', 0) < 1:
             continue
         return
     raise ValueError('no single legal acquisition state can prepare this party')

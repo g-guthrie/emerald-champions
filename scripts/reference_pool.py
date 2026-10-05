@@ -1019,6 +1019,24 @@ class Builder:
                 for req, w in self.scripted(label, n, extra):
                     self.item_sources.append(Source(kind, item, w, req, f"{m[1]} at {label}",
                                                     f"{rel(info['file'])}:{n}" + (f"; {extra[1]}" if extra else "")))
+        # Native Berry Master trades use harvested credits. For this upper-bound
+        # pool, obtainable seeds permit repeated planting/harvesting; finite
+        # certificates still need to prove the actual harvested quantities.
+        harvest_path = ROOT / "src/mega_stone_rewards.c"
+        harvest = harvest_path.read_text()
+        table = re.search(r"sBerryStoneTrades\[\]\s*=\s*\{(.*?)\n\};", harvest, re.S)[1]
+        gate = re.search(r"if \(choice != 3 && !FlagGet\((FLAG_\w+)\)\)", harvest)[1]
+        rows = list(re.finditer(r"\{(ITEM_\w+),\s*(FLAG_\w+|0),", table))
+        for index, row in enumerate(rows):
+            if row[1] == "ITEM_NONE":
+                continue
+            body = table[row.end():rows[index + 1].start() if index + 1 < len(rows) else len(table)]
+            recipe = re.findall(r"\{BERRY_ID_(\w+),\s*(\d+)\}", body)
+            self.item_sources.append(Source("harvest_trade", row[1], "Route123_BerryMastersHouse", [gate],
+                "Berry Master harvested credits: " + ", ".join(f"{qty} {berry}" for berry, qty in recipe)
+                + " (requires planting and harvesting; Bag berries alone do not count)",
+                cite(harvest_path, "sBerryStoneTrades") + "; " + cite(harvest_path, "TradeEmeraldChampionsGardenBerries"),
+                needs_items=[f"ITEM_{berry}_BERRY" for berry, _qty in recipe]))
         # Berry trees (new_game.inc setberrytree + BerryTreeScript objects).
         ng = (SCRIPTS_DIR / "new_game.inc").read_text()
         tree_berry = dict(re.findall(r"setberrytree\s+(BERRY_TREE_\w+),\s*BERRY_ID_(\w+)", ng))
@@ -1027,7 +1045,8 @@ class Builder:
         for d, m in self.geo.maps.items():
             for o in m.get("object_events") or []:
                 if o.get("script") == "BerryTreeScript":
-                    tree = tree_ids.get(str(o.get("trainer_sight_or_berry_tree_id")))
+                    tree_token = str(o.get("trainer_sight_or_berry_tree_id"))
+                    tree = tree_token if tree_token in tree_berry else tree_ids.get(tree_token)
                     berry = tree_berry.get(tree)
                     if berry:
                         self.item_sources.append(Source("berry_tree", f"ITEM_{berry}_BERRY", (d, o["x"], o["y"]), None,
@@ -1058,7 +1077,6 @@ GIFT_REQUIREMENTS: dict = {
     # (case 7/8), which the path scan does not track.
     "PetalburgCity_Gym_EventScript_GiveFacade": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:100-107,346-352,469"),
     "PetalburgCity_Gym_EventScript_GiveEnigmaBerry": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:346-350"),
-    "PetalburgCity_Gym_EventScript_NormanGiveKeystone": (["FLAG_BADGE04_GET"], "PetalburgCity_Gym/scripts.inc:100-105 (state 6)"),
     **{f"Route110_TrickHouseEnd_EventScript_CompletedPuzzle{n}": (
         [req] if req else [], f"Route110_TrickHouseEnd/scripts.inc:44-151 (switch VAR_TRICK_HOUSE_LEVEL, puzzle {n})")
        for n, req in ((1, None), (2, "FLAG_BADGE03_GET"), (3, "FLAG_BADGE04_GET"), (4, "FLAG_BADGE05_GET"),
@@ -1111,8 +1129,8 @@ EXTRA_ITEM_SOURCES = [
       for item in ("ITEM_HEAT_ROCK", "ITEM_DAMP_ROCK", "ITEM_ICY_ROCK", "ITEM_SMOOTH_ROCK")],
     ("ITEM_HONEY", "OldaleTown_PokemonCenter_1F", ["FLAG_BADGE01_GET"], "Center Supplies (1-badge tier)",
      "data/scripts/general_mart.inc:86,146"),
-    ("ITEM_MEGA_RING", "PetalburgCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Norman (four gym wins)",
-     "data/maps/PetalburgCity_Gym/scripts.inc:394-401"),
+    ("ITEM_MEGA_RING", "MauvilleCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Wattson after victory",
+     "data/maps/MauvilleCity_Gym/scripts.inc:MauvilleCity_Gym_EventScript_WattsonGiveKeystone"),
 ]
 
 
@@ -1278,7 +1296,7 @@ class Pools:
             if reachable("Route117_PokemonDayCare"):
                 for sp in list(species):
                     info = sd.info.get(sp, {})
-                    if info.get("egg_group") in (None, "EGG_GROUP_NO_EGGS_DISCOVERED") or sd.restricted_class(sp) and sd.base(sp) != "SPECIES_MANAPHY":
+                    if info.get("egg_group") in (None, "EGG_GROUP_NO_EGGS_DISCOVERED") or (sd.restricted_class(sp) not in (None, "special") and sd.base(sp) != "SPECIES_MANAPHY"):
                         continue
                     egg = "SPECIES_PHIONE" if sd.base(sp) == "SPECIES_MANAPHY" else sd.egg_species(sp)
                     if egg not in species:
@@ -1386,7 +1404,7 @@ ENCOUNTER_REQUIREMENTS: dict[str, tuple[list[str], str]] = {
     "TRAINER_CYNTHIA_1": (["FLAG_SYS_GAME_CLEAR"], "MossdeepCity_House1/scripts.inc:13-25"),
     "TRAINER_LEAF_ALTERING_CAVE": (["FLAG_SYS_GAME_CLEAR"], "Altering Cave opens on FLAG_SYS_GAME_CLEAR (Route103/scripts.inc:13-19)"),
     "TRAINER_WALLACE_DOUBLES_LEGENDS": (["FLAG_SYS_GAME_CLEAR"], "CaveOfOrigin_DianciesRoom/scripts.inc:40"),
-    "TRAINER_NORMAN_1": (["FLAG_BADGE04_GET", "FLAG_SYS_RECEIVED_KEYSTONE"], "PetalburgCity_Gym/scripts.inc:100-107,394-409"),
+    "TRAINER_NORMAN_1": (["FLAG_BADGE04_GET"], "PetalburgCity_Gym/scripts.inc:PetalburgCity_Gym_EventScript_Norman (state 6)"),
     **{f"TRAINER_{r}_RUSTBORO_{st}": (["FLAG_RECEIVED_POKENAV"],
                                        "Route104 rival: VAR_ROUTE104_STATE 1 from the PokeNav scientist (RustboroCity/scripts.inc:61-85)")
        for r in ("BRENDAN", "MAY") for st in ("MUDKIP", "TORCHIC", "TREECKO")},
@@ -1722,7 +1740,7 @@ def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=Non
         milestone=milestone, cap=r["cap"], source_head=git_head(), story_flags=sorted(r["flags"]),
         scope="Source upper bound before this encounter; optional detours, money and RNG are unconstrained.",
         species=species, items=items, megas=r["megas"], all_mega_stones=sorted(p.megas),
-        mega_ring=dict(available=r["ring"], gate="Norman's pre-battle gift after four Gym wins"),
+        mega_ring=dict(available=r["ring"], gate="Wattson's gift after victory"),
         friendship=dict(max_this_milestone=255),
         game_corner_available=story.reachable(milestone, "MauvilleCity_GameCorner", closure=closure),
         starter_lines=starter_lines(b, r),
@@ -1776,7 +1794,7 @@ def write_outputs(result: dict) -> list[str]:
             story_flags=sorted(r["flags"]),
             player_rules=rules,
             friendship=dict(friendship, max_this_milestone=friendship["per_window"][w]),
-            mega_ring=dict(available=r["ring"], gate=ring_gate, cite="data/maps/PetalburgCity_Gym/scripts.inc:100-107,394-401; src/battle_util.c:8503-8508"),
+            mega_ring=dict(available=r["ring"], gate=ring_gate, cite="data/maps/MauvilleCity_Gym/scripts.inc:MauvilleCity_Gym_EventScript_WattsonGiveKeystone; src/battle_util.c"),
             starter_rule=("At most two starters, both from the region picked at the start, until the Mauville Game Corner "
                           "starter archive is reachable (then any starter for 500 coins). src/emerald_champions_story.c "
                           "GiveEmeraldChampionsStarterPair; src/field_specials.c sEmeraldChampionsGameCornerPokemonPrizes"),

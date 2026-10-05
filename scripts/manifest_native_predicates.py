@@ -719,6 +719,7 @@ def _harvest(name,args,state,constants):
     else:claimed=_flag(state,flag,constants) or item in (state.get('items',set())|state.get('pc_items',set()))
     if name=='BufferEmeraldChampionsHarvestRecipe':return {int(claimed)}
     if claimed:return {1}
+    if choice!=3 and not _flag(state,'FLAG_BADGE07_GET',constants):return {5}
     pouch=state.get('harvested_berries')
     if pouch is not None:
         enough=all(pouch.get('BERRY_ID_'+berry,pouch.get('ITEM_'+berry+'_BERRY',pouch.get(berry,0)))>=count for berry,count in recipe.items())

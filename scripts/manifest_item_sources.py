@@ -108,7 +108,7 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
         rows.append(row)
         return row
     for source in builder.item_sources:
-        if source.kind in EXCLUDED_KINDS or 'wild_held' in source.kind: continue
+        if source.kind in EXCLUDED_KINDS or source.kind == 'harvest_trade' or 'wild_held' in source.kind: continue
         # Static marts are rebuilt below from their actual call sites; keeping
         # the older table-only rows would bypass exact branch conditions.
         if source.kind=='mart' and source.detail!='Lilycove Dept. Store 4F evolution specialist':continue
@@ -123,8 +123,8 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
             row['quantity'] = args[1] if len(args)>1 else 1
             row['controls'] = _controls(builder, label)
             row['repeatability'] = 'receipt flags and daily checks retained in controls; bag-space failures leave unreceived rewards retryable where source permits'
-        if "Norman's starter-pair Mega Stone" in source.detail:
-            row['selection']='only selected starter-pair final-form stones; Swampertite fallback if that pair has no Mega; other Hoenn stones require showing Norman the corresponding starter line'
+        if "starter-pair Mega Stone" in source.detail:
+            row['selection']='only selected starter-pair final-form stones; Swampertite fallback if that pair has no Mega; other Hoenn stones require showing the corresponding starter line'
             row['native_conditions']=['src/mega_stone_rewards.c:sStarterMegaStones','src/mega_stone_rewards.c:IsNormanStarterMegaStone','src/mega_stone_rewards.c:GetNormanStarterMegaStone']
         if source.kind == 'hidden':
             map_name=source.where[0] if isinstance(source.where,tuple) else source.where
@@ -396,12 +396,13 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
     # berry bag contents. Seeds may be replanted; farming is an optional detour.
     path='src/mega_stone_rewards.c';text=(ROOT/path).read_text()
     table=re.search(r'sBerryStoneTrades\[\]\s*=\s*\{(.*?)\n\};',text,re.S)[1]
+    harvest_gate = re.search(r'if \(choice != 3 && !FlagGet\((FLAG_\w+)\)\)', text)[1]
     starts=list(re.finditer(r'\{(ITEM_\w+),\s*(FLAG_\w+|0),',table))
     for index,m in enumerate(starts):
         body=table[m.end():starts[index+1].start() if index+1<len(starts) else len(table)]
         recipe=[dict(item=f'ITEM_{berry}_BERRY',count=int(qty)) for berry,qty in re.findall(r'\{BERRY_ID_(\w+),\s*(\d+)\}',body)]
         if m[1]=='ITEM_NONE': continue
-        add(m[1],'harvest_trade','Route123_BerryMastersHouse',_ref(path,'sBerryStoneTrades'),
+        add(m[1],'harvest_trade','Route123_BerryMastersHouse',_ref(path,'sBerryStoneTrades'), [[harvest_gate]],
             needs_items=[r['item'] for r in recipe],detail='trade harvested berry credits',receipt=m[2],recipe=recipe,activity_requirement={'kind':'harvest_credit_trade','recipe':recipe,'source':'src/mega_stone_rewards.c:39'},
             cost_rule='credits from successfully harvested berries; gifted/purchased berries give no credit until planted and harvested')
     # Relics are native gifts earned by obtaining their legendary species,

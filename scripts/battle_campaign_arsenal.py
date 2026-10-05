@@ -228,7 +228,8 @@ def _later_profile(stage,opening):
   s['preceding_battle_ids'] += ['TRAINER_COURTNEY_METEOR_FALLS','TRAINER_GRUNT_METEOR_FALLS',
                               'TRAINER_TABITHA_MT_CHIMNEY','TRAINER_GRUNT_MT_CHIMNEY_1',
                               'TRAINER_MAXIE_MT_CHIMNEY','TRAINER_FLANNERY_1']
- # Story milestones do not automatically execute Norman's Ring gift.
+ # This finite inventory certificate has not modeled Wattson's Ring/stone
+ # delivery (including Bag capacity); a milestone alone cannot grant it.
  f.setdefault('FLAG_HIDE_SLATEPORT_CITY_BRAWLY',False)
  f.setdefault('FLAG_DEFEATED_DEWFORD_GYM',False)
  f['FLAG_SYS_RECEIVED_KEYSTONE']=False
@@ -237,7 +238,7 @@ def _later_profile(stage,opening):
    physical_access_status='unresolved'if rank>=LATER_PROFILES.index('after_wattson') else 'native_corridor_validated',
    maximal_arsenal_status='unresolved',scope='Source transition prerequisites; conditional native ferry/Granite/Slateport/Gym-door corridor validated, not an earned prefix.',
    unresolved=['Other physical routes beyond the native validated ferry corridor','Target-specific interaction fields','Optional quest/gym battle dependencies and rewards; extra Chimney trainer wins are conservative prerequisites',
-               'Paid nature requests need source-matched harvested Berry counts; no nature service granted','No Mega Ring until Norman state6'])
+               'Paid nature requests need source-matched harvested Berry counts; no nature service granted','Wattson post-victory Mega Ring and starter-stone delivery remains uncertified'])
  return s
 
 
@@ -411,9 +412,7 @@ def _species_acquisition_metadata(species_text):
         items={kind:(re.search(r'\.'+kind+r'\s*=\s*(ITEM_\w+)',block)[1]
                      if re.search(r'\.'+kind+r'\s*=\s*(ITEM_\w+)',block) else 'ITEM_NONE')
                for kind in ('itemCommon','itemRare')}
-        items['restricted']=bool(re.search(r'\.(?:isRestrictedLegendary|isMythical|isUltraBeast|isParadox|isSubLegendary)\s*=\s*(?:1|TRUE)\b',block))
-        from player_star_rule import restricted_exceptions
-        items['restricted'] |= mark[1] in restricted_exceptions()
+        items['legend_encounter']=bool(re.search(r'\.(?:isRestrictedLegendary|isMythical|isUltraBeast|isParadox|isSubLegendary)\s*=\s*(?:1|TRUE)\b',block))
         result[mark[1]]=items
     return result
 
@@ -622,7 +621,7 @@ def apply_campaign_preparation(opening,preparation,access,geometry,r):
             if row is None:raise ValueError('Species absent from this exact map land table')
         else:raise ValueError('Unsupported capture method')
         sid=resolve_species(species,r['aliases']);meta=metadata[sid]
-        if meta['restricted']:raise ValueError('Legend capture gate, authored set and caught state remain unresolved')
+        if meta['legend_encounter']:raise ValueError('Legend capture gate, authored set and caught state remain unresolved')
         if owned is None and species in defaults:raise ValueError('Stage extension requires distinct ownership species; use opening owned-slot provider for duplicates')
         ident=capture.get('id','stage-capture-'+str(index))
         if owned is not None and (not isinstance(ident,str) or not re.fullmatch(r'[a-zA-Z0-9_-]+',ident) or ident in owned):

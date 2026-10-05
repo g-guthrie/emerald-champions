@@ -8,11 +8,11 @@ The manifest uses the scripts/playthrough/prepare_party.py format:
 
 The pool is work/tuning-20260930/pools/pool-<milestone>.json written by
 scripts/reference_pool.py. Checks: every member names an `availability`
-citation; species/form is in the pool; a Mega Stone needs its Mega form in
-the pool and the Mega Ring (the party carries base forms, prepare_party
+citation; species/form is in the pool; an active Mega Stone needs its Mega form in
+the pool and the Mega Ring (mega_disabled=true marks an inert held stone; prepare_party
 does not accept Mega species); held items are in the pool, and a
 non-restocking item is not held twice; the Ability is one the party menu
-offers; one Legendary/Mythical/Ultra Beast/Paradox in total; level equals
+offers; one restricted star in total, with no separate active Mega; level equals
 the cap when given; friendship does not exceed the milestone maximum;
 IV/EV bounds; the opening starter pick rule before the Game Corner.
 
@@ -34,6 +34,8 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
+
+from player_star_rule import blocked_mega_slots, restricted_exceptions
 
 ROOT = Path(__file__).resolve().parents[1]
 POOLS = ROOT / "work/tuning-20260930/pools"
@@ -142,9 +144,8 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         elif row is None:
             problems.append(f"{tag}: {sp} is not obtainable by {milestone} (cap {cap})")
         else:
-            from player_star_rule import restricted_exceptions
             if row.get("restricted_class") or sp in restricted_exceptions():
-                restricted.append((slot, sp, row["restricted_class"]))
+                restricted.append((slot, sp, row.get("restricted_class") or "special"))
             ability = mon.get("ability")
             if ability and row.get("abilities") and ability not in row["abilities"]:
                 problems.append(f"{tag}: {ability} is not a party-menu Ability for {sp} (offers {', '.join(row['abilities'])})")
@@ -155,7 +156,7 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
                 problems.append(f"{tag}: held item {item} is not obtainable by {milestone}")
             else:
                 held[item] += 1
-            if item in all_mega_stones:
+            if item in all_mega_stones and mon.get("mega_disabled") is not True:
                 forms = [m for m in megas_by_stone.get(item, []) if m.get("base") == sp]
                 if not pool.get("mega_ring", {}).get("available"):
                     problems.append(f"{tag}: {item} is a Mega Stone but the Mega Ring is not available until "
@@ -190,10 +191,9 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
             problems.append(f"{item} is held by {count} members but no restocking source exists by {milestone} "
                             f"(only {items[item]['source']['kind']}: {items[item]['source']['detail']})")
     if len(restricted) > 1:
-        problems.append("more than one Legendary/Mythical/Ultra Beast/Paradox: "
+        problems.append("more than one restricted Pokemon (Legendary/Mythical/Ultra Beast/Paradox or special star): "
                         + ", ".join(f"slot {s} {sp} ({c})" for s, sp, c in restricted)
                         + " (src/pokemon.c GetRestrictedPartyClass / PlayerPartyWithinRestrictedLimit)")
-    from player_star_rule import blocked_mega_slots, restricted_exceptions
     restricted_species = {sp for sp, row in species_rows.items() if row.get("restricted_class")} | restricted_exceptions()
     blocked = blocked_mega_slots(party, restricted_species, aliases)
     if blocked:

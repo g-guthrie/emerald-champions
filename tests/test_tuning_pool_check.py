@@ -77,6 +77,20 @@ class TuningPoolCheckTests(unittest.TestCase):
         problems = self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), pool=pool)
         self.assertTrue(any("Mega Ring" in p for p in problems), problems)
 
+    def test_inert_stones_need_inventory_but_not_ring_or_mega_form(self):
+        pool = copy.deepcopy(POOL)
+        pool["mega_ring"] = dict(available=False, gate="badge4")
+        self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_AGGRONITE", mega_disabled=True), pool=pool), [])
+        pool["items"] = []
+        self.assertTrue(any("not obtainable" in p for p in self.check(
+            mon("SPECIES_GARCHOMP", "ITEM_AGGRONITE", mega_disabled=True), pool=pool)))
+
+    def test_party_only_stars_cannot_stack(self):
+        pool = copy.deepcopy(POOL)
+        pool["species"] += [species("SPECIES_GHOLDENGO"), species("SPECIES_URSALUNA_BLOODMOON")]
+        problems = self.check(mon("SPECIES_GHOLDENGO"), mon("SPECIES_URSALUNA_BLOODMOON"), pool=pool)
+        self.assertTrue(any("more than one restricted" in p for p in problems), problems)
+
     def test_item_gate_and_duplicate_single_copy(self):
         self.assertTrue(any("ITEM_CHOICE_BAND" in p for p in self.check(mon("SPECIES_AGGRON", "ITEM_CHOICE_BAND"))))
         problems = self.check(mon("SPECIES_AGGRON", "ITEM_ASSAULT_VEST"), mon("SPECIES_GARCHOMP", "ITEM_ASSAULT_VEST"))
@@ -85,7 +99,7 @@ class TuningPoolCheckTests(unittest.TestCase):
 
     def test_one_restricted_pokemon(self):
         problems = self.check(mon("SPECIES_ENTEI"), mon("SPECIES_GREAT_TUSK"))
-        self.assertTrue(any("more than one Legendary" in p for p in problems), problems)
+        self.assertTrue(any("more than one restricted" in p for p in problems), problems)
 
     def test_level_friendship_ability_and_availability(self):
         problems = self.check(mon("SPECIES_AGGRON", level=46, friendship=256, ability="ABILITY_Z", availability=""))
@@ -195,9 +209,14 @@ class EncounterAvailabilityTests(unittest.TestCase):
         self.assertIn("SPECIES_LUCARIO", {s["species"] for s in pool["species"]})
         self.assertNotIn("FLAG_BADGE01_GET", pool["story_flags"])
 
-    def test_norman_pre_battle_mega_gift_is_available(self):
+    def test_wattson_cannot_use_his_own_victory_mega_reward(self):
+        pool = self.pool("TRAINER_WATTSON_1", "badge2")
+        self.assertFalse(pool["mega_ring"]["available"])
+        self.assertNotIn("ITEM_MEGA_RING", {row["item"] for row in pool["items"]})
+
+    def test_norman_has_earlier_wattson_mega_gift(self):
         pool = self.pool("TRAINER_NORMAN_1", "badge4")
-        # Norman gives the Ring before launching his battle, not on victory.
+        # Wattson already gave the Ring on victory before reaching Norman.
         self.assertTrue(pool["mega_ring"]["available"])
         self.assertTrue(pool["megas"])
         self.assertNotIn("FLAG_BADGE05_GET", pool["story_flags"])
@@ -206,6 +225,16 @@ class EncounterAvailabilityTests(unittest.TestCase):
         pool = self.pool("TRAINER_FLANNERY_1", "badge3")
         self.assertTrue(pool["hot_spring_available"])
         self.assertNotIn("FLAG_BADGE04_GET", pool["story_flags"])
+
+    def test_harvest_stones_follow_cap70_gate_and_real_berry_seeds(self):
+        pools = self.reference.Pools(self.builder, self.encounters, compute_windows=False)
+        stones = {"ITEM_BAXCALIBRITE", "ITEM_DRAGONINITE", "ITEM_TYRANITARITE", "ITEM_GARCHOMPITE_Z"}
+        self.assertFalse(stones & pools.compute("badge6")["items"].keys())
+        available = pools.compute("badge7")["items"]
+        self.assertTrue(stones <= available.keys())
+        self.assertEqual(available["ITEM_BAXCALIBRITE"]["kind"], "harvest_trade")
+        for berry in ("BLUK", "NANAB", "WEPEAR"):
+            self.assertIn(f"ITEM_{berry}_BERRY", available)
 
     def test_earned_mega_rayquaza_remains_available_in_finale(self):
         pool = self.pool("TRAINER_STEVEN", "champion")

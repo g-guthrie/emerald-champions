@@ -7,6 +7,17 @@ from battle_campaign_arsenal import _campaign_scenario, certify_scenario, profil
 from battle_opening_arsenal import _opening_scenario
 
 class CampaignArsenalTests(unittest.TestCase):
+    def test_party_only_stars_keep_ordinary_capture_rules(self):
+        from battle_campaign_arsenal import _species_acquisition_metadata
+        metadata = _species_acquisition_metadata("""
+            [SPECIES_GHOLDENGO] = { .itemCommon = ITEM_NONE },
+            [SPECIES_URSALUNA_BLOODMOON] = { .itemCommon = ITEM_NONE },
+            [SPECIES_ENTEI] = { .isSubLegendary = TRUE },
+        """)
+        self.assertFalse(metadata['SPECIES_GHOLDENGO']['legend_encounter'])
+        self.assertFalse(metadata['SPECIES_URSALUNA_BLOODMOON']['legend_encounter'])
+        self.assertTrue(metadata['SPECIES_ENTEI']['legend_encounter'])
+
     def test_source_profiles_preserve_earlier_resources_and_real_early_caps(self):
         args={'generation':3,'first':0,'second':1,'captures':['SPECIES_EEVEE'],
               'evolutions':{'SPECIES_EEVEE':'SPECIES_SYLVEON'}}

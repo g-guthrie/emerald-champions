@@ -21,6 +21,11 @@ extern const u8 VictoryRoad_B2F_EventScript_ItemFullHeal[];
 extern const u8 Common_EventScript_ChampionStoneLocked[];
 extern const u8 Common_EventScript_FinalBadgeStoneLocked[];
 extern const u8 Std_FindItem[];
+extern const u8 Route111_EventScript_ItemTM63RockSlide[];
+extern const u8 SeafloorCavern_Room9_EventScript_ItemTM26[];
+extern const u8 Seaspray_Cave_ItemStoneEdge[];
+extern const u8 ScorchedSlab_EventScript_ItemTyranitarite[];
+extern const u8 Common_EventScript_SeventhBadgeStoneLocked[];
 
 TEST("Mega Stone progression: restricted stones wait without consuming their pickups")
 {
@@ -28,6 +33,10 @@ TEST("Mega Stone progression: restricted stones wait without consuming their pic
     PARAMETRIZE { choice = 0; }
     PARAMETRIZE { choice = 1; }
     PARAMETRIZE { choice = 2; }
+    PARAMETRIZE { choice = 3; }
+    PARAMETRIZE { choice = 4; }
+    PARAMETRIZE { choice = 5; }
+    PARAMETRIZE { choice = 6; }
     static const struct {
         const u8 *script, *locked;
         enum Item item;
@@ -39,6 +48,14 @@ TEST("Mega Stone progression: restricted stones wait without consuming their pic
             ITEM_DARKRANITE, FLAG_BADGE08_GET, FLAG_SANDSTREWN_RUINS_LEECH_LIFE},
         {VictoryRoad_B2F_EventScript_ItemFullHeal, Common_EventScript_ChampionStoneLocked,
             ITEM_MEWTWONITE_X, FLAG_IS_CHAMPION, FLAG_ITEM_VICTORY_ROAD_B2F_FULL_HEAL},
+        {Route111_EventScript_ItemTM63RockSlide, Common_EventScript_SeventhBadgeStoneLocked,
+            ITEM_GARCHOMPITE_Z, FLAG_BADGE07_GET, FLAG_ITEM_ROUTE_111_ROCK_SLIDE},
+        {SeafloorCavern_Room9_EventScript_ItemTM26, Common_EventScript_SeventhBadgeStoneLocked,
+            ITEM_DRAGONINITE, FLAG_BADGE07_GET, FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_26},
+        {Seaspray_Cave_ItemStoneEdge, Common_EventScript_SeventhBadgeStoneLocked,
+            ITEM_BAXCALIBRITE, FLAG_BADGE07_GET, FLAG_SEASPRAY_CAVE_STONE_EDGE},
+        {ScorchedSlab_EventScript_ItemTyranitarite, Common_EventScript_SeventhBadgeStoneLocked,
+            ITEM_TYRANITARITE, FLAG_BADGE07_GET, FLAG_SCORCHED_SLAB_TYRANITARITE},
     };
     bool32 savedMilestone = FlagGet(stones[choice].milestone);
     bool32 savedReceipt = FlagGet(stones[choice].receipt);
@@ -83,8 +100,32 @@ static void ResetHarvest(void)
     FlagClear(FLAG_EC_BERRY_TRADE_TYRANITARITE);
 }
 
+TEST("Harvest economy: pseudo Mega Stones wait for cap 70 without spending the harvest")
+{
+    bool32 savedBadge = FlagGet(FLAG_BADGE07_GET);
+    FlagClear(FLAG_BADGE07_GET);
+    for (u32 choice = 0; choice < 3; choice++)
+    {
+        ResetHarvest();
+        memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
+        gSpecialVar_0x8004 = choice;
+        TradeEmeraldChampionsGardenBerries();
+        EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_LOCKED);
+        for (u32 berry = 1; berry <= NUM_BERRIES; berry++)
+            EXPECT_EQ(GetHarvestedBerryCount(berry), 30);
+        EXPECT(!PlayerOwnsItem(ITEM_BAXCALIBRITE));
+        EXPECT(!PlayerOwnsItem(ITEM_DRAGONINITE));
+        EXPECT(!PlayerOwnsItem(ITEM_TYRANITARITE));
+    }
+    ResetHarvest();
+    if (savedBadge)
+        FlagSet(FLAG_BADGE07_GET);
+}
+
 TEST("Harvest economy: ordinary free stock never pays a harvest recipe")
 {
+    bool32 savedBadge = FlagGet(FLAG_BADGE07_GET);
+    FlagSet(FLAG_BADGE07_GET);
     ResetHarvest();
     for (u32 berry = 1; berry < NUM_BERRIES; berry++)
     {
@@ -104,6 +145,8 @@ TEST("Harvest economy: ordinary free stock never pays a harvest recipe")
         EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_NOT_ENOUGH);
     }
     ResetHarvest();
+    if (!savedBadge)
+        FlagClear(FLAG_BADGE07_GET);
 }
 
 TEST("Harvest economy: each stone spends typed harvest once and leaves equipment untouched")
@@ -113,6 +156,8 @@ TEST("Harvest economy: each stone spends typed harvest once and leaves equipment
     PARAMETRIZE { choice = 0; stone = ITEM_BAXCALIBRITE; }
     PARAMETRIZE { choice = 1; stone = ITEM_DRAGONINITE; }
     PARAMETRIZE { choice = 2; stone = ITEM_TYRANITARITE; }
+    bool32 savedBadge = FlagGet(FLAG_BADGE07_GET);
+    FlagSet(FLAG_BADGE07_GET);
     ResetHarvest();
     memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
     EXPECT(AddBagItem(ITEM_LUM_BERRY, 6));
@@ -132,10 +177,14 @@ TEST("Harvest economy: each stone spends typed harvest once and leaves equipment
         after += GetHarvestedBerryCount(berry);
     EXPECT_EQ(after, remaining);
     ResetHarvest();
+    if (!savedBadge)
+        FlagClear(FLAG_BADGE07_GET);
 }
 
 TEST("Harvest economy: missing one type cannot be replaced by a surplus of another")
 {
+    bool32 savedBadge = FlagGet(FLAG_BADGE07_GET);
+    FlagSet(FLAG_BADGE07_GET);
     ResetHarvest();
     memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
     gSaveBlock2Ptr->pokedex.harvestedBerries[BERRY_ID_BLUK - 1] = 5;
@@ -147,10 +196,14 @@ TEST("Harvest economy: missing one type cannot be replaced by a surplus of anoth
     EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_BLUK), 5);
     EXPECT(!FlagGet(FLAG_EC_BERRY_TRADE_BAXCALIBRITE));
     ResetHarvest();
+    if (!savedBadge)
+        FlagClear(FLAG_BADGE07_GET);
 }
 
 TEST("Harvest economy: full reward pocket preserves all payment and allows retry")
 {
+    bool32 savedBadge = FlagGet(FLAG_BADGE07_GET);
+    FlagSet(FLAG_BADGE07_GET);
     ResetHarvest();
     memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
     struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_BAXCALIBRITE)];
@@ -166,6 +219,8 @@ TEST("Harvest economy: full reward pocket preserves all payment and allows retry
     EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_SUCCESS);
     EXPECT_EQ(GetHarvestedBerryCount(BERRY_ID_RAZZ), 24);
     ResetHarvest();
+    if (!savedBadge)
+        FlagClear(FLAG_BADGE07_GET);
 }
 
 TEST("Harvest economy: existing PC ownership cannot charge harvest again")
@@ -281,7 +336,7 @@ static void RestoreStarterVars(void)
     VarSet(VAR_EC_OPENING_STATE, sSavedStarterVars[3]);
 }
 
-// PetalburgCity_Gym_EventScript_NormanGiveKeystone: Ring, then each stone
+// MauvilleCity_Gym_EventScript_WattsonGiveKeystone: Ring, then each stone
 // through giveitem, then the receipt. Returns the gift kind.
 static u32 RunNormanGift(void)
 {
@@ -336,7 +391,7 @@ static u32 StoneCount(u16 item)
     return CountTotalItemQuantityInBag(item);
 }
 
-TEST("Norman's Mega gift: a Charizard pair receives Charizardite X and Y")
+TEST("Wattson's Mega gift: a Charizard pair receives Charizardite X and Y")
 {
     u16 partner, stone;
     PARAMETRIZE { partner = 0; stone = ITEM_VENUSAURITE; }
@@ -357,7 +412,7 @@ TEST("Norman's Mega gift: a Charizard pair receives Charizardite X and Y")
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: a Hoenn pair receives both stones and the third waits for its partner")
+TEST("Wattson's Mega gift: a Hoenn pair receives both stones and the third waits for its partner")
 {
     SaveStarterVars();
     ResetStarterStones(3, 0, 2);
@@ -380,7 +435,7 @@ TEST("Norman's Mega gift: a Hoenn pair receives both stones and the third waits 
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: a pair without Mega Stones receives Swampertite")
+TEST("Wattson's Mega gift: a pair without Mega Stones receives Swampertite")
 {
     u16 generation, first, second;
     PARAMETRIZE { generation = 4; first = 0; second = 2; }
@@ -407,10 +462,10 @@ TEST("Norman's Mega gift: a pair without Mega Stones receives Swampertite")
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a Leader's earlier copy closes his")
+TEST("Wattson's Mega gift: Feraligite closes Juan's copy; a Leader's earlier copy closes his")
 {
     SaveStarterVars();
-    // Totodile + Cyndaquil: Norman gives Feraligite and sets Juan's receipt.
+    // Totodile + Cyndaquil: Wattson gives Feraligite and sets Juan's receipt.
     ResetStarterStones(2, 2, 1);
     EXPECT_EQ(RunNormanGift(), GIFT_ONE);
     EXPECT_EQ(StoneCount(ITEM_FERALIGITE), 1);
@@ -435,7 +490,7 @@ TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a Leader's earlier 
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: a full Mega Stone pocket refuses the Ring and every stone")
+TEST("Wattson's Mega gift: a full Mega Stone pocket refuses the Ring and every stone")
 {
     SaveStarterVars();
     ResetStarterStones(1, 1, 2);
@@ -451,7 +506,7 @@ TEST("Norman's Mega gift: a full Mega Stone pocket refuses the Ring and every st
     RestoreStarterVars();
 }
 
-// Every region, every ordered pair: after Norman, the world homes, and showing
+// Every region, every ordered pair: after Wattson, the world homes, and showing
 // Norman all three Hoenn partners, each starter stone exists exactly once.
 TEST("Starter Mega Stones: every pair in every region yields each stone exactly once")
 {

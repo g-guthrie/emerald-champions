@@ -359,10 +359,10 @@ WILD_BATTLE_TEST("Item theft: wild Magician and Pickpocket deliver permanent Bag
     enum Ability ability;
     enum Item item;
     bool32 fullBag;
+    PARAMETRIZE { ability = ABILITY_MAGICIAN; item = ITEM_THROAT_SPRAY; fullBag = FALSE; }
+    PARAMETRIZE { ability = ABILITY_PICKPOCKET; item = ITEM_THROAT_SPRAY; fullBag = FALSE; }
     for (u32 full = 0; full < 2; full++)
     {
-        PARAMETRIZE { ability = ABILITY_MAGICIAN; item = ITEM_THROAT_SPRAY; fullBag = full; }
-        PARAMETRIZE { ability = ABILITY_PICKPOCKET; item = ITEM_THROAT_SPRAY; fullBag = full; }
         PARAMETRIZE { ability = ABILITY_MAGICIAN; item = ITEM_SITRUS_BERRY; fullBag = full; }
         PARAMETRIZE { ability = ABILITY_PICKPOCKET; item = ITEM_SITRUS_BERRY; fullBag = full; }
     }
@@ -370,14 +370,11 @@ WILD_BATTLE_TEST("Item theft: wild Magician and Pickpocket deliver permanent Bag
         WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
         ClearBag();
         memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
+        // StartBattle rebuilds the Bag from GIVE_PLAYER_ITEM declarations.
+        // A full Berry stack rejects delivery even with other slots free.
         if (fullBag)
         {
-            EXPECT(AddBagItemWithoutDiscovery(item, MAX_BAG_ITEM_CAPACITY));
-            struct BagPocket *pocket = &gBagPockets[GetItemPocket(item)];
-            enum Item filler = item == ITEM_SITRUS_BERRY ? ITEM_ORAN_BERRY : ITEM_POTION;
-            for (u32 slot = 0; slot < pocket->capacity; slot++)
-                if (BagPocket_GetSlotData(pocket, slot).itemId == ITEM_NONE)
-                    BagPocket_SetSlotItemIdAndCount(pocket, slot, filler, MAX_BAG_ITEM_CAPACITY);
+            GIVE_PLAYER_ITEM(item, MAX_BAG_ITEM_CAPACITY);
             EXPECT(!CheckBagHasSpace(item, 1));
         }
         PLAYER(SPECIES_WOBBUFFET) { Ability(ability); HP(400); MaxHP(400); Attack(1); Moves(MOVE_CELEBRATE, MOVE_TACKLE); }

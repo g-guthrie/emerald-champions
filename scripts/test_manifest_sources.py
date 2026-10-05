@@ -22,6 +22,17 @@ class SourceEligibility(unittest.TestCase):
         self.assertFalse(coverage['unrepresented_literal_sites'])
         self.assertEqual(coverage['trade_sources'],4)
 
+    def test_harvest_sources_keep_one_gated_credit_recipe_each(self):
+        from manifest_item_sources import build_item_sources
+        result = build_item_sources(self.model.builder, enrich=False)
+        trades = [row for row in result['sources'] if row['kind'] == 'harvest_trade']
+        self.assertEqual(len(trades), 3)
+        for row in trades:
+            self.assertEqual(row['requires'], [['FLAG_BADGE07_GET']])
+            self.assertTrue(row['recipe'])
+            self.assertTrue(row['receipt'])
+            self.assertEqual(row['activity_requirement']['kind'], 'harvest_credit_trade')
+
     def test_each_static_requires_its_real_capture_battle(self):
         for row in self.model.rows:
             if row['kind']!='static' or row.get('campaign_scope'):continue
@@ -137,6 +148,14 @@ class AcquisitionParser(unittest.TestCase):
             self.assertTrue(any(effect['op']=='removeobject' for effect in path['effects']))
         self.assertFalse(any(p['final_writes'].get('FLAG_DEFEATED_WALLY_MAUVILLE') and not p['prior_battles']
             for p in result['transitions']))
+
+    def test_cosmetic_heart_summary_rejects_real_movement(self):
+        from unittest.mock import patch
+        label = 'ContestHall_EventScript_AudienceHeartEmotes'
+        movement = self.parser.scripts.labels['ContestHall_Movement_Heart']
+        self.assertIn(label, self.parser._verified_cosmetic_summaries())
+        with patch.dict(movement, body=[(0, 'walk_right'), (1, 'step_end')]):
+            self.assertNotIn(label, self.parser._verified_cosmetic_summaries())
 
     def test_contest_and_scarf_paths_finish_without_truncation(self):
         self.query('ContestHall_EventScript_GiveLuxuryBall','giveitem')

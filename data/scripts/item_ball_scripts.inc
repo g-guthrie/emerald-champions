@@ -79,6 +79,7 @@ Route111_EventScript_ItemStarPiece:: @ 8290DA8
 	end
 
 Route111_EventScript_ItemTM63RockSlide:: @ 8290DB5
+	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_SeventhBadgeStoneLocked
 	finditem ITEM_GARCHOMPITE_Z
 	end
 
@@ -563,6 +564,7 @@ ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce:: @ 82913F4
 	end
 
 SeafloorCavern_Room9_EventScript_ItemTM26:: @ 8291401
+	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_SeventhBadgeStoneLocked
 	finditem ITEM_DRAGONINITE
 	end
 
@@ -696,6 +698,7 @@ Seaspray_Cave_Blastoisinite::
 	end
 
 Seaspray_Cave_ItemStoneEdge::
+	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_SeventhBadgeStoneLocked
 	finditem ITEM_BAXCALIBRITE
 	end
 
@@ -761,6 +764,16 @@ Common_EventScript_FinalBadgeStoneLocked::
 	msgbox Common_Text_FinalBadgeStoneLocked, MSGBOX_DEFAULT
 	release
 	end
+
+Common_EventScript_SeventhBadgeStoneLocked::
+	lock
+	faceplayer
+	msgbox Common_Text_SeventhBadgeStoneLocked, MSGBOX_DEFAULT
+	release
+	end
+
+Common_Text_SeventhBadgeStoneLocked:
+	.string "The stone is dormant.\nReturn with the Mind Badge.$"
 
 Common_Text_ChampionStoneLocked:
 	.string "The stone is dormant.\nReturn after becoming Champion.$"
@@ -845,6 +858,7 @@ Route131_EventScript_SplashPlate::
 	end
 
 ScorchedSlab_EventScript_ItemTyranitarite::
+	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_SeventhBadgeStoneLocked
 	finditem ITEM_TYRANITARITE
 	end
 

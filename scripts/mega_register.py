@@ -320,7 +320,7 @@ STORY_EVENTS: list[tuple] = [
      "LavaridgeTown/scripts.inc:81-92 (rival, VAR_LAVARIDGE_TOWN_STATE 1 from LavaridgeTown_Gym_1F:70)"),
     ("FLAG_SYS_RECEIVED_KEYSTONE", "MauvilleCity_Gym", None, "FLAG_BADGE03_GET",
      "MauvilleCity_Gym_EventScript_WattsonGiveKeystone: Ring and starter stones after Wattson"),
-    ("FLAG_BADGE05_GET", "PetalburgCity_Gym", None, ("FLAG_BADGE04_GET", "FLAG_SYS_RECEIVED_KEYSTONE"),
+    ("FLAG_BADGE05_GET", "PetalburgCity_Gym", None, "FLAG_BADGE04_GET",
      "PetalburgCity_Gym/scripts.inc:448-459"),
     ("FLAG_GOT_BASEMENT_KEY_FROM_WATTSON", "MauvilleCity", (29, 10), "FLAG_BADGE05_GET",
      "MauvilleCity/scripts.inc:445-453 (Wattson is put outside after Norman, PetalburgCity_Gym:462-463)"),

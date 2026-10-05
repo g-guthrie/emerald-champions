@@ -967,6 +967,7 @@ EmeraldChampions_EventScript_HarvestConfirm:
 	goto_if_ne VAR_RESULT, YES, EmeraldChampions_EventScript_HarvestRequests
 	copyvar VAR_0x8004, VAR_HARVEST_REWARD
 	special TradeEmeraldChampionsGardenBerries
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_LOCKED, EmeraldChampions_EventScript_HarvestStoneLocked
 	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_ALREADY_DONE, EmeraldChampions_EventScript_HarvestAlready
 	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_NOT_ENOUGH, EmeraldChampions_EventScript_HarvestNotEnough
 	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_BAG_FULL, EmeraldChampions_EventScript_HarvestBagFull
@@ -999,6 +1000,13 @@ EmeraldChampions_EventScript_HarvestCelebiCheck:
 EmeraldChampions_EventScript_HarvestCelebiLost:
 	msgbox EmeraldChampions_Text_HarvestCelebiVanished, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_HarvestRequests
+
+EmeraldChampions_EventScript_HarvestStoneLocked:
+	msgbox EmeraldChampions_Text_HarvestStoneLocked, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestRequests
+
+EmeraldChampions_Text_HarvestStoneLocked:
+	.string "These stones need the Mind Badge.\nCome back after Mossdeep's Gym!$"
 
 EmeraldChampions_EventScript_HarvestAlready:
 	msgbox EmeraldChampions_Text_HarvestAlready, MSGBOX_DEFAULT

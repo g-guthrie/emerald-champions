@@ -317,6 +317,13 @@ class ProgressionParser:
                 op,args=command(text)
                 if op in ('setvar','addvar','subvar','copyvar'):
                     if not args or (not re.match(r'VAR_TEMP_[0-8]$',args[0]) and args[0]!='VAR_RESULT'):valid=False
+                elif op == 'applymovement':
+                    # The general effect inventory includes movement, but this
+                    # exact emote does not move an object or unlock a path.
+                    movement = self.scripts.labels.get('ContestHall_Movement_Heart', {}).get('body', [])
+                    if (len(args) != 2 or args[1] != 'ContestHall_Movement_Heart'
+                            or [text for _n, text in movement] != ['emote_heart', 'step_end']):
+                        valid = False
                 elif op in EFFECTS or is_battle(op,args):valid=False
                 if op=='special' and args[0] not in ('GetContestMonCondition','GenerateContestRand'):valid=False
                 if op in ('call','goto') or op.startswith(('call_if','goto_if')):

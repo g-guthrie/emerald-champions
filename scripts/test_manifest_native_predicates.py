@@ -8,6 +8,15 @@ def special(name):return 'SPECIAL:'+name+'()'
 
 
 class NativePredicates(unittest.TestCase):
+    def test_pseudo_mega_harvest_trade_requires_mind_badge(self):
+        state={'flags':set(), 'items':set(), 'pc_items':set(),
+               'harvested_berries':{'RAZZ':30,'BLUK':30,'NANAB':30,'WEPEAR':30}}
+        key='SPECIAL:TradeEmeraldChampionsGardenBerries(VAR_0x8004=0)'
+        self.assertEqual(evaluate(key,state,{}),{5})
+        state['flags'].add('FLAG_BADGE07_GET')
+        state['bag_has_space']=True
+        self.assertEqual(evaluate(key,state,{}),{0})
+
     def test_caught_form_lookup_never_caches_mutable_pool_or_confuses_available(self):
         state={'caught':set(),'species':{'SPECIES_ROTOM_WASH'}}
         self.assertFalse(_caught(state,'SPECIES_ROTOM'))
