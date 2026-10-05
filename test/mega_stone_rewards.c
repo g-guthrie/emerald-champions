@@ -471,3 +471,25 @@ TEST("Harvest economy: pseudo Mega requests wait for badge seven without consumi
     ResetHarvest();
     if (!saved) FlagClear(FLAG_BADGE07_GET);
 }
+
+TEST("Wattson Mega gift: either full pocket refuses the combined pending rewards")
+{
+    enum Item pocketItem, filler;
+    PARAMETRIZE { pocketItem = ITEM_MEGA_RING; filler = ITEM_BICYCLE; }
+    PARAMETRIZE { pocketItem = ITEM_RAICHUNITE_X; filler = ITEM_AUDINITE; }
+    bool8 saved = FlagGet(FLAG_RECEIVED_TM72);
+    FlagClear(FLAG_RECEIVED_TM72);
+    ClearBag();
+    ZeroPlayerPartyMons();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(pocketItem)];
+    for (u32 slot = 0; slot < pocket->capacity; slot++)
+        BagPocket_SetSlotItemIdAndCount(pocket, slot, filler, 1);
+    EXPECT(!CanReceiveWattsonMegaGift());
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_MEGA_RING), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RAICHUNITE_X), 0);
+    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
+    EXPECT(CanReceiveWattsonMegaGift());
+    ClearBag();
+    if (saved) FlagSet(FLAG_RECEIVED_TM72);
+}

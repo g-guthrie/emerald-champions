@@ -365,6 +365,18 @@ void MarkStarterMegaStoneReceived(void)
     }
 }
 
+// Preflight both pockets before Wattson hands over either pending reward.
+bool32 CanReceiveWattsonMegaGift(void)
+{
+    struct ItemSlot gifts[2];
+    u32 count = 0;
+    if (!PlayerOwnsItem(ITEM_MEGA_RING))
+        gifts[count++] = (struct ItemSlot){ITEM_MEGA_RING, 1};
+    if (!FlagGet(FLAG_RECEIVED_TM72) && !PlayerOwnsItem(ITEM_RAICHUNITE_X))
+        gifts[count++] = (struct ItemSlot){ITEM_RAICHUNITE_X, 1};
+    return CheckBagHasSpaceForItemBundle(gifts, count);
+}
+
 // Only the starter stones Norman still owes must fit; Wattson awards the Ring.
 bool32 CanReceiveNormanMegaGift(void)
 {

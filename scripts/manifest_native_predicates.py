@@ -74,6 +74,7 @@ CITATIONS = {
  'CheckMagikarpBattle':('src/field_specials.c:5580','all six slots Magikarp'),
  'GetBattleOutcome':('src/field_specials.c:1553','recorded native battle outcome'),
  'CanReceiveGoGogglesGift':('src/field_specials.c:590','atomic Bag bundle capacity'),
+ 'CanReceiveWattsonMegaGift':('src/mega_stone_rewards.c:CanReceiveWattsonMegaGift','both pending Ring and Raichunite X fit before either is delivered'),
  'CanReceiveNormanMegaGift':('src/mega_stone_rewards.c:358','undelivered owed starter stones after Norman'),
  'CanReceiveFrontierReward':('src/field_specials.c:558','reward and bottle caps Bag bundle'),
  'CanReceiveLatiStones':('src/field_specials.c:566','only undelivered Lati stones require capacity'),
@@ -690,7 +691,7 @@ def evaluate(key,state,constants=None):
         outcome=state.get('battle_outcome')
         return {_number(outcome,constants)} if _number(outcome,constants) is not None else None
     if name=='CanReceiveLatiStones' and {'ITEM_LATIOSITE','ITEM_LATIASITE'} <= state.get('finite_duplicate_rewards',set()):return {1}
-    if name in ('CanReceiveGoGogglesGift','CanReceiveNormanMegaGift','CanReceiveFrontierReward','CanReceiveLatiStones','CanReceiveWeatherInstituteRocks'):return _capacity(state)
+    if name in ('CanReceiveGoGogglesGift','CanReceiveWattsonMegaGift','CanReceiveNormanMegaGift','CanReceiveFrontierReward','CanReceiveLatiStones','CanReceiveWeatherInstituteRocks'):return _capacity(state)
     if name=='IsPlayerPartyBelowLevelCap':
         party=state.get('party')
         if party is not None and all(isinstance(p,dict) and 'level' in p for p in party):

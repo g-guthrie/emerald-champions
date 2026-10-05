@@ -814,6 +814,7 @@ gSpecials::
 	def_special CanReceiveLatiStones
 	def_special CanReceiveShellBellReward
 
+	def_special CanReceiveWattsonMegaGift
 	def_special CanReceiveNormanMegaGift
 
 	def_special CanReceiveGoGogglesGift

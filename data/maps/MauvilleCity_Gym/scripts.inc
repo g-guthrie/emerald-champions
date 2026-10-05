@@ -419,6 +419,8 @@ MauvilleCity_Gym_Text_GymStatueCertified: @ 820E96C
 
 MauvilleCity_Gym_EventScript_GiveMegaRing::
 	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, Common_EventScript_NopReturn
+	specialvar VAR_RESULT, CanReceiveWattsonMegaGift
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_MegaRingGift, MSGBOX_DEFAULT
 	giveuniqueitem ITEM_MEGA_RING
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
