@@ -56,3 +56,20 @@ STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
       Goldeen (- / Mystic Water), Surskit (- / Honey), Combee (Honey / -)
   Not here: Chilan Berry (Petalburg Gym guide, after the fourth badge); Lucky Punch (needs Chansey
   caught).
+
+====================================================================================================
+STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James)
+  Adds Route 104 south (below the Woods entrance, y 38 and down).
+  Pokemon
+    Route 104 grass: Azurill, Taillow, Budew, Sandygast, Sentret, Litleo, Fletchling, Bunnelby,
+      Ledyba, Smoliv, Charcadet, Flabebe (White)
+    Old Rod: Magikarp, Skrelp
+    Honey: Cutiefly, Yungoos, Patrat
+    Evolutions by 14: Roselia (Budew), Marill (Azurill) via Bonding.
+  Battle items
+    Item ball: Friend Ball (29,53)
+    Berry trees: Oran, Pecha
+    Wild held: Budew (- / Poison Barb), Sandygast (- / Spell Tag), Yungoos (- / Pecha Berry),
+      Cutiefly (Honey / -)
+  Not here: Route 104 north (Soothe Bell, PP Up, Shell Bell, White Herb, Chesto Berry, Nugget,
+  flower shop, Cheri/Leppa/Oran trees) - past the Woods.
