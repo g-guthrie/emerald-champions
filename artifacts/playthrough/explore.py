@@ -1,0 +1,200 @@
+"""Explore one map in the real game: photograph every reachable tile, talk to every NPC, check every
+sign and hidden-item tile, and diff the Bag. Everything reported comes from the game's own readback.
+
+usage (repo root): .venv-studio/bin/python artifacts/playthrough/explore.py MAP START_SAVE OUT_NAME
+       [--caps cut,...] [--skip LOCALID,...]
+Writes work/studio/scenes/<OUT_NAME>-NN/ chunks, then work/studio/explore/<OUT_NAME>/report.json,
+report.md and mosaic.png. The last chunk's end.sav continues the playthrough.
+"""
+import argparse, json, os, re, subprocess, sys
+from collections import deque
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent.parent
+sys.path.insert(0, str(HERE))
+import reach as R
+import route_steps as RS
+
+SHOP_LIKE = re.compile(r'pokemart|General_Mart_Script|BattleVendor|ChoosePartyMon|ShowScrollableMultichoice|'
+                       r'multichoice|MoveTutor|Tutor|DoInGameTrade|CreateInGameTradePokemon|Lottery|NameRater|'
+                       r'BufferEmeraldChampionsBattleItemStock|special ChooseMonForMoveRelearner')
+SKIP_SCRIPTS = {'EventScript_CutTree', 'EventScript_RockSmash', 'EventScript_StrengthBoulder', '0x0', 'NULL', ''}
+CHUNK = 10          # interactions/photos per scene (keeps each scene under the frame cap)
+
+
+def script_graph_text(label, seen=None, depth=0):
+    import glob
+    if not hasattr(script_graph_text, 'labels'):
+        labels = {}
+        for f in glob.glob(str(ROOT / 'data/maps/*/scripts.inc')) + glob.glob(str(ROOT / 'data/scripts/*.inc')):
+            cur = None
+            for line in open(f, errors='ignore'):
+                m = re.match(r'^(\w+)::', line)
+                if m: cur = m.group(1); labels[cur] = []
+                elif cur: labels[cur].append(line)
+        script_graph_text.labels = labels
+    seen = seen if seen is not None else set()
+    if label in seen or depth > 5 or label not in script_graph_text.labels: return ''
+    seen.add(label)
+    body = ''.join(script_graph_text.labels[label])
+    out = body
+    for j in re.findall(r'\b(?:goto|call)\w*\s+(?:[^,\n]*,\s*)?(\w+)', body):
+        out += script_graph_text(j, seen, depth + 1)
+    return out
+
+
+def mode_for(script):
+    return 'B' if SHOP_LIKE.search(script + '\n' + script_graph_text(script)) else 'A'
+
+
+def reachable(map_dir, start, caps):
+    mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
+    g = R.grid(mid)
+    seen = {start}; q = deque([start])
+    while q:
+        p = q.popleft()
+        for d in RS.DIRS:
+            r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
+            if r and r not in seen: seen.add(r); q.append(r)
+    return seen, g
+
+
+def plan(map_dir, start, caps, skip):
+    mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
+    m = R.MAPS[mid]
+    tiles, g = reachable(map_dir, start, caps)
+    # photo stops: greedy cover of every reachable tile with a 15x10 screen window
+    uncovered = set(tiles); photos = []
+    while uncovered:
+        best = max(tiles, key=lambda t: sum(1 for u in uncovered if abs(u[0] - t[0]) <= 7 and abs(u[1] - t[1]) <= 4))
+        photos.append(best)
+        uncovered -= {u for u in uncovered if abs(u[0] - best[0]) <= 7 and abs(u[1] - best[1]) <= 4}
+    jobs = [dict(kind='photo', at=p) for p in photos]
+    for i, o in enumerate(m.get('object_events', [])):
+        s = o.get('script') or ''
+        if s in SKIP_SCRIPTS or (i + 1) in skip: continue
+        jobs.append(dict(kind='talk', id=i + 1, at=(o['x'], o['y']), script=s, mode=mode_for(s)))
+    for b in m.get('bg_events', []):
+        if b.get('type') == 'hidden_item':
+            jobs.append(dict(kind='inspect', at=(b['x'], b['y']), what='hidden ' + b['item'], mode='A'))
+        elif b.get('script'):
+            jobs.append(dict(kind='inspect', at=(b['x'], b['y']), what='sign ' + b['script'],
+                             mode=mode_for(b['script'])))
+    # nearest-neighbour order from the start
+    order = []; here = start; left = jobs[:]
+    while left:
+        j = min(left, key=lambda j: abs(j['at'][0] - here[0]) + abs(j['at'][1] - here[1]))
+        order.append(j); left.remove(j); here = tuple(j['at'])
+    return order, tiles, g
+
+
+def to_step(j):
+    if j['kind'] == 'photo':
+        return {'walk_to': list(j['at']), 'label': f"photo {j['at'][0]},{j['at'][1]}"}
+    if j['kind'] == 'talk':
+        return {'talk_id': j['id'], 'mode': j['mode'], 'label': f"talk {j['id']}"}
+    return {'inspect': list(j['at']), 'mode': j['mode'], 'label': f"inspect {j['at'][0]},{j['at'][1]}"}
+
+
+def run_chunk(recipe, out):
+    path = ROOT / 'work/studio/recipes' / (out + '.json')
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(recipe, indent=1))
+    dest = ROOT / 'work/studio/scenes' / out
+    if dest.exists():
+        subprocess.run(['chmod', '-R', 'u+w', str(dest)]); subprocess.run(['rm', '-rf', str(dest)])
+    subprocess.run([str(ROOT / '.venv-studio/bin/python'), str(ROOT / 'tools/studio/run_scene.py'), str(path),
+                    '--out', str(dest)], cwd=ROOT, capture_output=True, text=True, timeout=3600)
+    res = dest / 'result.json'
+    if not res.exists():
+        raise SystemExit(f'chunk {out} crashed; see {dest}')
+    return dest, json.loads(res.read_text())
+
+
+def texts_between(rec, a, b):
+    """Lines the game printed between frames a and b, minus the line already on screen at a."""
+    last = ''
+    for e in rec['events']:
+        if e['frame'] >= a: break
+        last = e['state']['text']
+    seen = []
+    for e in rec['events']:
+        if a <= e['frame'] < b:
+            t = e['state']['text']
+            if t and t != last and t not in seen: seen.append(t)
+            last = t
+    return seen
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('map'); ap.add_argument('save'); ap.add_argument('name')
+    ap.add_argument('--caps', default=''); ap.add_argument('--skip', default='')
+    ap.add_argument('--start', default='', help='x,y if the save does not start on this map')
+    a = ap.parse_args()
+    caps = [c for c in a.caps.split(',') if c]
+    skip = {int(s) for s in a.skip.split(',') if s}
+    # find the start position from the save
+    probe = {'name': 'probe ' + a.name, 'start': {'save': a.save}, 'steps': [{'frames': 2}]}
+    _, pr = run_chunk(probe, a.name + '-probe')
+    f = pr['outcome']['final']
+    if f['map'] != a.map: raise SystemExit(f"save is on {f['map']}, not {a.map}")
+    start = (f['x'], f['y'])
+    order, tiles, g = plan(a.map, start, caps, skip)
+    chunks = [order[i:i + CHUNK] for i in range(0, len(order), CHUNK)]
+    save = a.save; results = []; dests = []
+    for n, chunk in enumerate(chunks):
+        steps = ([{'bag': 'before'}] if n == 0 else []) + [to_step(j) for j in chunk]
+        if n == len(chunks) - 1: steps.append({'bag': 'after'})
+        recipe = {'name': f'{a.name} {n + 1}/{len(chunks)}', 'start': {'save': save}, 'battle_resolution': 'fixture_win',
+                  'steps': steps, 'expect': {'ready': True}}
+        dest, res = run_chunk(recipe, f'{a.name}-{n + 1:02d}')
+        dests.append(dest); results.append(res)
+        fin = res['outcome']['final']
+        if not fin.get('end_save'): raise SystemExit(f'chunk {n + 1} did not end idle: {res["outcome"]["failures"]}')
+        os.chmod(fin['end_save'], 0o444)
+        save = fin['end_save']
+    # report
+    report = dict(map=a.map, start=list(start), reachable_tiles=len(tiles), chunks=[str(d) for d in dests],
+                  end_save=save, failures=[], interactions=[], photos=[])
+    for dest, res in zip(dests, results):
+        rec = json.loads((dest / 'recording.json').read_text())
+        report['failures'] += res['outcome']['failures']
+        for it in res['outcome']['final']['interactions']:
+            job = next((j for j in order if to_step(j)['label'] == it['label']), None)
+            if job: it['source'] = job.get('script') or job.get('what')
+            lo, hi = it.get('start', -1), it.get('end', -1)
+            it['texts'] = texts_between(rec, lo, hi + 1) if it['status'] == 'visited' else []
+            it['battle'] = any(e['state']['battle'] for e in rec['events'] if lo <= e['frame'] <= hi)
+            report['interactions'].append(it)
+        for c in rec['captures']:
+            if c.get('label', '').startswith('photo'):
+                report['photos'].append(dict(path=str(dest / c['path']), x=c['state']['x'], y=c['state']['y'],
+                                             map=a.map))
+    before = json.loads((dests[0] / 'bag-before.json').read_text())
+    after = json.loads((dests[-1] / 'bag-after.json').read_text())
+    report['bag_gained'] = {k: after.get(k, 0) - before.get(k, 0) for k in set(before) | set(after)
+                            if after.get(k, 0) != before.get(k, 0)}
+    out = ROOT / 'work/studio/explore' / a.name
+    out.mkdir(parents=True, exist_ok=True)
+    # mosaic: paste each photo at the camera position its reported tile implies (16 px per tile)
+    from PIL import Image
+    W, H = g.w * 16, g.h * 16
+    canvas = Image.new('RGB', (W, H), (20, 20, 20))
+    for ph in report['photos']:
+        im = Image.open(ph['path']).convert('RGB')
+        canvas.paste(im, (ph['x'] * 16 - 112, ph['y'] * 16 - 64))
+    canvas.save(out / 'mosaic.png')
+    (out / 'report.json').write_text(json.dumps(report, indent=1))
+    lines = [f"# {a.map} ({a.name})", f"start {start}, reachable tiles {len(tiles)}, photos {len(report['photos'])}",
+             f"failures: {report['failures'] or 'none'}", f"Bag gained: {report['bag_gained'] or 'nothing'}", '']
+    for it in report['interactions']:
+        t = ' | '.join(x.replace('\n', ' ') for x in it['texts'])[:400]
+        lines.append(f"- {it['label']} {it.get('source','')} [{it['status']}{', battle' if it.get('battle') else ''}]: {t}")
+    (out / 'report.md').write_text('\n'.join(lines) + '\n')
+    print(out / 'report.md')
+
+
+if __name__ == '__main__':
+    main()

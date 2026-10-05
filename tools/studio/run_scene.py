@@ -102,7 +102,73 @@ async def run(spec,out):
         steps=spec.get("steps",replay["inputs"] if replay else [])
         total=0
         walk_failure=None
-        for step in steps:
+        bags={};interactions=[]
+        class _Steps:
+            def __init__(self,items):self.items=list(items)
+            def extend_front(self,more):self.items[0:0]=list(more)
+            def __iter__(self):return self
+            def __next__(self):
+                if not self.items:raise StopIteration
+                return self.items.pop(0)
+        steps_iter=_Steps(steps)
+        for step in steps_iter:
+            if "bag" in step and walk_failure is None:
+                # Full Bag snapshot read back from the game: every item id, nonzero counts kept.
+                ids=json.loads((server.ROOT/"artifacts/playthrough/item_ids.json").read_text())
+                async def _adv():
+                    nonlocal total
+                    studio.ingest(await studio.core.tick(frames=1));recorder.observe(studio.packet,0);total+=1
+                bag={}
+                for name in ids:
+                    v=await read_game_query(studio.core,4,int(studio.cat.constants[name]),_adv)
+                    if v:bag[name]=v
+                bags[step["bag"]]=bag
+                (out/f"bag-{step['bag']}.json").write_text(json.dumps(bag,indent=1))
+                recorder.mark("Bag "+step["bag"],studio.packet)
+                continue
+            if ("talk_id" in step or "inspect" in step) and walk_failure is None:
+                # Walk next to a live actor (talk_id) or a tile (inspect), face it, press A, then
+                # tap the step's button until the game is idle again.
+                import sys as _sys
+                _sys.path.insert(0,str(server.ROOT/"artifacts"/"playthrough"))
+                import route_steps
+                live=packet_state(studio.packet,recorder.decoder)["actors"]
+                if "talk_id" in step:
+                    hit=[a for a in live if a["local_id"]==int(step["talk_id"]) and not a["invisible"]]
+                    if not hit:
+                        recorder.mark(f"ABSENT actor {step['talk_id']} {step.get('label','')}",studio.packet)
+                        interactions.append(dict(label=step.get("label",""),target=step["talk_id"],status="absent"))
+                        continue
+                    target=(hit[0]["x"],hit[0]["y"])
+                else:
+                    target=tuple(step["inspect"])
+                occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
+                here=(studio.state[4],studio.state[5])
+                options=[]
+                for dx,dy,face in ((0,1,"UP"),(0,-1,"DOWN"),(1,0,"LEFT"),(-1,0,"RIGHT"),(0,2,"UP"),(0,-2,"DOWN"),(2,0,"LEFT"),(-2,0,"RIGHT")):
+                    spot=(target[0]+dx,target[1]+dy)
+                    if abs(dx)==2 or abs(dy)==2:
+                        # across a counter: the tile between must be a counter
+                        mid=(target[0]+dx//2,target[1]+dy//2)
+                        if not route_steps.is_counter(studio.current_map,mid):continue
+                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied-{spot})
+                    if mv is not None:options.append((len(mv),spot,face))
+                if not options:
+                    recorder.mark(f"UNREACHABLE {target} {step.get('label','')}",studio.packet)
+                    interactions.append(dict(label=step.get("label",""),target=list(target),status="unreachable"))
+                    continue
+                options.sort();_,spot,face=options[0]
+                serial0=studio.state[30];bag_label=step.get("label","")
+                idx=len(interactions)
+                interactions.append(dict(label=bag_label,target=list(target),status="visited",stand=list(spot)))
+                sub=[{"walk_to":list(spot),"face":face,"label":"At "+bag_label[:24]},{"note":idx,"edge":"start"},{"press":"A","frames":40},
+                     {"tap":step.get("mode","A"),"every":40,"frames":int(step.get("limit",4000)),"min_frames":20,"until":"idle"},
+                     {"note":idx,"edge":"end"}]
+                steps_iter.extend_front(sub)
+                continue
+            if "note" in step:
+                interactions[step["note"]][step["edge"]]=recorder.length if hasattr(recorder,"length") else total
+                continue
             if ("walk_to" in step or "walk" in step) and walk_failure is None:
                 async def settle_scene(label):
                     # A script took control (trigger, trainer, gift): tap A through it, then
@@ -210,6 +276,8 @@ async def run(spec,out):
             if isinstance(ident,str):ident=studio.cat.constants[ident]
             query_values[name]=await read_game_query(studio.core,kind,int(ident),advance_query)
         final["queries"]=query_values
+        final["interactions"]=interactions
+        if bags:final["bags"]=sorted(bags)
         failures=[walk_failure] if walk_failure else []
         for field,wanted in spec.get("expect",{}).items():
             if field=="contains_text":

@@ -38,6 +38,12 @@ def path(map_dir, start, goal, caps=frozenset(), block=None):
     return moves
 
 
+def is_counter(map_dir, p):
+    mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
+    g = R.grid(mid)
+    return g.inb(*p) and g.beh(*p) == R.MB['MB_COUNTER']
+
+
 def walk(moves, label=None):
     step = {'walk': [DIRS[d] for d in moves]}
     if label: step['label'] = label
