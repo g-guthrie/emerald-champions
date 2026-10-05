@@ -1815,7 +1815,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_URSARING"
+                "species": "SPECIES_URSALUNA_BLOODMOON"
               }
             ],
             "encounter_rates": [
@@ -1823,14 +1823,14 @@
               5,
               5,
               5,
-              12,
+              11,
               12,
               12,
               12,
               10,
               10,
               8,
-              4
+              5
             ]
           },
           "honey_mons": {
@@ -5169,9 +5169,9 @@
             "encounter_rates": [
               5,
               5,
-              16,
+              26,
               15,
-              15,
+              5,
               10,
               9,
               8,
@@ -17323,7 +17323,7 @@
               {
                 "min_level": 74,
                 "max_level": 74,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "species": "SPECIES_LAIRON"
               }
             ],
             "encounter_rates": [

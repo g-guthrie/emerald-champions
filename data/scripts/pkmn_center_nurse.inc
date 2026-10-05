@@ -19,6 +19,7 @@ EventScript_PkmnCenterNurse_GiveToolsForTour::
 	setvar VAR_0x8008, TRUE
 
 EventScript_PkmnCenterNurse_CheckTools:
+	call_if_unset FLAG_EC_RESTRICTED_RULE_EXPLAINED, EventScript_PkmnCenterNurse_RestrictedRule
 	setvar VAR_0x8009, FALSE
 	setvar VAR_0x8007, FALSE
 	setvar VAR_0x8004, ITEM_POKE_VIAL

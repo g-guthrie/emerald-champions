@@ -123,8 +123,8 @@ def player_rules() -> dict:
                             "Obtainable from the start (DexNav chains, random infection); the spring needs Lavaridge.",
                     "cite": [cite(ROOT / "src/pokerus.c", "GetPokerusNatureModifier"), cite(ROOT / "src/dexnav.c", "Pokerus"),
                              rel(MAPS_DIR / "LavaridgeTown/scripts.inc")]},
-        "restricted": {"rule": "At most ONE Legendary/Mythical/Ultra Beast/Paradox per party in total (judged on the base species: "
-                               "isUltraBeast / isRestrictedLegendary / isSubLegendary / isMythical / isParadox).",
+        "restricted": {"rule": "At most ONE restricted Pokemon per party: Legendary/Mythical/Ultra Beast/Paradox, Gholdengo or either Ursaluna form. Official classes use the base species flags: "
+                               "isUltraBeast / isRestrictedLegendary / isSubLegendary / isMythical / isParadox.",
                        "cite": [cite(pc, "GetRestrictedPartyClass"), cite(pc, "PlayerPartyWithinRestrictedLimit")]},
         "legend_level": {"rule": "Legend-class wild/static encounters arrive at the current cap with authored sets.",
                          "cite": [cite(ROOT / "src/legendary_signs.c", "GetLegendaryEncounterLevel")]},
@@ -327,6 +327,8 @@ class SpeciesData:
 
     def restricted_class(self, species: str) -> str | None:
         """GetRestrictedPartyClass (src/pokemon.c:3079-3094)."""
+        if self.resolve(species) in {"SPECIES_GHOLDENGO", "SPECIES_URSALUNA", "SPECIES_URSALUNA_BLOODMOON"}:
+            return "legendary"
         flags = self.info.get(self.base(species), {}).get("flags", set())
         if "isUltraBeast" in flags:
             return "ultra_beast"
@@ -1080,7 +1082,8 @@ GIFT_REQUIREMENTS: dict = {
     # (case 7/8), which the path scan does not track.
     "PetalburgCity_Gym_EventScript_GiveFacade": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:100-107,346-352,469"),
     "PetalburgCity_Gym_EventScript_GiveEnigmaBerry": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:346-350"),
-    "PetalburgCity_Gym_EventScript_NormanGiveKeystone": (["FLAG_BADGE04_GET"], "PetalburgCity_Gym/scripts.inc:100-105 (state 6)"),
+    "MauvilleCity_Gym_EventScript_GiveMegaRing": (["FLAG_BADGE03_GET"], "MauvilleCity_Gym/scripts.inc (Wattson victory or owed Ring retry)"),
+    "PetalburgCity_Gym_EventScript_NormanStarterGift": (["FLAG_BADGE05_GET"], "PetalburgCity_Gym/scripts.inc (after Norman victory)"),
     **{f"Route110_TrickHouseEnd_EventScript_CompletedPuzzle{n}": (
         [req] if req else [], f"Route110_TrickHouseEnd/scripts.inc:44-151 (switch VAR_TRICK_HOUSE_LEVEL, puzzle {n})")
        for n, req in ((1, None), (2, "FLAG_BADGE03_GET"), (3, "FLAG_BADGE04_GET"), (4, "FLAG_BADGE05_GET"),
@@ -1120,10 +1123,10 @@ BERRY_GIFTS = [
     ("CHERI", "CHESTO", "PECHA", "RAWST", "ASPEAR", "LEPPA", "ORAN", "PERSIM", "LUM", "SITRUS")
 ]
 EXTRA_ITEM_SOURCES = [
-    # Norman hands the Mega Ring with the stones of the starter pair's final
+    # Norman awards after his victory the stones of the starter pair's final
     # forms (src/mega_stone_rewards.c:200-231 sStarterMegaStones; the pair can
     # be any region's), and later the Hoenn stones when shown that line.
-    *[(item, "PetalburgCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Norman's starter-pair Mega Stone (with the Ring)",
+    *[(item, "PetalburgCity_Gym", ["FLAG_BADGE05_GET"], "Norman's starter-pair Mega Stone (after his victory)",
        "src/mega_stone_rewards.c:200-231; PetalburgCity_Gym/scripts.inc:394-446")
       for item in ("ITEM_VENUSAURITE", "ITEM_CHARIZARDITE_X", "ITEM_CHARIZARDITE_Y", "ITEM_BLASTOISINITE",
                    "ITEM_MEGANIUMITE", "ITEM_FERALIGITE", "ITEM_SCEPTILITE", "ITEM_BLAZIKENITE", "ITEM_SWAMPERTITE",
@@ -1133,8 +1136,8 @@ EXTRA_ITEM_SOURCES = [
       for item in ("ITEM_HEAT_ROCK", "ITEM_DAMP_ROCK", "ITEM_ICY_ROCK", "ITEM_SMOOTH_ROCK")],
     ("ITEM_HONEY", "OldaleTown_PokemonCenter_1F", ["FLAG_BADGE01_GET"], "Center Supplies (1-badge tier)",
      "data/scripts/general_mart.inc:86,146"),
-    ("ITEM_MEGA_RING", "PetalburgCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Norman (four gym wins)",
-     "data/maps/PetalburgCity_Gym/scripts.inc:394-401"),
+    ("ITEM_MEGA_RING", "MauvilleCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Wattson (after badge three)",
+     "data/maps/MauvilleCity_Gym/scripts.inc: MauvilleCity_Gym_EventScript_GiveMegaRing"),
 ]
 
 
@@ -1303,7 +1306,7 @@ class Pools:
             if reachable("Route117_PokemonDayCare"):
                 for sp in list(species):
                     info = sd.info.get(sp, {})
-                    if info.get("egg_group") in (None, "EGG_GROUP_NO_EGGS_DISCOVERED") or sd.restricted_class(sp) and sd.base(sp) != "SPECIES_MANAPHY":
+                    if info.get("egg_group") in (None, "EGG_GROUP_NO_EGGS_DISCOVERED"):
                         continue
                     egg = "SPECIES_PHIONE" if sd.base(sp) == "SPECIES_MANAPHY" else sd.egg_species(sp)
                     if egg not in species:
@@ -1750,7 +1753,7 @@ def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=Non
         milestone=milestone, cap=r["cap"], source_head=git_head(), story_flags=sorted(r["flags"]),
         scope="Source upper bound before this encounter; optional detours, money and RNG are unconstrained.",
         species=species, items=items, megas=r["megas"], all_mega_stones=sorted(p.megas),
-        mega_ring=dict(available=r["ring"], gate="Norman's pre-battle gift after four Gym wins"),
+        mega_ring=dict(available=r["ring"], gate="Wattson's victory reward after badge three"),
         friendship=dict(max_this_milestone=255),
         game_corner_available=story.reachable(milestone, "MauvilleCity_GameCorner", closure=closure),
         starter_lines=starter_lines(b, r),

@@ -1071,7 +1071,12 @@ TEST("Wild tables: nothing is grind-rare: restricted slots at 5%, ordinary slots
                     switch (GetRestrictedPartyClass(species))
                     {
                     case RESTRICTED_PARTY_LEGENDARY:
-                        legends++;
+                        // Named power-tier additions obey the same 5% odds.
+                        // The two-resident quota remains for official legends.
+                        if (gSpeciesInfo[GET_BASE_SPECIES_ID(species)].isRestrictedLegendary
+                         || gSpeciesInfo[GET_BASE_SPECIES_ID(species)].isSubLegendary
+                         || gSpeciesInfo[GET_BASE_SPECIES_ID(species)].isMythical)
+                            legends++;
                         legendSlots++;
                         ok = odds == 5;
                         break;

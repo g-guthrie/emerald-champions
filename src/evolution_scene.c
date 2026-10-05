@@ -173,6 +173,8 @@ static void CB2_BeginEvolutionScene(void)
 static void CommitEvolution(struct Pokemon *mon, enum Species before, enum Species after)
 {
     u32 zero = 0;
+    if (!CanEvolveMonWithinRestrictedLimit(mon, after))
+        return;
     SetMonData(mon, MON_DATA_SPECIES, &after);
     SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &zero);
     CalculateMonStats(mon);
@@ -642,6 +644,7 @@ enum {
     EVOSTATE_LEARNED_MOVE,
     EVOSTATE_TRY_LEARN_ANOTHER_MOVE,
     EVOSTATE_REPLACE_MOVE,
+    EVOSTATE_RESTRICTED_WAIT,
 };
 
 // States for the switch in EVOSTATE_REPLACE_MOVE
@@ -696,6 +699,15 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_INTRO_MSG:
         if (!gPaletteFade.active)
         {
+            if (!CanEvolveMonWithinRestrictedLimit(mon, gTasks[taskId].tPostEvoSpecies))
+            {
+                StringExpandPlaceholders(gStringVar4, gText_RestrictedEvolutionBlocked);
+                BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
+                gSpecialVar_Result = EVO_EVENT_INTERRUPTED;
+                gTasks[taskId].tEvoWasStopped = TRUE;
+                gTasks[taskId].tState = EVOSTATE_RESTRICTED_WAIT;
+                break;
+            }
             StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             gTasks[taskId].tState++;
@@ -831,6 +843,13 @@ static void Task_EvolutionScene(u8 taskId)
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
                 gTasks[taskId].tState++;
             }
+        }
+        break;
+    case EVOSTATE_RESTRICTED_WAIT:
+        if (!IsTextPrinterActiveOnWindow(0))
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            gTasks[taskId].tState = EVOSTATE_END;
         }
         break;
     case EVOSTATE_END:
@@ -1125,6 +1144,15 @@ static void Task_TradeEvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case T_EVOSTATE_INTRO_MSG:
+        if (!CanEvolveMonWithinRestrictedLimit(mon, gTasks[taskId].tPostEvoSpecies))
+        {
+            StringExpandPlaceholders(gStringVar4, gText_RestrictedEvolutionBlocked);
+            DrawTextOnTradeWindow(0, gStringVar4, 1);
+            gSpecialVar_Result = EVO_EVENT_INTERRUPTED;
+            gTasks[taskId].tEvoWasStopped = TRUE;
+            gTasks[taskId].tState = T_EVOSTATE_END;
+            break;
+        }
         StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
         DrawTextOnTradeWindow(0, gStringVar4, 1);
         gTasks[taskId].tState++;

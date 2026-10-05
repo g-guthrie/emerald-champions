@@ -13,6 +13,7 @@
 #include "legendary_signs.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "roamer.h"
 #include "battle.h"
@@ -88,8 +89,29 @@ void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem)
 // Sign's caught bit is the record (it tells regional forms such as Galarian
 // Articuno apart, which share a Pokédex number). Paradox Pokémon have no gate
 // and answer to the Pokédex.
+void RecordOwnedBloodmoon(void)
+{
+    if (FlagGet(FLAG_EC_CAUGHT_URSALUNA_BLOODMOON))
+        return;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES_OR_EGG) == SPECIES_URSALUNA_BLOODMOON)
+        {
+            FlagSet(FLAG_EC_CAUGHT_URSALUNA_BLOODMOON);
+            return;
+        }
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            if (GetBoxMonData(GetBoxedMonPtr(box, slot), MON_DATA_SPECIES_OR_EGG) == SPECIES_URSALUNA_BLOODMOON)
+            {
+                FlagSet(FLAG_EC_CAUGHT_URSALUNA_BLOODMOON);
+                return;
+            }
+}
+
 bool32 IsWildSlotSpeciesAcquirable(enum Species species)
 {
+    if (species == SPECIES_URSALUNA_BLOODMOON)
+        return !FlagGet(FLAG_EC_CAUGHT_URSALUNA_BLOODMOON);
     switch (GetRestrictedPartyClass(species))
     {
     case RESTRICTED_PARTY_NONE:
@@ -633,6 +655,8 @@ bool32 BufferLegendaryRelicsHeldOnCatch(enum Species species, u8 *dest)
 void MarkLegendarySignCaughtBySpecies(enum Species species)
 {
     species = SanitizeSpeciesId(species);
+    if (species == SPECIES_URSALUNA_BLOODMOON)
+        FlagSet(FLAG_EC_CAUGHT_URSALUNA_BLOODMOON);
     enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
     u16 objectFlag;
 

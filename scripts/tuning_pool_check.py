@@ -211,7 +211,7 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
             problems.append(f"{item} is held by {count} members but no restocking source exists by {milestone} "
                             f"(only {items[item]['source']['kind']}: {items[item]['source']['detail']})")
     if len(restricted) > 1:
-        problems.append("more than one Legendary/Mythical/Ultra Beast/Paradox: "
+        problems.append("more than one restricted Pokemon (Legendary/Mythical/Ultra Beast/Paradox, Gholdengo or either Ursaluna form): "
                         + ", ".join(f"slot {s} {sp} ({c})" for s, sp, c in restricted)
                         + " (src/pokemon.c GetRestrictedPartyClass / PlayerPartyWithinRestrictedLimit)")
     if len(mega_slots) > 1:

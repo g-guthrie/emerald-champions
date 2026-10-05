@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at 7974fa51d0 by scripts/manifest_text.py. 317 battles, through Buffel.
+Generated from source at b31dabd49b by scripts/manifest_text.py. 317 battles, through Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -7,7 +7,7 @@ HOW TO USE
   An optional fight taken later may also use what opened in between, but tune it at its first point.
   All your Pokemon are at the step's level cap (Leveler). Evolutions still need their own condition
   (level, stone, friendship, trade, time, move) and the item or move must already be available.
-  [L] = Legendary, Mythical, Ultra Beast or Paradox: at most one of these in a party in total.
+  [R] = Restricted: Legendary, Mythical, Ultra Beast, Paradox, Gholdengo or either Ursaluna; one total per party.
   Starters: choose one region, then take up to two of its three starters. This reference follows
   Treecko + Mudkip; other starter choices swap those two lines. The rival keeps the third starter.
   Items are held battle items only (Mega Stones are listed on their own line). Key items, medicine,
@@ -18,23 +18,24 @@ HOW TO USE
 ====================================================================================================
 STEP 1 - level cap 14
   Start of the game
-  New Pokemon (29):
+  New Pokemon (27):
     Starter - Littleroot Town: Mudkip, Treecko
-    Wild - Route 101: Fidough, Hoppip, Lillipup, Pawmi, Poochyena, Scatterbug (Icy Snow), Sewaddle,
-        Wurmple, Zigzagoon, Zorua
-    Wild - Route 103: Blitzle, Grubbin, Kricketot, Pachirisu, Rockruff, Shellos (West), Shinx,
-        Snubbull, Toxel, Wingull
+    Wild - Route 101: Fidough, Hoppip, Lillipup, Pawmi, Poochyena, Scatterbug (Icy Snow), Wurmple,
+        Zigzagoon, Zorua
+    Wild - Route 103: Blitzle, Grubbin, Kricketot, Rockruff, Shellos (West), Shinx, Snubbull, Toxel,
+        Wingull
     Evolve: Beautifly (from Silcoon), Cascoon (from Wurmple), Dustox (from Cascoon),
         Kricketune (from Kricketot), Silcoon (from Wurmple),
         Spewpa (Icy Snow) (from Scatterbug (Icy Snow)), Vivillon (Icy Snow) (from Spewpa (Icy Snow))
-  New held items (9): Cell Battery (buy, Oldale Town Mart),
+  New held items (9): Cell Battery (buy, Oldale Town Pokemon Center 1F),
       Choice Band (buy, Oldale Town Pokemon Center 1F),
       Choice Scarf (buy, Oldale Town Pokemon Center 1F),
       Choice Specs (buy, Oldale Town Pokemon Center 1F),
       Eviolite (buy, Oldale Town Pokemon Center 1F),
       Focus Sash (buy, Oldale Town Pokemon Center 1F),
-      Leftovers (buy, Oldale Town Pokemon Center 1F), Mental Herb (buy, Oldale Town Mart),
-      Red Card (buy, Oldale Town Mart)
+      Leftovers (buy, Oldale Town Pokemon Center 1F),
+      Mental Herb (buy, Oldale Town Pokemon Center 1F),
+      Red Card (buy, Oldale Town Pokemon Center 1F)
   Battles that open here:
     #1 Rival May - Route 103
         foe levels Easy 11 / Med 18-19 / Hard 20-23
@@ -82,10 +83,10 @@ STEP 3 - level cap 14
 STEP 4 - level cap 14
   After beating: Team Aqua Grunt (#10)
   New Pokemon (14):
-    Wild - Petalburg Woods: Blipbug, Buneary, Caterpie, Foongus, Larvesta, Paras, Pichu, Shroomish,
-        Slakoth
-    Evolve: Butterfree (from Metapod), Dottler (from Blipbug), Lopunny (from Buneary),
-        Metapod (from Caterpie), Pikachu (from Pichu)
+    Wild - Petalburg Woods: Blipbug, Caterpie, Foongus, Larvesta, Paras, Pichu, Shroomish, Slakoth,
+        Togepi
+    Evolve: Butterfree (from Metapod), Dottler (from Blipbug), Metapod (from Caterpie),
+        Pikachu (from Pichu), Togetic (from Togepi)
   New held items (7): Aspear Berry (Route 104 Pretty Petal Flower Shop),
       Cheri Berry (Route 104 Pretty Petal Flower Shop),
       Chesto Berry (Route 104 Pretty Petal Flower Shop),
@@ -103,21 +104,22 @@ STEP 4 - level cap 14
 ====================================================================================================
 STEP 5 - level cap 14
   After beating: Twins Gina & Mia (#13)
-  New Pokemon (35):
-    Wild - Route 115: Wailmer
+  New Pokemon (29):
+    Wild - Route 115: Wailmer, Wishiwashi (Solo)
     Wild - Route 116: Dreepy, Gimmighoul (Roaming), Houndour, Joltik, Mareep, Nickit, Nincada,
-        Riolu, Rookidee, Skiddo, Skitty, Starly
-    Wild - Seaspray Cave: Krabby, Psyduck, Stunfisk, Stunfisk (Galar), Tynamo, Wishiwashi (Solo),
-        Woobat, Wooper, Zubat
+        Rookidee, Skiddo, Skitty, Starly
+    Wild - Seaspray Cave: Krabby, Psyduck, Stunfisk (Galar), Tynamo, Wooper, Zubat
     Wild - Seaspray Cave B1F: Bergmite, Frigibax, Seel, Smoochum, Sneasel, Snorunt, Spheal, Swinub,
         Vanillite
-    Evolve: Froslass (from Snorunt), Lucario (from Riolu), Staravia (from Starly),
-        Swoobat (from Woobat)
-  New held items (7): Float Stone (buy, Oldale Town Pokemon Center 1F),
+    Evolve: Staravia (from Starly)
+  New held items (12): Damp Rock (buy, Petalburg City Pokemon Center 1F),
+      Float Stone (buy, Oldale Town Pokemon Center 1F),
       Grass Gem (buy, Oldale Town Pokemon Center 1F), Icicle Plate (Seaspray Cave B1F),
-      Kings Rock (Seaspray Cave B1F), Quick Claw (buy, Petalburg City Pokemon Center 1F),
+      Icy Rock (buy, Petalburg City Pokemon Center 1F), Kings Rock (Seaspray Cave B1F),
+      Never Melt Ice (Seaspray Cave), Quick Claw (buy, Petalburg City Pokemon Center 1F),
+      Rocky Helmet (buy, Oldale Town Pokemon Center 1F),
+      Smooth Rock (buy, Petalburg City Pokemon Center 1F),
       Steel Gem (buy, Petalburg City Pokemon Center 1F), Wise Glasses (Rustboro City)
-  New Mega Stones (no Mega Ring yet): Abomasite, Absolite Z, Golurkite
   Battles that open here:
     #14 Youngster Joey - Route 116
         foe levels Easy 10 / Med 16-17 / Hard 18-19
@@ -139,7 +141,7 @@ STEP 5 - level cap 14
 ====================================================================================================
 STEP 6 - level cap 20
   After beating: Hiker Devan (#17), Leader Roxanne (#21)
-  New Pokemon (95):
+  New Pokemon (85):
     Wild - Petalburg Woods: Cherubi, Pidgey, Pikipek
     Wild - Petalburg Woods 2: Beedrill, Bounsweet, Kakuna, Morelull, Panpour, Pansage, Pansear,
         Venipede, Weedle
@@ -148,30 +150,30 @@ STEP 6 - level cap 20
     Wild - Route 103: Audino
     Wild - Route 104: Patrat, Yungoos
     Wild - Route 116: Pancham, Purrloin
-    Wild - Rusturf Tunnel: Chingling, Drilbur, Dunsparce, Larvitar, Machop, Noibat, Roggenrola,
-        Teddiursa, Whismur
+    Wild - Rusturf Tunnel: Drilbur, Dunsparce, Larvitar, Machop, Noibat, Roggenrola, Teddiursa,
+        Whismur
     Wild - Seaspray Cave B1F: Cryogonal, Cubchoo, Delibird, Snover
-    Evolve: Ambipom (from Aipom), Azumarill (from Marill), Bibarel (from Bidoof),
-        Charjabug (from Grubbin), Chimecho (from Chingling), Corvisquire (from Rookidee),
-        Diggersby (from Bunnelby), Dudunsparce (Three Segment) (from Dunsparce),
-        Dudunsparce (Two Segment) (from Dunsparce), Flaaffy (from Mareep),
+    Evolve: Azumarill (from Marill), Bibarel (from Bidoof), Charjabug (from Grubbin),
+        Corvisquire (from Rookidee), Diggersby (from Bunnelby), Flaaffy (from Mareep),
         Fletchinder (from Fletchling), Floette (White) (from Flabébé), Furret (from Sentret),
-        Gallade (from Kirlia), Grovyle (from Treecko), Gumshoos (from Yungoos),
-        Gyarados (from Magikarp), Herdier (from Lillipup), Kirlia (from Ralts),
-        Leavanny (from Swadloon), Ledian (from Ledyba), Liepard (from Purrloin),
+        Grovyle (from Treecko), Gumshoos (from Yungoos), Gyarados (from Magikarp),
+        Herdier (from Lillipup), Kirlia (from Ralts), Ledian (from Ledyba), Liepard (from Purrloin),
         Linoone (from Zigzagoon), Loudred (from Whismur), Luxio (from Shinx),
         Marshtomp (from Mudkip), Mightyena (from Poochyena), Mothim (Plant) (from Burmy (Plant)),
         Ninjask (from Nincada), Oinkologne (F) (from Lechonk), Oinkologne (M) (from Lechonk),
         Pawmo (from Pawmi), Pawmot (from Pawmo), Pidgeotto (from Pidgey), Quagsire (from Wooper),
         Shedinja (from Nincada), Skiploom (from Hoppip), Slowking (from Slowpoke),
-        Steenee (from Bounsweet), Swadloon (from Sewaddle), Thievul (from Nickit),
-        Trumbeak (from Pikipek), Tsareena (from Steenee), Vigoroth (from Slakoth),
-        Watchog (from Patrat), Wormadam (Plant) (from Burmy (Plant)), Yanmega (from Yanma)
+        Steenee (from Bounsweet), Thievul (from Nickit), Trumbeak (from Pikipek),
+        Vigoroth (from Slakoth), Watchog (from Patrat), Wormadam (Plant) (from Burmy (Plant))
     Cut-tree habitat - Petalburg Woods: Aipom, Applin, Burmy (Plant), Phantump, Pineco, Skwovet
-  New held items (5): Absorb Bulb (buy, Oldale Town Mart),
-      Big Root (buy, Oldale Town Pokemon Center 1F), Eject Button (buy, Oldale Town Mart),
-      Insect Plate (Petalburg Woods 3), Miracle Seed (buy, Petalburg City Pokemon Center 1F)
-  New Mega Stones (no Mega Ring yet): Audinite, Chimechite, Delphoxite
+  New held items (9): Absorb Bulb (buy, Oldale Town Mart),
+      Big Root (buy, Petalburg City Pokemon Center 1F), Eject Button (buy, Oldale Town Mart),
+      Insect Plate (Petalburg Woods 3), Luminous Moss (buy, Oldale Town Pokemon Center 1F),
+      Miracle Seed (buy, Petalburg City Pokemon Center 1F),
+      Shell Bell (buy, Petalburg City Pokemon Center 1F),
+      Toxic Orb (buy, Petalburg City Pokemon Center 1F),
+      Wide Lens (buy, Oldale Town Pokemon Center 1F)
+  New Mega Stones (no Mega Ring yet): Delphoxite
   Battles that open here:
     #22 Lady Sarah - Route 116
         foe levels Easy 15 / Med 21-23 / Hard 22-25
@@ -183,44 +185,41 @@ STEP 6 - level cap 20
 ====================================================================================================
 STEP 7 - level cap 20
   After beating: Team Aqua Grunt (#24)
-  New Pokemon (94):
+  New Pokemon (80):
     Wild - Dewford Manor 1F: Drowzee, Gastly, Glameow, Hoothoot, Litwick, Mime Jr., Rattata,
         Sinistea (Phony), Slowpoke (Galar), Solosis
     Wild - Dewford Meadow: Combee, Cutiefly, Flabébé, Flabébé, Flabébé, Milcery, Oricorio (Baile),
         Spritzee, Swirlix
     Wild - Dewford Town: Mantyke
-    Wild - Granite Cave 1F: Abra, Aron, Axew, Geodude, Glimmet, Hawlucha, Kubfu [L], Nacli,
+    Wild - Granite Cave 1F: Abra, Aron, Axew, Geodude, Glimmet, Hawlucha, Kubfu [R], Nacli,
         Rolycoly, Timburr
     Wild - Granite Cave B1F: Bronzor, Carbink, Cubone, Ditto, Klefki, Onix, Sableye, Sneasel (Hisui)
-    Wild - Granite Cave B2F: Bagon, Duraludon, Gible, Sandshrew, Tinkatink
+    Wild - Granite Cave B2F: Bagon, Gible, Sandshrew, Tinkatink
     Wild - Granite Cave Stevens Room: Beldum
     Wild - Route 106: Buizel, Chatot, Clauncher, Crabrawler, Exeggcute, Inkay, Makuhita, Pidove
     Wild - Route 107: Arrokuda, Finneon
     Wild - Route 109: Luvdisc
-    Wild - Route 110: Doduo, Ekans, Electrike, Gulpin, Magnemite, Minun, Plusle, Shroodle, Stunky,
-        Trubbish, Varoom, Yamper
+    Wild - Route 110: Doduo, Ekans, Electrike, Gulpin, Magnemite, Minun, Pachirisu, Plusle,
+        Shroodle, Stunky, Trubbish, Varoom, Yamper
     Wild - Slateport City: Frillish, Horsea
     In-game trade - Dewford Town Hall: Bombirdier
-    Evolve: Blissey (from Chansey), Carkol (from Rolycoly), Chansey (from Happiny),
-        Crabominable (from Crabrawler), Delcatty (from Skitty), Exeggutor (from Exeggcute),
-        Exeggutor (Alola) (from Exeggcute), Floette (Orange) (from Flabébé),
-        Floette (Red) (from Flabébé), Floette (Yellow) (from Flabébé), Kadabra (from Abra),
-        Ludicolo (from Lombre), Mantine (from Mantyke), Metang (from Beldum),
-        Mr. Mime (from Mime Jr.), Noctowl (from Hoothoot), Raichu (from Pikachu),
-        Raticate (from Rattata), Shiftry (from Nuzleaf), Simipour (from Panpour),
-        Simisage (from Pansage), Simisear (from Pansear), Vikavolt (from Charjabug)
+    Evolve: Carkol (from Rolycoly), Floette (Orange) (from Flabébé), Floette (Red) (from Flabébé),
+        Floette (Yellow) (from Flabébé), Kadabra (from Abra), Mantine (from Mantyke),
+        Metang (from Beldum), Noctowl (from Hoothoot), Raticate (from Rattata)
     Form change: Oricorio (Pom Pom) (from Oricorio (Baile))
-  New held items (19): Dread Plate (Dewford Manor 1F), Everstone (Granite Cave B2F),
-      Expert Belt (buy, Oldale Town Pokemon Center 1F), Fairy Gem (Dewford Meadow),
-      Full Incense (buy, Slateport City), Lax Incense (buy, Slateport City),
-      Lucky Punch (buy, Petalburg City Pokemon Center 1F), Luck Incense (buy, Slateport City),
-      Odd Incense (buy, Slateport City), Pure Incense (buy, Slateport City),
+  New held items (23): Air Balloon (buy, Oldale Town Pokemon Center 1F),
+      Dread Plate (Dewford Manor 1F), Everstone (Granite Cave B2F),
+      Expert Belt (buy, Dewford Town Pokemon Center 1F), Fairy Gem (Dewford Meadow),
+      Full Incense (buy, Slateport City), Heat Rock (buy, Dewford Town Pokemon Center 1F),
+      Lax Incense (buy, Slateport City), Light Clay (buy, Dewford Town Pokemon Center 1F),
+      Luck Incense (buy, Slateport City), Odd Incense (buy, Slateport City),
+      Protective Pads (buy, Oldale Town Pokemon Center 1F), Pure Incense (buy, Slateport City),
       Ring Target (buy, Oldale Town Pokemon Center 1F), Rock Incense (buy, Slateport City),
       Rose Incense (buy, Slateport City), Scope Lens (buy, Oldale Town Pokemon Center 1F),
       Sea Incense (buy, Slateport City), Silk Scarf (buy, Dewford Town Pokemon Center 1F),
-      Soft Sand (buy, Dewford Town Pokemon Center 1F), Wave Incense (buy, Slateport City),
+      Soft Sand (buy, Dewford Town Pokemon Center 1F),
+      Throat Spray (buy, Dewford Town Pokemon Center 1F), Wave Incense (buy, Slateport City),
       Zoom Lens (Route 109)
-  New Mega Stones (no Mega Ring yet): Alakazite, Banettite, Butterfrenite, Meganiumite, Steelixite
   Battles that open here:
     #25 Rival May - Route 104
         foe levels Easy 16 / Med 30 / Hard 36-37
@@ -228,8 +227,8 @@ STEP 7 - level cap 20
 ====================================================================================================
 STEP 8 - level cap 20
   After beating: Rival May (#25)
-  New held items (2): Flying Gem (buy, Petalburg City Pokemon Center 1F),
-      Ground Gem (buy, Dewford Town Pokemon Center 1F)
+  New held items (2): Flying Gem (buy, Dewford Town Pokemon Center 1F),
+      Ground Gem (buy, Petalburg City Pokemon Center 1F)
   Battles that open here:
     #26 Fisherman Ned - Route 106
         foe levels Easy 15 / Med 23-24 / Hard 25-27
@@ -266,20 +265,21 @@ STEP 8 - level cap 20
 ====================================================================================================
 STEP 9 - level cap 30
   After beating: Rich Boy Dawson (#22), Leader Brawly (#33)
-  New Pokemon (77):
-    Wild - Dewford Meadow: Meloetta (Aria) [L]
-    Wild - Granite Cave B2F: Cobalion [L]
+  New Pokemon (89):
     Evolve: Alcremie (Strawberry Vanilla Cream) (from Milcery), Ampharos (from Flaaffy),
         Araquanid (from Dewpider), Arbok (from Ekans), Barraskewda (from Arrokuda),
-        Bellossom (from Gloom), Boldore (from Roggenrola), Boltund (from Yamper),
-        Breloom (from Shroomish), Cherrim (Overcast) (from Cherubi), Crawdaunt (from Corphish),
-        Crobat (from Golbat), Dachsbun (from Fidough), Dolliv (from Smoliv), Floatzel (from Buizel),
-        Gabite (from Gible), Gardevoir (from Kirlia), Gastrodon (West) (from Shellos (West)),
-        Gloom (from Oddish), Golbat (from Zubat), Grafaiai (from Shroodle),
-        Granbull (from Snubbull), Graveler (from Geodude), Greedent (from Skwovet),
-        Gurdurr (from Timburr), Hariyama (from Makuhita), Haunter (from Gastly),
-        Houndoom (from Houndour), Hypno (from Drowzee), Jumpluff (from Skiploom),
-        Jynx (from Smoochum), Kingler (from Krabby), Lokix (from Nymble), Luxray (from Luxio),
+        Bellossom (from Gloom), Blissey (from Chansey), Boldore (from Roggenrola),
+        Boltund (from Yamper), Breloom (from Shroomish), Chansey (from Happiny),
+        Cherrim (Overcast) (from Cherubi), Crabominable (from Crabrawler),
+        Crawdaunt (from Corphish), Crobat (from Golbat), Dachsbun (from Fidough),
+        Delcatty (from Skitty), Dolliv (from Smoliv), Exeggutor (from Exeggcute),
+        Exeggutor (Alola) (from Exeggcute), Floatzel (from Buizel), Gabite (from Gible),
+        Gardevoir (from Kirlia), Gastrodon (West) (from Shellos (West)), Gloom (from Oddish),
+        Golbat (from Zubat), Grafaiai (from Shroodle), Granbull (from Snubbull),
+        Graveler (from Geodude), Greedent (from Skwovet), Gurdurr (from Timburr),
+        Hariyama (from Makuhita), Haunter (from Gastly), Houndoom (from Houndour),
+        Hypno (from Drowzee), Jumpluff (from Skiploom), Jynx (from Smoochum), Kingler (from Krabby),
+        Lokix (from Nymble), Ludicolo (from Lombre), Luxray (from Luxio),
         Lycanroc (Midday) (from Rockruff), Lycanroc (Midnight) (from Rockruff),
         Machoke (from Machop), Magneton (from Magnemite), Magnezone (from Magneton),
         Malamar (from Inkay), Manectric (from Electrike), Marowak (from Cubone),
@@ -287,16 +287,19 @@ STEP 9 - level cap 30
         Orbeetle (from Dottler), Palpitoad (from Tympole), Parasect (from Paras),
         Pelipper (from Wingull), Persian (from Meowth), Politoed (from Poliwhirl),
         Poliwhirl (from Poliwag), Poliwrath (from Poliwhirl), Pupitar (from Larvitar),
-        Ribombee (from Cutiefly), Sandslash (from Sandshrew), Scolipede (from Whirlipede),
-        Shelgon (from Bagon), Shiinotic (from Morelull), Swalot (from Gulpin),
-        Swellow (from Taillow), Tinkatuff (from Tinkatink), Toedscruel (from Toedscool),
-        Toucannon (from Trumbeak), Toxtricity (Amped) (from Toxel),
-        Toxtricity (Low Key) (from Toxel), Tranquill (from Pidove), Ursaring (from Teddiursa),
-        Vespiquen (from Combee), Victreebel (from Weepinbell), Vileplume (from Gloom),
+        Raichu (from Pikachu), Ribombee (from Cutiefly), Sandslash (from Sandshrew),
+        Scolipede (from Whirlipede), Shelgon (from Bagon), Shiftry (from Nuzleaf),
+        Shiinotic (from Morelull), Simipour (from Panpour), Simisage (from Pansage),
+        Simisear (from Pansear), Swalot (from Gulpin), Swellow (from Taillow),
+        Tinkatuff (from Tinkatink), Toedscruel (from Toedscool), Toucannon (from Trumbeak),
+        Toxtricity (Amped) (from Toxel), Toxtricity (Low Key) (from Toxel), Tranquill (from Pidove),
+        Tsareena (from Steenee), Ursaring (from Teddiursa), Vespiquen (from Combee),
+        Victreebel (from Weepinbell), Vikavolt (from Charjabug), Vileplume (from Gloom),
         Weepinbell (from Bellsprout), Whirlipede (from Venipede), Zebstrika (from Blitzle),
         Zoroark (from Zorua)
-  New held items (4): Binding Band (buy, Dewford Town Pokemon Center 1F),
+  New held items (5): Binding Band (buy, Petalburg City Pokemon Center 1F),
       Loaded Dice (buy, Oldale Town Pokemon Center 1F),
+      Lucky Punch (buy, Dewford Town Pokemon Center 1F),
       Snowball (buy, Oldale Town Pokemon Center 1F), White Herb (buy, Oldale Town Pokemon Center 1F)
   New Mega Stones (no Mega Ring yet): Emboarite
   Battles that open here:
@@ -332,17 +335,10 @@ STEP 13 - level cap 30
 
 ====================================================================================================
 STEP 14 - level cap 30
-  After beating: Slateport Battle Tent — fight 3 of 3 (#45), Pokefan Kaleb (#46)
-  New Pokemon (14):
+  After beating: Pokefan Kaleb (#46)
+  New Pokemon (4):
     Wild - Route 110: Chinchou, Tadbulb
-    Evolve: Alakazam (from Kadabra), Bellibolt (from Tadbulb), Conkeldurr (from Gurdurr),
-        Gengar (from Haunter), Gigalith (from Boldore), Golem (from Graveler),
-        Lanturn (from Chinchou), Machamp (from Machoke), Sneasler (from Sneasel (Hisui)),
-        Steelix (from Onix), Trevenant (from Phantump), Weavile (from Sneasel)
-  New held items (5): Deep Sea Scale (Slateport City Battle Tent Lobby),
-      Deep Sea Tooth (Slateport City Battle Tent Lobby),
-      Metal Coat (Slateport City Battle Tent Lobby), Razor Claw (Slateport City Battle Tent Lobby),
-      Razor Fang (Slateport City Battle Tent Lobby)
+    Evolve: Bellibolt (from Tadbulb), Lanturn (from Chinchou)
   Battles that open here:
     #47 Lass Sally - Route 110 Trick House Puzzle 1
         foe levels Easy 23 / Med 31-33 / Hard 32-36
@@ -360,41 +356,39 @@ STEP 14 - level cap 30
 ====================================================================================================
 STEP 15 - level cap 30
   After beating: Rival May (#49)
-  New Pokemon (101):
+  New Pokemon (92):
     Wild - Route 111: Barboach
     Wild - Route 117: Wooper (Paldea)
-    Wild - Verdanturf Meadow: Cottonee, Espurr, Flabébé, Floette (Eternal), Hatenna, Indeedee (M),
-        Iron Leaves [L], Munna, Ponyta (Galar), Stufful, Togetic, Vivillon (Pokeball)
-    Gift egg - Route 117 Pokemon Day Care: Togepi
+    Wild - Verdanturf Meadow: Buneary, Cottonee, Espurr, Flabébé, Floette (Eternal), Hatenna,
+        Indeedee (M), Munna, Ponyta (Galar), Stufful, Vivillon (Pokeball)
     Game Corner - Mauville City Game Corner: Bulbasaur, Charmander, Chespin, Chikorita, Chimchar,
         Cyndaquil, Diglett (Alola), Fennekin, Froakie, Fuecoco, Geodude (Alola), Grimer (Alola),
-        Grookey, Litten, Marowak (Alola), Meowth (Alola), Munchlax, Oshawott, Piplup, Popplio,
-        Porygon, Quaxly, Raichu (Alola), Rattata (Alola), Rowlet, Sandshrew (Alola), Scorbunny,
-        Snivy, Sobble, Sprigatito, Squirtle, Tepig, Torchic, Totodile, Turtwig, Vulpix (Alola)
-    Evolve: Aromatisse (from Spritzee), Bayleef (from Chikorita), Bewear (from Stufful),
-        Braixen (from Fennekin), Brionne (from Popplio), Charmeleon (from Charmander),
-        Clodsire (from Wooper (Paldea)), Combusken (from Torchic), Crocalor (from Fuecoco),
-        Croconaw (from Totodile), Dartrix (from Rowlet), Dewott (from Oshawott),
-        Drizzile (from Sobble), Dugtrio (Alola) (from Diglett (Alola)), Feraligatr (from Croconaw),
+        Grookey, Litten, Marowak (Alola), Meowth (Alola), Oshawott, Piplup, Popplio, Quaxly,
+        Raichu (Alola), Rattata (Alola), Rowlet, Sandshrew (Alola), Scorbunny, Snivy, Sobble,
+        Sprigatito, Squirtle, Tepig, Torchic, Totodile, Turtwig, Vulpix (Alola)
+    Evolve: Bayleef (from Chikorita), Bewear (from Stufful), Braixen (from Fennekin),
+        Brionne (from Popplio), Charmeleon (from Charmander), Clodsire (from Wooper (Paldea)),
+        Combusken (from Torchic), Crocalor (from Fuecoco), Croconaw (from Totodile),
+        Dartrix (from Rowlet), Dewott (from Oshawott), Drizzile (from Sobble),
+        Dugtrio (Alola) (from Diglett (Alola)), Feraligatr (from Croconaw),
         Floette (Blue) (from Flabébé), Floragato (from Sprigatito), Frogadier (from Froakie),
-        Golem (Alola) (from Graveler (Alola)), Graveler (Alola) (from Geodude (Alola)),
-        Grotle (from Turtwig), Ivysaur (from Bulbasaur), Meowstic (F) (from Espurr),
-        Meowstic (M) (from Espurr), Monferno (from Chimchar), Musharna (from Munna),
-        Ninetales (Alola) (from Vulpix (Alola)), Persian (Alola) (from Meowth (Alola)),
-        Pignite (from Tepig), Porygon-Z (from Porygon2), Porygon2 (from Porygon),
-        Prinplup (from Piplup), Quaxwell (from Quaxly), Quilava (from Cyndaquil),
-        Quilladin (from Chespin), Raboot (from Scorbunny), Raticate (Alola) (from Rattata (Alola)),
-        Sandslash (Alola) (from Sandshrew (Alola)), Servine (from Snivy), Slurpuff (from Swirlix),
-        Snorlax (from Munchlax), Spewpa (Pokeball) (from Scatterbug (Pokeball)),
-        Thwackey (from Grookey), Torracat (from Litten), Wartortle (from Squirtle),
-        Whimsicott (from Cottonee), Whiscash (from Barboach)
+        Graveler (Alola) (from Geodude (Alola)), Grotle (from Turtwig), Ivysaur (from Bulbasaur),
+        Lopunny (from Buneary), Meowstic (F) (from Espurr), Meowstic (M) (from Espurr),
+        Monferno (from Chimchar), Musharna (from Munna), Ninetales (Alola) (from Vulpix (Alola)),
+        Persian (Alola) (from Meowth (Alola)), Pignite (from Tepig), Prinplup (from Piplup),
+        Quaxwell (from Quaxly), Quilava (from Cyndaquil), Quilladin (from Chespin),
+        Raboot (from Scorbunny), Raticate (Alola) (from Rattata (Alola)),
+        Sandslash (Alola) (from Sandshrew (Alola)), Servine (from Snivy),
+        Spewpa (Pokeball) (from Scatterbug (Pokeball)), Thwackey (from Grookey),
+        Torracat (from Litten), Wartortle (from Squirtle), Whimsicott (from Cottonee),
+        Whiscash (from Barboach)
     Form change: Oricorio (Pau) (from Oricorio (Baile)), Oricorio (Sensu) (from Oricorio (Baile))
     Breed: Scatterbug (Pokeball) (egg from Spewpa (Pokeball))
-  New held items (8): Black Glasses (Route 116), Bright Powder (buy, Oldale Town Pokemon Center 1F),
-      Leek (buy, Dewford Town Pokemon Center 1F), Light Ball (buy, Dewford Town Pokemon Center 1F),
+  New held items (9): Assault Vest (Route 110), Black Glasses (Route 116),
+      Bright Powder (Route 117), Leek (buy, Dewford Town Pokemon Center 1F),
+      Light Ball (buy, Dewford Town Pokemon Center 1F), Lum Berry (Verdanturf Meadow),
       Metal Powder (buy, Dewford Town Pokemon Center 1F), Muscle Band (Route 116),
-      Sitrus Berry (Verdanturf Meadow), Thick Club (buy, Dewford Town Pokemon Center 1F)
-  New Mega Stones (no Mega Ring yet): Manectite, Skarmorite
+      Sitrus Berry (Verdanturf Meadow)
   Battles that open here:
     #53 Psychic Jaclyn - Route 110
         foe levels Easy 23 / Med 31 / Hard 33
@@ -435,6 +429,8 @@ STEP 15 - level cap 30
 ====================================================================================================
 STEP 16 - level cap 30
   After beating: Lass Sally (#47)
+  New Pokemon (2):
+    Evolve: Froslass (from Snorunt), Gallade (from Kirlia)
   Battles that open here:
     #71 Youngster Eddie - Route 110 Trick House Puzzle 1
         foe levels Easy 23 / Med 31-32 / Hard 32-34
@@ -457,82 +453,97 @@ STEP 17 - level cap 30
 STEP 18 - level cap 30
   After beating: Winstrate Victor (#64), Psychic Brandi (#63), Youngster Deandre (#68),
     Hiker Mike (#69), Verdanturf Battle Tent — fight 1 of 3 (#70)
-  New Pokemon (29):
-    Wild - Route 117: Deerling (Spring), Eevee, Farfetch'd, Farfetch'd (Galar), Gossifleur,
-        Illumise, Karrablast, Minccino, Petilil, Shelmet, Volbeat, Wooloo
+  New Pokemon (32):
+    Wild - Route 117: Chingling, Deerling (Spring), Eevee, Farfetch'd, Farfetch'd (Galar),
+        Gossifleur, Illumise, Karrablast, Minccino, Petilil, Sewaddle, Shelmet, Volbeat, Wooloo
     Wild - Route 118: Carvanha
-    Evolve: Accelgor (from Shelmet), Dubwool (from Wooloo), Eldegoss (from Gossifleur),
-        Escavalier (from Karrablast), Espeon (from Eevee), Flareon (from Eevee),
-        Glaceon (from Eevee), Jolteon (from Eevee), Leafeon (from Eevee), Lilligant (from Petilil),
+    Evolve: Chimecho (from Chingling), Dubwool (from Wooloo), Eldegoss (from Gossifleur),
+        Espeon (from Eevee), Flareon (from Eevee), Glaceon (from Eevee), Jolteon (from Eevee),
+        Leafeon (from Eevee), Leavanny (from Swadloon), Lilligant (from Petilil),
         Lilligant (Hisui) (from Petilil), Sharpedo (from Carvanha),
-        Sirfetch'd (from Farfetch'd (Galar)), Sylveon (from Eevee), Umbreon (from Eevee),
-        Vaporeon (from Eevee)
-  New held items (1): Life Orb (buy, Dewford Town Pokemon Center 1F)
-  New Mega Stones (no Mega Ring yet): Sablenite
+        Sirfetch'd (from Farfetch'd (Galar)), Swadloon (from Sewaddle), Sylveon (from Eevee),
+        Umbreon (from Eevee), Vaporeon (from Eevee)
+  New held items (2): Eject Pack (buy, Rustboro City Pokemon Center 1F),
+      Life Orb (buy, Rustboro City Pokemon Center 1F)
   Battles that open here:
     #76 Verdanturf Battle Tent — fight 2 of 3 - Verdanturf Town Battle Tent Lobby
 
 ====================================================================================================
 STEP 19 - level cap 40
   After beating: Leader Wattson (#75)
-  New Pokemon (169):
-    Wild - Fiery Path: Diglett, Durant, Entei [L], Grimer, Heatmor, Koffing, Magby, Sizzlipede,
-        Slugma, Torkoal
+  New Pokemon (196):
+    Wild - Fiery Path: Diglett, Durant, Entei [R], Grimer, Heatmor, Koffing, Magby, Sizzlipede,
+        Slugma, Torkoal, Woobat
     Wild - Granite Cave B2F: Nosepass
     Wild - Route 103: Clamperl, Qwilfish, Staryu
     Wild - Route 106: Binacle, Dwebble, Shellder, Wimpod
-    Wild - Route 110: Raikou [L]
-    Wild - Route 111: Basculin (Red Striped), Drednaw, Shuckle
+    Wild - Route 110: Raikou [R]
+    Wild - Route 111: Basculin (Red Striped), Drednaw
     Wild - Route 112: Hitmonchan, Klawf, Numel, Ponyta, Rufflet, Sawk, Tauros (Paldea Combat),
-        Throh, Vullaby, Zapdos (Galar) [L]
+        Throh, Vullaby, Zapdos (Galar) [R]
     Wild - Route 113: Bouffalant, Falinks, Mienfoo, Pawniard, Scraggy, Skarmory, Spinda, Spoink
-    Wild - Route 114: Ducklett, Golduck, Phanpy, Probopass, Seviper, Skorupi, Swablu, Zangoose
+    Wild - Route 114: Ducklett, Golduck, Phanpy, Probopass, Seviper, Shuckle, Skorupi, Swablu,
+        Zangoose
     Wild - Seaspray Cave: Relicanth
-    Evolve: Abomasnow (from Snover), Altaria (from Swablu), Amoonguss (from Foongus),
-        Arboliva (from Dolliv), Arctibax (from Frigibax), Avalugg (from Bergmite),
-        Barbaracle (from Binacle), Beartic (from Cubchoo), Blastoise (from Wartortle),
-        Blaziken (from Combusken), Bronzong (from Bronzor), Camerupt (from Numel),
-        Centiskorch (from Sizzlipede), Charizard (from Charmeleon), Chesnaught (from Quilladin),
-        Cinccino (from Minccino), Cinderace (from Raboot), Clawitzer (from Clauncher),
-        Cloyster (from Shellder), Coalossal (from Carkol), Corviknight (from Corvisquire),
-        Crustle (from Dwebble), Decidueye (from Dartrix), Decidueye (Hisui) (from Dartrix),
-        Delphox (from Braixen), Dewgong (from Seel), Dodrio (from Doduo), Donphan (from Phanpy),
-        Drapion (from Skorupi), Dugtrio (from Diglett), Duosion (from Solosis),
-        Eelektrik (from Tynamo), Eelektross (from Eelektrik), Emboar (from Pignite),
-        Empoleon (from Prinplup), Excadrill (from Drilbur), Exploud (from Loudred),
+    Game Corner - Mauville City Game Corner: Munchlax, Porygon
+    Evolve: Abomasnow (from Snover), Accelgor (from Shelmet), Alakazam (from Kadabra),
+        Altaria (from Swablu), Ambipom (from Aipom), Amoonguss (from Foongus),
+        Arboliva (from Dolliv), Arctibax (from Frigibax), Aromatisse (from Spritzee),
+        Avalugg (from Bergmite), Barbaracle (from Binacle), Beartic (from Cubchoo),
+        Blastoise (from Wartortle), Blaziken (from Combusken), Bronzong (from Bronzor),
+        Camerupt (from Numel), Centiskorch (from Sizzlipede), Charizard (from Charmeleon),
+        Chesnaught (from Quilladin), Cinccino (from Minccino), Cinderace (from Raboot),
+        Clawitzer (from Clauncher), Cloyster (from Shellder), Coalossal (from Carkol),
+        Conkeldurr (from Gurdurr), Corviknight (from Corvisquire), Crustle (from Dwebble),
+        Decidueye (from Dartrix), Decidueye (Hisui) (from Dartrix), Delphox (from Braixen),
+        Dewgong (from Seel), Dodrio (from Doduo), Donphan (from Phanpy), Drapion (from Skorupi),
+        Dudunsparce (Three Segment) (from Dunsparce), Dudunsparce (Two Segment) (from Dunsparce),
+        Dugtrio (from Diglett), Duosion (from Solosis), Eelektrik (from Tynamo),
+        Eelektross (from Eelektrik), Emboar (from Pignite), Empoleon (from Prinplup),
+        Escavalier (from Karrablast), Excadrill (from Drilbur), Exploud (from Loudred),
         Florges (Blue) (from Floette (Blue)), Florges (Orange) (from Floette (Orange)),
         Florges (Red) (from Floette (Red)), Florges (White) (from Floette (White)),
         Florges (Yellow) (from Floette (Yellow)), Forretress (from Pineco), Fraxure (from Axew),
         Galvantula (from Joltik), Garbodor (from Trubbish), Garganacl (from Naclstack),
-        Glimmora (from Glimmet), Gogoat (from Skiddo), Golisopod (from Wimpod),
-        Gorebyss (from Clamperl), Gothorita (from Gothita), Greninja (from Frogadier),
-        Grumpig (from Spoink), Hattrem (from Hatenna), Hitmonlee (from Tyrogue),
-        Hitmontop (from Tyrogue), Honchkrow (from Murkrow), Huntail (from Clamperl),
-        Incineroar (from Torracat), Infernape (from Monferno), Inteleon (from Drizzile),
-        Jellicent (from Frillish), Kingdra (from Seadra), Lairon (from Aron),
-        Lumineon (from Finneon), Magcargo (from Slugma), Magmar (from Magby),
-        Magmortar (from Magmar), Mamoswine (from Piloswine), Meowscarada (from Floragato),
-        Mismagius (from Misdreavus), Morgrem (from Impidimp), Muk (from Grimer),
-        Muk (Alola) (from Grimer (Alola)), Pangoro (from Pancham), Pidgeot (from Pidgeotto),
-        Piloswine (from Swinub), Primarina (from Brionne), Purugly (from Glameow),
-        Pyroar (from Litleo), Quaquaval (from Quaxwell), Rapidash (from Ponyta),
-        Rapidash (Galar) (from Ponyta (Galar)), Revavroom (from Varoom), Rillaboom (from Thwackey),
-        Roserade (from Roselia), Samurott (from Dewott), Sawsbuck (Spring) (from Deerling (Spring)),
-        Sceptile (from Grovyle), Scrafty (from Scraggy), Seadra (from Horsea),
-        Seaking (from Goldeen), Sealeo (from Spheal), Seismitoad (from Palpitoad),
-        Serperior (from Servine), Skeledirge (from Crocalor), Skuntank (from Stunky),
-        Slaking (from Vigoroth), Sliggoo (from Goomy), Slowbro (from Slowpoke),
-        Staraptor (from Staravia), Starmie (from Staryu), Stoutland (from Herdier),
-        Swampert (from Marshtomp), Swanna (from Ducklett), Talonflame (from Fletchinder),
+        Gengar (from Haunter), Gigalith (from Boldore), Glimmora (from Glimmet),
+        Gogoat (from Skiddo), Golem (from Graveler), Golem (Alola) (from Graveler (Alola)),
+        Golisopod (from Wimpod), Gorebyss (from Clamperl), Gothorita (from Gothita),
+        Greninja (from Frogadier), Grumpig (from Spoink), Hattrem (from Hatenna),
+        Hitmonlee (from Tyrogue), Hitmontop (from Tyrogue), Honchkrow (from Murkrow),
+        Huntail (from Clamperl), Incineroar (from Torracat), Infernape (from Monferno),
+        Inteleon (from Drizzile), Jellicent (from Frillish), Kingdra (from Seadra),
+        Lairon (from Aron), Lumineon (from Finneon), Machamp (from Machoke), Magcargo (from Slugma),
+        Magmar (from Magby), Magmortar (from Magmar), Mamoswine (from Piloswine),
+        Meowscarada (from Floragato), Mismagius (from Misdreavus), Morgrem (from Impidimp),
+        Mr. Mime (from Mime Jr.), Muk (from Grimer), Muk (Alola) (from Grimer (Alola)),
+        Pangoro (from Pancham), Pidgeot (from Pidgeotto), Piloswine (from Swinub),
+        Porygon-Z (from Porygon2), Porygon2 (from Porygon), Primarina (from Brionne),
+        Purugly (from Glameow), Pyroar (from Litleo), Quaquaval (from Quaxwell),
+        Rapidash (from Ponyta), Rapidash (Galar) (from Ponyta (Galar)), Revavroom (from Varoom),
+        Rillaboom (from Thwackey), Roserade (from Roselia), Samurott (from Dewott),
+        Sawsbuck (Spring) (from Deerling (Spring)), Sceptile (from Grovyle), Scrafty (from Scraggy),
+        Seadra (from Horsea), Seaking (from Goldeen), Sealeo (from Spheal),
+        Seismitoad (from Palpitoad), Serperior (from Servine), Skeledirge (from Crocalor),
+        Skuntank (from Stunky), Slaking (from Vigoroth), Sliggoo (from Goomy),
+        Slowbro (from Slowpoke), Slurpuff (from Swirlix), Sneasler (from Sneasel (Hisui)),
+        Snorlax (from Munchlax), Staraptor (from Staravia), Starmie (from Staryu),
+        Steelix (from Onix), Stoutland (from Herdier), Swampert (from Marshtomp),
+        Swanna (from Ducklett), Swoobat (from Woobat), Talonflame (from Fletchinder),
         Tinkaton (from Tinkatuff), Togekiss (from Togetic), Torterra (from Grotle),
-        Toxicroak (from Croagunk), Typhlosion (from Quilava), Unfezant (from Tranquill),
-        Vanillish (from Vanillite), Venusaur (from Ivysaur), Wailord (from Wailmer),
-        Weezing (from Koffing), Weezing (Galar) (from Koffing)
+        Toxicroak (from Croagunk), Trevenant (from Phantump), Typhlosion (from Quilava),
+        Unfezant (from Tranquill), Vanillish (from Vanillite), Venusaur (from Ivysaur),
+        Wailord (from Wailmer), Weavile (from Sneasel), Weezing (from Koffing),
+        Weezing (Galar) (from Koffing), Yanmega (from Yanma)
     Breed: Chewtle (egg from Drednaw), Tyrogue (egg from Hitmonchan)
-  New held items (4): Chilan Berry (Petalburg City Gym),
-      Eject Pack (buy, Oldale Town Pokemon Center 1F),
-      Luminous Moss (buy, Dewford Town Pokemon Center 1F), Punching Glove (Route 114)
-  New Mega Stones (no Mega Ring yet): Drampanite, Gardevoirite, Raichunite X, Tatsugirinite
+  New held items (9): Chilan Berry (Petalburg City Gym),
+      Covert Cloak (buy, Mauville City Pokemon Center 1F),
+      Deep Sea Scale (Slateport City Battle Tent Lobby),
+      Deep Sea Tooth (Slateport City Battle Tent Lobby),
+      Metal Coat (Slateport City Battle Tent Lobby), Punching Glove (Route 114),
+      Razor Claw (Slateport City Battle Tent Lobby), Razor Fang (Slateport City Battle Tent Lobby),
+      Weakness Policy (Route 114)
+  Mega Ring: Mega Evolution is now usable with any Mega Stone listed so far.
+  New Mega Stones: Gardevoirite, Raichunite X
   Battles that open here:
     #77 Interviewer Gabby & Ty - Route 111
         foe levels Easy 31 / Med 40-43 / Hard 41-45
@@ -587,10 +598,9 @@ STEP 21 - level cap 40
 
 ====================================================================================================
 STEP 22 - level cap 40
-  After beating: Picnicker Charlotte (#90), Magma Admin Courtney + Team Magma Grunt (#95)
+  After beating: Magma Admin Courtney + Team Magma Grunt (#95)
   New held items (2): Draco Plate (Meteor Falls 1F 1R),
-      Protective Pads (buy, Oldale Town Pokemon Center 1F)
-  New Mega Stones (no Mega Ring yet): Raichunite Y
+      Fairy Feather (buy, Petalburg City Pokemon Center 1F)
   Battles that open here:
     #96 Battle Girl Cyndy - Route 115
         foe levels Easy 31 / Med 46-47 / Hard 50-52
@@ -616,20 +626,22 @@ STEP 24 - level cap 40
 ====================================================================================================
 STEP 25 - level cap 40
   After beating: Magma Leader Maxie (#100)
-  New Pokemon (31):
-    Wild - Ashen Woods: Brute Bonnet [L], Buzzwole [L], Growlithe, Growlithe (Hisui), Heracross,
-        Pinsir, Salandit, Salazzle, Scyther, Ursaluna (Bloodmoon)
-    Wild - Ember Path: Blacephalon [L], Chandelure, Slither Wing [L], Tauros (Paldea Blaze)
-    Wild - Jagged Pass: Fearow, Gligar, Jangmo-o, Mudbray, Mudsdale, Primeape, Turtonator
+  New Pokemon (33):
+    Wild - Ashen Woods: Brute Bonnet [R], Buzzwole [R], Growlithe, Growlithe (Hisui), Heracross,
+        Pinsir, Salandit, Salazzle, Scyther, Ursaluna (Bloodmoon) [R]
+    Wild - Ember Path: Blacephalon [R], Chandelure, Slither Wing [R], Tauros (Paldea Blaze)
+    Wild - Jagged Pass: Fearow, Gligar, Jangmo-o, Mudbray, Mudsdale, Primeape, Riolu, Turtonator
     Gift egg - Lavaridge Town: Wynaut
     Evolve: Annihilape (from Primeape), Arcanine (from Growlithe),
         Arcanine (Hisui) (from Growlithe (Hisui)), Gliscor (from Gligar), Hakamo-o (from Jangmo-o),
-        Scizor (from Scyther), Wobbuffet (from Wynaut)
+        Lucario (from Riolu), Scizor (from Scyther), Wobbuffet (from Wynaut)
     Breed: Mankey (egg from Annihilape), Spearow (egg from Fearow)
-  New held items (3): Charcoal (buy, Dewford Town Pokemon Center 1F),
-      Flame Orb (buy, Dewford Town Pokemon Center 1F), Flame Plate (Ember Path)
-  New Mega Stones (no Mega Ring yet): Chesnaughtite, Crabominite, Falinksite, Galladite,
-      Houndoominite, Pinsirite
+  New held items (8): Adrenaline Orb (Jagged Pass), Charcoal (buy, Dewford Town Pokemon Center 1F),
+      Clear Amulet (buy, Dewford Town Pokemon Center 1F),
+      Flame Orb (buy, Dewford Town Pokemon Center 1F), Flame Plate (Ember Path),
+      Heavy Duty Boots (Route 112), Iron Ball (buy, Oldale Town Pokemon Center 1F),
+      Mirror Herb (buy, Oldale Town Pokemon Center 1F)
+  New Mega Stones: Galladite
   Battles that open here:
     #101 Team Magma Grunt - Jagged Pass
         foe levels Easy 32 / Med 43-45 / Hard 45-48
@@ -669,28 +681,30 @@ STEP 25 - level cap 40
 ====================================================================================================
 STEP 26 - level cap 45
   After beating: Leader Flannery (#114)
-  New Pokemon (83):
+  New Pokemon (85):
+    Wild - Dewford Meadow: Meloetta (Aria) [R]
+    Wild - Granite Cave B2F: Cobalion [R]
     Wild - Mirage Tower 1F: Darumaka, Golett, Sigilyph, Spiritomb, Trapinch, Yamask
     Wild - Mirage Tower 2F: Krokorok, Orthworm
     Wild - Mirage Tower 3F: Sandaconda
     Wild - Mirage Tower 4F: Cofagrigus, Krookodile
     Wild - Mirage Tower B1F: Gimmighoul (Chest)
-    Wild - Petalburg Woods 2: Virizion [L]
-    Wild - Petalburg Woods 3: Celebi [L]
+    Wild - Petalburg Woods 2: Virizion [R]
+    Wild - Petalburg Woods 3: Celebi [R]
     Wild - Route 111: Bramblin, Cacnea, Capsakid, Hippopotas, Maractus, Rellor, Sandile, Silicobra,
         Stonjourner
-    Wild - Route 111 Ruins Exterior: Farigiraf, Great Tusk [L], Helioptile, Meditite,
-        Rockruff (Own Tempo), Sandy Shocks [L], Stakataka [L], Xatu
-    Wild - Route 117: Shaymin (Land) [L]
+    Wild - Route 111 Ruins Exterior: Farigiraf, Great Tusk [R], Helioptile, Meditite,
+        Rockruff (Own Tempo), Sandy Shocks [R], Stakataka [R], Xatu
+    Wild - Route 117: Shaymin (Land) [R]
     Wild - Sandstrewn Ruins: Baltoy, Claydol, Honedge, Unown
-    Wild - Sandstrewn Ruins 2F: Iron Treads [L]
+    Wild - Sandstrewn Ruins 2F: Iron Treads [R]
     Wild - Sandstrewn Ruins 3F: Doublade
     Fossil - Rustboro City Devon Corp 2F: Aerodactyl, Amaura, Archen, Cranidos, Kabuto, Omanyte,
         Shieldon, Tirtouga, Tyrunt
     Evolve: Aegislash (Shield) (from Doublade), Aggron (from Lairon), Archeops (from Archen),
         Aurorus (from Amaura), Bastiodon (from Shieldon), Brambleghast (from Bramblin),
         Cacturne (from Cacnea), Carracosta (from Tirtouga), Darmanitan (Standard) (from Darumaka),
-        Flygon (from Vibrava), Gholdengo (from Gimmighoul (Chest)), Glalie (from Snorunt),
+        Flygon (from Vibrava), Gholdengo [R] (from Gimmighoul (Chest)), Glalie (from Snorunt),
         Golurk (from Golett), Gothitelle (from Gothorita), Grimmsnarl (from Morgrem),
         Hatterene (from Hattrem), Heliolisk (from Helioptile), Hippowdon (from Hippopotas),
         Kabutops (from Kabuto), Kommo-o (from Hakamo-o), Lampent (from Litwick),
@@ -699,15 +713,18 @@ STEP 26 - level cap 45
         Rabsca (from Rellor), Rampardos (from Cranidos), Reuniclus (from Duosion),
         Scovillain (from Capsakid), Tyrantrum (from Tyrunt), Vibrava (from Trapinch),
         Walrein (from Sealeo)
-    Form change: Shaymin (Sky) [L] (from Shaymin (Land))
+    Form change: Shaymin (Sky) [R] (from Shaymin (Land))
     Breed: Girafarig (egg from Farigiraf), Natu (egg from Xatu)
-  New held items (7): Air Balloon (buy, Oldale Town Pokemon Center 1F), Blunder Policy (Route 111),
-      Clear Amulet (buy, Oldale Town Pokemon Center 1F), Earth Plate (Route 111),
-      Heavy Duty Boots (buy, Oldale Town Pokemon Center 1F),
-      Power Herb (buy, Oldale Town Pokemon Center 1F), Safety Goggles (Lavaridge Town)
-  Mega Ring: Mega Evolution is now usable with any Mega Stone listed so far.
-  New Mega Stones: Aerodactylite, Chandelurite, Charizardite X, Charizardite Y, Darkranite,
-      Garchompite, Sceptilite, Scovillainite, Swampertite, Zygardite
+  New held items (12): Ability Shield (buy, Oldale Town Pokemon Center 1F),
+      Blunder Policy (Route 111), Earth Plate (Route 111),
+      Electric Seed (buy, Petalburg City Pokemon Center 1F),
+      Ghost Gem (buy, Oldale Town Pokemon Center 1F),
+      Misty Seed (buy, Mauville City Pokemon Center 1F),
+      Power Herb (buy, Oldale Town Pokemon Center 1F),
+      Room Service (buy, Dewford Town Pokemon Center 1F), Safety Goggles (Lavaridge Town),
+      Terrain Extender (Fiery Path), Thick Club (buy, Oldale Town Pokemon Center 1F),
+      Utility Umbrella (buy, Oldale Town Pokemon Center 1F)
+  New Mega Stones: Chandelurite
   Battles that open here:
     #118 Camper Drew - Route 111
         foe levels Easy 35 / Med 45-46 / Hard 46-48
@@ -735,30 +752,30 @@ STEP 26 - level cap 45
         foe levels Easy 36 / Med 49-50 / Hard 52-54
     #130 Leader Norman - Petalburg City Gym
         foe levels Easy 36 / Med 47-50 / Hard 49-53
-    #131 Wild Moltres [L] - Ember Path
+    #131 Wild Moltres [R] - Ember Path
 
 ====================================================================================================
 STEP 27 - level cap 55
-  After beating: Pike Queen Lucy (#105), Wild Moltres [L] (#131), Leader Norman (#130)
-  New Pokemon (79):
+  After beating: Wild Moltres [R] (#131), Leader Norman (#130)
+  New Pokemon (80):
     Wild - Abandoned Ship Rooms B1F: Corsola, Dhelmise, Mareanie
-    Wild - Ashen Woods: Chi-Yu [L]
+    Wild - Ashen Woods: Chi-Yu [R]
     Wild - Desert Underpass: Arctovish, Arctozolt, Dracovish, Dracozolt, Flittle, Maschiff, Mawile,
-        Ting-Lu [L], Zygarde (50) [L]
-    Wild - New Mauville Entrance: Electrode, Elekid, Iron Thorns [L], Klink, Togedemaru, Voltorb
-    Wild - New Mauville Inside: Electabuzz, Iron Hands [L], Wattrel
-    Wild - Petalburg Woods 2: Wo-Chien [L]
+        Ting-Lu [R], Zygarde (50) [R]
+    Wild - New Mauville Entrance: Electrode, Elekid, Iron Thorns [R], Klink, Togedemaru, Voltorb
+    Wild - New Mauville Inside: Electabuzz, Iron Hands [R], Wattrel
+    Wild - Petalburg Woods 2: Wo-Chien [R]
     Wild - Route 104: Tentacruel
     Wild - Route 105: Cramorant
     Wild - Route 106: Wiglett
     Wild - Route 108: Dragalge, Lapras
     Wild - Route 109: Pincurchin
-    Wild - Route 114: Mesprit [L]
+    Wild - Route 114: Mesprit [R]
     Wild - Route 118: Carnivine, Dedenne, Kecleon, Lickilicky, Lickitung, Squawkabilly (Green),
         Tauros (Paldea Aqua), Zigzagoon (Galar)
-    Wild - Route 119: Articuno (Galar) [L], Comfey, Feebas, Gastrodon (East), Oranguru, Passimian,
-        Tropius, Voltorb (Hisui)
-    Wild - Seaspray Cave B1F: Poipole [L]
+    Wild - Route 119: Articuno (Galar) [R], Comfey, Feebas, Gastrodon (East), Iron Leaves [R],
+        Oranguru, Passimian, Tropius, Voltorb (Hisui)
+    Wild - Seaspray Cave B1F: Poipole [R]
     Wild - Slateport City: Pyukumuku, Tentacool
     Evolve: Baxcalibur (from Arctibax), Bisharp (from Pawniard), Braviary (from Rufflet),
         Dragonite (from Dragonair), Drakloak (from Dreepy), Electivire (from Electabuzz),
@@ -767,25 +784,19 @@ STEP 27 - level cap 55
         Kilowattrel (from Wattrel), Klang (from Klink), Klinklang (from Klang),
         Linoone (Galar) (from Zigzagoon (Galar)), Mabosstiff (from Maschiff),
         Mandibuzz (from Vullaby), Mienshao (from Mienfoo), Milotic (from Feebas),
-        Naganadel [L] (from Poipole), Noivern (from Noibat), Obstagoon (from Linoone (Galar)),
+        Naganadel [R] (from Poipole), Noivern (from Noibat), Obstagoon (from Linoone (Galar)),
         Salamence (from Shelgon), Toxapex (from Mareanie), Tyranitar (from Pupitar),
         Vanilluxe (from Vanillish), Wugtrio (from Wiglett)
     Breed: Shellos (East) (egg from Gastrodon (East))
-    Other: Moltres [L]
-  New held items (14): Adrenaline Orb (buy, Dewford Town Pokemon Center 1F),
-      Assault Vest (Route 110 Trick House Puzzle 4),
-      Booster Energy (buy, Oldale Town Pokemon Center 1F),
-      Covert Cloak (buy, Oldale Town Pokemon Center 1F),
-      Electric Seed (buy, Dewford Town Pokemon Center 1F), Fist Plate (Route 115),
-      Grassy Seed (buy, Dewford Town Pokemon Center 1F), Lum Berry (Route 123 Berry Masters House),
-      Mirror Herb (buy, Oldale Town Pokemon Center 1F),
-      Misty Seed (buy, Dewford Town Pokemon Center 1F),
-      Psychic Seed (buy, Dewford Town Pokemon Center 1F),
-      Throat Spray (buy, Dewford Town Pokemon Center 1F),
-      Toxic Orb (buy, Verdanturf Town Pokemon Center 1F), Utility Umbrella (Route 119)
-  New Mega Stones: Ampharosite, Baxcalibrite, Blastoisinite, Blazikenite, Dragalgite, Dragoninite,
-      Eelektrossite, Flygonite, Garchompite Z, Greninjite, Hawluchanite, Heracronite, Kinglerite,
-      Lopunnite, Magearnite, Pyroarite, Scizorite, Venusaurite
+    Other: Moltres [R]
+  New held items (4): Booster Energy (buy, Oldale Town Pokemon Center 1F), Fist Plate (Route 115),
+      Grassy Seed (buy, Dewford Town Pokemon Center 1F),
+      Psychic Seed (buy, Dewford Town Pokemon Center 1F)
+  New Mega Stones: Abomasite, Ampharosite, Audinite, Baxcalibrite, Beedrillite, Blastoisinite,
+      Blazikenite, Butterfrenite, Crabominite, Dragalgite, Dragoninite, Eelektrossite, Falinksite,
+      Flygonite, Garchompite Z, Greninjite, Hawluchanite, Heracronite, Kinglerite, Lopunnite,
+      Magearnite, Pyroarite, Raichunite Y, Sceptilite, Scizorite, Scovillainite, Swampertite,
+      Tatsugirinite, Venusaurite
   Battles that open here:
     #132 Black Belt Yuji - Route 110 Trick House Puzzle 4
         foe levels Easy 43 / Med 58-59 / Hard 60-63
@@ -839,11 +850,12 @@ STEP 27 - level cap 55
     #157 Wild Electrode - New Mauville Inside
     #158 Wild Electrode - New Mauville Inside
     #159 Wild Rotom - New Mauville Inside
-    #160 Wild Zapdos [L] - New Mauville Inside
+    #160 Wild Zapdos [R] - New Mauville Inside
 
 ====================================================================================================
 STEP 28 - level cap 55
   After beating: Camper Justin (#122)
+  New Mega Stones: Houndoominite
   Battles that open here:
     #161 Picnicker Martha - Route 110 Trick House Puzzle 3
         foe levels Easy 43 / Med 56-58 / Hard 58-60
@@ -852,13 +864,13 @@ STEP 28 - level cap 55
 
 ====================================================================================================
 STEP 29 - level cap 55
-  After beating: Wild Rotom (#159), Wild Zapdos [L] (#160), Expert Timothy (#143),
-    Fisherman Wade (#145), Team Aqua Grunt (#152)
+  After beating: Wild Rotom (#159), Wild Zapdos [R] (#160), Cooltrainer Carolina (#138),
+    Expert Timothy (#143), Fisherman Wade (#145), Team Aqua Grunt (#152)
   New Pokemon (24):
-    Wild - New Mauville Inside: Xurkitree [L], Zeraora [L]
+    Wild - New Mauville Inside: Xurkitree [R], Zeraora [R]
     Wild - Route 115: Cleffa, Fomantis, Furfrou (Natural), Jigglypuff, Morpeko (Full Belly),
         Tandemaus
-    Static encounter - New Mauville Inside: Zapdos [L]
+    Static encounter - New Mauville Inside: Zapdos [R]
     Gift - Route 119 Weather Institute 2F: Castform (Normal)
     In-game trade - Verdanturf Town Friendship Raters House: Cyclizar
     Evolve: Clefable (from Clefairy), Clefairy (from Cleffa), Lurantis (from Fomantis),
@@ -868,7 +880,7 @@ STEP 29 - level cap 55
         Rotom (Heat) (from Rotom), Rotom (Mow) (from Rotom), Rotom (Wash) (from Rotom)
     Breed: Igglybuff (egg from Jigglypuff)
   New held items (1): Mystic Water (Route 119 Weather Institute 2F)
-  New Mega Stones: Gyaradosite
+  New Mega Stones: Golurkite, Gyaradosite
   Battles that open here:
     #163 Team Aqua Grunt - Route 119 Weather Institute 2F
         foe levels Easy 44 / Med 57 / Hard 58-59
@@ -887,10 +899,8 @@ STEP 30 - level cap 55
 ====================================================================================================
 STEP 31 - level cap 55
   After beating: Aqua Admin Shelly (#166)
-  New held items (5): Damp Rock (Route 119 Weather Institute 1F),
-      Heat Rock (Route 119 Weather Institute 1F), Icy Rock (buy, Petalburg City Pokemon Center 1F),
-      Smooth Rock (Route 119 Weather Institute 1F), Zap Plate (Route 119)
-  New Mega Stones: Scraftinite
+  New held items (1): Zap Plate (Route 119)
+  New Mega Stones: Scolipite, Scraftinite
   Battles that open here:
     #167 Rival May - Route 119
         foe levels Easy 44 / Med 59-60 / Hard 61-63
@@ -898,37 +908,37 @@ STEP 31 - level cap 55
 ====================================================================================================
 STEP 32 - level cap 55
   After beating: Rival May (#167)
-  New Pokemon (35):
-    Wild - Route 120: Absol, Celesteela [L], Gourgeist (Average), Pumpkaboo (Large),
-        Pumpkaboo (Small), Tangrowth, Venomoth
-    Storm visitor - Petalburg Woods 3: Zarude [L]
-    Storm visitor - Route 118: Thundurus (Incarnate) [L]
-    Storm visitor - Route 119: Tornadus (Incarnate) [L]
-    Storm visitor - Verdanturf Meadow: Enamorus (Incarnate) [L]
-    In-game trade - Fortree City House 1: Type: Null [L]
+  New Pokemon (36):
+    Wild - Route 120: Absol, Celesteela [R], Gourgeist (Average), Pumpkaboo (Large),
+        Pumpkaboo (Small), Stunfisk, Tangrowth, Venomoth
+    Storm visitor - Petalburg Woods 3: Zarude [R]
+    Storm visitor - Route 118: Thundurus (Incarnate) [R]
+    Storm visitor - Route 119: Tornadus (Incarnate) [R]
+    Storm visitor - Verdanturf Meadow: Enamorus (Incarnate) [R]
+    In-game trade - Fortree City House 1: Type: Null [R]
     Evolve: Gourgeist (Large) (from Pumpkaboo (Large)), Gourgeist (Small) (from Pumpkaboo (Small)),
-        Silvally (Normal) [L] (from Type: Null)
-    Form change: Silvally (Bug) [L] (from Silvally (Dark)),
-        Silvally (Dark) [L] (from Silvally (Bug)), Silvally (Dragon) [L] (from Silvally (Bug)),
-        Silvally (Electric) [L] (from Silvally (Bug)), Silvally (Fairy) [L] (from Silvally (Bug)),
-        Silvally (Fighting) [L] (from Silvally (Bug)), Silvally (Fire) [L] (from Silvally (Bug)),
-        Silvally (Flying) [L] (from Silvally (Bug)), Silvally (Ghost) [L] (from Silvally (Bug)),
-        Silvally (Grass) [L] (from Silvally (Bug)), Silvally (Ground) [L] (from Silvally (Bug)),
-        Silvally (Ice) [L] (from Silvally (Bug)), Silvally (Poison) [L] (from Silvally (Bug)),
-        Silvally (Psychic) [L] (from Silvally (Bug)), Silvally (Rock) [L] (from Silvally (Bug)),
-        Silvally (Steel) [L] (from Silvally (Bug)), Silvally (Water) [L] (from Silvally (Bug))
+        Silvally (Normal) [R] (from Type: Null)
+    Form change: Silvally (Bug) [R] (from Silvally (Dark)),
+        Silvally (Dark) [R] (from Silvally (Bug)), Silvally (Dragon) [R] (from Silvally (Bug)),
+        Silvally (Electric) [R] (from Silvally (Bug)), Silvally (Fairy) [R] (from Silvally (Bug)),
+        Silvally (Fighting) [R] (from Silvally (Bug)), Silvally (Fire) [R] (from Silvally (Bug)),
+        Silvally (Flying) [R] (from Silvally (Bug)), Silvally (Ghost) [R] (from Silvally (Bug)),
+        Silvally (Grass) [R] (from Silvally (Bug)), Silvally (Ground) [R] (from Silvally (Bug)),
+        Silvally (Ice) [R] (from Silvally (Bug)), Silvally (Poison) [R] (from Silvally (Bug)),
+        Silvally (Psychic) [R] (from Silvally (Bug)), Silvally (Rock) [R] (from Silvally (Bug)),
+        Silvally (Steel) [R] (from Silvally (Bug)), Silvally (Water) [R] (from Silvally (Bug))
     Breed: Pumpkaboo (Average) (egg from Gourgeist (Average)), Tangela (egg from Tangrowth),
         Venonat (egg from Venomoth)
   New held items (18): Bug Memory (buy, Oldale Town Pokemon Center 1F),
       Dark Memory (buy, Dewford Town Pokemon Center 1F),
       Dragon Memory (buy, Dewford Town Pokemon Center 1F),
-      Electric Memory (buy, Fortree City Pokemon Center 1F),
+      Electric Memory (buy, Dewford Town Pokemon Center 1F),
       Fairy Memory (buy, Dewford Town Pokemon Center 1F),
       Fighting Memory (buy, Oldale Town Pokemon Center 1F),
       Fire Memory (buy, Oldale Town Pokemon Center 1F),
       Flying Memory (buy, Oldale Town Pokemon Center 1F),
       Ghost Memory (buy, Oldale Town Pokemon Center 1F),
-      Grass Memory (buy, Oldale Town Pokemon Center 1F),
+      Grass Memory (buy, Fallarbor Town Pokemon Center 1F),
       Ground Memory (buy, Oldale Town Pokemon Center 1F),
       Ice Memory (buy, Dewford Town Pokemon Center 1F),
       Poison Memory (buy, Oldale Town Pokemon Center 1F),
@@ -959,22 +969,22 @@ STEP 34 - level cap 55
     Wild - Mt Pyre 2F: Sinistea (Antique)
     Wild - Mt Pyre 3F: Yamask (Galar)
     Wild - Mt Pyre 4F: Banette, Dusclops, Dusknoir, Mimikyu (Disguised)
-    Wild - Mt Pyre 5F: Moltres (Galar) [L], Poltchageist (Artisan)
+    Wild - Mt Pyre 5F: Moltres (Galar) [R], Poltchageist (Artisan)
     Wild - Mt Pyre 6F: Houndstone, Poltchageist (Counterfeit), Sinistcha (Unremarkable)
     Wild - Mt Pyre Exterior: Beheeyem, Corsola (Galar), Drifblim, Drifloon, Ninetales, Vulpix,
         Zorua (Hisui)
     Wild - Route 121: Alomomola, Duskull, Elgyem, Komala, Shuppet
     Wild - Route 123: Flamigo, Spidops, Sunflora
-    Storm visitor - Route 123: Tapu Bulu [L]
+    Storm visitor - Route 123: Tapu Bulu [R]
     Evolve: Braviary (Hisui) (from Rufflet), Cursola (from Corsola (Galar)),
         Gourgeist (Super) (from Pumpkaboo (Super)), Runerigus (from Yamask (Galar)),
         Typhlosion (Hisui) (from Quilava), Zoroark (Hisui) (from Zorua (Hisui))
     Breed: Sunkern (egg from Sunflora), Tarountula (egg from Spidops)
-  New held items (10): Ability Shield (Route 121), Black Sludge (Route 123),
-      Cleanse Tag (Mt Pyre 1F), Electric Gem (Fortree City Gym), Fairy Feather (Route 120),
-      Ice Gem (Fortree City Gym), Light Clay (buy, Dewford Town Pokemon Center 1F),
-      Meadow Plate (Route 123), Room Service (Route 121), Wide Lens (Route 123)
-  New Mega Stones: Gengarite, Lucarionite Z, Machampite, Pidgeotite
+  New held items (5): Black Sludge (Route 123), Cleanse Tag (Mt Pyre 1F),
+      Electric Gem (buy, Oldale Town Pokemon Center 1F),
+      Ice Gem (buy, Oldale Town Pokemon Center 1F), Meadow Plate (Route 123)
+  New Mega Stones: Absolite Z, Banettite, Chimechite, Gengarite, Lucarionite Z, Machampite,
+      Meganiumite, Pidgeotite, Pinsirite, Sablenite
   Battles that open here:
     #172 Bird Keeper Colin - Route 120
         foe levels Easy 43 / Med 58 / Hard 60
@@ -1030,30 +1040,29 @@ STEP 35 - level cap 55
 ====================================================================================================
 STEP 36 - level cap 55
   After beating: Rival May (#188), Team Aqua Grunt (#192)
-  New Pokemon (17):
-    Evolve: Appletun (from Applin), Archaludon (from Duraludon), Armarouge (from Charcadet),
-        Ceruledge (from Charcadet), Dipplin (from Applin), Flapple (from Applin),
-        Hydrapple (from Dipplin), Kingambit (from Bisharp), Kleavor (from Scyther),
+  New Pokemon (16):
+    Evolve: Appletun (from Applin), Armarouge (from Charcadet), Ceruledge (from Charcadet),
+        Dipplin (from Applin), Flapple (from Applin), Hydrapple (from Dipplin),
+        Kingambit (from Bisharp), Kleavor (from Scyther),
         Polteageist (Antique) (from Sinistea (Antique)),
         Polteageist (Phony) (from Sinistea (Phony)),
         Sinistcha (Masterpiece) (from Poltchageist (Artisan)),
         Slowbro (Galar) (from Slowpoke (Galar)), Slowking (Galar) (from Slowpoke (Galar)),
-        Ursaluna (from Ursaring), Urshifu (Rapid Strike) [L] (from Kubfu),
-        Urshifu (Single Strike) [L] (from Kubfu)
+        Ursaluna [R] (from Ursaring), Urshifu (Rapid Strike) [R] (from Kubfu),
+        Urshifu (Single Strike) [R] (from Kubfu)
   Battles that open here:
     #195 Team Aqua Grunt - Mt Pyre Summit
         foe levels Easy 44 / Med 58 / Hard 60
 
 ====================================================================================================
 STEP 37 - level cap 55
-  After beating: Arena Tycoon Greta (#171), Bird Keeper Edwardo (#194)
+  After beating: Pkmn Breeder Pat (#185), Bird Keeper Edwardo (#194)
   New Pokemon (3):
     Wild - Scorched Slab B1F: Zweilous
-    Wild - Scorched Slab B2F: Iron Moth [L]
+    Wild - Scorched Slab B2F: Iron Moth [R]
     Breed: Deino (egg from Zweilous)
-  New held items (2): Stone Plate (Scorched Slab B2F),
-      Weakness Policy (buy, Petalburg City Pokemon Center 1F)
-  New Mega Stones: Tyranitarite
+  New held items (1): Stone Plate (Scorched Slab B2F)
+  New Mega Stones: Skarmorite, Steelixite, Tyranitarite
   Battles that open here:
     #196 Bird Keeper Darius - Fortree City Gym
         foe levels Easy 44 / Med 59-62 / Hard 61-66
@@ -1076,6 +1085,7 @@ STEP 39 - level cap 55
 STEP 40 - level cap 55
   After beating: Aqua Admin Matt (#197)
   New held items (1): Spooky Plate (Mt Pyre Summit)
+  New Mega Stones: Chesnaughtite, Drampanite
   Battles that open here:
     #199 Team Magma Grunt - Magma Hideout 1F
         foe levels Easy 44 / Med 61-62 / Hard 65-66
@@ -1102,14 +1112,13 @@ STEP 40 - level cap 55
 STEP 41 - level cap 60
   After beating: Leader Winona (#198), Team Magma Grunt (#205)
   New Pokemon (7):
-    Wild - Ashen Woods: Okidogi [L]
-    Wild - Route 117: Munkidori [L]
-    Wild - Verdanturf Meadow: Fezandipiti [L]
-    Storm visitor - Route 120: Calyrex [L]
-    Storm visitor - Route 123: Spectrier [L]
+    Wild - Ashen Woods: Okidogi [R]
+    Wild - Route 117: Munkidori [R]
+    Wild - Verdanturf Meadow: Fezandipiti [R]
+    Storm visitor - Route 120: Calyrex [R]
+    Storm visitor - Route 123: Spectrier [R]
     Evolve: Dragapult (from Drakloak), Volcarona (from Larvesta)
-  New held items (1): Terrain Extender (buy, Dewford Town Pokemon Center 1F)
-  New Mega Stones: Staraptite
+  New Mega Stones: Aerodactylite, Alakazite, Manectite, Staraptite
   Battles that open here:
     #209 Team Magma Grunt - Magma Hideout 2F 2R
         foe levels Easy 48 / Med 64 / Hard 67
@@ -1134,28 +1143,28 @@ STEP 43 - level cap 60
 STEP 44 - level cap 65
   After beating: Magma Leader Maxie (#208)
   New Pokemon (19):
-    Wild - Dewford Meadow: Pheromosa [L]
-    Wild - Magma Hideout 4F: Gouging Fire [L], Volcanion [L]
-    Wild - Petalburg Woods 3: Kartana [L]
-    Wild - Route 111 Ruins Exterior: Landorus (Incarnate) [L]
-    Wild - Route 120: Ogerpon (Teal) [L]
-    Storm visitor - Mt Pyre Exterior: Giratina (Altered) [L], Tapu Lele [L]
-    Storm visitor - Route 110: Tapu Koko [L]
-    Storm visitor - Route 112: Zekrom [L]
-    Storm visitor - Route 114: Koraidon [L]
-    Storm visitor - Route 115: Reshiram [L]
-    Storm visitor - Route 118: Miraidon [L]
-    Storm visitor - Route 121: Yveltal [L]
+    Wild - Dewford Meadow: Pheromosa [R]
+    Wild - Magma Hideout 4F: Gouging Fire [R], Volcanion [R]
+    Wild - Petalburg Woods 3: Kartana [R]
+    Wild - Route 111 Ruins Exterior: Landorus (Incarnate) [R]
+    Wild - Route 120: Ogerpon (Teal) [R]
+    Storm visitor - Mt Pyre Exterior: Giratina (Altered) [R], Tapu Lele [R]
+    Storm visitor - Route 110: Tapu Koko [R]
+    Storm visitor - Route 112: Zekrom [R]
+    Storm visitor - Route 114: Koraidon [R]
+    Storm visitor - Route 115: Reshiram [R]
+    Storm visitor - Route 118: Miraidon [R]
+    Storm visitor - Route 121: Yveltal [R]
     Evolve: Hydreigon (from Zweilous)
-    Form change: Giratina (Origin) [L] (from Giratina (Altered)),
-        Ogerpon (Cornerstone) [L] (from Ogerpon (Hearthflame)),
-        Ogerpon (Hearthflame) [L] (from Ogerpon (Cornerstone)),
-        Ogerpon (Wellspring) [L] (from Ogerpon (Cornerstone))
+    Form change: Giratina (Origin) [R] (from Giratina (Altered)),
+        Ogerpon (Cornerstone) [R] (from Ogerpon (Hearthflame)),
+        Ogerpon (Hearthflame) [R] (from Ogerpon (Cornerstone)),
+        Ogerpon (Wellspring) [R] (from Ogerpon (Cornerstone))
   New held items (4): Cornerstone Mask (Oldale Town Pokemon Center 1F),
       Griseous Core (buy, Dewford Town Pokemon Center 1F),
       Hearthflame Mask (Oldale Town Pokemon Center 1F),
       Wellspring Mask (Oldale Town Pokemon Center 1F)
-  New Mega Stones: Barbaracite, Cameruptite, Sharpedonite
+  New Mega Stones: Barbaracite, Cameruptite, Charizardite X, Sharpedonite
   Battles that open here:
     #213 Team Aqua Grunt - Aqua Hideout 1F
         foe levels Easy 52 / Med 71 / Hard 75
@@ -1166,7 +1175,7 @@ STEP 44 - level cap 65
     #216 Team Aqua Grunt - Aqua Hideout B1F
         foe levels Easy 52 / Med 69 / Hard 71-72
     #217 Wild Electrode - Aqua Hideout B1F
-    #218 Wild Heatran [L] - Scorched Slab Heatrans Room
+    #218 Wild Heatran [R] - Scorched Slab Heatrans Room
 
 ====================================================================================================
 STEP 45 - level cap 65
@@ -1183,9 +1192,9 @@ STEP 45 - level cap 65
 
 ====================================================================================================
 STEP 46 - level cap 65
-  After beating: Wild Heatran [L] (#218), Team Aqua Grunt (#222)
+  After beating: Wild Heatran [R] (#218), Team Aqua Grunt (#222)
   New Pokemon (1):
-    Other: Heatran [L]
+    Other: Heatran [R]
   Battles that open here:
     #223 Aqua Admin Matt - Aqua Hideout B2F
         foe levels Easy 52 / Med 67-68 / Hard 69-70
@@ -1198,20 +1207,19 @@ STEP 47 - level cap 65
     Wild - Route 128: Finizen
     Wild - Route 129: Basculegion (M)
     Wild - Route 130: Qwilfish (Hisui)
-    Wild - Shoal Cave Low Tide Entrance Room: Cetoddle, Eiscue (Ice)
-    Wild - Shoal Cave Low Tide Ice Room: Azelf [L], Iron Bundle [L], Mr. Mime (Galar)
+    Wild - Shoal Cave Low Tide Entrance Room: Cetoddle, Eiscue (Ice), Snom
+    Wild - Shoal Cave Low Tide Ice Room: Azelf [R], Iron Bundle [R], Mr. Mime (Galar)
     Wild - Shoal Cave Low Tide Inner Room: Darumaka (Galar)
-    Wild - Shoal Cave Low Tide Lower Room: Chien-Pao [L], Snom
-    Wild - Shoal Cave Low Tide Stairs Room: Glastrier [L]
-    Storm visitor - Route 125: Suicune [L]
+    Wild - Shoal Cave Low Tide Lower Room: Chien-Pao [R]
+    Wild - Shoal Cave Low Tide Stairs Room: Glastrier [R]
+    Storm visitor - Route 125: Suicune [R]
     Evolve: Avalugg (Hisui) (from Bergmite), Basculegion (F) (from Basculin (White Striped)),
         Cetitan (from Cetoddle), Darmanitan (Galar Standard) (from Darumaka (Galar)),
         Frosmoth (from Snom), Mr. Rime (from Mr. Mime (Galar)), Overqwil (from Qwilfish (Hisui)),
         Palafin (Zero) (from Finizen), Samurott (Hisui) (from Dewott)
     Breed: Basculin (White Striped) (egg from Basculegion (F))
-  New held items (7): Dark Gem (Mossdeep City Gym), Dragon Fang (Route 127),
-      Focus Band (Shoal Cave Low Tide Lower Room), Ghost Gem (Mossdeep City Gym),
-      Never Melt Ice (Shoal Cave Low Tide Ice Room), Sky Plate (Sky Pillar Outside),
+  New held items (5): Dark Gem (Mossdeep City Gym), Dragon Fang (Route 127),
+      Focus Band (Shoal Cave Low Tide Lower Room), Sky Plate (Sky Pillar Outside),
       Splash Plate (Route 131)
   New Mega Stones: Froslassite, Glalitite, Mawilite, Medichamite, Miloticite
   Battles that open here:
@@ -1245,7 +1253,7 @@ STEP 47 - level cap 65
         foe levels Easy 51 / Med 69-70 / Hard 73-74
     #238 Swimmer F Linda - Route 133
         foe levels Easy 51 / Med 65-66 / Hard 66-67
-    #239 Wild Articuno [L] - Shoal Cave Low Tide Ice Room
+    #239 Wild Articuno [R] - Shoal Cave Low Tide Ice Room
 
 ====================================================================================================
 STEP 48 - level cap 65
@@ -1279,9 +1287,9 @@ STEP 49 - level cap 65
 
 ====================================================================================================
 STEP 50 - level cap 65
-  After beating: Wild Articuno [L] (#239), Psychic Macey (#248)
+  After beating: Wild Articuno [R] (#239), Psychic Macey (#248)
   New Pokemon (1):
-    Static encounter - Shoal Cave Low Tide Ice Room: Articuno [L]
+    Static encounter - Shoal Cave Low Tide Ice Room: Articuno [R]
   Battles that open here:
     #250 Leader Tate&Liza - Mossdeep City Gym
         foe levels Easy 52 / Med 68-69 / Hard 70-71
@@ -1314,7 +1322,7 @@ STEP 52 - level cap 70
 STEP 53 - level cap 70
   After beating: Wild LEGENDARY_SIGN_DARKRAI (#256), Team Magma Grunt (#257)
   New Pokemon (1):
-    Static encounter - Mt Pyre Summit: Darkrai [L]
+    Static encounter - Mt Pyre Summit: Darkrai [R]
   Battles that open here:
     #258 Team Magma Grunt - Mossdeep City Space Center 2F
         foe levels Easy 56 / Med 77-78 / Hard 82-83
@@ -1347,13 +1355,13 @@ STEP 57 - level cap 70
     Wild - Seafloor Cavern Room 4: Grapploct
     Wild - Seafloor Cavern Room 6: Clobbopus
     Wild - Underwater Route 124: Dondozo
-    Wild - Underwater Seafloor Cavern: Nihilego [L], Tatsugiri (Curly), Tatsugiri (Droopy),
+    Wild - Underwater Seafloor Cavern: Nihilego [R], Tatsugiri (Curly), Tatsugiri (Droopy),
         Tatsugiri (Stretchy), Veluza
   New held items (7): Figy Berry (Sootopolis City),
       Hard Stone (buy, Dewford Town Pokemon Center 1F), Iapapa Berry (Sootopolis City),
       Iron Plate (Underwater Route 126), Mind Plate (Underwater Route 127),
-      Pixie Plate (Underwater Route 124), Poison Barb (buy, Pacifidlog Town Pokemon Center 1F)
-  New Mega Stones: Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite
+      Pixie Plate (Underwater Route 124), Poison Barb (buy, Dewford Town Pokemon Center 1F)
+  New Mega Stones: Darkranite, Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite, Zygardite
   Battles that open here:
     #262 Swimmer F Brenda - Route 126
         foe levels Easy 55 / Med 74-75 / Hard 78-79
@@ -1380,45 +1388,47 @@ STEP 58 - level cap 70
 ====================================================================================================
 STEP 59 - level cap 70
   After beating: Aqua Leader Archie (#269)
-  New Pokemon (14):
-    Wild - Cave Of Origin 1F: Walking Wake [L]
-    Wild - Cave Of Origin B1F: Druddigon, Terapagos (Normal) [L]
-    Wild - Route 124: Necrozma [L]
-    Wild - Route 127: Keldeo (Ordinary) [L], Palkia [L]
-    Wild - Route 128: Manaphy [L]
-    Wild - Sky Pillar 1F: Flutter Mane [L]
-    Wild - Sky Pillar 3F: Minior (Meteor Red), Raging Bolt [L]
-    Storm visitor - Route 126: Tapu Fini [L]
-    Form change: Keldeo (Resolute) [L] (from Keldeo (Ordinary)), Palkia (Origin) [L] (from Palkia)
-    Other: Phione [L]
-  New held items (1): Lustrous Globe (buy, Lilycove City Department Store 2F)
+  New Pokemon (16):
+    Wild - Cave Of Origin 1F: Walking Wake [R]
+    Wild - Cave Of Origin B1F: Druddigon, Terapagos (Normal) [R]
+    Wild - Cave Of Origin Entrance: Duraludon
+    Wild - Route 124: Necrozma [R]
+    Wild - Route 127: Keldeo (Ordinary) [R], Palkia [R]
+    Wild - Sky Pillar 1F: Flutter Mane [R]
+    Wild - Sky Pillar 3F: Minior (Meteor Red), Raging Bolt [R]
+    Storm visitor - Route 126: Tapu Fini [R]
+    Storm visitor - Route 128: Manaphy [R]
+    Evolve: Archaludon (from Duraludon)
+    Form change: Keldeo (Resolute) [R] (from Keldeo (Ordinary)), Palkia (Origin) [R] (from Palkia)
+    Other: Phione [R]
+  New held items (1): Lustrous Globe (buy, Dewford Town Pokemon Center 1F)
   Battles that open here:
     #270 Beauty Connie - Sootopolis City Gym B1F
         foe levels Easy 56 / Med 77-78 / Hard 81-83
     #271 Leader Juan - Sootopolis City Gym 1F
         foe levels Easy 56 / Med 76-78 / Hard 80-83
-    #272 Wild Rayquaza [L] - Sky Pillar Top
+    #272 Wild Rayquaza [R] - Sky Pillar Top
 
 ====================================================================================================
 STEP 60 - level cap 80
-  After beating: Wild Rayquaza [L] (#272), Leader Juan (#271)
+  After beating: Wild Rayquaza [R] (#272), Leader Juan (#271)
   New Pokemon (17):
-    Wild - Cave Of Origin Unused Ruby Sapphire Map 3: Eternatus [L]
+    Wild - Cave Of Origin Unused Ruby Sapphire Map 3: Eternatus [R]
     Wild - Meteor Falls 1F 2R: Ferroseed, Lunatone, Solrock
-    Wild - Meteor Falls B1F 1R: Dialga [L], Drampa, Uxie [L]
-    Wild - Victory Road 1F: Iron Valiant [L], Victini [L]
-    Static encounter - Sky Pillar Top: Rayquaza [L]
-    Game Corner - Mauville City Game Corner: Genesect [L]
+    Wild - Meteor Falls B1F 1R: Dialga [R], Drampa, Uxie [R]
+    Wild - Victory Road 1F: Iron Valiant [R], Victini [R]
+    Static encounter - Sky Pillar Top: Rayquaza [R]
+    Game Corner - Mauville City Game Corner: Genesect [R]
     Evolve: Ferrothorn (from Ferroseed)
-    Form change: Dialga (Origin) [L] (from Dialga), Genesect (Burn) [L] (from Genesect),
-        Genesect (Chill) [L] (from Genesect), Genesect (Douse) [L] (from Genesect),
-        Genesect (Shock) [L] (from Genesect)
+    Form change: Dialga (Origin) [R] (from Dialga), Genesect (Burn) [R] (from Genesect),
+        Genesect (Chill) [R] (from Genesect), Genesect (Douse) [R] (from Genesect),
+        Genesect (Shock) [R] (from Genesect)
   New held items (5): Adamant Crystal (buy, Oldale Town Pokemon Center 1F),
       Burn Drive (buy, Oldale Town Pokemon Center 1F),
       Chill Drive (buy, Oldale Town Pokemon Center 1F),
       Douse Drive (buy, Oldale Town Pokemon Center 1F),
       Shock Drive (buy, Oldale Town Pokemon Center 1F)
-  New Mega Stones: Feraligite, Zeraorite
+  New Mega Stones: Feraligite, Garchompite, Zeraorite
   Battles that open here:
     #273 Dragon Tamer Nicolas - Meteor Falls 1F 2R
         foe levels Easy 64 / Med 87-88 / Hard 91-93
@@ -1434,15 +1444,15 @@ STEP 60 - level cap 80
         foe levels Easy 64 / Med 87-88 / Hard 92-93
     #279 Cooltrainer Katelynn - Victory Road 1F
         foe levels Easy 64 / Med 82 / Hard 83-84
-    #280 Wild Diancie [L] - Cave Of Origin Diancies Room
+    #280 Wild Diancie [R] - Cave Of Origin Diancies Room
 
 ====================================================================================================
 STEP 61 - level cap 80
-  After beating: Wild Diancie [L] (#280), Dragon Tamer Nicolas (#273), Psychic Mariela (#275)
+  After beating: Wild Diancie [R] (#280), Dragon Tamer Nicolas (#273), Psychic Mariela (#275)
   New Pokemon (5):
-    Wild - Meteor Falls B1F 2R: Cresselia [L], Roaring Moon [L], Scream Tail [L]
-    Gift - Rustboro City Devon Corp 2F: Magearna [L]
-    Other: Diancie [L]
+    Wild - Meteor Falls B1F 2R: Cresselia [R], Roaring Moon [R], Scream Tail [R]
+    Gift - Rustboro City Devon Corp 2F: Magearna [R]
+    Other: Diancie [R]
   New Mega Stones: Heatranite, Salamencite
   Battles that open here:
     #281 Gentleman Everett - Route 110 Trick House Puzzle 7
@@ -1476,8 +1486,8 @@ STEP 64 - level cap 80
 STEP 65 - level cap 80
   After beating: Cooltrainer Edgar (#283)
   New Pokemon (7):
-    Wild - Victory Road B1F: Iron Jugulis [L], Rhydon, Terrakion [L]
-    Wild - Victory Road B2F: Zacian (Hero) [L], Zamazenta (Hero) [L]
+    Wild - Victory Road B1F: Iron Jugulis [R], Rhydon, Terrakion [R]
+    Wild - Victory Road B2F: Zacian (Hero) [R], Zamazenta (Hero) [R]
     Evolve: Rhyperior (from Rhydon)
     Breed: Rhyhorn (egg from Rhydon)
   Battles that open here:
@@ -1518,8 +1528,8 @@ STEP 67 - level cap 80
 
 ====================================================================================================
 STEP 68 - level cap 80
-  After beating: Cooltrainer Shannon (#296), Elite Four Glacia (#297)
-  New Mega Stones: Metagrossite
+  After beating: Cooltrainer Samuel (#286), Cooltrainer Shannon (#296), Elite Four Glacia (#297)
+  New Mega Stones: Charizardite Y, Metagrossite
   Battles that open here:
     #298 Elite Four Drake - Ever Grande City Drakes Room
         foe levels Easy 64 / Med 84-86 / Hard 87-90
@@ -1536,31 +1546,31 @@ STEP 70 - level cap 85
   After beating: Champion Wallace (#299)
   New Pokemon (40):
     Wild - Altering Cave: Smeargle
-    Wild - Altering Cave 1F: Hoopa (Confined) [L]
-    Wild - Altering Cave B1F: Guzzlord [L]
-    Wild - Meteor Falls Stevens Cave: Iron Boulder [L], Iron Crown [L]
-    Storm visitor - Route 121: Xerneas (Neutral) [L]
-    Gift - Littleroot Town Professor Birchs Lab: Cosmog [L]
-    Gift - Mossdeep City Stevens House: Meltan [L]
-    Gift - Rustboro City Devon Corp 2F: Arceus (Normal) [L]
-    Evolve: Cosmoem [L] (from Cosmog), Lunala [L] (from Cosmoem), Melmetal [L] (from Meltan),
-        Solgaleo [L] (from Cosmoem)
-    Form change: Arceus (Bug) [L] (from Arceus (Dark)), Arceus (Dark) [L] (from Arceus (Bug)),
-        Arceus (Dragon) [L] (from Arceus (Bug)), Arceus (Electric) [L] (from Arceus (Bug)),
-        Arceus (Fairy) [L] (from Arceus (Bug)), Arceus (Fighting) [L] (from Arceus (Bug)),
-        Arceus (Fire) [L] (from Arceus (Bug)), Arceus (Flying) [L] (from Arceus (Bug)),
-        Arceus (Ghost) [L] (from Arceus (Bug)), Arceus (Grass) [L] (from Arceus (Bug)),
-        Arceus (Ground) [L] (from Arceus (Bug)), Arceus (Ice) [L] (from Arceus (Bug)),
-        Arceus (Poison) [L] (from Arceus (Bug)), Arceus (Psychic) [L] (from Arceus (Bug)),
-        Arceus (Rock) [L] (from Arceus (Bug)), Arceus (Steel) [L] (from Arceus (Bug)),
-        Arceus (Water) [L] (from Arceus (Bug)), Calyrex (Ice) [L] (from Calyrex),
-        Calyrex (Shadow) [L] (from Calyrex), Hoopa (Unbound) [L] (from Hoopa (Confined)),
-        Necrozma (Dawn Wings) [L] (from Necrozma), Necrozma (Dusk Mane) [L] (from Necrozma),
-        Zygarde (10 Aura Break) [L] (from Zygarde (10 Power Construct)),
-        Zygarde (10 Power Construct) [L] (from Zygarde (10 Aura Break)),
-        Zygarde (50 Power Construct) [L] (from Zygarde (10 Aura Break))
-    Roamer - Route 101: Latias [L], Latios [L]
-  New held items (1): Destiny Knot (Route 110 Trick House Puzzle 8)
+    Wild - Altering Cave 1F: Hoopa (Confined) [R]
+    Wild - Altering Cave B1F: Guzzlord [R]
+    Wild - Meteor Falls Stevens Cave: Iron Boulder [R], Iron Crown [R]
+    Wild - Route 121: Xerneas (Neutral) [R]
+    Gift - Littleroot Town Professor Birchs Lab: Cosmog [R]
+    Gift - Mossdeep City Stevens House: Meltan [R]
+    Gift - Rustboro City Devon Corp 2F: Arceus (Normal) [R]
+    Evolve: Cosmoem [R] (from Cosmog), Lunala [R] (from Cosmoem), Melmetal [R] (from Meltan),
+        Solgaleo [R] (from Cosmoem)
+    Form change: Arceus (Bug) [R] (from Arceus (Dark)), Arceus (Dark) [R] (from Arceus (Bug)),
+        Arceus (Dragon) [R] (from Arceus (Bug)), Arceus (Electric) [R] (from Arceus (Bug)),
+        Arceus (Fairy) [R] (from Arceus (Bug)), Arceus (Fighting) [R] (from Arceus (Bug)),
+        Arceus (Fire) [R] (from Arceus (Bug)), Arceus (Flying) [R] (from Arceus (Bug)),
+        Arceus (Ghost) [R] (from Arceus (Bug)), Arceus (Grass) [R] (from Arceus (Bug)),
+        Arceus (Ground) [R] (from Arceus (Bug)), Arceus (Ice) [R] (from Arceus (Bug)),
+        Arceus (Poison) [R] (from Arceus (Bug)), Arceus (Psychic) [R] (from Arceus (Bug)),
+        Arceus (Rock) [R] (from Arceus (Bug)), Arceus (Steel) [R] (from Arceus (Bug)),
+        Arceus (Water) [R] (from Arceus (Bug)), Calyrex (Ice) [R] (from Calyrex),
+        Calyrex (Shadow) [R] (from Calyrex), Hoopa (Unbound) [R] (from Hoopa (Confined)),
+        Necrozma (Dawn Wings) [R] (from Necrozma), Necrozma (Dusk Mane) [R] (from Necrozma),
+        Zygarde (10 Aura Break) [R] (from Zygarde (10 Power Construct)),
+        Zygarde (10 Power Construct) [R] (from Zygarde (10 Aura Break)),
+        Zygarde (50 Power Construct) [R] (from Zygarde (10 Aura Break))
+    Roamer - Route 101: Latias [R], Latios [R]
+  New held items (1): Destiny Knot (buy, Dewford Town Pokemon Center 1F)
   Battles that open here:
     #300 Rival Wally - Victory Road 1F
         foe levels Easy 68 / Med 94-95 / Hard 100
@@ -1581,16 +1591,16 @@ STEP 70 - level cap 85
 STEP 71 - level cap 85
   After beating: Rival Green (#305)
   New held items (2): Spell Tag (buy, Dewford Town Pokemon Center 1F),
-      Twisted Spoon (Altering Cave B1F)
+      Twisted Spoon (buy, Dewford Town Pokemon Center 1F)
   Battles that open here:
-    #307 Wild Mewtwo [L] - Altering Cave B1F
+    #307 Wild Mewtwo [R] - Altering Cave B1F
 
 ====================================================================================================
 STEP 72 - level cap 85
   After beating: Champion Cynthia (#306)
   Battles that open here:
-    #308 Wild Lugia [L] - Navel Rock Bottom
-    #309 Wild Ho-Oh [L] - Navel Rock Top
+    #308 Wild Lugia [R] - Navel Rock Bottom
+    #309 Wild Ho-Oh [R] - Navel Rock Top
 
 ====================================================================================================
 STEP 73 - level cap 85
@@ -1609,12 +1619,12 @@ STEP 73 - level cap 85
 
 ====================================================================================================
 STEP 74 - level cap 85
-  After beating: Wild Mewtwo [L] (#307), Wild Lugia [L] (#308), Wild Ho-Oh [L] (#309),
+  After beating: Wild Mewtwo [R] (#307), Wild Lugia [R] (#308), Wild Ho-Oh [R] (#309),
     Lady Naomi (#314)
   New Pokemon (3):
-    Static encounter - Altering Cave B1F: Mewtwo [L]
-    Static encounter - Navel Rock Bottom: Lugia [L]
-    Static encounter - Navel Rock Top: Ho-Oh [L]
+    Static encounter - Altering Cave B1F: Mewtwo [R]
+    Static encounter - Navel Rock Bottom: Lugia [R]
+    Static encounter - Navel Rock Top: Ho-Oh [R]
   Battles that open here:
     #315 Rival Steven - Meteor Falls Stevens Cave
         foe levels Easy 68 / Med 89-90 / Hard 92-94
@@ -1623,16 +1633,16 @@ STEP 74 - level cap 85
 STEP 75 - level cap 85
   After beating: Rival Steven (#315)
   Battles that open here:
-    #316 Wild Deoxys (Normal) [L] - Birth Island Exterior
+    #316 Wild Deoxys (Normal) [R] - Birth Island Exterior
 
 ====================================================================================================
 STEP 76 - level cap 85
-  After beating: Wild Deoxys (Normal) [L] (#316)
+  After beating: Wild Deoxys (Normal) [R] (#316)
   New Pokemon (5):
-    Static encounter - Birth Island Exterior: Deoxys (Normal) [L]
-    Form change: Deoxys (Attack) [L] (from Deoxys (Normal)),
-        Deoxys (Defense) [L] (from Deoxys (Normal)), Deoxys (Normal) [L] (from Deoxys (Normal)),
-        Deoxys (Speed) [L] (from Deoxys (Normal))
+    Static encounter - Birth Island Exterior: Deoxys (Normal) [R]
+    Form change: Deoxys (Attack) [R] (from Deoxys (Normal)),
+        Deoxys (Defense) [R] (from Deoxys (Normal)), Deoxys (Normal) [R] (from Deoxys (Normal)),
+        Deoxys (Speed) [R] (from Deoxys (Normal))
   Battles that open here:
     #317 Expert Buffel - Lilycove City Cove Lily Motel 2F
         foe levels Easy 68 / Med 89-90 / Hard 92-94

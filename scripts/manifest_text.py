@@ -95,7 +95,7 @@ class Renderer:
     # ---- naming -------------------------------------------------------
     def species(self, sp: str) -> str:
         name = self.sd.name(sp)
-        return name + (' [L]' if self.sd.restricted_class(sp) else '')
+        return name + (' [R]' if self.sd.restricted_class(sp) else '')
 
     def battle_title(self, node: dict) -> str:
         if node.get('display_name'):
@@ -284,7 +284,7 @@ class Renderer:
             'An optional fight taken later may also use what opened in between, but tune it at its first point.',
             'All your Pokemon are at the step\'s level cap (Leveler). Evolutions still need their own condition',
             '(level, stone, friendship, trade, time, move) and the item or move must already be available.',
-            '[L] = Legendary, Mythical, Ultra Beast or Paradox: at most one of these in a party in total.',
+            '[R] = Restricted: Legendary, Mythical, Ultra Beast, Paradox, Gholdengo or either Ursaluna; one total per party.',
             'Starters: choose one region, then take up to two of its three starters. This reference follows',
             'Treecko + Mudkip; other starter choices swap those two lines. The rival keeps the third starter.',
             'Items are held battle items only (Mega Stones are listed on their own line). Key items, medicine,',

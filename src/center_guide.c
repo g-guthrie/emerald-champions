@@ -180,7 +180,7 @@ static const u8 sText_GuideLevelerPC[] = _("Your Leveler is in the PC.\nAt a Cen
 static const u8 sText_GuideInitialLeveler[] = _("Open Bag, then Key Items.\nChoose Leveler and USE it to\lraise every partner to the cap.\pThen go north from Oldale to\nRoute 103 and speak to your\lrival for your first battle.");
 static const u8 sText_GuideWoods[] = _("Leave Petalburg west on Route\n104. Enter Petalburg Woods and\lfollow the path north.\pHelp the Devon researcher by\ndefeating the Aqua grunt,\lthen leave the Woods north\land continue to Rustboro.");
 static const u8 sText_GuideGoodsRetry[] = _("You defeated Rusturf Tunnel's\nthief, but his Devon Goods\lstill need room in your Bag.\pMake room, then return to the\nAqua grunt beside Peeko in\lRusturf Tunnel and speak again.");
-static const u8 sText_GuideNormanRing[] = _("Return to Petalburg's Gym.\nDefeat a trainer in each room\lto reach Norman at the back.\pSpeak to Norman for your Mega\nRing and partner stones. Make\lroom if your Bag is full.\pSpeak to him again to start\nyour fifth Gym battle.");
+static const u8 sText_GuideWattsonRing[] = _("Speak to Wattson in Mauville's\nGym for your earned Mega Ring.\lMake Bag space if needed.");
 static const u8 sText_GuideLeagueWally[] = _("Surf east from Route 128 to\nEver Grande. Climb the falls\lwith a Waterfall-capable\lpartner, then enter Victory Road.\pWally challenges you just\ninside. Defeat him, then cross\lthe cave with Surf, Strength\land Rock Smash partners.\pThe north exit leads to the\nLeague. Defeat the Elite Four\land Champion Wallace.");
 
 static const u8 *GetCenterGuideStoryText(bool32 detailed)
@@ -216,7 +216,7 @@ static const u8 *GetCenterGuideStoryText(bool32 detailed)
             break;
         case FLAG_BADGE05_GET:
             if (!FlagGet(FLAG_SYS_RECEIVED_KEYSTONE))
-                return detailed ? sText_GuideNormanRing : COMPOUND_STRING("Reach Norman in Petalburg's\nGym for your Mega Ring. Make\lBag space, then speak again.");
+                return sText_GuideWattsonRing;
             break;
         case FLAG_BADGE03_GET:
             if (VarGet(VAR_ROUTE110_STATE) == 0)

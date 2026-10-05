@@ -6296,7 +6296,17 @@ static void Task_SacredAshDisplayHPRestored(u8 taskId)
 
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
 {
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    enum Species target = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_CHECK, gSpecialVar_ItemId, NULL, NULL, CHECK_EVO);
     PlaySE(SE_SELECT);
+    if (target != SPECIES_NONE && !CanEvolveMonWithinRestrictedLimit(mon, target))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        DisplayPartyMenuMessage(gText_RestrictedEvolutionBlocked, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+        return;
+    }
     gCB2_AfterEvolution = gPartyMenu.exitCallback;
     if (ExecuteTableBasedItemEffect(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gSpecialVar_ItemId, gPartyMenu.slotId, 0))
     {

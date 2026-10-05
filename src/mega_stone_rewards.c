@@ -210,7 +210,7 @@ u32 EmeraldChampions_CountMegasWitnessed(void)
 
 // Starter Mega Stones follow the starter pair. Each stone has exactly one
 // receipt flag, shared by every place that can hand it over:
-// - Norman gives, with the Mega Ring, the stones of the pair's final forms that
+// - Norman gives, after his victory, the stones of the pair's final forms that
 //   have not reached the player yet (Swampertite when the pair has none);
 // - a stone with a world home (a sparkle or a Gym Leader's gift) is handed over
 //   there otherwise; the sparkle's object flag or the Leader's receipt is the
@@ -292,7 +292,7 @@ static bool32 IsNormanStarterMegaStone(u32 i)
     return sStarterMegaStones[i].item == ITEM_SWAMPERTITE;
 }
 
-// Next stone Norman still hands over with the Ring, or ITEM_NONE.
+// Next stone Norman still owes after his victory, or ITEM_NONE.
 u16 GetNormanStarterMegaStone(void)
 {
     for (u32 i = 0; i < ARRAY_COUNT(sStarterMegaStones); i++)
@@ -365,11 +365,11 @@ void MarkStarterMegaStoneReceived(void)
     }
 }
 
-// The Ring and every stone Norman still owes must fit together.
+// Only the starter stones Norman still owes must fit; Wattson awards the Ring.
 bool32 CanReceiveNormanMegaGift(void)
 {
-    struct ItemSlot gifts[1 + ARRAY_COUNT(sStarterMegaStones)] = {{ITEM_MEGA_RING, 1}};
-    u32 count = 1;
+    struct ItemSlot gifts[ARRAY_COUNT(sStarterMegaStones)];
+    u32 count = 0;
 
     for (u32 i = 0; i < ARRAY_COUNT(sStarterMegaStones); i++)
     {

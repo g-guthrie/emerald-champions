@@ -319,9 +319,9 @@ Route117_PokemonDayCare_Text_GoodToSeeYou:
 	.string "Your Pokémon can only be doing good!$"
 
 Route117_PokemonDayCare_Text_PartyRuleRefusal:
-	.string "Your special Pokémon slot is full.\p"
-	.string "Legendary, Mythical, Ultra Beast\n"
-	.string "or Paradox: one total per party.\p"
+	.string "Your restricted Pokémon slot is full.\p"
+	.string "Only 1 restricted Pokémon\n"
+	.string "per party.\p"
 	.string "Store that one in the PC first,\n"
 	.string "then come back for this one.$"
 

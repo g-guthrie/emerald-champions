@@ -228,16 +228,17 @@ def _later_profile(stage,opening):
   s['preceding_battle_ids'] += ['TRAINER_COURTNEY_METEOR_FALLS','TRAINER_GRUNT_METEOR_FALLS',
                               'TRAINER_TABITHA_MT_CHIMNEY','TRAINER_GRUNT_MT_CHIMNEY_1',
                               'TRAINER_MAXIE_MT_CHIMNEY','TRAINER_FLANNERY_1']
- # Story milestones do not automatically execute Norman's Ring gift.
+ # This synthetic post-Wattson profile includes his victory Ring handoff.
  f.setdefault('FLAG_HIDE_SLATEPORT_CITY_BRAWLY',False)
  f.setdefault('FLAG_DEFEATED_DEWFORD_GYM',False)
- f['FLAG_SYS_RECEIVED_KEYSTONE']=False
+ f['FLAG_SYS_RECEIVED_KEYSTONE']=rank>=LATER_PROFILES.index('after_wattson')
+ if f['FLAG_SYS_RECEIVED_KEYSTONE']:items.add('ITEM_MEGA_RING')
  s.update(stage=stage,story_items=items,minimum_museum_fee=50 if rank>=5 else 0,
    source_evidence=[source_evidence(ROOT/p)for p in LATER_SOURCE_PATHS],
    physical_access_status='unresolved'if rank>=LATER_PROFILES.index('after_wattson') else 'native_corridor_validated',
    maximal_arsenal_status='unresolved',scope='Source transition prerequisites; conditional native ferry/Granite/Slateport/Gym-door corridor validated, not an earned prefix.',
    unresolved=['Other physical routes beyond the native validated ferry corridor','Target-specific interaction fields','Optional quest/gym battle dependencies and rewards; extra Chimney trainer wins are conservative prerequisites',
-               'Paid nature requests need source-matched harvested Berry counts; no nature service granted','No Mega Ring until Norman state6'])
+               'Paid nature requests need source-matched harvested Berry counts; no nature service granted','Mega Ring awarded during Wattson’s post-victory handoff'])
  return s
 
 

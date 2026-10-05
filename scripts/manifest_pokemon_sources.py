@@ -80,7 +80,7 @@ class PokemonSources:
                        needs_items=list(s.needs_items), detail=s.detail,
                        citations=[s.cite], conditions=[])
             if self.sd.restricted_class(s.key):
-                row['conditions'].append('Legend-class spawn stops after its species/family is caught; one restricted Pokemon in party total')
+                row['conditions'].append('Bloodmoon slot stops on FLAG_EC_CAUGHT_URSALUNA_BLOODMOON; regular Ursaluna does not close it' if s.key=='SPECIES_URSALUNA_BLOODMOON' else 'Restricted spawn stops after its species/form is caught; one restricted Pokemon in party total')
                 row['citations'].append(_citation('src/legendary_signs.c', 'MeetsSignDiscovery'))
             base = self.sd.base(s.key)
             if base in ('SPECIES_MELOETTA', 'SPECIES_LANDORUS', 'SPECIES_MARSHADOW'):
