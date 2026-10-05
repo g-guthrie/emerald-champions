@@ -8,100 +8,100 @@ strategy: SETUP
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 8 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 -1 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 -2 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 -4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 -5 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_TORCHIC class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 6 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 -3 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 -2 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 -4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 -5 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_TREECKO class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 6 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 -3 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 -2 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 -4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 -5 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_MAY_ROUTE_103_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 8 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TREECKO @SITRUS_BERRY OVERGROW JOLLY 4/252/0/0/0/252 -1 | SEED_BOMB, DRAIN_PUNCH, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 -2 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 -4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 -5 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_MAY_ROUTE_103_TORCHIC class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 6 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MUDKIP @LIFE_ORB TORRENT ADAMANT 4/252/0/0/0/252 -3 | LIQUIDATION, SUPERPOWER, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 -2 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 -4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 -5 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0001 TRAINER_MAY_ROUTE_103_TREECKO class=rival
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Pikachu uses Fake Out only on an interruptible threat or Electroweb when the speed drop enables its partner; the starter attacks or sets up only behind a genuinely safe turn. On turn two, exploit the created speed/position advantage rather than repeat Fake Out. Alternate deployment: Pikachu and Shroomish trade immediate starter pressure for disruption and recovery. Reserves & disruption: Taillow is an Orb-activation finisher, not a guaranteed turn-one Guts attacker. Preserve an attack line when sleep is blocked; respect the actual unchosen regional starter. Counterplay & audit: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
 crack: Grass/powder immunity, Electric immunity, priority denial, double targeting, and denying free setup. Disposition: Keep the printed Hoenn seeds; regional generated starter sets require the explicit expansion register, not a false claim that six printed aliases cover all generations.
-TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 6 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 7 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 5 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 4 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TORCHIC @LIFE_ORB SPEED_BOOST TIMID 4/0/0/252/0/252 -3 | FLAMETHROWER, HEAT_WAVE, WILL_O_WISP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PIKACHU @LIGHT_BALL LIGHTNING_ROD TIMID 4/0/0/252/0/252 -2 | FAKE_OUT, THUNDERBOLT, ELECTROWEB, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 -4 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 -5 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0002 TRAINER_CALVIN_1 class=regular
 strategy: SETUP,TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Poochyena uses Taunt or Helping Hand according to whether denying setup or securing damage matters more; Zigzagoon drums only when its post-cost HP and legal Gluttony/Figy recovery survive the opposing pair. On the next turn, cash in with Extreme Speed rather than continue setting up. Alternate deployment: Hoothoot Tailwind plus Starly gives an immediate attacking mode without Belly Drum. Reserves & disruption: If Drum is unsafe, attack with Zigzagoon or move to the bird pair. Figy is compatible with Adamant; Unnerve, item suppression or removal can deny recovery. Rattled is an opponent-dependent bonus, not an activation plan. Counterplay & audit: Priority immunity/denial, Fake Out on the support, physical mitigation, berry denial or focused damage before Drum resolves. Disposition: RETAIN; Figy replaces Sitrus to make Gluttony meaningful. Benchmark the first forced route fight against multiple starter pairs, not just a compliant setup fixture.
 crack: Priority immunity/denial, Fake Out on the support, physical mitigation, berry denial or focused damage before Drum resolves. Disposition: RETAIN; Figy replaces Sitrus to make Gluttony meaningful. Benchmark the first forced route fight against multiple starter pairs, not just a compliant setup fixture.
-POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 6 | CRUNCH, TAUNT, SUCKER_PUNCH, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
-ZIGZAGOON @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 6 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-HOOTHOOT @EVIOLITE TINTED_LENS MODEST 164/0/8/204/0/132 6 | AIR_SLASH, HYPER_VOICE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-STARLY @LIFE_ORB RECKLESS JOLLY 4/252/0/0/0/252 6 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
+POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 -1 | CRUNCH, TAUNT, SUCKER_PUNCH, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
+ZIGZAGOON @FIGY_BERRY GLUTTONY ADAMANT 252/252/4/0/0/0 -1 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+HOOTHOOT @EVIOLITE TINTED_LENS MODEST 164/0/8/204/0/132 -1 | AIR_SLASH, HYPER_VOICE, TAILWIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+STARLY @LIFE_ORB RECKLESS JOLLY 4/252/0/0/0/252 -1 | BRAVE_BIRD, DOUBLE_EDGE, QUICK_ATTACK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0003 TRAINER_RICK class=regular
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Scarf Spinarak chooses String Shot when the two-stage Speed drops let Dwebble or Karrablast act usefully before the player; Electroweb offers damaging one-stage control when that is enough. Turn two switches Spinarak when its locked support action no longer produces value. Alternate deployment: Fast control beside Karrablast creates stronger immediate offensive conversion. Reserves & disruption: Dewpider supplies the special Water lane when physical attacks are contained. Do not let a Choice-locked utility move become repeated empty turns. Re-evaluate both targets, turn order, protection, stat-loss immunity, Contrary and retaliatory abilities. Counterplay & audit: Ground immunity blocks Electroweb damage but does not inherently block String Shot. Taunt, Magic Bounce, Clear Amulet, White Herb, speed reversal and punishing switches offer counterplay. Disposition: RETAIN; String Shot replaces Toxic Thread for direct paired speed control, while the Scarf control-and-switch identity remains.
 crack: Ground immunity blocks Electroweb damage but does not inherently block String Shot. Taunt, Magic Bounce, Clear Amulet, White Herb, speed reversal and punishing switches offer counterplay. Disposition: RETAIN; String Shot replaces Toxic Thread for direct paired speed control, while the Scarf control-and-switch identity remains.
-SPINARAK @CHOICE_SCARF INSOMNIA JOLLY 252/0/4/0/0/252 5 | ELECTROWEB, STRING_SHOT, POISON_JAB, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
-DWEBBLE @EVIOLITE STURDY ADAMANT 68/252/0/0/0/188 2 | ROCK_SLIDE, X_SCISSOR, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-KARRABLAST @LIFE_ORB NO_GUARD ADAMANT 4/252/0/0/0/252 2 | MEGAHORN, DRILL_RUN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-DEWPIDER @SITRUS_BERRY WATER_BUBBLE MODEST 252/0/4/252/0/0 3 | SCALD, BUG_BUZZ, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SPINARAK @CHOICE_SCARF INSOMNIA JOLLY 252/0/4/0/0/252 -1 | ELECTROWEB, STRING_SHOT, POISON_JAB, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
+DWEBBLE @EVIOLITE STURDY ADAMANT 68/252/0/0/0/188 -4 | ROCK_SLIDE, X_SCISSOR, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+KARRABLAST @LIFE_ORB NO_GUARD ADAMANT 4/252/0/0/0/252 -4 | MEGAHORN, DRILL_RUN, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+DEWPIDER @SITRUS_BERRY WATER_BUBBLE MODEST 252/0/4/252/0/0 -3 | SCALD, BUG_BUZZ, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0004 TRAINER_ALLEN class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Sore loser: Allen has never won, and his Pokemon punish anything that weakens them. First two useful turns: Gothita and Pawniard lead. Gothita Fake Outs the foe that threatens Pawniard most, or attacks with Psychic/Thunderbolt when Fake Out has no target worth stopping; Pawniard attacks immediately, choosing Lash Out after its stats were lowered that turn, Sucker Punch to finish a faster attacker, and Iron Head into Fairy types. Alternate deployment: Mankey (Focus Sash) comes in for Rock Slide spread pressure against Flying leads, Close Combat into Normal, Rock, Steel, Ice and Dark targets, and Stomping Tantrum after one of its moves failed. Reserves & disruption: Bunnelby is the fed-up finisher: Huge Power Frustration at friendship zero, Quick Attack to pick off a weakened foe, Rock Slide spread and U-turn to bring a Defiant member back in. Defiant (Pawniard, Mankey) raises Attack by two and Competitive (Gothita) raises Special Attack by two whenever a foe lowers any of their stats, including Intimidate, Electroweb, Icy Wind, Snarl, Bulldoze, Rock Tomb and Fake Tears; credit the boost only when a drop actually happens. Protect when a foe would knock out a member before it acts.
 crack: Never lower their stats: no Intimidate, Electroweb, Icy Wind, Snarl or other drops. Use raw damage, burns and paralysis, special attacks into the Defiant pair, Unaware against boosted attackers, Haze or Clear Smog to remove boosts, Fairy and Fire pressure on Pawniard, Fairy, Flying and Psychic pressure on Mankey, and Dark or Ghost pressure on Gothita. Ghosts are immune to Bunnelby's Frustration and Quick Attack. Disposition: user-approved new identity replacing the Light Ball Pikachu and Spore core it shared with the Route 103 rival. Preserve Bunnelby's Huge Power Frustration at friendship zero.
-GOTHITA @EVIOLITE COMPETITIVE MODEST 252/0/4/252/0/0 3 | FAKE_OUT, PSYCHIC, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-PAWNIARD @EVIOLITE DEFIANT ADAMANT 4/252/0/0/0/252 3 | LASH_OUT, SUCKER_PUNCH, IRON_HEAD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-MANKEY @FOCUS_SASH DEFIANT JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, STOMPING_TANTRUM, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BUNNELBY @SITRUS_BERRY HUGE_POWER ADAMANT 4/252/0/0/0/252 2 | QUICK_ATTACK, FRUSTRATION, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=0
+GOTHITA @EVIOLITE COMPETITIVE MODEST 252/0/4/252/0/0 -2 | FAKE_OUT, PSYCHIC, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+PAWNIARD @EVIOLITE DEFIANT ADAMANT 4/252/0/0/0/252 -2 | LASH_OUT, SUCKER_PUNCH, IRON_HEAD, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+MANKEY @FOCUS_SASH DEFIANT JOLLY 4/252/0/0/0/252 -2 | CLOSE_COMBAT, STOMPING_TANTRUM, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BUNNELBY @SITRUS_BERRY HUGE_POWER ADAMANT 4/252/0/0/0/252 -3 | QUICK_ATTACK, FRUSTRATION, ROCK_SLIDE, U_TURN | ivs=31/31/31/31/31/31 | friendship=0
 
 ## E0005 TRAINER_TIANA class=casual
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Skitty chooses Fake Out when interruption is necessary, or timely Fake Tears on the same target Swirlix can exploit with special damage; Helping Hand remains the damage-support alternative when defense drops are blocked or less useful. Do not spend a turn lowering Special Defense after the relevant partner attack has already happened. Alternate deployment: Buneary threatens Klutz-assisted Flame Orb Switcheroo while Swirlix attacks. Reserves & disruption: Eevee can receive a Wish on a planned switch or keep itself alive for another attack; Bite is its answer to Ghosts, which Double-Edge cannot touch. An unconsumed Sitrus does not grant Unburden, and switching removes the earned speed bonus. Fake Tears must respect protection, reflection, stat-loss immunity, Contrary, White Herb and retaliatory abilities; it does not help Eevee's physical attacks. Counterplay & audit: Taunt, Magic Bounce, Clear Amulet, status immunity, item protection where supported, and burst damage before Wish resolves. Disposition: RETAIN; Fake Tears replaces Sing to give the whimsical support core a reliable special-damage partnership. No automatic credit for Unburden or guaranteed Orb disruption.
 crack: Ghosts block Skitty, Buneary and Double-Edge, leaving Swirlix's Fairy attacks and Eevee's Bite as the answers. Taunt, Magic Bounce, Clear Amulet, status immunity, item protection where supported, and burst damage before Wish resolves. Disposition: RETAIN; Eevee's Bite (user-approved) replaces Quick Attack so two members can hit Ghosts; Fake Tears replaces Sing to give the whimsical support core a reliable special-damage partnership. No automatic credit for Unburden or guaranteed Orb disruption.
-SKITTY @FOCUS_SASH WONDER_SKIN JOLLY 252/0/4/0/0/252 3 | FAKE_OUT, FAKE_TEARS, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 3 | DRAINING_KISS, DAZZLING_GLEAM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-EEVEE @EVIOLITE ADAPTABILITY ADAMANT 252/252/4/0/0/0 4 | BITE, DOUBLE_EDGE, WISH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-BUNEARY @FLAME_ORB KLUTZ JOLLY 4/252/0/0/0/252 3 | FAKE_OUT, SWITCHEROO, ENCORE, DRAIN_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
+SKITTY @FOCUS_SASH WONDER_SKIN JOLLY 252/0/4/0/0/252 -2 | FAKE_OUT, FAKE_TEARS, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 -2 | DRAINING_KISS, DAZZLING_GLEAM, THUNDERBOLT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+EEVEE @EVIOLITE ADAPTABILITY ADAMANT 252/252/4/0/0/0 -1 | BITE, DOUBLE_EDGE, WISH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+BUNEARY @FLAME_ORB KLUTZ JOLLY 4/252/0/0/0/252 -2 | FAKE_OUT, SWITCHEROO, ENCORE, DRAIN_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0006 TRAINER_BILLY class=regular
 strategy: RAIN
