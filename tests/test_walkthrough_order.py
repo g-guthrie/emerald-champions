@@ -10,16 +10,22 @@ MAPS = ["Route101", "Route102", "PetalburgCity", "PetalburgCity_Gym", "Route104"
 
 
 class WalkthroughOrderTest(unittest.TestCase):
-    def test_route_trainer_sees_only_chapters_through_its_route(self):
+    def test_route_trainer_sees_only_the_areas_before_its_route(self):
         allowed = w.allowed_maps("Route102", "start", MAPS)
         self.assertIn("Route101", allowed)
-        self.assertIn("Route102", allowed)
+        self.assertNotIn("Route102", allowed)  # the route's own Pokemon never count
         self.assertNotIn("PetalburgCity", allowed)
         self.assertNotIn("Route104", allowed)
 
     def test_side_cave_belongs_to_its_route_chapter(self):
         self.assertNotIn("Seaspray_Cave", w.allowed_maps("Route104", "start", MAPS))
-        self.assertIn("Seaspray_Cave", w.allowed_maps("Route115", "start", MAPS + ["Route115"]))
+        self.assertNotIn("Seaspray_Cave", w.allowed_maps("Route115", "start", MAPS + ["Route115"]))
+        self.assertIn("Seaspray_Cave", w.allowed_maps("DewfordTown", "start", MAPS + ["DewfordTown"]))
+
+    def test_first_rival_battle_counts_its_own_route(self):
+        maps = MAPS + ["Route103"]
+        self.assertIn("Route103", w.allowed_maps("Route103", "start", maps, "TRAINER_MAY_ROUTE_103_TREECKO"))
+        self.assertNotIn("Route103", w.allowed_maps("Route103", "start", maps, "TRAINER_SOMEONE_ELSE"))
 
     def test_gyms_use_the_full_pool(self):
         self.assertIsNone(w.allowed_maps("RustboroCity_Gym", "start", MAPS))

@@ -1752,7 +1752,7 @@ def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=Non
     if not story.realizes(milestone, story.flag_of(milestone), closure["flags"]):
         raise ValueError(f"{milestone} requires defeating {trainer}")
     battle_map = encounter_map(enc, trainer)
-    route_maps = walkthrough_order.allowed_maps(battle_map, milestone, story.geo.by_map)
+    route_maps = walkthrough_order.allowed_maps(battle_map, milestone, story.geo.by_map, trainer)
     if route_maps is not None:
         # A route trainer sees only the walkthrough chapters up to its own.
         nodes = {n for m in route_maps for n in story.geo.by_map[m]}
