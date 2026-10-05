@@ -1,0 +1,9 @@
+{"name":"PT04 Route 103: rival May (forced win)","start":{"save":"work/studio/scenes/pt03/end.sav"},"battle_resolution":"fixture_win",
+ "steps":[{"walk_to":[3,7],"label":"Mart mat"},{"hold":"DOWN","frames":40},{"frames":150,"label":"Oldale"},
+          {"walk_to":[10,0],"label":"Oldale north edge"},{"walk":["UP"],"label":"Route 103"},
+          {"tap":"B","every":40,"frames":2000,"min_frames":30,"until":"idle","label":"Route 103 idle"},
+          {"walk_to":[10,4],"face":"UP","label":"Facing May"},{"press":"A","frames":60,"label":"Talk"},
+          {"tap":"A","every":40,"frames":12000,"min_frames":120,"until":"idle","label":"Battle over"},{"frames":60,"label":"End"}],
+ "queries":{"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"},"birch_lab":{"kind":2,"id":"VAR_BIRCH_LAB_STATE"},
+            "rival_flag":{"kind":1,"id":"FLAG_HIDE_ROUTE_103_RIVAL"},"poke_ball":{"kind":4,"id":"ITEM_POKE_BALL"},"money":{"kind":9}},
+ "expect":{"ready":true}}

@@ -20,23 +20,32 @@ Rules
 
 ====================================================================================================
 STEP 1 - cap 14 - Rival May / Brendan, Route 103 (battle #1, all six starter variants)
+  VERIFIED IN PLAY (artifacts/playthrough/EVIDENCE.md, legs pt00-pt05; pair Mudkip + Treecko,
+  region Hoenn by default).
   Pokemon
-    Starters (Littleroot): any region's pair.
+    Starters (Littleroot): the chosen region's pair (the rival keeps the third).
     Route 101 grass: Fidough, Hoppip, Lillipup, Pawmi, Poochyena, Scatterbug (Icy Snow), Wurmple,
-      Zigzagoon, Zorua
+      Zigzagoon, Zorua   [table from src/data/wild_encounters.json; PokeNav screenshot pending]
     Route 103 grass: Blitzle, Grubbin, Kricketot, Rockruff, Shellos (West), Shinx, Snubbull, Toxel,
-      Wingull
+      Wingull   [same; Blitzle seen in play, pt04]
     Evolutions by 14: Silcoon/Cascoon -> Beautifly/Dustox, Kricketune, Spewpa -> Vivillon (Icy Snow);
       a Chimchar or Cyndaquil starter reaches Monferno or Quilava.
+    No fishing yet: the Old Rod comes from Mom only after the Pokedex (pt06), i.e. after this battle.
+  Before the battle the player must use the Leveler: May refuses below the cap
+    (Route103/scripts.inc:44); the Leveler raised the pair to Lv14 in play (pt05).
   Battle items
-    Center vendor kit: Choice Band, Choice Specs, Choice Scarf, Focus Sash, Eviolite, Leftovers
-    Poke Mart: Mental Herb, Red Card, Cell Battery
+    Center vendor kit (in Bag, pt07): Choice Band, Choice Specs, Choice Scarf, Focus Sash, Eviolite,
+      Leftovers
+    Poke Mart shelf (screenshot, pt03): Mental Herb 100, Red Card 1500, Cell Battery 1000
     Wild held: Wurmple (Pecha Berry / Bright Powder), Zigzagoon (Potion / Revive), Kricketot (- / Metronome),
-      Wingull (Pretty Feather / -)
+      Wingull (Pretty Feather / -)   [species data; held-item cleanup pending]
+  Other items (in Bag): Poke Ball x5 (Oldale Mart employee, pt02); tools from the Oldale Mart tour:
+    Poke Vial, Leveler, Regenerator, Repel Spray, Flight Beacon (pt03).
 
 ====================================================================================================
 STEP 2 - cap 14 - Route 102 trainers (Calvin, Rick, Allen, Tiana)
-  Adds nothing beyond Step 1 except Route 103's Old Rod: Magikarp, Remoraid.
+  Adds, after the rival: Pokedex, 30 Cherish Balls (lab, pt07 Bag), Old Rod (Mom, pt06 Bag).
+  Old Rod on Route 103: Magikarp, Remoraid (fishing slots 0-1, src/wild_encounter.c:342).
   (Route 102's own grass, fishing and berry trees do not count for Route 102's trainers.)
 
 ====================================================================================================

@@ -55,8 +55,10 @@ mistakes on water/elevation/ledges, missed side entrances). The owner no longer 
   pt00 truck (ng) -> pt00b out of truck -> pt00c clock set -> pt00d out of house -> pt00e/f May met
   (region default Hoenn, VAR_STARTER_GEN 3) -> pt00g north trigger -> pt00h rescue: pair Mudkip +
   Treecko (screenshots), forced win, back in Birch's lab (VAR_BIRCH_LAB_STATE 3).
-- Legs after: pt01 to Oldale, pt02 Mart employee (5 Poke Balls), pt03 Mart tour (tools).
-- Last end save: work/studio/scenes/pt03/end.sav (Oldale Mart, idle, 3,3)
+- Legs after: pt01 to Oldale, pt02 Mart employee, pt03 Mart tour, pt04 Route 103 (May needs Leveler),
+  pt05 Leveler + May (forced win), pt06 lab Pokedex + Mom Old Rod, pt07 Oldale vendor kit.
+  PILOT COMPLETE (Steps 1-2 inputs verified). Next: report to owner; then Step 3 (Route 102 trainers).
+- Last end save: work/studio/scenes/pt07/end.sav (Oldale Center, idle, 2,4)
 - Evidence table: artifacts/playthrough/EVIDENCE.md (update after every leg).
 - Tap B (not A) through tours/shops: A buys items (15 Mental Herbs happened once).
 - Next: lab -> Littleroot -> Route 101 -> Oldale (check gifts) -> Route 103 rival (forced win) ->
@@ -73,6 +75,11 @@ mistakes on water/elevation/ledges, missed side entrances). The owner no longer 
 - Steps 3-6 to be redone with this method after the pilot.
 
 ## Open items
+- Label drift found so far: PetalburgWoods ItemParalyzeHeal -> Nugget; Lab MayGivePokeBalls /
+  BrendanGivePokeBalls -> 30 Cherish Balls; Route116 ItemHPUp -> Muscle Band; RustboroCity
+  ItemAbilityCapsule -> Wise Glasses; Seaspray ItemStoneEdge -> Baxcalibrite; Seaspray Water_Pulse ->
+  Covert Cloak; PetalburgWoods_2 TM80Venoshock -> Toxic Orb; Woods_3 TM86_GrassKnot -> Nugget,
+  TM34_SludgeWave -> Victreebelite, Beedrillite -> Luminous Moss; Route104 ItemAudinite -> Shell Bell.
 - Label drift: item-ball script labels and flags that name a different item than finditem gives
   (e.g. PetalburgWoods_EventScript_ItemParalyzeHeal -> ITEM_NUGGET). Fix labels; add a check so a
   label/flag can never name a different item than the script gives; flag NPC dialogue that names

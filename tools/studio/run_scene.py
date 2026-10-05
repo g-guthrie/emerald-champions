@@ -121,7 +121,7 @@ async def run(spec,out):
                     nonlocal total
                     for i,d in enumerate(dirs):
                         mask=keys(d);before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
-                        moved=False
+                        origin=before;moved=False
                         for attempt in range(2):
                             for f in range(int(step.get("tile_limit",90))):
                                 studio.ingest(await studio.core.tick(mask,frames=1));recorder.observe(studio.packet,mask);total+=1
@@ -131,6 +131,7 @@ async def run(spec,out):
                             if not studio.state[0]:
                                 await settle_scene(f"Scene during {d} at {before[2]},{before[3]}")
                                 before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
+                                if before!=origin:moved=True;break  # the scene moved us (warp, cutscene)
                         if not moved and face_last and i==len(dirs)-1:return None  # only turning to face
                         if not moved:
                             recorder.mark("STUCK "+d,studio.packet)
