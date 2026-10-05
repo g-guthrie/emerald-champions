@@ -55,7 +55,7 @@ const struct EmeraldChampionsBattleSet *GetLegendaryAuthoredSet(enum Species spe
 bool32 IsLegendaryEncounterSpecies(enum Species species)
 {
     enum RestrictedPartyClass kind = GetRestrictedPartyClass(species);
-    return kind != RESTRICTED_PARTY_NONE;
+    return kind != RESTRICTED_PARTY_NONE && kind != RESTRICTED_PARTY_SPECIAL;
 }
 
 u8 GetLegendaryEncounterLevel(enum Species species)
@@ -93,6 +93,7 @@ bool32 IsWildSlotSpeciesAcquirable(enum Species species)
     switch (GetRestrictedPartyClass(species))
     {
     case RESTRICTED_PARTY_NONE:
+    case RESTRICTED_PARTY_SPECIAL:
         return TRUE;
     case RESTRICTED_PARTY_PARADOX:
         return !GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);

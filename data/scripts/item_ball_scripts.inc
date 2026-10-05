@@ -70,6 +70,7 @@ Route110_EventScript_ItemElixir:: @ 8290D8E
 	end
 
 Route111_EventScript_ItemTM37:: @ 8290D9B
+	goto_if_unset FLAG_IS_CHAMPION, Common_EventScript_ChampionStoneLocked
 	finditem ITEM_ZYGARDITE
 	end
 
@@ -590,7 +591,7 @@ Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest:: @ 829144F
 	end
 
 Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
-	finditem ITEM_MEWTWONITE_X
+	finditem ITEM_DUSK_BALL, 5
 	end
 
 Route110_TrickHousePuzzle7_EventScript_ItemBottleCap:: @ 8291469
@@ -618,7 +619,8 @@ VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
 	end
 
 VictoryRoad_B2F_EventScript_ItemFullHeal:: @ 82914B7
-	finditem ITEM_DUSK_BALL, 5
+	goto_if_unset FLAG_IS_CHAMPION, Common_EventScript_ChampionStoneLocked
+	finditem ITEM_MEWTWONITE_X
 	end
 
 ArtisanCave_B1F_EventScript_ItemHPUp:: @ 82914C4
@@ -742,8 +744,29 @@ Sandstrewn_Ruins_ItemGarchompite::
 	end
 
 Sandstrewn_Ruins_ItemLeechLife::
+	goto_if_unset FLAG_BADGE08_GET, Common_EventScript_FinalBadgeStoneLocked
 	finditem ITEM_DARKRANITE
 	end
+
+Common_EventScript_ChampionStoneLocked::
+	lock
+	faceplayer
+	msgbox Common_Text_ChampionStoneLocked, MSGBOX_DEFAULT
+	release
+	end
+
+Common_EventScript_FinalBadgeStoneLocked::
+	lock
+	faceplayer
+	msgbox Common_Text_FinalBadgeStoneLocked, MSGBOX_DEFAULT
+	release
+	end
+
+Common_Text_ChampionStoneLocked:
+	.string "The stone is dormant.\nReturn after becoming Champion.$"
+
+Common_Text_FinalBadgeStoneLocked:
+	.string "The stone is dormant.\nReturn with all eight Gym Badges.$"
 
 Sandstrewn_Ruins_ItemDomeFossil::
 	finditem ITEM_DOME_FOSSIL

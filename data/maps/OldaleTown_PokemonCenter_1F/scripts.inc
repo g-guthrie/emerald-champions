@@ -45,13 +45,10 @@ OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC: @ 81FC059
 	.string "Naturally, that means you're welcome\n"
 	.string "to use it, too.$"
 
-OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat: @ 81FC0CD
-	.string "Pokémon Centers are great!\p"
-	.string "Healing and the Move Tutor are free,\n"
-	.string "no matter how often you use them.\p"
-	.string "Not sure where to go next? Ask the\n"
-	.string "local guide over there. Every\l"
-	.string "Center has one!$"
+OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
+	.string "Your team gets one star!\p"
+	.string "That means one Legendary, Mythical,\nUltra Beast or Paradox Pokémon.\p"
+	.string "Gholdengo and Bloodmoon Ursaluna\nalso use that slot. Normal Ursaluna\ldoesn't. Its family stays ordinary.$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable: @ 81FC148
 	.string "The nurse has useful travel tools.\n"

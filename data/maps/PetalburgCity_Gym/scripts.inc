@@ -392,46 +392,7 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry:: @ 8204E1D
 @ have not reached the player yet, or Swampertite when the pair has none
 @ (src/mega_stone_rewards.c). The Bag check covers the Ring and every stone.
 PetalburgCity_Gym_EventScript_NormanGiveKeystone::
-	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, PetalburgCity_Gym_EventScript_NormanBattle
-	specialvar VAR_RESULT, CanReceiveNormanMegaGift
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
-	giveitem ITEM_MEGA_RING
-	setflag FLAG_SYS_RECEIVED_KEYSTONE
-	msgbox PetalburgCity_Gym_Text_NormanMegaBracelet, MSGBOX_DEFAULT
-	callnative BufferNormanMegaGiftKind
-	switch VAR_RESULT
-	case 0, PetalburgCity_Gym_EventScript_NormanStarterStones
-	case 1, PetalburgCity_Gym_EventScript_NormanStarterStone
-	case 2, PetalburgCity_Gym_EventScript_NormanFallbackStone
-	msgbox PetalburgCity_Gym_Text_NormanStonesAlreadyHeld, MSGBOX_DEFAULT
-	goto PetalburgCity_Gym_EventScript_NormanStonesGiven
-
-PetalburgCity_Gym_EventScript_NormanStarterStones::
-	msgbox PetalburgCity_Gym_Text_NormanStarterStones, MSGBOX_DEFAULT
-	goto PetalburgCity_Gym_EventScript_NormanNextStarterStone
-
-PetalburgCity_Gym_EventScript_NormanStarterStone::
-	msgbox PetalburgCity_Gym_Text_NormanStarterStone, MSGBOX_DEFAULT
-	goto PetalburgCity_Gym_EventScript_NormanNextStarterStone
-
-PetalburgCity_Gym_EventScript_NormanFallbackStone::
-	msgbox PetalburgCity_Gym_Text_NormanFallbackStone, MSGBOX_DEFAULT
-PetalburgCity_Gym_EventScript_NormanNextStarterStone::
-	callnative BufferNormanStarterMegaStone
-	goto_if_eq VAR_RESULT, ITEM_NONE, PetalburgCity_Gym_EventScript_NormanStonesGiven
-	copyvar VAR_0x8004, VAR_RESULT
-	giveitem VAR_0x8004
-	goto_if_eq VAR_RESULT, FALSE, PetalburgCity_Gym_EventScript_NormanStonesGiven
-	callnative MarkStarterMegaStoneReceived
-	goto PetalburgCity_Gym_EventScript_NormanNextStarterStone
-
-PetalburgCity_Gym_EventScript_NormanStonesGiven::
-	msgbox PetalburgCity_Gym_Text_NormanHoennPartnerStones, MSGBOX_DEFAULT
-	msgbox PetalburgCity_Gym_Text_NormanWheneverReady, MSGBOX_DEFAULT
-	release
-	end
+	goto PetalburgCity_Gym_EventScript_NormanBattle
 
 @ The Hoenn stones Norman did not give with the Ring wait here until the
 @ player shows him that partner's line; each is handed over once.

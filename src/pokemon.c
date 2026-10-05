@@ -3082,6 +3082,9 @@ enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species)
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return RESTRICTED_PARTY_NONE;
+    // Bloodmoon alone uses the star slot; its ordinary Ursaluna family does not.
+    if (species == SPECIES_GHOLDENGO || species == SPECIES_URSALUNA_BLOODMOON)
+        return RESTRICTED_PARTY_SPECIAL;
     info = &gSpeciesInfo[GET_BASE_SPECIES_ID(species)];
     if (info->isUltraBeast)
         return RESTRICTED_PARTY_ULTRA_BEAST;

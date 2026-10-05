@@ -95,6 +95,10 @@ enum EmeraldChampionsHeadlessScenario
 #define EC_HEADLESS_BATTLE_UI_ILLUSION   (1 << 2) // foe lead Zoroark, disguised as its last party member
 #define EC_HEADLESS_BATTLE_UI_PIXILATE   (1 << 3) // player lead Sylveon with Pixilate and Normal moves
 #define EC_HEADLESS_BATTLE_UI_THIRD_TYPE (1 << 4) // foe lead gains Ghost as a third type (Trick-or-Treat)
+#define EC_HEADLESS_BATTLE_UI_MEGA       (1 << 5) // Charizard and its stone
+#define EC_HEADLESS_BATTLE_UI_STAR       (1 << 6) // restricted reserve
+#define EC_HEADLESS_BATTLE_UI_SELF_MEGA  (1 << 7) // lead Darkrai instead
+#define EC_HEADLESS_BATTLE_UI_STAR_HEARD (1 << 8) // repeat visit to the battle UI
 
 enum EmeraldChampionsHeadlessLeafState
 {

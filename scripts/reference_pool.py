@@ -53,6 +53,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import emerald_champions_teams as teams
+from player_star_rule import restricted_exceptions
 import mega_register as mr
 from item_catalog import battle_item_categories
 from verify_trainer_ability_legality import preprocess_species_info, resolve_species, species_aliases
@@ -122,7 +123,7 @@ def player_rules() -> dict:
                             "Obtainable from the start (DexNav chains, random infection); the spring needs Lavaridge.",
                     "cite": [cite(ROOT / "src/pokerus.c", "GetPokerusNatureModifier"), cite(ROOT / "src/dexnav.c", "Pokerus"),
                              rel(MAPS_DIR / "LavaridgeTown/scripts.inc")]},
-        "restricted": {"rule": "At most ONE Legendary/Mythical/Ultra Beast/Paradox per party in total (judged on the base species: "
+        "restricted": {"rule": "One player star: at most one Legendary/Mythical/Ultra Beast/Paradox, Gholdengo or Bloodmoon Ursaluna. A restricted party member blocks every other Pokemon's Mega Evolution; it may Mega Evolve itself. Normal Ursaluna is ordinary. Metadata: "
                                "isUltraBeast / isRestrictedLegendary / isSubLegendary / isMythical / isParadox).",
                        "cite": [cite(pc, "GetRestrictedPartyClass"), cite(pc, "PlayerPartyWithinRestrictedLimit")]},
         "legend_level": {"rule": "Legend-class wild/static encounters arrive at the current cap with authored sets.",
@@ -325,6 +326,8 @@ class SpeciesData:
 
     def restricted_class(self, species: str) -> str | None:
         """GetRestrictedPartyClass (src/pokemon.c:3079-3094)."""
+        if self.resolve(species) in restricted_exceptions():
+            return "special"
         flags = self.info.get(self.base(species), {}).get("flags", set())
         if "isUltraBeast" in flags:
             return "ultra_beast"
@@ -649,7 +652,7 @@ class Builder:
         """(requirement, species needed, note) for a legend-class slot/static:
         MeetsSignProgression + MeetsSignDiscovery (src/legendary_signs.c:292-323)."""
         sp = self.S(species)
-        if self.species.restricted_class(sp) is None:
+        if self.species.restricted_class(sp) in (None, "special"):
             return [], (), ""
         # GetLegendarySignIdBySpecies (src/legendary_signs.c:250-268): the
         # species itself, else (unless a regional form) its base species.
@@ -1095,11 +1098,11 @@ BERRY_GIFTS = [
     ("CHERI", "CHESTO", "PECHA", "RAWST", "ASPEAR", "LEPPA", "ORAN", "PERSIM", "LUM", "SITRUS")
 ]
 EXTRA_ITEM_SOURCES = [
-    # Norman hands the Mega Ring with the stones of the starter pair's final
+    # Wattson hands the Mega Ring with the stones of the starter pair's final
     # forms (src/mega_stone_rewards.c:200-231 sStarterMegaStones; the pair can
     # be any region's), and later the Hoenn stones when shown that line.
-    *[(item, "PetalburgCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Norman's starter-pair Mega Stone (with the Ring)",
-       "src/mega_stone_rewards.c:200-231; PetalburgCity_Gym/scripts.inc:394-446")
+    *[(item, "MauvilleCity_Gym", ["FLAG_SYS_RECEIVED_KEYSTONE"], "Wattson's starter-pair Mega Stone (with the Ring)",
+       "src/mega_stone_rewards.c; MauvilleCity_Gym_EventScript_WattsonGiveKeystone")
       for item in ("ITEM_VENUSAURITE", "ITEM_CHARIZARDITE_X", "ITEM_CHARIZARDITE_Y", "ITEM_BLASTOISINITE",
                    "ITEM_MEGANIUMITE", "ITEM_FERALIGITE", "ITEM_SCEPTILITE", "ITEM_BLAZIKENITE", "ITEM_SWAMPERTITE",
                    "ITEM_EMBOARITE", "ITEM_CHESNAUGHTITE", "ITEM_DELPHOXITE", "ITEM_GRENINJITE")],

@@ -7,8 +7,69 @@
 #include "legendary_signs.h"
 #include "mega_stone_rewards.h"
 #include "pokemon.h"
+#include "script.h"
 #include "test/test.h"
 #include "constants/emerald_champions.h"
+#include "constants/flags.h"
+#include "constants/vars.h"
+
+extern ScrCmdFunc gScriptCmdTable[];
+extern ScrCmdFunc gScriptCmdTableEnd[];
+extern const u8 Route111_EventScript_ItemTM37[];
+extern const u8 Sandstrewn_Ruins_ItemLeechLife[];
+extern const u8 VictoryRoad_B2F_EventScript_ItemFullHeal[];
+extern const u8 Common_EventScript_ChampionStoneLocked[];
+extern const u8 Common_EventScript_FinalBadgeStoneLocked[];
+extern const u8 Std_FindItem[];
+
+TEST("Mega Stone progression: restricted stones wait without consuming their pickups")
+{
+    u32 choice;
+    PARAMETRIZE { choice = 0; }
+    PARAMETRIZE { choice = 1; }
+    PARAMETRIZE { choice = 2; }
+    static const struct {
+        const u8 *script, *locked;
+        enum Item item;
+        u16 milestone, receipt;
+    } stones[] = {
+        {Route111_EventScript_ItemTM37, Common_EventScript_ChampionStoneLocked,
+            ITEM_ZYGARDITE, FLAG_IS_CHAMPION, FLAG_ITEM_ROUTE_111_TM_37},
+        {Sandstrewn_Ruins_ItemLeechLife, Common_EventScript_FinalBadgeStoneLocked,
+            ITEM_DARKRANITE, FLAG_BADGE08_GET, FLAG_SANDSTREWN_RUINS_LEECH_LIFE},
+        {VictoryRoad_B2F_EventScript_ItemFullHeal, Common_EventScript_ChampionStoneLocked,
+            ITEM_MEWTWONITE_X, FLAG_IS_CHAMPION, FLAG_ITEM_VICTORY_ROAD_B2F_FULL_HEAL},
+    };
+    bool32 savedMilestone = FlagGet(stones[choice].milestone);
+    bool32 savedReceipt = FlagGet(stones[choice].receipt);
+    ClearBag();
+    FlagClear(stones[choice].receipt);
+    for (u32 unlocked = 0; unlocked <= 1; unlocked++)
+    {
+        struct ScriptContext ctx;
+        if (unlocked)
+            FlagSet(stones[choice].milestone);
+        else
+            FlagClear(stones[choice].milestone);
+        VarSet(VAR_0x8000, ITEM_NONE);
+        InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
+        SetupBytecodeScript(&ctx, stones[choice].script);
+        for (u32 step = 0; step < 8
+            && ctx.scriptPtr != stones[choice].locked && ctx.scriptPtr != Std_FindItem; step++)
+        {
+            u8 command = *ctx.scriptPtr++;
+            EXPECT(!ctx.cmdTable[command](&ctx));
+        }
+        EXPECT_EQ(ctx.scriptPtr, unlocked ? Std_FindItem : stones[choice].locked);
+        EXPECT_EQ(VarGet(VAR_0x8000), unlocked ? stones[choice].item : ITEM_NONE);
+        EXPECT(!FlagGet(stones[choice].receipt));
+        EXPECT_EQ(CountTotalItemQuantityInBag(stones[choice].item), 0);
+    }
+    if (!savedMilestone)
+        FlagClear(stones[choice].milestone);
+    if (savedReceipt)
+        FlagSet(stones[choice].receipt);
+}
 
 static void ResetHarvest(void)
 {

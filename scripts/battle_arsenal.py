@@ -34,6 +34,8 @@ def species_rules():
         block = text[mark.end():marks[index + 1].start() if index + 1 < len(marks) else len(text)]
         if re.search(r'\.(?:isRestrictedLegendary|isSubLegendary|isMythical|isUltraBeast|isParadox)\s*=\s*1\b', block):
             restricted.add(mark[1])
+    from player_star_rule import restricted_exceptions
+    restricted |= restricted_exceptions()
     aliases = species_aliases()
     return configured_species_abilities(), restricted, aliases
 
@@ -185,6 +187,10 @@ def validate_party(scenario: dict, manifest: dict, *, internal_fingerprint=None,
             needed[item] += 1
     if restricted_count > 1:
         raise ValueError('party contains multiple restricted Pokemon')
+    from player_star_rule import blocked_mega_slots
+    blocked = blocked_mega_slots(party, restricted, aliases)
+    if blocked:
+        raise ValueError('one star: a restricted party member blocks separate Mega loadouts in slots ' + ', '.join(str(i + 1) for i in blocked) + '; declare mega_disabled=true for an intentionally inert stone')
     mega_stones = set(re.findall(r'ITEM_\w+', (ROOT / 'src/data/emerald_champions_mega_stones.h').read_text()))
     for state in states:
         check_evidence(state.get('source_evidence'))

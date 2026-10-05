@@ -412,6 +412,8 @@ def _species_acquisition_metadata(species_text):
                      if re.search(r'\.'+kind+r'\s*=\s*(ITEM_\w+)',block) else 'ITEM_NONE')
                for kind in ('itemCommon','itemRare')}
         items['restricted']=bool(re.search(r'\.(?:isRestrictedLegendary|isMythical|isUltraBeast|isParadox|isSubLegendary)\s*=\s*(?:1|TRUE)\b',block))
+        from player_star_rule import restricted_exceptions
+        items['restricted'] |= mark[1] in restricted_exceptions()
         result[mark[1]]=items
     return result
 

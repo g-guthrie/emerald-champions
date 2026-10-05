@@ -226,6 +226,9 @@ def species_classes():
             classes[name] = PARADOX
         else:
             classes[name] = ORDINARY
+    from player_star_rule import restricted_exceptions
+    for species in restricted_exceptions():
+        classes[species] = ORDINARY # Party-only stars retain ordinary encounter rules.
     return classes
 
 

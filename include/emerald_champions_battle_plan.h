@@ -42,6 +42,7 @@ struct EmeraldChampionsBattleTactic
 
 u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler);
 bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler);
+bool32 EmeraldChampions_PlayerHasBlockedMega(void);
 u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler);
 #if EC_HEADLESS_FIXTURES
 // The compiled plan, Mega permissions and tactics of one trainer, for the

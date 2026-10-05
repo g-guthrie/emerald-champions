@@ -54,8 +54,12 @@ class TuningPoolCheckTests(unittest.TestCase):
     def check(self, *party, pool=POOL):
         return checker.check(manifest(*party), pool)
 
+    def test_restricted_plus_separate_mega_is_blocked(self):
+        problems = self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), mon("SPECIES_ENTEI"))
+        self.assertTrue(any("one star" in problem for problem in problems))
+
     def test_legal_party_passes(self):
-        self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE", level=45, friendship=255),
+        self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE", level=45, friendship=255, mega_disabled=True),
                                     mon("SPECIES_ENTEI", "ITEM_LIFE_ORB"), mon("SPECIES_ROTOM_WASH", "ITEM_LEFTOVERS"),
                                     mon("SPECIES_AGGRON", "ITEM_LIFE_ORB")), [])
 

@@ -827,6 +827,7 @@ enum RestrictedPartyClass
     RESTRICTED_PARTY_LEGENDARY,
     RESTRICTED_PARTY_ULTRA_BEAST,
     RESTRICTED_PARTY_PARADOX,
+    RESTRICTED_PARTY_SPECIAL, // Gholdengo and Bloodmoon: party-only stars.
 };
 enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species);
 bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot);

@@ -33,9 +33,11 @@ enum {
     TAG_LOGO_SHINE,
 };
 
-#define VERSION_BANNER_RIGHT_TILEOFFSET 128
-#define VERSION_BANNER_LEFT_X 98
-#define VERSION_BANNER_RIGHT_X 162
+#define VERSION_BANNER_MIDDLE_TILEOFFSET 128
+#define VERSION_BANNER_RIGHT_TILEOFFSET 256
+#define VERSION_BANNER_LEFT_X 56
+#define VERSION_BANNER_MIDDLE_X 120
+#define VERSION_BANNER_RIGHT_X 184
 #define VERSION_BANNER_Y 18
 #define VERSION_BANNER_Y_GOAL 82
 #define START_BANNER_X 128
@@ -154,6 +156,12 @@ static const union AnimCmd sVersionBannerRightAnimSequence[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sVersionBannerMiddleAnimSequence[] =
+{
+    ANIMCMD_FRAME(VERSION_BANNER_MIDDLE_TILEOFFSET, 30),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
 {
     sVersionBannerLeftAnimSequence,
@@ -162,6 +170,11 @@ static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
 static const union AnimCmd *const sVersionBannerRightAnimTable[] =
 {
     sVersionBannerRightAnimSequence,
+};
+
+static const union AnimCmd *const sVersionBannerMiddleAnimTable[] =
+{
+    sVersionBannerMiddleAnimSequence,
 };
 
 static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
@@ -182,11 +195,20 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .callback = SpriteCB_VersionBannerRight,
 };
 
+static const struct SpriteTemplate sVersionBannerMiddleSpriteTemplate =
+{
+    .tileTag = TAG_VERSION,
+    .paletteTag = TAG_VERSION,
+    .oam = &sVersionBannerRightOamData,
+    .anims = sVersionBannerMiddleAnimTable,
+    .callback = SpriteCB_VersionBannerRight,
+};
+
 static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 {
     {
         .data = gTitleScreenEmeraldVersionGfx,
-        .size = 0x2000,
+        .size = 0x3000,
         .tag = TAG_VERSION
     },
     {},
@@ -607,8 +629,8 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        // The regenerated Inclement Emerald 2 banner uses 17 colors.
-        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), 17 * sizeof(u16));
+        // The modern rain-and-fog banner uses 50 colors including transparency.
+        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), 50 * sizeof(u16));
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -709,6 +731,10 @@ static void Task_TitleScreenPhase1(u8 taskId)
         // Create left side of version banner
         spriteId = CreateSprite(&sVersionBannerLeftSpriteTemplate, VERSION_BANNER_LEFT_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].sAlphaBlendIdx = ARRAY_COUNT(gTitleScreenAlphaBlend);
+        gSprites[spriteId].sParentTaskId = taskId;
+
+        // Create middle of version banner
+        spriteId = CreateSprite(&sVersionBannerMiddleSpriteTemplate, VERSION_BANNER_MIDDLE_X, VERSION_BANNER_Y, 0);
         gSprites[spriteId].sParentTaskId = taskId;
 
         // Create right side of version banner

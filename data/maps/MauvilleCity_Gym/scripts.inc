@@ -75,6 +75,7 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
+	call MauvilleCity_Gym_EventScript_WattsonGiveKeystone
 	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
 	compare VAR_NEW_MAUVILLE_STATE, 6
 	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
@@ -107,6 +108,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
+	call MauvilleCity_Gym_EventScript_WattsonGiveKeystone
 	giveuniqueitem ITEM_RAICHUNITE_X
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -116,6 +118,7 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
+	call MauvilleCity_Gym_EventScript_WattsonGiveKeystone
 	giveuniqueitem ITEM_RAICHUNITE_X
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
@@ -396,7 +399,7 @@ MauvilleCity_Gym_Text_ExplainTakeThis:
 MauvilleCity_Gym_Text_ExplainVoltSwitch: @ 820E844
 	.string "Raichunite X! A Raichu holding\n"
 	.string "it can Mega Evolve once you have\l"
-	.string "a Mega Ring.\p"
+	.string "your new Mega Ring.\p"
 	.string "Put that spark to good use!$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle: @ 820E8E3
@@ -414,3 +417,60 @@ MauvilleCity_Gym_Text_GymStatueCertified: @ 820E96C
 	.string "Mauville City Pokémon Gym\p"
 	.string "Wattson's Certified Trainers:\n"
 	.string "{PLAYER}$"
+
+MauvilleCity_Gym_EventScript_WattsonGiveKeystone::
+	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, Common_EventScript_NopReturn
+	specialvar VAR_RESULT, CanReceiveNormanMegaGift
+	compare VAR_RESULT, FALSE
+	goto_if_eq MauvilleCity_Gym_EventScript_MegaGiftFull
+	msgbox MauvilleCity_Gym_Text_MegaRingGift, MSGBOX_DEFAULT
+	giveitem ITEM_MEGA_RING
+	setflag FLAG_SYS_RECEIVED_KEYSTONE
+	msgbox MauvilleCity_Gym_Text_MegaStarRule, MSGBOX_DEFAULT
+	callnative BufferNormanMegaGiftKind
+	switch VAR_RESULT
+	case 0, MauvilleCity_Gym_EventScript_WattsonStarterStones
+	case 1, MauvilleCity_Gym_EventScript_WattsonStarterStone
+	case 2, MauvilleCity_Gym_EventScript_WattsonFallbackStone
+	msgbox PetalburgCity_Gym_Text_NormanStonesAlreadyHeld, MSGBOX_DEFAULT
+	goto MauvilleCity_Gym_EventScript_WattsonStonesGiven
+
+MauvilleCity_Gym_EventScript_WattsonStarterStones::
+	msgbox PetalburgCity_Gym_Text_NormanStarterStones, MSGBOX_DEFAULT
+	goto MauvilleCity_Gym_EventScript_WattsonNextStarterStone
+
+MauvilleCity_Gym_EventScript_WattsonStarterStone::
+	msgbox PetalburgCity_Gym_Text_NormanStarterStone, MSGBOX_DEFAULT
+	goto MauvilleCity_Gym_EventScript_WattsonNextStarterStone
+
+MauvilleCity_Gym_EventScript_WattsonFallbackStone::
+	msgbox PetalburgCity_Gym_Text_NormanFallbackStone, MSGBOX_DEFAULT
+MauvilleCity_Gym_EventScript_WattsonNextStarterStone::
+	callnative BufferNormanStarterMegaStone
+	goto_if_eq VAR_RESULT, ITEM_NONE, MauvilleCity_Gym_EventScript_WattsonStonesGiven
+	copyvar VAR_0x8004, VAR_RESULT
+	giveitem VAR_0x8004
+	goto_if_eq VAR_RESULT, FALSE, MauvilleCity_Gym_EventScript_WattsonStonesGiven
+	callnative MarkStarterMegaStoneReceived
+	goto MauvilleCity_Gym_EventScript_WattsonNextStarterStone
+
+MauvilleCity_Gym_EventScript_WattsonStonesGiven::
+	msgbox MauvilleCity_Gym_Text_NormanPartnerStones, MSGBOX_DEFAULT
+	return
+
+MauvilleCity_Gym_EventScript_MegaGiftFull::
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+	return
+
+MauvilleCity_Gym_Text_MegaRingGift:
+	.string "Wahahah! Take this Mega Ring!$"
+
+MauvilleCity_Gym_Text_MegaStarRule:
+	.string "Give a Pokémon its Mega Stone.\nPress START when choosing a move.\p"
+	.string "Your team gets one star: a\nrestricted Pokémon or a Mega.\p"
+	.string "With a restricted partner, only\nthat partner may Mega Evolve.\p"
+	.string "Other partners can keep their\nMega Stones, but cannot use them.$"
+
+MauvilleCity_Gym_Text_NormanPartnerStones:
+	.string "Norman keeps the Hoenn partners'\nother Mega Stones in Petalburg.\p"
+	.string "Show him a partner of that line\nonce you have one!$"

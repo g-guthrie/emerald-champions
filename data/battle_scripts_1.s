@@ -6307,3 +6307,8 @@ BattleScript_BelchFails::
 	printstring STRINGID_BELCHCANTSELECT
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_OneStarRule::
+	printstring STRINGID_ONESTARRULE
+	waitmessage B_WAIT_TIME_LONG
+	end

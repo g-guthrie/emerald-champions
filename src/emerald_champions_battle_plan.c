@@ -10,6 +10,9 @@
 #include "emerald_champions_agent_battle.h"
 #include "emerald_champions_battle_plan.h"
 #include "pokemon.h"
+#include "item.h"
+#include "constants/items.h"
+#include "constants/form_change_types.h"
 #include "constants/moves.h"
 #include "constants/opponents.h"
 #include "data/emerald_champions_battle_plans.h"
@@ -86,6 +89,14 @@ u32 EmeraldChampions_GetCompiledPlan(u32 trainer, u32 *plan, u32 *megaPermission
 
 bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
 {
+    // One player star: a restricted party member blocks other Pokemon's Megas,
+    // including while fainted or in reserve. Its own Mega remains eligible.
+    // Trainer opponents and an NPC partner retain their authored permissions.
+    if (GetBattlerTrainer(battler) == B_TRAINER_PLAYER
+     && GetRestrictedPartyClass(gBattleMons[battler].species) == RESTRICTED_PARTY_NONE
+     && GetUniquePartyRestrictedSlot() != PARTY_SIZE)
+        return FALSE;
+
     // A legend's trump form is the final act's: the player's Rayquaza keeps
     // Dragon Ascent but Mega Evolves only after the Hall of Fame, like the
     // Orbs, Rusted weapons and fusion tools (legendary_signs.c).
@@ -107,6 +118,26 @@ bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
         return TRUE;
     return gBattlerPartyIndexes[battler] < PARTY_SIZE
         && (permissions & (1u << gBattlerPartyIndexes[battler]));
+}
+
+bool32 EmeraldChampions_PlayerHasBlockedMega(void)
+{
+    if (GetUniquePartyRestrictedSlot() == PARTY_SIZE || !CheckBagHasItem(ITEM_MEGA_RING, 1))
+        return FALSE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG)
+         || GetRestrictedPartyClass(species) != RESTRICTED_PARTY_NONE)
+            continue;
+        const struct FormChange *forms = GetSpeciesFormChanges(species);
+        enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
+        for (u32 i = 0; forms != NULL && forms[i].method != FORM_CHANGE_TERMINATOR; i++)
+            if (forms[i].method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM && forms[i].param1 == item)
+                return TRUE;
+    }
+    return FALSE;
 }
 
 // Explicit endgame exceptions. Player, ordinary trainer and foreign battle

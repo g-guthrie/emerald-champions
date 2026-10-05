@@ -79,7 +79,7 @@ class PokemonSources:
                        requires=[list(a) for a in s.requires], needs_species=list(s.needs_species),
                        needs_items=list(s.needs_items), detail=s.detail,
                        citations=[s.cite], conditions=[])
-            if self.sd.restricted_class(s.key):
+            if self.sd.restricted_class(s.key) not in (None, "special"):
                 row['conditions'].append('Legend-class spawn stops after its species/family is caught; one restricted Pokemon in party total')
                 row['citations'].append(_citation('src/legendary_signs.c', 'MeetsSignDiscovery'))
             base = self.sd.base(s.key)

@@ -15,12 +15,17 @@ TEST("Restricted party: special categories share one slot, including forms and l
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_NAGANADEL), RESTRICTED_PARTY_ULTRA_BEAST);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_FLUTTER_MANE), RESTRICTED_PARTY_PARADOX);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_ROARING_MOON), RESTRICTED_PARTY_PARADOX);
-    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA_BLOODMOON), RESTRICTED_PARTY_NONE);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA_BLOODMOON), RESTRICTED_PARTY_SPECIAL);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_GHOLDENGO), RESTRICTED_PARTY_SPECIAL);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA), RESTRICTED_PARTY_NONE);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_GIMMIGHOUL), RESTRICTED_PARTY_NONE);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSARING), RESTRICTED_PARTY_NONE);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_GARCHOMP), RESTRICTED_PARTY_NONE);
     static const enum Species special[] = {
         SPECIES_SHAYMIN_SKY, SPECIES_MEWTWO, SPECIES_NAGANADEL, SPECIES_FLUTTER_MANE,
         SPECIES_WALKING_WAKE, SPECIES_IRON_LEAVES, SPECIES_RAGING_BOLT,
         SPECIES_GOUGING_FIRE, SPECIES_IRON_BOULDER, SPECIES_IRON_CROWN,
+        SPECIES_GHOLDENGO, SPECIES_URSALUNA_BLOODMOON,
     };
 
     ZeroPlayerPartyMons();
@@ -35,7 +40,7 @@ TEST("Restricted party: special categories share one slot, including forms and l
         CreateMon(&gParties[B_TRAINER_PLAYER][0], special[i], 14, 0, OTID_STRUCT_PLAYER_ID);
         EXPECT(PlayerPartyWithinRestrictedLimit());
         EXPECT(PlayerPartyLeagueEligible());
-        EXPECT(CanAddRestrictedMonToParty(SPECIES_URSALUNA_BLOODMOON, PARTY_SIZE));
+        EXPECT(CanAddRestrictedMonToParty(SPECIES_URSALUNA, PARTY_SIZE));
         for (u32 j = 0; j < ARRAY_COUNT(special); j++)
         {
             EXPECT(!CanAddRestrictedMonToParty(special[j], PARTY_SIZE));

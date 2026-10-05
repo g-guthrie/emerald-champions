@@ -142,7 +142,8 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         elif row is None:
             problems.append(f"{tag}: {sp} is not obtainable by {milestone} (cap {cap})")
         else:
-            if row.get("restricted_class"):
+            from player_star_rule import restricted_exceptions
+            if row.get("restricted_class") or sp in restricted_exceptions():
                 restricted.append((slot, sp, row["restricted_class"]))
             ability = mon.get("ability")
             if ability and row.get("abilities") and ability not in row["abilities"]:
@@ -192,6 +193,11 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         problems.append("more than one Legendary/Mythical/Ultra Beast/Paradox: "
                         + ", ".join(f"slot {s} {sp} ({c})" for s, sp, c in restricted)
                         + " (src/pokemon.c GetRestrictedPartyClass / PlayerPartyWithinRestrictedLimit)")
+    from player_star_rule import blocked_mega_slots, restricted_exceptions
+    restricted_species = {sp for sp, row in species_rows.items() if row.get("restricted_class")} | restricted_exceptions()
+    blocked = blocked_mega_slots(party, restricted_species, aliases)
+    if blocked:
+        problems.append("one star: restricted party blocks separate Mega loadouts in slots " + ", ".join(str(i + 1) for i in blocked) + "; mega_disabled=true permits an inert stone")
     gc = pool.get("game_corner_gate")
     order = pool.get("milestone_order") or []
     before_gc = gc is None or (order and milestone in order and gc in order and order.index(milestone) < order.index(gc))

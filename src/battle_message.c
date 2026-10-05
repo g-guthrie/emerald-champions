@@ -899,7 +899,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LOSTSOMEOFITSHP]                      = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} lost some of its HP!"),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} hasn't eaten any held Berries, so it can't possibly belch!\p"),
     [STRINGID_SWAPSPECIALMON] = COMPOUND_STRING("Your special Pokémon slot is full.\pReplace {B_COPY_VAR_1}\nwith {B_DEF_NAME}?"),
-    [STRINGID_SPECIALMONSENTTOPC] = COMPOUND_STRING("Legendary, Mythical, Ultra Beast\nor Paradox: one total per party.\p{B_COPY_VAR_2} was sent to\n“{B_COPY_VAR_1}” in the PC.\pYou can swap your special\nPokémon at a PC."),
+    [STRINGID_ONESTARRULE] = COMPOUND_STRING("Your star blocks other Pokémon\nfrom Mega Evolving."),
+    [STRINGID_SPECIALMONSENTTOPC] = COMPOUND_STRING("Your restricted star slot is full.\p{B_COPY_VAR_2} was sent to\n“{B_COPY_VAR_1}” in the PC.\pYou can swap your special\nPokémon at a PC."),
     [STRINGID_LEGENDARYRELICWAITS]                  = COMPOUND_STRING("{STR_VAR_1} will be waiting for you at a Pokémon Center once you become the Champion!"),
 };
 

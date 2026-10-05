@@ -1697,8 +1697,8 @@
 #define FLAG_EC_RECEIVED_EON_TICKET                     (SYSTEM_FLAGS + 0xB7)
 #define FLAG_SANDSTREWN_RUINS_ODD_KEYSTONE              (SYSTEM_FLAGS + 0xB8) // Old 0x20E is a live legacy Underwater Route 128 Dive Ball receipt.
 #define FLAG_SANDSTREWN_RUINS_OLD_AMBER                  (SYSTEM_FLAGS + 0xB9) // No pre-rebase Sandstrewn pickup; old 0xE9 is a live Trick House receipt.
-// Reserved former Circuit lottery-ticket bit; the current lottery uses daily draws.
-#define FLAG_EC_LOTTERY_TICKET_READY                (SYSTEM_FLAGS + 0xBA)
+// Former Circuit lottery-ticket bit, reused for the one-time star lesson.
+#define FLAG_EC_STAR_RULE_EXPLAINED                 (SYSTEM_FLAGS + 0xBA)
 #define FLAG_EC_TUTOR_MACHINES_LINE_SEEN            (SYSTEM_FLAGS + 0xBB) // Emerald Champions: the Center tutor explained once that machines are gone
 #define FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS       (SYSTEM_FLAGS + 0xBC) // Emerald Champions: the vendor has handed over the six opening held items
 #define FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F                           (SYSTEM_FLAGS + 0xBD) // Unused Flag

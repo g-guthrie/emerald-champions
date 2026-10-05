@@ -1120,6 +1120,23 @@ static void PrepareHeadlessBattleUi(void)
         SetMonMoveSlot(&player[1], MOVE_HELPING_HAND, 2);
         SetMonMoveSlot(&player[1], MOVE_PROTECT, 3);
     }
+    if (param & EC_HEADLESS_BATTLE_UI_MEGA)
+    {
+        bool32 ownMega = (param & EC_HEADLESS_BATTLE_UI_SELF_MEGA) != 0;
+        u16 stone = ownMega ? ITEM_DARKRANITE : ITEM_CHARIZARDITE_X;
+        CreateHealthyHeadlessMon(&player[0], ownMega ? SPECIES_DARKRAI : SPECIES_CHARIZARD, 30, OTID_STRUCT_PLAYER_ID);
+        SetMonData(&player[0], MON_DATA_HELD_ITEM, &stone);
+        SetMonMoveSlot(&player[0], ownMega ? MOVE_DARK_PULSE : MOVE_FLAMETHROWER, 0);
+        SetMonMoveSlot(&player[0], ownMega ? MOVE_SLUDGE_BOMB : MOVE_DRAGON_PULSE, 1);
+        SetMonMoveSlot(&player[0], ownMega ? MOVE_FOCUS_BLAST : MOVE_AIR_SLASH, 2);
+        SetMonMoveSlot(&player[0], MOVE_PROTECT, 3);
+        if (param & EC_HEADLESS_BATTLE_UI_STAR)
+            CreateHealthyHeadlessMon(&player[isDouble ? 2 : 1], ownMega ? SPECIES_CHARIZARD : SPECIES_DARKRAI, 30, OTID_STRUCT_PLAYER_ID);
+        if (param & EC_HEADLESS_BATTLE_UI_STAR_HEARD)
+            FlagSet(FLAG_EC_STAR_RULE_EXPLAINED);
+        else
+            FlagClear(FLAG_EC_STAR_RULE_EXPLAINED);
+    }
     CalculatePlayerPartyCount();
 
     // Illusion copies the last party member that is neither the user nor its partner.
@@ -1157,6 +1174,8 @@ static void PrepareHeadlessBattleUi(void)
     }
 
     ClearBag();
+    if (param & EC_HEADLESS_BATTLE_UI_MEGA)
+        AddBagItem(ITEM_MEGA_RING, 1);
     AddBagItem(ITEM_QUICK_BALL, 10);
     gLastThrownBall = ITEM_QUICK_BALL;
     gBallToDisplay = ITEM_QUICK_BALL;

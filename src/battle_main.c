@@ -20,6 +20,7 @@
 #include "battle_tower.h"
 #include "battle_z_move.h"
 #include "battle_gimmick.h"
+#include "emerald_champions_battle_plan.h"
 #include "berry.h"
 #include "bg.h"
 #include "data.h"
@@ -3668,6 +3669,14 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (ShouldDoTrainerSlide(B_BATTLER_2, TRAINER_SLIDE_BEFORE_FIRST_TURN))
             BattleScriptExecute(BattleScript_TrainerPartnerSlideMsgEnd);
         gBattleStruct->eventState.beforeFirstTurn++;
+        break;
+    case FIRST_TURN_EVENTS_ONE_STAR:
+        gBattleStruct->eventState.beforeFirstTurn++;
+        if (!FlagGet(FLAG_EC_STAR_RULE_EXPLAINED) && EmeraldChampions_PlayerHasBlockedMega())
+        {
+            FlagSet(FLAG_EC_STAR_RULE_EXPLAINED);
+            BattleScriptExecute(BattleScript_OneStarRule);
+        }
         break;
     case FIRST_TURN_EVENTS_END:
         for (enum BattlerId battler = 0; battler < MAX_BATTLERS_COUNT; battler++)

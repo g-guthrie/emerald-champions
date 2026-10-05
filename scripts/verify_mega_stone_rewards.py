@@ -2,7 +2,7 @@
 """Check native Mega Stones against structurally linked world reward sources.
 
 Starter Mega Stones are dynamic: src/mega_stone_rewards.c (sStarterMegaStones)
-gives each one a single receipt flag shared by Norman's Mega Ring gift, its world
+gives each one a single receipt flag shared by Wattson's Mega Ring gift, its world
 home (a sparkle's object flag or a Gym Leader's receipt) and, for the Hoenn
 stones, Norman's shown-partner gift. Sources that close the same receipt count
 as one finite source; this script proves every home really closes on that flag.
@@ -155,13 +155,16 @@ def link_starter_mega_stones(root, rewards, nodes, object_flags, give_labels, sp
                          f"missing {sorted(expected - listed)}, extra {sorted(listed - expected)}")
     for native in set(NORMAN_NATIVES + PARTNER_NATIVES):
         locations = special_sources.get(native)
-        if not locations or set(locations) != {"PetalburgCity_Gym"}:
-            raise ValueError(f"{native}: Norman's starter stone gift must be reachable only from PetalburgCity_Gym")
+        expected = ({"MauvilleCity_Gym", "PetalburgCity_Gym"} if native == "MarkStarterMegaStoneReceived"
+                    else {"PetalburgCity_Gym"} if native == "BufferNormanPartnerMegaStone"
+                    else {"MauvilleCity_Gym"})
+        if not locations or set(locations) != expected:
+            raise ValueError(f"{native}: starter stone gift has incorrect source ownership")
     code = (root / "src/mega_stone_rewards.c").read_text()
     mark = re.search(r"void MarkStarterMegaStoneReceived\(void\)\s*\{(.*?)^\}", code, re.S | re.M)
     if not mark or "FlagSet(sStarterMegaStones[i].flag)" not in mark[1]:
         raise ValueError("MarkStarterMegaStoneReceived must set the stone's table receipt")
-    norman = nodes.get("PetalburgCity_Gym_EventScript_NormanNextStarterStone", ("",))[0]
+    norman = nodes.get("MauvilleCity_Gym_EventScript_WattsonNextStarterStone", ("",))[0]
     partner = nodes.get("PetalburgCity_Gym_EventScript_NormanPartnerStones", ("",))[0]
     for body, label in ((norman, "NormanNextStarterStone"), (partner, "NormanPartnerStones")):
         # The receipt is written only after the item popup succeeds.
@@ -189,7 +192,7 @@ def link_starter_mega_stones(root, rewards, nodes, object_flags, give_labels, sp
             if not (guarded_first or guarded_uses):
                 raise ValueError(f"{location}/{label}: {item} must be guarded by its receipt {flag}")
         rewards[item] = [f"{source} [receipt {flag}]" for source in homes]
-        rewards[item].append(f"PetalburgCity_Gym: Norman's Mega Ring gift for the starter pair [receipt {flag}]")
+        rewards[item].append(f"MauvilleCity_Gym: Wattson's Mega Ring gift for the starter pair [receipt {flag}]")
         if hoenn:
             rewards[item].append(f"PetalburgCity_Gym: Norman, shown a partner of this line [receipt {flag}]")
 
@@ -236,7 +239,7 @@ def main() -> None:
     if catalogue_stones:
         raise SystemExit(f"Mega Stones cannot be free catalogue stock: {sorted(catalogue_stones)}")
     print(f"PASS: all {len(rewards)} Mega Stones have one finite pickup and at most one one-time Berry Master trade")
-    print(f"PASS: {len(starter_mega_stones())} starter Mega Stones share one receipt between Norman and their home")
+    print(f"PASS: {len(starter_mega_stones())} starter Mega Stones share one receipt between Wattson, Norman and their home")
     print("PASS: no free Mega archive or catalogue stock")
 
 

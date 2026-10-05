@@ -26,7 +26,7 @@ PREP_RESULTS = {
     10: 'ability not available to this species',
     11: 'bad held item',
     12: 'bad EV spread',
-    13: ('restricted party: only one Legendary, Mythical, Ultra Beast or Paradox '
+    13: ('restricted party: only one Legendary, Mythical, Ultra Beast, Paradox, Gholdengo or Bloodmoon Ursaluna '
          'Pokemon is allowed per party in total'),
     14: 'bad IV spread (each IV must be between 0 and 31)',
     15: 'bad friendship (must be between 0 and 255)',
