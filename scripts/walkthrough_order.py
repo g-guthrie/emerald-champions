@@ -80,6 +80,13 @@ def uses_full_pool(map_name: str | None) -> bool:
 OWN_ROUTE_COUNTS = {f"TRAINER_{rival}_ROUTE_103_{starter}"
                     for rival in ("MAY", "BRENDAN") for starter in ("TREECKO", "TORCHIC", "MUDKIP")}
 
+# Trainers met after a later area than their own map's: Route 104's north half
+# is reached through Petalburg Woods, so its trainers have walked the Woods.
+WALKED_THROUGH = {
+    **{f"TRAINER_WINSTON_{n}": "PetalburgWoods" for n in range(1, 6)},
+    **{f"TRAINER_GINA_AND_MIA_{n}": "PetalburgWoods" for n in range(1, 3)},
+}
+
 
 def allowed_maps(map_name: str | None, milestone: str, all_maps, trainer: str | None = None) -> set[str] | None:
     """Maps a route trainer's player may draw on, or None for the full pool."""
@@ -90,5 +97,6 @@ def allowed_maps(map_name: str | None, milestone: str, all_maps, trainer: str | 
         return None
     # The trainer's own route never counts: only the areas walked before it,
     # or the story frontier for an area revisited later.
-    limit = max(own if trainer in OWN_ROUTE_COUNTS else own - 1, FRONTIER.get(milestone, 0))
+    walked = _index(WALKED_THROUGH[trainer]) if trainer in WALKED_THROUGH else own - 1
+    limit = max(own if trainer in OWN_ROUTE_COUNTS else walked, FRONTIER.get(milestone, 0))
     return {m for m in all_maps if (c := chapter_of(m)) is not None and c <= limit}

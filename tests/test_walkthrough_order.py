@@ -27,6 +27,12 @@ class WalkthroughOrderTest(unittest.TestCase):
         self.assertIn("Route103", w.allowed_maps("Route103", "start", maps, "TRAINER_MAY_ROUTE_103_TREECKO"))
         self.assertNotIn("Route103", w.allowed_maps("Route103", "start", maps, "TRAINER_SOMEONE_ELSE"))
 
+    def test_route_104_north_trainers_have_walked_the_woods(self):
+        maps = MAPS + ["PetalburgWoods", "RustboroCity"]
+        self.assertIn("PetalburgWoods", w.allowed_maps("Route104", "start", maps, "TRAINER_WINSTON_1"))
+        self.assertNotIn("RustboroCity", w.allowed_maps("Route104", "start", maps, "TRAINER_GINA_AND_MIA_1"))
+        self.assertNotIn("PetalburgWoods", w.allowed_maps("Route104", "start", maps, "TRAINER_BILLY"))
+
     def test_gyms_use_the_full_pool(self):
         self.assertIsNone(w.allowed_maps("RustboroCity_Gym", "start", MAPS))
         self.assertIsNone(w.allowed_maps("PetalburgCity_Gym", "badge4", MAPS))

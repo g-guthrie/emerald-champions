@@ -58,7 +58,7 @@ STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
   caught).
 
 ====================================================================================================
-STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James)
+STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James, Aqua Grunt)
   Adds Route 104 south (below the Woods entrance, y 38 and down).
   Pokemon
     Route 104 grass: Azurill, Taillow, Budew, Sandygast, Sentret, Litleo, Fletchling, Bunnelby,
@@ -67,9 +67,29 @@ STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James)
     Honey: Cutiefly, Yungoos, Patrat
     Evolutions by 14: Roselia (Budew), Marill (Azurill) via Bonding.
   Battle items
-    Item ball: Friend Ball (29,53)
     Berry trees: Oran, Pecha
     Wild held: Budew (- / Poison Barb), Sandygast (- / Spell Tag), Yungoos (- / Pecha Berry),
       Cutiefly (Honey / -)
   Not here: Route 104 north (Soothe Bell, PP Up, Shell Bell, White Herb, Chesto Berry, Nugget,
   flower shop, Cheri/Leppa/Oran trees) - past the Woods.
+
+====================================================================================================
+STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
+  Adds Petalburg Woods without Cut (south entrance to north exit, plus the east-door pocket of
+  Route 104).
+  Pokemon
+    Woods grass: Blipbug, Slakoth, Shroomish, Paras, Togepi, Caterpie, Pichu, Foongus, Larvesta,
+      Cascoon, Silcoon
+    Woods honey: Combee, Pikachu, Pidgey, Cherubi, Pikipek
+    Evolutions by 14: Dottler (Blipbug 10), Metapod (7) -> Butterfree (10), Beautifly/Dustox
+      (Silcoon/Cascoon 10), Trumbeak (Pikipek 14); Togetic (Togepi) and Pikachu (Pichu) via Bonding.
+      Raichu needs a Thunder Stone (none yet).
+  Battle items
+    Gift: Dusk Ball x3 from the Devon researcher (data/maps/PetalburgWoods/scripts.inc:98)
+    Item balls: Ether (4,8), Paralyze Heal (4,26); hidden Potion (39,35), Poke Ball (4,19);
+      Friend Ball (Route 104 29,53, through the Woods east door)
+    Wild held: Combee (Honey / -), Pikachu (- / Light Ball), Cherubi (- / Miracle Seed),
+      Pikipek (Oran Berry / -), Shroomish/Paras/Foongus (Tiny Mushroom / Big Mushroom)
+    Light Ball and Miracle Seed reach the vendor shelf when caught held (src/field_specials.c:272,310).
+  Not here: Woods girl's Miracle Seed (33,6), Great Ball, Revive, Tiny Mushroom (26,6), (40,29),
+  Woods 2 and 3 - all behind Cut. Route 104 north's own items are the trainers' own route.
