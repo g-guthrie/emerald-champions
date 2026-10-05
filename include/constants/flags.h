@@ -794,7 +794,6 @@
 #define FLAG_EC_BERRY_TRADE_BAXCALIBRITE  0x278
 #define FLAG_EC_BERRY_TRADE_DRAGONINITE  0x279
 #define FLAG_EC_BERRY_TRADE_TYRANITARITE  0x27A
-#define FLAG_EC_EXPLAINED_RESTRICTED_MEGA 0x2AD
 #define FLAG_EC_MEGA_REWARD_BUTTERFRENITE 0x27B
 #define FLAG_EC_MEGA_REWARD_GOLISOPITE 0x27E
 #define FLAG_EC_MEGA_REWARD_SHARPEDONITE 0x27F
@@ -837,8 +836,7 @@
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE120_WEPEAR_BERRY 0x2A7
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE115_NANAB_BERRY 0x2A8
 #define FLAG_EC_WINSTRATE_GARDEN_BERRIES 0x2A9
-#define FLAG_EC_CAUGHT_URSALUNA_BLOODMOON 0x2AB
-#define FLAG_EC_RESTRICTED_RULE_EXPLAINED 0x2AC
+// Retired Bloodmoon catch receipt; 0x2AB remains the Route 120 Rare Candy flag.
 #define FLAG_SEASPRAY_CAVE_B1F_REVIVE 0x2AA // Formerly unused; old 0x43 belongs to the same-location Lure Ball.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
@@ -1554,8 +1552,8 @@
 #define FLAG_SYS_CLOCK_SET                          (SYSTEM_FLAGS + 0x35)
 #define FLAG_SYS_NATIONAL_DEX                       (SYSTEM_FLAGS + 0x36)
 #define FLAG_ITEM_SEASPRAY_CAVE_B1_F_ROCKY_HELMET           (SYSTEM_FLAGS + 0x37) // Formerly unused R/S debug flag; old 0x44 belongs to King's Rock.
-#define FLAG_SYS_CAVE_WONDER                        (SYSTEM_FLAGS + 0x38) // Unused Flag, same as above
-#define FLAG_SYS_CAVE_BATTLE                        (SYSTEM_FLAGS + 0x39) // Unused Flag, same as above
+#define FLAG_EC_RESTRICTED_RULE_EXPLAINED           (SYSTEM_FLAGS + 0x38) // Formerly unused R/S debug flag; 0x2AC belongs to a Route 120 hidden item.
+#define FLAG_EC_EXPLAINED_RESTRICTED_MEGA            (SYSTEM_FLAGS + 0x39) // Formerly unused R/S debug flag; 0x2AD belongs to a Route 120 hidden item.
 #define FLAG_SYS_SHOAL_TIDE                         (SYSTEM_FLAGS + 0x3A)
 #define FLAG_SYS_RIBBON_GET                         (SYSTEM_FLAGS + 0x3B)
 

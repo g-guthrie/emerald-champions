@@ -734,17 +734,21 @@ TEST("Wild rarity: early Dreepy uses local land odds and Sweet Scent reverses th
         SeedRng(seed);
         EXPECT_EQ(ChooseWildMonIndex_Land(info), expected);
     }
-    // Under Sweet Scent the five rarest residents, Dreepy among them, all at
-    // the 4% floor, share the reversed species odds. The two Starly slots
-    // combine into 26%, so five rare species share 26+16+15+10+8 = 75%.
+    // Rookidee now occupies two 4% slots and is an 8% species. Only
+    // Nickit, Houndour and Dreepy remain at 4%. Sweet Scent gives that
+    // tied group the reversed top weights: Starly 24 + Skiddo 17 + Nincada 16.
+    EXPECT_EQ(info->wildPokemon[8].species, SPECIES_ROOKIDEE);
+    EXPECT_EQ(info->wildPokemon[10].species, SPECIES_ROOKIDEE);
+    EXPECT_EQ(weights[8] + weights[10], 8);
     u32 rarest = 0;
     for (u32 roll = 0; roll < 100; roll++)
     {
         SET_RNG(RNG_NONE, roll);
         u32 index = ChooseSweetScentWildMonIndex(info, WILD_AREA_LAND);
-        rarest += weights[index] == 4;
+        enum Species species = info->wildPokemon[index].species;
+        rarest += species == SPECIES_NICKIT || species == SPECIES_HOUNDOUR || species == SPECIES_DREEPY;
     }
-    EXPECT_EQ(rarest, 75);
+    EXPECT_EQ(rarest, 57);
     VarSet(VAR_REPEL_STEP_COUNT, savedRepel);
 }
 

@@ -138,3 +138,25 @@ TEST("Hatched Pokemon of the iconic families know their one-hit KO; caught ones 
             EXPECT(!IsMoveRemovedFromGame(moves[i]));
     }
 }
+
+TEST("OHKO lessons: No Guard families never receive the hatchling exception or a tutor Fissure")
+{
+    static const enum Species species[] = {SPECIES_MACHOP, SPECIES_MACHOKE, SPECIES_MACHAMP, SPECIES_GOLURK};
+    static EWRAM_DATA u16 moves[MAX_RELEARNER_MOVES];
+    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        struct Pokemon mon;
+        u32 metLevel = 0;
+        CreateMon(&mon, species[i], 100, 0, OTID_STRUCT_PLAYER_ID);
+        SetMonData(&mon, MON_DATA_MET_LEVEL, &metLevel);
+        EXPECT_EQ(GetBoxMonIconicOhkoMove(&mon.box), MOVE_NONE);
+        TeachHatchedIconicOhkoMove(&mon);
+        EXPECT(!MonKnowsMove(&mon, MOVE_FISSURE));
+        for (u32 state = 0; state < MOVE_RELEARNER_COUNT; state++)
+        {
+            u32 count = GetMovesToRelearn(&mon.box, state, moves);
+            for (u32 m = 0; m < count; m++)
+                EXPECT(!IsMoveRemovedFromGame(moves[m]));
+        }
+    }
+}

@@ -2026,6 +2026,5 @@ extern const u8 gText_HydroCannon[];
 extern const u8 gText_SingleBattle[];
 extern const u8 gText_DoubleBattle[];
 
-extern const u8 gText_RestrictedEvolutionBlocked[];
 
 #endif // GUARD_STRINGS_H

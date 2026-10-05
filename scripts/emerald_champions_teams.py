@@ -619,6 +619,7 @@ def main() -> None:
             run([sys.executable, "scripts/verify_trainer_ability_legality.py"],
                 {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
         run([sys.executable, "scripts/verify_campaign_trainer_roster.py"])
+        run([sys.executable, "scripts/trainer_set_copies.py", "--late"], fatal=False)
 
         move_violations, move_notes = check_move_legality(branches)
         if move_violations:
@@ -656,4 +657,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

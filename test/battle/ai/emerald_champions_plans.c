@@ -2827,28 +2827,29 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Norman's Weezing does not hit a Blaziken it
     }
 }
 
-static const struct EmeraldChampionsBattleSet sMattFoePawmot = {
+static const struct EmeraldChampionsBattleSet sMegaForecastFoePawmot = {
     .moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
     .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_NATURAL_CURE, .evs = {252, 252, 4, 0, 0, 0},
 };
-static const struct EmeraldChampionsBattleSet sMattFoeGyarados = {
+static const struct EmeraldChampionsBattleSet sMegaForecastFoeGyarados = {
     .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_CRUNCH, MOVE_PROTECT},
     .item = ITEM_GYARADOSITE, .nature = NATURE_JOLLY, .ability = ABILITY_INTIMIDATE, .evs = {4, 252, 0, 0, 0, 252},
 };
 
-AI_DOUBLE_BATTLE_TEST("EC Mega forecast: Matt's Grimmsnarl does not Prankster Thunder Wave a Gyarados about to turn Dark")
+AI_DOUBLE_BATTLE_TEST("EC Mega forecast: Sidney's Grimmsnarl does not Prankster Thunder Wave a Gyarados about to turn Dark")
 {
     GIVEN {
         // Preserve the original board's Electric/Fighting partner and its
         // paralysis immunity without spending the restricted slot. That
         // leaves only Gyarados as a possible Thunder Wave target, and its
         // impending Dark type must still prevent the Prankster attempt.
-        PreparedPlayer(SPECIES_PAWMOT, 65, &sMattFoePawmot);
-        PreparedPlayer(SPECIES_GYARADOS, 65, &sMattFoeGyarados);
-        // Matt at the Aqua Hideout: six badges, cap65. Kingdra had fallen.
+        PreparedPlayer(SPECIES_PAWMOT, 80, &sMegaForecastFoePawmot);
+        PreparedPlayer(SPECIES_GYARADOS, 80, &sMegaForecastFoeGyarados);
+        // Sidney retains the authored Grimmsnarl after Matt's copy is removed.
+        // Use the League cap and its existing Prankster set.
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_GRIMMSNARL, 46};
-        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_KINGDRA, 0};
-        AuthoredOpponentWithPartner(TRAINER_MATT, 6, FALSE, 2);
+        sAuthoredInjuries[1] = (struct AuthoredInjury){SPECIES_YVELTAL, 0};
+        AuthoredOpponentWithPartner(TRAINER_SIDNEY, 8, FALSE, 2);
     } WHEN {
         // A screen goes up before the benchmark turn.
         TURN {

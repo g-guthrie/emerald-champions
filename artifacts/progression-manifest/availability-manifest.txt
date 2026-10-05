@@ -1,5 +1,5 @@
 INCLEMENT EMERALD 2 - WHAT A PLAYER CAN HAVE BEFORE EACH BATTLE
-Generated from source at 73dd6d5feb by scripts/manifest_text.py. 328 battles, through Buffel.
+Generated from source at c956acb3e7 by scripts/manifest_text.py. 328 battles, through Buffel.
 
 HOW TO USE
   Battles are numbered in the order they first become possible. A team for battle N may use
@@ -7,7 +7,7 @@ HOW TO USE
   An optional fight taken later may also use what opened in between, but tune it at its first point.
   All your Pokemon are at the step's level cap (Leveler). Evolutions still need their own condition
   (level, stone, friendship, trade, time, move) and the item or move must already be available.
-  [R] = Restricted: Legendary, Mythical, Ultra Beast, Paradox, Gholdengo or either Ursaluna; one total per party.
+  [R] = Restricted: Legendary, Mythical, Ultra Beast or Paradox; one total per party.
   A player Mega Evolution uses the same slot: with an [R] member along, only that member can Mega Evolve.
   Starters: choose one region, then take up to two of its three starters. This reference follows
   Treecko + Mudkip; other starter choices swap those two lines. The rival keeps the third starter.
@@ -106,10 +106,10 @@ STEP 4 - level cap 14
 ====================================================================================================
 STEP 5 - level cap 14
   After beating: Twins Gina & Mia (#13)
-  New Pokemon (29):
+  New Pokemon (28):
     Wild - Route 115: Wailmer, Wishiwashi (Solo)
-    Wild - Route 116: Dreepy, Gimmighoul (Roaming), Houndour, Joltik, Mareep, Nickit, Nincada,
-        Rookidee, Skiddo, Skitty, Starly
+    Wild - Route 116: Dreepy, Houndour, Joltik, Mareep, Nickit, Nincada, Rookidee, Skiddo, Skitty,
+        Starly
     Wild - Seaspray Cave: Krabby, Psyduck, Stunfisk (Galar), Tynamo, Wooper, Zubat
     Wild - Seaspray Cave B1F: Bergmite, Frigibax, Seel, Smoochum, Sneasel, Snorunt, Spheal, Swinub,
         Vanillite
@@ -121,7 +121,8 @@ STEP 5 - level cap 14
       Never Melt Ice (Seaspray Cave), Quick Claw (buy, Petalburg City Pokemon Center 1F),
       Rocky Helmet (buy, Oldale Town Pokemon Center 1F),
       Smooth Rock (buy, Petalburg City Pokemon Center 1F),
-      Steel Gem (buy, Petalburg City Pokemon Center 1F), Wise Glasses (Rustboro City)
+      Steel Gem (buy, Petalburg City Pokemon Center 1F),
+      Wise Glasses (buy, Rustboro City Pokemon Center 1F)
   Battles that open here:
     #14 Youngster Joey - Route 116
         foe levels Easy 10 / Med 16-17 / Hard 18-19
@@ -211,14 +212,15 @@ STEP 7 - level cap 20
     Form change: Oricorio (Pom Pom) (from Oricorio (Baile))
   New held items (23): Air Balloon (buy, Oldale Town Pokemon Center 1F),
       Dread Plate (Dewford Manor 1F), Everstone (Granite Cave B2F),
-      Expert Belt (buy, Dewford Town Pokemon Center 1F), Fairy Gem (Dewford Meadow),
-      Full Incense (buy, Slateport City), Heat Rock (buy, Dewford Town Pokemon Center 1F),
-      Lax Incense (buy, Slateport City), Light Clay (buy, Dewford Town Pokemon Center 1F),
-      Luck Incense (buy, Slateport City), Odd Incense (buy, Slateport City),
-      Protective Pads (buy, Oldale Town Pokemon Center 1F), Pure Incense (buy, Slateport City),
-      Ring Target (buy, Oldale Town Pokemon Center 1F), Rock Incense (buy, Slateport City),
-      Rose Incense (buy, Slateport City), Scope Lens (buy, Oldale Town Pokemon Center 1F),
-      Sea Incense (buy, Slateport City), Silk Scarf (buy, Dewford Town Pokemon Center 1F),
+      Expert Belt (buy, Dewford Town Pokemon Center 1F),
+      Fairy Gem (buy, Slateport City Pokemon Center 1F), Full Incense (buy, Slateport City),
+      Heat Rock (buy, Dewford Town Pokemon Center 1F), Lax Incense (buy, Slateport City),
+      Light Clay (buy, Dewford Town Pokemon Center 1F), Luck Incense (buy, Slateport City),
+      Odd Incense (buy, Slateport City), Protective Pads (buy, Oldale Town Pokemon Center 1F),
+      Pure Incense (buy, Slateport City), Ring Target (buy, Oldale Town Pokemon Center 1F),
+      Rock Incense (buy, Slateport City), Rose Incense (buy, Slateport City),
+      Scope Lens (buy, Oldale Town Pokemon Center 1F), Sea Incense (buy, Slateport City),
+      Silk Scarf (buy, Dewford Town Pokemon Center 1F),
       Soft Sand (buy, Dewford Town Pokemon Center 1F),
       Throat Spray (buy, Dewford Town Pokemon Center 1F), Wave Incense (buy, Slateport City),
       Zoom Lens (Route 109)
@@ -440,7 +442,7 @@ STEP 16 - level cap 30
 ====================================================================================================
 STEP 17 - level cap 30
   After beating: Rival Wally (#57)
-  New held items (1): Rock Gem (buy, Dewford Town Pokemon Center 1F)
+  New held items (1): Rock Gem (buy, Oldale Town Pokemon Center 1F)
   Battles that open here:
     #72 Guitarist Kirk - Mauville City Gym
         foe levels Easy 24 / Med 31-34 / Hard 31-36
@@ -465,8 +467,8 @@ STEP 18 - level cap 30
         Lilligant (Hisui) (from Petilil), Sharpedo (from Carvanha),
         Sirfetch'd (from Farfetch'd (Galar)), Swadloon (from Sewaddle), Sylveon (from Eevee),
         Umbreon (from Eevee), Vaporeon (from Eevee)
-  New held items (2): Eject Pack (buy, Petalburg City Pokemon Center 1F),
-      Life Orb (buy, Petalburg City Pokemon Center 1F)
+  New held items (2): Eject Pack (buy, Mauville City Pokemon Center 1F),
+      Life Orb (buy, Mauville City Pokemon Center 1F)
   Battles that open here:
     #76 Verdanturf Battle Tent — fight 2 of 3 - Verdanturf Town Battle Tent Lobby
 
@@ -538,7 +540,7 @@ STEP 19 - level cap 40
         Weezing (Galar) (from Koffing), Yanmega (from Yanma)
     Breed: Chewtle (egg from Drednaw), Tyrogue (egg from Hitmonchan)
   New held items (9): Chilan Berry (Petalburg City Gym),
-      Covert Cloak (buy, Fallarbor Town Pokemon Center 1F),
+      Covert Cloak (buy, Dewford Town Pokemon Center 1F),
       Deep Sea Scale (Slateport City Battle Tent Lobby),
       Deep Sea Tooth (Slateport City Battle Tent Lobby),
       Metal Coat (Slateport City Battle Tent Lobby), Punching Glove (Route 114),
@@ -628,9 +630,9 @@ STEP 24 - level cap 40
 ====================================================================================================
 STEP 25 - level cap 40
   After beating: Magma Leader Maxie (#100)
-  New Pokemon (33):
+  New Pokemon (32):
     Wild - Ashen Woods: Brute Bonnet [R], Buzzwole [R], Growlithe, Growlithe (Hisui), Heracross,
-        Pinsir, Salandit, Salazzle, Scyther, Ursaluna (Bloodmoon) [R]
+        Pinsir, Salandit, Salazzle, Scyther
     Wild - Ember Path: Blacephalon [R], Chandelure, Slither Wing [R], Tauros (Paldea Blaze)
     Wild - Jagged Pass: Fearow, Gligar, Jangmo-o, Mudbray, Mudsdale, Primeape, Riolu, Turtonator
     Gift egg - Lavaridge Town: Wynaut
@@ -683,17 +685,17 @@ STEP 25 - level cap 40
 ====================================================================================================
 STEP 26 - level cap 45
   After beating: Leader Flannery (#114)
-  New Pokemon (85):
+  New Pokemon (83):
     Wild - Dewford Meadow: Meloetta (Aria) [R]
     Wild - Granite Cave B2F: Cobalion [R]
     Wild - Mirage Tower 1F: Darumaka, Golett, Sigilyph, Spiritomb, Trapinch, Yamask
     Wild - Mirage Tower 2F: Krokorok, Orthworm
     Wild - Mirage Tower 3F: Sandaconda
     Wild - Mirage Tower 4F: Cofagrigus, Krookodile
-    Wild - Mirage Tower B1F: Gimmighoul (Chest)
+    Wild - Mirage Tower B1F: Sandile
     Wild - Petalburg Woods 2: Virizion [R]
     Wild - Petalburg Woods 3: Celebi [R]
-    Wild - Route 111: Bramblin, Cacnea, Capsakid, Hippopotas, Maractus, Rellor, Sandile, Silicobra,
+    Wild - Route 111: Bramblin, Cacnea, Capsakid, Hippopotas, Maractus, Rellor, Silicobra,
         Stonjourner
     Wild - Route 111 Ruins Exterior: Farigiraf, Great Tusk [R], Helioptile, Meditite,
         Rockruff (Own Tempo), Sandy Shocks [R], Stakataka [R], Xatu
@@ -706,10 +708,10 @@ STEP 26 - level cap 45
     Evolve: Aegislash (Shield) (from Doublade), Aggron (from Lairon), Archeops (from Archen),
         Aurorus (from Amaura), Bastiodon (from Shieldon), Brambleghast (from Bramblin),
         Cacturne (from Cacnea), Carracosta (from Tirtouga), Darmanitan (Standard) (from Darumaka),
-        Flygon (from Vibrava), Gholdengo [R] (from Gimmighoul (Chest)), Glalie (from Snorunt),
-        Golurk (from Golett), Gothitelle (from Gothorita), Grimmsnarl (from Morgrem),
-        Hatterene (from Hattrem), Heliolisk (from Helioptile), Hippowdon (from Hippopotas),
-        Kabutops (from Kabuto), Kommo-o (from Hakamo-o), Lampent (from Litwick),
+        Flygon (from Vibrava), Glalie (from Snorunt), Golurk (from Golett),
+        Gothitelle (from Gothorita), Grimmsnarl (from Morgrem), Hatterene (from Hattrem),
+        Heliolisk (from Helioptile), Hippowdon (from Hippopotas), Kabutops (from Kabuto),
+        Kommo-o (from Hakamo-o), Lampent (from Litwick),
         Lycanroc (Dusk) (from Rockruff (Own Tempo)), Medicham (from Meditite),
         Metagross (from Metang), Omastar (from Omanyte), Palossand (from Sandygast),
         Rabsca (from Rellor), Rampardos (from Cranidos), Reuniclus (from Duosion),
@@ -719,7 +721,7 @@ STEP 26 - level cap 45
     Breed: Girafarig (egg from Farigiraf), Natu (egg from Xatu)
   New held items (12): Ability Shield (buy, Oldale Town Pokemon Center 1F),
       Blunder Policy (Route 111), Earth Plate (Route 111),
-      Electric Seed (buy, Petalburg City Pokemon Center 1F),
+      Electric Seed (buy, Mauville City Pokemon Center 1F),
       Ghost Gem (buy, Oldale Town Pokemon Center 1F),
       Misty Seed (buy, Mauville City Pokemon Center 1F),
       Power Herb (buy, Oldale Town Pokemon Center 1F),
@@ -964,29 +966,30 @@ STEP 33 - level cap 55
 ====================================================================================================
 STEP 34 - level cap 55
   After beating: Wild Kecleon (#170)
-  New Pokemon (60):
+  New Pokemon (64):
     Wild - Lilycove City: Bruxish
     Wild - Mt Pyre 1F: Greavard, Pumpkaboo (Super)
-    Wild - Mt Pyre 2F: Sinistea (Antique)
+    Wild - Mt Pyre 2F: Gimmighoul (Chest), Sinistea (Antique)
     Wild - Mt Pyre 3F: Yamask (Galar)
     Wild - Mt Pyre 4F: Banette, Dusclops, Dusknoir, Mimikyu (Disguised)
     Wild - Mt Pyre 5F: Moltres (Galar) [R], Poltchageist (Artisan)
     Wild - Mt Pyre 6F: Houndstone, Poltchageist (Counterfeit), Sinistcha (Unremarkable)
     Wild - Mt Pyre Exterior: Beheeyem, Corsola (Galar), Drifblim, Drifloon, Ninetales, Vulpix,
         Zorua (Hisui)
-    Wild - Route 121: Alomomola, Duskull, Elgyem, Komala, Shuppet
+    Wild - Route 121: Alomomola, Duskull, Elgyem, Gimmighoul (Roaming), Komala, Shuppet
     Wild - Route 123: Flamigo, Spidops, Sunflora
     Wild - Safari Zone North: Cufant, Kangaskhan
     Wild - Safari Zone Northeast: Miltank, Nidorina, Nidorino, Tauros
     Wild - Safari Zone Northwest: Rhydon, Rhyhorn, Squawkabilly (Yellow)
     Wild - Safari Zone South: Meowth (Galar), Smeargle
-    Wild - Safari Zone Southeast: Ariados, Stantler
+    Wild - Safari Zone Southeast: Ariados, Stantler, Ursaluna (Bloodmoon)
     Storm visitor - Route 123: Tapu Bulu [R]
     Evolve: Braviary (Hisui) (from Rufflet), Copperajah (from Cufant),
-        Cursola (from Corsola (Galar)), Gourgeist (Super) (from Pumpkaboo (Super)),
-        Nidoking (from Nidorino), Nidoqueen (from Nidorina), Perrserker (from Meowth (Galar)),
-        Rhyperior (from Rhydon), Runerigus (from Yamask (Galar)), Typhlosion (Hisui) (from Quilava),
-        Wyrdeer (from Stantler), Zoroark (Hisui) (from Zorua (Hisui))
+        Cursola (from Corsola (Galar)), Gholdengo (from Gimmighoul (Chest)),
+        Gourgeist (Super) (from Pumpkaboo (Super)), Nidoking (from Nidorino),
+        Nidoqueen (from Nidorina), Perrserker (from Meowth (Galar)), Rhyperior (from Rhydon),
+        Runerigus (from Yamask (Galar)), Typhlosion (Hisui) (from Quilava), Wyrdeer (from Stantler),
+        Zoroark (Hisui) (from Zorua (Hisui))
     Breed: Nidoran♀ (egg from Nidoqueen), Nidoran♂ (egg from Nidoking), Spinarak (egg from Ariados),
         Sunkern (egg from Sunflora), Tarountula (egg from Spidops)
   New held items (6): Black Sludge (Route 123), Cleanse Tag (Mt Pyre 1F),
@@ -1059,7 +1062,7 @@ STEP 36 - level cap 55
         Polteageist (Phony) (from Sinistea (Phony)),
         Sinistcha (Masterpiece) (from Poltchageist (Artisan)),
         Slowbro (Galar) (from Slowpoke (Galar)), Slowking (Galar) (from Slowpoke (Galar)),
-        Ursaluna [R] (from Ursaring), Urshifu (Rapid Strike) [R] (from Kubfu),
+        Ursaluna (from Ursaring), Urshifu (Rapid Strike) [R] (from Kubfu),
         Urshifu (Single Strike) [R] (from Kubfu)
   Battles that open here:
     #195 Team Aqua Grunt - Mt Pyre Summit
@@ -1402,7 +1405,7 @@ STEP 58 - level cap 70
       Hard Stone (buy, Dewford Town Pokemon Center 1F), Iapapa Berry (Sootopolis City),
       Iron Plate (Underwater Route 126), Mind Plate (Underwater Route 127),
       Pixie Plate (Underwater Route 124), Poison Barb (buy, Dewford Town Pokemon Center 1F)
-  New Mega Stones: Darkranite, Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite, Zygardite
+  New Mega Stones: Excadrite, Floettite, Kingdranite, Laprasite, Lucarionite
   Battles that open here:
     #273 Swimmer F Brenda - Route 126
         foe levels Easy 55 / Med 74-75 / Hard 78-79
@@ -1469,7 +1472,7 @@ STEP 61 - level cap 80
       Chill Drive (buy, Oldale Town Pokemon Center 1F),
       Douse Drive (buy, Oldale Town Pokemon Center 1F),
       Shock Drive (buy, Oldale Town Pokemon Center 1F)
-  New Mega Stones: Feraligite, Garchompite, Zeraorite
+  New Mega Stones: Darkranite, Feraligite, Garchompite, Zeraorite
   Battles that open here:
     #284 Dragon Tamer Nicolas - Meteor Falls 1F 2R
         foe levels Easy 64 / Med 87-88 / Hard 91-93
@@ -1612,6 +1615,7 @@ STEP 71 - level cap 85
   Master Ball pickup: Altering Cave 1F
   Master Ball pickup: Altering Cave 1F
   New held items (1): Destiny Knot (buy, Dewford Town Pokemon Center 1F)
+  New Mega Stones: Zygardite
   Battles that open here:
     #311 Rival Wally - Victory Road 1F
         foe levels Easy 68 / Med 94-95 / Hard 100

@@ -1,4 +1,4 @@
-# Un-restrict Gholdengo and Ursaluna, tutor ban, late-game copies: implementation spec
+# Un-restrict Gholdengo and Ursaluna, tutor policy, late-game copies: implementation spec
 
 Approved by the owner. Follows `artifacts/redesign/star-rule-ring-and-cap45-55.md`
 and the fixes in d4f828a0f6 and bd6cc1fe91. Same working rules: a species
@@ -74,28 +74,16 @@ Expect: Gholdengo, Ursaluna and Bloodmoon Ursaluna carry no [R];
 Gimmighoul (both forms) and Gholdengo first appear at cap 55; Bloodmoon first
 at cap 55 (Safari Zone Southeast); Ursaring stays at Ashen Woods (cap 40).
 
-## 2. The tutor stops teaching one-hit-KO and evasion moves
+## 2. Preserve the existing tutor ban and designated egg-move exceptions
 
-No Guard Machop (cap 14), Machoke, Machamp and Golurk can learn Fissure,
-which then always hits: a guaranteed KO on any grounded, non-Sturdy foe that
-is not a higher level. Tuning already ignores these moves
-(`UNTUNED_MOVES` in `scripts/tuning_pool_check.py`), so the player should not
-be able to get them.
-
-Banned for the player: `MOVE_SHEER_COLD`, `MOVE_FISSURE`, `MOVE_HORN_DRILL`,
-`MOVE_GUILLOTINE`, `MOVE_DOUBLE_TEAM`, `MOVE_MINIMIZE`.
-- All Legal Moves tutor: `GetEmeraldChampionsPreparationMovesToLearn`
-  (`src/emerald_champions_battle_sets.c`) never offers them (same place the
-  evolution-move gate filters).
-- Level-up and evolution move learning for the player's Pokemon skips them.
-- Pokemon the player receives (wild catches, gifts, eggs, trades) never carry
-  them: skip them when the initial/egg moveset is generated.
-- `src/emerald_champions_agent_prep.c` rejects them in prepared parties;
-  `scripts/tuning_pool_check.py` reports them as illegal, not just untuned.
-- Trainer teams are unaffected.
-- Tests: native (a No Guard Machop is not offered Fissure; a level-up that
-  would teach Double Team skips it; a wild Pokemon's generated moveset has
-  none of the six) and Python (the checker rejects a party with Fissure).
+Owner clarification: the six moves are already excluded from the main tutor.
+Keep the intentional hatchling-only OHKO lessons and egg-relearner access for
+their designated families. No Guard species are not among those families.
+Do not remove the hatchling exception, sanitize it away during acquisition,
+or change the existing tuning policy. Verify that the main tutor does not
+offer Fissure to Machop/Machoke/Machamp or Golurk and that eligible hatchlings
+still receive and can relearn their own family lesson. Trainer teams are
+unaffected by this move policy.
 
 ## 3. Gina & Mia have nothing that touches Shedinja
 

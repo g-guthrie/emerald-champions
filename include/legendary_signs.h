@@ -67,7 +67,6 @@ void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem);
 // Legendary, Ultra Beast and Paradox slots are acquirable only until the
 // species is caught (one of each in the wild); Legendary and UB slots also
 // wait for their gate. Everything else always is.
-void RecordOwnedBloodmoon(void);
 bool32 IsWildSlotSpeciesAcquirable(enum Species species);
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);

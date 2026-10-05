@@ -1301,7 +1301,6 @@ EmeraldChampions_Text_Back:
 	.string "Back$"
 
 EventScript_PkmnCenterNurse_RestrictedRule::
-	callnative RecordOwnedBloodmoon
 	msgbox EmeraldChampions_Text_RestrictedRule, MSGBOX_DEFAULT
 	setflag FLAG_EC_RESTRICTED_RULE_EXPLAINED
 	return
@@ -1310,9 +1309,6 @@ EmeraldChampions_Text_RestrictedRule:
 	.string "The League allows one restricted\n"
 	.string "Pokémon in your party at a time.\p"
 	.string "That means Legendary, Mythical,\n"
-	.string "Ultra Beast or Paradox Pokémon,\l"
-	.string "plus Gholdengo and any Ursaluna.\p"
-	.string "Gimmighoul, Teddiursa and Ursaring\n"
-	.string "are ordinary party members.\p"
+	.string "Ultra Beast or Paradox Pokémon.\p"
 	.string "Catch more restricted Pokémon\n"
 	.string "and keep them in the PC!$"

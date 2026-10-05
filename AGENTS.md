@@ -77,7 +77,8 @@ or data.
   --trainer`), not merely anything inside its level-cap window. Hard is
   tuned against that team fully kitted: complete EV spreads, best natures,
   perfect IVs and its best legal items. One-hit KO moves and evasion boosts
-  are never tuned for.
+  are never tuned for. The existing hatchling-only OHKO lessons remain limited
+  to their designated families; the main tutor never offers them.
 - Wild encounters: ordinary table slots are at least 4%; Legendary/Mythical,
   Ultra Beast and Paradox slots are 5%. Feebas keeps its native tile rule.
   Active storm visitors have a 25% encounter roll, reducing the normal table's
@@ -85,10 +86,10 @@ or data.
   Caught legend-class species stop spawning. Gates live in
   `src/data/pokemon/legendary_signs.h`; legend-class spawns arrive at the
   current cap with authored sets. One Legendary, Mythical, Ultra Beast or
-  Paradox, Gholdengo or either Ursaluna form per party in total. Their
-  pre-evolutions and other ordinary/pseudo-legendary Pokemon have no category
-  limit. Player Mega Evolution uses that same slot; a restricted member may
-  Mega Evolve itself, but other party members cannot while it is present.
+  Paradox Pokémon per party in total. Ordinary and pseudo-legendary
+  Pokémon have no category limit. Player Mega Evolution uses that same slot;
+  a restricted member may Mega Evolve itself, but other party members cannot
+  while it is present.
   Opponents and AI partners are exempt. Wattson awards the Mega Ring after badge three; Norman awards
   starter-pair stones after badge five. Static legends are high stakes: a knockout loses one.
   No wild-table percentages in dialogue. The rival demonstrates DexNav after

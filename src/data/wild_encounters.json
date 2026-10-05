@@ -1815,7 +1815,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_URSALUNA_BLOODMOON"
+                "species": "SPECIES_URSARING"
               }
             ],
             "encounter_rates": [
@@ -1823,14 +1823,14 @@
               5,
               5,
               5,
-              11,
+              12,
               12,
               12,
               12,
               10,
               10,
               8,
-              5
+              4
             ]
           },
           "honey_mons": {
@@ -5169,9 +5169,9 @@
             "encounter_rates": [
               5,
               5,
-              26,
+              16,
               15,
-              5,
+              15,
               10,
               9,
               8,
@@ -5533,7 +5533,7 @@
               {
                 "min_level": 39,
                 "max_level": 39,
-                "species": "SPECIES_GIMMIGHOUL_CHEST"
+                "species": "SPECIES_SANDILE"
               },
               {
                 "min_level": 37,
@@ -5836,7 +5836,7 @@
               {
                 "min_level": 51,
                 "max_level": 51,
-                "species": "SPECIES_MISDREAVUS"
+                "species": "SPECIES_GIMMIGHOUL_CHEST"
               },
               {
                 "min_level": 46,
@@ -10144,7 +10144,7 @@
               {
                 "min_level": 8,
                 "max_level": 10,
-                "species": "SPECIES_GIMMIGHOUL_ROAMING"
+                "species": "SPECIES_ROOKIDEE"
               },
               {
                 "min_level": 8,
@@ -11166,7 +11166,7 @@
               {
                 "min_level": 45,
                 "max_level": 45,
-                "species": "SPECIES_ZOROARK"
+                "species": "SPECIES_GIMMIGHOUL_ROAMING"
               },
               {
                 "min_level": 45,
@@ -13492,7 +13492,7 @@
               {
                 "min_level": 50,
                 "max_level": 50,
-                "species": "SPECIES_GRANBULL"
+                "species": "SPECIES_URSALUNA_BLOODMOON"
               },
               {
                 "min_level": 51,

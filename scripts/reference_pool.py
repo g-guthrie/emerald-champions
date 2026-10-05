@@ -123,7 +123,7 @@ def player_rules() -> dict:
                             "Obtainable from the start (DexNav chains, random infection); the spring needs Lavaridge.",
                     "cite": [cite(ROOT / "src/pokerus.c", "GetPokerusNatureModifier"), cite(ROOT / "src/dexnav.c", "Pokerus"),
                              rel(MAPS_DIR / "LavaridgeTown/scripts.inc")]},
-        "restricted": {"rule": "At most ONE restricted Pokemon per party: Legendary/Mythical/Ultra Beast/Paradox, Gholdengo or either Ursaluna form. Official classes use the base species flags: "
+        "restricted": {"rule": "At most ONE restricted Pokemon per party: Legendary/Mythical/Ultra Beast/Paradox. Official classes use the base species flags: "
                                "isUltraBeast / isRestrictedLegendary / isSubLegendary / isMythical / isParadox.",
                        "cite": [cite(pc, "GetRestrictedPartyClass"), cite(pc, "PlayerPartyWithinRestrictedLimit")]},
         "legend_level": {"rule": "Legend-class wild/static encounters arrive at the current cap with authored sets.",
@@ -327,8 +327,6 @@ class SpeciesData:
 
     def restricted_class(self, species: str) -> str | None:
         """GetRestrictedPartyClass (src/pokemon.c:3079-3094)."""
-        if self.resolve(species) in {"SPECIES_GHOLDENGO", "SPECIES_URSALUNA", "SPECIES_URSALUNA_BLOODMOON"}:
-            return "legendary"
         flags = self.info.get(self.base(species), {}).get("flags", set())
         if "isUltraBeast" in flags:
             return "ultra_beast"

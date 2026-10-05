@@ -41,7 +41,6 @@ LEGENDARY, ULTRA_BEAST, PARADOX, ORDINARY = "legendary", "ub", "paradox", "none"
 RESTRICTED_RATES = {LEGENDARY: {5}, ULTRA_BEAST: {5}, PARADOX: {5}}
 MIN_ORDINARY_SLOT_PERCENT = 4
 MAX_LEGENDARY_SLOTS_PER_TABLE = 2
-NAMED_RESTRICTED_SPECIES = {"SPECIES_GHOLDENGO", "SPECIES_URSALUNA", "SPECIES_URSALUNA_BLOODMOON"}
 WATER_LEVEL_BOUNDS = (3, 100)
 MAX_WATER_ROD_LEVEL_SPAN = 5
 PLACEMENT_METHODS = {"land": "land_mons", "water": "water_mons"}
@@ -219,9 +218,7 @@ def species_classes():
     classes = {}
     for name in flags:
         base = flags.get(base_of[name], flags[name])
-        if name in NAMED_RESTRICTED_SPECIES:
-            classes[name] = LEGENDARY
-        elif "isUltraBeast" in base:
+        if "isUltraBeast" in base:
             classes[name] = ULTRA_BEAST
         elif base & {"isRestrictedLegendary", "isSubLegendary", "isMythical"}:
             classes[name] = LEGENDARY
@@ -445,9 +442,7 @@ def main():
                     errors.append(f'{tag} slot {slot}: {kind} {species} is not allowed in {name}')
                 if rate not in RESTRICTED_RATES[kind]:
                     errors.append(f'{tag} slot {slot}: {kind} {species} has {rate}%, expected {sorted(RESTRICTED_RATES[kind])}')
-                # The habitat quota remains for official legends. The named power-tier
-                # additions still have restricted 5% odds and the shared party limit.
-                legendary_slots += kind == LEGENDARY and species not in NAMED_RESTRICTED_SPECIES
+                legendary_slots += kind == LEGENDARY
             if legendary_slots > MAX_LEGENDARY_SLOTS_PER_TABLE:
                 errors.append(f'{tag}: {legendary_slots} Legendary-class slots, at most {MAX_LEGENDARY_SLOTS_PER_TABLE}')
             checked += 1

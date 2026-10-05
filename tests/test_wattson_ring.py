@@ -5,7 +5,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import reference_pool as rp
 from manifest_battle_progression import ProgressionParser
-import manifest_native_predicates as native
 
 class WattsonRingTests(unittest.TestCase):
     @classmethod
@@ -50,9 +49,3 @@ class WattsonRingTests(unittest.TestCase):
         for path in paths:
             self.assertTrue(any('CanReceiveWattsonMegaGift' in c['key'] and c['op']=='ne' and c['value']=='FALSE'
                                 for c in path['conditions']),path['conditions'])
-
-    def test_old_save_bloodmoon_record_is_form_specific(self):
-        key='SPECIAL:RecordOwnedBloodmoon()'
-        for species, recorded in [('SPECIES_URSALUNA',False),('SPECIES_URSALUNA_BLOODMOON',True)]:
-            effects=native.native_effects(key,None,{'species':{species}})
-            self.assertEqual('FLAG_EC_CAUGHT_URSALUNA_BLOODMOON' in effects['flags_set'],recorded)

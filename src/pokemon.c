@@ -3152,10 +3152,6 @@ enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species)
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return RESTRICTED_PARTY_NONE;
-    // These final forms share the power-tier slot without changing official metadata.
-    if (species == SPECIES_GHOLDENGO || species == SPECIES_URSALUNA
-     || species == SPECIES_URSALUNA_BLOODMOON)
-        return RESTRICTED_PARTY_LEGENDARY;
     info = &gSpeciesInfo[GET_BASE_SPECIES_ID(species)];
     if (info->isUltraBeast)
         return RESTRICTED_PARTY_ULTRA_BEAST;
@@ -3178,15 +3174,6 @@ bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot)
          && GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_NONE)
             return FALSE;
     }
-    return TRUE;
-}
-
-bool32 CanEvolveMonWithinRestrictedLimit(struct Pokemon *mon, enum Species target)
-{
-    // Opponent and boxed Pokemon do not occupy the player's active party.
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        if (mon == &gParties[B_TRAINER_PLAYER][slot])
-            return CanAddRestrictedMonToParty(target, slot);
     return TRUE;
 }
 
@@ -4279,7 +4266,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                             bool32 canStopEvo = TRUE;
                             enum Species targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL, &canStopEvo, CHECK_EVO);
 
-                            if (targetSpecies != SPECIES_NONE && CanEvolveMonWithinRestrictedLimit(mon, targetSpecies))
+                            if (targetSpecies != SPECIES_NONE)
                             {
                                 GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL, &canStopEvo, DO_EVO);
                                 BeginEvolutionScene(mon, targetSpecies, canStopEvo, partyIndex);
@@ -4987,7 +4974,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                 break;
             }
 
-            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, CanEvolveMonWithinRestrictedLimit(mon, evolutions[i].targetSpecies) ? evoState : CHECK_EVO))
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
             {
                 // All checks passed, so stop checking the rest of the evolutions.
                 // This is different from vanilla where the loop continues.
@@ -5011,7 +4998,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                 break;
             }
 
-            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, tradePartner, PARTY_SIZE, canStopEvo, CanEvolveMonWithinRestrictedLimit(mon, evolutions[i].targetSpecies) ? evoState : CHECK_EVO))
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, tradePartner, PARTY_SIZE, canStopEvo, evoState))
             {
                 // All checks passed, so stop checking the rest of the evolutions.
                 // This is different from vanilla where the loop continues.
@@ -5037,7 +5024,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                 break;
             }
 
-            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, CanEvolveMonWithinRestrictedLimit(mon, evolutions[i].targetSpecies) ? evoState : CHECK_EVO))
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
             {
                 // All checks passed, so stop checking the rest of the evolutions.
                 // This is different from vanilla where the loop continues.
@@ -5064,7 +5051,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                 break;
             }
 
-            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, evolutionItem, canStopEvo, CanEvolveMonWithinRestrictedLimit(mon, evolutions[i].targetSpecies) ? evoState : CHECK_EVO))
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, evolutionItem, canStopEvo, evoState))
             {
                 // All checks passed, so stop checking the rest of the evolutions.
                 // This is different from vanilla where the loop continues.
@@ -5090,7 +5077,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                 break;
             }
 
-            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, CanEvolveMonWithinRestrictedLimit(mon, evolutions[i].targetSpecies) ? evoState : CHECK_EVO))
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
             {
                 // All checks passed, so stop checking the rest of the evolutions.
                 // This is different from vanilla where the loop continues.
@@ -5109,7 +5096,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
                 continue;
             if (evolutions[i].param != evolutionItem)
                 continue;
-            if (DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, CanEvolveMonWithinRestrictedLimit(mon, evolutions[i].targetSpecies) ? evoState : CHECK_EVO))
+            if (DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
             {
                 // All checks passed, so stop checking the rest of the evolutions.
                 // This is different from vanilla where the loop continues.
@@ -6037,8 +6024,6 @@ void HandleSetPokedexFlagFromMon(struct Pokemon *mon, u32 caseId)
     enum NationalDexOrder nationalNum = SpeciesToNationalPokedexNum(GetMonData(mon, MON_DATA_SPECIES));
 
     HandleSetPokedexFlag(nationalNum, caseId, personality);
-    if (caseId == FLAG_SET_CAUGHT && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_URSALUNA_BLOODMOON)
-        FlagSet(FLAG_EC_CAUGHT_URSALUNA_BLOODMOON);
 }
 
 bool8 HasTwoFramesAnimation(enum Species species)

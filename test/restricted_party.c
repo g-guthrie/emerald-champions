@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "item.h"
+#include "legendary_signs.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "script_pokemon_util.h"
@@ -15,8 +16,8 @@ TEST("Restricted party: special categories share one slot, including forms and l
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_NAGANADEL), RESTRICTED_PARTY_ULTRA_BEAST);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_FLUTTER_MANE), RESTRICTED_PARTY_PARADOX);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_ROARING_MOON), RESTRICTED_PARTY_PARADOX);
-    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA_BLOODMOON), RESTRICTED_PARTY_LEGENDARY);
-    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA), RESTRICTED_PARTY_LEGENDARY);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA_BLOODMOON), RESTRICTED_PARTY_NONE);
+    EXPECT_EQ(GetRestrictedPartyClass(SPECIES_URSALUNA), RESTRICTED_PARTY_NONE);
     EXPECT_EQ(GetRestrictedPartyClass(SPECIES_GARCHOMP), RESTRICTED_PARTY_NONE);
     static const enum Species special[] = {
         SPECIES_SHAYMIN_SKY, SPECIES_MEWTWO, SPECIES_NAGANADEL, SPECIES_FLUTTER_MANE,
@@ -36,7 +37,7 @@ TEST("Restricted party: special categories share one slot, including forms and l
         CreateMon(&gParties[B_TRAINER_PLAYER][0], special[i], 14, 0, OTID_STRUCT_PLAYER_ID);
         EXPECT(PlayerPartyWithinRestrictedLimit());
         EXPECT(PlayerPartyLeagueEligible());
-        EXPECT(!CanAddRestrictedMonToParty(SPECIES_URSALUNA_BLOODMOON, PARTY_SIZE));
+        EXPECT(CanAddRestrictedMonToParty(SPECIES_URSALUNA_BLOODMOON, PARTY_SIZE));
         for (u32 j = 0; j < ARRAY_COUNT(special); j++)
         {
             EXPECT(!CanAddRestrictedMonToParty(special[j], PARTY_SIZE));
@@ -139,4 +140,35 @@ TEST("Restricted party: a scripted Meltan gift offers the Legendary swap")
     EXPECT_EQ(GetBoxedLegendaryGiftSwapStatus(), 1);
     ZeroPlayerPartyMons();
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+}
+
+TEST("Restricted party: ordinary evolutions never enter a restricted class")
+{
+    for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
+    {
+        if (!IsSpeciesEnabled(species) || GetRestrictedPartyClass(species) != RESTRICTED_PARTY_NONE)
+            continue;
+        const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+        for (u32 i = 0; evolutions != NULL && evolutions[i].method != EVOLUTIONS_END; i++)
+            if (IsSpeciesEnabled(evolutions[i].targetSpecies))
+                EXPECT_EQ(GetRestrictedPartyClass(evolutions[i].targetSpecies), RESTRICTED_PARTY_NONE);
+    }
+}
+
+TEST("Restricted party: Gholdengo and both Ursalunas coexist with a legend; Bloodmoon keeps spawning")
+{
+    static const enum Species ordinary[] = {SPECIES_GHOLDENGO, SPECIES_URSALUNA, SPECIES_URSALUNA_BLOODMOON};
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEWTWO, 55, 0, OTID_STRUCT_PLAYER_ID);
+    for (u32 i = 0; i < ARRAY_COUNT(ordinary); i++)
+    {
+        EXPECT_EQ(GetRestrictedPartyClass(ordinary[i]), RESTRICTED_PARTY_NONE);
+        EXPECT(CanAddRestrictedMonToParty(ordinary[i], i + 1));
+        CreateMon(&gParties[B_TRAINER_PLAYER][i + 1], ordinary[i], 55, 0, OTID_STRUCT_PLAYER_ID);
+    }
+    EXPECT(PlayerPartyWithinRestrictedLimit());
+    EXPECT(!CanAddRestrictedMonToParty(SPECIES_KARTANA, PARTY_SIZE));
+    HandleSetPokedexFlagFromMon(&gParties[B_TRAINER_PLAYER][3], FLAG_SET_CAUGHT);
+    EXPECT(IsWildSlotSpeciesAcquirable(SPECIES_URSALUNA_BLOODMOON));
+    ZeroPlayerPartyMons();
 }
