@@ -42,6 +42,15 @@ class WattsonRingTests(unittest.TestCase):
                                        for c in path['conditions'])
                                 or ('TRAINER_WATTSON_1' in path.get('prior_battles',[]) and badge=='FLAG_BADGE03_GET'), (label,path))
 
+    def test_wattson_preflights_both_rewards_before_giving_the_ring(self):
+        label='MauvilleCity_Gym_EventScript_GiveMegaRing'
+        line=next(n for n,text in self.builder.scripts.labels[label]['body'] if text.startswith('giveuniqueitem ITEM_MEGA_RING'))
+        paths=self.parser.paths_to(label,line)
+        self.assertTrue(paths)
+        for path in paths:
+            self.assertTrue(any('CanReceiveWattsonMegaGift' in c['key'] and c['op']=='ne' and c['value']=='FALSE'
+                                for c in path['conditions']),path['conditions'])
+
     def test_old_save_bloodmoon_record_is_form_specific(self):
         key='SPECIAL:RecordOwnedBloodmoon()'
         for species, recorded in [('SPECIES_URSALUNA',False),('SPECIES_URSALUNA_BLOODMOON',True)]:

@@ -11,6 +11,7 @@ void LoseEmeraldChampionsGardenCelebi(void);
 u32 EmeraldChampions_GetMegaArchiveCount(void);
 void EmeraldChampions_RecordMegaWitnessed(u32 item);
 u32 EmeraldChampions_CountMegasWitnessed(void);
+bool32 CanReceiveWattsonMegaGift(void);
 // Norman's starter Mega Stones (callnative from PetalburgCity_Gym).
 u16 GetNormanStarterMegaStone(void);
 u16 GetNormanPartnerMegaStone(void);
