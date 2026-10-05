@@ -1,0 +1,41 @@
+{
+ "name": "PT00b leave the truck, arrival with Mom",
+ "start": {
+  "save": "work/studio/scenes/ng/end.sav"
+ },
+ "steps": [
+  {
+   "walk": [
+    "RIGHT",
+    "RIGHT"
+   ],
+   "label": "Truck door"
+  },
+  {
+   "hold": "RIGHT",
+   "frames": 40,
+   "label": "Press out"
+  },
+  {
+   "frames": 200,
+   "label": "Outside"
+  },
+  {
+   "tap": "A",
+   "every": 40,
+   "frames": 6000,
+   "until": "idle",
+   "label": "Arrival scene done"
+  },
+  {
+   "frames": 60,
+   "label": "End"
+  }
+ ],
+ "queries": {
+  "littleroot_state": {
+   "kind": 2,
+   "id": "VAR_LITTLEROOT_TOWN_STATE"
+  }
+ }
+}

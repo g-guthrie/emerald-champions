@@ -1,0 +1,7 @@
+{"name":"PT00e May's house: meet the rival, choose the region","start":{"save":"work/studio/scenes/pt00d/end.sav"},
+ "steps":[{"walk_to":[14,9],"label":"At May's door"},{"walk":["UP"],"label":"Enter"},{"hold":"UP","frames":30},{"frames":150,"label":"Inside"},
+          {"tap":"A","every":40,"frames":3000,"min_frames":30,"until":"idle","label":"Entry scene"},
+          {"walk_to":[2,4],"label":"Rival trigger"},
+          {"tap":"A","every":40,"frames":6000,"min_frames":30,"until":"idle","label":"Met May"},{"frames":60,"label":"End"}],
+ "queries":{"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"},"rival_state":{"kind":2,"id":"VAR_LITTLEROOT_RIVAL_STATE"},"starter_gen":{"kind":2,"id":"VAR_STARTER_GEN"}},
+ "expect":{"ready":true}}

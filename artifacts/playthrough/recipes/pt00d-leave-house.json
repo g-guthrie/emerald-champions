@@ -1,0 +1,78 @@
+{
+ "name": "PT00d downstairs, Mom, leave the house",
+ "start": {
+  "save": "work/studio/scenes/pt00c/end.sav"
+ },
+ "steps": [
+  {
+   "walk_to": [
+    7,
+    2
+   ],
+   "label": "By stairs"
+  },
+  {
+   "walk": [
+    "UP"
+   ],
+   "label": "Downstairs"
+  },
+  {
+   "frames": 120
+  },
+  {
+   "tap": "A",
+   "every": 40,
+   "frames": 5000,
+   "min_frames": 30,
+   "until": "idle",
+   "label": "1F scene done"
+  },
+  {
+   "walk_to": [
+    8,
+    7
+   ],
+   "label": "Above door"
+  },
+  {
+   "walk": [
+    "DOWN"
+   ],
+   "label": "Out the door"
+  },
+  {
+   "hold": "DOWN",
+   "frames": 40,
+   "label": "Press out"
+  },
+  {
+   "frames": 150
+  },
+  {
+   "tap": "A",
+   "every": 40,
+   "frames": 3000,
+   "min_frames": 30,
+   "until": "idle",
+   "label": "Outside, idle"
+  },
+  {
+   "frames": 60,
+   "label": "End"
+  }
+ ],
+ "queries": {
+  "intro_state": {
+   "kind": 2,
+   "id": "VAR_LITTLEROOT_INTRO_STATE"
+  },
+  "littleroot_state": {
+   "kind": 2,
+   "id": "VAR_LITTLEROOT_TOWN_STATE"
+  }
+ },
+ "expect": {
+  "ready": true
+ }
+}

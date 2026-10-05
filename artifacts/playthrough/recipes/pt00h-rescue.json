@@ -1,0 +1,99 @@
+{
+ "name": "PT00h Route 101: Birch's rescue, choose the pair, to the lab",
+ "start": {
+  "save": "work/studio/scenes/pt00g/end.sav"
+ },
+ "battle_resolution": "fixture_win",
+ "steps": [
+  {
+   "walk": [
+    "UP",
+    "UP"
+   ],
+   "label": "Into Route 101"
+  },
+  {
+   "frames": 60
+  },
+  {
+   "tap": "A",
+   "every": 40,
+   "frames": 4000,
+   "min_frames": 30,
+   "until": "idle",
+   "label": "Rescue scene"
+  },
+  {
+   "walk_to": [
+    7,
+    15
+   ],
+   "face": "UP",
+   "label": "Facing the bag"
+  },
+  {
+   "press": "A",
+   "frames": 400,
+   "label": "Open bag"
+  },
+  {
+   "press": "A",
+   "frames": 200,
+   "label": "First pick"
+  },
+  {
+   "press": "A",
+   "frames": 200,
+   "label": "Yes"
+  },
+  {
+   "press": "RIGHT",
+   "frames": 60,
+   "label": "Move cursor"
+  },
+  {
+   "press": "A",
+   "frames": 200,
+   "label": "Second pick"
+  },
+  {
+   "press": "A",
+   "frames": 200,
+   "label": "Yes 2"
+  },
+  {
+   "press": "A",
+   "frames": 300,
+   "label": "Confirm pair"
+  },
+  {
+   "tap": "A",
+   "every": 45,
+   "frames": 9000,
+   "until": "idle",
+   "min_frames": 120,
+   "label": "Battle and lab"
+  },
+  {
+   "frames": 60,
+   "label": "End"
+  }
+ ],
+ "queries": {
+  "littleroot_state": {
+   "kind": 2,
+   "id": "VAR_LITTLEROOT_TOWN_STATE"
+  },
+  "route101_state": {
+   "kind": 2,
+   "id": "VAR_ROUTE101_STATE"
+  },
+  "birch_lab": {
+   "kind": 2,
+   "id": "VAR_BIRCH_LAB_STATE"
+  }
+ },
+ "expect": {
+  "ready": true
+ }
+}

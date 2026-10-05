@@ -51,11 +51,17 @@ mistakes on water/elevation/ledges, missed side entrances). The owner no longer 
   then python3 scripts/stamp_release_inputs.py --stamp pokeemerald-headless.inputs.json
 
 ## State
-- Current leg: PILOT. pt00 true new game reaches the truck (work/studio/scenes/ng). Next: leave the
-  truck, house intro, Route 101 rescue, lab, Littleroot (Mom: Old Rod), Oldale, Route 103 rival.
-- Last end save: work/studio/scenes/ng/end.sav (truck, idle)
-- Finding: Mom's Old Rod trigger needs VAR_LITTLEROOT_TOWN_STATE == 3 (LittlerootTown/map.json
-  coord events; set at ProfessorBirchsLab/scripts.inc:391). Confirm order in play.
+- Legs done (recipes in artifacts/playthrough/recipes, evidence in work/studio/scenes/<leg>):
+  pt00 truck (ng) -> pt00b out of truck -> pt00c clock set -> pt00d out of house -> pt00e/f May met
+  (region default Hoenn, VAR_STARTER_GEN 3) -> pt00g north trigger -> pt00h rescue: pair Mudkip +
+  Treecko (screenshots), forced win, back in Birch's lab (VAR_BIRCH_LAB_STATE 3).
+- Last end save: work/studio/scenes/pt00h/end.sav (Birch's lab, idle, 6,5)
+- Next: lab -> Littleroot -> Route 101 -> Oldale (check gifts) -> Route 103 rival (forced win) ->
+  back to lab (Pokedex; Littleroot state 3) -> Mom (Old Rod, confirm by Bag query).
+- Runner step types: walk, walk_to (+face), until_text, tap/press/hold; door mats need an extra
+  hold toward the exit; Yes/No prompts need explicit cursor moves (tapping A picks the default).
+- Finding: Mom's Old Rod trigger needs VAR_LITTLEROOT_TOWN_STATE == 3 (set when Birch gives the
+  Pokedex, ProfessorBirchsLab/scripts.inc:391). Confirm order in play.
 
 ## Known errors in the old manifest (to be redone from evidence)
 - Step 5: Petalburg Woods (4,26) is a Nugget (item_ball_scripts.inc:354), not Paralyze Heal.

@@ -14,10 +14,12 @@ DIRS = {(1, 0): 'RIGHT', (-1, 0): 'LEFT', (0, 1): 'DOWN', (0, -1): 'UP'}
 FRAMES_PER_TILE = 16
 
 
-def path(map_dir, start, goal, caps=frozenset(), block=()):
+def path(map_dir, start, goal, caps=frozenset(), block=None):
+    """block: tiles occupied right now (the game's visible actors). Without it, every object in
+    the map file is treated as standing where the file places it."""
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid)
-    npcs = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])} | set(block)
+    npcs = set(block) if block is not None else {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}
     prev = {start: None}; q = deque([start])
     while q:
         p = q.popleft()

@@ -103,6 +103,20 @@ async def run(spec,out):
         total=0
         walk_failure=None
         for step in steps:
+            if "walk_to" in step and walk_failure is None:
+                # Plan from the position the game reports right now, then walk it closed-loop.
+                import sys as _sys
+                _sys.path.insert(0,str(server.ROOT/"artifacts"/"playthrough"))
+                import route_steps
+                here=(studio.state[4],studio.state[5]);goal=tuple(step["walk_to"])
+                live=packet_state(studio.packet,recorder.decoder)["actors"]
+                occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
+                moves=route_steps.path(studio.current_map,here,goal,block=occupied) if here!=goal else []
+                if moves is None:
+                    walk_failure=f"walk_to {step.get('label','')}: no path on {studio.current_map} from {here} to {goal}"
+                    recorder.mark("NO PATH",studio.packet);break
+                step=dict(step,walk=[route_steps.DIRS[d] for d in moves]+([step["face"]] if step.get("face") else []))
+                if step.get("face"):step["face_only"]=True
             if "walk" in step and walk_failure is None:
                 # Closed-loop walking: hold each direction until the game reports one tile of
                 # progress (position or map changed). A tile that never comes is a failure.
@@ -129,6 +143,8 @@ async def run(spec,out):
                         if not studio.state[0]:
                             await settle_scene(f"Scene during {d} at {before[2]},{before[3]}")
                             before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
+                    if not moved and step.get("face_only") and i==len(step["walk"])-1:
+                        break  # turning to face an object or sign: no tile is expected
                     if not moved:
                         walk_failure=f"walk {step.get('label','')}: move {i+1} ({d}) made no progress at {before[2]},{before[3]}"
                         recorder.mark("STUCK "+d,studio.packet);break
@@ -162,6 +178,7 @@ async def run(spec,out):
                     if condition=="idle" and active_seen and idle_frames>=12:break
                     if condition=="battle" and studio.state[1]:break
                     if condition=="dialogue" and studio.state[11] and studio.state[30]!=start_state["text_serial"]:break
+                    if step.get("until_text") and f%6==0 and step["until_text"] in packet_state(studio.packet,recorder.decoder)["text"]:break
             if step.get("label"):recorder.mark(step["label"],studio.packet)
         final=packet_state(studio.packet,recorder.decoder)
         final["map"]=studio.current_map
