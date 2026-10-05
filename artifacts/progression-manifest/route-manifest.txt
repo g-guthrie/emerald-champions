@@ -1,0 +1,1084 @@
+INCLEMENT EMERALD 2 - WHAT EACH BATTLE'S CHALLENGER CAN HAVE, ROUTE BY ROUTE
+Generated from source at 9d098c63cf by scripts/route_manifest.py from the tuning pools
+(scripts/reference_pool.py encounter_pool + scripts/walkthrough_order.py).
+
+Rule: a route trainer's challenger has every area walked before that route, never the
+route's own new Pokemon or items (the first rival battle on Route 103 counts Route 103).
+Gyms and the League count everything reachable. Each step lists only what is new since
+the previous step. Starters: one region, two of its three, until the Game Corner.
+No Pokemon has EVs before the Knuckle Badge.
+
+====================================================================================================
+STEP 1 - cap 14 - Route103 (walkthrough order)
+  Battles: #1 BRENDAN_ROUTE_103_MUDKIP; #2 BRENDAN_ROUTE_103_TORCHIC; #3 BRENDAN_ROUTE_103_TREECKO; #4 MAY_ROUTE_103_MUDKIP; #5 MAY_ROUTE_103_TORCHIC; #6 MAY_ROUTE_103_TREECKO
+  New Pokemon (54):
+    Starter - LittlerootTown: Bulbasaur, Charmander, Chespin, Chikorita, Chimchar, Cyndaquil, Fennekin, Froakie, Fuecoco, Grookey, Litten, Mudkip, Oshawott, Piplup, Popplio, Quaxly, Rowlet, Scorbunny, Snivy, Sobble, Sprigatito, Squirtle, Tepig, Torchic, Totodile, Treecko, Turtwig
+    Wild grass - Route101: Fidough, Hoppip, Lillipup, Pawmi, Poochyena, Scatterbug (Icy Snow), Wurmple, Zigzagoon, Zorua
+    Wild grass - Route103: Blitzle, Grubbin, Kricketot, Rockruff, Shellos (West), Shinx, Snubbull, Toxel, Wingull
+    Evolution: Beautifly <- level 10 from Silcoon, Cascoon <- level 7 from Wurmple, Dustox <- level 10 from Cascoon, Kricketune <- level 10 from Kricketot, Monferno <- level 14 from Chimchar, Quilava <- level 14 from Cyndaquil, Silcoon <- level 7 from Wurmple, Spewpa (Icy Snow) <- level 9 from Scatterbug (Icy Snow), Vivillon (Icy Snow) <- level 12 from Spewpa (Icy Snow)
+  New battle items (11):
+    Bright Powder - wild held (Wurmple)
+    Cell Battery - mart
+    Choice Band - vendor_kit
+    Choice Scarf - vendor_kit
+    Choice Specs - vendor_kit
+    Eviolite - vendor_kit
+    Focus Sash - vendor_kit
+    Leftovers - vendor_kit
+    Mental Herb - mart
+    Metronome - wild held (Kricketot)
+    Pecha Berry - wild held (Wurmple)
+
+====================================================================================================
+STEP 2 - cap 14 - Route102 (walkthrough order)
+  Battles: #7 CALVIN_1; #8 RICK; #9 ALLEN; #10 TIANA
+  New Pokemon (2):
+    Wild old_rod - Route103: Magikarp, Remoraid
+
+====================================================================================================
+STEP 3 - cap 14 - Route104 (walkthrough order)
+  Battles: #11 BILLY; #12 DARIAN; #13 CINDY_1
+  New Pokemon (19):
+    Wild grass - Route102: Bidoof, Gothita, Happiny, Lechonk, Lotad, Meowth, Nymble, Ralts, Seedot, Surskit, Toedscool, Tympole
+    Wild honey - Route101: Combee
+    Wild honey - Route103: Cutiefly
+    Wild old_rod - PetalburgCity: Marill
+    Wild old_rod - Route102: Corphish, Goldeen
+    Evolution: Lombre <- level 14 from Lotad, Nuzleaf <- level 14 from Seedot
+  New battle items (7):
+    Chilan Berry - gift
+    Honey - wild held (Surskit)
+    Lucky Punch - vendor_species
+    Mystic Water - wild held (Goldeen)
+    Oran Berry - berry_tree
+    Power Herb - wild held (Seedot)
+    Quick Claw - wild held (Meowth)
+
+====================================================================================================
+STEP 4 - cap 14 - PetalburgWoods (walkthrough order)
+  Battles: #14 LYLE; #15 GRUNT_PETALBURG_WOODS; #16 JAMES_1
+  New Pokemon (16):
+    Wild grass - Route104: Azurill, Budew, Bunnelby, Charcadet, Flabébé, Fletchling, Ledyba, Litleo, Sandygast, Sentret, Smoliv, Taillow
+    Wild honey - Route104: Patrat, Yungoos
+    Wild old_rod - Route104: Skrelp
+    Evolution: Roselia <- level-up (Bonding) from Budew
+  New battle items (12):
+    Cheri Berry - berry_tree
+    Chesto Berry - gift
+    Grepa Berry - gift
+    Hondew Berry - gift
+    Kelpsy Berry - gift
+    Leppa Berry - berry_tree
+    Poison Barb - wild held (Budew)
+    Pomeg Berry - gift
+    Qualot Berry - gift
+    Soothe Bell - item_ball
+    Spell Tag - wild held (Sandygast)
+    Tamato Berry - gift
+
+====================================================================================================
+STEP 5 - cap 14 - Route104 (walkthrough order)
+  Battles: #17 WINSTON_1; #18 GINA_AND_MIA_1
+  New Pokemon: none
+
+====================================================================================================
+STEP 6 - cap 14 - Route116 (walkthrough order)
+  Battles: #19 JOEY; #20 JOSE; #21 CLARK; #22 JOHNSON; #23 DEVAN
+  New Pokemon (18):
+    Wild grass - PetalburgWoods: Blipbug, Caterpie, Foongus, Larvesta, Paras, Pichu, Shroomish, Slakoth, Togepi
+    Wild honey - PetalburgWoods: Cherubi, Pidgey, Pikipek
+    Evolution: Butterfree <- level 10 from Metapod, Dottler <- level 10 from Blipbug, Metapod <- level 7 from Caterpie, Pikachu <- level-up (Bonding) from Pichu, Togetic <- level-up (Bonding) from Togepi, Trumbeak <- level 14 from Pikipek
+  New battle items (5):
+    Float Stone - gift
+    Grass Gem - gift
+    Miracle Seed - wild held (Cherubi)
+    Steel Gem - gift
+    Wise Glasses - item_ball
+
+====================================================================================================
+STEP 7 - cap 14 - RustboroCity_Gym (full reachable pool)
+  Battles: #24 JOSH; #25 TOMMY; #26 MARC; #27 ROXANNE_1
+  New Pokemon (43):
+    Wild grass - Route116: Dreepy, Houndour, Joltik, Mareep, Nickit, Nincada, Rookidee, Skiddo, Skitty, Starly
+    Wild grass - RusturfTunnel: Drilbur, Dunsparce, Larvitar, Machop, Noibat, Roggenrola, Teddiursa, Whismur
+    Wild grass - Seaspray_Cave: Psyduck, Stunfisk (Galar), Tynamo, Wooper, Zubat
+    Wild grass - Seaspray_Cave_B1F: Bergmite, Frigibax, Seel, Smoochum, Sneasel, Snorunt, Spheal, Swinub, Vanillite
+    Wild honey - Route116: Pancham, Purrloin
+    Wild honey - Seaspray_Cave_B1F: Cryogonal, Cubchoo, Delibird, Snover
+    Wild old_rod - Route115: Wailmer, Wishiwashi (Solo)
+    Wild old_rod - Seaspray_Cave: Krabby
+    Evolution: Shedinja <- split evolution from Nincada, Staravia <- level 14 from Starly
+  New battle items (12):
+    Damp Rock - item_ball
+    Everstone - wild held (Roggenrola)
+    Focus Band - wild held (Machop)
+    Hard Stone - wild held (Roggenrola)
+    Icicle Plate - hidden
+    Icy Rock - hidden
+    Kings Rock - item_ball
+    Never Melt Ice - wild held (Vanillite)
+    Rocky Helmet - item_ball
+    Smooth Rock - item_ball
+    Soft Sand - wild held (Nincada)
+    Wide Lens - item_ball
+
+====================================================================================================
+STEP 8 - cap 20 - Route116 (walkthrough order)
+  Battles: #28 DAWSON; #29 SARAH; #30 JANICE; #31 JERRY_1
+  New Pokemon (84):
+    Cut_tree - PetalburgWoods: Aipom, Applin, Burmy (Plant), Phantump, Pineco, Skwovet
+    Form - FORM_CHANGE_END_BATTLE_ENVIRONMENT BATTLE_ENVIRONMENT_BUILDING from Burmy (Plant): Burmy (Trash)
+    Form - FORM_CHANGE_END_BATTLE_ENVIRONMENT BATTLE_ENVIRONMENT_CAVE from Burmy (Plant): Burmy (Sandy)
+    Wild grass - PetalburgWoods_2: Bounsweet, Kakuna, Morelull, Panpour, Pansage, Pansear, Venipede, Weedle
+    Wild grass - PetalburgWoods_3: Bellsprout, Croagunk, Dewpider, Emolga, Impidimp, Misdreavus, Murkrow, Oddish, Yanma
+    Wild honey - PetalburgWoods_3: Goomy
+    Wild old_rod - PetalburgWoods_3: Poliwag, Slowpoke
+    Evolution: Azumarill <- level 18 from Marill, Bayleef <- level 16 from Chikorita, Beedrill <- level 10 from Kakuna, Bibarel <- level 15 from Bidoof, Braixen <- level 16 from Fennekin, Brionne <- level 17 from Popplio, Charjabug <- level 20 from Grubbin, Charmeleon <- level 16 from Charmander, Combusken <- level 16 from Torchic, Crocalor <- level 16 from Fuecoco, Croconaw <- level 18 from Totodile, Dartrix <- level 17 from Rowlet, Dewott <- level 17 from Oshawott, Diggersby <- level 20 from Bunnelby, Drizzile <- level 16 from Sobble, Fletchinder <- level 17 from Fletchling, Floette (White) <- level 19 from Flabébé, Floragato <- level 16 from Sprigatito, Frogadier <- level 16 from Froakie, Furret <- level 15 from Sentret, Grotle <- level 18 from Turtwig, Grovyle <- level 16 from Treecko, Gumshoos <- level 20 from Yungoos, Gyarados <- level 20 from Magikarp, Herdier <- level 16 from Lillipup, Ivysaur <- level 16 from Bulbasaur, Kirlia <- level 20 from Ralts, Ledian <- level 18 from Ledyba, Linoone <- level 20 from Zigzagoon, Luxio <- level 15 from Shinx, Marshtomp <- level 16 from Mudkip, Mightyena <- level 18 from Poochyena, Mothim (Plant) <- level 20 from Burmy (Plant), Mothim (Sandy) <- level 20 from Burmy (Sandy), Mothim (Trash) <- level 20 from Burmy (Trash), Oinkologne (F) <- level 18 from Lechonk, Oinkologne (M) <- level 18 from Lechonk, Pawmo <- level 18 from Pawmi, Pawmot <- level-up from Pawmo, Pidgeotto <- level 18 from Pidgey, Pignite <- level 17 from Tepig, Prinplup <- level 16 from Piplup, Quaxwell <- level 16 from Quaxly, Quilladin <- level 16 from Chespin, Raboot <- level 16 from Scorbunny, Servine <- level 17 from Snivy, Skiploom <- level 18 from Hoppip, Steenee <- level 18 from Bounsweet, Thwackey <- level 16 from Grookey, Torracat <- level 17 from Litten, Vigoroth <- level 18 from Slakoth, Wartortle <- level 16 from Squirtle, Watchog <- level 20 from Patrat, Wormadam (Plant) <- level 20 from Burmy (Plant), Wormadam (Sandy) <- level 20 from Burmy (Sandy), Wormadam (Trash) <- level 20 from Burmy (Trash)
+  New battle items (14):
+    Absorb Bulb - wild held (Oddish)
+    Big Root - hidden
+    Black Sludge - wild held (Croagunk)
+    Eject Button - mart
+    Glimmoranite - gift
+    Grassy Seed - wild held (Bounsweet)
+    Insect Plate - hidden
+    Lagging Tail - wild held (Slowpoke)
+    Luminous Moss - item_ball
+    Shed Shell - wild held (Goomy)
+    Shell Bell - item_ball
+    Silver Powder - wild held (Butterfree)
+    Sun Stone - item_ball
+    Toxic Orb - item_ball
+
+====================================================================================================
+STEP 9 - cap 20 - RusturfTunnel (walkthrough order)
+  Battles: #32 GRUNT_RUSTURF_TUNNEL
+  New Pokemon (5):
+    Evolution: Corvisquire <- level 18 from Rookidee, Flaaffy <- level 15 from Mareep, Liepard <- level 20 from Purrloin, Ninjask <- level 20 from Nincada, Thievul <- level 18 from Nickit
+  New battle items (2):
+    Binding Band - item_ball
+    Pinap Berry - berry_tree
+
+====================================================================================================
+STEP 10 - cap 20 - Route104 (walkthrough order)
+  Battles: #33 BRENDAN_RUSTBORO_MUDKIP; #34 BRENDAN_RUSTBORO_TORCHIC; #35 BRENDAN_RUSTBORO_TREECKO; #36 MAY_RUSTBORO_MUDKIP; #37 MAY_RUSTBORO_TORCHIC; #38 MAY_RUSTBORO_TREECKO
+  New Pokemon: none
+
+====================================================================================================
+STEP 11 - cap 20 - Route106 (walkthrough order)
+  Battles: #39 NED; #40 ELLIOT_1
+  New Pokemon (53):
+    Trade - DewfordTown_Hall: Bombirdier
+    Wild grass - DewfordManor_1F: Drowzee, Gastly, Glameow, Hoothoot, Litwick, Mime Jr., Rattata, Sinistea (Phony), Slowpoke (Galar), Solosis
+    Wild grass - DewfordMeadow: Milcery, Oricorio (Baile)
+    Wild grass - GraniteCave_1F: Abra, Aron, Axew, Geodude, Glimmet, Hawlucha, Kubfu, Makuhita, Nacli, Rolycoly, Timburr
+    Wild grass - GraniteCave_B1F: Bronzor, Carbink, Cubone, Ditto, Klefki, Onix, Sableye, Sneasel (Hisui)
+    Wild grass - GraniteCave_B2F: Bagon, Gible, Sandshrew, Tinkatink
+    Wild grass - GraniteCave_StevensRoom: Beldum
+    Wild honey - DewfordMeadow: Spritzee, Swirlix
+    Wild old_rod - DewfordTown: Mantyke
+    Evolution: Carkol <- level 18 from Rolycoly, Floette (Orange) <- level 19 from Flabébé, Floette (Red) <- level 19 from Flabébé, Floette (Yellow) <- level 19 from Flabébé, Kadabra <- level 16 from Abra, Loudred <- level 20 from Whismur, Mantine <- level-up from Mantyke, Metang <- level 20 from Beldum, Noctowl <- level 20 from Hoothoot, Quagsire <- level 20 from Wooper, Raticate <- level 20 from Rattata, Slowking <- use ITEM_KINGS_ROCK from Slowpoke, Steelix <- use ITEM_METAL_COAT from Onix
+  New battle items (20):
+    Black Belt - wild held (Makuhita)
+    Dragon Fang - wild held (Bagon)
+    Dread Plate - hidden
+    Expert Belt - gift
+    Fairy Gem - hidden
+    Flying Gem - gift
+    Grip Claw - wild held (Sandshrew)
+    Ground Gem - gift
+    Heat Rock - item_ball
+    Metal Coat - wild held (Bronzor)
+    Metal Powder - wild held (Ditto)
+    Protective Pads - item_ball
+    Quick Powder - wild held (Ditto)
+    Red Nectar - wild held (Oricorio)
+    Ring Target - item_ball
+    Silk Scarf - gift
+    Thick Club - wild held (Cubone)
+    Throat Spray - item_ball
+    Twisted Spoon - wild held (Abra)
+    Yellow Nectar - hidden
+
+====================================================================================================
+STEP 12 - cap 20 - Route109 (walkthrough order)
+  Battles: #41 HAILEY; #42 EDMOND; #43 LOLA_1; #44 CHANDLER; #45 DWAYNE; #46 JOHANNA; #47 SIMON
+  New Pokemon (9):
+    Wild grass - Route106: Buizel, Chatot, Crabrawler, Exeggcute, Inkay, Pidove
+    Wild old_rod - Route106: Clauncher
+    Wild old_rod - Route107: Arrokuda, Finneon
+  New battle items (3):
+    Aspear Berry - wild held (Crabrawler)
+    Prism Scale - hidden
+    Psychic Seed - wild held (Exeggcute)
+
+====================================================================================================
+STEP 13 - cap 20 - DewfordTown_Gym (full reachable pool)
+  Battles: #48 LAURA; #49 BRENDEN; #50 LILITH; #51 TAKAO; #52 CRISTIAN; #53 JOCELYN; #54 BRAWLY_1
+  New Pokemon (16):
+    Wild grass - Route110: Electrike, Gulpin, Magnemite, Minun, Plusle, Shroodle, Stunky, Trubbish, Varoom, Yamper
+    Wild honey - Route110: Doduo, Ekans, Pachirisu
+    Wild old_rod - Route109: Luvdisc
+    Wild old_rod - SlateportCity: Frillish, Horsea
+  New battle items (24):
+    Blue Scarf - gift
+    Dragon Scale - wild held (Horsea)
+    Energy Powder - mart
+    Energy Root - mart
+    Fluffy Tail - mart
+    Full Incense - mart
+    Green Scarf - gift
+    Lax Incense - mart
+    Light Clay - item_ball
+    Luck Incense - mart
+    Odd Incense - mart
+    Pink Scarf - gift
+    Pure Incense - mart
+    Red Scarf - gift
+    Revival Herb - mart
+    Rock Incense - mart
+    Rose Incense - mart
+    Sea Incense - mart
+    Sharp Beak - wild held (Doduo)
+    Sitrus Berry - wild held (Gulpin)
+    Soda Pop - gift
+    Wave Incense - mart
+    Yellow Scarf - gift
+    Zoom Lens - item_ball
+
+====================================================================================================
+STEP 14 - cap 30 - SlateportCity_OceanicMuseum_2F (walkthrough order)
+  Battles: #55 GRUNT_MUSEUM_1; #56 ARCHIE_SLATEPORT
+  New Pokemon (67):
+    Evolution: Alcremie (Strawberry Vanilla Cream) <- level 30 from Milcery, Ampharos <- level 30 from Flaaffy, Araquanid <- level 22 from Dewpider, Barraskewda <- level 26 from Arrokuda, Bellossom <- use ITEM_SUN_STONE from Gloom, Boldore <- level 25 from Roggenrola, Breloom <- level 23 from Shroomish, Cherrim (Overcast) <- level 25 from Cherubi, Crawdaunt <- level 30 from Corphish, Crobat <- level-up (Bonding) from Golbat, Dachsbun <- level 26 from Fidough, Dolliv <- level 25 from Smoliv, Feraligatr <- level 30 from Croconaw, Floatzel <- level 26 from Buizel, Gabite <- level 24 from Gible, Gardevoir <- level 30 from Kirlia, Gastrodon (West) <- level 30 from Shellos (West), Gloom <- level 21 from Oddish, Golbat <- level 22 from Zubat, Granbull <- level 23 from Snubbull, Graveler <- level 25 from Geodude, Greedent <- level 24 from Skwovet, Gurdurr <- level 25 from Timburr, Hariyama <- level 24 from Makuhita, Haunter <- level 25 from Gastly, Houndoom <- level 24 from Houndour, Hypno <- level 26 from Drowzee, Jumpluff <- level 27 from Skiploom, Jynx <- level 30 from Smoochum, Kingler <- level 28 from Krabby, Lokix <- level 24 from Nymble, Luxray <- level 30 from Luxio, Lycanroc (Midday) <- level 25 from Rockruff, Lycanroc (Midnight) <- level 25 from Rockruff, Machoke <- level 28 from Machop, Malamar <- level 30 from Inkay, Marowak <- level 28 from Cubone, Masquerain <- level 22 from Surskit, Naclstack <- level 24 from Nacli, Octillery <- level 25 from Remoraid, Orbeetle <- level 30 from Dottler, Palpitoad <- level 25 from Tympole, Parasect <- level 24 from Paras, Pelipper <- level 25 from Wingull, Persian <- level 28 from Meowth, Politoed <- use ITEM_KINGS_ROCK from Poliwhirl, Poliwhirl <- level 25 from Poliwag, Pupitar <- level 30 from Larvitar, Ribombee <- level 25 from Cutiefly, Sandslash <- level 22 from Sandshrew, Scolipede <- level 30 from Whirlipede, Shelgon <- level 30 from Bagon, Shiinotic <- level 24 from Morelull, Swellow <- level 22 from Taillow, Tinkatuff <- level 24 from Tinkatink, Toedscruel <- level 30 from Toedscool, Toucannon <- level 28 from Trumbeak, Toxtricity (Amped) <- level 30 from Toxel, Toxtricity (Low Key) <- level 30 from Toxel, Tranquill <- level 21 from Pidove, Tsareena <- level-up from Steenee, Ursaring <- level 30 from Teddiursa, Vespiquen <- level 21 from Combee, Weepinbell <- level 21 from Bellsprout, Whirlipede <- level 22 from Venipede, Zebstrika <- level 27 from Blitzle, Zoroark <- level 30 from Zorua
+  New battle items (3):
+    Loaded Dice - vendor_badge_stock
+    Machampite - gift
+    White Herb - mart
+
+====================================================================================================
+STEP 15 - cap 30 - Route110 (walkthrough order)
+  Battles: #57 ISABEL_1; #58 KALEB; #59 SALLY; #60 EDDIE
+  New Pokemon (16):
+    Evolution: Blissey <- level-up (Bonding) from Chansey, Chansey <- level-up holding ITEM_OVAL_STONE from Happiny, Crabominable <- use ITEM_ICE_STONE from Crabrawler, Delcatty <- use ITEM_MOON_STONE from Skitty, Exeggutor <- use ITEM_LEAF_STONE from Exeggcute, Exeggutor (Alola) <- use ITEM_LEAF_STONE in MAPSEC_DEWFORD_TOWN from Exeggcute, Ludicolo <- use ITEM_WATER_STONE from Lombre, Poliwrath <- use ITEM_WATER_STONE from Poliwhirl, Raichu <- use ITEM_THUNDER_STONE from Pikachu, Shiftry <- use ITEM_LEAF_STONE from Nuzleaf, Simipour <- use ITEM_WATER_STONE from Panpour, Simisage <- use ITEM_LEAF_STONE from Pansage, Simisear <- use ITEM_FIRE_STONE from Pansear, Victreebel <- use ITEM_LEAF_STONE from Weepinbell, Vikavolt <- use ITEM_THUNDER_STONE from Charjabug, Vileplume <- use ITEM_LEAF_STONE from Gloom
+  New battle items (12):
+    Aggronite - gift
+    Black Glasses - hidden
+    Eject Pack - item_ball
+    Fire Stone - mart
+    Ice Stone - mart
+    Leaf Stone - mart
+    Moon Stone - mart
+    Muscle Band - item_ball
+    Oval Stone - mart
+    Pp Up - item_ball
+    Thunder Stone - mart
+    Water Stone - mart
+
+====================================================================================================
+STEP 16 - cap 30 - Route103 (walkthrough order)
+  Battles: #61 DAISY; #62 AMY_AND_LIV_1; #63 MIGUEL_1
+  New Pokemon: none
+
+====================================================================================================
+STEP 17 - cap 30 - Route110 (walkthrough order)
+  Battles: #64 TIMMY; #65 BRENDAN_ROUTE_110_MUDKIP; #66 BRENDAN_ROUTE_110_TORCHIC; #67 BRENDAN_ROUTE_110_TREECKO; #68 MAY_ROUTE_110_MUDKIP; #69 MAY_ROUTE_110_TORCHIC; #70 MAY_ROUTE_110_TREECKO
+  New Pokemon: none
+
+====================================================================================================
+STEP 18 - cap 30 - MauvilleCity (walkthrough order)
+  Battles: #71 WALLY_MAUVILLE
+  New Pokemon (13):
+    Wild old_rod - Route110: Chinchou, Tadbulb
+    Evolution: Arbok <- level 22 from Ekans, Bellibolt <- use ITEM_THUNDER_STONE from Tadbulb, Boltund <- level 25 from Yamper, Froslass <- use ITEM_DAWN_STONE from Snorunt, Gallade <- use ITEM_DAWN_STONE from Kirlia, Grafaiai <- level 28 from Shroodle, Lanturn <- level 27 from Chinchou, Magneton <- level 30 from Magnemite, Magnezone <- use ITEM_THUNDER_STONE from Magneton, Manectric <- level 26 from Electrike, Swalot <- level 26 from Gulpin
+  New battle items (4):
+    Assault Vest - item_ball
+    Dawn Stone - item_ball
+    Deep Sea Scale - wild held (Chinchou)
+    Nanab Berry - berry_tree
+
+====================================================================================================
+STEP 19 - cap 30 - Route117 (walkthrough order)
+  Battles: #72 ANNA_AND_MEG_1; #73 ISAAC_1; #74 MARIA_1; #75 DEREK; #76 LYDIA_1; #77 AISHA; #78 BRANDI; #79 MELINA
+  New Pokemon (15):
+    Game_corner - MauvilleCity_GameCorner: Diglett (Alola), Geodude (Alola), Grimer (Alola), Marowak (Alola), Meowth (Alola), Raichu (Alola), Rattata (Alola), Sandshrew (Alola), Vulpix (Alola)
+    Evolution: Dugtrio (Alola) <- level 26 from Diglett (Alola), Graveler (Alola) <- level 25 from Geodude (Alola), Ninetales (Alola) <- use ITEM_ICE_STONE from Vulpix (Alola), Persian (Alola) <- level-up (Bonding) from Meowth (Alola), Raticate (Alola) <- level 20 from Rattata (Alola), Sandslash (Alola) <- use ITEM_ICE_STONE from Sandshrew (Alola)
+  New battle items (2):
+    Leek - mart
+    Rock Gem - gift
+
+====================================================================================================
+STEP 20 - cap 30 - RusturfTunnel (walkthrough order)
+  Battles: #80 MIKE_2
+  New Pokemon: none
+
+====================================================================================================
+STEP 21 - cap 30 - Route118 (walkthrough order)
+  Battles: #81 ROSE_1; #82 DEANDRE
+  New Pokemon (64):
+    Breeding - Day-Care egg from Vivillon (Pokeball): Scatterbug (Pokeball)
+    Gift - VerdanturfMeadow: Audino
+    Wild grass - Route117: Deerling (Spring), Eevee, Farfetch'd, Farfetch'd (Galar), Gossifleur, Illumise, Minccino, Petilil, Volbeat, Wooloo
+    Wild grass - VerdanturfMeadow: Buneary, Cottonee, Espurr, Floette (Eternal), Indeedee (M), Munna, Ponyta (Galar), Stufful, Vivillon (Pokeball)
+    Wild honey - Route117: Chingling, Karrablast, Sewaddle, Shelmet
+    Wild honey - VerdanturfMeadow: Hatenna
+    Wild old_rod - Route111: Barboach
+    Wild old_rod - Route117: Wooper (Paldea)
+    Evolution: Bewear <- level 27 from Stufful, Chimecho <- level-up (Bonding) from Chingling, Cinccino <- use ITEM_SHINY_STONE from Minccino, Clodsire <- level 20 from Wooper (Paldea), Dubwool <- level 24 from Wooloo, Eldegoss <- level 20 from Gossifleur, Espeon <- level-up (Bonding) from Eevee, Flareon <- use ITEM_FIRE_STONE from Eevee, Floette (Blue) <- level 19 from Flabébé, Florges (Blue) <- use ITEM_SHINY_STONE from Floette (Blue), Florges (Orange) <- use ITEM_SHINY_STONE from Floette (Orange), Florges (Red) <- use ITEM_SHINY_STONE from Floette (Red), Florges (White) <- use ITEM_SHINY_STONE from Floette (White), Florges (Yellow) <- use ITEM_SHINY_STONE from Floette (Yellow), Glaceon <- use ITEM_ICE_STONE from Eevee, Honchkrow <- use ITEM_DUSK_STONE from Murkrow, Jolteon <- use ITEM_THUNDER_STONE from Eevee, Leafeon <- level-up in MAP_PETALBURG_WOODS from Eevee, Leavanny <- level-up (Bonding) from Swadloon, Lilligant <- use ITEM_SUN_STONE from Petilil, Lilligant (Hisui) <- use ITEM_SUN_STONE in MAP_VERDANTURF_MEADOW from Petilil, Lopunny <- level-up (Bonding) from Buneary, Meowstic (F) <- level 25 from Espurr, Meowstic (M) <- level 25 from Espurr, Mismagius <- use ITEM_DUSK_STONE from Misdreavus, Musharna <- use ITEM_MOON_STONE from Munna, Roserade <- use ITEM_SHINY_STONE from Roselia, Sirfetch'd <- level-up from Farfetch'd (Galar), Spewpa (Pokeball) <- level 9 from Scatterbug (Pokeball), Swadloon <- level 20 from Sewaddle, Sylveon <- level-up (Bonding) from Eevee, Togekiss <- use ITEM_SHINY_STONE from Togetic, Umbreon <- level-up (Bonding) from Eevee, Vaporeon <- use ITEM_WATER_STONE from Eevee, Whimsicott <- use ITEM_SUN_STONE from Cottonee, Whiscash <- level 30 from Barboach
+  New battle items (8):
+    Cleanse Tag - wild held (Chingling)
+    Dusk Stone - tent_prize
+    Life Orb - gift
+    Lum Berry - item_ball
+    Pink Nectar - hidden
+    Purple Nectar - hidden
+    Shiny Stone - tent_prize
+    Wepear Berry - berry_tree
+
+====================================================================================================
+STEP 22 - cap 30 - Route111 (walkthrough order)
+  Battles: #83 TYRON; #84 BIANCA; #85 VICTOR; #86 VICTORIA; #87 VIVI; #88 VICKY
+  New Pokemon: none
+
+====================================================================================================
+STEP 23 - cap 30 - Route110 (walkthrough order)
+  Battles: #89 JACLYN; #90 ANTHONY; #91 JASMINE; #92 JACOB
+  New Pokemon: none
+
+====================================================================================================
+STEP 24 - cap 30 - MauvilleCity_Gym (full reachable pool)
+  Battles: #93 VIVIAN; #94 KIRK; #95 BEN; #96 ANGELO; #97 SHAWN; #98 WATTSON_1
+  New Pokemon (2):
+    Wild old_rod - Route118: Carvanha
+    Evolution: Sharpedo <- level 30 from Carvanha
+  New battle items (1):
+    Deep Sea Tooth - wild held (Carvanha)
+
+====================================================================================================
+STEP 25 - cap 40 - Route110_TrickHousePuzzle2 (walkthrough order)
+  Battles: #99 TED; #100 GEORGIA
+  New Pokemon (122):
+    Game_corner - MauvilleCity_GameCorner: Munchlax, Porygon
+    Wild good_rod - DewfordTown: Qwilfish, Staryu
+    Wild good_rod - Route103: Clamperl
+    Wild good_rod - Route106: Shellder
+    Wild good_rod - Seaspray_Cave: Relicanth
+    Wild grass - Route110: Raikou
+    Wild rock_smash - GraniteCave_B2F: Dwebble, Nosepass
+    Wild rock_smash - Route106: Binacle, Wimpod
+    Evolution: Abomasnow <- level 40 from Snover, Alakazam <- use ITEM_LINKING_CORD from Kadabra, Ambipom <- level-up from Aipom, Amoonguss <- level 39 from Foongus, Arboliva <- level 35 from Dolliv, Arctibax <- level 35 from Frigibax, Aromatisse <- use ITEM_SACHET from Spritzee, Avalugg <- level 37 from Bergmite, Barbaracle <- level 39 from Binacle, Beartic <- level 37 from Cubchoo, Blastoise <- level 36 from Wartortle, Blaziken <- level 36 from Combusken, Bronzong <- level 33 from Bronzor, Charizard <- level 36 from Charmeleon, Chesnaught <- level 36 from Quilladin, Cinderace <- level 35 from Raboot, Clawitzer <- level 37 from Clauncher, Cloyster <- use ITEM_WATER_STONE from Shellder, Coalossal <- level 34 from Carkol, Conkeldurr <- use ITEM_LINKING_CORD from Gurdurr, Corviknight <- level 38 from Corvisquire, Crustle <- level 34 from Dwebble, Decidueye <- level 34 from Dartrix, Decidueye (Hisui) <- level 34 in MAP_PETALBURG_WOODS from Dartrix, Delphox <- level 36 from Braixen, Dewgong <- level 34 from Seel, Dodrio <- level 31 from Doduo, Dudunsparce (Three Segment) <- level-up from Dunsparce, Dudunsparce (Two Segment) <- level-up from Dunsparce, Duosion <- level 32 from Solosis, Eelektrik <- level 39 from Tynamo, Eelektross <- use ITEM_THUNDER_STONE from Eelektrik, Emboar <- level 36 from Pignite, Empoleon <- level 36 from Prinplup, Excadrill <- level 31 from Drilbur, Exploud <- level 40 from Loudred, Forretress <- level 31 from Pineco, Fraxure <- level 38 from Axew, Galvantula <- level 36 from Joltik, Garbodor <- level 36 from Trubbish, Garganacl <- level 38 from Naclstack, Gengar <- use ITEM_LINKING_CORD from Haunter, Gigalith <- use ITEM_LINKING_CORD from Boldore, Glimmora <- level 35 from Glimmet, Gogoat <- level 32 from Skiddo, Golduck <- level 33 from Psyduck, Golem <- use ITEM_LINKING_CORD from Graveler, Golem (Alola) <- use ITEM_LINKING_CORD from Graveler (Alola), Golisopod <- level 30 from Wimpod, Gorebyss <- use ITEM_DEEP_SEA_SCALE from Clamperl, Gothorita <- level 32 from Gothita, Greninja <- level 36 from Frogadier, Huntail <- use ITEM_DEEP_SEA_TOOTH from Clamperl, Incineroar <- level 34 from Torracat, Infernape <- level 36 from Monferno, Inteleon <- level 35 from Drizzile, Jellicent <- level 40 from Frillish, Kingdra <- use ITEM_DRAGON_SCALE from Seadra, Lairon <- level 32 from Aron, Lumineon <- level 31 from Finneon, Machamp <- use ITEM_LINKING_CORD from Machoke, Mamoswine <- level-up from Piloswine, Meganium <- level 32 from Bayleef, Meowscarada <- level 36 from Floragato, Morgrem <- level 32 from Impidimp, Mr. Mime <- level-up from Mime Jr., Muk (Alola) <- level 38 from Grimer (Alola), Pangoro <- level 32 from Pancham, Pidgeot <- level 36 from Pidgeotto, Piloswine <- level 33 from Swinub, Porygon-Z <- use ITEM_DUBIOUS_DISC from Porygon2, Porygon2 <- use ITEM_UPGRADE from Porygon, Primarina <- level 34 from Brionne, Probopass <- use ITEM_THUNDER_STONE from Nosepass, Purugly <- level 38 from Glameow, Pyroar <- level 35 from Litleo, Quaquaval <- level 36 from Quaxwell, Revavroom <- level 40 from Varoom, Rillaboom <- level 35 from Thwackey, Samurott <- level 36 from Dewott, Sceptile <- level 36 from Grovyle, Seadra <- level 32 from Horsea, Seaking <- level 33 from Goldeen, Sealeo <- level 32 from Spheal, Seismitoad <- level 36 from Palpitoad, Serperior <- level 36 from Servine, Skeledirge <- level 36 from Crocalor, Skuntank <- level 34 from Stunky, Slaking <- level 36 from Vigoroth, Sliggoo <- level 40 from Goomy, Slowbro <- level 37 from Slowpoke, Slurpuff <- use ITEM_WHIPPED_DREAM from Swirlix, Sneasler <- level-up holding ITEM_RAZOR_CLAW from Sneasel (Hisui), Snorlax <- level-up (Bonding) from Munchlax, Staraptor <- level 34 from Staravia, Starmie <- use ITEM_WATER_STONE from Staryu, Stoutland <- level 32 from Herdier, Swampert <- level 36 from Marshtomp, Talonflame <- level 35 from Fletchinder, Tinkaton <- level 38 from Tinkatuff, Torterra <- level 32 from Grotle, Toxicroak <- level 37 from Croagunk, Trevenant <- use ITEM_LINKING_CORD from Phantump, Typhlosion <- level 36 from Quilava, Unfezant <- level 32 from Tranquill, Vanillish <- level 35 from Vanillite, Venusaur <- level 32 from Ivysaur, Wailord <- level 40 from Wailmer, Weavile <- level-up holding ITEM_RAZOR_CLAW from Sneasel, Yanmega <- level-up from Yanma
+  New battle items (25):
+    Adamant Crystal - vendor_form_items
+    Bluk Berry - berry_tree
+    Burn Drive - vendor_form_items
+    Chill Drive - vendor_form_items
+    Covert Cloak - item_ball
+    Douse Drive - vendor_form_items
+    Dubious Disc - tent_prize
+    Electirizer - tent_prize
+    Gracidea - vendor_form_items
+    Griseous Core - vendor_form_items
+    Linking Cord - tent_prize
+    Lustrous Globe - vendor_form_items
+    Magmarizer - tent_prize
+    Magnet - wild held (Nosepass)
+    Mega Ring - gift
+    Protector - tent_prize
+    Raichunite X - gift
+    Razor Claw - tent_prize
+    Razor Fang - tent_prize
+    Reaper Cloth - tent_prize
+    Rotom Catalog - vendor_form_items
+    Sachet - mart
+    Shock Drive - vendor_form_items
+    Upgrade - mart
+    Whipped Dream - mart
+
+====================================================================================================
+STEP 26 - cap 40 - Route111 (walkthrough order)
+  Battles: #101 GABBY_AND_TY_1
+  New Pokemon (9):
+    Egg - Route117_PokemonDayCare: Ferroseed, Ponyta
+    Evolution: Accelgor <- use ITEM_LINKING_CORD from Shelmet, Escavalier <- use ITEM_LINKING_CORD from Karrablast, Ferrothorn <- level 40 from Ferroseed, Hattrem <- level 32 from Hatenna, Rapidash <- level 40 from Ponyta, Rapidash (Galar) <- level 40 from Ponyta (Galar), Sawsbuck (Spring) <- level 34 from Deerling (Spring)
+  New battle items (1):
+    Gardevoirite - gift
+
+====================================================================================================
+STEP 27 - cap 40 - Route112 (walkthrough order)
+  Battles: #102 BRICE; #103 SHAYLA; #104 BRYANT
+  New Pokemon (4):
+    Breeding - Day-Care egg from Drednaw: Chewtle
+    Wild good_rod - Route111: Basculin (Red Striped), Drednaw
+    Wild rock_smash - Route111: Shuckle
+  New battle items (2):
+    Berry Juice - wild held (Shuckle)
+    Razz Berry - gift
+
+====================================================================================================
+STEP 28 - cap 40 - Route111 (walkthrough order)
+  Battles: #105 WILTON_1; #106 BROOKE_1
+  New Pokemon: none
+
+====================================================================================================
+STEP 29 - cap 40 - Route113 (walkthrough order)
+  Battles: #107 WYATT; #108 LAWRENCE; #109 LUNG; #110 JAYLEN; #111 TORI_AND_TIA; #112 DILLON; #113 SOPHIE; #114 COBY
+  New Pokemon (35):
+    Breeding - Day-Care egg from Hitmonchan: Tyrogue
+    Wild grass - FieryPath: Diglett, Durant, Entei, Grimer, Heatmor, Koffing, Magby, Sizzlipede, Slugma, Torkoal, Woobat
+    Wild grass - Route112: Hitmonchan, Klawf, Numel, Rufflet, Sawk, Tauros (Paldea Combat), Throh, Vullaby, Zapdos (Galar)
+    Wild honey - Route112: Heracross, Pinsir
+    Evolution: Camerupt <- level 33 from Numel, Centiskorch <- level 28 from Sizzlipede, Dugtrio <- level 26 from Diglett, Hitmonlee <- level 20 from Tyrogue, Hitmontop <- level 20 from Tyrogue, Magcargo <- level 38 from Slugma, Magmar <- level 30 from Magby, Magmortar <- use ITEM_MAGMARIZER from Magmar, Muk <- level 38 from Grimer, Swoobat <- level-up (Bonding) from Woobat, Weezing <- level 35 from Koffing, Weezing (Galar) <- level 35 in MAP_FIERY_PATH from Koffing
+  New battle items (3):
+    Charcoal - wild held (Torkoal)
+    Heavy Duty Boots - item_ball
+    Rawst Berry - berry_tree
+
+====================================================================================================
+STEP 30 - cap 40 - Route114 (walkthrough order)
+  Battles: #115 KAI; #116 CHARLOTTE; #117 STEVE_1; #118 LUCAS_1; #119 LENNY
+  New Pokemon (11):
+    Wild grass - Route113: Bouffalant, Falinks, Marshadow, Mienfoo, Pawniard, Scraggy, Skarmory, Spinda, Spoink
+    Evolution: Grumpig <- level 32 from Spoink, Scrafty <- level 39 from Scraggy
+  New battle items (1):
+    Galladite - gift
+
+====================================================================================================
+STEP 31 - cap 40 - MeteorFalls_1F_1R (walkthrough order)
+  Battles: #120 COURTNEY_METEOR_FALLS; #121 GRUNT_METEOR_FALLS
+  New Pokemon (10):
+    Wild grass - Route114: Ducklett, Phanpy, Seviper, Skorupi, Swablu, Zangoose
+    Evolution: Altaria <- level 35 from Swablu, Donphan <- level 25 from Phanpy, Drapion <- level 40 from Skorupi, Swanna <- level 35 from Ducklett
+  New battle items (3):
+    Persim Berry - berry_tree
+    Punching Glove - hidden
+    Weakness Policy - item_ball
+
+====================================================================================================
+STEP 32 - cap 40 - Route115 (walkthrough order)
+  Battles: #122 CYNDY_1; #123 MARLENE
+  New Pokemon: none
+
+====================================================================================================
+STEP 33 - cap 40 - Route111 (walkthrough order)
+  Battles: #124 TRAVIS
+  New Pokemon: none
+
+====================================================================================================
+STEP 34 - cap 40 - MtChimney (walkthrough order)
+  Battles: #125 GRUNT_MT_CHIMNEY_1; #126 TABITHA_MT_CHIMNEY; #127 MAXIE_MT_CHIMNEY
+  New Pokemon (11):
+    Breeding - Day-Care egg from Clefairy: Cleffa
+    Wild grass - MeteorFalls_1F_1R: Clefairy, Deino, Druddigon, Lunatone, Minior (Meteor Red), Solrock
+    Wild old_rod - MeteorFalls_1F_1R: Dratini
+    Evolution: Clefable <- use ITEM_MOON_STONE from Clefairy, Dragonair <- level 30 from Dratini, Sliggoo (Hisui) <- level 40 in MAP_METEOR_FALLS_1F_1R from Goomy
+  New battle items (2):
+    Draco Plate - hidden
+    Sticky Barb - wild held (Ferroseed)
+
+====================================================================================================
+STEP 35 - cap 40 - JaggedPass (walkthrough order)
+  Battles: #128 GRUNT_JAGGED_PASS; #129 DIANA_1; #130 AUTUMN; #131 JULIO; #132 ETHAN_1
+  New Pokemon: none
+  New battle items (1):
+    Lava Cookie - gift
+
+====================================================================================================
+STEP 36 - cap 40 - AshenWoods (walkthrough order)
+  Battles: #133 ROMAN; #134 ALANNAH; #135 ELMER
+  New Pokemon (20):
+    Breeding - Day-Care egg from Fearow: Spearow
+    Breeding - Day-Care egg from Primeape: Mankey
+    Wild grass - EmberPath: Blacephalon, Chandelure, Slither Wing, Tauros (Paldea Blaze)
+    Wild grass - JaggedPass: Fearow, Gligar, Jangmo-o, Mudbray, Mudsdale, Primeape, Riolu, Salandit, Turtonator
+    Evolution: Annihilape <- level-up from Primeape, Gliscor <- level-up holding ITEM_RAZOR_FANG from Gligar, Hakamo-o <- level 35 from Jangmo-o, Lucario <- level-up (Bonding) from Riolu, Salazzle <- level 33 from Salandit
+  New battle items (4):
+    Adrenaline Orb - item_ball
+    Booster Energy - wild held (Slither Wing)
+    Clear Amulet - item_ball
+    Flame Plate - hidden
+
+====================================================================================================
+STEP 37 - cap 40 - LavaridgeTown_PokemonCenter_1F (walkthrough order)
+  Battles: #136 LUCY_LAVARIDGE
+  New Pokemon (8):
+    Wild grass - AshenWoods: Brute Bonnet, Buzzwole, Growlithe, Growlithe (Hisui), Scyther
+    Evolution: Arcanine <- use ITEM_FIRE_STONE from Growlithe, Arcanine (Hisui) <- use ITEM_FIRE_STONE from Growlithe (Hisui), Scizor <- use ITEM_METAL_COAT from Scyther
+  New battle items (3):
+    Flame Orb - item_ball
+    Mirror Herb - item_ball
+    Pp Max - hidden
+
+====================================================================================================
+STEP 38 - cap 40 - MtChimney (walkthrough order)
+  Battles: #137 SHELBY_1; #138 SHIRLEY
+  New Pokemon: none
+
+====================================================================================================
+STEP 39 - cap 40 - LavaridgeTown_Gym_1F (full reachable pool)
+  Battles: #139 COLE; #140 GERALD; #141 AXLE; #142 KEEGAN; #143 JACE; #144 JEFF; #145 ELI; #146 DANIELLE; #147 FLANNERY_1
+  New Pokemon (2):
+    Egg - LavaridgeTown: Wynaut
+    Evolution: Wobbuffet <- level 15 from Wynaut
+  New battle items (1):
+    Moomoo Milk - gift
+
+====================================================================================================
+STEP 40 - cap 45 - Route110_TrickHousePuzzle3 (walkthrough order)
+  Battles: #148 JUSTIN; #149 MARTHA; #150 ALAN; #151 RANDALL; #152 PARKER; #153 GEORGE; #154 BERKE; #155 MARY; #156 ALEXIA; #157 JODY; #158 NORMAN_1; #159 DREW; #160 HEIDI; #161 BEAU; #162 DUSTY_1
+  New Pokemon (87):
+    Breeding - Day-Care egg from Farigiraf: Girafarig
+    Breeding - Day-Care egg from Xatu: Natu
+    Fossil - revived from ITEM_ARMOR_FOSSIL at Devon Corp 2F: Shieldon
+    Fossil - revived from ITEM_CLAW_FOSSIL at Devon Corp 2F: Anorith
+    Fossil - revived from ITEM_COVER_FOSSIL at Devon Corp 2F: Tirtouga
+    Fossil - revived from ITEM_DOME_FOSSIL at Devon Corp 2F: Kabuto
+    Fossil - revived from ITEM_HELIX_FOSSIL at Devon Corp 2F: Omanyte
+    Fossil - revived from ITEM_JAW_FOSSIL at Devon Corp 2F: Tyrunt
+    Fossil - revived from ITEM_OLD_AMBER at Devon Corp 2F: Aerodactyl
+    Fossil - revived from ITEM_PLUME_FOSSIL at Devon Corp 2F: Archen
+    Fossil - revived from ITEM_ROOT_FOSSIL at Devon Corp 2F: Lileep
+    Fossil - revived from ITEM_SAIL_FOSSIL at Devon Corp 2F: Amaura
+    Fossil - revived from ITEM_SKULL_FOSSIL at Devon Corp 2F: Cranidos
+    Static - EmberPath: Moltres
+    Wild grass - DewfordMeadow: Meloetta (Aria)
+    Wild grass - GraniteCave_B2F: Cobalion
+    Wild grass - MirageTower_1F: Darumaka, Golett, Sigilyph, Spiritomb, Trapinch, Yamask
+    Wild grass - MirageTower_2F: Krokorok, Orthworm
+    Wild grass - MirageTower_3F: Sandaconda
+    Wild grass - MirageTower_4F: Cofagrigus, Krookodile
+    Wild grass - MirageTower_B1F: Sandile
+    Wild grass - PetalburgWoods_2: Virizion
+    Wild grass - PetalburgWoods_3: Celebi
+    Wild grass - Route111: Bramblin, Cacnea, Capsakid, Hippopotas, Maractus, Rellor, Silicobra, Stonjourner
+    Wild grass - Route111_RuinsExterior: Farigiraf, Great Tusk, Helioptile, Meditite, Rockruff (Own Tempo), Sandy Shocks, Stakataka, Xatu
+    Wild grass - Route117: Shaymin (Land)
+    Wild grass - SandstrewnRuins: Claydol, Honedge, Unown
+    Wild grass - SandstrewnRuins_2F: Iron Treads
+    Wild grass - SandstrewnRuins_3F: Doublade
+    Wild rock_smash - SandstrewnRuins: Baltoy
+    Evolution: Aegislash (Shield) <- use ITEM_DUSK_STONE from Doublade, Aggron <- level 42 from Lairon, Archeops <- level 37 from Archen, Armaldo <- level 40 from Anorith, Aurorus <- level 39 from Amaura, Bastiodon <- level 30 from Shieldon, Brambleghast <- level-up from Bramblin, Cacturne <- level 32 from Cacnea, Carracosta <- level 37 from Tirtouga, Cradily <- level 40 from Lileep, Darmanitan (Standard) <- level 35 from Darumaka, Flygon <- level 45 from Vibrava, Glalie <- level 42 from Snorunt, Golurk <- level 43 from Golett, Gothitelle <- level 41 from Gothorita, Grimmsnarl <- level 42 from Morgrem, Hatterene <- level 42 from Hattrem, Heliolisk <- use ITEM_SUN_STONE from Helioptile, Hippowdon <- level 34 from Hippopotas, Kabutops <- level 40 from Kabuto, Kommo-o <- level 45 from Hakamo-o, Lampent <- level 41 from Litwick, Lycanroc (Dusk) <- level 25 from Rockruff (Own Tempo), Medicham <- level 37 from Meditite, Metagross <- level 45 from Metang, Omastar <- level 40 from Omanyte, Palossand <- level 42 from Sandygast, Rabsca <- level-up from Rellor, Rampardos <- level 30 from Cranidos, Reuniclus <- level 41 from Duosion, Scovillain <- use ITEM_FIRE_STONE from Capsakid, Tyrantrum <- level 39 from Tyrunt, Vibrava <- level 35 from Trapinch, Walrein <- level 44 from Sealeo
+  New battle items (11):
+    Ability Shield - item_ball
+    Blunder Policy - hidden
+    Chandelurite - gift
+    Earth Plate - hidden
+    Electric Seed - item_ball
+    Ghost Gem - item_ball
+    Houndoominite - item_ball
+    Misty Seed - item_ball
+    Room Service - item_ball
+    Terrain Extender - item_ball
+    Utility Umbrella - item_ball
+
+====================================================================================================
+STEP 41 - cap 55 - SlateportCity (walkthrough order)
+  Battles: #163 GRETA_SLATEPORT; #164 GABBY_AND_TY_6; #165 YUJI; #166 FOSTER; #167 LUIS; #168 JOSUE; #169 DARRIN; #170 TARA; #171 CAROLINA; #172 DUNCAN; #173 JANI; #174 GARRISON; #175 MEL_AND_PAUL; #176 TIMOTHY_1; #177 ALIX
+  New Pokemon (78):
+    Breeding - Day-Care egg from Jigglypuff: Igglybuff
+    Egg - Route117_PokemonDayCare: Rhyhorn, Shuppet
+    Static - NewMauville_Inside: Rotom, Zapdos
+    Trade - VerdanturfTown_FriendshipRatersHouse: Cyclizar
+    Wild good_rod - AbandonedShip_Rooms_B1F: Corsola, Dhelmise
+    Wild grass - AshenWoods: Chi-Yu
+    Wild grass - DesertUnderpass: Arctovish, Arctozolt, Dracovish, Dracozolt, Flittle, Maschiff, Mawile, Ting-Lu, Zygarde (50)
+    Wild grass - NewMauville_Entrance: Electrode, Elekid, Iron Thorns, Klink, Togedemaru, Voltorb
+    Wild grass - NewMauville_Inside: Electabuzz, Iron Hands, Wattrel, Xurkitree, Zeraora
+    Wild grass - PetalburgWoods_2: Wo-Chien
+    Wild grass - PetalburgWoods_3: Zarude
+    Wild grass - Route105: Cramorant
+    Wild grass - Route114: Mesprit
+    Wild grass - Route115: Fomantis, Furfrou (Natural), Jigglypuff, Morpeko (Full Belly), Tandemaus
+    Wild grass - Seaspray_Cave_B1F: Poipole
+    Wild grass - VerdanturfMeadow: Enamorus (Incarnate)
+    Wild surf - AbandonedShip_Rooms_B1F: Mareanie
+    Wild surf - Route103: Wiglett
+    Wild surf - Route104: Tentacruel
+    Wild surf - Route108: Dragalge, Lapras
+    Wild surf - Route109: Pincurchin
+    Wild surf - SlateportCity: Pyukumuku, Tentacool
+    Evolution: Banette <- level 37 from Shuppet, Baxcalibur <- level 54 from Arctibax, Bisharp <- level 52 from Pawniard, Braviary <- level 54 from Rufflet, Dragonite <- level 55 from Dragonair, Drakloak <- level 50 from Dreepy, Electivire <- use ITEM_ELECTIRIZER from Electabuzz, Espathra <- level 35 from Flittle, Garchomp <- level 48 from Gabite, Goodra <- level 50 from Sliggoo, Goodra (Hisui) <- level 50 from Sliggoo (Hisui), Haxorus <- level 48 from Fraxure, Kilowattrel <- level 25 from Wattrel, Klang <- level 38 from Klink, Klinklang <- level 49 from Klang, Lurantis <- level 34 from Fomantis, Mabosstiff <- level 30 from Maschiff, Mandibuzz <- level 54 from Vullaby, Mienshao <- level 50 from Mienfoo, Naganadel <- level-up from Poipole, Noivern <- level 48 from Noibat, Rhydon <- level 42 from Rhyhorn, Rhyperior <- use ITEM_PROTECTOR from Rhydon, Salamence <- level 50 from Shelgon, Toxapex <- level 38 from Mareanie, Tyranitar <- level 55 from Pupitar, Vanilluxe <- level 47 from Vanillish, Wigglytuff <- use ITEM_MOON_STONE from Jigglypuff, Wugtrio <- level 26 from Wiglett, Zweilous <- level 50 from Deino
+  New battle items (30):
+    Abomasite - item_ball
+    Ampharosite - item_ball
+    Blastoisinite - item_ball
+    Blazikenite - gift
+    Charizardite X - gift
+    Charizardite Y - gift
+    Chesnaughtite - gift
+    Crabominite - item_ball
+    Delphoxite - gift
+    Dragalgite - item_ball
+    Eelektrossite - item_ball
+    Emboarite - gift
+    Enigma Berry - gift
+    Falinksite - item_ball
+    Feraligite - gift
+    Fist Plate - hidden
+    Flygonite - item_ball
+    Golurkite - item_ball
+    Greninjite - gift
+    Heracronite - item_ball
+    Kinglerite - item_ball
+    Lopunnite - item_ball
+    Meganiumite - gift
+    Pyroarite - gift
+    Raichunite Y - item_ball
+    Sceptilite - gift
+    Scovillainite - item_ball
+    Swampertite - gift
+    Venusaurite - item_ball
+    Victreebelite - item_ball
+
+====================================================================================================
+STEP 42 - cap 55 - Route118 (walkthrough order)
+  Battles: #178 MAGIKARP_GUY; #179 GABBY_AND_TY_2
+  New Pokemon (1):
+    Wild grass - ScorchedSlab_B2F: Iron Moth
+  New battle items (2):
+    Steelixite - item_ball
+    Stone Plate - hidden
+
+====================================================================================================
+STEP 43 - cap 55 - Route119 (walkthrough order)
+  Battles: #180 DONALD; #181 TAYLOR; #182 DOUG; #183 JACKSON_1; #184 CATHERINE_1; #185 PHIL
+  New Pokemon (11):
+    Wild grass - Route118: Carnivine, Dedenne, Kecleon, Lickitung, Squawkabilly (Green), Thundurus (Incarnate), Zigzagoon (Galar)
+    Wild surf - Route118: Tauros (Paldea Aqua)
+    Evolution: Lickilicky <- level-up from Lickitung, Linoone (Galar) <- level 20 from Zigzagoon (Galar), Obstagoon <- level 35 from Linoone (Galar)
+  New battle items (2):
+    Gyaradosite - gift
+    Max Revive - wild held (Linoone)
+
+====================================================================================================
+STEP 44 - cap 55 - Route119_WeatherInstitute_1F (walkthrough order)
+  Battles: #186 GRUNT_WEATHER_INST_1; #187 GRUNT_WEATHER_INST_4; #188 GRUNT_WEATHER_INST_5; #189 GRUNT_WEATHER_INST_2; #190 GRUNT_WEATHER_INST_3; #191 SHELLY_WEATHER_INSTITUTE
+  New Pokemon: none
+
+====================================================================================================
+STEP 45 - cap 55 - Route123 (walkthrough order)
+  Battles: #192 MIU_AND_YUKI; #193 JAZMYN
+  New Pokemon (99):
+    Breeding - Day-Care egg from Ariados: Spinarak
+    Breeding - Day-Care egg from Gastrodon (East): Shellos (East)
+    Breeding - Day-Care egg from Nidorino: Nidoran♂
+    Breeding - Day-Care egg from Tangrowth: Tangela
+    Breeding - Day-Care egg from Venomoth: Venonat
+    Gift - Route119_WeatherInstitute_2F: Castform (Normal)
+    Trade - FortreeCity_House1: Type: Null
+    Wild feebas - Route119: Feebas
+    Wild grass - MagmaHideout_3F_2R: Ceruledge
+    Wild grass - MagmaHideout_4F: Gouging Fire
+    Wild grass - MtPyre_1F: Duskull, Greavard, Pumpkaboo (Average), Pumpkaboo (Super)
+    Wild grass - MtPyre_2F: Gimmighoul (Chest), Sinistea (Antique)
+    Wild grass - MtPyre_3F: Yamask (Galar)
+    Wild grass - MtPyre_4F: Dusclops, Dusknoir, Mimikyu (Disguised)
+    Wild grass - MtPyre_5F: Moltres (Galar), Poltchageist (Artisan)
+    Wild grass - MtPyre_6F: Houndstone, Poltchageist (Counterfeit), Sinistcha (Unremarkable)
+    Wild grass - MtPyre_Exterior: Beheeyem, Corsola (Galar), Drifblim, Drifloon, Vulpix, Zorua (Hisui)
+    Wild grass - Route119: Articuno (Galar), Comfey, Iron Leaves, Oranguru, Passimian, Tornadus (Incarnate), Tropius, Voltorb (Hisui)
+    Wild grass - Route120: Absol, Celesteela, Gourgeist (Average), Pumpkaboo (Large), Pumpkaboo (Small), Venomoth
+    Wild grass - Route121: Elgyem, Gimmighoul (Roaming), Komala
+    Wild grass - SafariZone_North: Cufant, Kangaskhan
+    Wild grass - SafariZone_Northeast: Maushold (Three), Miltank, Nidorina, Nidorino, Tauros
+    Wild grass - SafariZone_Northwest: Squawkabilly (Yellow)
+    Wild grass - SafariZone_South: Meowth (Galar), Smeargle
+    Wild grass - SafariZone_Southeast: Ariados, Stantler, Ursaluna (Bloodmoon)
+    Wild honey - Route120: Tangrowth
+    Wild surf - LilycoveCity: Bruxish
+    Wild surf - Route119: Gastrodon (East)
+    Wild surf - Route120: Stunfisk
+    Wild surf - Route121: Alomomola
+    Evolution: Appletun <- use ITEM_SWEET_APPLE from Applin, Armarouge <- use ITEM_AUSPICIOUS_ARMOR from Charcadet, Braviary (Hisui) <- level 54 in MAPSEC_MT_PYRE from Rufflet, Copperajah <- level 34 from Cufant, Cursola <- level 38 from Corsola (Galar), Dipplin <- use ITEM_SYRUPY_APPLE from Applin, Electrode (Hisui) <- use ITEM_LEAF_STONE from Voltorb (Hisui), Flapple <- use ITEM_TART_APPLE from Applin, Gholdengo <- level 45 from Gimmighoul (Chest), Gourgeist (Large) <- use ITEM_LINKING_CORD from Pumpkaboo (Large), Gourgeist (Small) <- use ITEM_LINKING_CORD from Pumpkaboo (Small), Gourgeist (Super) <- use ITEM_LINKING_CORD from Pumpkaboo (Super), Hydrapple <- level-up from Dipplin, Kingambit <- level-up holding ITEM_LEADERS_CREST from Bisharp, Kleavor <- use ITEM_BLACK_AUGURITE from Scyther, Milotic <- use ITEM_PRISM_SCALE from Feebas, Nidoking <- use ITEM_MOON_STONE from Nidorino, Nidoqueen <- use ITEM_MOON_STONE from Nidorina, Ninetales <- use ITEM_FIRE_STONE from Vulpix, Perrserker <- level 28 from Meowth (Galar), Polteageist (Antique) <- use ITEM_CHIPPED_POT from Sinistea (Antique), Polteageist (Phony) <- use ITEM_CRACKED_POT from Sinistea (Phony), Runerigus <- level 34 in MAPSEC_ROUTE_111 from Yamask (Galar), Silvally (Normal) <- level-up (Bonding) from Type: Null, Sinistcha (Masterpiece) <- use ITEM_MASTERPIECE_TEACUP from Poltchageist (Artisan), Slowbro (Galar) <- use ITEM_GALARICA_CUFF from Slowpoke (Galar), Slowking (Galar) <- use ITEM_GALARICA_WREATH from Slowpoke (Galar), Typhlosion (Hisui) <- level 36 in MAPSEC_MT_PYRE from Quilava, Ursaluna <- use ITEM_PEAT_BLOCK from Ursaring, Urshifu (Rapid Strike) <- use ITEM_SCROLL_OF_WATERS from Kubfu, Urshifu (Single Strike) <- use ITEM_SCROLL_OF_DARKNESS from Kubfu, Wyrdeer <- level-up from Stantler, Zoroark (Hisui) <- level 30 from Zorua (Hisui)
+  New battle items (46):
+    Absolite - item_ball
+    Altarianite - gift
+    Audinite - item_ball
+    Auspicious Armor - mart
+    Banettite - item_ball
+    Beedrillite - item_ball
+    Black Augurite - mart
+    Butterfrenite - item_ball
+    Cameruptite - item_ball
+    Chimechite - item_ball
+    Chipped Pot - mart
+    Cracked Pot - mart
+    Electric Gem - gift
+    Full Restore - hidden
+    Galarica Cuff - mart
+    Galarica Wreath - mart
+    Gengarite - item_ball
+    Golisopite - item_ball
+    Heatranite - item_ball
+    Ice Gem - gift
+    Leaders Crest - mart
+    Lucarionite Z - item_ball
+    Magma Stone - item_ball
+    Malamarite - item_ball
+    Malicious Armor - mart
+    Masterpiece Teacup - mart
+    Metal Alloy - mart
+    Peat Block - mart
+    Pidgeotite - item_ball
+    Pinsirite - item_ball
+    Pokeblock Case - gift
+    Sablenite - item_ball
+    Scizorite - item_ball
+    Scolipite - item_ball
+    Scraftinite - item_ball
+    Scroll Of Darkness - mart
+    Scroll Of Waters - mart
+    Skarmorite - item_ball
+    Spooky Plate - hidden
+    Sweet Apple - mart
+    Syrupy Apple - mart
+    Tart Apple - mart
+    Toxic Plate - hidden
+    Type Evolution Stone - mart
+    Unremarkable Teacup - mart
+    Zap Plate - hidden
+
+====================================================================================================
+STEP 46 - cap 55 - Route118 (walkthrough order)
+  Battles: #194 GABBY_AND_TY_5
+  New Pokemon: none
+
+====================================================================================================
+STEP 47 - cap 55 - Route119 (walkthrough order)
+  Battles: #195 BRENDAN_ROUTE_119_MUDKIP; #196 BRENDAN_ROUTE_119_TORCHIC; #197 BRENDAN_ROUTE_119_TREECKO; #198 MAY_ROUTE_119_MUDKIP; #199 MAY_ROUTE_119_TORCHIC; #200 MAY_ROUTE_119_TREECKO; #201 HIDEO
+  New Pokemon: none
+
+====================================================================================================
+STEP 48 - cap 55 - FortreeCity_Mart (walkthrough order)
+  Battles: #202 SPENSER_FORTREE
+  New Pokemon: none
+
+====================================================================================================
+STEP 49 - cap 55 - Route120 (walkthrough order)
+  Battles: #203 COLIN; #204 LORENZO; #205 JENNA; #206 JENNIFER
+  New Pokemon: none
+
+====================================================================================================
+STEP 50 - cap 55 - Route123 (walkthrough order)
+  Battles: #207 WENDY; #208 BRAXTON; #209 FREDRICK; #210 KAYLEY
+  New Pokemon: none
+
+====================================================================================================
+STEP 51 - cap 55 - FortreeCity_Gym (full reachable pool)
+  Battles: #211 JARED; #212 EDWARDO; #213 FLINT; #214 ASHLEY; #215 HUMBERTO; #216 DARIUS; #217 WINONA_1
+  New Pokemon (6):
+    Breeding - Day-Care egg from Spidops: Tarountula
+    Breeding - Day-Care egg from Sunflora: Sunkern
+    Wild grass - Route123: Flamigo, Spidops, Sunflora, Tapu Bulu
+  New battle items (7):
+    Absolite Z - item_ball
+    Belue Berry - gift
+    Durin Berry - gift
+    Hawluchanite - item_ball
+    Meadow Plate - item_ball
+    Pamtre Berry - gift
+    Spelon Berry - gift
+
+====================================================================================================
+STEP 52 - cap 55 - Route121 (walkthrough order)
+  Battles: #218 MYLES; #219 PAT; #220 MARCEL; #221 CRISTIN_1
+  New Pokemon: none
+
+====================================================================================================
+STEP 53 - cap 55 - LilycoveCity (walkthrough order)
+  Battles: #222 BRENDAN_LILYCOVE_MUDKIP; #223 BRENDAN_LILYCOVE_TORCHIC; #224 BRENDAN_LILYCOVE_TREECKO; #225 MAY_LILYCOVE_MUDKIP; #226 MAY_LILYCOVE_TORCHIC; #227 MAY_LILYCOVE_TREECKO
+  New Pokemon: none
+
+====================================================================================================
+STEP 54 - cap 55 - MtPyre_3F (walkthrough order)
+  Battles: #228 GABRIELLE_1; #229 GRUNT_MT_PYRE_1; #230 GRUNT_MT_PYRE_2; #231 GRUNT_MT_PYRE_3; #232 GRUNT_MT_PYRE_4; #233 MATT_MT_PYRE
+  New Pokemon: none
+
+====================================================================================================
+STEP 55 - cap 55 - MagmaHideout_1F (walkthrough order)
+  Battles: #234 GRUNT_MAGMA_HIDEOUT_1; #235 GRUNT_MAGMA_HIDEOUT_2; #236 GRUNT_MAGMA_HIDEOUT_14; #237 GRUNT_MAGMA_HIDEOUT_3; #238 GRUNT_MAGMA_HIDEOUT_4; #239 GRUNT_MAGMA_HIDEOUT_5; #240 GRUNT_MAGMA_HIDEOUT_15; #241 GRUNT_MAGMA_HIDEOUT_6; #242 GRUNT_MAGMA_HIDEOUT_7; #243 GRUNT_MAGMA_HIDEOUT_8; #244 GRUNT_MAGMA_HIDEOUT_9; #245 GRUNT_MAGMA_HIDEOUT_16; #246 GRUNT_MAGMA_HIDEOUT_10; #247 GRUNT_MAGMA_HIDEOUT_11; #248 GRUNT_MAGMA_HIDEOUT_12; #249 GRUNT_MAGMA_HIDEOUT_13; #250 TABITHA_MAGMA_HIDEOUT; #251 COURTNEY_MAGMA_HIDEOUT; #252 MAXIE_MAGMA_HIDEOUT
+  New Pokemon: none
+
+====================================================================================================
+STEP 56 - cap 65 - AquaHideout_1F (walkthrough order)
+  Battles: #253 GRUNT_AQUA_HIDEOUT_1; #254 GRUNT_AQUA_HIDEOUT_2; #255 GRUNT_AQUA_HIDEOUT_3; #256 GRUNT_AQUA_HIDEOUT_5; #257 GRUNT_AQUA_HIDEOUT_7; #258 GRUNT_AQUA_HIDEOUT_4; #259 GRUNT_AQUA_HIDEOUT_6; #260 GRUNT_AQUA_HIDEOUT_8
+  New Pokemon (26):
+    Breeding - Day-Care egg from Basculegion (M): Basculin (White Striped)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_CORNERSTONE_MASK from Ogerpon (Teal): Ogerpon (Cornerstone)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_HEARTHFLAME_MASK from Ogerpon (Teal): Ogerpon (Hearthflame)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_WELLSPRING_MASK from Ogerpon (Teal): Ogerpon (Wellspring)
+    Static - ScorchedSlab_HeatransRoom: Heatran
+    Wild grass - AshenWoods: Okidogi
+    Wild grass - DewfordMeadow: Pheromosa
+    Wild grass - MagmaHideout_4F: Volcanion
+    Wild grass - MtPyre_Exterior: Giratina (Altered), Tapu Lele
+    Wild grass - PetalburgWoods_3: Kartana
+    Wild grass - Route110: Tapu Koko
+    Wild grass - Route111_RuinsExterior: Landorus (Incarnate)
+    Wild grass - Route112: Zekrom
+    Wild grass - Route115: Reshiram
+    Wild grass - Route117: Munkidori
+    Wild grass - Route120: Calyrex, Ogerpon (Teal)
+    Wild grass - Route121: Yveltal
+    Wild grass - VerdanturfMeadow: Fezandipiti
+    Wild super_rod - Route118: Basculin (Blue Striped)
+    Wild super_rod - Route122: Basculegion (M)
+    Evolution: Basculegion (F) <- level-up from Basculin (White Striped), Dragapult <- level 60 from Drakloak, Hydreigon <- level 64 from Zweilous, Volcarona <- level 59 from Larvesta
+  New battle items (8):
+    Alakazite - item_ball
+    Barbaracite - item_ball
+    Cornerstone Mask - relic
+    Hearthflame Mask - relic
+    Manectite - item_ball
+    Sharpedonite - item_ball
+    Staraptite - gift
+    Wellspring Mask - relic
+
+====================================================================================================
+STEP 57 - cap 65 - AquaHideout_B2F (walkthrough order)
+  Battles: #261 MATT
+  New Pokemon: none
+
+====================================================================================================
+STEP 58 - cap 65 - Route124 (walkthrough order)
+  Battles: #262 LILA_AND_ROY_1
+  New Pokemon (1):
+    Wild grass - Route123: Spectrier
+
+====================================================================================================
+STEP 59 - cap 65 - Route125 (walkthrough order)
+  Battles: #263 AURON
+  New Pokemon (20):
+    Static - ShoalCave_LowTideIceRoom: Articuno
+    Wild grass - ShoalCave_LowTideEntranceRoom: Cetoddle, Eiscue (Ice), Snom
+    Wild grass - ShoalCave_LowTideIceRoom: Azelf, Iron Bundle, Mr. Mime (Galar)
+    Wild grass - ShoalCave_LowTideInnerRoom: Darumaka (Galar)
+    Wild grass - ShoalCave_LowTideLowerRoom: Chien-Pao
+    Wild grass - ShoalCave_LowTideStairsRoom: Glastrier
+    Wild super_rod - ShoalCave_LowTideEntranceRoom: Qwilfish (Hisui)
+    Wild surf - MossdeepCity: Finizen
+    Evolution: Avalugg (Hisui) <- level 37 in MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM from Bergmite, Cetitan <- use ITEM_ICE_STONE from Cetoddle, Darmanitan (Galar Standard) <- use ITEM_ICE_STONE from Darumaka (Galar), Frosmoth <- level-up (Bonding) from Snom, Mr. Rime <- level 42 from Mr. Mime (Galar), Overqwil <- level-up from Qwilfish (Hisui), Palafin (Zero) <- level 38 from Finizen, Samurott (Hisui) <- level 36 in MAPSEC_SHOAL_CAVE from Dewott
+  New battle items (7):
+    Dark Gem - gift
+    Froslassite - item_ball
+    Glalitite - item_ball
+    Kangaskhanite - item_ball
+    Miloticite - item_ball
+    Shoal Salt - gift
+    Slowbronite - gift
+
+====================================================================================================
+STEP 60 - cap 65 - Route126 (walkthrough order)
+  Battles: #264 NIKKI; #265 ROGER; #266 ATHENA; #267 KATELYN_1; #268 ALEXA; #269 RUBEN
+  New Pokemon (1):
+    Wild surf - Route125: Suicune
+  New battle items (1):
+    Mawilite - item_ball
+
+====================================================================================================
+STEP 61 - cap 65 - MossdeepCity_Gym (full reachable pool)
+  Battles: #270 PRESTON; #271 VIRGIL; #272 BLAKE; #273 HANNAH; #274 SAMANTHA; #275 MAURA; #276 SYLVIA; #277 NATE; #278 MACEY; #279 CLIFFORD; #280 NICHOLAS; #281 KATHLEEN; #282 TATE_AND_LIZA_1
+  New Pokemon: none
+  New battle items (5):
+    Diancite - gift
+    Medichamite - item_ball
+    Sky Plate - hidden
+    Splash Plate - item_ball
+    Starminite - item_ball
+
+====================================================================================================
+STEP 62 - cap 65 - Route130 (walkthrough order)
+  Battles: #283 SANTIAGO; #284 HERMAN; #285 SUSIE; #286 KARA
+  New Pokemon: none
+
+====================================================================================================
+STEP 63 - cap 65 - Route132 (walkthrough order)
+  Battles: #287 RONALD; #288 PAXTON; #289 DARCY; #290 JONATHAN; #291 MAKAYLA; #292 LINDA; #293 WARREN; #294 MOLLIE; #295 CONOR
+  New Pokemon: none
+
+====================================================================================================
+STEP 64 - cap 65 - Route134 (walkthrough order)
+  Battles: #296 AARON; #297 HUDSON; #298 MARLEY
+  New Pokemon: none
+
+====================================================================================================
+STEP 65 - cap 70 - MossdeepCity_SpaceCenter_1F (walkthrough order)
+  Battles: #299 GRUNT_SPACE_CENTER_3; #300 GRUNT_SPACE_CENTER_1; #301 GRUNT_SPACE_CENTER_4; #302 GRUNT_SPACE_CENTER_2
+  New Pokemon (3):
+    Static - MtPyre_Summit: Darkrai
+    Wild grass - Route114: Koraidon
+    Wild grass - Route118: Miraidon
+  New battle items (5):
+    Baxcalibrite - harvest_trade
+    Destiny Knot - item_ball
+    Dragoninite - harvest_trade
+    Meowsticite - gift
+    Tyranitarite - harvest_trade
+
+====================================================================================================
+STEP 66 - cap 70 - MossdeepCity_SpaceCenter_2F (walkthrough order)
+  Battles: #303 GRUNT_SPACE_CENTER_5; #304 GRUNT_SPACE_CENTER_7
+  New Pokemon (6):
+    Static - AncientTomb: Registeel
+    Static - DesertRuins: Regirock
+    Static - IslandCave: Regice
+    Static - TerraCave_End: Groudon
+    Wild grass - NewMauville_Entrance: Regieleki
+    Wild surf - Route124: Necrozma
+  New battle items (3):
+    Excadrite - item_ball
+    Floettite - item_ball
+    Lucarionite - item_ball
+
+====================================================================================================
+STEP 67 - cap 70 - MossdeepCity_SpaceCenter_2F (walkthrough order)
+  Battles: #305 TABITHA_MOSSDEEP; #306 COURTNEY_MOSSDEEP; #307 MAXIE_MOSSDEEP
+  New Pokemon: none
+
+====================================================================================================
+STEP 68 - cap 70 - Route110_TrickHousePuzzle6 (walkthrough order)
+  Battles: #308 SOPHIA; #309 SEBASTIAN
+  New Pokemon: none
+
+====================================================================================================
+STEP 69 - cap 70 - Route126 (walkthrough order)
+  Battles: #310 BRENDA
+  New Pokemon (7):
+    Wild grass - ShoalCave_LowTideIceRoom: Kyurem
+    Wild grass - Underwater_Route124: Dondozo
+    Wild grass - Underwater_SeafloorCavern: Nihilego, Tatsugiri (Curly), Tatsugiri (Droopy), Tatsugiri (Stretchy), Veluza
+  New battle items (3):
+    Iron Plate - hidden
+    Mind Plate - hidden
+    Pixie Plate - hidden
+
+====================================================================================================
+STEP 70 - cap 70 - SeafloorCavern_Room1 (walkthrough order)
+  Battles: #311 GRUNT_SEAFLOOR_CAVERN_1; #312 GRUNT_SEAFLOOR_CAVERN_2; #313 SHELLY_SEAFLOOR_CAVERN; #314 GRUNT_SEAFLOOR_CAVERN_5; #315 GRUNT_SEAFLOOR_CAVERN_3; #316 GRUNT_SEAFLOOR_CAVERN_4; #317 ARCHIE
+  New Pokemon: none
+  New battle items (1):
+    Laprasite - item_ball
+
+====================================================================================================
+STEP 71 - cap 70 - SootopolisCity_Gym_B1F (full reachable pool)
+  Battles: #318 ANDREA; #319 CRISSY; #320 BRIANNA; #321 CONNIE; #322 BRIDGET; #323 OLIVIA; #324 TIFFANY; #325 BETHANY; #326 ANNIKA; #327 DAPHNE; #328 JUAN_1
+  New Pokemon (16):
+    Breeding - Day-Care egg from Manaphy: Phione
+    Static - MarineCave_End: Kyogre
+    Static - SealedChamber_InnerRoom: Regigigas
+    Static - SkyPillar_Top: Rayquaza
+    Wild grass - CaveOfOrigin_1F: Walking Wake
+    Wild grass - CaveOfOrigin_B1F: Terapagos (Normal)
+    Wild grass - CaveOfOrigin_Entrance: Duraludon
+    Wild grass - CaveOfOrigin_UnusedRubySapphireMap2: Archaludon
+    Wild grass - SeafloorCavern_Room1: Grapploct
+    Wild grass - SeafloorCavern_Room6: Clobbopus
+    Wild grass - SkyPillar_1F: Flutter Mane
+    Wild grass - SkyPillar_3F: Raging Bolt
+    Wild surf - Route126: Tapu Fini
+    Wild surf - Route127: Keldeo (Ordinary), Palkia
+    Wild surf - Route128: Manaphy
+  New battle items (1):
+    Kingdranite - item_ball
+
+====================================================================================================
+STEP 72 - cap 80 - Route110_TrickHousePuzzle7 (walkthrough order)
+  Battles: #329 ALEXIS; #330 MARIELA; #331 EVERETT; #332 NICOLAS_1
+  New Pokemon (13):
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_BURN_DRIVE from Genesect: Genesect (Burn)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_CHILL_DRIVE from Genesect: Genesect (Chill)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_DOUSE_DRIVE from Genesect: Genesect (Douse)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_SHOCK_DRIVE from Genesect: Genesect (Shock)
+    Game_corner - MauvilleCity_GameCorner: Genesect
+    Static - MeteorFalls_JirachisRoom: Jirachi
+    Wild grass - MeteorFalls_1F_2R: Regidrago
+    Wild grass - MeteorFalls_B1F_1R: Dialga, Drampa, Uxie
+    Wild grass - MeteorFalls_B1F_2R: Cresselia, Roaring Moon, Scream Tail
+  New battle items (5):
+    Darkranite - item_ball
+    Drampanite - item_ball
+    Magearnite - gift
+    Salamencite - item_ball
+    Zeraorite - item_ball
+
+====================================================================================================
+STEP 73 - cap 80 - VictoryRoad_1F (walkthrough order)
+  Battles: #333 WALLY_VR_1; #334 EDGAR; #335 ALBERT; #336 HOPE; #337 QUINCY; #338 KATELYNN; #339 SAMUEL; #340 SHANNON; #341 MICHELLE; #342 MITCHELL; #343 HALLE; #344 VITO; #345 OWEN; #346 CAROLINE; #347 JULIE; #348 FELIX; #349 DIANNE
+  New Pokemon (3):
+    Gift - RustboroCity_DevonCorp_2F: Magearna
+    Static - CaveOfOrigin_DianciesRoom: Diancie
+    Wild grass - CaveOfOrigin_UnusedRubySapphireMap3: Eternatus
+
+====================================================================================================
+STEP 74 - cap 80 - EverGrandeCity_SidneysRoom (full reachable pool)
+  Battles: #350 SIDNEY; #351 PHOEBE; #352 GLACIA; #353 DRAKE; #354 WALLACE
+  New Pokemon (6):
+    Wild grass - VictoryRoad_1F: Iron Valiant, Victini
+    Wild grass - VictoryRoad_B1F: Iron Jugulis, Terrakion
+    Wild grass - VictoryRoad_B2F: Zacian (Hero), Zamazenta (Hero)
+  New battle items (4):
+    Garchompite - item_ball
+    Garchompite Z - item_ball
+    Metagrossite - item_ball
+    Mewtwonite Y - item_ball
+
+====================================================================================================
+STEP 75 - cap 85 - Route110_TrickHousePuzzle8 (walkthrough order)
+  Battles: #355 VINCENT; #356 KEIRA; #357 LEROY; #358 WALLACE_DOUBLES_LEGENDS; #359 LEAF_ALTERING_CAVE; #360 CYNTHIA_1
+  New Pokemon (41):
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_DRACO_PLATE from Arceus (Normal): Arceus (Dragon)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_DREAD_PLATE from Arceus (Normal): Arceus (Dark)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_EARTH_PLATE from Arceus (Normal): Arceus (Ground)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_FIST_PLATE from Arceus (Normal): Arceus (Fighting)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_FLAME_PLATE from Arceus (Normal): Arceus (Fire)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_ICICLE_PLATE from Arceus (Normal): Arceus (Ice)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_INSECT_PLATE from Arceus (Normal): Arceus (Bug)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_IRON_PLATE from Arceus (Normal): Arceus (Steel)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_MEADOW_PLATE from Arceus (Normal): Arceus (Grass)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_MIND_PLATE from Arceus (Normal): Arceus (Psychic)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_PIXIE_PLATE from Arceus (Normal): Arceus (Fairy)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_SKY_PLATE from Arceus (Normal): Arceus (Flying)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_SPLASH_PLATE from Arceus (Normal): Arceus (Water)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_SPOOKY_PLATE from Arceus (Normal): Arceus (Ghost)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_STONE_PLATE from Arceus (Normal): Arceus (Rock)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_TOXIC_PLATE from Arceus (Normal): Arceus (Poison)
+    Form - FORM_CHANGE_ITEM_HOLD ITEM_ZAP_PLATE from Arceus (Normal): Arceus (Electric)
+    Form - FORM_CHANGE_ITEM_USE_MULTICHOICE ITEM_ZYGARDE_CUBE from Zygarde (10 Aura Break): Zygarde (10 Power Construct)
+    Form - FORM_CHANGE_ITEM_USE_MULTICHOICE ITEM_ZYGARDE_CUBE from Zygarde (50): Zygarde (10 Aura Break), Zygarde (50 Power Construct)
+    Gift - LittlerootTown_ProfessorBirchsLab: Cosmog
+    Gift - MossdeepCity_StevensHouse: Meltan
+    Gift - RustboroCity_DevonCorp_2F: Arceus (Normal)
+    Primal - ITEM_BLUE_ORB (battle): Kyogre (Primal)
+    Primal - ITEM_RED_ORB (battle): Groudon (Primal)
+    Static - AlteringCave_B1F: Mewtwo
+    Static - BirthIsland_Exterior: Deoxys (Normal)
+    Static - FarawayIsland_Interior: Mew
+    Static - NavelRock_Bottom: Lugia
+    Static - NavelRock_Top: Ho-Oh
+    Static - SouthernIsland_Interior: Latias, Latios
+    Wild grass - AlteringCave_1F: Hoopa (Confined)
+    Wild grass - AlteringCave_B1F: Guzzlord
+    Wild grass - MeteorFalls_StevensCave: Iron Boulder, Iron Crown
+    Wild grass - Route121: Xerneas (Neutral)
+    Evolution: Cosmoem <- level 43 from Cosmog, Lunala <- level 53 from Cosmoem, Melmetal <- level-up in MAPSEC_NEW_MAUVILLE from Meltan, Solgaleo <- level 53 from Cosmoem
+  New battle items (15):
+    Blue Orb - relic
+    Dna Splicers - relic
+    Latiasite - gift
+    Latiosite - gift
+    Mewtwonite X - item_ball
+    N Lunarizer - relic
+    N Solarizer - relic
+    Prison Bottle - relic
+    Red Orb - relic
+    Reins Of Unity - relic
+    Rusted Shield - relic
+    Rusted Sword - relic
+    Sacred Ash - hidden
+    Zygarde Cube - relic
+    Zygardite - item_ball
+
+====================================================================================================
+STEP 76 - cap 85 - SSTidalRooms (walkthrough order)
+  Battles: #361 COLTON; #362 MICAH; #363 THOMAS; #364 LEA_AND_JED; #365 NAOMI; #366 STEVEN
+  New Pokemon: none
+
