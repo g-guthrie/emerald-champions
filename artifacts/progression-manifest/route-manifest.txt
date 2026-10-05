@@ -99,7 +99,8 @@ STEP 6 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
   Everything reachable before the Stone Badge. Cut needs the Stone Badge
   (data/scripts/field_move_scripts.inc:43-47), so no HM obstacle is open.
   Adds Route 104 north, Rustboro City, Route 116 west, Rusturf Tunnel west, Route 115 south
-  (no grass, so no honey: src/wild_encounter.c:1416), Seaspray Cave 1F and B1F (B1F gate pending).
+  (no grass, so no honey: src/wild_encounter.c:1416), Seaspray Cave 1F. B1F's stairs sit behind a
+  muddy slope (Seaspray_Cave 10,12, MB_MUDDY_SLOPE) that needs the Mach Bike.
   Pokemon
     Route 116 grass: Skiddo, Nincada, Starly, Mareep, Joltik, Skitty, Nickit, Rookidee, Houndour,
       Dreepy
@@ -107,8 +108,6 @@ STEP 6 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
     Rusturf Tunnel: Whismur, Noibat, Roggenrola, Teddiursa, Dunsparce, Drilbur, Machop, Larvitar
     Old Rod: Route 115 Wishiwashi, Wailmer; Seaspray Cave Wishiwashi, Krabby
     Seaspray Cave 1F: Psyduck, Tynamo, Wooper, Stunfisk (Galar), Zubat
-    Seaspray Cave B1F: Seel, Swinub, Snorunt, Sneasel, Bergmite, Smoochum, Spheal, Vanillite,
-      Frigibax; honey Cubchoo, Snover, Delibird, Cryogonal
     Trade: Zigzagoon for a perfect-IV Fidough (RustboroCity_House1; src/data/trade.h:972)
     Evolutions by 14: Staravia (Starly 14).
     Wild levels never exceed the cap (src/wild_encounter.c:716).
@@ -119,13 +118,12 @@ STEP 6 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
       (PokemonSchool/scripts.inc:86), Float Stone (Flat2_2F/scripts.inc:42), Chesto Berry
       (Route 104 Expert), daily flower-shop bundle: one of Cheri..Persim plus Pomeg, Kelpsy, Qualot,
       Hondew, Grepa, Tamato (src/field_specials.c:520)
-    Item balls: Wide Lens (Route 116 55,12), Smooth Rock (Seaspray 5,5), King's Rock (B1F 46,15),
-      Rocky Helmet (B1F 11,12), Damp Rock (B1F 40,7); hidden Icy Rock (B1F 25,20), Icicle Plate
-      (B1F 36,6)
+    Item balls: Wide Lens (Route 116 55,12), Smooth Rock (Seaspray 5,5)
     Berry trees: Cheri, Leppa, Oran (Route 104 north)
     Marts unchanged (Mental Herb, Red Card, Cell Battery); Rustboro Center clerk: Repeat, Timer,
       Nest Balls only.
     Wild held items: pending the held-item cleanup.
   Not here: Shell Bell (Cut), Route 104 PP Up (Surf), Route 116 Binding Band, Ether, HP Up (Cut),
   White Herb florist (badge 3), Dream Balls and Scope Lens (after Roxanne), Seaspray 1F
-  Blastoisinite, Covert Cloak, Stone Edge TM, Never-Melt Ice (Rock Smash / Surf).
+  Blastoisinite, Covert Cloak, Stone Edge TM, Never-Melt Ice (Rock Smash / Surf), Seaspray B1F
+  (Mach Bike): King's Rock, Rocky Helmet, Damp Rock, Icy Rock, Icicle Plate and its Pokemon.
