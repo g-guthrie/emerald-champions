@@ -834,6 +834,7 @@ enum RestrictedPartyClass
 };
 enum RestrictedPartyClass GetRestrictedPartyClass(enum Species species);
 bool32 CanAddRestrictedMonToParty(enum Species species, s32 replacedSlot);
+bool32 CanEvolveMonWithinRestrictedLimit(struct Pokemon *mon, enum Species target);
 bool32 PlayerPartyWithinRestrictedLimit(void);
 s32 GetUniquePartyRestrictedSlot(void);
 bool32 PlayerPartyLeagueEligible(void);

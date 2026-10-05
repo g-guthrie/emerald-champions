@@ -1164,3 +1164,5 @@ const u8 gText_HydroCannon[] = _("Hydro Cannon");
 
 const u8 gText_SingleBattle[] = _("Single Battle");
 const u8 gText_DoubleBattle[] = _("Double Battle");
+
+const u8 gText_RestrictedEvolutionBlocked[] = _("Only 1 restricted Pokémon\nper party.\pStore the other one in the PC,\nthen try evolving again.{PAUSE_UNTIL_PRESS}");

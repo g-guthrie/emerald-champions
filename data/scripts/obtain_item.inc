@@ -373,9 +373,9 @@ Common_EventScript_NPCTradeRestrictedParty::
 	end
 
 Common_Text_NPCTradeRestrictedParty:
-	.string "Choose one special Pokémon:\n"
-	.string "Legendary, Mythical, Ultra Beast\l"
-	.string "or Paradox. One total per party.$"
+	.string "Choose one restricted Pokémon:\n"
+	.string "Only 1 restricted Pokémon\n"
+	.string "per party.$"
 
 Common_EventScript_TradeHeldItemBag:
 	msgbox Common_Text_TradeHeldItemBag, MSGBOX_DEFAULT

@@ -836,6 +836,8 @@
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE120_WEPEAR_BERRY 0x2A7
 #define FLAG_EC_GARDEN_BUNDLE_ROUTE115_NANAB_BERRY 0x2A8
 #define FLAG_EC_WINSTRATE_GARDEN_BERRIES 0x2A9
+#define FLAG_EC_CAUGHT_URSALUNA_BLOODMOON 0x2AB
+#define FLAG_EC_RESTRICTED_RULE_EXPLAINED 0x2AC
 #define FLAG_SEASPRAY_CAVE_B1F_REVIVE 0x2AA // Formerly unused; old 0x43 belongs to the same-location Lure Ball.
 #define FLAG_EC_TRICK_FINAL_TENT_RECEIVED  0x2B2 // Emerald Champions: persistent receipt.
 #define FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED  0x2B3 // Emerald Champions: persistent receipt.
@@ -844,7 +846,7 @@
 #define FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE 0x2B6
 #define FLAG_HIDE_ROUTE101_DEXNAV_RIVAL 0x2BF
 #define FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE 0x2B7
-// Hoenn starter Mega Stone receipts: Norman's Ring gift or his shown-partner gift (src/mega_stone_rewards.c).
+// Hoenn starter Mega Stone receipts: Norman's victory gift or his shown-partner gift (src/mega_stone_rewards.c).
 #define FLAG_EC_MEGA_GIFT_SCEPTILITE 0x2B8
 #define FLAG_EC_MEGA_GIFT_BLAZIKENITE 0x2B9
 #define FLAG_EC_MEGA_GIFT_SWAMPERTITE 0x2BA

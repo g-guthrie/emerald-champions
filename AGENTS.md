@@ -85,8 +85,10 @@ or data.
   Caught legend-class species stop spawning. Gates live in
   `src/data/pokemon/legendary_signs.h`; legend-class spawns arrive at the
   current cap with authored sets. One Legendary, Mythical, Ultra Beast or
-  Paradox per party in total; ordinary and pseudo-legendary Pokemon have no
-  category limit. Static legends are high stakes: a knockout loses one.
+  Paradox, Gholdengo or either Ursaluna form per party in total. Their
+  pre-evolutions and other ordinary/pseudo-legendary Pokemon have no category
+  limit. Wattson awards the Mega Ring after badge three; Norman awards
+  starter-pair stones after badge five. Static legends are high stakes: a knockout loses one.
   No wild-table percentages in dialogue. The rival demonstrates DexNav after
   Birch's gift; Birch offers the detailed hunting lesson on request.
 - DexNav and the PokéNav atlas share the native wild roster. Show every

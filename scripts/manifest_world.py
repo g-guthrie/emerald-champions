@@ -300,7 +300,7 @@ class World:
             if row.get('starter_region') != state['starter_generation'] or row.get('species',row.get('key')) not in state.get('starter_species',{'SPECIES_TREECKO','SPECIES_MUDKIP'}):return False
         stone=row.get('starter_stone_species')
         if stone:
-            # Norman's Ring gift holds only the selected pair's stones; a Hoenn
+            # Norman's victory gift holds only the selected pair's stones; a Hoenn
             # partner's stone waits until after his battle for that line to be
             # shown (src/mega_stone_rewards.c, PetalburgCity_Gym NormanPostBattle).
             sd=self.pokemon.sd

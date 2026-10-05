@@ -2,7 +2,7 @@
 """Check native Mega Stones against structurally linked world reward sources.
 
 Starter Mega Stones are dynamic: src/mega_stone_rewards.c (sStarterMegaStones)
-gives each one a single receipt flag shared by Norman's Mega Ring gift, its world
+gives each one a single receipt flag shared by Norman's post-victory starter gift, its world
 home (a sparkle's object flag or a Gym Leader's receipt) and, for the Hoenn
 stones, Norman's shown-partner gift. Sources that close the same receipt count
 as one finite source; this script proves every home really closes on that flag.
@@ -189,7 +189,7 @@ def link_starter_mega_stones(root, rewards, nodes, object_flags, give_labels, sp
             if not (guarded_first or guarded_uses):
                 raise ValueError(f"{location}/{label}: {item} must be guarded by its receipt {flag}")
         rewards[item] = [f"{source} [receipt {flag}]" for source in homes]
-        rewards[item].append(f"PetalburgCity_Gym: Norman's Mega Ring gift for the starter pair [receipt {flag}]")
+        rewards[item].append(f"PetalburgCity_Gym: Norman's post-victory starter gift for the starter pair [receipt {flag}]")
         if hoenn:
             rewards[item].append(f"PetalburgCity_Gym: Norman, shown a partner of this line [receipt {flag}]")
 

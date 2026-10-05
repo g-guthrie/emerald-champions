@@ -220,14 +220,13 @@ static void RestoreStarterVars(void)
     VarSet(VAR_EC_OPENING_STATE, sSavedStarterVars[3]);
 }
 
-// PetalburgCity_Gym_EventScript_NormanGiveKeystone: Ring, then each stone
+// PetalburgCity_Gym_EventScript_NormanStarterGift: each owed stone after victory
 // through giveitem, then the receipt. Returns the gift kind.
 static u32 RunNormanGift(void)
 {
     u32 kind;
 
     EXPECT(CanReceiveNormanMegaGift());
-    EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
     BufferNormanMegaGiftKind();
     kind = gSpecialVar_Result;
     for (u32 guard = 0; guard <= ARRAY_COUNT(sStarterStones); guard++)
@@ -385,7 +384,7 @@ TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a Leader's earlier 
     RestoreStarterVars();
 }
 
-TEST("Norman's Mega gift: a full Mega Stone pocket refuses the Ring and every stone")
+TEST("Norman's Mega gift: a full Mega Stone pocket preserves every owed stone")
 {
     SaveStarterVars();
     ResetStarterStones(1, 1, 2);

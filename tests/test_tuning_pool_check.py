@@ -81,7 +81,7 @@ class TuningPoolCheckTests(unittest.TestCase):
 
     def test_one_restricted_pokemon(self):
         problems = self.check(mon("SPECIES_ENTEI"), mon("SPECIES_GREAT_TUSK"))
-        self.assertTrue(any("more than one Legendary" in p for p in problems), problems)
+        self.assertTrue(any("more than one restricted Pokemon" in p for p in problems), problems)
 
     def test_level_friendship_ability_and_availability(self):
         problems = self.check(mon("SPECIES_AGGRON", level=46, friendship=256, ability="ABILITY_Z", availability=""))
@@ -201,12 +201,15 @@ class EncounterAvailabilityTests(unittest.TestCase):
         self.assertIn("SPECIES_TOGETIC", species)  # Friendship assumed despite the native Bonding lock.
         self.assertNotIn("FLAG_BADGE01_GET", pool["story_flags"])
 
-    def test_norman_pre_battle_mega_gift_is_available(self):
+    def test_norman_has_wattson_ring_but_no_norman_starter_gifts(self):
         pool = self.pool("TRAINER_NORMAN_1", "badge4")
-        # Norman gives the Ring before launching his battle, not on victory.
+        # Wattson has awarded the Ring, while Norman’s starter stones await victory.
         self.assertTrue(pool["mega_ring"]["available"])
         self.assertTrue(pool["megas"])
         self.assertNotIn("FLAG_BADGE05_GET", pool["story_flags"])
+        items = {i["item"] for i in pool["items"]}
+        self.assertNotIn("ITEM_SCEPTILITE", items)
+        self.assertNotIn("ITEM_SWAMPERTITE", items)
 
     def test_flannery_pre_battle_hot_spring_is_available(self):
         pool = self.pool("TRAINER_FLANNERY_1", "badge3")

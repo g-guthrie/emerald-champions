@@ -657,6 +657,7 @@ EmeraldChampions_EventScript_CenterGuideHelp:
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
 EmeraldChampions_EventScript_CenterHelp0:
+	msgbox EmeraldChampions_Text_RestrictedRule, MSGBOX_DEFAULT
 	msgbox EmeraldChampions_Text_CenterHelpLesson0, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_CenterGuideHelp
 
@@ -781,9 +782,10 @@ EmeraldChampions_Text_CenterHelpLesson2:
 	.string "the Bag in Trainer battles.$"
 
 EmeraldChampions_Text_CenterHelpLesson4:
-	.string "Norman gives the Mega Ring when\n"
-	.string "you have four Badges and visit\l"
-	.string "him to challenge his Gym.\p"
+	.string "Wattson gives the Mega Ring\n"
+	.string "after you win your third Badge.\p"
+	.string "Norman gives your starter stones\n"
+	.string "after you win his fifth Badge.\p"
 	.string "Give a Pokémon its matching\n"
 	.string "Mega Stone. In battle, press\l"
 	.string "START before choosing its move.\p"
@@ -841,8 +843,7 @@ EmeraldChampions_Text_CenterHelpLegends:
 	.string "DexNav can search for residents\l"
 	.string "once their requirements are met.\p"
 	.string "Your party can hold only one\n"
-	.string "Legendary, Mythical, Ultra Beast\l"
-	.string "or Paradox Pokémon in total.\p"
+	.string "restricted Pokémon at a time.\p"
 	.string "Once you catch one, that Pokémon\n"
 	.string "stops appearing in the wild.\p"
 	.string "A legend met face to face is\n"
@@ -892,8 +893,7 @@ EmeraldChampions_Text_CenterGuideSaveFirst:
 	.string "Save before you face one. You\n"
 	.string "can always run and try again.\p"
 	.string "Your party can hold only one\n"
-	.string "Legendary, Mythical, Ultra Beast,\l"
-	.string "or Paradox Pokémon in total.$"
+	.string "restricted Pokémon at a time.$"
 
 EmeraldChampions_Text_CenterGuideGoodbye:
 	.string "Come back whenever you feel\n"
@@ -1295,3 +1295,20 @@ EC_Text_TravelDocumentsPending:
 
 EmeraldChampions_Text_Back:
 	.string "Back$"
+
+EventScript_PkmnCenterNurse_RestrictedRule::
+	callnative RecordOwnedBloodmoon
+	msgbox EmeraldChampions_Text_RestrictedRule, MSGBOX_DEFAULT
+	setflag FLAG_EC_RESTRICTED_RULE_EXPLAINED
+	return
+
+EmeraldChampions_Text_RestrictedRule:
+	.string "The League allows one restricted\n"
+	.string "Pokémon in your party at a time.\p"
+	.string "That means Legendary, Mythical,\n"
+	.string "Ultra Beast or Paradox Pokémon,\l"
+	.string "plus Gholdengo and any Ursaluna.\p"
+	.string "Gimmighoul, Teddiursa and Ursaring\n"
+	.string "are ordinary party members.\p"
+	.string "Catch more restricted Pokémon\n"
+	.string "and keep them in the PC!$"

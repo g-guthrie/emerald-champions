@@ -2176,10 +2176,10 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
         EmeraldChampionsAgentBattleBegin(gEcHeadlessFixtureParam & 0xFF,
                                          (gEcHeadlessFixtureParam >> 8) & 0xFF);
-        // Norman grants the Mega Ring before his own battle, the cap-45 stage.
+        // Wattson awards the Mega Ring with his third badge, the cap-40 stage.
         // Only boards at that cap or later start with the bracelet; earlier
         // fights must be played without Mega Evolution, as the real player does.
-        if ((gEcHeadlessFixtureParam & 0xFF) >= 45)
+        if ((gEcHeadlessFixtureParam & 0xFF) >= 40)
             AddBagItem(ITEM_MEGA_RING, 1);
         gEcHeadlessFixtureSetupResult = TRUE;
         LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 6);

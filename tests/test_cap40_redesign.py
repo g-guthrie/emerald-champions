@@ -21,20 +21,22 @@ class Cap40Redesign(unittest.TestCase):
     def test_corrected_evolutions_open_at_authored_caps(self):
         for species, cap in [('BUNEARY', 30), ('LOPUNNY', 30), ('SEWADDLE', 30), ('LEAVANNY', 30),
                              ('CHINGLING', 30), ('CHIMECHO', 30), ('RIOLU', 40), ('LUCARIO', 40),
-                             ('WOOBAT', 40), ('SWOOBAT', 40), ('URSALUNA_BLOODMOON', 80)]:
+                             ('WOOBAT', 40), ('SWOOBAT', 40), ('URSALUNA_BLOODMOON', 40)]:
             with self.subTest(species=species):
                 self.assertEqual(self.first('SPECIES_' + species, 'species'), cap)
 
-    def test_first_wave_stones_are_available_at_cap_55(self):
+    def test_first_wave_stones_are_available_at_cap_45_or_55(self):
         for item in ('AUDINITE', 'BANETTITE', 'BUTTERFRENITE', 'BEEDRILLITE', 'SCOLIPITE', 'CHIMECHITE',
                      'MEGANIUMITE', 'ABOMASITE', 'GOLURKITE', 'SABLENITE', 'STEELIXITE', 'FALINKSITE',
                      'CRABOMINITE', 'CHESNAUGHTITE', 'TATSUGIRINITE', 'DRAMPANITE', 'PINSIRITE',
                      'SCOVILLAINITE', 'SKARMORITE', 'HOUNDOOMINITE', 'ABSOLITE_Z', 'RAICHUNITE_Y'):
             with self.subTest(item=item):
-                self.assertEqual(self.first('ITEM_' + item, 'items'), 55)
+                self.assertIn(self.first('ITEM_' + item, 'items'), (45, 55))
 
-    def test_both_ursaluna_forms_remain_unrestricted(self):
-        for species in ('SPECIES_URSALUNA', 'SPECIES_URSALUNA_BLOODMOON'):
+    def test_named_final_forms_are_restricted_and_pre_evolutions_are_free(self):
+        for species in ('SPECIES_GHOLDENGO', 'SPECIES_URSALUNA', 'SPECIES_URSALUNA_BLOODMOON'):
+            self.assertEqual(self.builder.species.restricted_class(species), 'legendary')
+        for species in ('SPECIES_GIMMIGHOUL', 'SPECIES_GIMMIGHOUL_ROAMING', 'SPECIES_TEDDIURSA', 'SPECIES_URSARING'):
             self.assertIsNone(self.builder.species.restricted_class(species))
 
     def test_second_wave_field_pickups_need_sixth_badge(self):
@@ -51,7 +53,7 @@ class Cap40Redesign(unittest.TestCase):
     def test_nonnorman_second_wave_stones_open_at_cap_60(self):
         for item in ('ALAKAZITE', 'MANECTITE', 'AERODACTYLITE'):
             self.assertEqual(self.first('ITEM_' + item, 'items'), 60)
-        # Charizard X/Y remain possible at 45 only for Norman's selected starter gift.
+        # Charizard X/Y starter gifts wait for Norman's victory at 55.
         self.assertGreaterEqual(self.first('ITEM_GARCHOMPITE', 'items'), 70)
         self.assertGreaterEqual(self.first('ITEM_ZYGARDITE', 'items'), 70)
         self.assertGreaterEqual(self.first('ITEM_DARKRANITE', 'items'), 70)

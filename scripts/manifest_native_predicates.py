@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 CITATIONS = {
+ 'RecordOwnedBloodmoon':('src/legendary_signs.c:RecordOwnedBloodmoon','remember raw Bloodmoon form already in the party or PC during the rule lesson'),
  'QuizPrizeItem':('src/lilycove_lady.c:466','native scratch prize item output'),
  'TryEnterContestMon':('src/contest.c:3052','Egg, fainted and selected category ribbon rank eligibility'),
  'HasMonWonThisContestBefore':('src/contest_util.c:1915','selected category ribbon strictly exceeds entered rank'),
@@ -70,7 +71,7 @@ CITATIONS = {
  'CheckMagikarpBattle':('src/field_specials.c:5580','all six slots Magikarp'),
  'GetBattleOutcome':('src/field_specials.c:1553','recorded native battle outcome'),
  'CanReceiveGoGogglesGift':('src/field_specials.c:590','atomic Bag bundle capacity'),
- 'CanReceiveNormanMegaGift':('src/mega_stone_rewards.c:358','Ring plus each undelivered owed starter stone'),
+ 'CanReceiveNormanMegaGift':('src/mega_stone_rewards.c:358','undelivered owed starter stones after Norman'),
  'CanReceiveFrontierReward':('src/field_specials.c:558','reward and bottle caps Bag bundle'),
  'CanReceiveLatiStones':('src/field_specials.c:566','only undelivered Lati stones require capacity'),
  'DoDeoxysRockInteraction':('src/field_specials.c:4020','legal shortest-path puzzle sequence, 11 stages'),
@@ -440,6 +441,7 @@ def evaluate(key,state,constants=None):
         return {int(counts.get(item,0)>=quantity)} if counts is not None and quantity is not None else None
     name,args=_inputs(key)
     if name is None:return None
+    if name=='RecordOwnedBloodmoon':return {0}  # No script result is read; ownership writes are below.
     if name in ('BufferNormanMegaGiftKind','BufferNormanStarterMegaStone','BufferNormanPartnerMegaStone'):
         rows=_starter_stones()
         pair=_initial_starters(state,constants)
@@ -776,6 +778,8 @@ def native_effects(key,result,state,constants=None):
                 effect[kind+'_add' if op.startswith('add') else kind+'_remove']=amount
         return effect
     if name is None:return effect
+    if name=='RecordOwnedBloodmoon' and 'SPECIES_URSALUNA_BLOODMOON' in state.get('species',()):
+        effect['flags_set'].add('FLAG_EC_CAUGHT_URSALUNA_BLOODMOON')
     if name=='GiveEmeraldChampionsStarterBattleItems' and result==1 and not _flag(state,'FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS',constants):
         text=(ROOT/'src/field_specials.c').read_text().split('void GiveEmeraldChampionsStarterBattleItems(void)',1)[1].split('};',1)[0]
         effect['items_add']={item:1 for item in re.findall(r'\{(ITEM_\w+),\s*1\}',text)}

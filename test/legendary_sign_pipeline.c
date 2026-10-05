@@ -735,7 +735,7 @@ static bool32 WildTableHasSpecies(const struct WildPokemonInfo *info, u32 slots,
     return FALSE;
 }
 
-TEST("Gate table: every wild or quest row has a compiled slot and every wild legend has a row")
+TEST("Gate table: every wild or quest row has a compiled slot and every official wild legend has a row")
 {
     u32 missing = 0;
     for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
@@ -770,8 +770,11 @@ TEST("Gate table: every wild or quest row has a compiled slot and every wild leg
         for (u32 slot = 0; infos[method] != NULL && slot < slots[method]; slot++)
         {
             enum Species species = infos[method]->wildPokemon[slot].species;
-            if (IsLegendaryEncounterSpecies(species)
-             && GetRestrictedPartyClass(species) != RESTRICTED_PARTY_PARADOX
+            const struct SpeciesInfo *metadata = &gSpeciesInfo[GET_BASE_SPECIES_ID(species)];
+            // Named power-tier additions are intentionally ungated; Bloodmoon
+            // has its separate caught flag and Gholdengo uses its Pokedex record.
+            if ((metadata->isRestrictedLegendary || metadata->isSubLegendary
+              || metadata->isMythical || metadata->isUltraBeast)
              && GetLegendarySignIdBySpecies(species) >= LEGENDARY_SIGN_COUNT)
             {
                 Test_MgbaPrintf("Wild legend without a gate row: map %d.%d species %d",

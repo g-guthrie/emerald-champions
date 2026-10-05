@@ -75,6 +75,7 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
+	call MauvilleCity_Gym_EventScript_GiveMegaRing
 	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
 	compare VAR_NEW_MAUVILLE_STATE, 6
 	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
@@ -100,6 +101,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	special MauvilleGymDeactivatePuzzle
 	special DrawWholeMapView
 	playse SE_UNLOCK
+	call MauvilleCity_Gym_EventScript_GiveMegaRing
 	call MauvilleCity_Gym_EventScript_GiveVoltSwitch
 	closemessage
 	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
@@ -395,7 +397,7 @@ MauvilleCity_Gym_Text_ExplainTakeThis:
 
 MauvilleCity_Gym_Text_ExplainVoltSwitch: @ 820E844
 	.string "Raichunite X! A Raichu holding\n"
-	.string "it can Mega Evolve once you have\l"
+	.string "it can Mega Evolve with\l"
 	.string "a Mega Ring.\p"
 	.string "Put that spark to good use!$"
 
@@ -414,3 +416,23 @@ MauvilleCity_Gym_Text_GymStatueCertified: @ 820E96C
 	.string "Mauville City Pokémon Gym\p"
 	.string "Wattson's Certified Trainers:\n"
 	.string "{PLAYER}$"
+
+MauvilleCity_Gym_EventScript_GiveMegaRing::
+	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, Common_EventScript_NopReturn
+	msgbox MauvilleCity_Gym_Text_MegaRingGift, MSGBOX_DEFAULT
+	giveuniqueitem ITEM_MEGA_RING
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	setflag FLAG_SYS_RECEIVED_KEYSTONE
+	msgbox MauvilleCity_Gym_Text_MegaRingLesson, MSGBOX_DEFAULT
+	return
+
+MauvilleCity_Gym_Text_MegaRingGift:
+	.string "Wahahaha! You've earned more\n"
+	.string "than a Badge. Take this Mega Ring!$"
+
+MauvilleCity_Gym_Text_MegaRingLesson:
+	.string "Give a Pokémon its matching\n"
+	.string "Mega Stone, then press START\l"
+	.string "before choosing its move.\p"
+	.string "You can Mega Evolve one Pokémon\n"
+	.string "per battle. Try your gift stones!$"
