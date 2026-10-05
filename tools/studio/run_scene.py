@@ -103,23 +103,7 @@ async def run(spec,out):
         total=0
         walk_failure=None
         for step in steps:
-            if "walk_to" in step and walk_failure is None:
-                # Plan from the position the game reports right now, then walk it closed-loop.
-                import sys as _sys
-                _sys.path.insert(0,str(server.ROOT/"artifacts"/"playthrough"))
-                import route_steps
-                here=(studio.state[4],studio.state[5]);goal=tuple(step["walk_to"])
-                live=packet_state(studio.packet,recorder.decoder)["actors"]
-                occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
-                moves=route_steps.path(studio.current_map,here,goal,block=occupied) if here!=goal else []
-                if moves is None:
-                    walk_failure=f"walk_to {step.get('label','')}: no path on {studio.current_map} from {here} to {goal}"
-                    recorder.mark("NO PATH",studio.packet);break
-                step=dict(step,walk=[route_steps.DIRS[d] for d in moves]+([step["face"]] if step.get("face") else []))
-                if step.get("face"):step["face_only"]=True
-            if "walk" in step and walk_failure is None:
-                # Closed-loop walking: hold each direction until the game reports one tile of
-                # progress (position or map changed). A tile that never comes is a failure.
+            if ("walk_to" in step or "walk" in step) and walk_failure is None:
                 async def settle_scene(label):
                     # A script took control (trigger, trainer, gift): tap A through it, then
                     # wait for twelve idle frames. Battles resolve per battle_resolution.
@@ -131,30 +115,58 @@ async def run(spec,out):
                         idle=idle+1 if studio.state[0] else 0
                         if idle>=12:break
                     recorder.mark("Scene over",studio.packet)
-                for i,d in enumerate(step["walk"]):
-                    mask=keys(d.split("*")[0]);before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
-                    moved=False
-                    for attempt in range(2):
-                        for f in range(int(step.get("tile_limit",90))):
-                            studio.ingest(await studio.core.tick(mask,frames=1));recorder.observe(studio.packet,mask);total+=1
-                            if (studio.state[2],studio.state[3],studio.state[4],studio.state[5])!=before:moved=True;break
-                            if not studio.state[0] and f>4:break
-                        if moved:break
+                async def walk_moves(dirs,face_last=False):
+                    # Closed loop: hold each direction until the game reports one tile of progress
+                    # (position or map). Returns None, or why the walk stopped.
+                    nonlocal total
+                    for i,d in enumerate(dirs):
+                        mask=keys(d);before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
+                        moved=False
+                        for attempt in range(2):
+                            for f in range(int(step.get("tile_limit",90))):
+                                studio.ingest(await studio.core.tick(mask,frames=1));recorder.observe(studio.packet,mask);total+=1
+                                if (studio.state[2],studio.state[3],studio.state[4],studio.state[5])!=before:moved=True;break
+                                if not studio.state[0] and f>4:break
+                            if moved:break
+                            if not studio.state[0]:
+                                await settle_scene(f"Scene during {d} at {before[2]},{before[3]}")
+                                before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
+                        if not moved and face_last and i==len(dirs)-1:return None  # only turning to face
+                        if not moved:
+                            recorder.mark("STUCK "+d,studio.packet)
+                            return f"move {i+1} ({d}) made no progress at {before[2]},{before[3]}"
+                        # let the tile finish; play through any script the step triggered
+                        for f in range(16):
+                            studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
+                            if studio.state[0] and f>=2:break
                         if not studio.state[0]:
-                            await settle_scene(f"Scene during {d} at {before[2]},{before[3]}")
-                            before=(studio.state[2],studio.state[3],studio.state[4],studio.state[5])
-                    if not moved and step.get("face_only") and i==len(step["walk"])-1:
-                        break  # turning to face an object or sign: no tile is expected
-                    if not moved:
-                        walk_failure=f"walk {step.get('label','')}: move {i+1} ({d}) made no progress at {before[2]},{before[3]}"
-                        recorder.mark("STUCK "+d,studio.packet);break
-                    # let the tile finish so the next input starts from rest; a script the
-                    # step triggered (coord event, trainer sight) is played through
-                    for f in range(16):
-                        studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
-                        if studio.state[0] and f>=2:break
-                    if not studio.state[0]:
-                        await settle_scene(f"Scene after {d} at {studio.state[4]},{studio.state[5]}")
+                            await settle_scene(f"Scene after {d} at {studio.state[4]},{studio.state[5]}")
+                    return None
+                if "walk_to" in step:
+                    # Plan from the game's reported position and live actors; re-plan when a
+                    # wandering NPC blocks the way.
+                    import sys as _sys
+                    _sys.path.insert(0,str(server.ROOT/"artifacts"/"playthrough"))
+                    import route_steps
+                    goal=tuple(step["walk_to"]);start_map=studio.current_map;failure=None
+                    for tries in range(5):
+                        here=(studio.state[4],studio.state[5])
+                        if here==goal or studio.current_map!=start_map:failure=None;break
+                        live=packet_state(studio.packet,recorder.decoder)["actors"]
+                        occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
+                        moves=route_steps.path(studio.current_map,here,goal,block=occupied)
+                        if moves is None:
+                            failure=f"no path on {studio.current_map} from {here} to {goal}"
+                        else:
+                            failure=await walk_moves([route_steps.DIRS[d] for d in moves])
+                            if failure is None:break
+                        for f in range(40):
+                            studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
+                    if failure is None and step.get("face"):failure=await walk_moves([step["face"]],face_last=True)
+                    if failure:walk_failure=f"walk_to {step.get('label','')}: {failure}"
+                else:
+                    failure=await walk_moves(step["walk"])
+                    if failure:walk_failure=f"walk {step.get('label','')}: {failure}"
                 if step.get("label"):recorder.mark(step["label"],studio.packet)
                 if total>18000:raise ValueError("A scene may run at most 18,000 frames.")
                 continue

@@ -55,7 +55,10 @@ mistakes on water/elevation/ledges, missed side entrances). The owner no longer 
   pt00 truck (ng) -> pt00b out of truck -> pt00c clock set -> pt00d out of house -> pt00e/f May met
   (region default Hoenn, VAR_STARTER_GEN 3) -> pt00g north trigger -> pt00h rescue: pair Mudkip +
   Treecko (screenshots), forced win, back in Birch's lab (VAR_BIRCH_LAB_STATE 3).
-- Last end save: work/studio/scenes/pt00h/end.sav (Birch's lab, idle, 6,5)
+- Legs after: pt01 to Oldale, pt02 Mart employee (5 Poke Balls), pt03 Mart tour (tools).
+- Last end save: work/studio/scenes/pt03/end.sav (Oldale Mart, idle, 3,3)
+- Evidence table: artifacts/playthrough/EVIDENCE.md (update after every leg).
+- Tap B (not A) through tours/shops: A buys items (15 Mental Herbs happened once).
 - Next: lab -> Littleroot -> Route 101 -> Oldale (check gifts) -> Route 103 rival (forced win) ->
   back to lab (Pokedex; Littleroot state 3) -> Mom (Old Rod, confirm by Bag query).
 - Runner step types: walk, walk_to (+face), until_text, tap/press/hold; door mats need an extra
