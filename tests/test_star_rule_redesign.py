@@ -26,7 +26,7 @@ class StarRuleAvailability(unittest.TestCase):
     def test_eastern_ocean_matches_post_hideout_manifest_boundary(self):
         self.assertEqual(self.first("SPECIES_IRON_BUNDLE", "species"), 65)
         self.assertEqual(self.first("SPECIES_SUICUNE", "species"), 65)
-        for item in ("MILOTICITE", "MAWILITE"):
+        for item in ("MILOTICITE", "MAWILITE", "MASTER_BALL"):
             self.assertEqual(self.first("ITEM_" + item), 65)
 
 

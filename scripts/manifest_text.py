@@ -191,6 +191,10 @@ class Renderer:
                 contributed = True
                 pending['species'][sp] = self.species_how(sp, new_p, deriv, known_before)
             for it in raw['new']['items']:
+                # The requested Ball exception is its finite field pickups;
+                # lottery offers remain conditional in the source appendix.
+                if it == 'ITEM_MASTER_BALL':
+                    continue
                 if it == 'ITEM_MEGA_RING' and not pending.get('ring') and not self.ring_seen:
                     pending['ring'] = contributed = self.ring_seen = True
                 if it in known_items or it not in self.held:
@@ -204,6 +208,9 @@ class Renderer:
                 row=self.irows[index]
                 if row.get('key')=='ITEM_MASTER_BALL' and row.get('kind')=='item_ball':
                     pending['pickups'].append(place(row.get('where')))
+                    if 'ITEM_MASTER_BALL' not in known_items:
+                        known_items.add('ITEM_MASTER_BALL')
+                        pending['items']['ITEM_MASTER_BALL']=place(row.get('where'))
                     contributed=True
             pending['cap'] = raw['cap']
             for site in raw['battles']:
@@ -289,7 +296,8 @@ class Renderer:
             'Treecko + Mudkip; other starter choices swap those two lines. The rival keeps the third starter.',
             'Items are held battle items only (Mega Stones are listed on their own line). Key items, medicine,',
             'Poke Balls other than the Master Ball, evolution stones and decorations are left out. Wild held items, stolen items and',
-            'Pickup finds are excluded. Prices and one-off pickups still apply.',
+            'Pickup finds are excluded. Master Ball entries are finite field pickups; lottery outcomes remain',
+            'in the conditional source appendix. Prices and one-off pickups still apply.',
             'Foe levels are for the battle\'s first possible point: Easy / Medium / Hard.',
         ):
             L.append('  ' + line)
@@ -326,8 +334,6 @@ class Renderer:
                     L.extend(wrap(label, words, 8))
             stones = sorted(it for it in step['items'] if self.is_mega_stone(it))
             held = {it: how for it, how in step['items'].items() if it not in stones and it != 'ITEM_MASTER_BALL'}
-            if 'ITEM_MASTER_BALL' in step['items']:
-                L.append('  Master Ball: ' + step['items']['ITEM_MASTER_BALL'])
             for where in step['pickups']:
                 L.append('  Master Ball pickup: ' + where)
             if held:
