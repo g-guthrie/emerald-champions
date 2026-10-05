@@ -841,6 +841,8 @@ bool32 ClampMonToPlayerLevelCap(struct Pokemon *mon);
 void MaxPlayerMonIVs(struct Pokemon *mon);
 void SetPlayerMonBaselineEVs(struct Pokemon *mon);
 void MaxPlayerIVsIfNeeded(void);
+void ClearMonEVsIfLocked(struct Pokemon *mon);
+void ApplyBaselineEVsAtUnlock(void);
 bool32 ClampBoxMonToPlayerLevelCap(struct BoxPokemon *mon);
 u8 CopyMonToPC(struct Pokemon *mon);
 bool32 ReturnBoxMonHeldItemToBag(struct BoxPokemon *mon);

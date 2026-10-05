@@ -27,7 +27,7 @@ class RescueArsenalTests(unittest.TestCase):
         self.assertEqual(members[0]['fixed']['moves'],['MOVE_POUND','MOVE_LEER','MOVE_LEAFAGE','MOVE_NONE'])
         for member in members:
             fixed=member['fixed']
-            self.assertEqual(fixed['evs'],[252,52,52,52,52,50])
+            self.assertEqual(fixed['evs'],[0]*6)  # no EVs before the Knuckle Badge
             self.assertEqual(fixed['ivs'],[31]*6)
             self.assertEqual(member['domains']['item'],['ITEM_NONE'])
             self.assertEqual(fixed['pokerus'],0)
@@ -69,7 +69,7 @@ class RescueArsenalTests(unittest.TestCase):
             with self.assertRaises(ValueError):wild.certify_scenario(forged,internal_fingerprint='test')
         exported=wild.rescue_scenario(internal_fingerprint='test')
         exported['expected_player_factory']['members'][0]['domains']['nature'].append('NATURE_RANDOM')
-        exported['expected_player_factory']['members'][0]['fixed']['evs'][0]=0
+        exported['expected_player_factory']['members'][0]['fixed']['evs'][0]=4
         with self.assertRaises(ValueError):wild.certify_scenario(exported,internal_fingerprint='test')
         self.assertEqual(wild.rescue_scenario(internal_fingerprint='test'),self.scenario)
 

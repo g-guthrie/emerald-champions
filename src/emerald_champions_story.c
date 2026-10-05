@@ -171,6 +171,7 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
         // even when a partner also needs it (especially Eviolite).
     }
     ApplyEmeraldChampionsScriptedSet(&party[slot], &preset);
+    ClearMonEVsIfLocked(&party[slot]);
 }
 
 // Derive progress from earned victories instead of maintaining a second quest

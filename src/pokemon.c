@@ -3070,33 +3070,92 @@ void MaxPlayerMonIVs(struct Pokemon *mon)
     CalculateMonStats(mon);
 }
 
-// Emerald Champions: every Pokemon that joins the player arrives with a full
-// baseline spread and is re-specced at the Center move tutor. 252 HP; the
-// other 258 split as evenly as whole stat points allow (EVs count in fours):
-// 52 each to Attack, Defense, Sp. Atk and Sp. Def and 50 to Speed, 510 in
-// all. Only acquisition paths call this; a Pokemon already owned keeps the
-// spread the player chose. Trainer-owned Pokemon keep their authored EVs.
+// Emerald Champions: once EVs are unlocked (AreEVsUnlocked), every Pokemon
+// that joins the player arrives with a full baseline spread and is re-specced
+// at the Center move tutor: 252 HP and 252 Speed, the last 6 to Defense (4)
+// and Sp. Def (2) - EVs count in fours, so an even 3/3 would buy nothing.
+// Before the unlock a Pokemon arrives with none. Only acquisition paths and
+// the unlock itself call this; a Pokemon already owned keeps its spread.
+// Trainer-owned Pokemon keep their authored EVs once unlocked.
 static const u8 sPlayerBaselineEVs[NUM_STATS] =
 {
-    [STAT_HP] = MAX_PER_STAT_EVS,
-    [STAT_ATK] = 52,
-    [STAT_DEF] = 52,
-    [STAT_SPEED] = 50,
-    [STAT_SPATK] = 52,
-    [STAT_SPDEF] = 52,
+    [STAT_HP] = 252,
+    [STAT_ATK] = 0,
+    [STAT_DEF] = 4,
+    [STAT_SPEED] = 252,
+    [STAT_SPATK] = 0,
+    [STAT_SPDEF] = 2,
 };
-STATIC_ASSERT(MAX_PER_STAT_EVS + 52 * 4 + 50 == MAX_TOTAL_EVS, PlayerBaselineEVsFillTheTotal);
+STATIC_ASSERT(252 + 4 + 252 + 2 == MAX_TOTAL_EVS, PlayerBaselineEVsFillTheTotal);
+
+static void SetMonEVsKeepingFullHP(struct Pokemon *mon, const u8 *evs)
+{
+    u32 hp = GetMonData(mon, MON_DATA_HP);
+    bool32 full = hp == GetMonData(mon, MON_DATA_MAX_HP);
+
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        u32 ev = evs != NULL ? evs[stat] : 0;
+        SetMonData(mon, MON_DATA_HP_EV + stat, &ev);
+    }
+    CalculateMonStats(mon);
+    hp = full ? GetMonData(mon, MON_DATA_MAX_HP) : min(hp, GetMonData(mon, MON_DATA_MAX_HP));
+    SetMonData(mon, MON_DATA_HP, &hp);
+}
 
 void SetPlayerMonBaselineEVs(struct Pokemon *mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
         return;
+    SetMonEVsKeepingFullHP(mon, AreEVsUnlocked() ? sPlayerBaselineEVs : NULL);
+}
+
+// Before the unlock, no battler carries EVs: trainers, partners and wild
+// Legendaries set from an authored spread are cleared here.
+static bool32 BoxMonHasNoEVs(struct BoxPokemon *boxMon)
+{
     for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
-        u32 ev = sPlayerBaselineEVs[stat];
-        SetMonData(mon, MON_DATA_HP_EV + stat, &ev);
+        if (GetBoxMonData(boxMon, MON_DATA_HP_EV + stat) != 0)
+            return FALSE;
     }
-    CalculateMonStats(mon);
+    return TRUE;
+}
+
+// A Pokemon already without EVs is left alone, so its stats are never
+// recalculated for nothing.
+void ClearMonEVsIfLocked(struct Pokemon *mon)
+{
+    if (AreEVsUnlocked() || GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || BoxMonHasNoEVs(&mon->box))
+        return;
+    SetMonEVsKeepingFullHP(mon, NULL);
+}
+
+// Knuckle Badge: every owned Pokemon still without EVs gets the arrival
+// spread; one the player already specced keeps it.
+void ApplyBaselineEVsAtUnlock(void)
+{
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gPlayerParty[slot];
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && BoxMonHasNoEVs(&mon->box))
+            SetPlayerMonBaselineEVs(mon);
+    }
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        for (u32 pos = 0; pos < IN_BOX_COUNT; pos++)
+        {
+            struct BoxPokemon *boxMon = GetBoxedMonPtr(box, pos);
+            if (GetBoxMonData(boxMon, MON_DATA_SPECIES) == SPECIES_NONE
+             || GetBoxMonData(boxMon, MON_DATA_IS_EGG) || !BoxMonHasNoEVs(boxMon))
+                continue;
+            for (u32 stat = 0; stat < NUM_STATS; stat++)
+            {
+                u32 ev = sPlayerBaselineEVs[stat];
+                SetBoxMonData(boxMon, MON_DATA_HP_EV + stat, &ev);
+            }
+        }
+    }
 }
 
 // Saves from before the rule get one upgrade on load. New games set the flag

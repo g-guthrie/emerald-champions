@@ -101,7 +101,7 @@ class OpeningArsenalTests(unittest.TestCase):
         self.assertEqual(scenario['trainer_id'],'TRAINER_MAY_ROUTE_103_TORCHIC')
         self.assertEqual(scenario['candidate_roster'],['SPECIES_TREECKO','SPECIES_TORCHIC'])
         self.assertEqual(scenario['level_cap'],14)
-        self.assertEqual(scenario['acquisition_states'][0]['pokemon_defaults']['SPECIES_TREECKO']['evs'],[252,52,52,52,52,50])
+        self.assertEqual(scenario['acquisition_states'][0]['pokemon_defaults']['SPECIES_TREECKO']['evs'],[0]*6)  # no EVs before the Knuckle Badge
         self.assertEqual(scenario['battle_field']['player_xy'],[11,3])
         self.assertEqual(scenario['battle_field']['environment'],'BATTLE_ENVIRONMENT_GRASS')
         self.assertEqual(scenario['maximal_arsenal_status'],'unresolved')
@@ -137,13 +137,15 @@ class OpeningArsenalTests(unittest.TestCase):
         self.assertNotIn('ivs',state['services'])
         self.assertGreaterEqual(scenario['economy']['cash_remaining_minimum'],0)
 
-    def test_player_ev_edits_do_not_mutate_acquisition_defaults(self):
+    def test_player_ev_edits_are_illegal_before_the_knuckle_badge(self):
         scenario=build_opening_scenario()
         manifest=candidate_party(scenario)
+        certify_opening_manifest(scenario,manifest)
+        manifest['party'][0]['evs'][0]=4
+        self.assertEqual(scenario['acquisition_states'][0]['pokemon_defaults']['SPECIES_TREECKO']['evs'][0],0)
+        self.assertEqual(rules()['evs'][0],0)
+        with self.assertRaises(ValueError):certify_opening_manifest(scenario,manifest)
         manifest['party'][0]['evs'][0]=0
-        self.assertEqual(scenario['acquisition_states'][0]['pokemon_defaults']['SPECIES_TREECKO']['evs'][0],252)
-        self.assertEqual(rules()['evs'][0],252)
-        certify_opening_manifest(scenario,manifest)  # Funded EV editing is legal.
         manifest['party'][0]['ivs'][0]=0
         with self.assertRaises(ValueError):certify_opening_manifest(scenario,manifest)
 

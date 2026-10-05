@@ -72,6 +72,15 @@ u32 GetPlayerLevelCapForSpecies(enum Species species)
     return GetLevelCapForSpecies(species, GetCurrentLevelCap());
 }
 
+// No Pokemon has EVs until the Knuckle Badge (the cap-30 milestone): early
+// levels are small enough that a full spread would decide every fight. The
+// badge opens the EV editors, gives owned Pokemon their arrival spread and
+// turns trainers' authored spreads on (src/pokemon.c).
+bool32 AreEVsUnlocked(void)
+{
+    return FlagGet(FLAG_BADGE02_GET);
+}
+
 u32 GetCurrentEVCap(void)
 {
     static const u16 sEvCapFlagMap[][2] = {

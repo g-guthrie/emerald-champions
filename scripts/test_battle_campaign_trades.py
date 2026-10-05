@@ -18,7 +18,7 @@ class TradeDraftTests(unittest.TestCase):
         self.assertEqual(p['personality'],132);self.assertEqual(p['ot_id'],38726)
         self.assertEqual(p['nature'],'NATURE_RELAXED');self.assertEqual(p['pokerus'],0)
         self.assertEqual(p['friendship'],70);self.assertEqual(p['pp_bonuses'],0)
-        self.assertEqual(p['evs'],[252,52,52,52,52,50]);self.assertEqual(p['ivs'],[31]*6)
+        self.assertEqual(p['evs'],[0]*6);self.assertEqual(p['ivs'],[31]*6)
         self.assertTrue(s['progression_flags']['FLAG_RUSTBORO_NPC_TRADE_COMPLETED'])
         self.assertEqual(s['economy']['npc_trade_ev_preparation_cost'],500)
         self.assertEqual(s['economy']['cash_remaining_minimum'],3800)

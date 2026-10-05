@@ -22,7 +22,7 @@ class CampaignInfectionTests(unittest.TestCase):
         self.assertEqual(s['economy'],before['economy'])
         self.assertEqual(state['resources'],before['acquisition_states'][0]['resources'])
         self.assertEqual(state['pokemon_defaults_by_id']['riolu']['ivs'],[31]*6)
-        self.assertEqual(state['pokemon_defaults_by_id']['riolu']['evs'],[252,52,52,52,52,50])
+        self.assertEqual(state['pokemon_defaults_by_id']['riolu']['evs'],[0]*6)
         campaign.certify_scenario(json.loads(json.dumps(s)))
     def test_existing_donor_budget_and_non_propagating_recipients(self):
         args={'preparation':{'pokerus':{'direct':['starter-0']}}}
@@ -49,7 +49,7 @@ class CampaignInfectionTests(unittest.TestCase):
     def test_trade_reset_zero_can_be_infected_without_copying_donor_history(self):
         # Native NPC trade creation gives a new PID/OT and clears infection.
         owned={'fidough-trade':{'species':'SPECIES_FIDOUGH','method':'npc_trade'}}
-        default={'nature':'NATURE_RELAXED','pokerus':0,'pp_bonuses':0,'ivs':[31]*6,'evs':[252,52,52,52,52,50]}
+        default={'nature':'NATURE_RELAXED','pokerus':0,'pp_bonuses':0,'ivs':[31]*6,'evs':[0]*6}
         defaults={'fidough-trade':copy.deepcopy(default)}
         opening.apply_owned_pokerus_plan(owned,defaults,{'direct':['fidough-trade']})
         self.assertEqual(defaults['fidough-trade'],{**default,'pokerus':254})

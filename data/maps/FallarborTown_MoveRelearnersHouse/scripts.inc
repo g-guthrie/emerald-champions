@@ -114,10 +114,16 @@ FallarborTown_Text_AnnoyingIntroPart8:
 FallarborTown_SuperTrainer::
 	lockall
 	faceplayer
+	goto_if_unset FLAG_BADGE02_GET, FallarborTown_EventScript_EVsLocked
 	msgbox FallarborTown_Text_SharedEVEditor, MSGBOX_DEFAULT
 	setvar VAR_0x8004, TRUE
 	special SetPlannedEVPricing
 	goto EmeraldChampions_EventScript_EVTrainingChooseMon
+
+FallarborTown_EventScript_EVsLocked:
+	msgbox EmeraldChampions_Text_EVTrainingLocked, MSGBOX_DEFAULT
+	releaseall
+	end
 
 FallarborTown_Text_SharedEVEditor:
 	.string "Choose a partner, then adjust its\n"

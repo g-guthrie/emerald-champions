@@ -919,6 +919,8 @@ TEST("Emerald Champions ordinary wild creation uses natural moves within the cur
 
 TEST("Emerald Champions mandatory legendary scenes apply their authored set")
 {
+    bool32 hadEVs = FlagGet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE02_GET); // EVs unlocked (src/caps.c AreEVsUnlocked)
     gSpecialVar_0x8004 = SPECIES_HEATRAN;
     gSpecialVar_0x8005 = 0;
     CreateEmeraldChampionsStaticLegendaryEncounter();
@@ -937,6 +939,8 @@ TEST("Emerald Champions mandatory legendary scenes apply their authored set")
             hasMagmaStorm = TRUE;
     }
     EXPECT(hasMagmaStorm);
+    if (!hadEVs)
+        FlagClear(FLAG_BADGE02_GET);
 }
 
 TEST("Emerald Champions unauthored legendary scenes still receive a random set")
@@ -1237,6 +1241,8 @@ TEST("Emerald Champions Game Corner rejects the initially chosen starter")
 
 TEST("Emerald Champions Game Corner delivers a natural alternate starter transactionally")
 {
+    bool32 hadEVs = FlagGet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE02_GET); // EVs unlocked (src/caps.c AreEVsUnlocked)
     ResetEmeraldChampionsGameCornerTestState();
     SeedRng(7);
     gSpecialVar_0x8004 = SPECIES_CHARMANDER;
@@ -1252,6 +1258,8 @@ TEST("Emerald Champions Game Corner delivers a natural alternate starter transac
     // Every Pokemon joins the player with the baseline spread (252 HP, 510 in all).
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), MAX_PER_STAT_EVS);
     EXPECT_EQ(GetMonEVCount(&gParties[B_TRAINER_PLAYER][0]), MAX_TOTAL_EVS);
+    if (!hadEVs)
+        FlagClear(FLAG_BADGE02_GET);
 }
 
 TEST("Emerald Champions Game Corner rejects a repeated archive claim")
@@ -1321,6 +1329,8 @@ TEST("Emerald Champions story gifts preserve natural builds and empty held items
     };
     static const u8 levels[] = {25, 5, 20};
     struct BattleStruct *savedBattleStruct = gBattleStruct;
+    bool32 hadEVs = FlagGet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE02_GET); // EVs unlocked (src/caps.c AreEVsUnlocked)
 
     ZeroPlayerPartyMons();
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
@@ -1347,10 +1357,14 @@ TEST("Emerald Champions story gifts preserve natural builds and empty held items
         EXPECT_EQ(restorationItem, item);
     }
     gBattleStruct = savedBattleStruct;
+    if (!hadEVs)
+        FlagClear(FLAG_BADGE02_GET);
 }
 
 TEST("Emerald Champions prepared story gifts preserve PC delivery and no-room retries")
 {
+    bool32 hadEVs = FlagGet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE02_GET); // EVs unlocked (src/caps.c AreEVsUnlocked)
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
         CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_RATTATA, 5, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
@@ -1378,10 +1392,12 @@ TEST("Emerald Champions prepared story gifts preserve PC delivery and no-room re
     );
     EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HELD_ITEM), ITEM_NONE);
     EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HP_EV), MAX_PER_STAT_EVS);
-    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPEED_EV), 50);
+    EXPECT_EQ(GetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_SPEED_EV), 252);
 
     ZeroPlayerPartyMons();
     memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    if (!hadEVs)
+        FlagClear(FLAG_BADGE02_GET);
 }
 
 TEST("Emerald Champions legendary requirements accept the whole evolution family")

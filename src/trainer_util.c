@@ -229,6 +229,8 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     }
 
     CalculateMonStats(mon);
+    // Authored spreads switch on with the Knuckle Badge (src/caps.c AreEVsUnlocked).
+    ClearMonEVsIfLocked(mon);
     SetMonData(mon, MON_DATA_OT_NAME, trainer->name);
     data = trainer->gender;
     SetMonData(mon, MON_DATA_OT_GENDER, &data);

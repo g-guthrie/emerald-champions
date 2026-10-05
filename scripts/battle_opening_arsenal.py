@@ -105,6 +105,10 @@ def _rules(_source_identity):
     for stat in ('HP','ATK','DEF','SPATK','SPDEF','SPEED'):
         value = re.search(r'\[STAT_' + stat + r'\]\s*=\s*(\w+)', ev_block)[1]
         evs.append(int(value) if value.isdigit() else number('include/constants/pokemon_stats.h', value))
+    # No Pokemon has EVs before the Knuckle Badge, and the opening is always before it.
+    demand('src/pokemon.c', ['AreEVsUnlocked() ? sPlayerBaselineEVs : NULL'])
+    demand('src/caps.c', ['return FlagGet(FLAG_BADGE02_GET);'])
+    evs = [0] * 6
     demand('src/emerald_champions_story.c', ['first == second', 'CreateRandomMonWithIVs', 'second + 1', '(GetEmeraldChampionsRivalStarterIndex() + 2) % 3'])
     demand('src/pokemon.c', ['Random32(), OTID_STRUCT_PLAYER_ID', 'MaxPlayerMonIVs(mon);', 'SetPlayerMonBaselineEVs(mon);'])
     demand('data/scripts/general_mart.inc', ['call EmeraldChampions_EventScript_TryStarterKit', 'goto_if_set FLAG_SYS_POKEMON_GET, Mart_Poke_Center_Pokedex'])
@@ -313,7 +317,7 @@ def _opening_scenario(difficulty='hard', *, generation=3, first=0, second=1, cap
                   progression_flags={'FLAG_SYS_POKEMON_GET':True,'FLAG_RESCUED_BIRCH':True,'FLAG_VISITED_OLDALE_TOWN':True,
                                      'FLAG_EC_PLAYER_IVS_MAXED':True,'FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS':True},
                   battle_field=opening_field(trainer),candidate_roster=roster,
-                  acquisition_states=[dict(resources=resources,services=['legal_move_tutor','ability','evs','friendship'],
+                  acquisition_states=[dict(resources=resources,services=['legal_move_tutor','ability','friendship'],
                                            pokemon_defaults=defaults,pokerus_values=[0],pp_bonuses_values=[0],
                                            friendship_values=[0,r['friendship_threshold'],255],
                                            source_evidence=evidence)],

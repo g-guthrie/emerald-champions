@@ -38,6 +38,8 @@ import evolution_move_gate
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+# The Knuckle Badge raises the cap to 30 and unlocks EVs for everyone.
+EV_UNLOCK_CAP = 30
 POOLS = ROOT / "work/tuning-20260930/pools"
 PROGRESSION = ROOT / "work/progression-manifest/progression.pickle"
 # Owner rule: the iconic one-hit KOs (hatched Lapras, Spheal, Rhyhorn, Krabby,
@@ -206,6 +208,8 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         evs = mon.get("evs", [])
         if len(evs) != 6 or any(type(v) is not int or not 0 <= v <= 252 for v in evs) or sum(evs) > 510:
             problems.append(f"{tag}: EVs must be six values 0-252 totalling at most 510")
+        elif cap < EV_UNLOCK_CAP and any(evs):
+            problems.append(f"{tag}: no Pokemon has EVs before the Knuckle Badge (cap {EV_UNLOCK_CAP}; src/caps.c AreEVsUnlocked)")
     for item, count in held.items():
         if count > 1 and not items[item].get("unlimited"):
             problems.append(f"{item} is held by {count} members but no restocking source exists by {milestone} "

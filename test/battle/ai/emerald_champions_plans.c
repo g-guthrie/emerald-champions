@@ -361,13 +361,13 @@ AI_DOUBLE_BATTLE_TEST("EC Gym: Cristian activates the recipient that survives th
     // Annihilape is neutral to Dark: a healthy one is exactly the Rage Fist
     // recipient Cristian's plan wants. At 18 HP the six Beat Up hits (about 30)
     // would KO it, which the plan rejects; nothing else threatens it this turn.
-    // Lucario resists Dark; Beat Up (about 12) plus this Psychic (about 36)
-    // leaves it standing. At SpAttack 120 the Psychic alone KOs Lucario, so no
+    // Lucario resists Dark; Beat Up (about 12) plus this Psychic (about 27)
+    // leaves it standing at its no-EV (pre-Knuckle Badge) bulk. At SpAttack 120 the Psychic alone KOs Lucario, so no
     // choice of Cristian's could keep it alive.
     PARAMETRIZE { lethal = TRUE; }   // Annihilape at 18 HP.
     PARAMETRIZE { lethal = FALSE; }  // Lucario activation case.
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(140); MaxHP(140); Defense(100); SpAttack(60); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_PSYCHIC, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(140); MaxHP(140); Defense(100); SpAttack(45); Speed(30); Ability(ABILITY_TELEPATHY); Moves(MOVE_PSYCHIC, MOVE_CELEBRATE); }
         PLAYER(SPECIES_WOBBUFFET) { Level(20); HP(300); MaxHP(300); Defense(150); Speed(20); Ability(ABILITY_TELEPATHY); Moves(MOVE_CELEBRATE); }
         AuthoredOpponentWithPartner(TRAINER_CRISTIAN, 1, FALSE, lethal ? 2 : 3);
         if (lethal)
@@ -498,8 +498,8 @@ AI_DOUBLE_BATTLE_TEST("EC shoreline: authored Ned uses Soak to enable Wattrel's 
     GIVEN {
         // Synthetic resistant board, using Ned's complete native party and
         // Medium badge-one levels. This is not an earned fight or a legal-pool benchmark.
-        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(55); Speed(25); Ability(ABILITY_IRON_BARBS); Moves(MOVE_SEED_BOMB); }
-        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(55); Speed(20); Ability(ABILITY_IRON_BARBS); Moves(MOVE_SEED_BOMB); }
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(40); Speed(25); Ability(ABILITY_IRON_BARBS); Moves(MOVE_SEED_BOMB); }
+        PLAYER(SPECIES_FERROTHORN) { Level(20); HP(40); Speed(20); Ability(ABILITY_IRON_BARBS); Moves(MOVE_SEED_BOMB); }
         AuthoredOpponent(TRAINER_NED, 1, FALSE);
     } WHEN {
         TURN {
@@ -542,8 +542,8 @@ DOUBLE_BATTLE_TEST("EC shoreline mechanics: native Soak changes Wattrel's actual
 AI_DOUBLE_BATTLE_TEST("EC shoreline: authored Ned charges Wattrel before its attack")
 {
     GIVEN {
-        PLAYER(SPECIES_LAPRAS) { Level(25); HP(110); Speed(35); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_ICE_BEAM); }
-        PLAYER(SPECIES_LAPRAS) { Level(25); HP(110); Speed(30); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_ICE_BEAM); }
+        PLAYER(SPECIES_LAPRAS) { Level(20); HP(110); Speed(35); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_ICE_BEAM); }
+        PLAYER(SPECIES_LAPRAS) { Level(20); HP(110); Speed(30); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_ICE_BEAM); }
         AuthoredOpponent(TRAINER_NED, 1, FALSE);
     } WHEN {
         TURN {

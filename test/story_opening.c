@@ -17,9 +17,9 @@ static void ExpectUntrainedOpeningMon(struct Pokemon *mon, u32 level, bool32 pla
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
     EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), level);
     EXPECT_EQ(GetMonData(mon, MON_DATA_HELD_ITEM), ITEM_NONE);
-    // No authored set: the player's get the baseline spread, wild ones none.
-    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), playerOwned ? MAX_PER_STAT_EVS : 0);
-    EXPECT_EQ(GetMonEVCount(mon), playerOwned ? MAX_TOTAL_EVS : 0);
+    // No authored set, and no Pokemon carries EVs before the Knuckle Badge.
+    (void)playerOwned;
+    EXPECT_EQ(GetMonEVCount(mon), 0);
     EXPECT_NE(GetMonData(mon, MON_DATA_MOVE1), MOVE_NONE);
     for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
     {

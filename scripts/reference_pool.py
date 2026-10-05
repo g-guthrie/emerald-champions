@@ -99,7 +99,8 @@ def player_rules() -> dict:
         "ivs": {"rule": "31 in every stat for every Pokemon the player owns (catch, gift, starter, trade, egg).",
                 "cite": [cite(pc, "void MaxPlayerMonIVs"), cite(pc, "GiveMonToPartyOrPC"), cite(ROOT / "src/trade.c", "MaxPlayerMonIVs")]},
         "evs": {"rule": "Any legal spread (510 total, 252 max) re-planned at every Pokemon Center tutor for a flat 500 "
-                        "(free when unchanged); new arrivals come with 252/52/52/52/52/50. Battles give no EVs.",
+                        "(free when unchanged); new arrivals come with 252 HP / 4 Def / 2 SpD / 252 Spe. Battles give no EVs. "
+                        "Before the Knuckle Badge (cap 30) no Pokemon - player or trainer - has any EVs (src/caps.c AreEVsUnlocked).",
                 "cite": [cite(ec, "EmeraldChampions_EventScript_EVTraining"), cite(ROOT / "include/constants/field_specials.h", "EV_PLAN_FEE"),
                          cite(ROOT / "include/config/caps.h", "B_EV_CAP_TYPE")]},
         "nature": {"rule": "Any nature. Before Slateport it depends on the catch/gift roll (repeatable); from Slateport the "

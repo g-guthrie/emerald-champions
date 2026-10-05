@@ -861,6 +861,7 @@ gSpecials::
 	def_special ApplyHotSpringPokerusTreatment
 
 	def_special SetPlannedEVPricing
+	def_special ApplyBaselineEVsAtUnlock
 	def_special IsEvieEVPlan
 	def_special BufferPlannedEVConfirmation
 	def_special PayForPlannedEVSpread

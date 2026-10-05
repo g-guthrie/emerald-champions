@@ -76,6 +76,7 @@ void ApplyLegendaryEncounterSet(struct Pokemon *mon, enum Item fallbackItem)
         ApplyEmeraldChampionsScriptedSet(mon, authored);
     else
         ApplyEmeraldChampionsRandomNonMegaSet(mon);
+    ClearMonEVsIfLocked(mon);
     if (fallbackItem != ITEM_NONE && GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_NONE)
     {
         u16 item = fallbackItem;

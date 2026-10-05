@@ -80,6 +80,10 @@ def rules(fingerprint):
     ev_block = native.split('sPlayerBaselineEVs[NUM_STATS] =', 1)[1].split('};', 1)[0]
     stats = ('HP', 'ATK', 'DEF', 'SPATK', 'SPDEF', 'SPEED')
     evs = [int(re.search(r'\[STAT_' + stat + r'\]\s*=\s*(\d+)', ev_block)[1]) for stat in stats]
+    # The Birch rescue is always before the Knuckle Badge: no Pokemon has EVs yet.
+    if 'AreEVsUnlocked() ? sPlayerBaselineEVs : NULL' not in (ROOT / 'src/pokemon.c').read_text() or 'return FlagGet(FLAG_BADGE02_GET);' not in (ROOT / 'src/caps.c').read_text():
+        raise ValueError('EV unlock gate unresolved')
+    evs = [0] * 6
     natures = re.findall(r'\bNATURE_[A-Z]+\b', (ROOT / 'include/constants/pokemon.h').read_text().split('NATURE_HARDY')[1].split('NATURE_RANDOM')[0])
     natures = ['NATURE_HARDY'] + list(dict.fromkeys(natures))
     if len(natures) != 25: raise ValueError('Native nature domain unresolved')

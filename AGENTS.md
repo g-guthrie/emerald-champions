@@ -51,8 +51,11 @@ or data.
   stolen items return to their original owners afterward, including a stolen
   Berry later eaten or destroyed. Wild theft remains permanent. Items acquired
   through theft or Pickup never unlock vendor stock.
-- EVs: every Pokémon joining the player (catch, gift, starter, trade, hatch)
-  arrives with 252 HP / 52 Atk, Def, SpA, SpD / 50 Spe; owned Pokémon keep
+- EVs: no Pokémon, the player's or any trainer's, has EVs before the Knuckle
+  Badge (cap 30); the badge opens the EV editors, turns trainers' authored
+  spreads on and gives owned Pokémon still without EVs the arrival spread.
+  After it, every Pokémon joining the player (catch, gift, starter, trade,
+  hatch) arrives with 252 HP / 252 Spe / 4 Def / 2 SpD; owned Pokémon keep
   their chosen spread. Every Center move tutor plans a whole spread and
   applies it at once for a flat ¥500 (free when unchanged, nothing on
   cancel). Evie in Fallarbor uses the same editor at ¥2 per added EV, with free

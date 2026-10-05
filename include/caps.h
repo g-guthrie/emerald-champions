@@ -24,6 +24,7 @@ u32 GetCurrentLevelCap(void);
 u32 GetLevelCapForSpecies(enum Species species, u32 baseline);
 u32 GetPlayerLevelCapForSpecies(enum Species species);
 u32 GetCurrentEVCap(void);
+bool32 AreEVsUnlocked(void);
 #if EC_HEADLESS_FIXTURES
 #endif
 

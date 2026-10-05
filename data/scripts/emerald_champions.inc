@@ -75,6 +75,8 @@ EmeraldChampions_EventScript_MoveTutorExit:
 @ asks first. Nothing is applied or charged until the player confirms.
 EmeraldChampions_EventScript_EVTraining:
 	setvar VAR_TUTOR_CURSOR, 2
+	@ No Pokemon has EVs before the Knuckle Badge (src/caps.c AreEVsUnlocked).
+	goto_if_unset FLAG_BADGE02_GET, EmeraldChampions_EventScript_EVTrainingLocked
 	msgbox EmeraldChampions_Text_EVTrainingIntro, MSGBOX_DEFAULT
 	setvar VAR_0x8004, FALSE
 	special SetPlannedEVPricing
@@ -219,8 +221,17 @@ EmeraldChampions_EventScript_EVTrainingExit:
 	releaseall
 	end
 
+EmeraldChampions_EventScript_EVTrainingLocked:
+	msgbox EmeraldChampions_Text_EVTrainingLocked, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_MoveTutorMain
+
 EmeraldChampions_Text_EVTraining:
 	.string "EV Training$"
+EmeraldChampions_Text_EVTrainingLocked:
+	.string "EV training opens with the Knuckle\n"
+	.string "Badge from Dewford's Gym.\p"
+	.string "Until then, no Pokémon - yours or\n"
+	.string "any Trainer's - carries any EVs.$"
 EmeraldChampions_Text_EVTrainingIntro:
 	.string "Choose a Pokémon and plan its EVs.\n"
 	.string "A new spread costs ¥500 to apply.\p"
