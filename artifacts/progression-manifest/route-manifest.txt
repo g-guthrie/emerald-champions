@@ -93,3 +93,39 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
     Light Ball and Miracle Seed reach the vendor shelf when caught held (src/field_specials.c:272,310).
   Not here: Woods girl's Miracle Seed (33,6), Great Ball, Revive, Tiny Mushroom (26,6), (40,29),
   Woods 2 and 3 - all behind Cut. Route 104 north's own items are the trainers' own route.
+
+====================================================================================================
+STEP 6 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
+  Everything reachable before the Stone Badge. Cut needs the Stone Badge
+  (data/scripts/field_move_scripts.inc:43-47), so no HM obstacle is open.
+  Adds Route 104 north, Rustboro City, Route 116 west, Rusturf Tunnel west, Route 115 south
+  (no grass, so no honey: src/wild_encounter.c:1416), Seaspray Cave 1F and B1F (B1F gate pending).
+  Pokemon
+    Route 116 grass: Skiddo, Nincada, Starly, Mareep, Joltik, Skitty, Nickit, Rookidee, Houndour,
+      Dreepy
+    Route 116 honey: Teddiursa, Pancham, Purrloin
+    Rusturf Tunnel: Whismur, Noibat, Roggenrola, Teddiursa, Dunsparce, Drilbur, Machop, Larvitar
+    Old Rod: Route 115 Wishiwashi, Wailmer; Seaspray Cave Wishiwashi, Krabby
+    Seaspray Cave 1F: Psyduck, Tynamo, Wooper, Stunfisk (Galar), Zubat
+    Seaspray Cave B1F: Seel, Swinub, Snorunt, Sneasel, Bergmite, Smoochum, Spheal, Vanillite,
+      Frigibax; honey Cubchoo, Snover, Delibird, Cryogonal
+    Trade: Zigzagoon for a perfect-IV Fidough (RustboroCity_House1; src/data/trade.h:972)
+    Evolutions by 14: Staravia (Starly 14).
+    Wild levels never exceed the cap (src/wild_encounter.c:716).
+    Not live: Poipole (badge 5), Reshiram (Groudon weather visitor), Magearna sign (badge 8),
+      fossils (none held), Terra Cave (abnormal weather).
+  Battle items
+    Gifts: Grass Gem + Steel Gem (Gym guide, RustboroCity_Gym/scripts.inc:164), Quick Claw
+      (PokemonSchool/scripts.inc:86), Float Stone (Flat2_2F/scripts.inc:42), Chesto Berry
+      (Route 104 Expert), daily flower-shop bundle: one of Cheri..Persim plus Pomeg, Kelpsy, Qualot,
+      Hondew, Grepa, Tamato (src/field_specials.c:520)
+    Item balls: Wide Lens (Route 116 55,12), Smooth Rock (Seaspray 5,5), King's Rock (B1F 46,15),
+      Rocky Helmet (B1F 11,12), Damp Rock (B1F 40,7); hidden Icy Rock (B1F 25,20), Icicle Plate
+      (B1F 36,6)
+    Berry trees: Cheri, Leppa, Oran (Route 104 north)
+    Marts unchanged (Mental Herb, Red Card, Cell Battery); Rustboro Center clerk: Repeat, Timer,
+      Nest Balls only.
+    Wild held items: pending the held-item cleanup.
+  Not here: Shell Bell (Cut), Route 104 PP Up (Surf), Route 116 Binding Band, Ether, HP Up (Cut),
+  White Herb florist (badge 3), Dream Balls and Scope Lens (after Roxanne), Seaspray 1F
+  Blastoisinite, Covert Cloak, Stone Edge TM, Never-Melt Ice (Rock Smash / Surf).
