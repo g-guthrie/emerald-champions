@@ -55,6 +55,7 @@ from pathlib import Path
 import emerald_champions_teams as teams
 import evolution_move_gate
 import mega_register as mr
+import walkthrough_order
 from item_catalog import battle_item_categories
 from verify_trainer_ability_legality import preprocess_species_info, resolve_species, species_aliases
 
@@ -1708,6 +1709,17 @@ def species_row(b: Builder, sp: str, how: dict, gate: str) -> dict:
                 source=dict(kind=how.get("kind"), detail=how.get("detail"), where=how.get("where"), cite=how.get("cite")))
 
 
+def encounter_map(enc, trainer: str) -> str | None:
+    """The map whose script starts this battle."""
+    for _req, where, _c in enc.paths.get(trainer, []):
+        if where:
+            return where[0] if isinstance(where, tuple) else where
+    calls = enc.calls.get(trainer, [])
+    if calls and calls[0]["file"].startswith("data/maps"):
+        return calls[0]["file"].split("/")[2]
+    return None
+
+
 def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=None) -> dict:
     """Fresh source upper bound while this battle is still pending.
 
@@ -1738,6 +1750,12 @@ def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=Non
     closure = story.close(story.cap(milestone), forbid)
     if not story.realizes(milestone, story.flag_of(milestone), closure["flags"]):
         raise ValueError(f"{milestone} requires defeating {trainer}")
+    battle_map = encounter_map(enc, trainer)
+    route_maps = walkthrough_order.allowed_maps(battle_map, milestone, story.geo.by_map)
+    if route_maps is not None:
+        # A route trainer sees only the walkthrough chapters up to its own.
+        nodes = {n for m in route_maps for n in story.geo.by_map[m]}
+        closure = dict(closure, reached={n: v for n, v in closure["reached"].items() if n in nodes})
     p = Pools(b, enc, compute_windows=False)
     r = p.compute(milestone, closure=closure, pending=frozenset(pending))
     unlimited_kinds = {"vendor_kit", "vendor_badge_stock", "vendor_form_items", "vendor_species", "mart"}
@@ -1750,7 +1768,10 @@ def encounter_pool(trainer: str, milestone: str, *, builder=None, encounters=Non
         trainer=trainer, encounter=next(f"E{br.encounter:04d}" for br in enc.branches if br.trainer == trainer),
         pending_trainers=sorted(pending), excluded_victory_flags=sorted(forbid),
         milestone=milestone, cap=r["cap"], source_head=git_head(), story_flags=sorted(r["flags"]),
-        scope="Source upper bound before this encounter; optional detours, money and RNG are unconstrained.",
+        battle_map=battle_map,
+        scope=("Walkthrough-order pool: chapters up to this route (scripts/walkthrough_order.py)."
+               if route_maps is not None else
+               "Source upper bound before this encounter; optional detours, money and RNG are unconstrained."),
         species=species, items=items, megas=r["megas"], all_mega_stones=sorted(p.megas),
         mega_ring=dict(available=r["ring"], gate="Wattson's victory reward after badge three"),
         friendship=dict(max_this_milestone=255),
