@@ -61,6 +61,8 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist:: @ 82118DA
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_DreamsFallback
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_DreamsFallback
 	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_MagearnaAwake
+	checkitemspace ITEM_MAGEARNITE
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoBagRoom
 	special TryGiveSelectedLegendarySignReward
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaParty
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
@@ -382,6 +384,7 @@ RustboroCity_DevonCorp_2F_EventScript_MagearnaParty::
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaParty, MSGBOX_DEFAULT
+	call RustboroCity_DevonCorp_2F_EventScript_GiveMagearnite
 	release
 	end
 
@@ -389,7 +392,17 @@ RustboroCity_DevonCorp_2F_EventScript_MagearnaPC::
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaPC, MSGBOX_DEFAULT
+	call RustboroCity_DevonCorp_2F_EventScript_GiveMagearnite
 	call Common_EventScript_OfferLegendaryGiftSwap
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_GiveMagearnite::
+	giveitem ITEM_MAGEARNITE
+	return
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaNoBagRoom::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaNoBagRoom, MSGBOX_DEFAULT
 	release
 	end
 
@@ -407,6 +420,12 @@ RustboroCity_DevonCorp_2F_Text_MagearnaPC:
 	.string "Diancie has awakened Devon's\n"
 	.string "mechanical prototype!\p"
 	.string "Magearna was sent to your PC.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaNoBagRoom:
+	.string "The prototype answers Diancie,\n"
+	.string "and its Mega Stone wakes too.\p"
+	.string "Make room in your Bag for it.\n"
+	.string "Magearna will wait here.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
 	.string "The prototype answers Diancie,\n"

@@ -173,6 +173,12 @@ class Renderer:
         steps, pending = [], None
         numbers = {}
         self.ring_seen = False
+        # A League room opens in the listing just before the sitting fights it,
+        # so its number follows the one-sitting order the campaign builder plays.
+        league = ('TRAINER_SIDNEY', 'TRAINER_PHOEBE', 'TRAINER_GLACIA', 'TRAINER_DRAKE', 'TRAINER_WALLACE')
+        victories = [raw['after'] for raw in self.raw_steps() if raw['after']]
+        league_prev = {site: victories[i - 1] for i, site in enumerate(victories)
+                       if i and site in self.nodes and any(t in league for t in self.nodes[site].get('trainers', []))}
         for raw in self.raw_steps():
             rows = raw['rows'] or {}
             new_p = set(rows.get('pokemon_sources', [])) - seen_p
@@ -215,6 +221,8 @@ class Renderer:
             pending['cap'] = raw['cap']
             for site in raw['battles']:
                 if site in known_battles or site not in self.nodes:
+                    continue
+                if site in league_prev and raw['after'] != league_prev[site]:
                     continue
                 known_battles.add(site)
                 node = self.nodes[site]

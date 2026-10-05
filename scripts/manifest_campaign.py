@@ -173,12 +173,26 @@ def snapshot(world,state):
                 money=state['money'],coins=state['coins'],funding_possible=state['funding_possible'])
 
 
+LEAGUE_RUN=('TRAINER_SIDNEY','TRAINER_PHOEBE','TRAINER_GLACIA','TRAINER_DRAKE','TRAINER_WALLACE')
+
+
+def league_order(actual,state):
+    # The League is one sitting: its rooms only open forward, so once Sidney
+    # falls nothing else can be fought before the Champion. Everything else
+    # that is open is fought before entering, so numbering follows real play.
+    league=[n for n in actual if any(t in LEAGUE_RUN for t in n['trainers'])]
+    others=[n for n in actual if n not in league]
+    if not league:return actual
+    if 'TRAINER_SIDNEY' in state['defeated'] and 'TRAINER_WALLACE' not in state['defeated']:return league
+    return others or league
+
+
 def build(world,battles,events,items,limit=80):
     state=world.initial();previous=dict(pokemon=set(),items=set(),areas=set())
     periods=[];placed=set();finished=False
     for i in range(limit):
         details=world.close(state);current=resources(state)
-        actual=[n for n in world.battles if world.eligible(n,state)]
+        actual=league_order([n for n in world.battles if world.eligible(n,state)],state)
         alternatives=[n for n in world.battles if world.eligible(n,state,selectors=True) and n['site_id'] not in placed]
         periods.append(dict(index=i+1,label='Before the Route 103 rival' if i==0 else f'Progression frontier {i+1}',
             new=delta(previous,current),available={k:sorted(v) for k,v in current.items()},
@@ -220,6 +234,11 @@ def build(world,battles,events,items,limit=80):
     rules=catalogue.difficulty_level_rules()
     encounter_order=[]
     earliest={n:i for i,p in enumerate(periods) for n in p['battles']}
+    # League rooms are numbered where the sitting actually fights them.
+    fought={v['battle']:i for i,p in enumerate(periods) for v in p['after_victory']}
+    for node in world.battles:
+        if node['site_id'] in fought and any(t in LEAGUE_RUN for t in node['trainers']):
+            earliest[node['site_id']]=max(earliest.get(node['site_id'],0),fought[node['site_id']])
     for node in sorted(world.battles,key=lambda n:(earliest.get(n['site_id'],9999),min((branch_data[t].encounter for t in n['trainers'] if t in branch_data),default=9999),n['site_id'])):
         if node['site_id'] not in earliest:continue
         branches=[branch_data[t] for t in node['trainers'] if t in branch_data]

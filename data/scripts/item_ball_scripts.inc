@@ -407,7 +407,7 @@ MeteorFalls_1F_1R_EventScript_ItemPPUP:: @ 82911D2
 	end
 
 MeteorFalls_B1F_2R_EventScript_ItemTM02:: @ 82911DF
-	finditem ITEM_HEATRANITE
+	finditem ITEM_DRAMPANITE
 	end
 
 NewMauville_Inside_EventScript_ItemFastBall:: @ 82911EC
@@ -444,11 +444,11 @@ AbandonedShip_Rooms2_B1F_EventScript_ItemLevelBall:: @ 8291247
 	end
 
 AbandonedShip_Room_B1F_EventScript_ItemTM13:: @ 8291254
-	finditem ITEM_MAGEARNITE
+	finditem ITEM_MAX_REPEL
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_ItemRevive:: @ 8291261
-	finditem ITEM_TATSUGIRINITE
+	finditem ITEM_LUXURY_BALL
 	end
 
 AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey:: @ 829126E
@@ -456,7 +456,7 @@ AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey:: @ 829126E
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall:: @ 829127B
-	finditem ITEM_LUXURY_BALL
+	finditem ITEM_TATSUGIRINITE
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner:: @ 8291288
@@ -593,7 +593,7 @@ Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest:: @ 829144F
 	end
 
 Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
-	finditem ITEM_MEWTWONITE_X
+	finditem ITEM_DESTINY_KNOT
 	end
 
 Route110_TrickHousePuzzle7_EventScript_ItemBottleCap:: @ 8291469
@@ -601,7 +601,7 @@ Route110_TrickHousePuzzle7_EventScript_ItemBottleCap:: @ 8291469
 	end
 
 Route110_TrickHousePuzzle8_EventScript_ItemDestinyKnot:: @ 8291476
-	finditem ITEM_DESTINY_KNOT
+	finditem ITEM_MEWTWONITE_X
 	end
 
 VictoryRoad_1F_EventScript_ItemMaxElixir:: @ 8291483
@@ -649,7 +649,7 @@ MagmaHideout_3F_1R_EventScript_ItemCameruptite:: @ 8291505
 	end
 
 MagmaHideout_3F_2R_EventScript_ItemPPMax:: @ 8291512
-	finditem ITEM_PP_MAX
+	finditem ITEM_HEATRANITE
 	end
 
 MagmaHideout_4F_EventScript_ItemMaxRevive:: @ 829151F
@@ -658,7 +658,7 @@ MagmaHideout_4F_EventScript_ItemMaxRevive:: @ 829151F
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower:: @ 829152C
-	finditem ITEM_DRAMPANITE
+	finditem ITEM_PP_MAX
 	end
 
 PetalburgWoods_2_Item_TM80Venoshock::
