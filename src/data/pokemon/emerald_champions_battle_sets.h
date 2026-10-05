@@ -4430,7 +4430,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_TORRENT,
+        .ability = ABILITY_MEGA_LAUNCHER,
         .evs = {4, 0, 0, 252, 0, 252},
     }},
     {.name = sEmeraldChampionsSetName_4223, .preset = {
@@ -42104,7 +42104,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[] =
         .requiredItem = ITEM_NONE,
         .requiredMove = MOVE_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_TORRENT,
+        .ability = ABILITY_MEGA_LAUNCHER,
         .evs = {4, 0, 0, 252, 0, 252},
     }},
     {.name = sEmeraldChampionsSetName_6880, .preset = {

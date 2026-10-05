@@ -5,6 +5,8 @@ Common_EventScript_PkmnCenterNurse::
 	call EventScript_PkmnCenterNurse_Itemfinder
 	call_if_set FLAG_EC_WOODS_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_WoodsGift
 	call EventScript_PkmnCenterNurse_GiveTools
+	@ The party rule follows the welcome and tools, before Kubfu can be met.
+	call_if_unset FLAG_EC_RESTRICTED_RULE_EXPLAINED, EventScript_PkmnCenterNurse_RestrictedRule
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_OfferHealAfterTools
 	goto EventScript_PkmnCenterNurse_Main
 
@@ -19,7 +21,6 @@ EventScript_PkmnCenterNurse_GiveToolsForTour::
 	setvar VAR_0x8008, TRUE
 
 EventScript_PkmnCenterNurse_CheckTools:
-	call_if_unset FLAG_EC_RESTRICTED_RULE_EXPLAINED, EventScript_PkmnCenterNurse_RestrictedRule
 	setvar VAR_0x8009, FALSE
 	setvar VAR_0x8007, FALSE
 	setvar VAR_0x8004, ITEM_POKE_VIAL

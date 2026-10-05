@@ -2823,7 +2823,7 @@
             "MOVE_PROTECT"
           ],
           "nature": "NATURE_MODEST",
-          "ability": "ABILITY_TORRENT",
+          "ability": "ABILITY_MEGA_LAUNCHER",
           "item": "ITEM_WHITE_HERB",
           "required_item": "ITEM_NONE",
           "field_dependency": null,
@@ -2835,7 +2835,7 @@
             0,
             252
           ],
-          "role": "weather-independent base-form spread sweeper with Fighting coverage",
+          "role": "weather-independent base-form spread sweeper with Mega Launcher Fighting coverage",
           "source": "Hand-audited Emerald Champions base-form adaptation of Smogon Shell Smash Blastoise"
         },
         {
@@ -2900,7 +2900,7 @@
             "MOVE_DARK_PULSE"
           ],
           "nature": "NATURE_TIMID",
-          "ability": "ABILITY_TORRENT",
+          "ability": "ABILITY_MEGA_LAUNCHER",
           "item": "ITEM_WHITE_HERB",
           "required_item": "ITEM_NONE",
           "evs": [

@@ -292,6 +292,7 @@ class Renderer:
             'All your Pokemon are at the step\'s level cap (Leveler). Evolutions still need their own condition',
             '(level, stone, friendship, trade, time, move) and the item or move must already be available.',
             '[R] = Restricted: Legendary, Mythical, Ultra Beast, Paradox, Gholdengo or either Ursaluna; one total per party.',
+            'A player Mega Evolution uses the same slot: with an [R] member along, only that member can Mega Evolve.',
             'Starters: choose one region, then take up to two of its three starters. This reference follows',
             'Treecko + Mudkip; other starter choices swap those two lines. The rival keeps the third starter.',
             'Items are held battle items only (Mega Stones are listed on their own line). Key items, medicine,',

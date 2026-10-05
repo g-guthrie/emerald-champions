@@ -373,9 +373,8 @@ Common_EventScript_NPCTradeRestrictedParty::
 	end
 
 Common_Text_NPCTradeRestrictedParty:
-	.string "Choose one restricted Pokémon:\n"
-	.string "Only 1 restricted Pokémon\n"
-	.string "per party.$"
+	.string "Only 1 restricted Pokémon per\n"
+	.string "party. Store one in the PC first.$"
 
 Common_EventScript_TradeHeldItemBag:
 	msgbox Common_Text_TradeHeldItemBag, MSGBOX_DEFAULT

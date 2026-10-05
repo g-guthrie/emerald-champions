@@ -214,8 +214,7 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         problems.append("more than one restricted Pokemon (Legendary/Mythical/Ultra Beast/Paradox, Gholdengo or either Ursaluna form): "
                         + ", ".join(f"slot {s} {sp} ({c})" for s, sp, c in restricted)
                         + " (src/pokemon.c GetRestrictedPartyClass / PlayerPartyWithinRestrictedLimit)")
-    if len(mega_slots) > 1:
-        problems.append("more than one usable Mega in the prepared party")
+    # Several holders are legal: the battle allows one Mega, and the player picks which.
     for slot in mega_slots:
         if any(other != slot for other, _, _ in restricted):
             problems.append(f"slot {slot}: Mega Evolution uses the restricted slot already held by another party member")

@@ -222,7 +222,8 @@ void EmeraldChampionsAgentPrepPoll(void)
         ClampMonToPlayerLevelCap(&sEcAgentPreparedParty[slot]);
     }
 
-    u32 megaCount = 0;
+    // Several Mega Stone holders are legal (one Mega per battle); a holder
+    // beside another restricted member could never use its stone.
     for (u32 slot = 0; slot < gEcAgentPrepPartyCount; slot++)
     {
         struct Pokemon *mon = &sEcAgentPreparedParty[slot];
@@ -240,11 +241,6 @@ void EmeraldChampionsAgentPrepPoll(void)
         mega |= GetFormChangeTargetSpecies_Internal(ctx) != species;
         if (!mega)
             continue;
-        if (++megaCount > 1)
-        {
-            Fail(EC_AGENT_PREP_RESTRICTED_PARTY, slot);
-            return;
-        }
         for (u32 other = 0; other < gEcAgentPrepPartyCount; other++)
             if (other != slot && GetRestrictedPartyClass(gEcAgentPrepSpecies[other]) != RESTRICTED_PARTY_NONE)
             {

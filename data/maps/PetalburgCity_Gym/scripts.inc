@@ -1383,9 +1383,8 @@ PetalburgCity_Gym_Text_NormanIntro: @ 8205FE5
 	.string "So, you did get four Gym Badges.\p"
 	.string "Fine, as I promised, we will have\n"
 	.string "a Pokémon battle.\p"
-	.string "Show me how far you and your\l"
-	.string "partners have come. Beat me, and\l"
-	.string "their Mega Stones are yours!$"
+	.string "Show me how far you and your\n"
+	.string "partners have come!$"
 
 PetalburgCity_Gym_Text_NormanStarterStones:
 	.string "I kept Mega Stones for the partners\n"

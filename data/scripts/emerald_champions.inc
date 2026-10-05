@@ -657,7 +657,6 @@ EmeraldChampions_EventScript_CenterGuideHelp:
 	goto EmeraldChampions_EventScript_CenterGuideMenu
 
 EmeraldChampions_EventScript_CenterHelp0:
-	msgbox EmeraldChampions_Text_RestrictedRule, MSGBOX_DEFAULT
 	msgbox EmeraldChampions_Text_CenterHelpLesson0, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_CenterGuideHelp
 

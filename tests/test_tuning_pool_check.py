@@ -68,11 +68,10 @@ class TuningPoolCheckTests(unittest.TestCase):
         pool["species"][0]["restricted_class"] = "legendary"
         self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), pool=pool), [])
 
-    def test_two_usable_megas_are_rejected(self):
+    def test_two_mega_holders_are_allowed_without_a_restricted_member(self):
         pool = copy.deepcopy(POOL)
         pool["megas"].append(dict(species="SPECIES_AGGRON_MEGA", base="SPECIES_AGGRON", stone="ITEM_AGGRONITE"))
-        problems = self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), mon("SPECIES_AGGRON", "ITEM_AGGRONITE"), pool=pool)
-        self.assertTrue(any("more than one usable Mega" in p for p in problems), problems)
+        self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), mon("SPECIES_AGGRON", "ITEM_AGGRONITE"), pool=pool), [])
 
     def test_species_not_in_pool_fails(self):
         problems = self.check(mon("SPECIES_DRAGAPULT"))
