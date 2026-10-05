@@ -259,7 +259,7 @@ Route124_EventScript_ItemFloettite:: @ 8290FF1
 	end
 
 Route124_EventScript_ItemBlueShard:: @ 8290FFE
-	finditem ITEM_DARKRANITE
+	finditem ITEM_BOTTLE_CAP
 	end
 
 Route124_EventScript_ItemYellowShard:: @ 829100B
@@ -271,7 +271,7 @@ Route125_EventScript_ItemMawilite:: @ 8291018
 	end
 
 Route126_EventScript_ItemGreenShard:: @ 8291025
-	finditem ITEM_ZYGARDITE
+	finditem ITEM_COMET_SHARD
 	end
 
 Route127_EventScript_ItemZinc:: @ 8291032
@@ -597,7 +597,7 @@ Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
 	end
 
 Route110_TrickHousePuzzle7_EventScript_ItemBottleCap:: @ 8291469
-	finditem ITEM_BOTTLE_CAP
+	finditem ITEM_DARKRANITE
 	end
 
 Route110_TrickHousePuzzle8_EventScript_ItemDestinyKnot:: @ 8291476
@@ -898,7 +898,7 @@ Altering_Cave_EventScript_MasterBall2::
 	end
 
 Altering_Cave_EventScript_CometShard::
-	finditem ITEM_COMET_SHARD
+	finditem ITEM_ZYGARDITE
 	end
 
 EventScript_MegaStoneBadgeLocked::

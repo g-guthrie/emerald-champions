@@ -23,6 +23,12 @@ class StarRuleAvailability(unittest.TestCase):
                 self.assertGreaterEqual(self.first("ITEM_" + item), 70)
         self.assertIn(self.first("ITEM_KANGASKHANITE"), (60, 65))
 
+    def test_legend_mega_stones_wait_for_the_league(self):
+        # A restricted Pokemon may Mega Evolve itself, so its stone is the
+        # strongest single pick available; keep it at the final gym or later.
+        self.assertEqual(self.first("ITEM_DARKRANITE"), 80)
+        self.assertEqual(self.first("ITEM_ZYGARDITE"), 85)
+
     def test_eastern_ocean_matches_post_hideout_manifest_boundary(self):
         self.assertEqual(self.first("SPECIES_IRON_BUNDLE", "species"), 65)
         self.assertEqual(self.first("SPECIES_SUICUNE", "species"), 65)

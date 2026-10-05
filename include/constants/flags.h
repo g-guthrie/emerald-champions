@@ -1244,7 +1244,7 @@
 #define FLAG_ITEM_VICTORY_ROAD_B2F_TYRANITARITE                        0x440
 #define FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_MASTER_BALL              0x442
 #define FLAG_ITEM_ROUTE_124_RED_SHARD                               0x444
-#define FLAG_ITEM_ROUTE124_DARKRANITE                              0x445
+#define FLAG_ITEM_ROUTE124_BOTTLE_CAP                              0x445
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_HONEY              0x446
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_HARBOR_MAIL               0x447
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_ESCAPE_ROPE              0x448
@@ -1255,7 +1255,7 @@
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_MASTER_BALL  0x44E
 #define FLAG_ITEM_ROUTE_121_QUICK_BALL                              0x44F
 #define FLAG_ITEM_ROUTE_123_ULTRA_BALL                              0x450
-#define FLAG_ITEM_ROUTE126_ZYGARDITE                             0x451
+#define FLAG_ITEM_ROUTE126_COMET_SHARD                             0x451
 #define FLAG_ITEM_ROUTE119_BEEDRILLITE                          0x452
 #define FLAG_ITEM_ROUTE120_PINSIRITE                            0x453
 #define FLAG_ITEM_ROUTE_120_ZERAORITE                               0x454
@@ -1996,7 +1996,7 @@
 #define FLAG_ITEM_ROUTE110_TRICK_HOUSE_PUZZLE3_HOUNDOOMINITE                     0x428 // shares 0x428 with FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_WOOD_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE110_TRICK_HOUSE_PUZZLE4_SCOVILLAINITE                    0x429 // shares 0x429 with FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_MECH_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_6_MEWTWONITE_X                    0x42B // shares 0x42B with FLAG_ITEM_TRICK_HOUSE_PUZZLE_6_GLITTER_MAIL (dead: its map.json was overwritten)
-#define FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_BOTTLE_CAP                      0x42C // shares 0x42C with FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL (dead: its map.json was overwritten)
+#define FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_DARKRANITE                      0x42C // shares 0x42C with FLAG_ITEM_TRICK_HOUSE_PUZZLE_7_TROPIC_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_DESTINY_KNOT                    0x42D // shares 0x42D with FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_BEAD_MAIL (dead: its map.json was overwritten)
 #define FLAG_ITEM_JAGGED_PASS_ADRENALINE_ORB                         0x42E // shares 0x42E with FLAG_ITEM_JAGGED_PASS_ABSOLITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_MT_PYRE_EXTERIOR_GENGARITE                           0x431 // shares 0x431 with FLAG_ITEM_MT_PYRE_EXTERIOR_MAX_POTION (dead: its map.json was overwritten)
@@ -2091,7 +2091,7 @@
 #define FLAG_ITEM_DEWFORD_MANOR_1_F_AIR_BALLOON                              0x20B // relocated 0x49C -> 0x20B; 0x49C is live as FLAG_SHOWN_DEOXYS_TO_COSMO. Target bit's only other name is dead FLAG_HIDDEN_ITEM_UNDERWATER_127_MOON_BALL
 #define FLAG_ITEM_VERDANTURF_MEADOW_LUM_BERRY                                          0x20D // relocated 0x4E1 -> 0x20D; 0x4E1 is live as FLAG_EC_CAUGHT_JIRACHI. Target bit's only other name is dead FLAG_HIDDEN_ITEM_UNDERWATER_128_DRAGON_SCALE
 #define FLAG_HIDE_ASHEN_WOODS_CHANSEY                                  0x20F // relocated 0x4E5 -> 0x20F; 0x4E5 is live as FLAG_EC_CAUGHT_CELEBI. Target bit's only other name is dead FLAG_HIDDEN_ITEM_LILYCOVE_CITY_LOVE_BALL
-#define FLAG_ALTERING_CAVE_COMET_SHARD                                 0x210 // relocated 0x4E9 -> 0x210; 0x4E9 is live as FLAG_EC_CAUGHT_RESHIRAM. Target bit's only other name is dead FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_UPGRADE
+#define FLAG_ALTERING_CAVE_ZYGARDITE                                 0x210 // relocated 0x4E9 -> 0x210; 0x4E9 is live as FLAG_EC_CAUGHT_RESHIRAM. Target bit's only other name is dead FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_UPGRADE
 #define FLAG_ALTERING_CAVE_MASTER_BALL_2                               0x212 // relocated 0x4EA -> 0x212; 0x4EA is live as FLAG_HIDE_ROUTE133_VIAL_NURSE. Target bit's only other name is dead FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL
 #define FLAG_DEFEATED_LEAF                                             0x217 // relocated 0x4EB -> 0x217; 0x4EB is live as FLAG_RECEIVED_GAME_CORNER_GENESECT. Target bit's only other name is dead FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_ULTRA_BALL
 #define FLAG_ENABLE_MOM_MATCH_CALL           0xD8

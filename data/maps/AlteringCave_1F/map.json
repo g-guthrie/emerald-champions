@@ -145,17 +145,17 @@
       "flag": "FLAG_TEMP_A"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 33,
       "y": 12,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Altering_Cave_EventScript_CometShard",
-      "flag": "FLAG_ALTERING_CAVE_COMET_SHARD"
+      "flag": "FLAG_ALTERING_CAVE_ZYGARDITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
