@@ -43,6 +43,7 @@ struct EmeraldChampionsBattleTactic
 u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler);
 bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler);
 u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler);
+bool32 EmeraldChampions_UsesVintageRules(enum BattlerId battler);
 #if EC_HEADLESS_FIXTURES
 // The compiled plan, Mega permissions and tactics of one trainer, for the
 // headless benchmark's per-battle copy (emerald_champions_agent_battle.c).

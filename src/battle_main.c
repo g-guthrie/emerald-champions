@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_battle_plan.h"
 #include "move.h"
 #include "emerald_champions_agent_battle.h"
 #include "emerald_champions_opening.h"
@@ -4725,7 +4726,7 @@ static s32 GetMovePriorityInternal(enum BattlerId battler, enum Ability ability,
         priority = -8;
     }
     else if (ability == ABILITY_GALE_WINGS
-          && (GetConfig(B_GALE_WINGS) < GEN_7 || IsBattlerAtMaxHp(battler))
+          && (GetConfig(B_GALE_WINGS) < GEN_7 || IsBattlerAtMaxHp(battler) || EmeraldChampions_UsesVintageRules(battler))
           && GetMoveType(move) == TYPE_FLYING)
     {
         priority++;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_battle_plan.h"
 #include "battle.h"
 #include "battle_arena.h"
 #include "battle_environment.h"
@@ -1200,7 +1201,8 @@ static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
     case EFFECT_DARK_VOID:
         if (gBattleStruct->bouncedMoveIsUsed)
             break;
-        if (B_DARK_VOID_FAIL >= GEN_7 && gBattleMons[cv->battlerAtk].species != SPECIES_DARKRAI)
+        if (B_DARK_VOID_FAIL >= GEN_7 && gBattleMons[cv->battlerAtk].species != SPECIES_DARKRAI
+         && !EmeraldChampions_UsesVintageRules(cv->battlerAtk))
             battleScript = BattleScript_PokemonCantUseTheMove;
         break;
     case EFFECT_AURA_WHEEL:

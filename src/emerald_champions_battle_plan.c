@@ -116,6 +116,14 @@ bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
 // licensed to use them all, which is how the Elite Four and the Champion get
 // to break it. The count comes from the authored mega_slots line rather than a
 // list here, so licensing a trainer is a data change.
+// Buffel's finale fields the 2016 tournament Big Six under the rules it won with:
+// Gen 6 Parental Bond, Gale Wings, -ate boosts, Moody and an 80% Dark Void any
+// user can cast. Only his own battlers; the player keeps current rules.
+bool32 EmeraldChampions_UsesVintageRules(enum BattlerId battler)
+{
+    return GetCampaignTrainer(battler) == TRAINER_BUFFEL;
+}
+
 u32 EmeraldChampions_GetMegaEvolutionLimit(enum BattlerId battler)
 {
     u32 trainer = GetCampaignTrainer(battler);

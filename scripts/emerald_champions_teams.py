@@ -427,6 +427,10 @@ def check_move_legality(branches: list[Branch]) -> tuple[list[str], list[str]]:
                     f"(extend SHOWDOWN_FORM_SUFFIXES/SHOWDOWN_ID_OVERRIDES in scripts/ec_moves.py)"
                 )
                 continue
+            if mon.species == "SMEARGLE":
+                # Sketch copies any move it sees, as in the games; the ROM table lists only Sketch.
+                notes.append(f"# note: {tag} SMEARGLE {', '.join(mon.moves)} allowed via Sketch")
+                continue
             legal, rom_only = ec_moves.legal_moves_with_rom_union(species)
             for move in mon.moves:
                 token = f"MOVE_{move}"

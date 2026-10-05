@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_battle_plan.h"
 #include "emerald_champions_agent_battle.h"
 #include "emerald_champions_opening.h"
 #include "main.h"
@@ -3304,7 +3305,8 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_DARK_VOID:
-        if (B_DARK_VOID_FAIL >= GEN_7 && gBattleMons[battlerAtk].species != SPECIES_DARKRAI)
+        if (B_DARK_VOID_FAIL >= GEN_7 && gBattleMons[battlerAtk].species != SPECIES_DARKRAI
+         && !EmeraldChampions_UsesVintageRules(battlerAtk))
             ADJUST_SCORE(-10);
         break;
     case EFFECT_HYPERSPACE_FURY:

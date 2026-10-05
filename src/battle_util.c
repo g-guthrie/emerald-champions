@@ -3584,7 +3584,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 {
                     enum Stat stat = STAT_ATK;
                     u32 validToRaise = 0, validToLower = 0;
-                    u32 statsNum = GetConfig(B_MOODY_ACC_EVASION) >= GEN_8 ? NUM_STATS : NUM_BATTLE_STATS;
+                    u32 statsNum = GetConfig(B_MOODY_ACC_EVASION) >= GEN_8 && !EmeraldChampions_UsesVintageRules(battler) ? NUM_STATS : NUM_BATTLE_STATS;
 
                     for (stat = STAT_ATK; stat < statsNum; stat++)
                     {
@@ -6551,26 +6551,26 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         break;
     case ABILITY_PIXILATE:
         if (moveType == TYPE_FAIRY && gBattleStruct->battlerState[battlerAtk].ateBoost)
-            modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
+            modifier = uq4_12_multiply(modifier, (GetConfig(B_ATE_MULTIPLIER) >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk) ? UQ_4_12(1.2) : UQ_4_12(1.3)));
         break;
     case ABILITY_GALVANIZE:
         if (moveType == TYPE_ELECTRIC && gBattleStruct->battlerState[battlerAtk].ateBoost)
-            modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
+            modifier = uq4_12_multiply(modifier, (GetConfig(B_ATE_MULTIPLIER) >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk) ? UQ_4_12(1.2) : UQ_4_12(1.3)));
         break;
     case ABILITY_REFRIGERATE:
         if (moveType == TYPE_ICE && gBattleStruct->battlerState[battlerAtk].ateBoost)
-            modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
+            modifier = uq4_12_multiply(modifier, (GetConfig(B_ATE_MULTIPLIER) >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk) ? UQ_4_12(1.2) : UQ_4_12(1.3)));
         break;
     case ABILITY_AERILATE:
         if (moveType == TYPE_FLYING && gBattleStruct->battlerState[battlerAtk].ateBoost)
-            modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
+            modifier = uq4_12_multiply(modifier, (GetConfig(B_ATE_MULTIPLIER) >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk) ? UQ_4_12(1.2) : UQ_4_12(1.3)));
         break;
     case ABILITY_DRAGONIZE:
         if (moveType == TYPE_DRAGON && gBattleStruct->battlerState[battlerAtk].ateBoost)
-            modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
+            modifier = uq4_12_multiply(modifier, (GetConfig(B_ATE_MULTIPLIER) >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk) ? UQ_4_12(1.2) : UQ_4_12(1.3)));
         break;
     case ABILITY_NORMALIZE:
-        if (moveType == TYPE_NORMAL && gBattleStruct->battlerState[battlerAtk].ateBoost && GetConfig(B_ATE_MULTIPLIER) >= GEN_7)
+        if (moveType == TYPE_NORMAL && gBattleStruct->battlerState[battlerAtk].ateBoost && GetConfig(B_ATE_MULTIPLIER) >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     case ABILITY_PUNK_ROCK:
@@ -7267,7 +7267,7 @@ static inline uq4_12_t GetParentalBondModifier(enum BattlerId battlerAtk)
 {
     if (gSpecialStatuses[battlerAtk].parentalBondState != PARENTAL_BOND_2ND_HIT)
         return UQ_4_12(1.0);
-    return B_PARENTAL_BOND_DMG >= GEN_7 ? UQ_4_12(0.25) : UQ_4_12(0.5);
+    return B_PARENTAL_BOND_DMG >= GEN_7 && !EmeraldChampions_UsesVintageRules(battlerAtk) ? UQ_4_12(0.25) : UQ_4_12(0.5);
 }
 
 static inline uq4_12_t GetSameTypeAttackBonusModifier(struct DamageContext *ctx)
@@ -10602,6 +10602,8 @@ u32 GetTotalAccuracy(struct BattleCalcValues *cv, u32 weather)
         buff = MAX_STAT_STAGE;
 
     u32 moveAcc = GetMoveAccuracy(cv->move);
+    if (GetMoveEffect(cv->move) == EFFECT_DARK_VOID && EmeraldChampions_UsesVintageRules(battlerAtk))
+        moveAcc = 80;
     u32 attackerWeather = GetAttackerWeather(cv->holdEffects[battlerAtk], cv->abilities[battlerAtk], weather);
 
     // Check Thunder and Hurricane on sunny weather.
