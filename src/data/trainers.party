@@ -11274,8 +11274,8 @@ Prize Multiplier: 5
 Easy Level Reduction: 1
 
 SPECIES_POOCHYENA @ ITEM_FOCUS_SASH
-Level: 20
-Level Offset: 6
+Level: 14
+Level Offset: 0
 Ability: ABILITY_RATTLED
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -11287,8 +11287,8 @@ Nature: NATURE_JOLLY
 - MOVE_HELPING_HAND
 
 SPECIES_ZIGZAGOON @ ITEM_FIGY_BERRY
-Level: 20
-Level Offset: 6
+Level: 14
+Level Offset: 0
 Ability: ABILITY_GLUTTONY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -11300,8 +11300,8 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_HOOTHOOT @ ITEM_EVIOLITE
-Level: 20
-Level Offset: 6
+Level: 14
+Level Offset: 0
 Ability: ABILITY_TINTED_LENS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
@@ -11313,8 +11313,8 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_STARLY @ ITEM_LIFE_ORB
-Level: 20
-Level Offset: 6
+Level: 14
+Level Offset: 0
 Ability: ABILITY_RECKLESS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255
