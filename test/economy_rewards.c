@@ -20,7 +20,7 @@ extern const u8 EventScript_PickUpDuplicateFiniteItem[];
 extern const u8 Common_EventScript_ObtainFiniteItem[];
 extern const u8 SeafloorCavern_Room9_EventScript_ItemTM26[];
 extern const u8 Seaspray_Cave_ItemStoneEdge[];
-extern const u8 ScorchedSlab_EventScript_ItemTyranitarite[];
+extern const u8 VictoryRoad_B2F_EventScript_ItemFullHeal[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward[];
@@ -67,7 +67,7 @@ TEST("Economy rewards: live garden-stone pickups enter the shared finite payout 
     static const struct { u16 map, item; const u8 *script; } rewards[] = {
         {MAP_SEAFLOOR_CAVERN_ROOM9, ITEM_DRAGONINITE, SeafloorCavern_Room9_EventScript_ItemTM26},
         {MAP_SEASPRAY_CAVE, ITEM_BAXCALIBRITE, Seaspray_Cave_ItemStoneEdge},
-        {MAP_SCORCHED_SLAB_B2F, ITEM_TYRANITARITE, ScorchedSlab_EventScript_ItemTyranitarite},
+        {MAP_VICTORY_ROAD_B2F, ITEM_TYRANITARITE, VictoryRoad_B2F_EventScript_ItemFullHeal},
     };
     struct MapHeader saved = gMapHeader;
     u32 savedMoney = GetMoney(&gSaveBlock1Ptr->money);

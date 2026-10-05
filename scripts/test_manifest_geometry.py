@@ -85,6 +85,44 @@ class ObjectCollision(unittest.TestCase):
         state['defeated'].add('TRAINER_PARKER');close()
         self.assertTrue(set(self.geo.near('PetalburgCity_Gym',4,16))&state['reached'])
 
+    def test_route132_current_reaches_ronalds_sight_before_his_victory(self):
+        tile=('Route132',50,28)
+        upstream={n for n in self.geo.current_landings[tile] if self.geo.nodes[n][1]=='W'}
+        self.assertTrue(upstream)
+        state=self.state({'CAN_SURF'})
+        state['reached']=set(upstream)
+        node=dict(site_id='Ronald',label='Route132_EventScript_Ronald',trainers=['TRAINER_RONALD'],
+                  locations=[dict(map='Route132',entry='Route132_EventScript_Ronald',x=49,y=28,trigger='object')])
+        self.assertTrue(self.geo.battle_approach(node,state,constants=self.names)&upstream)
+        targets=set(self.geo.tile_nodes[tile])
+        self.assertFalse(any(b in targets and mr.holds(req,state['flags']) for n in upstream for b,req,_ in self.geo.edges[n]))
+        state['defeated'].add('TRAINER_RONALD')
+        flags=state['flags']|self.geo.flags_for_state(state,self.names)
+        self.assertTrue(any(b in targets and mr.holds(req,flags) for n in upstream for b,req,_ in self.geo.edges[n]))
+
+    def test_gated_shores_retain_surf_mount_and_dismount(self):
+        shores=[(a,b,req) for a,edges in self.geo.edges.items() for b,req,via in edges
+                if via.startswith('tile gate Route132:') and self.geo.nodes[a][1]!=self.geo.nodes[b][1]]
+        self.assertTrue(shores,"Route132's gated coast must keep its native Surf transitions")
+        for _,_,req in shores:
+            self.assertTrue(all('CAN_SURF' in alt for alt in req))
+
+    def test_safari_payment_warp_reaches_the_native_arrival_floor(self):
+        transitions=[t for t in self.geo.puzzle_transitions if t['origin'][0]=='Route121_SafariZoneEntrance' and t['action']=='warp']
+        self.assertTrue(transitions)
+        edges=[e for nodes in self.geo.by_map['Route121_SafariZoneEntrance'] for e in self.geo.edges[nodes]
+               if e[2].startswith('script warp') and self.geo.nodes[e[0]][0]=='SafariZone_South']
+        self.assertTrue(edges, "Safari's scripted entry must survive the collision-marked door tile")
+        state=self.state()
+        state.update(items={'ITEM_POKEBLOCK_CASE'},money=500,preparation_possible=True,species={'SPECIES_TREECKO'},
+                     reached=set(self.geo.tile_nodes.get(('Route121_SafariZoneEntrance',8,4),[])))
+        self.assertIn('SafariZone_South',self.walk('Route121_SafariZoneEntrance',8,4,state,{'Route121_SafariZoneEntrance','SafariZone_South'}))
+        state['money']=499
+        self.assertNotIn('SafariZone_South',self.walk('Route121_SafariZoneEntrance',8,4,state,{'Route121_SafariZoneEntrance','SafariZone_South'}))
+        for transition in transitions:
+            self.assertTrue(any('CHECKITEM:ITEM_POKEBLOCK_CASE' in c[0] for c in transition['conditions']))
+            self.assertTrue(any('CHECKMONEY:500' in c[0] for c in transition['conditions']))
+
     def test_sootopolis_ice_has_complete_no_repeat_route_certificates(self):
         proofs=[p for p in self.geo.puzzle_transitions if p['action']=='ice']
         self.assertEqual([p['ice_tiles'] for p in proofs],[7,19,38])

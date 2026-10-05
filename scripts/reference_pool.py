@@ -131,7 +131,7 @@ def player_rules() -> dict:
         "items": {"rule": "No Item Clause for the player; any number of duplicates of a Battle Vendor catalogue item once it "
                           "has reached the Bag/PC or joined on a Pokemon (then sold without limit).",
                   "cite": [cite(ROOT / "src/emerald_champions_story.c", "no Item Clause"), cite(fs, "IsEmeraldChampionsBattleItemUnlocked")]},
-        "gimmicks": {"rule": "Mega Evolution only (Mega Ring in the Bag). Z-Moves/Dynamax/Ultra Burst blocked; Terastallization does not exist.",
+        "gimmicks": {"rule": "Mega Evolution only (Mega Ring in the Bag), using the one restricted slot: a restricted member can Mega Evolve itself; otherwise choose one Mega or one restricted member. Z-Moves/Dynamax/Ultra Burst blocked; Terastallization does not exist.",
                      "cite": [cite(ROOT / "include/constants/emerald_champions.h", "EMERALD_CHAMPIONS_MEGA_ONLY"),
                               cite(ROOT / "src/battle_util.c", "ITEM_MEGA_RING")]},
     }
@@ -1044,6 +1044,18 @@ class Builder:
                                                         f"berry tree {tree}", cite(SCRIPTS_DIR / "new_game.inc", tree)))
         for item, where, req, note, c in BERRY_GIFTS:
             self.item_sources.append(Source("gift", item, where, req, note, c))
+        # Harvest rewards are native transactions, not giveitem macros. The
+        # pouch accepts only berries the player harvested, after badge seven.
+        harvest = (ROOT / "src/mega_stone_rewards.c").read_text().split("sBerryStoneTrades[]", 1)[1].split("STATIC_ASSERT", 1)[0]
+        entries = list(re.finditer(r"\{(ITEM_\w+),\s*(FLAG_EC_BERRY_TRADE_\w+|0),", harvest))
+        for index, entry in enumerate(entries):
+            if entry[1] == "ITEM_NONE":
+                continue
+            body = harvest[entry.end():entries[index + 1].start() if index + 1 < len(entries) else len(harvest)]
+            berries = tuple("ITEM_" + b + "_BERRY" for b in re.findall(r"\{BERRY_ID_(\w+),", body))
+            self.item_sources.append(Source("harvest_trade", entry[1], "Route123_BerryMastersHouse",
+                ["FLAG_BADGE07_GET"], "one-time harvested berry trade after badge seven",
+                cite(ROOT / "src/mega_stone_rewards.c", "TradeEmeraldChampionsGardenBerries"), needs_items=berries))
         for item, where, req, note, c in EXTRA_ITEM_SOURCES:
             self.item_sources.append(Source("gift", item, where, req, note, c))
 

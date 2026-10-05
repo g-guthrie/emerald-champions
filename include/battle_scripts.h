@@ -51,6 +51,7 @@ extern const u8 BattleScript_WeatherFaded[];
 extern const u8 BattleScript_DamagingWeather[];
 extern const u8 BattleScript_FogEnded[];
 extern const u8 BattleScript_IceBodyHeal[];
+extern const u8 BattleScript_RestrictedMegaUnavailable[];
 extern const u8 BattleScript_OverworldStatusStarts[];
 extern const u8 BattleScript_OverworldWeatherStarts[];
 extern const u8 BattleScript_OverworldSSWeatherStarts[];

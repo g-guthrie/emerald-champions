@@ -3101,6 +3101,11 @@ BattleScript_IceBodyHeal::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_RestrictedMegaUnavailable::
+	printstring STRINGID_RESTRICTEDMEGAUNAVAILABLE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_OverworldStatusStarts::
 	printfromtable gStartingStatusStringIds
 	waitmessage B_WAIT_TIME_LONG

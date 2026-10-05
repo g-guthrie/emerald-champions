@@ -78,7 +78,7 @@ Route111_EventScript_ItemStarPiece:: @ 8290DA8
 	end
 
 Route111_EventScript_ItemTM63RockSlide:: @ 8290DB5
-	finditem ITEM_GARCHOMPITE_Z
+	finditem ITEM_BIG_NUGGET
 	end
 
 Route111_EventScript_ItemElixir:: @ 8290DC2
@@ -488,7 +488,7 @@ SafariZone_Southwest_EventScript_ItemMaxRevive:: @ 82912D6
 	end
 
 SafariZone_Northeast_EventScript_ItemKangaskhanite:: @ 82912E3
-	finditem ITEM_KANGASKHANITE
+	finditem ITEM_BIG_PEARL
 	end
 
 SafariZone_Southeast_EventScript_ItemTM53EnergyBall:: @ 82912F0
@@ -553,7 +553,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy:: @ 82913CD
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemTM70AuroraVeil::
-	finditem ITEM_BIG_PEARL
+	finditem ITEM_KANGASKHANITE
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemTM07:: @ 82913E7
@@ -613,7 +613,7 @@ VictoryRoad_1F_EventScript_ItemMetagrossite:: @ 8291490
 	end
 
 VictoryRoad_B1F_EventScript_ItemTM29:: @ 829149D
-	finditem ITEM_BIG_NUGGET
+	finditem ITEM_GARCHOMPITE_Z
 	end
 
 VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
@@ -621,7 +621,7 @@ VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
 	end
 
 VictoryRoad_B2F_EventScript_ItemFullHeal:: @ 82914B7
-	finditem ITEM_DUSK_BALL, 5
+	finditem ITEM_TYRANITARITE
 	end
 
 ArtisanCave_B1F_EventScript_ItemHPUp:: @ 82914C4
@@ -826,7 +826,7 @@ Route131_EventScript_SplashPlate::
 	end
 
 ScorchedSlab_EventScript_ItemTyranitarite::
-	finditem ITEM_TYRANITARITE
+	finditem ITEM_DUSK_BALL, 5
 	end
 
 GraniteCave_B1F_EventScript_ItemTM65ShadowClaw::

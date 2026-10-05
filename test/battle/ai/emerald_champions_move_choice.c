@@ -294,7 +294,7 @@ AI_DOUBLE_BATTLE_TEST("EC move choice: Shelly's Rotom does not follow a partner'
         ChoicePlayer(SPECIES_IRON_HANDS, 55, &sShellyFoes[1], FULL, 0);
         ChoicePlayer(SPECIES_KARTANA, 55, &sShellyFoes[2], 66, 0);
         ChoiceMilestones(sFiveBadges, ARRAY_COUNT(sFiveBadges));
-        sChoiceMembers[0] = (struct ChoiceMember){SPECIES_NINETALES_ALOLA, 0, ITEMS_COUNT, 0};
+        sChoiceMembers[0] = (struct ChoiceMember){SPECIES_ABOMASNOW, 0, ITEMS_COUNT, 0};
         sChoiceMembers[1] = (struct ChoiceMember){SPECIES_EMPOLEON, 0, ITEMS_COUNT, 0};
         sChoiceMembers[2] = (struct ChoiceMember){SPECIES_CLEFABLE, 0, ITEMS_COUNT, 0};
         sChoiceMembers[3] = (struct ChoiceMember){SPECIES_CASTFORM, 0, ITEMS_COUNT, 0};

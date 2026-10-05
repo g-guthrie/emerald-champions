@@ -349,3 +349,56 @@ SINGLE_BATTLE_TEST("Shed Tail transfers Substitute without transferring stat boo
         EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
     }
 }
+
+SINGLE_BATTLE_TEST("Restricted Mega slot: a benched Entei prevents player Gardevoir from Mega Evolving")
+{
+    GIVEN {
+        PLAYER(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); }
+        PLAYER(SPECIES_ENTEI);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT(!CanMegaEvolve(B_BATTLER_0));
+        EXPECT_EQ(player->species, SPECIES_GARDEVOIR);
+    }
+}
+
+SINGLE_BATTLE_TEST("Restricted Mega slot: a lone restricted Rayquaza can Mega Evolve itself")
+{
+    GIVEN {
+        PLAYER(SPECIES_RAYQUAZA) { Moves(MOVE_DRAGON_ASCENT, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_RAYQUAZA_MEGA);
+    }
+}
+
+SINGLE_BATTLE_TEST("Restricted Mega slot: opponent Gardevoir keeps its Mega alongside a restricted teammate")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); }
+        OPPONENT(SPECIES_ENTEI);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
+    } THEN {
+        EXPECT_EQ(opponent->species, SPECIES_GARDEVOIR_MEGA);
+    }
+}
+
+MULTI_BATTLE_TEST("Restricted Mega slot: the AI partner ignores the human player's restricted party")
+{
+    GIVEN {
+        PLAYER(SPECIES_ENTEI);
+        PARTNER(SPECIES_GARDEVOIR) { Item(ITEM_GARDEVOIRITE); }
+        OPPONENT_A(SPECIES_WOBBUFFET);
+        OPPONENT_B(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerRight, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); }
+    } THEN {
+        EXPECT_EQ(playerRight->species, SPECIES_GARDEVOIR_MEGA);
+    }
+}

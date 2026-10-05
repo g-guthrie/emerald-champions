@@ -336,7 +336,7 @@ STORY_EVENTS: list[tuple] = [
     ("FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT", "MagmaHideout_4F", (16, 22), None, "MagmaHideout_4F/scripts.inc:88 (Maxie)"),
     ("FLAG_MET_TEAM_AQUA_HARBOR", "SlateportCity_Harbor", None, "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT",
      "SlateportCity_Harbor/scripts.inc:71-85 (VAR_SLATEPORT_HARBOR_STATE 1 from MagmaHideout_4F:89)"),
-    ("FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE", "AquaHideout_B2F", None, None, "AquaHideout_B2F/scripts.inc:52-53 (Matt)"),
+    ("FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE", "AquaHideout_B2F", None, "FLAG_MET_TEAM_AQUA_HARBOR", "AquaHideout_B2F/scripts.inc:52-53 (Matt); entrance blockers require the harbor event"),
     ("FLAG_BADGE07_GET", "MossdeepCity_Gym", None, None, "MossdeepCity_Gym/scripts.inc:65"),
     ("FLAG_DEFEATED_MAGMA_SPACE_CENTER", "MossdeepCity_SpaceCenter_2F", None, "FLAG_BADGE07_GET",
      "MossdeepCity_SpaceCenter_2F/scripts.inc:311 (Magma appear on MossdeepCity_Gym:73-76)"),
@@ -501,6 +501,12 @@ STORY_WARP_GATES: dict[tuple[str, str], tuple] = {
 
 # Whole-map entry requirements. (map prefix match) -> (requirement, citation).
 STORY_MAP_GATES: dict[str, tuple] = {
+    # The ocean beyond Lilycove opens when Matt's submarine leaves. Keep
+    # coarse cap windows from routing around the blocking Aqua objects.
+    **{map_: ("FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE",
+        "LilycoveCity/map.json Aqua blockers; AquaHideout_B2F/scripts.inc:52-53")
+       for map_ in ("MossdeepCity", "ShoalCave", "PacifidlogTown",
+                    *(f"Route{n}" for n in range(124, 134)))},
     # Trick House puzzles (Route110_TrickHouseEntrance/scripts.inc:55-100).
     "Route110_TrickHousePuzzle2": ("FLAG_BADGE03_GET", "Route110_TrickHouseEntrance/scripts.inc:76"),
     "Route110_TrickHousePuzzle3": ("FLAG_BADGE04_GET", "Route110_TrickHouseEntrance/scripts.inc:80"),
@@ -1169,7 +1175,11 @@ class Story:
                     continue
                 if map_ is not None and not any(n in reached for n in self.locate((map_, *xy) if xy else map_)):
                     continue
-                if flag in MILESTONE_FLAGS and cap_of_flags(flags | {flag}, self.milestones) > cap:
+                # Windows model the declared campaign stage. An optional
+                # pre-Winona Maxie win must not leak the cap-65 story gate
+                # into the cap-55 pool just because the runtime postpones
+                # its level increase until Winona's badge.
+                if any(f == flag and declared_cap > cap for _, f, declared_cap in self.milestones):
                     continue
                 new.append(flag)
             if not new:

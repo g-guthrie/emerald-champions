@@ -8,6 +8,31 @@ def special(name):return 'SPECIAL:'+name+'()'
 
 
 class NativePredicates(unittest.TestCase):
+    def test_altaria_gift_uses_obtainable_selected_species(self):
+        constants={'SPECIES_ALTARIA':334,'SPECIES_SWABLU':333}
+        state={'preparation_possible':True,'species':{'SPECIES_SWABLU'}}
+        self.assertEqual(evaluate(special('ScriptGetPartyMonSpecies'),state,constants),{333})
+        state['species'].add('SPECIES_ALTARIA')
+        self.assertEqual(evaluate(special('ScriptGetPartyMonSpecies'),state,constants),{333,334})
+
+    def test_diancite_requires_diancie_at_max_friendship(self):
+        state={'preparation_possible':True,'species':set()}
+        self.assertEqual(evaluate(special('GetDiancieFriendshipScore'),state),{0})
+        state['species'].add('SPECIES_DIANCIE')
+        self.assertEqual(evaluate(special('GetDiancieFriendshipScore'),state),{1})
+        state={'party':[{'species':'SPECIES_DIANCIE','friendship':254}]}
+        self.assertEqual(evaluate(special('GetDiancieFriendshipScore'),state),{0})
+        state['party'][0]['friendship']=255
+        self.assertEqual(evaluate(special('GetDiancieFriendshipScore'),state),{1})
+
+    def test_harvest_pseudo_stones_wait_for_seventh_badge(self):
+        for choice in range(3):
+            state={'flags':set(),'items':set(),'harvested_berries':dict(RAZZ=30,BLUK=30,NANAB=30,WEPEAR=30,CHERI=30,CHESTO=30,ORAN=30,PECHA=30,POMEG=30,KELPSY=30,QUALOT=30,HONDEW=30,GREPA=30,TAMATO=30),'bag_has_space':True}
+            for fn in ('BufferEmeraldChampionsHarvestRecipe','TradeEmeraldChampionsGardenBerries'):
+                self.assertEqual(evaluate('SPECIAL:'+fn+'(VAR_0x8004='+str(choice)+')',state),{5})
+            state['flags'].add('FLAG_BADGE07_GET')
+            self.assertEqual(evaluate('SPECIAL:TradeEmeraldChampionsGardenBerries(VAR_0x8004='+str(choice)+')',state),{0})
+
     def test_caught_form_lookup_never_caches_mutable_pool_or_confuses_available(self):
         state={'caught':set(),'species':{'SPECIES_ROTOM_WASH'}}
         self.assertFalse(_caught(state,'SPECIES_ROTOM'))

@@ -3593,6 +3593,41 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->speedTieBreaks = RandomUniform(RNG_SPEED_TIE, 0, Factorial(MAX_BATTLERS_COUNT) - 1);
         gBattleTurnCounter = 0;
         gBattleStruct->eventState.beforeFirstTurn++;
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+         && CheckBagHasItem(ITEM_MEGA_RING, 1)
+         && !FlagGet(FLAG_EC_EXPLAINED_RESTRICTED_MEGA))
+        {
+            // Include healthy reserves: the missing option may first be
+            // noticed after switching, so explain it before commands begin.
+            for (u32 candidate = 0; candidate < PARTY_SIZE; candidate++)
+            {
+                struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][candidate];
+                enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+                if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG) || !GetMonData(mon, MON_DATA_HP))
+                    continue;
+                struct FormChangeContext ctx = {
+                    .method = FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,
+                    .currentSpecies = species,
+                    .heldItem = GetMonData(mon, MON_DATA_HELD_ITEM),
+                    .ability = GetMonAbility(mon),
+                };
+                bool32 mega = GetFormChangeTargetSpecies_Internal(ctx) != species;
+                ctx.method = FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE;
+                for (u32 move = 0; move < MAX_MON_MOVES; move++)
+                    ctx.moves[move] = GetMonData(mon, MON_DATA_MOVE1 + move);
+                mega |= GetFormChangeTargetSpecies_Internal(ctx) != species;
+                if (!mega)
+                    continue;
+                for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+                    if (slot != candidate
+                     && GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_NONE)
+                    {
+                        FlagSet(FLAG_EC_EXPLAINED_RESTRICTED_MEGA);
+                        BattleScriptExecute(BattleScript_RestrictedMegaUnavailable);
+                        return;
+                    }
+            }
+        }
         break;
     case FIRST_TURN_EVENTS_OVERWORLD_WEATHER:
         gBattleStruct->eventState.beforeFirstTurn++;

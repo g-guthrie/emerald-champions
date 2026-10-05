@@ -85,7 +85,7 @@ class Renderer:
     def __init__(self, manifest: dict):
         self.m = manifest
         self.sd = SpeciesData()
-        self.held = battle_items()
+        self.held = battle_items() | {"ITEM_MASTER_BALL"}
         self.names = trainer_names()
         self.nodes = {n['site_id']: n for n in manifest['battles']}
         self.branches = {b.trainer: b for b in teams.read_teams()}
@@ -181,7 +181,7 @@ class Renderer:
             seen_i |= new_i
             deriv = (rows.get('derivations') or {}).get('species', {}) or {}
             if pending is None:
-                pending = dict(after=[], species={}, items={}, battles=[], cap=raw['cap'])
+                pending = dict(after=[], species={}, items={}, pickups=[], battles=[], cap=raw['cap'])
             contributed = False
             known_before = set(known_species) | set(raw['new']['pokemon'])
             for sp in raw['new']['pokemon']:
@@ -198,6 +198,13 @@ class Renderer:
                 contributed = True
                 known_items.add(it)
                 pending['items'][it] = self.item_how(it, new_i)
+            # Finite Master Ball sources matter even after the lottery has
+            # made the item theoretically obtainable; retain each pickup.
+            for index in sorted(new_i):
+                row=self.irows[index]
+                if row.get('key')=='ITEM_MASTER_BALL' and row.get('kind')=='item_ball':
+                    pending['pickups'].append(place(row.get('where')))
+                    contributed=True
             pending['cap'] = raw['cap']
             for site in raw['battles']:
                 if site in known_battles or site not in self.nodes:
@@ -218,7 +225,7 @@ class Renderer:
             if pending['battles']:
                 steps.append(pending)
                 pending = None
-        if pending and (pending['species'] or pending['items']):
+        if pending and (pending['species'] or pending['items'] or pending['pickups']):
             steps.append(pending)
         # Number battles in step order, story order within a step.
         n = 0
@@ -281,7 +288,7 @@ class Renderer:
             'Starters: choose one region, then take up to two of its three starters. This reference follows',
             'Treecko + Mudkip; other starter choices swap those two lines. The rival keeps the third starter.',
             'Items are held battle items only (Mega Stones are listed on their own line). Key items, medicine,',
-            'Poke Balls, evolution stones and decorations are left out. Wild held items, stolen items and',
+            'Poke Balls other than the Master Ball, evolution stones and decorations are left out. Wild held items, stolen items and',
             'Pickup finds are excluded. Prices and one-off pickups still apply.',
             'Foe levels are for the battle\'s first possible point: Easy / Medium / Hard.',
         ):
@@ -318,7 +325,11 @@ class Renderer:
                         words = [self.species(sp) + (f' ({w})' if w else '') for sp, w in entries]
                     L.extend(wrap(label, words, 8))
             stones = sorted(it for it in step['items'] if self.is_mega_stone(it))
-            held = {it: how for it, how in step['items'].items() if it not in stones}
+            held = {it: how for it, how in step['items'].items() if it not in stones and it != 'ITEM_MASTER_BALL'}
+            if 'ITEM_MASTER_BALL' in step['items']:
+                L.append('  Master Ball: ' + step['items']['ITEM_MASTER_BALL'])
+            for where in step['pickups']:
+                L.append('  Master Ball pickup: ' + where)
             if held:
                 L.extend(wrap(f'  New held items ({len(held)}): ',
                               [pretty(it) + (f' ({how})' if how else '') for it, how in sorted(held.items())], 6))

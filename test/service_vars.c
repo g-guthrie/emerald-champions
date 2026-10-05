@@ -12,6 +12,7 @@
 #include "move_relearner.h"
 #include "constants/field_specials.h"
 #include "constants/items.h"
+#include "constants/emerald_champions.h"
 #include "constants/service_vars.h"
 
 // include/constants/service_vars.h: services pass arguments in VAR_0x8004-0x8007
@@ -107,8 +108,15 @@ TEST("Service vars: harvest, berry, fossil, stock and stat services leave script
     EXPECT_EQ(gSpecialVar_Result, TRUE); // Claimed comes back in VAR_RESULT.
     FlagClear(FLAG_EC_BERRY_TRADE_BAXCALIBRITE);
     ClearBag();
+    bool8 badgeSaved = FlagGet(FLAG_BADGE07_GET);
+    FlagClear(FLAG_BADGE07_GET);
+    BufferEmeraldChampionsHarvestRecipe();
+    EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_LOCKED);
+    ExpectScriptOwnedSentinels();
+    FlagSet(FLAG_BADGE07_GET);
     BufferEmeraldChampionsHarvestRecipe();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
+    if (!badgeSaved) FlagClear(FLAG_BADGE07_GET);
     ExpectScriptOwnedSentinels();
 
     gSpecialVar_0x8004 = ITEM_ORAN_BERRY;

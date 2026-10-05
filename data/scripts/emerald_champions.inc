@@ -956,11 +956,16 @@ EmeraldChampions_EventScript_HarvestRequests:
 	copyvar VAR_HARVEST_REWARD, VAR_RESULT
 	copyvar VAR_0x8004, VAR_HARVEST_REWARD
 	special BufferEmeraldChampionsHarvestRecipe
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_LOCKED, EmeraldChampions_EventScript_HarvestRecipeLocked
 	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_HarvestRecipeClaimed
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	goto_if_eq VAR_HARVEST_AT_BERRY_MASTER, FALSE, EmeraldChampions_EventScript_HarvestRequests
 	goto_if_eq VAR_HARVEST_REWARD, 3, EmeraldChampions_EventScript_HarvestCelebiCheck
 	goto EmeraldChampions_EventScript_HarvestConfirm
+
+EmeraldChampions_EventScript_HarvestRecipeLocked:
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_HarvestRequests
 
 EmeraldChampions_EventScript_HarvestRecipeClaimed:
 	msgbox gStringVar4, MSGBOX_DEFAULT

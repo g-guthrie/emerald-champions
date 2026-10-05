@@ -95,6 +95,12 @@ void BufferEmeraldChampionsHarvestRecipe(void)
         ConvertIntToDecimalStringN(gStringVar2, part->count, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringAppend(gStringVar4, gStringVar2);
     }
+    if (choice < 3 && !FlagGet(FLAG_BADGE07_GET) && !RewardClaimed(choice))
+    {
+        gSpecialVar_Result = EC_MEGA_BERRY_TRADE_LOCKED;
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAvailable after your seventh\nGym Badge."));
+        return;
+    }
     gSpecialVar_Result = RewardClaimed(choice);
     StringAppend(gStringVar4, gSpecialVar_Result
         ? COMPOUND_STRING("\pYou've already claimed this reward.")
@@ -110,6 +116,11 @@ void TradeEmeraldChampionsGardenBerries(void)
     if (RewardClaimed(choice))
     {
         gSpecialVar_Result = EC_MEGA_BERRY_TRADE_ALREADY_DONE;
+        return;
+    }
+    if (choice < 3 && !FlagGet(FLAG_BADGE07_GET))
+    {
+        gSpecialVar_Result = EC_MEGA_BERRY_TRADE_LOCKED;
         return;
     }
     for (u32 i = 0; i < ARRAY_COUNT(sBerryStoneTrades[choice].recipe); i++)

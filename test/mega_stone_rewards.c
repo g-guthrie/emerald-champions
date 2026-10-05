@@ -12,6 +12,7 @@
 
 static void ResetHarvest(void)
 {
+    FlagSet(FLAG_BADGE07_GET);
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
     ZeroPlayerPartyMons();
@@ -443,4 +444,31 @@ TEST("Starter Mega Stones: every pair in every region yields each stone exactly 
         EXPECT(CanReceiveNormanMegaGift());
     }
     RestoreStarterVars();
+}
+
+TEST("Harvest economy: pseudo Mega requests wait for badge seven without consuming berries")
+{
+    u32 choice;
+    PARAMETRIZE { choice = 0; }
+    PARAMETRIZE { choice = 1; }
+    PARAMETRIZE { choice = 2; }
+    bool8 saved = FlagGet(FLAG_BADGE07_GET);
+    ResetHarvest();
+    FlagClear(FLAG_BADGE07_GET);
+    memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
+    gSpecialVar_0x8004 = choice;
+    BufferEmeraldChampionsHarvestRecipe();
+    EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_LOCKED);
+    TradeEmeraldChampionsGardenBerries();
+    EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_LOCKED);
+    for (u32 berry = 1; berry <= NUM_BERRIES; berry++)
+        EXPECT_EQ(GetHarvestedBerryCount(berry), 30);
+    EXPECT(!CheckBagHasItem(ITEM_BAXCALIBRITE, 1));
+    EXPECT(!CheckBagHasItem(ITEM_DRAGONINITE, 1));
+    EXPECT(!CheckBagHasItem(ITEM_TYRANITARITE, 1));
+    FlagSet(FLAG_BADGE07_GET);
+    TradeEmeraldChampionsGardenBerries();
+    EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_SUCCESS);
+    ResetHarvest();
+    if (!saved) FlagClear(FLAG_BADGE07_GET);
 }

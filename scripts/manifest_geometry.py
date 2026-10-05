@@ -161,6 +161,7 @@ class ManifestGeometry(mr.Geometry):
         for a,edges in self.edges.items():
             self.edges[a]=[e for e in edges if e[2]!='puzzle' and not e[2].startswith('gate@')]
         self._add_individual_gate_tiles()
+        self._add_current_gate_landings()
         self._add_script_geometry_edges()
 
     def _add_individual_gate_tiles(self):
@@ -177,12 +178,40 @@ class ManifestGeometry(mr.Geometry):
             for a in self.tile_nodes[d,x,y]:
                 for dx,dy in self.DIRS:
                     nx,ny=x+dx,y+dy
-                    if self.step_z(self.elevation(d,x,y),self.elevation(d,nx,ny)) is None: continue
                     combined=mr.req_and(req,self.tile_gates.get((d,nx,ny),((),)))
                     for b in self.tile_nodes.get((d,nx,ny),[]):
-                        if self.nodes[a][1]!=self.nodes[b][1]: continue
-                        self.edges[a].append((b,combined,f'tile gate {d}:{x},{y}'))
-                        self.edges[b].append((a,combined,f'tile gate {d}:{x},{y}'))
+                        edge_req=combined
+                        if self.nodes[a][1]!=self.nodes[b][1]:
+                            # Conditional shores retain the native elevation-3
+                            # Surf mount/dismount, after their own clearance.
+                            land=(x,y) if self.nodes[a][1]=='L' else (nx,ny)
+                            if self.elevation(d,*land)!=3: continue
+                            edge_req=mr.req_and(combined,(('CAN_SURF',),))
+                        elif self.step_z(self.elevation(d,x,y),self.elevation(d,nx,ny)) is None:
+                            continue
+                        self.edges[a].append((b,edge_req,f'tile gate {d}:{x},{y}'))
+                        self.edges[b].append((a,edge_req,f'tile gate {d}:{x},{y}'))
+
+    def _add_current_gate_landings(self):
+        # Current edges are built before conditional shore nodes exist. Restore
+        # those exact forced landings, retaining every destination gate.
+        self.current_landings=defaultdict(set)
+        gates={n:tile for tile in self.tile_gates for n in self.tile_nodes.get(tile,[])}
+        for d,(width,height,_,_) in self.grid.items():
+            for y in range(height):
+                for x in range(width):
+                    if self.kind(d,x,y)!='C': continue
+                    targets=[n for n in self._follow_current(d,x,y) if n in gates]
+                    if not targets: continue
+                    entries={n for dx,dy in self.DIRS for n in self.tile_nodes.get((d,x+dx,y+dy),[])
+                             if self.nodes[n][1]=='W' or self.elevation(d,x+dx,y+dy)==3}
+                    for target in targets:
+                        tile=gates[target]
+                        req=mr.req_and((('CAN_SURF',),),self.tile_gates[tile])
+                        for entry in entries:
+                            edge=(target,req,'current landing')
+                            if edge not in self.edges[entry]:self.edges[entry].append(edge)
+                        self.current_landings[tile].update(entries)
 
     def _prepare_script_geometry(self,parser,scripts):
         """Compile explicit script doors and removable wall tiles only.
@@ -272,6 +301,15 @@ class ManifestGeometry(mr.Geometry):
             # over an occupied approach or solid wall.
             if transition['kind']=='bg_events': source=self.near(d,x,y)
             target=self.tile_nodes.get((dest,tx,ty),[])
+            # The Safari warp lands on a collision-marked door. The native
+            # VAR_SAFARI_ZONE_STATE=2 arrival scene walks down onto the floor
+            # before returning control (SafariZone_South/scripts.inc:12-34).
+            # Follow that actual movement instead of inventing a passable door.
+            if (dest,tx,ty)==('SafariZone_South',32,33) and not target:
+                movement=self._script_index.labels.get('SafariZone_South_Movement_PlayerEnter',{})
+                commands=[line for _,line in movement.get('body',[]) if line!='step_end']
+                if commands==['walk_down']:
+                    target=self.near(dest,tx,ty+1)
             for a in source:
                 for b in target:
                     edge=(b,((transition['token'],),),'script warp '+transition['source'])
@@ -780,6 +818,7 @@ class ManifestGeometry(mr.Geometry):
             candidates=[t for t in triggers if t['map']==d and t['x']==x and t['y']==y]
             residuals=[self._sight_entry_requirement(t,ignored=own) if t['kind']=='trainer_sight' else tuple(tuple(t for t in alt if t not in own) for alt in self.tile_gates.get((d,x,y),((),))) for t in candidates]
             if not any(mr.holds(req,flags) for req in residuals): continue
+            out.update(self.current_landings.get((d,x,y),()))
             for dx,dy in self.DIRS:
                 nx,ny=x+dx,y+dy
                 if (d,nx,ny) in trigger_tiles: continue

@@ -559,6 +559,8 @@ class ProgressionParser:
                 env=dict(env); env['VAR_RESULT']='COMMAND:'+op+'@'+_cite(self.scripts,label,line)
             if op in ('multichoice','multichoicedefault','multichoicegrid','yesnobox','dynmultichoice','giveitem','additem','givemon','givepokemon','giveegg','callstd') or (op=='msgbox' and args and args[-1]=='MSGBOX_YESNO'):
                 env=dict(env); env['VAR_RESULT']='COMMAND:'+op+'@'+_cite(self.scripts,label,line)
+            if op=='getpartysize':
+                env=dict(env);env['VAR_RESULT']='SPECIAL:CountPartyNonEggMons()'
             if op=='checkcoins' and args:
                 env=dict(env);env[args[0]]='CHECKCOINS:'+args[0]
             if op in ('checkflag','checktrainerflag','checkplayergender','checkitem','checkitemspace','checkmoney'):

@@ -56,8 +56,23 @@ class TuningPoolCheckTests(unittest.TestCase):
 
     def test_legal_party_passes(self):
         self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE", level=45, friendship=255),
-                                    mon("SPECIES_ENTEI", "ITEM_LIFE_ORB"), mon("SPECIES_ROTOM_WASH", "ITEM_LEFTOVERS"),
+                                    mon("SPECIES_AGGRON", "ITEM_LIFE_ORB"), mon("SPECIES_ROTOM_WASH", "ITEM_LEFTOVERS"),
                                     mon("SPECIES_AGGRON", "ITEM_LIFE_ORB")), [])
+
+    def test_legend_plus_another_members_mega_is_rejected(self):
+        problems = self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), mon("SPECIES_ENTEI"))
+        self.assertTrue(any("restricted slot" in p for p in problems), problems)
+
+    def test_restricted_member_can_hold_its_own_mega_stone(self):
+        pool = copy.deepcopy(POOL)
+        pool["species"][0]["restricted_class"] = "legendary"
+        self.assertEqual(self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), pool=pool), [])
+
+    def test_two_usable_megas_are_rejected(self):
+        pool = copy.deepcopy(POOL)
+        pool["megas"].append(dict(species="SPECIES_AGGRON_MEGA", base="SPECIES_AGGRON", stone="ITEM_AGGRONITE"))
+        problems = self.check(mon("SPECIES_GARCHOMP", "ITEM_GARCHOMPITE"), mon("SPECIES_AGGRON", "ITEM_AGGRONITE"), pool=pool)
+        self.assertTrue(any("more than one usable Mega" in p for p in problems), problems)
 
     def test_species_not_in_pool_fails(self):
         problems = self.check(mon("SPECIES_DRAGAPULT"))

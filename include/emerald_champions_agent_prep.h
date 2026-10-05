@@ -25,7 +25,7 @@ enum EmeraldChampionsAgentPrepResult
     EC_AGENT_PREP_BAD_ABILITY,
     EC_AGENT_PREP_BAD_ITEM,
     EC_AGENT_PREP_BAD_EVS,
-    EC_AGENT_PREP_RESTRICTED_PARTY, // a second Legendary/Mythical, Ultra Beast or Paradox
+    EC_AGENT_PREP_RESTRICTED_PARTY, // a second restricted member or conflicting Mega
     EC_AGENT_PREP_BAD_IVS,
     EC_AGENT_PREP_BAD_FRIENDSHIP,
     EC_AGENT_PREP_BAD_POKERUS,

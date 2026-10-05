@@ -12,6 +12,7 @@
 #include "pokedex.h"
 #include "save.h"
 #include "constants/abilities.h"
+#include "constants/form_change_types.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
@@ -185,8 +186,7 @@ void EmeraldChampionsAgentPrepPoll(void)
             Fail(EC_AGENT_PREP_BAD_SPECIES, slot);
             return;
         }
-        // The party rule the PC, gifts and the League door all enforce: one
-        // Legendary, Mythical, Ultra Beast or Paradox per party in total.
+        // The PC, gifts and League door share the one restricted member limit.
         enum RestrictedPartyClass kind = GetRestrictedPartyClass(species);
         for (u32 earlier = 0; kind != RESTRICTED_PARTY_NONE && earlier < slot; earlier++)
         {
@@ -220,6 +220,37 @@ void EmeraldChampionsAgentPrepPoll(void)
             return;
         }
         ClampMonToPlayerLevelCap(&sEcAgentPreparedParty[slot]);
+    }
+
+    u32 megaCount = 0;
+    for (u32 slot = 0; slot < gEcAgentPrepPartyCount; slot++)
+    {
+        struct Pokemon *mon = &sEcAgentPreparedParty[slot];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+        struct FormChangeContext ctx = {
+            .method = FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,
+            .currentSpecies = species,
+            .heldItem = GetMonData(mon, MON_DATA_HELD_ITEM),
+            .ability = GetMonAbility(mon),
+        };
+        for (u32 move = 0; move < MAX_MON_MOVES; move++)
+            ctx.moves[move] = GetMonData(mon, MON_DATA_MOVE1 + move);
+        bool32 mega = GetFormChangeTargetSpecies_Internal(ctx) != species;
+        ctx.method = FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE;
+        mega |= GetFormChangeTargetSpecies_Internal(ctx) != species;
+        if (!mega)
+            continue;
+        if (++megaCount > 1)
+        {
+            Fail(EC_AGENT_PREP_RESTRICTED_PARTY, slot);
+            return;
+        }
+        for (u32 other = 0; other < gEcAgentPrepPartyCount; other++)
+            if (other != slot && GetRestrictedPartyClass(gEcAgentPrepSpecies[other]) != RESTRICTED_PARTY_NONE)
+            {
+                Fail(EC_AGENT_PREP_RESTRICTED_PARTY, slot);
+                return;
+            }
     }
 
     memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));

@@ -1016,6 +1016,12 @@ static void PrepareHeadlessMegaBattle(void)
     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_FLAMETHROWER, 2);
     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], requiredMove, 3);
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &stone);
+    // Bit 2 adds a benched restricted member for the missing-Mega UI path.
+    if (gEcHeadlessFixtureParam & 4)
+    {
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_ENTEI, 50, OTID_STRUCT_PLAYER_ID);
+        FlagClear(FLAG_EC_EXPLAINED_RESTRICTED_MEGA);
+    }
     CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_VENUSAUR, 50, OTID_STRUCT_RANDOM_NO_SHINY);
     if (gEcHeadlessFixtureParam >> 16)
     {

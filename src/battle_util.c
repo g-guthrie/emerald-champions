@@ -8516,6 +8516,14 @@ bool32 CanMegaEvolve(enum BattlerId battler)
     if (!EmeraldChampions_IsMegaAllowed(battler))
         return FALSE;
 
+    // Only the human player's party shares its restricted slot with a Mega.
+    // GetBattlerTrainer excludes the AI partner in multi battles.
+    if (GetBattlerTrainer(battler) == B_TRAINER_PLAYER)
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            if (slot != gBattlerPartyIndexes[battler]
+             && GetRestrictedPartyClass(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES)) != RESTRICTED_PARTY_NONE)
+                return FALSE;
+
     // Check if Player has a Mega Ring.
     if (!TESTING
         && (position == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))

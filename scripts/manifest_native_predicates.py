@@ -58,6 +58,9 @@ CITATIONS = {
  'TryGiveSelectedLegendarySignReward':('src/legendary_signs.c:743','source gate and party/PC delivery'),
  'TryUnlockLocalLegendaryDiscovery':('src/legendary_signs.c:341','actual local map, progression and Sing/Castform/soot preparation'),
  'CalculatePlayerPartyCount':('src/pokemon.c:3293','native party occupancy'),
+ 'ScriptGetPartyMonSpecies':('src/field_specials.c:ScriptGetPartyMonSpecies','selected obtainable party species'),
+ 'GetDiancieFriendshipScore':('src/field_specials.c:GetDiancieFriendshipScore','Diancie at maximum friendship'),
+ 'ScriptCheckFreePokemonStorageSpace':('src/pokemon_storage_system.c:ScriptCheckFreePokemonStorageSpace','available free PC slot during preparation'),
  'CountPartyNonEggMons':('src/pokemon_storage_system.c:1367','native occupied non-Egg slots'),
  'IsChanseyVialRewardClaimed':('src/quest_states.c:37','saved vial capacity >=2'),
  'GetEmeraldChampionsFinaleStage':('src/emerald_champions_story.c:178','computed victories and completion flags'),
@@ -452,6 +455,25 @@ def evaluate(key,state,constants=None):
                   and r['item'] not in state.get('items',()) and not _flag(state,r['flag'],constants)
                   and any(_base_species(s) in r['family'] for s in state.get('species',()))]
         return {_number(r['item'],constants) for r in partners} or {_number('ITEM_NONE',constants)}
+    if name=='ScriptGetPartyMonSpecies':
+        # The player may choose any currently obtainable non-Egg party member.
+        party=state.get('party')
+        if party is not None:
+            slot=_number(_arg(args,'VAR_0x8004',state,constants),constants)
+            if slot is None or slot>=len(party):return None
+            return {_number(party[slot].get('species'),constants)}
+        if state.get('preparation_possible'):
+            values={_number(sp,constants) for sp in state.get('species',())}
+            return values-{None} if values else {0}
+        return None
+    if name=='GetDiancieFriendshipScore':
+        if state.get('preparation_possible'):
+            return {int('SPECIES_DIANCIE' in state.get('species',()))}
+        party=state.get('party')
+        if party is None:return None
+        return {int(any(mon.get('species')=='SPECIES_DIANCIE' and mon.get('friendship',0)==255 for mon in party))}
+    if name=='ScriptCheckFreePokemonStorageSpace':
+        return {1} if state.get('preparation_possible') else None
     if name=='NativeScratchOutput':return _scratch_output(args,state,constants)
     # Party composition is a player choice; an eligible party always exists.
     if name=='PlayerPartyLeagueEligible':return {0,1}
@@ -741,6 +763,7 @@ def _harvest(name,args,state,constants):
         if not caught and garden is None:return None
         claimed=caught or bool(garden)
     else:claimed=_flag(state,flag,constants) or item in (state.get('items',set())|state.get('pc_items',set()))
+    if choice<3 and not claimed and not _flag(state,'FLAG_BADGE07_GET',constants):return {5}
     if name=='BufferEmeraldChampionsHarvestRecipe':return {int(claimed)}
     if claimed:return {1}
     pouch=state.get('harvested_berries')

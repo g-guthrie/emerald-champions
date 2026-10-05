@@ -2827,9 +2827,9 @@ AI_DOUBLE_BATTLE_TEST("EC no payoff: Norman's Weezing does not hit a Blaziken it
     }
 }
 
-static const struct EmeraldChampionsBattleSet sMattFoeIronHands = {
-    .moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
-    .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_QUARK_DRIVE, .evs = {252, 252, 4, 0, 0, 0},
+static const struct EmeraldChampionsBattleSet sMattFoeHariyama = {
+    .moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_THUNDER_PUNCH, MOVE_PROTECT},
+    .item = ITEM_SITRUS_BERRY, .nature = NATURE_ADAMANT, .ability = ABILITY_THICK_FAT, .evs = {252, 252, 4, 0, 0, 0},
 };
 static const struct EmeraldChampionsBattleSet sMattFoeGyarados = {
     .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_CRUNCH, MOVE_PROTECT},
@@ -2839,10 +2839,9 @@ static const struct EmeraldChampionsBattleSet sMattFoeGyarados = {
 AI_DOUBLE_BATTLE_TEST("EC Mega forecast: Matt's Grimmsnarl does not Prankster Thunder Wave a Gyarados about to turn Dark")
 {
     GIVEN {
-        // The benchmark board: Pelipper and a 46 HP Grimmsnarl against Iron
-        // Hands and a Gyarados holding its Mega Stone. Gyarados Mega Evolved
+        // The benchmark board: Pelipper and a 46 HP Grimmsnarl against Hariyama and a Gyarados holding its Mega Stone. Gyarados Mega Evolved
         // into a Dark type first, and the Prankster Thunder Wave failed.
-        PreparedPlayer(SPECIES_IRON_HANDS, 65, &sMattFoeIronHands);
+        PreparedPlayer(SPECIES_HARIYAMA, 65, &sMattFoeHariyama);
         PreparedPlayer(SPECIES_GYARADOS, 65, &sMattFoeGyarados);
         // Matt at the Aqua Hideout: six badges, cap65. Kingdra had fallen.
         sAuthoredInjuries[0] = (struct AuthoredInjury){SPECIES_GRIMMSNARL, 46};

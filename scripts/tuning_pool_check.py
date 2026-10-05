@@ -140,6 +140,7 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         problems.append("manifest has no availability_audit")
     restricted = []
     held = Counter()
+    mega_slots = []
     for slot, mon in enumerate(party, 1):
         tag = f"slot {slot} {mon.get('species', '?')}"
         if not str(mon.get("availability", "")).strip():
@@ -168,8 +169,14 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
                 if not pool.get("mega_ring", {}).get("available"):
                     problems.append(f"{tag}: {item} is a Mega Stone but the Mega Ring is not available until "
                                     f"{pool.get('mega_ring', {}).get('gate')}")
+                elif forms:
+                    mega_slots.append(slot)
                 elif not forms:
                     problems.append(f"{tag}: {item} does not Mega Evolve {sp} in this pool (no such Mega by {milestone})")
+        if (sp == "SPECIES_RAYQUAZA" and "MOVE_DRAGON_ASCENT" in (mon.get("moves") or [])
+                and pool.get("mega_ring", {}).get("available")
+                and any(m.get("base") == sp and not m.get("stone") for m in pool["megas"])):
+            mega_slots.append(slot)
         for move in mon.get("moves") or []:
             if not evolution_move_gate.ready(sp, move, mon.get("level", cap), pool.get("story_flags", [])):
                 problems.append(f"{tag}: {move} is an evolution trigger locked at this level and badge count")
@@ -207,6 +214,11 @@ def check(manifest: dict, pool: dict, aliases: dict[str, str] | None = None) -> 
         problems.append("more than one Legendary/Mythical/Ultra Beast/Paradox: "
                         + ", ".join(f"slot {s} {sp} ({c})" for s, sp, c in restricted)
                         + " (src/pokemon.c GetRestrictedPartyClass / PlayerPartyWithinRestrictedLimit)")
+    if len(mega_slots) > 1:
+        problems.append("more than one usable Mega in the prepared party")
+    for slot in mega_slots:
+        if any(other != slot for other, _, _ in restricted):
+            problems.append(f"slot {slot}: Mega Evolution uses the restricted slot already held by another party member")
     gc = pool.get("game_corner_gate")
     order = pool.get("milestone_order") or []
     before_gc = gc is None or (order and milestone in order and gc in order and order.index(milestone) < order.index(gc))

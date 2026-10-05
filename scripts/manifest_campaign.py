@@ -252,7 +252,7 @@ def build(world,battles,events,items,limit=80):
 
 def running_ledger(manifest):
     """One append-only availability list; never store a pool per battle."""
-    allowed_items=battle_items()
+    allowed_items=battle_items() | {'ITEM_MASTER_BALL'}
     ledger=[];known_battles=set();known_sources={'items':set(),'pokemon':set()}
     known_resources={key:set() for key in ('pokemon','items','areas')}
     previous_state={}

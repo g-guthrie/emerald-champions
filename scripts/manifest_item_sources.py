@@ -409,6 +409,7 @@ def build_item_sources(builder, economy=None, parser=None, enrich=True):
         recipe=[dict(item=f'ITEM_{berry}_BERRY',count=int(qty)) for berry,qty in re.findall(r'\{BERRY_ID_(\w+),\s*(\d+)\}',body)]
         if m[1]=='ITEM_NONE': continue
         add(m[1],'harvest_trade','Route123_BerryMastersHouse',_ref(path,'sBerryStoneTrades'),
+            requires=[['FLAG_BADGE07_GET']],
             needs_items=[r['item'] for r in recipe],detail='trade harvested berry credits',receipt=m[2],recipe=recipe,activity_requirement={'kind':'harvest_credit_trade','recipe':recipe,'source':'src/mega_stone_rewards.c:39'},
             cost_rule='credits from successfully harvested berries; gifted/purchased berries give no credit until planted and harvested')
     # Relics are native gifts earned by obtaining their legendary species,
