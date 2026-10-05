@@ -1027,6 +1027,9 @@ class Builder:
                 if info["file"].name == "debug.inc":
                     continue
                 extra = GIFT_REQUIREMENTS.get(label) or GIFT_REQUIREMENTS.get((label, item))
+                if label in SIGN_GIFT_LABELS:
+                    # Handed over only once that Legendary's Sign unlocks (its own gate).
+                    extra = (self.legend_requirement(SIGN_GIFT_LABELS[label])[0], f"{label}: after the Sign unlocks")
                 kind = "item_ball" if m[1] == "finditem" else "gift"
                 for req, w in self.scripted(label, n, extra):
                     self.item_sources.append(Source(kind, item, w, req, f"{m[1]} at {label}",
@@ -1095,6 +1098,11 @@ GIFT_REQUIREMENTS: dict = {
         [req] if req else [], f"Route110_TrickHouseEntrance/scripts.inc:{72 + 4 * n} (puzzle {n})")
        for n, req in ((1, None), (2, "FLAG_BADGE03_GET"), (3, "FLAG_BADGE04_GET"), (4, "FLAG_BADGE05_GET"),
                       (5, "FLAG_BADGE06_GET"), (6, "FLAG_BADGE07_GET"), (7, "FLAG_BADGE08_GET"), (8, "FLAG_SYS_GAME_CLEAR"))},
+}
+# Item gifts reached only through TryUnlockSelectedLegendarySign succeeding
+# for this species (the path scan does not follow the special's result).
+SIGN_GIFT_LABELS = {
+    "RustboroCity_DevonCorp_2F_EventScript_GiveMagearnite": "SPECIES_MAGEARNA",
 }
 # Gifts made by C specials rather than a literal givemon.
 SPECIAL_GIFTS = [
