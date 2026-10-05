@@ -1839,22 +1839,22 @@
               {
                 "min_level": 41,
                 "max_level": 41,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SIZZLIPEDE"
               },
               {
                 "min_level": 41,
                 "max_level": 41,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SIZZLIPEDE"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_TRUMBEAK"
               },
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_TRUMBEAK"
               },
               {
                 "min_level": 43,
@@ -2712,7 +2712,7 @@
               {
                 "min_level": 41,
                 "max_level": 41,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 41,
@@ -3571,12 +3571,12 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_TEDDIURSA"
               },
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_TEDDIURSA"
               },
               {
                 "min_level": 35,
@@ -3591,7 +3591,7 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_URSARING"
               },
               {
                 "min_level": 36,
@@ -6285,7 +6285,7 @@
               {
                 "min_level": 49,
                 "max_level": 49,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SLURPUFF"
               },
               {
                 "min_level": 49,
@@ -6300,17 +6300,17 @@
               {
                 "min_level": 50,
                 "max_level": 50,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_AROMATISSE"
               },
               {
                 "min_level": 51,
                 "max_level": 51,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SLURPUFF"
               },
               {
                 "min_level": 51,
                 "max_level": 51,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_AROMATISSE"
               }
             ],
             "encounter_rates": [
@@ -6411,7 +6411,7 @@
               {
                 "min_level": 49,
                 "max_level": 49,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_AROMATISSE"
               },
               {
                 "min_level": 49,
@@ -6426,17 +6426,17 @@
               {
                 "min_level": 50,
                 "max_level": 50,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_VESPIQUEN"
               },
               {
                 "min_level": 51,
                 "max_level": 51,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_AROMATISSE"
               },
               {
                 "min_level": 51,
                 "max_level": 51,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SLURPUFF"
               }
             ],
             "encounter_rates": [
@@ -6907,7 +6907,7 @@
               {
                 "min_level": 6,
                 "max_level": 6,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 6,
@@ -7033,7 +7033,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 12,
@@ -7257,7 +7257,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_CUTIEFLY"
               },
               {
                 "min_level": 13,
@@ -7383,7 +7383,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 2,
@@ -7607,7 +7607,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 3,
@@ -7831,7 +7831,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_CUTIEFLY"
               },
               {
                 "min_level": 2,
@@ -8055,7 +8055,7 @@
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_CUTIEFLY"
               },
               {
                 "min_level": 5,
@@ -8978,7 +8978,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 12,
@@ -9140,12 +9140,12 @@
               {
                 "min_level": 5,
                 "max_level": 10,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_ROGGENROLA"
               },
               {
                 "min_level": 15,
                 "max_level": 20,
-                "species": "SPECIES_SHUCKLE"
+                "species": "SPECIES_ROLYCOLY"
               },
               {
                 "min_level": 15,
@@ -9442,7 +9442,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_HERACROSS"
               },
               {
                 "min_level": 34,
@@ -9457,7 +9457,7 @@
               {
                 "min_level": 35,
                 "max_level": 35,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_PINSIR"
               },
               {
                 "min_level": 36,
@@ -9740,7 +9740,7 @@
               {
                 "min_level": 33,
                 "max_level": 38,
-                "species": "SPECIES_SHUCKLE"
+                "species": "SPECIES_CARBINK"
               }
             ],
             "encounter_rates": [
@@ -9823,7 +9823,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 34,
@@ -10047,22 +10047,22 @@
               {
                 "min_level": 16,
                 "max_level": 16,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_BOUNSWEET"
               },
               {
                 "min_level": 16,
                 "max_level": 16,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SMOLIV"
               },
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_BOUNSWEET"
               },
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_SMOLIV"
               },
               {
                 "min_level": 18,
@@ -10173,7 +10173,7 @@
               {
                 "min_level": 8,
                 "max_level": 8,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_TEDDIURSA"
               },
               {
                 "min_level": 8,
@@ -10397,7 +10397,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 25,
@@ -10621,7 +10621,7 @@
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_VESPIQUEN"
               },
               {
                 "min_level": 25,
@@ -10636,7 +10636,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_COMBEE"
               },
               {
                 "min_level": 26,
@@ -10845,7 +10845,7 @@
               {
                 "min_level": 40,
                 "max_level": 40,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_VESPIQUEN"
               },
               {
                 "min_level": 41,
@@ -10860,7 +10860,7 @@
               {
                 "min_level": 42,
                 "max_level": 42,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 42,
@@ -11074,17 +11074,17 @@
               {
                 "min_level": 49,
                 "max_level": 49,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_HERACROSS"
               },
               {
                 "min_level": 50,
                 "max_level": 50,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_PINSIR"
               },
               {
                 "min_level": 50,
                 "max_level": 50,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_URSARING"
               },
               {
                 "min_level": 51,
@@ -11293,7 +11293,7 @@
               {
                 "min_level": 46,
                 "max_level": 46,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_VESPIQUEN"
               },
               {
                 "min_level": 46,
@@ -11619,22 +11619,22 @@
               {
                 "min_level": 49,
                 "max_level": 49,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_HERACROSS"
               },
               {
                 "min_level": 49,
                 "max_level": 49,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_PINSIR"
               },
               {
                 "min_level": 49,
                 "max_level": 49,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_VESPIQUEN"
               },
               {
                 "min_level": 50,
                 "max_level": 50,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_RIBOMBEE"
               },
               {
                 "min_level": 50,
@@ -17221,7 +17221,7 @@
               {
                 "min_level": 41,
                 "max_level": 41,
-                "species": "SPECIES_AUDINO"
+                "species": "SPECIES_VESPIQUEN"
               },
               {
                 "min_level": 41,
