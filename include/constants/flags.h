@@ -2011,6 +2011,8 @@
 
 #define FLAG_ENABLE_MOM_MATCH_CALL           0xD8
 #define FLAG_ENABLE_MR_STONE_POKENAV         0x158
+#include "constants/story.h"
+
 #endif // GUARD_CONSTANTS_FLAGS_H
 
 // Fixture-era names for item balls and objects that map data names differently.

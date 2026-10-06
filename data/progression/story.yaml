@@ -1,0 +1,15 @@
+# The story machine. The only place that says what exists when.
+#
+# steps:   every story step, in the order the player passes them. VAR_STORY_STEP holds
+#          the current one; scripts move it only with `advance_story STEP`, one step at
+#          a time. Region 1 steps come first; later regions are added as converted.
+# windows: when something exists. Open from `from` (inclusive) until `until`
+#          (exclusive; omitted = forever); `player: male|female` limits it to one
+#          player. A map object whose flag is STORY_<id> is present only while its
+#          window is open; a trigger whose var is STORY_<id> with var_value 0 fires
+#          only while it is open (scripts/story.py, src/story.c).
+
+steps:
+  - NEW_GAME
+
+windows: []

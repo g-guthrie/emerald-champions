@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "story.h"
 #include "pokedex.h"
 
 #define SPECIAL_FLAGS_SIZE  (NUM_SPECIAL_FLAGS / 8)  // 8 flags per byte
@@ -229,7 +230,12 @@ u8 FlagClear(u16 id)
 
 bool8 FlagGet(u16 id)
 {
-    u8 *ptr = GetFlagPointer(id);
+    u8 *ptr;
+
+    // Story windows are not stored: they read as set (hidden) outside their window.
+    if (IsStoryWindowId(id))
+        return !IsStoryWindowOpen(id);
+    ptr = GetFlagPointer(id);
 
     return ptr != NULL && ((*ptr >> (id & 7)) & 1);
 }

@@ -2,7 +2,7 @@
 # Stages: intro .. pokedex (stages.yaml). The region ends when the Pokedex gift opens
 # Oldale's west exit to Route 102 (region 2).
 #
-# status: reference. Every entry below was read from the old game's scripts and
+# status: reference. Every entry below was read from the game's scripts and
 # map.json files on 2026-10-06; none of it is verified in play yet. `decide:` lines
 # are questions for the owner; nothing marked decide is built until answered.
 
@@ -49,14 +49,14 @@ gates:
     script: Route101_EventScript_PreventExitSouth / West / North
     until: starter
   - id: oldale_west_to_route102
-    kind: turn_back + blocker
+    kind: turn_back
     tiles: {map: MAP_OLDALE_TOWN, at: [[0,10]]}
     while: VAR_OLDALE_TOWN_STATE == 0
     script: OldaleTown_EventScript_BlockedPath
     blocker: "Footprints man moved to (1,11) facing left while FLAG_ADVENTURE_STARTED is unset (OldaleTown_EventScript_BlockWestEntrance)"
     opened_by: LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex (sets FLAG_ADVENTURE_STARTED, VAR_OLDALE_TOWN_STATE=1)
     until: pokedex
-    note: "Two mechanisms guard one exit. The rebuild keeps one (the turn-back tile read from the progression table)."
+    note: "One gate: stepping on the tile makes the Footprints man (standing at 1,11) step up, say WaitDontComeInHere, push the player back and return."
   - id: route103_water
     kind: terrain
     tiles: {map: MAP_ROUTE103}
@@ -96,7 +96,7 @@ items: []        # no item balls or hidden items in region-1 areas reachable bef
                  # Chikorita displays (FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_*).
 
 wild:
-  # Levels are the old game's (src/data/wild_encounters.json), not yet set by rule.
+  # Levels are the current ones (src/data/wild_encounters.json), not yet set by rule.
   route101:
     land: {levels: 4-6, species: [ZIGZAGOON, POOCHYENA, WURMPLE, PAWMI, ZORUA, LILLIPUP, FIDOUGH, HOPPIP, SCATTERBUG]}
     honey: {levels: 4-6, species: [COMBEE, WURMPLE]}
@@ -104,11 +104,10 @@ wild:
     land: {levels: 5-7, species: [WINGULL, SHELLOS_WEST, TOXEL, BLITZLE, GRUBBIN, SHINX, SNUBBULL, KRICKETOT, ROCKRUFF]}
     honey: {levels: 5-7, species: [CUTIEFLY, SHINX, GRUBBIN, KRICKETOT]}
     old_rod: {levels: 2-4, species: [MAGIKARP, REMORAID]}
-    # Good Rod 31-33, Super Rod 63-65, Surf 43-45: later stages, set when those regions are rebuilt.
+    # Good Rod 31-33, Super Rod 63-65, Surf 43-45: later stages, set when those regions are refactored.
 
 decide:
-  - "Lab: delete the three retired Johto-starter display balls (all at 6,8, hidden by flag) in the rebuild?"
+  - "Lab: delete the three retired Johto-starter display balls (all at 6,8, hidden by flag)?"
   - "Wild levels: cap is 14 for the whole region, but grass is 4-6 / 5-7 and Old Rod 2-4. Rule says levels belong to places and open no lower than the tool that reaches them; proposal: Route 101 4-6, Route 103 6-8, Old Rod 5-7. Or keep as is?"
-  - "Oldale west exit has two locks (turn-back tile + Footprints man repositioned). Keep only the turn-back tile?"
-  - "Route 103 Surf table opens at 43-45 but Surf arrives at cap 55. Set when region with Surf is rebuilt, or now?"
+  - "Route 103 Surf table opens at 43-45 but Surf arrives at cap 55. Set when the Surf region is refactored, or now?"
   - "Oldale Mart nurse gives Poke Vial, Leveler and Regenerator before the first Gym. Keep all three here?"

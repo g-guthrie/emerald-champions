@@ -14,33 +14,31 @@ or data.
   or wholesale restores. Preserve saves, archives and other agents' work.
 - Never load a savestate into a different ROM; move a save between builds with
   a native in-game save and a clean boot.
-- Overworld objects (map.json objects, local ids): Codex, except in rebuilt regions,
-  where the progression generator owns them (see Rebuild).
+- Overworld objects (map.json objects, local ids): Codex, except in regions refactored
+  under Canonical progression, where Claude owns them.
 - UI changes require native screenshots of affected states and menu navigation:
   opening, selection, page changes, cancellation and returned player control.
 - Studio instructions live in `tools/studio/skill/SKILL.md`; prefer this
   checked-in source over installed copies.
 
-## Rebuild (owner decision, 2026-10-06)
+## Canonical progression (owner decision, 2026-10-06)
 
-The game's content layer is being rebuilt from the ground up on the session branch;
-`main` stays the old game, used only as reference, until cut-over.
+The existing game is refactored in place, not rebuilt: every story gate, gift, item
+and wild level is made canonical, one region at a time, from Littleroot.
 
 - Source of truth: `data/progression/`. `stages.yaml` orders the story stages (cap,
-  field moves, key items, flags set). One file per region lists its areas: maps, the
-  stage that opens each, the gate that opens it (citing the script, flag or object),
-  trainers (required or optional), items, gifts, NPCs and wild tables. Nothing else
-  may state these facts by hand: map objects, generated scripts, wild levels, battle
-  order and manifests are generated from it, and tests fail when code and spec differ.
-- Gates use the standard barriers only (blocker NPC, turn-back tile, opening, ferry,
-  Gym rule); each reads the in-game progression table generated from the spec.
-  Story cutscenes are ported by hand and wired to stages.
-- One region at a time, from Littleroot: write the region spec from the old game and
-  the design rules, get the owner's approval, generate, port its cutscenes, then play it
-  headlessly with forced trainer wins. Photograph every walkable tile (explore mosaics)
-  and every DexNav, check spec against play, keep a stage save. Then report to the
-  owner before the next region: Pokemon available, items, balance concerns,
-  recommended changes. The owner decides; changes go into the spec.
+  field moves, key items, flags set). One file per region lists its areas, the stage
+  that opens each, the gate that opens it (citing the script, flag or object),
+  trainers (required or optional), items, gifts and wild tables. Tests read these files
+  and fail when the code disagrees; the hand-written walkthrough order and manifests
+  are replaced by output generated from them.
+- Gates are refactored to a few standard forms (turn-back tile, blocker NPC, opening,
+  ferry, Gym rule), named for what they guard; story cutscenes stay hand-written.
+- Per region: write the spec from the code, get the owner's approval, refactor the
+  region to match, then play it headlessly with forced trainer wins. Photograph every
+  walkable tile (explore mosaics) and every DexNav, check spec against play, keep a
+  stage save. Report to the owner before the next region: Pokemon available, items,
+  balance concerns, recommended changes. The owner decides; changes go into the spec.
 - Never state anything as fact that was not seen in play or read in code; say which.
 - Rename misnamed labels, flags and texts as they are found, and say so.
 - Wild levels belong to places: an area's levels come from the stage that first opens
