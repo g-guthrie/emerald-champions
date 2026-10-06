@@ -394,8 +394,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_ItemElixir",
-      "flag": "FLAG_ITEM_ROUTE_110_ELIXIR"
+      "script": "Route110_EventScript_ItemSharpBeak",
+      "flag": "FLAG_ITEM_ROUTE_110_SHARP_BEAK"
     },
     {
       "local_id": "LOCALID_ROUTE110_BIRCH",

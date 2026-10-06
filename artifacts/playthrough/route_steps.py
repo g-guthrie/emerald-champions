@@ -22,21 +22,22 @@ def path(map_dir, start, goal, caps=frozenset(), block=None):
     npcs = set(block) if block is not None else {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}
     npcs |= warps(mid)   # stepping on a door, stair or mat leaves the map: only as the goal
     tp = teleports(mid)
-    prev = {start: None}; q = deque([start])
+    s0 = R.start_state(g, start)
+    prev = {s0: None}; q = deque([s0]); end = None
     while q:
-        p = q.popleft()
-        if p == goal: break
+        s = q.popleft()
+        if s[:2] == goal: end = s; break
         for d in DIRS:
-            n = (p[0] + d[0], p[1] + d[1])
+            n = (s[0] + d[0], s[1] + d[1])
             if n in npcs and n != goal: continue
-            r = R.can_enter(g, p, n, d, set(caps))
-            if r and r in tp and r != goal: r = tp[r]
+            r = R.step(g, s, d, set(caps))
+            if r and r[:2] in tp and r[:2] != goal: r = R.start_state(g, tp[r[:2]])
             if r and r not in prev:
-                prev[r] = (p, d); q.append(r)
-    if goal not in prev: return None
-    moves = []; p = goal
-    while prev[p]:
-        p, d = prev[p][0], prev[p][1]; moves.append(d)
+                prev[r] = (s, d); q.append(r)
+    if end is None: return None
+    moves = []; s = end
+    while prev[s]:
+        s, d = prev[s][0], prev[s][1]; moves.append(d)
     moves.reverse()
     return moves
 
@@ -63,13 +64,15 @@ def teleports(mid):
 def closest_reachable(map_dir, start, target, caps=frozenset(), avoid=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid); wp = warps(mid); tp = teleports(mid)
-    seen = {start}; q = deque([start])
+    s0 = R.start_state(g, start)
+    states = {s0}; q = deque([s0])
     while q:
-        p = q.popleft()
+        s = q.popleft()
         for d in DIRS:
-            r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
-            if r and r in tp: r = tp[r]
-            if r and r not in seen and r not in wp and r not in avoid: seen.add(r); q.append(r)
+            r = R.step(g, s, d, set(caps))
+            if r and r[:2] in tp: r = R.start_state(g, tp[r[:2]])
+            if r and r not in states and r[:2] not in wp and r[:2] not in avoid: states.add(r); q.append(r)
+    seen = {s[:2] for s in states}
     # end beside the target, never on an object's own tile (it may load in once we are close)
     objs = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}
     cands = (seen - objs) or seen

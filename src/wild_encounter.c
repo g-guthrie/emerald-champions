@@ -657,13 +657,10 @@ u32 ChooseWildMonIndex_Fishing(const struct WildPokemonInfo *info, u8 rod)
     return sRodFirstSlot[rod] + ChooseEncounterSlotWithLure(GetEncounterBounds(info, sFishingEncounterBounds) + sRodFirstSlot[rod], sRodSlotCount[rod]);
 }
 
-// Emerald Champions: a table authored for an early visit must not leave an
-// area far below the Trainer who returns to it, and no evolved Pokemon is
-// met below the level it evolves at. Levels already in range are untouched;
-// every caller still applies the cap ceiling afterwards.
-#define WILD_LEVELS_BELOW_CAP_FLOOR 12
-#define WILD_LEVEL_FLOOR_SPREAD     4
-
+// Emerald Champions: each area's table sets its levels, as in Vanilla
+// (scripts/assign_wild_levels.py writes them in route order). Two guards stay:
+// no evolved Pokemon is met below the level it evolves at, and nothing is met
+// above the live cap.
 #include "data/wild_evolution_floors.h"
 
 static u8 GetWildEvolutionFloor(enum Species species)
@@ -674,19 +671,13 @@ static u8 GetWildEvolutionFloor(enum Species species)
     return 1;
 }
 
-static u32 GetWildLevelFloor(void)
-{
-    u32 cap = GetCurrentLevelCap();
-    return cap > WILD_LEVELS_BELOW_CAP_FLOOR ? cap - WILD_LEVELS_BELOW_CAP_FLOOR : 1;
-}
-
 // The levels a slot's Pokémon can arrive at right now, from the same rules
 // as ChooseWildMonLevel and TryGenerateWildMon: Legendary-class and Ultra
-// Beast slots come at their cap, others at their table levels after the wild
-// level floor, the evolution floor and the cap. A Lure's +1 is not included.
+// Beast slots come at their cap, others at their table levels after the
+// evolution floor and the cap. A Lure's +1 is not included.
 void GetWildSlotLevelRange(const struct WildPokemon *mon, u8 *minLevel, u8 *maxLevel)
 {
-    u32 low, high, floor = GetWildLevelFloor(), evolution, ceiling;
+    u32 low, high, evolution, ceiling;
 
     if (IsLegendaryEncounterSpecies(mon->species))
     {
@@ -695,11 +686,6 @@ void GetWildSlotLevelRange(const struct WildPokemon *mon, u8 *minLevel, u8 *maxL
     }
     low = min(mon->minLevel, mon->maxLevel);
     high = max(mon->minLevel, mon->maxLevel);
-    if (low < floor)
-    {
-        low = floor;
-        high = max(high, floor + WILD_LEVEL_FLOOR_SPREAD - 1);
-    }
     evolution = GetWildEvolutionFloor(mon->species);
     ceiling = min(GetCurrentLevelCap(), MAX_LEVEL);
     *minLevel = min(max(low, evolution), ceiling);
@@ -708,12 +694,8 @@ void GetWildSlotLevelRange(const struct WildPokemon *mon, u8 *minLevel, u8 *maxL
 
 u8 ApplyWildLevelFloor(enum Species species, u8 level)
 {
-    u32 cap = GetCurrentLevelCap();
-    u32 floor = GetWildLevelFloor();
-    if (level < floor)
-        level = floor + Random() % WILD_LEVEL_FLOOR_SPREAD;
     level = max(level, GetWildEvolutionFloor(species));
-    return min(level, min(cap, MAX_LEVEL));
+    return min(level, min(GetCurrentLevelCap(), MAX_LEVEL));
 }
 
 static u8 ChooseTableWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, enum WildPokemonArea area);

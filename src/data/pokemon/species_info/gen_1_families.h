@@ -11418,7 +11418,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .catchRate = 190,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 62 : 96,
         .evYield_Attack = 1,
-        .itemRare = ITEM_SHARP_BEAK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -11510,7 +11509,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .expYield = 158,
     #endif
         .evYield_Attack = 2,
-        .itemRare = ITEM_SHARP_BEAK,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,

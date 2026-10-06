@@ -30,6 +30,11 @@ Rules
   clerk at floor 0 (owner decision): Bright Powder, Mental Herb, Metronome, Mystic Water, Power
   Herb, Quick Claw. Berries, Honey, medicine and sell items stay on wild Pokemon. Listed per step
   from the species' itemCommon/itemRare.
+  Wild levels: set per area in route order, as in Vanilla (scripts/assign_wild_levels.py; owner
+  decision). Grass climbs through each cap window to a few levels under its cap; Surf, Rock Smash
+  and the Good/Super Rods start no lower than where the tool is earned; the Old Rod sits under the
+  grass. No evolved Pokemon below its evolution level; nothing above the live cap; legends at the
+  cap. A revisited route keeps its own levels. Levels quoted in Steps 1-14 are the old tables.
   Mega Stones: none before the Mega Ring (Wattson, Dynamo Badge; owner decision). Early gifts give
   a battle item instead and the stone waits in a sparkle behind Rock Smash (licensed with the same
   Badge): Glimmoranite (Granite B1F) for Roxanne's Rocky Helmet, Machampite (Rusturf Tunnel) for

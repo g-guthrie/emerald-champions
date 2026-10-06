@@ -97,28 +97,22 @@ TEST("Wild levels: creation respects the current cap without raising low-level e
     ZeroEnemyPartyMons();
 }
 
-TEST("Wild levels: stale tables are floored to the cap and evolved Pokemon to their evolution level")
+TEST("Wild levels: tables set the level; evolved Pokemon never below their evolution level, nothing above the cap")
 {
     bool8 saved[ARRAY_COUNT(sWildCapFlags)];
     SaveAndClearWildCapFlags(saved);
     // Cap 14: an early route's own levels stand.
     EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZIGZAGOON, 3), 3);
-    // Cap 45: a table authored for level 20 rises to within 12 of the cap.
+    // Cap 45: an early route revisited keeps its own levels (no raise).
     FlagSet(FLAG_BADGE01_GET); FlagSet(FLAG_BADGE02_GET); FlagSet(FLAG_BADGE03_GET); FlagSet(FLAG_BADGE04_GET);
     EXPECT_EQ(GetCurrentLevelCap(), 45);
-    for (u32 i = 0; i < 20; i++)
-    {
-        u32 level = ApplyWildLevelFloor(SPECIES_SANDSHREW, 20);
-        EXPECT(level >= 33 && level <= 36);
-    }
-    // In-range levels are untouched.
+    EXPECT_EQ(ApplyWildLevelFloor(SPECIES_SANDSHREW, 20), 20);
     EXPECT_EQ(ApplyWildLevelFloor(SPECIES_SANDSHREW, 40), 40);
     // Zweilous evolves from Deino at 50: never met below it, but never above the cap.
     EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZWEILOUS, 40), 45);
     FlagSet(FLAG_BADGE05_GET); FlagSet(FLAG_BADGE06_GET); FlagSet(FLAG_BADGE07_GET);
     EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZWEILOUS, 60), 60);
-    u32 floored = ApplyWildLevelFloor(SPECIES_ZWEILOUS, 49); // cap 70: floor 58-61
-    EXPECT(floored >= 58 && floored <= 61);
+    EXPECT_EQ(ApplyWildLevelFloor(SPECIES_ZWEILOUS, 49), 50); // cap 70: raised to its evolution level
     RestoreWildCapFlags(saved);
 }
 
@@ -826,7 +820,7 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
     }
 
     // Gate open: the slot spawns at the cap with a competitive set, while
-    // ordinary slots keep the wild level floor.
+    // ordinary slots keep their table levels.
     FlagSet(FLAG_BADGE01_GET);
     FlagSet(FLAG_BADGE02_GET);
     FlagSet(FLAG_BADGE03_GET);
@@ -846,9 +840,8 @@ TEST("Legendary wild slots: gated and caught slots reroll; live slots spawn at t
         }
         else
         {
-            // A level-5 table at cap 40 is floored to within 12 of the cap.
-            u32 level = GetMonData(mon, MON_DATA_LEVEL);
-            EXPECT(level >= GetCurrentLevelCap() - 12 && level <= GetCurrentLevelCap() - 9);
+            // Tables set their own levels, as in Vanilla: a level-5 slot stays level 5.
+            EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 5);
         }
     }
     // A default 4% slot meets the player at its table odds: no boost.

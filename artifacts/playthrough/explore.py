@@ -67,15 +67,16 @@ def reachable(map_dir, start, caps, gates=frozenset()):
             'OBJ_EVENT_GFX_PUSHABLE_BOULDER': 'strength'}
     walls = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])
              if o.get('graphics_id') in need and need[o['graphics_id']] not in caps}
-    seen = {start}; q = deque([start])
+    s0 = R.start_state(g, start)
+    states = {s0}; q = deque([s0])
     while q:
-        p = q.popleft()
+        s = q.popleft()
         for d in RS.DIRS:
-            r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
-            if r and r in tp: r = tp[r]   # a teleport within the map lands on its pair
-            if r and r not in seen and r not in wp and r not in gates and r not in walls:
-                seen.add(r); q.append(r)
-    return seen, g
+            r = R.step(g, s, d, set(caps))
+            if r and r[:2] in tp: r = R.start_state(g, tp[r[:2]])   # a teleport lands on its pair
+            if r and r not in states and r[:2] not in wp and r[:2] not in gates and r[:2] not in walls:
+                states.add(r); q.append(r)
+    return {s[:2] for s in states}, g
 
 
 def story_gates(map_dir, values):
@@ -214,7 +215,7 @@ def main():
     gates = story_gates(a.map, f.get('queries', {}))
     live = {x['local_id']: (x['x'], x['y']) for x in f.get('actors', []) if x['local_id'] not in (255, 254) and not x['invisible']}  # player; follower Pokemon swaps places
     order, tiles, g, later = plan(a.map, start, caps, skip, gates, live)
-    pending = list(order); save = a.save; results = []; dests = []; n = 0
+    pending = list(order); save = a.save; results = []; dests = []; n = 0; retried = set()
     while pending:
         chunk, pending = pending[:CHUNK], pending[CHUNK:]
         steps = ([{'bag': 'before'}] if n == 0 else []) + [dict(to_step(j), map=a.map, avoid=sorted(gates)) for j in chunk]
@@ -236,6 +237,24 @@ def main():
             left = [j for j in chunk if to_step(j)['label'] not in done]
             if len(left) == len(chunk): raise SystemExit(f'chunk {n} made no progress within the frame budget')
             pending = left + pending
+            res['outcome']['failures'] = []
+            continue
+        if fails and all(f.startswith('walk_to At talk') for f in fails) and not retried & {f.split(':')[0] for f in fails}:
+            # a trainer who spotted the player stands where the plan put the talk tile: the next chunk
+            # replans that talk from live positions (once)
+            retried |= {f.split(':')[0] for f in fails}
+            done = {i['label'] for i in fin.get('interactions', [])}
+            done |= {m['label'] for m in json.loads((dest / 'recording.json').read_text())['markers']}
+            pending = [j for j in chunk if to_step(j)['label'] not in done] + pending
+            res['outcome']['failures'] = []
+            continue
+        if fails and all(f.startswith('walk_to photo') for f in fails):
+            # a photo stop someone now stands on is skipped, not a failure: carry the rest over
+            done = {i['label'] for i in fin.get('interactions', [])}
+            done |= {m['label'] for m in json.loads((dest / 'recording.json').read_text())['markers']}
+            missed = {f.split(':')[0][len('walk_to '):] for f in fails}
+            later += [dict(label=m, source='photo', needs='a free tile (occupied now)') for m in sorted(missed)]
+            pending = [j for j in chunk if to_step(j)['label'] not in done | missed] + pending
             res['outcome']['failures'] = []
             continue
         if fails: break   # report what was done; the sweep stops on failures

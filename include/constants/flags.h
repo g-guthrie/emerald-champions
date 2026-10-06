@@ -1943,7 +1943,7 @@
 #define FLAG_ITEM_ROUTE_124_EXCADRITE                           0x472
 #define FLAG_ITEM_ROUTE108_GOLURKITE                                 0x473 // shares 0x473 with FLAG_ITEM_ROUTE_108_DEEP_SEA_TOOTH (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_109_ZOOM_LENS                                  0x474 // shares 0x474 with FLAG_ITEM_ROUTE_109_POTION (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_110_ELIXIR                                     0x475 // shares 0x475 with FLAG_ITEM_ROUTE_110_FERALIGITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_110_SHARP_BEAK                                     0x475 // shares 0x475 with FLAG_ITEM_ROUTE_110_FERALIGITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_115_HERACRONITE                                0x478 // shares 0x478 with FLAG_ITEM_ROUTE_115_AUDINITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_BARBARACITE                     0x479
 #define FLAG_ITEM_ROUTE_116_BINDING_BAND                               0x47A // shares 0x47A with FLAG_ITEM_ROUTE_116_MEOWSTICITE (dead: its map.json was overwritten)
