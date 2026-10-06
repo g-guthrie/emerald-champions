@@ -32,11 +32,18 @@ Rules
   clerk at floor 0 (owner decision): Bright Powder, Mental Herb, Metronome, Mystic Water, Power
   Herb, Quick Claw. Berries, Honey, medicine and sell items stay on wild Pokemon. Listed per step
   from the species' itemCommon/itemRare.
-  Wild levels: set per area in route order, as in Vanilla (scripts/assign_wild_levels.py; owner
-  decision). Grass climbs through each cap window to a few levels under its cap; Surf, Rock Smash
-  and the Good/Super Rods start no lower than where the tool is earned; the Old Rod sits under the
-  grass. No evolved Pokemon below its evolution level; nothing above the live cap; legends at the
-  cap. A revisited route keeps its own levels. Levels quoted in Steps 1-14 are the old tables.
+  Wild levels: set per area, as in Vanilla (scripts/assign_wild_levels.py; owner decision). Each
+  area sits in the cap window the player first reaches it in: the walkthrough order, moved later
+  by the field move it needs (Cut 20, Rock Smash 40, Strength 45, Surf 55, Dive 70, Waterfall 80;
+  scripts/wild_level_gates.json from the reach model, ferries that need the post-game ticket left
+  out) and by story gates: the east sea (Routes 124-134, Pacifidlog, Mossdeep, Shoal Cave, Ever
+  Grande's water) opens at cap 65 (the Lilycove Wailmer grunt leaves in Aqua Hideout B2F, after
+  Groudon wakes); Route 123 opens with Route 118's east bank (Surf, cap 55). Early windows climb
+  in route order to cap-3; from the Surf window on the player arrives at the cap, so each window
+  climbs from cap-8 to cap-3. Surf tables open no lower than the Surf window (46-48); the Good Rod
+  no lower than Route 114; the Super Rod no lower than Mossdeep (59-61); the Old Rod sits under
+  the grass. No evolved Pokemon below its evolution level; nothing above the live cap; legends at
+  the cap.
   Mega Stones: none before the Mega Ring (Wattson, Dynamo Badge; owner decision). Early gifts give
   a battle item instead and the stone waits in a sparkle behind Rock Smash (licensed with the same
   Badge; checked against whole-world reach with Cut, Bike and Strength): Glimmoranite and
@@ -166,7 +173,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0123 Cyndy, E0125 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+  Deferred: E0131 Cyndy, E0132 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
     it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -230,14 +237,15 @@ STEP 8 - cap 20 - Route 116 north trainers (Dawson, Sarah, Janice, Jerry)
   Bonding and friendship evolutions open), the Cut-tree habitat, Petalburg Woods behind Cut, Woods 2
   and 3 (side trips open before Route 116 north), Route 104's Shell Bell.
   Pokemon
-    Cut trees, every tree (DexNav photo, Woods 2-3), Lv 8-10 (the area's grass band): Skwovet,
+    Cut trees, every tree (the area's grass band; DexNav photo of the species), Lv 10-12: Skwovet,
       Pineco, Aipom (common); Burmy (uncommon); Applin, Phantump (rare); one tree in three
-    Woods 2 grass (DexNav photo), Lv 8-10: Kakuna, Metapod, Venipede (common); Panpour, Pansear,
-      Weedle, Pansage (uncommon); Morelull, Bounsweet (rare). LEVEL ERROR: Woods 2-3 open with
-      Cut (cap 20) but share the cap-14 Woods band (scripts/assign_wild_levels.py prefix match). Honey (code): Combee 12, Beedrill
+    Woods 2 grass (DexNav photo of the roster; code Lv 10-12): Kakuna, Metapod, Venipede (common);
+      Panpour, Pansear, Weedle, Pansage (uncommon); Morelull, Bounsweet (rare). Woods 2-3 open
+      with Cut (cap 20); they were leveled with the cap-14 Woods (8-10) until this fix. Honey (code): Combee 12, Beedrill
       12-13, Butterfree 13-14
-    Woods 3 grass (DexNav photo), Lv 8-10: Oddish, Bellsprout, Dewpider (common); Croagunk, Yanma,
-      Murkrow (uncommon); Emolga, Misdreavus, Impidimp (rare). Old Rod Lv 4-6: Slowpoke, Poliwag.
+    Woods 3 grass (DexNav photo of the roster; code Lv 10-12): Oddish, Bellsprout, Dewpider
+      (common); Croagunk, Yanma, Murkrow (uncommon); Emolga, Misdreavus, Impidimp (rare). Old Rod
+      Lv 6-8: Slowpoke, Poliwag.
       Honey (code): Cutiefly 13, Emolga 13-15, Goomy 15
     Not live: the Woods 2-3 legendary slots (Virizion, Wo-Chien, Celebi, Zarude, Kartana: not on the
       DexNav).
@@ -286,7 +294,7 @@ STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
 ====================================================================================================
 STEP 11 - cap 20 - Route 106 trainer (Ned)
   Battles: E0031 Ned
-  Deferred: E0127 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
+  Deferred: E0134 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
     Takao, Cristian, Jocelyn, Brawly): Brawly is in Slateport and his guide blocks the Gym door until
     the player speaks to him there (DewfordTown object 6, FLAG_HIDE_SLATEPORT_CITY_BRAWLY)
   VERIFIED IN PLAY: Mr. Briney's boat from Route 104; Dewford Town, Center, Hall, both houses,
@@ -340,7 +348,7 @@ STEP 13 - cap 20 - Route 109 beach and the Seashore House
   Battles: E0032 Hailey, E0033 Edmond, E0034 Chandler, E0035 Lola (Route 109 beach);
     E0036 Johanna, E0037 Dwayne, E0038 Simon (Seashore House, doubles)
   Deferred: E0047 Museum grunts, E0048 Archie (Museum raid, after the Knuckle Badge);
-    E0128 Greta (refuses until later)
+    E0135 Greta (refuses until later)
   Played: Briney (Dewford, after the Letter) to Route 109; beach and Seashore House swept; Slateport,
   its Center, Mart, House, Chef's house, Fan Club, Shipyard, Battle Tent lobby and Harbor swept;
   Brawly spoken to outside the Museum. Before the Knuckle Badge the Aqua line blocks the Museum door
@@ -524,8 +532,9 @@ STEP 22 - cap 40 - Fallarbor, Route 114, Meteor Falls
       Whiscash, Buizel, Crawdaunt.
   Battle items
     Gifts (play): Nugget (Fallarbor Mart), Good Rod and Big Pearl (Route 114).
-    Pickups (play): hidden Nugget (Fallarbor); Protective Pads, Weakness Policy, hidden Punching
-      Glove and Revive, Persim berries (Route 114); hidden Draco Plate, Fairy Feather, Comet Shard
+    Pickups (play): hidden Nugget (Fallarbor); Bug Gem and Dragon Gem (Route 114; were a second
+      Protective Pads and Weakness Policy, both met earlier), hidden Punching Glove and Revive,
+      Persim berries (Route 114); hidden Draco Plate, Fairy Feather, Comet Shard
       (Meteor Falls).
   Story (play): the Meteor Falls scene (FLAG_MET_ARCHIE_METEOR_FALLS; the Ferroseed Egg opens).
   Not yet: Route 114 Nugget and Meteor Falls Zeraorite, PP Up (Waterfall).
@@ -537,10 +546,10 @@ STEP 23 - cap 40 - Mt. Chimney, Jagged Pass, Ember Path, Route 112 west
   Played: cable car up; Maxie beaten, the Meteorite taken; Jagged Pass down; Ember Path (open, no
   gate); Route 112's west ledges.
   Pokemon
-    Ember Path (DexNav photo), Lv 34-36: Chandelure, Magmar, Tauros (Paldea) (common); Boldore,
+    Ember Path (DexNav photo), Lv 34-36: Litwick, Magmar, Tauros (Paldea) (common); Boldore,
       Magcargo, Grumpig, Golbat (uncommon); Coalossal, Larvesta, Centiskorch (rare); Blacephalon,
-      Slither Wing (visitors, Lv 40). Concern: Chandelure is a common fully evolved find before
-      Flannery, who then gives Chandelurite.
+      Slither Wing (visitors, Lv 40). Litwick replaced a common wild Chandelure (owner): Flannery's
+      Chandelurite is now something to raise toward (Lampent cannot appear under 41, the cap is 40).
   Battle items
     Pickups (play): Adrenaline Orb, hidden Level Ball (Jagged Pass); Clear Amulet, hidden Flame
       Plate, hidden Magmarizer (Ember Path). Machampite sparkle (Route 112 west, Rock Smash).
@@ -550,12 +559,15 @@ STEP 23 - cap 40 - Mt. Chimney, Jagged Pass, Ember Path, Route 112 west
 
 ====================================================================================================
 STEP 24 - cap 40 - Lavaridge Town and the Lavaridge Gym
-  Battles: E0116 Eli & Jace, E0118 Flannery
-  Deferred: E0130 Cole & Gerald, E0131 Axle, E0132 Keegan, E0134 Danielle, E0135 Jeff (the pit
-    route to Flannery passes none of them even at sight 15)
+  Battles: E0116 Eli & Jace, E0118 Cole & Gerald, E0123 Axle, E0125 Keegan, E0127 Danielle,
+    E0128 Jeff, E0130 Flannery
+  Gate (owner): Flannery battles only after every Gym trainer is beaten (the pits let a route to
+    her pass six of the eight; LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet). All eight stand
+    beside tiles the pit graph reaches.
   Played: town, Center, Mart, Herb Shop, house; the Gym's pit puzzle solved from its live warp
   tiles (8 hops) and Flannery beaten: Heat Badge (cap 45), Chandelurite.
   Battle items
     Gifts (play): Rock Gem and Flying Gem (Gym guide), Charcoal (Herb Shop), Nugget (house),
       Wynaut Egg (offered by the egg woman).
-  Fixes on the way: the house's Nugget gift scripts were still labelled TM94.
+  Fixes on the way: the house's Nugget gift scripts were still labelled TM94; Flannery's
+    Chandelurite retry and text were labelled GiveOverheat2 and ExplainOverheat.

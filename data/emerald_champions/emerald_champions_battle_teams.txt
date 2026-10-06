@@ -186,7 +186,7 @@ MINUN @SITRUS_BERRY MINUS TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, HELPING_HAND, E
 VOLBEAT @LUM_BERRY PRANKSTER MODEST 252/0/4/252/0/0 4 | TAIL_GLOW, ROOST, BUG_BUZZ, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ILLUMISE @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 4 | DAZZLING_GLEAM, AIR_SLASH, ENCORE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0123 TRAINER_CYNDY_1 class=regular
+## E0131 TRAINER_CYNDY_1 class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Riolu and Meditite keep Cyndy’s support opening: Prankster Screech or Quick Guard opens a physical hit, while Fake Out buys a turn and Pure Power strengthens Drain Punch. Crabominable supplies Iron Fist Ice Hammer for Flying targets, Drain Punch recovery and Thunder Punch coverage. Tinkaton switches into the Fairy, Flying, Psychic, Dark and Bug attacks that threaten its partners, then uses Gigaton Hammer, Mold Breaker Play Rough or Knock Off. It cannot use Gigaton Hammer on consecutive turns.
@@ -196,7 +196,7 @@ MEDITITE @SITRUS_BERRY PURE_POWER JOLLY 4/252/0/0/0/252 9 | FAKE_OUT, DRAIN_PUNC
 CRABOMINABLE @SITRUS_BERRY IRON_FIST ADAMANT 252/252/0/0/4/0 9 | ICE_HAMMER, DRAIN_PUNCH, THUNDER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TINKATON @LEFTOVERS MOLD_BREAKER ADAMANT 252/252/0/0/4/0 11 | GIGATON_HAMMER, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0125 TRAINER_MARLENE class=regular
+## E0132 TRAINER_MARLENE class=regular
 strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Marlene's young psychics now travel with a big sister who handles their counters. First two useful turns: Gothita and Hatterene lead. Hatterene sets Trick Room from 29 base Speed, and Magic Bounce reflects the Taunt, Encore or Will-O-Wisp that normally stops a room; Fake Out still interrupts it, so Gothita Protects or uses Fake Tears on the foe Hatterene will hit next. Shadow Tag keeps non-Ghost foes from switching out of the room, but pivot moves such as U-turn and Parting Shot still leave. Under the room, Hatterene's Dazzling Gleam hits both foes and punishes Dark and Fighting leads, Mystical Fire answers Bug and Steel while lowering Special Attack, and Psychic handles Poison. Alternate deployment: Spoink is the backup room with Thick Fat and Power Gem into Bug, Fire and Flying targets. Reserves & disruption: Inkay replaces Slowpoke and Baltoy's Knock Off weakness with a Dark/Psychic body that resists Dark and Ghost and is immune to Psychic; Contrary turns Superpower into +1 Attack and Defense, Superpower hits Dark and Steel foes for super-effective damage, Knock Off hits Ghost foes, Psycho Cut hits Fighting and Poison, and Protect covers the turn a room ends. Gothita's Focus Sash and Inkay's Eviolite can still be knocked away.
@@ -425,7 +425,7 @@ WATTREL @LIFE_ORB WIND_POWER MODEST 4/0/0/252/0/252 5 | THUNDERBOLT, AIR_SLASH, 
 MANTYKE @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 5 | SURF, AIR_SLASH, WIDE_GUARD, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
 ARROKUDA @MYSTIC_WATER PROPELLER_TAIL ADAMANT 4/252/0/0/0/252 4 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0127 TRAINER_ELLIOT_1 class=regular
+## E0134 TRAINER_ELLIOT_1 class=regular
 strategy: SETUP
 mega_slots: NONE
 ai: Conservative
@@ -631,7 +631,7 @@ EELEKTRIK @EVIOLITE SWIFT_SWIM MODEST 120/0/0/252/0/136 4 | THUNDER, FLASH_CANNO
 LOMBRE @SITRUS_BERRY SWIFT_SWIM MODEST 4/0/0/252/0/252 3 | RAIN_DANCE, HYDRO_PUMP, GIGA_DRAIN, ICE_BEAM | ivs=31/0/31/31/31/31 | friendship=255
 CARVANHA @EXPERT_BELT SPEED_BOOST ADAMANT 4/252/0/0/0/252 3 | LIQUIDATION, CRUNCH, POISON_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0128 TRAINER_GRETA_SLATEPORT class=brain
+## E0135 TRAINER_GRETA_SLATEPORT class=brain
 strategy: ALLY_COMBO
 mega_slots: NONE
 plan: The Arena Tycoon's exhibition, one Pokemon for each Battle Arena judge plus her Gold-print headliner, and now a lead that no Fake Out can touch. First two useful turns: Umbreon (Mind) and Shedinja (Skill) open together. Umbreon's Inner Focus blocks the flinch and Intimidate, and Fake Out cannot hurt Shedinja at all: it is a Ghost, and Wonder Guard stops a Scrappy Normal hit. Shedinja's Focus Sash means it always gets one action, and its two priority moves act before almost every foe. Shadow Sneak removes a fast Ghost, Psychic or Booster Energy attacker before it moves (at Shedinja's level it one-shots a Booster Energy Flutter Mane even without help). Sucker Punch hits an attacking Steel, Ghost or Psychic. Poltergeist is the 110-power finisher on any foe still holding an item, such as a Mega Charizard, a Sitrus or Life Orb holder or a Focus Sash user. Umbreon uses Helping Hand only on a turn when the boost turns Shedinja's or Gengar's hit into a KO it would otherwise miss, such as Poltergeist into a Mega Charizard Y or Kangaskhan, or Shadow Sneak through Intimidate. Otherwise it uses Snarl against special pairs, Foul Play into a physical attacker, or Thunder Wave on a fast threat that Shedinja cannot reach, so Gengar and Heracross can outspeed it afterwards. Shedinja Protects when two foes that can hit it super-effectively both aim at it. Alternate deployment: when the first lead falls, Gengar (the Gold print) comes in at full HP behind a Focus Sash. A faster Ghost or Dark hit leaves it at 1 HP, and it answers with Sludge Bomb or Shadow Ball on the fast attacker, Thunderbolt on a Charizard or Water/Flying foe (Helping Hand makes that an OHKO on Mega Charizard Y), or Focus Blast on an Incineroar, Kangaskhan or other Dark/Normal/Steel foe. Reserves & disruption: Guts Heracross (Body) comes in last. Its Flame Orb burns it at the end of its first turn, so Intimidate and burns stop mattering, and at Jolly speed it outspeeds Mega Charizard Y. It uses Rock Slide on Flying and Fire pairs, Close Combat on Incineroar, Kangaskhan and Dark/Steel foes, Knock Off on Ghosts (Gholdengo and Flutter Mane included), and Protect when two foes aim at it. Stats: Umbreon is specially bulky support. Shedinja has 1 HP, full Attack and full Speed (Inclement Attack 100), and still moves last without priority. Gengar is a fast special attacker. Heracross is a fast physical attacker. Could it be cooler? The last version led with Gengar, and a Booster Energy Flutter Mane deleted it before it moved. Now the lead is the Arena's precision act: a 1-HP Wonder Guard assassin that Fake Out cannot touch and that strikes first with priority, beside an Inner Focus caddy. The Gold Gengar waits behind it with a Sash, and Heracross waits as the burned bruiser.
@@ -1451,7 +1451,7 @@ SYLVEON @LEFTOVERS PIXILATE MODEST 252/0/4/252/0/0 4 | HYPER_VOICE, SHADOW_BALL,
 MR_MIME_GALAR @CHOICE_SCARF SCREEN_CLEANER TIMID 4/0/0/252/0/252 6 | FREEZE_DRY, PSYCHIC, FOCUS_BLAST, ICY_WIND | ivs=31/31/31/31/31/31 | friendship=255
 GREEDENT @SITRUS_BERRY CHEEK_POUCH ADAMANT 252/252/4/0/0/0 4 | BODY_SLAM, CRUNCH, HIGH_HORSEPOWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0130 TRAINER_COLE class=gym
+## E0118 TRAINER_COLE class=gym
 strategy: SETUP,ALLY_COMBO
 field: MISTY_TERRAIN
 mega_slots: NONE
@@ -1465,7 +1465,7 @@ NUMEL @EVIOLITE SIMPLE MODEST 252/0/4/252/0/0 18 | HEAT_WAVE, EARTH_POWER, STOCK
 LITLEO @CHOICE_SPECS UNNERVE MODEST 4/0/0/252/0/252 18 | FLAMETHROWER, HYPER_VOICE, SNARL, OVERHEAT | ivs=31/31/31/31/31/31 | friendship=255
 HEATMOR @ASSAULT_VEST TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 15 | FIRE_LASH, THUNDER_PUNCH, BODY_SLAM, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0130 TRAINER_GERALD class=gym
+## E0118 TRAINER_GERALD class=gym
 strategy: SUN,SETUP
 field: MISTY_TERRAIN
 mega_slots: 6
@@ -1478,7 +1478,7 @@ SCOVILLAIN @SITRUS_BERRY CHLOROPHYLL MODEST 4/0/0/252/0/252 2 | FLAMETHROWER, EN
 PYROAR @LEFTOVERS COMPETITIVE MODEST 4/0/0/252/0/252 2 | FLAMETHROWER, HYPER_VOICE, DARK_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CHARIZARD @CHARIZARDITE_X BLAZE ADAMANT 4/252/0/0/0/252 1 | FLARE_BLITZ, THUNDER_PUNCH, ROOST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0131 TRAINER_AXLE class=gym
+## E0123 TRAINER_AXLE class=gym
 strategy: ALLY_COMBO,REDIRECTION,SETUP
 field: MISTY_TERRAIN
 mega_slots: NONE
@@ -1494,7 +1494,7 @@ MAGMAR @EVIOLITE FLAME_BODY ADAMANT 4/252/0/0/0/252 5 | FIRE_PUNCH, THUNDER_PUNC
 CENTISKORCH @ROCKY_HELMET FLASH_FIRE ADAMANT 252/252/4/0/0/0 3 | FIRE_LASH, POWER_WHIP, COIL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ARMAROUGE @LIFE_ORB FLASH_FIRE QUIET 252/0/4/252/0/0 2 | ARMOR_CANNON, PSYCHIC, ENERGY_BALL, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 
-## E0132 TRAINER_KEEGAN class=gym
+## E0125 TRAINER_KEEGAN class=gym
 strategy: ALLY_COMBO
 field: MISTY_TERRAIN
 mega_slots: NONE
@@ -1507,7 +1507,7 @@ EMBOAR @CHOICE_BAND RECKLESS ADAMANT 252/252/4/0/0/0 4 | FLARE_BLITZ, HEAD_SMASH
 MAGMORTAR @LIFE_ORB FLAME_BODY MODEST 252/0/4/252/0/0 5 | HEAT_WAVE, THUNDERBOLT, FOCUS_BLAST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 HOUNDOOM @SITRUS_BERRY FLASH_FIRE TIMID 4/0/0/252/0/252 5 | FLAMETHROWER, DARK_PULSE, SNARL, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0134 TRAINER_DANIELLE class=gym
+## E0127 TRAINER_DANIELLE class=gym
 strategy: ALLY_COMBO
 field: MISTY_TERRAIN
 mega_slots: 6
@@ -1550,7 +1550,7 @@ MAROWAK_ALOLA @THICK_CLUB CURSED_BODY ADAMANT 252/252/4/0/0/0 -2 | SHADOW_BONE, 
 TYPHLOSION_HISUI @SITRUS_BERRY BLAZE TIMID 4/0/0/252/0/252 0 | CALM_MIND, SHADOW_BALL, HEAT_WAVE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 ARCANINE_HISUI @CLEAR_AMULET ROCK_HEAD ADAMANT 4/252/0/0/0/252 -1 | HEAD_SMASH, FLARE_BLITZ, WILD_CHARGE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0135 TRAINER_JEFF class=gym
+## E0128 TRAINER_JEFF class=gym
 strategy: TAILWIND,ALLY_COMBO
 field: MISTY_TERRAIN
 mega_slots: NONE
@@ -1563,7 +1563,7 @@ ARCANINE @SITRUS_BERRY INTIMIDATE ADAMANT 4/252/0/0/0/252 2 | FLARE_BLITZ, EXTRE
 CINDERACE @CHOICE_BAND LIBERO JOLLY 4/252/0/0/0/252 2 | PYRO_BALL, HIGH_JUMP_KICK, U_TURN, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 CROBAT @ROCKY_HELMET INFILTRATOR JOLLY 4/252/0/0/0/252 2 | CROSS_POISON, BRAVE_BIRD, U_TURN, TAUNT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0118 TRAINER_FLANNERY_1 class=leader
+## E0130 TRAINER_FLANNERY_1 class=leader
 strategy: SUN,ALLY_COMBO
 field: MISTY_TERRAIN
 mega_slots: 6

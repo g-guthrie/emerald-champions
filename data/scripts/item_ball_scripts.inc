@@ -105,12 +105,12 @@ Route114_EventScript_ItemNugget:: @ 8290E03
 	finditem ITEM_NUGGET
 	end
 
-Route114_EventScript_ItemWeaknessPolicy:: @ 8290E10
-	finditem ITEM_WEAKNESS_POLICY
+Route114_EventScript_ItemDragonGem:: @ 8290E10
+	finditem ITEM_DRAGON_GEM
 	end
 
-Route114_EventScript_ItemProtectivePads:: @ 8290E1D
-	finditem ITEM_PROTECTIVE_PADS
+Route114_EventScript_ItemBugGem:: @ 8290E1D
+	finditem ITEM_BUG_GEM
 	end
 
 Route115_EventScript_ItemSoftSand:: @ 8290E2A

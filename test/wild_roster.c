@@ -528,14 +528,13 @@ TEST("Wild roster: Cut trees list the forms their map's grass levels bring, as t
     EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_PINECO));
     EXPECT(!RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_FORRETRESS));
     EXPECT_EQ(CheckCutTreeRosterAgainstEngine(MAP_ROUTE117, 1500), 0);
-    // Route 118's band straddles Phantump's 45: both forms are listed, each
-    // at the levels it comes at.
+    // Route 118's band is the Surf era's (upper forties); held at the fourth
+    // badge's cap of 45 its trees still reach Phantump's 45: Trevenant only.
     SetRosterBadges(4);
-    EXPECT_GE(GetCurrentLevelCap(), 45);
+    EXPECT_EQ(GetCurrentLevelCap(), 45);
     count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE118), MAP_NUM(MAP_ROUTE118), roster, ARRAY_COUNT(roster));
     entry = FindRosterEntry(roster, count, WILD_ROSTER_CUT_TREES, SPECIES_PHANTUMP);
-    EXPECT_NE(entry, NO_ENTRY);
-    EXPECT_LE(roster[entry].maxLevel, 44);
+    EXPECT_EQ(entry, NO_ENTRY);
     entry = FindRosterEntry(roster, count, WILD_ROSTER_CUT_TREES, SPECIES_TREVENANT);
     EXPECT_NE(entry, NO_ENTRY);
     EXPECT_GE(roster[entry].minLevel, 45);

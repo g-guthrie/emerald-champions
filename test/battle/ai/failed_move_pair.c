@@ -898,7 +898,7 @@ static void CorphishLockBoard(void)
     gLastMoves[B_BATTLER_1] = MOVE_AQUA_JET;
 }
 
-// E0127 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
+// E0134 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
 // Tsareena's Queenly Majesty, which stops priority against its whole side.
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is left")
 {

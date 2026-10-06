@@ -126,8 +126,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route114_EventScript_ItemWeaknessPolicy",
-      "flag": "FLAG_ITEM_ROUTE114_WEAKNESS_POLICY"
+      "script": "Route114_EventScript_ItemDragonGem",
+      "flag": "FLAG_ITEM_ROUTE_114_DRAGON_GEM"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -256,8 +256,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route114_EventScript_ItemProtectivePads",
-      "flag": "FLAG_ITEM_ROUTE_114_PROTECTIVE_PADS"
+      "script": "Route114_EventScript_ItemBugGem",
+      "flag": "FLAG_ITEM_ROUTE_114_BUG_GEM"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",

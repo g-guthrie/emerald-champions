@@ -45,8 +45,19 @@ LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers:: @ 81FE78B
 	return
 
 LavaridgeTown_Gym_1F_EventScript_Flannery:: @ 81FE78C
+	@ Every trainer in the Gym first: the pits let a route to Flannery pass most of them.
+	goto_if_set FLAG_BADGE04_GET, LavaridgeTown_Gym_1F_EventScript_FlanneryBattle
+	goto_if_not_defeated TRAINER_COLE, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_GERALD, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_AXLE, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_DANIELLE, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_KEEGAN, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_JACE, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_JEFF, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+	goto_if_not_defeated TRAINER_ELI, LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet
+LavaridgeTown_Gym_1F_EventScript_FlanneryBattle::
 	trainerbattle_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
+	goto_if_unset FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F, LavaridgeTown_Gym_1F_EventScript_RetryChandelurite
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -74,7 +85,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated:: @ 81FE7C1
 	release
 	end
 
-LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
+LavaridgeTown_Gym_1F_EventScript_RetryChandelurite::
 	call LavaridgeTown_Gym_1F_EventScript_GiveChandelurite
 	release
 	end
@@ -83,7 +94,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveChandelurite:: @ 81FE841
 	giveuniqueitem ITEM_CHANDELURITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
-	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainChandelurite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F
 	return
 
@@ -366,7 +377,7 @@ LavaridgeTown_Gym_1F_Text_TakeThis:
 	.string "This is a token of my appreciation.\n"
 	.string "Don't be shy about taking it!$"
 
-LavaridgeTown_Gym_1F_Text_ExplainOverheat: @ 81FF45C
+LavaridgeTown_Gym_1F_Text_ExplainChandelurite: @ 81FF45C
 	.string "This is Chandelurite. Once you have\n"
 	.string "a Mega Ring, Chandelure can Mega\l"
 	.string "Evolve while holding it.$"
@@ -383,3 +394,16 @@ LavaridgeTown_Gym_1F_Text_GymStatueCertified: @ 81FF5C4
 	.string "Lavaridge Town Pokémon Gym\p"
 	.string "Flannery's Certified Trainers:\n"
 	.string "{PLAYER}$"
+
+LavaridgeTown_Gym_1F_EventScript_FlanneryNotYet::
+	lock
+	faceplayer
+	msgbox LavaridgeTown_Gym_1F_Text_FlanneryNotYet, MSGBOX_DEFAULT
+	release
+	end
+
+LavaridgeTown_Gym_1F_Text_FlanneryNotYet:
+	.string "Flannery: Whoa, not so fast!\p"
+	.string "Everyone in my Gym trained hard\n"
+	.string "for this. Beat all of them first,\l"
+	.string "then come and face me!$"
