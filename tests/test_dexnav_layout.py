@@ -81,6 +81,21 @@ class DexNavLayout(unittest.TestCase):
             for line in lines:
                 self.assertLessEqual(line_width(line, cm, widths), limit_w, f'{name}: "{line}" is too wide')
 
+    def test_odds_lines_fit_without_a_narrower_font(self):
+        """The search-odds lines print in FONT_SMALL itself: at their widest
+        (base odds, a half-percent Pokerus chance, a three-digit chain) they fit."""
+        cm, widths = charmap(), small_widths()
+        limit_w = value('INFO_TEXT_WIDTH')
+        texts = dict(re.findall(r'static const u8 (sText_\w+)\[\] = _\("(.*?)"\);', DEXNAV))
+        for label, values in (('sText_ShinyChance', ['1/8192', '100%']), ('sText_PokerusChance', ['3/65536', '49.5%', '100%']),
+                              ('sText_SearchChain', None)):
+            for v in values or ['999']:
+                line = texts[label].replace('{STR_VAR_3}', v).replace('{STR_VAR_1}', v)
+                self.assertLessEqual(line_width(line, cm, widths), limit_w, f'{label}: "{line}" needs a narrower font')
+
+    def test_hint_keeps_clear_of_the_border(self):
+        self.assertGreaterEqual(value('INFO_BOTTOM_PAD'), 3)
+
 
 if __name__ == '__main__':
     unittest.main()

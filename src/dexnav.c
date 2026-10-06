@@ -888,7 +888,7 @@ static const u8 sThemeColors[][2] =
 #define INFO_TYPES_Y        (INFO_TOP + LIST_HEADER_HEIGHT + 3)
 #define INFO_RARITY_Y       (INFO_TYPES_Y + 12)
 #define INFO_LEVEL_Y        (INFO_RARITY_Y + 11)
-#define INFO_ODDS_Y         (INFO_LEVEL_Y + 13)
+#define INFO_ODDS_Y         (INFO_LEVEL_Y + 11)
 #define INFO_SHINY_Y        (INFO_ODDS_Y + 11)
 #define INFO_POKERUS_Y      (INFO_SHINY_Y + 11)
 #define INFO_CHAIN_Y        (INFO_POKERUS_Y + 11)
@@ -896,13 +896,15 @@ static const u8 sThemeColors[][2] =
 // (gFontInfos[FONT_SMALL]: maxLetterHeight 12 + lineSpacing 0; checked by
 // tests/test_dexnav_layout.py). Positions below the stats are derived from it,
 // and the asserts refuse to build a panel whose lines cross each other, the
-// rule or the box's bottom border.
+// rule or the box's bottom border. The hint keeps INFO_BOTTOM_PAD white rows
+// between its last line and the border, so its text never sits on the frame.
 #define DEXNAV_SMALL_LINE   12
 #define INFO_HINT_LINES     2   // "{A_BUTTON} Search\n{B_BUTTON} Back" and the other hints
 #define INFO_HOW_LINES      2   // the how-to-find text, printed at INFO_SHINY_Y
-#define INFO_HINT_Y         (INFO_BOTTOM - 1 - INFO_HINT_LINES * DEXNAV_SMALL_LINE)
+#define INFO_BOTTOM_PAD     3
+#define INFO_HINT_Y         (INFO_BOTTOM - 1 - INFO_BOTTOM_PAD - INFO_HINT_LINES * DEXNAV_SMALL_LINE)
 #define INFO_RULE_Y         (INFO_HINT_Y - 2)
-STATIC_ASSERT(INFO_HINT_Y + INFO_HINT_LINES * DEXNAV_SMALL_LINE <= INFO_BOTTOM - 1, dexNavHintInsideBox);
+STATIC_ASSERT(INFO_HINT_Y + INFO_HINT_LINES * DEXNAV_SMALL_LINE + INFO_BOTTOM_PAD <= INFO_BOTTOM - 1, dexNavHintInsideBox);
 STATIC_ASSERT(INFO_CHAIN_Y + DEXNAV_SMALL_LINE <= INFO_RULE_Y, dexNavChainAboveRule);
 STATIC_ASSERT(INFO_SHINY_Y + INFO_HOW_LINES * DEXNAV_SMALL_LINE <= INFO_RULE_Y, dexNavHowToFindAboveRule);
 STATIC_ASSERT(INFO_BOTTOM <= 18 * 8, dexNavInfoBoxInsideWindow);
@@ -955,7 +957,6 @@ static const u8 sText_DexNavNotHere[] = _("{R_BUTTON} Not here");
 static const u8 sText_DexNavNoSearch[] = _("No search.");
 static const u8 sText_DexNavHowToFind[] = _("How to find");
 static const u8 sText_DexNavWildOnly[] = _("Wild battles\nonly.");
-static const u8 sText_DexNavNoWildPokemon[] = _("No wild Pokémon live here.");
 static const u8 sText_DexNavLevel[] = _("Lv. {STR_VAR_1}");
 static const u8 sText_DexNavLevelRange[] = _("Lv. {STR_VAR_1}-{STR_VAR_2}");
 static const u8 sText_DexNavHintSearch[] = _("{A_BUTTON} Search\n{B_BUTTON} Back");
@@ -1333,10 +1334,16 @@ static void DrawDexNavList(void)
         u8 method = ui->roster[ui->rows[row].first].method;
         enum DexNavTheme theme = GetDexNavMethodTheme(method);
         u32 top = ui->rowY[row] - LIST_HEADER_HEIGHT;
+        u32 bottom;
 
         while (end < last && !ui->rows[end + 1].startsSection)
             end++;
-        DrawDexNavBox(WIN_LIST, theme, LIST_BOX_X, top, LIST_BOX_WIDTH, ui->rowY[end] + LIST_ROW_HEIGHT + LIST_BOX_BOTTOM, TRUE);
+        bottom = ui->rowY[end] + LIST_ROW_HEIGHT + LIST_BOX_BOTTOM;
+        // With nothing more below, the last box reaches down to the info
+        // panel's bottom so the two panels end together.
+        if (end == ui->rowCount - 1 && bottom < LIST_BOTTOM)
+            bottom = LIST_BOTTOM;
+        DrawDexNavBox(WIN_LIST, theme, LIST_BOX_X, top, LIST_BOX_WIDTH, bottom, TRUE);
         PrintDexNavBandText(WIN_LIST, theme, FONT_NORMAL, LIST_BOX_X + 6, top, GetDexNavMethodName(method));
         row = end + 1;
     }
@@ -1344,17 +1351,59 @@ static void DrawDexNavList(void)
     CopyWindowToVram(WIN_LIST, COPYWIN_FULL);
 }
 
+// One box across the middle of the screen, over both the list's and the
+// panel's windows; its two lines stay inside the list window.
+#define EMPTY_BOX_LEFT      24
+#define EMPTY_BOX_RIGHT     (DISPLAY_WIDTH - EMPTY_BOX_LEFT)
+#define EMPTY_BOX_TOP       ((LIST_TOP + LIST_BOTTOM) / 2 - 20)
+#define EMPTY_BOX_BOTTOM    (EMPTY_BOX_TOP + 40)
+
+static const u8 sText_DexNavNoWildPokemonLine1[] = _("No wild Pokémon");
+static const u8 sText_DexNavNoWildPokemonLine2[] = _("live here.");
+
+// Part of the box in one window, which starts at screen x windowX and is
+// width pixels wide; edges outside the window are left off.
+static void DrawDexNavEmptyBoxPart(u32 windowId, u32 windowX, u32 width)
+{
+    s32 left = max(EMPTY_BOX_LEFT - (s32)windowX, 0), right = min(EMPTY_BOX_RIGHT - (s32)windowX, (s32)width);
+    const u8 *colors = sThemeColors[THEME_WATER];
+
+    if (left >= right)
+        return;
+    FillWindowPixelRect(windowId, PIXEL_FILL(colors[1]), left, EMPTY_BOX_TOP, right - left, EMPTY_BOX_BOTTOM - EMPTY_BOX_TOP);
+    FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_WHITE), left, EMPTY_BOX_TOP + 1, right - left, EMPTY_BOX_BOTTOM - EMPTY_BOX_TOP - 2);
+    if (EMPTY_BOX_LEFT >= (s32)windowX)
+    {
+        FillWindowPixelRect(windowId, PIXEL_FILL(colors[1]), left, EMPTY_BOX_TOP, 1, EMPTY_BOX_BOTTOM - EMPTY_BOX_TOP);
+        FillWindowPixelRect(windowId, PIXEL_FILL(0), left, EMPTY_BOX_TOP, 1, 1);
+        FillWindowPixelRect(windowId, PIXEL_FILL(0), left, EMPTY_BOX_BOTTOM - 1, 1, 1);
+    }
+    if (EMPTY_BOX_RIGHT <= (s32)(windowX + width))
+    {
+        FillWindowPixelRect(windowId, PIXEL_FILL(colors[1]), right - 1, EMPTY_BOX_TOP, 1, EMPTY_BOX_BOTTOM - EMPTY_BOX_TOP);
+        FillWindowPixelRect(windowId, PIXEL_FILL(0), right - 1, EMPTY_BOX_TOP, 1, 1);
+        FillWindowPixelRect(windowId, PIXEL_FILL(0), right - 1, EMPTY_BOX_BOTTOM - 1, 1, 1);
+    }
+}
+
+static void PrintDexNavEmptyLine(const u8 *str, u32 y)
+{
+    u32 x = DISPLAY_WIDTH / 2 - GetStringWidth(FONT_NORMAL, str, 0) / 2;
+    AddTextPrinterParameterized3(WIN_LIST, FONT_NORMAL, x, y, sBodyTextColors, TEXT_SKIP_DRAW, str);
+}
+
 static void DrawDexNavEmptyList(void)
 {
-    u32 top = (LIST_TOP + LIST_BOTTOM) / 2 - 16;
-
     FillWindowPixelBuffer(WIN_LIST, PIXEL_FILL(0));
-    DrawDexNavBox(WIN_LIST, THEME_WATER, LIST_BOX_X, top, LIST_BOX_WIDTH, top + 32, FALSE);
-    AddTextPrinterParameterized3(WIN_LIST, FONT_NORMAL,
-                                 LIST_BOX_X + (LIST_BOX_WIDTH - GetStringWidth(FONT_NORMAL, sText_DexNavNoWildPokemon, 0)) / 2,
-                                 top + 8, sBodyTextColors, TEXT_SKIP_DRAW, sText_DexNavNoWildPokemon);
+    FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
+    DrawDexNavEmptyBoxPart(WIN_LIST, 0, INFO_WINDOW_X);
+    DrawDexNavEmptyBoxPart(WIN_INFO, INFO_WINDOW_X, DISPLAY_WIDTH - INFO_WINDOW_X);
+    PrintDexNavEmptyLine(sText_DexNavNoWildPokemonLine1, EMPTY_BOX_TOP + 4);
+    PrintDexNavEmptyLine(sText_DexNavNoWildPokemonLine2, EMPTY_BOX_TOP + 20);
     PutWindowTilemap(WIN_LIST);
+    PutWindowTilemap(WIN_INFO);
     CopyWindowToVram(WIN_LIST, COPYWIN_FULL);
+    CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
 }
 
 static bool32 IsSpeciesCaught(enum Species species)
@@ -1428,7 +1477,9 @@ static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId);
 
 static const u8 sText_SearchOdds[] = _("Search odds");
 static const u8 sText_ShinyChance[] = _("Shiny {STR_VAR_3}");
-static const u8 sText_PokerusChance[] = _("Pokérus {STR_VAR_3}");
+// PKRS, the party menu's own Pokérus status, keeps the line in the panel's
+// regular font (tests/test_dexnav_layout.py).
+static const u8 sText_PokerusChance[] = _("PKRS {STR_VAR_3}");
 static const u8 sText_ChancePercent[] = _("{STR_VAR_1}%");
 static const u8 sText_ChanceHalfPercent[] = _("{STR_VAR_1}.5%");
 static const u8 sText_ChanceFraction[] = _("{STR_VAR_2}/{STR_VAR_1}");
@@ -1451,8 +1502,7 @@ static void PrintSearchChance(bool32 pokerus)
     }
     StringCopy(gStringVar3, gStringVar4);
     StringExpandPlaceholders(gStringVar4, label);
-    AddTextPrinterParameterized3(WIN_INFO, GetFontIdToFit(gStringVar4, FONT_SMALL, 0, INFO_TEXT_WIDTH), INFO_TEXT_X, y,
-                                 sBodyTextColors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, y, sBodyTextColors, TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static void PrintDexNavInfo(void)
@@ -1493,7 +1543,9 @@ static void PrintDexNavInfo(void)
     AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_LEVEL_Y, sBodyTextColors, TEXT_SKIP_DRAW, gStringVar4);
 
     bool32 searchable = CanDexNavSearchFor(entry);
-    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_ODDS_Y, sBodyTextColors, TEXT_SKIP_DRAW,
+    // The odds' heading takes the method's color, setting it off the values.
+    u8 headingColors[3] = {TEXT_COLOR_TRANSPARENT, sThemeColors[theme][1], COLOR_SHADOW};
+    AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_ODDS_Y, headingColors, TEXT_SKIP_DRAW,
                                  searchable ? sText_SearchOdds : sText_DexNavHowToFind);
     if (searchable)
     {
@@ -1838,8 +1890,8 @@ static bool8 DexNav_DoGfxSetup(void)
     case 10:
         if (ui->rowCount == 0)
         {
-            DrawDexNavEmptyList();
             PrintDexNavInfo();
+            DrawDexNavEmptyList();
             gSprites[ui->cursorSpriteId].invisible = TRUE;
         }
         else

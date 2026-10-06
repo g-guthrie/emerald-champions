@@ -1,0 +1,180 @@
+{
+  "name": "PokeNav Wild Pokemon on Route 119 with every method unlocked: scrolling and area jumps",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_SYS_POKEDEX_GET": true,
+      "FLAG_RECEIVED_DEXNAV": true,
+      "FLAG_SYS_POKENAV_GET": true,
+      "FLAG_RECEIVED_POKENAV": true,
+      "FLAG_RECEIVED_HM_SURF": true,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": true,
+      "FLAG_BADGE05_GET": true,
+      "FLAG_BADGE06_GET": true
+    },
+    "items": {
+      "ITEM_OLD_ROD": 1,
+      "ITEM_GOOD_ROD": 1,
+      "ITEM_SUPER_ROD": 1,
+      "ITEM_HONEY": 1
+    }
+  },
+  "warp": {
+    "map": "Route119",
+    "x": 10,
+    "y": 90,
+    "facing": 1
+  },
+  "steps": [
+    {
+      "frames": 60
+    },
+    {
+      "press": "START",
+      "frames": 40
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "A",
+      "frames": 240,
+      "label": "map"
+    },
+    {
+      "press": "A",
+      "frames": 200,
+      "label": "zoom"
+    },
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "choice"
+    },
+    {
+      "press": "A",
+      "frames": 60,
+      "label": "wild"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 1"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 2"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 3"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 4"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 5"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 6"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 7"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 8"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 9"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "wdown 10"
+    },
+    {
+      "press": "R",
+      "frames": 24,
+      "label": "area 1"
+    },
+    {
+      "press": "R",
+      "frames": 24,
+      "label": "area 2"
+    },
+    {
+      "press": "R",
+      "frames": 24,
+      "label": "area 3"
+    },
+    {
+      "press": "R",
+      "frames": 24,
+      "label": "area 4"
+    },
+    {
+      "press": "R",
+      "frames": 24,
+      "label": "area 5"
+    },
+    {
+      "press": "R",
+      "frames": 24,
+      "label": "area 6"
+    },
+    {
+      "press": "B",
+      "frames": 120,
+      "label": "back"
+    },
+    {
+      "press": "B",
+      "frames": 200,
+      "label": "PokeNav off"
+    },
+    {
+      "press": "B",
+      "frames": 60
+    },
+    {
+      "frames": 60,
+      "label": "Controls returned"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "Route119"
+  }
+}

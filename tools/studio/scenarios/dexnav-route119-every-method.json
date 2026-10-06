@@ -1,0 +1,143 @@
+{
+  "name": "DexNav Route 119 with every method unlocked: sections, scrolling, how-to-find panels",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_SYS_POKEDEX_GET": true,
+      "FLAG_RECEIVED_DEXNAV": true,
+      "FLAG_SYS_POKENAV_GET": true,
+      "FLAG_RECEIVED_POKENAV": true,
+      "FLAG_RECEIVED_HM_SURF": true,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": true,
+      "FLAG_BADGE05_GET": true,
+      "FLAG_BADGE06_GET": true
+    },
+    "items": {
+      "ITEM_OLD_ROD": 1,
+      "ITEM_GOOD_ROD": 1,
+      "ITEM_SUPER_ROD": 1,
+      "ITEM_HONEY": 1
+    }
+  },
+  "warp": {
+    "map": "Route119",
+    "x": 10,
+    "y": 90,
+    "facing": 1
+  },
+  "steps": [
+    {
+      "frames": 60
+    },
+    {
+      "press": "START",
+      "frames": 40
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "A",
+      "frames": 160,
+      "label": "DexNav open"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 1"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 2"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 3"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 4"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 5"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 6"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 7"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 8"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 9"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 10"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 11"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 12"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 13"
+    },
+    {
+      "press": "DOWN",
+      "frames": 24,
+      "label": "down 14"
+    },
+    {
+      "press": "RIGHT",
+      "frames": 24,
+      "label": "right"
+    },
+    {
+      "press": "B",
+      "frames": 100,
+      "label": "closed"
+    },
+    {
+      "press": "B",
+      "frames": 60
+    },
+    {
+      "frames": 60,
+      "label": "Controls returned"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "Route119"
+  }
+}
