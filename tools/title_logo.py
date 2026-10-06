@@ -4,13 +4,17 @@
     python3 tools/title_logo.py graphics/title_screen/inclement_emerald_2_logo_master.png \
         graphics/title_screen/inclement_emerald_2_logo.png
 
-The master is pixel art enlarged by some factor that need not be a whole
-number (about 14.4 for the current one). The tool finds that pixel grid from
-where the colour edges fall, then takes one colour per grid cell, the median
-of the cell's middle, so the logo comes back at its own size (145x42) with
-no pixel blended, doubled or dropped. It is shown at that size, centred in a
-192x64 8bpp sheet (three 64x64 sprites, src/title_screen.c), with at most
-PALETTE_COLORS colours after the transparent index 0.
+The master is the logo itself, 145x42, hand-finished: its INCLEMENT is
+redrawn in a bold 7-pixel face and its outlines cleaned. It is shown at that
+size, centred in a 192x64 8bpp sheet (three 64x64 sprites,
+src/title_screen.c), with at most PALETTE_COLORS colours after the
+transparent index 0.
+
+A master larger than the sheet is taken as pixel art enlarged by some factor
+that need not be a whole number: the tool finds that pixel grid from where
+the colour edges fall and takes one colour per grid cell, the median of the
+cell's middle, so the logo comes back at its own size with no pixel blended,
+doubled or dropped. Redraw by hand anything the enlarger smeared.
 """
 import sys
 import numpy as np
@@ -38,8 +42,7 @@ def cells(length, pitch, offset):
     return [(s, s + pitch) for s in starts if s + pitch > 0 and s < length]
 
 
-def build(src, dst):
-    art = np.array(Image.open(src).convert('RGBA')).astype(int)
+def shrink_to_grid(art):
     rgb = art[..., :3] * (art[..., 3:] / 255)
     x0, y0, x1, y1 = Image.fromarray(((art[..., 3] >= 128) * 255).astype(np.uint8)).getbbox()
     edges = [np.abs(np.diff(rgb, axis=axis)).sum(2).sum(1 - axis) for axis in (1, 0)]
@@ -63,8 +66,15 @@ def build(src, dst):
                 continue
             logo[j, i, :3] = np.median(block[block[:, 3] >= 128][:, :3], axis=0)
             logo[j, i, 3] = 255
-    logo = Image.fromarray(logo)
-    logo = logo.crop(logo.getchannel('A').getbbox())
+    return Image.fromarray(logo), grid
+
+
+def build(src, dst):
+    logo = Image.open(src).convert('RGBA')
+    grid = None
+    if logo.width > SHEET_WIDTH or logo.height > SHEET_HEIGHT:
+        logo, grid = shrink_to_grid(np.array(logo).astype(int))
+    logo = logo.crop(logo.getchannel('A').point(lambda a: 255 if a >= 128 else 0).getbbox())
     if logo.width > SHEET_WIDTH or logo.height > SHEET_HEIGHT:
         sys.exit(f'{src}: the logo is {logo.width}x{logo.height} pixels, more than {SHEET_WIDTH}x{SHEET_HEIGHT}')
 
@@ -78,7 +88,8 @@ def build(src, dst):
     sheet.putpalette(gba + [0] * (768 - len(gba)))
     sheet.save(dst, transparency=0)
     used = sum(1 for count in sheet.histogram()[1:] if count)
-    print(f'{dst}: grid {grid[0][0]:.2f}x{grid[1][0]:.2f}, logo {logo.width}x{logo.height}, {used} colours')
+    found = f'grid {grid[0][0]:.2f}x{grid[1][0]:.2f}, ' if grid else ''
+    print(f'{dst}: {found}logo {logo.width}x{logo.height}, {used} colours')
 
 
 if __name__ == '__main__':
