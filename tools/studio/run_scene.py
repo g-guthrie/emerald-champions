@@ -254,7 +254,20 @@ async def run(spec,out):
                             if failure is None:failure=f"stopped at {(studio.state[4],studio.state[5])} short of {goal}"
                         for f in range(40):
                             studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
-                    if failure is None and step.get("face"):failure=await walk_moves([step["face"]],face_last=True)
+                    if failure is None and step.get("face"):
+                        # Turn in place: a short tap turns without stepping (a hidden item lies on a
+                        # walkable tile, and holding would walk onto it). Confirm with the game.
+                        want={"DOWN":1,"UP":2,"LEFT":3,"RIGHT":4}[step["face"]]
+                        for attempt in range(3):
+                            if studio.state[6]==want:break
+                            for f in range(2):
+                                studio.ingest(await studio.core.tick(keys(step["face"]),frames=1));recorder.observe(studio.packet,keys(step["face"]));total+=1
+                            for f in range(14):
+                                studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
+                        if (studio.state[4],studio.state[5])!=goal and studio.current_map==start_map:
+                            failure=f"turning {step['face']} stepped off {goal}"
+                        elif studio.state[6]!=want:
+                            failure=f"could not face {step['face']} at {goal}"
                     if failure:walk_failure=f"walk_to {step.get('label','')}: {failure}"
                 else:
                     failure=await walk_moves(step["walk"])
