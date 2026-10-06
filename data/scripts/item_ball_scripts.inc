@@ -85,20 +85,20 @@ Route111_EventScript_ItemElixir:: @ 8290DC2
 	finditem ITEM_ELIXIR
 	end
 
-Route112_EventScript_ItemHeavyDutyBoots:: @ 8290DCF
-	finditem ITEM_HEAVY_DUTY_BOOTS
+Route112_EventScript_ItemMachampite:: @ 8290DCF
+	finditem ITEM_MACHAMPITE
 	end
 
-Route113_EventScript_ItemMaxEther:: @ 8290DDC
-	finditem ITEM_MAX_ETHER
+Route113_EventScript_ItemGlimmoranite:: @ 8290DDC
+	finditem ITEM_GLIMMORANITE
 	end
 
 Route113_EventScript_ItemShinyStone:: @ 8290DE9
 	finditem ITEM_SHINY_STONE
 	end
 
-Route113_EventScript_ItemHyperPotion:: @ 8290DF6
-	finditem ITEM_HYPER_POTION
+Route113_EventScript_ItemAggronite:: @ 8290DF6
+	finditem ITEM_AGGRONITE
 	end
 
 Route114_EventScript_ItemNugget:: @ 8290E03
@@ -358,8 +358,8 @@ RusturfTunnel_EventScript_ItemPokeBall:: @ 8291136
 	finditem ITEM_POKE_BALL
 	end
 
-RusturfTunnel_EventScript_ItemMachampite:: @ 8291143
-	finditem ITEM_MACHAMPITE
+RusturfTunnel_EventScript_ItemHeavyDutyBoots:: @ 8291143
+	finditem ITEM_HEAVY_DUTY_BOOTS
 	end
 
 GraniteCave_1F_EventScript_ItemBlackBelt:: @ 8291150
@@ -370,8 +370,8 @@ GraniteCave_B1F_EventScript_ItemPokeBall:: @ 829115D
 	finditem ITEM_POKE_BALL
 	end
 
-GraniteCave_B2F_EventScript_ItemAggronite:: @ 829116A
-	finditem ITEM_AGGRONITE
+GraniteCave_B2F_EventScript_ItemThroatSpray:: @ 829116A
+	finditem ITEM_THROAT_SPRAY
 	end
 
 GraniteCave_B2F_EventScript_ItemNugget:: @ 8291177
@@ -829,8 +829,8 @@ ScorchedSlab_EventScript_ItemDuskBall::
 	finditem ITEM_DUSK_BALL, 5
 	end
 
-GraniteCave_B1F_EventScript_ItemGlimmoranite::
-	finditem ITEM_GLIMMORANITE
+GraniteCave_B1F_EventScript_ItemProtectivePads::
+	finditem ITEM_PROTECTIVE_PADS
 	end
 
 Route117_EventScript_ItemStardust::
