@@ -576,9 +576,12 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
 #define INFO_FRAME_TILE    0x42
 #define INFO_FRAME_PAL     4
 #define INFO_CLEAR_TILE    0x1040
-// On the full map BG1 sits this far down: the box's name row and its closed
-// frame show just above the help bar.
-#define FULL_VIEW_BG1_Y    (-0x5800)
+// On the full map BG1 sits this far down, so the name box (three window rows,
+// GetInfoBoxRows(INFO_LINE_HEIGHT + 1)) ends 2 clear rows above the help bar.
+// The frame's shadow ends 2 rows into its bottom tile.
+#define HELP_BAR_TOP       144
+#define NAME_BOX_BOTTOM    ((INFO_WINDOW_TOP + 3) * 8 + 8 - 2)
+#define FULL_VIEW_BG1_Y    (-(HELP_BAR_TOP - 3 - NAME_BOX_BOTTOM) * 0x100)
 
 // One line of the info window, in the narrow font or narrower so it always
 // fits inside the frame.
