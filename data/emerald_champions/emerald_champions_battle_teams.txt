@@ -186,7 +186,7 @@ MINUN @SITRUS_BERRY MINUS TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, HELPING_HAND, E
 VOLBEAT @LUM_BERRY PRANKSTER MODEST 252/0/4/252/0/0 4 | TAIL_GLOW, ROOST, BUG_BUZZ, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ILLUMISE @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 4 | DAZZLING_GLEAM, AIR_SLASH, ENCORE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0063 TRAINER_CYNDY_1 class=regular
+## E0071 TRAINER_CYNDY_1 class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Riolu and Meditite keep Cyndy’s support opening: Prankster Screech or Quick Guard opens a physical hit, while Fake Out buys a turn and Pure Power strengthens Drain Punch. Crabominable supplies Iron Fist Ice Hammer for Flying targets, Drain Punch recovery and Thunder Punch coverage. Tinkaton switches into the Fairy, Flying, Psychic, Dark and Bug attacks that threaten its partners, then uses Gigaton Hammer, Mold Breaker Play Rough or Knock Off. It cannot use Gigaton Hammer on consecutive turns.
@@ -196,7 +196,7 @@ MEDITITE @SITRUS_BERRY PURE_POWER JOLLY 4/252/0/0/0/252 9 | FAKE_OUT, DRAIN_PUNC
 CRABOMINABLE @SITRUS_BERRY IRON_FIST ADAMANT 252/252/0/0/4/0 9 | ICE_HAMMER, DRAIN_PUNCH, THUNDER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TINKATON @LEFTOVERS MOLD_BREAKER ADAMANT 252/252/0/0/4/0 11 | GIGATON_HAMMER, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0064 TRAINER_MARLENE class=regular
+## E0073 TRAINER_MARLENE class=regular
 strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Marlene's young psychics now travel with a big sister who handles their counters. First two useful turns: Gothita and Hatterene lead. Hatterene sets Trick Room from 29 base Speed, and Magic Bounce reflects the Taunt, Encore or Will-O-Wisp that normally stops a room; Fake Out still interrupts it, so Gothita Protects or uses Fake Tears on the foe Hatterene will hit next. Shadow Tag keeps non-Ghost foes from switching out of the room, but pivot moves such as U-turn and Parting Shot still leave. Under the room, Hatterene's Dazzling Gleam hits both foes and punishes Dark and Fighting leads, Mystical Fire answers Bug and Steel while lowering Special Attack, and Psychic handles Poison. Alternate deployment: Spoink is the backup room with Thick Fat and Power Gem into Bug, Fire and Flying targets. Reserves & disruption: Inkay replaces Slowpoke and Baltoy's Knock Off weakness with a Dark/Psychic body that resists Dark and Ghost and is immune to Psychic; Contrary turns Superpower into +1 Attack and Defense, Superpower hits Dark and Steel foes for super-effective damage, Knock Off hits Ghost foes, Psycho Cut hits Fighting and Poison, and Protect covers the turn a room ends. Gothita's Focus Sash and Inkay's Eviolite can still be knocked away.
@@ -425,7 +425,7 @@ WATTREL @LIFE_ORB WIND_POWER MODEST 4/0/0/252/0/252 5 | THUNDERBOLT, AIR_SLASH, 
 MANTYKE @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 5 | SURF, AIR_SLASH, WIDE_GUARD, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
 ARROKUDA @MYSTIC_WATER PROPELLER_TAIL ADAMANT 4/252/0/0/0/252 4 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0067 TRAINER_ELLIOT_1 class=regular
+## E0074 TRAINER_ELLIOT_1 class=regular
 strategy: SETUP
 mega_slots: NONE
 ai: Conservative
@@ -612,7 +612,7 @@ MORELULL @EVIOLITE EFFECT_SPORE BOLD 252/0/252/0/4/0 3 | SPORE, STRENGTH_SAP, DA
 ## E0047 TRAINER_GRUNT_MUSEUM_1 class=grunt
 strategy: TRICK_ROOM
 mega_slots: NONE
-plan: The museum ambush turns the Oceanic Museum's own wreck-salvage display against the player. Galarian Yamask, a cursed tablet from the undersea-ruins case, and Dhelmise, the anchor off the shipwreck model, lead. Both are Ghosts, so Fake Out, Close Combat and Sacred Sword pass straight through them. Yamask's Ground typing ignores Electric, and Dhelmise resists Electric and Grass. Turn one: Yamask sets Trick Room from 24 Speed. It does not Protect first, and it takes Will-O-Wisp or Night Shade only when the room is already up or cannot be set. Dhelmise attacks at once. It uses Poltergeist on a holder of an item, Steelworker Heavy Slam on light Electric, Fairy or Ice targets, and Power Whip on Water or Ground. Under the room the whole crew moves in one chain: Yamask 24 Night Shade (fixed 37), Dhelmise 29, Rattata 52 Super Fang, then Wailmer 60 Brine, which doubles on the target Rattata just halved. Alolan Rattata and Wailmer are the grunt's own partners in the back. Thick Fat Rattata is immune to Ghost and Psychic and resists Dark, Fire and Ice, which are exactly the answers to the lead. It uses Snarl to cut both special attackers, and Taunt on a foe that is Protect-stalling the room or setting its own speed control. Wailmer is the only Electric/Grass-weak member. It enters behind Snarl and a set room and spends the room on Hydro Pump, Brine or Ice Beam into Grass and Flying. When the room ends or is denied, the team keeps its typing and the level lead rather than resetting blindly. Yamask resets only if it is alive on a turn when the room is down. Stats: Yamask Eviolite Sassy, zero Speed, HP with split defenses to survive one super-effective hit. Dhelmise Brave HP/Attack, zero Speed. Rattata Eviolite Sassy HP/SpD, zero Speed. Wailmer Eviolite Modest HP/SpD-heavy (252/60 SpA/196 SpD) so an L30 Specs Thunderbolt tops out at 171 of its 177 HP, and full Speed IV so it moves after Rattata under the room. Could it be cooler? Yes: the grunt raids the exhibits. The display pieces come alive around the Rattata and Wailmer he brought, and the old Super Fang into attack sequence becomes a real in-room combo. Could it be cooler again? The lead's immunities blank the counter that broke the old team, and the back line blanks the counter to the lead. Overrepresented? Galarian Yamask has no other authored owner. Dhelmise's first other owner is E0137. Brandi's E0080 Bronzor room is a Psychic/Steel support room, not a Ghost immunity lead. There is no Carvanha/Golbat repeat before Archie's rain crew, and Woods-thug Water Spout is not reused. Preserve the grunt's independent win and the scripted recovery exit before Archie.
+plan: The museum ambush turns the Oceanic Museum's own wreck-salvage display against the player. Galarian Yamask, a cursed tablet from the undersea-ruins case, and Dhelmise, the anchor off the shipwreck model, lead. Both are Ghosts, so Fake Out, Close Combat and Sacred Sword pass straight through them. Yamask's Ground typing ignores Electric, and Dhelmise resists Electric and Grass. Turn one: Yamask sets Trick Room from 24 Speed. It does not Protect first, and it takes Will-O-Wisp or Night Shade only when the room is already up or cannot be set. Dhelmise attacks at once. It uses Poltergeist on a holder of an item, Steelworker Heavy Slam on light Electric, Fairy or Ice targets, and Power Whip on Water or Ground. Under the room the whole crew moves in one chain: Yamask 24 Night Shade (fixed 37), Dhelmise 29, Rattata 52 Super Fang, then Wailmer 60 Brine, which doubles on the target Rattata just halved. Alolan Rattata and Wailmer are the grunt's own partners in the back. Thick Fat Rattata is immune to Ghost and Psychic and resists Dark, Fire and Ice, which are exactly the answers to the lead. It uses Snarl to cut both special attackers, and Taunt on a foe that is Protect-stalling the room or setting its own speed control. Wailmer is the only Electric/Grass-weak member. It enters behind Snarl and a set room and spends the room on Hydro Pump, Brine or Ice Beam into Grass and Flying. When the room ends or is denied, the team keeps its typing and the level lead rather than resetting blindly. Yamask resets only if it is alive on a turn when the room is down. Stats: Yamask Eviolite Sassy, zero Speed, HP with split defenses to survive one super-effective hit. Dhelmise Brave HP/Attack, zero Speed. Rattata Eviolite Sassy HP/SpD, zero Speed. Wailmer Eviolite Modest HP/SpD-heavy (252/60 SpA/196 SpD) so an L30 Specs Thunderbolt tops out at 171 of its 177 HP, and full Speed IV so it moves after Rattata under the room. Could it be cooler? Yes: the grunt raids the exhibits. The display pieces come alive around the Rattata and Wailmer he brought, and the old Super Fang into attack sequence becomes a real in-room combo. Could it be cooler again? The lead's immunities blank the counter that broke the old team, and the back line blanks the counter to the lead. Overrepresented? Galarian Yamask has no other authored owner. Dhelmise's first other owner is E0137. Brandi's E0067 Bronzor room is a Psychic/Steel support room, not a Ghost immunity lead. There is no Carvanha/Golbat repeat before Archie's rain crew, and Woods-thug Water Spout is not reused. Preserve the grunt's independent win and the scripted recovery exit before Archie.
 crack: Deny the room: Taunt Yamask before its -7 Trick Room, or take it out turn one with two super-effective hits (Dark, Ghost, Grass, Water, Ice), which hands Dhelmise a free attack. Otherwise Protect or switch through the four room turns while Rattata tries to Taunt you out of Protect. Dark, Ghost and Ice hit both leads, and Fire hits Dhelmise. Knock Off strips Yamask's Eviolite, and a Pokemon holding no item blanks Poltergeist. Heavy targets such as Hariyama, Snorlax, Gyarados and Cobalion shrug off Heavy Slam. Fighting hits Rattata four times over and Electric/Grass hits Wailmer, so keep those attackers for the back line instead of wasting them on the Ghost lead.
 YAMASK_GALAR @EVIOLITE WANDERING_SPIRIT SASSY 252/0/116/0/140/0 5 | TRICK_ROOM, NIGHT_SHADE, WILL_O_WISP, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 DHELMISE @SITRUS_BERRY STEELWORKER BRAVE 252/252/4/0/0/0 4 | POLTERGEIST, HEAVY_SLAM, POWER_WHIP, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
@@ -631,7 +631,7 @@ EELEKTRIK @EVIOLITE SWIFT_SWIM MODEST 120/0/0/252/0/136 4 | THUNDER, FLASH_CANNO
 LOMBRE @SITRUS_BERRY SWIFT_SWIM MODEST 4/0/0/252/0/252 3 | RAIN_DANCE, HYDRO_PUMP, GIGA_DRAIN, ICE_BEAM | ivs=31/0/31/31/31/31 | friendship=255
 CARVANHA @EXPERT_BELT SPEED_BOOST ADAMANT 4/252/0/0/0/252 3 | LIQUIDATION, CRUNCH, POISON_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0068 TRAINER_GRETA_SLATEPORT class=brain
+## E0075 TRAINER_GRETA_SLATEPORT class=brain
 strategy: ALLY_COMBO
 mega_slots: NONE
 plan: The Arena Tycoon's exhibition, one Pokemon for each Battle Arena judge plus her Gold-print headliner, and now a lead that no Fake Out can touch. First two useful turns: Umbreon (Mind) and Shedinja (Skill) open together. Umbreon's Inner Focus blocks the flinch and Intimidate, and Fake Out cannot hurt Shedinja at all: it is a Ghost, and Wonder Guard stops a Scrappy Normal hit. Shedinja's Focus Sash means it always gets one action, and its two priority moves act before almost every foe. Shadow Sneak removes a fast Ghost, Psychic or Booster Energy attacker before it moves (at Shedinja's level it one-shots a Booster Energy Flutter Mane even without help). Sucker Punch hits an attacking Steel, Ghost or Psychic. Poltergeist is the 110-power finisher on any foe still holding an item, such as a Mega Charizard, a Sitrus or Life Orb holder or a Focus Sash user. Umbreon uses Helping Hand only on a turn when the boost turns Shedinja's or Gengar's hit into a KO it would otherwise miss, such as Poltergeist into a Mega Charizard Y or Kangaskhan, or Shadow Sneak through Intimidate. Otherwise it uses Snarl against special pairs, Foul Play into a physical attacker, or Thunder Wave on a fast threat that Shedinja cannot reach, so Gengar and Heracross can outspeed it afterwards. Shedinja Protects when two foes that can hit it super-effectively both aim at it. Alternate deployment: when the first lead falls, Gengar (the Gold print) comes in at full HP behind a Focus Sash. A faster Ghost or Dark hit leaves it at 1 HP, and it answers with Sludge Bomb or Shadow Ball on the fast attacker, Thunderbolt on a Charizard or Water/Flying foe (Helping Hand makes that an OHKO on Mega Charizard Y), or Focus Blast on an Incineroar, Kangaskhan or other Dark/Normal/Steel foe. Reserves & disruption: Guts Heracross (Body) comes in last. Its Flame Orb burns it at the end of its first turn, so Intimidate and burns stop mattering, and at Jolly speed it outspeeds Mega Charizard Y. It uses Rock Slide on Flying and Fire pairs, Close Combat on Incineroar, Kangaskhan and Dark/Steel foes, Knock Off on Ghosts (Gholdengo and Flutter Mane included), and Protect when two foes aim at it. Stats: Umbreon is specially bulky support. Shedinja has 1 HP, full Attack and full Speed (Inclement Attack 100), and still moves last without priority. Gengar is a fast special attacker. Heracross is a fast physical attacker. Could it be cooler? The last version led with Gengar, and a Booster Energy Flutter Mane deleted it before it moved. Now the lead is the Arena's precision act: a 1-HP Wonder Guard assassin that Fake Out cannot touch and that strikes first with priority, beside an Inner Focus caddy. The Gold Gengar waits behind it with a Sash, and Heracross waits as the burned bruiser.
@@ -663,7 +663,7 @@ GRANBULL @SITRUS_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 4 | PLAY_ROUGH, CLOSE_
 BOLTUND @LIFE_ORB STRONG_JAW JOLLY 4/252/0/0/0/252 3 | THUNDER_FANG, CRUNCH, FIRE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 DACHSBUN @SITRUS_BERRY WELL_BAKED_BODY IMPISH 252/0/252/0/4/0 4 | HOWL, BODY_PRESS, PLAY_ROUGH, SNARL | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0069 TRAINER_SALLY class=regular
+## E0076 TRAINER_SALLY class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Lopunny and Kirlia lead the Trick House control puzzle. Scrappy Fake Out can buy Kirlia a useful Imprison turn; Kirlia can instead attack when the opponent has no worthwhile shared moves or the support turn is unsafe. Imprison denies opposing Psychic, Dazzling Gleam and Protect while Kirlia remains active. It does not cancel a Protect that already executed before this priority-zero action, and switching/fainting ends the lock. Floragato supplies physical attacks/pivoting, and Whimsicott's Encore punishes a suitable remaining choice. Kirlia is Timid252HP/4SpAttack/252Speed, unmodified79 Speed at35, rather than another Calm Mind recipient. Lopunny's108 Speed and Fake Out support the opening; no guarantee against Covert Cloak, priority denial, spread attacks or faster disruption is implied. Keep Wally's separate Kirlia growth/setup role. Stats: Timid HP/Speed Kirlia79 now supports move denial rather than maximizing Calm Mind offense. Lopunny108 and fast physical Floragato provide pressure; Sitrus Whimsicott is bulky/fast utility. Could it be cooler? Yes: Fake Out into a useful matching-move lock makes the Trick House cast distinct; Kirlia attacks when no useful lock exists. Overrepresented? Sally no longer duplicates Wally Calm Mind/Psychic/Dazzling Gleam/Protect Kirlia. The species callback remains, with a different job and opening. Medium incoming cap30 levels31/35/32/30 are unplayed design seeds.
@@ -673,7 +673,7 @@ KIRLIA @EVIOLITE TRACE TIMID 252/0/0/4/0/252 5 | IMPRISON, PSYCHIC, DAZZLING_GLE
 FLORAGATO @EVIOLITE PROTEAN JOLLY 4/252/0/0/0/252 3 | SEED_BOMB, PLAY_ROUGH, U_TURN, QUICK_ATTACK | ivs=31/31/31/31/31/31 | friendship=255
 WHIMSICOTT @SITRUS_BERRY PRANKSTER TIMID 252/0/4/0/0/252 1 | MOONBLAST, LEECH_SEED, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
-## E0070 TRAINER_EDDIE class=regular
+## E0077 TRAINER_EDDIE class=regular
 strategy: REDIRECTION
 mega_slots: NONE
 plan: Dugtrio Earthquake with airborne Misdreavus attacking/burning; on next turn reassess trapping and immunities. Carnivine can redirect or Stun Spore for a surviving attacker; Gligar is a fast Ground-immune pivot. No ally is presumed immune once grounded/suppressed. Stats: Keep Sash physical Dugtrio, Eviolite special Misdreavus, physical/support Carnivine and Flying Gem Acrobatics Gligar. Could it be cooler? Keep the underground/hovering trap formation; replace unsupported Carnivine Helping Hand with legal Stun Spore. Overrepresented? Eddie develops Sarah alternate Arena Trap/Levitate Earthquake into a full fast team; this accepted overlap remains a pacing watch item. Medium incoming cap30 levels30/32/32/32 are unplayed design seeds.
@@ -759,7 +759,7 @@ BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | SPORE, MACH_PUNCH, SEED
 NUMEL @SITRUS_BERRY OBLIVIOUS QUIET 252/0/4/252/0/0 7 | HEAT_WAVE, EARTH_POWER, YAWN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 COMBUSKEN @LIFE_ORB SPEED_BOOST JOLLY 4/252/0/0/0/252 9 | FIRE_PUNCH, LOW_KICK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0071 TRAINER_JACLYN class=regular
+## E0078 TRAINER_JACLYN class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Jaclyn keeps the trapped-Encore, Simple Stored Power puzzle and now has a Psychic that Dark types cannot wall. First two useful turns: Wobbuffet uses Encore to lock in a completed support move, or Safeguard against a relevant status line, while Swoobat safely uses Calm Mind or attacks. Simple doubles Calm Mind to +2 Special Attack and Special Defense, and Stored Power then attacks; Shadow Tag traps non-Ghost foes but never redirects attacks. Counter and Mirror Coat punish the foe that hits Wobbuffet hardest. Alternate deployment: Kadabra gives immediate fast pressure, with Dazzling Gleam for Dark and Fighting foes. Reserves & disruption: Gallade replaces Musharna, the overlap with Brandi. Justified raises its Attack when a Dark move hits it, so the Knock Offs, Foul Plays and Sucker Punches that answer the other three feed it; Sacred Sword hits Dark and Steel foes for super-effective damage and ignores their stat boosts, Psycho Cut handles Fighting and Poison foes, and Knock Off punishes Ghosts. Lum Berry cures the Will-O-Wisp or sleep a Dark/Ghost support would use to neutralize it.
@@ -769,7 +769,7 @@ SWOOBAT @SITRUS_BERRY SIMPLE TIMID 4/0/0/252/0/252 2 | CALM_MIND, STORED_POWER, 
 KADABRA @FOCUS_SASH MAGIC_GUARD TIMID 4/0/0/252/0/252 2 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 GALLADE @LUM_BERRY JUSTIFIED ADAMANT 252/252/4/0/0/0 2 | SACRED_SWORD, PSYCHO_CUT, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0073 TRAINER_ANTHONY class=regular
+## E0079 TRAINER_ANTHONY class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Doduo attacks or uses one supported Swords Dance while Zebstrika threatens coverage/pivot. Linoone now supplies immediate Choice Band Extreme Speed or a useful Switcheroo; Magneton can Reflect against physical pressure then attack. No Belly Drum turn or Gluttony trigger is planned. Stats: Fast physical Band Linoone matches priority/coverage; Gluttony is dormant while Band remains. Physical Zebstrika still has uninvested Overheat coverage. Could it be cooler? Yes: item trading adds a road-race trick while Doduo keeps optional Swords Dance offense. Overrepresented? Johnson Doduo is Sash/Endeavor. Removing this Drum is a local differentiation choice, not a campaign ban on evolutionary callbacks. Medium incoming cap30 levels34/31/32/30 are unplayed design seeds.
@@ -789,7 +789,7 @@ QUAXWELL @LIFE_ORB MOXIE JOLLY 4/252/0/0/0/252 5 | AQUA_CUTTER, BRAVE_BIRD, LOW_
 QUILAVA @CHOICE_SPECS BLAZE TIMID 4/0/0/252/0/252 4 | HEAT_WAVE, FLAMETHROWER, EXTRASENSORY, ERUPTION | ivs=31/0/31/31/31/31 | friendship=255
 BRIONNE @THROAT_SPRAY LIQUID_VOICE MODEST 4/0/0/252/0/252 4 | HYPER_VOICE, MOONBLAST, ICY_WIND, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
-## E0074 TRAINER_JACOB class=regular
+## E0080 TRAINER_JACOB class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Ferroseed Leech Seed plus Druddigon attacks creates a contact tax; hazards only if likely switches repay the turn. Cyclizar Shed Tail has an actual receiver (Druddigon or Lycanroc), HP cost and a remaining bench. Lycanroc gives faster pressure; do not spend two pivots without attacking. Stats: Zero Speed IV improves Ferroseed Gyro Ball. Attack/Assault Vest Druddigon and HP/Shed Tail Cyclizar fit their actual moves. Could it be cooler? Retain the thorny contact-tax board and substitute transfer rather than add generic setup. Overrepresented? Later Julio repeats Cyclizar with different recipients; Maria nearby Lycanroc family remains a visible accepted overlap. Medium incoming cap30 levels32/31/30/30 are unplayed design seeds.
@@ -810,7 +810,7 @@ ROSELIA @FOCUS_SASH NATURAL_CURE TIMID 4/0/0/252/0/252 9 | MUD_SHOT, SLEEP_POWDE
 KIRLIA @EVIOLITE TRACE MODEST 140/0/0/252/0/116 13 | MYSTICAL_FIRE, DAZZLING_GLEAM, PSYCHIC, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 MAGNETON @AIR_BALLOON STURDY MODEST 4/0/0/252/0/252 8 | THUNDERBOLT, FLASH_CANNON, VOLT_SWITCH, PROTECT | ivs=31/0/31/31/31/31 | friendship=255
 
-## E0075 TRAINER_ANNA_AND_MEG_1 class=regular
+## E0063 TRAINER_ANNA_AND_MEG_1 class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Hitmonlee attacks before minimum-Speed Oranguru and can be Instructed in the same turn after successful eligible move history exists. Repeat useful Rock Slide/Low Kick only into a valid surviving target; otherwise Psychic/Foul Play. Trumbeak is a faster multi-hit alternative and Lickitung provides Helping Hand. Stats: Minimum-Speed Oranguru37 follows Hitmonlee68 and Trumbeak95; Lickitung35 is slower and cannot automatically supply a fresh same-turn repeat. Could it be cooler? Keep instructor, kicking pupil and drilling bird; replace unsupported Drain Punch with Low Kick while retaining Band Close Combat. Overrepresented? Later Parker uses room and slow spread partners; this no-room fast-pupil lesson differs. Takao Hitmonlee serves trapping. Medium incoming cap30 levels31/31/33/34 are unplayed design seeds.
@@ -820,7 +820,7 @@ HITMONLEE @CHOICE_BAND LIMBER ADAMANT 252/252/4/0/0/0 2 | LOW_KICK, CLOSE_COMBAT
 LICKITUNG @EVIOLITE OWN_TEMPO IMPISH 252/0/252/0/4/0 3 | BODY_SLAM, KNOCK_OFF, POWER_WHIP, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 TRUMBEAK @EVIOLITE SKILL_LINK JOLLY 4/252/0/0/0/252 4 | ROCK_BLAST, BULLET_SEED, DRILL_PECK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0076 TRAINER_ISAAC_1 class=ace
+## E0069 TRAINER_ISAAC_1 class=ace
 strategy: REDIRECTION,SETUP
 mega_slots: 6
 ai: Conservative
@@ -833,7 +833,7 @@ DRATINI @EVIOLITE SHED_SKIN ADAMANT 4/252/0/0/0/252 4 | DRAGON_DANCE, EXTREME_SP
 STARYU @EXPERT_BELT ANALYTIC MODEST 4/0/0/252/0/252 2 | HYDRO_PUMP, ICE_BEAM, THUNDERBOLT, RECOVER | ivs=31/0/31/31/31/31 | friendship=255
 KANGASKHAN @KANGASKHANITE SCRAPPY ADAMANT 140/252/0/0/0/116 -1 | FAKE_OUT, BODY_SLAM, DRAIN_PUNCH, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0077 TRAINER_MARIA_1 class=regular
+## E0064 TRAINER_MARIA_1 class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Froslass Icy Wind/Will-O-Wisp can enable Salandit Nasty Plot or immediate STAB; next turn exploit speed/boost instead of repeating setup. Lycanroc and Raboot give physical priority/pivot alternatives. Destiny Bond only buys a real trade, never automatic alternating stall. Stats: Fast utility Froslass and offensive Salandit/Raboot fit; smaller attackers receive levels individually. Tough Claws does not boost Rock Slide; Expert Belt requires a super-effective hit. Could it be cooler? Retain icy disruption into fire-lizard offense and immediate physical reserves; no extra field engine needed. Overrepresented? Jacob nearby Lycanroc family is accepted but noticeable. Later Froslass owners use Anger Point or snow instead of this tempo opening. Medium incoming cap30 levels30/34/30/33 are unplayed design seeds.
@@ -843,7 +843,7 @@ SALANDIT @EVIOLITE OBLIVIOUS TIMID 4/0/0/252/0/252 4 | FLAMETHROWER, SLUDGE_BOMB
 LYCANROC_DUSK @EXPERT_BELT TOUGH_CLAWS JOLLY 4/252/0/0/0/252 1 | ACCELEROCK, ROCK_SLIDE, CLOSE_COMBAT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 RABOOT @EVIOLITE LIBERO JOLLY 4/252/0/0/0/252 3 | FLARE_BLITZ, HIGH_JUMP_KICK, U_TURN, SUCKER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0078 TRAINER_DEREK class=regular
+## E0068 TRAINER_DEREK class=regular
 strategy: NONE
 mega_slots: NONE
 plan: The bagworm family keeps its three cloak-and-moth jobs, but trades Plant Wormadam (4x weak to Fire) for an Araquanid that shuts down Fire attacks. First two useful turns: Araquanid and Sandy lead. Water Bubble halves Fire damage and prevents burns, so Bug/Water Araquanid takes half damage from Fire; its doubled Liquidation hits Fire, Rock and Ground types for super-effective damage. Wide Guard blocks the spread Heat Wave, Rock Slide and Air Cutter that punish a Bug team, and it also shields its own side from Sandy's Earthquake, so Sandy can attack freely that turn. Sandy's Assault Vest Earthquake, Rock Blast and Sucker Punch are the physical lane; Rock Blast also hits Fire and Flying types for super-effective damage. Alternate deployment: Trash Wormadam uses the damage it actually received for Metal Burst, or Toxic an appropriate wall; its zero Speed IV is deliberate. Specs Tinted Lens Mothim provides fast special damage and a U-turn pivot, and is immune to Sandy's Earthquake. Reserves & disruption: Leech Life keeps Araquanid healthy against Grass and Psychic foes. Metal Burst does not use Trash's Attack stat, and an Earthquake beside an unshielded Trash still hits it.
@@ -853,7 +853,7 @@ WORMADAM_SANDY @ASSAULT_VEST OVERCOAT ADAMANT 252/252/4/0/0/0 4 | EARTHQUAKE, RO
 WORMADAM_TRASH @ROCKY_HELMET OVERCOAT SASSY 252/0/252/0/4/0 4 | FLASH_CANNON, METAL_BURST, TOXIC, PROTECT | ivs=31/0/31/31/31/0 | friendship=255
 MOTHIM @CHOICE_SPECS TINTED_LENS TIMID 4/0/0/252/0/252 4 | BUG_BUZZ, AIR_SLASH, GIGA_DRAIN, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0079 TRAINER_LYDIA_1 class=ace
+## E0070 TRAINER_LYDIA_1 class=ace
 strategy: NONE
 mega_slots: NONE
 ai: Conservative
@@ -866,7 +866,7 @@ MAGBY @EVIOLITE VITAL_SPIRIT ADAMANT 4/252/0/0/0/252 5 | FIRE_PUNCH, MACH_PUNCH,
 GIBLE @EVIOLITE ROUGH_SKIN JOLLY 4/252/0/0/0/252 5 | DRAGON_CLAW, ROCK_SLIDE, EARTHQUAKE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 LARVESTA @CHOICE_BAND FLAME_BODY ADAMANT 4/252/0/0/0/252 5 | FLARE_BLITZ, U_TURN, WILD_CHARGE, BUG_BITE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0080 TRAINER_AISHA class=casual
+## E0067 TRAINER_AISHA class=casual
 strategy: ALLY_COMBO
 mega_slots: NONE
 tactic: ACTIVATE THROH STORM_THROW TAUROS_PALDEA_COMBAT
@@ -877,7 +877,7 @@ TAUROS_PALDEA_COMBAT @CLEAR_AMULET ANGER_POINT BRAVE 252/252/0/0/4/0 3 | CLOSE_C
 HARIYAMA @SITRUS_BERRY THICK_FAT ADAMANT 4/252/124/0/128/0 3 | FAKE_OUT, CLOSE_COMBAT, KNOCK_OFF, BULLET_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 HITMONTOP @ROCKY_HELMET INTIMIDATE ADAMANT 252/252/4/0/0/0 3 | FAKE_OUT, CLOSE_COMBAT, FEINT, WIDE_GUARD | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0080 TRAINER_BRANDI class=casual
+## E0067 TRAINER_BRANDI class=casual
 strategy: TRICK_ROOM
 mega_slots: NONE
 plan: Bronzor establishes Trick Room for Magic Guard/Life Orb Solosis or physical Heavy Metal Cufant. Musharna supplies Helping Hand, Moonlight and Safeguard, with Psychic when direct pressure is better. Do not spend every room turn layering support. Stats: All four use zero Speed IVs and suitable slow natures. Solosis invests in special offense; Cufant in physical offense. Heavy Metal improves eligible Heavy Slam weight ratios but can strengthen incoming Low Kick/Grass Knot. Could it be cooler? Replace Kirlia/Wobbuffet with a small mixed-attacking Trick Room collection rather than another Psychic setup/trap quartet. Overrepresented? Removes the strongest Jaclyn/Sally/Wally overlap. Solosis and Cufant have no other authored owners; Musharna's support now serves a different primary plan. Medium cap30 levels35/34/34/29 are initial design seeds; no new battle validation is claimed.
@@ -887,7 +887,7 @@ SOLOSIS @LIFE_ORB MAGIC_GUARD QUIET 252/0/4/252/0/0 9 | PSYCHIC, ENERGY_BALL, SH
 CUFANT @EVIOLITE HEAVY_METAL BRAVE 252/252/4/0/0/0 9 | HEAVY_SLAM, HIGH_HORSEPOWER, PLAY_ROUGH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 MUSHARNA @LEFTOVERS SYNCHRONIZE QUIET 252/0/4/252/0/0 8 | PSYCHIC, HELPING_HAND, MOONLIGHT, SAFEGUARD | ivs=31/0/31/31/31/0 | friendship=255
 
-## E0080 TRAINER_MELINA class=casual
+## E0067 TRAINER_MELINA class=casual
 strategy: ALLY_COMBO
 mega_slots: NONE
 plan: Yanma accumulates actual Speed Boost stages; a later Flamigo entry can copy them through Costar. Persian disrupts or pivots. Gligar becomes bulky Feint/Knock Off/High Horsepower support rather than another Flying Gem Acrobatics attacker. Switching Flamigo in spends that slot's action. Stats: Fast special Yanma and physical Flamigo remain distinct. Eviolite/Hyper Cutter Gligar uses HP/Speed for timely Feint and utility; no unsupported Roost is added. Could it be cooler? Keep speed inheritance, with a more purposeful shield-breaking reserve. Overrepresented? Lilith copies Dragon Dance/Moxie progress; Melina copies accumulated speed. The Gligar revision removes Eddie's exact recent build copy. Medium cap30 levels33/31/30/33 are initial design seeds; no new battle validation is claimed.

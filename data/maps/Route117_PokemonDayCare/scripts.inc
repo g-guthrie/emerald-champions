@@ -81,5 +81,6 @@ Route117_PokemonDayCare_Text_AsYouWishThen:
 
 Route117_PokemonDayCare_Text_SometimesEggFoundAtDayCare:
 	.string "I've already given you an Egg today.\p"
-	.string "Come back tomorrow. I may have\n"
-	.string "another Egg for you to raise!$"
+	.string "Day Care Eggs hatch knowing moves\n"
+	.string "no tutor will ever teach.\p"
+	.string "Come back tomorrow for another!$"

@@ -1,6 +1,6 @@
 {
   "play_order": 66,
-  "e_group": "E0080",
+  "e_group": "E0067",
   "trainer": "TRAINER_AISHA",
   "class": "casual",
   "location": "Route117",
@@ -57,7 +57,7 @@
     {
       "check": "Hariyama's own Fake Out / physical line",
       "result": "PASS with a targeting flaw",
-      "evidence": "T2 Hariyama used Fake Out. The choice of move is correct on entry. See AI defect E0080-D2 for the target collision with Hitmontop's Fake Out on the same turn."
+      "evidence": "T2 Hariyama used Fake Out. The choice of move is correct on entry. See AI defect E0067-D2 for the target collision with Hitmontop's Fake Out on the same turn."
     },
     {
       "check": "Every opposing Protect has a payoff",
@@ -68,7 +68,7 @@
   "protect_ledger": [],
   "ai_defects": [
     {
-      "id": "E0080-D1",
+      "id": "E0067-D1",
       "status": "REPRODUCES on work/agent-battle-build-5 - third consecutive run",
       "severity": "high",
       "attempt": 1,
@@ -80,7 +80,7 @@
       "cross_owner_note": "The ACTIVATE machinery is shared. E0059 TRAINER_WATTSON_1 carries `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE` and is the second data point; that owner's rerun receipt should be read beside this one."
     },
     {
-      "id": "E0080-D2",
+      "id": "E0067-D2",
       "status": "NEW this run",
       "severity": "low",
       "attempt": 1,
@@ -104,7 +104,7 @@
         "after": 1,
         "resolved_level_before": 28,
         "resolved_level_after": 29,
-        "reasoning": "All four members are now level 28, so 'weakest' cannot be decided by level and is decided by evidence instead. Froslass is the activator and it has died on turn 1 in every run, which is also the reason the fight collapses in three turns. It has full +-2 budget remaining. Raising it does not repair defect E0080-D1 and is not offered as a substitute for that repair - it buys the activator one more point of bulk against the turn-1 alpha strike that has ended this fight three times."
+        "reasoning": "All four members are now level 28, so 'weakest' cannot be decided by level and is decided by evidence instead. Froslass is the activator and it has died on turn 1 in every run, which is also the reason the fight collapses in three turns. It has full +-2 budget remaining. Raising it does not repair defect E0067-D1 and is not offered as a substitute for that repair - it buys the activator one more point of bulk against the turn-1 alpha strike that has ended this fight three times."
       },
       {
         "trainer": "TRAINER_AISHA",
@@ -118,7 +118,7 @@
       }
     ]
   },
-  "cooler_note": "Unchanged and now urgent. The concept - a Froslass with a surgically weakened Special Attack throwing a guaranteed-crit Frost Breath at its own Clear Amulet Tauros to hand it +6 Attack, with Wide Guard behind it - is one of the most memorable small ideas in the range, and no player has ever seen it. The cooler team is this exact team with the tactic working; no composition change is warranted or proposed. If E0080-D1 proves unfixable on the shared path, the fallback worth considering in a later pass is giving Froslass a reason to survive turn 1 that is not levels, for example moving the Focus Sash's job onto a Custap-style resource or leading Hariyama beside Froslass so Fake Out covers the activation turn. Flagged, not applied - this pass changes levels only.",
+  "cooler_note": "Unchanged and now urgent. The concept - a Froslass with a surgically weakened Special Attack throwing a guaranteed-crit Frost Breath at its own Clear Amulet Tauros to hand it +6 Attack, with Wide Guard behind it - is one of the most memorable small ideas in the range, and no player has ever seen it. The cooler team is this exact team with the tactic working; no composition change is warranted or proposed. If E0067-D1 proves unfixable on the shared path, the fallback worth considering in a later pass is giving Froslass a reason to survive turn 1 that is not levels, for example moving the Focus Sash's job onto a Custap-style resource or leading Hariyama beside Froslass so Fake Out covers the activation turn. Flagged, not applied - this pass changes levels only.",
   "authored_set_legality": "No legality problem found. All four sets validate and no member exceeds the cap window.",
   "verdict": "still too easy",
   "note_on_teams_file": "Per this block's override the teams file was edited in place by targeted line replacement and is deliberately NOT staged or committed by this receipt. The two changed lines are recorded above and in the final report."

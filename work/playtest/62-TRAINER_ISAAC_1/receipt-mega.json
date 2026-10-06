@@ -1,8 +1,8 @@
 {
-  "play_order": 62, "e_group": "E0076", "trainer": "TRAINER_ISAAC_1", "cap": 30, "difficulty": "medium",
+  "play_order": 62, "e_group": "E0069", "trainer": "TRAINER_ISAAC_1", "cap": 30, "difficulty": "medium",
   "run_kind": "mega-rerun", "build": "work/agent-battle-build-10",
   "rom_sha256": "30de2c0e8774959c392796a5ec21a389185de8479ad4cc650885a05bb5072e26",
-  "question": "Does Mega Kangaskhan now Mega-Evolve on its first action (E0076-D1 retest after the pair-search Mega-board fix)?",
+  "question": "Does Mega Kangaskhan now Mega-Evolve on its first action (E0069-D1 retest after the pair-search Mega-board fix)?",
   "party_manifest": "work/playtest/62-TRAINER_ISAAC_1/party.json",
   "party_reuse": "Unchanged from receipt.json / receipt-rerun.json; same cap 30 and Route 117, chronology audit unchanged.",
   "level_offsets_at_run": {"MUNCHLAX": 4, "TOGEPI": 6, "ABRA": 4, "DRATINI": 5, "STARYU": 3, "KANGASKHAN": -1},
@@ -13,7 +13,7 @@
   ],
   "mega_check": {"evolved": true, "turn": 7, "first_action": true, "board": "Kangaskhan 111/111 enters T6 beside Abra 1/68 (Sash spent) vs Kartana 18/85 (+1 Atk) and Magearna 116/116 (+1 SpA). T7: Mega Evolution, Sucker Punch into Kartana (KO)."},
   "strategy_checks": [
-    {"check": "Mega Kangaskhan Mega-Evolves on first action", "result": "PASS", "evidence": "T7 messages: 'The opposing Kangaskhan's Kangaskhanite is reacting' / 'has Mega Evolved'; opponent party shows KANGASKHAN_MEGA. E0076-D1 no longer reproduces."},
+    {"check": "Mega Kangaskhan Mega-Evolves on first action", "result": "PASS", "evidence": "T7 messages: 'The opposing Kangaskhan's Kangaskhanite is reacting' / 'has Mega Evolved'; opponent party shows KANGASKHAN_MEGA. E0069-D1 no longer reproduces."},
     {"check": "Togepi Follow Me / Helping Hand support", "result": "PASS", "evidence": "T1 Ancient Power into Ice-type Weavile (flinched by Fake Out), T2 Follow Me pulled Knock Off away from Munchlax."},
     {"check": "Munchlax attacks instead of Cursing", "result": "PASS", "evidence": "Fire Punch T1 into Weavile, Body Slam T2 (KO Weavile), Body Slam T3 aimed at 30-HP Gardevoir; never Curse."},
     {"check": "Dratini Protect/Dragon Dance", "result": "PASS", "evidence": "Extreme Speed at the 30-HP Mega Gardevoir on T4 and T5, the correct kill attempt both times; no wasted setup."},

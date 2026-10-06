@@ -1,6 +1,6 @@
 {
   "play_order": 62,
-  "e_group": "E0076",
+  "e_group": "E0069",
   "trainer": "TRAINER_ISAAC_1",
   "class": "ace",
   "location": "Route117",
@@ -10,14 +10,14 @@
   "prior_receipt": "work/playtest/62-TRAINER_ISAAC_1/receipt.json",
   "build": "work/agent-battle-build-3",
   "rom_sha256": "e7de65be122669a85f67ad7c25d12a211d3d53aee0f14f97df843ee75165efe1",
-  "why_rerun": "No level offsets were changed on this trainer after the first run (the first receipt deliberately kept levels because the authored Mega never activated). The rerun exists to re-benchmark the fight on the rebuilt snapshot and to re-test AI defect E0076-D1 (Mega Kangaskhan declining Mega Evolution).",
+  "why_rerun": "No level offsets were changed on this trainer after the first run (the first receipt deliberately kept levels because the authored Mega never activated). The rerun exists to re-benchmark the fight on the rebuilt snapshot and to re-test AI defect E0069-D1 (Mega Kangaskhan declining Mega Evolution).",
   "cap_confirmation": "Driver state reports level_cap 30 and resolved opponent levels 32/34/32/33/31/27, i.e. cap 30 + offset - 2 on Medium with offsets 4/6/4/5/3/-1. This matches the first run exactly, so the two runs are directly comparable. NOTE: the rerun block's table gave cap 36 for play_order 82 and 42 for 107 while giving the receipt value for every other row; those two rows look like a one-row shift of the cap column. Per the brief's own instruction to trust the driver's level_cap, this battle and the rest of the block were run at the cap the driver and the prior receipts confirm.",
   "level_offsets_at_run": {"MUNCHLAX": 4, "TOGEPI": 6, "ABRA": 4, "DRATINI": 5, "STARYU": 3, "KANGASKHAN": -1},
   "resolved_opponent_levels": {"MUNCHLAX": 32, "TOGEPI": 34, "ABRA": 32, "DRATINI": 33, "STARYU": 31, "KANGASKHAN": 27},
   "party_manifest": "work/playtest/62-TRAINER_ISAAC_1/party.json",
   "party_reuse_justification": "Reused unchanged from the first run. The first receipt's chronology audit is still valid at the same cap 30 and the same map (Route 117): every member's source map is at or before Route 110/Slateport, strictly earlier in play order. Nothing in the party was reported weak or illegal, and the party won both runs, so no rebuild was warranted.",
   "pre_declared_strategy_checks": [
-    "RETEST of E0076-D1: does Mega Kangaskhan now Mega-Evolve when it enters holding the Kangaskhanite?",
+    "RETEST of E0069-D1: does Mega Kangaskhan now Mega-Evolve when it enters holding the Kangaskhanite?",
     "Togepi's Follow Me / Helping Hand support is chosen sensibly rather than Ancient Power boost fishing",
     "Munchlax attacks rather than Cursing under spread pressure, with correct type targeting",
     "Dratini's Protect and Dragon Dance are used as real decisions with payoff",
@@ -37,7 +37,7 @@
     }
   ],
   "strategy_checks": [
-    {"check": "E0076-D1 RETEST: Mega Kangaskhan Mega-Evolves", "result": "FAIL - defect reproduces", "evidence": "T3 driver state: b3 KANGASKHAN L27 111/111 SCRAPPY @KANGASKHANITE, active_gimmick 'none', usable_gimmick 'mega', mega_already_used false. It chose MOVE_FAKE_OUT in base form and was KO'd the same turn still in base form. Identical to the first run on the previous build. Parental Bond has now never existed in two benchmarked runs of this team."},
+    {"check": "E0069-D1 RETEST: Mega Kangaskhan Mega-Evolves", "result": "FAIL - defect reproduces", "evidence": "T3 driver state: b3 KANGASKHAN L27 111/111 SCRAPPY @KANGASKHANITE, active_gimmick 'none', usable_gimmick 'mega', mega_already_used false. It chose MOVE_FAKE_OUT in base form and was KO'd the same turn still in base form. Identical to the first run on the previous build. Parental Bond has now never existed in two benchmarked runs of this team."},
     {"check": "Togepi supports rather than boost-fishes", "result": "PASS - improved over the first run", "evidence": "Togepi selected Helping Hand on both of its turns (T1 into the Body Slam that killed Weavile, T2 into the Body Slam that took Mega Gardevoir from 90 to 2) and never selected Ancient Power. Helping Hand is +5 priority, so it resolved ahead of my +3 Fake Out and the Fake Out could not deny it. That is the correct read of the board twice in a row and it is the single biggest behavioural difference between the two runs."},
     {"check": "Munchlax attacks instead of Cursing", "result": "PASS", "evidence": "Curse never selected. Body Slam T1 and T2 (correct: the boosted STAB was lethal both turns), Fire Punch T3 into Mega Gardevoir and T4 into the Grass/Steel Kartana at 4x. Correct target and correct type every turn."},
     {"check": "Dratini Protect / Dragon Dance", "result": "PASS", "evidence": "T5 Protect blocked a Fleur Cannon from a +4 Magearna at 2x into Dragon - certain death. Dratini then used Extreme Speed on T6 rather than a second Protect or a Dragon Dance it would not live to cash. Both choices were correct."},
@@ -49,7 +49,7 @@
   ],
   "ai_defects": [
     {
-      "id": "E0076-D1",
+      "id": "E0069-D1",
       "status": "REPRODUCES on work/agent-battle-build-3",
       "severity": "high",
       "attempt": 1,
@@ -72,7 +72,7 @@
     "changes": []
   },
   "verdict": "calibrated",
-  "could_this_be_cooler": "Unchanged from the first run and still a yes-as-built: five babies and one grown mother, with the mother deliberately BELOW the cap at -1 because her Mega is supposed to make up the difference. The concept survives this pass intact. The one roster note stays the same - Togepi's Yawn was again never selected in six turns, and Light Screen or Thunder Wave would give the redirector something to do on turns when Helping Hand is not the best action. But the real improvement is still not a design change: the coolest thing about this team is a Mega that has now failed to happen twice. Fixing E0076-D1 is worth more than any species swap here, and I would re-benchmark for a possible REDUCTION on Togepi (+6) once Parental Bond actually exists.",
+  "could_this_be_cooler": "Unchanged from the first run and still a yes-as-built: five babies and one grown mother, with the mother deliberately BELOW the cap at -1 because her Mega is supposed to make up the difference. The concept survives this pass intact. The one roster note stays the same - Togepi's Yawn was again never selected in six turns, and Light Screen or Thunder Wave would give the redirector something to do on turns when Helping Hand is not the best action. But the real improvement is still not a design change: the coolest thing about this team is a Mega that has now failed to happen twice. Fixing E0069-D1 is worth more than any species swap here, and I would re-benchmark for a possible REDUCTION on Togepi (+6) once Parental Bond actually exists.",
   "legality_problems_in_authored_set": [],
   "scope": "Synthetic headless benchmark through scripts/playthrough/battle_driver.py on work/agent-battle-build-3. Not earned campaign traversal, and no story progress was awarded. Run-dir scene.gba/scene.elf deleted after the attempt was recorded; logs kept."
 }

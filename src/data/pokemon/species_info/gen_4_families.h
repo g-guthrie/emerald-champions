@@ -2092,7 +2092,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 148 : 159,
         .evYield_SpDefense = 2,
-        .itemRare = ITEM_SILVER_POWDER,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
@@ -2158,7 +2157,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 148 : 159,
         .evYield_Defense = 2,
-        .itemRare = ITEM_SILVER_POWDER,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
@@ -2225,7 +2223,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 148 : 159,
         .evYield_Defense = 1,
         .evYield_SpDefense = 1,
-        .itemRare = ITEM_SILVER_POWDER,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
@@ -2292,7 +2289,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 148 : 159,            \
         .evYield_Attack = 1,                                                \
         .evYield_SpAttack = 1,                                              \
-        .itemRare = ITEM_SILVER_POWDER,                                     \
         .genderRatio = MON_MALE,                                            \
         .eggCycles = 15,                                                    \
         .friendship = STANDARD_FRIENDSHIP,                                  \
