@@ -1458,7 +1458,10 @@ static void PlayerHandleYesNoInput(enum BattlerId battler)
         // Declining Restart immediately asks about forfeiting in the same box.
         // Keep it visible while that selection script replaces the question.
         if (!gBattleStruct->restartQuestionPending || gMultiUsePlayerCursor == 0)
+        {
             HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            ShowPlayerHealthboxesAfterPanel();
+        }
         PlaySE(SE_SELECT);
 
         if (gMultiUsePlayerCursor != 0)
@@ -1471,6 +1474,7 @@ static void PlayerHandleYesNoInput(enum BattlerId battler)
     if (JOY_NEW(B_BUTTON))
     {
         HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+        ShowPlayerHealthboxesAfterPanel();
         PlaySE(SE_SELECT);
         BtlController_Complete(battler);
     }
@@ -1555,8 +1559,8 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
 }
 
 // The move-description and foe-types panel runs a tile into the player's HP
-// box, which would peek out beside it; the boxes it covers are hidden while
-// it is up, and only those come back.
+// boxes, and the restart/forfeit Yes/No box sits over their right ends; the
+// boxes are hidden while either is up, and only those come back.
 static u8 sPanelHiddenHealthboxes;
 
 static void HidePlayerHealthboxesForPanel(void)
@@ -2071,6 +2075,7 @@ static void PlayerHandleYesNoBox(enum BattlerId battler)
     if (IsOnPlayerSide(battler))
     {
         HandleBattleWindow(YESNOBOX_X_Y, 0);
+        HidePlayerHealthboxesForPanel();
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gMultiUsePlayerCursor = 1;
         BattleCreateYesNoCursorAt(1);

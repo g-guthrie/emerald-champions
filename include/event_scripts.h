@@ -711,6 +711,9 @@ extern const u8 EventScript_MovedTooFast[];
 extern const u8 EventScript_DexNavNotAvailable[];
 extern const u8 EventScript_DexNavStartSurfing[];
 extern const u8 EventScript_DexNavStepOnLand[];
+extern const u8 EventScript_DexNavStartSurfingRepeat[];
+extern const u8 EventScript_DexNavStepOnLandRepeat[];
+extern const u8 EventScript_DexNavGetOffBikeRepeat[];
 extern const u8 EventScript_DexNavGetOffBike[];
 extern const u8 EventScript_DexNavTimedOut[];
 

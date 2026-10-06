@@ -300,7 +300,7 @@ void BufferPlannedEVStatPrompt(void)
     u8 *dst = StringCopy(gStringVar4, sPlannedEVStatNames[stat]);
     dst = StringCopy(dst, COMPOUND_STRING(" EVs: "));
     dst = ConvertIntToDecimalStringN(dst, mon != NULL ? GetMonData(mon, sStatData[stat]) : 0, STR_CONV_MODE_LEFT_ALIGN, 3);
-    dst = StringCopy(dst, COMPOUND_STRING(" > "));
+    dst = StringCopy(dst, COMPOUND_STRING(" {RIGHT_ARROW} "));
     dst = ConvertIntToDecimalStringN(dst, sPlannedEVs[stat], STR_CONV_MODE_LEFT_ALIGN, 3);
     dst = StringCopy(dst, COMPOUND_STRING("\nStat: "));
     if (mon != NULL)
@@ -313,7 +313,7 @@ void BufferPlannedEVStatPrompt(void)
         }
         CalculateMonStats(&preview);
         dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, MON_DATA_MAX_HP + stat), STR_CONV_MODE_LEFT_ALIGN, 3);
-        dst = StringCopy(dst, COMPOUND_STRING(" > "));
+        dst = StringCopy(dst, COMPOUND_STRING(" {RIGHT_ARROW} "));
         dst = ConvertIntToDecimalStringN(dst, GetMonData(&preview, MON_DATA_MAX_HP + stat), STR_CONV_MODE_LEFT_ALIGN, 3);
     }
     dst = StringCopy(dst, COMPOUND_STRING("  Total: "));

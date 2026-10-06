@@ -521,7 +521,18 @@ EmeraldChampions_EventScript_BondingValues:
 	copyvar VAR_0x8004, VAR_BONDING_MON
 	copyvar VAR_0x8005, VAR_BONDING_CURSOR
 	special ApplyEmeraldChampionsBonding
+	@ The preview left the Pokémon's name in STR_VAR_1.
+	goto_if_eq VAR_BONDING_CURSOR, 0, EmeraldChampions_EventScript_BondingDoneLow
+	goto_if_eq VAR_BONDING_CURSOR, 2, EmeraldChampions_EventScript_BondingDoneMaximum
 	msgbox EmeraldChampions_Text_BondingDone, MSGBOX_DEFAULT
+	goto Common_EventScript_EmeraldChampionsBonding
+
+EmeraldChampions_EventScript_BondingDoneLow:
+	msgbox EmeraldChampions_Text_BondingDoneLow, MSGBOX_DEFAULT
+	goto Common_EventScript_EmeraldChampionsBonding
+
+EmeraldChampions_EventScript_BondingDoneMaximum:
+	msgbox EmeraldChampions_Text_BondingDoneMaximum, MSGBOX_DEFAULT
 	goto Common_EventScript_EmeraldChampionsBonding
 
 EmeraldChampions_EventScript_BondingUnavailable:
@@ -545,6 +556,10 @@ EmeraldChampions_Text_BondingMaximum:
 	.string "Adores You$"
 EmeraldChampions_Text_BondingDone:
 	.string "All done! If it's ready to evolve,\nyour Leveler can help it along.$"
+EmeraldChampions_Text_BondingDoneLow:
+	.string "All done! {STR_VAR_1}\nwill keep its distance now.$"
+EmeraldChampions_Text_BondingDoneMaximum:
+	.string "All done! {STR_VAR_1}\nadores you now!$"
 EmeraldChampions_Text_BondingLocked:
 	.string "Bonding is for Trainers with a Gym\n"
 	.string "Badge. Come back once you've beaten\l"

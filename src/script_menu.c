@@ -343,9 +343,10 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     }
     LoadMessageBoxAndBorderGfx();
     windowHeight = (argc < maxBeforeScroll) ? argc * 2 : maxBeforeScroll * 2;
-    // A list that scrolls gets a tile on the right for its arrows, so they sit
-    // inside the frame beside the first and last rows instead of on its edges.
-    newWidth = ConvertPixelWidthToTileWidth(width) + (argc > maxBeforeScroll ? 1 : 0);
+    // A list that scrolls gets two tiles on the right for its arrows (14
+    // pixels wide), so they sit inside the frame beside the first and last
+    // rows instead of on its edges or over the text.
+    newWidth = ConvertPixelWidthToTileWidth(width) + (argc > maxBeforeScroll ? 2 : 0);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
     windowId = CreateWindowFromRect(left, top, newWidth, windowHeight);
     SetStandardWindowBorderStyle(windowId, FALSE);
@@ -388,12 +389,14 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     {
         // Create Scrolling Arrows
         struct ScrollArrowsTemplate template;
-        // An up arrow's ink spans y-6..y+1 and a down arrow's y-3..y+5:
-        // these centre them on the first and last 16-pixel rows.
-        template.firstX = (left + newWidth - 1) * 8 + 4;
-        template.firstY = top * 8 + 10;
+        // The window's inside starts a tile in from its frame (left + 1,
+        // top + 1). An up arrow's ink spans y-6..y+1 and a down arrow's
+        // y-3..y+5: these centre them in the two-tile lane, on the first and
+        // last 16-pixel rows.
+        template.firstX = (left + newWidth) * 8;
+        template.firstY = (top + 1) * 8 + 10;
         template.secondX = template.firstX;
-        template.secondY = (top + windowHeight) * 8 - 9;
+        template.secondY = (top + 1 + windowHeight) * 8 - 9;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = argc - maxBeforeScroll;
         template.firstArrowType = SCROLL_ARROW_UP;
