@@ -58,11 +58,17 @@
 #define DETAIL_LINE_2_Y     96
 #define DETAIL_HEIGHT       30
 
-// Each icon has a whole 32x32 cell (WILD_LIST_ICON_PITCH, WILD_LIST_ROW_HEIGHT
-// in include/pokenav.h), so no two icons can touch, and a heading's text never
-// reaches the cells under it.
+// Text and icon cells start a little in from the frame. Each icon has a whole
+// 32x32 cell (WILD_LIST_ICON_PITCH, WILD_LIST_ROW_HEIGHT in include/pokenav.h),
+// so no two icons can touch, and a heading's text never reaches the cells
+// under it. The cells leave a gutter on the right for the scroll arrows.
+#define CONTENT_LEFT        4
+#define CONTENT_WIDTH       (WINDOW_PIXEL_WIDTH - 2 * CONTENT_LEFT)
 #define HEADING_HEIGHT      16
-#define ICONS_PER_ROW       (WINDOW_PIXEL_WIDTH / WILD_LIST_ICON_PITCH)
+#define ICONS_PER_ROW       6
+#define GRID_WIDTH          (ICONS_PER_ROW * WILD_LIST_ICON_PITCH)
+#define ARROW_X             (8 + (CONTENT_LEFT + GRID_WIDTH + WINDOW_PIXEL_WIDTH) / 2) // screen x, mid-gutter
+STATIC_ASSERT(CONTENT_LEFT + GRID_WIDTH + 16 <= WINDOW_PIXEL_WIDTH, wildListArrowGutterFits);
 #define MAX_VISIBLE_ROWS    (LIST_HEIGHT / WILD_LIST_ROW_HEIGHT)
 #define MAX_VISIBLE_ICONS   (MAX_VISIBLE_ROWS * ICONS_PER_ROW)
 
@@ -302,8 +308,19 @@ static void PrintFitted(u32 windowId, u32 fontId, const u8 *str, u32 x, u32 y, u
     AddTextPrinterParameterized3(windowId, fontId, x, y, colors, TEXT_SKIP_DRAW, text);
 }
 
+static bool32 IsHeadingVisible(struct Pokenav_WildList *wild, u32 section)
+{
+    for (u32 i = 0; i < wild->lineCount; i++)
+    {
+        if (wild->lines[i].section == section && wild->lines[i].row == LINE_HEADING)
+            return IsLineVisible(wild, wild->topLine, i);
+    }
+    return FALSE;
+}
+
 // The cell's name, and on the right the place the highlighted section is in
-// ("Mt. Pyre 3F"), blank while it is in the cell's own main map.
+// ("Mt. Pyre 3F") while its heading has scrolled out of sight; blank in the
+// cell's own main map.
 static void DrawTitle(struct Pokenav_WildList *wild)
 {
     u32 windowId = wild->windowIds[WIN_TITLE];
@@ -313,11 +330,11 @@ static void DrawTitle(struct Pokenav_WildList *wild)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(COLOR_BG));
     FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_RULE), 0, TITLE_RULE_Y, WINDOW_PIXEL_WIDTH, 1);
     GetMapName(gStringVar1, wild->list.cell, 0);
-    PrintFitted(windowId, FONT_NORMAL, gStringVar1, 0, 0, WINDOW_PIXEL_WIDTH, sColors_Black, FALSE);
-    nameWidth = GetStringWidth(GetFontIdToFit(gStringVar1, FONT_NORMAL, 0, WINDOW_PIXEL_WIDTH), gStringVar1, 0);
+    PrintFitted(windowId, FONT_NORMAL, gStringVar1, CONTENT_LEFT, 0, CONTENT_WIDTH, sColors_Black, FALSE);
+    nameWidth = min(GetStringWidth(GetFontIdToFit(gStringVar1, FONT_NORMAL, 0, CONTENT_WIDTH), gStringVar1, 0), CONTENT_WIDTH);
     GetWildPlaceLabel(gStringVar2, wild->list.cell, section->mapGroup, section->mapNum);
-    if (gStringVar2[0] != EOS && nameWidth + 12 < WINDOW_PIXEL_WIDTH)
-        PrintFitted(windowId, FONT_NORMAL, gStringVar2, nameWidth + 12, 0, WINDOW_PIXEL_WIDTH - nameWidth - 12, sColors_Gray, TRUE);
+    if (gStringVar2[0] != EOS && !IsHeadingVisible(wild, wild->cursorSection) && nameWidth + 12 < CONTENT_WIDTH)
+        PrintFitted(windowId, FONT_NORMAL, gStringVar2, CONTENT_LEFT + nameWidth + 12, 0, CONTENT_WIDTH - nameWidth - 12, sColors_Gray, TRUE);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -335,7 +352,7 @@ static void DestroyIcons(struct Pokenav_WildList *wild)
 static void CreateIcon(struct Pokenav_WildList *wild, u32 entryId, u32 column, u32 y)
 {
     enum Species species = wild->list.entries[entryId].species;
-    s16 x = 8 + column * WILD_LIST_ICON_PITCH + 16;
+    s16 x = 8 + CONTENT_LEFT + column * WILD_LIST_ICON_PITCH + WILD_LIST_ICON_PITCH / 2;
     s16 iconY = BODY_SCREEN_Y + LIST_Y + y + 16;
     u32 icon = wild->iconCount++;
 
@@ -371,7 +388,7 @@ static void DrawList(struct Pokenav_WildList *wild, bool32 scrolled)
         if (line->row == LINE_HEADING)
         {
             GetWildPlaceSectionName(gStringVar4, wild->list.cell, section);
-            PrintFitted(windowId, FONT_NORMAL, gStringVar4, 1, LIST_Y + y + 1, WINDOW_PIXEL_WIDTH - 12, sColors_Blue, FALSE);
+            PrintFitted(windowId, FONT_NORMAL, gStringVar4, CONTENT_LEFT, LIST_Y + y + 1, GRID_WIDTH, sColors_Blue, FALSE);
         }
         else
         {
@@ -381,7 +398,7 @@ static void DrawList(struct Pokenav_WildList *wild, bool32 scrolled)
             for (u32 column = 0; column < count; column++)
             {
                 if (line->section == wild->cursorSection && first + column == wild->cursorIndex)
-                    FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_HIGHLIGHT), column * WILD_LIST_ICON_PITCH + 1, LIST_Y + y + 1,
+                    FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_HIGHLIGHT), CONTENT_LEFT + column * WILD_LIST_ICON_PITCH + 1, LIST_Y + y + 1,
                                         WILD_LIST_ICON_PITCH - 2, WILD_LIST_ROW_HEIGHT - 2);
                 if (scrolled && wild->iconCount < MAX_VISIBLE_ICONS)
                     CreateIcon(wild, section->first + first + column, column, y);
@@ -421,13 +438,13 @@ static void DrawDetail(struct Pokenav_WildList *wild)
     u8 *end;
 
     FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_BG), 0, DETAIL_Y, WINDOW_PIXEL_WIDTH, DETAIL_HEIGHT);
-    PrintFitted(windowId, FONT_NORMAL, GetSpeciesName(entry->species), 0, DETAIL_Y, 120, sColors_Black, FALSE);
+    PrintFitted(windowId, FONT_NORMAL, GetSpeciesName(entry->species), CONTENT_LEFT, DETAIL_Y, 120, sColors_Black, FALSE);
     nameWidth = min(GetStringWidth(FONT_NORMAL, GetSpeciesName(entry->species), 0), 120);
-    SetTypeIcon(wild, 0, type1, 8 + nameWidth + 4, BODY_SCREEN_Y + DETAIL_Y + 1);
+    SetTypeIcon(wild, 0, type1, 8 + CONTENT_LEFT + nameWidth + 4, BODY_SCREEN_Y + DETAIL_Y + 1);
     wild->typeCount = 1;
     if (type2 != type1)
     {
-        SetTypeIcon(wild, 1, type2, 8 + nameWidth + 4 + 34, BODY_SCREEN_Y + DETAIL_Y + 1);
+        SetTypeIcon(wild, 1, type2, 8 + CONTENT_LEFT + nameWidth + 4 + 34, BODY_SCREEN_Y + DETAIL_Y + 1);
         wild->typeCount = 2;
     }
     else
@@ -438,14 +455,14 @@ static void DrawDetail(struct Pokenav_WildList *wild)
     end = StringCopy(gStringVar4, GetWildRosterMethodName(section->method, section->mapGroup, section->mapNum));
     end = StringCopy(end, COMPOUND_STRING(" · "));
     end = StringCopy(end, GetWildRosterRarityName(entry->rarity));
-    end = StringCopy(end, COMPOUND_STRING(" · Lv "));
+    end = StringCopy(end, COMPOUND_STRING(" · Lv. "));
     end = ConvertIntToDecimalStringN(end, entry->minLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     if (entry->maxLevel != entry->minLevel)
     {
         *end++ = CHAR_HYPHEN;
         end = ConvertIntToDecimalStringN(end, entry->maxLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     }
-    PrintFitted(windowId, FONT_NORMAL, gStringVar4, 0, DETAIL_LINE_2_Y, WINDOW_PIXEL_WIDTH, sColors_Gray, FALSE);
+    PrintFitted(windowId, FONT_NORMAL, gStringVar4, CONTENT_LEFT, DETAIL_LINE_2_Y, CONTENT_WIDTH, sColors_Gray, FALSE);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
@@ -575,8 +592,8 @@ u32 LoopedTask_OpenWildList(s32 taskState)
             PutWindowTilemap(wild->windowIds[i]);
         CopyBgTilemapBufferToVram(1);
         ShowSprites(wild);
-        wild->scrollArrowsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 236, BODY_SCREEN_Y + LIST_Y + 4,
-                                     BODY_SCREEN_Y + LIST_Y + LIST_HEIGHT - 4, wild->maxTopLine, TAG_WILD_SCROLL, TAG_WILD_SCROLL, &wild->scrollOffset);
+        wild->scrollArrowsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, ARROW_X, BODY_SCREEN_Y + LIST_Y + 8,
+                                     BODY_SCREEN_Y + LIST_Y + LIST_HEIGHT - 8, wild->maxTopLine, TAG_WILD_SCROLL, TAG_WILD_SCROLL, &wild->scrollOffset);
         PrintHelpBarText(HELPBAR_WILD_LIST);
         return LT_INC_AND_PAUSE;
     case 4:

@@ -76,13 +76,13 @@ static void DecompressCityMaps(void);
 static bool32 IsDecompressCityMapsActive(void);
 static void LoadPokenavRegionMapGfx(struct Pokenav_RegionMapGfx *);
 static bool32 TryFreeTempTileDataBuffers(void);
-static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *);
+static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *, bool32 zoomed);
 static bool32 IsDma3ManagerBusyWithBgCopy_(struct Pokenav_RegionMapGfx *);
 static void ChangeBgYForZoom(bool32);
 static bool32 IsChangeBgYForZoomActive(void);
 static void CreateCityZoomTextSprites(void);
 static void DrawCityMap(struct Pokenav_RegionMapGfx *, mapsec_s32_t, int);
-static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *, mapsec_s32_t, int);
+static u32 PrintLandmarkNames(struct Pokenav_RegionMapGfx *, mapsec_s32_t, int);
 static void SetCityZoomTextInvisibility(bool32);
 static void Task_ChangeBgYForZoom(u8 taskId);
 static void UpdateCityZoomTextPosition(void);
@@ -300,7 +300,7 @@ static u32 HandlePlaceChoiceInput(struct Pokenav_RegionMapMenu *state)
         case PLACE_CHOICE_FLY:
             return POKENAV_MAP_FUNC_FLY;
         case PLACE_CHOICE_FULL_MAP:
-            UpdateMapSecInfoWindow(GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM));
+            UpdateMapSecInfoWindow(GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM), TRUE);
             return POKENAV_MAP_FUNC_ZOOM_OUT;
         default:
             PlaySE(SE_SELECT);
@@ -454,7 +454,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
         if (TryFreeTempTileDataBuffers())
             return LT_PAUSE;
 
-        UpdateMapSecInfoWindow(state);
+        UpdateMapSecInfoWindow(state, IsRegionMapZoomed());
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         return LT_INC_AND_PAUSE;
     case 5:
@@ -487,7 +487,7 @@ static u32 LoopedTask_UpdateInfoAfterCursorMove(s32 taskState)
     switch (taskState)
     {
     case 0:
-        UpdateMapSecInfoWindow(state);
+        UpdateMapSecInfoWindow(state, IsRegionMapZoomed());
         UpdateRegionMapHelpBarText();
         return LT_INC_AND_PAUSE;
     case 1:
@@ -501,6 +501,8 @@ static u32 LoopedTask_UpdateInfoAfterCursorMove(s32 taskState)
 
 static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
 {
+    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
+
     switch (taskState)
     {
     case 0:
@@ -512,6 +514,8 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
 
+        // The box slid down whole; on the full map it holds just the name.
+        UpdateMapSecInfoWindow(state, FALSE);
         UpdateRegionMapHelpBarText();
         return LT_INC_AND_PAUSE;
     case 2:
@@ -532,7 +536,7 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
     {
     case 0:
         PlaySE(SE_SELECT);
-        UpdateMapSecInfoWindow(state);
+        UpdateMapSecInfoWindow(state, TRUE);
         return LT_INC_AND_PAUSE;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy_(state))
@@ -558,12 +562,63 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
     return LT_FINISH;
 }
 
-#define INFO_WINDOW_WIDTH  (12 * 8)
-#define INFO_WINDOW_HEIGHT (13 * 8)
+// The info window (sMapSecInfoWindowTemplate) and its frame on BG1.
+#define INFO_WINDOW_LEFT   17
+#define INFO_WINDOW_TOP    4
+#define INFO_WINDOW_COLS   12
+#define INFO_WINDOW_ROWS   13
+#define INFO_WINDOW_WIDTH  (INFO_WINDOW_COLS * 8)
+#define INFO_WINDOW_HEIGHT (INFO_WINDOW_ROWS * 8)
 #define INFO_LINE_HEIGHT   16
+#define INFO_TEXT_X        2
+#define INFO_TEXT_WIDTH    (INFO_WINDOW_WIDTH - INFO_TEXT_X - 2)
+#define INFO_BOTTOM_PAD    3 // white under the last line, above the frame
+#define INFO_FRAME_TILE    0x42
+#define INFO_FRAME_PAL     4
+#define INFO_CLEAR_TILE    0x1040
+// On the full map BG1 sits this far down: the box's name row and its closed
+// frame show just above the help bar.
+#define FULL_VIEW_BG1_Y    (-0x5800)
+
+// One line of the info window, in the narrow font or narrower so it always
+// fits inside the frame.
+static void PrintInfoLine(struct Pokenav_RegionMapGfx *state, const u8 *str, u32 x, u32 y)
+{
+    u32 width = INFO_TEXT_WIDTH - (x - INFO_TEXT_X);
+    AddTextPrinterParameterized(state->infoWindowId, GetFontIdToFit(str, FONT_NARROW, 0, width), str, x, y, TEXT_SKIP_DRAW, NULL);
+}
+
+// Frames the top rows of the info window that hold something; the rest of the
+// window's area shows the map. No rows hides the box.
+static void ShowInfoBox(struct Pokenav_RegionMapGfx *state, u32 rows)
+{
+    u32 left = INFO_WINDOW_LEFT - 1, top = INFO_WINDOW_TOP - 1, right = INFO_WINDOW_LEFT + INFO_WINDOW_COLS;
+    u32 bottom = INFO_WINDOW_TOP + rows;
+
+    FillBgTilemapBufferRect(1, INFO_CLEAR_TILE, left, top, INFO_WINDOW_COLS + 2, INFO_WINDOW_ROWS + 2, 17);
+    if (rows != 0)
+    {
+        PutWindowRectTilemap(state->infoWindowId, 0, 0, INFO_WINDOW_COLS, rows);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 0, left,             top,             1,                1,    INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 1, INFO_WINDOW_LEFT, top,             INFO_WINDOW_COLS, 1,    INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 2, right,            top,             1,                1,    INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 3, left,             INFO_WINDOW_TOP, 1,                rows, INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 5, right,            INFO_WINDOW_TOP, 1,                rows, INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 6, left,             bottom,          1,                1,    INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 7, INFO_WINDOW_LEFT, bottom,          INFO_WINDOW_COLS, 1,    INFO_FRAME_PAL);
+        FillBgTilemapBufferRect(1, INFO_FRAME_TILE + 8, right,            bottom,          1,                1,    INFO_FRAME_PAL);
+    }
+    CopyBgTilemapBufferToVram(1);
+}
+
+// Window rows a box needs for content ending at pixel row `height`.
+static u32 GetInfoBoxRows(u32 height)
+{
+    return min((height + INFO_BOTTOM_PAD + 7) / 8, INFO_WINDOW_ROWS);
+}
 
 // The choice fills the info window under the place's name and as many of its
-// landmarks as still fit above a rule.
+// landmarks as still fit above a rule; the box ends under the last choice.
 static void DrawPlaceChoice(struct Pokenav_RegionMapGfx *state, struct Pokenav_RegionMapMenu *menu)
 {
     struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
@@ -573,21 +628,21 @@ static void DrawPlaceChoice(struct Pokenav_RegionMapGfx *state, struct Pokenav_R
 
     SetCityZoomTextInvisibility(TRUE);
     FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(state->infoWindowId);
-    AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
-    for (lines = 1; (lines + 1) * INFO_LINE_HEIGHT + 7 + menuHeight <= INFO_WINDOW_HEIGHT; lines++)
+    PrintInfoLine(state, regionMap->mapSecName, INFO_TEXT_X, 1);
+    for (lines = 1; (lines + 1) * INFO_LINE_HEIGHT + 5 + menuHeight + INFO_BOTTOM_PAD <= INFO_WINDOW_HEIGHT; lines++)
     {
         const u8 *landmarkName = GetLandmarkName(regionMap->mapSecId, regionMap->posWithinMapSec, lines - 1);
         if (landmarkName == NULL)
             break;
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, landmarkName, 0, lines * INFO_LINE_HEIGHT + 1, TEXT_SKIP_DRAW, NULL);
+        PrintInfoLine(state, landmarkName, INFO_TEXT_X, lines * INFO_LINE_HEIGHT + 1);
     }
-    top = lines * INFO_LINE_HEIGHT + 3;
-    FillWindowPixelRect(state->infoWindowId, PIXEL_FILL(3), 2, top, INFO_WINDOW_WIDTH - 4, 1);
+    top = lines * INFO_LINE_HEIGHT + 2;
+    FillWindowPixelRect(state->infoWindowId, PIXEL_FILL(3), INFO_TEXT_X, top, INFO_TEXT_WIDTH, 1);
     top += 3;
     for (i = 0; i < menu->choiceCount; i++)
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, sPlaceChoiceTexts[menu->choices[i]], cursorWidth, top + i * INFO_LINE_HEIGHT, TEXT_SKIP_DRAW, NULL);
-    InitMenuNormal(state->infoWindowId, FONT_NARROW, 0, top, INFO_LINE_HEIGHT, menu->choiceCount, 0);
+        PrintInfoLine(state, sPlaceChoiceTexts[menu->choices[i]], INFO_TEXT_X + cursorWidth, top + i * INFO_LINE_HEIGHT);
+    InitMenuNormal(state->infoWindowId, FONT_NARROW, INFO_TEXT_X, top, INFO_LINE_HEIGHT, menu->choiceCount, 0);
+    ShowInfoBox(state, GetInfoBoxRows(top + menuHeight));
     CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
 }
 
@@ -627,10 +682,8 @@ void RestoreRegionMapZoomView(void)
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
 
     DecompressDataWithHeaderVram(sRegionMapCityZoomTiles_Gfx, (void *)BG_CHAR_ADDR(1));
-    CpuFill16(0x1040, state->tilemapBuffer, BG_SCREEN_SIZE);
-    DrawTextBorderOuter(state->infoWindowId, 0x42, 4);
-    UpdateMapSecInfoWindow(state);
-    CopyBgTilemapBufferToVram(1);
+    CpuFill16(INFO_CLEAR_TILE, state->tilemapBuffer, BG_SCREEN_SIZE);
+    UpdateMapSecInfoWindow(state, TRUE);
     SetRegionMapIconsHidden(FALSE);
 }
 
@@ -661,16 +714,14 @@ static void LoadPokenavRegionMapGfx(struct Pokenav_RegionMapGfx *state)
     CpuFill16(0x1040, state->tilemapBuffer, 0x800);
     SetBgTilemapBuffer(1, state->tilemapBuffer);
     state->infoWindowId = AddWindow(&sMapSecInfoWindowTemplate);
-    LoadUserWindowBorderGfx_(state->infoWindowId, 0x42, BG_PLTT_ID(4));
-    DrawTextBorderOuter(state->infoWindowId, 0x42, 4);
+    LoadUserWindowBorderGfx_(state->infoWindowId, INFO_FRAME_TILE, BG_PLTT_ID(INFO_FRAME_PAL));
     DecompressAndCopyTileDataToVram(1, sRegionMapCityZoomTiles_Gfx, 0, 0, 0);
     FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-    PutWindowTilemap(state->infoWindowId);
     CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
     CopyPaletteIntoBufferUnfaded(sMapSecInfoWindow_Pal, BG_PLTT_ID(1), sizeof(sMapSecInfoWindow_Pal));
     CopyPaletteIntoBufferUnfaded(gRegionMapCityZoomTiles_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     if (!IsRegionMapZoomed())
-        ChangeBgY(1, -0x6000, BG_COORD_SET);
+        ChangeBgY(1, FULL_VIEW_BG1_Y, BG_COORD_SET);
     else
         ChangeBgY(1, 0, BG_COORD_SET);
 
@@ -682,42 +733,35 @@ static bool32 TryFreeTempTileDataBuffers(void)
     return FreeTempTileDataBuffersIfPossible();
 }
 
-static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
+// The box for the place under the cursor: on the full map just its name;
+// zoomed in, a city's map or a route's landmarks under it. Open sea has none.
+static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state, bool32 zoomed)
 {
     struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
-    switch (regionMap->mapSecType)
+    u32 height = INFO_LINE_HEIGHT + 1;
+
+    SetCityZoomTextInvisibility(TRUE);
+    if (regionMap->mapSecType == MAPSECTYPE_NONE)
     {
-    case MAPSECTYPE_CITY_CANFLY:
-        FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-        PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
-        DrawCityMap(state, regionMap->mapSecId, regionMap->posWithinMapSec);
-        CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
-        SetCityZoomTextInvisibility(FALSE);
-        break;
-    case MAPSECTYPE_CITY_CANTFLY:
-        FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-        PutWindowRectTilemap(state->infoWindowId, 0, 0, 12, 2);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
-        FillBgTilemapBufferRect(1, 0x1041, 17, 6, 12, 11, 17);
-        CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
-        SetCityZoomTextInvisibility(TRUE);
-        break;
-    case MAPSECTYPE_ROUTE:
-    case MAPSECTYPE_BATTLE_FRONTIER:
-        FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
-        PutWindowTilemap(state->infoWindowId);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, regionMap->mapSecName, 0, 1, TEXT_SKIP_DRAW, NULL);
-        PrintLandmarkNames(state, regionMap->mapSecId, regionMap->posWithinMapSec);
-        CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
-        SetCityZoomTextInvisibility(TRUE);
-        break;
-    case MAPSECTYPE_NONE:
-        FillBgTilemapBufferRect(1, 0x1041, 17, 4, 12, 13, 17);
-        CopyBgTilemapBufferToVram(1);
-        SetCityZoomTextInvisibility(TRUE);
-        break;
+        ShowInfoBox(state, 0);
+        return;
     }
+    FillWindowPixelBuffer(state->infoWindowId, PIXEL_FILL(1));
+    PrintInfoLine(state, regionMap->mapSecName, INFO_TEXT_X, 1);
+    if (zoomed && regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY)
+    {
+        ShowInfoBox(state, INFO_WINDOW_ROWS);
+        DrawCityMap(state, regionMap->mapSecId, regionMap->posWithinMapSec);
+        CopyBgTilemapBufferToVram(1);
+        SetCityZoomTextInvisibility(FALSE);
+    }
+    else
+    {
+        if (zoomed && (regionMap->mapSecType == MAPSECTYPE_ROUTE || regionMap->mapSecType == MAPSECTYPE_BATTLE_FRONTIER))
+            height = PrintLandmarkNames(state, regionMap->mapSecId, regionMap->posWithinMapSec);
+        ShowInfoBox(state, GetInfoBoxRows(height));
+    }
+    CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(struct Pokenav_RegionMapGfx *state)
@@ -752,9 +796,9 @@ static void Task_ChangeBgYForZoom(u8 taskId)
     }
     else
     {
-        if (ChangeBgY(1, 0x480, BG_COORD_SUB) <= -0x6000)
+        if (ChangeBgY(1, 0x480, BG_COORD_SUB) <= FULL_VIEW_BG1_Y)
         {
-            ChangeBgY(1, -0x6000, BG_COORD_SET);
+            ChangeBgY(1, FULL_VIEW_BG1_Y, BG_COORD_SET);
             DestroyTask(taskId);
         }
 
@@ -799,19 +843,20 @@ static void DrawCityMap(struct Pokenav_RegionMapGfx *state, mapsec_s32_t mapSecI
     CopyToBgTilemapBufferRect(1, state->cityZoomPics[i], 18, 6, 10, 10);
 }
 
-static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, mapsec_s32_t mapSecId, int pos)
+// The route's landmarks under its name, as many as fit; returns the pixel row
+// the last line ends on.
+static u32 PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, mapsec_s32_t mapSecId, int pos)
 {
-    int i = 0;
-    while (1)
+    u32 i, y = INFO_LINE_HEIGHT + 1;
+
+    for (i = 0; y + INFO_LINE_HEIGHT + INFO_BOTTOM_PAD <= INFO_WINDOW_HEIGHT; i++, y += INFO_LINE_HEIGHT)
     {
         const u8 *landmarkName = GetLandmarkName(mapSecId, pos, i);
         if (!landmarkName)
             break;
-
-        StringCopyPadded(gStringVar1, landmarkName, CHAR_SPACE, 12);
-        AddTextPrinterParameterized(state->infoWindowId, FONT_NARROW, gStringVar1, 0, i * 16 + 17, TEXT_SKIP_DRAW, NULL);
-        i++;
+        PrintInfoLine(state, landmarkName, INFO_TEXT_X, y);
     }
+    return y;
 }
 
 static void CreateCityZoomTextSprites(void)
