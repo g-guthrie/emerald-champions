@@ -54,12 +54,19 @@ def reachable(map_dir, start, caps, gates=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid)
     wp = RS.warps(mid)   # a door, stair or mat leaves the map
+    # field obstacles are objects, not tiles: a Cut tree, smashable rock or Strength boulder is a
+    # wall until the move that clears it
+    need = {'OBJ_EVENT_GFX_CUTTABLE_TREE': 'cut', 'OBJ_EVENT_GFX_BREAKABLE_ROCK': 'smash',
+            'OBJ_EVENT_GFX_PUSHABLE_BOULDER': 'strength'}
+    walls = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])
+             if o.get('graphics_id') in need and need[o['graphics_id']] not in caps}
     seen = {start}; q = deque([start])
     while q:
         p = q.popleft()
         for d in RS.DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
-            if r and r not in seen and r not in wp and r not in gates: seen.add(r); q.append(r)
+            if r and r not in seen and r not in wp and r not in gates and r not in walls:
+                seen.add(r); q.append(r)
     return seen, g
 
 
@@ -112,7 +119,12 @@ def plan(map_dir, start, caps, skip, gates=frozenset(), live=None):
                              mode=mode_for(b['script'])))
     # targets with no reachable tile beside them (or across one counter) wait for a field move:
     # name the first level that brings them within reach
-    def near(ts, at): return any(abs(t[0] - at[0]) + abs(t[1] - at[1]) <= 2 for t in ts)
+    def near(ts, at):
+        # beside it, or two tiles straight across a counter (a clerk behind the desk)
+        for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            if (at[0] + dx, at[1] + dy) in ts: return True
+            if (at[0] + 2 * dx, at[1] + 2 * dy) in ts and RS.is_counter(map_dir, (at[0] + dx, at[1] + dy)): return True
+        return False
     later = []
     for j in [j for j in jobs if j['kind'] != 'photo' and not near(tiles, j['at'])]:
         jobs.remove(j)
