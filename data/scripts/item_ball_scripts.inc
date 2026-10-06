@@ -9,8 +9,8 @@ Common_EventScript_FindOrdinaryItem::
 @ Inclement Emerald's item ball scripts share Std_FindItem's finite reward
 @ conversion, so both the generic wrapper and authored pickups use it.
 
-Route102_EventScript_ItemPotion:: @ 8290CD8
-	finditem ITEM_POTION
+Route102_EventScript_ItemPowerHerb:: @ 8290CD8
+	finditem ITEM_POWER_HERB
 	end
 
 Route103_EventScript_ItemPearl:: @ 8290CE5
@@ -113,8 +113,8 @@ Route114_EventScript_ItemProtectivePads:: @ 8290E1D
 	finditem ITEM_PROTECTIVE_PADS
 	end
 
-Route115_EventScript_ItemSuperPotion:: @ 8290E2A
-	finditem ITEM_SUPER_POTION
+Route115_EventScript_ItemSoftSand:: @ 8290E2A
+	finditem ITEM_SOFT_SAND
 	end
 
 Route115_EventScript_ItemDragalgite:: @ 8290E37
@@ -141,12 +141,12 @@ Route116_EventScript_ItemWideLens:: @ 8290E78
 	finditem ITEM_WIDE_LENS
 	end
 
-Route116_EventScript_ItemEther:: @ 8290E85
-	finditem ITEM_ETHER
+Route116_EventScript_ItemBlackSludge:: @ 8290E85
+	finditem ITEM_BLACK_SLUDGE
 	end
 
-Route116_EventScript_ItemRepel:: @ 8290E92
-	finditem ITEM_REPEL
+Route116_EventScript_ItemFocusBand:: @ 8290E92
+	finditem ITEM_FOCUS_BAND
 	end
 
 Route116_EventScript_ItemMuscleBand:: @ 8290E9F
@@ -346,8 +346,8 @@ PetalburgWoods_EventScript_ItemGreatBall:: @ 829110F
 	finditem ITEM_GREAT_BALL
 	end
 
-PetalburgWoods_EventScript_ItemEther:: @ 829111C
-	finditem ITEM_ETHER
+PetalburgWoods_EventScript_ItemBrightPowder:: @ 829111C
+	finditem ITEM_BRIGHT_POWDER
 	end
 
 PetalburgWoods_EventScript_ItemNugget:: @ 8291129

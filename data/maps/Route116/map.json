@@ -113,8 +113,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemEther",
-      "flag": "FLAG_ITEM_ROUTE_116_ETHER"
+      "script": "Route116_EventScript_ItemBlackSludge",
+      "flag": "FLAG_ITEM_ROUTE_116_BLACK_SLUDGE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -126,8 +126,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemRepel",
-      "flag": "FLAG_ITEM_ROUTE_116_REPEL"
+      "script": "Route116_EventScript_ItemFocusBand",
+      "flag": "FLAG_ITEM_ROUTE_116_FOCUS_BAND"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
@@ -501,8 +501,8 @@
       "x": 22,
       "y": 9,
       "elevation": 3,
-      "item": "ITEM_SUPER_POTION",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_116_SUPER_POTION"
+      "item": "ITEM_SHED_SHELL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_116_SHED_SHELL"
     },
     {
       "type": "hidden_item",

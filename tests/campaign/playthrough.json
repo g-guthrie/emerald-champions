@@ -6880,7 +6880,7 @@
           "PetalburgWoods_EventScript_Boy2"
         ],
         "flags": [
-          "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION"
+          "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POISON_BARB"
         ],
         "items": [
           "ITEM_POTION"
@@ -6898,7 +6898,7 @@
           35
         ],
         "flags": {
-          "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION": 1
+          "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POISON_BARB": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 17,
@@ -7452,7 +7452,7 @@
         "object_scripts": [
           "PetalburgWoods_EventScript_Boy1",
           "PetalburgWoods_EventScript_James",
-          "PetalburgWoods_EventScript_ItemEther"
+          "PetalburgWoods_EventScript_ItemBrightPowder"
         ],
         "bg_scripts": [
           "PetalburgWoods_EventScript_Sign2"
@@ -7465,7 +7465,7 @@
         ],
         "flags": [
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL",
-          "FLAG_ITEM_PETALBURG_WOODS_ETHER"
+          "FLAG_ITEM_PETALBURG_WOODS_BRIGHT_POWDER"
         ],
         "items": [
           "ITEM_POKE_BALL",
@@ -7487,7 +7487,7 @@
         },
         "flags": {
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL": 1,
-          "FLAG_ITEM_PETALBURG_WOODS_ETHER": 1
+          "FLAG_ITEM_PETALBURG_WOODS_BRIGHT_POWDER": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 20,
@@ -7560,10 +7560,10 @@
           "VAR_PETALBURG_WOODS_STATE": 1
         },
         "flags": {
-          "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION": 1,
+          "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POISON_BARB": 1,
           "FLAG_ITEM_PETALBURG_WOODS_NUGGET": 1,
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL": 1,
-          "FLAG_ITEM_PETALBURG_WOODS_ETHER": 1
+          "FLAG_ITEM_PETALBURG_WOODS_BRIGHT_POWDER": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 20,
@@ -8647,7 +8647,7 @@
         "flags": [
           "FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL",
           "FLAG_ITEM_ROUTE_104_SOOTHE_BELL",
-          "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION"
+          "FLAG_HIDDEN_ITEM_ROUTE_104_SPELL_TAG"
         ],
         "items": [
           "ITEM_ORAN_BERRY",
@@ -8671,7 +8671,7 @@
         "flags": {
           "FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL": 1,
           "FLAG_ITEM_ROUTE_104_SOOTHE_BELL": 1,
-          "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION": 1
+          "FLAG_HIDDEN_ITEM_ROUTE_104_SPELL_TAG": 1
         },
         "battle_serial_min": 29,
         "stable_overworld": true

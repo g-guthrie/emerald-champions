@@ -130,8 +130,8 @@
       "x": 18,
       "y": 31,
       "elevation": 3,
-      "item": "ITEM_SUPER_POTION",
-      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SUPER_POTION"
+      "item": "ITEM_SILVER_POWDER",
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SILVER_POWDER"
     },
     {
       "type": "hidden_item",

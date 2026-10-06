@@ -567,15 +567,15 @@
 #define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_6             (FLAG_HIDDEN_ITEMS_START + 0x22)
 #define FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_ULTRA_BALL       (FLAG_HIDDEN_ITEMS_START + 0x23)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_DEEP_SEA_SCALE          (FLAG_HIDDEN_ITEMS_START + 0x24)
-#define FLAG_HIDDEN_ITEM_ROUTE_104_POTION                    (FLAG_HIDDEN_ITEMS_START + 0x25)
+#define FLAG_HIDDEN_ITEM_ROUTE_104_MYSTIC_WATER                    (FLAG_HIDDEN_ITEMS_START + 0x25)
 #define FLAG_HIDDEN_ITEM_UNDERWATER_124_LOVE_BALL        (FLAG_HIDDEN_ITEMS_START + 0x26)
 #define FLAG_HIDDEN_ITEM_ROUTE_121_DUBIOUS_DISC                (FLAG_HIDDEN_ITEMS_START + 0x27)
 #define FLAG_HIDDEN_ITEM_ROUTE_121_WHIPPED_DREAM                    (FLAG_HIDDEN_ITEMS_START + 0x28)
 #define FLAG_HIDDEN_ITEM_ROUTE_123_REVIVE                    (FLAG_HIDDEN_ITEMS_START + 0x29)
 #define FLAG_HIDDEN_ITEM_ROUTE_114_REVIVE                    (FLAG_HIDDEN_ITEMS_START + 0x2A)
 #define FLAG_HIDDEN_ITEM_LILYCOVE_CITY_PP_UP                 (FLAG_HIDDEN_ITEMS_START + 0x2B)
-#define FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION              (FLAG_HIDDEN_ITEMS_START + 0x2C)
-#define FLAG_HIDDEN_ITEM_ROUTE_116_SUPER_POTION              (FLAG_HIDDEN_ITEMS_START + 0x2D)
+#define FLAG_HIDDEN_ITEM_ROUTE_104_SPELL_TAG              (FLAG_HIDDEN_ITEMS_START + 0x2C)
+#define FLAG_HIDDEN_ITEM_ROUTE_116_SHED_SHELL              (FLAG_HIDDEN_ITEMS_START + 0x2D)
 #define FLAG_HIDDEN_ITEM_ROUTE_106_STARDUST                  (FLAG_HIDDEN_ITEMS_START + 0x2E)
 #define FLAG_HIDDEN_ITEM_ROUTE_106_LURE_BALL               (FLAG_HIDDEN_ITEMS_START + 0x2F)
 #define FLAG_HIDDEN_ITEM_GRANITE_CAVE_B2F_EVERSTONE_1        (FLAG_HIDDEN_ITEMS_START + 0x30)
@@ -585,7 +585,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_109_LEVEL_BALL             (FLAG_HIDDEN_ITEMS_START + 0x34)
 #define FLAG_HIDDEN_ITEM_ROUTE_111_RAZOR_CLAW                    (FLAG_HIDDEN_ITEMS_START + 0x38)
 #define FLAG_HIDDEN_ITEM_ROUTE_111_ULTRA_BALL                (FLAG_HIDDEN_ITEMS_START + 0x39)
-#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION              (FLAG_HIDDEN_ITEMS_START + 0x3A)
+#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POISON_BARB              (FLAG_HIDDEN_ITEMS_START + 0x3A)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_LEAF_STONE     (FLAG_HIDDEN_ITEMS_START + 0x3B)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_NET_BALL     (FLAG_HIDDEN_ITEMS_START + 0x3C)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL           (FLAG_HIDDEN_ITEMS_START + 0x3D)
@@ -763,7 +763,7 @@
 // Inclement declares these two bare at 0x22/0x23, below FLAG_HIDDEN_ITEMS_START,
 // which this engine's bg_hidden_item_event assertion rejects. Renamed in the map
 // data and given proper in-range flags.
-#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SUPER_POTION                        (FLAG_HIDDEN_ITEMS_START + 0x2be) // relocated 0x2e3 -> 0x4b2 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SILVER_POWDER                        (FLAG_HIDDEN_ITEMS_START + 0x2be) // relocated 0x2e3 -> 0x4b2 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_HEAL_BALL                           (FLAG_HIDDEN_ITEMS_START + 0x2bf) // relocated 0x2e4 -> 0x4b3 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_3_BIG_ROOT                                          (FLAG_HIDDEN_ITEMS_START + 0x2c5) // relocated 0x2db -> 0x4b9 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_3_INSECT_PLATE                                      (FLAG_HIDDEN_ITEMS_START + 0x2c6) // relocated 0x2dc -> 0x4ba (Sept 23 2026: bit was shared with a live flag)
@@ -1154,7 +1154,7 @@
 #define FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT                0x3E7
 
 // Item Ball Flags
-#define FLAG_ITEM_ROUTE_102_POTION                                  0x3E8
+#define FLAG_ITEM_ROUTE_102_POWER_HERB                                  0x3E8
 #define FLAG_ITEM_ROUTE_116_LUCARIONITE_Z                               0x3E9
 #define FLAG_ITEM_ROUTE_104_PP_UP                                   0x3EA
 #define FLAG_ITEM_ROUTE_105_NET_BALL                                0x3EB
@@ -1210,7 +1210,7 @@
 #define FLAG_ITEM_PETALBURG_WOODS_HERACRONITE                         0x41F
 #define FLAG_ITEM_PETALBURG_WOODS_SCOLIPITE                        0x420
 #define FLAG_ITEM_ROUTE_104_POKE_BALL                               0x421
-#define FLAG_ITEM_PETALBURG_WOODS_ETHER                             0x422
+#define FLAG_ITEM_PETALBURG_WOODS_BRIGHT_POWDER                             0x422
 #define FLAG_ITEM_MAGMA_HIDEOUT_3F_3R_ESCAPE_ROPE                    0x423
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_1_ORANGE_MAIL                  0x424
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_HARBOR_MAIL                  0x425
@@ -1954,11 +1954,11 @@
 #define FLAG_ITEM_ROUTE_113_SHINY_STONE                                0x3F5 // shares 0x3F5 with FLAG_ITEM_ROUTE_113_SUPER_REPEL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_114_NUGGET                                 0x3F6 // shares 0x3F6 with FLAG_ITEM_ROUTE_114_ULTRA_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE114_WEAKNESS_POLICY                              0x3F7 // shares 0x3F7 with FLAG_ITEM_ROUTE_114_TIMER_BALL (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_115_SUPER_POTION                               0x3F8 // shares 0x3F8 with FLAG_ITEM_ROUTE_115_LOPUNNITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_115_SOFT_SAND                               0x3F8 // shares 0x3F8 with FLAG_ITEM_ROUTE_115_LOPUNNITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_115_DRAGALGITE                                      0x3F9 // shares 0x3F9 with FLAG_ITEM_ROUTE_115_MEDICHAMITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_115_MOON_BALL                                  0x3FA // shares 0x3FA with FLAG_ITEM_ROUTE_115_VICTREEBELITE (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_116_ETHER                                      0x3FB // shares 0x3FB with FLAG_ITEM_ROUTE_116_LUCARIONITE (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_116_REPEL                                      0x3FC // shares 0x3FC with FLAG_ITEM_ROUTE_116_STARAPTITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_116_BLACK_SLUDGE                                      0x3FB // shares 0x3FB with FLAG_ITEM_ROUTE_116_LUCARIONITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_116_FOCUS_BAND                                      0x3FC // shares 0x3FC with FLAG_ITEM_ROUTE_116_STARAPTITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_116_MUSCLE_BAND                                      0x3FD // shares 0x3FD with FLAG_ITEM_ROUTE_116_GARCHOMPITE_Z (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_117_GREAT_BALL                                 0x3FE // shares 0x3FE with FLAG_ITEM_ROUTE_117_CHESNAUGHTITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_117_REVIVE                                     0x3FF // shares 0x3FF with FLAG_ITEM_ROUTE_117_GRENINJITE (dead: its map.json was overwritten)

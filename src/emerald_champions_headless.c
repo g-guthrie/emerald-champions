@@ -2827,7 +2827,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (scene == 262)
                 {
-                    FlagClear(FLAG_ITEM_ROUTE_102_POTION);
+                    FlagClear(FLAG_ITEM_ROUTE_102_POWER_HERB);
                     SetTrainerFlag(TRAINER_CALVIN_1);
                     SetTrainerFlag(TRAINER_RICK);
                     SetTrainerFlag(TRAINER_ALLEN);

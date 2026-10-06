@@ -98,7 +98,8 @@ STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
     Berry trees (Route 102, play): Oran x2, Pecha x2
     Wild held (species data): Surskit (- / Honey), Combee (Honey / -), Cutiefly (Honey / -),
       Toedscool (Tiny Mushroom / Big Mushroom). No battle items.
-  Other items: Potion (Route 102 ball, play).
+  Other items: Power Herb (Route 102 ball; was a Potion, owner rule: worthless pickups become
+    battle items; play).
   Not yet: Petalburg's Abomasite, Venusaurite and hidden Nugget (pond islands: Surf).
   Not here: Chilan Berry (Petalburg Gym guide, after the fourth badge); Lucky Punch (needs Chansey
   caught).
@@ -119,7 +120,8 @@ STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James, Aqua Grunt)
     Berry trees (play): Oran x2, Pecha x2 (a third soil is empty)
     Wild held (species data): Yungoos (- / Pecha Berry), Cutiefly (Honey / -). Budew's Poison Barb
       and Sandygast's Spell Tag moved to the clerk at floor 0 (owner rule).
-  Other items (play): hidden Potion (14,55), hidden Bottle Cap (16,64), hidden Great Ball x3 (16,72)
+  Other items (play): hidden Mystic Water (14,55; was a Potion), hidden Bottle Cap (16,64), hidden
+    Great Ball x3 (16,72)
   Not here: Friend Ball (29,53: below a west-only ledge, reached through the Woods' east door);
     Route 104 north - past the Woods.
 
@@ -142,7 +144,8 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
       Foongus (Tiny Mushroom / Big Mushroom). Cherubi's Miracle Seed moved to the clerk at floor 0;
       Pikachu's Light Ball removed (the Mauville Mart sells it).
   Other items (play): Dusk Ball x3 (Devon researcher, after the Grunt); Nugget (4,26) and Ether
-    item balls; hidden Potion (39,35) and Poke Ball (4,19); Friend Ball (Route 104 29,53).
+    item balls; hidden Poison Barb (39,35; was a Potion) and Poke Ball (4,19); Friend Ball (Route
+    104 29,53). The Ether ball is now a Bright Powder.
   Not here: Great Ball, Revive, hidden Tiny Mushrooms (26,6), (40,29), the Woods girl, and Woods 2
     and 3 - all behind Cut. Route 104 north's own items belong to its trainers' own route.
 
@@ -166,8 +169,10 @@ STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
     Gifts (play): Quick Claw (Pokemon School), Float Stone (Flat 2 2F), Chesto Berry (Route 104
       woman), Nugget (Route 104 boy), Nugget (Rustboro Mart; a wandering NPC), Wailmer Pail and
       seven berries (flower shop: Hondew, Pomeg, Grepa, Qualot, Pecha, Kelpsy, Tamato)
-    Item balls (play): Soothe Bell (Route 104), Super Potion (Route 115), Lure Ball and Smooth Rock
-      (Seaspray 1F); hidden Super Potion (Route 104 7,6), Poke Ball (Route 104 3,9), Bottle Cap
+    Item balls (play): Soothe Bell (Route 104), Soft Sand (Route 115; was a Super Potion), Lure Ball
+      and Smooth Rock
+      (Seaspray 1F); hidden Spell Tag (Route 104 7,6; was a Super Potion), Poke Ball (Route 104 3,9),
+      Bottle Cap
       (Rustboro); Premier Ball (Flat 2 2F)
     Berry trees (play, Route 104 north): Cheri x4, Oran x2, Leppa x2 (two soils empty)
     Wild held (species data): none new.
@@ -189,7 +194,7 @@ STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
     Evolutions by 14 (species data): Starly -> Staravia (14).
   Battle items
     Gifts (play): Grass Gem + Steel Gem (Gym guide, on the walk in)
-    Item balls (play): Wide Lens, Repel (Route 116); Poke Ball (Rusturf Tunnel)
+    Item balls (play): Wide Lens, Focus Band (Route 116; was a Repel); Poke Ball (Rusturf Tunnel)
     Wild held (species data): Teddiursa (- / Honey), Roggenrola (Everstone / -). Nincada's Soft
       Sand, Roggenrola's Hard Stone and Machop's Focus Band moved to the clerk at floor 0; Pancham's
       Mental Herb removed (the clerk already stocks it).
@@ -236,12 +241,13 @@ STEP 8 - cap 20 - Route 116 north trainers (Dawson, Sarah, Janice, Jerry)
     Shops (code, data/scripts/general_mart.inc): Center marts add Great Ball, Super Potion, Honey,
       Repel with the Stone Badge. Clerk: no Stone Badge floor items.
     Gifts and pickups (play): Woods 1 Great Ball, Revive, hidden Tiny Mushroom x2, Miracle Seed (the
-      Woods girl); Woods 2 Sun Stone, Super Potion, Heal Ball, Toxic Orb; Woods 3 Luminous Moss,
+      Woods girl); Woods 2 Sun Stone, hidden Silver Powder (was a Super Potion), Heal Ball, Toxic Orb; Woods 3 Luminous Moss,
       Nugget, hidden Big Root, hidden Insect Plate; Route 104 Shell Bell
     Wild held (species data): Skwovet (- / Oran Berry), Morelull (Tiny / Big Mushroom), Combee and
-      Cutiefly (Honey); battle items pending the owner's call: Bounsweet Grassy Seed, Venipede and
-      Beedrill Poison Barb, Butterfree Silver Powder, Croagunk Black Sludge, Dewpider Mystic Water,
-      Oddish Absorb Bulb, Yanma Wide Lens, Slowpoke Lagging Tail, Goomy Shed Shell.
+      Cutiefly (Honey). Battle items left the wild families (owner rule, also after the first Badge):
+      Absorb Bulb (Oddish), Grassy Seed (Bounsweet), Lagging Tail (Slowpoke) stock at the clerk from
+      the Stone Badge; Silver Powder, Black Sludge, Shed Shell became pickups (Woods 2, Route 116);
+      Wide Lens, Poison Barb, Mystic Water were already stocked or picked up.
   Not yet: Woods 3 Victreebelite (pond: Surf).
 
 ====================================================================================================
@@ -249,7 +255,8 @@ STEP 9 - cap 20 - Rusturf Tunnel Aqua Grunt
   Battles: E0029 Rusturf Tunnel Grunt
   VERIFIED IN PLAY: Route 116 north swept with Cut; the Grunt beaten (he returns the Devon Parts).
   Adds Route 116 north.
-  Battle items (play): Binding Band, Ether, hidden Super Potion; berry trees Pinap x6, Chesto x4.
+  Battle items (play): Binding Band, Black Sludge (was an Ether), hidden Shed Shell (was a Super
+    Potion); berry trees Pinap x6, Chesto x4.
   Pokemon: none new (Route 116's tables and the Cut trees are already counted).
 
 ====================================================================================================

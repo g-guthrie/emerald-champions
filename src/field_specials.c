@@ -476,6 +476,9 @@ static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
     {ITEM_QUICK_CLAW,       0},   // was Meowth's
     {ITEM_SOFT_SAND,        0},   // was Nincada's
     {ITEM_SPELL_TAG,        0},   // was Sandygast's
+    {ITEM_ABSORB_BULB,      1},   // was Oddish's (Petalburg Woods 3)
+    {ITEM_GRASSY_SEED,      1},   // was Bounsweet's (Petalburg Woods 2)
+    {ITEM_LAGGING_TAIL,     1},   // was Slowpoke's (Petalburg Woods 3)
     {ITEM_LOADED_DICE,      2},
     {ITEM_EJECT_PACK,       3},
     {ITEM_HEAVY_DUTY_BOOTS, 4},

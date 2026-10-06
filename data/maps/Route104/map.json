@@ -565,8 +565,8 @@
       "x": 7,
       "y": 6,
       "elevation": 3,
-      "item": "ITEM_SUPER_POTION",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION"
+      "item": "ITEM_SPELL_TAG",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_SPELL_TAG"
     },
     {
       "type": "hidden_item",
@@ -581,8 +581,8 @@
       "x": 14,
       "y": 55,
       "elevation": 3,
-      "item": "ITEM_POTION",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_POTION"
+      "item": "ITEM_MYSTIC_WATER",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_MYSTIC_WATER"
     },
     {
       "type": "hidden_item",
