@@ -84,7 +84,10 @@ def trigger_vars(map_dir):
                    and not c['var'].startswith('VAR_0x')})
 
 
-def plan(map_dir, start, caps, skip, gates=frozenset()):
+def plan(map_dir, start, caps, skip, gates=frozenset(), live=None):
+    """live: {local_id: (x, y)} where the game has actors right now; map scripts move some
+    (Norman waits in the Petalburg Gym lobby), so these beat the map file's positions."""
+    live = live or {}
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     m = R.MAPS[mid]
     tiles, g = reachable(map_dir, start, caps, gates)
@@ -100,7 +103,7 @@ def plan(map_dir, start, caps, skip, gates=frozenset()):
     for i, o in enumerate(m.get('object_events', [])):
         s = o.get('script') or ''
         if s in SKIP_SCRIPTS or (i + 1) in skip: continue
-        jobs.append(dict(kind='talk', id=i + 1, at=(o['x'], o['y']), script=s, mode=mode_for(s)))
+        jobs.append(dict(kind='talk', id=i + 1, at=live.get(i + 1, (o['x'], o['y'])), script=s, mode=mode_for(s)))
     for b in m.get('bg_events', []):
         if b.get('type') == 'hidden_item':
             jobs.append(dict(kind='inspect', at=(b['x'], b['y']), what='hidden ' + b['item'], mode='A'))
@@ -178,7 +181,8 @@ def main():
     if f['map'] != a.map: raise SystemExit(f"save is on {f['map']}, not {a.map}")
     start = (f['x'], f['y'])
     gates = story_gates(a.map, f.get('queries', {}))
-    order, tiles, g, later = plan(a.map, start, caps, skip, gates)
+    live = {x['local_id']: (x['x'], x['y']) for x in f.get('actors', []) if x['local_id'] != 255 and not x['invisible']}
+    order, tiles, g, later = plan(a.map, start, caps, skip, gates, live)
     chunks = [order[i:i + CHUNK] for i in range(0, len(order), CHUNK)]
     save = a.save; results = []; dests = []
     for n, chunk in enumerate(chunks):

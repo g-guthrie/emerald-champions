@@ -108,6 +108,8 @@ static const struct EmeraldChampionsBattleSet raw[] = {
 static const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Species s,u8 n){return &raw[s];}
 static u32 GetMonData(struct Pokemon *p,int n){return p->species;}
 static void ApplyEmeraldChampionsScriptedSet(struct Pokemon *p,const struct EmeraldChampionsBattleSet *s){p->preset=*s;}
+/* The opening rival always battles before the Knuckle Badge: EVs are locked (src/caps.c AreEVsUnlocked). */
+static void ClearMonEVsIfLocked(struct Pokemon *p){for(int i=0;i<NUM_STATS;i++)p->preset.evs[i]=0;}
 '''+functions+'\nint main(void){ struct Pokemon p;\n'
     for species in raw:
         program+='p.species='+species+';ApplyEmeraldChampionsRegionalRivalSet(&p,0,1);printf("'+species+' %d %d %d %d %d %d %d %d %d %d %d %d %d\\n",p.preset.nature,p.preset.ability,p.preset.item,p.preset.moves[0],p.preset.moves[1],p.preset.moves[2],p.preset.moves[3],p.preset.evs[0],p.preset.evs[1],p.preset.evs[2],p.preset.evs[3],p.preset.evs[4],p.preset.evs[5]);\n'

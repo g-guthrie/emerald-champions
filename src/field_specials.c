@@ -460,8 +460,16 @@ static s32 EmeraldChampionsBattleItemIndex(enum Item item)
 // Items no pickup or gift hands over: the vendor stocks them once the Trainer
 // has enough Badges, so nothing competitive depends on a lucky wild held item.
 // A world pickup, gift or purchase still unlocks one before its Badge floor.
+// Floor 0: battle items that wild Pokémon met before the first Badge used to
+// hold; the vendor stocks them from the start instead.
 static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
 {
+    {ITEM_BRIGHT_POWDER,    0},   // was Wurmple's
+    {ITEM_MENTAL_HERB,      0},   // was Lotad's (also on every Poke Mart shelf)
+    {ITEM_METRONOME,        0},   // was Kricketot's
+    {ITEM_MYSTIC_WATER,     0},   // was Goldeen's
+    {ITEM_POWER_HERB,       0},   // was Seedot's
+    {ITEM_QUICK_CLAW,       0},   // was Meowth's
     {ITEM_LOADED_DICE,      2},
     {ITEM_EJECT_PACK,       3},
     {ITEM_HEAVY_DUTY_BOOTS, 4},
