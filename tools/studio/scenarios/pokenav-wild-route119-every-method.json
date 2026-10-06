@@ -162,6 +162,11 @@
     {
       "press": "B",
       "frames": 200,
+      "label": "Full map"
+    },
+    {
+      "press": "B",
+      "frames": 200,
       "label": "PokeNav off"
     },
     {
