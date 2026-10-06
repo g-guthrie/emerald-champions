@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
   "play_order": 32,
-  "e_group": "E0049",
+  "e_group": "E0067",
   "trainer": "TRAINER_ELLIOT_1",
   "class": "regular",
   "cap": 20,
@@ -68,7 +68,7 @@
   "ai_defects_newly_introduced": [],
   "ai_weak_choices": [
     {
-      "id": "E0049-W1",
+      "id": "E0067-W1",
       "turn": 1,
       "board": "Frillish at full HP with Hex, Icy Wind, Will-O-Wisp and Recover, opposite an unstatused Magearna and an unstatused Jolteon.",
       "chosen": "Hex on Magearna for 9 damage.",

@@ -1,6 +1,6 @@
 {
   "play_order": 66,
-  "e_group": "E0076",
+  "e_group": "E0080",
   "trainer": "TRAINER_AISHA",
   "class": "casual",
   "location": "Route117",
@@ -44,7 +44,7 @@
   "protect_ledger": [],
   "ai_defects": [
     {
-      "id": "E0076-D1",
+      "id": "E0080-D1",
       "status": "REPRODUCES on work/agent-battle-build-3",
       "severity": "high",
       "attempt": 1,
@@ -54,7 +54,7 @@
       "why_wrong": "This is the only board in the battle on which the team's single authored centrepiece could fire, and every precondition the dossier names was satisfied: the activator was healthy, the recipient was at full HP and would survive a deliberately weakened friendly Frost Breath (Froslass carries a 0 Special Attack IV and no special EVs precisely so the friendly crit does not kill), and Tauros had no boost yet. Icy Wind's spread Speed drop is not worthless, but it is a generic support move chosen over the interaction that defines the trainer. Tauros's Clear Amulet, Hitmontop's Wide Guard and Froslass's crippled Special Attack are all dead weight unless this fires, so roughly three quarters of the authored team is unreachable.",
       "better_action": "MOVE_FROST_BREATH targeting the ally Tauros, which is a guaranteed critical hit and therefore a guaranteed Anger Point +6 Attack.",
       "unchanged_from_first_run": true,
-      "note": "I did not change any AI C code. The ACTIVATE tactic machinery is shared, so other owners with an `ACTIVATE` line (E0092 TRAINER_WATTSON_1 carries `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE`) should be checked on the same path - see this block's Wattson rerun receipt for that second data point."
+      "note": "I did not change any AI C code. The ACTIVATE tactic machinery is shared, so other owners with an `ACTIVATE` line (E0059 TRAINER_WATTSON_1 carries `ACTIVATE ELECTRODE DISCHARGE ELECTIVIRE`) should be checked on the same path - see this block's Wattson rerun receipt for that second data point."
     }
   ],
   "ai_notes": [

@@ -1472,7 +1472,7 @@
         "TRAINER_ELLIOT_1"
       ],
       "e_groups": [
-        "E0049"
+        "E0067"
       ],
       "battle_calls": [
         {
@@ -2069,7 +2069,7 @@
         "TRAINER_GRETA_SLATEPORT"
       ],
       "e_groups": [
-        "E0053"
+        "E0068"
       ],
       "battle_calls": [
         {
@@ -2107,7 +2107,7 @@
         "TRAINER_GRUNT_MUSEUM_1"
       ],
       "e_groups": [
-        "E0050"
+        "E0047"
       ],
       "battle_calls": [
         {
@@ -2145,7 +2145,7 @@
         "TRAINER_ARCHIE_SLATEPORT"
       ],
       "e_groups": [
-        "E0052"
+        "E0048"
       ],
       "battle_calls": [
         {
@@ -2191,7 +2191,7 @@
         "TRAINER_ISABEL_1"
       ],
       "e_groups": [
-        "E0054"
+        "E0049"
       ],
       "battle_calls": [
         {
@@ -2238,7 +2238,7 @@
         "TRAINER_KALEB"
       ],
       "e_groups": [
-        "E0054"
+        "E0049"
       ],
       "battle_calls": [
         {
@@ -2276,7 +2276,7 @@
         "TRAINER_SALLY"
       ],
       "e_groups": [
-        "E0055"
+        "E0069"
       ],
       "battle_calls": [
         {
@@ -2314,7 +2314,7 @@
         "TRAINER_EDDIE"
       ],
       "e_groups": [
-        "E0056"
+        "E0070"
       ],
       "battle_calls": [
         {
@@ -2510,7 +2510,7 @@
         "TRAINER_TIMMY"
       ],
       "e_groups": [
-        "E0058"
+        "E0050"
       ],
       "battle_calls": [
         {
@@ -2553,7 +2553,7 @@
         "TRAINER_MAY_ROUTE_110_TREECKO"
       ],
       "e_groups": [
-        "E0059"
+        "E0053"
       ],
       "battle_calls": [
         {
@@ -2627,7 +2627,7 @@
         "TRAINER_JACLYN"
       ],
       "e_groups": [
-        "E0063"
+        "E0071"
       ],
       "battle_calls": [
         {
@@ -2665,7 +2665,7 @@
         "TRAINER_WALLY_MAUVILLE"
       ],
       "e_groups": [
-        "E0069"
+        "E0054"
       ],
       "battle_calls": [
         {
@@ -2703,7 +2703,7 @@
         "TRAINER_ANTHONY"
       ],
       "e_groups": [
-        "E0064"
+        "E0073"
       ],
       "battle_calls": [
         {
@@ -2741,7 +2741,7 @@
         "TRAINER_JASMINE"
       ],
       "e_groups": [
-        "E0067"
+        "E0052"
       ],
       "battle_calls": [
         {
@@ -2779,7 +2779,7 @@
         "TRAINER_JACOB"
       ],
       "e_groups": [
-        "E0068"
+        "E0074"
       ],
       "battle_calls": [
         {
@@ -2817,7 +2817,7 @@
         "TRAINER_ANNA_AND_MEG_1"
       ],
       "e_groups": [
-        "E0070"
+        "E0075"
       ],
       "battle_calls": [
         {
@@ -2890,7 +2890,7 @@
         "TRAINER_ISAAC_1"
       ],
       "e_groups": [
-        "E0071"
+        "E0076"
       ],
       "battle_calls": [
         {
@@ -2937,7 +2937,7 @@
         "TRAINER_MARIA_1"
       ],
       "e_groups": [
-        "E0073"
+        "E0077"
       ],
       "battle_calls": [
         {
@@ -2984,7 +2984,7 @@
         "TRAINER_DEREK"
       ],
       "e_groups": [
-        "E0074"
+        "E0078"
       ],
       "battle_calls": [
         {
@@ -3023,7 +3023,7 @@
         "TRAINER_LYDIA_1"
       ],
       "e_groups": [
-        "E0075"
+        "E0079"
       ],
       "battle_calls": [
         {
@@ -3071,7 +3071,7 @@
         "TRAINER_AISHA"
       ],
       "e_groups": [
-        "E0076"
+        "E0080"
       ],
       "battle_calls": [
         {
@@ -3110,7 +3110,7 @@
         "TRAINER_BRANDI"
       ],
       "e_groups": [
-        "E0076"
+        "E0080"
       ],
       "battle_calls": [
         {
@@ -3149,7 +3149,7 @@
         "TRAINER_MELINA"
       ],
       "e_groups": [
-        "E0076"
+        "E0080"
       ],
       "battle_calls": [
         {
@@ -3227,7 +3227,7 @@
         "TRAINER_ROSE_1"
       ],
       "e_groups": [
-        "E0085"
+        "E0091"
       ],
       "battle_calls": [
         {
@@ -3275,7 +3275,7 @@
         "TRAINER_DEANDRE"
       ],
       "e_groups": [
-        "E0088"
+        "E0092"
       ],
       "battle_calls": [
         {
@@ -3314,7 +3314,7 @@
         "TRAINER_TYRON"
       ],
       "e_groups": [
-        "E0083"
+        "E0090"
       ],
       "battle_calls": [
         {
@@ -3353,7 +3353,7 @@
         "TRAINER_BIANCA"
       ],
       "e_groups": [
-        "E0082"
+        "E0089"
       ],
       "battle_calls": [
         {
@@ -3392,7 +3392,7 @@
         "TRAINER_VICTOR"
       ],
       "e_groups": [
-        "E0077"
+        "E0082"
       ],
       "battle_calls": [
         {
@@ -3431,7 +3431,7 @@
         "TRAINER_VICTORIA"
       ],
       "e_groups": [
-        "E0078"
+        "E0083"
       ],
       "battle_calls": [
         {
@@ -3470,7 +3470,7 @@
         "TRAINER_VIVI"
       ],
       "e_groups": [
-        "E0079"
+        "E0085"
       ],
       "battle_calls": [
         {
@@ -3509,7 +3509,7 @@
         "TRAINER_VICKY"
       ],
       "e_groups": [
-        "E0080"
+        "E0088"
       ],
       "battle_calls": [
         {
@@ -3548,7 +3548,7 @@
         "TRAINER_VIVIAN"
       ],
       "e_groups": [
-        "E0089"
+        "E0058"
       ],
       "battle_calls": [
         {
@@ -3587,7 +3587,7 @@
         "TRAINER_KIRK"
       ],
       "e_groups": [
-        "E0089"
+        "E0058"
       ],
       "battle_calls": [
         {
@@ -3626,7 +3626,7 @@
         "TRAINER_BEN"
       ],
       "e_groups": [
-        "E0090"
+        "E0055"
       ],
       "battle_calls": [
         {
@@ -3665,7 +3665,7 @@
         "TRAINER_ANGELO"
       ],
       "e_groups": [
-        "E0091"
+        "E0056"
       ],
       "battle_calls": [
         {
@@ -3704,7 +3704,7 @@
         "TRAINER_SHAWN"
       ],
       "e_groups": [
-        "E0091"
+        "E0056"
       ],
       "battle_calls": [
         {
@@ -3743,7 +3743,7 @@
         "TRAINER_WATTSON_1"
       ],
       "e_groups": [
-        "E0092"
+        "E0059"
       ],
       "battle_calls": [
         {
@@ -5781,7 +5781,7 @@
         "TRAINER_CYNDY_1"
       ],
       "e_groups": [
-        "E0047"
+        "E0063"
       ],
       "battle_calls": [
         {
@@ -11210,7 +11210,7 @@
         "TRAINER_MARLENE"
       ],
       "e_groups": [
-        "E0048"
+        "E0064"
       ],
       "battle_calls": [
         {

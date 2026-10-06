@@ -17,8 +17,10 @@ Checks src/data/wild_encounters.json (gWildMonHeaders entries):
 5. With --placement SPEC, each wild/quest placement appears exactly once on its
    map and method at its rate, and no restricted species appears elsewhere.
 6. The shared Cut-tree habitat (sCutTreeHabitat in src/wild_encounter.c) totals
-   100, keeps the ordinary floor, and is the only home of its species: none
-   of them appears in any map table. It counts as a valid species home.
+   100, keeps the ordinary floor, and is the only home of its base species:
+   none of them appears in any map table. Their evolved forms, met where a
+   map's levels reach the evolution, are ordinary species and may live
+   elsewhere too. It counts as a valid species home for both.
 
 Species classes follow GetRestrictedPartyClass in src/pokemon.c: the flags of
 the form table's base species (Ultra Beast, then Legendary-class, then
@@ -166,15 +168,17 @@ SURF_HABITATS = {
 
 CUT_TREE_SOURCE = ROOT / 'src/wild_encounter.c'
 CUT_TREE_TABLE = re.compile(r"sCutTreeHabitat\[\]\s*=\s*\{(.*?)\};", re.S)
-CUT_TREE_SLOT = re.compile(r"\{\s*(SPECIES_[A-Z0-9_]+)\s*,\s*(\d+)\s*\}")
+# {base, odds, evolution level, evolved form[, second evolved form]}
+CUT_TREE_SLOT = re.compile(r"\{\s*(SPECIES_[A-Z0-9_]+)\s*,\s*(\d+)\s*,\s*\d+\s*((?:,\s*SPECIES_[A-Z0-9_]+\s*)*)\}")
 
 
 def cut_tree_habitat():
-    """Return [(species, odds)] from the native Cut-tree table."""
+    """Return [(species, odds, evolved forms)] from the native Cut-tree table."""
     match = CUT_TREE_TABLE.search(CUT_TREE_SOURCE.read_text())
     if match is None:
         raise SystemExit(f"{CUT_TREE_SOURCE}: sCutTreeHabitat table not found")
-    return [(species, int(odds)) for species, odds in CUT_TREE_SLOT.findall(match.group(1))]
+    return [(species, int(odds), re.findall(r"SPECIES_[A-Z0-9_]+", evolved))
+            for species, odds, evolved in CUT_TREE_SLOT.findall(match.group(1))]
 
 
 FLAG_FIELDS = ("isUltraBeast", "isRestrictedLegendary", "isSubLegendary", "isMythical", "isParadox")
@@ -450,10 +454,22 @@ def main():
         errors.append('no Emerald encounter tables checked')
     # Rule 6: the Cut-tree habitat is its species' only home.
     cut_slots = cut_tree_habitat()
-    cut_species = {resolve_species(species, aliases) for species, _ in cut_slots}
-    if not cut_slots or sum(odds for _, odds in cut_slots) != 100:
-        errors.append(f'cut_tree: odds {[odds for _, odds in cut_slots]} must total 100')
-    for species, odds in cut_slots:
+    cut_species = {resolve_species(species, aliases) for species, _, _ in cut_slots}
+    if not cut_slots or sum(odds for _, odds, _ in cut_slots) != 100:
+        errors.append(f'cut_tree: odds {[odds for _, odds, _ in cut_slots]} must total 100')
+    for species, _, evolved in cut_slots:
+        if not evolved:
+            errors.append(f'cut_tree: {species} names no evolved form')
+        for form in evolved:
+            canonical = resolve_species(form, aliases)
+            if not configured.get(canonical):
+                errors.append(f'cut_tree: invalid configured evolved form {form}')
+            elif class_of(form) != ORDINARY:
+                errors.append(f'cut_tree: {class_of(form)} {form} is not allowed on Cut trees')
+            else:
+                sources.setdefault(canonical, set()).add('CUT_TREES/cut_tree')
+                wild_sources.add(canonical)
+    for species, odds, _ in cut_slots:
         canonical = resolve_species(species, aliases)
         if not configured.get(canonical):
             errors.append(f'cut_tree: invalid configured species {species}')
@@ -486,7 +502,8 @@ def main():
     if errors:
         raise SystemExit('\n'.join(errors))
     print(f'PASS: {checked} Emerald encounter tables have explicit weights, the odds floor and valid level templates')
-    print(f'PASS: the shared Cut-tree habitat ({len(cut_slots)} species) totals 100 and is their only home')
+    print(f'PASS: the shared Cut-tree habitat ({len(cut_slots)} species) totals 100 and is their only home; '
+          f'{sum(len(evolved) for _, _, evolved in cut_slots)} evolved forms are ordinary species')
     if placement_count is not None:
         print(f'PASS: {placement_count} wild/quest placements from {args.placement} match their map, method and rate')
     print(f'INFO: {len(sources)} canonical species referenced by ordinary Hoenn tables; campaign access is not verified')

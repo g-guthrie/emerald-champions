@@ -162,7 +162,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0047 Cyndy, E0048 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+  Deferred: E0063 Cyndy, E0064 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
     it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -279,7 +279,7 @@ STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
 ====================================================================================================
 STEP 11 - cap 20 - Route 106 trainer (Ned)
   Battles: E0031 Ned
-  Deferred: E0049 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
+  Deferred: E0067 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
     Takao, Cristian, Jocelyn, Brawly): Brawly is in Slateport and his guide blocks the Gym door until
     the player speaks to him there (DewfordTown object 6, FLAG_HIDE_SLATEPORT_CITY_BRAWLY)
   VERIFIED IN PLAY: Mr. Briney's boat from Route 104; Dewford Town, Center, Hall, both houses,
@@ -333,8 +333,8 @@ STEP 12 - cap 20 - Route 106 and Granite Cave (the pool for Route 109)
 STEP 13 - cap 20 - Route 109 beach and the Seashore House
   Battles: E0032 Hailey, E0033 Edmond, E0034 Chandler, E0035 Lola (Route 109 beach);
     E0036 Johanna, E0037 Dwayne, E0038 Simon (Seashore House, doubles)
-  Deferred: E0050 Museum grunts, E0052 Archie (Museum raid, after the Knuckle Badge);
-    E0053 Greta (refuses until later)
+  Deferred: E0047 Museum grunts, E0048 Archie (Museum raid, after the Knuckle Badge);
+    E0068 Greta (refuses until later)
   Played: Briney (Dewford, after the Letter) to Route 109; beach and Seashore House swept; Slateport,
   its Center, Mart, House, Chef's house, Fan Club, Shipyard, Battle Tent lobby and Harbor swept;
   Brawly spoken to outside the Museum. Before the Knuckle Badge the Aqua line blocks the Museum door
@@ -364,4 +364,51 @@ STEP 14 - cap 20 - Dewford Gym
   Played: Briney back from Route 109; every Gym trainer and Brawly beaten. Brawly gives the Knuckle
   Badge (cap 30; EVs unlock) and a Punching Glove (code; was Machampite in play).
   Adds nothing new to the pool: the Gym sees everything reachable at cap 20 (Steps 1-13).
+
+====================================================================================================
+STEP 15 - cap 30 - Oceanic Museum raid (Slateport)
+  Battles: E0047 Museum grunts (double), E0048 Archie
+  Played: Briney from Dewford to Route 109; Museum 1F and 2F swept; the Rusturf grunt hands back a
+  Nugget; Capt. Stern takes the Devon Parts and Aqua attacks. The raid clears the Museum line and
+  Route 110's grunts (play: Route 110 opens north).
+  Adds nothing new to the pool (Slateport was walked in Step 13).
+
+====================================================================================================
+STEP 16 - cap 30 - Route 110
+  Battles: E0049 Isabel & Kaleb, E0050 Timmy, E0052 Jasmine, E0053 rival (six variants)
+  Deferred: E0069 Sally, E0070 Eddie (Trick House puzzle 1); E0071 Jaclyn, E0073 Anthony,
+    E0074 Jacob (Cycling Road, by Bike)
+  Played: Route 110's low road swept north to Mauville; the rival battle gives the Dowsing Machine.
+  Adds Route 110 (and the Slateport raid's aftermath).
+  Pokemon
+    Route 110 grass (DexNav, Lv 21-23): Electrike (common); Gulpin, Plusle, Minun, Trubbish,
+      Magnemite, Varoom (uncommon); Shroodle, Yamper, Stunky (rare). Raikou and Tapu Koko are
+      gated 5% slots. Old Rod (DexNav, Lv 17-19): Tadbulb, Chinchou. Honey (code): Combee, Ekans,
+      Doduo, Pachirisu.
+  Battle items
+    Gifts (play): Dowsing Machine (rival).
+    Pickups (play): hidden Poke Ball, Bottle Cap, Great Ball, Revive, three Quick Balls; nine Nanab
+      Berries. Sharp Beak (code; was an Elixir in play).
+    Wild held (species data): Gulpin (Oran / Sitrus Berry), Magnemite (- / Metal Coat), Combee
+      (Honey), Chinchou (- / Deep Sea Scale). Removed: Doduo/Dodrio Sharp Beak (now the Route 110
+      pickup), Plusle/Minun Cell Battery (every Mart), Trubbish/Garbodor Silk Scarf (Dewford gift).
+  Not yet: Falinksite sparkle and the vandalized sign (Surf); Assault Vest and the Cycling Road
+    trainers (Bike); Trick House puzzles; New Mauville (key from Wattson).
+
+====================================================================================================
+STEP 17 - cap 30 - Mauville City and the Mauville Gym
+  Battles: E0054 Wally (outside the Gym), E0055 Ben, E0056 Angelo & Shawn, E0058 Kirk & Vivian,
+    E0059 Wattson
+  Played: Mauville, its Center, Mart, Rydel's Cycles, both houses and the Game Corner swept; Wally
+  beaten; the Gym's switch puzzle walked (route solved from the barrier states) and Wattson beaten.
+  Beating Wattson clears the Gym's other trainers, so Kirk & Vivian are optional. Wattson gives the
+  Dynamo Badge (cap 40), the Mega Ring and Raichunite X.
+  Adds Mauville (no wild Pokemon).
+  Battle items
+    Gifts (play): Acro Bike (Rydel), Rock Smash license (Rock Smash Dude, usable with the Dynamo
+      Badge), Nugget (city), Mudkip Doll (Game Corner); Mega Ring and Raichunite X (Wattson).
+      The Coin Case is a trade for an Ice Stone (House 2).
+    Pickups (play): Ultra Ball (city), two hidden Bottle Caps (Game Corner).
+  Fixes on the way: Wattson's lesson said "Try your gift stones!" (none come before the Ring now);
+    it points to the sparkles behind cracked rocks.
 
