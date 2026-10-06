@@ -641,13 +641,13 @@
 // Hidden items Inclement Emerald places that this tree had not declared.
 // Appended after the existing block; the range runs to TRAINER_FLAGS_START (0x500),
 // so there is ample room and no later range moves.
-#define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_ROOMS_B1F_BOTTLE_CAP                   (FLAG_HIDDEN_ITEMS_START + 0x70)
+#define FLAG_HIDDEN_ITEM_ABANDONED_SHIP_ROOMS_1F_BOTTLE_CAP                   (FLAG_HIDDEN_ITEMS_START + 0x70)
 #define FLAG_HIDDEN_ITEM_ALTERING_CAVE_B1F_TWISTED_SPOON                                 (FLAG_HIDDEN_ITEMS_START + 0x71)
 #define FLAG_HIDDEN_ITEM_ALTERING_CAVE_B1F_SPELL_TAG                                  (FLAG_HIDDEN_ITEMS_START + 0x72)
 #define FLAG_ITEM_GRANITE_CAVE_B2F_GOLD_BOTTLE_CAP                            (FLAG_HIDDEN_ITEMS_START + 0x73) // Former Altering Cave Gold Cap receipt; keep the saved bit.
 #define FLAG_HIDDEN_ITEM_ALTERING_CAVE_MAX_REVIVE                              (FLAG_HIDDEN_ITEMS_START + 0x74)
 #define FLAG_HIDDEN_ITEM_AQUA_HIDEOUT_B1F_BOTTLE_CAP1                          (FLAG_HIDDEN_ITEMS_START + 0x75)
-#define FLAG_HIDDEN_ITEM_AQUA_HIDEOUT_B1F_BOTTLE_CAP2                          (FLAG_HIDDEN_ITEMS_START + 0x76)
+#define FLAG_HIDDEN_ITEM_AQUA_HIDEOUT_B2F_BOTTLE_CAP                          (FLAG_HIDDEN_ITEMS_START + 0x76)
 #define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_STAR_PIECE_2                              (FLAG_HIDDEN_ITEMS_START + 0x77)
 #define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_PEARL_STRING_2                                 (FLAG_HIDDEN_ITEMS_START + 0x78)
 #define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_BIG_PEARL_2                              (FLAG_HIDDEN_ITEMS_START + 0x79)
@@ -700,7 +700,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_111_BLUNDER_POLICY                                     (FLAG_HIDDEN_ITEMS_START + 0xa8)
 #define FLAG_HIDDEN_ITEM_ROUTE_111_NUGGET                                  (FLAG_HIDDEN_ITEMS_START + 0xa9)
 #define FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET                                      (FLAG_HIDDEN_ITEMS_START + 0xaa)
-#define FLAG_HIDDEN_ITEM_ROUTE_113_REVIVE                                      (FLAG_HIDDEN_ITEMS_START + 0xab)
+#define FLAG_HIDDEN_ITEM_ROUTE_114_REVIVE_2                                      (FLAG_HIDDEN_ITEMS_START + 0xab)
 #define FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET_2                                       (FLAG_HIDDEN_ITEMS_START + 0xac)
 #define FLAG_HIDDEN_ITEM_ROUTE_114_PUNCHING_GLOVE                                      (FLAG_HIDDEN_ITEMS_START + 0xad)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0xae)
@@ -1241,7 +1241,7 @@
 #define FLAG_ITEM_VICTORY_ROAD_B1_F_CHARIZARDITE_Y                     0x43F
 #define FLAG_ITEM_VICTORY_ROAD_B2F_TYRANITARITE                        0x440
 #define FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_MASTER_BALL              0x442
-#define FLAG_ITEM_ROUTE_124_RED_SHARD                               0x444
+#define FLAG_ITEM_DEWFORD_MEADOW_RED_SHARD                               0x444
 #define FLAG_ITEM_ROUTE124_BOTTLE_CAP                              0x445
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_HONEY              0x446
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_HARBOR_MAIL               0x447
@@ -1972,7 +1972,7 @@
 #define FLAG_ITEM_ROUTE_127_DRAGON_FANG                                       0x40A // shares 0x40A with FLAG_ITEM_ROUTE_127_NET_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_127_LAPRASITE                                  0x40B // shares 0x40B with FLAG_ITEM_ROUTE_127_DIVE_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_132_NUGGET                                 0x40C // shares 0x40C with FLAG_ITEM_ROUTE_132_ULTRA_BALL (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_133_PEARL_STRING                               0x40D // shares 0x40D with FLAG_ITEM_ROUTE_133_DRAGON_SCALE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_103_PEARL                               0x40D // shares 0x40D with FLAG_ITEM_ROUTE_133_DRAGON_SCALE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_111_RUINS_EXTERIOR_STARDUST                                0x40E // shares 0x40E with FLAG_ITEM_ROUTE_133_REAPER_CLOTH (dead: its map.json was overwritten)
 #define FLAG_ITEM_PETALBURG_CITY_VENUSAURITE                           0x410 // shares 0x410 with FLAG_ITEM_PETALBURG_CITY_ETHER (dead: its map.json was overwritten)
 #define FLAG_ITEM_RUSTBORO_CITY_WISE_GLASSES                        0x411 // shares 0x411 with FLAG_ITEM_RUSTBORO_CITY_HEAVY_BALL (dead: its map.json was overwritten)
@@ -2037,7 +2037,7 @@
 #define FLAG_ITEM_ROUTE_119_GRENINJITE                            0x467 // shares 0x467 with FLAG_ITEM_OLD_MAGMA_HIDEOUT_B2F_NEST_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_NEW_MAUVILLE_INSIDE_EELEKTROSSITE                             0x468 // shares 0x468 with FLAG_UNUSED_0x468 (dead: its map.json was overwritten)
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_SHARPEDONITE                        0x46C // shares 0x46C with FLAG_ITEM_AQUA_HIDEOUT_B1F_PRISM_SCALE (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_111_MEDICHAMITE                                0x46D // shares 0x46D with FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08 (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_133_MEDICHAMITE                                0x46D // shares 0x46D with FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08 (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_119_NUGGET                                     0x46E // shares 0x46E with FLAG_ITEM_ROUTE_119_TART_APPLE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_104_SOOTHE_BELL                                0x46F // shares 0x46F with FLAG_ITEM_ROUTE_104_POTION -- same Route 104 item ball, different item
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE                        0x470 // shares 0x470 with FLAG_UNUSED_0x470 (dead: its map.json was overwritten)

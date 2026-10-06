@@ -72,7 +72,19 @@ def names_other_item(text: str, given: str, items: list[str]) -> bool:
     if not hits: return False
     # longest match wins (MAX_REVIVE over REVIVE)
     best = max(hits, key=lambda i: len(norm(i[5:])))
-    return norm(best[5:]) != norm(given[5:]) and norm(given[5:]) not in t
+    # a longer item name that merely contains the given one (PEARL_STRING for PEARL) is still drift
+    return norm(best[5:]) != norm(given[5:])
+
+
+def names_other_map(flag: str, prefix: str, item: str, mp: str, maps) -> bool:
+    """True when the flag's place part names another map that exists, never this one
+    (FLAG_ITEM_ROUTE_133_... on Route 103)."""
+    place = norm(re.sub(r'(_\d+)?$', '', flag[len(prefix):]))
+    it = norm(item[5:])
+    if it in place: place = place[:place.rindex(it)]
+    if len(place) < 5: return False
+    homes = [m for m in maps if place in norm(m)]
+    return bool(homes) and mp not in homes
 
 
 def plan():
@@ -100,14 +112,16 @@ def plan():
                 while new in used_labels or new in renames.values():
                     new = f'{prefix}_EventScript_Item{camel(item)}{n}'; n += 1
                 renames[label] = new; used_labels.add(new)
-            if flag.startswith('FLAG_') and names_other_item(flag, item, items):
+            if flag.startswith('FLAG_') and (names_other_item(flag, item, items) or (
+                    flag.startswith('FLAG_ITEM_') and names_other_map(flag, 'FLAG_ITEM_', item, mp, maps))):
                 renames.setdefault(flag, f'FLAG_ITEM_{snake(mp)}_{item[5:]}')
         hidden_seen = {}
         for b in m.get('bg_events', []) or []:
             if b.get('type') != 'hidden_item': continue
             flag, item = b.get('flag') or '', b['item']
             flag_users.setdefault(flag, []).append((mp, b['x'], b['y'], item))
-            if flag.startswith('FLAG_') and names_other_item(flag.replace('FLAG_HIDDEN_ITEM_', ''), item, items):
+            if flag.startswith('FLAG_') and (names_other_item(flag.replace('FLAG_HIDDEN_ITEM_', ''), item, items) or (
+                    flag.startswith('FLAG_HIDDEN_ITEM_') and names_other_map(flag, 'FLAG_HIDDEN_ITEM_', item, mp, maps))):
                 k = (mp, item); hidden_seen[k] = hidden_seen.get(k, 0) + 1
                 suffix = '' if hidden_seen[k] == 1 else f'_{hidden_seen[k]}'
                 renames.setdefault(flag, f'FLAG_HIDDEN_ITEM_{snake(mp)}_{item[5:]}{suffix}')
