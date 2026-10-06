@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Seaspray_Cave_Stealth_Rock",
+      "script": "Seaspray_Cave_EventScript_ItemSmoothRock",
       "flag": "FLAG_ITEM_SEASPRAY_CAVE_SMOOTH_ROCK"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 0,
       "trainer_type": "0",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Seaspray_Cave_Water_Pulse",
+      "script": "Seaspray_Cave_EventScript_ItemCovertCloak",
       "flag": "FLAG_ITEM_SEASPRAY_CAVE_COVERT_CLOAK"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Seaspray_Cave_ItemStoneEdge",
+      "script": "Seaspray_Cave_EventScript_ItemBaxcalibrite",
       "flag": "FLAG_SEASPRAY_CAVE_STONE_EDGE"
     }
   ],

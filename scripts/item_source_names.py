@@ -105,7 +105,9 @@ def plan():
             item = given[0]
             flag = o.get('flag') or ''
             flag_users.setdefault(flag, []).append((mp, o['x'], o['y'], item))
-            if label not in PERSON_LABELS and names_other_item(label, item, items) and label not in renames:
+            tail = label.split('_EventScript_')[-1] if '_EventScript_' in label else label[len(mp):]
+            names_move = norm(item[5:]) not in norm(tail) and any(len(mv) >= 5 and mv in norm(tail) for mv in moves)
+            if label not in PERSON_LABELS and (names_other_item(label, item, items) or names_move) and label not in renames:
                 prefix = label.split('_EventScript')[0] if '_EventScript' in label else mp
                 new = f'{prefix}_EventScript_Item{camel(item)}'
                 n = 2

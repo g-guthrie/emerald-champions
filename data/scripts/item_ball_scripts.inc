@@ -685,11 +685,11 @@ Seaspray_Cave_Lure_Ball::
 	finditem ITEM_LURE_BALL
 	end
 
-Seaspray_Cave_Stealth_Rock::
+Seaspray_Cave_EventScript_ItemSmoothRock::
 	finditem ITEM_SMOOTH_ROCK
 	end
 
-Seaspray_Cave_Water_Pulse::
+Seaspray_Cave_EventScript_ItemCovertCloak::
 	finditem ITEM_COVERT_CLOAK
 	end
 
@@ -697,11 +697,11 @@ Seaspray_Cave_Blastoisinite::
 	finditem ITEM_BLASTOISINITE
 	end
 
-Seaspray_Cave_ItemStoneEdge::
+Seaspray_Cave_EventScript_ItemBaxcalibrite::
 	finditem ITEM_BAXCALIBRITE
 	end
 
-Seaspray_Cave_B1F_ItemFreezeDry::
+Seaspray_Cave_B1F_EventScript_ItemDampRock::
 	finditem ITEM_DAMP_ROCK
 	end
 
@@ -721,7 +721,7 @@ GraniteCave_B2F_EventScript_ItemGoldBottleCap::
 	finditem ITEM_GOLD_BOTTLE_CAP
 	end
 
-Ember_Path_ItemSmack_Down::
+EmberPath_EventScript_ItemClearAmulet::
 	finditem ITEM_CLEAR_AMULET
 	end
 
@@ -733,7 +733,7 @@ Ashen_Woods_ItemFlame_Orb::
 	finditem ITEM_FLAME_ORB
 	end
 
-Ashen_Woods_ItemU_Turn::
+AshenWoods_EventScript_ItemIronBall::
 	finditem ITEM_IRON_BALL
 	end
 
@@ -745,7 +745,7 @@ SandstrewnRuins_EventScript_ItemUtilityUmbrella::
 	finditem ITEM_UTILITY_UMBRELLA
 	end
 
-Sandstrewn_Ruins_ItemLeechLife::
+SandstrewnRuins_EventScript_ItemAbilityShield::
 	finditem ITEM_ABILITY_SHIELD
 	end
 

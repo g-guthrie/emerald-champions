@@ -465,13 +465,16 @@ static s32 EmeraldChampionsBattleItemIndex(enum Item item)
 static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
 {
     {ITEM_BRIGHT_POWDER,    0},   // was Wurmple's
-    {ITEM_MENTAL_HERB,      0},   // was Lotad's (also on every Poke Mart shelf)
+    {ITEM_FOCUS_BAND,       0},   // was Machop's (Rusturf Tunnel)
+    {ITEM_HARD_STONE,       0},   // was Roggenrola's (Rusturf Tunnel)
+    {ITEM_MENTAL_HERB,      0},   // was Lotad's and Pancham's (also on every Poke Mart shelf)
     {ITEM_METRONOME,        0},   // was Kricketot's
     {ITEM_MYSTIC_WATER,     0},   // was Goldeen's
     {ITEM_MIRACLE_SEED,     0},   // was Cherubi's (Petalburg Woods honey)
     {ITEM_POISON_BARB,      0},   // was Budew's
     {ITEM_POWER_HERB,       0},   // was Seedot's
     {ITEM_QUICK_CLAW,       0},   // was Meowth's
+    {ITEM_SOFT_SAND,        0},   // was Nincada's
     {ITEM_SPELL_TAG,        0},   // was Sandygast's
     {ITEM_LOADED_DICE,      2},
     {ITEM_EJECT_PACK,       3},
