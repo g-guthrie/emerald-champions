@@ -334,8 +334,8 @@
       "x": 28,
       "y": 20,
       "elevation": 3,
-      "item": "ITEM_ETHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_ETHER"
+      "item": "ITEM_SHELL_BELL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_SHELL_BELL"
     },
     {
       "type": "hidden_item",

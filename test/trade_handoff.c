@@ -2,11 +2,14 @@
 #include "pokemon.h"
 #include "trade.h"
 #include "event_data.h"
+#include "legendary_signs.h"
 #include "constants/party_menu.h"
 #include "constants/trade.h"
+#include "constants/vars.h"
 #include "test/test.h"
 
 extern void Test_FinishInGameTrade(void);
+extern void CreateInGameTradePokemon(void);
 
 TEST("NPC trade handoff: selected party slot is independent of the authored trade ID")
 {
@@ -55,6 +58,32 @@ TEST("NPC trade handoff: Type Null shares the special slot across categories")
     gSpecialVar_0x8004 = 0;
     EXPECT(CanReceiveInGameTradePokemon()); // Swapping the current special Pokemon is legal.
     ZeroPlayerPartyMons();
+}
+
+TEST("NPC trade handoff: a traded Type: Null counts as caught")
+{
+    static const u16 caughtVars[] = {
+        VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
+        VAR_LEGENDARY_SIGNS_CAUGHT_2, VAR_LEGENDARY_SIGNS_CAUGHT_3,
+        VAR_LEGENDARY_SIGNS_CAUGHT_4, VAR_LEGENDARY_SIGNS_CAUGHT_5,
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
+        VarSet(caughtVars[i], 0);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_SKITTY, 30, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    gSpecialVar_0x8004 = 0;
+    gSpecialVar_0x8005 = INGAME_TRADE_TYPE_NULL;
+    CreateInGameTradePokemon();
+    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_TYPE_NULL));
+    Test_FinishInGameTrade();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_TYPE_NULL);
+    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_TYPE_NULL));
+    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
+        VarSet(caughtVars[i], 0);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
 }
 
 TEST("NPC trade handoff: link trades distinguish the shared-slot refusal from other failures")

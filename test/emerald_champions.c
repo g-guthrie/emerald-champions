@@ -2676,6 +2676,7 @@ TEST("Evolution conditions commit item costs once after all conditions pass")
     u8 friendship = eligible ? 255 : 0;
     SetMonData(&mon, MON_DATA_HELD_ITEM, &heldItem);
     SetMonData(&mon, MON_DATA_FRIENDSHIP, &friendship);
+    FlagSet(FLAG_BADGE01_GET); // friendship evolutions wait for the Stone Badge
     ClearBag();
     EXPECT(AddBagItem(ITEM_POKE_BALL, 5));
     bool32 canStop = TRUE;
@@ -2685,6 +2686,31 @@ TEST("Evolution conditions commit item costs once after all conditions pass")
     EXPECT(CheckBagHasItem(ITEM_POKE_BALL, consumed ? 4 : 5));
     EXPECT(!CheckBagHasItem(ITEM_POKE_BALL, consumed ? 5 : 6));
     EXPECT_EQ(canStop, !eligible);
+    FlagClear(FLAG_BADGE01_GET);
+}
+
+TEST("No friendship evolution before the Stone Badge")
+{
+    // Friendship still builds before Roxanne; it only pays off once the badge
+    // is in hand (May and Brendan tell the player with the Cherish Balls).
+    static const struct EvolutionParam conditions[] = {
+        {IF_MIN_FRIENDSHIP, 160},
+        {CONDITIONS_END},
+    };
+    bool32 badge = FALSE;
+    PARAMETRIZE_LABEL("%s", "before the badge") { badge = FALSE; }
+    PARAMETRIZE_LABEL("%s", "after the badge") { badge = TRUE; }
+    struct Pokemon mon;
+    CreateMon(&mon, SPECIES_BUDEW, 15, 0, OTID_STRUCT_PLAYER_ID);
+    u8 friendship = 255;
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &friendship);
+    if (badge)
+        FlagSet(FLAG_BADGE01_GET);
+    else
+        FlagClear(FLAG_BADGE01_GET);
+    bool32 canStop = TRUE;
+    EXPECT_EQ(DoesMonMeetAdditionalConditions(&mon, conditions, NULL, PARTY_SIZE, &canStop, CHECK_EVO), badge);
+    FlagClear(FLAG_BADGE01_GET);
 }
 
 TEST("A held-item evolution can't be cancelled once its item is spent")

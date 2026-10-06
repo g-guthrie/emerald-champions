@@ -15,7 +15,7 @@
     {MAPSEC_SLATEPORT_CITY, LEGENDARY_SIGN_MEWTWO, COMPOUND_STRING("Altering Cave on Route 103\nopens after you enter the\lHall of Fame. Surf there;\lMewtwo waits on B1F."), SPECIES_NONE},
     {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_THUNDURUS, COMPOUND_STRING("After five Badges and your\nfirst Fortree visit, Thundurus\lrides thunderstorms over\lRoute 118.\pSnow may bring it, too.\nAfter Sootopolis' crisis,\lit settles there."), SPECIES_NONE},
     {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_ZERAORA, COMPOUND_STRING("Zeraora roams inside New\nMauville. Finish Wattson's\lgenerator job, report back,\land earn five Badges first."), SPECIES_NONE},
-    {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_REGIELEKI, COMPOUND_STRING("Regieleki sparks at New\nMauville's entrance. Finish\lWattson's generator job, earn\lfive Badges and catch\lRegisteel first."), SPECIES_NONE},
+    {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_REGIELEKI, COMPOUND_STRING("Regieleki sparks at New\nMauville's entrance. Finish\lWattson's generator job, earn\lseven Badges and catch\lRegisteel first."), SPECIES_NONE},
     {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_ZEKROM, COMPOUND_STRING("With six Badges and Maxie\nstopped at the Magma Hideout,\lZekrom rides thunder\lover Route 112.\pSnow may bring it, too.\nAfter Sootopolis' crisis,\lit settles there."), SPECIES_NONE},
     {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_ZAPDOS, COMPOUND_STRING("The original Zapdos rests\ninside New Mauville. Approach\lit once you have five Badges."), SPECIES_NONE},
     {MAPSEC_MAUVILLE_CITY, LEGENDARY_SIGN_GENESECT, COMPOUND_STRING("Genesect is a prize at the\nMauville Game Corner once you\lhave all eight Badges."), SPECIES_NONE},

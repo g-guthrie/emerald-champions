@@ -358,8 +358,9 @@ static void FindMapsWithMon(enum Species species)
 
     currentRegionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
     // Add regular species to the area map. Legendary and Ultra Beast
-    // residents are ordinary slots, shown only while their slot is live:
-    // gate open and species not yet caught.
+    // residents are ordinary slots, shown only while acquirable: gate open
+    // and species not yet caught. Not IsWildSlotLive: a storm visitor's home
+    // map stays marked while its own slot is inert, since its storms come there.
     showWild = IsWildSlotSpeciesAcquirable(species);
     // The Cut tree habitat is not a table: it lives on every map with wild
     // Pokemon and a Cut tree (CutTreeWildEncounter).

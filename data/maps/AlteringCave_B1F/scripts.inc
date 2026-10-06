@@ -7,7 +7,6 @@ AlteringCave_B1F_MapScripts::
 AlteringCave_B1F_EventScript_Mewtwo::
 	lock
 	faceplayer
-	goto_if_unset FLAG_BADGE07_GET, Common_EventScript_LegendaryNotReady
 	waitse
 	playmoncry SPECIES_MEWTWO, 2
 	delay 40

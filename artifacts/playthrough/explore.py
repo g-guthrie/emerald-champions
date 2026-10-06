@@ -28,21 +28,27 @@ CHUNK = 6          # interactions/photos per scene (keeps each scene under the f
 def script_graph_text(label, seen=None, depth=0):
     import glob
     if not hasattr(script_graph_text, 'labels'):
-        labels = {}
+        labels, after = {}, {}   # after: the label a body falls through into when it doesn't end
         for f in glob.glob(str(ROOT / 'data/maps/*/scripts.inc')) + glob.glob(str(ROOT / 'data/scripts/*.inc')):
             cur = None
             for line in open(f, errors='ignore'):
                 m = re.match(r'^(\w+)::', line)
-                if m: cur = m.group(1); labels[cur] = []
+                if m:
+                    if cur: after[cur] = m.group(1)
+                    cur = m.group(1); labels[cur] = []
                 elif cur: labels[cur].append(line)
-        script_graph_text.labels = labels
+        script_graph_text.labels, script_graph_text.after = labels, after
     seen = seen if seen is not None else set()
     if label in seen or depth > 5 or label not in script_graph_text.labels: return ''
     seen.add(label)
     body = ''.join(script_graph_text.labels[label])
     out = body
-    for j in re.findall(r'\b(?:goto|call)\w*\s+(?:[^,\n]*,\s*)?(\w+)', body):
+    for j in re.findall(r'\b(?:goto|call)\w*\s+(?:[^,\n]*,\s*)?(\w+)|\bcase\s+[^,\n]+,\s*(\w+)', body):
+        j = j[0] or j[1]
         out += script_graph_text(j, seen, depth + 1)
+    last = [l.split('@')[0].strip() for l in script_graph_text.labels[label] if l.split('@')[0].strip()]
+    if not last or not re.match(r'(end\b|return\b|goto\s|step_end|\.)', last[-1]):
+        out += script_graph_text(script_graph_text.after.get(label, ''), seen, depth + 1)
     return out
 
 

@@ -140,7 +140,6 @@ TEST("Harvest economy: Celebi invitation is permanent and does not claim a captu
     ResetHarvest();
     // A fresh encounter state, separate from the earned campaign.
     VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_0, 0);
-    FlagClear(FLAG_EC_CAUGHT_CELEBI);
     memset(gSaveBlock2Ptr->pokedex.harvestedBerries, 30, NUM_BERRIES);
     gSpecialVar_0x8004 = 3;
     TradeEmeraldChampionsGardenBerries();
@@ -157,7 +156,6 @@ TEST("Harvest economy: Celebi invitation is permanent and does not claim a captu
     EXPECT_EQ(gSpecialVar_Result, 2);
     ResetHarvest();
     VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_0, 0);
-    FlagClear(FLAG_EC_CAUGHT_CELEBI);
 }
 
 // Norman's starter stone gift (src/mega_stone_rewards.c; reached by callnative).

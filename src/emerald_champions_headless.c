@@ -285,7 +285,6 @@ static void PrepareHeadlessOverworldFixtureState(enum Species species)
 {
     FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
     FlagClear(FLAG_EC_CAUGHT_DIANCIE);
-    FlagClear(FLAG_EC_CAUGHT_HEATRAN);
     FlagClear(FLAG_EC_CAUGHT_JIRACHI);
     FlagClear(FLAG_EC_CAUGHT_MOLTRES);
     FlagClear(FLAG_EC_CAUGHT_MEWTWO);
@@ -499,7 +498,6 @@ static void PrepareBookResearchScene(void)
         break;
     case 10:
         AddBagItem(ITEM_MAGMA_STONE, 1);
-        FlagSet(FLAG_EC_CAUGHT_HEATRAN);
         LoadHeadlessMap(MAP_SCORCHED_SLAB_HEATRANS_ROOM, 10, 15);
         break;
     case 11:
@@ -3686,23 +3684,15 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_RECEIVED_HM_STRENGTH);
                 if (gEcHeadlessFixtureParam <= 116)
                 {
-                    FlagSet(FLAG_EC_CAUGHT_HEATRAN);
                     AddBagItem(ITEM_MAGMA_STONE, 1);
                     LoadHeadlessMap(MAP_SCORCHED_SLAB_HEATRANS_ROOM, 10, 15);
                 }
                 else if (gEcHeadlessFixtureParam <= 119)
                 {
-                    FlagSet(FLAG_EC_CAUGHT_HEATRAN);
                     if (gEcHeadlessFixtureParam >= 118)
-                    {
                         MarkLegendarySignCaughtBySpecies(SPECIES_RESHIRAM);
-                        FlagClear(FLAG_EC_CAUGHT_HEATRAN);
-                    }
                     if (gEcHeadlessFixtureParam == 119)
-                    {
                         GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_HEATRAN), FLAG_SET_CAUGHT);
-                        FlagSet(FLAG_EC_CAUGHT_HEATRAN);
-                    }
                     LoadHeadlessMap(MAP_SCORCHED_SLAB_B2F, 19, 17);
                 }
                 else if (gEcHeadlessFixtureParam == 120)

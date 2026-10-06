@@ -9,7 +9,7 @@ Route109_SeashoreHouse_OnTransition: @ 82693FA
 Route109_SeashoreHouse_EventScript_Owner:: @ 82693FE
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_6_SODA_POP, Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop
+	goto_if_set FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE, Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop
 	goto_if_set FLAG_DEFEATED_SEASHORE_HOUSE, Route109_SeashoreHouse_EventScript_DefeatedTrainers
 	goto_if_set FLAG_TEMP_2, Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction
 	msgbox Route109_SeashoreHouse_Text_SeashoreHouseIntro, MSGBOX_DEFAULT
@@ -23,11 +23,11 @@ Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction:: @ 8269428
 	end
 
 Route109_SeashoreHouse_EventScript_DefeatedTrainers:: @ 8269432
-	msgbox Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles, MSGBOX_DEFAULT
-	giveitem ITEM_SODA_POP, 6
+	msgbox Route109_SeashoreHouse_Text_TakeThisFlameOrb, MSGBOX_DEFAULT
+	giveitem ITEM_FLAME_ORB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route109_SeashoreHouse_EventScript_BagFull
-	setflag FLAG_RECEIVED_6_SODA_POP
+	setflag FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE
 	release
 	end
 
@@ -114,17 +114,18 @@ Route109_SeashoreHouse_Text_ShowMeSomeHotMatches: @ 8269635
 	.string "I run this Seashore House just for\n"
 	.string "that reason alone!$"
 
-Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles: @ 8269685
+Route109_SeashoreHouse_Text_TakeThisFlameOrb:
 	.string "You're scorching hot!\n"
 	.string "Those battles blazed!\l"
 	.string "I'm more than just satisfied!\p"
 	.string "As thanks for showing me your hot\n"
-	.string "streak, I want you to take these.\p"
-	.string "It's half a dozen bottles of Soda Pop!$"
+	.string "streak, I want you to take this.\p"
+	.string "A Flame Orb! It burns its holder,\n"
+	.string "so a gutsy Pokémon hits harder!$"
 
 Route109_SeashoreHouse_Text_BagFull: @ 826973A
 	.string "Oh, but hey, your Bag's jammed full.\n"
-	.string "I'll hang on to these for you.$"
+	.string "I'll hang on to it for you.$"
 
 Route109_SeashoreHouse_Text_WantToBuySodaPop: @ 826977E
 	.string "Want to buy some Soda Pop?\n"

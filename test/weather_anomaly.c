@@ -149,7 +149,7 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
         SPECIES_TAPU_KOKO, SPECIES_TAPU_BULU, SPECIES_TAPU_LELE, SPECIES_TORNADUS,
         SPECIES_THUNDURUS, SPECIES_ENAMORUS, SPECIES_ZARUDE, SPECIES_SUICUNE,
         SPECIES_ZEKROM, SPECIES_RESHIRAM, SPECIES_KORAIDON, SPECIES_MIRAIDON,
-        SPECIES_XERNEAS, SPECIES_YVELTAL, SPECIES_GIRATINA, SPECIES_CALYREX,
+        SPECIES_YVELTAL, SPECIES_GIRATINA, SPECIES_CALYREX,
         SPECIES_SPECTRIER, SPECIES_TAPU_FINI, SPECIES_KELDEO, SPECIES_PALKIA,
         SPECIES_MANAPHY, SPECIES_NECROZMA,
     };
@@ -229,8 +229,10 @@ TEST("Weather anomalies: visitor rows are complete, unique and use only anomaly 
     // Orichalcum Pulse and Hadron Engine bring their own weather and terrain: they wait a stage.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_KORAIDON].unlockFlag, FLAG_BADGE07_GET);
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_MIRAIDON].unlockFlag, FLAG_BADGE07_GET);
-    // Geomancy Xerneas swept the Elite Four: it waits for the Hall of Fame.
+    // Geomancy Xerneas swept the Elite Four: it waits for the Hall of Fame,
+    // after the window, so it is an ordinary Route 121 resident.
     EXPECT_EQ(gLegendaryGates[LEGENDARY_SIGN_XERNEAS].unlockFlag, FLAG_IS_CHAMPION);
+    EXPECT(!IsWeatherAnomalyVisitor(LEGENDARY_SIGN_XERNEAS));
 }
 
 TEST("Weather anomalies: Koraidon and Miraidon wait for Tate and Liza at cap 70")

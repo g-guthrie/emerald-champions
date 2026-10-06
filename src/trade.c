@@ -14,6 +14,7 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "legendary_signs.h"
 #include "librfu.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -3351,6 +3352,8 @@ static void FinishInGameTrade(void)
     struct Pokemon *mon = gSpecialVar_0x8004 == PC_MON_CHOSEN
         ? &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC]
         : &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    // A gated species received by trade (Type: Null) counts as caught.
+    MarkLegendarySignCaughtBySpecies(GetMonData(mon, MON_DATA_SPECIES));
     enum Species target = GetEvolutionTargetSpecies(mon, EVO_MODE_TRADE, ITEM_NONE,
         &gParties[B_TRAINER_OPPONENT_A][0], NULL, CHECK_EVO);
     if (target != SPECIES_NONE)

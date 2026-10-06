@@ -56,7 +56,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_PINK_NECTAR",
-      "flag": "FLAG_HIDDEN_ITEM_PINK_NECTAR"
+      "flag": "FLAG_HIDDEN_ITEM_VERDANTURF_MEADOW_PINK_NECTAR"
     },
     {
       "type": "hidden_item",
@@ -64,7 +64,7 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_PURPLE_NECTAR",
-      "flag": "FLAG_HIDDEN_ITEM_PURPLE_NECTAR"
+      "flag": "FLAG_HIDDEN_ITEM_VERDANTURF_MEADOW_PURPLE_NECTAR"
     }
   ]
 }

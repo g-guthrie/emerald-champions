@@ -16869,7 +16869,7 @@
         },
         "flags": {
           "FLAG_RECEIVED_SOFT_SAND": 0,
-          "FLAG_RECEIVED_6_SODA_POP": 0,
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 0,
           "FLAG_DEFEATED_SEASHORE_HOUSE": 0
         }
       }
@@ -17603,7 +17603,7 @@
           "ITEM_SODA_POP": 0
         },
         "flags": {
-          "FLAG_RECEIVED_6_SODA_POP": 0,
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 0,
           "FLAG_DEFEATED_SEASHORE_HOUSE": 0
         }
       }
@@ -17734,7 +17734,7 @@
         },
         "flags": {
           "FLAG_RECEIVED_SOFT_SAND": 1,
-          "FLAG_RECEIVED_6_SODA_POP": 0,
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 0,
           "FLAG_DEFEATED_SEASHORE_HOUSE": 0
         }
       }
@@ -17818,7 +17818,7 @@
         "battle_serial_min": 1,
         "flags": {
           "FLAG_DEFEATED_SEASHORE_HOUSE": 0,
-          "FLAG_RECEIVED_6_SODA_POP": 0
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 0
         }
       }
     },
@@ -17867,7 +17867,7 @@
         "battle_serial_min": 2,
         "flags": {
           "FLAG_DEFEATED_SEASHORE_HOUSE": 1,
-          "FLAG_RECEIVED_6_SODA_POP": 0
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 0
         },
         "items": {
           "ITEM_SODA_POP": 0
@@ -17926,7 +17926,7 @@
         "stable_overworld": true,
         "flags": {
           "FLAG_DEFEATED_SEASHORE_HOUSE": 1,
-          "FLAG_RECEIVED_6_SODA_POP": 1
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 1
         },
         "items": {
           "ITEM_SODA_POP": 6
@@ -17969,7 +17969,7 @@
           "ITEM_SODA_POP": 6
         },
         "flags": {
-          "FLAG_RECEIVED_6_SODA_POP": 1
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 1
         }
       }
     },
@@ -18004,7 +18004,7 @@
           "ITEM_SODA_POP": 6
         },
         "flags": {
-          "FLAG_RECEIVED_6_SODA_POP": 1
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 1
         }
       }
     },
@@ -18061,7 +18061,7 @@
           "ITEM_SODA_POP": 7
         },
         "flags": {
-          "FLAG_RECEIVED_6_SODA_POP": 1
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 1
         }
       }
     },
@@ -18115,7 +18115,7 @@
           "ITEM_SODA_POP": 7
         },
         "flags": {
-          "FLAG_RECEIVED_6_SODA_POP": 1,
+          "FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE": 1,
           "FLAG_DEFEATED_SEASHORE_HOUSE": 1
         }
       }

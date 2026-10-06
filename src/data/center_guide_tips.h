@@ -17,7 +17,7 @@ TIP(RUSTBORO_CITY, 0, 0, 0, NONE, sTip_MoveTutor),
 TIP(RUSTBORO_CITY, 4, 0, 0, NONE, COMPOUND_STRING("Devon's lab on 2F can revive\nfossils. Many lie buried under\lthe Route 111 desert.")),
 TIP(RUSTBORO_CITY, 0, FLAG_IS_CHAMPION, 0, ARCEUS_GIFT, COMPOUND_STRING("You're the Champion now!\nDevon's dream researcher on 2F\lhas an extraordinary gift\lwaiting for you.")),
 
-TIP(SLATEPORT_CITY, 0, 0, FLAG_RECEIVED_6_SODA_POP, NONE, COMPOUND_STRING("Beat all three Trainers in the\nSeashore House on Route 109,\lsouth of town, and the owner\lwill treat you to Soda Pop.")),
+TIP(SLATEPORT_CITY, 0, 0, FLAG_RECEIVED_FLAME_ORB_ROUTE_109_SEASHORE_HOUSE, NONE, COMPOUND_STRING("Beat all three Trainers in the\nSeashore House on Route 109,\lsouth of town, and the owner\lwill hand you a Flame Orb.")),
 TIP(SLATEPORT_CITY, 0, 0, 0, TRICK_HOUSE, sTip_TrickHouse),
 TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("The Battle Tent here lends you\nPokémon for Double Battles.\pWin three in a row to earn an\nitem like a Metal Coat or a\lLinking Cord.")),
 TIP(SLATEPORT_CITY, 0, 0, 0, NONE, COMPOUND_STRING("A retired Pokéblock chef lives\nin the Name Rater's house. Bring\lone Berry of the kind he asks\lfor to change a Pokémon's Nature.")),

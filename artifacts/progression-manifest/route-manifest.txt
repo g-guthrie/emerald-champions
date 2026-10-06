@@ -276,10 +276,11 @@ STEP 11 - cap 20 - Route 106 trainer (Ned)
   Adds Dewford Town and its side areas (Dewford Meadow, Dewford Manor).
   Pokemon
     Dewford Old Rod (DexNav = code), Lv 8-11: Magikarp, Mantyke
-    Dewford Meadow grass (DexNav, levels capped at 20; the table is written for 41-43): Cutiefly,
+    Dewford Meadow grass (code, Lv 13-16; retuned from 41-43, which met at a flat cap 20): Cutiefly,
       Flabebe, Oricorio (Baile), Butterfree (common); Flabebe (other colours) (uncommon); Combee,
-      Milcery (rare). Honey (code): Combee, Swirlix, Spritzee. Meloetta and Pheromosa are not live.
-    Dewford Manor (DexNav, Lv 20, the table is written for 41-43): Mime Jr., Gastly, Solosis,
+      Milcery (rare). Honey (code, Lv 14-16): Combee, Swirlix, Spritzee. Meloetta (4 badges + the Warden's
+      Sing quest) and Pheromosa (Groudon awake) are gated 5% slots, met at the cap.
+    Dewford Manor (code, Lv 13-16; retuned from 41-43): Mime Jr., Gastly, Solosis,
       Slowpoke (Galar) (common); Litwick, Sinistea, Glameow (uncommon); Drowzee, Rattata, Hoothoot
       (rare)
     Evolutions by 20 new: Rattata -> Raticate 20, Hoothoot -> Noctowl 20; Oricorio changes style
@@ -289,7 +290,7 @@ STEP 11 - cap 20 - Route 106 trainer (Ned)
     Pickups (play): Big Pearl (Dewford); Meadow Red Shard, Heat Rock, hidden Grass Gem, Fairy Gem,
       Red Nectar, Yellow Nectar; Manor Air Balloon, Nugget, hidden Dread Plate, Bottle Cap
     Wild held (species data): Oricorio (- / Red Nectar), Cutiefly and Combee (Honey). No battle items.
-  Not yet: Meadow Ring Target (27,1) (not reached from the Meadow's entrance).
+  Not yet: Meadow Ring Target (27,1), up a muddy slope (Acro Bike).
 
 ====================================================================================================
 STEP 12 - cap 20 - (next: the boat to Slateport, Route 109, Slateport; the Dewford Gym after Brawly)
@@ -298,7 +299,8 @@ STEP 12 - cap 20 - (next: the boat to Slateport, Route 109, Slateport; the Dewfo
     Route 106 grass (DexNav = code), Lv 14-16: Exeggcute, Inkay, Chatot (common); Buizel, Machop,
       Makuhita (uncommon); Pidove, Crabrawler (rare). Old Rod Lv 8-11: Remoraid, Clauncher
     Granite Cave 1F (DexNav = code), Lv 12-14: Zubat, Geodude, Glimmet (common); Makuhita, Aron,
-      Abra (uncommon); Rolycoly, Axew, Nacli, Hawlucha, Timburr (rare); Kubfu (rare, Lv 20)
+      Abra (uncommon); Rolycoly, Axew, Nacli, Hawlucha, Timburr (rare); Kubfu (5%, met at the cap; one
+      of a kind; Scrolls sold at Lilycove Dept. Store 4F)
     Granite Cave B1F (code), Lv 13-15: Klefki, Sableye, Glimmet, Bronzor, Cubone, Aron, Onix, Carbink,
       Ditto, Sneasel (Hisui)
     Granite Cave B2F (DexNav = code), Lv 13-15: Sandshrew, Sableye, Tinkatink (common); Aron, Onix,
