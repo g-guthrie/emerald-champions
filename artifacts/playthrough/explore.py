@@ -69,8 +69,10 @@ def plan(map_dir, start, caps, skip):
     tiles, g = reachable(map_dir, start, caps)
     # photo stops: greedy cover of every reachable tile with a 15x10 screen window
     uncovered = set(tiles); photos = []
+    # a photo stop is a tile to stand on: never one an object occupies
+    stands = set(tiles) - {(o['x'], o['y']) for o in m.get('object_events', [])} or set(tiles)
     while uncovered:
-        best = max(tiles, key=lambda t: sum(1 for u in uncovered if abs(u[0] - t[0]) <= 7 and abs(u[1] - t[1]) <= 4))
+        best = max(stands, key=lambda t: sum(1 for u in uncovered if abs(u[0] - t[0]) <= 7 and abs(u[1] - t[1]) <= 4))
         photos.append(best)
         uncovered -= {u for u in uncovered if abs(u[0] - best[0]) <= 7 and abs(u[1] - best[1]) <= 4}
     jobs = [dict(kind='photo', at=p) for p in photos]
@@ -167,6 +169,7 @@ def main():
         if not fin.get('end_save'): raise SystemExit(f'chunk {n + 1} did not end idle: {res["outcome"]["failures"]}')
         os.chmod(fin['end_save'], 0o444)
         save = fin['end_save']
+        if res['outcome']['failures']: break   # report what was done; the sweep stops on failures
     # report
     report = dict(map=a.map, start=list(start), reachable_tiles=len(tiles), chunks=[str(d) for d in dests],
                   end_save=save, failures=[], interactions=[], photos=[], later=later)
@@ -185,7 +188,11 @@ def main():
                 report['photos'].append(dict(path=str(dest / c['path']), x=c['state']['x'], y=c['state']['y'],
                                              map=a.map))
     before = json.loads((dests[0] / 'bag-before.json').read_text())
-    after = json.loads((dests[-1] / 'bag-after.json').read_text())
+    last_bag = dests[-1] / 'bag-after.json'
+    if not last_bag.exists():   # stopped early: read the Bag where it stopped
+        _, br = run_chunk({'name': a.name + ' bag', 'start': {'save': save}, 'steps': [{'bag': 'after'}]}, a.name + '-bag')
+        last_bag = ROOT / 'work/studio/scenes' / (a.name + '-bag') / 'bag-after.json'
+    after = json.loads(last_bag.read_text())
     report['bag_gained'] = {k: after.get(k, 0) - before.get(k, 0) for k in set(before) | set(after)
                             if after.get(k, 0) != before.get(k, 0)}
     out = ROOT / 'work/studio/explore' / a.name
@@ -208,7 +215,8 @@ def main():
         lines.append(f"- {it['label']} {it['source']} [later: needs {it['needs']}]")
     (out / 'report.md').write_text('\n'.join(lines) + '\n')
     # Frames and sheets were only working material: the report holds what they showed.
-    for dest in dests:
+    for dest, res in zip(dests, results):
+        if res['outcome']['failures']: continue   # a failed chunk keeps its frames for diagnosis
         for f in dest.iterdir():
             if f.name not in ('end.sav', 'result.json', 'bag-before.json', 'bag-after.json'):
                 if f.is_dir(): subprocess.run(['rm', '-rf', str(f)])

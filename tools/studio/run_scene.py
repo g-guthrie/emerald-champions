@@ -239,7 +239,9 @@ async def run(spec,out):
                             failure=f"no path on {studio.current_map} from {here} to {goal}"
                         else:
                             failure=await walk_moves([route_steps.DIRS[d] for d in moves])
-                            if failure is None:break
+                            # trust only the game's reported tile: a battle or scene can cut a walk short
+                            if failure is None and ((studio.state[4],studio.state[5])==goal or studio.current_map!=start_map):break
+                            if failure is None:failure=f"stopped at {(studio.state[4],studio.state[5])} short of {goal}"
                         for f in range(40):
                             studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
                     if failure is None and step.get("face"):failure=await walk_moves([step["face"]],face_last=True)

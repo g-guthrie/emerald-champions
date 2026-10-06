@@ -56,7 +56,10 @@ def closest_reachable(map_dir, start, target, caps=frozenset()):
         for d in DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
             if r and r not in seen and r not in wp: seen.add(r); q.append(r)
-    return min(seen, key=lambda t: abs(t[0] - target[0]) + abs(t[1] - target[1]))
+    # end beside the target, never on an object's own tile (it may load in once we are close)
+    objs = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}
+    cands = (seen - objs) or seen
+    return min(cands, key=lambda t: abs(t[0] - target[0]) + abs(t[1] - target[1]))
 
 
 def is_counter(map_dir, p):

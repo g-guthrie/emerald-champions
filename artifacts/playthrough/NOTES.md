@@ -85,6 +85,15 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
 - Stand spots for talk/inspect never sit on another actor or a warp (lab: it chose Birch's tile).
 - Absent actors so far are all flag-hidden at this story point (checked against map.json flags).
 
+## Wild Pokemon evidence: DexNav (Start menu, 2nd entry), from the start of the game
+- artifacts/playthrough/dexnav.py SAVE NAME -> work/studio/dexnav/NAME/sheet.png (one panel per icon).
+  The roster lists only slots that can start a battle now (no Honey table without Honey, no Surf
+  table without Surf). Route 101/102/103 land + Old Rod rosters match src/data/wild_encounters.json.
+- Each scene boots fresh from a save: Start menu cursor on Pokedex, Bag on Items pocket.
+- Repel Spray: sweep token SPRAY (recipes/use-repel-spray.json; Key Items 4th). Renews itself:
+  wear-off Yes/No defaults to Yes and scenes are settled with A.
+- Waiting on a background run: never `pgrep -f sweep.py` (matches the waiting shell itself).
+
 ## Known errors in the old manifest (to be redone from evidence)
 - Bonding (friendship evolutions) is locked until the Stone Badge (emerald_champions.inc:482);
   before it friendship only rises by walking. Steps 4-6 wrongly list Roselia, Marill, Togetic and

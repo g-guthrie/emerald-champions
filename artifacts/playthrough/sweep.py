@@ -9,6 +9,8 @@ import json, subprocess, sys, time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import explore as X
 ROOT = HERE.parent.parent
 PY = str(ROOT / '.venv-studio/bin/python')
 
@@ -20,6 +22,16 @@ def log(line):
 def main():
     save = sys.argv[1]
     for spec in sys.argv[2:]:
+        if spec == 'SPRAY':
+            # Use the Repel Spray from the Bag (Key Items, 4th) and confirm the game's flag.
+            # Bag cursor memory: valid only for the first use; the spray then renews itself
+            # (wear-off Yes/No defaults to Yes and scenes are settled with A).
+            r = json.loads((HERE / 'recipes/use-repel-spray.json').read_text()); r['start'] = {'save': save}
+            dest, res = X.run_chunk(r, f'spray-{int(time.time()) % 100000}')
+            fin = res['outcome']['final']
+            if fin['queries'].get('spray_on') != 1 or not fin.get('end_save'):
+                log(f"| SPRAY | FAILED | {fin['queries']} |"); print('STOP spray'); return
+            save = fin['end_save']; log(f"| SPRAY | on, {fin['queries']['spray_steps']} steps | {fin['map']} | {save} |"); continue
         skip = spec.endswith('!'); spec = spec.rstrip('!')
         target, _, via = spec.partition('@')
         tag = f"{target.lower()}-{int(time.time()) % 100000}"

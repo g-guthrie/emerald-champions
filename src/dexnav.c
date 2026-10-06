@@ -892,8 +892,20 @@ static const u8 sThemeColors[][2] =
 #define INFO_SHINY_Y        (INFO_ODDS_Y + 11)
 #define INFO_POKERUS_Y      (INFO_SHINY_Y + 11)
 #define INFO_CHAIN_Y        (INFO_POKERUS_Y + 11)
-#define INFO_HINT_Y         (INFO_BOTTOM - 23)
-#define INFO_RULE_Y         (INFO_HINT_Y - 4)
+// Every info-panel line is FONT_SMALL, one line per DEXNAV_SMALL_LINE pixels
+// (gFontInfos[FONT_SMALL]: maxLetterHeight 12 + lineSpacing 0; checked by
+// tests/test_dexnav_layout.py). Positions below the stats are derived from it,
+// and the asserts refuse to build a panel whose lines cross each other, the
+// rule or the box's bottom border.
+#define DEXNAV_SMALL_LINE   12
+#define INFO_HINT_LINES     2   // "{A_BUTTON} Search\n{B_BUTTON} Back" and the other hints
+#define INFO_HOW_LINES      2   // the how-to-find text, printed at INFO_SHINY_Y
+#define INFO_HINT_Y         (INFO_BOTTOM - 1 - INFO_HINT_LINES * DEXNAV_SMALL_LINE)
+#define INFO_RULE_Y         (INFO_HINT_Y - 2)
+STATIC_ASSERT(INFO_HINT_Y + INFO_HINT_LINES * DEXNAV_SMALL_LINE <= INFO_BOTTOM - 1, dexNavHintInsideBox);
+STATIC_ASSERT(INFO_CHAIN_Y + DEXNAV_SMALL_LINE <= INFO_RULE_Y, dexNavChainAboveRule);
+STATIC_ASSERT(INFO_SHINY_Y + INFO_HOW_LINES * DEXNAV_SMALL_LINE <= INFO_RULE_Y, dexNavHowToFindAboveRule);
+STATIC_ASSERT(INFO_BOTTOM <= 18 * 8, dexNavInfoBoxInsideWindow);
 
 #define DEXNAV_ARROWS_TAG   0x4012
 
