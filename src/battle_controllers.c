@@ -1860,7 +1860,7 @@ static bool8 ShouldDoSlideInAnim(enum BattlerId battler)
     )
         return FALSE;
 
-    if (GetFirstLiveMon() != GetBattlerMon(battler))
+    if (GetFollowerMon() != GetBattlerMon(battler))
         return FALSE;
 
     return TRUE;

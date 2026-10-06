@@ -212,7 +212,7 @@ def main():
     if f['map'] != a.map: raise SystemExit(f"save is on {f['map']}, not {a.map}")
     start = (f['x'], f['y'])
     gates = story_gates(a.map, f.get('queries', {}))
-    live = {x['local_id']: (x['x'], x['y']) for x in f.get('actors', []) if x['local_id'] != 255 and not x['invisible']}
+    live = {x['local_id']: (x['x'], x['y']) for x in f.get('actors', []) if x['local_id'] not in (255, 254) and not x['invisible']}  # player; follower Pokemon swaps places
     order, tiles, g, later = plan(a.map, start, caps, skip, gates, live)
     pending = list(order); save = a.save; results = []; dests = []; n = 0
     while pending:

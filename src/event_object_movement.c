@@ -30,6 +30,7 @@
 #include "party_menu.h"
 #include "pokemon.h"
 #include "pokeball.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "region_map.h"
 #include "rtc.h"
@@ -2090,26 +2091,81 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
     return spriteId;
 }
 
+// Whether a party mon is able to walk behind the player right now.
+bool32 CanMonFollow(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    if (species == SPECIES_NONE || mon->hp == 0 || mon->box.isEgg || mon->box.isBadEgg)
+        return FALSE;
+
+    if ((OW_FOLLOWERS_ALLOWED_SPECIES && species != VarGet(OW_FOLLOWERS_ALLOWED_SPECIES))
+     || (OW_FOLLOWERS_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LVL))
+     || (OW_FOLLOWERS_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LOC)))
+        return FALSE;
+
+    return TRUE;
+}
+
 // Return address of first conscious party mon or NULL
 struct Pokemon *GetFirstLiveMon(void)
 {
     u32 i;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE)
-            continue;
-
-        if ((OW_FOLLOWERS_ALLOWED_SPECIES && species != VarGet(OW_FOLLOWERS_ALLOWED_SPECIES))
-         || (OW_FOLLOWERS_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LVL))
-         || (OW_FOLLOWERS_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LOC)))
-            continue;
-
-        if (gParties[B_TRAINER_PLAYER][i].hp > 0 && !(gParties[B_TRAINER_PLAYER][i].box.isEgg || gParties[B_TRAINER_PLAYER][i].box.isBadEgg))
+        if (CanMonFollow(&gParties[B_TRAINER_PLAYER][i]))
             return &gParties[B_TRAINER_PLAYER][i];
     }
     return NULL;
+}
+
+// The party mon that follows the player, or NULL when the player recalled it.
+// The Pokémon chosen in the party menu follows while it can; while it is
+// fainted or in storage, the first conscious party mon stands in, as the
+// leader does when nobody has been chosen.
+struct Pokemon *GetFollowerMon(void)
+{
+    u32 i;
+
+    if (!OW_FOLLOWERS_ENABLED || (B_FLAG_FOLLOWERS_DISABLED && FlagGet(B_FLAG_FOLLOWERS_DISABLED)))
+        return NULL;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        if (mon->box.isFollower && CanMonFollow(mon))
+            return mon;
+    }
+    return GetFirstLiveMon();
+}
+
+// Make this party mon the follower. The choice belongs to one Pokémon, so it
+// is cleared everywhere else it could be stored and come back from.
+void SetFollowerMon(struct Pokemon *follower)
+{
+    u32 i, j;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        gParties[B_TRAINER_PLAYER][i].box.isFollower = FALSE;
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+            gPokemonStoragePtr->boxes[i][j].isFollower = FALSE;
+    }
+    for (i = 0; i < MAX_FUSION_STORAGE; i++)
+        gPokemonStoragePtr->fusions[i].box.isFollower = FALSE;
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
+        gSaveBlock1Ptr->daycare.mons[i].mon.isFollower = FALSE;
+
+    follower->box.isFollower = TRUE;
+    if (B_FLAG_FOLLOWERS_DISABLED)
+        FlagClear(B_FLAG_FOLLOWERS_DISABLED);
+}
+
+// Send the follower back to its Poké Ball until a Pokémon is chosen again.
+void RecallFollowerMon(void)
+{
+    if (B_FLAG_FOLLOWERS_DISABLED)
+        FlagSet(B_FLAG_FOLLOWERS_DISABLED);
 }
 
 // Return follower ObjectEvent or NULL
@@ -2353,7 +2409,22 @@ static bool8 GetMonInfo(struct Pokemon *mon, enum Species *species, bool32 *shin
 // Retrieve graphic information about the following Pokémon, if any
 bool8 GetFollowerInfo(enum Species *species, bool32 *shiny, bool32 *female)
 {
-    return GetMonInfo(GetFirstLiveMon(), species, shiny, female);
+    return GetMonInfo(GetFollowerMon(), species, shiny, female);
+}
+
+// Followers larger than 32x32 wait in their Poké Ball indoors.
+static bool32 IsFollowerTooBigForIndoors(enum Species species, bool32 shiny, bool32 female)
+{
+    const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, shiny, female);
+    return graphicsInfo != NULL && graphicsInfo->oam->size > ST_OAM_SIZE_2;
+}
+
+bool32 IsMonTooBigToFollowIndoors(struct Pokemon *mon)
+{
+    enum Species species;
+    bool32 shiny, female;
+
+    return GetMonInfo(mon, &species, &shiny, &female) && IsFollowerTooBigForIndoors(species, shiny, female);
 }
 
 // Update following Pokémon if any
@@ -2374,7 +2445,7 @@ void UpdateFollowingPokemon(void)
      || FlagGet(B_FLAG_FOLLOWERS_DISABLED)
      || !GetFollowerInfo(&species, &shiny, &female)
      || SpeciesToGraphicsInfo(species, shiny, female) == NULL
-     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, shiny, female)->oam->size > ST_OAM_SIZE_2)
+     || (gMapHeader.mapType == MAP_TYPE_INDOOR && IsFollowerTooBigForIndoors(species, shiny, female))
      || FlagGet(FLAG_TEMP_HIDE_FOLLOWER)
      || PlayerHasFollowerNPC()
      )
@@ -2584,7 +2655,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     u32 condCount = 0;
     u32 emotion;
     struct ObjectEvent *objEvent = GetFollowerObject();
-    struct Pokemon *mon = GetFirstLiveMon();
+    struct Pokemon *mon = GetFollowerMon();
     u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] =
     {
         [FOLLOWER_EMOTION_HAPPY] = 10,
@@ -5440,7 +5511,7 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
     }
 
     if (OW_FOLLOWERS_COPY_WILD_PKMN
-        && (MonKnowsMove(mon = GetFirstLiveMon(), MOVE_TRANSFORM)
+        && (MonKnowsMove(mon = GetFollowerMon(), MOVE_TRANSFORM)
          || (ability = GetMonAbility(mon)) == ABILITY_IMPOSTER || ability == ABILITY_ILLUSION)
         && (Random() & 0xFFFF) < 18 && GetLocalWildMon(NULL))
     {
@@ -6031,7 +6102,7 @@ void IsFollowerFieldMoveUser(struct ScriptContext *ctx)
 
     u16 *var = GetVarPointer(varId);
     u16 userIndex = gFieldEffectArguments[0]; // field move user index
-    struct Pokemon *follower = GetFirstLiveMon();
+    struct Pokemon *follower = GetFollowerMon();
     struct ObjectEvent *obj = GetFollowerObject();
     if (var == NULL)
         return;
@@ -7418,7 +7489,7 @@ static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
     enum PokeBall ball = BALL_STRANGE;
     if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
     {
-        struct Pokemon *mon = GetFirstLiveMon();
+        struct Pokemon *mon = GetFollowerMon();
         if (mon)
             ball = GetMonData(mon, MON_DATA_POKEBALL);
     }
@@ -9523,14 +9594,29 @@ void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 sub
 
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
+    bool32 isHugeFollower;
+
     if (objEvent->fixedPriority)
         return;
+
+    isHugeFollower = objEvent->localId == OBJ_EVENT_ID_FOLLOWER && GetObjectEventGraphicsInfo(objEvent->graphicsId)->height > 32;
 
     // If transitioning between elevations, use the player's elevation
     if (!objEvent->currentElevation && (objEvent->localId == OBJ_EVENT_ID_FOLLOWER || objEvent->localId == OBJ_EVENT_ID_NPC_FOLLOWER))
         objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
+
+    // A huge follower (Regigigas, Wailord, Steelix...) one tile behind the
+    // player would otherwise be drawn over the player and hide them entirely.
+    // It stays behind the player; against everything else it keeps its depth.
+    if (isHugeFollower)
+    {
+        u8 playerSubpriority = gSprites[gObjectEvents[gPlayerAvatar.objectEventId].spriteId].subpriority;
+
+        if (sprite->subpriority <= playerSubpriority && playerSubpriority < 0xFF)
+            sprite->subpriority = playerSubpriority + 1;
+    }
 }
 
 bool8 AreElevationsCompatible(u8 a, u8 b)

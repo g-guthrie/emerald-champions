@@ -1186,7 +1186,7 @@
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL                 0x465 // Unused Flag, leftover from the Ruby Magma hideout
 #define FLAG_ITEM_SEASPRAY_CAVE_B1_F_DAMP_ROCK                           0x466 // Formerly unused Ruby Magma flag; the pickup is now Absolite Z.
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B2F_NEST_BALL                   0x467 // Unused Flag, leftover from the Ruby Magma hideout
-#define FLAG_UNUSED_0x468                                           0x468 // Unused Flag
+#define FLAG_FOLLOWER_RECALLED                                      0x468 // Set when the player recalls their follower from the party menu; no Pokémon follows until one is chosen again
 #define FLAG_ITEM_MT_PYRE_2_F_BANETTITE                             0x469
 #define FLAG_ITEM_MT_PYRE_4F_SEA_INCENSE                            0x46A
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_WEST_MAX_REVIVE                 0x46B

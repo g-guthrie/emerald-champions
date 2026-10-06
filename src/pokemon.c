@@ -116,6 +116,7 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 EWRAM_DATA u8 gTriedEvolving = 0;
 EWRAM_DATA u16 gFollowerSteps = 0;
+EWRAM_DATA static u32 sFollowerStepsPersonality = 0; // Whose walk gFollowerSteps counts.
 
 struct Pokemon (*const gPlayerPartyPtr)[6] = &gParties[B_TRAINER_PLAYER];
 u8 (*const gPlayerPartyCountPtr) = &gPartiesCount[B_TRAINER_PLAYER];
@@ -4924,7 +4925,7 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
                 currentCondition = TRUE;
             break;
         case IF_MIN_OVERWORLD_STEPS:
-            if (mon == GetFirstLiveMon() && gFollowerSteps >= params[i].arg1)
+            if (GetMonFollowerSteps(mon) >= params[i].arg1)
                 currentCondition = TRUE;
             break;
         case IF_BAG_ITEM_COUNT:
@@ -7328,4 +7329,31 @@ void CreateMonFromTemplate(struct Pokemon *mon, const struct PokemonTemplate *mo
 
     CalculateMonStats(mon);
     TryFormChange(mon, FORM_CHANGE_ITEM_HOLD, B_TRAINER_PLAYER);
+}
+
+// Count a step for whoever is following. A new follower starts from zero, so
+// a walk is never credited to a Pokémon that did not take it.
+void IncrementFollowerSteps(void)
+{
+    struct Pokemon *follower = GetFollowerMon();
+    u32 personality;
+
+    if (follower == NULL)
+        return;
+    personality = GetMonData(follower, MON_DATA_PERSONALITY);
+    if (personality != sFollowerStepsPersonality)
+    {
+        sFollowerStepsPersonality = personality;
+        gFollowerSteps = 0;
+    }
+    if (gFollowerSteps < (u16)-1)
+        gFollowerSteps++;
+}
+
+// Steps this Pokémon has walked as the current follower; 0 for any other.
+u32 GetMonFollowerSteps(struct Pokemon *mon)
+{
+    if (mon != GetFollowerMon() || GetMonData(mon, MON_DATA_PERSONALITY) != sFollowerStepsPersonality)
+        return 0;
+    return gFollowerSteps;
 }

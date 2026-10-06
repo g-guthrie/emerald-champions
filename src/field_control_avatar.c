@@ -835,8 +835,7 @@ static void UpdateFriendshipStepCounter(void)
 
 static void UpdateFollowerStepCounter(void)
 {
-    if (gPartiesCount[B_TRAINER_PLAYER] > 0 && gFollowerSteps < (u16)-1)
-        gFollowerSteps++;
+    IncrementFollowerSteps();
 }
 
 void ClearPoisonStepCounter(void)
