@@ -269,27 +269,27 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill:: @ 820A220
 SlateportCity_PokemonFanClub_EventScript_GiveNugget::
 	lock
 	faceplayer
-	goto_if_set FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
-	msgbox SlateportCity_PokemonFanClub_Text_GiveTM58, MSGBOX_DEFAULT
+	goto_if_set FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB, SlateportCity_PokemonFanClub_EventScript_ReceivedNugget
+	msgbox SlateportCity_PokemonFanClub_Text_GiveNugget, MSGBOX_DEFAULT
 	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB
-	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_NuggetSells, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_ReceivedTM58::
+SlateportCity_PokemonFanClub_EventScript_ReceivedNugget::
 	lock
 	faceplayer
-	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
+	msgbox SlateportCity_PokemonFanClub_Text_NuggetSells, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_PokemonFanClub_Text_GiveTM58:
+SlateportCity_PokemonFanClub_Text_GiveNugget:
 	.string "Your Pokémon look so happy with you!\n"
 	.string "Here, have a Nugget!$"
 
-SlateportCity_PokemonFanClub_Text_HaveTM58:
+SlateportCity_PokemonFanClub_Text_NuggetSells:
 	.string "A Nugget sells for ¥2,500.\n"
 	.string "Give your partners a useful treat!\p"
 	.string "And the Move Tutor can teach Endure!\n"

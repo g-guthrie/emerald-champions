@@ -1,5 +1,5 @@
 {
-  "play_order": 35, "e_group": "E0037", "trainer": "TRAINER_LILITH", "class": "gym",
+  "play_order": 35, "e_group": "E0043", "trainer": "TRAINER_LILITH", "class": "gym",
   "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
   "party_manifest": "work/playtest/35-TRAINER_LILITH/party.json",
   "opponent_levels_observed": {"HITMONTOP": 20, "SCRAGGY": 22, "PANCHAM": 23, "FLAMIGO": 20, "MEDITITE": 22, "CLOBBOPUS": 24},

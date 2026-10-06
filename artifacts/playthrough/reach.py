@@ -102,7 +102,10 @@ class Grid:
         a = self.pa if t < 512 else self.sa
         i = t if t < 512 else t - 512
         return a[i] if i < len(a) else 0
-    def blk(self, x, y): return struct.unpack_from('<H', self.b, (y * self.w + x) * 2)[0]
+    def blk(self, x, y):
+        # off the layout (a leftover warp such as Slateport Harbor's second door): a solid wall
+        if not (0 <= x < self.w and 0 <= y * self.w * 2 + x * 2 < len(self.b)): return 0x0C00
+        return struct.unpack_from('<H', self.b, (y * self.w + x) * 2)[0]
     def coll(self, x, y):
         o = self.mt_over.get((x, y))
         if isinstance(o, int): return 0

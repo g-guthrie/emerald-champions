@@ -51,6 +51,11 @@
     {
       "press": "A",
       "frames": 500,
+      "label": "Special gear page"
+    },
+    {
+      "press": "A",
+      "frames": 500,
       "label": "Held Items shelves"
     },
     {

@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/36-TRAINER_TAKAO/receipt.json",
   "rerun_reason": "AI check commissioned by the main agent: re-test the turn-one healthy-lead withdrawal defect recorded in the first pass ('Withdrew the healthy, unthreatened Grapploct and sent in Hitmonlee') against the rebuilt headless ROM, which now charges healthy turn-one switches.",
   "play_order": 36,
-  "e_group": "E0038",
+  "e_group": "E0040",
   "trainer": "TRAINER_TAKAO",
   "class": "gym",
   "location": "DewfordTown_Gym",
@@ -27,7 +27,7 @@
     "defect": "turn-one healthy-lead withdrawal (first pass, a1 turn 1: Takao withdrew a healthy Grapploct and sent Hitmonlee)",
     "result": "REPRODUCED - still present on the rebuilt ROM",
     "evidence": "r1 turn 1, same trainer, same leads, same opening HP as the first pass. Grapploct was at 80/80 with no status, no stat drops and nothing on the field threatening it - my leads had not yet acted. Takao withdrew it and sent Hitmonlee, which was knocked out by the 2x Play Rough that would otherwise have hit a Grapploct with 80 HP. The chosen record for battler 1 is {'action': 'switch', 'source': 'native'} with no move. This is the same shape and the same trainer as the first pass.",
-    "contrast": "The identical check at E0037 Lilith, run immediately before this one on the same ROM and with the same player leads, did NOT reproduce: both of Lilith's leads attacked on turn 1. So the charge is being applied, but it is not yet large enough to deter the switch on Takao's board. The two boards differ in one obvious way: Takao's switch-in candidate (Hitmonlee, Unburden/White Herb) is a setup-adjacent body, and Grapploct's own best move is Octolock, a support move that the new pricing should also be discounting. It is worth the AI owner checking whether the switch is being scored as a route to a cheap Unburden activation.",
+    "contrast": "The identical check at E0043 Lilith, run immediately before this one on the same ROM and with the same player leads, did NOT reproduce: both of Lilith's leads attacked on turn 1. So the charge is being applied, but it is not yet large enough to deter the switch on Takao's board. The two boards differ in one obvious way: Takao's switch-in candidate (Hitmonlee, Unburden/White Herb) is a setup-adjacent body, and Grapploct's own best move is Octolock, a support move that the new pricing should also be discounting. It is worth the AI owner checking whether the switch is being scored as a route to a cheap Unburden activation.",
     "cost_measured": "Two of six members, both removed on turn 1 without acting, out of a total of six opponent faints. Roughly a third of the team was spent on one bad decision."
   },
   "strategy_checks": [
@@ -52,7 +52,7 @@
       "board": "Grapploct at 80/80, no status, no drops, beside Wobbuffet at 124/124, against Tsareena and Magearna before either had acted",
       "chosen": "Withdrew Grapploct and sent Hitmonlee, which was knocked out by the incoming 2x Play Rough without acting; the redirected Fleur Cannon then also removed Wobbuffet",
       "better": "Attack, or at minimum do not volunteer a 2x-weak body into an unrevealed board. Grapploct at full HP was in no danger it could identify, and the pivot handed me two knockouts on turn 1 for one attack each.",
-      "note": "This is the defect the rerun was commissioned to re-test, and it is still here. The healthy-turn-one-switch charge did suppress the equivalent switch at E0037 Lilith on the same ROM, so the mechanism exists but the price is too low for this board. Precise cost: two of six members, neither of which ever took an action."
+      "note": "This is the defect the rerun was commissioned to re-test, and it is still here. The healthy-turn-one-switch charge did suppress the equivalent switch at E0043 Lilith on the same ROM, so the mechanism exists but the price is too low for this board. Precise cost: two of six members, neither of which ever took an action."
     }
   ],
   "ai_observations": [

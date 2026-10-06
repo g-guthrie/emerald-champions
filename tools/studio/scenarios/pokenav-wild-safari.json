@@ -11,8 +11,8 @@
   },
   "warp": {
     "map": "SafariZone_South",
-    "x": 32,
-    "y": 32,
+    "x": 31,
+    "y": 34,
     "facing": 1
   },
   "steps": [

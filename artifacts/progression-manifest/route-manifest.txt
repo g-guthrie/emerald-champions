@@ -30,6 +30,11 @@ Rules
   clerk at floor 0 (owner decision): Bright Powder, Mental Herb, Metronome, Mystic Water, Power
   Herb, Quick Claw. Berries, Honey, medicine and sell items stay on wild Pokemon. Listed per step
   from the species' itemCommon/itemRare.
+  Mega Stones: none before the Mega Ring (Wattson, Dynamo Badge; owner decision). Early gifts give
+  a battle item instead and the stone waits in a sparkle behind Rock Smash (licensed with the same
+  Badge): Glimmoranite (Granite B1F) for Roxanne's Rocky Helmet, Machampite (Rusturf Tunnel) for
+  Brawly's Punching Glove, Aggronite (Granite B2F) for the Devon employee's Eject Pack.
+  Worthless pickups (Potion, Ether, Repel, Escape Rope, status heals) become battle items.
 
 ====================================================================================================
 STEP 1 - cap 14 - Rival May / Brendan, Route 103 (all six starter variants)
@@ -152,7 +157,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0032 Cyndy, E0033 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+  Deferred: E0047 Cyndy, E0048 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
     it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -199,11 +204,12 @@ STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
       Sand, Roggenrola's Hard Stone and Machop's Focus Band moved to the clerk at floor 0; Pancham's
       Mental Herb removed (the clerk already stocks it).
   Not yet: Route 116 north behind Cut (Ether, hidden Super Potion, Binding Band, four berry trees,
-    Dawson, Sarah, Janice, Jerry); Rusturf Tunnel past the rocks (Eject Pack, Mike, Wanda: Rock
-    Smash); Route 116 east (Muscle Band, Glasses Man, hidden Black Glasses: from Verdanturf);
+    Dawson, Sarah, Janice, Jerry); Rusturf Tunnel past the rocks (Machampite sparkle, Mike, Wanda:
+    Rock Smash); Route 116 east (Muscle Band, Glasses Man, hidden Black Glasses: from Verdanturf);
     the Tunnelers' Rest House (Wanda's boyfriend blocks the door until the tunnel story).
   After the battle (play): Stone Badge (cap 20, Cut with the Cutter's license, Bonding and
-    friendship evolutions open), Glimmoranite.
+    friendship evolutions open), Rocky Helmet (code; was Glimmoranite in play:
+    no Mega Stone comes before the Mega Ring).
 
 ====================================================================================================
 STEP 8 - cap 20 - Route 116 north trainers (Dawson, Sarah, Janice, Jerry)
@@ -268,7 +274,7 @@ STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
 ====================================================================================================
 STEP 11 - cap 20 - Route 106 trainer (Ned)
   Battles: E0031 Ned
-  Deferred: E0034 Elliot (Route 106 water: Surf); E0035-E0036 Dewford Gym (Laura, Brenden & Lilith,
+  Deferred: E0049 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
     Takao, Cristian, Jocelyn, Brawly): Brawly is in Slateport and his guide blocks the Gym door until
     the player speaks to him there (DewfordTown object 6, FLAG_HIDE_SLATEPORT_CITY_BRAWLY)
   VERIFIED IN PLAY: Mr. Briney's boat from Route 104; Dewford Town, Center, Hall, both houses,
@@ -293,7 +299,7 @@ STEP 11 - cap 20 - Route 106 trainer (Ned)
   Not yet: Meadow Ring Target (27,1), up a muddy slope (Acro Bike).
 
 ====================================================================================================
-STEP 12 - cap 20 - (next: the boat to Slateport, Route 109, Slateport; the Dewford Gym after Brawly)
+STEP 12 - cap 20 - Route 106 and Granite Cave (the pool for Route 109)
   Adds, verified in play, for the battles after Route 106: Route 106 and Granite Cave.
   Pokemon
     Route 106 grass (DexNav = code), Lv 14-16: Exeggcute, Inkay, Chatot (common); Buizel, Machop,
@@ -315,5 +321,42 @@ STEP 12 - cap 20 - (next: the boat to Slateport, Route 109, Slateport; the Dewfo
       (- / Thick Club), Ditto (Quick Powder / Metal Powder), Hawlucha (- / King's Rock), Crabrawler (-
       / Aspear Berry). Battle items moved: Twisted Spoon, Grip Claw, Dragon Fang, Psychic Seed to
       the clerk from the Stone Badge; Black Belt is the Granite pickup.
-  Not yet: B1F Protective Pads, B2F Throat Spray, Nugget and a second hidden Everstone (Rock Smash /
+  Not yet: B1F Glimmoranite and B2F Aggronite sparkles, B2F Nugget and a second hidden Everstone (Rock Smash /
     the other side), Route 106 hidden Big Pearl (Rock Smash), Route 106 water (Surf).
+
+====================================================================================================
+STEP 13 - cap 20 - Route 109 beach and the Seashore House
+  Battles: E0032 Hailey, E0033 Edmond, E0034 Chandler, E0035 Lola (Route 109 beach);
+    E0036 Johanna, E0037 Dwayne, E0038 Simon (Seashore House, doubles)
+  Deferred: E0050 Museum grunts, E0052 Archie (Museum raid, after the Knuckle Badge);
+    E0053 Greta (refuses until later)
+  Played: Briney (Dewford, after the Letter) to Route 109; beach and Seashore House swept; Slateport,
+  its Center, Mart, House, Chef's house, Fan Club, Shipyard, Battle Tent lobby and Harbor swept;
+  Brawly spoken to outside the Museum. Before the Knuckle Badge the Aqua line blocks the Museum door
+  and Route 110's grunts wall the road north (play), so this window is Route 109 + Slateport.
+  Adds Route 109 and Slateport.
+  Pokemon
+    Route 109 Old Rod (code), Lv 5-10 at the cap: Magikarp, Luvdisc. Slateport Old Rod (code): Horsea,
+      Frillish. Water tables need Surf.
+    Route 109 sand mounds (code, new): dig up Wiglett (common), Sandygast, Dwebble (rare), Lv 15-17.
+      The mounds called a Rock Smash encounter but the route had no table, so they gave nothing.
+  Battle items
+    Gifts (play): Soft Sand (Route 109 tuber), Nugget (Fan Club), Flying Gem and Ground Gem (Dewford
+      Gym guide, on entry). Seashore House reward: Flame Orb (code; was six Soda Pop in play).
+    Pickups (play): Zoom Lens, hidden Revive, Great Ball, three Bottle Caps (Route 109); Light Clay
+      (Slateport). Hidden Shell Bell (code; was an Ether in play).
+    Wild held (species data): Luvdisc (Heart Scale), Horsea (- / Dragon Scale). Dwebble and Crustle
+      no longer hold a Hard Stone (stocked by the clerk from the start).
+    Shops: Catching Guru balls, Power TM clerk, incense, herbal medicine, dolls/decor (Slateport).
+  Fixes on the way: Center guide sent players to the Museum before Brawly; the Museum step now
+    follows the Knuckle Badge and says "Devon Parts" like the item. Fan Club gift labels said TM58.
+  Not yet: Route 109 Crabominite, Mel, Paul, the woman and a Bottle Cap (Surf); Museum (badge).
+
+====================================================================================================
+STEP 14 - cap 20 - Dewford Gym
+  Battles: E0039 Laura, E0040 Takao, E0042 Cristian, E0043 Brenden & Lilith, E0045 Jocelyn,
+    E0046 Brawly
+  Played: Briney back from Route 109; every Gym trainer and Brawly beaten. Brawly gives the Knuckle
+  Badge (cap 30; EVs unlock) and a Punching Glove (code; was Machampite in play).
+  Adds nothing new to the pool: the Gym sees everything reachable at cap 20 (Steps 1-13).
+

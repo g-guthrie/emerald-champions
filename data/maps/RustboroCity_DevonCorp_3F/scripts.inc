@@ -181,7 +181,7 @@ RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor:: @ 82125CC
 RustboroCity_DevonCorp_3F_EventScript_Employee:: @ 82125E1
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_AGGRONITE, RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls
+	goto_if_set FLAG_RECEIVED_EJECT_PACK_ROUTE_116, RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls
 	msgbox RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard, MSGBOX_DEFAULT
 	release
 	end

@@ -1,8 +1,8 @@
 {
   "rerun_of": "work/playtest/35-TRAINER_LILITH/receipt.json",
-  "rerun_reason": "AI check only, commissioned by the main agent: re-test the turn-one healthy-lead withdrawal defect recorded in the first pass ('Withdrew Scraggy and sent in Flamigo, the team's Costar body') against the rebuilt headless ROM, which now charges healthy turn-one switches. No level change was authored for E0037 between the passes, and the band did not call for one.",
+  "rerun_reason": "AI check only, commissioned by the main agent: re-test the turn-one healthy-lead withdrawal defect recorded in the first pass ('Withdrew Scraggy and sent in Flamigo, the team's Costar body') against the rebuilt headless ROM, which now charges healthy turn-one switches. No level change was authored for E0043 between the passes, and the band did not call for one.",
   "play_order": 35,
-  "e_group": "E0037",
+  "e_group": "E0043",
   "trainer": "TRAINER_LILITH",
   "class": "gym",
   "location": "DewfordTown_Gym",

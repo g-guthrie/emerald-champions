@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0035 TRAINER_LAURA (Dewford Gym, unevolved dojo, six members); play_order 33, cap 20, Medium",
+  "encounter": "E0039 TRAINER_LAURA (Dewford Gym, unevolved dojo, six members); play_order 33, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Spiritomb, Whimsicott (Cottonee + Sun Stone) and Magearna are gate-14 entries; Alakazam comes from Kadabra with a Linking Cord, Nidoking from Nidorino with a Moon Stone, and Celebi is a reachable legendary sign at PetalburgWoods_3. Ordinary items only. Assisted acquisition, not native capture acceptance.",
   "plan": "The authored crack is to deny the support action and punish predictable entry moves. Spiritomb leads because Ghost/Dark is outright immune to both Fake Out and every Fighting attack on the roster, which blanks the entry-pressure lesson at the source. Fairy and Psychic attacks are 2x into all six, Prankster Taunt denies Helping Hand, Wide Guard, Nasty Plot and Protect, and I deliberately carry Will-O-Wisp to test whether the AI walks Timburr into a burn it wants or keeps it away from one it does not.",
   "party": [

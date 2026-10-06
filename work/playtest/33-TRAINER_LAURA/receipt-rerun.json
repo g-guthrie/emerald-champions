@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/33-TRAINER_LAURA/receipt.json",
   "rerun_reason": "Confirming rerun for the first pass's unverified level change (MANKEY offset 4->5) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
   "play_order": 33,
-  "e_group": "E0035",
+  "e_group": "E0039",
   "trainer": "TRAINER_LAURA",
   "class": "gym",
   "location": "DewfordTown_Gym",

@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "encounter": "C15 E0047 Dwayne (Route 109 Seashore House), cap 24",
+ "encounter": "C15 E0037 Dwayne (Route 109 Seashore House), cap 24",
  "availability_audit": "All six appear in work/reference-pools/pool-24.json with gate <= 24: TOGEKISS (Shiny Stone evo, gate 24), ENAMORUS (legendary_sign:VerdanturfMeadow, gate 14, reachable legend), HOOPA (gate 20), MAGEARNA (gate 20), ALAKAZAM (Linking Cord evo, gate 20), KARTANA (wild PetalburgWoods_3, gate 20). No Mega is used even though the Mega Ring is now available, because no legal stone in this window improves the party.",
  "plan": "Dwayne's Fire/Ice/Electric nursery punishes Kartana (4x Fire), so Arcanine replaces it: Intimidate blunts Monferno and Magby, Fire typing resists both Flamethrower and Smoochum's Ice Beam, and Extreme Speed answers a Focus Sash. Enamorus' Earth Power is 2x into Magby, Elekid and Monferno. Togekiss redirects around Magby's own Follow Me; Hoopa is immune to Mach Punch and Drain Punch; Magearna and Alakazam are the special core.",
  "party": [

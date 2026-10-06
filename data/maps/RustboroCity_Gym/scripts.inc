@@ -3,7 +3,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 
 RustboroCity_Gym_EventScript_Roxanne::
 	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, EmeraldChampions_Text_NeedTwoPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM, RustboroCity_Gym_EventScript_GiveGlimmoranite
+	goto_if_unset FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM, RustboroCity_Gym_EventScript_GiveRockyHelmet
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -21,17 +21,16 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	call Common_EventScript_SetGymTrainers
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
-	@ Roxanne's Glimmoranite is not a starter stone, so every pair gets it.
-	goto_if_unset FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM, RustboroCity_Gym_EventScript_GiveGlimmoranite
+	goto_if_unset FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM, RustboroCity_Gym_EventScript_GiveRockyHelmet
 	release
 	end
 
-RustboroCity_Gym_EventScript_GiveGlimmoranite:: @ 8212FA4
-	giveuniqueitem ITEM_GLIMMORANITE
+RustboroCity_Gym_EventScript_GiveRockyHelmet:: @ 8212FA4
+	giveitem ITEM_ROCKY_HELMET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM
-	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM
+	msgbox RustboroCity_Gym_Text_ExplainRockyHelmet, MSGBOX_DEFAULT
 	release
 	end
 
@@ -386,10 +385,12 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
 	.string "help your Pokémon with Bonding.\p"
 	.string "Please take this Mega Stone, too.$"
 
-RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
-	.string "This is Glimmoranite. Give it to\n"
-	.string "Glimmora to Mega Evolve once you\l"
-	.string "have a Mega Ring.$"
+RustboroCity_Gym_Text_ExplainRockyHelmet: @ 82138B1
+	.string "A Rocky Helmet. Any foe that\n"
+	.string "strikes its holder with a contact\l"
+	.string "move gets hurt in return.\p"
+	.string "Rock-solid defense is a lesson\n"
+	.string "of its own!$"
 
 RustboroCity_Gym_Text_RoxannePostBattle: @ 82139A7
 	.string "Since you are so strong, you should\n"

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "C15 E0036 Brawly (Dewford Gym leader), cap 20",
+  "encounter": "C15 E0046 Brawly (Dewford Gym leader), cap 20",
   "availability_audit": "All six appear in work/reference-pools/pool-20.json with gate <= 20. No Mega: the Mega Ring is granted by Steven only after Brawly. Items from the free Center held-item catalogue/preparation system.",
   "plan": "Jocelyn fields four Fighting-types and two Grass-types, so Fairy, Psychic, Fire and Flying all bite. Togetic redirects and answers Tailwind with its own; Enamorus and Magearna are the Fairy nukes; Arcanine's Heat Wave is the spread answer to Lilligant/Breloom/Whimsicott and Intimidate blunts the Hustle physical core; Alakazam is the fast Psychic; Hoopa is immune to Close Combat, Drain Punch and Mach Punch.",
   "party": [

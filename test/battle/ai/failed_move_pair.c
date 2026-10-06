@@ -898,7 +898,7 @@ static void CorphishLockBoard(void)
     gLastMoves[B_BATTLER_1] = MOVE_AQUA_JET;
 }
 
-// E0034 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
+// E0049 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
 // Tsareena's Queenly Majesty, which stops priority against its whole side.
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is left")
 {
@@ -920,7 +920,7 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is l
     }
 }
 
-// E0038: Takao's Wobbuffet Encored fresh switch-ins that had not moved yet and
+// E0040: Takao's Wobbuffet Encored fresh switch-ins that had not moved yet and
 // would only have moved first by raising Protect, which blocks the Encore.
 AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a fresh switch-in whose only faster move is Protect")
 {

@@ -1,5 +1,5 @@
 {
-  "name": "Route111 observer confirms permanent closure",
+  "name": "Route 111 observer confirms the collapsed tower is gone",
   "start": {
     "chapter": 3
   },
@@ -24,11 +24,11 @@
       "every": 100,
       "frames": 4000,
       "until": "idle",
-      "label": "No alternate entrance promised"
+      "label": "Tower has not been seen since"
     }
   ],
   "expect": {
     "ready": true,
-    "contains_text": "passage to the ruins is shut"
+    "contains_text": "Perhaps it really was"
   }
 }

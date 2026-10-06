@@ -358,8 +358,8 @@ RusturfTunnel_EventScript_ItemPokeBall:: @ 8291136
 	finditem ITEM_POKE_BALL
 	end
 
-RusturfTunnel_EventScript_ItemEjectPack:: @ 8291143
-	finditem ITEM_EJECT_PACK
+RusturfTunnel_EventScript_ItemMachampite:: @ 8291143
+	finditem ITEM_MACHAMPITE
 	end
 
 GraniteCave_1F_EventScript_ItemBlackBelt:: @ 8291150
@@ -370,8 +370,8 @@ GraniteCave_B1F_EventScript_ItemPokeBall:: @ 829115D
 	finditem ITEM_POKE_BALL
 	end
 
-GraniteCave_B2F_EventScript_ItemThroatSpray:: @ 829116A
-	finditem ITEM_THROAT_SPRAY
+GraniteCave_B2F_EventScript_ItemAggronite:: @ 829116A
+	finditem ITEM_AGGRONITE
 	end
 
 GraniteCave_B2F_EventScript_ItemNugget:: @ 8291177
@@ -829,8 +829,8 @@ ScorchedSlab_EventScript_ItemDuskBall::
 	finditem ITEM_DUSK_BALL, 5
 	end
 
-GraniteCave_B1F_EventScript_ItemProtectivePads::
-	finditem ITEM_PROTECTIVE_PADS
+GraniteCave_B1F_EventScript_ItemGlimmoranite::
+	finditem ITEM_GLIMMORANITE
 	end
 
 Route117_EventScript_ItemStardust::

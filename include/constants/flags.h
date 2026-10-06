@@ -670,7 +670,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET                                      (FLAG_HIDDEN_ITEMS_START + 0xaa)
 #define FLAG_HIDDEN_ITEM_ROUTE_114_REVIVE_2                                      (FLAG_HIDDEN_ITEMS_START + 0xab)
 #define FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET_2                                       (FLAG_HIDDEN_ITEMS_START + 0xac)
-#define FLAG_HIDDEN_ITEM_ROUTE_114_PUNCHING_GLOVE                                      (FLAG_HIDDEN_ITEMS_START + 0xad)
+#define FLAG_HIDDEN_ITEM_ROUTE_114_PROTECTIVE_PADS                                      (FLAG_HIDDEN_ITEMS_START + 0xad)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0xae)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_FIST_PLATE                                  (FLAG_HIDDEN_ITEMS_START + 0xaf)
 #define FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES                               (FLAG_HIDDEN_ITEMS_START + 0x2e) // relocated 0x2a4 -> 0x222 (Sept 23 2026: bit was shared with a live flag)
@@ -1118,7 +1118,7 @@
 #define FLAG_ITEM_GRANITE_CAVE_1F_BLACK_BELT                       0x41A
 #define FLAG_ITEM_GRANITE_CAVE_B1F_ALAKAZITE                        0x41B
 #define FLAG_ITEM_MT_PYRE_5_F_ALAKAZITE                            0x41C
-#define FLAG_ITEM_GRANITE_CAVE_B2_F_THROAT_SPRAY                            0x41D
+#define FLAG_ITEM_GRANITE_CAVE_B2F_AGGRONITE                            0x41D
 #define FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE                       0x41E
 #define FLAG_ITEM_PETALBURG_WOODS_HERACRONITE                         0x41F
 #define FLAG_ITEM_PETALBURG_WOODS_SCOLIPITE                        0x420
@@ -1747,7 +1747,7 @@
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER        0x229 // Restored from Inclement Emerald; relocated 0x436 -> 0x229 (donor ID taken by live EC content).
 #define FLAG_LENT_NURSE_SURF                                        0x22A // Restored from Inclement Emerald; relocated 0x4EC -> 0x22A (donor ID taken by live EC content).
 #define FLAG_MET_BATTLE_FRONTIER_BREEDER                            0x22B // Restored from Inclement Emerald; relocated 0x153 -> 0x22B (donor ID taken by live EC content).
-#define FLAG_RECEIVED_AGGRONITE                                     0x235 // Restored from Inclement Emerald; relocated 0x100 -> 0x235 (donor ID taken by live EC content).
+#define FLAG_RECEIVED_EJECT_PACK_ROUTE_116                                     0x235 // Restored from Inclement Emerald; relocated 0x100 -> 0x235 (donor ID taken by live EC content).
 #define FLAG_RECEIVED_AUDINO                                        0x23C // Restored from Inclement Emerald; relocated 0x4E4 -> 0x23C (donor ID taken by live EC content).
 #define FLAG_RECEIVED_DIANCITE                                      0x3F1 // Restored from Inclement Emerald; relocated 0x12B -> 0x3F1 (donor ID taken by live EC content).
 #define FLAG_RECEIVED_GALLADITE                                     0x441 // Restored from Inclement Emerald; relocated 0x466 -> 0x441 (donor ID taken by live EC content).
@@ -1759,8 +1759,8 @@
 // in-world event, different reward item/wording). Restoring the Inclement name
 // as an alias keeps one event on one bit instead of burning a second bit.
 // ---------------------------------------------------------------------------
-#define FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM                                          FLAG_RECEIVED_ROXANNE_OLD_AMBER                        // Roxanne's post-badge reward (RustboroCity_Gym)
-#define FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM                                          FLAG_RECEIVED_BRAWLY_LUCARIONITE                       // Brawly's post-badge reward (DewfordTown_Gym)
+#define FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM                                          FLAG_RECEIVED_ROXANNE_OLD_AMBER                        // Roxanne's post-badge reward (RustboroCity_Gym)
+#define FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM                                          FLAG_RECEIVED_BRAWLY_LUCARIONITE                       // Brawly's post-badge reward (DewfordTown_Gym)
 #define FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM                                          FLAG_RECEIVED_WATTSON_MANECTITE                        // Wattson's post-badge reward (MauvilleCity_Gym)
 #define FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F                                          FLAG_RECEIVED_FLANNERY_CAMERUPTITE                     // Flannery's post-badge reward (LavaridgeTown_Gym_1F)
 #define FLAG_RECEIVED_PYROARITE_PETALBURG_CITY_GYM                                          FLAG_RECEIVED_NORMAN_LOPUNNITE                         // Norman's post-badge reward (PetalburgCity_Gym)
@@ -1836,7 +1836,7 @@
 #define FLAG_ITEM_SANDSTREWN_RUINS_ABILITY_SHIELD                               0x1AA // formerly FLAG_EC_ITEM_ROUTE111_ALTARIANITE (that dead name is removed: its map.json was overwritten)
 #define FLAG_ROUTE_131_SPLASH_PLATE                                    0x1DA // formerly FLAG_EC_ITEM_ROUTE119_QUICK_BALL (that dead name is removed: its map.json was overwritten)
 #define FLAG_SCORCHED_SLAB_DUSK_BALLS                                0x1E1 // formerly FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_HONEY (that dead name is removed: its map.json was overwritten)
-#define FLAG_ITEM_GRANITE_CAVE_B1_F_PROTECTIVE_PADS                                0x1E2 // formerly FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_DUSK_BALL (that dead name is removed: its map.json was overwritten)
+#define FLAG_ITEM_GRANITE_CAVE_B1F_GLIMMORANITE                                0x1E2 // formerly FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_DUSK_BALL (that dead name is removed: its map.json was overwritten)
 #define FLAG_ROUTE_117_MAWILITE                                        0x1E3 // formerly FLAG_EC_ITEM_SEASPRAY_CAVE_DUSK_BALL (that dead name is removed: its map.json was overwritten)
 #define FLAG_HIDE_ROUTE_116_DROPPED_GLASSES_MAN                        0x32D // shares 0x32D with FLAG_HIDE_ROUTE_116_DUSK_STONE_SEEKER (dead: its map.json was overwritten)
 #define FLAG_ITEM_MIRAGE_TOWER_4_F_GHOST_GEM                             0x339 // shares 0x339 with FLAG_HIDE_LEGEND_MON_CAVE_OF_ORIGIN (dead: its map.json was overwritten)
@@ -1879,7 +1879,7 @@
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_ZERAORITE                             0x414 // shares 0x414 with FLAG_ITEM_METEOR_FALLS_1F_1R_AGGRONITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_COMET_SHARD                       0x415 // shares 0x415 with FLAG_ITEM_METEOR_FALLS_1F_1R_FULL_HEAL (dead: its map.json was overwritten)
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_FAIRY_FEATHER                 0x416 // shares 0x416 with FLAG_ITEM_METEOR_FALLS_1F_1R_MOON_STONE (dead: its map.json was overwritten)
-#define FLAG_ITEM_RUSTURF_TUNNEL_EJECT_PACK                             0x419 // shares 0x419 with FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER (dead: its map.json was overwritten)
+#define FLAG_ITEM_RUSTURF_TUNNEL_MACHAMPITE                             0x419 // shares 0x419 with FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER (dead: its map.json was overwritten)
 #define FLAG_ITEM_GRANITE_CAVE_B1F_POKE_BALL                           0x41B // shares 0x41B with FLAG_ITEM_GRANITE_CAVE_B1F_ALAKAZITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_GRANITE_CAVE_B2F_NUGGET                          0x41E // shares 0x41E with FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_PETALBURG_WOODS_REVIVE                               0x41F // shares 0x41F with FLAG_ITEM_PETALBURG_WOODS_HERACRONITE (dead: its map.json was overwritten)
