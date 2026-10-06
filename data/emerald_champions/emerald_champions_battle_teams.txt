@@ -186,7 +186,7 @@ MINUN @SITRUS_BERRY MINUS TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, HELPING_HAND, E
 VOLBEAT @LUM_BERRY PRANKSTER MODEST 252/0/4/252/0/0 4 | TAIL_GLOW, ROOST, BUG_BUZZ, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ILLUMISE @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 4 | DAZZLING_GLEAM, AIR_SLASH, ENCORE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0031 TRAINER_CYNDY_1 class=regular
+## E0032 TRAINER_CYNDY_1 class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Riolu and Meditite keep Cyndy’s support opening: Prankster Screech or Quick Guard opens a physical hit, while Fake Out buys a turn and Pure Power strengthens Drain Punch. Crabominable supplies Iron Fist Ice Hammer for Flying targets, Drain Punch recovery and Thunder Punch coverage. Tinkaton switches into the Fairy, Flying, Psychic, Dark and Bug attacks that threaten its partners, then uses Gigaton Hammer, Mold Breaker Play Rough or Knock Off. It cannot use Gigaton Hammer on consecutive turns.
@@ -196,7 +196,7 @@ MEDITITE @SITRUS_BERRY PURE_POWER JOLLY 4/252/0/0/0/252 9 | FAKE_OUT, DRAIN_PUNC
 CRABOMINABLE @SITRUS_BERRY IRON_FIST ADAMANT 252/252/0/0/4/0 9 | ICE_HAMMER, DRAIN_PUNCH, THUNDER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TINKATON @LEFTOVERS MOLD_BREAKER ADAMANT 252/252/0/0/4/0 11 | GIGATON_HAMMER, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0032 TRAINER_MARLENE class=regular
+## E0033 TRAINER_MARLENE class=regular
 strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Marlene's young psychics now travel with a big sister who handles their counters. First two useful turns: Gothita and Hatterene lead. Hatterene sets Trick Room from 29 base Speed, and Magic Bounce reflects the Taunt, Encore or Will-O-Wisp that normally stops a room; Fake Out still interrupts it, so Gothita Protects or uses Fake Tears on the foe Hatterene will hit next. Shadow Tag keeps non-Ghost foes from switching out of the room, but pivot moves such as U-turn and Parting Shot still leave. Under the room, Hatterene's Dazzling Gleam hits both foes and punishes Dark and Fighting leads, Mystical Fire answers Bug and Steel while lowering Special Attack, and Psychic handles Poison. Alternate deployment: Spoink is the backup room with Thick Fat and Power Gem into Bug, Fire and Flying targets. Reserves & disruption: Inkay replaces Slowpoke and Baltoy's Knock Off weakness with a Dark/Psychic body that resists Dark and Ghost and is immune to Psychic; Contrary turns Superpower into +1 Attack and Defense, Superpower hits Dark and Steel foes for super-effective damage, Knock Off hits Ghost foes, Psycho Cut hits Fighting and Poison, and Protect covers the turn a room ends. Gothita's Focus Sash and Inkay's Eviolite can still be knocked away.
@@ -414,7 +414,7 @@ TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATT
 ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 COMBUSKEN @EVIOLITE SPEED_BOOST JOLLY 4/252/0/0/0/252 14 | FIRE_PUNCH, BRICK_BREAK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-## E0033 TRAINER_NED class=regular
+## E0031 TRAINER_NED class=regular
 strategy: TAILWIND
 mega_slots: NONE
 ai: Conservative
@@ -448,7 +448,7 @@ MAKUHITA @SITRUS_BERRY THICK_FAT ADAMANT 252/252/4/0/0/0 10 | FAKE_OUT, WIDE_GUA
 MANKEY @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 9 | CLOSE_COMBAT, U_TURN, ROCK_SLIDE, NIGHT_SLASH | ivs=31/31/31/31/31/31 | friendship=255
 TYROGUE @FOCUS_SASH VITAL_SPIRIT JOLLY 252/0/4/0/0/252 11 | FAKE_OUT, FEINT, HELPING_HAND, COUNTER | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0036 TRAINER_BRENDEN class=gym
+## E0037 TRAINER_BRENDEN class=gym
 strategy: SETUP
 mega_slots: NONE
 plan: Brenden's sailor-coach team converts Prankster Riolu Coaching into an actual later physical attack, especially Scarf Mold Breaker Sawk. Native order, the Choice lock and survival determine the payoff; do not repeatedly coach an unavailable or protected attack. No Guard Machop and Inner Focus Throh supply separate anti-evasion, anti-flinch/Intimidate and critical-hit lines. Stufful's unsupported Drain Punch becomes Brick Break, adding screen removal to the Fluffy/Bulk Up reserve. Monferno uses Iron Fist Fire Punch/Mach Punch, Close Combat and U-turn rather than duplicating Brick Break. This remains a purposeful physical school, with special offense provided by other Gym rooms. Medium levels22/25/23/25/25/24 at cap20 are initial seeds. Keep this six-member battle independent of neighboring Lilith; an overlap is not a twelve-member merged party.
@@ -460,7 +460,7 @@ MACHOP @EVIOLITE NO_GUARD ADAMANT 252/252/4/0/0/0 9 | DYNAMIC_PUNCH, KNOCK_OFF, 
 STUFFUL @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 9 | BRICK_BREAK, PAYBACK, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MONFERNO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 8 | FIRE_PUNCH, MACH_PUNCH, CLOSE_COMBAT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0036 TRAINER_LILITH class=gym
+## E0037 TRAINER_LILITH class=gym
 strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
 plan: Lilith's footwork is a relay, and it now carries answers to the Flying and Fairy types it used to have none for. First two useful turns: Hitmontop's Intimidate and Fake Out or Feint opens a useful Scraggy Dragon Dance or attack; Moxie requires a real knockout. Hitmontop's Rock Slide replaces Helping Hand: after the Fake Out turn it hits both foes, hits Flying types for super-effective damage and can flinch slower targets. Alternate deployment: Pancham's Parting Shot can bring in Costar Flamigo beside the boosted partner. Costar copies the active ally's current stat stages on entry, including harmful drops; it is not Dancer and does not copy a later dance. Pancham's Gunk Shot replaces Crunch, whose Ghost coverage Scrappy already provides, so the relay now hits Fairy types for super-effective damage. Reserves & disruption: Meditite remains the Pure Power breaker, with Zen Headbutt for Poison and Fighting foes; Technician Clobbopus uses Feint or Circle Throw only when it changes the actual board. Never force a switch just to show off Costar, or spend a good turn copying neutral stages.
@@ -472,7 +472,7 @@ FLAMIGO @SITRUS_BERRY COSTAR JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, CLOSE_COMBAT,
 MEDITITE @EVIOLITE PURE_POWER ADAMANT 4/252/0/0/0/252 4 | ZEN_HEADBUTT, DRAIN_PUNCH, FAKE_OUT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CLOBBOPUS @EVIOLITE TECHNICIAN ADAMANT 252/252/4/0/0/0 5 | CIRCLE_THROW, FEINT, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0037 TRAINER_TAKAO class=gym
+## E0038 TRAINER_TAKAO class=gym
 strategy: NONE
 mega_slots: NONE
 plan: Takao keeps the island grappler/counterpunch identity. Grapploct Octolock and Wobbuffet Shadow Tag restrict eligible exits, while the end-turn Defense/Special Defense drops must lead to useful damage rather than two passive slots. Wobbuffet's unsupported Helping Hand becomes Safeguard; Counter/Mirror Coat must match actual incoming hits, and Encore must have a useful target. Special Life Orb Poliwrath now exploits Octolock's Special Defense side and gives the room an answer to physical walls. Hitmonlee's White Herb/Close Combat activates Unburden through a real drop; Passimian supplies Scarf Defiant pressure, and Pawmo contributes priority/electric control. The copied or suppressed ability, Ghost escape rules, turn order and guard decisions remain native. There is no invented Perish Song. Medium levels22/22/22/22/22/25 are initial seeds.
@@ -484,7 +484,7 @@ POLIWRATH @LIFE_ORB WATER_ABSORB MODEST 252/0/4/252/0/0 4 | HYDRO_PUMP, VACUUM_W
 PASSIMIAN @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, KNOCK_OFF, U_TURN, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 PAWMO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 5 | MACH_PUNCH, THUNDER_PUNCH, NUZZLE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0038 TRAINER_CRISTIAN class=gym
+## E0039 TRAINER_CRISTIAN class=gym
 strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
 ai: Double Ace Pokemon
@@ -500,7 +500,7 @@ LUCARIO @EXPERT_BELT JUSTIFIED BRAVE 112/252/0/0/0/144 4 | CLOSE_COMBAT, BULLET_
 HITMONCHAN @ASSAULT_VEST BLITZ_BOXER ADAMANT 252/252/4/0/0/0 4 | DRAIN_PUNCH, MACH_PUNCH, ICE_PUNCH, THUNDER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 MACHAMP @CHOICE_BAND NO_GUARD ADAMANT 252/252/4/0/0/0 4 | DYNAMIC_PUNCH, KNOCK_OFF, HIGH_HORSEPOWER, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0039 TRAINER_JOCELYN class=gym
+## E0040 TRAINER_JOCELYN class=gym
 strategy: SETUP,TAILWIND,ALLY_COMBO
 mega_slots: NONE
 ai: Ace Pokemon
@@ -513,7 +513,7 @@ CRABOMINABLE @CHOICE_BAND IRON_FIST ADAMANT 232/252/4/0/0/20 4 | CLOSE_COMBAT, I
 BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | BULLET_SEED, DRAIN_PUNCH, SPORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SIRFETCHD @LEEK SCRAPPY ADAMANT 4/252/0/0/0/252 5 | LEAF_BLADE, CLOSE_COMBAT, KNOCK_OFF, FIRST_IMPRESSION | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0040 TRAINER_BRAWLY_1 class=leader
+## E0036 TRAINER_BRAWLY_1 class=leader
 strategy: REDIRECTION,SETUP
 mega_slots: 2
 ai: Ace Pokemon

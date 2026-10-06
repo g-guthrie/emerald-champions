@@ -1,5 +1,5 @@
 {
-  "play_order": 34, "e_group": "E0036", "trainer": "TRAINER_BRENDEN", "class": "gym",
+  "play_order": 34, "e_group": "E0037", "trainer": "TRAINER_BRENDEN", "class": "gym",
   "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
   "party_manifest": "work/playtest/34-TRAINER_BRENDEN/party.json",
   "opponent_levels_observed": {"SAWK": 20, "RIOLU": 23, "THROH": 21, "MACHOP": 23, "STUFFUL": 23, "MONFERNO": 22},

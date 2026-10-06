@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0033 TRAINER_NED (Route 106 sea-breeze fisherman); play_order 31, cap 20, Medium",
+  "encounter": "E0031 TRAINER_NED (Route 106 sea-breeze fisherman); play_order 31, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Jolteon comes from Eevee with a Thunder Stone; Quagsire from Wooper; Kartana is a PetalburgWoods_3 land encounter; Nidoking from Nidorino with a Moon Stone; Lucario is AlteringCave_1F; Magearna is a reachable legendary sign. Ordinary items only. Assisted acquisition, not native capture acceptance.",
   "plan": "Bring the two absorption abilities the dossier names as counterplay - Volt Absorb against Thunderbolt and Volt Switch, Water Absorb against Surf and Hydro Pump - and keep them on the field so the Soak clause is actually tested. Electric pressure covers all four bodies, and Ice covers Wattrel where Ground cannot reach it.",
   "party": [

@@ -1434,7 +1434,7 @@
         "TRAINER_NED"
       ],
       "e_groups": [
-        "E0033"
+        "E0031"
       ],
       "battle_calls": [
         {
@@ -1557,7 +1557,7 @@
         "TRAINER_BRENDEN"
       ],
       "e_groups": [
-        "E0036"
+        "E0037"
       ],
       "battle_calls": [
         {
@@ -1595,7 +1595,7 @@
         "TRAINER_LILITH"
       ],
       "e_groups": [
-        "E0036"
+        "E0037"
       ],
       "battle_calls": [
         {
@@ -1633,7 +1633,7 @@
         "TRAINER_TAKAO"
       ],
       "e_groups": [
-        "E0037"
+        "E0038"
       ],
       "battle_calls": [
         {
@@ -1671,7 +1671,7 @@
         "TRAINER_CRISTIAN"
       ],
       "e_groups": [
-        "E0038"
+        "E0039"
       ],
       "battle_calls": [
         {
@@ -1709,7 +1709,7 @@
         "TRAINER_JOCELYN"
       ],
       "e_groups": [
-        "E0039"
+        "E0040"
       ],
       "battle_calls": [
         {
@@ -1747,7 +1747,7 @@
         "TRAINER_BRAWLY_1"
       ],
       "e_groups": [
-        "E0040"
+        "E0036"
       ],
       "battle_calls": [
         {
@@ -5781,7 +5781,7 @@
         "TRAINER_CYNDY_1"
       ],
       "e_groups": [
-        "E0031"
+        "E0032"
       ],
       "battle_calls": [
         {
@@ -11210,7 +11210,7 @@
         "TRAINER_MARLENE"
       ],
       "e_groups": [
-        "E0032"
+        "E0033"
       ],
       "battle_calls": [
         {

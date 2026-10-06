@@ -1,6 +1,6 @@
 {
   "play_order": 14,
-  "e_group": "E0031",
+  "e_group": "E0032",
   "trainer": "TRAINER_CYNDY_1",
   "class": "regular",
   "location": "Route115",
@@ -52,6 +52,6 @@
   "level_changes": [],
   "level_verdict": "KEEP. Brief rule 5: won with 2+ player faints and after a real fight -> keep. Honest caveat: both of my faints were my own type errors (Porygon-Z and Lucario are each weak to Fighting and I put them in front of two Fighting attackers), and Snorlax and Whimsicott finished untouched, so this was less dangerous than the faint count suggests. Under the stricter AGENTS.md threshold ('first-attempt win with fewer than three new player faints triggers review of a level increase, normally +1 to the lowest-level opponent') a +1 on Riolu or Meditite (both at level 14, the block's floor) would be defensible. Deferred to the main agent rather than applied, because the brief's calibration rule is the operative instruction for this pass.",
   "cooler_note": "Yes, slightly. The four-member all-Fighting squad reads as one type rather than one idea, and Crabrawler carried the fight almost alone. Suggestion for a later pass, not applied here: give Clobbopus a reason to exist before it faints - its Technician Feint plus Riolu's Quick Guard is a genuine priority-control package, but neither half fired. Either lead with Riolu + Clobbopus so the Quick Guard/Feint pair is the opening statement, or swap one slot for a non-Fighting partner (Mienfoo-style pivot or a Psychic-type coach) so the room has a second angle.",
-  "authored_set_legality": "No legality problem found. All four members, abilities, items, moves and EV spreads resolved correctly in the native party; the dossier prose is stale, however - the E0031 block says 'Medium cap34 levels 36/36/37/39' while the live battle_index cap window and the actual materialized levels are cap 14 -> 14/14/15/17.",
+  "authored_set_legality": "No legality problem found. All four members, abilities, items, moves and EV spreads resolved correctly in the native party; the dossier prose is stale, however - the E0032 block says 'Medium cap34 levels 36/36/37/39' while the live battle_index cap window and the actual materialized levels are cap 14 -> 14/14/15/17.",
   "not_finished": "Quick Guard and Screech remain unexercised; Feint and Taunt were never given a target."
 }

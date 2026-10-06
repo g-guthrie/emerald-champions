@@ -1,6 +1,6 @@
 {
   "play_order": 15,
-  "e_group": "E0032",
+  "e_group": "E0033",
   "trainer": "TRAINER_MARLENE",
   "class": "regular",
   "location": "Route115",
@@ -27,7 +27,7 @@
     {"check": "Gothita's Shadow Tag traps the player's active", "result": "PASS (ability present, never tested)", "evidence": "Gothita entered with ABILITY_SHADOW_TAG and was on the field for the whole battle. I never attempted a switch, so the trap was never exercised."},
     {"check": "Slowpoke Yawn opens a sleep threat", "result": "FAIL (never fired)", "evidence": "Slowpoke chose MOVE_PSYCHIC on turns 1 and 2 and fainted to Knock Off on turn 2. Yawn was never selected."},
     {"check": "Gothita Fake Tears lowers Sp. Def before a special attack", "result": "FAIL (never fired)", "evidence": "Gothita chose Protect (turn 1), Psychic (turn 2, overridden by Encore) and then was Encore-locked. Fake Tears never appeared. The dossier explicitly does not assume it precedes Slowpoke, so this is a soft fail."},
-    {"check": "Baltoy renews Trick Room if Spoink falls", "result": "N/A - AUTHORING GAP", "evidence": "The E0032 dossier prose says 'reserve Trick Room' and the block is tagged strategy: TRICK_ROOM, but Marlene's Baltoy has no Trick Room in its four moves. Only Sarah's (E0027) Baltoy carries it. Marlene's room has a single point of failure."},
+    {"check": "Baltoy renews Trick Room if Spoink falls", "result": "N/A - AUTHORING GAP", "evidence": "The E0033 dossier prose says 'reserve Trick Room' and the block is tagged strategy: TRICK_ROOM, but Marlene's Baltoy has no Trick Room in its four moves. Only Sarah's (E0027) Baltoy carries it. Marlene's room has a single point of failure."},
     {"check": "Opponent decision budget 1.2 s", "result": "PASS", "evidence": "ai_decision_frames_max = 14 frames = 0.234 s."}
   ],
   "protect_ledger": [
@@ -38,7 +38,7 @@
   ],
   "ai_defects": [
     {
-      "id": "E0032-TRICKROOM-NOT-SET",
+      "id": "E0033-TRICKROOM-NOT-SET",
       "severity": "medium",
       "turn": 2,
       "board": "Marlene had lost Slowpoke. Gothita (49/49) was Encore-locked into Protect and could not act. Spoink (60/60, Eviolite, Thick Fat, the team's only Trick Room carrier) entered against Weavile (48/48) and Whimsicott (21/45), both far faster than her whole team, which is the exact board Trick Room exists for.",
@@ -47,7 +47,7 @@
       "caveat": "Trick Room is priority -7, so Spoink would have eaten both attacks before the room resolved and in fact died on the following turn. An expected-value scorer could legitimately price that as a wasted turn. I record this as a defect because the trainer is tagged strategy: TRICK_ROOM, Spoink is its only setter, and the room was never even attempted - not because a single -7 priority call is obviously wrong."
     }
   ],
-  "authored_set_legality": "No engine legality problem. One authoring inconsistency: the E0032 plan prose promises a 'reserve Trick Room' behind Spoink, but Baltoy's authored moves contain no Trick Room, so the TRICK_ROOM strategy flag rests on a single member. The dossier prose is also stale on levels ('Medium cap34 levels 36/37/38/38' against a live cap-14 window resolving to 14/15/16/16).",
+  "authored_set_legality": "No engine legality problem. One authoring inconsistency: the E0033 plan prose promises a 'reserve Trick Room' behind Spoink, but Baltoy's authored moves contain no Trick Room, so the TRICK_ROOM strategy flag rests on a single member. The dossier prose is also stale on levels ('Medium cap34 levels 36/37/38/38' against a live cap-14 window resolving to 14/15/16/16).",
   "level_changes": [
     {"member": "GOTHITA", "field": "level offset", "before": 2, "after": 3, "reason": "Brief rule 5: won first try with 0 player faints and no real threat -> +1 on the weakest one or two members. Gothita is the lowest offset."},
     {"member": "SLOWPOKE", "field": "level offset", "before": 3, "after": 4, "reason": "Second lowest offset; it died to a single Knock Off from full HP."}

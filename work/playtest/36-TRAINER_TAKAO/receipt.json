@@ -1,5 +1,5 @@
 {
-  "play_order": 36, "e_group": "E0037", "trainer": "TRAINER_TAKAO", "class": "gym",
+  "play_order": 36, "e_group": "E0038", "trainer": "TRAINER_TAKAO", "class": "gym",
   "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
   "party_manifest": "work/playtest/36-TRAINER_TAKAO/party.json",
   "opponent_levels_observed": {"GRAPPLOCT": 20, "WOBBUFFET": 20, "HITMONLEE": 20, "POLIWRATH": 20, "PASSIMIAN": 20, "PAWMO": 23},
@@ -29,7 +29,7 @@
       "board": "Grapploct at 80/80 with Leftovers and Wobbuffet at 124/124, against Tsareena and Magearna with nothing yet revealed",
       "chosen": "Withdrew the healthy, unthreatened Grapploct and sent in Hitmonlee",
       "better": "Keep Grapploct in and attack, or switch to a body that is not 2x weak to the lead's typing. Hitmonlee arrived into a Play Rough and was knocked out without acting, so the switch cost a full member and gained nothing - no Regenerator, no pivot damage, no matchup improvement.",
-      "note": "This is the same shape as the defect I recorded for E0036 Lilith, where a healthy Scraggy was withdrawn on turn 1 and the Costar Flamigo was fed to the lead. Two unforced turn-1 switches in consecutive Dewford rooms that each spent a member for zero value suggests the switch scorer may be over-valuing a turn-1 pivot when the active body is at full HP and nothing has been revealed. Worth looking at together rather than as two isolated incidents."
+      "note": "This is the same shape as the defect I recorded for E0037 Lilith, where a healthy Scraggy was withdrawn on turn 1 and the Costar Flamigo was fed to the lead. Two unforced turn-1 switches in consecutive Dewford rooms that each spent a member for zero value suggests the switch scorer may be over-valuing a turn-1 pivot when the active body is at full HP and nothing has been revealed. Worth looking at together rather than as two isolated incidents."
     }
   ],
   "ai_observations": [

@@ -152,7 +152,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0031 Cyndy, E0032 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+  Deferred: E0032 Cyndy, E0033 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
     it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -264,3 +264,54 @@ STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
   Battles: E0030 Rival (Rustboro)
   VERIFIED IN PLAY: Devon Corp swept (Mr. Stone's scene on 3F); the rival battle won in Rustboro.
   Adds nothing battle-relevant: the PokeNav and Mr. Stone's letter.
+
+====================================================================================================
+STEP 11 - cap 20 - Route 106 trainer (Ned)
+  Battles: E0031 Ned
+  Deferred: E0034 Elliot (Route 106 water: Surf); E0035-E0036 Dewford Gym (Laura, Brenden & Lilith,
+    Takao, Cristian, Jocelyn, Brawly): Brawly is in Slateport and his guide blocks the Gym door until
+    the player speaks to him there (DewfordTown object 6, FLAG_HIDE_SLATEPORT_CITY_BRAWLY)
+  VERIFIED IN PLAY: Mr. Briney's boat from Route 104; Dewford Town, Center, Hall, both houses,
+  Dewford Meadow and Manor swept; Ned beaten on Route 106; DexNav in each.
+  Adds Dewford Town and its side areas (Dewford Meadow, Dewford Manor).
+  Pokemon
+    Dewford Old Rod (DexNav = code), Lv 8-11: Magikarp, Mantyke
+    Dewford Meadow grass (DexNav, levels capped at 20; the table is written for 41-43): Cutiefly,
+      Flabebe, Oricorio (Baile), Butterfree (common); Flabebe (other colours) (uncommon); Combee,
+      Milcery (rare). Honey (code): Combee, Swirlix, Spritzee. Meloetta and Pheromosa are not live.
+    Dewford Manor (DexNav, Lv 20, the table is written for 41-43): Mime Jr., Gastly, Solosis,
+      Slowpoke (Galar) (common); Litwick, Sinistea, Glameow (uncommon); Drowzee, Rattata, Hoothoot
+      (rare)
+    Evolutions by 20 new: Rattata -> Raticate 20, Hoothoot -> Noctowl 20; Oricorio changes style
+      with the Nectars found here.
+  Battle items
+    Gifts (play): Silk Scarf (Dewford House 2)
+    Pickups (play): Big Pearl (Dewford); Meadow Red Shard, Heat Rock, hidden Grass Gem, Fairy Gem,
+      Red Nectar, Yellow Nectar; Manor Air Balloon, Nugget, hidden Dread Plate, Bottle Cap
+    Wild held (species data): Oricorio (- / Red Nectar), Cutiefly and Combee (Honey). No battle items.
+  Not yet: Meadow Ring Target (27,1) (not reached from the Meadow's entrance).
+
+====================================================================================================
+STEP 12 - cap 20 - (next: the boat to Slateport, Route 109, Slateport; the Dewford Gym after Brawly)
+  Adds, verified in play, for the battles after Route 106: Route 106 and Granite Cave.
+  Pokemon
+    Route 106 grass (DexNav = code), Lv 14-16: Exeggcute, Inkay, Chatot (common); Buizel, Machop,
+      Makuhita (uncommon); Pidove, Crabrawler (rare). Old Rod Lv 8-11: Remoraid, Clauncher
+    Granite Cave 1F (DexNav = code), Lv 12-14: Zubat, Geodude, Glimmet (common); Makuhita, Aron,
+      Abra (uncommon); Rolycoly, Axew, Nacli, Hawlucha, Timburr (rare); Kubfu (rare, Lv 20)
+    Granite Cave B1F (code), Lv 13-15: Klefki, Sableye, Glimmet, Bronzor, Cubone, Aron, Onix, Carbink,
+      Ditto, Sneasel (Hisui)
+    Granite Cave B2F (DexNav = code), Lv 13-15: Sandshrew, Sableye, Tinkatink (common); Aron, Onix,
+      Carbink (uncommon); Gible, Bronzor, Rolycoly, Bagon (rare). Cobalion is not live.
+    Steven's room (code): Zubat, Aron, Glimmet, Axew, Timburr, Makuhita, Abra, Beldum
+    Evolutions by 20 new: Abra -> Kadabra 16, Rolycoly -> Carkol 18, Beldum -> Metang 20.
+  Battle items
+    Gifts (play): Expert Belt (Steven, for the Letter); Flash license (Granite Cave hiker)
+    Pickups (play): Black Belt (Granite 1F; was an Escape Rope), Poke Ball (Route 106, B1F), Prism
+      Scale (Route 106), Gold Bottle Cap, hidden Everstone (B2F)
+    Wild held (species data): Geodude (- / Everstone), Bronzor and Beldum (- / Metal Coat), Cubone
+      (- / Thick Club), Ditto (Quick Powder / Metal Powder), Hawlucha (- / King's Rock), Crabrawler (-
+      / Aspear Berry). Battle items moved: Twisted Spoon, Grip Claw, Dragon Fang, Psychic Seed to
+      the clerk from the Stone Badge; Black Belt is the Granite pickup.
+  Not yet: B1F Protective Pads, B2F Throat Spray, Nugget and a second hidden Everstone (Rock Smash /
+    the other side), Route 106 hidden Big Pearl (Rock Smash), Route 106 water (Surf).

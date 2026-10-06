@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
   "play_order": 36,
-  "e_group": "E0037",
+  "e_group": "E0038",
   "trainer": "TRAINER_TAKAO",
   "class": "gym",
   "cap": 20,
@@ -62,7 +62,7 @@
     },
     {
       "check": "Counter / Mirror Coat must match actual incoming hits",
-      "result": "FAIL - four consecutive failures. See E0037-D1",
+      "result": "FAIL - four consecutive failures. See E0038-D1",
       "evidence": "Wobbuffet selected Counter on turns 1, 2, 3 and 4. It failed every time ('But it failed!'), including on T3 when the only attack that hit Wobbuffet that turn was a special Flash Cannon for 52 - the exact case Mirror Coat exists for, which would have returned 104 to a 40 HP Magearna and probably killed it."
     },
     {
@@ -94,7 +94,7 @@
   "protect_ledger_note": "Exactly one opponent Protect in eight turns, and it was the highest-value guard available on that board. No guard spam. The waste on this team was Counter, not Protect.",
   "ai_defects": [
     {
-      "id": "E0037-D1",
+      "id": "E0038-D1",
       "severity": "high - a member spends its entire life on a move that cannot resolve",
       "turns": "1, 2, 3, 4",
       "board": "Wobbuffet (Counter / Mirror Coat / Encore / Safeguard) beside a partner that was the actual target of my attacks on T1, T2 and T4, and on T3 taking a special Flash Cannon for 52 itself.",

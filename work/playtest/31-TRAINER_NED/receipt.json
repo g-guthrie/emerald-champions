@@ -1,5 +1,5 @@
 {
-  "play_order": 31, "e_group": "E0033", "trainer": "TRAINER_NED", "class": "regular",
+  "play_order": 31, "e_group": "E0031", "trainer": "TRAINER_NED", "class": "regular",
   "location": "Route106", "cap": 20, "difficulty": "medium",
   "party_manifest": "work/playtest/31-TRAINER_NED/party.json",
   "opponent_levels_before": {"FINNEON": 23, "WATTREL": 21, "MANTYKE": 22, "ARROKUDA": 20},

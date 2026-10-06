@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0036 TRAINER_LILITH (Dewford Gym, footwork relay, six members); play_order 35, cap 20, Medium",
+  "encounter": "E0037 TRAINER_LILITH (Dewford Gym, footwork relay, six members); play_order 35, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Spiritomb, Whimsicott (Cottonee + Sun Stone) and Magearna are gate-14 entries; Alakazam comes from Kadabra with a Linking Cord, Nidoking from Nidorino with a Moon Stone, and Celebi is a reachable legendary sign at PetalburgWoods_3. Ordinary items only. Assisted acquisition, not native capture acceptance. Tsareena evolves from Steenee by known move (pool-20 gate 20).",
   "plan": "Attack the relay at its opening: Queenly Majesty on the lead blanks both Fake Out users and Clobbopus's Feint, which is where Hitmontop's setup turn comes from. Fairy and Psychic damage is 2x into five of the six, Prankster Taunt denies Dragon Dance, Parting Shot and Taunt itself, and Spiritomb walls the four members that lack a Dark or Scrappy answer. Nidoking is dropped from the Laura/Brenden six because it was one-shot on a switch-in there and adds nothing against an all-Fighting room.",
   "party": [

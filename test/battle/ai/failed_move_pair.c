@@ -920,7 +920,7 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is l
     }
 }
 
-// E0037: Takao's Wobbuffet Encored fresh switch-ins that had not moved yet and
+// E0038: Takao's Wobbuffet Encored fresh switch-ins that had not moved yet and
 // would only have moved first by raising Protect, which blocks the Encore.
 AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a fresh switch-in whose only faster move is Protect")
 {

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
   "play_order": 31,
-  "e_group": "E0033",
+  "e_group": "E0031",
   "trainer": "TRAINER_NED",
   "class": "regular",
   "cap": 20,
@@ -59,7 +59,7 @@
     {
       "check": "Arrokuda applies Propeller Tail physical pressure",
       "result": "FAIL - it never attacked",
-      "evidence": "Both of its turns were Protect (T2 successful, T3 failed). It was removed having dealt zero damage. See E0033-D1."
+      "evidence": "Both of its turns were Protect (T2 successful, T3 failed). It was removed having dealt zero damage. See E0031-D1."
     }
   ],
   "protect_ledger": [
@@ -82,7 +82,7 @@
   "protect_ledger_note": "Three guards for one real payoff. Two of Ned's four members spent their entire lives on Protect and dealt no damage at all.",
   "ai_defects": [
     {
-      "id": "E0033-D1",
+      "id": "E0031-D1",
       "severity": "repeated Protect with a failure it should price",
       "turn": 3,
       "board": "Arrokuda at 57/57 (untouched), having successfully Protected on the previous turn, opposite a Life Orb Jolteon and a +1 Attack Kartana, with its partner Mantyke at full HP beside it.",
@@ -94,7 +94,7 @@
   "ai_defects_newly_introduced": [],
   "ai_weak_choices": [
     {
-      "id": "E0033-W1",
+      "id": "E0031-W1",
       "turn": 1,
       "board": "Wattrel at full HP with Life Orb, opposite a Kartana whose Leaf Blade it resists and a Jolteon it cannot damage with Electric moves (Volt Absorb).",
       "chosen": "Protect.",

@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/31-TRAINER_NED/receipt.json",
   "rerun_reason": "Confirming rerun for the first pass's unverified level changes (ARROKUDA offset 2->3, WATTREL 3->4) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
   "play_order": 31,
-  "e_group": "E0033",
+  "e_group": "E0031",
   "trainer": "TRAINER_NED",
   "class": "regular",
   "location": "Route106",
