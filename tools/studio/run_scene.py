@@ -189,6 +189,16 @@ async def run(spec,out):
                     mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied|gates)
                     if mv is not None:options.append((len(mv),spot,face))
                 if not options:
+                    # only past a Cut tree or rock? the walk there clears it (the game decides)
+                    obst=set()
+                    for gfx in obstacle_graphics().values():
+                        obst|={(a["x"],a["y"]) for a in live if a["graphic"]==gfx and not a["invisible"]}
+                    for dx,dy,face in ((0,1,"UP"),(0,-1,"DOWN"),(1,0,"LEFT"),(-1,0,"RIGHT")):
+                        spot=(target[0]+dx,target[1]+dy)
+                        if spot in occupied or spot in gates:continue
+                        mv=route_steps.path(studio.current_map,here,spot,caps=frozenset({"cut","smash"}),block=(occupied-obst)|gates)
+                        if mv is not None:options.append((len(mv),spot,face))
+                if not options:
                     recorder.mark(f"UNREACHABLE {target} {step.get('label','')}",studio.packet)
                     interactions.append(dict(label=step.get("label",""),target=list(target),status="unreachable"))
                     continue
@@ -265,7 +275,8 @@ async def run(spec,out):
                             for name,gfx in obstacle_graphics().items():
                                 for a in live:
                                     if gfx is not None and a["graphic"]==int(gfx) and not a["invisible"]:obstacle[(a["x"],a["y"])]=a["local_id"]
-                            via=route_steps.path(studio.current_map,here,goal,block=(occupied-set(obstacle))|{tuple(t) for t in step.get("avoid",[])})
+                            via=route_steps.path(studio.current_map,here,goal,caps=frozenset({"cut","smash"}),
+                                                 block=(occupied-set(obstacle))|{tuple(t) for t in step.get("avoid",[])})
                             if via is not None:
                                 p=here
                                 for d in via:

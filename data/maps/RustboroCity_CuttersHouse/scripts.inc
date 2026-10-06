@@ -5,7 +5,7 @@ RustboroCity_CuttersHouse_EventScript_Cutter:: @ 8215BD4
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_HM01, RustboroCity_CuttersHouse_EventScript_ExplainCut
-	msgbox RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse, MSGBOX_DEFAULT
+	msgbox RustboroCity_CuttersHouse_Text_AuthorizeCut, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_HM01
 	msgbox RustboroCity_CuttersHouse_Text_ExplainCut, MSGBOX_DEFAULT
 	release
@@ -20,7 +20,7 @@ RustboroCity_CuttersHouse_EventScript_Lass:: @ 8215C0A
 	msgbox RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees, MSGBOX_NPC
 	end
 
-RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse: @ 8215C13
+RustboroCity_CuttersHouse_Text_AuthorizeCut: @ 8215C13
 	.string "That determined expression…\n"
 	.string "You look ready to learn how to\l"
 	.string "clear a path.\p"
