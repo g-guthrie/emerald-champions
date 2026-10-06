@@ -26,14 +26,18 @@ def live_battles():
 
 def manifest_steps():
     """[(step header, [battle numbers])] in manifest order."""
-    steps, cur = [], None
+    steps, cur, field = [], None, None
     for line in MANIFEST.read_text().splitlines():
         if line.startswith('STEP '):
-            cur = (line, [], []); steps.append(cur)
-        elif cur and line.strip().startswith('Battles:'):
-            cur[1].extend(int(n) for n in re.findall(r'\bE(\d{4})\b', line))
-        elif cur and line.strip().startswith('Deferred:'):
-            cur[2].extend(int(n) for n in re.findall(r'\bE(\d{4})\b', line))
+            cur, field = (line, [], []), None; steps.append(cur); continue
+        if not cur: continue
+        if line.startswith('  ') and not line.startswith('   '):   # a new field of the step
+            key = line.strip().split(':')[0]
+            field = {'Battles': 1, 'Deferred': 2}.get(key)
+        elif not line.startswith('   '):
+            field = None
+        if field:   # the field's own line and its deeper-indented continuation lines
+            cur[field].extend(int(n) for n in re.findall(r'\bE(\d{4})\b', line))
     return steps
 
 
