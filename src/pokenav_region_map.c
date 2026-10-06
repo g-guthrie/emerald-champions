@@ -276,6 +276,9 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
         state->callback = HandlePlaceChoiceInput;
         return POKENAV_MAP_FUNC_OPEN_CHOICE;
     case MAP_INPUT_B_BUTTON:
+        // Back one level: zoomed in, to the full map; from there, out.
+        if (IsRegionMapZoomed())
+            return POKENAV_MAP_FUNC_ZOOM_OUT;
         return POKENAV_MAP_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
         if (CanFlyToCursor(regionMap))
