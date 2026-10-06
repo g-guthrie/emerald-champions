@@ -1,6 +1,6 @@
 {
   "play_order": 119,
-  "e_group": "E0144",
+  "e_group": "E0130",
   "trainer": "TRAINER_COLE",
   "class": "gym",
   "location": "LavaridgeTown_Gym_1F",
@@ -51,5 +51,5 @@
   "level_change_decision": "KEEP. Won on attempt 1 with two faints in a six-member room. The offset spread is the most interesting in the block and it works: the three unevolved members carry +4 to +6 and Litleo at L40 with Choice Specs one-shot a full-HP Mamoswine, which is exactly the 'compensate the unevolved members individually' intent from the dossier paying off. Coalossal and Heatmor at +1 are correctly the ordinary bodies.",
   "could_this_be_cooler": "The level-compensation idea here is genuinely good and I would not change it - a L40 Choice Specs Litleo is a better encounter than a L36 Pyroar would be, and it reads as a gym trainer who has raised his baby Pokemon hard. The problem is that two of the six sets never do their thing: Tar Shot arrives a turn late and Stockpile never arrives at all, so what should be a layered room plays as six Fire-types taking turns. Suggestion, not applied: Coalossal's Protect competes directly with the Tar Shot the team is built around - if the support member simply did not have Protect, the two-step would be forced, and the same is true of Numel, whose Protect is the move beating Stockpile in scoring. Removing one defensive button from each of the two support members would probably fix both without touching a single stat.",
   "authored_set_legality": "No legality problems. Flame Body, Intimidate, Simple, Unnerve, Tough Claws, both Eviolites and the Choice Specs all behaved as printed.",
-  "notes": "The Misty Terrain discrepancy above applies to Gerald (E0144) as well and is the one thing in this battle that needs a decision from the book side rather than the AI side."
+  "notes": "The Misty Terrain discrepancy above applies to Gerald (E0130) as well and is the one thing in this battle that needs a decision from the book side rather than the AI side."
 }

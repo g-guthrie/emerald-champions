@@ -1,6 +1,6 @@
 {
   "play_order": 110,
-  "e_group": "E0132",
+  "e_group": "E0110",
   "trainer": "TRAINER_MAXIE_MT_CHIMNEY",
   "class": "leader",
   "location": "MtChimney",
@@ -11,7 +11,7 @@
     {
       "seed": 21,
       "attempt": 1,
-      "party": "party-a1.json (Mega Gyarados core carried over from E0131)",
+      "party": "party-a1.json (Mega Gyarados core carried over from E0109)",
       "outcome": "lost",
       "turns": 5,
       "player_faints": 6,

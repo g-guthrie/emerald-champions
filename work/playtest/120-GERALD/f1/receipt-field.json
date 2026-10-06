@@ -1,6 +1,6 @@
 {
   "play_order": 120,
-  "e_group": "E0144",
+  "e_group": "E0130",
   "trainer": "TRAINER_GERALD",
   "class": "gym",
   "location": "LavaridgeTown_Gym_1F",
@@ -9,7 +9,7 @@
   "run_kind": "field rerun (f1) - Lavaridge Gym Misty Terrain now authored as a starting field",
   "supersedes": "work/playtest/120-GERALD/receipt.json (mist-less run at cap 36; left intact)",
   "cap_note": "Cap moved 36 -> 42, the window the plan targets. Observed levels 43/39/40/40/40/38 = 42 + offset - 2 against the CURRENT offsets (Volbeat 3, Victreebel -1 after the first run's two -1s; Simisear/Scovillain/Pyroar 0, Charizard -2). The dossier prose still quotes the pre-nerf 44/40/40/40/40/38.",
-  "build_note": "Both attempts ran on work/agent-battle-build-3, each against its own pinned ROM/ELF copy. Neither attempt stalled. The coordinator's build-4 (AI Protect-scoring crash fix) arrived mid-attempt-2; every start from E0145 onward uses build-4.",
+  "build_note": "Both attempts ran on work/agent-battle-build-3, each against its own pinned ROM/ELF copy. Neither attempt stalled. The coordinator's build-4 (AI Protect-scoring crash fix) arrived mid-attempt-2; every start from E0131 onward uses build-4.",
   "mist_confirmation": {
     "checked_at": "turn 0 of both attempts, before any action",
     "field_source": {

@@ -166,7 +166,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0071 Cyndy, E0073 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+  Deferred: E0123 Cyndy, E0125 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
     it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -286,7 +286,7 @@ STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
 ====================================================================================================
 STEP 11 - cap 20 - Route 106 trainer (Ned)
   Battles: E0031 Ned
-  Deferred: E0074 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
+  Deferred: E0127 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
     Takao, Cristian, Jocelyn, Brawly): Brawly is in Slateport and his guide blocks the Gym door until
     the player speaks to him there (DewfordTown object 6, FLAG_HIDE_SLATEPORT_CITY_BRAWLY)
   VERIFIED IN PLAY: Mr. Briney's boat from Route 104; Dewford Town, Center, Hall, both houses,
@@ -340,7 +340,7 @@ STEP 13 - cap 20 - Route 109 beach and the Seashore House
   Battles: E0032 Hailey, E0033 Edmond, E0034 Chandler, E0035 Lola (Route 109 beach);
     E0036 Johanna, E0037 Dwayne, E0038 Simon (Seashore House, doubles)
   Deferred: E0047 Museum grunts, E0048 Archie (Museum raid, after the Knuckle Badge);
-    E0075 Greta (refuses until later)
+    E0128 Greta (refuses until later)
   Played: Briney (Dewford, after the Letter) to Route 109; beach and Seashore House swept; Slateport,
   its Center, Mart, House, Chef's house, Fan Club, Shipyard, Battle Tent lobby and Harbor swept;
   Brawly spoken to outside the Museum. Before the Knuckle Badge the Aqua line blocks the Museum door
@@ -382,8 +382,8 @@ STEP 15 - cap 30 - Oceanic Museum raid (Slateport)
 ====================================================================================================
 STEP 16 - cap 30 - Route 110
   Battles: E0049 Isabel & Kaleb, E0050 Timmy, E0052 Jasmine, E0053 rival (six variants)
-  Deferred: E0076 Sally, E0077 Eddie (Trick House puzzle 1); E0078 Jaclyn, E0079 Anthony,
-    E0080 Jacob (Cycling Road, by Bike)
+  Deferred: E0076 Sally, E0077 Eddie (Trick House puzzle 1); E0073 Jaclyn, E0074 Anthony,
+    E0075 Jacob (Cycling Road, by Bike)
   Played: Route 110's low road swept north to Mauville; the rival battle gives the Dowsing Machine.
   Adds Route 110 (and the Slateport raid's aftermath).
   Pokemon
@@ -461,3 +461,101 @@ STEP 18 - cap 30 - Route 117, the Day Care and Verdanturf Town
   Fixes on the way: the Cyclizar trade's flag was named for Pacifidlog
     (FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED -> FLAG_VERDANTURF_CYCLIZAR_TRADE_COMPLETED).
   Concern (owner): four Nuggets by Verdanturf (Rusturf grunt plus three here).
+
+====================================================================================================
+STEP 19 - cap 40 - Rusturf Tunnel east, Route 110 by Bike, Trick House 1
+  Battles: E0071 Mike (Rusturf), E0073 Jaclyn, E0074 Anthony, E0075 Jacob (Cycling Road),
+    E0076 Sally, E0077 Eddie (Trick House 1)
+  Played (forced wins; mosaics and DexNav looked at): Rusturf east from Verdanturf; the rock
+  smashed (Strength license given, for use with the Heat Badge); Cycling Road ridden on the Bicycle
+  (the gate stops a walker); the Trick Master found under the desk, puzzle 1 cut through, the door
+  code read, his reward taken.
+  Battle items
+    Pickups (play): Heavy-Duty Boots (Rusturf), Assault Vest (Cycling Road), Dawn Stone (puzzle 1),
+      hidden Nugget (Trick House end). Gift (play): 2 Bottle Caps (Trick Master).
+  Not yet: Route 110's Surf side (Falinksite, berry trees, grunts' old spot).
+
+====================================================================================================
+STEP 20 - cap 40 - Route 111 south, Route 118 west bank
+  Battles: E0078 Victor, E0079 Victoria, E0080 Vivi, E0082 Vicky (back to back), E0083 Bianca,
+    E0085 Tyron (Route 111); E0088 Deandre (Route 118 west bank)
+  Played: Route 111 south to the sandstorm (mosaic), the Winstrates' chain, the nurse's Chansey
+  quest (Rock Smash frees it); Route 118's west bank (116 tiles: plain and sand, no grass, no Cut
+  tree; the river needs Surf).
+  Pokemon
+    Route 111 (DexNav photo), grass Lv 28-30 on the south side: Stonjourner, Cacnea, Trapinch
+      (common); Hippopotas, Sandile (uncommon); Gible, Silicobra, Bramblin, Capsakid, Rellor,
+      Maractus (rare; Gible and Hippopotas swapped, owner). Old Rod Lv 24-26: Goldeen, Barboach.
+      Rock Smash: Roggenrola, Geodude, Rolycoly, Shuckle.
+    Route 118 west bank: Old Rod only (Carvanha, Magikarp, Lv 39-40). The DexNav also lists the
+      grass and Cut-tree tables, which this bank cannot reach.
+  Battle items
+    Gifts (play): Heal Ball (nurse). Pickups (play): Fire Gem (Route 111; was an Elixir), hidden
+      Bottle Cap (Route 118).
+  Gate (code + play): Route 111's vicious sandstorm turns back a player without the Go-Goggles
+    (Route111_EventScript_ViciousSandstormTrigger): the desert, Room Service, Earth Plate, Blunder
+    Policy, a Nugget, Dusty and Beau wait. Big Nugget: Surf.
+
+====================================================================================================
+STEP 21 - cap 40 - Route 112, Fiery Path, Route 111 north, Route 113
+  Battles: E0089 Brice, E0090 Bryant & Shayla (Route 112), E0091 Wilton (Route 111 north), E0092
+    Wyatt, Lung, Lawrence, E0093 Jaylen, E0094 Tori & Tia, E0095 Dillon, E0099 Coby & Sophie
+    (Route 113)
+  Pokemon
+    Fiery Path (DexNav photo), Lv 29-31: Slugma, Diglett, Torkoal, Grimer (common); Koffing,
+      Sizzlipede (uncommon); Magby, Durant, Charcadet, Woobat, Heatmor (rare); Entei (visitor, Lv 40).
+    Route 113 (DexNav photo), Lv 30-32: Spinda, Scraggy, Pawniard (common); Klefki, Bouffalant,
+      Skarmory, Fletchinder (uncommon); Mienfoo, Spoink, Falinks (rare).
+  Battle items
+    Pickups (play): Pecha and Rawst berries (Route 112 north); Shiny Stone, Aggronite and
+      Glimmoranite sparkles (Rock Smash), two hidden Nuggets, Water Gem (Route 113; was an Ether).
+  Gate: the Route 112 cable car is guarded by Magma grunts until the Meteorite is taken; Fiery
+    Path's Terrain Extender and Misty Seed need Strength.
+
+====================================================================================================
+STEP 22 - cap 40 - Fallarbor, Route 114, Meteor Falls
+  Battles: E0101 Charlotte & Kai, E0102 Steve, E0104 Lenny (Route 114)
+  Pokemon
+    Route 114 (DexNav photo), Lv 31-33: Swablu, Ducklett, Lombre, Skorupi (common); Nuzleaf,
+      Zangoose, Phanpy (uncommon); Seviper (rare). Old Rod Lv 27-29: Wishiwashi, Barboach. Good Rod
+      Lv 31-33: Whiscash, Golduck, Lombre. Rock Smash: Geodude, Graveler, Probopass, Carbink.
+    Meteor Falls 1F (DexNav photo), Lv 32-34: Minior, Lunatone, Solrock, Ferroseed (common);
+      Druddigon, Clefairy, Deino (uncommon). Old Rod Lv 28-30: Barboach, Dratini. Good Rod Lv 32-34:
+      Whiscash, Buizel, Crawdaunt.
+  Battle items
+    Gifts (play): Nugget (Fallarbor Mart), Good Rod and Big Pearl (Route 114).
+    Pickups (play): hidden Nugget (Fallarbor); Protective Pads, Weakness Policy, hidden Punching
+      Glove and Revive, Persim berries (Route 114); hidden Draco Plate, Fairy Feather, Comet Shard
+      (Meteor Falls).
+  Story (play): the Meteor Falls scene (FLAG_MET_ARCHIE_METEOR_FALLS; the Ferroseed Egg opens).
+  Not yet: Route 114 Nugget and Meteor Falls Zeraorite, PP Up (Waterfall).
+
+====================================================================================================
+STEP 23 - cap 40 - Mt. Chimney, Jagged Pass, Ember Path, Route 112 west
+  Battles: E0105 Mt. Chimney grunt, E0109 Tabitha, E0110 Maxie; E0111 Jagged Pass guard, E0113
+    Autumn & Julio, E0115 Ethan
+  Played: cable car up; Maxie beaten, the Meteorite taken; Jagged Pass down; Ember Path (open, no
+  gate); Route 112's west ledges.
+  Pokemon
+    Ember Path (DexNav photo), Lv 34-36: Chandelure, Magmar, Tauros (Paldea) (common); Boldore,
+      Magcargo, Grumpig, Golbat (uncommon); Coalossal, Larvesta, Centiskorch (rare); Blacephalon,
+      Slither Wing (visitors, Lv 40). Concern: Chandelure is a common fully evolved find before
+      Flannery, who then gives Chandelurite.
+  Battle items
+    Pickups (play): Adrenaline Orb, hidden Level Ball (Jagged Pass); Clear Amulet, hidden Flame
+      Plate, hidden Magmarizer (Ember Path). Machampite sparkle (Route 112 west, Rock Smash).
+  Gate (code): the Magma Hideout entrance is a rock wall until the Magma Emblem
+    (JaggedPass_EventScript_OpenMagmaHideout). Shelby and Shirley appear after Lavaridge.
+    Ember Path's Electric Seed and Moltres need Strength.
+
+====================================================================================================
+STEP 24 - cap 40 - Lavaridge Town and the Lavaridge Gym
+  Battles: E0116 Eli & Jace, E0118 Flannery
+  Deferred: E0130 Cole & Gerald, E0131 Axle, E0132 Keegan, E0134 Danielle, E0135 Jeff (the pit
+    route to Flannery passes none of them even at sight 15)
+  Played: town, Center, Mart, Herb Shop, house; the Gym's pit puzzle solved from its live warp
+  tiles (8 hops) and Flannery beaten: Heat Badge (cap 45), Chandelurite.
+  Battle items
+    Gifts (play): Rock Gem and Flying Gem (Gym guide), Charcoal (Herb Shop), Nugget (house),
+      Wynaut Egg (offered by the egg woman).
+  Fixes on the way: the house's Nugget gift scripts were still labelled TM94.

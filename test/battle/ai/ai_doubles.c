@@ -3228,7 +3228,7 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Knock Off timing removes only the later o
     }
 }
 
-// E0071: disabling post-hit guard clearing reproduces the failed pair.
+// E0123: disabling post-hit guard clearing reproduces the failed pair.
 // These fixed stats are a generic discriminator, not a trainer loadout lock.
 AI_DOUBLE_BATTLE_TEST("EC expert pair: Feint opens partner damage through Protect but not immunity")
 {

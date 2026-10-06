@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0147 TRAINER_DANIELLE, Lavaridge Gym room 3 (Mega Blaziken), cap 36",
+  "encounter": "E0134 TRAINER_DANIELLE, Lavaridge Gym room 3 (Mega Blaziken), cap 36",
   "availability_audit": "Chronology: the Lavaridge Gym sits at the end of the cap-36 window (C22 Mt. Chimney set the cap, C23 is Flannery). Every source map precedes Lavaridge in book play order: Route 102/103/104 (C02-C05), Dewford (C10-C14), Mauville Game Corner and Route 117 (C18-C20), Altering Cave rock-smash with the C18 Rock Smash license. No Surf-gated water (Surf is C27), no Strength-gated area (Strength is granted only after Flannery), no legendary, no post-badge source. All evolution levels are at or below cap 36.",
   "plan": "Same validated rain core. Volcarona is 4x weak to Rock, so Garganacl's Rock Slide is the primary answer to the dancer lead; Kingdra's Swift Swim outruns Mega Blaziken's Speed Boost before it accumulates; Swampert is immune to Rotom-Heat's Thunderbolt and Blaziken's Thunder Punch; Primarina's Fairy typing walls Mega Blaziken's Close Combat.",
   "party": [

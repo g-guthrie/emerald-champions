@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0074 TRAINER_ELLIOT_1 (Route 106 sea-and-stream collector); play_order 32, cap 20, Medium",
+  "encounter": "E0127 TRAINER_ELLIOT_1 (Route 106 sea-and-stream collector); play_order 32, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Jolteon comes from Eevee with a Thunder Stone; Quagsire from Wooper; Kartana is a PetalburgWoods_3 land encounter; Nidoking from Nidorino with a Moon Stone; Lucario is AlteringCave_1F; Magearna is a reachable legendary sign. Ordinary items only. Assisted acquisition, not native capture acceptance. Alakazam comes from Kadabra with a Linking Cord (pool-20 gate 20).",
   "plan": "Answer the authored crack list: Electric and Grass pressure into four Water bodies, an all-special core so Will-O-Wisp has nothing worth burning, a Steel/Fairy lead that takes Choice Specs Dark Pulse at 0.25x and is outright immune to Dragon Pulse, Water Absorb in reserve, and priority-free focus fire so a Shell Smash Shellder never gets a second turn.",
   "party": [

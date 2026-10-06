@@ -1,6 +1,6 @@
 {
   "play_order": 115,
-  "e_group": "E0137",
+  "e_group": "E0115",
   "trainer": "TRAINER_ETHAN_1",
   "class": "casual",
   "location": "JaggedPass",
@@ -41,7 +41,7 @@
       "turn": 2,
       "board": "Dhelmise entering as a replacement at full HP; both of my actions were already committed to Bouffalant",
       "chosen": "MOVE_PROTECT",
-      "why_wrong": "An empty Protect on an entry turn. Not costly here, but it is the same pattern seen with Tabitha's Weezing in E0131 - Protect scoring high on a turn with no incoming threat.",
+      "why_wrong": "An empty Protect on an entry turn. Not costly here, but it is the same pattern seen with Tabitha's Weezing in E0109 - Protect scoring high on a turn with no incoming threat.",
       "better_action": "Anchor Shot or Power Whip."
     }
   ],

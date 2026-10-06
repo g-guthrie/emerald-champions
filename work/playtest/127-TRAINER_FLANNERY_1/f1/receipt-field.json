@@ -1,6 +1,6 @@
 {
   "play_order": 127,
-  "e_group": "E0150",
+  "e_group": "E0118",
   "trainer": "TRAINER_FLANNERY_1",
   "class": "leader",
   "location": "LavaridgeTown_Gym_1F",
@@ -96,7 +96,7 @@
       "check": "Flinch is not blocked by the mist (corroboration)",
       "result": "PASS",
       "mist_dependent": true,
-      "evidence": "Turn 7: Incineroar's Fake Out flinched my grounded Kingdra under the mist, and Skeledirge's Shadow Ball then killed it. Corroborates the same finding from E0144 Cole."
+      "evidence": "Turn 7: Incineroar's Fake Out flinched my grounded Kingdra under the mist, and Skeledirge's Shadow Ball then killed it. Corroborates the same finding from E0130 Cole."
     }
   ],
   "protect_ledger": [

@@ -1125,11 +1125,11 @@
       "reason": "remove the second Museum battle; retain both grunt actors/dialogue and the first ambush plus Archie. No repeated prize or extra cap."
     },
     {
-      "group": "E0130-B02",
+      "group": "E0105-B02",
       "identities": [
         "TRAINER_GRUNT_MT_CHIMNEY_2"
       ],
-      "reason": "remove this one sand/control grunt fight. E0130-B01 remains the required sun grunt. Keep the second actor's existing story position and revise its nonbattle dialogue after spatial review."
+      "reason": "remove this one sand/control grunt fight. E0105-B01 remains the required sun grunt. Keep the second actor's existing story position and revise its nonbattle dialogue after spatial review."
     },
     {
       "group": "E0266",

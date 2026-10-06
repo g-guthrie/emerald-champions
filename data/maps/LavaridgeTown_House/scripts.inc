@@ -18,30 +18,30 @@ LavaridgeTown_House_EventScript_Zigzagoon:: @ 81FF91B
 LavaridgeTown_House_EventScript_GiveNugget::
 	lock
 	faceplayer
-	goto_if_set FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE, LavaridgeTown_House_EventScript_ReceivedTM94
+	goto_if_set FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE, LavaridgeTown_House_EventScript_ReceivedNugget
 	msgbox LavaridgeTown_House_Text_OfferNugget, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq LavaridgeTown_House_EventScript_DeclineNugget
-	msgbox LavaridgeTown_House_Text_GiveTM94, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_House_Text_GiveNugget, MSGBOX_DEFAULT
 	giveitem ITEM_NUGGET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE
-	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_House_Text_HaveNugget, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_House_EventScript_ReceivedTM94::
-	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
+LavaridgeTown_House_EventScript_ReceivedNugget::
+	msgbox LavaridgeTown_House_Text_HaveNugget, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_House_Text_HaveTM94::
+LavaridgeTown_House_Text_HaveNugget::
 	.string "A Nugget sells for ¥2,500.\n"
 	.string "Choose something useful for your team!\p"
 	.string "For new techniques, see the Move\n"
 	.string "Tutor at the Pokémon Center!$"
 
-LavaridgeTown_House_Text_GiveTM94::
+LavaridgeTown_House_Text_GiveNugget::
 	.string "Heh! Then it's yours.\n"
 	.string "A ninja never takes back a gift!$"
 

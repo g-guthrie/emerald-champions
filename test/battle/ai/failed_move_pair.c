@@ -729,7 +729,7 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: Spore is not aimed where the partner's k
     }
 }
 
-// E0116 a01 turn 2: Parasect aimed Spore at the Arcanine its faster Sawsbuck
+// E0099 a01 turn 2: Parasect aimed Spore at the Arcanine its faster Sawsbuck
 // was knocking out, and the Spore fell on Entei in Safety Goggles: "But it
 // failed!". Only a High Horsepower miss leaves Arcanine there to sleep, and
 // that share is all the sleep is worth.
@@ -898,7 +898,7 @@ static void CorphishLockBoard(void)
     gLastMoves[B_BATTLER_1] = MOVE_AQUA_JET;
 }
 
-// E0074 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
+// E0127 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
 // Tsareena's Queenly Majesty, which stops priority against its whole side.
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is left")
 {
@@ -972,7 +972,7 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: redirection is useless when no foe is dr
     }
 }
 
-// E0078: Jaclyn's Wobbuffet set Safeguard, and set it again, against a party
+// E0073: Jaclyn's Wobbuffet set Safeguard, and set it again, against a party
 // with no way to inflict a status. Hard knows every foe loadout; on the other
 // modes an unseen move may still bring one.
 AI_SINGLE_BATTLE_TEST("EC failed moves: Safeguard is useless against a known party with no status to give")

@@ -1,13 +1,13 @@
 {
   "play_order": 87,
-  "e_group": "E0101",
+  "e_group": "E0142",
   "trainer": "TRAINER_GEORGIA",
   "class": "regular",
   "location": "Route110_TrickHousePuzzle2",
   "cap": 36,
   "difficulty": "medium",
   "resolved_opponent_levels": {"DUSKULL": 38, "METANG": 38, "BUTTERFREE": 35, "HATTREM": 38},
-  "cap_window_confirmation": "Dossier offsets 4/4/1/4 resolved to 38/38/35/38 against a level-36 player party: cap 36 on Medium. Same index disagreement as E0099 - battle_index.json calls this a 42-only window while the authored seeds and the driver both say 36.",
+  "cap_window_confirmation": "Dossier offsets 4/4/1/4 resolved to 38/38/35/38 against a level-36 player party: cap 36 on Medium. Same index disagreement as E0139 - battle_index.json calls this a 42-only window while the authored seeds and the driver both say 36.",
   "party_manifest": "work/playtest/87-TRAINER_GEORGIA/party.json",
   "party_pool_audit": "Block core, leading Weavile + Incineroar; Excadrill retained from the Ted rebuild. Same six-member legality audit as work/playtest/party-cap36-post-wattson.json, all gate <= 36 with pre-Route-110 source maps.",
   "pre_declared_strategy_checks": [

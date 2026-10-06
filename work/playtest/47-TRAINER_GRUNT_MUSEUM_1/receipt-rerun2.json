@@ -71,7 +71,7 @@
       "chosen": "MOVE_BRAVE_BIRD targeting Magearna",
       "problem": "Brave Bird is 0.5x into Steel/Fairy and 1x into Togekiss, so the AI picked the resisting target over the neutral one - and Brave Bird carries recoil, on a 28 HP body. It did chip damage, took recoil, and died to Air Slash on the same turn. Two strictly better options were on the sheet: U_TURN (no recoil, pivots the 28 HP body out for the healthy Carvanha) or TAUNT (shuts off my Follow Me/Protect/Tailwind, which is the disruption role Zubat is on this team to play).",
       "better_action": "MOVE_U_TURN, or MOVE_BRAVE_BIRD aimed at Togekiss if it was going to attack at all.",
-      "scope_note": "Two separate sub-issues for the AI owner: (a) recoil-move target selection preferring a resist over an available neutral target, and (b) a low-HP pivot declining U-turn. Affected-team index candidates: every team with a recoil attacker (Staravia on E0033 next door, Doduo on E0079, Quaxwell on E0052) and every U-turn/Volt Switch pivot at low HP. Not fixing AI C code from this session."
+      "scope_note": "Two separate sub-issues for the AI owner: (a) recoil-move target selection preferring a resist over an available neutral target, and (b) a low-HP pivot declining U-turn. Affected-team index candidates: every team with a recoil attacker (Staravia on E0033 next door, Doduo on E0074, Quaxwell on E0052) and every U-turn/Volt Switch pivot at low HP. Not fixing AI C code from this session."
     }
   ],
   "ai_notes": [

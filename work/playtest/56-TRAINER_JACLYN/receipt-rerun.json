@@ -1,6 +1,6 @@
 {
   "play_order": 56,
-  "e_group": "E0078",
+  "e_group": "E0073",
   "trainer": "TRAINER_JACLYN",
   "class": "regular",
   "location": "Route110",
@@ -99,7 +99,7 @@
       "reason": "Highest offset on the team at 2. Its loss this pass was a trainer pivot into two incoming attacks, not a level problem."
     }
   ],
-  "calibration": "RAISE Musharna 0 -> 1. Won on the first attempt in four turns with one player faint. The faint matters - it was a full-health 116 HP Assault Vest Magearna removed in one move by the authored trap - and under enforced Shadow Tag this encounter is far better than the void pass suggested. But it is still a four-turn clear with four of my six untouched, so brief rule 5's 'won first try with 0-1 player faints -> +1 on the weakest one or two' applies. One member only, because Wobbuffet is the member that is working and Swoobat's failure is an ordering problem. IMPORTANT for the main agent: this receipt, not receipt.json, is the benchmark of record for E0078.",
+  "calibration": "RAISE Musharna 0 -> 1. Won on the first attempt in four turns with one player faint. The faint matters - it was a full-health 116 HP Assault Vest Magearna removed in one move by the authored trap - and under enforced Shadow Tag this encounter is far better than the void pass suggested. But it is still a four-turn clear with four of my six untouched, so brief rule 5's 'won first try with 0-1 player faints -> +1 on the weakest one or two' applies. One member only, because Wobbuffet is the member that is working and Swoobat's failure is an ordering problem. IMPORTANT for the main agent: this receipt, not receipt.json, is the benchmark of record for E0073.",
   "could_this_be_cooler": "Retain, and this replay materially raises my opinion of the team. Under enforced Shadow Tag, Jaclyn's concept is one of the sharpest in my block: a wall with no attacking move that punishes the player for the damage they have to deal, next to partners the player must remove, while the player cannot rotate a damaged attacker out or bring in a resist. The trap even caught me through a redirect I could not fully control. Two honest observations, neither implemented: Swoobat is the team's most exciting idea (Simple doubles every Calm Mind stage) and it has never got a single boost in two attempts because it leads into the player's opening damage - it belongs behind the wall, not beside it; and Encore has never been selected, which is a shame, because Encore plus Shadow Tag is exactly the lock this archetype exists to produce. The first is a send-out order note for the main agent and the second is for the AI owner.",
   "legality_problems_in_authored_set": [],
   "scope": "Full replay, one attempt (three are allowed only on a loss), same party manifest as the void pass so the two are comparable. Teams-file change is the single MUSHARNA offset line, edited in place; generated projections were not regenerated or committed by this session. Synthetic headless benchmark, not earned campaign play."

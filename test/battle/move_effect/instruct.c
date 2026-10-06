@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-// E0148: Eli's Oranguru Instructed its partner, and on the next turn its own
+// E0116: Eli's Oranguru Instructed its partner, and on the next turn its own
 // Psychic printed its name and did nothing at all.
 DOUBLE_BATTLE_TEST("The Instruct user's own move the next turn resolves normally")
 {

@@ -1,13 +1,13 @@
 {
   "play_order": 86,
-  "e_group": "E0099",
+  "e_group": "E0139",
   "trainer": "TRAINER_TED",
   "class": "regular",
   "location": "Route110_TrickHousePuzzle2",
   "cap": 36,
   "difficulty": "medium",
   "resolved_opponent_levels": {"GARDEVOIR": 35, "KLEFKI": 35, "PERSIAN_ALOLA": 35, "COPPERAJAH": 34},
-  "cap_window_confirmation": "Dossier offsets 1/1/1/0 resolved to 35/35/35/34 against a level-36 player party, which is cap 36 on Medium (cap+offset-2). NOTE: work/playtest/battle_index.json gives E0099 a cap window of 42-42, but the authored seeds are written for cap 36 ('Medium cap34 levels 35/35/35/34') and the driver accepted cap 36 and produced exactly those levels. Played at 36 as briefed; the index window and the authored seed disagree for this entry and E0101.",
+  "cap_window_confirmation": "Dossier offsets 1/1/1/0 resolved to 35/35/35/34 against a level-36 player party, which is cap 36 on Medium (cap+offset-2). NOTE: work/playtest/battle_index.json gives E0139 a cap window of 42-42, but the authored seeds are written for cap 36 ('Medium cap34 levels 35/35/35/34') and the driver accepted cap 36 and produced exactly those levels. Played at 36 as briefed; the index window and the authored seed disagree for this entry and E0142.",
   "party_manifest": "work/playtest/86-TRAINER_TED/party.json",
   "party_pool_audit": "Same block core with Alakazam swapped for Excadrill (Drilbur, Rusturf Tunnel land, pool gate 20; evolution gate 36). Reason: three of Ted's four members carry Dark damage - two Foul Plays plus Persian's STAB - so a Psychic-type is dead weight, while Excadrill's Steel typing resists both Fairy attackers and Ground is 2x into Klefki and Copperajah. All six remain gate <= 36 with source maps passed before Route 110.",
   "pre_declared_strategy_checks": [

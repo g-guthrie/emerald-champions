@@ -1,6 +1,6 @@
 {
   "play_order": 122,
-  "e_group": "E0146",
+  "e_group": "E0132",
   "trainer": "TRAINER_KEEGAN",
   "class": "gym",
   "location": "LavaridgeTown_Gym_1F",
@@ -123,7 +123,7 @@
       "chosen": "Hitmontop selected Close Combat into Kingdra.",
       "better": "Ice Spinner. Turn 1 is the authored trigger: the seed had already banked its Sp.Def, Flareon was sitting beside it with a dead Toxic Orb, and Ice Spinner is the single move on the whole team that turns Flareon's Guts on. Removing the terrain would also have restored Typhlosion's Burning Jealousy burn and Magmortar's Flame Body against my four grounded bodies.",
       "assessment": "Close Combat is not illegal or absurd - it is 120 BP versus Ice Spinner's 80, and both are 1x into Kingdra, so on raw damage Close Combat wins. The gap is that the scorer appears to place no value on Ice Spinner's terrain removal as an enabler for an ally's ability and item. Hitmontop did eventually select Ice Spinner on turn 4, so the move is reachable in scoring; it simply loses to a bigger damage number for three turns running, by which point it was at 63 HP and died before the move resolved. Net effect: the room's authored payoff never came online in a nine-turn battle.",
-      "relation_to_axle": "This is the same shape as AXLE-1 in E0145, where Magcargo never selected Lava Plume despite four explicit ACTIVATE tactic lines naming its allies. Both are cases of an ally-enabling move losing to raw damage scoring. Worth tracing as one issue rather than two. I did not touch AI C code."
+      "relation_to_axle": "This is the same shape as AXLE-1 in E0131, where Magcargo never selected Lava Plume despite four explicit ACTIVATE tactic lines naming its allies. Both are cases of an ally-enabling move losing to raw damage scoring. Worth tracing as one issue rather than two. I did not touch AI C code."
     }
   ],
   "ai_notes": [

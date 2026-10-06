@@ -1,6 +1,6 @@
 {
   "play_order": 125,
-  "e_group": "E0148",
+  "e_group": "E0116",
   "trainer": "TRAINER_JACE",
   "class": "gym",
   "location": "LavaridgeTown_Gym_1F",
@@ -50,7 +50,7 @@
       "check": "plan: 'Drifblim can receive its own Flame Orb burn while airborne even under Misty Terrain'",
       "result": "PASS - and this is the exact complement to Keegan's blocked Toxic Orb",
       "mist_dependent": true,
-      "evidence": "End of turn 1, with the terrain still reading 'misty': 'The opposing Drifblim was burned!' and the turn-1 state shows status ['STATUS1_BURN'] on Drifblim with its Flame Orb consumed. Drifblim is Ghost/Flying and therefore ungrounded, so the mist did not protect it and Flare Boost came online. Put beside E0146, where grounded Flareon's Toxic Orb was blocked for seven straight turns, this is a clean two-sided demonstration that the engine is applying the mist by grounding rather than blanket-blocking status."
+      "evidence": "End of turn 1, with the terrain still reading 'misty': 'The opposing Drifblim was burned!' and the turn-1 state shows status ['STATUS1_BURN'] on Drifblim with its Flame Orb consumed. Drifblim is Ghost/Flying and therefore ungrounded, so the mist did not protect it and Flare Boost came online. Put beside E0132, where grounded Flareon's Toxic Orb was blocked for seven straight turns, this is a clean two-sided demonstration that the engine is applying the mist by grounding rather than blanket-blocking status."
     },
     {
       "check": "plan: 'it can use Defog when clearing the terrain makes the team's status attacks worthwhile'",

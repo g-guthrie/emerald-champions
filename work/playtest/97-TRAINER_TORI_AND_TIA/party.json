@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0113 TRAINER_TORI_AND_TIA (Route 113, cap 36 window)",
+  "encounter": "E0094 TRAINER_TORI_AND_TIA (Route 113, cap 36 window)",
   "availability_audit": "Chronology anchor: Route 113 is reached after Mauville/Wattson (cap 30) via Route 111 -> Route 112 -> Fiery Path, per Game Book C20/C21. Every member below is in work/reference-pools/pool-36.json with gate <= 36 and a source_detail map the player has already passed on the way to Route 113: Seaspray Cave B1F (Sneasel), Rusturf Tunnel (Drilbur), Petalburg City Old Rod (Magikarp), Route 102 (Togepi), Mauville Game Corner (Litten), Granite Cave 1F (Abra). No Route 118+, Mt. Pyre, desert-interior or post-Flannery sources are used. Mega Ring earned from Steven after Brawly (C13); Gyaradosite stone window 20.",
   "plan": "Tori & Tia are two Dancer Oricorio whose Revelation Dance copies can produce up to four attacks a turn. The dossier crack names Ground/Normal immunity to the relevant Revelation Dance type, removing a bird, and special mitigation. Excadrill is immune to Pom-Pom's Electric Revelation Dance and threatens both birds with Rock Slide; Weavile's Triple Axel is 2x into both birds and Ice Shard is priority that beats a Tailwind turn. Gyarados-Mega Ice Fang and Togekiss Follow Me cover the Ribombee/Frosmoth back half; Incineroar Fake Out denies the first Tailwind or dance.",
   "party": [

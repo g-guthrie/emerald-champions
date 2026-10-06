@@ -33,7 +33,7 @@ AI_DOUBLE_BATTLE_TEST("EC Mega reveal: shows the form against guarding foes with
     }
 }
 
-// Nicolas E0128 turn 4, and Michelle E0484 turn 1 in the same shape across
+// Nicolas E0146 turn 4, and Michelle E0484 turn 1 in the same shape across
 // three builds: the holder spent its turn on a status move and kept its stone.
 // Altaria is the expensive case, because base form is Dragon/Flying and takes
 // Ice at four times while Mega Altaria is Dragon/Fairy and takes it at two, so

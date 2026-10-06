@@ -1,6 +1,6 @@
 {
   "play_order": 120,
-  "e_group": "E0144",
+  "e_group": "E0130",
   "trainer": "TRAINER_GERALD",
   "class": "gym",
   "location": "LavaridgeTown_Gym_1F",
@@ -21,7 +21,7 @@
     {"check": "Heat Rock extends the sun to eight turns", "result": "PASS", "evidence": "Sun persisted from turn 1 to the end of every attempt; in attempt 3 it was still up on turn 7 after Volbeat had been dead for three turns."},
     {"check": "Chlorophyll doubles Victreebel's and Scovillain's Speed in sun", "result": "PASS", "evidence": "Victreebel moved before a Timid 252-Speed L36 Alakazam and before Mega Blastoise; Scovillain outran Mega Blastoise and Mamoswine. Both are base 70 and both were acting first against a party built around speed."},
     {"check": "Solar Beam is a one-turn move in sun", "result": "PASS", "evidence": "'The opposing Victreebel absorbed light!' with the beam resolving the same turn, in attempts 1 and 2. It one-shot a full-HP Mega Blastoise (136 HP) and a full-HP Mamoswine (136 HP)."},
-    {"check": "Volbeat's Helping Hand converts into partner damage", "result": "PASS", "evidence": "Attempt 2 turn 2 and attempt 3 turn 2: the boosted Sludge Bomb removed a full-HP 141 HP Togekiss. Correctly aimed at the partner that was about to attack, unlike Shuckle's wasted Helping Hand in E0138."},
+    {"check": "Volbeat's Helping Hand converts into partner damage", "result": "PASS", "evidence": "Attempt 2 turn 2 and attempt 3 turn 2: the boosted Sludge Bomb removed a full-HP 141 HP Togekiss. Correctly aimed at the partner that was about to attack, unlike Shuckle's wasted Helping Hand in E0148."},
     {"check": "Mega Charizard X evolves and holds Tough Claws", "result": "PASS", "evidence": "Attempt 1 turn 5: 'The opposing Charizard has Mega Evolved into Mega Charizard X'; state confirms CHARIZARD_MEGA_X with TOUGH_CLAWS. It used Protect, Roost and Flare Blitz."},
     {"check": "Mega Charizard X uses Thunder Punch (the dossier's specific anti-Misty-Terrain choice)", "result": "FAIL", "evidence": "Across three attempts Charizard used Protect, Roost and Flare Blitz and never selected Thunder Punch. The move is on the set specifically because the dossier expects Misty Terrain to halve its other coverage - and no terrain was present (see below), so the reason for the choice did not exist on the board either."},
     {"check": "Victreebel uses Weather Ball, which becomes Fire in sun", "result": "FAIL", "evidence": "Victreebel had eight decision points across the three attempts and chose only Solar Beam, Sludge Bomb and Protect. Weather Ball - the move the dossier explicitly added ('Victreebel gains Weather Ball') - was never selected once. In fairness its other two moves were hitting for 2x every time, so this is the scorer preferring a correct option rather than a blunder."},

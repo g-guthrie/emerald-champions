@@ -1190,7 +1190,7 @@ AI_DOUBLE_BATTLE_TEST("EC authored strategy: Eli's Oranguru instructs the Ferrot
     }
 }
 
-// E0131 (persona med-b3) turn 1: a foe's Liquidation had already set off
+// E0109 (persona med-b3) turn 1: a foe's Liquidation had already set off
 // Coalossal's Steam Engine, +6 Speed, and Salandit still spent its turn on the
 // authored Ember into it - nothing left to gain, and chip on its own partner.
 EWRAM_DATA static u8 sTabithaCoalossalSpeed = 0;

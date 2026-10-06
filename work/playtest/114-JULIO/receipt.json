@@ -1,6 +1,6 @@
 {
   "play_order": 114,
-  "e_group": "E0136",
+  "e_group": "E0113",
   "trainer": "TRAINER_JULIO",
   "class": "regular",
   "location": "JaggedPass",
@@ -28,7 +28,7 @@
       "turns": "1, 2, 3",
       "board": "Cyclizar L34 leading at full HP with Shed Tail available and two Choice-item attackers waiting in the back",
       "chosen": "Dragon Claw, then Knock Off, then Knock Off.",
-      "why_wrong": "Same shape as the Thievul defect in E0134: the scorer weighs immediate damage and never values the setup move that the set exists to use. Shed Tail is the reason this Pokemon is on the team - it costs half its HP to give a Choice Specs Haunter a free turn, and Regenerator is on the set specifically to pay that cost back. Turn 1 with both Choice users healthy in the back is exactly the turn to use it. Instead the substitute never existed and both Choice attackers had to come in raw off a faint.",
+      "why_wrong": "Same shape as the Thievul defect in E0111: the scorer weighs immediate damage and never values the setup move that the set exists to use. Shed Tail is the reason this Pokemon is on the team - it costs half its HP to give a Choice Specs Haunter a free turn, and Regenerator is on the set specifically to pay that cost back. Turn 1 with both Choice users healthy in the back is exactly the turn to use it. Instead the substitute never existed and both Choice attackers had to come in raw off a faint.",
       "better_action": "Shed Tail on turn 1, bringing Haunter or Dodrio in behind the substitute, then let Regenerator refund the HP when Cyclizar returns."
     }
   ],

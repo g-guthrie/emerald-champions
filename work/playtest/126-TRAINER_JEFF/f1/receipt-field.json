@@ -1,6 +1,6 @@
 {
   "play_order": 126,
-  "e_group": "E0149",
+  "e_group": "E0135",
   "trainer": "TRAINER_JEFF",
   "class": "gym",
   "location": "LavaridgeTown_Gym_1F",
@@ -51,7 +51,7 @@
       "check": "plan: 'A terrain seed can activate on a Flying Pokemon'",
       "result": "PASS",
       "mist_dependent": true,
-      "evidence": "Turn-0 state, before any action: Hawlucha's item read NONE (Misty Seed consumed), its stat stages read spd +1, and its ability read UNBURDEN. Hawlucha is Fighting/Flying, so this is the third distinct grounding case the block now has on record: grounded Flareon's Toxic Orb blocked (E0146), ungrounded Drifblim's Flame Orb allowed (E0148 Jace), and here an ungrounded Pokemon still receiving a terrain SEED. Seeds key off the terrain being present, not off the holder being grounded, and the engine is doing that correctly."
+      "evidence": "Turn-0 state, before any action: Hawlucha's item read NONE (Misty Seed consumed), its stat stages read spd +1, and its ability read UNBURDEN. Hawlucha is Fighting/Flying, so this is the third distinct grounding case the block now has on record: grounded Flareon's Toxic Orb blocked (E0132), ungrounded Drifblim's Flame Orb allowed (E0116 Jace), and here an ungrounded Pokemon still receiving a terrain SEED. Seeds key off the terrain being present, not off the holder being grounded, and the engine is doing that correctly."
     },
     {
       "check": "plan: 'the consumed seed ... enables Unburden'",

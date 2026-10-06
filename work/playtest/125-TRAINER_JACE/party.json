@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0148 TRAINER_JACE, Lavaridge Gym room 5 (fire/ghost field controller), cap 36",
+  "encounter": "E0116 TRAINER_JACE, Lavaridge Gym room 5 (fire/ghost field controller), cap 36",
   "availability_audit": "Chronology: the Lavaridge Gym sits at the end of the cap-36 window (C22 Mt. Chimney set the cap, C23 is Flannery). Every source map precedes Lavaridge in book play order: Route 102/103/104 (C02-C05), Dewford (C10-C14), Mauville Game Corner and Route 117 (C18-C20), Altering Cave rock-smash with the C18 Rock Smash license. No Surf-gated water (Surf is C27), no Strength-gated area (Strength is granted only after Flannery), no legendary, no post-badge source. All evolution levels are at or below cap 36.",
   "plan": "Same validated rain core. Garganacl is the key piece here: Purifying Salt makes it immune to Salazzle's Corrosion Toxic and to Will-O-Wisp, and halves incoming Ghost damage from Alolan Marowak's Shadow Bone and Hisuian Typhlosion's Infernal Parade. Primarina resists Dark and Fighting; Kingdra's rain Hydro Pump answers the Fire core; Rock Slide is 2x on five of the six.",
   "party": [

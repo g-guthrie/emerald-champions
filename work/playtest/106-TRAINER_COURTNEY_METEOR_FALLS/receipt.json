@@ -1,6 +1,6 @@
 {
   "play_order": 106,
-  "e_group": "E0127",
+  "e_group": "E0145",
   "trainer": "TRAINER_COURTNEY_METEOR_FALLS + TRAINER_GRUNT_METEOR_FALLS (one two-owner battle, twelve opponents)",
   "class": "admin",
   "location": "MeteorFalls_1F_1R",
@@ -38,7 +38,7 @@
     {"turn": "a3 T12/T14/T15", "battler": "MINIOR", "payoff": "real - blocked Dazzling Gleam and Focus Blast on separate turns while below half HP"},
     {"turn": "a3 T16", "battler": "AERODACTYL_MEGA", "payoff": "real - Mega Evolved and Protected on the same turn, blocking Flash Cannon (2x) and Dazzling Gleam, which is the correct way to spend a Mega's entry turn against a committed pair"}
   ],
-  "protect_note": "Thirteen Protects across three attempts and only one was empty (a2 T2 Camerupt). No consecutive-Protect failures anywhere in this battle, in contrast to the Alolan Graveler case at E0123. Guarding cadence here is genuinely good.",
+  "protect_note": "Thirteen Protects across three attempts and only one was empty (a2 T2 Camerupt). No consecutive-Protect failures anywhere in this battle, in contrast to the Alolan Graveler case at E0102. Guarding cadence here is genuinely good.",
   "ai_defects": [],
   "ai_observations": [
     {"turn": "a3 T1", "note": "The grunt withdrew Solrock on turn one - before it had used Will-O-Wisp - and sent Hippowdon for sand. Will-O-Wisp on Solrock was precisely what beat me in attempt 1, so trading it away on turn one for weather that then chipped its own Psychic-type partner was the softest opening of the three attempts. Not a defect: switching into a Follow Me turn to deny value is defensible, and sand is a real asset. Recorded because the difference between my two losses and my win correlates exactly with whether Solrock stayed in to burn something."},

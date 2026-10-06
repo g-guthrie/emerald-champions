@@ -1,6 +1,6 @@
 {
   "play_order": 118,
-  "e_group": "E0142",
+  "e_group": "E0150",
   "trainer": "TRAINER_SHIRLEY",
   "class": "regular",
   "location": "MtChimney",
@@ -33,7 +33,7 @@
       "turn": 1,
       "board": "Alcremie L36 at full HP leading beside a full-HP Sylveon, against Excadrill and Mamoswine - the exact opening the dossier designs for",
       "chosen": "MOVE_DAZZLING_GLEAM (spread Fairy, into a Steel-type and a neutral target)",
-      "why_wrong": "Decorate is the reason Alcremie is on this team and the reason Sylveon's spread is scary. Alcremie is faster than Sylveon precisely so the boost lands first. Instead it chose a spread attack that is resisted by one of my two targets, it died the same turn, and Sylveon was left as an ordinary L35 attacker. This is the third instance in the block of the same pattern (see Thievul in E0134 and Cyclizar in E0136): a support/setup move that defines the set loses to an immediate-damage option in scoring.",
+      "why_wrong": "Decorate is the reason Alcremie is on this team and the reason Sylveon's spread is scary. Alcremie is faster than Sylveon precisely so the boost lands first. Instead it chose a spread attack that is resisted by one of my two targets, it died the same turn, and Sylveon was left as an ordinary L35 attacker. This is the third instance in the block of the same pattern (see Thievul in E0111 and Cyclizar in E0113): a support/setup move that defines the set loses to an immediate-damage option in scoring.",
       "better_action": "Decorate on Sylveon on turn 1."
     },
     {

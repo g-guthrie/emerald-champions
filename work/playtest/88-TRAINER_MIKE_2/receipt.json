@@ -1,6 +1,6 @@
 {
   "play_order": 88,
-  "e_group": "E0102",
+  "e_group": "E0071",
   "trainer": "TRAINER_MIKE_2",
   "class": "regular",
   "location": "RusturfTunnel",
@@ -35,7 +35,7 @@
   "protect_ledger_note": "No opposing Protect was possible: none of Gigalith, Graveler, Primeape or Donphan carries it. The only Protect in the fight was mine, on T2, and it blocked a Close Combat and a Body Press aimed at a 56 HP Mega.",
   "ai_defects": [],
   "ai_notes": [
-    "Gigalith's turn-1 Iron Defense is the weakest opponent decision in my block so far. The board was a visible Grass type and a visible Water type, both physical, both 2x into a Rock/Ground with no Protect and no partner redirection. Doubling Defense does not survive two super-effective hits, and Gigalith had Stone Edge and Stomping Tantrum available. The authored profile is 'ai: Conservative', and if the Conservative profile biases toward defensive setup on turn 1 this is the kind of board where that bias costs the whole Pokemon. Worth a look next to the E0105 Brice Conservative team, which is the other Conservative profile in this block.",
+    "Gigalith's turn-1 Iron Defense is the weakest opponent decision in my block so far. The board was a visible Grass type and a visible Water type, both physical, both 2x into a Rock/Ground with no Protect and no partner redirection. Doubling Defense does not survive two super-effective hits, and Gigalith had Stone Edge and Stomping Tantrum available. The authored profile is 'ai: Conservative', and if the Conservative profile biases toward defensive setup on turn 1 this is the kind of board where that bias costs the whole Pokemon. Worth a look next to the E0089 Brice Conservative team, which is the other Conservative profile in this block.",
     "Graveler declining Wide Guard for three turns against an entirely single-target board is a genuinely good negative result and deserves to be recorded as such. The move is in the set, the flag is on the team, and the AI still correctly valued it at zero.",
     "Primeape's Defiant shaped my entire play without ever activating. I could not bring Incineroar or Gyarados in on a switch while it was on the field, which cost me my normal pivot. That is an unusually elegant piece of team construction for an ordinary route Hiker."
   ],

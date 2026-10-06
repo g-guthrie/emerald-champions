@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0146 TRAINER_KEEGAN, Lavaridge Gym room 2, cap 36",
+  "encounter": "E0132 TRAINER_KEEGAN, Lavaridge Gym room 2, cap 36",
   "availability_audit": "Chronology: Lavaridge Gym sits at the end of the cap-36 window (C22 Mt. Chimney raised the cap; C23 is Flannery). Every member's source map precedes Lavaridge Town in book play order: Route 103 (C02), Petalburg City ponds and Route 102/104 (C02-C05), Granite Cave and Altering Cave rock smash (C12 + Rock Smash license from C18 Mauville), Mauville Game Corner (C18). No Surf-gated water (C27), no Strength-gated area (granted only after Flannery), no legendary, no post-badge source. All evolution levels are at or below cap 36.",
   "plan": "Same rain core. Against Guts Flareon and Choice Band Emboar, Gyarados's Intimidate and Garganacl's Purifying Salt (burn immunity) carry the physical side; Pelipper's rain halves every Fire attack; Togekiss redirects the single-target Fighting and Electric coverage away from Gyarados.",
   "party": [
