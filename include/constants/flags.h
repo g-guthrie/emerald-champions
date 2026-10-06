@@ -1929,7 +1929,7 @@
 #define FLAG_ITEM_PETALBURG_WOODS_NUGGET                        0x45D // shares 0x45D with FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL -- same Petalburg Woods item ball; donor name has a typo (PETALBURD)
 #define FLAG_ITEM_ROUTE_115_GREAT_BALL                                 0x45E // shares 0x45E with FLAG_ITEM_ROUTE_115_PYROARITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_ABSOLITE                           0x45F // shares 0x45F with FLAG_ITEM_SAFARI_ZONE_NORTH_OVAL_STONE (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_118_HYPER_POTION                               0x461 // shares 0x461 with FLAG_ITEM_ROUTE_118_SCIZORITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_118_FIGHTING_GEM                               0x461 // shares 0x461 with FLAG_ITEM_ROUTE_118_SCIZORITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_NEW_MAUVILLE_INSIDE_RAICHUNITE_Y                               0x462 // shares 0x462 with FLAG_ITEM_NEW_MAUVILLE_ROTOM_CATALOG -- same New Mauville item ball, different item
 #define FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER                             0x463 // shares 0x463 with FLAG_ITEM_NEW_MAUVILLE_UPGRADE -- same New Mauville item ball, different item
 #define FLAG_ITEM_SLATEPORT_CITY_LIGHT_CLAY                             0x465 // shares 0x465 with FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL (dead: its map.json was overwritten)

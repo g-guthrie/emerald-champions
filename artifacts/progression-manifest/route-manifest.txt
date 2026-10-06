@@ -16,9 +16,11 @@ Rules
   Balls). Friendship still builds by walking, and the Center tutor's Bonding opens with the same
   Badge, so a raised Budew or Pichu evolves on its first level-up after it.
   EVs: none, player or trainer, before the Knuckle Badge (src/caps.c AreEVsUnlocked).
-  Wild Pokemon: the in-game DexNav (Start menu) photographed on every area, checked against
-  src/data/wild_encounters.json. It lists only slots that can start a battle now (no Surf table
-  without Surf, no Honey table without Honey).
+  Wild Pokemon: the in-game DexNav (Start menu) photographed on every area (work/studio/dexnav).
+  The DexNav shows the map's tables for the tools held (Surf, rods, Rock Smash, Cut, Honey;
+  src/wild_roster.c), not whether that terrain is reachable: its grass table shows even where
+  no grass can be walked to. Reachable terrain comes from the walk itself (the tiles the
+  explorer reaches, and the mosaic photos).
   Old Rod: from Mom after the Pokedex (VAR_LITTLEROOT_TOWN_STATE 3); fishing slots 0-1
   (src/wild_encounter.c:342). Surf tables wait for Surf.
   Shops: every Poke Mart at 0 badges sells Mental Herb, Red Card, Cell Battery
@@ -50,10 +52,10 @@ STEP 1 - cap 14 - Rival May / Brendan, Route 103 (all six starter variants)
   Pokemon
     Starters (Littleroot): the chosen region's pair; the rival keeps the third (play: Hoenn,
       Mudkip + Treecko).
-    Route 101 grass (DexNav = code), Lv 2-3: Wurmple, Zigzagoon, Poochyena (common); Pawmi,
-      Lillipup, Zorua (uncommon); Scatterbug (Icy Snow), Fidough, Hoppip (rare)
-    Route 103 grass (DexNav = code), Lv 2-4: Wingull, Shellos (West) (common); Toxel, Blitzle,
-      Grubbin, Shinx (uncommon); Rockruff, Snubbull, Kricketot (rare)
+    Route 101 grass (DexNav photo), Lv 4-6: Wurmple, Zigzagoon, Poochyena (common); Pawmi,
+      Lillipup, Zorua (uncommon); Scatterbug, Fidough, Hoppip (rare)
+    Route 103 grass (DexNav photo), Lv 5-7: Wingull, Shellos (West), Toxel (common); Blitzle,
+      Grubbin (uncommon); Rockruff, Shinx, Snubbull, Kricketot (rare)
     Evolutions by 14 (species data): Wurmple -> Silcoon / Cascoon (7) -> Beautifly / Dustox (10);
       Scatterbug -> Spewpa (9) -> Vivillon (12); Kricketot -> Kricketune (10). Nothing else here
       evolves by 14 (next: Shinx 15, starters 16).
@@ -82,7 +84,7 @@ STEP 2 - cap 14 - Route 102 trainers (Calvin, Rick, Allen, Tiana)
   Battles: E0002 Calvin, E0003 Rick, E0004 Allen, E0005 Tiana
   VERIFIED IN PLAY: all four beaten (post-battle lines in the Route 102 sweep).
   Adds, after the rival: Pokedex, 30 Cherish Balls (lab, pt07 Bag), Old Rod (Mom, pt06 Bag).
-  Old Rod on Route 103 (DexNav = code): Magikarp, Remoraid, Lv 5-10 (common). Route 101 has no water.
+  Old Rod on Route 103 (DexNav photo), Lv 2-4: Remoraid, Magikarp. Route 101 has no water.
   Wild held: unchanged from Step 1 (Magikarp and Remoraid hold nothing).
   (Route 102's own grass, fishing and berry trees do not count for Route 102's trainers.)
 
@@ -94,9 +96,9 @@ STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
   Petalburg.
   Adds Route 102 and Petalburg City.
   Pokemon
-    Route 102 grass (DexNav = code), Lv 3-4: Lotad, Seedot, Happiny, Bidoof (common); Tympole,
-      Gothita, Toedscool (uncommon); Lechonk, Surskit, Nymble, Meowth, Ralts (rare)
-    Old Rod (DexNav = code), Lv 5-10: Route 102 Goldeen, Corphish; Petalburg Magikarp, Marill
+    Route 102 grass (DexNav photo), Lv 6-8: Lotad, Seedot, Happiny (common); Bidoof, Tympole,
+      Lechonk, Gothita (uncommon); Toedscool, Surskit, Nymble, Meowth, Ralts (rare)
+    Old Rod (DexNav photo): Route 102 Goldeen, Corphish, Lv 2-4; Petalburg Magikarp, Marill, Lv 3-5
     Honey (counts: owner decision; Honey is gettable before the first Badge from a wild Surskit's
       rare hold, and Center marts sell it from the Stone Badge; Honey needs a land-encounter tile;
       tables from code, the DexNav shows them only with Honey in the Bag):
@@ -121,9 +123,9 @@ STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James, Aqua Grunt)
   VERIFIED IN PLAY: Route 104 south swept (from Petalburg, up to the Woods); DexNav on Route 104.
   Adds Route 104 south (below the Woods; Mr. Briney's cottage is empty at this point).
   Pokemon
-    Route 104 grass (DexNav = code), Lv 5-7: Azurill, Taillow, Budew (common); Sandygast, Sentret,
-      Litleo (uncommon); Smoliv, Fletchling, Bunnelby, Ledyba, Flabebe (White), Charcadet (rare)
-    Old Rod (DexNav = code), Lv 5-10: Magikarp, Skrelp
+    Route 104 grass (DexNav photo), Lv 7-9: Azurill, Taillow, Budew (common); Sandygast, Sentret
+      (uncommon); Smoliv, Litleo, Fletchling, Bunnelby, Ledyba, Flabebe, Charcadet (rare)
+    Old Rod (DexNav photo), Lv 3-5: Skrelp, Magikarp
     Honey (code), Lv 5-7: Cutiefly, Yungoos, Patrat
     Evolutions by 14 (species data): none new (Sentret 15, Fletchling 17). Budew -> Roselia and
       Azurill -> Marill are friendship evolutions: they wait for the Stone Badge.
@@ -143,7 +145,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
   researcher's gift received), the Woods' east-door pocket of Route 104; DexNav in the Woods.
   Adds Petalburg Woods without Cut (south entrance to north exit) and Route 104's east-door pocket.
   Pokemon
-    Woods grass (DexNav = code; now Lv 8-10 by scripts/assign_wild_levels.py): Blipbug, Slakoth
+    Woods grass (DexNav photo), Lv 8-10: Blipbug, Slakoth
       (common); Shroomish, Paras, Tyrogue (uncommon); Caterpie, Pichu, Foongus, Larvesta, Cascoon,
       Silcoon (rare). Tyrogue took Togepi's slot (owner: Togepi is the Day Care's Egg).
     Woods honey (code): Combee 6, Pikachu 6, Pidgey 7-8, Cherubi 7, Pikipek 8
@@ -172,9 +174,10 @@ STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Rustboro, open before Route 116).
   Pokemon
     Route 115: no tall grass south of the ledge (so no grass or Honey yet); Old Rod from the beach
-      (DexNav = code), Lv 5-10: Wishiwashi, Wailmer
-    Seaspray Cave 1F (DexNav = code), Lv 10-12: Psyduck, Wooper, Zubat, Tynamo (common); Stunfisk
-      (Galar) (uncommon); Old Rod Lv 5-10: Wishiwashi, Krabby. Rock Smash slots wait for Rock Smash.
+      (DexNav photo), Lv 7-9: Wailmer, Wishiwashi. Grass: 0 reachable tiles south of the ledge
+      (the DexNav shows the map's grass table anyway).
+    Seaspray Cave 1F (DexNav photo), Lv 11-13: Psyduck, Wooper, Zubat, Tynamo (common); Stunfisk
+      (Galar) (uncommon); Old Rod Lv 7-9: Wishiwashi, Krabby. Rock Smash slots wait for Rock Smash.
     Trade (code): Zigzagoon for a perfect-IV Fidough (RustboroCity_House1)
     Evolutions by 14: none new.
   Battle items
@@ -198,10 +201,10 @@ STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
   VERIFIED IN PLAY: Route 116 west and Rusturf Tunnel west swept; all four Gym battles won.
   Everything reachable before the Stone Badge: adds Route 116 west and Rusturf Tunnel west.
   Pokemon
-    Route 116 grass (DexNav = code), Lv 8-10: Starly, Skiddo, Nincada (common); Mareep, Joltik,
+    Route 116 grass (DexNav photo), Lv 10-12: Starly, Skiddo, Nincada (common); Mareep, Joltik,
       Rookidee (uncommon); Skitty, Nickit, Houndour, Dreepy (rare)
     Route 116 honey (code): Teddiursa 8, Pancham 8-9, Purrloin 9-10
-    Rusturf Tunnel (DexNav = code), Lv 8-10: Whismur, Noibat, Roggenrola (common); Teddiursa,
+    Rusturf Tunnel (DexNav photo), Lv 11-13: Whismur, Noibat, Roggenrola (common); Teddiursa,
       Dunsparce, Drilbur, Larvitar (uncommon); Machop (rare)
     Evolutions by 14 (species data): Starly -> Staravia (14).
   Battle items
@@ -227,13 +230,14 @@ STEP 8 - cap 20 - Route 116 north trainers (Dawson, Sarah, Janice, Jerry)
   Bonding and friendship evolutions open), the Cut-tree habitat, Petalburg Woods behind Cut, Woods 2
   and 3 (side trips open before Route 116 north), Route 104's Shell Bell.
   Pokemon
-    Cut trees, every tree (DexNav = code, src/wild_encounter.c sCutTreeHabitat), Lv 12-16: Skwovet,
+    Cut trees, every tree (DexNav photo, Woods 2-3), Lv 8-10 (the area's grass band): Skwovet,
       Pineco, Aipom (common); Burmy (uncommon); Applin, Phantump (rare); one tree in three
-    Woods 2 grass (DexNav = code), Lv 12-14: Kakuna, Metapod, Venipede (common); Panpour, Pansear,
-      Pansage (uncommon); Weedle, Morelull, Bounsweet (rare). Honey (code): Combee 12, Beedrill
+    Woods 2 grass (DexNav photo), Lv 8-10: Kakuna, Metapod, Venipede (common); Panpour, Pansear,
+      Weedle, Pansage (uncommon); Morelull, Bounsweet (rare). LEVEL ERROR: Woods 2-3 open with
+      Cut (cap 20) but share the cap-14 Woods band (scripts/assign_wild_levels.py prefix match). Honey (code): Combee 12, Beedrill
       12-13, Butterfree 13-14
-    Woods 3 grass (DexNav = code), Lv 13-15: Oddish, Bellsprout, Dewpider (common); Croagunk, Yanma,
-      Murkrow (uncommon); Emolga, Misdreavus, Impidimp (rare). Old Rod Lv 8-11: Slowpoke, Poliwag.
+    Woods 3 grass (DexNav photo), Lv 8-10: Oddish, Bellsprout, Dewpider (common); Croagunk, Yanma,
+      Murkrow (uncommon); Emolga, Misdreavus, Impidimp (rare). Old Rod Lv 4-6: Slowpoke, Poliwag.
       Honey (code): Cutiefly 13, Emolga 13-15, Goomy 15
     Not live: the Woods 2-3 legendary slots (Virizion, Wo-Chien, Celebi, Zarude, Kartana: not on the
       DexNav).
@@ -289,14 +293,12 @@ STEP 11 - cap 20 - Route 106 trainer (Ned)
   Dewford Meadow and Manor swept; Ned beaten on Route 106; DexNav in each.
   Adds Dewford Town and its side areas (Dewford Meadow, Dewford Manor).
   Pokemon
-    Dewford Old Rod (DexNav = code), Lv 8-11: Magikarp, Mantyke
-    Dewford Meadow grass (code, Lv 13-16; retuned from 41-43, which met at a flat cap 20): Cutiefly,
-      Flabebe, Oricorio (Baile), Butterfree (common); Flabebe (other colours) (uncommon); Combee,
-      Milcery (rare). Honey (code, Lv 14-16): Combee, Swirlix, Spritzee. Meloetta (4 badges + the Warden's
+    Dewford Old Rod (DexNav photo), Lv 8-10: Magikarp, Mantyke
+    Dewford Meadow grass (DexNav photo), Lv 12-14: Cutiefly, Flabebe, Oricorio (Baile), Butterfree
+      (common); Flabebe (other colours) (uncommon); Combee, Milcery (rare). Honey (code, Lv 14-16): Combee, Swirlix, Spritzee. Meloetta (4 badges + the Warden's
       Sing quest) and Pheromosa (Groudon awake) are gated 5% slots, met at the cap.
-    Dewford Manor (code, Lv 13-16; retuned from 41-43): Mime Jr., Gastly, Solosis,
-      Slowpoke (Galar) (common); Litwick, Sinistea, Glameow (uncommon); Drowzee, Rattata, Hoothoot
-      (rare)
+    Dewford Manor (DexNav photo), Lv 12-14: Mime Jr., Gastly, Solosis, Slowpoke (Galar) (common);
+      Litwick, Glameow (uncommon); Sinistea, Drowzee, Rattata, Hoothoot (rare)
     Evolutions by 20 new: Rattata -> Raticate 20, Hoothoot -> Noctowl 20; Oricorio changes style
       with the Nectars found here.
   Battle items
@@ -310,16 +312,17 @@ STEP 11 - cap 20 - Route 106 trainer (Ned)
 STEP 12 - cap 20 - Route 106 and Granite Cave (the pool for Route 109)
   Adds, verified in play, for the battles after Route 106: Route 106 and Granite Cave.
   Pokemon
-    Route 106 grass (DexNav = code), Lv 14-16: Exeggcute, Inkay, Chatot (common); Buizel, Machop,
-      Makuhita (uncommon); Pidove, Crabrawler (rare). Old Rod Lv 8-11: Remoraid, Clauncher
-    Granite Cave 1F (DexNav = code), Lv 12-14: Zubat, Geodude, Glimmet (common); Makuhita, Aron,
+    Route 106 grass (DexNav photo), Lv 13-15: Exeggcute, Inkay, Chatot (common); Buizel, Machop,
+      Makuhita (uncommon); Pidove, Crabrawler (rare). Old Rod Lv 9-11: Remoraid, Clauncher
+    Granite Cave 1F (DexNav photo), Lv 12-14: Zubat, Geodude, Glimmet (common); Makuhita, Aron,
       Abra (uncommon); Rolycoly, Axew, Nacli, Hawlucha, Timburr (rare); Kubfu (5%, met at the cap; one
       of a kind; Scrolls sold at Lilycove Dept. Store 4F)
-    Granite Cave B1F (code), Lv 13-15: Klefki, Sableye, Glimmet, Bronzor, Cubone, Aron, Onix, Carbink,
-      Ditto, Sneasel (Hisui)
-    Granite Cave B2F (DexNav = code), Lv 13-15: Sandshrew, Sableye, Tinkatink (common); Aron, Onix,
+    Granite Cave B1F (DexNav photo), Lv 12-14: Klefki, Sableye, Glimmet (common); Bronzor, Cubone,
+      Aron (uncommon); Sneasel (Hisui), Onix, Carbink, Ditto (rare)
+    Granite Cave B2F (DexNav photo), Lv 12-14: Sandshrew, Sableye, Tinkatink (common); Aron, Onix,
       Carbink (uncommon); Gible, Bronzor, Rolycoly, Bagon (rare). Cobalion is not live.
-    Steven's room (code): Zubat, Aron, Glimmet, Axew, Timburr, Makuhita, Abra, Beldum
+    Steven's room (DexNav photo), Lv 12-14: Axew, Zubat, Timburr, Aron, Glimmet (common); Makuhita
+      (uncommon); Beldum, Abra (rare)
     Evolutions by 20 new: Abra -> Kadabra 16, Rolycoly -> Carkol 18, Beldum -> Metang 20.
   Battle items
     Gifts (play): Expert Belt (Steven, for the Letter); Flash license (Granite Cave hiker)
@@ -344,8 +347,8 @@ STEP 13 - cap 20 - Route 109 beach and the Seashore House
   and Route 110's grunts wall the road north (play), so this window is Route 109 + Slateport.
   Adds Route 109 and Slateport.
   Pokemon
-    Route 109 Old Rod (code), Lv 5-10 at the cap: Magikarp, Luvdisc. Slateport Old Rod (code): Horsea,
-      Frillish. Water tables need Surf.
+    Route 109 Old Rod (DexNav photo), Lv 11-13: Magikarp, Luvdisc. Slateport Old Rod (DexNav photo),
+      Lv 11-13: Horsea, Frillish. Water tables need Surf.
     Route 109 sand mounds (code, new): dig up Wiglett (common), Sandygast, Dwebble (rare), Lv 15-17.
       The mounds called a Rock Smash encounter but the route had no table, so they gave nothing.
   Battle items
