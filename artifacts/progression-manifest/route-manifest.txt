@@ -70,19 +70,28 @@ STEP 2 - cap 14 - Route 102 trainers (Calvin, Rick, Allen, Tiana)
 
 ====================================================================================================
 STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
+  VERIFIED IN PLAY: full sweep of Route 102 and Petalburg (city, Center, Mart, both houses, Wally's
+  house, Gym lobby; Norman's intro and Wally's catch tutorial played); DexNav on Route 102 and
+  Petalburg.
   Adds Route 102 and Petalburg City.
   Pokemon
-    Route 102 grass: Toedscool, Lotad, Seedot, Happiny, Bidoof, Tympole, Gothita, Surskit, Nymble,
-      Lechonk, Ralts, Meowth
-    Old Rod: Route 102 Corphish, Goldeen; Petalburg Magikarp, Marill
-    Honey (Honey from wild Surskit or Combee): Combee (Routes 101, 102), Cutiefly (Route 103);
-      Route 102's honey table also has Ralts, Gothita, Bidoof
-    Evolutions by 14: Lombre (Lotad 14), Nuzleaf (Seedot 14). Happiny needs an Oval Stone (none yet).
-    Not yet: Petalburg's Abomasite and Venusaurite (pond islands, need Surf); Surf tables.
+    Route 102 grass (DexNav = code), Lv 3-4: Lotad, Seedot, Happiny, Bidoof (common); Tympole,
+      Gothita, Toedscool (uncommon); Lechonk, Surskit, Nymble, Meowth, Ralts (rare)
+    Old Rod (DexNav = code), Lv 5-10: Route 102 Goldeen, Corphish; Petalburg Magikarp, Marill
+    Honey (counts: owner decision; Honey is gettable before the first Badge from a wild Surskit's
+      rare hold, and Center marts sell it from the Stone Badge; Honey needs a land-encounter tile;
+      tables from code, the DexNav shows them only with Honey in the Bag):
+      Route 101: Combee 2, Wurmple 2-3; Route 102: Combee 3, Ralts 3-4, Gothita 3-4, Bidoof 4;
+      Route 103: Cutiefly 2, Shinx 2-4, Grubbin 3-4, Kricketot 3
+    Evolutions by 14 (species data): Lotad -> Lombre (14), Seedot -> Nuzleaf (14). Nothing else new
+      evolves by 14 (Bidoof 15, Lechonk / Marill 18, Combee 21, Cutiefly 25). Happiny needs an Oval
+      Stone (none yet).
   Battle items
-    Berry trees (Route 102): Oran, Pecha
-    Wild held: Surskit (- / Honey), Combee (Honey / -), Toedscool (Tiny Mushroom / Big Mushroom)
-      [battle items moved to the clerk; step to be redone from play]
+    Berry trees (Route 102, play): Oran x2, Pecha x2
+    Wild held (species data): Surskit (- / Honey), Combee (Honey / -), Cutiefly (Honey / -),
+      Toedscool (Tiny Mushroom / Big Mushroom). No battle items.
+  Other items: Potion (Route 102 ball, play).
+  Not yet: Petalburg's Abomasite, Venusaurite and hidden Nugget (pond islands: Surf).
   Not here: Chilan Berry (Petalburg Gym guide, after the fourth badge); Lucky Punch (needs Chansey
   caught).
 

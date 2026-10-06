@@ -15,6 +15,18 @@ ROOT = HERE.parent.parent
 PY = str(ROOT / '.venv-studio/bin/python')
 
 
+def _wild_maps():
+    import re
+    d = json.loads((ROOT / 'src/data/wild_encounters.json').read_text())
+    camel = {}
+    for f in (ROOT / 'data/maps').glob('*/map.json'):
+        m = json.loads(f.read_text()); camel[m.get('id')] = f.parent.name
+    return {camel.get(e.get('map')) for g in d['wild_encounter_groups'] for e in g['encounters'] if e.get('map')}
+
+
+WILD_MAPS = _wild_maps()
+
+
 def log(line):
     with open(HERE / 'SWEEP.md', 'a') as f: f.write(line + '\n')
 
@@ -55,6 +67,8 @@ def main():
         log(f"| {target} | explored | photos {len(rep['photos'])}, interactions {visited} visited {other or ''}, "
             f"bag {rep['bag_gained'] or '-'}, failures {rep['failures'] or '-'} | {out}/report.md |")
         save = rep['end_save']
+        if target in WILD_MAPS:   # photograph the DexNav roster where the sweep ended
+            subprocess.run([PY, str(HERE / 'dexnav.py'), save, target.lower()], cwd=ROOT, capture_output=True, text=True)
         if rep['failures']: print('STOP after failures', target, rep['failures']); print(save); return
     print(save)
 

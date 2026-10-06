@@ -113,6 +113,15 @@ async def run(spec,out):
         steps_iter=_Steps(steps)
         for step in steps_iter:
             if step.get("map") and walk_failure is None and studio.current_map!=step["map"]:
+                # A story scene may visit another map and come back (Wally's tutorial):
+                # play it through before judging where the player is.
+                idle=0
+                for f in range(12000):
+                    if idle>=12:break
+                    m=keys("A") if f%30==0 else 0
+                    studio.ingest(await studio.core.tick(m,frames=1));recorder.observe(studio.packet,m);total+=1
+                    idle=idle+1 if studio.state[0] else 0
+            if step.get("map") and walk_failure is None and studio.current_map!=step["map"]:
                 # A step planned for one map must never act on another (a warp was taken).
                 walk_failure=f"left {step['map']} for {studio.current_map} before {step.get('label','step')}"
             if "bag" in step and walk_failure is None:
