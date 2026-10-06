@@ -70,6 +70,8 @@ def main():
     a = ap.parse_args()
     _, pr = X.run_chunk({'name': 'probe ' + a.name, 'start': {'save': a.save}, 'steps': [{'frames': 2}]}, a.name + '-probe')
     f = pr['outcome']['final']
+    if f['map'] == a.target and not a.via:   # already there
+        print(json.dumps(dict(passed=True, failures=[], map=f['map'], x=f['x'], y=f['y'], end_save=a.save))); return
     via = tuple(map(int, a.via.split(','))) if a.via else None
     steps = hop_steps(f['map'], (f['x'], f['y']), a.target, via)
     if steps is None: raise SystemExit(f"no way from {f['map']} {f['x']},{f['y']} to {a.target}")
