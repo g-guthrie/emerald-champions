@@ -265,7 +265,92 @@ def entities(mdir):
         yield dict(kind='warp', x=w['x'], y=w['y'], dest=w['dest_map'])
 
 
-def conditions(maps):
+PRODUCER = re.compile(r'^\s*(specialvar\s+VAR_RESULT\s*,|special|callnative|giveitem|giveuniqueitem|additem|removeitem|checkitem\w*|checkplayergender|'
+                      r'checkmoney|checkcoins|checkpartymove|givemon|giveegg|trainerbattle\w*|msgbox|yesnobox|multichoice\w*|'
+                      r'dynmultichoice|call|goto|setvar\s+VAR_RESULT|copyvar\s+VAR_RESULT|getpartysize|checkfieldmove|'
+                      r'bufferitemname|pokemart\w*|playmoncry|waitmoncry|choose\w*|npc_reward)(?!\w)\s*,?\s*([\w]*)\s*,?\s*(\w*)')
+
+
+def result_producer(s, label, i):
+    """The command whose VAR_RESULT a branch reads: the nearest producer above it in the
+    label, or (for a label entered by fallthrough or call) a caller's."""
+    for x in reversed(s.body[label][:i]):
+        m = PRODUCER.match(x)
+        if not m: continue
+        cmd, a, b = m.group(1).split()[0].rstrip(','), m.group(2), m.group(3)
+        if cmd == 'msgbox':
+            return 'choice: msgbox ' + (b or '')  if b == 'MSGBOX_YESNO' else 'unknown: msgbox'
+        if cmd in ('yesnobox',) or cmd.startswith('multichoice') or cmd == 'dynmultichoice':
+            return 'choice: ' + cmd
+        if cmd in ('special', 'callnative', 'specialvar'):
+            return f'special: {a or b}'
+        if cmd in ('call', 'goto'):
+            return f'callee: {a}'
+        if cmd in ('setvar', 'copyvar'):
+            return f'set: {a} {b}'.strip()
+        return f'{cmd}: {a}'.strip(': ')
+    return 'entry: ' + label
+
+
+def scan(maps):
+    """{(kind, subject): set(sites)} for every condition reachable from these maps."""
+    import io, contextlib
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        return conditions(maps, quiet=True)
+
+
+def classify(kind, subj, table):
+    """The class of one condition subject, or None if conditions.yaml does not say."""
+    if kind == 'scratch': return 'scratch'
+    if kind == 'result':
+        head, _, rest = subj.partition(': ')
+        if head == 'choice': return 'choice'
+        if head == 'special':
+            return next((c for c in ('gate', 'outcome', 'effect', 'choice', 'flavor') if rest in (table.get(c) or ())), None)
+        if head in ('checkitem', 'checkitemspace', 'checkfieldmove', 'getpartysize', 'checkplayergender'):
+            key = (head + ' ' + rest).strip()
+            if key in (table.get('gate') or {}) or head in (table.get('gate') or {}): return 'gate'
+            if head in (table.get('choice') or ()): return 'choice'
+            return None
+        if head in (table.get('outcome') or {}): return 'outcome'
+        if head == 'entry': return 'outcome'
+        return None
+    if kind == 'bag':
+        cmd, _, item = subj.partition(' ')
+        return 'gate' if subj in (table.get('gate') or {}) or cmd in (table.get('gate') or {}) else None
+    if kind == 'player':
+        cmd = subj.split()[0]
+        return 'choice' if cmd in (table.get('choice') or ()) else ('gate' if subj in (table.get('gate') or {}) or cmd in (table.get('gate') or {}) else None)
+    if kind == 'special':
+        return next((c for c in ('gate', 'outcome', 'effect', 'choice', 'flavor') if subj in (table.get(c) or ())), None)
+    for c in ('story', 'window', 'engine', 'gate', 'once', 'memory', 'later'):
+        if subj in (table.get(c) or {}): return c
+    if re.match((table.get('scratch') or {}).get('pattern', '^$'), subj): return 'scratch'
+    if subj.startswith('STORY_'): return 'machine'
+    return None
+
+
+def check():
+    """Fail unless every condition on the story-machine maps is classified, and none of
+    them is old story state or an old presence flag (those must be replaced)."""
+    table = yaml.safe_load(open(ROOT / 'data/progression/conditions.yaml'))
+    maps = [yaml.safe_load(open(f))['map'] for f in sorted(MAPS.glob('*.yaml'))]
+    found = scan(maps)
+    bad = {}
+    for (kind, subj), where in sorted(found.items()):
+        c = classify(kind, subj, table)
+        if c is None: bad.setdefault('unclassified', []).append((kind, subj, where))
+        elif c in ('story', 'window'): bad.setdefault(f'still uses old {c} state', []).append((kind, subj, where))
+    for why, items in bad.items():
+        print(f'\n{why}: {len(items)}')
+        for kind, subj, where in items:
+            w = sorted(where)
+            print(f'  [{kind}] {subj}: ' + ', '.join(w[:3]) + (f' (+{len(w) - 3})' if len(w) > 3 else ''))
+    return 0 if not bad else 1
+
+
+def conditions(maps, quiet=False):
     """Every condition reachable from these maps' entities and map scripts, by subject."""
     s = Scripts()
     sites = {}
@@ -296,11 +381,11 @@ def conditions(maps):
                     if not mt: continue
                     kind, subj = f(mt)
                     if kind == 'var' and subj == 'VAR_RESULT':
-                        before = '\n'.join(body[max(0, i - 6):i])
-                        kind, subj = ('choice', 'VAR_RESULT') if CHOICE.search(before) else ('result', 'VAR_RESULT')
+                        kind, subj = 'result', result_producer(s, l, i)
                     if kind in ('var', 'flag') and SCRATCH.match(subj): kind = 'scratch'
                     sites.setdefault((kind, subj), set()).add(l)
                     break
+    if quiet: return sites
     order = ['object-flag', 'trigger-var', 'hidden-flag', 'flag', 'var', 'bag', 'money', 'player', 'special', 'result', 'choice', 'scratch']
     for kind in order:
         keys = sorted(k for k in sites if k[0] == kind)
@@ -352,7 +437,7 @@ COND = [
     (re.compile(r'^\s*(checkitem|checkitemspace|checkpcitem|checkdecor|checkdecorspace)\s+(\w+)'), lambda m: ('bag', m.group(1) + ' ' + m.group(2))),
     (re.compile(r'^\s*(checkmoney|checkcoins)\b'), lambda m: ('money', m.group(1))),
     (re.compile(r'^\s*(checkpartymove|getpartysize|checkplayergender|checktrainerflag|checkfieldmove)\b\s*(\w*)'), lambda m: ('player', (m.group(1) + ' ' + m.group(2)).strip())),
-    (re.compile(r'^\s*(special|specialvar\s+\w+\s*,)\s*(\w+)'), lambda m: ('special', m.group(2))),
+    (re.compile(r'^\s*(specialvar\s+\w+\s*,|special)\s*(\w+)'), lambda m: ('special', m.group(2))),
     (re.compile(r'^\s*callnative\s+(\w+)'), lambda m: ('special', m.group(1))),
 ]
 CHOICE = re.compile(r'MSGBOX_YESNO|yesnobox|multichoice|ShowScrollableMultichoice|ChooseStarter|ChoosePartyMon|ChooseMonFor|ScrollableMultichoice|ShowNatureGirl')
@@ -474,6 +559,8 @@ if __name__ == '__main__':
         write_maps()
     elif len(sys.argv) >= 4 and sys.argv[1] == 'import':
         import_maps(int(sys.argv[2]), sys.argv[3:])
+    elif len(sys.argv) == 2 and sys.argv[1] == 'check':
+        sys.exit(check())
     elif len(sys.argv) >= 2 and sys.argv[1] == 'conditions':
         conditions(sys.argv[2:])
     elif len(sys.argv) >= 2 and sys.argv[1] == 'inventory':

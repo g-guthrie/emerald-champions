@@ -24,9 +24,11 @@ steps:
   - MET_RIVAL           # *_EventScript_MeetRival / MeetBrendan / MeetMay
   - ON_ROUTE101         # Route101_EventScript_HideMapNamePopup (Route 101 on frame)
   - BIRCH_IN_DANGER     # Route101_EventScript_StartBirchRescue (trigger tiles)
+  - CHOSE_STARTERS      # ChooseStarter (C: the pair is granted; replaces VAR_EC_OPENING_STATE)
   - RESCUED_BIRCH       # Route101_EventScript_FinishRescue
   - SENT_TO_RIVAL_103   # LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival
-  - BEAT_RIVAL_103      # Route103_EventScript_RivalEnd
+  - TOURED_OLDALE_MART  # OldaleTown_Mart_EventScript_FirstShopping (the nurse's tools: Leveler)
+  - BEAT_RIVAL_103      # Route103_EventScript_RivalEnd (requires: Leveler held, party at the cap)
   - RIVAL_LEFT_OLDALE   # OldaleTown_EventScript_RivalFinish, or LittlerootTown on transition
   - GOT_POKEDEX         # LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
   - GOT_RUNNING_SHOES   # LittlerootTown_EventScript_SetReceivedRunningShoes

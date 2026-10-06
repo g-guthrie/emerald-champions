@@ -1,0 +1,276 @@
+# What every condition on a story-machine map is. `story.py conditions` finds each place a
+# script, object or trigger tests something; `story.py check` fails the build on any subject
+# not classified here. Classes:
+#
+#   story    old progress state; becomes the story step. Value: the step it means
+#            (a flag: set once the story reaches that step; a var: value -> step).
+#   window   object or trigger presence; becomes a window in story.yaml.
+#   gate     a real requirement the player meets, other than story order. Each use must
+#            sit on an entity whose `requires` names it, so it shows in the story report.
+#   once     a one-time gift or event of an entity: its `once` done flag.
+#   memory   a one-time line ("I already told you"); no effect on the game.
+#   engine   a system switch the engine itself reads; kept, set by its step's scene.
+#   scratch  scene-local working state (temp vars and flags), cleared on map load.
+#   choice   the player's own answer (yes/no, menus, starter pick).
+#   outcome  how a scene the player plays ended (battle won, tutorial finished).
+#   flavor   changes only what is said, never what happens (greetings, ratings).
+#   effect   runs code; any result is not a gate (UI, animation, healing, buffering text).
+#   later    belongs to a later region; converted with it. Value: that region.
+
+story:
+  # Region 1 state, replaced by steps (story.yaml).
+  VAR_LITTLEROOT_INTRO_STATE: {0: NEW_GAME, 1: TRUCK_STOPPED, 2: TRUCK_STOPPED, 3: ENTERED_HOUSE, 4: SENT_UPSTAIRS, 5: UPSTAIRS, 6: CLOCK_SET, 7: SENT_TO_RIVAL}
+  VAR_LITTLEROOT_TOWN_STATE: {0: NEW_GAME, 1: MET_RIVAL, 2: MET_RIVAL, 3: GOT_POKEDEX, 4: GOT_RUNNING_SHOES}
+  VAR_LITTLEROOT_RIVAL_STATE: {0: NEW_GAME, 2: RIVAL_UPSTAIRS, 3: MET_RIVAL, 5: GOT_POKEDEX, 4: DEXNAV_LESSON}
+  VAR_ROUTE101_STATE: {0: NEW_GAME, 1: ON_ROUTE101, 2: BIRCH_IN_DANGER, 3: RESCUED_BIRCH}
+  VAR_BIRCH_LAB_STATE: {0: NEW_GAME, 2: RESCUED_BIRCH, 3: SENT_TO_RIVAL_103, 4: BEAT_RIVAL_103, 5: GOT_POKEDEX}
+  VAR_OLDALE_TOWN_STATE: {0: NEW_GAME, 1: GOT_POKEDEX}
+  VAR_EC_OPENING_STATE: {EC_OPENING_UNSELECTED: BIRCH_IN_DANGER, EC_OPENING_PAIR_GRANTED: CHOSE_STARTERS, EC_OPENING_RESCUE_WON: RESCUED_BIRCH}
+  VAR_OLDALE_RIVAL_STATE: {0: NEW_GAME, 1: BEAT_RIVAL_103, 2: RIVAL_LEFT_OLDALE}
+  VAR_LITTLEROOT_HOUSES_STATE_MAY: {1: TRUCK_STOPPED, 2: MET_RIVAL_MOM}            # 3-5: later (post-game)
+  VAR_LITTLEROOT_HOUSES_STATE_BRENDAN: {1: TRUCK_STOPPED, 2: MET_RIVAL_MOM}        # 3-5: later (post-game)
+  FLAG_SET_WALL_CLOCK: CLOCK_SET
+  FLAG_RESCUED_BIRCH: RESCUED_BIRCH
+  FLAG_DEFEATED_RIVAL_ROUTE103: BEAT_RIVAL_103
+  FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE: TOURED_OLDALE_MART
+  FLAG_ADVENTURE_STARTED: GOT_POKEDEX
+  FLAG_RECEIVED_DEXNAV: GOT_POKEDEX
+  FLAG_RECEIVED_POKEDEX_FROM_BIRCH: GOT_POKEDEX
+  FLAG_RECEIVED_RUNNING_SHOES: GOT_RUNNING_SHOES
+  FLAG_RECEIVED_OLD_ROD: GOT_RUNNING_SHOES
+  FLAG_RIVAL_LEFT_FOR_ROUTE103: MET_RIVAL
+  FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE: DEXNAV_LESSON_DONE
+
+engine:
+  # Read by engine code; each becomes STORY_REACHED_<step> (flags.h alias), so it can
+  # only ever be true from its step on.
+  FLAG_SYS_POKEMON_GET: RESCUED_BIRCH
+  FLAG_SYS_POKEDEX_GET: GOT_POKEDEX
+  FLAG_SYS_NATIONAL_DEX: GOT_POKEDEX
+  FLAG_SYS_B_DASH: GOT_RUNNING_SHOES
+  FLAG_DECORATION_1: secret base / bedroom decorations (decoration.c)
+  FLAG_DECORATION_2: decorations
+  FLAG_DECORATION_3: decorations
+  FLAG_DECORATION_4: decorations
+  FLAG_DECORATION_5: decorations
+  FLAG_DECORATION_6: decorations
+  FLAG_DECORATION_7: decorations
+  FLAG_DECORATION_8: decorations
+  FLAG_DECORATION_9: decorations
+  FLAG_DECORATION_10: decorations
+  FLAG_DECORATION_11: decorations
+  FLAG_DECORATION_12: decorations
+  VAR_SECRET_BASE_INITIALIZED: bedroom decorations set up once per load
+  VAR_DEXNAV_SPECIES: DexNav's registered species
+  VAR_STARTER_GEN: the starter region the player chose
+  VAR_CABLE_CLUB_TUTORIAL_STATE: Union Room tutorial line
+  VAR_ITEM_ID: berry the player picked to plant
+
+gate:
+  # Real requirements. Each use belongs to an entity whose `requires` names the gate.
+  IsPlayerPartyBelowLevelCap: party below the level cap (Route 103 rival waits until it is not)
+  CheckEmeraldChampionsHandoffItem: holds a tool item, or the Bag can take it (nurse, rival's Leveler check, tickets)
+  checkitem ITEM_MEGA_RING: "holds the Mega Ring (Mart: Mega services)"
+  checkitem ITEM_WAILMER_PAIL: "holds the Wailmer Pail (berry trees: watering)"
+  checkfieldmove FIELD_MOVE_CUT: can use Cut (Cut trees)
+  FLAG_RECEIVED_HM_CUT: later           # Cut: region 2 (Stone Badge)
+  CheckChampionsLinkBattleParty: link battle party is legal (Cable Club)
+  CenterGuideHasStaticLegendaryLead: the guide has a legendary to point to
+  CountDeliverableLegendaryRelics: the nurse holds relics for the player
+  Special_HasMoveToRelearn: the chosen Pokemon has a move to relearn
+  IsSelectedMonEgg: the chosen Pokemon is an Egg
+  GetNumMovesSelectedMonHas: the chosen Pokemon's move count (Rotom)
+  getpartysize: party size (move relearner)
+  PlayerHasBerries: has a Berry to plant (berry trees)
+  CountRotomInParty: has a Rotom (Rotom appliances)
+  DoesRotomKnowSpecialMove: the Rotom knows its form move
+  HasAllHoennMons: "later: post-game (Birch's Hoenn Pokedex reward)"
+  checkitemspace: the Bag has room (every gift)
+
+once:
+  FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN: Oldale Mart employee's 5 Poke Balls
+  FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS: starter battle items
+  FLAG_BIRCH_AIDE_MET: Birch's aide introduces himself
+
+memory:
+  FLAG_EC_RESTRICTED_RULE_EXPLAINED: nurse explains the restricted rule once
+  FLAG_EC_TUTOR_MACHINES_LINE_SEEN: tutor's machines line
+  FLAG_NURSE_MENTIONS_GOLD_CARD: nurse's Gold Card line
+  FLAG_POKERUS_EXPLAINED: nurse's Pokerus line
+  VAR_CLERK_FORM_ITEMS_GREETED: clerk's form items greeting
+  VAR_CLERK_HELD_ITEMS_GREETED: clerk's held items greeting
+  VAR_GUIDE_WARNED: guide's warning
+  VAR_GUIDE_HAS_LEGENDS: guide menu state
+  VAR_GUIDE_HAS_TIPS: guide menu state
+  VAR_BONDING_CURSOR: bonding menu cursor
+
+scratch:
+  pattern: '^(VAR_TEMP_\w+|VAR_0x[0-9A-F]+|FLAG_TEMP_\w+|VAR_FACING|VAR_LAST_TALKED)$'
+
+choice:
+  - msgbox MSGBOX_YESNO
+  - multichoice
+  - ShowScrollableMultichoice
+  - ChooseStarter
+  - ChoosePartyMon
+  - Bag_ChooseBerry
+  - MoveDeleterChooseMoveToForget
+  - checkplayergender        # the player's own choice at the start
+
+outcome:
+  StartEmeraldChampionsBirchRescue: the rescue battle (won / lost and retry)
+  StartInitialToolsBagTutorial: the Oldale Mart tour (finished / backed out)
+  StartRivalDexNavTutorial: the DexNav lesson
+  TryBattleLinkup: link battle connected
+  StartPlannedEVSpread: EV training session
+  PayForPlannedEVSpread: EV training paid
+  CheckPlannedEVSpreadChanged: EV plan edited
+  IsEvieEVPlan: EV plan from Evie
+  AdjustPlannedEV: EV plan edited
+  CutTreeWildEncounter: a wild Pokemon was in the cut tree
+  BufferEmeraldChampionsRivalBranch: which starter the rival kept (the player's pick)
+  GiveBirchCosmogPair: the Cosmog pair fit (party or box)
+  GiveEmeraldChampionsStarterBattleItems: the starter items fit
+  giveitem: the gift fit in the Bag
+  additem: the gift fit in the Bag
+  callee: result handed back by a called script
+
+flavor:
+  CountPlayerTrainerStars: nurse's greeting for a starred Trainer Card
+  IsPokerusInParty: nurse's Pokerus line
+  ScriptGetPokedexInfo: Birch's Pokedex rating
+  GetPlayerFacingDirection: which way the follower steps aside
+
+effect:
+  - ApplyEmeraldChampionsBonding
+  - BedroomPC
+  - BufferCenterGuideDirections
+  - BufferCenterGuideObjective
+  - BufferEmeraldChampionsBattleItemStock
+  - BufferEmeraldChampionsBondingPreview
+  - BufferMoveDeleterNicknameAndMove
+  - BufferNextCenterLegendaryLead
+  - BufferNextLegendaryRelic
+  - BufferPlannedEVConfirmation
+  - BufferPlannedEVRow
+  - BufferPlannedEVStatPrompt
+  - BufferPlannedEVTotal
+  - ChangeMonSpecies
+  - ClearPlannedEVs
+  - CloseLink
+  - DoCableClubWarp
+  - DoPCTurnOffEffect
+  - DoPCTurnOnEffect
+  - DoWateringBerryTreeAnim
+  - DrawWholeMapView
+  - EnableNationalPokedex
+  - FinishRivalDexNavTutorial
+  - GetLevelCapForScriptedGift
+  - GetPlayerBigGuyGirlString
+  - GetRivalSonDaughterString
+  - GetRotomNewSpecialMove
+  - GetRotomState
+  - HealPlayerParty
+  - IncrementDailyPickedBerries
+  - IncrementDailyPlantedBerries
+  - InitSecretBaseDecorationSprites
+  - LoadPlayerBag
+  - MoveDeleterForgetMove
+  - ObjectEventInteractionGetBerryCountString
+  - ObjectEventInteractionGetBerryName
+  - ObjectEventInteractionGetBerryTreeData
+  - ObjectEventInteractionPickBerryTree
+  - ObjectEventInteractionPlantBerryTree
+  - ObjectEventInteractionRemoveBerryTree
+  - ObjectEventInteractionWaterBerryTree
+  - OpenEmeraldChampionsBattleItemMart
+  - OpenEmeraldChampionsEvolutionItemArchive
+  - OpenEmeraldChampionsSellMenu
+  - PrepareRivalDexNavTutorial
+  - RotomForgetSpecialMove
+  - SaveGame
+  - SavePlayerParty
+  - SetCableClubWarp
+  - SetPlannedEVPricing
+  - SetUnlockedPokedexFlags
+  - ShowPokedexRatingMessage
+  - Special_ViewWallClock
+  - StartWallClock
+  - TeachMoveRelearnerMove
+  - TeachRotomMove
+  - TurnOffTVScreen
+  - UndoPlannedEVs
+  - UpdateFollowingPokemon
+  - WarpToRivalTutorialSpot
+  - removeitem
+
+later:
+  # Region named is where the gate is set; converted then.
+  FLAG_BADGE01_GET: badge1_stone
+  FLAG_BADGE02_GET: badge2_knuckle
+  FLAG_BADGE03_GET: badge3_dynamo
+  FLAG_BADGE04_GET: badge4_heat
+  FLAG_BADGE05_GET: badge5_balance
+  FLAG_BADGE06_GET: badge6_feather
+  FLAG_BADGE07_GET: badge7_mind
+  FLAG_VISITED_RUSTBORO_CITY: badge1_stone
+  VAR_PETALBURG_GYM_STATE: badge5_balance
+  VAR_BIRCH_STATE: post-game (Birch's location)
+  VAR_ROUTE110_STATE: badge3_dynamo
+  VAR_TRAVEL_DOCS_PENDING: post-game
+  VAR_DEX_UPGRADE_JOHTO_STARTER_STATE: post-game
+  FLAG_SYS_GAME_CLEAR: post-game
+  FLAG_IS_CHAMPION: post-game
+  FLAG_MET_RIVAL_LILYCOVE: lilycove
+  FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE: lilycove
+  FLAG_ENABLE_SHIP_SOUTHERN_ISLAND: post-game
+  FLAG_ENABLE_SHIP_NAVEL_ROCK: post-game
+  FLAG_RECEIVED_SS_TICKET: post-game
+  FLAG_RECEIVED_MYSTIC_TICKET: post-game
+  FLAG_EC_EARNED_SS_TICKET: post-game
+  FLAG_EC_WOODS_DUSK_BALLS_PENDING: badge1_stone (Petalburg Woods)
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCH: post-game (Pokedex upgrade scene)
+  FLAG_HIDE_LITTLEROOT_TOWN_RIVAL: post-game (Pokedex upgrade scene)
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM: lilycove
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM: lilycove
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL: post-game (Pokedex upgrade scene)
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380: post-game (Pokedex upgrade scene)
+  FLAG_HIDE_ROUTE_103_RIVAL: post-game (Eon Ticket visit)
+  FLAG_HIDE_ROUTE_103_BIRCH: post-game
+  FLAG_HIDE_ROUTE_101_BIRCH: post-game
+  FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM: post-game
+  FLAG_HIDE_PLAYERS_HOUSE_DAD: badge5_balance
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL: lilycove
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL: lilycove
+  FLAG_ITEM_ROUTE_103_PEARL: badge5_balance (Surf)
+  FLAG_ITEM_ROUTE_103_PP_UP: badge5_balance (Surf)
+
+window:
+  # Region 1 object presence; each becomes the story.yaml window named here.
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK: BRENDANS_HOUSE_TRUCK
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK: MAYS_HOUSE_TRUCK
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM: BRENDANS_HOUSE_MOM
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM: MAYS_HOUSE_MOM
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM: BRENDANS_HOUSE_RIVAL_MOM
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM: MAYS_HOUSE_RIVAL_MOM
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING: BRENDANS_HOUSE_RIVAL_SIBLING
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING: MAYS_HOUSE_RIVAL_SIBLING
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL: BRENDANS_HOUSE_RIVALS_BALL
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL: MAYS_HOUSE_RIVALS_BALL
+  FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN: SCRIPT_ACTOR
+  FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY: SCRIPT_ACTOR
+  FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1: PLAYERS_HOUSE_MOVERS
+  FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2: PLAYERS_HOUSE_MOVERS
+  FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN: LITTLEROOT_FAT_MAN
+  FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE: LITTLEROOT_MOM_SHOES
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH: LAB_BIRCH
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL: removed     # retired displays, never shown (owner decides)
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE: removed
+  FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA: removed
+  FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE: ROUTE101_BIRCH_CHASED
+  FLAG_HIDE_ROUTE_101_ZIGZAGOON: ROUTE101_BIRCH_CHASED
+  FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG: ROUTE101_BIRCH_CHASED
+  FLAG_HIDE_ROUTE_101_BOY: ROUTE101_BOY
+  FLAG_HIDE_ROUTE101_DEXNAV_RIVAL: ROUTE101_DEXNAV_RIVAL
+  FLAG_HIDE_OLDALE_TOWN_RIVAL: OLDALE_RIVAL
+  FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE: OLDALE_MART_NURSE
