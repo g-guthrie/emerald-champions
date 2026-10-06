@@ -17,6 +17,7 @@
 #include "constants/event_objects.h"
 #include "field_specials.h"
 #include "field_move.h"
+#include "emerald_champions_battle_sets.h"
 #include "string_util.h"
 #include "text.h"
 #include "constants/characters.h"
@@ -62,29 +63,38 @@ TEST("Inclement integration: every HM needs badge, license, and a capable party 
     ZeroPlayerPartyMons();
 }
 
-TEST("Inclement integration: signature Fly capability preserves licenses, badges, and Egg exclusion")
+TEST("Inclement integration: Day Care Egg moves stay exclusive but work in the field")
 {
+    // The Center never teaches the gift Eggs' moves to their families...
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_PICHU, MOVE_SURF));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_PIKACHU, MOVE_FLY));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_PIKACHU, MOVE_EXTREME_SPEED));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_RAICHU_ALOLA, MOVE_SURF));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_SWELLOW, MOVE_BOOMBURST));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_DRAGONITE, MOVE_EXTREME_SPEED));
+    // ...but other moves and other families keep theirs.
+    EXPECT(CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_DRAGONITE, MOVE_FLY));
+    EXPECT(CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_SWELLOW, MOVE_FLY));
+    EXPECT(CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_LUCARIO, MOVE_EXTREME_SPEED));
+    EXPECT(!SpeciesCanLearnFieldMove(SPECIES_PIKACHU, MOVE_FLY));
+
+    // A Pikachu that hatched knowing Fly carries the player, with license and badge.
     ZeroPlayerPartyMons();
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIKACHU, 30, 0, OTID_STRUCT_PLAYER_ID);
     CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_RAICHU_ALOLA, 30, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT(SpeciesCanLearnFieldMove(SPECIES_PICHU, MOVE_FLY));
-    EXPECT(SpeciesCanLearnFieldMove(SPECIES_PIKACHU, MOVE_FLY));
-    EXPECT(SpeciesCanLearnFieldMove(SPECIES_RAICHU_ALOLA, MOVE_FLY));
-    EXPECT(!SpeciesCanLearnFieldMove(SPECIES_MAGIKARP, MOVE_FLY));
-    FlagClear(FLAG_BADGE06_GET);
+    FlagSet(FLAG_BADGE06_GET);
     FlagSet(FLAG_RECEIVED_HM_FLY);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), PARTY_SIZE);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_FLY, 0);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 1);
+    FlagClear(FLAG_BADGE06_GET);
     EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, FALSE), PARTY_SIZE);
     FlagSet(FLAG_BADGE06_GET);
     FlagClear(FLAG_RECEIVED_HM_FLY);
     EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, FALSE), PARTY_SIZE);
     FlagSet(FLAG_RECEIVED_HM_FLY);
-    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 0);
-    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_FLY, 0);
-    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 1);
     u32 isEgg = TRUE;
     SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &isEgg);
-    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), 0);
-    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_EGG, &isEgg);
     EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_FLY, TRUE), PARTY_SIZE);
     FlagClear(FLAG_BADGE06_GET);
     FlagClear(FLAG_RECEIVED_HM_FLY);

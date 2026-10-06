@@ -126,7 +126,7 @@ bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
         if (learnset[i].move == move)
             return TRUE;
     }
-    // Include legal preparation and signature lessons, such as Flying Pikachu.
+    // Include legal preparation and signature lessons, such as Pika Papow.
     // Field licenses still own access; the battle move need not be taught.
     return CanSpeciesUseEmeraldChampionsPreparationMove(species, move);
 }
@@ -150,7 +150,7 @@ u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)
 
             if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
                 continue;
-            if (SpeciesCanLearnFieldMove(species, move) && MonKnowsMove(mon, move))
+            if (MonKnowsMove(mon, move)) // Day Care Egg moves, such as Surfing Pichu
                 return i;
             if (capable == PARTY_SIZE && SpeciesCanLearnFieldMove(species, move))
                 capable = i;

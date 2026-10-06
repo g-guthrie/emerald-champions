@@ -16,7 +16,7 @@ sys.path.insert(0, str(HERE))
 import reach as R
 import route_steps as RS
 
-SHOP_LIKE = re.compile(r'pokemart|InterviewBefore|EasyChat|General_Mart_Script|BattleVendor|ChoosePartyMon|ShowScrollableMultichoice|'
+SHOP_LIKE = re.compile(r'pokemart|chooseboxmon|InterviewBefore|EasyChat|General_Mart_Script|BattleVendor|ChoosePartyMon|ShowScrollableMultichoice|'
                        r'multichoice|MoveTutor|Tutor|DoInGameTrade|CreateInGameTradePokemon|Lottery|NameRater|'
                        r'BufferEmeraldChampionsBattleItemStock|special ChooseMonForMoveRelearner|'
                        r'PlayerPC|BedroomPC|AccessPC|EventScript_PC\b|_PC::|WallClock|StartWallClock|'
@@ -43,7 +43,7 @@ def script_graph_text(label, seen=None, depth=0):
     seen.add(label)
     body = ''.join(script_graph_text.labels[label])
     out = body
-    for j in re.findall(r'\b(?:goto|call)\w*\s+(?:[^,\n]*,\s*)?(\w+)|\bcase\s+[^,\n]+,\s*(\w+)', body):
+    for j in re.findall(r'^\s*(?:goto|call)\w*\s+(?:[^\n]*,\s*)?(\w+)\s*$|\bcase\s+[^,\n]+,\s*(\w+)', body, re.M):
         j = j[0] or j[1]
         out += script_graph_text(j, seen, depth + 1)
     last = [l.split('@')[0].strip() for l in script_graph_text.labels[label] if l.split('@')[0].strip()]

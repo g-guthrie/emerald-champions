@@ -66,7 +66,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu:: @ 82030DA
 VerdanturfTown_FriendshipRatersHouse_EventScript_Trader:: @ 8203C11
 	lock
 	faceplayer
-	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, VerdanturfTown_FriendshipRatersHouse_EventScript_TradeCompleted
+	goto_if_set FLAG_VERDANTURF_CYCLIZAR_TRADE_COMPLETED, VerdanturfTown_FriendshipRatersHouse_EventScript_TradeCompleted
 	setvar VAR_0x8008, INGAME_TRADE_CYCLIZAR
 	@ This engine reads the trade index from VAR_0x8005 and the party slot from
 	@ VAR_0x8004; Inclement passes them the other way round.
@@ -97,7 +97,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Trader:: @ 8203C11
 	special DoInGameTradeScene
 	bufferspeciesname 0, VAR_0x8009
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_ItsSubtlyDifferentThankYou, MSGBOX_DEFAULT
-	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
+	setflag FLAG_VERDANTURF_CYCLIZAR_TRADE_COMPLETED
 	release
 	end
 

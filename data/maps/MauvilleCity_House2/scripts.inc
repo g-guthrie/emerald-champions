@@ -135,7 +135,7 @@ MauvilleCity_House2_Text_ThatsDisappointing: @ 8210E16
 MauvilleCity_House2_Text_IconicTutorIntro:
 	.string "Some Pokémon are famous for moves\n"
 	.string "nobody else will ever teach them.\p"
-	.string "A flying Pikachu, a Magikarp with\n"
+	.string "Pikachu's Zippy Zap, Magikarp's\n"
 	.string "Dragon Rage… I know them all.\p"
 	.string "More Badges unlock more lessons.\n"
 	.string "My neighbor has the catalogue.\p"

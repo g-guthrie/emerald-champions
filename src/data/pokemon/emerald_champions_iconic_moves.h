@@ -13,10 +13,7 @@ struct EmeraldChampionsIconicMove
 
 static const struct EmeraldChampionsIconicMove sEmeraldChampionsIconicMoves[] =
 {
-    // Flying Pikachu and the Let's Go partner moves.
-    {SPECIES_PICHU,       MOVE_FLY,               SPECIES_PICHU,      2, 0},
-    {SPECIES_PIKACHU,     MOVE_FLY,               SPECIES_PICHU,      2, 0},
-    {SPECIES_RAICHU,      MOVE_FLY,               SPECIES_PICHU,      2, 0},
+    // The Let's Go partner moves. Receipt bit 0 was Fly, now a Day Care Egg move.
     {SPECIES_PIKACHU,     MOVE_PIKA_PAPOW,        SPECIES_PICHU,      2, 1},
     {SPECIES_PIKACHU,     MOVE_ZIPPY_ZAP,         SPECIES_PICHU,      3, 2},
     {SPECIES_PIKACHU,     MOVE_SPLISHY_SPLASH,    SPECIES_PICHU,      3, 3},

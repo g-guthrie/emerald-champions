@@ -163,6 +163,8 @@ int main(void) {
         expected[MOVE_NONE] = FALSE;
         // Moves removed from the game are never offered (IsMoveRemovedFromGame).
         for (u32 move = 1; move < MOVES_COUNT_ALL; move++) if (IsMoveRemovedFromGame(move)) expected[move] = FALSE;
+        // Day Care Egg moves are never taught to their families.
+        for (u32 move = 1; move < MOVES_COUNT_ALL; move++) if (IsEmeraldChampionsDayCareExclusiveMove(species, move)) expected[move] = FALSE;
         u32 count = collect(&mon);
         for (u32 move = 1; move < MOVES_COUNT_ALL; move++) assert(offered[move] == expected[move]);
         // Learning any four offered moves must remove only those four entries.

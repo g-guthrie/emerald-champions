@@ -1,6 +1,6 @@
 {
   "play_order": 66,
-  "e_group": "E0080",
+  "e_group": "E0067",
   "trainer": "TRAINER_AISHA",
   "class": "casual",
   "location": "Route117",
@@ -44,7 +44,7 @@
   "protect_ledger": [],
   "ai_defects": [
     {
-      "id": "E0080-D1",
+      "id": "E0067-D1",
       "status": "REPRODUCES on work/agent-battle-build-3",
       "severity": "high",
       "attempt": 1,

@@ -73,6 +73,7 @@ u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *move
 // The same pool for a species, known moves included (the Pokedex's moves page).
 u32 GetEmeraldChampionsPreparationMovesForSpecies(enum Species species, u16 *moves);
 bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move);
+bool32 IsEmeraldChampionsDayCareExclusiveMove(enum Species species, enum Move move);
 bool32 IsIconicMoveUnlocked(struct BoxPokemon *mon, enum Move move);
 bool32 PayForIconicMove(struct BoxPokemon *mon, enum Move move, enum Item payment);
 u32 GetEmeraldChampionsIconicMovesToLearn(struct BoxPokemon *mon, u16 *moves);

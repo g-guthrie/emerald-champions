@@ -1512,8 +1512,8 @@ static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
 
         if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
             continue;
-        if (SpeciesCanLearnFieldMove(species, MOVE_FLY)
-         && (!mustKnowFly || MonKnowsMove(mon, MOVE_FLY)))
+        if (MonKnowsMove(mon, MOVE_FLY)
+         || (!mustKnowFly && SpeciesCanLearnFieldMove(species, MOVE_FLY)))
             return species;
     }
     for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
@@ -1525,8 +1525,8 @@ static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
 
             if (species == SPECIES_NONE || GetBoxMonData(mon, MON_DATA_IS_EGG))
                 continue;
-            if (SpeciesCanLearnFieldMove(species, MOVE_FLY)
-             && (!mustKnowFly || BoxMonKnowsMove(mon, MOVE_FLY)))
+            if (BoxMonKnowsMove(mon, MOVE_FLY)
+             || (!mustKnowFly && SpeciesCanLearnFieldMove(species, MOVE_FLY)))
                 return species;
         }
     }

@@ -5802,7 +5802,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .expYield = 146,
     #endif
         .evYield_Speed = 1,
-        .itemRare = ITEM_BRIGHT_POWDER,
         .genderRatio = MON_MALE,
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
@@ -5881,7 +5880,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .expYield = 146,
     #endif
         .evYield_Speed = 1,
-        .itemRare = ITEM_BRIGHT_POWDER,
         .genderRatio = MON_FEMALE,
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,

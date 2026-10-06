@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/32-TRAINER_ELLIOT_1/receipt.json",
   "rerun_reason": "Confirming rerun for the first pass's unverified level changes (CLAUNCHER offset 2->3, CORPHISH 2->3) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
   "play_order": 32,
-  "e_group": "E0067",
+  "e_group": "E0074",
   "trainer": "TRAINER_ELLIOT_1",
   "class": "regular",
   "location": "Route106",

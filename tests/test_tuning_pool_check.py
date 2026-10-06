@@ -212,7 +212,8 @@ class EncounterAvailabilityTests(unittest.TestCase):
         self.assertIn("HAS_OLD_ROD", pool["story_flags"])
         species = {s["species"] for s in pool["species"]}
         self.assertNotIn("SPECIES_LUCARIO", species)
-        self.assertIn("SPECIES_TOGETIC", species)  # Friendship assumed despite the native Bonding lock.
+        self.assertIn("SPECIES_TYROGUE", species)  # Petalburg Woods; Togepi is the Day Care's Egg.
+        self.assertNotIn("SPECIES_TOGEPI", species)
         self.assertNotIn("FLAG_BADGE01_GET", pool["story_flags"])
 
     def test_wattson_cannot_use_his_own_victory_mega_reward(self):

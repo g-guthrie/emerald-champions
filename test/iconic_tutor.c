@@ -44,7 +44,6 @@ TEST("Iconic tutor: a paid receipt bit zero offers only its own family's lesson"
 {
     enum Species species;
     enum Move move;
-    PARAMETRIZE { species = SPECIES_PICHU; move = MOVE_FLY; }
     PARAMETRIZE { species = SPECIES_EEVEE; move = MOVE_VEEVEE_VOLLEY; }
     PARAMETRIZE { species = SPECIES_MAGIKARP; move = MOVE_DRAGON_RAGE; }
     PARAMETRIZE { species = SPECIES_IGGLYBUFF; move = MOVE_SPARKLING_ARIA; }
@@ -91,21 +90,21 @@ TEST("Iconic tutor: boxed evolved Eevee keeps partner lessons without badges or 
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BOTTLE_CAP), 0);
 }
 
-TEST("Iconic tutor: regional evolution preserves purchased Fly without unlocking other lessons")
+TEST("Iconic tutor: regional evolution preserves purchased Pika Papow without unlocking other lessons")
 {
     ClearIconicBadges();
     ClearBag();
     struct Pokemon mon;
     CreateMonWithIVs(&mon, SPECIES_PIKACHU, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
-    SetMonMoveSlot(&mon, MOVE_FLY, 0);
+    SetMonMoveSlot(&mon, MOVE_PIKA_PAPOW, 0);
     EXPECT(AddBagItem(ITEM_GOLD_BOTTLE_CAP, 1));
-    EXPECT(PayForIconicMove(&mon.box, MOVE_FLY, ITEM_GOLD_BOTTLE_CAP));
+    EXPECT(PayForIconicMove(&mon.box, MOVE_PIKA_PAPOW, ITEM_GOLD_BOTTLE_CAP));
     enum Species evolution = SPECIES_RAICHU_ALOLA;
     SetMonData(&mon, MON_DATA_SPECIES, &evolution);
     ForgetMoves(&mon.box);
     u16 moves[MAX_RELEARNER_MOVES];
     EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, moves), 1);
-    EXPECT_EQ(moves[0], MOVE_FLY);
+    EXPECT_EQ(moves[0], MOVE_PIKA_PAPOW);
     EXPECT(!IsIconicMoveUnlocked(&mon.box, MOVE_VEEVEE_VOLLEY));
 }
 
@@ -143,11 +142,11 @@ TEST("Iconic tutor: unrelated species cannot migrate an iconic lesson or spend a
     struct Pokemon mon;
     CreateMonWithIVs(&mon, SPECIES_EEVEE, 20, 0, OTID_STRUCT_PLAYER_ID, 31);
     ForgetMoves(&mon.box);
-    SetMonMoveSlot(&mon, MOVE_FLY, 0);
+    SetMonMoveSlot(&mon, MOVE_PIKA_PAPOW, 0);
     EXPECT(AddBagItem(ITEM_GOLD_BOTTLE_CAP, 1));
     EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, NULL), 0);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_ICONIC_MOVES), 0);
-    EXPECT(!PayForIconicMove(&mon.box, MOVE_FLY, ITEM_GOLD_BOTTLE_CAP));
+    EXPECT(!PayForIconicMove(&mon.box, MOVE_PIKA_PAPOW, ITEM_GOLD_BOTTLE_CAP));
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_GOLD_BOTTLE_CAP), 1);
 }
 
@@ -161,9 +160,9 @@ TEST("Iconic tutor: fresh lessons remain gated by badge count")
     FlagSet(FLAG_BADGE01_GET);
     EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, NULL), 0);
     FlagSet(FLAG_BADGE02_GET);
-    EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, NULL), 2);
+    EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, NULL), 1);
     FlagSet(FLAG_BADGE03_GET);
-    EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, NULL), 5);
+    EXPECT_EQ(GetEmeraldChampionsIconicMovesToLearn(&mon.box, NULL), 4);
     ClearIconicBadges();
 }
 
@@ -210,7 +209,7 @@ TEST("Iconic catalogue: every listed lesson agrees with the actual tutor without
     EXPECT(GetEmeraldChampionsIconicTutorLesson(SPECIES_EEVEE, 8, &move, &badges));
     EXPECT_EQ(move, MOVE_SPARKLY_SWIRL);
     EXPECT_EQ(badges, 5);
-    EXPECT(GetEmeraldChampionsIconicTutorLesson(SPECIES_RAICHU_ALOLA, 0, &move, &badges));
-    EXPECT_EQ(move, MOVE_FLY);
+    EXPECT(GetEmeraldChampionsIconicTutorLesson(SPECIES_PIKACHU, 0, &move, &badges));
+    EXPECT_EQ(move, MOVE_PIKA_PAPOW);
     EXPECT_EQ(badges, 2);
 }

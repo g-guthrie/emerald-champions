@@ -14,7 +14,7 @@ Rules
   the step's cap. No friendship evolution happens before the Stone Badge (owner decision;
   src/pokemon.c IF_MIN_FRIENDSHIP checks FLAG_BADGE01_GET; the rival says so with the Cherish
   Balls). Friendship still builds by walking, and the Center tutor's Bonding opens with the same
-  Badge, so a raised Budew or Togepi evolves on its first level-up after it.
+  Badge, so a raised Budew or Pichu evolves on its first level-up after it.
   EVs: none, player or trainer, before the Knuckle Badge (src/caps.c AreEVsUnlocked).
   Wild Pokemon: the in-game DexNav (Start menu) photographed on every area, checked against
   src/data/wild_encounters.json. It lists only slots that can start a battle now (no Surf table
@@ -143,13 +143,14 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
   researcher's gift received), the Woods' east-door pocket of Route 104; DexNav in the Woods.
   Adds Petalburg Woods without Cut (south entrance to north exit) and Route 104's east-door pocket.
   Pokemon
-    Woods grass (DexNav = code), Lv 6-8: Blipbug, Slakoth (common); Shroomish, Paras, Togepi
-      (uncommon); Caterpie, Pichu, Foongus, Larvesta, Cascoon, Silcoon (rare)
+    Woods grass (DexNav = code; now Lv 8-10 by scripts/assign_wild_levels.py): Blipbug, Slakoth
+      (common); Shroomish, Paras, Tyrogue (uncommon); Caterpie, Pichu, Foongus, Larvesta, Cascoon,
+      Silcoon (rare). Tyrogue took Togepi's slot (owner: Togepi is the Day Care's Egg).
     Woods honey (code): Combee 6, Pikachu 6, Pidgey 7-8, Cherubi 7, Pikipek 8
     Evolutions by 14 (species data): Blipbug -> Dottler (10); Caterpie -> Metapod (7) -> Butterfree
-      (10); Silcoon / Cascoon -> Beautifly / Dustox (10); Pikipek -> Trumbeak (14). Togepi -> Togetic
-      and Pichu -> Pikachu are friendship evolutions: they wait for the Stone Badge. Raichu needs a
-      Thunder Stone (none yet).
+      (10); Silcoon / Cascoon -> Beautifly / Dustox (10); Pikipek -> Trumbeak (14). Pichu ->
+      Pikachu is a friendship evolution: it waits for the Stone Badge. Raichu needs a Thunder Stone
+      (none yet). Tyrogue -> Hitmonlee / Hitmonchan / Hitmontop at 20, by its stats (after Roxanne).
   Battle items
     Wild held (species data): Combee (Honey / -), Pikipek (Oran Berry / -), Shroomish, Paras,
       Foongus (Tiny Mushroom / Big Mushroom). Cherubi's Miracle Seed moved to the clerk at floor 0;
@@ -163,7 +164,7 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0063 Cyndy, E0064 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+  Deferred: E0071 Cyndy, E0073 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
     it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -247,7 +248,8 @@ STEP 8 - cap 20 - Route 116 north trainers (Dawson, Sarah, Janice, Jerry)
       Quagsire 20; Yungoos -> Gumshoos 20; Zigzagoon -> Linoone 20; Nincada -> Ninjask (+ Shedinja)
       20; Burmy -> Wormadam / Mothim 20; Weedle -> Kakuna 7 -> Beedrill 10; Caterpie -> Metapod 7 ->
       Butterfree 10; Blipbug -> Dottler 10; plus Steps 1-7's. Friendship (Bonding now open): Budew
-      -> Roselia, Togepi -> Togetic, Pichu -> Pikachu, Azurill -> Marill. Sun Stone in hand, but no
+      -> Roselia, Pichu -> Pikachu, Azurill -> Marill. Tyrogue -> Hitmonlee / Hitmonchan /
+      Hitmontop 20. Sun Stone in hand, but no
       Sun Stone user in the pool yet.
   Battle items
     Shops (code, data/scripts/general_mart.inc): Center marts add Great Ball, Super Potion, Honey,
@@ -280,7 +282,7 @@ STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
 ====================================================================================================
 STEP 11 - cap 20 - Route 106 trainer (Ned)
   Battles: E0031 Ned
-  Deferred: E0067 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
+  Deferred: E0074 Elliot (Route 106 water: Surf); E0039-E0046 Dewford Gym (Laura, Brenden & Lilith,
     Takao, Cristian, Jocelyn, Brawly): Brawly is in Slateport and his guide blocks the Gym door until
     the player speaks to him there (DewfordTown object 6, FLAG_HIDE_SLATEPORT_CITY_BRAWLY)
   VERIFIED IN PLAY: Mr. Briney's boat from Route 104; Dewford Town, Center, Hall, both houses,
@@ -335,7 +337,7 @@ STEP 13 - cap 20 - Route 109 beach and the Seashore House
   Battles: E0032 Hailey, E0033 Edmond, E0034 Chandler, E0035 Lola (Route 109 beach);
     E0036 Johanna, E0037 Dwayne, E0038 Simon (Seashore House, doubles)
   Deferred: E0047 Museum grunts, E0048 Archie (Museum raid, after the Knuckle Badge);
-    E0068 Greta (refuses until later)
+    E0075 Greta (refuses until later)
   Played: Briney (Dewford, after the Letter) to Route 109; beach and Seashore House swept; Slateport,
   its Center, Mart, House, Chef's house, Fan Club, Shipyard, Battle Tent lobby and Harbor swept;
   Brawly spoken to outside the Museum. Before the Knuckle Badge the Aqua line blocks the Museum door
@@ -377,8 +379,8 @@ STEP 15 - cap 30 - Oceanic Museum raid (Slateport)
 ====================================================================================================
 STEP 16 - cap 30 - Route 110
   Battles: E0049 Isabel & Kaleb, E0050 Timmy, E0052 Jasmine, E0053 rival (six variants)
-  Deferred: E0069 Sally, E0070 Eddie (Trick House puzzle 1); E0071 Jaclyn, E0073 Anthony,
-    E0074 Jacob (Cycling Road, by Bike)
+  Deferred: E0076 Sally, E0077 Eddie (Trick House puzzle 1); E0078 Jaclyn, E0079 Anthony,
+    E0080 Jacob (Cycling Road, by Bike)
   Played: Route 110's low road swept north to Mauville; the rival battle gives the Dowsing Machine.
   Adds Route 110 (and the Slateport raid's aftermath).
   Pokemon
@@ -413,3 +415,34 @@ STEP 17 - cap 30 - Mauville City and the Mauville Gym
   Fixes on the way: Wattson's lesson said "Try your gift stones!" (none come before the Ring now);
     it points to the sparkles behind cracked rocks.
 
+====================================================================================================
+STEP 18 - cap 30 - Route 117, the Day Care and Verdanturf Town
+  Battles: E0063 Anna & Meg, E0064 Maria, E0067 Aisha / Melina / Brandi, E0068 Derek, E0069 Isaac,
+    E0070 Lydia
+  Played (Cut, Rock Smash, Acro Bike): Route 117 swept both ways; the Day Care, Verdanturf, its
+  Center, Mart, houses and Battle Tent lobby walked; DexNav on Route 117. Scott and Wally talk in
+  Verdanturf; Rusturf Tunnel is left for its own step.
+  Adds Route 117 and Verdanturf (no Verdanturf wild table).
+  Pokemon
+    Route 117 grass (DexNav, Lv 26-28): Wooloo, Deerling, Volbeat, Illumise, Eevee, Farfetch'd (both
+      forms), Gossifleur, Petilil, Minccino. Shaymin (Balance Badge) and Munkidori (Mind Badge) are
+      gated slots. Honey (code): Combee, Shelmet, Karrablast, Chingling, Sewaddle. Cut trees (play):
+      the area's grass band; Greedent, Wormadam and Mothim appear past their evolution levels.
+      Water and the better rods wait for their tools (code levels 43-45 Surf, 31-33 Good Rod).
+    Gifts (play): the Day Care's first Egg is Togepi (Extrasensory); a random Egg every day after
+      that (src/field_specials.c SetSpeciesAndEggMove). Cyclizar by trade (Friendship Rater's house).
+    Day Care Egg moves are exclusive (owner): the Center no longer teaches Pichu-line Surf, Fly and
+      Extreme Speed, Taillow-line Boomburst or Dratini-line Extreme Speed, and the Mauville iconic
+      tutor dropped Pichu-line Fly. A hatched Pokemon keeps the move, and one that knows Surf or Fly
+      can use it in the field (src/field_move.c). Other gift Eggs' moves are still Center-teachable.
+    Follow Me (owner): Sentret / Furret from Route 104 (Center-teachable); Togepi now comes only
+      from the Day Care.
+  Battle items
+    Gifts (play): three Nuggets (Center, Mart, Battle Tent lobby).
+    Pickups (play): Revive (behind Cut), Great Ball, Stardust, hidden Bright Powder, nine Wepear
+      Berries.
+    Wild held (species data): removed Volbeat / Illumise Bright Powder (the Route 117 pickup),
+      Petilil / Lilligant Absorb Bulb, Sewaddle line Mental Herb, Wormadam / Mothim Silver Powder.
+  Fixes on the way: the Cyclizar trade's flag was named for Pacifidlog
+    (FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED -> FLAG_VERDANTURF_CYCLIZAR_TRADE_COMPLETED).
+  Concern (owner): four Nuggets by Verdanturf (Rusturf grunt plus three here).
