@@ -1034,6 +1034,15 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
     return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, scrollOffset);
 }
 
+// How far a pair's arrows bob, in pixels either way (the templates use 2).
+void SetScrollIndicatorArrowPairBounce(u8 taskId, s16 pixels)
+{
+    struct ScrollIndicatorPair *data = (void *)gTasks[taskId].data;
+
+    gSprites[data->topSpriteId].data[3] = pixels;    // tMultiplier
+    gSprites[data->bottomSpriteId].data[3] = pixels;
+}
+
 static void Task_ScrollIndicatorArrowPair(u8 taskId)
 {
     struct ScrollIndicatorPair *data = (void *) gTasks[taskId].data;

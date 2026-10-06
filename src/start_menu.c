@@ -76,6 +76,13 @@ enum
 };
 
 #define START_MENU_MAX_VISIBLE 8
+// A menu that scrolls shows one row fewer in the same window: the freed 16
+// pixels become an 8-pixel lane above and below the rows, where the scroll
+// arrows bob (±2) without ever touching a row or the frame.
+#define START_MENU_ROWS_Y       9
+#define START_MENU_ARROW_LANE   8
+#define START_MENU_UP_ARROW_Y   (1 * 8 + 10)                                // centered in the top lane
+#define START_MENU_DOWN_ARROW_Y ((1 + START_MENU_MAX_VISIBLE * 2 + 2) * 8 - 9) // centered in the bottom lane
 
 // Save status
 enum
@@ -499,9 +506,20 @@ static void RemoveExtraStartMenuWindows(void)
     }
 }
 
+static bool32 IsStartMenuScrolling(void)
+{
+    return sNumStartMenuActions > START_MENU_MAX_VISIBLE;
+}
+
 static u8 StartMenuVisibleCount(void)
 {
-    return sNumStartMenuActions > START_MENU_MAX_VISIBLE ? START_MENU_MAX_VISIBLE : sNumStartMenuActions;
+    return IsStartMenuScrolling() ? START_MENU_MAX_VISIBLE - 1 : sNumStartMenuActions;
+}
+
+// The window's y of the first row.
+static u8 StartMenuRowsY(void)
+{
+    return IsStartMenuScrolling() ? START_MENU_ROWS_Y + START_MENU_ARROW_LANE : START_MENU_ROWS_Y;
 }
 
 // Keeps the remembered cursor inside the action list and scrolls the window so the
@@ -532,12 +550,12 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 
         if (sStartMenuItems[action].func.u8_void == StartMenuPlayerNameCallback)
         {
-            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[action].text, 8, (index << 4) + 9);
+            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[action].text, 8, (index << 4) + StartMenuRowsY());
         }
         else
         {
             StringExpandPlaceholders(gStringVar4, sStartMenuItems[action].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + StartMenuRowsY(), TEXT_SKIP_DRAW, NULL);
         }
 
         index++;
@@ -571,9 +589,10 @@ static void AddStartMenuScrollArrows(void)
     RemoveStartMenuScrollArrows();
     if (sNumStartMenuActions > visible)
     {
-        // The window sits at tilemap (22,1), 7 tiles wide, (visible * 2 + 2) tiles tall.
+        // The window sits at tilemap (22,1), 7 tiles wide, the full
+        // START_MENU_MAX_VISIBLE rows tall; the arrows sit in its lanes.
         sStartMenuScrollArrowTaskId = AddScrollIndicatorArrowPairParameterized(
-            SCROLL_ARROW_UP, 22 * 8 + 7 * 4, 1 * 8 + 4, (1 + visible * 2 + 2) * 8 - 4,
+            SCROLL_ARROW_UP, 22 * 8 + 7 * 4, START_MENU_UP_ARROW_Y, START_MENU_DOWN_ARROW_Y,
             sNumStartMenuActions - visible, 110, 110, &sStartMenuScrollOffset);
         sStartMenuScrollArrowsActive = TRUE;
     }
@@ -587,7 +606,7 @@ static void RedrawStartMenuRows(void)
     FillWindowPixelBuffer(GetStartMenuWindowId(), PIXEL_FILL(1));
     while (!PrintStartMenuActions(&index, StartMenuVisibleCount()))
         ;
-    InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
+    InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, StartMenuRowsY(), 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
     CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_GFX);
 }
 
@@ -648,7 +667,7 @@ static bool32 InitStartMenuStep(void)
     case 2:
         LoadMessageBoxAndBorderGfx();
         ClampStartMenuScroll();
-        DrawStdWindowFrame(AddStartMenuWindow(StartMenuVisibleCount()), FALSE);
+        DrawStdWindowFrame(AddStartMenuWindow(IsStartMenuScrolling() ? START_MENU_MAX_VISIBLE : StartMenuVisibleCount()), FALSE);
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
         break;
@@ -664,7 +683,7 @@ static bool32 InitStartMenuStep(void)
             sInitStartMenuData[0]++;
         break;
     case 5:
-        InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
+        InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, StartMenuRowsY(), 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
         AddStartMenuScrollArrows();
         CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;

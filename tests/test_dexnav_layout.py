@@ -13,7 +13,12 @@ ROOT = Path(__file__).resolve().parents[1]
 DEXNAV = (ROOT / 'src/dexnav.c').read_text()
 
 
+SCREEN = {'DISPLAY_WIDTH': '240', 'DISPLAY_HEIGHT': '160'}  # include/gba/defines.h
+
+
 def define(name):
+    if name in SCREEN:
+        return SCREEN[name]
     m = re.search(rf'^#define {name}\s+(.+?)\s*(?://.*)?$', DEXNAV, re.M)
     return m.group(1)
 

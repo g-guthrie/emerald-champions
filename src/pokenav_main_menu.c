@@ -75,7 +75,7 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 
 static const u8 sHelpBarTextColors[3] =
 {
-    TEXT_COLOR_RED, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY
+    TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY
 };
 
 // Three 64x32 frames: "Hoenn Map", then the "Full View" and "Zoomed" labels
@@ -255,7 +255,10 @@ void PrintHelpBarText(u32 textId)
     struct Pokenav_Frame *frame = GetSubstructPtr(POKENAV_SUBSTRUCT_FRAME);
 
     DrawHelpBar(frame->helpBarWindowId);
-    AddTextPrinterParameterized3(frame->helpBarWindowId, FONT_NORMAL, 0, 1, sHelpBarTextColors, 0, sHelpBarTexts[textId]);
+    // The bar is a 1-pixel highlight over 15 rows. At y 0 the text keeps 2
+    // rows under the highlight and 3 above the screen's edge; it prints over
+    // the bar with no background of its own, so it never covers the highlight.
+    AddTextPrinterParameterized3(frame->helpBarWindowId, FONT_NORMAL, 0, 0, sHelpBarTextColors, 0, sHelpBarTexts[textId]);
 }
 
 bool32 WaitForHelpBar(void)
