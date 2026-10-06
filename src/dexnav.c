@@ -837,6 +837,7 @@ enum DexNavWindows
 #define COLOR_WHITE         1
 #define COLOR_TEXT          2
 #define COLOR_SHADOW        3
+#define COLOR_BLACK         8
 
 enum DexNavTheme
 {
@@ -857,29 +858,53 @@ static const u8 sThemeColors[][2] =
 
 // The list and info windows sit under the title bar. Their layout is
 // window-relative, with room above and below for the scroll arrows. Every
-// icon owns a whole 32-pixel cell, the size of an icon frame, so no two
-// icons (or an icon and a band) can ever touch: five to a row.
+// icon owns a whole 32-pixel cell, the size of an icon frame and of the
+// cursor, so no two icons (or an icon and a band) can ever touch: five to a
+// row. The cells keep LIST_CELL_INSET pixels of white from the box's sides
+// and LIST_BAND_GAP from the band above them, so the cursor never meets a
+// border. The two boxes keep a pixel off the screen's edges and
+// LIST_INFO_GAP pixels apart.
 #define LIST_WINDOW_Y       16
 #define LIST_TOP            8
 #define LIST_BOTTOM         136
-#define LIST_BOX_X          2
-#define LIST_BOX_WIDTH      164
+#define LIST_BOX_X          1
+#define LIST_CELL_INSET     2
+#define LIST_BOX_WIDTH      (1 + LIST_CELL_INSET + 5 * 32 + LIST_CELL_INSET + 1)
+#define LIST_INFO_GAP       2
 #define LIST_HEADER_HEIGHT  16
+#define LIST_BAND_GAP       2
+#define LIST_ROWS_BELOW_BAND (LIST_HEADER_HEIGHT + LIST_BAND_GAP) // a section's first row, below its band's top
 #define LIST_ROW_HEIGHT     32
 #define LIST_BOX_BOTTOM     3   // margin and border under a section's last row
 #define LIST_SECTION_GAP    4
 #define LIST_ICONS_PER_ROW  5
 #define LIST_ICON_PITCH     32
-#define LIST_ICON_X         (LIST_BOX_X + 2 + LIST_ICON_PITCH / 2)   // first icon's center
+#define LIST_ICON_X         (LIST_BOX_X + 1 + LIST_CELL_INSET + LIST_ICON_PITCH / 2)   // first icon's center
 #define LIST_ICON_Y         (LIST_ROW_HEIGHT / 2)                    // icon center below its row's top
 #define LIST_MAX_ROWS       (WILD_ROSTER_MAX_ENTRIES / LIST_ICONS_PER_ROW + WILD_ROSTER_METHOD_COUNT)
-#define LIST_ARROW_X        (LIST_BOX_X + LIST_BOX_WIDTH / 2)
-#define LIST_ARROW_UP_Y     (LIST_WINDOW_Y + 4)
-#define LIST_ARROW_DOWN_Y   (LIST_WINDOW_Y + LIST_BOTTOM + 4)
+// The scroll arrows sit at the list's right end and bob a pixel either way:
+// "more above" inside the top band, "more below" in a lane the rows leave
+// free under the list while there is more to scroll to. Neither meets a
+// border or the screen's edge.
+#define LIST_ARROW_BOUNCE   1
+#define LIST_ARROW_LANE     15
+#define LIST_ARROW_X        (LIST_BOX_X + LIST_BOX_WIDTH - 12)
+// An up arrow's ink spans y-6..y+1 and a down arrow's y-3..y+5, plus the
+// bounce; these centers leave 2 clear rows inside the band and the lane.
+#define LIST_ARROW_UP_Y     (LIST_WINDOW_Y + LIST_TOP + 9)
+#define LIST_ARROW_DOWN_Y   (LIST_WINDOW_Y + LIST_BOTTOM - 9)
+#define LIST_ARROW_CLEAR    2
+STATIC_ASSERT(LIST_ARROW_UP_Y - 6 - LIST_ARROW_BOUNCE >= LIST_WINDOW_Y + LIST_TOP + LIST_ARROW_CLEAR, dexNavUpArrowClearsBandTop);
+STATIC_ASSERT(LIST_ARROW_UP_Y + 1 + LIST_ARROW_BOUNCE <= LIST_WINDOW_Y + LIST_TOP + LIST_HEADER_HEIGHT - 2 - LIST_ARROW_CLEAR, dexNavUpArrowClearsBandLine);
+STATIC_ASSERT(LIST_ARROW_DOWN_Y - 3 - LIST_ARROW_BOUNCE >= LIST_WINDOW_Y + LIST_BOTTOM - LIST_ARROW_LANE + LIST_ARROW_CLEAR, dexNavDownArrowClearsList);
+STATIC_ASSERT(LIST_ARROW_DOWN_Y + 5 + LIST_ARROW_BOUNCE <= LIST_WINDOW_Y + LIST_BOTTOM - LIST_ARROW_CLEAR, dexNavDownArrowAbovePanelBottom);
 
 #define INFO_WINDOW_X       168
-#define INFO_BOX_X          2
-#define INFO_BOX_WIDTH      68
+#define INFO_BOX_X          (LIST_BOX_X + LIST_BOX_WIDTH + LIST_INFO_GAP - INFO_WINDOW_X)
+#define INFO_BOX_WIDTH      (DISPLAY_WIDTH - 1 - INFO_WINDOW_X - INFO_BOX_X)
+#define INFO_TYPE_WIDTH     32  // a type badge (gSpriteTemplate_MoveTypes)
+STATIC_ASSERT(LIST_BOX_X + LIST_BOX_WIDTH <= INFO_WINDOW_X, dexNavListBoxInsideItsWindow);
+STATIC_ASSERT(INFO_BOX_WIDTH >= 2 * INFO_TYPE_WIDTH + 2, dexNavInfoBoxHoldsTwoTypes);
 #define INFO_TOP            LIST_TOP
 #define INFO_BOTTOM         LIST_BOTTOM
 #define INFO_TEXT_X         (INFO_BOX_X + 4)
@@ -934,6 +959,8 @@ struct DexNavGUI
     u8 topRow;
     u8 lastTopRow;
     u16 scrollOffset;   // topRow, for the scroll arrows
+    bool8 showPending;  // windows drawn, waiting a frame to go up with the sprites
+    bool8 listChanged;  // ...and the list scrolled, so its icons change too
     s16 rowY[LIST_MAX_ROWS];   // window y of each row on screen, or -1
     u8 iconSpriteIds[WILD_ROSTER_MAX_ENTRIES];
     u8 markSpriteIds[WILD_ROSTER_MAX_ENTRIES];
@@ -1271,7 +1298,7 @@ static void DexNavLoadRoster(void)
 // Places rows from topRow down. A section's band sits over its first row,
 // and the top row always shows its own section's band. Returns the last row
 // that fits.
-static u32 LayoutDexNavRows(u32 topRow, s16 *rowY)
+static u32 LayoutDexNavRowsTo(u32 topRow, s16 *rowY, u32 bottom)
 {
     struct DexNavGUI *ui = sDexNavUiDataPtr;
     u32 y = LIST_TOP, last = topRow;
@@ -1285,8 +1312,8 @@ static u32 LayoutDexNavRows(u32 topRow, s16 *rowY)
         if (row != topRow && ui->rows[row].startsSection)
             top += LIST_SECTION_GAP;
         if (row == topRow || ui->rows[row].startsSection)
-            top += LIST_HEADER_HEIGHT;
-        if (top + LIST_ROW_HEIGHT + LIST_BOX_BOTTOM > LIST_BOTTOM)
+            top += LIST_ROWS_BELOW_BAND;
+        if (top + LIST_ROW_HEIGHT + LIST_BOX_BOTTOM > bottom)
             break;
         rowY[row] = top;
         y = top + LIST_ROW_HEIGHT;
@@ -1294,6 +1321,17 @@ static u32 LayoutDexNavRows(u32 topRow, s16 *rowY)
             y += LIST_BOX_BOTTOM;
         last = row;
     }
+    return last;
+}
+
+// Lays the rows out from topRow; with more rows below than fit, the bottom
+// lane is left for the down arrow.
+static u32 LayoutDexNavRows(u32 topRow, s16 *rowY)
+{
+    u32 last = LayoutDexNavRowsTo(topRow, rowY, LIST_BOTTOM);
+
+    if (last + 1u < sDexNavUiDataPtr->rowCount)
+        last = LayoutDexNavRowsTo(topRow, rowY, LIST_BOTTOM - LIST_ARROW_LANE);
     return last;
 }
 
@@ -1333,7 +1371,7 @@ static void DrawDexNavList(void)
         u32 end = row;
         u8 method = ui->roster[ui->rows[row].first].method;
         enum DexNavTheme theme = GetDexNavMethodTheme(method);
-        u32 top = ui->rowY[row] - LIST_HEADER_HEIGHT;
+        u32 top = ui->rowY[row] - LIST_ROWS_BELOW_BAND;
         u32 bottom;
 
         while (end < last && !ui->rows[end + 1].startsSection)
@@ -1348,7 +1386,6 @@ static void DrawDexNavList(void)
         row = end + 1;
     }
     PutWindowTilemap(WIN_LIST);
-    CopyWindowToVram(WIN_LIST, COPYWIN_FULL);
 }
 
 // One box across the middle of the screen, over both the list's and the
@@ -1474,6 +1511,7 @@ static bool32 ScrollDexNavToCursor(void)
 }
 
 static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId);
+static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 
 static const u8 sText_SearchOdds[] = _("Search odds");
 static const u8 sText_ShinyChance[] = _("Shiny {STR_VAR_3}");
@@ -1507,19 +1545,14 @@ static void PrintSearchChance(bool32 pokerus)
 
 static void PrintDexNavInfo(void)
 {
-    struct DexNavGUI *ui = sDexNavUiDataPtr;
     const struct WildRosterEntry *entry = GetSelectedDexNavEntry();
     enum DexNavTheme theme;
-    enum Type type1, type2;
     const u8 *name;
 
     FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
-    gSprites[ui->typeIconSpriteIds[0]].invisible = TRUE;
-    gSprites[ui->typeIconSpriteIds[1]].invisible = TRUE;
     if (entry == NULL)
     {
         PutWindowTilemap(WIN_INFO);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         return;
     }
 
@@ -1529,11 +1562,6 @@ static void PrintDexNavInfo(void)
     name = GetSpeciesName(entry->species);
     PrintDexNavBandText(WIN_INFO, theme, GetFontIdToFit(name, FONT_NORMAL, 0, INFO_NAME_WIDTH), INFO_TEXT_X, INFO_TOP, name);
 
-    type1 = GetSpeciesType(entry->species, 0);
-    type2 = GetSpeciesType(entry->species, 1);
-    SetTypeIconPosAndPal(type1, INFO_WINDOW_X + INFO_BOX_X + 2, LIST_WINDOW_Y + INFO_TYPES_Y, 0);
-    if (type2 != type1)
-        SetTypeIconPosAndPal(type2, INFO_WINDOW_X + INFO_BOX_X + 2 + 32, LIST_WINDOW_Y + INFO_TYPES_Y, 1);
 
     AddTextPrinterParameterized3(WIN_INFO, FONT_SMALL, INFO_TEXT_X, INFO_RARITY_Y, sBodyTextColors, TEXT_SKIP_DRAW,
                                  GetWildRosterRarityName(entry->rarity));
@@ -1569,21 +1597,58 @@ static void PrintDexNavInfo(void)
                                  searchable || IsStormVisitorHere(entry->species) ? GetDexNavEntryHint(entry) : sText_DexNavNoSearch);
 
     PutWindowTilemap(WIN_INFO);
-    CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
 }
 
-// Redraws what the cursor changed: the list when it scrolled, the moving
-// icon (only the highlighted Pokémon animates), the cursor and the panel.
-static void UpdateDexNavSelection(bool32 redrawList)
+// The info panel's type badges for the highlighted Pokémon: one lines up
+// with the text, two sit centered in the box.
+static void ShowDexNavInfoTypes(void)
+{
+    const struct WildRosterEntry *entry = GetSelectedDexNavEntry();
+    enum Type type1, type2;
+
+    SetSpriteInvisibility(0, TRUE);
+    SetSpriteInvisibility(1, TRUE);
+    if (entry == NULL)
+        return;
+    type1 = GetSpeciesType(entry->species, 0);
+    type2 = GetSpeciesType(entry->species, 1);
+    if (type2 != type1)
+    {
+        u32 x = INFO_WINDOW_X + INFO_BOX_X + (INFO_BOX_WIDTH - 2 * INFO_TYPE_WIDTH) / 2;
+        SetTypeIconPosAndPal(type1, x, LIST_WINDOW_Y + INFO_TYPES_Y, 0);
+        SetTypeIconPosAndPal(type2, x + INFO_TYPE_WIDTH, LIST_WINDOW_Y + INFO_TYPES_Y, 1);
+    }
+    else
+    {
+        SetTypeIconPosAndPal(type1, INFO_WINDOW_X + INFO_TEXT_X - 1, LIST_WINDOW_Y + INFO_TYPES_Y, 0);
+    }
+}
+
+// What the cursor changed shows in two steps. First the windows are drawn
+// into their buffers, which takes a few frames. On the next frame the
+// sprites change (the list's icons when it scrolled, the moving icon, the
+// cursor, the type badges) and the windows are copied, all before that
+// frame's VBlank, so the list, panel and sprites always change together.
+static void DrawDexNavSelection(bool32 redrawList)
+{
+    struct DexNavGUI *ui = sDexNavUiDataPtr;
+
+    ui->listChanged = ScrollDexNavToCursor() || redrawList;
+    if (ui->listChanged)
+        DrawDexNavList();
+    PrintDexNavInfo();
+    ui->showPending = TRUE;
+}
+
+static void ShowDexNavSelection(void)
 {
     struct DexNavGUI *ui = sDexNavUiDataPtr;
     const struct WildRosterEntry *entry = GetSelectedDexNavEntry();
     u32 selected = ui->rows[ui->cursorRow].first + ui->cursorCol;
 
-    if (ScrollDexNavToCursor() || redrawList)
+    if (ui->listChanged)
     {
         DestroyDexNavListSprites();
-        DrawDexNavList();
         CreateDexNavListSprites();
     }
 
@@ -1609,11 +1674,23 @@ static void UpdateDexNavSelection(bool32 redrawList)
 
     gSprites[ui->cursorSpriteId].x = LIST_ICON_X + ui->cursorCol * LIST_ICON_PITCH;
     gSprites[ui->cursorSpriteId].y = LIST_WINDOW_Y + ui->rowY[ui->cursorRow] + LIST_ICON_Y;
-    PrintDexNavInfo();
+    ShowDexNavInfoTypes();
+    if (ui->listChanged)
+        CopyWindowToVram(WIN_LIST, COPYWIN_FULL);
+    CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+    ui->showPending = FALSE;
+    ui->listChanged = FALSE;
 
     sDexNavCursorMap = CurrentDexNavCursorMap();
     sDexNavCursorSpecies = entry->species;
     sDexNavCursorMethod = entry->method;
+}
+
+// Both steps at once, while the screen is still black.
+static void UpdateDexNavSelection(bool32 redrawList)
+{
+    DrawDexNavSelection(redrawList);
+    ShowDexNavSelection();
 }
 
 // Back on the Pokémon highlighted last time on this map, if it is still here.
@@ -1664,8 +1741,11 @@ static void CreateDexNavScrollArrows(void)
     while (ui->lastTopRow + 1u < ui->rowCount && LayoutDexNavRows(ui->lastTopRow, rowY) + 1u < ui->rowCount)
         ui->lastTopRow++;
     if (ui->lastTopRow != 0)
+    {
         ui->arrowTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, LIST_ARROW_X, LIST_ARROW_UP_Y, LIST_ARROW_DOWN_Y,
                                                                    ui->lastTopRow, DEXNAV_ARROWS_TAG, DEXNAV_ARROWS_TAG, &ui->scrollOffset);
+        SetScrollIndicatorArrowPairBounce(ui->arrowTaskId, LIST_ARROW_BOUNCE);
+    }
 }
 
 static void DexNav_InitWindows(void)
@@ -1797,7 +1877,9 @@ static void PrintDexNavTitle(void)
         else
             shortcut = sText_DexNavNotHere;
     }
-    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
+    // The title bar is the window's own black, a full 16 pixels: the title's
+    // glyphs keep the same margin above and below.
+    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(COLOR_BLACK));
     if (shortcut != NULL)
     {
         titleWidth -= GetStringWidth(FONT_NORMAL, shortcut, 0) + 8;
@@ -1890,7 +1972,7 @@ static bool8 DexNav_DoGfxSetup(void)
     case 10:
         if (ui->rowCount == 0)
         {
-            PrintDexNavInfo();
+            PrintDexNavInfo(); // clears the panel; the empty box copies both windows
             DrawDexNavEmptyList();
             gSprites[ui->cursorSpriteId].invisible = TRUE;
         }
@@ -2002,7 +2084,7 @@ static void MoveDexNavCursor(s32 rowDelta, s32 colDelta)
         ui->preferredCol = ui->cursorCol;
     }
     PlaySE(SE_RG_BAG_CURSOR);
-    UpdateDexNavSelection(FALSE);
+    DrawDexNavSelection(FALSE);
 }
 
 static void Task_DexNavMain(u8 taskId)
@@ -2010,6 +2092,12 @@ static void Task_DexNavMain(u8 taskId)
     struct Task *task = &gTasks[taskId];
     const struct WildRosterEntry *entry;
 
+    // A move drawn last frame goes up now, before anything else.
+    if (sDexNavUiDataPtr->showPending)
+    {
+        ShowDexNavSelection();
+        return;
+    }
     if (IsSEPlaying())
         return;
 

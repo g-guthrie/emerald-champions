@@ -115,6 +115,10 @@ struct Pokenav_WildList
     u8 typeCount;
     u8 scrollArrowsTaskId;
     bool8 spritesHidden;
+    bool8 showPending; // the drawn windows wait a frame for their sprites
+    u8 oldIconCount; // a scrolled list's icons, until its new ones show
+    u8 oldIconSpriteIds[MAX_VISIBLE_ICONS];
+    u8 oldBallSpriteIds[MAX_VISIBLE_ICONS];
 };
 
 static const struct WindowTemplate sWildWindowTemplates[WIN_COUNT] =
@@ -335,18 +339,33 @@ static void DrawTitle(struct Pokenav_WildList *wild)
     GetWildPlaceLabel(gStringVar2, wild->list.cell, section->mapGroup, section->mapNum);
     if (gStringVar2[0] != EOS && !IsHeadingVisible(wild, wild->cursorSection) && nameWidth + 12 < CONTENT_WIDTH)
         PrintFitted(windowId, FONT_NORMAL, gStringVar2, CONTENT_LEFT + nameWidth + 12, 0, CONTENT_WIDTH - nameWidth - 12, sColors_Gray, TRUE);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+static void DestroyIconSprites(u8 *iconSpriteIds, u8 *ballSpriteIds, u32 count)
+{
+    for (u32 i = 0; i < count; i++)
+    {
+        FreeAndDestroyMonIconSprite(&gSprites[iconSpriteIds[i]]);
+        if (ballSpriteIds[i] != MAX_SPRITES)
+            DestroySprite(&gSprites[ballSpriteIds[i]]);
+    }
 }
 
 static void DestroyIcons(struct Pokenav_WildList *wild)
 {
+    DestroyIconSprites(wild->iconSpriteIds, wild->ballSpriteIds, wild->iconCount);
+    DestroyIconSprites(wild->oldIconSpriteIds, wild->oldBallSpriteIds, wild->oldIconCount);
+    wild->iconCount = wild->oldIconCount = 0;
+}
+
+static void SetIconsInvisible(struct Pokenav_WildList *wild, bool32 invisible)
+{
     for (u32 i = 0; i < wild->iconCount; i++)
     {
-        FreeAndDestroyMonIconSprite(&gSprites[wild->iconSpriteIds[i]]);
+        gSprites[wild->iconSpriteIds[i]].invisible = invisible;
         if (wild->ballSpriteIds[i] != MAX_SPRITES)
-            DestroySprite(&gSprites[wild->ballSpriteIds[i]]);
+            gSprites[wild->ballSpriteIds[i]].invisible = invisible;
     }
-    wild->iconCount = 0;
 }
 
 static void CreateIcon(struct Pokenav_WildList *wild, u32 entryId, u32 column, u32 y)
@@ -368,17 +387,13 @@ static void CreateIcon(struct Pokenav_WildList *wild, u32 entryId, u32 column, u
     }
 }
 
-// Redraws the scrolling list: headings, the cursor's highlight, and icons
-// for the rows that show when the list has scrolled.
-static void DrawList(struct Pokenav_WildList *wild, bool32 scrolled)
+// Redraws the scrolling list's buffer: headings and the cursor's highlight.
+static void DrawList(struct Pokenav_WildList *wild)
 {
     u32 windowId = wild->windowIds[WIN_BODY];
     u32 visible = GetVisibleLineCount(wild, wild->topLine);
-    const struct WildPlaceSection *cursorSection = &wild->list.sections[wild->cursorSection];
     u32 y = 0;
 
-    if (scrolled)
-        DestroyIcons(wild);
     FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_BG), 0, LIST_Y, WINDOW_PIXEL_WIDTH, LIST_HEIGHT);
     for (u32 i = 0; i < visible; i++)
     {
@@ -400,20 +415,52 @@ static void DrawList(struct Pokenav_WildList *wild, bool32 scrolled)
                 if (line->section == wild->cursorSection && first + column == wild->cursorIndex)
                     FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_HIGHLIGHT), CONTENT_LEFT + column * WILD_LIST_ICON_PITCH + 1, LIST_Y + y + 1,
                                         WILD_LIST_ICON_PITCH - 2, WILD_LIST_ROW_HEIGHT - 2);
-                if (scrolled && wild->iconCount < MAX_VISIBLE_ICONS)
-                    CreateIcon(wild, section->first + first + column, column, y);
             }
         }
         y += GetLineHeight(line);
     }
+}
 
-    // Only the highlighted Pokemon moves.
+// Hidden icons for the rows a scrolled list shows; the old ones stay up
+// until ShowWildSelection swaps them.
+static void CreateListIcons(struct Pokenav_WildList *wild)
+{
+    u32 visible = GetVisibleLineCount(wild, wild->topLine);
+    u32 y = 0;
+
+    DestroyIconSprites(wild->oldIconSpriteIds, wild->oldBallSpriteIds, wild->oldIconCount);
+    memcpy(wild->oldIconSpriteIds, wild->iconSpriteIds, sizeof(wild->iconSpriteIds));
+    memcpy(wild->oldBallSpriteIds, wild->ballSpriteIds, sizeof(wild->ballSpriteIds));
+    wild->oldIconCount = wild->iconCount;
+    wild->iconCount = 0;
+    for (u32 i = 0; i < visible; i++)
+    {
+        const struct WildListLine *line = &wild->lines[wild->topLine + i];
+        const struct WildPlaceSection *section = &wild->list.sections[line->section];
+
+        if (line->row != LINE_HEADING)
+        {
+            u32 first = line->row * ICONS_PER_ROW;
+            u32 count = min(section->count - first, ICONS_PER_ROW);
+
+            for (u32 column = 0; column < count && wild->iconCount < MAX_VISIBLE_ICONS; column++)
+                CreateIcon(wild, section->first + first + column, column, y);
+        }
+        y += GetLineHeight(line);
+    }
+    SetIconsInvisible(wild, TRUE);
+}
+
+// Only the highlighted Pokemon moves.
+static void SetIconCallbacks(struct Pokenav_WildList *wild)
+{
+    const struct WildPlaceSection *cursorSection = &wild->list.sections[wild->cursorSection];
+
     for (u32 i = 0; i < wild->iconCount; i++)
     {
         struct Sprite *icon = &gSprites[wild->iconSpriteIds[i]];
         icon->callback = wild->iconEntries[i] == cursorSection->first + wild->cursorIndex ? SpriteCB_MonIcon : SpriteCallbackDummy;
     }
-    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 static void SetTypeIcon(struct Pokenav_WildList *wild, u32 slot, enum Type type, s16 x, s16 y)
@@ -433,25 +480,10 @@ static void DrawDetail(struct Pokenav_WildList *wild)
     u32 windowId = wild->windowIds[WIN_BODY];
     const struct WildRosterEntry *entry = GetCursorEntry(wild);
     const struct WildPlaceSection *section = &wild->list.sections[wild->cursorSection];
-    enum Type type1 = GetSpeciesType(entry->species, 0), type2 = GetSpeciesType(entry->species, 1);
-    u32 nameWidth;
     u8 *end;
 
     FillWindowPixelRect(windowId, PIXEL_FILL(COLOR_BG), 0, DETAIL_Y, WINDOW_PIXEL_WIDTH, DETAIL_HEIGHT);
     PrintFitted(windowId, FONT_NORMAL, GetSpeciesName(entry->species), CONTENT_LEFT, DETAIL_Y, 120, sColors_Black, FALSE);
-    nameWidth = min(GetStringWidth(FONT_NORMAL, GetSpeciesName(entry->species), 0), 120);
-    SetTypeIcon(wild, 0, type1, 8 + CONTENT_LEFT + nameWidth + 4, BODY_SCREEN_Y + DETAIL_Y + 1);
-    wild->typeCount = 1;
-    if (type2 != type1)
-    {
-        SetTypeIcon(wild, 1, type2, 8 + CONTENT_LEFT + nameWidth + 4 + 34, BODY_SCREEN_Y + DETAIL_Y + 1);
-        wild->typeCount = 2;
-    }
-    else
-    {
-        gSprites[wild->typeSpriteIds[1]].invisible = TRUE;
-    }
-
     end = StringCopy(gStringVar4, GetWildRosterMethodName(section->method, section->mapGroup, section->mapNum));
     end = StringCopy(end, COMPOUND_STRING(" · "));
     end = StringCopy(end, GetWildRosterRarityName(entry->rarity));
@@ -463,18 +495,58 @@ static void DrawDetail(struct Pokenav_WildList *wild)
         end = ConvertIntToDecimalStringN(end, entry->maxLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     }
     PrintFitted(windowId, FONT_NORMAL, gStringVar4, CONTENT_LEFT, DETAIL_LINE_2_Y, CONTENT_WIDTH, sColors_Gray, FALSE);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+}
+
+// The highlighted Pokemon's types, after its name.
+static void ShowDetailTypes(struct Pokenav_WildList *wild)
+{
+    const struct WildRosterEntry *entry = GetCursorEntry(wild);
+    enum Type type1 = GetSpeciesType(entry->species, 0), type2 = GetSpeciesType(entry->species, 1);
+    u32 nameWidth = min(GetStringWidth(FONT_NORMAL, GetSpeciesName(entry->species), 0), 120);
+
+    SetTypeIcon(wild, 0, type1, 8 + CONTENT_LEFT + nameWidth + 4, BODY_SCREEN_Y + DETAIL_Y + 1);
+    wild->typeCount = 1;
+    if (type2 != type1)
+    {
+        SetTypeIcon(wild, 1, type2, 8 + CONTENT_LEFT + nameWidth + 4 + 34, BODY_SCREEN_Y + DETAIL_Y + 1);
+        wild->typeCount = 2;
+    }
+    else
+    {
+        gSprites[wild->typeSpriteIds[1]].invisible = TRUE;
+    }
+}
+
+// Redrawing the windows takes most of a frame, so it is split in two: this
+// frame draws the buffers, and the next sets the sprites and queues the
+// copies together, so new text never shows beside old icons.
+// New icons are made hidden here too: making a dozen can run past VBlank.
+static void DrawWildSelection(struct Pokenav_WildList *wild, bool32 scrolled)
+{
+    DrawTitle(wild);
+    DrawList(wild);
+    DrawDetail(wild);
+    if (scrolled)
+        CreateListIcons(wild);
+    wild->showPending = TRUE;
+}
+
+static void ShowWildSelection(struct Pokenav_WildList *wild)
+{
+    DestroyIconSprites(wild->oldIconSpriteIds, wild->oldBallSpriteIds, wild->oldIconCount);
+    wild->oldIconCount = 0;
+    SetIconsInvisible(wild, wild->spritesHidden);
+    SetIconCallbacks(wild);
+    ShowDetailTypes(wild);
+    for (u32 i = 0; i < WIN_COUNT; i++)
+        CopyWindowToVram(wild->windowIds[i], COPYWIN_GFX);
+    wild->showPending = FALSE;
 }
 
 static void ShowSprites(struct Pokenav_WildList *wild)
 {
     wild->spritesHidden = FALSE;
-    for (u32 i = 0; i < wild->iconCount; i++)
-    {
-        gSprites[wild->iconSpriteIds[i]].invisible = FALSE;
-        if (wild->ballSpriteIds[i] != MAX_SPRITES)
-            gSprites[wild->ballSpriteIds[i]].invisible = FALSE;
-    }
+    SetIconsInvisible(wild, FALSE);
     for (u32 i = 0; i < wild->typeCount; i++)
         gSprites[wild->typeSpriteIds[i]].invisible = FALSE;
 }
@@ -580,9 +652,8 @@ u32 LoopedTask_OpenWildList(s32 taskState)
         }
 
         ScrollToCursor(wild, FALSE);
-        DrawTitle(wild);
-        DrawList(wild, TRUE);
-        DrawDetail(wild);
+        DrawWildSelection(wild, TRUE);
+        ShowWildSelection(wild);
         return LT_INC_AND_PAUSE;
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -592,8 +663,11 @@ u32 LoopedTask_OpenWildList(s32 taskState)
             PutWindowTilemap(wild->windowIds[i]);
         CopyBgTilemapBufferToVram(1);
         ShowSprites(wild);
-        wild->scrollArrowsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, ARROW_X, BODY_SCREEN_Y + LIST_Y + 8,
+        // An up arrow's ink spans y-6..y+1 and a down arrow's y-3..y+5, plus a
+        // pixel of bounce: 2 clear rows from the title's and detail's rules.
+        wild->scrollArrowsTaskId = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, ARROW_X, BODY_SCREEN_Y + LIST_Y + 9,
                                      BODY_SCREEN_Y + LIST_Y + LIST_HEIGHT - 8, wild->maxTopLine, TAG_WILD_SCROLL, TAG_WILD_SCROLL, &wild->scrollOffset);
+        SetScrollIndicatorArrowPairBounce(wild->scrollArrowsTaskId, 1);
         PrintHelpBarText(HELPBAR_WILD_LIST);
         return LT_INC_AND_PAUSE;
     case 4:
@@ -666,7 +740,14 @@ u32 HandleWildListInput(void)
     u32 topLine;
 
     // A list that could not open goes straight back to the map.
-    if (wild == NULL || JOY_NEW(B_BUTTON))
+    if (wild == NULL)
+        return POKENAV_MAP_FUNC_CLOSE_WILD_LIST;
+    if (wild->showPending)
+    {
+        ShowWildSelection(wild);
+        return POKENAV_MAP_FUNC_NONE;
+    }
+    if (JOY_NEW(B_BUTTON))
         return POKENAV_MAP_FUNC_CLOSE_WILD_LIST;
 
     sections = wild->list.sections;
@@ -716,9 +797,7 @@ u32 HandleWildListInput(void)
         PlaySE(SE_SELECT);
         topLine = wild->topLine;
         ScrollToCursor(wild, jumped);
-        DrawTitle(wild);
-        DrawList(wild, topLine != wild->topLine);
-        DrawDetail(wild);
+        DrawWildSelection(wild, topLine != wild->topLine);
     }
     return POKENAV_MAP_FUNC_NONE;
 }
