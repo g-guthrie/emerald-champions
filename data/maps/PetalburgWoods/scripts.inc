@@ -94,11 +94,11 @@ PetalburgWoods_EventScript_DevonResearcherPostBattle::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT
-	setflag FLAG_EC_WOODS_GREAT_BALL_PENDING
+	setflag FLAG_EC_WOODS_DUSK_BALLS_PENDING
 	giveitem ITEM_DUSK_BALL, 3
 	compare VAR_RESULT, FALSE
 	goto_if_eq PetalburgWoods_EventScript_BagFull
-	clearflag FLAG_EC_WOODS_GREAT_BALL_PENDING
+	clearflag FLAG_EC_WOODS_DUSK_BALLS_PENDING
 	goto PetalburgWoods_EventScript_DevonResearcherFinish
 	end
 

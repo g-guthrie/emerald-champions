@@ -5968,7 +5968,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .catchRate = 255,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 56 : 68,
         .evYield_SpAttack = 1,
-        .itemRare = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -6040,7 +6039,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .catchRate = 150,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 140 : 152,
         .evYield_SpAttack = (P_UPDATED_EVS >= GEN_4) ? 2 : 1,
-        .itemRare = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -6135,7 +6133,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .expYield = 204,
     #endif
         .evYield_SpAttack = 3,
-        .itemRare = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,

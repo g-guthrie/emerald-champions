@@ -468,8 +468,11 @@ static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
     {ITEM_MENTAL_HERB,      0},   // was Lotad's (also on every Poke Mart shelf)
     {ITEM_METRONOME,        0},   // was Kricketot's
     {ITEM_MYSTIC_WATER,     0},   // was Goldeen's
+    {ITEM_MIRACLE_SEED,     0},   // was Cherubi's (Petalburg Woods honey)
+    {ITEM_POISON_BARB,      0},   // was Budew's
     {ITEM_POWER_HERB,       0},   // was Seedot's
     {ITEM_QUICK_CLAW,       0},   // was Meowth's
+    {ITEM_SPELL_TAG,        0},   // was Sandygast's
     {ITEM_LOADED_DICE,      2},
     {ITEM_EJECT_PACK,       3},
     {ITEM_HEAVY_DUTY_BOOTS, 4},

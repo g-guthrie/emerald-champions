@@ -2784,7 +2784,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_BADGE02_GET);
                 VarSet(VAR_PETALBURG_CITY_STATE, 3);
                 VarSet(VAR_PETALBURG_GYM_STATE, 2);
-                FlagClear(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                FlagClear(FLAG_EC_WOODS_DUSK_BALLS_PENDING);
                 AddBagItem(ITEM_POKE_VIAL, 1);
                 AddBagItem(ITEM_LEVELER, 1);
                 AddBagItem(ITEM_REGENERATOR, 1);
@@ -2807,7 +2807,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (scene == 256 || scene == 257)
                 {
-                    FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                    FlagSet(FLAG_EC_WOODS_DUSK_BALLS_PENDING);
                     LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
                 }
                 else if (scene == 258 || scene == 259)
@@ -2866,7 +2866,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     VarSet(VAR_PETALBURG_WOODS_STATE, 1);
                     FlagSet(FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE);
                     FlagSet(FLAG_HIDE_PETALBURG_WOODS_AQUA_GRUNT);
-                    FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                    FlagSet(FLAG_EC_WOODS_DUSK_BALLS_PENDING);
                     LoadHeadlessMap(MAP_PETALBURG_WOODS, 26, 24);
                 }
                 else if (scene == 272 || scene == 279 || scene == 280 || scene == 283)
@@ -2895,7 +2895,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (scene == 282)
                 {
-                    FlagSet(FLAG_EC_WOODS_GREAT_BALL_PENDING);
+                    FlagSet(FLAG_EC_WOODS_DUSK_BALLS_PENDING);
                     LoadHeadlessMap(MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 8, 4);
                 }
                 else if (scene == 273)

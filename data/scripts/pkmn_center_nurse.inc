@@ -3,7 +3,7 @@ Common_EventScript_PkmnCenterNurse::
 	faceplayer
 	call EC_DeliverTravelDocuments
 	call EventScript_PkmnCenterNurse_Itemfinder
-	call_if_set FLAG_EC_WOODS_GREAT_BALL_PENDING, EventScript_PkmnCenterNurse_WoodsGift
+	call_if_set FLAG_EC_WOODS_DUSK_BALLS_PENDING, EventScript_PkmnCenterNurse_WoodsGift
 	call EventScript_PkmnCenterNurse_GiveTools
 	@ The party rule follows the welcome and tools, before Kubfu can be met.
 	call_if_unset FLAG_EC_RESTRICTED_RULE_EXPLAINED, EventScript_PkmnCenterNurse_RestrictedRule
@@ -215,7 +215,7 @@ EventScript_PkmnCenterNurse_WoodsGift::
 	msgbox Text_PkmnCenterNurse_WoodsGift, MSGBOX_DEFAULT
 	giveitem ITEM_DUSK_BALL, 3
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
-	clearflag FLAG_EC_WOODS_GREAT_BALL_PENDING
+	clearflag FLAG_EC_WOODS_DUSK_BALLS_PENDING
 	return
 EventScript_PkmnCenterNurse_KeepDevonGift::
 	msgbox Text_PkmnCenterNurse_KeepDevonGift, MSGBOX_DEFAULT
