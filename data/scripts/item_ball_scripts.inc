@@ -362,8 +362,8 @@ RusturfTunnel_EventScript_ItemEjectPack:: @ 8291143
 	finditem ITEM_EJECT_PACK
 	end
 
-GraniteCave_1F_EventScript_ItemEscapeRope:: @ 8291150
-	finditem ITEM_ESCAPE_ROPE
+GraniteCave_1F_EventScript_ItemBlackBelt:: @ 8291150
+	finditem ITEM_BLACK_BELT
 	end
 
 GraniteCave_B1F_EventScript_ItemPokeBall:: @ 829115D
