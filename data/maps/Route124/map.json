@@ -51,7 +51,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route124_EventScript_ItemFloettite",
-      "flag": "FLAG_ITEM_DEWFORD_MEADOW_TM95"
+      "flag": "FLAG_ITEM_ROUTE_124_FLOETTITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route124_EventScript_ItemBlueShard",
+      "script": "Route124_EventScript_ItemBottleCap",
       "flag": "FLAG_ITEM_ROUTE124_BOTTLE_CAP"
     },
     {
@@ -115,8 +115,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route124_EventScript_TM85DreamEater",
-      "flag": "FLAG_ITEM_ROUTE_124_TM85_DREAM_EATER"
+      "script": "Route124_EventScript_ItemExcadrite",
+      "flag": "FLAG_ITEM_ROUTE_124_EXCADRITE"
     }
   ],
   "warp_events": [

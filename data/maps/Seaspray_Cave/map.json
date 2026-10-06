@@ -158,7 +158,7 @@
       "y": 22,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_SEASPRAY_CAVE_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_NUGGET"
     }
   ],
   "allow_bike": "",

@@ -1084,7 +1084,7 @@ GIFT_REQUIREMENTS: dict = {
                                                        "needs the Letter (GraniteCave_StevensRoom/scripts.inc:9-14)"),
     # Norman's post-battle talk is reached through `switch VAR_PETALBURG_GYM_STATE`
     # (case 7/8), which the path scan does not track.
-    "PetalburgCity_Gym_EventScript_GiveFacade": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:100-107,346-352,469"),
+    "PetalburgCity_Gym_EventScript_GivePyroarite": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:100-107,346-352,469"),
     "PetalburgCity_Gym_EventScript_GiveEnigmaBerry": (["DEFEATED:TRAINER_NORMAN_1"], "PetalburgCity_Gym/scripts.inc:346-350"),
     # The gym guide is hidden by FLAG_HIDE_PETALBURG_GYM_GREETER until VAR_PETALBURG_GYM_STATE
     # reaches 6 (fourth badge; data/event_scripts.s Common_EventScript_ReadyPetalburgGymForBattle).
@@ -1455,7 +1455,7 @@ ENCOUNTER_CONSEQUENCES: dict[str, list[str]] = {
     "TRAINER_GRUNT_METEOR_FALLS": ["FLAG_HIDE_ROUTE_112_TEAM_MAGMA", "FLAG_MET_ARCHIE_METEOR_FALLS"],
     "TRAINER_TABITHA_MT_CHIMNEY": ["FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"], "TRAINER_MAXIE_MT_CHIMNEY": ["FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY"],
     "TRAINER_SHELLY_WEATHER_INSTITUTE": ["FLAG_HIDE_ROUTE_119_TEAM_AQUA"],
-    "TRAINER_MATT_MT_PYRE": ["FLAG_RECEIVED_RED_OR_BLUE_ORB"],
+    "TRAINER_MATT_MT_PYRE": ["FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT"],
     "TRAINER_MAXIE_MAGMA_HIDEOUT": ["FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT"],
     "TRAINER_MATT": ["FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE"],
     "TRAINER_MAXIE_MOSSDEEP": ["FLAG_DEFEATED_MAGMA_SPACE_CENTER"], "TRAINER_COURTNEY_MOSSDEEP": ["FLAG_DEFEATED_MAGMA_SPACE_CENTER"],
@@ -1472,8 +1472,8 @@ ENCOUNTER_CONSEQUENCES: dict[str, list[str]] = {
 VANISH_FLAGS = {
     "FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA": "FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY",       # MtChimney/scripts.inc:60
     "FLAG_HIDE_ROUTE_119_TEAM_AQUA": "FLAG_HIDE_ROUTE_119_TEAM_AQUA",              # Route119_WeatherInstitute_2F:77
-    "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA": "FLAG_RECEIVED_RED_OR_BLUE_ORB",         # MtPyre_Summit/scripts.inc:65
-    "FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD": "FLAG_RECEIVED_RED_OR_BLUE_ORB",          # MtPyre_Summit/scripts.inc:82
+    "FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA": "FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT",         # MtPyre_Summit/scripts.inc:65
+    "FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD": "FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT",          # MtPyre_Summit/scripts.inc:82
     "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS": "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT",       # MagmaHideout_4F/scripts.inc:97
     "FLAG_HIDE_AQUA_HIDEOUT_GRUNTS": "FLAG_BADGE07_GET",                           # MossdeepCity_Gym/scripts.inc:66
     "FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS": "FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN", # SeafloorCavern_Room9:154

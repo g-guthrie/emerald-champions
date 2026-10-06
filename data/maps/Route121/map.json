@@ -225,8 +225,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route121_EventScript_ItemCarbos",
-      "flag": "FLAG_ITEM_ROUTE_121_CARBOS"
+      "script": "Route121_EventScript_ItemAbilityShield",
+      "flag": "FLAG_ITEM_ROUTE_121_ABILITY_SHIELD"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
@@ -303,7 +303,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route121_EventScript_ItemRevive",
+      "script": "Route121_EventScript_ItemSkarmorite",
       "flag": "FLAG_ITEM_ROUTE121_SKARMORITE"
     },
     {
@@ -444,7 +444,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_ROOM_SERVICE",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_HP_UP"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_ROOM_SERVICE"
     },
     {
       "type": "hidden_item",
@@ -461,7 +461,7 @@
       "elevation": 3,
       "item": "ITEM_ULTRA_BALL",
       "quantity": 3,
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_FULL_HEAL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_121_ULTRA_BALL"
     },
     {
       "type": "hidden_item",

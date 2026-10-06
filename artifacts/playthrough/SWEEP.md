@@ -1,0 +1,18 @@
+# Sweep log
+
+| Map | Result | Detail | Evidence |
+|---|---|---|---|
+| OldaleTown_PokemonCenter_1F | explored | photos 2, 6 NPCs visited, girl absent; bag -; EV-tutor line conflicts with EV lock | work/studio/explore/x-oldale-center/report.md |
+| OldaleTown | explored | photos 5, interactions 8 visited ['talk 4:absent'], bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-oldaletown-44605/report.md |
+| OldaleTown_Mart | explored | photos 1, interactions 3 visited ['talk 4:absent'], bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-oldaletown_mart-44642/report.md |
+| OldaleTown | passed through | arrived 14,7 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-oldaletown-44685/end.sav |
+| OldaleTown_House1 | explored | photos 1, interactions 1 visited , bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-oldaletown_house1-44703/report.md |
+| OldaleTown | passed through | arrived 5,8 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-oldaletown-44728/end.sav |
+| OldaleTown_House2 | explored | photos 1, interactions 2 visited , bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-oldaletown_house2-44746/report.md |
+| OldaleTown | passed through | arrived 15,17 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-oldaletown-44770/end.sav |
+| Route103 | explored | photos 5, interactions 2 visited ['talk 2:absent', 'talk 10:absent', 'talk 1:absent', 'talk 11:absent', 'talk 5:absent', 'talk 4:absent', 'talk 15:absent', 'talk 8:absent', 'talk 7:absent', 'talk 6:absent', 'talk 12:absent', 'talk 3:absent'], bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-route103-44784/report.md |
+| OldaleTown | passed through | arrived 11,0 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-oldaletown-44817/end.sav |
+| Route101 | explored | photos 6, interactions 2 visited ['talk 7:absent', 'talk 3:absent', 'talk 5:absent', 'talk 1:absent'], bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-route101-44832/report.md |
+| LittlerootTown | explored | photos 6, interactions 7 visited ['talk 4:absent'], bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-littleroottown-44875/report.md |
+| LittlerootTown_BrendansHouse_1F | explored | photos 1, interactions 1 visited ['talk 3:absent', 'talk 4:absent', 'talk 6:absent', 'talk 2:absent'], bag -, failures - | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/explore/x-littleroottown_brendanshouse_1f-44926/report.md |
+| LittlerootTown_BrendansHouse_2F | EXPLORE FAILED | 'chunk x-littleroottown_brendanshouse_2f-44950-01 crashed; see /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/x-littleroottown_brendanshouse_2f-44950-01\n' |

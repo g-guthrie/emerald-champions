@@ -32,7 +32,7 @@
       "elevation": 0,
       "item": "ITEM_BOTTLE_CAP",
       "quantity": 3,
-      "flag": "FLAG_HIDDEN_ITEM_SS_TIDAL_LOWER_DECK_LEFTOVERS"
+      "flag": "FLAG_HIDDEN_ITEM_SSTIDAL_LOWER_DECK_BOTTLE_CAP"
     }
   ]
 }

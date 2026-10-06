@@ -15,7 +15,7 @@ LavaridgeTown_House_EventScript_Zigzagoon:: @ 81FF91B
 	release
 	end
 
-LavaridgeTown_House_EventScript_SuckerPunchTM::
+LavaridgeTown_House_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE, LavaridgeTown_House_EventScript_ReceivedTM94

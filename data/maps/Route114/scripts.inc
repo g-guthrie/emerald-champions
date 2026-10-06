@@ -75,12 +75,12 @@ Route114_EventScript_ReceivedBerry:: @ 81F25C7
 Route114_EventScript_RoarGentleman:: @ 81F25D1
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedPearl
+	goto_if_set FLAG_RECEIVED_BIG_PEARL_ROUTE_114, Route114_EventScript_ReceivedPearl
 	msgbox Route114_Text_RoarGentlemanGift, MSGBOX_DEFAULT
 	giveitem ITEM_BIG_PEARL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM05
+	setflag FLAG_RECEIVED_BIG_PEARL_ROUTE_114
 	msgbox Route114_Text_PearlAndRoarTutor, MSGBOX_DEFAULT
 	release
 	end

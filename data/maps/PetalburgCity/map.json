@@ -103,7 +103,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgCity_EventScript_ItemMaxRevive",
+      "script": "PetalburgCity_EventScript_ItemAbomasite",
       "flag": "FLAG_ITEM_PETALBURG_CITY_ABOMASITE"
     },
     {
@@ -329,7 +329,7 @@
       "y": 29,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_NUGGET"
     }
   ]
 }

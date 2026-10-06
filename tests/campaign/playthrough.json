@@ -4918,7 +4918,7 @@
           "LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent",
           "LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex",
           "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex",
-          "LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls"
+          "LittlerootTown_ProfessorBirchsLab_EventScript_MayGiveCherishBall"
         ],
         "states": [
           "VAR_BIRCH_LAB_STATE",
@@ -7022,7 +7022,7 @@
         ],
         "object_scripts": [
           "PetalburgWoods_EventScript_Lyle",
-          "PetalburgWoods_EventScript_ItemParalyzeHeal"
+          "PetalburgWoods_EventScript_ItemNugget"
         ],
         "trainers": [
           "TRAINER_LYLE"
@@ -7031,7 +7031,7 @@
           "BATTLE_009_PETALBURG_WOODS_LYLE"
         ],
         "flags": [
-          "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL"
+          "FLAG_ITEM_PETALBURG_WOODS_NUGGET"
         ],
         "items": [
           "ITEM_NUGGET"
@@ -7048,7 +7048,7 @@
           27
         ],
         "flags": {
-          "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL": 1
+          "FLAG_ITEM_PETALBURG_WOODS_NUGGET": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 18,
@@ -7561,7 +7561,7 @@
         },
         "flags": {
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION": 1,
-          "FLAG_ITEM_PETALBURD_WOODS_PARALYZE_HEAL": 1,
+          "FLAG_ITEM_PETALBURG_WOODS_NUGGET": 1,
           "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL": 1,
           "FLAG_ITEM_PETALBURG_WOODS_ETHER": 1
         },
@@ -7733,7 +7733,7 @@
           "BATTLE_012_ROUTE_104_WINSTON"
         ],
         "flags": [
-          "FLAG_RECEIVED_TM09"
+          "FLAG_RECEIVED_NUGGET_ROUTE_104"
         ],
         "items": [
           "ITEM_RARE_CANDY"
@@ -7750,7 +7750,7 @@
           24
         ],
         "flags": {
-          "FLAG_RECEIVED_TM09": 1
+          "FLAG_RECEIVED_NUGGET_ROUTE_104": 1
         },
         "capture_serial_min": 1,
         "battle_serial_min": 28,
@@ -10065,7 +10065,7 @@
           "RustboroCity_Mart_EventScript_Boy",
           "RustboroCity_Mart_EventScript_PokefanF",
           "RustboroCity_Mart_EventScript_BugCatcher",
-          "RustboroCity_Mart_EventScript_FalseSwipeTM"
+          "RustboroCity_Mart_EventScript_GiveNugget"
         ],
         "labels": [
           "rustboro_first_visit",
@@ -11131,7 +11131,7 @@
         "flags": {
           "FLAG_BADGE01_GET": 1,
           "FLAG_DEFEATED_RUSTBORO_GYM": 1,
-          "FLAG_RECEIVED_TM39": 1
+          "FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM": 1
         },
         "vars": {
           "VAR_RUSTBORO_CITY_STATE": 2
@@ -15356,7 +15356,7 @@
           "ITEM_DEVON_PARTS": 1
         },
         "flags": {
-          "FLAG_RECEIVED_TM46": 1,
+          "FLAG_RECEIVED_NUGGET_SLATEPORT_CITY_OCEANIC_MUSEUM_1F": 1,
           "FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT": 1
         }
       },
@@ -16511,7 +16511,7 @@
         "map": "MAP_DEWFORD_TOWN_HALL",
         "stable_overworld": true,
         "flags": {
-          "FLAG_RECEIVED_TM36": 0
+          "FLAG_RECEIVED_NUGGET_DEWFORD_TOWN_HALL": 0
         }
       }
     },
@@ -16530,7 +16530,7 @@
         "stable_overworld": true,
         "flags": {
           "FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN": 1,
-          "FLAG_RECEIVED_TM36": 0
+          "FLAG_RECEIVED_NUGGET_DEWFORD_TOWN_HALL": 0
         }
       }
     },
@@ -19249,7 +19249,7 @@
         "flags": {
           "FLAG_BADGE02_GET": 1,
           "FLAG_DEFEATED_DEWFORD_GYM": 1,
-          "FLAG_RECEIVED_TM08": 1
+          "FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM": 1
         },
         "items": {
           "ITEM_EMBOARITE": 1
@@ -19291,7 +19291,7 @@
         "stable_overworld": true,
         "flags": {
           "FLAG_BADGE02_GET": 1,
-          "FLAG_RECEIVED_TM08": 1
+          "FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM": 1
         },
         "items": {
           "ITEM_EMBOARITE": 1
@@ -19878,7 +19878,7 @@
         "map": "MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB",
         "stable_overworld": true,
         "flags": {
-          "FLAG_RECEIVED_SOOTHE_BELL": 0
+          "FLAG_RECEIVED_LOVE_BALL_SLATEPORT_CITY_POKEMON_FAN_CLUB": 0
         }
       }
     },

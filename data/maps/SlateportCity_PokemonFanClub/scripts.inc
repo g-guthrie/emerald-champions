@@ -201,15 +201,15 @@ SlateportCity_PokemonFanClub_EventScript_MeetChairman:: @ 820A172
 SlateportCity_PokemonFanClub_EventScript_SootheBellWoman:: @ 820A17E
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_SOOTHE_BELL, SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell
+	goto_if_set FLAG_RECEIVED_LOVE_BALL_SLATEPORT_CITY_POKEMON_FAN_CLUB, SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell
 	msgbox SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
-	goto_if_ge SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
+	goto_if_ge SlateportCity_PokemonFanClub_EventScript_GiveLoveBall
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_GiveSootheBell:: @ 820A1A3
+SlateportCity_PokemonFanClub_EventScript_GiveLoveBall:: @ 820A1A3
 	playse SE_PIN
 	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -219,7 +219,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveSootheBell:: @ 820A1A3
 	giveitem ITEM_LOVE_BALL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_SOOTHE_BELL
+	setflag FLAG_RECEIVED_LOVE_BALL_SLATEPORT_CITY_POKEMON_FAN_CLUB
 	release
 	end
 
@@ -266,7 +266,7 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill:: @ 820A220
 	release
 	end
 
-SlateportCity_PokemonFanClub_EventScript_EndureTM::
+SlateportCity_PokemonFanClub_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_SLATEPORT_CITY_POKEMON_FAN_CLUB, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58

@@ -254,7 +254,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_ItemTM37",
+      "script": "Route111_EventScript_ItemRoomService",
       "flag": "FLAG_ITEM_ROUTE111_ROOM_SERVICE"
     },
     {
@@ -334,7 +334,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route111_EventScript_ItemTM63RockSlide",
+      "script": "Route111_EventScript_ItemBigNugget",
       "flag": "FLAG_ITEM_ROUTE_111_BIG_NUGGET"
     },
     {
@@ -1013,7 +1013,7 @@
       "y": 55,
       "elevation": 0,
       "item": "ITEM_BLUNDER_POLICY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_PROTEIN"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_BLUNDER_POLICY"
     },
     {
       "type": "hidden_item",
@@ -1021,7 +1021,7 @@
       "y": 66,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_111_NUGGET"
     },
     {
       "type": "sign",

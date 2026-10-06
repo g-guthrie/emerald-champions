@@ -286,7 +286,7 @@ MossdeepCity_EventScript_ScottExitEast:: @ 81E4CC2
 	waitmovement 0
 	return
 
-MossdeepCity_EventScript_AvalancheTM::
+MossdeepCity_EventScript_GiveBigPearl::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_MOSSDEEP_CITY, MossdeepCity_EventScript_ReceivedTM96

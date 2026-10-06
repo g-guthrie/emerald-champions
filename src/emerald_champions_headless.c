@@ -1665,7 +1665,7 @@ static void ObserveHeadlessFixture(void)
                 && gEcHeadlessCampaignLastResolution == EC_HEADLESS_BATTLE_WIN
                 && FlagGet(FLAG_BADGE01_GET)
                 && FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)
-                && FlagGet(FLAG_RECEIVED_TM39) // Roxanne's Glimmoranite receipt
+                && FlagGet(FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM) // Roxanne's Glimmoranite receipt
                 && HasTrainerBeenFought(TRAINER_ROXANNE_1)
                 && GetCurrentLevelCap() == 20
                 && CheckBagHasItem(ITEM_GLIMMORANITE, 1)
@@ -2910,7 +2910,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (scene == 275 || scene == 276)
                 {
-                    FlagClear(FLAG_RECEIVED_POTION_OLDALE);
+                    FlagClear(FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN);
                     // The guide's first tour already ran; retry without restaging it.
                     AddBagItem(ITEM_POKE_BALL, 10);
                     if (scene == 275)
@@ -3519,7 +3519,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_BADGE06_GET);
                 FlagClear(FLAG_BADGE07_GET);
                 FlagClear(FLAG_BADGE08_GET);
-                FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+                FlagClear(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
                 if (gEcHeadlessFixtureParam <= 151)
                 {
                     VarSet(VAR_MT_PYRE_STATE, 0);
@@ -3553,7 +3553,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else
                 {
                     VarSet(VAR_MT_PYRE_STATE, 1);
-                    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+                    FlagSet(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
                     FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE);
                     FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE);
                     FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA);
@@ -3831,7 +3831,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     ClearTrainerFlag(TRAINER_WINONA_1);
                     FlagClear(FLAG_DEFEATED_FORTREE_GYM);
                     FlagClear(FLAG_RECEIVED_WINONA_ALTARIANITE);
-                    FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+                    FlagClear(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
                     LoadHeadlessMap(MAP_FORTREE_CITY_GYM, gEcHeadlessFixtureParam == 96 ? 15 : 16,
                         gEcHeadlessFixtureParam == 96 ? 3 : 23);
                 }

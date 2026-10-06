@@ -70,7 +70,7 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce: @ 8224F42
 
 SootopolisCity_Gym_1F_EventScript_Juan:: @ 8224F44
 	trainerbattle_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, EmeraldChampions_Text_NeedTwoPokemon, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_GiveScald2
+	goto_if_unset FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F, SootopolisCity_Gym_1F_EventScript_GiveScald2
 	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
 	release
@@ -81,7 +81,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
-	call_if_unset FLAG_RECEIVED_TM03, SootopolisCity_Gym_1F_EventScript_JuanTakeThis
+	call_if_unset FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F, SootopolisCity_Gym_1F_EventScript_JuanTakeThis
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
 	setflag FLAG_BADGE08_GET
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
@@ -91,7 +91,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
-	call SootopolisCity_Gym_1F_EventScript_GiveScald
+	call SootopolisCity_Gym_1F_EventScript_GiveFeraligite
 	closemessage
 	setflag FLAG_ENABLE_JUAN_MATCH_CALL
 	release
@@ -101,19 +101,19 @@ SootopolisCity_Gym_1F_EventScript_JuanTakeThis:
 	msgbox SootopolisCity_Gym_1F_Text_TakeThis, MSGBOX_DEFAULT
 	return
 
-@ FLAG_RECEIVED_TM03 is Feraligite's only receipt. Norman sets it when he
+@ FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F is Feraligite's only receipt. Norman sets it when he
 @ hands Feraligite to a Totodile pair, which closes Juan's copy.
-SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
-	goto_if_set FLAG_RECEIVED_TM03, Common_EventScript_NopReturn
+SootopolisCity_Gym_1F_EventScript_GiveFeraligite:: @ 8224FD4
+	goto_if_set FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F, Common_EventScript_NopReturn
 	giveuniqueitem ITEM_FERALIGITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM03
+	setflag FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F
 	return
 
 SootopolisCity_Gym_1F_EventScript_GiveScald2:: @ 8224FF7
-	call SootopolisCity_Gym_1F_EventScript_GiveScald
+	call SootopolisCity_Gym_1F_EventScript_GiveFeraligite
 	release
 	end
 

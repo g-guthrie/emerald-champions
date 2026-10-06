@@ -22,7 +22,7 @@ MauvilleCity_EventScript_MoveWattsonBackToGym:: @ 81DF3A9
 	setflag FLAG_WATTSON_REMATCH_AVAILABLE
 	return
 
-MauvilleCity_EventScript_GyroBallTM::
+MauvilleCity_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_MAUVILLE_CITY, MauvilleCity_EventScript_ReceivedTM74

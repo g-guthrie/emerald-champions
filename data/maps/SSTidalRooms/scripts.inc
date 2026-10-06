@@ -1,15 +1,15 @@
 SSTidalRooms_MapScripts:: @ 823C9F1
 	.byte 0
 
-SSTidalRooms_EventScript_SnatchGiver:: @ 823C9F2
+SSTidalRooms_EventScript_SnatchGiveBigPearl:: @ 823C9F2
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM49, SSTidalRooms_EventScript_ExplainSnatch
+	goto_if_set FLAG_RECEIVED_BIG_PEARL_SSTIDAL_ROOMS, SSTidalRooms_EventScript_ExplainSnatch
 	msgbox SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_BIG_PEARL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM49
+	setflag FLAG_RECEIVED_BIG_PEARL_SSTIDAL_ROOMS
 	msgbox SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT
 	release
 	end

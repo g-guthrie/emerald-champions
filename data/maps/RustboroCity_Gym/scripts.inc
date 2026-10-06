@@ -3,7 +3,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 
 RustboroCity_Gym_EventScript_Roxanne::
 	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, EmeraldChampions_Text_NeedTwoPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
+	goto_if_unset FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM, RustboroCity_Gym_EventScript_GiveGlimmoranite
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -22,15 +22,15 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	compare VAR_PETALBURG_GYM_STATE, 6
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	@ Roxanne's Glimmoranite is not a starter stone, so every pair gets it.
-	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
+	goto_if_unset FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM, RustboroCity_Gym_EventScript_GiveGlimmoranite
 	release
 	end
 
-RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
+RustboroCity_Gym_EventScript_GiveGlimmoranite:: @ 8212FA4
 	giveuniqueitem ITEM_GLIMMORANITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM39
+	setflag FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM
 	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
 	release
 	end

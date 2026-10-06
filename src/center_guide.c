@@ -147,7 +147,7 @@ static const struct
     {FLAG_RECEIVED_DEVON_SCOPE, COMPOUND_STRING("From Fortree, go east onto\nRoute 120 and south to the\lbridge. Speak to Steven and\laccept his Scope demonstration.\pMake room for the Devon Scope\nif he says your Bag is full."), COMPOUND_STRING("Find Steven on Route 120's\nbridge, east of Fortree.\lAccept his Devon Scope lesson.")},
     {FLAG_KECLEON_FLED_FORTREE, COMPOUND_STRING("Return to Fortree's Gym.\nFace its invisible entrance\lblocker and press A to use\lthe Devon Scope and clear it."), COMPOUND_STRING("Face Fortree Gym's invisible\nblocker and press A to clear\lit with the Devon Scope.")},
     {FLAG_BADGE06_GET, COMPOUND_STRING("Enter Fortree's Gym and\ndefeat Winona for Badge six."), COMPOUND_STRING("Defeat Winona in Fortree's Gym\nfor your sixth Badge.")},
-    {FLAG_RECEIVED_RED_OR_BLUE_ORB, COMPOUND_STRING("Go south along Route 120,\nthen east onto Route 121.\lAt the Mt. Pyre pier, Surf\lsouth across Route 122.\pEnter Mt. Pyre, take the west\nexit on 1F, then climb the\loutside paths to the summit.\lApproach Archie there."), COMPOUND_STRING("Go to Mt. Pyre's summit,\nsouth of Route 121, and stop\lAqua's raid.")},
+    {FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT, COMPOUND_STRING("Go south along Route 120,\nthen east onto Route 121.\lAt the Mt. Pyre pier, Surf\lsouth across Route 122.\pEnter Mt. Pyre, take the west\nexit on 1F, then climb the\loutside paths to the summit.\lApproach Archie there."), COMPOUND_STRING("Go to Mt. Pyre's summit,\nsouth of Route 121, and stop\lAqua's raid.")},
     {FLAG_RECEIVED_HM04, COMPOUND_STRING("You need the Strength license\nfor Team Magma's hideout.\pReturn to Rusturf Tunnel, west\nof Verdanturf. Use Rock Smash\lto reunite the couple inside.\pThe man grants Strength. Your\nHeat Badge and a compatible\lpartner let you move boulders."), COMPOUND_STRING("Smash Rusturf Tunnel's rocks\nto reunite the couple. The\lman grants your Strength license.")},
     {FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, COMPOUND_STRING("Ride Route 112's cable car\nto Mt. Chimney. Walk south\ldown Jagged Pass with the\lMagma Emblem in your Bag.\pApproach the rock wall where\nthe Magma guard stood. Enter\lthe hideout and use Strength\lto move its boulders.\pFind Maxie beside Groudon\ndeep inside and defeat him."), COMPOUND_STRING("Use the Magma Emblem to enter\nJagged Pass's hideout. Defeat\lMaxie beside Groudon inside.")},
     {FLAG_MET_TEAM_AQUA_HARBOR, COMPOUND_STRING("Return to Slateport's harbor\nin the northeast of the city.\lSpeak to Capt. Stern outside,\lthen follow him inside to\lsee Aqua steal the submarine."), COMPOUND_STRING("Speak to Capt. Stern outside\nSlateport's northeast harbor,\lthen follow him inside.")},
@@ -228,7 +228,7 @@ static const u8 *GetCenterGuideStoryText(bool32 detailed)
             if (VarGet(VAR_ROUTE119_STATE) == 0)
                 return detailed ? sText_GuideRoute119Rival : COMPOUND_STRING("Defeat your rival beyond the\nWeather Institute on the\lRoute 119 path to Fortree.");
             break;
-        case FLAG_RECEIVED_RED_OR_BLUE_ORB:
+        case FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT:
             if (VarGet(VAR_MT_PYRE_STATE) >= 1)
                 return detailed ? sText_GuideMagmaEmblem : COMPOUND_STRING("Accept the Magma Emblem from\nMt. Pyre's old lady. If your\lBag was full, speak again.");
             break;

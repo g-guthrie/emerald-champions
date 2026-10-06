@@ -30,12 +30,12 @@ Route111_EventScript_SecretPowerMan:: @ 82765FF
 	faceplayer
 	msgbox Route111_Text_MakingRoomUseTMToMakeYourOwn, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq Route111_EventScript_GiveSecretPower
+	goto_if_eq Route111_EventScript_GiveNugget
 	msgbox Route111_Text_DontWantThis, MSGBOX_DEFAULT
 	release
 	end
 
-Route111_EventScript_GiveSecretPower:: @ 827661E
+Route111_EventScript_GiveNugget:: @ 827661E
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route111_EventScript_NoRoomForSecretPower

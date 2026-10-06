@@ -154,7 +154,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Altering_Cave_EventScript_CometShard",
+      "script": "Altering_Cave_EventScript_ItemZygardite",
       "flag": "FLAG_ALTERING_CAVE_ZYGARDITE"
     },
     {

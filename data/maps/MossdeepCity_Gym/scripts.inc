@@ -50,7 +50,7 @@ MossdeepCity_Gym_EventScript_SetSwitch4Metatiles:: @ 8220885
 
 MossdeepCity_Gym_EventScript_TateAndLiza:: @ 8220898
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM04, MossdeepCity_Gym_EventScript_GiveCalmMind2
+	goto_if_unset FLAG_RECEIVED_MEOWSTICITE_MOSSDEEP_CITY_GYM, MossdeepCity_Gym_EventScript_GiveMeowsticite
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -82,12 +82,12 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: @ 82208D1
 	release
 	end
 
-MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
+MossdeepCity_Gym_EventScript_GiveMeowsticite:: @ 8220937
 	giveuniqueitem ITEM_MEOWSTICITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM04
+	setflag FLAG_RECEIVED_MEOWSTICITE_MOSSDEEP_CITY_GYM
 	release
 	end
 
@@ -96,7 +96,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM04
+	setflag FLAG_RECEIVED_MEOWSTICITE_MOSSDEEP_CITY_GYM
 	return
 
 MossdeepCity_Gym_EventScript_WarpToEntrance:: @ 8220AF1

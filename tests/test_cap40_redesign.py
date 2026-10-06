@@ -48,8 +48,8 @@ class Cap40Redesign(unittest.TestCase):
 
     def test_second_wave_field_pickups_need_sixth_badge(self):
         parser = ProgressionParser(self.builder.scripts)
-        for label in ('MtPyre_5F_EventScript_ItemLaxIncense', 'NewMauville_Inside_EventScript_ItemDuskBall',
-                      'Route120_EventScript_ItemRevive', 'MagmaHideout_4F_EventScript_ItemMaxRevive'):
+        for label in ('MtPyre_5F_EventScript_ItemAlakazite', 'NewMauville_Inside_EventScript_ItemManectite',
+                      'Route120_EventScript_ItemAerodactylite', 'MagmaHideout_4F_EventScript_ItemCharizarditeX'):
             line = next(n for n, text in self.builder.scripts.labels[label]['body'] if text.startswith('finditem'))
             paths = parser.paths_to(label, line)
             self.assertTrue(paths)

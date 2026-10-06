@@ -253,16 +253,16 @@ DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight: @ 81FD7D8
 	walk_in_place_right
 	step_end
 
-DewfordTown_Hall_EventScript_SludgeBombMan:: @ 81FD7DA
+DewfordTown_Hall_EventScript_GiveNugget:: @ 81FD7DA
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
-	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
+	goto_if_set FLAG_RECEIVED_NUGGET_DEWFORD_TOWN_HALL, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
 	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM36
+	setflag FLAG_RECEIVED_NUGGET_DEWFORD_TOWN_HALL
 	release
 	end
 

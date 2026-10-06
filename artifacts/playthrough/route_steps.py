@@ -38,6 +38,18 @@ def path(map_dir, start, goal, caps=frozenset(), block=None):
     return moves
 
 
+def closest_reachable(map_dir, start, target, caps=frozenset()):
+    mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
+    g = R.grid(mid)
+    seen = {start}; q = deque([start])
+    while q:
+        p = q.popleft()
+        for d in DIRS:
+            r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
+            if r and r not in seen: seen.add(r); q.append(r)
+    return min(seen, key=lambda t: abs(t[0] - target[0]) + abs(t[1] - target[1]))
+
+
 def is_counter(map_dir, p):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid)

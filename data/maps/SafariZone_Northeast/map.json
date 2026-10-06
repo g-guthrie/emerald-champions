@@ -139,7 +139,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_Northeast_EventScript_ItemKangaskhanite",
+      "script": "SafariZone_Northeast_EventScript_ItemBigPearl",
       "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_BIG_PEARL"
     }
   ],
@@ -156,7 +156,7 @@
       "y": 35,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTHEAST_NUGGET"
     },
     {
       "type": "hidden_item",
@@ -164,7 +164,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_METRONOME",
-      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_ZINC"
+      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTHEAST_METRONOME"
     }
   ]
 }

@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "JaggedPass_EventScript_ItemTM69RockPolish",
+      "script": "JaggedPass_EventScript_ItemAdrenalineOrb",
       "flag": "FLAG_ITEM_JAGGED_PASS_ADRENALINE_ORB"
     },
     {
@@ -240,7 +240,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL"
+      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_STAR_PIECE"
     },
     {
       "type": "hidden_item",

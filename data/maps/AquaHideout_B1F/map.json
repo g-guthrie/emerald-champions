@@ -141,8 +141,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AquaHideout_B1F_EventScript_ItemTM97DarkPulse",
-      "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_TM97_DARK_PULSE"
+      "script": "AquaHideout_B1F_EventScript_ItemBarbaracite",
+      "flag": "FLAG_ITEM_AQUA_HIDEOUT_B1F_BARBARACITE"
     }
   ],
   "warp_events": [

@@ -66,7 +66,7 @@
       "y": 36,
       "elevation": 3,
       "item": "ITEM_HARD_STONE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_HP_UP"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_ROUTE_127_HARD_STONE"
     },
     {
       "type": "hidden_item",

@@ -191,15 +191,15 @@ SlateportCity_BattleTentLobby_EventScript_CancelChallenge:: @ 8208A2E
 	end
 
 @ Unused
-SlateportCity_BattleTentLobby_EventScript_TormentGiver:: @ 8208A3D
+SlateportCity_BattleTentLobby_EventScript_TormentGiveNugget:: @ 8208A3D
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
+	goto_if_set FLAG_RECEIVED_NUGGET_SLATEPORT_CITY_BATTLE_TENT_LOBBY, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM41
+	setflag FLAG_RECEIVED_NUGGET_SLATEPORT_CITY_BATTLE_TENT_LOBBY
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
 	release
 	end

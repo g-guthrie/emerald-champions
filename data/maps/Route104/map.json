@@ -380,7 +380,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route104_EventScript_ItemAudinite",
+      "script": "Route104_EventScript_ItemShellBell",
       "flag": "FLAG_ITEM_ROUTE104_SHELL_BELL"
     },
     {
@@ -591,7 +591,7 @@
       "elevation": 3,
       "item": "ITEM_GREAT_BALL",
       "quantity": 3,
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_ANTIDOTE"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_104_GREAT_BALL"
     },
     {
       "type": "hidden_item",

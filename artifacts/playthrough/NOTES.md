@@ -23,6 +23,16 @@ mistakes on water/elevation/ledges, missed side entrances). The owner no longer 
 6. The manifest entry for a route cites its recording folder, end save and Bag readout. The owner
    approves each route before the next.
 
+## Full sweep (owner, after the pilot): no stone unturned
+Every map: photograph every reachable tile (stitched mosaic), talk to every NPC, check every sign
+and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are forced wins.
+- explore.py MAP SAVE NAME  -> work/studio/explore/NAME/{report.md,report.json,mosaic.png}
+- travel.py SAVE TARGET NAME -> one hop (warp or edge) into an adjacent map
+- sweep.py SAVE MAP MAP! MAP@x,y ... -> travel+explore in order; MAP! = pass through only;
+  appends to artifacts/playthrough/SWEEP.md; stops at the first failure and prints the last save.
+- NPC talk mode: A for talk/gifts; B for shops, trades, tutors, multichoice (explore.SHOP_LIKE).
+- Oddities found are logged in FINDINGS (below) and raised with the owner at each route report.
+
 ## Rules carried over (do not relitigate)
 - Route trainer pool = areas walked before the route; route's own new Pokemon/items never count.
   Exception: first rival battle (Route 103) counts Route 103. Gyms/League/Champion: everything
@@ -74,8 +84,19 @@ mistakes on water/elevation/ledges, missed side entrances). The owner no longer 
 - Step 6: Seaspray "Stone Edge TM" ball is Baxcalibrite; Route 116 "HP Up" ball is Muscle Band.
 - Steps 3-6 to be redone with this method after the pilot.
 
+## FINDINGS (raise with owner)
+- Oldale Center Move Tutor says "New partners have full EV training. EV Training reshapes it for
+  500" at 0 badges, but EVs are locked until the Knuckle Badge (caps.c AreEVsUnlocked).
+
+- Tatsugirinite (AbandonedShip_HiddenFloorRooms: keys + Dive) and Drampanite (MeteorFalls_B1F_2R:
+  Waterfall) are listed as first-wave stones (cap 45/55) in tests/test_cap40_redesign.py, which fails
+  on HEAD before any rename: their real homes are far later.
+- Label/flag drift FIXED (scripts/item_source_names.py --write, 241 names, values unchanged); CI test
+  tests/test_item_source_names.py keeps it fixed. Save-layout id changed only because flag NAMES are
+  hashed (scripts/build_provenance.py ids); flag values and struct layout are unchanged.
+
 ## Open items
-- Label drift found so far: PetalburgWoods ItemParalyzeHeal -> Nugget; Lab MayGivePokeBalls /
+- (done) Label drift found so far: PetalburgWoods ItemParalyzeHeal -> Nugget; Lab MayGivePokeBalls /
   BrendanGivePokeBalls -> 30 Cherish Balls; Route116 ItemHPUp -> Muscle Band; RustboroCity
   ItemAbilityCapsule -> Wise Glasses; Seaspray ItemStoneEdge -> Baxcalibrite; Seaspray Water_Pulse ->
   Covert Cloak; PetalburgWoods_2 TM80Venoshock -> Toxic Orb; Woods_3 TM86_GrassKnot -> Nugget,

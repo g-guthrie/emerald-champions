@@ -375,9 +375,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	waitmovement 0
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_MayGiveCherishBall
 	compare VAR_RESULT, FEMALE
-	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
+	call_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGiveCherishBall
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_RivalDexNavInvite, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalLeaveForDemo
@@ -403,7 +403,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ExplainDexNav::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_DexNavSpread, MSGBOX_DEFAULT
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls:: @ 81FA352
+LittlerootTown_ProfessorBirchsLab_EventScript_MayGiveCherishBall:: @ 81FA352
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
 	giveitem ITEM_CHERISH_BALL, 30
 	compare VAR_RESULT, FALSE
@@ -412,7 +412,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls:: @ 81FA352
 	setvar VAR_RESULT, 0
 	return
 
-LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls:: @ 81FA37F
+LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGiveCherishBall:: @ 81FA37F
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese, MSGBOX_DEFAULT
 	giveitem ITEM_CHERISH_BALL, 30
 	compare VAR_RESULT, FALSE

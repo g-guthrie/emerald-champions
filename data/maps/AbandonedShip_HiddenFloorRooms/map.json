@@ -24,8 +24,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemLuxuryBall",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemTatsugirinite",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_TATSUGIRINITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -50,8 +50,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM_18"
+      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemClefablite",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_CLEFABLITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
@@ -153,7 +153,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_KEY_TO_ROOM_1",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_1"
     },
     {
       "type": "hidden_item",
@@ -161,7 +161,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_KEY_TO_ROOM_2",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_2"
     },
     {
       "type": "hidden_item",
@@ -169,7 +169,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_KEY_TO_ROOM_4",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_4"
     },
     {
       "type": "hidden_item",
@@ -177,7 +177,7 @@
       "y": 2,
       "elevation": 0,
       "item": "ITEM_KEY_TO_ROOM_6",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_6"
     },
     {
       "type": "sign",

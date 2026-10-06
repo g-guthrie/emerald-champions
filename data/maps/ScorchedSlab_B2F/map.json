@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ScorchedSlab_EventScript_ItemTyranitarite",
+      "script": "ScorchedSlab_EventScript_ItemDuskBall",
       "flag": "FLAG_SCORCHED_SLAB_DUSK_BALLS"
     },
     {

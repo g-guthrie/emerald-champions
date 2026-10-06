@@ -9,7 +9,7 @@ OldaleTown_OnTransition: @ 81E8EA8
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
-	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_MoveMartEmployee
+	call_if_unset FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN, OldaleTown_EventScript_MoveMartEmployee
 	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
 	end
 
@@ -39,7 +39,7 @@ OldaleTown_EventScript_Girl:: @ 81E8EF3
 OldaleTown_EventScript_MartEmployee:: @ 81E8EFC
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_ExplainPotion
+	goto_if_set FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN, OldaleTown_EventScript_ExplainPotion
 	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_GivePromotionalItem
 	setflag FLAG_TEMP_1
 	playbgm MUS_FOLLOW_ME, FALSE
@@ -80,7 +80,7 @@ OldaleTown_EventScript_GivePromotionalItem::
 	compare VAR_RESULT, FALSE
 	goto_if_eq OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_POTION_OLDALE
+	setflag FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN
 	fadedefaultbgm
 	release
 	end

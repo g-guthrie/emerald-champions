@@ -204,7 +204,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_ItemNugget",
+      "script": "Route120_EventScript_ItemMeganiumite",
       "flag": "FLAG_ITEM_ROUTE120_MEGANIUMITE"
     },
     {
@@ -310,7 +310,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_ItemHyperPotion",
+      "script": "Route120_EventScript_ItemPinsirite",
       "flag": "FLAG_ITEM_ROUTE120_PINSIRITE"
     },
     {
@@ -456,7 +456,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route120_EventScript_ItemRevive",
+      "script": "Route120_EventScript_ItemAerodactylite",
       "flag": "FLAG_ITEM_ROUTE120_AERODACTYLITE"
     }
   ],
@@ -683,7 +683,7 @@
       "y": 1,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_1"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_NUGGET"
     },
     {
       "type": "hidden_item",
@@ -699,7 +699,7 @@
       "y": 86,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_RARE_CANDY_2"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_NUGGET_2"
     },
     {
       "type": "hidden_item",
@@ -707,7 +707,7 @@
       "y": 42,
       "elevation": 3,
       "item": "ITEM_FAIRY_FEATHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_ZINC"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_FAIRY_FEATHER"
     },
     {
       "type": "secret_base",

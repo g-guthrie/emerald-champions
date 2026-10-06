@@ -6,10 +6,10 @@ Route123_OnTransition: @ 81F614D
 	special SetRoute123Weather
 	end
 
-Route123_EventScript_GigaDrainGirl:: @ 81F6151
+Route123_EventScript_GiveStarPiece:: @ 81F6151
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM19, Route123_EventScript_ReceivedGigaDrain
+	goto_if_set FLAG_RECEIVED_STAR_PIECE_ROUTE_123, Route123_EventScript_ReceivedGigaDrain
 	msgbox Route123_Text_LoveGrassMonsHaveAny, MSGBOX_DEFAULT
 	special IsGrassTypeInParty
 	compare VAR_RESULT, FALSE
@@ -18,7 +18,7 @@ Route123_EventScript_GigaDrainGirl:: @ 81F6151
 	giveitem ITEM_STAR_PIECE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM19
+	setflag FLAG_RECEIVED_STAR_PIECE_ROUTE_123
 	msgbox Route123_Text_CheckTreesWithMyGrassMon, MSGBOX_DEFAULT
 	release
 	end

@@ -145,7 +145,7 @@ DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
+	goto_if_unset FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -166,7 +166,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
 	@ Brawly's Machampite is not a starter stone, so every pair gets it.
-	call_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp
+	call_if_unset FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM, DewfordTown_Gym_EventScript_GiveMachampite
 	closemessage
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
@@ -174,12 +174,12 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	release
 	end
 
-DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
+DewfordTown_Gym_EventScript_GiveMachampite:: @ 81FC855
 	giveuniqueitem ITEM_MACHAMPITE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM08
+	setflag FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
@@ -187,7 +187,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM08
+	setflag FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM
 	release
 	end
 

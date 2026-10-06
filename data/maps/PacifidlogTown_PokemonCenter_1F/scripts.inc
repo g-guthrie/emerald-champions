@@ -29,7 +29,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_OldMan:: @ 82034D6
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats, MSGBOX_NPC
 	end
 
-PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM::
+PacifidlogTown_PokemonCenter_1F_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_PACIFIDLOG_TOWN_POKEMON_CENTER_1_F, PacifidlogTown_PokemonCenter_1F_EventScript_HaveExplosion

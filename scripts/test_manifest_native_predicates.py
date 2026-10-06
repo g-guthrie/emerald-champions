@@ -172,7 +172,7 @@ class NativePredicates(unittest.TestCase):
             self.assertIsNone(evaluate(special(name),state))
 
     def test_ship_key_reads_flag_and_writes_scratch_flag_id(self):
-        key=special('FoundAbandonedShipRoom4Key');flag='FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY'
+        key=special('FoundAbandonedShipRoom4Key');flag='FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_4'
         self.assertEqual(evaluate(key,{'flags':set()}),{0})
         self.assertEqual(evaluate(key,{'flags':{flag}}),{1})
         self.assertEqual(native_effects(key,1,{})['vars'],{'VAR_0x8004':flag})

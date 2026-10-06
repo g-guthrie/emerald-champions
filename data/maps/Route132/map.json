@@ -35,8 +35,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_ItemRareCandy",
-      "flag": "FLAG_ITEM_ROUTE_132_RARE_CANDY"
+      "script": "Route132_EventScript_ItemNugget",
+      "flag": "FLAG_ITEM_ROUTE_132_NUGGET"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
@@ -113,8 +113,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_ItemProtein",
-      "flag": "FLAG_ITEM_ROUTE_132_PROTEIN"
+      "script": "Route132_EventScript_ItemSharpBeak",
+      "flag": "FLAG_ITEM_ROUTE_132_SHARP_BEAK"
     }
   ],
   "warp_events": [],

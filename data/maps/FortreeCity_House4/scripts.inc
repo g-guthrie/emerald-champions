@@ -9,7 +9,7 @@ FortreeCity_House4_EventScript_Woman:: @ 8217C81
 
 FortreeCity_House4_EventScript_Boy:: @ 8217C8A
 	lockall
-	goto_if_set FLAG_RECEIVED_CHOICE_SCARF, FortreeCity_House4_EventScript_ReceivedMentalHerb
+	goto_if_set FLAG_RECEIVED_THROAT_SPRAY_FORTREE_CITY_HOUSE_4, FortreeCity_House4_EventScript_ReceivedMentalHerb
 	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_WingullReturned
 	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_WingullOnErrand
 	msgbox FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT
@@ -36,7 +36,7 @@ FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
 	giveitem ITEM_THROAT_SPRAY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_CHOICE_SCARF
+	setflag FLAG_RECEIVED_THROAT_SPRAY_FORTREE_CITY_HOUSE_4
 	releaseall
 	end
 

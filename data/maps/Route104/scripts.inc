@@ -320,12 +320,12 @@ Route104_EventScript_Woman:: @ 81ED04E
 Route104_EventScript_Boy2:: @ 81ED057
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
+	goto_if_set FLAG_RECEIVED_NUGGET_ROUTE_104, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM09
+	setflag FLAG_RECEIVED_NUGGET_ROUTE_104
 	release
 	end
 

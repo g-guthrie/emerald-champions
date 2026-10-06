@@ -17,7 +17,7 @@ FortreeCity_Gym_EventScript_InitRotatingGates:: @ 82165C4
 
 FortreeCity_Gym_EventScript_Winona:: @ 82165C8
 	trainerbattle_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, EmeraldChampions_Text_NeedTwoPokemon, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM51, FortreeCity_Gym_EventScript_GiveRoost2
+	goto_if_unset FLAG_RECEIVED_STARAPTITE_FORTREE_CITY_GYM, FortreeCity_Gym_EventScript_GiveStaraptite
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -39,12 +39,12 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	release
 	end
 
-FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
+FortreeCity_Gym_EventScript_GiveStaraptite:: @ 8216646
 	giveuniqueitem ITEM_STARAPTITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM51
+	setflag FLAG_RECEIVED_STARAPTITE_FORTREE_CITY_GYM
 	release
 	end
 
@@ -53,7 +53,7 @@ FortreeCity_Gym_EventScript_GiveRoost:: @ 821666A
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM51
+	setflag FLAG_RECEIVED_STARAPTITE_FORTREE_CITY_GYM
 	return
 
 FortreeCity_Gym_EventScript_Jared:: @ 82166A8

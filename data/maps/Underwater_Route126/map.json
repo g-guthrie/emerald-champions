@@ -75,7 +75,7 @@
       "y": 36,
       "elevation": 3,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_ROUTE_126_BIG_PEARL"
     },
     {
       "type": "hidden_item",
@@ -83,7 +83,7 @@
       "y": 39,
       "elevation": 3,
       "item": "ITEM_POISON_BARB",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON"
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_ROUTE_126_POISON_BARB"
     },
     {
       "type": "hidden_item",

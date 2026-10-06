@@ -245,7 +245,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_B1F_EventScript_ItemTM29",
+      "script": "VictoryRoad_B1F_EventScript_ItemGarchompiteZ",
       "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_GARCHOMPITE_Z"
     },
     {
@@ -258,7 +258,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_B1F_EventScript_ItemFullRestore",
+      "script": "VictoryRoad_B1F_EventScript_ItemCharizarditeY",
       "flag": "FLAG_ITEM_VICTORY_ROAD_B1_F_CHARIZARDITE_Y"
     },
     {

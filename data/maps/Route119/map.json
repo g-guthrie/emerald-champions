@@ -192,7 +192,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemElixir",
+      "script": "Route119_EventScript_ItemAudinite",
       "flag": "FLAG_ITEM_ROUTE119_AUDINITE"
     },
     {
@@ -205,8 +205,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemTM84_Poison_Jab",
-      "flag": "FLAG_ITEM_ROUTE_119_TM84_POISON_JAB"
+      "script": "Route119_EventScript_ItemScraftinite",
+      "flag": "FLAG_ITEM_ROUTE_119_SCRAFTINITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -218,8 +218,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemRareCandy",
-      "flag": "FLAG_ITEM_ROUTE_119_RARE_CANDY"
+      "script": "Route119_EventScript_ItemNugget2",
+      "flag": "FLAG_ITEM_ROUTE_119_NUGGET_2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
@@ -231,7 +231,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemHyperPotion",
+      "script": "Route119_EventScript_ItemButterfrenite",
       "flag": "FLAG_ITEM_ROUTE119_BUTTERFRENITE"
     },
     {
@@ -362,7 +362,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemHyperPotion2",
+      "script": "Route119_EventScript_ItemBeedrillite",
       "flag": "FLAG_ITEM_ROUTE119_BEEDRILLITE"
     },
     {
@@ -440,7 +440,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemElixir2",
+      "script": "Route119_EventScript_ItemScolipite",
       "flag": "FLAG_ITEM_ROUTE119_SCOLIPITE"
     },
     {
@@ -467,8 +467,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemTM62_Acrobatics",
-      "flag": "FLAG_ITEM_ROUTE_119_TM62_ACROBATICS"
+      "script": "Route119_EventScript_ItemGreninjite",
+      "flag": "FLAG_ITEM_ROUTE_119_GRENINJITE"
     }
   ],
   "warp_events": [
@@ -733,7 +733,7 @@
       "y": 82,
       "elevation": 3,
       "item": "ITEM_UTILITY_UMBRELLA",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_CALCIUM"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_UTILITY_UMBRELLA"
     },
     {
       "type": "hidden_item",
@@ -785,7 +785,7 @@
       "elevation": 3,
       "item": "ITEM_NET_BALL",
       "quantity": 3,
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_FULL_HEAL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_119_NET_BALL"
     },
     {
       "type": "hidden_item",

@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route111_RuinsExterior_EventScript_ItemStardust",
-      "flag": "FLAG_ITEM_ROUTE_133_COMET_SHARD"
+      "flag": "FLAG_ITEM_ROUTE_111_RUINS_EXTERIOR_STARDUST"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",

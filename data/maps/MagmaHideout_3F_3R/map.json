@@ -24,8 +24,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower",
-      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_3_F_3_R_DRAMPANITE"
+      "script": "MagmaHideout_3F_3R_EventScript_ItemPpMax",
+      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_3F_3R_PP_MAX"
     }
   ],
   "warp_events": [

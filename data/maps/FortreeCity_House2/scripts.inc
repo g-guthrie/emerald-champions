@@ -1,10 +1,10 @@
 FortreeCity_House2_MapScripts:: @ 82177CA
 	.byte 0
 
-FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 82177CB
+FortreeCity_House2_EventScript_HiddenPowerGiveNugget:: @ 82177CB
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM10, FortreeCity_House2_EventScript_ExplainHiddenPower
+	goto_if_set FLAG_RECEIVED_NUGGET_FORTREE_CITY_HOUSE_2, FortreeCity_House2_EventScript_ExplainHiddenPower
 	call_if_unset FLAG_MET_HIDDEN_POWER_GIVER, FortreeCity_House2_EventScript_Greeting
 	msgbox FortreeCity_House2_Text_CoinInWhichHand, MSGBOX_DEFAULT
 	multichoice 21, 8, MULTI_RIGHTLEFT, TRUE
@@ -22,7 +22,7 @@ FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 82177CB
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM10
+	setflag FLAG_RECEIVED_NUGGET_FORTREE_CITY_HOUSE_2
 	msgbox FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT
 	release
 	end
@@ -42,7 +42,7 @@ FortreeCity_House2_EventScript_WrongGuess:: @ 8217878
 	release
 	end
 
-FortreeCity_House2_EventScript_SleepTalkTM::
+FortreeCity_House2_EventScript_GiveBigPearl::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_FORTREE_CITY_HOUSE2, FortreeCity_House2_EventScript_ReceivedTM49

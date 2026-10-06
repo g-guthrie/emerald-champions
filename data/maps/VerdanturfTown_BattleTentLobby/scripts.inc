@@ -225,15 +225,15 @@ VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor: @ 8201A77
 	set_invisible
 	step_end
 
-VerdanturfTown_BattleTentLobby_EventScript_AttractGiver:: @ 8201A7B
+VerdanturfTown_BattleTentLobby_EventScript_AttractGiveNugget:: @ 8201A7B
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
+	goto_if_set FLAG_RECEIVED_NUGGET_VERDANTURF_TOWN_BATTLE_TENT_LOBBY, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep, MSGBOX_DEFAULT
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM45
+	setflag FLAG_RECEIVED_NUGGET_VERDANTURF_TOWN_BATTLE_TENT_LOBBY
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT
 	release
 	end

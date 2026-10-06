@@ -78,7 +78,7 @@ MtPyre_Summit_EventScript_GiveMagmaEmblem::
 	giveitem ITEM_MAGMA_EMBLEM
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
+	setflag FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall
 	end
@@ -179,7 +179,7 @@ MtPyre_Summit_EventScript_OldLady:: @ 82321A2
 	lock
 	faceplayer
 	goto_if_lt VAR_MT_PYRE_STATE, 1, MtPyre_Summit_EventScript_OldLadyStory
-	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_GiveMagmaEmblem
+	goto_if_unset FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT, MtPyre_Summit_EventScript_GiveMagmaEmblem
 MtPyre_Summit_EventScript_OldLadyStory:
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	compare VAR_MT_PYRE_STATE, 3

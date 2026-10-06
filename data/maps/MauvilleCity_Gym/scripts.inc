@@ -76,7 +76,7 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	call MauvilleCity_Gym_EventScript_GiveMegaRing
-	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
+	goto_if_unset FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM, MauvilleCity_Gym_EventScript_GiveRaichuniteX
 	compare VAR_NEW_MAUVILLE_STATE, 6
 	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
@@ -108,12 +108,12 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	release
 	end
 
-MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
+MauvilleCity_Gym_EventScript_GiveRaichuniteX:: @ 820DF8D
 	giveuniqueitem ITEM_RAICHUNITE_X
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM72
+	setflag FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM
 	release
 	end
 
@@ -122,7 +122,7 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM72
+	setflag FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM
 	return
 
 MauvilleCity_Gym_EventScript_CompletedNewMauville:: @ 820DFD4

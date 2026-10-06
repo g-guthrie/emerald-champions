@@ -187,7 +187,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_SPELL_TAG",
-      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_CARBOS"
+      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_B1F_SPELL_TAG"
     },
     {
       "type": "hidden_item",
@@ -195,7 +195,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_TWISTED_SPOON",
-      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_CALCIUM"
+      "flag": "FLAG_HIDDEN_ITEM_ALTERING_CAVE_B1F_TWISTED_SPOON"
     }
   ]
 }

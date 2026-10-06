@@ -18,7 +18,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_Nurse:: @ 820273A
 	release
 	end
 
-VerdanturfTown_PokemonCenter_1F_EventScript_XscissorTM::
+VerdanturfTown_PokemonCenter_1F_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_VERDANTURF_TOWN_POKEMON_CENTER_1_F, VerdanturfTown_PokemonCenter_1F_EventScript_ReceivedTM81

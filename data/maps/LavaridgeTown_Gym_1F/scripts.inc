@@ -46,7 +46,7 @@ LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers:: @ 81FE78B
 
 LavaridgeTown_Gym_1F_EventScript_Flannery:: @ 81FE78C
 	trainerbattle_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_TM50, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
+	goto_if_unset FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -68,23 +68,23 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated:: @ 81FE7C1
 	call Common_EventScript_SetGymTrainers
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
-	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
+	call LavaridgeTown_Gym_1F_EventScript_GiveChandelurite
 	closemessage
 	setflag FLAG_ENABLE_FLANNERY_MATCH_CALL
 	release
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
-	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
+	call LavaridgeTown_Gym_1F_EventScript_GiveChandelurite
 	release
 	end
 
-LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
+LavaridgeTown_Gym_1F_EventScript_GiveChandelurite:: @ 81FE841
 	giveuniqueitem ITEM_CHANDELURITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM50
+	setflag FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F
 	return
 
 LavaridgeTown_Gym_1F_EventScript_Cole:: @ 81FE87F

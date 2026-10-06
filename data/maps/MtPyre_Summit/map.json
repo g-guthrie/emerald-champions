@@ -135,8 +135,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_Summit_EventScript_ItemTM61_WillOWisp",
-      "flag": "FLAG_ITEM_MT_PYRE_SUMMIT_TM61_WILLOWISP"
+      "script": "MtPyre_Summit_EventScript_ItemStarPiece",
+      "flag": "FLAG_ITEM_MT_PYRE_SUMMIT_STAR_PIECE"
     },
     {
       "local_id": "LOCALID_EC_MATT_MT_PYRE",
@@ -247,7 +247,7 @@
       "y": 25,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_RARE_CANDY"
+      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_NUGGET"
     },
     {
       "type": "sign",

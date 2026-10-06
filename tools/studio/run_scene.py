@@ -135,6 +135,14 @@ async def run(spec,out):
                 live=packet_state(studio.packet,recorder.decoder)["actors"]
                 if "talk_id" in step:
                     hit=[a for a in live if a["local_id"]==int(step["talk_id"]) and not a["invisible"]]
+                    if not hit and step.get("near") and not step.get("_approached"):
+                        # The game only loads objects near the camera: walk to the closest
+                        # reachable tile to where the map places this one, then look again.
+                        here=(studio.state[4],studio.state[5]);near=tuple(step["near"])
+                        best=route_steps.closest_reachable(studio.current_map,here,near)
+                        if best and best!=here:
+                            steps_iter.extend_front([{"walk_to":list(best)},dict(step,_approached=True)])
+                            continue
                     if not hit:
                         recorder.mark(f"ABSENT actor {step['talk_id']} {step.get('label','')}",studio.packet)
                         interactions.append(dict(label=step.get("label",""),target=step["talk_id"],status="absent"))

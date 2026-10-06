@@ -18,9 +18,11 @@ import route_steps as RS
 
 SHOP_LIKE = re.compile(r'pokemart|General_Mart_Script|BattleVendor|ChoosePartyMon|ShowScrollableMultichoice|'
                        r'multichoice|MoveTutor|Tutor|DoInGameTrade|CreateInGameTradePokemon|Lottery|NameRater|'
-                       r'BufferEmeraldChampionsBattleItemStock|special ChooseMonForMoveRelearner')
+                       r'BufferEmeraldChampionsBattleItemStock|special ChooseMonForMoveRelearner|'
+                       r'PlayerPC|BedroomPC|AccessPC|EventScript_PC\b|_PC::|WallClock|StartWallClock|'
+                       r'checkmoney|removemoney')
 SKIP_SCRIPTS = {'EventScript_CutTree', 'EventScript_RockSmash', 'EventScript_StrengthBoulder', '0x0', 'NULL', ''}
-CHUNK = 10          # interactions/photos per scene (keeps each scene under the frame cap)
+CHUNK = 6          # interactions/photos per scene (keeps each scene under the frame cap)
 
 
 def script_graph_text(label, seen=None, depth=0):
@@ -93,7 +95,7 @@ def to_step(j):
     if j['kind'] == 'photo':
         return {'walk_to': list(j['at']), 'label': f"photo {j['at'][0]},{j['at'][1]}"}
     if j['kind'] == 'talk':
-        return {'talk_id': j['id'], 'mode': j['mode'], 'label': f"talk {j['id']}"}
+        return {'talk_id': j['id'], 'mode': j['mode'], 'near': list(j['at']), 'label': f"talk {j['id']}"}
     return {'inspect': list(j['at']), 'mode': j['mode'], 'label': f"inspect {j['at'][0]},{j['at'][1]}"}
 
 
@@ -193,6 +195,12 @@ def main():
         t = ' | '.join(x.replace('\n', ' ') for x in it['texts'])[:400]
         lines.append(f"- {it['label']} {it.get('source','')} [{it['status']}{', battle' if it.get('battle') else ''}]: {t}")
     (out / 'report.md').write_text('\n'.join(lines) + '\n')
+    # Frames and sheets were only working material: the report holds what they showed.
+    for dest in dests:
+        for f in dest.iterdir():
+            if f.name not in ('end.sav', 'result.json', 'bag-before.json', 'bag-after.json'):
+                if f.is_dir(): subprocess.run(['rm', '-rf', str(f)])
+                else: f.unlink()
     print(out / 'report.md')
 
 

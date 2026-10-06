@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GraniteCave_B2F_EventScript_ItemSteelixite",
+      "script": "GraniteCave_B2F_EventScript_ItemThroatSpray",
       "flag": "FLAG_ITEM_GRANITE_CAVE_B2_F_THROAT_SPRAY"
     },
     {
@@ -37,8 +37,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GraniteCave_B2F_EventScript_ItemRareCandy",
-      "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY"
+      "script": "GraniteCave_B2F_EventScript_ItemNugget",
+      "flag": "FLAG_ITEM_GRANITE_CAVE_B2F_NUGGET"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",

@@ -13,7 +13,7 @@ RustboroCity_Mart_EventScript_BugCatcher:: @ 8214F86
 	msgbox RustboroCity_Mart_Text_HeldItemsForBattle, MSGBOX_NPC
 	end
 
-RustboroCity_Mart_EventScript_FalseSwipeTM::
+RustboroCity_Mart_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_RUSTBORO_CITY_MART, RustboroCity_Mart_EventScript_ReceivedTM98

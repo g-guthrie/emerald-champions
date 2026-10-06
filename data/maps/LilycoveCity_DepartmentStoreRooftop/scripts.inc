@@ -168,7 +168,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine:: @ 822045E
 	releaseall
 	end
 
-LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM::
+LilycoveCity_DepartmentStoreRooftop_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP, LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90

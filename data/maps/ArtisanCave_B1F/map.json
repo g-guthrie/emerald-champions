@@ -24,8 +24,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ArtisanCave_B1F_EventScript_ItemHPUp",
-      "flag": "FLAG_ITEM_ARTISAN_CAVE_B1F_HP_UP"
+      "script": "ArtisanCave_B1F_EventScript_ItemCometShard",
+      "flag": "FLAG_ITEM_ARTISAN_CAVE_B1F_COMET_SHARD_2"
     }
   ],
   "warp_events": [
@@ -52,7 +52,7 @@
       "y": 29,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_ZINC"
+      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_NUGGET_2"
     },
     {
       "type": "hidden_item",
@@ -60,7 +60,7 @@
       "y": 8,
       "elevation": 0,
       "item": "ITEM_STAR_PIECE",
-      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_CALCIUM"
+      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_STAR_PIECE_2"
     },
     {
       "type": "hidden_item",
@@ -68,7 +68,7 @@
       "y": 5,
       "elevation": 0,
       "item": "ITEM_BIG_PEARL",
-      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_PROTEIN"
+      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_BIG_PEARL_2"
     },
     {
       "type": "hidden_item",
@@ -76,7 +76,7 @@
       "y": 43,
       "elevation": 0,
       "item": "ITEM_PEARL_STRING",
-      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_IRON"
+      "flag": "FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_PEARL_STRING_2"
     }
   ]
 }

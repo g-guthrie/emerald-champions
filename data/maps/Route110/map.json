@@ -209,7 +209,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_ItemManectite",
+      "script": "Route110_EventScript_ItemAssaultVest",
       "flag": "FLAG_ITEM_ROUTE110_ASSAULT_VEST"
     },
     {
@@ -222,7 +222,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_ItemRareCandy",
+      "script": "Route110_EventScript_ItemFalinksite",
       "flag": "FLAG_ITEM_ROUTE110_FALINKSITE"
     },
     {
@@ -665,7 +665,7 @@
       "elevation": 3,
       "item": "ITEM_QUICK_BALL",
       "quantity": 3,
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_FULL_HEAL"
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_110_QUICK_BALL"
     },
     {
       "type": "sign",

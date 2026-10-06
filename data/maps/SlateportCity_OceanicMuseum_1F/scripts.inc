@@ -156,7 +156,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt:: @ 820AEF8
 	giveitem ITEM_NUGGET
 	compare VAR_RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
-	setflag FLAG_RECEIVED_TM46
+	setflag FLAG_RECEIVED_NUGGET_SLATEPORT_CITY_OCEANIC_MUSEUM_1F
 	msgbox SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, DIR_NORTH

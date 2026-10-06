@@ -38,7 +38,7 @@ FallarborTown_Mart_EventScript_Skitty:: @ 81FFD06
 	release
 	end
 
-FallarborTown_Mart_EventScript_DrainPunchTM::
+FallarborTown_Mart_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_FALLARBOR_TOWN_MART, FallarborTown_Mart_EventScript_ReceivedNugget

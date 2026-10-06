@@ -13,7 +13,7 @@ VerdanturfTown_Mart_EventScript_Lass:: @ 82025CC
 	msgbox VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_PaybackTM::
+VerdanturfTown_Mart_EventScript_GiveNugget::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_GIFT_VERDANTURF_TOWN_MART, VerdanturfTown_Mart_EventScript_ReceivedTM66

@@ -331,7 +331,7 @@ STORY_EVENTS: list[tuple] = [
     ("FLAG_VISITED_FORTREE_CITY", "FortreeCity", None, None, "FortreeCity/scripts.inc:7"),
     ("FLAG_RECEIVED_DEVON_SCOPE", "Route120", (13, 16), None, "Route120/scripts.inc:255-260 (Steven)"),
     ("FLAG_BADGE06_GET", "FortreeCity_Gym", None, None, "FortreeCity_Gym/scripts.inc:31"),
-    ("FLAG_RECEIVED_RED_OR_BLUE_ORB", "MtPyre_Summit", None, None,
+    ("FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT", "MtPyre_Summit", None, None,
      "MtPyre_Summit/scripts.inc:69-82 (Magma Emblem, Orb, Jagged Pass guard hidden); no badge check"),
     ("FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT", "MagmaHideout_4F", (16, 22), None, "MagmaHideout_4F/scripts.inc:88 (Maxie)"),
     ("FLAG_MET_TEAM_AQUA_HARBOR", "SlateportCity_Harbor", None, "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT",
@@ -422,7 +422,7 @@ _gate_tiles("LilycoveCity", [(73, 15), (46, 12), (45, 12), (38, 9)], "FLAG_TEAM_
             "LilycoveCity/map.json Aqua grunts (FLAG_HIDE_LILYCOVE_CITY_AQUA_GRUNTS, set at AquaHideout_B2F/scripts.inc:53)")
 _gate_tiles("AquaHideout_1F", [(13, 11), (14, 11)], "FLAG_MET_TEAM_AQUA_HARBOR",
             "AquaHideout_1F/map.json entrance-blocking grunts (hidden at SlateportCity_Harbor/scripts.inc:84-85)")
-_gate_tiles("JaggedPass", [(16, 19)], "FLAG_RECEIVED_RED_OR_BLUE_ORB",
+_gate_tiles("JaggedPass", [(16, 19)], "FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT",
             "JaggedPass/map.json hideout guard (hidden at MtPyre_Summit/scripts.inc:82)")
 _gate_tiles("EverGrandeCity_PokemonLeague_1F", [(9, 2), (10, 2)], "BADGES>=8",
             "EverGrandeCity_PokemonLeague_1F/scripts.inc:45-52 door guards")
@@ -448,7 +448,7 @@ STORY_EXTRA_EDGES: list[tuple] = [
       for n in range(1, 9)],
     ("Route112_CableCarStation", "MtChimney_CableCarStation", None, "cable car special (Route112_CableCarStation/scripts.inc)"),
     ("MtChimney_CableCarStation", "Route112_CableCarStation", None, "cable car special (MtChimney_CableCarStation/scripts.inc)"),
-    (("JaggedPass", 16, 18), "MagmaHideout_1F", "FLAG_RECEIVED_RED_OR_BLUE_ORB",
+    (("JaggedPass", 16, 18), "MagmaHideout_1F", "FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT",
      "JaggedPass/scripts.inc:16-23,52-73 (Magma Emblem opens the hideout; emblem from MtPyre_Summit:78)"),
     (("NewMauville_Entrance", 4, 1), "NewMauville_Inside", "FLAG_GOT_BASEMENT_KEY_FROM_WATTSON",
      "NewMauville_Entrance/scripts.inc:24-40 (Basement Key)"),

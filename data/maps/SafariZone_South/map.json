@@ -93,8 +93,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_South_EventScript_ItemTM93WildCharge",
-      "flag": "FLAG_TM93_WILD_CHARGE"
+      "script": "SafariZone_South_EventScript_ItemMalamarite",
+      "flag": "FLAG_ITEM_SAFARI_ZONE_SOUTH_MALAMARITE"
     }
   ],
   "warp_events": [
