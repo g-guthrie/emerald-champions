@@ -4,10 +4,11 @@
     python3 tools/title_logo.py graphics/title_screen/inclement_emerald_2_logo_master.png \
         graphics/title_screen/inclement_emerald_2_logo.png
 
-The master is the logo itself, 145x42, hand-finished: its INCLEMENT is
-redrawn in a bold 7-pixel face set on the arch of its gold frame (each
-letter as high as the frame allows with a pixel of black around it), and its
-outlines cleaned. It is shown at that
+The master is the logo itself, 145x42, hand-finished: INCLEMENT is
+redrawn in a bold 8-pixel face on one line, its gold bow redrawn with a low
+arch over the top and its straight bottom sitting right on EMERALD's white
+border (two black pixels round every letter), the 2's white top outline
+restored, and the outlines cleaned. It is shown at that
 size, centred in a 192x64 8bpp sheet (three 64x64 sprites,
 src/title_screen.c), with at most PALETTE_COLORS colours after the
 transparent index 0.
