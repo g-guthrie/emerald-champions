@@ -557,6 +557,15 @@ static void DexNavSearchBail(const u8 *script)
     ScriptContext_SetupScript(tutorial ? EC_RivalDexNavTutorial_Abort : script);
 }
 
+// R repeats the remembered search unless a Bag item is registered to it.
+static bool32 CanRepeatDexNavSearchWithR(void)
+{
+    u16 item = *GetRegisteredItemPtr(REGISTER_BUTTON_R);
+    if (item != ITEM_NONE && CheckBagHasItem(item, 1))
+        return FALSE;
+    return (VarGet(DN_VAR_SPECIES) & DEXNAV_MASK_SPECIES) != SPECIES_NONE && !IsRivalDexNavTutorialActive();
+}
+
 static bool8 InitDexNavSearch(enum Species species, u32 environment)
 {
     sDexNavSearchDataPtr = AllocZeroed(sizeof(struct DexNavSearch));
@@ -586,14 +595,19 @@ static bool8 InitDexNavSearch(enum Species species, u32 environment)
         DexNavSearchBail(EventScript_DexNavNotAvailable);
         return TRUE;
     }
+    // The search is remembered above, so when R repeats it (no Bag item owns
+    // R) the message says so rather than sending the player back to the menu.
     if ((environment == ENCOUNTER_TYPE_WATER) != (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) != 0))
     {
-        DexNavSearchBail(environment == ENCOUNTER_TYPE_WATER ? EventScript_DexNavStartSurfing : EventScript_DexNavStepOnLand);
+        if (environment == ENCOUNTER_TYPE_WATER)
+            DexNavSearchBail(CanRepeatDexNavSearchWithR() ? EventScript_DexNavStartSurfingRepeat : EventScript_DexNavStartSurfing);
+        else
+            DexNavSearchBail(CanRepeatDexNavSearchWithR() ? EventScript_DexNavStepOnLandRepeat : EventScript_DexNavStepOnLand);
         return TRUE;
     }
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
     {
-        DexNavSearchBail(EventScript_DexNavGetOffBike);
+        DexNavSearchBail(CanRepeatDexNavSearchWithR() ? EventScript_DexNavGetOffBikeRepeat : EventScript_DexNavGetOffBike);
         return TRUE;
     }
     if (!TryStartHiddenMonFieldEffect(sDexNavSearchDataPtr->environment, 12, 12, FALSE))

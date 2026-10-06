@@ -28,6 +28,20 @@ EventScript_DexNavGetOffBike::
 	msgbox sText_DexNavGetOffBike, MSGBOX_SIGN
 	end
 
+@ The same, when R will repeat the search (no Bag item owns R): the player
+@ need not open the DexNav again.
+EventScript_DexNavStartSurfingRepeat::
+	msgbox sText_DexNavStartSurfingRepeat, MSGBOX_SIGN
+	end
+
+EventScript_DexNavStepOnLandRepeat::
+	msgbox sText_DexNavStepOnLandRepeat, MSGBOX_SIGN
+	end
+
+EventScript_DexNavGetOffBikeRepeat::
+	msgbox sText_DexNavGetOffBikeRepeat, MSGBOX_SIGN
+	end
+
 EventScript_MovedTooFast::
 	msgbox sText_TryMovingSlower, MSGBOX_SIGN
 	call DexNav_ReportChainEnd
@@ -78,6 +92,19 @@ sText_DexNavStepOnLand:
 
 sText_DexNavGetOffBike:
 	.string "Get off your Bike before searching.\n"
+	.string "Hold A while moving to sneak.$"
+
+sText_DexNavStartSurfingRepeat:
+	.string "Start Surfing on the water first,\n"
+	.string "then press {R_BUTTON} to search for it.$"
+
+sText_DexNavStepOnLandRepeat:
+	.string "Step onto land first, then\n"
+	.string "press {R_BUTTON} to search for it.$"
+
+sText_DexNavGetOffBikeRepeat:
+	.string "Get off your Bike first, then\n"
+	.string "press {R_BUTTON} to search for it.\p"
 	.string "Hold A while moving to sneak.$"
 
 sText_TryMovingSlower:

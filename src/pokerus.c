@@ -95,7 +95,7 @@ void BufferHotSpringPokerusPreview(void)
             dst = StringCopy(dst, gStatNamesTable[stat]);
             dst = StringCopy(dst, COMPOUND_STRING(": "));
             dst = ConvertIntToDecimalStringN(dst, GetMonData(mon, MON_DATA_MAX_HP + stat), STR_CONV_MODE_LEFT_ALIGN, 3);
-            dst = StringCopy(dst, COMPOUND_STRING(" > "));
+            dst = StringCopy(dst, COMPOUND_STRING(" {RIGHT_ARROW} "));
             dst = ConvertIntToDecimalStringN(dst, GetMonData(&preview, MON_DATA_MAX_HP + stat), STR_CONV_MODE_LEFT_ALIGN, 3);
             *dst++ = i == 0 ? CHAR_NEWLINE : CHAR_PROMPT_CLEAR;
             *dst = EOS;
