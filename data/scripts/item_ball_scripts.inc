@@ -81,8 +81,8 @@ Route111_EventScript_ItemBigNugget:: @ 8290DB5
 	finditem ITEM_BIG_NUGGET
 	end
 
-Route111_EventScript_ItemElixir:: @ 8290DC2
-	finditem ITEM_ELIXIR
+Route111_EventScript_ItemFireGem:: @ 8290DC2
+	finditem ITEM_FIRE_GEM
 	end
 
 Route112_EventScript_ItemMachampite:: @ 8290DCF
@@ -165,8 +165,8 @@ Route117_EventScript_ItemRevive:: @ 8290EC6
 	finditem ITEM_REVIVE
 	end
 
-Route118_EventScript_ItemHyperPotion:: @ 8290ED3
-	finditem ITEM_HYPER_POTION
+Route118_EventScript_ItemFightingGem:: @ 8290ED3
+	finditem ITEM_FIGHTING_GEM
 	end
 
 Route119_EventScript_ItemToxicOrb:: @ 8290EE0

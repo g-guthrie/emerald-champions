@@ -416,8 +416,8 @@
       "x": 66,
       "y": 3,
       "elevation": 3,
-      "item": "ITEM_ETHER",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_ETHER"
+      "item": "ITEM_WATER_GEM",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_WATER_GEM"
     },
     {
       "type": "hidden_item",

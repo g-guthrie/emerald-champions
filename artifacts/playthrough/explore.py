@@ -79,6 +79,16 @@ def reachable(map_dir, start, caps, gates=frozenset()):
     return {s[:2] for s in states}, g
 
 
+def const_value(v):
+    """A trigger's var_value: a number, or a #define name from include/constants."""
+    try: return int(str(v), 0)
+    except ValueError: pass
+    for f in (ROOT / 'include/constants').glob('*.h'):
+        m = re.search(rf'^#define\s+{re.escape(str(v))}\s+(\w+)', f.read_text(), re.M)
+        if m: return const_value(m.group(1))
+    raise ValueError(f'unknown constant {v}')
+
+
 def story_gates(map_dir, values):
     """Trigger tiles that are live now (their var holds the trigger's value) and whose script never
     changes that var: they fire every time and turn the player back (Petalburg's Gym escort), so the
@@ -88,10 +98,25 @@ def story_gates(map_dir, values):
     for c in m.get('coord_events', []) or []:
         var = c.get('var') or ''
         if c.get('type') != 'trigger' or var not in values: continue
-        if values[var] != int(str(c.get('var_value', 0)), 0): continue
-        if re.search(rf'\b(?:setvar|addvar|subvar|copyvar)\s+{var}\b', script_graph_text(c['script'])): continue
+        if values[var] != const_value(c.get('var_value', 0)): continue
+        text = script_graph_text(c['script'])
+        # an item check that turns the player back while the item is missing (Route 111's
+        # sandstorm wants the Go-Goggles) is a wall until the Bag holds it
+        needs = re.findall(r'\bcheckitem\s+(ITEM_\w+)', text)
+        if needs and all(values.get(i) == 0 for i in needs):
+            gates.add((c['x'], c['y'])); continue
+        if re.search(rf'\b(?:setvar|addvar|subvar|copyvar)\s+{var}\b', text): continue
         gates.add((c['x'], c['y']))
     return gates
+
+
+def trigger_items(map_dir):
+    """Items a live trigger's script checks the Bag for."""
+    m = next(mm for mm in R.MAPS.values() if mm['_dir'] == map_dir)
+    out = set()
+    for c in m.get('coord_events', []) or []:
+        if c.get('script'): out |= set(re.findall(r'\bcheckitem\s+(ITEM_\w+)', script_graph_text(c['script'])))
+    return sorted(out)
 
 
 def trigger_vars(map_dir):
@@ -207,7 +232,8 @@ def main():
     skip = {int(s) for s in a.skip.split(',') if s}
     # find the start position from the save
     probe = {'name': 'probe ' + a.name, 'start': {'save': a.save}, 'steps': [{'frames': 2}],
-             'queries': {v: {'kind': 2, 'id': v} for v in trigger_vars(a.map)}}
+             'queries': {**{v: {'kind': 2, 'id': v} for v in trigger_vars(a.map)},
+                         **{i: {'kind': 4, 'id': i} for i in trigger_items(a.map)}}}
     _, pr = run_chunk(probe, a.name + '-probe')
     f = pr['outcome']['final']
     if f['map'] != a.map: raise SystemExit(f"save is on {f['map']}, not {a.map}")

@@ -17,7 +17,7 @@ ARROW = {'MB_SOUTH_ARROW_WARP': 'DOWN', 'MB_NORTH_ARROW_WARP': 'UP', 'MB_EAST_AR
          'MB_WEST_ARROW_WARP': 'LEFT', 'MB_WATER_SOUTH_ARROW_WARP': 'DOWN', 'MB_DEEP_SOUTH_WARP': 'DOWN'}
 
 
-def hop_steps(map_dir, here, target_map, via=None):
+def hop_steps(map_dir, here, target_map, via=None, caps=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     m = R.MAPS[mid]; g = R.grid(mid)
     tid = next(k for k, mm in R.MAPS.items() if mm['_dir'] == target_map)
@@ -29,11 +29,11 @@ def hop_steps(map_dir, here, target_map, via=None):
         if via and (x, y) != via: continue
         b = inv.get(g.beh(x, y), '')
         if g.coll(x, y):            # door in a wall: stand below it and walk up into it
-            mv = RS.path(map_dir, here, (x, y + 1), block=set())
+            mv = RS.path(map_dir, here, (x, y + 1), caps, block=set())
             if mv is not None:
                 options.append((len(mv), [{'walk_to': [x, y + 1]}, {'walk': ['UP']}, {'hold': 'UP', 'frames': 30}]))
         else:
-            mv = RS.path(map_dir, here, (x, y), block=set()) if (x, y) != here else []
+            mv = RS.path(map_dir, here, (x, y), caps, block=set()) if (x, y) != here else []
             if mv is not None:
                 push = ARROW.get(b)
                 steps = [{'walk_to': [x, y]}] if (x, y) != here else []
@@ -55,7 +55,7 @@ def hop_steps(map_dir, here, target_map, via=None):
             if via and e != via: continue
             t = across(e)
             if not tg.inb(*t) or tg.coll(*t): continue
-            mv = RS.path(map_dir, here, e, block=set()) if e != here else []
+            mv = RS.path(map_dir, here, e, caps, block=set()) if e != here else []
             if mv is not None:
                 options.append((len(mv), [{'walk_to': list(e)}, {'walk': [step]}]))
     if not options: return None
@@ -67,13 +67,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('save'); ap.add_argument('target'); ap.add_argument('name')
     ap.add_argument('--via', default='')
+    ap.add_argument('--caps', default='', help='field moves the walk may use (cut,smash,bike)')
     a = ap.parse_args()
     _, pr = X.run_chunk({'name': 'probe ' + a.name, 'start': {'save': a.save}, 'steps': [{'frames': 2}]}, a.name + '-probe')
     f = pr['outcome']['final']
     if f['map'] == a.target and not a.via:   # already there
         print(json.dumps(dict(passed=True, failures=[], map=f['map'], x=f['x'], y=f['y'], end_save=a.save))); return
     via = tuple(map(int, a.via.split(','))) if a.via else None
-    steps = hop_steps(f['map'], (f['x'], f['y']), a.target, via)
+    steps = hop_steps(f['map'], (f['x'], f['y']), a.target, via, frozenset(c for c in a.caps.split(',') if c))
     if steps is None: raise SystemExit(f"no way from {f['map']} {f['x']},{f['y']} to {a.target}")
     steps = steps + [{'frames': 120}, {'tap': 'B', 'every': 40, 'frames': 6000, 'min_frames': 30, 'until': 'idle', 'label': 'Arrived'}]
     recipe = {'name': f"travel {f['map']} -> {a.target}", 'start': {'save': a.save}, 'battle_resolution': 'fixture_win',
