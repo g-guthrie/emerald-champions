@@ -903,8 +903,9 @@ STATIC_ASSERT(LIST_ARROW_DOWN_Y + 5 + LIST_ARROW_BOUNCE <= LIST_WINDOW_Y + LIST_
 #define INFO_BOX_X          (LIST_BOX_X + LIST_BOX_WIDTH + LIST_INFO_GAP - INFO_WINDOW_X)
 #define INFO_BOX_WIDTH      (DISPLAY_WIDTH - 1 - INFO_WINDOW_X - INFO_BOX_X)
 #define INFO_TYPE_WIDTH     32  // a type badge (gSpriteTemplate_MoveTypes)
+#define INFO_TYPE_GAP       2   // between two badges, so they read as two
 STATIC_ASSERT(LIST_BOX_X + LIST_BOX_WIDTH <= INFO_WINDOW_X, dexNavListBoxInsideItsWindow);
-STATIC_ASSERT(INFO_BOX_WIDTH >= 2 * INFO_TYPE_WIDTH + 2, dexNavInfoBoxHoldsTwoTypes);
+STATIC_ASSERT(INFO_BOX_WIDTH >= 2 + 2 * INFO_TYPE_WIDTH + INFO_TYPE_GAP + 2, dexNavInfoBoxHoldsTwoTypes);
 #define INFO_TOP            LIST_TOP
 #define INFO_BOTTOM         LIST_BOTTOM
 #define INFO_TEXT_X         (INFO_BOX_X + 4)
@@ -1614,9 +1615,9 @@ static void ShowDexNavInfoTypes(void)
     type2 = GetSpeciesType(entry->species, 1);
     if (type2 != type1)
     {
-        u32 x = INFO_WINDOW_X + INFO_BOX_X + (INFO_BOX_WIDTH - 2 * INFO_TYPE_WIDTH) / 2;
+        u32 x = INFO_WINDOW_X + INFO_BOX_X + (INFO_BOX_WIDTH - 2 * INFO_TYPE_WIDTH - INFO_TYPE_GAP) / 2;
         SetTypeIconPosAndPal(type1, x, LIST_WINDOW_Y + INFO_TYPES_Y, 0);
-        SetTypeIconPosAndPal(type2, x + INFO_TYPE_WIDTH, LIST_WINDOW_Y + INFO_TYPES_Y, 1);
+        SetTypeIconPosAndPal(type2, x + INFO_TYPE_WIDTH + INFO_TYPE_GAP, LIST_WINDOW_Y + INFO_TYPES_Y, 1);
     }
     else
     {
