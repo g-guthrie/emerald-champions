@@ -45,8 +45,16 @@ def hop_steps(map_dir, here, target_map, via=None):
         edge = {'up': [(x, 0) for x in range(g.w)], 'down': [(x, g.h - 1) for x in range(g.w)],
                 'left': [(0, y) for y in range(g.h)], 'right': [(g.w - 1, y) for y in range(g.h)]}.get(d, [])
         step = {'up': 'UP', 'down': 'DOWN', 'left': 'LEFT', 'right': 'RIGHT'}[d]
+        # the tile across the edge must be walkable in the target map (connection offset)
+        tg = R.grid(tid); off = int(c.get('offset', 0))
+        def across(e):
+            x, y = e
+            return {'up': (x - off, tg.h - 1), 'down': (x - off, 0), 'left': (tg.w - 1, y - off),
+                    'right': (0, y - off)}[d]
         for e in edge:
             if via and e != via: continue
+            t = across(e)
+            if not tg.inb(*t) or tg.coll(*t): continue
             mv = RS.path(map_dir, here, e, block=set()) if e != here else []
             if mv is not None:
                 options.append((len(mv), [{'walk_to': list(e)}, {'walk': [step]}]))
