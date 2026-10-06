@@ -61,6 +61,8 @@ Independent recipes can select an existing native fixture with `start:{"fixture"
 
 For scoped outcome testing, `battle_resolution:"fixture_defeat"` selects the existing no-capture victory fixture; `"fixture_loss"` selects the existing forced-loss fixture. Both are synthetic battle exits and never combat evidence. `"fixture_win"` retains the automatic-capture behavior for wild battles. All modes are recorded in the outcome.
 
+A warp with `"surf":true` lands on the nearest calm surfable tile to its `x`/`y` and the game starts the player Surfing there; use it for water encounters and DexNav water searches instead of walking to a shore. `tools/studio/audit_dexnav_water.py OUTDIR` plays a DexNav water search to its battle.
+
 Use `expect.visited_maps:["SouthernIsland_Exterior"]` to require actual intermediate travel in the native capture trace, including when the scene ends back at its starting harbor. Permission flags alone do not prove a voyage occurred.
 
 Use `expect.forbidden_text:["obsolete instruction"]` to reject stale dialogue anywhere in the native trace, rather than only checking the final text buffer.
