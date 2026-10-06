@@ -115,6 +115,8 @@ enum {
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
     MENU_OPEN_ABILITY,
+    MENU_FOLLOW,
+    MENU_RECALL,
     MENU_FIELD_MOVES
 };
 
@@ -496,6 +498,8 @@ static void CursorCb_CatalogMower(u8);
 static void CursorCb_ChangeForm(u8);
 static void CursorCb_ChangeAbility(u8);
 static void CursorCb_OpenAbilityMenu(u8);
+static void CursorCb_Follow(u8);
+static void CursorCb_Recall(u8);
 static void Task_HandleAbilitySelectionInput(u8);
 static void Task_ReturnToPartyActionsAfterAbilityText(u8);
 static u8 CollectSelectableAbilitySlots(struct Pokemon *, u8 *);
@@ -515,6 +519,8 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nAbility to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_MonIsFollowingYou[] = _("{STR_VAR_1} is following you!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_MonReturnedToBall[] = _("{STR_VAR_1} returned to its Poké Ball.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_WhichAbility[] = _("Which Ability?");
 static const u8 sText_DigThroughWall[] = _("Use Dig to open a passage\nthrough this wall?");
@@ -3034,6 +3040,23 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         }
     }
 
+    // Follow/Recall sits under Summary and Ability, but yields its row to a
+    // field move when the list is full.
+    if (OW_FOLLOWERS_ENABLED && !InBattlePike() && sPartyMenuInternal->numActions + 3 < ARRAY_COUNT(sPartyMenuInternal->actions))
+    {
+        u8 followAction = (GetFollowerMon() == &mons[slotId]) ? MENU_RECALL : MENU_FOLLOW;
+
+        if (followAction == MENU_RECALL || CanMonFollow(&mons[slotId]))
+        {
+            u8 row = (sPartyMenuInternal->numActions > 1 && sPartyMenuInternal->actions[1] == MENU_OPEN_ABILITY) ? 2 : 1;
+
+            for (i = sPartyMenuInternal->numActions; i > row; i--)
+                sPartyMenuInternal->actions[i] = sPartyMenuInternal->actions[i - 1];
+            sPartyMenuInternal->actions[row] = followAction;
+            sPartyMenuInternal->numActions++;
+        }
+    }
+
     if (!InBattlePike())
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
@@ -3255,9 +3278,6 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void)
 
 static void CursorCb_Switch(u8 taskId)
 {
-    // Reset follower steps when the party leader is changed
-    if (gPartyMenu.slotId == 0 || gPartyMenu.slotId2 == 0)
-        gFollowerSteps = 0;
     PlaySE(SE_SELECT);
     gPartyMenu.action = PARTY_ACTION_SWITCH;
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -7430,6 +7450,54 @@ static void Task_ReturnToPartyActionsAfterAbilityText(u8 taskId)
 {
     if (!IsPartyMenuTextPrinterActive())
         ReturnToPartyActionMenu(taskId);
+}
+
+// Back to the same Pokemon's actions, where the row now offers the opposite.
+static void Task_ReturnToPartyActionsAfterFollowText(u8 taskId)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+
+    if (IsPartyMenuTextPrinterActive())
+        return;
+    SetPartyMonSelectionActions(gParties[B_TRAINER_PLAYER], gPartyMenu.slotId, GetPartyMenuActionsType(mon));
+    DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    MoveActionCursorTo(GetFollowerMon() == mon ? MENU_RECALL : MENU_FOLLOW);
+    DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_MON);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+static void ShowFollowChoiceMessage(u8 taskId, struct Pokemon *mon, const u8 *text)
+{
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    GetMonNickname(mon, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, text);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_ReturnToPartyActionsAfterFollowText;
+}
+
+// The chosen Pokemon follows from now on, whatever its place in the party.
+// It appears when the player returns to the field.
+static void CursorCb_Follow(u8 taskId)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+
+    PlaySE(SE_SELECT);
+    SetFollowerMon(mon);
+    PlayCry_NormalNoDucking(GetMonData(mon, MON_DATA_SPECIES), 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
+    ShowFollowChoiceMessage(taskId, mon, sText_MonIsFollowingYou);
+}
+
+// Nobody follows until a Pokemon is chosen again.
+static void CursorCb_Recall(u8 taskId)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+
+    PlaySE(SE_BALL);
+    RecallFollowerMon();
+    ShowFollowChoiceMessage(taskId, mon, sText_MonReturnedToBall);
 }
 
 #undef tAbilityCount

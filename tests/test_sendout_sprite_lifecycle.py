@@ -19,7 +19,7 @@ import host_c
 # they resolve to trapping placeholders so any call aborts the run.
 UNCALLED = (
     'CopyBattleSpriteInvisibility', 'CreateTask', 'DestroySprite', 'FreeSpritePaletteByTag',
-    'FreeSpriteTilesByTag', 'GetFirstLiveMon', 'GetPartnerBattler', 'HandleLowHpMusicChange',
+    'FreeSpriteTilesByTag', 'GetFollowerMon', 'GetPartnerBattler', 'HandleLowHpMusicChange',
     'InitAndLaunchSpecialAnimation', 'IsCryPlayingOrClearCrySongs', 'SetBattlerShadowSpriteCallback',
     'SetHealthboxSpriteVisible', 'SpriteCB_WaitForBattlerBallReleaseAnim', 'SpriteCallbackDummy_2',
     'StartHealthboxSlideIn', 'Task_PlayerController_RestoreBgmAfterCry', 'UpdateHealthboxAttribute',

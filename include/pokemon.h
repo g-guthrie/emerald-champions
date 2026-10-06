@@ -275,7 +275,7 @@ struct BoxPokemon
     u16 checksum;
     u16 hpLost:14; // 16383 HP.
     u16 shinyModifier:1;
-    u16 unused_1E:1;
+    u16 isFollower:1; // The player's chosen follower (GetFollowerMon). At most one owned Pokémon carries it.
 
     union
     {
@@ -1056,5 +1056,8 @@ static inline enum ReturnToIdleOWE OWE_GetReturnToIdleFromSpecies(enum Species s
     enum OverworldWildEncounterBehaviors behavior = gSpeciesInfo[speciesId].overworldEncounterBehavior;
     return gOWESpeciesBehavior[behavior].returnToIdle;
 }
+
+void IncrementFollowerSteps(void);
+u32 GetMonFollowerSteps(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H

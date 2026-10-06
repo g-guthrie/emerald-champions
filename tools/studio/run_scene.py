@@ -16,6 +16,8 @@ from functools import lru_cache
 # Field obstacles (Cut trees, rocks, boulders) are objects: plan through the map file's ones and
 # let the live actors block those still standing (a cut tree is gone until the map reloads).
 OBSTACLE_CAPS=frozenset({"cut","smash","strength"})
+# The player and the follower Pokemon (OBJ_EVENT_ID_FOLLOWER); the player walks through its follower.
+WALKABLE_ACTORS=(255,254)
 
 
 @lru_cache(maxsize=1)
@@ -183,7 +185,7 @@ async def run(spec,out):
                     target=(hit[0]["x"],hit[0]["y"])
                 else:
                     target=tuple(step["inspect"])
-                occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
+                occupied={(a["x"],a["y"]) for a in live if a["local_id"] not in WALKABLE_ACTORS and not a["invisible"]}
                 gates={tuple(t) for t in step.get("avoid",[])}   # story triggers that turn the player back
                 here=(studio.state[4],studio.state[5])
                 options=[]
@@ -275,7 +277,7 @@ async def run(spec,out):
                         here=(studio.state[4],studio.state[5])
                         if here==goal or studio.current_map!=start_map:failure=None;break
                         live=packet_state(studio.packet,recorder.decoder)["actors"]
-                        occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
+                        occupied={(a["x"],a["y"]) for a in live if a["local_id"] not in WALKABLE_ACTORS and not a["invisible"]}
                         moves=route_steps.path(studio.current_map,here,goal,caps=OBSTACLE_CAPS,block=occupied|{tuple(t) for t in step.get("avoid",[])})
                         if moves is None and step.get("_clears",0)<6:
                             # A Cut tree, smashable rock or boulder in the way: clear the first one on
