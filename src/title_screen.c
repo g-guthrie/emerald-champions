@@ -33,13 +33,18 @@ enum {
     TAG_LOGO_SHINE,
 };
 
-#define VERSION_BANNER_MIDDLE_TILEOFFSET 128
-#define VERSION_BANNER_RIGHT_TILEOFFSET 256
-#define VERSION_BANNER_LEFT_X 56
-#define VERSION_BANNER_MIDDLE_X 120
-#define VERSION_BANNER_RIGHT_X 184
-#define VERSION_BANNER_Y 18
-#define VERSION_BANNER_Y_GOAL 82
+// The game logo (graphics/title_screen/inclement_emerald_2_logo.png, made by
+// tools/title_logo.py): 224x64 at one art pixel a screen pixel, as four 64x64
+// 8bpp sprites from x 8. The last is half transparent.
+#define VERSION_BANNER_PARTS 4
+#define VERSION_BANNER_PART_TILES 128
+#define VERSION_BANNER_LEFT_X (8 + 32)
+// It settles clear of the POKéMON logo above and PRESS START below.
+#define VERSION_BANNER_Y_GOAL 87
+#define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 64)
+#define START_BANNER_Y 126
+#define COPYRIGHT_BANNER_Y 148
+#define VERSION_BANNER_COLORS (9 * 16) // OBJ palettes 0-8, below PRESS START's
 #define START_BANNER_X 128
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
@@ -150,15 +155,21 @@ static const union AnimCmd sVersionBannerLeftAnimSequence[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sVersionBannerRightAnimSequence[] =
+static const union AnimCmd sVersionBannerPart1AnimSequence[] =
 {
-    ANIMCMD_FRAME(VERSION_BANNER_RIGHT_TILEOFFSET, 30),
+    ANIMCMD_FRAME(1 * VERSION_BANNER_PART_TILES, 30),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sVersionBannerMiddleAnimSequence[] =
+static const union AnimCmd sVersionBannerPart2AnimSequence[] =
 {
-    ANIMCMD_FRAME(VERSION_BANNER_MIDDLE_TILEOFFSET, 30),
+    ANIMCMD_FRAME(2 * VERSION_BANNER_PART_TILES, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sVersionBannerPart3AnimSequence[] =
+{
+    ANIMCMD_FRAME(3 * VERSION_BANNER_PART_TILES, 30),
     ANIMCMD_END,
 };
 
@@ -167,14 +178,12 @@ static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
     sVersionBannerLeftAnimSequence,
 };
 
+// The parts right of the first, in order.
 static const union AnimCmd *const sVersionBannerRightAnimTable[] =
 {
-    sVersionBannerRightAnimSequence,
-};
-
-static const union AnimCmd *const sVersionBannerMiddleAnimTable[] =
-{
-    sVersionBannerMiddleAnimSequence,
+    sVersionBannerPart1AnimSequence,
+    sVersionBannerPart2AnimSequence,
+    sVersionBannerPart3AnimSequence,
 };
 
 static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
@@ -195,20 +204,11 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .callback = SpriteCB_VersionBannerRight,
 };
 
-static const struct SpriteTemplate sVersionBannerMiddleSpriteTemplate =
-{
-    .tileTag = TAG_VERSION,
-    .paletteTag = TAG_VERSION,
-    .oam = &sVersionBannerRightOamData,
-    .anims = sVersionBannerMiddleAnimTable,
-    .callback = SpriteCB_VersionBannerRight,
-};
-
 static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 {
     {
         .data = gTitleScreenEmeraldVersionGfx,
-        .size = 0x3000,
+        .size = VERSION_BANNER_PARTS * VERSION_BANNER_PART_TILES * TILE_SIZE_4BPP,
         .tag = TAG_VERSION
     },
     {},
@@ -629,8 +629,7 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        // The modern rain-and-fog banner uses 50 colors including transparency.
-        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), 50 * sizeof(u16));
+        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), VERSION_BANNER_COLORS * sizeof(u16));
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -733,13 +732,13 @@ static void Task_TitleScreenPhase1(u8 taskId)
         gSprites[spriteId].sAlphaBlendIdx = ARRAY_COUNT(gTitleScreenAlphaBlend);
         gSprites[spriteId].sParentTaskId = taskId;
 
-        // Create middle of version banner
-        spriteId = CreateSprite(&sVersionBannerMiddleSpriteTemplate, VERSION_BANNER_MIDDLE_X, VERSION_BANNER_Y, 0);
-        gSprites[spriteId].sParentTaskId = taskId;
-
-        // Create right side of version banner
-        spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
-        gSprites[spriteId].sParentTaskId = taskId;
+        // Create the rest of version banner
+        for (u32 i = 1; i < VERSION_BANNER_PARTS; i++)
+        {
+            spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_LEFT_X + i * 64, VERSION_BANNER_Y, 0);
+            StartSpriteAnim(&gSprites[spriteId], i - 1);
+            gSprites[spriteId].sParentTaskId = taskId;
+        }
 
         gTasks[taskId].tCounter = 144;
         gTasks[taskId].func = Task_TitleScreenPhase2;
@@ -777,8 +776,8 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_BG1_ON
                                     | DISPCNT_BG2_ON
                                     | DISPCNT_OBJ_ON);
-        CreatePressStartBanner(START_BANNER_X, 108);
-        CreateCopyrightBanner(START_BANNER_X, 148);
+        CreatePressStartBanner(START_BANNER_X, START_BANNER_Y);
+        CreateCopyrightBanner(START_BANNER_X, COPYRIGHT_BANNER_Y);
         if (QUICKSTART && QUICKSTART_HUD
 #if EC_HEADLESS_FIXTURES
          && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_TITLE
