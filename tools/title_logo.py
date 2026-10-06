@@ -5,7 +5,9 @@
         graphics/title_screen/inclement_emerald_2_logo.png
 
 The master is the logo itself, 145x42, hand-finished: its INCLEMENT is
-redrawn in a bold 7-pixel face and its outlines cleaned. It is shown at that
+redrawn in a bold 7-pixel face set on the arch of its gold frame (each
+letter as high as the frame allows with a pixel of black around it), and its
+outlines cleaned. It is shown at that
 size, centred in a 192x64 8bpp sheet (three 64x64 sprites,
 src/title_screen.c), with at most PALETTE_COLORS colours after the
 transparent index 0.
