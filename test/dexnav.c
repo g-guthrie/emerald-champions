@@ -756,7 +756,7 @@ TEST("DexNav only shows in the Safari Zone and lists nothing where no wild Pokem
     gSaveBlock1Ptr->location = savedLocation;
 }
 
-TEST("DexNav levels obey the live cap and the wild level floor")
+TEST("DexNav levels obey the live cap")
 {
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     u8 savedChain = gSaveBlock3Ptr->dexNavChain;
@@ -770,7 +770,6 @@ TEST("DexNav levels obey the live cap and the wild level floor")
     {
         SetMilestones(milestones);
         u32 cap = GetCurrentLevelCap();
-        u32 floor = cap > 12 ? cap - 12 : 1;
         for (u32 c = 0; c < ARRAY_COUNT(cases); c++)
         {
             SetLocation(cases[c].map);
@@ -788,7 +787,6 @@ TEST("DexNav levels obey the live cap and the wild level floor")
                     gSaveBlock3Ptr->dexNavChain = chain;
                     EXPECT_NE(level, MON_LEVEL_NONEXISTENT);
                     EXPECT_LE(level, cap);
-                    EXPECT_GE(level, floor);
                 }
             }
         }

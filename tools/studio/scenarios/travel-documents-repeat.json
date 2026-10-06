@@ -81,14 +81,14 @@
     "ready": true,
     "queries": {
       "SS_TICKET": 1,
-      "EON_TICKET": 1,
-      "OLD_SEA_MAP": 1,
-      "AURORA_TICKET": 1,
+      "EON_TICKET": 0,
+      "OLD_SEA_MAP": 0,
+      "AURORA_TICKET": 0,
       "MYSTIC_TICKET": 1,
       "FLAG_RECEIVED_SS_TICKET": 1,
-      "FLAG_EC_RECEIVED_EON_TICKET": 1,
-      "FLAG_RECEIVED_OLD_SEA_MAP": 1,
-      "FLAG_RECEIVED_AURORA_TICKET": 1,
+      "FLAG_EC_RECEIVED_EON_TICKET": 0,
+      "FLAG_RECEIVED_OLD_SEA_MAP": 0,
+      "FLAG_RECEIVED_AURORA_TICKET": 0,
       "FLAG_RECEIVED_MYSTIC_TICKET": 1
     }
   },

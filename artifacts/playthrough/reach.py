@@ -124,8 +124,10 @@ def grid(mid):
     if mid not in GRIDS: GRIDS[mid] = Grid(MAPS[mid])
     return GRIDS[mid]
 
-def can_enter(g, a, n, d, caps):
-    """Return the tile actually reached when stepping from a in direction d onto n, or None."""
+def can_enter(g, a, n, d, caps, height=None):
+    """Return the tile actually reached when stepping from a in direction d onto n, or None.
+    height: the player's current height when a is a bridge crossing (elevation 15), which keeps
+    the height the player came in at; see step()."""
     x, y = n
     if not g.inb(x, y): return None
     o = g.obst.get(n)
@@ -143,7 +145,7 @@ def can_enter(g, a, n, d, caps):
         return n
     if bn in BIKE_TILES and 'bike' not in caps: return None
     if bn == WATERFALL and 'waterfall' not in caps: return None
-    ea, en = g.elev(*a), g.elev(x, y)
+    ea, en = (height if height is not None else g.elev(*a)), g.elev(x, y)
     wa, wn = g.beh(*a) in SURF, bn in SURF
     if wn and not wa:          # embark: needs Surf
         return n if 'surf' in caps else None
@@ -152,6 +154,21 @@ def can_enter(g, a, n, d, caps):
     if wa and wn: return n
     if ea == en or ea in (0, 15) or en in (0, 15): return n
     return None
+
+def step(g, s, d, caps):
+    """One move from search state s = (x, y, height) in direction d: the next state, or None.
+    Height is the tile's elevation, except on a bridge crossing (elevation 15), where the player
+    keeps the height they came in at: under Route 110's Cycling Road you can't climb onto it."""
+    x, y, h = s
+    r = can_enter(g, (x, y), (x + d[0], y + d[1]), d, caps, h)
+    if not r: return None
+    e = g.elev(*r)
+    return (r[0], r[1], h if e == 15 else e)
+
+
+def start_state(g, p):
+    return (p[0], p[1], g.elev(*p))
+
 
 # Scripted travel (boats, cable car, ferries, puzzle entrances): source map -> landing tile.
 EDGES = [

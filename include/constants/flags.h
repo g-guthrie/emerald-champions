@@ -1561,9 +1561,9 @@
 #define FLAG_EC_MEADOW_SONG_PERFORMED                    (SYSTEM_FLAGS + 0x92)
 #define FLAG_EC_RESOLVED_LANDORUS                        (SYSTEM_FLAGS + 0x93)
 #define FLAG_EC_EARNED_SS_TICKET                         (SYSTEM_FLAGS + 0x94)
-#define FLAG_EC_EARNED_EON_TICKET                        (SYSTEM_FLAGS + 0x95)
-#define FLAG_EC_EARNED_OLD_SEA_MAP                       (SYSTEM_FLAGS + 0x96)
-#define FLAG_EC_EARNED_AURORA_TICKET                     (SYSTEM_FLAGS + 0x97)
+#define FLAG_UNUSED_0x8F5                                (SYSTEM_FLAGS + 0x95) // Unused Flag; was FLAG_EC_EARNED_EON_TICKET, may be set in older saves
+#define FLAG_UNUSED_0x8F6                                (SYSTEM_FLAGS + 0x96) // Unused Flag; was FLAG_EC_EARNED_OLD_SEA_MAP, may be set in older saves
+#define FLAG_UNUSED_0x8F7                                (SYSTEM_FLAGS + 0x97) // Unused Flag; was FLAG_EC_EARNED_AURORA_TICKET, may be set in older saves
 #define FLAG_UNUSED_0x8F8                                (SYSTEM_FLAGS + 0x98) // Unused Flag; was FLAG_EC_CAUGHT_ROTOM, may be set in older saves
 #define FLAG_EC_REPORT_C42_COMPLETE                      (SYSTEM_FLAGS + 0x99)
 #define FLAG_UNUSED_0x8FA                                (SYSTEM_FLAGS + 0x9A) // Unused Flag; was FLAG_EC_SCANNER_REWARD_SELECTED, may be set in older saves
@@ -1943,7 +1943,7 @@
 #define FLAG_ITEM_ROUTE_124_EXCADRITE                           0x472
 #define FLAG_ITEM_ROUTE108_GOLURKITE                                 0x473 // shares 0x473 with FLAG_ITEM_ROUTE_108_DEEP_SEA_TOOTH (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_109_ZOOM_LENS                                  0x474 // shares 0x474 with FLAG_ITEM_ROUTE_109_POTION (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_110_ELIXIR                                     0x475 // shares 0x475 with FLAG_ITEM_ROUTE_110_FERALIGITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_110_SHARP_BEAK                                     0x475 // shares 0x475 with FLAG_ITEM_ROUTE_110_FERALIGITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_115_HERACRONITE                                0x478 // shares 0x478 with FLAG_ITEM_ROUTE_115_AUDINITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_BARBARACITE                     0x479
 #define FLAG_ITEM_ROUTE_116_BINDING_BAND                               0x47A // shares 0x47A with FLAG_ITEM_ROUTE_116_MEOWSTICITE (dead: its map.json was overwritten)

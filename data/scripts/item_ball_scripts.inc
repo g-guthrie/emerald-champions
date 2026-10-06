@@ -65,8 +65,8 @@ Route110_EventScript_ItemAssaultVest:: @ 8290D81
 	finditem ITEM_ASSAULT_VEST
 	end
 
-Route110_EventScript_ItemElixir:: @ 8290D8E
-	finditem ITEM_ELIXIR
+Route110_EventScript_ItemSharpBeak:: @ 8290D8E
+	finditem ITEM_SHARP_BEAK
 	end
 
 Route111_EventScript_ItemRoomService:: @ 8290D9B

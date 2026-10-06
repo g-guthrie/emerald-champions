@@ -1223,9 +1223,6 @@ EmeraldChampions_Text_GuardianAncient:
 EC_DeliverTravelDocuments::
 	setvar VAR_TRAVEL_DOCS_PENDING, FALSE
 	call_if_set FLAG_EC_EARNED_SS_TICKET, EC_Deliver_SS_TICKET
-	call_if_set FLAG_EC_EARNED_EON_TICKET, EC_Deliver_EON_TICKET
-	call_if_set FLAG_EC_EARNED_OLD_SEA_MAP, EC_Deliver_OLD_SEA_MAP
-	call_if_set FLAG_EC_EARNED_AURORA_TICKET, EC_Deliver_AURORA_TICKET
 	call_if_set FLAG_ENABLE_SHIP_NAVEL_ROCK, EC_Deliver_MYSTIC_TICKET
 	call_if_eq VAR_TRAVEL_DOCS_PENDING, TRUE, EC_TravelDocumentsPending
 	return
@@ -1241,45 +1238,6 @@ EC_Deliver_SS_TICKET::
 	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
 EC_Received_SS_TICKET::
 	setflag FLAG_RECEIVED_SS_TICKET
-	return
-
-EC_Deliver_EON_TICKET::
-	goto_if_set FLAG_EC_RECEIVED_EON_TICKET, Common_EventScript_NopReturn
-	setvar VAR_0x8004, ITEM_EON_TICKET
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EC_Received_EON_TICKET
-	checkitemspace ITEM_EON_TICKET, 1
-	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
-	giveitem ITEM_EON_TICKET
-	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
-EC_Received_EON_TICKET::
-	setflag FLAG_EC_RECEIVED_EON_TICKET
-	return
-
-EC_Deliver_OLD_SEA_MAP::
-	goto_if_set FLAG_RECEIVED_OLD_SEA_MAP, Common_EventScript_NopReturn
-	setvar VAR_0x8004, ITEM_OLD_SEA_MAP
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EC_Received_OLD_SEA_MAP
-	checkitemspace ITEM_OLD_SEA_MAP, 1
-	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
-	giveitem ITEM_OLD_SEA_MAP
-	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
-EC_Received_OLD_SEA_MAP::
-	setflag FLAG_RECEIVED_OLD_SEA_MAP
-	return
-
-EC_Deliver_AURORA_TICKET::
-	goto_if_set FLAG_RECEIVED_AURORA_TICKET, Common_EventScript_NopReturn
-	setvar VAR_0x8004, ITEM_AURORA_TICKET
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EC_Received_AURORA_TICKET
-	checkitemspace ITEM_AURORA_TICKET, 1
-	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
-	giveitem ITEM_AURORA_TICKET
-	goto_if_eq VAR_RESULT, FALSE, EC_TravelDocumentFull
-EC_Received_AURORA_TICKET::
-	setflag FLAG_RECEIVED_AURORA_TICKET
 	return
 
 EC_Deliver_MYSTIC_TICKET::
