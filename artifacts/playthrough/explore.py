@@ -195,20 +195,31 @@ def main():
     gates = story_gates(a.map, f.get('queries', {}))
     live = {x['local_id']: (x['x'], x['y']) for x in f.get('actors', []) if x['local_id'] != 255 and not x['invisible']}
     order, tiles, g, later = plan(a.map, start, caps, skip, gates, live)
-    chunks = [order[i:i + CHUNK] for i in range(0, len(order), CHUNK)]
-    save = a.save; results = []; dests = []
-    for n, chunk in enumerate(chunks):
+    pending = list(order); save = a.save; results = []; dests = []; n = 0
+    while pending:
+        chunk, pending = pending[:CHUNK], pending[CHUNK:]
         steps = ([{'bag': 'before'}] if n == 0 else []) + [dict(to_step(j), map=a.map, avoid=sorted(gates)) for j in chunk]
-        if n == len(chunks) - 1: steps.append({'bag': 'after'})
-        recipe = {'name': f'{a.name} {n + 1}/{len(chunks)}', 'start': {'save': save}, 'battle_resolution': 'fixture_win',
+        if not pending: steps.append({'bag': 'after'})
+        recipe = {'name': f'{a.name} {n + 1}', 'start': {'save': save}, 'battle_resolution': 'fixture_win',
                   'steps': steps, 'expect': {'ready': True}}
         dest, res = run_chunk(recipe, f'{a.name}-{n + 1:02d}')
+        n += 1
         dests.append(dest); results.append(res)
         fin = res['outcome']['final']
-        if not fin.get('end_save'): raise SystemExit(f'chunk {n + 1} did not end idle: {res["outcome"]["failures"]}')
+        if not fin.get('end_save'): raise SystemExit(f'chunk {n} did not end idle: {res["outcome"]["failures"]}')
         os.chmod(fin['end_save'], 0o444)
         save = fin['end_save']
-        if res['outcome']['failures']: break   # report what was done; the sweep stops on failures
+        fails = res['outcome']['failures']
+        if fails == ['frame budget']:
+            # the scene ran out of frames (battles, Cut trees): carry the unstarted jobs over
+            done = {i['label'] for i in fin.get('interactions', [])}
+            done |= {m['label'] for m in json.loads((dest / 'recording.json').read_text())['markers']}
+            left = [j for j in chunk if to_step(j)['label'] not in done]
+            if len(left) == len(chunk): raise SystemExit(f'chunk {n} made no progress within the frame budget')
+            pending = left + pending
+            res['outcome']['failures'] = []
+            continue
+        if fails: break   # report what was done; the sweep stops on failures
     # report
     report = dict(map=a.map, start=list(start), reachable_tiles=len(tiles), chunks=[str(d) for d in dests],
                   end_save=save, failures=[], interactions=[], photos=[], later=later)

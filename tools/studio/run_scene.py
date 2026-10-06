@@ -124,6 +124,10 @@ async def run(spec,out):
                 return self.items.pop(0)
         steps_iter=_Steps(steps)
         for step in steps_iter:
+            if walk_failure is None and total>15000 and "bag" not in step and "note" not in step:
+                # Soft budget: start nothing new near the 18,000-frame cap; the caller resumes
+                # the remaining steps from this scene's end save.
+                walk_failure="frame budget"
             if step.get("map") and walk_failure is None and studio.current_map!=step["map"]:
                 # A story scene may visit another map and come back (Wally's tutorial):
                 # play it through before judging where the player is.
