@@ -78,6 +78,15 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
 - Finding: Mom's Old Rod trigger needs VAR_LITTLEROOT_TOWN_STATE == 3 (set when Birch gives the
   Pokedex, ProfessorBirchsLab/scripts.inc:391). Confirm order in play.
 
+## Standing owner rules (sweep)
+- Fix every misnamed label/flag/text found, as found (scripts/item_source_names.py --check guards).
+- Renumber battles after each verified step: python3 scripts/renumber_battles.py --plan/--write
+  (manifest order is truth; tests/test_manifest_battle_order.py; Deferred: lines for late ones).
+- Wild held battle items on Pokemon met before the first Badge -> clerk floor 0 (family-wide);
+  berries, Honey, medicine, sell items, Everstone stay; scheduled items (Light Ball) just removed.
+- No friendship evolution before the Stone Badge (src/pokemon.c).
+- Report per step: Pokemon, items, evolutions, concerns; then write the manifest step.
+
 ## Harness fixes (sweep)
 - Planned paths never step on a warp tile unless it is the goal; explore reachability and the
   hidden-actor approach skip warps (Brendan 2F stairs sent the sweep to 1F).
