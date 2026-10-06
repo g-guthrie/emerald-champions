@@ -54,17 +54,17 @@ Route116_EventScript_BoyfriendGruntInTunnel:: @ 81F2C98
 Route116_EventScript_DevonEmployee:: @ 81F2CA2
 	lock
 	faceplayer
-	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_TryGiveAggroniteAgain
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_TryGiveEjectPackAgain
 	msgbox Route116_Text_ThankYouTokenOfAppreciation, MSGBOX_DEFAULT
-	goto Route116_EventScript_GiveAggronite
+	goto Route116_EventScript_GiveEjectPack
 	end
 
-Route116_EventScript_GiveAggronite:: @ 81F2CBB
+Route116_EventScript_GiveEjectPack:: @ 81F2CBB
 	setflag FLAG_MET_DEVON_EMPLOYEE
-	giveuniqueitem ITEM_AGGRONITE
+	giveitem ITEM_EJECT_PACK
 	compare VAR_RESULT, FALSE
-	goto_if_eq Route116_EventScript_NoRoomForAggronite
-	msgbox Route116_Text_AlsoNeedKeystone, MSGBOX_DEFAULT
+	goto_if_eq Route116_EventScript_NoRoomForEjectPack
+	msgbox Route116_Text_ExplainEjectPack, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq Route116_EventScript_DevonEmployeeExit
@@ -76,7 +76,7 @@ Route116_EventScript_GiveAggronite:: @ 81F2CBB
 	call_if_eq Route116_EventScript_DevonEmployeeExitEast
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
-	setflag FLAG_RECEIVED_AGGRONITE
+	setflag FLAG_RECEIVED_EJECT_PACK_ROUTE_116
 	release
 	end
 
@@ -90,12 +90,12 @@ Route116_EventScript_DevonEmployeeExitEast:: @ 81F2D20
 	waitmovement 0
 	return
 
-Route116_EventScript_TryGiveAggroniteAgain:: @ 81F2D2B
+Route116_EventScript_TryGiveEjectPackAgain:: @ 81F2D2B
 	msgbox Route116_Text_TokenOfAppreciation, MSGBOX_DEFAULT
-	goto Route116_EventScript_GiveAggronite
+	goto Route116_EventScript_GiveEjectPack
 	end
 
-Route116_EventScript_NoRoomForAggronite:: @ 81F2D39
+Route116_EventScript_NoRoomForEjectPack:: @ 81F2D39
 	msgbox Route116_Text_BagIsJamPacked, MSGBOX_DEFAULT
 	release
 	end
@@ -337,20 +337,20 @@ Route116_Text_ThankYouTokenOfAppreciation: @ 81F3317
 	.string "you as a hero!\p"
 	.string "For you, the most wonderful Trainer,\n"
 	.string "I bear a gift!\p"
-	.string "This stone will allow Aggron to\n"
-	.string "Mega Evolve in battle.\p"
+	.string "This is Devon's newest gear: an\n"
+	.string "Eject Pack.\p"
 	.string "As a token of our appreciation, this\n"
 	.string "is our gift to our wonderful Trainer!$"
 
-Route116_Text_AlsoNeedKeystone: @ 81F3521
-	.string "An Aggron holding it can Mega Evolve\n"
-	.string "once you have a Mega Ring.\p"
+Route116_Text_ExplainEjectPack: @ 81F3521
+	.string "If its holder's stats drop, the pack\n"
+	.string "whisks it back to switch out.\p"
 	.string "Please do try it out!\n"
 	.string "Thank you and bye-bye!$"
 
 Route116_Text_BagIsJamPacked: @ 81F3593
 	.string "Your Bag is jam-packed.\n"
-	.string "I can't give you this Aggronite.$"
+	.string "I can't give you this Eject Pack.$"
 
 Route116_Text_TokenOfAppreciation: @ 81F35CE
 	.string "As a token of our appreciation for\n"

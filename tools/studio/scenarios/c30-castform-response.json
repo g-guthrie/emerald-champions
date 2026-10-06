@@ -5,6 +5,10 @@
   },
   "steps": [
     {
+      "frames": 60,
+      "label": "Field settles"
+    },
+    {
       "press": "A",
       "frames": 120
     },
@@ -36,7 +40,9 @@
       "FLAG_BADGE02_GET": true,
       "FLAG_BADGE03_GET": true,
       "FLAG_BADGE04_GET": true,
-      "FLAG_EC_RESOLVED_LANDORUS": false
+      "FLAG_EC_RESOLVED_LANDORUS": false,
+      "FLAG_BADGE06_GET": true,
+      "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT": true
     },
     "vars": {}
   },

@@ -50,6 +50,10 @@
       "label": "Raikou"
     },
     {
+      "frames": 12,
+      "label": "Search timing (picks the tile north)"
+    },
+    {
       "press": "A",
       "frames": 90,
       "label": "A: search for Raikou"
@@ -59,14 +63,9 @@
       "label": "Searching"
     },
     {
-      "hold": "A+RIGHT",
-      "frames": 96,
-      "label": "Creep east to search tile"
-    },
-    {
       "hold": "A+UP",
-      "frames": 32,
-      "label": "Enter Raikou search tile"
+      "frames": 205,
+      "label": "Creep north onto Raikou search tile"
     },
     {
       "frames": 450,

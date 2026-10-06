@@ -145,7 +145,7 @@ DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
-	goto_if_unset FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM, DewfordTown_Gym_EventScript_GiveBulkUp2
+	goto_if_unset FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM, DewfordTown_Gym_EventScript_GivePunchingGloveAgain
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -165,8 +165,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	call_if_eq Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	@ Brawly's Machampite is not a starter stone, so every pair gets it.
-	call_if_unset FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM, DewfordTown_Gym_EventScript_GiveMachampite
+	call_if_unset FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM, DewfordTown_Gym_EventScript_GivePunchingGlove
 	closemessage
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
@@ -174,20 +173,20 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	release
 	end
 
-DewfordTown_Gym_EventScript_GiveMachampite:: @ 81FC855
-	giveuniqueitem ITEM_MACHAMPITE
+DewfordTown_Gym_EventScript_GivePunchingGlove:: @ 81FC855
+	giveitem ITEM_PUNCHING_GLOVE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM
+	msgbox DewfordTown_Gym_Text_ExplainPunchingGlove, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM
 	return
 
-DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
-	giveuniqueitem ITEM_MACHAMPITE
+DewfordTown_Gym_EventScript_GivePunchingGloveAgain: @ 81FC878
+	giveitem ITEM_PUNCHING_GLOVE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM
+	msgbox DewfordTown_Gym_Text_ExplainPunchingGlove, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM
 	release
 	end
 
@@ -441,10 +440,10 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "a partner that could learn Flash.\p"
 	.string "Take this Mega Stone as well.$"
 
-DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181
-	.string "This is Machampite. A Machamp\n"
-	.string "holding it can Mega Evolve once\l"
-	.string "you have a Mega Ring.$"
+DewfordTown_Gym_Text_ExplainPunchingGlove: @ 81FD181
+	.string "A Punching Glove! Punches hit\n"
+	.string "harder, and its holder never\l"
+	.string "touches the foe when it swings.$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle: @ 81FD20D
 	.string "I can see your talent becoming a giant\n"

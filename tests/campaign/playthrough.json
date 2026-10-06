@@ -11131,7 +11131,7 @@
         "flags": {
           "FLAG_BADGE01_GET": 1,
           "FLAG_DEFEATED_RUSTBORO_GYM": 1,
-          "FLAG_RECEIVED_GLIMMORANITE_RUSTBORO_CITY_GYM": 1
+          "FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM": 1
         },
         "vars": {
           "VAR_RUSTBORO_CITY_STATE": 2
@@ -19249,7 +19249,7 @@
         "flags": {
           "FLAG_BADGE02_GET": 1,
           "FLAG_DEFEATED_DEWFORD_GYM": 1,
-          "FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM": 1
+          "FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM": 1
         },
         "items": {
           "ITEM_EMBOARITE": 1
@@ -19291,7 +19291,7 @@
         "stable_overworld": true,
         "flags": {
           "FLAG_BADGE02_GET": 1,
-          "FLAG_RECEIVED_MACHAMPITE_DEWFORD_TOWN_GYM": 1
+          "FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM": 1
         },
         "items": {
           "ITEM_EMBOARITE": 1

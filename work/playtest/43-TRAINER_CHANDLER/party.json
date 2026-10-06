@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "C15 E0046 Chandler (Route 109 rain), cap 24",
+  "encounter": "C15 E0034 Chandler (Route 109 rain), cap 24",
   "availability_audit": "All six appear in work/reference-pools/pool-24.json with gate <= 24: TOGEKISS (Shiny Stone evo, gate 24), ENAMORUS (legendary_sign:VerdanturfMeadow, gate 14, reachable legend), HOOPA (gate 20), MAGEARNA (gate 20), ALAKAZAM (Linking Cord evo, gate 20), KARTANA (wild PetalburgWoods_3, gate 20). No Mega is used even though the Mega Ring is now available, because no legal stone in this window improves the party.",
   "plan": "Togekiss redirects, sets Tailwind and threatens Serene Grace flinches; Enamorus and Magearna are the Fairy nukes and carry Ground/Electric coverage; Hoopa is the Fighting/Normal-immune special attacker; Alakazam is the fast recoil-free Psychic; Kartana is the Grass/Steel physical answer to the Water teams on this route.",
   "party": [

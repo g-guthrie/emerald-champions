@@ -17,7 +17,7 @@
      "note": "The hardest fight in this block by a wide margin, and the only one where losing was a live possibility for several turns."}
   ],
   "strategy_checks": [
-    {"check": "Trick Room is up on turn 1 or 2", "result": "PASS - turn 1", "evidence": "Spritzee chose MOVE_TRICK_ROOM on turn 1 and the field state read STATUS_FIELD_TRICK_ROOM from that turn on. The contrast with Marlene (E0033), whose Spoink declined the same move, is stark: here the setter had a healthy board and took the -7 priority turn."},
+    {"check": "Trick Room is up on turn 1 or 2", "result": "PASS - turn 1", "evidence": "Spritzee chose MOVE_TRICK_ROOM on turn 1 and the field state read STATUS_FIELD_TRICK_ROOM from that turn on. The contrast with Marlene (E0048), whose Spoink declined the same move, is stark: here the setter had a healthy board and took the -7 priority turn."},
     {"check": "Trick Room is renewed when it expires", "result": "PASS - turn 6", "evidence": "The first room expired at the end of turn 5. On turn 6 Spritzee, at 12/66 HP, set Trick Room again rather than attack or guard. It then died on turn 7 having spent its last useful turn on the room. Baltoy, the authored reserve setter, was never needed for renewal."},
     {"check": "Gothita's Competitive punishes a stat drop", "result": "PASS - and it decided a kill", "evidence": "Turn 4: Snorlax's Crunch lowered Gothita's Defense, Competitive raised its Sp. Atk sharply, and the boosted Psychic on the same turn killed a full-HP 48/48 Lucario THROUGH a 0.5x Steel resistance. This is the single most impressive authored interaction I saw in the block."},
     {"check": "Gothita uses priority Helping Hand for a partner damage threshold", "result": "PASS", "evidence": "Turn 5: Gothita, at 7/55 and about to die, chose MOVE_HELPING_HAND on Spritzee instead of attacking. The boosted Moonblast took Ludicolo from 50 to 20. Correct triage on its last turn."},
@@ -37,7 +37,7 @@
   "ai_observations": [
     "This is the best AI performance in the block. The room went up on turn 1, was renewed the turn after it lapsed by a member at 12/66 HP, both Protects covered a set-up turn, Helping Hand was spent on the correct dying turn, and Earthquake was correctly priced as free next to a Levitate partner.",
     "Both times Trick Room was active the pair focus-fired one of my members down in a single turn (Weavile on turn 2, Whimsicott on turn 3) rather than splitting damage. That is the right use of a speed reversal and it is what actually beat me down to one member.",
-    "Directly comparable to E0033 Marlene, whose single Trick Room carrier declined the move on a board that wanted it. Same mechanic, opposite outcome, so the E0033 finding is about that specific decision rather than a broken Trick Room path."
+    "Directly comparable to E0048 Marlene, whose single Trick Room carrier declined the move on a board that wanted it. Same mechanic, opposite outcome, so the E0048 finding is about that specific decision rather than a broken Trick Room path."
   ],
   "level_changes": [],
   "level_verdict": "KEEP, emphatically. Brief rule 5: won after a real fight with 5 player faints - well past the AGENTS.md 'at least three faints against a well-prepared competitive party' bar. If anything this trainer sits at the top of the acceptable range for a cap-14 route battle; I would not add a level, and I would look here first if a later pass decides the early game is too punishing.",

@@ -11,8 +11,7 @@
   "setup": {
     "flags": {
       "FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL": false,
-      "FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL": false,
-      "FLAG_EC_REPORT_C26_COMPLETE": true
+      "FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL": false
     }
   },
   "steps": [
@@ -24,59 +23,24 @@
     {
       "press": "A",
       "frames": 150,
-      "label": "All ruins will seal"
+      "label": "Ground will crumble"
     },
     {
       "press": "A",
       "frames": 150,
-      "label": "No return"
+      "label": "Anything else up here is lost"
     },
     {
       "press": "A",
       "frames": 150,
-      "label": "Zygarde and Stakataka"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Only chance"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Other rare finds"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Chest Form Gimmighoul"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Trapinch and Honedge family"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Uncollected stones and fossils"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Explore before choosing"
-    },
-    {
-      "press": "A",
-      "frames": 150,
-      "label": "Permanent decision"
+      "label": "Take it anyway? Yes/No"
     },
     {
       "tap": "B",
       "every": 100,
       "frames": 1000,
       "until": "idle",
-      "label": "Decline keeps ruins open"
+      "label": "Decline keeps the tower standing"
     }
   ],
   "queries": {
@@ -95,7 +59,8 @@
     "queries": {
       "fossil": 0,
       "tower": 0
-    }
+    },
+    "contains_text": "left the Root Fossil alone"
   },
-  "name": "C26 named irreversible warning and deliberate decline"
+  "name": "C26 Mirage Tower fossil warning pages and deliberate decline"
 }

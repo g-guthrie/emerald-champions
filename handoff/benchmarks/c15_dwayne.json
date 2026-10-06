@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "C15 E0047-B01 Dwayne; original T043 team",
+  "encounter": "C15 E0037-B01 Dwayne; original T043 team",
   "availability_audit": "C01-C14 habitats and first-arrival Slateport evolution stock reviewed against active map scripts, wild tables, legendary_signs.h and native earned licenses. handoff/benchmarks/c15_available_pool.json records roots, methods and exclusions. No Surf, Rock Smash, later-route gifts or new legendary cap penalties. Explicit access checks are in the pool manifest. Only selected six are accepted for this benchmark; the broader candidate inventory is not a blanket grant authorization.",
   "plan": "Lead Mega Aerodactyl + Munkidori: Rock Slide threatens both opening Fire/Ice targets without Flame Body contact; faster Fake Out denies Smoochum and breaks Sash. Keep dual-hit Flying pressure for Monferno. Kartana covers Ice/Electric backline, Alakazam supplies recoil-free special pressure, AV Azumarill resists Fires and supplies priority, Togekiss supplies redirection. Avoid inflating faint counts with weak choices. Strong source-audited candidate, not proof of global optimality.",
   "party": [

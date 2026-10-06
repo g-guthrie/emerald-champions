@@ -1,5 +1,5 @@
 {
-  "play_order": 33, "e_group": "E0035", "trainer": "TRAINER_LAURA", "class": "gym",
+  "play_order": 33, "e_group": "E0039", "trainer": "TRAINER_LAURA", "class": "gym",
   "location": "DewfordTown_Gym", "cap": 20, "difficulty": "medium",
   "party_manifest": "work/playtest/33-TRAINER_LAURA/party.json",
   "opponent_levels_observed": {"MIENFOO": 24, "TIMBURR": 23, "CROAGUNK": 23, "MAKUHITA": 24, "MANKEY": 22, "TYROGUE": 25},
@@ -25,7 +25,7 @@
   "ai_observations": [
     "This was the best-played opposing side in my block. Three decisions stand out as correct and non-obvious: the turn-1 Fake Out that bought the Orb turn rather than chasing damage, the turn-6 Wide Guard timed off a revealed spread move, and Mankey choosing Night Slash over its STAB Close Combat against a Psychic/Grass target. No defect found."
   ],
-  "source_book_mismatch": "The authored plan text for E0035 states 'individual Medium levels 26/25/25/26/24/27 at cap20' and separately that 'Mienfoo alone rises to 26'. The actual resolved Medium levels in the ROM are 24/23/23/24/22/25 - exactly two lower across the board, because the offsets are 6/5/5/6/4/7 and Medium subtracts 2 from cap+offset. Either the plan prose was written against cap+offset without the Medium subtraction, or the offsets were never raised to match the stated seeds. This is a book-versus-source reconciliation item for the team owner and it materially understates the fight's intended difficulty. I did not resolve it myself: raising every member by 2 is a six-member change well beyond the calibration this pass authorises, and the brief restricts me to rule-driven level adjustments.",
+  "source_book_mismatch": "The authored plan text for E0039 states 'individual Medium levels 26/25/25/26/24/27 at cap20' and separately that 'Mienfoo alone rises to 26'. The actual resolved Medium levels in the ROM are 24/23/23/24/22/25 - exactly two lower across the board, because the offsets are 6/5/5/6/4/7 and Medium subtracts 2 from cap+offset. Either the plan prose was written against cap+offset without the Medium subtraction, or the offsets were never raised to match the stated seeds. This is a book-versus-source reconciliation item for the team owner and it materially understates the fight's intended difficulty. I did not resolve it myself: raising every member by 2 is a six-member change well beyond the calibration this pass authorises, and the brief restricts me to rule-driven level adjustments.",
   "level_changes": {
     "rule_applied": "Won on the first attempt with one player faint, which puts this in the brief's 0-1 faint band. It was however a genuine nine-turn grind with two flinches, two items knocked off and a blocked spread move, so I applied the minimum: +1 to the single weakest member rather than two.",
     "changes": [{"member": "MANKEY", "offset_before": 4, "offset_after": 5, "level_before": 22, "level_after": 23}],

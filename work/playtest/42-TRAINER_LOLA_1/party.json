@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "encounter": "C15 E0045 Lola (Route 109 sun garden), cap 24",
+ "encounter": "C15 E0035 Lola (Route 109 sun garden), cap 24",
  "availability_audit": "All six appear in work/reference-pools/pool-24.json with gate <= 24: TOGEKISS (Shiny Stone evo, gate 24), ENAMORUS (legendary_sign:VerdanturfMeadow, gate 14, reachable legend), HOOPA (gate 20), MAGEARNA (gate 20), ALAKAZAM (Linking Cord evo, gate 20), KARTANA (wild PetalburgWoods_3, gate 20). No Mega is used even though the Mega Ring is now available, because no legal stone in this window improves the party.",
  "plan": "Lola's sun doubles Leafeon's Speed and turns Weather Ball into a Fire attack, so Kartana (4x Fire) is swapped out for Gyarados: Intimidate blunts the sun-boosted physical core, Water/Flying resists Fire, and Ice Fang hits Leafeon and Cherrim for 2x. Togekiss and Enamorus supply Flying pressure into the two Grass-types; Hoopa, Alakazam and Magearna are the special core.",
  "party": [

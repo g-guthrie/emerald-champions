@@ -1,6 +1,6 @@
 {
   "play_order": 15,
-  "e_group": "E0033",
+  "e_group": "E0048",
   "trainer": "TRAINER_MARLENE",
   "class": "regular",
   "location": "Route115",
@@ -84,14 +84,14 @@
   "ai_defects": [],
   "ai_defects_resolved": [
     {
-      "id": "E0033-TRICKROOM-NOT-SET",
+      "id": "E0048-TRICKROOM-NOT-SET",
       "status": "RESOLVED",
       "evidence": "Pass 1: Spoink entered on a board where every opponent outsped its whole team and chose MOVE_PSYCHIC; Trick Room was never attempted. Pass 2 on the same trainer with the setup/support pricing change: Spoink chose MOVE_TRICK_ROOM on turn 3 and the room then bought its side two kills. The -7 priority is now being priced against what the following turns buy, which is the correct shape."
     }
   ],
   "ai_observations": [
     {
-      "id": "E0033-TURNONE-GUARD-STILL-EMPTY",
+      "id": "E0048-TURNONE-GUARD-STILL-EMPTY",
       "severity": "low",
       "turn": 1,
       "board": "Slowpoke 69/69, full HP, turn one, partner Gothita 52/52 with a Focus Sash, nothing on my side revealed.",
@@ -100,7 +100,7 @@
       "assessment": "Recorded as an observation rather than a defect because a turn-one guard from full HP behind a Focus Sash partner is a defensible read. But it denied zero damage, and the new rule that a guard denying less than its user could have healed banks nothing should be catching this case too. Slowpoke never got another safe turn."
     },
     {
-      "id": "E0033-TRICKROOM-ORDER-ANOMALY",
+      "id": "E0048-TRICKROOM-ORDER-ANOMALY",
       "severity": "low (engine, not AI scoring; unverified)",
       "turn": 5,
       "board": "Trick Room active. Tangrowth (base 50 Speed, Relaxed, 0 Speed EVs, L14) and Shiftry (base 80, L14, 252 Speed EVs) against Baltoy (base 55, Quiet, 0 Speed EVs, L16).",
@@ -108,7 +108,7 @@
       "assessment": "Reported honestly as unverified. The driver does not expose raw Speed stats, so I could not confirm Tangrowth's actual Speed and cannot rule out my own arithmetic. Not an AI choice defect either way. Worth one check on the engine side if anyone is already in Trick Room turn-order code."
     },
     {
-      "id": "E0033-SHADOWTAG-MAYSWITCH-ASYMMETRY",
+      "id": "E0048-SHADOWTAG-MAYSWITCH-ASYMMETRY",
       "severity": "withdrawn",
       "turn": 0,
       "observed": "With Gothita (Shadow Tag) on the field, pending_decision reported may_switch=false / switch_slots=[] for player battler 2 but may_switch=true / switch_slots=[2,3,4,5] for player battler 0.",

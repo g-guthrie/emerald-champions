@@ -1,6 +1,6 @@
 {
   "play_order": 39,
-  "e_group": "E0036",
+  "e_group": "E0046",
   "trainer": "TRAINER_BRAWLY_1",
   "class": "leader",
   "location": "DewfordTown_Gym",
@@ -8,7 +8,7 @@
   "difficulty": "medium",
   "resolved_opponent_levels": {"PACHIRISU": 21, "HERACROSS": 20, "CONKELDURR": 20, "HARIYAMA": 21, "HAWLUCHA": 20, "COBALION": 19},
   "party_manifest": "work/playtest/39-TRAINER_BRAWLY_1/party.json",
-  "party_pool_audit": "Same six as E0040, all in work/reference-pools/pool-20.json with gate <= 20. No player Mega: the Mega Ring is granted by Steven only after this battle.",
+  "party_pool_audit": "Same six as E0045, all in work/reference-pools/pool-20.json with gate <= 20. No player Mega: the Mega Ring is granted by Steven only after this battle.",
   "attempts": [
     {"attempt": 1, "run_dir": "work/playtest/39-TRAINER_BRAWLY_1/a1", "seed": 44, "outcome": "won", "turns": 7, "player_faints": 2, "opponent_faints": 6,
      "narrative": "T1 both sides used Follow Me; my Moonblast was redirected into Pachirisu, Heracross' pre-Mega Rock Blast hit Togetic 3 times. T2 Heracross Mega Evolved into Mega Heracross (Skill Link), Moonblast KO'd Pachirisu through its Sitrus, Rock Blast KO'd Togetic. T3 Arcanine came in with Intimidate, Hariyama Fake Out flinched it, Moonblast KO'd the full-health Mega Heracross outright. T4 Hawlucha Close Combat triggered White Herb (Unburden condition met) and nearly removed Arcanine; Moonblast KO'd Hawlucha; Hariyama Knock Off removed Enamorus' Life Orb. T5 Hoopa switched in immune to Aura Sphere but was one-shot by Hariyama's Knock Off (4x on Psychic/Ghost). T6 Brawly withdrew a healthy Hariyama for Conkeldurr, which was KO'd at full HP by a +1 Fleur Cannon while Earth Power finished Cobalion. T7 Fake Out flinched Enamorus and Fleur Cannon KO'd Hariyama."},

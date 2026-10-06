@@ -16,7 +16,7 @@ sys.path.insert(0, str(HERE))
 import reach as R
 import route_steps as RS
 
-SHOP_LIKE = re.compile(r'pokemart|General_Mart_Script|BattleVendor|ChoosePartyMon|ShowScrollableMultichoice|'
+SHOP_LIKE = re.compile(r'pokemart|InterviewBefore|EasyChat|General_Mart_Script|BattleVendor|ChoosePartyMon|ShowScrollableMultichoice|'
                        r'multichoice|MoveTutor|Tutor|DoInGameTrade|CreateInGameTradePokemon|Lottery|NameRater|'
                        r'BufferEmeraldChampionsBattleItemStock|special ChooseMonForMoveRelearner|'
                        r'PlayerPC|BedroomPC|AccessPC|EventScript_PC\b|_PC::|WallClock|StartWallClock|'

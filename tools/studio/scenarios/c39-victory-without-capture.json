@@ -4,7 +4,13 @@
   },
   "setup": {
     "flags": {
-      "FLAG_DEFEATED_HEATRAN": false
+      "FLAG_DEFEATED_HEATRAN": false,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": true,
+      "FLAG_BADGE05_GET": true,
+      "FLAG_BADGE06_GET": true
     }
   },
   "warp": {

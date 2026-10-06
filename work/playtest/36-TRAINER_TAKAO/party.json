@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0038 TRAINER_TAKAO (Dewford Gym, island grappler/counterpunch room); play_order 36, cap 20, Medium",
+  "encounter": "E0040 TRAINER_TAKAO (Dewford Gym, island grappler/counterpunch room); play_order 36, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Spiritomb, Whimsicott (Cottonee + Sun Stone) and Magearna are gate-14 entries; Alakazam comes from Kadabra with a Linking Cord, Nidoking from Nidorino with a Moon Stone, and Celebi is a reachable legendary sign at PetalburgWoods_3. Ordinary items only. Assisted acquisition, not native capture acceptance. Tsareena evolves from Steenee by known move (pool-20 gate 20).",
   "plan": "Queenly Majesty on the lead blanks four of this room's moves at once - Grapploct's Sucker Punch, Hitmonlee's Fake Out, Poliwrath's Vacuum Wave and Pawmo's Mach Punch - which is the 'punish wasted reactive moves' half of the crack. Spiritomb is the authored Ghost escape route against Wobbuffet's Shadow Tag. Fairy and Psychic damage is 2x into five of the six. Against Wobbuffet specifically the plan is to leave it alone rather than feed Mirror Coat, and to remove its partners first.",
   "party": [

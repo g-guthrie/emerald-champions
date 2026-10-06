@@ -1,5 +1,5 @@
 {
-  "name": "Underpass connection 3",
+  "name": "Underpass connection 3 (after collapse the ruins stay open)",
   "start": {
     "chapter": 3
   },
@@ -26,6 +26,6 @@
   ],
   "expect": {
     "ready": true,
-    "map": "DesertUnderpass"
+    "map": "SandstrewnRuins"
   }
 }

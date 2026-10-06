@@ -12,11 +12,12 @@
       "FLAG_BADGE03_GET": true,
       "FLAG_BADGE04_GET": true,
       "FLAG_BADGE05_GET": true,
-      "FLAG_BADGE06_GET": false,
+      "FLAG_BADGE06_GET": true,
       "FLAG_BADGE07_GET": false,
       "FLAG_BADGE08_GET": false,
       "FLAG_VISITED_FORTREE_CITY": true,
-      "FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE": false
+      "FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE": false,
+      "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT": true
     },
     "vars": {
       "VAR_WEATHER_ANOMALY_STATE_0": 961,

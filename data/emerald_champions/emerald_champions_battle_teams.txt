@@ -186,7 +186,7 @@ MINUN @SITRUS_BERRY MINUS TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, HELPING_HAND, E
 VOLBEAT @LUM_BERRY PRANKSTER MODEST 252/0/4/252/0/0 4 | TAIL_GLOW, ROOST, BUG_BUZZ, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ILLUMISE @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 4 | DAZZLING_GLEAM, AIR_SLASH, ENCORE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0032 TRAINER_CYNDY_1 class=regular
+## E0047 TRAINER_CYNDY_1 class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Riolu and Meditite keep Cyndy’s support opening: Prankster Screech or Quick Guard opens a physical hit, while Fake Out buys a turn and Pure Power strengthens Drain Punch. Crabominable supplies Iron Fist Ice Hammer for Flying targets, Drain Punch recovery and Thunder Punch coverage. Tinkaton switches into the Fairy, Flying, Psychic, Dark and Bug attacks that threaten its partners, then uses Gigaton Hammer, Mold Breaker Play Rough or Knock Off. It cannot use Gigaton Hammer on consecutive turns.
@@ -196,7 +196,7 @@ MEDITITE @SITRUS_BERRY PURE_POWER JOLLY 4/252/0/0/0/252 9 | FAKE_OUT, DRAIN_PUNC
 CRABOMINABLE @SITRUS_BERRY IRON_FIST ADAMANT 252/252/0/0/4/0 9 | ICE_HAMMER, DRAIN_PUNCH, THUNDER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TINKATON @LEFTOVERS MOLD_BREAKER ADAMANT 252/252/0/0/4/0 11 | GIGATON_HAMMER, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0033 TRAINER_MARLENE class=regular
+## E0048 TRAINER_MARLENE class=regular
 strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Marlene's young psychics now travel with a big sister who handles their counters. First two useful turns: Gothita and Hatterene lead. Hatterene sets Trick Room from 29 base Speed, and Magic Bounce reflects the Taunt, Encore or Will-O-Wisp that normally stops a room; Fake Out still interrupts it, so Gothita Protects or uses Fake Tears on the foe Hatterene will hit next. Shadow Tag keeps non-Ghost foes from switching out of the room, but pivot moves such as U-turn and Parting Shot still leave. Under the room, Hatterene's Dazzling Gleam hits both foes and punishes Dark and Fighting leads, Mystical Fire answers Bug and Steel while lowering Special Attack, and Psychic handles Poison. Alternate deployment: Spoink is the backup room with Thick Fat and Power Gem into Bug, Fire and Flying targets. Reserves & disruption: Inkay replaces Slowpoke and Baltoy's Knock Off weakness with a Dark/Psychic body that resists Dark and Ghost and is immune to Psychic; Contrary turns Superpower into +1 Attack and Defense, Superpower hits Dark and Steel foes for super-effective damage, Knock Off hits Ghost foes, Psycho Cut hits Fighting and Poison, and Protect covers the turn a room ends. Gothita's Focus Sash and Inkay's Eviolite can still be knocked away.
@@ -425,7 +425,7 @@ WATTREL @LIFE_ORB WIND_POWER MODEST 4/0/0/252/0/252 5 | THUNDERBOLT, AIR_SLASH, 
 MANTYKE @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 5 | SURF, AIR_SLASH, WIDE_GUARD, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
 ARROKUDA @MYSTIC_WATER PROPELLER_TAIL ADAMANT 4/252/0/0/0/252 4 | LIQUIDATION, CLOSE_COMBAT, CRUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0034 TRAINER_ELLIOT_1 class=regular
+## E0049 TRAINER_ELLIOT_1 class=regular
 strategy: SETUP
 mega_slots: NONE
 ai: Conservative
@@ -436,7 +436,7 @@ FRILLISH @EVIOLITE CURSED_BODY BOLD 252/0/252/0/4/0 5 | HEX, ICY_WIND, WILL_O_WI
 SHELLDER @FOCUS_SASH SKILL_LINK JOLLY 4/252/0/0/0/252 5 | SHELL_SMASH, ICICLE_SPEAR, ROCK_BLAST, RAZOR_SHELL | ivs=31/31/31/31/31/31 | friendship=255
 CORPHISH @CHOICE_BAND ADAPTABILITY ADAMANT 4/252/0/0/0/252 4 | CRABHAMMER, KNOCK_OFF, AQUA_JET, X_SCISSOR | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0035 TRAINER_LAURA class=gym
+## E0039 TRAINER_LAURA class=gym
 strategy: SETUP
 mega_slots: NONE
 plan: Laura is the six-member entry-pressure lesson: Mienfoo uses Fake Out or Regenerator/U-turn positioning to create a useful Timburr turn; Flame Orb must actually activate before Guts is credited. Croagunk is now the special Nasty Plot/Sludge Bomb/Vacuum Wave lane, breaking the all-physical pattern and reducing duplicate Fake Out slots. Makuhita's Wide Guard and Tyrogue's Feint/Helping Hand/Counter make different commitments; Counter needs the right incoming hit, not just an enemy physical moveset. Scarf Defiant Mankey punishes eligible stat drops and must respect its lock. Avoid repeated Fake Out/pivot/Protect turns with no payoff. The youngsters remain deliberately unevolved, with individual Medium levels26/25/25/26/24/27 at cap20. Their shared dojo identity earns retention; physical walls, special pressure, priority denial and removing the active support remain real counterplay. The current-source cap20 double-Cloak benchmark cleared the earlier24/25/25/26/24/27 seeds with zero faints. Mienfoo alone rises to26 to reach a relevant Psychic survival threshold; keep all other species, moves, roles and levels. Retest this adjustment before final difficulty acceptance.
@@ -448,7 +448,7 @@ MAKUHITA @SITRUS_BERRY THICK_FAT ADAMANT 252/252/4/0/0/0 10 | FAKE_OUT, WIDE_GUA
 MANKEY @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 9 | CLOSE_COMBAT, U_TURN, ROCK_SLIDE, NIGHT_SLASH | ivs=31/31/31/31/31/31 | friendship=255
 TYROGUE @FOCUS_SASH VITAL_SPIRIT JOLLY 252/0/4/0/0/252 11 | FAKE_OUT, FEINT, HELPING_HAND, COUNTER | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0037 TRAINER_BRENDEN class=gym
+## E0043 TRAINER_BRENDEN class=gym
 strategy: SETUP
 mega_slots: NONE
 plan: Brenden's sailor-coach team converts Prankster Riolu Coaching into an actual later physical attack, especially Scarf Mold Breaker Sawk. Native order, the Choice lock and survival determine the payoff; do not repeatedly coach an unavailable or protected attack. No Guard Machop and Inner Focus Throh supply separate anti-evasion, anti-flinch/Intimidate and critical-hit lines. Stufful's unsupported Drain Punch becomes Brick Break, adding screen removal to the Fluffy/Bulk Up reserve. Monferno uses Iron Fist Fire Punch/Mach Punch, Close Combat and U-turn rather than duplicating Brick Break. This remains a purposeful physical school, with special offense provided by other Gym rooms. Medium levels22/25/23/25/25/24 at cap20 are initial seeds. Keep this six-member battle independent of neighboring Lilith; an overlap is not a twelve-member merged party.
@@ -460,7 +460,7 @@ MACHOP @EVIOLITE NO_GUARD ADAMANT 252/252/4/0/0/0 9 | DYNAMIC_PUNCH, KNOCK_OFF, 
 STUFFUL @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 9 | BRICK_BREAK, PAYBACK, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MONFERNO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 8 | FIRE_PUNCH, MACH_PUNCH, CLOSE_COMBAT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0037 TRAINER_LILITH class=gym
+## E0043 TRAINER_LILITH class=gym
 strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
 plan: Lilith's footwork is a relay, and it now carries answers to the Flying and Fairy types it used to have none for. First two useful turns: Hitmontop's Intimidate and Fake Out or Feint opens a useful Scraggy Dragon Dance or attack; Moxie requires a real knockout. Hitmontop's Rock Slide replaces Helping Hand: after the Fake Out turn it hits both foes, hits Flying types for super-effective damage and can flinch slower targets. Alternate deployment: Pancham's Parting Shot can bring in Costar Flamigo beside the boosted partner. Costar copies the active ally's current stat stages on entry, including harmful drops; it is not Dancer and does not copy a later dance. Pancham's Gunk Shot replaces Crunch, whose Ghost coverage Scrappy already provides, so the relay now hits Fairy types for super-effective damage. Reserves & disruption: Meditite remains the Pure Power breaker, with Zen Headbutt for Poison and Fighting foes; Technician Clobbopus uses Feint or Circle Throw only when it changes the actual board. Never force a switch just to show off Costar, or spend a good turn copying neutral stages.
@@ -472,7 +472,7 @@ FLAMIGO @SITRUS_BERRY COSTAR JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, CLOSE_COMBAT,
 MEDITITE @EVIOLITE PURE_POWER ADAMANT 4/252/0/0/0/252 4 | ZEN_HEADBUTT, DRAIN_PUNCH, FAKE_OUT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CLOBBOPUS @EVIOLITE TECHNICIAN ADAMANT 252/252/4/0/0/0 5 | CIRCLE_THROW, FEINT, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0038 TRAINER_TAKAO class=gym
+## E0040 TRAINER_TAKAO class=gym
 strategy: NONE
 mega_slots: NONE
 plan: Takao keeps the island grappler/counterpunch identity. Grapploct Octolock and Wobbuffet Shadow Tag restrict eligible exits, while the end-turn Defense/Special Defense drops must lead to useful damage rather than two passive slots. Wobbuffet's unsupported Helping Hand becomes Safeguard; Counter/Mirror Coat must match actual incoming hits, and Encore must have a useful target. Special Life Orb Poliwrath now exploits Octolock's Special Defense side and gives the room an answer to physical walls. Hitmonlee's White Herb/Close Combat activates Unburden through a real drop; Passimian supplies Scarf Defiant pressure, and Pawmo contributes priority/electric control. The copied or suppressed ability, Ghost escape rules, turn order and guard decisions remain native. There is no invented Perish Song. Medium levels22/22/22/22/22/25 are initial seeds.
@@ -484,7 +484,7 @@ POLIWRATH @LIFE_ORB WATER_ABSORB MODEST 252/0/4/252/0/0 4 | HYDRO_PUMP, VACUUM_W
 PASSIMIAN @CHOICE_SCARF DEFIANT JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, KNOCK_OFF, U_TURN, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 PAWMO @EVIOLITE IRON_FIST JOLLY 4/252/0/0/0/252 5 | MACH_PUNCH, THUNDER_PUNCH, NUZZLE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0039 TRAINER_CRISTIAN class=gym
+## E0042 TRAINER_CRISTIAN class=gym
 strategy: SETUP,ALLY_COMBO
 mega_slots: NONE
 ai: Double Ace Pokemon
@@ -500,7 +500,7 @@ LUCARIO @EXPERT_BELT JUSTIFIED BRAVE 112/252/0/0/0/144 4 | CLOSE_COMBAT, BULLET_
 HITMONCHAN @ASSAULT_VEST BLITZ_BOXER ADAMANT 252/252/4/0/0/0 4 | DRAIN_PUNCH, MACH_PUNCH, ICE_PUNCH, THUNDER_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 MACHAMP @CHOICE_BAND NO_GUARD ADAMANT 252/252/4/0/0/0 4 | DYNAMIC_PUNCH, KNOCK_OFF, HIGH_HORSEPOWER, STONE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0040 TRAINER_JOCELYN class=gym
+## E0045 TRAINER_JOCELYN class=gym
 strategy: SETUP,TAILWIND,ALLY_COMBO
 mega_slots: NONE
 ai: Ace Pokemon
@@ -513,7 +513,7 @@ CRABOMINABLE @CHOICE_BAND IRON_FIST ADAMANT 232/252/4/0/0/20 4 | CLOSE_COMBAT, I
 BRELOOM @TOXIC_ORB POISON_HEAL JOLLY 4/252/0/0/0/252 4 | BULLET_SEED, DRAIN_PUNCH, SPORE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SIRFETCHD @LEEK SCRAPPY ADAMANT 4/252/0/0/0/252 5 | LEAF_BLADE, CLOSE_COMBAT, KNOCK_OFF, FIRST_IMPRESSION | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0036 TRAINER_BRAWLY_1 class=leader
+## E0046 TRAINER_BRAWLY_1 class=leader
 strategy: REDIRECTION,SETUP
 mega_slots: 2
 ai: Ace Pokemon
@@ -526,7 +526,7 @@ HARIYAMA @SITRUS_BERRY THICK_FAT CAREFUL 252/4/0/0/252/0 3 | CLOSE_COMBAT, FAKE_
 HAWLUCHA @WHITE_HERB UNBURDEN JOLLY 4/252/0/0/0/252 2 | CLOSE_COMBAT, ACROBATICS, SWORDS_DANCE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 COBALION @LEFTOVERS JUSTIFIED TIMID 4/0/0/252/0/252 1 | AURA_SPHERE, FLASH_CANNON, QUICK_GUARD, COACHING | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0042 TRAINER_HAILEY class=regular
+## E0032 TRAINER_HAILEY class=regular
 strategy: SETUP
 mega_slots: NONE
 plan: Hailey's beach play pairs Flaaffy's screens and Electroweb with White Herb Wartortle's Shell Smash. Choose the relevant protection or immediate damage, then exploit the opening rather than automatically spending two turns on screens. Huge Power Marill is the physical priority alternative; Water Absorb Palpitoad supplies Ground coverage and an Electric immunity. Keep all four species and the actual loadouts. Stats: role-aligned. Flaaffy has mixed bulk for screens; Wartortle has fast special offense for Smash; Marill has bulky physical investment and Aqua Jet; Palpitoad has bulky special offense. No Trick Room is assumed. Could it be cooler? Retain the sheltered shell-breaker: it distinguishes this tuber from the next sailor's immediate offense without another weather setter. Medium arrival seeds26/25/29/26 give the small supporters and Marill individual compensation against the cap24 player pool, including Mega Aerodactyl and reachable legends. Taunt, screen removal, Grass pressure and priority after setup remain weaknesses; these are design seeds, not new battle calibration. Overrepresented? Wartortle, Flaaffy and Palpitoad each occur in one authored E group; Marill in two, including nearby Janice. Shell Smash also appears earlier on Darian's Clamperl, Josh's Dwebble and Elliot's Shellder, so no extra Smash recipient is added: Flaaffy screens/White Herb is this team's distinction. Retain, with setup pacing to revisit in the campaign pass. Historical pre-revision evidence only: Earned audit (2026-09-13): Hailey defeated first attempt in9 turns at cap24, with two player faints. Source/team/intent review covered screens, White Herb, Water Absorb and shared pair selection. Wartortle's opening Protect bought Thunderbolt damage; Flaaffy supported Wartortle's Ice Beam with Electroweb rather than screens into Taunt. Marill's Protect bought a Hydro Pump into redirected Pachirisu; Palpitoad's first Protect bought Aerodactyl's knockout. Its consecutive attempt failed; Sableye entry plus Giga Drain closed the fight. Wartortle's terminal Shell Smash selection never executed before its knockout and is not evidence of successful setup. No level/party change warranted. Six sampled complete decisions max43 native frames (~0.72s), including setup; this is sampled timing, not a universal maximum. Native settlement restored Pachirisu's consumed Sitrus. Evidence: work/v4-c14-common-singers-play steps039–064, work/hailey-decision-timing.json, work/contact-sheets/hailey-earned.png.
@@ -538,7 +538,7 @@ PALPITOAD @EVIOLITE WATER_ABSORB MODEST 252/0/4/252/0/0 3 | MUDDY_WATER, EARTH_P
 
 
 
-## E0043 TRAINER_EDMOND class=regular
+## E0033 TRAINER_EDMOND class=regular
 strategy: TAILWIND
 mega_slots: NONE
 plan: Edmond's sailor team pairs a protective manta with a hard-hitting crab. Mantyke keeps Tailwind and Helping Hand but replaces personal Protect with Wide Guard against Rock Slide and other spread pressure; Krabby trades Eviolite for Life Orb, combining Sheer Force Liquidation/Rock Slide with direct damage instead of another shell setup. Only moves with eligible secondary effects receive Sheer Force and its Life Orb recoil interaction; X-Scissor does not. Levitate Koffing supplies burns, Clear Smog and a Grass-resistant switch; Reckless Staravia supplies fast physical pressure under Tailwind and a pivot. Stats: role-aligned. Mantyke invests in special bulk and protects against physical spread moves; Krabby and Staravia invest in Attack/Speed to exploit Tailwind; Koffing invests in physical bulk. Krabby trades bulk for Sheer Force/Life Orb pressure. Could it be cooler? Yes: spread protection plus the offensive crab makes the manta partnership distinct from Ned's Soak/Wind Power shoreline team, despite reusing Mantyke. Medium seeds26/25/26/26; Krabby's offensive item earns a lower level than its bulky alternative. Electric attacks, Taunt, priority and special pressure remain cracks; Wide Guard does not stop single-target Electric attacks. Overrepresented? Mantyke appears in two E groups, Ned and Edmond, close enough to require different jobs: Soak/Wind Power/Surf at Ned versus Wide Guard/Helping Hand for Sheer Force Krabby here. Koffing repeats Jerry's defensive species but not his Acid Spray chemistry opening. Tailwind is common campaign-wide; keep it as support, not the whole identity. Historical pre-revision evidence only: Earned pre-fix audit (2026-09-13): Edmond defeated first attempt in12 turns at cap24; five player faints, Azumarill20/104 sole survivor. Native steps079–106 in work/v4-c14-common-singers-play and work/contact-sheets/edmond-earned.png. Mantyke attempted Tailwind into faster Taunt on turn1, leading to the shared repair and retrospective/forward index above. Elsewhere Krabby switched to Grass-resistant Staravia, Mantyke's Helping Hand enabled Staravia's full-health Sableye knockout, and Koffing's Protect bought partner damage and a knockout. Jigglypuff's Fake Out enabled Liquidation pressure; Azumarill finished with Play Rough. Six sampled pre-fix decisions max44frames (~0.74s), including setup, in work/edmond-decision-timing.json. This was a close win, so no level increase or roster change is proposed. Apply the shared bug repair going forward; no compulsory replay of this earned clear.
@@ -550,7 +550,7 @@ STARAVIA @EVIOLITE RECKLESS ADAMANT 4/252/0/0/0/252 2 | BRAVE_BIRD, DOUBLE_EDGE,
 
 
 
-## E0045 TRAINER_LOLA_1 class=regular
+## E0035 TRAINER_LOLA_1 class=regular
 strategy: TAILWIND
 mega_slots: NONE
 plan: A tuber's pool party on the Route 109 beach: four little Water Pokemon, one speed engine, and a Soul-Heart cleaner. First two useful turns: Focus Sash Ducklett is guaranteed to get Tailwind up, then uses Helping Hand on the partner's knockout hit or Scald for chip; it must not reset Tailwind while the first one is still running. Goldeen attacks beside it: Megahorn hits the Grass types that beat a Water team, Knock Off strips an item, and Lightning Rod pulls single-target Electric attacks away from its partners and absorbs them. Alternate deployment: Eviolite Seel is the physical reserve - Fake Out buys a turn for Tailwind or Luvdisc, Drill Run answers the Electric types, and Aqua Jet picks off a weakened target. Reserves & disruption: Luvdisc keeps the Soul-Heart cleanup mode - every knockout on either side raises its Special Attack - with Icy Wind speed control, Draining Kiss sustain and Charm against physical attackers. Stats: Timid HP/Speed Ducklett is a support setter, not an attacker; Goldeen and Seel are Eviolite physical attackers. Could it be cooler? Lola used to be a sun garden - Cherrim, Leafeon and Ponyta - with Luvdisc the only Water type on a Tuber. Each slot keeps its job in the water: Ducklett takes Cherrim's support-setter role with Tailwind in place of Sunny Day, Goldeen takes Leafeon's physical attacker slot, and Seel takes Ponyta's Eviolite reserve. Tailwind rather than rain keeps her a separate fight from Chandler's rain team next door. Level offsets carried by role: Ducklett takes Cherrim's +1 on the same Focus Sash, Goldeen +2 as an Eviolite pre-evolution in Leafeon's slot, Luvdisc +4 and Seel +3 unchanged.
@@ -562,7 +562,7 @@ SEEL @EVIOLITE THICK_FAT JOLLY 68/188/0/0/0/252 4 | FAKE_OUT, AQUA_JET, DRILL_RU
 
 
 
-## E0046 TRAINER_CHANDLER class=regular
+## E0034 TRAINER_CHANDLER class=regular
 strategy: RAIN
 mega_slots: NONE
 plan: Chandler answers Lola's sun with manual rain from a Tuber's seal. First two useful turns: Dewgong sets Rain Dance when the lead pair can afford the turn, or attacks at once with Hydro Pump or Ice Beam when setup is unsafe; Joltik's Compound Eyes Thunder reaches full accuracy only in that rain, and Swift Swim Buizel doubles its Speed there for Liquidation and Aqua Jet. Turn two spends the rain on damage rather than resetting it. Roles: Dewgong is the weather setter and bulky special Water/Ice attacker, its Speed EVs moved into HP; under rain Hydration clears status at the end of each turn, so Rest becomes a one-turn full heal. Joltik is fast special Electric/Bug, Buizel fast physical Water with priority, and Unaware Quagsire the bulky answer to boosted or Mega attackers, ignoring their stat changes while it trades Liquidation and High Horsepower and Recovers. Ice Beam from Dewgong and Ice Punch from Buizel are the team's answer to the Grass attacker that would otherwise walk through three Water bodies, and rain halves the Fire damage aimed at Joltik. Route 109 adjacency: Lola and Chandler share a lane and are earned back to back; losing this fight must not erase Lola.
@@ -574,7 +574,7 @@ QUAGSIRE @LEFTOVERS UNAWARE IMPISH 252/0/252/0/4/0 0 | LIQUIDATION, HIGH_HORSEPO
 
 
 
-## E0047 TRAINER_DWAYNE class=casual
+## E0037 TRAINER_DWAYNE class=casual
 strategy: SETUP,REDIRECTION
 mega_slots: NONE
 plan: Dwayne's young crew in the Seashore House: a sailor's Water hands, each carrying one element of the old hot-battle/cold-soda idea, and one stoker from the boiler room. First two useful turns: Eviolite Magby offers Follow Me or Acid Spray while Poliwhirl spends the protected turn on Belly Drum - maximum Attack at the cost of half its HP, which the Sitrus Berry partly returns - so redirection and setup are one plan rather than two. Alternate deployment: Eviolite Chinchou is the fast Electric lane with Thunderbolt, Volt Switch and Electroweb, and Volt Absorb turns the player's Electric attack into healing; Eviolite Spheal is the cold lane with Ice Beam, Icy Wind speed control and Brine for the finish. Reserves & disruption: after Belly Drum, Poliwhirl's Liquidation and Low Kick end the fight, so the player must answer Magby's Follow Me before the drum rather than after. Stats: Magby is fast special support, Chinchou fast special control, Spheal slow special, Poliwhirl fast physical. Could it be cooler? The old crew was Magby, Smoochum, Elekid and Monferno - a Sailor with no Water at all. Magby stays as the one non-Water hand: its Fire attacks punish the Grass types a Water crew invites, and Follow Me is the engine. Chinchou takes Elekid's Electric lane with the same moves, Spheal takes Smoochum's Ice lane, and Poliwhirl takes Monferno's fast physical Fighting-flavoured slot with a Belly Drum that finally gives the redirection something worth protecting. Level offsets unchanged: +5 for the three Eviolite babies in the old baby slots, +4 for Poliwhirl in Monferno's.
@@ -586,7 +586,7 @@ POLIWHIRL @SITRUS_BERRY WATER_ABSORB JOLLY 4/252/0/0/0/252 5 | BELLY_DRUM, LIQUI
 
 
 
-## E0048 TRAINER_JOHANNA class=regular
+## E0036 TRAINER_JOHANNA class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Johanna's beauty-and-potential team preserves Budew, Sylveon, Feebas and Qwilfish. Budew threatens susceptible foes with Sleep Powder while Pixilate Sylveon earns Throat Spray through Hyper Voice; sleep is an inaccurate opportunity, not guaranteed protection. Feebas replaces unsupported Helping Hand with Chilling Water: Icy Wind controls speed, Chilling Water weakens a physical attacker and Adaptability Muddy Water remains a modest spread option. Intimidate Qwilfish protects the special core and provides an independent physical Poison/Water lane. Stats: Feebas changes from Modest special offense to Timid HP/Speed support; its job is acting with Icy Wind/Chilling Water, not maximizing base10 Special Attack. Budew is fast special disruption, Sylveon fast special offense with Icy Wind support, and Qwilfish bulky physical. Could it be cooler? Retain the contrast between tiny Budew/Feebas and the polished Sylveon; give Feebas a real support job instead of evolving it simply for strength. Medium seeds27/23/31/24 acknowledge Feebas's very low raw stats and Sylveon's complete special profile. Wide Guard, powder immunity, Steel/Poison attacks, Defiant/Competitive and spread damage breaking Focus Sash are counterplay. Do not label these level choices battle-tested. Overrepresented? Budew appears in one E group, Feebas in two, Sylveon in four and Qwilfish in five. Qwilfish is the main reuse concern, including the recent Rusturf thug, but a secondary Intimidate/Poison role here differs from Power of Alchemy inheritance. Keep this support cast provisionally; scrutinize later Qwilfish owners rather than replacing it solely for a count. Sleep-supported spread offense is common, so the tiny-fish utility and beauty identity must remain meaningful.
@@ -598,7 +598,7 @@ QWILFISH @PAYAPA_BERRY INTIMIDATE ADAMANT 252/252/4/0/0/0 3 | LIQUIDATION, POISO
 
 
 
-## E0049 TRAINER_SIMON class=regular
+## E0038 TRAINER_SIMON class=regular
 strategy: NONE
 mega_slots: NONE
 plan: Simon's small-Pokemon collection now leads Competitive Prinplup beside Battery Charjabug. Battery supports special attacks without spending Charjabug's action; the beetle can choose String Shot, Spark, Bug Bite or Protect according to the board. Mudbray is the independent physical reserve, while Morelull supplies Spore/Strength Sap and a secondary Battery-compatible special attack. The original unsupported Mudbray Body Press becomes Close Combat, using actual Attack investment; Stamina remains reactive defense, and Close Combat spends bulk for damage. Stats: Prinplup has fast special offense for Battery; Charjabug is Impish HP/Defense with physical Spark/Bug Bite and String Shot support, so no wasted special investment. Mudbray retains physical Attack/Speed with a small HP allocation; Morelull remains physically bulky support. Could it be cooler? Yes: reject the proposed Chinchou/Discharge/Ground copy of Darian's earlier team and use the child's battery-beetle partnership instead. Medium seeds25/27/26/27 are informed cap24 choices, not native calibration. Grass pressure into Prinplup/Mudbray, Fire pressure into Charjabug/Morelull, special damage and powder immunity remain answers. Battery does not strengthen Mudbray's physical attacks. Overrepresented? The proposed Chinchou/Discharge/Ground partnership was rejected because Darian already uses it with Barboach. Charjabug now appears in two E groups including later Ben, giving Prinplup a Battery partner; Morelull and Prinplup each have one authored group, Mudbray two including Clark. Ben's Gym lineup now extends Battery into named Electric/Water absorption pairings with a physical reserve; this resolves the earlier differentiation task without claiming Battery is unique. Regional rival replacement pools may add Prinplup outside these directly authored counts.

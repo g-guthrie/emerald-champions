@@ -5,7 +5,13 @@
   },
   "setup": {
     "flags": {
-      "FLAG_DEFEATED_HEATRAN": true
+      "FLAG_DEFEATED_HEATRAN": true,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": true,
+      "FLAG_BADGE05_GET": true,
+      "FLAG_BADGE06_GET": true
     },
     "items": {
       "ITEM_MAGMA_STONE": 1
