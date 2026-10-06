@@ -70,8 +70,8 @@ TEST("Inclement integration: Day Care Egg moves stay exclusive but work in the f
     EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_PIKACHU, MOVE_FLY));
     EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_PIKACHU, MOVE_EXTREME_SPEED));
     EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_RAICHU_ALOLA, MOVE_SURF));
-    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_SWELLOW, MOVE_BOOMBURST));
-    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_DRAGONITE, MOVE_EXTREME_SPEED));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_SWELLOW, MOVE_EXTREME_SPEED));
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_TOGEKISS, MOVE_LUNAR_BLESSING));
     // ...but other moves and other families keep theirs.
     EXPECT(CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_DRAGONITE, MOVE_FLY));
     EXPECT(CanSpeciesUseEmeraldChampionsPreparationMove(SPECIES_SWELLOW, MOVE_FLY));

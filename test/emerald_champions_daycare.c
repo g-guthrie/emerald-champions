@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daycare.h"
+#include "emerald_champions_battle_sets.h"
 #include "egg_hatch.h"
 #include "event_data.h"
 #include "item.h"
@@ -331,4 +332,40 @@ TEST("Nursery eggs never inherit a one-hit KO; hatching teaches only the family'
         if (GetMonData(egg, MON_DATA_MOVE1 + slot) == MOVE_SHEER_COLD)
             EXPECT_GT(GetMonData(egg, MON_DATA_PP1 + slot), 0);
     ResetNursery();
+}
+
+#include "../src/data/day_care_gift_eggs.h"
+
+static bool32 LearnsByLevelUp(enum Species species, enum Move move)
+{
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+        if (learnset[i].move == move)
+            return TRUE;
+    return FALSE;
+}
+
+// Every gift Egg's move is special: the Center, a level-up or an iconic
+// lesson never gives it to the family, from the Egg through its final stage.
+static void ExpectSpecialMove(enum Species species, enum Move move, u32 depth)
+{
+    EXPECT(!CanSpeciesUseEmeraldChampionsPreparationMove(species, move));
+    EXPECT(!LearnsByLevelUp(species, move));
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+    if (depth == 0 || evolutions == NULL)
+        return;
+    for (u32 i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+    {
+        enum Species next = SanitizeSpeciesId(evolutions[i].targetSpecies);
+        if (IsSpeciesEnabled(next))
+            ExpectSpecialMove(next, move, depth - 1);
+    }
+}
+
+TEST("Day Care gift Eggs: every special move is unavailable to its family elsewhere")
+{
+    ExpectSpecialMove(DAY_CARE_FIRST_EGG_SPECIES, DAY_CARE_FIRST_EGG_MOVE, 3);
+    for (u32 i = 0; i < ARRAY_COUNT(sDayCareGiftEggs); i++)
+        for (u32 j = 0; j < 3; j++)
+            ExpectSpecialMove(sDayCareGiftEggs[i].species, sDayCareGiftEggs[i].moves[j], 3);
 }

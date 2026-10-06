@@ -85,7 +85,7 @@ TEST("Campaign gifts: Day Care egg delivery preserves full-party retries and tea
             FlagClear(FLAG_RECEIVED_TOGEPI_EGG);
         FlagClear(FLAG_DAILY_RECEIVED_DAYCARE_EGG);
         gSpecialVar_0x8004 = SPECIES_TOGEPI;
-        gSpecialVar_0x8005 = MOVE_EXTRASENSORY;
+        gSpecialVar_0x8005 = MOVE_LUNAR_BLESSING;
         struct ScriptContext ctx;
         InitScriptContext(&ctx, gScriptCmdTable, gScriptCmdTableEnd);
         SetupBytecodeScript(&ctx, Route117_PokemonDayCare_EventScript_CheckEggSpace);
@@ -116,7 +116,7 @@ TEST("Campaign gifts: Day Care egg delivery preserves full-party retries and tea
             if (!received)
             {
                 EXPECT_EQ(gSpecialVar_0x8004, SPECIES_TOGEPI);
-                EXPECT_EQ(gSpecialVar_0x8005, MOVE_EXTRASENSORY);
+                EXPECT_EQ(gSpecialVar_0x8005, MOVE_LUNAR_BLESSING);
             }
         }
     }

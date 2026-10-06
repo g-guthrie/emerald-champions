@@ -89,6 +89,7 @@
 #include "battle_util.h"
 #include "naming_screen.h"
 #include "chooseboxmon.h"
+#include "data/day_care_gift_eggs.h"
 
 #define TAG_ITEM_ICON 5500
 
@@ -5671,51 +5672,26 @@ void CreateEventLegalEnemyMon(void)
         ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], gSpecialVar_0x8006);
 }
 
-// Repeat Day Care eggs supplement habitats that are already accessible.
-// The first, guaranteed Togepi stays in the map script. Feebas remains a
-// Route 119 tile discovery. 0x8004 takes the species, 0x8005 the egg move.
+// Repeat Day Care eggs (src/data/day_care_gift_eggs.h) supplement habitats that
+// are already accessible. The first, guaranteed Togepi stays in the map script.
+// Feebas remains a Route 119 tile discovery. 0x8004 takes the species, 0x8005
+// the special move.
 void SetSpeciesAndEggMove(void)
 {
-    static const struct
-    {
-        u16 species;
-        u16 moves[3];
-        u16 licenseFlag;
-        u16 badgeFlag;
-        bool8 needsBike;
-    } sEggGifts[] =
-    {
-        {SPECIES_BAGON,     {MOVE_DRAGON_DANCE,  MOVE_DRAGON_RUSH,   MOVE_THRASH}, FLAG_RECEIVED_HM_WATERFALL, FLAG_BADGE08_GET, FALSE},
-        {SPECIES_SHUPPET,   {MOVE_GUNK_SHOT,     MOVE_DESTINY_BOND,  MOVE_PHANTOM_FORCE}, FLAG_RECEIVED_HM_SURF, FLAG_BADGE05_GET, FALSE},
-        {SPECIES_SNEASEL,   {MOVE_FAKE_OUT,      MOVE_ICICLE_CRASH,  MOVE_BITE}, 0, 0, TRUE},
-        {SPECIES_CORPHISH,  {MOVE_DRAGON_DANCE,  MOVE_AQUA_JET,      MOVE_BODY_SLAM}, 0, 0, FALSE},
-        {SPECIES_MARILL,    {MOVE_BELLY_DRUM,    MOVE_AQUA_JET,      MOVE_PERISH_SONG}, 0, 0, FALSE},
-        {SPECIES_EMOLGA,    {MOVE_ROOST,         MOVE_AIR_SLASH,     MOVE_BATON_PASS}, FLAG_RECEIVED_HM_CUT, FLAG_BADGE01_GET, FALSE},
-        {SPECIES_GOOMY,     {MOVE_ACID_ARMOR,    MOVE_POISON_TAIL,   MOVE_IRON_TAIL}, FLAG_RECEIVED_HM_CUT, FLAG_BADGE01_GET, FALSE},
-        {SPECIES_RHYHORN,   {MOVE_CRUNCH,        MOVE_METAL_BURST,   MOVE_DRAGON_RUSH}, FLAG_RECEIVED_HM_SURF, FLAG_BADGE05_GET, TRUE},
-        {SPECIES_GASTLY,    {MOVE_PERISH_SONG,   MOVE_DISABLE,       MOVE_CLEAR_SMOG}, 0, 0, FALSE},
-        {SPECIES_PICHU,     {MOVE_SURF,          MOVE_FLY,           MOVE_EXTREME_SPEED}, 0, 0, FALSE},
-        {SPECIES_WIMPOD,    {MOVE_SPIKES,        MOVE_AQUA_JET,      MOVE_METAL_CLAW}, FLAG_RECEIVED_HM_ROCK_SMASH, FLAG_BADGE03_GET, FALSE},
-        {SPECIES_PONYTA,    {MOVE_HYPNOSIS,      MOVE_MORNING_SUN,   MOVE_HIGH_HORSEPOWER}, 0, FLAG_BADGE03_GET, FALSE},
-        {SPECIES_SNOVER,    {MOVE_LEECH_SEED,    MOVE_AVALANCHE,     MOVE_SEED_BOMB}, 0, 0, TRUE},
-        {SPECIES_FERROSEED, {MOVE_SPIKES,        MOVE_LEECH_SEED,    MOVE_ACID_SPRAY}, FLAG_MET_ARCHIE_METEOR_FALLS, 0, FALSE},
-        {SPECIES_TAILLOW,   {MOVE_BOOMBURST,     MOVE_BOOMBURST,     MOVE_BOOMBURST}, 0, 0, FALSE},
-        {SPECIES_DRATINI,   {MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED}, FLAG_RECEIVED_HM_SURF, FLAG_BADGE05_GET, FALSE},
-    };
-    u8 eligible[ARRAY_COUNT(sEggGifts)];
+    u8 eligible[ARRAY_COUNT(sDayCareGiftEggs)];
     u32 count = 0;
     // Old saves may still carry either retired bicycle id.
     bool32 hasBike = CheckBagHasItem(ITEM_BICYCLE, 1)
                   || CheckBagHasItem(ITEM_MACH_BIKE, 1)
                   || CheckBagHasItem(ITEM_ACRO_BIKE, 1);
 
-    for (u32 i = 0; i < ARRAY_COUNT(sEggGifts); i++)
+    for (u32 i = 0; i < ARRAY_COUNT(sDayCareGiftEggs); i++)
     {
-        if (sEggGifts[i].licenseFlag && !FlagGet(sEggGifts[i].licenseFlag))
+        if (sDayCareGiftEggs[i].licenseFlag && !FlagGet(sDayCareGiftEggs[i].licenseFlag))
             continue;
-        if (sEggGifts[i].badgeFlag && !FlagGet(sEggGifts[i].badgeFlag))
+        if (sDayCareGiftEggs[i].badgeFlag && !FlagGet(sDayCareGiftEggs[i].badgeFlag))
             continue;
-        if (sEggGifts[i].needsBike && !hasBike)
+        if (sDayCareGiftEggs[i].needsBike && !hasBike)
             continue;
         eligible[count++] = i;
     }
@@ -5723,8 +5699,8 @@ void SetSpeciesAndEggMove(void)
     u32 randSpecies = eligible[Random() % count]; // five ungated species always fit
     u32 randEggMove = Random() % 3;
 
-    gSpecialVar_0x8004 = sEggGifts[randSpecies].species;
-    gSpecialVar_0x8005 = sEggGifts[randSpecies].moves[randEggMove];
+    gSpecialVar_0x8004 = sDayCareGiftEggs[randSpecies].species;
+    gSpecialVar_0x8005 = sDayCareGiftEggs[randSpecies].moves[randEggMove];
 }
 
 // Teaches the gift egg the move SetSpeciesAndEggMove rolled.

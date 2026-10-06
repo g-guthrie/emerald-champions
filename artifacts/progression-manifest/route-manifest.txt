@@ -429,12 +429,24 @@ STEP 18 - cap 30 - Route 117, the Day Care and Verdanturf Town
       gated slots. Honey (code): Combee, Shelmet, Karrablast, Chingling, Sewaddle. Cut trees (play):
       the area's grass band; Greedent, Wormadam and Mothim appear past their evolution levels.
       Water and the better rods wait for their tools (code levels 43-45 Surf, 31-33 Good Rod).
-    Gifts (play): the Day Care's first Egg is Togepi (Extrasensory); a random Egg every day after
-      that (src/field_specials.c SetSpeciesAndEggMove). Cyclizar by trade (Friendship Rater's house).
-    Day Care Egg moves are exclusive (owner): the Center no longer teaches Pichu-line Surf, Fly and
-      Extreme Speed, Taillow-line Boomburst or Dratini-line Extreme Speed, and the Mauville iconic
-      tutor dropped Pichu-line Fly. A hatched Pokemon keeps the move, and one that knows Surf or Fly
-      can use it in the field (src/field_move.c). Other gift Eggs' moves are still Center-teachable.
+    Gifts (play): the Day Care's first Egg is Togepi; a random Egg every day after that. Cyclizar by
+      trade (Friendship Rater's house).
+    Day Care Eggs (owner): each hatches with one special move its family learns nowhere else (not
+      Center, level-up or tutor; src/data/day_care_gift_eggs.h, test/emerald_champions_daycare.c).
+      Togepi (first Egg): Lunar Blessing. Daily, rolled one move per Egg:
+      Pichu Surf / Fly / Extreme Speed; Corphish Jet Punch / Kowtow Cleave / Ceaseless Edge;
+      Marill Jet Punch / Life Dew / Flip Turn; Gastly Infernal Parade / Mystical Fire / Last
+      Respects; Taillow Extreme Speed / Triple Arrows / Beak Blast; Sneasel (Bike) Sucker Punch /
+      Mountain Gale / Spirit Break; Snover (Bike) Strength Sap / Mountain Gale / Glacial Lance;
+      Emolga (Cut) Volt Tackle / Hurricane / Double Shock; Goomy (Cut) Shore Up / Core Enforcer /
+      Clangorous Soul; Wimpod (Rock Smash) Triple Dive / Aqua Cutter / Ceaseless Edge; Ponyta
+      (Dynamo Badge) Raging Bull / Headlong Rush / Volt Tackle; Ferroseed (Meteor Falls) Spiky
+      Shield / Strength Sap / Rock Slide; Shuppet (Surf) Last Respects / Bitter Blade / Psycho Cut;
+      Rhyhorn (Surf, Bike) Head Smash / Headlong Rush / Accelerock; Dratini (Surf) Dragon Darts /
+      Glaive Rush / Triple Dive; Bagon (Waterfall) Head Smash / Dragon Darts / Brave Bird.
+      The Mauville iconic tutor dropped Pichu-line Fly. A hatched Pokemon keeps its move, and one
+      that knows Surf or Fly can use it in the field (src/field_move.c). Wild Pichu stays in the
+      Woods: only the Day Care's is special.
     Follow Me (owner): Sentret / Furret from Route 104 (Center-teachable); Togepi now comes only
       from the Day Care.
   Battle items

@@ -14,6 +14,7 @@
 #include "data/pokemon/emerald_champions_battle_sets.h"
 #include "data/pokemon/emerald_champions_preparation_learnsets.h"
 #include "data/pokemon/emerald_champions_iconic_moves.h"
+#include "data/day_care_gift_eggs.h"
 
 static const u8 sRecommendedSetName[] = _("Recommended");
 
@@ -645,25 +646,23 @@ const u16 *GetEmeraldChampionsPreparationMoves(enum Species species)
 
 static bool32 IsIconicEvolutionFamily(enum Species family, enum Species species, u32 depth);
 
-// Moves only the Day Care's gift Eggs carry (SetSpeciesAndEggMove). The Center
-// never teaches them to the family, even where a legal pool or preset has them;
-// a Pokemon that hatched knowing one keeps it.
-static const struct { u16 family; u16 move; } sDayCareExclusiveMoves[] =
+static bool32 IsInDayCareFamily(enum Species family, enum Species species)
 {
-    {SPECIES_PICHU,   MOVE_SURF},
-    {SPECIES_PICHU,   MOVE_FLY},
-    {SPECIES_PICHU,   MOVE_EXTREME_SPEED},
-    {SPECIES_TAILLOW, MOVE_BOOMBURST},
-    {SPECIES_DRATINI, MOVE_EXTREME_SPEED},
-};
+    return IsIconicEvolutionFamily(family, species, 5)
+        || IsIconicEvolutionFamily(family, GET_BASE_SPECIES_ID(species), 5);
+}
 
+// A Day Care gift Egg's special move stays exclusive to the Egg: the Center
+// never teaches it to that family, though a hatched Pokemon keeps it.
 bool32 IsEmeraldChampionsDayCareExclusiveMove(enum Species species, enum Move move)
 {
-    for (u32 i = 0; i < ARRAY_COUNT(sDayCareExclusiveMoves); i++)
+    if (move == DAY_CARE_FIRST_EGG_MOVE && IsInDayCareFamily(DAY_CARE_FIRST_EGG_SPECIES, species))
+        return TRUE;
+    for (u32 i = 0; i < ARRAY_COUNT(sDayCareGiftEggs); i++)
     {
-        if (sDayCareExclusiveMoves[i].move == move
-         && (IsIconicEvolutionFamily(sDayCareExclusiveMoves[i].family, species, 5)
-          || IsIconicEvolutionFamily(sDayCareExclusiveMoves[i].family, GET_BASE_SPECIES_ID(species), 5)))
+        const struct DayCareGiftEgg *egg = &sDayCareGiftEggs[i];
+        if ((egg->moves[0] == move || egg->moves[1] == move || egg->moves[2] == move)
+         && IsInDayCareFamily(egg->species, species))
             return TRUE;
     }
     return FALSE;
@@ -709,9 +708,16 @@ static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, boo
     for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
         if (availableMoves[move] && IsMoveRemovedFromGame(move))
             availableMoves[move] = FALSE;
-    for (u32 i = 0; i < ARRAY_COUNT(sDayCareExclusiveMoves); i++)
-        if (IsEmeraldChampionsDayCareExclusiveMove(species, sDayCareExclusiveMoves[i].move))
-            availableMoves[sDayCareExclusiveMoves[i].move] = FALSE;
+    // Day Care gift Eggs' special moves (IsEmeraldChampionsDayCareExclusiveMove).
+    if (IsInDayCareFamily(DAY_CARE_FIRST_EGG_SPECIES, species))
+        availableMoves[DAY_CARE_FIRST_EGG_MOVE] = FALSE;
+    for (u32 i = 0; i < ARRAY_COUNT(sDayCareGiftEggs); i++)
+    {
+        if (!IsInDayCareFamily(sDayCareGiftEggs[i].species, species))
+            continue;
+        for (u32 j = 0; j < ARRAY_COUNT(sDayCareGiftEggs[i].moves); j++)
+            availableMoves[sDayCareGiftEggs[i].moves[j]] = FALSE;
+    }
 }
 
 static u32 CountIconicTutorBadges(void)

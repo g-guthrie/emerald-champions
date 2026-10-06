@@ -66,6 +66,7 @@ TRADE_H = ROOT / "src/data/trade.h"
 MAPS_DIR = ROOT / "data/maps"
 SCRIPTS_DIR = ROOT / "data/scripts"
 FIELD_SPECIALS = ROOT / "src/field_specials.c"
+DAY_CARE_GIFT_EGGS = ROOT / "src/data/day_care_gift_eggs.h"
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 REVIEW_INDEX = ROOT / "data/emerald_champions/trainer-review-index.json"
 
@@ -879,17 +880,17 @@ class Builder:
             self.species_sources.append(Source("gift", self.S(sp), where, lreq + list(req), note, c, needs))
 
     def _daycare_eggs(self):
-        """Day-Care lady's daily gift egg pool (src/field_specials.c
-        SetSpeciesAndEggMove): licence flag + badge + bike gates."""
-        fs = FIELD_SPECIALS.read_text()
-        block = re.search(r"sEggGifts\[\]\s*=\s*\{(.*?)\n    \};", fs, re.S)[1]
+        """Day-Care lady's daily gift egg pool (src/data/day_care_gift_eggs.h, rolled by
+        src/field_specials.c SetSpeciesAndEggMove): licence flag + badge + bike gates."""
+        fs = DAY_CARE_GIFT_EGGS.read_text()
+        block = re.search(r"sDayCareGiftEggs\[\]\s*=\s*\{(.*?)\n\};", fs, re.S)[1]
         for sp, lic, badge, bike in re.findall(r"\{(SPECIES_\w+),\s*\{[^}]*\},\s*(\w+),\s*(\w+),\s*(TRUE|FALSE)\}", block):
             req = [f for f in (lic, badge) if f != "0"]
             if bike == "TRUE":
                 req.append("FLAG_RECEIVED_BIKE")
             self.species_sources.append(Source("egg", self.S(sp), "Route117_PokemonDayCare", req,
                                                "Day-Care lady daily gift egg",
-                                               cite(FIELD_SPECIALS, f"{{{sp},")))
+                                               cite(DAY_CARE_GIFT_EGGS, f"{{{sp},")))
 
     def _trades(self):
         """NPC trades: `setvar VAR_0x8008, INGAME_TRADE_*` + src/data/trade.h."""

@@ -1363,7 +1363,7 @@ def _scratch_output(args,state,constants):
             return {previous} if item is not None and previous is not None else None
         number=_number(species,constants);return {number} if number is not None else None
     if function=='SetSpeciesAndEggMove':
-        text=(ROOT/'src/field_specials.c').read_text().split('void SetSpeciesAndEggMove(void)',1)[1].split('u8 eligible',1)[0]
+        text=(ROOT/'src/data/day_care_gift_eggs.h').read_text().split('sDayCareGiftEggs[] =',1)[1]
         values=set();bike=bool(set(state.get('items',())) & {'ITEM_BICYCLE','ITEM_MACH_BIKE','ITEM_ACRO_BIKE'})
         for species,moves,license_,badge,needs in re.findall(r'\{(SPECIES_\w+),\s*\{([^}]+)\},\s*(\w+),\s*(\w+),\s*(TRUE|FALSE)\}',text):
             if license_!='0' and not _flag(state,license_,constants):continue

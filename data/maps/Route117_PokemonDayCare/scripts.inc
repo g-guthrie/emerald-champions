@@ -11,7 +11,7 @@ Route117_PokemonDayCare_EventScript_RandomEgg::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TOGEPI_EGG, Route117_PokemonDayCare_EventScript_ReceivedTogepi
 	setvar VAR_0x8004, SPECIES_TOGEPI
-	setvar VAR_0x8005, MOVE_EXTRASENSORY
+	setvar VAR_0x8005, MOVE_LUNAR_BLESSING
 Route117_PokemonDayCare_EventScript_TryGiveEgg::
 	msgbox Route117_PokemonDayCare_Text_HaveEggWillYouTakeIt, MSGBOX_YESNO
 	compare VAR_RESULT, NO
