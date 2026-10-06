@@ -13,7 +13,7 @@ OldaleTown_OnTransition: @ 81E8EA8
 	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
 	end
 
-@ This script seems pointless because nothing uses VAR_OLDALE_TOWN_STATE
+@ Keeps the west exit open on re-entry; OldaleTown_EventScript_BlockedPath runs while this var is 0.
 OldaleTown_EventScript_SetOldaleState:: @ 81E8ECC
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	return

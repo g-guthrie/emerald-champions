@@ -1,0 +1,51 @@
+# Story stages, in the order the player passes them. The single source of truth for
+# what is open when: regions/*.yaml say which areas each stage opens and why, and every
+# map object, generated script, wild level, battle number and manifest is derived from
+# these files (AGENTS.md, Rebuild). Tests check each `begins` citation against the code.
+#
+# cap:     the level cap during the stage (src/caps.c sCampaignMilestones)
+# moves:   field moves usable from this stage (license + badge, src/field_move.c)
+# items:   key items held from this stage
+# begins:  the script that starts the stage, and the flag or var it sets
+# status:  rebuilt (regions/ file approved and verified in play) or reference
+#          (copied from the old game, not yet rebuilt or verified)
+
+stages:
+  # --- Region 1: Littleroot, Route 101, Oldale, Route 103 (south) --------------------
+  - id: intro
+    cap: 14
+    begins: {script: InsideOfTruck_EventScript_SetIntroFlags, sets: VAR_LITTLEROOT_INTRO_STATE=1}
+    status: reference
+  - id: meet_rival
+    cap: 14
+    begins: {script: data/scripts/players_house.inc, sets: VAR_LITTLEROOT_INTRO_STATE=7}
+    status: reference
+  - id: rescue_birch
+    cap: 14
+    begins: {script: "LittlerootTown_{Brendans,Mays}House_*: meet rival", sets: VAR_LITTLEROOT_TOWN_STATE=1}
+    status: reference
+  - id: starter
+    cap: 14
+    begins: {script: Route101 Birch rescue, sets: VAR_ROUTE101_STATE=3}
+    status: reference
+  - id: rival_route103
+    cap: 14
+    begins: {script: Route103 rival battle, sets: VAR_BIRCH_LAB_STATE=4}
+    status: reference
+  - id: pokedex
+    cap: 14
+    items: [ITEM_OLD_ROD]   # Mom, LittlerootTown_EventScript_GiveRunningShoes (VAR_LITTLEROOT_TOWN_STATE 3 -> 4)
+    begins: {script: LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex, sets: [FLAG_ADVENTURE_STARTED, VAR_OLDALE_TOWN_STATE=1, VAR_LITTLEROOT_TOWN_STATE=3]}
+    status: reference
+
+  # --- Later regions: caps only (code), stages filled in as each region is rebuilt ----
+  - {id: badge1_stone,     cap: 20, moves: [cut],        status: reference}
+  - {id: badge2_knuckle,   cap: 30,                      status: reference}
+  - {id: badge3_dynamo,    cap: 40, moves: [rock_smash], items: [bike], status: reference}
+  - {id: badge4_heat,      cap: 45, moves: [strength],   items: [ITEM_GO_GOGGLES], status: reference}
+  - {id: badge5_balance,   cap: 55, moves: [surf],       status: reference}
+  - {id: badge6_feather,   cap: 60, moves: [fly],        status: reference}
+  - {id: groudon_awake,    cap: 65,                      status: reference}
+  - {id: badge7_mind,      cap: 70, moves: [dive],       status: reference}
+  - {id: badge8_rain,      cap: 80, moves: [waterfall],  status: reference}
+  - {id: champion,         cap: 85,                      status: reference}

@@ -14,11 +14,46 @@ or data.
   or wholesale restores. Preserve saves, archives and other agents' work.
 - Never load a savestate into a different ROM; move a save between builds with
   a native in-game save and a clean boot.
-- Codex owns overworld presentation (map.json objects, local ids).
+- Overworld objects (map.json objects, local ids): Codex, except in rebuilt regions,
+  where the progression generator owns them (see Rebuild).
 - UI changes require native screenshots of affected states and menu navigation:
   opening, selection, page changes, cancellation and returned player control.
 - Studio instructions live in `tools/studio/skill/SKILL.md`; prefer this
   checked-in source over installed copies.
+
+## Rebuild (owner decision, 2026-10-06)
+
+The game's content layer is being rebuilt from the ground up on the session branch;
+`main` stays the old game, used only as reference, until cut-over.
+
+- Source of truth: `data/progression/`. `stages.yaml` orders the story stages (cap,
+  field moves, key items, flags set). One file per region lists its areas: maps, the
+  stage that opens each, the gate that opens it (citing the script, flag or object),
+  trainers (required or optional), items, gifts, NPCs and wild tables. Nothing else
+  may state these facts by hand: map objects, generated scripts, wild levels, battle
+  order and manifests are generated from it, and tests fail when code and spec differ.
+- Gates use the standard barriers only (blocker NPC, turn-back tile, opening, ferry,
+  Gym rule); each reads the in-game progression table generated from the spec.
+  Story cutscenes are ported by hand and wired to stages.
+- One region at a time, from Littleroot: write the region spec from the old game and
+  the design rules, get the owner's approval, generate, port its cutscenes, then play it
+  headlessly with forced trainer wins. Photograph every walkable tile (explore mosaics)
+  and every DexNav, check spec against play, keep a stage save. Then report to the
+  owner before the next region: Pokemon available, items, balance concerns,
+  recommended changes. The owner decides; changes go into the spec.
+- Never state anything as fact that was not seen in play or read in code; say which.
+- Rename misnamed labels, flags and texts as they are found, and say so.
+- Wild levels belong to places: an area's levels come from the stage that first opens
+  it, climbing in route order to a few levels under the cap; tables open no lower than
+  the tool that reaches them. No evolved Pokemon below its evolution level, nothing
+  above the live cap, legend-class at the cap.
+- Gym trainers cannot be skipped: a leader battles only after the Gym's trainers.
+- No Mega Stone before the Mega Ring; no friendship evolution before the Stone Badge.
+- Wild Pokemon hold no battle items (berries, Honey, medicine, sell items, Everstone,
+  evolution items, signature items and Nectars stay); the vendor's badge floors cover them.
+- Worthless pickups (potions, ethers, repels, status heals) become battle items or Gems.
+- Day Care gift Eggs carry special moves their family learns nowhere else.
+- Special places stay special: Dhelmise lives only on the Abandoned Ship.
 
 ## Design rules (owner decisions)
 

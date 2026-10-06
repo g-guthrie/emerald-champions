@@ -1,0 +1,114 @@
+# Region 1: Littleroot Town, Route 101, Oldale Town, Route 103 (south bank).
+# Stages: intro .. pokedex (stages.yaml). The region ends when the Pokedex gift opens
+# Oldale's west exit to Route 102 (region 2).
+#
+# status: reference. Every entry below was read from the old game's scripts and
+# map.json files on 2026-10-06; none of it is verified in play yet. `decide:` lines
+# are questions for the owner; nothing marked decide is built until answered.
+
+region: littleroot
+cap: 14
+
+areas:
+  - {id: littleroot_town, maps: [MAP_LITTLEROOT_TOWN], opens: intro}
+  - id: littleroot_houses
+    maps: [MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,
+           MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F]
+    opens: intro
+  - {id: birch_lab, maps: [MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB], opens: intro}
+  - {id: route101, maps: [MAP_ROUTE101], opens: rescue_birch}
+  - id: oldale_town
+    maps: [MAP_OLDALE_TOWN, MAP_OLDALE_TOWN_HOUSE1, MAP_OLDALE_TOWN_HOUSE2,
+           MAP_OLDALE_TOWN_POKEMON_CENTER_1F, MAP_OLDALE_TOWN_POKEMON_CENTER_2F,
+           MAP_OLDALE_TOWN_MART]
+    opens: starter
+  - id: route103_south
+    maps: [MAP_ROUTE103]
+    tiles: "west of the water: rival (10,3), Boy (20,10), sign (11,9)"
+    opens: starter
+  - id: route103_east
+    maps: [MAP_ROUTE103]
+    tiles: "across the water: trainers, berry trees (58-60,5), Pearl, PP Up, Altering Cave"
+    opens: badge5_balance          # Surf; built with the region that reaches it
+    region: later
+
+# Barriers between areas. kind is one of the standard barrier kinds the generator
+# will provide: turn_back (trigger tile + message + step back), blocker (NPC moved
+# into the path), cutscene (a hand-ported story scene owns the tiles).
+gates:
+  - id: littleroot_north_before_rescue
+    kind: turn_back
+    tiles: {map: MAP_LITTLEROOT_TOWN, at: [[10,1],[11,1]]}
+    while: VAR_LITTLEROOT_TOWN_STATE == 0
+    script: LittlerootTown_EventScript_NeedPokemonTriggerLeft / ...Right
+    until: rescue_birch
+  - id: route101_rescue_pen
+    kind: turn_back
+    tiles: {map: MAP_ROUTE101, at: [[10,18],[11,18],[6,15],[6,16],[6,17],[6,18],[7,13]]}
+    while: VAR_ROUTE101_STATE == 2
+    script: Route101_EventScript_PreventExitSouth / West / North
+    until: starter
+  - id: oldale_west_to_route102
+    kind: turn_back + blocker
+    tiles: {map: MAP_OLDALE_TOWN, at: [[0,10]]}
+    while: VAR_OLDALE_TOWN_STATE == 0
+    script: OldaleTown_EventScript_BlockedPath
+    blocker: "Footprints man moved to (1,11) facing left while FLAG_ADVENTURE_STARTED is unset (OldaleTown_EventScript_BlockWestEntrance)"
+    opened_by: LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex (sets FLAG_ADVENTURE_STARTED, VAR_OLDALE_TOWN_STATE=1)
+    until: pokedex
+    note: "Two mechanisms guard one exit. The rebuild keeps one (the turn-back tile read from the progression table)."
+  - id: route103_water
+    kind: terrain
+    tiles: {map: MAP_ROUTE103}
+    needs: surf
+    until: badge5_balance
+
+# Story scenes. Hand-ported; the generator does not write these.
+cutscenes:
+  - {id: truck,            stage: intro,          script: InsideOfTruck_EventScript_SetIntroFlags}
+  - {id: meet_rival,       stage: meet_rival,     script: "LittlerootTown_{Brendans,Mays}House_* rival bedroom scenes"}
+  - {id: go_save_birch,    stage: rescue_birch,   script: LittlerootTown_EventScript_GoSaveBirchTrigger}
+  - {id: birch_rescue,     stage: rescue_birch,   script: [Route101_EventScript_StartBirchRescue, Route101_EventScript_BirchsBag, Route101_EventScript_BattleRescue]}
+  - {id: rival_route103,   stage: starter,        script: Route103_EventScript_Rival .. Route103_EventScript_RivalEnd, sets: [FLAG_DEFEATED_RIVAL_ROUTE103, VAR_OLDALE_RIVAL_STATE=1]}
+  - {id: rival_oldale,     stage: rival_route103, script: OldaleTown_EventScript_RivalTrigger1-3 .. OldaleTown_EventScript_RivalFinish}
+  - {id: pokedex,          stage: rival_route103, script: [LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex]}
+  - {id: running_shoes,    stage: pokedex,        script: LittlerootTown_EventScript_GiveRunningShoes, while: VAR_LITTLEROOT_TOWN_STATE == 3}
+  - {id: dexnav_tutorial,  stage: pokedex,        script: EC_RivalDexNavTutorial_Begin, hidden_by: FLAG_HIDE_ROUTE101_DEXNAV_RIVAL}
+  - {id: oldale_mart_tour, stage: pokedex,        script: OldaleTown_Mart_EventScript_FirstShopping, sets: FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE}
+
+gifts:
+  - {what: starter Pokemon,          where: Route101 Birch's bag,     script: Route101_EventScript_BirchsBag (special ChooseStarter)}
+  - {what: "Pokedex + DexNav + National Dex", where: Birch's lab,   script: LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex}
+  - {what: "ITEM_CHERISH_BALL x30",   where: Birch's lab (rival),      script: LittlerootTown_ProfessorBirchsLab_EventScript_{May,Brendan}GiveCherishBall}
+  - {what: "ITEM_POKE_BALL x5",       where: Oldale Mart employee,     script: OldaleTown_EventScript_GivePromotionalItem, flag: FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN}
+  - {what: "ITEM_POKE_VIAL, ITEM_LEVELER, ITEM_REGENERATOR", where: Oldale Mart nurse, script: EventScript_PkmnCenterNurse_GiveToolsForTour}
+  - {what: Running Shoes,            where: Mom, Littleroot,           script: LittlerootTown_EventScript_GiveRunningShoes, flag: FLAG_RECEIVED_RUNNING_SHOES}
+  - {what: ITEM_OLD_ROD,             where: Mom, Littleroot,           script: LittlerootTown_EventScript_GiveRunningShoes, flag: FLAG_RECEIVED_OLD_ROD}
+  # In region-1 maps but given in later stages; listed here so nothing in these maps is unaccounted for.
+  - {what: "ITEM_GOLD_BOTTLE_CAP x6", where: Birch's lab, stage: later (dex reward), script: LittlerootTown_ProfessorBirchsLab_EventScript_DeliverDexReward}
+  - {what: "Cosmog x2 (first holds Eviolite)", where: Birch's lab, stage: champion (hall_of_fame.inc sets VAR_DEX_UPGRADE_JOHTO_STARTER_STATE=1), script: GiveBirchCosmogPair}
+  - {what: ITEM_EON_TICKET,          where: Route103, stage: champion, script: Route103 Eon Ticket scene}
+
+items: []        # no item balls or hidden items in region-1 areas reachable before Surf
+                 # (Route103 Pearl and PP Up are on the east bank: route103_east).
+                 # Item-ball sprites that are not items: rival's 2F Poke Ball (both houses,
+                 # *_EventScript_RivalsPokeBall) and the lab's retired Cyndaquil/Totodile/
+                 # Chikorita displays (FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_*).
+
+wild:
+  # Levels are the old game's (src/data/wild_encounters.json), not yet set by rule.
+  route101:
+    land: {levels: 4-6, species: [ZIGZAGOON, POOCHYENA, WURMPLE, PAWMI, ZORUA, LILLIPUP, FIDOUGH, HOPPIP, SCATTERBUG]}
+    honey: {levels: 4-6, species: [COMBEE, WURMPLE]}
+  route103:
+    land: {levels: 5-7, species: [WINGULL, SHELLOS_WEST, TOXEL, BLITZLE, GRUBBIN, SHINX, SNUBBULL, KRICKETOT, ROCKRUFF]}
+    honey: {levels: 5-7, species: [CUTIEFLY, SHINX, GRUBBIN, KRICKETOT]}
+    old_rod: {levels: 2-4, species: [MAGIKARP, REMORAID]}
+    # Good Rod 31-33, Super Rod 63-65, Surf 43-45: later stages, set when those regions are rebuilt.
+
+decide:
+  - "Lab: delete the three retired Johto-starter display balls (all at 6,8, hidden by flag) in the rebuild?"
+  - "Wild levels: cap is 14 for the whole region, but grass is 4-6 / 5-7 and Old Rod 2-4. Rule says levels belong to places and open no lower than the tool that reaches them; proposal: Route 101 4-6, Route 103 6-8, Old Rod 5-7. Or keep as is?"
+  - "Oldale west exit has two locks (turn-back tile + Footprints man repositioned). Keep only the turn-back tile?"
+  - "Route 103 Surf table opens at 43-45 but Surf arrives at cap 55. Set when region with Surf is rebuilt, or now?"
+  - "Oldale Mart nurse gives Poke Vial, Leveler and Regenerator before the first Gym. Keep all three here?"
