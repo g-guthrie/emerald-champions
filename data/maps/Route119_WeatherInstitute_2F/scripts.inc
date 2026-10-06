@@ -141,7 +141,7 @@ Route119_WeatherInstitute_2F_EventScript_ExplainCastform:: @ 82700EA
 	end
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather:: @ 82700F7
-	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_SkyCalmed
 	goto_if_set FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route119_WeatherInstitute_2F_EventScript_AnomalyReport
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
 	release
@@ -164,6 +164,19 @@ Route119_WeatherInstitute_2F_EventScript_AnomalyReport::
 
 Route119_WeatherInstitute_2F_EventScript_AnomalyReportNone::
 	msgbox Route119_WeatherInstitute_2F_Text_AnomalyReportNone, MSGBOX_DEFAULT
+	release
+	end
+
+@ Once the sky calms, the storm visitors settle as ordinary residents, and the
+@ scientist hands over the only Reveal Glass: Tornadus, Thundurus and Landorus
+@ change between their Incarnate and Therian Formes with it.
+Route119_WeatherInstitute_2F_EventScript_SkyCalmed::
+	goto_if_set FLAG_EC_RECEIVED_REVEAL_GLASS, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	msgbox Route119_WeatherInstitute_2F_Text_TakeRevealGlass, MSGBOX_DEFAULT
+	giveitem ITEM_REVEAL_GLASS
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_RECEIVED_REVEAL_GLASS
+	msgbox Route119_WeatherInstitute_2F_Text_ExplainRevealGlass, MSGBOX_DEFAULT
 	release
 	end
 
@@ -394,3 +407,15 @@ Route119_WeatherInstitute_2F_Text_NoAbnormalWeather: @ 82708FC
 	.string "no longer being reported.\p"
 	.string "The occasional rainfall is a blessing,\n"
 	.string "really.$"
+
+Route119_WeatherInstitute_2F_Text_TakeRevealGlass:
+	.string "The skies have calmed, but the\n"
+	.string "Forces of Nature still roam Hoenn.\p"
+	.string "Our studies turned up this mirror.\n"
+	.string "I think you should have it.$"
+
+Route119_WeatherInstitute_2F_Text_ExplainRevealGlass:
+	.string "The Reveal Glass shows Tornadus,\n"
+	.string "Thundurus and Landorus as they\l"
+	.string "truly are: their Therian Formes.\p"
+	.string "Use it again to change them back.$"

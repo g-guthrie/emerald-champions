@@ -48,7 +48,7 @@
 
 #define FLAG_UNUSED_0x22                         0x22 // Unused Flag; was FLAG_EC_ITEM_ALTERING_BEAST_BALL, may be set in older saves
 #define FLAG_UNUSED_0x23                         0x23 // Unused Flag; was FLAG_EC_ITEM_ASHEN_HONEY, may be set in older saves
-#define FLAG_UNUSED_0x29                         0x29 // Unused Flag; was FLAG_EC_ITEM_MEADOW_SHINY_STONE, may be set in older saves
+#define FLAG_FOLLOWER_RECALLED                   0x29 // Set when the player recalls their follower from the party menu; no Pokémon follows until one is chosen again (was FLAG_EC_ITEM_MEADOW_SHINY_STONE, a pickup never placed)
 #define FLAG_UNUSED_0x2A                         0x2A // Unused Flag; was FLAG_EC_ITEM_MEADOW_HAWLUCHANITE, may be set in older saves
 #define FLAG_UNUSED_0x2B                         0x2B // Unused Flag; was FLAG_EC_ITEM_EMBER_QUICK_BALL, may be set in older saves
 #define FLAG_UNUSED_0x2E                         0x2E // Unused Flag; was FLAG_EC_ITEM_WOODS2_SUN_STONE, may be set in older saves
@@ -1186,7 +1186,6 @@
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL                 0x465 // Unused Flag, leftover from the Ruby Magma hideout
 #define FLAG_ITEM_SEASPRAY_CAVE_B1_F_DAMP_ROCK                           0x466 // Formerly unused Ruby Magma flag; the pickup is now Absolite Z.
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B2F_NEST_BALL                   0x467 // Unused Flag, leftover from the Ruby Magma hideout
-#define FLAG_FOLLOWER_RECALLED                                      0x468 // Set when the player recalls their follower from the party menu; no Pokémon follows until one is chosen again
 #define FLAG_ITEM_MT_PYRE_2_F_BANETTITE                             0x469
 #define FLAG_ITEM_MT_PYRE_4F_SEA_INCENSE                            0x46A
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_WEST_MAX_REVIVE                 0x46B
@@ -1194,16 +1193,13 @@
 #define FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08                       0x46D // Unused Flag, leftover from R/S. HM08 is given to the player directly in Emerald
 #define FLAG_ITEM_ROUTE_119_TART_APPLE                                  0x46E
 #define FLAG_ITEM_ROUTE_104_POTION                                  0x46F
-#define FLAG_UNUSED_0x470                                           0x470 // Unused Flag
 #define FLAG_ITEM_ROUTE_103_PP_UP                                   0x471
-#define FLAG_UNUSED_0x472                                           0x472 // Unused Flag
 #define FLAG_ITEM_ROUTE_108_DEEP_SEA_TOOTH                              0x473
 #define FLAG_ITEM_ROUTE_109_POTION                                  0x474
 #define FLAG_ITEM_ROUTE_110_FERALIGITE                                  0x475
 #define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
 #define FLAG_ITEM_ROUTE_113_HYPER_POTION                            0x477
 #define FLAG_ITEM_ROUTE_115_AUDINITE                             0x478
-#define FLAG_UNUSED_0x479                                           0x479 // Unused Flag
 #define FLAG_ITEM_ROUTE_116_MEOWSTICITE                                  0x47A
 #define FLAG_ITEM_ROUTE119_SCOLIPITE                                0x47B
 #define FLAG_ITEM_ROUTE120_AERODACTYLITE                                  0x47C
@@ -1232,7 +1228,6 @@
 
 #define FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAGMA_STONE                  0x493
 #define FLAG_WEATHER_INSTITUTE_ROCKS                                0x494 // Restored from Inclement Emerald at its own ID (0x494); slot was an unused placeholder.
-#define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
 #define FLAG_HIDE_LAVARIDGE_POKECENTER_LUCY                         0x496 // Restored from Inclement Emerald at its own ID (0x496); slot was an unused placeholder.
 #define FLAG_HIDE_FORTREE_POKECENTER_SPENSER                        0x497 // Restored from Inclement Emerald at its own ID (0x497); slot was an unused placeholder.
 #define FLAG_DEFEATED_SLATEPORT_GRETA                               0x498 // Restored from Inclement Emerald at its own ID (0x498); slot was an unused placeholder.
@@ -1939,18 +1934,18 @@
 #define FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER                             0x463 // shares 0x463 with FLAG_ITEM_NEW_MAUVILLE_UPGRADE -- same New Mauville item ball, different item
 #define FLAG_ITEM_SLATEPORT_CITY_LIGHT_CLAY                             0x465 // shares 0x465 with FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_119_GRENINJITE                            0x467 // shares 0x467 with FLAG_ITEM_OLD_MAGMA_HIDEOUT_B2F_NEST_BALL (dead: its map.json was overwritten)
-#define FLAG_ITEM_NEW_MAUVILLE_INSIDE_EELEKTROSSITE                             0x468 // shares 0x468 with FLAG_UNUSED_0x468 (dead: its map.json was overwritten)
+#define FLAG_ITEM_NEW_MAUVILLE_INSIDE_EELEKTROSSITE                             0x468
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_SHARPEDONITE                        0x46C // shares 0x46C with FLAG_ITEM_AQUA_HIDEOUT_B1F_PRISM_SCALE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_133_MEDICHAMITE                                0x46D // shares 0x46D with FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08 (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_119_NUGGET                                     0x46E // shares 0x46E with FLAG_ITEM_ROUTE_119_TART_APPLE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_104_SOOTHE_BELL                                0x46F // shares 0x46F with FLAG_ITEM_ROUTE_104_POTION -- same Route 104 item ball, different item
-#define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE                        0x470 // shares 0x470 with FLAG_UNUSED_0x470 (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE_124_EXCADRITE                           0x472 // shares 0x472 with FLAG_UNUSED_0x472 (dead: its map.json was overwritten)
+#define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE                        0x470
+#define FLAG_ITEM_ROUTE_124_EXCADRITE                           0x472
 #define FLAG_ITEM_ROUTE108_GOLURKITE                                 0x473 // shares 0x473 with FLAG_ITEM_ROUTE_108_DEEP_SEA_TOOTH (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_109_ZOOM_LENS                                  0x474 // shares 0x474 with FLAG_ITEM_ROUTE_109_POTION (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_110_ELIXIR                                     0x475 // shares 0x475 with FLAG_ITEM_ROUTE_110_FERALIGITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_115_HERACRONITE                                0x478 // shares 0x478 with FLAG_ITEM_ROUTE_115_AUDINITE (dead: its map.json was overwritten)
-#define FLAG_ITEM_AQUA_HIDEOUT_B1F_BARBARACITE                     0x479 // shares 0x479 with FLAG_UNUSED_0x479 (dead: its map.json was overwritten)
+#define FLAG_ITEM_AQUA_HIDEOUT_B1F_BARBARACITE                     0x479
 #define FLAG_ITEM_ROUTE_116_BINDING_BAND                               0x47A // shares 0x47A with FLAG_ITEM_ROUTE_116_MEOWSTICITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_121_EMBOARITE                                 0x47E // shares 0x47E with FLAG_ITEM_ROUTE_121_REPEAT_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_MAGMA_HIDEOUT_1F_CHESNAUGHTITE                          0x47F // shares 0x47F with FLAG_ITEM_MAGMA_HIDEOUT_1F_ULTRA_BALL (dead: its map.json was overwritten)
@@ -1967,7 +1962,7 @@
 #define FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_CAMERUPTITE                      0x48E // shares 0x48E with FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_MAGMARIZER (dead: its map.json was overwritten)
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_BIG_PEARL                 0x491 // shares 0x491 with FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_BLACK_AUGURITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_SAFARI_ZONE_SOUTHEAST_DELPHOXITE              0x492 // shares 0x492 with FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_PROTECTOR (dead: its map.json was overwritten)
-#define FLAG_ITEM_TRICK_HOUSE_TERRAIN_EXTENDER                         0x495 // shares 0x495 with FLAG_UNUSED_0x495 (dead: its map.json was overwritten)
+#define FLAG_ITEM_TRICK_HOUSE_TERRAIN_EXTENDER                         0x495
 #define FLAG_HIDE_ASHEN_WOODS_POKE_BALL                                0x4E6 // formerly FLAG_EC_CAUGHT_VIRIZION (that dead name is removed: its map.json was overwritten)
 #define FLAG_EVERGRANDE_MEWTWONITEY                                    0x4E7 // formerly FLAG_EC_CAUGHT_LANDORUS (that dead name is removed: its map.json was overwritten)
 #define FLAG_ALTERING_CAVE_MASTER_BALL_1                               0x4E8 // formerly FLAG_EC_CAUGHT_ZYGARDE (that dead name is removed: its map.json was overwritten)

@@ -3860,6 +3860,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_DEFEATED_KYOGRE);
                 FlagClear(FLAG_DEFEATED_GROUDON);
                 AddBagItem(ITEM_REVEAL_GLASS, 1);
+                FlagSet(FLAG_EC_RECEIVED_REVEAL_GLASS);
                 LoadHeadlessMap(MAP_ROUTE119_WEATHER_INSTITUTE_2F, 2, 3);
                 break;
             }
