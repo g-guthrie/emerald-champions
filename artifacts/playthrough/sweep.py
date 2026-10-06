@@ -33,7 +33,10 @@ def log(line):
 
 def main():
     save = sys.argv[1]
+    caps = ''
     for spec in sys.argv[2:]:
+        if spec.startswith('CAPS='):   # field moves the explorer may plan with from here on
+            caps = spec[5:]; continue
         if spec == 'SPRAY':
             # Use the Repel Spray from the Bag (Key Items, 4th) and confirm the game's flag.
             # Bag cursor memory: valid only for the first use; the spray then renews itself
@@ -56,7 +59,8 @@ def main():
         save = t['end_save']
         if skip:
             log(f"| {target} | passed through | arrived {t['x']},{t['y']} | {save} |"); continue
-        r = subprocess.run([PY, str(HERE / 'explore.py'), target, save, 'x-' + tag], cwd=ROOT, capture_output=True, text=True)
+        r = subprocess.run([PY, str(HERE / 'explore.py'), target, save, 'x-' + tag] + (['--caps', caps] if caps else []),
+                           cwd=ROOT, capture_output=True, text=True)
         out = ROOT / 'work/studio/explore' / ('x-' + tag)
         if not (out / 'report.json').exists():
             log(f"| {target} | EXPLORE FAILED | {(r.stdout + r.stderr)[-300:]!r} |"); print('STOP', target); return

@@ -9,6 +9,18 @@ import traceback
 import server
 from scenes import Recorder,keys,packet_state
 from native_tools import read_game_query
+import subprocess
+from functools import lru_cache
+
+
+@lru_cache(maxsize=1)
+def obstacle_graphics():
+    """Graphics ids of field obstacles a walk may clear (enum members, so ask the compiler)."""
+    names=("OBJ_EVENT_GFX_CUTTABLE_TREE","OBJ_EVENT_GFX_BREAKABLE_ROCK")
+    src='#include <stdio.h>\n#include "constants/event_objects.h"\nint main(void){'+"".join(f'printf("%d\\n",{n});' for n in names)+'return 0;}'
+    exe=server.WORK/"obstacle_gfx"
+    subprocess.run(["cc","-I",str(server.ROOT/"include"),"-x","c","-","-o",str(exe)],input=src,text=True,check=True,capture_output=True)
+    return dict(zip(names,map(int,subprocess.check_output([str(exe)],text=True).split())))
 
 async def run(spec,out):
     out=out.resolve()
@@ -245,6 +257,25 @@ async def run(spec,out):
                         live=packet_state(studio.packet,recorder.decoder)["actors"]
                         occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
                         moves=route_steps.path(studio.current_map,here,goal,block=occupied|{tuple(t) for t in step.get("avoid",[])})
+                        if moves is None and step.get("_clears",0)<6:
+                            # A Cut tree, smashable rock or boulder in the way: clear the first one on
+                            # the way (talk to it; Yes is the default) and walk on. The game decides
+                            # whether the player can; a refusal leaves the walk failing visibly.
+                            obstacle={}
+                            for name,gfx in obstacle_graphics().items():
+                                for a in live:
+                                    if gfx is not None and a["graphic"]==int(gfx) and not a["invisible"]:obstacle[(a["x"],a["y"])]=a["local_id"]
+                            via=route_steps.path(studio.current_map,here,goal,block=(occupied-set(obstacle))|{tuple(t) for t in step.get("avoid",[])})
+                            if via is not None:
+                                p=here
+                                for d in via:
+                                    p=(p[0]+d[0],p[1]+d[1])
+                                    if p in obstacle:
+                                        steps_iter.extend_front([{"talk_id":obstacle[p],"mode":"A","label":f"clear {p[0]},{p[1]}","map":studio.current_map},
+                                                                 dict(step,_clears=step.get("_clears",0)+1)])
+                                        break
+                                failure="clearing"
+                                break
                         if moves is None:
                             failure=f"no path on {studio.current_map} from {here} to {goal}"
                         else:
@@ -254,6 +285,9 @@ async def run(spec,out):
                             if failure is None:failure=f"stopped at {(studio.state[4],studio.state[5])} short of {goal}"
                         for f in range(40):
                             studio.ingest(await studio.core.tick(0,frames=1));recorder.observe(studio.packet,0);total+=1
+                    if failure=="clearing":
+                        if step.get("label"):recorder.mark(step["label"]+" (clearing the way)",studio.packet)
+                        continue
                     if failure is None and step.get("face"):
                         # Turn in place: a short tap turns without stepping (a hidden item lies on a
                         # walkable tile, and holding would walk onto it). Confirm with the game.
