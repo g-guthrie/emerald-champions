@@ -473,7 +473,7 @@
       "y": 31,
       "elevation": 3,
       "item": "ITEM_PROTECTOR",
-      "flag": "FLAG_SANDSTREWN_RUINS_PROTECTOR"
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_PROTECTOR"
     },
     {
       "type": "hidden_item",
@@ -481,7 +481,7 @@
       "y": 89,
       "elevation": 3,
       "item": "ITEM_BIG_NUGGET",
-      "flag": "FLAG_SANDSTREWN_RUINS_BIG_NUGGET"
+      "flag": "FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BIG_NUGGET"
     }
   ]
 }

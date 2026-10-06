@@ -21,6 +21,7 @@ def path(map_dir, start, goal, caps=frozenset(), block=None):
     g = R.grid(mid)
     npcs = set(block) if block is not None else {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}
     npcs |= warps(mid)   # stepping on a door, stair or mat leaves the map: only as the goal
+    tp = teleports(mid)
     prev = {start: None}; q = deque([start])
     while q:
         p = q.popleft()
@@ -29,6 +30,7 @@ def path(map_dir, start, goal, caps=frozenset(), block=None):
             n = (p[0] + d[0], p[1] + d[1])
             if n in npcs and n != goal: continue
             r = R.can_enter(g, p, n, d, set(caps))
+            if r and r in tp and r != goal: r = tp[r]
             if r and r not in prev:
                 prev[r] = (p, d); q.append(r)
     if goal not in prev: return None
@@ -44,17 +46,29 @@ def map_id(map_dir):
 
 
 def warps(mid):
-    return {(w['x'], w['y']) for w in R.MAPS[mid].get('warp_events', [])}
+    """Warp tiles that leave the map (doors, stairs, mats)."""
+    return {(w['x'], w['y']) for w in R.MAPS[mid].get('warp_events', []) if w['dest_map'] != mid}
+
+
+def teleports(mid):
+    """Warps back into the same map (Petalburg Woods 3's maze): stepping on one lands on its pair."""
+    ws = R.MAPS[mid].get('warp_events', [])
+    out = {}
+    for w in ws:
+        if w['dest_map'] == mid and 0 <= int(w['dest_warp_id']) < len(ws):
+            d = ws[int(w['dest_warp_id'])]; out[(w['x'], w['y'])] = (d['x'], d['y'])
+    return out
 
 
 def closest_reachable(map_dir, start, target, caps=frozenset(), avoid=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
-    g = R.grid(mid); wp = warps(mid)
+    g = R.grid(mid); wp = warps(mid); tp = teleports(mid)
     seen = {start}; q = deque([start])
     while q:
         p = q.popleft()
         for d in DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
+            if r and r in tp: r = tp[r]
             if r and r not in seen and r not in wp and r not in avoid: seen.add(r); q.append(r)
     # end beside the target, never on an object's own tile (it may load in once we are close)
     objs = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}

@@ -765,11 +765,11 @@
 // data and given proper in-range flags.
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_SUPER_POTION                        (FLAG_HIDDEN_ITEMS_START + 0x2be) // relocated 0x2e3 -> 0x4b2 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_2_HEAL_BALL                           (FLAG_HIDDEN_ITEMS_START + 0x2bf) // relocated 0x2e4 -> 0x4b3 (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_PETALBURG_WOODS_BIG_ROOT                                          (FLAG_HIDDEN_ITEMS_START + 0x2c5) // relocated 0x2db -> 0x4b9 (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_PETALBURG_WOODS_INSECT_PLATE                                      (FLAG_HIDDEN_ITEMS_START + 0x2c6) // relocated 0x2dc -> 0x4ba (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_SANDSTREWN_RUINS_BIG_NUGGET                                       (FLAG_HIDDEN_ITEMS_START + 0x2c8) // relocated 0x2dd -> 0x4bc (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_SANDSTREWN_RUINS_PROTECTOR                                        (FLAG_HIDDEN_ITEMS_START + 0x2ca) // relocated 0x2de -> 0x4be (Sept 23 2026: bit was shared with a live flag)
-#define FLAG_SEASPRAY_CAVE_NEVER_MELT_ICE                                          (FLAG_HIDDEN_ITEMS_START + 0x2cb) // relocated 0x2df -> 0x4bf (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_3_BIG_ROOT                                          (FLAG_HIDDEN_ITEMS_START + 0x2c5) // relocated 0x2db -> 0x4b9 (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_PETALBURG_WOODS_3_INSECT_PLATE                                      (FLAG_HIDDEN_ITEMS_START + 0x2c6) // relocated 0x2dc -> 0x4ba (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_BIG_NUGGET                                       (FLAG_HIDDEN_ITEMS_START + 0x2c8) // relocated 0x2dd -> 0x4bc (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SANDSTREWN_RUINS_PROTECTOR                                        (FLAG_HIDDEN_ITEMS_START + 0x2ca) // relocated 0x2de -> 0x4be (Sept 23 2026: bit was shared with a live flag)
+#define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_NEVER_MELT_ICE                                          (FLAG_HIDDEN_ITEMS_START + 0x2cb) // relocated 0x2df -> 0x4bf (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_SEASPRAY_CAVE_NUGGET                                          (FLAG_HIDDEN_ITEMS_START + 0x2d6) // relocated 0x2e0 -> 0x4ca (Sept 23 2026: bit was shared with a live flag)
 
 #define FLAG_EC_ITEM_SEASPRAY_CAVE_B1F_QUICK_BALL 0x264

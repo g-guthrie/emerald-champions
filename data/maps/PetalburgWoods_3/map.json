@@ -186,7 +186,7 @@
       "y": 32,
       "elevation": 3,
       "item": "ITEM_BIG_ROOT",
-      "flag": "FLAG_PETALBURG_WOODS_BIG_ROOT"
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_3_BIG_ROOT"
     },
     {
       "type": "hidden_item",
@@ -194,7 +194,7 @@
       "y": 41,
       "elevation": 3,
       "item": "ITEM_INSECT_PLATE",
-      "flag": "FLAG_PETALBURG_WOODS_INSECT_PLATE"
+      "flag": "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_3_INSECT_PLATE"
     }
   ],
   "allow_bike": "",

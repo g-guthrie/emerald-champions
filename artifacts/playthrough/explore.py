@@ -54,6 +54,7 @@ def reachable(map_dir, start, caps, gates=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid)
     wp = RS.warps(mid)   # a door, stair or mat leaves the map
+    tp = RS.teleports(mid)
     # field obstacles are objects, not tiles: a Cut tree, smashable rock or Strength boulder is a
     # wall until the move that clears it
     need = {'OBJ_EVENT_GFX_CUTTABLE_TREE': 'cut', 'OBJ_EVENT_GFX_BREAKABLE_ROCK': 'smash',
@@ -65,6 +66,7 @@ def reachable(map_dir, start, caps, gates=frozenset()):
         p = q.popleft()
         for d in RS.DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
+            if r and r in tp: r = tp[r]   # a teleport within the map lands on its pair
             if r and r not in seen and r not in wp and r not in gates and r not in walls:
                 seen.add(r); q.append(r)
     return seen, g

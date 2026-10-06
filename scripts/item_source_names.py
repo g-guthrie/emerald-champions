@@ -122,7 +122,7 @@ def plan():
             if b.get('type') != 'hidden_item': continue
             flag, item = b.get('flag') or '', b['item']
             flag_users.setdefault(flag, []).append((mp, b['x'], b['y'], item))
-            if flag.startswith('FLAG_') and (names_other_item(flag.replace('FLAG_HIDDEN_ITEM_', ''), item, items) or (
+            if flag.startswith('FLAG_') and (not flag.startswith('FLAG_HIDDEN_ITEM_') or names_other_item(flag.replace('FLAG_HIDDEN_ITEM_', ''), item, items) or (
                     flag.startswith('FLAG_HIDDEN_ITEM_') and names_other_map(flag, 'FLAG_HIDDEN_ITEM_', item, mp, maps))):
                 k = (mp, item); hidden_seen[k] = hidden_seen.get(k, 0) + 1
                 suffix = '' if hidden_seen[k] == 1 else f'_{hidden_seen[k]}'
