@@ -176,14 +176,14 @@ static const struct { u16 item; u16 flag; bool8 hoenn; } sStarterStones[] =
     {ITEM_CHARIZARDITE_Y, FLAG_ITEM_VICTORY_ROAD_B1_F_CHARIZARDITE_Y,       FALSE},
     {ITEM_BLASTOISINITE,  FLAG_SEASPRAY_CAVE_BLASTOISINITE,     FALSE},
     {ITEM_MEGANIUMITE,    FLAG_ITEM_ROUTE120_MEGANIUMITE,      FALSE},
-    {ITEM_FERALIGITE,     FLAG_RECEIVED_TM03,                   FALSE},
+    {ITEM_FERALIGITE,     FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F,                   FALSE},
     {ITEM_SCEPTILITE,     FLAG_EC_MEGA_GIFT_SCEPTILITE,         TRUE},
     {ITEM_BLAZIKENITE,    FLAG_EC_MEGA_GIFT_BLAZIKENITE,        TRUE},
     {ITEM_SWAMPERTITE,    FLAG_EC_MEGA_GIFT_SWAMPERTITE,        TRUE},
     {ITEM_EMBOARITE,      FLAG_ITEM_ROUTE_121_EMBOARITE,        FALSE},
     {ITEM_CHESNAUGHTITE,  FLAG_ITEM_MAGMA_HIDEOUT_1_F_CHESNAUGHTITE,           FALSE},
-    {ITEM_DELPHOXITE,     FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL, FALSE},
-    {ITEM_GRENINJITE,     FLAG_ITEM_ROUTE_119_TM62_ACROBATICS,  FALSE},
+    {ITEM_DELPHOXITE,     FLAG_ITEM_SAFARI_ZONE_SOUTHEAST_DELPHOXITE, FALSE},
+    {ITEM_GRENINJITE,     FLAG_ITEM_ROUTE_119_GRENINJITE,  FALSE},
 };
 
 static u16 sSavedStarterVars[4];
@@ -381,7 +381,7 @@ TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a home's earlier co
     EXPECT_EQ(RunNormanGift(), GIFT_FALLBACK);
     EXPECT_EQ(StoneCount(ITEM_FERALIGITE), 1);
     EXPECT_EQ(StoneCount(ITEM_BLAZIKENITE), 1);
-    EXPECT(FlagGet(FLAG_RECEIVED_TM03));
+    EXPECT(FlagGet(FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F));
 
     // Tepig + Snivy after the Route 121 Emboarite: only Snivy's Sceptilite.
     ResetStarterStones(5, 1, 0);
@@ -394,12 +394,12 @@ TEST("Norman's Mega gift: his Feraligite closes Juan's copy; a home's earlier co
 
     // Fennekin + Froakie after the Safari Zone Delphoxite: only Greninjite.
     ResetStarterStones(6, 1, 2);
-    FlagSet(FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL);
+    FlagSet(FLAG_ITEM_SAFARI_ZONE_SOUTHEAST_DELPHOXITE);
     EXPECT(AddBagItem(ITEM_DELPHOXITE, 1));
     EXPECT_EQ(RunNormanGift(), GIFT_ONE);
     EXPECT_EQ(StoneCount(ITEM_DELPHOXITE), 1);
     EXPECT_EQ(StoneCount(ITEM_GRENINJITE), 1);
-    EXPECT(FlagGet(FLAG_ITEM_ROUTE_119_TM62_ACROBATICS));
+    EXPECT(FlagGet(FLAG_ITEM_ROUTE_119_GRENINJITE));
     RestoreStarterVars();
 }
 
@@ -495,8 +495,8 @@ TEST("Wattson Mega gift: either full pocket refuses the combined pending rewards
     enum Item pocketItem, filler;
     PARAMETRIZE { pocketItem = ITEM_MEGA_RING; filler = ITEM_BICYCLE; }
     PARAMETRIZE { pocketItem = ITEM_RAICHUNITE_X; filler = ITEM_AUDINITE; }
-    bool8 saved = FlagGet(FLAG_RECEIVED_TM72);
-    FlagClear(FLAG_RECEIVED_TM72);
+    bool8 saved = FlagGet(FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM);
+    FlagClear(FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM);
     ClearBag();
     ZeroPlayerPartyMons();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
@@ -509,5 +509,5 @@ TEST("Wattson Mega gift: either full pocket refuses the combined pending rewards
     BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
     EXPECT(CanReceiveWattsonMegaGift());
     ClearBag();
-    if (saved) FlagSet(FLAG_RECEIVED_TM72);
+    if (saved) FlagSet(FLAG_RECEIVED_RAICHUNITE_X_MAUVILLE_CITY_GYM);
 }

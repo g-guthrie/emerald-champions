@@ -18,9 +18,9 @@ extern const u8 EventScript_CheckFiniteItem[];
 extern const u8 EventScript_FindOrdinaryItem[];
 extern const u8 EventScript_PickUpDuplicateFiniteItem[];
 extern const u8 Common_EventScript_ObtainFiniteItem[];
-extern const u8 SeafloorCavern_Room9_EventScript_ItemTM26[];
+extern const u8 SeafloorCavern_Room9_EventScript_ItemDragoninite[];
 extern const u8 Seaspray_Cave_ItemStoneEdge[];
-extern const u8 VictoryRoad_B2F_EventScript_ItemFullHeal[];
+extern const u8 VictoryRoad_B2F_EventScript_ItemTyranitarite[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward[];
 extern const u8 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward[];
@@ -45,7 +45,7 @@ TEST("Economy rewards: only a persistent item-ball receipt permits compensation"
     static const struct ObjectEventTemplate objects[] = {
         {.localId = 22, .flagId = 0},
         {.localId = 37, .flagId = FLAG_TEMP_1},
-        {.localId = 5, .flagId = FLAG_ITEM_ROUTE_119_RARE_CANDY},
+        {.localId = 5, .flagId = FLAG_ITEM_ROUTE_119_NUGGET_2},
     };
     static const struct MapEvents events = {
         .objectEventCount = ARRAY_COUNT(objects), .objectEvents = objects,
@@ -65,9 +65,9 @@ TEST("Economy rewards: only a persistent item-ball receipt permits compensation"
 TEST("Economy rewards: live garden-stone pickups enter the shared finite payout path")
 {
     static const struct { u16 map, item; const u8 *script; } rewards[] = {
-        {MAP_SEAFLOOR_CAVERN_ROOM9, ITEM_DRAGONINITE, SeafloorCavern_Room9_EventScript_ItemTM26},
+        {MAP_SEAFLOOR_CAVERN_ROOM9, ITEM_DRAGONINITE, SeafloorCavern_Room9_EventScript_ItemDragoninite},
         {MAP_SEASPRAY_CAVE, ITEM_BAXCALIBRITE, Seaspray_Cave_ItemStoneEdge},
-        {MAP_VICTORY_ROAD_B2F, ITEM_TYRANITARITE, VictoryRoad_B2F_EventScript_ItemFullHeal},
+        {MAP_VICTORY_ROAD_B2F, ITEM_TYRANITARITE, VictoryRoad_B2F_EventScript_ItemTyranitarite},
     };
     struct MapHeader saved = gMapHeader;
     u32 savedMoney = GetMoney(&gSaveBlock1Ptr->money);

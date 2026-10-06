@@ -192,7 +192,7 @@ TEST("Gates follow badges, milestone and family from the gate row")
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
     FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
-    FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagClear(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
 
     // Zeraora: five badges, then Wattson's New Mauville receipt.
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_ZERAORA));
@@ -205,7 +205,7 @@ TEST("Gates follow badges, milestone and family from the gate row")
     // Cresselia: every badge and the milestone, then a Darkrai record.
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
-    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagSet(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
     EXPECT(!CanAcquireLegendarySignSpecies(SPECIES_CRESSELIA));
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_DARKRAI), FLAG_SET_CAUGHT);
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_CRESSELIA));
@@ -213,7 +213,7 @@ TEST("Gates follow badges, milestone and family from the gate row")
     for (u32 badge = 0; badge < NUM_BADGES; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
     FlagClear(FLAG_GOT_TM24_FROM_WATTSON);
-    FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagClear(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
     memcpy(gSaveBlock1Ptr->dexCaught, savedCaught, sizeof(savedCaught));
     ResetSignState();
 }
@@ -840,7 +840,7 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
         FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_RECEIVED_HM06, FLAG_MET_ARCHIE_METEOR_FALLS,
         FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FLAG_BADGE04_GET, FLAG_BADGE05_GET,
         FLAG_RECEIVED_HM03, FLAG_HIDE_ROUTE_119_TEAM_AQUA, FLAG_RECEIVED_DEVON_SCOPE, FLAG_KECLEON_FLED_FORTREE,
-        FLAG_BADGE06_GET, FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_RECEIVED_HM04, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,
+        FLAG_BADGE06_GET, FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT, FLAG_RECEIVED_HM04, FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT,
         FLAG_MET_TEAM_AQUA_HARBOR, FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, FLAG_BADGE07_GET,
         FLAG_DEFEATED_MAGMA_SPACE_CENTER, FLAG_RECEIVED_HM08, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
         FLAG_WALLACE_GOES_TO_SKY_PILLAR,
@@ -942,7 +942,7 @@ TEST("Center guide: story directions follow the campaign, one step at a time")
             BufferNextCenterLegendaryLead();
             EXPECT(GuideTextContains(COMPOUND_STRING("Bag was full")));
         }
-        else if (sStory[i] == FLAG_RECEIVED_RED_OR_BLUE_ORB)
+        else if (sStory[i] == FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT)
         {
             EXPECT(GuideTextContains(COMPOUND_STRING("Strength license")));
         }
@@ -1329,7 +1329,7 @@ TEST("Center guide: every legendary lead states the gate its row enforces")
             ; // The required catch already waits for the same milestone.
         else if (gate->unlockFlag == FLAG_IS_CHAMPION || gate->unlockFlag == FLAG_SYS_GAME_CLEAR)
             ok &= namesHallOfFame;
-        else if (gate->unlockFlag == FLAG_RECEIVED_RED_OR_BLUE_ORB)
+        else if (gate->unlockFlag == FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT)
             ok &= LeadTextContains(text, COMPOUND_STRING("Magma Emblem"))
                || LeadTextContains(text, COMPOUND_STRING("Mt. Pyre"));
         else if (gate->unlockFlag == FLAG_VISITED_FORTREE_CITY)

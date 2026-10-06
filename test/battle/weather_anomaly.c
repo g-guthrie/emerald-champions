@@ -19,7 +19,7 @@ static void PrepareStorm(enum LegendarySignId sign)
     for (u32 i = 0; i < 8; i++)
         FlagSet(FLAG_BADGE01_GET + i);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagSet(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
     FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
     FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);

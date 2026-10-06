@@ -631,7 +631,7 @@ TEST("Campaign gifts: Juan's delayed stone delivery keeps the badge and retries 
     for (u32 slot = 0; slot < stones->capacity; slot++)
         BagPocket_SetSlotItemIdAndCount(stones, slot, ITEM_ABOMASITE, MAX_BAG_ITEM_CAPACITY);
     FlagSet(FLAG_BADGE08_GET);
-    FlagClear(FLAG_RECEIVED_TM03);
+    FlagClear(FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F);
     for (u32 hasRoom = 0; hasRoom < 2; hasRoom++)
     {
         if (hasRoom)
@@ -649,7 +649,7 @@ TEST("Campaign gifts: Juan's delayed stone delivery keeps the badge and retries 
         EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_FERALIGITE), hasRoom);
         EXPECT(FlagGet(FLAG_BADGE08_GET));
         // Receipt follows the item popup; neither stopped path has reached it.
-        EXPECT(!FlagGet(FLAG_RECEIVED_TM03));
+        EXPECT(!FlagGet(FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F));
     }
     ClearBag();
     FlagClear(FLAG_BADGE08_GET);

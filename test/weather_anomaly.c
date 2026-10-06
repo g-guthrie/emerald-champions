@@ -32,7 +32,7 @@ static const u16 sProgressFlags[] = {
     FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
     FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
     FLAG_VISITED_FORTREE_CITY, FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE,
-    FLAG_RECEIVED_RED_OR_BLUE_ORB, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
+    FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN,
     FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, FLAG_IS_CHAMPION,
 };
 
@@ -354,7 +354,7 @@ TEST("Weather anomalies: expiry refills at once with a cooldown and never two pe
     // Every visitor eligible: shared home maps (Route 118, 121, 123, Mt. Pyre)
     // never host two anomalies, and a lone expiry never redraws itself.
     SetBadges(8);
-    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagSet(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
     FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
     FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
     u32 seenVisitors = 0;
@@ -923,7 +923,7 @@ TEST("Weather anomalies: saved scripted weather survives Continue beneath a stor
     ResetAnomalyState();
     SetBadges(6);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+    FlagSet(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
     SetLocation(MAP_ROUTE120);
     SetWeatherAnomalySlot(0, LEGENDARY_SIGN_CALYREX, 1500);
     SetSavedWeather(WEATHER_SUNNY_CLOUDS);
