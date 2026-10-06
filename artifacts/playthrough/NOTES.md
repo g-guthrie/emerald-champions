@@ -79,6 +79,9 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
   Pokedex, ProfessorBirchsLab/scripts.inc:391). Confirm order in play.
 
 ## Known errors in the old manifest (to be redone from evidence)
+- Bonding (friendship evolutions) is locked until the Stone Badge (emerald_champions.inc:482);
+  before it friendship only rises by walking. Steps 4-6 wrongly list Roselia, Marill, Togetic and
+  Pikachu via Bonding; the manifest header must say Bonding opens with the Stone Badge.
 - Step 5: Petalburg Woods (4,26) is a Nugget (item_ball_scripts.inc:354), not Paralyze Heal.
 - Step 6: Rustboro (35,55) Wise Glasses was missed (reachable from Route 104's north edge at x 32-33).
 - Step 6: Seaspray "Stone Edge TM" ball is Baxcalibrite; Route 116 "HP Up" ball is Muscle Band.

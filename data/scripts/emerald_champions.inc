@@ -422,7 +422,8 @@ EmeraldChampions_Text_MoveTutorHowCanHelp:
 EmeraldChampions_Text_MoveTutorNoMachines:
 	.string "I teach any legal move for free.\n"
 	.string "No machines needed!\p"
-	.string "New partners have full EV training.\n"
+	.string "With the Knuckle Badge, new partners\n"
+	.string "arrive with full EV training.\p"
 	.string "EV Training reshapes it for ¥500.\p"
 	.string "Change Abilities for free from\n"
 	.string "a Pokémon's party menu.\p"
