@@ -4693,7 +4693,9 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
                 currentCondition = TRUE;
             break;
         case IF_MIN_FRIENDSHIP:
-            if (friendship >= params[i].arg1)
+            // No friendship evolution before the Stone Badge, the same gate as the
+            // Center tutor's Bonding: friendship still builds and pays off after it.
+            if (friendship >= params[i].arg1 && FlagGet(FLAG_BADGE01_GET))
                 currentCondition = TRUE;
             break;
         case IF_ATK_GT_DEF:

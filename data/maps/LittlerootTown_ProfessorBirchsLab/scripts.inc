@@ -797,7 +797,12 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls: @ 81FAE40
 	.string "I'm going to look all over the place\n"
 	.string "because I want different Pokémon.\p"
 	.string "If I find any cute Pokémon, I'll catch\n"
-	.string "them with Poké Balls!$"
+	.string "them with Poké Balls!\p"
+	.string "Oh! My dad says Pokémon bond with\n"
+	.string "you as you travel together.\p"
+	.string "But no matter how close you get,\n"
+	.string "none will evolve from friendship\l"
+	.string "until you earn your first Badge!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull: @ 81FAEF3
 	.string "Oh? Your Bag's full.$"
@@ -818,7 +823,11 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls: @ 81FAF8E
 	.string "I'm going to explore all over the place\n"
 	.string "to find different Pokémon.\p"
 	.string "If I find any cool Pokémon, you bet\n"
-	.string "I'll try to get them with Poké Balls.$"
+	.string "I'll try to get them with Poké Balls.\p"
+	.string "Oh, and my dad says Pokémon bond\n"
+	.string "with you as you travel together.\p"
+	.string "But none of them will evolve from\n"
+	.string "friendship before your first Badge.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull: @ 81FB05D
 	.string "Hey, your Bag's full.$"

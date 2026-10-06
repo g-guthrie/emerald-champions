@@ -3,13 +3,18 @@ Written route by route from play (artifacts/playthrough: SWEEP.md, EVIDENCE.md, 
 in source; every step is approved by the owner before the next.
 
 Rules
+  Battle numbers (E0001...) are the encounter IDs of data/emerald_champions/emerald_champions_battle_teams.txt,
+  in story order; retired numbers (data/emerald_champions/retired_battles.json) are skipped. Every
+  live battle belongs to exactly one step; the trainer audit walks the steps in order.
   A route trainer's challenger has every area walked before that route, never the route's own new
   Pokemon or items. Exception: the first rival battle on Route 103 also counts Route 103.
   Gym, League and Champion battles count everything reachable when the player walks in.
   Starters: one region, two of its three (Game Corner opens the rest later).
   Levels: the Leveler raises the party to the cap. Evolutions listed are only those reachable by
-  the step's cap. Friendship evolutions need the Center tutor's Bonding, which opens with the Stone
-  Badge (data/scripts/emerald_champions.inc); before it friendship rises only by walking.
+  the step's cap. No friendship evolution happens before the Stone Badge (owner decision;
+  src/pokemon.c IF_MIN_FRIENDSHIP checks FLAG_BADGE01_GET; the rival says so with the Cherish
+  Balls). Friendship still builds by walking, and the Center tutor's Bonding opens with the same
+  Badge, so a raised Budew or Togepi evolves on its first level-up after it.
   EVs: none, player or trainer, before the Knuckle Badge (src/caps.c AreEVsUnlocked).
   Wild Pokemon: the in-game DexNav (Start menu) photographed on every area, checked against
   src/data/wild_encounters.json. It lists only slots that can start a battle now (no Surf table
@@ -27,7 +32,8 @@ Rules
   from the species' itemCommon/itemRare.
 
 ====================================================================================================
-STEP 1 - cap 14 - Rival May / Brendan, Route 103 (battle #1, all six starter variants)
+STEP 1 - cap 14 - Rival May / Brendan, Route 103 (all six starter variants)
+  Battles: E0001 (rival, six variants)
   VERIFIED IN PLAY: legs pt00-pt07 (EVIDENCE.md), full sweep of Littleroot (both houses, lab),
   Route 101, Oldale (Center, Mart, houses), Route 103 (SWEEP.md); DexNav on Routes 101 and 103.
   Pokemon
@@ -39,7 +45,7 @@ STEP 1 - cap 14 - Rival May / Brendan, Route 103 (battle #1, all six starter var
       Grubbin, Shinx (uncommon); Rockruff, Snubbull, Kricketot (rare)
     Evolutions by 14 (species data): Wurmple -> Silcoon / Cascoon (7) -> Beautifly / Dustox (10);
       Scatterbug -> Spewpa (9) -> Vivillon (12); Kricketot -> Kricketune (10). Nothing else here
-      evolves by 14 (next: Shinx 15, starters 16). No Bonding yet.
+      evolves by 14 (next: Shinx 15, starters 16).
     No fishing yet: the Old Rod comes after this battle.
   Before the battle the player must use the Leveler: May refuses below the cap
     (Route103/scripts.inc:44); the Leveler raised the pair to Lv14 in play (pt05).
@@ -62,6 +68,7 @@ STEP 1 - cap 14 - Rival May / Brendan, Route 103 (battle #1, all six starter var
 
 ====================================================================================================
 STEP 2 - cap 14 - Route 102 trainers (Calvin, Rick, Allen, Tiana)
+  Battles: E0002 Calvin, E0003 Rick, E0004 Allen, E0005 Tiana
   VERIFIED IN PLAY: all four beaten (post-battle lines in the Route 102 sweep).
   Adds, after the rival: Pokedex, 30 Cherish Balls (lab, pt07 Bag), Old Rod (Mom, pt06 Bag).
   Old Rod on Route 103 (DexNav = code): Magikarp, Remoraid, Lv 5-10 (common). Route 101 has no water.
@@ -70,6 +77,7 @@ STEP 2 - cap 14 - Route 102 trainers (Calvin, Rick, Allen, Tiana)
 
 ====================================================================================================
 STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
+  Battles: E0006 Billy, E0007 Darian, E0008 Cindy
   VERIFIED IN PLAY: full sweep of Route 102 and Petalburg (city, Center, Mart, both houses, Wally's
   house, Gym lobby; Norman's intro and Wally's catch tutorial played); DexNav on Route 102 and
   Petalburg.
@@ -97,6 +105,7 @@ STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
 
 ====================================================================================================
 STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James, Aqua Grunt)
+  Battles: E0009 Lyle, E0010 Aqua Grunt, E0011 James
   VERIFIED IN PLAY: Route 104 south swept (from Petalburg, up to the Woods); DexNav on Route 104.
   Adds Route 104 south (below the Woods; Mr. Briney's cottage is empty at this point).
   Pokemon
@@ -105,7 +114,7 @@ STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James, Aqua Grunt)
     Old Rod (DexNav = code), Lv 5-10: Magikarp, Skrelp
     Honey (code), Lv 5-7: Cutiefly, Yungoos, Patrat
     Evolutions by 14 (species data): none new (Sentret 15, Fletchling 17). Budew -> Roselia and
-      Azurill -> Marill need friendship: no Bonding before the Stone Badge.
+      Azurill -> Marill are friendship evolutions: they wait for the Stone Badge.
   Battle items
     Berry trees (play): Oran x2, Pecha x2 (a third soil is empty)
     Wild held (species data): Yungoos (- / Pecha Berry), Cutiefly (Honey / -). Budew's Poison Barb
@@ -116,6 +125,7 @@ STEP 4 - cap 14 - Petalburg Woods trainers (Lyle, James, Aqua Grunt)
 
 ====================================================================================================
 STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
+  Battles: E0012 Winston, E0014 Gina & Mia (mandatory: they watch the bridge, tests/test_route104_twins_gate.py)
   VERIFIED IN PLAY: Petalburg Woods swept (Lyle, James and the Aqua Grunt beaten; the Devon
   researcher's gift received), the Woods' east-door pocket of Route 104; DexNav in the Woods.
   Adds Petalburg Woods without Cut (south entrance to north exit) and Route 104's east-door pocket.
@@ -125,7 +135,8 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
     Woods honey (code): Combee 6, Pikachu 6, Pidgey 7-8, Cherubi 7, Pikipek 8
     Evolutions by 14 (species data): Blipbug -> Dottler (10); Caterpie -> Metapod (7) -> Butterfree
       (10); Silcoon / Cascoon -> Beautifly / Dustox (10); Pikipek -> Trumbeak (14). Togepi -> Togetic
-      and Pichu -> Pikachu need friendship: no Bonding yet. Raichu needs a Thunder Stone (none yet).
+      and Pichu -> Pikachu are friendship evolutions: they wait for the Stone Badge. Raichu needs a
+      Thunder Stone (none yet).
   Battle items
     Wild held (species data): Combee (Honey / -), Pikipek (Oran Berry / -), Shroomish, Paras,
       Foongus (Tiny Mushroom / Big Mushroom). Cherubi's Miracle Seed moved to the clerk at floor 0;
