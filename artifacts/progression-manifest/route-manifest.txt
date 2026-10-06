@@ -147,35 +147,56 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
     and 3 - all behind Cut. Route 104 north's own items belong to its trainers' own route.
 
 ====
-STEP 6 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
-  Everything reachable before the Stone Badge. Cut needs the Stone Badge
-  (data/scripts/field_move_scripts.inc:43-47), so no HM obstacle is open.
-  Adds Route 104 north, Rustboro City, Route 116 west, Rusturf Tunnel west, Route 115 south
-  (no grass, so no honey: src/wild_encounter.c:1416), Seaspray Cave 1F. B1F's stairs sit behind a
-  muddy slope (Seaspray_Cave 10,12, MB_MUDDY_SLOPE) that needs the Mach Bike.
+STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
+  Battles: E0020 Joey, E0021 Jose, E0023 Clark, E0023 Johnson, E0024 Devan
+  Deferred: E0017 Cyndy, E0019 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+    it off; reached later from the north), E0025 Dawson, E0025 Sarah, E0026 Janice, E0026 Jerry
+    (Route 116 north, behind Cut trees: after the Stone Badge)
+  VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
+  Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
+  Adds Route 104 north, Rustboro City, Route 115 south and Seaspray Cave 1F (side trips from
+  Rustboro, open before Route 116).
   Pokemon
-    Route 116 grass: Skiddo, Nincada, Starly, Mareep, Joltik, Skitty, Nickit, Rookidee, Houndour,
-      Dreepy
-    Route 116 honey: Teddiursa, Pancham, Purrloin
-    Rusturf Tunnel: Whismur, Noibat, Roggenrola, Teddiursa, Dunsparce, Drilbur, Machop, Larvitar
-    Old Rod: Route 115 Wishiwashi, Wailmer; Seaspray Cave Wishiwashi, Krabby
-    Seaspray Cave 1F: Psyduck, Tynamo, Wooper, Stunfisk (Galar), Zubat
-    Trade: Zigzagoon for a perfect-IV Fidough (RustboroCity_House1; src/data/trade.h:972)
-    Evolutions by 14: Staravia (Starly 14).
-    Wild levels never exceed the cap (src/wild_encounter.c:716).
-    Not live: Poipole (badge 5), Reshiram (Groudon weather visitor), Magearna sign (badge 8),
-      fossils (none held), Terra Cave (abnormal weather).
+    Route 115: no tall grass south of the ledge (so no grass or Honey yet); Old Rod from the beach
+      (DexNav = code), Lv 5-10: Wishiwashi, Wailmer
+    Seaspray Cave 1F (DexNav = code), Lv 10-12: Psyduck, Wooper, Zubat, Tynamo (common); Stunfisk
+      (Galar) (uncommon); Old Rod Lv 5-10: Wishiwashi, Krabby. Rock Smash slots wait for Rock Smash.
+    Trade (code): Zigzagoon for a perfect-IV Fidough (RustboroCity_House1)
+    Evolutions by 14: none new.
   Battle items
-    Gifts: Grass Gem + Steel Gem (Gym guide, RustboroCity_Gym/scripts.inc:164), Quick Claw
-      (PokemonSchool/scripts.inc:86), Float Stone (Flat2_2F/scripts.inc:42), Chesto Berry
-      (Route 104 Expert), daily flower-shop bundle: one of Cheri..Persim plus Pomeg, Kelpsy, Qualot,
-      Hondew, Grepa, Tamato (src/field_specials.c:520)
-    Item balls: Wide Lens (Route 116 55,12), Smooth Rock (Seaspray 5,5)
-    Berry trees: Cheri, Leppa, Oran (Route 104 north)
-    Marts unchanged (Mental Herb, Red Card, Cell Battery); Rustboro Center clerk: Repeat, Timer,
-      Nest Balls only.
-    Wild held items: pending the held-item cleanup.
-  Not here: Shell Bell (Cut), Route 104 PP Up (Surf), Route 116 Binding Band, Ether, HP Up (Cut),
-  White Herb florist (badge 3), Dream Balls and Scope Lens (after Roxanne), Seaspray 1F
-  Blastoisinite, Covert Cloak, Stone Edge TM, Never-Melt Ice (Rock Smash / Surf), Seaspray B1F
-  (Mach Bike): King's Rock, Rocky Helmet, Damp Rock, Icy Rock, Icicle Plate and its Pokemon.
+    Gifts (play): Quick Claw (Pokemon School), Float Stone (Flat 2 2F), Chesto Berry (Route 104
+      woman), Nugget (Route 104 boy), Nugget (Rustboro Mart; a wandering NPC), Wailmer Pail and
+      seven berries (flower shop: Hondew, Pomeg, Grepa, Qualot, Pecha, Kelpsy, Tamato)
+    Item balls (play): Soothe Bell (Route 104), Super Potion (Route 115), Lure Ball and Smooth Rock
+      (Seaspray 1F); hidden Super Potion (Route 104 7,6), Poke Ball (Route 104 3,9), Bottle Cap
+      (Rustboro); Premier Ball (Flat 2 2F)
+    Berry trees (play, Route 104 north): Cheri x4, Oran x2, Leppa x2 (two soils empty)
+    Wild held (species data): none new.
+  Not yet: Route 104 PP Up (Surf), Shell Bell (Cut), White Herb florist (absent: story), Seaspray
+    Blastoisinite (Surf), Covert Cloak (Rock Smash), Baxcalibrite, hidden Never-Melt Ice and Nugget
+    (past them), Seaspray B1F (Mach Bike).
+
+====================================================================================================
+STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
+  Battles: E0027 Josh, E0028 Tommy, E0029 Marc, E0030 Roxanne
+  VERIFIED IN PLAY: Route 116 west and Rusturf Tunnel west swept; all four Gym battles won.
+  Everything reachable before the Stone Badge: adds Route 116 west and Rusturf Tunnel west.
+  Pokemon
+    Route 116 grass (DexNav = code), Lv 8-10: Starly, Skiddo, Nincada (common); Mareep, Joltik,
+      Rookidee (uncommon); Skitty, Nickit, Houndour, Dreepy (rare)
+    Route 116 honey (code): Teddiursa 8, Pancham 8-9, Purrloin 9-10
+    Rusturf Tunnel (DexNav = code), Lv 8-10: Whismur, Noibat, Roggenrola (common); Teddiursa,
+      Dunsparce, Drilbur, Larvitar (uncommon); Machop (rare)
+    Evolutions by 14 (species data): Starly -> Staravia (14).
+  Battle items
+    Gifts (play): Grass Gem + Steel Gem (Gym guide, on the walk in)
+    Item balls (play): Wide Lens, Repel (Route 116); Poke Ball (Rusturf Tunnel)
+    Wild held (species data): Teddiursa (- / Honey), Roggenrola (Everstone / -). Nincada's Soft
+      Sand, Roggenrola's Hard Stone and Machop's Focus Band moved to the clerk at floor 0; Pancham's
+      Mental Herb removed (the clerk already stocks it).
+  Not yet: Route 116 north behind Cut (Ether, hidden Super Potion, Binding Band, four berry trees,
+    Dawson, Sarah, Janice, Jerry); Rusturf Tunnel past the rocks (Eject Pack, Mike, Wanda: Rock
+    Smash); Route 116 east (Muscle Band, Glasses Man, hidden Black Glasses: from Verdanturf);
+    the Tunnelers' Rest House (Wanda's boyfriend blocks the door until the tunnel story).
+  After the battle (play): Stone Badge (cap 20, Cut with the Cutter's license, Bonding and
+    friendship evolutions open), Glimmoranite.
