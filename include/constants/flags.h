@@ -670,7 +670,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET                                      (FLAG_HIDDEN_ITEMS_START + 0xaa)
 #define FLAG_HIDDEN_ITEM_ROUTE_114_REVIVE_2                                      (FLAG_HIDDEN_ITEMS_START + 0xab)
 #define FLAG_HIDDEN_ITEM_ROUTE_113_NUGGET_2                                       (FLAG_HIDDEN_ITEMS_START + 0xac)
-#define FLAG_HIDDEN_ITEM_ROUTE_114_PROTECTIVE_PADS                                      (FLAG_HIDDEN_ITEMS_START + 0xad)
+#define FLAG_HIDDEN_ITEM_ROUTE_114_PUNCHING_GLOVE                                      (FLAG_HIDDEN_ITEMS_START + 0xad)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_BOTTLE_CAP                                  (FLAG_HIDDEN_ITEMS_START + 0xae)
 #define FLAG_HIDDEN_ITEM_ROUTE_115_FIST_PLATE                                  (FLAG_HIDDEN_ITEMS_START + 0xaf)
 #define FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES                               (FLAG_HIDDEN_ITEMS_START + 0x2e) // relocated 0x2a4 -> 0x222 (Sept 23 2026: bit was shared with a live flag)
@@ -1078,7 +1078,7 @@
 #define FLAG_ITEM_ROUTE_111_DRAMPANITE                            0x3F0
 #define FLAG_ITEM_ROUTE_111_QUICK_BALL                              0x3F2
 #define FLAG_ITEM_ROUTE_112_SKARMORITE                                  0x3F3
-#define FLAG_ITEM_ROUTE_113_MAX_ETHER                               0x3F4
+#define FLAG_ITEM_ROUTE_113_GLIMMORANITE                               0x3F4
 #define FLAG_ITEM_ROUTE_113_SUPER_REPEL                             0x3F5
 #define FLAG_ITEM_ROUTE_114_ULTRA_BALL                              0x3F6
 #define FLAG_ITEM_ROUTE_114_TIMER_BALL                              0x3F7
@@ -1118,7 +1118,7 @@
 #define FLAG_ITEM_GRANITE_CAVE_1F_BLACK_BELT                       0x41A
 #define FLAG_ITEM_GRANITE_CAVE_B1F_ALAKAZITE                        0x41B
 #define FLAG_ITEM_MT_PYRE_5_F_ALAKAZITE                            0x41C
-#define FLAG_ITEM_GRANITE_CAVE_B2F_AGGRONITE                            0x41D
+#define FLAG_ITEM_GRANITE_CAVE_B2F_THROAT_SPRAY                            0x41D
 #define FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE                       0x41E
 #define FLAG_ITEM_PETALBURG_WOODS_HERACRONITE                         0x41F
 #define FLAG_ITEM_PETALBURG_WOODS_SCOLIPITE                        0x420
@@ -1198,7 +1198,7 @@
 #define FLAG_ITEM_ROUTE_109_POTION                                  0x474
 #define FLAG_ITEM_ROUTE_110_FERALIGITE                                  0x475
 #define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
-#define FLAG_ITEM_ROUTE_113_HYPER_POTION                            0x477
+#define FLAG_ITEM_ROUTE_113_AGGRONITE                            0x477
 #define FLAG_ITEM_ROUTE_115_AUDINITE                             0x478
 #define FLAG_ITEM_ROUTE_116_MEOWSTICITE                                  0x47A
 #define FLAG_ITEM_ROUTE119_SCOLIPITE                                0x47B
@@ -1836,7 +1836,7 @@
 #define FLAG_ITEM_SANDSTREWN_RUINS_ABILITY_SHIELD                               0x1AA // formerly FLAG_EC_ITEM_ROUTE111_ALTARIANITE (that dead name is removed: its map.json was overwritten)
 #define FLAG_ROUTE_131_SPLASH_PLATE                                    0x1DA // formerly FLAG_EC_ITEM_ROUTE119_QUICK_BALL (that dead name is removed: its map.json was overwritten)
 #define FLAG_SCORCHED_SLAB_DUSK_BALLS                                0x1E1 // formerly FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_HONEY (that dead name is removed: its map.json was overwritten)
-#define FLAG_ITEM_GRANITE_CAVE_B1F_GLIMMORANITE                                0x1E2 // formerly FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_DUSK_BALL (that dead name is removed: its map.json was overwritten)
+#define FLAG_ITEM_GRANITE_CAVE_B1F_PROTECTIVE_PADS                                0x1E2 // formerly FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_DUSK_BALL (that dead name is removed: its map.json was overwritten)
 #define FLAG_ROUTE_117_MAWILITE                                        0x1E3 // formerly FLAG_EC_ITEM_SEASPRAY_CAVE_DUSK_BALL (that dead name is removed: its map.json was overwritten)
 #define FLAG_HIDE_ROUTE_116_DROPPED_GLASSES_MAN                        0x32D // shares 0x32D with FLAG_HIDE_ROUTE_116_DUSK_STONE_SEEKER (dead: its map.json was overwritten)
 #define FLAG_ITEM_MIRAGE_TOWER_4_F_GHOST_GEM                             0x339 // shares 0x339 with FLAG_HIDE_LEGEND_MON_CAVE_OF_ORIGIN (dead: its map.json was overwritten)
@@ -1849,7 +1849,7 @@
 #define FLAG_ITEM_ROUTE110_ASSAULT_VEST                                  0x3EF // shares 0x3EF with FLAG_ITEM_ROUTE_110_FAST_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE111_ROOM_SERVICE                                      0x3F0 // shares 0x3F0 with FLAG_ITEM_ROUTE_111_DRAMPANITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_111_BIG_NUGGET                                 0x3F2 // shares 0x3F2 with FLAG_ITEM_ROUTE_111_QUICK_BALL (dead: its map.json was overwritten)
-#define FLAG_ITEM_ROUTE112_HEAVY_DUTY_BOOTS                              0x3F3 // shares 0x3F3 with FLAG_ITEM_ROUTE_112_SKARMORITE (dead: its map.json was overwritten)
+#define FLAG_ITEM_ROUTE_112_MACHAMPITE                              0x3F3 // shares 0x3F3 with FLAG_ITEM_ROUTE_112_SKARMORITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_113_SHINY_STONE                                0x3F5 // shares 0x3F5 with FLAG_ITEM_ROUTE_113_SUPER_REPEL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE_114_NUGGET                                 0x3F6 // shares 0x3F6 with FLAG_ITEM_ROUTE_114_ULTRA_BALL (dead: its map.json was overwritten)
 #define FLAG_ITEM_ROUTE114_WEAKNESS_POLICY                              0x3F7 // shares 0x3F7 with FLAG_ITEM_ROUTE_114_TIMER_BALL (dead: its map.json was overwritten)
@@ -1879,7 +1879,7 @@
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_ZERAORITE                             0x414 // shares 0x414 with FLAG_ITEM_METEOR_FALLS_1F_1R_AGGRONITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_COMET_SHARD                       0x415 // shares 0x415 with FLAG_ITEM_METEOR_FALLS_1F_1R_FULL_HEAL (dead: its map.json was overwritten)
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_FAIRY_FEATHER                 0x416 // shares 0x416 with FLAG_ITEM_METEOR_FALLS_1F_1R_MOON_STONE (dead: its map.json was overwritten)
-#define FLAG_ITEM_RUSTURF_TUNNEL_MACHAMPITE                             0x419 // shares 0x419 with FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER (dead: its map.json was overwritten)
+#define FLAG_ITEM_RUSTURF_TUNNEL_HEAVY_DUTY_BOOTS                             0x419 // shares 0x419 with FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER (dead: its map.json was overwritten)
 #define FLAG_ITEM_GRANITE_CAVE_B1F_POKE_BALL                           0x41B // shares 0x41B with FLAG_ITEM_GRANITE_CAVE_B1F_ALAKAZITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_GRANITE_CAVE_B2F_NUGGET                          0x41E // shares 0x41E with FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE (dead: its map.json was overwritten)
 #define FLAG_ITEM_PETALBURG_WOODS_REVIVE                               0x41F // shares 0x41F with FLAG_ITEM_PETALBURG_WOODS_HERACRONITE (dead: its map.json was overwritten)

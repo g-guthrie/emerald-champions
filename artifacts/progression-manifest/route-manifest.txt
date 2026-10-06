@@ -37,8 +37,9 @@ Rules
   cap. A revisited route keeps its own levels. Levels quoted in Steps 1-14 are the old tables.
   Mega Stones: none before the Mega Ring (Wattson, Dynamo Badge; owner decision). Early gifts give
   a battle item instead and the stone waits in a sparkle behind Rock Smash (licensed with the same
-  Badge): Glimmoranite (Granite B1F) for Roxanne's Rocky Helmet, Machampite (Rusturf Tunnel) for
-  Brawly's Punching Glove, Aggronite (Granite B2F) for the Devon employee's Eject Pack.
+  Badge; checked against whole-world reach with Cut, Bike and Strength): Glimmoranite and
+  Aggronite (Route 113) for Roxanne's Rocky Helmet and the Devon employee's Eject Pack, Machampite
+  (Route 112) for Brawly's Punching Glove.
   Worthless pickups (Potion, Ether, Repel, Escape Rope, status heals) become battle items.
 
 ====================================================================================================
@@ -209,7 +210,7 @@ STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
       Sand, Roggenrola's Hard Stone and Machop's Focus Band moved to the clerk at floor 0; Pancham's
       Mental Herb removed (the clerk already stocks it).
   Not yet: Route 116 north behind Cut (Ether, hidden Super Potion, Binding Band, four berry trees,
-    Dawson, Sarah, Janice, Jerry); Rusturf Tunnel past the rocks (Machampite sparkle, Mike, Wanda:
+    Dawson, Sarah, Janice, Jerry); Rusturf Tunnel past the rocks (Heavy-Duty Boots, Mike, Wanda:
     Rock Smash); Route 116 east (Muscle Band, Glasses Man, hidden Black Glasses: from Verdanturf);
     the Tunnelers' Rest House (Wanda's boyfriend blocks the door until the tunnel story).
   After the battle (play): Stone Badge (cap 20, Cut with the Cutter's license, Bonding and
@@ -326,7 +327,7 @@ STEP 12 - cap 20 - Route 106 and Granite Cave (the pool for Route 109)
       (- / Thick Club), Ditto (Quick Powder / Metal Powder), Hawlucha (- / King's Rock), Crabrawler (-
       / Aspear Berry). Battle items moved: Twisted Spoon, Grip Claw, Dragon Fang, Psychic Seed to
       the clerk from the Stone Badge; Black Belt is the Granite pickup.
-  Not yet: B1F Glimmoranite and B2F Aggronite sparkles, B2F Nugget and a second hidden Everstone (Rock Smash /
+  Not yet: B1F Protective Pads, B2F Throat Spray, B2F Nugget and a second hidden Everstone (Rock Smash /
     the other side), Route 106 hidden Big Pearl (Rock Smash), Route 106 water (Surf).
 
 ====================================================================================================
