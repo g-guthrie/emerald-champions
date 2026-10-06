@@ -2412,6 +2412,21 @@ bool8 GetFollowerInfo(enum Species *species, bool32 *shiny, bool32 *female)
     return GetMonInfo(GetFollowerMon(), species, shiny, female);
 }
 
+// Followers larger than 32x32 wait in their Poké Ball indoors.
+static bool32 IsFollowerTooBigForIndoors(enum Species species, bool32 shiny, bool32 female)
+{
+    const struct ObjectEventGraphicsInfo *graphicsInfo = SpeciesToGraphicsInfo(species, shiny, female);
+    return graphicsInfo != NULL && graphicsInfo->oam->size > ST_OAM_SIZE_2;
+}
+
+bool32 IsMonTooBigToFollowIndoors(struct Pokemon *mon)
+{
+    enum Species species;
+    bool32 shiny, female;
+
+    return GetMonInfo(mon, &species, &shiny, &female) && IsFollowerTooBigForIndoors(species, shiny, female);
+}
+
 // Update following Pokémon if any
 void UpdateFollowingPokemon(void)
 {
@@ -2430,7 +2445,7 @@ void UpdateFollowingPokemon(void)
      || FlagGet(B_FLAG_FOLLOWERS_DISABLED)
      || !GetFollowerInfo(&species, &shiny, &female)
      || SpeciesToGraphicsInfo(species, shiny, female) == NULL
-     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, shiny, female)->oam->size > ST_OAM_SIZE_2)
+     || (gMapHeader.mapType == MAP_TYPE_INDOOR && IsFollowerTooBigForIndoors(species, shiny, female))
      || FlagGet(FLAG_TEMP_HIDE_FOLLOWER)
      || PlayerHasFollowerNPC()
      )
@@ -9579,14 +9594,29 @@ void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 sub
 
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
+    bool32 isHugeFollower;
+
     if (objEvent->fixedPriority)
         return;
+
+    isHugeFollower = objEvent->localId == OBJ_EVENT_ID_FOLLOWER && GetObjectEventGraphicsInfo(objEvent->graphicsId)->height > 32;
 
     // If transitioning between elevations, use the player's elevation
     if (!objEvent->currentElevation && (objEvent->localId == OBJ_EVENT_ID_FOLLOWER || objEvent->localId == OBJ_EVENT_ID_NPC_FOLLOWER))
         objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
     SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
+
+    // A huge follower (Regigigas, Wailord, Steelix...) one tile behind the
+    // player would otherwise be drawn over the player and hide them entirely.
+    // It stays behind the player; against everything else it keeps its depth.
+    if (isHugeFollower)
+    {
+        u8 playerSubpriority = gSprites[gObjectEvents[gPlayerAvatar.objectEventId].spriteId].subpriority;
+
+        if (sprite->subpriority <= playerSubpriority && playerSubpriority < 0xFF)
+            sprite->subpriority = playerSubpriority + 1;
+    }
 }
 
 bool8 AreElevationsCompatible(u8 a, u8 b)

@@ -153,6 +153,7 @@ bool32 CanMonFollow(struct Pokemon *mon);
 struct Pokemon *GetFollowerMon(void);
 void SetFollowerMon(struct Pokemon *follower);
 void RecallFollowerMon(void);
+bool32 IsMonTooBigToFollowIndoors(struct Pokemon *mon);
 enum Species GetOverworldWeatherSpecies(enum Species species);
 void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);

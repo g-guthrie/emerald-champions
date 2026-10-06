@@ -520,6 +520,7 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nAbility to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_MonIsFollowingYou[] = _("{STR_VAR_1} is following you!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_HugeMonIsFollowingYou[] = _("{STR_VAR_1} is following you!\nIt waits in its Poké Ball indoors.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_MonReturnedToBall[] = _("{STR_VAR_1} returned to its Poké Ball.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_WhichAbility[] = _("Which Ability?");
@@ -7487,7 +7488,7 @@ static void CursorCb_Follow(u8 taskId)
     PlaySE(SE_SELECT);
     SetFollowerMon(mon);
     PlayCry_NormalNoDucking(GetMonData(mon, MON_DATA_SPECIES), 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
-    ShowFollowChoiceMessage(taskId, mon, sText_MonIsFollowingYou);
+    ShowFollowChoiceMessage(taskId, mon, IsMonTooBigToFollowIndoors(mon) ? sText_HugeMonIsFollowingYou : sText_MonIsFollowingYou);
 }
 
 // Nobody follows until a Pokemon is chosen again.
