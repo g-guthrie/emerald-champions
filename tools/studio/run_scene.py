@@ -194,7 +194,8 @@ async def run(spec,out):
                         mid=(target[0]+dx//2,target[1]+dy//2)
                         if not route_steps.is_counter(studio.current_map,mid):continue
                     # never stand on another actor or on a door, stair or mat (it would leave the map)
-                    if spot in occupied or spot in gates or (spot!=here and spot in route_steps.warps(route_steps.map_id(studio.current_map))):continue
+                    mid_=route_steps.map_id(studio.current_map)
+                    if spot in occupied or spot in gates or (spot!=here and (spot in route_steps.warps(mid_) or spot in route_steps.teleports(mid_))):continue
                     mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,caps=OBSTACLE_CAPS,block=occupied|gates)
                     if mv is not None:options.append((len(mv),spot,face))
                 if not options:

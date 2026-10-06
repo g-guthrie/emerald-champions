@@ -103,7 +103,8 @@ def plan(map_dir, start, caps, skip, gates=frozenset(), live=None):
     # photo stops: greedy cover of every reachable tile with a 15x10 screen window
     uncovered = set(tiles); photos = []
     # a photo stop is a tile to stand on: never one an object occupies
-    stands = set(tiles) - {(o['x'], o['y']) for o in m.get('object_events', [])} or set(tiles)
+    stands = (set(tiles) - {(o['x'], o['y']) for o in m.get('object_events', [])}
+              - set(RS.teleports(mid))) or set(tiles)   # a teleport tile sends the player away
     while uncovered:
         best = max(stands, key=lambda t: sum(1 for u in uncovered if abs(u[0] - t[0]) <= 7 and abs(u[1] - t[1]) <= 4))
         photos.append(best)
