@@ -2,7 +2,7 @@
 #include "test/battle.h"
 
 // Mimicry takes the terrain's type while a terrain is up and keeps the
-// species' own types otherwise. E0029 and E0001: Galarian Stunfisk entered a
+// species' own types otherwise. E0025 and E0001: Galarian Stunfisk entered a
 // field with no terrain, and outlasted an Electric Terrain, and each time
 // printed "Stunfisk's type changed to None!" and became typeless.
 

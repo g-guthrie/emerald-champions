@@ -1,8 +1,8 @@
 {
   "rerun_of": "work/playtest/25-TRAINER_JOSH/receipt.json",
-  "rerun_reason": "AI check only. The main agent asked for a re-test of the Naclstack empty-consecutive-Protect defect recorded in the first pass, on the rebuilt headless ROM that prices setup/support moves and charges healthy turn-one switches. No level change was authored for E0027 between the passes.",
+  "rerun_reason": "AI check only. The main agent asked for a re-test of the Naclstack empty-consecutive-Protect defect recorded in the first pass, on the rebuilt headless ROM that prices setup/support moves and charges healthy turn-one switches. No level change was authored for E0023 between the passes.",
   "play_order": 25,
-  "e_group": "E0027",
+  "e_group": "E0023",
   "trainer": "TRAINER_JOSH",
   "class": "gym",
   "location": "RustboroCity_Gym",
@@ -84,7 +84,7 @@
       "note": "Roughly a 4-5x increase in opponent scoring time on identical boards. Reported as a sampled measurement, not a worst-case proof, and flagged for the AI owner because it is a user-visible battle pause."
     }
   ],
-  "level_changes": "none. Won on the first attempt but with two player faints out of six against six opponent faints, which is the brief's 'won after a real fight' band. Keep the authored offsets (3/4/5/4/1/4). The main agent authored no level change for E0027 between the passes and the band does not call for one now.",
+  "level_changes": "none. Won on the first attempt but with two player faints out of six against six opponent faints, which is the brief's 'won after a real fight' band. Keep the authored offsets (3/4/5/4/1/4). The main agent authored no level change for E0023 between the passes and the band does not call for one now.",
   "cooler_note": "Unchanged from the first pass, and this run sharpened the point. Naclstack has now failed to contribute in two runs for two different reasons - last-slot deployment then an instant spread knockout - and its Salt Cure/Recover pair has still never been seen. The suggestion stands: deploy Naclstack beside Onix, whose Taunt (which did fire this time, and well) creates exactly the slow grindy turns Salt Cure is written for. The Acid Spray relay firing this run is the fight's best moment and is worth protecting in any future edit.",
   "authored_set_legality": "No legality problem found.",
   "evidence": {

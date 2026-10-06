@@ -1,12 +1,12 @@
 {
   "play_order": 19,
-  "e_group": "E0023",
+  "e_group": "E0020",
   "trainer": "TRAINER_JOHNSON",
   "class": "regular",
   "location": "Route116",
   "cap_window": 14,
   "pass": "rerun (pass 2) - AI check only, no level changes were in scope for this trainer",
-  "purpose": "Re-test the pass-1 defect E0023-JOHNSON-ENDEAVOR-DECLINED: a 2 HP Doduo choosing Quick Attack over Endeavor against a healthy target.",
+  "purpose": "Re-test the pass-1 defect E0020-JOHNSON-ENDEAVOR-DECLINED: a 2 HP Doduo choosing Quick Attack over Endeavor against a healthy target.",
   "outcome": "WON on attempt 1, 5 turns, 2 player faints. Levels KEPT (unchanged from pass 1, which also kept them).",
   "party_manifest": "work/playtest/party-cap14-route115-chrono.json",
   "party_manifest_note": "New chronology-checked party; the pass-1 party used Seaspray Cave, Verdanturf Meadow and Altering Cave species that a player has not reached at Route 116.",
@@ -88,14 +88,14 @@
   "ai_defects": [],
   "ai_defects_resolved": [
     {
-      "id": "E0023-JOHNSON-ENDEAVOR-DECLINED",
+      "id": "E0020-JOHNSON-ENDEAVOR-DECLINED",
       "status": "RESOLVED",
       "evidence": "Pass 1: Doduo at 2/38 against a healthy 45/45 Whimsicott chose Quick Attack (about 10 damage) over Endeavor (about 43). Pass 2 on a deliberately reconstructed equivalent board - Doduo at 1/38, Sash spent, against a 65/65 Tangrowth - it chose MOVE_ENDEAVOR and landed it. The affected_index_hint from pass 1 (Flail / Reversal / Final Gambit users) should be treated as covered by the same change."
     }
   ],
   "ai_observations": [
     {
-      "id": "E0023-HELPING-HAND-ONTO-ENDEAVOR",
+      "id": "E0020-HELPING-HAND-ONTO-ENDEAVOR",
       "severity": "medium",
       "turn": 4,
       "board": "Shinx 28/55 with Wild Charge, Crunch, Helping Hand and Protect, beside a 1/38 Doduo. Opposite: Tangrowth 65/65 and Arcanine 41/53.",
@@ -104,7 +104,7 @@
       "assessment": "This is the sharpest remaining coordination gap I found. The AI clearly has pair coordination (src/battle_ai_pair.c) and the engine knows Doduo's chosen move, yet the support turn was spent on a partner action it cannot affect. The dossier anticipates this exact mistake in writing, which suggests it was a known risk. The fix is narrow: Helping Hand should score zero when the partner's selected move is a fixed-damage or level/HP-based move (Endeavor, Seismic Toss, Night Shade, Dragon Rage, Sonic Boom, Super Fang, Final Gambit). Not scored as a hard defect only because I cannot be certain from the outside that the pair scorer had Doduo's choice available at the time it scored Shinx."
     },
     {
-      "id": "E0023-FLETCHINDER-SUPPORT-MOVES-UNREACHED",
+      "id": "E0020-FLETCHINDER-SUPPORT-MOVES-UNREACHED",
       "severity": "low",
       "turns": "1-2",
       "observed": "Tailwind and Will-O-Wisp have now gone unselected across two passes and four total Fletchinder decisions.",

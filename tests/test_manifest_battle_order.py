@@ -45,7 +45,7 @@ class ManifestBattleOrder(unittest.TestCase):
     def test_battles_are_live_ordered_and_contiguous(self):
         live, retired = live_battles()
         steps = manifest_steps()
-        # one number can group several trainers (E0023 Clark and Johnson): unique within a step
+        # one number can group several trainers (E0020 Clark and Johnson): unique within a step
         listed = [n for _, ns, _ in steps for n in sorted(set(ns))]
         self.assertTrue(listed, 'no step lists its battles')
         for n in listed:

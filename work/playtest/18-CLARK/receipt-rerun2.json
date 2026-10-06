@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
   "play_order": 18,
-  "e_group": "E0023",
+  "e_group": "E0020",
   "trainer": "TRAINER_CLARK",
   "class": "regular",
   "location": "Route116",
@@ -39,7 +39,7 @@
   "strategy_checks": [
     {
       "check": "Wide Guard only against meaningful spread pressure, otherwise attack or a worthwhile Iron Defense play",
-      "result": "NOT EXERCISED for Wide Guard; the Iron Defense half was a poor turn (see E0023-W1)",
+      "result": "NOT EXERCISED for Wide Guard; the Iron Defense half was a poor turn (see E0020-W1)",
       "evidence": "I opened with two single-target moves, so there was no spread to block on turn 1 and declining Wide Guard was right. Roggenrola instead used Iron Defense at 22/58 and died the next turn without attacking or using the Body Press that the boost exists to feed."
     },
     {
@@ -74,7 +74,7 @@
   "ai_defects_newly_introduced": [],
   "ai_weak_choices": [
     {
-      "id": "E0023-W1",
+      "id": "E0020-W1",
       "turn": 1,
       "board": "Roggenrola at 22/58 after a super-effective Close Combat, opposite a Heracross holding Close Combat and a Shiftry holding Leaf Blade (both super effective on Rock), with Rock Slide and Body Press in its own kit.",
       "chosen": "Iron Defense.",

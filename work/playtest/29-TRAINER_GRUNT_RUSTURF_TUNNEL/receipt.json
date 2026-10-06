@@ -36,7 +36,7 @@
       {"member": "QWILFISH", "offset_before": 2, "offset_after": 3, "level_before": 20, "level_after": 21},
       {"member": "SKRELP", "offset_before": 3, "offset_after": 4, "level_before": 21, "level_after": 22}
     ],
-    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. scripts/emerald_champions_teams.py --check currently reports the generated master as stale because other authored edits from a concurrent session are also in the working tree; I deliberately did not run --write so as not to clobber that session's in-flight generation. The main agent materializes. For E0030 earlier in this block I did run --write then --check and all three gates passed.",
+    "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. scripts/emerald_champions_teams.py --check currently reports the generated master as stale because other authored edits from a concurrent session are also in the working tree; I deliberately did not run --write so as not to clobber that session's in-flight generation. The main agent materializes. For E0026 earlier in this block I did run --write then --check and all three gates passed.",
     "rerun": "NOT PERFORMED. The driver reads opponent levels from the compiled ROM and this machine's arm-none-eabi toolchain cannot build one (fatal error: stdint.h: No such file or directory), so work/agent-battle-build still holds the pre-change image.",
     "note": "These two +1s are the rule-mandated minimum and I do not expect them to change the result. The structural issue is that this grunt fields four members against a six-member optimized party, so it is outnumbered before type matchups are considered - see the cooler note."
   },

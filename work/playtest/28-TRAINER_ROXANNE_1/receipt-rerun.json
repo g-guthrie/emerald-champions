@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/28-TRAINER_ROXANNE_1/receipt.json",
   "rerun_reason": "Confirming rerun for the level changes the first pass authored but could not verify (that machine could not rebuild the ROM). Since the first pass: TYRANTRUM offset 1->2, OMASTAR 2->3, and AERODACTYL 0->2 - the follow-up the first pass recommended and the main agent approved. The headless ROM also now carries the AI setup/support pricing and the healthy-turn-one-switch charge.",
   "play_order": 28,
-  "e_group": "E0030",
+  "e_group": "E0026",
   "trainer": "TRAINER_ROXANNE_1",
   "class": "leader",
   "location": "RustboroCity_Gym",

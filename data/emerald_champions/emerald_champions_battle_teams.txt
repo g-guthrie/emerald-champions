@@ -186,7 +186,7 @@ MINUN @SITRUS_BERRY MINUS TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, HELPING_HAND, E
 VOLBEAT @LUM_BERRY PRANKSTER MODEST 252/0/4/252/0/0 4 | TAIL_GLOW, ROOST, BUG_BUZZ, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ILLUMISE @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 4 | DAZZLING_GLEAM, AIR_SLASH, ENCORE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0017 TRAINER_CYNDY_1 class=regular
+## E0027 TRAINER_CYNDY_1 class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Riolu and Meditite keep Cyndy’s support opening: Prankster Screech or Quick Guard opens a physical hit, while Fake Out buys a turn and Pure Power strengthens Drain Punch. Crabominable supplies Iron Fist Ice Hammer for Flying targets, Drain Punch recovery and Thunder Punch coverage. Tinkaton switches into the Fairy, Flying, Psychic, Dark and Bug attacks that threaten its partners, then uses Gigaton Hammer, Mold Breaker Play Rough or Knock Off. It cannot use Gigaton Hammer on consecutive turns.
@@ -196,7 +196,7 @@ MEDITITE @SITRUS_BERRY PURE_POWER JOLLY 4/252/0/0/0/252 9 | FAKE_OUT, DRAIN_PUNC
 CRABOMINABLE @SITRUS_BERRY IRON_FIST ADAMANT 252/252/0/0/4/0 9 | ICE_HAMMER, DRAIN_PUNCH, THUNDER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TINKATON @LEFTOVERS MOLD_BREAKER ADAMANT 252/252/0/0/4/0 11 | GIGATON_HAMMER, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0019 TRAINER_MARLENE class=regular
+## E0028 TRAINER_MARLENE class=regular
 strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Marlene's young psychics now travel with a big sister who handles their counters. First two useful turns: Gothita and Hatterene lead. Hatterene sets Trick Room from 29 base Speed, and Magic Bounce reflects the Taunt, Encore or Will-O-Wisp that normally stops a room; Fake Out still interrupts it, so Gothita Protects or uses Fake Tears on the foe Hatterene will hit next. Shadow Tag keeps non-Ghost foes from switching out of the room, but pivot moves such as U-turn and Parting Shot still leave. Under the room, Hatterene's Dazzling Gleam hits both foes and punishes Dark and Fighting leads, Mystical Fire answers Bug and Steel while lowering Special Attack, and Psychic handles Poison. Alternate deployment: Spoink is the backup room with Thick Fat and Power Gem into Bug, Fire and Flying targets. Reserves & disruption: Inkay replaces Slowpoke and Baltoy's Knock Off weakness with a Dark/Psychic body that resists Dark and Ghost and is immune to Psychic; Contrary turns Superpower into +1 Attack and Defense, Superpower hits Dark and Steel foes for super-effective damage, Knock Off hits Ghost foes, Psycho Cut hits Fighting and Poison, and Protect covers the turn a room ends. Gothita's Focus Sash and Inkay's Eviolite can still be knocked away.
@@ -206,7 +206,7 @@ HATTERENE @SITRUS_BERRY MAGIC_BOUNCE QUIET 252/0/4/252/0/0 5 | TRICK_ROOM, DAZZL
 SPOINK @EVIOLITE THICK_FAT SASSY 252/0/116/0/140/0 5 | TRICK_ROOM, PSYCHIC, POWER_GEM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 INKAY @EVIOLITE CONTRARY BRAVE 252/252/4/0/0/0 5 | SUPERPOWER, KNOCK_OFF, PSYCHO_CUT, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
-## E0020 TRAINER_JOEY class=regular
+## E0017 TRAINER_JOEY class=regular
 strategy: REDIRECTION,PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Pawmi and Galarian Farfetchd lead. Fake Out or a useful Nuzzle opens immediate damage; Farfetchd attacks instead of paying a Belly Drum or Focus Energy setup turn. With its working Leek, Leaf Blade and Night Slash reach the native guaranteed-critical threshold against targets that permit critical hits. Close Combat has the Leek's increased critical chance, not a guaranteed critical hit. Alternate deployment: Clefairy supplies Friend Guard, eligible Follow Me and Helping Hand beside an attacker; its Moonblast is the special damage lane. Lechonk supplies Aroma Veil against its actual covered disruption and either immediate Body Slam/Play Rough or a worthwhile Helping Hand. Neither support has an unconditional protection command. Reserves & disruption: Knock Off/item suppression removes the Leek benefit; Battle Armor, Shell Armor and Lucky Chant can deny critical hits. Critical hits ignore the relevant unfavorable stat stages and screens, not burn or type resistance. Scrappy permits Normal/Fighting hits on Ghosts and has its configured Intimidate protection; it does not make every attack super effective. Recheck Close Combat's defensive drops and ally survival before choosing it. Ground-immune targets invalidate Nuzzle, and Fake Out is entry-turn only. Counterplay & audit: Item removal, critical-hit prevention, burn, Fairy/Flying/Psychic pressure on Farfetchd, spread damage around Follow Me and denying useful support turns. Disposition: User requested a complete non-Belly-Drum identity because Calvin already owns that engine. Retain the small-route-partner theme and give Joey immediate critical-hit offense with distinct bodyguard modes. All four member offsets are individual Medium seeds; full battle calibration remains pending.
@@ -216,7 +216,7 @@ FARFETCHD_GALAR @LEEK SCRAPPY JOLLY 4/252/0/0/0/252 3 | CLOSE_COMBAT, LEAF_BLADE
 CLEFAIRY @EVIOLITE FRIEND_GUARD BOLD 252/0/252/0/4/0 3 | FOLLOW_ME, HELPING_HAND, MOONBLAST, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 LECHONK @EVIOLITE AROMA_VEIL ADAMANT 108/252/8/0/0/140 4 | BODY_SLAM, PLAY_ROUGH, HELPING_HAND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0021 TRAINER_JOSE class=regular
+## E0019 TRAINER_JOSE class=regular
 strategy: SETUP,REDIRECTION,PRESSURE
 mega_slots: NONE
 plan: The cocoon-and-moth opening stays, and a Kabuto guards the colony against its three natural predators. First two useful turns: Beautifly and Venonat lead. Venonat uses Rage Powder to protect a Quiver Dance, or Sleep Powder and Struggle Bug when powder protection cannot work (Grass types, Overcoat and Safety Goggles are immune). Beautifly attacks immediately when the dance is unsafe. Alternate deployment: Kabuto replaces Dustox and is the answer to Fire, Flying and Rock. Rock/Water typing takes a quarter damage from Fire and half from Flying; Rock Slide hits both foes and hits Fire and Flying types for super-effective damage; Liquidation hits Fire, Rock and Ground types for super-effective damage; Aqua Jet picks off a weakened Fire attacker first. Battle Armor blocks critical hits and Eviolite supplies the bulk. Reserves & disruption: Kricketune is the finisher. A genuine Technician Fell Stinger knockout raises its Attack; neither an ordinary hit nor a partner's knockout earns the boost. Knock Off is its direct action when no finishing hit is available, Taunt stops opposing setup, and Focus Sash buys one action rather than guaranteed safety. With Dustox gone there is no Tailwind; speed comes from Quiver Dance and Aqua Jet.
@@ -226,7 +226,7 @@ VENONAT @EVIOLITE COMPOUND_EYES BOLD 252/0/4/0/0/252 4 | RAGE_POWDER, SLEEP_POWD
 KABUTO @EVIOLITE BATTLE_ARMOR ADAMANT 252/252/4/0/0/0 5 | ROCK_SLIDE, LIQUIDATION, AQUA_JET, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 KRICKETUNE @FOCUS_SASH TECHNICIAN JOLLY 4/252/0/0/0/252 4 | FELL_STINGER, KNOCK_OFF, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0023 TRAINER_CLARK class=regular
+## E0020 TRAINER_CLARK class=regular
 strategy: SETUP,PRESSURE
 mega_slots: NONE
 ai: Conservative
@@ -237,7 +237,7 @@ ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 5 | ROCK_SLIDE, ACROBATICS, PROTECT
 GEODUDE @LIFE_ORB ROCK_HEAD ADAMANT 4/252/0/0/0/252 5 | ROCK_TOMB, DOUBLE_EDGE, STOMPING_TANTRUM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MUDBRAY @SITRUS_BERRY STAMINA ADAMANT 252/252/4/0/0/0 5 | HIGH_HORSEPOWER, ROCK_TOMB, HEAVY_SLAM, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0023 TRAINER_JOHNSON class=regular
+## E0020 TRAINER_JOHNSON class=regular
 strategy: TAILWIND,PRESSURE
 mega_slots: NONE
 plan: Johnson keeps Shinx/Fletchinder as the fast bird-training opening: Intimidate creates a useful attack, burn or Tailwind window, with full-HP Gale Wings applying only while its condition holds. Meowth (user-approved) replaces the Huge Power Bunnelby that Allen keeps as his signature: Technician Fake Out buys the Tailwind turn, Feint breaks a Protect for a partner's hit, Covet is its Technician damage and U-turn brings Fletchinder back for another Tailwind. Doduo replaces the copied rival Taillow as a Focus Sash/Endeavor reserve: attack with Drill Peck at healthy HP, threaten Endeavor when genuinely low, and use Quick Attack or a surviving partner to finish an appropriate target. Do not assume Sash always activates or that Endeavor is useful before Doduo takes damage; Helping Hand does not multiply Endeavor's fixed HP difference. Stats: Doduo is Jolly with maximum Attack/Speed, full HP IVs and the previous slot's offset+2. Its lower HP is natural, not an artificial level-one gimmick. Early Bird is a small sleep fallback; the Sash is the intended resource. Could it be cooler? Yes: the two-headed runner gives this youngster a distinct low-HP timing puzzle instead of borrowing the rival's Guts bird. Overrepresented? This removes the exact Flame Orb/Guts Taillow loadout shared with the Rustboro rival and leaves the rival's continuing Taillow identity intact. Johnson still shares the broad Tailwind tool with Dawson/Jose, but low-HP Endeavor, full-HP Gale Wings and Intimidate create a different action sequence from their Skill Link and powder/Quiver Dance plans. Priority, spread/residual damage, Ghost immunity to Endeavor/Quick Attack and breaking the Sash are clear counterplay. No native battle result is claimed.
@@ -247,7 +247,7 @@ FLETCHINDER @NONE GALE_WINGS JOLLY 4/252/0/0/0/252 2 | ACROBATICS, TAILWIND, WIL
 MEOWTH @EVIOLITE TECHNICIAN JOLLY 4/252/0/0/0/252 3 | FAKE_OUT, COVET, FEINT, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
 DODUO @FOCUS_SASH EARLY_BIRD JOLLY 4/252/0/0/0/252 2 | DRILL_PECK, ENDEAVOR, QUICK_ATTACK, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0024 TRAINER_DEVAN class=regular
+## E0021 TRAINER_DEVAN class=regular
 strategy: SAND,PRESSURE
 mega_slots: NONE
 ai: Conservative
@@ -258,7 +258,7 @@ DRILBUR @LIFE_ORB SAND_RUSH ADAMANT 4/252/0/0/0/252 3 | DRILL_RUN, ROCK_SLIDE, X
 ARON @EVIOLITE STURDY ADAMANT 252/252/4/0/0/0 4 | IRON_HEAD, ROCK_SLIDE, BODY_PRESS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SANDILE @EVIOLITE MOXIE JOLLY 4/252/0/0/0/252 4 | STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0025 TRAINER_DAWSON class=regular
+## E0029 TRAINER_DAWSON class=regular
 strategy: TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
@@ -268,7 +268,7 @@ ROOKIDEE @EVIOLITE KEEN_EYE JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, TAILWIND, TAUN
 WOOLOO @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 6 | DOUBLE_EDGE, WILD_CHARGE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MINCCINO @WIDE_LENS SKILL_LINK JOLLY 4/252/0/0/0/252 3 | TAIL_SLAP, KNOCK_OFF, U_TURN, ENCORE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0025 TRAINER_SARAH class=regular
+## E0029 TRAINER_SARAH class=regular
 strategy: TRICK_ROOM
 mega_slots: NONE
 ai: Conservative
@@ -279,7 +279,7 @@ GOTHITA @EVIOLITE COMPETITIVE QUIET 252/0/4/252/0/0 4 | PSYCHIC, ENERGY_BALL, HE
 TRAPINCH @LIFE_ORB ARENA_TRAP BRAVE 252/252/4/0/0/0 1 | EARTHQUAKE, FIRST_IMPRESSION, CRUNCH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 BALTOY @EVIOLITE LEVITATE QUIET 252/0/4/252/0/0 4 | EARTH_POWER, PSYCHIC, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
-## E0026 TRAINER_JANICE class=casual
+## E0030 TRAINER_JANICE class=casual
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Togedemaru uses Fake Out or Nuzzle to enable Marill's immediate Huge Power damage, or Iron Head when direct pressure is better. Lightning Rod protects eligible Water partners from Electric attacks; it does not protect Togedemaru from Ground damage. Spiky Shield requires useful partner action or an actual survival payoff. Alternate deployment: Togedemaru plus Chewtle supplies an alternate physical attacking pair; choose the partner for the current coverage and incoming threats rather than blindly preserving the lead. Reserves & disruption: Swirlix uses Flamethrower for Grass/Steel coverage without feeding its own Togedemaru's Lightning Rod, Dazzling Gleam for foe-only spread damage and receives Unburden only after its Sitrus Berry is consumed. Togedemaru's Sitrus is recovery, not an Unburden trigger. Ground immunity/paralysis eligibility and opposing priority denial invalidate some support lines. Counterplay & audit: Severe Ground pressure against Togedemaru, Grass pressure against the Water attackers, special attacks and denied priority. Disposition: Approved Togedemaru replaces Pichu and Dazzling Gleam replaces Swirlix's unsupported Moonblast; Janice retains her independent four-member doubles battle. Thunderbolt is retired because allied Lightning Rod redirects it away from the intended foe and Togedemaru has no special attack to exploit the boost. Levels await native calibration.
@@ -289,7 +289,7 @@ MARILL @EVIOLITE HUGE_POWER ADAMANT 252/252/4/0/0/0 4 | AQUA_JET, PLAY_ROUGH, KN
 SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 3 | DAZZLING_GLEAM, ENERGY_BALL, FLAMETHROWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CHEWTLE @EVIOLITE STRONG_JAW ADAMANT 232/252/0/0/0/24 4 | LIQUIDATION, CRUNCH, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0026 TRAINER_JERRY_1 class=casual
+## E0030 TRAINER_JERRY_1 class=casual
 strategy: PRESSURE
 mega_slots: NONE
 ai: Conservative
@@ -300,7 +300,7 @@ VAROOM @AIR_BALLOON OVERCOAT JOLLY 4/252/0/0/0/252 4 | IRON_HEAD, ACID_SPRAY, TA
 SKRELP @CHOICE_SPECS ADAPTABILITY TIMID 4/0/0/252/0/252 2 | MUDDY_WATER, SLUDGE_BOMB, HYDRO_PUMP, THUNDERBOLT | ivs=31/31/31/31/31/31 | friendship=255
 KOFFING @EVIOLITE LEVITATE BOLD 252/0/252/0/4/0 4 | SLUDGE_BOMB, FLAMETHROWER, WILL_O_WISP, PAIN_SPLIT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0027 TRAINER_JOSH class=gym
+## E0023 TRAINER_JOSH class=gym
 strategy: SETUP,PRESSURE
 mega_slots: NONE
 ai: Conservative
@@ -313,7 +313,7 @@ GEODUDE_ALOLA @LUM_BERRY GALVANIZE ADAMANT 252/252/4/0/0/0 5 | DOUBLE_EDGE, ROCK
 NACLSTACK @LEFTOVERS PURIFYING_SALT CAREFUL 252/0/252/0/4/0 2 | SALT_CURE, RECOVER, BODY_PRESS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ONIX @EVIOLITE STURDY IMPISH 252/0/252/0/4/0 5 | BODY_PRESS, ROCK_TOMB, TAUNT, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0028 TRAINER_TOMMY class=gym
+## E0024 TRAINER_TOMMY class=gym
 strategy: ALLY_COMBO,PRESSURE
 mega_slots: NONE
 tactic: ACTIVATE TIRTOUGA SURF CRADILY
@@ -326,7 +326,7 @@ SHUCKLE @SITRUS_BERRY STURDY IMPISH 252/0/252/0/4/0 4 | POWER_SPLIT, STRUGGLE_BU
 CORSOLA @SITRUS_BERRY REGENERATOR CALM 252/0/116/0/140/0 5 | LIFE_DEW, POWER_GEM, EARTH_POWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BINACLE @CHOICE_SCARF TOUGH_CLAWS JOLLY 4/252/0/0/0/252 5 | LIQUIDATION, ROCK_SLIDE, X_SCISSOR, CROSS_CHOP | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0029 TRAINER_MARC class=gym
+## E0025 TRAINER_MARC class=gym
 strategy: SNOW,SETUP,PRESSURE
 mega_slots: NONE
 plan: First two useful turns: Amaura establishes snow; Power Spot Stonjourner strengthens its actual attacks. Choose Aurora Veil only when it completes and improves the exchange more than Blizzard/Icy Wind. Stonjourner attacks, uses Wide Guard against a real spread threat, or Protects for useful partner pressure. Alternate deployment: Tyrunt can use Dragon Dance behind a real opportunity, then Rock Slide or Strong Jaw biting coverage. Archen supplies itemless Acrobatics while healthy. Do not treat snow as a teamwide Rock-defense boost. Reserves & disruption: Klawf needs an actual Anger Shell trigger and berry recovery; Cranidos obeys Choice Scarf lock and pays Head Smash recoil despite Mold Breaker. Switching does not heal Defeatist. Protect replaces Stealth Rock and Amaura now has special-offense investment. Counterplay & audit: Weather replacement before Veil, special focus fire, screen removal and priority. Disposition: Preserve all six species and sharpen their prehistoric/Power Spot plan; individual levels await native calibration.
@@ -338,7 +338,7 @@ KLAWF @SITRUS_BERRY ANGER_SHELL ADAMANT 252/252/4/0/0/0 3 | ROCK_SLIDE, CRABHAMM
 ARCHEN @NONE DEFEATIST JOLLY 4/252/0/0/0/252 4 | ROCK_SLIDE, ACROBATICS, DRAGON_CLAW, KNOCK_OFF | ivs=31/31/31/31/31/31 | friendship=255
 CRANIDOS @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 4 | HEAD_SMASH, STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0030 TRAINER_ROXANNE_1 class=leader
+## E0026 TRAINER_ROXANNE_1 class=leader
 strategy: TAILWIND,PRESSURE,MEGA_REVEAL
 mega_slots: 1
 plan: First two useful turns: Aerodactyl and Carbink lead. Aerodactyl is the sole Mega-eligible slot and reveals Mega Aerodactyl before the player's Ring unlock. MEGA_REVEAL evaluates a legal first-entry Mega board first and retains that transformation once a valid board exists; moves/targets remain evaluated normally. The directive does not grant eligibility or override forced escape. Choose immediate Rock Slide or Tough Claws Dual Wingbeat when stronger than Tailwind. Carbink selects the relevant screen, Rock Tomb or Body Press; never waste successive screen turns against the wrong damage profile. Alternate deployment: This is a fast fossil-offense team, with NO Trick Room move or intent. Speed-invested Relicanth and Omastar exploit Tailwind; Tyrantrum's Assault Vest/Rock Head build supplies immediate attacks, not Dragon Dance. Aerodactyl and Bombirdier are airborne partners for Tyrantrum's Earthquake; recheck grounding and the actual partner before every spread attack. Reserves & disruption: Bombirdier provides a second Tailwind source and Rocky Payload attacks. Relicanth honors Choice Band; Tyrantrum has no status move through Assault Vest. Rock Head blocks move recoil, not Life Orb damage on Omastar. Mega Aerodactyl's Tough Claws boosts contact Dual Wingbeat, not noncontact Rock Slide. Do not count base Unnerve after Mega transformation. Counterplay & audit: Opposing speed reversal, priority, Intimidate, Wide Guard, Steel/Water pressure and removal of screens. Disposition: User selected Mega Aerodactyl and rejected the hybrid Trick Room proposal. Larvitar/Sudowoodo/Nosepass are replaced by Tyrantrum/Aerodactyl/Omastar. Regirock remains reserved for a later desert/ruins showcase. Native first-Mega/scene checks are separate from full difficulty calibration.

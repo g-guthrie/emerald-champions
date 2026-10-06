@@ -148,9 +148,9 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
-  Battles: E0020 Joey, E0021 Jose, E0023 Clark, E0023 Johnson, E0024 Devan
-  Deferred: E0017 Cyndy, E0019 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
-    it off; reached later from the north), E0025 Dawson, E0025 Sarah, E0026 Janice, E0026 Jerry
+  Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
+  Deferred: E0027 Cyndy, E0028 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+    it off; reached later from the north), E0029 Dawson, E0029 Sarah, E0030 Janice, E0030 Jerry
     (Route 116 north, behind Cut trees: after the Stone Badge)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
@@ -178,7 +178,7 @@ STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
 
 ====================================================================================================
 STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
-  Battles: E0027 Josh, E0028 Tommy, E0029 Marc, E0030 Roxanne
+  Battles: E0023 Josh, E0024 Tommy, E0025 Marc, E0026 Roxanne
   VERIFIED IN PLAY: Route 116 west and Rusturf Tunnel west swept; all four Gym battles won.
   Everything reachable before the Stone Badge: adds Route 116 west and Rusturf Tunnel west.
   Pokemon

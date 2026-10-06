@@ -1,6 +1,6 @@
 {
   "play_order": 16,
-  "e_group": "E0020",
+  "e_group": "E0017",
   "trainer": "TRAINER_JOEY",
   "class": "regular",
   "location": "Route116",
@@ -111,7 +111,7 @@
   "ai_defects": [],
   "ai_observations": [
     {
-      "id": "E0020-FOLLOWME-REPEAT-INTO-PARALYSIS",
+      "id": "E0017-FOLLOWME-REPEAT-INTO-PARALYSIS",
       "severity": "low",
       "turn": 5,
       "board": "Clefairy 16/60, partner Lechonk 42/52. Opposite: a fully paralyzed Arcanine and a Tangrowth that had just switched in.",

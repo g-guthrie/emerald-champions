@@ -1,6 +1,6 @@
 {
   "play_order": 19,
-  "e_group": "E0023",
+  "e_group": "E0020",
   "trainer": "TRAINER_JOHNSON",
   "class": "regular",
   "location": "Route116",
@@ -32,7 +32,7 @@
   ],
   "ai_defects": [
     {
-      "id": "E0023-JOHNSON-ENDEAVOR-DECLINED",
+      "id": "E0020-JOHNSON-ENDEAVOR-DECLINED",
       "severity": "medium",
       "turn": 4,
       "board": "Doduo had just entered and sat at 2/38 HP (its Focus Sash intact but irrelevant at 2 HP) opposite a completely healthy Whimsicott at 45/45 and a Lucario at 48/48. Doduo's authored role is explicitly 'threaten Endeavor when genuinely low'.",

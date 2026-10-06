@@ -1,6 +1,6 @@
 {
   "play_order": 18,
-  "e_group": "E0023",
+  "e_group": "E0020",
   "trainer": "TRAINER_CLARK",
   "class": "regular",
   "location": "Route116",
@@ -95,7 +95,7 @@
   "ai_defects": [],
   "ai_defects_resolved": [
     {
-      "id": "E0023-CLARK-IRONDEFENSE-NOT-SET",
+      "id": "E0020-CLARK-IRONDEFENSE-NOT-SET",
       "status": "RESOLVED",
       "evidence": "Pass 1 recorded 'Roggenrola chose Body Press on turns 1 and 2 and never Iron Defense, including turn 1 when it was at full HP behind Eviolite and Sturdy - the safest setup turn it would ever get.' Pass 2: Iron Defense on turn 1 from exactly that board, Body Press on turn 2 into the correct 2x target. The setup pricing change reached this trainer."
     }

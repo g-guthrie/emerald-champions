@@ -1,6 +1,6 @@
 {
   "play_order": 17,
-  "e_group": "E0021",
+  "e_group": "E0019",
   "trainer": "TRAINER_JOSE",
   "class": "regular",
   "location": "Route116",
@@ -83,7 +83,7 @@
   "ai_defects": [],
   "ai_observations": [
     {
-      "id": "E0021-QUIVERDANCE-STILL-UNSEEN",
+      "id": "E0019-QUIVERDANCE-STILL-UNSEEN",
       "severity": "low",
       "turn": 1,
       "board": "Beautifly 55/55 with a Focus Sash, partner Venonat 60/60 with Rage Powder available.",

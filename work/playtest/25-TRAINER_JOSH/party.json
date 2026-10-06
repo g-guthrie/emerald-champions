@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0027 TRAINER_JOSH (Rustboro Gym, living minerals); play_order 25, cap 14, Medium",
+  "encounter": "E0023 TRAINER_JOSH (Rustboro Gym, living minerals); play_order 25, cap 14, Medium",
   "availability_audit": "Every member is traced to work/reference-pools/pool-14.json with gate <= 14. Lucario, Reuniclus and Cloyster's root Shellder are AlteringCave_1F / route land encounters; Cottonee (VerdanturfMeadow land table) takes a Sun Stone for Whimsicott; Shaymin (legendary_sign:Route102) and Magearna (legendary_sign:RustboroCity_DevonCorp_2F) are reachable legendary signs at this cap and are used because Steel and Grass are the honest strongest answers to a Rock/Poison mineral gym. Items are ordinary stock (Life Orb, Focus Sash, Leftovers, Eviolite not used). Assisted acquisition, not native capture acceptance.",
   "plan": "Steel leads are immune to Glimmet's Sludge Bomb and resist Power Gem/Rock Slide; Flash Cannon and Close Combat both hit Rock super effectively. Skill Link Cloyster exists to punch through Focus Sash, Sturdy Onix and Sturdy Dwebble with multi-hit moves. Whimsicott supplies Prankster Taunt/Encore against Shell Smash and Taunt, and Reuniclus's Magic Guard blanks Salt Cure residual and Toxic Debris.",
   "party": [
