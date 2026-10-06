@@ -133,6 +133,7 @@ gStdScripts::
 	.4byte Std_PutItemAway             @ STD_PUT_ITEM_AWAY
 gStdScripts_End::
 
+	.include "data/scripts/story_entities.inc"
 
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"

@@ -1073,6 +1073,46 @@
 	.2byte STORY_STEP_\step
 	.endm
 
+	@ Entity rewards and lines, generated from data/progression/maps (scripts/story.py).
+	@ npc_reward gives everything in the entity's `gives`, marks it done, advances the
+	@ story if it says so; VAR_RESULT is FALSE (nothing given) if the Bag is full.
+	.macro npc_reward id:req
+	call Story_E\id\()_Reward
+	.endm
+
+	@ Shows one of the entity's lines, with {GIFT_n} filled from its `gives`.
+	.macro npc_say id:req, key:req, type=MSGBOX_DEFAULT
+	call Story_E\id\()_Buffer
+	msgbox Story_E\id\()_Text_\key, \type
+	.endm
+
+	@ Computed choreography (src/story_path.c): the path is found when the scene runs,
+	@ on the live map, using the game's own collision. VAR_RESULT is FALSE if there is
+	@ no path (the object stays put and the chain test fails). Follow with waitmovement.
+	.macro story_walk obj:req, mode:req, x=0, y=0, fast=0
+	callnative ScrCmd_storywalk, requests_effects=1
+	.2byte \obj
+	.byte \mode
+	.byte \fast
+	.2byte \x
+	.2byte \y
+	.endm
+
+	@ Walk obj to a tile next to the player and face them.
+	.macro approach_player obj:req, fast=0
+	story_walk \obj, 0, fast=\fast
+	.endm
+
+	@ Walk obj to (x, y) on the current map.
+	.macro walk_to obj:req, x:req, y:req, fast=0
+	story_walk \obj, 1, \x, \y, \fast
+	.endm
+
+	@ Walk obj back to its position in the map's entity list.
+	.macro walk_home obj:req, fast=0
+	story_walk \obj, 2, fast=\fast
+	.endm
+
 	.macro getrandomspecies dest:req, option:req, arg1=0xFFFF, arg2=0xFFFF
 	callnative ScrCmd_getrandomspecies, requests_effects=1
 	.2byte \dest
