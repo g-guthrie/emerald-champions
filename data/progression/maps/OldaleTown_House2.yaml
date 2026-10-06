@@ -1,0 +1,6 @@
+# OldaleTown_House2: every object, trigger, sign and hidden item on this map. map.json's
+# object_events, coord_events and bg_events are generated from this file (scripts/story.py).
+map: MAP_OLDALE_TOWN_HOUSE2
+entities:
+  - {id: 150, kind: npc, at: [4, 4], sprite: POKEFAN_F, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_House2_EventScript_Woman, when: '0'}
+  - {id: 151, kind: npc, at: [7, 4], sprite: SCHOOL_KID_M, movement_type: MOVEMENT_TYPE_FACE_LEFT, script: OldaleTown_House2_EventScript_Man, when: '0'}

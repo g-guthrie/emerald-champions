@@ -1,0 +1,20 @@
+# Route103: every object, trigger, sign and hidden item on this map. map.json's
+# object_events, coord_events and bg_events are generated from this file (scripts/story.py).
+map: MAP_ROUTE103
+entities:
+  - {id: 168, kind: npc, at: [49, 12], sprite: MAN_3, movement_type: MOVEMENT_TYPE_FACE_LEFT, script: Route103_EventScript_Man, when: '0'}
+  - {id: 169, kind: npc, local_id: LOCALID_ROUTE103_RIVAL, at: [10, 3], sprite: VAR_0, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: Route103_EventScript_Rival, when: FLAG_HIDE_ROUTE_103_RIVAL}
+  - {id: 170, kind: trainer, at: [71, 11], sprite: WOMAN_2, movement_type: MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT, trainer_type: TRAINER_TYPE_NORMAL, trainer_sight_or_berry_tree_id: '3', script: Route103_EventScript_Daisy, when: '0'}
+  - {id: 171, kind: trainer, at: [65, 12], sprite: TWIN, trainer_type: TRAINER_TYPE_NORMAL, trainer_sight_or_berry_tree_id: '1', script: Route103_EventScript_Liv, when: '0'}
+  - {id: 172, kind: trainer, at: [64, 12], sprite: TWIN, trainer_type: TRAINER_TYPE_NORMAL, trainer_sight_or_berry_tree_id: '1', script: Route103_EventScript_Amy, when: '0'}
+  - {id: 173, kind: berry_tree, at: [58, 5], sprite: BERRY_TREE, movement_type: MOVEMENT_TYPE_BERRY_TREE_GROWTH, trainer_sight_or_berry_tree_id: BERRY_TREE_ROUTE_103_CHERI_1, script: BerryTreeScript, when: '0'}
+  - {id: 174, kind: berry_tree, at: [59, 5], sprite: BERRY_TREE, movement_type: MOVEMENT_TYPE_BERRY_TREE_GROWTH, trainer_sight_or_berry_tree_id: BERRY_TREE_ROUTE_103_LEPPA, script: BerryTreeScript, when: '0'}
+  - {id: 175, kind: berry_tree, at: [60, 5], sprite: BERRY_TREE, movement_type: MOVEMENT_TYPE_BERRY_TREE_GROWTH, trainer_sight_or_berry_tree_id: BERRY_TREE_ROUTE_103_CHERI_2, script: BerryTreeScript, when: '0'}
+  - {id: 176, kind: npc, at: [20, 10], sprite: BOY_1, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 2, script: Route103_EventScript_Boy, when: '0'}
+  - {id: 177, kind: npc, at: [7, 3], sprite: PROF_BIRCH, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 1, script: ProfBirch_EventScript_RatePokedexOrRegister, when: FLAG_HIDE_ROUTE_103_BIRCH}
+  - {id: 178, kind: trainer, at: [56, 13], sprite: POKEFAN_M, movement_type: MOVEMENT_TYPE_FACE_RIGHT, trainer_type: TRAINER_TYPE_NORMAL, trainer_sight_or_berry_tree_id: '5', script: Route103_EventScript_Miguel, when: '0'}
+  - {id: 179, kind: item, at: [50, 5], sprite: ITEM_BALL, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: Route103_EventScript_ItemPearl, when: FLAG_ITEM_ROUTE_103_PEARL}
+  - {id: 180, kind: obstacle, at: [67, 7], sprite: CUTTABLE_TREE, movement_type: MOVEMENT_TYPE_LOOK_AROUND, movement_range_x: 1, movement_range_y: 1, script: EventScript_CutTree, when: FLAG_TEMP_12}
+  - {id: 181, kind: obstacle, at: [72, 8], sprite: CUTTABLE_TREE, movement_type: MOVEMENT_TYPE_LOOK_AROUND, movement_range_x: 1, movement_range_y: 1, script: EventScript_CutTree, when: FLAG_TEMP_13}
+  - {id: 182, kind: item, at: [64, 7], sprite: ITEM_BALL, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, movement_range_x: 1, movement_range_y: 1, script: Route103_EventScript_ItemPPUp, when: FLAG_ITEM_ROUTE_103_PP_UP}
+  - {id: 183, kind: sign, at: [11, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Route103_EventScript_RouteSign}

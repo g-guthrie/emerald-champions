@@ -2,14 +2,62 @@
 #
 # steps:   every story step, in the order the player passes them. VAR_STORY_STEP holds
 #          the current one; scripts move it only with `advance_story STEP`, one step at
-#          a time. Region 1 steps come first; later regions are added as converted.
+#          a time. Each step names the script that moves the story onto it.
 # windows: when something exists. Open from `from` (inclusive) until `until`
 #          (exclusive; omitted = forever); `player: male|female` limits it to one
 #          player. A map object whose flag is STORY_<id> is present only while its
 #          window is open; a trigger whose var is STORY_<id> with var_value 0 fires
-#          only while it is open (scripts/story.py, src/story.c).
+#          only while it is open. Every step S also gets STORY_REACHED_S, which reads
+#          as a set flag once the story has reached S (scripts/story.py, src/story.c).
 
 steps:
-  - NEW_GAME
+  # --- Region 1: Littleroot, Route 101, Oldale, Route 103 (south) ----------------------
+  - NEW_GAME            # in the moving truck
+  - TRUCK_STOPPED       # InsideOfTruck trigger tiles
+  - ENTERED_HOUSE       # LittlerootTown_EventScript_GoInsideWithMom
+  - SENT_UPSTAIRS       # PlayersHouse_1F_EventScript_EnterHouseMovingIn
+  - UPSTAIRS            # PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet (2F on transition)
+  - CLOCK_SET           # PlayersHouse_2F_EventScript_WallClock
+  - SENT_TO_RIVAL       # PlayersHouse_1F_EventScript_SetWatchedBroadcast
+  - MET_RIVAL_MOM       # *_1F_EventScript_YoureNewNeighbor (rival's house 1F on frame)
+  - RIVAL_UPSTAIRS      # *_2F_EventScript_SetReadyToMeet* (rival's house 2F on transition)
+  - MET_RIVAL           # *_EventScript_MeetRival / MeetBrendan / MeetMay
+  - ON_ROUTE101         # Route101_EventScript_HideMapNamePopup (Route 101 on frame)
+  - BIRCH_IN_DANGER     # Route101_EventScript_StartBirchRescue (trigger tiles)
+  - RESCUED_BIRCH       # Route101_EventScript_FinishRescue
+  - SENT_TO_RIVAL_103   # LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival
+  - BEAT_RIVAL_103      # Route103_EventScript_RivalEnd
+  - RIVAL_LEFT_OLDALE   # OldaleTown_EventScript_RivalFinish, or LittlerootTown on transition
+  - GOT_POKEDEX         # LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
+  - GOT_RUNNING_SHOES   # LittlerootTown_EventScript_SetReceivedRunningShoes
+  - DEXNAV_LESSON       # EC_RivalDexNavTutorial_Begin (Route 101 on frame)
+  - DEXNAV_LESSON_DONE  # EC_RivalDexNavTutorial_Capture
 
-windows: []
+windows:
+  # --- Region 1 ------------------------------------------------------------------------
+  # The truck and the two houses. Brendan's house is the player's when male, May's when
+  # female; each house has the player's mom and movers, and the rival's mom and sibling.
+  - {id: TRUCK_EXIT,                 from: NEW_GAME, until: TRUCK_STOPPED}
+  - {id: BRENDANS_HOUSE_TRUCK,       from: NEW_GAME, until: ENTERED_HOUSE, player: male}
+  - {id: MAYS_HOUSE_TRUCK,           from: NEW_GAME, until: ENTERED_HOUSE, player: female}
+  - {id: BRENDANS_HOUSE_MOM,         from: NEW_GAME, player: male}
+  - {id: MAYS_HOUSE_MOM,             from: NEW_GAME, player: female}
+  - {id: BRENDANS_HOUSE_RIVAL_MOM,   from: NEW_GAME, player: female}
+  - {id: MAYS_HOUSE_RIVAL_MOM,       from: NEW_GAME, player: male}
+  - {id: BRENDANS_HOUSE_RIVAL_SIBLING, from: NEW_GAME, player: female}
+  - {id: MAYS_HOUSE_RIVAL_SIBLING,   from: NEW_GAME, player: male}
+  - {id: BRENDANS_HOUSE_RIVALS_BALL, from: NEW_GAME, until: MET_RIVAL, player: female}
+  - {id: MAYS_HOUSE_RIVALS_BALL,     from: NEW_GAME, until: MET_RIVAL, player: male}
+  - {id: PLAYERS_HOUSE_MOVERS,       from: NEW_GAME, until: CLOCK_SET}
+  - {id: SCRIPT_ACTOR, never: true}  # never placed by the map; only scenes add it (addobject)
+  # Littleroot Town
+  - {id: LITTLEROOT_FAT_MAN,         from: ENTERED_HOUSE}
+  - {id: LITTLEROOT_NORTH_GUARD,     from: NEW_GAME, until: MET_RIVAL}          # twin: no Pokemon, no Route 101
+  - {id: LITTLEROOT_MOM_SHOES,       from: GOT_POKEDEX, until: GOT_RUNNING_SHOES}
+  # Route 101
+  - {id: ROUTE101_RESCUE_START,      from: ON_ROUTE101, until: BIRCH_IN_DANGER}
+  - {id: ROUTE101_RESCUE_PEN,        from: BIRCH_IN_DANGER, until: RESCUED_BIRCH}
+  - {id: ROUTE101_BIRCH_CHASED,      from: NEW_GAME, until: RESCUED_BIRCH}
+  # Oldale Town
+  - {id: OLDALE_WEST_GUARD,          from: NEW_GAME, until: GOT_POKEDEX}
+  - {id: OLDALE_RIVAL,               from: BEAT_RIVAL_103, until: RIVAL_LEFT_OLDALE}

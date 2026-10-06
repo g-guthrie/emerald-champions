@@ -25,6 +25,12 @@ $(DATA_ASM_BUILDDIR)/maps.o: $(DATA_ASM_SUBDIR)/maps.s $(LAYOUTS_DIR)/layouts.in
 $(DATA_ASM_BUILDDIR)/map_events.o: $(DATA_ASM_SUBDIR)/map_events.s $(MAPS_DIR)/events.inc $(MAP_EVENTS)
 	$(PREPROC) -s $< charmap.txt | $(CPP) $(CPPFLAGS) -I include - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
+# Maps under the story machine: their object, trigger and sign lists are generated from
+# data/progression/maps/<Map>.yaml (scripts/story.py). A hand edit to those lists is overwritten.
+$(MAPS_DIR)/%/map.json: data/progression/maps/%.yaml scripts/story.py
+	python3 scripts/story.py maps
+	@touch $@
+
 $(MAPS_OUTDIR)/%/header.inc $(MAPS_OUTDIR)/%/events.inc $(MAPS_OUTDIR)/%/connections.inc: $(MAPS_DIR)/%/map.json $(INCLUDECONSTS_OUTDIR)/map_groups.h $(MAPJSON)
 	$(MAPJSON) map $< $(LAYOUTS_DIR)/layouts.json $(@D)
 

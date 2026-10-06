@@ -1,0 +1,7 @@
+# OldaleTown_PokemonCenter_2F: every object, trigger, sign and hidden item on this map. map.json's
+# object_events, coord_events and bg_events are generated from this file (scripts/story.py).
+map: MAP_OLDALE_TOWN_POKEMON_CENTER_2F
+entities:
+  - {id: 159, kind: npc, at: [6, 2], sprite: TEALA, movement_range_x: 1, movement_range_y: 1, script: Common_EventScript_UnionRoomAttendant, when: '0'}
+  - {id: 160, kind: npc, at: [2, 2], sprite: TEALA, movement_range_x: 1, movement_range_y: 1, script: Common_EventScript_WirelessClubAttendant, when: '0'}
+  - {id: 161, kind: npc, at: [10, 2], sprite: TEALA, movement_range_x: 1, movement_range_y: 1, script: Common_EventScript_DirectCornerAttendant, when: '0'}

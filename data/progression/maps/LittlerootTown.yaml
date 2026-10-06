@@ -1,0 +1,25 @@
+# LittlerootTown: every object, trigger, sign and hidden item on this map. map.json's
+# object_events, coord_events and bg_events are generated from this file (scripts/story.py).
+map: MAP_LITTLEROOT_TOWN
+entities:
+  - {id: 12, kind: npc, local_id: LOCALID_LITTLEROOT_TWIN, at: [16, 10], sprite: TWIN, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 2, script: LittlerootTown_EventScript_Twin, when: '0'}
+  - {id: 13, kind: npc, at: [12, 13], sprite: FAT_MAN, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 2, movement_range_y: 1, script: LittlerootTown_EventScript_FatMan, when: FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN}
+  - {id: 14, kind: npc, at: [14, 17], sprite: BOY_2, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 2, movement_range_y: 1, script: LittlerootTown_EventScript_Boy, when: '0'}
+  - {id: 15, kind: npc, local_id: LOCALID_LITTLEROOT_MOM, at: [5, 8], sprite: MOM, movement_type: MOVEMENT_TYPE_FACE_UP, script: LittlerootTown_EventScript_Mom, when: FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE}
+  - {id: 16, kind: npc, at: [2, 10], sprite: TRUCK, elevation: 4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK}
+  - {id: 17, kind: npc, at: [11, 10], sprite: TRUCK, elevation: 4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK}
+  - {id: 18, kind: npc, local_id: LOCALID_LITTLEROOT_RIVAL, at: [13, 10], sprite: VAR_0, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_RIVAL}
+  - {id: 19, kind: npc, local_id: LOCALID_LITTLEROOT_BIRCH, at: [14, 10], sprite: PROF_BIRCH, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCH}
+  - {id: 20, kind: trigger, at: [10, 1], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '0', script: LittlerootTown_EventScript_NeedPokemonTriggerLeft}
+  - {id: 21, kind: trigger, at: [11, 1], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '0', script: LittlerootTown_EventScript_NeedPokemonTriggerRight}
+  - {id: 22, kind: trigger, at: [11, 1], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '1', script: LittlerootTown_EventScript_GoSaveBirchTrigger}
+  - {id: 23, kind: trigger, at: [8, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger4}
+  - {id: 24, kind: trigger, at: [9, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger5}
+  - {id: 25, kind: trigger, at: [10, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger2}
+  - {id: 26, kind: trigger, at: [11, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger3}
+  - {id: 27, kind: trigger, at: [10, 2], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger0}
+  - {id: 28, kind: trigger, at: [11, 2], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger1}
+  - {id: 29, kind: sign, at: [15, 13], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_TownSign}
+  - {id: 30, kind: sign, at: [6, 17], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_BirchsLabSign}
+  - {id: 31, kind: sign, at: [7, 8], elevation: 3, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_BrendansHouseSign}
+  - {id: 32, kind: sign, at: [12, 8], elevation: 3, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_MaysHouseSign}

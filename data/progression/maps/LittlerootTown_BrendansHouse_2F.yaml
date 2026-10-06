@@ -1,0 +1,24 @@
+# LittlerootTown_BrendansHouse_2F: every object, trigger, sign and hidden item on this map. map.json's
+# object_events, coord_events and bg_events are generated from this file (scripts/story.py).
+map: MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
+entities:
+  - {id: 44, kind: npc, local_id: LOCALID_RIVALS_HOUSE_2F_RIVAL, at: [7, 1], sprite: RIVAL_BRENDAN_NORMAL, elevation: 0, movement_range_x: 1, script: RivalsHouse_2F_EventScript_Rival, when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM}
+  - {id: 45, kind: npc, at: [0, 0], sprite: VAR_0, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_1}
+  - {id: 46, kind: npc, at: [0, 1], sprite: VAR_1, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_2}
+  - {id: 47, kind: npc, at: [0, 2], sprite: VAR_2, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_3}
+  - {id: 48, kind: npc, at: [0, 3], sprite: VAR_3, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_4}
+  - {id: 49, kind: npc, at: [0, 4], sprite: VAR_4, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_5}
+  - {id: 50, kind: npc, at: [0, 5], sprite: VAR_5, elevation: 4, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_6}
+  - {id: 51, kind: npc, at: [1, 0], sprite: VAR_6, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_7}
+  - {id: 52, kind: npc, at: [1, 1], sprite: VAR_7, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_8}
+  - {id: 53, kind: npc, at: [1, 2], sprite: VAR_8, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_9}
+  - {id: 54, kind: npc, at: [1, 3], sprite: VAR_9, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_10}
+  - {id: 55, kind: npc, at: [1, 4], sprite: VAR_A, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_11}
+  - {id: 56, kind: npc, at: [1, 5], sprite: VAR_B, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: '0x0', when: FLAG_DECORATION_12}
+  - {id: 57, kind: npc, local_id: LOCALID_PLAYERS_HOUSE_2F_MOM, at: [7, 1], sprite: MOM, movement_range_x: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM}
+  - {id: 58, kind: item, at: [3, 4], sprite: ITEM_BALL, elevation: 0, movement_type: MOVEMENT_TYPE_LOOK_AROUND, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_BrendansHouse_2F_EventScript_RivalsPokeBall, when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL}
+  - {id: 59, kind: npc, at: [5, 5], sprite: SWABLU_DOLL, movement_type: MOVEMENT_TYPE_LOOK_AROUND, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL}
+  - {id: 60, kind: sign, at: [0, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: LittlerootTown_BrendansHouse_2F_EventScript_PC}
+  - {id: 61, kind: sign, at: [1, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: PlayersHouse_2F_EventScript_Notebook}
+  - {id: 62, kind: sign, at: [5, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_BrendansHouse_2F_EventScript_WallClock}
+  - {id: 63, kind: sign, at: [3, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: PlayersHouse_2F_EventScript_GameCube}

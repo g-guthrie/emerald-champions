@@ -1,0 +1,11 @@
+# OldaleTown_PokemonCenter_1F: every object, trigger, sign and hidden item on this map. map.json's
+# object_events, coord_events and bg_events are generated from this file (scripts/story.py).
+map: MAP_OLDALE_TOWN_POKEMON_CENTER_1F
+entities:
+  - {id: 152, kind: npc, local_id: LOCALID_OLDALE_NURSE, at: [8, 2], sprite: NURSE, script: OldaleTown_PokemonCenter_1F_EventScript_Nurse, when: '0'}
+  - {id: 153, kind: trainer, at: [13, 2], sprite: OLD_MAN, trainer_type: '0', script: Common_EventScript_EmeraldChampionsMoveTutor, when: '0'}
+  - {id: 154, kind: trainer, at: [2, 2], sprite: MART_EMPLOYEE, trainer_type: '0', script: General_Mart_Script, when: '0'}
+  - {id: 155, kind: npc, at: [4, 4], sprite: GENTLEMAN, script: OldaleTown_PokemonCenter_1F_EventScript_Gentleman, when: '0'}
+  - {id: 156, kind: npc, at: [12, 6], sprite: BOY_1, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_PokemonCenter_1F_EventScript_Boy, when: '0'}
+  - {id: 157, kind: npc, at: [3, 8], sprite: GIRL_3, movement_type: MOVEMENT_TYPE_FACE_RIGHT, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_PokemonCenter_1F_EventScript_Girl, when: '0'}
+  - {id: 158, kind: npc, at: [12, 4], sprite: MAN_4, script: Common_EventScript_CenterLocalGuide, when: '0'}
