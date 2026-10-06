@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/29-TRAINER_GRUNT_RUSTURF_TUNNEL/receipt.json",
   "rerun_reason": "Confirming rerun for the first pass's unverified level changes (QWILFISH offset 2->3, SKRELP 3->4) on the rebuilt headless ROM, which also carries the AI setup/support pricing and the healthy-turn-one-switch charge.",
   "play_order": 29,
-  "e_group": "E0031",
+  "e_group": "E0029",
   "trainer": "TRAINER_GRUNT_RUSTURF_TUNNEL",
   "class": "grunt",
   "location": "RusturfTunnel",

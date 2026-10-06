@@ -1,6 +1,6 @@
 {
   "play_order": 24,
-  "e_group": "E0030",
+  "e_group": "E0028",
   "trainer": "TRAINER_JERRY_1",
   "class": "casual",
   "location": "Route116",
@@ -84,7 +84,7 @@
   "ai_defects": [],
   "ai_defects_resolved": [
     {
-      "id": "E0030-JERRY-ACIDSPRAY-NEVER-USED",
+      "id": "E0028-JERRY-ACIDSPRAY-NEVER-USED",
       "status": "RESOLVED",
       "evidence": "Pass 1: 'Varoom was on the field for three turns and chose MOVE_IRON_HEAD every single time, including turn 3 with Choice Specs Adaptability Skrelp in reserve.' Pass 2: Acid Spray on turn 1 into the correct 2x target, converted into a kill by the partner's Flash Cannon in the same turn, and Protect on turn 2 denying two lethal attacks. The pass-1 conclusion that this team 'needs the AI to value a Special Defence drop that feeds a known Choice Specs partner' is answered, and the alternative suggestion there (replace Acid Spray with a second attack) should NOT be taken - the move works now."
     }

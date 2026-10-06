@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0029 TRAINER_SARAH (play_order 22); P2 cap-14 anti-Trick-Room build",
+  "encounter": "E0027 TRAINER_SARAH (play_order 22); P2 cap-14 anti-Trick-Room build",
   "availability_audit": "Every member's root and evolution provider is listed in work/reference-pools/pool-14.json at gate 14: Riolu (wild:Route116) -> Lucario also appears directly as wild:AlteringCave_1F; Growlithe (wild:Route103) -> Arcanine via ITEM_FIRE_STONE; Cottonee (wild:VerdanturfMeadow) -> Whimsicott via ITEM_SUN_STONE; Porygon-Z (wild:AlteringCave_1F); Sneasel (wild:Seaspray_Cave_B1F) -> Weavile via level/condition; Munchlax (wild:Route116) -> Snorlax via friendship. Items are ordinary stage-available held items. No legendary, no Mega stone, no unreached gate is claimed. Assisted acquisition through the authorized native preparation API; not a native capture receipt.",
   "plan": "Sarah is a zero-Speed-IV Trick Room room with Arena Trap. Arcanine is deliberately LEFT OUT: its Intimidate would hand Gothita a free Competitive +2 Special Attack on switch-in. Weavile's Knock Off is 2x on both Psychic members, Ludicolo answers the two Ground members, and Snorlax is the slow body that stays useful if the room does go up.",
   "party": [

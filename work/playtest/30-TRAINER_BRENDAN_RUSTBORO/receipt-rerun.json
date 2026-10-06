@@ -2,7 +2,7 @@
   "rerun_of": "work/playtest/30-TRAINER_BRENDAN_RUSTBORO/receipt.json",
   "rerun_reason": "Confirming rerun for the first pass's unverified level changes (starter slot offset 1->2, TAILLOW 3->4) on the rebuilt headless ROM with the AI setup/support pricing and the healthy-turn-one-switch charge.",
   "play_order": 30,
-  "e_group": "E0032",
+  "e_group": "E0030",
   "trainer_played": "TRAINER_BRENDAN_RUSTBORO_TREECKO",
   "aliases_covered": ["TRAINER_BRENDAN_RUSTBORO_MUDKIP", "TRAINER_BRENDAN_RUSTBORO_TORCHIC", "TRAINER_BRENDAN_RUSTBORO_TREECKO", "TRAINER_MAY_RUSTBORO_MUDKIP", "TRAINER_MAY_RUSTBORO_TORCHIC", "TRAINER_MAY_RUSTBORO_TREECKO"],
   "class": "rival",
@@ -56,7 +56,7 @@
     "budget_after_this_pass": {"TAILLOW": "+1 of 2 used", "ELECTRIKE": "+1 of 2 used", "SHROOMISH": "0 of 2 used", "starter slot": "+2 of 2 used - exhausted"},
     "applied_to_all_six_aliases": true,
     "verification": "Offset-only edits, which cannot affect move legality or strategy coherence. I did not run scripts/emerald_champions_teams.py --write: a concurrent session has uncommitted edits to other trainers in the same authored file (Pikachu, Mienfoo, Ditto, Heliolisk offsets), and materializing would sweep their in-flight work into the generated outputs. My twelve lines were staged as an isolated hunk so their changes were not committed with mine. The main agent materializes.",
-    "rerun_after_this_change": "NOT PERFORMED. The driver reads opponent levels from the compiled ROM, so confirming these two +1s needs a rebuild that only the main agent can do. The brief's 'rerun once' step is therefore outstanding for E0032."
+    "rerun_after_this_change": "NOT PERFORMED. The driver reads opponent levels from the compiled ROM, so confirming these two +1s needs a rebuild that only the main agent can do. The brief's 'rerun once' step is therefore outstanding for E0030."
   },
   "cooler_note": "The rival's identity is right and the Taillow Orb turn is genuinely clever - it is the one moment in this fight where the AI out-thought my prepared answer. The structural problem is that three of the four members are conditional support and the conditions collapse against a single well-chosen party. Electrike's whole kit is Electric, so a Ground lead makes it a spectator; Shroomish's whole kit is powder and Leech Seed, so a Grass lead makes it a spectator; that leaves Taillow and a middle-stage starter to carry a four-member rival fight. A concrete suggestion for a later pass, not applied here: Electrike's fourth slot is Protect, and giving it a non-Electric attack - or leading Shroomish beside Taillow so its Spore happens while the opponent still has grounded, non-Grass bodies out - would stop both members from being switched off by one type choice. Species-wise the continuity picks are correct and worth keeping.",
   "authored_set_legality": "No legality problem found in any of the six aliases.",

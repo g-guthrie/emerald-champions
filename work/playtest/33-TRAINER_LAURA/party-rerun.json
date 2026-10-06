@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "encounter": "E0035 TRAINER_LAURA (Dewford Gym, six-member dojo); play_order 33, cap 20, Medium",
- "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0032 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
+ "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0030 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
  "plan": "Psychic and Fairy pressure into six Fighting bodies, Wide Guard for the spread turns, and a Ghost body that blanks Fake Out relays and Close Combat.",
  "party": [
   {
@@ -46,7 +46,7 @@
     0
    ],
    "role": "Steel/Fairy wall and Soul-Heart snowball",
-   "availability": "legendary_sign:RustboroCity_DevonCorp_2F. The Devon stairs are blocked until FLAG_RETURNED_DEVON_GOODS (data/maps/RustboroCity_DevonCorp_1F/scripts.inc), i.e. after Rusturf Tunnel, so this is legal only from E0032 onward."
+   "availability": "legendary_sign:RustboroCity_DevonCorp_2F. The Devon stairs are blocked until FLAG_RETURNED_DEVON_GOODS (data/maps/RustboroCity_DevonCorp_1F/scripts.inc), i.e. after Rusturf Tunnel, so this is legal only from E0030 onward."
   },
   {
    "species": "SPECIES_ALAKAZAM",

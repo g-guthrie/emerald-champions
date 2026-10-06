@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0031 TRAINER_GRUNT_RUSTURF_TUNNEL (Aqua cave smuggler, marine/Poison); play_order 29, cap 20, Medium",
+  "encounter": "E0029 TRAINER_GRUNT_RUSTURF_TUNNEL (Aqua cave smuggler, marine/Poison); play_order 29, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Alakazam (Kadabra + Linking Cord), Nidoking (Nidorino + Moon Stone), Gyarados (Magikarp) and Whimsicott (Cottonee + Sun Stone) are ordinary evolution lines; Kartana is a PetalburgWoods_3 land encounter at this cap; Magearna is a reachable legendary sign at RustboroCity_DevonCorp_2F. Ordinary items only. Assisted acquisition, not native capture acceptance.",
   "plan": "Play the authored counterplay exactly: Psychic pressure into all three Poison bodies, Ground pressure into the grounded Poison members, Ice pressure into Noibat, and focus fire to remove Alolan Grimer before its ally so Power of Alchemy never has a corpse to inherit from.",
   "party": [

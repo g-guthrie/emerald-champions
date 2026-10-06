@@ -149,9 +149,8 @@ STEP 5 - cap 14 - Route 104 north trainers (Winston, Gina & Mia)
 ====
 STEP 6 - cap 14 - Route 116 west trainers (Joey, Jose, Clark, Johnson, Devan)
   Battles: E0017 Joey, E0019 Jose, E0020 Clark, E0020 Johnson, E0021 Devan
-  Deferred: E0027 Cyndy, E0028 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
-    it off; reached later from the north), E0029 Dawson, E0029 Sarah, E0030 Janice, E0030 Jerry
-    (Route 116 north, behind Cut trees: after the Stone Badge)
+  Deferred: E0031 Cyndy, E0032 Marlene (Route 115 north: a south-only ledge at y 69 and the sea cut
+    it off; reached later from the north)
   VERIFIED IN PLAY: Route 104 north (with the flower shop), Rustboro (city and every building but the
   Gym), Route 115 south and Seaspray Cave 1F swept; the five trainers beaten on Route 116.
   Adds Route 104 north, Rustboro City, Route 115 south and Seaspray Cave 1F (side trips from
@@ -200,3 +199,61 @@ STEP 7 - cap 14 - Rustboro Gym (Josh, Tommy, Marc, Roxanne)
     the Tunnelers' Rest House (Wanda's boyfriend blocks the door until the tunnel story).
   After the battle (play): Stone Badge (cap 20, Cut with the Cutter's license, Bonding and
     friendship evolutions open), Glimmoranite.
+
+====================================================================================================
+STEP 8 - cap 20 - Route 116 north trainers (Dawson, Sarah, Janice, Jerry)
+  Battles: E0027 Dawson, E0027 Sarah, E0028 Janice, E0028 Jerry
+  VERIFIED IN PLAY: after Roxanne, Rustboro, the Cutter, Petalburg Woods 1-3 and Route 104 swept with
+  Cut; the four trainers beaten (their trainer flags read back set).
+  Adds the Stone Badge (cap 20; Cut with the Cutter's license and a Pokemon able to learn it;
+  Bonding and friendship evolutions open), the Cut-tree habitat, Petalburg Woods behind Cut, Woods 2
+  and 3 (side trips open before Route 116 north), Route 104's Shell Bell.
+  Pokemon
+    Cut trees, every tree (DexNav = code, src/wild_encounter.c sCutTreeHabitat), Lv 12-16: Skwovet,
+      Pineco, Aipom (common); Burmy (uncommon); Applin, Phantump (rare); one tree in three
+    Woods 2 grass (DexNav = code), Lv 12-14: Kakuna, Metapod, Venipede (common); Panpour, Pansear,
+      Pansage (uncommon); Weedle, Morelull, Bounsweet (rare). Honey (code): Combee 12, Beedrill
+      12-13, Butterfree 13-14
+    Woods 3 grass (DexNav = code), Lv 13-15: Oddish, Bellsprout, Dewpider (common); Croagunk, Yanma,
+      Murkrow (uncommon); Emolga, Misdreavus, Impidimp (rare). Old Rod Lv 8-11: Slowpoke, Poliwag.
+      Honey (code): Cutiefly 13, Emolga 13-15, Goomy 15
+    Not live: the Woods 2-3 legendary slots (Virizion, Wo-Chien, Celebi, Zarude, Kartana: not on the
+      DexNav).
+    Evolutions by 20 (species data; Leveler to 20): Bidoof -> Bibarel 15; Shinx -> Luxio 15;
+      Mareep -> Flaaffy 15; Sentret -> Furret 15; Lillipup -> Herdier 16; starters 16 (Marshtomp,
+      Grovyle, Combusken); Fletchling -> Fletchinder 17; Azurill -> Marill (friendship) -> Azumarill
+      18; Marill -> Azumarill 18; Hoppip -> Skiploom 18; Lechonk -> Oinkologne 18; Ledyba -> Ledian
+      18; Nickit -> Thievul 18; Pawmi -> Pawmo 18; Pidgey -> Pidgeotto 18; Poochyena -> Mightyena 18;
+      Rookidee -> Corvisquire 18; Slakoth -> Vigoroth 18; Bounsweet -> Steenee 18; Flabebe ->
+      Floette 19; Bunnelby -> Diggersby 20; Grubbin -> Charjabug 20; Magikarp -> Gyarados 20; Patrat
+      -> Watchog 20; Purrloin -> Liepard 20; Ralts -> Kirlia 20; Whismur -> Loudred 20; Wooper ->
+      Quagsire 20; Yungoos -> Gumshoos 20; Zigzagoon -> Linoone 20; Nincada -> Ninjask (+ Shedinja)
+      20; Burmy -> Wormadam / Mothim 20; Weedle -> Kakuna 7 -> Beedrill 10; Caterpie -> Metapod 7 ->
+      Butterfree 10; Blipbug -> Dottler 10; plus Steps 1-7's. Friendship (Bonding now open): Budew
+      -> Roselia, Togepi -> Togetic, Pichu -> Pikachu, Azurill -> Marill. Sun Stone in hand, but no
+      Sun Stone user in the pool yet.
+  Battle items
+    Shops (code, data/scripts/general_mart.inc): Center marts add Great Ball, Super Potion, Honey,
+      Repel with the Stone Badge. Clerk: no Stone Badge floor items.
+    Gifts and pickups (play): Woods 1 Great Ball, Revive, hidden Tiny Mushroom x2, Miracle Seed (the
+      Woods girl); Woods 2 Sun Stone, Super Potion, Heal Ball, Toxic Orb; Woods 3 Luminous Moss,
+      Nugget, hidden Big Root, hidden Insect Plate; Route 104 Shell Bell
+    Wild held (species data): Skwovet (- / Oran Berry), Morelull (Tiny / Big Mushroom), Combee and
+      Cutiefly (Honey); battle items pending the owner's call: Bounsweet Grassy Seed, Venipede and
+      Beedrill Poison Barb, Butterfree Silver Powder, Croagunk Black Sludge, Dewpider Mystic Water,
+      Oddish Absorb Bulb, Yanma Wide Lens, Slowpoke Lagging Tail, Goomy Shed Shell.
+  Not yet: Woods 3 Victreebelite (pond: Surf).
+
+====================================================================================================
+STEP 9 - cap 20 - Rusturf Tunnel Aqua Grunt
+  Battles: E0029 Rusturf Tunnel Grunt
+  VERIFIED IN PLAY: Route 116 north swept with Cut; the Grunt beaten (he returns the Devon Parts).
+  Adds Route 116 north.
+  Battle items (play): Binding Band, Ether, hidden Super Potion; berry trees Pinap x6, Chesto x4.
+  Pokemon: none new (Route 116's tables and the Cut trees are already counted).
+
+====================================================================================================
+STEP 10 - cap 20 - Rival May / Brendan, Rustboro City
+  Battles: E0030 Rival (Rustboro)
+  VERIFIED IN PLAY: Devon Corp swept (Mr. Stone's scene on 3F); the rival battle won in Rustboro.
+  Adds nothing battle-relevant: the PokeNav and Mr. Stone's letter.

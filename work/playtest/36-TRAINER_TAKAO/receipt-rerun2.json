@@ -18,7 +18,7 @@
   "headline": "The turn-one healthy withdrawal did NOT recur. Grapploct stayed in and Protected instead, denying both of my super-effective attacks. That is the single most important result in this receipt.",
   "party_manifest": "work/playtest/36-TRAINER_TAKAO/party-rerun.json",
   "party_summary": "Reused the R1 party unchanged: Tsareena / Magearna / Spiritomb / Alakazam / Celebi / Mr. Mime. Only Tsareena, Magearna and Celebi took a turn.",
-  "party_caveat": "This manifest carries Celebi (mythical) and Magearna at cap 20; Alakazam is included although the R1 audit for E0032 called Abra unreachable before the Dewford Gym, and Takao is play_order 36, after Dewford, so that is consistent. Reused unchanged for comparability. Celebi was used on the last turn.",
+  "party_caveat": "This manifest carries Celebi (mythical) and Magearna at cap 20; Alakazam is included although the R1 audit for E0030 called Abra unreachable before the Dewford Gym, and Takao is play_order 36, after Dewford, so that is consistent. Reused unchanged for comparability. Celebi was used on the last turn.",
   "driver": {
     "tool": "scripts/playthrough/battle_driver.py",
     "build_dir": "work/agent-battle-build",

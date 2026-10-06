@@ -186,7 +186,7 @@ MINUN @SITRUS_BERRY MINUS TIMID 4/0/0/252/0/252 2 | THUNDERBOLT, HELPING_HAND, E
 VOLBEAT @LUM_BERRY PRANKSTER MODEST 252/0/4/252/0/0 4 | TAIL_GLOW, ROOST, BUG_BUZZ, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 ILLUMISE @LEFTOVERS PRANKSTER MODEST 4/0/0/252/0/252 4 | DAZZLING_GLEAM, AIR_SLASH, ENCORE, HELPING_HAND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0027 TRAINER_CYNDY_1 class=regular
+## E0031 TRAINER_CYNDY_1 class=regular
 strategy: PRESSURE
 mega_slots: NONE
 plan: Riolu and Meditite keep Cyndy’s support opening: Prankster Screech or Quick Guard opens a physical hit, while Fake Out buys a turn and Pure Power strengthens Drain Punch. Crabominable supplies Iron Fist Ice Hammer for Flying targets, Drain Punch recovery and Thunder Punch coverage. Tinkaton switches into the Fairy, Flying, Psychic, Dark and Bug attacks that threaten its partners, then uses Gigaton Hammer, Mold Breaker Play Rough or Knock Off. It cannot use Gigaton Hammer on consecutive turns.
@@ -196,7 +196,7 @@ MEDITITE @SITRUS_BERRY PURE_POWER JOLLY 4/252/0/0/0/252 9 | FAKE_OUT, DRAIN_PUNC
 CRABOMINABLE @SITRUS_BERRY IRON_FIST ADAMANT 252/252/0/0/4/0 9 | ICE_HAMMER, DRAIN_PUNCH, THUNDER_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 TINKATON @LEFTOVERS MOLD_BREAKER ADAMANT 252/252/0/0/4/0 11 | GIGATON_HAMMER, PLAY_ROUGH, KNOCK_OFF, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0028 TRAINER_MARLENE class=regular
+## E0032 TRAINER_MARLENE class=regular
 strategy: TRICK_ROOM,PRESSURE
 mega_slots: NONE
 plan: Marlene's young psychics now travel with a big sister who handles their counters. First two useful turns: Gothita and Hatterene lead. Hatterene sets Trick Room from 29 base Speed, and Magic Bounce reflects the Taunt, Encore or Will-O-Wisp that normally stops a room; Fake Out still interrupts it, so Gothita Protects or uses Fake Tears on the foe Hatterene will hit next. Shadow Tag keeps non-Ghost foes from switching out of the room, but pivot moves such as U-turn and Parting Shot still leave. Under the room, Hatterene's Dazzling Gleam hits both foes and punishes Dark and Fighting leads, Mystical Fire answers Bug and Steel while lowering Special Attack, and Psychic handles Poison. Alternate deployment: Spoink is the backup room with Thick Fat and Power Gem into Bug, Fire and Flying targets. Reserves & disruption: Inkay replaces Slowpoke and Baltoy's Knock Off weakness with a Dark/Psychic body that resists Dark and Ghost and is immune to Psychic; Contrary turns Superpower into +1 Attack and Defense, Superpower hits Dark and Steel foes for super-effective damage, Knock Off hits Ghost foes, Psycho Cut hits Fighting and Poison, and Protect covers the turn a room ends. Gothita's Focus Sash and Inkay's Eviolite can still be knocked away.
@@ -258,7 +258,7 @@ DRILBUR @LIFE_ORB SAND_RUSH ADAMANT 4/252/0/0/0/252 3 | DRILL_RUN, ROCK_SLIDE, X
 ARON @EVIOLITE STURDY ADAMANT 252/252/4/0/0/0 4 | IRON_HEAD, ROCK_SLIDE, BODY_PRESS, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SANDILE @EVIOLITE MOXIE JOLLY 4/252/0/0/0/252 4 | STOMPING_TANTRUM, CRUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0029 TRAINER_DAWSON class=regular
+## E0027 TRAINER_DAWSON class=regular
 strategy: TAILWIND
 mega_slots: NONE
 plan: First two useful turns: Galarian Meowth uses Fake Out to enable Rookidee's useful Tailwind or Taunt, then attacks or U Turns into an improved board. Convert the speed window into Minccino's Skill Link Tail Slap or an appropriate attacking partner, rather than repeated switches without damage. Alternate deployment: Meowth plus Minccino supplies direct multi-hit pressure; Wide Lens improves Tail Slap reliability rather than increasing the Skill Link hit count. Encore punishes a genuinely exploitable move. Reserves & disruption: Eviolite/Fluffy Wooloo supplies a physical-contact buffer and zero-friendship Double-Edge; respect its Fire weakness and recoil costs. It is not a second weather/speed engine. Do not bring Sarah's Trick Room onto this independent board. Counterplay & audit: Ghost/Fake Out immunity, Taunt, speed reversal and punishing a poor switch. Disposition: Approved Wide Lens and individual levels; retain Dawson's four species and separate trainer receipt. Full difficulty calibration remains pending.
@@ -268,7 +268,7 @@ ROOKIDEE @EVIOLITE KEEN_EYE JOLLY 4/252/0/0/0/252 4 | BRAVE_BIRD, TAILWIND, TAUN
 WOOLOO @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 6 | DOUBLE_EDGE, WILD_CHARGE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MINCCINO @WIDE_LENS SKILL_LINK JOLLY 4/252/0/0/0/252 3 | TAIL_SLAP, KNOCK_OFF, U_TURN, ENCORE | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0029 TRAINER_SARAH class=regular
+## E0027 TRAINER_SARAH class=regular
 strategy: TRICK_ROOM
 mega_slots: NONE
 ai: Conservative
@@ -279,7 +279,7 @@ GOTHITA @EVIOLITE COMPETITIVE QUIET 252/0/4/252/0/0 4 | PSYCHIC, ENERGY_BALL, HE
 TRAPINCH @LIFE_ORB ARENA_TRAP BRAVE 252/252/4/0/0/0 1 | EARTHQUAKE, FIRST_IMPRESSION, CRUNCH, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 BALTOY @EVIOLITE LEVITATE QUIET 252/0/4/252/0/0 4 | EARTH_POWER, PSYCHIC, TRICK_ROOM, PROTECT | ivs=31/31/31/31/31/0 | friendship=255
 
-## E0030 TRAINER_JANICE class=casual
+## E0028 TRAINER_JANICE class=casual
 strategy: NONE
 mega_slots: NONE
 plan: First two useful turns: Togedemaru uses Fake Out or Nuzzle to enable Marill's immediate Huge Power damage, or Iron Head when direct pressure is better. Lightning Rod protects eligible Water partners from Electric attacks; it does not protect Togedemaru from Ground damage. Spiky Shield requires useful partner action or an actual survival payoff. Alternate deployment: Togedemaru plus Chewtle supplies an alternate physical attacking pair; choose the partner for the current coverage and incoming threats rather than blindly preserving the lead. Reserves & disruption: Swirlix uses Flamethrower for Grass/Steel coverage without feeding its own Togedemaru's Lightning Rod, Dazzling Gleam for foe-only spread damage and receives Unburden only after its Sitrus Berry is consumed. Togedemaru's Sitrus is recovery, not an Unburden trigger. Ground immunity/paralysis eligibility and opposing priority denial invalidate some support lines. Counterplay & audit: Severe Ground pressure against Togedemaru, Grass pressure against the Water attackers, special attacks and denied priority. Disposition: Approved Togedemaru replaces Pichu and Dazzling Gleam replaces Swirlix's unsupported Moonblast; Janice retains her independent four-member doubles battle. Thunderbolt is retired because allied Lightning Rod redirects it away from the intended foe and Togedemaru has no special attack to exploit the boost. Levels await native calibration.
@@ -289,7 +289,7 @@ MARILL @EVIOLITE HUGE_POWER ADAMANT 252/252/4/0/0/0 4 | AQUA_JET, PLAY_ROUGH, KN
 SWIRLIX @SITRUS_BERRY UNBURDEN MODEST 4/0/0/252/0/252 3 | DAZZLING_GLEAM, ENERGY_BALL, FLAMETHROWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 CHEWTLE @EVIOLITE STRONG_JAW ADAMANT 232/252/0/0/0/24 4 | LIQUIDATION, CRUNCH, ICE_FANG, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0030 TRAINER_JERRY_1 class=casual
+## E0028 TRAINER_JERRY_1 class=casual
 strategy: PRESSURE
 mega_slots: NONE
 ai: Conservative
@@ -350,7 +350,7 @@ TYRANTRUM @ASSAULT_VEST ROCK_HEAD JOLLY 4/252/0/0/0/252 0 | HEAD_SMASH, DRAGON_C
 OMASTAR @LIFE_ORB SHELL_ARMOR MODEST 4/0/0/252/0/252 1 | MUDDY_WATER, ICE_BEAM, EARTH_POWER, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 BOMBIRDIER @SITRUS_BERRY ROCKY_PAYLOAD JOLLY 4/252/0/0/0/252 1 | ROCK_SLIDE, BRAVE_BIRD, KNOCK_OFF, TAILWIND | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0031 TRAINER_GRUNT_RUSTURF_TUNNEL class=grunt
+## E0029 TRAINER_GRUNT_RUSTURF_TUNNEL class=grunt
 strategy: TAILWIND,PRESSURE
 mega_slots: NONE
 plan: The cave smuggler leads Alolan Grimer and Qwilfish: Eviolite bulk and Intimidate support immediate Knock Off/Poison/Water pressure. Power of Alchemy copies a fainted active ally's eligible ability only while Grimer survives beside it. Qwilfish can leave a second Intimidate activation; Skrelp can leave Adaptability for Grimer's STAB; Noibat can leave Infiltrator. None requires sacrificing a healthy partner. Noibat is the sonar-cave Tailwind reserve and special Fire/Dragon coverage; it replaces Zubat's unsupported Tailwind role. Skrelp keeps the special Water/Poison lane. Acid Spray is useful only when a subsequent special attack benefits: the usually faster Noibat cannot receive a retroactive same-turn boost. Re-evaluate every inherited ability and every switch. Do not value Power of Alchemy as an ability that stacks or persists through an ordinary switch. Counterplay: special focus fire, Psychic pressure on Qwilfish, Ground pressure on the grounded Poison members, Ice/Rock pressure on Noibat, status and denying the inheritance by removing Grimer first. Design: preserve Aqua's marine/Poison identity while replacing the repeated Mightyena with the campaign's first Alolan Grimer; chosen individual levels are initial Medium seeds, not calibrated difficulty.
@@ -360,7 +360,7 @@ QWILFISH @BLACK_SLUDGE INTIMIDATE ADAMANT 252/252/4/0/0/0 7 | WATERFALL, POISON_
 SKRELP @EVIOLITE ADAPTABILITY MODEST 252/0/0/168/0/88 7 | SLUDGE_BOMB, MUDDY_WATER, ACID_SPRAY, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 NOIBAT @EVIOLITE INFILTRATOR TIMID 4/0/0/252/0/252 8 | TAILWIND, HEAT_WAVE, DRAGON_PULSE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
-## E0032 TRAINER_BRENDAN_RUSTBORO_MUDKIP class=rival
+## E0030 TRAINER_BRENDAN_RUSTBORO_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
@@ -369,7 +369,7 @@ TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATT
 ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 14 | LEAF_BLADE, DRAIN_PUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-## E0032 TRAINER_BRENDAN_RUSTBORO_TORCHIC class=rival
+## E0030 TRAINER_BRENDAN_RUSTBORO_TORCHIC class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
@@ -378,7 +378,7 @@ TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATT
 ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 14 | WATERFALL, EARTHQUAKE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-## E0032 TRAINER_BRENDAN_RUSTBORO_TREECKO class=rival
+## E0030 TRAINER_BRENDAN_RUSTBORO_TREECKO class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
@@ -387,7 +387,7 @@ TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATT
 ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 COMBUSKEN @EVIOLITE SPEED_BOOST JOLLY 4/252/0/0/0/252 14 | FIRE_PUNCH, BRICK_BREAK, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-## E0032 TRAINER_MAY_RUSTBORO_MUDKIP class=rival
+## E0030 TRAINER_MAY_RUSTBORO_MUDKIP class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
@@ -396,7 +396,7 @@ TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATT
 ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 GROVYLE @EVIOLITE OVERGROW JOLLY 4/252/0/0/0/252 14 | LEAF_BLADE, DRAIN_PUNCH, ROCK_SLIDE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-## E0032 TRAINER_MAY_RUSTBORO_TORCHIC class=rival
+## E0030 TRAINER_MAY_RUSTBORO_TORCHIC class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.
@@ -405,7 +405,7 @@ TAILLOW @FLAME_ORB GUTS JOLLY 4/252/0/0/0/252 15 | FACADE, BRAVE_BIRD, QUICK_ATT
 ELECTRIKE @FOCUS_SASH LIGHTNING_ROD TIMID 4/0/0/252/0/252 15 | THUNDERBOLT, EERIE_IMPULSE, THUNDER_WAVE, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 SHROOMISH @EVIOLITE EFFECT_SPORE BOLD 252/0/232/0/0/24 14 | SPORE, LEECH_SEED, GIGA_DRAIN, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MARSHTOMP @SITRUS_BERRY TORRENT ADAMANT 252/252/4/0/0/0 14 | WATERFALL, EARTHQUAKE, ICE_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-## E0032 TRAINER_MAY_RUSTBORO_TREECKO class=rival
+## E0030 TRAINER_MAY_RUSTBORO_TREECKO class=rival
 strategy: SETUP
 mega_slots: NONE
 plan: The rival retains a recognizable Guts Taillow, Lightning Rod Electrike, Spore Shroomish and the unchosen regional middle-stage starter. Taillow attacks immediately when that is better than waiting for Flame Orb; Protect needs actual survival or a useful Orb-turn payoff. Electrike's Eerie Impulse replaces unsupported Helping Hand and can suppress a relevant special attack before it lands; Thunder Wave and Thunderbolt remain alternate support/pressure. Shroomish supplies a deliberate sleep/recovery mode, not a license for empty Protect cycles. The fourth slot is a native regional substitution: all six gender/Hoenn aliases and the 24 non-Hoenn middle-stage alternatives must remain coherent. Hoenn keeps its printed bespoke sets; Marshtomp Earthquake is safe beside Taillow but not Electrike/Shroomish. Prinplup's replacement uses Hydro Pump instead of unsupported Scald; Drizzile uses Mud Shot instead of unsupported Ice Beam, preserving Sniper/Focus Energy and adding Electric coverage/speed control. No automatic sun or ally Electric activation is assumed. Counterplay: physical attacks bypass Eerie Impulse, powder/status immunity, priority, special-drop prevention and attacking the exposed partner during Protect. Design: continuity earns retaining the familiar species, with differentiated support and individual Medium level seeds; full native branch/difficulty acceptance remains pending.

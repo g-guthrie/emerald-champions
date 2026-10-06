@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "encounter": "E0032 TRAINER_BRENDAN_RUSTBORO_TREECKO (Rustboro rival, Treecko branch so the rival fields Combusken); play_order 30, cap 20, Medium",
+  "encounter": "E0030 TRAINER_BRENDAN_RUSTBORO_TREECKO (Rustboro rival, Treecko branch so the rival fields Combusken); play_order 30, cap 20, Medium",
   "availability_audit": "All six are gate-20 or lower in work/reference-pools/pool-20.json. Kartana is a PetalburgWoods_3 land encounter and Tsareena evolves from Steenee by known move; Nidoking (Moon Stone) and Alakazam (Linking Cord) are ordinary trade/stone evolutions; Lucario is AlteringCave_1F; Magearna is a reachable legendary sign. Ordinary items only. Assisted acquisition, not native capture acceptance.",
   "plan": "Run the authored crack list: an almost entirely physical party so Eerie Impulse has nothing worth suppressing, two Grass bodies that are outright immune to Spore, a Ground body immune to Thunderbolt and Thunder Wave, Queenly Majesty to blank Taillow's Quick Attack priority, and Bullet Punch priority of my own to punish a passive Flame Orb turn.",
   "party": [

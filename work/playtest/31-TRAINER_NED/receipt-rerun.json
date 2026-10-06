@@ -10,7 +10,7 @@
   "difficulty": "medium",
   "party_manifest": "work/playtest/31-TRAINER_NED/party-rerun.json",
   "party_changed_from_first_pass": {
-    "reason": "Nothing had to change. This is the one party in the block that was already chronology-legal: Jolteon (Route 101 Eevee plus a Rustboro Thunder Stone), Kartana and Quagsire (Petalburg Woods 3 and Seaspray Cave off Route 115), Nidoking, Lucario, and Magearna - which is legal from E0032 onward because this fight follows Devon Corp. The only edit was cosmetic: Kartana's Assault Vest was swapped for a Life Orb after the previous battle showed the Vest made its Protect slot unusable.",
+    "reason": "Nothing had to change. This is the one party in the block that was already chronology-legal: Jolteon (Route 101 Eevee plus a Rustboro Thunder Stone), Kartana and Quagsire (Petalburg Woods 3 and Seaspray Cave off Route 115), Nidoking, Lucario, and Magearna - which is legal from E0030 onward because this fight follows Devon Corp. The only edit was cosmetic: Kartana's Assault Vest was swapped for a Life Orb after the previous battle showed the Vest made its Protect slot unusable.",
     "removed": [], "added": []
   },
   "opponent_levels_before": {"FINNEON": 23, "WATTREL": 21, "MANTYKE": 22, "ARROKUDA": 20},

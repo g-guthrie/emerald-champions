@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pass": "rerun R5 (confirming run on the rebuilt ROM work/agent-battle-build)",
   "play_order": 30,
-  "e_group": "E0032",
+  "e_group": "E0030",
   "trainer": "TRAINER_BRENDAN_RUSTBORO_TREECKO",
   "alias_note": "Played the Treecko-branch Brendan as the brief directs. No level change this pass, so nothing needs mirroring to the other five aliases.",
   "class": "rival",

@@ -15,7 +15,7 @@
   ],
   "party_manifest": "work/playtest/31-TRAINER_NED/party-rerun.json",
   "party_summary": "Reused the R1 party unchanged: Jolteon / Kartana / Quagsire / Nidoking / Magearna / Lucario. Only the first two ever took a turn.",
-  "party_caveat": "Same reservation as E0032: this manifest uses Kartana, an Ultra Beast justified as a Cut-gated Petalburg Woods wild catch. Reused unchanged for comparability with the R1 measurement, but it makes this benchmark an upper bound on cap-20 player power.",
+  "party_caveat": "Same reservation as E0030: this manifest uses Kartana, an Ultra Beast justified as a Cut-gated Petalburg Woods wild catch. Reused unchanged for comparability with the R1 measurement, but it makes this benchmark an upper bound on cap-20 player power.",
   "driver": {
     "tool": "scripts/playthrough/battle_driver.py",
     "build_dir": "work/agent-battle-build",
