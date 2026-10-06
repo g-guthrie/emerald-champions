@@ -34,15 +34,18 @@ enum {
 };
 
 // The game logo (graphics/title_screen/inclement_emerald_2_logo.png, made by
-// tools/title_logo.py): 145x42 at its own pixel size, centred in a 192x64
-// sheet shown as three 64x64 8bpp sprites.
-#define VERSION_BANNER_PARTS 3
-#define VERSION_BANNER_PART_TILES 128
-#define VERSION_BANNER_LEFT_X (DISPLAY_WIDTH / 2 - 64)
-// It settles clear of the POKéMON logo above and PRESS START below.
-#define VERSION_BANNER_Y_GOAL 76
+// tools/title_logo.py): 229x76 at its own pixel size, centred in a 256x96
+// sheet shown as a 4x3 grid of 64x32 8bpp sprites.
+#define VERSION_BANNER_COLUMNS 4
+#define VERSION_BANNER_ROWS 3
+#define VERSION_BANNER_PARTS (VERSION_BANNER_COLUMNS * VERSION_BANNER_ROWS)
+#define VERSION_BANNER_PART_TILES 64
+#define VERSION_BANNER_LEFT_X (DISPLAY_WIDTH / 2 - 96)
+// The top row's centre; it settles with the logo's top just under the
+// POKéMON logo and its bottom clear of PRESS START.
+#define VERSION_BANNER_Y_GOAL 56
 #define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 64)
-#define START_BANNER_Y 108
+#define START_BANNER_Y 134
 #define COPYRIGHT_BANNER_Y 148
 #define VERSION_BANNER_COLORS (9 * 16) // OBJ palettes 0-8, below PRESS START's
 #define START_BANNER_X 128
@@ -122,10 +125,10 @@ static const struct OamData sVersionBannerLeftOamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
     .bpp = ST_OAM_8BPP,
-    .shape = SPRITE_SHAPE(64x64),
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -139,10 +142,10 @@ static const struct OamData sVersionBannerRightOamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
     .bpp = ST_OAM_8BPP,
-    .shape = SPRITE_SHAPE(64x64),
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -155,17 +158,24 @@ static const union AnimCmd sVersionBannerLeftAnimSequence[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sVersionBannerPart1AnimSequence[] =
-{
-    ANIMCMD_FRAME(1 * VERSION_BANNER_PART_TILES, 30),
-    ANIMCMD_END,
-};
+#define VERSION_BANNER_PART_ANIM(n) \
+static const union AnimCmd sVersionBannerPart##n##AnimSequence[] = \
+{ \
+    ANIMCMD_FRAME(n * VERSION_BANNER_PART_TILES, 30), \
+    ANIMCMD_END, \
+}
 
-static const union AnimCmd sVersionBannerPart2AnimSequence[] =
-{
-    ANIMCMD_FRAME(2 * VERSION_BANNER_PART_TILES, 30),
-    ANIMCMD_END,
-};
+VERSION_BANNER_PART_ANIM(1);
+VERSION_BANNER_PART_ANIM(2);
+VERSION_BANNER_PART_ANIM(3);
+VERSION_BANNER_PART_ANIM(4);
+VERSION_BANNER_PART_ANIM(5);
+VERSION_BANNER_PART_ANIM(6);
+VERSION_BANNER_PART_ANIM(7);
+VERSION_BANNER_PART_ANIM(8);
+VERSION_BANNER_PART_ANIM(9);
+VERSION_BANNER_PART_ANIM(10);
+VERSION_BANNER_PART_ANIM(11);
 
 
 static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
@@ -174,10 +184,19 @@ static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
 };
 
 // The parts right of the first, in order.
-static const union AnimCmd *const sVersionBannerRightAnimTable[] =
+static const union AnimCmd *const sVersionBannerRightAnimTable[VERSION_BANNER_PARTS - 1] =
 {
     sVersionBannerPart1AnimSequence,
     sVersionBannerPart2AnimSequence,
+    sVersionBannerPart3AnimSequence,
+    sVersionBannerPart4AnimSequence,
+    sVersionBannerPart5AnimSequence,
+    sVersionBannerPart6AnimSequence,
+    sVersionBannerPart7AnimSequence,
+    sVersionBannerPart8AnimSequence,
+    sVersionBannerPart9AnimSequence,
+    sVersionBannerPart10AnimSequence,
+    sVersionBannerPart11AnimSequence,
 };
 
 static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
@@ -726,11 +745,13 @@ static void Task_TitleScreenPhase1(u8 taskId)
         gSprites[spriteId].sAlphaBlendIdx = ARRAY_COUNT(gTitleScreenAlphaBlend);
         gSprites[spriteId].sParentTaskId = taskId;
 
-        // Create the rest of version banner
+        // Create the rest of version banner. Every part slides down together;
+        // the rows below the first sit 32 pixels apart through y2.
         for (u32 i = 1; i < VERSION_BANNER_PARTS; i++)
         {
-            spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_LEFT_X + i * 64, VERSION_BANNER_Y, 0);
+            spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_LEFT_X + (i % VERSION_BANNER_COLUMNS) * 64, VERSION_BANNER_Y, 0);
             StartSpriteAnim(&gSprites[spriteId], i - 1);
+            gSprites[spriteId].y2 = (i / VERSION_BANNER_COLUMNS) * 32;
             gSprites[spriteId].sParentTaskId = taskId;
         }
 

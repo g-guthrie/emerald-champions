@@ -4,12 +4,10 @@
     python3 tools/title_logo.py graphics/title_screen/inclement_emerald_2_logo_master.png \
         graphics/title_screen/inclement_emerald_2_logo.png
 
-The master is the logo itself, 145x42, hand-finished: INCLEMENT is
-redrawn in a bold 8-pixel face on one line, its gold bow redrawn with a low
-arch over the top and its straight bottom sitting right on EMERALD's white
-border (two black pixels round every letter), the 2's white top outline
-restored, and the outlines cleaned. It is shown at that
-size, centred in a 192x64 8bpp sheet (three 64x64 sprites,
+The master is the logo itself, 229x76: the artwork shrunk in GIMP to 240x76
+with no interpolation (each pixel taken from the artwork, none blended) and
+its alpha thresholded at 127, which drops the faint halo at the sides. It is
+shown at that size, centred in a 256x96 8bpp sheet (twelve 64x32 sprites,
 src/title_screen.c), with at most PALETTE_COLORS colours after the
 transparent index 0.
 
@@ -23,8 +21,8 @@ import sys
 import numpy as np
 from PIL import Image
 
-SHEET_WIDTH, SHEET_HEIGHT = 192, 64
-PALETTE_COLORS = 64  # OBJ palettes 0-8 hold up to 143
+SHEET_WIDTH, SHEET_HEIGHT = 256, 96
+PALETTE_COLORS = 143  # all of OBJ palettes 0-8
 MIN_WIDTH = 96  # narrower and the lettering cannot read
 
 
