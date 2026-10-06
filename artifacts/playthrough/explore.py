@@ -50,7 +50,7 @@ def mode_for(script):
     return 'B' if SHOP_LIKE.search(script + '\n' + script_graph_text(script)) else 'A'
 
 
-def reachable(map_dir, start, caps):
+def reachable(map_dir, start, caps, gates=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid)
     wp = RS.warps(mid)   # a door, stair or mat leaves the map
@@ -59,14 +59,35 @@ def reachable(map_dir, start, caps):
         p = q.popleft()
         for d in RS.DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
-            if r and r not in seen and r not in wp: seen.add(r); q.append(r)
+            if r and r not in seen and r not in wp and r not in gates: seen.add(r); q.append(r)
     return seen, g
 
 
-def plan(map_dir, start, caps, skip):
+def story_gates(map_dir, values):
+    """Trigger tiles that are live now (their var holds the trigger's value) and whose script never
+    changes that var: they fire every time and turn the player back (Petalburg's Gym escort), so the
+    sweep walks around them. One-time scenes set their var and are walked into as usual."""
+    m = next(mm for mm in R.MAPS.values() if mm['_dir'] == map_dir)
+    gates = set()
+    for c in m.get('coord_events', []) or []:
+        var = c.get('var') or ''
+        if c.get('type') != 'trigger' or var not in values: continue
+        if values[var] != int(str(c.get('var_value', 0)), 0): continue
+        if re.search(rf'\b(?:setvar|addvar|subvar|copyvar)\s+{var}\b', script_graph_text(c['script'])): continue
+        gates.add((c['x'], c['y']))
+    return gates
+
+
+def trigger_vars(map_dir):
+    m = next(mm for mm in R.MAPS.values() if mm['_dir'] == map_dir)
+    return sorted({c['var'] for c in m.get('coord_events', []) or [] if (c.get('var') or '').startswith('VAR_')
+                   and not c['var'].startswith('VAR_0x')})
+
+
+def plan(map_dir, start, caps, skip, gates=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     m = R.MAPS[mid]
-    tiles, g = reachable(map_dir, start, caps)
+    tiles, g = reachable(map_dir, start, caps, gates)
     # photo stops: greedy cover of every reachable tile with a 15x10 screen window
     uncovered = set(tiles); photos = []
     # a photo stop is a tile to stand on: never one an object occupies
@@ -92,8 +113,8 @@ def plan(map_dir, start, caps, skip):
     later = []
     for j in [j for j in jobs if j['kind'] != 'photo' and not near(tiles, j['at'])]:
         jobs.remove(j)
-        need = next((lv for lv in R.LEVELS[1:] if near(reachable(map_dir, start, R.LEVEL_CAPS[lv])[0], j['at'])),
-                    'not from here')
+        need = next((lv for lv in R.LEVELS[1:] if near(reachable(map_dir, start, R.LEVEL_CAPS[lv], gates)[0], j['at'])),
+                    'story progress' if gates and near(reachable(map_dir, start, caps)[0], j['at']) else 'not from here')
         later.append(dict(label=to_step(j)['label'], source=j.get('script') or j.get('what'), needs=need))
     # nearest-neighbour order from the start
     order = []; here = start; left = jobs[:]
@@ -150,16 +171,18 @@ def main():
     caps = [c for c in a.caps.split(',') if c]
     skip = {int(s) for s in a.skip.split(',') if s}
     # find the start position from the save
-    probe = {'name': 'probe ' + a.name, 'start': {'save': a.save}, 'steps': [{'frames': 2}]}
+    probe = {'name': 'probe ' + a.name, 'start': {'save': a.save}, 'steps': [{'frames': 2}],
+             'queries': {v: {'kind': 2, 'id': v} for v in trigger_vars(a.map)}}
     _, pr = run_chunk(probe, a.name + '-probe')
     f = pr['outcome']['final']
     if f['map'] != a.map: raise SystemExit(f"save is on {f['map']}, not {a.map}")
     start = (f['x'], f['y'])
-    order, tiles, g, later = plan(a.map, start, caps, skip)
+    gates = story_gates(a.map, f.get('queries', {}))
+    order, tiles, g, later = plan(a.map, start, caps, skip, gates)
     chunks = [order[i:i + CHUNK] for i in range(0, len(order), CHUNK)]
     save = a.save; results = []; dests = []
     for n, chunk in enumerate(chunks):
-        steps = ([{'bag': 'before'}] if n == 0 else []) + [dict(to_step(j), map=a.map) for j in chunk]
+        steps = ([{'bag': 'before'}] if n == 0 else []) + [dict(to_step(j), map=a.map, avoid=sorted(gates)) for j in chunk]
         if n == len(chunks) - 1: steps.append({'bag': 'after'})
         recipe = {'name': f'{a.name} {n + 1}/{len(chunks)}', 'start': {'save': save}, 'battle_resolution': 'fixture_win',
                   'steps': steps, 'expect': {'ready': True}}

@@ -83,6 +83,10 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
   hidden-actor approach skip warps (Brendan 2F stairs sent the sweep to 1F).
 - Every explore step carries "map"; the runner fails the chunk if the game is on another map.
 - Stand spots for talk/inspect never sit on another actor or a warp (lab: it chose Birch's tile).
+- Story gates: a coord trigger live now whose script never changes its own var repeats forever and
+  turns the player back (Petalburg Gym escort at x=8, y 10-13 while VAR_PETALBURG_CITY_STATE == 0).
+  explore.py queries trigger vars, walks around such tiles, lists what lies behind as "story progress".
+  Petalburg: visit the Gym (Norman, Wally) before the west side.
 - Absent actors so far are all flag-hidden at this story point (checked against map.json flags).
 
 ## Wild Pokemon evidence: DexNav (Start menu, 2nd entry), from the start of the game

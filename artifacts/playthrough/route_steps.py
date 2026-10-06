@@ -47,7 +47,7 @@ def warps(mid):
     return {(w['x'], w['y']) for w in R.MAPS[mid].get('warp_events', [])}
 
 
-def closest_reachable(map_dir, start, target, caps=frozenset()):
+def closest_reachable(map_dir, start, target, caps=frozenset(), avoid=frozenset()):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid); wp = warps(mid)
     seen = {start}; q = deque([start])
@@ -55,7 +55,7 @@ def closest_reachable(map_dir, start, target, caps=frozenset()):
         p = q.popleft()
         for d in DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
-            if r and r not in seen and r not in wp: seen.add(r); q.append(r)
+            if r and r not in seen and r not in wp and r not in avoid: seen.add(r); q.append(r)
     # end beside the target, never on an object's own tile (it may load in once we are close)
     objs = {(o['x'], o['y']) for o in R.MAPS[mid].get('object_events', [])}
     cands = (seen - objs) or seen

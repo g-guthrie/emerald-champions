@@ -142,9 +142,9 @@ async def run(spec,out):
                         # The game only loads objects near the camera: walk to the closest
                         # reachable tile to where the map places this one, then look again.
                         here=(studio.state[4],studio.state[5]);near=tuple(step["near"])
-                        best=route_steps.closest_reachable(studio.current_map,here,near)
+                        best=route_steps.closest_reachable(studio.current_map,here,near,avoid={tuple(t) for t in step.get("avoid",[])})
                         if best and best!=here:
-                            steps_iter.extend_front([{"walk_to":list(best)},dict(step,_approached=True)])
+                            steps_iter.extend_front([{"walk_to":list(best),"avoid":step.get("avoid",[])},dict(step,_approached=True)])
                             continue
                     if not hit:
                         recorder.mark(f"ABSENT actor {step['talk_id']} {step.get('label','')}",studio.packet)
@@ -154,6 +154,7 @@ async def run(spec,out):
                 else:
                     target=tuple(step["inspect"])
                 occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
+                gates={tuple(t) for t in step.get("avoid",[])}   # story triggers that turn the player back
                 here=(studio.state[4],studio.state[5])
                 options=[]
                 for dx,dy,face in ((0,1,"UP"),(0,-1,"DOWN"),(1,0,"LEFT"),(-1,0,"RIGHT"),(0,2,"UP"),(0,-2,"DOWN"),(2,0,"LEFT"),(-2,0,"RIGHT")):
@@ -163,8 +164,8 @@ async def run(spec,out):
                         mid=(target[0]+dx//2,target[1]+dy//2)
                         if not route_steps.is_counter(studio.current_map,mid):continue
                     # never stand on another actor or on a door, stair or mat (it would leave the map)
-                    if spot in occupied or (spot!=here and spot in route_steps.warps(route_steps.map_id(studio.current_map))):continue
-                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied)
+                    if spot in occupied or spot in gates or (spot!=here and spot in route_steps.warps(route_steps.map_id(studio.current_map))):continue
+                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied|gates)
                     if mv is not None:options.append((len(mv),spot,face))
                 if not options:
                     recorder.mark(f"UNREACHABLE {target} {step.get('label','')}",studio.packet)
@@ -174,7 +175,7 @@ async def run(spec,out):
                 serial0=studio.state[30];bag_label=step.get("label","")
                 idx=len(interactions)
                 interactions.append(dict(label=bag_label,target=list(target),status="visited",stand=list(spot)))
-                sub=[{"walk_to":list(spot),"face":face,"label":"At "+bag_label[:24]},{"note":idx,"edge":"start"},{"press":"A","frames":40},
+                sub=[{"walk_to":list(spot),"avoid":step.get("avoid",[]),"face":face,"label":"At "+bag_label[:24]},{"note":idx,"edge":"start"},{"press":"A","frames":40},
                      {"tap":step.get("mode","A"),"every":40,"frames":int(step.get("limit",4000)),"min_frames":20,"until":"idle"},
                      {"note":idx,"edge":"end"}]
                 steps_iter.extend_front(sub)
@@ -234,7 +235,7 @@ async def run(spec,out):
                         if here==goal or studio.current_map!=start_map:failure=None;break
                         live=packet_state(studio.packet,recorder.decoder)["actors"]
                         occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
-                        moves=route_steps.path(studio.current_map,here,goal,block=occupied)
+                        moves=route_steps.path(studio.current_map,here,goal,block=occupied|{tuple(t) for t in step.get("avoid",[])})
                         if moves is None:
                             failure=f"no path on {studio.current_map} from {here} to {goal}"
                         else:
