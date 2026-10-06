@@ -43,9 +43,9 @@ enum {
 #define VERSION_BANNER_LEFT_X (DISPLAY_WIDTH / 2 - 96)
 // The top row's centre; it settles with the logo's top just under the
 // POKéMON logo and its bottom clear of PRESS START.
-#define VERSION_BANNER_Y_GOAL 54
+#define VERSION_BANNER_Y_GOAL 42
 #define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 64)
-#define START_BANNER_Y 128
+#define START_BANNER_Y 120
 #define COPYRIGHT_BANNER_Y 148
 #define VERSION_BANNER_COLORS (9 * 16) // OBJ palettes 0-8, below PRESS START's
 #define START_BANNER_X 128
