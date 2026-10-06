@@ -13,6 +13,11 @@ import subprocess
 from functools import lru_cache
 
 
+# Field obstacles (Cut trees, rocks, boulders) are objects: plan through the map file's ones and
+# let the live actors block those still standing (a cut tree is gone until the map reloads).
+OBSTACLE_CAPS=frozenset({"cut","smash","strength"})
+
+
 @lru_cache(maxsize=1)
 def obstacle_graphics():
     """Graphics ids of field obstacles a walk may clear (enum members, so ask the compiler)."""
@@ -190,7 +195,7 @@ async def run(spec,out):
                         if not route_steps.is_counter(studio.current_map,mid):continue
                     # never stand on another actor or on a door, stair or mat (it would leave the map)
                     if spot in occupied or spot in gates or (spot!=here and spot in route_steps.warps(route_steps.map_id(studio.current_map))):continue
-                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied|gates)
+                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,caps=OBSTACLE_CAPS,block=occupied|gates)
                     if mv is not None:options.append((len(mv),spot,face))
                 if not options:
                     # only past a Cut tree or rock? the walk there clears it (the game decides)
@@ -200,7 +205,7 @@ async def run(spec,out):
                     for dx,dy,face in ((0,1,"UP"),(0,-1,"DOWN"),(1,0,"LEFT"),(-1,0,"RIGHT")):
                         spot=(target[0]+dx,target[1]+dy)
                         if spot in occupied or spot in gates:continue
-                        mv=route_steps.path(studio.current_map,here,spot,caps=frozenset({"cut","smash"}),block=(occupied-obst)|gates)
+                        mv=route_steps.path(studio.current_map,here,spot,caps=OBSTACLE_CAPS,block=(occupied-obst)|gates)
                         if mv is not None:options.append((len(mv),spot,face))
                 if not options:
                     recorder.mark(f"UNREACHABLE {target} {step.get('label','')}",studio.packet)
@@ -270,7 +275,7 @@ async def run(spec,out):
                         if here==goal or studio.current_map!=start_map:failure=None;break
                         live=packet_state(studio.packet,recorder.decoder)["actors"]
                         occupied={(a["x"],a["y"]) for a in live if a["local_id"]!=255 and not a["invisible"]}
-                        moves=route_steps.path(studio.current_map,here,goal,block=occupied|{tuple(t) for t in step.get("avoid",[])})
+                        moves=route_steps.path(studio.current_map,here,goal,caps=OBSTACLE_CAPS,block=occupied|{tuple(t) for t in step.get("avoid",[])})
                         if moves is None and step.get("_clears",0)<6:
                             # A Cut tree, smashable rock or boulder in the way: clear the first one on
                             # the way (talk to it; Yes is the default) and walk on. The game decides
@@ -279,7 +284,7 @@ async def run(spec,out):
                             for name,gfx in obstacle_graphics().items():
                                 for a in live:
                                     if gfx is not None and a["graphic"]==int(gfx) and not a["invisible"]:obstacle[(a["x"],a["y"])]=a["local_id"]
-                            via=route_steps.path(studio.current_map,here,goal,caps=frozenset({"cut","smash"}),
+                            via=route_steps.path(studio.current_map,here,goal,caps=OBSTACLE_CAPS,
                                                  block=(occupied-set(obstacle))|{tuple(t) for t in step.get("avoid",[])})
                             if via is not None:
                                 p=here
@@ -342,6 +347,7 @@ async def run(spec,out):
                 if f>=int(step.get("min_frames",30)):
                     condition=step.get("until")
                     if condition=="idle" and active_seen and idle_frames>=12:break
+                    if condition=="idle" and not active_seen and f>=90:break   # nothing started: no response
                     if condition=="battle" and studio.state[1]:break
                     if condition=="dialogue" and studio.state[11] and studio.state[30]!=start_state["text_serial"]:break
                     if step.get("until_text") and f%6==0 and step["until_text"] in packet_state(studio.packet,recorder.decoder)["text"]:break

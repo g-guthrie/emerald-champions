@@ -54,6 +54,11 @@ def main():
         r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
         try: t = json.loads(r.stdout.strip().splitlines()[-1])
         except Exception: log(f'| {target} | TRAVEL CRASH | {r.stderr[-300:]!r} |'); print('STOP', target); return
+        story_moved = (not t['passed'] and t.get('end_save') and t['map'] != target
+                       and all(f.startswith('map: expected') for f in t['failures']))
+        if story_moved:   # a story scene took the player elsewhere (Devon Corp sends you up to 3F)
+            log(f"| {target} | story moved the player to {t['map']} {t['x']},{t['y']} | {t['end_save']} |")
+            target = t['map']; t['passed'] = True
         if not t['passed'] or not t.get('end_save'):
             log(f"| {target} | TRAVEL FAILED | {t['failures']} at {t['map']} {t['x']},{t['y']} |"); print('STOP', target, t); return
         save = t['end_save']
