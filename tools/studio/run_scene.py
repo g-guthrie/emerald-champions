@@ -112,6 +112,9 @@ async def run(spec,out):
                 return self.items.pop(0)
         steps_iter=_Steps(steps)
         for step in steps_iter:
+            if step.get("map") and walk_failure is None and studio.current_map!=step["map"]:
+                # A step planned for one map must never act on another (a warp was taken).
+                walk_failure=f"left {step['map']} for {studio.current_map} before {step.get('label','step')}"
             if "bag" in step and walk_failure is None:
                 # Full Bag snapshot read back from the game: every item id, nonzero counts kept.
                 ids=json.loads((server.ROOT/"artifacts/playthrough/item_ids.json").read_text())
@@ -159,7 +162,9 @@ async def run(spec,out):
                         # across a counter: the tile between must be a counter
                         mid=(target[0]+dx//2,target[1]+dy//2)
                         if not route_steps.is_counter(studio.current_map,mid):continue
-                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied-{spot})
+                    # never stand on another actor or on a door, stair or mat (it would leave the map)
+                    if spot in occupied or (spot!=here and spot in route_steps.warps(route_steps.map_id(studio.current_map))):continue
+                    mv=[] if spot==here else route_steps.path(studio.current_map,here,spot,block=occupied)
                     if mv is not None:options.append((len(mv),spot,face))
                 if not options:
                     recorder.mark(f"UNREACHABLE {target} {step.get('label','')}",studio.packet)

@@ -53,12 +53,13 @@ def mode_for(script):
 def reachable(map_dir, start, caps):
     mid = next(k for k, m in R.MAPS.items() if m['_dir'] == map_dir)
     g = R.grid(mid)
+    wp = RS.warps(mid)   # a door, stair or mat leaves the map
     seen = {start}; q = deque([start])
     while q:
         p = q.popleft()
         for d in RS.DIRS:
             r = R.can_enter(g, p, (p[0] + d[0], p[1] + d[1]), d, set(caps))
-            if r and r not in seen: seen.add(r); q.append(r)
+            if r and r not in seen and r not in wp: seen.add(r); q.append(r)
     return seen, g
 
 
@@ -83,12 +84,21 @@ def plan(map_dir, start, caps, skip):
         elif b.get('script'):
             jobs.append(dict(kind='inspect', at=(b['x'], b['y']), what='sign ' + b['script'],
                              mode=mode_for(b['script'])))
+    # targets with no reachable tile beside them (or across one counter) wait for a field move:
+    # name the first level that brings them within reach
+    def near(ts, at): return any(abs(t[0] - at[0]) + abs(t[1] - at[1]) <= 2 for t in ts)
+    later = []
+    for j in [j for j in jobs if j['kind'] != 'photo' and not near(tiles, j['at'])]:
+        jobs.remove(j)
+        need = next((lv for lv in R.LEVELS[1:] if near(reachable(map_dir, start, R.LEVEL_CAPS[lv])[0], j['at'])),
+                    'not from here')
+        later.append(dict(label=to_step(j)['label'], source=j.get('script') or j.get('what'), needs=need))
     # nearest-neighbour order from the start
     order = []; here = start; left = jobs[:]
     while left:
         j = min(left, key=lambda j: abs(j['at'][0] - here[0]) + abs(j['at'][1] - here[1]))
         order.append(j); left.remove(j); here = tuple(j['at'])
-    return order, tiles, g
+    return order, tiles, g, later
 
 
 def to_step(j):
@@ -143,11 +153,11 @@ def main():
     f = pr['outcome']['final']
     if f['map'] != a.map: raise SystemExit(f"save is on {f['map']}, not {a.map}")
     start = (f['x'], f['y'])
-    order, tiles, g = plan(a.map, start, caps, skip)
+    order, tiles, g, later = plan(a.map, start, caps, skip)
     chunks = [order[i:i + CHUNK] for i in range(0, len(order), CHUNK)]
     save = a.save; results = []; dests = []
     for n, chunk in enumerate(chunks):
-        steps = ([{'bag': 'before'}] if n == 0 else []) + [to_step(j) for j in chunk]
+        steps = ([{'bag': 'before'}] if n == 0 else []) + [dict(to_step(j), map=a.map) for j in chunk]
         if n == len(chunks) - 1: steps.append({'bag': 'after'})
         recipe = {'name': f'{a.name} {n + 1}/{len(chunks)}', 'start': {'save': save}, 'battle_resolution': 'fixture_win',
                   'steps': steps, 'expect': {'ready': True}}
@@ -159,7 +169,7 @@ def main():
         save = fin['end_save']
     # report
     report = dict(map=a.map, start=list(start), reachable_tiles=len(tiles), chunks=[str(d) for d in dests],
-                  end_save=save, failures=[], interactions=[], photos=[])
+                  end_save=save, failures=[], interactions=[], photos=[], later=later)
     for dest, res in zip(dests, results):
         rec = json.loads((dest / 'recording.json').read_text())
         report['failures'] += res['outcome']['failures']
@@ -194,6 +204,8 @@ def main():
     for it in report['interactions']:
         t = ' | '.join(x.replace('\n', ' ') for x in it['texts'])[:400]
         lines.append(f"- {it['label']} {it.get('source','')} [{it['status']}{', battle' if it.get('battle') else ''}]: {t}")
+    for it in later:
+        lines.append(f"- {it['label']} {it['source']} [later: needs {it['needs']}]")
     (out / 'report.md').write_text('\n'.join(lines) + '\n')
     # Frames and sheets were only working material: the report holds what they showed.
     for dest in dests:

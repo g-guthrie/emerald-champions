@@ -78,6 +78,13 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
 - Finding: Mom's Old Rod trigger needs VAR_LITTLEROOT_TOWN_STATE == 3 (set when Birch gives the
   Pokedex, ProfessorBirchsLab/scripts.inc:391). Confirm order in play.
 
+## Harness fixes (sweep)
+- Planned paths never step on a warp tile unless it is the goal; explore reachability and the
+  hidden-actor approach skip warps (Brendan 2F stairs sent the sweep to 1F).
+- Every explore step carries "map"; the runner fails the chunk if the game is on another map.
+- Stand spots for talk/inspect never sit on another actor or a warp (lab: it chose Birch's tile).
+- Absent actors so far are all flag-hidden at this story point (checked against map.json flags).
+
 ## Known errors in the old manifest (to be redone from evidence)
 - Bonding (friendship evolutions) is locked until the Stone Badge (emerald_champions.inc:482);
   before it friendship only rises by walking. Steps 4-6 wrongly list Roselia, Marill, Togetic and
@@ -88,12 +95,14 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
 - Steps 3-6 to be redone with this method after the pilot.
 
 ## FINDINGS (raise with owner)
-- Oldale Center Move Tutor says "New partners have full EV training. EV Training reshapes it for
-  500" at 0 badges, but EVs are locked until the Knuckle Badge (caps.c AreEVsUnlocked).
+- FIXED 5ecf8659db: Move Tutor line now says EV training arrives with the Knuckle Badge (EVs are
+  locked until then, caps.c AreEVsUnlocked). Owner told.
 
 - Tatsugirinite (AbandonedShip_HiddenFloorRooms: keys + Dive) and Drampanite (MeteorFalls_B1F_2R:
   Waterfall) are listed as first-wave stones (cap 45/55) in tests/test_cap40_redesign.py, which fails
   on HEAD before any rename: their real homes are far later.
+- Wrong-map flags FIXED 882d614995 (Route 103 Pearl was FLAG_ITEM_ROUTE_133_PEARL_STRING, + 5 more);
+  check now catches a flag naming another existing map. Owner told.
 - Label/flag drift FIXED (scripts/item_source_names.py --write, 241 names, values unchanged); CI test
   tests/test_item_source_names.py keeps it fixed. Save-layout id changed only because flag NAMES are
   hashed (scripts/build_provenance.py ids); flag values and struct layout are unchanged.

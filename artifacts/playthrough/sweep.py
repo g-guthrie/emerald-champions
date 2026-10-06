@@ -39,6 +39,7 @@ def main():
         rep = json.loads((out / 'report.json').read_text())
         visited = sum(1 for i in rep['interactions'] if i['status'] == 'visited')
         other = [f"{i['label']}:{i['status']}" for i in rep['interactions'] if i['status'] != 'visited']
+        other += [f"{i['label']}:needs {i['needs']}" for i in rep.get('later', [])]
         log(f"| {target} | explored | photos {len(rep['photos'])}, interactions {visited} visited {other or ''}, "
             f"bag {rep['bag_gained'] or '-'}, failures {rep['failures'] or '-'} | {out}/report.md |")
         save = rep['end_save']
