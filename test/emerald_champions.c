@@ -2885,7 +2885,7 @@ TEST("Emerald Champions garden refuses owned stones before charging")
 {
     ResetBookItemOwnership();
     FlagClear(FLAG_EC_BERRY_TRADE_BAXCALIBRITE);
-    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+    FlagClear(FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE);
     EXPECT(AddBagItem(ITEM_RAZZ_BERRY, 20));
     EXPECT(AddPCItem(ITEM_BAXCALIBRITE, 1));
     gSpecialVar_0x8004 = 0;

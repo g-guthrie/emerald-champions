@@ -284,8 +284,8 @@ static u16 GetHeadlessOverworldFixtureGraphicsId(enum Species species)
 static void PrepareHeadlessOverworldFixtureState(enum Species species)
 {
     FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
-    FlagClear(FLAG_EC_CAUGHT_DIANCIE);
-    FlagClear(FLAG_EC_CAUGHT_JIRACHI);
+    FlagClear(FLAG_DEFEATED_DIANCIE);
+    FlagClear(FLAG_DEFEATED_JIRACHI);
     FlagClear(FLAG_EC_CAUGHT_MOLTRES);
     FlagClear(FLAG_EC_CAUGHT_MEWTWO);
     FlagClear(FLAG_EC_CAUGHT_REGIGIGAS);
@@ -483,7 +483,7 @@ static void PrepareBookResearchScene(void)
         LoadHeadlessMap(MAP_MOSSDEEP_CITY_STEVENS_HOUSE, 6, 6);
         break;
     case 8:
-        FlagSet(FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON);
+        FlagSet(FLAG_RECEIVED_SCOPE_LENS);
         FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
         FlagSet(FLAG_SYS_POKENAV_GET);
         VarSet(VAR_DEVON_CORP_3F_STATE, 1);
@@ -514,7 +514,7 @@ static void PrepareBookResearchScene(void)
         LoadHeadlessMap(MAP_ROUTE113_GLASS_WORKSHOP, 2, 4);
         break;
     case 14:
-        FlagClear(FLAG_ITEM_ROUTE_120_GENGARITE);
+        FlagClear(FLAG_ITEM_MT_PYRE_EXTERIOR_GENGARITE);
         if (!missing)
             AddPCItem(ITEM_GENGARITE, 1);
         LoadHeadlessMap(MAP_ROUTE120, 20, 56);
@@ -558,7 +558,7 @@ static void PrepareBookResearchScene(void)
         AddBagItem(ITEM_SHOAL_SHELL, 4);
         if (!missing)
             AddPCItem(ITEM_GLALITITE, 1);
-        FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+        FlagClear(FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE);
         LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM, 17, 15);
         break;
     case 20:
@@ -571,8 +571,8 @@ static void PrepareBookResearchScene(void)
     case 24: // Meteor entrance, with an unavailable actor and no observation.
         FlagClear(FLAG_EC_SURVEYED_ORIGIN_CHAMBER);
         FlagClear(FLAG_EC_SURVEYED_METEOR_CHAMBER);
-        FlagClear(FLAG_EC_CAUGHT_DIANCIE);
-        FlagClear(FLAG_EC_CAUGHT_JIRACHI);
+        FlagClear(FLAG_DEFEATED_DIANCIE);
+        FlagClear(FLAG_DEFEATED_JIRACHI);
         if (missing)
             FlagClear(FLAG_BADGE08_GET);
         if (gEcHeadlessFixtureParam & 0x1000)
@@ -604,9 +604,9 @@ static void PrepareBookResearchScene(void)
         }
         SetLastHealLocationWarp(HEAL_LOCATION_SOOTOPOLIS_CITY);
         if (scene == 23)
-            FlagSet(FLAG_EC_CAUGHT_DIANCIE);
+            FlagSet(FLAG_DEFEATED_DIANCIE);
         if (scene == 24)
-            FlagSet(FLAG_EC_CAUGHT_JIRACHI);
+            FlagSet(FLAG_DEFEATED_JIRACHI);
         if (scene & 1)
             LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, scene == 23 ? 8 : 10);
         else
@@ -1622,7 +1622,7 @@ static void ObserveHeadlessFixture(void)
                 && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_DIANCIE
                 && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
                 && gEcHeadlessCampaignCaptureBookkeepingValid
-                && FlagGet(FLAG_EC_CAUGHT_DIANCIE);
+                && FlagGet(FLAG_DEFEATED_DIANCIE);
         }
         else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL)
         {
@@ -2831,8 +2831,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (scene == 263 || scene == 264)
                 {
-                    FlagClear(FLAG_RECEIVED_ROUTE104_LEAF_STONE);
-                    FlagClear(FLAG_RECEIVED_ROUTE104_FLORIST_LEAF_STONE);
+                    FlagClear(FLAG_RECEIVED_NUGGET_ROUTE_104);
+                    FlagClear(FLAG_RECEIVED_WHITE_HERB);
                     LoadHeadlessMap(MAP_ROUTE104, scene == 263 ? 5 : 8, scene == 263 ? 27 : 20);
                 }
                 else if (scene == 265 || scene == 266)
@@ -2843,16 +2843,16 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     if (scene == 266)
                     {
                         AddBagItem(ITEM_MEGA_RING, 1);
-                        FlagSet(FLAG_RECEIVED_ROXANNE_OLD_AMBER);
+                        FlagSet(FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM);
                     }
-                    else FlagClear(FLAG_RECEIVED_ROXANNE_OLD_AMBER);
+                    else FlagClear(FLAG_RECEIVED_ROCKY_HELMET_RUSTBORO_CITY_GYM);
                     LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, 5, 3);
                 }
                 else if (scene == 267 || scene == 268)
                 {
                     FlagSet(FLAG_BADGE02_GET);
                     SetTrainerFlag(TRAINER_BRAWLY_1);
-                    FlagClear(FLAG_RECEIVED_BRAWLY_LUCARIONITE);
+                    FlagClear(FLAG_RECEIVED_PUNCHING_GLOVE_DEWFORD_TOWN_GYM);
                     if (scene == 268) AddBagItem(ITEM_MEGA_RING, 1);
                     LoadHeadlessMap(MAP_DEWFORD_TOWN_GYM, 4, 4);
                 }
@@ -2895,7 +2895,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (scene == 273)
                 {
-                    FlagClear(FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE);
+                    FlagClear(FLAG_RECEIVED_MIRACLE_SEED);
                     LoadHeadlessMap(MAP_PETALBURG_WOODS, 33, 7);
                 }
                 else if (scene == 277 || scene == 278)
@@ -2978,7 +2978,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_BADGE03_GET);
                 FlagClear(FLAG_BADGE04_GET);
                 FlagClear(FLAG_DEFEATED_LAVARIDGE_GYM);
-                FlagClear(FLAG_RECEIVED_FLANNERY_CAMERUPTITE);
+                FlagClear(FLAG_RECEIVED_CHANDELURITE_LAVARIDGE_TOWN_GYM_1F);
                 ClearTrainerFlag(TRAINER_FLANNERY_1);
                 SetTrainerFlag(TRAINER_COLE);
                 SetTrainerFlag(TRAINER_GERALD);
@@ -3017,7 +3017,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_BADGE05_GET);
                 FlagClear(FLAG_DEFEATED_PETALBURG_GYM);
                 FlagClear(FLAG_RECEIVED_HM_SURF);
-                FlagClear(FLAG_RECEIVED_NORMAN_LOPUNNITE);
+                FlagClear(FLAG_RECEIVED_PYROARITE_PETALBURG_CITY_GYM);
                 FlagSet(FLAG_HIDE_PETALBURG_GYM_WALLY);
                 FlagSet(FLAG_HIDE_PETALBURG_GYM_WALLYS_DAD);
                 ClearTrainerFlag(TRAINER_NORMAN_1);
@@ -3069,7 +3069,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else if (param == 245 || param == 249)
                 {
                     FlagSet(FLAG_BADGE08_GET);
-                    FlagClear(FLAG_EC_CAUGHT_DIANCIE);
+                    FlagClear(FLAG_DEFEATED_DIANCIE);
                     LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, 10);
                 }
                 else if (param == 246 || param == 250)
@@ -3168,7 +3168,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 else if (param == 224)
                 {
                     FlagClear(FLAG_DEFEATED_SOOTOPOLIS_GYM);
-                    FlagClear(FLAG_RECEIVED_JUAN_GYARADOSITE);
+                    FlagClear(FLAG_RECEIVED_FERALIGITE_SOOTOPOLIS_CITY_GYM_1F);
                     ClearTrainerFlag(TRAINER_JUAN_1);
                     LoadHeadlessMap(MAP_SOOTOPOLIS_CITY_GYM_1F, 8, 3);
                 }
@@ -3308,7 +3308,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagClear(FLAG_SYS_CLOCK_SET); // Daily-reset cases seed its earned pending flag below.
                 FlagClear(FLAG_SYS_SHOAL_TIDE);
                 FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
-                FlagClear(FLAG_RECEIVED_SHOAL_DEEP_SEA_SCALE);
+                FlagClear(FLAG_RECEIVED_FOCUS_BAND);
                 for (slot = 0; slot < ARRAY_COUNT(collectionFlags); slot++)
                     FlagClear(collectionFlags[slot]);
                 if (gEcHeadlessFixtureParam == 174 || gEcHeadlessFixtureParam == 184)
@@ -3379,7 +3379,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 {
                     FlagClear(FLAG_BADGE07_GET);
                     FlagClear(FLAG_DEFEATED_MOSSDEEP_GYM);
-                    FlagClear(FLAG_RECEIVED_TATE_LIZA_METAGROSSITE);
+                    FlagClear(FLAG_RECEIVED_MEOWSTICITE_MOSSDEEP_CITY_GYM);
                     ClearTrainerFlag(TRAINER_TATE_AND_LIZA_1);
                     LoadHeadlessMap(MAP_MOSSDEEP_CITY_GYM,
                         gEcHeadlessFixtureParam == 164 ? 23 : 2,
@@ -3703,9 +3703,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     FlagSet(FLAG_WINGULL_SENT_ON_ERRAND);
                     FlagSet(FLAG_WINGULL_DELIVERED_MAIL);
                     FlagClear(FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL);
-                    FlagClear(FLAG_RECEIVED_FORTREE_SACHET);
+                    FlagClear(FLAG_RECEIVED_THROAT_SPRAY_FORTREE_CITY_HOUSE_4);
                     if (gEcHeadlessFixtureParam == 122)
-                        FlagSet(FLAG_RECEIVED_FORTREE_SACHET);
+                        FlagSet(FLAG_RECEIVED_THROAT_SPRAY_FORTREE_CITY_HOUSE_4);
                     LoadHeadlessMap(MAP_FORTREE_CITY_HOUSE4, 1, 4);
                 }
                 else
@@ -3724,7 +3724,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                         (gEcHeadlessFixtureParam == 102 || gEcHeadlessFixtureParam == 105) ? 100 :
                         gEcHeadlessFixtureParam == 103 ? 250 : 500;
                     VarSet(VAR_EC_SOOT_PROGRESS, total);
-                    FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
+                    FlagClear(FLAG_ITEM_ROUTE110_TRICK_HOUSE_PUZZLE3_HOUNDOOMINITE);
                     AddBagItem(ITEM_SOOT_SACK, 1);
                     if (gEcHeadlessFixtureParam >= 105)
                     {
@@ -3750,9 +3750,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 }
                 else if (gEcHeadlessFixtureParam <= 111)
                 {
-                    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+                    FlagClear(FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE);
                     if (gEcHeadlessFixtureParam == 110)
-                        FlagSet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+                        FlagSet(FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_GLALITITE);
                     AddBagItem(ITEM_SHOAL_SALT, 4);
                     AddBagItem(ITEM_SHOAL_SHELL, 4);
                     if (gEcHeadlessFixtureParam == 111)
@@ -3817,7 +3817,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                         SetTrainerFlag(trainers[slot]);
                     ClearTrainerFlag(TRAINER_WINONA_1);
                     FlagClear(FLAG_DEFEATED_FORTREE_GYM);
-                    FlagClear(FLAG_RECEIVED_WINONA_ALTARIANITE);
+                    FlagClear(FLAG_RECEIVED_STARAPTITE_FORTREE_CITY_GYM);
                     FlagClear(FLAG_RECEIVED_MAGMA_EMBLEM_MT_PYRE_SUMMIT);
                     LoadHeadlessMap(MAP_FORTREE_CITY_GYM, gEcHeadlessFixtureParam == 96 ? 15 : 16,
                         gEcHeadlessFixtureParam == 96 ? 3 : 23);
@@ -3833,7 +3833,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 {
                     FlagClear(FLAG_WINGULL_SENT_ON_ERRAND);
                     FlagClear(FLAG_WINGULL_DELIVERED_MAIL);
-                    FlagClear(FLAG_RECEIVED_FORTREE_SACHET);
+                    FlagClear(FLAG_RECEIVED_THROAT_SPRAY_FORTREE_CITY_HOUSE_4);
                     FlagClear(FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL);
                     LoadHeadlessMap(MAP_FORTREE_CITY_HOUSE4, 1, 4);
                 }
@@ -3932,15 +3932,15 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 if (gEcHeadlessFixtureParam == 77)
                 {
                     // Traversal assumes the removable objects have been cleared.
-                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_ESCAPE_ROPE);
-                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_ROTOM_CATALOG);
-                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_UPGRADE);
-                    FlagSet(FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE);
-                    FlagSet(FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE);
-                    FlagSet(FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE);
-                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1);
-                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2);
-                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_3);
+                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_INSIDE_MANECTITE);
+                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_INSIDE_RAICHUNITE_Y);
+                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER);
+                    FlagSet(FLAG_DEFEATED_ELECTRODE_1_NEW_MAUVILLE);
+                    FlagSet(FLAG_DEFEATED_ELECTRODE_2_NEW_MAUVILLE);
+                    FlagSet(FLAG_DEFEATED_ELECTRODE_3_NEW_MAUVILLE);
+                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_ELECTRODE_1);
+                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_ELECTRODE_2);
+                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_ELECTRODE_3);
                     AddBagItem(ITEM_BASEMENT_KEY, 1);
                     AddBagItem(ITEM_ROTOM_CATALOG, 1);
                     VarSet(VAR_NEW_MAUVILLE_STATE, 0);
@@ -4083,7 +4083,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             }
             if (gEcHeadlessFixtureParam >= 40 && gEcHeadlessFixtureParam <= 42)
             {
-                FlagClear(FLAG_HIDE_FALLARBOR_POKEMON_CENTER_LANETTE);
+                FlagClear(FLAG_HIDE_FALLORBOR_POKEMON_CENTER_LANETTE);
                 FlagSet(FLAG_HIDE_LANETTES_HOUSE_LANETTE);
                 LoadHeadlessMap(MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,
                     gEcHeadlessFixtureParam == 40 ? 11 : gEcHeadlessFixtureParam == 41 ? 12 : 10,
@@ -4382,9 +4382,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 100, OTID_STRUCT_PLAYER_ID);
         CalculatePlayerPartyCount();
         FlagSet(FLAG_SYS_POKEMON_GET);
-        FlagSet(FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE);
-        FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2);
-        FlagSet(FLAG_ITEM_NEW_MAUVILLE_UPGRADE);
+        FlagSet(FLAG_DEFEATED_ELECTRODE_2_NEW_MAUVILLE);
+        FlagSet(FLAG_HIDE_NEW_MAUVILLE_ELECTRODE_2);
+        FlagSet(FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER);
         VarSet(VAR_REPEL_STEP_COUNT, 250);
         LoadHeadlessMap(MAP_NEW_MAUVILLE_INSIDE, 6, 12);
         break;
