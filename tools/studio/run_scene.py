@@ -16,7 +16,7 @@ from functools import lru_cache
 # Field obstacles (Cut trees, rocks, boulders) are objects: plan through the map file's ones and
 # let the live actors block those still standing (a cut tree is gone until the map reloads).
 OBSTACLE_CAPS=frozenset({"cut","smash","strength"})
-# The player and the follower Pokemon (OBJ_EVENT_ID_FOLLOWER); the player walks through its follower.
+# The player and the follower Pokemon (OBJ_EVENT_ID_FOLLOWER): stepping onto the follower swaps places with it.
 WALKABLE_ACTORS=(255,254)
 
 
