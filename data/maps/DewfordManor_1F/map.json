@@ -38,7 +38,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "DewfordManor_EventScript_ItemAirBalloon",
-      "flag": "FLAG_ITEM_DEWFORD_MANOR_1_F_AIR_BALLOON"
+      "flag": "FLAG_ITEM_DEWFORD_MANOR_1F_AIR_BALLOON"
     }
   ],
   "warp_events": [

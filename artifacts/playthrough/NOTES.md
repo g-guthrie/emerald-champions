@@ -144,3 +144,9 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
   an item different from its giveitem.
 - Held-item cleanup and vendor badge-floor template: paused until the verified inventory exists.
 - Hard battle tuning: paused (only Rival -8, Calvin -6 done).
+
+## Intel: what opens before Brawly (verified in play)
+- Briney (Dewford, after the Letter) sails to Route 109. Slateport is open; Brawly stands outside the Oceanic Museum.
+- The Aqua queue (FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA) physically blocks the museum door; only the Knuckle Badge clears it (DewfordTown_Gym sets the flag).
+- Route 110's Aqua grunts (FLAG_HIDE_ROUTE_110_TEAM_AQUA) wall the route north at y=83 until the museum raid. So pre-Brawly land = Route 109 beach + Slateport; Route 108/134/107 need Surf.
+- Order: Slateport (talk to Brawly) -> Dewford Gym -> Museum raid -> Route 110 -> Mauville.

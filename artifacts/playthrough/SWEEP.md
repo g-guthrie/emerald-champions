@@ -173,3 +173,6 @@
 | Route106 | passed through | arrived 48,17 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-route106-85243/end.sav |
 | DewfordTown | passed through | arrived 3,0 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-dewfordtown-85254/end.sav |
 | DewfordTown_Gym | TRAVEL FAILED | ['walk_to : move 1 (RIGHT) made no progress at 7,18', "map: expected 'DewfordTown_Gym', observed 'DewfordTown'"] at DewfordTown 7,18 |
+| SlateportCity | passed through | arrived 19,59 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-slateportcity-88944/end.sav |
+| Route110 | passed through | arrived 17,99 | /tmp/claude-0/-home-user-emerald-champions/d714be2f-ee63-5198-8779-d6d258b48868/scratchpad/feynman/work/studio/scenes/go-route110-88961/end.sav |
+| MauvilleCity | TRAVEL FAILED | ['walk_to : no path on Route110 from (10, 84) to (12, 0)', "map: expected 'MauvilleCity', observed 'Route110'"] at Route110 10,84 |

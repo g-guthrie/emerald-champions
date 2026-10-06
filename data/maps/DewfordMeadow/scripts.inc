@@ -19,7 +19,7 @@ DewfordMeadow_EventScript_Warden::
 	lock
 	faceplayer
 	goto_if_set FLAG_EC_MEADOW_SONG_PERFORMED, DewfordMeadow_EventScript_AfterSong
-	goto_if_unset FLAG_BADGE02_GET, DewfordMeadow_EventScript_NotYet
+	goto_if_unset FLAG_BADGE04_GET, DewfordMeadow_EventScript_NotYet
 	setvar VAR_0x8004, LEGENDARY_SIGN_MELOETTA
 	special TryUnlockLocalLegendaryDiscovery
 	goto_if_eq VAR_RESULT, FALSE, DewfordMeadow_EventScript_NeedSinger
@@ -82,7 +82,7 @@ DewfordMeadow_Text_MeloettaCaught:
 DewfordMeadow_Text_NotYet:
 	.string "A melody sometimes drifts over this\n"
 	.string "meadow. Come back once you've earned\l"
-	.string "two Gym Badges, and we'll listen.$"
+	.string "four Gym Badges, and we'll listen.$"
 
 DewfordMeadow_Text_NeedSinger:
 	.string "Meloetta answers songs. Any partner\n"
