@@ -9071,7 +9071,7 @@
               {
                 "min_level": 28,
                 "max_level": 30,
-                "species": "SPECIES_GIBLE"
+                "species": "SPECIES_HIPPOPOTAS"
               },
               {
                 "min_level": 28,
@@ -9106,7 +9106,7 @@
               {
                 "min_level": 28,
                 "max_level": 30,
-                "species": "SPECIES_HIPPOPOTAS"
+                "species": "SPECIES_GIBLE"
               },
               {
                 "min_level": 28,

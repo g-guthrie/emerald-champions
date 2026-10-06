@@ -81,8 +81,8 @@ Route111_EventScript_ItemBigNugget:: @ 8290DB5
 	finditem ITEM_BIG_NUGGET
 	end
 
-Route111_EventScript_ItemElixir:: @ 8290DC2
-	finditem ITEM_ELIXIR
+Route111_EventScript_ItemFireGem:: @ 8290DC2
+	finditem ITEM_FIRE_GEM
 	end
 
 Route112_EventScript_ItemMachampite:: @ 8290DCF

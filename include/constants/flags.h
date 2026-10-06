@@ -501,7 +501,7 @@
 #define FLAG_HIDDEN_ITEM_LAVARIDGE_TOWN_ICE_HEAL                               (FLAG_HIDDEN_ITEMS_START + 0x2) // relocated 0x1f4 -> 0x1f6 (Sept 23 2026: bit was shared with a live flag)
 #define FLAG_HIDDEN_ITEM_TRICK_HOUSE_SHINY_STONE                  (FLAG_HIDDEN_ITEMS_START + 0x01)
 #define FLAG_HIDDEN_ITEM_ROUTE_111_SUN_STONE                  (FLAG_HIDDEN_ITEMS_START + 0x02)
-#define FLAG_HIDDEN_ITEM_ROUTE_113_ETHER                     (FLAG_HIDDEN_ITEMS_START + 0x03)
+#define FLAG_HIDDEN_ITEM_ROUTE_113_WATER_GEM                     (FLAG_HIDDEN_ITEMS_START + 0x03)
 #define FLAG_HIDDEN_ITEM_ROUTE_114_DAWN_STONE                (FLAG_HIDDEN_ITEMS_START + 0x04)
 #define FLAG_HIDDEN_ITEM_ROUTE_119_KINGS_ROCK                (FLAG_HIDDEN_ITEMS_START + 0x05)
 #define FLAG_HIDDEN_ITEM_ROUTE_119_ULTRA_BALL                (FLAG_HIDDEN_ITEMS_START + 0x06)
@@ -1197,7 +1197,7 @@
 #define FLAG_ITEM_ROUTE_108_DEEP_SEA_TOOTH                              0x473
 #define FLAG_ITEM_ROUTE_109_POTION                                  0x474
 #define FLAG_ITEM_ROUTE_110_FERALIGITE                                  0x475
-#define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
+#define FLAG_ITEM_ROUTE_111_FIRE_GEM                                  0x476
 #define FLAG_ITEM_ROUTE_113_AGGRONITE                            0x477
 #define FLAG_ITEM_ROUTE_115_AUDINITE                             0x478
 #define FLAG_ITEM_ROUTE_116_MEOWSTICITE                                  0x47A

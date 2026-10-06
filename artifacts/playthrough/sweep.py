@@ -50,7 +50,7 @@ def main():
         skip = spec.endswith('!'); spec = spec.rstrip('!')
         target, _, via = spec.partition('@')
         tag = f"{target.lower()}-{int(time.time()) % 100000}"
-        cmd = [PY, str(HERE / 'travel.py'), save, target, 'go-' + tag] + (['--via', via] if via else [])
+        cmd = [PY, str(HERE / 'travel.py'), save, target, 'go-' + tag] + (['--via', via] if via else []) + (['--caps', caps] if caps else [])
         r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
         try: t = json.loads(r.stdout.strip().splitlines()[-1])
         except Exception: log(f'| {target} | TRAVEL CRASH | {r.stderr[-300:]!r} |'); print('STOP', target); return

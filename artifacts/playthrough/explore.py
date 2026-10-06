@@ -79,6 +79,16 @@ def reachable(map_dir, start, caps, gates=frozenset()):
     return {s[:2] for s in states}, g
 
 
+def const_value(v):
+    """A trigger's var_value: a number, or a #define name from include/constants."""
+    try: return int(str(v), 0)
+    except ValueError: pass
+    for f in (ROOT / 'include/constants').glob('*.h'):
+        m = re.search(rf'^#define\s+{re.escape(str(v))}\s+(\w+)', f.read_text(), re.M)
+        if m: return const_value(m.group(1))
+    raise ValueError(f'unknown constant {v}')
+
+
 def story_gates(map_dir, values):
     """Trigger tiles that are live now (their var holds the trigger's value) and whose script never
     changes that var: they fire every time and turn the player back (Petalburg's Gym escort), so the
@@ -88,7 +98,7 @@ def story_gates(map_dir, values):
     for c in m.get('coord_events', []) or []:
         var = c.get('var') or ''
         if c.get('type') != 'trigger' or var not in values: continue
-        if values[var] != int(str(c.get('var_value', 0)), 0): continue
+        if values[var] != const_value(c.get('var_value', 0)): continue
         if re.search(rf'\b(?:setvar|addvar|subvar|copyvar)\s+{var}\b', script_graph_text(c['script'])): continue
         gates.add((c['x'], c['y']))
     return gates
