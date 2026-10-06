@@ -134,10 +134,20 @@ def plan(map_dir, start, caps, skip, gates=frozenset(), live=None):
         need = next((lv for lv in R.LEVELS[1:] if near(reachable(map_dir, start, R.LEVEL_CAPS[lv], gates)[0], j['at'])),
                     'story progress' if gates and near(reachable(map_dir, start, caps)[0], j['at']) else 'not from here')
         later.append(dict(label=to_step(j)['label'], source=j.get('script') or j.get('what'), needs=need))
-    # nearest-neighbour order from the start
+    # nearest-neighbour order from the start, but never go somewhere the remaining jobs cannot be
+    # reached from (a one-way ledge drops the player out of an area for good)
+    def spot(j):
+        if j['kind'] == 'photo': return tuple(j['at'])
+        near_t = [t for t in tiles if abs(t[0] - j['at'][0]) + abs(t[1] - j['at'][1]) <= 2]
+        return min(near_t, key=lambda t: abs(t[0] - j['at'][0]) + abs(t[1] - j['at'][1])) if near_t else tuple(j['at'])
+    from_spot = {}
+    def reach_from(p):
+        if p not in from_spot: from_spot[p] = reachable(map_dir, p, caps, gates)[0]
+        return from_spot[p]
     order = []; here = start; left = jobs[:]
     while left:
-        j = min(left, key=lambda j: abs(j['at'][0] - here[0]) + abs(j['at'][1] - here[1]))
+        ranked = sorted(left, key=lambda j: abs(j['at'][0] - here[0]) + abs(j['at'][1] - here[1]))
+        j = next((c for c in ranked if all(spot(o) in reach_from(spot(c)) for o in left if o is not c)), ranked[0])
         order.append(j); left.remove(j); here = tuple(j['at'])
     return order, tiles, g, later
 
