@@ -203,6 +203,32 @@ class Catalogue:
                     objects=[dict(o, index=i) for i, o in enumerate(m["object_events"])],
                     warps=m["warp_events"], connections=m.get("connections", []))
 
+    def surf_tiles(self, name):
+        """Tiles of a map where arriving starts the player Surfing: the game's
+        own surfable flag (src/metatile_behavior.c), calm water with
+        encounters only (no currents, waterfalls or seaweed)."""
+        if not hasattr(self, "_surf_behaviors"):
+            names = re.findall(r"^\s*(MB_\w+)\b", (ROOT/"include/constants/metatile_behaviors.h").read_text(), re.M)
+            flags = dict(re.findall(r"\[(MB_\w+)\]\s*=\s*([^,\n]+)", (ROOT/"src/metatile_behavior.c").read_text()))
+            self._surf_behaviors = {names.index(b) for b, f in flags.items()
+                                    if "TILE_FLAG_SURFABLE" in f and "TILE_FLAG_HAS_ENCOUNTERS" in f and "SEAWEED" not in b and b in names}
+        layout = self.layouts[self.maps[name]["layout"]]
+        headers = (ROOT/"src/data/tilesets/headers.h").read_text()
+        metatiles = (ROOT/"src/data/tilesets/metatiles.h").read_text()
+        banks = []
+        for ident in (layout["primary_tileset"], layout["secondary_tileset"]):
+            body = re.search(r"struct Tileset " + ident + r"\s*=\s*\{(.*?)\};", headers, re.S)[1]
+            attrs = re.search(r"\.metatileAttributes\s*=\s*(\w+)", body)[1]
+            banks.append((ROOT/re.search(attrs + r'\[\].*?\("([^"]+)"', metatiles)[1]).read_bytes())
+        width = layout["width"]
+        tiles = set()
+        for i, (block,) in enumerate(struct.iter_unpack("<H", (ROOT/layout["blockdata_filepath"]).read_bytes())):
+            block &= 1023
+            bank, index = (0, block) if block < 512 else (1, block - 512)
+            if index*2 + 2 <= len(banks[bank]) and (struct.unpack_from("<H", banks[bank], index*2)[0] & 0xFF) in self._surf_behaviors:
+                tiles.add((i % width, i // width))
+        return tiles
+
     def map_image(self, name):
         if name in self.map_images: return self.map_images[name]
         layout = self.layouts[self.maps[name]["layout"]]
@@ -822,9 +848,16 @@ class Studio:
                     m = self.cat.maps[data["map"]]; layout = self.cat.layouts[m["layout"]]
                     x, y = int(data["x"]), int(data["y"])
                     if not (0 <= x < layout["width"] and 0 <= y < layout["height"]): raise ValueError("Outside the map.")
-                    cells = (ROOT / layout["blockdata_filepath"]).read_bytes()
-                    block = struct.unpack_from("<H", cells, (y * layout["width"] + x)*2)[0]
-                    if (block >> 10) & 3: raise ValueError("Choose a walkable tile.")
+                    if data.get("surf"):
+                        # Arrive Surfing: the nearest calm surfable tile to (x, y); the game
+                        # starts the player Surfing there on its own (GetAdjustedInitialTransitionFlags).
+                        water = self.cat.surf_tiles(data["map"]) - {(o["x"], o["y"]) for o in m["object_events"]}
+                        if not water: raise ValueError("This map has no surfable water.")
+                        x, y = min(water, key=lambda t: (abs(t[0] - x) + abs(t[1] - y), t[1], t[0]))
+                    else:
+                        cells = (ROOT / layout["blockdata_filepath"]).read_bytes()
+                        block = struct.unpack_from("<H", cells, (y * layout["width"] + x)*2)[0]
+                        if (block >> 10) & 3: raise ValueError("Choose a walkable tile.")
                     if any(o["x"] == x and o["y"] == y for o in m["object_events"]): raise ValueError("Choose a tile beside the NPC.")
                     self.ingest(await self.core.field_command(2, [m["group"], m["num"], x, y, int(data.get("facing", 1))]))
                 elif op == "heal": self.ingest(await self.core.field_command(3))

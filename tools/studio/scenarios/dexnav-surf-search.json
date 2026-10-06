@@ -1,0 +1,80 @@
+{
+  "name": "DexNav: a Surfing Pokemon searched from the water",
+  "start": {
+    "chapter": 3
+  },
+  "setup": {
+    "flags": {
+      "FLAG_SYS_POKEDEX_GET": true,
+      "FLAG_RECEIVED_DEXNAV": true,
+      "FLAG_SYS_POKENAV_GET": true,
+      "FLAG_RECEIVED_POKENAV": true,
+      "FLAG_RECEIVED_HM_SURF": true,
+      "FLAG_BADGE01_GET": true,
+      "FLAG_BADGE02_GET": true,
+      "FLAG_BADGE03_GET": true,
+      "FLAG_BADGE04_GET": true,
+      "FLAG_BADGE05_GET": true,
+      "FLAG_BADGE06_GET": true
+    },
+    "items": {
+      "ITEM_OLD_ROD": 1,
+      "ITEM_GOOD_ROD": 1,
+      "ITEM_SUPER_ROD": 1,
+      "ITEM_HONEY": 1
+    }
+  },
+  "warp": {
+    "map": "Route119",
+    "x": 12,
+    "y": 88,
+    "facing": 1,
+    "surf": true
+  },
+  "steps": [
+    {
+      "frames": 60
+    },
+    {
+      "press": "START",
+      "frames": 40
+    },
+    {
+      "press": "DOWN",
+      "frames": 20
+    },
+    {
+      "press": "A",
+      "frames": 160,
+      "label": "DexNav open"
+    },
+    {
+      "press": "DOWN",
+      "frames": 30
+    },
+    {
+      "press": "DOWN",
+      "frames": 30
+    },
+    {
+      "press": "DOWN",
+      "frames": 30,
+      "label": "Surfing row"
+    },
+    {
+      "press": "A",
+      "frames": 120,
+      "label": "A on a Surfing Pokemon"
+    },
+    {
+      "hold": "A+DOWN",
+      "frames": 700,
+      "until": "battle",
+      "label": "Sneak toward it"
+    }
+  ],
+  "expect": {
+    "ready": true,
+    "map": "Route119"
+  }
+}
