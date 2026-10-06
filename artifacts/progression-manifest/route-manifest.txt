@@ -1,5 +1,6 @@
 INCLEMENT EMERALD 2 - WHAT EACH BATTLE'S CHALLENGER CAN HAVE, ROUTE BY ROUTE
-Written by hand, route by route, with every entry checked in source and approved by the owner.
+Written route by route from play (artifacts/playthrough: SWEEP.md, EVIDENCE.md, NOTES.md) and checked
+in source; every step is approved by the owner before the next.
 
 Rules
   A route trainer's challenger has every area walked before that route, never the route's own new
@@ -7,45 +8,64 @@ Rules
   Gym, League and Champion battles count everything reachable when the player walks in.
   Starters: one region, two of its three (Game Corner opens the rest later).
   Levels: the Leveler raises the party to the cap. Evolutions listed are only those reachable by
-  the step's cap. Friendship evolutions use the Center tutor's Bonding (data/scripts/emerald_champions.inc).
+  the step's cap. Friendship evolutions need the Center tutor's Bonding, which opens with the Stone
+  Badge (data/scripts/emerald_champions.inc); before it friendship rises only by walking.
   EVs: none, player or trainer, before the Knuckle Badge (src/caps.c AreEVsUnlocked).
-  Old Rod: from Mom at the start (data/maps/LittlerootTown/scripts.inc:952); fishing slots 0-1
+  Wild Pokemon: the in-game DexNav (Start menu) photographed on every area, checked against
+  src/data/wild_encounters.json. It lists only slots that can start a battle now (no Surf table
+  without Surf, no Honey table without Honey).
+  Old Rod: from Mom after the Pokedex (VAR_LITTLEROOT_TOWN_STATE 3); fishing slots 0-1
   (src/wild_encounter.c:342). Surf tables wait for Surf.
   Shops: every Poke Mart at 0 badges sells Mental Herb, Red Card, Cell Battery
-  (data/scripts/poke_mart.inc:19). The Center vendor's first-talk kit is Choice Band, Choice Specs,
-  Choice Scarf, Focus Sash, Eviolite, Leftovers (src/field_specials.c:606); buying, picking up,
-  receiving or catching a Pokemon holding a catalogue item adds it to the vendor shelf for good,
-  and catching a species adds its signature item (src/field_specials.c:485-506).
-  Wild held items: listed per step as (common/rare) from the species' itemCommon/itemRare.
+  (data/scripts/poke_mart.inc:19). The Center clerk's first-talk kit is Choice Band, Choice Specs,
+  Choice Scarf, Focus Sash, Eviolite, Leftovers (src/field_specials.c GiveEmeraldChampionsStarter-
+  BattleItems); a pickup, gift, purchase or catch of a holder adds a catalogue item to the clerk's
+  Held Items shelves for good, and badge floors stock the rest (sBadgeStockedBattleItems).
+  Wild held items: battle items held by wild Pokemon met before the first Badge were moved to the
+  clerk at floor 0 (owner decision): Bright Powder, Mental Herb, Metronome, Mystic Water, Power
+  Herb, Quick Claw. Berries, Honey, medicine and sell items stay on wild Pokemon. Listed per step
+  from the species' itemCommon/itemRare.
 
 ====================================================================================================
 STEP 1 - cap 14 - Rival May / Brendan, Route 103 (battle #1, all six starter variants)
-  VERIFIED IN PLAY (artifacts/playthrough/EVIDENCE.md, legs pt00-pt05; pair Mudkip + Treecko,
-  region Hoenn by default).
+  VERIFIED IN PLAY: legs pt00-pt07 (EVIDENCE.md), full sweep of Littleroot (both houses, lab),
+  Route 101, Oldale (Center, Mart, houses), Route 103 (SWEEP.md); DexNav on Routes 101 and 103.
   Pokemon
-    Starters (Littleroot): the chosen region's pair (the rival keeps the third).
-    Route 101 grass: Fidough, Hoppip, Lillipup, Pawmi, Poochyena, Scatterbug (Icy Snow), Wurmple,
-      Zigzagoon, Zorua   [table from src/data/wild_encounters.json; PokeNav screenshot pending]
-    Route 103 grass: Blitzle, Grubbin, Kricketot, Rockruff, Shellos (West), Shinx, Snubbull, Toxel,
-      Wingull   [same; Blitzle seen in play, pt04]
-    Evolutions by 14: Silcoon/Cascoon -> Beautifly/Dustox, Kricketune, Spewpa -> Vivillon (Icy Snow);
-      a Chimchar or Cyndaquil starter reaches Monferno or Quilava.
-    No fishing yet: the Old Rod comes from Mom only after the Pokedex (pt06), i.e. after this battle.
+    Starters (Littleroot): the chosen region's pair; the rival keeps the third (play: Hoenn,
+      Mudkip + Treecko).
+    Route 101 grass (DexNav = code), Lv 2-3: Wurmple, Zigzagoon, Poochyena (common); Pawmi,
+      Lillipup, Zorua (uncommon); Scatterbug (Icy Snow), Fidough, Hoppip (rare)
+    Route 103 grass (DexNav = code), Lv 2-4: Wingull, Shellos (West) (common); Toxel, Blitzle,
+      Grubbin, Shinx (uncommon); Rockruff, Snubbull, Kricketot (rare)
+    Evolutions by 14 (species data): Wurmple -> Silcoon / Cascoon (7) -> Beautifly / Dustox (10);
+      Scatterbug -> Spewpa (9) -> Vivillon (12); Kricketot -> Kricketune (10). Nothing else here
+      evolves by 14 (next: Shinx 15, starters 16). No Bonding yet.
+    No fishing yet: the Old Rod comes after this battle.
   Before the battle the player must use the Leveler: May refuses below the cap
     (Route103/scripts.inc:44); the Leveler raised the pair to Lv14 in play (pt05).
   Battle items
-    Center vendor kit (in Bag, pt07): Choice Band, Choice Specs, Choice Scarf, Focus Sash, Eviolite,
-      Leftovers
-    Poke Mart shelf (screenshot, pt03): Mental Herb 100, Red Card 1500, Cell Battery 1000
-    Wild held: Wurmple (Pecha Berry / Bright Powder), Zigzagoon (Potion / Revive), Kricketot (- / Metronome),
-      Wingull (Pretty Feather / -)   [species data; held-item cleanup pending]
+    Center clerk kit (counts for the rival, owner decision; free on first talk at the Oldale
+      Center, which the player passes before Route 103): Choice Band, Choice Specs, Choice Scarf,
+      Focus Sash, Eviolite, Leftovers
+    Center clerk Held Items shelves at 0 badges (play, Petalburg Center, after the kit):
+      Offense: Choice Band 1500, Power Herb 2000, Choice Scarf 1500, Choice Specs 1500, Metronome 1500
+      Defense & Recovery: Bright Powder 1500, Leftovers 1500, Focus Sash 1500, Eviolite 1500
+      Field & Tempo: Quick Claw 1500, Mental Herb 100
+      Type Boosts: Mystic Water 1000
+    Poke Mart shelf (play, pt03): Mental Herb 100, Red Card 1500, Cell Battery 1000
+    Wild held (species data): Wurmple (Pecha Berry / -), Zigzagoon (Potion / Revive), Wingull
+      (Pretty Feather / -). No battle items.
   Other items (in Bag): Poke Ball x5 (Oldale Mart employee, pt02); tools from the Oldale Mart tour:
     Poke Vial, Leveler, Regenerator, Repel Spray, Flight Beacon (pt03).
+  Ground and hidden items: none on Littleroot, Route 101, Oldale or Route 103's walkable part.
+    Route 103's Pearl (50,5) and PP Up (64,7) are across the water: Surf.
 
 ====================================================================================================
 STEP 2 - cap 14 - Route 102 trainers (Calvin, Rick, Allen, Tiana)
+  VERIFIED IN PLAY: all four beaten (post-battle lines in the Route 102 sweep).
   Adds, after the rival: Pokedex, 30 Cherish Balls (lab, pt07 Bag), Old Rod (Mom, pt06 Bag).
-  Old Rod on Route 103: Magikarp, Remoraid (fishing slots 0-1, src/wild_encounter.c:342).
+  Old Rod on Route 103 (DexNav = code): Magikarp, Remoraid, Lv 5-10 (common). Route 101 has no water.
+  Wild held: unchanged from Step 1 (Magikarp and Remoraid hold nothing).
   (Route 102's own grass, fishing and berry trees do not count for Route 102's trainers.)
 
 ====================================================================================================
@@ -61,8 +81,8 @@ STEP 3 - cap 14 - Route 104 south trainers (Billy, Darian, Cindy)
     Not yet: Petalburg's Abomasite and Venusaurite (pond islands, need Surf); Surf tables.
   Battle items
     Berry trees (Route 102): Oran, Pecha
-    Wild held: Lotad (- / Mental Herb), Seedot (- / Power Herb), Meowth (- / Quick Claw),
-      Goldeen (- / Mystic Water), Surskit (- / Honey), Combee (Honey / -)
+    Wild held: Surskit (- / Honey), Combee (Honey / -), Toedscool (Tiny Mushroom / Big Mushroom)
+      [battle items moved to the clerk; step to be redone from play]
   Not here: Chilan Berry (Petalburg Gym guide, after the fourth badge); Lucky Punch (needs Chansey
   caught).
 
