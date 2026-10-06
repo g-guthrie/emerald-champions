@@ -79,30 +79,36 @@ EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
 
 #include "data/wild_encounters.h"
 
-// Every Cut tree in the wild shares this one habitat, and these six species
-// live nowhere else (scripts/verify_wild_distribution.py reads this table and
-// keeps them out of every map table). Odds are percent of tree encounters.
-// A felled tree hides a Pokemon one time in three: the "sometimes" of
-// Headbutt trees and of Sword/Shield's shaken Berry trees, and Inclement's
-// own tree rule. The level sits just under the live cap like every land
-// table: cap minus 8 to cap minus 4. Maps with no wild Pokemon at all (the
-// Trick House puzzle rooms) never roll.
+// Every Cut tree in the wild shares this one habitat, and its six base
+// species live nowhere else (scripts/verify_wild_distribution.py reads this
+// table and keeps them out of every map table). Odds are percent of tree
+// encounters. A felled tree hides a Pokemon one time in three: the
+// "sometimes" of Headbutt trees and of Sword/Shield's shaken Berry trees, and
+// Inclement's own tree rule. Its level comes from the map's own grass band
+// (GetCutTreeLevelBand), then the evolution floor and the cap, as for every
+// wild Pokemon. A slot's Pokemon arrives evolved once that level reaches its
+// evolution level: the level-up evolutions at their own levels, Aipom when it
+// learns Double Hit and the item and trade evolutions at levels set here. A
+// slot with two evolved forms picks one by an even roll. Maps with no wild
+// Pokemon at all (the Trick House puzzle rooms) never roll.
 #define CUT_TREE_ENCOUNTER_ODDS 3
-#define CUT_TREE_LEVELS_BELOW_CAP_MIN 4
-#define CUT_TREE_LEVELS_BELOW_CAP_MAX 8
+#define CUT_TREE_FORM_ROLLS 2
 
 static const struct CutTreeHabitatSlot
 {
     enum Species species;
     u8 odds;
+    u8 evolutionLevel;
+    enum Species evolution;
+    enum Species altEvolution; // SPECIES_NONE when there is one evolved form
 } sCutTreeHabitat[] =
 {
-    {SPECIES_SKWOVET, 38},
-    {SPECIES_PINECO, 30},
-    {SPECIES_AIPOM, 15},
-    {SPECIES_BURMY, 8},
-    {SPECIES_APPLIN, 5},
-    {SPECIES_PHANTUMP, 4},
+    {SPECIES_SKWOVET, 38, 24, SPECIES_GREEDENT},
+    {SPECIES_PINECO, 30, 31, SPECIES_FORRETRESS},
+    {SPECIES_AIPOM, 15, 32, SPECIES_AMBIPOM}, // Double Hit, learned at 32
+    {SPECIES_BURMY, 8, 20, SPECIES_WORMADAM_PLANT, SPECIES_MOTHIM},
+    {SPECIES_APPLIN, 5, 40, SPECIES_FLAPPLE, SPECIES_APPLETUN}, // Tart/Sweet Apple
+    {SPECIES_PHANTUMP, 4, 45, SPECIES_TREVENANT}, // trade
 };
 
 extern const u8 EventScript_CutTree[];
@@ -131,6 +137,11 @@ u32 GetCutTreeSlotOdds(u32 slot)
     return slot < ARRAY_COUNT(sCutTreeHabitat) ? sCutTreeHabitat[slot].odds : 0;
 }
 
+u32 GetCutTreeSlotEvolutionLevel(u32 slot)
+{
+    return slot < ARRAY_COUNT(sCutTreeHabitat) ? sCutTreeHabitat[slot].evolutionLevel : 0;
+}
+
 u32 ChooseCutTreeSlotFromRoll(u32 roll)
 {
     u32 slot;
@@ -144,20 +155,94 @@ u32 ChooseCutTreeSlotFromRoll(u32 roll)
     return slot;
 }
 
-void GetCutTreeEncounterLevelRange(u8 *minLevel, u8 *maxLevel)
+// The lowest and highest table levels of a map's ordinary slots; Legendary-
+// class slots come at their own cap, so they say nothing about the area.
+static bool32 GetWildTableLevelBand(const struct WildPokemonInfo *info, u32 slots, u8 *minLevel, u8 *maxLevel)
 {
-    u32 cap = GetCurrentLevelCap();
+    bool32 found = FALSE;
 
-    *minLevel = cap > CUT_TREE_LEVELS_BELOW_CAP_MAX ? cap - CUT_TREE_LEVELS_BELOW_CAP_MAX : 1;
-    *maxLevel = cap > CUT_TREE_LEVELS_BELOW_CAP_MIN ? cap - CUT_TREE_LEVELS_BELOW_CAP_MIN : 1;
+    if (info == NULL)
+        return FALSE;
+    for (u32 i = 0; i < slots; i++)
+    {
+        const struct WildPokemon *mon = &info->wildPokemon[i];
+
+        if (mon->species == SPECIES_NONE || IsLegendaryEncounterSpecies(mon->species))
+            continue;
+        if (!found)
+        {
+            *minLevel = 255;
+            *maxLevel = 0;
+            found = TRUE;
+        }
+        *minLevel = min(*minLevel, min(mon->minLevel, mon->maxLevel));
+        *maxLevel = max(*maxLevel, max(mon->minLevel, mon->maxLevel));
+    }
+    return found;
 }
 
-u8 GetCutTreeEncounterLevelFromRoll(u32 roll)
+// A tree grows beside the map's grass, so it borrows the land table's band.
+// A map without one falls back to its Honey table, which Honey draws on that
+// same grass, then to its Surf table: the next-nearest area levels. With none
+// of them there is no band, and the tree hides nothing (no Cut-tree map is in
+// that case today; the Trick House rooms have no wild header at all).
+bool32 GetCutTreeLevelBand(u32 headerId, u8 *minLevel, u8 *maxLevel)
+{
+    const struct WildEncounterTypes *types;
+
+    if (headerId == HEADER_NONE)
+        return FALSE;
+    types = gWildMonHeaders[headerId].encounterTypes;
+    return GetWildTableLevelBand(types[GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND)].landMonsInfo,
+                                 NUM_LAND_MONS_ENCOUNTER_SLOTS, minLevel, maxLevel)
+        || GetWildTableLevelBand(types[GetTimeOfDayForEncounters(headerId, WILD_AREA_HONEY)].honeyMonsInfo,
+                                 NUM_HONEY_MONS_ENCOUNTER_SLOTS, minLevel, maxLevel)
+        || GetWildTableLevelBand(types[GetTimeOfDayForEncounters(headerId, WILD_AREA_WATER)].waterMonsInfo,
+                                 NUM_WATER_MONS_ENCOUNTER_SLOTS, minLevel, maxLevel);
+}
+
+// What one tree roll brings from a slot, given its level drawn from the band
+// and its form roll. The cap comes first, so a capped roll below the
+// evolution level stays the base form; the evolved form's own floor and the
+// cap then apply as for every wild Pokemon. The encounter and the roster both
+// use this, so they cannot disagree about a species or its level.
+enum Species GetCutTreeSlotEncounter(u32 slot, u8 bandLevel, u32 formRoll, u8 *level)
+{
+    const struct CutTreeHabitatSlot *habitat;
+    enum Species species;
+
+    if (slot >= ARRAY_COUNT(sCutTreeHabitat))
+        return SPECIES_NONE;
+    habitat = &sCutTreeHabitat[slot];
+    *level = ApplyWildLevelFloor(habitat->species, bandLevel);
+    if (*level < habitat->evolutionLevel)
+        species = habitat->species;
+    else if (habitat->altEvolution != SPECIES_NONE && formRoll % CUT_TREE_FORM_ROLLS != 0)
+        species = habitat->altEvolution;
+    else
+        species = habitat->evolution;
+    *level = ApplyWildLevelFloor(species, *level);
+    return species;
+}
+
+// Can a felled tree on this map bring this species right now? The Pokedex
+// area page asks; the band's ends after the cap settle it without a roll.
+bool32 CutTreeHabitatHasSpecies(u32 headerId, enum Species species)
 {
     u8 low, high;
 
-    GetCutTreeEncounterLevelRange(&low, &high);
-    return low + roll % (high - low + 1);
+    if (species == SPECIES_NONE || !GetCutTreeLevelBand(headerId, &low, &high))
+        return FALSE;
+    for (u32 slot = 0; slot < ARRAY_COUNT(sCutTreeHabitat); slot++)
+    {
+        const struct CutTreeHabitatSlot *habitat = &sCutTreeHabitat[slot];
+
+        if (species == habitat->species)
+            return ApplyWildLevelFloor(species, low) < habitat->evolutionLevel;
+        if (species == habitat->evolution || species == habitat->altEvolution)
+            return ApplyWildLevelFloor(habitat->species, high) >= habitat->evolutionLevel;
+    }
+    return FALSE;
 }
 
 // Does this map have a Cut tree? The Pokedex area page marks the tree
@@ -1287,26 +1372,44 @@ void RockSmashWildEncounter(void)
 }
 
 // A felled Cut tree (data/scripts/field_move_scripts.inc) may hide one of the
-// tree habitat's species. VAR_RESULT is TRUE when a battle starts; the
-// script then waits for it with waitstate.
-void CutTreeWildEncounter(void)
+// tree habitat's Pokemon at the map's grass levels (GetCutTreeSlotEncounter).
+// TRUE when one comes out past Repel and the lead's Ability; it is then made.
+static bool32 TryGenerateCutTreeWildMon(void)
 {
     enum Species species;
-    u8 level;
+    u32 slot;
+    u8 low, high, level;
 
-    gSpecialVar_Result = FALSE;
-    if (GetCurrentMapWildMonHeaderId() == HEADER_NONE)
-        return;
+    if (!GetCutTreeLevelBand(GetCurrentMapWildMonHeaderId(), &low, &high))
+        return FALSE;
     if (Random() % CUT_TREE_ENCOUNTER_ODDS != 0)
-        return;
-    species = sCutTreeHabitat[ChooseCutTreeSlotFromRoll(Random() % 100)].species;
-    level = GetCutTreeEncounterLevelFromRoll(Random());
+        return FALSE;
+    slot = ChooseCutTreeSlotFromRoll(Random() % 100);
+    level = low + Random() % (high - low + 1);
+    species = GetCutTreeSlotEncounter(slot, level, Random(), &level);
     if (!IsWildLevelAllowedByRepel(level) || !IsAbilityAllowingEncounter(level))
-        return;
+        return FALSE;
     CreateWildMon(species, level);
+    return TRUE;
+}
+
+// VAR_RESULT is TRUE when a battle starts; the script then waits for it with
+// waitstate.
+void CutTreeWildEncounter(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (!TryGenerateCutTreeWildMon())
+        return;
     BattleSetup_StartWildBattle();
     gSpecialVar_Result = TRUE;
 }
+
+#if TESTING
+bool32 Test_GenerateCutTreeWildMon(void)
+{
+    return TryGenerateCutTreeWildMon();
+}
+#endif
 
 static bool8 SweetScentWildEncounterInner(void)
 {

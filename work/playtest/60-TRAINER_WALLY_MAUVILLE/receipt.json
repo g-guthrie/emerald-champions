@@ -1,6 +1,6 @@
 {
   "play_order": 60,
-  "e_group": "E0069",
+  "e_group": "E0054",
   "trainer": "TRAINER_WALLY_MAUVILLE",
   "class": "rival",
   "alias_note": "Single trainer - this rival encounter has no starter/gender alias set, so there is nothing to propagate. No level change was made in any case.",

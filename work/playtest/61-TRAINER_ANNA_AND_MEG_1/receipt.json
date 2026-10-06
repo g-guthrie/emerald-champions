@@ -1,6 +1,6 @@
 {
   "play_order": 61,
-  "e_group": "E0070",
+  "e_group": "E0075",
   "trainer": "TRAINER_ANNA_AND_MEG_1",
   "class": "regular",
   "location": "Route117",
@@ -36,7 +36,7 @@
     {"attempt": 2, "turn": 3, "battler": "ORANGURU", "payoff": "PARTIAL: blocked one Pixilate Hyper Voice (~54 damage on a 118 HP body, which is a genuine save) but converted it into nothing. Oranguru survived to the next turn and was KO'd there without having used a move. Its partner Lickitung was not protected and died in the same turn."}
   ],
   "ai_defects": [
-    {"id": "E0070-D1", "severity": "low", "attempt": 1, "turn": 3,
+    {"id": "E0075-D1", "severity": "low", "attempt": 1, "turn": 3,
      "board": "Opponent Lickitung 48/125 and Oranguru 42/118 against my Mega Gardevoir 65/90 and Togekiss 113/119.",
      "chosen": "Lickitung used Helping Hand targeting Oranguru.",
      "why_wrong": "Helping Hand is +5 priority so it resolves first, but it only pays off if the boosted ally then moves and lands something worthwhile. Oranguru is built at minimum Speed (0 Speed IV, Relaxed) precisely so it acts last, and its only revealed attack was Foul Play, which had already proved nearly worthless into my party - Foul Play scales off the TARGET's Attack, and both of my active Pokemon are special attackers with no Attack investment, so it had done 6 into Togekiss and 25 into Gardevoir. Doubling a 25-damage move is worth 25 damage, and only if the slowest Pokemon on the field survives to use it, which it did not.",

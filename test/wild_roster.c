@@ -20,6 +20,7 @@
 #include "test/test.h"
 
 extern u16 Test_GenerateFishingWildMon(const struct WildPokemonInfo *info, u8 rod);
+extern bool32 Test_GenerateCutTreeWildMon(void);
 
 static const u16 sRosterCaughtVars[] = {
     VAR_LEGENDARY_SIGNS_CAUGHT_0, VAR_LEGENDARY_SIGNS_CAUGHT_1,
@@ -428,6 +429,126 @@ TEST("Wild roster: Feebas keeps its hidden spots and Cut trees their habitat")
     RestoreRosterTestState(&state);
 }
 
+// A felled tree's own draws (Test_GenerateCutTreeWildMon) against the
+// roster's Cut-tree entries, as CheckRosterAgainstEngine does for tables.
+static u32 CheckCutTreeRosterAgainstEngine(u16 map, u32 draws)
+{
+    struct WildRosterEntry roster[WILD_ROSTER_MAX_ENTRIES];
+    u16 hits[WILD_ROSTER_MAX_ENTRIES] = {0};
+    u32 count, battles = 0, failures = 0;
+
+    SetRosterLocation(map);
+    count = GetWildRosterForMap(MAP_GROUP(map), MAP_NUM(map), roster, ARRAY_COUNT(roster));
+    for (u32 seed = 0; seed < draws; seed++)
+    {
+        enum Species species;
+        u32 level, entry;
+
+        SeedRng(seed * 2654435761u);
+        if (!Test_GenerateCutTreeWildMon())
+            continue;
+        battles++;
+        species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES);
+        level = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_LEVEL);
+        entry = FindRosterEntry(roster, count, WILD_ROSTER_CUT_TREES, species);
+        if (entry == NO_ENTRY)
+        {
+            Test_MgbaPrintf("Unlisted: map %d.%d Cut tree species %d", MAP_GROUP(map), MAP_NUM(map), species);
+            failures++;
+            continue;
+        }
+        hits[entry]++;
+        if (level < roster[entry].minLevel || level > roster[entry].maxLevel)
+        {
+            Test_MgbaPrintf("Level: map %d.%d Cut tree species %d level %d range %d-%d", MAP_GROUP(map), MAP_NUM(map),
+                species, level, roster[entry].minLevel, roster[entry].maxLevel);
+            failures++;
+        }
+    }
+    for (u32 i = 0; i < count; i++)
+    {
+        if (roster[i].method != WILD_ROSTER_CUT_TREES)
+            continue;
+        s64 error = (s64)hits[i] * WILD_SLOT_SHARE_TOTAL - (s64)battles * roster[i].share;
+        s64 variance = (s64)battles * roster[i].share * (WILD_SLOT_SHARE_TOTAL - roster[i].share);
+        if (hits[i] == 0 || error * error > 16 * variance + (s64)3 * WILD_SLOT_SHARE_TOTAL * 3 * WILD_SLOT_SHARE_TOTAL)
+        {
+            Test_MgbaPrintf("Share: map %d.%d Cut tree species %d hits %d of %d share %d", MAP_GROUP(map), MAP_NUM(map),
+                roster[i].species, hits[i], battles, roster[i].share);
+            failures++;
+        }
+    }
+    return failures;
+}
+
+// The share of a Cut-tree slot's Pokemon on a map, base and evolved forms
+// together: each slot keeps its habitat odds whatever form it arrives in.
+static u32 GetCutTreeSlotRosterShare(u16 map, u32 slot)
+{
+    static const enum Species evolved[][2] = {
+        {SPECIES_GREEDENT, SPECIES_GREEDENT},
+        {SPECIES_FORRETRESS, SPECIES_FORRETRESS},
+        {SPECIES_AMBIPOM, SPECIES_AMBIPOM},
+        {SPECIES_WORMADAM_PLANT, SPECIES_MOTHIM},
+        {SPECIES_FLAPPLE, SPECIES_APPLETUN},
+        {SPECIES_TREVENANT, SPECIES_TREVENANT},
+    };
+    u32 share = GetRosterShare(map, WILD_ROSTER_CUT_TREES, GetCutTreeSlotSpecies(slot))
+              + GetRosterShare(map, WILD_ROSTER_CUT_TREES, evolved[slot][0]);
+
+    if (evolved[slot][1] != evolved[slot][0])
+        share += GetRosterShare(map, WILD_ROSTER_CUT_TREES, evolved[slot][1]);
+    return share;
+}
+
+TEST("Wild roster: Cut trees list the forms their map's grass levels bring, as the tree does")
+{
+    struct RosterTestState state;
+    struct WildRosterEntry roster[WILD_ROSTER_MAX_ENTRIES];
+    u32 count, entry;
+
+    SaveRosterTestState(&state);
+    FlagSet(FLAG_RECEIVED_HM_CUT);
+    // Route 117's grass is in the high twenties. Under the first badge's cap
+    // of 20 its tree Pokemon are held at 20: Burmy, which evolves there,
+    // comes as Wormadam or Mothim; Skwovet stays itself.
+    SetRosterBadges(1);
+    EXPECT_EQ(GetCurrentLevelCap(), 20);
+    EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_SKWOVET));
+    EXPECT(!RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_GREEDENT));
+    EXPECT(!RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_BURMY));
+    EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_WORMADAM_PLANT));
+    EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_MOTHIM));
+    EXPECT_EQ(CheckCutTreeRosterAgainstEngine(MAP_ROUTE117, 1500), 0);
+    // From the second badge they arrive at the grass levels: Skwovet as
+    // Greedent, Pineco still below 31.
+    SetRosterBadges(2);
+    EXPECT(!RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_SKWOVET));
+    EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_GREEDENT));
+    EXPECT(RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_PINECO));
+    EXPECT(!RosterHas(MAP_ROUTE117, WILD_ROSTER_CUT_TREES, SPECIES_FORRETRESS));
+    EXPECT_EQ(CheckCutTreeRosterAgainstEngine(MAP_ROUTE117, 1500), 0);
+    // Route 118's band straddles Phantump's 45: both forms are listed, each
+    // at the levels it comes at.
+    SetRosterBadges(4);
+    EXPECT_GE(GetCurrentLevelCap(), 45);
+    count = GetWildRosterForMap(MAP_GROUP(MAP_ROUTE118), MAP_NUM(MAP_ROUTE118), roster, ARRAY_COUNT(roster));
+    entry = FindRosterEntry(roster, count, WILD_ROSTER_CUT_TREES, SPECIES_PHANTUMP);
+    EXPECT_NE(entry, NO_ENTRY);
+    EXPECT_LE(roster[entry].maxLevel, 44);
+    entry = FindRosterEntry(roster, count, WILD_ROSTER_CUT_TREES, SPECIES_TREVENANT);
+    EXPECT_NE(entry, NO_ENTRY);
+    EXPECT_GE(roster[entry].minLevel, 45);
+    EXPECT_EQ(CheckCutTreeRosterAgainstEngine(MAP_ROUTE118, 2000), 0);
+    // Whatever form it arrives in, each slot keeps its habitat odds.
+    for (u32 slot = 0; slot < GetCutTreeSlotCount(); slot++)
+    {
+        EXPECT_GE(GetCutTreeSlotRosterShare(MAP_ROUTE118, slot) + 2, GetCutTreeSlotOdds(slot) * WILD_SLOT_SHARE_TOTAL / 100);
+        EXPECT_LE(GetCutTreeSlotRosterShare(MAP_ROUTE118, slot), GetCutTreeSlotOdds(slot) * WILD_SLOT_SHARE_TOTAL / 100 + 2);
+    }
+    RestoreRosterTestState(&state);
+}
+
 TEST("Wild roster: rods and field licenses expose only their usable methods")
 {
     struct RosterTestState state;
@@ -548,7 +669,9 @@ static u32 CheckRosterFloors(void)
         u32 count = GetWildRosterForMap(mapGroup, mapNum, roster, ARRAY_COUNT(roster));
         for (u32 i = 0; i < count; i++)
         {
-            if (roster[i].method == WILD_ROSTER_FEEBAS)
+            // A Cut-tree slot keeps its habitat odds, but its evolved forms
+            // share them by level and by an even form roll.
+            if (roster[i].method == WILD_ROSTER_FEEBAS || roster[i].method == WILD_ROSTER_CUT_TREES)
                 continue;
             bool32 restricted = GetRestrictedPartyClass(roster[i].species) != RESTRICTED_PARTY_NONE;
             if (roster[i].share < 400 || (restricted && roster[i].share != 500))

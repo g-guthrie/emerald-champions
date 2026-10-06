@@ -1,6 +1,6 @@
 {
   "play_order": 49,
-  "e_group": "E0053",
+  "e_group": "E0068",
   "trainer": "TRAINER_GRETA_SLATEPORT",
   "class": "brain",
   "location": "SlateportCity",
@@ -77,7 +77,7 @@
       "chosen": "MOVE_WISH",
       "problem": "Wish was used at full health on turn 1 and resolved on turn 2 with Umbreon still at 98/98 - the log reads 'The opposing Umbreon's HP is full!' It healed nothing. Greta did not switch, so there was no Wish pass either. It is a completely blank turn from the team's only support body, on the one turn when the board was at its most even, and it is the same category of failure as an empty Protect: a support move scored without a payoff to score against.",
       "better_action": "MOVE_SNARL. Both player battlers were special attackers, Snarl is a spread special-attack drop, and when Umbreon did eventually use it on turn 3 it was the single most useful thing the team's support did all battle. Foul Play would also have been better than nothing.",
-      "scope_note": "For the AI owner: this is Wish (and by extension delayed-heal/self-support moves) being scored without a target-state check - 'will there be damage to heal when this resolves'. It is the same shape as empty-Protect pricing, which the guard work already addresses; the delayed-heal path appears not to be covered. Affected-team index candidates: every authored team carrying Wish, Life Dew, Roost, Morning Sun or Pollen Puff healing on a full-health body - Audino on E0054 and Swablu on E0069 are the nearest in my block. Not fixing AI C code from this session."
+      "scope_note": "For the AI owner: this is Wish (and by extension delayed-heal/self-support moves) being scored without a target-state check - 'will there be damage to heal when this resolves'. It is the same shape as empty-Protect pricing, which the guard work already addresses; the delayed-heal path appears not to be covered. Affected-team index candidates: every authored team carrying Wish, Life Dew, Roost, Morning Sun or Pollen Puff healing on a full-health body - Audino on E0049 and Swablu on E0054 are the nearest in my block. Not fixing AI C code from this session."
     }
   ],
   "ai_notes": [

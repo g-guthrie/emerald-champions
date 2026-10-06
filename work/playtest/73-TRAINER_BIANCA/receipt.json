@@ -1,6 +1,6 @@
 {
  "play_order": 73,
- "e_group": "E0082",
+ "e_group": "E0089",
  "trainer": "TRAINER_BIANCA",
  "class": "regular",
  "location": "Route111",
@@ -12,7 +12,7 @@
   "SKIDDO": 33,
   "BELLOSSOM": 29
  },
- "cap_window_confirmation": "Dossier seeds 30/35/35/31 resolved to 28/33/33/29, i.e. cap 30 with the Medium -2. Confirms the live cap window for play_order 73 is 30, matching the E0082-E0092 dossier prose.",
+ "cap_window_confirmation": "Dossier seeds 30/35/35/31 resolved to 28/33/33/29, i.e. cap 30 with the Medium -2. Confirms the live cap window for play_order 73 is 30, matching the E0089-E0059 dossier prose.",
  "party_manifest": "work/playtest/73-TRAINER_BIANCA/party.json",
  "party_pool_audit": "Reuses the already-audited cap-30 Route 110 core (Mega Gardevoir, Togekiss, Magearna, Kartana, Weavile, Nidoking); every source map is at or before Route 110 and therefore before this battle on Route 111. Explicitly excluded as not yet reachable: all NewMauville sources (the book gates New Mauville behind Surf in C28) and all Route 111 desert species (Go-Goggles arrive in C23). One reachable legend (Magearna) and one Mega (Gardevoir, stone-window 14) declared.",
  "pre_declared_strategy_checks": [

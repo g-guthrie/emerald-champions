@@ -1,6 +1,6 @@
 {
   "play_order": 51,
-  "e_group": "E0054",
+  "e_group": "E0049",
   "trainer": "TRAINER_KALEB",
   "class": "regular",
   "location": "Route110",
@@ -82,7 +82,7 @@
       "chosen": "MOVE_HOWL",
       "problem": "Howl raises Attack. Dachsbun's only Attack-scaling attack is PLAY_ROUGH, which is 0.5x into Togekiss (Fairy) and 0.5x into Magearna (Steel) - so the boost could not improve its damage against either opponent on the field, whatever happened next. Meanwhile BODY_PRESS scales off Defense, ignores Howl entirely, and is 2x into Magearna: the exact move it had just used to KO my Kartana. The team also has no partner left for Howl to support and no turn in which to spend the boost - it died from full HP to a single Flash Cannon on the same turn.",
       "better_action": "MOVE_BODY_PRESS at Magearna. It is 2x, it is the move Dachsbun's Impish 252 HP / 252 Def spread is actually built around, and it had just produced a knockout with it.",
-      "scope_note": "This is not simply 'setup while about to die' - the boost was type-dead as well. Two things for the AI owner: (a) a setup move should be scored against whether the boosted stat feeds a move that can actually damage what is on the field, and (b) the 1-vs-2 case where there is no partner to support and no expected surviving turn. Affected-team index candidates: every authored team with Howl / Swords Dance / Calm Mind / Nasty Plot on a member whose best move ignores the boosted stat, and every last-Pokemon board. Doduo's Swords Dance on E0064 and Swoobat's Calm Mind on E0063 are the nearest in my block. Not fixing AI C code from this session."
+      "scope_note": "This is not simply 'setup while about to die' - the boost was type-dead as well. Two things for the AI owner: (a) a setup move should be scored against whether the boosted stat feeds a move that can actually damage what is on the field, and (b) the 1-vs-2 case where there is no partner to support and no expected surviving turn. Affected-team index candidates: every authored team with Howl / Swords Dance / Calm Mind / Nasty Plot on a member whose best move ignores the boosted stat, and every last-Pokemon board. Doduo's Swords Dance on E0073 and Swoobat's Calm Mind on E0071 are the nearest in my block. Not fixing AI C code from this session."
     }
   ],
   "ai_notes": [

@@ -153,15 +153,30 @@ static u32 GetRosterOverlays(u8 mapGroup, u8 mapNum, enum WildPokemonArea area, 
     return count;
 }
 
-static void AddRosterCutTrees(struct RosterBuild *build)
+// Every level of the map's band and both form rolls, through the encounter's
+// own GetCutTreeSlotEncounter, so a band that straddles an evolution level
+// lists both forms at the levels each comes at. Each draw weighs its slot's
+// odds; FinishRosterMethod turns the weights into shares.
+static void AddRosterCutTrees(struct RosterBuild *build, u16 headerId)
 {
-    u8 minLevel, maxLevel;
+    u8 low, high;
 
-    GetCutTreeEncounterLevelRange(&minLevel, &maxLevel);
+    if (!GetCutTreeLevelBand(headerId, &low, &high))
+        return;
     StartRosterMethod(build);
     for (u32 slot = 0; slot < GetCutTreeSlotCount(); slot++)
-        AddRosterShare(build, WILD_ROSTER_CUT_TREES, GetCutTreeSlotSpecies(slot),
-                       GetCutTreeSlotOdds(slot) * WILD_SLOT_SHARE_TOTAL / 100, minLevel, maxLevel);
+    {
+        for (u32 bandLevel = low; bandLevel <= high; bandLevel++)
+        {
+            for (u32 formRoll = 0; formRoll < 2; formRoll++)
+            {
+                u8 level;
+                enum Species species = GetCutTreeSlotEncounter(slot, bandLevel, formRoll, &level);
+
+                AddRosterShare(build, WILD_ROSTER_CUT_TREES, species, GetCutTreeSlotOdds(slot), level, level);
+            }
+        }
+    }
     FinishRosterMethod(build);
 }
 
@@ -234,7 +249,7 @@ u32 GetWildRosterForMap(u8 mapGroup, u8 mapNum, struct WildRosterEntry *entries,
         AddRosterTable(&build, WILD_ROSTER_HONEY, types[GetTimeOfDayForEncounters(headerId, WILD_AREA_HONEY)].honeyMonsInfo,
                        WILD_AREA_HONEY, 0, NULL, 0);
     if (IsFieldMoveUnlocked(FIELD_MOVE_CUT) && MapHeaderHasCutTrees(mapHeader))
-        AddRosterCutTrees(&build);
+        AddRosterCutTrees(&build, headerId);
     if (hasRod && MapHasFeebasSpots(mapGroup, mapNum))
         AddRosterFeebas(&build);
 

@@ -1,6 +1,6 @@
 {
   "play_order": 62,
-  "e_group": "E0071",
+  "e_group": "E0076",
   "trainer": "TRAINER_ISAAC_1",
   "class": "ace",
   "location": "Route117",
@@ -37,7 +37,7 @@
     {"turn": 6, "battler": "ABRA", "payoff": "REAL. Abra was on exactly 1 HP behind a spent Focus Sash. Protect blocked a Hyper Voice and a Fleur Cannon, preserving the only Pokemon that could still throw a spread attack at my pair. It converted that turn into nothing because its partner died anyway, but guarding 1 HP against two incoming attacks is the correct use of the move and the alternative was certain death."}
   ],
   "ai_defects": [
-    {"id": "E0071-D1", "severity": "high", "attempt": 1, "turns": "3 and 4",
+    {"id": "E0076-D1", "severity": "high", "attempt": 1, "turns": "3 and 4",
      "board": "T3: Kangaskhan 111/111 holding ITEM_KANGASKHANITE enters beside Munchlax 68/158, against my Mega Gardevoir 90/90 and a freshly switched-in Kartana 85/85. Driver state reports the battler as usable_gimmick 'mega', mega_already_used false, active_gimmick 'none'. T4: Kangaskhan 39/111, same item, still not Mega-Evolved.",
      "chosen": "T3 Fake Out (base form). T4 Sucker Punch (base form). It then fainted in base form.",
      "why_wrong": "This trainer's dossier names 'Mega Kangaskhan is an independently strong physical closer' as one of the team's four pillars, the authored line carries mega_slots: 6 and the Kangaskhanite, and the crack line is written around Parental Bond's damage ('Current Parental Bond second hit is 25percent, not 50percent'). None of that existed in the battle. Mega Evolution is free - it costs no action, it happens before moves resolve, and Mega Kangaskhan gains both a large stat spread and Parental Bond, which turns Fake Out into two hits (a second flinch roll and extra Focus Sash chip) and roughly doubles the value of Sucker Punch. There is no board on which declining it is correct, and it declined twice.",

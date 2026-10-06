@@ -869,7 +869,7 @@ static void GalvantulaLockBoard(void)
     gLastMoves[B_BATTLER_1] = MOVE_THUNDER;
 }
 
-// E0092 a02: Wattson's Specs Galvantula, locked into Thunder, fired it twice
+// E0059 a02: Wattson's Specs Galvantula, locked into Thunder, fired it twice
 // into a Lightning Rod Marowak beside a Ground-type Clodsire. Each Thunder
 // only raised Marowak's Sp. Atk; the lock does nothing on either target.
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into Lightning Rod and a Ground type is left")
@@ -898,7 +898,7 @@ static void CorphishLockBoard(void)
     gLastMoves[B_BATTLER_1] = MOVE_AQUA_JET;
 }
 
-// E0049 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
+// E0067 a07: Elliot's Band Corphish, locked into Aqua Jet, kept firing it into
 // Tsareena's Queenly Majesty, which stops priority against its whole side.
 AI_DOUBLE_BATTLE_TEST("EC failed moves: a Choice lock into a priority block is left")
 {
@@ -947,7 +947,7 @@ AI_SINGLE_BATTLE_TEST("EC failed moves: Encore scores as a failure on a fresh sw
     }
 }
 
-// E0056 a03: Eddie's Carnivine used Rage Powder when every foe was a Grass
+// E0070 a03: Eddie's Carnivine used Rage Powder when every foe was a Grass
 // type, which the powder cannot draw. Follow Me still draws them; with no
 // partner on the field, neither has anyone to draw attacks away from.
 AI_DOUBLE_BATTLE_TEST("EC failed moves: redirection is useless when no foe is drawn or no partner is left to cover")
@@ -972,7 +972,7 @@ AI_DOUBLE_BATTLE_TEST("EC failed moves: redirection is useless when no foe is dr
     }
 }
 
-// E0063: Jaclyn's Wobbuffet set Safeguard, and set it again, against a party
+// E0071: Jaclyn's Wobbuffet set Safeguard, and set it again, against a party
 // with no way to inflict a status. Hard knows every foe loadout; on the other
 // modes an unseen move may still bring one.
 AI_SINGLE_BATTLE_TEST("EC failed moves: Safeguard is useless against a known party with no status to give")

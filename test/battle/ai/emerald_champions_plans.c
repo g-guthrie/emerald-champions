@@ -3018,7 +3018,7 @@ AI_DOUBLE_BATTLE_TEST("EC KO allocation: a search the clock cuts short still sta
     }
 }
 
-// rv2 v002/E0052, every attempt: Archie's plan opens with Sableye's Prankster
+// rv2 v002/E0048, every attempt: Archie's plan opens with Sableye's Prankster
 // Rain Dance so the Damp Rock rain carries the Swift Swim back line, but the
 // rain was priced only for the two bodies on the field. Neither Sableye nor
 // Mightyena gains from rain, so Sableye used Knock Off or Will-O-Wisp and the

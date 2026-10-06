@@ -22,8 +22,9 @@ EventScript_CutTreeDown:: @ fallthrough
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	@ Every Cut tree shares one habitat (Skwovet, Pineco, Aipom, Burmy, Applin,
-	@ Phantump: found nowhere else). One tree in three hides a Pokemon; the
-	@ odds, levels and Repel rule live in CutTreeWildEncounter (wild_encounter.c).
+	@ Phantump: found nowhere else, evolved once the map's grass levels reach
+	@ their evolution). One tree in three hides a Pokemon; the odds, levels and
+	@ Repel rule live in CutTreeWildEncounter (wild_encounter.c).
 	callnative CutTreeWildEncounter
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CancelCut
 	waitstate

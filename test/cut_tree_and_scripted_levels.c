@@ -3,6 +3,7 @@
 #include "caps.h"
 #include "event_data.h"
 #include "field_specials.h"
+#include "legendary_signs.h"
 #include "overworld.h"
 #include "pokemon.h"
 #include "random.h"
@@ -24,7 +25,6 @@ extern u32 GetCutTreeSlotCount(void);
 extern enum Species GetCutTreeSlotSpecies(u32 slot);
 extern u32 GetCutTreeSlotOdds(u32 slot);
 extern u32 ChooseCutTreeSlotFromRoll(u32 roll);
-extern u8 GetCutTreeEncounterLevelFromRoll(u32 roll);
 extern void CutTreeWildEncounter(void);
 extern void GetLevelCapForScriptedGift(void);
 extern const u8 GabbyAndTy_EventScript_UpdateLocation[];
@@ -84,26 +84,158 @@ TEST("Cut trees: one shared habitat with the owner's roster and odds")
         EXPECT_EQ(rolled[slot], expected[slot].odds);
 }
 
-TEST("Cut trees: levels sit four to eight under the live cap at every milestone")
+static u32 GetLevelUpEvolutionLevel(enum Species species, enum Species target)
+{
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+
+    for (u32 i = 0; evolutions != NULL && evolutions[i].method != EVOLUTIONS_END; i++)
+        if (evolutions[i].method == EVO_LEVEL && evolutions[i].targetSpecies == target)
+            return evolutions[i].param;
+    return 0;
+}
+
+static u32 GetLevelUpMoveLevel(enum Species species, enum Move move)
+{
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+
+    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+        if (learnset[i].move == move)
+            return learnset[i].level;
+    return 0;
+}
+
+TEST("Cut trees: each slot evolves at its real evolution level")
+{
+    static const struct { enum Species evolution, altEvolution; u8 level; } expected[] = {
+        {SPECIES_GREEDENT, SPECIES_GREEDENT, 24},
+        {SPECIES_FORRETRESS, SPECIES_FORRETRESS, 31},
+        {SPECIES_AMBIPOM, SPECIES_AMBIPOM, 32},
+        {SPECIES_WORMADAM_PLANT, SPECIES_MOTHIM, 20},
+        {SPECIES_FLAPPLE, SPECIES_APPLETUN, 40},
+        {SPECIES_TREVENANT, SPECIES_TREVENANT, 45},
+    };
+    bool8 saved[ARRAY_COUNT(sCapFlags)];
+
+    // The level-up evolutions and Aipom's Double Hit come from species data;
+    // Applin's apples and Phantump's trade have no level of their own.
+    EXPECT_EQ(GetLevelUpEvolutionLevel(SPECIES_SKWOVET, SPECIES_GREEDENT), 24);
+    EXPECT_EQ(GetLevelUpEvolutionLevel(SPECIES_PINECO, SPECIES_FORRETRESS), 31);
+    EXPECT_EQ(GetLevelUpEvolutionLevel(SPECIES_BURMY, SPECIES_WORMADAM_PLANT), 20);
+    EXPECT_EQ(GetLevelUpEvolutionLevel(SPECIES_BURMY, SPECIES_MOTHIM), 20);
+    EXPECT_EQ(GetLevelUpMoveLevel(SPECIES_AIPOM, MOVE_DOUBLE_HIT), 32);
+
+    // Under the Champion's cap nothing clamps these levels.
+    SaveAndClearCapFlags(saved);
+    for (u32 i = 0; i < ARRAY_COUNT(sCapFlags); i++)
+        FlagSet(sCapFlags[i]);
+    EXPECT_EQ(GetCutTreeSlotCount(), ARRAY_COUNT(expected));
+    for (u32 slot = 0; slot < ARRAY_COUNT(expected); slot++)
+    {
+        u8 level;
+
+        EXPECT_EQ(GetCutTreeSlotEvolutionLevel(slot), expected[slot].level);
+        EXPECT_EQ(GetCutTreeSlotEncounter(slot, expected[slot].level - 1, 0, &level), GetCutTreeSlotSpecies(slot));
+        EXPECT_EQ(level, expected[slot].level - 1);
+        EXPECT_EQ(GetCutTreeSlotEncounter(slot, expected[slot].level - 1, 1, &level), GetCutTreeSlotSpecies(slot));
+        EXPECT_EQ(GetCutTreeSlotEncounter(slot, expected[slot].level, 0, &level), expected[slot].evolution);
+        EXPECT_EQ(level, expected[slot].level);
+        EXPECT_EQ(GetCutTreeSlotEncounter(slot, expected[slot].level, 1, &level), expected[slot].altEvolution);
+        EXPECT_EQ(GetCutTreeSlotEncounter(slot, MAX_LEVEL, 0, &level), expected[slot].evolution);
+    }
+    RestoreCapFlags(saved);
+}
+
+// The lowest and highest levels of a land table's ordinary slots.
+static bool32 GetLandBand(u32 headerId, u8 *low, u8 *high)
+{
+    const struct WildPokemonInfo *land = gWildMonHeaders[headerId].encounterTypes[GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND)].landMonsInfo;
+
+    *low = MAX_LEVEL;
+    *high = 0;
+    for (u32 slot = 0; land != NULL && slot < NUM_LAND_MONS_ENCOUNTER_SLOTS; slot++)
+    {
+        const struct WildPokemon *mon = &land->wildPokemon[slot];
+        if (IsLegendaryEncounterSpecies(mon->species))
+            continue;
+        *low = min(*low, min(mon->minLevel, mon->maxLevel));
+        *high = max(*high, max(mon->minLevel, mon->maxLevel));
+    }
+    return *high != 0;
+}
+
+TEST("Cut trees: a tree's Pokemon comes at its map's grass levels, evolved only at its evolution level and never above the cap")
 {
     bool8 saved[ARRAY_COUNT(sCapFlags)];
+    u32 maps = 0;
+
     SaveAndClearCapFlags(saved);
     for (u32 milestone = 0; milestone <= ARRAY_COUNT(sCapFlags); milestone++)
     {
         if (milestone > 0)
             FlagSet(sCapFlags[milestone - 1]);
         u32 cap = GetCurrentLevelCap();
-        bool32 seen[5] = {FALSE};
-        for (u32 roll = 0; roll < 50; roll++)
+        for (u32 header = 0; gWildMonHeaders[header].mapGroup != MAP_GROUP(MAP_UNDEFINED); header++)
         {
-            u32 level = GetCutTreeEncounterLevelFromRoll(roll);
-            EXPECT_GE(level, cap - 8);
-            EXPECT_LE(level, cap - 4);
-            seen[level - (cap - 8)] = TRUE;
+            const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(gWildMonHeaders[header].mapGroup, gWildMonHeaders[header].mapNum);
+            u8 low, high, landLow, landHigh;
+
+            if (!MapHeaderHasCutTrees(map))
+                continue;
+            // Every map with a Cut tree and wild Pokemon has a land table,
+            // and the tree uses its ordinary slots' band.
+            EXPECT(GetLandBand(header, &landLow, &landHigh));
+            EXPECT(GetCutTreeLevelBand(header, &low, &high));
+            EXPECT_EQ(low, landLow);
+            EXPECT_EQ(high, landHigh);
+            maps += milestone == 0;
+            for (u32 slot = 0; slot < GetCutTreeSlotCount(); slot++)
+            {
+                for (u32 bandLevel = low; bandLevel <= high; bandLevel++)
+                {
+                    for (u32 formRoll = 0; formRoll < 2; formRoll++)
+                    {
+                        u8 level;
+                        enum Species species = GetCutTreeSlotEncounter(slot, bandLevel, formRoll, &level);
+
+                        EXPECT_EQ(level, min(bandLevel, cap));
+                        if (species == GetCutTreeSlotSpecies(slot))
+                            EXPECT_LT(level, GetCutTreeSlotEvolutionLevel(slot));
+                        else
+                            EXPECT_GE(level, GetCutTreeSlotEvolutionLevel(slot));
+                    }
+                }
+            }
         }
-        for (u32 i = 0; i < ARRAY_COUNT(seen); i++)
-            EXPECT(seen[i]);
     }
+    EXPECT_GT(maps, 0);
+    RestoreCapFlags(saved);
+}
+
+TEST("Cut trees: Route 117's Skwovet arrives as Greedent once the cap lets its grass levels through")
+{
+    bool8 saved[ARRAY_COUNT(sCapFlags)];
+    u32 header = GetWildMonHeaderIdForMap(MAP_GROUP(MAP_ROUTE117), MAP_NUM(MAP_ROUTE117));
+    u8 low, high, level;
+
+    EXPECT(GetCutTreeLevelBand(header, &low, &high));
+    EXPECT_GE(low, GetCutTreeSlotEvolutionLevel(0));
+    SaveAndClearCapFlags(saved);
+    // Before the second badge the cap (under 24) holds it as Skwovet.
+    EXPECT_LT(GetCurrentLevelCap(), GetCutTreeSlotEvolutionLevel(0));
+    EXPECT_EQ(GetCutTreeSlotEncounter(0, high, 0, &level), SPECIES_SKWOVET);
+    EXPECT_EQ(level, GetCurrentLevelCap());
+    EXPECT(CutTreeHabitatHasSpecies(header, SPECIES_SKWOVET));
+    EXPECT(!CutTreeHabitatHasSpecies(header, SPECIES_GREEDENT));
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    EXPECT_GE(GetCurrentLevelCap(), high);
+    for (u32 bandLevel = low; bandLevel <= high; bandLevel++)
+    {
+        EXPECT_EQ(GetCutTreeSlotEncounter(0, bandLevel, 0, &level), SPECIES_GREEDENT);
+        EXPECT_EQ(level, bandLevel);
+    }
+    EXPECT(!CutTreeHabitatHasSpecies(header, SPECIES_SKWOVET));
+    EXPECT(CutTreeHabitatHasSpecies(header, SPECIES_GREEDENT));
     RestoreCapFlags(saved);
 }
 

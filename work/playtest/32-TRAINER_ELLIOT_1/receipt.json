@@ -1,5 +1,5 @@
 {
-  "play_order": 32, "e_group": "E0049", "trainer": "TRAINER_ELLIOT_1", "class": "regular",
+  "play_order": 32, "e_group": "E0067", "trainer": "TRAINER_ELLIOT_1", "class": "regular",
   "location": "Route106", "cap": 20, "difficulty": "medium",
   "party_manifest": "work/playtest/32-TRAINER_ELLIOT_1/party.json",
   "opponent_levels_before": {"CLAUNCHER": 20, "FRILLISH": 22, "SHELLDER": 22, "CORPHISH": 20},

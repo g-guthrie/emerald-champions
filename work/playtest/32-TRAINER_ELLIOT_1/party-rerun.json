@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "encounter": "E0049 TRAINER_ELLIOT_1 (Route 106 sea-and-stream collection); play_order 32, cap 20, Medium",
+ "encounter": "E0067 TRAINER_ELLIOT_1 (Route 106 sea-and-stream collection); play_order 32, cap 20, Medium",
  "availability_audit": "Chronology audit for this rerun. Every member's source map is checked against the book's chapter order (Game Book lines 1-300) and against the live map scripts, not only against the pool file's cap gate. Three species used in the first pass are chronology-ILLEGAL and were removed: WHIMSICOTT (Cottonee's only source is wild:VerdanturfMeadow, reached in C20 at cap 30); MAGEARNA before E0030 (the Devon Corp stairs are blocked until FLAG_RETURNED_DEVON_GOODS, set after Rusturf Tunnel); and ALAKAZAM before the Dewford Gym (Abra's only source is wild:GraniteCave_1F, entered in C12 after Route 106). Assisted acquisition through the native preparation API, ordinary items only, no Mega Stone on the player side (the Ring arrives after Brawly). Not native capture acceptance.",
  "plan": "Electric and Grass special pressure into four Water bodies, a Water Absorb-proof Ground wall, and priority-safe answers to a Shell Smash Shellder behind Focus Sash.",
  "party": [

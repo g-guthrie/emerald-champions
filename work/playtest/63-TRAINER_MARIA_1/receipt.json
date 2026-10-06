@@ -1,6 +1,6 @@
 {
   "play_order": 63,
-  "e_group": "E0073",
+  "e_group": "E0077",
   "trainer": "TRAINER_MARIA_1",
   "class": "regular",
   "location": "Route117",
@@ -31,7 +31,7 @@
   "protect_ledger": [],
   "protect_ledger_note": "Empty. Zero opposing Protects across the three turns. No empty, harmful or repetitive guarding to report.",
   "ai_defects": [
-    {"id": "E0073-D1", "severity": "low", "attempt": 1, "turn": 2,
+    {"id": "E0077-D1", "severity": "low", "attempt": 1, "turn": 2,
      "board": "Froslass 13/86 (Focus Sash already irrelevant, it was below full HP), the fastest Pokemon on the field, with its partner Salandit already dead. Against my Magearna 116/116 and Nidoking 98/98. Raboot was its only surviving teammate.",
      "chosen": "Icy Wind (spread, Speed -1).",
      "why_wrong": "Froslass was certain to die that turn to either of my two attackers and it knew its own HP. Icy Wind's payoff was one Speed stage on a Magearna that was already slower than everything relevant and on a Nidoking it missed entirely - the damage was a rounding error on a 13 HP Pokemon's last action. Destiny Bond is on the sheet precisely for this board, it has +6 priority so Froslass would have got it up before dying, and it would have taken a healthy Magearna or Nidoking with it. That is a one-for-one trade for a Pokemon at 15 percent HP, which is the single highest-value action available. The dossier's own wording is that Destiny Bond 'only buys a real trade' - this was a real trade and it was declined.",
