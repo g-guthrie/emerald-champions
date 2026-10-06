@@ -85,6 +85,9 @@ and hidden-item tile, pick up every item, Bag snapshot before/after. Battles are
 - Wild held battle items on Pokemon met before the first Badge -> clerk floor 0 (family-wide);
   berries, Honey, medicine, sell items, Everstone stay; scheduled items (Light Ball) just removed.
 - No friendship evolution before the Stone Badge (src/pokemon.c).
+- Worthless overworld pickups (Potion, Super Potion, Ether, Repel, status heals...) become battle
+  items, preferably the ones pulled off wild holds in that step; others get a clerk badge floor.
+- Held-item rule applies after the first Badge too (owner, step 8).
 - Report per step: Pokemon, items, evolutions, concerns; then write the manifest step.
 
 ## Harness fixes (sweep)
