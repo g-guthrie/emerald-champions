@@ -4,11 +4,11 @@
     python3 tools/title_logo.py graphics/title_screen/inclement_emerald_2_logo_master.png \
         graphics/title_screen/inclement_emerald_2_logo.png
 
-The master is the logo itself, 229x76: the artwork shrunk in GIMP to 240x76
-with no interpolation (each pixel taken from the artwork, none blended) and
-its alpha thresholded at 127, which drops the faint halo at the sides. It is
-shown at that size, centred in a 256x96 8bpp sheet (twelve 64x32 sprites,
-src/title_screen.c), with at most PALETTE_COLORS colours after the
+The master is the logo itself, 200x66: the artwork, its flat grey
+background cut away from the edges in, shrunk in GIMP with LoHalo
+interpolation (it is smooth art, not pixel art) and its alpha thresholded at
+127. It is shown at that size, centred in a 256x96 8bpp sheet (twelve 64x32
+sprites, src/title_screen.c), with at most PALETTE_COLORS colours after the
 transparent index 0.
 
 A master larger than the sheet is taken as pixel art enlarged by some factor
