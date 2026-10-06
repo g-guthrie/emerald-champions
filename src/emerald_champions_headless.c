@@ -637,9 +637,6 @@ static void PrepareBookResearchScene(void)
                 AddBagItem(tools[i], 1);
         VarSet(VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE);
         FlagSet(FLAG_EC_EARNED_SS_TICKET);
-        FlagSet(FLAG_EC_EARNED_EON_TICKET);
-        FlagSet(FLAG_EC_EARNED_OLD_SEA_MAP);
-        FlagSet(FLAG_EC_EARNED_AURORA_TICKET);
         FlagSet(FLAG_ENABLE_SHIP_NAVEL_ROCK);
         if (gEcHeadlessFixtureParam & 0x100)
         {

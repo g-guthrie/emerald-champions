@@ -1561,9 +1561,9 @@
 #define FLAG_EC_MEADOW_SONG_PERFORMED                    (SYSTEM_FLAGS + 0x92)
 #define FLAG_EC_RESOLVED_LANDORUS                        (SYSTEM_FLAGS + 0x93)
 #define FLAG_EC_EARNED_SS_TICKET                         (SYSTEM_FLAGS + 0x94)
-#define FLAG_EC_EARNED_EON_TICKET                        (SYSTEM_FLAGS + 0x95)
-#define FLAG_EC_EARNED_OLD_SEA_MAP                       (SYSTEM_FLAGS + 0x96)
-#define FLAG_EC_EARNED_AURORA_TICKET                     (SYSTEM_FLAGS + 0x97)
+#define FLAG_UNUSED_0x8F5                                (SYSTEM_FLAGS + 0x95) // Unused Flag; was FLAG_EC_EARNED_EON_TICKET, may be set in older saves
+#define FLAG_UNUSED_0x8F6                                (SYSTEM_FLAGS + 0x96) // Unused Flag; was FLAG_EC_EARNED_OLD_SEA_MAP, may be set in older saves
+#define FLAG_UNUSED_0x8F7                                (SYSTEM_FLAGS + 0x97) // Unused Flag; was FLAG_EC_EARNED_AURORA_TICKET, may be set in older saves
 #define FLAG_UNUSED_0x8F8                                (SYSTEM_FLAGS + 0x98) // Unused Flag; was FLAG_EC_CAUGHT_ROTOM, may be set in older saves
 #define FLAG_EC_REPORT_C42_COMPLETE                      (SYSTEM_FLAGS + 0x99)
 #define FLAG_UNUSED_0x8FA                                (SYSTEM_FLAGS + 0x9A) // Unused Flag; was FLAG_EC_SCANNER_REWARD_SELECTED, may be set in older saves

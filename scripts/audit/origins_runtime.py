@@ -355,9 +355,6 @@ def main():
         if 'tickets-full-retry' in cases:
             s = Scene(out, 'tickets-full-retry', 28 | 0x100, symbols, runner, scenario, constants)
             papers = [('SS_TICKET','FLAG_RECEIVED_SS_TICKET','FLAG_EC_EARNED_SS_TICKET'),
-                      ('EON_TICKET','FLAG_EC_RECEIVED_EON_TICKET','FLAG_EC_EARNED_EON_TICKET'),
-                      ('OLD_SEA_MAP','FLAG_RECEIVED_OLD_SEA_MAP','FLAG_EC_EARNED_OLD_SEA_MAP'),
-                      ('AURORA_TICKET','FLAG_RECEIVED_AURORA_TICKET','FLAG_EC_EARNED_AURORA_TICKET'),
                       ('MYSTIC_TICKET','FLAG_RECEIVED_MYSTIC_TICKET','FLAG_ENABLE_SHIP_NAVEL_ROCK')]
             s.face('UP', 'face-center-nurse')
             s.menu()
