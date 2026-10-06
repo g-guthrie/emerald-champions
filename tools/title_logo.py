@@ -5,18 +5,18 @@
         graphics/title_screen/inclement_emerald_2_logo.png
 
 The master is pixel art drawn at about 9 source pixels per art pixel. It is
-cropped to its opaque pixels and scaled to LOGO_WIDTH x LOGO_HEIGHT by
-nearest-neighbour sampling, which lands near one art pixel per screen pixel
-and never blends two colours into a new one, so the outlines stay hard. The
-result goes into a 256x64 8bpp sheet (four 64x64 sprites, src/title_screen.c)
+cropped to its opaque pixels and scaled to fit LOGO_WIDTH x LOGO_HEIGHT by
+nearest-neighbour sampling, which never blends two colours into a new one, so
+the outlines stay hard. 192 wide is about 0.85 screen pixels an art pixel;
+much smaller and its one-pixel outlines start to break. The result goes into a 192x64 8bpp sheet (three 64x64 sprites, src/title_screen.c)
 with at most PALETTE_COLORS colours after the transparent index 0: OBJ
 palettes 0-8, the ones the title screen reserves below PRESS START's.
 """
 import sys
 from PIL import Image
 
-SHEET_WIDTH, SHEET_HEIGHT = 256, 64
-LOGO_WIDTH, LOGO_HEIGHT = 224, 64
+SHEET_WIDTH, SHEET_HEIGHT = 192, 64
+LOGO_WIDTH, LOGO_HEIGHT = 192, 64
 PALETTE_COLORS = 9 * 16 - 1
 
 

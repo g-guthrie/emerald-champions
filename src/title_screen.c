@@ -34,15 +34,14 @@ enum {
 };
 
 // The game logo (graphics/title_screen/inclement_emerald_2_logo.png, made by
-// tools/title_logo.py): 224x64 at one art pixel a screen pixel, as four 64x64
-// 8bpp sprites from x 8. The last is half transparent.
-#define VERSION_BANNER_PARTS 4
+// tools/title_logo.py): 192x64, as three 64x64 8bpp sprites centred on screen.
+#define VERSION_BANNER_PARTS 3
 #define VERSION_BANNER_PART_TILES 128
-#define VERSION_BANNER_LEFT_X (8 + 32)
+#define VERSION_BANNER_LEFT_X (DISPLAY_WIDTH / 2 - 64)
 // It settles clear of the POKéMON logo above and PRESS START below.
-#define VERSION_BANNER_Y_GOAL 87
+#define VERSION_BANNER_Y_GOAL 83
 #define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 64)
-#define START_BANNER_Y 126
+#define START_BANNER_Y 120
 #define COPYRIGHT_BANNER_Y 148
 #define VERSION_BANNER_COLORS (9 * 16) // OBJ palettes 0-8, below PRESS START's
 #define START_BANNER_X 128
@@ -167,11 +166,6 @@ static const union AnimCmd sVersionBannerPart2AnimSequence[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sVersionBannerPart3AnimSequence[] =
-{
-    ANIMCMD_FRAME(3 * VERSION_BANNER_PART_TILES, 30),
-    ANIMCMD_END,
-};
 
 static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
 {
@@ -183,7 +177,6 @@ static const union AnimCmd *const sVersionBannerRightAnimTable[] =
 {
     sVersionBannerPart1AnimSequence,
     sVersionBannerPart2AnimSequence,
-    sVersionBannerPart3AnimSequence,
 };
 
 static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
