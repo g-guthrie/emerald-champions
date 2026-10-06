@@ -343,7 +343,9 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     }
     LoadMessageBoxAndBorderGfx();
     windowHeight = (argc < maxBeforeScroll) ? argc * 2 : maxBeforeScroll * 2;
-    newWidth = ConvertPixelWidthToTileWidth(width);
+    // A list that scrolls gets a tile on the right for its arrows, so they sit
+    // inside the frame beside the first and last rows instead of on its edges.
+    newWidth = ConvertPixelWidthToTileWidth(width) + (argc > maxBeforeScroll ? 1 : 0);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
     windowId = CreateWindowFromRect(left, top, newWidth, windowHeight);
     SetStandardWindowBorderStyle(windowId, FALSE);
@@ -386,10 +388,12 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     {
         // Create Scrolling Arrows
         struct ScrollArrowsTemplate template;
-        template.firstX = (newWidth / 2) * 8 + 12 + (left) * 8;
-        template.firstY = top * 8 + 5;
+        // An up arrow's ink spans y-6..y+1 and a down arrow's y-3..y+5:
+        // these centre them on the first and last 16-pixel rows.
+        template.firstX = (left + newWidth - 1) * 8 + 4;
+        template.firstY = top * 8 + 10;
         template.secondX = template.firstX;
-        template.secondY = top * 8 + windowHeight * 8 + 12;
+        template.secondY = (top + windowHeight) * 8 - 9;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = argc - maxBeforeScroll;
         template.firstArrowType = SCROLL_ARROW_UP;
@@ -399,6 +403,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
         template.palNum = 0;
 
         gTasks[taskId].data[6] = AddScrollIndicatorArrowPair(&template, &gScrollableMultichoice_ScrollOffset);
+        SetScrollIndicatorArrowPairBounce(gTasks[taskId].data[6], 1);
     }
 }
 

@@ -188,14 +188,17 @@ static const struct ScrollArrowsTemplate sDisplayModeArrowsTemplate =
     .palNum = 0,
 };
 
+// In the lanes above and below a scrolling list's five rows: an up arrow's
+// ink spans y-6..y+1 and a down arrow's y-3..y+5, each with a pixel of
+// bounce, so both keep 3 pixels from the rows and from the frame.
 static const struct ScrollArrowsTemplate sMoveListScrollArrowsTemplate =
 {
     .firstArrowType = SCROLL_ARROW_UP,
     .firstX = 192,
-    .firstY = 8,
+    .firstY = 15,
     .secondArrowType = SCROLL_ARROW_DOWN,
     .secondX = 192,
-    .secondY = 104,
+    .secondY = 99,
     .fullyUpThreshold = 0,
     .fullyDownThreshold = 0,
     .tileTag = TAG_LIST_ARROWS,
@@ -885,6 +888,7 @@ static void AddScrollArrows(void)
         gTempScrollArrowTemplate = sMoveListScrollArrowsTemplate;
         gTempScrollArrowTemplate.fullyDownThreshold = sMoveRelearnerStruct->numMenuChoices - sMoveRelearnerStruct->numToShowAtOnce;
         sMoveRelearnerStruct->moveListScrollArrowTask = AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, &sMoveRelearnerScrollState.listOffset);
+        SetScrollIndicatorArrowPairBounce(sMoveRelearnerStruct->moveListScrollArrowTask, 1);
     }
 }
 

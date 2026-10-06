@@ -82,6 +82,8 @@ static void MoveSelectionDisplayPPString(enum BattlerId battler);
 static void MoveSelectionDisplayMoveType(enum BattlerId battler);
 static void MoveSelectionDisplayMoveNames(enum BattlerId battler);
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler);
+static void HidePlayerHealthboxesForPanel(void);
+static void ShowPlayerHealthboxesAfterPanel(void);
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayFoeTypes(enum BattlerId battler);
 static void OpenFoeTypesSubmenu(enum BattlerId battler);
@@ -254,6 +256,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
         {
             gBattleStruct->foeTypesSubmenu = FALSE;
             gBattleStruct->descriptionSubmenu = FALSE;
+            ShowPlayerHealthboxesAfterPanel();
             FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
             ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
             CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
@@ -926,6 +929,7 @@ void HandleInputChooseMove(enum BattlerId battler)
         {
             gBattleStruct->descriptionSubmenu = FALSE;
             gBattleStruct->foeTypesSubmenu = FALSE;
+            ShowPlayerHealthboxesAfterPanel();
             TryToAddMoveInfoWindow();
             if (gCategoryIconSpriteId != 0xFF)
             {
@@ -951,6 +955,7 @@ void HandleInputChooseMove(enum BattlerId battler)
     {
         // The button hints overlap the panel; hide them while the panel is up.
         TryToHideMoveInfoWindow();
+        HidePlayerHealthboxesForPanel();
         gBattleStruct->descriptionSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);
     }
@@ -1549,6 +1554,33 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
+// The move-description and foe-types panel runs a tile into the player's HP
+// box, which would peek out beside it; the boxes it covers are hidden while
+// it is up, and only those come back.
+static u8 sPanelHiddenHealthboxes;
+
+static void HidePlayerHealthboxesForPanel(void)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (IsOnPlayerSide(battler) && !gSprites[gHealthboxSpriteIds[battler]].invisible)
+        {
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
+            sPanelHiddenHealthboxes |= 1u << battler;
+        }
+    }
+}
+
+static void ShowPlayerHealthboxesAfterPanel(void)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (sPanelHiddenHealthboxes & (1u << battler))
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
+    }
+    sPanelHiddenHealthboxes = 0;
+}
+
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler)
 {
     if (!B_SHOW_MOVE_DESCRIPTION)
@@ -1582,6 +1614,7 @@ static void RestoreMoveDescriptionWindowSize(void)
 
 static void OpenFoeTypesSubmenu(enum BattlerId battler)
 {
+    HidePlayerHealthboxesForPanel();
     gBattleStruct->descriptionSubmenu = TRUE;
     gBattleStruct->foeTypesSubmenu = TRUE;
     TryMoveSelectionDisplayMoveDescription(battler);

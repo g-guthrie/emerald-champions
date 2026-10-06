@@ -737,10 +737,18 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
     if (gRelearnMode == RELEARN_MODE_SCRIPT)
         gMultiuseListMenuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
 
-    if (numChoices < 6)
+    // Six rows fill the window. A longer list shows five, 8 pixels down, so
+    // its scroll arrows get a lane of their own above and below them
+    // (sMoveListScrollArrowsTemplate).
+    if (numChoices <= 6)
+    {
         gMultiuseListMenuTemplate.maxShowed = numChoices;
+    }
     else
-        gMultiuseListMenuTemplate.maxShowed = 6;
+    {
+        gMultiuseListMenuTemplate.maxShowed = 5;
+        gMultiuseListMenuTemplate.upText_Y += 8;
+    }
 
     return gMultiuseListMenuTemplate.maxShowed;
 }
