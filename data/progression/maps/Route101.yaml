@@ -2,21 +2,21 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_ROUTE101
 entities:
-  - {id: 118, kind: npc, at: [16, 8], sprite: YOUNGSTER, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: Route101_EventScript_Youngster, when: '0'}
-  - {id: 119, kind: npc, local_id: LOCALID_ROUTE101_BIRCH, at: [9, 13], sprite: PROF_BIRCH, elevation: 0, movement_type: MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT, script: '0x0', when: FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE}
-  - {id: 120, kind: npc, at: [7, 14], sprite: BIRCHS_BAG, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: Route101_EventScript_BirchsBag, when: FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG}
-  - {id: 121, kind: npc, local_id: LOCALID_ROUTE101_ZIGZAGOON, at: [10, 13], sprite: ZIGZAGOON_1, elevation: 0, movement_type: MOVEMENT_TYPE_JOG_IN_PLACE_LEFT, script: '0x0', when: FLAG_HIDE_ROUTE_101_ZIGZAGOON}
-  - {id: 122, kind: npc, at: [5, 11], sprite: PROF_BIRCH, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: ProfBirch_EventScript_RatePokedexOrRegister, when: FLAG_HIDE_ROUTE_101_BIRCH}
-  - {id: 123, kind: npc, at: [2, 13], sprite: BOY_2, movement_type: MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, movement_range_x: 1, movement_range_y: 1, script: Route101_EventScript_Boy, when: FLAG_HIDE_ROUTE_101_BOY}
-  - {id: 124, kind: npc, local_id: LOCALID_ROUTE101_RIVAL_TUTORIAL, at: [10, 14], sprite: VAR_0, script: EC_RivalDexNavTutorial_Begin, when: FLAG_HIDE_ROUTE101_DEXNAV_RIVAL}
-  - {id: 125, kind: npc, local_id: LOCALID_ROUTE101_POOCHYENA, at: [10, 12], sprite: POOCHYENA, elevation: 0, movement_type: MOVEMENT_TYPE_JOG_IN_PLACE_LEFT, script: '0x0', when: FLAG_HIDE_ROUTE_101_ZIGZAGOON}
-  - {id: 126, kind: trigger, at: [10, 19], var: VAR_ROUTE101_STATE, var_value: '1', script: Route101_EventScript_StartBirchRescue}
-  - {id: 127, kind: trigger, at: [11, 19], var: VAR_ROUTE101_STATE, var_value: '1', script: Route101_EventScript_StartBirchRescue}
-  - {id: 128, kind: trigger, at: [10, 18], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitSouth}
-  - {id: 129, kind: trigger, at: [11, 18], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitSouth}
-  - {id: 130, kind: trigger, at: [6, 16], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
-  - {id: 131, kind: trigger, at: [6, 15], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
-  - {id: 132, kind: trigger, at: [6, 17], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
-  - {id: 133, kind: trigger, at: [6, 18], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
-  - {id: 134, kind: trigger, at: [7, 13], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitNorth}
-  - {id: 135, kind: sign, at: [5, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Route101_EventScript_RouteSign}
+  - {id: 134, kind: npc, name: ROUTE101_YOUNGSTER, at: [16, 8], sprite: YOUNGSTER, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: Route101_EventScript_Youngster, when: '0'}
+  - {id: 135, kind: npc, name: ROUTE101_BIRCH, at: [9, 13], sprite: PROF_BIRCH, elevation: 0, movement_type: MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT, script: '0x0', when: FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE}
+  - {id: 136, kind: npc, name: ROUTE101_BIRCHS_BAG, at: [7, 14], sprite: BIRCHS_BAG, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: Route101_EventScript_BirchsBag, when: FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG}
+  - {id: 137, kind: npc, name: ROUTE101_ZIGZAGOON, at: [10, 13], sprite: ZIGZAGOON_1, elevation: 0, movement_type: MOVEMENT_TYPE_JOG_IN_PLACE_LEFT, script: '0x0', when: FLAG_HIDE_ROUTE_101_ZIGZAGOON}
+  - {id: 138, kind: npc, name: ROUTE101_PROF_BIRCH, at: [5, 11], sprite: PROF_BIRCH, movement_type: MOVEMENT_TYPE_LOOK_AROUND, script: ProfBirch_EventScript_RatePokedexOrRegister, when: FLAG_HIDE_ROUTE_101_BIRCH}
+  - {id: 139, kind: npc, name: ROUTE101_BOY_2, at: [2, 13], sprite: BOY_2, movement_type: MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, movement_range_x: 1, movement_range_y: 1, script: Route101_EventScript_Boy, when: FLAG_HIDE_ROUTE_101_BOY}
+  - {id: 140, kind: npc, name: ROUTE101_RIVAL_TUTORIAL, at: [10, 14], sprite: VAR_0, script: EC_RivalDexNavTutorial_Begin, when: FLAG_HIDE_ROUTE101_DEXNAV_RIVAL}
+  - {id: 141, kind: npc, name: ROUTE101_POOCHYENA, at: [10, 12], sprite: POOCHYENA, elevation: 0, movement_type: MOVEMENT_TYPE_JOG_IN_PLACE_LEFT, script: '0x0', when: FLAG_HIDE_ROUTE_101_ZIGZAGOON}
+  - {id: 142, kind: trigger, at: [10, 19], var: VAR_ROUTE101_STATE, var_value: '1', script: Route101_EventScript_StartBirchRescue}
+  - {id: 143, kind: trigger, at: [11, 19], var: VAR_ROUTE101_STATE, var_value: '1', script: Route101_EventScript_StartBirchRescue}
+  - {id: 144, kind: trigger, at: [10, 18], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitSouth}
+  - {id: 145, kind: trigger, at: [11, 18], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitSouth}
+  - {id: 146, kind: trigger, at: [6, 16], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
+  - {id: 147, kind: trigger, at: [6, 15], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
+  - {id: 148, kind: trigger, at: [6, 17], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
+  - {id: 149, kind: trigger, at: [6, 18], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitWest}
+  - {id: 150, kind: trigger, at: [7, 13], var: VAR_ROUTE101_STATE, var_value: '2', script: Route101_EventScript_PreventExitNorth}
+  - {id: 151, kind: sign, at: [5, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Route101_EventScript_RouteSign}

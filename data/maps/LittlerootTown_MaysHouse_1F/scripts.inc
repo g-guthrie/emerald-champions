@@ -1,6 +1,5 @@
-.set LOCALID_MOM, 1
-.set LOCALID_RIVAL_MOM, 4
-.set LOCALID_RIVAL, 7
+.set LOCALID_RIVAL_MOM, LOCALID_RIVALS_HOUSE_1F_MOM
+.set LOCALID_RIVAL, LOCALID_RIVALS_HOUSE_1F_RIVAL
 
 LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
 	map_script MAP_SCRIPT_ON_LOAD, LittlerootTown_MaysHouse_1F_OnLoad
@@ -9,9 +8,8 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_OnLoad: @ 81F88B5
-	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if_lt LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes
-	call_if_set FLAG_RECEIVED_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual
+	call_if_lt VAR_STORY_STEP, STORY_STEP_CLOCK_SET, LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes
+	call_if_set STORY_REACHED_GOT_RUNNING_SHOES, LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes:: @ 81F88CA
@@ -30,44 +28,25 @@ LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual:: @ 81F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_OnTransition: @ 81F88F4
-	compare VAR_LITTLEROOT_INTRO_STATE, 3
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor
-	compare VAR_LITTLEROOT_INTRO_STATE, 5
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs
-	compare VAR_LITTLEROOT_INTRO_STATE, 6
-	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV
+	@ Mom's position at each step is her schedule (data/progression/maps).
 	end
-
-LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs:: @ 81F8916
-	setobjectxyperm LOCALID_MOM, 2, 4
-	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV:: @ 81F8922
-	setobjectxyperm LOCALID_MOM, 6, 5
-	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor:: @ 81F892E
-	setobjectxyperm LOCALID_MOM, 1, 8
-	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_UP
-	return
 
 @ Many of the below scripts have no gender check because they assume youre in the correct house
 LittlerootTown_MaysHouse_1F_OnFrame: @ 81F893A
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock
-	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport
-	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1, LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor
+	map_script_2 VAR_STORY_STEP, STORY_STEP_ENTERED_HOUSE, LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn
+	map_script_2 VAR_STORY_STEP, STORY_STEP_UPSTAIRS, LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock
+	map_script_2 VAR_STORY_STEP, STORY_STEP_CLOCK_SET, LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport
+	map_script_2 STORY_MAYS_HOUSE_NEW_NEIGHBOR, 1, LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_MAY, 3, PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV
 	.2byte 0
 
 LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock:: @ 81F8964
 	lockall
+	npc_pick 74
 	msgbox PlayersHouse_1F_Text_GoSetTheClock, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
-	applymovement LOCALID_MOM, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
+	applymovement VAR_0x8008, LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs
 	waitmovement 0
 	warp MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 255, 1, 1
 	waitstate
@@ -80,15 +59,17 @@ LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs: @ 81F898A
 
 LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn:: @ 81F898C
 	lockall
-	setvar VAR_0x8004, LOCALID_MOM
+	npc_pick 74
+	copyvar VAR_0x8004, VAR_0x8008
 	setvar VAR_0x8005, FEMALE
 	goto PlayersHouse_1F_EventScript_EnterHouseMovingIn
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport:: @ 81F899D
 	lockall
+	npc_pick 74
 	setvar VAR_0x8004, FEMALE
-	setvar VAR_0x8005, LOCALID_MOM
+	copyvar VAR_0x8005, VAR_0x8008
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportFemale
 	end
 
@@ -105,7 +86,7 @@ LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor:: @ 81F89AE
 	special GetRivalSonDaughterString
 	msgbox RivalsHouse_1F_Text_OhYoureTheNewNeighbor, MSGBOX_DEFAULT
 	setflag FLAG_MET_RIVAL_MOM
-	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2
+	advance_story MET_RIVAL_MOM
 	releaseall
 	end
 
@@ -121,10 +102,9 @@ LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach: @ 81F89EC
 RivalsHouse_1F_EventScript_RivalMom:: @ 81F89F3
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, RivalsHouse_1F_EventScript_GoHomeEverySoOften
-	goto_if_set FLAG_SYS_POKEMON_GET, RivalsHouse_1F_EventScript_RivalIsOnRoute103
-	compare VAR_LITTLEROOT_RIVAL_STATE, 3
-	goto_if_eq RivalsHouse_1F_EventScript_RivalTooBusy
+	goto_if_set STORY_REACHED_BEAT_RIVAL_103, RivalsHouse_1F_EventScript_GoHomeEverySoOften
+	goto_if_set STORY_REACHED_RESCUED_BIRCH, RivalsHouse_1F_EventScript_RivalIsOnRoute103
+	goto_if_set STORY_REACHED_MET_RIVAL, RivalsHouse_1F_EventScript_RivalTooBusy
 	special GetRivalSonDaughterString
 	msgbox RivalsHouse_1F_Text_LikeChildLikeFather, MSGBOX_DEFAULT
 	release
@@ -155,7 +135,8 @@ RivalsHouse_1F_EventScript_RivalSibling:: @ 81F8A3D
 
 LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom:: @ 81F8A4C
 	lockall
-	setvar VAR_0x8004, LOCALID_MOM
+	npc_pick 74
+	copyvar VAR_0x8004, VAR_0x8008
 	setvar VAR_0x8005, FEMALE
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
@@ -211,12 +192,9 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival:: @ 81F8A8B
 	call_if_eq LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
 	playse SE_EXIT
 	removeobject LOCALID_RIVAL
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	delay 30
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
-	setvar VAR_LITTLEROOT_TOWN_STATE, 1
+	advance_story MET_RIVAL
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

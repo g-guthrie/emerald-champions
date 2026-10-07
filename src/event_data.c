@@ -169,7 +169,12 @@ u16 *GetVarPointer(u16 id)
 
 u16 VarGet(u16 id)
 {
-    u16 *ptr = GetVarPointer(id);
+    u16 *ptr;
+
+    // Story windows read as a var too: 1 while open, 0 while closed.
+    if (IsStoryWindowId(id))
+        return IsStoryWindowOpen(id);
+    ptr = GetVarPointer(id);
     if (!ptr)
         return id;
     return *ptr;

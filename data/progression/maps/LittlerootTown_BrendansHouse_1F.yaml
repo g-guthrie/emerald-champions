@@ -2,14 +2,30 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
 entities:
-  - {id: 33, kind: npc, local_id: LOCALID_PLAYERS_HOUSE_1F_MOM, at: [2, 6], sprite: MOM, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: PlayersHouse_1F_EventScript_Mom, when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM}
-  - {id: 34, kind: npc, at: [1, 3], sprite: VIGOROTH_CARRYING_BOX, movement_type: MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT, movement_range_x: 3, script: PlayersHouse_1F_EventScript_Vigoroth2, when: FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2}
-  - {id: 35, kind: npc, at: [4, 5], sprite: VIGOROTH_FACING_AWAY, movement_type: MOVEMENT_TYPE_WALK_IN_PLACE_UP, script: PlayersHouse_1F_EventScript_Vigoroth1, when: FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1}
-  - {id: 36, kind: npc, local_id: LOCALID_RIVALS_HOUSE_1F_MOM, at: [2, 7], sprite: WOMAN_4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: RivalsHouse_1F_EventScript_RivalMom, when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM}
-  - {id: 37, kind: npc, local_id: LOCALID_PLAYERS_HOUSE_1F_DAD, at: [5, 6], sprite: NORMAN, movement_type: MOVEMENT_TYPE_FACE_LEFT, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_PLAYERS_HOUSE_DAD}
-  - {id: 38, kind: npc, at: [1, 5], sprite: NINJA_BOY, movement_type: MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, movement_range_x: 1, movement_range_y: 1, script: RivalsHouse_1F_EventScript_RivalSibling, when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING}
-  - {id: 39, kind: npc, local_id: LOCALID_RIVALS_HOUSE_1F_RIVAL, at: [8, 8], sprite: RIVAL_BRENDAN_NORMAL, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN}
-  - {id: 40, kind: trigger, at: [8, 8], elevation: 0, var: VAR_LITTLEROOT_INTRO_STATE, var_value: '4', script: LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom}
-  - {id: 41, kind: trigger, at: [7, 3], elevation: 0, var: VAR_LITTLEROOT_RIVAL_STATE, var_value: '2', script: LittlerootTown_BrendansHouse_1F_EventScript_MeetRival0}
-  - {id: 42, kind: trigger, at: [8, 4], elevation: 0, var: VAR_LITTLEROOT_RIVAL_STATE, var_value: '2', script: LittlerootTown_BrendansHouse_1F_EventScript_MeetRival1}
-  - {id: 43, kind: trigger, at: [9, 3], elevation: 0, var: VAR_LITTLEROOT_RIVAL_STATE, var_value: '2', script: LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2}
+  - id: 39
+    kind: npc
+    name: BRENDANS_HOUSE_MOM
+    sprite: MOM
+    script: PlayersHouse_1F_EventScript_Mom
+    when: BRENDANS_HOUSE_MOM
+    movement_type: MOVEMENT_TYPE_FACE_RIGHT
+    schedule:   # where Mom stands at each step of the move-in
+      - {from: NEW_GAME, at: [2, 6]}
+      - {from: ENTERED_HOUSE, at: [9, 8], movement_type: MOVEMENT_TYPE_FACE_UP}   # by the door
+      - {from: SENT_UPSTAIRS, at: [2, 6]}
+      - {from: UPSTAIRS, at: [8, 4], movement_type: MOVEMENT_TYPE_FACE_UP}        # at the stairs
+      - {from: CLOCK_SET, at: [4, 5], movement_type: MOVEMENT_TYPE_FACE_UP}       # by the TV
+      - {from: SENT_TO_RIVAL, at: [2, 6]}
+  - {id: 40, kind: npc, name: LITTLEROOT_TOWN_BRENDANS_HOUSE_1F_VIGOROTH_CARRYING_BOX, at: [1, 3], sprite: VIGOROTH_CARRYING_BOX, movement_type: MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT, movement_range_x: 3, script: PlayersHouse_1F_EventScript_Vigoroth2, when: PLAYERS_HOUSE_MOVERS}
+  - {id: 41, kind: npc, name: LITTLEROOT_TOWN_BRENDANS_HOUSE_1F_VIGOROTH_FACING_AWAY, at: [4, 5], sprite: VIGOROTH_FACING_AWAY, movement_type: MOVEMENT_TYPE_WALK_IN_PLACE_UP, script: PlayersHouse_1F_EventScript_Vigoroth1, when: PLAYERS_HOUSE_MOVERS}
+  - {id: 42, kind: npc, name: RIVALS_HOUSE_1F_MOM, at: [2, 7], sprite: WOMAN_4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: RivalsHouse_1F_EventScript_RivalMom, when: BRENDANS_HOUSE_RIVAL_MOM}
+  - {id: 43, kind: npc, name: PLAYERS_HOUSE_1F_DAD, at: [5, 6], sprite: NORMAN, movement_type: MOVEMENT_TYPE_FACE_LEFT, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_PLAYERS_HOUSE_DAD}
+  - {id: 44, kind: npc, name: LITTLEROOT_TOWN_BRENDANS_HOUSE_1F_NINJA_BOY, at: [1, 5], sprite: NINJA_BOY, movement_type: MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, movement_range_x: 1, movement_range_y: 1, script: RivalsHouse_1F_EventScript_RivalSibling, when: BRENDANS_HOUSE_RIVAL_SIBLING}
+  - {id: 45, kind: npc, name: RIVALS_HOUSE_1F_RIVAL, at: [8, 8], sprite: RIVAL_BRENDAN_NORMAL, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: SCRIPT_ACTOR}
+  - {id: 46, kind: trigger, at: [8, 8], elevation: 0, var: STORY_HOUSE_SENT_UPSTAIRS, var_value: '1', script: LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom}
+  - {id: 47, kind: trigger, at: [7, 3], elevation: 0, var: STORY_BRENDANS_HOUSE_RIVAL_COMES_DOWN, var_value: '1', script: LittlerootTown_BrendansHouse_1F_EventScript_MeetRival0}
+  - {id: 48, kind: trigger, at: [8, 4], elevation: 0, var: STORY_BRENDANS_HOUSE_RIVAL_COMES_DOWN, var_value: '1', script: LittlerootTown_BrendansHouse_1F_EventScript_MeetRival1}
+  - {id: 49, kind: trigger, at: [9, 3], elevation: 0, var: STORY_BRENDANS_HOUSE_RIVAL_COMES_DOWN, var_value: '1', script: LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2}
+  - {id: 50, kind: warp, at: [9, 8], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN, dest_warp_id: 1}
+  - {id: 51, kind: warp, at: [8, 8], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN, dest_warp_id: 1}
+  - {id: 52, kind: warp, at: [8, 2], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, dest_warp_id: 0}

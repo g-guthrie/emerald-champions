@@ -2,9 +2,11 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_OLDALE_TOWN_MART
 entities:
-  - {id: 162, kind: npc, local_id: LOCALID_OLDALE_MART_CLERK, at: [1, 3], sprite: MART_EMPLOYEE, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: General_Pokemart_Script, when: '0'}
-  - {id: 163, kind: npc, at: [5, 5], sprite: WOMAN_5, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_Mart_EventScript_Woman, when: '0'}
-  - {id: 164, kind: npc, at: [9, 4], sprite: BOY_1, movement_type: MOVEMENT_TYPE_WANDER_UP_AND_DOWN, movement_range_y: 1, script: OldaleTown_Mart_EventScript_Boy, when: '0'}
-  - {id: 165, kind: npc, local_id: LOCALID_OLDALE_MART_VISITING_NURSE, at: [4, 5], sprite: NURSE, script: OldaleTown_Mart_EventScript_Nurse, when: FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE}
-  - {id: 166, kind: trigger, at: [3, 6], elevation: 0, var: VAR_TEMP_1, var_value: '1', script: OldaleTown_Mart_EventScript_FirstShopping}
-  - {id: 167, kind: trigger, at: [4, 6], elevation: 0, var: VAR_TEMP_1, var_value: '1', script: OldaleTown_Mart_EventScript_FirstShopping}
+  - {id: 192, kind: npc, name: OLDALE_MART_CLERK, at: [1, 3], sprite: MART_EMPLOYEE, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: General_Pokemart_Script, when: '0'}
+  - {id: 193, kind: npc, name: OLDALE_TOWN_MART_WOMAN_5, at: [5, 5], sprite: WOMAN_5, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_Mart_EventScript_Woman, when: '0'}
+  - {id: 194, kind: npc, name: OLDALE_TOWN_MART_BOY_1, at: [9, 4], sprite: BOY_1, movement_type: MOVEMENT_TYPE_WANDER_UP_AND_DOWN, movement_range_y: 1, script: OldaleTown_Mart_EventScript_Boy, when: '0'}
+  - {id: 195, kind: npc, name: OLDALE_MART_VISITING_NURSE, at: [4, 5], sprite: NURSE, script: OldaleTown_Mart_EventScript_Nurse, when: FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE}
+  - {id: 196, kind: trigger, at: [3, 6], elevation: 0, var: VAR_TEMP_1, var_value: '1', script: OldaleTown_Mart_EventScript_FirstShopping}
+  - {id: 197, kind: trigger, at: [4, 6], elevation: 0, var: VAR_TEMP_1, var_value: '1', script: OldaleTown_Mart_EventScript_FirstShopping}
+  - {id: 198, kind: warp, at: [3, 7], elevation: 0, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 3}
+  - {id: 199, kind: warp, at: [4, 7], elevation: 0, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 3}

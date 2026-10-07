@@ -32,9 +32,38 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_Twin",
-      "flag": "0"
+      "flag": "STORY_LITTLEROOT_TWIN_FREE"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_TWIN_GUARD",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
+      "x": 7,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LittlerootTown_EventScript_Twin",
+      "flag": "STORY_LITTLEROOT_NORTH_GUARD"
+    },
+    {
+      "local_id": "LOCALID_LITTLEROOT_TWIN_WORRIED",
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
+      "x": 10,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LittlerootTown_EventScript_Twin",
+      "flag": "STORY_LITTLEROOT_TWIN_WORRIED"
+    },
+    {
+      "local_id": "LOCALID_LITTLEROOT_TOWN_FAT_MAN",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 12,
       "y": 13,
@@ -45,9 +74,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_FatMan",
-      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN"
+      "flag": "STORY_LITTLEROOT_FAT_MAN"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_TOWN_BOY_2",
       "graphics_id": "OBJ_EVENT_GFX_BOY_2",
       "x": 14,
       "y": 17,
@@ -61,20 +91,35 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_LITTLEROOT_MOM",
+      "local_id": "LOCALID_LITTLEROOT_MOM_M",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 5,
-      "y": 8,
+      "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "LittlerootTown_EventScript_Mom",
-      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE"
+      "flag": "STORY_LITTLEROOT_MOM_SHOES_M"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_MOM_F",
+      "graphics_id": "OBJ_EVENT_GFX_MOM",
+      "x": 14,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "LittlerootTown_EventScript_Mom",
+      "flag": "STORY_LITTLEROOT_MOM_SHOES_F"
+    },
+    {
+      "local_id": "LOCALID_LITTLEROOT_TRUCK_M",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 2,
       "y": 10,
@@ -85,9 +130,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK"
+      "flag": "STORY_TRUCK_PARKED_M"
     },
     {
+      "local_id": "LOCALID_LITTLEROOT_TRUCK_F",
       "graphics_id": "OBJ_EVENT_GFX_TRUCK",
       "x": 11,
       "y": 10,
@@ -98,7 +144,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK"
+      "flag": "STORY_TRUCK_PARKED_F"
     },
     {
       "local_id": "LOCALID_LITTLEROOT_RIVAL",
@@ -158,25 +204,25 @@
       "x": 10,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "0",
-      "script": "LittlerootTown_EventScript_NeedPokemonTriggerLeft"
+      "var": "STORY_LITTLEROOT_NORTH_GUARD",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_NeedPokemonTrigger"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "0",
-      "script": "LittlerootTown_EventScript_NeedPokemonTriggerRight"
+      "var": "STORY_LITTLEROOT_NORTH_GUARD",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_NeedPokemonTrigger"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 1,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
+      "var": "STORY_LITTLEROOT_SEND_TO_BIRCH",
       "var_value": "1",
       "script": "LittlerootTown_EventScript_GoSaveBirchTrigger"
     },
@@ -185,54 +231,54 @@
       "x": 8,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger4"
+      "var": "STORY_LITTLEROOT_MOM_SHOES",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_MomShoesTrigger"
     },
     {
       "type": "trigger",
       "x": 9,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger5"
+      "var": "STORY_LITTLEROOT_MOM_SHOES",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_MomShoesTrigger"
     },
     {
       "type": "trigger",
       "x": 10,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger2"
+      "var": "STORY_LITTLEROOT_MOM_SHOES",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_MomShoesTrigger"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger3"
+      "var": "STORY_LITTLEROOT_MOM_SHOES",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_MomShoesTrigger"
     },
     {
       "type": "trigger",
       "x": 10,
       "y": 2,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger0"
+      "var": "STORY_LITTLEROOT_MOM_SHOES",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_MomShoesTrigger"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 2,
       "elevation": 3,
-      "var": "VAR_LITTLEROOT_TOWN_STATE",
-      "var_value": "3",
-      "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger1"
+      "var": "STORY_LITTLEROOT_MOM_SHOES",
+      "var_value": "1",
+      "script": "LittlerootTown_EventScript_MomShoesTrigger"
     }
   ],
   "bg_events": [

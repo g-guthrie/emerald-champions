@@ -64,7 +64,7 @@ RivalsHouse_EventScript_Paldea:
 	return
 
 PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet::
-	setvar VAR_LITTLEROOT_INTRO_STATE, 5
+	advance_story UPSTAIRS
 	return
 
 PlayersHouse_1F_EventScript_EnterHouseMovingIn::
@@ -75,7 +75,7 @@ PlayersHouse_1F_EventScript_EnterHouseMovingIn::
 	call_if_eq VAR_0x8005, FEMALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale
 	msgbox PlayersHouse_1F_Text_MoversPokemonGoSetClock, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_LITTLEROOT_INTRO_STATE, 4
+	advance_story SENT_UPSTAIRS
 	applymovement LOCALID_PLAYER, PlayersHouse_1F_Movement_PlayerWalkIn
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
@@ -118,14 +118,11 @@ LittlerootTown_MaysHouse_2F_EventScript_WallClock::
 	end
 
 PlayersHouse_2F_EventScript_WallClock::
-	goto_if_set FLAG_SET_WALL_CLOCK, PlayersHouse_2F_EventScript_CheckWallClock
+	goto_if_set STORY_REACHED_CLOCK_SET, PlayersHouse_2F_EventScript_CheckWallClock
 	msgbox PlayersHouse_2F_Text_ClockIsStopped, MSGBOX_DEFAULT
 	call PlayersHouse_2F_EventScript_SetWallClock
 	delay 30
-	setvar VAR_LITTLEROOT_INTRO_STATE, 6
-	setflag FLAG_SET_WALL_CLOCK
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
+	advance_story CLOCK_SET
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, PlayersHouse_2F_EventScript_MomComesUpstairsMale
 	call_if_eq VAR_RESULT, FEMALE, PlayersHouse_2F_EventScript_MomComesUpstairsFemale
@@ -203,7 +200,7 @@ PlayersHouse_2F_Movement_MomExitsFemale:
 	step_end
 
 PlayersHouse_1F_EventScript_SetWatchedBroadcast::
-	setvar VAR_LITTLEROOT_INTRO_STATE, 7
+	advance_story SENT_TO_RIVAL
 	releaseall
 	end
 
@@ -364,7 +361,7 @@ PlayersHouse_1F_Movement_MomReturnToSeatFemale:
 PlayersHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
-	goto_if_unset FLAG_RECEIVED_OLD_ROD, PlayersHouse_1F_EventScript_MomNormal
+	goto_if_unset STORY_REACHED_GOT_RUNNING_SHOES, PlayersHouse_1F_EventScript_MomNormal
 	setvar VAR_0x8004, ITEM_OLD_ROD
 	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, PlayersHouse_1F_EventScript_MomNormal
@@ -382,9 +379,9 @@ PlayersHouse_1F_Text_OldRodStillHere:
 PlayersHouse_1F_EventScript_MomNormal:
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
-	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
+	goto_if_set STORY_REACHED_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
 	goto_if_eq VAR_TEMP_1, 1, PlayersHouse_1F_EventScript_SeeYouHoney
-	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
+	goto_if_set STORY_REACHED_SENT_TO_RIVAL, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
 	msgbox PlayersHouse_1F_Text_IsntItNiceInHere, MSGBOX_DEFAULT
 	release
 	end
@@ -556,13 +553,13 @@ PlayersHouse_1F_EventScript_SSTicketNoRoom::
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD
-	setvar VAR_0x800A, LOCALID_PLAYERS_HOUSE_1F_MOM
+	setvar VAR_0x800A, LOCALID_BRENDANS_HOUSE_MOM_S5  @ the same local id in May's house (both list Mom first)
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale::
 	setvar VAR_0x8008, FEMALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD
-	setvar VAR_0x800A, LOCALID_PLAYERS_HOUSE_1F_MOM
+	setvar VAR_0x800A, LOCALID_BRENDANS_HOUSE_MOM_S5  @ the same local id in May's house (both list Mom first)
 	return
 
 PlayersHouse_1F_EventScript_DadApproachPlayerMale::

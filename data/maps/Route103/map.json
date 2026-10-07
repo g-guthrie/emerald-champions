@@ -26,6 +26,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE103_MAN_3",
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 49,
       "y": 12,
@@ -53,6 +54,7 @@
       "flag": "FLAG_HIDE_ROUTE_103_RIVAL"
     },
     {
+      "local_id": "LOCALID_ROUTE103_WOMAN_2",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 71,
       "y": 11,
@@ -66,6 +68,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_TWIN",
       "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 65,
       "y": 12,
@@ -79,6 +82,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_TWIN_2",
       "graphics_id": "OBJ_EVENT_GFX_TWIN",
       "x": 64,
       "y": 12,
@@ -92,6 +96,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_BERRY_TREE",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 58,
       "y": 5,
@@ -105,6 +110,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_BERRY_TREE_2",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 59,
       "y": 5,
@@ -118,6 +124,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_BERRY_TREE_3",
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
       "x": 60,
       "y": 5,
@@ -131,6 +138,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_BOY_1",
       "graphics_id": "OBJ_EVENT_GFX_BOY_1",
       "x": 20,
       "y": 10,
@@ -144,6 +152,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_PROF_BIRCH",
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 7,
       "y": 3,
@@ -157,6 +166,7 @@
       "flag": "FLAG_HIDE_ROUTE_103_BIRCH"
     },
     {
+      "local_id": "LOCALID_ROUTE103_POKEFAN_M",
       "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 56,
       "y": 13,
@@ -170,6 +180,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE103_ITEM_BALL",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 50,
       "y": 5,
@@ -183,6 +194,7 @@
       "flag": "FLAG_ITEM_ROUTE_103_PEARL"
     },
     {
+      "local_id": "LOCALID_ROUTE103_CUTTABLE_TREE",
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 67,
       "y": 7,
@@ -196,6 +208,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
+      "local_id": "LOCALID_ROUTE103_CUTTABLE_TREE_2",
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 72,
       "y": 8,
@@ -209,6 +222,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
+      "local_id": "LOCALID_ROUTE103_ITEM_BALL_2",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 64,
       "y": 7,

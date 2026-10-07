@@ -2,16 +2,20 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_OLDALE_TOWN
 entities:
-  - {id: 136, kind: npc, at: [16, 11], sprite: GIRL_3, movement_type: MOVEMENT_TYPE_FACE_LEFT, script: OldaleTown_EventScript_Girl, when: '0'}
-  - {id: 137, kind: npc, local_id: LOCALID_OLDALE_MART_EMPLOYEE, at: [13, 7], sprite: MART_EMPLOYEE, script: OldaleTown_EventScript_MartEmployee, when: '0'}
-  - {id: 138, kind: npc, local_id: LOCALID_FOOTPRINTS_MAN, at: [8, 9], sprite: MANIAC, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_EventScript_FootprintsMan, when: '0'}
-  - {id: 139, kind: npc, local_id: LOCALID_OLDALE_RIVAL, at: [11, 19], sprite: VAR_0, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_EventScript_Rival, when: FLAG_HIDE_OLDALE_TOWN_RIVAL}
-  - {id: 140, kind: trigger, at: [0, 10], var: VAR_OLDALE_TOWN_STATE, var_value: '0', script: OldaleTown_EventScript_BlockedPath}
-  - {id: 141, kind: trigger, at: [8, 19], var: VAR_OLDALE_RIVAL_STATE, var_value: '1', script: OldaleTown_EventScript_RivalTrigger1}
-  - {id: 142, kind: trigger, at: [9, 19], var: VAR_OLDALE_RIVAL_STATE, var_value: '1', script: OldaleTown_EventScript_RivalTrigger2}
-  - {id: 143, kind: trigger, at: [10, 19], var: VAR_OLDALE_RIVAL_STATE, var_value: '1', script: OldaleTown_EventScript_RivalTrigger3}
-  - {id: 144, kind: sign, at: [11, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: OldaleTown_EventScript_CitySign}
-  - {id: 145, kind: sign, at: [7, 16], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemonCenterSign}
-  - {id: 146, kind: sign, at: [15, 6], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemartSign}
-  - {id: 147, kind: sign, at: [8, 16], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemonCenterSign}
-  - {id: 148, kind: sign, at: [16, 6], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemartSign}
+  - {id: 152, kind: npc, name: OLDALE_TOWN_GIRL_3, at: [16, 11], sprite: GIRL_3, movement_type: MOVEMENT_TYPE_FACE_LEFT, script: OldaleTown_EventScript_Girl, when: '0'}
+  - {id: 153, kind: npc, name: OLDALE_MART_EMPLOYEE, at: [13, 7], sprite: MART_EMPLOYEE, script: OldaleTown_EventScript_MartEmployee, when: '0'}
+  - {id: 154, kind: npc, name: FOOTPRINTS_MAN, at: [8, 9], sprite: MANIAC, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_EventScript_FootprintsMan, when: '0'}
+  - {id: 155, kind: npc, name: OLDALE_RIVAL, at: [11, 19], sprite: VAR_0, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_EventScript_Rival, when: FLAG_HIDE_OLDALE_TOWN_RIVAL}
+  - {id: 156, kind: trigger, at: [0, 10], var: VAR_OLDALE_TOWN_STATE, var_value: '0', script: OldaleTown_EventScript_BlockedPath}
+  - {id: 157, kind: trigger, at: [8, 19], var: VAR_OLDALE_RIVAL_STATE, var_value: '1', script: OldaleTown_EventScript_RivalTrigger1}
+  - {id: 158, kind: trigger, at: [9, 19], var: VAR_OLDALE_RIVAL_STATE, var_value: '1', script: OldaleTown_EventScript_RivalTrigger2}
+  - {id: 159, kind: trigger, at: [10, 19], var: VAR_OLDALE_RIVAL_STATE, var_value: '1', script: OldaleTown_EventScript_RivalTrigger3}
+  - {id: 160, kind: sign, at: [11, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: OldaleTown_EventScript_CitySign}
+  - {id: 161, kind: sign, at: [7, 16], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemonCenterSign}
+  - {id: 162, kind: sign, at: [15, 6], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemartSign}
+  - {id: 163, kind: sign, at: [8, 16], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemonCenterSign}
+  - {id: 164, kind: sign, at: [16, 6], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: Common_EventScript_ShowPokemartSign}
+  - {id: 165, kind: warp, at: [5, 7], elevation: 0, dest_map: MAP_OLDALE_TOWN_HOUSE1, dest_warp_id: 0}
+  - {id: 166, kind: warp, at: [15, 16], elevation: 0, dest_map: MAP_OLDALE_TOWN_HOUSE2, dest_warp_id: 0}
+  - {id: 167, kind: warp, at: [6, 16], elevation: 0, dest_map: MAP_OLDALE_TOWN_POKEMON_CENTER_1F, dest_warp_id: 0}
+  - {id: 168, kind: warp, at: [14, 6], elevation: 0, dest_map: MAP_OLDALE_TOWN_MART, dest_warp_id: 0}

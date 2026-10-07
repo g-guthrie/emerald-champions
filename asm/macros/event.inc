@@ -1070,7 +1070,7 @@
 	@ Refuses any other move; the chain test fails on a refusal (src/story.c).
 	.macro advance_story step:req
 	callnative ScrCmd_advancestory, requests_effects=1
-	.2byte STORY_STEP_\step
+	.2byte STEP_\step
 	.endm
 
 	@ Entity rewards and lines, generated from data/progression/maps (scripts/story.py).
@@ -1084,6 +1084,12 @@
 	.macro npc_say id:req, key:req, type=MSGBOX_DEFAULT
 	call Story_E\id\()_Buffer
 	msgbox Story_E\id\()_Text_\key, \type
+	.endm
+
+	@ For an entity placed per player or with a door: VAR_0x8008 = the current player's
+	@ object (local id), VAR_0x8009/VAR_0x800A = its door. Use VAR_0x8008 as the object.
+	.macro npc_pick id:req
+	call Story_E\id\()_Pick
 	.endm
 
 	@ Computed choreography (src/story_path.c): the path is found when the scene runs,
@@ -1103,7 +1109,13 @@
 	story_walk \obj, 0, fast=\fast
 	.endm
 
-	@ Walk obj to (x, y) on the current map.
+	@ The player turns to face obj.
+	.macro face_npc obj:req
+	callnative ScrCmd_storyface, requests_effects=1
+	.2byte \obj
+	.endm
+
+	@ Walk obj to (x, y) on the current map (x, y may be vars).
 	.macro walk_to obj:req, x:req, y:req, fast=0
 	story_walk \obj, 1, \x, \y, \fast
 	.endm

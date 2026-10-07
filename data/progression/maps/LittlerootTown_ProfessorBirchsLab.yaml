@@ -2,26 +2,28 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
 entities:
-  - {id: 95, kind: npc, local_id: LOCALID_BIRCHS_LAB_AIDE, at: [9, 8], sprite: SCIENTIST_1, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Aide, when: '0'}
-  - {id: 96, kind: npc, local_id: LOCALID_BIRCHS_LAB_BIRCH, at: [6, 4], sprite: PROF_BIRCH, script: LittlerootTown_ProfessorBirchsLab_EventScript_Birch, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH}
-  - {id: 97, kind: npc, local_id: LOCALID_BIRCHS_LAB_RIVAL, at: [7, 4], sprite: VAR_0, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Rival, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL}
-  - {id: 98, kind: item, at: [6, 8], sprite: ITEM_BALL, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL}
-  - {id: 99, kind: item, at: [6, 8], sprite: ITEM_BALL, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Totodile, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE}
-  - {id: 100, kind: item, at: [6, 8], sprite: ITEM_BALL, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA}
-  - {id: 101, kind: sign, at: [10, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: LittlerootTown_ProfessorBirchsLab_EventScript_Machine}
-  - {id: 102, kind: sign, at: [11, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: LittlerootTown_ProfessorBirchsLab_EventScript_Machine}
-  - {id: 103, kind: sign, at: [7, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Book}
-  - {id: 104, kind: sign, at: [8, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Book}
-  - {id: 105, kind: sign, at: [1, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
-  - {id: 106, kind: sign, at: [0, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
-  - {id: 107, kind: sign, at: [1, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
-  - {id: 108, kind: sign, at: [2, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
-  - {id: 109, kind: sign, at: [3, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
-  - {id: 110, kind: sign, at: [4, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
-  - {id: 111, kind: sign, at: [3, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
-  - {id: 112, kind: sign, at: [1, 10], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
-  - {id: 113, kind: sign, at: [1, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
-  - {id: 114, kind: sign, at: [11, 10], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
-  - {id: 115, kind: sign, at: [11, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
-  - {id: 116, kind: sign, at: [9, 4], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Rotom_Appliances_Main}
-  - {id: 117, kind: sign, at: [10, 4], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Rotom_Appliances_Main}
+  - {id: 109, kind: npc, name: BIRCHS_LAB_AIDE, at: [9, 8], sprite: SCIENTIST_1, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Aide, when: '0'}
+  - {id: 110, kind: npc, name: BIRCHS_LAB_BIRCH, at: [6, 4], sprite: PROF_BIRCH, script: LittlerootTown_ProfessorBirchsLab_EventScript_Birch, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH}
+  - {id: 111, kind: npc, name: BIRCHS_LAB_RIVAL, at: [7, 4], sprite: VAR_0, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Rival, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL}
+  - {id: 112, kind: item, name: LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_ITEM_BALL, at: [6, 8], sprite: ITEM_BALL, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL}
+  - {id: 113, kind: item, name: LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_ITEM_BALL_2, at: [6, 8], sprite: ITEM_BALL, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Totodile, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE}
+  - {id: 114, kind: item, name: LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_ITEM_BALL_3, at: [6, 8], sprite: ITEM_BALL, movement_range_x: 1, movement_range_y: 1, script: LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita, when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA}
+  - {id: 115, kind: sign, at: [10, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: LittlerootTown_ProfessorBirchsLab_EventScript_Machine}
+  - {id: 116, kind: sign, at: [11, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_NORTH, script: LittlerootTown_ProfessorBirchsLab_EventScript_Machine}
+  - {id: 117, kind: sign, at: [7, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Book}
+  - {id: 118, kind: sign, at: [8, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Book}
+  - {id: 119, kind: sign, at: [1, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
+  - {id: 120, kind: sign, at: [0, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
+  - {id: 121, kind: sign, at: [1, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
+  - {id: 122, kind: sign, at: [2, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
+  - {id: 123, kind: sign, at: [3, 7], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf}
+  - {id: 124, kind: sign, at: [4, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
+  - {id: 125, kind: sign, at: [3, 1], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
+  - {id: 126, kind: sign, at: [1, 10], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
+  - {id: 127, kind: sign, at: [1, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
+  - {id: 128, kind: sign, at: [11, 10], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
+  - {id: 129, kind: sign, at: [11, 9], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_ProfessorBirchsLab_EventScript_PC}
+  - {id: 130, kind: sign, at: [9, 4], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Rotom_Appliances_Main}
+  - {id: 131, kind: sign, at: [10, 4], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: Rotom_Appliances_Main}
+  - {id: 132, kind: warp, at: [6, 12], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN, dest_warp_id: 2}
+  - {id: 133, kind: warp, at: [7, 12], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN, dest_warp_id: 2}

@@ -2,4 +2,6 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_OLDALE_TOWN_HOUSE1
 entities:
-  - {id: 149, kind: npc, at: [6, 4], sprite: WOMAN_2, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_House1_EventScript_Woman, when: '0'}
+  - {id: 169, kind: npc, name: OLDALE_TOWN_HOUSE1_WOMAN_2, at: [6, 4], sprite: WOMAN_2, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_House1_EventScript_Woman, when: '0'}
+  - {id: 170, kind: warp, at: [3, 8], elevation: 0, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 0}
+  - {id: 171, kind: warp, at: [4, 8], elevation: 0, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 0}

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle_setup.h"
 #include "bike.h"
 #include "braille_puzzles.h"
@@ -1130,7 +1131,12 @@ static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 e
 
 static bool32 ShouldTriggerScriptRun(const struct CoordEvent *coordEvent)
 {
-    u16 *varPtr = GetVarPointer(coordEvent->trigger);
+    u16 *varPtr;
+
+    // A story window as a trigger's var: var_value 1 fires while it is open.
+    if (IsStoryWindowId(coordEvent->trigger))
+        return IsStoryWindowOpen(coordEvent->trigger) == coordEvent->index;
+    varPtr = GetVarPointer(coordEvent->trigger);
     // Treat non Vars as flags
     if (varPtr == NULL)
         return (FlagGet(coordEvent->trigger) == coordEvent->index);

@@ -145,8 +145,8 @@ void ScrCmd_storywalk(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     enum StoryWalkMode mode = ScriptReadByte(ctx);
     u8 fast = ScriptReadByte(ctx);
-    s16 x = ScriptReadHalfword(ctx) + MAP_OFFSET;
-    s16 y = ScriptReadHalfword(ctx) + MAP_OFFSET;
+    s16 x = VarGet(ScriptReadHalfword(ctx)) + MAP_OFFSET;
+    s16 y = VarGet(ScriptReadHalfword(ctx)) + MAP_OFFSET;
     u8 mapNum = gSaveBlock1Ptr->location.mapNum, mapGroup = gSaveBlock1Ptr->location.mapGroup;
     u8 objectId = GetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup);
     struct ObjectEvent *obj;
@@ -188,4 +188,18 @@ void ScrCmd_storywalk(struct ScriptContext *ctx)
     obj->directionOverwrite = DIR_NONE;
     ScriptMovement_StartObjectMovementScript(localId, mapNum, mapGroup, moves);
     gSpecialVar_Result = TRUE;
+}
+
+// face_npc OBJ: the player turns to face OBJ (after it has approached).
+void ScrCmd_storyface(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u8 objectId = GetObjectEventIdByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+    if (objectId >= OBJECT_EVENTS_COUNT)
+        return;
+    ObjectEventTurn(player, FaceTowards(player->currentCoords.x, player->currentCoords.y,
+                                        gObjectEvents[objectId].currentCoords.x, gObjectEvents[objectId].currentCoords.y));
 }

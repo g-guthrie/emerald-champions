@@ -598,10 +598,17 @@ EventScript_AfterWhiteOutHealAdvice::
 	msgbox gText_WhiteOutAdvice
 	return
 
+EventScript_AfterWhiteOutPickMaysMom:
+	npc_pick 74
+	return
+
 @ Before the Oldale nurse, Mom points the way to the tools instead.
 EventScript_AfterWhiteOutMomHeal::
 	lockall
-	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
+	npc_pick 39
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, EventScript_AfterWhiteOutPickMaysMom
+	applymovement VAR_0x8008, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox gText_HadQuiteAnExperienceTakeRest
 	call Common_EventScript_OutOfCenterPartyHeal

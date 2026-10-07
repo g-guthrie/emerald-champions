@@ -2,5 +2,7 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_OLDALE_TOWN_HOUSE2
 entities:
-  - {id: 150, kind: npc, at: [4, 4], sprite: POKEFAN_F, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_House2_EventScript_Woman, when: '0'}
-  - {id: 151, kind: npc, at: [7, 4], sprite: SCHOOL_KID_M, movement_type: MOVEMENT_TYPE_FACE_LEFT, script: OldaleTown_House2_EventScript_Man, when: '0'}
+  - {id: 172, kind: npc, name: OLDALE_TOWN_HOUSE2_POKEFAN_F, at: [4, 4], sprite: POKEFAN_F, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_House2_EventScript_Woman, when: '0'}
+  - {id: 173, kind: npc, name: OLDALE_TOWN_HOUSE2_SCHOOL_KID_M, at: [7, 4], sprite: SCHOOL_KID_M, movement_type: MOVEMENT_TYPE_FACE_LEFT, script: OldaleTown_House2_EventScript_Man, when: '0'}
+  - {id: 174, kind: warp, at: [3, 7], elevation: 0, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 1}
+  - {id: 175, kind: warp, at: [4, 7], elevation: 0, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 1}

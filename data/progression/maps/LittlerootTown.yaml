@@ -2,24 +2,44 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_LITTLEROOT_TOWN
 entities:
-  - {id: 12, kind: npc, local_id: LOCALID_LITTLEROOT_TWIN, at: [16, 10], sprite: TWIN, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 2, script: LittlerootTown_EventScript_Twin, when: '0'}
-  - {id: 13, kind: npc, at: [12, 13], sprite: FAT_MAN, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 2, movement_range_y: 1, script: LittlerootTown_EventScript_FatMan, when: FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN}
-  - {id: 14, kind: npc, at: [14, 17], sprite: BOY_2, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 2, movement_range_y: 1, script: LittlerootTown_EventScript_Boy, when: '0'}
-  - {id: 15, kind: npc, local_id: LOCALID_LITTLEROOT_MOM, at: [5, 8], sprite: MOM, movement_type: MOVEMENT_TYPE_FACE_UP, script: LittlerootTown_EventScript_Mom, when: FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE}
-  - {id: 16, kind: npc, at: [2, 10], sprite: TRUCK, elevation: 4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK}
-  - {id: 17, kind: npc, at: [11, 10], sprite: TRUCK, elevation: 4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK}
-  - {id: 18, kind: npc, local_id: LOCALID_LITTLEROOT_RIVAL, at: [13, 10], sprite: VAR_0, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_RIVAL}
-  - {id: 19, kind: npc, local_id: LOCALID_LITTLEROOT_BIRCH, at: [14, 10], sprite: PROF_BIRCH, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCH}
-  - {id: 20, kind: trigger, at: [10, 1], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '0', script: LittlerootTown_EventScript_NeedPokemonTriggerLeft}
-  - {id: 21, kind: trigger, at: [11, 1], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '0', script: LittlerootTown_EventScript_NeedPokemonTriggerRight}
-  - {id: 22, kind: trigger, at: [11, 1], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '1', script: LittlerootTown_EventScript_GoSaveBirchTrigger}
-  - {id: 23, kind: trigger, at: [8, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger4}
-  - {id: 24, kind: trigger, at: [9, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger5}
-  - {id: 25, kind: trigger, at: [10, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger2}
-  - {id: 26, kind: trigger, at: [11, 9], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger3}
-  - {id: 27, kind: trigger, at: [10, 2], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger0}
-  - {id: 28, kind: trigger, at: [11, 2], var: VAR_LITTLEROOT_TOWN_STATE, var_value: '3', script: LittlerootTown_EventScript_GiveRunningShoesTrigger1}
-  - {id: 29, kind: sign, at: [15, 13], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_TownSign}
-  - {id: 30, kind: sign, at: [6, 17], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_BirchsLabSign}
-  - {id: 31, kind: sign, at: [7, 8], elevation: 3, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_BrendansHouseSign}
-  - {id: 32, kind: sign, at: [12, 8], elevation: 3, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_MaysHouseSign}
+  - {id: 15, kind: npc, name: LITTLEROOT_TWIN, at: [16, 10], sprite: TWIN, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 1, movement_range_y: 2, script: LittlerootTown_EventScript_Twin, when: LITTLEROOT_TWIN_FREE}
+  - {id: 217, kind: npc, name: LITTLEROOT_TWIN_GUARD, at: [7, 2], sprite: TWIN, script: LittlerootTown_EventScript_Twin, when: LITTLEROOT_NORTH_GUARD}
+  - {id: 218, kind: npc, name: LITTLEROOT_TWIN_WORRIED, at: [10, 1], sprite: TWIN, movement_type: MOVEMENT_TYPE_FACE_UP, script: LittlerootTown_EventScript_Twin, when: LITTLEROOT_TWIN_WORRIED}
+  - {id: 16, kind: npc, name: LITTLEROOT_TOWN_FAT_MAN, at: [12, 13], sprite: FAT_MAN, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 2, movement_range_y: 1, script: LittlerootTown_EventScript_FatMan, when: LITTLEROOT_FAT_MAN}
+  - {id: 17, kind: npc, name: LITTLEROOT_TOWN_BOY_2, at: [14, 17], sprite: BOY_2, movement_type: MOVEMENT_TYPE_WANDER_AROUND, movement_range_x: 2, movement_range_y: 1, script: LittlerootTown_EventScript_Boy, when: '0'}
+  - id: 18
+    kind: npc
+    name: LITTLEROOT_MOM
+    at: {male: [5, 9], female: [14, 9]}   # in front of the player's house
+    door: {male: BRENDANS_DOOR, female: MAYS_DOOR}
+    sprite: MOM
+    script: LittlerootTown_EventScript_Mom
+    when: LITTLEROOT_MOM_SHOES
+    gives: [ITEM_OLD_ROD]
+    advances: GOT_RUNNING_SHOES
+    text:
+      wait: 'Mom: Wait, {PLAYER}!'
+      gift: 'Mom: {PLAYER}! {PLAYER}! Did you\nintroduce yourself to Prof. Birch?\pOh! What adorable Pokémon!\nProf. Birch gave you both? How nice!\pYou''re your father''s child, all right.\nYou look good together with Pokémon!\pHere, honey! If you''re going out on an\nadventure, take Dad''s {GIFT_1}.\pHe never uses it anyway!'
+      shoes: 'Mom: Oh, and put these on, too!'
+      switched: '{PLAYER} switched shoes with the\nRunning Shoes.'
+      explain: 'Mom: They came with a note:\p“Hold the B Button to run.\nNow get out there and explore!”'
+      farewell: '… … … … … … … …\n… … … … … … … …\pTo think that you have your very own\nPokémon now…\lYour father will be overjoyed.\p…But please be careful.\nIf anything happens, you can come home.\pGo on, go get them, honey!'
+  - {id: 19, kind: npc, name: LITTLEROOT_TRUCK, at: {male: [2, 10], female: [11, 10]}, sprite: TRUCK, elevation: 4, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: '0x0', when: TRUCK_PARKED}
+  - {id: 21, kind: npc, name: LITTLEROOT_RIVAL, at: [13, 10], sprite: VAR_0, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_RIVAL}
+  - {id: 22, kind: npc, name: LITTLEROOT_BIRCH, at: [14, 10], sprite: PROF_BIRCH, movement_type: MOVEMENT_TYPE_FACE_UP, movement_range_x: 1, movement_range_y: 1, script: '0x0', when: FLAG_HIDE_LITTLEROOT_TOWN_BIRCH}
+  - {id: 23, kind: trigger, at: [10, 1], var: STORY_LITTLEROOT_NORTH_GUARD, var_value: '1', script: LittlerootTown_EventScript_NeedPokemonTrigger}
+  - {id: 24, kind: trigger, at: [11, 1], var: STORY_LITTLEROOT_NORTH_GUARD, var_value: '1', script: LittlerootTown_EventScript_NeedPokemonTrigger}
+  - {id: 25, kind: trigger, at: [11, 1], var: STORY_LITTLEROOT_SEND_TO_BIRCH, var_value: '1', script: LittlerootTown_EventScript_GoSaveBirchTrigger}
+  - {id: 26, kind: trigger, at: [8, 9], var: STORY_LITTLEROOT_MOM_SHOES, var_value: '1', script: LittlerootTown_EventScript_MomShoesTrigger}
+  - {id: 27, kind: trigger, at: [9, 9], var: STORY_LITTLEROOT_MOM_SHOES, var_value: '1', script: LittlerootTown_EventScript_MomShoesTrigger}
+  - {id: 28, kind: trigger, at: [10, 9], var: STORY_LITTLEROOT_MOM_SHOES, var_value: '1', script: LittlerootTown_EventScript_MomShoesTrigger}
+  - {id: 29, kind: trigger, at: [11, 9], var: STORY_LITTLEROOT_MOM_SHOES, var_value: '1', script: LittlerootTown_EventScript_MomShoesTrigger}
+  - {id: 30, kind: trigger, at: [10, 2], var: STORY_LITTLEROOT_MOM_SHOES, var_value: '1', script: LittlerootTown_EventScript_MomShoesTrigger}
+  - {id: 31, kind: trigger, at: [11, 2], var: STORY_LITTLEROOT_MOM_SHOES, var_value: '1', script: LittlerootTown_EventScript_MomShoesTrigger}
+  - {id: 32, kind: sign, at: [15, 13], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_TownSign}
+  - {id: 33, kind: sign, at: [6, 17], elevation: 0, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_BirchsLabSign}
+  - {id: 34, kind: sign, at: [7, 8], elevation: 3, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_BrendansHouseSign}
+  - {id: 35, kind: sign, at: [12, 8], elevation: 3, player_facing_dir: BG_EVENT_PLAYER_FACING_ANY, script: LittlerootTown_EventScript_MaysHouseSign}
+  - {id: 36, kind: warp, name: MAYS_DOOR, at: [14, 8], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, dest_warp_id: 1}
+  - {id: 37, kind: warp, name: BRENDANS_DOOR, at: [5, 8], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, dest_warp_id: 1}
+  - {id: 38, kind: warp, name: LITTLEROOT_LAB_DOOR, at: [7, 16], elevation: 0, dest_map: MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, dest_warp_id: 0}

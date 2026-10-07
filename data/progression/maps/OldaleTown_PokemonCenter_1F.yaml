@@ -2,10 +2,13 @@
 # object_events, coord_events and bg_events are generated from this file (scripts/story.py).
 map: MAP_OLDALE_TOWN_POKEMON_CENTER_1F
 entities:
-  - {id: 152, kind: npc, local_id: LOCALID_OLDALE_NURSE, at: [8, 2], sprite: NURSE, script: OldaleTown_PokemonCenter_1F_EventScript_Nurse, when: '0'}
-  - {id: 153, kind: trainer, at: [13, 2], sprite: OLD_MAN, trainer_type: '0', script: Common_EventScript_EmeraldChampionsMoveTutor, when: '0'}
-  - {id: 154, kind: trainer, at: [2, 2], sprite: MART_EMPLOYEE, trainer_type: '0', script: General_Mart_Script, when: '0'}
-  - {id: 155, kind: npc, at: [4, 4], sprite: GENTLEMAN, script: OldaleTown_PokemonCenter_1F_EventScript_Gentleman, when: '0'}
-  - {id: 156, kind: npc, at: [12, 6], sprite: BOY_1, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_PokemonCenter_1F_EventScript_Boy, when: '0'}
-  - {id: 157, kind: npc, at: [3, 8], sprite: GIRL_3, movement_type: MOVEMENT_TYPE_FACE_RIGHT, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_PokemonCenter_1F_EventScript_Girl, when: '0'}
-  - {id: 158, kind: npc, at: [12, 4], sprite: MAN_4, script: Common_EventScript_CenterLocalGuide, when: '0'}
+  - {id: 176, kind: npc, name: OLDALE_NURSE, at: [8, 2], sprite: NURSE, script: OldaleTown_PokemonCenter_1F_EventScript_Nurse, when: '0'}
+  - {id: 177, kind: trainer, name: OLDALE_TOWN_POKEMON_CENTER_1F_OLD_MAN, at: [13, 2], sprite: OLD_MAN, trainer_type: '0', script: Common_EventScript_EmeraldChampionsMoveTutor, when: '0'}
+  - {id: 178, kind: trainer, name: OLDALE_TOWN_POKEMON_CENTER_1F_MART_EMPLOYEE, at: [2, 2], sprite: MART_EMPLOYEE, trainer_type: '0', script: General_Mart_Script, when: '0'}
+  - {id: 179, kind: npc, name: OLDALE_TOWN_POKEMON_CENTER_1F_GENTLEMAN, at: [4, 4], sprite: GENTLEMAN, script: OldaleTown_PokemonCenter_1F_EventScript_Gentleman, when: '0'}
+  - {id: 180, kind: npc, name: OLDALE_TOWN_POKEMON_CENTER_1F_BOY_1, at: [12, 6], sprite: BOY_1, movement_type: MOVEMENT_TYPE_FACE_RIGHT, script: OldaleTown_PokemonCenter_1F_EventScript_Boy, when: '0'}
+  - {id: 181, kind: npc, name: OLDALE_TOWN_POKEMON_CENTER_1F_GIRL_3, at: [3, 8], sprite: GIRL_3, movement_type: MOVEMENT_TYPE_FACE_RIGHT, movement_range_x: 1, movement_range_y: 1, script: OldaleTown_PokemonCenter_1F_EventScript_Girl, when: '0'}
+  - {id: 182, kind: npc, name: OLDALE_TOWN_POKEMON_CENTER_1F_MAN_4, at: [12, 4], sprite: MAN_4, script: Common_EventScript_CenterLocalGuide, when: '0'}
+  - {id: 183, kind: warp, at: [8, 8], elevation: 3, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 2}
+  - {id: 184, kind: warp, at: [7, 8], elevation: 3, dest_map: MAP_OLDALE_TOWN, dest_warp_id: 2}
+  - {id: 185, kind: warp, at: [1, 6], elevation: 4, dest_map: MAP_OLDALE_TOWN_POKEMON_CENTER_2F, dest_warp_id: 0}

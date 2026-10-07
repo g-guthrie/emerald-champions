@@ -1,4 +1,4 @@
-.set LOCALID_RIVAL, 1
+.set LOCALID_RIVAL, LOCALID_RIVALS_HOUSE_2F_RIVAL
 
 LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_OnTransition
@@ -6,20 +6,16 @@ LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81F83E3
 	.byte 0
 
 LittlerootTown_BrendansHouse_2F_OnTransition: @ 81F83EE
-	compare VAR_LITTLEROOT_RIVAL_STATE, 2
-	call_if_lt LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan
-	compare VAR_LITTLEROOT_RIVAL_STATE, 3
-	call_if_ge LittlerootTown_BrendansHouse_2F_EventScript_CheckShouldUpdateBrendanPos
-	compare VAR_LITTLEROOT_INTRO_STATE, 4
-	call_if_eq PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
+	call_if_eq VAR_STORY_STEP, STORY_STEP_MET_RIVAL_MOM, LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan
+	call_if_ge VAR_STORY_STEP, STORY_STEP_MET_RIVAL, LittlerootTown_BrendansHouse_2F_EventScript_CheckShouldUpdateBrendanPos
+	call_if_eq VAR_STORY_STEP, STORY_STEP_SENT_UPSTAIRS, PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
 	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_CheckShouldUpdateBrendanPos:: @ 81F841A
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos
-	compare VAR_BIRCH_LAB_STATE, 2
-	goto_if_ge LittlerootTown_BrendansHouse_2F_EventScript_Ret
+	goto_if_set STORY_REACHED_RESCUED_BIRCH, LittlerootTown_BrendansHouse_2F_EventScript_Ret
 	goto LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos
 
 LittlerootTown_BrendansHouse_2F_EventScript_TryUpdateBrendanPos:: @ 81F8433
@@ -42,7 +38,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckSetReadyToMeetBrendan:: @ 81F84
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan:: @ 81F8464
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
+	advance_story RIVAL_UPSTAIRS
 	return
 
 LittlerootTown_BrendansHouse_2F_OnWarp: @ 81F846A
@@ -57,8 +53,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckInitDecor:: @ 81F8474
 
 LittlerootTown_BrendansHouse_2F_EventScript_RivalsPokeBall:: @ 81F8481
 	lockall
-	compare VAR_LITTLEROOT_RIVAL_STATE, 2
-	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan
+	goto_if_eq VAR_STORY_STEP, STORY_STEP_RIVAL_UPSTAIRS, LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan
 	msgbox RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -83,10 +78,8 @@ LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendan:: @ 81F8497
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanWest
 	compare VAR_FACING, DIR_EAST
 	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_MeetBrendanEast
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setvar VAR_LITTLEROOT_TOWN_STATE, 1
+	advance_story MET_RIVAL
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall

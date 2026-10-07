@@ -6,8 +6,8 @@
 # windows: when something exists. Open from `from` (inclusive) until `until`
 #          (exclusive; omitted = forever); `player: male|female` limits it to one
 #          player. A map object whose flag is STORY_<id> is present only while its
-#          window is open; a trigger whose var is STORY_<id> with var_value 0 fires
-#          only while it is open. Every step S also gets STORY_REACHED_S, which reads
+#          window is open; a trigger whose var is STORY_<id> with var_value 1 fires
+#          only while it is open (as a var, a window reads 1 open, 0 closed). Every step S also gets STORY_REACHED_S, which reads
 #          as a set flag once the story has reached S (scripts/story.py, src/story.c).
 
 steps:
@@ -40,8 +40,7 @@ windows:
   # The truck and the two houses. Brendan's house is the player's when male, May's when
   # female; each house has the player's mom and movers, and the rival's mom and sibling.
   - {id: TRUCK_EXIT,                 from: NEW_GAME, until: TRUCK_STOPPED}
-  - {id: BRENDANS_HOUSE_TRUCK,       from: NEW_GAME, until: ENTERED_HOUSE, player: male}
-  - {id: MAYS_HOUSE_TRUCK,           from: NEW_GAME, until: ENTERED_HOUSE, player: female}
+  - {id: TRUCK_PARKED,               from: NEW_GAME, until: ENTERED_HOUSE}   # per player: in front of their house
   - {id: BRENDANS_HOUSE_MOM,         from: NEW_GAME, player: male}
   - {id: MAYS_HOUSE_MOM,             from: NEW_GAME, player: female}
   - {id: BRENDANS_HOUSE_RIVAL_MOM,   from: NEW_GAME, player: female}
@@ -51,10 +50,18 @@ windows:
   - {id: BRENDANS_HOUSE_RIVALS_BALL, from: NEW_GAME, until: MET_RIVAL, player: female}
   - {id: MAYS_HOUSE_RIVALS_BALL,     from: NEW_GAME, until: MET_RIVAL, player: male}
   - {id: PLAYERS_HOUSE_MOVERS,       from: NEW_GAME, until: CLOCK_SET}
+  - {id: HOUSE_SENT_UPSTAIRS,        from: SENT_UPSTAIRS, until: UPSTAIRS}       # Mom: go see your room
+  - {id: BRENDANS_HOUSE_NEW_NEIGHBOR, from: SENT_TO_RIVAL, until: MET_RIVAL_MOM, player: female}
+  - {id: MAYS_HOUSE_NEW_NEIGHBOR,    from: SENT_TO_RIVAL, until: MET_RIVAL_MOM, player: male}
+  - {id: BRENDANS_HOUSE_RIVAL_COMES_DOWN, from: RIVAL_UPSTAIRS, until: MET_RIVAL, player: female}
+  - {id: MAYS_HOUSE_RIVAL_COMES_DOWN, from: RIVAL_UPSTAIRS, until: MET_RIVAL, player: male}
   - {id: SCRIPT_ACTOR, never: true}  # never placed by the map; only scenes add it (addobject)
   # Littleroot Town
   - {id: LITTLEROOT_FAT_MAN,         from: ENTERED_HOUSE}
   - {id: LITTLEROOT_NORTH_GUARD,     from: NEW_GAME, until: MET_RIVAL}          # twin: no Pokemon, no Route 101
+  - {id: LITTLEROOT_TWIN_WORRIED,    from: MET_RIVAL, until: RESCUED_BIRCH}     # twin on the left exit tile
+  - {id: LITTLEROOT_SEND_TO_BIRCH,   from: MET_RIVAL, until: ON_ROUTE101}       # twin's plea on the right exit tile
+  - {id: LITTLEROOT_TWIN_FREE,       from: RESCUED_BIRCH}
   - {id: LITTLEROOT_MOM_SHOES,       from: GOT_POKEDEX, until: GOT_RUNNING_SHOES}
   # Route 101
   - {id: ROUTE101_RESCUE_START,      from: ON_ROUTE101, until: BIRCH_IN_DANGER}
