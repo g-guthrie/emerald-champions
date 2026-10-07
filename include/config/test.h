@@ -1129,6 +1129,16 @@
 #undef P_FAMILY_PECHARUNT
 #define P_FAMILY_PECHARUNT               TRUE
 
+// The game turns off battle experience and sets badge level caps; the tests run the engine's defaults.
+#undef B_BATTLE_EXPERIENCE
+#define B_BATTLE_EXPERIENCE             TRUE
+#undef B_EXP_CAP_TYPE
+#define B_EXP_CAP_TYPE                  EXP_CAP_NONE
+#undef B_LEVEL_CAP_TYPE
+#define B_LEVEL_CAP_TYPE                LEVEL_CAP_NONE
+#undef B_RARE_CANDY_CAP
+#define B_RARE_CANDY_CAP                FALSE
+
 // Vars
 #undef B_VAR_DIFFICULTY
 #define B_VAR_DIFFICULTY                TESTING_VAR_DIFFICULTY
