@@ -88,8 +88,6 @@ struct ConditionGraph
 };
 
 // Mailbox menu
-void ShowIconicTutorCatalogue(void);
-
 bool8 MailboxMenu_Alloc(u8 count);
 u8 MailboxMenu_AddWindow(u8 windowIdx);
 u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page);

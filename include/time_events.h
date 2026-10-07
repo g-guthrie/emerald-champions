@@ -5,6 +5,4 @@ void UpdateMirageRnd(u16 days);
 bool8 IsMirageIslandPresent(void);
 void UpdateBirchState(u16 days);
 
-void UpdateShoalTideFlag(void);
-
 #endif // GUARD_TIME_EVENTS_H

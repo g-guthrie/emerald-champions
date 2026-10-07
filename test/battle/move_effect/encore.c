@@ -135,6 +135,40 @@ SINGLE_BATTLE_TEST("Encore forces the last move used while asleep")
     }
 }
 
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Encore")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_ENCORE); }
+        TURN { MOVE(player, MOVE_EMBER); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Strike!");
+        MESSAGE("The opposing Wobbuffet used Encore!");
+        MESSAGE("But it failed!");
+        MESSAGE("Wobbuffet used Max Flare!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be encored immediately after reverting")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }; // yes, this speed is necessary
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ARM_THRUST, gimmick: GIMMICK_DYNAMAX); }
+        TURN { MOVE(player, MOVE_ARM_THRUST); }
+        TURN { MOVE(player, MOVE_ARM_THRUST); }
+        TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        MESSAGE("Wobbuffet used Max Knuckle!");
+        MESSAGE("The opposing Wobbuffet used Encore!");
+        MESSAGE("Wobbuffet used Arm Thrust!");
+    }
+}
 
 DOUBLE_BATTLE_TEST("Encore works even if the target's last move failed")
 {
@@ -195,7 +229,87 @@ SINGLE_BATTLE_TEST("Encore's effect ends if the encored move runs out of PP")
 }
 
 // NOTE: AI test is required to validate RNG range without MOVE/FORCED_MOVE invalids; there may be a better approach.
+AI_SINGLE_BATTLE_TEST("Encore lasts for 2-6 turns (Gen 2-3)")
+{
+    u32 count, turns;
 
+    PARAMETRIZE { turns = 2; }
+    PARAMETRIZE { turns = 3; }
+    PARAMETRIZE { turns = 4; }
+    PARAMETRIZE { turns = 5; }
+    PARAMETRIZE { turns = 6; }
+    PASSES_RANDOMLY(1, 5, RNG_ENCORE_TURNS);
+    GIVEN {
+        WITH_CONFIG(B_ENCORE_TURNS, GEN_3);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); Moves(MOVE_ENCORE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_ENCORE); }
+        for (count = 0; count < turns - 1; ++count)
+            TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, player);
+        for (count = 0; count < turns - 1; ++count)
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        MESSAGE("The opposing Wobbuffet ended its encore!");
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Encore lasts for 3-7 turns (Gen 4)")
+{
+    u32 count, turns;
+
+    PARAMETRIZE { turns = 3; }
+    PARAMETRIZE { turns = 4; }
+    PARAMETRIZE { turns = 5; }
+    PARAMETRIZE { turns = 6; }
+    PARAMETRIZE { turns = 7; }
+    PASSES_RANDOMLY(1, 5, RNG_ENCORE_TURNS);
+    GIVEN {
+        WITH_CONFIG(B_ENCORE_TURNS, GEN_4);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); Moves(MOVE_ENCORE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_ENCORE); }
+        for (count = 0; count < turns - 1; ++count)
+            TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, player);
+        for (count = 0; count < turns - 1; ++count)
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+        MESSAGE("The opposing Wobbuffet ended its encore!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Encore randomly chooses an opponent target (Gen 2-4)")
+{
+    GIVEN {
+        WITH_CONFIG(B_ENCORE_TARGET, GEN_4);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); Moves(MOVE_TACKLE, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(4); Moves(MOVE_ENCORE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
+        }
+        TURN {
+            MOVE(opponentLeft, MOVE_ENCORE, target: playerLeft, WITH_RNG(RNG_RANDOM_TARGET, 1));
+            MOVE(playerLeft, MOVE_CELEBRATE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft, target: opponentRight);
+        HP_BAR(opponentRight);
+    }
+}
 
 DOUBLE_BATTLE_TEST("Encore allows choosing an opponent target (Gen 5+)")
 {
@@ -242,6 +356,35 @@ SINGLE_BATTLE_TEST("Encore into Fake Out/First Impression results in Struggle (C
     }
 }
 
+DOUBLE_BATTLE_TEST("Encore uses the priority of the selected move on the turn the target is Encored (Gen9)")
+{
+    GIVEN {
+        WITH_CONFIG(B_ENCORE_PRIORITY, GEN_9);
+        PLAYER(SPECIES_WHIMSICOTT) { Ability(ABILITY_PRANKSTER); Speed(500); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(200); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); };
+        OPPONENT(SPECIES_WYNAUT) { Speed(1); };
+    } WHEN {
+        TURN {
+            MOVE(opponentLeft, MOVE_SCRATCH, target: playerRight);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_ENCORE, target: opponentLeft);
+            MOVE(opponentLeft, MOVE_QUICK_ATTACK, target: playerRight);
+        }
+    } SCENE {
+        // Turn 1
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+        // Turn 1
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+    }
+}
 
 DOUBLE_BATTLE_TEST("Encore uses the priority of the Encored move on the turn the target is Encored instead of the selected move (Champions)")
 {
@@ -270,91 +413,5 @@ DOUBLE_BATTLE_TEST("Encore uses the priority of the Encored move on the turn the
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
-    }
-}
-
-// An Encored move that Cursed Body then disables leaves nothing selectable;
-// the battler Struggles rather than stalling the turn, even when it is trapped.
-SINGLE_BATTLE_TEST("Encore: a trapped Pokemon whose Encored move is disabled by Cursed Body uses Struggle")
-{
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_MEAN_LOOK) == EFFECT_MEAN_LOOK);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(20); Moves(MOVE_SHADOW_SNEAK, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WYNAUT) { Speed(1); }
-        OPPONENT(SPECIES_FRILLISH) { Ability(ABILITY_CURSED_BODY); Speed(10); HP(300); MaxHP(300); Moves(MOVE_ENCORE, MOVE_MEAN_LOOK, MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_SHADOW_SNEAK, WITH_RNG(RNG_CURSED_BODY, FALSE)); MOVE(opponent, MOVE_ENCORE); }
-        TURN { MOVE(player, MOVE_SHADOW_SNEAK, WITH_RNG(RNG_CURSED_BODY, TRUE)); MOVE(opponent, MOVE_MEAN_LOOK); }
-        TURN { FORCED_MOVE(player); MOVE(opponent, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_SNEAK, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_SNEAK, player);
-        ABILITY_POPUP(opponent, ABILITY_CURSED_BODY);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_MEAN_LOOK, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, player);
-    } THEN {
-        EXPECT_EQ((enum Move)player->volatiles.disabledMove, MOVE_SHADOW_SNEAK);
-        EXPECT_EQ((enum Move)player->volatiles.encoredMove, MOVE_SHADOW_SNEAK);
-    }
-}
-
-// The same lock reached by Disable, on an AI battler that Shadow Tag keeps in.
-AI_SINGLE_BATTLE_TEST("Encore: a trapped AI Pokemon whose Encored move is disabled uses Struggle")
-{
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_DISABLE) == EFFECT_DISABLE);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Speed(10); Moves(MOVE_ENCORE, MOVE_DISABLE, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Speed(20); Moves(MOVE_SCRATCH, MOVE_CELEBRATE, MOVE_SPLASH); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Speed(1); Moves(MOVE_SCRATCH); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_ENCORE); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_DISABLE); }
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_DISABLE, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("Encore into Fake Out: a trapped AI Pokemon uses Struggle after its first turn (Champions)")
-{
-    GIVEN {
-        WITH_CONFIG(B_FIRST_TURN_MOVE, GEN_CHAMPIONS);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Item(ITEM_COVERT_CLOAK); Speed(10); Moves(MOVE_ENCORE, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Speed(20); Moves(MOVE_FAKE_OUT, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_ZIGZAGOON) { Speed(1); Moves(MOVE_SCRATCH); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_ENCORE); EXPECT_MOVE(opponent, MOVE_FAKE_OUT); }
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
-    }
-}
-
-// Doubles, as the harness hit it: the Encored Fake Out user is also trapped.
-DOUBLE_BATTLE_TEST("Encore into Fake Out: a trapped player Pokemon uses Struggle in doubles (Champions)")
-{
-    GIVEN {
-        WITH_CONFIG(B_FIRST_TURN_MOVE, GEN_CHAMPIONS);
-        PLAYER(SPECIES_ZIGZAGOON) { Speed(30); Moves(MOVE_FAKE_OUT, MOVE_SCRATCH); }
-        PLAYER(SPECIES_WYNAUT) { Speed(20); }
-        PLAYER(SPECIES_WYNAUT) { Speed(1); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Item(ITEM_COVERT_CLOAK); Speed(10); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentLeft); MOVE(opponentLeft, MOVE_ENCORE, target: playerLeft); }
-        TURN { FORCED_MOVE(playerLeft); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, playerLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponentLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, playerLeft);
     }
 }

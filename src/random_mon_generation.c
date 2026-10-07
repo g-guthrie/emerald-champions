@@ -213,6 +213,7 @@ static bool32 IsRandomSpeciesFormAllowed(enum Species species, const u16 *formTa
         && !speciesInfo->isTotem
         && !speciesInfo->isUltraBurst
         && !speciesInfo->cannotBeTraded
+        && !speciesInfo->isTeraForm
         && !speciesInfo->isPrimalReversion;
 }
 
@@ -318,6 +319,8 @@ static bool32 IsRandomItemAllowed(const struct RandomItemGeneratorOptions *optio
     enum HoldEffect holdEffect = GetItemHoldEffect(item);
 
     if (GetItemPocket(item) == POCKET_KEY_ITEMS)
+        return FALSE;
+    if (GetItemPocket(item) == POCKET_TM_HM && GetItemPrice(item) == 0)
         return FALSE;
     for (u32 i = 0; i < options->bannedHoldEffectsCount; i++)
     {

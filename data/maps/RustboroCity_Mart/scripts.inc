@@ -1,65 +1,84 @@
-RustboroCity_Mart_MapScripts:: @ 8214F05
+RustboroCity_Mart_MapScripts::
 	.byte 0
 
-RustboroCity_Mart_EventScript_PokefanF:: @ 8214F74
+RustboroCity_Mart_EventScript_Clerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_PokemartBasic
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_PokemartExpanded
+	end
+
+RustboroCity_Mart_EventScript_PokemartBasic::
+	pokemart RustboroCity_Mart_Pokemart_Basic
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+RustboroCity_Mart_Pokemart_Basic:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_POTION
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_REPEL
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	pokemartlistend
+
+RustboroCity_Mart_EventScript_PokemartExpanded::
+	pokemart RustboroCity_Mart_Pokemart_Expanded
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+RustboroCity_Mart_Pokemart_Expanded:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_REPEAT_BALL
+	.2byte ITEM_POTION
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_REPEL
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	pokemartlistend
+
+RustboroCity_Mart_EventScript_PokefanF::
 	msgbox RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish, MSGBOX_NPC
 	end
 
-RustboroCity_Mart_EventScript_Boy:: @ 8214F7D
+RustboroCity_Mart_EventScript_Boy::
 	msgbox RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead, MSGBOX_NPC
 	end
 
-RustboroCity_Mart_EventScript_BugCatcher:: @ 8214F86
-	msgbox RustboroCity_Mart_Text_HeldItemsForBattle, MSGBOX_NPC
+RustboroCity_Mart_EventScript_BugCatcher::
+	msgbox RustboroCity_Mart_Text_GettingEscapeRopeJustInCase, MSGBOX_NPC
 	end
 
-RustboroCity_Mart_EventScript_GiveNugget::
-	lock
-	faceplayer
-	goto_if_set FLAG_EC_GIFT_RUSTBORO_CITY_MART, RustboroCity_Mart_EventScript_ReceivedNugget
-	msgbox RustboroCity_Mart_Text_ExcuseMeTrainer, MSGBOX_DEFAULT
-	giveitem ITEM_NUGGET
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_GIFT_RUSTBORO_CITY_MART
-	msgbox RustboroCity_Mart_Text_SellThatNugget, MSGBOX_DEFAULT
-	release
-	end
+RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish:
+	.string "I'm buying some PARLYZ HEALS and\n"
+	.string "ANTIDOTES.\p"
+	.string "Just in case I run into SHROOMISH\n"
+	.string "in PETALBURG WOODS.$"
 
-RustboroCity_Mart_EventScript_ReceivedNugget::
-	msgbox RustboroCity_Mart_Text_SellThatNugget, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_Mart_Text_ExcuseMeTrainer:
-	.string "Excuse me, Trainer over there.\n"
-	.string "Do you have a minute?\p"
-	.string "False Swipe leaves a wild Pokémon\n"
-	.string "with at least one HP. It helps\l"
-	.string "when you're trying to catch one.\p"
-	.string "The Move Tutor can teach it\n"
-	.string "to any Pokémon that can learn it.\p"
-	.string "Here's a Nugget to help\n"
-	.string "pay for your catching supplies!$"
-
-RustboroCity_Mart_Text_SellThatNugget:
-	.string "Sell that Nugget for ¥2,500.\p"
-	.string "Poké Balls and held items can help\n"
-	.string "you bring new partners onto the team!$"
-
-RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
-	.string "I buy Paralyze Heals and Antidotes\n"
-	.string "at the Pokémon Center.\p"
-	.string "Just in case I run into Paras\n"
-	.string "in Petalburg Woods.$"
-
-RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead: @ 8214FF1
-	.string "My Pokémon evolved.\n"
+RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead:
+	.string "My POKéMON evolved.\n"
 	.string "It has a lot of HP now.\p"
-	.string "The Pokémon Center sells Super\n"
-	.string "Potions. I should try those!$"
+	.string "I should buy SUPER POTIONS for it\n"
+	.string "instead of ordinary POTIONS.$"
 
-RustboroCity_Mart_Text_HeldItemsForBattle:
-	.string "This Mart sells items that Pokémon\n"
-	.string "can hold in battle.\p"
-	.string "A held item can help your partner\n"
-	.string "when you can't use your Bag!$"
+RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
+	.string "I'm getting an ESCAPE ROPE just in\n"
+	.string "case I get lost in a cave.\p"
+	.string "I just need to use it to get back to\n"
+	.string "the entrance.$"
+

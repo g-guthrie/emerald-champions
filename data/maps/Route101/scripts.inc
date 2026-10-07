@@ -5,24 +5,9 @@ Route101_MapScripts::
 
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
-	call Common_EventScript_SetupRivalGfxId
-	setflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
-	goto_if_unset FLAG_RECEIVED_DEXNAV, Route101_TutorialVisibilityDone
-	goto_if_set FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE, Route101_TutorialVisibilityDone
-	clearflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
-	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 5, Route101_RivalWaitingAtEntrance
-	setobjectxyperm LOCALID_ROUTE101_RIVAL_TUTORIAL, 11, 12
-	setobjectmovementtype LOCALID_ROUTE101_RIVAL_TUTORIAL, MOVEMENT_TYPE_FACE_LEFT
-Route101_TutorialVisibilityDone:
-	end
-
-Route101_RivalWaitingAtEntrance:
-	setobjectxyperm LOCALID_ROUTE101_RIVAL_TUTORIAL, 10, 14
-	setobjectmovementtype LOCALID_ROUTE101_RIVAL_TUTORIAL, MOVEMENT_TYPE_FACE_DOWN
 	end
 
 Route101_OnFrame:
-	map_script_2 VAR_LITTLEROOT_RIVAL_STATE, 5, EC_RivalDexNavTutorial_Begin
 	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
 	.2byte 0
 
@@ -38,23 +23,16 @@ Route101_EventScript_StartBirchRescue::
 	closemessage
 	setobjectxy LOCALID_ROUTE101_BIRCH, 0, 15
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 0, 16
-	@ Poochyena runs two tiles behind Zigzagoon, replaying its path two steps
-	@ late: their 32-pixel sprites keep a full empty square between them. When
-	@ they corner Birch it steps up beside Zigzagoon.
-	setobjectxy LOCALID_ROUTE101_POOCHYENA, 0, 18
 	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChase1
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChaseInCircles
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaFlankZigzagoon
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
@@ -99,7 +77,7 @@ Route101_Movement_PreventExitWest:
 	step_end
 
 Route101_Movement_PreventExitNorth:
-	walk_left
+	walk_down
 	step_end
 
 Route101_Movement_ZigzagoonChaseInCircles:
@@ -145,55 +123,6 @@ Route101_Movement_ZigzagoonChase1:
 	step_end
 
 @ Leftover data? This command is unused.
-	step_end
-
-Route101_Movement_PoochyenaChase1:
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	step_end
-
-Route101_Movement_PoochyenaChaseInCircles:
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	walk_fast_left
-	walk_fast_left
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	walk_fast_left
-	walk_fast_left
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_down
-	walk_fast_down
-	step_end
-
-Route101_Movement_PoochyenaFlankZigzagoon:
-	walk_fast_up
-	walk_fast_left
-	walk_fast_left
-	walk_in_place_fast_left
 	step_end
 
 Route101_Movement_ZigzagoonFaceBirch:
@@ -263,6 +192,17 @@ Route101_Movement_BirchFaceZigzagoon:
 	walk_in_place_fast_right
 	step_end
 
+Route101_Movement_Unused1:
+	walk_up
+	walk_up
+	step_end
+
+Route101_Movement_Unused2:
+	walk_up
+	walk_left
+	walk_up
+	step_end
+
 Route101_EventScript_Youngster::
 	msgbox Route101_Text_TakeTiredPokemonToPokeCenter, MSGBOX_NPC
 	end
@@ -276,40 +216,21 @@ Route101_EventScript_RouteSign::
 	end
 
 Route101_EventScript_BirchsBag::
-	lockall
+	lock
 	faceplayer
-	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, Route101_EventScript_FinishRescue
-	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_BattleRescue
-	@ Birch's doubles cue, while both wild Pokémon are still in view.
-	msgbox Route101_Text_TwoOfThem, MSGBOX_DEFAULT
-	closemessage
+	setflag FLAG_SYS_POKEMON_GET
+	setflag FLAG_RESCUED_BIRCH
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
-	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	special ChooseStarter
-	goto_if_eq VAR_RESULT, FALSE, Route101_EventScript_PairUnavailable
-	goto Route101_EventScript_BattleRescue
-
-Route101_EventScript_BattleRescue::
-	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_ROUTE101_ZIGZAGOON
-	removeobject LOCALID_ROUTE101_POOCHYENA
-	setobjectxy LOCALID_PLAYER, 6, 13
-	special StartEmeraldChampionsBirchRescue
-	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route101_EventScript_RescueLost
-	setvar VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON
-	setflag FLAG_RESCUED_BIRCH
-
-Route101_EventScript_FinishRescue::
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
 	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
 	special HealPlayerParty
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
-	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_BIRCH_LAB_STATE, 2
@@ -322,54 +243,6 @@ Route101_EventScript_FinishRescue::
 	waitstate
 	release
 	end
-
-@ A lost or fled rescue carries no penalty and no whiteout, so the partners
-@ must be restored here; otherwise a retry would begin with a fainted pair.
-Route101_EventScript_RescueLost::
-	special HealPlayerParty
-	msgbox Route101_Text_RescueTryAgain, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route101_EventScript_BattleRescue
-	goto Route101_EventScript_ReturnToBag
-
-Route101_EventScript_PairUnavailable::
-	msgbox Route101_Text_PairUnavailable, MSGBOX_DEFAULT
-
-Route101_EventScript_ReturnToBag::
-	fadescreen FADE_TO_BLACK
-	setobjectxy LOCALID_PLAYER, 7, 15
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	clearflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
-	clearflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
-	addobject LOCALID_ROUTE101_BIRCH
-	addobject LOCALID_ROUTE101_ZIGZAGOON
-	addobject LOCALID_ROUTE101_POOCHYENA
-	setobjectxy LOCALID_ROUTE101_BIRCH, 4, 13
-	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 5, 13
-	setobjectxy LOCALID_ROUTE101_POOCHYENA, 5, 12
-	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_ROUTE101_ZIGZAGOON, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_ROUTE101_POOCHYENA, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	setvar VAR_ROUTE101_STATE, 2
-	playbgm MUS_HELP, TRUE
-	fadescreen FADE_FROM_BLACK
-	releaseall
-	end
-
-Route101_Text_TwoOfThem:
-	.string "Prof. Birch: Take two from my bag!\n"
-	.string "There's more than one!\p"
-	.string "Both partners fight! Pick a move\n"
-	.string "and a target for each one!$"
-
-Route101_Text_RescueTryAgain:
-	.string "Your partners are safe.\p"
-	.string "Try again and help Birch?$"
-
-Route101_Text_PairUnavailable:
-	.string "There is no room for both partners.\n"
-	.string "No new pair was given.$"
 
 Route101_EventScript_HideMayInBedroom::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
@@ -387,34 +260,39 @@ Route101_Text_HelpMe:
 	.string "H-help me!$"
 
 Route101_Text_PleaseHelp:
-	.string "You there! Please help!\p"
-	.string "Wild Pokémon are after me!\n"
-	.string "Choose two Pokémon from my Bag!$"
+	.string "Hello! You over there!\n"
+	.string "Please! Help!\p"
+	.string "In my BAG!\n"
+	.string "There's a POKé BALL!$"
 
 Route101_Text_DontLeaveMe:
 	.string "Wh-Where are you going?!\n"
 	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:
-	.string "Prof. Birch: Whew! Thank you!\p"
-	.string "I was studying those wild Pokémon\n"
-	.string "when they suddenly chased me.\p"
-	.string "You're {PLAYER}{KUN}, our new neighbor!\n"
-	.string "What a way to meet!\p"
-	.string "Let's get back to my Lab. I want\n"
-	.string "to thank you and your partners.$"
+	.string "PROF. BIRCH: Whew…\p"
+	.string "I was in the tall grass studying wild\n"
+	.string "POKéMON when I was jumped.\p"
+	.string "You saved me.\n"
+	.string "Thanks a lot!\p"
+	.string "Oh?\p"
+	.string "Hi, you're {PLAYER}{KUN}!\p"
+	.string "This is not the place to chat, so come\n"
+	.string "by my POKéMON LAB later, okay?$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "If Pokémon get tired, take them to\n"
-	.string "a Pokémon Center.\p"
-	.string "There's a Pokémon Center in Oldale\n"
-	.string "Town right close by.$"
+	.string "If POKéMON get tired, take them to\n"
+	.string "a POKéMON CENTER.\p"
+	.string "There's a POKéMON CENTER in OLDALE\n"
+	.string "TOWN right close by.$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild Pokémon live in tall grass.\p"
-	.string "Walk through it to find a partner,\n"
-	.string "then use a Poké Ball to catch it.$"
+	.string "Wild POKéMON will jump out at you in\n"
+	.string "tall grass.\p"
+	.string "If you want to catch POKéMON, you have\n"
+	.string "to go into the tall grass and search.$"
 
 Route101_Text_RouteSign:
-	.string "Route 101\n"
-	.string "{UP_ARROW} Oldale Town$"
+	.string "ROUTE 101\n"
+	.string "{UP_ARROW} OLDALE TOWN$"
+

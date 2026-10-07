@@ -3,6 +3,7 @@
   "name": "BattleFrontier_BattleFactoryBattleRoom",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM",
   "music": "MUS_B_FACTORY",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_1",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 6,
@@ -25,10 +27,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_1"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 7,
       "y": 4,
@@ -39,10 +41,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_OPPONENT"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_2",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 4,
@@ -53,10 +55,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_2"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_3",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 0,
       "y": 8,
@@ -67,10 +69,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_3"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_4",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 12,
       "y": 4,
@@ -81,10 +83,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_4"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_5",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 12,
       "y": 6,
@@ -95,10 +97,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_5"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_6",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
       "x": 12,
       "y": 8,
@@ -109,10 +111,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_SCIENTIST_6"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_FACTORY_BATTLE_PLAYER",
       "graphics_id": "OBJ_EVENT_GFX_VAR_F",
       "x": 5,
       "y": 11,
@@ -123,8 +125,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_FACTORY_BATTLE_PLAYER"
+      "flag": "0"
     }
   ],
   "warp_events": [],

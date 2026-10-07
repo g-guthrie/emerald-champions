@@ -15,11 +15,12 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "script.h"
-#include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "constants/party_menu.h"
 #include "constants/songs.h"
+
+#include "sound.h"
 
 #define VALID_MON 0
 #define INVALID_MON 1
@@ -53,7 +54,6 @@ static const struct PcMonSelection sPcMonSelectionTypes[] =
     [SELECT_PC_MON_MOVE_DELETER] = {ChoosePartyMon, ChooseBoxMon_CanMonDeleteMove, NULL, FALSE},
     [SELECT_PC_MON_MOVE_RELEARNER] = {ChooseMonForMoveRelearner, ChooseBoxMon_CanRelearnMoves, NULL, FALSE},
     [SELECT_PC_MON_EVOLUTION] = {ChoosePartyMon, ChooseBoxMon_CanEvolve, NULL, FALSE},
-    [SELECT_PC_MON_MOVE_RELEARNER_DIRECT] = {ChooseMonForMoveRelearnerDirect, ChooseBoxMon_CanRelearnMoves, NULL, FALSE},
 };
 
 static u32 ChooseBoxMon_NoFilter(struct BoxPokemon *boxmon)
@@ -159,7 +159,7 @@ static void Task_ChooseBoxMon(u8 taskId)
 void ChooseBoxMon(struct ScriptContext *ctx)
 {
     sSelectionType = ScriptReadByte(ctx);
-    if (!OW_CHOOSE_FROM_PC_AND_PARTY && sSelectionType != SELECT_PC_MON_DAYCARE)
+    if (!OW_CHOOSE_FROM_PC_AND_PARTY)
     {
         sPcMonSelectionTypes[sSelectionType].partyMonBackup();
         return;
@@ -213,7 +213,6 @@ enum LearnMoveState
 
     LEARNED_MOVE_1,
     LEARNED_MOVE_2,
-    WAIT_LEARNED_MOVE_FANFARE,
 
     FORGOT_MOVE_1,
 
@@ -232,14 +231,6 @@ static struct BoxPokemon *LearnMove_GetBoxMonFromTaskData(u8 partyIndex)
     return boxmon;
 }
 
-static void LearnMove_TryFormChange(u8 partyIndex, struct BoxPokemon *boxMon, enum Move changedMove)
-{
-    if (partyIndex == PC_MON_CHOSEN)
-        TryBoxMonFormChangeOnMove(boxMon, changedMove);
-    else
-        TryFormChangeOnMove(&gParties[B_TRAINER_PLAYER][partyIndex], changedMove, B_TRAINER_PLAYER);
-}
-
 #define state         gTasks[taskId].data[0]
 #define partyIndex    gTasks[taskId].data[1]
 #define move          gTasks[taskId].data[2]
@@ -255,7 +246,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         ui->askConfirmation();
         return PROMPT_BEFORE_LEARNING_2;
     case PROMPT_BEFORE_LEARNING_2:
-        switch (ui->waitConfirmation(FALSE))
+        switch (ui->waitConfirmation())
         {
         case 0: // Yes
             return LEARN_MOVE;
@@ -284,12 +275,9 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         }
     case LEARN_MOVE:
         if (GiveMoveToBoxMon(boxmon, move) != MON_HAS_MAX_MOVES)
-        {
-            LearnMove_TryFormChange(partyIndex, boxmon, move);
             return LEARNED_MOVE_1;
-        }
         else
-            return ui->concise ? WANT_REPLACE_2 : ASK_REPLACEMENT_1;
+            return ASK_REPLACEMENT_1;
     case ASK_REPLACEMENT_1:
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(move));
@@ -299,16 +287,13 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         ui->askConfirmation();
         return ASK_REPLACEMENT_3;
     case ASK_REPLACEMENT_3:
-        switch (ui->waitConfirmation(TRUE))
+        switch (ui->waitConfirmation())
         {
         case 0: // Yes
             return WANT_REPLACE_1;
         case 1: // No
         case MENU_B_PRESSED:
-            // Reuse the existing box for the immediate stop-learning question.
-            StringCopy(gStringVar2, GetMoveName(move));
-            ui->printMessage(gText_StopLearningMove2);
-            return REFUSE_REPLACE_3;
+            return REFUSE_REPLACE_1;
         }
         return state;
     case REFUSE_REPLACE_1:
@@ -319,7 +304,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         ui->askConfirmation();
         return REFUSE_REPLACE_3;
     case REFUSE_REPLACE_3:
-        switch (ui->waitConfirmation(FALSE))
+        switch (ui->waitConfirmation())
         {
         case 0: // Yes
             return DID_NOT_LEARN_1;
@@ -336,7 +321,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         return WANT_REPLACE_3;
     case WANT_REPLACE_3:
         if (GetMoveSlotToReplace() == MAX_MON_MOVES)
-            return ui->concise ? DID_NOT_LEARN_1 : REFUSE_REPLACE_1;
+            return REFUSE_REPLACE_1;
         else
             return FORGOT_MOVE_1;
     case LEARNED_MOVE_1:
@@ -347,14 +332,8 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
     case LEARNED_MOVE_2:
         gSpecialVar_Result = TRUE;
         ui->playFanfare(MUS_LEVEL_UP);
-        return WAIT_LEARNED_MOVE_FANFARE;
-    case WAIT_LEARNED_MOVE_FANFARE:
-        // Returning to the field resets tasks. Let the fanfare restore the
-        // paused map music before its task can be destroyed by UI teardown.
-        return IsFanfareTaskInactive() ? LEARN_MOVE_END : WAIT_LEARNED_MOVE_FANFARE;
+        return LEARN_MOVE_END;
     case FORGOT_MOVE_1:
-        if (ui->concise)
-            return REPLACE_MOVE_1;
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(GetBoxMonData(boxmon, MON_DATA_MOVE1 + GetMoveSlotToReplace())));
         ui->printMessage(gText_12PoofForgotMove);
@@ -362,15 +341,12 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
     case REPLACE_MOVE_1:
     {
         u32 slot = GetMoveSlotToReplace();
-        enum Move forgottenMove = GetBoxMonData(boxmon, MON_DATA_MOVE1 + slot);
         RemoveBoxMonPPBonus(boxmon, slot);
         u32 originalPP = GetBoxMonData(boxmon, MON_DATA_PP1 + slot);
-        u32 pp = GetMoveMaxPP(move);
+        u32 pp = GetMovePP(move);
         SetBoxMonData(boxmon, MON_DATA_MOVE1 + slot, &move);
         if (recoverPP || (pp < originalPP))
             SetBoxMonData(boxmon, MON_DATA_PP1 + slot, &pp);
-        LearnMove_TryFormChange(partyIndex, boxmon, forgottenMove);
-        LearnMove_TryFormChange(partyIndex, boxmon, move);
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(move));
         gSpecialVar_Result = TRUE;
@@ -386,7 +362,8 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
     default:
         errorf("Unknown LearnMove state %d\nEnding move learning ...", state);
     case LEARN_MOVE_END:
-        ui->endTask(taskId);
+        if (IsFanfareTaskInactive())
+            ui->endTask(taskId);
         return LEARN_MOVE_END;
     }
 }
@@ -399,12 +376,6 @@ s32 GetLearnMoveStartState(void)
 s32 GetLearnMoveStartAfterPromptState(void)
 {
     return PROMPT_BEFORE_LEARNING_1;
-}
-
-// Payment choice already approved this lesson; do not ask to teach it again.
-s32 GetLearnMoveStartAfterConfirmationState(void)
-{
-    return LEARN_MOVE;
 }
 
 //At the time of writing code for this, there was no prescribed way to make a task persist between scenes

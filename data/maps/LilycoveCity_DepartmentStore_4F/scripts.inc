@@ -1,69 +1,68 @@
-LilycoveCity_DepartmentStore_4F_MapScripts:: @ 821FDEA
+LilycoveCity_DepartmentStore_4F_MapScripts::
 	.byte 0
 
-LilycoveCity_DepartmentStore_4F_EventScript_Gentleman:: @ 821FDEB
+LilycoveCity_DepartmentStore_4F_EventScript_Gentleman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_Woman:: @ 821FDF4
+LilycoveCity_DepartmentStore_4F_EventScript_Woman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_Youngster:: @ 821FDFD
+LilycoveCity_DepartmentStore_4F_EventScript_Youngster::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: @ 821FE06
+LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
 	lock
 	faceplayer
-	msgbox LilycoveCity_DepartmentStore_4F_Text_Stones, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 0
-	special OpenEmeraldChampionsEvolutionSpecialist
-	@ The special opens a native Mart but is not a waitstate special;
-	@ wait here like the pokemart command so the farewell follows the shop.
-	waitstate
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight:: @ 821FE2C
+	.align 2
+LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
+	.2byte ITEM_TM_FIRE_BLAST
+	.2byte ITEM_TM_THUNDER
+	.2byte ITEM_TM_BLIZZARD
+	.2byte ITEM_TM_HYPER_BEAM
+	pokemartlistend
+
+LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 	lock
 	faceplayer
-	msgbox LilycoveCity_DepartmentStore_4F_Text_Tools, MSGBOX_DEFAULT
-	setvar VAR_0x8004, 1
-	special OpenEmeraldChampionsEvolutionSpecialist
-	@ The special opens a native Mart but is not a waitstate special;
-	@ wait here like the pokemart command so the farewell follows the shop.
-	waitstate
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_4F_Text_Stones:
-	.string "We stock every evolution stone!\n"
-	.string "Which one does your partner need?$"
+	.align 2
+LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
+	.2byte ITEM_TM_PROTECT
+	.2byte ITEM_TM_SAFEGUARD
+	.2byte ITEM_TM_REFLECT
+	.2byte ITEM_TM_LIGHT_SCREEN
+	pokemartlistend
 
-LilycoveCity_DepartmentStore_4F_Text_Tools:
-	.string "Special evolution tools and\n"
-	.string "reusable devices, all in stock!\p"
-	.string "A reusable device only needs to be\n"
-	.string "bought once. Check its description!$"
+LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
+	.string "Hmm…\p"
+	.string "An attacking move…\n"
+	.string "Or a defensive move…\p"
+	.string "It's no easy matter to decide which TM\n"
+	.string "moves should be taught to POKéMON…$"
 
-LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM: @ 821FE50
-	.string "Should I evolve my partner now,\n"
-	.string "or wait a little longer?\p"
-	.string "There are so many choices here.$"
+LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
+	.string "There are so many different kinds of\n"
+	.string "TM moves.\p"
+	.string "A catalog I read said there are fifty\n"
+	.string "different kinds.$"
 
-LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs: @ 821FEC7
-	.string "Evolution items help all sorts\n"
-	.string "of Pokémon grow.\p"
-	.string "Check what your partner needs\n"
-	.string "before buying one.$"
-
-LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves: @ 821FF2D
-	.string "The Move Tutor offers plenty\n"
-	.string "of moves, but a Pokémon can use\l"
-	.string "only four at once.\p"
-	.string "I choose them to suit the whole\n"
-	.string "team.$"
+LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
+	.string "I'd like to get all the different TMs,\n"
+	.string "but a POKéMON learns only four moves.$"
 

@@ -29,6 +29,7 @@
 #include "task.h"
 #include "window.h"
 #include "menu_specialized.h"
+#include "constants/layouts.h"
 
 // Top level PC menu options
 enum {
@@ -167,14 +168,14 @@ static EWRAM_DATA u8 sTopMenuNumOptions = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPCItemPageInfo = {};
 static EWRAM_DATA struct ItemStorageMenu *sItemStorageMenu = NULL;
 
-static const u8 sText_WithdrawItem[] = _("Withdraw Item");
-static const u8 sText_DepositItem[] = _("Deposit Item");
-static const u8 sText_TossItem[] = _("Toss Item");
-static const u8 sText_Mailbox[] = _("Mailbox");
+static const u8 sText_WithdrawItem[] = _("WITHDRAW ITEM");
+static const u8 sText_DepositItem[] = _("DEPOSIT ITEM");
+static const u8 sText_TossItem[] = _("TOSS ITEM");
+static const u8 sText_Mailbox[] = _("MAILBOX");
 
 static const u8 sText_WithdrawHowManyItems[] = _("Withdraw how many\n{STR_VAR_1}?");
 static const u8 sText_WithdrawXItems[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}.");
-static const u8 sText_NoRoomInBag[] = _("There is no more\nroom in the Bag.");
+static const u8 sText_NoRoomInBag[] = _("There is no more\nroom in the BAG.");
 static const u8 sText_TooImportantToToss[] = _("That's much too\nimportant to toss\nout!");
 
 static const u8 *const sItemStorage_OptionDescriptions[] =
@@ -187,10 +188,10 @@ static const u8 *const sItemStorage_OptionDescriptions[] =
 
 static const struct MenuAction sPlayerPCMenuActions[] =
 {
-    [MENU_ITEMSTORAGE] = { COMPOUND_STRING("Item Storage"), {PlayerPC_ItemStorage} },
+    [MENU_ITEMSTORAGE] = { COMPOUND_STRING("ITEM STORAGE"), {PlayerPC_ItemStorage} },
     [MENU_MAILBOX]     = { sText_Mailbox,                   {PlayerPC_Mailbox} },
-    [MENU_DECORATION]  = { COMPOUND_STRING("Decoration"),   {PlayerPC_Decoration} },
-    [MENU_TURNOFF]     = { COMPOUND_STRING("Turn Off"),     {PlayerPC_TurnOff} }
+    [MENU_DECORATION]  = { COMPOUND_STRING("DECORATION"),   {PlayerPC_Decoration} },
+    [MENU_TURNOFF]     = { COMPOUND_STRING("TURN OFF"),     {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
@@ -226,9 +227,9 @@ static const u16 sNewGamePCItems[][2] =
 
 const struct MenuAction gMailboxMailOptions[] =
 {
-    { COMPOUND_STRING("Read"),        {Mailbox_DoMailRead} },
-    { COMPOUND_STRING("Move to Bag"), {Mailbox_MoveToBag} },
-    { COMPOUND_STRING("Give"),        {Mailbox_Give} },
+    { COMPOUND_STRING("READ"),        {Mailbox_DoMailRead} },
+    { COMPOUND_STRING("MOVE TO BAG"), {Mailbox_MoveToBag} },
+    { COMPOUND_STRING("GIVE"),        {Mailbox_Give} },
     { gText_Cancel2,                  {Mailbox_Cancel} }
 };
 
@@ -490,7 +491,9 @@ static void PlayerPC_TurnOff(u8 taskId)
 {
     if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
     {
-        if (gSaveBlock2Ptr->playerGender == MALE)
+        if (gMapHeader.mapLayoutId == LAYOUT_PALLET_TOWN_PLAYERS_HOUSE_2F_FRLG)
+            ScriptContext_SetupScript(EventScript_PalletTown_PlayersHouse_2F_ShutDownPC);
+        else if (gSaveBlock2Ptr->playerGender == MALE)
             ScriptContext_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
         else
             ScriptContext_SetupScript(LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC);
@@ -853,7 +856,7 @@ static void Mailbox_HandleConfirmMoveToBag(u8 taskId)
 static void Mailbox_DoMailMoveToBag(u8 taskId)
 {
     struct Mail *mail = &gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos];
-    if (!AddBagItemWithoutDiscovery(mail->itemId, 1))
+    if (!AddBagItem(mail->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, gText_BagIsFull, Mailbox_Cancel);
     }
@@ -1385,7 +1388,7 @@ static void ItemStorage_DoItemWithdraw(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
-    if (AddBagItemWithoutDiscovery(gSaveBlock1Ptr->pcItems[pos].itemId, tQuantity) == TRUE)
+    if (AddBagItem(gSaveBlock1Ptr->pcItems[pos].itemId, tQuantity) == TRUE)
     {
         // Item withdrawn
         u8 *end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, tQuantity);
@@ -1408,7 +1411,7 @@ static void ItemStorage_DoItemToss(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 pos = gPlayerPCItemPageInfo.cursorPos + gPlayerPCItemPageInfo.itemsAbove;
 
-    if (!IsItemProtectedFromLoss(gSaveBlock1Ptr->pcItems[pos].itemId))
+    if (!GetItemImportance(gSaveBlock1Ptr->pcItems[pos].itemId))
     {
         // Show toss confirmation prompt
         u8 *end = CopyItemNameHandlePlural(gSaveBlock1Ptr->pcItems[pos].itemId, gStringVar1, tQuantity);

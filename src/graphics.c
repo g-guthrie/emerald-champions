@@ -43,6 +43,8 @@ const u16 gBattleAnimSpritePal_AlphaSymbol[] = INCGFX_U16("graphics/battle_anims
 const u32 gBattleAnimSpriteGfx_OmegaSymbol[] = INCGFX_U32("graphics/battle_anims/sprites/omega_symbol.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_OmegaSymbol[] = INCGFX_U16("graphics/battle_anims/sprites/omega_symbol.png", ".gbapal");
 
+const u32 gBattleAnimSpriteGfx_TeraSymbol[] = INCGFX_U32("graphics/battle_anims/sprites/tera_symbol.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_TeraSymbol[] = INCGFX_U16("graphics/battle_anims/sprites/tera_symbol.png", ".gbapal");
 
 const u32 gBattleAnimSpriteGfx_FlashCannonBall[] = INCGFX_U32("graphics/battle_anims/sprites/flash_cannon_ball.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_FlashCannonBall[] = INCGFX_U16("graphics/battle_anims/sprites/flash_cannon_ball.png", ".gbapal");
@@ -59,7 +61,11 @@ const u16 gBattleAnimSpritePal_QuickGuard[] = INCGFX_U16("graphics/battle_anims/
 const u32 gBattleAnimSpriteGfx_AlphaStone[] = INCGFX_U32("graphics/battle_anims/sprites/alpha_stone.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_AlphaStone[] = INCGFX_U16("graphics/battle_anims/sprites/alpha_stone.png", ".gbapal");
 
+const u32 gBattleAnimSpriteGfx_TeraCrystal[] = INCGFX_U32("graphics/battle_anims/sprites/tera_crystal.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_TeraCrystal[] = INCGFX_U16("graphics/battle_anims/sprites/tera_crystal.png", ".gbapal");
 
+const u32 gBattleAnimSpriteGfx_TeraShatter[] = INCGFX_U32("graphics/battle_anims/sprites/tera_shatter.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_TeraShatter[] = INCGFX_U16("graphics/battle_anims/sprites/tera_shatter.png", ".gbapal");
 
 const u32 gBattleAnimSpriteGfx_Anchor[] = INCGFX_U32("graphics/battle_anims/sprites/anchor.png", ".4bpp.smol");
 
@@ -706,6 +712,7 @@ const u16 gBattleInterface_BallStatusBarPal[] = INCGFX_U16("graphics/battle_inte
 const u16 gBattleInterface_BallDisplayPal[] = INCGFX_U16("graphics/battle_interface/ball_display.png", ".gbapal");
 
 const u8 gHealthboxElementsGfxTable[][32] = INCBIN_U8("graphics/battle_interface/hpbar.4bpp",
+                                                  "graphics/battle_interface/expbar.4bpp",
                                                   "graphics/battle_interface/status.4bpp",
                                                   "graphics/battle_interface/misc.4bpp",
                                                   "graphics/battle_interface/hpbar_anim.4bpp",
@@ -1307,6 +1314,8 @@ const u16 gBattleAnimSpritePal_Meteor[] = INCGFX_U16("graphics/battle_anims/spri
 const u32 gBattleAnimSpriteGfx_FlatRock[] = INCGFX_U32("graphics/battle_anims/sprites/flat_rock.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_FlatRock[] = INCGFX_U16("graphics/battle_anims/sprites/flat_rock.png", ".gbapal");
 
+const u32 gBattleAnimSpriteGfx_TeraStarstormBeam[] = INCGFX_U32("graphics/battle_anims/sprites/starstorm_beam.png", ".4bpp.smol");
+const u16 gBattleAnimSpritePal_TeraStarstormBeam[] = INCGFX_U16("graphics/battle_anims/sprites/starstorm_beam.png", ".gbapal");
 
 const u32 gBattleAnimSpriteGfx_SaltParticle[] = INCGFX_U32("graphics/battle_anims/sprites/salt_particle.png", ".4bpp.smol");
 const u16 gBattleAnimSpritePal_SaltParticle[] = INCGFX_U16("graphics/battle_anims/sprites/salt_particle.png", ".gbapal");
@@ -1690,7 +1699,7 @@ const u16 gBattleAnimBGPalette_Swamp[] = INCGFX_U16("graphics/battle_anims/backg
 const u32 gBattleAnimBgTilemap_Swamp[] = INCGFX_U32("graphics/battle_anims/backgrounds/swampswizzle.bin", ".smolTM");
 
 const u32 gPartyMenuBg_Gfx[] = INCGFX_U32("graphics/party_menu/bg.png", ".4bpp.smol", "-num_tiles 62 -Wnum_tiles");
-const u16 gPartyMenuBg_Pal[] = INCGFX_U16("graphics/party_menu/bg.pal", ".gbapal");
+const u16 gPartyMenuBg_Pal[] = INCGFX_U16("graphics/party_menu/bg.png", ".gbapal");
 const u32 gPartyMenuBg_Tilemap[] = INCGFX_U32("graphics/party_menu/bg.bin", ".smolTM");
 
 const u32 gPartyMenuPokeball_Gfx[] = INCGFX_U32("graphics/party_menu/pokeball.png", ".4bpp.smol");
@@ -1714,7 +1723,7 @@ const u32 gSummaryScreen_Gfx[]                = INCGFX_U32("graphics/summary_scr
 #else
 const u32 gSummaryScreen_Gfx[]                = INCGFX_U32("graphics/summary_screen/tiles.png", ".4bpp.smol");
 #endif // P_SUMMARY_SCREEN_IV_EV_TILESET
-const u16 gSummaryScreen_Pal[]                = INCGFX_U16("graphics/summary_screen/tiles.pal", ".gbapal");
+const u16 gSummaryScreen_Pal[]                = INCGFX_U16("graphics/summary_screen/tiles.png", ".gbapal");
 const u32 gSummaryPage_Info_Tilemap[]         = INCGFX_U32("graphics/summary_screen/page_info.bin", ".smolTM");
 const u32 gSummaryPage_Skills_Tilemap[]       = INCGFX_U32("graphics/summary_screen/page_skills.bin", ".smolTM");
 const u32 gSummaryPage_BattleMoves_Tilemap[]  = INCGFX_U32("graphics/summary_screen/page_battle_moves.bin", ".smolTM");
@@ -1854,6 +1863,7 @@ const u16 gMenuInfoElements2_Pal[] = INCGFX_U16("graphics/interface/menu_info2.p
 const u16 gMenuInfoElements3_Pal[] = INCGFX_U16("graphics/interface/menu_info3.pal", ".gbapal");
 const u8 gMenuInfoElements_Gfx[] = INCGFX_U8("graphics/interface/menu_info.png", ".4bpp");
 
+const u8 gBagMenuHMIcon_Gfx[] = INCGFX_U8("graphics/bag/hm.png", ".4bpp");
 
 // contest results screen
 
@@ -1871,12 +1881,35 @@ const u16 gContestResultsTitle_Tilemap[]        = INCBIN_U16("graphics/contest/r
 
 // PokéNav
 
+const u16 gPokenavCondition_Pal[] = INCGFX_U16("graphics/pokenav/condition/graph.png", ".gbapal");
+const u32 gPokenavCondition_Gfx[] = INCGFX_U32("graphics/pokenav/condition/graph.png", ".4bpp.smol");
+const u32 gPokenavCondition_Tilemap[] = INCGFX_U32("graphics/pokenav/condition/graph.bin", ".smolTM");
+
+const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("graphics/pokenav/options/options.bin");
+const u32 gPokenavOptions_Gfx[] = INCGFX_U32("graphics/pokenav/options/options.4bpp", ".smol");
+const u16 gPokenavOptions_Pal[] = INCGFX_U16("graphics/pokenav/options/options.pal", ".gbapal");
+
 const u16 gPokenavHeader_Pal[] = INCGFX_U16("graphics/pokenav/header.png", ".gbapal");
 const u32 gPokenavHeader_Gfx[] = INCGFX_U32("graphics/pokenav/header.png", ".4bpp.smol", "-num_tiles 53 -Wnum_tiles"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
 const u32 gPokenavHeader_Tilemap[] = INCGFX_U32("graphics/pokenav/header.bin", ".smolTM");
 
 const u16 gPokenavLeftHeader_Pal[] = INCGFX_U16("graphics/pokenav/left_headers/palette.pal", ".gbapal");
+const u32 gPokenavLeftHeaderBeauty_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/beauty.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderSmart_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/smart.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderCondition_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/condition.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderCute_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/cute.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderMatchCall_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/match_call.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderMainMenu_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/main_menu.png", ".4bpp.smol");
 const u32 gPokenavLeftHeaderHoennMap_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/hoenn_map.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderRibbons_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/ribbons.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderSearch_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/search.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderTough_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/tough.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderCool_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/cool.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderParty_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/party.png", ".4bpp.smol");
+
+const u16 gPokenavMessageBox_Pal[] = INCGFX_U16("graphics/pokenav/message.png", ".gbapal");
+const u32 gPokenavMessageBox_Gfx[] = INCGFX_U32("graphics/pokenav/message.png", ".4bpp.smol");
+const u32 gPokenavMessageBox_Tilemap[] = INCGFX_U32("graphics/pokenav/message.bin", ".smolTM");
 
 const u16 gRegionMapCityZoomTiles_Pal[] = INCGFX_U16("graphics/pokenav/region_map/zoom_tiles.png", ".gbapal");
 const u32 gRegionMapCityZoomText_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/city_zoom_text.png", ".4bpp.smol");
@@ -2059,6 +2092,10 @@ const u16 gWallpaperPalettes_Ribbon[][16] =
 const u32 gWallpaperTiles_Ribbon[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/ribbon/tiles.4bpp", ".smol");
 const u32 gWallpaperTilemap_Ribbon[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/ribbon/tilemap.bin", ".smolTM");
 
+const u16 gPokenavRibbonsSummaryBg_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/summary_bg.png", ".gbapal");
+const u32 gPokenavRibbonsSummaryBg_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/summary_bg.png", ".4bpp.smol");
+const u32 gPokenavRibbonsSummaryBg_Tilemap[] = INCGFX_U32("graphics/pokenav/ribbons/summary_bg.bin", ".smolTM");
+
 const u16 gMonIconPalettes[][16] =
 {
     INCGFX_U16("graphics/pokemon/icon_palettes/pal0.pal", ".gbapal"),
@@ -2071,10 +2108,10 @@ const u16 gMonIconPalettes[][16] =
 
 const u16 gTitleScreenBgPalettes[]         = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
                                                         "graphics/title_screen/rayquaza_and_clouds.gbapal");
-const u16 gTitleScreenEmeraldVersionPal[]  = INCGFX_U16("graphics/title_screen/inclement_emerald_2_logo.png", ".gbapal");
+const u16 gTitleScreenEmeraldVersionPal[]  = INCGFX_U16("graphics/title_screen/emerald_version.png", ".gbapal");
 const u32 gTitleScreenCloudsTilemap[]      = INCGFX_U32("graphics/title_screen/clouds.bin", ".smolTM");
 const u32 gTitleScreenPokemonLogoGfx[]     = INCGFX_U32("graphics/title_screen/pokemon_logo.png", ".8bpp.smol");
-const u32 gTitleScreenEmeraldVersionGfx[]  = INCGFX_U32("graphics/title_screen/inclement_emerald_2_logo.png", ".8bpp.smol", "-mwidth 8 -mheight 8");
+const u32 gTitleScreenEmeraldVersionGfx[]  = INCGFX_U32("graphics/title_screen/emerald_version.png", ".8bpp.smol", "-mwidth 8 -mheight 4");
 const u16 gTitleScreenPressStartPal[]      = INCGFX_U16("graphics/title_screen/press_start.png", ".gbapal");
 const u32 gTitleScreenPressStartGfx[]      = INCGFX_U32("graphics/title_screen/press_start.png", ".4bpp.smol", "-mwidth 4 -mheight 1 -num_tiles 48 -Wnum_tiles");
 const u32 gTitleScreenPokemonLogoTilemap[] = INCGFX_U32("graphics/title_screen/pokemon_logo.bin", ".smolTM");

@@ -71,14 +71,14 @@ static const u8* const sFrontierTrainerSlides[DIFFICULTY_COUNT][FRONTIER_TRAINER
     },
 };
 
-#if TESTING
+#define TRAINER_RED_TEST    1
+#define TRAINER_LEAF_TEST   2
 #define PARTNER_STEVEN_TEST 1
 
-static const u8* const sTestTrainerSlides[DIFFICULTY_COUNT][TRAINER_PARTNER(PARTNER_COUNT)][TRAINER_SLIDE_COUNT] =
+static const u8* const sTestTrainerSlides[DIFFICULTY_COUNT][MAX_TRAINERS_COUNT_EMERALD + PARTNER_COUNT][TRAINER_SLIDE_COUNT] =
 {
 #include "../test/battle/trainer_slides.h"
 };
-#endif
 
 static u32 BattlerHPPercentage(enum BattlerId battler, enum ComparisonOperators operation, u32 threshold)
 {
@@ -232,7 +232,7 @@ static bool32 ShouldRunTrainerSlideLastSwitchIn(enum BattlerId battler, enum Tra
     if (slideId == TRAINER_SLIDE_OPPONENT_LAST_SWITCHIN)
     {
         enum BattlerId oppositeBattler = GetOppositeBattler(battler);
-        enum BattlerId oppositePartner = GetPartnerBattler(oppositeBattler);
+        enum BattlerId oppositePartner = IsDoubleBattle() ? GetPartnerBattler(oppositeBattler) : oppositeBattler;
 
         return (CountUsablePartyMons(oppositeBattler) == 0 && CountUsablePartyMons(oppositePartner) == 0);
     }
@@ -402,9 +402,11 @@ enum TrainerSlideTargets ShouldDoTrainerSlide(enum BattlerId battler, enum Train
         case TRAINER_SLIDE_ATTACKER_MEGA_EVOLUTION:
         case TRAINER_SLIDE_ATTACKER_Z_MOVE:
         case TRAINER_SLIDE_ATTACKER_DYNAMAX:
+        case TRAINER_SLIDE_ATTACKER_TERA:
         case TRAINER_SLIDE_OPPONENT_MEGA_EVOLUTION:
         case TRAINER_SLIDE_OPPONENT_Z_MOVE:
         case TRAINER_SLIDE_OPPONENT_DYNAMAX:
+        case TRAINER_SLIDE_OPPONENT_TERA:
             shouldRun = TRUE;
             break;
         default:

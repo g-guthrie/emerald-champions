@@ -18,9 +18,7 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
     } WHEN {
         TURN { MOVE(player, MOVE_SKY_UPPERCUT); EXPECT_MOVE(opponent, move); }
-        // Either attack satisfies this contract; Calm Mind can make Swift
-        // preferable. What must never win here is another setup turn.
-        TURN { EXPECT_MOVES(opponent, MOVE_CHIP_AWAY, MOVE_SWIFT); MOVE(player, MOVE_SKY_UPPERCUT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); MOVE(player, MOVE_SKY_UPPERCUT); }
     }
 }
 
@@ -40,7 +38,7 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
         OPPONENT(SPECIES_KANGASKHAN) { Speed(15); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
     } WHEN {
         TURN { MOVE(player, MOVE_DOUBLE_KICK); EXPECT_MOVE(opponent, move); }
-        TURN { EXPECT_MOVES(opponent, MOVE_CHIP_AWAY, MOVE_SWIFT); MOVE(player, MOVE_DOUBLE_KICK); }
+        TURN { EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); MOVE(player, MOVE_DOUBLE_KICK); }
     }
 }
 
@@ -72,7 +70,7 @@ AI_SINGLE_BATTLE_TEST("AI will not waste a turn setting up if it knows target ca
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
     } WHEN {
         TURN { MOVE(player, MOVE_DOUBLE_KICK); EXPECT_MOVE(opponent, move); }
-        TURN { EXPECT_MOVES(opponent, MOVE_CHIP_AWAY, MOVE_SWIFT); MOVE(player, MOVE_SKY_UPPERCUT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); MOVE(player, MOVE_SKY_UPPERCUT); }
     }
 }
 
@@ -116,8 +114,7 @@ AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases o
 {
     u32 hp;
 
-    // 80 HP: Sonic Boom is a 4HKO (not chip), the other three 2HKOs.
-    PARAMETRIZE { hp = 80; }
+    PARAMETRIZE { hp = 120; }
     PARAMETRIZE { hp = 20; }
 
     GIVEN {
@@ -125,7 +122,7 @@ AI_SINGLE_BATTLE_TEST("AI will incentivise multiple best damage moves in cases o
         PLAYER(SPECIES_WOBBUFFET) { Speed(15); HP(hp); }
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Level(40); Moves(MOVE_SONICBOOM, MOVE_DRAGON_RAGE, MOVE_NIGHT_SHADE, MOVE_SEISMIC_TOSS); }
     } WHEN {
-        if (hp == 80)
+        if (hp == 120)
         {
             TURN {
                 SCORE_EQ_VAL(opponent, MOVE_SONICBOOM,      AI_SCORE_DEFAULT);
@@ -265,10 +262,7 @@ AI_SINGLE_BATTLE_TEST("AI_IsMoveEffectInPlus - AI should not see secondary effec
         ASSUME(GetMovePower(MOVE_PSYCHIC) == 90);
         ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_PSYCHIC, spDef: -1);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        // Pin the damage thresholds so shared species buffs do not change
-        // a comparison whose subject is Sheer Force's secondary effects.
-        PLAYER(SPECIES_STEELIX) { Level(100); Nature(NATURE_SASSY); Item(ITEM_STEELIXITE); Ability(ABILITY_STURDY); Speed(58); Moves(MOVE_GYRO_BALL);
-                                  Attack(206); SpDefense(182); }
+        PLAYER(SPECIES_STEELIX) { Level(100); Nature(NATURE_SASSY); Item(ITEM_STEELIXITE); Ability(ABILITY_STURDY); Speed(58); Moves(MOVE_GYRO_BALL); }
         OPPONENT(SPECIES_BRAVIARY_HISUI) { Level(100); Nature(NATURE_TIMID); Ability(ABILITY_SHEER_FORCE); Speed(251); Moves(MOVE_PSYCHIC, MOVE_NIGHT_SHADE); }
     } WHEN {
         TURN { MOVE(player, MOVE_GYRO_BALL); SCORE_EQ_VAL(opponent, MOVE_PSYCHIC, 101); SCORE_EQ_VAL(opponent, MOVE_NIGHT_SHADE, 101); }
@@ -285,8 +279,7 @@ AI_SINGLE_BATTLE_TEST("Fillet Away AI handling")
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        // Slowbro's HP keeps Aqua Cutter a 4HKO rather than chip.
-        PLAYER(SPECIES_SLOWBRO){ Level(100); HP(180); Nature(NATURE_BOLD); Ability(ABILITY_REGENERATOR); Speed(96); Moves(move); }
+        PLAYER(SPECIES_SLOWBRO){ Level(100); Nature(NATURE_BOLD); Ability(ABILITY_REGENERATOR); Speed(96); Moves(move); }
         OPPONENT(SPECIES_VELUZA){ Level(100); Nature(NATURE_ADAMANT); Ability(ABILITY_SHARPNESS); Speed(176); Moves(MOVE_FILLET_AWAY, MOVE_AQUA_CUTTER); }
     } WHEN {
         TURN { MOVE(player, move); EXPECT_MOVE(opponent, move == MOVE_SCALD ? MOVE_FILLET_AWAY : MOVE_AQUA_CUTTER); }

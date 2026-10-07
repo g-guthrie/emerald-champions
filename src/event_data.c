@@ -131,6 +131,13 @@ void ClearMysteryGiftFlags(void)
 void ClearMysteryGiftVars(void)
 {
     VarSet(VAR_GIFT_PICHU_SLOT, 0);
+    VarSet(VAR_GIFT_UNUSED_1, 0);
+    VarSet(VAR_GIFT_UNUSED_2, 0);
+    VarSet(VAR_GIFT_UNUSED_3, 0);
+    VarSet(VAR_GIFT_UNUSED_4, 0);
+    VarSet(VAR_GIFT_UNUSED_5, 0);
+    VarSet(VAR_GIFT_UNUSED_6, 0);
+    VarSet(VAR_GIFT_UNUSED_7, 0);
 }
 
 void DisableResetRTC(void)
@@ -155,15 +162,16 @@ bool32 CanResetRTC(void)
 
 u16 *GetVarPointer(u16 id)
 {
-    if (id >= VARS_START && id - VARS_START < ARRAY_COUNT(gSaveBlock1Ptr->vars))
+    if (id < VARS_START)
+        return NULL;
+    else if (id < SPECIAL_VARS_START)
         return &gSaveBlock1Ptr->vars[id - VARS_START];
 #if TESTING
-    if (id >= TESTING_VARS_START && id - TESTING_VARS_START < ARRAY_COUNT(sTestVars))
+    else if (id >= TESTING_VARS_START)
         return &sTestVars[id - TESTING_VARS_START];
 #endif // TESTING
-    if (id >= SPECIAL_VARS_START && id <= SPECIAL_VARS_END)
+    else
         return gSpecialVars[id - SPECIAL_VARS_START];
-    return NULL;
 }
 
 u16 VarGet(u16 id)
@@ -171,6 +179,14 @@ u16 VarGet(u16 id)
     u16 *ptr = GetVarPointer(id);
     if (!ptr)
         return id;
+    return *ptr;
+}
+
+u16 VarGetIfExist(u16 id)
+{
+    u16 *ptr = GetVarPointer(id);
+    if (!ptr)
+        return 65535;
     return *ptr;
 }
 
@@ -192,15 +208,14 @@ u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
         return NULL;
-    if (id < FLAGS_COUNT)
+    else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
 #if TESTING
-    if (id >= TESTING_FLAGS_START && id - TESTING_FLAGS_START < sizeof(sTestFlags) * 8)
+    else if (id >= TESTING_FLAGS_START)
         return &sTestFlags[(id - TESTING_FLAGS_START) / 8];
 #endif // TESTING
-    if (id >= SPECIAL_FLAGS_START && id <= SPECIAL_FLAGS_END)
+    else
         return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
-    return NULL;
 }
 
 u8 FlagSet(u16 id)
@@ -231,5 +246,11 @@ bool8 FlagGet(u16 id)
 {
     u8 *ptr = GetFlagPointer(id);
 
-    return ptr != NULL && ((*ptr >> (id & 7)) & 1);
+    if (!ptr)
+        return FALSE;
+
+    if (!(((*ptr) >> (id & 7)) & 1))
+        return FALSE;
+
+    return TRUE;
 }

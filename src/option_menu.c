@@ -1,17 +1,11 @@
 #include "global.h"
 #include "option_menu.h"
 #include "bg.h"
-#include "difficulty.h"
-#include "string_util.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
-#include "main_menu.h"
-#include "malloc.h"
 #include "menu.h"
-#include "overworld.h"
 #include "palette.h"
-#include "save.h"
 #include "scanline_effect.h"
 #include "sprite.h"
 #include "strings.h"
@@ -23,16 +17,18 @@
 #include "constants/rgb.h"
 
 #define tMenuSelection data[0]
-#define tDifficulty data[1]
+#define tTextSpeed data[1]
 #define tBattleSceneOff data[2]
-#define tSound data[3]
-#define tButtonMode data[4]
-#define tWindowFrameType data[5]
+#define tBattleStyle data[3]
+#define tSound data[4]
+#define tButtonMode data[5]
+#define tWindowFrameType data[6]
 
 enum
 {
-    MENUITEM_DIFFICULTY,
+    MENUITEM_TEXTSPEED,
     MENUITEM_BATTLESCENE,
+    MENUITEM_BATTLESTYLE,
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
@@ -42,26 +38,13 @@ enum
 
 enum
 {
-    WIN_OPTIONS,
-    WIN_DIFFICULTY_HELP,
+    WIN_HEADER,
+    WIN_OPTIONS
 };
 
-// The frame tiles sit at the top of the shared char block, clear of the
-// list's own tiles.
-#define TILE_FRAME_BASE   0x1E0
-#define TILE_TOP_CORNER_L (TILE_FRAME_BASE + 0)
-#define TILE_TOP_EDGE     (TILE_FRAME_BASE + 1)
-#define TILE_TOP_CORNER_R (TILE_FRAME_BASE + 2)
-#define TILE_LEFT_EDGE    (TILE_FRAME_BASE + 3)
-#define TILE_RIGHT_EDGE   (TILE_FRAME_BASE + 5)
-#define TILE_BOT_CORNER_L (TILE_FRAME_BASE + 6)
-#define TILE_BOT_EDGE     (TILE_FRAME_BASE + 7)
-#define TILE_BOT_CORNER_R (TILE_FRAME_BASE + 8)
-
-#define OPTIONS_TOP       1
-
-#define YPOS_DIFFICULTY   (MENUITEM_DIFFICULTY * 16)
+#define YPOS_TEXTSPEED    (MENUITEM_TEXTSPEED * 16)
 #define YPOS_BATTLESCENE  (MENUITEM_BATTLESCENE * 16)
+#define YPOS_BATTLESTYLE  (MENUITEM_BATTLESTYLE * 16)
 #define YPOS_SOUND        (MENUITEM_SOUND * 16)
 #define YPOS_BUTTONMODE   (MENUITEM_BUTTONMODE * 16)
 #define YPOS_FRAMETYPE    (MENUITEM_FRAMETYPE * 16)
@@ -71,66 +54,74 @@ static void Task_OptionMenuProcessInput(u8 taskId);
 static void Task_OptionMenuSave(u8 taskId);
 static void Task_OptionMenuFadeOut(u8 taskId);
 static void HighlightOptionMenuItem(u8 selection);
-static u8 Difficulty_ProcessInput(u8 selection);
-static void Difficulty_DrawChoices(u8 selection);
+static u8 TextSpeed_ProcessInput(u8 selection);
+static void TextSpeed_DrawChoices(u8 selection);
 static u8 BattleScene_ProcessInput(u8 selection);
 static void BattleScene_DrawChoices(u8 selection);
+static u8 BattleStyle_ProcessInput(u8 selection);
+static void BattleStyle_DrawChoices(u8 selection);
 static u8 Sound_ProcessInput(u8 selection);
 static void Sound_DrawChoices(u8 selection);
 static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
 static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
+static void DrawHeaderText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
 
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
-EWRAM_DATA static bool8 sChoosingNewGame = FALSE;
-EWRAM_DATA static void (*sNewGameCancelCallback)(void) = NULL;
 
-static const u8 gText_DifficultyHard[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Hard");
-static const u8 gText_DifficultyMedium[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Medium");
-static const u8 gText_DifficultyEasy[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Easy");
-static const u8 gText_BattleSceneOn[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}On");
-static const u8 gText_BattleSceneOff[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Off");
-static const u8 gText_SoundMono[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Mono");
-static const u8 gText_SoundStereo[]        = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Stereo");
-static const u8 gText_FrameType[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Type");
+static const u8 gText_Option[]             = _("OPTION");
+static const u8 gText_TextSpeedSlow[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SLOW");
+static const u8 gText_TextSpeedMid[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MID");
+static const u8 gText_TextSpeedFast[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST");
+static const u8 gText_BattleSceneOn[]      = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}ON");
+static const u8 gText_BattleSceneOff[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF");
+static const u8 gText_BattleStyleShift[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SHIFT");
+static const u8 gText_BattleStyleSet[]     = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SET");
+static const u8 gText_SoundMono[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MONO");
+static const u8 gText_SoundStereo[]        = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}STEREO");
+static const u8 gText_FrameType[]          = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}TYPE");
 static const u8 gText_FrameTypeNumber[]    = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}");
-static const u8 gText_ButtonTypeNormal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Normal");
+static const u8 gText_ButtonTypeNormal[]   = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL");
 static const u8 gText_ButtonTypeLR[]       = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}LR");
 static const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A");
 
 static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_menu_text.pal", ".gbapal");
 // note: this is only used in the Japanese release
-
 static const u8 sEqualSignGfx[] = INCGFX_U8("graphics/interface/option_menu_equals_sign.png", ".4bpp");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
-    [MENUITEM_DIFFICULTY]  = COMPOUND_STRING("Difficulty"),
-    [MENUITEM_BATTLESCENE] = COMPOUND_STRING("Battle scene"),
-    [MENUITEM_SOUND]       = COMPOUND_STRING("Sound"),
-    [MENUITEM_BUTTONMODE]  = COMPOUND_STRING("Button mode"),
-    [MENUITEM_FRAMETYPE]   = COMPOUND_STRING("Frame"),
-    [MENUITEM_CANCEL]      = COMPOUND_STRING("Cancel"),
+    [MENUITEM_TEXTSPEED]   = COMPOUND_STRING("TEXT SPEED"),
+    [MENUITEM_BATTLESCENE] = COMPOUND_STRING("BATTLE SCENE"),
+    [MENUITEM_BATTLESTYLE] = COMPOUND_STRING("BATTLE STYLE"),
+    [MENUITEM_SOUND]       = COMPOUND_STRING("SOUND"),
+    [MENUITEM_BUTTONMODE]  = COMPOUND_STRING("BUTTON MODE"),
+    [MENUITEM_FRAMETYPE]   = COMPOUND_STRING("FRAME"),
+    [MENUITEM_CANCEL]      = COMPOUND_STRING("CANCEL"),
 };
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
-    // One framed panel, centred on the screen: a row per option.
-    [WIN_OPTIONS] = {
-        .bg = 0,
+    [WIN_HEADER] = {
+        .bg = 1,
         .tilemapLeft = 2,
-        .tilemapTop = OPTIONS_TOP,
+        .tilemapTop = 1,
         .width = 26,
-        .height = MENUITEM_COUNT * 2,
+        .height = 2,
         .paletteNum = 1,
         .baseBlock = 2
     },
-    [WIN_DIFFICULTY_HELP] = {
-        .bg = 0, .tilemapLeft = 2, .tilemapTop = 14,
-        .width = 26, .height = 6, .paletteNum = 1, .baseBlock = 314
+    [WIN_OPTIONS] = {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 5,
+        .width = 26,
+        .height = 14,
+        .paletteNum = 1,
+        .baseBlock = 0x36
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -174,14 +165,6 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-void ChooseNewGameDifficulty(void (*cancelCallback)(void))
-{
-    sChoosingNewGame = TRUE;
-    sNewGameCancelCallback = cancelCallback;
-    gMain.savedCallback = CB2_NewGame;
-    SetMainCallback2(CB2_InitOptionMenu);
-}
-
 void CB2_InitOptionMenu(void)
 {
     switch (gMain.state)
@@ -207,9 +190,6 @@ void CB2_InitOptionMenu(void)
         ChangeBgX(3, 0, BG_COORD_SET);
         ChangeBgY(3, 0, BG_COORD_SET);
         InitWindows(sOptionMenuWinTemplates);
-        // The list lives on bg0, so InitWindows leaves bg1 (the frame)
-        // without a tilemap buffer.
-        SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
         DeactivateAllTextPrinters();
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -231,7 +211,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 3:
-        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, TILE_FRAME_BASE);
+        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
         gMain.state++;
         break;
     case 4:
@@ -244,6 +224,10 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 6:
+        PutWindowTilemap(WIN_HEADER);
+        DrawHeaderText();
+        gMain.state++;
+        break;
     case 7:
         gMain.state++;
         break;
@@ -260,14 +244,16 @@ void CB2_InitOptionMenu(void)
         u8 taskId = CreateTask(Task_OptionMenuFadeIn, 0);
 
         gTasks[taskId].tMenuSelection = 0;
-        gTasks[taskId].tDifficulty = sChoosingNewGame ? DIFFICULTY_NORMAL : GetCurrentDifficultyLevel();
+        gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
         gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
+        gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
 
-        Difficulty_DrawChoices(gTasks[taskId].tDifficulty);
+        TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
+        BattleStyle_DrawChoices(gTasks[taskId].tBattleStyle);
         Sound_DrawChoices(gTasks[taskId].tSound);
         ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
         FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
@@ -300,18 +286,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
     else if (JOY_NEW(B_BUTTON))
     {
-        if (sChoosingNewGame)
-        {
-            // All choices remain in this task until Begin run; cancellation
-            // leaves the loaded run's difficulty and options untouched.
-            gMain.savedCallback = sNewGameCancelCallback;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_OptionMenuFadeOut;
-        }
-        else
-        {
-            gTasks[taskId].func = Task_OptionMenuSave;
-        }
+        gTasks[taskId].func = Task_OptionMenuSave;
     }
     else if (JOY_NEW(DPAD_UP))
     {
@@ -335,12 +310,12 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
         switch (gTasks[taskId].tMenuSelection)
         {
-        case MENUITEM_DIFFICULTY:
-            previousOption = gTasks[taskId].tDifficulty;
-            gTasks[taskId].tDifficulty = Difficulty_ProcessInput(gTasks[taskId].tDifficulty);
+        case MENUITEM_TEXTSPEED:
+            previousOption = gTasks[taskId].tTextSpeed;
+            gTasks[taskId].tTextSpeed = TextSpeed_ProcessInput(gTasks[taskId].tTextSpeed);
 
-            if (previousOption != gTasks[taskId].tDifficulty)
-                Difficulty_DrawChoices(gTasks[taskId].tDifficulty);
+            if (previousOption != gTasks[taskId].tTextSpeed)
+                TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
             break;
         case MENUITEM_BATTLESCENE:
             previousOption = gTasks[taskId].tBattleSceneOff;
@@ -348,6 +323,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
             if (previousOption != gTasks[taskId].tBattleSceneOff)
                 BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
+            break;
+        case MENUITEM_BATTLESTYLE:
+            previousOption = gTasks[taskId].tBattleStyle;
+            gTasks[taskId].tBattleStyle = BattleStyle_ProcessInput(gTasks[taskId].tBattleStyle);
+
+            if (previousOption != gTasks[taskId].tBattleStyle)
+                BattleStyle_DrawChoices(gTasks[taskId].tBattleStyle);
             break;
         case MENUITEM_SOUND:
             previousOption = gTasks[taskId].tSound;
@@ -384,10 +366,9 @@ static void Task_OptionMenuProcessInput(u8 taskId)
 
 static void Task_OptionMenuSave(u8 taskId)
 {
-    if (sChoosingNewGame)
-        SetNewGameDifficultyLevel(gTasks[taskId].tDifficulty);
+    gSaveBlock2Ptr->optionsTextSpeed = gTasks[taskId].tTextSpeed;
     gSaveBlock2Ptr->optionsBattleSceneOff = gTasks[taskId].tBattleSceneOff;
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    gSaveBlock2Ptr->optionsBattleStyle = gTasks[taskId].tBattleStyle;
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
@@ -401,10 +382,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
     if (!gPaletteFade.active)
     {
         DestroyTask(taskId);
-        Free(GetBgTilemapBuffer(1));
         FreeAllWindowBuffers();
-        sChoosingNewGame = FALSE;
-        sNewGameCancelCallback = NULL;
         SetMainCallback2(gMain.savedCallback);
     }
 }
@@ -412,7 +390,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
 static void HighlightOptionMenuItem(u8 index)
 {
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(16, DISPLAY_WIDTH - 16));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(OPTIONS_TOP * 8 + index * 16, OPTIONS_TOP * 8 + index * 16 + 16));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(index * 16 + 40, index * 16 + 56));
 }
 
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
@@ -433,97 +411,50 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, dst, x, y + 1, TEXT_SKIP_DRAW, NULL);
 }
 
-static u8 Difficulty_ProcessInput(u8 selection)
+static u8 TextSpeed_ProcessInput(u8 selection)
 {
-    if (!sChoosingNewGame)
-        return selection;
     if (JOY_NEW(DPAD_RIGHT))
     {
-        if (selection == DIFFICULTY_HARD)
-            selection = DIFFICULTY_NORMAL;
-        else if (selection == DIFFICULTY_NORMAL)
-            selection = DIFFICULTY_EASY;
+        if (selection <= 1)
+            selection++;
         else
-            selection = DIFFICULTY_HARD;
+            selection = 0;
 
         sArrowPressed = TRUE;
     }
     if (JOY_NEW(DPAD_LEFT))
     {
-        if (selection == DIFFICULTY_HARD)
-            selection = DIFFICULTY_EASY;
-        else if (selection == DIFFICULTY_EASY)
-            selection = DIFFICULTY_NORMAL;
+        if (selection != 0)
+            selection--;
         else
-            selection = DIFFICULTY_HARD;
+            selection = 2;
 
         sArrowPressed = TRUE;
     }
     return selection;
 }
 
-static void Difficulty_DrawChoices(u8 selection)
+static void TextSpeed_DrawChoices(u8 selection)
 {
     u8 styles[3];
-    s32 widthHard, widthMedium, widthEasy, xMedium;
+    s32 widthSlow, widthMid, widthFast, xMid;
 
-    styles[0] = selection == DIFFICULTY_HARD;
-    styles[1] = selection == DIFFICULTY_NORMAL;
-    styles[2] = selection == DIFFICULTY_EASY;
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[2] = 0;
+    styles[selection] = 1;
 
-    if (sChoosingNewGame)
-    {
-        DrawOptionMenuChoice(gText_DifficultyHard, 104, YPOS_DIFFICULTY, styles[0]);
-        widthHard = GetStringWidth(FONT_NORMAL, gText_DifficultyHard, 0);
-        widthMedium = GetStringWidth(FONT_NORMAL, gText_DifficultyMedium, 0);
-        widthEasy = GetStringWidth(FONT_NORMAL, gText_DifficultyEasy, 0);
-        widthMedium -= 94;
-        xMedium = (widthHard - widthMedium - widthEasy) / 2 + 104;
-        DrawOptionMenuChoice(gText_DifficultyMedium, xMedium, YPOS_DIFFICULTY, styles[1]);
-        DrawOptionMenuChoice(gText_DifficultyEasy, GetStringRightAlignXOffset(FONT_NORMAL, gText_DifficultyEasy, 198), YPOS_DIFFICULTY, styles[2]);
-    }
-    else
-    {
-        const u8 *name = selection == DIFFICULTY_HARD ? gText_DifficultyHard
-            : selection == DIFFICULTY_EASY ? gText_DifficultyEasy : gText_DifficultyMedium;
-        DrawOptionMenuChoice(name, 104, YPOS_DIFFICULTY, 1);
-    }
-    ConvertIntToDecimalStringN(gStringVar1, GetTrainerLevelLeadPercentFor(selection), STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, GetTrainerLevelCapDropPercentFor(selection), STR_CONV_MODE_LEFT_ALIGN, 3);
-    const u8 *description = selection == DIFFICULTY_HARD
-        ? COMPOUND_STRING("Hard: foes scout your whole team.\nThey keep their full level lead\nover your level cap.")
-        : selection == DIFFICULTY_NORMAL
-        ? COMPOUND_STRING("Medium: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead\nover your level cap.")
-        : GetTrainerLevelLeadPercentFor(selection) == 0
-        ? COMPOUND_STRING("Easy: foes learn your team in battle.\nThey have no level lead and sit\n{STR_VAR_2}% below your level cap.")
-        : COMPOUND_STRING("Easy: foes learn your team in battle.\nThey keep {STR_VAR_1}% of Hard's level lead,\nthen drop {STR_VAR_2}% of your level cap.");
-    StringExpandPlaceholders(gStringVar4, description);
-    FillWindowPixelBuffer(WIN_DIFFICULTY_HELP, PIXEL_FILL(1));
-    const u8 helpColors[] = {1, 6, 7}; // White and gray in the Options palette.
-    u32 helpWidth = GetWindowAttribute(WIN_DIFFICULTY_HELP, WINDOW_WIDTH) * 8;
-    u8 *line = gStringVar4;
-    u32 y = 0;
-    while (TRUE)
-    {
-        u8 *end = line;
-        while (*end != CHAR_NEWLINE && *end != EOS)
-            end++;
-        u8 separator = *end;
-        *end = EOS;
-        AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL,
-            GetStringCenterAlignXOffset(FONT_SMALL, line, helpWidth), y, helpColors, TEXT_SKIP_DRAW, line);
-        *end = separator;
-        if (separator == EOS)
-            break;
-        line = end + 1;
-        y += GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_HEIGHT);
-    }
-    const u8 *footnote = sChoosingNewGame ? COMPOUND_STRING("Choose now; fixed for this run.")
-                                          : COMPOUND_STRING("Difficulty is fixed for this run.");
-    AddTextPrinterParameterized3(WIN_DIFFICULTY_HELP, FONT_SMALL,
-        GetStringCenterAlignXOffset(FONT_SMALL, footnote, helpWidth), 36, helpColors, TEXT_SKIP_DRAW, footnote);
-    PutWindowTilemap(WIN_DIFFICULTY_HELP);
-    CopyWindowToVram(WIN_DIFFICULTY_HELP, COPYWIN_FULL);
+    DrawOptionMenuChoice(gText_TextSpeedSlow, 104, YPOS_TEXTSPEED, styles[0]);
+
+    widthSlow = GetStringWidth(FONT_NORMAL, gText_TextSpeedSlow, 0);
+    widthMid = GetStringWidth(FONT_NORMAL, gText_TextSpeedMid, 0);
+    widthFast = GetStringWidth(FONT_NORMAL, gText_TextSpeedFast, 0);
+
+    widthMid -= 94;
+    xMid = (widthSlow - widthMid - widthFast) / 2 + 104;
+    DrawOptionMenuChoice(gText_TextSpeedMid, xMid, YPOS_TEXTSPEED, styles[1]);
+
+    DrawOptionMenuChoice(gText_TextSpeedFast, GetStringRightAlignXOffset(FONT_NORMAL, gText_TextSpeedFast, 198), YPOS_TEXTSPEED, styles[2]);
 }
 
 static u8 BattleScene_ProcessInput(u8 selection)
@@ -547,6 +478,29 @@ static void BattleScene_DrawChoices(u8 selection)
 
     DrawOptionMenuChoice(gText_BattleSceneOn, 104, YPOS_BATTLESCENE, styles[0]);
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_BATTLESCENE, styles[1]);
+}
+
+static u8 BattleStyle_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        selection ^= 1;
+        sArrowPressed = TRUE;
+    }
+
+    return selection;
+}
+
+static void BattleStyle_DrawChoices(u8 selection)
+{
+    u8 styles[2];
+
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleStyleShift, 104, YPOS_BATTLESTYLE, styles[0]);
+    DrawOptionMenuChoice(gText_BattleStyleSet, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleStyleSet, 198), YPOS_BATTLESTYLE, styles[1]);
 }
 
 static u8 Sound_ProcessInput(u8 selection)
@@ -582,7 +536,7 @@ static u8 FrameType_ProcessInput(u8 selection)
         else
             selection = 0;
 
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, TILE_FRAME_BASE);
+        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         sArrowPressed = TRUE;
     }
@@ -593,7 +547,7 @@ static u8 FrameType_ProcessInput(u8 selection)
         else
             selection = WINDOW_FRAMES_COUNT - 1;
 
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, TILE_FRAME_BASE);
+        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         sArrowPressed = TRUE;
     }
@@ -677,34 +631,54 @@ static void ButtonMode_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
 }
 
+static void DrawHeaderText(void)
+{
+    FillWindowPixelBuffer(WIN_HEADER, PIXEL_FILL(1));
+    AddTextPrinterParameterized(WIN_HEADER, FONT_NORMAL, gText_Option, 8, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
+}
+
 static void DrawOptionMenuTexts(void)
 {
     u8 i;
 
     FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
-    {
-        const u8 *name = sChoosingNewGame && i == MENUITEM_CANCEL
-            ? COMPOUND_STRING("Begin run") : sOptionMenuItemsNames[i];
-        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, name, 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
-    }
+        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
 
+#define TILE_TOP_CORNER_L 0x1A2
+#define TILE_TOP_EDGE     0x1A3
+#define TILE_TOP_CORNER_R 0x1A4
+#define TILE_LEFT_EDGE    0x1A5
+#define TILE_RIGHT_EDGE   0x1A7
+#define TILE_BOT_CORNER_L 0x1A8
+#define TILE_BOT_EDGE     0x1A9
+#define TILE_BOT_CORNER_R 0x1AA
+
 static void DrawBgWindowFrames(void)
 {
-    u32 top = OPTIONS_TOP - 1, height = MENUITEM_COUNT * 2, bottom = OPTIONS_TOP + height;
+    //                     bg, tile,              x, y, width, height, palNum
+    // Draw title window frame
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  0,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  0, 27,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  0,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  1,  1,  2,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  1,  1,  2,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1,  3,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2,  3, 27,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28,  3,  1,  1,  7);
 
-    //                     bg, tile,              x, y,       width, height, palNum
-    // One frame around the list
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1, top,         1,      1, 7);
-    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2, top,        26,      1, 7);
-    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28, top,         1,      1, 7);
-    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1, top + 1,     1, height, 7);
-    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28, top + 1,     1, height, 7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, bottom,      1,      1, 7);
-    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, bottom,     26,      1, 7);
-    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, bottom,      1,      1, 7);
+    // Draw options list window frame
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_L,  1,  4,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_EDGE,      2,  4, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_TOP_CORNER_R, 28,  4,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_LEFT_EDGE,     1,  5,  1, 18,  7);
+    FillBgTilemapBufferRect(1, TILE_RIGHT_EDGE,   28,  5,  1, 18,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_L,  1, 19,  1,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_EDGE,      2, 19, 26,  1,  7);
+    FillBgTilemapBufferRect(1, TILE_BOT_CORNER_R, 28, 19,  1,  1,  7);
 
     CopyBgTilemapBufferToVram(1);
 }

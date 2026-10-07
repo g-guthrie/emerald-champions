@@ -1034,10 +1034,6 @@ extern const u32 gItemIcon_Tatsugirinite[];
 extern const u16 gItemIconPalette_Tatsugirinite[];
 extern const u32 gItemIcon_Glimmoranite[];
 extern const u16 gItemIconPalette_Glimmoranite[];
-extern const u32 gItemIcon_PokeVial[];
-extern const u16 gItemIconPalette_PokeVial[];
-extern const u32 gItemIcon_MagmaStone[];
-extern const u16 gItemIconPalette_MagmaStone[];
 
 // Gems
 extern const u32 gItemIcon_TypeGem[];
@@ -1509,7 +1505,28 @@ extern const u32 gItemIcon_KeeBerry[];
 extern const u16 gItemIconPalette_KeeBerry[];
 extern const u32 gItemIcon_MarangaBerry[];
 extern const u16 gItemIconPalette_MarangaBerry[];
-
+// TMs/HMs
+extern const u32 gItemIcon_TM[];
+extern const u32 gItemIcon_HM[];
+extern const u16 gItemIconPalette_NormalTMHM[];
+extern const u16 gItemIconPalette_FireTMHM[];
+extern const u16 gItemIconPalette_WaterTMHM[];
+extern const u16 gItemIconPalette_ElectricTMHM[];
+extern const u16 gItemIconPalette_GrassTMHM[];
+extern const u16 gItemIconPalette_IceTMHM[];
+extern const u16 gItemIconPalette_FightingTMHM[];
+extern const u16 gItemIconPalette_PoisonTMHM[];
+extern const u16 gItemIconPalette_GroundTMHM[];
+extern const u16 gItemIconPalette_FlyingTMHM[];
+extern const u16 gItemIconPalette_PsychicTMHM[];
+extern const u16 gItemIconPalette_BugTMHM[];
+extern const u16 gItemIconPalette_RockTMHM[];
+extern const u16 gItemIconPalette_GhostTMHM[];
+extern const u16 gItemIconPalette_DragonTMHM[];
+extern const u16 gItemIconPalette_DarkTMHM[];
+extern const u16 gItemIconPalette_SteelTMHM[];
+extern const u16 gItemIconPalette_MysteryTMHM[];
+extern const u16 gItemIconPalette_FairyTMHM[];
 // Charms
 extern const u32 gItemIcon_OvalCharm[];
 extern const u16 gItemIconPalette_OvalCharm[];
@@ -1565,6 +1582,8 @@ extern const u32 gItemIcon_TownMap[];
 extern const u16 gItemIconPalette_TownMap[];
 extern const u32 gItemIcon_VsSeeker[];
 extern const u16 gItemIconPalette_VsSeeker[];
+extern const u32 gItemIcon_TMCase[];
+extern const u16 gItemIconPalette_TMCase[];
 extern const u32 gItemIcon_BerryPouch[];
 extern const u16 gItemIconPalette_BerryPouch[];
 extern const u32 gItemIcon_PokemonBoxLink[];
@@ -1673,8 +1692,34 @@ extern const u32 gItemIcon_ScrollOfDarkness[];
 extern const u16 gItemIconPalette_ScrollOfDarkness[];
 extern const u32 gItemIcon_ScrollOfWaters[];
 extern const u16 gItemIconPalette_ScrollOfWaters[];
+extern const u32 gItemIcon_TeraOrb[];
+extern const u16 gItemIconPalette_TeraOrb[];
 extern const u32 gItemIcon_TinyBambooShoot[];
 extern const u16 gItemIconPalette_TinyBambooShoot[];
+
+// Tera Shards
+extern const u32 gItemIcon_TeraShard[];
+extern const u16 gItemIconPalette_NormalTeraShard[];
+extern const u16 gItemIconPalette_FireTeraShard[];
+extern const u16 gItemIconPalette_WaterTeraShard[];
+extern const u16 gItemIconPalette_GrassTeraShard[];
+extern const u16 gItemIconPalette_ElectricTeraShard[];
+extern const u16 gItemIconPalette_IceTeraShard[];
+extern const u16 gItemIconPalette_FightingTeraShard[];
+extern const u16 gItemIconPalette_PoisonTeraShard[];
+extern const u16 gItemIconPalette_GroundTeraShard[];
+extern const u16 gItemIconPalette_FlyingTeraShard[];
+extern const u16 gItemIconPalette_PsychicTeraShard[];
+extern const u16 gItemIconPalette_BugTeraShard[];
+extern const u16 gItemIconPalette_RockTeraShard[];
+extern const u16 gItemIconPalette_GhostTeraShard[];
+extern const u16 gItemIconPalette_DarkTeraShard[];
+extern const u16 gItemIconPalette_DragonTeraShard[];
+extern const u16 gItemIconPalette_SteelTeraShard[];
+extern const u16 gItemIconPalette_FairyTeraShard[];
+
+extern const u32 gItemIcon_StellarTeraShard[];
+extern const u16 gItemIconPalette_StellarTeraShard[];
 
 extern const u32 gItemIcon_AdamantCrystal[];
 extern const u16 gItemIconPalette_AdamantCrystal[];
@@ -1741,6 +1786,7 @@ extern const u32 gBagScreen_Gfx[];
 extern const u32 gBagScreen_GfxTileMap[];
 extern const u16 gBagScreenFemale_Pal[];
 extern const u16 gBagScreenMale_Pal[];
+extern const u8 gBagMenuHMIcon_Gfx[];
 
 // item menu icons graphics
 extern const u32 gBagMaleTiles[];
@@ -1929,11 +1975,31 @@ extern const u16 gBerryPalette_Kee[];
 extern const u16 gBerryPalette_Maranga[];
 
 //PokéNav
+extern const u16 gPokenavCondition_Pal[];
+extern const u32 gPokenavCondition_Gfx[];
+extern const u32 gPokenavCondition_Tilemap[];
+extern const u16 gPokenavOptions_Tilemap[];
+extern const u32 gPokenavOptions_Gfx[];
+extern const u16 gPokenavOptions_Pal[];
 extern const u16 gPokenavLeftHeader_Pal[];
 extern const u16 gPokenavHeader_Pal[];
 extern const u32 gPokenavHeader_Gfx[];
 extern const u32 gPokenavHeader_Tilemap[];
 extern const u32 gPokenavLeftHeaderHoennMap_Gfx[];
+extern const u32 gPokenavLeftHeaderMainMenu_Gfx[];
+extern const u32 gPokenavLeftHeaderCondition_Gfx[];
+extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
+extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
+extern const u32 gPokenavLeftHeaderParty_Gfx[];
+extern const u32 gPokenavLeftHeaderSearch_Gfx[];
+extern const u32 gPokenavLeftHeaderCool_Gfx[];
+extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
+extern const u32 gPokenavLeftHeaderCute_Gfx[];
+extern const u32 gPokenavLeftHeaderSmart_Gfx[];
+extern const u32 gPokenavLeftHeaderTough_Gfx[];
+extern const u16 gPokenavRibbonsSummaryBg_Pal[];
+extern const u32 gPokenavRibbonsSummaryBg_Gfx[];
+extern const u32 gPokenavRibbonsSummaryBg_Tilemap[];
 
 extern const u32 gSummaryScreen_Gfx[];
 extern const u16 gSummaryScreen_Pal[];
@@ -2667,6 +2733,8 @@ extern const u32 gBattleAnimSpriteGfx_MegaParticles[];
 extern const u16 gBattleAnimSpritePal_MegaParticles[];
 extern const u32 gBattleAnimSpriteGfx_MegaSymbol[];
 extern const u16 gBattleAnimSpritePal_MegaSymbol[];
+extern const u32 gBattleAnimSpriteGfx_TeraSymbol[];
+extern const u16 gBattleAnimSpritePal_TeraSymbol[];
 extern const u32 gBattleAnimSpriteGfx_FlashCannonBall[];
 extern const u16 gBattleAnimSpritePal_FlashCannonBall[];
 extern const u32 gBattleAnimSpriteGfx_WaterGun[];
@@ -2675,6 +2743,10 @@ extern const u32 gBattleAnimSpriteGfx_Punishment[];
 extern const u16 gBattleAnimSpritePal_Punishment[];
 extern const u32 gBattleAnimSpriteGfx_QuickGuard[];
 extern const u16 gBattleAnimSpritePal_QuickGuard[];
+extern const u32 gBattleAnimSpriteGfx_TeraCrystal[];
+extern const u16 gBattleAnimSpritePal_TeraCrystal[];
+extern const u32 gBattleAnimSpriteGfx_TeraShatter[];
+extern const u16 gBattleAnimSpritePal_TeraShatter[];
 extern const u32 gBattleAnimSpriteGfx_TatsugiriCurly[];
 extern const u16 gBattleAnimSpritePal_TatsugiriCurly[];
 extern const u32 gBattleAnimSpriteGfx_TatsugiriDroopy[];
@@ -2862,6 +2934,8 @@ extern const u16 gBattleAnimSpritePal_IvyCudgelRock[];
 extern const u16 gBattleAnimSpritePal_IvyCudgelWater[];
 extern const u32 gBattleAnimSpriteGfx_PinkVioletOrb[];
 extern const u16 gBattleAnimSpritePal_PinkVioletOrb[];
+extern const u32 gBattleAnimSpriteGfx_TeraStarstormBeam[];
+extern const u16 gBattleAnimSpritePal_TeraStarstormBeam[];
 extern const u32 gBattleAnimSpriteGfx_SaltParticle[];
 extern const u16 gBattleAnimSpritePal_SaltParticle[];
 
@@ -3298,6 +3372,13 @@ extern const u32 gBerryCrush_Crusher_Gfx[];
 extern const u16 gBerryCrush_Crusher_Pal[];
 extern const u32 gBerryCrush_TextWindows_Tilemap[];
 
+// PokéNav
+extern const u32 gPokenavMessageBox_Gfx[];
+extern const u32 gPokenavMessageBox_Tilemap[];
+extern const u16 gPokenavMessageBox_Pal[];
+extern const u32 gPokenavOptions_Gfx[];
+extern const u16 gPokenavOptions_Pal[];
+
 // Battle Factory Screen
 extern const u16 gFrontierFactoryMenu_Gfx[34 * TILE_SIZE_4BPP / 2];
 extern const u16 gFrontierFactoryMenu_Tilemap[];
@@ -3357,55 +3438,5 @@ extern const u16 gBattleIcons_Pal2[];
 
 extern const u32 gGhostFrontPic[];
 extern const u16 gGhostPalette[];
-
-extern const u32 gMonFrontPic_ButterfreeMega[];
-extern const u32 gMonBackPic_ButterfreeMega[];
-extern const u16 gMonPalette_ButterfreeMega[];
-extern const u16 gMonShinyPalette_ButterfreeMega[];
-extern const u8 gMonIcon_ButterfreeMega[];
-extern const u32 gItemIcon_Butterfrenite[];
-extern const u16 gItemIconPalette_Butterfrenite[];
-extern const u32 gMonFrontPic_MachampMega[];
-extern const u32 gMonBackPic_MachampMega[];
-extern const u16 gMonPalette_MachampMega[];
-extern const u16 gMonShinyPalette_MachampMega[];
-extern const u8 gMonIcon_MachampMega[];
-extern const u32 gItemIcon_Machampite[];
-extern const u16 gItemIconPalette_Machampite[];
-extern const u32 gMonFrontPic_KinglerMega[];
-extern const u32 gMonBackPic_KinglerMega[];
-extern const u16 gMonPalette_KinglerMega[];
-extern const u16 gMonShinyPalette_KinglerMega[];
-extern const u8 gMonIcon_KinglerMega[];
-extern const u32 gItemIcon_Kinglerite[];
-extern const u16 gItemIconPalette_Kinglerite[];
-extern const u32 gMonFrontPic_LaprasMega[];
-extern const u32 gMonBackPic_LaprasMega[];
-extern const u16 gMonPalette_LaprasMega[];
-extern const u16 gMonShinyPalette_LaprasMega[];
-extern const u8 gMonIcon_LaprasMega[];
-extern const u32 gItemIcon_Laprasite[];
-extern const u16 gItemIconPalette_Laprasite[];
-extern const u32 gMonFrontPic_FlygonMega[];
-extern const u32 gMonBackPic_FlygonMega[];
-extern const u16 gMonPalette_FlygonMega[];
-extern const u16 gMonShinyPalette_FlygonMega[];
-extern const u8 gMonIcon_FlygonMega[];
-extern const u32 gItemIcon_Flygonite[];
-extern const u16 gItemIconPalette_Flygonite[];
-extern const u32 gMonFrontPic_MiloticMega[];
-extern const u32 gMonBackPic_MiloticMega[];
-extern const u16 gMonPalette_MiloticMega[];
-extern const u16 gMonShinyPalette_MiloticMega[];
-extern const u8 gMonIcon_MiloticMega[];
-extern const u32 gItemIcon_Miloticite[];
-extern const u16 gItemIconPalette_Miloticite[];
-extern const u32 gMonFrontPic_KingdraMega[];
-extern const u32 gMonBackPic_KingdraMega[];
-extern const u16 gMonPalette_KingdraMega[];
-extern const u16 gMonShinyPalette_KingdraMega[];
-extern const u8 gMonIcon_KingdraMega[];
-extern const u32 gItemIcon_Kingdranite[];
-extern const u16 gItemIconPalette_Kingdranite[];
 
 #endif //GUARD_GRAPHICS_H

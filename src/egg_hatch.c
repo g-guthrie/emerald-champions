@@ -3,7 +3,6 @@
 #include "egg_hatch.h"
 #include "pokedex.h"
 #include "constants/items.h"
-#include "constants/region_map_sections.h"
 #include "script.h"
 #include "decompress.h"
 #include "task.h"
@@ -30,7 +29,6 @@
 #include "overworld.h"
 #include "scanline_effect.h"
 #include "field_weather.h"
-#include "legendary_signs.h"
 #include "naming_screen.h"
 #include "pokemon_storage_system.h"
 #include "field_screen_effect.h"
@@ -318,15 +316,10 @@ static void AddHatchedMonToParty(u8 id)
 
     bool32 isEgg = FALSE;
     SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
-    // A hatchling joins the player like any other Pokémon: baseline EVs.
-    SetPlayerMonBaselineEVs(mon);
 
     species = GetMonData(mon, MON_DATA_SPECIES);
-    memset(name, EOS, sizeof(name));
     StringCopy(name, GetSpeciesName(species));
     SetMonData(mon, MON_DATA_NICKNAME, name);
-
-    MarkLegendarySignCaughtBySpecies(species);
 
     nationalDexNum = SpeciesToNationalPokedexNum(species);
     GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
@@ -343,7 +336,6 @@ static void AddHatchedMonToParty(u8 id)
     // A met level of 0 is interpreted on the summary screen as "hatched at"
     metLevel = 0;
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
-    TeachHatchedIconicOhkoMove(mon);
 
     metLocation = GetCurrentRegionMapSectionId();
     SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);

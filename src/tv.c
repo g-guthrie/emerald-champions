@@ -181,8 +181,8 @@ static const u8 sText_SoSo[] = _("So-so");
 static const u8 sText_Bad[] = _("Bad");
 static const u8 sText_TheWorst[] = _("The worst");
 
-static const u8 sText_Slots[] = _("Slots");
-static const u8 sText_Roulette[] = _("Roulette");
+static const u8 sText_Slots[] = _("SLOTS");
+static const u8 sText_Roulette[] = _("ROULETTE");
 static const u8 sText_Jackpot[] = _("jackpot");
 
 static const u16 sNumberOneVarsAndThresholds[][2] = {
@@ -815,9 +815,6 @@ u8 GetSelectedTVShow(void)
 
 // IN SEARCH OF TRAINERS
 
-// The battle counter after party 6 (the last authored team) is beaten.
-#define GABBY_AND_TY_RETIRED 6
-
 void ResetGabbyAndTy(void)
 {
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = SPECIES_NONE;
@@ -846,12 +843,8 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.playerMon1Species;
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMovePlayer;
-    // The authored sequence keeps parties 1, 2, 5 and 6, one battle each.
-    // Beating party 6 retires the pair: the counter stops at 6.
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum < GABBY_AND_TY_RETIRED)
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != 0xFF)
         gSaveBlock1Ptr->gabbyAndTyData.battleNum++;
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum == 2)
-        gSaveBlock1Ptr->gabbyAndTyData.battleNum = 4;
 
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.playerMonWasDamaged;
 
@@ -895,17 +888,11 @@ static void TakeGabbyAndTyOffTheAir(void)
     gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
 }
 
-// See gabby_and_ty.inc for details: 0, 1, 4 and 5 are the four battle stops
-// (parties 1, 2, 5, 6); GABBY_AND_TY_RETIRED means party 6 is beaten and the
-// pair stays on Route 120 as interviewers.
+// See gabby_and_ty.inc for details
 u8 GabbyAndTyGetBattleNum(void)
 {
-    // Saves from before parties 3 and 4 were retired must advance to a live stop.
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum == 2 || gSaveBlock1Ptr->gabbyAndTyData.battleNum == 3)
-        gSaveBlock1Ptr->gabbyAndTyData.battleNum = 4;
-    // Saves from the old endless party-6 cycle (7, 8) have already retired them.
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > GABBY_AND_TY_RETIRED)
-        gSaveBlock1Ptr->gabbyAndTyData.battleNum = GABBY_AND_TY_RETIRED;
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 5)
+        return (gSaveBlock1Ptr->gabbyAndTyData.battleNum % 3) + 6;
 
     return gSaveBlock1Ptr->gabbyAndTyData.battleNum;
 }
@@ -922,7 +909,6 @@ bool8 GabbyAndTyGetLastQuote(void)
         return FALSE;
     }
     CopyEasyChatWord(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.quote[0]);
-    CapitalizeEasyChatText(gStringVar1);
     gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
     return TRUE;
 }
@@ -953,17 +939,33 @@ void GetGabbyAndTyLocalIds(void)
         gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_1;
         gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_1;
         break;
-    case 4: // After party 2, the next-party counter skips retired parties 3/4.
+    case 2:
         gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_1;
         gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_1;
+        break;
+    case 3:
+        gSpecialVar_0x8004 = LOCALID_ROUTE120_GABBY_1;
+        gSpecialVar_0x8005 = LOCALID_ROUTE120_TY_1;
+        break;
+    case 4:
+        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_2;
+        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_2;
         break;
     case 5:
         gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_2;
         gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_2;
         break;
-    case GABBY_AND_TY_RETIRED: // Party 6 on Route 120, and the retired pair there.
+    case 6:
         gSpecialVar_0x8004 = LOCALID_ROUTE120_GABBY_2;
         gSpecialVar_0x8005 = LOCALID_ROUTE120_TY_2;
+        break;
+    case 7:
+        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_3;
+        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_3;
+        break;
+    case 8:
+        gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_3;
+        gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_3;
         break;
     }
 }
@@ -1406,16 +1408,12 @@ void TryPutSmartShopperOnAir(void)
                 show->smartshopperShow.kind = TVSHOW_SMART_SHOPPER;
                 show->smartshopperShow.active = FALSE; // NOTE: Show is not active until passed via Record Mix.
                 show->smartshopperShow.shopLocation = gMapHeader.regionMapSectionId;
-                show->smartshopperShow.priceReduced = FALSE;
                 for (i = 0; i < SMARTSHOPPER_NUM_ITEMS; i++)
                 {
                     show->smartshopperShow.itemIds[i] = gMartPurchaseHistory[i].itemId;
                     show->smartshopperShow.itemAmounts[i] = gMartPurchaseHistory[i].quantity;
-                    if ((gMartPurchaseHistory[i].itemId == ITEM_NET_BALL
-                         || gMartPurchaseHistory[i].itemId == ITEM_DIVE_BALL)
-                        && IsPokeNewsActive(POKENEWS_SLATEPORT))
-                        show->smartshopperShow.priceReduced = TRUE;
                 }
+                show->smartshopperShow.priceReduced = IsPokeNewsActive(POKENEWS_SLATEPORT);
                 StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
                 StorePlayerIdInRecordMixShow(show);
                 show->smartshopperShow.language = gGameLanguage;
@@ -2597,6 +2595,9 @@ size_t CountDigits(int value)
 {
     u32 count = 0;
 
+    if (value == 0)
+        return 1;
+
     while (value > 0)
     {
         value /= 10;
@@ -2611,17 +2612,14 @@ static void SmartShopper_BufferPurchaseTotal(u8 varIdx, TVShow *show)
     int price = 0;
     for (i = 0; i < SMARTSHOPPER_NUM_ITEMS; i++)
     {
-        u16 item = show->smartshopperShow.itemIds[i];
-        if (item != ITEM_NONE)
-        {
-            u32 itemPrice = GetItemPrice(item);
-            if (show->smartshopperShow.priceReduced
-                && (item == ITEM_NET_BALL || item == ITEM_DIVE_BALL))
-                itemPrice /= 2;
-            price += itemPrice * show->smartshopperShow.itemAmounts[i];
-        }
+        if (show->smartshopperShow.itemIds[i] != ITEM_NONE)
+            price += GetItemPrice(show->smartshopperShow.itemIds[i]) * show->smartshopperShow.itemAmounts[i];
     }
-    ConvertIntToDecimalString(varIdx, price);
+
+    if (show->smartshopperShow.priceReduced == TRUE)
+        ConvertIntToDecimalString(varIdx, price >> 1);
+    else
+        ConvertIntToDecimalString(varIdx, price);
 }
 
 static bool8 IsRecordMixShowAlreadySpawned(u8 kind, bool8 delete)
@@ -3104,37 +3102,6 @@ void ChangePokemonNickname(void)
     ChangePokemonNicknameWithCallback(ChangeBoxPokemonNickname_CB);
 }
 
-// Names a mon that was just sent to a box, for the restored Inclement
-// "Common_EventScript_NameReceivedBoxMon" flow.
-//
-// This cannot forward to ChangePokemonNickname above: that one resolves its
-// target through GetSelectedBoxMonFromPcOrParty(), which only looks in a box
-// when VAR_0x8004 == PC_MON_CHOSEN, and the calling script does not set it -
-// it relies on gSpecialVar_MonBoxId / gSpecialVar_MonBoxPos, which
-// GiveMonToPartyOrPC filled in. So address the box slot directly.
-// The donor finished with SetBoxMonNickAt(boxId, boxPos, name); that helper is
-// gone here, and SetBoxMonData(ptr, MON_DATA_NICKNAME, ...) is its equivalent.
-static void ChangeReceivedBoxMonNickname_CB(void)
-{
-    SetBoxMonData(GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos),
-                  MON_DATA_NICKNAME, gStringVar2);
-    CB2_ReturnToFieldContinueScriptPlayMapMusic();
-}
-
-void ChangeBoxPokemonNickname(void)
-{
-    struct BoxPokemon *boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
-
-    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
-    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(NAMING_SCREEN_NICKNAME,
-                   gStringVar2,
-                   GetBoxMonData(boxMon, MON_DATA_SPECIES),
-                   GetBoxMonGender(boxMon),
-                   GetBoxMonData(boxMon, MON_DATA_PERSONALITY),
-                   ChangeReceivedBoxMonNickname_CB);
-}
-
 void BufferMonNickname(void)
 {
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
@@ -3258,8 +3225,8 @@ void GetMomOrDadStringForTVMessage(void)
 
 void HideBattleTowerReporter(void)
 {
-    // The Tower lobby reporter object was removed with the retired Frontier challenge.
     VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
+    RemoveObjectEventByLocalIdAndMap(LOCALID_TOWER_LOBBY_REPORTER, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     FlagSet(FLAG_HIDE_BATTLE_TOWER_REPORTER);
 }
 
@@ -3779,6 +3746,71 @@ if (IsStringJapanese(strptr)) \
 else \
 { \
     (langptr) = langfix; \
+}
+
+static void UNUSED TranslateShowNames(TVShow *show, u32 language)
+{
+    int i;
+    TVShow **shows;
+
+    shows = AllocZeroed(sizeof(TVShow *) * 11);
+    for (i = 0; i < LAST_TVSHOW_IDX; i++)
+    {
+        switch (show[i].common.kind)
+        {
+        case TVSHOW_FAN_CLUB_LETTER:
+        case TVSHOW_RECENT_HAPPENINGS: // NOTE: These two shows are assumed to have the same struct layout
+            shows[0] = &show[i];
+            SetStrLanguage(shows[0]->fanclubLetter.playerName, shows[0]->fanclubLetter.language, language);
+            break;
+        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+            shows[1] = &show[i];
+            SetStrLanguage(shows[1]->fanclubOpinions.playerName, shows[1]->fanclubOpinions.language, language);
+            SetStrLanguage(shows[1]->fanclubOpinions.nickname, shows[1]->fanclubOpinions.pokemonNameLanguage, language);
+            break;
+        case TVSHOW_POKEMON_TODAY_CAUGHT:
+            shows[6] = &show[i];
+            SetStrLanguage(shows[6]->pokemonToday.playerName, shows[6]->pokemonToday.language, language);
+            SetStrLanguage(shows[6]->pokemonToday.nickname, shows[6]->pokemonToday.language2, language);
+            break;
+        case TVSHOW_SMART_SHOPPER:
+            shows[7] = &show[i];
+            SetStrLanguage(shows[7]->smartshopperShow.playerName, shows[7]->smartshopperShow.language, language);
+            break;
+        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+            shows[5] = &show[i];
+            SetStrLanguage(shows[5]->bravoTrainerTower.playerName, shows[5]->bravoTrainerTower.playerLanguage, language);
+            SetStrLanguage(shows[5]->bravoTrainerTower.opponentName, shows[5]->bravoTrainerTower.opponentLanguage, language);
+            break;
+        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+            shows[4] = &show[i];
+            SetStrLanguage(shows[4]->bravoTrainer.playerName, shows[4]->bravoTrainer.language, language);
+            SetStrLanguage(shows[4]->bravoTrainer.pokemonNickname, shows[4]->bravoTrainer.pokemonNameLanguage, language);
+            break;
+        case TVSHOW_NAME_RATER_SHOW:
+            shows[3] = &show[i];
+            SetStrLanguage(shows[3]->nameRaterShow.trainerName, shows[3]->nameRaterShow.language, language);
+            SetStrLanguage(shows[3]->nameRaterShow.pokemonName, shows[3]->nameRaterShow.pokemonNameLanguage, language);
+            break;
+        case TVSHOW_POKEMON_TODAY_FAILED:
+            shows[2] = &show[i];
+            SetStrLanguage(shows[2]->pokemonTodayFailed.playerName, shows[2]->pokemonTodayFailed.language, language);
+            break;
+        case TVSHOW_FISHING_ADVICE:
+            shows[8] = &show[i];
+            SetStrLanguage(shows[8]->pokemonAngler.playerName, shows[8]->pokemonAngler.language, language);
+            break;
+        case TVSHOW_WORLD_OF_MASTERS:
+            shows[9] = &show[i];
+            SetStrLanguage(shows[9]->worldOfMasters.playerName, shows[9]->worldOfMasters.language, language);
+            break;
+        case TVSHOW_MASS_OUTBREAK:
+            shows[10] = &show[i];
+            shows[10]->massOutbreak.language = language;
+            break;
+        }
+    }
+    Free(shows);
 }
 
 void SanitizeTVShowsForRuby(TVShow *shows)
@@ -4563,13 +4595,11 @@ static void DoTVShowPokemonFanClubLetter(void)
         break;
     case 50:
         ConvertEasyChatWordsToString(gStringVar4, show->fanclubLetter.words, 2, 2);
-        CapitalizeEasyChatText(gStringVar4);
         ShowFieldMessage(gStringVar4);
         sTVShowState = 1;
         return;
     case 51:
         ConvertEasyChatWordsToString(gStringVar4, show->fanclubLetter.words, 2, 2);
-        CapitalizeEasyChatText(gStringVar4);
         ShowFieldMessage(gStringVar4);
         sTVShowState = 3;
         return;
@@ -4605,7 +4635,6 @@ static void DoTVShowRecentHappenings(void)
         break;
     case 50:
         ConvertEasyChatWordsToString(gStringVar4, show->recentHappenings.words, 2, 2);
-        CapitalizeEasyChatText(gStringVar4);
         ShowFieldMessage(gStringVar4);
         sTVShowState = 1;
         return;
@@ -4635,13 +4664,11 @@ static void DoTVShowPokemonFanClubOpinions(void)
         TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
         StringCopy(gStringVar2, GetSpeciesName(show->fanclubOpinions.species));
         CopyEasyChatWord(gStringVar3, show->fanclubOpinions.words[0]);
-        CapitalizeEasyChatText(gStringVar3);
         sTVShowState = 4;
         break;
     case 4:
         TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
         CopyEasyChatWord(gStringVar3, show->fanclubOpinions.words[1]);
-        CapitalizeEasyChatText(gStringVar3);
         TVShowDone();
         break;
     }
@@ -5179,7 +5206,6 @@ void DoTVShowInSearchOfTrainers(void)
         break;
     case 8:
         CopyEasyChatWord(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.quote[0]);
-        CapitalizeEasyChatText(gStringVar1);
         StringCopy(gStringVar2, GetSpeciesName(gSaveBlock1Ptr->gabbyAndTyData.mon1));
         StringCopy(gStringVar3, GetSpeciesName(gSaveBlock1Ptr->gabbyAndTyData.mon2));
         gSpecialVar_Result = TRUE;
@@ -5808,7 +5834,6 @@ static void DoTVShowTrainerFanClubSpecial(void)
         TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
         TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
         CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
-        CapitalizeEasyChatText(gStringVar3);
         if (show->fanClubSpecial.score >= 90)
             sTVShowState = 1;
         else if (show->fanClubSpecial.score >= 70)
@@ -5846,7 +5871,6 @@ static void DoTVShowTrainerFanClubSpecial(void)
         TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
         TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
         CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
-        CapitalizeEasyChatText(gStringVar3);
         TVShowDone();
         break;
     }

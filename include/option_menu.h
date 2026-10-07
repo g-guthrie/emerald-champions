@@ -2,6 +2,5 @@
 #define GUARD_OPTION_MENU_H
 
 void CB2_InitOptionMenu(void);
-void ChooseNewGameDifficulty(void (*cancelCallback)(void));
 
 #endif // GUARD_OPTION_MENU_H

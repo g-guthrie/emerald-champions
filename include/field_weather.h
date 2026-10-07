@@ -230,8 +230,6 @@ bool8 Bubbles_Finish(void);
 u8 GetSavedWeather(void);
 void SetSavedWeather(enum OverworldWeather weather);
 void SetSavedWeatherFromCurrMapHeader(void);
-void InitWeatherAnomalyBaseFromSavedGame(void);
-void UpdateWeatherAnomalyWeather(void);
 void SetWeather(enum OverworldWeather weather);
 void DoCurrentWeather(void);
 void UpdateWeatherPerDay(u16 increment);

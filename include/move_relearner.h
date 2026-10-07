@@ -7,15 +7,8 @@ void TeachMoveRelearnerMove(void);
 void MoveRelearnerShowHideHearts(s32 move);
 void MoveRelearnerShowHideCategoryIcon(s32);
 void CB2_InitLearnMove(void);
-void CB2_InitLearnMoveFromPartyMenu(void);
-bool32 CanPartyMonGoStraightToRelearner(u32 partyIndex);
-void Special_HasMoveToRelearn(void);
 bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
 bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
-u32 GetMovesToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state, u16 *moves);
-// By move name, as the tutor lists them (also the Pokedex's moves page).
-void SortMovesAlphabetically(u16 *moves, u32 numMoves);
-bool32 MoveMatchesTutorFilters(enum Move move, u32 typeFilter, u32 categoryFilter);
 
 extern enum MoveRelearnerStates gMoveRelearnerState;
 extern enum RelearnMode gRelearnMode;

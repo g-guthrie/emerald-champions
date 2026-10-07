@@ -23,6 +23,7 @@
 #include "gpu_regs.h"
 #include "constants/game_stat.h"
 #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "constants/rgb.h"
 
 static void Task_CloseTrainerHillRecordsOnButton(u8 taskId);
@@ -436,6 +437,17 @@ static void ClearTasksAndGraphicalStructs(void)
     FreeAllSpritePalettes();
 }
 
+static void ResetBgCoordinates(void)
+{
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
+}
 
 static void SetDispcntReg(void)
 {
@@ -488,7 +500,7 @@ static void CB2_ShowTrainerHillRecords(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
         SetBgTilemapBuffer(3, sTilemapBuffer);
-        ResetAllBgsCoordinates();
+        ResetBgCoordinates();
         gMain.state++;
         break;
     case 3:
@@ -517,7 +529,9 @@ static void CB2_ShowTrainerHillRecords(void)
     case 7:
         SetDispcntReg();
         SetVBlankCallback(VblankCB_TrainerHillRecords);
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_0x8004)
+            PrintTrainerTowerRecords();
+        else
             PrintOnTrainerHillRecordsWindow();
         CreateTask(Task_TrainerHillWaitForPaletteFade, 8);
         SetMainCallback2(MainCB2_TrainerHillRecords);

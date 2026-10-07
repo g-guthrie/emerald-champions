@@ -1,37 +1,46 @@
-MauvilleCity_House1_MapScripts:: @ 820F975
+MauvilleCity_House1_MapScripts::
 	.byte 0
 
-MauvilleCity_House1_EventScript_RockSmashDude:: @ 820F976
+MauvilleCity_House1_EventScript_RockSmashDude::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_HM06, MauvilleCity_House1_EventScript_ReceivedRockSmash
+	goto_if_set FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_House1_EventScript_ReceivedRockSmash
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_HM06
+	giveitem ITEM_HM_ROCK_SMASH
+	setflag FLAG_RECEIVED_HM_ROCK_SMASH
+	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_House1_EventScript_ReceivedRockSmash:: @ 820F9A5
+MauvilleCity_House1_EventScript_ReceivedRockSmash::
 	msgbox MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock, MSGBOX_DEFAULT
 	release
 	end
 
-MauvilleCity_House1_Text_ImRockSmashDudeTakeThis: @ 820F9AF
-	.string "Woohoo! Call me the Rock Smash\n"
-	.string "Dude!\p"
-	.string "Your team looks strong. I\n"
-	.string "authorize you to use Rock Smash!$"
+MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
+	.string "Woohoo!\p"
+	.string "I hear people call me the ROCK SMASH\n"
+	.string "GUY, but I find that sort of degrading.\p"
+	.string "I think I deserve a bit more respect,\n"
+	.string "like maybe the ROCK SMASH DUDE.\p"
+	.string "Woohoo!\p"
+	.string "Anyways, your POKéMON look pretty\n"
+	.string "strong.\p"
+	.string "I like that!\n"
+	.string "Here, take this HIDDEN MACHINE!$"
 
-MauvilleCity_House1_Text_ExplainRockSmash: @ 820FAA9
-	.string "Earn the Dynamo Badge, then\n"
-	.string "press A by a cracked rock\l"
-	.string "to smash it. Woohoo!\p"
-	.string "Bring a Pokémon able to learn\n"
-	.string "Rock Smash. No move slot needed!$"
-
-MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
-	.string "Oh, yes, if you smash a rock, a Pokémon\n"
-	.string "could come flying out of hiding.\p"
-	.string "A cracked rock could be hiding\n"
-	.string "a rare Pokémon.\p"
+MauvilleCity_House1_Text_ExplainRockSmash:
+	.string "That HM contains ROCK SMASH.\p"
+	.string "If you come across large boulders\n"
+	.string "that block your path…\p"
+	.string "Well, use that HM move and smash\n"
+	.string "them right out of your way!\p"
+	.string "Yes, sir! Smash rocks aside, I say!\n"
 	.string "Woohoo!$"
+
+MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock:
+	.string "Oh, yes, if you smash a rock, a POKéMON\n"
+	.string "could come flying out of hiding.\p"
+	.string "Woohoo!$"
+

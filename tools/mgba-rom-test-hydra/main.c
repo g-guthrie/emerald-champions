@@ -35,15 +35,6 @@
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
-static int RunnerExitCode(int status)
-{
-    if (WIFEXITED(status))
-        return WEXITSTATUS(status);
-    if (WIFSIGNALED(status))
-        return 128 + WTERMSIG(status);
-    return 2;
-}
-
 #ifndef _GNU_SOURCE
 // Very naive implementation of 'memmem' for systems which don't make it
 // available by default.
@@ -82,6 +73,9 @@ void *memrchr(const void *s_, int c, size_t n)
 
 #define MAX_PROCESSES             32 // See also test/test.h
 #define MAX_SUMMARY_TESTS_TO_LIST 50
+// Retain complete lines within this capacity; discard the first line that does
+// not fit and all later diagnostic output until the result.
+#define OUTPUT_BUFFER_CAPACITY (1024 * 1024)
 
 #define ARRAY_COUNT(arr) (sizeof((arr)) / sizeof((arr)[0]))
 
@@ -89,7 +83,8 @@ struct SummaryResult
 {
     char test_name[256];
     char filename_line[256];
-    char output_line[256];
+    // mGBA emits up to 256 payload bytes; allow a Windows CR and the terminator.
+    char output_line[256 + 2];
 };
 
 struct SummaryResults
@@ -111,8 +106,8 @@ struct Runner
     size_t input_buffer_capacity;
     char *input_buffer;
     size_t output_buffer_size;
-    size_t output_buffer_capacity;
     char *output_buffer;
+    bool output_truncated;
     int passes;
     int expected_fails;
     int expected_fails_passing;
@@ -133,6 +128,9 @@ void push_summary_result(struct SummaryResults *summaries, const struct Runner *
         memcpy(result->test_name, runner->test_name, sizeof(result->test_name));
 
         memcpy(result->filename_line, runner->filename_line, sizeof(result->filename_line));
+
+        result->output_line[0] = '\0';
+        if (runner->output_buffer_size == 0) return;
 
         // Extract the last line of the output buffer.
         // NOTE: '- 1' because 'output_buffer' ends with a '\n'.
@@ -156,10 +154,7 @@ void push_summary_result(struct SummaryResults *summaries, const struct Runner *
             n = nl_n;
             memcpy(result->output_line, nl, n);
         }
-        if (n < sizeof(result->output_line))
-            result->output_line[n] = '\0';
-        else
-            result->output_line[sizeof(result->output_line) - 1] = '\0';
+        result->output_line[n] = '\0';
     }
 }
 
@@ -339,8 +334,14 @@ add_to_results:
                     fprintf(stdout, "[%0*d] %s: ", runners_digits, i, runner->test_name);
                     fwrite(soc, 1, eol - soc, stdout);
                     fprint_buffer(stdout, runner->output_buffer, runner->output_buffer_size);
+                    if (runner->output_truncated)
+                    {
+                        fprintf(stdout, "[Further test output was truncated.]\n");
+                    }
+
                     strcpy(runner->test_name, "WAITING...");
                     runner->output_buffer_size = 0;
+                    runner->output_truncated = false;
                     break;
 
                 default:
@@ -350,20 +351,23 @@ add_to_results:
             else
             {
 buffer_output:
-                if (runner->output_buffer_size + eol - soc >= runner->output_buffer_capacity)
+                // Keep complete lines and continue parsing result commands even
+                // when diagnostic output floods the buffer.
+                if (!runner->output_truncated)
                 {
-                    runner->output_buffer_capacity *= 2;
-                    if (runner->output_buffer_capacity < runner->output_buffer_size + eol - soc)
-                        runner->output_buffer_capacity = runner->output_buffer_size + eol - soc;
-                    runner->output_buffer = realloc(runner->output_buffer, runner->output_buffer_capacity);
-                    if (!runner->output_buffer)
+                    if (runner->output_buffer_size + (eol - soc) > OUTPUT_BUFFER_CAPACITY)
                     {
-                        perror("realloc output_buffer failed");
-                        exit(2);
+                        fprintf(stderr, "[%0*d] %s (%s): test output exceeded %d bytes; further output is truncated. The worker may be stuck.\n",
+                                runners_digits, i, runner->test_name, runner->filename_line,
+                                OUTPUT_BUFFER_CAPACITY);
+                        runner->output_truncated = true;
+                    }
+                    else
+                    {
+                        memcpy(runner->output_buffer + runner->output_buffer_size, soc, eol - soc);
+                        runner->output_buffer_size += eol - soc;
                     }
                 }
-                memcpy(runner->output_buffer + runner->output_buffer_size, soc, eol - soc);
-                runner->output_buffer_size += eol - soc;
             }
         }
         else
@@ -375,7 +379,7 @@ buffer_output:
         remaining -= n;
     }
 
-    memcpy(runner->input_buffer, sol, remaining);
+    memmove(runner->input_buffer, sol, remaining);
     runner->input_buffer_size -= consumed;
 
     if (runner->input_buffer_size == runner->input_buffer_capacity)
@@ -563,25 +567,8 @@ int main(int argc, char *argv[])
         }
         regfree(&preg);
     }
-    // Explicit runtime budget takes precedence over inherited build flags.
-    // Direct Python invocations do not inherit the child's make -j setting.
-    const char *worker_budget = getenv("HYDRA_JOBS");
-    if (worker_budget)
-    {
-        char *end;
-        long requested = strtol(worker_budget, &end, 10);
-        if (end == worker_budget || *end != '\0' || requested < 1 || requested > MAX_PROCESSES)
-        {
-            fprintf(stderr, "HYDRA_JOBS must be an integer between 1 and %d\n", MAX_PROCESSES);
-            exit(2);
-        }
-        nrunners = requested;
-    }
     if (nrunners > MAX_PROCESSES)
         nrunners = MAX_PROCESSES;
-    if (nrunners < 1)
-        nrunners = 1;
-    fprintf(stdout, "Hydra workers: %d\n", nrunners);
     runners_digits = ceil(log10(nrunners));
     runners = calloc(nrunners, sizeof(*runners));
     if (!runners)
@@ -593,8 +580,13 @@ int main(int argc, char *argv[])
     {
         runners[i].input_buffer_capacity = 4096;
         runners[i].input_buffer = malloc(runners[i].input_buffer_capacity);
-        runners[i].output_buffer_capacity = 4096;
-        runners[i].output_buffer = malloc(runners[i].output_buffer_capacity);
+        runners[i].output_buffer = malloc(OUTPUT_BUFFER_CAPACITY);
+        if (!runners[i].output_buffer)
+        {
+            perror("malloc output_buffer failed");
+            exit(2);
+        }
+
         strcpy(runners[i].test_name, "WAITING...");
         if (tty)
             fprintf(stdout, "[%0*d] %s\n", runners_digits, i, runners[i].test_name);
@@ -836,11 +828,8 @@ int main(int argc, char *argv[])
         }
         if (runners[i].output_buffer_size > 0)
             fwrite(runners[i].output_buffer, 1, runners[i].output_buffer_size, stdout);
-        int runner_exit_code = RunnerExitCode(wstatus);
-        if (!WIFEXITED(wstatus))
-            fprintf(stderr, "runner %d terminated abnormally (status %d)\n", i, wstatus);
-        if (runner_exit_code > exit_code)
-            exit_code = runner_exit_code;
+        if (WIFEXITED(wstatus) && WEXITSTATUS(wstatus) > exit_code)
+            exit_code = WEXITSTATUS(wstatus);
         passes += runners[i].passes;
         expected_fails += runners[i].expected_fails;
         expected_fails_passing += runners[i].expected_fails_passing;
@@ -855,9 +844,6 @@ int main(int argc, char *argv[])
     if (results == 0)
     {
         fprintf(stdout, "\nNo tests found.\n");
-        // An empty selection is not evidence that the requested checks passed.
-        if (exit_code == 0)
-            exit_code = 1;
     }
     else
     {

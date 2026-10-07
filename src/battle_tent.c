@@ -70,13 +70,7 @@ void static (*const sVerdanturfTentFuncs[])(void) =
     [VERDANTURF_TENT_FUNC_GIVE_PRIZE]         = GiveVerdanturfTentPrize
 };
 
-// Battle Tent prizes: every clear pays out something that unlocks a species
-// or form, never a disposable medicine or a held item the Pokémon Center
-// already gives away for free.
-static const u16 sVerdanturfTentRewards[] = {
-    ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE, ITEM_LEAF_STONE, ITEM_MOON_STONE,
-    ITEM_SUN_STONE, ITEM_SHINY_STONE, ITEM_DUSK_STONE, ITEM_DAWN_STONE, ITEM_ICE_STONE,
-};
+static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
 void static (*const sFallarborTentFuncs[])(void) =
 {
@@ -89,10 +83,7 @@ void static (*const sFallarborTentFuncs[])(void) =
     [FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME] = BufferFallarborTentTrainerName
 };
 
-static const u16 sFallarborTentRewards[] = {
-    ITEM_MAX_ETHER, ITEM_LEVEL_BALL, ITEM_LURE_BALL, ITEM_MOON_BALL, ITEM_FRIEND_BALL,
-    ITEM_LOVE_BALL, ITEM_HEAVY_BALL, ITEM_FAST_BALL, ITEM_DREAM_BALL, ITEM_BEAST_BALL,
-};
+static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
 void static (*const sSlateportTentFuncs[])(void) =
 {
@@ -108,29 +99,7 @@ void static (*const sSlateportTentFuncs[])(void) =
     [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
 
-static const u16 sSlateportTentRewards[] = {
-    ITEM_KINGS_ROCK, ITEM_METAL_COAT, ITEM_DRAGON_SCALE, ITEM_UPGRADE, ITEM_DUBIOUS_DISC,
-    ITEM_PROTECTOR, ITEM_ELECTIRIZER, ITEM_MAGMARIZER, ITEM_REAPER_CLOTH, ITEM_RAZOR_CLAW,
-    ITEM_RAZOR_FANG, ITEM_PRISM_SCALE, ITEM_OVAL_STONE, ITEM_DEEP_SEA_TOOTH, ITEM_DEEP_SEA_SCALE,
-    ITEM_LINKING_CORD,
-};
-
-// Before Wattson, clears pay held gear rather than trade-evolution items.
-static const u16 sSlateportTentEarlyRewards[] = {
-    ITEM_CHARCOAL, ITEM_MYSTIC_WATER, ITEM_MIRACLE_SEED, ITEM_MAGNET,
-    ITEM_SOFT_SAND, ITEM_HARD_STONE,
-};
-
-static const u16 *GetSlateportTentRewards(u32 *count)
-{
-    if (FlagGet(FLAG_BADGE03_GET))
-    {
-        *count = ARRAY_COUNT(sSlateportTentRewards);
-        return sSlateportTentRewards;
-    }
-    *count = ARRAY_COUNT(sSlateportTentEarlyRewards);
-    return sSlateportTentEarlyRewards;
-}
+static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 
 // code
 void CallVerdanturfTentFunction(void)
@@ -286,9 +255,7 @@ static void SaveSlateportTentChallenge(void)
 
 static void SetRandomSlateportTentPrize(void)
 {
-    u32 count;
-    const u16 *rewards = GetSlateportTentRewards(&count);
-    gSaveBlock2Ptr->frontier.slateportTentPrize = rewards[Random() % count];
+    gSaveBlock2Ptr->frontier.slateportTentPrize = sSlateportTentRewards[Random() % ARRAY_COUNT(sSlateportTentRewards)];
 }
 
 static void GiveSlateportTentPrize(void)
@@ -458,57 +425,5 @@ static void GenerateOpponentMons(void)
         heldItems[i] = gFacilityTrainerMons[sRandMonId].heldItem;
         gFrontierTempParty[i] = sRandMonId;
         i++;
-    }
-}
-
-// Local exhibitions retain the three original pending-prize fields.
-static u16 *GetChampionsTentPrizeField(u8 tent)
-{
-    if (tent == 0)
-        return &gSaveBlock2Ptr->frontier.slateportTentPrize;
-    if (tent == 1)
-        return &gSaveBlock2Ptr->frontier.verdanturfTentPrize;
-    return &gSaveBlock2Ptr->frontier.fallarborTentPrize;
-}
-
-void SetChampionsTentPrize(u8 tent)
-{
-    const u16 *rewards;
-    u32 count;
-
-    if (*GetChampionsTentPrizeField(tent) != ITEM_NONE)
-        return;
-    if (tent == 0)
-    {
-        rewards = GetSlateportTentRewards(&count);
-    }
-    else if (tent == 1)
-    {
-        rewards = sVerdanturfTentRewards;
-        count = ARRAY_COUNT(sVerdanturfTentRewards);
-    }
-    else
-    {
-        rewards = sFallarborTentRewards;
-        count = ARRAY_COUNT(sFallarborTentRewards);
-    }
-    *GetChampionsTentPrizeField(tent) = rewards[RandomUniform(RNG_NONE, 0, count - 1)];
-}
-
-void ChampionsTentTryGivePrize(void)
-{
-    u16 *prize = GetChampionsTentPrizeField(gSpecialVar_0x8004);
-    gSpecialVar_Result = 0;
-    if (*prize == ITEM_NONE)
-        return;
-    CopyItemName(*prize, gStringVar1);
-    if (AddBagItem(*prize, 1))
-    {
-        *prize = ITEM_NONE;
-        gSpecialVar_Result = 1;
-    }
-    else
-    {
-        gSpecialVar_Result = 2;
     }
 }

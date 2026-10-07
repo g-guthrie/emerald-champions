@@ -1,87 +1,69 @@
-MtPyre_6F_MapScripts:: @ 8231D3A
+MtPyre_6F_MapScripts::
 	.byte 0
 
-MtPyre_6F_EventScript_Valerie:: @ 8231D3B
-	msgbox MtPyre_6F_Text_ValeriePostBattle, MSGBOX_AUTOCLOSE
+MtPyre_6F_EventScript_Valerie::
+	trainerbattle_single TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieIntro, MtPyre_6F_Text_ValerieDefeat, MtPyre_6F_EventScript_RegisterValerie
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq VAR_RESULT, TRUE, MtPyre_6F_EventScript_RematchValerie
+	msgbox MtPyre_6F_Text_ValeriePostBattle, MSGBOX_DEFAULT
+	release
 	end
 
-MtPyre_6F_Text_ValeriePostBattle: @ 8231DFC
+MtPyre_6F_EventScript_RegisterValerie::
+	special PlayerFaceTrainerAfterBattle
+	waitmovement 0
+	msgbox MtPyre_6F_Text_ValerieRegister, MSGBOX_DEFAULT
+	register_matchcall TRAINER_VALERIE_1
+	release
+	end
+
+MtPyre_6F_EventScript_RematchValerie::
+	trainerbattle_rematch TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieRematchIntro, MtPyre_6F_Text_ValerieRematchDefeat
+	msgbox MtPyre_6F_Text_ValeriePostRematch, MSGBOX_AUTOCLOSE
+	end
+
+MtPyre_6F_EventScript_Cedric::
+	trainerbattle_single TRAINER_CEDRIC, MtPyre_6F_Text_CedricIntro, MtPyre_6F_Text_CedricDefeat
+	msgbox MtPyre_6F_Text_CedricPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MtPyre_6F_Text_ValerieIntro:
+	.string "When I'm here…\n"
+	.string "A curious power flows into me…$"
+
+MtPyre_6F_Text_ValerieDefeat:
+	.string "The power is ebbing away…$"
+
+MtPyre_6F_Text_ValeriePostBattle:
 	.string "Perhaps the power is from the spirits\n"
-	.string "of Pokémon in fitful sleep here…$"
+	.string "of POKéMON in fitful sleep here…$"
 
-MtPyre_6F_EventScript_Pecharunt::
-	lockall
-	setvar VAR_0x8004, LEGENDARY_SIGN_PECHARUNT
-	special GetSelectedLegendarySignState
-	goto_if_eq VAR_RESULT, 4, MtPyre_6F_EventScript_PecharuntGone
-	goto_if_eq VAR_RESULT, 3, Common_EventScript_LegendaryRestingAtShrine
-	goto_if_eq VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntQuiet
-	setvar VAR_0x8004, LEGENDARY_SIGN_OKIDOGI
-	special GetSelectedLegendarySignState
-	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
-	setvar VAR_0x8004, LEGENDARY_SIGN_MUNKIDORI
-	special GetSelectedLegendarySignState
-	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
-	setvar VAR_0x8004, LEGENDARY_SIGN_FEZANDIPITI
-	special GetSelectedLegendarySignState
-	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
-	setvar VAR_0x8004, LEGENDARY_SIGN_PECHARUNT
-	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, MtPyre_6F_EventScript_PecharuntGone
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
-	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntDormant
-	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntDormant
-	special CreateSelectedLegendarySignEncounter
-	goto_if_eq VAR_RESULT, FALSE, MtPyre_6F_EventScript_PecharuntDormant
-	msgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
-	playmoncry SPECIES_PECHARUNT, CRY_MODE_ENCOUNTER
-	waitmoncry
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special BattleSetup_StartLegendaryBattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	special FinishLegendaryLandmarkEncounter
-	specialvar VAR_RESULT, GetBattleOutcome
-	@ A knockout loses it for good (its shrine flag marks the loss); capture
-	@ resolves it; any other ending rests it until the player comes back.
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtPyre_6F_EventScript_DefeatedPecharunt
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
-	releaseall
-	end
+MtPyre_6F_Text_ValerieRegister:
+	.string "Fufufu… I lost the match, but…\n"
+	.string "I have this little ability…\p"
+	.string "Without ever laying my hands on\n"
+	.string "your POKéNAV… Hiyah!$"
 
-MtPyre_6F_EventScript_DefeatedPecharunt::
-	setflag FLAG_EC_CAUGHT_PECHARUNT
-	setvar VAR_0x8004, SPECIES_PECHARUNT
-	goto Common_EventScript_LegendaryGoneAtShrine
+MtPyre_6F_Text_ValerieRematchIntro:
+	.string "Behind you…\n"
+	.string "What is it…$"
 
-MtPyre_6F_EventScript_PecharuntGone::
-	msgbox MtPyre_6F_Text_PecharuntGone, MSGBOX_DEFAULT
-	releaseall
-	end
+MtPyre_6F_Text_ValerieRematchDefeat:
+	.string "Something faded away…$"
 
-MtPyre_6F_EventScript_PecharuntDormant::
-	msgbox MtPyre_6F_Text_PecharuntDormant, MSGBOX_DEFAULT
-	releaseall
-	end
+MtPyre_6F_Text_ValeriePostRematch:
+	.string "The POKéMON at rest here…\n"
+	.string "Sometimes, they play…$"
 
-MtPyre_6F_EventScript_PecharuntQuiet::
-	msgbox MtPyre_6F_Text_PecharuntQuiet, MSGBOX_DEFAULT
-	releaseall
-	end
+MtPyre_6F_Text_CedricIntro:
+	.string "Have you lost your bearings?\n"
+	.string "Have no fear for I am here!$"
 
-MtPyre_6F_Text_PecharuntDormant:
-	.string "Three masks adorn the tombstone.\p"
-	.string "Earn the Mind Badge and catch\n"
-	.string "Okidogi, Munkidori and Fezandipiti\l"
-	.string "to awaken Pecharunt here.$"
+MtPyre_6F_Text_CedricDefeat:
+	.string "Weren't you lost?$"
 
-MtPyre_6F_Text_PecharuntAwakens:
-	.string "The three masks flare!\n"
-	.string "Pecharunt emerges from the mist!$"
+MtPyre_6F_Text_CedricPostBattle:
+	.string "I had this feeling that a lost TRAINER\n"
+	.string "would be panicked and easy to beat.\p"
+	.string "It's dirty and I won't try it again…$"
 
-MtPyre_6F_Text_PecharuntGone:
-	.string "The three masks are cracked.\n"
-	.string "Pecharunt vanished and won't return.$"
-
-MtPyre_6F_Text_PecharuntQuiet:
-	.string "The tombstone is still.\n"
-	.string "The three masks have faded.$"

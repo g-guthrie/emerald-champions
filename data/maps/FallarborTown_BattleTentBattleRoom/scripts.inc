@@ -29,13 +29,8 @@ FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
 	return
 
 FallarborTown_BattleTentBattleRoom_OnFrame:
-	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentBattleRoom_EventScript_ReturnToLobby
+	map_script_2 VAR_TEMP_0, 0, FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom
 	.2byte 0
-
-FallarborTown_BattleTentBattleRoom_EventScript_ReturnToLobby::
-	lockall
-	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY, 6, 6
-	waitstate
 
 FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	lockall
@@ -200,6 +195,10 @@ FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter:
 	step_end
 
 @ Unused
+FallarborTown_BattleTentBattleRoom_Movement_OpponentStepForward:
+	walk_left
+	step_end
+
 FallarborTown_BattleTentBattleRoom_Movement_OpponentExit:
 	walk_up
 	walk_up
@@ -236,3 +235,4 @@ FallarborTown_BattleTentBattleRoom_EventScript_SetUpObjects::
 	removeobject LOCALID_FALLARBOR_TENT_BATTLE_OPPONENT
 	setvar VAR_TEMP_1, 1
 	end
+

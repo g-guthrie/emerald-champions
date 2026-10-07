@@ -1,10 +1,8 @@
 EventScript_FieldPoison::
 	lockall
 	special TryFieldPoisonWhiteOut
-	compare VAR_RESULT, FLDPSN_WHITEOUT
-	goto_if_eq EventScript_FieldWhiteOut
-	compare VAR_RESULT, FLDPSN_FRONTIER_WHITEOUT
-	goto_if_eq EventScript_FrontierFieldWhiteOut
+	goto_if_eq VAR_RESULT, FLDPSN_WHITEOUT, EventScript_FieldWhiteOut
+	goto_if_eq VAR_RESULT, FLDPSN_FRONTIER_WHITEOUT, EventScript_FrontierFieldWhiteOut
 	releaseall
 	end
 
@@ -27,16 +25,12 @@ EventScript_FrontierFieldWhiteOut::
 	waitmessage
 	waitbuttonpress
 	pike_inchallenge
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattlePike_EventScript_Retire
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePike_EventScript_Retire
 	pyramid_getlocation
-	compare VAR_RESULT, 1  @ On Pyramid floor
-	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	compare VAR_RESULT, 2  @ On Pyramid peak
-	goto_if_eq BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_TOP, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 	trainerhill_inchallenge
-	compare VAR_RESULT, TRUE
-	goto_if_eq TrainerHill_1F_EventScript_Lost
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_1F_EventScript_Lost
 	special Script_FadeOutMapMusic
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut

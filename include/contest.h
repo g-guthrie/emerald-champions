@@ -280,6 +280,11 @@ struct ContestTV
     bool8 madeExcitingAppeal:1;
 };
 
+struct ContestUnused
+{
+    u8 filler[12];
+};
+
 struct ContestResources
 {
     struct Contest *contest;
@@ -290,6 +295,7 @@ struct ContestResources
     struct ContestGraphicsState *gfxState;
     struct ContestMoveAnimData *moveAnim;
     struct ContestTV *tv;
+    struct ContestUnused *unused;
     u8 *contestBgTilemaps[CONTESTANT_COUNT];
     void *boxBlinkTiles1;
     void *boxBlinkTiles2;
@@ -325,6 +331,7 @@ extern const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUN
 #define eContestGfxState (gContestResources->gfxState)
 #define eUnzippedContestAudience_Gfx (gHeap + 0x18000)
 #define eContestAudienceFrame2_Gfx (gHeap + 0x19000)
+#define eContestDebugMode (gHeap[0x1a000])
 #define eContestTempSave (*(struct ContestTempSave *)(gHeap + 0x1a004))
 
 extern struct ContestPokemon gContestMons[CONTESTANT_COUNT];

@@ -1,12 +1,7 @@
 #ifndef GUARD_SCRIPT_POKEMON_UTIL_H
 #define GUARD_SCRIPT_POKEMON_UTIL_H
 
-struct ScriptContext;
-
-struct ScriptContext;
-
 u32 ScriptGiveMon(enum Species species, u8 level, enum Item item);
-void GiveBirchCosmogPair(struct ScriptContext *ctx);
 u8 ScriptGiveEgg(enum Species species);
 void CreateScriptedWildMon(enum Species species, u8 level, enum Item item);
 void CreateScriptedDoubleWildMon(enum Species species, u8 level, enum Item item, enum Species species2, u8 level2, enum Item item2);
@@ -18,5 +13,6 @@ void Script_GetChosenMonDefensiveEVs(void);
 void Script_GetChosenMonOffensiveIVs(void);
 void Script_GetChosenMonDefensiveIVs(void);
 u32 ScriptGiveMonParameterized(u8 side, u8 slot, struct PokemonTemplate *monTemplate);
+u8 HasEnoughMonsForDoubleBattle2(void);
 
 #endif // GUARD_SCRIPT_POKEMON_UTIL_H

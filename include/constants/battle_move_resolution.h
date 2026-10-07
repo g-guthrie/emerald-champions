@@ -104,7 +104,6 @@ enum FaintBlockStates
 {
     FAINT_BLOCK_FINAL_GAMBIT,
     FAINT_BLOCK_CHECK_TARGET_FAINTED, // Exits if target is not fainted
-    FAINT_BLOCK_MULTIHIT_STRINGS, // A multi-strike move reports its hits before the knockout
     FAINT_BLOCK_VICTORY_CATCH,
     FAINT_BLOCK_END_NEUTRALIZING_GAS,
     FAINT_BLOCK_DO_GRUDGE,
@@ -152,8 +151,6 @@ enum MoveEndState
     MOVEEND_MULTIHIT_MOVE,
     MOVEEND_DEFROST,
     MOVEEND_MOVE_BLOCK_RECOIL, // Recoil effects should still happen even if Sheer Force applies
-    MOVEEND_CHAMPIONS_SHEER_FORCE_ABILITIES,
-    MOVEEND_CHAMPIONS_SHEER_FORCE_PICKPOCKET,
     MOVEEND_SHEER_FORCE, // If move is Sheer Force affected, jump to effects that are not suppressed
     MOVEEND_MOVE_BLOCK,
     MOVEEND_ITEM_EFFECTS_ATTACKER_2,

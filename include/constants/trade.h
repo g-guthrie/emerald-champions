@@ -7,12 +7,10 @@
 // In-game Trade IDs
 enum InGameTradeID
 {
-    // Inclement Emerald's four traders, re-skinned onto species with no other
-    // source; each keeps its donor's OT, otId, conditions and personality.
-    INGAME_TRADE_FIDOUGH,    // Rustboro, Kobe
-    INGAME_TRADE_BOMBIRDIER, // Dewford Hall, Roman
-    INGAME_TRADE_CYCLIZAR,   // Verdanturf, Skylar
-    INGAME_TRADE_TYPE_NULL,  // Fortree, Isis
+    INGAME_TRADE_SEEDOT,
+    INGAME_TRADE_PLUSLE,
+    INGAME_TRADE_HORSEA,
+    INGAME_TRADE_MEOWTH,
     // FRLG
     INGAME_TRADE_MR_MIME,
     INGAME_TRADE_JYNX,
@@ -40,7 +38,6 @@ enum CanTradeMon
 #define PLAYER_MON_INVALID   0
 #define BOTH_MONS_VALID      1
 #define PARTNER_MON_INVALID  2
-#define TRADE_RESTRICTED_PARTY 3
 
 // Return values for GetGameProgressForLinkTrade
 #define TRADE_BOTH_PLAYERS_READY      0

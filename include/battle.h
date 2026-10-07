@@ -22,6 +22,7 @@
 #include "main.h"
 #include "battle_debug.h"
 #include "battle_dynamax.h"
+#include "battle_terastal.h"
 #include "battle_gimmick.h"
 #include "config_changes.h"
 #include "item.h"
@@ -134,6 +135,7 @@ struct SpecialStatus
     // End of byte
     u8 parentalBondState:2;
     u8 multiHitOn:1;
+    u8 teraShellAbilityDone:1;
     u8 backUpTarget:3;
     u8 padding1:1;
     // End of byte
@@ -178,7 +180,6 @@ struct FieldTimer
     u8 wonderRoomTimer;
     u8 magicRoomTimer;
     u8 trickRoomTimer;
-    u8 trickRoomSetter; // 1 + side of the battler whose Trick Room is up; 0 unknown (a starting room)
     u8 terrain;
     u8 terrainTimer;
     u8 gravityTimer;
@@ -208,8 +209,7 @@ struct AiPartyMon
     u8 gender:2;
     u8 isFainted:1;
     u8 wasSentInBattle:1;
-    u8 seenWithoutItem:1; // Publicly lost its item, or a Poltergeist found none.
-    u8 padding:3;
+    u8 padding:4;
 };
 
 struct AiPartyData // Opposing battlers - party mons.
@@ -218,35 +218,17 @@ struct AiPartyData // Opposing battlers - party mons.
     u8 count[MAX_BATTLE_TRAINERS];
 };
 
-#define AI_ITEM_CONSUMED_MINIMUM (1u << 0)
-#define AI_ITEM_CONSUMED_MEDIAN  (1u << 1)
-#define AI_ITEM_CONSUMED_MAXIMUM (1u << 2)
-
 struct SimulatedDamage
 {
     u16 minimum;
     u16 median;
     u16 maximum;
     u16 random;
-    u8 consumedItem; // AI_ITEM_CONSUMED_* bits for the corresponding damage roll.
-    bool8 affectsTarget; // Conditional on hitting; includes Substitute/Disguise and zero-HP-loss hits.
-};
-
-#define AI_POPULATION_BOMB_STRIKES 10
-struct AiPopulationBombDamage
-{
-    u16 strike[3][AI_POPULATION_BOMB_STRIKES]; // Existing native low/median/high calculations.
-    u8 count[3];
-    u8 minimumStrikes;
-    bool8 repeatedAccuracy;
-    bool8 valid;
 };
 
 // Ai Data used when deciding which move to use, computed only once before each turn's start.
 struct AiLogicData
 {
-    u32 decisionStartFrame; // Native setup and optional pair comparisons share one budget.
-    u32 decisionSetupFrames;
     enum Ability abilities[MAX_BATTLERS_COUNT];
     enum Item items[MAX_BATTLERS_COUNT];
     enum HoldEffect holdEffects[MAX_BATTLERS_COUNT];
@@ -255,7 +237,6 @@ struct AiLogicData
     enum Move partnerMove;
     u16 speedStats[MAX_BATTLERS_COUNT]; // Speed stats for all battles, calculated only once, same way as damages
     struct SimulatedDamage simulatedDmg[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
-    struct AiPopulationBombDamage populationBomb[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     uq4_12_t effectiveness[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveAccuracy[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveLimitations[MAX_BATTLERS_COUNT];
@@ -263,11 +244,6 @@ struct AiLogicData
     u8 mostSuitableMonId[MAX_BATTLERS_COUNT]; // Stores result of GetMostSuitableMonToSwitchInto, which decides which generic mon the AI would switch into if they decide to switch. This can be overruled by specific mons found in ShouldSwitch; the final resulting mon is stored in AI_monToSwitchIntoId.
     enum Move predictedMove[MAX_BATTLERS_COUNT];
     u8 resistBerryAffected[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // Tracks whether currently calc'd move is affected by a resist berry into given target
-    // This turn's guess at each battler's unrevealed ability, for the party
-    // slot (plus one; zero is none) and species it was made for.
-    enum Ability abilityGuess[MAX_BATTLERS_COUNT];
-    enum Species abilityGuessSpecies[MAX_BATTLERS_COUNT];
-    u8 abilityGuessSlot[MAX_BATTLERS_COUNT];
 
     // Flags
     u32 ejectButtonSwitch:1; // Tracks whether current switch out was from Eject Button
@@ -325,11 +301,19 @@ struct BattleCallbacksStack
     u8 size;
 };
 
+struct StatsArray
+{
+    u16 stats[NUM_STATS];
+    u16 level:15;
+    u16 learnMultipleMoves:1;
+};
+
 struct BattleResources
 {
     struct SecretBase *secretBase;
     struct BattleScriptsStack *battleScriptsStack;
     struct BattleCallbacksStack *battleCallbackStack;
+    struct StatsArray *beforeLvlUp;
     u8 bufferA[MAX_BATTLERS_COUNT][0x200];
     u8 bufferB[MAX_BATTLERS_COUNT][0x200];
     u8 transferBuffer[0x100];
@@ -492,14 +476,12 @@ struct BattleGimmickData
     u8 toActivate;                                       // stores whether a battler should transform at start of turn as bitfield
     u8 activeGimmick[MAX_BATTLE_TRAINERS][PARTY_SIZE];   // stores the active gimmick for each party member
     bool8 activated[MAX_BATTLERS_COUNT][GIMMICKS_COUNT]; // stores whether a trainer has used gimmick
-    u8 megaEvolutionsUsed[MAX_BATTLE_TRAINERS];          // actual activations, persistent across switches/faints
 };
 
 struct LostItem
 {
-    enum Item originalItem:14;
+    enum Item originalItem:15;
     u16 stolen:1;
-    u16 temporaryTheft:1;
 };
 
 struct BattleVideo {
@@ -574,12 +556,8 @@ struct PartyState
     u32 sentOut:1;
     u32 isKnockedOff:1;
     u32 freezeTurns:2;
-    u32 originalBerryDestroyed:1; // Incinerate/Bug Bite: not recoverable by Recycle.
-    u32 originalBerryConsumed:1; // Independent of the last item available to Recycle.
-    u32 originalBerryRemoved:1; // Knock Off or theft is not consumption.
+    u32 padding:3;
     enum Item usedHeldItem;
-    u8 heldItemOrigin; // trainer * PARTY_SIZE + slot + 1; 0 means unknown.
-    u8 usedHeldItemOrigin;
 };
 
 struct EventStates
@@ -612,15 +590,19 @@ struct BattleStruct
     struct Wish wish[MAX_BATTLERS_COUNT];
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 faintCounter[MAX_BATTLE_TRAINERS]; // Supreme Overload / Last Respects
+    u32 expShareExpValue;
+    u32 expValue;
     u8 weatherDuration;
-    bool8 victorySongStarted;
+    u8 expGettersOrder[PARTY_SIZE]; // First battlers which were sent out, then via exp-share
+    u8 expGetterMonId;
+    u8 expOrderId:3;
+    u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
+    u8 padding0:4;
+    u8 givenExpMons[2]; // Bits for enemy party's Pokémon that gave exp to player's party.
+    u8 expSentInMons; // As bits for player party mons - not including exp share mons.
+    u8 wildVictorySong;
     enum Type dynamicMoveType;
     enum BattlerId battlerPreventingSwitchout;
-    u8 campaignLevelCap;
-    u8 campaignPrizeMultiplier;
-    bool8 campaignRewardEligible;
-    bool8 moneyRewardEligibleA; // FALSE for a trainer (opponentA) already defeated, or reached via the rematch table -- return fights pay no prize money.
-    bool8 moneyRewardEligibleB; // Same as above, for opponentB in BATTLE_TYPE_TWO_OPPONENTS battles.
     u8 moneyMultiplier:6;
     u8 moneyMultiplierItem:1;
     u8 moneyMultiplierMove:1;
@@ -701,15 +683,12 @@ struct BattleStruct
     u8 redCardActivated :1;
     u8 snatchedMoveIsUsed:1;
     u8 descriptionSubmenu:1; // For Move Description window in move selection screen
-    u8 foeTypesSubmenu:1; // Emerald Champions: the description window is showing the foes' types (R)
-    u8 restartQuestionPending:1; // Emerald Champions: Run in a trainer battle first asks to restart the battle
     u8 ackBallUseBtn:1; // Used for the last used ball feature
     u8 ballSwapped:1; // Used for the last used ball feature
     u8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 throwingPokeBall:1;
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 moveInfoSpriteId; // move info, window gfx
-    u8 foeTypesHintSpriteId; // Emerald Champions: the L hint beside the move info one
     // When using a move which hits multiple opponents which is then bounced by a target, we need to make sure, the move hits both opponents, the one with bounce, and the one without.
     enum Species beatUpSpecies[PARTY_SIZE]; // Species for Gen5+ Beat Up, otherwise party indexes
     u8 beatUpSlot:3;
@@ -728,6 +707,7 @@ struct BattleStruct
     struct SleepClause monCausingSleepClause[NUM_BATTLE_SIDES]; // Stores which Pokémon on a given side is causing Sleep Clause to be active as the mon's index in the party
     u8 additionalEffectsCounter:4; // A counter for the additionalEffects applied by the current move in Cmd_setadditionaleffects
     u8 pursuitStoredSwitch:4; // Stored id for the Pursuit target's switch (value between 0 and PARTY_SIZE included)
+    s32 battlerExpReward;
     enum Species prevTurnSpecies[MAX_BATTLERS_COUNT]; // Stores species the AI has in play at start of turn
     s16 passiveHpUpdate[MAX_BATTLERS_COUNT]; // non-move damage and healing
     s16 moveDamage[MAX_BATTLERS_COUNT];
@@ -736,8 +716,7 @@ struct BattleStruct
     u32 savedMoveResultFlags[MAX_BATTLERS_COUNT]; // for Bounced moves
     u8 numSpreadTargets:3;
     u8 moldBreakerActive:1;
-    u8 spreadFaintsPending:4; // Spread-move targets knocked out whose faint waits for the last target's messages
-
+    u8 unused4:4;
     struct MessageStatus slideMessageStatus;
     u8 trainerSlideSpriteIds[MAX_BATTLERS_COUNT];
     u8 hazardsQueue[NUM_BATTLE_SIDES][HAZARDS_MAX_COUNT];
@@ -755,9 +734,7 @@ struct BattleStruct
     u32 dancerSavedTarget:3;
     u32 statChangeBattler:3;
     u32 overworldWeatherPresent:1;
-    u32 spreadFaintPass:1; // Running the faint block for a deferred spread-move knockout
-    u32 spreadFaintLastTarget:3; // Target to restore once the deferred faints are done
-
+    u32 padding5:4;
     u8 statChangeMoveAnim:1;
     u8 tidyUpActivates:1;
     u8 positiveAnimPlayed:1;
@@ -834,23 +811,24 @@ static inline bool32 IsBattleMoveStatus(enum Move move)
 /* Checks if 'battler' is any of the types.
  * Passing multiple types is more efficient than calling this multiple
  * times with one type because it shares the 'GetBattlerTypes' result. */
-#define IS_BATTLER_ANY_TYPE(battler, ...)                                        \
+#define _IS_BATTLER_ANY_TYPE(battler, ignoreTera, ...)                           \
     ({                                                                           \
         enum Type types[3];                                                      \
-        GetBattlerTypes(battler, types);                                          \
+        GetBattlerTypes(battler, ignoreTera, types);                             \
         RECURSIVELY(R_FOR_EACH(_IS_BATTLER_ANY_TYPE_HELPER, __VA_ARGS__)) FALSE; \
     })
 
 #define _IS_BATTLER_ANY_TYPE_HELPER(type) (types[0] == type) || (types[1] == type) || (types[2] == type) ||
 
+#define IS_BATTLER_ANY_TYPE(battler, ...) _IS_BATTLER_ANY_TYPE(battler, FALSE, __VA_ARGS__)
 #define IS_BATTLER_OF_TYPE IS_BATTLER_ANY_TYPE
-#define IS_BATTLER_ANY_BASE_TYPE IS_BATTLER_ANY_TYPE
-#define IS_BATTLER_OF_BASE_TYPE IS_BATTLER_ANY_TYPE
+#define IS_BATTLER_ANY_BASE_TYPE(battler, ...) _IS_BATTLER_ANY_TYPE(battler, TRUE, __VA_ARGS__)
+#define IS_BATTLER_OF_BASE_TYPE IS_BATTLER_ANY_BASE_TYPE
 
 #define IS_BATTLER_TYPELESS(battlerId)                                                    \
     ({                                                                                    \
         enum Type types[3];                                                               \
-        GetBattlerTypes(battlerId, types);                                         \
+        GetBattlerTypes(battlerId, FALSE, types);                                         \
         types[0] == TYPE_MYSTERY && types[1] == TYPE_MYSTERY && types[2] == TYPE_MYSTERY; \
     })
 
@@ -875,7 +853,7 @@ struct BattleScripting
     s32 unused_0x00;
     s32 unused_0x04;
     u8 multihitString[6];
-    u8 unused_0x0e;
+    bool8 expOnCatch;
     u8 unused2;
     u8 animArg1;
     u8 animArg2;
@@ -888,10 +866,10 @@ struct BattleScripting
     u8 animTargetsHit;
     u8 unused_0x1a;
     u8 unused_0x1b;
-    u8 unused_0x1c;
+    u8 getexpState;
     u8 battleStyle;
-    u8 unused_0x1e;
-    u8 unused_0x1f;
+    u8 drawlvlupboxState;
+    u8 learnMoveState;
     u8 savedBattler;
     u8 reshowMainState;
     u8 reshowHelperState;
@@ -936,7 +914,7 @@ struct BattleAnimationInfo
     u8 criticalCaptureSuccess:1;
     u8 introAnimActive:1;
     u8 wildMonInvisible:1;
-    u8 :3; // Reserved; summary graphics use live sprite ownership.
+    u8 field_9_x1C:3;
     u8 field_9_x20:1;
     u8 field_9_x40:1;
     u8 field_9_x80:1;
@@ -1086,6 +1064,7 @@ extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 extern u16 gBattleWeather;
 extern u16 gIntroSlideFlags;
+extern u8 gSentPokesToOpponent[2];
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
 extern struct BattleScripting gBattleScripting;
 extern struct BattleStruct *gBattleStruct;
@@ -1119,6 +1098,7 @@ extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattleMainFunc)(void);
 extern struct BattleResults gBattleResults;
+extern u8 gLeveledUpInBattle;
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
@@ -1199,14 +1179,6 @@ static inline bool32 IsBattlerAlly(enum BattlerId battlerAtk, enum BattlerId bat
 static inline bool32 IsDoubleBattle(void)
 {
     return !!(gBattleTypeFlags & BATTLE_TYPE_MORE_THAN_TWO_BATTLERS);
-}
-
-// A spread-move target knocked out earlier in the move, whose faint waits
-// until every target has had its messages. Mechanically it is already gone:
-// its ability and held item do nothing for the rest of the move.
-static inline bool32 IsSpreadFaintPending(enum BattlerId battler)
-{
-    return (gBattleStruct->spreadFaintsPending & (1u << battler)) != 0;
 }
 
 static inline bool32 IsSpreadMove(enum MoveTarget moveTarget)

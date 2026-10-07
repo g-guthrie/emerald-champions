@@ -12,11 +12,13 @@
 #include "battle_controllers.h"
 #include "battle_dynamax.h"
 #include "battle_gimmick.h"
+#include "battle_terastal.h"
 #include "item.h"
 #include "pokemon.h"
 #include "util.h"
 #include "move.h"
 #include "random.h"
+#include "string_util.h"
 #include "config/battle.h"
 
 static inline bool32 IgnoreTargetingForMoveEffect(enum MoveEffect moveEffect);
@@ -75,15 +77,27 @@ static void HandleSetEffectFlinch(struct BattleCalcValues *cv, struct SetEffect 
             gLastUsedAbility = ABILITY_INNER_FOCUS;
             gBattlerAbility = se->effectBattler;
             RecordAbilityBattle(se->effectBattler, ABILITY_INNER_FOCUS);
+            gBattlescriptCurrInstr = se->script;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = se->script;
         }
     }
-    else if (!gBattleMons[se->effectBattler].volatiles.flinched
-          && !HasBattlerActedThisTurn(se->effectBattler)
+    else if (gBattleMons[se->effectBattler].volatiles.flinched)
+    {
+        gBattlescriptCurrInstr = se->script;
+    }
+    else if (!HasBattlerActedThisTurn(se->effectBattler)
           && GetActiveGimmick(se->effectBattler) != GIMMICK_DYNAMAX)
     {
         gBattleMons[se->effectBattler].volatiles.flinched = TRUE;
+        gBattlescriptCurrInstr = se->script;
     }
-    gBattlescriptCurrInstr = se->script;
+    else
+    {
+        gBattlescriptCurrInstr = se->script;
+    }
 }
 
 static void HandleSetEffectAbsorb(struct BattleCalcValues *cv, struct SetEffect *se)
@@ -257,15 +271,6 @@ static void HandleSetEffectRecharge(struct BattleCalcValues *cv, struct SetEffec
 {
     if (B_SKIP_RECHARGE == GEN_1 && !IsBattlerAlive(cv->battlerDef))  // Skip recharge if gen 1 and foe is KO'd
         return;
-    // Rampage (Inclement): knocking out the target skips the recharge turn
-    // while the battle goes on.
-    if (GetBattlerAbility(se->effectBattler) == ABILITY_RAMPAGE
-     && !IsBattlerAlive(cv->battlerDef)
-     && !NoAliveMonsForEitherParty())
-    {
-        gBattlescriptCurrInstr = se->script;
-        return;
-    }
 
     gBattleMons[se->effectBattler].volatiles.rechargeTimer = 2;
     gLockedMoves[se->effectBattler] = cv->move;
@@ -318,7 +323,6 @@ static void HandleSetEffectRemoveStatus(struct BattleCalcValues *cv, struct SetE
             gBattlescriptCurrInstr = BattleScript_TargetPRLZHeal;
             break;
         case STATUS1_SLEEP:
-            gBattleMons[se->effectBattler].volatiles.nightmare = FALSE;
             TryDeactivateSleepClause(se->effectBattler, gBattlerPartyIndexes[se->effectBattler]);
             gBattlescriptCurrInstr = BattleScript_TargetWokeUp;
             break;
@@ -443,19 +447,6 @@ static void HandleSetEffectThroatChop(struct BattleCalcValues *cv, struct SetEff
     }
 }
 
-static void DestroyHeldItemForMove(struct SetEffect *se, const u8 *effectScript)
-{
-    gLastUsedItem = gBattleMons[se->effectBattler].item;
-    RecordDestroyedHeldItem(se->effectBattler, gLastUsedItem);
-    gBattleMons[se->effectBattler].item = ITEM_NONE;
-    CheckSetUnburden(se->effectBattler);
-
-    BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[se->effectBattler].item), &gBattleMons[se->effectBattler].item);
-    MarkBattlerForControllerExec(se->effectBattler);
-    BattleScriptPush(se->script);
-    gBattlescriptCurrInstr = effectScript;
-}
-
 static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     if (cv->abilities[se->effectBattler] == ABILITY_STICKY_HOLD)
@@ -464,7 +455,14 @@ static void HandleSetEffectIncinerate(struct BattleCalcValues *cv, struct SetEff
     if (gItemsInfo[gBattleMons[se->effectBattler].item].pocket == POCKET_BERRIES
      || (B_INCINERATE_GEMS >= GEN_6 && GetItemHoldEffect(gBattleMons[se->effectBattler].item) == HOLD_EFFECT_GEMS))
     {
-        DestroyHeldItemForMove(se, BattleScript_MoveEffectIncinerate);
+        gLastUsedItem = gBattleMons[se->effectBattler].item;
+        gBattleMons[se->effectBattler].item = ITEM_NONE;
+        CheckSetUnburden(se->effectBattler);
+
+        BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[se->effectBattler].item), &gBattleMons[se->effectBattler].item);
+        MarkBattlerForControllerExec(se->effectBattler);
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectIncinerate;
     }
 }
 
@@ -478,15 +476,31 @@ static void HandleSetEffectBugBite(struct BattleCalcValues *cv, struct SetEffect
     else if (GetItemPocket(gBattleMons[se->effectBattler].item) == POCKET_BERRIES
         && cv->abilities[se->effectBattler] != ABILITY_STICKY_HOLD)
     {
-        RecordBerryRemoval(GetBattlerPartyState(se->effectBattler)->heldItemOrigin, gBattleMons[se->effectBattler].item);
-        DestroyHeldItemForMove(se, BattleScript_MoveEffectBugBite);
+        // target loses their berry
+        gLastUsedItem = gBattleMons[se->effectBattler].item;
+        gBattleMons[se->effectBattler].item = ITEM_NONE;
+        CheckSetUnburden(se->effectBattler);
+
+        BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[se->effectBattler].item), &gBattleMons[se->effectBattler].item);
+        MarkBattlerForControllerExec(se->effectBattler);
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectBugBite;
     }
 }
 
 static void HandleSetEffectRecoilHp25(struct BattleCalcValues *cv, struct SetEffect *se)
 {
-    s32 recoil = (gBattleMons[se->effectBattler].maxHP) / 4;
-    if (B_UPDATED_MOVE_DATA >= GEN_5 && (gBattleMons[se->effectBattler].maxHP % 4) >= 2) // Account for standard rounding (Gen5+)
+    s32 recoil;
+    if (GetConfig(B_STRUGGLE_RECOIL) < GEN_4)
+    {
+        u32 recoilPercentage = GetConfig(B_STRUGGLE_RECOIL) == GEN_1 ? 50 : 25;
+        recoil = gBattleStruct->moveDamage[gBattlerTarget] * recoilPercentage / 100;
+    }
+    else
+    {
+        recoil = (gBattleMons[se->effectBattler].maxHP) / 4;
+    }
+    if (GetConfig(B_STRUGGLE_RECOIL) >= GEN_5 && (gBattleMons[se->effectBattler].maxHP % 4) >= 2) // Account for standard rounding (Gen5+)
         recoil++;
     if (recoil == 0)
         recoil = 1;
@@ -647,6 +661,19 @@ static void HandleSetEffectPsychicNoise(struct BattleCalcValues *cv, struct SetE
     }
 }
 
+static void HandleSetEffectTeraBlast(struct BattleCalcValues *cv, struct SetEffect *se)
+{
+    if (GetActiveGimmick(se->effectBattler) == GIMMICK_TERA
+     && GetBattlerTeraType(se->effectBattler) == TYPE_STELLAR
+     && !NoAliveMonsForEitherParty())
+    {
+        SetStatChange(se->effectBattler, STAT_ATK, -1);
+        SetStatChange(se->effectBattler, STAT_SPATK, -1);
+        BattleScriptPush(se->script);
+        gBattlescriptCurrInstr = BattleScript_MoveEffectStatChange;
+    }
+}
+
 static void HandleSetEffectOrderUp(struct BattleCalcValues *cv, struct SetEffect *se)
 {
     enum Stat stat = 0;
@@ -741,7 +768,12 @@ static void HandleSetEffectEerieSpell(struct BattleCalcValues *cv, struct SetEff
     if (IsMaxMove(moveToReduce))
         moveToReduce = gBattleStruct->dynamax.baseMoves[se->effectBattler];
 
-    u32 i = GetMoveSlot(gBattleMons[se->effectBattler].moves, moveToReduce);
+    u32 i;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moveToReduce == gBattleMons[se->effectBattler].moves[i])
+            break;
+    }
 
     if (i != MAX_MON_MOVES && gBattleMons[se->effectBattler].pp[i] != 0)
     {
@@ -751,9 +783,11 @@ static void HandleSetEffectEerieSpell(struct BattleCalcValues *cv, struct SetEff
             ppToDeduct = gBattleMons[se->effectBattler].pp[i];
 
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, moveToReduce)
+        ConvertIntToDecimalStringN(gBattleTextBuff2, ppToDeduct, STR_CONV_MODE_LEFT_ALIGN, 1);
         PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff2, 1, ppToDeduct)
         gBattleMons[se->effectBattler].pp[i] -= ppToDeduct;
-        if (MOVE_IS_PERMANENT(se->effectBattler, i))
+        if (!(gBattleMons[se->effectBattler].volatiles.mimickedMoves & (1u << i))
+            && !(gBattleMons[se->effectBattler].volatiles.transformed))
         {
             BtlController_EmitSetMonData(se->effectBattler, B_COMM_TO_CONTROLLER, REQUEST_PPMOVE1_BATTLE + i, 0, sizeof(gBattleMons[se->effectBattler].pp[i]), &gBattleMons[se->effectBattler].pp[i]);
             MarkBattlerForControllerExec(se->effectBattler);
@@ -900,7 +934,7 @@ static void HandleSetEffectWeather(struct BattleCalcValues *cv, struct SetEffect
         msg = B_MSG_STARTED_SANDSTORM;
         break;
     case MOVE_EFFECT_HAIL:
-        if (B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW)
+        if (GetConfig(B_PREFERRED_ICE_WEATHER) == B_ICE_WEATHER_SNOW)
         {
             weather = BATTLE_WEATHER_SNOW;
             msg = B_MSG_STARTED_SNOW;
@@ -1202,22 +1236,18 @@ static void HandleSetEffectBreakScreen(struct BattleCalcValues *cv, struct SetEf
 
         if (!failed)
         {
-            // Name only the screens this hit removes. The chooser still held
-            // the last message's index, and a screen's timer outlived its
-            // removal, so a lone Light Screen was announced as Aurora Veil
-            // too, and a broken Reflect wore off again at its old end turn.
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if (gSideStatuses[side] & SIDE_STATUS_REFLECT)
-                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << B_MSG_BREAK_REFLECT;
-            if (gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN)
-                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << B_MSG_BREAK_LIGHT_SCREEN;
-            if (gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL)
-                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << B_MSG_BREAK_AURORA_VEIL;
+            if (gSideTimers[side].reflectTimer)
+                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << 0;
+            if (gSideTimers[side].lightscreenTimer)
+                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << 1;
+            if (gSideTimers[side].auroraVeilTimer)
+                gBattleCommunication[MULTISTRING_CHOOSER] |= 1 << 2;
 
-            gSideStatuses[side] &= ~SIDE_STATUS_SCREEN_ANY;
             gSideTimers[side].reflectTimer = 0;
             gSideTimers[side].lightscreenTimer = 0;
             gSideTimers[side].auroraVeilTimer = 0;
+            gSideStatuses[side] &= ~SIDE_STATUS_SCREEN_ANY;
             gBattleScripting.animTurn = 1;
             gBattleScripting.animTargetsHit = 1;
             gBattleStruct->attackAnimPlayed = TRUE; // The whole brick break animation is covered by the move so don't play twice
@@ -1330,6 +1360,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_FLORAL_HEALING] = HandleSetEffectNone,
     [MOVE_EFFECT_SECRET_POWER] = HandleSetEffectSecretPower,
     [MOVE_EFFECT_PSYCHIC_NOISE] = HandleSetEffectPsychicNoise,
+    [MOVE_EFFECT_TERA_BLAST] = HandleSetEffectTeraBlast,
     [MOVE_EFFECT_ORDER_UP] = HandleSetEffectOrderUp,
     [MOVE_EFFECT_ION_DELUGE] = HandleSetEffectIonDeluge,
     [MOVE_EFFECT_HAZE] = HandleSetEffectHaze,
@@ -1408,6 +1439,7 @@ void SetMoveEffect(struct BattleCalcValues *cv, struct SetEffect *se)
     if (!se->primary && !affectsUser && IsMoveEffectBlockedByTarget(cv->abilities[se->effectBattler]))
         se->moveEffect = MOVE_EFFECT_NONE;
     else if (!se->primary
+          && !se->bypassSheerForce
           && IsSheerForceAffected(cv->move, cv->abilities[cv->battlerAtk])
           && !(se->moveEffect == MOVE_EFFECT_ORDER_UP && gBattleStruct->battlerState[cv->battlerAtk].commanderSpecies != SPECIES_NONE))
         se->moveEffect = MOVE_EFFECT_NONE;
@@ -1438,8 +1470,9 @@ void SetMoveEffectHelper(enum BattlerId battlerAtk, enum BattlerId effectBattler
     se.moveEffect = moveEffect;
     se.script = battleScript;
     se.effectBattler = effectBattler;
-    se.primary = effectFlags & EFFECT_PRIMARY;
-    se.certain = effectFlags & EFFECT_CERTAIN;
+    se.primary = (effectFlags & EFFECT_PRIMARY) != 0;
+    se.certain = (effectFlags & EFFECT_CERTAIN) != 0;
+    se.bypassSheerForce = (effectFlags & EFFECT_BYPASS_SHEER_FORCE) != 0;
 
     SetMoveEffect(&cv, &se);
 }
@@ -1521,4 +1554,3 @@ static bool32 IsFinalStrikeEffect(enum MoveEffect moveEffect)
         return FALSE;
     }
 }
-

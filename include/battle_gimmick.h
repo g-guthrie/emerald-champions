@@ -10,10 +10,9 @@ enum Gimmick
     GIMMICK_ULTRA_BURST,
     GIMMICK_Z_MOVE,
     GIMMICK_DYNAMAX,
+    GIMMICK_TERA,
     GIMMICKS_COUNT,
 };
-
-bool32 IsEmeraldChampionsGimmickAllowed(enum Gimmick gimmick);
 
 struct GimmickInfo
 {
@@ -35,8 +34,6 @@ void SetActiveGimmick(enum BattlerId battler, enum Gimmick gimmick);
 enum Gimmick GetActiveGimmick(enum BattlerId battler);
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick);
 bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick);
-u32 GetRemainingMegaEvolutions(enum BattlerId battler);
-bool32 CanTrainerStillActivateGimmick(enum BattlerId battler, enum Gimmick gimmick);
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick);
 
 void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId);

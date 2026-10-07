@@ -64,6 +64,7 @@
 	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
 	STD_PUT_ITEM_AWAY = 11
+	STD_RECEIVED_ITEM = 12
 
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
@@ -177,7 +178,7 @@
 	@ Copies the value of source into destination.
 	.macro copyvar destination:req, source:req, warn=TRUE
 	.if \warn && !((\source >= VARS_START && \source <= VARS_END) || (\source >= SPECIAL_VARS_START && \source <= SPECIAL_VARS_END))
-	.error "copyvar source must be a VAR_ constant; use setvar for literal values"
+	.warning "copyvar with a value that is not a VAR_ constant; did you mean setvar instead?"
 	.endif
 	.byte SCR_OP_COPYVAR
 	.2byte \destination
@@ -814,7 +815,7 @@
 
 	@ Starts a rematch double battle. Takes a trainer, intro text, loss text, and text for when you have too few pokemon
 	.macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
-	trainerbattle LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE
+	trainerbattle LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE
 	.endm
 
 	@ Starts a trainer battle, skipping intro text. Takes a trainer and loss text
@@ -822,23 +823,10 @@
 	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
 	.endm
 
-	@ Starts a doubles trainer battle after dialogue has already been shown.
-	@ The scene has already committed to this fight, so a player with only one
-	@ usable Pokemon battles alone instead of aborting the script mid-scene.
-	.macro trainerbattle_no_intro_double trainer:req, lose_text:req
-	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES
-	.endm
-
 	@ Starts a double battle with the player against two trainers
 	@ Takes two trainers and defeat text for each
 	.macro trainerbattle_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req
 	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-	.endm
-
-	@ Starts a checked, scripted Double Battle against two opposing trainers.
-	@ Dialogue and facing are handled by the scene; resume it after victory.
-	.macro trainerbattle_double_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req, not_enough_pkmn_text:req
-	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
 	.endm
 
 	@ Starts a trainer battle with victory text if the player loses. If flags is nonzero, the player will be healed after battle (and its assumed to be the tutorial battle)
@@ -849,12 +837,6 @@
 	@ Starts a lavaridge gym battle
 	.macro trainerbattle_lavaridge localId: req, trainer: req, intro_text: req, lose_text: req, event_script: req
 	trainerbattle \localId, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-	.endm
-
-
-	@ Starts a checked Double Battle using Lavaridge Gym's buried-trainer flow.
-	.macro trainerbattle_lavaridge_double localId:req, trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req, event_script:req
-	trainerbattle \localId, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
 	.endm
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by the scripts in trainer_battle.inc, which
@@ -1083,7 +1065,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
+	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
 	callnative ScrCmd_createmon, requests_effects=1
 	.byte 0
 	.byte PARTY_SIZE @ assign to first empty slot
@@ -1113,6 +1095,7 @@
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
 	.ifnb \shinyMode; .set givemon_flags, givemon_flags | (1 << 21); .endif
 	.ifnb \gmaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
+	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.ifnb \dmaxLevel; .set givemon_flags, givemon_flags | (1 << 24); .endif
 	.ifnb \isEgg; .set givemon_flags, givemon_flags | (1 << 25); .endif
 	.if \ignoreTotalEvCheck; .set givemon_flags, givemon_flags | (1 << 26); .endif
@@ -1140,13 +1123,14 @@
 	.ifnb \move4; .2byte \move4; .endif
 	.ifnb \shinyMode; .2byte \shinyMode; .endif
 	.ifnb \gmaxFactor; .2byte \gmaxFactor; .endif
+	.ifnb \teraType; .2byte \teraType; .endif
 	.ifnb \dmaxLevel; .2byte \dmaxLevel; .endif
 	.ifnb \isEgg; .2byte \isEgg; .endif
 	.endm
 
 	@ creates a mon for a given party and slot
 	@ otherwise
-	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
+	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, shinyMode, gmaxFactor, teraType, dmaxLevel, isEgg, ignoreTotalEvCheck = FALSE
 	callnative ScrCmd_createmon, requests_effects=1
 	.byte \side	 @ 0 - player, 1 - opponent
 	.byte \slot	 @ 0-5
@@ -1176,6 +1160,7 @@
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
 	.ifnb \shinyMode; .set givemon_flags, givemon_flags | (1 << 21); .endif
 	.ifnb \gmaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
+	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.ifnb \dmaxLevel; .set givemon_flags, givemon_flags | (1 << 24); .endif
 	.ifnb \isEgg; .set givemon_flags, givemon_flags | (1 << 25); .endif
 	.if \ignoreTotalEvCheck; .set givemon_flags, givemon_flags | (1 << 26); .endif
@@ -1203,6 +1188,7 @@
 	.ifnb \move4; .2byte \move4; .endif
 	.ifnb \shinyMode; .2byte \shinyMode; .endif
 	.ifnb \gmaxFactor; .2byte \gmaxFactor; .endif
+	.ifnb \teraType; .2byte \teraType; .endif
 	.ifnb \dmaxLevel; .2byte \dmaxLevel; .endif
 	.ifnb \isEgg; .2byte \isEgg; .endif
 	.endm
@@ -1215,8 +1201,8 @@
 	.endm
 
 	@ Replaces the move at 'slot' of the Pokémon in the player's party at 'partyIndex' with the specified move.
-	@ A partyIndex >= PARTY_SIZE selects the last party member, including Eggs.
-	@ Empty selections and invalid move/slot values do nothing.
+	@ If a value greater than PARTY_SIZE is given for partyIndex it will use the last Pokémon in the party instead.
+	@ Note that this means in vanilla a value equal to PARTY_SIZE for partyIndex will go out of bounds.
 	.macro setmonmove partyIndex:req, slot:req, move:req
 	.byte SCR_OP_SETMONMOVE
 	.byte \partyIndex
@@ -1317,12 +1303,6 @@
 	@ Products should be a list of .2byte item values preceded by an .align 2
 	.macro pokemart products=Pokemart_DefaultItemList
 	.byte SCR_OP_POKEMART
-	.4byte \products
-	.endm
-
-	@ Opens the Buy list for products directly, without the Buy/Sell/Quit box.
-	.macro pokemartbuy products:req
-	.byte SCR_OP_POKEMARTBUY
 	.4byte \products
 	.endm
 
@@ -1661,17 +1641,13 @@
 	@ that is also against 'species2' at 'level2' holding 'item2'.
 	@ Running this command will not affect normal wild battles. You start the prepared battle with dowildbattle.
 	@ If the player only has one Pokemon, a scripted double battle will be buggy.
-	@ Emerald Champions: level/level2 are halfwords so a VAR_ id can be passed and
-	@ resolved at runtime (Inclement Emerald does this for every static/legendary
-	@ encounter, e.g. "setwildbattle SPECIES_RAYQUAZA, VAR_0x800A, ITEM_...").
-	@ As a byte, VAR_0x800A truncated to 0x0A and every such encounter was level 10.
 	.macro setwildbattle species:req, level:req, item=ITEM_NONE, species2=SPECIES_NONE, level2=0, item2=ITEM_NONE
 	.byte SCR_OP_SETWILDBATTLE
 	.2byte \species
-	.2byte \level
+	.byte \level
 	.2byte \item
 	.2byte \species2
-	.2byte \level2
+	.byte \level2
 	.2byte \item2
 	.endm
 
@@ -1774,6 +1750,23 @@
 	.2byte \box
 	.endm
 
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
+	.macro textcolor color:req
+	.byte SCR_OP_TEXTCOLOR
+	.byte \color
+	.endm
+
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
+	.macro loadhelp text:req
+	.byte SCR_OP_LOADHELP
+	.4byte \text
+	.endm
+
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
+	.macro unloadhelp
+	.byte SCR_OP_UNLOADHELP
+	.endm
+
 	@ After using this command, all standard message boxes will use the signpost frame.
 	.macro signmsg
 	.byte SCR_OP_SIGNMSG
@@ -1782,6 +1775,13 @@
 	@ Ends the effects of signmsg, returning message box frames to normal.
 	.macro normalmsg
 	.byte SCR_OP_NORMALMSG
+	.endm
+
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
+	.macro comparehiddenvar a:req, value:req
+	.byte SCR_OP_COMPAREHIDDENVAR
+	.byte \a
+	.4byte \value
 	.endm
 
 	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
@@ -1801,6 +1801,12 @@
 	@ ram script is invalid then this does nothing.
 	.macro trywondercardscript
 	.byte SCR_OP_TRYWONDERCARDSCRIPT
+	.endm
+
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
+	.macro setworldmapflag worldmapflag:req
+	.byte SCR_OP_SETWORLDMAPFLAG
+	.2byte \worldmapflag
 	.endm
 
 	@ Warps the player to the specified map using a teleport effect. Effect is similar to warpteleport, but
@@ -2142,14 +2148,6 @@
 	callstd STD_OBTAIN_ITEM
 	.endm
 
-	@ A finite gift whose caller owns a permanent completion receipt.
-	@ Duplicate Mega/evolution devices pay the named one-time alternative.
-	.macro giveuniqueitem item:req
-	setorcopyvar VAR_0x8000, \item
-	setvar VAR_0x8001, 1
-	call Common_EventScript_ObtainFiniteItem
-	.endm
-
 	@ For picking up items in the overworld. Similar to giveitem, but with different language and
 	@ sets the flag of the last-talked to object (the item the player picked up).
 	.macro finditem item:req, amount=1
@@ -2172,8 +2170,11 @@
 	.endm
 
 	@ Registers the specified trainer in Match Call and plays a fanfare with a notification message.
-	@ Match Call is removed; registering a Trainer does nothing.
 	.macro register_matchcall trainer:req
+	setvar VAR_0x8004, \trainer
+	special SetMatchCallRegisteredFlag
+	setorcopyvar VAR_0x8000, \trainer
+	callstd STD_REGISTER_MATCH_CALL
 	.endm
 
 	@ Does a sparkle field effect (e.g. when the Trick Master is hiding) at the given coordinates.
@@ -2352,6 +2353,18 @@
 	.2byte \slot
 	.endm
 
+	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
+	.macro checkteratype slot:req
+	callnative CheckTeraType, requests_effects=1
+	.2byte \slot
+	.endm
+
+	@ Sets the Pokémon in \slot's Tera Type
+	.macro setteratype type:req, slot:req
+	callnative SetTeraType, requests_effects=1
+	.byte \type
+	.2byte \slot
+	.endm
 
 	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to VAR_RESULT.
 	.macro getdaycaregfx varSpecies1:req varSpecies2:req varForm1:req varForm2:req
@@ -2689,8 +2702,6 @@
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, \declineTradeJump
 	specialvar VAR_0x800B, GetTradeSpecies
 	goto_if_ne VAR_0x800B, VAR_0x8009, \wrongMonJump
-	call Common_EventScript_ReturnNPCTradeItem
-	goto_if_eq VAR_RESULT, FALSE, \declineTradeJump
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	bufferspeciesname STR_VAR_1, VAR_0x8009
@@ -2726,6 +2737,11 @@
 	.macro pickpartymon selectionType:req
 	callnative PickPartyMon
 	.byte \selectionType
+	.endm
+
+	.macro mappreview duration:req
+	callnative MapPreviewScript
+	.2byte \duration
 	.endm
 
 	.macro tryspecialevo evoArg:req, canStopEvo=TRUE, tryMultiple=FALSE
@@ -2956,120 +2972,42 @@
 	.byte \dataField
 	.endm
 
-@ Inclement Emerald compatibility
-@
-@ Map and field scripts restored from Inclement Emerald (v1.13, 2021 engine)
-@ call script macros whose names changed - or whose subsystems were removed -
-@ in this engine. Every alias below forwards to the macro that already exists
-@ here, so the opcode always comes from this tree's SCR_OP_* constants in
-@ data/script_cmd_table.inc and is never hard-coded to a donor opcode number.
+@ FRLG
 
-	@ Inclement's name for setobjectsubpriority (SCR_OP_SETOBJECTSUBPRIORITY).
-	@ Identical argument order, and this tree's ScrCmd_setobjectsubpriority is
-	@ byte-for-byte the donor's ScrCmd_setobjectpriority (localId halfword, map
-	@ group/num bytes, priority byte, passed on as subpriority + 83).
-	@ Used by the Mr. Briney follow sequences on Route 104 / 109 / Dewford Town.
-	.macro setobjectpriority localId:req, map:req, priority:req
-	setobjectsubpriority \localId, \map, \priority
+
+	@ Prints the provided message after playing the fanfare music (can only be MUS_LEVEL_UP or MUS_RG_OBTAIN_KEY_ITEM).
+	@ It then prints the message shown by using putitemaway.
+	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
+	loadword 0, \msg
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	setorcopyvar VAR_0x8002, \fanfare
+	callstd STD_RECEIVED_ITEM
 	.endm
 
-	@ Inclement's name for resetobjectsubpriority (SCR_OP_RESETOBJECTSUBPRIORITY).
-	.macro resetobjectpriority localId:req, map:req
-	resetobjectsubpriority \localId, \map
+	@ Adds the specified item to the bag, then prints a message with fanfare. See description of msgreceiveditem.
+	.macro giveitem_msg msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
+	additem \item, \amount
+	msgreceiveditem \msg, \item, \amount, \fanfare
 	.endm
 
-	@ Inclement's name for setflashlevel (SCR_OP_SETFLASHLEVEL). Despite the
-	@ donor's name the argument is a flash *level* in both engines, read as a
-	@ halfword through VarGet - cave darkness / Flash in Granite Cave.
-	.macro setflashradius level:req
-	setflashlevel \level
+	@ Depends on the provided function. With the default argument, unlocks the specified entry in the Fame Checker.
+	.macro famechecker person:req, index:req, function=SetFlavorTextFlagFromSpecialVars
+	setvar VAR_0x8004, \person
+	setvar VAR_0x8005, \index
+	special \function
 	.endm
 
-	@ Inclement's name for getpokenewsactive (SCR_OP_GETPOKENEWSACTIVE). Both
-	@ take a POKENEWS_* kind as a halfword and report through VAR_RESULT; the
-	@ command was renamed upstream once it was understood to be a PokeNews
-	@ check rather than a price lookup. The restored call sites already pass
-	@ POKENEWS_* constants.
-	.macro getpricereduction newsKind:req
-	getpokenewsactive \newsKind
+	@ Sets the 'defeated' flag for all trainers in the specified gym.
+	.macro set_gym_trainers_frlg gym:req
+	setvar VAR_0x8008, \gym
+	call Common_EventScript_SetGymTrainers_Frlg
 	.endm
 
-	@ Inclement's name for warpwhitefade (SCR_OP_WARPWHITEFADE): the Sootopolis
-	@ legendary encounter warp. The donor's DoSootopolisLegendWarp is this
-	@ tree's DoWhiteFadeWarp, and the donor's "map, byte, word1, word2" layout
-	@ is exactly what formatwarp emits for "map, warpId, x, y".
-	.macro warpsootopolislegend map:req, warpId:req, x:req, y:req
-	warpwhitefade \map, \warpId, \x, \y
-	.endm
-
-	@ Inclement's checkpartymove took a MOVE_* id. This engine's checkfieldmove
-	@ takes a FIELD_MOVE_* id (include/constants/field_move.h) and encodes it as
-	@ a single byte, so the two are NOT interchangeable by argument - passing a
-	@ MOVE_* id straight through would silently select the wrong field move.
-	@ Translate here instead, and refuse to assemble anything with no field-move
-	@ equivalent rather than emit a wrong index. HMs always enforce the player
-	@ unlock; non-HM moves retain their ordinary compatibility lookup.
-	.macro checkpartymove move:req
-	.if \move == MOVE_CUT
-	checkfieldmove FIELD_MOVE_CUT
-	.elseif \move == MOVE_FLASH
-	checkfieldmove FIELD_MOVE_FLASH
-	.elseif \move == MOVE_ROCK_SMASH
-	checkfieldmove FIELD_MOVE_ROCK_SMASH
-	.elseif \move == MOVE_STRENGTH
-	checkfieldmove FIELD_MOVE_STRENGTH
-	.elseif \move == MOVE_SURF
-	checkfieldmove FIELD_MOVE_SURF
-	.elseif \move == MOVE_FLY
-	checkfieldmove FIELD_MOVE_FLY
-	.elseif \move == MOVE_DIVE
-	checkfieldmove FIELD_MOVE_DIVE
-	.elseif \move == MOVE_WATERFALL
-	checkfieldmove FIELD_MOVE_WATERFALL
-	.elseif \move == MOVE_TELEPORT
-	checkfieldmove FIELD_MOVE_TELEPORT
-	.elseif \move == MOVE_DIG
-	checkfieldmove FIELD_MOVE_DIG
-	.elseif \move == MOVE_SECRET_POWER
-	checkfieldmove FIELD_MOVE_SECRET_POWER
-	.elseif \move == MOVE_MILK_DRINK
-	checkfieldmove FIELD_MOVE_MILK_DRINK
-	.elseif \move == MOVE_SOFT_BOILED
-	checkfieldmove FIELD_MOVE_SOFT_BOILED
-	.elseif \move == MOVE_SWEET_SCENT
-	checkfieldmove FIELD_MOVE_SWEET_SCENT
-	.elseif \move == MOVE_ROCK_CLIMB
-	checkfieldmove FIELD_MOVE_ROCK_CLIMB
-	.elseif \move == MOVE_DEFOG
-	checkfieldmove FIELD_MOVE_DEFOG
-	.else
-	.error "checkpartymove: this move has no FIELD_MOVE_* equivalent - use checkfieldmove directly"
-	.endif
-	.endm
-
-	@ Inclement defined checkPartyHasSpecies and isChosenMonSpecies as script
-	@ commands 0xe3 and 0xe4. Both opcodes are already occupied in this engine
-	@ (SCR_OP_DYNMULTICHOICE and SCR_OP_DYNMULTIPUSH), so the two commands are
-	@ restored as callnative handlers in src/scrcmd.c instead of new command
-	@ table entries - no opcode is invented and the table is left untouched.
-
-	@ Sets VAR_RESULT to TRUE if the player's party holds the given species or
-	@ any alternate form that shares its National Dex number.
-	.macro checkPartyHasSpecies species:req
-	callnative NativeFunc_CheckPartyHasSpecies
-	.2byte \species
-	.endm
-
-	@ Sets VAR_RESULT to TRUE if the party member chosen into VAR_0x8004 is the
-	@ given species or any alternate form that shares its National Dex number.
-	.macro isChosenMonSpecies species:req
-	callnative NativeFunc_IsChosenMonSpecies
-	.2byte \species
-	.endm
-
-	@ Inclement's name for the lock_anim movement action
-	@ (MOVEMENT_ACTION_LOCK_ANIM, 0x94 in both engines). Event-only users,
-	@ including native script tests, do not include the movement macro factory.
-	.macro store_lock_anim
-	.byte MOVEMENT_ACTION_LOCK_ANIM
+	@ Prints a braille message, then waits for users input.
+	.macro braillemessage_wait text:req
+	setvar VAR_0x8006, 0
+	braillemessage \text
+	getbraillestringwidth \text
+	call EventScript_BrailleCursorWaitButton
 	.endm

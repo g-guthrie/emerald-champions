@@ -1,9 +1,7 @@
 #include "global.h"
-#include "difficulty.h"
 #include "main.h"
 #include "data.h"
 #include "move.h"
-#include "pokemon.h"
 #include "random.h"
 #include "string_util.h"
 #include "trainer_util.h"
@@ -14,10 +12,7 @@
 
 rng_value_t GeneratePartySeed(const struct Trainer *trainer)
 {
-    // Level tuning must not reroll party selection or personalities.
-    struct Trainer seedTrainer = *trainer;
-    seedTrainer.easyLevelReduction = FALSE;
-    u32 seed = Crc32B((const u8 *)&seedTrainer, sizeof(seedTrainer)) ^ READ_OTID_FROM_SAVE;
+    u32 seed = Crc32B((const u8 *)trainer, sizeof(struct Trainer)) ^ READ_OTID_FROM_SAVE;
     return LocalRandomSeed(seed);
 }
 
@@ -40,7 +35,7 @@ static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct Trai
 
     for (j = 0; j < MAX_MON_MOVES; ++j)
     {
-        u32 pp = GetMoveMaxPP(partyEntry->moves[j]);
+        u32 pp = GetMovePP(partyEntry->moves[j]);
         SetMonData(mon, MON_DATA_MOVE1 + j, &partyEntry->moves[j]);
         SetMonData(mon, MON_DATA_PP1 + j, &pp);
     }
@@ -68,7 +63,7 @@ u32 GeneratePersonalityForGender(u32 gender, u32 species)
 
 const u8 sModuloLUT[25] = {0, 21, 17, 13, 9, 5, 1, 22, 18, 14, 10, 6, 2, 23, 19, 15, 11, 7, 3, 24, 20, 16, 12, 8, 4};
 
-static void ModifyPersonalityForNature(u32 *personality, s32 newNature)
+void ModifyPersonalityForNature(u32 *personality, s32 newNature)
 {
     s32 nature = GetNatureFromPersonality(*personality);
     s32 diff = abs(newNature - nature);
@@ -78,30 +73,23 @@ static void ModifyPersonalityForNature(u32 *personality, s32 newNature)
         diff = NUM_NATURES - diff;
         sign *= -1;
     }
-    s32 delta = sModuloLUT[diff] * 0x100 * sign;
-    // Preserve the gender byte while avoiding a u32 wrap, which changes nature.
-    if (delta < 0 && *personality < (u32)-delta)
-        delta += NUM_NATURES * 0x100;
-    else if (delta > 0 && *personality > UINT32_MAX - (u32)delta)
-        delta -= NUM_NATURES * 0x100;
-    *personality += delta;
+    *personality += (sModuloLUT[diff] * 0x100 * sign);
 }
-
-#ifdef TESTING
-void Test_ModifyTrainerPersonalityForNature(u32 *personality, u32 nature)
-{
-    ModifyPersonalityForNature(personality, nature);
-}
-#endif
 
 static bool32 SetCorrectAbilityNum(struct Pokemon *mon, enum Species species, enum Ability ability)
 {
+    const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[species];
     u32 abilityNum;
-    bool32 found = FindSpeciesAbilitySlotForOwner(species, ability, TRUE, &abilityNum);
-    // An authored mismatch must fail, never silently change the designed team.
-    fatal_assertf(found, "illegal ability %S for %S", gAbilitiesInfo[ability].name, GetSpeciesName(species));
-    if (!found)
+    u32 maxAbilityNum = ARRAY_COUNT(speciesInfo->abilities);
+    for (abilityNum = 0; abilityNum < maxAbilityNum; ++abilityNum)
+    {
+        if (speciesInfo->abilities[abilityNum] == ability)
+            break;
+    }
+    assertf(abilityNum < maxAbilityNum, "illegal ability %S for %S", gAbilitiesInfo[ability].name, speciesInfo->speciesName)
+    {
         return FALSE;
+    }
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
     return TRUE;
 }
@@ -109,8 +97,9 @@ static bool32 SetCorrectAbilityNum(struct Pokemon *mon, enum Species species, en
 void MakeTrainerGenerator(struct TrainerGenerator *trainerGen, const struct Trainer *trainer)
 {
     trainerGen->gender = trainer->gender;
+    if (trainer->aiFlags & AI_FLAG_SMART_TERA)
+        trainerGen->smartTera = TRUE;
     trainerGen->isFrontier = FALSE;
-    trainerGen->easyLevelReduction = trainer->easyLevelReduction;
     StringCopyN(trainerGen->name, trainer->trainerName, TRAINER_NAME_LENGTH + 1);
     trainerGen->trainerClass = trainer->trainerClass;
     trainerGen->otID = OTID_STRUCT_RANDOM_NO_SHINY;
@@ -121,7 +110,8 @@ void MakePartnerGenerator(struct TrainerGenerator *trainerGen, const struct Trai
 {
     u32 otID;
     trainerGen->gender = partner->gender;
-    trainerGen->easyLevelReduction = FALSE;
+    if (partner->aiFlags & AI_FLAG_SMART_TERA)
+        trainerGen->smartTera = TRUE;
     trainerGen->isFrontier = FALSE;
     StringCopyN(trainerGen->name, partner->trainerName, TRAINER_NAME_LENGTH + 1);
     trainerGen->trainerClass = partner->trainerClass;
@@ -135,10 +125,6 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
     u32 data;
     u32 personality = (LocalRandom32(&trainer->localRngState) & 0xFFFFDF00) + 0x1000;
     u32 genderValue = 0;
-    u8 battleLevel = trainerMon->useLevelOffset ? GetCampaignTrainerLevel(trainerMon->levelOffset)
-        : max(1, min(MAX_LEVEL, trainerMon->lvl));
-    if (trainer->easyLevelReduction)
-        battleLevel = max(1, battleLevel - 1);
     if (trainerMon->gender == TRAINER_MON_RANDOM_GENDER)
         genderValue = LocalRandom32(&trainer->localRngState) & 0x000000FF;
     else if (trainerMon->gender == TRAINER_MON_MALE)
@@ -149,11 +135,7 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
         errorf("Unkwown trainer mon gender value %d", trainerMon->gender);
     personality |= genderValue;
     ModifyPersonalityForNature(&personality, trainerMon->nature);
-    CreateMon(mon, trainerMon->species,
-              min(battleLevel, MAX_LEVEL),
-              personality, trainer->otID);
-    // Species buffs are shared; ownership preserves trainer-specific mechanics.
-    SetMonTrainerOwned(mon, TRUE);
+    CreateMon(mon, trainerMon->species, trainerMon->lvl, personality, trainer->otID);
     if (trainerMon->nickname != NULL)
         SetMonData(mon, MON_DATA_NICKNAME, trainerMon->nickname);
     if (trainerMon->ev) //ev in struct TrainerMon are stored in Showdown order not vanilla Emerald order
@@ -227,10 +209,18 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
         data = trainerMon->gigantamaxFactor;
         SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &data);
     }
+    if (trainerMon->teraType)
+    {
+        data = trainerMon->teraType;
+        SetMonData(mon, MON_DATA_TERA_TYPE, &data);
+    }
+    else if (!trainer->smartTera)
+    {
+        data = TYPE_MYSTERY;
+        SetMonData(mon, MON_DATA_TERA_TYPE, &data);
+    }
 
     CalculateMonStats(mon);
-    // Authored spreads switch on with the Knuckle Badge (src/caps.c AreEVsUnlocked).
-    ClearMonEVsIfLocked(mon);
     SetMonData(mon, MON_DATA_OT_NAME, trainer->name);
     data = trainer->gender;
     SetMonData(mon, MON_DATA_OT_GENDER, &data);

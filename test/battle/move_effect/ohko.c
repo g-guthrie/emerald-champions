@@ -1,79 +1,244 @@
 #include "global.h"
 #include "test/battle.h"
 
-// Owner rule: a one-hit KO hits with its accuracy plus one point per level the
-// user leads by, or minus one per level it trails. A higher-level target is
-// harder to hit, never immune.
 ASSUMPTIONS
 {
+    ASSUME(GetMoveEffect(MOVE_FISSURE) == EFFECT_OHKO);
     ASSUME(GetMoveEffect(MOVE_GUILLOTINE) == EFFECT_OHKO);
-    ASSUME(GetMoveAccuracy(MOVE_GUILLOTINE) == 30);
-    ASSUME(GetMoveEffect(MOVE_SHEER_COLD) == EFFECT_OHKO);
+    ASSUME(GetMoveEffect(MOVE_HORN_DRILL) == EFFECT_OHKO);
+    ASSUME(GetMoveType(MOVE_FISSURE) == TYPE_GROUND);
+    ASSUME(GetMoveType(MOVE_GUILLOTINE) == TYPE_NORMAL);
+    ASSUME(GetMoveType(MOVE_HORN_DRILL) == TYPE_NORMAL);
 }
 
-SINGLE_BATTLE_TEST("One-hit KO moves lose one point of accuracy per level the target leads by")
+SINGLE_BATTLE_TEST("Fissure does not bypass type immunities (Gen 1)")
 {
-    PASSES_RANDOMLY(20, 100, RNG_ACCURACY);
     GIVEN {
-        PLAYER(SPECIES_KINGLER) { Level(50); Moves(MOVE_GUILLOTINE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Level(60); }
+        WITH_CONFIG(B_FIXED_DMG_IGNORES_TYPE, GEN_1);
+        ASSUME(IsSpeciesOfType(SPECIES_PIDGEY, TYPE_FLYING));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_PIDGEY);
     } WHEN {
-        TURN { MOVE(player, MOVE_GUILLOTINE); }
+        TURN { MOVE(player, MOVE_FISSURE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
-        MESSAGE("It's a one-hit KO!");
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+        MESSAGE("It doesn't affect the opposing Pidgey…");
     }
 }
 
-SINGLE_BATTLE_TEST("One-hit KO moves gain one point of accuracy per level the user leads by")
-{
-    PASSES_RANDOMLY(40, 100, RNG_ACCURACY);
-    GIVEN {
-        PLAYER(SPECIES_KINGLER) { Level(60); Moves(MOVE_GUILLOTINE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Level(50); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_GUILLOTINE); }
-    } SCENE {
-        MESSAGE("It's a one-hit KO!");
-    }
-}
-
-SINGLE_BATTLE_TEST("One-hit KO moves cannot hit a target 30 or more levels above the user")
+SINGLE_BATTLE_TEST("Guillotine does not bypass type immunities (Gen 1)")
 {
     GIVEN {
-        PLAYER(SPECIES_KINGLER) { Level(20); Moves(MOVE_GUILLOTINE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Level(50); }
+        WITH_CONFIG(B_FIXED_DMG_IGNORES_TYPE, GEN_1);
+        ASSUME(IsSpeciesOfType(SPECIES_GASTLY, TYPE_GHOST));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GASTLY);
     } WHEN {
         TURN { MOVE(player, MOVE_GUILLOTINE); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_GUILLOTINE, player);
-        MESSAGE("The opposing Wobbuffet avoided the attack!");
+        MESSAGE("It doesn't affect the opposing Gastly…");
     }
 }
 
-SINGLE_BATTLE_TEST("Sheer Cold still loses ten more points when the user is not Ice type")
+SINGLE_BATTLE_TEST("Horn Drill does not bypass type immunities (Gen 1)")
 {
-    PASSES_RANDOMLY(15, 100, RNG_ACCURACY);
     GIVEN {
-        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_ICE);
-        PLAYER(SPECIES_WOBBUFFET) { Level(50); Moves(MOVE_SHEER_COLD); }
-        OPPONENT(SPECIES_WOBBUFFET) { Level(55); }
+        WITH_CONFIG(B_FIXED_DMG_IGNORES_TYPE, GEN_1);
+        ASSUME(IsSpeciesOfType(SPECIES_GASTLY, TYPE_GHOST));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GASTLY);
     } WHEN {
-        TURN { MOVE(player, MOVE_SHEER_COLD); }
+        TURN { MOVE(player, MOVE_HORN_DRILL); }
     } SCENE {
-        MESSAGE("It's a one-hit KO!");
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HORN_DRILL, player);
+        MESSAGE("It doesn't affect the opposing Gastly…");
     }
 }
 
-SINGLE_BATTLE_TEST("Sturdy still blocks a one-hit KO from a higher-level user")
+SINGLE_BATTLE_TEST("OHKO moves can hit semi-invulnerable mons when the user has No-Guard")
 {
     GIVEN {
-        PLAYER(SPECIES_KINGLER) { Level(100); Moves(MOVE_GUILLOTINE); }
-        OPPONENT(SPECIES_GEODUDE) { Level(5); Ability(ABILITY_STURDY); }
+        ASSUME(GetItemHoldEffect(ITEM_FOCUS_SASH) == HOLD_EFFECT_FOCUS_SASH);
+        PLAYER(SPECIES_MACHAMP) { Ability(ABILITY_NO_GUARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_GUILLOTINE); }
+        TURN { MOVE(opponent, MOVE_FLY); }
+        TURN { MOVE(player, MOVE_FISSURE); }
     } SCENE {
-        NOT MESSAGE("It's a one-hit KO!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+        HP_BAR(opponent, hp: 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("OHKO moves can not hit semi-invulnerable")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLY); MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("OHKO moves can can be endured by Focus Sash")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+        HP_BAR(opponent, hp: 1);
+        MESSAGE("The opposing Wobbuffet hung on using its Focus Sash!");
+    }
+}
+
+SINGLE_BATTLE_TEST("OHKO moves can can be endured by Sturdy")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GEODUDE) { Ability(ABILITY_STURDY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
         ABILITY_POPUP(opponent, ABILITY_STURDY);
     }
 }
+
+SINGLE_BATTLE_TEST("OHKO moves always fails if the target has a higher level than the user")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(2); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("OHKO moves fail by level before checking Sturdy")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); }
+        OPPONENT(SPECIES_GEODUDE) { Level(2); Ability(ABILITY_STURDY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+            ABILITY_POPUP(opponent, ABILITY_STURDY);
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("OHKO moves fail if target protects")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold can hit semi-invulnerable mons when the user has No-Guard")
+{
+    GIVEN {
+        ASSUME(GetItemHoldEffect(ITEM_FOCUS_SASH) == HOLD_EFFECT_FOCUS_SASH);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_NO_GUARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLY); }
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        HP_BAR(opponent, hp: 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold can be endured by Focus Sash")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        HP_BAR(opponent, hp: 1);
+        MESSAGE("The opposing Wobbuffet hung on using its Focus Sash!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold can be endured by Sturdy")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GEODUDE) { Ability(ABILITY_STURDY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        ABILITY_POPUP(opponent, ABILITY_STURDY);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon (Gen3-6)")
+{
+    GIVEN {
+        WITH_CONFIG(B_SHEER_COLD_IMMUNITY, GEN_6);
+        ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_GLALIE);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        NOT MESSAGE("It doesn't affect the opposing Glalie…");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        HP_BAR(opponent, hp: 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon (Gen7+)")
+{
+    GIVEN {
+        WITH_CONFIG(B_SHEER_COLD_IMMUNITY, GEN_7);
+        ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_GLALIE);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        MESSAGE("It doesn't affect the opposing Glalie…");
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold's accuracy decreasaes by 10% if the user is not Ice type")
+{
+    PASSES_RANDOMLY(20, 100, RNG_ACCURACY);
+    GIVEN {
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_ICE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        HP_BAR(opponent);
+    }
+}
+
+TO_DO_BATTLE_TEST("OHKO moves faints the target, skipping regular damage calculations")
+TO_DO_BATTLE_TEST("OHKO moves's accuracy increases by 1% for every level the user has over the target")
+TO_DO_BATTLE_TEST("OHKO moves's ignores non-stage accuracy modifiers") // Gravity, Wide Lens, Compound Eyes
+TO_DO_BATTLE_TEST("OHKO moves ignore non-stage accuracy modifiers") // Gravity, Wide Lens, Compound Eyes

@@ -1,6 +1,4 @@
 #include "global.h"
-#include "emerald_champions_studio.h"
-#include "emerald_champions_agent_battle.h"
 #include "battle.h"
 #include "blit.h"
 #include "dynamic_placeholder_text_util.h"
@@ -39,6 +37,7 @@ static void DecompressGlyph_Normal(u16, bool32);
 static void DecompressGlyph_Short(u16, bool32);
 static void DecompressGlyph_Narrow(u16, bool32);
 static void DecompressGlyph_SmallNarrow(u16, bool32);
+static void DecompressGlyph_Bold(u16);
 static void DecompressGlyph_Narrower(u16, bool32);
 static void DecompressGlyph_SmallNarrower(u16, bool32);
 static void DecompressGlyph_ShortNarrow(u16, bool32);
@@ -55,6 +54,7 @@ static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
 static struct TextPrinter *AllocateTextPrinter(void);
 static u32 GetNumTextPrinters(void);
 static void FreeFinishedTextPrinters(void);
+static void SpriteCB_TextCursor(struct Sprite *sprite);
 
 static EWRAM_DATA struct TextPrinter *sFirstTextPrinter = NULL;
 
@@ -68,6 +68,8 @@ IWRAM_DATA struct TextGlyph gCurGlyph = {0};
 
 static const u8 sDownArrowTiles[] = INCGFX_U8("graphics/fonts/down_arrow.png", ".4bpp");
 static const u8 sDarkDownArrowTiles[] = INCGFX_U8("graphics/fonts/down_arrow_alt.png", ".4bpp");
+static const u8 sUnusedFRLGBlankedDownArrow[] = INCGFX_U8("graphics/fonts/unused_frlg_blanked_down_arrow.png", ".4bpp");
+static const u8 sUnusedFRLGDownArrow[] = INCGFX_U8("graphics/fonts/unused_frlg_down_arrow.png", ".4bpp");
 static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
@@ -312,6 +314,8 @@ static const u8 sTextScrollSpeeds[] =
     [OPTIONS_TEXT_SPEED_INSTANT] = 6,
 };
 
+static const u16 sFontBoldJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_bold.png", ".hwjpnfont");
+
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
     gFonts = fonts;
@@ -381,6 +385,68 @@ bool16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, 
     return AddTextPrinter(&printerTemplate, speed, callback);
 }
 
+bool16 AddSpriteTextPrinterParameterized(u8 spriteId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, TextPrinterCallback callback)
+{
+    struct TextPrinterTemplate printerTemplate;
+
+    printerTemplate.currentChar = str;
+    printerTemplate.type = SPRITE_TEXT_PRINTER;
+    printerTemplate.spriteId = spriteId;
+    printerTemplate.fontId = fontId;
+    printerTemplate.x = x;
+    printerTemplate.y = y;
+    printerTemplate.currentX = x;
+    printerTemplate.currentY = y;
+    printerTemplate.letterSpacing = gFonts[fontId].letterSpacing;
+    printerTemplate.lineSpacing = gFonts[fontId].lineSpacing;
+    printerTemplate.color = gFonts[fontId].color;
+    return AddTextPrinter(&printerTemplate, speed, callback);
+}
+
+void AddSpriteTextPrinterParameterized3(u8 spriteId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
+{
+    struct TextPrinterTemplate printer;
+
+    printer.currentChar = str;
+    printer.type = SPRITE_TEXT_PRINTER;
+    printer.spriteId = spriteId;
+    printer.fontId = fontId;
+    printer.x = left;
+    printer.y = top;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
+    printer.color.background = color[0];
+    printer.color.foreground = color[1];
+    printer.color.shadow = color[2];
+    printer.color.accent = color[0];
+
+    AddTextPrinter(&printer, speed, NULL);
+}
+
+void AddSpriteTextPrinterParameterized4(u8 spriteId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
+{
+    struct TextPrinterTemplate printer;
+
+    printer.currentChar = str;
+    printer.type = SPRITE_TEXT_PRINTER;
+    printer.spriteId = spriteId;
+    printer.fontId = fontId;
+    printer.x = left;
+    printer.y = top;
+    printer.currentX = printer.x;
+    printer.currentY = printer.y;
+    printer.letterSpacing = letterSpacing;
+    printer.lineSpacing = lineSpacing;
+    printer.color.background = color[0];
+    printer.color.foreground = color[1];
+    printer.color.shadow = color[2];
+    printer.color.accent = color[0];
+
+    AddTextPrinter(&printer, speed, NULL);
+}
+
 void AddSpriteTextPrinterParameterized6(u8 spriteId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const union TextColor color, s8 speed, const u8 *str)
 {
     struct TextPrinterTemplate printer;
@@ -402,11 +468,6 @@ void AddSpriteTextPrinterParameterized6(u8 spriteId, u8 fontId, u8 left, u8 top,
 
 bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    if (printerTemplate->type == WINDOW_TEXT_PRINTER && printerTemplate->windowId == 0)
-    {
-        EmeraldChampionsStudioText(printerTemplate->currentChar);
-        EmeraldChampionsAgentBattleText(printerTemplate->currentChar);
-    }
     if (!gFonts)
         return FALSE;
 
@@ -553,6 +614,23 @@ bool32 IsTextPrinterActiveOnWindow(u32 windowId)
     return FALSE;
 }
 
+bool32 IsTextPrinterActiveOnSprite(u32 spriteId)
+{
+    struct TextPrinter *currentPrinter = sFirstTextPrinter;
+
+    while (currentPrinter != NULL)
+    {
+        if (currentPrinter->printerTemplate.type == SPRITE_TEXT_PRINTER
+         && currentPrinter->printerTemplate.firstSprite == spriteId)
+        {
+            return currentPrinter->active;
+        }
+        currentPrinter = currentPrinter->nextPrinter;
+    }
+
+    return FALSE;
+}
+
 static u32 RenderFont(struct TextPrinter *textPrinter)
 {
     u32 ret;
@@ -645,6 +723,24 @@ void DecompressGlyphTile(const void *src_, void *dest_)
 
     temp = *(src++);
     *(dest++) = (sFontHalfRowLookupTable[temp & 0xFF] << 16) | (sFontHalfRowLookupTable[temp >> 8]);
+}
+
+static u8 UNUSED GetLastTextColor(enum TextColorType colorType)
+{
+    switch (colorType)
+    {
+    case TEXT_COLOR_TYPE_FOREGROUND:
+        return sLastTextColor.foreground;
+    case TEXT_COLOR_TYPE_HIGHLIGHT:
+    case TEXT_COLOR_TYPE_BACKGROUND:
+        return sLastTextColor.background;
+    case TEXT_COLOR_TYPE_SHADOW:
+        return sLastTextColor.shadow;
+    case TEXT_COLOR_TYPE_ACCENT:
+        return sLastTextColor.accent;
+    default:
+        return TEXT_COLOR_TRANSPARENT;
+    }
 }
 
 static u32 OffsetCurrGlyph(u32 shiftWidth)
@@ -1601,6 +1697,99 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 #undef nextX
 #undef nextY
 
+static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
+{
+    int i;
+    u8 width;
+    int temp;
+    int temp2;
+    u8 line;
+    int strPos;
+    u8 lineWidths[8];
+    const u8 *strLocal;
+
+    for (i = 0; i < (int)ARRAY_COUNT(lineWidths); i++)
+        lineWidths[i] = 0;
+
+    width = 0;
+    line = 0;
+    strLocal = str;
+    strPos = 0;
+
+    do
+    {
+        temp = strLocal[strPos++];
+        switch (temp)
+        {
+        case CHAR_NEWLINE:
+        case EOS:
+            lineWidths[line] = width;
+            width = 0;
+            line++;
+            break;
+        case EXT_CTRL_CODE_BEGIN:
+            temp2 = strLocal[strPos++];
+            switch (temp2)
+            {
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
+            case EXT_CTRL_CODE_TEXT_COLORS:
+                ++strPos;
+            case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_SE:
+                ++strPos;
+            case EXT_CTRL_CODE_BACKGROUND:
+            case EXT_CTRL_CODE_COLOR:
+            case EXT_CTRL_CODE_SHADOW:
+            case EXT_CTRL_CODE_ACCENT:
+            case EXT_CTRL_CODE_HIGHLIGHT:
+            case EXT_CTRL_CODE_PALETTE:
+            case EXT_CTRL_CODE_FONT:
+            case EXT_CTRL_CODE_PAUSE:
+            case EXT_CTRL_CODE_ESCAPE:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
+            case EXT_CTRL_CODE_CLEAR:
+            case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_CLEAR_TO:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+            case EXT_CTRL_CODE_SPEAKER:
+                ++strPos;
+                break;
+            case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
+            default:
+                break;
+            }
+            break;
+        case CHAR_DYNAMIC:
+        case PLACEHOLDER_BEGIN:
+            ++strPos;
+            break;
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
+            break;
+        case CHAR_KEYPAD_ICON:
+        case CHAR_EXTRA_SYMBOL:
+            ++strPos;
+        default:
+            ++width;
+            break;
+        }
+    } while (temp != EOS);
+
+    for (width = 0, strPos = 0; strPos < 8; ++strPos)
+    {
+        if (width < lineWidths[strPos])
+            width = lineWidths[strPos];
+    }
+
+    return (u8)(GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + letterSpacing) * width;
+}
+
 static u32 (*GetFontWidthFunc(u8 fontId))(u16, bool32)
 {
     u32 i;
@@ -1823,6 +2012,129 @@ s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum,
         str += strLen + 1;
     }
     return strWidth;
+}
+
+u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
+{
+    u8 *strLocal;
+    int strPos;
+    int temp;
+    int temp2;
+
+    union TextColor savedTextColors = SaveTextColors();
+
+    union TextColor textColor = {
+        .background = TEXT_COLOR_TRANSPARENT,
+        .foreground = TEXT_COLOR_WHITE,
+        .shadow = TEXT_COLOR_LIGHT_GRAY,
+        .accent = TEXT_COLOR_TRANSPARENT,
+    };
+
+    GenerateFontHalfRowLookupTable(textColor);
+    strLocal = str;
+    strPos = 0;
+
+    do
+    {
+        temp = strLocal[strPos++];
+        switch (temp)
+        {
+        case EXT_CTRL_CODE_BEGIN:
+            temp2 = strLocal[strPos++];
+            switch (temp2)
+            {
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
+                textColor.foreground = strLocal[strPos++];
+                textColor.background = textColor.accent = strLocal[strPos++];
+                textColor.shadow = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_TEXT_COLORS:
+                textColor.foreground = strLocal[strPos++];
+                textColor.shadow = strLocal[strPos++];
+                textColor.accent = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_BACKGROUND:
+                textColor.background = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_COLOR:
+                textColor.foreground = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_SHADOW:
+                textColor.shadow = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_ACCENT:
+                textColor.accent = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_HIGHLIGHT:
+                textColor.background = textColor.accent = strLocal[strPos++];
+                GenerateFontHalfRowLookupTable(textColor);
+                continue;
+            case EXT_CTRL_CODE_FONT:
+                fontId = strLocal[strPos++];
+                break;
+            case EXT_CTRL_CODE_PLAY_BGM:
+            case EXT_CTRL_CODE_PLAY_SE:
+                ++strPos;
+            case EXT_CTRL_CODE_PALETTE:
+            case EXT_CTRL_CODE_PAUSE:
+            case EXT_CTRL_CODE_ESCAPE:
+            case EXT_CTRL_CODE_SHIFT_RIGHT:
+            case EXT_CTRL_CODE_SHIFT_DOWN:
+            case EXT_CTRL_CODE_CLEAR:
+            case EXT_CTRL_CODE_SKIP:
+            case EXT_CTRL_CODE_CLEAR_TO:
+            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+            case EXT_CTRL_CODE_SPEAKER:
+                ++strPos;
+                break;
+            case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
+            default:
+                continue;
+            }
+            break;
+        case CHAR_DYNAMIC:
+        case CHAR_KEYPAD_ICON:
+        case CHAR_EXTRA_SYMBOL:
+        case PLACEHOLDER_BEGIN:
+            ++strPos;
+            break;
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
+        case CHAR_NEWLINE:
+        case EOS:
+            break;
+        default:
+            switch (fontId)
+            {
+            case FONT_BOLD:
+                DecompressGlyph_Bold(temp);
+                break;
+            case FONT_NORMAL:
+            default:
+                DecompressGlyph_Normal(temp, TRUE);
+                break;
+            }
+            CpuCopy32(gCurGlyph.gfxBufferTop, pixels, 0x20);
+            CpuCopy32(gCurGlyph.gfxBufferBottom, pixels + 0x20, 0x20);
+            pixels += 0x40;
+            break;
+        }
+    }
+    while (temp != EOS);
+
+    RestoreTextColors(savedTextColors);
+    return 1;
 }
 
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
@@ -2099,6 +2411,17 @@ static u32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
         return 8;
     else
         return gFontNormalLatinGlyphWidths[glyphId];
+}
+
+static void DecompressGlyph_Bold(u16 glyphId)
+{
+    const u16 *glyphs;
+
+    glyphs = sFontBoldJapaneseGlyphs + (0x100 * (glyphId >> 4)) + (0x8 * (glyphId & 0xF));
+    DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+    DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+    gCurGlyph.width = 8;
+    gCurGlyph.height = 12;
 }
 
 static void DecompressGlyph_Narrower(u16 glyphId, bool32 isJapanese)
@@ -2420,6 +2743,95 @@ static void FreeFinishedTextPrinters(void)
         }
     }
 }
+
+// FRLG
+
+#define TAG_CURSOR 0x8000
+
+extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
+
+static const u8 sDoubleArrowTiles1[]       = INCGFX_U8("graphics/fonts/down_arrow_3.png", ".4bpp");
+static const u8 sDoubleArrowTiles2[]       = INCGFX_U8("graphics/fonts/down_arrow_4.png", ".4bpp");
+
+static const struct SpriteSheet sSpriteSheets_TextCursor[] =
+{
+    {sDoubleArrowTiles1, sizeof(sDoubleArrowTiles1), TAG_CURSOR},
+    {sDoubleArrowTiles2, sizeof(sDoubleArrowTiles2), TAG_CURSOR},
+    {NULL}
+};
+
+static const struct SpritePalette sSpritePalettes_TextCursor[] =
+{
+    {gStandardMenuPalette, TAG_CURSOR},
+    {NULL}
+};
+
+static const struct SpriteTemplate sSpriteTemplate_TextCursor =
+{
+    .tileTag = TAG_CURSOR,
+    .paletteTag = TAG_CURSOR,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_TextCursor,
+};
+
+#define sDelay data[0]
+#define sState data[1]
+
+static void SpriteCB_TextCursor(struct Sprite *sprite)
+{
+    if (sprite->sDelay)
+    {
+        sprite->sDelay--;
+    }
+    else
+    {
+        sprite->sDelay = 8;
+        switch (sprite->sState)
+        {
+        case 0:
+            sprite->y2 = 0;
+            break;
+        case 1:
+            sprite->y2 = 1;
+            break;
+        case 2:
+            sprite->y2 = 2;
+            break;
+        case 3:
+            sprite->y2 = 1;
+            sprite->sState = 0;
+            return;
+        }
+        sprite->sState++;
+    }
+}
+
+u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority)
+{
+    u8 spriteId;
+    LoadSpriteSheet(&sSpriteSheets_TextCursor[sheetId & 1]);
+    LoadSpritePalette(&sSpritePalettes_TextCursor[0]);
+    spriteId = CreateSprite(&sSpriteTemplate_TextCursor, x + 3, y + 4, subpriority);
+    gSprites[spriteId].oam.priority = (priority & 3);
+    gSprites[spriteId].oam.matrixNum = 0;
+    gSprites[spriteId].sDelay = 8;
+    return spriteId;
+}
+
+void DestroyTextCursorSprite(u8 spriteId)
+{
+    DestroySprite(&gSprites[spriteId]);
+    FreeSpriteTilesByTag(TAG_CURSOR);
+    FreeSpritePaletteByTag(TAG_CURSOR);
+}
+
+#undef sDelay
+#undef sState
+
+// End FRLG
 
 void DeactivateSingleTextPrinter(u32 id, enum TextPrinterType type)
 {

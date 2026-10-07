@@ -23,30 +23,28 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     ITEM_LIST_END
 };
 
-// These shelves complement the free Center loadout gear with finite supplies
-// and evolution tools that remain meaningful in the postgame.
-static const enum Item sFrontierExchangeCorner_Supplies[] =
+static const enum Item sFrontierExchangeCorner_Vitamins[] =
 {
-    ITEM_QUICK_BALL,
-    ITEM_TIMER_BALL,
-    ITEM_MAX_REVIVE,
-    ITEM_SACRED_ASH,
-    ITEM_DREAM_BALL,
-    ITEM_BEAST_BALL,
+    ITEM_PROTEIN,
+    ITEM_CALCIUM,
+    ITEM_IRON,
+    ITEM_ZINC,
+    ITEM_CARBOS,
+    ITEM_HP_UP,
     ITEM_LIST_END
 };
 
-static const enum Item sFrontierExchangeCorner_EvolutionItems[] =
+static const enum Item sFrontierExchangeCorner_HoldItems[] =
 {
-    ITEM_LINKING_CORD,
-    ITEM_PROTECTOR,
-    ITEM_ELECTIRIZER,
-    ITEM_MAGMARIZER,
-    ITEM_REAPER_CLOTH,
-    ITEM_RAZOR_CLAW,
-    ITEM_SWEET_APPLE,
-    ITEM_TART_APPLE,
-    ITEM_PRISM_SCALE,
+    ITEM_LEFTOVERS,
+    ITEM_WHITE_HERB,
+    ITEM_QUICK_CLAW,
+    ITEM_MENTAL_HERB,
+    ITEM_BRIGHT_POWDER,
+    ITEM_CHOICE_BAND,
+    ITEM_KINGS_ROCK,
+    ITEM_FOCUS_BAND,
+    ITEM_SCOPE_LENS,
     ITEM_LIST_END
 };
 
@@ -75,27 +73,27 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_SupplyDescriptions[] =
+static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_QuickBallDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_TimerBallDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_MaxReviveDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_SacredAshDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_DreamBallDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_BeastBallDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_IronDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_EvolutionItemDescriptions[] =
+static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_LinkingCordDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ProtectorDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ElectirizerDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_MagmarizerDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ReaperClothDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_RazorClawDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_SweetAppleDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_TartAppleDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_PrismScaleDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc,
     gText_Exit
 };

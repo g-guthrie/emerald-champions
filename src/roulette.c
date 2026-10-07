@@ -417,17 +417,17 @@ static void SpriteCB_Shroomish(struct Sprite *);
 static void SpriteCB_Taillow(struct Sprite *);
 
 static const u8 Roulette_Text_PlayMinimumWagerIsX[] = _("The minimum wager at this table\nis {STR_VAR_1}. Do you want to play?");
-static const u8 Roulette_Text_NotEnoughCoins[] = _("You don't have enough Coins.");
+static const u8 Roulette_Text_NotEnoughCoins[] = _("You don't have enough COINS.");
 static const u8 Roulette_Text_SpecialRateTable[] = _("Special rate table right now!");
 static const u8 Roulette_Text_ControlsInstruction[] = _("Place your wager with the + Control\nPad, then press the A Button.");
 static const u8 Roulette_Text_ItsAHit[] = _("It's a hit!");
 static const u8 Roulette_Text_Jackpot[] = _("Jackpot!");
 static const u8 Roulette_Text_NothingDoing[] = _("Nothing doing!");
-static const u8 Roulette_Text_YouveWonXCoins[] = _("You've won {STR_VAR_1} Coins!");
-static const u8 Roulette_Text_NoCoinsLeft[] = _("No Coins left…");
+static const u8 Roulette_Text_YouveWonXCoins[] = _("You've won {STR_VAR_1} COINS!");
+static const u8 Roulette_Text_NoCoinsLeft[] = _("No COINS left…");
 static const u8 Roulette_Text_KeepPlaying[] = _("Keep playing?");
-static const u8 Roulette_Text_BoardWillBeCleared[] = _("The Roulette board will be cleared.");
-static const u8 Roulette_Text_CoinCaseIsFull[] = _("Your Coin Case is full!\nCoins can be exchanged for prizes.");
+static const u8 Roulette_Text_BoardWillBeCleared[] = _("The ROULETTE board will be cleared.");
+static const u8 Roulette_Text_CoinCaseIsFull[] = _("Your COIN CASE is full!\nCoins can be exchanged for prizes.");
 
 static const u16 sWheel_Pal[] = INCGFX_U16("graphics/roulette/wheel.png", ".gbapal"); // also palette for grid
 static const u32 sGrid_Tilemap[] = INCGFX_U32("graphics/roulette/grid.bin", ".smolTM");
@@ -3483,6 +3483,15 @@ static void CreateGridSprites(void)
     }
 }
 
+static void UNUSED DestroyGridSprites(void)
+{
+    u8 i;
+    for (i = 0; i < NUM_ROULETTE_SLOTS; i++)
+    {
+        DestroySprite(&gSprites[sRoulette->spriteIds[i + SPR_GRID_ICONS]]);
+    }
+}
+
 static void ShowHideGridIcons(bool8 hideAll, u8 hideSquare)
 {
     u8 i;
@@ -3784,7 +3793,7 @@ static void CreateWheelBallSprites(void)
     u8 i;
     for (i = 0; i < BALLS_PER_ROUND; i++)
     {
-        sRoulette->spriteIds[i] = CreateSprite(&sSpriteTemplate_Ball, 116, 80, 57 - i);
+        sRoulette->spriteIds[i] = CreateSpriteUnchecked(&sSpriteTemplate_Ball, 116, 80, 57 - i);
         if (sRoulette->spriteIds[i] != MAX_SPRITES)
         {
             gSprites[sRoulette->spriteIds[i]].invisible = TRUE;

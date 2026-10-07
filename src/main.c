@@ -25,9 +25,6 @@
 #include "trainer_hill.h"
 #include "test_runner.h"
 #include "constants/rgb.h"
-#if EC_HEADLESS_FIXTURES
-#include "emerald_champions_headless.h"
-#endif
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -85,7 +82,7 @@ static void CallCallbacks(void);
 #ifdef BUGFIX
 static void SeedRngWithRtc(void);
 #endif
-static void ReadKeys(u16 keyInput);
+static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
@@ -138,7 +135,7 @@ void AgbMainLoop(void)
 {
     for (;;)
     {
-        ReadKeys(REG_KEYINPUT ^ KEYS_MASK);
+        ReadKeys();
 
         if (gSoftResetDisabled == FALSE
          && JOY_HELD_RAW(A_BUTTON)
@@ -188,11 +185,7 @@ static void InitMainCallbacks(void)
     gTrainerHillVBlankCounter = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-#if EC_HEADLESS_FIXTURES
-    SetMainCallback2(CB2_EmeraldChampionsHeadlessFixture);
-#else
     SetMainCallback2(gInitialMainCB2);
-#endif
     gSaveBlock2Ptr = &gSaveblock2.block;
     gPokemonStoragePtr = &gPokemonStorage.block;
 }
@@ -204,9 +197,6 @@ static void CallCallbacks(void)
 
     if (gMain.callback2)
         gMain.callback2();
-#if EC_HEADLESS_FIXTURES
-    EmeraldChampionsHeadlessObserve();
-#endif
 }
 
 void SetMainCallback2(MainCallback callback)
@@ -276,13 +266,18 @@ void InitKeys(void)
     gMain.newKeysRaw = 0;
 }
 
-static void ReadKeys(u16 keyInput)
+static void ReadKeys(void)
 {
+    u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
     gMain.newKeysRaw = keyInput & ~gMain.heldKeysRaw;
     gMain.newKeys = gMain.newKeysRaw;
     gMain.newAndRepeatedKeys = gMain.newKeysRaw;
 
-    if (keyInput != 0 && gMain.heldKeysRaw == keyInput)
+    // BUG: Key repeat won't work when pressing L using L=A button mode
+    // because it compares the raw key input with the remapped held keys.
+    // Note that newAndRepeatedKeys is never remapped either.
+
+    if (keyInput != 0 && gMain.heldKeys == keyInput)
     {
         gMain.keyRepeatCounter--;
 
@@ -309,21 +304,11 @@ static void ReadKeys(u16 keyInput)
 
         if (JOY_HELD(L_BUTTON))
             gMain.heldKeys |= A_BUTTON;
-
-        if (gMain.newAndRepeatedKeys & L_BUTTON)
-            gMain.newAndRepeatedKeys |= A_BUTTON;
     }
 
     if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;
 }
-
-#ifdef TESTING
-void Test_ReadKeys(u16 keys)
-{
-    ReadKeys(keys);
-}
-#endif
 
 void InitIntrHandlers(void)
 {

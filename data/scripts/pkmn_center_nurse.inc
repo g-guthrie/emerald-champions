@@ -1,112 +1,12 @@
 Common_EventScript_PkmnCenterNurse::
 	lock
 	faceplayer
-	call EC_DeliverTravelDocuments
-	call EventScript_PkmnCenterNurse_Itemfinder
-	call_if_set FLAG_EC_WOODS_DUSK_BALLS_PENDING, EventScript_PkmnCenterNurse_WoodsGift
-	call EventScript_PkmnCenterNurse_GiveTools
-	@ The party rule follows the welcome and tools, before Kubfu can be met.
-	call_if_unset FLAG_EC_RESTRICTED_RULE_EXPLAINED, EventScript_PkmnCenterNurse_RestrictedRule
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_OfferHealAfterTools
-	goto EventScript_PkmnCenterNurse_Main
-
-@ Both Center nurses and the Oldale Mart visitor use the same per-item checks.
-@ VAR_RESULT reports a new handout; VAR_0x8007 reports that none are pending.
-@ The Mart gives its lesson in the native Bag, so it skips the counter lectures.
-EventScript_PkmnCenterNurse_GiveTools::
-	setvar VAR_0x8008, FALSE
-	goto EventScript_PkmnCenterNurse_CheckTools
-
-EventScript_PkmnCenterNurse_GiveToolsForTour::
-	setvar VAR_0x8008, TRUE
-
-EventScript_PkmnCenterNurse_CheckTools:
-	setvar VAR_0x8009, FALSE
-	setvar VAR_0x8007, FALSE
-	setvar VAR_0x8004, ITEM_POKE_VIAL
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_HasVial
-	msgbox gText_EmeraldChampionsFirstCenterVisit, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_VIAL, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	setvar VAR_0x8009, TRUE
-	setvar VAR_POKE_VIAL_MAX_CHARGES, POKE_VIAL_CAPACITY_BASE
-	setvar VAR_POKE_VIAL_CHARGES, 1
-	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_HasVial
-	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
-
-EventScript_PkmnCenterNurse_HasVial:
-	setvar VAR_0x8004, ITEM_LEVELER
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRegenerator
-	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
-	giveitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	setvar VAR_0x8009, TRUE
-	call_if_eq VAR_0x8008, FALSE, EventScript_PkmnCenterNurse_ExplainLeveler
-
-EventScript_PkmnCenterNurse_CheckRegenerator:
-	setvar VAR_0x8004, ITEM_REGENERATOR
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
-	msgbox gText_EmeraldChampionsGiveRegenerator, MSGBOX_DEFAULT
-	giveitem ITEM_REGENERATOR, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	setvar VAR_0x8009, TRUE
-	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
-	msgbox gText_EmeraldChampionsExplainRegenerator, MSGBOX_DEFAULT
-
-EventScript_PkmnCenterNurse_CheckRepelSpray:
-	setvar VAR_0x8004, ITEM_REPEL_SPRAY
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
-	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
-	giveitem ITEM_REPEL_SPRAY, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	setvar VAR_0x8009, TRUE
-	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
-	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
-
-EventScript_PkmnCenterNurse_CheckFlightBeacon:
-	setvar VAR_0x8004, ITEM_FLIGHT_BEACON
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_ToolsDelivered
-	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
-	giveitem ITEM_FLIGHT_BEACON, 1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ToolsPending
-	setvar VAR_0x8009, TRUE
-	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_ToolsDelivered
-	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
-
-EventScript_PkmnCenterNurse_ToolsDelivered:
-	setvar VAR_0x8007, TRUE
-	goto_if_eq VAR_0x8008, TRUE, EventScript_PkmnCenterNurse_ReturnToolsResult
-	call_if_eq VAR_0x8009, TRUE, EventScript_PkmnCenterNurse_LocalGuide
-EventScript_PkmnCenterNurse_ReturnToolsResult:
-	copyvar VAR_RESULT, VAR_0x8009
-	return
-
-EventScript_PkmnCenterNurse_ExplainLeveler:
-	special GetLevelCapForScriptedGift
-	buffernumberstring STR_VAR_1, VAR_0x800A
-	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
-	return
-
-EventScript_PkmnCenterNurse_LocalGuide:
-	msgbox gText_EmeraldChampionsLocalGuide, MSGBOX_DEFAULT
-	return
-
-EventScript_PkmnCenterNurse_OfferHealAfterTools::
 	setvar VAR_0x8004, 0
-	msgbox gText_EmeraldChampionsHealAfterTools, MSGBOX_YESNO
-	goto EventScript_PkmnCenterNurse_AnswerHeal
-
-EventScript_PkmnCenterNurse_Main::
-	setvar VAR_0x8004, 0
+.if !IS_FRLG
 	specialvar VAR_RESULT, CountPlayerTrainerStars
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
+.endif
 	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
-EventScript_PkmnCenterNurse_AnswerHeal::
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn
 	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_Goodbye
 	end
@@ -123,7 +23,7 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	waitmessage
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
 	goto_if_unset FLAG_POKERUS_EXPLAINED, EventScript_PkmnCenterNurse_CheckPokerus
-	goto EventScript_PkmnCenterNurse_ReturnPkmn
+	goto EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
 	end
 
 EventScript_PkmnCenterNurse_IllTakeYourPkmn::
@@ -136,16 +36,29 @@ EventScript_PkmnCenterNurse_IllTakeYourPkmn2::
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	hidefollower 0
-	applymovement VAR_0x800B, Common_Movement_FaceLeft
+	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Turn
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
+.if OW_UNION_DISABLE_CHECK == FALSE && OW_FLAG_MOVE_UNION_ROOM_CHECK != 0
+	setflag OW_FLAG_MOVE_UNION_ROOM_CHECK
+	call CableClub_OnResume
+	clearflag OW_FLAG_MOVE_UNION_ROOM_CHECK
+.endif
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_0x800B, Common_Movement_FaceDown
+	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
-	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
 	callnative UpdateFollowingPokemon
 	return
+
+EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom::
+	specialvar VAR_RESULT, PlayerNotAtTrainerHillEntrance
+	goto_if_eq VAR_RESULT, 0, EventScript_PkmnCenterNurse_ReturnPkmn
+	specialvar VAR_RESULT, BufferUnionRoomPlayerName
+	copyvar VAR_0x8008, VAR_RESULT
+	goto_if_eq VAR_0x8008, 0, EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_eq VAR_0x8008, 1, EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom
+	end
 
 @ VAR_0x8004 is 1 when player has Gold Card
 EventScript_PkmnCenterNurse_ReturnPkmn::
@@ -154,7 +67,6 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	call EventScript_PkmnCenterNurse_DeliverRelics
 	message gText_WeHopeToSeeYouAgain
 	return
 
@@ -163,18 +75,27 @@ EventScript_PkmnCenterNurse_ReturnPkmn2::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
-	call EventScript_PkmnCenterNurse_DeliverRelics
 	message gText_WeHopeToSeeYouAgain2
+	return
+
+EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
+	goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, EventScript_PkmnCenterNurse_ReturnPkmn
+	msgbox gText_RestoredPkmnToFullHealth, MSGBOX_DEFAULT
+	setflag FLAG_NURSE_UNION_ROOM_REMINDER
+	message CableClub_Text_PlayerIsWaiting
+	waitmessage
+	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
+	waitmovement 0
+	message gText_WeHopeToSeeYouAgain
 	return
 
 EventScript_PkmnCenterNurse_CheckPokerus::
 	specialvar VAR_RESULT, IsPokerusInParty
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_ExplainPokerus
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
 	end
 
 EventScript_PkmnCenterNurse_ExplainPokerus::
-	call EventScript_PkmnCenterNurse_DeliverRelics
 	message gText_PokerusExplanation
 	setflag FLAG_POKERUS_EXPLAINED
 	return
@@ -209,106 +130,6 @@ Movement_PkmnCenterNurse_Bow:
 	delay_4
 	step_end
 
-@ The Petalburg Woods researcher's Dusk Balls wait here when the Bag was full.
-@ It is independent of story completion and healing.
-EventScript_PkmnCenterNurse_WoodsGift::
-	msgbox Text_PkmnCenterNurse_WoodsGift, MSGBOX_DEFAULT
-	giveitem ITEM_DUSK_BALL, 3
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_KeepDevonGift
-	clearflag FLAG_EC_WOODS_DUSK_BALLS_PENDING
-	return
-EventScript_PkmnCenterNurse_KeepDevonGift::
-	msgbox Text_PkmnCenterNurse_KeepDevonGift, MSGBOX_DEFAULT
-	return
-Text_PkmnCenterNurse_WoodsGift:
-	.string "The Woods researcher left three\n"
-	.string "Dusk Balls for you. Here you are!$"
-Text_PkmnCenterNurse_KeepDevonGift:
-	.string "Your Bag is still full. I'll keep it\n"
-	.string "safe. Make room and speak to me again.$"
-
-EventScript_PkmnCenterNurse_ToolsPending::
-	setvar VAR_0x8007, FALSE
-	msgbox gText_EmeraldChampionsToolsPending, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
-	return
-
-gText_EmeraldChampionsToolsPending:
-	.string "Your Bag is full. We will hold\n"
-	.string "the missing tools for you.\p"
-	.string "The Center can still heal your team.\n"
-	.string "Make room and return for the tools\l"
-	.string "whenever you are ready.$"
-
-@ Route110 completion records entitlement; ownership includes deposited items.
-EventScript_PkmnCenterNurse_Itemfinder::
-	goto_if_lt VAR_ROUTE110_STATE, 1, Common_EventScript_NopReturn
-	setvar VAR_0x8004, ITEM_ITEMFINDER
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, Common_EventScript_NopReturn
-	checkitemspace ITEM_ITEMFINDER, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
-	msgbox Text_PkmnCenterNurse_Itemfinder, MSGBOX_DEFAULT
-	giveitem ITEM_ITEMFINDER
-	return
-
-Text_PkmnCenterNurse_Itemfinder:
-	.string "Your friend left a Dowsing Machine\n"
-	.string "for you after your Route 110 battle!$"
-
-@ Relics a legend put aside for the Hall of Fame (legendary_signs.c) are
-@ handed over once the heal is done, before the farewell, each by name.
-@ One the Bag cannot take stays pending for the next heal.
-EventScript_PkmnCenterNurse_DeliverRelics::
-	callnative CountDeliverableLegendaryRelics
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_NopReturn
-	goto_if_unset FLAG_IS_CHAMPION, EventScript_PkmnCenterNurse_RelicWaiting
-	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_RelicArrived
-	msgbox EventScript_PkmnCenterNurse_Text_RelicsArrived, MSGBOX_DEFAULT
-	goto EventScript_PkmnCenterNurse_GiveRelics
-
-EventScript_PkmnCenterNurse_RelicArrived:
-	msgbox EventScript_PkmnCenterNurse_Text_RelicArrived, MSGBOX_DEFAULT
-	goto EventScript_PkmnCenterNurse_GiveRelics
-
-@ Before the Hall of Fame only a relic the Bag and PC were too full to take
-@ at the catch can be waiting here.
-EventScript_PkmnCenterNurse_RelicWaiting:
-	msgbox EventScript_PkmnCenterNurse_Text_RelicWaiting, MSGBOX_DEFAULT
-@ Each relic the Bag has room for is handed over; one whose pocket is full
-@ stays pending without holding back the relics bound for other pockets.
-EventScript_PkmnCenterNurse_GiveRelics:
-	callnative BufferNextLegendaryRelic
-	goto_if_eq VAR_RESULT, ITEM_NONE, EventScript_PkmnCenterNurse_KeepRelics
-	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_GiveRelics
-EventScript_PkmnCenterNurse_KeepRelics:
-	callnative CountDeliverableLegendaryRelics
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_NopReturn
-	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_KeepRelic
-	msgbox EventScript_PkmnCenterNurse_Text_KeepRelics, MSGBOX_DEFAULT
-	return
-
-EventScript_PkmnCenterNurse_KeepRelic:
-	msgbox EventScript_PkmnCenterNurse_Text_KeepRelic, MSGBOX_DEFAULT
-	return
-
-EventScript_PkmnCenterNurse_Text_RelicArrived:
-	.string "Oh! This was left here for you,\n"
-	.string "Champion. It's humming with power…$"
-
-EventScript_PkmnCenterNurse_Text_RelicsArrived:
-	.string "Oh! These were left here for you,\n"
-	.string "Champion. They're humming with power…$"
-
-EventScript_PkmnCenterNurse_Text_RelicWaiting:
-	.string "Oh! We've been keeping something\n"
-	.string "safe for you. Here you are!$"
-
-EventScript_PkmnCenterNurse_Text_KeepRelic:
-	.string "Oh, your Bag is full! I'll keep it\n"
-	.string "safe until your next visit.$"
-
-EventScript_PkmnCenterNurse_Text_KeepRelics:
-	.string "Oh, your Bag is full! I'll keep them\n"
-	.string "safe until your next visit.$"
+Movement_PkmnCenterNurse_Turn:
+	walk_in_place_faster_left
+	step_end

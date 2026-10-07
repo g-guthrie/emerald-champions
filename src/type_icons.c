@@ -17,6 +17,7 @@ static bool32 UseDoubleBattleCoords(u32);
 static enum Type GetMonPublicType(enum BattlerId, u32);
 static bool32 ShouldHideUncaughtType(enum Species species);
 static bool32 ShouldHideUnseenType(enum Species species);
+static enum Type GetMonDefensiveTeraType(struct Pokemon *, struct Pokemon *, enum BattlerId, u32, enum Species, enum Species);
 static bool32 IsIllusionActiveAndTypeUnchanged(struct Pokemon *, enum Species, enum BattlerId);
 
 static void CreateSpriteFromType(u32, bool32, enum Type[], u32, enum BattlerId);
@@ -303,6 +304,9 @@ static enum Type GetMonPublicType(enum BattlerId battlerId, u32 typeNum)
     monIllusion = GetIllusionMonPtr(battlerId);
     illusionSpecies = GetMonData(monIllusion,MON_DATA_SPECIES,NULL);
 
+    if (GetActiveGimmick(battlerId) == GIMMICK_TERA)
+        return GetMonDefensiveTeraType(mon,monIllusion,battlerId,typeNum,illusionSpecies,monSpecies);
+
     if (IsIllusionActiveAndTypeUnchanged(monIllusion,monSpecies, battlerId))
         return GetSpeciesType(illusionSpecies, typeNum);
 
@@ -329,6 +333,19 @@ static bool32 ShouldHideUnseenType(enum Species species)
         return FALSE;
 
     return TRUE;
+}
+
+static enum Type GetMonDefensiveTeraType(struct Pokemon *mon, struct Pokemon *monIllusion, enum BattlerId battlerId, u32 typeNum, enum Species illusionSpecies, enum Species monSpecies)
+{
+    enum Type teraType = GetBattlerTeraType(battlerId);
+    enum Species targetSpecies;
+
+    if (teraType != TYPE_STELLAR)
+        return teraType;
+
+    targetSpecies = (monIllusion != NULL) ? illusionSpecies : monSpecies;
+
+    return GetSpeciesType(targetSpecies, typeNum);
 }
 
 static bool32 IsIllusionActiveAndTypeUnchanged(struct Pokemon *monIllusion, enum Species monSpecies, enum BattlerId battlerId)
@@ -378,7 +395,7 @@ static void CreateSpriteAndSetTypeSpriteAttributes(enum Type type, u32 x, u32 y,
 {
     struct Sprite* sprite;
     const struct SpriteTemplate* spriteTemplate = gTypesInfo[type].useSecondTypeIconPalette ? &sSpriteTemplate_TypeIcons2 : &sSpriteTemplate_TypeIcons1;
-    u32 spriteId = CreateSpriteAtEnd(spriteTemplate, x, y, UCHAR_MAX);
+    u32 spriteId = CreateSpriteAtEndUnchecked(spriteTemplate, x, y, UCHAR_MAX);
 
     if (spriteId == MAX_SPRITES)
         return;

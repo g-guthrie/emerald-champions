@@ -24,7 +24,6 @@
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
-#include "menu_helpers.h"
 #include "new_game.h"
 #include "option_menu.h"
 #include "overworld.h"
@@ -33,7 +32,6 @@
 #include "pokedex.h"
 #include "pokenav.h"
 #include "safari_zone.h"
-#include "reload_save.h"
 #include "save.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -71,18 +69,7 @@ enum
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
-    MENU_ACTION_RELOAD_SAVE,
-    MENU_ACTION_COUNT,
 };
-
-#define START_MENU_MAX_VISIBLE 8
-// A menu that scrolls shows one row fewer in the same window: the freed 16
-// pixels become an 8-pixel lane above and below the rows, where the scroll
-// arrows bob (±2) without ever touching a row or the frame.
-#define START_MENU_ROWS_Y       9
-#define START_MENU_ARROW_LANE   8
-#define START_MENU_UP_ARROW_Y   (1 * 8 + 10)                                // centered in the top lane
-#define START_MENU_DOWN_ARROW_Y ((1 + START_MENU_MAX_VISIBLE * 2 + 2) * 8 - 9) // centered in the bottom lane
 
 // Save status
 enum
@@ -101,14 +88,8 @@ EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
-EWRAM_DATA static u8 sCurrentStartMenuActions[MENU_ACTION_COUNT] = {0};
+EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
-// Emerald Champions: the menu window shows at most START_MENU_MAX_VISIBLE rows and
-// scrolls; with Pokedex, Pokemon, Bag, PokeNav, Player, Save, Reload, Option and
-// Exit the vanilla single-height window ran off the bottom of the screen.
-EWRAM_DATA static u16 sStartMenuScrollOffset = 0;
-EWRAM_DATA static u8 sStartMenuScrollArrowTaskId = 0;
-EWRAM_DATA static bool8 sStartMenuScrollArrowsActive = FALSE;
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
@@ -130,13 +111,6 @@ static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexNavCallback(void);
-static bool8 StartMenuReloadSaveCallback(void);
-static bool8 ReloadSaveStartCallback(void);
-static bool8 ReloadSaveCallback(void);
-static u8 ReloadSaveConfirmCallback(void);
-static u8 ReloadSaveYesNoCallback(void);
-static u8 ReloadSaveConfirmInputCallback(void);
-static u8 ReloadSaveWaitFadeCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -214,8 +188,6 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 };
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
-static const u8 sText_MenuReload[] = _("Reload");
-static const u8 sText_ReloadLastSaveConfirm[] = _("Reload the last save?\nAnything since then will be lost.");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -233,7 +205,6 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
-    [MENU_ACTION_RELOAD_SAVE]     = {sText_MenuReload,  {.u8_void = StartMenuReloadSaveCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
 };
 
@@ -288,7 +259,6 @@ static void BuildMultiPartnerRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
 static void ShowPyramidFloorWindow(void);
 static void RemoveExtraStartMenuWindows(void);
-static void RemoveStartMenuScrollArrows(void);
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count);
 static bool32 InitStartMenuStep(void);
 static void InitStartMenu(void);
@@ -370,9 +340,6 @@ static void BuildNormalStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
-    // Emerald Champions: instant retry from the last save, only when one exists.
-    if (CanReloadLastSave())
-        AddStartMenuAction(MENU_ACTION_RELOAD_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -396,9 +363,6 @@ static void BuildSafariZoneStartMenu(void)
 {
     AddStartMenuAction(MENU_ACTION_RETIRE_SAFARI);
     AddStartMenuAction(MENU_ACTION_POKEDEX);
-    // Shows what lives here; the Safari Zone's own rules leave it unable to search.
-    if (DN_FLAG_DEXNAV_GET != 0 && FlagGet(DN_FLAG_DEXNAV_GET))
-        AddStartMenuAction(MENU_ACTION_DEXNAV);
     AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
     AddStartMenuAction(MENU_ACTION_PLAYER);
@@ -469,9 +433,20 @@ static void ShowSafariBallsWindow(void)
     sSafariBallsWindowId = AddWindow(&sWindowTemplate_SafariBalls);
     PutWindowTilemap(sSafariBallsWindowId);
     DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
-    ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    if (IS_FRLG)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, 600, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar3, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        StringExpandPlaceholders(gStringVar4, gText_MenuSafariStats);
+        AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 4, 3, 0xFF, NULL);
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
+        StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
+        AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    }
     CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
 }
 
@@ -492,7 +467,6 @@ static void ShowPyramidFloorWindow(void)
 
 static void RemoveExtraStartMenuWindows(void)
 {
-    RemoveStartMenuScrollArrows();
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
@@ -506,60 +480,24 @@ static void RemoveExtraStartMenuWindows(void)
     }
 }
 
-static bool32 IsStartMenuScrolling(void)
-{
-    return sNumStartMenuActions > START_MENU_MAX_VISIBLE;
-}
-
-static u8 StartMenuVisibleCount(void)
-{
-    return IsStartMenuScrolling() ? START_MENU_MAX_VISIBLE - 1 : sNumStartMenuActions;
-}
-
-// The window's y of the first row.
-static u8 StartMenuRowsY(void)
-{
-    return IsStartMenuScrolling() ? START_MENU_ROWS_Y + START_MENU_ARROW_LANE : START_MENU_ROWS_Y;
-}
-
-// Keeps the remembered cursor inside the action list and scrolls the window so the
-// cursor row is visible.
-static void ClampStartMenuScroll(void)
-{
-    u8 visible = StartMenuVisibleCount();
-
-    if (sStartMenuCursorPos >= sNumStartMenuActions)
-        sStartMenuCursorPos = 0;
-    if (sStartMenuScrollOffset > sNumStartMenuActions - visible)
-        sStartMenuScrollOffset = sNumStartMenuActions - visible;
-    if (sStartMenuCursorPos < sStartMenuScrollOffset)
-        sStartMenuScrollOffset = sStartMenuCursorPos;
-    else if (sStartMenuCursorPos >= sStartMenuScrollOffset + visible)
-        sStartMenuScrollOffset = sStartMenuCursorPos - visible + 1;
-}
-
-// Prints `count` visible rows starting at *pIndex (a row index, not an action index).
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 {
     s8 index = *pIndex;
-    u8 visible = StartMenuVisibleCount();
 
     do
     {
-        u8 action = sCurrentStartMenuActions[sStartMenuScrollOffset + index];
-
-        if (sStartMenuItems[action].func.u8_void == StartMenuPlayerNameCallback)
+        if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback)
         {
-            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[action].text, 8, (index << 4) + StartMenuRowsY());
+            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, sStartMenuItems[action].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + StartMenuRowsY(), TEXT_SKIP_DRAW, NULL);
+            StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
         }
 
         index++;
-        if (index >= visible)
+        if (index >= sNumStartMenuActions)
         {
             *pIndex = index;
             return TRUE;
@@ -571,84 +509,6 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 
     *pIndex = index;
     return FALSE;
-}
-
-static void RemoveStartMenuScrollArrows(void)
-{
-    if (sStartMenuScrollArrowsActive)
-    {
-        RemoveScrollIndicatorArrowPair(sStartMenuScrollArrowTaskId);
-        sStartMenuScrollArrowsActive = FALSE;
-    }
-}
-
-static void AddStartMenuScrollArrows(void)
-{
-    u8 visible = StartMenuVisibleCount();
-
-    RemoveStartMenuScrollArrows();
-    if (sNumStartMenuActions > visible)
-    {
-        // The window sits at tilemap (22,1), 7 tiles wide, the full
-        // START_MENU_MAX_VISIBLE rows tall; the arrows sit in its lanes.
-        sStartMenuScrollArrowTaskId = AddScrollIndicatorArrowPairParameterized(
-            SCROLL_ARROW_UP, 22 * 8 + 7 * 4, START_MENU_UP_ARROW_Y, START_MENU_DOWN_ARROW_Y,
-            sNumStartMenuActions - visible, 110, 110, &sStartMenuScrollOffset);
-        sStartMenuScrollArrowsActive = TRUE;
-    }
-}
-
-// Redraws every visible row and the cursor after a scroll.
-static void RedrawStartMenuRows(void)
-{
-    s8 index = 0;
-
-    FillWindowPixelBuffer(GetStartMenuWindowId(), PIXEL_FILL(1));
-    while (!PrintStartMenuActions(&index, StartMenuVisibleCount()))
-        ;
-    InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, StartMenuRowsY(), 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
-    CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_GFX);
-}
-
-static void MoveStartMenuCursor(s8 delta)
-{
-    u8 visible = StartMenuVisibleCount();
-    u8 row = sStartMenuCursorPos - sStartMenuScrollOffset;
-
-    if (delta < 0)
-    {
-        if (sStartMenuCursorPos == 0)
-        {
-            // Wrap to the bottom, scrolling to the last page if needed.
-            sStartMenuCursorPos = sNumStartMenuActions - 1;
-            sStartMenuScrollOffset = sNumStartMenuActions - visible;
-        }
-        else
-        {
-            sStartMenuCursorPos--;
-            if (row == 0)
-                sStartMenuScrollOffset--;
-        }
-    }
-    else
-    {
-        if (sStartMenuCursorPos == sNumStartMenuActions - 1)
-        {
-            sStartMenuCursorPos = 0;
-            sStartMenuScrollOffset = 0;
-        }
-        else
-        {
-            sStartMenuCursorPos++;
-            if (row == visible - 1)
-                sStartMenuScrollOffset++;
-        }
-    }
-
-    if (sNumStartMenuActions > visible)
-        RedrawStartMenuRows();
-    else
-        Menu_MoveCursor(delta);
 }
 
 static bool32 InitStartMenuStep(void)
@@ -666,8 +526,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 2:
         LoadMessageBoxAndBorderGfx();
-        ClampStartMenuScroll();
-        DrawStdWindowFrame(AddStartMenuWindow(IsStartMenuScrolling() ? START_MENU_MAX_VISIBLE : StartMenuVisibleCount()), FALSE);
+        DrawStdWindowFrame(AddStartMenuWindow(sNumStartMenuActions), FALSE);
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
         break;
@@ -683,8 +542,7 @@ static bool32 InitStartMenuStep(void)
             sInitStartMenuData[0]++;
         break;
     case 5:
-        InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, StartMenuRowsY(), 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
-        AddStartMenuScrollArrows();
+        sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
         CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
@@ -716,11 +574,13 @@ static void CreateStartMenuTask(TaskFunc followupFunc)
     SetTaskFuncWithFollowupFunc(taskId, StartMenuTask, followupFunc);
 }
 
-// The screen is black while the field reloads, so build the whole menu at once
-// and start the fade-in on this frame rather than one build step per frame.
 static bool8 FieldCB_ReturnToFieldStartMenu(void)
 {
-    InitStartMenu();
+    if (InitStartMenuStep() == FALSE)
+    {
+        return FALSE;
+    }
+
     ReturnToFieldOpenStartMenu();
     return TRUE;
 }
@@ -769,13 +629,13 @@ static bool8 HandleStartMenuInput(void)
     if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        MoveStartMenuCursor(-1);
+        sStartMenuCursorPos = Menu_MoveCursor(-1);
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        MoveStartMenuCursor(1);
+        sStartMenuCursorPos = Menu_MoveCursor(1);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -786,6 +646,9 @@ static bool8 HandleStartMenuInput(void)
             if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
                 return FALSE;
         }
+        if (sCurrentStartMenuActions[sStartMenuCursorPos] == MENU_ACTION_DEXNAV
+          && MapHasNoEncounterData())
+            return FALSE;
 
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
 
@@ -793,8 +656,7 @@ static bool8 HandleStartMenuInput(void)
             && gMenuCallback != StartMenuExitCallback
             && gMenuCallback != StartMenuDebugCallback
             && gMenuCallback != StartMenuSafariZoneRetireCallback
-            && gMenuCallback != StartMenuBattlePyramidRetireCallback
-            && gMenuCallback != StartMenuReloadSaveCallback)
+            && gMenuCallback != StartMenuBattlePyramidRetireCallback)
         {
            FadeScreen(FADE_TO_BLACK, 0);
         }
@@ -904,82 +766,6 @@ static bool8 StartMenuSaveCallback(void)
     return FALSE;
 }
 
-// Reload flow. Reuses the save dialog machinery so it reads exactly like Save:
-// the menu steps aside for the prompt (its Yes/No would sit on the menu), a
-// Yes/No confirms, No brings the menu back, and Yes fades out and reloads.
-static bool8 StartMenuReloadSaveCallback(void)
-{
-    gMenuCallback = ReloadSaveStartCallback;
-
-    return FALSE;
-}
-
-static bool8 ReloadSaveStartCallback(void)
-{
-    sSaveDialogCallback = ReloadSaveConfirmCallback;
-    sSavingComplete = FALSE;
-    gMenuCallback = ReloadSaveCallback;
-
-    return FALSE;
-}
-
-static bool8 ReloadSaveCallback(void)
-{
-    switch (RunSaveCallback())
-    {
-    case SAVE_CANCELED: // Back to start menu
-        ClearDialogWindowAndFrameToTransparent(0, FALSE);
-        InitStartMenu();
-        gMenuCallback = HandleStartMenuInput;
-        return FALSE;
-    default:
-        return FALSE;
-    }
-}
-
-static u8 ReloadSaveConfirmCallback(void)
-{
-    RemoveStartMenuScrollArrows();
-    ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
-    RemoveStartMenuWindow();
-    ShowSaveMessage(sText_ReloadLastSaveConfirm, ReloadSaveYesNoCallback);
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 ReloadSaveYesNoCallback(void)
-{
-    DisplayYesNoMenuDefaultYes();
-    sSaveDialogCallback = ReloadSaveConfirmInputCallback;
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 ReloadSaveConfirmInputCallback(void)
-{
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
-    {
-    case 0: // Yes
-        HideSaveMessageWindow();
-        FadeScreen(FADE_TO_BLACK, 0);
-        sSaveDialogCallback = ReloadSaveWaitFadeCallback;
-        return SAVE_IN_PROGRESS;
-    case MENU_B_PRESSED:
-    case 1: // No
-        HideSaveMessageWindow();
-        return SAVE_CANCELED;
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 ReloadSaveWaitFadeCallback(void)
-{
-    if (gPaletteFade.active)
-        return SAVE_IN_PROGRESS;
-    // Never returns to this menu: the game continues from the loaded save.
-    ReloadLastSave();
-    return SAVE_IN_PROGRESS;
-}
-
 static bool8 StartMenuOptionCallback(void)
 {
     if (!gPaletteFade.active)
@@ -1030,7 +816,6 @@ static bool8 StartMenuSafariZoneRetireCallback(void)
 static void HideStartMenuDebug(void)
 {
     PlaySE(SE_SELECT);
-    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
 }
@@ -1251,7 +1036,6 @@ static bool8 SaveErrorTimer(void)
 
 static u8 SaveConfirmSaveCallback(void)
 {
-    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveInfoWindow();
@@ -1277,9 +1061,7 @@ static u8 SaveYesNoCallback(void)
 
 static u8 SaveConfirmInputCallback(void)
 {
-    // The overwrite question reuses this box. Only remove it when leaving
-    // the confirmation flow, rather than flashing it off between questions.
-    switch (Menu_ProcessInputNoWrap())
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0: // Yes
         switch (gSaveFileStatus)
@@ -1292,22 +1074,17 @@ static u8 SaveConfirmInputCallback(void)
                 return SAVE_IN_PROGRESS;
             }
 
-            EraseYesNoWindow();
             sSaveDialogCallback = SaveSavingMessageCallback;
             return SAVE_IN_PROGRESS;
         default:
             if (SKIP_SAVE_CONFIRMATION)
-            {
-                EraseYesNoWindow();
                 sSaveDialogCallback = SaveSavingMessageCallback;
-            }
             else
                 sSaveDialogCallback = SaveFileExistsCallback;
             return SAVE_IN_PROGRESS;
         }
     case MENU_B_PRESSED:
     case 1: // No
-        EraseYesNoWindow();
         HideSaveInfoWindow();
         HideSaveMessageWindow();
         return SAVE_CANCELED;
@@ -1333,14 +1110,14 @@ static u8 SaveFileExistsCallback(void)
 
 static u8 SaveConfirmOverwriteDefaultNoCallback(void)
 {
-    Menu_MoveCursorNoWrapAround(1); // Retain the box; default to No for a different save.
+    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveConfirmOverwriteCallback(void)
 {
-    // Yes is still selected from the first question.
+    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
     sSaveDialogCallback = SaveOverwriteInputCallback;
     return SAVE_IN_PROGRESS;
 }
@@ -1378,6 +1155,7 @@ static u8 SaveDoSaveCallback(void)
     if (gDifferentSaveFile == TRUE)
     {
         saveStatus = TrySavingData(SAVE_OVERWRITE_DIFFERENT_FILE);
+        gDifferentSaveFile = FALSE;
     }
     else
     {
@@ -1449,7 +1227,6 @@ static void InitBattlePyramidRetire(void)
 
 static u8 BattlePyramidConfirmRetireCallback(void)
 {
-    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveMessage(gText_BattlePyramidConfirmRetire, BattlePyramidRetireYesNoCallback);
@@ -1703,7 +1480,6 @@ void SaveForBattleTowerLink(void)
 
 static void HideStartMenuWindow(void)
 {
-    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeObjectEvents();
@@ -1724,17 +1500,8 @@ void AppendToList(u8 *list, u8 *pos, u8 newEntry)
 
 static bool8 StartMenuDexNavCallback(void)
 {
-    // Like the other full-screen entries, drop the scroll arrows first: their
-    // task would otherwise outlive the DexNav screen and move whatever
-    // sprites reuse its slots, including the field camera.
-    if (!gPaletteFade.active)
-    {
-        PlayRainStoppingSoundEffect();
-        RemoveExtraStartMenuWindows();
-        CreateTask(Task_OpenDexNavFromStartMenu, 0);
-        return TRUE;
-    }
-    return FALSE;
+    CreateTask(Task_OpenDexNavFromStartMenu, 0);
+    return TRUE;
 }
 
 void Script_ForceSaveGame(struct ScriptContext *ctx)

@@ -1,7 +1,5 @@
 #include "global.h"
 #include "berry.h"
-#include "mega_stone_rewards.h"
-#include "constants/emerald_champions.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -245,7 +243,7 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .size = 28,
             .maxYield = YIELD_RATE(3, 5, 15, 22),
             .minYield = YIELD_RATE(2, 2, 2, 2),
-            .description1 = COMPOUND_STRING("Grows as quickly as Cheri and others."),
+            .description1 = COMPOUND_STRING("Grows slower than Cheri and others."),
             .description2 = COMPOUND_STRING("The smaller the Berry, the tastier."),
             .growthDuration = GROWTH_DURATION(16, 16, 24, 24, 16, 24),
             .spicy = 10,
@@ -279,7 +277,7 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .maxYield = YIELD_RATE(3, 5, 15, 20),
             .minYield = YIELD_RATE(2, 2, 4, 4),
             .description1 = COMPOUND_STRING("A peculiar Berry with a mix of flavors."),
-            .description2 = COMPOUND_STRING("Berries grow in just four hours."),
+            .description2 = COMPOUND_STRING("Berries grow in half a day."),
             .growthDuration = GROWTH_DURATION(12, 16, 24, 24, 16, 24),
             .spicy = 10,
             .dry = 10,
@@ -344,7 +342,7 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .size = 34,
             .maxYield = YIELD_RATE(2, 5, 20, 18),
             .minYield = YIELD_RATE(1, 2, 3, 2),
-            .description1 = COMPOUND_STRING("Quick to grow. If raised with loving"),
+            .description1 = COMPOUND_STRING("Slow to grow. If raised with loving"),
             .description2 = COMPOUND_STRING("care, it may grow two Berries."),
             .growthDuration = GROWTH_DURATION(48, 48, 72, 48, 32, 48),
             .spicy = 10,
@@ -543,7 +541,7 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .maxYield = YIELD_RATE(3, 5, 15, 15),
             .minYield = YIELD_RATE(2, 1, 3, 3),
             .description1 = COMPOUND_STRING("The Berry is very big and sour."),
-            .description2 = COMPOUND_STRING("It grows in just four hours."),
+            .description2 = COMPOUND_STRING("It takes at least a day to grow."),
             .growthDuration = GROWTH_DURATION(24, 20, 30, 24, 16, 24),
             .spicy = 0,
             .dry = 0,
@@ -906,7 +904,7 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .maxYield = YIELD_RATE(4, 5, 20, 26),
             .minYield = YIELD_RATE(2, 1, 1, 2),
             .description1 = COMPOUND_STRING("The Berry is lip-bendingly spicy."),
-            .description2 = COMPOUND_STRING("It is quick to grow, too."),
+            .description2 = COMPOUND_STRING("It takes time to grow."),
             .growthDuration = GROWTH_DURATION(24, 32, 48, 48, 32, 48),
             .spicy = 20,
             .dry = 10,
@@ -938,8 +936,8 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .size = 75,
             .maxYield = YIELD_RATE(4, 10, 15, 15),
             .minYield = YIELD_RATE(2, 2, 3, 3),
-            .description1 = COMPOUND_STRING("A Berry from an ancient era. It grows"),
-            .description2 = COMPOUND_STRING("fine even when planted on its own."),
+            .description1 = COMPOUND_STRING("A Berry from an ancient era. May not"),
+            .description2 = COMPOUND_STRING("grow unless planted in quantity."),
             .growthDuration = GROWTH_DURATION(24, 24, 36, 24, 16, 24),
             .spicy = 0,
             .dry = 20,
@@ -1203,7 +1201,7 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
             .maxYield = YIELD_RATE(2, 15, 15, 15),
             .minYield = YIELD_RATE(1, 2, 3, 3),
             .description1 = COMPOUND_STRING("It is glossy and looks delicious, but"),
-            .description2 = COMPOUND_STRING("it is awfully sour. Quick to grow."),
+            .description2 = COMPOUND_STRING("it is awfully sour. Takes time to grow."),
             .growthDuration = GROWTH_DURATION(72, 60, 90, 24, 16, 24),
             .spicy = 10,
             .dry = 0,
@@ -2714,7 +2712,7 @@ static u32 GetBerryTreeAge(u8 id, u8 stage)
         stage = 6;
     else if (stage > 0)
         stage -= 1;
-    return min(GetBerryInfo(id)->growthDuration, 4) * stage / (OW_BERRY_SIX_STAGES ? 6 : 4);
+    return GetBerryInfo(id)->growthDuration * stage / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
 
 static u8 GetBerryCountByBerryTreeId(u8 id)
@@ -2724,7 +2722,7 @@ static u8 GetBerryCountByBerryTreeId(u8 id)
 
 static u16 GetStageDurationByBerryType(u8 berry)
 {
-    return min(GetBerryInfo(berry)->growthDuration, 4) * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
+    return GetBerryInfo(berry)->growthDuration * 60 / (OW_BERRY_SIX_STAGES ? 6 : 4);
 }
 
 static u8 GetDrainRateByBerryType(u8 berry)
@@ -2839,30 +2837,16 @@ void ObjectEventInteractionPickBerryTree(void)
     u8 berry = GetBerryTypeByBerryTreeId(id);
     u8 mutation = GetTreeMutationValue(id);
 
-    u8 count = GetBerryCountByBerryTreeId(id);
     if (!OW_BERRY_MUTATIONS || mutation == 0)
     {
-        gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), count);
-        if (gSpecialVar_0x8004)
-            AddHarvestedBerries(berry, count);
+        gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
         return;
     }
     gSpecialVar_0x8004 = (CheckBagHasSpace(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id)) && CheckBagHasSpace(BerryTypeToItemId(mutation), 1)) + 2;
     if (gSpecialVar_0x8004 == 3)
     {
-        if (!AddBagItem(BerryTypeToItemId(berry), count))
-        {
-            gSpecialVar_0x8004 = 2;
-            return;
-        }
-        if (!AddBagItem(BerryTypeToItemId(mutation), 1))
-        {
-            RemoveBagItem(BerryTypeToItemId(berry), count);
-            gSpecialVar_0x8004 = 2;
-            return;
-        }
-        AddHarvestedBerries(berry, count);
-        AddHarvestedBerries(mutation, 1);
+        AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+        AddBagItem(BerryTypeToItemId(mutation), 1);
     }
 }
 

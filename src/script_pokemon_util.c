@@ -9,7 +9,6 @@
 #include "event_data.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "legendary_signs.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "main.h"
@@ -43,6 +42,10 @@ void HealPlayerParty(void)
         HealPokemon(&gParties[B_TRAINER_PLAYER][i]);
     if (OW_PC_HEAL >= GEN_8)
         HealPlayerBoxes();
+
+    // Recharge Tera Orb, if possible.
+    if (!IsTeraOrbCharged() && CheckBagHasItem(ITEM_TERA_ORB, 1))
+        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 static void HealPlayerBoxes(void)
@@ -64,9 +67,35 @@ static void HealPlayerBoxes(void)
 u8 ScriptGiveEgg(enum Species species)
 {
     struct Pokemon mon;
+    u8 isEgg;
 
     CreateEgg(&mon, species, TRUE);
+    isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
+
     return GiveCapturedMonToPlayer(&mon);
+}
+
+// TODO verify that this is really always the same output as the script special variant
+u8 HasEnoughMonsForDoubleBattle2(void)
+{
+    return GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS; 
+}
+
+void HasEnoughMonsForDoubleBattle(void)
+{
+    switch (GetMonsStateToDoubles())
+    {
+    case PLAYER_HAS_TWO_USABLE_MONS:
+        gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
+        break;
+    case PLAYER_HAS_ONE_MON:
+        gSpecialVar_Result = PLAYER_HAS_ONE_MON;
+        break;
+    case PLAYER_HAS_ONE_USABLE_MON:
+        gSpecialVar_Result = PLAYER_HAS_ONE_USABLE_MON;
+        break;
+    }
 }
 
 static bool32 CheckPartyMonHasHeldItem(enum Item item)
@@ -91,58 +120,66 @@ bool8 DoesPartyHaveEnigmaBerry(void)
     return hasItem;
 }
 
-// setwildbattle and every scripted legendary share one rule: a Legendary-class
-// or Ultra Beast species ignores the script's level, meets the player at the
-// current cap and receives its authored set (or a random non-Mega set). The
-// script's held item stays only when that set leaves the Pokemon empty-handed.
-static void InitScriptedWildMon(struct Pokemon *mon, enum Species species, u8 level, enum Item item)
+void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
 {
-    bool32 legendary = IsLegendaryEncounterSpecies(species);
-    if (legendary)
-        level = GetLegendaryEncounterLevel(species);
+    u8 heldItem[2];
+
+    ZeroEnemyPartyMons();
     u32 personality = GetMonPersonality(species,
         GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species),
         GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species),
         RANDOM_UNOWN_LETTER);
-    CreateMonWithIVs(mon, species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
-    GiveMonInitialMoveset(mon);
-    if (item != ITEM_NONE)
+    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+    GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
+    if (item)
     {
-        u16 heldItem = item;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+        heldItem[0] = item;
+        heldItem[1] = item >> 8;
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, heldItem);
     }
-    if (legendary)
-        ApplyLegendaryEncounterSet(mon, item);
 }
-
-void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
-{
-    ZeroEnemyPartyMons();
-    InitScriptedWildMon(&gParties[B_TRAINER_OPPONENT_A][0], species, level, item);
-}
-
 void CreateScriptedDoubleWildMon(enum Species species1, u8 level1, enum Item item1, enum Species species2, u8 level2, enum Item item2)
 {
+    u8 heldItem1[2];
+    u8 heldItem2[2];
+
     ZeroEnemyPartyMons();
-    InitScriptedWildMon(&gParties[B_TRAINER_OPPONENT_A][0], species1, level1, item1);
-    InitScriptedWildMon(&gParties[B_TRAINER_OPPONENT_A][1], species2, level2, item2);
+    u32 personality = GetMonPersonality(species1,
+        GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species1),
+        GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species1),
+        RANDOM_UNOWN_LETTER);
+    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species1, level1, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+    GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
+    if (item1)
+    {
+        heldItem1[0] = item1;
+        heldItem1[1] = item1 >> 8;
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, heldItem1);
+    }
+
+    personality = GetMonPersonality(species2,
+        GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species2),
+        GetSynchronizedNature(STATIC_WILDMON_ORIGIN, species2),
+        RANDOM_UNOWN_LETTER);
+    CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][1], species2, level2, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
+    GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][1]);
+    if (item2)
+    {
+        heldItem2[0] = item2;
+        heldItem2[1] = item2 >> 8;
+        SetMonData(&gParties[B_TRAINER_OPPONENT_A][1], MON_DATA_HELD_ITEM, heldItem2);
+    }
 }
 
 void ScriptSetMonMoveSlot(u8 monIndex, enum Move move, u8 slot)
 {
-    if (slot >= MAX_MON_MOVES || move >= MOVES_COUNT_ALL)
-        return;
-
-    // Scripts may request the last party member, including a newly gifted Egg.
+// Allows monIndex to go out of bounds of gParties[B_TRAINER_PLAYER]. Doesn't occur in vanilla
+#ifdef BUGFIX
     if (monIndex >= PARTY_SIZE)
-    {
-        u8 count = CalculatePlayerPartyCount();
-        if (count == 0)
-            return;
-        monIndex = count - 1;
-    }
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][monIndex], MON_DATA_SPECIES) == SPECIES_NONE)
-        return;
+#else
+    if (monIndex > PARTY_SIZE)
+#endif
+        monIndex = gPartiesCount[B_TRAINER_PLAYER] - 1;
 
     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][monIndex], move, slot);
 }
@@ -301,6 +338,29 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
     }
 }
 
+void CheckTeraType(struct ScriptContext *ctx)
+{
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1);
+
+    gSpecialVar_Result = TYPE_NONE;
+
+    if (partyIndex < PARTY_SIZE)
+        gSpecialVar_Result = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TERA_TYPE);
+}
+
+void SetTeraType(struct ScriptContext *ctx)
+{
+    enum Type type = ScriptReadByte(ctx);
+    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    if (type < NUMBER_OF_MON_TYPES && partyIndex < PARTY_SIZE)
+        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TERA_TYPE, &type);
+}
+
 /* Creates a Pokemon via script
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
@@ -318,7 +378,7 @@ u32 ScriptGiveMonParameterized(u8 side, u8 slot, struct PokemonTemplate *monTemp
     {
         return MON_CANT_GIVE;
     }
-    memcpy(&gParties[B_TRAINER_OPPONENT_A][slot], &mon, sizeof(struct Pokemon));
+    CopyMon(&gParties[B_TRAINER_OPPONENT_A][slot], &mon, sizeof(struct Pokemon));
     return MON_GIVEN_TO_PARTY;
 }
 
@@ -326,7 +386,6 @@ u32 ScriptGiveMon(enum Species species, u8 level, enum Item item)
 {
     struct Pokemon mon;
     u8 heldItem[2];
-    u32 giveResult;
 
     CreateRandomMon(&mon, species, level);
     if (item)
@@ -336,46 +395,7 @@ u32 ScriptGiveMon(enum Species species, u8 level, enum Item item)
         SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
     }
 
-    giveResult = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
-    if (giveResult != MON_CANT_GIVE)
-        MarkLegendarySignCaughtBySpecies(species);
-    return giveResult;
-}
-
-// Birch's single entitlement preserves both Cosmoem evolution branches.
-// Only one Cosmog can join a legal party; the other always needs a PC slot.
-void GiveBirchCosmogPair(struct ScriptContext *ctx)
-{
-    (void)ctx;
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    gSpecialVar_Result = FALSE;
-    u16 state = VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE);
-    if ((state != 1 && state != 7) || gPokemonStoragePtr == NULL)
-        return;
-
-    u32 neededBoxSlots = 2;
-    if (CalculatePlayerPartyCount() < PARTY_SIZE
-     && CanAddRestrictedMonToParty(SPECIES_COSMOG, PARTY_SIZE))
-        neededBoxSlots--;
-    u32 freeBoxSlots = 0;
-    for (u32 box = 0; box < TOTAL_BOXES_COUNT && freeBoxSlots < neededBoxSlots; box++)
-        freeBoxSlots += IN_BOX_COUNT - CountMonsInBox(box);
-    if (freeBoxSlots < neededBoxSlots)
-        return;
-
-    // The same preflight and transfer search all boxes. Nothing can mutate
-    // party/storage between these two synchronous transfers.
-    for (u32 i = 0; i < 2; i++)
-    {
-        u32 result = ScriptGiveMon(SPECIES_COSMOG, GetCurrentLevelCap(), i == 0 ? ITEM_EVIOLITE : ITEM_NONE);
-        assertf(result != MON_CANT_GIVE, "preflighted Birch Cosmog pair failed")
-        {
-            return;
-        }
-    }
-    // Retain the save's existing gift receipt, before any presentation.
-    VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
-    gSpecialVar_Result = TRUE;
+    return GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
@@ -426,6 +446,8 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     monTemplate.gmaxFactor   = PARSE_FLAG(22, FALSE);
     if (flags & (1 << 23))
     {
+        monTemplate.teraType = VarGet(ScriptReadHalfword(ctx));
+        monTemplate.doNotUseDefaultTeraType = TRUE;
     }
     monTemplate.dmaxLevel    = PARSE_FLAG(24, 0);
     monTemplate.isEgg        = PARSE_FLAG(25, FALSE);

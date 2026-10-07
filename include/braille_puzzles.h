@@ -8,8 +8,4 @@ void DoBrailleDigEffect(void);
 void SetUpPuzzleEffectRegisteel(void);
 void SetUpPuzzleEffectRegirock(void);
 
-bool8 CheckRelicanthWailord(void);
-void DoSealedChamberShakingEffect1(void);
-void DoSealedChamberShakingEffect2(void);
-
 #endif // GUARD_BRAILLE_PUZZLES_H

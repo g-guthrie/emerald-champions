@@ -39,6 +39,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "test_runner.h"
 #include "test/battle.h"
 
@@ -79,6 +80,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(enum Battler
     [CONTROLLER_CHOOSEPOKEMON]            = OpponentHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,
@@ -318,6 +320,10 @@ static u32 OpponentGetTrainerPicId(enum BattlerId battlerId)
     {
         trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+    {
+        trainerPicId = GetTrainerTowerTrainerFrontSpriteId();
+    }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
@@ -510,14 +516,6 @@ static void OpponentHandleChoosePokemon(enum BattlerId battler)
 {
     s32 chosenMonId;
     enum SwitchType switchType = SWITCH_AFTER_KO;
-
-    // The engine refused a switch: a trapped battler never leaves.
-    if (AI_CancelRefusedSwitch(battler))
-    {
-        BtlController_EmitChosenMonReturnValue(battler, B_COMM_TO_ENGINE, PARTY_SIZE, NULL);
-        BtlController_Complete(battler);
-        return;
-    }
 
     // Choosing Revival Blessing target
     if (gBattleResources->bufferA[battler][1] == PARTY_ACTION_CHOOSE_FAINTED_MON)

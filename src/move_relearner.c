@@ -7,13 +7,11 @@
 #include "contest_effect.h"
 #include "data.h"
 #include "decompress.h"
-#include "emerald_champions_battle_sets.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "gpu_regs.h"
 #include "item.h"
 #include "move_relearner.h"
-#include "move.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "menu.h"
@@ -31,9 +29,9 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/party_menu.h"
-#include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "data/tutor_moves.h"
 
 // The different versions of hearts are selected using animation
 // commands.
@@ -67,38 +65,19 @@ static EWRAM_DATA struct
     u16 movesToLearn[MAX_RELEARNER_MOVES];
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];
     u8 mainTask;
-    u16 numMenuChoices;
+    u8 numMenuChoices;
     u8 numToShowAtOnce;
     u8 moveListMenuTask;
     u8 moveListScrollArrowTask;
     u8 moveDisplayArrowTask;
     u16 scrollOffset;
     u8 categoryIconSpriteId;
-    u8 typeFilter, categoryFilter;
-    u8 filterRow, pendingTypeFilter, pendingCategoryFilter;
 } *sMoveRelearnerStruct = {0};
 
 static EWRAM_DATA struct {
     u16 listOffset;
     u16 listRow;
 } sMoveRelearnerScrollState = {0};
-
-// Where the list resumes after the forget-a-move summary screen. The relearner
-// keeps this itself: the calling script owns VAR_0x8008-VAR_0x800B
-// (include/constants/service_vars.h) and may keep its menu state there.
-static EWRAM_DATA struct {
-    u16 partyIndex;
-    u16 move;
-    u16 category;
-    u8 typeFilter, categoryFilter;
-} sMoveRelearnerResume = {0};
-
-// Set when a Center tutor's party screen opened the list itself
-// (ChooseMonForMoveRelearnerDirect); B then returns to that party screen.
-static EWRAM_DATA bool8 sMoveRelearnerReturnToParty = FALSE;
-
-static EWRAM_DATA enum Item sIconicPayment = ITEM_NONE;
-static EWRAM_DATA u8 sIconicPaymentWindow = 0;
 
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
@@ -188,17 +167,14 @@ static const struct ScrollArrowsTemplate sDisplayModeArrowsTemplate =
     .palNum = 0,
 };
 
-// In the lanes above and below a scrolling list's five rows: an up arrow's
-// ink spans y-6..y+1 and a down arrow's y-3..y+5, each with a pixel of
-// bounce, so both keep 3 pixels from the rows and from the frame.
 static const struct ScrollArrowsTemplate sMoveListScrollArrowsTemplate =
 {
     .firstArrowType = SCROLL_ARROW_UP,
     .firstX = 192,
-    .firstY = 15,
+    .firstY = 8,
     .secondArrowType = SCROLL_ARROW_DOWN,
     .secondX = 192,
-    .secondY = 99,
+    .secondY = 104,
     .fullyUpThreshold = 0,
     .fullyDownThreshold = 0,
     .tileTag = TAG_LIST_ARROWS,
@@ -282,20 +258,21 @@ static void FreeMoveRelearnerResources(void);
 static void RemoveScrollArrows(void);
 static bool32 IsLevelUpMoveRelearnerActive(void);
 static bool32 IsEggMoveRelearnerActive(void);
-static bool32 IsAllMoveRelearnerActive(void);
+static bool32 IsTMMoveRelearnerActive(void);
+static bool32 IsTutorMoveRelearnerActive(void);
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon);
-static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon);
-static bool32 IsIconicMoveRelearnerActive(void);
-static bool32 HasRelearnerIconicMoves(struct BoxPokemon *boxMon);
+static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon);
+static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon);
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
+static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
+static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
-static void Task_MoveRelearner_Filters(u8 taskId);
-static void ShowTutorFilters(void);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
 static void Task_MoveRelearner_Quit(u8 taskId);
+static void SortMovesAlphabetically(u16 *moves, u32 numMoves);
 static void QuickSortMoves(u16 *moves, s32 left, s32 right);
 
 static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
@@ -312,17 +289,17 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .getMoves = GetRelearnerEggMoves,
         .moveText = MoveRelearner_Text_EggMoveLWR
     },
-    [MOVE_RELEARNER_ALL_MOVES] = {
-        .isActive = IsAllMoveRelearnerActive,
-        .hasMoveToRelearn = HasRelearnerAllMoves,
-        .getMoves = GetEmeraldChampionsPreparationMovesToLearn,
-        .moveText = MoveRelearner_Text_MoveLWR
+    [MOVE_RELEARNER_TM_MOVES] = {
+        .isActive = IsTMMoveRelearnerActive,
+        .hasMoveToRelearn = HasRelearnerTMMoves,
+        .getMoves = GetRelearnerTMMoves,
+        .moveText = MoveRelearner_Text_TMMoveLWR
     },
-    [MOVE_RELEARNER_ICONIC_MOVES] = {
-        .isActive = IsIconicMoveRelearnerActive,
-        .hasMoveToRelearn = HasRelearnerIconicMoves,
-        .getMoves = GetEmeraldChampionsIconicMovesToLearn,
-        .moveText = MoveRelearner_Text_MoveLWR
+    [MOVE_RELEARNER_TUTOR_MOVES] = {
+        .isActive = IsTutorMoveRelearnerActive,
+        .hasMoveToRelearn = HasRelearnerTutorMoves,
+        .getMoves = GetRelearnerTutorMoves,
+        .moveText = MoveRelearner_Text_TutorMoveLWR
     },
 };
 
@@ -422,7 +399,6 @@ static void CB2_InitLearnMove_Basic(void)
 void CB2_InitLearnMove(void)
 {
     ResetTasks();
-    sIconicPaymentWindow = WINDOW_NONE;
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->mainTask = CreateTask(TaskDummy, 1);
     sMoveRelearnerScrollState.listOffset = 0;
@@ -434,17 +410,7 @@ void CB2_InitLearnMove(void)
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = CONTEST_INFO;
     else
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = BATTLE_INFO;
-    sMoveRelearnerReturnToParty = FALSE;
     SetMainCallback2(CB2_InitLearnMove_Basic);
-}
-
-// The Pokémon in VAR_0x8004 was picked on the tutor's party screen, which
-// stays the list's way out.
-void CB2_InitLearnMoveFromPartyMenu(void)
-{
-    gRelearnMode = RELEARN_MODE_SCRIPT;
-    CB2_InitLearnMove();
-    sMoveRelearnerReturnToParty = TRUE;
 }
 
 static void CB2_InitLearnMoveReturnFromSelectMove(void)
@@ -453,17 +419,27 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     sMoveRelearnerStruct = AllocZeroed(sizeof(*sMoveRelearnerStruct));
     sMoveRelearnerStruct->mainTask = CreateTask(TaskDummy, 1);
     gTasks[sMoveRelearnerStruct->mainTask].tState = GetLearnMoveResumeAfterSummaryScreenState();
-    gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = sMoveRelearnerResume.partyIndex;
-    gTasks[sMoveRelearnerStruct->mainTask].tMove = sMoveRelearnerResume.move;
-    gTasks[sMoveRelearnerStruct->mainTask].tCategory = sMoveRelearnerResume.category;
-    sMoveRelearnerStruct->typeFilter = sMoveRelearnerResume.typeFilter;
-    sMoveRelearnerStruct->categoryFilter = sMoveRelearnerResume.categoryFilter;
+    gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = gSpecialVar_0x8008;
+    gTasks[sMoveRelearnerStruct->mainTask].tMove = gSpecialVar_0x8009;
+    gTasks[sMoveRelearnerStruct->mainTask].tCategory = gSpecialVar_0x800A;
     SetMainCallback2(CB2_InitLearnMove_Basic);
+}
+
+static bool32 GameHasDifferentRelearners(void)
+{
+    if (P_ENABLE_MOVE_RELEARNERS || P_TM_MOVES_RELEARNER)
+        return TRUE;
+    if (P_FLAG_EGG_MOVES || P_FLAG_TUTOR_MOVES)
+        return TRUE;
+    return FALSE;
 }
 
 static void StoreMoveText(void)
 {
-    StringCopy(gStringVar3, sRelearnTypes[gMoveRelearnerState].moveText);
+    if (GameHasDifferentRelearners() || gRelearnMode == RELEARN_MODE_SCRIPT)
+        StringCopy(gStringVar3, sRelearnTypes[gMoveRelearnerState].moveText);
+    else
+        StringCopy(gStringVar3, MoveRelearner_Text_MoveLWR);
 }
 
 static void InitMoveRelearnerBackgroundLayers(void)
@@ -490,6 +466,15 @@ static void CB2_MoveRelearnerMain(void)
     UpdatePaletteFade();
 }
 
+static bool32 ShouldConsumeTmItem(enum Move move)
+{
+    if (gMoveRelearnerState != MOVE_RELEARNER_TM_MOVES || gRelearnMode == RELEARN_MODE_SCRIPT)
+        return FALSE;
+    if (I_REUSABLE_TMS || P_ENABLE_ALL_TM_MOVES)
+        return FALSE;
+    return TRUE;
+}
+
 static void FreeMoveRelearnerResources(void)
 {
     RemoveScrollArrows();
@@ -505,25 +490,13 @@ static void UIAskConfirmation(void)
     MoveRelearnerCreateYesNoMenu();
 }
 
-static s32 UIWaitConfirmation(bool32 keepOnNo)
+static s32 UIWaitConfirmation(void)
 {
-    s32 result = Menu_ProcessInputNoWrap();
-    if (result == MENU_NOTHING_CHOSEN)
-        return result;
-    if (keepOnNo && (result == 1 || result == MENU_B_PRESSED))
-        Menu_MoveCursorNoWrapAround(-1); // The follow-up question defaults to Yes.
-    else
-        EraseYesNoWindow();
-    return result;
+    return Menu_ProcessInputNoWrapClearOnChoose();
 }
 
 static void UIPrintMessage(const u8 *message)
 {
-    // Canceling returns to the move list. The shared rejection text waits
-    // for another A/B press while leaving that list visible but unresponsive.
-    if (message == gText_MoveNotLearned)
-        return;
-
     StringExpandPlaceholders(gStringVar4, message);
     MoveRelearnerPrintMessage(gStringVar4);
 }
@@ -535,11 +508,9 @@ static void UIPlayFanfare(u32 songId)
 
 static void UIShowMoveList(u8 taskId)
 {
-    sMoveRelearnerResume.partyIndex = gTasks[taskId].tPartyIndex;
-    sMoveRelearnerResume.move = gTasks[taskId].tMove;
-    sMoveRelearnerResume.category = gTasks[taskId].tCategory;
-    sMoveRelearnerResume.typeFilter = sMoveRelearnerStruct->typeFilter;
-    sMoveRelearnerResume.categoryFilter = sMoveRelearnerStruct->categoryFilter;
+    gSpecialVar_0x8008 = gTasks[taskId].tPartyIndex;
+    gSpecialVar_0x8009 = gTasks[taskId].tMove;
+    gSpecialVar_0x800A = gTasks[taskId].tCategory;
     ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_InitLearnMoveReturnFromSelectMove, gTasks[taskId].tMove);
     DestroyTask(taskId);
     FreeMoveRelearnerResources();
@@ -555,16 +526,22 @@ static void RedrawMoveList(void)
     ShowTeachMoveText();
 }
 
-// Every mode stays in the list after a move is taught, so a tutor can teach
-// several moves in one visit; B leaves the list.
 static void UIEndTask(u8 taskId)
 {
-    if (gSpecialVar_Result == TRUE)
+    if (gSpecialVar_Result == TRUE && ShouldConsumeTmItem(gTasks[taskId].tMove))
     {
-        if (gMoveRelearnerState == MOVE_RELEARNER_ICONIC_MOVES)
-            PayForIconicMove(GetSelectedBoxMonFromPcOrParty(), gTasks[taskId].tMove, sIconicPayment);
-        RedrawMoveList();
+        enum Item item = GetTMHMItemIdFromMoveId(gTasks[taskId].tMove);
+        if (!GetItemImportance(item))
+            RemoveBagItem(item, 1);
     }
+    if (gRelearnMode == RELEARN_MODE_SCRIPT && gSpecialVar_Result == TRUE)
+    {
+        gTasks[taskId].func = Task_MoveRelearner_Quit;
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        return;
+    }
+    if (gSpecialVar_Result == TRUE)
+        RedrawMoveList();
     else
         ShowTeachMoveText();
     AddScrollArrows();
@@ -573,7 +550,6 @@ static void UIEndTask(u8 taskId)
 
 static const struct MoveLearnUI sMoveLearnUI =
 {
-    .concise = TRUE,
     .askConfirmation = UIAskConfirmation,
     .waitConfirmation = UIWaitConfirmation,
     .printMessage = UIPrintMessage,
@@ -587,11 +563,7 @@ static void Task_MoveRelearner_Quit(u8 taskId)
     if (gPaletteFade.active)
         return;
 
-    if (sMoveRelearnerReturnToParty)
-    {
-        SetMainCallback2(CB2_ReturnToMoveRelearnerPartyMenu);
-    }
-    else if (gInitialSummaryScreenCallback != NULL)
+    if (gInitialSummaryScreenCallback != NULL)
     {
         if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
             ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_CONTEST, gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
@@ -605,7 +577,6 @@ static void Task_MoveRelearner_Quit(u8 taskId)
 
     FreeMoveRelearnerResources();
     gRelearnMode = RELEARN_MODE_NONE;
-    sMoveRelearnerReturnToParty = FALSE;
     DestroyTask(taskId);
 }
 
@@ -664,73 +635,6 @@ static bool32 UpdateMoveRelearnerState(void)
     return FALSE;
 }
 
-static void Task_IconicNoFunds(u8 taskId)
-{
-    if (!IsTextPrinterActiveOnWindow(RELEARNERWIN_MSG) && JOY_NEW(A_BUTTON | B_BUTTON))
-    {
-        ShowTeachMoveText();
-        AddScrollArrows();
-        gTasks[taskId].func = Task_MoveRelearner_HandleInput;
-    }
-}
-
-static void Task_IconicPayment(u8 taskId)
-{
-    if (IsTextPrinterActiveOnWindow(RELEARNERWIN_MSG))
-        return;
-    if (gTasks[taskId].tState == 0)
-    {
-        static const struct WindowTemplate paymentWindow = {
-            .bg = 0, .tilemapLeft = 15, .tilemapTop = 5,
-            .width = 14, .height = 6, .paletteNum = 15, .baseBlock = 0x25A,
-        };
-        static const struct MenuAction choices[] = {
-            {COMPOUND_STRING(STR(EC_ICONIC_MOVE_CAP_COST) " Bottle Caps"), {.void_u8 = NULL}},
-            {COMPOUND_STRING("1 Gold Bottle Cap"), {.void_u8 = NULL}},
-            {gText_Cancel, {.void_u8 = NULL}},
-        };
-        sIconicPaymentWindow = AddWindow(&paymentWindow);
-        if (sIconicPaymentWindow == WINDOW_NONE)
-        {
-            UIPrintMessage(COMPOUND_STRING("Couldn't open payment choices."));
-            gTasks[taskId].func = Task_IconicNoFunds;
-            return;
-        }
-        DrawStdFrameWithCustomTileAndPalette(sIconicPaymentWindow, FALSE, 1, 0xE);
-        PrintMenuTable(sIconicPaymentWindow, ARRAY_COUNT(choices), choices);
-        u32 cursor = !CheckBagHasItem(ITEM_BOTTLE_CAP, EC_ICONIC_MOVE_CAP_COST)
-            && CheckBagHasItem(ITEM_GOLD_BOTTLE_CAP, EC_ICONIC_MOVE_GOLD_CAP_COST) ? 1 : 0;
-        InitMenuInUpperLeftCorner(sIconicPaymentWindow, ARRAY_COUNT(choices), cursor, TRUE);
-        PutWindowTilemap(sIconicPaymentWindow);
-        CopyWindowToVram(sIconicPaymentWindow, COPYWIN_FULL);
-        gTasks[taskId].tState = 1;
-        return;
-    }
-    s32 answer = Menu_ProcessInputNoWrap();
-    if (answer == MENU_NOTHING_CHOSEN)
-        return;
-    ClearStdWindowAndFrameToTransparent(sIconicPaymentWindow, TRUE);
-    RemoveWindow(sIconicPaymentWindow);
-    sIconicPaymentWindow = WINDOW_NONE;
-    PlaySE(SE_SELECT);
-    if (answer != 0 && answer != 1)
-    {
-        ShowTeachMoveText();
-        AddScrollArrows();
-        gTasks[taskId].func = Task_MoveRelearner_HandleInput;
-        return;
-    }
-    sIconicPayment = answer == 0 ? ITEM_BOTTLE_CAP : ITEM_GOLD_BOTTLE_CAP;
-    if (!CheckBagHasItem(sIconicPayment, sIconicPayment == ITEM_BOTTLE_CAP ? EC_ICONIC_MOVE_CAP_COST : EC_ICONIC_MOVE_GOLD_CAP_COST))
-    {
-        UIPrintMessage(COMPOUND_STRING("Not enough Bottle Caps."));
-        gTasks[taskId].func = Task_IconicNoFunds;
-        return;
-    }
-    gTasks[taskId].tState = GetLearnMoveStartAfterConfirmationState();
-    gTasks[taskId].func = Task_MoveRelearner_LearnMove;
-}
-
 static void Task_MoveRelearner_HandleInput(u8 taskId)
 {
     s32 itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
@@ -739,16 +643,7 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
     switch (itemId)
     {
     case LIST_NOTHING_CHOSEN:
-        if (JOY_NEW(START_BUTTON))
-        {
-            RemoveScrollArrows();
-            sMoveRelearnerStruct->pendingTypeFilter = sMoveRelearnerStruct->typeFilter;
-            sMoveRelearnerStruct->pendingCategoryFilter = sMoveRelearnerStruct->categoryFilter;
-            sMoveRelearnerStruct->filterRow = 0;
-            gTasks[taskId].func = Task_MoveRelearner_Filters;
-            ShowTutorFilters();
-        }
-        else if (JOY_NEW(SELECT_BUTTON) && gRelearnMode != RELEARN_MODE_SCRIPT)
+        if (JOY_NEW(SELECT_BUTTON) && gRelearnMode != RELEARN_MODE_SCRIPT)
         {
             if (UpdateMoveRelearnerState())
             {
@@ -757,15 +652,14 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
                 sMoveRelearnerScrollState.listRow = 0;
                 RedrawMoveList();
             }
-            else
+            else if (GameHasDifferentRelearners())
             {
                 PlaySE(SE_FAILURE);
             }
         }
         else if (!C_HIDE_CONTEST_DATA)
         {
-            if (gRelearnMode == RELEARN_MODE_SCRIPT ? !JOY_NEW(SELECT_BUTTON)
-                : !(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
+            if (!(JOY_NEW(DPAD_LEFT | DPAD_RIGHT)) && !GetLRKeysPressed())
                 break;
 
             PlaySE(SE_SELECT);
@@ -793,16 +687,11 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
     case LIST_CANCEL:
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
-        // A tutor's list costs nothing to leave: B goes straight back to
-        // choosing a Pokémon, through the script or the tutor's party screen.
-        if (gRelearnMode == RELEARN_MODE_SCRIPT)
-        {
-            gTasks[taskId].func = Task_MoveRelearner_Quit;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            break;
-        }
         gTasks[taskId].func = Task_MoveRelearner_Giveup_Prompt;
-        StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerStop);
+        if (gRelearnMode == RELEARN_MODE_SCRIPT)
+            StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerGiveUp);
+        else
+            StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerStop);
         MoveRelearnerPrintMessage(gStringVar4);
         break;
     default:
@@ -811,23 +700,16 @@ static void Task_MoveRelearner_HandleInput(u8 taskId)
         StringCopy(gStringVar2, GetMoveName(itemId));
         gTasks[taskId].func = Task_MoveRelearner_LearnMove;
         gTasks[taskId].tMove = GetCurrentSelectedMove();
-        gSpecialVar_Result = FALSE;
-        sIconicPayment = ITEM_NONE;
-        if (gMoveRelearnerState == MOVE_RELEARNER_ICONIC_MOVES
-         && !IsIconicMoveUnlocked(GetSelectedBoxMonFromPcOrParty(), gTasks[taskId].tMove))
+        gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
+        const u8 *message = gText_MoveRelearnerTeachMoveConfirm;
+        if (ShouldConsumeTmItem(gTasks[taskId].tMove))
         {
-            sIconicPayment = ITEM_BOTTLE_CAP;
-            gTasks[taskId].tState = 0;
-            gTasks[taskId].func = Task_IconicPayment;
-            ConvertIntToDecimalStringN(gStringVar1, CountTotalItemQuantityInBag(ITEM_BOTTLE_CAP), STR_CONV_MODE_LEFT_ALIGN, 6);
-            ConvertIntToDecimalStringN(gStringVar3, CountTotalItemQuantityInBag(ITEM_GOLD_BOTTLE_CAP), STR_CONV_MODE_LEFT_ALIGN, 6);
-            UIPrintMessage(COMPOUND_STRING("{STR_VAR_1} Caps / {STR_VAR_3} Gold\nPay for {STR_VAR_2}?"));
+            enum Item item = GetTMHMItemIdFromMoveId(gTasks[taskId].tMove);
+            StringCopy(gStringVar3, GetItemName(item));
+            if (!GetItemImportance(item))
+                message = gText_MoveRelearnerTeachMoveConfirmUseTm;
         }
-        else
-        {
-            gTasks[taskId].tState = GetLearnMoveStartAfterPromptState();
-            UIPrintMessage(gText_MoveRelearnerTeachMoveConfirm);
-        }
+        UIPrintMessage(message);
         break;
     }
 }
@@ -839,16 +721,9 @@ static s32 GetCurrentSelectedMove(void)
 
 static void ShowTeachMoveText(void)
 {
-    GetBoxMonData(GetSelectedBoxMonFromPcOrParty(), MON_DATA_NICKNAME, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gRelearnMode == RELEARN_MODE_SCRIPT
-        ? COMPOUND_STRING("{STR_VAR_1}: choose a move.") : gText_TeachWhichMoveToPkmn);
+    StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
     FillWindowPixelBuffer(RELEARNERWIN_MSG, 0x11);
-    AddTextPrinterParameterized(RELEARNERWIN_MSG, GetFontIdToFit(gStringVar4, FONT_NORMAL, 0, WindowWidthPx(RELEARNERWIN_MSG)), gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
-    if (gRelearnMode == RELEARN_MODE_SCRIPT)
-        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_SMALL_NARROW,
-            C_HIDE_CONTEST_DATA ? COMPOUND_STRING("{DPAD_LEFTRIGHT} Page  {START_BUTTON} Filter")
-                : COMPOUND_STRING("{DPAD_LEFTRIGHT} Page  {START_BUTTON} Filter"), 0, 16, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(RELEARNERWIN_MSG, COPYWIN_GFX);
+    AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
 }
 
 static void CreateUISprites(void)
@@ -880,7 +755,7 @@ static void CreateUISprites(void)
 
 static void AddScrollArrows(void)
 {
-    if (!C_HIDE_CONTEST_DATA && gRelearnMode != RELEARN_MODE_SCRIPT && sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
+    if (!C_HIDE_CONTEST_DATA && sMoveRelearnerStruct->moveDisplayArrowTask == TASK_NONE)
         sMoveRelearnerStruct->moveDisplayArrowTask = AddScrollIndicatorArrowPair(&sDisplayModeArrowsTemplate, &sMoveRelearnerStruct->scrollOffset);
 
     if (sMoveRelearnerStruct->moveListScrollArrowTask == TASK_NONE)
@@ -888,7 +763,6 @@ static void AddScrollArrows(void)
         gTempScrollArrowTemplate = sMoveListScrollArrowsTemplate;
         gTempScrollArrowTemplate.fullyDownThreshold = sMoveRelearnerStruct->numMenuChoices - sMoveRelearnerStruct->numToShowAtOnce;
         sMoveRelearnerStruct->moveListScrollArrowTask = AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, &sMoveRelearnerScrollState.listOffset);
-        SetScrollIndicatorArrowPairBounce(sMoveRelearnerStruct->moveListScrollArrowTask, 1);
     }
 }
 
@@ -907,77 +781,6 @@ static void RemoveScrollArrows(void)
     }
 }
 
-static const enum Type sTutorFilterTypes[] = {
-    TYPE_NORMAL, TYPE_FIGHTING, TYPE_FLYING, TYPE_POISON, TYPE_GROUND,
-    TYPE_ROCK, TYPE_BUG, TYPE_GHOST, TYPE_STEEL, TYPE_FIRE, TYPE_WATER,
-    TYPE_GRASS, TYPE_ELECTRIC, TYPE_PSYCHIC, TYPE_ICE, TYPE_DRAGON,
-    TYPE_DARK, TYPE_FAIRY,
-};
-static const u8 *const sTutorCategories[] = {
-    COMPOUND_STRING("All"), COMPOUND_STRING("Physical"),
-    COMPOUND_STRING("Special"), COMPOUND_STRING("Status"),
-};
-
-bool32 MoveMatchesTutorFilters(enum Move move, u32 typeFilter, u32 categoryFilter)
-{
-    return move != MOVE_NONE && move < MOVES_COUNT
-        && typeFilter <= ARRAY_COUNT(sTutorFilterTypes) && categoryFilter < ARRAY_COUNT(sTutorCategories)
-        && (!typeFilter || GetMoveType(move) == sTutorFilterTypes[typeFilter - 1])
-        && (!categoryFilter || GetMoveCategory(move) == categoryFilter);
-}
-
-static void ShowTutorFilters(void)
-{
-    PutWindowTilemap(RELEARNERWIN_DESC_BATTLE);
-    FillWindowPixelBuffer(RELEARNERWIN_DESC_BATTLE, PIXEL_FILL(1));
-    if (sMoveRelearnerStruct->categoryIconSpriteId != 0xFF)
-        gSprites[sMoveRelearnerStruct->categoryIconSpriteId].invisible = TRUE;
-    for (u32 i = 0; i < ARRAY_COUNT(sMoveRelearnerStruct->heartSpriteIds); i++)
-        gSprites[sMoveRelearnerStruct->heartSpriteIds[i]].invisible = TRUE;
-    const u8 *type = sMoveRelearnerStruct->pendingTypeFilter
-        ? gTypesInfo[sTutorFilterTypes[sMoveRelearnerStruct->pendingTypeFilter - 1]].name : sTutorCategories[0];
-    StringCopy(gStringVar1, type);
-    StringCopy(gStringVar2, sTutorCategories[sMoveRelearnerStruct->pendingCategoryFilter]);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Type: {STR_VAR_1}\nKind: {STR_VAR_2}\n\nUP/DOWN: row\nLEFT/RIGHT: choice\nA: apply  B: cancel"));
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL, gStringVar4, 10, 1, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL, COMPOUND_STRING(">"), 0,
-        1 + sMoveRelearnerStruct->filterRow * 12, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(RELEARNERWIN_DESC_BATTLE, COPYWIN_FULL);
-}
-
-static void Task_MoveRelearner_Filters(u8 taskId)
-{
-    if (JOY_NEW(A_BUTTON | B_BUTTON | START_BUTTON))
-    {
-        if (JOY_NEW(A_BUTTON))
-        {
-            sMoveRelearnerStruct->typeFilter = sMoveRelearnerStruct->pendingTypeFilter;
-            sMoveRelearnerStruct->categoryFilter = sMoveRelearnerStruct->pendingCategoryFilter;
-            sMoveRelearnerScrollState.listOffset = sMoveRelearnerScrollState.listRow = 0;
-        }
-        RedrawMoveList();
-        if (gTasks[taskId].tCategory == CONTEST_INFO)
-            PutWindowTilemap(RELEARNERWIN_DESC_CONTEST);
-        MoveRelearnerShowHideCategoryIcon(GetCurrentSelectedMove());
-        MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
-        AddScrollArrows();
-        gTasks[taskId].func = Task_MoveRelearner_HandleInput;
-        return;
-    }
-    if (JOY_NEW(DPAD_UP | DPAD_DOWN))
-        sMoveRelearnerStruct->filterRow ^= 1;
-    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
-    {
-        u8 *value = sMoveRelearnerStruct->filterRow ? &sMoveRelearnerStruct->pendingCategoryFilter : &sMoveRelearnerStruct->pendingTypeFilter;
-        u32 count = sMoveRelearnerStruct->filterRow ? ARRAY_COUNT(sTutorCategories) : ARRAY_COUNT(sTutorFilterTypes) + 1;
-        *value = (*value + count + (JOY_NEW(DPAD_RIGHT) ? 1 : -1)) % count;
-    }
-    else
-        return;
-    PlaySE(SE_SELECT);
-    ShowTutorFilters();
-}
-
 static void CreateLearnableMovesList(void)
 {
     s32 i;
@@ -985,15 +788,6 @@ static void CreateLearnableMovesList(void)
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
     if (gRelearnMode == RELEARN_MODE_SCRIPT || sRelearnTypes[gMoveRelearnerState].isActive())
         sMoveRelearnerStruct->numMenuChoices = sRelearnTypes[gMoveRelearnerState].getMoves(boxmon, sMoveRelearnerStruct->movesToLearn);
-
-    u32 kept = 0;
-    for (u32 j = 0; j < sMoveRelearnerStruct->numMenuChoices; j++)
-    {
-        enum Move move = sMoveRelearnerStruct->movesToLearn[j];
-        if (MoveMatchesTutorFilters(move, sMoveRelearnerStruct->typeFilter, sMoveRelearnerStruct->categoryFilter))
-            sMoveRelearnerStruct->movesToLearn[kept++] = move;
-    }
-    sMoveRelearnerStruct->numMenuChoices = kept;
 
     if (P_SORT_MOVES)
         SortMovesAlphabetically(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices);
@@ -1102,10 +896,19 @@ static void QuickSortMoves(u16 *moves, s32 left, s32 right)
     QuickSortMoves(moves, i, right);
 }
 
-void SortMovesAlphabetically(u16 *moves, u32 numMoves)
+static void SortMovesAlphabetically(u16 *moves, u32 numMoves)
 {
     if (numMoves > 1)
         QuickSortMoves(moves, 0, numMoves - 1);
+}
+
+static bool32 IsTmAvailable(enum Item item)
+{
+    if (P_ENABLE_ALL_TM_MOVES)
+        return TRUE;
+    if (gRelearnMode == RELEARN_MODE_SCRIPT)
+        return TRUE;
+    return CheckBagHasItem(item, 1);
 }
 
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
@@ -1122,7 +925,7 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
             if (learnset[i].level > level)
                 break;
 
-            if (BoxMonKnowsMove(mon, learnset[i].move) || IsMoveRemovedFromGame(learnset[i].move))
+            if (BoxMonKnowsMove(mon, learnset[i].move))
                 continue;
 
             bool32 alreadyInList = FALSE;
@@ -1148,20 +951,60 @@ static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves)
     while (GetSpeciesPreEvolution(species) != SPECIES_NONE)
         species = GetSpeciesPreEvolution(species);
 
-    // A hatchling of an iconic family can always relearn its one-hit KO.
-    enum Move iconic = GetBoxMonIconicOhkoMove(mon);
-    if (iconic != MOVE_NONE && !BoxMonKnowsMove(mon, iconic))
-        moves[numMoves++] = iconic;
-
     const u16 *eggMoves = GetSpeciesEggMoves(species);
 
     if (eggMoves[0] == MOVE_UNAVAILABLE)
-        return numMoves;
+        return 0;
 
     for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
     {
-        if (!BoxMonKnowsMove(mon, eggMoves[i]) && !IsMoveRemovedFromGame(eggMoves[i]))
+        if (!BoxMonKnowsMove(mon, eggMoves[i]))
             moves[numMoves++] = eggMoves[i];
+    }
+
+    return numMoves;
+}
+
+static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves)
+{
+    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
+    u32 numMoves = 0;
+
+    for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
+    {
+        enum Item item = GetTMHMItemId(i + 1);
+        enum Move move = GetTMHMMoveId(i + 1);
+
+        if (move == MOVE_NONE)
+            continue;
+
+        if (!IsTmAvailable(item))
+            continue;
+
+        if (!CanLearnTeachableMove(species, move))
+            continue;
+
+        if (!BoxMonKnowsMove(mon, move))
+            moves[numMoves++] = move;
+    }
+
+    return numMoves;
+}
+
+static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
+{
+    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
+    u32 numMoves = 0;
+
+    for (u32 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = gTutorMoves[i];
+
+        if (!CanLearnTeachableMove(species, move))
+            continue;
+
+        if (!BoxMonKnowsMove(mon, move))
+            moves[numMoves++] = move;
     }
 
     return numMoves;
@@ -1176,20 +1019,6 @@ void Special_HasMoveToRelearn(void)
         gSpecialVar_Result = FALSE;
 }
 
-// The script's own checks (IsSelectedMonEgg, Special_HasMoveToRelearn) for a
-// party pick: TRUE opens the move list without returning to the field.
-bool32 CanPartyMonGoStraightToRelearner(u32 partyIndex)
-{
-    struct BoxPokemon *boxmon;
-
-    if (partyIndex >= PARTY_SIZE)
-        return FALSE;
-    boxmon = &gParties[B_TRAINER_PLAYER][partyIndex].box;
-    if (GetBoxMonData(boxmon, MON_DATA_IS_EGG))
-        return FALSE;
-    return HasMoveToRelearn(boxmon, gMoveRelearnerState);
-}
-
 bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates state)
 {
     if (!sRelearnTypes[state].isActive())
@@ -1202,11 +1031,6 @@ bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates
 bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state)
 {
     return sRelearnTypes[state].hasMoveToRelearn(boxMon);
-}
-
-u32 GetMovesToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state, u16 *moves)
-{
-    return sRelearnTypes[state].getMoves(boxMon, moves);
 }
 
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon)
@@ -1237,9 +1061,6 @@ static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon)
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon)
 {
     enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
-    enum Move iconic = GetBoxMonIconicOhkoMove(boxMon);
-    if (iconic != MOVE_NONE && !BoxMonKnowsMove(boxMon, iconic))
-        return TRUE;
     while (GetSpeciesPreEvolution(species) != SPECIES_NONE)
         species = GetSpeciesPreEvolution(species);
 
@@ -1250,16 +1071,53 @@ static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon)
 
     for (u32 i = 0; eggMoves[i] != MOVE_UNAVAILABLE; i++)
     {
-        if (!BoxMonKnowsMove(boxMon, eggMoves[i]) && !IsMoveRemovedFromGame(eggMoves[i]))
+        if (!BoxMonKnowsMove(boxMon, eggMoves[i]))
             return TRUE;
     }
 
     return FALSE;
 }
 
-static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon)
+static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon)
 {
-    return GetEmeraldChampionsPreparationMovesToLearn(boxMon, NULL) != 0;
+    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    for (u32 i = 0; i < NUM_ALL_MACHINES; i++)
+    {
+        enum Item item = GetTMHMItemId(i + 1);
+        enum Move move = GetTMHMMoveId(i + 1);
+
+        if (move == MOVE_NONE)
+            continue;
+
+        bool32 tmAvailable = IsTmAvailable(item);
+        if (!tmAvailable)
+            continue;
+
+        if (!CanLearnTeachableMove(species, move))
+            continue;
+
+        if (!BoxMonKnowsMove(boxMon, move))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon)
+{
+    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    for (u32 i = 0; gTutorMoves[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = gTutorMoves[i];
+
+        if (!CanLearnTeachableMove(species, move))
+            continue;
+
+        if (!BoxMonKnowsMove(boxMon, move))
+            return TRUE;
+    }
+
+    return FALSE;
 }
 
 static bool32 IsLevelUpMoveRelearnerActive(void)
@@ -1272,18 +1130,12 @@ static bool32 IsEggMoveRelearnerActive(void)
     return (FlagGet(P_FLAG_EGG_MOVES) || P_ENABLE_MOVE_RELEARNERS);
 }
 
-static bool32 IsAllMoveRelearnerActive(void)
+static bool32 IsTMMoveRelearnerActive(void)
 {
-    return TRUE;
+    return (P_TM_MOVES_RELEARNER || P_ENABLE_MOVE_RELEARNERS);
 }
 
-// Only Mauville's tutor opens this list; other relearners never cycle into it.
-static bool32 IsIconicMoveRelearnerActive(void)
+static bool32 IsTutorMoveRelearnerActive(void)
 {
-    return gMoveRelearnerState == MOVE_RELEARNER_ICONIC_MOVES;
-}
-
-static bool32 HasRelearnerIconicMoves(struct BoxPokemon *boxMon)
-{
-    return GetEmeraldChampionsIconicMovesToLearn(boxMon, NULL) != 0;
+    return (FlagGet(P_FLAG_TUTOR_MOVES) || P_ENABLE_MOVE_RELEARNERS);
 }

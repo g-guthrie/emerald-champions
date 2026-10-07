@@ -1,9 +1,6 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
-// A short planted-foot pause after each deliberate sneaking step (60 Hz).
-#define SNEAK_STEP_PAUSE_FRAMES 8
-
 void PlayerStep(enum Direction direction, u16 newKeys, u16 heldKeys);
 bool8 TryDoMetatileBehaviorForcedMovement();
 void ClearPlayerAvatarInfo(void);

@@ -7,13 +7,16 @@ ASSUMPTIONS
     ASSUME(GetMoveNonVolatileStatus(MOVE_THUNDER_WAVE) == MOVE_EFFECT_PARALYSIS);
 }
 
-SINGLE_BATTLE_TEST("Paralysis reduces Speed by 50%")
+SINGLE_BATTLE_TEST("Paralysis reduces Speed by 50% (Gen 7+) or 75% (Gen 1-6)")
 {
-    u32 playerSpeed;
+    u32 playerSpeed, genConfig;
     bool32 playerFirst;
-    PARAMETRIZE { playerSpeed = 98;  playerFirst = FALSE; }
-    PARAMETRIZE { playerSpeed = 102; playerFirst = TRUE;  }
+    PARAMETRIZE { playerSpeed = 196; playerFirst = FALSE; genConfig = GEN_6; }
+    PARAMETRIZE { playerSpeed = 204; playerFirst = TRUE;  genConfig = GEN_6; }
+    PARAMETRIZE { playerSpeed = 98;  playerFirst = FALSE; genConfig = GEN_7; }
+    PARAMETRIZE { playerSpeed = 102; playerFirst = TRUE;  genConfig = GEN_7; }
     GIVEN {
+        WITH_CONFIG(B_PARALYSIS_SPEED, genConfig);
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_PARALYSIS); Speed(playerSpeed); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
     } WHEN {
@@ -35,6 +38,19 @@ SINGLE_BATTLE_TEST("Paralysis reduces Speed by 50%")
     }
 }
 
+SINGLE_BATTLE_TEST("Paralysis has a 1/4 chance of skipping the turn (Gen9-)")
+{
+    PASSES_RANDOMLY(1, 4, RNG_PARALYSIS);
+    GIVEN {
+        WITH_CONFIG(B_PARALYSIS_CHANCE, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_PARALYSIS); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        MESSAGE("Wobbuffet couldn't move because it's paralyzed!");
+    }
+}
 
 SINGLE_BATTLE_TEST("Paralysis has a 1/8 chance of skipping the turn (Champions)")
 {

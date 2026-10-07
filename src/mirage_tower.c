@@ -295,22 +295,31 @@ void ClearMirageTowerPulseBlendEffect(void)
     FREE_AND_SET_NULL(sMirageTowerPulseBlend);
 }
 
-// The tower falls when its fossil is taken, and no way leads back in.
-bool32 IsMirageTowerGone(void)
-{
-    return VarGet(VAR_MIRAGE_TOWER_STATE) != 0;
-}
-
 void SetMirageTowerVisibility(void)
 {
-    if (VarGet(VAR_MIRAGE_TOWER_STATE) >= 2)
+    u16 rand;
+    bool8 visible;
+
+    if (VarGet(VAR_MIRAGE_TOWER_STATE))
     {
+        // Mirage Tower event has already been completed, hide it
         FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
         return;
     }
-    FlagSet(FLAG_MIRAGE_TOWER_VISIBLE);
-    if (VarGet(VAR_MIRAGE_TOWER_STATE) == 0)
+
+    rand = Random();
+    visible = rand & 1;
+    if (FlagGet(FLAG_FORCE_MIRAGE_TOWER_VISIBLE) == TRUE)
+        visible = TRUE;
+
+    if (visible)
+    {
+        FlagSet(FLAG_MIRAGE_TOWER_VISIBLE);
         TryStartMirageTowerPulseBlendEffect();
+        return;
+    }
+
+    FlagClear(FLAG_MIRAGE_TOWER_VISIBLE);
 }
 
 void StartPlayerDescendMirageTower(void)

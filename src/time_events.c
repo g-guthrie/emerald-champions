@@ -4,8 +4,8 @@
 #include "field_weather.h"
 #include "pokemon.h"
 #include "random.h"
-#include "rtc.h"
 #include "overworld.h"
+#include "rtc.h"
 #include "script.h"
 #include "task.h"
 
@@ -54,35 +54,6 @@ bool8 IsMirageIslandPresent(void)
     return FALSE;
 }
 
-static void Task_WaitWeather(u8 taskId)
-{
-    if (IsWeatherChangeComplete())
-    {
-        ScriptContext_Enable();
-        DestroyTask(taskId);
-    }
-}
-
-void WaitWeather(void)
-{
-    CreateTask(Task_WaitWeather, 80);
-}
-
-void InitBirchState(void)
-{
-    *GetVarPointer(VAR_BIRCH_STATE) = 0;
-}
-
-void UpdateBirchState(u16 days)
-{
-    u16 *state = GetVarPointer(VAR_BIRCH_STATE);
-    *state += days;
-    *state %= 7;
-}
-
-// Shoal Cave's tide, restored for the Inclement Emerald Shoal Cave scripts.
-// The entrance script calls this and then branches on FLAG_SYS_SHOAL_TIDE.
-// Unchanged from the engine's own version other than living here again.
 void UpdateShoalTideFlag(void)
 {
     static const u8 tide[] =
@@ -121,4 +92,30 @@ void UpdateShoalTideFlag(void)
         else
             FlagClear(FLAG_SYS_SHOAL_TIDE);
     }
+}
+
+static void Task_WaitWeather(u8 taskId)
+{
+    if (IsWeatherChangeComplete())
+    {
+        ScriptContext_Enable();
+        DestroyTask(taskId);
+    }
+}
+
+void WaitWeather(void)
+{
+    CreateTask(Task_WaitWeather, 80);
+}
+
+void InitBirchState(void)
+{
+    *GetVarPointer(VAR_BIRCH_STATE) = 0;
+}
+
+void UpdateBirchState(u16 days)
+{
+    u16 *state = GetVarPointer(VAR_BIRCH_STATE);
+    *state += days;
+    *state %= 7;
 }

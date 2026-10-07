@@ -3,9 +3,6 @@
 #include "config/quickstart.h"
 #include "quickstart.h"
 #include "title_screen.h"
-#if EC_HEADLESS_FIXTURES
-#include "emerald_champions_headless.h"
-#endif
 #include "sprite.h"
 #include "gba/m4a_internal.h"
 #include "clear_save_data_menu.h"
@@ -19,6 +16,7 @@
 #include "reset_rtc_screen.h"
 #include "berry_fix_program.h"
 #include "sound.h"
+#include "sprite.h"
 #include "task.h"
 #include "scanline_effect.h"
 #include "gpu_regs.h"
@@ -33,18 +31,11 @@ enum {
     TAG_LOGO_SHINE,
 };
 
-// The game logo (graphics/title_screen/inclement_emerald_2_logo.png, made by
-// tools/title_logo.py): 145x42 at its own pixel size, centred in a 192x64
-// sheet shown as three 64x64 8bpp sprites.
-#define VERSION_BANNER_PARTS 3
-#define VERSION_BANNER_PART_TILES 128
-#define VERSION_BANNER_LEFT_X (DISPLAY_WIDTH / 2 - 64)
-// It settles clear of the POKéMON logo above and PRESS START below.
-#define VERSION_BANNER_Y_GOAL 76
-#define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 64)
-#define START_BANNER_Y 108
-#define COPYRIGHT_BANNER_Y 148
-#define VERSION_BANNER_COLORS (9 * 16) // OBJ palettes 0-8, below PRESS START's
+#define VERSION_BANNER_RIGHT_TILEOFFSET 64
+#define VERSION_BANNER_LEFT_X 98
+#define VERSION_BANNER_RIGHT_X 162
+#define VERSION_BANNER_Y 2
+#define VERSION_BANNER_Y_GOAL 66
 #define START_BANNER_X 128
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
@@ -76,7 +67,9 @@ static const u32 sTitleScreenRayquazaTilemap[] = INCGFX_U32("graphics/title_scre
 static const u32 sTitleScreenLogoShineGfx[] = INCGFX_U32("graphics/title_screen/logo_shine.png", ".4bpp.smol");
 static const u32 sTitleScreenCloudsGfx[] = INCGFX_U32("graphics/title_screen/clouds.png", ".4bpp.smol");
 
-// Used to blend "Inclement Emerald 2" as it passes over the Pokémon banner.
+
+
+// Used to blend "Emerald Version" as it passes over over the Pokémon banner.
 // Also used by the intro to blend the Game Freak name/logo in and out as they appear and disappear
 const u16 gTitleScreenAlphaBlend[64] =
 {
@@ -122,10 +115,10 @@ static const struct OamData sVersionBannerLeftOamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
     .bpp = ST_OAM_8BPP,
-    .shape = SPRITE_SHAPE(64x64),
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -139,10 +132,10 @@ static const struct OamData sVersionBannerRightOamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
     .bpp = ST_OAM_8BPP,
-    .shape = SPRITE_SHAPE(64x64),
+    .shape = SPRITE_SHAPE(64x32),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
+    .size = SPRITE_SIZE(64x32),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
@@ -155,29 +148,20 @@ static const union AnimCmd sVersionBannerLeftAnimSequence[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sVersionBannerPart1AnimSequence[] =
+static const union AnimCmd sVersionBannerRightAnimSequence[] =
 {
-    ANIMCMD_FRAME(1 * VERSION_BANNER_PART_TILES, 30),
+    ANIMCMD_FRAME(VERSION_BANNER_RIGHT_TILEOFFSET, 30),
     ANIMCMD_END,
 };
-
-static const union AnimCmd sVersionBannerPart2AnimSequence[] =
-{
-    ANIMCMD_FRAME(2 * VERSION_BANNER_PART_TILES, 30),
-    ANIMCMD_END,
-};
-
 
 static const union AnimCmd *const sVersionBannerLeftAnimTable[] =
 {
     sVersionBannerLeftAnimSequence,
 };
 
-// The parts right of the first, in order.
 static const union AnimCmd *const sVersionBannerRightAnimTable[] =
 {
-    sVersionBannerPart1AnimSequence,
-    sVersionBannerPart2AnimSequence,
+    sVersionBannerRightAnimSequence,
 };
 
 static const struct SpriteTemplate sVersionBannerLeftSpriteTemplate =
@@ -202,7 +186,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 {
     {
         .data = gTitleScreenEmeraldVersionGfx,
-        .size = VERSION_BANNER_PARTS * VERSION_BANNER_PART_TILES * TILE_SIZE_4BPP,
+        .size = 0x1000,
         .tag = TAG_VERSION
     },
     {},
@@ -579,6 +563,11 @@ static void VBlankCB(void)
 
 void CB2_InitTitleScreen(void)
 {
+    if (IS_FRLG)
+    {
+        CB2_InitTitleScreenFrlg();
+        return;
+    }
     switch (gMain.state)
     {
     default:
@@ -623,7 +612,7 @@ void CB2_InitTitleScreen(void)
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
         LoadCompressedSpriteSheet(&sPokemonLogoShineSpriteSheet[0]);
-        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), VERSION_BANNER_COLORS * sizeof(u16));
+        LoadPalette(gTitleScreenEmeraldVersionPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
         LoadSpritePalette(&sSpritePalette_PressStart[0]);
         gMain.state = 2;
         break;
@@ -726,13 +715,9 @@ static void Task_TitleScreenPhase1(u8 taskId)
         gSprites[spriteId].sAlphaBlendIdx = ARRAY_COUNT(gTitleScreenAlphaBlend);
         gSprites[spriteId].sParentTaskId = taskId;
 
-        // Create the rest of version banner
-        for (u32 i = 1; i < VERSION_BANNER_PARTS; i++)
-        {
-            spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_LEFT_X + i * 64, VERSION_BANNER_Y, 0);
-            StartSpriteAnim(&gSprites[spriteId], i - 1);
-            gSprites[spriteId].sParentTaskId = taskId;
-        }
+        // Create right side of version banner
+        spriteId = CreateSprite(&sVersionBannerRightSpriteTemplate, VERSION_BANNER_RIGHT_X, VERSION_BANNER_Y, 0);
+        gSprites[spriteId].sParentTaskId = taskId;
 
         gTasks[taskId].tCounter = 144;
         gTasks[taskId].func = Task_TitleScreenPhase2;
@@ -770,14 +755,9 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_BG1_ON
                                     | DISPCNT_BG2_ON
                                     | DISPCNT_OBJ_ON);
-        CreatePressStartBanner(START_BANNER_X, START_BANNER_Y);
-        CreateCopyrightBanner(START_BANNER_X, COPYRIGHT_BANNER_Y);
-        if (QUICKSTART && QUICKSTART_HUD
-#if EC_HEADLESS_FIXTURES
-         && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_TITLE
-         && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE
-#endif
-        )
+        CreatePressStartBanner(START_BANNER_X, 108);
+        CreateCopyrightBanner(START_BANNER_X, 148);
+        if (QUICKSTART && QUICKSTART_HUD)
             CreateQuickstartHud();
         gTasks[taskId].tBg1Y = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
@@ -800,11 +780,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
 // Show Rayquaza silhouette and process main title screen input
 static void Task_TitleScreenPhase3(u8 taskId)
 {
-    if (QUICKSTART && JOY_NEW(SELECT_BUTTON)
-#if EC_HEADLESS_FIXTURES
-        && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE
-#endif
-    )
+    if (QUICKSTART && JOY_NEW(SELECT_BUTTON))
         Quickstart();
 
     if (JOY_NEW(A_BUTTON) || JOY_NEW(START_BUTTON))

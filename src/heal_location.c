@@ -7,6 +7,28 @@
 
 #include "data/heal_locations.h"
 
+u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sHealLocations); i++)
+    {
+        if (sHealLocations[i].mapGroup == mapGroup && sHealLocations[i].mapNum == mapNum)
+            return i + 1;
+    }
+    return HEAL_LOCATION_NONE;
+}
+
+const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum)
+{
+    u32 index = GetHealLocationIndexByMap(mapGroup, mapNum);
+
+    if (index == HEAL_LOCATION_NONE)
+        return NULL;
+    else
+        return &sHealLocations[index - 1];
+}
+
 u32 GetHealLocationIndexByWarpData(struct WarpData *warp)
 {
     u32 i;
@@ -48,7 +70,8 @@ bool32 IsLastHealLocationPlayerHouse()
     if (IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE)
         || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F)
         || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE)
-        || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F))
+        || IsLastHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F)
+        || IsLastHealLocation(HEAL_LOCATION_PALLET_TOWN))
         return TRUE;
 
     return FALSE;
@@ -81,14 +104,3 @@ void SetWhiteoutRespawnWarpAndHealerNPC(struct WarpData *warp)
     gSpecialVar_LastTalked = healNpcLocalId;
     gSpecialVar_0x800B = healNpcLocalId;
 }
-
-#if EC_HEADLESS_FIXTURES
-bool32 IsWhiteoutRespawnHeadlessState(u32 healLocationId)
-{
-    if (healLocationId == HEAL_LOCATION_NONE || healLocationId >= NUM_HEAL_LOCATIONS)
-        return FALSE;
-    return gSaveBlock1Ptr->location.mapGroup == sWhiteoutRespawnHealCenterMapIdxs[healLocationId - 1][0]
-        && gSaveBlock1Ptr->location.mapNum == sWhiteoutRespawnHealCenterMapIdxs[healLocationId - 1][1]
-        && gSpecialVar_0x800B == sWhiteoutRespawnHealerNpcIds[healLocationId - 1];
-}
-#endif

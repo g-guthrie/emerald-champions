@@ -25,6 +25,7 @@
 #include "title_screen.h"
 #include "expansion_intro.h"
 #include "battle_anim.h"
+#include "intro_frlg.h"
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
 #include "pokemon.h"
@@ -1050,6 +1051,9 @@ static void SerialCB_CopyrightScreen(void)
 
 static u8 SetUpCopyrightScreen(void)
 {
+    if (IS_FRLG)
+        return SetUpCopyrightScreenFrlg();
+
     switch (gMain.state)
     {
     case COPYRIGHT_INITIALIZE:
@@ -2986,6 +2990,30 @@ static void SpriteCB_WaterDrop_Fall(struct Sprite *sprite)
     }
 }
 
+// Identical to SpriteCB_WaterDrop_Fall
+// Used by the 2nd and 3rd water drops to skip the leaf slide
+static void SpriteCB_WaterDropShort(struct Sprite *sprite)
+{
+    if (sprite->y < sprite->data[5])
+    {
+        sprite->y += 4;
+    }
+    else
+    {
+        sprite->data[7] = 1;
+        sprite->invisible = TRUE;
+        sprite->x += sprite->x2;
+        sprite->y += sprite->y2;
+        StartSpriteAnim(sprite, DROP_ANIM_RIPPLE);
+        sprite->data[2] = 1024;
+        sprite->data[3] = 8 * (sprite->data[1] & 3);
+        sprite->callback = SpriteCB_WaterDrop_Ripple;
+        sprite->oam.shape = SPRITE_SHAPE(64x32);
+        sprite->oam.size = SPRITE_SIZE(64x32);
+        CalcCenterToCornerVec(sprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_ERASE);
+    }
+}
+
 static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
 {
     u8 spriteId;
@@ -3007,7 +3035,7 @@ static u8 CreateWaterDrop(s16 x, s16 y, u16 c, u16 d, u16 e, u8 fallImmediately)
     if (!fallImmediately)
         gSprites[spriteId].callback = SpriteCB_WaterDrop; // Do full anim, for 1st drop that slides along the leaf
     else
-        gSprites[spriteId].callback = SpriteCB_WaterDrop_Fall; // Skip to drop falling into the water, for 2nd and 3rd drops
+        gSprites[spriteId].callback = SpriteCB_WaterDropShort; // Skip to drop falling into the water, for 2nd and 3rd drops
     oldSpriteId = spriteId;
 
     // Create water drop upper half

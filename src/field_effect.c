@@ -62,7 +62,9 @@ static void HallOfFameRecordEffect_WaitForBallPlacement(struct Task *);
 static void HallOfFameRecordEffect_WaitForBallFlashing(struct Task *);
 static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *);
 static void CreateHofMonitorSprite(s16, s16, s16, bool8);
+static void CreateHofMonitorSpriteFrlg(s32 x, s32 y);
 static void SpriteCB_HallOfFameMonitor(struct Sprite *);
+static void SpriteCB_HallOfFameMonitorFrlg(struct Sprite *sprite);
 
 static u8 CreateGlowingPokeballsEffect(s16, s16, s16, bool16);
 static void SpriteCB_PokeballGlowEffect(struct Sprite *);
@@ -275,9 +277,12 @@ static const u32 sPokeballGlow_Gfx[] = INCGFX_U32("graphics/field_effects/pics/p
 static const u16 sPokeballGlow_Pal[16] = INCGFX_U16("graphics/field_effects/palettes/pokeball_glow.pal", ".gbapal");
 static const u32 sPokecenterMonitor0_Gfx[] = INCGFX_U32("graphics/field_effects/pics/pokecenter_monitor/0.png", ".4bpp");
 static const u32 sPokecenterMonitor1_Gfx[] = INCGFX_U32("graphics/field_effects/pics/pokecenter_monitor/1.png", ".4bpp");
+static const u16 sPokecenterMonitor_Gfx_Frlg[] = INCGFX_U16("graphics/field_effects/pics/pokecenter_monitor/frlg.png", ".4bpp");
 static const u32 sHofMonitorBig_Gfx[] = INCGFX_U32("graphics/field_effects/pics/hof_monitor_big.png", ".4bpp");
 static const u8 sHofMonitorSmall_Gfx[] = INCGFX_U8("graphics/field_effects/pics/hof_monitor_small.png", ".4bpp");
 static const u16 sHofMonitor_Pal[16] = INCGFX_U16("graphics/field_effects/palettes/hof_monitor.pal", ".gbapal");
+static const u16 sHofMonitor_Gfx_Frlg[] = INCGFX_U16("graphics/field_effects/pics/hof_monitor_frlg.png", ".4bpp");
+static const u16 sHofMonitor_Pal_Frlg[] = INCGFX_U16("graphics/field_effects/pics/hof_monitor_frlg.png", ".gbapal");
 
 // Graphics for the lights streaking past your Pokémon when it uses a field move.
 static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCGFX_U32("graphics/field_effects/pics/field_move_streaks.png", ".4bpp");
@@ -393,6 +398,12 @@ const struct SpritePalette gSpritePalette_HofMonitor =
     .tag = FLDEFF_PAL_TAG_HOF_MONITOR
 };
 
+const struct SpritePalette gSpritePalette_HofMonitor_Frlg =
+{
+    .data = sHofMonitor_Pal_Frlg,
+    .tag = FLDEFF_PAL_TAG_HOF_MONITOR
+};
+
 static const struct OamData sOam_32x16 =
 {
     .y = 0,
@@ -418,6 +429,13 @@ static const struct SpriteFrameImage sPicTable_PokecenterMonitor[] =
     obj_frame_tiles(sPokecenterMonitor1_Gfx)
 };
 
+static const struct SpriteFrameImage sPicTable_PokecenterMonitor_Frlg[] = {
+    {sPokecenterMonitor_Gfx_Frlg + 0x000, 0x100},
+    {sPokecenterMonitor_Gfx_Frlg + 0x080, 0x100},
+    {sPokecenterMonitor_Gfx_Frlg + 0x100, 0x100},
+    {sPokecenterMonitor_Gfx_Frlg + 0x180, 0x100}
+};
+
 static const struct SpriteFrameImage sPicTable_HofMonitorBig[] =
 {
     obj_frame_tiles(sHofMonitorBig_Gfx)
@@ -426,6 +444,13 @@ static const struct SpriteFrameImage sPicTable_HofMonitorBig[] =
 static const struct SpriteFrameImage sPicTable_HofMonitorSmall[] =
 {
     {.data = sHofMonitorSmall_Gfx, .size = 0x200} // the macro breaks down here
+};
+
+static const struct SpriteFrameImage sPicTable_HofMonitor_Frlg[] = {
+    {sHofMonitor_Gfx_Frlg + 0x00, 0x80},
+    {sHofMonitor_Gfx_Frlg + 0x40, 0x80},
+    {sHofMonitor_Gfx_Frlg + 0x80, 0x80},
+    {sHofMonitor_Gfx_Frlg + 0xC0, 0x80}
 };
 
 /*
@@ -545,6 +570,23 @@ static const union AnimCmd *const sAnims_HofMonitor[] =
     sAnim_Static
 };
 
+static const union AnimCmd sAnim_HofMonitorFrlg[] = {
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_LOOP(2),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_HofMonitorFrlg[] = {
+    sAnim_HofMonitorFrlg
+};
+
 static const struct SpriteTemplate sSpriteTemplate_PokeballGlow =
 {
     .tileTag = TAG_NONE,
@@ -562,6 +604,15 @@ static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor =
     .oam = &sOam_16x16,
     .anims = sAnims_Flicker,
     .images = sPicTable_PokecenterMonitor,
+    .callback = SpriteCB_PokecenterMonitor
+};
+
+static const struct SpriteTemplate sSpriteTemplate_PokecenterMonitor_FrLg = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_POKEBALL_GLOW,
+    .oam = &sOam_32x16,
+    .anims = sAnims_Flicker,
+    .images = sPicTable_PokecenterMonitor_Frlg,
     .callback = SpriteCB_PokecenterMonitor
 };
 
@@ -583,6 +634,16 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorSmall =
     .anims = sAnims_HofMonitor,
     .images = sPicTable_HofMonitorSmall,
     .callback = SpriteCB_HallOfFameMonitor
+};
+
+static const struct SpriteTemplate sSpriteTemplate_HofMonitor = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_HOF_MONITOR,
+    .oam = &sOam_16x16,
+    .anims = sAnims_HofMonitorFrlg,
+    .images = sPicTable_HofMonitor_Frlg,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_HallOfFameMonitorFrlg
 };
 
 static void (*const sPokecenterHealEffectFuncs[])(struct Task *) =
@@ -811,19 +872,14 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     u32 paletteSlot = LoadSpritePalette(palette);
     (*script) += 4;
-    enum ColorMapType colorMap = T1_READ_8(*script);
+    SetPaletteColorMapType(paletteSlot + 16, T1_READ_8(*script));
     (*script)++;
-    if (paletteSlot == 0xFF)
-        return;
-    SetPaletteColorMapType(paletteSlot + 16, colorMap);
     UpdateSpritePaletteWithWeather(paletteSlot, ShouldFieldEffectBeFogBlended(*script));
 }
 
 void FieldEffect_LoadFadedPalette(struct SpritePalette *palette, enum ColorMapType colorMap)
 {
     u32 paletteSlot = LoadSpritePalette(palette);
-    if (paletteSlot == 0xFF)
-        return;
     SetPaletteColorMapType(paletteSlot + 16, colorMap);
     UpdateSpritePaletteWithWeather(paletteSlot, TRUE);
 }
@@ -957,9 +1013,13 @@ u8 CreateTrainerSprite(enum TrainerPicID trainerPicId, s16 x, s16 y, u8 subprior
     spriteTemplate.images = NULL;
     spriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     spriteTemplate.callback = SpriteCallbackDummy;
-    u32 spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, x, y, subpriority);
-    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
-    return spriteId;
+    return CreateSprite(&spriteTemplate, x, y, subpriority);
+}
+
+static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
+{
+    DecompressDataWithHeaderVram(GetTrainerFrontPicData(gender), dest);
+    LoadPalette(GetTrainerFrontPicPalette(gender), palOffset, PLTT_SIZE_4BPP);
 }
 
 u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
@@ -971,25 +1031,31 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 u8 CreateMonSprite_PicBox(enum Species species, s16 x, s16 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
-    return spriteId;
+    else
+        return spriteId;
 }
 
 u8 CreateMonSprite_FieldMove(enum Species species, bool8 isShiny, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     u16 spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, x, y, 0, species);
+    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-    PreservePaletteInWeather(gSprites[spriteId].oam.paletteNum + 0x10);
-    return spriteId;
+    else
+        return spriteId;
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 {
     u8 paletteNum = sprite->oam.paletteNum;
     ResetPreservedPalettesInWeather();
+    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
+    {
+        FreeOamMatrix(sprite->oam.matrixNum);
+    }
     FreeAndDestroyMonPicSpriteNoPalette(spriteId);
     FieldEffectFreePaletteIfUnused(paletteNum); // Clear palette only if unused, in case follower is using it
 }
@@ -1123,7 +1189,7 @@ bool8 FldEff_HallOfFameRecord(void)
     task = &gTasks[CreateTask(Task_HallOfFameRecord, 0xff)];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 117;
-    task->tFirstBallY = 52;
+    task->tFirstBallY = IS_FRLG ? 60 : 52;
     return FALSE;
 }
 
@@ -1139,18 +1205,23 @@ static void HallOfFameRecordEffect_Init(struct Task *task)
     u8 taskId;
     task->tState++;
     task->tBallSpriteId = CreateGlowingPokeballsEffect(task->tNumMons, task->tFirstBallX, task->tFirstBallY, FALSE);
-    taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
-    CreateHofMonitorSprite(taskId, 120, 24, FALSE);
-    CreateHofMonitorSprite(taskId, 40, 8, TRUE);
-    CreateHofMonitorSprite(taskId, 72, 8, TRUE);
-    CreateHofMonitorSprite(taskId, 168, 8, TRUE);
-    CreateHofMonitorSprite(taskId, 200, 8, TRUE);
+    if (!IS_FRLG)
+    {
+        taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
+        CreateHofMonitorSprite(taskId, 120, 24, FALSE);
+        CreateHofMonitorSprite(taskId, 40, 8, TRUE);
+        CreateHofMonitorSprite(taskId, 72, 8, TRUE);
+        CreateHofMonitorSprite(taskId, 168, 8, TRUE);
+        CreateHofMonitorSprite(taskId, 200, 8, TRUE);
+    }
 }
 
 static void HallOfFameRecordEffect_WaitForBallPlacement(struct Task *task)
 {
     if (gSprites[task->tBallSpriteId].sState > 1)
     {
+        if (IS_FRLG)
+            CreateHofMonitorSpriteFrlg(120, 25);
         task->tStartHofFlash++;
         task->tState++;
     }
@@ -1169,23 +1240,13 @@ static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *task)
     if (gSprites[task->tBallSpriteId].sState > 6)
     {
         DestroySprite(&gSprites[task->tBallSpriteId]);
-        FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
+        if (IS_FRLG)
+            FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD_FRLG);
+        else
+            FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
         DestroyTask(FindTaskIdByFunc(Task_HallOfFameRecord));
     }
 }
-
-#if EC_HEADLESS_FIXTURES
-bool32 IsHallOfFameRecordHeadlessVisible(u32 partyCount)
-{
-    u8 taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
-
-    return taskId != TASK_NONE
-        && gTasks[taskId].tNumMons == partyCount
-        && gTasks[taskId].tState >= 1
-        && gTasks[taskId].tBallSpriteId < MAX_SPRITES
-        && gSprites[gTasks[taskId].tBallSpriteId].inUse;
-}
-#endif
 
 static u8 CreateGlowingPokeballsEffect(s16 numMons, s16 x, s16 y, bool16 playHealSe)
 {
@@ -1328,8 +1389,15 @@ static u8 CreatePokecenterMonitorSprite(s16 x, s16 y)
 {
     u8 spriteId;
     struct Sprite *sprite;
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokecenterMonitor, x, y, 0);
-    SetSubspriteTables(&gSprites[spriteId], &sSubspriteTable_PokecenterMonitor);
+    if (IS_FRLG)
+    {
+        spriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokecenterMonitor_FrLg, x + 4, y, 0);
+    }
+    else
+    {
+        spriteId = CreateSpriteAtEnd(&sSpriteTemplate_PokecenterMonitor, x, y, 0);
+        SetSubspriteTables(&gSprites[spriteId], &sSubspriteTable_PokecenterMonitor);
+    }
     sprite = &gSprites[spriteId];
     sprite->oam.priority = 2;
     sprite->invisible = TRUE;
@@ -1366,6 +1434,11 @@ static void CreateHofMonitorSprite(s16 taskId, s16 x, s16 y, bool8 isSmallMonito
     gSprites[spriteId].data[0] = taskId;
 }
 
+static void CreateHofMonitorSpriteFrlg(s32 x, s32 y)
+{
+    CreateSpriteAtEnd(&sSpriteTemplate_HofMonitor, x, y, 0);
+}
+
 static void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
 {
     if (gTasks[sprite->data[0]].tStartHofFlash)
@@ -1381,6 +1454,12 @@ static void SpriteCB_HallOfFameMonitor(struct Sprite *sprite)
     {
         FieldEffectFreeGraphicsResources(sprite);
     }
+}
+
+static void SpriteCB_HallOfFameMonitorFrlg(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        FieldEffectFreeGraphicsResources(sprite);
 }
 
 #undef tState
@@ -1670,6 +1749,11 @@ static bool8 FallWarpEffect_End(struct Task *task)
     UnfreezeObjectEvents();
     InstallCameraPanAheadCallback();
     PlayerGetDestCoords(&x, &y);
+    if (MetatileBehavior_IsSurfableInSeafoamIslands(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+    {
+        VarSet(VAR_TEMP_1, 1);
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
+    }
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
     FollowerNPC_WarpSetEnd();
 
@@ -2838,32 +2922,17 @@ static void TeleportWarpInFieldEffect_SpinGround(struct Task *task)
 // For both the background streaks move to the right, and the mon sprite enters from the right and exits left
 bool8 FldEff_FieldMoveShowMon(void)
 {
-    u8 spriteId = InitFieldMoveMonSprite(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
-    if (spriteId == MAX_SPRITES)
-    {
-        FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
-        return FALSE;
-    }
     u8 taskId;
     if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
         taskId = CreateTask(Task_FieldMoveShowMonOutdoors, 0xff);
     else
         taskId = CreateTask(Task_FieldMoveShowMonIndoors, 0xff);
-    gTasks[taskId].tMonSpriteId = spriteId;
+
+    gTasks[taskId].tMonSpriteId = InitFieldMoveMonSprite(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     return FALSE;
 }
 
 #define SHOW_MON_CRY_NO_DUCKING (1 << 31)
-
-// Emerald Champions: the Flight Beacon summons a flier that need not be in
-// the party, so the next field-move showcase can be told which species to
-// show. Consumed on use; cleared if the fly map is cancelled.
-EWRAM_DATA enum Species gFieldMoveShowMonSpeciesOverride = SPECIES_NONE;
-
-void FieldMoveShowMon_ClearSpeciesOverride(void)
-{
-    gFieldMoveShowMonSpeciesOverride = SPECIES_NONE;
-}
 
 bool8 FldEff_FieldMoveShowMonInit(void)
 {
@@ -2873,13 +2942,6 @@ bool8 FldEff_FieldMoveShowMonInit(void)
     gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
     gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_IS_SHINY);
     gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
-    if (gFieldMoveShowMonSpeciesOverride != SPECIES_NONE)
-    {
-        gFieldEffectArguments[0] = gFieldMoveShowMonSpeciesOverride;
-        gFieldEffectArguments[1] = FALSE;
-        gFieldEffectArguments[2] = 0;
-        gFieldMoveShowMonSpeciesOverride = SPECIES_NONE;
-    }
     gFieldEffectArguments[0] |= noDucking;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -3226,8 +3288,6 @@ static u8 InitFieldMoveMonSprite(enum Species species, bool8 isShiny, u32 person
     noDucking = (species & SHOW_MON_CRY_NO_DUCKING) >> 16;
     species &= ~SHOW_MON_CRY_NO_DUCKING;
     monSprite = CreateMonSprite_FieldMove(species, isShiny, personality, 320, 80, 0);
-    if (monSprite == MAX_SPRITES)
-        return MAX_SPRITES;
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;
@@ -3280,7 +3340,7 @@ u8 FldEff_UseSurf(void)
     u8 taskId = CreateTask(Task_SurfFieldEffect, 0xff);
     gTasks[taskId].tMonId = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
-    Overworld_ChangeMusicTo(MUS_SURF);
+    Overworld_ChangeMusicTo(IS_FRLG ? MUS_RG_SURF : MUS_SURF);
     return FALSE;
 }
 
@@ -4099,7 +4159,7 @@ static void CreateDeoxysRockFragments(struct Sprite *sprite)
 
     for (i = 0; i < 4; i++)
     {
-        u8 spriteId = CreateSprite(&sSpriteTemplate_DeoxysRockFragment, xPos, yPos, 0);
+        u8 spriteId = CreateSpriteUnchecked(&sSpriteTemplate_DeoxysRockFragment, xPos, yPos, 0);
         if (spriteId != MAX_SPRITES)
         {
             StartSpriteAnim(&gSprites[spriteId], i);
@@ -4212,7 +4272,7 @@ u8 FldEff_CaveDust(void)
     u8 spriteId;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_CAVE_DUST], gFieldEffectArguments[0], gFieldEffectArguments[1], 0xFF);
+    spriteId = CreateSpriteAtEndUnchecked(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_CAVE_DUST], gFieldEffectArguments[0], gFieldEffectArguments[1], 0xFF);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].coordOffsetEnabled = TRUE;
@@ -4247,7 +4307,7 @@ static u8 CreateRockClimbBlob(void)
     struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ROCK_CLIMB_BLOB], gFieldEffectArguments[0], gFieldEffectArguments[1], 0x96);
+    spriteId = CreateSpriteAtEndUnchecked(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ROCK_CLIMB_BLOB], gFieldEffectArguments[0], gFieldEffectArguments[1], 0x96);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];

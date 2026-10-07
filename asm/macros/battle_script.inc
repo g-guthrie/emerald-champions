@@ -180,6 +180,11 @@
 	jumpbasedontype \battler, \type, FALSE, \jumpInstr
 	.endm
 
+	.macro getexp battler:req
+	.byte B_SCR_OP_GETEXP
+	.byte \battler
+	.endm
+
 	.macro checkteamslost jumpInstr:req
 	.byte B_SCR_OP_CHECKTEAMSLOST
 	.4byte \jumpInstr
@@ -484,6 +489,23 @@
 	.byte \changingForm
 	.endm
 
+	.macro handlelearnnewmove learnedMoveInstr:req, nothingToLearnInstr:req, isFirstMove:req
+	.byte B_SCR_OP_HANDLELEARNNEWMOVE
+	.4byte \learnedMoveInstr
+	.4byte \nothingToLearnInstr
+	.byte \isFirstMove
+	.endm
+
+	.macro yesnoboxlearnmove forgotMoveInstr:req
+	.byte B_SCR_OP_YESNOBOXLEARNMOVE
+	.4byte \forgotMoveInstr
+	.endm
+
+	.macro yesnoboxstoplearningmove noInstr:req
+	.byte B_SCR_OP_YESNOBOXSTOPLEARNINGMOVE
+	.4byte \noInstr
+	.endm
+
 	.macro hitanimation battler:req
 	.byte B_SCR_OP_HITANIMATION
 	.byte \battler
@@ -565,6 +587,14 @@
 	.byte B_SCR_OP_ATKNAMEINBUFF1
 	.endm
 
+	.macro drawlvlupbox
+	.byte B_SCR_OP_DRAWLVLUPBOX
+	.endm
+
+	.macro resetsentmonsvalue
+	.byte B_SCR_OP_RESETSENTMONSVALUE
+	.endm
+
 	.macro setatktoplayer0
 	.byte B_SCR_OP_SETATKTOPLAYER0
 	.endm
@@ -577,6 +607,10 @@
 	.macro recordability battler:req
 	.byte B_SCR_OP_RECORDABILITY
 	.byte \battler
+	.endm
+
+	.macro buffermovetolearn
+	.byte B_SCR_OP_BUFFERMOVETOLEARN
 	.endm
 
 	.macro jumpifplayerran jumpInstr:req
@@ -1101,10 +1135,6 @@
 	.4byte \func
 	.endm
 
-	.macro tryvictorysong
-	callnative BS_TryPlayVictorySong
-	.endm
-
 	.macro savetarget
 	callnative BS_SaveTarget
 	.endm
@@ -1295,6 +1325,10 @@
 	callnative BS_TryTrainerSlideDynamaxMsg
 	.endm
 
+	.macro trytrainerslideteramsg
+	callnative BS_TryTrainerSlideTeraMsg
+	.endm
+
 	.macro tryhealpulse failInstr:req
 	callnative BS_TryHealPulse
 	.4byte \failInstr
@@ -1328,6 +1362,10 @@
 
 	.macro removeweather
 	callnative BS_RemoveWeather
+	.endm
+
+	.macro applyterastallization
+	callnative BS_ApplyTerastallization
 	.endm
 
 	.macro jumpifsleepclause jumpInstr:req
@@ -1578,13 +1616,6 @@
 	.byte \equal
 	.endm
 
-	@ After a catch, buffers the relics it put aside for the Hall of Fame;
-	@ jumps when there are none.
-	.macro jumpifnolegendaryrelicwaits jumpInstr:req
-	callnative BS_JumpIfNoLegendaryRelicWaits
-	.4byte \jumpInstr
-	.endm
-
 	.macro jumpifnoally battler:req, jumpInstr:req
 	callnative BS_JumpIfNoAlly
 	.byte \battler
@@ -1654,6 +1685,10 @@
 
 	.macro resetswitchinabilitybits
 	callnative BS_ResetSwitchInAbilityBits
+	.endm
+
+	.macro updatechoicemoveonlvlup
+	callnative BS_UpdateChoiceMoveOnLvlUp
 	.endm
 
 	.macro resetplayerfainted
@@ -1936,8 +1971,9 @@
 	callnative BS_TryToClearPrimalWeather
 	.endm
 
-	.macro tryendneutralizinggas
+	.macro tryendneutralizinggas battler=BS_TARGET
 	callnative BS_TryEndNeutralizingGas
+	.byte \battler
 	.endm
 
 	.macro consumeberry battler:req, fromBattler:req

@@ -414,6 +414,19 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
     }
 }
 
+static void UNUSED UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 pointless)
+{
+    sprite->animPaused = TRUE;
+    sprite->callback = SpriteCallbackDummy;
+
+    if (!pointless)
+        StartSpriteAffineAnim(sprite, 1);
+    else
+        StartSpriteAffineAnim(sprite, 1);
+
+    AnimateSprite(sprite);
+}
+
 #define sSpeedX data[0]
 
 void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
@@ -672,6 +685,12 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, enum BattlerId battler)
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
     }
 
+    // Terastallization's tint
+    if (GetActiveGimmick(battler) == GIMMICK_TERA)
+    {
+        BlendPalette(paletteOffset, 16, 8, GetTeraTypeRGB(GetBattlerTeraType(battler)));
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
+    }
 }
 
 void BattleGfxSfxDummy2(enum Species species)
@@ -683,6 +702,11 @@ void DecompressTrainerFrontPic(enum TrainerPicID trainerPicId, enum BattlerId ba
     enum BattlerPosition position = GetBattlerPosition(battler);
     DecompressDataWithHeaderWram(GetTrainerFrontPicData(trainerPicId), gMonSpritesGfxPtr->spritesGfx[position]);
     LoadSpritePaletteWithTag(GetTrainerFrontPicPalette(trainerPicId), GetTrainerPicTag(trainerPicId, TRUE));
+}
+
+void FreeTrainerFrontPicPalette(enum TrainerPicID trainerPicId)
+{
+    FreeSpritePaletteByTag(GetTrainerPicTag(trainerPicId, TRUE));
 }
 
 bool8 BattleLoadAllHealthBoxesGfx(u8 state)
@@ -950,6 +974,12 @@ void HandleSpeciesGfxDataChange(enum BattlerId battlerAtk, enum BattlerId battle
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
     }
 
+    // Terastallization's tint
+    if (changeType != SPECIES_GFX_CHANGE_ILLUSION_OFF && GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
+    {
+        BlendPalette(paletteOffset, 16, 8, GetTeraTypeRGB(GetBattlerTeraType(battlerAtk)));
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
+    }
 
     gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], 0);
@@ -1108,7 +1138,7 @@ void CreateEnemyShadowSprite(enum BattlerId battler)
         enum Species species = GetBattlerVisualSpecies(battler);
         u8 size = gSpeciesInfo[species].enemyShadowSize;
 
-        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow,
+        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = CreateSpriteUnchecked(&gSpriteTemplate_EnemyShadow,
                                                                                              GetBattlerSpriteCoord(battler, BATTLER_COORD_X),
                                                                                              GetBattlerSpriteCoord(battler, BATTLER_COORD_Y),
                                                                                              0xC8);
@@ -1122,7 +1152,7 @@ void CreateEnemyShadowSprite(enum BattlerId battler)
             sprite->invisible = TRUE;
         }
 
-        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary = CreateSprite(&gSpriteTemplate_EnemyShadow,
+        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary = CreateSpriteUnchecked(&gSpriteTemplate_EnemyShadow,
                                                                                                GetBattlerSpriteCoord(battler, BATTLER_COORD_X),
                                                                                                GetBattlerSpriteCoord(battler, BATTLER_COORD_Y),
                                                                                                0xC8);
@@ -1138,7 +1168,7 @@ void CreateEnemyShadowSprite(enum BattlerId battler)
     }
     else
     {
-        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow,
+        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = CreateSpriteUnchecked(&gSpriteTemplate_EnemyShadow,
                                                                                              GetBattlerSpriteCoord(battler, BATTLER_COORD_X),
                                                                                              GetBattlerSpriteCoord(battler, BATTLER_COORD_Y) + 29,
                                                                                              0xC8);

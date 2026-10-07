@@ -629,7 +629,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RIVALRY] =
     {
         .name = _("Rivalry"),
-        .description = COMPOUND_STRING("Strong vs. same gender."),
+        .description = COMPOUND_STRING("Strong vs. opposite gender."),
         .aiRating = 1,
     },
 
@@ -787,7 +787,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STALL] =
     {
         .name = _("Stall"),
-        .description = COMPOUND_STRING("Moves last at same priority."),
+        .description = COMPOUND_STRING("Always last to use moves."),
         .aiRating = -1,
     },
 
@@ -1081,7 +1081,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TOXIC_BOOST] =
     {
         .name = _("Toxic Boost"),
-        .description = COMPOUND_STRING("Poison boosts physical moves."),
+        .description = COMPOUND_STRING("Boosts Attack if poisoned."),
         .aiRating = 6,
     },
 
@@ -1768,7 +1768,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_POWER_OF_ALCHEMY] =
     {
-        .name = _("Power of Alchemy"),
+        .name = _("Power Of Alchemy"),
         .description = COMPOUND_STRING("Copies fainted ally Ability."),
         .aiRating = 0,
         .cantBeCopied = TRUE,
@@ -1933,7 +1933,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STEAM_ENGINE] =
     {
         .name = _("Steam Engine"),
-        .description = COMPOUND_STRING("Fire/Water: Speed +6; Water not weak."),
+        .description = COMPOUND_STRING("Fire & Water hits up Speed."),
         .aiRating = 3,
     },
 
@@ -1972,11 +1972,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Ice Face"),
         .description = COMPOUND_STRING(
         #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_HAIL
-            "Hail renews physical shield."),
+            "Hail renews one free hit."),
         #elif B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW
-            "Snow renews physical shield."),
+            "Snow renews one free hit."),
         #else
-            "Ice weather renews physical shield."),
+            "Hail & snow renew free hit."),
         #endif
         .aiRating = 4,
         .cantBeCopied = TRUE,
@@ -2077,7 +2077,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_UNSEEN_FIST] =
     {
         .name = _("Unseen Fist"),
-        .description = COMPOUND_STRING("Contact chips through shields."),
+        .description = COMPOUND_STRING("Contact evades protection."),
         .aiRating = 6,
     },
 
@@ -2401,28 +2401,48 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .breakable = TRUE,
     },
 
-    [ABILITY_301] =
+    [ABILITY_EMBODY_ASPECT_TEAL_MASK] =
     {
-        .name = _("-------"),
-        .description = COMPOUND_STRING("No special ability."),
+        .name = _("Embody Aspect"),
+        .description = COMPOUND_STRING("Terastal raises Speed."),
+        .aiRating = 6,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .failsOnImposter = TRUE,
     },
 
-    [ABILITY_302] =
+    [ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK] =
     {
-        .name = _("-------"),
-        .description = COMPOUND_STRING("No special ability."),
+        .name = _("Embody Aspect"),
+        .description = COMPOUND_STRING("Terastal raises Attack."),
+        .aiRating = 6,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .failsOnImposter = TRUE,
     },
 
-    [ABILITY_303] =
+    [ABILITY_EMBODY_ASPECT_WELLSPRING_MASK] =
     {
-        .name = _("-------"),
-        .description = COMPOUND_STRING("No special ability."),
+        .name = _("Embody Aspect"),
+        .description = COMPOUND_STRING("Terastal raises Sp. Def."),
+        .aiRating = 6,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .failsOnImposter = TRUE,
     },
 
-    [ABILITY_304] =
+    [ABILITY_EMBODY_ASPECT_CORNERSTONE_MASK] =
     {
-        .name = _("-------"),
-        .description = COMPOUND_STRING("No special ability."),
+        .name = _("Embody Aspect"),
+        .description = COMPOUND_STRING("Terastal raises Defense."),
+        .aiRating = 6,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .failsOnImposter = TRUE,
     },
 
     [ABILITY_TOXIC_CHAIN] =
@@ -2439,10 +2459,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 5,
     },
 
-    [ABILITY_TERRA] =
+    [ABILITY_TERA_SHIFT] =
     {
-        .name = _("Terra"),
-        .description = COMPOUND_STRING("Awakens on entry."),
+        .name = _("Tera Shift"),
+        .description = COMPOUND_STRING("Changes form on entry."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -2452,16 +2472,25 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .failsOnImposter = TRUE,
     },
 
-    [ABILITY_308] =
+    [ABILITY_TERA_SHELL] =
     {
-        .name = _("-------"),
-        .description = COMPOUND_STRING("No special ability."),
+        .name = _("Tera Shell"),
+        .description = COMPOUND_STRING("Resists all types at full HP."),
+        .aiRating = 10,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .breakable = TRUE,
     },
 
-    [ABILITY_309] =
+    [ABILITY_TERAFORM_ZERO] =
     {
-        .name = _("-------"),
-        .description = COMPOUND_STRING("No special ability."),
+        .name = _("Teraform Zero"),
+        .description = COMPOUND_STRING("Zeroes weather and terrain."),
+        .aiRating = 10,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
     },
 
     [ABILITY_POISON_PUPPETEER] =
@@ -2477,22 +2506,19 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PIERCING_DRILL] =
     {
         .name = _("Piercing Drill"),
-        .description = COMPOUND_STRING("Contact chips through shields."),
-        .aiRating = 6,
+        .description = COMPOUND_STRING("Contact evades protection."),
     },
 
     [ABILITY_DRAGONIZE] =
     {
         .name = _("Dragonize"),
         .description = COMPOUND_STRING("Normal moves turn Dragon."),
-        .aiRating = 8,
     },
 
     [ABILITY_EELEVATE] =
     {
         .name = _("Eelevate"),
         .description = COMPOUND_STRING("Levitate and Beast Boost."),
-        .aiRating = 8,
     },
 
     [ABILITY_314] =
@@ -2505,14 +2531,12 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Mega Sol"),
         .description = COMPOUND_STRING("Acts like under sun."),
-        .aiRating = 7,
     },
 
     [ABILITY_FIRE_MANE] =
     {
         .name = _("Fire Mane"),
         .description = COMPOUND_STRING("Ups Fire-type moves."),
-        .aiRating = 6,
     },
 
     [ABILITY_317] =
@@ -2525,68 +2549,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Spicy Spray"),
         .description = COMPOUND_STRING("Burns the foe when damaged."),
-        .aiRating = 6,
     },
 
-    [ABILITY_BLITZ_BOXER] =
+    [ABILITY_AURA_GUARD] =
     {
-        .name = _("Blitz Boxer"),
-        .description = COMPOUND_STRING("Punching moves gain priority."),
-        .aiRating = 9,
-    },
-    [ABILITY_POWER_FISTS] =
-    {
-        .name = _("Power Fists"),
-        .description = COMPOUND_STRING("Boosted punches hit Sp. Def."),
-        .aiRating = 8,
-    },
-    [ABILITY_SAND_SONG] =
-    {
-        .name = _("Sand Song"),
-        .description = COMPOUND_STRING("Sound moves become Ground."),
-        .aiRating = 6,
-    },
-    [ABILITY_PRISM_SCALES] =
-    {
-        .name = _("Prism Scales"),
-        .description = COMPOUND_STRING("Takes less special damage."),
-        .aiRating = 7,
-        .breakable = TRUE,
-    },
-    [ABILITY_CHLOROPLAST] =
-    {
-        .name = _("Chloroplast"),
-        .description = COMPOUND_STRING("Sun moves work in any weather."),
-        .aiRating = 5,
-    },
-    [ABILITY_WHITEOUT] =
-    {
-        .name = _("Whiteout"),
-        .description = COMPOUND_STRING("Ups Ice moves in snow or hail."),
-        .aiRating = 5,
-    },
-    [ABILITY_PYROMANCY] =
-    {
-        .name = _("Pyromancy"),
-        .description = COMPOUND_STRING("Fire moves burn more often."),
-        .aiRating = 5,
-    },
-    [ABILITY_KEEN_EDGE] =
-    {
-        .name = _("Keen Edge"),
-        .description = COMPOUND_STRING("Boosts slicing moves."),
-        .aiRating = 6,
-    },
-    [ABILITY_RAMPAGE] =
-    {
-        .name = _("Rampage"),
-        .description = COMPOUND_STRING("No recharge after a KO."),
-        .aiRating = 5,
-    },
-    [ABILITY_VENGEANCE] =
-    {
-        .name = _("Vengeance"),
-        .description = COMPOUND_STRING("Ups Ghost; more in a pinch."),
-        .aiRating = 5,
+        .name = _("Aura Guard"),
+        .description = COMPOUND_STRING("Unimplemented."),
     },
 };

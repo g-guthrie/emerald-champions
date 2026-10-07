@@ -4,15 +4,9 @@
 #include "fldeff.h"
 #include "fldeff_misc.h"
 #include "party_menu.h"
-#include "pokemon.h"
-#include "emerald_champions_battle_sets.h"
-#include "constants/battle.h"
 #include "strings.h"
-#include "string_util.h"
-#include "move.h"
 #include "constants/field_move.h"
 #include "constants/moves.h"
-#include "constants/pokemon.h"
 #include "constants/party_menu.h"
 
 static bool32 IsAlwaysFalse(enum FieldMove fieldMove)
@@ -25,70 +19,9 @@ static bool32 IsAlwaysTrue(enum FieldMove fieldMove)
     return TRUE;
 }
 
-static const u16 sEmeraldHiddenMoveLicenses[FIELD_MOVES_COUNT] =
-{
-    [FIELD_MOVE_CUT]        = FLAG_RECEIVED_HM_CUT,
-    [FIELD_MOVE_FLASH]      = FLAG_RECEIVED_HM_FLASH,
-    [FIELD_MOVE_ROCK_SMASH] = FLAG_RECEIVED_HM_ROCK_SMASH,
-    [FIELD_MOVE_STRENGTH]   = FLAG_RECEIVED_HM_STRENGTH,
-    [FIELD_MOVE_SURF]       = FLAG_RECEIVED_HM_SURF,
-    [FIELD_MOVE_FLY]        = FLAG_RECEIVED_HM_FLY,
-    [FIELD_MOVE_DIVE]       = FLAG_RECEIVED_HM_DIVE,
-    [FIELD_MOVE_WATERFALL]  = FLAG_RECEIVED_HM_WATERFALL,
-};
-
-// Where each field license comes from, told when a locked obstacle is tried.
-// Every HM above needs a row (test/inclement_integration.c checks).
-const u8 *const gFieldMoveLicenseGivers[FIELD_MOVES_COUNT] =
-{
-    [FIELD_MOVE_CUT]        = COMPOUND_STRING("The Cutter grants it. His house\nis west of Rustboro's Center."),
-    [FIELD_MOVE_FLASH]      = COMPOUND_STRING("Ask the Hiker in Granite Cave,\nnorth of Dewford, to earn it."),
-    [FIELD_MOVE_ROCK_SMASH] = COMPOUND_STRING("Visit the Rock Smash Dude in\nMauville to earn it."),
-    [FIELD_MOVE_STRENGTH]   = COMPOUND_STRING("Smash the rocks in Rusturf\nTunnel to earn it."),
-    [FIELD_MOVE_SURF]       = COMPOUND_STRING("Beat Norman, then visit Wally's\nhouse in Petalburg to earn it."),
-    [FIELD_MOVE_FLY]        = COMPOUND_STRING("Beat your rival on Route 119\nto earn it."),
-    [FIELD_MOVE_DIVE]       = COMPOUND_STRING("Steven grants it at his house\nin Mossdeep."),
-    [FIELD_MOVE_WATERFALL]  = COMPOUND_STRING("Wallace grants it in Sootopolis\nonce the skies calm."),
-};
-
-bool32 FieldMove_IsHM(enum FieldMove fieldMove)
-{
-    return (u32)fieldMove < ARRAY_COUNT(sEmeraldHiddenMoveLicenses)
-        && sEmeraldHiddenMoveLicenses[fieldMove] != 0;
-}
-
 static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 {
-    u16 licenseFlag = sEmeraldHiddenMoveLicenses[fieldMove];
-
-    if (!FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET))
-        return FALSE;
-    if (licenseFlag == 0)
-        return TRUE;
-    return FlagGet(licenseFlag);
-}
-
-// Called after an HM action fails its badge, license, or party check.
-// Report the reason without granting or changing access.
-void BufferFieldMoveUnlockRequirement(void)
-{
-    static const u8 badgeNames[][14] = {
-        _("Stone Badge"), _("Knuckle Badge"), _("Dynamo Badge"), _("Heat Badge"),
-        _("Balance Badge"), _("Feather Badge"), _("Mind Badge"), _("Rain Badge"),
-    };
-    enum FieldMove fieldMove = gSpecialVar_0x8004;
-    u32 badge = gFieldMoveInfo[fieldMove].arg;
-
-    StringCopy(gStringVar1, GetMoveName(FieldMove_GetMoveId(fieldMove)));
-    StringCopy(gStringVar2, badgeNames[badge]);
-    StringCopy(gStringVar3, gFieldMoveLicenseGivers[fieldMove] != NULL
-                            ? gFieldMoveLicenseGivers[fieldMove] : gText_EmptyString2);
-    if (!FlagGet(FLAG_BADGE01_GET + badge))
-        gSpecialVar_Result = 0;
-    else if (!IsFieldMoveUnlocked(fieldMove))
-        gSpecialVar_Result = 1;
-    else
-        gSpecialVar_Result = 2; // Unlocked, but no compatible party member.
+    return FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET);
 }
 
 const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
@@ -112,78 +45,6 @@ const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =
 
 #define FLAG_TO_BADGE(flag) flag - FLAG_BADGE01_GET
 
-// Field licenses replace HM moveslots, but a capable party member is still
-// needed. Optional non-HM moves also use this species capability check.
-bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move)
-{
-    const struct LevelUpMove *learnset;
-
-    if (CanLearnTeachableMove(species, move))
-        return TRUE;
-    learnset = GetSpeciesLevelUpLearnset(species);
-    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-    {
-        if (learnset[i].move == move)
-            return TRUE;
-    }
-    // Include legal preparation and signature lessons, such as Pika Papow.
-    // Field licenses still own access; the battle move need not be taught.
-    return CanSpeciesUseEmeraldChampionsPreparationMove(species, move);
-}
-
-u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)
-{
-    // An HM needs its license, badge, and a compatible non-Egg party member.
-    // Prefer a member that knows the move for the field animation, but knowing
-    // it is not required.
-    if (FieldMove_IsHM(fieldMove))
-    {
-        enum Move move = FieldMove_GetMoveId(fieldMove);
-        u32 capable = PARTY_SIZE;
-
-        if (!IsFieldMoveUnlocked(fieldMove))
-            return PARTY_SIZE;
-        for (u32 i = 0; i < PARTY_SIZE; i++)
-        {
-            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-            enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-
-            if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
-                continue;
-            if (MonKnowsMove(mon, move)) // Day Care Egg moves, such as Surfing Pichu
-                return i;
-            if (capable == PARTY_SIZE && SpeciesCanLearnFieldMove(species, move))
-                capable = i;
-        }
-        return capable;
-    }
-
-    enum Move move = FieldMove_GetMoveId(fieldMove);
-    u32 fallback = PARTY_SIZE;
-
-    if (doUnlockedCheck && !IsFieldMoveUnlocked(fieldMove))
-        return PARTY_SIZE;
-
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-
-        if (species == SPECIES_NONE)
-            break;
-        if (GetMonData(mon, MON_DATA_IS_EGG))
-            continue;
-        if (MonKnowsMove(mon, move))
-            return i;
-        if (FieldMove_IsCapabilityBased(fieldMove)
-         && fallback == PARTY_SIZE && SpeciesCanLearnFieldMove(species, move))
-            fallback = i;
-    }
-    if (fallback != PARTY_SIZE && IsFieldMoveUnlocked(fieldMove))
-        return fallback;
-    return PARTY_SIZE;
-}
-
 const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
 {
     [FIELD_MOVE_CUT] =
@@ -192,9 +53,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_CUT,
         .partyMsgID = PARTY_MSG_NOTHING_TO_CUT,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE01_GET),
-        .hideIfLocked = TRUE,
-        .capabilityInPartyMenu = TRUE, // Optional grass clearing keeps Inclement's party-menu action.
+        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE02_GET) : FLAG_TO_BADGE(FLAG_BADGE01_GET),
     },
 
     [FIELD_MOVE_FLASH] =
@@ -203,9 +62,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_FLASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE02_GET),
-        .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
+        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE01_GET) : FLAG_TO_BADGE(FLAG_BADGE02_GET),
     },
 
     [FIELD_MOVE_ROCK_SMASH] =
@@ -214,9 +71,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_ROCK_SMASH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE03_GET),
-        .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
+        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE06_GET) : FLAG_TO_BADGE(FLAG_BADGE03_GET),
     },
 
     [FIELD_MOVE_STRENGTH] =
@@ -226,8 +81,6 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .moveID = MOVE_STRENGTH,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = FLAG_TO_BADGE(FLAG_BADGE04_GET),
-        .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_SURF] =
@@ -237,8 +90,6 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .moveID = MOVE_SURF,
         .partyMsgID = PARTY_MSG_CANT_SURF_HERE,
         .arg = FLAG_TO_BADGE(FLAG_BADGE05_GET),
-        .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_FLY] =
@@ -247,10 +98,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_FLY,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE06_GET),
-        .hideIfLocked = TRUE,
-        // The Flight Beacon owns Fly: it is called from the Bag, never from a moveslot.
-        .hideInPartyMenu = TRUE,
+        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE03_GET) : FLAG_TO_BADGE(FLAG_BADGE06_GET),
     },
 
     [FIELD_MOVE_DIVE] =
@@ -260,8 +108,6 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .moveID = MOVE_DIVE,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
         .arg = FLAG_TO_BADGE(FLAG_BADGE07_GET),
-        .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_WATERFALL] =
@@ -270,9 +116,7 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = BADGE_UNLOCK,
         .moveID = MOVE_WATERFALL,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .arg = FLAG_TO_BADGE(FLAG_BADGE08_GET),
-        .hideIfLocked = TRUE,
-        .hideInPartyMenu = TRUE,
+        .arg = IS_FRLG ? FLAG_TO_BADGE(FLAG_BADGE07_GET) : FLAG_TO_BADGE(FLAG_BADGE08_GET),
     },
 
     [FIELD_MOVE_TELEPORT] =
@@ -281,7 +125,6 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_TELEPORT,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .capabilityInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_DIG] =
@@ -290,8 +133,6 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_DIG,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        // The Sealed Chamber wall asks for Dig itself; the Escape Rope covers the rest.
-        .hideInPartyMenu = TRUE,
     },
 
     [FIELD_MOVE_SECRET_POWER] =
@@ -324,7 +165,6 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
         .unlockType = ALWAYS_UNLOCKED,
         .moveID = MOVE_SWEET_SCENT,
         .partyMsgID = PARTY_MSG_CANT_USE_HERE,
-        .capabilityInPartyMenu = TRUE,
     },
     [FIELD_MOVE_ROCK_CLIMB] =
     {

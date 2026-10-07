@@ -3,6 +3,7 @@
   "name": "MirageTower_4F",
   "layout": "LAYOUT_MIRAGE_TOWER_4F",
   "music": "MUS_MT_CHIMNEY",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MIRAGE_TOWER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_MIRAGE_ROOT_FOSSIL",
@@ -43,17 +44,17 @@
       "flag": "FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 6,
       "y": 7,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Mirage_Tower_4F_EventScript_ItemGhostGem",
-      "flag": "FLAG_ITEM_MIRAGE_TOWER_4_F_GHOST_GEM"
+      "script": "EventScript_RockSmash",
+      "flag": "FLAG_TEMP_11"
     }
   ],
   "warp_events": [
@@ -62,7 +63,7 @@
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_MIRAGE_TOWER_3F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

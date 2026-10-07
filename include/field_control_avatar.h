@@ -12,7 +12,7 @@ struct FieldInput
     bool8 tookStep:1;
     bool8 pressedBButton:1;
     bool8 pressedRButton:1;
-    bool8 pressedLButton:1; // Only set when OPTIONS_BUTTON_MODE_L_EQUALS_A is not active; L is otherwise reserved to act as A.
+    bool8 input_field_1_1:1;
     bool8 input_field_1_2:1;
     bool8 input_field_1_3:1;
     bool8 input_field_1_4:1;
@@ -27,8 +27,6 @@ void FieldClearPlayerInput(struct FieldInput *pStruct);
 void FieldGetPlayerInput(struct FieldInput *pStruct, u16 keys, u16 heldKeys);
 int ProcessPlayerFieldInput(struct FieldInput *pStruct);
 void RestartWildEncounterImmunitySteps(void);
-void ResetHotSpringPokerusSteps(void);
-bool32 UpdateHotSpringPokerusSteps(u16 metatileBehavior);
 const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 bool8 TryDoDiveWarp(struct MapPosition *position, u16 metatileBehavior);
 int SetCableClubWarp(void);

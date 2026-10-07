@@ -2,6 +2,5 @@
 #define GUARD_ITEM_BALL_H
 
 void GetItemBallIdAndAmountFromTemplate(void);
-void CheckItemBallHasPermanentReceipt(void);
 
 #endif //GUARD_ITEM_BALL_H

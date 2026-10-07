@@ -28,8 +28,6 @@ u32 GetBattlerTurnOrderNum(enum BattlerId battler);
 u32 GetBattlerRawSpeedOrder(enum BattlerId battler);
 bool32 NoAliveMonsForBattlerSide(enum BattlerId battler);
 bool32 NoAliveMonsForPlayer(void);
-bool32 NoAliveMonsForOpponent(void);
-bool32 WillPlayerWhiteOutIfPartnerWinsAlone(void);
 bool32 NoAliveMonsForEitherParty(void);
 bool32 TrySetReflect(enum BattlerId battler);
 bool32 TrySetLightScreen(enum BattlerId battler);
@@ -54,12 +52,8 @@ bool32 IsShieldsDownProtected(enum BattlerId battler, enum Ability ability);
 u32 IsAbilityStatusProtected(enum BattlerId battler, enum Ability ability);
 bool32 TryResetBattlerStatChanges(enum BattlerId battler);
 bool32 CanCamouflage(enum BattlerId battler);
-bool32 StealTargetItem(enum BattlerId battlerStealer, enum BattlerId battlerItem, enum Item itemOverride, bool32 isTheft);
+void StealTargetItem(enum BattlerId battlerStealer, enum BattlerId battlerItem, enum Item itemOverride);
 u8 GetCatchingBattler(void);
-bool32 IsCaughtMonStorageFull(void);
-#if EC_HEADLESS_FIXTURES
-void BattleDebug_CaptureBattle(void);
-#endif
 bool32 ProteanTryChangeType(enum BattlerId battler, enum Ability ability, enum Move move, enum Type moveType);
 u8 GetFirstFaintedPartyIndex(enum BattlerId battler);
 void SaveBattlerTarget(enum BattlerId battler);

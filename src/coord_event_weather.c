@@ -2,7 +2,6 @@
 #include "constants/weather.h"
 #include "coord_event_weather.h"
 #include "field_weather.h"
-#include "weather_anomaly.h"
 
 struct CoordEventWeather
 {
@@ -109,8 +108,6 @@ static void CoordEventWeather_Route123Cycle(void)
 void DoCoordEventWeather(u8 coordEventWeather)
 {
     u8 i;
-    // SetSavedWeather decides whether a live anomaly overrides this weather
-    // (terrain weather such as desert sandstorm and volcanic ash always wins).
     for (i = 0; i < ARRAY_COUNT(sCoordEventWeatherFuncs); i++)
     {
         if (sCoordEventWeatherFuncs[i].coordEventWeather == coordEventWeather)

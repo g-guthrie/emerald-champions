@@ -192,13 +192,6 @@ static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1] =
     [MAPSEC_ALTERING_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_MARBLE,
-    [MAPSEC_SEASPRAY_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
-    [MAPSEC_EMBER_PATH - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
-    [MAPSEC_ASHEN_WOODS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_SANDSTREWN_RUINS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
-    [MAPSEC_DEWFORD_MEADOW - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_DEWFORD_MANOR - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
-    [MAPSEC_VERDANTURF_MEADOW - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
 };
 
 #if OW_POPUP_GENERATION == GEN_5
@@ -320,23 +313,16 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
     [MAPSEC_ALTERING_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
     [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
     [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_SEASPRAY_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_EMBER_PATH - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_ASHEN_WOODS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_SANDSTREWN_RUINS - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_DEWFORD_MEADOW - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_DEWFORD_MANOR - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
-    [MAPSEC_VERDANTURF_MEADOW - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
 };
 
-static const u8 sText_PyramidFloor1[] = _("Pyramid Floor 1");
-static const u8 sText_PyramidFloor2[] = _("Pyramid Floor 2");
-static const u8 sText_PyramidFloor3[] = _("Pyramid Floor 3");
-static const u8 sText_PyramidFloor4[] = _("Pyramid Floor 4");
-static const u8 sText_PyramidFloor5[] = _("Pyramid Floor 5");
-static const u8 sText_PyramidFloor6[] = _("Pyramid Floor 6");
-static const u8 sText_PyramidFloor7[] = _("Pyramid Floor 7");
-static const u8 sText_Pyramid[] = _("Pyramid");
+static const u8 sText_PyramidFloor1[] = _("PYRAMID FLOOR 1");
+static const u8 sText_PyramidFloor2[] = _("PYRAMID FLOOR 2");
+static const u8 sText_PyramidFloor3[] = _("PYRAMID FLOOR 3");
+static const u8 sText_PyramidFloor4[] = _("PYRAMID FLOOR 4");
+static const u8 sText_PyramidFloor5[] = _("PYRAMID FLOOR 5");
+static const u8 sText_PyramidFloor6[] = _("PYRAMID FLOOR 6");
+static const u8 sText_PyramidFloor7[] = _("PYRAMID FLOOR 7");
+static const u8 sText_Pyramid[] = _("PYRAMID");
 
 static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
@@ -349,6 +335,13 @@ static const u8 *const sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALL
     sText_PyramidFloor7,
     sText_Pyramid,
 };
+
+static bool8 UNUSED StartMenu_ShowMapNamePopup(void)
+{
+    HideStartMenu();
+    ShowMapNamePopup();
+    return TRUE;
+}
 
 // States and data defines for Task_MapNamePopUpWindow
 enum {
@@ -550,9 +543,29 @@ static void MapNamePopupAppendFloorNum(u8 *map_name, s8 floorNum)
     *dest = EOS;
 }
 
+static bool32 IsCeladonDeptStore(const struct MapHeader *mapHeader)
+{
+    if (mapHeader->regionMapSectionId != MAPSEC_CELADON_CITY)
+        return FALSE;
+    if (mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_1F
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_2F
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_3F
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_4F
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_5F
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_ROOF
+     && mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
 u8 *GetPopUpMapName(u8 *dest, const struct MapHeader *mapHeader)
 {
-    GetMapName(dest, mapHeader->regionMapSectionId, 0);
+    if (IsCeladonDeptStore(mapHeader))
+        StringCopy(dest, COMPOUND_STRING("CELADON DEPT."));
+    else
+        GetMapName(dest, mapHeader->regionMapSectionId, 0);
     if (mapHeader->floorNumber == 0)
         return dest;
     MapNamePopupAppendFloorNum(dest, mapHeader->floorNumber);

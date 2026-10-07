@@ -940,8 +940,7 @@ static u8 AddScrollIndicatorArrowObject(u8 arrowDir, u8 x, u8 y, u16 tileTag, u1
     spriteTemplate.tileTag = tileTag;
     spriteTemplate.paletteTag = palTag;
 
-    spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, x, y, 0);
-    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+    spriteId = CreateSprite(&spriteTemplate, x, y, 0);
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].tState = 0;
     gSprites[spriteId].tAnimNum = sScrollIndicatorTemplates[arrowDir].animNum;
@@ -1032,15 +1031,6 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
     gTempScrollArrowTemplate.palNum = 0;
 
     return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, scrollOffset);
-}
-
-// How far a pair's arrows bob, in pixels either way (the templates use 2).
-void SetScrollIndicatorArrowPairBounce(u8 taskId, s16 pixels)
-{
-    struct ScrollIndicatorPair *data = (void *)gTasks[taskId].data;
-
-    gSprites[data->topSpriteId].data[3] = pixels;    // tMultiplier
-    gSprites[data->bottomSpriteId].data[3] = pixels;
 }
 
 static void Task_ScrollIndicatorArrowPair(u8 taskId)
@@ -1251,8 +1241,7 @@ static u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
     spriteTemplate.tileTag = cursor->tileTag;
     spriteTemplate.paletteTag = cursor->palTag;
 
-    data->spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, cursor->left + 120, cursor->top + 120, 0);
-    fatal_assertf(data->spriteId < MAX_SPRITES, "Out of sprite slots");
+    data->spriteId = CreateSprite(&spriteTemplate, cursor->left + 120, cursor->top + 120, 0);
     SetSubspriteTables(&gSprites[data->spriteId], &data->subspriteTable);
     gSprites[data->spriteId].oam.priority = 0;
     gSprites[data->spriteId].subpriority = 0;
@@ -1334,8 +1323,7 @@ static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
     spriteTemplate.tileTag = cursor->tileTag;
     spriteTemplate.paletteTag = cursor->palTag;
 
-    data->spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, cursor->left, cursor->top, 0);
-    fatal_assertf(data->spriteId < MAX_SPRITES, "Out of sprite slots");
+    data->spriteId = CreateSprite(&spriteTemplate, cursor->left, cursor->top, 0);
     gSprites[data->spriteId].x2 = 8;
     gSprites[data->spriteId].y2 = 8;
 

@@ -33,6 +33,9 @@ static void AnimPetalDanceSmallFlower_Step(struct Sprite *);
 static void AnimRazorLeafParticle(struct Sprite *);
 static void AnimRazorLeafParticle_Step1(struct Sprite *);
 static void AnimRazorLeafParticle_Step2(struct Sprite *);
+static void AnimTeraStarstormBeam(struct Sprite *sprite);
+static void AnimTeraStarstormBeam_Step(struct Sprite *);
+static void AnimTeraStarstormStars_Step(struct Sprite *);
 static void AnimLeechSeed(struct Sprite *);
 static void AnimLeechSeed_Step(struct Sprite *);
 static void AnimLeechSeedSprouts(struct Sprite *);
@@ -143,6 +146,7 @@ static void AnimMoveWorrySeed(struct Sprite *);
 static void AnimMoveSmallCloud(struct Sprite *);
 static void AnimGrassKnotStep(struct Sprite *);
 static void AnimGrassKnot(struct Sprite *);
+static void AnimWoodHammerSmall(struct Sprite *);
 static void AnimWoodHammerBig(struct Sprite *);
 static void AnimWoodHammerHammer(struct Sprite *);
 static void AnimWoodHammerHammer_WaitForPunch(struct Sprite *);
@@ -2747,7 +2751,7 @@ const struct SpriteTemplate gWoodHammerSmallSpriteTemplate =
     .paletteTag = ANIM_TAG_WOOD_HAMMER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gWoodHammerSmallAnims,
-    .callback = AnimRockFragment,
+    .callback = AnimWoodHammerSmall,
 };
 
 const struct SpriteTemplate gWoodHammerHammerSpriteTemplate =
@@ -2937,6 +2941,32 @@ static void AnimWoodHammerBig(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, 1);
 
     TranslateAnimSpriteToTargetMonLocation(sprite);
+}
+
+static void AnimWoodHammerSmall(struct Sprite *sprite)
+{
+    StartSpriteAnim(sprite, gBattleAnimArgs[5]);
+    AnimateSprite(sprite);
+
+    if (!IsOnPlayerSide(gBattleAnimAttacker))
+        sprite->x -= gBattleAnimArgs[0];
+    else
+        sprite->x += gBattleAnimArgs[0];
+
+    sprite->y += gBattleAnimArgs[1];
+
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = sprite->y + gBattleAnimArgs[3];
+
+    InitSpriteDataForLinearTranslation(sprite);
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+
+    sprite->callback = TranslateSpriteLinearFixedPoint;
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 #define HAMMER_X_OFFSET 40
@@ -3723,6 +3753,147 @@ static void AnimRazorLeafParticle_Step2(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
+static const union AnimCmd sAnim_TeraStarstormBeamRing_0[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_TeraStarstormBeamRing_1[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnims_TeraStarstormBeamRing[] =
+{
+    sAnim_TeraStarstormBeamRing_0,
+    sAnim_TeraStarstormBeamRing_1,
+};
+
+static const union AffineAnimCmd sAffineAnim_TeraStarstormBeamRing[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_FRAME(0x60, 0x60, 0, 1),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const sAffineAnims_TeraStarstormBeamRing[] =
+{
+    sAffineAnim_TeraStarstormBeamRing,
+};
+
+const struct SpriteTemplate gTeraStarstormBeamSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_STARSTORM,
+    .paletteTag = ANIM_TAG_STARSTORM,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
+    .callback = AnimTeraStarstormBeam,
+};
+
+//  arg0: start offset x
+//  arg1: start offset y
+//  arg2: end offset x
+//  arg3: end offset y
+//  arg4: duration
+static void AnimTeraStarstormBeam(struct Sprite *sprite)
+{
+    gBattleAnimArgs[0] += 4;
+    gBattleAnimArgs[1] -= 30;
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[3] = 0;
+    sprite->data[4] = -70;
+    InitAnimLinearTranslation(sprite);
+    sprite->callback = AnimTeraStarstormBeam_Step;
+    sprite->affineAnimPaused = TRUE;
+    sprite->callback(sprite);
+
+}
+
+static void AnimTeraStarstormBeam_Step(struct Sprite *sprite)
+{
+    if (AnimTranslateLinear(sprite))
+        DestroyAnimSprite(sprite);
+}
+
+const union AffineAnimCmd gTeraStarAffineAnimCmds[] = {
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gTeraStarAffineAnimTable[] = {
+    gTeraStarAffineAnimCmds,
+};
+
+//  arg0: start offset x
+//  arg1: start offset y
+//  arg2: end offset x
+//  arg3: end offset y
+//  arg4: duration
+//  arg5: target partner
+//  arg6: ?????
+const struct SpriteTemplate gTeraStarSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_YELLOW_STAR,
+    .paletteTag = ANIM_TAG_YELLOW_STAR,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .affineAnims = gTeraStarAffineAnimTable,
+    .callback = AnimTeraStarstormStars,
+};
+
+
+void AnimTeraStarstormStars(struct Sprite *sprite)
+{
+    gBattleAnimArgs[0] += 4;
+    gBattleAnimArgs[1] -= 100;
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = sprite->x;
+    sprite->data[3] = sprite->y;
+    if (gBattleAnimArgs[5] == 1)
+    {
+        enum BattlerId targetPartner;
+        if (IsOnPlayerSide(gBattleAnimTarget))
+        {
+            if (gBattleAnimTarget == 0)
+                targetPartner = 2;
+            else
+                targetPartner = 0;
+        }
+        else
+        {
+            if (gBattleAnimTarget == 1)
+                targetPartner = 3;
+            else
+                targetPartner = 1;
+        }
+        sprite->data[2] = GetBattlerSpriteCoord(targetPartner, BATTLER_COORD_X_2) + gBattleAnimArgs[2] ;
+        sprite->data[4] = GetBattlerSpriteCoord(targetPartner, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
+    }
+    else
+    {
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + gBattleAnimArgs[2] ;
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];
+    }
+    InitAnimLinearTranslation(sprite);
+    sprite->callback = AnimTeraStarstormStars_Step;
+    sprite->affineAnimPaused = TRUE;
+    sprite->callback(sprite);
+}
+
+static void AnimTeraStarstormStars_Step(struct Sprite *sprite)
+{
+    if (AnimTranslateLinear(sprite))
+        DestroyAnimSprite(sprite);
+    if ((u16)gBattleAnimArgs[7] == 0xFFFF)
+    {
+        StartSpriteAnim(sprite, 1);
+        sprite->affineAnimPaused = FALSE;
+    }
+}
 
 // Animates a sprite that moves linearly from one location to another, with a
 // single-cycle sine wave added to the y position along the way.
@@ -4432,9 +4603,12 @@ void AnimTask_LeafBlade(u8 taskId)
     task->data[5] = (!IsOnPlayerSide(gBattleAnimTarget)) ? 1 : -1;
     task->data[9] = 56 - (task->data[5] * 64);
     task->data[8] = task->data[7] - task->data[9] + task->data[6];
-    task->data[2] = CreateSprite(&gLeafBladeSpriteTemplate, task->data[8], task->data[9], task->data[4]);
+    task->data[2] = CreateSpriteUnchecked(&gLeafBladeSpriteTemplate, task->data[8], task->data[9], task->data[4]);
     if (task->data[2] == MAX_SPRITES)
+    {
         DestroyAnimVisualTask(taskId);
+        return;
+    }
 
     gSprites[task->data[2]].data[0] = 10;
     gSprites[task->data[2]].data[1] = task->data[8];
@@ -4651,7 +4825,7 @@ static void AnimTask_LeafBlade_Step2(struct Task *task, u8 taskId)
         task->data[14] = 0;
         spriteX = gSprites[task->data[2]].x + gSprites[task->data[2]].x2;
         spriteY = gSprites[task->data[2]].y + gSprites[task->data[2]].y2;
-        spriteId = CreateSprite(&gLeafBladeSpriteTemplate, spriteX, spriteY, task->data[4]);
+        spriteId = CreateSpriteUnchecked(&gLeafBladeSpriteTemplate, spriteX, spriteY, task->data[4]);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[6] = taskId;
@@ -5035,6 +5209,39 @@ static void AnimSlice_Step(struct Sprite *sprite)
         StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
         sprite->data[0] = 3;
         sprite->callback = WaitAnimForDuration;
+    }
+}
+
+static void UNUSED UnusedFlickerAnim(struct Sprite *sprite)
+{
+    if (sprite->data[2] > 1)
+    {
+        if (sprite->data[3] & 1)
+        {
+            sprite->invisible = FALSE;
+            gSprites[sprite->data[0]].invisible = FALSE;
+            gSprites[sprite->data[1]].invisible = FALSE;
+        }
+        else
+        {
+            sprite->invisible = TRUE;
+            gSprites[sprite->data[0]].invisible = TRUE;
+            gSprites[sprite->data[1]].invisible = TRUE;
+        }
+
+        sprite->data[2] = 0;
+        sprite->data[3]++;
+    }
+    else
+    {
+        sprite->data[2]++;
+    }
+
+    if (sprite->data[3] == 10)
+    {
+        DestroySprite(&gSprites[sprite->data[0]]);
+        DestroySprite(&gSprites[sprite->data[1]]);
+        DestroyAnimSprite(sprite);
     }
 }
 
@@ -6069,6 +6276,30 @@ void AnimTask_Conversion2AlphaBlend(u8 taskId)
     }
 }
 
+static void UNUSED AnimTask_HideBattlersHealthbox(u8 taskId)
+{
+    CMD_ARGS(unk0, unk1);
+
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+    {
+        if (cmd->unk0 == TRUE && IsOnPlayerSide(i))
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
+
+        if (cmd->unk1 == TRUE && !IsOnPlayerSide(i))
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
+    }
+
+    DestroyAnimVisualTask(taskId);
+}
+
+static void UNUSED AnimTask_ShowBattlersHealthbox(u8 taskId)
+{
+    for (enum BattlerId i = 0; i < gBattlersCount; i++)
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[i]);
+
+    DestroyAnimVisualTask(taskId);
+}
+
 // args[0] - sprite x
 // args[1] - sprite y
 static void AnimMoon(struct Sprite *sprite)
@@ -6408,17 +6639,20 @@ static void ReloadBattlerSprites(enum BattlerId battler, struct Pokemon *party)
     }
 }
 
+#define TRY_SIDE_TIMER_BATTLER_ID_SWAP(battlerAtk, battlerPartner, side, field)    \
+    if (gSideTimers[side].field == battlerAtk)                      \
+        gSideTimers[side].field = battlerPartner;                   \
+    else if (gSideTimers[side].field == battlerPartner)             \
+        gSideTimers[side].field = battlerAtk;
+
 static void TrySwapStickyWebBattlerId(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
 {
-    // Court Change can move a hazard onto its setter's own side.
-    for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
-    {
-        if (gSideTimers[side].stickyWebBattlerId == battlerAtk)
-            gSideTimers[side].stickyWebBattlerId = battlerPartner;
-        else if (gSideTimers[side].stickyWebBattlerId == battlerPartner)
-            gSideTimers[side].stickyWebBattlerId = battlerAtk;
-    }
+    u32 oppSide = GetBattlerSide(GetOppositeBattler(battlerAtk));
+
+    // if we've set sticky web on the opposing side, need to swap stickyWebBattlerId for mirror armor
+    TRY_SIDE_TIMER_BATTLER_ID_SWAP(battlerAtk, battlerPartner, oppSide, stickyWebBattlerId);
 }
+#undef TRY_SIDE_TIMER_BATTLER_ID_SWAP
 
 static void TrySwapWishBattlerIds(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
 {

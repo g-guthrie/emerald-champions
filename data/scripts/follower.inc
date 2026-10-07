@@ -1,6 +1,15 @@
 gText_FollowerLovesYou::
 	.string "{STR_VAR_1} is regarding you with\nadoration!$"
 
+gText_FollowerLostInThought::
+	.string "{STR_VAR_1} seems lost in thought.$"
+
+gText_FollowerDefault::
+	.string "ERROR 404: Script not found.$"
+
+gText_WantsToFly::
+	.string "{STR_VAR_1} looks up at the\nsky restlessly.\pWould you like to use FLY?$"
+
 EventScript_Follower::
 	lock
 	bufferlivemonnickname STR_VAR_1
@@ -11,12 +20,8 @@ EventScript_FollowerEnd::
 	release
 	end
 
-Follower_Movement_Heart:
-	emote_heart
-	step_end
-
 EventScript_FollowerLovesYou::
-	applymovement OBJ_EVENT_ID_FOLLOWER, Follower_Movement_Heart
+	applymovement OBJ_EVENT_ID_FOLLOWER, ContestHall_Movement_Heart
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	waitmoncry
 	msgbox gText_FollowerLovesYou, MSGBOX_DEFAULT
@@ -32,11 +37,28 @@ EventScript_FollowerGenericSkipFace:
 	waitbuttonpress
 	return
 
+EventScript_FollowerJump::
+	faceplayer
+	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerSplashMovement
+	waitmovement OBJ_EVENT_ID_FOLLOWER
+	waitfieldeffect FLDEFF_EMOTE
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	return
+
 EnterPokeballMovement::
 	enter_pokeball
 	step_end
 
 @ Movement scripts below, movements are defined in movement.inc
+
+FollowerSplashMovement::
+	jump_in_place_down
+	delay_4
+	jump_in_place_down
+	face_player
+	step_end
 
 FollowerShiverVerticalMovement:
 	lock_facing_direction
@@ -182,6 +204,54 @@ FollowerGetCloserWest:
 	delay_16
 	lock_facing_direction
 	walk_right
+	unlock_facing_direction
+	step_end
+
+FollowerPokeNorth:
+	walk_faster_up
+	delay_8
+	lock_facing_direction
+	walk_faster_down
+	delay_4
+	walk_faster_up
+	delay_4
+	walk_faster_down
+	unlock_facing_direction
+	step_end
+
+FollowerPokeSouth:
+	walk_faster_down
+	delay_8
+	lock_facing_direction
+	walk_faster_up
+	delay_4
+	walk_faster_down
+	delay_4
+	walk_faster_up
+	unlock_facing_direction
+	step_end
+
+FollowerPokeEast:
+	walk_faster_right
+	delay_8
+	lock_facing_direction
+	walk_faster_left
+	delay_4
+	walk_faster_right
+	delay_4
+	walk_faster_left
+	unlock_facing_direction
+	step_end
+
+FollowerPokeWest:
+	walk_faster_left
+	delay_8
+	lock_facing_direction
+	walk_faster_right
+	delay_4
+	walk_faster_left
+	delay_4
+	walk_faster_right
 	unlock_facing_direction
 	step_end
 

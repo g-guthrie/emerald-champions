@@ -6,6 +6,26 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_AERIAL_ACE) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
+SINGLE_BATTLE_TEST("Disguised Mimikyu doesn't lose 1/8 of its max HP upon changing to its busted form (Gen7)")
+{
+    enum Species species, newSpecies;
+    PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED;       newSpecies = SPECIES_MIMIKYU_BUSTED; }
+    PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; newSpecies = SPECIES_MIMIKYU_BUSTED_TOTEM; }
+    GIVEN {
+        WITH_CONFIG(B_DISGUISE_HP_LOSS, GEN_7);
+        PLAYER(species) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AERIAL_ACE, opponent);
+        NOT HP_BAR(player);
+        ABILITY_POPUP(player, ABILITY_DISGUISE);
+    } THEN {
+        EXPECT_EQ(player->species, newSpecies);
+        EXPECT_EQ(player->hp, player->maxHP);
+    }
+}
 
 SINGLE_BATTLE_TEST("Disguised Mimikyu will lose 1/8 of its max HP upon changing to its busted form (Gen8+)")
 {
@@ -220,19 +240,5 @@ SINGLE_BATTLE_TEST("Disguise does not break from a teammate's Wish")
         NOT ABILITY_POPUP(player, ABILITY_DISGUISE);
     } THEN {
         EXPECT_EQ(player->species, species);
-    }
-}
-
-SINGLE_BATTLE_TEST("Disguise treats the absorbed hit as neutral (Champions)")
-{
-    GIVEN {
-        WITH_CONFIG(B_DISGUISE_TYPE_EFFECTIVENESS, GEN_CHAMPIONS);
-        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_SHADOW_CLAW); }
-    } SCENE {
-        NOT MESSAGE("It's super effective!");
-        ABILITY_POPUP(player, ABILITY_DISGUISE);
     }
 }

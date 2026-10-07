@@ -1,7 +1,7 @@
-FallarborTown_Mart_MapScripts:: @ 81FFCBE
+FallarborTown_Mart_MapScripts::
 	.byte 0
 
-FallarborTown_Mart_EventScript_Clerk:: @ 81FFCBF
+FallarborTown_Mart_EventScript_Clerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -12,72 +12,53 @@ FallarborTown_Mart_EventScript_Clerk:: @ 81FFCBF
 	end
 
 	.align 2
-FallarborTown_Mart_Pokemart: @ 81FFCD8
-	.2byte ITEM_SHINY_STONE
-	.2byte ITEM_DUSK_STONE
-	.2byte ITEM_DAWN_STONE
-	.2byte ITEM_NONE
-	release
-	end
+FallarborTown_Mart_Pokemart:
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_SUPER_REPEL
+	.2byte ITEM_X_SP_ATK
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_DIRE_HIT
+	.2byte ITEM_GUARD_SPEC
+	pokemartlistend
 
-FallarborTown_Mart_EventScript_Woman:: @ 81FFCF4
+FallarborTown_Mart_EventScript_Woman::
 	msgbox FallarborTown_Mart_Text_DecidingSkittyEvolve, MSGBOX_NPC
 	end
 
-FallarborTown_Mart_EventScript_PokefanM:: @ 81FFCFD
+FallarborTown_Mart_EventScript_PokefanM::
 	msgbox FallarborTown_Mart_Text_SellNuggetIFound, MSGBOX_NPC
 	end
 
-FallarborTown_Mart_EventScript_Skitty:: @ 81FFD06
+FallarborTown_Mart_EventScript_Skitty::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_SKITTY, 0
+	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
 	msgbox FallarborTown_Mart_Text_Skitty, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-FallarborTown_Mart_EventScript_GiveNugget::
-	lock
-	faceplayer
-	goto_if_set FLAG_EC_GIFT_FALLARBOR_TOWN_MART, FallarborTown_Mart_EventScript_ReceivedNugget
-	msgbox FallarborTown_Mart_Text_FreeSample, MSGBOX_DEFAULT
-	giveitem ITEM_NUGGET
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_GIFT_FALLARBOR_TOWN_MART
-	msgbox FallarborTown_Mart_Text_TutorAndNugget, MSGBOX_DEFAULT
-	release
-	end
-
-FallarborTown_Mart_EventScript_ReceivedNugget::
-	msgbox FallarborTown_Mart_Text_TutorAndNugget, MSGBOX_DEFAULT
-	release
-	end
-
-FallarborTown_Mart_Text_FreeSample:
-	.string "A Nugget makes a useful travel fund.\n"
-	.string "Take this one for your next stop!$"
-
-FallarborTown_Mart_Text_TutorAndNugget:
-	.string "That Nugget sells for good money.\p"
-	.string "For moves like Drain Punch, use\n"
-	.string "the Center's free Move Tutor.$"
-
-FallarborTown_Mart_Text_DecidingSkittyEvolve: @ 81FFD19
+FallarborTown_Mart_Text_DecidingSkittyEvolve:
 	.string "I'm having a hard time deciding if I\n"
-	.string "should make my Skitty evolve or not.\p"
-	.string "I only have to use this Moon Stone,\n"
+	.string "should make my SKITTY evolve or not.\p"
+	.string "I only have to use this MOON STONE,\n"
 	.string "but it's so hard to decide…\p"
 	.string "If I make it evolve, it will become\n"
 	.string "much stronger.\p"
 	.string "But it will look so different, too.$"
 
-FallarborTown_Mart_Text_Skitty: @ 81FFDFA
-	.string "Skitty: Miyao?$"
+FallarborTown_Mart_Text_Skitty:
+	.string "SKITTY: Miyao?$"
 
-FallarborTown_Mart_Text_SellNuggetIFound: @ 81FFE09
-	.string "This Nugget I found here…\n"
+FallarborTown_Mart_Text_SellNuggetIFound:
+	.string "This NUGGET I found here…\n"
 	.string "I suppose I'll have to sell it, seeing\l"
 	.string "as how it has no other use.$"
 

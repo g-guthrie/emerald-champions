@@ -127,12 +127,12 @@ static void (*const sArenaFunctions[])(void) =
 
 static const u16 sShortStreakPrizeItems[] =
 {
-    ITEM_NUGGET,
-    ITEM_STAR_PIECE,
-    ITEM_BIG_PEARL,
-    ITEM_BALM_MUSHROOM,
-    ITEM_RARE_BONE,
-    ITEM_PEARL_STRING,
+    ITEM_HP_UP,
+    ITEM_PROTEIN,
+    ITEM_IRON,
+    ITEM_CALCIUM,
+    ITEM_CARBOS,
+    ITEM_ZINC,
 };
 
 static const u16 sLongStreakPrizeItems[] =
@@ -440,6 +440,15 @@ void BattleArena_DeductSkillPoints(enum BattlerId battler, enum StringID stringI
     default:
         break;
     }
+}
+
+static void UNUSED UpdateHPAtStart(enum BattlerId battler)
+{
+    u16 *hpAtStart = gBattleStruct->arenaStartHp;
+
+    hpAtStart[battler] = gBattleMons[battler].hp;
+    if (hpAtStart[GetOppositeBattler(battler)] > gBattleMons[GetOppositeBattler(battler)].hp)
+        hpAtStart[GetOppositeBattler(battler)] = gBattleMons[GetOppositeBattler(battler)].hp;
 }
 
 static void InitArenaChallenge(void)

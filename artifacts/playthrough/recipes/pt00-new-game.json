@@ -1,3 +1,0 @@
-{"name":"PT00 true new game: truck","start":{"chapter":100},
- "steps":[{"frames":600,"label":"In truck"},{"tap":"A","every":40,"frames":3000,"until":"idle","label":"Truck idle"},{"frames":60,"label":"End"}],
- "queries":{"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"}}}

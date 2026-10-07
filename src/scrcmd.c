@@ -33,6 +33,7 @@
 #include "item.h"
 #include "lilycove_lady.h"
 #include "main.h"
+#include "map_preview_screen.h"
 #include "menu.h"
 #include "money.h"
 #include "move.h"
@@ -1745,9 +1746,7 @@ bool8 ScrCmd_closemessage(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     HideFieldMessageBox();
-    // The window clear queues a BG copy. Let that copy finish before the
-    // script reuses the tiles for another message/menu in the same frame.
-    return TRUE;
+    return FALSE;
 }
 
 static bool8 WaitForAorBPress(void)
@@ -2127,16 +2126,10 @@ bool8 ScrCmd_bufferleadmonspeciesname(struct ScriptContext *ctx)
 void BufferFirstLiveMonNickname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
-    struct Pokemon *follower = GetFollowerMon();
 
     Script_RequestEffects(SCREFF_V1);
 
-    if (follower == NULL)
-    {
-        GetStringVar(stringVarIndex)[0] = EOS;
-        return;
-    }
-    GetMonData(follower, MON_DATA_NICKNAME, GetStringVar(stringVarIndex));
+    GetMonData(GetFirstLiveMon(), MON_DATA_NICKNAME, GetStringVar(stringVarIndex));
     StringGet_Nickname(GetStringVar(stringVarIndex));
 }
 
@@ -2302,21 +2295,26 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
 {
     enum FieldMove fieldMove = ScriptReadByte(ctx);
     bool32 doUnlockedCheck = ScriptReadByte(ctx);
+    enum Move move;
 
     Script_RequestEffects(SCREFF_V1);
 
-    gSpecialVar_Result = FieldMove_GetUserSlot(fieldMove, doUnlockedCheck);
-    // An unlocked HM can still lack a compatible party member; non-HM field
-    // moves likewise report when nobody can use them.
-    gSpecialVar_0x8005 = 0;
-    if (gSpecialVar_Result != PARTY_SIZE)
+    gSpecialVar_Result = PARTY_SIZE;
+    if (doUnlockedCheck && !IsFieldMoveUnlocked(fieldMove))
+        return FALSE;
+
+    move = FieldMove_GetMoveId(fieldMove);
+    for (u32 i = 0; i < PARTY_SIZE; i++)
     {
-        gSpecialVar_0x8004 = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_Result], MON_DATA_SPECIES);
-    }
-    else if (IsFieldMoveUnlocked(fieldMove))
-    {
-        gSpecialVar_0x8005 = 1;
-        StringCopy(gStringVar1, GetMoveName(FieldMove_GetMoveId(fieldMove)));
+        enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
+        if (!species)
+            break;
+        if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG) && MonKnowsMove(&gParties[B_TRAINER_PLAYER][i], move) == TRUE)
+        {
+            gSpecialVar_Result = i;
+            gSpecialVar_0x8004 = species;
+            break;
+        }
     }
 
     return FALSE;
@@ -2472,10 +2470,10 @@ bool8 ScrCmd_cleartrainerflag(struct ScriptContext *ctx)
 bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 {
     enum Species species = ScriptReadHalfword(ctx);
-    u16 level = VarGet(ScriptReadHalfword(ctx));
+    u8 level = ScriptReadByte(ctx);
     enum Item item = ScriptReadHalfword(ctx);
     enum Species species2 = ScriptReadHalfword(ctx);
-    u16 level2 = VarGet(ScriptReadHalfword(ctx));
+    u8 level2 = ScriptReadByte(ctx);
     enum Item item2 = ScriptReadHalfword(ctx);
 
     Script_RequestEffects(SCREFF_V1);
@@ -2515,18 +2513,6 @@ bool8 ScrCmd_pokemart(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     CreatePokemartMenu(ptr);
-    ScriptContext_Stop();
-    return TRUE;
-}
-
-// Straight into the Buy list; the script resumes when it closes.
-bool8 ScrCmd_pokemartbuy(struct ScriptContext *ctx)
-{
-    const void *ptr = (void *)ScriptReadWord(ctx);
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    CreatePokemartBuyMenu(ptr);
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2695,12 +2681,9 @@ bool8 ScrCmd_playmoncry(struct ScriptContext *ctx)
 
 void PlayFirstMonCry(struct ScriptContext *ctx)
 {
-    struct Pokemon *follower = GetFollowerMon();
-
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
-    if (follower != NULL)
-        PlayCry_Script(GetMonData(follower, MON_DATA_SPECIES), CRY_MODE_NORMAL);
+    PlayCry_Script(GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES), CRY_MODE_NORMAL);
 }
 
 bool8 ScrCmd_waitmoncry(struct ScriptContext *ctx)
@@ -3329,7 +3312,7 @@ void Script_TriggerUniqueEvolution(struct ScriptContext *ctx)
         gSpecialVar_Result = EVO_EVENT_IMPOSSIBLE;
         return;
     }
-    assertf(gSpecialVar_0x8004 < PARTY_SIZE, "TriggerEvolution script called with invalid partyIndex %d", gSpecialVar_0x8004)
+    assertf(gSpecialVar_0x8004 <= PARTY_SIZE, "TriggerEvolution script called with invalid partyIndex %d", gSpecialVar_0x8004)
     {
         gSpecialVar_Result = EVO_EVENT_IMPOSSIBLE;
         return;
@@ -3379,7 +3362,7 @@ bool8 ScrCmd_setworldmapflag(struct ScriptContext * ctx)
     u16 value = ScriptReadHalfword(ctx);
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    FlagSet(value);
+    MapPreview_SetFlag(value);
     return FALSE;
 }
 
@@ -3410,62 +3393,4 @@ bool8 ScrCmd_normalmsg(struct ScriptContext *ctx)
 
     gMsgIsSignPost = FALSE;
     return FALSE;
-}
-
-// Emerald Champions: restored from Inclement Emerald, where these were script
-// commands 0xe3 and 0xe4. Both of those opcodes are already taken in this
-// engine (SCR_OP_DYNMULTICHOICE and SCR_OP_DYNMULTIPUSH), so rather than
-// renumber the command table they are reached through callnative from the
-// checkPartyHasSpecies / isChosenMonSpecies macros in asm/macros/event.inc.
-//
-// The donor compared the party member's National Dex number against the raw
-// species constant, which only lines up in its own species numbering. Both
-// sides are converted here instead, which is what the donor's comment
-// describes - "a certain species OR one of its forms that shares the same
-// national dex number" - and is correct whatever the species ids happen to be.
-
-// Sets VAR_RESULT to TRUE if the player's party holds the given species, or any
-// alternate form sharing its National Dex number.
-void NativeFunc_CheckPartyHasSpecies(struct ScriptContext *ctx)
-{
-    enum Species wantedSpecies = ScriptReadHalfword(ctx);
-    enum NationalDexOrder wantedDexNum = SpeciesToNationalPokedexNum(wantedSpecies);
-    u32 partyCount = CalculatePlayerPartyCount();
-
-    Script_RequestEffects(SCREFF_V1);
-
-    gSpecialVar_Result = FALSE;
-    if (wantedDexNum == NATIONAL_DEX_NONE)
-        return;
-
-    for (u32 i = 0; i < partyCount; i++)
-    {
-        // An Egg is not the species it will hatch into.
-        enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
-
-        if (SpeciesToNationalPokedexNum(species) == wantedDexNum)
-        {
-            gSpecialVar_Result = TRUE;
-            return;
-        }
-    }
-}
-
-// Sets VAR_RESULT to TRUE if the party member chosen into VAR_0x8004 is the
-// given species, or any alternate form sharing its National Dex number.
-void NativeFunc_IsChosenMonSpecies(struct ScriptContext *ctx)
-{
-    enum Species wantedSpecies = ScriptReadHalfword(ctx);
-    enum NationalDexOrder wantedDexNum = SpeciesToNationalPokedexNum(wantedSpecies);
-
-    Script_RequestEffects(SCREFF_V1);
-
-    gSpecialVar_Result = FALSE;
-    if (wantedDexNum == NATIONAL_DEX_NONE || gSpecialVar_0x8004 >= PARTY_SIZE)
-        return;
-
-    // MON_DATA_SPECIES_OR_EGG reports SPECIES_EGG for an egg, which has no
-    // National Dex number, so an egg can never match.
-    if (SpeciesToNationalPokedexNum(GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG)) == wantedDexNum)
-        gSpecialVar_Result = TRUE;
 }

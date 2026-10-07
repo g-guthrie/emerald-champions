@@ -58,7 +58,10 @@ void EnterSafariMode(void)
     SetSafariZoneFlag();
     ClearAllPokeblockFeeders();
     gNumSafariBalls = 30;
-    gSafariZoneStepCounter = 500;
+    if (IS_FRLG)
+        gSafariZoneStepCounter = 600;
+    else
+        gSafariZoneStepCounter = 500;
     sSafariZoneCaughtMons = 0;
     sSafariZonePkblkUses = 0;
 }
@@ -137,8 +140,7 @@ void GetPokeblockFeederInFront(void)
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (sPokeblockFeeders[i].stepCounter != 0
-         && gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum
+        if (gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum
          && sPokeblockFeeders[i].x == x
          && sPokeblockFeeders[i].y == y)
         {
@@ -160,17 +162,16 @@ void GetPokeblockFeederWithinRange(void)
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (sPokeblockFeeders[i].stepCounter != 0
-         && gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum)
+        if (gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum)
         {
-            // Each feeder is measured from the original player position.
-            s16 dx = x - sPokeblockFeeders[i].x;
-            s16 dy = y - sPokeblockFeeders[i].y;
-            if (dx < 0)
-                dx *= -1;
-            if (dy < 0)
-                dy *= -1;
-            if ((dx + dy) <= 5)
+            // Get absolute value of x and y distance from Pokeblock feeder on current map.
+            x -= sPokeblockFeeders[i].x;
+            y -= sPokeblockFeeders[i].y;
+            if (x < 0)
+                x *= -1;
+            if (y < 0)
+                y *= -1;
+            if ((x + y) <= 5)
             {
                 gSpecialVar_Result = i;
                 return;
@@ -179,6 +180,17 @@ void GetPokeblockFeederWithinRange(void)
     }
 
     gSpecialVar_Result = -1;
+}
+
+// unused
+struct Pokeblock *SafariZoneGetPokeblockInFront(void)
+{
+    GetPokeblockFeederInFront();
+
+    if (gSpecialVar_Result == 0xFFFF)
+        return NULL;
+    else
+        return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
 }
 
 struct Pokeblock *SafariZoneGetActivePokeblock(void)

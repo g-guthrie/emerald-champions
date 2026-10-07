@@ -1,5 +1,4 @@
 #include "global.h"
-#include "field_specials.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
@@ -14,13 +13,11 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
-#include "legendary_signs.h"
 #include "librfu.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
 #include "mail.h"
-#include "item.h"
 #include "main.h"
 #include "mystery_gift.h"
 #include "mystery_gift_menu.h"
@@ -99,7 +96,6 @@ enum {
     MSG_MON_CANT_BE_TRADED,
     MSG_EGG_CANT_BE_TRADED,
     MSG_FRIENDS_MON_CANT_BE_TRADED,
-    MSG_RESTRICTED_PARTY,
 };
 
 // IDs for QueueAction
@@ -113,7 +109,6 @@ enum {
     QUEUE_MON_CANT_BE_TRADED,
     QUEUE_EGG_CANT_BE_TRADED,
     QUEUE_FRIENDS_MON_CANT_BE_TRADED,
-    QUEUE_RESTRICTED_PARTY,
 };
 
 #define QUEUE_DELAY_MSG   3
@@ -327,14 +322,6 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 #include "data/trade.h"
 
-static void CreateTradeMenuTextSprite(u16 tagOffset, s16 x, s16 y)
-{
-    struct SpriteTemplate template = sSpriteTemplate_MenuText;
-    template.tileTag += tagOffset;
-    u32 spriteId = CreateSpriteWithTemplateCopy(&template, x, y, 1);
-    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
-}
-
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
     if (gPlayerCurrActivity == ACTIVITY_29)
@@ -460,6 +447,7 @@ void CB2_StartCreateTradeMenu(void)
 static void CB2_CreateTradeMenu(void)
 {
     int i;
+    struct SpriteTemplate temp;
     u8 id;
     u32 xPos;
 
@@ -625,26 +613,36 @@ static void CB2_CreateTradeMenu(void)
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gSaveBlock2Ptr->playerName, 120);
         for (i = 0; i < NUM_PLAYER_NAME_SPRITES; i++)
         {
-            CreateTradeMenuTextSprite(i + GFXTAG_PLAYER_NAME_L, xPos + (i * 32) + 16, 10);
+            temp = sSpriteTemplate_MenuText;
+            temp.tileTag += i + GFXTAG_PLAYER_NAME_L;
+            CreateSprite(&temp, xPos + (i * 32) + 16, 10, 1);
         }
 
         // Create partner's name text sprites
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gLinkPlayers[GetMultiplayerId() ^ 1].name, 120);
         for (i = 0; i < NUM_PARTNER_NAME_SPRITES; i++)
         {
-            CreateTradeMenuTextSprite(i + GFXTAG_PARTNER_NAME_L, xPos + (i * 32) + 136, 10);
+            temp = sSpriteTemplate_MenuText;
+            temp.tileTag += i + GFXTAG_PARTNER_NAME_L;
+            CreateSprite(&temp, xPos + (i * 32) + 136, 10, 1);
         }
         gMain.state++;
         break;
     case 13:
         // Create Cancel text sprites
-        CreateTradeMenuTextSprite(GFXTAG_CANCEL_L, 215, 152);
-        CreateTradeMenuTextSprite(GFXTAG_CANCEL_R, 215 + 32, 152);
+        temp = sSpriteTemplate_MenuText;
+        temp.tileTag += GFXTAG_CANCEL_L;
+        CreateSprite(&temp, 215, 152, 1);
+        temp = sSpriteTemplate_MenuText;
+        temp.tileTag += GFXTAG_CANCEL_R;
+        CreateSprite(&temp, 215 + 32, 152, 1);
 
         // Create Choose a Pokémon text sprites (only 3 are needed, other 3 are empty)
         for (i = 0; i < NUM_CHOOSE_PKMN_SPRITES; i++)
         {
-            CreateTradeMenuTextSprite(i + GFXTAG_CHOOSE_PKMN_L, (i * 32) + 24, 150);
+            temp = sSpriteTemplate_MenuText;
+            temp.tileTag += i + GFXTAG_CHOOSE_PKMN_L;
+            CreateSprite(&temp, (i * 32) + 24, 150, 1);
         }
 
         sTradeMenu->cursorSpriteId = CreateSprite(&sSpriteTemplate_Cursor, sTradeMonSpriteCoords[0][0] * 8 + 32, sTradeMonSpriteCoords[0][1] * 8, 2);
@@ -711,6 +709,7 @@ static void CB2_CreateTradeMenu(void)
 static void CB2_ReturnToTradeMenu(void)
 {
     int i;
+    struct SpriteTemplate temp;
     u8 id;
     u32 xPos;
 
@@ -803,26 +802,36 @@ static void CB2_ReturnToTradeMenu(void)
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gSaveBlock2Ptr->playerName, 120);
         for (i = 0; i < NUM_PLAYER_NAME_SPRITES; i++)
         {
-            CreateTradeMenuTextSprite(i + GFXTAG_PLAYER_NAME_L, xPos + (i * 32) + 16, 10);
+            temp = sSpriteTemplate_MenuText;
+            temp.tileTag += i + GFXTAG_PLAYER_NAME_L;
+            CreateSprite(&temp, xPos + (i * 32) + 16, 10, 1);
         }
 
         // Create partner's name text sprites
         xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gLinkPlayers[GetMultiplayerId() ^ 1].name, 120);
         for (i = 0; i < NUM_PARTNER_NAME_SPRITES; i++)
         {
-            CreateTradeMenuTextSprite(i + GFXTAG_PARTNER_NAME_L, xPos + (i * 32) + 136, 10);
+            temp = sSpriteTemplate_MenuText;
+            temp.tileTag += i + GFXTAG_PARTNER_NAME_L;
+            CreateSprite(&temp, xPos + (i * 32) + 136, 10, 1);
         }
         gMain.state++;
         break;
     case 13:
         // Create Cancel text sprites
-        CreateTradeMenuTextSprite(GFXTAG_CANCEL_L, 215, 152);
-        CreateTradeMenuTextSprite(GFXTAG_CANCEL_R, 215 + 32, 152);
+        temp = sSpriteTemplate_MenuText;
+        temp.tileTag += GFXTAG_CANCEL_L;
+        CreateSprite(&temp, 215, 152, 1);
+        temp = sSpriteTemplate_MenuText;
+        temp.tileTag += GFXTAG_CANCEL_R;
+        CreateSprite(&temp, 215 + 32, 152, 1);
 
         // Create Choose a Pokémon text sprites
         for (i = 0; i < NUM_CHOOSE_PKMN_SPRITES; i++)
         {
-            CreateTradeMenuTextSprite(i + GFXTAG_CHOOSE_PKMN_L, (i * 32) + 24, 150);
+            temp = sSpriteTemplate_MenuText;
+            temp.tileTag += i + GFXTAG_CHOOSE_PKMN_L;
+            CreateSprite(&temp, (i * 32) + 24, 150, 1);
         }
 
         if (sTradeMenu->cursorPosition < PARTY_SIZE)
@@ -1026,6 +1035,16 @@ static void SetActiveMenuOptions(void)
     sTradeMenu->optionsActive[PARTY_SIZE * 2] = TRUE;
 }
 
+// why not just use memcpy?
+static void Trade_Memcpy(void *dest, const void *src, u32 size)
+{
+    u8 *_dest = dest;
+    const u8 *_src = src;
+    u32 i;
+    for (i = 0; i < size; i++)
+        _dest[i] = _src[i];
+}
+
 static bool8 BufferTradeParties(void)
 {
     u8 id = GetMultiplayerId();
@@ -1036,7 +1055,7 @@ static bool8 BufferTradeParties(void)
     {
     case 0:
         // The parties are sent in pairs rather than all at once
-        memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][0], 2 * sizeof(struct Pokemon));
+        Trade_Memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][0], 2 * sizeof(struct Pokemon));
         sTradeMenu->bufferPartyState++;
         sTradeMenu->timer = 0;
         break;
@@ -1062,13 +1081,13 @@ static bool8 BufferTradeParties(void)
     case 4:
         if (_GetBlockReceivedStatus() == 3)
         {
-            memcpy(&gParties[B_TRAINER_OPPONENT_A][0], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
+            Trade_Memcpy(&gParties[B_TRAINER_OPPONENT_A][0], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
         break;
     case 5:
-        memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][2], 2 * sizeof(struct Pokemon));
+        Trade_Memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][2], 2 * sizeof(struct Pokemon));
         sTradeMenu->bufferPartyState++;
         break;
     case 7:
@@ -1079,13 +1098,13 @@ static bool8 BufferTradeParties(void)
     case 8:
         if (_GetBlockReceivedStatus() == 3)
         {
-            memcpy(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[id ^ 1],  2 * sizeof(struct Pokemon));
+            Trade_Memcpy(&gParties[B_TRAINER_OPPONENT_A][2], gBlockRecvBuffer[id ^ 1],  2 * sizeof(struct Pokemon));
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
         break;
     case 9:
-        memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][4], 2 * sizeof(struct Pokemon));
+        Trade_Memcpy(gBlockSendBuffer, &gParties[B_TRAINER_PLAYER][4], 2 * sizeof(struct Pokemon));
         sTradeMenu->bufferPartyState++;
         break;
     case 11:
@@ -1096,13 +1115,13 @@ static bool8 BufferTradeParties(void)
     case 12:
         if (_GetBlockReceivedStatus() == 3)
         {
-            memcpy(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
+            Trade_Memcpy(&gParties[B_TRAINER_OPPONENT_A][4], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
         break;
     case 13:
-        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct Mail) + 4);
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct Mail) + 4);
         sTradeMenu->bufferPartyState++;
         break;
     case 15:
@@ -1113,13 +1132,13 @@ static bool8 BufferTradeParties(void)
     case 16:
         if (_GetBlockReceivedStatus() == 3)
         {
-            memcpy(gTradeMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct Mail));
+            Trade_Memcpy(gTradeMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct Mail));
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
         break;
     case 17:
-        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, sizeof(sTradeMenu->giftRibbons));
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, sizeof(sTradeMenu->giftRibbons));
         sTradeMenu->bufferPartyState++;
         break;
     case 19:
@@ -1130,7 +1149,7 @@ static bool8 BufferTradeParties(void)
     case 20:
         if (_GetBlockReceivedStatus() == 3)
         {
-            memcpy(sTradeMenu->giftRibbons, gBlockRecvBuffer[id ^ 1], sizeof(sTradeMenu->giftRibbons));
+            Trade_Memcpy(sTradeMenu->giftRibbons, gBlockRecvBuffer[id ^ 1], sizeof(sTradeMenu->giftRibbons));
             TradeResetReceivedFlags();
             sTradeMenu->bufferPartyState++;
         }
@@ -1553,9 +1572,6 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     partnerMonIdx %= PARTY_SIZE;
     partnerSpecies = GetMonData(&gParties[B_TRAINER_OPPONENT_A][partnerMonIdx], MON_DATA_SPECIES);
 
-    if (!CanAddRestrictedMonToParty(partnerSpecies, playerMonIdx))
-        return TRADE_RESTRICTED_PARTY;
-
     // Can't trade specific species
     if (gSpeciesInfo[partnerSpecies].cannotBeTraded)
         return PARTNER_MON_INVALID;
@@ -1594,9 +1610,6 @@ static bool32 CheckMonsBeforeTrade(void)
         QueueAction(QUEUE_DELAY_MSG, QUEUE_STANDBY);
         SetLinkData(LINKCMD_INIT_BLOCK, 0);
         break;
-    case TRADE_RESTRICTED_PARTY:
-        QueueAction(QUEUE_DELAY_MSG, QUEUE_RESTRICTED_PARTY);
-        return TRUE;
     case PARTNER_MON_INVALID:
         QueueAction(QUEUE_DELAY_MSG, QUEUE_FRIENDS_MON_CANT_BE_TRADED);
         return TRUE;
@@ -2188,9 +2201,6 @@ static void DoQueuedActions(void)
                     break;
                 case QUEUE_EGG_CANT_BE_TRADED:
                     PrintTradeMessage(MSG_EGG_CANT_BE_TRADED);
-                    break;
-                case QUEUE_RESTRICTED_PARTY:
-                    PrintTradeMessage(MSG_RESTRICTED_PARTY);
                     break;
                 case QUEUE_FRIENDS_MON_CANT_BE_TRADED:
                     PrintTradeMessage(MSG_FRIENDS_MON_CANT_BE_TRADED);
@@ -3088,8 +3098,6 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
         ClearMail(&gSaveBlock1Ptr->mail[playerMail]);
 
     SWAP(*playerMon, *partnerMon, sTradeAnim->tempMon);
-    ClampMonToPlayerLevelCap(playerMon);
-    EmeraldChampions_UnlockBattleItem(GetMonData(playerMon, MON_DATA_HELD_ITEM));
 
     // By default, a Pokémon received from a trade will have 70 Friendship.
     // Eggs use Friendship to track egg cycles, so don't set this on Eggs.
@@ -3343,45 +3351,6 @@ static void BufferTradeSceneStrings(void)
     }
 }
 
-// Both animation styles hand off the same selected NPC-trade Pokemon. The
-// selection is VAR_0x8004; VAR_0x8005 identifies the NPC's authored trade.
-static void FinishInGameTrade(void)
-{
-    TradeMons(gSpecialVar_0x8004, 0);
-    gCB2_AfterEvolution = CB2_InGameTrade;
-    struct Pokemon *mon = gSpecialVar_0x8004 == PC_MON_CHOSEN
-        ? &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC]
-        : &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    // A gated species received by trade (Type: Null) counts as caught.
-    MarkLegendarySignCaughtBySpecies(GetMonData(mon, MON_DATA_SPECIES));
-    enum Species target = GetEvolutionTargetSpecies(mon, EVO_MODE_TRADE, ITEM_NONE,
-        &gParties[B_TRAINER_OPPONENT_A][0], NULL, CHECK_EVO);
-    if (target != SPECIES_NONE)
-    {
-        GetEvolutionTargetSpecies(mon, EVO_MODE_TRADE, ITEM_NONE,
-            &gParties[B_TRAINER_OPPONENT_A][0], NULL, DO_EVO);
-        TradeEvolutionScene(mon, target, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSpecialVar_0x8004);
-    }
-}
-
-#if TESTING
-u8 Test_CheckValidityOfTradeMons(u8 playerSlot, u8 partnerSlot)
-{
-    u8 aliveMons[PARTY_SIZE];
-    memset(aliveMons, TRUE, sizeof(aliveMons));
-    return CheckValidityOfTradeMons(aliveMons, CalculatePlayerPartyCount(), playerSlot, partnerSlot);
-}
-
-void Test_FinishInGameTrade(void)
-{
-    MainCallback after = gCB2_AfterEvolution;
-    sTradeAnim = AllocZeroed(sizeof(*sTradeAnim));
-    FinishInGameTrade();
-    FREE_AND_SET_NULL(sTradeAnim);
-    gCB2_AfterEvolution = after;
-}
-#endif
-
 // returns TRUE if it finished a link trade, FALSE if it finished an in-game trade or if sequence is still going
 static bool8 DoTradeAnim(void)
 {
@@ -3467,6 +3436,7 @@ enum {
 
 static bool8 DoTradeAnim_Cable(void)
 {
+    u32 evoTarget;
 
     switch (sTradeAnim->state)
     {
@@ -3899,8 +3869,15 @@ static bool8 DoTradeAnim_Cable(void)
         else if (JOY_NEW(A_BUTTON))
             sTradeAnim->state++;
         break;
-    case STATE_TRY_EVOLUTION: // Link trades use CB2_TryLinkTradeEvolution.
-        FinishInGameTrade();
+    case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
+        TradeMons(gSpecialVar_0x8005, 0);
+        gCB2_AfterEvolution = CB2_InGameTrade;
+        evoTarget = GetEvolutionTargetSpecies(&gParties[B_TRAINER_PLAYER][gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gParties[B_TRAINER_OPPONENT_A][0], NULL, CHECK_EVO);
+        if (evoTarget != SPECIES_NONE)
+        {
+            GetEvolutionTargetSpecies(&gParties[B_TRAINER_PLAYER][gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gParties[B_TRAINER_OPPONENT_A][0], NULL, DO_EVO);
+            TradeEvolutionScene(&gParties[B_TRAINER_PLAYER][gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
+        }
         sTradeAnim->state++;
         break;
     case STATE_FADE_OUT_END:
@@ -3935,6 +3912,7 @@ static bool8 DoTradeAnim_Cable(void)
 
 static bool8 DoTradeAnim_Wireless(void)
 {
+    u32 evoTarget;
 
     switch (sTradeAnim->state)
     {
@@ -4391,8 +4369,20 @@ static bool8 DoTradeAnim_Wireless(void)
         else if (JOY_NEW(A_BUTTON))
             sTradeAnim->state++;
         break;
-    case STATE_TRY_EVOLUTION: // Link trades use CB2_TryLinkTradeEvolution.
-        FinishInGameTrade();
+    case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
+        TradeMons(gSpecialVar_0x8004, 0);
+        gCB2_AfterEvolution = CB2_InGameTrade;
+        struct Pokemon *canEvolveMon;
+        if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+            canEvolveMon = &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC];
+        else
+            canEvolveMon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+        evoTarget = GetEvolutionTargetSpecies(canEvolveMon, EVO_MODE_TRADE, ITEM_NONE, &gParties[B_TRAINER_OPPONENT_A][0], NULL, CHECK_EVO);
+        if (evoTarget != SPECIES_NONE)
+        {
+            GetEvolutionTargetSpecies(canEvolveMon, EVO_MODE_TRADE, ITEM_NONE, &gParties[B_TRAINER_OPPONENT_A][0], NULL, DO_EVO);
+            TradeEvolutionScene(canEvolveMon, evoTarget, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSpecialVar_0x8004);
+        }
         sTradeAnim->state++;
         break;
     case STATE_FADE_OUT_END:
@@ -4560,28 +4550,11 @@ u16 GetInGameTradeSpeciesInfo(void)
     return inGameTrade->requestedSpecies;
 }
 
-u16 CanReceiveInGameTradePokemon(void)
-{
-    u16 tradeId = gSpecialVar_0x8005;
-    u16 outgoingSlot = gSpecialVar_0x8004;
-
-    if (tradeId >= ARRAY_COUNT(sIngameTrades))
-        return FALSE;
-    if (outgoingSlot == PC_MON_CHOSEN)
-        return TRUE; // The received Pokémon stays in storage.
-    if (outgoingSlot >= PARTY_SIZE)
-        return FALSE;
-    return CanAddRestrictedMonToParty(sIngameTrades[tradeId].species, outgoingSlot);
-}
-
 static void BufferInGameTradeMonName(void)
 {
     u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8005];
-    struct Pokemon *mon = gSpecialVar_0x8004 == PC_MON_CHOSEN
-        ? &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC]
-        : &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
 }
@@ -4606,8 +4579,6 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     SetMonData(pokemon, MON_DATA_SPEED_IV, &inGameTrade->ivs[3]);
     SetMonData(pokemon, MON_DATA_SPATK_IV, &inGameTrade->ivs[4]);
     SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
-    MaxPlayerMonIVs(pokemon); // The traded Pokemon joins the player's side.
-    SetPlayerMonBaselineEVs(pokemon);
     SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->nickname);
     SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
     SetMonData(pokemon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
@@ -5143,32 +5114,4 @@ static void CB2_SaveAndEndWirelessTrade(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
-}
-
-void ReturnInGameTradeHeldItem(void)
-{
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    struct BoxPokemon *mon = GetSelectedBoxMonFromPcOrParty();
-    enum Item item = GetBoxMonData(mon, MON_DATA_HELD_ITEM);
-    enum Item none = ITEM_NONE;
-    gSpecialVar_Result = 1;
-    if (item == ITEM_NONE)
-        return;
-    CopyItemName(item, gStringVar1);
-    if (ItemIsMail(item))
-    {
-        // Let the normal Mail UI preserve its message before the trade.
-        gSpecialVar_Result = 4;
-        return;
-    }
-    if (AddBagItemWithoutDiscovery(item, 1))
-        gSpecialVar_Result = 2;
-    else if (AddPCItemWithoutDiscovery(item, 1))
-        gSpecialVar_Result = 3;
-    else
-    {
-        gSpecialVar_Result = 0;
-        return;
-    }
-    SetBoxMonData(mon, MON_DATA_HELD_ITEM, &none);
 }

@@ -380,6 +380,11 @@ void CB2_PyramidBagMenuFromStartMenu(void)
 }
 
 // CB2_BagMenuFromBattle is used instead
+static void UNUSED OpenBattlePyramidBagInBattle(void)
+{
+    GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
+}
+
 // If the player finishes a round at the Battle Pyramid with insufficient space in their
 // Pyramid Bag to store the party's held items, they may choose items to toss in order to
 // make room.
@@ -1093,6 +1098,7 @@ static void BagAction_UseOnField(u8 taskId)
 
     if (pocketId == POCKET_KEY_ITEMS
         || pocketId == POCKET_POKE_BALLS
+        || pocketId == POCKET_TM_HM
         || ItemIsMail(gSpecialVar_ItemId) == TRUE)
     {
         CloseMenuActionWindow();
@@ -1412,27 +1418,39 @@ static void CancelItemSwap(u8 taskId)
 
 void TryStoreHeldItemsInPyramidBag(void)
 {
-    gSpecialVar_Result = 1;
-    if (gSaveBlock2Ptr->frontier.lvlMode >= FRONTIER_LVL_MODE_COUNT)
-        return;
-
+    u8 i;
     struct Pokemon *party = gParties[B_TRAINER_PLAYER];
-    struct PyramidBag *bag = &gSaveBlock2Ptr->frontier.pyramidBag;
-    struct PyramidBag before = *bag;
-    for (u32 i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+#if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
+    u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+#else
+    u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+#endif
+    enum Item heldItem;
+
+    memcpy(newItems, gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+    memcpy(newQuantities, gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        enum Item item = GetMonData(&party[i], MON_DATA_HELD_ITEM);
-        if (item != ITEM_NONE && !AddPyramidBagItem(item, 1))
+        heldItem = GetMonData(&party[i], MON_DATA_HELD_ITEM);
+        if (heldItem != ITEM_NONE && !AddBagItem(heldItem, 1))
         {
-            *bag = before;
+            // Cant store party held items in pyramid bag because bag is full
+            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode], newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newItems));
+            memcpy(gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode], newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(*newQuantities));
+            Free(newItems);
+            Free(newQuantities);
+            gSpecialVar_Result = 1;
             return;
         }
     }
 
-    enum Item item = ITEM_NONE;
-    for (u32 i = 0; i < FRONTIER_PARTY_SIZE; i++)
-        SetMonData(&party[i], MON_DATA_HELD_ITEM, &item);
+    heldItem = ITEM_NONE;
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+        SetMonData(&party[i], MON_DATA_HELD_ITEM, &heldItem);
     gSpecialVar_Result = 0;
+    Free(newItems);
+    Free(newQuantities);
 }
 
 static void InitPyramidBagWindows(void)
@@ -1468,6 +1486,11 @@ static void DrawTossNumberWindow(u8 windowId)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 1, 0xE);
     ScheduleBgCopyTilemapToVram(1);
+}
+
+static u8 UNUSED GetMenuActionWindowId(u8 windowArrayId)
+{
+    return gPyramidBagMenu->windowIds[windowArrayId];
 }
 
 static u8 OpenMenuActionWindowById(u8 windowArrayId)

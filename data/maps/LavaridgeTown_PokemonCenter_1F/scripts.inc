@@ -1,336 +1,48 @@
-.set LOCALID_NURSE, 1
-.set LOCALID_LUCY, 8
-
-LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 81FFAFA
+LavaridgeTown_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LavaridgeTown_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, LavaridgeTown_PokemonCenter_1F_OnFrame
 	.byte 0
 
-LavaridgeTown_PokemonCenter_1F_OnTransition: @ 81FFB05
+LavaridgeTown_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
 	call Common_EventScript_UpdateBrineyLocation
-	goto_if_ne VAR_LAVARIDGE_LUCY_STATE, 0, LavaridgeTown_PokemonCenter_1F_EndTransition
-	setflag FLAG_HIDE_LAVARIDGE_POKECENTER_LUCY
-	@ The forced doorway step does not run the coordinate event at (2, 2).
-	getplayerxy VAR_0x8004, VAR_0x8005
-	goto_if_ne VAR_0x8004, 2, LavaridgeTown_PokemonCenter_1F_EndTransition
-	goto_if_ne VAR_0x8005, 1, LavaridgeTown_PokemonCenter_1F_EndTransition
-	setvar VAR_TEMP_0, 1
-LavaridgeTown_PokemonCenter_1F_EndTransition:
 	end
 
-LavaridgeTown_PokemonCenter_1F_OnFrame:
-	map_script_2 VAR_TEMP_0, 1, LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger
-	.2byte 0
-
-LavaridgeTown_PokemonCenter_1F_EventScript_Nurse:: @ 81FFB0E
-	setvar VAR_0x800B, LOCALID_NURSE
+LavaridgeTown_PokemonCenter_1F_EventScript_Nurse::
+	setvar VAR_0x800B, LOCALID_LAVARIDGE_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-LavaridgeTown_PokemonCenter_1F_EventScript_Youngster:: @ 81FFB1C
+LavaridgeTown_PokemonCenter_1F_EventScript_Youngster::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate, MSGBOX_NPC
 	end
 
-LavaridgeTown_PokemonCenter_1F_EventScript_Woman:: @ 81FFB25
+LavaridgeTown_PokemonCenter_1F_EventScript_Woman::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether, MSGBOX_NPC
 	end
 
-LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman:: @ 81FFB2E
+LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo, MSGBOX_NPC
 	end
 
-LavaridgeTown_PokemonCenter_1F_EventScript_MoomooMilk::
-	lock
-	faceplayer
-	showmoneybox 0, 0
-	message LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk
-	waitmessage
-	multichoice 16, 0, MULTI_MOOMOO_MILK, 0
-	switch VAR_RESULT
-	case 0, LavaridgeTown_PokemonCenter_1F_EventScript_Buy1MoomooMilk
-	case 1, LavaridgeTown_PokemonCenter_1F_EventScript_Buy12MoomooMilk
-	case 2, LavaridgeTown_PokemonCenter_1F_EventScript_ExitWithoutBuying
-	case 127, LavaridgeTown_PokemonCenter_1F_EventScript_ExitWithoutBuying
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_Buy1MoomooMilk::
-	checkmoney 500
-	compare VAR_RESULT, FALSE
-	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughMoney
-	checkitemspace ITEM_MOOMOO_MILK, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughSpace
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_HereYouGo, MSGBOX_DEFAULT
-	removemoney 500
-	updatemoneybox
-	giveitem ITEM_MOOMOO_MILK
-	hidemoneybox
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_Buy12MoomooMilk::
-	checkmoney 6000
-	compare VAR_RESULT, FALSE
-	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughMoney
-	checkitemspace ITEM_MOOMOO_MILK, 12
-	compare VAR_RESULT, FALSE
-	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughSpace
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_HereYouGo, MSGBOX_DEFAULT
-	removemoney 6000
-	updatemoneybox
-	giveitem ITEM_MOOMOO_MILK, 12
-	hidemoneybox
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_ExitWithoutBuying::
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_ThatsTooBad, MSGBOX_DEFAULT
-	hidemoneybox
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughMoney::
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_NotEnoughMoney, MSGBOX_DEFAULT
-	hidemoneybox
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_NotEnoughSpace::
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	hidemoneybox
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger::
-	setvar VAR_TEMP_0, 0
-	lock
-	addobject LOCALID_LUCY
-	setvar VAR_LAVARIDGE_LUCY_STATE, 1
-	clearflag FLAG_HIDE_LAVARIDGE_POKECENTER_LUCY
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyYouThere, MSGBOX_AUTOCLOSE
-	playse SE_PIN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
-	waitmovement 0
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyEnter
-	waitmovement 0
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_ScottSaid, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
-	goto_if_defeated TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyBattle, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
-	setvar VAR_0x8004, ITEM_TOXIC_ORB
-	setvar VAR_0x8005, 3
-	specialvar VAR_RESULT, CanReceiveFrontierReward
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setvar VAR_LAVARIDGE_LUCY_STATE, 2
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveToxicOrb, MSGBOX_DEFAULT
-	giveitem ITEM_TOXIC_ORB
-	giveitem ITEM_BOTTLE_CAP, 3
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE
-	waitmessage
-	@ Lucy still at the springs doorway (a full-Bag retry keeps her there)
-	@ leaves by the springs route, whichever side the player talks from.
-	getobjectxy LOCALID_LUCY, CURRENT_POSITION, VAR_0x8004, VAR_0x8005
-	compare VAR_0x8004, 2
-	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitFromSprings
-	switch VAR_FACING
-	case DIR_NORTH, LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitNorth
-	case DIR_WEST, LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitWest
-	case DIR_EAST, LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitEast
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_Lucy::
-	lock
-	applymovement LOCALID_LUCY, Common_Movement_FacePlayer
-	waitmovement 0
-	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse::
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_VeryWell, MSGBOX_AUTOCLOSE	
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyGoWait
-	waitmovement 0
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitFromSprings::
-	getplayerxy VAR_0x8004, VAR_0x8005
-	goto_if_eq VAR_0x8005, 4, LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitAroundPlayer
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitFromSprings
-	waitmovement 0
-	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
-
-@ The player stands below her doorway spot: step right before heading down.
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitAroundPlayer:
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitAroundPlayer
-	waitmovement 0
-	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitNorth:
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitNorth
-	waitmovement 0
-	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitWest:
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitNorth
-	waitmovement 0
-	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyExitEast:
-	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyExitEast
-	waitmovement 0
-	goto LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave
-
-LavaridgeTown_PokemonCenter_1F_EventScript_LucyLeave::
-	playse SE_SLIDING_DOOR
-	removeobject LOCALID_LUCY
-	release
-	end
-
-LavaridgeTown_PokemonCenter_1F_Text_LucyYouThere:
-	.string "???: You there… Stop.$"
-
-LavaridgeTown_PokemonCenter_1F_Text_ScottSaid:
-	.string "???: Scott said I might find you here.\n"
-	.string "I am Lucy, Pike Queen of the Battle\l"
-	.string "Frontier he is building…\p"
-	.string "I'm not one for idle chatter… I want\n"
-	.string "to battle. Are you ready?$"
-
-LavaridgeTown_PokemonCenter_1F_Text_VeryWell:
-	.string "Lucy: Very well…\n"
-	.string "I'll be by the PC.\p"
-	.string "Don't keep me waiting…$"
-
-LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat:
-	.string "Urk…$"
-
-LavaridgeTown_PokemonCenter_1F_Text_LucyBattle:
-	.string "Lucy: Ready? Good.\n"
-	.string "Let's make this quick…$"
-
-LavaridgeTown_PokemonCenter_1F_Text_LucyGiveToxicOrb:
-	.string "Lucy: You were lucky, this time…\n"
-	.string "Take this Toxic Orb and three Caps.\p"
-	.string "The Orb poisons its holder…\n"
-	.string "Poison Heal turns that into healing.$"
-
-LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye:
-	.string "Lucy: Perhaps we'll meet again…\n"
-	.string "If your luck holds up.\p"
-	.string "Good-bye, for now…$"
-
-LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk:
-	.string "Moomoo Milk? It's great before the\n"
-	.string "hot spring, and even better after!\p"
-	.string "It's ¥500 a bottle, or ¥6,000\n"
-	.string "for a dozen. How about some?$"
-
-LavaridgeTown_PokemonCenter_1F_Text_ThatsTooBad:
-	.string "Well, now I feel udder-ly useless!$"
-
-LavaridgeTown_PokemonCenter_1F_Text_HereYouGo:
-	.string "Here's your Moomoo Milk. Drink up!$"
-
-LavaridgeTown_PokemonCenter_1F_Text_NotEnoughMoney:
-	.string "You don't have enough money.$"
-
-LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether: @ 81FFB37
-	.string "I think Pokémon get closer to their\n"
-	.string "Trainers if they spend time together.\p"
+LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether:
+	.string "I think POKéMON get closer to their\n"
+	.string "TRAINERS if they spend time together.\p"
 	.string "The longer the better.\n"
 	.string "That's what I think.$"
 
-LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate: @ 81FFBAD
+LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate:
 	.string "It's sort of magical how just sitting\n"
 	.string "in a hot-spring pool can invigorate.\p"
-	.string "My Pokémon soak with me while\n"
-	.string "I walk through the spring water.$"
+	.string "I wish I could let my POKéMON\n"
+	.string "soak, too.$"
 
-LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo: @ 81FFC21
+LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo:
 	.string "Hohoho! Hey, kid, you can reach\n"
 	.string "the hot springs from here.\p"
-	.string "If Pokémon are getting rest, so too\n"
-	.string "should their Trainers.$"
+	.string "If POKéMON are getting rest, so too\n"
+	.string "should their TRAINERS.$"
 
-LavaridgeTown_PokemonCenter_1F_Movement_LucyEnter:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	step_end
-
-LavaridgeTown_PokemonCenter_1F_Movement_LucyGoWait:
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	face_down
-	step_end
-
-LavaridgeTown_PokemonCenter_1F_Movement_LucyExitAroundPlayer:
-	walk_right
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_down
-	walk_down
-	step_end
-
-LavaridgeTown_PokemonCenter_1F_Movement_LucyExitFromSprings:
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_down
-	walk_down
-	step_end
-
-LavaridgeTown_PokemonCenter_1F_Movement_LucyExitNorth:
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	delay_8
-	step_end
-
-LavaridgeTown_PokemonCenter_1F_Movement_LucyExitEast:
-	walk_down
-	walk_left
-	walk_left
-	walk_down
-	walk_down
-	walk_down
-	delay_8
-	step_end

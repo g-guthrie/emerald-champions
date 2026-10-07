@@ -308,7 +308,7 @@ static void SetRandomQuestionData(void)
     monId = ((PLAYER_APPRENTICE.speciesIds[count]) >> (monId << 2)) & 0xF; \
 
 // Get the second move choice for the "Which move" question
-// Unlike the first move choice, this can be either a level up move or a teachable move
+// Unlike the first move choice, this can be either a level up move or a TM/HM move
 static u16 GetRandomAlternateMove(u8 monId)
 {
     u8 i, j;
@@ -346,22 +346,19 @@ static u16 GetRandomAlternateMove(u8 monId)
     {
         if (Random() % 2 == 0 || needTMs == TRUE)
         {
-            // Get a teachable move
-            // NOTE: Below is an infinite loop if a species that only learns teachable moves
+            // Get TM move
+            // NOTE: Below is an infinite loop if a species that only learns TMs for moves
             //       that are also in its level up learnset is assigned to an Apprentice
             do
             {
-                const u16 *teachableLearnset = GetSpeciesTeachableLearnset(species);
-                u32 numTeachableMoves = 0;
-
-                while (teachableLearnset[numTeachableMoves] != MOVE_UNAVAILABLE)
-                    numTeachableMoves++;
-
-                if (numTeachableMoves == 0)
-                    break;
-
-                move = teachableLearnset[Random() % numTeachableMoves];
-                shouldUseMove = TRUE;
+                // NOTE: Below is an infinite loop if a species which cannot learn TMs is assigned to an Apprentice
+                do
+                {
+                    id = (Random() % NUM_ALL_MACHINES) + 1;
+                    move = GetTMHMMoveId(id);
+                    shouldUseMove = CanLearnTeachableMove(species, move);
+                }
+                while (!shouldUseMove);
 
                 if (numLearnsetMoves <= MAX_MON_MOVES)
                     j = 0;
@@ -370,7 +367,7 @@ static u16 GetRandomAlternateMove(u8 monId)
 
                 for (; j < numLearnsetMoves; j++)
                 {
-                    // Keep looking until one not in the level up learnset is found
+                    // Keep looking for TMs until one not in the level up learnset is found
                     if ((learnset[j].move) == move)
                     {
                         shouldUseMove = FALSE;
@@ -1262,6 +1259,12 @@ const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, enum Language language)
     }
 }
 
+static void UNUSED Task_SwitchToFollowupFuncAfterButtonPress(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        SwitchTaskToFollowupFunc(taskId);
+}
+
 static void Task_ExecuteFuncAfterButtonPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
@@ -1277,4 +1280,10 @@ static void ExecuteFuncAfterButtonPress(void (*func)(void))
     u8 taskId = CreateTask(Task_ExecuteFuncAfterButtonPress, 1);
     gTasks[taskId].data[0] = (u32)(func);
     gTasks[taskId].data[1] = (u32)(func) >> 16;
+}
+
+static void UNUSED ExecuteFollowupFuncAfterButtonPress(TaskFunc task)
+{
+    u8 taskId = CreateTask(Task_SwitchToFollowupFuncAfterButtonPress, 1);
+    SetTaskFuncWithFollowupFunc(taskId, Task_SwitchToFollowupFuncAfterButtonPress, task);
 }

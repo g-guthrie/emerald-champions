@@ -112,6 +112,8 @@ static void AnimTask_OdorSleuthMovementWaitFinish(u8);
 static void MoveOdorSleuthClone(struct Sprite *);
 static void AnimTask_TeeterDanceMovement_Step(u8);
 static void AnimTask_SlackOffSquish_Step(u8);
+static void AnimTask_TeraCrystalShatter(struct Sprite *);
+static void AnimTask_TeraCrystalShatter_Step(struct Sprite *);
 
 const union AnimCmd gScratchAnimCmds[] =
 {
@@ -1166,8 +1168,52 @@ const struct SpriteTemplate gZSymbolSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
+const struct SpriteTemplate gTeraCrystalSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_TERA_CRYSTAL,
+    .paletteTag = ANIM_TAG_TERA_CRYSTAL,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
+    .affineAnims = gAffineAnims_LusterPurgeCircle,
+    .callback = AnimSpriteOnMonPos,
+};
 
-#undef tCounter
+const struct SpriteTemplate gTeraCrystalSpreadSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_TERA_SHATTER,
+    .paletteTag = ANIM_TAG_TERA_SHATTER,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .callback = AnimTask_TeraCrystalShatter,
+};
+
+// See AnimSpriteOnMonPos in battle_anim_mons.c for more specifics
+// Reuses the Mega Symbol affine animation seen in Mega Evolution
+// gBattleAnimArgs 0-3 used
+// 0, 1 used for position
+// 2, 3 as some control variables
+const struct SpriteTemplate gTeraSymbolSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_TERA_SYMBOL,
+    .paletteTag = ANIM_TAG_TERA_SYMBOL,
+    .oam = &gOamData_AffineDouble_ObjBlend_32x32,
+    .affineAnims = gSpriteAffineAnimTable_MegaSymbol,
+    .callback = AnimSpriteOnMonPos,
+};
+
+// Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
+// args[0] - initial x offset
+// args[1] - initial y offset
+// args[2] - y increment
+// args[3] - duration
+// args[4] - increments some sin parameter
+// args[5] - fixed sin parameter
+// args[6] - attacker or target
+const struct SpriteTemplate gTeraSmokeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SPARKLE_6,
+    .paletteTag = ANIM_TAG_SPARKLE_6,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .callback = AnimParticleInVortex,
+};
 
 const struct SpriteTemplate gPinkPetalVortexTemplate =
 {
@@ -1177,6 +1223,35 @@ const struct SpriteTemplate gPinkPetalVortexTemplate =
     .anims = gSweetScentPetalAnimCmdTable,
     .callback = AnimParticleInVortex
 };
+
+// Task data for AnimTask_TeraCrystalShatter
+#define tCounter    data[0]
+#define tDX         data[6]
+#define tDY         data[7]
+
+static void AnimTask_TeraCrystalShatter(struct Sprite *sprite)
+{
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
+    sprite->oam.tileNum += gBattleAnimArgs[0] * 4;
+
+    sprite->tCounter = 0;
+    sprite->tDX = gBattleAnimArgs[1];
+    sprite->tDY = gBattleAnimArgs[2];
+
+    sprite->callback = AnimTask_TeraCrystalShatter_Step;
+}
+
+static void AnimTask_TeraCrystalShatter_Step(struct Sprite *sprite)
+{
+    sprite->x += sprite->tDX;
+    sprite->y += sprite->tDY;
+
+    if (++sprite->tCounter > 15)
+        DestroyAnimSprite(sprite);
+}
+
+#undef tCounter
 
 void AnimBlackSmoke(struct Sprite *sprite)
 {
@@ -1933,7 +2008,7 @@ static void TormentAttacker_Step(u8 taskId)
         }
 
         y = task->data[3] + task->data[5];
-        spriteId = CreateSprite(&gThoughtBubbleSpriteTemplate, x, y, 6 - task->data[1]);
+        spriteId = CreateSpriteUnchecked(&gThoughtBubbleSpriteTemplate, x, y, 6 - task->data[1]);
         PlaySE12WithPanning(SE_M_METRONOME, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
 
         if (spriteId != MAX_SPRITES)
@@ -3914,7 +3989,7 @@ static void CreateSweatDroplets(u8 taskId, bool8 lowerDroplets)
 
     for (u32 i = 0; i < 4; i++)
     {
-        u8 spriteId = CreateSprite(&gFacadeSweatDropSpriteTemplate, xCoords[i], yCoords[i & 1], task->tSubpriority - 5);
+        u8 spriteId = CreateSpriteUnchecked(&gFacadeSweatDropSpriteTemplate, xCoords[i], yCoords[i & 1], task->tSubpriority - 5);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].sTimer = 0;
@@ -4130,7 +4205,7 @@ static void AnimTask_GlareEyeDots_Step(u8 taskId)
             // Create dot pair
             for (i = 0; i < 2; i++)
             {
-                u8 spriteId = CreateSprite(&gGlareEyeDotSpriteTemplate, x, y, 35);
+                u8 spriteId = CreateSpriteUnchecked(&gGlareEyeDotSpriteTemplate, x, y, 35);
                 if (spriteId != MAX_SPRITES)
                 {
                     if (!task->tIsContest)
@@ -4259,7 +4334,7 @@ void AnimTask_BarrageBall(u8 taskId)
     task->data[12] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     task->data[13] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     task->data[14] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) / 4;
-    task->data[15] = CreateSprite(&gBarrageBallSpriteTemplate, task->data[11], task->data[12], GetBattlerSpriteSubpriority(gBattleAnimTarget) - 5);
+    task->data[15] = CreateSpriteUnchecked(&gBarrageBallSpriteTemplate, task->data[11], task->data[12], GetBattlerSpriteSubpriority(gBattleAnimTarget) - 5);
     if (task->data[15] != MAX_SPRITES)
     {
         gSprites[task->data[15]].data[0] = 16;

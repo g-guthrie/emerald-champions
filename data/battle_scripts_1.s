@@ -44,6 +44,37 @@ BattleScript_MagnitudeMessage::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_Terastallization::
+	@ TODO: no string prints in S/V, but right now this helps with clarity
+	flushtextbox
+	printstring STRINGID_PKMNSTORINGENERGY
+	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
+	waitanimation
+	applyterastallization
+	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
+	waitanimation
+	printstring STRINGID_PKMNTERASTALLIZEDINTO
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_TeraFormChange::
+	@ TODO: no string prints in S/V, but right now this helps with clarity
+	flushtextbox
+	printstring STRINGID_PKMNSTORINGENERGY
+	handleformchange BS_ATTACKER, 0, FALSE @ Prevent species name from overriting type name
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
+	waitanimation
+	applyterastallization
+	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
+	waitanimation
+	printstring STRINGID_PKMNTERASTALLIZEDINTO
+	waitmessage B_WAIT_TIME_LONG
+	switchinabilities BS_ATTACKER
+	abilityonformchange BS_ATTACKER
+	effectsafterformchange
+	end3
+
 BattleScript_EffectStatChange::
 	attackcanceler
 	trymovestatchanges
@@ -272,6 +303,9 @@ BattleScript_EffectDoodle_AfterCopy:
 	recordability BS_ATTACKER
 	printstring STRINGID_PKMNCOPIEDFOE
 	waitmessage B_WAIT_TIME_LONG
+	tryendneutralizinggas BS_ATTACKER
+	trytoclearprimalweather
+	call BattleScript_TryRevertWeatherform
 	switchinabilities BS_ATTACKER
 	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_EffectDoodleMoveEnd
 	addbyte gBattleCommunication, 1
@@ -1054,13 +1088,13 @@ BattleScript_EffectEntrainment::
 	tryentrainment BattleScript_ButItFailed
 	attackanimation
 	waitanimation
-	switchinabilities BS_TARGET
 	printstring STRINGID_PKMNACQUIREDABILITY
 	waitmessage B_WAIT_TIME_LONG
+	tryendneutralizinggas
 	trytoclearprimalweather
 	call BattleScript_TryRevertWeatherform
 	flushtextbox
-	tryendneutralizinggas
+	switchinabilities BS_TARGET
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectLuckyChant::
@@ -1139,6 +1173,7 @@ BattleScript_EffectOverwriteAbility::
 	call BattleScript_TryRevertWeatherform
 	flushtextbox
 	tryendneutralizinggas
+	switchinabilities BS_TARGET
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectPowerSplit::
@@ -1399,6 +1434,10 @@ BattleScript_EffectHealBlock::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectHitEscape::
+	jumpiffainted BS_TARGET, FALSE, BattleScript_HitEscapeSwitch
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_TARGET
+BattleScript_HitEscapeSwitch:
 	call BattleScript_MoveSwitchPursuitRet
 	return
 
@@ -1793,10 +1832,6 @@ BattleScript_TwoTurnMoveCharging::
 	twoturnmoveschargestringandanimation
 	setadditionaleffects @ only onChargeTurnOnly effects will work here
 	return
-
-BattleScript_SkyDropCharging::
-	call BattleScript_TwoTurnMoveCharging
-	goto BattleScript_MoveEnd
 
 BattleScript_TwoTurnMovesSecondTurnRet:
 	setbyte sB_ANIM_TURN, 1
@@ -2488,6 +2523,9 @@ BattleScript_EffectRolePlay::
 	recordability BS_ATTACKER
 	printstring STRINGID_PKMNCOPIEDFOE
 	waitmessage B_WAIT_TIME_LONG
+	tryendneutralizinggas BS_ATTACKER
+	trytoclearprimalweather
+	call BattleScript_TryRevertWeatherform
 	switchinabilities BS_ATTACKER
 	goto BattleScript_MoveEnd
 
@@ -2605,8 +2643,6 @@ BattleScript_EffectSkillSwap_AfterAbilityPopUp:
 	switchinabilities BS_ATTACKER
 	switchinabilities BS_TARGET
 .endif
-	call BattleScript_TryRevertWeatherform
-	flushtextbox
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectImprison::
@@ -2679,7 +2715,6 @@ BattleScript_FaintBattler::
 	pause B_WAIT_TIME_LONG
 	dofaintanimation BS_FAINTED
 	copybyte sBATTLER, gBattlerFainted @ for message
-	tryvictorysong @ the last foe's faint message plays over the victory tune
 	printstring STRINGID_BATTLERFAINTED
 	tryconfusionafterskydrop BS_FAINTED
 	cleareffectsonfaint BS_FAINTED
@@ -2691,6 +2726,11 @@ BattleScript_FaintBattler::
 	tryactivatesoulheart
 	trytrainerslidemsgfirstoff BS_FAINTED
 	return
+
+BattleScript_GiveExp::
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_TARGET
+	end
 
 BattleScript_HandleFaintedMon::
 	setbyte sSHIFT_SWITCHED, 0
@@ -2773,6 +2813,7 @@ BattleScript_FaintedMonShiftSwitched:
 	copybyte sSAVED_BATTLER, gBattlerTarget
 	switchineffects BS_ATTACKER
 	switchinevents
+	resetsentmonsvalue
 	copybyte gBattlerTarget, sSAVED_BATTLER
 	goto BattleScript_FaintedMonSendOutNewEnd
 
@@ -2797,6 +2838,7 @@ BattleScript_HandleFaintedMonLoop::
 	trytrainerslidemsglaston BS_FAINTED
 	switchineffects BS_FAINTED_MULTIPLE_1
 	jumpifbytenotequal gBattlerFainted, gBattlersCount, BattleScript_HandleFaintedMonLoop
+	setbyte gBattlerFainted, 0
 BattleScript_HandleFaintedMonMultipleEnd::
 	switchinevents
 	trytrainerslidemsglaston BS_FAINTED_MULTIPLE_2
@@ -2859,12 +2901,28 @@ BattleScript_LocalBattleLost::
 	jumpifnowhiteout BattleScript_LocalBattleLostEnd_
 	jumpifbattletype BATTLE_TYPE_INGAME_PARTNER, BattleScript_LocalBattleLostPrintWhiteOut
 BattleScript_LocalBattleLostPrintWhiteOut::
+	getmoneyreward
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_LocalBattleLostEnd::
+.if B_WHITEOUT_MONEY >= GEN_4
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostEnd
+	printstring STRINGID_PLAYERWHITEOUT2_WILD
+	waitmessage B_WAIT_TIME_LONG
 	printstring STRINGID_PLAYERWHITEOUT3
 	waitmessage B_WAIT_TIME_LONG
 	end
+BattleScript_LocalBattleLostEnd::
+	printstring STRINGID_PLAYERWHITEOUT2_TRAINER
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_PLAYERWHITEOUT3
+	waitmessage B_WAIT_TIME_LONG
+	end
+.else
+	printstring STRINGID_PLAYERWHITEOUT3
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LocalBattleLostEnd::
+	end
+.endif
 
 BattleScript_CheckDomeDrew::
 	jumpifbyte CMP_EQUAL, gBattleOutcome, B_OUTCOME_DREW, BattleScript_LocalBattleLostEnd_
@@ -3030,6 +3088,45 @@ BattleScript_Pausex20::
 	pause B_WAIT_TIME_SHORT
 	return
 
+BattleScript_LevelUp::
+	fanfare MUS_LEVEL_UP
+	printstring STRINGID_PKMNGREWTOLV
+	setbyte sLVLBOX_STATE, 0
+	drawlvlupbox
+	handlelearnnewmove BattleScript_LearnedNewMove, BattleScript_LearnMoveReturn, TRUE
+	goto BattleScript_AskToLearnMove
+BattleScript_TryLearnMoveLoop::
+	handlelearnnewmove BattleScript_LearnedNewMove, BattleScript_LearnMoveReturn, FALSE
+BattleScript_AskToLearnMove::
+	buffermovetolearn
+	printstring STRINGID_TRYTOLEARNMOVE1
+	printstring STRINGID_TRYTOLEARNMOVE2
+	printstring STRINGID_TRYTOLEARNMOVE3
+	waitstate
+	setbyte sLEARNMOVE_STATE, 0
+	yesnoboxlearnmove BattleScript_ForgotAndLearnedNewMove
+.if P_ASK_MOVE_CONFIRMATION == TRUE
+	printstring STRINGID_STOPLEARNINGMOVE
+	waitstate
+	setbyte sLEARNMOVE_STATE, 0
+	yesnoboxstoplearningmove BattleScript_AskToLearnMove
+.endif
+	printstring STRINGID_DIDNOTLEARNMOVE
+	goto BattleScript_TryLearnMoveLoop
+BattleScript_ForgotAndLearnedNewMove::
+	printstring STRINGID_123POOF
+	printstring STRINGID_PKMNFORGOTMOVE
+	printstring STRINGID_ANDELLIPSIS
+BattleScript_LearnedNewMove::
+	buffermovetolearn
+	fanfare MUS_LEVEL_UP
+	printstring STRINGID_PKMNLEARNEDMOVE
+	waitmessage B_WAIT_TIME_LONG
+	updatechoicemoveonlvlup
+	goto BattleScript_TryLearnMoveLoop
+BattleScript_LearnMoveReturn::
+	return
+
 BattleScript_WeatherAbilityActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
@@ -3100,11 +3197,6 @@ BattleScript_IceBodyHeal::
 	printstring STRINGID_ICEBODYHPGAIN
 	waitmessage B_WAIT_TIME_LONG
 	return
-
-BattleScript_RestrictedMegaUnavailable::
-	printstring STRINGID_RESTRICTEDMEGAUNAVAILABLE
-	waitmessage B_WAIT_TIME_LONG
-	end3
 
 BattleScript_OverworldStatusStarts::
 	printfromtable gStartingStatusStringIds
@@ -3965,6 +4057,10 @@ BattleScript_TargetFormChangeWithStringNoPopup::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_IllusionOffAndTerastallization::
+	call BattleScript_IllusionOff
+	goto BattleScript_Terastallization
+
 BattleScript_IllusionOff::
 	call BattleScript_SwapFromSubstitute
 	playanimation BS_SCRIPTING, B_ANIM_ILLUSION_OFF
@@ -4144,7 +4240,7 @@ BattleScript_DoSelfConfusionDmg::
 	waitstate
 	tryselfconfusiondmgformchange
 	healthbarupdate BS_ATTACKER
-	datahpupdate BS_ATTACKER, ASSURANCE_IGNORE
+	datahpupdate BS_ATTACKER, ASSURANCE_DOUBLE
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_ATTACKER
@@ -4257,7 +4353,6 @@ BattleScript_YawnMakesAsleep::
 	waitstate
 	tryactivateitem BS_EFFECT_BATTLER, ACTIVATION_ON_STATUS_CHANGE
 	jumpfifsemiinvulnerable BS_EFFECT_BATTLER, STATE_SKY_DROP_TARGET, BattleScript_YawnEnd
-	jumpfifsemiinvulnerable BS_EFFECT_BATTLER, STATE_COMMANDER, BattleScript_YawnEnd
 	makevisible BS_EFFECT_BATTLER
 BattleScript_YawnEnd:
 	return
@@ -4902,6 +4997,13 @@ BattleScript_ProteanActivates::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_TeraShellDistortingTypeMatchups::
+	pause B_WAIT_TIME_SHORTEST
+	call BattleScript_AbilityPopUpScripting
+	printstring STRINGID_PKMNMADESHELLGLEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_CursedBodyActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_CURSEDBODYDISABLED
@@ -4921,7 +5023,7 @@ BattleScript_MummyActivates::
 	trytoclearprimalweather
 	call BattleScript_TryRevertWeatherform
 	flushtextbox
-	tryendneutralizinggas
+	tryendneutralizinggas BS_ATTACKER
 	return
 
 BattleScript_WanderingSpiritActivates::
@@ -5573,6 +5675,46 @@ BattleScript_AnnounceAirLockCloudNine::
 	call BattleScript_ActivateWeatherAbilities
 	return
 
+BattleScript_ActivateTeraformZero::
+	call BattleScript_AbilityPopUp
+	waitmessage B_WAIT_TIME_LONG
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_ANY, BattleScript_ActivateTeraformZero_RemoveWeather
+	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_NONE, BattleScript_ActivateTeraformZero_RemoveTerrain
+	goto BattleScript_ActivateTeraformZero_Ret
+BattleScript_ActivateTeraformZeroRemovesOnlyTerrain::
+	call BattleScript_AbilityPopUp
+	waitmessage B_WAIT_TIME_LONG
+	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_NONE, BattleScript_ActivateTeraformZero_RemoveTerrain
+	goto BattleScript_ActivateTeraformZero_Ret
+BattleScript_ActivateTeraformZero_RemoveWeather:
+	removeweather
+	printfromtable gWeatherEndsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_ActivateWeatherAbilities
+	jumpifterrain CMP_NOT_EQUAL, B_TERRAIN_NONE, BattleScript_ActivateTeraformZero_RemoveTerrain
+BattleScript_ActivateTeraformZero_RemoveTerrain:
+	removeterrain
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
+	printfromtable gTerrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ActivateTeraformZeroEffects:
+	saveattacker
+	savetarget
+	tryboosterenergy ON_ANY
+	resetterrainabilityflags
+	setbyte gBattlerAttacker, 0
+	sortbattlers
+BattleScript_ActivateTeraformZeroLoop:
+	copyarraywithindex gBattlerTarget, gBattlersBySpeed, gBattlerAttacker, 1
+	activateterrainchangeabilities BS_TARGET
+	activateweatherchangeabilities BS_TARGET
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_ActivateTeraformZeroLoop
+	restoreattacker
+	restoretarget
+BattleScript_ActivateTeraformZero_Ret:
+	return
+
 BattleScript_QuickClawActivation::
 	flushtextbox
 	call BattleScript_ItemPopUp_Attacker
@@ -6196,24 +6338,24 @@ BattleScript_SleepClausePrevents::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_RestartBattleNoPenalty::
-	end
-
-BattleScript_QuestionRestartBattle::
-	printselectionstring STRINGID_QUESTIONRESTARTBATTLE
-	forfeityesnobox
-	endselectionscript
-
 BattleScript_QuestionForfeitBattle::
 	printselectionstring STRINGID_QUESTIONFORFEITBATTLE
 	forfeityesnobox
 	endselectionscript
 
 BattleScript_ForfeitBattleGaveMoney::
-	goto BattleScript_PrintPlayerForfeited
+	getmoneyreward
+.if B_WHITEOUT_MONEY >= GEN_4
+	printstring STRINGID_PLAYERWHITEOUT2_TRAINER
+.else
+	printstring STRINGID_PLAYERWHITEOUT3
+.endif
+	waitmessage B_WAIT_TIME_LONG
+	end
 
 BattleScript_Attackstring::
 	printattackstring
+	waitmessage B_WAIT_TIME_SHORT
 	return
 
 BattleScript_SubmoveAttackstring::

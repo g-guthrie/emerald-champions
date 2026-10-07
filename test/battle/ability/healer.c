@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-DOUBLE_BATTLE_TEST("Healer cures adjacent ally's status condition 50% of the time (Champions)")
+DOUBLE_BATTLE_TEST("Healer cures adjacent ally's status condition 30% of the time")
 {
     u16 status;
     PARAMETRIZE { status = STATUS1_SLEEP; }
@@ -11,9 +11,8 @@ DOUBLE_BATTLE_TEST("Healer cures adjacent ally's status condition 50% of the tim
     PARAMETRIZE { status = STATUS1_PARALYSIS; }
     PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
     PARAMETRIZE { status = STATUS1_FROSTBITE; }
-    PASSES_RANDOMLY(50, 100, RNG_HEALER);
+    PASSES_RANDOMLY(30, 100, RNG_HEALER);
     GIVEN {
-        WITH_CONFIG(B_UPDATED_ABILITY_DATA, GEN_CHAMPIONS);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Status1(status); }
@@ -45,7 +44,6 @@ DOUBLE_BATTLE_TEST("Healer cures adjacent ally's status condition 50% of the tim
     }
 }
 
-
 DOUBLE_BATTLE_TEST("Healer cures status condition before burn or poison damage is dealt")
 {
     u16 status;
@@ -53,9 +51,8 @@ DOUBLE_BATTLE_TEST("Healer cures status condition before burn or poison damage i
     PARAMETRIZE { status = STATUS1_BURN; }
     PARAMETRIZE { status = STATUS1_TOXIC_POISON; }
     PARAMETRIZE { status = STATUS1_FROSTBITE; }
-    PASSES_RANDOMLY(50, 100, RNG_HEALER);
+    PASSES_RANDOMLY(30, 100, RNG_HEALER);
     GIVEN {
-        WITH_CONFIG(B_UPDATED_ABILITY_DATA, GEN_CHAMPIONS);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Status1(status); }
@@ -83,3 +80,4 @@ DOUBLE_BATTLE_TEST("Healer cures status condition before burn or poison damage i
 }
 
 // Triple battles
+TO_DO_BATTLE_TEST("Healer has a 30% chance of curing each of its ally's status conditions independently");

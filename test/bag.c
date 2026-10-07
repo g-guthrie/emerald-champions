@@ -1,155 +1,51 @@
 #include "global.h"
-#include "main.h"
-#include "malloc.h"
 #include "battle.h"
 #include "event_data.h"
 #include "item_menu.h"
-#include "load_save.h"
-#include "strings.h"
 #include "pokemon.h"
-#include "constants/item_effects.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
 
-TEST("Item effect parameters: absent effects return zero and healing offsets retain their data source")
+TEST("TMs and HMs are sorted correctly in the bag")
 {
-    EXPECT(GetItemEffect(ITEM_NONE) == NULL);
-    EXPECT(GetItemEffect(ITEM_POKE_BALL) == NULL);
-    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_NONE, 4, ITEM4_HEAL_HP), 0);
-    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_POKE_BALL, 4, ITEM4_HEAL_HP), 0);
-    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_POTION, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START);
-    EXPECT_EQ(GetItemEffectParamOffset(B_BATTLER_0, ITEM_FULL_RESTORE, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START);
-    for (u32 battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
-    {
-        struct BattleEnigmaBerry saved = gEnigmaBerries[battler];
-        memset(gEnigmaBerries[battler].itemEffect, 0, sizeof(gEnigmaBerries[battler].itemEffect));
-        // An HP EV parameter preceding healing shifts the heal offset by one.
-        gEnigmaBerries[battler].itemEffect[4] = ITEM4_EV_HP | ITEM4_HEAL_HP;
-        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START + 1);
-        gEnigmaBerries[battler].itemEffect[4] = ITEM4_EV_HP | ITEM4_EV_ATK | ITEM4_HEAL_HP | ITEM4_HEAL_PP;
-        gEnigmaBerries[battler].itemEffect[5] = ITEM5_EV_DEF | ITEM5_EV_SPEED;
-        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 4, ITEM4_HEAL_HP), ITEM_EFFECT_ARG_START + 2);
-        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 4, ITEM4_HEAL_PP), ITEM_EFFECT_ARG_START + 3);
-        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 5, ITEM5_EV_DEF), ITEM_EFFECT_ARG_START + 4);
-        EXPECT_EQ(GetItemEffectParamOffset(battler, ITEM_ENIGMA_BERRY_E_READER, 5, ITEM5_EV_SPEED), ITEM_EFFECT_ARG_START + 5);
-        gEnigmaBerries[battler] = saved;
-    }
-}
+    struct BagPocket *pocket = &gBagPockets[POCKET_TM_HM];
 
-static const enum Item sEmeraldChampionsMegaStoneArchiveItems[] =
-{
-#include "../src/data/emerald_champions_mega_stones.h"
-};
+    ASSUME(GetItemPocket(ITEM_HM07) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_TM25) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_TM14) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_TM42) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_HM05) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_TM05) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_TM01) == POCKET_TM_HM);
+    ASSUME(GetItemPocket(ITEM_HM02) == POCKET_TM_HM);
 
-TEST("Inclement-style bag routes preparation, battle, and Mega items to dedicated pockets")
-{
-    EXPECT_EQ(GetItemPocket(ITEM_POTION), POCKET_MEDICINE);
-    EXPECT_EQ(GetItemPocket(ITEM_RARE_CANDY), POCKET_MEDICINE);
-    EXPECT_EQ(GetItemPocket(ITEM_ABILITY_CAPSULE), POCKET_MEDICINE);
-    EXPECT_EQ(GetItemPocket(ITEM_LEFTOVERS), POCKET_BATTLE);
-    EXPECT_EQ(GetItemPocket(ITEM_X_ATTACK), POCKET_BATTLE);
-    EXPECT_EQ(GetItemPocket(ITEM_CHARIZARDITE_X), POCKET_MEGA_STONES);
-    EXPECT_EQ(GetItemPocket(ITEM_RED_ORB), POCKET_MEGA_STONES);
-    EXPECT_EQ(GetItemPocket(ITEM_FIRE_STONE), POCKET_ITEMS);
-}
+    /*
+     * Note: I would add a test to make sure that TMs are sorted correctly by move name,
+     * but downstream users are likely to rearrange TMs so this would just be a nuisance.
+     */
 
-TEST("The Bag has seven pockets and none of them is a machine case")
-{
-    EXPECT_EQ(POCKETS_COUNT, 7);
-    for (enum Pocket pocket = 0; pocket < POCKETS_COUNT; pocket++)
-        EXPECT(gPocketNamesStringsTable[pocket] != NULL);
-}
+    RUN_OVERWORLD_SCRIPT(
+        additem ITEM_HM07;
+        additem ITEM_TM25;
+        additem ITEM_TM14;
+        additem ITEM_TM42;
+        additem ITEM_HM05;
+        additem ITEM_TM05;
+        additem ITEM_TM01;
+        additem ITEM_HM02;
+    );
 
-TEST("Mega pocket holds the complete Emerald Champions archive and both Primal Orbs")
-{
-    ClearBag();
+    SortItemsInBag(&gBagPockets[POCKET_TM_HM], SORT_BY_INDEX);
 
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsMegaStoneArchiveItems); i++)
-        EXPECT(AddBagItem(sEmeraldChampionsMegaStoneArchiveItems[i], 1));
-    EXPECT(AddBagItem(ITEM_RED_ORB, 1));
-    EXPECT(AddBagItem(ITEM_BLUE_ORB, 1));
-
-    EXPECT_EQ(ARRAY_COUNT(sEmeraldChampionsMegaStoneArchiveItems) + 2, BAG_MEGASTONES_COUNT);
-    EXPECT_EQ(GetBagItemId(POCKET_MEGA_STONES, BAG_MEGASTONES_COUNT - 1), ITEM_BLUE_ORB);
-}
-
-TEST("Legacy five-pocket saves migrate items into the seven-pocket layout")
-{
-    ClearBag();
-
-    gSaveBlock1Ptr->bag.items[0].itemId = ITEM_POTION;
-    gSaveBlock1Ptr->bag.items[0].quantity = 3 ^ gSaveBlock2Ptr->encryptionKey;
-    gSaveBlock1Ptr->bag.items[1].itemId = ITEM_LEFTOVERS;
-    gSaveBlock1Ptr->bag.items[1].quantity = 2 ^ gSaveBlock2Ptr->encryptionKey;
-    gSaveBlock1Ptr->bag.items[2].itemId = ITEM_CHARIZARDITE_X;
-    gSaveBlock1Ptr->bag.items[2].quantity = 1 ^ gSaveBlock2Ptr->encryptionKey;
-    gSaveBlock3Ptr->bagPocketLayoutMagic = 0;
-    gSaveBlock3Ptr->bagPocketLayoutMagicInverse = 0;
-
-    MigrateBagPocketsIfNeeded();
-
-    EXPECT(CheckBagHasItem(ITEM_POTION, 3));
-    EXPECT(CheckBagHasItem(ITEM_LEFTOVERS, 2));
-    EXPECT(CheckBagHasItem(ITEM_CHARIZARDITE_X, 1));
-    EXPECT_EQ(GetBagItemId(POCKET_MEDICINE, 0), ITEM_POTION);
-    EXPECT_EQ(GetBagItemId(POCKET_BATTLE, 0), ITEM_LEFTOVERS);
-    EXPECT_EQ(GetBagItemId(POCKET_MEGA_STONES, 0), ITEM_CHARIZARDITE_X);
-}
-
-TEST("Emerald Champions link-battle Bag restore preserves every segmented pocket region")
-{
-    static const u32 oldKey = 0x12345678;
-    static const u32 newKey = 0x89ABCDEF;
-    static const struct
-    {
-        enum Pocket pocket;
-        u32 slot;
-        enum Item item;
-        u16 quantity;
-    } cases[] =
-    {
-        {POCKET_ITEMS,       0,                                         ITEM_FIRE_STONE,    1},
-        {POCKET_ITEMS,       BAG_LEGACY_ITEMS_COUNT,                    ITEM_METAL_COAT,    2},
-        {POCKET_MEDICINE,    0,                                         ITEM_POTION,        3},
-        {POCKET_BATTLE,      0,                                         ITEM_LEFTOVERS,     4},
-        {POCKET_BERRIES,     0,                                         ITEM_ORAN_BERRY,     7},
-        {POCKET_BERRIES,     BAG_LEGACY_BERRIES_COUNT,                  ITEM_SITRUS_BERRY,   8},
-        {POCKET_POKE_BALLS,  0,                                         ITEM_POKE_BALL,      9},
-        {POCKET_POKE_BALLS,  BAG_LEGACY_POKEBALLS_COUNT,                ITEM_GREAT_BALL,    10},
-        {POCKET_KEY_ITEMS,   0,                                         ITEM_MACH_BIKE,     11},
-        {POCKET_KEY_ITEMS,   BAG_LEGACY_KEYITEMS_COUNT,                 ITEM_ACRO_BIKE,     12},
-        {POCKET_MEGA_STONES, 0,                                         ITEM_CHARIZARDITE_X, 13},
-        {POCKET_MEGA_STONES, BAG_MEGASTONES_PRIMARY_COUNT,              ITEM_VENUSAURITE,   14},
-    };
-
-    gSaveBlock2Ptr->encryptionKey = oldKey;
-    ClearBag();
-    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
-    {
-        BagPocket_SetSlotItemIdAndCount(
-            &gBagPockets[cases[i].pocket],
-            cases[i].slot,
-            cases[i].item,
-            cases[i].quantity
-        );
-    }
-
-    LoadPlayerBag();
-    ApplyNewEncryptionKeyToBagItems(newKey);
-    gSaveBlock2Ptr->encryptionKey = newKey;
-    SavePlayerBag();
-
-    EXPECT_EQ(gSaveBlock2Ptr->encryptionKey, newKey);
-    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
-    {
-        struct ItemSlot slot = BagPocket_GetSlotData(
-            &gBagPockets[cases[i].pocket],
-            cases[i].slot
-        );
-
-        EXPECT_EQ(slot.itemId, cases[i].item);
-        EXPECT_EQ(slot.quantity, cases[i].quantity);
-    }
+    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_TM01);
+    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_TM05);
+    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TM14);
+    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_TM25);
+    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_TM42);
+    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_HM02);
+    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_HM05);
+    EXPECT_EQ(pocket->itemSlots[7].itemId, ITEM_HM07);
+    EXPECT_EQ(pocket->itemSlots[8].itemId, ITEM_NONE);
 }
 
 TEST("Berries are sorted correctly in the bag")
@@ -266,80 +162,4 @@ TEST("Items are correctly sorted and compacted in the bag")
     EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
-}
-
-TEST("Key items can be registered to SELECT, L and R independently")
-{
-    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
-    gSaveBlock1Ptr->registeredItemL = ITEM_NONE;
-    gSaveBlock1Ptr->registeredItemR = ITEM_NONE;
-
-    // Registering to SELECT only touches the SELECT slot.
-    RegisterKeyItemToButton(ITEM_MACH_BIKE, REGISTER_BUTTON_SELECT);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_MACH_BIKE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemL, ITEM_NONE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_NONE);
-
-    // Registering a different item to L only touches the L slot.
-    RegisterKeyItemToButton(ITEM_ACRO_BIKE, REGISTER_BUTTON_L);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_MACH_BIKE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemL, ITEM_ACRO_BIKE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_NONE);
-
-    // Re-registering the Acro Bike to R moves it, clearing L. SELECT is untouched.
-    RegisterKeyItemToButton(ITEM_ACRO_BIKE, REGISTER_BUTTON_R);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_MACH_BIKE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemL, ITEM_NONE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_ACRO_BIKE);
-
-    EXPECT(GetRegisteredItemButton(ITEM_ACRO_BIKE, NULL));
-    EXPECT(!GetRegisteredItemButton(ITEM_POTION, NULL));
-
-    // Registering a new item onto a button that already holds one replaces it.
-    RegisterKeyItemToButton(ITEM_BICYCLE, REGISTER_BUTTON_R);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_BICYCLE);
-    EXPECT(!GetRegisteredItemButton(ITEM_ACRO_BIKE, NULL));
-
-    // Deselecting unbinds an item from whichever button holds it.
-    DeselectRegisteredKeyItem(ITEM_MACH_BIKE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItem, ITEM_NONE);
-    EXPECT_EQ(gSaveBlock1Ptr->registeredItemR, ITEM_BICYCLE);
-}
-
-static void BagAllocationTestReturn(void) {}
-static void BagAllocationTestExplicitReturn(void) {}
-
-TEST("Bag allocation: exhausted heap returns through explicit or remembered callback")
-{
-    bool32 explicitCallback;
-    PARAMETRIZE { explicitCallback = FALSE; }
-    PARAMETRIZE { explicitCallback = TRUE; }
-    struct BagPosition oldPosition = gBagPosition;
-    MainCallback oldCallback = gMain.callback2;
-    void *blocks[64];
-    u32 count = 0;
-    const struct MemBlock *head = HeapHead();
-    const struct MemBlock *block = head;
-    gBagPosition.exitCallback = BagAllocationTestReturn;
-    // Occupy every free block that could hold the Bag, without replacing
-    // the harness heap or disturbing its existing allocations.
-    do
-    {
-        if (!block->allocated && block->size >= sizeof(struct BagMenu))
-        {
-            ASSUME(count < ARRAY_COUNT(blocks));
-            blocks[count++] = AllocUnchecked(block->size);
-        }
-        block = block->next;
-    } while (block != head);
-    GoToBagMenu(ITEMMENULOCATION_LAST, POCKETS_COUNT,
-        explicitCallback ? BagAllocationTestExplicitReturn : NULL);
-    MainCallback actualCallback = gMain.callback2;
-    bool32 noBag = gBagMenu == NULL;
-    for (u32 i = 0; i < count; i++)
-        Free(blocks[i]);
-    gBagPosition = oldPosition;
-    SetMainCallback2(oldCallback);
-    EXPECT(noBag);
-    EXPECT(actualCallback == (explicitCallback ? BagAllocationTestExplicitReturn : BagAllocationTestReturn));
 }

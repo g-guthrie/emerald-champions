@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "pokemon.h"
 #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "party_menu.h"
 #include "event_data.h"
 #include "constants/abilities.h"
@@ -33,7 +34,9 @@ void CloseMainBattleScreen(void)
 
 void AllocateBattleResources(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+        InitTrainerTowerBattleStruct();
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         InitTrainerHillBattleStruct();
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
@@ -51,6 +54,7 @@ void AllocateBattleResources(void)
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));
     gBattleResources->battleScriptsStack = AllocZeroed(sizeof(*gBattleResources->battleScriptsStack));
     gBattleResources->battleCallbackStack = AllocZeroed(sizeof(*gBattleResources->battleCallbackStack));
+    gBattleResources->beforeLvlUp = AllocZeroed(sizeof(*gBattleResources->beforeLvlUp));
 
     gLinkBattleSendBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
     gLinkBattleRecvBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
@@ -66,7 +70,9 @@ void AllocateBattleResources(void)
 
 void FreeBattleResources(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
+        FreeTrainerTowerBattleStruct();
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
         FreeTrainerHillBattleStruct();
 
     gFieldTimers.terrain = 0;
@@ -82,6 +88,7 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleResources->secretBase);
         FREE_AND_SET_NULL(gBattleResources->battleScriptsStack);
         FREE_AND_SET_NULL(gBattleResources->battleCallbackStack);
+        FREE_AND_SET_NULL(gBattleResources->beforeLvlUp);
         FREE_AND_SET_NULL(gBattleResources);
 
         FREE_AND_SET_NULL(gLinkBattleSendBuffer);

@@ -50,12 +50,12 @@ SealedChamber_OuterRoom_Braille_DigHere:
 	brailleformat 7, 4, 23, 15, 10, 7
 	.braille "DIG HERE.$"
 
-SealedChamber_InnerRoom_Braille_ThreeRecords:
+SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth:
 	brailleformat 0, 0, 29, 19, 3, 3
-	.braille "STONE.\n"
-	.braille "STORM.\n"
-	.braille "SEA.\n"
-	.braille "REMEMBER.$"
+	.braille "FIRST COMES\n"
+	.braille "WAILORD.\n"
+	.braille "LAST COMES\n"
+	.braille "RELICANTH.$"
 
 SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived:
 	brailleformat 2, 0, 26, 19, 5, 3
@@ -99,8 +99,7 @@ DesertRuins_Braille_UseRockSmash:
 	brailleformat 1, 0, 27, 19, 4, 3
 	.braille "LEFT, LEFT,\n"
 	.braille "DOWN, DOWN.\n"
-	.braille "PRESS A\n"
-	.braille "TO USE\n"
+	.braille "THEN, USE\n"
 	.braille "ROCK SMASH.$"
 
 IslandCave_Braille_RunLapAroundWall:
@@ -115,28 +114,162 @@ AncientTomb_Braille_ShineInTheMiddle:
 	.braille "THOSE WHO\n"
 	.braille "INHERIT OUR\n"
 	.braille "WILL, SHINE\n"
-	.braille "IN THE MIDDLE.\n"
-	.braille "PRESS A\n"
-	.braille "FOR FLASH.$"
+	.braille "IN THE MIDDLE.$"
 
-SealedChamber_InnerRoom_Braille_Regigigas:
+@ FRLG
+Braille_Text_Up::
 	brailleformat 3, 0, 25, 19, 6, 3
-	.braille "BODIES OF\n"
-	.braille "ROCK, ICE,\n"
-	.braille "AND STEEL.\n"
-	.braille "CATCH THREE.\n"
-	.braille "THE KING\n"
-	.braille "SHALL AWAKEN.$"
+	.braille "UP$"
 
-@ ---------------------------------------------------------------------------
-@ Restored from Inclement Emerald: the Regi trio braille clue, referenced by
-@ the Inclement Sealed Chamber inner-room scripts.
-@ Additive only; no existing symbol was changed.
-@ ---------------------------------------------------------------------------
+Braille_Text_Down::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "DOWN$"
 
-SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth:
-	brailleformat 0, 0, 29, 19, 3, 3
-	.braille "FIRST COMES\n"
-	.braille "WAILORD.\n"
-	.braille "LAST COMES\n"
-	.braille "RELICANTH.$"
+Braille_Text_Right::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "RIGHT$"
+
+Braille_Text_Left::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "LEFT$"
+
+Braille_Text_Cut::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "CUT$"
+
+Braille_Text_ABC::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "ABC$"
+
+Braille_Text_GHI::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "GHI$"
+
+Braille_Text_MNO::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "MNO$"
+
+Braille_Text_TUV::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "TUV$"
+
+Braille_Text_DEF::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "DEF$"
+
+Braille_Text_JKL::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "JKL$"
+
+Braille_Text_PQRS::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "PQRS$"
+
+Braille_Text_WXYZ::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "WXYZ$"
+
+Braille_Text_Period::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille ".$"
+
+Braille_Text_Comma::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille ",$"
+
+Braille_Text_Everything::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "EVERYTHING$"
+
+Braille_Text_HasMeaning1::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "HAS MEANING$"
+
+Braille_Text_Existence::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "EXISTENCE$"
+
+Braille_Text_HasMeaning2::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "HAS MEANING$"
+
+Braille_Text_BeingAlive::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "BEING ALIVE$"
+
+Braille_Text_HasMeaning3::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "HAS MEANING$"
+
+Braille_Text_HaveDreams::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "HAVE DREAMS$"
+
+Braille_Text_UsePower::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "USE POWER.$"
+
+Braille_Text_LetTheTwo::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "LET THE TWO$"
+
+Braille_Text_Glittering::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "GLITTERING$"
+
+Braille_Text_Stones::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "STONES$"
+
+Braille_Text_OneInRed::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "ONE IN RED$"
+
+Braille_Text_OneInBlue::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "ONE IN BLUE$"
+
+Braille_Text_ConnectThe::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "CONNECT THE$"
+
+Braille_Text_Past::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "PAST.$"
+
+Braille_Text_TwoFriends::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "TWO FRIENDS$"
+
+Braille_Text_Sharing::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "SHARING$"
+
+Braille_Text_PowerOpen::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "POWER OPEN$"
+
+Braille_Text_AWindowTo::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "A WINDOW TO$"
+
+Braille_Text_ANewWorld::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "A NEW WORLD$"
+
+Braille_Text_ThatGlows::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "THAT GLOWS.$"
+
+Braille_Text_TheNext::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "THE NEXT$"
+
+Braille_Text_WorldWaits::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "WORLD WAITS$"
+
+Braille_Text_ForYou::
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "FOR YOU.$"
+

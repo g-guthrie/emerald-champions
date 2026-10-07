@@ -107,8 +107,9 @@ enum {
     NUM_INFO_CARD_WINDOWS
 };
 
+static u8 GetDomeTrainerMonIvs(u16);
 static void SwapDomeTrainers(int, int, u16 *);
-static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, int *stats);
+static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats);
 static void CreateDomeOpponentMons(u16);
 static int SelectOpponentMons_Good(u16, bool8);
 static int SelectOpponentMons_Bad(u16, bool8);
@@ -916,49 +917,49 @@ static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 // The third line of text on a trainers info card. It that gives information about their party's stat spread (based on their Pokémon's effort values and Nature).
 static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
-    COMPOUND_STRING("Emphasizes HP and Attack."),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
-    COMPOUND_STRING("Emphasizes HP and Defense."),
-    COMPOUND_STRING("Emphasizes HP and Speed."),
-    COMPOUND_STRING("Emphasizes HP and Sp. Atk."),
-    COMPOUND_STRING("Emphasizes HP and Sp. Def."),
-    COMPOUND_STRING("Emphasizes Attack and Defense."),         // DOME_TEXT_ATK starts here
-    COMPOUND_STRING("Emphasizes Attack and Speed."),
-    COMPOUND_STRING("Emphasizes Attack and Sp. Atk."),
-    COMPOUND_STRING("Emphasizes Attack and Sp. Def."),
-    COMPOUND_STRING("Emphasizes Defense and Speed."),          // DOME_TEXT_DEF starts here
-    COMPOUND_STRING("Emphasizes Defense and Sp. Atk."),
-    COMPOUND_STRING("Emphasizes Defense and Sp. Def."),
-    COMPOUND_STRING("Emphasizes Speed and Sp. Atk."),          // DOME_TEXT_SPEED starts here
-    COMPOUND_STRING("Emphasizes Speed and Sp. Def."),
-    COMPOUND_STRING("Emphasizes Sp. Atk and Sp. Def."),        // DOME_TEXT_SPATK starts here
+    COMPOUND_STRING("Emphasizes HP and ATTACK."),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
+    COMPOUND_STRING("Emphasizes HP and DEFENSE."),
+    COMPOUND_STRING("Emphasizes HP and SPEED."),
+    COMPOUND_STRING("Emphasizes HP and SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes HP and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes ATTACK and DEFENSE."),         // DOME_TEXT_ATK starts here
+    COMPOUND_STRING("Emphasizes ATTACK and SPEED."),
+    COMPOUND_STRING("Emphasizes ATTACK and SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes ATTACK and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes DEFENSE and SPEED."),          // DOME_TEXT_DEF starts here
+    COMPOUND_STRING("Emphasizes DEFENSE and SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes DEFENSE and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes SPEED and SP. ATTACK."),       // DOME_TEXT_SPEED starts here
+    COMPOUND_STRING("Emphasizes SPEED and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes SP. ATTACK and SP. DEFENSE."), // DOME_TEXT_SPATK starts here
     COMPOUND_STRING("Emphasizes HP."),                         // DOME_TEXT_ONE_GOOD_STAT starts here
-    COMPOUND_STRING("Emphasizes Attack."),
-    COMPOUND_STRING("Emphasizes Defense."),
-    COMPOUND_STRING("Emphasizes Speed."),
-    COMPOUND_STRING("Emphasizes Sp. Atk."),
-    COMPOUND_STRING("Emphasizes Sp. Def."),
-    COMPOUND_STRING("Neglects HP and Attack."),                // DOME_TEXT_TWO_BAD_STATS starts here
-    COMPOUND_STRING("Neglects HP and Defense."),
-    COMPOUND_STRING("Neglects HP and Speed."),
-    COMPOUND_STRING("Neglects HP and Sp. Atk."),
-    COMPOUND_STRING("Neglects HP and Sp. Def."),
-    COMPOUND_STRING("Neglects Attack and Defense."),
-    COMPOUND_STRING("Neglects Attack and Speed."),
-    COMPOUND_STRING("Neglects Attack and Sp. Atk."),
-    COMPOUND_STRING("Neglects Attack and Sp. Def."),
-    COMPOUND_STRING("Neglects Defense and Speed."),
-    COMPOUND_STRING("Neglects Defense and Sp. Atk."),
-    COMPOUND_STRING("Neglects Defense and Sp. Def."),
-    COMPOUND_STRING("Neglects Speed and Sp. Atk."),
-    COMPOUND_STRING("Neglects Speed and Sp. Def."),
-    COMPOUND_STRING("Neglects Sp. Atk and Sp. Def."),
+    COMPOUND_STRING("Emphasizes ATTACK."),
+    COMPOUND_STRING("Emphasizes DEFENSE."),
+    COMPOUND_STRING("Emphasizes SPEED."),
+    COMPOUND_STRING("Emphasizes SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes SP. DEFENSE."),
+    COMPOUND_STRING("Neglects HP and ATTACK."),                // DOME_TEXT_TWO_BAD_STATS starts here
+    COMPOUND_STRING("Neglects HP and DEFENSE."),
+    COMPOUND_STRING("Neglects HP and SPEED."),
+    COMPOUND_STRING("Neglects HP and SP. ATTACK."),
+    COMPOUND_STRING("Neglects HP and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects ATTACK and DEFENSE."),
+    COMPOUND_STRING("Neglects ATTACK and SPEED."),
+    COMPOUND_STRING("Neglects ATTACK and SP. ATTACK."),
+    COMPOUND_STRING("Neglects ATTACK and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects DEFENSE and SPEED."),
+    COMPOUND_STRING("Neglects DEFENSE and SP. ATTACK."),
+    COMPOUND_STRING("Neglects DEFENSE and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects SPEED and SP. ATTACK."),
+    COMPOUND_STRING("Neglects SPEED and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects SP. ATTACK and SP. DEFENSE."),
     COMPOUND_STRING("Neglects HP."),                           // DOME_TEXT_ONE_BAD_STAT starts here
-    COMPOUND_STRING("Neglects Attack."),
-    COMPOUND_STRING("Neglects Defense."),
-    COMPOUND_STRING("Neglects Speed."),
-    COMPOUND_STRING("Neglects Sp. Atk."),
-    COMPOUND_STRING("Neglects Sp. Def."),
-    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("Raises Pokémon in a well-balanced way."),
+    COMPOUND_STRING("Neglects ATTACK."),
+    COMPOUND_STRING("Neglects DEFENSE."),
+    COMPOUND_STRING("Neglects SPEED."),
+    COMPOUND_STRING("Neglects SP. ATTACK."),
+    COMPOUND_STRING("Neglects SP. DEFENSE."),
+    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("Raises POKéMON in a well-balanced way."),
 };
 
 static const u8 sInfoTrainerMonX[FRONTIER_PARTY_SIZE] = {104, 136, 104};
@@ -1917,6 +1918,7 @@ static void InitDomeTrainers(void)
     int monId;
     u16 *rankingScores;
     int *statValues;
+    u8 ivs = 0;
 
     species[0] = SPECIES_NONE;
     species[1] = SPECIES_NONE;
@@ -2037,10 +2039,11 @@ static void InitDomeTrainers(void)
     {
         monTypesBits = 0;
         rankingScores[i] = 0;
+        ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
-                             monLevel, statValues);
+                             monLevel, ivs, statValues);
 
             rankingScores[i] += statValues[STAT_ATK];
             rankingScores[i] += statValues[STAT_DEF];
@@ -2111,14 +2114,40 @@ static void InitDomeTrainers(void)
     Free(statValues);
 }
 
-static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, int *stats)
+#define CALC_STAT(base, statIndex)                                                          \
+{                                                                                           \
+    u8 baseStat = gSpeciesInfo[fmon->species].base;                                                 \
+    stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
+    stats[statIndex] = (u8) ModifyStatByNature(fmon->nature, stats[statIndex], statIndex);        \
+}
+
+static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats)
 {
-    // TrainerMon EVs use Showdown order; native stat order puts Speed fourth.
-    static const u8 evIndices[NUM_STATS] = {0, 1, 2, 5, 3, 4};
+    int evs[NUM_STATS];
+
     for (enum Stat i = 0; i < NUM_STATS; i++)
-        stats[i] = CalculateSpeciesStat(fmon->species, fmon->nature, i, level,
-                                       fmon->ev != NULL ? fmon->ev[evIndices[i]] : 0,
-                                       fmon->iv ? (fmon->iv >> (i * 5)) & MAX_IV_MASK : MAX_PER_STAT_IVS);
+    {
+        if (fmon->ev != NULL)
+            evs[i] = fmon->ev[i];
+        else
+            evs[i] = 0;
+    }
+
+    if (HasShedinjaHPHandling(fmon->species))
+    {
+        stats[STAT_HP] = 1;
+    }
+    else
+    {
+        int n = 2 * GetSpeciesBaseHP(fmon->species);
+        stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
+    }
+
+    CALC_STAT(baseAttack, STAT_ATK);
+    CALC_STAT(baseDefense, STAT_DEF);
+    CALC_STAT(baseSpeed, STAT_SPEED);
+    CALC_STAT(baseSpAttack, STAT_SPATK);
+    CALC_STAT(baseSpDefense, STAT_SPDEF);
 }
 
 static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
@@ -2153,9 +2182,9 @@ static void InitDomeOpponentParty(void)
 static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
     #ifdef BUGFIX
-    u8 fixedIv = GetFrontierTrainerFixedIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
+    u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
     #else
-    u8 fixedIv = GetFrontierTrainerFixedIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
+    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
     #endif
     u8 level = SetFacilityPtrsGetLevel();
 
@@ -2468,6 +2497,32 @@ static int GetTypeEffectivenessPoints(enum Move move, enum Species targetSpecies
     return typePower;
 }
 
+// Duplicate of GetFrontierTrainerFixedIvs
+// NOTE: In CreateDomeOpponentMon a tournament trainer ID (0-15) is passed instead, resulting in all IVs of 3
+//       To fix, see CreateDomeOpponentMon
+static u8 GetDomeTrainerMonIvs(u16 trainerId)
+{
+    u8 fixedIv;
+
+    if (trainerId <= FRONTIER_TRAINER_JILL)         // 0 - 99
+        fixedIv = 3;
+    else if (trainerId <= FRONTIER_TRAINER_CHLOE)   // 100 - 119
+        fixedIv = 6;
+    else if (trainerId <= FRONTIER_TRAINER_SOFIA)   // 120 - 139
+        fixedIv = 9;
+    else if (trainerId <= FRONTIER_TRAINER_JAZLYN)  // 140 - 159
+        fixedIv = 12;
+    else if (trainerId <= FRONTIER_TRAINER_ALISON)  // 160 - 179
+        fixedIv = 15;
+    else if (trainerId <= FRONTIER_TRAINER_LAMAR)   // 180 - 199
+        fixedIv = 18;
+    else if (trainerId <= FRONTIER_TRAINER_TESS)    // 200 - 219
+        fixedIv = 21;
+    else                                            // 220+ (- 299)
+        fixedIv = MAX_PER_STAT_IVS;
+
+    return fixedIv;
+}
 
 static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
@@ -3906,6 +3961,15 @@ static bool32 IsDomeLuckyMove(enum Move move)
 
 static bool32 IsDomePopularMove(enum Move move)
 {
+    u8 i;
+    for (i = 0; i < NUM_ALL_MACHINES; i++)
+    {
+        if (GetTMHMMoveId(i + 1) == move)
+            return TRUE;
+    }
+    if (i == NUM_ALL_MACHINES)
+        return FALSE;
+    // Filter in TMs/HMs
     if (GetMovePower(move) >= 90)
         return TRUE;
 
@@ -5648,6 +5712,7 @@ static void InitRandomTourneyTreeResults(void)
     enum FrontierLevelMode lvlMode;
     u16 *statSums;
     int *statValues;
+    u8 ivs = 0;
 
     species[0] = SPECIES_NONE;
     species[1] = SPECIES_NONE;
@@ -5714,10 +5779,11 @@ static void InitRandomTourneyTreeResults(void)
     {
         monTypesBits = 0;
         statSums[i] = 0;
+        ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
-                             monLevel, statValues);
+                             monLevel, ivs, statValues);
 
             statSums[i] += statValues[STAT_ATK];
             statSums[i] += statValues[STAT_DEF];

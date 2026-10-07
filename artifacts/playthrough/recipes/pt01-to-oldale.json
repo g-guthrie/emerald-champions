@@ -1,9 +1,0 @@
-{"name":"PT01 lab to Oldale","start":{"save":"work/studio/scenes/pt00h/end.sav"},"battle_resolution":"fixture_win",
- "steps":[{"walk_to":[6,12],"label":"On lab mat"},{"hold":"DOWN","frames":40},{"frames":150,"label":"Littleroot"},
-          {"tap":"A","every":40,"frames":2000,"min_frames":30,"until":"idle","label":"Littleroot idle"},
-          {"walk_to":[11,0],"label":"Town north edge"},{"walk":["UP"],"label":"Route 101"},
-          {"tap":"A","every":40,"frames":3000,"min_frames":30,"until":"idle","label":"Route 101 idle"},
-          {"walk_to":[10,0],"label":"Route 101 north edge"},{"walk":["UP"],"label":"Oldale"},
-          {"tap":"A","every":40,"frames":3000,"min_frames":30,"until":"idle","label":"Oldale idle"},{"frames":60,"label":"End"}],
- "queries":{"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"},"oldale_state":{"kind":2,"id":"VAR_OLDALE_TOWN_STATE"},"poke_ball":{"kind":4,"id":"ITEM_POKE_BALL"},"old_rod":{"kind":4,"id":"ITEM_OLD_ROD"}},
- "expect":{"ready":true,"map":"OldaleTown"}}

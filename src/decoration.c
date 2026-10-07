@@ -1299,8 +1299,8 @@ static void ShowDecorationOnMap_(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, 
         for (i = 0; i < decWidth; i++)
         {
             x = mapX + i;
-            metatileBehavior = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i], METATILE_ATTRIBUTE_BEHAVIOR);
-            layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i], METATILE_ATTRIBUTE_LAYER_TYPE);
+            metatileBehavior = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i], METATILE_ATTRIBUTE_BEHAVIOR, FALSE);
+            layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + gDecorations[decoration].tiles[j * decWidth + i], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
             if (MetatileBehavior_IsSecretBaseImpassable(metatileBehavior) == TRUE
              || (gDecorations[decoration].permission != DECORPERM_PASS_FLOOR && layerType != METATILE_LAYER_TYPE_NORMAL))
                 impassableFlag = MAPGRID_IMPASSABLE;
@@ -1559,7 +1559,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].tCursorX + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j], METATILE_ATTRIBUTE_LAYER_TYPE);
+                layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
                 if (!IsFloorOrBoardAndHole(behaviorAt, decoration))
                     return FALSE;
 
@@ -1580,7 +1580,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].tCursorX + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j], METATILE_ATTRIBUTE_LAYER_TYPE);
+                layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[(mapY - 1 - i) * mapX + j], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
                 if (!MetatileBehavior_IsNormal(behaviorAt) && !IsSecretBaseTrainerSpot(behaviorAt, layerType))
                     return FALSE;
 
@@ -1597,7 +1597,7 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
         {
             curX = gTasks[taskId].tCursorX + j;
             behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-            layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[j], METATILE_ATTRIBUTE_LAYER_TYPE);
+            layerType = GetAttributeByMetatileIdAndMapLayout(NUM_TILES_IN_PRIMARY + decoration->tiles[j], METATILE_ATTRIBUTE_LAYER_TYPE, FALSE);
             if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 return FALSE;
 
@@ -2088,9 +2088,7 @@ static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 
 {
     struct SpriteSheet sheet;
     struct SpritePalette palette;
-    struct SpriteTemplate template;
-    bool32 newTiles = GetSpriteTileStartByTag(tilesTag) == TAG_NONE;
-    bool32 newPalette = IndexOfSpritePaletteTag(paletteTag) == 0xFF;
+    struct SpriteTemplate *template;
     u8 spriteId;
 
     if (!AllocItemIconTemporaryBuffers())
@@ -2101,23 +2099,17 @@ static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 
     sheet.data = gItemIcon4x4Buffer;
     sheet.size = 0x200;
     sheet.tag = tilesTag;
-    if (newTiles)
-        LoadSpriteSheet(&sheet);
+    LoadSpriteSheet(&sheet);
     palette.data = GetDecorationIconPalette(decor);
     palette.tag = paletteTag;
     LoadSpritePalette(&palette);
-    template = gItemIconSpriteTemplate;
-    template.tileTag = tilesTag;
-    template.paletteTag = paletteTag;
-    spriteId = CreateSpriteWithTemplateCopy(&template, 0, 0, 0);
+    template = Alloc(sizeof(struct SpriteTemplate));
+    *template = gItemIconSpriteTemplate;
+    template->tileTag = tilesTag;
+    template->paletteTag = paletteTag;
+    spriteId = CreateSpriteUnchecked(template, 0, 0, 0);
     FreeItemIconTemporaryBuffers();
-    if (spriteId == MAX_SPRITES)
-    {
-        if (newTiles)
-            FreeSpriteTilesByTag(tilesTag);
-        if (newPalette)
-            FreeSpritePaletteByTag(paletteTag);
-    }
+    Free(template);
     return spriteId;
 }
 
@@ -2142,9 +2134,7 @@ static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u
     u8 spriteId;
     struct SpriteSheet sheet;
     struct SpritePalette palette;
-    struct SpriteTemplate template;
-    bool32 newTiles = GetSpriteTileStartByTag(tilesTag) == TAG_NONE;
-    bool32 newPalette = IndexOfSpritePaletteTag(paletteTag) == 0xFF;
+    struct SpriteTemplate *template;
 
     ClearPlaceDecorationGraphicsDataBuffer(&sPlaceDecorationGraphicsDataBuffer);
     sPlaceDecorationGraphicsDataBuffer.decoration = &gDecorations[decor];
@@ -2157,26 +2147,20 @@ static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u
         sheet.data = sPlaceDecorationGraphicsDataBuffer.image;
         sheet.size = sDecorShapes[sPlaceDecorationGraphicsDataBuffer.decoration->shape].size * TILE_SIZE_4BPP;
         sheet.tag = tilesTag;
-        if (newTiles)
-            LoadSpriteSheet(&sheet);
+        LoadSpriteSheet(&sheet);
         palette.data = sPlaceDecorationGraphicsDataBuffer.palette;
         palette.tag = paletteTag;
         LoadSpritePalette(&palette);
-        template = sDecorWhilePlacingSpriteTemplate;
-        template.tileTag = tilesTag;
-        template.paletteTag = paletteTag;
-        spriteId = CreateSpriteWithTemplateCopy(&template, 0, 0, 0);
+        template = Alloc(sizeof(struct SpriteTemplate));
+        *template = sDecorWhilePlacingSpriteTemplate;
+        template->tileTag = tilesTag;
+        template->paletteTag = paletteTag;
+        spriteId = CreateSpriteUnchecked(template, 0, 0, 0);
+        Free(template);
     }
     else
     {
         spriteId = CreateObjectGraphicsSpriteWithTag(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1, paletteTag);
-    }
-    if (spriteId == MAX_SPRITES && sPlaceDecorationGraphicsDataBuffer.decoration->permission != DECORPERM_SPRITE)
-    {
-        if (newTiles)
-            FreeSpriteTilesByTag(tilesTag);
-        if (newPalette)
-            FreeSpritePaletteByTag(paletteTag);
     }
     return spriteId;
 }

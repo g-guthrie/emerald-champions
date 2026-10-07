@@ -186,6 +186,11 @@ BattleScript_SuccessBallThrow::
 	setbyte sMON_CAUGHT, TRUE
 	incrementgamestat GAME_STAT_POKEMON_CAPTURES
 	printstring STRINGID_GOTCHAPKMNCAUGHTPLAYER
+	jumpifbyte CMP_NOT_EQUAL, sEXP_CATCH, TRUE, BattleScript_TryPrintCaughtMonInfo
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_TARGET
+	sethword gBattle_BG2_X, 0
+BattleScript_TryPrintCaughtMonInfo:
 	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_GiveCaughtMonEnd
 	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
 	printstring STRINGID_PKMNDATAADDEDTODEX
@@ -204,10 +209,6 @@ BattleScript_TryNicknameCaughtMon::
 BattleScript_GiveCaughtMonEnd::
 	givecaughtmon BattleScript_SuccessBallThrowEnd
 BattleScript_SuccessBallThrowEnd::
-	jumpifnolegendaryrelicwaits BattleScript_SuccessBallThrowOutcome
-	printstring STRINGID_LEGENDARYRELICWAITS
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_SuccessBallThrowOutcome:
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 
@@ -247,6 +248,9 @@ BattleScript_RunByUsingItem::
 BattleScript_ActionWatchesCarefully:
 	printfromtable gSafariReactionStringIds
 	waitmessage B_WAIT_TIME_LONG
+#if IS_FRLG
+	playanimation BS_OPPONENT1, B_ANIM_SAFARI_REACTION
+#endif
 	end
 
 BattleScript_ActionGetNear:

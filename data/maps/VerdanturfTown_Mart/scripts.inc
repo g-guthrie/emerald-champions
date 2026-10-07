@@ -1,56 +1,58 @@
-VerdanturfTown_Mart_MapScripts:: @ 8202586
+VerdanturfTown_Mart_MapScripts::
 	.byte 0
 
-VerdanturfTown_Mart_EventScript_Boy:: @ 82025BA
+VerdanturfTown_Mart_EventScript_Clerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart VerdanturfTown_Mart_Pokemart
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+VerdanturfTown_Mart_Pokemart:
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_AWAKENING
+	.2byte ITEM_BURN_HEAL
+	.2byte ITEM_ICE_HEAL
+	.2byte ITEM_REPEL
+	.2byte ITEM_X_SP_ATK
+	.2byte ITEM_FLUFFY_TAIL
+	pokemartlistend
+
+VerdanturfTown_Mart_EventScript_Boy::
 	msgbox VerdanturfTown_Mart_Text_XSpecialIsCrucial, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_ExpertF:: @ 82025C3
+VerdanturfTown_Mart_EventScript_ExpertF::
 	msgbox VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_Lass:: @ 82025CC
+VerdanturfTown_Mart_EventScript_Lass::
 	msgbox VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_GiveNugget::
-	lock
-	faceplayer
-	goto_if_set FLAG_EC_GIFT_VERDANTURF_TOWN_MART, VerdanturfTown_Mart_EventScript_ReceivedTM66
-	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
-	giveitem ITEM_NUGGET
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_EC_GIFT_VERDANTURF_TOWN_MART
-	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
-	release
-	end
-
-VerdanturfTown_Mart_EventScript_ReceivedTM66::
-	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
-	release
-	end
-
-VerdanturfTown_Mart_Text_SlowPokemon:
-	.string "You've come such a long way!\n"
-	.string "Please take this Nugget!$"
-
-VerdanturfTown_Mart_Text_HaveTM66:
-	.string "Sell that Nugget for ¥2,500.\n"
-	.string "Put it toward your next team purchase!$"
-
-VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
-	.string "For any Pokémon match, the right\n"
-	.string "held item is crucial.\p"
+VerdanturfTown_Mart_Text_XSpecialIsCrucial:
+	.string "For any POKéMON match, X SPECIAL\n"
+	.string "is crucial.\p"
 	.string "It jacks up the power of some moves\n"
-	.string "for every battle it's held in.$"
+	.string "even though it's only for one battle.$"
 
-VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent: @ 820264C
+VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
 	.string "They don't seem to sell any winning\n"
-	.string "strategy guides for the Battle Tent…\p"
+	.string "strategy guides for the BATTLE TENT…\p"
 	.string "It seems one must rely on one's\n"
 	.string "own wits after all…$"
 
 VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
-	.string "The Nest Ball works better on\n"
-	.string "weaker Pokémon.$"
+	.string "The NEST BALL works better on\n"
+	.string "weakened POKéMON.\p"
+	.string "VERDANTURF is the only place you can\n"
+	.string "buy it.$"
 

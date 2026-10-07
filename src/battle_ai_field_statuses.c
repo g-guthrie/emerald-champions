@@ -6,7 +6,6 @@
 #include "battle_ai_field_statuses.h"
 #include "battle_ai_util.h"
 #include "battle_ai_main.h"
-#include "battle_util.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
 #include "event_data.h"
@@ -46,92 +45,6 @@ static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
-static bool32 HasUsableMoveWithEffect(enum BattlerId battler, enum BattleMoveEffects effect)
-{
-    enum Move *moves = GetMovesArray(battler);
-
-    if (!IsBattlerAlive(battler))
-        return FALSE;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        if (!IsMoveUnusable(i, moves[i], gAiLogicData->moveLimitations[battler])
-         && GetMoveEffect(moves[i]) == effect)
-            return TRUE;
-    return FALSE;
-}
-
-static bool32 HasUsableSleepMoveAgainst(enum BattlerId battler, enum BattlerId target)
-{
-    enum Move *moves = GetMovesArray(battler);
-    enum Ability targetAbility = gAiLogicData->abilities[target];
-
-    // This is the sleep value lost to the proposed terrain, including when
-    // considering clearing existing Electric Terrain. Do not query the old
-    // terrain's sleep prohibition and mistake it for permanent immunity.
-    if (!IsBattlerAlive(battler) || !IsBattlerAlive(target)
-     || !AI_IsBattlerGrounded(target) || gBattleMons[target].status1 & STATUS1_ANY
-     || IsBattlerIncapacitated(battler, gAiLogicData->abilities[battler])
-     || IsSleepClauseActiveForSide(GetBattlerSide(target))
-     || targetAbility == ABILITY_INSOMNIA || targetAbility == ABILITY_VITAL_SPIRIT
-     || targetAbility == ABILITY_COMATOSE || targetAbility == ABILITY_PURIFYING_SALT
-     || AI_IsAbilityOnSide(target, ABILITY_SWEET_VEIL))
-        return FALSE;
-
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        enum Move move = moves[i];
-        if (IsMoveUnusable(i, move, gAiLogicData->moveLimitations[battler])
-         || (GetMoveNonVolatileStatus(move) != MOVE_EFFECT_SLEEP
-             && !MoveHasAdditionalEffect(move, MOVE_EFFECT_SLEEP))
-         || DoesSubstituteBlockMove(battler, target, move)
-         || (IsPowderMove(move) && !IsAffectedByPowderMove(target, targetAbility, gAiLogicData->holdEffects[target])))
-            continue;
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static bool32 HasUsablePriorityAgainst(enum BattlerId battler, enum BattlerId target)
-{
-    enum Move *moves = GetMovesArray(battler);
-    enum Ability ability = gAiLogicData->abilities[battler];
-
-    if (!IsBattlerAlive(battler) || !IsBattlerAlive(target)
-     || !AI_IsBattlerGrounded(target)
-     || IsBattlerIncapacitated(battler, ability))
-        return FALSE;
-
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        enum Move move = moves[i];
-        enum MoveTarget moveTarget;
-        enum BattleMoveEffects effect;
-        s32 priority;
-
-        if (IsMoveUnusable(i, move, gAiLogicData->moveLimitations[battler]))
-            continue;
-        moveTarget = AI_GetBattlerMoveTargetType(battler, move);
-        effect = GetMoveEffect(move);
-        if (moveTarget != TARGET_SELECTED && moveTarget != TARGET_SMART
-         && moveTarget != TARGET_OPPONENT && moveTarget != TARGET_RANDOM
-         && moveTarget != TARGET_BOTH && moveTarget != TARGET_FOES_AND_ALLY)
-            continue;
-        // These selected-target actions support an ally; their abilities do
-        // not turn them into opposing actions blocked by Psychic Terrain.
-        if (effect == EFFECT_HEAL_PULSE || effect == EFFECT_AFTER_YOU || effect == EFFECT_INSTRUCT
-         || (effect == EFFECT_FIRST_TURN_ONLY && !IsBattlersFirstTurn(battler)))
-            continue;
-
-        priority = AI_GetMovePriority(battler, ability, move);
-        // Grassy Glide loses its boost in the proposed Psychic Terrain.
-        if (effect == EFFECT_GRASSY_GLIDE && gFieldTimers.terrain == B_TERRAIN_GRASSY
-         && AI_IsBattlerGrounded(battler))
-            priority--;
-        if (priority > 0)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 static bool32 HasBattlerTerrainBoostMove(enum BattlerId battler, enum BattleTerrain terrain)
 {
     if (!IsBattlerAlive(battler))
@@ -141,8 +54,7 @@ static bool32 HasBattlerTerrainBoostMove(enum BattlerId battler, enum BattleTerr
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
         enum Move move = moves[moveIndex];
-        if (!IsMoveUnusable(moveIndex, move, gAiLogicData->moveLimitations[battler])
-         && GetMoveEffect(move) == EFFECT_TERRAIN_BOOST
+        if (GetMoveEffect(move) == EFFECT_TERRAIN_BOOST
          && GetMoveTerrainBoost_Terrain(move) == terrain)
             return TRUE;
     }
@@ -152,100 +64,38 @@ static bool32 HasBattlerTerrainBoostMove(enum BattlerId battler, enum BattleTerr
 
 bool32 WeatherChecker(enum BattlerId battler, u32 weather, enum FieldEffectOutcome desiredResult)
 {
-    enum FieldEffectOutcome actorResult = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome partnerResult = FIELD_EFFECT_NEUTRAL;
-
     if (IsWeatherActive(B_WEATHER_PRIMAL_ANY) != WEATHER_INACTIVE)
-        return FIELD_EFFECT_BLOCKED == desiredResult;
+        return (FIELD_EFFECT_BLOCKED == desiredResult);
+
+    enum SideBattlers { USER, PARTNER, COUNT };
+
+    enum SideBattlers sideBattlers = USER;
+    enum FieldEffectOutcome result[COUNT] = { FIELD_EFFECT_NEUTRAL, FIELD_EFFECT_NEUTRAL };
 
     for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
     {
-        enum FieldEffectOutcome result = FIELD_EFFECT_NEUTRAL;
-
         if (!IsBattlerAlive(battlerIndex) || !IsBattlerAlly(battler, battlerIndex))
             continue;
 
         if (weather & B_WEATHER_RAIN)
-            result = BenefitsFromRain(battlerIndex);
+            result[sideBattlers] = BenefitsFromRain(battlerIndex);
         else if (weather & B_WEATHER_SUN)
-            result = BenefitsFromSun(battlerIndex);
+            result[sideBattlers] = BenefitsFromSun(battlerIndex);
         else if (weather & B_WEATHER_SANDSTORM)
-            result = BenefitsFromSandstorm(battlerIndex);
+            result[sideBattlers] = BenefitsFromSandstorm(battlerIndex);
         else if (weather & B_WEATHER_ICY_ANY)
-            result = BenefitsFromHailOrSnow(battlerIndex, weather);
+            result[sideBattlers] = BenefitsFromHailOrSnow(battlerIndex, weather);
 
-        if (battlerIndex == battler)
-            actorResult = result;
-        else
-            partnerResult = result;
+        sideBattlers = PARTNER;
     }
 
-    if (actorResult != FIELD_EFFECT_NEUTRAL)
-        return actorResult == desiredResult;
-    return partnerResult == desiredResult;
-}
-
-// Whether a member waiting in this battler's party, off the field, is built
-// for the weather: its ability, a move the weather powers or makes sure, or
-// the typing the weather defends. The field check above reads only the two
-// bodies on the field, so an authored setter leading beside a partner the
-// weather does nothing for never set it for the back line it exists for:
-// Archie's Prankster Sableye opens beside Mightyena so that its Damp Rock rain
-// carries Swift Swim Eelektrik and Lombre.
-bool32 AI_ReserveBenefitsFromWeather(enum BattlerId battler, u32 weather)
-{
-    struct Pokemon *party = GetBattlerParty(battler);
-    u32 onField = gBattlerPartyIndexes[battler];
-    // A partner's slot is on this party's field only when both battlers
-    // share the party. Campaign multi battles give each owner a separate one.
-    u32 partnerOnField = IsDoubleBattle() && GetBattlerParty(GetPartnerBattler(battler)) == party
-        ? gBattlerPartyIndexes[GetPartnerBattler(battler)] : onField;
-    s32 lastId = GetAILastPartyIndex(battler);
-    for (s32 index = 0; index < lastId; index++)
-    {
-        struct Pokemon *mon = &party[index];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        if ((u32)index == onField || (u32)index == partnerOnField || species == SPECIES_NONE
-         || species == SPECIES_EGG || GetMonData(mon, MON_DATA_HP) == 0)
-            continue;
-        enum Ability ability = GetMonAbility(mon);
-        if ((weather & (B_WEATHER_RAIN | B_WEATHER_SUN)) && ability != ABILITY_PROTOSYNTHESIS
-         && GetItemHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_UTILITY_UMBRELLA)
-            continue;
-        if (DoesAbilityBenefitFromWeather(ability, weather))
-            return TRUE;
-        bool32 rock = GetSpeciesType(species, 0) == TYPE_ROCK || GetSpeciesType(species, 1) == TYPE_ROCK;
-        bool32 ice = GetSpeciesType(species, 0) == TYPE_ICE || GetSpeciesType(species, 1) == TYPE_ICE;
-        if (((weather & B_WEATHER_SANDSTORM) && rock) || ((weather & B_WEATHER_ICY_ANY) && ice))
-            return TRUE;
-        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-        {
-            enum Move move = GetMonData(mon, MON_DATA_MOVE1 + slot);
-            if (move == MOVE_NONE)
-                continue;
-            enum BattleMoveEffects effect = GetMoveEffect(move);
-            bool32 damaging = !IsBattleMoveStatus(move);
-            if (effect == EFFECT_WEATHER_BALL)
-                return TRUE;
-            if ((weather & B_WEATHER_RAIN)
-             && ((damaging && GetMoveType(move) == TYPE_WATER) || MoveAlwaysHitsInRain(move) || move == MOVE_ELECTRO_SHOT))
-                return TRUE;
-            if ((weather & B_WEATHER_SUN)
-             && ((damaging && GetMoveType(move) == TYPE_FIRE) || effect == EFFECT_HYDRO_STEAM
-                 || (IsLightSensitiveMove(move) && !IsSunlightMoveAbility(ability))))
-                return TRUE;
-            if ((weather & B_WEATHER_ICY_ANY) && (MoveAlwaysHitsInHailSnow(move) || effect == EFFECT_AURORA_VEIL))
-                return TRUE;
-        }
-    }
-    return FALSE;
+    return result[USER] == desiredResult || result[PARTNER] == desiredResult;
 }
 
 bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum FieldEffectOutcome desiredResult)
 {
     enum FieldEffectOutcome result = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome actorResult = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome partnerResult = FIELD_EFFECT_NEUTRAL;
+    enum FieldEffectOutcome firstResult = FIELD_EFFECT_NEUTRAL;
 
     for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
     {
@@ -269,23 +119,17 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
         default:
             break;
         }
-
-        if (battlerIndex == battler)
-            actorResult = result;
-        else
-            partnerResult = result;
     }
 
-    if (actorResult != FIELD_EFFECT_NEUTRAL)
-        return actorResult == desiredResult;
-    return partnerResult == desiredResult;
+    if (firstResult != FIELD_EFFECT_NEUTRAL)
+        return (firstResult == result) && (result == desiredResult);
+    return (result == desiredResult);
 }
 
 bool32 FieldStatusChecker(enum BattlerId battler, u32 fieldStatus, enum FieldEffectOutcome desiredResult)
 {
     enum FieldEffectOutcome result = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome actorResult = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome partnerResult = FIELD_EFFECT_NEUTRAL;
+    enum FieldEffectOutcome firstResult = FIELD_EFFECT_NEUTRAL;
 
     for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
     {
@@ -298,18 +142,16 @@ bool32 FieldStatusChecker(enum BattlerId battler, u32 fieldStatus, enum FieldEff
         if (fieldStatus & STATUS_FIELD_TRICK_ROOM)
             result = BenefitsFromTrickRoom(battlerIndex);
 
-        if (battlerIndex == battler)
-            actorResult = result;
-        else
-            partnerResult = result;
+        if (result != FIELD_EFFECT_NEUTRAL)
+        {
+            // Trick room wants both Pokémon to agree, not just one
+            if (fieldStatus & STATUS_FIELD_TRICK_ROOM && battlerIndex == GetBattlerLeftFoe(battler))
+                firstResult = result;
+        }
     }
-    if (fieldStatus & STATUS_FIELD_TRICK_ROOM
-     && actorResult != FIELD_EFFECT_NEUTRAL
-     && partnerResult != FIELD_EFFECT_NEUTRAL)
-        return actorResult == partnerResult && actorResult == desiredResult;
-    if (actorResult != FIELD_EFFECT_NEUTRAL)
-        return actorResult == desiredResult;
-    return partnerResult == desiredResult;
+    if (firstResult != FIELD_EFFECT_NEUTRAL)
+        return (firstResult == result) && (result == desiredResult);
+    return (result == desiredResult);
 }
 
 static bool32 DoesAbilityBenefitFromWeather(enum Ability ability, u32 weather)
@@ -388,11 +230,6 @@ static bool32 IsLightSensitiveMove(enum Move move)
 static bool32 HasLightSensitiveMove(enum BattlerId battler)
 {
     enum Move *moves = GetMovesArray(battler);
-
-    // Chloroplast and Mega Sol keep these moves in harsh sunlight whatever
-    // the weather, so weather neither helps nor hampers them.
-    if (IsSunlightMoveAbility(gAiLogicData->abilities[battler]))
-        return FALSE;
 
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
@@ -495,31 +332,33 @@ static enum FieldEffectOutcome BenefitsFromRain(enum BattlerId battler)
     return FIELD_EFFECT_NEUTRAL;
 }
 
+//TODO: when is electric terrain bad?
 static enum FieldEffectOutcome BenefitsFromElectricTerrain(enum BattlerId battler)
 {
+    if (DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_ELECTRIC))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasBattlerTerrainBoostMove(battler, B_TERRAIN_ELECTRIC))
+        return FIELD_EFFECT_POSITIVE;
+
+    if ((HasMoveWithEffect(GetBattlerLeftFoe(battler), EFFECT_REST) && AI_IsBattlerGrounded(GetBattlerLeftFoe(battler)))
+     || (HasMoveWithEffect(GetBattlerRightFoe(battler), EFFECT_REST) && AI_IsBattlerGrounded(GetBattlerRightFoe(battler))))
+        return FIELD_EFFECT_POSITIVE;
+
     bool32 grounded = AI_IsBattlerGrounded(battler);
-    bool32 benefits = DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_ELECTRIC)
-                  || HasBattlerTerrainBoostMove(battler, B_TERRAIN_ELECTRIC)
-                  || (grounded && (gBattleMons[battler].volatiles.yawn || HasDamagingMoveOfType(battler, TYPE_ELECTRIC)));
-    bool32 harms = grounded && HasUsableMoveWithEffect(battler, EFFECT_REST);
+    if (grounded && HasBattlerSideMoveWithAdditionalEffect(GetBattlerLeftFoe(battler), MOVE_EFFECT_SLEEP))
+        return FIELD_EFFECT_POSITIVE;
 
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-    {
-        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
-            continue;
-        benefits |= HasUsableSleepMoveAgainst(foe, battler)
-                 || (AI_IsBattlerGrounded(foe) && HasUsableMoveWithEffect(foe, EFFECT_REST));
-        harms |= HasBattlerTerrainBoostMove(foe, B_TERRAIN_ELECTRIC);
-        for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
-            if (IsBattlerAlive(ally) && IsBattlerAlly(battler, ally))
-                harms |= HasUsableSleepMoveAgainst(ally, foe);
-    }
+    if (grounded && ((gBattleMons[battler].status1 & STATUS1_SLEEP)
+    || gBattleMons[battler].volatiles.yawn
+    || HasDamagingMoveOfType(battler, TYPE_ELECTRIC)))
+        return FIELD_EFFECT_POSITIVE;
 
-    // Existing sleep is not cured. A remaining allied sleep plan is a real
-    // tradeoff even when this actor has an Electric attack or ability.
-    if (benefits == harms)
-        return FIELD_EFFECT_NEUTRAL;
-    return benefits ? FIELD_EFFECT_POSITIVE : FIELD_EFFECT_NEGATIVE;
+    if (HasBattlerTerrainBoostMove(GetBattlerLeftFoe(battler), B_TERRAIN_ELECTRIC)
+     || HasBattlerTerrainBoostMove(GetBattlerRightFoe(battler), B_TERRAIN_ELECTRIC))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
 }
 
 //TODO: when is grassy terrain bad?
@@ -550,109 +389,78 @@ static enum FieldEffectOutcome BenefitsFromGrassyTerrain(enum BattlerId battler)
     return FIELD_EFFECT_NEUTRAL;
 }
 
-// Evaluate the status opportunity without changing battle state or RNG. Native
-// CHECK_TRIGGER queries retain type, powder, ability and sleep-clause rules.
-static bool32 MistyBlocksStatusOpportunity(enum BattlerId actor, enum BattlerId target)
-{
-    if (!AI_IsBattlerGrounded(target) || gBattleMons[target].status1)
-        return FALSE;
-
-    enum Ability actorAbility = gAiLogicData->abilities[actor];
-    enum HoldEffect targetItem = gAiLogicData->holdEffects[target];
-    enum BattleTerrain savedTerrain = gFieldTimers.terrain;
-    bool32 opportunity = FALSE;
-    gFieldTimers.terrain = B_TERRAIN_NONE;
-    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-    {
-        enum Move move = gBattleMons[actor].moves[slot];
-        enum MoveEffect status = GetMoveNonVolatileStatus(move);
-        if (!gBattleMons[actor].pp[slot] || !IsBattleMoveStatus(move)
-         || status == MOVE_EFFECT_NONE || GetMoveEffect(move) == EFFECT_REST)
-            continue;
-        enum Ability targetAbility = AI_GetMoldBreakerSanitizedAbility(actor,
-            actorAbility, gAiLogicData->abilities[target], targetItem, move);
-        if (targetAbility == ABILITY_GOOD_AS_GOLD || targetAbility == ABILITY_MAGIC_BOUNCE
-         || DoesSubstituteBlockMove(actor, target, move)
-         || (IsPowderMove(move) && !IsAffectedByPowderMove(target, targetAbility, targetItem))
-         || (status == MOVE_EFFECT_PARALYSIS && GetMoveType(move) == TYPE_ELECTRIC
-             && IS_BATTLER_OF_TYPE(target, TYPE_GROUND)))
-            continue;
-        if (CanSetNonVolatileStatus(actor, target, actorAbility, targetAbility, status, CHECK_TRIGGER))
-        {
-            opportunity = TRUE;
-            break;
-        }
-    }
-    gFieldTimers.terrain = savedTerrain;
-    return opportunity;
-}
-
-static bool32 MistyBlocksUsefulOrb(enum BattlerId battler)
-{
-    if (!AI_IsBattlerGrounded(battler) || gBattleMons[battler].status1)
-        return FALSE;
-    enum Ability ability = gAiLogicData->abilities[battler];
-    enum HoldEffect item = gAiLogicData->holdEffects[battler];
-    bool32 benefit = ability == ABILITY_GUTS || ability == ABILITY_QUICK_FEET
-        || ability == ABILITY_MARVEL_SCALE || HasMoveWithEffect(battler, EFFECT_FACADE)
-        || (ability == ABILITY_POISON_HEAL && item == HOLD_EFFECT_TOXIC_ORB)
-        || (ability == ABILITY_FLARE_BOOST && item == HOLD_EFFECT_FLAME_ORB);
-    if (!benefit || (item != HOLD_EFFECT_TOXIC_ORB && item != HOLD_EFFECT_FLAME_ORB))
-        return FALSE;
-    enum BattleTerrain savedTerrain = gFieldTimers.terrain;
-    gFieldTimers.terrain = B_TERRAIN_NONE;
-    bool32 possible = item == HOLD_EFFECT_TOXIC_ORB
-        ? CanBePoisoned(battler, battler, ability, ability)
-        : CanBeBurned(battler, battler, ability);
-    gFieldTimers.terrain = savedTerrain;
-    return possible;
-}
-
+//TODO: when is misty terrain bad?
 static enum FieldEffectOutcome BenefitsFromMistyTerrain(enum BattlerId battler)
 {
-    bool32 grounded = AI_IsBattlerGrounded(battler);
-    bool32 benefits = DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_MISTY)
-        || HasBattlerTerrainBoostMove(battler, B_TERRAIN_MISTY)
-        || (grounded && !gBattleMons[battler].status1 && gBattleMons[battler].volatiles.yawn);
-    bool32 harms = MistyBlocksUsefulOrb(battler);
+    if (DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_MISTY))
+        return FIELD_EFFECT_POSITIVE;
 
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-    {
-        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
-            continue;
-        bool32 foeGrounded = AI_IsBattlerGrounded(foe);
-        benefits |= MistyBlocksStatusOpportunity(foe, battler)
-            || (grounded && HasDamagingMoveOfType(foe, TYPE_DRAGON))
-            || (foeGrounded && HasMoveWithEffect(foe, EFFECT_REST));
-        harms |= MistyBlocksStatusOpportunity(battler, foe)
-            || (foeGrounded && HasDamagingMoveOfType(battler, TYPE_DRAGON));
-    }
-    // Mist protects against new status; it neither cures existing sleep nor
-    // improves an already activated Orb. Conflicting field uses remain neutral.
-    if (benefits == harms)
-        return FIELD_EFFECT_NEUTRAL;
-    return benefits ? FIELD_EFFECT_POSITIVE : FIELD_EFFECT_NEGATIVE;
+    if (HasBattlerTerrainBoostMove(battler, B_TERRAIN_MISTY)
+     || HasBattlerTerrainBoostMove(GetPartnerBattler(battler), B_TERRAIN_MISTY))
+        return FIELD_EFFECT_POSITIVE;
+
+    bool32 grounded = AI_IsBattlerGrounded(battler);
+    bool32 allyGrounded = FALSE;
+    if (HasPartner(battler))
+        allyGrounded = AI_IsBattlerGrounded(GetPartnerBattler(battler));
+
+    if ((HasMoveWithEffect(GetBattlerLeftFoe(battler), EFFECT_REST) && AI_IsBattlerGrounded(GetBattlerLeftFoe(battler)))
+     || (HasMoveWithEffect(GetBattlerRightFoe(battler), EFFECT_REST) && AI_IsBattlerGrounded(GetBattlerRightFoe(battler))))
+        return FIELD_EFFECT_POSITIVE;
+
+    // harass dragons
+    if ((grounded || allyGrounded)
+     && (HasDamagingMoveOfType(GetBattlerLeftFoe(battler), TYPE_DRAGON) || HasDamagingMoveOfType(GetBattlerRightFoe(battler), TYPE_DRAGON)))
+        return FIELD_EFFECT_POSITIVE;
+
+    if ((grounded || allyGrounded)
+     && (HasNonVolatileMoveEffect(GetBattlerLeftFoe(battler), MOVE_EFFECT_SLEEP) || HasNonVolatileMoveEffect(GetBattlerRightFoe(battler), MOVE_EFFECT_SLEEP)))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (grounded && (gBattleMons[battler].status1 & STATUS1_SLEEP || gBattleMons[battler].volatiles.yawn))
+        return FIELD_EFFECT_POSITIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
 }
 
+//TODO: when is Psychic Terrain negative?
 static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler)
 {
-    bool32 benefits = DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_PSYCHIC)
-                  || HasBattlerTerrainBoostMove(battler, B_TERRAIN_PSYCHIC)
-                  || (AI_IsBattlerGrounded(battler) && HasDamagingMoveOfType(battler, TYPE_PSYCHIC));
-    bool32 harms = FALSE;
+    if (DoesAbilityBenefitFromTerrain(gAiLogicData->abilities[battler], B_TERRAIN_PSYCHIC))
+        return FIELD_EFFECT_POSITIVE;
 
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    if (HasBattlerTerrainBoostMove(battler, B_TERRAIN_PSYCHIC)
+     || HasBattlerTerrainBoostMove(GetPartnerBattler(battler), B_TERRAIN_PSYCHIC))
+        return FIELD_EFFECT_POSITIVE;
+
+    bool32 grounded = AI_IsBattlerGrounded(battler);
+    bool32 allyGrounded = FALSE;
+    if (HasPartner(battler))
+        allyGrounded = AI_IsBattlerGrounded(GetPartnerBattler(battler));
+
+    // don't bother if we're not grounded
+    if (grounded || allyGrounded)
     {
-        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
-            continue;
-        benefits |= HasUsablePriorityAgainst(foe, battler);
-        harms |= HasUsablePriorityAgainst(battler, foe)
-              || HasBattlerTerrainBoostMove(foe, B_TERRAIN_PSYCHIC);
+        // harass priority
+        if (AI_IsAbilityOnSide(GetBattlerLeftFoe(battler), ABILITY_GALE_WINGS)
+         || AI_IsAbilityOnSide(GetBattlerLeftFoe(battler), ABILITY_TRIAGE)
+         || AI_IsAbilityOnSide(GetBattlerLeftFoe(battler), ABILITY_PRANKSTER))
+            return FIELD_EFFECT_POSITIVE;
     }
 
-    if (benefits == harms)
-        return FIELD_EFFECT_NEUTRAL;
-    return benefits ? FIELD_EFFECT_POSITIVE : FIELD_EFFECT_NEGATIVE;
+    if (grounded && HasDamagingMoveOfType(battler, TYPE_PSYCHIC))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasBattlerTerrainBoostMove(GetBattlerLeftFoe(battler), B_TERRAIN_PSYCHIC)
+     || HasBattlerTerrainBoostMove(GetBattlerRightFoe(battler), B_TERRAIN_PSYCHIC))
+        return FIELD_EFFECT_NEGATIVE;
+
+    if (AI_IsAbilityOnSide(battler, ABILITY_GALE_WINGS)
+     || AI_IsAbilityOnSide(battler, ABILITY_TRIAGE)
+     || AI_IsAbilityOnSide(battler, ABILITY_PRANKSTER))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
 }
 
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler)
@@ -685,59 +493,37 @@ static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler)
 
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler)
 {
-    s32 speedMatchups = 0;
-    bool32 hasPriorityAttack = FALSE;
-    bool32 hasOrdinaryAttack = FALSE;
+    // If we're in singles, we literally only care about speed.
+    if (IsBattle1v1())
+    {
+        if (gAiLogicData->speedStats[battler] < gAiLogicData->speedStats[GetBattlerLeftFoe(battler)])
+            return FIELD_EFFECT_POSITIVE;
+        // If we tie, we shouldn't change trick room state.
+        else if (gAiLogicData->speedStats[battler] == gAiLogicData->speedStats[GetBattlerLeftFoe(battler)])
+            return FIELD_EFFECT_NEUTRAL;
+        else
+            return FIELD_EFFECT_NEGATIVE;
+    }
 
-    // A priority-only attacker is indifferent to Room, not a reason to set it.
-    // Merely carrying Fake Out or a priority finisher does not make its other
-    // attacks independent of Speed. Count only currently usable attacks.
-    if (!IsBattle1v1() && gFieldTimers.terrain != B_TERRAIN_PSYCHIC)
+    // First checking if we have enough priority for one Pokémon to disregard Trick Room entirely.
+    if (gFieldTimers.terrain != B_TERRAIN_PSYCHIC)
     {
         enum Move *aiMoves = GetMovesArray(battler);
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             enum Move move = aiMoves[moveIndex];
-            if (IsMoveUnusable(moveIndex, move, gAiLogicData->moveLimitations[battler]) || IsBattleMoveStatus(move))
-                continue;
-            if (AI_GetMovePriority(battler, gAiLogicData->abilities[battler], move) > 0
-             && GetMoveEffect(move) != EFFECT_FIRST_TURN_ONLY
-             && GetMoveEffect(move) != EFFECT_SUCKER_PUNCH)
-                hasPriorityAttack = TRUE;
-            else
-                hasOrdinaryAttack = TRUE;
+            if (GetBattleMovePriority(battler, gAiLogicData->abilities[battler], move) > 0 && !(GetMovePriority(move) > 0 && IsBattleMoveStatus(move)))
+            {
+                return FIELD_EFFECT_POSITIVE;
+            }
         }
-        if (hasPriorityAttack && !hasOrdinaryAttack)
-            return FIELD_EFFECT_NEUTRAL;
     }
 
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-    {
-        if (!IsBattlerAlive(foe) || IsBattlerAlly(battler, foe))
-            continue;
-        if (gAiLogicData->speedStats[battler] < gAiLogicData->speedStats[foe])
-            speedMatchups++;
-        else if (gAiLogicData->speedStats[battler] > gAiLogicData->speedStats[foe])
-            speedMatchups--;
-    }
-    // Ties and one faster/one slower matchup do not justify toggling the field.
-    if (speedMatchups < 0)
+    // If we are faster or tie, we don't want trick room.
+    if ((gAiLogicData->speedStats[battler] >= gAiLogicData->speedStats[GetBattlerLeftFoe(battler)]) || (gAiLogicData->speedStats[battler] >= gAiLogicData->speedStats[GetBattlerRightFoe(battler)]))
         return FIELD_EFFECT_NEGATIVE;
-    if (speedMatchups > 0)
-        return FIELD_EFFECT_POSITIVE;
-    return FIELD_EFFECT_NEUTRAL;
-}
 
-// A foe's weather-dependent healing (and, for rain, Solar Beam) that a new
-// weather would cut. Chloroplast and Mega Sol keep those moves sunlit.
-static bool32 HasWeatherHamperedSunMove(enum BattlerId battler, bool32 solarBeam)
-{
-    if (IsSunlightMoveAbility(gAiLogicData->abilities[battler]))
-        return FALSE;
-    return HasMoveWithEffect(battler, EFFECT_MORNING_SUN)
-        || HasMoveWithEffect(battler, EFFECT_SYNTHESIS)
-        || HasMoveWithEffect(battler, EFFECT_MOONLIGHT)
-        || (solarBeam && HasMoveWithEffect(battler, EFFECT_SOLAR_BEAM));
+    return FIELD_EFFECT_POSITIVE;
 }
 
 s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, struct AiLogicData *aiData)
@@ -755,8 +541,10 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_DAMP_ROCK)
                 score += WEAK_EFFECT;
-            if (HasWeatherHamperedSunMove(battlerDef, TRUE)
-             || (HasPartnerIgnoreFlags(battlerDef) && HasWeatherHamperedSunMove(GetPartnerBattler(battlerDef), TRUE)))
+            if (HasBattlerSideMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
+             || HasBattlerSideMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
+             || HasBattlerSideMoveWithEffect(battlerDef, EFFECT_SOLAR_BEAM)
+             || HasBattlerSideMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
                 score += WEAK_EFFECT;
             if (HasDamagingMoveOfType(battlerDef, TYPE_FIRE) || HasDamagingMoveOfType(GetPartnerBattler(battlerDef), TYPE_FIRE))
                 score += WEAK_EFFECT;
@@ -786,7 +574,9 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_SMOOTH_ROCK)
                 score += WEAK_EFFECT;
-            if (HasWeatherHamperedSunMove(battlerDef, FALSE))
+            if (HasMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
+             || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
+             || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
                 score += WEAK_EFFECT;
         }
         break;
@@ -801,7 +591,9 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ICY_ROCK)
                 score += WEAK_EFFECT;
-            if (HasWeatherHamperedSunMove(battlerDef, FALSE))
+            if (HasMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
+             || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
+             || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
                 score += WEAK_EFFECT;
         }
         break;
@@ -816,7 +608,9 @@ s32 CalcWeatherScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
                 score += WEAK_EFFECT;
             if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ICY_ROCK)
                 score += WEAK_EFFECT;
-            if (HasWeatherHamperedSunMove(battlerDef, FALSE))
+            if (HasMoveWithEffect(battlerDef, EFFECT_MORNING_SUN)
+             || HasMoveWithEffect(battlerDef, EFFECT_SYNTHESIS)
+             || HasMoveWithEffect(battlerDef, EFFECT_MOONLIGHT))
                 score += WEAK_EFFECT;
         }
         break;

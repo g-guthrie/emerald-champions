@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_VARS_H
 #define GUARD_CONSTANTS_VARS_H
 
+#include "constants/vars_frlg.h"
+
 #define VARS_START 0x4000
 
 // temporary vars
@@ -47,8 +49,7 @@
 #define VAR_OBJ_GFX_ID_F           0x401F
 
 // general purpose vars
-#define VAR_WEATHER_ANOMALY_STATE_0                      0x4020 // Bits 0-15 of the packed weather anomaly state (src/weather_anomaly.c). Reclaimed
-        // VAR_RECYCLE_GOODS; neither it nor its FRLG alias VAR_REPEL_STEP_COUNT_FRLG had any reference.
+#define VAR_RECYCLE_GOODS                                0x4020
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
 #define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
@@ -62,7 +63,7 @@
 #define VAR_POISON_STEP_COUNTER                          0x402B
 #define VAR_RESET_RTC_ENABLE                             0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE                       0x402D
-#define VAR_CYNTHIA_STATE                                0x402E // Preserve existing Cynthia progress; Wonder News uses 0x4048.
+#define VAR_WONDER_NEWS_STEP_COUNTER                     0x402E
 
 #define VAR_FRONTIER_MANIAC_FACILITY                     0x402F
 #define VAR_FRONTIER_GAMBLER_CHALLENGE                   0x4030
@@ -86,17 +87,17 @@
 #define VAR_FANCLUB_FAN_COUNTER                          0x4041
 #define VAR_FANCLUB_LOSE_FAN_TIMER                       0x4042
 #define VAR_DEPT_STORE_FLOOR                             0x4043
-#define VAR_TRICK_HOUSE_LEVEL                            0x4044 // Puzzles solved, up to TRICK_HOUSE_ALL_SOLVED (constants/quest_states.h)
+#define VAR_TRICK_HOUSE_LEVEL                            0x4044
 #define VAR_POKELOT_PRIZE_ITEM                           0x4045
 #define VAR_NATIONAL_DEX                                 0x4046
 #define VAR_SEEDOT_SIZE_RECORD                           0x4047
-#define VAR_WONDER_NEWS_STEP_COUNTER                     0x4048 // Reuses the retired second soot balance; Cynthia retains 0x402E.
+#define VAR_ASH_GATHER_COUNT                             0x4048
 #define VAR_BIRCH_STATE                                  0x4049
 #define VAR_CRUISE_STEP_COUNT                            0x404A
 #define VAR_POKELOT_RND1                                 0x404B // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
 #define VAR_POKELOT_RND2                                 0x404C // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
-#define VAR_FALLARBOR_TOWN_STATE                         0x404E // 0: rival warning pending, 1: complete
+#define VAR_UNUSED_0x404E                                0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
 #define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_OLDALE_TOWN_STATE                            0x4051
@@ -112,10 +113,10 @@
 #define VAR_FORTREE_CITY_STATE                           0x405B // Unused Var
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
-#define VAR_SOOTOPOLIS_CITY_STATE                        0x405E // SOOTOPOLIS_STATE_* (constants/quest_states.h)
+#define VAR_SOOTOPOLIS_CITY_STATE                        0x405E
 #define VAR_EVER_GRANDE_CITY_STATE                       0x405F // Unused Var
 #define VAR_ROUTE101_STATE                               0x4060
-#define VAR_CHANSEY_NURSE_STATE                          0x4061 // CHANSEY_NURSE_* (constants/quest_states.h)
+#define VAR_ROUTE102_STATE                               0x4061 // Unused Var
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
 #define VAR_ROUTE105_STATE                               0x4064 // Unused Var
@@ -127,32 +128,29 @@
 #define VAR_ROUTE111_STATE                               0x406A // Unused Var
 #define VAR_ROUTE112_STATE                               0x406B // Unused Var
 #define VAR_ROUTE113_STATE                               0x406C // Unused Var
-#define VAR_LAVARIDGE_LUCY_STATE                               0x406D  // Restored from Inclement Emerald. Reclaimed the
-        // id of VAR_ROUTE114_STATE, which had zero references in data/, src/ or include/.
+#define VAR_ROUTE114_STATE                               0x406D // Unused Var
 #define VAR_ROUTE115_STATE                               0x406E // Unused Var
 #define VAR_ROUTE116_STATE                               0x406F
 #define VAR_ROUTE117_STATE                               0x4070 // Unused Var
 #define VAR_ROUTE118_STATE                               0x4071
 #define VAR_ROUTE119_STATE                               0x4072
-#define VAR_WEATHER_ANOMALY_BASE                         0x4073 // Base weather + 1; 0 means a legacy save. Retired Route120 state had no readers or writers.
+#define VAR_ROUTE120_STATE                               0x4073 // Unused Var
 #define VAR_ROUTE121_STATE                               0x4074
 #define VAR_ROUTE122_STATE                               0x4075 // Unused Var
 #define VAR_ROUTE123_STATE                               0x4076 // Unused Var
-#define VAR_IVY_EVIE_HOUSE_STATE                               0x4077  // Restored from Inclement Emerald. Reclaimed the
-        // id of VAR_ROUTE124_STATE, which had zero references in data/, src/ or include/.
-#define VAR_WEATHER_ANOMALY_SNOW_MASK                     0x4078 // One saved snow bit per storm slot; reclaimed unused VAR_ROUTE125_STATE.
+#define VAR_ROUTE124_STATE                               0x4077 // Unused Var
+#define VAR_ROUTE125_STATE                               0x4078 // Unused Var
 #define VAR_ROUTE126_STATE                               0x4079 // Unused Var
-#define VAR_LEAF_STATE                               0x407A  // Restored from Inclement Emerald. Reclaimed the
-        // id of VAR_ROUTE127_STATE, which had zero references in data/, src/ or include/.
+#define VAR_ROUTE127_STATE                               0x407A // Unused Var
 #define VAR_ROUTE128_STATE                               0x407B
 #define VAR_ROUTE129_STATE                               0x407C // Unused Var
 #define VAR_ROUTE130_STATE                               0x407D // Unused Var
 #define VAR_ROUTE131_STATE                               0x407E // Unused Var
 #define VAR_ROUTE132_STATE                               0x407F // Unused Var
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
-#define VAR_EC_REPEL_SPRAY_STEPS                         0x4081 // Emerald Champions: Repel Spray steps remaining (was unused VAR_ROUTE134_STATE).
+#define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_STARTER_GEN                                  0x4083 // 1=Kanto through 9=Paldea; 0 safely defaults to Hoenn.
+#define VAR_UNUSED_0x4083                                0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                              0x4084
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
@@ -160,13 +158,13 @@
 #define VAR_CONTEST_TYPE                                 0x4088
 #define VAR_SECRET_BASE_INITIALIZED                      0x4089
 #define VAR_CONTEST_PRIZE_PICKUP                         0x408A
-#define VAR_LEGENDARY_SIGNS_UNLOCKED_4                   0x408B // Append-only Sign IDs 64-79.
+#define VAR_UNUSED_0x408B                                0x408B // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN              0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
 #define VAR_DEVON_CORP_3F_STATE                          0x408F
 #define VAR_BRINEY_HOUSE_STATE                           0x4090
-#define VAR_POKE_VIAL_CHARGES                            0x4091 // Remaining portable party-heal uses.
+#define VAR_UNUSED_0x4091                                0x4091 // Unused Var
 #define VAR_LITTLEROOT_INTRO_STATE                       0x4092
 #define VAR_MAUVILLE_GYM_STATE                           0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE                     0x4094
@@ -176,20 +174,20 @@
 #define VAR_PETALBURG_WOODS_STATE                        0x4098
 #define VAR_LILYCOVE_CONTEST_LOBBY_STATE                 0x4099
 #define VAR_RUSTURF_TUNNEL_STATE                         0x409A
-#define VAR_POKE_VIAL_MAX_CHARGES                        0x409B // Charges restored by a Pokémon Center: POKE_VIAL_CAPACITY_* (constants/quest_states.h)
+#define VAR_UNUSED_0x409B                                0x409B // Unused Var
 #define VAR_ELITE_4_STATE                                0x409C
-#define VAR_LEGENDARY_SIGNS_CAUGHT_4                     0x409D // Append-only Sign IDs 64-79.
+#define VAR_UNUSED_0x409D                                0x409D // Unused Var
 #define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE      0x409E
 #define VAR_MOSSDEEP_SPACE_CENTER_STATE                  0x409F
 #define VAR_SLATEPORT_HARBOR_STATE                       0x40A0
-#define VAR_LEGENDARY_SIGNS_UNLOCKED_5                   0x40A1 // Append-only Sign IDs 80-95.
+#define VAR_UNUSED_0x40A1                                0x40A1 // Unused var
 #define VAR_SEAFLOOR_CAVERN_STATE                        0x40A2
 #define VAR_CABLE_CAR_STATION_STATE                      0x40A3
 #define VAR_SAFARI_ZONE_STATE                            0x40A4  // 0: In or out of SZ, 1: Player exiting SZ, 2: Player entering SZ
 #define VAR_TRICK_HOUSE_BEING_WATCHED_STATE              0x40A5
 #define VAR_TRICK_HOUSE_FOUND_TRICK_MASTER               0x40A6
 #define VAR_TRICK_HOUSE_ENTRANCE_STATE                   0x40A7
-#define VAR_LEGENDARY_SIGNS_CAUGHT_5                     0x40A8 // Append-only Sign IDs 80-95.
+#define VAR_UNUSED_0x40A8                                0x40A8 // Unused Var
 #define VAR_CYCLING_CHALLENGE_STATE                      0x40A9
 #define VAR_SLATEPORT_MUSEUM_1F_STATE                    0x40AA
 #define VAR_TRICK_HOUSE_PUZZLE_1_STATE                   0x40AB
@@ -205,21 +203,17 @@
 #define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR              0x40B5
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2                 0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE                     0x40B7
-#define VAR_EC_SOOT_PROGRESS                             0x40B8 // Low 15 bits: lifetime soot; high bit: Cord received.
+#define VAR_UNUSED_0x40B8                                0x40B8 // Unused Var
 #define VAR_MT_PYRE_STATE                                0x40B9
 #define VAR_NEW_MAUVILLE_STATE                           0x40BA
-#define VAR_DEXNAV_SPECIES                               0x40BB // Registered DexNav species and habitat. Reclaimed VAR_RUSTBORO_GYM_GUIDE_STATE,
-        // retired with the Rustboro guide; the DexNav grant clears any stale value.
+#define VAR_UNUSED_0x40BB                                0x40BB // Unused Var
 #define VAR_BRAVO_TRAINER_BATTLE_TOWER_ON                0x40BC
 #define VAR_JAGGED_PASS_ASH_WEATHER                      0x40BD
-#define VAR_GLASS_WORKSHOP_STATE                         0x40BE // Restored from Inclement Emerald at its own ID.
-                                                                // This tree had retired the slot as VAR_UNUSED_0x40BE
-                                                                // ("the glass workshop keeps no state"), so the bit was free.
+#define VAR_GLASS_WORKSHOP_STATE                         0x40BE
 #define VAR_METEOR_FALLS_STATE                           0x40BF
 #define VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE              0x40C0
 #define VAR_TRICK_HOUSE_PRIZE_PICKUP                     0x40C1
-#define VAR_WEATHER_ANOMALY_STATE_1                      0x40C2 // Bits 16-31 of the weather anomaly state. Reclaimed VAR_PACIFIDLOG_STONE_RECEIVED_DAY;
-        // neither it nor its FRLG alias VAR_0x40C2 had any reference.
+#define VAR_PACIFIDLOG_TM_RECEIVED_DAY                   0x40C2
 #define VAR_VICTORY_ROAD_1F_STATE                        0x40C3
 #define VAR_FOSSIL_RESURRECTION_STATE                    0x40C4
 #define VAR_WHICH_FOSSIL_REVIVED                         0x40C5
@@ -236,29 +230,25 @@
 #define VAR_HAS_ENTERED_BATTLE_FRONTIER                  0x40D0 // Var is used like a flag.
 #define VAR_SCOTT_STATE                                  0x40D1
 #define VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE               0x40D2
-#define VAR_ASH_GATHER_COUNT                0x40D3  // Restored from Inclement Emerald. Reclaimed the
-        // id of VAR_BIRCH_POSTGAME_RESEARCH_STATE, which had zero references in data/, src/ or include/.
+#define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE              0x40D3
 #define VAR_SS_TIDAL_SCOTT_STATE                         0x40D4 // Always equal to FLAG_MET_SCOTT_ON_SS_TIDAL
 #define VAR_ROAMER_POKEMON                               0x40D5 // 0 = Latias, 1 = Latios
-#define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6 // Restored from Inclement Emerald at its own ID; 0x40D6 was an unclaimed hole.
+#define VAR_TRAINER_HILL_IS_ACTIVE                       0x40D6
 #define VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE                 0x40D7
-#define VAR_SKY_PILLAR_RAQUAZA_CRY_DONE                  VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE // Inclement's spelling of the same var (identical ID 0x40D7).
 #define VAR_SOOTOPOLIS_WALLACE_STATE                     0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE                         0x40DA
-#define VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS               0x40DB
-#define VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS                 0x40DC
+#define VAR_UNUSED_0x40DB                                0x40DB // Unused Var
+#define VAR_UNUSED_0x40DC                                0x40DC // Unused Var
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
-#define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic delivery bits 0-15.
-#define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned grant bits 0-5.
-#define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE                 0x40E0  // Restored from Inclement Emerald. Reclaimed the
-        // id of VAR_STEVEN_STARTER_STONE_DELIVERY, which had zero references in data/, src/ or include/.
-#define VAR_EC_SECOND_STARTER                         0x40E1 // 0 unset; second regional starter index + 1.
-#define VAR_EC_OPENING_STATE                         0x40E2 // EC_OPENING_* transaction state.
-#define VAR_EC_CIRCUIT_BEST_WINS                         0x40E3 // Best observed Circuit streak; 0 means no record yet.
-#define VAR_LEGENDARY_RELIC_DELIVERY_2                    0x40E4 // Pending bits 24-31 and earned grant bits 6-13. Reclaimed
-        // VAR_GIFT_UNUSED_7, which was only ever cleared to 0 and never read.
-#define VAR_CHAMPIONS_CIRCUIT_ACTIVE                     0x40E5
+#define VAR_GIFT_UNUSED_1                                0x40DE // Var is written to, but never read
+#define VAR_GIFT_UNUSED_2                                0x40DF // Var is written to, but never read
+#define VAR_GIFT_UNUSED_3                                0x40E0 // Var is written to, but never read
+#define VAR_GIFT_UNUSED_4                                0x40E1 // Var is written to, but never read
+#define VAR_GIFT_UNUSED_5                                0x40E2 // Var is written to, but never read
+#define VAR_GIFT_UNUSED_6                                0x40E3 // Var is written to, but never read
+#define VAR_GIFT_UNUSED_7                                0x40E4 // var is written to, but never read
+#define VAR_UNUSED_0x40E5                                0x40E5 // Unused Var
 #define VAR_DAILY_SLOTS                                  0x40E6
 #define VAR_DAILY_WILDS                                  0x40E7
 #define VAR_DAILY_BLENDER                                0x40E8
@@ -271,21 +261,20 @@
 #define VAR_SECRET_BASE_HIGH_TV_FLAGS                    0x40EF // Used by Secret Base TV programs
 #define VAR_SECRET_BASE_IS_NOT_LOCAL                     0x40F0 // Set to TRUE while in another player's secret base.
 #define VAR_DAILY_BP                                     0x40F1
-#define VAR_WEATHER_ANOMALY_STATE_2                      0x40F2 // Bits 32-47 of the weather anomaly state. Reclaimed VAR_WALLY_CALL_STEP_COUNTER
-        // (Match Call is removed); neither it nor its FRLG alias VAR_0x40F2 had any reference.
+#define VAR_WALLY_CALL_STEP_COUNTER                      0x40F2
 #define VAR_SCOTT_FORTREE_CALL_STEP_COUNTER              0x40F3
 #define VAR_ROXANNE_CALL_STEP_COUNTER                    0x40F4
 #define VAR_SCOTT_BF_CALL_STEP_COUNTER                   0x40F5
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER             0x40F6
-#define VAR_EMERALD_CHAMPIONS_DIFFICULTY                  0x40F7 // Live Hard/Medium/Easy enemy trainer level setting.
-#define VAR_LEGENDARY_SIGNS_UNLOCKED_0                   0x40F8
-#define VAR_LEGENDARY_SIGNS_UNLOCKED_1                   0x40F9
-#define VAR_LEGENDARY_SIGNS_UNLOCKED_2                   0x40FA
-#define VAR_LEGENDARY_SIGNS_UNLOCKED_3                   0x40FB
-#define VAR_LEGENDARY_SIGNS_CAUGHT_0                     0x40FC
-#define VAR_LEGENDARY_SIGNS_CAUGHT_1                     0x40FD
-#define VAR_LEGENDARY_SIGNS_CAUGHT_2                     0x40FE
-#define VAR_LEGENDARY_SIGNS_CAUGHT_3                     0x40FF
+#define VAR_UNUSED_0x40F7                                0x40F7 // Unused Var
+#define VAR_UNUSED_0x40F8                                0x40F8 // Unused Var
+#define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
+#define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
+#define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
+#define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
+#define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
+#define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
+#define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
 
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)
@@ -313,7 +302,7 @@
 #define VAR_CONTEST_CATEGORY          0x8011
 #define VAR_MON_BOX_ID                0x8012
 #define VAR_MON_BOX_POS               0x8013
-#define VAR_DEXNAV_STEP_COUNTER       0x8014 // DexNav hidden-Pokemon steps (never saved)
+#define VAR_UNUSED_0x8014             0x8014
 #define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of TRAINER_BATTLE_PARAM.opponentA
 
 #define SPECIAL_VARS_END              0x8015

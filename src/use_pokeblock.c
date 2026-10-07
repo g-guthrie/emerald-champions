@@ -6,7 +6,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "palette.h"
-#include "pokemon_storage_system.h"
+#include "pokenav.h"
 #include "menu_specialized.h"
 #include "scanline_effect.h"
 #include "text.h"
@@ -55,9 +55,11 @@ struct UsePokeblockSession
     struct Pokemon *mon;
     u8 stringBuffer[64];
     u8 mainState;
+    u8 unused1;
     u8 timer;
     u8 condition;
     u8 numEnhancements;
+    u8 unused2;
     bool8 monInTopHalf;
     u8 conditionsBeforeBlock[CONDITION_COUNT];
     u8 conditionsAfterBlock[CONDITION_COUNT];
@@ -67,19 +69,27 @@ struct UsePokeblockSession
     u8 curSelection;
     bool8 (*loadNewSelection)(void);
     u8 helperState;
+    u8 unused3;
     u8 natureText[34];
 };
 
+// This struct is identical to PokenavMonListItem, the struct used for managing lists of Pokémon in the PokéNav
+// Given that this screen is essentially duplicated in the poknav, this struct was probably the same one with
+// a more general name/purpose
+// TODO: Once the PokéNav conditions screens are documented, resolve the above
 struct UsePokeblockMenuPokemon
 {
     u8 boxId; // Because this screen is never used for the PC this is always set to TOTAL_BOXES_COUNT to refer to party
     u8 monId;
+    u16 data; // never read
 };
 
 struct UsePokeblockMenu
 {
+    u32 unused;
     u16 partyPalettes[PARTY_SIZE][0x40];
     u8 partySheets[NUM_SELECTIONS_LOADED][MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
+    u8 unusedBuffer[0x1000];
     u8 tilemapBuffer[BG_SCREEN_SIZE + 2];
     u8 selectionIconSpriteIds[PARTY_SIZE + 1];
     s16 curMonXOffset;
@@ -146,14 +156,14 @@ static void SpriteCB_SelectionIconCancel(struct Sprite *);
 static void SpriteCB_MonPic(struct Sprite *);
 static void SpriteCB_Condition(struct Sprite *);
 
-static const u8 sText_GetsAPokeBlockQuestion[] = _(" gets a Pokéblock?");
+static const u8 sText_GetsAPokeBlockQuestion[] = _(" gets a {POKEBLOCK}?");
 static const u8 sText_WasEnhanced[] = _("was enhanced!");
 static const u8 sText_NothingChanged[] = _("Nothing changed!");
 static const u8 sText_WontEatAnymore[] = _("It won't eat anymore…");
-static const u8 sText_NatureSlash[] = _("Nature/");
+static const u8 sText_NatureSlash[] = _("NATURE/");
 
-static const u16 sConditionGraphData_Pal[] = INCGFX_U16("graphics/pokenav/condition/graph_data.pal", ".gbapal");
-static const u16 sConditionText_Pal[] = INCGFX_U16("graphics/pokenav/condition/text.pal", ".gbapal");
+extern const u16 gConditionGraphData_Pal[];
+extern const u16 gConditionText_Pal[];
 
 // The below 3 are saved for returning to the screen after feeding a pokeblock to a mon
 // so that the rest of the data can be freed
@@ -1111,7 +1121,7 @@ static void LoadAndCreateUpDownSprites(void)
     {
         if (sInfo->enhancements[i] != 0)
         {
-            u16 spriteId = CreateSprite(&sSpriteTemplate_UpDown, sUpDownCoordsOnGraph[i][0], sUpDownCoordsOnGraph[i][1], 0);
+            u16 spriteId = CreateSpriteUnchecked(&sSpriteTemplate_UpDown, sUpDownCoordsOnGraph[i][0], sUpDownCoordsOnGraph[i][1], 0);
             if (spriteId != MAX_SPRITES)
             {
                 if (sInfo->enhancements[i] != 0) // Always true here
@@ -1151,6 +1161,7 @@ static void LoadPartyInfo(void)
         {
             sMenu->party[numMons].boxId = TOTAL_BOXES_COUNT;
             sMenu->party[numMons].monId = i;
+            sMenu->party[numMons].data = 0;
             numMons++;
         }
     }
@@ -1207,7 +1218,7 @@ static void UpdateMonPic(u8 loadId)
         spritePal.data = sMenu->partyPalettes[loadId];
         sMenu->curMonPalette = LoadSpritePalette(&spritePal);
         sMenu->curMonSheet = LoadSpriteSheet(&spriteSheet);
-        spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, 38, 104, 0);        fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+        spriteId = CreateSpriteUnchecked(&spriteTemplate, 38, 104, 0);
         sMenu->curMonSpriteId = spriteId;
         if (spriteId == MAX_SPRITES)
         {
@@ -1247,7 +1258,7 @@ static void LoadAndCreateSelectionIcons(void)
     // Fill Poké Ball selection icons up to number in party
     for (i = 0; i < sMenu->info.numSelections - 1; i++)
     {
-        spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, 226, (i * 20) + 8, 0);        fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+        spriteId = CreateSpriteUnchecked(&spriteTemplate, 226, (i * 20) + 8, 0);
         if (spriteId != MAX_SPRITES)
         {
             sMenu->selectionIconSpriteIds[i] = spriteId;
@@ -1264,7 +1275,7 @@ static void LoadAndCreateSelectionIcons(void)
     spriteTemplate.tileTag = TAG_CONDITION_BALL_PLACEHOLDER;
     for (; i < PARTY_SIZE; i++)
     {
-        spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, 230, (i * 20) + 8, 0);        fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+        spriteId = CreateSpriteUnchecked(&spriteTemplate, 230, (i * 20) + 8, 0);
         if (spriteId != MAX_SPRITES)
         {
             sMenu->selectionIconSpriteIds[i] = spriteId;
@@ -1279,7 +1290,7 @@ static void LoadAndCreateSelectionIcons(void)
     // Add cancel selection icon at bottom
     spriteTemplate.tileTag = TAG_CONDITION_CANCEL;
     spriteTemplate.callback = SpriteCB_SelectionIconCancel;
-    spriteId = CreateSpriteWithTemplateCopy(&spriteTemplate, 222, (i * 20) + 8, 0);    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+    spriteId = CreateSpriteUnchecked(&spriteTemplate, 222, (i * 20) + 8, 0);
     if (spriteId != MAX_SPRITES)
     {
         sMenu->selectionIconSpriteIds[i] = spriteId;
@@ -1351,8 +1362,8 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         break;
     case 11:
         LoadBgTilemap(2, sMenu->tilemapBuffer, 1280, 0);
-        LoadPalette(sConditionGraphData_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
-        LoadPalette(sConditionText_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        LoadPalette(gConditionGraphData_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+        LoadPalette(gConditionText_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         ConditionGraph_InitWindow(2);
         break;
     default:
@@ -1614,7 +1625,7 @@ static void CreateConditionSprite(void)
 
     for (i = 0, xDiff = 64, xStart = -96; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(template, i * xDiff + xStart, yStart, 0);
+        u8 spriteId = CreateSpriteUnchecked(template, i * xDiff + xStart, yStart, 0);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].sSpeed = speed;

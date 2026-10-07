@@ -8,7 +8,6 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "malloc.h"
-#include "sound.h"
 #include "text.h"
 
 // Reloads the game, continuing from the point of the last save
@@ -32,22 +31,4 @@ void ReloadSave(void)
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     InitHeap(gHeap, HEAP_SIZE);
     SetMainCallback2(CB2_ContinueSavedGame);
-}
-
-// Reload restores the last disk save, independently of battle Retry.
-// SAVE_STATUS_ERROR means loading recovered a valid redundant slot.
-// A new game that has not been saved yet must not reload the previous file.
-bool32 CanReloadLastSave(void)
-{
-    return (gSaveFileStatus == SAVE_STATUS_OK || gSaveFileStatus == SAVE_STATUS_ERROR)
-        && !gDifferentSaveFile;
-}
-
-void ReloadLastSave(void)
-{
-    if (!CanReloadLastSave())
-        return;
-    StopMapMusic();
-    m4aMPlayAllStop();
-    ReloadSave();
 }

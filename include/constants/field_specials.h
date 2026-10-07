@@ -7,6 +7,7 @@ enum PCLocation
     PC_LOCATION_OTHER,
     PC_LOCATION_BRENDANS_HOUSE,
     PC_LOCATION_MAYS_HOUSE,
+    PC_LOCATION_PLAYER_HOUSE_FRLG
 };
 
 // SS Tidal Locations
@@ -31,7 +32,6 @@ enum SSTidalState
     SS_TIDAL_LAND_SLATEPORT,
     SS_TIDAL_EXIT_CURRENTS_RIGHT,
     SS_TIDAL_EXIT_CURRENTS_LEFT,
-    SS_TIDAL_EXPEDITION,
 };
 
 #define SS_TIDAL_MAX_STEPS 205
@@ -40,11 +40,12 @@ enum SSTidalState
 enum ScrollMulti
 {
     SCROLL_MULTI_NONE,
+    SCROLL_MULTI_GLASS_WORKSHOP_VENDOR,
     SCROLL_MULTI_POKEMON_FAN_CLUB_RATER,
     SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1,
     SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2,
-    SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR,
-    SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR,
+    SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR,
+    SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR,
     SCROLL_MULTI_BERRY_POWDER_VENDOR,
     SCROLL_MULTI_BF_RECEPTIONIST,
     SCROLL_MULTI_BF_MOVE_TUTOR_1,
@@ -53,29 +54,10 @@ enum ScrollMulti
     SCROLL_MULTI_BATTLE_TENT_RULES,
     SCROLL_MULTI_BADGES,
     SCROLL_MULTI_SILPHCO_FLOORS,
-    SCROLL_MULTI_STARTER_REGIONS,
-    SCROLL_MULTI_FURFROU_TRIMS,
-    // Restored from Inclement Emerald.
-    SCROLL_MULTI_GAMECORNER_POKEMON,
-    SCROLL_MULTI_GAMECORNER_GRASS_STARTERS,
-    SCROLL_MULTI_GAMECORNER_FIRE_STARTERS,
-    SCROLL_MULTI_GAMECORNER_WATER_STARTERS,
-    SCROLL_MULTI_GLASS_WORKSHOP_VENDOR,
-    SCROLL_MULTI_HIDDEN_POWER,
 };
 
-// Inclement Emerald names the two Battle Frontier Exchange Corner vendors for
-// what they sold in vanilla. Same clerk, same slot, same row count either way;
-// this matches the EXCHANGE_CORNER_*_CLERK aliases in constants/battle_frontier.h.
-#define SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR    SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR
-#define SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR  SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR
-
-// Inclement Emerald's starter-region picker. This engine's list is the same
-// menu in the same order, extended past Alola with Galar and Paldea.
-#define SCROLL_MULTI_REGION_NAMES                         SCROLL_MULTI_STARTER_REGIONS
-
 #define MAX_SCROLL_MULTI_ON_SCREEN 6
-#define MAX_SCROLL_MULTI_LENGTH 17
+#define MAX_SCROLL_MULTI_LENGTH 16
 
 // Dept Store Floor Numbers
 enum DeptStoreFloorNumber
@@ -134,25 +116,5 @@ enum {
     CURRENT_POSITION,
     TEMPLATE_POSITION
 };
-
-// GiveEmeraldChampionsGameCornerPokemon otherwise returns the native
-// MON_GIVEN_TO_* / MON_CANT_GIVE values from constants/pokemon.h.
-#define EC_GAME_CORNER_PRIZE_SET_FAILED 3
-#define EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT 4
-
-// The Center move tutor's EV editor (src/inclement_stat_services.c).
-// AdjustPlannedEV takes one of these steps in VAR_0x8006 ...
-#define EV_PLAN_STEP_ADD_4      0
-#define EV_PLAN_STEP_ADD_64     1
-#define EV_PLAN_STEP_ADD_MAX    2
-#define EV_PLAN_STEP_SUB_4      3
-#define EV_PLAN_STEP_SUB_64     4
-#define EV_PLAN_STEP_CLEAR      5
-// ... and answers with one of these in VAR_RESULT.
-#define EV_PLAN_CHANGED         0
-#define EV_PLAN_STAT_FULL       1
-#define EV_PLAN_TOTAL_FULL      2
-#define EV_PLAN_STAT_EMPTY      3
-#define EV_PLAN_FEE             500
 
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

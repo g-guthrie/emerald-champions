@@ -3,6 +3,7 @@
   "name": "OldaleTown_Mart",
   "layout": "LAYOUT_MART",
   "music": "MUS_POKE_MART",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_OLDALE_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -25,7 +26,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "General_Pokemart_Script",
+      "script": "OldaleTown_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -53,20 +54,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "OldaleTown_Mart_EventScript_Boy",
       "flag": "0"
-    },
-    {
-      "local_id": "LOCALID_OLDALE_MART_VISITING_NURSE",
-      "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 4,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_Mart_EventScript_Nurse",
-      "flag": "FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE"
     }
   ],
   "warp_events": [
@@ -75,35 +62,16 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_TOWN",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_TOWN",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 3,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_TEMP_1",
-      "var_value": "1",
-      "script": "OldaleTown_Mart_EventScript_FirstShopping"
-    },
-    {
-      "type": "trigger",
-      "x": 4,
-      "y": 6,
-      "elevation": 0,
-      "var": "VAR_TEMP_1",
-      "var_value": "1",
-      "script": "OldaleTown_Mart_EventScript_FirstShopping"
-    }
-  ],
+  "coord_events": [],
   "bg_events": []
 }

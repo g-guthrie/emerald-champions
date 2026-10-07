@@ -3,6 +3,7 @@
   "name": "PetalburgCity_Mart",
   "layout": "LAYOUT_MART",
   "music": "MUS_POKE_MART",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_PETALBURG_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -25,7 +26,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "General_Pokemart_Script",
+      "script": "PetalburgCity_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -74,14 +75,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_PETALBURG_CITY",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],

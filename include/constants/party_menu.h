@@ -98,7 +98,6 @@ enum PcMonSelectionType
     SELECT_PC_MON_MOVE_DELETER,
     SELECT_PC_MON_MOVE_RELEARNER,
     SELECT_PC_MON_EVOLUTION,
-    SELECT_PC_MON_MOVE_RELEARNER_DIRECT, // The party screen and move list hand off without the field
 };
 
 enum CanMoveBeLearned

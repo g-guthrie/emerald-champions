@@ -1,8 +1,0 @@
-{"name":"PT00c set the clock","start":{"save":"work/studio/scenes/pt00b/end.sav"},
- "steps":[{"walk_to":[8,3],"label":"Below stairs"},{"walk":["UP"],"label":"Upstairs"},{"frames":120,"label":"2F"},
-          {"walk_to":[5,2],"face":"UP","label":"Facing clock"},
-          {"tap":"A","every":60,"frames":3000,"min_frames":10,"until_text":"correct time","label":"Asked: correct time?"},
-          {"frames":40},{"press":"UP","frames":30,"label":"Cursor Yes"},{"press":"A","frames":120,"label":"Yes"},
-          {"tap":"A","every":40,"frames":4000,"until":"idle","label":"Clock scene done"},{"frames":60,"label":"End"}],
- "queries":{"intro_state":{"kind":2,"id":"VAR_LITTLEROOT_INTRO_STATE"},"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"}},
- "expect":{"ready":true}}

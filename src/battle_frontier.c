@@ -40,8 +40,8 @@ static void HandleFacilityTrainerBattleEnd(void)
     case FACILITY_BATTLE_PALACE:
     case FACILITY_BATTLE_ARENA:
     case FACILITY_BATTLE_FACTORY:
-    case FACILITY_BATTLE_PIKE_ONE_TRAINER:
-    case FACILITY_BATTLE_PIKE_TWO_TRAINERS:
+    case FACILITY_BATTLE_PIKE_SINGLE:
+    case FACILITY_BATTLE_PIKE_DOUBLE:
     case FACILITY_BATTLE_PYRAMID:
         if (gSaveBlock2Ptr->frontier.battlesCount < 0xFFFFFF)
         {
@@ -79,7 +79,7 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
     switch (facility)
     {
     case FACILITY_BATTLE_TOWER:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOUBLE;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
         switch (VarGet(VAR_FRONTIER_BATTLE_MODE))
         {
         case FRONTIER_MODE_SINGLES:
@@ -87,6 +87,7 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
             break;
         case FRONTIER_MODE_DOUBLES:
             FillFrontierTrainerParty(FRONTIER_DOUBLES_PARTY_SIZE);
+            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
             break;
         case FRONTIER_MODE_MULTIS:
             FillFrontierTrainersParties(FRONTIER_MULTI_PARTY_SIZE);
@@ -104,7 +105,9 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_TOWER));
         break;
     case FACILITY_BATTLE_DOME:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOME | BATTLE_TYPE_DOUBLE;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOME;
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
         if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_FRONTIER_BRAIN)
         FillFrontierTrainerParty(DOME_BATTLE_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
@@ -112,7 +115,9 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_DOME));
         break;
     case FACILITY_BATTLE_PALACE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE | BATTLE_TYPE_DOUBLE;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE;
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
         if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         else
@@ -132,20 +137,22 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_ARENA));
         break;
     case FACILITY_BATTLE_FACTORY:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY | BATTLE_TYPE_DOUBLE;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
+        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
         FillFactoryTrainerParty();
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_FACTORY));
         break;
-    case FACILITY_BATTLE_PIKE_ONE_TRAINER:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOUBLE;
-        FillFrontierTrainerParty(FRONTIER_MULTI_PARTY_SIZE);
+    case FACILITY_BATTLE_PIKE_SINGLE:
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
         break;
-    case FACILITY_BATTLE_PIKE_TWO_TRAINERS:
+    case FACILITY_BATTLE_PIKE_DOUBLE:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
         FillFrontierTrainersParties(1);
         CreateTask(Task_StartBattleAfterTransition, 1);
@@ -153,7 +160,7 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
         break;
     case FACILITY_BATTLE_PYRAMID:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID | BATTLE_TYPE_DOUBLE;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID;
         FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
@@ -308,15 +315,15 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
 
     if (fmon->gender == TRAINER_MON_MALE)
     {
-        personality = GeneratePersonalityForGender(MON_MALE, fmon->species);
+        personality = GeneratePersonalityForGender(MON_MALE, fmon->species) + 0x1000;
     }
     else if (fmon->gender == TRAINER_MON_FEMALE)
     {
-        personality = GeneratePersonalityForGender(MON_FEMALE, fmon->species);
+        personality = GeneratePersonalityForGender(MON_FEMALE, fmon->species) + 0x1000;
     }
 
     ModifyPersonalityForNature(&personality, fmon->nature);
-    CreateMonWithIVs(dst, fmon->species, level, personality, OTID_STRUCT_PRESET(otID), MAX_PER_STAT_IVS);
+    CreateMonWithIVs(dst, fmon->species, level, personality, OTID_STRUCT_PRESET(otID), fixedIV);
 
     friendship = MAX_FRIENDSHIP;
     // Give the chosen Pokémon its specified moves.
@@ -376,6 +383,11 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
     {
         u32 data = fmon->gigantamaxFactor;
         SetMonData(dst, MON_DATA_GIGANTAMAX_FACTOR, &data);
+    }
+    if (fmon->teraType)
+    {
+        u32 data = fmon->teraType;
+        SetMonData(dst, MON_DATA_TERA_TYPE, &data);
     }
 
 

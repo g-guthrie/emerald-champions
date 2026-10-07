@@ -1,6 +1,6 @@
 EventScript_PC::
 	lockall
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, PC_LOCATION_OTHER
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox Text_BootUpPC, MSGBOX_DEFAULT
@@ -44,11 +44,15 @@ EventScript_AccessSomeonesPC::
 	return
 
 EventScript_AccessLanettesPC::
+#if IS_FRLG
+	msgbox gText_AccessedBillsPC, MSGBOX_DEFAULT
+#else
 	msgbox gText_AccessedLanettesPC, MSGBOX_DEFAULT
+#endif
 	return
 
 EventScript_TurnOffPC::
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, PC_LOCATION_OTHER
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
@@ -61,8 +65,6 @@ EventScript_AccessHallOfFame::
 	goto EventScript_AccessPC
 	end
 
-
-@ Emerald Champions: restored after the Inclement merge.
 EventScript_AccessPokemonBoxLink::
 	playse SE_PC_LOGIN
 	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT

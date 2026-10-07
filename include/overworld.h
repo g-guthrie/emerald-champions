@@ -47,6 +47,13 @@ struct LinkPlayerObjectEvent
     u8 movementMode;
 };
 
+struct CreditsOverworldCmd
+{
+    s16 unk_0;
+    s16 unk_2;
+    s16 unk_4;
+};
+
 enum {
     MUSIC_DISABLE_OFF,
     MUSIC_DISABLE_STOP,
@@ -93,20 +100,20 @@ void ApplyCurrentWarp(void);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
 struct MapHeader const *const GetDestinationWarpMapHeader(void);
 void WarpIntoMap(void);
-void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y);
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetWarpDestinationToMapWarp(s8 mapGroup, s8 mapNum, s8 warpId);
 void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId);
-void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y);
+void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetWarpDestinationToDynamicWarp(u8 unusedWarpId);
 void SetWarpDestinationToHealLocation(u8 healLocationId);
 void SetWarpDestinationToLastHealLocation(void);
 void SetWarpDestinationForTeleport(void);
 void SetLastHealLocationWarp(u8 healLocationId);
 void UpdateEscapeWarp(s16 x, s16 y);
-void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y);
+void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetWarpDestinationToEscapeWarp(void);
-void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y);
-void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y);
+void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 void SetContinueGameWarpToHealLocation(u8 healLocationId);
 void SetContinueGameWarpToDynamicWarp(int unused);
@@ -144,6 +151,7 @@ mapsec_u8_t GetLastUsedWarpMapSectionId(void);
 bool8 IsMapTypeOutdoors(enum MapType mapType);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(enum MapType mapType);
 bool8 IsMapTypeIndoors(enum MapType mapType);
+mapsec_u8_t GetSavedWarpRegionMapSectionId(void);
 mapsec_u8_t GetCurrentRegionMapSectionId(void);
 enum MapBattleScene GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
@@ -180,6 +188,8 @@ bool32 Overworld_RecvKeysFromLinkIsRunning(void);
 bool32 Overworld_SendKeysToLinkIsRunning(void);
 bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
+bool16 SetTimeOfDay(u16 hours);
+bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior);
 
 // Item Description Headers
 enum ItemObtainFlags
@@ -188,5 +198,8 @@ enum ItemObtainFlags
     FLAG_SET_ITEM_OBTAINED,
 };
 bool8 GetSetItemObtained(enum Item item, enum ItemObtainFlags caseId);
+
+void Overworld_CreditsMainCB(void);
+bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *);
 
 #endif // GUARD_OVERWORLD_H

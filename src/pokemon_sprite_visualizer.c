@@ -53,7 +53,9 @@ static const u16 sBgColor[] = {RGB_WHITE};
 
 static struct PokemonSpriteVisualizer *GetStructPtr(u8 taskId)
 {
-    return (struct PokemonSpriteVisualizer *)GetWordTaskArg(taskId, 0);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
+
+    return (struct PokemonSpriteVisualizer*)(T1_READ_PTR(taskDataPtr));
 }
 
 //BgTemplates
@@ -454,6 +456,19 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data);
 static void Exit_PokemonSpriteVisualizer(u8);
 
 //Text handling functions
+static void UNUSED PadString(const u8 *src, u8 *dst)
+{
+    u32 i;
+
+    for (i = 0; i < 17 && src[i] != EOS; i++)
+        dst[i] = src[i];
+
+    for (; i < 17; i++)
+        dst[i] = CHAR_SPACE;
+
+    dst[i] = EOS;
+}
+
 static const struct SubmenuText sSubmenuText[] =
 {
     [SUBMENU_SPECIES] =
@@ -544,6 +559,16 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
+static void SetStructPtr(u8 taskId, void *ptr)
+{
+    u32 structPtr = (u32)(ptr);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
+
+    taskDataPtr[0] = structPtr >> 0;
+    taskDataPtr[1] = structPtr >> 8;
+    taskDataPtr[2] = structPtr >> 16;
+    taskDataPtr[3] = structPtr >> 24;
+}
 
 //Digit and arrow functions
 #define VAL_U16     0
@@ -1241,7 +1266,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
         taskId = CreateTask(HandleInput_PokemonSpriteVisualizer, 0);
 
         data = AllocZeroed(sizeof(struct PokemonSpriteVisualizer));
-        SetWordTaskArg(taskId, 0, (u32)data);
+        SetStructPtr(taskId, data);
 
         data->currentmonId = SPECIES_BULBASAUR;
         species = IsSpeciesEnabled(data->currentmonId) ? SanitizeSpeciesId(data->currentmonId) : SPECIES_NONE;

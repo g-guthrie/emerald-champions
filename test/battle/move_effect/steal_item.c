@@ -1,9 +1,5 @@
 #include "global.h"
 #include "test/battle.h"
-#include "item.h"
-#include "battle_util.h"
-#include "event_data.h"
-#include "field_specials.h"
 
 ASSUMPTIONS
 {
@@ -110,6 +106,7 @@ SINGLE_BATTLE_TEST("Thief and Covet don't steal target's held item if target has
     }
 }
 
+// Test can't currently verify if the item is sent to Bag
 WILD_BATTLE_TEST("Thief and Covet steal target's held item and it's added to Bag in wild battles (Gen 9+)")
 {
     enum Move move;
@@ -117,7 +114,6 @@ WILD_BATTLE_TEST("Thief and Covet steal target's held item and it's added to Bag
     PARAMETRIZE { move = MOVE_COVET; }
     GIVEN {
         WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
-        ClearBag();
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_HYPER_POTION); }
     } WHEN {
@@ -129,15 +125,29 @@ WILD_BATTLE_TEST("Thief and Covet steal target's held item and it's added to Bag
     } THEN {
         EXPECT_EQ(player->item, ITEM_NONE);
         EXPECT_EQ(opponent->item, ITEM_NONE);
-        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_HYPER_POTION), 1);
-        u32 flags = gBattleTypeFlags;
-        gBattleTypeFlags = 0; // Same restoration endpoint used when a wild mon is caught.
-        EXPECT_EQ(GetBattleRestoredHeldItem(B_TRAINER_OPPONENT_A, 0), ITEM_NONE);
-        gBattleTypeFlags = flags;
-        ClearBag();
     }
 }
 
+SINGLE_BATTLE_TEST("Thief and Covet can't steal target's held item if user faints before (Gen9)")
+{
+    enum Move move;
+    PARAMETRIZE { move = MOVE_THIEF; }
+    PARAMETRIZE { move = MOVE_COVET; }
+    GIVEN {
+        WITH_CONFIG(B_FAINT_MOVE_EFFECT_TIMING, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ROCKY_HELMET); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        HP_BAR(opponent);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_NONE);
+        EXPECT_EQ(opponent->item, ITEM_ROCKY_HELMET);
+    }
+}
 
 SINGLE_BATTLE_TEST("Thief and Covet can steal target's held item if user faints before (Champions)")
 {
@@ -165,10 +175,9 @@ SINGLE_BATTLE_TEST("Thief and Covet: Berries that activate on HP thresholds are 
     PARAMETRIZE { move = MOVE_THIEF; }
     PARAMETRIZE { move = MOVE_COVET; }
 
-    // Half-HP berries activate at floor(maxHP / 2) + 1 in this game.
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(200); HP(102); Item(ITEM_ORAN_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(200); HP(101); Item(ITEM_ORAN_BERRY); }
     } WHEN {
         TURN { MOVE(player, move); }
     } SCENE {
@@ -176,9 +185,6 @@ SINGLE_BATTLE_TEST("Thief and Covet: Berries that activate on HP thresholds are 
         HP_BAR(opponent);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
-    } THEN {
-        EXPECT_EQ(player->item, ITEM_ORAN_BERRY);
-        EXPECT_EQ(opponent->item, ITEM_NONE);
     }
 }
 
@@ -198,63 +204,5 @@ SINGLE_BATTLE_TEST("Thief and Covet: Berries that activate on a Status activate 
         ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, opponent);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
-    }
-}
-
-WILD_BATTLE_TEST("Thief and Covet leave the wild held item intact when the Bag is full")
-{
-    enum Move move;
-    PARAMETRIZE { move = MOVE_THIEF; }
-    PARAMETRIZE { move = MOVE_COVET; }
-    GIVEN {
-        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
-        GIVE_PLAYER_ITEM(ITEM_SITRUS_BERRY, MAX_BAG_ITEM_CAPACITY);
-        PLAYER(SPECIES_WOBBUFFET) { Attack(1); Moves(move); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(200); MaxHP(200); Item(ITEM_SITRUS_BERRY); Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(player, move); MOVE(opponent, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, move, player);
-        HP_BAR(opponent);
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
-    } THEN {
-        EXPECT_EQ(player->item, ITEM_NONE);
-        EXPECT_EQ(opponent->item, ITEM_SITRUS_BERRY);
-        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SITRUS_BERRY), MAX_BAG_ITEM_CAPACITY);
-        EXPECT_EQ(GetBattlerPartyState(B_BATTLER_1)->heldItemOrigin, B_TRAINER_OPPONENT_A * PARTY_SIZE + 1);
-        ClearBag();
-    }
-}
-
-WILD_BATTLE_TEST("Thief and Covet give usable wild gear without discovering vendor stock")
-{
-    enum Move move;
-    bool32 previouslyDiscovered;
-    for (u32 discovered = 0; discovered < 2; discovered++)
-    {
-        PARAMETRIZE { move = MOVE_THIEF; previouslyDiscovered = discovered; }
-        PARAMETRIZE { move = MOVE_COVET; previouslyDiscovered = discovered; }
-    }
-    GIVEN {
-        WITH_CONFIG(B_STEAL_WILD_ITEMS, GEN_9);
-        ClearBag();
-        memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
-        if (previouslyDiscovered)
-            EmeraldChampions_UnlockBattleItem(ITEM_THROAT_SPRAY);
-        PLAYER(SPECIES_WOBBUFFET) { Attack(1); Moves(move); }
-        OPPONENT(SPECIES_WOBBUFFET) { HP(200); MaxHP(200); Item(ITEM_THROAT_SPRAY); Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(player, move); MOVE(opponent, MOVE_CELEBRATE); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, move, player);
-        HP_BAR(opponent);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
-    } THEN {
-        EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_THROAT_SPRAY), 1);
-        EXPECT_EQ(player->item, ITEM_NONE);
-        EXPECT_EQ(opponent->item, ITEM_NONE);
-        EXPECT_EQ(IsEmeraldChampionsBattleItemUnlocked(ITEM_THROAT_SPRAY), previouslyDiscovered);
-        ClearBag();
-        memset(gSaveBlock1Ptr->battleItemsUnlocked, 0, sizeof(gSaveBlock1Ptr->battleItemsUnlocked));
     }
 }

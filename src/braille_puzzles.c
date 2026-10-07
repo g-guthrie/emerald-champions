@@ -89,6 +89,20 @@ void DoBrailleDigEffect(void)
     FlagSet(FLAG_SYS_BRAILLE_DIG);
 }
 
+bool8 CheckRelicanthWailord(void)
+{
+    // Emerald change: why did they flip it?
+    // First comes Wailord
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_WAILORD)
+    {
+        CalculatePlayerPartyCount();
+        // Last comes Relicanth
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][gPartiesCount[B_TRAINER_PLAYER] - 1], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_RELICANTH)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 // THEORY: this was caused by block commenting out all of the older R/S braille functions but leaving the call to it itself, which creates the nullsub.
 void ShouldDoBrailleRegirockEffectOld(void)
 {
@@ -323,40 +337,4 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     }
 
     return FALSE;
-}
-
-// ---------------------------------------------------------------------------
-// Names the restored Inclement Emerald Sealed Chamber scripts use.
-// ---------------------------------------------------------------------------
-
-// The braille dig puzzle needs Wailord leading the party and Relicanth last.
-// The donor read MON_DATA_SPECIES2 and gPlayerPartyCount; both are renamed
-// here (MON_DATA_SPECIES_OR_EGG, and the party arrays became gParties[] /
-// gPartiesCount[] indexed by trainer, with the old names deprecated).
-bool8 CheckRelicanthWailord(void)
-{
-    // First comes Wailord.
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES_OR_EGG) == SPECIES_WAILORD)
-    {
-        CalculatePlayerPartyCount();
-        // Last comes Relicanth.
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][gPartiesCount[B_TRAINER_PLAYER] - 1],
-                       MON_DATA_SPECIES_OR_EGG) == SPECIES_RELICANTH)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-// Upstream renamed these two to _Long and _Short when it gave the shake task
-// named data fields; the bodies are unchanged (50 shakes of +/-2, and 2 shakes
-// of +/-3). The restored scripts still use the numbered names, so alias them
-// rather than renaming upstream API.
-void DoSealedChamberShakingEffect1(void)
-{
-    DoSealedChamberShakingEffect_Long();
-}
-
-void DoSealedChamberShakingEffect2(void)
-{
-    DoSealedChamberShakingEffect_Short();
 }

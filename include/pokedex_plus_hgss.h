@@ -22,7 +22,5 @@ void HandleCreateStatBars_HGSS(void);
 void HandleCreateStatBarsDPAD_HGSS(void);
 void HandleCaughtMonPageTypeIcons_HGSS(void);
 bool32 TryHandleCaughtMonPageFlicker_HGSS(u8 taskId);
-// The Stats page's moves: exactly what the Center's tutor teaches the species.
-u32 GetPokedexTutorMoves(enum Species species, u16 *moves);
 
 #endif // GUARD_POKEDEX_PLUS_HGSS_H

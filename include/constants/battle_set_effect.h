@@ -45,6 +45,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_FLORAL_HEALING,
     MOVE_EFFECT_SECRET_POWER,
     MOVE_EFFECT_PSYCHIC_NOISE,
+    MOVE_EFFECT_TERA_BLAST,
     MOVE_EFFECT_ORDER_UP,
     MOVE_EFFECT_ION_DELUGE,
     MOVE_EFFECT_HAZE,
@@ -132,6 +133,7 @@ enum SetMoveEffectFlags
     EFFECT_PRIMARY    = (1 << 0),
     EFFECT_CERTAIN    = (1 << 1),
     EFFECT_ON_SIDE    = (1 << 2),
+    EFFECT_BYPASS_SHEER_FORCE = (1 << 3),
 };
 
 #endif // GUARD_CONSTANTS_BATTLE_SET_EFFECT_H

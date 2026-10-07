@@ -1716,6 +1716,50 @@ const u16 gItemIconPalette_KeeBerry[] = INCGFX_U16("graphics/items/icon_palettes
 const u32 gItemIcon_MarangaBerry[] = INCGFX_U32("graphics/items/icons/maranga_berry.png", ".4bpp.smol");
 const u16 gItemIconPalette_MarangaBerry[] = INCGFX_U16("graphics/items/icon_palettes/maranga_berry.pal", ".gbapal");
 
+// TMs/HMs
+
+const u32 gItemIcon_TM[] = INCGFX_U32("graphics/items/icons/tm.png", ".4bpp.smol");
+
+const u32 gItemIcon_HM[] = INCGFX_U32("graphics/items/icons/hm.png", ".4bpp.smol");
+
+const u16 gItemIconPalette_NormalTMHM[] = INCGFX_U16("graphics/items/icon_palettes/normal_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_FireTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fire_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_WaterTMHM[] = INCGFX_U16("graphics/items/icon_palettes/water_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_ElectricTMHM[] = INCGFX_U16("graphics/items/icon_palettes/electric_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_GrassTMHM[] = INCGFX_U16("graphics/items/icon_palettes/grass_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_IceTMHM[] = INCGFX_U16("graphics/items/icon_palettes/ice_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_FightingTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fighting_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_PoisonTMHM[] = INCGFX_U16("graphics/items/icon_palettes/poison_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_GroundTMHM[] = INCGFX_U16("graphics/items/icon_palettes/ground_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_FlyingTMHM[] = INCGFX_U16("graphics/items/icon_palettes/flying_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_PsychicTMHM[] = INCGFX_U16("graphics/items/icon_palettes/psychic_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_BugTMHM[] = INCGFX_U16("graphics/items/icon_palettes/bug_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_RockTMHM[] = INCGFX_U16("graphics/items/icon_palettes/rock_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_GhostTMHM[] = INCGFX_U16("graphics/items/icon_palettes/ghost_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_DragonTMHM[] = INCGFX_U16("graphics/items/icon_palettes/dragon_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_DarkTMHM[] = INCGFX_U16("graphics/items/icon_palettes/dark_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_SteelTMHM[] = INCGFX_U16("graphics/items/icon_palettes/steel_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_MysteryTMHM[] = INCGFX_U16("graphics/items/icon_palettes/mystery_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_FairyTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fairy_tm_hm.pal", ".gbapal");
+
 // Charms
 
 const u32 gItemIcon_OvalCharm[] = INCGFX_U32("graphics/items/icons/oval_charm.png", ".4bpp.smol");
@@ -1802,6 +1846,9 @@ const u16 gItemIconPalette_TownMap[] = INCGFX_U16("graphics/items/icon_palettes/
 
 const u32 gItemIcon_VsSeeker[] = INCGFX_U32("graphics/items/icons/vs_seeker.png", ".4bpp.smol");
 const u16 gItemIconPalette_VsSeeker[] = INCGFX_U16("graphics/items/icon_palettes/vs_seeker.pal", ".gbapal");
+
+const u32 gItemIcon_TMCase[] = INCGFX_U32("graphics/items/icons/tm_case.png", ".4bpp.smol");
+const u16 gItemIconPalette_TMCase[] = INCGFX_U16("graphics/items/icon_palettes/tm_case.pal", ".gbapal");
 
 const u32 gItemIcon_BerryPouch[] = INCGFX_U32("graphics/items/icons/berry_pouch.png", ".4bpp.smol");
 const u16 gItemIconPalette_BerryPouch[] = INCGFX_U16("graphics/items/icon_palettes/berry_pouch.pal", ".gbapal");
@@ -1966,8 +2013,36 @@ const u16 gItemIconPalette_ScrollOfDarkness[] = INCGFX_U16("graphics/items/icon_
 const u32 gItemIcon_ScrollOfWaters[] = INCGFX_U32("graphics/items/icons/scroll_of_waters.png", ".4bpp.smol");
 const u16 gItemIconPalette_ScrollOfWaters[] = INCGFX_U16("graphics/items/icon_palettes/scroll_of_waters.pal", ".gbapal");
 
+const u32 gItemIcon_TeraOrb[] = INCGFX_U32("graphics/items/icons/tera_orb.png", ".4bpp.smol");
+const u16 gItemIconPalette_TeraOrb[] = INCGFX_U16("graphics/items/icon_palettes/tera_orb.pal", ".gbapal");
+
 const u32 gItemIcon_TinyBambooShoot[] = INCGFX_U32("graphics/items/icons/tiny_bamboo_shoot.png", ".4bpp.smol");
 const u16 gItemIconPalette_TinyBambooShoot[] = INCGFX_U16("graphics/items/icon_palettes/tiny_bamboo_shoot.pal", ".gbapal");
+
+// Tera Shards
+
+const u32 gItemIcon_TeraShard[] = INCGFX_U32("graphics/items/icons/tera_shard.png", ".4bpp.smol");
+const u16 gItemIconPalette_NormalTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/normal_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_FireTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/fire_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_WaterTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/water_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_GrassTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/grass_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_ElectricTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/electric_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_IceTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/ice_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_FightingTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/fighting_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_PoisonTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/poison_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_GroundTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/ground_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_FlyingTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/flying_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_PsychicTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/psychic_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_BugTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/bug_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_RockTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/rock_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_GhostTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/ghost_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_DarkTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/dark_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_DragonTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/dragon_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_SteelTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/steel_tera_shard.pal", ".gbapal");
+const u16 gItemIconPalette_FairyTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/fairy_tera_shard.pal", ".gbapal");
+
+const u32 gItemIcon_StellarTeraShard[] = INCGFX_U32("graphics/items/icons/stellar_tera_shard.png", ".4bpp.smol");
+const u16 gItemIconPalette_StellarTeraShard[] = INCGFX_U16("graphics/items/icon_palettes/stellar_tera_shard.pal", ".gbapal");
 
 // Mochi
 
@@ -2032,35 +2107,8 @@ const u16 gItemIconPalette_JubilifeMuffin[] = INCGFX_U16("graphics/items/icon_pa
 const u32 gItemIcon_PokeshiDoll[] = INCGFX_U32("graphics/items/icons/pokeshi_doll.png", ".4bpp.smol");
 const u16 gItemIconPalette_PokeshiDoll[] = INCGFX_U16("graphics/items/icon_palettes/pokeshi_doll.pal", ".gbapal");
 
-const u32 gItemIcon_PokeVial[] = INCGFX_U32("graphics/items/icons/poke_vial.png", ".4bpp.smol");
-const u16 gItemIconPalette_PokeVial[] = INCGFX_U16("graphics/items/icon_palettes/poke_vial.pal", ".gbapal");
-
-const u32 gItemIcon_MagmaStone[] = INCGFX_U32("graphics/items/icons/magma_stone.png", ".4bpp.smol");
-const u16 gItemIconPalette_MagmaStone[] = INCGFX_U16("graphics/items/icon_palettes/magma_stone.pal", ".gbapal");
-
 const u32 gItemIcon_SwapSnack[] = INCGFX_U32("graphics/items/icons/swap_snack.png", ".4bpp.smol");
 const u16 gItemIconPalette_SwapSnack[] = INCGFX_U16("graphics/items/icon_palettes/swap_snack.pal", ".gbapal");
 
 const u32 gItemIcon_TwiceSpicedRadish[] = INCGFX_U32("graphics/items/icons/twice_spiced_radish.png", ".4bpp.smol");
 const u16 gItemIconPalette_TwiceSpicedRadish[] = INCGFX_U16("graphics/items/icon_palettes/twice_spiced_radish.pal", ".gbapal");
-
-const u32 gItemIcon_Butterfrenite[] = INCGFX_U32("graphics/items/icons/butterfrenite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Butterfrenite[] = INCGFX_U16("graphics/items/icon_palettes/butterfrenite.pal", ".gbapal");
-
-const u32 gItemIcon_Machampite[] = INCGFX_U32("graphics/items/icons/machampite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Machampite[] = INCGFX_U16("graphics/items/icon_palettes/machampite.pal", ".gbapal");
-
-const u32 gItemIcon_Kinglerite[] = INCGFX_U32("graphics/items/icons/kinglerite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Kinglerite[] = INCGFX_U16("graphics/items/icon_palettes/kinglerite.pal", ".gbapal");
-
-const u32 gItemIcon_Laprasite[] = INCGFX_U32("graphics/items/icons/laprasite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Laprasite[] = INCGFX_U16("graphics/items/icon_palettes/laprasite.pal", ".gbapal");
-
-const u32 gItemIcon_Flygonite[] = INCGFX_U32("graphics/items/icons/flygonite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Flygonite[] = INCGFX_U16("graphics/items/icon_palettes/flygonite.pal", ".gbapal");
-
-const u32 gItemIcon_Miloticite[] = INCGFX_U32("graphics/items/icons/miloticite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Miloticite[] = INCGFX_U16("graphics/items/icon_palettes/miloticite.pal", ".gbapal");
-
-const u32 gItemIcon_Kingdranite[] = INCGFX_U32("graphics/items/icons/kingdranite.png", ".4bpp.smol");
-const u16 gItemIconPalette_Kingdranite[] = INCGFX_U16("graphics/items/icon_palettes/kingdranite.pal", ".gbapal");

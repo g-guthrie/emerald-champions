@@ -1,8 +1,0 @@
-{"name":"PT00g leave May's house, head north to Route 101","start":{"save":"work/studio/scenes/pt00f/end.sav"},
- "steps":[{"walk_to":[1,2],"label":"By stairs"},{"walk":["UP"],"label":"Downstairs"},{"frames":120},
-          {"tap":"A","every":40,"frames":2000,"min_frames":30,"until":"idle","label":"1F"},
-          {"walk_to":[2,8],"label":"On mat"},{"hold":"DOWN","frames":40,"label":"Press out"},{"frames":150,"label":"Outside"},
-          {"walk_to":[11,2],"label":"North of town"},{"walk":["UP"],"label":"Trigger"},
-          {"tap":"A","every":40,"frames":4000,"min_frames":30,"until":"idle","label":"After trigger"},{"frames":60,"label":"End"}],
- "queries":{"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"},"route101_state":{"kind":2,"id":"VAR_ROUTE101_STATE"}},
- "expect":{"ready":true}}

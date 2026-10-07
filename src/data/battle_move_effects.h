@@ -1799,6 +1799,18 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
+    [EFFECT_TERA_BLAST] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_TERA_STARSTORM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
+    },
+
     [EFFECT_SHELL_SIDE_ARM] =
     {
         .battleScript = BattleScript_EffectHit,
@@ -1863,5 +1875,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
+    },
+
+    [EFFECT_SECRET_POWER] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 1,
     },
 };

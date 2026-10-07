@@ -3,6 +3,7 @@
   "name": "BattleFrontier_BattlePalaceBattleRoom",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM",
   "music": "MUS_B_PALACE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_PALACE_BATTLE_PLAYER",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 1,
       "y": 9,
@@ -25,10 +27,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_PALACE_BATTLE_PLAYER"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_PALACE_BATTLE_OPPONENT",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 13,
       "y": 1,
@@ -39,10 +41,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_PALACE_BATTLE_OPPONENT"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_PALACE_BATTLE_ATTENDANT",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 1,
       "y": 4,
@@ -53,10 +55,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_PALACE_BATTLE_ATTENDANT"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_PALACE_DUSCLOPS",
       "graphics_id": "OBJ_EVENT_GFX_DUSCLOPS",
       "x": 13,
       "y": 1,
@@ -67,10 +69,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_PALACE_DUSCLOPS"
+      "flag": "0"
     },
     {
+      "local_id": "LOCALID_PALACE_AZURILL",
       "graphics_id": "OBJ_EVENT_GFX_AZURILL",
       "x": 13,
       "y": 1,
@@ -81,8 +83,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "0",
-      "local_id": "LOCALID_PALACE_AZURILL"
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -91,14 +92,14 @@
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 9,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

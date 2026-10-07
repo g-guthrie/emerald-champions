@@ -14,8 +14,6 @@ const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[] = {
     {CLI_RECV, MG_LINKID_CLIENT_SCRIPT},
     {CLI_COPY_RECV}
 };
-STATIC_ASSERT(sizeof(gMysteryGiftClientScript_Init) <= MG_LINK_BUFFER_SIZE, MysteryGiftClientInitScriptFits);
-const u32 gMysteryGiftClientScript_InitSize = sizeof(gMysteryGiftClientScript_Init);
 
 static const struct MysteryGiftClientCmd sClientScript_SendGameData[] = {
     {CLI_LOAD_GAME_DATA},

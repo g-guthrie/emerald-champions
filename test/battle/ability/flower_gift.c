@@ -84,28 +84,6 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
     }
 }
 
-SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back after losing Flower Gift to Skill Swap")
-{
-    GIVEN {
-        ASSUME(B_WEATHER_FORMS >= GEN_5);
-        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
-        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
-        TURN { MOVE(opponent, MOVE_SKILL_SWAP); }
-    } SCENE {
-        ABILITY_POPUP(player, ABILITY_FLOWER_GIFT);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
-        MESSAGE("Cherrim transformed!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
-        MESSAGE("Cherrim transformed!");
-    } THEN {
-        EXPECT_EQ(player->species, SPECIES_CHERRIM_OVERCAST);
-    }
-}
-
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal under Cloud Nine/Air Lock")
 {
     enum Species species = SPECIES_NONE;
@@ -240,5 +218,41 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back when it uses a move that
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_CHERRIM);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Flower Gift reverts Cherrim back after Teraform Zero clears weather")
+{
+    GIVEN {
+        PLAYER(SPECIES_TERAPAGOS_TERASTAL);
+        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        OPPONENT(SPECIES_GROUDON) { Ability(ABILITY_DROUGHT); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        ABILITY_POPUP(opponentLeft, ABILITY_DROUGHT);
+        ABILITY_POPUP(playerRight, ABILITY_FLOWER_GIFT);
+        ABILITY_POPUP(playerLeft, ABILITY_TERAFORM_ZERO);
+        ABILITY_POPUP(playerRight, ABILITY_FLOWER_GIFT);
+    } THEN {
+        EXPECT_EQ(playerRight->species, SPECIES_CHERRIM);
+    }
+}
+
+SINGLE_BATTLE_TEST("Flower Gift does not transform Cherrim back to normal when suppressed if Cherrim is Dynamaxed")
+{
+    GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
+        ASSUME(GetMoveEffect(MOVE_GASTRO_ACID) == EFFECT_GASTRO_ACID);
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+        TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); }
+        TURN { MOVE(opponent, MOVE_GASTRO_ACID); }
+    } SCENE {
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CHERRIM_SUNSHINE);
     }
 }

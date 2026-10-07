@@ -1,122 +1,201 @@
 #include "global.h"
 #include "test/battle.h"
-#include "battle_stat_change.h"
-#include "battle_ai_util.h"
 
-SINGLE_BATTLE_TEST("Guard Dog: Intimidate replaces the drop at minimum, neutral and maximum Attack")
-{
-    u32 initial;
-    PARAMETRIZE { initial = MIN_STAT_STAGE; }
-    PARAMETRIZE { initial = DEFAULT_STAT_STAGE; }
-    PARAMETRIZE { initial = MAX_STAT_STAGE; }
-    GIVEN {
-        PLAYER(SPECIES_DACHSBUN) { Ability(ABILITY_GUARD_DOG); Moves(MOVE_CELEBRATE, MOVE_BELLY_DRUM); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CHARM, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_ARCANINE) { Ability(ABILITY_INTIMIDATE); Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        if (initial == MIN_STAT_STAGE)
-            for (u32 i = 0; i < 3; i++)
-                TURN { MOVE(opponent, MOVE_CHARM); MOVE(player, MOVE_CELEBRATE); }
-        else if (initial == MAX_STAT_STAGE)
-            TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_BELLY_DRUM); }
-        TURN { SWITCH(opponent, 1); MOVE(player, MOVE_CELEBRATE); }
-    } THEN {
-        EXPECT_EQ(player->statStages[STAT_ATK], min(initial + 1, MAX_STAT_STAGE));
-    }
-}
-
-DOUBLE_BATTLE_TEST("Stat reactions: Intimidate independently triggers Defiant and Competitive in doubles")
-{
-    GIVEN {
-        PLAYER(SPECIES_BISHARP) { Ability(ABILITY_DEFIANT); Moves(MOVE_CELEBRATE); }
-        PLAYER(SPECIES_MILOTIC) { Ability(ABILITY_COMPETITIVE); Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_ARCANINE) { Ability(ABILITY_INTIMIDATE); Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
-    } THEN {
-        EXPECT_EQ(playerLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
-        EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
-        EXPECT_EQ(playerRight->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 2);
-    }
-}
-
-SINGLE_BATTLE_TEST("Stat preview: checking Intimidate immunity does not queue reactions or reveal abilities")
+SINGLE_BATTLE_TEST("Guard Dog raises Attack when intimidated", s16 damage)
 {
     enum Ability ability;
-    PARAMETRIZE { ability = ABILITY_GUARD_DOG; }
-    PARAMETRIZE { ability = ABILITY_INNER_FOCUS; }
-    PARAMETRIZE { ability = ABILITY_SCRAPPY; }
-    PARAMETRIZE { ability = ABILITY_OWN_TEMPO; }
-    PARAMETRIZE { ability = ABILITY_OBLIVIOUS; }
+    PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
+    PARAMETRIZE { ability = ABILITY_SHED_SKIN; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ability); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARBOK) { Ability(ability); }
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE); }
-    } THEN {
-        struct BattleCalcValues cv = {.battlerAtk = B_BATTLER_0, .battlerDef = B_BATTLER_1, .move = MOVE_NONE};
-        cv.abilities[B_BATTLER_1] = ability;
-        struct StatChange st = {.stat = STAT_ATK, .stage = -1, .intimidate = TRUE, .onlyChecking = TRUE};
-        u32 queued = gSpecialStatuses[B_BATTLER_1].statStageAmount2;
-        enum Ability lastAbility = gLastUsedAbility;
-        enum BattlerId abilityBattler = gBattlerAbility;
-        enum BattlerId scriptBattler = gBattleScripting.battler;
-        enum BattlerId effectBattler = gEffectBattler;
-        EXPECT(!CanStatChange(&cv, &st));
-        EXPECT_EQ((u32)gSpecialStatuses[B_BATTLER_1].statStageAmount2, queued);
-        EXPECT_EQ(gLastUsedAbility, lastAbility);
-        EXPECT_EQ(gBattlerAbility, abilityBattler);
-        EXPECT_EQ(gBattleScripting.battler, scriptBattler);
-        EXPECT_EQ(gEffectBattler, effectBattler);
-        EXPECT_EQ(st.script, NULL);
+        TURN { SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        if (ability == ABILITY_INTIMIDATE)
+        {
+            ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+            ABILITY_POPUP(player, ABILITY_GUARD_DOG);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Okidogi's Attack rose!");
+        }
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[1].damage, Q_4_12(1.5), results[0].damage);
     }
 }
 
-DOUBLE_BATTLE_TEST("Stat queues: selective resets preserve other battlers pending reactions")
+SINGLE_BATTLE_TEST("Guard Dog raises Attack before Adrenaline Orb when Intimidated")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        ASSUME(gItemsInfo[ITEM_ADRENALINE_ORB].holdEffect == HOLD_EFFECT_ADRENALINE_ORB);
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); Item(ITEM_ADRENALINE_ORB); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); MOVE(opponentLeft, MOVE_CELEBRATE); MOVE(opponentRight, MOVE_CELEBRATE); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        ABILITY_POPUP(player, ABILITY_GUARD_DOG);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Okidogi's Attack rose!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
     } THEN {
-        for (u32 battler = 0; battler < gBattlersCount; battler++)
-        {
-            SetStatChange(battler, STAT_ATK, 1);
-            SetStatChange2(battler, STAT_DEF, 2);
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->item, ITEM_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Guard Dog still raises Attack against Intimidate when holding Clear Amulet")
+{
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_CLEAR_AMULET].holdEffect == HOLD_EFFECT_CLEAR_AMULET);
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); Item(ITEM_CLEAR_AMULET); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        ABILITY_POPUP(player, ABILITY_GUARD_DOG);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Okidogi's Attack rose!");
+        NOT MESSAGE("The effects of the Clear Amulet held by Okidogi prevents its stats from being lowered!");
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("Guard Dog does not activate if Intimidate is blocked by Substitute")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_SUBSTITUTE) == EFFECT_SUBSTITUTE);
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUBSTITUTE); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, player);
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_GUARD_DOG);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Okidogi's Attack rose!");
         }
-        gBattleStruct->statChangeBattler = 2;
-        gBattleStruct->positiveAnimPlayed = TRUE;
-        gBattleStruct->negativeAnimPlayed = TRUE;
-        ClearStatChangeValues();
-        for (u32 battler = 0; battler < gBattlersCount; battler++)
-        {
-            EXPECT_EQ((u32)gSpecialStatuses[battler].statStageAmount, 0);
-            EXPECT_EQ((u32)gSpecialStatuses[battler].statStageAmount2, 1);
-            EXPECT_EQ(gSpecialStatuses[battler].statStageQueue2[0].stage, 2);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Guard Dog does not activate if Intimidate is blocked by Mist")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_MIST) == EFFECT_MIST);
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_MIST); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MIST, player);
+        MESSAGE("Okidogi surrounds itself with a protective mist!");
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_GUARD_DOG);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Okidogi's Attack rose!");
         }
-        EXPECT_EQ((u32)gBattleStruct->statChangeBattler, 0);
-        EXPECT(!(bool32)gBattleStruct->positiveAnimPlayed);
-        EXPECT(!(bool32)gBattleStruct->negativeAnimPlayed);
-        ClearOtherStatChangeValues(B_BATTLER_1);
-        for (u32 battler = 0; battler < gBattlersCount; battler++)
-        {
-            EXPECT_EQ((u32)gSpecialStatuses[battler].statStageAmount2, battler == B_BATTLER_1 ? 0 : 1);
-            SetStatChange(battler, STAT_ATK, 1);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Guard Dog does not activate if Intimidate cannot lower Attack at minimum stage")
+{
+    GIVEN {
+        ASSUME_STAT_CHANGE(MOVE_CHARM, attack: -2);
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CHARM); }
+        TURN { MOVE(opponent, MOVE_CHARM); }
+        TURN { MOVE(opponent, MOVE_CHARM); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARM, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARM, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARM, opponent);
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_GUARD_DOG);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Okidogi's Attack rose!");
         }
-        ClearBothStatChangeQueues();
-        for (u32 battler = 0; battler < gBattlersCount; battler++)
-        {
-            EXPECT_EQ((u32)gSpecialStatuses[battler].statStageAmount, 0);
-            EXPECT_EQ((u32)gSpecialStatuses[battler].statStageAmount2, 0);
-            for (u32 slot = 0; slot < NUM_BATTLE_STATS; slot++)
-            {
-                EXPECT_EQ(gSpecialStatuses[battler].statStageQueue[slot].stage, 0);
-                EXPECT_EQ(gSpecialStatuses[battler].statStageQueue2[slot].stage, 0);
-            }
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], MIN_STAT_STAGE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Guard Dog does not activate if Intimidate is blocked by Flower Veil")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_FORESTS_CURSE) == EFFECT_THIRD_TYPE);
+        ASSUME(GetMoveArgType(MOVE_FORESTS_CURSE) == TYPE_GRASS);
+        PLAYER(SPECIES_COMFEY) { Ability(ABILITY_FLOWER_VEIL); Speed(40); }
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); Speed(30); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); Speed(5); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FORESTS_CURSE, target: playerRight); }
+        TURN { SWITCH(opponentRight, 2); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FORESTS_CURSE, playerLeft);
+        ABILITY_POPUP(opponentRight, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ABILITY_POPUP(playerLeft, ABILITY_FLOWER_VEIL);
+        NONE_OF {
+            ABILITY_POPUP(playerRight, ABILITY_GUARD_DOG);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+            MESSAGE("Okidogi's Attack rose!");
         }
+    } THEN {
+        EXPECT_EQ(playerRight->types[2], TYPE_GRASS);
+        EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Guard Dog activates before Flower Veil if it has higher unmodified Speed")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_FORESTS_CURSE) == EFFECT_THIRD_TYPE);
+        ASSUME(GetMoveArgType(MOVE_FORESTS_CURSE) == TYPE_GRASS);
+        PLAYER(SPECIES_COMFEY) { Ability(ABILITY_FLOWER_VEIL); Speed(30); }
+        PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_GUARD_DOG); Speed(40); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); Speed(5); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FORESTS_CURSE, target: playerRight); }
+        TURN { SWITCH(opponentRight, 2); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FORESTS_CURSE, playerLeft);
+        ABILITY_POPUP(opponentRight, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ABILITY_POPUP(playerRight, ABILITY_GUARD_DOG);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        MESSAGE("Okidogi's Attack rose!");
+        NOT ABILITY_POPUP(playerLeft, ABILITY_FLOWER_VEIL);
+    } THEN {
+        EXPECT_EQ(playerRight->types[2], TYPE_GRASS);
+        EXPECT_EQ(playerRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
     }
 }

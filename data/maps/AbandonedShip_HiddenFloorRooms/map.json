@@ -3,6 +3,7 @@
   "name": "AbandonedShip_HiddenFloorRooms",
   "layout": "LAYOUT_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS",
   "music": "MUS_ABANDONED_SHIP",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",
@@ -12,10 +13,10 @@
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 41,
       "y": 4,
       "elevation": 3,
@@ -23,9 +24,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemTatsugirinite",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_TATSUGIRINITE"
+      "trainer_sight_or_berry_tree_id": "ITEM_LUXURY_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -36,48 +37,35 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemScanner",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_4_SCANNER"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
-      "x": 5,
-      "y": 11,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemClefablite",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_CLEFABLITE"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
-      "x": 31,
-      "y": 11,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_ItemLucarionite",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_LUCARIONITE"
+      "trainer_sight_or_berry_tree_id": "ITEM_SCANNER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 16,
-      "y": 6,
+      "x": 5,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_range_x": 1,
+      "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_HiddenFloorRooms_EventScript_OldSeaMap",
-      "flag": "FLAG_RECEIVED_OLD_SEA_MAP"
+      "trainer_sight_or_berry_tree_id": "ITEM_TM_RAIN_DANCE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM_RAIN_DANCE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 31,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_WATER_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_WATER_STONE"
     }
   ],
   "warp_events": [
@@ -86,63 +74,63 @@
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 7,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 21,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 22,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 36,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 37,
       "y": 14,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 6,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 21,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 36,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
   "coord_events": [],
@@ -153,7 +141,7 @@
       "y": 10,
       "elevation": 3,
       "item": "ITEM_KEY_TO_ROOM_1",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_1"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY"
     },
     {
       "type": "hidden_item",
@@ -161,7 +149,7 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_KEY_TO_ROOM_2",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_2"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY"
     },
     {
       "type": "hidden_item",
@@ -169,7 +157,7 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_KEY_TO_ROOM_4",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_4"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY"
     },
     {
       "type": "hidden_item",
@@ -177,7 +165,7 @@
       "y": 2,
       "elevation": 0,
       "item": "ITEM_KEY_TO_ROOM_6",
-      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_6"
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY"
     },
     {
       "type": "sign",

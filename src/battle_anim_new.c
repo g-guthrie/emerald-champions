@@ -6610,6 +6610,7 @@ const struct SpriteTemplate gOrderUpTatsugiriStretchySpriteTemplate =
     .callback = AnimRockTomb,
 };
 
+// Start of Tera Blast sprite templates
 const struct SpriteTemplate gFireSpreadBlastSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_EMBER,
@@ -6730,6 +6731,32 @@ const struct SpriteTemplate gYellowStarSpiralOutwardSpriteTemplate =
     .callback = AnimFireSpiralOutward,
 };
 
+const struct SpriteTemplate gTeraBlastFlyingSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_METAL_SOUND_WAVES,
+    .paletteTag = ANIM_TAG_METAL_SOUND_WAVES,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x64,
+    .affineAnims = gAffineAnims_SpinningBone,
+    .callback = AnimShadowBall,
+};
+
+const struct SpriteTemplate gTeraBlastWaterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_HYDRO_PUMP,
+    .paletteTag = ANIM_TAG_HYDRO_PUMP,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .callback = AnimDracoMeteorRock,
+};
+
+const struct SpriteTemplate gTeraBlastRockSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_BasicRock,
+    .callback = AnimDracoMeteorRock,
+};
+
 const struct SpriteTemplate gGhostProjectileSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GHOSTLY_SPIRIT,
@@ -6737,6 +6764,7 @@ const struct SpriteTemplate gGhostProjectileSpriteTemplate =
     .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .callback = AnimPoisonJabProjectile,
 };
+// End of Tera Blast sprite templates
 
 const union AnimCmd gSproutAnimCmds[] =
 {
@@ -8323,6 +8351,28 @@ static void SpriteCB_LashOutStrike(struct Sprite* sprite)
 //arg 1: Final x-pos
 //arg 2: Movement duration
 //arg 3: Affine anim
+static void SpriteCB_ShellSmashShell(struct Sprite* sprite)
+{
+    //Init Position
+    sprite->x = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[0];
+    sprite->y = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + 2; //2 to slightly encompass the entire sprite
+
+    //Prepare linear movement
+    sprite->data[0] = gBattleAnimArgs[2]; //Duration
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
+    sprite->data[4] = sprite->y;
+    sprite->callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(sprite, SpriteCB_ShellSmashShell_DestroyDuringFadeOut);
+
+    //Rotate properly
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
+}
+
+static void SpriteCB_ShellSmashShell_DestroyDuringFadeOut(struct Sprite* sprite)
+{
+    if (GetGpuReg(REG_OFFSET_BLDALPHA) >= BLDALPHA_BLEND(0, 8)) //Fade out 1/2 done
+        DestroyAnimSprite(sprite);
+}
 */
 
 static void SpriteCB_AnimSpriteOnTargetSideCentre(struct Sprite *sprite)

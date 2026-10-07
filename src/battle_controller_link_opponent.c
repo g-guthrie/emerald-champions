@@ -66,6 +66,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(enum Bat
     [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,
@@ -378,13 +379,13 @@ static void LinkOpponentHandleDrawPartyStatusSummary(enum BattlerId battler)
 
 static void LinkOpponentHandleLinkStandbyMsg(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2], sizeof(gBattleResources->transferBuffer) - 2);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
     BtlController_Complete(battler);
 }
 
 static void LinkOpponentHandleEndLinkBattle(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4], sizeof(gBattleResources->transferBuffer) - 4);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
 
     if (gBattleResources->bufferA[battler][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleResources->bufferA[battler][1];

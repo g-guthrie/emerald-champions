@@ -295,7 +295,6 @@ void GenerateGiddyLine(void)
         adjective %= ARRAY_COUNT(sGiddyAdjectives);
 
         stringPtr = CopyEasyChatWord(gStringVar4, giddy->randomWords[giddy->taleCounter]);
-        CapitalizeEasyChatText(gStringVar4);
         stringPtr = StringCopy(stringPtr, GiddyText_Is);
         stringPtr = StringCopy(stringPtr, sGiddyAdjectives[adjective]);
         StringCopy(stringPtr, GiddyText_DontYouAgree);
@@ -361,8 +360,8 @@ static void InitGiddyTaleList(void)
             // Pick a random word id, then advance through the word
             // groups until the group where that id landed.
             s16 randWord = Random() % totalWords;
-            for (var = 0; var < ARRAY_COUNT(wordGroupsAndCount); var++)
-                if ((randWord -= wordGroupsAndCount[var][1]) < 0)
+            for (var = 0; i < ARRAY_COUNT(wordGroupsAndCount); var++)
+                if ((randWord -= wordGroupsAndCount[var][1]) <= 0)
                     break;
             if (var == ARRAY_COUNT(wordGroupsAndCount))
                 var = 0;
@@ -777,6 +776,71 @@ void SanitizeMauvilleOldManForRuby(union OldMan *oldMan)
         }
         break;
     }
+    }
+}
+
+static void UNUSED SetMauvilleOldManLanguage(union OldMan *oldMan, enum Language language1, enum Language language2, enum Language language3)
+{
+    s32 i;
+
+    switch (oldMan->common.id)
+    {
+    case MAUVILLE_MAN_TRADER:
+    {
+        struct MauvilleOldManTrader *trader = &oldMan->trader;
+
+        for (i = 0; i < NUM_TRADER_ITEMS; i++)
+        {
+            if (IsStringJapanese(trader->playerNames[i]))
+                trader->language[i] = language1;
+            else
+                trader->language[i] = language2;
+        }
+    }
+    break;
+    case MAUVILLE_MAN_STORYTELLER:
+    {
+        struct MauvilleManStoryteller *storyteller = &oldMan->storyteller;
+
+        for (i = 0; i < NUM_STORYTELLER_TALES; i++)
+        {
+            if (IsStringJapanese(storyteller->trainerNames[i]))
+                storyteller->language[i] = language1;
+            else
+                storyteller->language[i] = language2;
+        }
+    }
+    break;
+    case MAUVILLE_MAN_BARD:
+    {
+        struct MauvilleManBard *bard = &oldMan->bard;
+
+        if (language3 == LANGUAGE_JAPANESE)
+            bard->language = language1;
+        else
+            bard->language = language2;
+    }
+    break;
+    case MAUVILLE_MAN_HIPSTER:
+    {
+        struct MauvilleManHipster *hipster = &oldMan->hipster;
+
+        if (language3 == LANGUAGE_JAPANESE)
+            hipster->language = language1;
+        else
+            hipster->language = language2;
+    }
+    break;
+    case MAUVILLE_MAN_GIDDY:
+    {
+        struct MauvilleManGiddy *giddy = &oldMan->giddy;
+
+        if (language3 == LANGUAGE_JAPANESE)
+            giddy->language = language1;
+        else
+            giddy->language = language2;
+    }
+    break;
     }
 }
 
@@ -1247,8 +1311,6 @@ static bool8 StorytellerInitializeRandomStat(void)
     u8 storyIds[sNumStories];
     s32 i, j;
 
-    for (i = 0; i < sNumStories; i++)
-        storyIds[i] = i;
     Shuffle(storyIds, sNumStories, sizeof(storyIds[0]));
     for (i = 0; i < sNumStories; i++)
     {

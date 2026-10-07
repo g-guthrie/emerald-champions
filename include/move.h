@@ -211,6 +211,7 @@ struct MoveInfo
         u32 fixedDamage;
         u32 damagePercentage;
         u32 recoilPercentage;
+        u32 secondaryEffectChance;
         u32 nonVolatileStatus;
         u32 overwriteAbility;
         u32 weatherType;
@@ -298,15 +299,7 @@ static inline enum MoveTarget GetMoveTarget(enum Move moveId)
 
 static inline u32 GetMovePP(enum Move moveId)
 {
-    return min(gMovesInfo[SanitizeMoveId(moveId)].pp, 20);
-}
-
-static inline u32 GetMoveMaxPP(enum Move moveId)
-{
-    u32 basePP = GetMovePP(moveId);
-    if (moveId == MOVE_NONE || moveId == MOVE_REVIVAL_BLESSING || moveId == MOVE_SKETCH || moveId == MOVE_STRUGGLE)
-        return basePP;
-    return (basePP / 5 + 1) * 4;
+    return gMovesInfo[SanitizeMoveId(moveId)].pp;
 }
 
 static inline enum ZEffect GetMoveZEffect(enum Move moveId)
@@ -776,6 +769,13 @@ static inline u32 GetMoveRecoil(enum Move moveId)
     moveId = SanitizeMoveId(moveId);
     assertf(gMovesInfo[moveId].effect == EFFECT_RECOIL, "not a recoil move: %S", gMovesInfo[moveId].name);
     return gMovesInfo[moveId].argument.recoilPercentage;
+}
+
+static inline u32 GetMoveSecondaryEffectChance(enum Move moveId)
+{
+    moveId = SanitizeMoveId(moveId);
+    assertf(gMovesInfo[moveId].effect == EFFECT_SECRET_POWER, "not a move with a secondary effect chance argument: %S", GetMoveName(moveId));
+    return gMovesInfo[moveId].argument.secondaryEffectChance;
 }
 
 static inline enum MoveEffect GetMoveNonVolatileStatus(enum Move move)

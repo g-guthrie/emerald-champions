@@ -26,24 +26,11 @@ struct FieldMoveInfo
     u32 partyMsgID:7;
     u32 arg:8;
     u32 hideIfLocked:1;
-    // Obstacle moves normally use A at the obstacle. Cut is also exposed in
-    // the party menu for Inclement's optional grass-clearing action.
-    u32 hideInPartyMenu:1;
-    // Emerald Champions: a field move never occupies a battle move slot. A move
-    // marked here is offered in the party menu to any member whose species could
-    // learn it, exactly as an obstacle move picks its user.
-    u32 capabilityInPartyMenu:1;
-    u32 padding:1;
+    u32 padding:3;
 };
 
 extern const struct FieldMoveInfo gFieldMoveInfo[];
 extern const struct FieldMoveUnlock gFieldMoveUnlocks[];
-extern const u8 *const gFieldMoveLicenseGivers[FIELD_MOVES_COUNT];
-
-u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck);
-bool32 SpeciesCanLearnFieldMove(enum Species species, enum Move move);
-
-bool32 FieldMove_IsHM(enum FieldMove fieldMove);
 
 static inline bool32 SetUpFieldMove(enum FieldMove fieldMove)
 {
@@ -70,18 +57,9 @@ static inline u32 FieldMove_GetPartyMsgID(enum FieldMove fieldMove)
     return gFieldMoveInfo[fieldMove].partyMsgID;
 }
 
-static inline bool32 FieldMove_IsCapabilityBased(enum FieldMove fieldMove)
-{
-    return gFieldMoveInfo[fieldMove].capabilityInPartyMenu;
-}
-
 static inline bool32 FieldMove_IsVisible(enum FieldMove fieldMove)
 {
-    if (gFieldMoveInfo[fieldMove].hideInPartyMenu)
-        return FALSE;
     return !gFieldMoveInfo[fieldMove].hideIfLocked || IsFieldMoveUnlocked(fieldMove);
 }
-
-void BufferFieldMoveUnlockRequirement(void);
 
 #endif //GUARD_FIELD_MOVE_H

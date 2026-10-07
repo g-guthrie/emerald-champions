@@ -728,6 +728,75 @@ DOUBLE_BATTLE_TEST("Commander cancels Tatsugiri's pending Mega Evolution")
     }
 }
 
+DOUBLE_BATTLE_TEST("Commander cancels Tatsugiri's pending Z-Move")
+{
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_DRAGON_PULSE) == TYPE_DRAGON);
+        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); Item(ITEM_DRAGONIUM_Z); }
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DONDOZO);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DRAGON_PULSE, gimmick: GIMMICK_Z_MOVE, target: opponentLeft);
+            SWITCH(playerRight, 2);
+        }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
+        MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, playerLeft);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, playerLeft);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Commander cancels Tatsugiri's pending Dynamax")
+{
+    GIVEN {
+        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); HP(100); MaxHP(100); }
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DONDOZO);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX, target: opponentLeft);
+            SWITCH(playerRight, 2);
+        }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
+        MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
+        NONE_OF {
+            MESSAGE("Time to Dynamax!");
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, playerLeft);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Commander cancels Tatsugiri's pending Terastallization")
+{
+    GIVEN {
+        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); TeraType(TYPE_FIRE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DONDOZO);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA);
+            SWITCH(playerRight, 2);
+        }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
+        MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_CHARGE, playerLeft);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, playerLeft);
+        }
+    }
+}
 
 DOUBLE_BATTLE_TEST("Commander clears when Dondozo is replaced and Tatsugiri can be hit")
 {
@@ -768,10 +837,7 @@ DOUBLE_BATTLE_TEST("Commander does not clear semi-invulnerability of non-Tatsugi
         ASSUME(GetMoveEffect(MOVE_FLY) == EFFECT_SEMI_INVULNERABLE);
         PLAYER(SPECIES_DONDOZO) { HP(1); Speed(1); }
         PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); HP(1); Status1(STATUS1_POISON); Speed(2); }
-        // Inclement's Pidgeot defaults to No Guard, which intentionally lets
-        // Scratch connect through Fly. Use another legal ability so this test
-        // isolates Commander cleanup instead of No Guard's accuracy rule.
-        PLAYER(SPECIES_PIDGEOT) { Ability(ABILITY_BIG_PECKS); Speed(100); }
+        PLAYER(SPECIES_PIDGEOT) { Speed(100); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(90); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(80); }
     } WHEN {
@@ -856,53 +922,6 @@ DOUBLE_BATTLE_TEST("Red Card is still consumed but cannot force out Dondozo afte
     } THEN {
         EXPECT(playerLeft->item == ITEM_NONE);
         EXPECT(opponentLeft->species == SPECIES_DONDOZO);
-    }
-}
-
-DOUBLE_BATTLE_TEST("Commander Tatsugiri's existing sleep still advances and ends")
-{
-    GIVEN {
-        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); Status1(STATUS1_SLEEP_TURN(2)); }
-        PLAYER(SPECIES_DONDOZO);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
-    } WHEN {
-        TURN { MOVE(playerRight, MOVE_CELEBRATE); }
-        TURN { MOVE(playerRight, MOVE_CELEBRATE); }
-    } SCENE {
-        ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
-        MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
-        MESSAGE("Tatsugiri woke up!");
-    } THEN {
-        EXPECT_EQ(playerLeft->status1 & STATUS1_SLEEP, 0);
-    }
-}
-
-DOUBLE_BATTLE_TEST("Yawn does not reveal or release Commander Tatsugiri")
-{
-    u8 visibility;
-
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);
-        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); }
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_DONDOZO);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
-    } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_YAWN, target: playerLeft); }
-        TURN { SWITCH(playerRight, 2); }
-    } SCENE {
-        MESSAGE("Tatsugiri grew drowsy!");
-        ABILITY_POPUP(playerLeft, ABILITY_COMMANDER);
-        MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
-        MESSAGE("Tatsugiri fell asleep!");
-    } THEN {
-        EXPECT(playerLeft->status1 & STATUS1_SLEEP);
-        EXPECT(playerLeft->volatiles.semiInvulnerable == STATE_COMMANDER);
-        EXPECT(gBattleStruct->battlerState[B_BATTLER_0].commandingDondozo);
-        visibility = gBattleSpritesDataPtr->battlerData[B_BATTLER_0].invisible;
-        EXPECT_EQ(visibility, TRUE);
     }
 }
 

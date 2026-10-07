@@ -17,6 +17,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "random.h"
+#include "new_game.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -113,6 +114,7 @@ static void CreateNextTurnSprites(void);
 static void CreateApplauseMeterSprite(void);
 static void CreateJudgeAttentionEyeTask(void);
 static void CreateUnusedBlendTask(void);
+static void ContestDebugDoPrint(void);
 static void DrawContestantWindows(void);
 static void ApplyNextTurnOrder(void);
 static void SlideApplauseMeterIn(void);
@@ -146,7 +148,7 @@ static bool8 DrawStatusSymbol(u8);
 static void DrawStatusSymbols(void);
 static void StartStopFlashJudgeAttentionEye(u8);
 static void BlendAudienceBackground(s8, s8);
-static void ShowAndUpdateApplauseMeter(void);
+static void ShowAndUpdateApplauseMeter(s8 unused);
 static void AnimateAudience(void);
 static void UpdateApplauseMeter(void);
 static void RankContestants(void);
@@ -184,6 +186,7 @@ static void SetBattleTargetSpritePosition(void);
 static void CalculateContestLiveUpdateData(void);
 static void SetConestLiveUpdateTVData(void);
 static void SetContestLiveUpdateFlags(u8);
+static void ContestDebugPrintBitStrings(void);
 static void StripPlayerNameForLinkContest(u8 *);
 static void StripMonNameForLinkContest(u8 *, enum Language);
 static void SwapMoveDescAndContestTilemaps(void);
@@ -230,6 +233,12 @@ enum {
     STAT_SYMBOL_SQUARE,
 };
 
+enum {
+    CONTEST_DEBUG_MODE_OFF,
+    CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL,
+    CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS,
+    CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
+};
 
 #define MOVE_WINDOWS_START WIN_MOVE0
 
@@ -351,7 +360,7 @@ EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 
 // IWRAM common vars.
-EWRAM_DATA rng_value_t gContestRngValue = {0};
+COMMON_DATA rng_value_t gContestRngValue = {0};
 
 //Text
 const u8 gText_LinkStandby4[] = _("Link standby!");
@@ -361,7 +370,7 @@ const u8 gText_AppealNumButItCantParticipate[] = _("Appeal no. {STR_VAR_1}!\nBut
 const u8 gText_MonAppealedWithMove[] = _("{STR_VAR_1} appealed with\n{STR_VAR_2}!");
 const u8 gText_MonWasWatchingOthers[] = _("{STR_VAR_1} was watching\nthe others.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
 const u8 gText_AllOutOfAppealTime[] = _("We're all out of\nAppeal Time!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_JudgeLookedAtMonExpectantly[] = _("The judge looked at\n{STR_VAR_1} expectantly.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_JudgeLookedAtMonExpectantly[] = _("The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
 const u8 gText_AppealComboWentOverWell[] = _("The appeal combo went\nover well.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
 const u8 gText_AppealComboWentOverVeryWell[] = _("The appeal combo went\nover very well.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
 const u8 gText_AppealComboWentOverExcellently[] = _("The appeal combo went\nover excellently.{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
@@ -681,9 +690,9 @@ const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUNT + 1] 
 {
     [CONTEST_CATEGORY_COOL] =
     {
-        .name = COMPOUND_STRING("Cool"),
+        .name = COMPOUND_STRING("COOL"),
         .condition = COMPOUND_STRING("coolness"),
-        .generic = COMPOUND_STRING("Cool Move"),
+        .generic = COMPOUND_STRING("COOL Move"),
         .negativeTrait = COMPOUND_STRING("shyness"),
         .ribbon = MON_DATA_COOL_RIBBON,
         .imageEffect = IMAGE_EFFECT_OUTLINE_COLORED,
@@ -700,9 +709,9 @@ const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUNT + 1] 
 
     [CONTEST_CATEGORY_BEAUTY] =
     {
-        .name = COMPOUND_STRING("Beauty"),
+        .name = COMPOUND_STRING("BEAUTY"),
         .condition = COMPOUND_STRING("beauty"),
-        .generic = COMPOUND_STRING("Beauty Move"),
+        .generic = COMPOUND_STRING("BEAUTY Move"),
         .negativeTrait = COMPOUND_STRING("anxiety"),
         .ribbon = MON_DATA_BEAUTY_RIBBON,
         .imageEffect = IMAGE_EFFECT_SHIMMER,
@@ -719,9 +728,9 @@ const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUNT + 1] 
 
     [CONTEST_CATEGORY_CUTE] =
     {
-        .name = COMPOUND_STRING("Cute"),
+        .name = COMPOUND_STRING("CUTE"),
         .condition = COMPOUND_STRING("cuteness"),
-        .generic = COMPOUND_STRING("Cute Move"),
+        .generic = COMPOUND_STRING("CUTE Move"),
         .negativeTrait = COMPOUND_STRING("laziness"),
         .ribbon = MON_DATA_CUTE_RIBBON,
         .imageEffect = IMAGE_EFFECT_POINTILLISM,
@@ -738,9 +747,9 @@ const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUNT + 1] 
 
     [CONTEST_CATEGORY_SMART] =
     {
-        .name = COMPOUND_STRING("Smart"),
+        .name = COMPOUND_STRING("SMART"),
         .condition = COMPOUND_STRING("smartness"),
-        .generic = COMPOUND_STRING("Smart Move"),
+        .generic = COMPOUND_STRING("SMART Move"),
         .negativeTrait = COMPOUND_STRING("hesitancy"),
         .ribbon = MON_DATA_SMART_RIBBON,
         .imageEffect = IMAGE_EFFECT_CHARCOAL,
@@ -757,9 +766,9 @@ const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUNT + 1] 
 
     [CONTEST_CATEGORY_TOUGH] =
     {
-        .name = COMPOUND_STRING("Tough"),
+        .name = COMPOUND_STRING("TOUGH"),
         .condition = COMPOUND_STRING("toughness"),
-        .generic = COMPOUND_STRING("Tough Move"),
+        .generic = COMPOUND_STRING("TOUGH Move"),
         .negativeTrait = COMPOUND_STRING("fear"),
         .ribbon = MON_DATA_TOUGH_RIBBON,
         .imageEffect = IMAGE_EFFECT_GRAYSCALE_LIGHT,
@@ -1234,6 +1243,7 @@ static void AllocContestResources(void)
     gContestResources->gfxState = AllocZeroed(sizeof(struct ContestGraphicsState) * CONTESTANT_COUNT);
     gContestResources->moveAnim = AllocZeroed(sizeof(struct ContestMoveAnimData));
     gContestResources->tv = AllocZeroed(sizeof(struct ContestTV) * CONTESTANT_COUNT);
+    gContestResources->unused = AllocZeroed(sizeof(struct ContestUnused));
     gContestResources->contestBgTilemaps[0] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[1] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[2] = AllocZeroed(0x1000);
@@ -1255,6 +1265,7 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->gfxState);
     FREE_AND_SET_NULL(gContestResources->moveAnim);
     FREE_AND_SET_NULL(gContestResources->tv);
+    FREE_AND_SET_NULL(gContestResources->unused);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[0]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[1]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[2]);
@@ -1288,6 +1299,7 @@ void CB2_StartContest(void)
         ResetTasks();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 4;
+        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
         InitContestResources();
         gMain.state++;
         break;
@@ -1572,6 +1584,7 @@ static void Task_DisplayAppealNumberText(u8 taskId)
     {
         gBattle_BG0_Y = 0;
         gBattle_BG2_Y = 0;
+        ContestDebugDoPrint();
         DmaCopy32Defvars(3, gPlttBufferUnfaded, eContestTempSave.cachedPlttBufferUnfaded, PLTT_SIZE);
         ConvertIntToDecimalStringN(gStringVar1, eContest.appealNumber + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
         if (!Contest_IsMonsTurnDisabled(gContestPlayerMonIndex))
@@ -1832,6 +1845,7 @@ static void Task_DoAppeals(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case APPEALSTATE_START_TURN:
+        ContestDebugDoPrint();
         for (i = 0; eContest.turnNumber != eContestAppealResults.turnOrder[i]; i++)
             ;
         eContest.currentContestant = i;
@@ -1860,6 +1874,7 @@ static void Task_DoAppeals(u8 taskId)
         return;
     case APPEALSTATE_CHECK_SKIP_TURN:
         SetContestLiveUpdateFlags(contestant);
+        ContestDebugPrintBitStrings();
         if (eContestantStatus[contestant].numTurnsSkipped != 0
             || eContestantStatus[contestant].noMoreTurns)
         {
@@ -2281,6 +2296,7 @@ static void Task_DoAppeals(u8 taskId)
         }
         return;
     case APPEALSTATE_WAIT_HEARTS_FROM_REPEAT:
+        ContestDebugDoPrint();
         if (!eContestGfxState[contestant].updatingAppealHearts)
         {
             gTasks[taskId].tCounter = 0;
@@ -2347,7 +2363,7 @@ static void Task_DoAppeals(u8 taskId)
         case 1:
             if (!eContest.waitForAudienceBlend && !Contest_RunTextPrinters())
             {
-                ShowAndUpdateApplauseMeter();
+                ShowAndUpdateApplauseMeter(-1);
                 gTasks[taskId].tCounter++;
             }
             break;
@@ -2387,7 +2403,7 @@ static void Task_DoAppeals(u8 taskId)
             {
                 AnimateAudience();
                 PlaySE(SE_M_ENCORE2);
-                ShowAndUpdateApplauseMeter();
+                ShowAndUpdateApplauseMeter(1);
                 gTasks[taskId].tCounter++;
             }
             break;
@@ -2687,6 +2703,7 @@ static void Task_PrintRoundResultText(u8 taskId)
         {
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].func = Task_ReUpdateHeartSliders;
+            ContestDebugDoPrint();
         }
     }
 }
@@ -2766,6 +2783,7 @@ static void Task_EndAppeals(u8 taskId)
     {
         CalculateContestLiveUpdateData();
         SetConestLiveUpdateTVData();
+        ContestDebugPrintBitStrings();
     }
     gContestRngValue = gRngValue;
     StringExpandPlaceholders(gStringVar4, gText_AllOutOfAppealTime);
@@ -2837,11 +2855,7 @@ static void Task_ContestReturnToField(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        // Palette-animation tasks also read the Contest resources. Stop the
-        // entire appeal screen before freeing them and returning to the field.
-        ResetTasks();
-        SetVBlankCallback(NULL);
-        sContestBgCopyFlags = 0;
+        DestroyTask(taskId);
         gFieldCallback = FieldCB_ContestReturnToField;
         FreeAllWindowBuffers();
         FreeContestResources();
@@ -3238,6 +3252,32 @@ static void SwapMoveDescAndContestTilemaps(void)
 }
 
 // Functionally unused
+static u16 GetMoveEffectSymbolTileOffset(enum Move move, u8 contestant)
+{
+    u16 offset;
+
+    switch (gContestEffects[GetMoveContestEffect(move)].effectType)
+    {
+    case CONTEST_EFFECT_TYPE_APPEAL:
+    case CONTEST_EFFECT_TYPE_AVOID_STARTLE:
+    case CONTEST_EFFECT_TYPE_UNKNOWN:
+        offset = 0x9082;
+        break;
+    case CONTEST_EFFECT_TYPE_STARTLE_MON:
+    case CONTEST_EFFECT_TYPE_STARTLE_MONS:
+        offset = 0x9088;
+        break;
+    default:
+    //case CONTEST_EFFECT_TYPE_WORSEN:
+    //case CONTEST_EFFECT_TYPE_SPECIAL_APPEAL:
+    //case CONTEST_EFFECT_TYPE_TURN_ORDER:
+        offset = 0x9086;
+        break;
+    }
+    offset += 0x9000 + (contestant << 12);
+    return offset;
+}
+
 static void PrintContestMoveDescription(enum Move move)
 {
     u16 categoryTile;
@@ -3273,6 +3313,31 @@ static void PrintContestMoveDescription(enum Move move)
     FillWindowPixelBuffer(WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
     Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, contestEffect.description);
     Contest_PrintTextToBg0WindowStd(WIN_SLASH, gText_Slash);
+}
+
+static void DrawMoveEffectSymbol(enum Move move, u8 contestant)
+{
+    u8 contestantOffset = gContestantTurnOrder[contestant] * 5 + 2;
+
+    if (!Contest_IsMonsTurnDisabled(contestant) && move != MOVE_NONE)
+    {
+        u16 tile = GetMoveEffectSymbolTileOffset(move, contestant);
+
+        ContestBG_FillBoxWithIncrementingTile(0, tile,      20, contestantOffset,     2, 1, 17, 1);
+        ContestBG_FillBoxWithIncrementingTile(0, tile + 16, 20, contestantOffset + 1, 2, 1, 17, 1);
+    }
+    else
+    {
+        ContestBG_FillBoxWithTile(0, 0, 20, contestantOffset, 2, 2, 17);
+    }
+}
+
+static void UNUSED DrawMoveEffectSymbols(void)
+{
+    s32 i;
+
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+        DrawMoveEffectSymbol(eContestantStatus[i].currMove, i);
 }
 
 static u16 GetStarTileOffset(void)
@@ -4236,6 +4301,77 @@ static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     ResetBlendForContestantBoxBlink();
 }
 
+static void UNUSED ContestDebugTogglePointTotal(void)
+{
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
+        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
+    else
+        eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL;
+
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
+    {
+        DrawContestantWindowText();
+        SwapMoveDescAndContestTilemaps();
+    }
+    else
+    {
+        ContestDebugDoPrint();
+    }
+}
+
+static void ContestDebugDoPrint(void)
+{
+    u8 i;
+    s16 value;
+    u8 *txtPtr;
+    u8 text[8];
+
+    if (!gEnableContestDebugging)
+        return;
+
+    switch (eContestDebugMode)
+    {
+    case CONTEST_DEBUG_MODE_OFF:
+        break;
+    case CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS:
+    case CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS:
+        ContestDebugPrintBitStrings();
+        break;
+    // The only other possible value is 1, which is only set by ContestDebugTogglePointTotal.
+    //
+    // case CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL:
+    default:
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+            FillWindowPixelBuffer(i, PIXEL_FILL(0));
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            value = eContestantStatus[i].pointTotal;
+            txtPtr = text;
+            if (eContestantStatus[i].pointTotal < 0)
+            {
+                value *= -1;
+                txtPtr = StringCopy(txtPtr, gText_OneDash);
+            }
+            ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 55, 1, FONT_NARROW);
+        }
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            value = eContestantStatus[i].appeal;
+            txtPtr = text;
+            if (eContestantStatus[i].appeal < 0)
+            {
+                value *= -1;
+                txtPtr = StringCopy(txtPtr, gText_OneDash);
+            }
+            ConvertIntToDecimalStringN(txtPtr, value, STR_CONV_MODE_LEFT_ALIGN, 4);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text, 5, 1, FONT_NARROW);
+        }
+        SwapMoveDescAndContestTilemaps();
+        break;
+    }
+}
+
 void SortContestants(bool8 useRanking)
 {
     u8 scratch[CONTESTANT_COUNT];
@@ -4776,9 +4912,11 @@ static void Task_SlideApplauseMeterOut(u8 taskId)
     }
 }
 
-static void ShowAndUpdateApplauseMeter(void)
+static void ShowAndUpdateApplauseMeter(s8 unused)
 {
-    CreateTask(Task_ShowAndUpdateApplauseMeter, 5);
+    u8 taskId = CreateTask(Task_ShowAndUpdateApplauseMeter, 5);
+
+    gTasks[taskId].data[0] = unused;
     eContest.isShowingApplauseMeter = TRUE;
 }
 
@@ -4806,6 +4944,17 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
         }
         break;
     }
+}
+
+static void UNUSED HideApplauseMeterNoAnim(void)
+{
+    gSprites[eContest.applauseMeterSpriteId].x2 = 0;
+    gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
+}
+
+static void UNUSED ShowApplauseMeterNoAnim(void)
+{
+    gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
 }
 
 #define tDelay  data[10]
@@ -5473,7 +5622,6 @@ bool8 SaveContestWinner(u8 rank)
         // but excludes the temporary save used by the artist
         u8 id = GetContestWinnerSaveIdx(rank, TRUE);
         gSaveBlock1Ptr->contestWinners[id].personality = gContestMons[i].personality;
-        gSaveBlock1Ptr->contestWinners[id].isShiny = gContestMons[i].isShiny;
         gSaveBlock1Ptr->contestWinners[id].species = gContestMons[i].species;
         gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
         StringCopyN(gSaveBlock1Ptr->contestWinners[id].monName, gContestMons[i].nickname, VANILLA_POKEMON_NAME_LENGTH);
@@ -5822,6 +5970,69 @@ static void SetConestLiveUpdateTVData(void)
     ContestLiveUpdates_SetWinnerAppealFlag(winnerFlag);
     ContestLiveUpdates_SetWinnerMoveUsed(gContestResources->tv[winner].move);
     ContestLiveUpdates_SetLoserData(loserFlag, loser);
+}
+
+static void ContestDebugPrintBitStrings(void)
+{
+    u8 i;
+    s8 j;
+    u8 text1[20];
+    u8 text2[20];
+    u8 *txtPtr;
+    u32 bits;
+
+    if (!gEnableContestDebugging)
+        return;
+
+    if (eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS && eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS)
+        return;
+
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+        FillWindowPixelBuffer(i, PIXEL_FILL(0));
+
+    if (eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS)
+    {
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            txtPtr = StringCopy(text1, COMPOUND_STRING("C."));
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1, 5, 1, FONT_NARROW);
+            bits = gContestResources->tv[i].winnerFlags;
+            for (j = 7; j > -1; j--) // Weird loop.
+            {
+                txtPtr = ConvertIntToDecimalStringN(txtPtr, bits & 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+                bits >>= 1;
+            }
+
+            for (j = 0; j < 5; j++)
+                text2[j] = text1[j];
+
+            text2[j] = EOS;
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, 7);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, FONT_NARROW);
+        }
+    }
+    else // CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS
+    {
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            StringCopy(text1, COMPOUND_STRING("B."));
+            bits = gContestResources->tv[i].loserFlags;
+            txtPtr = &text1[2];
+            for (j = 7; j > -1; j--) // Weird loop.
+            {
+                txtPtr = ConvertIntToDecimalStringN(txtPtr, bits & 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+                bits >>= 1;
+            }
+
+            for (j = 0; j < 5; j++)
+                text2[j] = text1[j];
+
+            text2[j] = EOS;
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text2, 5, 1, FONT_NARROW);
+            Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[i], text1 + j, 55, 1, FONT_NARROW);
+        }
+    }
+    SwapMoveDescAndContestTilemaps();
 }
 
 static enum Language GetMonNicknameLanguage(u8 *nickname)

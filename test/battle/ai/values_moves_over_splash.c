@@ -25,9 +25,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 1-100")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_MIST:
         case EFFECT_TELEPORT:
@@ -37,8 +34,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 1-100")
         case EFFECT_DISABLE:
 
         // tests exist elsewhere
-        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
-        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_STAT_CHANGE:
         case EFFECT_GROWTH:
             break;
@@ -93,9 +88,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 101-200")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_LIGHT_SCREEN:
         case EFFECT_REFLECT:
@@ -179,9 +171,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 201-300")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_SAFEGUARD:
         case EFFECT_FOLLOW_ME:
@@ -207,8 +196,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 201-300")
         case EFFECT_WISH:
 
         // tests exist elsewhere
-        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
-        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_STAT_CHANGE:
         case EFFECT_CHARGE:
         case EFFECT_STOCKPILE:
@@ -228,13 +215,11 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 201-300")
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        // Attract fails between two bodies of the same gender, and the AI
-        // sees gender: give it a board where the move can land.
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); Gender(MON_FEMALE); }
-        PLAYER(SPECIES_WOBBUFFET) { Gender(MON_FEMALE); }
+        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH, move); Status1(STATUS1_BURN); Item(ITEM_STARF_BERRY); Gender(MON_MALE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, move); Item(ITEM_STARF_BERRY); Gender(MON_MALE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH, move); Status1(STATUS1_BURN); Item(ITEM_STARF_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, move); Item(ITEM_STARF_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -271,9 +256,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 301-400")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_WATER_SPORT:
         case EFFECT_LUCKY_CHANT:
@@ -293,8 +275,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 301-400")
         case EFFECT_MAGNET_RISE:
 
         // tests exist elsewhere
-        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
-        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_STAT_CHANGE:
         case EFFECT_GRAVITY:
         case EFFECT_HEAL_BELL:
@@ -352,9 +332,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 401-500")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_HEALING_WISH:
         case EFFECT_LUNAR_DANCE:
@@ -422,9 +399,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 501-600")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_ALLY_SWITCH:
         case EFFECT_QUASH:
@@ -443,8 +417,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 501-600")
         case EFFECT_FAIRY_LOCK:
 
         // tests exist elsewhere
-        // the partner holds the same move here and the AI won't phaze twice; left as chip it ties Splash
-        case EFFECT_HIT_SWITCH_TARGET:
         case EFFECT_STAT_CHANGE:
         case EFFECT_ROTOTILLER:
         case EFFECT_FLOWER_SHIELD:
@@ -460,10 +432,7 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 501-600")
     }
 
     GIVEN {
-        // Bestow needs an empty hand the AI knows about; an unrevealed item is
-        // assumed held.
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
-            | (GetMoveEffect(move) == EFFECT_BESTOW ? AI_FLAG_ITEM_OMNISCIENCE : 0));
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
@@ -501,9 +470,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 601-700")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_NO_RETREAT:
         case EFFECT_TEATIME:
@@ -521,8 +487,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 601-700")
         case EFFECT_AURORA_VEIL:
 
         // tests exist elsewhere
-        // fails for anyone but Hoopa Unbound, so it rightly ties Splash (check_bad_move.c)
-        case EFFECT_HYPERSPACE_FURY:
         case EFFECT_STAT_CHANGE:
         case EFFECT_STUFF_CHEEKS:
         case EFFECT_GEOMANCY:
@@ -584,9 +548,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 701-800")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_CLANGOROUS_SOUL:
         case EFFECT_POLTERGEIST:
@@ -653,9 +614,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 801-900")
 
         switch (effect)
         {
-        // retired move slots cannot be selected at all
-        case EFFECT_PLACEHOLDER:
-
         //TODO: AI HANDLING
         case EFFECT_SHED_TAIL:
         case EFFECT_FAIL_IF_NOT_ARG_TYPE:
@@ -665,10 +623,6 @@ AI_DOUBLE_BATTLE_TEST("AI values moves above Splash, 801-900")
         case EFFECT_TIDY_UP:
 
         // tests exist elsewhere
-        // needs a revealed incoming attack, which the AI never reads from a pending command (reflect_damage_pair.c)
-        case EFFECT_REFLECT_DAMAGE:
-        // needs a revealed priority attack, which the AI never reads from a pending command
-        case EFFECT_UPPER_HAND:
         case EFFECT_STAT_CHANGE:
         case EFFECT_DRAGON_CHEER:
             break;

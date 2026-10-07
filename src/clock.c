@@ -9,6 +9,7 @@
 #include "main.h"
 #include "mass_outbreak.h"
 #include "overworld.h"
+#include "pokerus.h"
 #include "random.h"
 #include "rtc.h"
 #include "time_events.h"
@@ -51,9 +52,11 @@ void DoDailyEvents(u32 daysSince)
     UpdateDewfordTrendPerDay(daysSince);
     UpdateTVShowsPerDay(daysSince);
     UpdateWeatherPerDay(daysSince);
+    UpdatePartyPokerusTime(daysSince);
     UpdateBirchState(daysSince);
     UpdateFrontierManiac(daysSince);
     UpdateFrontierGambler(daysSince);
+    SetShoalItemFlag(daysSince);
     if (!OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES)
     {
         UpdateMirageRnd(daysSince);

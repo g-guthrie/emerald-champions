@@ -254,12 +254,6 @@ struct NPCFollower
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
-struct ItemSlot
-{
-    enum Item itemId;
-    u16 quantity;
-};
-
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
@@ -278,16 +272,6 @@ struct SaveBlock3
 #if APRICORN_TREE_COUNT > 0
     u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
 #endif
-    // Inclement-style bag extensions. SaveBlock3 is serialized in the spare
-    // 116-byte chunk of each save sector, so this adds capacity without moving
-    // legacy SaveBlock1 fields.
-    u32 bagPocketLayoutMagic;
-    u32 bagPocketLayoutMagicInverse;
-    struct ItemSlot bagPocketMedicine[BAG_MEDICINE_COUNT];
-    struct ItemSlot bagPocketBattle[BAG_BATTLE_COUNT];
-    struct ItemSlot bagPocketBerries[BAG_BERRIES_PRIMARY_COUNT - BAG_LEGACY_BERRIES_COUNT];
-    struct ItemSlot bagPocketKeyItems[BAG_KEYITEMS_COUNT - BAG_LEGACY_KEYITEMS_COUNT];
-    struct ItemSlot bagPocketMegaStones[BAG_MEGASTONES_PRIMARY_COUNT];
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -301,11 +285,8 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 lostLegendaryEncounters[16]; // Legacy loss bits, cleared on migration; preserve the save layout.
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2 == FALSE
-    /*0x20*/ u8 harvestedBerries[NUM_BERRIES]; // Per-type harvest only; cap 255.
-    u8 gardenCelebiUnlocked;
-    u8 filler[0x58 - NUM_BERRIES - 1]; // Preserve all existing save offsets.
+    /*0x10*/ u8 filler[0x68]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2
 };
 
@@ -642,8 +623,6 @@ struct SaveBlock2
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
-    // Append-only overflow keeps the original SaveBlock2 offsets intact.
-    struct ItemSlot bagPocketPokeBalls[BAG_POKEBALLS_COUNT - BAG_LEGACY_POKEBALLS_COUNT];
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -692,6 +671,12 @@ struct WarpData
     s8 warpId;
     //u8 padding;
     s16 x, y;
+};
+
+struct ItemSlot
+{
+    enum Item itemId;
+    u16 quantity;
 };
 
 struct Pokeblock
@@ -1100,19 +1085,11 @@ struct ExternalEventFlags
 
 struct Bag
 {
-    struct ItemSlot items[BAG_LEGACY_ITEMS_COUNT];
-    struct ItemSlot keyItems[BAG_LEGACY_KEYITEMS_COUNT];
-    struct ItemSlot pokeBalls[BAG_LEGACY_POKEBALLS_COUNT];
-    struct ItemSlot berries[BAG_LEGACY_BERRIES_COUNT];
-};
-
-// Append-only pocket overflow at the end of SaveBlock1. Keep existing item
-// slots in place when extending the Mega archive; never insert this beside Bag.
-struct BagSaveBlock1Extension
-{
-    struct ItemSlot items[BAG_ITEMS_COUNT - BAG_LEGACY_ITEMS_COUNT];
-    struct ItemSlot megaStones[BAG_MEGASTONES_COUNT - BAG_MEGASTONES_PRIMARY_COUNT];
-    struct ItemSlot berries[BAG_BERRIES_COUNT - BAG_BERRIES_PRIMARY_COUNT];
+    struct ItemSlot items[BAG_ITEMS_COUNT];
+    struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
+    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
+    struct ItemSlot berries[BAG_BERRIES_COUNT];
 };
 
 struct SaveBlock1
@@ -1141,19 +1118,7 @@ struct SaveBlock1
     /*0x560*/ struct Bag bag;
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
-    /*0x988*/ u16 registeredItemL; // registered for use with L button (stolen from the unused Dex Flags filler below)
-    /*0x98A*/ u16 registeredItemR; // registered for use with R button (stolen from the unused Dex Flags filler below)
-    // One bit per Mega Stone in the Champions archive, set when that Mega
-    // Evolution plays on either side. Taken from the dead Dex Flags filler so
-    // no later SaveBlock1 offset moves.
-    /*0x98C*/ u8 megasWitnessed[13];
-    // One bit per entry in the battle-item catalogue, set the first time the
-    // player actually obtains that item. The vendor only lists what is set, so
-    // the world teaches you an item exists and the counter then keeps you
-    // supplied. Taken from the same dead Dex Flags filler, so no later
-    // SaveBlock1 offset moves and existing saves stay readable.
-    /*0x999*/ u8 battleItemsUnlocked[25];
-    /*0x9B2*/ u8 filler1[0x34 - 4 - 13 - 25]; // Previously Dex Flags, feel free to remove. Shrunk to store registeredItemL/R, megasWitnessed and battleItemsUnlocked above.
+    /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[2];
@@ -1237,7 +1202,14 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
-    struct BagSaveBlock1Extension bagExtension;
+#if FREE_TRAINER_TOWER == FALSE && IS_FRLG
+    u32 towerChallengeId;
+    struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
+#endif //FREE_TRAINER_TOWER
+#if IS_FRLG
+    u8 rivalName[PLAYER_NAME_LENGTH + 1];
+    struct DaycareMon route5DayCareMon;
+#endif
     // sizeof: 0x3???
 };
 

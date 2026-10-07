@@ -4,26 +4,6 @@
 
 #define PARTNER_NONE 0
 #define PARTNER_STEVEN 1
-
-// Meteor Falls 2-vs-2 (MeteorFalls_1F_1R): the rival fights alongside the
-// player against Courtney and a Magma grunt. Variants follow the player's Hoenn
-// starter like TRAINER_*_ROUTE_119_*; FillPartnerParty sets them to the level
-// cap and swaps in the rival's regional starter.
-#define PARTNER_MAY_TREECKO_METEOR_FALLS     2
-#define PARTNER_MAY_TORCHIC_METEOR_FALLS     3
-#define PARTNER_MAY_MUDKIP_METEOR_FALLS      4
-#define PARTNER_BRENDAN_TREECKO_METEOR_FALLS 5
-#define PARTNER_BRENDAN_TORCHIC_METEOR_FALLS 6
-#define PARTNER_BRENDAN_MUDKIP_METEOR_FALLS  7
-
-#define PARTNER_COUNT 8
-
-// Names used verbatim by the restored data/maps/MeteorFalls_1F_1R/scripts.inc.
-#define MAY_TREECKO_METEOR_FALLS     PARTNER_MAY_TREECKO_METEOR_FALLS
-#define MAY_TORCHIC_METEOR_FALLS     PARTNER_MAY_TORCHIC_METEOR_FALLS
-#define MAY_MUDKIP_METEOR_FALLS      PARTNER_MAY_MUDKIP_METEOR_FALLS
-#define BRENDAN_TREECKO_METEOR_FALLS PARTNER_BRENDAN_TREECKO_METEOR_FALLS
-#define BRENDAN_TORCHIC_METEOR_FALLS PARTNER_BRENDAN_TORCHIC_METEOR_FALLS
-#define BRENDAN_MUDKIP_METEOR_FALLS  PARTNER_BRENDAN_MUDKIP_METEOR_FALLS
+#define PARTNER_COUNT 2
 
 #endif  // GUARD_CONSTANTS_BATTLE_PARTNERS_H

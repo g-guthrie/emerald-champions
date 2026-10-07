@@ -87,10 +87,23 @@ void DestroyTask(u8 taskId)
     {
         gTasks[taskId].isActive = FALSE;
 
-        if (gTasks[taskId].prev != HEAD_SENTINEL)
-            gTasks[gTasks[taskId].prev].next = gTasks[taskId].next;
-        if (gTasks[taskId].next != TAIL_SENTINEL)
-            gTasks[gTasks[taskId].next].prev = gTasks[taskId].prev;
+        if (gTasks[taskId].prev == HEAD_SENTINEL)
+        {
+            if (gTasks[taskId].next != TAIL_SENTINEL)
+                gTasks[gTasks[taskId].next].prev = HEAD_SENTINEL;
+        }
+        else
+        {
+            if (gTasks[taskId].next == TAIL_SENTINEL)
+            {
+                gTasks[gTasks[taskId].prev].next = TAIL_SENTINEL;
+            }
+            else
+            {
+                gTasks[gTasks[taskId].prev].next = gTasks[taskId].next;
+                gTasks[gTasks[taskId].next].prev = gTasks[taskId].prev;
+            }
+        }
     }
 }
 
@@ -125,18 +138,29 @@ void TaskDummy(u8 taskId)
 
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc)
 {
-    SetWordTaskArg(taskId, NUM_TASK_DATA - 2, (u32)followupFunc);
+    u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
+
+    gTasks[taskId].data[followupFuncIndex] = (s16)((u32)followupFunc);
+    gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // Store followupFunc as two half-words in the data array.
     gTasks[taskId].func = func;
 }
 
 void SwitchTaskToFollowupFunc(u8 taskId)
 {
-    gTasks[taskId].func = (TaskFunc)GetWordTaskArg(taskId, NUM_TASK_DATA - 2);
+    u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
+
+    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[followupFuncIndex]) | (gTasks[taskId].data[followupFuncIndex + 1] << 16));
 }
 
 bool8 FuncIsActiveTask(TaskFunc func)
 {
-    return FindTaskIdByFunc(func) != TASK_NONE;
+    u8 i;
+
+    for (i = 0; i < NUM_TASKS; i++)
+        if (gTasks[i].isActive == TRUE && gTasks[i].func == func)
+            return TRUE;
+
+    return FALSE;
 }
 
 u8 FindTaskIdByFunc(TaskFunc func)
@@ -162,7 +186,7 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
     if (dataElem < NUM_TASK_DATA - 1)
-        return (u16)gTasks[taskId].data[dataElem] | ((u32)(u16)gTasks[taskId].data[dataElem + 1] << 16);
+        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;
 }

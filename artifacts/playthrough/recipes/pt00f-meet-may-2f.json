@@ -1,6 +1,0 @@
-{"name":"PT00f May's 2F: Poke Ball, meet May, region choice","start":{"save":"work/studio/scenes/pt00e/end.sav"},
- "steps":[{"walk_to":[2,3],"label":"Below stairs"},{"walk":["UP"],"label":"Upstairs"},{"frames":120,"label":"2F"},
-          {"walk_to":[5,5],"face":"UP","label":"Facing Poke Ball"},{"press":"A","frames":60,"label":"Check ball"},
-          {"tap":"A","every":40,"frames":8000,"min_frames":30,"until":"idle","label":"Met May"},{"frames":60,"label":"End"}],
- "queries":{"littleroot_state":{"kind":2,"id":"VAR_LITTLEROOT_TOWN_STATE"},"rival_state":{"kind":2,"id":"VAR_LITTLEROOT_RIVAL_STATE"},"starter_gen":{"kind":2,"id":"VAR_STARTER_GEN"}},
- "expect":{"ready":true}}

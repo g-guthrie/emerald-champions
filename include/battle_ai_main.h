@@ -13,8 +13,6 @@ typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 #define BEST_DAMAGE_MOVE         1  // Move with the most amount of hits with the best accuracy/effect
 #define POWERFUL_STATUS_MOVE     10 // Moves with this score will be chosen over a move that faints target
 #define NO_DAMAGE_OR_FAILS      -20 // Move fails or does no damage
-// Hits to a knockout beyond which an attack is chip rather than progress.
-#define NEGLIGIBLE_DAMAGE_HITS   5
 
 // Scores given in AI_CalcMoveEffectScore and AI_CalcHoldEffectMoveScore
 enum AIScore
@@ -41,6 +39,10 @@ enum MoveComparisonResult
 #define FAST_KILL      6 // AI is faster and faints target
 #define SLOW_KILL      4 // AI is slower and faints target
 #define LAST_CHANCE    2 // AI faints to target. It should try and do damage with a priority move
+
+// AI_Risky
+#define STRONG_RISKY_EFFECT     3
+#define AVERAGE_RISKY_EFFECT    2
 
 #include "test_runner.h"
 
@@ -102,17 +104,6 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, enum BattlerId battler);
 void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void ComputeAiBattlerDecisions(enum BattlerId battler);
-bool32 AI_ComputeDoublesDecisions(enum BattlerId battler);
-#if TESTING
-s32 AI_TestPairReserveValue(enum BattleSide evaluatingSide, enum BattleSide side);
-u32 AI_TestPairWeatherMask(enum Move move);
-#endif
-s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask);
-// Candidate scoring mutates the temporary board. The caller owns a snapshot
-// and must restore it before another candidate and before returning to play.
-s32 AI_EvaluateDoublesCandidate(enum BattlerId battler, u32 noActionMask);
-s32 AI_ScoreMoveAgainstTarget(enum BattlerId battler, enum BattlerId target, u32 moveIndex);
-u32 AI_GetMoveAccuracy(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 u32 BattleAI_ChooseMoveIndex(enum BattlerId battler);
 void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(enum BattlerId battler);
@@ -120,7 +111,6 @@ void Ai_UpdateFaintData(enum BattlerId battler);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
 void ResetDynamicAiFunctions(void);
 void AI_TrySwitchOrUseItem(enum BattlerId battler);
-bool32 AI_CancelRefusedSwitch(enum BattlerId battler);
 void CalcBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 weather, enum BattleTerrain terrain);
 void AIDebugTimerStart(void);
 void AIDebugTimerEnd(void);

@@ -1,8 +1,6 @@
 #ifndef GUARD_CAPS_H
 #define GUARD_CAPS_H
 
-#include "constants/species.h"
-
 #if B_EXP_CAP_TYPE != EXP_CAP_NONE && B_EXP_CAP_TYPE != EXP_CAP_HARD && B_EXP_CAP_TYPE != EXP_CAP_SOFT
 #error "Invalid choice for B_EXP_CAP_TYPE, must be of [EXP_CAP_NONE, EXP_CAP_HARD, EXP_CAP_SOFT]"
 #endif
@@ -21,11 +19,7 @@
 #endif
 
 u32 GetCurrentLevelCap(void);
-u32 GetLevelCapForSpecies(enum Species species, u32 baseline);
-u32 GetPlayerLevelCapForSpecies(enum Species species);
+u32 GetSoftLevelCapExpValue(u32 level, u32 expValue);
 u32 GetCurrentEVCap(void);
-bool32 AreEVsUnlocked(void);
-#if EC_HEADLESS_FIXTURES
-#endif
 
 #endif /* GUARD_CAPS_H */

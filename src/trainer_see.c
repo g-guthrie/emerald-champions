@@ -117,8 +117,7 @@ static bool8 (*const sTrainerSeeFuncList2[])(u8 taskId, struct Task *task, struc
 {
     RevealBuriedTrainer,
     PopOutOfAshBuriedTrainer,
-    JumpInPlaceBuriedTrainer,
-    WaitRevealBuriedTrainer,
+    JumpInPlaceBuriedTrainer
 };
 
 static const struct OamData sOamData_Icons =
@@ -434,10 +433,17 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
 };
 
 // code
-static u8 GetSortedTrainerObjects(u8 *trainerObjects)
+bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
+    u8 trainerObjects[OBJECT_EVENTS_COUNT] = {0};
     u8 trainerObjectsCount = 0;
+
+    if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
+        return FALSE;
+
+    gNoOfApproachingTrainers = 0;
+    gApproachingTrainerId = 0;
 
     // Adds trainers wanting to battle to array
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -450,7 +456,7 @@ static u8 GetSortedTrainerObjects(u8 *trainerObjects)
     }
 
     // Sorts array by localId
-    for (i = 1; i < trainerObjectsCount; i++)
+    for (i = 1; i <= trainerObjectsCount; i++)
     {
         u8 x = trainerObjects[i];
         u8 j = i;
@@ -462,28 +468,7 @@ static u8 GetSortedTrainerObjects(u8 *trainerObjects)
         trainerObjects[j] = x;
     }
 
-    return trainerObjectsCount;
-}
-
-#if TESTING
-u8 Test_GetSortedTrainerObjects(u8 *trainerObjects)
-{
-    return GetSortedTrainerObjects(trainerObjects);
-}
-#endif
-
-bool8 CheckForTrainersWantingBattle(void)
-{
-    u8 trainerObjects[OBJECT_EVENTS_COUNT];
-
-    if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
-        return FALSE;
-
-    gNoOfApproachingTrainers = 0;
-    gApproachingTrainerId = 0;
-    u8 trainerObjectsCount = GetSortedTrainerObjects(trainerObjects);
-
-    for (u32 i = 0; i < trainerObjectsCount; i++)
+    for (i = 0; i <= trainerObjectsCount; i++)
     {
         u8 numTrainers;
         numTrainers = CheckTrainer(trainerObjects[i]);
@@ -516,7 +501,7 @@ bool8 CheckForTrainersWantingBattle(void)
             ConfigureApproachingFacilityTrainerBattle(gApproachingTrainers);
         else
             ConfigureApproachingTrainerBattle(gApproachingTrainers);
-
+            
         gTrainerApproachedPlayer = TRUE;
         gApproachingTrainerId = 0;
         return TRUE;
@@ -592,7 +577,7 @@ static u8 CheckTrainer(u8 objectEventId)
         numTrainers = 0xFF;
     }
 
-    if (trainerBattlePtr && !InTrainerHillChallenge() && !InBattlePyramid())
+    if (trainerBattlePtr && !InTrainerHillChallenge() && !InBattlePyramid()) 
     {
         TrainerBattleParameter *temp = (TrainerBattleParameter *)(trainerBattlePtr + 1);
         if (temp->params.isDoubleBattle)
@@ -956,7 +941,6 @@ static void Task_SetBuriedTrainerMovement(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     struct ObjectEvent *objEvent;
-    const u32 funcCount = ARRAY_COUNT(sTrainerSeeFuncList2);
 
     LoadWordFromTwoHalfwords((u16*) &task->tObjEvent, (u32 *)&objEvent);
     if (!task->data[7])
@@ -964,24 +948,18 @@ static void Task_SetBuriedTrainerMovement(u8 taskId)
         ObjectEventClearHeldMovement(objEvent);
         task->data[7]++;
     }
-
-    // WaitRevealBuriedTrainer shares the main approach state enum and advances
-    // to TRSEE_MOVE_TO_PLAYER when it finishes.  That value is one past this
-    // direct-interaction table; never dispatch it as a function pointer.
-    if (task->tFuncId < funcCount)
+    if (task->tFuncId < ARRAY_COUNT(sTrainerSeeFuncList2))
+    {
         sTrainerSeeFuncList2[task->tFuncId](taskId, task, objEvent);
-
-    if (task->tFuncId >= funcCount
-     || (task->tFuncId == funcCount - 1 && !FieldEffectActiveListContains(FLDEFF_ASH_PUFF)))
+    }
+    else if (!FieldEffectActiveListContains(FLDEFF_ASH_PUFF))
     {
         SetTrainerMovementType(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));
         TryOverrideTemplateCoordsForObjectEvent(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));
         DestroyTask(taskId);
+        return;
     }
-    else
-    {
-        objEvent->heldMovementFinished = 0;
-    }
+    objEvent->heldMovementFinished = 0;
 }
 
 // Called when a buried Trainer has the reveal_trainer movement applied, from direct interaction
@@ -1017,6 +995,18 @@ void PrepareSecondApproachingTrainer(void)
     }
 }
 
+void TryPrepareSecondApproachingTrainer(void)
+{
+    if (gNoOfApproachingTrainers == 2)
+    {
+        PrepareSecondApproachingTrainer();
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
+}
+
 #define sLocalId    data[0]
 #define sMapNum     data[1]
 #define sMapGroup   data[2]
@@ -1026,7 +1016,7 @@ void PrepareSecondApproachingTrainer(void)
 
 u8 FldEff_ExclamationMarkIcon(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
     {
@@ -1044,14 +1034,14 @@ u8 FldEff_QuestionMarkIcon(void)
     {
         // Use follower emotes
         u8 emotion = gFieldEffectArguments[7];
-        spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emote, 0, 0, 0x52);
+        spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_Emote, 0, 0, 0x52);
         if (spriteId == MAX_SPRITES)
             return 0;
         SetIconSpriteData(&gSprites[spriteId], FLDEFF_EMOTE, emotion); // Set animation based on emotion
         UpdateSpritePaletteByTemplate(&sSpriteTemplate_Emote, &gSprites[spriteId]);
         return 0;
     }
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x52);
+    spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
     {
@@ -1064,7 +1054,7 @@ u8 FldEff_QuestionMarkIcon(void)
 
 u8 FldEff_HeartIcon(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_HeartIcon, 0, 0, 0x52);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_HeartIcon, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
     {
@@ -1079,7 +1069,7 @@ u8 FldEff_HeartIcon(void)
 
 u8 FldEff_DoubleExclMarkIcon(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
     {
@@ -1094,7 +1084,7 @@ u8 FldEff_DoubleExclMarkIcon(void)
 
 u8 FldEff_XIcon(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
     {
@@ -1109,7 +1099,7 @@ u8 FldEff_XIcon(void)
 
 u8 FldEff_SmileyFaceIcon(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x53);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sSpriteTemplate_Emoticons, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
         SetIconSpriteData(&gSprites[spriteId], FLDEFF_SMILEY_FACE_ICON, 3);

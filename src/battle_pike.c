@@ -1,5 +1,4 @@
 #include "global.h"
-#include "move.h"
 #include "battle_pike.h"
 #include "event_data.h"
 #include "frontier_util.h"
@@ -82,7 +81,6 @@ static void PrepareOneTrainer(bool8 difficult);
 static u16 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
 static void TryHealMons(u8 healCount);
-static bool32 IsPikeMonNeedingHealing(struct Pokemon *mon);
 static void Task_DoStatusInflictionScreenFlash(u8 taskId);
 static bool8 AtLeastTwoAliveMons(void);
 static u8 SpeciesToPikeMonId(enum Species species);
@@ -500,14 +498,14 @@ static void (*const sBattlePikeFunctions[])(void) =
 };
 
 static const u8 sRoomTypeHints[] = {
-    PIKE_HINT_PEOPLE,     // PIKE_ROOM_ONE_TRAINER_BATTLE
+    PIKE_HINT_PEOPLE,     // PIKE_ROOM_SINGLE_BATTLE
     PIKE_HINT_PEOPLE,     // PIKE_ROOM_HEAL_FULL
     PIKE_HINT_WHISPERING, // PIKE_ROOM_NPC
     PIKE_HINT_NOSTALGIA,  // PIKE_ROOM_STATUS
     PIKE_HINT_NOSTALGIA,  // PIKE_ROOM_HEAL_PART
     PIKE_HINT_POKEMON,    // PIKE_ROOM_WILD_MONS
     PIKE_HINT_POKEMON,    // PIKE_ROOM_HARD_BATTLE
-    PIKE_HINT_WHISPERING, // PIKE_ROOM_TWO_TRAINER_BATTLE
+    PIKE_HINT_WHISPERING, // PIKE_ROOM_DOUBLE_BATTLE
     PIKE_HINT_BRAIN,      // PIKE_ROOM_BRAIN
 };
 
@@ -555,7 +553,7 @@ static void SetupRoomObjectEvents(void)
 
     switch (sRoomType)
     {
-    case PIKE_ROOM_ONE_TRAINER_BATTLE:
+    case PIKE_ROOM_SINGLE_BATTLE:
         PrepareOneTrainer(FALSE);
         setObjGfx1 = FALSE;
         break;
@@ -585,7 +583,7 @@ static void SetupRoomObjectEvents(void)
         setObjGfx1 = FALSE;
         setObjGfx2 = TRUE;
         break;
-    case PIKE_ROOM_TWO_TRAINER_BATTLE:
+    case PIKE_ROOM_DOUBLE_BATTLE:
         PrepareTwoTrainers();
         setObjGfx1 = FALSE;
         break;
@@ -767,6 +765,36 @@ static void BufferNPCMessage(void)
 static void StatusInflictionScreenFlash(void)
 {
     CreateTask(Task_DoStatusInflictionScreenFlash, 2);
+}
+
+static void HealMon(struct Pokemon *mon)
+{
+    u8 i;
+    u16 hp;
+    u8 ppBonuses;
+    u8 data[4];
+
+    for (i = 0; i < 4; i++)
+        data[i] = 0;
+
+    hp = GetMonData(mon, MON_DATA_MAX_HP);
+    data[0] = hp;
+    data[1] = hp >> 8;
+    SetMonData(mon, MON_DATA_HP, data);
+
+    ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
+        data[0] = CalculatePPWithBonus(move, ppBonuses, i);
+        SetMonData(mon, MON_DATA_PP1 + i, data);
+    }
+
+    data[0] = 0;
+    data[1] = 0;
+    data[2] = 0;
+    data[3] = 0;
+    SetMonData(mon, MON_DATA_STATUS, data);
 }
 
 static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
@@ -989,10 +1017,6 @@ static u8 GetNextRoomType(void)
     // Check if the player walked into the same room that the lady gave a hint about.
     if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.pikeHintedRoomIndex)
     {
-        u8 hinted = gSaveBlock2Ptr->frontier.pikeHintedRoomType;
-        if ((hinted == PIKE_ROOM_ONE_TRAINER_BATTLE || hinted == PIKE_ROOM_HARD_BATTLE
-          || hinted == PIKE_ROOM_TWO_TRAINER_BATTLE) && !AtLeastTwoAliveMons())
-            return PIKE_ROOM_NPC;
         if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS)
             TryInflictRandomStatus();
         return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
@@ -1014,20 +1038,11 @@ static u8 GetNextRoomType(void)
         }
     }
 
-    // Every trainer room now uses doubles. With one usable mon left, keep
-    // offering nonbattle rooms rather than selecting a trainer room it cannot
-    // enter with the Pike's two-mon requirement.
-    if (!AtLeastTwoAliveMons())
+    // Remove room type candidates that would have no effect on the player's party.
+    if (roomTypesDisabled[PIKE_ROOM_DOUBLE_BATTLE] != TRUE && !AtLeastTwoAliveMons())
     {
-        const u8 battleRooms[] = {PIKE_ROOM_ONE_TRAINER_BATTLE, PIKE_ROOM_HARD_BATTLE, PIKE_ROOM_TWO_TRAINER_BATTLE};
-        for (u32 room = 0; room < ARRAY_COUNT(battleRooms); room++)
-        {
-            if (!roomTypesDisabled[battleRooms[room]])
-            {
-                roomTypesDisabled[battleRooms[room]] = TRUE;
-                numRoomCandidates--;
-            }
-        }
+        roomTypesDisabled[PIKE_ROOM_DOUBLE_BATTLE] = TRUE;
+        numRoomCandidates--;
     }
     if (roomTypesDisabled[PIKE_ROOM_STATUS] != TRUE && !AtLeastOneHealthyMon())
     {
@@ -1070,6 +1085,11 @@ static u16 GetNPCRoomGraphicsId(void)
 {
     sNpcId = Random() % ARRAY_COUNT(sNPCTable);
     return sNPCTable[sNpcId].graphicsId;
+}
+
+static bool8 UNUSED GetInWildMonRoom(void)
+{
+    return sInWildMonRoom;
 }
 
 bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
@@ -1228,7 +1248,7 @@ static void Task_DoStatusInflictionScreenFlash(u8 taskId)
 
 static void TryHealMons(u8 healCount)
 {
-    u8 i;
+    u8 j, i;
     u8 indices[FRONTIER_PARTY_SIZE];
 
     if (healCount == 0)
@@ -1243,34 +1263,41 @@ static void TryHealMons(u8 healCount)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
+        bool32 canBeHealed = FALSE;
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][indices[i]];
-        if (IsPikeMonNeedingHealing(mon))
+        u16 curr = GetMonData(mon, MON_DATA_HP);
+        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
+        if (curr < max)
         {
-            HealPokemon(&gParties[B_TRAINER_PLAYER][indices[i]]);
+            canBeHealed = TRUE;
+        }
+        else if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) != AILMENT_NONE)
+        {
+            canBeHealed = TRUE;
+        }
+        else
+        {
+            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                enum Move move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                max = CalculatePPWithBonus(move, ppBonuses, j);
+                curr = GetMonData(mon, MON_DATA_PP1 + j);
+                if (curr < max)
+                {
+                    canBeHealed = TRUE;
+                    break;
+                }
+            }
+        }
+
+        if (canBeHealed == TRUE)
+        {
+            HealMon(&gParties[B_TRAINER_PLAYER][indices[i]]);
             if (--healCount == 0)
                 break;
         }
     }
-}
-
-static bool32 IsPikeMonNeedingHealing(struct Pokemon *mon)
-{
-    u16 curr = GetMonData(mon, MON_DATA_HP);
-    u16 max = GetMonData(mon, MON_DATA_MAX_HP);
-
-    if (curr < max || GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) != AILMENT_NONE)
-        return TRUE;
-
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
-        max = GetMoveMaxPP(move);
-        curr = GetMonData(mon, MON_DATA_PP1 + i);
-        if (curr < max)
-            return TRUE;
-    }
-
-    return FALSE;
 }
 
 static void GetInBattlePike(void)
@@ -1324,10 +1351,7 @@ static void SetHintedRoom(void)
         Free(roomCandidates);
         if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS && !AtLeastOneHealthyMon())
             gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
-        if ((gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_ONE_TRAINER_BATTLE
-          || gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_HARD_BATTLE
-          || gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_TWO_TRAINER_BATTLE)
-         && !AtLeastTwoAliveMons())
+        if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
             gSaveBlock2Ptr->frontier.pikeHintedRoomType = PIKE_ROOM_NPC;
     }
 }
@@ -1508,13 +1532,36 @@ static void SetHealingroomTypesDisabled(void)
 
 static void IsPartyFullHealed(void)
 {
-    u8 i;
+    u8 i, j;
 
     gSpecialVar_Result = TRUE;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
+        bool32 canBeHealed = FALSE;
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        if (IsPikeMonNeedingHealing(mon))
+        u16 curr = GetMonData(mon, MON_DATA_HP);
+        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
+        if (curr >= max && GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE)
+        {
+            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                enum Move move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                max = CalculatePPWithBonus(move, ppBonuses, j);
+                curr = GetMonData(mon, MON_DATA_PP1 + j);
+                if (curr < max)
+                {
+                    canBeHealed = TRUE;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            canBeHealed = TRUE;
+        }
+
+        if (canBeHealed == TRUE)
         {
             gSpecialVar_Result = FALSE;
             break;

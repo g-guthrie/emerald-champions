@@ -118,7 +118,9 @@ struct ContestResults
 {
     struct ContestResultsInternal *data;
     struct ContestMonResults (*monResults)[CONTESTANT_COUNT];
+    u8 *unusedBg; // Allocated/freed, never used
     u8 *tilemapBuffers[4];
+    u8 *unused; // Allocated/freed, never used
 };
 
 static EWRAM_DATA struct ContestResults *sContestResults = NULL;
@@ -1857,8 +1859,12 @@ static void AllocContestResults(void)
     sContestResults = AllocZeroed(sizeof(*sContestResults));
     sContestResults->data = AllocZeroed(sizeof(*sContestResults->data));
     sContestResults->monResults = AllocZeroed(sizeof(*sContestResults->monResults));
-    for (u32 i = 0; i < ARRAY_COUNT(sContestResults->tilemapBuffers); i++)
-        sContestResults->tilemapBuffers[i] = AllocZeroed(BG_SCREEN_SIZE);
+    sContestResults->unusedBg = AllocZeroed(BG_SCREEN_SIZE);
+    sContestResults->tilemapBuffers[0] = AllocZeroed(BG_SCREEN_SIZE);
+    sContestResults->tilemapBuffers[1] = AllocZeroed(BG_SCREEN_SIZE);
+    sContestResults->tilemapBuffers[2] = AllocZeroed(BG_SCREEN_SIZE);
+    sContestResults->tilemapBuffers[3] = AllocZeroed(BG_SCREEN_SIZE);
+    sContestResults->unused = AllocZeroed(0x1000);
     AllocateMonSpritesGfx();
 }
 
@@ -1866,8 +1872,12 @@ static void FreeContestResults(void)
 {
     FREE_AND_SET_NULL(sContestResults->data);
     FREE_AND_SET_NULL(sContestResults->monResults);
-    for (u32 i = 0; i < ARRAY_COUNT(sContestResults->tilemapBuffers); i++)
-        FREE_AND_SET_NULL(sContestResults->tilemapBuffers[i]);
+    FREE_AND_SET_NULL(sContestResults->unusedBg);
+    FREE_AND_SET_NULL(sContestResults->tilemapBuffers[0]);
+    FREE_AND_SET_NULL(sContestResults->tilemapBuffers[1]);
+    FREE_AND_SET_NULL(sContestResults->tilemapBuffers[2]);
+    FREE_AND_SET_NULL(sContestResults->tilemapBuffers[3]);
+    FREE_AND_SET_NULL(sContestResults->unused);
     FREE_AND_SET_NULL(sContestResults);
     FreeMonSpritesGfx();
 }
@@ -2445,6 +2455,11 @@ bool8 GiveMonArtistRibbon(void)
     {
         return FALSE;
     }
+}
+
+bool8 IsContestDebugActive(void)
+{
+    return FALSE; // gUnknown_0203856C in pokeruby
 }
 
 void ShowContestEntryMonPic(void)

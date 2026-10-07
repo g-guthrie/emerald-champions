@@ -1,68 +1,3 @@
-@ Both rival meeting paths share every region and default cancellation to Hoenn.
-RivalsHouse_EventScript_ChooseStarterRegion::
-	setvar VAR_0x8004, SCROLL_MULTI_REGION_NAMES
-	setvar VAR_0x8005, 2 @ cursor on Hoenn; the list still opens at its top
-	special ShowScrollableMultichoice
-
-RivalsHouse_EventScript_ApplyStarterRegion::
-	switch VAR_RESULT
-	case 0, RivalsHouse_EventScript_Kanto
-	case 1, RivalsHouse_EventScript_Johto
-	case 2, RivalsHouse_EventScript_Hoenn
-	case 3, RivalsHouse_EventScript_Sinnoh
-	case 4, RivalsHouse_EventScript_Unova
-	case 5, RivalsHouse_EventScript_Kalos
-	case 6, RivalsHouse_EventScript_Alola
-	case 7, RivalsHouse_EventScript_Galar
-	case 8, RivalsHouse_EventScript_Paldea
-	goto RivalsHouse_EventScript_Hoenn
-	end
-
-RivalsHouse_EventScript_Kanto:
-	setvar VAR_STARTER_GEN, 1
-	bufferstring 1, StarterRegionStringKanto
-	return
-
-RivalsHouse_EventScript_Johto:
-	setvar VAR_STARTER_GEN, 2
-	bufferstring 1, StarterRegionStringJohto
-	return
-
-RivalsHouse_EventScript_Hoenn:
-	setvar VAR_STARTER_GEN, 3
-	bufferstring 1, StarterRegionStringHoenn
-	return
-
-RivalsHouse_EventScript_Sinnoh:
-	setvar VAR_STARTER_GEN, 4
-	bufferstring 1, StarterRegionStringSinnoh
-	return
-
-RivalsHouse_EventScript_Unova:
-	setvar VAR_STARTER_GEN, 5
-	bufferstring 1, StarterRegionStringUnova
-	return
-
-RivalsHouse_EventScript_Kalos:
-	setvar VAR_STARTER_GEN, 6
-	bufferstring 1, StarterRegionStringKalos
-	return
-
-RivalsHouse_EventScript_Alola:
-	setvar VAR_STARTER_GEN, 7
-	bufferstring 1, StarterRegionStringAlola
-	return
-
-RivalsHouse_EventScript_Galar:
-	setvar VAR_STARTER_GEN, 8
-	bufferstring 1, StarterRegionStringGalar
-	return
-
-RivalsHouse_EventScript_Paldea:
-	setvar VAR_STARTER_GEN, 9
-	bufferstring 1, StarterRegionStringPaldea
-	return
-
 PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet::
 	setvar VAR_LITTLEROOT_INTRO_STATE, 5
 	return
@@ -364,24 +299,9 @@ PlayersHouse_1F_Movement_MomReturnToSeatFemale:
 PlayersHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
-	goto_if_unset FLAG_RECEIVED_OLD_ROD, PlayersHouse_1F_EventScript_MomNormal
-	setvar VAR_0x8004, ITEM_OLD_ROD
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, PlayersHouse_1F_EventScript_MomNormal
-	checkitemspace ITEM_OLD_ROD, 1
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox PlayersHouse_1F_Text_OldRodStillHere, MSGBOX_DEFAULT
-	giveitem ITEM_OLD_ROD
-	release
-	end
-
-PlayersHouse_1F_Text_OldRodStillHere:
-	.string "I kept your Old Rod safe.\n"
-	.string "You can take it now!$"
-
-PlayersHouse_1F_EventScript_MomNormal:
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
 	goto_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, PlayersHouse_1F_EventScript_DontPushYourselfTooHard
+	goto_if_set FLAG_HAS_MATCH_CALL, PlayersHouse_1F_EventScript_TryRegisterMom
 	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
 	goto_if_eq VAR_TEMP_1, 1, PlayersHouse_1F_EventScript_SeeYouHoney
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
@@ -391,6 +311,34 @@ PlayersHouse_1F_EventScript_MomNormal:
 
 PlayersHouse_1F_EventScript_DontPushYourselfTooHard::
 	msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
+	release
+	end
+
+PlayersHouse_1F_EventScript_TryRegisterMom::
+	goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, PlayersHouse_1F_EventScript_CheckGiveAmuletCoin
+	msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	playfanfare MUS_REGISTER_MATCH_CALL
+	msgbox PlayersHouse_1F_Text_RegisteredMom, MSGBOX_DEFAULT
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_ENABLE_MOM_MATCH_CALL
+	release
+	end
+
+PlayersHouse_1F_EventScript_CheckGiveAmuletCoin::
+	goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_TryGiveAmuletCoin
+	goto PlayersHouse_1F_EventScript_MomHealsParty
+
+PlayersHouse_1F_EventScript_TryGiveAmuletCoin::
+	goto_if_set FLAG_RECEIVED_AMULET_COIN, PlayersHouse_1F_EventScript_MomHealsParty
+	msgbox PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom, MSGBOX_DEFAULT
+	giveitem ITEM_AMULET_COIN
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_AMULET_COIN
 	release
 	end
 
@@ -483,24 +431,7 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_DadApproachPlayerMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadApproachPlayerFemale
 	msgbox PlayersHouse_1F_Text_TicketFromBrineyCameForYou, MSGBOX_DEFAULT
-	setflag FLAG_EC_EARNED_SS_TICKET
-	setvar VAR_0x8004, ITEM_SS_TICKET
-	special CheckEmeraldChampionsHandoffItem
-	goto_if_eq VAR_RESULT, TRUE, PlayersHouse_1F_EventScript_SSTicketDelivered
 	giveitem ITEM_SS_TICKET
-	goto_if_eq VAR_RESULT, FALSE, PlayersHouse_1F_EventScript_ArchiveSSTicket
-	goto PlayersHouse_1F_EventScript_SSTicketDelivered
-	end
-
-PlayersHouse_1F_EventScript_ArchiveSSTicket::
-	addpcitem ITEM_SS_TICKET
-	goto_if_eq VAR_RESULT, FALSE, PlayersHouse_1F_EventScript_SSTicketNoRoom
-	msgbox PlayersHouse_1F_Text_SSTicketSentToPC, MSGBOX_DEFAULT
-
-PlayersHouse_1F_EventScript_SSTicketDelivered::
-	setflag FLAG_RECEIVED_SS_TICKET
-
-PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	msgbox PlayersHouse_1F_Text_PortsInSlateportLilycove, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -512,13 +443,13 @@ PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadExitsFemale
 	playse SE_DOOR
 	removeobject VAR_0x8009
+	setflag FLAG_RECEIVED_SS_TICKET
 	delay 30
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_MomApproachPlayerMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_MomApproachPlayerFemale
 	delay 20
 	msgbox PlayersHouse_1F_Text_DadShouldStayLonger, MSGBOX_DEFAULT
 	closemessage
-	goto_if_set FLAG_LATIOS_OR_LATIAS_ROAMING, PlayersHouse_1F_EventScript_LatiReportFinished
 	setflag FLAG_SYS_TV_LATIAS_LATIOS
 	special TurnOnTVScreen
 	delay 60
@@ -542,17 +473,16 @@ PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	copyvar VAR_ROAMER_POKEMON, VAR_RESULT
 	msgbox PlayersHouse_1F_Text_StillUnknownPokemon, MSGBOX_DEFAULT
 	closemessage
-PlayersHouse_1F_EventScript_LatiReportFinished::
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 4
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
 	releaseall
 	end
 
-PlayersHouse_1F_EventScript_SSTicketNoRoom::
-	msgbox PlayersHouse_1F_Text_SSTicketNoRoom, MSGBOX_DEFAULT
-	goto PlayersHouse_1F_EventScript_ReceivedSSTicket
-
 @ Never called.
+PlayersHouse_1F_EventScript_AirLatiBroadcast::
+	setflag FLAG_SYS_TV_LATIAS_LATIOS
+	return
+
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD

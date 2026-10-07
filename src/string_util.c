@@ -227,6 +227,62 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
     return dest;
 }
 
+u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode, u8 n)
+{
+    enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
+    s32 powerOfTen;
+    s32 largestPowerOfTen = sPowersOfTen[n - 1];
+
+    state = WAITING_FOR_NONZERO_DIGIT;
+
+    if (mode == STR_CONV_MODE_RIGHT_ALIGN)
+        state = WRITING_SPACES;
+
+    if (mode == STR_CONV_MODE_LEADING_ZEROS)
+        state = WRITING_DIGITS;
+
+    for (powerOfTen = largestPowerOfTen; powerOfTen > 0; powerOfTen /= 10)
+    {
+        u8 c;
+        u16 digit = value / powerOfTen;
+        u32 temp = value - (powerOfTen * digit);
+
+        if (state == WRITING_DIGITS)
+        {
+            u8 *out = dest++;
+
+            if (digit <= 9)
+                c = sDigits[digit];
+            else
+                c = CHAR_QUESTION_MARK;
+
+            *out = c;
+        }
+        else if (digit != 0 || powerOfTen == 1)
+        {
+            u8 *out;
+            state = WRITING_DIGITS;
+            out = dest++;
+
+            if (digit <= 9)
+                c = sDigits[digit];
+            else
+                c = CHAR_QUESTION_MARK;
+
+            *out = c;
+        }
+        else if (state == WRITING_SPACES)
+        {
+            *dest++ = CHAR_SPACER;
+        }
+
+        value = temp;
+    }
+
+    *dest = EOS;
+    return dest;
+}
+
 u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
@@ -338,6 +394,44 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
     }
 }
 
+u8 *StringBraille(u8 *dest, const u8 *src)
+{
+    const u8 setBrailleFont[] = {
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_FONT,
+        FONT_BRAILLE,
+        EOS
+    };
+    const u8 gotoLine2[] = {
+        CHAR_NEWLINE,
+        EXT_CTRL_CODE_BEGIN,
+        EXT_CTRL_CODE_SHIFT_DOWN,
+        2,
+        EOS
+    };
+
+    dest = StringCopy(dest, setBrailleFont);
+
+    for (;;)
+    {
+        u8 c = *src++;
+
+        switch (c)
+        {
+        case EOS:
+            *dest = c;
+            return dest;
+        case CHAR_NEWLINE:
+            dest = StringCopy(dest, gotoLine2);
+            break;
+        default:
+            *dest++ = c;
+            *dest++ = c + NUM_BRAILLE_CHARS;
+            break;
+        }
+    }
+}
+
 static const u8 *ExpandPlaceholder_UnknownStringVar(void)
 {
     return sUnknownStringVar;
@@ -373,10 +467,15 @@ static const u8 *ExpandPlaceholder_KunChan(void)
 
 static const u8 *ExpandPlaceholder_RivalName(void)
 {
+#if IS_FRLG
+    if (gSaveBlock1Ptr->rivalName[0] != EOS)
+        return gSaveBlock1Ptr->rivalName;
+#endif
+
     if (gSaveBlock2Ptr->playerGender == MALE)
-        return gText_ExpandedPlaceholder_May;
+        return (IS_FRLG ? gText_ExpandedPlaceholder_Green : gText_ExpandedPlaceholder_May);
     else
-        return gText_ExpandedPlaceholder_Brendan;
+        return (IS_FRLG ? gText_ExpandedPlaceholder_Red : gText_ExpandedPlaceholder_Brendan);
 }
 
 static const u8 *ExpandPlaceholder_Version(void)
@@ -416,7 +515,10 @@ static const u8 *ExpandPlaceholder_Groudon(void)
 
 static const u8 *ExpandPlaceholder_Region(void)
 {
-    return gText_Hoenn;
+    if (IS_FRLG)
+        return gText_Kanto;
+    else
+        return gText_Hoenn;
 }
 
 const u8 *GetExpandedPlaceholder(u32 id)

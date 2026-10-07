@@ -12,6 +12,8 @@
 #define P_ULTRA_BURST_FORMS              TRUE
 #undef P_GIGANTAMAX_FORMS
 #define P_GIGANTAMAX_FORMS               TRUE
+#undef P_TERA_FORMS
+#define P_TERA_FORMS                     TRUE
 #undef P_FUSION_FORMS
 #define P_FUSION_FORMS                   TRUE
 #undef P_ALOLAN_FORMS

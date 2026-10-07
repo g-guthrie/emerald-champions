@@ -3,7 +3,6 @@
 
 #include "main.h"
 #include "task.h"
-#include "constants/pokemon.h"
 
 enum PartyMenuLayout
 {
@@ -97,9 +96,11 @@ void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task);
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task);
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task);
 void ItemUseCB_PPUp(u8 taskId, TaskFunc task);
+enum Move ItemIdToBattleMoveId(enum Item item);
+bool8 MonKnowsMove(struct Pokemon *mon, enum Move move);
+bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move);
+void ItemUseCB_TMHM(u8 taskId, TaskFunc task);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task);
-void StartLevelerPartySequence(MainCallback exitCallback);
-void StartLevelerTutorialSequence(MainCallback exitCallback);
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task);
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task);
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task);
@@ -131,11 +132,10 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void);
 void ChooseContestMon(void);
 void ChoosePartyMon(void);
 void ChooseMonForMoveRelearner(void);
-void ChooseMonForMoveRelearnerDirect(void);
-void CB2_ReturnToMoveRelearnerPartyMenu(void);
 void BattlePyramidChooseMonHeldItems(void);
 void DoBattlePyramidMonsHaveHeldItem(void);
 void IsSelectedMonEgg(void);
+void IsLastMonThatKnowsSurf(void);
 void MoveDeleterForgetMove(void);
 void BufferMoveDeleterNicknameAndMove(void);
 void GetNumMovesSelectedMonHas(void);
@@ -150,33 +150,5 @@ bool32 SetUpFieldMove_RockClimb(void);
 #if TESTING
 s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 chooseHalf, u8 lastSelectedSlot);
 #endif
-
-#if EC_HEADLESS_FIXTURES
-bool32 IsPartyMenuHeadlessAwaitingSelection(void);
-#endif
-
-
-// Native party Ability list layout (tested against every species).
-#define PARTY_ABILITY_MENU_MAX_OPTIONS (NUM_OWNER_ABILITY_SLOTS + 1) // Abilities plus Cancel
-#define PARTY_ABILITY_MENU_MAX_ROWS 9 // Two-tile rows between the top and bottom frames
-#define PARTY_ABILITY_MENU_MIN_WIDTH 10
-#define PARTY_ABILITY_MENU_MAX_WIDTH 17
-// The prompt box left of the list: widest beside the narrowest list, and
-// bottom-anchored, two tiles per line of wrapped text.
-#define PARTY_ABILITY_PROMPT_MAX_WIDTH (29 - PARTY_ABILITY_MENU_MIN_WIDTH - 3)
-#define PARTY_ABILITY_PROMPT_MAX_LINES 4
-#define PARTY_ABILITY_PROMPT_LENGTH 64 // Buffer for the wrapped text
-struct PartyAbilityMenuLayout
-{
-    u8 x, y, width, height;
-    u8 visibleRows;
-    u8 textWidth; // Pixels available to a label after the cursor.
-    u8 promptX, promptWidth;
-};
-u32 GetPartyAbilityMenuOptions(struct Pokemon *mon, u8 *slots, const u8 **labels);
-void GetPartyAbilityMenuLayout(const u8 *const *labels, u32 optionCount, struct PartyAbilityMenuLayout *layout);
-u32 GetPartyAbilityMenuLabelFont(const u8 *label, const struct PartyAbilityMenuLayout *layout);
-const u8 *GetPartyAbilityMenuPromptText(struct Pokemon *mon, u32 option);
-u32 WrapPartyAbilityMenuPrompt(const u8 *text, u32 widthPx, u8 *dest, u8 *fontId);
 
 #endif // GUARD_PARTY_MENU_H

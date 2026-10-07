@@ -24,8 +24,6 @@ static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
-STATIC_ASSERT(sizeof(struct SaveBlock1) + sizeof(struct SaveBlock2) + sizeof(struct PokemonStorage) <= HEAP_SIZE, RelocatedSaveCopiesFitHeap);
-
 struct LoadedSaveData
 {
  /*0x0000*/ struct Bag bag;
@@ -81,10 +79,12 @@ void ClearSav1(void)
 // Offset is the sum of the trainer id bytes
 void SetSaveBlocksPointers(u16 offset)
 {
+    struct SaveBlock1 **sav1_LocalVar = &gSaveBlock1Ptr;
+
     offset = (offset + Random()) & (SAVEBLOCK_MOVE_RANGE - 4);
 
     gSaveBlock2Ptr = (void *)(&gSaveblock2) + offset;
-    gSaveBlock1Ptr = (void *)(&gSaveblock1) + offset;
+    *sav1_LocalVar = (void *)(&gSaveblock1) + offset;
     gPokemonStoragePtr = (void *)(&gPokemonStorage) + offset;
 
     SetBagItemsPointers();
@@ -93,7 +93,7 @@ void SetSaveBlocksPointers(u16 offset)
 
 void MoveSaveBlocks_ResetHeap(void)
 {
-    IntrCallback vblankCB, hblankCB;
+    void *vblankCB, *hblankCB;
     u32 encryptionKey;
     struct SaveBlock2 *saveBlock2Copy;
     struct SaveBlock1 *saveBlock1Copy;
@@ -187,10 +187,6 @@ void LoadPlayerParty(void)
         u32 data;
         gParties[B_TRAINER_PLAYER][i] = *GetSavedPlayerPartyMon(i);
 
-        // Refresh cached stats; preserve fainting and clamp current HP.
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE)
-            CalculateMonStats(&gParties[B_TRAINER_PLAYER][i]);
-
         // TODO: Turn this into a save migration once those are available.
         // At which point we can remove hp and status from Pokemon entirely.
         data = gParties[B_TRAINER_PLAYER][i].maxHP - gParties[B_TRAINER_PLAYER][i].hp;
@@ -259,48 +255,34 @@ void CopyPartyAndObjectsFromSave(void)
 
 void LoadPlayerBag(void)
 {
+    int i;
+
     // load player bag.
     memcpy(&gLoadedSaveData.bag, &gSaveBlock1Ptr->bag, sizeof(struct Bag));
 
     // load mail.
-    memcpy(gLoadedSaveData.mail, gSaveBlock1Ptr->mail, sizeof(gLoadedSaveData.mail));
+    for (i = 0; i < MAIL_COUNT; i++)
+        gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
 
     gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
 }
 
-static void ApplyNewEncryptionKeyToLegacyBagItems(u32 newKey)
-{
-    struct Bag *bag = &gSaveBlock1Ptr->bag;
-
-#define REKEY_LEGACY_POCKET(pocket)                                      \
-    for (u32 i = 0; i < ARRAY_COUNT(bag->pocket); i++)                   \
-        ApplyNewEncryptionKeyToHword(&bag->pocket[i].quantity, newKey)
-
-    REKEY_LEGACY_POCKET(items);
-    REKEY_LEGACY_POCKET(keyItems);
-    REKEY_LEGACY_POCKET(pokeBalls);
-    REKEY_LEGACY_POCKET(berries);
-
-#undef REKEY_LEGACY_POCKET
-}
-
 void SavePlayerBag(void)
 {
+    int i;
     u32 encryptionKeyBackup;
 
     // save player bag.
     memcpy(&gSaveBlock1Ptr->bag, &gLoadedSaveData.bag, sizeof(struct Bag));
 
     // save mail.
-    memcpy(gSaveBlock1Ptr->mail, gLoadedSaveData.mail, sizeof(gLoadedSaveData.mail));
+    for (i = 0; i < MAIL_COUNT; i++)
+        gSaveBlock1Ptr->mail[i] = gLoadedSaveData.mail[i];
 
     encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
-    // LoadPlayerBag backs up only the original five arrays.  Extension and
-    // new-pocket slots already received encryptionKeyBackup when the save
-    // blocks moved, so re-keying every logical pocket here would corrupt them.
-    ApplyNewEncryptionKeyToLegacyBagItems(encryptionKeyBackup);
-    gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup;
+    ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
+    gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)

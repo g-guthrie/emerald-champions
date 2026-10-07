@@ -1,9 +1,6 @@
 #ifndef GUARD_ROAMER_H
 #define GUARD_ROAMER_H
 
-// A roamer on the player's map takes one in this many land and Surf encounters.
-#define ROAMER_ENCOUNTER_ODDS 4
-
 void DeactivateAllRoamers(void);
 void InitRoamer(void);
 void UpdateLocationHistoryForRoamer(void);

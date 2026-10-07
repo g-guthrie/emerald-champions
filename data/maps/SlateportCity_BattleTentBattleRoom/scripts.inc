@@ -33,7 +33,7 @@ SlateportCity_BattleTentBattleRoom_OnWarp:
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
-	hideobjectat LOCALID_PLAYER, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat LOCALID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
 	hideobjectat LOCALID_SLATEPORT_TENT_BATTLE_OPPONENT, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
 	end
 
@@ -100,3 +100,4 @@ SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_down
 	walk_in_place_faster_left
 	step_end
+

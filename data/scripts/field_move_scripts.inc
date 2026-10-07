@@ -21,13 +21,6 @@ EventScript_CutTreeDown:: @ fallthrough
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	@ Every Cut tree shares one habitat (Skwovet, Pineco, Aipom, Burmy, Applin,
-	@ Phantump: found nowhere else, evolved once the map's grass levels reach
-	@ their evolution). One tree in three hides a Pokemon; the odds, levels and
-	@ Repel rule live in CutTreeWildEncounter (wild_encounter.c).
-	callnative CutTreeWildEncounter
-	goto_if_eq VAR_RESULT, FALSE, EventScript_CancelCut
-	waitstate
 	releaseall
 	end
 
@@ -41,19 +34,7 @@ Movement_CutTreeDown:
 	step_end
 
 EventScript_CheckTreeCantCut::
-	goto_if_set FLAG_RECEIVED_HM_CUT, EventScript_CutNeedsStoneBadge
 	msgbox Text_CantCut, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_CutNeedsStoneBadge::
-	goto_if_set FLAG_BADGE01_GET, EventScript_CutNeedsPokemon
-	msgbox Text_CutNeedsStoneBadge, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_CutNeedsPokemon::
-	msgbox Text_CutNeedsPokemon, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -64,87 +45,15 @@ EventScript_CancelCut::
 
 Text_WantToCut:
 	.string "This tree looks like it can be\n"
-	.string "Cut down!\p"
-	.string "Would you like to Cut it?$"
+	.string "CUT down!\p"
+	.string "Would you like to CUT it?$"
 
 Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
-@ Interact at the solution positions described by the original tomb inscriptions.
-EventScript_BrailleRockSmash::
-	lockall
-	setvar VAR_0x8009, 1
-	setvar VAR_0x8004, FIELD_MOVE_ROCK_SMASH
-	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
-	checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
-	goto EventScript_BrailleFieldMove
-
-EventScript_BrailleFlash::
-	lockall
-	setvar VAR_0x8009, 3
-	setvar VAR_0x8004, FIELD_MOVE_FLASH
-	buffermovename STR_VAR_2, MOVE_FLASH
-	checkfieldmove FIELD_MOVE_FLASH, TRUE
-EventScript_BrailleFieldMove:
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_BrailleFieldMoveUnavailable
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	msgbox Text_UseBrailleFieldMove, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
-	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
-	closemessage
-	setfieldeffectargument 3, 0
-	dofieldeffect FLDEFF_USE_TOMB_PUZZLE_EFFECT
-	waitfieldeffect FLDEFF_USE_TOMB_PUZZLE_EFFECT
-	call_if_eq VAR_0x8009, 1, DesertRuins_EventScript_ReadAccount
-	call_if_eq VAR_0x8009, 3, AncientTomb_EventScript_ReadAccount
-	releaseall
-	end
-
-DesertRuins_EventScript_ReadAccount::
-	msgbox DesertRuins_Text_RouteAccount, MSGBOX_DEFAULT
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
-	return
-
-AncientTomb_EventScript_ReadAccount::
-	msgbox AncientTomb_Text_RouteAccount, MSGBOX_DEFAULT
-	call EmeraldChampions_EventScript_ThreeRuinsProgress
-	return
-
-DesertRuins_Text_RouteAccount:
-	.string "The first account describes an\n"
-	.string "islet on the western sea, between\l"
-	.string "Petalburg's shore and Dewford.\p"
-	.string "When land and sea fought, the\n"
-	.string "builders appealed to the guardian\l"
-	.string "of the sky.$"
-
-AncientTomb_Text_RouteAccount:
-	.string "The final account describes an\n"
-	.string "underwater cave where the path\l"
-	.string "rises above the waterline.\p"
-	.string "The sky guardian quieted the\n"
-	.string "land and sea. Its tower stood\l"
-	.string "above the southern ocean.$"
-
-EventScript_BrailleFieldMoveUnavailable:
-	goto EventScript_FieldMoveLocked
-
-Text_UseBrailleFieldMove:
-	.string "Use {STR_VAR_2}?$"
-
 Text_CantCut:
-	.string "Get the Cut license from the\n"
-	.string "cutter in Rustboro. His house is\l"
-	.string "west of the Pokémon Center.$"
-
-Text_CutNeedsStoneBadge:
-	.string "Defeat Roxanne at Rustboro Gym.\n"
-	.string "Her Stone Badge lets you use Cut.$"
-
-Text_CutNeedsPokemon:
-	.string "A Pokémon in your party must be\n"
-	.string "able to learn Cut.$"
+	.string "This tree looks like it can be\n"
+	.string "CUT down!$"
 
 @ Use rock smash from party menu
 EventScript_UseRockSmash::
@@ -295,8 +204,9 @@ Movement_SmashRock:
 	step_end
 
 EventScript_CantSmashRock::
-	setvar VAR_0x8004, FIELD_MOVE_ROCK_SMASH
-	goto EventScript_FieldMoveLocked
+	msgbox Text_CantSmash, MSGBOX_DEFAULT
+	releaseall
+	end
 
 EventScript_CancelSmash::
 	closemessage
@@ -305,14 +215,17 @@ EventScript_CancelSmash::
 
 Text_WantToSmash:
 	.string "This rock appears to be breakable.\n"
-	.string "Would you like to use Rock Smash?$"
+	.string "Would you like to use ROCK SMASH?$"
+
+Text_CantSmash:
+	.string "It's a rugged rock, but a POKéMON\n"
+	.string "may be able to smash it.$"
 
 EventScript_StrengthBoulder::
 	lockall
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkfieldmove FIELD_MOVE_STRENGTH, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
@@ -336,8 +249,9 @@ EventScript_ActivateStrength::
 	end
 
 EventScript_CantStrength::
-	setvar VAR_0x8004, FIELD_MOVE_STRENGTH
-	goto EventScript_FieldMoveLocked
+	msgbox Text_CantStrength, MSGBOX_DEFAULT
+	releaseall
+	end
 
 EventScript_CheckActivatedBoulder::
 	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
@@ -350,23 +264,27 @@ EventScript_CancelStrength::
 	end
 
 Text_WantToStrength:
-	.string "It's a big boulder, but a Pokémon\n"
+	.string "It's a big boulder, but a POKéMON\n"
 	.string "may be able to push it aside.\p"
-	.string "Would you like to use Strength?$"
+	.string "Would you like to use STRENGTH?$"
 
 Text_MonUsedStrength:
-	.string "{STR_VAR_1} used Strength!\p"
-	.string "{STR_VAR_1}'s Strength made it\n"
+	.string "{STR_VAR_1} used STRENGTH!\p"
+	.string "{STR_VAR_1}'s STRENGTH made it\n"
 	.string "possible to move boulders around!$"
 
+Text_CantStrength:
+	.string "It's a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.$"
+
 Text_StrengthActivated:
-	.string "Strength made it possible to move\n"
+	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
 
 EventScript_UseWaterfall::
 	lockall
 	checkfieldmove FIELD_MOVE_WATERFALL
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_WaterfallLocked
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
@@ -379,7 +297,6 @@ EventScript_UseWaterfall::
 
 EventScript_CannotUseWaterfall::
 	lockall
-	setvar VAR_0x8005, 0
 
 EventScript_CantWaterfall::
 	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
@@ -394,15 +311,15 @@ Text_CantWaterfall:
 
 Text_WantToWaterfall:
 	.string "It's a large waterfall.\n"
-	.string "Would you like to use Waterfall?$"
+	.string "Would you like to use WATERFALL?$"
 
 Text_MonUsedWaterfall:
-	.string "{STR_VAR_1} used Waterfall.$"
+	.string "{STR_VAR_1} used WATERFALL.$"
 
 EventScript_UseDive::
 	lockall
 	checkfieldmove FIELD_MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_DiveLocked
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
 	copyvar 0x8004 VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
@@ -429,7 +346,7 @@ EventScript_EndDive::
 EventScript_UseDiveUnderwater::
 	lockall
 	checkfieldmove FIELD_MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_DiveLocked
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
@@ -453,7 +370,7 @@ EventScript_NoSurface::
 	releaseall
 	end
 
-EventScript_DigCommon::
+EventScript_DigCommon:
 	isfollowerfieldmoveuser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if true
 	dofieldeffect FLDEFF_USE_DIG
@@ -483,23 +400,23 @@ EventScript_UseCutGrass::
 	goto EventScript_CutGrassCommon
 
 Text_CantDive:
-	.string "The sea is deep here. A Pokémon\n"
+	.string "The sea is deep here. A POKéMON\n"
 	.string "may be able to go underwater.$"
 
 Text_WantToDive:
 	.string "The sea is deep here.\n"
-	.string "Would you like to use Dive?$"
+	.string "Would you like to use DIVE?$"
 
 Text_MonUsedDive:
-	.string "{STR_VAR_1} used Dive.$"
+	.string "{STR_VAR_1} used DIVE.$"
 
 Text_CantSurface:
 	.string "Light is filtering down from above.\n"
-	.string "A Pokémon may be able to surface.$"
+	.string "A POKéMON may be able to surface.$"
 
 Text_WantToSurface:
 	.string "Light is filtering down from above.\n"
-	.string "Would you like to use Dive?$"
+	.string "Would you like to use DIVE?$"
 
 EventScript_FailSweetScent::
 	msgbox Text_FailSweetScent, MSGBOX_SIGN
@@ -557,60 +474,3 @@ Text_MonUsedRockClimb:
 Text_CantRockClimb:
 	.string "The cliff is steep.\n"
 	.string "A Pokémon may be able to climb it.$"
-
-@ HMs need a license, badge, and compatible party member. Non-HM moves used by legendary
-@ puzzles (Dig) still need a party member that knows the move; checkfieldmove
-@ buffers its name in STR_VAR_1 when nobody qualifies.
-EventScript_NobodyCanUseFieldMove::
-	msgbox Text_NobodyCanUseFieldMove, MSGBOX_DEFAULT
-	releaseall
-	end
-
-Text_NobodyCanUseFieldMove:
-	.string "Nobody in your party can use\n{STR_VAR_1}.$"
-
-@ These entries are reached from valid HM action contexts when access failed.
-EventScript_SurfLocked::
-	setvar VAR_0x8004, FIELD_MOVE_SURF
-	goto EventScript_FieldMoveLocked
-
-EventScript_WaterfallLocked::
-	setvar VAR_0x8004, FIELD_MOVE_WATERFALL
-	goto EventScript_FieldMoveLocked
-
-EventScript_DiveLocked::
-	setvar VAR_0x8004, FIELD_MOVE_DIVE
-	goto EventScript_FieldMoveLocked
-
-EventScript_FieldMoveLocked:
-	lockall
-	special BufferFieldMoveUnlockRequirement
-	goto_if_eq VAR_RESULT, 2, EventScript_FieldMoveNeedsPokemon
-	goto_if_eq VAR_RESULT, TRUE, EventScript_FieldMoveAuthorizationRequired
-	msgbox Text_FieldMoveBadgeRequired, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_FieldMoveAuthorizationRequired:
-	msgbox Text_FieldMoveAuthorizationRequired, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_FieldMoveNeedsPokemon:
-	msgbox Text_FieldMoveNeedsPokemon, MSGBOX_DEFAULT
-	releaseall
-	end
-
-Text_FieldMoveBadgeRequired:
-	.string "The {STR_VAR_2} is needed\n"
-	.string "to use {STR_VAR_1} here.$"
-
-@ STR_VAR_3 names where that license comes from (gFieldMoveLicenseGivers).
-Text_FieldMoveAuthorizationRequired:
-	.string "You need the {STR_VAR_1}\n"
-	.string "field license to use it here.\p"
-	.string "{STR_VAR_3}$"
-
-Text_FieldMoveNeedsPokemon:
-	.string "A Pokémon in your party must be\n"
-	.string "able to learn {STR_VAR_1}.$"

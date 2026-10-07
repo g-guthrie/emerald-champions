@@ -3,6 +3,7 @@
   "name": "OldaleTown_House1",
   "layout": "LAYOUT_HOUSE1",
   "music": "MUS_OLDALE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_OLDALE_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -34,14 +35,14 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_TOWN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 4,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_TOWN",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

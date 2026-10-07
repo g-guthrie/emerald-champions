@@ -263,7 +263,7 @@ EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
 EWRAM_DATA static u8 sSpriteOrder[MAX_SPRITES] = {0};
 EWRAM_DATA static bool8 sShouldProcessSpriteCopyRequests = 0;
 EWRAM_DATA static u8 sSpriteCopyRequestCount = 0;
-EWRAM_DATA static struct SpriteCopyRequest sSpriteCopyRequests[MAX_SPRITES] = {0};
+EWRAM_DATA static struct SpriteCopyRequest sSpriteCopyRequests[MAX_SPRITE_COPY_REQUESTS] = {0};
 EWRAM_DATA u8 gOamLimit = 0;
 static EWRAM_DATA u8 sOamDummyIndex = 0;
 EWRAM_DATA u16 gReservedSpriteTileCount = 0;
@@ -447,37 +447,6 @@ u32 CreateSpriteUnchecked(const struct SpriteTemplate *template, s16 x, s16 y, u
     return MAX_SPRITES;
 }
 
-// Dynamic constructors may discard their template after this call. Keep a
-// copy for the lifetime of the sprite slot, including generic resource cleanup.
-static EWRAM_DATA struct SpriteTemplate sCopiedSpriteTemplates[MAX_SPRITES] = {0};
-
-u32 CreateSpriteWithTemplateCopy(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
-{
-    u32 id = CreateSpriteUnchecked(template, x, y, subpriority);
-    if (id != MAX_SPRITES)
-    {
-        sCopiedSpriteTemplates[id] = *template;
-        gSprites[id].template = &sCopiedSpriteTemplates[id];
-    }
-    return id;
-}
-
-void CopySpriteToSlot(u32 id, const struct Sprite *source)
-{
-    gSprites[id] = *source;
-    // Static templates retain identity (some animations compare pointers).
-    // A dynamic template must follow the clone, not its original sprite slot.
-    for (u32 i = 0; i < MAX_SPRITES; i++)
-    {
-        if (gSprites[id].template == &sCopiedSpriteTemplates[i])
-        {
-            sCopiedSpriteTemplates[id] = sCopiedSpriteTemplates[i];
-            gSprites[id].template = &sCopiedSpriteTemplates[id];
-            break;
-        }
-    }
-}
-
 u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority)
 {
     u32 spriteId = CreateSpriteAtEndUnchecked(template, x, y, subpriority);
@@ -496,7 +465,7 @@ u32 CreateSpriteAtEndUnchecked(const struct SpriteTemplate *template, s16 x, s16
 
 u32 CreateInvisibleSprite(void (*callback)(struct Sprite *))
 {
-    u32 index = CreateSprite(&gDummySpriteTemplate, 0, 0, 31);
+    u32 index = CreateSprite(&gDummySpriteTemplate, 0, 0, 31);//This is not unchecked because CreateInvisibleSprite is only used in places that have no handler for when it returns MAX_SPRITES
 
     if (index == MAX_SPRITES)
     {
@@ -771,6 +740,32 @@ bool32 CanAllocSpriteTiles(u16 tileCount)
     }
 }
 
+u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
+{
+    u8 index = bit / 8;
+    u8 shift = bit % 8;
+    u8 val = bit % 8;
+    u8 retVal = 0;
+
+    if (op == 0)
+    {
+        val = ~(1 << val);
+        sSpriteTileAllocBitmap[index] &= val;
+    }
+    else if (op == 1)
+    {
+        val = (1 << val);
+        sSpriteTileAllocBitmap[index] |= val;
+    }
+    else
+    {
+        retVal = 1 << shift;
+        retVal &= sSpriteTileAllocBitmap[index];
+    }
+
+    return retVal;
+}
+
 void SpriteCallbackDummy(struct Sprite *sprite)
 {
 }
@@ -819,6 +814,30 @@ void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size)
         sSpriteCopyRequests[sSpriteCopyRequestCount].dest = dest;
         sSpriteCopyRequests[sSpriteCopyRequestCount].size = size;
         sSpriteCopyRequestCount++;
+    }
+}
+
+void CopyFromSprites(u8 *dest)
+{
+    u32 i;
+    u8 *src = (u8 *)gSprites;
+    for (i = 0; i < sizeof(struct Sprite) * MAX_SPRITES; i++)
+    {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+}
+
+void CopyToSprites(u8 *src)
+{
+    u32 i;
+    u8 *dest = (u8 *)gSprites;
+    for (i = 0; i < sizeof(struct Sprite) * MAX_SPRITES; i++)
+    {
+        *dest = *src;
+        src++;
+        dest++;
     }
 }
 
@@ -1914,15 +1933,30 @@ static u32 UpdateFillSpanY(u32 spriteId, u32 spriteHeight, u32 top, u32 height)
     return height;
 }
 
+enum SpriteFillMode
+{
+    SPRITE_FILL_COLOR,
+    SPRITE_FILL_EXISTING_SPRITE,
+    SPRITE_FILL_PROVIDED_SPRITE,
+};
+
+union FillInput
+{
+    u32 color;
+    u32 *spriteSrc;
+};
+
 #define CURRENT_SPRITE_POS ((spriteY / 8) * spriteWidth + spriteX + spriteY % 8)
 #define BITS_PER_PIXEL 4
 #define PIXELS_PER_TILE 8
 
-static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 height, bool32 isColor, u32 color)
+static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 height, enum SpriteFillMode mode, union FillInput input)
 {
     //  Check if area spans more than 1 sprite
     u32 spriteWidth = GetSpriteWidth(&gSprites[spriteId]);
     u32 spriteHeight = GetSpriteHeight(&gSprites[spriteId]);
+    u32 color = 0;
+    bool32 isColor = FALSE;
 
     // Bit masks for fast modulus division, this is posible
     // since all posible values for the sprite
@@ -1932,10 +1966,21 @@ static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 heigh
 
     u32 *src = NULL;
 
-    if (isColor)
-        color *= 0x11111111;
-    else
+    switch (mode)
+    {
+    case SPRITE_FILL_COLOR:
+        color = input.color * 0x11111111;
+        isColor = TRUE;
+        break;
+    case SPRITE_FILL_EXISTING_SPRITE:
         src = GetSrcPtrFromSprite(&gSprites[spriteId]);
+        isColor = FALSE;
+        break;
+    case SPRITE_FILL_PROVIDED_SPRITE:
+        src = input.spriteSrc;
+        isColor = FALSE;
+        break;
+    }
 
     //  Check if only one sprite is being filled
     if (left + width > spriteWidth || top + height > spriteHeight)
@@ -1993,43 +2038,65 @@ static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 heigh
             dstMask = ~srcMask;
         }
 
-        for (u32 row = 0; row < height; row++)
+        if (currWidth == PIXELS_PER_TILE)
         {
-            u32 spriteX = (currStart - (currStart % PIXELS_PER_TILE)) & widthMask;
-            u32 spriteY = (top + row) & heightMask;
-            if (currWidth == PIXELS_PER_TILE)
+            //  Separate out the case that doesn't need to mask the pixels
+            for (u32 row = 0; row < height; row++)
             {
-                // Full tiles do not need to read or mask the destination.
+                u32 spriteX = (currStart - (currStart % PIXELS_PER_TILE)) & widthMask;
+                u32 spriteY = (top + row) & heightMask;
                 if (isColor)
                     tiles[CURRENT_SPRITE_POS] = color;
                 else
                     tiles[CURRENT_SPRITE_POS] = src[CURRENT_SPRITE_POS];
+
+                if (row == height - 1)
+                {
+                    currSpriteId = spriteId;
+                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
+                    if (!isColor)
+                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
+                }
+                else if (((top + row) & heightMask) == heightMask)
+                {
+                    //  Switch sprite along Y-axis
+                    currSpriteId = gSprites[currSpriteId].nextY;
+                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
+                    if (!isColor)
+                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
+                }
             }
-            else
+        }
+        else
+        {
+            //  Mask these since it's needed
+            for (u32 row = 0; row < height; row++)
             {
+                u32 spriteX = (currStart - (currStart % PIXELS_PER_TILE)) & widthMask;
+                u32 spriteY = (top + row) & heightMask;
                 u32 orig = tiles[CURRENT_SPRITE_POS] & dstMask;
                 u32 new;
                 if (isColor)
                     new = color & srcMask;
                 else
                     new = src[CURRENT_SPRITE_POS] & srcMask;
-                tiles[CURRENT_SPRITE_POS] = orig | new;
-            }
 
-            if (row == height - 1)
-            {
-                currSpriteId = spriteId;
-                tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
-                if (!isColor)
-                    src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
-            }
-            else if (((top + row) & heightMask) == heightMask)
-            {
-                //  Switch sprite along Y-axis
-                currSpriteId = gSprites[currSpriteId].nextY;
-                tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
-                if (!isColor)
-                    src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
+                tiles[CURRENT_SPRITE_POS] = orig | new;
+                if (row == height - 1)
+                {
+                    currSpriteId = spriteId;
+                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
+                    if (!isColor)
+                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
+                }
+                else if (((top + row) & heightMask) == heightMask)
+                {
+                    //  Switch sprite along Y-axis
+                    currSpriteId = gSprites[currSpriteId].nextY;
+                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
+                    if (!isColor)
+                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
+                }
             }
         }
 
@@ -2045,12 +2112,23 @@ static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 heigh
 
 void FillSpriteRectColor(u32 spriteId, u32 left, u32 top, u32 width, u32 height, u32 color)
 {
-    FillSpriteRect(spriteId, left, top, width, height, TRUE, color);
+    union FillInput input;
+    input.color = color;
+    FillSpriteRect(spriteId, left, top, width, height, SPRITE_FILL_COLOR, input);
 }
 
 void FillSpriteRectSprite(u32 spriteId, u32 left, u32 top, u32 width, u32 height)
 {
-    FillSpriteRect(spriteId, left, top, width, height, FALSE, 0);
+    union FillInput input;
+    input.spriteSrc = NULL;
+    FillSpriteRect(spriteId, left, top, width, height, SPRITE_FILL_EXISTING_SPRITE, input);
+}
+
+void FillSpriteRectSpriteWithSprite(u32 spriteId, u32 left, u32 top, u32 width, u32 height, u32 *sprite)
+{
+    union FillInput input;
+    input.spriteSrc = sprite;
+    FillSpriteRect(spriteId, left, top, width, height, SPRITE_FILL_PROVIDED_SPRITE, input);
 }
 
 static void StorePointerInSpriteData(struct Sprite *sprite, const u32 *ptr)

@@ -8,11 +8,13 @@
 #include "text.h"
 #include "pokemon_storage_system.h"
 
-// Inclement's four prize tiers; the live clerk delivers VAR_0x8005.
-static const enum Item sLotteryPrizes[] =
+static EWRAM_DATA u16 sWinNumberDigit = 0;
+static EWRAM_DATA u16 sOtIdDigit = 0;
+
+static const u16 sLotteryPrizes[] =
 {
     ITEM_PP_UP,
-    ITEM_BOTTLE_CAP,
+    ITEM_EXP_SHARE,
     ITEM_MAX_REVIVE,
     ITEM_MASTER_BALL,
 };
@@ -51,8 +53,6 @@ void PickLotteryCornerTicket(void)
     u32 slot;
 
     gSpecialVar_0x8004 = 0;
-    gSpecialVar_0x8005 = ITEM_NONE;
-    gSpecialVar_0x8006 = 0;
     slot = 0;
     box = 0;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -104,6 +104,7 @@ void PickLotteryCornerTicket(void)
     if (gSpecialVar_0x8004 != 0)
     {
         gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
+
         if (box == TOTAL_BOXES_COUNT)
         {
             gSpecialVar_0x8006 = 0;
@@ -120,14 +121,25 @@ void PickLotteryCornerTicket(void)
 
 static u8 GetMatchingDigits(u16 winNumber, u32 otId)
 {
+    u8 i;
     u8 matchingDigits = 0;
-    otId &= 0xFFFF;
-    for (; matchingDigits < 5; matchingDigits++)
+
+    otId = otId & 0xFFFF;
+    for (i = 0; i < 5; i++)
     {
-        if (winNumber % 10 != otId % 10)
+        sWinNumberDigit = winNumber % 10;
+        sOtIdDigit = otId % 10;
+
+        if (sWinNumberDigit == sOtIdDigit)
+        {
+            winNumber = winNumber / 10;
+            otId = otId / 10;
+            matchingDigits++;
+        }
+        else
+        {
             break;
-        winNumber /= 10;
-        otId /= 10;
+        }
     }
     return matchingDigits;
 }

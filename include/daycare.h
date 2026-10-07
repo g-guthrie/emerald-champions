@@ -18,13 +18,12 @@ void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDay
 s8 Daycare_FindEmptySpot(struct DayCare *daycare);
 void StoreSelectedPokemonInDaycare(void);
 u16 TakePokemonFromDaycare(void);
-bool32 CanTakeDaycareMonWithinPartyRule(void);
 void GetDaycareCostAndPrepareString(void);
 u8 GetNumLevelsGainedFromDaycare(void);
 void TriggerPendingDaycareEgg(void);
 void RejectEggFromDayCare(void);
 void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLocation);
-bool32 GiveEggFromDaycare(void);
+void GiveEggFromDaycare(void);
 bool8 ShouldEggHatch(void);
 enum Species GetSelectedMonNicknameAndSpecies(void);
 void GetDaycareMonNicknames(void);

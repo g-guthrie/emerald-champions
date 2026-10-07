@@ -4884,11 +4884,11 @@ static bool8 IsModeWindowAnimActive(void)
 
 static void CreateScrollIndicatorSprites(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_ScrollIndicator, 96, 80, 0);
+    u8 spriteId = CreateSpriteUnchecked(&sSpriteTemplate_ScrollIndicator, 96, 80, 0);
     if (spriteId != MAX_SPRITES)
         sScreenControl->scrollIndicatorUpSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&sSpriteTemplate_ScrollIndicator, 96, 156, 0);
+    spriteId = CreateSpriteUnchecked(&sSpriteTemplate_ScrollIndicator, 96, 156, 0);
     if (spriteId != MAX_SPRITES)
     {
         sScreenControl->scrollIndicatorDownSprite = &gSprites[spriteId];
@@ -4929,11 +4929,11 @@ static void SetScrollIndicatorXPos(bool32 inWordSelect)
 // The Start/Select buttons are used as page scroll indicators
 static void CreateStartSelectButtonSprites(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_StartSelectButton, 220, 84, 1);
+    u8 spriteId = CreateSpriteUnchecked(&sSpriteTemplate_StartSelectButton, 220, 84, 1);
     if (spriteId != MAX_SPRITES)
         sScreenControl->startButtonSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&sSpriteTemplate_StartSelectButton, 220, 156, 1);
+    spriteId = CreateSpriteUnchecked(&sSpriteTemplate_StartSelectButton, 220, 156, 1);
     if (spriteId != MAX_SPRITES)
     {
         sScreenControl->selectButtonSprite = &gSprites[spriteId];
@@ -5177,7 +5177,7 @@ u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord)
     {
         u16 index = EC_INDEX(easyChatWord);
         u8 groupId = EC_GROUP(easyChatWord);
-        resultStr = StringCopy(dest, GetEasyChatWord(groupId, index));
+        resultStr = StringCopyUppercase(dest, GetEasyChatWord(groupId, index));
     }
     else
     {
@@ -5186,14 +5186,6 @@ u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord)
     }
 
     return resultStr;
-}
-
-// Easy Chat words are stored in mixed case with ordinary words in lowercase.
-// Dialogue that quotes a word as speech or as a catchphrase capitalizes it.
-void CapitalizeEasyChatText(u8 *str)
-{
-    if (*str >= CHAR_a && *str <= CHAR_z)
-        *str += CHAR_A - CHAR_a;
 }
 
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
@@ -5218,6 +5210,58 @@ u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows
         dest = CopyEasyChatWord(dest, *(src++));
         *dest = CHAR_NEWLINE;
         dest++;
+    }
+
+    dest--;
+    *dest = EOS;
+    return dest;
+}
+
+static u8 UNUSED *UnusedConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows)
+{
+    u16 i, j, k;
+    u16 numColumns;
+    int notEmpty, lineNumber;
+
+    numColumns = columns;
+    lineNumber = 0;
+    columns--;
+    for (i = 0; i < rows; i++)
+    {
+        const u16 *str = src;
+        notEmpty = FALSE;
+        for (j = 0; j < numColumns; j++)
+        {
+            if (str[j] != EC_EMPTY_WORD)
+                notEmpty = TRUE;
+        }
+
+        if (!notEmpty)
+        {
+            src += numColumns;
+            continue;
+        }
+
+        for (k = 0; k < columns; k++)
+        {
+            dest = CopyEasyChatWord(dest, *src);
+            if (*src != EC_EMPTY_WORD)
+            {
+                *dest = CHAR_SPACE;
+                dest++;
+            }
+
+            src++;
+        }
+
+        dest = CopyEasyChatWord(dest, *(src++));
+        if (lineNumber == 0)
+            *dest = CHAR_NEWLINE;
+        else
+            *dest = CHAR_PROMPT_SCROLL;
+
+        dest++;
+        lineNumber++;
     }
 
     dest--;
@@ -5323,7 +5367,6 @@ void ShowEasyChatProfile(void)
     }
 
     ConvertEasyChatWordsToString(gStringVar4, easyChatWords, columns, rows);
-    CapitalizeEasyChatText(gStringVar4);
     ShowFieldAutoScrollMessage(gStringVar4);
 }
 
@@ -5333,7 +5376,6 @@ void BufferDeepLinkPhrase(void)
     int groupId = Random() & 1 ? EC_GROUP_HOBBIES : EC_GROUP_LIFESTYLE;
     u16 easyChatWord = GetRandomEasyChatWordFromUnlockedGroup(groupId);
     CopyEasyChatWord(gStringVar2, easyChatWord);
-    CapitalizeEasyChatText(gStringVar2);
 }
 
 /*
@@ -5411,6 +5453,28 @@ u16 UnlockRandomTrendySaying(void)
     }
 
     // Would only be reached if there are no new words to teach, which is handled at the start.
+    return EC_EMPTY_WORD;
+}
+
+static u16 UNUSED GetRandomUnlockedTrendySaying(void)
+{
+    u16 i;
+    u16 n = GetNumTrendySayingsUnlocked();
+    if (n == 0)
+        return EC_EMPTY_WORD;
+
+    n = Random() % n;
+    for (i = 0; i < NUM_TRENDY_SAYINGS; i++)
+    {
+        if (IsTrendySayingUnlocked(i))
+        {
+            if (n)
+                n--;
+            else
+                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
+        }
+    }
+
     return EC_EMPTY_WORD;
 }
 
@@ -5536,6 +5600,20 @@ static u8 GetUnlockedEasyChatGroupId(u8 index)
         return EC_NUM_GROUPS;
     else
         return sWordData->unlockedGroupIds[index];
+}
+
+static u8 UNUSED *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
+{
+    u16 i;
+    u8 *str = StringCopy(dest, gEasyChatGroups[groupId].name);
+    for (i = str - dest; i < totalChars; i++)
+    {
+        *str = CHAR_SPACE;
+        str++;
+    }
+
+    *str = EOS;
+    return str;
 }
 
 static const u8 *GetEasyChatWordGroupName(u8 groupId)

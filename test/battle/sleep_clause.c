@@ -537,6 +537,30 @@ DOUBLE_BATTLE_TEST("Sleep Clause: Dark Void can only sleep one opposing mon if s
     }
 }
 
+DOUBLE_BATTLE_TEST("Sleep Clause: G-Max Befuddle can only sleep one opposing mon if sleep clause is active")
+{
+    GIVEN {
+        FLAG_SET(B_FLAG_SLEEP_CLAUSE);
+        ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_BEFUDDLE, MOVE_EFFECT_EFFECT_SPORE_SIDE));
+        PLAYER(SPECIES_BUTTERFREE) { GigantamaxFactor(TRUE); }
+        PLAYER(SPECIES_CATERPIE);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_BUG_BITE, target: opponentLeft, gimmick: GIMMICK_DYNAMAX,
+               WITH_RNG(RNG_G_MAX_BEFUDDLE, STATUS1_SLEEP)); }
+    } SCENE {
+        MESSAGE("Butterfree used G-Max Befuddle!");
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentLeft);
+        MESSAGE("The opposing Wobbuffet fell asleep!");
+        STATUS_ICON(opponentLeft, sleep: TRUE);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponentRight);
+            STATUS_ICON(opponentRight, sleep: TRUE);
+            MESSAGE("The opposing Wobbuffet fell asleep!");
+        }
+    }
+}
 
 SINGLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mon wakes up")
 {
@@ -863,7 +887,6 @@ DOUBLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mo
 {
     PASSES_RANDOMLY(30, 100, RNG_HEALER);
     GIVEN {
-        WITH_CONFIG(B_UPDATED_ABILITY_DATA, GEN_9);
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
@@ -1042,7 +1065,7 @@ SINGLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mo
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
-        PLAYER(SPECIES_DELIBIRD) { Ability(ability); Moves(MOVE_CELEBRATE, MOVE_SPORE); }
+        PLAYER(SPECIES_DELIBIRD) { Ability(ability); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SLEEP_TALK, MOVE_SKILL_SWAP); }
     } WHEN {
         TURN { MOVE(player, MOVE_SPORE); MOVE(opponent, MOVE_SLEEP_TALK); }
@@ -1107,26 +1130,35 @@ SINGLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mo
     enum Ability ability;
     PARAMETRIZE { ability = ABILITY_VITAL_SPIRIT; }
     PARAMETRIZE { ability = ABILITY_INSOMNIA; }
+    KNOWN_FAILING; // Sleep Clause parts work, but Imposter seems broken with battle messages / targeting. Issue #5565 https://github.com/rh-hideout/pokeemerald-expansion/issues/5565
     GIVEN {
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
-        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_SPORE, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_DELIBIRD) { Ability(ability); Moves(MOVE_CELEBRATE); }
+        ASSUME(gItemsInfo[ITEM_LAGGING_TAIL].holdEffect == HOLD_EFFECT_LAGGING_TAIL);
+        PLAYER(SPECIES_ZIGZAGOON)
+        PLAYER(SPECIES_DELIBIRD) { Ability(ability); }
         OPPONENT(SPECIES_DITTO) { Ability(ABILITY_IMPOSTER); }
         OPPONENT(SPECIES_ZIGZAGOON);
     } WHEN {
-        // Imposter replaces Ditto's recorded moves with Zigzagoon's moves before
-        // this turn executes. Use explicit slots for both battlers so playback
-        // cannot reinterpret the copied Spore as an action against Ditto itself.
-        TURN { MOVE(player, moveSlot: 0, target: opponent); MOVE(opponent, moveSlot: 1); }
+        TURN { MOVE(player, MOVE_SPORE); }
         TURN { SWITCH(player, 1); SWITCH(opponent, 1); }
-        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 0); }
-    } THEN {
-        EXPECT_EQ(opponent->status1 & STATUS1_SLEEP, 0);
-        EXPECT_EQ(opponent->ability, ability);
-        EXPECT(opponent->volatiles.transformed);
-        EXPECT_EQ(IsSleepClauseActiveForSide(B_SIDE_OPPONENT), FALSE);
+        TURN { SWITCH(opponent, 0); }
+        TURN { SWITCH(opponent, 1); MOVE(player, MOVE_SPORE); }
+    } SCENE {
+        MESSAGE("The opposing Ditto transformed into Zigzagoon using Imposter!");
+        MESSAGE("Zigzagoon used Spore!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
+        MESSAGE("The opposing Ditto fell asleep!");
+        MESSAGE("2 sent out Zigzagoon!");
+        MESSAGE("2 sent out Ditto!");
+        MESSAGE("The opposing Ditto woke up!");
+        MESSAGE("2 sent out Zigzagoon!");
+        MESSAGE("Delibird used Spore!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
+        MESSAGE("The opposing Zigzagoon fell asleep!");
     }
 }
 
@@ -1146,6 +1178,33 @@ AI_SINGLE_BATTLE_TEST("Sleep Clause: AI will use sleep moves again when sleep cl
     }
 }
 
+DOUBLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mon is woken up with G-Max Sweetness")
+{
+    GIVEN {
+        FLAG_SET(B_FLAG_SLEEP_CLAUSE);
+        ASSUME(MoveHasAdditionalEffectSelf(MOVE_G_MAX_SWEETNESS, MOVE_EFFECT_AROMATHERAPY));
+        ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
+        PLAYER(SPECIES_APPLETUN) { GigantamaxFactor(TRUE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentRight, MOVE_SPORE, target: playerRight); }
+        TURN { MOVE(playerLeft, MOVE_VINE_WHIP, target: opponentLeft, gimmick: GIMMICK_DYNAMAX); }
+        TURN { MOVE(opponentRight, MOVE_SPORE, target: playerRight); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet used Spore!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponentRight);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, playerRight);
+        MESSAGE("Wobbuffet fell asleep!");
+        MESSAGE("Appletun used G-Max Sweetness!");
+        MESSAGE("The opposing Wobbuffet used Spore!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, opponentRight);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, playerRight);
+        MESSAGE("Wobbuffet fell asleep!");
+    }
+}
 
 SINGLE_BATTLE_TEST("Sleep Clause: Pre-existing sleep condition doesn't activate sleep clause")
 {

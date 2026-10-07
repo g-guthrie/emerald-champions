@@ -151,7 +151,6 @@ enum BattleSide
 
 #define RIVAL_BATTLE_HEAL_AFTER  1
 #define RIVAL_BATTLE_TUTORIAL    3
-#define TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES (1 << 7)
 
 // Battle Outcome defines
 #define B_OUTCOME_WON                  1
@@ -303,6 +302,7 @@ enum VolatileFlags
     F(VOLATILE_TERRAIN_ABILITY_DONE,        terrainAbilityDone,            (u32, 1)) \
     F(VOLATILE_SYRUP_BOMB_IS_SHINY,         syrupBombIsShiny,              (u32, 1)) \
     F(VOLATILE_USED_PROTEAN_LIBERO,         usedProteanLibero,             (u32, 1)) \
+    F(VOLATILE_EMBODY_ASPECT_ACTIVATED,     embodyAspectActivated,         (u32, 1)) \
     F(VOLATILE_FLASH_FIRE_BOOSTED,          flashFireBoosted,              (u32, 1)) \
     F(VOLATILE_BOOSTER_ENERGY_ACTIVATED,    boosterEnergyActivated,        (u32, 1)) \
     F(VOLATILE_OVERWRITTEN_ABILITY,         overwrittenAbility,            (enum Ability, ABILITIES_COUNT)) \
@@ -629,7 +629,7 @@ enum MoveTarget
     TARGET_USER_OR_ALLY, // Acupressure
     TARGET_FOES_AND_ALLY,
     TARGET_FIELD, // Moves that target the field, e.g. Rain Dance
-    TARGET_OPPONENTS_FIELD, // Targets the opposing side, e.g. Stealth Rock
+    TARGET_OPPONENTS_FIELD, // Targets all other battlers and self, e.g. Teatime
     TARGET_ALL_BATTLERS,
 };
 
@@ -644,6 +644,7 @@ enum MoveTarget
 enum FaintedActions
 {
     FAINTED_ACTIONS_NO_MONS_TO_SWITCH,
+    FAINTED_ACTIONS_GIVE_EXP,
     FAINTED_ACTIONS_SET_ABSENT_FLAGS,
     FAINTED_ACTIONS_WAIT_STATE,
     FAINTED_ACTIONS_HANDLE_FAINTED_MON,

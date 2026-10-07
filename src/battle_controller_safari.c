@@ -67,6 +67,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId
     [CONTROLLER_CHOOSEPOKEMON]            = SafariHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_Empty,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_Empty,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,
@@ -297,7 +298,7 @@ static void SafariHandleChooseAction(enum BattlerId battler)
     s32 i;
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
-    BattlePutTextOnWindow(gText_SafariZoneMenu, B_WIN_ACTION_MENU);
+    BattlePutTextOnWindow(IS_FRLG ? gText_SafariZoneMenuFrlg : gText_SafariZoneMenu, B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);

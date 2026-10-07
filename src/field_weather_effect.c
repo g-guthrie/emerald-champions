@@ -8,22 +8,16 @@
 #include "script.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
-#include "constants/vars.h"
-#include "event_data.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
-#include "weather_anomaly.h"
 #include "gpu_regs.h"
 #include "palette.h"
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
-// Applied override is transient; the underlying map/script weather is saved
-// in VAR_WEATHER_ANOMALY_BASE so Continue preserves it beneath a storm.
-EWRAM_DATA static u8 sAppliedAnomalyWeather = WEATHER_NONE;
 
 const u16 gCloudsWeatherPalette[] = INCGFX_U16("graphics/weather/cloud.png", ".gbapal");
 const u16 gSandstormWeatherPalette[] = INCGFX_U16("graphics/weather/sandstorm.png", ".gbapal");
@@ -194,7 +188,7 @@ static void CreateCloudSprites(void)
     LoadCustomWeatherSpritePalette(gCloudsWeatherPalette);
     for (i = 0; i < NUM_CLOUD_SPRITES; i++)
     {
-        spriteId = CreateSprite(&sCloudSpriteTemplate, 0, 0, 0xFF);
+        spriteId = CreateSpriteUnchecked(&sCloudSpriteTemplate, 0, 0, 0xFF);
         if (spriteId != MAX_SPRITES)
         {
             gWeatherPtr->sprites.s1.cloudSprites[i] = &gSprites[spriteId];
@@ -683,7 +677,7 @@ static bool8 CreateRainSprite(void)
         return FALSE;
 
     spriteIndex = gWeatherPtr->rainSpriteCount;
-    spriteId = CreateSpriteAtEnd(&sRainSpriteTemplate,
+    spriteId = CreateSpriteAtEndUnchecked(&sRainSpriteTemplate,
       sRainSpriteCoords[spriteIndex].x, sRainSpriteCoords[spriteIndex].y, 78);
 
     if (spriteId != MAX_SPRITES)
@@ -910,7 +904,7 @@ static const struct SpriteTemplate sSnowflakeSpriteTemplate =
 
 static bool8 CreateSnowflakeSprite(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSnowflakeSpriteTemplate, 0, 0, 78);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sSnowflakeSpriteTemplate, 0, 0, 78);
     if (spriteId == MAX_SPRITES)
         return FALSE;
 
@@ -949,6 +943,18 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
     sprite->tWaveDelta = ((rand & 3) == 0) ? 2 : 1;
     sprite->tFallDuration = (rand & 0x1F) + 210;
     sprite->tFallCounter = 0;
+}
+
+static void UNUSED WaitSnowflakeSprite(struct Sprite *sprite)
+{
+    if (++gWeatherPtr->snowflakeTimer > 18)
+    {
+        sprite->invisible = FALSE;
+        sprite->callback = UpdateSnowflakeSprite;
+        sprite->y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
+        sprite->tPosY = sprite->y * 128;
+        gWeatherPtr->snowflakeTimer = 0;
+    }
 }
 
 static void UpdateSnowflakeSprite(struct Sprite *sprite)
@@ -1478,7 +1484,7 @@ static void CreateFogHorizontalSprites(void)
         LoadSpriteSheet(&fogHorizontalSpriteSheet);
         for (i = 0; i < NUM_FOG_HORIZONTAL_SPRITES; i++)
         {
-            spriteId = CreateSpriteAtEnd(&sFogHorizontalSpriteTemplate, 0, 0, 0xFF);
+            spriteId = CreateSpriteAtEndUnchecked(&sFogHorizontalSpriteTemplate, 0, 0, 0xFF);
             if (spriteId != MAX_SPRITES)
             {
                 sprite = &gSprites[spriteId];
@@ -1665,7 +1671,7 @@ static void CreateAshSprites(void)
     {
         for (i = 0; i < NUM_ASH_SPRITES; i++)
         {
-            spriteId = CreateSpriteAtEnd(&sAshSpriteTemplate, 0, 0, 0x4E);
+            spriteId = CreateSpriteAtEndUnchecked(&sAshSpriteTemplate, 0, 0, 0x4E);
             if (spriteId != MAX_SPRITES)
             {
                 sprite = &gSprites[spriteId];
@@ -1882,7 +1888,7 @@ static void CreateFogDiagonalSprites(void)
         LoadSpriteSheet(&fogDiagonalSpriteSheet);
         for (i = 0; i < NUM_FOG_DIAGONAL_SPRITES; i++)
         {
-            spriteId = CreateSpriteAtEnd(&sFogDiagonalSpriteTemplate, 0, (i / 5) * 64, 0xFF);
+            spriteId = CreateSpriteAtEndUnchecked(&sFogDiagonalSpriteTemplate, 0, (i / 5) * 64, 0xFF);
             if (spriteId != MAX_SPRITES)
             {
                 sprite = &gSprites[spriteId];
@@ -2144,7 +2150,7 @@ static void CreateSandstormSprites(void)
         LoadCustomWeatherSpritePalette(gSandstormWeatherPalette);
         for (i = 0; i < NUM_SANDSTORM_SPRITES; i++)
         {
-            spriteId = CreateSpriteAtEnd(&sSandstormSpriteTemplate, 0, (i / 5) * 64, 1);
+            spriteId = CreateSpriteAtEndUnchecked(&sSandstormSpriteTemplate, 0, (i / 5) * 64, 1);
             if (spriteId != MAX_SPRITES)
             {
                 gWeatherPtr->sprites.s2.sandstormSprites1[i] = &gSprites[spriteId];
@@ -2172,7 +2178,7 @@ static void CreateSwirlSandstormSprites(void)
     {
         for (i = 0; i < NUM_SWIRL_SANDSTORM_SPRITES; i++)
         {
-            spriteId = CreateSpriteAtEnd(&sSandstormSpriteTemplate, i * 48 + 24, 208, 1);
+            spriteId = CreateSpriteAtEndUnchecked(&sSandstormSpriteTemplate, i * 48 + 24, 208, 1);
             if (spriteId != MAX_SPRITES)
             {
                 gWeatherPtr->sprites.s2.sandstormSprites2[i] = &gSprites[spriteId];
@@ -2380,7 +2386,7 @@ static void CreateBubbleSprite(u16 coordsIndex)
 {
     s16 x = sBubbleStartCoords[coordsIndex][0];
     s16 y = sBubbleStartCoords[coordsIndex][1] - gSpriteCoordOffsetY;
-    u8 spriteId = CreateSpriteAtEnd(&sBubbleSpriteTemplate, x, y, 0);
+    u8 spriteId = CreateSpriteAtEndUnchecked(&sBubbleSpriteTemplate, x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.priority = 1;
@@ -2506,25 +2512,9 @@ static enum OverworldWeather TranslateWeatherNum(enum OverworldWeather weather);
 static void UpdateRainCounter(u8, u8);
 static u8 GetDynamicWeather(void);
 
-// Desert sandstorm and volcanic ash are terrain, not weather: a place that is
-// a desert stays a desert. Everything else (sun, clouds, rain cycles, cutscene
-// resets) yields to a live weather anomaly on the map.
-static bool32 IsTerrainWeather(enum OverworldWeather weather)
-{
-    return weather == WEATHER_SANDSTORM || weather == WEATHER_VOLCANIC_ASH;
-}
-
 void SetSavedWeather(enum OverworldWeather weather)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
-    // A live weather anomaly owns its home map's sky: scripted weather
-    // (cloud/sun triggers, rain cycles, cutscene resets) cannot clear it.
-    u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
-
-    VarSet(VAR_WEATHER_ANOMALY_BASE, weather + 1);
-    sAppliedAnomalyWeather = anomalyWeather;
-    if (anomalyWeather != WEATHER_NONE && !IsTerrainWeather(weather))
-        weather = anomalyWeather;
     gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }
@@ -2536,39 +2526,9 @@ u8 GetSavedWeather(void)
 
 void SetSavedWeatherFromCurrMapHeader(void)
 {
-    SetSavedWeather(gMapHeader.weather);
-}
-
-void InitWeatherAnomalyBaseFromSavedGame(void)
-{
-    u8 weather = GetSavedWeather();
-    u16 base = VarGet(VAR_WEATHER_ANOMALY_BASE);
-    u8 anomalyWeather = GetWeatherAnomalyWeatherForCurrentMap();
-
-    if (base > 0 && base <= WEATHER_COUNT)
-        weather = base - 1;
-    // Legacy saves contain only effective weather. A storm's hidden base is
-    // unrecoverable there, so fall back to the header for that one migration.
-    else if (anomalyWeather != WEATHER_NONE && weather == anomalyWeather)
-        weather = gMapHeader.weather;
-    SetSavedWeather(weather);
-}
-
-static bool32 RefreshSavedAnomalyWeather(void)
-{
-    u8 oldWeather = GetSavedWeather();
-
-    if (sAppliedAnomalyWeather == GetWeatherAnomalyWeatherForCurrentMap())
-        return FALSE;
-    u16 base = VarGet(VAR_WEATHER_ANOMALY_BASE);
-    SetSavedWeather(base > 0 && base <= WEATHER_COUNT ? base - 1 : gMapHeader.weather);
-    return oldWeather != GetSavedWeather();
-}
-
-void UpdateWeatherAnomalyWeather(void)
-{
-    if (RefreshSavedAnomalyWeather())
-        DoCurrentWeather();
+    enum OverworldWeather oldWeather = gSaveBlock1Ptr->weather;
+    gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
+    UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
 }
 
 void SetWeather(enum OverworldWeather weather)
@@ -2579,10 +2539,7 @@ void SetWeather(enum OverworldWeather weather)
 
 void DoCurrentWeather(void)
 {
-    u8 weather;
-
-    RefreshSavedAnomalyWeather();
-    weather = GetSavedWeather();
+    u8 weather = GetSavedWeather();
 
     if (weather == WEATHER_ABNORMAL)
     {
@@ -2601,10 +2558,7 @@ void DoCurrentWeather(void)
 
 void ResumePausedWeather(void)
 {
-    u8 weather;
-
-    RefreshSavedAnomalyWeather();
-    weather = GetSavedWeather();
+    u8 weather = GetSavedWeather();
 
     if (weather == WEATHER_ABNORMAL)
     {

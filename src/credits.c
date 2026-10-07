@@ -24,6 +24,8 @@
 #include "event_data.h"
 #include "random.h"
 
+#if !IS_FRLG
+
 #define COLOR_DARK_GREEN RGB(7, 11, 6)
 #define COLOR_LIGHT_GREEN RGB(13, 20, 12)
 
@@ -1547,7 +1549,7 @@ static void DeterminePokemonToShow(void)
 
     // Go through the Pokédex, and anything that has gotten caught we put into our massive array.
     // This basically packs all of the caught Pokémon into the front of the array
-    for (dexNum = 1, j = 0; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
+    for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
     {
         if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {
@@ -1555,11 +1557,6 @@ static void DeterminePokemonToShow(void)
             j++;
         }
     }
-
-    // Debug entry or an imported save can have no recorded catches.
-    // Keep selection nonempty so sampling and repetition remain defined.
-    if (j == 0)
-        sCreditsData->caughtMonIds[j++] = starter;
 
     // Fill the rest of the array with zeroes
     for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
@@ -1610,7 +1607,7 @@ static void DeterminePokemonToShow(void)
     else
     {
         // Check to see if our starter has already appeared in this list, break if it has
-        for (dexNum = 0; dexNum < NUM_MON_SLIDES && sCreditsData->monToShow[dexNum] != starter; dexNum++);
+        for (dexNum = 0; sCreditsData->monToShow[dexNum] != starter && dexNum < NUM_MON_SLIDES; dexNum++);
 
         // If it has, swap it with the last Pokémon, to ensure our starter is the last image
         if (dexNum < sCreditsData->numMonToShow - 1)
@@ -1627,16 +1624,4 @@ static void DeterminePokemonToShow(void)
     sCreditsData->numMonToShow = NUM_MON_SLIDES;
 }
 
-#if TESTING
-u32 Test_DetermineCreditsMons(u16 *output, u32 capacity)
-{
-    struct CreditsData *saved = sCreditsData;
-    sCreditsData = AllocZeroed(sizeof(*sCreditsData));
-    DeterminePokemonToShow();
-    u32 count = min(capacity, NUM_MON_SLIDES);
-    memcpy(output, sCreditsData->monToShow, count * sizeof(*output));
-    Free(sCreditsData);
-    sCreditsData = saved;
-    return count;
-}
-#endif
+#endif // !IS_FRLG

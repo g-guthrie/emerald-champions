@@ -944,6 +944,10 @@ void BattleInitBgsAndWindows(void)
         SetBgTilemapBuffer(1, gBattleAnimBgTilemapBuffer);
         SetBgTilemapBuffer(2, gBattleAnimBgTilemapBuffer);
     }
+    else if (IS_FRLG && (gBattleTypeFlags & (BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_CATCH_TUTORIAL)))
+    {
+        gBattleScripting.windowsType = B_WIN_TYPE_KANTO_TUTORIAL;
+    }
     else
     {
         gBattleScripting.windowsType = B_WIN_TYPE_NORMAL;
@@ -970,7 +974,8 @@ void LoadBattleMenuWindowGfx(void)
     LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
     LoadPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_POKEDUDE))
+    if ((gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_POKEDUDE))
+    || (IS_FRLG && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)))
     {
         // Load graphics for the Battle Arena referee's mid-battle messages.
         Menu_LoadStdPalAt(BG_PLTT_ID(7));

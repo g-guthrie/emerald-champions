@@ -59,8 +59,6 @@ extern u16 gPartnerTrainerId;
 
 #define TRAINER_BATTLE_PARAM gTrainerBattleParameter.params
 
-void EmeraldChampions_RebuildTrainerBattleParties(void);
-
 #define DebugPrintTrainerParams(battleParameter) DebugPrintfLevel(MGBA_LOG_DEBUG, "\nisDouble: %d\nisRematch: %d\nplayMusicA: %d\nplayMusicB: %d\ncotinueScript: %d\nfacePlayer: %d\nearlyRival: %d\npadding: %d\nlocalIdA: %d\ntrainerA: %d\nintroA: %x\ndefeatA: %x\neventA: %x\nlocalIdB: %d\ntrainerB: %d\nintroB: %x\ndefeatB: %x\neventB: %x\nvictory: %x\nnotBattle:%x\n", \
         battleParameter->params.isDoubleBattle, \
         battleParameter->params.isRematch, \
@@ -113,7 +111,6 @@ bool8 HasTrainerBeenFought(u16 trainerId);
 void SetTrainerFlag(u16 trainerId);
 void ClearTrainerFlag(u16 trainerId);
 void BattleSetup_StartTrainerBattle(void);
-void BattleSetup_StartChampionsCircuitBattle(void);
 void BattleSetup_StartRematchBattle(void);
 void ShowTrainerIntroSpeech(void);
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void);
@@ -137,12 +134,8 @@ u16 CountBattledRematchTeams(u16 trainerId);
 void TrainerBattleLoadArgs(const u8 *data);
 void TrainerBattleLoadArgsSecondTrainer(const u8 *data);
 void InitTrainerBattleParameter(void);
-void InitCampaignBattleReward(void);
-void RecordCampaignPrizePaid(void);
-u32 GetCampaignBattleMoneyReward(void);
-bool32 IsBattleMoneyRewardEligible(void);
-void InitTrainerMoneyRewardEligibility(void);
 
+void DoStandardWildBattle_Debug(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
 s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
 s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId);
@@ -150,6 +143,5 @@ u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBa
 u8 GetRivalBattleFlags(void);
 
 void CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer *trainer);
-void ApplyRivalStarterToParty(struct Pokemon *party);
 
 #endif // GUARD_BATTLE_SETUP_H

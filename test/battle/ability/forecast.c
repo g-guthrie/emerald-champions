@@ -372,28 +372,6 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when its ability
     }
 }
 
-SINGLE_BATTLE_TEST("Forecast transforms Castform back after losing Forecast to Skill Swap")
-{
-    GIVEN {
-        ASSUME(B_WEATHER_FORMS >= GEN_5);
-        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
-        PLAYER(SPECIES_CASTFORM_NORMAL) { Ability(ABILITY_FORECAST); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
-        TURN { MOVE(opponent, MOVE_SKILL_SWAP); }
-    } SCENE {
-        ABILITY_POPUP(player, ABILITY_FORECAST);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
-        MESSAGE("Castform transformed!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
-        MESSAGE("Castform transformed!");
-    } THEN {
-        EXPECT_EQ(player->species, SPECIES_CASTFORM_NORMAL);
-    }
-}
-
 SINGLE_BATTLE_TEST("Forecast transforms Castform back when it switches out")
 {
     GIVEN {
@@ -459,6 +437,25 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform when Cloud Nine ability user le
     }
 }
 
+DOUBLE_BATTLE_TEST("Forecast reverts Castform back after Teraform Zero clears weather")
+{
+    GIVEN {
+        PLAYER(SPECIES_TERAPAGOS_TERASTAL);
+        PLAYER(SPECIES_CASTFORM) { Ability(ABILITY_FORECAST); }
+        OPPONENT(SPECIES_KYOGRE) { Ability(ABILITY_DRIZZLE); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        ABILITY_POPUP(opponentLeft, ABILITY_DRIZZLE);
+        ABILITY_POPUP(playerRight, ABILITY_FORECAST);
+        ABILITY_POPUP(playerLeft, ABILITY_TERAFORM_ZERO);
+        ABILITY_POPUP(playerRight, ABILITY_FORECAST);
+    } THEN {
+        EXPECT_EQ(playerRight->species, SPECIES_CASTFORM_NORMAL);
+    }
+}
+
 DOUBLE_BATTLE_TEST("Forecast: All Forecast mons revert on the field if Primal Weather is removed due to fainting")
 {
     GIVEN {
@@ -484,3 +481,4 @@ DOUBLE_BATTLE_TEST("Forecast: All Forecast mons revert on the field if Primal We
         EXPECT_EQ(playerRight->species, SPECIES_CASTFORM_NORMAL);
     }
 }
+

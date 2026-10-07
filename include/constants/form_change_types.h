@@ -37,11 +37,11 @@ enum FormChanges
     // - 0 if irrelevant, but param3 is necessary.
     // param3: illegal statuses to have, optional.
     FORM_CHANGE_ITEM_USE,
-    // Form change that activates when the Pokémon learns or forgets the move.
+    // TODO: Form change that activates when the Pokémon learns or forgets the move.
     // param1: move to check for
     // param2:
-    // - WHEN_LEARNED if Form change that activates when move is learned
-    // - WHEN_FORGOTTEN if Form change that activates when move is forgotten
+    // - WHEN_LEARNED if Form change that activates when move is forgotten
+    // - WHEN_FORGOTTEN if Form change that activates when move is learned
     FORM_CHANGE_MOVE,
     // Form change that activates when the Pokémon is withdrawn from the PC or Daycare.
     // - No parameters.
@@ -138,6 +138,9 @@ enum FormChanges
     // Form change that activates after hitting itself in confusion.
     // param1: ability
     FORM_CHANGE_BATTLE_HIT_BY_CONFUSION_SELF_DMG,
+    // Form change that activates when terastallized as as a specific type
+    // param1: tera type
+    FORM_CHANGE_BATTLE_TERASTALLIZATION,
     // Form change that activates at midnight after a certain amount of days has passed.
     // Adding this form change will automatically make the countdown start as soon the Pokémon changes into a species other than the one specified for this form change.
     // param1: amount of days

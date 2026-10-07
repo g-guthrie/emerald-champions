@@ -3,6 +3,7 @@
   "name": "Route110_TrickHousePuzzle4",
   "layout": "LAYOUT_ROUTE110_TRICK_HOUSE_PUZZLE4",
   "music": "MUS_TRICK_HOUSE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_110",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -14,6 +15,32 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+      "x": 2,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route110_TrickHousePuzzle4_EventScript_Cora",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+      "x": 14,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route110_TrickHousePuzzle4_EventScript_Paula",
+      "flag": "0"
+    },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 2,
@@ -28,17 +55,17 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 2,
       "y": 5,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle4_EventScript_ItemScovillainite",
-      "flag": "FLAG_ITEM_ROUTE110_TRICK_HOUSE_PUZZLE4_SCOVILLAINITE"
+      "trainer_sight_or_berry_tree_id": "ITEM_MECH_MAIL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_MECH_MAIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -177,21 +204,21 @@
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 13,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_END",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

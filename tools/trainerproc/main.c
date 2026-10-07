@@ -71,8 +71,6 @@ struct Pokemon
 
     int level;
     int level_line;
-    int level_offset;
-    int level_offset_line;
 
     struct String ball;
     int ball_line;
@@ -92,6 +90,8 @@ struct Pokemon
     bool gigantamax_factor;
     bool gigantamax_factor_line;
 
+    struct String tera_type;
+    int tera_type_line;
 
     struct String moves[MAX_MON_MOVES];
     int moves_n;
@@ -117,10 +117,6 @@ struct Trainer
 
     struct String class;
     int class_line;
-    int easy_level_reduction;
-    int easy_level_reduction_line;
-    int prize_multiplier;
-    int prize_multiplier_line;
 
     struct String encounter_music;
     int encounter_music_line;
@@ -1222,26 +1218,6 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             trainer->class_line = value.location.line;
             trainer->class = token_string(&value);
         }
-        else if (is_literal_token(&key, "Easy Level Reduction"))
-        {
-            if (trainer->easy_level_reduction_line)
-                any_error = !set_show_parse_error(p, key.location, "duplicate 'Easy Level Reduction'");
-            trainer->easy_level_reduction_line = value.location.line;
-            if (!token_int(p, &value, &trainer->easy_level_reduction))
-                any_error = !show_parse_error(p);
-            else if (trainer->easy_level_reduction < 0 || trainer->easy_level_reduction > 1)
-                any_error = !set_show_parse_error(p, value.location, "Easy Level Reduction must be 0 or 1");
-        }
-        else if (is_literal_token(&key, "Prize Multiplier"))
-        {
-            if (trainer->prize_multiplier_line)
-                any_error = !set_show_parse_error(p, key.location, "duplicate 'Prize Multiplier'");
-            trainer->prize_multiplier_line = value.location.line;
-            if (!token_int(p, &value, &trainer->prize_multiplier))
-                any_error = !show_parse_error(p);
-            else if (trainer->prize_multiplier < 0 || trainer->prize_multiplier > 255)
-                any_error = !set_show_parse_error(p, value.location, "Prize Multiplier must be 0..255");
-        }
         else if (is_literal_token(&key, "Music"))
         {
             if (trainer->encounter_music_line)
@@ -1388,9 +1364,7 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
         while (match_empty_line(p)) {}
         if (!parse_pokemon_header(p, &nickname, &species, &gender, &item))
         {
-            if (i > 0 || ends_with(trainer->id, "_NONE")
-             || (trainer->party_size_line && trainer->party_size == 0)
-             || !is_empty_string(trainer->copy_pool))
+            if (i > 0 || ends_with(trainer->id, "_NONE") || !is_empty_string(trainer->copy_pool))
                 break;
             if (!p->error)
                 set_parse_error(p, p->location, "expected nickname or species");
@@ -1484,16 +1458,6 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
                 if (!token_int(p, &value, &pokemon->level))
                     any_error = !show_parse_error(p);
             }
-            else if (is_literal_token(&key, "Level Offset"))
-            {
-                if (pokemon->level_offset_line)
-                    any_error = !set_show_parse_error(p, key.location, "duplicate 'Level Offset'");
-                pokemon->level_offset_line = value.location.line;
-                if (!token_int(p, &value, &pokemon->level_offset))
-                    any_error = !show_parse_error(p);
-                else if (pokemon->level_offset < -254 || pokemon->level_offset > 254)
-                    any_error = !set_show_parse_error(p, value.location, "Level Offset must fit native -254..254");
-            }
             else if (is_literal_token(&key, "Ball"))
             {
                 if (pokemon->ball_line)
@@ -1540,6 +1504,13 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
                 if (!token_bool(p, &value, &pokemon->gigantamax_factor))
                     any_error = !show_parse_error(p);
             }
+            else if (is_literal_token(&key, "Tera Type"))
+            {
+                if (pokemon->tera_type_line)
+                    any_error = !set_show_parse_error(p, key.location, "duplicate 'Tera Type'");
+                pokemon->tera_type_line = value.location.line;
+                pokemon->tera_type = token_string(&value);
+            }
             else if (is_literal_token(&key, "Tags"))
             {
                 if (pokemon->tags_line)
@@ -1550,7 +1521,7 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             }
             else
             {
-                any_error = !set_show_parse_error(p, key.location, "expected one of 'EVs', 'IVs', 'Ability', 'Level', 'Ball', 'Happiness', 'Nature', 'Shiny', 'Dynamax Level', or 'Gigantamax'");
+                any_error = !set_show_parse_error(p, key.location, "expected one of 'EVs', 'IVs', 'Ability', 'Level', 'Ball', 'Happiness', 'Nature', 'Shiny', 'Dynamax Level', 'Gigantamax', or 'Tera Type'");
             }
         }
 
@@ -1870,11 +1841,6 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
-        if (trainer->easy_level_reduction_line)
-            fprintf(f, "        .easyLevelReduction = %d,\n", trainer->easy_level_reduction);
-        if (trainer->prize_multiplier_line)
-            fprintf(f, "        .prizeMultiplier = %d,\n", trainer->prize_multiplier);
-
         if (!is_empty_string(trainer->pic))
         {
             fprintf(f, "#line %d\n", trainer->pic_line);
@@ -2098,8 +2064,6 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             {
                 fprintf(f, "#line %d\n", pokemon->level_line);
                 fprintf(f, "            .lvl = %d,\n", pokemon->level);
-                if (pokemon->level_offset_line)
-                    fprintf(f, "            .useLevelOffset = TRUE, .levelOffset = %d,\n", pokemon->level_offset);
             }
 
             if (pokemon->ball_line)
@@ -2161,6 +2125,13 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             if (pokemon->dynamax_level_line || pokemon->gigantamax_factor_line)
             {
                 fprintf(f, "            .shouldUseDynamax = TRUE,\n");
+            }
+            else if (pokemon->tera_type_line)
+            {
+                fprintf(f, "#line %d\n", pokemon->tera_type_line);
+                fprintf(f, "            .teraType = ");
+                fprint_constant(f, "TYPE", pokemon->tera_type);
+                fprintf(f, ",\n");
             }
 
             if (pokemon->tags_line)

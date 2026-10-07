@@ -1,46 +1,11 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai_record.h"
 #include "battle_setup.h"
 #include "battle_controllers.h"
 #include "battle_factory.h"
 #include "constants/abilities.h"
 #include "constants/hold_effects.h"
 #include "constants/battle_ai.h"
-
-struct AiPartyMon *GetBattlerAiPartyMon(enum BattlerId battler)
-{
-    return &gAiPartyData->mons[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]];
-}
-
-static bool32 HasTemporaryAbility(enum BattlerId battler)
-{
-    return gBattleMons[battler].volatiles.transformed || gBattleMons[battler].volatiles.overwrittenAbility;
-}
-
-enum Ability GetRecordedAbility(enum BattlerId battler)
-{
-    if (gBattleMons[battler].volatiles.overwrittenAbility)
-        return gBattleMons[battler].volatiles.overwrittenAbility;
-    if (HasTemporaryAbility(battler))
-        return gBattleHistory->abilities[battler];
-    return GetBattlerAiPartyMon(battler)->ability;
-}
-
-enum Move GetRecordedMove(enum BattlerId battler, u32 moveSlot)
-{
-    if (!MOVE_IS_PERMANENT(battler, moveSlot))
-        return gBattleHistory->usedMoves[battler][moveSlot];
-    return GetBattlerAiPartyMon(battler)->moves[moveSlot];
-}
-
-static void RecordMoveSlot(enum BattlerId battler, u32 moveSlot)
-{
-    enum Move move = gBattleMons[battler].moves[moveSlot];
-    gBattleHistory->usedMoves[battler][moveSlot] = move;
-    if (MOVE_IS_PERMANENT(battler, moveSlot))
-        GetBattlerAiPartyMon(battler)->moves[moveSlot] = move;
-}
 
 void RecordLastUsedMoveBy(enum BattlerId battlerId, enum Move move)
 {
@@ -61,34 +26,33 @@ void RecordKnownMove(enum BattlerId battler, enum Move move)
             break;
     }
 
-    if (moveIndex < MAX_MON_MOVES)
-        RecordMoveSlot(battler, moveIndex);
+    if (moveIndex < MAX_MON_MOVES && gBattleHistory->usedMoves[battler][moveIndex] == MOVE_NONE)
+    {
+        gBattleHistory->usedMoves[battler][moveIndex] = move;
+        gAiPartyData->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves[moveIndex] = move;
+    }
 }
 
 void RecordAllMoves(enum BattlerId battler)
 {
-    for (u32 moveSlot = 0; moveSlot < MAX_MON_MOVES; moveSlot++)
-        RecordMoveSlot(battler, moveSlot);
+    memcpy(gAiPartyData->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u16));
 }
 
 void RecordAbilityBattle(enum BattlerId battlerId, enum Ability abilityId)
 {
     gBattleHistory->abilities[battlerId] = abilityId;
-    if (!HasTemporaryAbility(battlerId))
-        GetBattlerAiPartyMon(battlerId)->ability = abilityId;
+    gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability = abilityId;
 }
 
 void RecordItemEffectBattle(enum BattlerId battlerId, enum HoldEffect itemEffect)
 {
     gBattleHistory->itemEffects[battlerId] = itemEffect;
-    GetBattlerAiPartyMon(battlerId)->heldEffect = itemEffect;
+    gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect = itemEffect;
 }
 
-// Every held-item loss is announced, and a Poltergeist that finds nothing
-// fails in view, so both show that this Pokemon holds no item.
-void RecordEmptyHandBattle(enum BattlerId battlerId)
+void ClearBattlerAbilityHistory(enum BattlerId battlerId)
 {
-    GetBattlerAiPartyMon(battlerId)->seenWithoutItem = TRUE;
+    gBattleHistory->abilities[battlerId] = ABILITY_NONE;
 }
 
 void ClearBattlerMoveHistory(enum BattlerId battlerId)
@@ -101,11 +65,4 @@ void ClearBattlerMoveHistory(enum BattlerId battlerId)
 void ClearBattlerItemEffectHistory(enum BattlerId battlerId)
 {
     gBattleHistory->itemEffects[battlerId] = HOLD_EFFECT_NONE;
-}
-
-void ClearBattlerHistory(enum BattlerId battler)
-{
-    ClearBattlerMoveHistory(battler);
-    gBattleHistory->abilities[battler] = ABILITY_NONE;
-    ClearBattlerItemEffectHistory(battler);
 }

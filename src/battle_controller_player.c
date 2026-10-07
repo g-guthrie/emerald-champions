@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle.h"
-#include "emerald_champions_agent_battle.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
@@ -82,24 +81,20 @@ static void MoveSelectionDisplayPPString(enum BattlerId battler);
 static void MoveSelectionDisplayMoveType(enum BattlerId battler);
 static void MoveSelectionDisplayMoveNames(enum BattlerId battler);
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler);
-static void HidePlayerHealthboxesForPanel(void);
-static void ShowPlayerHealthboxesAfterPanel(void);
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler);
-static void MoveSelectionDisplayFoeTypes(enum BattlerId battler);
-static void OpenFoeTypesSubmenu(enum BattlerId battler);
-static void RestoreMoveDescriptionWindowSize(void);
-
-#define MOVE_DESCRIPTION_HEIGHT 6 // tiles; the foe-types panel shrinks it per foe
 static void WaitForMonSelection(enum BattlerId battler);
 static void CompleteWhenChoseItem(enum BattlerId battler);
+static void Task_LaunchLvlUpAnim(u8);
+static void Task_PrepareToGiveExpWithExpBar(u8);
+static void Task_SetControllerToWaitForString(u8);
+static void Task_GiveExpWithExpBar(u8);
+static void Task_UpdateLvlInHealthbox(u8);
 static void PrintLinkStandbyMsg(void);
 
 static void ReloadMoveNames(enum BattlerId battler);
 static u32 CheckTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef);
 static u32 CheckTargetTypeEffectiveness(enum BattlerId battler);
 static void MoveSelectionDisplayMoveEffectiveness(u32 foeEffectiveness, enum BattlerId battler);
-static u32 CheckSeenTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef);
-static const u8 *GetFoeTypesPanelMark(u32 effectiveness);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
 {
@@ -127,6 +122,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId
     [CONTROLLER_CHOOSEPOKEMON]            = PlayerHandleChoosePokemon,
     [CONTROLLER_23]                       = PlayerHandleCmd23,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
     [CONTROLLER_STATUSXOR]                = PlayerHandleStatusXor,
@@ -246,39 +242,6 @@ static void HandleInputChooseAction(enum BattlerId battler)
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;
-
-    // Emerald Champions: L opens the foes' types from the action menu as well, so the
-    // panel is reachable before choosing FIGHT (which is where it is wanted in wild
-    // battles). Closing it repaints the action menu through its normal handler.
-    if (gBattleStruct->foeTypesSubmenu)
-    {
-        if (JOY_NEW(L_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
-        {
-            gBattleStruct->foeTypesSubmenu = FALSE;
-            gBattleStruct->descriptionSubmenu = FALSE;
-            ShowPlayerHealthboxesAfterPanel();
-            FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
-            ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
-            CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
-            RestoreMoveDescriptionWindowSize();
-            SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 47);
-            PlaySE(SE_SELECT);
-            PlayerHandleChooseAction(battler);
-        }
-        return;
-    }
-    if (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    {
-        PlaySE(SE_SELECT);
-        // Reuse the native move-description window on the action-menu page.
-        // Only its tilemap row changes; BG0 and the action menu stay in place.
-        // The last-used-Ball shortcut sprite sits where the panel opens, so slide
-        // it away first; PlayerHandleChooseAction restores it when the panel closes.
-        TryHideLastUsedBall();
-        SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 27);
-        OpenFoeTypesSubmenu(battler);
-        return;
-    }
 
     if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
     && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
@@ -411,7 +374,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
             // Return item to bag if partner had selected one (if consumable).
             if (gBattleResources->bufferA[battler][1] == B_ACTION_USE_ITEM && GetItemConsumability(itemId))
             {
-                AddBagItemWithoutDiscovery(itemId, 1);
+                AddBagItem(itemId, 1);
             }
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_CANCEL_PARTNER, 0);
@@ -551,7 +514,7 @@ void HandleInputChooseTarget(enum BattlerId battler)
                     validTarget = FALSE;
 
                 if (B_SHOW_EFFECTIVENESS && validTarget)
-                    MoveSelectionDisplayMoveEffectiveness(CheckSeenTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+                    MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
 
             } while (!validTarget);
         }
@@ -600,7 +563,7 @@ void HandleInputChooseTarget(enum BattlerId battler)
                     break;
                 }
                 if (B_SHOW_EFFECTIVENESS)
-                    MoveSelectionDisplayMoveEffectiveness(CheckSeenTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+                    MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
 
                 if (!CanTargetBattler(battler, gMultiUsePlayerCursor, move)
                  || (moveTarget == TARGET_OPPONENT && IsOnPlayerSide(gMultiUsePlayerCursor)))
@@ -716,10 +679,6 @@ void HandleInputChooseMove(enum BattlerId battler)
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
-    // Emerald Champions: the action menu's last-used-Ball shortcut also lives on R;
-    // never let its held state swallow R in the move menu (foe types panel).
-    gBattleStruct->ackBallUseBtn = FALSE;
-
     if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         gPlayerDpadHoldFrames++;
     else
@@ -744,13 +703,9 @@ void HandleInputChooseMove(enum BattlerId battler)
         if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX || IsGimmickSelected(battler, GIMMICK_DYNAMAX))
             moveTarget = GetMoveTarget(GetMaxMove(battler, moveInfo->moves[gMoveSelectionCursor[battler]]));
 
+        gMultiUsePlayerCursor = GetDefaultSelectionTarget(battler, moveTarget);
+        
         enum BattlerId partner = GetPartnerBattler(battler);
-        if (isUserOrAlly)
-            gMultiUsePlayerCursor = battler;
-        else if (moveTarget == TARGET_ALLY)
-            gMultiUsePlayerCursor = partner;
-        else
-            gMultiUsePlayerCursor = GetBattlerLeftFoe(battler);
 
         if (gBattleResources->bufferA[battler][1]) // a double battle
         {
@@ -812,7 +767,7 @@ void HandleInputChooseMove(enum BattlerId battler)
             else
                 gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             if (B_SHOW_EFFECTIVENESS)
-                MoveSelectionDisplayMoveEffectiveness(CheckSeenTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
+                MoveSelectionDisplayMoveEffectiveness(CheckTypeEffectiveness(battler, gMultiUsePlayerCursor), battler);
 
             gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
             break;
@@ -925,12 +880,9 @@ void HandleInputChooseMove(enum BattlerId battler)
     }
     else if (gBattleStruct->descriptionSubmenu)
     {
-        if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) || JOY_NEW(L_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             gBattleStruct->descriptionSubmenu = FALSE;
-            gBattleStruct->foeTypesSubmenu = FALSE;
-            ShowPlayerHealthboxesAfterPanel();
-            TryToAddMoveInfoWindow();
             if (gCategoryIconSpriteId != 0xFF)
             {
                 DestroySprite(&gSprites[gCategoryIconSpriteId]);
@@ -940,7 +892,6 @@ void HandleInputChooseMove(enum BattlerId battler)
             FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
             ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
             CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
-            RestoreMoveDescriptionWindowSize();
             PlaySE(SE_SELECT);
             if (B_SHOW_EFFECTIVENESS)
                 MoveSelectionDisplayMoveEffectiveness(CheckTargetTypeEffectiveness(battler), battler);
@@ -948,22 +899,11 @@ void HandleInputChooseMove(enum BattlerId battler)
             MoveSelectionDisplayMoveType(battler);
         }
     }
-    // Emerald Champions: R throws the last used Ball from the action menu only;
-    // in the move menu it always opens move info, wild battles included.
     else if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) &&
         !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
-        // The button hints overlap the panel; hide them while the panel is up.
-        TryToHideMoveInfoWindow();
-        HidePlayerHealthboxesForPanel();
         gBattleStruct->descriptionSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);
-    }
-    else if (JOY_NEW(L_BUTTON) && !gBattleStruct->zmove.viewing
-        && gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    {
-        TryToHideMoveInfoWindow();
-        OpenFoeTypesSubmenu(battler);
     }
     else if (JOY_NEW(START_BUTTON))
     {
@@ -998,6 +938,56 @@ static void ReloadMoveNames(enum BattlerId battler)
         MoveSelectionDisplayPPNumber(battler);
         MoveSelectionDisplayMoveType(battler);
     }
+}
+
+static u32 UNUSED HandleMoveInputUnused(enum BattlerId battler)
+{
+    u32 var = 0;
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        var = 1;
+    }
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = DISPLAY_HEIGHT * 2;
+        var = 0xFF;
+    }
+    if (JOY_NEW(DPAD_LEFT) && gMoveSelectionCursor[battler] & 1)
+    {
+        MoveSelectionDestroyCursorAt(gMoveSelectionCursor[battler]);
+        gMoveSelectionCursor[battler] ^= 1;
+        PlaySE(SE_SELECT);
+        MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
+    }
+    if (JOY_NEW(DPAD_RIGHT) && !(gMoveSelectionCursor[battler] & 1)
+        && (gMoveSelectionCursor[battler] ^ 1) < gNumberOfMovesToChoose)
+    {
+        MoveSelectionDestroyCursorAt(gMoveSelectionCursor[battler]);
+        gMoveSelectionCursor[battler] ^= 1;
+        PlaySE(SE_SELECT);
+        MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
+    }
+    if (JOY_NEW(DPAD_UP) && gMoveSelectionCursor[battler] & 2)
+    {
+        MoveSelectionDestroyCursorAt(gMoveSelectionCursor[battler]);
+        gMoveSelectionCursor[battler] ^= 2;
+        PlaySE(SE_SELECT);
+        MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
+    }
+    if (JOY_NEW(DPAD_DOWN) && !(gMoveSelectionCursor[battler] & 2)
+        && (gMoveSelectionCursor[battler] ^ 2) < gNumberOfMovesToChoose)
+    {
+        MoveSelectionDestroyCursorAt(gMoveSelectionCursor[battler]);
+        gMoveSelectionCursor[battler] ^= 2;
+        PlaySE(SE_SELECT);
+        MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
+    }
+
+    return var;
 }
 
 void HandleMoveSwitching(enum BattlerId battler)
@@ -1094,7 +1084,10 @@ void HandleMoveSwitching(enum BattlerId battler)
             }
         }
 
-        gBattlerControllerFuncs[battler] = HandleInputChooseMove;
+        if (IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+            gBattlerControllerFuncs[battler] = OakOldManHandleInputChooseMove;
+        else
+            gBattlerControllerFuncs[battler] = HandleInputChooseMove;
         gMoveSelectionCursor[battler] = gMultiUsePlayerCursor;
         MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
         if (B_SHOW_EFFECTIVENESS)
@@ -1111,7 +1104,10 @@ void HandleMoveSwitching(enum BattlerId battler)
         MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
         MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
 
-        gBattlerControllerFuncs[battler] = HandleInputChooseMove;
+        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+            gBattlerControllerFuncs[battler] = OakOldManHandleInputChooseMove;
+        else
+            gBattlerControllerFuncs[battler] = HandleInputChooseMove;
 
         if (B_SHOW_EFFECTIVENESS)
             MoveSelectionDisplayMoveEffectiveness(CheckTargetTypeEffectiveness(battler), battler);
@@ -1384,6 +1380,188 @@ void Task_PlayerController_RestoreBgmAfterCry(u8 taskId)
     }
 }
 
+#define tExpTask_monId          data[0]
+#define tExpTask_battler        data[2]
+#define tExpTask_gainedExp_1    data[3]
+#define tExpTask_gainedExp_2    data[4] // Stored as two half-words containing a word.
+#define tExpTask_frames         data[10]
+
+static void DynamaxModifyHPLevelUp(struct Pokemon *mon, enum BattlerId battler, u32 oldMaxHP)
+{
+    ApplyDynamaxHPMultiplier(mon);
+    gBattleScripting.levelUpHP = GetMonData(mon, MON_DATA_MAX_HP) - oldMaxHP; // overwrite levelUpHP since it overflows
+    gBattleMons[battler].hp += gBattleScripting.levelUpHP;
+    SetMonData(mon, MON_DATA_HP, &gBattleMons[battler].hp);
+}
+
+static s32 GetTaskExpValue(u8 taskId)
+{
+    return (u16)(gTasks[taskId].tExpTask_gainedExp_1) | (gTasks[taskId].tExpTask_gainedExp_2 << 16);
+}
+
+static void Task_GiveExpToMon(u8 taskId)
+{
+    u32 monId = (u8)(gTasks[taskId].tExpTask_monId);
+    enum BattlerId battler = gTasks[taskId].tExpTask_battler;
+    s32 gainedExp = GetTaskExpValue(taskId);
+
+    if (GetBattlerCoordsIndex(battler) == BATTLE_COORDS_DOUBLES || monId != gBattlerPartyIndexes[battler]) // Give exp without moving the expbar.
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monId];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+        u8 level = GetMonData(mon, MON_DATA_LEVEL);
+        u32 currExp = GetMonData(mon, MON_DATA_EXP);
+        u32 nextLvlExp = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
+        u32 expAfterGain = currExp + gainedExp;
+        u32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP);
+
+        if (expAfterGain >= nextLvlExp)
+        {
+            SetMonData(mon, MON_DATA_EXP, (B_LEVEL_UP_NOTIFICATION >= GEN_9) ? &expAfterGain : &nextLvlExp);
+
+            CalculateMonStats(mon);
+
+            // Reapply Dynamax HP multiplier after stats are recalculated.
+            if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && monId == gBattlerPartyIndexes[battler])
+                DynamaxModifyHPLevelUp(mon, battler, oldMaxHP);
+
+            gainedExp -= nextLvlExp - currExp;
+            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, RET_VALUE_LEVELED_UP, (B_LEVEL_UP_NOTIFICATION >= GEN_9) ? 0 : gainedExp);
+
+            if (IsDoubleBattle() == TRUE
+             && (monId == gBattlerPartyIndexes[battler] || monId == gBattlerPartyIndexes[GetPartnerBattler(battler)]))
+                gTasks[taskId].func = Task_LaunchLvlUpAnim;
+            else
+                gTasks[taskId].func = Task_SetControllerToWaitForString;
+        }
+        else
+        {
+            currExp += gainedExp;
+            SetMonData(mon, MON_DATA_EXP, &currExp);
+            gBattlerControllerFuncs[battler] = Controller_WaitForString;
+            DestroyTask(taskId);
+        }
+    }
+    else
+    {
+        gTasks[taskId].func = Task_PrepareToGiveExpWithExpBar;
+    }
+}
+
+static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
+{
+    u8 monIndex = gTasks[taskId].tExpTask_monId;
+    s32 gainedExp = GetTaskExpValue(taskId);
+    enum BattlerId battler = gTasks[taskId].tExpTask_battler;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monIndex];
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 exp = GetMonData(mon, MON_DATA_EXP);
+    u32 currLvlExp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
+    u32 expToNextLvl;
+
+    exp -= currLvlExp;
+    expToNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLvlExp;
+    SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], expToNextLvl, exp, -gainedExp);
+    TestRunner_Battle_RecordExp(battler, exp, -gainedExp);
+    PlaySE(SE_EXP);
+    gTasks[taskId].func = Task_GiveExpWithExpBar;
+}
+
+static void Task_GiveExpWithExpBar(u8 taskId)
+{
+    u32 level, expAfterGain;
+    enum Species species;
+    u32 oldMaxHP;
+    s32 currExp, expOnNextLvl, newExpPoints;
+
+    if (gTasks[taskId].tExpTask_frames < 13)
+    {
+        gTasks[taskId].tExpTask_frames++;
+    }
+    else
+    {
+        u8 monId = gTasks[taskId].tExpTask_monId;
+        s32 gainedExp = GetTaskExpValue(taskId);
+        enum BattlerId battler = gTasks[taskId].tExpTask_battler;
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monId];
+
+        newExpPoints = MoveBattleBar(battler, gHealthboxSpriteIds[battler], EXP_BAR, 0);
+        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
+        if (newExpPoints == -1) // The bar has been filled with given exp points.
+        {
+            m4aSongNumStop(SE_EXP);
+            level = GetMonData(mon, MON_DATA_LEVEL);
+            currExp = GetMonData(mon, MON_DATA_EXP);
+            species = GetMonData(mon, MON_DATA_SPECIES);
+            oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP);
+            expOnNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
+
+            expAfterGain = currExp + gainedExp;
+            if (expAfterGain >= expOnNextLvl)
+            {
+                if (B_LEVEL_UP_NOTIFICATION >= GEN_9)
+                    SetMonData(mon, MON_DATA_EXP, &expAfterGain);
+                else
+                    SetMonData(mon, MON_DATA_EXP, &expOnNextLvl);
+
+                CalculateMonStats(mon);
+
+                // Reapply Dynamax HP multiplier after stats are recalculated.
+                if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && monId == gBattlerPartyIndexes[battler])
+                    DynamaxModifyHPLevelUp(mon, battler, oldMaxHP);
+
+                gainedExp -= expOnNextLvl - currExp;
+                BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, RET_VALUE_LEVELED_UP, (B_LEVEL_UP_NOTIFICATION >= GEN_9) ? 0 : gainedExp);
+                gTasks[taskId].func = Task_LaunchLvlUpAnim;
+            }
+            else
+            {
+                currExp += gainedExp;
+                SetMonData(mon, MON_DATA_EXP, &currExp);
+                gBattlerControllerFuncs[battler] = Controller_WaitForString;
+                DestroyTask(taskId);
+            }
+        }
+    }
+}
+
+static void Task_LaunchLvlUpAnim(u8 taskId)
+{
+    enum BattlerId battler = gTasks[taskId].tExpTask_battler;
+    u8 monIndex = gTasks[taskId].tExpTask_monId;
+
+    if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[GetPartnerBattler(battler)])
+        battler ^= BIT_FLANK;
+
+    InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_LVL_UP);
+    gTasks[taskId].func = Task_UpdateLvlInHealthbox;
+}
+
+static void Task_UpdateLvlInHealthbox(u8 taskId)
+{
+    enum BattlerId battler = gTasks[taskId].tExpTask_battler;
+
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+    {
+        u8 monIndex = gTasks[taskId].tExpTask_monId;
+
+        if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[GetPartnerBattler(battler)])
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[GetPartnerBattler(battler)], &gParties[B_TRAINER_PLAYER][monIndex], HEALTHBOX_ALL);
+        else
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gParties[B_TRAINER_PLAYER][monIndex], HEALTHBOX_ALL);
+
+        gTasks[taskId].func = Task_SetControllerToWaitForString;
+    }
+}
+
+static void Task_SetControllerToWaitForString(u8 taskId)
+{
+    enum BattlerId battler = gTasks[taskId].tExpTask_battler;
+    gBattlerControllerFuncs[battler] = Controller_WaitForString;
+    DestroyTask(taskId);
+}
+
 static void OpenPartyMenuToChooseMon(enum BattlerId battler)
 {
     if (!gPaletteFade.active)
@@ -1455,13 +1633,7 @@ static void PlayerHandleYesNoInput(enum BattlerId battler)
     }
     if (JOY_NEW(A_BUTTON))
     {
-        // Declining Restart immediately asks about forfeiting in the same box.
-        // Keep it visible while that selection script replaces the question.
-        if (!gBattleStruct->restartQuestionPending || gMultiUsePlayerCursor == 0)
-        {
-            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
-            ShowPlayerHealthboxesAfterPanel();
-        }
+        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         PlaySE(SE_SELECT);
 
         if (gMultiUsePlayerCursor != 0)
@@ -1474,7 +1646,6 @@ static void PlayerHandleYesNoInput(enum BattlerId battler)
     if (JOY_NEW(B_BUTTON))
     {
         HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
-        ShowPlayerHealthboxesAfterPanel();
         PlaySE(SE_SELECT);
         BtlController_Complete(battler);
     }
@@ -1533,11 +1704,16 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
     enum Type type = GetMoveType(move);
     enum BattleMoveEffects effect = GetMoveEffect(move);
 
-    if (effect == EFFECT_IVY_CUDGEL)
+    if (effect == EFFECT_TERA_BLAST)
     {
-        if (speciesId == SPECIES_OGERPON_WELLSPRING
-         || speciesId == SPECIES_OGERPON_HEARTHFLAME
-         || speciesId == SPECIES_OGERPON_CORNERSTONE)
+        if (IsGimmickSelected(battler, GIMMICK_TERA) || GetActiveGimmick(battler) == GIMMICK_TERA)
+            type = GetBattlerTeraType(battler);
+    }
+    else if (effect == EFFECT_IVY_CUDGEL)
+    {
+        if (speciesId == SPECIES_OGERPON_WELLSPRING || speciesId == SPECIES_OGERPON_WELLSPRING_TERA
+         || speciesId == SPECIES_OGERPON_HEARTHFLAME || speciesId == SPECIES_OGERPON_HEARTHFLAME_TERA
+         || speciesId == SPECIES_OGERPON_CORNERSTONE || speciesId == SPECIES_OGERPON_CORNERSTONE_TERA)
             type = GetSpeciesType(speciesId, 1);
     }
     else if (GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS
@@ -1545,10 +1721,14 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
     {
         type = TYPE_NORMAL; // Max Guard is always a Normal-type move
     }
-    else
+    else if (effect == EFFECT_TERA_STARSTORM)
     {
-        // Emerald Champions: the type the move really has now (Pixilate, Weather
-        // Ball, ...), the same one its effectiveness mark is worked out from.
+        if (speciesId == SPECIES_TERAPAGOS_STELLAR
+        || (IsGimmickSelected(battler, GIMMICK_TERA) && speciesId == SPECIES_TERAPAGOS_TERASTAL))
+            type = TYPE_STELLAR;
+    }
+    else if (P_SHOW_DYNAMIC_TYPES) // Non-vanilla changes to battle UI showing dynamic types
+    {
         struct Pokemon *mon = GetBattlerMon(battler);
         type = CheckDynamicMoveType(mon, move, battler, MON_IN_BATTLE);
     }
@@ -1558,193 +1738,13 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
-// The move-description and foe-types panel runs a tile into the player's HP
-// boxes, and the restart/forfeit Yes/No box sits over their right ends; the
-// boxes are hidden while either is up, and only those come back.
-static u8 sPanelHiddenHealthboxes;
-
-static void HidePlayerHealthboxesForPanel(void)
-{
-    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
-    {
-        if (IsOnPlayerSide(battler) && !gSprites[gHealthboxSpriteIds[battler]].invisible)
-        {
-            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-            sPanelHiddenHealthboxes |= 1u << battler;
-        }
-    }
-}
-
-static void ShowPlayerHealthboxesAfterPanel(void)
-{
-    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
-    {
-        if (sPanelHiddenHealthboxes & (1u << battler))
-            SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
-    }
-    sPanelHiddenHealthboxes = 0;
-}
-
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler)
 {
     if (!B_SHOW_MOVE_DESCRIPTION)
         return;
 
-    if (gBattleStruct->foeTypesSubmenu)
-        MoveSelectionDisplayFoeTypes(battler);
-    else if (gBattleStruct->descriptionSubmenu)
+    if (gBattleStruct->descriptionSubmenu)
         MoveSelectionDisplayMoveDescription(battler);
-}
-
-// The foe list shares the move-description window, which is three lines tall.
-// It shrinks to one line per foe with its bottom edge kept in place, so a
-// single foe no longer draws a box over the player's HP box; closing restores it.
-// SetWindowAttribute cannot change a height, and a window may never grow past
-// the buffer it was created with, so only this helper resizes, and only within
-// the panel's own MOVE_DESCRIPTION_HEIGHT.
-static void SetMoveDescriptionWindowHeight(u32 height)
-{
-    struct WindowTemplate *window = &gWindows[B_WIN_MOVE_DESCRIPTION].window;
-
-    height = min(height, MOVE_DESCRIPTION_HEIGHT);
-    window->tilemapTop = window->tilemapTop + window->height - height;
-    window->height = height;
-}
-
-static void RestoreMoveDescriptionWindowSize(void)
-{
-    SetMoveDescriptionWindowHeight(MOVE_DESCRIPTION_HEIGHT);
-}
-
-static void OpenFoeTypesSubmenu(enum BattlerId battler)
-{
-    HidePlayerHealthboxesForPanel();
-    gBattleStruct->descriptionSubmenu = TRUE;
-    gBattleStruct->foeTypesSubmenu = TRUE;
-    TryMoveSelectionDisplayMoveDescription(battler);
-}
-
-// Whether the player sees an Illusion disguise for this battler: its disguise
-// species, whose types show until the battler's own types change (the rule
-// the type icons follow).
-static bool32 IsBattlerSeenAsDisguise(enum BattlerId battler, enum Species *disguise)
-{
-    enum Species species = GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES);
-
-    *disguise = GetIllusionMonSpecies(battler);
-    return *disguise != SPECIES_NONE
-        && gBattleMons[battler].types[0] == GetSpeciesType(species, 0)
-        && gBattleMons[battler].types[1] == GetSpeciesType(species, 1);
-}
-
-// Emerald Champions: the same panel as the move description, listing each
-// opposing Pokémon as the player sees it (an Illusion shows its disguise) with
-// its current types, a third one included ("Wingull        Water/Flying").
-// Opened with L from the action or move menu (Birch mentions it). From the
-// move menu each foe also carries the highlighted move's effectiveness mark
-// against it, in a column at the right edge. The types are right-aligned to
-// the panel edge or that column, in FONT_NARROW (the panel is 144 px, the
-// widest name 59 px, the widest type pair 82 px) or narrower when a long name
-// and a long type line would meet.
-static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
-{
-    static const u8 sText_TypeSlash[] = _("/");
-    const u32 panelWidth = GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_WIDTH) * 8;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    bool32 showMarks = B_SHOW_EFFECTIVENESS && gBattlerControllerFuncs[battler] == HandleInputChooseMove;
-    u32 markColumn = panelWidth, typesRight;
-    u8 *text = gDisplayedStringBattle;
-    u32 lines = 0, foes = 0, height;
-
-    if (showMarks)
-    {
-        u32 markWidth = 0;
-
-        for (u32 effectiveness = 0; effectiveness < 7; effectiveness++)
-            markWidth = max(markWidth, GetStringWidth(FONT_NARROW, GetFoeTypesPanelMark(effectiveness), 0));
-        markColumn = panelWidth - markWidth - 2;
-    }
-    typesRight = showMarks ? markColumn - 4 : panelWidth - 2;
-
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-        if (GetBattlerSide(foe) != GetBattlerSide(battler) && IsBattlerAlive(foe))
-            foes++;
-    height = max(foes, 1) * 2;
-    SetMoveDescriptionWindowHeight(height);
-
-    LoadMessageBoxAndBorderGfx();
-    DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
-    text[0] = EOS;
-    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
-    {
-        enum Type types[3];
-        enum Species species, disguise;
-        u8 typeText[48];
-        u32 nameWidth, typeFont, typeWidth, column;
-
-        if (GetBattlerSide(foe) == GetBattlerSide(battler) || !IsBattlerAlive(foe))
-            continue;
-        GetBattlerTypes(foe, types);
-        species = gBattleMons[foe].species;
-        if (IsBattlerSeenAsDisguise(foe, &disguise))
-        {
-            species = disguise;
-            types[0] = GetSpeciesType(disguise, 0);
-            types[1] = GetSpeciesType(disguise, 1);
-        }
-        else if (disguise != SPECIES_NONE)
-        {
-            species = disguise;
-        }
-        StringCopy(typeText, gTypesInfo[types[0]].name);
-        if (types[1] != types[0] && types[1] != TYPE_MYSTERY)
-        {
-            StringAppend(typeText, sText_TypeSlash);
-            StringAppend(typeText, gTypesInfo[types[1]].name);
-        }
-        if (types[2] != TYPE_MYSTERY && types[2] != types[0] && types[2] != types[1])
-        {
-            StringAppend(typeText, sText_TypeSlash);
-            StringAppend(typeText, gTypesInfo[types[2]].name);
-        }
-        nameWidth = GetStringWidth(FONT_NARROW, GetSpeciesName(species), 0);
-        typeFont = GetFontIdToFit(typeText, FONT_NARROW, 0, typesRight > nameWidth + 4 ? typesRight - nameWidth - 4 : 0);
-        typeWidth = GetStringWidth(typeFont, typeText, 0);
-        column = typesRight > typeWidth ? typesRight - typeWidth : 0;
-
-        if (lines++ > 0)
-            text = StringAppend(text, gText_NewLine);
-        text = StringAppend(text, GetSpeciesName(species));
-        *text++ = EXT_CTRL_CODE_BEGIN;
-        *text++ = EXT_CTRL_CODE_CLEAR_TO;
-        *text++ = column;
-        if (typeFont != FONT_NARROW)
-        {
-            *text++ = EXT_CTRL_CODE_BEGIN;
-            *text++ = EXT_CTRL_CODE_FONT;
-            *text++ = typeFont;
-        }
-        *text = EOS;
-        text = StringAppend(text, typeText);
-        if (typeFont != FONT_NARROW)
-        {
-            *text++ = EXT_CTRL_CODE_BEGIN;
-            *text++ = EXT_CTRL_CODE_FONT;
-            *text++ = FONT_NARROW;
-            *text = EOS;
-        }
-        // Status moves carry no mark, as in the PP window.
-        if (showMarks && !IsBattleMoveStatus(moveInfo->moves[gMoveSelectionCursor[battler]]))
-        {
-            *text++ = EXT_CTRL_CODE_BEGIN;
-            *text++ = EXT_CTRL_CODE_CLEAR_TO;
-            *text++ = markColumn;
-            *text = EOS;
-            text = StringAppend(text, GetFoeTypesPanelMark(CheckSeenTypeEffectiveness(battler, foe)));
-        }
-    }
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
-    CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_FULL);
 }
 
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler)
@@ -1763,9 +1763,9 @@ static void MoveSelectionDisplayMoveDescription(enum BattlerId battler)
     }
 
     u8 pwr_num[3], acc_num[3];
-    u8 cat_desc[7] = _("Cat: ");
-    u8 pwr_desc[7] = _("Pwr: ");
-    u8 acc_desc[7] = _("Acc: ");
+    u8 cat_desc[7] = _("CAT: ");
+    u8 pwr_desc[7] = _("PWR: ");
+    u8 acc_desc[7] = _("ACC: ");
     u8 cat_start[] = _("{CLEAR_TO 3}");
     u8 pwr_start[] = _("{CLEAR_TO 56}");
     u8 acc_start[] = _("{CLEAR_TO 108}");
@@ -2003,22 +2003,11 @@ static void HandleChooseActionAfterDma3(enum BattlerId battler)
 
 static void PlayerHandleChooseAction(enum BattlerId battler)
 {
-#if EC_HEADLESS_FIXTURES
-    if (EmeraldChampionsAgentBattleActive())
-    {
-        EmeraldChampionsAgentBattleChooseAction(battler);
-        return;
-    }
-#endif
-
     s32 i;
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
-    if (ShouldBattleRestrictionsApply(battler) && !IsAllowedToUseBag())
-        BattlePutTextOnWindow(gText_BattleMenuNoBag, B_WIN_ACTION_MENU);
-    else
-        BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
+    BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
@@ -2075,7 +2064,6 @@ static void PlayerHandleYesNoBox(enum BattlerId battler)
     if (IsOnPlayerSide(battler))
     {
         HandleBattleWindow(YESNOBOX_X_Y, 0);
-        HidePlayerHealthboxesForPanel();
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gMultiUsePlayerCursor = 1;
         BattleCreateYesNoCursorAt(1);
@@ -2111,14 +2099,6 @@ static void PlayerChooseMoveInBattlePalace(enum BattlerId battler)
 
 void PlayerHandleChooseMove(enum BattlerId battler)
 {
-#if EC_HEADLESS_FIXTURES
-    if (EmeraldChampionsAgentBattleActive())
-    {
-        EmeraldChampionsAgentBattleChooseMove(battler);
-        return;
-    }
-#endif
-
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
         gBattleStruct->arenaMindPoints[battler] = 8;
@@ -2174,14 +2154,6 @@ static void PlayerHandleChooseItem(enum BattlerId battler)
 
 static void PlayerHandleChoosePokemon(enum BattlerId battler)
 {
-#if EC_HEADLESS_FIXTURES
-    if (EmeraldChampionsAgentBattleActive())
-    {
-        EmeraldChampionsAgentBattleChoosePokemon(battler);
-        return;
-    }
-#endif
-
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
@@ -2215,6 +2187,34 @@ static void PlayerHandleCmd23(enum BattlerId battler)
     BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
     BtlController_Complete(battler);
 }
+
+void PlayerHandleExpUpdate(enum BattlerId battler)
+{
+    u8 monId = gBattleResources->bufferA[battler][1];
+    s32 taskId, expPointsToGive;
+
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_LEVEL) >= MAX_LEVEL)
+    {
+        BtlController_Complete(battler);
+    }
+    else
+    {
+        LoadBattleBarGfx(1);
+        expPointsToGive = T1_READ_32(&gBattleResources->bufferA[battler][2]);
+        taskId = CreateTask(Task_GiveExpToMon, 10);
+        gTasks[taskId].tExpTask_monId = monId;
+        gTasks[taskId].tExpTask_gainedExp_1 = expPointsToGive;
+        gTasks[taskId].tExpTask_gainedExp_2 = expPointsToGive >> 16;
+        gTasks[taskId].tExpTask_battler = battler;
+        gBattlerControllerFuncs[battler] = BattleControllerDummy;
+    }
+}
+
+#undef tExpTask_monId
+#undef tExpTask_battler
+#undef tExpTask_gainedExp_1
+#undef tExpTask_gainedExp_2
+#undef tExpTask_frames
 
 static void PlayerHandleStatusXor(enum BattlerId battler)
 {
@@ -2287,7 +2287,7 @@ static void PlayerHandleEndBounceEffect(enum BattlerId battler)
 
 static void PlayerHandleLinkStandbyMsg(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2], sizeof(gBattleResources->transferBuffer) - 2);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
     switch (gBattleResources->bufferA[battler][1])
     {
     case LINK_STANDBY_MSG_STOP_BOUNCE:
@@ -2324,7 +2324,7 @@ static void PlayerHandleResetActionMoveSelection(enum BattlerId battler)
 
 static void PlayerHandleEndLinkBattle(enum BattlerId battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4], sizeof(gBattleResources->transferBuffer) - 4);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
     gBattleOutcome = gBattleResources->bufferA[battler][1];
     gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
     FadeOutMapMusic(5);
@@ -2408,59 +2408,15 @@ static u32 CheckTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId batt
     return EFFECTIVENESS_NORMAL; // Normal effectiveness
 }
 
-// Emerald Champions: every effectiveness mark (the PP window's, a chosen
-// target's, the foe types panel's) is against the foe the player sees; an
-// Illusion disguise's types stand in for the real ones.
-static u32 CheckSeenTypeEffectiveness(enum BattlerId battlerAtk, enum BattlerId battlerDef)
-{
-    enum Species disguise;
-    enum Type types[2];
-    u32 effectiveness;
-
-    // The player knows their own side's Pokémon.
-    if (GetBattlerSide(battlerDef) == GetBattlerSide(battlerAtk) || !IsBattlerSeenAsDisguise(battlerDef, &disguise))
-        return CheckTypeEffectiveness(battlerAtk, battlerDef);
-    types[0] = gBattleMons[battlerDef].types[0];
-    types[1] = gBattleMons[battlerDef].types[1];
-    gBattleMons[battlerDef].types[0] = GetSpeciesType(disguise, 0);
-    gBattleMons[battlerDef].types[1] = GetSpeciesType(disguise, 1);
-    effectiveness = CheckTypeEffectiveness(battlerAtk, battlerDef);
-    gBattleMons[battlerDef].types[0] = types[0];
-    gBattleMons[battlerDef].types[1] = types[1];
-    return effectiveness;
-}
-
-// The same marks as the PP window's; none for foes it can't show.
-static const u8 *GetFoeTypesPanelMark(u32 effectiveness)
-{
-    switch (effectiveness)
-    {
-    case EFFECTIVENESS_EXTREMELY_EFFECTIVE:
-        return COMPOUND_STRING("{STAR}");
-    case EFFECTIVENESS_SUPER_EFFECTIVE:
-        return COMPOUND_STRING("{CIRCLE_DOT}");
-    case EFFECTIVENESS_NORMAL:
-        return COMPOUND_STRING("{CIRCLE_HOLLOW}");
-    case EFFECTIVENESS_NOT_VERY_EFFECTIVE:
-        return COMPOUND_STRING("{TRIANGLE}");
-    case EFFECTIVENESS_MOSTLY_INEFFECTIVE:
-        return COMPOUND_STRING("{TRIANGLE_UPSIDE_DOWN}");
-    case EFFECTIVENESS_NO_EFFECT:
-        return COMPOUND_STRING("{BIG_MULT_X}");
-    default:
-        return COMPOUND_STRING("");
-    }
-}
-
 static u32 CheckTargetTypeEffectiveness(enum BattlerId battler)
 {
     enum BattlerId battlerFoe = GetOppositeBattler(battler);
-    u32 foeEffectiveness = CheckSeenTypeEffectiveness(battler, battlerFoe);
+    u32 foeEffectiveness = CheckTypeEffectiveness(battler, battlerFoe);
 
     if (IsDoubleBattle())
     {
         enum BattlerId partnerFoe = GetPartnerBattler(battlerFoe);
-        u32 partnerFoeEffectiveness = CheckSeenTypeEffectiveness(battler, partnerFoe);
+        u32 partnerFoeEffectiveness = CheckTypeEffectiveness(battler, partnerFoe);
         if (!IsBattlerAlive(battlerFoe))
             return partnerFoeEffectiveness;
         if (IsBattlerAlive(battlerFoe) && IsBattlerAlive(partnerFoe)

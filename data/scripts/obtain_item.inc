@@ -19,31 +19,14 @@ EventScript_ObtainItemMessage::
 EventScript_BufferPocketNameAndTryFanfare::
 	switch VAR_RESULT
 	case POCKET_ITEMS,      EventScript_BufferItemsPocket
-	case POCKET_MEDICINE,   EventScript_BufferMedicinePocket
-	case POCKET_BATTLE,     EventScript_BufferBattleItemsPocket
 	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
+	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
 	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
-	case POCKET_MEGA_STONES, EventScript_BufferMegaStonesPocket
 	end
 
 EventScript_BufferItemsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
-	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferMedicinePocket::
-	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
-	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferBattleItemsPocket::
-	bufferstdstring STR_VAR_3, STDSTRING_BATTLE_ITEMS
-	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferMegaStonesPocket::
-	bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONES
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
@@ -55,6 +38,11 @@ EventScript_BufferKeyItemsPocket::
 EventScript_BufferPokeballsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferTMHMsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedTMHM
 	return
 
 EventScript_BufferBerriesPocket::
@@ -73,9 +61,6 @@ EventScript_ObtainedItemMessage:
 EventScript_ContinueObtainedItem:
 	delay 10
 	showitemdescription
-	@ At slower text speeds the fanfare can end first; a message started
-	@ while one is still printing is dropped.
-	waitmessage
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
@@ -88,6 +73,10 @@ EventScript_NoRoomForItem::
 
 EventScript_PlayFanfareObtainedItem::
 	playfanfare MUS_OBTAIN_ITEM
+	return
+
+EventScript_PlayFanfareObtainedTMHM::
+	playfanfare MUS_OBTAIN_TMHM
 	return
 
 Std_ObtainDecoration::
@@ -118,13 +107,6 @@ Std_FindItem::
 	lock
 	faceplayer
 	waitse
-	@ Location-specific and generic item balls share this finite receipt path.
-EventScript_CheckFiniteItem::
-	callnative CheckItemBallHasPermanentReceipt, requests_effects=1
-	goto_if_eq VAR_RESULT, FALSE, EventScript_FindOrdinaryItem
-	special ConvertEmeraldChampionsFiniteReward
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpDuplicateFiniteItem
-EventScript_FindOrdinaryItem::
 	copyvar VAR_0x8006, ITEMID
 	copyvar VAR_0x8004, ITEMID
 	copyvar VAR_0x8005, AMOUNT
@@ -138,25 +120,40 @@ EventScript_FindOrdinaryItem::
 	release
 	return
 
-EventScript_PickUpDuplicateFiniteItem::
-	removeobject VAR_LAST_TALKED
-	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
-	setvar VAR_RESULT, TRUE
-	release
-	return
-
 EventScript_PickUpItem::
 	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
 	copyvar VAR_0x8006 VAR_0x8004
-	call EventScript_FoundItem
+	specialvar VAR_RESULT, BufferTMHMMoveName
+	copyvar VAR_0x8008, VAR_RESULT
+	call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
+	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
 	delay 10
 	showitemdescription
 	waitfanfare
 	waitmessage
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
+	pyramid_getlocation
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
+	return
+
+EventScript_PutBattlePyramidItemInBag::
+	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
+	hideitemdescription
+	return
+
+EventScript_FoundTMHM::
+	bufferitemnameplural STR_VAR_1, VAR_0x8004, VAR_0x8005
+	compare VAR_0x8005, 2
+	goto_if_lt EventScript_FoundTMHMMessage
+	buffernumberstring STR_VAR_3, VAR_0x8005
+	message gText_PlayerFoundTMHMs
+	goto EventScript_BufferTMHMsPocket
+	return
+EventScript_FoundTMHMMessage::
+	message gText_PlayerFoundOneTMHM
 	return
 
 EventScript_FoundItem::
@@ -169,11 +166,8 @@ EventScript_FoundItemMessage::
 	message gText_PlayerFoundOneItem
 	return
 
-@ The ball stays on the map, so say it was found, not obtained.
 EventScript_NoRoomToPickUpItem::
-	call EventScript_FoundItem
-	waitmessage
-	waitbuttonpress
+	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, FALSE
 	return
@@ -182,12 +176,6 @@ EventScript_HiddenItemScript::
 	lockall
 	waitse
 	goto_if_eq VAR_0x8005, 0, EventScript_TryPickUpHiddenCoins
-	goto_if_le VAR_0x8004, TEMP_FLAGS_END, EventScript_FindOrdinaryHiddenItem
-	copyvar VAR_0x8000, VAR_0x8005
-	copyvar VAR_0x8001, VAR_0x8009
-	special ConvertEmeraldChampionsFiniteReward
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpDuplicateFiniteHiddenItem
-EventScript_FindOrdinaryHiddenItem::
 	copyvar VAR_0x8006, VAR_0x8005
 	additem VAR_0x8005, VAR_0x8009
 	copyvar VAR_0x8007, VAR_RESULT
@@ -198,19 +186,18 @@ EventScript_FindOrdinaryHiddenItem::
 	goto_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForHiddenItem
 	end
 
-EventScript_PickUpDuplicateFiniteHiddenItem::
-	callnative Script_ClearDowsingColor
-	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
-	special SetHiddenItemFlag
-	callnative Script_UpdateDowseState
-	setvar VAR_RESULT, TRUE
-	releaseall
-	end
-
 EventScript_PickUpHiddenItem::
 	copyvar VAR_0x8008, VAR_0x8004
 	copyvar VAR_0x8004, VAR_0x8005
-	goto EventScript_FoundHiddenItem
+	specialvar VAR_RESULT, BufferTMHMMoveName
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FoundHiddenTMHM
+	goto_if_eq VAR_RESULT, FALSE, EventScript_FoundHiddenItem
+	end
+
+EventScript_FoundHiddenTMHM::
+	bufferitemnameplural STR_VAR_1, VAR_0x8004, 1
+	message gText_PlayerFoundOneTMHM
+	goto EventScript_PutHiddenItemInPocket
 	end
 
 EventScript_FoundHiddenItem::
@@ -225,7 +212,6 @@ EventScript_FoundSingleItem::
 
 EventScript_FoundMultipleItems::
 	buffernumberstring STR_VAR_1, VAR_0x8009
-	bufferitemnameplural STR_VAR_2, VAR_0x8005, VAR_0x8009
 	message gText_FoundXItems
 	return
 
@@ -235,7 +221,7 @@ EventScript_PutHiddenItemInPocket::
 	showitemdescription
 	waitmessage
 	waitfanfare
-	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8009
+	bufferitemnameplural STR_VAR_2, VAR_0x8004, 1
 	copyvar VAR_0x8004, VAR_0x8008
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
@@ -246,14 +232,15 @@ EventScript_PutHiddenItemInPocket::
 	end
 
 EventScript_NoRoomForHiddenItem::
-	call_if_eq VAR_0x8009, 1, EventScript_FoundSingleItem
-	call_if_ne VAR_0x8009, 1, EventScript_FoundMultipleItems
-	waitmessage
-	waitbuttonpress
+	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	releaseall
 	end
+
+EventScript_RestorePrevTextColor::
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+	return
 
 Std_PutItemAway::
 	bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001
@@ -265,28 +252,14 @@ Std_PutItemAway::
 EventScript_BufferPutAwayPocketName::
 	switch VAR_RESULT
 	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
-	case POCKET_MEDICINE,    EventScript_BufferPutAwayPocketMedicine
-	case POCKET_BATTLE,      EventScript_BufferPutAwayPocketBattleItems
 	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
 	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
+	case POCKET_TM_HM,     EventScript_BufferPutAwayPocketTMCase
 	case POCKET_BERRIES, EventScript_BufferPutAwayPocketBerryPouch
-	case POCKET_MEGA_STONES, EventScript_BufferPutAwayPocketMegaStones
 	end
 
 EventScript_BufferPutAwayPocketItems::
 	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
-	return
-
-EventScript_BufferPutAwayPocketMedicine::
-	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
-	return
-
-EventScript_BufferPutAwayPocketBattleItems::
-	bufferstdstring STR_VAR_3, STDSTRING_BATTLE_ITEMS
-	return
-
-EventScript_BufferPutAwayPocketMegaStones::
-	bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONES
 	return
 
 EventScript_BufferPutAwayPocketKeyItems::
@@ -295,6 +268,10 @@ EventScript_BufferPutAwayPocketKeyItems::
 
 EventScript_BufferPutAwayPocketPokeBalls::
 	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS
+	return
+
+EventScript_BufferPutAwayPocketTMCase::
+	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
 	return
 
 EventScript_BufferPutAwayPocketBerryPouch::
@@ -339,66 +316,3 @@ EventScript_NoCaseForHiddenCoins::
 	setvar VAR_RESULT, 0
 	releaseall
 	end
-
-Common_EventScript_ObtainFiniteItem::
-	special ConvertEmeraldChampionsFiniteReward
-	goto_if_eq VAR_RESULT, FALSE, Std_ObtainItem
-	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
-	setvar VAR_RESULT, TRUE
-	return
-
-Common_Text_DuplicateFiniteReward:
-	.string "You already own a {STR_VAR_1}.\p"
-	.string "This discovery earns a one-time\n"
-	.string "research payment of ¥{STR_VAR_2}!$"
-
-@ Called after an NPC trader accepts the offered party Pokemon (VAR_0x8004).
-@ Returns its held item first; Mail or a full Bag/PC cancels the trade.
-Common_EventScript_ReturnNPCTradeItem::
-	special ReturnInGameTradeHeldItem
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_TradeHeldItemFull
-	goto_if_eq VAR_RESULT, 4, Common_EventScript_TradeMailAttached
-	call_if_eq VAR_RESULT, 2, Common_EventScript_TradeHeldItemBag
-	call_if_eq VAR_RESULT, 3, Common_EventScript_TradeHeldItemPC
-	setvar VAR_RESULT, TRUE
-	return
-
-Common_EventScript_NPCTradeCancelled::
-	release
-	end
-
-Common_EventScript_NPCTradeRestrictedParty::
-	msgbox Common_Text_NPCTradeRestrictedParty, MSGBOX_DEFAULT
-	release
-	end
-
-Common_Text_NPCTradeRestrictedParty:
-	.string "Only 1 restricted Pokémon per\n"
-	.string "party. Store one in the PC first.$"
-
-Common_EventScript_TradeHeldItemBag:
-	msgbox Common_Text_TradeHeldItemBag, MSGBOX_DEFAULT
-	return
-Common_EventScript_TradeHeldItemPC:
-	msgbox Common_Text_TradeHeldItemPC, MSGBOX_DEFAULT
-	return
-Common_EventScript_TradeHeldItemFull:
-	msgbox Common_Text_TradeHeldItemFull, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
-	return
-Common_EventScript_TradeMailAttached:
-	msgbox Common_Text_TradeMailAttached, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
-	return
-Common_Text_TradeHeldItemBag:
-	.string "Your Pokémon's {STR_VAR_1}\n"
-	.string "was returned to your Bag.$"
-Common_Text_TradeHeldItemPC:
-	.string "Your Pokémon's {STR_VAR_1}\n"
-	.string "was returned to your item PC.$"
-Common_Text_TradeHeldItemFull:
-	.string "Make room in your Bag or item PC\n"
-	.string "for the held item before trading.$"
-Common_Text_TradeMailAttached:
-	.string "Please remove your Pokémon's Mail\n"
-	.string "before trading. Keep its message safe!$"

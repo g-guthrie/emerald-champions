@@ -7,7 +7,6 @@
 #include "battle_gimmick.h"
 #include "battle_z_move.h"
 #include "event_data.h"
-#include "field_weather.h"
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "main.h"
@@ -51,13 +50,12 @@ static inline bool32 RngSeedNotDefault(const rng_value_t *seed)
 #undef Q_4_12
 #define Q_4_12(n) (s32)((n) * 4096)
 
+#define TRAINER_RED_TEST    1
+#define TRAINER_LEAF_TEST   2
 #define PARTNER_STEVEN_TEST 1
 
-// Synthetic IDs occupy spare slots after campaign records. Never override a
-// real trainer: actual-party fixtures must read the production catalog intact.
 const struct Trainer gTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] =
 {
-    #include "../src/data/trainers.h"
     #include "battle/trainer_control.h"
 };
 
@@ -316,39 +314,9 @@ static u32 BattleTest_EstimateCost(void *data)
     return cost;
 }
 
-// World state a test may change in GIVEN and put back in THEN. A test that
-// stops before THEN - INVALID, a failed EXPECT, a crash - never puts it back,
-// and the next test in the same worker inherits it: fog left by an aborted
-// misty-gym fixture started every later battle in Misty Terrain, so status
-// moves failed in tests that never asked for mist. The runner restores it.
-static EWRAM_DATA struct
-{
-    u8 overworldWeather;
-    u8 nextOverworldWeather;
-    u8 flags[NUM_FLAG_BYTES];
-    u16 vars[VARS_COUNT];
-} sWorldBeforeTest = {0};
-
-static void SaveWorldBeforeTest(void)
-{
-    sWorldBeforeTest.overworldWeather = gWeatherPtr->currWeather;
-    sWorldBeforeTest.nextOverworldWeather = gWeatherPtr->nextWeather;
-    memcpy(sWorldBeforeTest.flags, gSaveBlock1Ptr->flags, sizeof(sWorldBeforeTest.flags));
-    memcpy(sWorldBeforeTest.vars, gSaveBlock1Ptr->vars, sizeof(sWorldBeforeTest.vars));
-}
-
-static void RestoreWorldAfterTest(void)
-{
-    gWeatherPtr->currWeather = sWorldBeforeTest.overworldWeather;
-    gWeatherPtr->nextWeather = sWorldBeforeTest.nextOverworldWeather;
-    memcpy(gSaveBlock1Ptr->flags, sWorldBeforeTest.flags, sizeof(sWorldBeforeTest.flags));
-    memcpy(gSaveBlock1Ptr->vars, sWorldBeforeTest.vars, sizeof(sWorldBeforeTest.vars));
-}
-
 static void BattleTest_SetUp(void *data)
 {
     const struct BattleTest *test = data;
-    SaveWorldBeforeTest();
     memset(STATE, 0, sizeof(*STATE));
     InitTestBattlers(test);
     InvokeTestFunction(test);
@@ -423,27 +391,6 @@ static void ResetTestInventory()
         if (DATA.inventory[i].itemId != ITEM_NONE)
             AddBagItem(DATA.inventory[i].itemId, DATA.inventory[i].quantity);
     }
-    // A full pocket must be rebuilt here: GIVEN-time Bag edits are cleared above.
-    if (DATA.fullPocket[0].itemId != ITEM_NONE)
-    {
-        struct BagPocket *pocket = &gBagPockets[GetItemPocket(DATA.fullPocket[0].itemId)];
-        AddBagItemWithoutDiscovery(DATA.fullPocket[0].itemId, MAX_BAG_ITEM_CAPACITY);
-        for (u32 slot = 0; slot < pocket->capacity; slot++)
-            if (BagPocket_GetSlotData(pocket, slot).itemId == ITEM_NONE)
-                BagPocket_SetSlotItemIdAndCount(pocket, slot, DATA.fullPocket[1].itemId, MAX_BAG_ITEM_CAPACITY);
-    }
-}
-
-void FillPlayerBagPocket(u32 sourceLine, enum Item item, enum Item filler)
-{
-    // Default filler: the first other item sorted into the same Bag pocket.
-    for (enum Item other = ITEM_NONE + 1; filler == ITEM_NONE && other < ITEMS_COUNT; other++)
-        if (other != item && GetItemPocket(other) == GetItemPocket(item))
-            filler = other;
-    INVALID_IF(GetItemPocket(item) != GetItemPocket(filler) || item == filler, "Filler must be another item from the same pocket");
-    DATA.explicitInventory = TRUE;
-    DATA.fullPocket[0].itemId = item;
-    DATA.fullPocket[1].itemId = filler;
 }
 
 static void StartBattle(void)
@@ -609,11 +556,6 @@ static void BattleTest_Run(void *data)
     {
         requiredPartySizes[Test_GetBattlerTrainer(i)] = DATA.currentMonIndexes[i] + 1;
     }
-    // Campaign doubles permit a lone player Pokemon. Keep both opposing
-    // battlers required and let the engine mark the empty player slot absent.
-    if (OW_DOUBLE_APPROACH_WITH_ONE_MON && gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-        && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER)))
-        requiredPartySizes[B_TRAINER_PLAYER] = 1;
     for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
     {
         if (DATA.partySizes[trainer] < requiredPartySizes[trainer])
@@ -1403,6 +1345,7 @@ static const char *const sGimmickIdentifiers[GIMMICKS_COUNT] =
     [GIMMICK_ULTRA_BURST] = "Ultra Burst",
     [GIMMICK_Z_MOVE] = "Z-Move",
     [GIMMICK_DYNAMAX] = "Dynamax",
+    [GIMMICK_TERA] = "Terastallize",
 };
 
 static u32 CountAiExpectMoves(struct ExpectedAIAction *expectedAction, enum BattlerId battlerId, bool32 printLog)
@@ -1426,10 +1369,6 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
     u32 id = DATA.trial.aiActionsPlayed[battlerId];
     struct ExpectedAIAction *expectedAction = &DATA.expectedAiActions[battlerId][id];
 
-    // Temporary decision trace for the current native encounter investigation.
-    if (strncmp(gTestRunnerState.test->name, "EC live review", 14) == 0)
-        Test_MgbaPrintf("AI decision turn=%d actor=%d move=%S target=%d", gBattleResults.battleTurnCounter + 1, battlerId, GetMoveName(moveId), target);
-
     if (!expectedAction->actionSet)
         return;
 
@@ -1444,7 +1383,7 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
             Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Expected %s, got MOVE", filename, expectedAction->sourceLine, sBattleActionNames[expectedAction->type]);
 
         if (expectedAction->explicitTarget && expectedAction->target != target)
-            Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Expected target %s, got %s with %S", filename, expectedAction->sourceLine, BattlerIdentifier(expectedAction->target), BattlerIdentifier(target), GetMoveName(moveId));
+            Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Expected target %s, got %s", filename, expectedAction->sourceLine, BattlerIdentifier(expectedAction->target), BattlerIdentifier(target));
 
         if ((DATA.targetTieOverride >= DATA.trial.targetTieCount) && (DATA.targetTieResolution == TARGET_TIE_CHOSEN))
             Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), "%s:%d: TIE_BREAK_TARGET override %d, greater than count %d of targets with tied best score", filename, expectedAction->sourceLine, DATA.targetTieOverride, DATA.trial.targetTieCount);
@@ -1484,9 +1423,9 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
             u32 moveSlot = GetMoveSlot(gBattleMons[battlerId].moves, moveId);
             PrintAiMoveLog(battlerId, moveSlot, moveId, gAiBattleData->finalScore[battlerId][expectedAction->target][moveSlot]);
             if (countExpected > 1)
-                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVES %S, got %S targeting %s", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId), BattlerIdentifier(target));
+                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVES %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
             else
-                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVE %S, got %S targeting %s", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId), BattlerIdentifier(target));
+                Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: Unmatched EXPECT_MOVE %S, got %S", filename, expectedAction->sourceLine, GetMoveName(expectedMoveId), GetMoveName(moveId));
         }
         if (expectedAction->notMove && !movePasses)
         {
@@ -1503,9 +1442,6 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
 
 void TestRunner_Battle_CheckSwitch(enum BattlerId battlerId, u32 partyIndex)
 {
-    // Temporary encounter-review trace, paired with the chosen-move trace.
-    if (strncmp(gTestRunnerState.test->name, "EC live review", 14) == 0)
-        Test_MgbaPrintf("AI switch turn=%d actor=%d party=%d", gBattleResults.battleTurnCounter + 1, battlerId, partyIndex);
     const char *filename = gTestRunnerState.test->filename;
     u32 id = DATA.trial.aiActionsPlayed[battlerId];
     struct ExpectedAIAction *expectedAction = &DATA.expectedAiActions[battlerId][id];
@@ -1700,6 +1636,118 @@ void TestRunner_Battle_CheckAiMoveScores(enum BattlerId battlerId)
         {
             CheckIfMaxScoreEqualExpectMove(battlerId, target, aiAction, filename);
         }
+    }
+}
+
+static s32 TryExp(s32 i, s32 n, enum BattlerId battlerId, u32 oldExp, u32 newExp)
+{
+    struct QueuedExpEvent *event;
+    s32 iMax = i + n;
+    for (; i < iMax; i++)
+    {
+        if (DATA.queuedEvents[i].type != QUEUED_EXP_EVENT)
+            continue;
+
+        event = &DATA.queuedEvents[i].as.exp;
+
+        if (event->battlerId == battlerId)
+        {
+            if (event->address <= 0xFFFF)
+            {
+                switch (event->type)
+                {
+                case EXP_EVENT_NEW_EXP:
+                    if (event->address == newExp)
+                        return i;
+                    break;
+                case EXP_EVENT_DELTA_EXP:
+                    if (event->address == 0)
+                        return i;
+                    else if ((s16)event->address == oldExp - newExp)
+                        return i;
+                    break;
+                }
+            }
+            else
+            {
+                switch (event->type)
+                {
+                case EXP_EVENT_NEW_EXP:
+                    *(u32 *)(u32)(event->address) = newExp;
+                    break;
+                case EXP_EVENT_DELTA_EXP:
+                    *(s32 *)(u32)(event->address) = oldExp - newExp;
+                    break;
+                }
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+void TestRunner_Battle_RecordExp(enum BattlerId battlerId, u32 oldExp, u32 newExp)
+{
+    s32 queuedEvent;
+    s32 match;
+    struct QueuedEvent *event;
+
+    if (DATA.trial.queuedEvent == DATA.queuedEventsCount)
+        return;
+
+    event = &DATA.queuedEvents[DATA.trial.queuedEvent];
+    switch (event->groupType)
+    {
+    case QUEUE_GROUP_NONE:
+    case QUEUE_GROUP_ONE_OF:
+        if (TryExp(DATA.trial.queuedEvent, event->groupSize, battlerId, oldExp, newExp) != -1)
+        {
+            DATA.trial.queuedEvent += event->groupSize;
+        }
+        else if (DATA.trial.queuedEvent == DATA.queuedEventsFailIndex
+              && DATA.queuedEvents[DATA.queuedEventsFailIndex].type == QUEUED_EXP_EVENT)
+        {
+            const char *filename = gTestRunnerState.test->filename;
+            u32 line = SourceLine(event->sourceLineOffset);
+            switch (DATA.queuedEvents[DATA.queuedEventsFailIndex].as.exp.type)
+            {
+            case EXP_EVENT_NEW_EXP:
+                Test_MgbaPrintf("%s:%d: Did you mean: EXPERIENCE_BAR(%s, exp: %d)", filename, line, BattlerIdentifier(battlerId), newExp);
+                break;
+            case EXP_EVENT_DELTA_EXP:
+                if (DATA.queuedEvents[DATA.queuedEventsFailIndex].as.exp.address == 0)
+                    Test_MgbaPrintf("%s:%d: Did you mean: EXPERIENCE_BAR(%s)", filename, line, BattlerIdentifier(battlerId));
+                else
+                    Test_MgbaPrintf("%s:%d: Did you mean: EXPERIENCE_BAR(%s, captureGainedExp: %d)", filename, line, BattlerIdentifier(battlerId), oldExp - newExp);
+                break;
+            }
+        }
+        break;
+    case QUEUE_GROUP_NONE_OF:
+        queuedEvent = DATA.trial.queuedEvent;
+        do
+        {
+            if ((match = TryExp(queuedEvent, event->groupSize, battlerId, oldExp, newExp)) != -1)
+            {
+                const char *filename = gTestRunnerState.test->filename;
+                u32 line = SourceLine(DATA.queuedEvents[match].sourceLineOffset);
+                if (gTestRunnerState.expectedFailState == EXPECT_FAIL_SCENE_OPEN)
+                    gTestRunnerState.expectedFailState = EXPECT_FAIL_SUCCESS;
+                Test_ExitWithResult(TEST_RESULT_FAIL, line, "%s:%d: Matched EXPERIENCE_BAR", filename, line);
+            }
+
+            queuedEvent += event->groupSize;
+            if (queuedEvent == DATA.queuedEventsCount)
+                break;
+
+            event = &DATA.queuedEvents[queuedEvent];
+            if (event->groupType == QUEUE_GROUP_NONE_OF)
+                continue;
+
+            if (TryExp(queuedEvent, event->groupSize, battlerId, oldExp, newExp) != -1)
+                DATA.trial.queuedEvent = queuedEvent + event->groupSize;
+        } while (FALSE);
+        break;
     }
 }
 
@@ -2006,11 +2054,11 @@ static const char *const sEventTypeMacros[] =
     [QUEUED_ANIMATION_EVENT] = "ANIMATION",
     [QUEUED_HP_EVENT] = "HP_BAR",
     [QUEUED_SUB_HIT_EVENT] = "SUB_HIT",
+    [QUEUED_EXP_EVENT] = "EXPERIENCE_BAR",
     [QUEUED_MESSAGE_EVENT] = "MESSAGE",
     [QUEUED_STATUS_EVENT] = "STATUS_ICON",
     [QUEUED_CATCH_CHANCE_EVENT] = "CATCH_CHANCE",
     [QUEUED_EFFECTIVENESS_EVENT] = "EFFECTIVENESS_SE",
-    [QUEUED_MUSIC_EVENT] = "MUSIC",
     [QUEUED_ITEM_POPUP_EVENT] = "ITEM_POPUP",
 };
 
@@ -2018,13 +2066,22 @@ static void TearDownBattle(void)
 {
     // Zero out the parties, data in them could potentially carry over
     for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
+    {
         ZeroPartyMons(gParties[trainer]);
+        gPartiesCount[trainer] = 0;
+    }
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
 
     // Set Battle Controllers to BATTLE_CONTROLLER_NONE
     for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         gBattlerBattleController[i] = BATTLE_CONTROLLER_NONE;
+    }
+
+    // Set battler party indexes to zero
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        gBattlerPartyIndexes[i] = 0; // make PARTY_SLOT_0 in upcoming
     }
 
     FreeMonSpritesGfx();
@@ -2181,7 +2238,6 @@ static void BattleTest_TearDown(void *data)
         TearDownBattle();
         STATE->hasTornDownBattle = TRUE;
     }
-    RestoreWorldAfterTest();
 }
 
 static bool32 BattleTest_CheckProgress(void *data)
@@ -2306,17 +2362,6 @@ void SetVarForTest(u32 sourceLine, u16 varId, u16 value)
     VarSet(varId, value);
 }
 
-void UseOverworldWeather_(u32 sourceLine)
-{
-    INVALID_IF(!STATE->runGiven, "UseOverworldWeather outside of GIVEN");
-    DATA.useOverworldWeather = TRUE;
-}
-
-bool32 TestRunner_Battle_UsesOverworldWeather(void)
-{
-    return DATA.useOverworldWeather;
-}
-
 void TestSetConfig(u32 sourceLine, enum ConfigTag configTag, u32 value)
 {
     INVALID_IF(!STATE->runGiven, "WITH_CONFIG outside of GIVEN");
@@ -2377,12 +2422,6 @@ void OpenPokemon(u32 sourceLine, enum BattleTrainer trainer, enum Species specie
     (*partySize)++;
 
     CreateMon(DATA.currentMon, species, 100, 0, OTID_STRUCT_PRESET(0));
-    // As in the game (IsMonTrainerOwned), a trainer battle's opponents and any
-    // partner are trainer-owned; wild foes are not. Mark them now so the
-    // battle-start sweep never recalculates stats a test sets explicitly.
-    if (trainer == B_TRAINER_PARTNER
-     || (trainer != B_TRAINER_PLAYER && (DATA.recordedBattle.battleFlags & BATTLE_TYPE_TRAINER)))
-        SetMonTrainerOwned(DATA.currentMon, TRUE);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         data = MOVE_NONE;
@@ -2477,18 +2516,23 @@ void Nature_(u32 sourceLine, u32 nature)
 
 void Ability_(u32 sourceLine, enum Ability ability)
 {
-    u32 slot;
+    s32 i;
     enum Species species;
+    const struct SpeciesInfo *info;
     INVALID_IF(!DATA.currentMon, "Ability outside of PLAYER/OPPONENT");
     INVALID_IF(ability >= ABILITIES_COUNT, "Illegal ability id: %d", ability);
     species = GetMonData(DATA.currentMon, MON_DATA_SPECIES);
-    // Resolve the shared official and Inclement Ability slots.
-    if (FindSpeciesAbilitySlotForOwner(species, ability, IsMonTrainerOwned(DATA.currentMon), &slot))
+    info = &gSpeciesInfo[species];
+    for (i = 0; i < NUM_ABILITY_SLOTS; i++)
     {
-        SetMonData(DATA.currentMon, MON_DATA_ABILITY_NUM, &slot);
+        if (info->abilities[i] == ability)
+        {
+            SetMonData(DATA.currentMon, MON_DATA_ABILITY_NUM, &i);
+            break;
+        }
     }
     // Store forced ability to be set when the battle starts if invalid.
-    else
+    if (i == NUM_ABILITY_SLOTS)
     {
         DATA.forcedAbilities[DATA.battlerParty][DATA.currentPartyIndex] = ability;
     }
@@ -2696,6 +2740,13 @@ void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor)
     SetGimmick(sourceLine, DATA.battlerParty, DATA.currentPartyIndex, GIMMICK_DYNAMAX);
 }
 
+void TeraType_(u32 sourceLine, enum Type teraType)
+{
+    INVALID_IF(!DATA.currentMon, "TeraType outside of PLAYER/OPPONENT");
+    SetMonData(DATA.currentMon, MON_DATA_TERA_TYPE, &teraType);
+    SetGimmick(sourceLine, DATA.battlerParty, DATA.currentPartyIndex, GIMMICK_TERA);
+}
+
 void Shadow_(u32 sourceLine, bool32 isShadow)
 {
     INVALID_IF(!DATA.currentMon, "Shadow outside of PLAYER/OPPONENT");
@@ -2835,10 +2886,7 @@ void TestRunner_Battle_CheckBattleRecordActionType(enum BattlerId battlerId, u32
         if (DATA.trial.lastActionTurn == gBattleResults.battleTurnCounter)
         {
             const char *filename = gTestRunnerState.test->filename;
-            Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0),
-                "%s:%d: TURN %d incomplete (%s requests record type %d at index %d)",
-                filename, SourceLine(0), gBattleResults.battleTurnCounter + 1,
-                BattlerIdentifier(battlerId), actionType, recordIndex);
+            Test_ExitWithResult(TEST_RESULT_FAIL, SourceLine(0), "%s:%d: TURN %d incomplete", filename, SourceLine(0), gBattleResults.battleTurnCounter + 1);
         }
     }
 }
@@ -3670,6 +3718,50 @@ void QueueSubHit(u32 sourceLine, struct BattlePokemon *battler, struct SubHitEve
     };
 }
 
+void QueueExp(u32 sourceLine, struct BattlePokemon *battler, struct ExpEventContext ctx)
+{
+    enum BattlerId battlerId = battler - gBattleMons;
+    u32 type;
+    uintptr_t address;
+
+    if (gTestRunnerState.expectedFailState == EXPECT_FAIL_OPEN)
+        gTestRunnerState.expectedFailState = EXPECT_FAIL_SCENE_OPEN;
+
+    INVALID_IF(!STATE->runScene, "EXPERIENCE_BAR outside of SCENE");
+    if (DATA.queuedEventsCount == MAX_QUEUED_EVENTS)
+        Test_ExitWithResult(TEST_RESULT_ERROR, sourceLine, "%s:%d: EXPERIENCE_BAR exceeds MAX_QUEUED_EVENTS", gTestRunnerState.test->filename, sourceLine);
+
+    if (ctx.explicitExp)
+    {
+        type = EXP_EVENT_NEW_EXP;
+        address = (u32)ctx.exp;
+    }
+    else if (ctx.explicitCaptureGainedExp)
+    {
+        INVALID_IF(ctx.captureGainedExp == NULL, "captureGainedExp is NULL");
+        type = EXP_EVENT_DELTA_EXP;
+        *ctx.captureGainedExp = 0;
+        address = (uintptr_t)ctx.captureGainedExp;
+    }
+    else
+    {
+        type = EXP_EVENT_DELTA_EXP;
+        address = 0;
+    }
+
+    DATA.queuedEvents[DATA.queuedEventsCount++] = (struct QueuedEvent) {
+        .type = QUEUED_EXP_EVENT,
+        .sourceLineOffset = SourceLineOffset(sourceLine),
+        .groupType = QUEUE_GROUP_NONE,
+        .groupSize = 1,
+        .as = { .exp = {
+            .battlerId = battlerId,
+            .type = type,
+            .address = address,
+        }},
+    };
+}
+
 void QueueMessage(u32 sourceLine, const u8 *pattern)
 {
     if (gTestRunnerState.expectedFailState == EXPECT_FAIL_OPEN)
@@ -3885,75 +3977,6 @@ void TestRunner_Battle_RecordEffectivenessSound(u32 battlerId, u32 soundId)
                 continue;
 
             if (TryEffectivenessSound(queuedEvent, event->groupSize, battlerId, soundId) != -1)
-                DATA.trial.queuedEvent = queuedEvent + event->groupSize;
-        } while (FALSE);
-        break;
-    }
-}
-
-void QueueMusic(u32 sourceLine, u32 songId)
-{
-    INVALID_IF(!STATE->runScene, "MUSIC outside of SCENE");
-    if (DATA.queuedEventsCount == MAX_QUEUED_EVENTS)
-        Test_ExitWithResult(TEST_RESULT_ERROR, sourceLine, "%s:%d: MUSIC exceeds MAX_QUEUED_EVENTS", gTestRunnerState.test->filename, sourceLine);
-    DATA.queuedEvents[DATA.queuedEventsCount++] = (struct QueuedEvent) {
-        .type = QUEUED_MUSIC_EVENT,
-        .sourceLineOffset = SourceLineOffset(sourceLine),
-        .groupType = QUEUE_GROUP_NONE,
-        .groupSize = 1,
-        .as = { .music = { .songId = songId } },
-    };
-}
-
-static s32 TryMusic(s32 i, s32 n, u32 songId)
-{
-    for (s32 iMax = i + n; i < iMax; i++)
-    {
-        if (DATA.queuedEvents[i].type == QUEUED_MUSIC_EVENT
-         && DATA.queuedEvents[i].as.music.songId == songId)
-            return i;
-    }
-    return -1;
-}
-
-// Called whenever a song starts on the BGM player during a battle test.
-void TestRunner_Battle_RecordMusic(u32 songId)
-{
-    s32 queuedEvent;
-    s32 match;
-    struct QueuedEvent *event;
-
-    if (!gMain.inBattle || DATA.trial.queuedEvent == DATA.queuedEventsCount)
-        return;
-
-    event = &DATA.queuedEvents[DATA.trial.queuedEvent];
-    switch (event->groupType)
-    {
-    case QUEUE_GROUP_NONE:
-    case QUEUE_GROUP_ONE_OF:
-        if (TryMusic(DATA.trial.queuedEvent, event->groupSize, songId) != -1)
-            DATA.trial.queuedEvent += event->groupSize;
-        break;
-    case QUEUE_GROUP_NONE_OF:
-        queuedEvent = DATA.trial.queuedEvent;
-        do
-        {
-            if ((match = TryMusic(queuedEvent, event->groupSize, songId)) != -1)
-            {
-                const char *filename = gTestRunnerState.test->filename;
-                u32 line = SourceLine(DATA.queuedEvents[match].sourceLineOffset);
-                Test_ExitWithResult(TEST_RESULT_FAIL, line, "%s:%d: Matched MUSIC", filename, line);
-            }
-
-            queuedEvent += event->groupSize;
-            if (queuedEvent == DATA.queuedEventsCount)
-                break;
-
-            event = &DATA.queuedEvents[queuedEvent];
-            if (event->groupType == QUEUE_GROUP_NONE_OF)
-                continue;
-
-            if (TryMusic(queuedEvent, event->groupSize, songId) != -1)
                 DATA.trial.queuedEvent = queuedEvent + event->groupSize;
         } while (FALSE);
         break;

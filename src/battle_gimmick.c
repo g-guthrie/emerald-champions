@@ -6,16 +6,13 @@
 #include "battle_gimmick.h"
 #include "battle_z_move.h"
 #include "battle_setup.h"
-#include "emerald_champions_battle_plan.h"
 #include "battle_util.h"
 #include "item.h"
-#include "mega_stone_rewards.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "sprite.h"
 #include "util.h"
 #include "test_runner.h"
-#include "constants/emerald_champions.h"
 
 #include "data/gimmicks.h"
 
@@ -39,18 +36,7 @@ void AssignUsableGimmicks(void)
 // Returns whether a battler is able to use a gimmick. Checks consumption and gimmick specific functions.
 bool32 CanActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
-#if !TESTING
-    if (!IsEmeraldChampionsGimmickAllowed(gimmick))
-        return FALSE;
-#endif
     return gGimmicksInfo[gimmick].CanActivate != NULL && gGimmicksInfo[gimmick].CanActivate(battler);
-}
-
-bool32 IsEmeraldChampionsGimmickAllowed(enum Gimmick gimmick)
-{
-    if (!EMERALD_CHAMPIONS_MEGA_ONLY)
-        return TRUE;
-    return gimmick == GIMMICK_NONE || gimmick == GIMMICK_MEGA;
 }
 
 // Returns whether the player has a gimmick selected while in the move selection menu.
@@ -76,7 +62,7 @@ enum Gimmick GetActiveGimmick(enum BattlerId battler)
     return gBattleStruct->gimmick.activeGimmick[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]];
 }
 
-// Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick.
+// Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
     // There are no trainer party settings in battles, but the AI needs to know which gimmick to use.
@@ -89,6 +75,8 @@ bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmi
 
     // When reading trainer party data, we load invalid values in struct Pokemon to indicate the gimmick should not be used
     struct Pokemon *mon = GetBattlerMon(battler);
+    if (gimmick == GIMMICK_TERA && GetMonData(mon, MON_DATA_TERA_TYPE) != TYPE_MYSTERY)
+        return TRUE;
     if (gimmick == GIMMICK_DYNAMAX && GetMonData(mon, MON_DATA_DYNAMAX_LEVEL) != BLOCK_AI_DYNAMAX)
         return TRUE;
     #endif
@@ -110,47 +98,9 @@ bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick)
     return gBattleStruct->gimmick.activated[battler][gimmick];
 }
 
-u32 GetRemainingMegaEvolutions(enum BattlerId battler)
-{
-    u32 limit = EmeraldChampions_GetMegaEvolutionLimit(battler);
-    u32 used = gBattleStruct->gimmick.megaEvolutionsUsed[GetBattlerTrainer(battler)];
-    return used < limit ? limit - used : 0;
-}
-
-// Whether this battler may still activate `gimmick` right now. Mega asks the
-// trainer's authored allowance instead of the one-per-side default, so a team
-// licensed for two stones can still evolve after its partner already has.
-bool32 CanTrainerStillActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
-{
-    u32 reserved = 0;
-    enum BattlerId partner;
-
-    if (gimmick != GIMMICK_MEGA || EmeraldChampions_GetMegaEvolutionLimit(battler) == 1)
-        return !HasTrainerUsedGimmick(battler, gimmick);
-
-    if (GetActiveGimmick(battler) == GIMMICK_MEGA)
-        return FALSE;
-
-    // A partner that has already committed to Mega this turn holds one charge.
-    partner = GetPartnerBattler(battler);
-    if (IsDoubleBattle() && IsPartnerMonFromSameTrainer(battler)
-     && (gBattleStruct->gimmick.toActivate & (1u << partner))
-     && gBattleStruct->gimmick.usableGimmick[partner] == GIMMICK_MEGA
-     && GetActiveGimmick(partner) != GIMMICK_MEGA)
-        reserved = 1;
-
-    return GetRemainingMegaEvolutions(battler) > reserved;
-}
-
 // Sets a gimmick as used by a trainer with checks for Multi Battles.
 void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
 {
-    if (gimmick == GIMMICK_MEGA)
-    {
-        gBattleStruct->gimmick.megaEvolutionsUsed[GetBattlerTrainer(battler)]++;
-        // The Trainer Card records every Mega the player watches, either side.
-        EmeraldChampions_RecordMegaWitnessed(gBattleMons[battler].item);
-    }
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
     if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
         gBattleStruct->gimmick.activated[GetPartnerBattler(battler)][gimmick] = TRUE;
@@ -317,6 +267,7 @@ void LoadIndicatorSpritesGfx(void)
 {
     LoadSpritePalette(&sSpritePalette_MiscIndicator);
     LoadSpritePalette(&sSpritePalette_MegaIndicator);
+    LoadSpritePalette(&sSpritePalette_TeraIndicator);
 }
 
 static void SpriteCb_GimmickIndicator(struct Sprite *sprite)
@@ -328,12 +279,9 @@ static void SpriteCb_GimmickIndicator(struct Sprite *sprite)
     sprite->y2 = gSprites[gHealthboxSpriteIds[battler]].y2;
 }
 
-static struct Sprite *GetIndicatorSprite(u32 healthboxId)
+static inline u32 GetIndicatorSpriteId(u32 healthboxId)
 {
-    u32 id = gBattleStruct->gimmick.indicatorSpriteId[gSprites[healthboxId].hMain_Battler];
-    // Safari's player healthbox has no indicator (zero). Failed allocations
-    // return MAX_SPRITES, which is not a live indicator either.
-    return id != 0 && id < MAX_SPRITES ? &gSprites[id] : NULL;
+    return gBattleStruct->gimmick.indicatorSpriteId[gSprites[healthboxId].hMain_Battler];
 }
 
 const u32 *GetIndicatorSpriteSrc(enum BattlerId battler)
@@ -347,6 +295,9 @@ const u32 *GetIndicatorSpriteSrc(enum BattlerId battler)
         else
             return (u32 *)&sAlphaIndicatorGfx;
     }
+
+    if (gimmick == GIMMICK_TERA) // special case
+        return (u32 *)sTeraIndicatorDataPtrs[GetBattlerTeraType(battler)];
 
     if (gGimmicksInfo[gimmick].indicatorData != NULL)
         return (u32 *)gGimmicksInfo[gimmick].indicatorData;
@@ -371,9 +322,9 @@ void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
 {
     enum BattlerId battler = gSprites[healthboxId].hMain_Battler;
     u32 palTag = GetIndicatorPalTag(battler);
-    struct Sprite *sprite = GetIndicatorSprite(healthboxId);
+    struct Sprite *sprite = &gSprites[GetIndicatorSpriteId(healthboxId)];
 
-    if (sprite == NULL)
+    if (GetIndicatorSpriteId(healthboxId) == 0) // safari zone means the player doesn't have an indicator sprite id
         return;
 
     if (palTag != TAG_NONE)
@@ -398,24 +349,19 @@ void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
 
 void UpdateIndicatorOamPriority(u32 healthboxId, u32 oamPriority)
 {
-    struct Sprite *sprite = GetIndicatorSprite(healthboxId);
-    if (sprite != NULL)
-        sprite->oam.priority = oamPriority;
+    gSprites[GetIndicatorSpriteId(healthboxId)].oam.priority = oamPriority;
 }
 
 void UpdateIndicatorLevelData(u32 healthboxId, u32 level)
 {
     s32 xDelta = 0;
-    struct Sprite *sprite = GetIndicatorSprite(healthboxId);
-    if (sprite == NULL)
-        return;
 
     if (level >= 100)
         xDelta -= 4;
     else if (level < 10)
         xDelta += 5;
 
-    sprite->tLevelXDelta = xDelta;
+    gSprites[GetIndicatorSpriteId(healthboxId)].tLevelXDelta = xDelta;
 }
 
 static const s8 sIndicatorPositions[][2] =

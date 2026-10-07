@@ -270,6 +270,8 @@ enum  BattleMoveEffects
     EFFECT_DRAGON_CHEER,
     EFFECT_LAST_RESPECTS,
     EFFECT_TIDY_UP,
+    EFFECT_TERA_BLAST,
+    EFFECT_TERA_STARSTORM,
     EFFECT_SHELL_SIDE_ARM,
     EFFECT_RAPID_SPIN,
     EFFECT_RECOIL,
@@ -281,6 +283,7 @@ enum  BattleMoveEffects
     EFFECT_CEASELESS_EDGE, // Same applies to spikes
     EFFECT_SPECIES_POWER_OVERRIDE, // Uses argument field to for the species, power and (number of hits, used only for multi hit moves)
     EFFECT_SCALE_SHOT,
+    EFFECT_SECRET_POWER,
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

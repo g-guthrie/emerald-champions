@@ -1,5 +1,4 @@
 #include "global.h"
-#include "move.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -618,9 +617,21 @@ static void SwitchToDebugViewFromAiParty(u8 taskId);
 // code
 static struct BattleDebugMenu *GetStructPtr(u8 taskId)
 {
-    return (struct BattleDebugMenu *)GetWordTaskArg(taskId, 0);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
+
+    return (struct BattleDebugMenu*)(T1_READ_PTR(taskDataPtr));
 }
 
+static void SetStructPtr(u8 taskId, void *ptr)
+{
+    u32 structPtr = (u32)(ptr);
+    u8 *taskDataPtr = (u8 *)(&gTasks[taskId].data[0]);
+
+    taskDataPtr[0] = structPtr >> 0;
+    taskDataPtr[1] = structPtr >> 8;
+    taskDataPtr[2] = structPtr >> 16;
+    taskDataPtr[3] = structPtr >> 24;
+}
 
 static void MainCB2(void)
 {
@@ -677,7 +688,7 @@ void CB2_BattleDebugMenu(void)
     case 4:
         taskId = CreateTask(Task_DebugMenuFadeIn, 0);
         data = AllocZeroed(sizeof(struct BattleDebugMenu));
-        SetWordTaskArg(taskId, 0, (u32)data);
+        SetStructPtr(taskId, data);
 
         data->battlerId = gBattleStruct->debugBattler;
         data->battlerWindowId = AddWindow(&sBattlerWindowTemplate);
@@ -922,10 +933,10 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
 {
     u32 i, j, count;
     u8 *text = Alloc(0x50), *txtPtr;
-    struct AiPartyMon *aiMons = gAiPartyData->mons[GetBattlerTrainer(data->aiBattlerId)];
+    struct AiPartyMon *aiMons = gAiPartyData->mons[GetBattlerSide(data->aiBattlerId)];
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
-    count = gAiPartyData->count[GetBattlerTrainer(data->aiBattlerId)];
+    count = gAiPartyData->count[GetBattlerSide(data->aiBattlerId)];
     for (i = 0; i < count; i++)
     {
         if (aiMons[i].wasSentInBattle)
@@ -1051,8 +1062,8 @@ static void Task_ShowAiParty(u8 taskId)
         LoadMonIconPalettes();
         LoadPartyMenuAilmentGfx();
         data->aiBattlerId = data->battlerId;
-        aiMons = gAiPartyData->mons[GetBattlerTrainer(data->aiBattlerId)];
-        for (i = 0; i < gAiPartyData->count[GetBattlerTrainer(data->aiBattlerId)]; i++)
+        aiMons = gAiPartyData->mons[GetBattlerSide(data->aiBattlerId)];
+        for (i = 0; i < gAiPartyData->count[GetBattlerSide(data->aiBattlerId)]; i++)
         {
             enum Species species = SPECIES_NONE; // Question mark
             if (aiMons[i].wasSentInBattle && aiMons[i].species)
@@ -1892,7 +1903,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         break;
     case LIST_ITEM_PP:
         data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = GetMoveMaxPP(gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId]);
+        data->modifyArrows.maxValue = CalculatePPWithBonus(gBattleMons[data->battlerId].moves[data->currentSecondaryListItemId], gBattleMons[data->battlerId].ppBonuses, data->currentSecondaryListItemId);
         data->modifyArrows.maxDigits = 2;
         data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].pp[data->currentSecondaryListItemId];
         data->modifyArrows.typeOfVal = VAL_U8;

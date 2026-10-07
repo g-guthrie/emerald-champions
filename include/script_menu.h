@@ -24,8 +24,11 @@ struct DynamicMultichoiceStack
 void MultichoiceDynamic_InitStack(u32 capacity);
 void MultichoiceDynamic_ReallocStack(u32 newCapacity);
 bool32 MultichoiceDynamic_StackFull(void);
+bool32 MultichoiceDynamic_StackEmpty(void);
 u32 MultichoiceDynamic_StackSize(void);
 void MultichoiceDynamic_PushElement(struct ListMenuItem item);
+struct ListMenuItem *MultichoiceDynamic_PopElement(void);
+struct ListMenuItem *MultichoiceDynamic_PeekElement(void);
 struct ListMenuItem *MultichoiceDynamic_PeekElementAt(u32 index);
 void MultichoiceDynamic_DestroyStack(void);
 bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u8 maxBeforeScroll, u32 initialRow, u32 callbackSet);
@@ -43,7 +46,5 @@ int DisplayTextAndGetWidth(const u8 *str, int prevWidth);
 int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width);
 bool16 ScriptMenu_CreatePCMultichoice(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
-
-bool16 ScriptMenu_CreateStartMenuForPokenavTutorial(void);
 
 #endif //GUARD_SCRIPT_MENU_H

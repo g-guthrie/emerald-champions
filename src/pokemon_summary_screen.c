@@ -1,7 +1,4 @@
 #include "global.h"
-#include "guided_tutorial.h"
-#include "caps.h"
-#include "move.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -108,7 +105,6 @@
 
 #define MOVE_SELECTOR_SPRITES_COUNT 10
 #define TYPE_ICON_SPRITE_COUNT (MAX_MON_MOVES + 1)
-#define PSS_PAL_HOT_SPRING_POKERUS 10
 // for the spriteIds field in PokemonSummaryScreenData
 enum
 {
@@ -135,39 +131,41 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     /*0x04*/ MainCallback callback;
     /*0x08*/ struct Sprite *markingsSprite;
     /*0x0C*/ struct Pokemon currentMon;
-    struct PokeSummary
+    /*0x70*/ struct PokeSummary
     {
-        enum Species species;
-        enum Species species2;
-        u8 isEgg:1;
+        enum Species species; // 0x0
+        enum Species species2; // 0x2
+        u8 isEgg:1; // 0x4
         u8 isShiny:1;
-        u8 isTrainerOwned:1;
-        u8 padding:5;
-        u8 level;
-        u8 ribbonCount;
-        u8 ailment;
-        u8 abilityNum;
-        metloc_u8_t metLocation;
-        u8 metLevel;
-        u8 metGame;
-        u32 pid;
-        u32 exp;
-        enum Move moves[MAX_MON_MOVES];
-        u8 pp[MAX_MON_MOVES];
-        u16 currentHP;
-        u16 maxHP;
-        u16 atk;
-        u16 def;
-        u16 spatk;
-        u16 spdef;
-        u16 speed;
-        enum Item item;
-        u16 friendship;
-        u8 OTGender;
-        u8 nature;
-        u8 sanity;
-        u8 OTName[17];
-        u32 OTID;
+        u8 padding:6;
+        u8 level; // 0x5
+        u8 ribbonCount; // 0x6
+        u8 ailment; // 0x7
+        u8 abilityNum; // 0x8
+        metloc_u8_t metLocation; // 0x9
+        u8 metLevel; // 0xA
+        u8 metGame; // 0xB
+        u32 pid; // 0xC
+        u32 exp; // 0x10
+        enum Move moves[MAX_MON_MOVES]; // 0x14
+        u8 pp[MAX_MON_MOVES]; // 0x1C
+        u16 currentHP; // 0x20
+        u16 maxHP; // 0x22
+        u16 atk; // 0x24
+        u16 def; // 0x26
+        u16 spatk; // 0x28
+        u16 spdef; // 0x2A
+        u16 speed; // 0x2C
+        enum Item item; // 0x2E
+        u16 friendship; // 0x30
+        u8 OTGender; // 0x32
+        u8 nature; // 0x33
+        u8 ppBonuses; // 0x34
+        u8 sanity; // 0x35
+        u8 OTName[17]; // 0x36
+        u32 OTID; // 0x48
+        enum Type teraType;
+        u8 mintNature;
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
     u8 mode;
@@ -217,6 +215,7 @@ static void PssScrollRight(u8);
 static void PssScrollRightEnd(u8);
 static void PssScrollLeft(u8);
 static void PssScrollLeftEnd(u8);
+static void TryDrawExperienceProgressBar(void);
 static void SwitchToMoveSelection(u8);
 static void Task_HandleInput_MoveSelect(u8);
 static bool8 HasMoreThanOneMove(void);
@@ -225,8 +224,13 @@ static void CloseMoveSelectMode(u8);
 static void SwitchToMovePositionSwitchMode(u8);
 static void Task_HandleInput_MovePositionSwitch(u8);
 static void ExitMovePositionSwitchMode(u8, bool8);
+static void SwapMonMoves(struct Pokemon *, u8, u8);
+static void SwapBoxMonMoves(struct BoxPokemon *, u8, u8);
 static void Task_SetHandleReplaceMoveInput(u8);
 static void Task_HandleReplaceMoveInput(u8);
+static bool8 CanReplaceMove(void);
+static void ShowCantForgetHMsWindow(u8);
+static void Task_HandleInputCantForgetHMsMoves(u8);
 static void DrawPagination(void);
 static void PositionPowerAccSlidingWindow(u16, s16);
 static void Task_SlidePowerAccWindow(u8);
@@ -236,6 +240,7 @@ static void PositionStatusSlidingWindow(u16, s16);
 static void Task_SlideStatusWindow(u8);
 static void TilemapFiveMovesDisplay(u16 *, u16, bool8);
 static void DrawPokerusCuredSymbol(struct Pokemon *);
+static void DrawExperienceProgressBar(struct Pokemon *);
 static void DrawContestMoveHearts(enum Move move);
 static void LimitEggSummaryPageDisplay(void);
 static void ResetWindows(void);
@@ -274,7 +279,7 @@ static void BufferLeftColumnStats(void);
 static void PrintLeftColumnStats(void);
 static void BufferRightColumnStats(void);
 static void PrintRightColumnStats(void);
-static void PrintLevelAndBadgeLevel(void);
+static void PrintExpPointsNextLevel(void);
 static void PrintBattleMoves(void);
 static void Task_PrintBattleMoves(u8);
 static void PrintMoveNameAndPP(u8);
@@ -285,6 +290,7 @@ static void PrintMoveDetails(enum Move move);
 static void PrintNewMoveDetailsOrCancelText(void);
 static void AddAndFillMoveNamesWindow(void);
 static void SwapMovesNamesPP(u8, u8);
+static void PrintHMMovesCantBeForgotten(void);
 static void ResetSpriteIds(void);
 static void SetSpriteInvisibility(u8, bool8);
 static void HidePageSpecificSprites(void);
@@ -671,7 +677,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 6,
         .height = 6,
-        .paletteNum = 9,
+        .paletteNum = 6,
         .baseBlock = 507,
     },
     [PSS_DATA_WINDOW_SKILLS_STATS_RIGHT] = {
@@ -680,7 +686,7 @@ static const struct WindowTemplate sPageSkillsTemplate[] =
         .tilemapTop = 7,
         .width = 3,
         .height = 6,
-        .paletteNum = 9,
+        .paletteNum = 6,
         .baseBlock = 543,
     },
     [PSS_DATA_WINDOW_EXP] = {
@@ -761,7 +767,7 @@ static const TaskFunc sTextPrinterTasks[] =
     [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves
 };
 
-static const u8 sText_Relearn[] = _("{START_BUTTON} Relearn");
+static const u8 sText_Relearn[] = _("{START_BUTTON} RELEARN"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
 static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GRAY}"); // This is also affected by palettes, apparently
@@ -1208,7 +1214,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     else
         sMonSummaryScreen->isBoxMon = FALSE;
 
-    u32 maxPageIndex = C_HIDE_CONTEST_DATA ? PSS_PAGE_COUNT - 2 : PSS_PAGE_COUNT - 1;
+    u32 maxPageIndex = PSS_PAGE_COUNT - (C_HIDE_CONTEST_DATA ? 2 : 1);
     switch (mode)
     {
     case SUMMARY_MODE_NORMAL:
@@ -1347,8 +1353,7 @@ static bool8 LoadGraphics(void)
         gMain.state++;
         break;
     case 15:
-        if (P_SUMMARY_SCREEN_MOVE_RELEARNER)
-            UpdateMoveRelearnerState();
+        UpdateMoveRelearnerState();
         PutPageWindowTilemaps(sMonSummaryScreen->currPageIndex);
         gMain.state++;
         break;
@@ -1460,12 +1465,6 @@ static bool8 DecompressGraphics(void)
     case 6:
         LoadPalette(gSummaryScreen_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
         LoadPalette(&gPPTextPalette, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
-        LoadPalette(gSummaryScreen_Pal + BG_PLTT_ID(6), BG_PLTT_ID(9), PLTT_SIZE_4BPP);
-        static const u16 gold[] = {RGB(12, 7, 0), RGB(25, 17, 0)};
-        LoadPalette(gold, BG_PLTT_ID(9) + 14, sizeof(gold));
-        // Keep the recovered marker's background, changing only its ink to nature red.
-        LoadPalette(gSummaryScreen_Pal, BG_PLTT_ID(PSS_PAL_HOT_SPRING_POKERUS), PLTT_SIZE_4BPP);
-        LoadPalette(gSummaryScreen_Pal + BG_PLTT_ID(6) + 5, BG_PLTT_ID(PSS_PAL_HOT_SPRING_POKERUS) + 1, PLTT_SIZEOF(1));
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
@@ -1519,18 +1518,9 @@ static void CopyMonToSummaryStruct(struct Pokemon *mon)
     }
 }
 
-static void ExtractMonMovesToSummaryStruct(struct Pokemon *mon)
-{
-    struct PokeSummary *sum = &sMonSummaryScreen->summary;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        sum->moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
-        sum->pp[i] = GetMonData(mon, MON_DATA_PP1 + i);
-    }
-}
-
 static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
 {
+    u32 i;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     // Spread the data extraction over multiple frames.
     switch (sMonSummaryScreen->switchCounter)
@@ -1541,7 +1531,6 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->exp = GetMonData(mon, MON_DATA_EXP);
         sum->level = GetMonData(mon, MON_DATA_LEVEL);
         sum->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
-        sum->isTrainerOwned = IsMonTrainerOwned(mon);
         sum->item = GetMonData(mon, MON_DATA_HELD_ITEM);
         sum->pid = GetMonData(mon, MON_DATA_PERSONALITY);
         sum->sanity = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
@@ -1553,7 +1542,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
 
         break;
     case 1:
-        ExtractMonMovesToSummaryStruct(mon);
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            sum->moves[i] = GetMonData(mon, MON_DATA_MOVE1+i);
+            sum->pp[i] = GetMonData(mon, MON_DATA_PP1+i);
+        }
+        sum->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
         break;
     case 2:
         ExtractMonSkillStatsData(mon, sum);
@@ -1571,6 +1565,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         break;
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
+        sum->teraType = GetMonData(mon, MON_DATA_TERA_TYPE);
         sum->isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
         return TRUE;
     }
@@ -1745,24 +1740,23 @@ static void Task_HandleInput(u8 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
-        u16 pressed = IsRivalDexNavTutorialActive() ? RivalTutorialSummaryKeys(sMonSummaryScreen->currPageIndex) : gMain.newKeys;
-        if ((pressed & (DPAD_UP)))
+        if (JOY_NEW(DPAD_UP))
         {
             ChangeSummaryPokemon(taskId, -1);
         }
-        else if ((pressed & (DPAD_DOWN)))
+        else if (JOY_NEW(DPAD_DOWN))
         {
             ChangeSummaryPokemon(taskId, 1);
         }
-        else if ((pressed & (DPAD_LEFT)))
+        else if (JOY_NEW(DPAD_LEFT))
         {
             ChangePage(taskId, -1);
         }
-        else if ((pressed & (DPAD_RIGHT)))
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             ChangePage(taskId, 1);
         }
-        else if ((pressed & (A_BUTTON)))
+        else if (JOY_NEW(A_BUTTON))
         {
             if (sMonSummaryScreen->currPageIndex != PSS_PAGE_SKILLS)
             {
@@ -1802,13 +1796,13 @@ static void Task_HandleInput(u8 taskId)
                 }
             }
         }
-        else if ((pressed & (B_BUTTON)))
+        else if (JOY_NEW(B_BUTTON))
         {
             StopPokemonAnimations();
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
-        else if (DEBUG_POKEMON_SPRITE_VISUALIZER && (pressed & (SELECT_BUTTON)) && !gMain.inBattle)
+        else if (DEBUG_POKEMON_SPRITE_VISUALIZER && JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
         {
             sMonSummaryScreen->callback = CB2_Pokemon_Sprite_Visualizer;
             StopPokemonAnimations();
@@ -1895,9 +1889,8 @@ static void ShowMonSkillsInfo(u8 taskId, s16 mode)
 
 void ExtractMonSkillStatsData(struct Pokemon *mon, struct PokeSummary *sum)
 {
-    // Emerald Champions: the tutor rewrites Nature, so the memo and the stat
-    // colouring both report the hidden Nature the game actually battles with.
-    sum->nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
+    sum->nature = GetNature(mon);
+    sum->mintNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
     sum->currentHP = GetMonData(mon, MON_DATA_HP);
     sum->maxHP = GetMonData(mon, MON_DATA_MAX_HP);
     sum->atk = GetMonData(mon, MON_DATA_ATK);
@@ -1934,10 +1927,18 @@ bool32 HasAnyRelearnableMoves(enum MoveRelearnerStates state)
 
 static void UpdateMoveRelearnerState(void)
 {
-    // One legality rule for the whole game: the Summary relearner offers the
-    // same complete list the Poke Center tutor does.
-    gMoveRelearnerState = MOVE_RELEARNER_ALL_MOVES;
-    sMonSummaryScreen->hasRelearnableMoves = HasAnyRelearnableMoves(MOVE_RELEARNER_ALL_MOVES);
+    u32 state;
+    sMonSummaryScreen->hasRelearnableMoves = FALSE;
+    for (u32 i = 0; i < MOVE_RELEARNER_COUNT; i++)
+    {
+        state = (gMoveRelearnerState + i) % MOVE_RELEARNER_COUNT;
+        if (HasAnyRelearnableMoves(state))
+        {
+            sMonSummaryScreen->hasRelearnableMoves = TRUE;
+            gMoveRelearnerState = state;
+            break;
+        }
+    }
     UpdateRelearnPrompt();
 }
 
@@ -2047,6 +2048,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON] == SPRITE_NONE)
             return;
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].data[2] = 1;
+        TryDrawExperienceProgressBar();
         data[1] = 0;
         break;
     case 9:
@@ -2132,26 +2134,11 @@ static bool8 IsValidToViewInMulti(struct Pokemon *mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
         return FALSE;
-    else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO || !GetMonData(mon, MON_DATA_IS_EGG))
+    else if (sMonSummaryScreen->curMonIndex != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
         return TRUE;
     else
         return FALSE;
 }
-
-#ifdef TESTING
-bool32 Test_SummaryCanViewMultiMon(struct Pokemon *mon, bool32 infoPage, u8 currentMon)
-{
-    struct PokemonSummaryScreenData *saved = sMonSummaryScreen;
-    sMonSummaryScreen = AllocZeroed(sizeof(*sMonSummaryScreen));
-    sMonSummaryScreen->currPageIndex = infoPage ? PSS_PAGE_INFO : PSS_PAGE_BATTLE_MOVES;
-    sMonSummaryScreen->curMonIndex = currentMon;
-    bool32 result = IsValidToViewInMulti(mon);
-    Free(sMonSummaryScreen);
-    sMonSummaryScreen = saved;
-    return result;
-}
-#endif
-
 
 static void ChangePage(u8 taskId, s8 delta)
 {
@@ -2235,6 +2222,7 @@ static void PssScrollRightEnd(u8 taskId) // display right
     DrawPagination();
     PutPageWindowTilemaps(sMonSummaryScreen->currPageIndex);
     SetTypeIcons();
+    TryDrawExperienceProgressBar();
     SwitchTaskToFollowupFunc(taskId);
 }
 
@@ -2286,7 +2274,14 @@ static void PssScrollLeftEnd(u8 taskId) // display left
     DrawPagination();
     PutPageWindowTilemaps(sMonSummaryScreen->currPageIndex);
     SetTypeIcons();
+    TryDrawExperienceProgressBar();
     SwitchTaskToFollowupFunc(taskId);
+}
+
+static void TryDrawExperienceProgressBar(void)
+{
+    if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+        DrawExperienceProgressBar(&sMonSummaryScreen->currentMon);
 }
 
 static void SwitchToMoveSelection(u8 taskId)
@@ -2510,9 +2505,17 @@ static void ExitMovePositionSwitchMode(u8 taskId, bool8 swapMoves)
 
     if (swapMoves == TRUE)
     {
-        SwapBoxMonMoves(GetCurrentBoxmon(), sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
+        if (!sMonSummaryScreen->isBoxMon)
+        {
+            struct Pokemon *mon = sMonSummaryScreen->monList.mons;
+            SwapMonMoves(&mon[sMonSummaryScreen->curMonIndex], sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
+        }
+        else
+        {
+            struct BoxPokemon *boxMon = sMonSummaryScreen->monList.boxMons;
+            SwapBoxMonMoves(&boxMon[sMonSummaryScreen->curMonIndex], sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
+        }
         CopyMonToSummaryStruct(&sMonSummaryScreen->currentMon);
-        ExtractMonMovesToSummaryStruct(&sMonSummaryScreen->currentMon);
         SwapMovesNamesPP(sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
         SwapMovesTypeSprites(sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
         sMonSummaryScreen->firstMoveIndex = sMonSummaryScreen->secondMoveIndex;
@@ -2524,6 +2527,76 @@ static void ExitMovePositionSwitchMode(u8 taskId, bool8 swapMoves)
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_HandleInput_MoveSelect;
+}
+
+static void SwapMonMoves(struct Pokemon *mon, u8 moveIndex1, u8 moveIndex2)
+{
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+
+    enum Move move1 = summary->moves[moveIndex1];
+    enum Move move2 = summary->moves[moveIndex2];
+    u8 move1pp = summary->pp[moveIndex1];
+    u8 move2pp = summary->pp[moveIndex2];
+    u8 ppBonuses = summary->ppBonuses;
+
+    // Calculate PP bonuses
+    u8 ppUpMask1 = gPPUpGetMask[moveIndex1];
+    u8 ppBonusMove1 = (ppBonuses & ppUpMask1) >> (moveIndex1 * 2);
+    u8 ppUpMask2 = gPPUpGetMask[moveIndex2];
+    u8 ppBonusMove2 = (ppBonuses & ppUpMask2) >> (moveIndex2 * 2);
+    ppBonuses &= ~ppUpMask1;
+    ppBonuses &= ~ppUpMask2;
+    ppBonuses |= (ppBonusMove1 << (moveIndex2 * 2)) + (ppBonusMove2 << (moveIndex1 * 2));
+
+    // Swap the moves
+    SetMonData(mon, MON_DATA_MOVE1 + moveIndex1, &move2);
+    SetMonData(mon, MON_DATA_MOVE1 + moveIndex2, &move1);
+    SetMonData(mon, MON_DATA_PP1 + moveIndex1, &move2pp);
+    SetMonData(mon, MON_DATA_PP1 + moveIndex2, &move1pp);
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+
+    summary->moves[moveIndex1] = move2;
+    summary->moves[moveIndex2] = move1;
+
+    summary->pp[moveIndex1] = move2pp;
+    summary->pp[moveIndex2] = move1pp;
+
+    summary->ppBonuses = ppBonuses;
+}
+
+static void SwapBoxMonMoves(struct BoxPokemon *mon, u8 moveIndex1, u8 moveIndex2)
+{
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+
+    enum Move move1 = summary->moves[moveIndex1];
+    enum Move move2 = summary->moves[moveIndex2];
+    u8 move1pp = summary->pp[moveIndex1];
+    u8 move2pp = summary->pp[moveIndex2];
+    u8 ppBonuses = summary->ppBonuses;
+
+    // Calculate PP bonuses
+    u8 ppUpMask1 = gPPUpGetMask[moveIndex1];
+    u8 ppBonusMove1 = (ppBonuses & ppUpMask1) >> (moveIndex1 * 2);
+    u8 ppUpMask2 = gPPUpGetMask[moveIndex2];
+    u8 ppBonusMove2 = (ppBonuses & ppUpMask2) >> (moveIndex2 * 2);
+    ppBonuses &= ~ppUpMask1;
+    ppBonuses &= ~ppUpMask2;
+    ppBonuses |= (ppBonusMove1 << (moveIndex2 * 2)) + (ppBonusMove2 << (moveIndex1 * 2));
+
+    // Swap the moves
+    SetBoxMonData(mon, MON_DATA_MOVE1 + moveIndex1, &move2);
+    SetBoxMonData(mon, MON_DATA_MOVE1 + moveIndex2, &move1);
+    SetBoxMonData(mon, MON_DATA_PP1 + moveIndex1, &move2pp);
+    SetBoxMonData(mon, MON_DATA_PP1 + moveIndex2, &move1pp);
+    SetBoxMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+
+    summary->moves[moveIndex1] = move2;
+    summary->moves[moveIndex2] = move1;
+
+    summary->pp[moveIndex1] = move2pp;
+    summary->pp[moveIndex2] = move1pp;
+
+    summary->ppBonuses = ppBonuses;
 }
 
 static void Task_SetHandleReplaceMoveInput(u8 taskId)
@@ -2561,13 +2634,20 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
             }
             else if (JOY_NEW(A_BUTTON))
             {
-                // Emerald Champions: no move is undeletable, so every slot can be replaced.
-                StopPokemonAnimations();
-                PlaySE(SE_SELECT);
-                sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
-                gSpecialVar_0x8005 = sMoveSlotToReplace;
-                gSpecialVar_Result = sMoveSlotToReplace < MAX_MON_MOVES;
-                BeginCloseSummaryScreen(taskId);
+                if (CanReplaceMove() == TRUE)
+                {
+                    StopPokemonAnimations();
+                    PlaySE(SE_SELECT);
+                    sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
+                    gSpecialVar_0x8005 = sMoveSlotToReplace;
+                    gSpecialVar_Result = TRUE;
+                    BeginCloseSummaryScreen(taskId);
+                }
+                else
+                {
+                    PlaySE(SE_FAILURE);
+                    ShowCantForgetHMsWindow(taskId);
+                }
             }
             else if (JOY_NEW(B_BUTTON))
             {
@@ -2582,6 +2662,94 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
     }
 }
 
+static bool8 CanReplaceMove(void)
+{
+    if (sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES
+        || sMonSummaryScreen->newMove == MOVE_NONE
+        || !CannotForgetMove(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static void ShowCantForgetHMsWindow(u8 taskId)
+{
+    ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_POWER_ACC);
+    ClearWindowTilemap(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM);
+    gSprites[sMonSummaryScreen->categoryIconSpriteId].invisible = TRUE;
+    ScheduleBgCopyTilemapToVram(0);
+    PositionPowerAccSlidingWindow(0, 3);
+    PositionAppealJamSlidingWindow(0, 3, 0);
+    PrintHMMovesCantBeForgotten();
+    gTasks[taskId].func = Task_HandleInputCantForgetHMsMoves;
+}
+
+// This redraws the power/accuracy window when the player scrolls out of the "HM Moves can't be forgotten" message
+static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    enum Move move;
+    if (FuncIsActiveTask(Task_SlidePowerAccWindow) != 1)
+    {
+        if (JOY_NEW(DPAD_UP))
+        {
+            data[1] = 1;
+            data[0] = 4;
+            ChangeSelectedMove(&data[0], -1, &sMonSummaryScreen->firstMoveIndex);
+            data[1] = 0;
+            gTasks[taskId].func = Task_HandleReplaceMoveInput;
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            data[1] = 1;
+            data[0] = 4;
+            ChangeSelectedMove(&data[0], 1, &sMonSummaryScreen->firstMoveIndex);
+            data[1] = 0;
+            gTasks[taskId].func = Task_HandleReplaceMoveInput;
+        }
+        else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+        {
+            if (sMonSummaryScreen->currPageIndex != PSS_PAGE_BATTLE_MOVES)
+            {
+                ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
+                if (!gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_STATUS]].invisible)
+                    ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
+                move = sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex];
+                gTasks[taskId].func = Task_HandleReplaceMoveInput;
+                ChangePage(taskId, -1);
+                PositionPowerAccSlidingWindow(9, -2);
+                PositionAppealJamSlidingWindow(9, -2, move);
+            }
+        }
+        else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+        {
+            if (sMonSummaryScreen->currPageIndex != PSS_PAGE_CONTEST_MOVES)
+            {
+                ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
+                if (!gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_STATUS]].invisible)
+                    ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
+                move = sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex];
+                gTasks[taskId].func = Task_HandleReplaceMoveInput;
+                ChangePage(taskId, 1);
+                PositionPowerAccSlidingWindow(9, -2);
+                PositionAppealJamSlidingWindow(9, -2, move);
+            }
+        }
+        else if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            ClearWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
+            if (!gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_STATUS]].invisible)
+                ClearWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
+            move = sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex];
+            PrintMoveDetails(move);
+            ScheduleBgCopyTilemapToVram(0);
+            PositionPowerAccSlidingWindow(9, -3);
+            PositionAppealJamSlidingWindow(9, -3, move);
+            gTasks[taskId].func = Task_HandleReplaceMoveInput;
+        }
+    }
+}
+
 u8 GetMoveSlotToReplace(void)
 {
     return sMoveSlotToReplace;
@@ -2589,7 +2757,7 @@ u8 GetMoveSlotToReplace(void)
 
 static void DrawPagination(void) // Updates the pagination dots at the top of the summary screen
 {
-    u16 tilemap[4 * PSS_PAGE_COUNT];
+    u16 *tilemap = Alloc(8 * PSS_PAGE_COUNT);
     u8 i;
 
     for (i = 0; i < PSS_PAGE_COUNT; i++)
@@ -2651,25 +2819,32 @@ static void DrawPagination(void) // Updates the pagination dots at the top of th
     }
     CopyToBgTilemapBufferRect_ChangePalette(3, tilemap, 11, 0, PSS_PAGE_COUNT * 2, 2, 16);
     ScheduleBgCopyTilemapToVram(3);
+    Free(tilemap);
 }
 
 static void CopyNColumnsToTilemap(const struct SlidingWindow *slidingWindow, u16 *tilemapDest, u8 visibleColumns, bool8 isOpeningToTheLeft)
 {
-    u32 width = slidingWindow->width;
-    for (u32 row = 0; row < slidingWindow->height; row++)
+    u16 i;
+    u16 *alloced = Alloc(slidingWindow->width * 2 * slidingWindow->height);
+    CpuFill16(slidingWindow->defaultTile, alloced, slidingWindow->width * 2 * slidingWindow->height);
+    if (slidingWindow->width != visibleColumns)
     {
-        u16 *dest = &tilemapDest[(slidingWindow->top + row) * 32 + slidingWindow->left];
-        const u16 *src = &slidingWindow->gfx[width * row];
-        CpuFill16(slidingWindow->defaultTile, dest, width * sizeof(*dest));
-        if (visibleColumns != width)
+        if (!isOpeningToTheLeft)
         {
-            if (isOpeningToTheLeft)
-                dest += visibleColumns;
-            else
-                src += visibleColumns;
-            CpuCopy16(src, dest, (width - visibleColumns) * sizeof(*dest));
+            for (i = 0; i < slidingWindow->height; i++)
+                CpuCopy16(&slidingWindow->gfx[visibleColumns + slidingWindow->width * i], &alloced[slidingWindow->width * i], (slidingWindow->width - visibleColumns) * 2);
+        }
+        else
+        {
+            for (i = 0; i < slidingWindow->height; i++)
+                CpuCopy16(&slidingWindow->gfx[slidingWindow->width * i], &alloced[visibleColumns + slidingWindow->width * i], (slidingWindow->width - visibleColumns) * 2);
         }
     }
+
+    for (i = 0; i < slidingWindow->height; i++)
+        CpuCopy16(&alloced[slidingWindow->width * i], &tilemapDest[(slidingWindow->top + i) * 32 + slidingWindow->left], slidingWindow->width * 2);
+
+    Free(alloced);
 }
 
 #define tScrollingSpeed data[0]
@@ -2856,16 +3031,16 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
 
 static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mon has been cured of pokerus
 {
-    u16 tile = 0x81A;
-
     if (ShouldPokemonShowCuredPokerus(mon))
     {
-        tile = 0x2C;
-        if (HasHotSpringPokerus(mon))
-            tile |= PSS_PAL_HOT_SPRING_POKERUS << 12;
+        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x2C;
+        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x2C;
     }
-    sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = tile;
-    sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = tile;
+    else
+    {
+        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x81A;
+        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x81A;
+    }
     ScheduleBgCopyTilemapToVram(3);
 }
 
@@ -2876,6 +3051,48 @@ static void SetMonPicBackgroundPalette(bool8 isMonShiny)
     else
         SetBgTilemapPalette(3, 1, 4, 8, 8, 5);
     ScheduleBgCopyTilemapToVram(3);
+}
+
+static void DrawExperienceProgressBar(struct Pokemon *unused)
+{
+    s64 numExpProgressBarTicks;
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+    u16 *dst;
+    u8 i;
+
+    if (summary->level < MAX_LEVEL)
+    {
+        u32 expBetweenLevels = gExperienceTables[gSpeciesInfo[summary->species].growthRate][summary->level + 1] - gExperienceTables[gSpeciesInfo[summary->species].growthRate][summary->level];
+        u32 expSinceLastLevel = summary->exp - gExperienceTables[gSpeciesInfo[summary->species].growthRate][summary->level];
+
+        // Calculate the number of 1-pixel "ticks" to illuminate in the experience progress bar.
+        // There are 8 tiles that make up the bar, and each tile has 8 "ticks". Hence, the numerator
+        // is multiplied by 64.
+        numExpProgressBarTicks = expSinceLastLevel * 64 / expBetweenLevels;
+        if (numExpProgressBarTicks == 0 && expSinceLastLevel != 0)
+            numExpProgressBarTicks = 1;
+    }
+    else
+    {
+        numExpProgressBarTicks = 0;
+    }
+
+    dst = &sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_SKILLS][1][0x255];
+    for (i = 0; i < 8; i++)
+    {
+        if (numExpProgressBarTicks > 7)
+            dst[i] = 0x206A;
+        else
+            dst[i] = 0x2062 + (numExpProgressBarTicks % 8);
+        numExpProgressBarTicks -= 8;
+        if (numExpProgressBarTicks < 0)
+            numExpProgressBarTicks = 0;
+    }
+
+    if (GetBgTilemapBuffer(1) == sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_SKILLS][0])
+        ScheduleBgCopyTilemapToVram(1);
+    else
+        ScheduleBgCopyTilemapToVram(2);
 }
 
 static void DrawContestMoveHearts(enum Move move)
@@ -3072,8 +3289,8 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef4, statsXPos, 17, 0, 1);
     statsXPos = 2 + GetStringCenterAlignXOffset(FONT_NORMAL, gText_Speed2, 36);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed2, statsXPos, 33, 0, 1);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, COMPOUND_STRING("Level"), 6, 1, 0, 1);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, COMPOUND_STRING("Badge Lv."), 6, 17, 0, 1);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_ExpPoints, 6, 1, 0, 1);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_NextLv, 6, 17, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS, gText_Status, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Power, 0, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Accuracy2, 0, 17, 0, 1);
@@ -3309,31 +3526,14 @@ static void PrintMonOTID(void)
 
 static void PrintMonAbilityName(void)
 {
-    enum Ability ability = GetAbilityBySpeciesForOwner(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum, sMonSummaryScreen->summary.isTrainerOwned);
-    PrintTextOnWindowToFit(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
+    enum Ability ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
+    PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
 }
-
-static u32 SummaryAbilityDescriptionFont(const u8 *text)
-{
-    u32 font = FONT_NORMAL;
-    for (const u8 *p = text; *p != EOS; p++)
-        if (*p == CHAR_NEWLINE)
-            font = FONT_SMALL_NARROW; // Two 8-pixel lines below the name.
-    return GetFontIdToFit(text, font, 0, 18 * 8);
-}
-
-#if TESTING
-u32 Test_SummaryAbilityDescriptionFont(const u8 *text)
-{
-    return SummaryAbilityDescriptionFont(text);
-}
-#endif
 
 static void PrintMonAbilityDescription(void)
 {
-    enum Ability ability = GetAbilityBySpeciesForOwner(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum, sMonSummaryScreen->summary.isTrainerOwned);
-    const u8 *text = gAbilitiesInfo[ability].description;
-    PrintTextOnWindowWithFont(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), text, 0, 16, 0, 0, SummaryAbilityDescriptionFont(text));
+    enum Ability ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
+    PrintTextOnWindowToFit(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].description, 0, 17, 0, 0);
 }
 
 static void BufferMonTrainerMemo(void)
@@ -3352,8 +3552,8 @@ static void BufferMonTrainerMemo(void)
     }
     else
     {
-        u8 metLevelString[32];
-        u8 metLocationString[32];
+        u8 *metLevelString = Alloc(32);
+        u8 *metLocationString = Alloc(32);
         GetMetLevelString(metLevelString);
 
         if (sum->metLocation < MAPSEC_NONE)
@@ -3383,8 +3583,8 @@ static void BufferMonTrainerMemo(void)
         }
 
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, text);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, NULL);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, NULL);
+        Free(metLevelString);
+        Free(metLocationString);
     }
 }
 
@@ -3411,9 +3611,6 @@ static void GetMetLevelString(u8 *output)
 
 static bool8 DoesMonOTMatchOwner(void)
 {
-    // The viewer of this borrowed tutorial card is the rival who just caught it.
-    if (IsRivalDexNavTutorialActive())
-        return TRUE;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     u32 trainerId;
     u8 gender;
@@ -3542,7 +3739,7 @@ static void PrintSkillsPageText(void)
     PrintLeftColumnStats();
     BufferRightColumnStats();
     PrintRightColumnStats();
-    PrintLevelAndBadgeLevel();
+    PrintExpPointsNextLevel();
 }
 
 static void Task_PrintSkillsPage(u8 taskId)
@@ -3573,7 +3770,7 @@ static void Task_PrintSkillsPage(u8 taskId)
         PrintRightColumnStats();
         break;
     case 8:
-        PrintLevelAndBadgeLevel();
+        PrintExpPointsNextLevel();
         break;
     case 9:
         DestroyTask(taskId);
@@ -3631,20 +3828,16 @@ static void PrintRibbonCount(void)
 
 static void BufferStat(u8 *dst, enum Stat statIndex, u32 stat, u32 strId, u32 n)
 {
-    static const u8 sTextNatureDown[] = _("{COLOR}{08}{SHADOW}{02}");
-    static const u8 sTextNatureUp[] = _("{COLOR}{05}{SHADOW}{02}");
-    static const u8 sTextNaturePokerus[] = _("{COLOR DYNAMIC_COLOR6}{SHADOW DYNAMIC_COLOR5}");
-    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}{SHADOW}{02}");
+    static const u8 sTextNatureDown[] = _("{COLOR}{08}");
+    static const u8 sTextNatureUp[] = _("{COLOR}{05}");
+    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
     u8 *txtPtr;
 
-    if (statIndex == 0 || !P_SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.nature].statUp == gNaturesInfo[sMonSummaryScreen->summary.nature].statDown)
+    if (statIndex == 0 || !P_SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
         txtPtr = StringCopy(dst, sTextNatureNeutral);
-    else if (sMonSummaryScreen->skillsPageMode == SUMMARY_SKILLS_MODE_STATS
-        && IsPokerusNatureBoosted(&sMonSummaryScreen->currentMon, statIndex))
-        txtPtr = StringCopy(dst, sTextNaturePokerus);
-    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.nature].statUp)
+    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp)
         txtPtr = StringCopy(dst, sTextNatureUp);
-    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.nature].statDown)
+    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
         txtPtr = StringCopy(dst, sTextNatureDown);
     else
         txtPtr = StringCopy(dst, sTextNatureNeutral);
@@ -3757,19 +3950,23 @@ static void PrintRightColumnStats(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT), gStringVar4, x, 1, 0, 0);
 }
 
-// Battles grant no experience, so the Skills page shows what the Leveler works
-// from instead: this Pokémon's level beside the level its Badges allow.
-static void PrintLevelAndBadgeLevel(void)
+static void PrintExpPointsNextLevel(void)
 {
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     u8 windowId = AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_EXP);
     int x;
+    u32 expToNextLevel;
 
-    ConvertIntToDecimalStringN(gStringVar1, sum->level, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, sum->exp, STR_CONV_MODE_RIGHT_ALIGN, 7);
     x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar1, 42) + 2;
     PrintTextOnWindow(windowId, gStringVar1, x, 1, 0, 0);
 
-    ConvertIntToDecimalStringN(gStringVar1, GetPlayerLevelCapForSpecies(sum->species), STR_CONV_MODE_RIGHT_ALIGN, 3);
+    if (sum->level < MAX_LEVEL)
+        expToNextLevel = gExperienceTables[gSpeciesInfo[sum->species].growthRate][sum->level + 1] - sum->exp;
+    else
+        expToNextLevel = 0;
+
+    ConvertIntToDecimalStringN(gStringVar1, expToNextLevel, STR_CONV_MODE_RIGHT_ALIGN, 6);
     x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar1, 42) + 2;
     PrintTextOnWindow(windowId, gStringVar1, x, 17, 0, 0);
 }
@@ -3852,7 +4049,7 @@ static void PrintMoveNameAndPP(u8 moveIndex)
 
     if (move != 0)
     {
-        pp = GetMoveMaxPP(move);
+        pp = CalculatePPWithBonus(move, summary->ppBonuses, moveIndex);
         PrintTextOnWindowToFit(moveNameWindowId, GetMoveName(move), 0, moveIndex * 16 + 1, 0, 1);
         ConvertIntToDecimalStringN(gStringVar1, summary->pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -4052,6 +4249,13 @@ static void SwapMovesNamesPP(u8 moveIndex1, u8 moveIndex2)
     PrintMoveNameAndPP(moveIndex2);
 }
 
+static void PrintHMMovesCantBeForgotten(void)
+{
+    u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_DESCRIPTION);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+    PrintTextOnWindow(windowId, gText_HMMovesCantBeForgotten2, 6, 1, 0, 0);
+}
+
 static void ResetSpriteIds(void)
 {
     u8 i;
@@ -4149,6 +4353,10 @@ static void SetMonTypeIcons(void)
         else
         {
             SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, TRUE);
+        }
+        if (P_SHOW_TERA_TYPE >= GEN_9)
+        {
+            SetTypeSpritePosAndPal(summary->teraType, 200, 48, SPRITE_ARR_ID_TYPE + 2);
         }
     }
 }
@@ -4366,6 +4574,14 @@ static void SummaryScreen_DestroyAnimDelayTask(void)
     }
 }
 
+static bool32 UNUSED IsMonAnimationFinished(void)
+{
+    if (gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].callback == SpriteCallbackDummy)
+        return FALSE;
+    else
+        return TRUE;
+}
+
 static void StopPokemonAnimations(void)  // A subtle effect, this function stops Pokémon animations when leaving the PSS
 {
     u16 i;
@@ -4561,8 +4777,8 @@ static inline void ShowUtilityPrompt(s16 mode)
     const u8* promptText = NULL;
     const u8* gText_SkillPageIvs = COMPOUND_STRING("IVs");
     const u8* gText_SkillPageEvs = COMPOUND_STRING("EVs");
-    const u8* gText_SkillPageStats = COMPOUND_STRING("Stats");
-    const u8* gText_Rename = COMPOUND_STRING("Rename");
+    const u8* gText_SkillPageStats = COMPOUND_STRING("STATS");
+    const u8* gText_Rename = COMPOUND_STRING("RENAME");
 
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO)
     {
@@ -4646,14 +4862,3 @@ static void CB2_PssChangePokemonNickname(void)
 {
     ChangePokemonNicknameWithCallback(CB2_ReturnToSummaryScreenFromNamingScreen);
 }
-
-#if EC_HEADLESS_FIXTURES
-bool32 IsPokemonSummaryHeadlessOnPage(u32 page, bool32 moveDetailsOpen)
-{
-    if (sMonSummaryScreen == NULL || sMonSummaryScreen->currPageIndex != page)
-        return FALSE;
-    if (moveDetailsOpen)
-        return FuncIsActiveTask(Task_HandleInput_MoveSelect);
-    return FuncIsActiveTask(Task_HandleInput);
-}
-#endif

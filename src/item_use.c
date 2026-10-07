@@ -1,8 +1,6 @@
 #include "global.h"
-#include "move.h"
 #include "item_use.h"
 #include "battle.h"
-#include "battle_script_commands.h"
 #include "battle_anim.h"
 #include "battle_stat_change.h"
 #include "battle_pyramid.h"
@@ -11,7 +9,6 @@
 #include "berry_powder.h"
 #include "bike.h"
 #include "coins.h"
-#include "caps.h"
 #include "data.h"
 #include "event_data.h"
 #include "event_object_lock.h"
@@ -24,7 +21,6 @@
 #include "field_weather.h"
 #include "fishing.h"
 #include "fldeff.h"
-#include "field_move.h"
 #include "follower_npc.h"
 #include "item.h"
 #include "item_menu.h"
@@ -38,8 +34,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon_storage_system.h"
-#include "region_map.h"
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "script.h"
@@ -49,7 +43,6 @@
 #include "task.h"
 #include "text.h"
 #include "vs_seeker.h"
-#include "wild_encounter.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
@@ -75,41 +68,34 @@ static void ItemUseOnFieldCB_Berry(u8);
 static void ItemUseOnFieldCB_WailmerPailBerry(u8);
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8);
 static bool8 TryToWaterSudowoodo(void);
+static void BootUpSoundTMHM(u8);
+static void Task_ShowTMHMContainedMessage(u8);
+static void UseTMHMYesNo(u8);
+static void UseTMHM(u8);
 static void Task_StartUseRepel(u8);
-static bool32 TryEndRepelSprayForAttractant(void);
 static void Task_StartUseLure(u8 taskId);
 static void Task_UseRepel(u8);
-static void Task_StartUseRepelSpray(u8);
-static void Task_UseRepelSpray(u8);
 static void Task_UseLure(u8 taskId);
-static void ItemUseOnFieldCB_PokeVial(u8 taskId);
-static void CB2_OpenLevelerFromBag(void);
-static void Task_OpenRegisteredLeveler(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 
-static const u8 sText_CantDismountBike[] = _("You can't dismount your Bike here.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe Dowsing Machine is responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe Dowsing Machine is shaking!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_CoinCase[] = _("Your Coins:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
-static const u8 sText_PowderQty[] = _("Powder Qty: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
-static const u8 sText_PlayedPokeFluteCatchy[] = _("Played the Poké Flute.\pNow, that's a catchy tune!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_PlayedPokeFlute[] = _("Played the Poké Flute.");
-static const u8 sText_PokeFluteAwakenedMon[] = _("The Poké Flute awakened sleeping\nPokémon.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_HoneyCantHere[] = _("Honey won't attract Pokémon\nhere.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!\pDoses left: {STR_VAR_1} of {STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_LevelerNoEffect[] = _("Your party has caught up.\nNo Pokémon is ready to evolve.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon needs the\nFeather Badge and permission\lto use Fly.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_FlightBeaconNeedsFlier[] = _("A Pokémon in your party or PC\nmust be able to learn Fly.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_FlightBeaconCantHere[] = _("A flier can't pick you up here.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CoinCase[] = _("Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PowderQty[] = _("POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
+static const u8 sText_BootedUpTM[] = _("Booted up a TM.");
+static const u8 sText_BootedUpHM[] = _("Booted up an HM.");
+static const u8 sText_TMHMContainedVar1[] = _("It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?");
+static const u8 sText_UsedVar2WildLured[] = _("{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_UsedVar2WildRepelled[] = _("{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PlayedPokeFluteCatchy[] = _("Played the POKé FLUTE.\pNow, that's a catchy tune!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PlayedPokeFlute[] = _("Played the POKé FLUTE.");
+static const u8 sText_PokeFluteAwakenedMon[] = _("The POKé FLUTE awakened sleeping\nPOKéMON.{PAUSE_UNTIL_PRESS}");
 
 // EWRAM variables
 EWRAM_DATA static TaskFunc sItemUseOnFieldCB = NULL;
@@ -128,6 +114,12 @@ static const MainCallback sItemUseCallbacks[] =
 };
 
 static const u8 sClockwiseDirections[] = {DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST};
+
+static const struct YesNoFuncTable sUseTMHMYesNoFuncTable =
+{
+    .yesFunc = UseTMHM,
+    .noFunc = CloseItemMessage,
+};
 
 #define tEnigmaBerryType data[4]
 static void SetUpItemUseCallback(u8 taskId)
@@ -228,9 +220,14 @@ static void Task_CloseCantUseKeyItemMessage(u8 taskId)
     UnlockPlayerFieldControls();
 }
 
-bool32 IsItemEvolutionStone(enum Item itemId)
+u8 CheckIfItemIsTMHMOrEvolutionStone(enum Item itemId)
 {
-    return GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone;
+    if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_TMHM)
+        return ITEM_IS_TM_HM;
+    else if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone)
+        return ITEM_IS_EVOLUTION_STONE;
+    else
+        return ITEM_IS_OTHER;
 }
 
 // Mail in the bag menu can't have a message but it can be checked (view the mail background, no message)
@@ -802,19 +799,6 @@ static void ItemUseOnFieldCB_Berry(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void Task_OpenHarvestPouch(u8 taskId)
-{
-    extern const u8 EmeraldChampions_EventScript_UseHarvestPouch[];
-    ScriptContext_SetupScript(EmeraldChampions_EventScript_UseHarvestPouch);
-    DestroyTask(taskId);
-}
-
-void ItemUseOutOfBattle_HarvestPouch(u8 taskId)
-{
-    sItemUseOnFieldCB = Task_OpenHarvestPouch;
-    SetUpItemUseOnFieldCallback(taskId);
-}
-
 void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 {
     if (TryToWaterSudowoodo() == TRUE)
@@ -927,6 +911,41 @@ void ItemUseOutOfBattle_DynamaxCandy(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+void ItemUseOutOfBattle_TMHM(u8 taskId)
+{
+    if (GetItemTMHMIndex(gSpecialVar_ItemId) > NUM_TECHNICAL_MACHINES)
+        DisplayItemMessage(taskId, FONT_NORMAL, sText_BootedUpHM, BootUpSoundTMHM); // HM
+    else
+        DisplayItemMessage(taskId, FONT_NORMAL, sText_BootedUpTM, BootUpSoundTMHM); // TM
+}
+
+static void BootUpSoundTMHM(u8 taskId)
+{
+    PlaySE(SE_PC_LOGIN);
+    gTasks[taskId].func = Task_ShowTMHMContainedMessage;
+}
+
+static void Task_ShowTMHMContainedMessage(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
+    {
+        StringCopy(gStringVar1, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_ItemId)));
+        StringExpandPlaceholders(gStringVar4, sText_TMHMContainedVar1);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, UseTMHMYesNo);
+    }
+}
+
+static void UseTMHMYesNo(u8 taskId)
+{
+    BagMenu_YesNo(taskId, ITEMWIN_YESNO_HIGH, &sUseTMHMYesNoFuncTable);
+}
+
+static void UseTMHM(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_TMHM;
+    SetUpItemUseCallback(taskId);
+}
+
 static void RemoveUsedItem(void)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -1013,13 +1032,42 @@ static void Task_UseLure(u8 taskId)
         VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
     #endif
         RemoveUsedItem();
-        if (TryEndRepelSprayForAttractant())
-            StringAppend(gStringVar4, sText_RepelSprayEnded);
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
+}
+
+static void Task_UsedBlackWhiteFlute(u8 taskId)
+{
+    if (++gTasks[taskId].data[8] > 7)
+    {
+        PlaySE(SE_GLASS_FLUTE);
+        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
+    }
+}
+
+void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
+{
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    if (gSpecialVar_ItemId == ITEM_WHITE_FLUTE)
+    {
+        FlagSet(FLAG_SYS_ENC_UP_ITEM);
+        FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
+        StringExpandPlaceholders(gStringVar4, sText_UsedVar2WildLured);
+    }
+    else
+    {
+        FlagSet(FLAG_SYS_ENC_DOWN_ITEM);
+        FlagClear(FLAG_SYS_ENC_UP_ITEM);
+        StringExpandPlaceholders(gStringVar4, sText_UsedVar2WildRepelled);
+    }
+    gTasks[taskId].data[8] = 0;
+    gTasks[taskId].func = Task_UsedBlackWhiteFlute;
 }
 
 void Task_UseDigEscapeRopeOnField(u8 taskId)
@@ -1076,7 +1124,7 @@ static u32 GetBallThrowableState(void)
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
      && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
         return BALL_THROW_UNABLE_TWO_MONS;
-    else if (IsCaughtMonStorageFull() == TRUE)
+    else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
         return BALL_THROW_UNABLE_NO_ROOM;
     else if (GetConfig(B_SEMI_INVULNERABLE_CATCH) >= GEN_4 &&  IsSemiInvulnerable(GetCatchingBattler(), CHECK_ALL))
         return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
@@ -1093,7 +1141,7 @@ bool32 CanThrowBall(void)
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
-static const u8 sText_CantThrowPokeBall_Disabled[] = _("Poké Balls cannot be used\nright now!\p");
+static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be used\nright now!\p");
 
 static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
@@ -1253,13 +1301,13 @@ bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon)
         {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (GetMonData(mon, MON_DATA_PP1 + i) < GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + i)))
+                if (GetMonData(mon, MON_DATA_PP1 + i) < CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + i), GetMonData(mon, MON_DATA_PP_BONUSES), i))
                     break;
             }
             if (i == MAX_MON_MOVES)
                 cannotUse = TRUE;
         }
-        else if (GetMonData(mon, MON_DATA_PP1 + gPartyMenu.data1) == GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + gPartyMenu.data1)))
+        else if (GetMonData(mon, MON_DATA_PP1 + gPartyMenu.data1) == CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + gPartyMenu.data1), GetMonData(mon, MON_DATA_PP_BONUSES), gPartyMenu.data1))
         {
             cannotUse = TRUE;
         }
@@ -1376,14 +1424,13 @@ void ItemUseOutOfBattle_Fusion(u8 taskId)
 
 void Task_UseHoneyOnField(u8 taskId)
 {
-    ScriptContext_SetupScript(EventScript_HoneyEncounter);
+    StartSweetScentFieldEffect();
     DestroyTask(taskId);
 }
 
-// Honey lures a wild Pokémon in place; unlike Dig or an Escape Rope it must keep
-// Safari mode, the Cycling Road challenge and active Strength intact.
 static void ItemUseOnFieldCB_Honey(u8 taskId)
 {
+    Overworld_ResetStateAfterDigEscRope();
     RemoveBagItem(gSpecialVar_ItemId, 1);
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
@@ -1392,269 +1439,10 @@ static void ItemUseOnFieldCB_Honey(u8 taskId)
 
 void ItemUseOutOfBattle_Honey(u8 taskId)
 {
-    if (!CanUseHoneyHere())
-    {
-        DisplayCannotUseItemMessage(taskId, FALSE, sText_HoneyCantHere);
-        return;
-    }
     sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
     gFieldCallback = FieldCB_UseItemOnField;
     gBagMenu->newScreenCallback = CB2_ReturnToField;
     Task_FadeAndCloseBagMenu(taskId);
-}
-
-void ItemUseOutOfBattle_PokeVial(u8 taskId)
-{
-    if (VarGet(VAR_POKE_VIAL_CHARGES) == 0)
-    {
-        if (!gTasks[taskId].tUsingRegisteredKeyItem)
-            DisplayItemMessage(taskId, FONT_NORMAL, sText_PokeVialEmpty, CloseItemMessage);
-        else
-            DisplayItemMessageOnField(taskId, sText_PokeVialEmpty, Task_CloseCantUseKeyItemMessage);
-        return;
-    }
-
-    sItemUseOnFieldCB = ItemUseOnFieldCB_PokeVial;
-    SetUpItemUseOnFieldCallback(taskId);
-}
-
-static void ItemUseOnFieldCB_PokeVial(u8 taskId)
-{
-    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
-        HealPokemon(&gParties[B_TRAINER_PLAYER][i]);
-
-    VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
-    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_POKE_VIAL_CHARGES), STR_CONV_MODE_LEFT_ALIGN, 2);
-    ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_POKE_VIAL_MAX_CHARGES), STR_CONV_MODE_LEFT_ALIGN, 2);
-    DisplayItemMessageOnField(taskId, sText_UsedPokeVial, Task_CloseCantUseKeyItemMessage);
-}
-
-static bool32 CanLevelPartyToCap(void)
-{
-    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
-    {
-        if (IsMonEligibleForLeveler(&gParties[B_TRAINER_PLAYER][i]))
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-// While the spray is active no step-based wild encounter can start anywhere.
-// It lasts EC_REPEL_SPRAY_STEPS steps (counted down in UpdateRepelCounter),
-// then wears off and asks to be used again. Using it while active turns it
-// off early. Deliberate encounters (fishing, Rock Smash, Sweet Scent) still
-// work, so the spray removes grass tax without removing the ability to go
-// looking for a Pokemon on purpose.
-// Attracting items would otherwise do nothing while the spray suppresses
-// encounters. Cancel the spray for the player and say so, instead of leaving
-// them to wonder why the Lure did not work.
-static bool32 TryEndRepelSprayForAttractant(void)
-{
-    if (!FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
-        return FALSE;
-    FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
-    VarSet(VAR_EC_REPEL_SPRAY_STEPS, 0);
-    return TRUE;
-}
-
-// Same presentation as a Repel: a short beat, the sound, then the message
-// once the sound has finished, in the Bag or on the field when registered.
-void ItemUseOutOfBattle_RepelSpray(u8 taskId)
-{
-    gTasks[taskId].data[8] = 0;
-    gTasks[taskId].func = Task_StartUseRepelSpray;
-}
-
-static void Task_StartUseRepelSpray(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (++data[8] > 7)
-    {
-        data[8] = 0;
-        if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
-        {
-            FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
-            VarSet(VAR_EC_REPEL_SPRAY_STEPS, 0);
-            PlaySE(SE_PC_OFF);
-        }
-        else
-        {
-            FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);
-            VarSet(VAR_EC_REPEL_SPRAY_STEPS, EC_REPEL_SPRAY_STEPS);
-            PlaySE(SE_REPEL);
-        }
-        gTasks[taskId].func = Task_UseRepelSpray;
-    }
-}
-
-static void Task_UseRepelSpray(u8 taskId)
-{
-    const u8 *message;
-
-    if (IsSEPlaying())
-        return;
-    message = FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE) ? sText_RepelSprayOn : sText_RepelSprayOff;
-    if (!gTasks[taskId].tUsingRegisteredKeyItem)
-        DisplayItemMessage(taskId, FONT_NORMAL, message, CloseItemMessage);
-    else
-        DisplayItemMessageOnField(taskId, message, Task_CloseCantUseKeyItemMessage);
-}
-
-// The Beacon can call a capable flier from the party or PC without a moveslot.
-static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
-{
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-
-        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
-            continue;
-        if (MonKnowsMove(mon, MOVE_FLY)
-         || (!mustKnowFly && SpeciesCanLearnFieldMove(species, MOVE_FLY)))
-            return species;
-    }
-    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
-    {
-        for (u32 pos = 0; pos < IN_BOX_COUNT; pos++)
-        {
-            struct BoxPokemon *mon = &gPokemonStoragePtr->boxes[box][pos];
-            enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
-
-            if (species == SPECIES_NONE || GetBoxMonData(mon, MON_DATA_IS_EGG))
-                continue;
-            if (BoxMonKnowsMove(mon, MOVE_FLY)
-             || (!mustKnowFly && SpeciesCanLearnFieldMove(species, MOVE_FLY)))
-                return species;
-        }
-    }
-    return SPECIES_NONE;
-}
-
-// Why the Flight Beacon cannot fly the player from here, or NULL when it can.
-static const u8 *GetFlightBeaconRefusal(void)
-{
-    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
-        return sText_FlightBeaconLocked;
-    if (FindFlightBeaconRider(FALSE) == SPECIES_NONE)
-        return sText_FlightBeaconNeedsFlier;
-    if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
-     || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
-        return sText_FlightBeaconCantHere;
-    return NULL;
-}
-
-// Whether the player could fly from here with the Flight Beacon right now.
-// The PokeNav map offers Fly on exactly these terms.
-bool32 CanFlyWithFlightBeacon(void)
-{
-    return CheckBagHasItem(ITEM_FLIGHT_BEACON, 1) && GetFlightBeaconRefusal() == NULL;
-}
-
-void PrepareFlightBeaconRider(void)
-{
-    enum Species rider = FindFlightBeaconRider(TRUE);
-
-    if (rider == SPECIES_NONE)
-        rider = FindFlightBeaconRider(FALSE);
-    gFieldMoveShowMonSpeciesOverride = rider;
-
-    gPartyMenu.slotId = 0;
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE
-         && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG))
-        {
-            gPartyMenu.slotId = i;
-            break;
-        }
-    }
-}
-
-// Shared by the Bag, the registered-item path and the headless fixtures.
-void OpenFlyMapForFlightBeacon(void (*cancelCallback)(void))
-{
-    PrepareFlightBeaconRider();
-    SetFlyMapCancelCallback(cancelCallback);
-    SetMainCallback2(CB2_OpenFlyMap);
-}
-
-static void CB2_OpenFlyMapFromBag(void)
-{
-    OpenFlyMapForFlightBeacon(CB2_ReturnToBagMenuPocket);
-}
-
-static void Task_OpenRegisteredFlightBeacon(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        CleanupOverworldWindowsAndTilemaps();
-        OpenFlyMapForFlightBeacon(CB2_ReturnToField);
-        DestroyTask(taskId);
-    }
-}
-
-void ItemUseOutOfBattle_FlightBeacon(u8 taskId)
-{
-    const u8 *refusal = GetFlightBeaconRefusal();
-
-    if (refusal != NULL)
-    {
-        if (!gTasks[taskId].tUsingRegisteredKeyItem)
-            DisplayItemMessage(taskId, FONT_NORMAL, refusal, CloseItemMessage);
-        else
-            DisplayItemMessageOnField(taskId, refusal, Task_CloseCantUseKeyItemMessage);
-    }
-    else if (!gTasks[taskId].tUsingRegisteredKeyItem)
-    {
-        gBagMenu->newScreenCallback = CB2_OpenFlyMapFromBag;
-        Task_FadeAndCloseBagMenu(taskId);
-    }
-    else
-    {
-        gFieldCallback = FieldCB_ReturnToFieldNoScript;
-        FadeScreen(FADE_TO_BLACK, 0);
-        gTasks[taskId].func = Task_OpenRegisteredFlightBeacon;
-    }
-}
-
-void ItemUseOutOfBattle_Leveler(u8 taskId)
-{
-    if (!CanLevelPartyToCap())
-    {
-        if (!gTasks[taskId].tUsingRegisteredKeyItem)
-            DisplayItemMessage(taskId, FONT_NORMAL, sText_LevelerNoEffect, CloseItemMessage);
-        else
-            DisplayItemMessageOnField(taskId, sText_LevelerNoEffect, Task_CloseCantUseKeyItemMessage);
-    }
-    else if (!gTasks[taskId].tUsingRegisteredKeyItem)
-    {
-        gBagMenu->newScreenCallback = CB2_OpenLevelerFromBag;
-        Task_FadeAndCloseBagMenu(taskId);
-    }
-    else
-    {
-        gFieldCallback = FieldCB_ReturnToFieldNoScript;
-        FadeScreen(FADE_TO_BLACK, 0);
-        gTasks[taskId].func = Task_OpenRegisteredLeveler;
-    }
-}
-
-static void CB2_OpenLevelerFromBag(void)
-{
-    StartLevelerPartySequence(CB2_ReturnToBagMenuPocket);
-}
-
-static void Task_OpenRegisteredLeveler(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        CleanupOverworldWindowsAndTilemaps();
-        StartLevelerPartySequence(CB2_ReturnToField);
-        DestroyTask(taskId);
-    }
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)

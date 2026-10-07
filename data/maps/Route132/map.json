@@ -3,6 +3,7 @@
   "name": "Route132",
   "layout": "LAYOUT_ROUTE132",
   "music": "MUS_ROUTE119",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_132",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,17 +15,43 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE133",
       "offset": 0,
-      "map": "MAP_ROUTE133"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_PACIFIDLOG_TOWN",
       "offset": 0,
-      "map": "MAP_PACIFIDLOG_TOWN"
+      "direction": "right"
     }
   ],
   "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+      "x": 40,
+      "y": 13,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
+      "movement_range_x": 3,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route132_EventScript_Gilbert",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+      "x": 10,
+      "y": 6,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT",
+      "movement_range_x": 3,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route132_EventScript_Dana",
+      "flag": "0"
+    },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
@@ -34,9 +61,22 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_ItemNugget",
-      "flag": "FLAG_ITEM_ROUTE_132_NUGGET"
+      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ROUTE_132_RARE_CANDY"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
+      "x": 9,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Route132_EventScript_Kiyo",
+      "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
@@ -112,9 +152,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_ItemSharpBeak",
-      "flag": "FLAG_ITEM_ROUTE_132_SHARP_BEAK"
+      "trainer_sight_or_berry_tree_id": "ITEM_PROTEIN",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ROUTE_132_PROTEIN"
     }
   ],
   "warp_events": [],

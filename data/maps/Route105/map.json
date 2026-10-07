@@ -3,6 +3,7 @@
   "name": "Route105",
   "layout": "LAYOUT_ROUTE105",
   "music": "MUS_ROUTE104",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_105",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,19 +15,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE104",
       "offset": 0,
-      "map": "MAP_ROUTE104"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE106",
       "offset": 0,
-      "map": "MAP_ROUTE106"
+      "direction": "down"
     },
     {
-      "direction": "dive",
+      "map": "MAP_UNDERWATER_ROUTE105",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE105"
+      "direction": "dive"
     }
   ],
   "object_events": [
@@ -44,17 +45,56 @@
       "flag": "0"
     },
     {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+      "x": 27,
+      "y": 36,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+      "movement_range_x": 7,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route105_EventScript_Dominik",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+      "x": 8,
+      "y": 45,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 7,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route105_EventScript_Beverly",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+      "x": 19,
+      "y": 9,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
+      "movement_range_x": 0,
+      "movement_range_y": 5,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route105_EventScript_Imani",
+      "flag": "0"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 7,
-      "y": 75,
+      "x": 8,
+      "y": 73,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route105_EventScript_ItemAdrenalineOrb",
-      "flag": "FLAG_ITEM_ROUTE_105_ADRENALINE_ORB"
+      "trainer_sight_or_berry_tree_id": "ITEM_IRON",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ROUTE_105_IRON"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
@@ -81,6 +121,19 @@
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route105_EventScript_Josue",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 4,
+      "y": 58,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 2,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Route105_EventScript_Andres",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -89,7 +142,7 @@
       "y": 20,
       "elevation": 0,
       "dest_map": "MAP_ISLAND_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
@@ -99,8 +152,8 @@
       "x": 15,
       "y": 68,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_105_BOTTLE_CAP"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_105_HEART_SCALE"
     },
     {
       "type": "hidden_item",

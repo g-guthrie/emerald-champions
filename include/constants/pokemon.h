@@ -1,8 +1,6 @@
 #ifndef GUARD_CONSTANTS_POKEMON_H
 #define GUARD_CONSTANTS_POKEMON_H
 
-#include "constants/pokemon_stats.h"
-
 // Pokémon types
 enum __attribute__((packed)) Type
 {
@@ -152,8 +150,9 @@ enum __attribute__((packed)) Stat
 // each of these to the given name. In Gen 3 they're
 // used to get an index into giftRibbons in the save block,
 // which can have a value 0-64 (0 is 'no ribbon') that
-// corresponds to one of the special ribbons. Most of
-// these were never distributed
+// corresponds to one of the special ribbons listed
+// in gGiftRibbonDescriptionPointers. Most of these were
+// never distributed
 #define MAX_GIFT_RIBBON 64
 
 #define MIN_LEVEL 1
@@ -226,8 +225,11 @@ enum OtIdMethod
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255
 
+#define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
+#define MAX_PER_STAT_EVS ((P_EV_CAP >= GEN_6) ? 252 : 255)
+#define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT ((I_VITAMIN_EV_CAP >= GEN_8) ? MAX_PER_STAT_EVS : 100)
 
 // Move category defines.
@@ -339,7 +341,7 @@ enum EvolutionMode {
     EVO_MODE_BATTLE_SPECIAL,
     EVO_MODE_OVERWORLD_SPECIAL,
     EVO_MODE_SCRIPT_TRIGGER,
-    EVO_MODE_BATTLE_READY,       // Battle-only methods after a battle without a level gain.
+    EVO_MODE_BATTLE_ONLY,        // This mode is only used in battles to support Tandemaus' unique requirement
 };
 
 enum EvoTriggerVersion {
@@ -409,14 +411,6 @@ enum GeneratedMonOrigin
 
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
-// Emerald Champions: extra normal slots for the Inclement layer's added
-// Abilities, read only by Pokemon that are not trainer-owned. The stored
-// ability number is 3 bits, so slots 0-2 stay official and 3 and up are
-// Inclement additions.
-#define ABILITY_SLOT_INCLEMENT 3
-#define NUM_INCLEMENT_ABILITY_SLOTS 2 // Most added Abilities any species has.
-#define NUM_OWNER_ABILITY_SLOTS (ABILITY_SLOT_INCLEMENT + NUM_INCLEMENT_ABILITY_SLOTS)
-#define IS_INCLEMENT_ABILITY_SLOT(slot) ((slot) >= ABILITY_SLOT_INCLEMENT && (slot) < NUM_OWNER_ABILITY_SLOTS)
 #define NUM_HIDDEN_ABILITY_SLOTS 1
 
 // Used as a signal for givemon to generate a default ability by personality.

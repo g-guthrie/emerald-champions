@@ -1,4 +1,3 @@
-
 @ 'requests_effects' should be set to 1 if the command contains a call
 @ to 'Script_RequestEffects', which allows it to be analyzed with
 @ 'RunScriptImmediatelyUntilEffect'.
@@ -254,7 +253,6 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_DYNMULTIPUSH                  ScrCmd_dynmultipush,                requests_effects=1  @ 0xe4
 	script_cmd_table_entry SCR_OP_HIDEFOLLOWER                  ScrCmd_hidefollower,                requests_effects=1  @ 0xe5
 	script_cmd_table_entry SCR_OP_GETBRAILLESTRINGWIDTH         ScrCmd_getbraillestringwidth,       requests_effects=1  @ 0xe6
-	script_cmd_table_entry SCR_OP_POKEMARTBUY                   ScrCmd_pokemartbuy,                 requests_effects=1  @ 0xe7
 
 	.if ALLOCATE_SCRIPT_CMD_TABLE
 gScriptCmdTableEnd::

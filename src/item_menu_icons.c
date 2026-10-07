@@ -76,41 +76,26 @@ static const union AnimCmd sSpriteAnim_Bag_Pokeballs[] =
     ANIMCMD_END
 };
 
+static const union AnimCmd sSpriteAnim_Bag_TMsHMs[] =
+{
+    ANIMCMD_FRAME(256, 4),
+    ANIMCMD_END
+};
+
 static const union AnimCmd sSpriteAnim_Bag_Berries[] =
 {
     ANIMCMD_FRAME(320, 4),
     ANIMCMD_END
 };
 
-// Inclement uses the original Items bag pose for its three added pockets.
-static const union AnimCmd sSpriteAnim_Bag_Medicine[] =
-{
-    ANIMCMD_FRAME(64, 4),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_Bag_Battle[] =
-{
-    ANIMCMD_FRAME(64, 4),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_Bag_MegaStones[] =
-{
-    ANIMCMD_FRAME(64, 4),
-    ANIMCMD_END
-};
-
 static const union AnimCmd *const sBagSpriteAnimTable[] =
 {
     [POCKET_ITEMS]      = sSpriteAnim_Bag_Items,
-    [POCKET_MEDICINE]   = sSpriteAnim_Bag_Medicine,
-    [POCKET_BATTLE]     = sSpriteAnim_Bag_Battle,
-    [POCKET_BERRIES]    = sSpriteAnim_Bag_Berries,
     [POCKET_POKE_BALLS] = sSpriteAnim_Bag_Pokeballs,
+    [POCKET_TM_HM]      = sSpriteAnim_Bag_TMsHMs,
+    [POCKET_BERRIES]    = sSpriteAnim_Bag_Berries,
     [POCKET_KEY_ITEMS]  = sSpriteAnim_Bag_KeyItems,
-    [POCKET_MEGA_STONES] = sSpriteAnim_Bag_MegaStones,
-    [POCKET_DUMMY]      = sSpriteAnim_Bag_Closed,
+    [POCKET_DUMMY]       = sSpriteAnim_Bag_Closed,
 };
 
 static const union AffineAnimCmd sSpriteAffineAnim_BagNormal[] =
@@ -503,14 +488,22 @@ void AddBagItemIconSprite(enum Item itemId, u8 id)
 
 void RemoveBagItemIconSprite(u8 id)
 {
+// BUG: For one frame, the item you scroll to in the Bag menu
+// will have an incorrect palette and may be seen as a flicker.
 #ifdef BUGFIX
-    // Hide the other icon during replacement to avoid a one-frame palette flash.
-    u8 other = gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM + (id ^ 1)];
-    if (other != SPRITE_NONE)
-        gSprites[other].invisible = TRUE;
-#endif
-    // Bag slots own stable tags; the icon's temporary SpriteTemplate is freed.
+    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
+
+    if (spriteId[id ^ 1] != SPRITE_NONE)
+        gSprites[spriteId[id ^ 1]].invisible = TRUE;
+
+    if (spriteId[id] != SPRITE_NONE)
+    {
+        DestroySpriteAndFreeResources(&gSprites[spriteId[id]]);
+        spriteId[id] = SPRITE_NONE;
+    }
+#else
     RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
+#endif
 }
 
 void CreateItemMenuSwapLine(void)
@@ -592,8 +585,7 @@ static u32 CreateBerrySprite(const struct SpriteTemplate *sprTemplate, u32 berry
     dynamicGfx->images[0].size = BERRY_SPRITE_SIZE;
     dynamicGfx->images[0].relativeFrames = FALSE;
 
-    spriteId = CreateSpriteWithTemplateCopy(&newSprTemplate, x, y, 0);
-    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+    spriteId = CreateSprite(&newSprTemplate, x, y, 0);
     StoreWordInTwoHalfwords((u16 *) &gSprites[spriteId].data[BERRY_ICON_GFX_PTR_DATA_ID], (u32) dynamicGfx);
     return spriteId;
 }
@@ -623,8 +615,8 @@ void DestroyBerryIconSpritePtr(struct Sprite *sprite, u32 berryId, bool32 freePa
     u32 gfxBuffer;
 
     LoadWordFromTwoHalfwords((u16 *) &sprite->data[BERRY_ICON_GFX_PTR_DATA_ID], &gfxBuffer);
-    DestroySprite(sprite);
     Free((void *)gfxBuffer);
+    DestroySprite(sprite);
     if (freePal)
         FreeBerryIconSpritePalette(berryId);
 }

@@ -3,6 +3,7 @@
   "name": "Route128",
   "layout": "LAYOUT_ROUTE128",
   "music": "MUS_ROUTE120",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_128",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,27 +15,40 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE127",
       "offset": 0,
-      "map": "MAP_ROUTE127"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE129",
       "offset": 0,
-      "map": "MAP_ROUTE129"
+      "direction": "down"
     },
     {
-      "direction": "right",
+      "map": "MAP_EVER_GRANDE_CITY",
       "offset": -40,
-      "map": "MAP_EVER_GRANDE_CITY"
+      "direction": "right"
     },
     {
-      "direction": "dive",
+      "map": "MAP_UNDERWATER_ROUTE128",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE128"
+      "direction": "dive"
     }
   ],
   "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+      "x": 35,
+      "y": 33,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN",
+      "movement_range_x": 5,
+      "movement_range_y": 5,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route128_EventScript_Isaiah",
+      "flag": "0"
+    },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
       "x": 78,
@@ -91,6 +105,19 @@
       "flag": "FLAG_HIDE_ROUTE_128_MAXIE"
     },
     {
+      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "x": 63,
+      "y": 28,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route128_EventScript_Wayne",
+      "flag": "0"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
       "x": 47,
       "y": 9,
@@ -115,6 +142,32 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route128_EventScript_Alexa",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+      "x": 101,
+      "y": 29,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Route128_EventScript_Carlee",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+      "x": 101,
+      "y": 22,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Route128_EventScript_Harrison",
+      "flag": "0"
     }
   ],
   "warp_events": [],
@@ -125,24 +178,24 @@
       "x": 49,
       "y": 9,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_1"
     },
     {
       "type": "hidden_item",
       "x": 57,
       "y": 21,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_2"
     },
     {
       "type": "hidden_item",
       "x": 31,
       "y": 33,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_3"
     }
   ]
 }

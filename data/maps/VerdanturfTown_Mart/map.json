@@ -3,6 +3,7 @@
   "name": "VerdanturfTown_Mart",
   "layout": "LAYOUT_MART",
   "music": "MUS_POKE_MART",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_VERDANTURF_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_VERDANTURF_MART_CLERK",
@@ -25,7 +26,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "General_Pokemart_Script",
+      "script": "VerdanturfTown_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -56,7 +57,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 4,
+      "x": 3,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -66,19 +67,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "VerdanturfTown_Mart_EventScript_Lass",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 8,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfTown_Mart_EventScript_GiveNugget",
-      "flag": "0"
     }
   ],
   "warp_events": [
@@ -87,14 +75,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_VERDANTURF_TOWN",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_VERDANTURF_TOWN",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],

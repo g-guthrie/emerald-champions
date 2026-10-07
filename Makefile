@@ -1,6 +1,24 @@
-TITLE        ?= INCLEMENT E2
+GAME_VERSION ?= EMERALD
+TITLE        ?= POKEMON EMER
 GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
+MAP_VERSION  ?= emerald
+
+ifeq (firered, $(or $(BUILD), $(MAKECMDGOALS)))
+  	GAME_VERSION 	:= FIRERED
+	TITLE       	:= POKEMON FIRE
+	GAME_CODE   	:= BPRE
+	BUILD_NAME  	:= firered
+	MAP_VERSION 	:= firered
+else
+ifeq (leafgreen, $(or $(BUILD), $(MAKECMDGOALS)))
+	GAME_VERSION 	:= LEAFGREEN
+	TITLE       	:= POKEMON LEAF
+	GAME_CODE   	:= BPGE
+	BUILD_NAME  	:= leafgreen
+	MAP_VERSION 	:= firered
+endif
+endif
 
 # GBA rom header
 MAKER_CODE  := 01
@@ -15,7 +33,6 @@ BUILD_DIR := build
 COMPARE     ?= 0
 # Executes the Test Runner System that checks that all mechanics work as expected
 TEST         ?= 0
-EC_HEADLESS_FIXTURES ?= 0
 # Enables -fanalyzer C flag to analyze in depth potential UBs
 ANALYZE      ?= 0
 # Count unused warnings as errors. Used by RH-Hideout's repo
@@ -65,7 +82,6 @@ endif
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
-NM := $(PREFIX)nm
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
 
@@ -109,9 +125,7 @@ ifeq ($(RELEASE),1)
   OBJ_DIR := $(OBJ_DIR_NAME_RELEASE)
 endif
 ELF := $(ROM:.gba=.elf)
-UNFILTERED_TESTELF := $(OBJ_DIR)/$(notdir $(TESTELF))
 MAP := $(ROM:.gba=.map)
-PROVENANCE := $(ROM:.gba=.provenance.json)
 SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
@@ -131,7 +145,7 @@ TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 SHELL := bash -o pipefail
 
 # Set flags for tools
-ASFLAGS := -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1
+ASFLAGS := -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym $(GAME_VERSION)=1
 
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
@@ -142,20 +156,16 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -std=gnu17
-CPPFLAGS += -DEC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
 ifeq ($(RELEASE),1)
-ifneq ($(EC_HEADLESS_FIXTURES),0)
-$(error EC_HEADLESS_FIXTURES must remain disabled for release builds)
-endif
-override CPPFLAGS += -DRELEASE
-ifeq ($(USE_LTO_ON_RELEASE),1)
-LTO := 1
-endif
+	override CPPFLAGS += -DRELEASE
+	ifeq ($(USE_LTO_ON_RELEASE),1)
+		LTO := 1
+	endif
 endif
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
-CC1 = $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
+CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
 
 override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init -Wnonnull -Wenum-conversion
 
@@ -181,10 +191,8 @@ ifeq ($(DEPRECATED_ERROR),0)
   endif
 endif
 
-LIBPATH = -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
-LIB = $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
-# Lazy toolchain probes must not be expanded as inherited shell environment.
-unexport CC1 LIBPATH LIB
+LIBPATH := -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
+LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 # Enable debug info if set
 ifeq ($(DINFO),1)
   override CFLAGS += -g
@@ -210,6 +218,7 @@ WAV2AGB      := $(TOOLS_DIR)/wav2agb/wav2agb$(EXE)
 MID          := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
 SCANINC      := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
 PREPROC      := $(TOOLS_DIR)/preproc/preproc$(EXE)
+RAMSCRGEN    := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
 FIX          := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
 MAPJSON      := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
 JSONPROC     := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
@@ -231,10 +240,6 @@ LEARNSET_HELPERS_DIR := $(TOOLS_DIR)/learnset_helpers
 LEARNSET_HELPERS_DATA_DIR := $(LEARNSET_HELPERS_DIR)/porymoves_files
 LEARNSET_HELPERS_BUILD_DIR := $(LEARNSET_HELPERS_DIR)/build
 ALL_LEARNABLES_JSON := $(DATA_SRC_SUBDIR)/pokemon/all_learnables.json
-MOVE_ACCESS_REVIEW_JSON := data/emerald_champions/emerald_champions_move_access_review.json
-PREPARATION_FORM_LEARNSETS_JSON := data/emerald_champions/emerald_champions_preparation_form_learnsets.json
-EC_PREPARATION_LEARNSETS := $(DATA_SRC_SUBDIR)/pokemon/emerald_champions_preparation_learnsets.h
-AUTO_GEN_TARGETS += $(EC_PREPARATION_LEARNSETS)
 ALL_TUTORS_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_tutors.json
 ALL_TEACHING_TYPES_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_teaching_types.json
 
@@ -264,7 +269,7 @@ MAKEFLAGS += --no-print-directory
 .DELETE_ON_ERROR:
 
 RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck tidyrelease generated clean-generated clean-teachables clean-teachables_intermediates
-.PHONY: all rom agbcc modern compare check patch-test-filter debug release
+.PHONY: all rom agbcc modern compare check debug release
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -281,20 +286,18 @@ ifneq (,$(MAKECMDGOALS))
   endif
 endif
 
+.SHELLSTATUS ?= 0
+
 ifeq ($(SETUP_PREREQS),1)
   # If set on: Default target or a rule requiring a scan
   # Forcibly execute `make tools` since we need them for what we are doing.
-  # GNU Make 3.81 (macOS) has no .SHELLSTATUS. With our pipefail shell,
-  # append a success marker only after the entire prerequisite pipeline passes.
-  TOOLS_SETUP_OUTPUT := $(shell $(MAKE) -f make_tools.mk | sed "s/ /__SPACE__/g" && printf '\n__EC_PREREQUISITES_OK__')
-  $(foreach line, $(filter-out __EC_PREREQUISITES_OK__,$(TOOLS_SETUP_OUTPUT)), $(info $(subst __SPACE__, ,$(line))))
-  ifneq ($(lastword $(TOOLS_SETUP_OUTPUT)),__EC_PREREQUISITES_OK__)
+  $(foreach line, $(shell $(MAKE) -f make_tools.mk | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+  ifneq ($(.SHELLSTATUS),0)
     $(error Errors occurred while building tools. See error messages above for more details)
   endif
   # Oh and also generate mapjson sources before we use `SCANINC`.
-  GENERATED_SETUP_OUTPUT := $(shell $(MAKE) generated | sed "s/ /__SPACE__/g" && printf '\n__EC_PREREQUISITES_OK__')
-  $(foreach line, $(filter-out __EC_PREREQUISITES_OK__,$(GENERATED_SETUP_OUTPUT)), $(info $(subst __SPACE__, ,$(line))))
-  ifneq ($(lastword $(GENERATED_SETUP_OUTPUT)),__EC_PREREQUISITES_OK__)
+  $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+  ifneq ($(.SHELLSTATUS),0)
     $(error Errors occurred while generating map-related sources. See error messages above for more details)
   endif
 endif
@@ -304,15 +307,7 @@ C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
-# A release/PR job may provide a curated source allowlist.  The normal default
-# selects the retained focused test corpus for manual builds.
-TEST_SOURCE_ALLOWLIST ?=
-TEST_SUPPORT_SRCS := $(TEST_SUBDIR)/test_runner.c $(TEST_SUBDIR)/test_runner_args.c $(TEST_SUBDIR)/test_runner_battle.c
-ifeq (,$(strip $(TEST_SOURCE_ALLOWLIST)))
 TEST_SRCS_IN := $(wildcard $(TEST_SUBDIR)/*.c $(TEST_SUBDIR)/*/*.c $(TEST_SUBDIR)/*/*/*.c)
-else
-TEST_SRCS_IN := $(sort $(TEST_SUPPORT_SRCS) $(TEST_SOURCE_ALLOWLIST))
-endif
 TEST_SRCS := $(foreach src,$(TEST_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 TEST_OBJS := $(patsubst $(TEST_SUBDIR)/%.c,$(TEST_BUILDDIR)/%.o,$(TEST_SRCS))
 TEST_OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(TEST_OBJS))
@@ -352,18 +347,11 @@ LD_SCRIPT_TEST := ld_script_test.ld
 $(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST)
 	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT_TEST) > ld_script_test.ld
 
-$(UNFILTERED_TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) $(OBJ_DIR)/.test-link-config.json
-	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o $(notdir $@) <objects> <test-objects> <lib>"
-	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o $(notdir $@) $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
+$(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
+	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
+	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
-
-$(TESTELF): $(UNFILTERED_TESTELF) FORCE_TEST_EXPORT | check-tools
-	@python3 scripts/export_test_elf.py $(UNFILTERED_TESTELF) $@ --receipt=$(OBJ_DIR)/.test-filter.json --patchelf=$(call shell_quote,$(PATCHELF)) --filter=$(call shell_quote,$(TESTS:%*=%))
-
-# Filter export validates actual bytes, so direct/check/direct requests stay
-# coherent even when an earlier command patched the public test image.
-patch-test-filter: $(TESTELF)
-	@:
+	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS:%*=%)\0"
 
 ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
 TEST_SKIP_IS_FAIL := \x01
@@ -371,8 +359,8 @@ else
 TEST_SKIP_IS_FAIL := \x00
 endif
 
-check: patch-test-filter
-	@cp $(TESTELF) $(HEADLESSELF)
+check: $(TESTELF)
+	@cp $< $(HEADLESSELF)
 	$(PATCHELF) $(HEADLESSELF) gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "$(TEST_SKIP_IS_FAIL)"
 	$(ROMTESTHYDRA) $(ROMTEST) $(OBJCOPY) $(HEADLESSELF)
 
@@ -392,6 +380,7 @@ clean-assets:
 	rm -f $(MID_SUBDIR)/*.s
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc $(DATA_SRC_SUBDIR)/map_group_count.h
+	rm -f .map_version
 	find sound -iname '*.bin' -exec rm {} +
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.smol' -o -iname '*.fastSmol' -o -iname '*.smolTM' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
@@ -399,7 +388,7 @@ clean-assets:
 tidy: tidymodern tidycheck tidydebug tidyrelease
 
 tidymodern:
-	rm -f poke*.gba poke*.elf poke*.map poke*.provenance.json
+	rm -f poke*.gba poke*.elf poke*.map
 	rm -rf $(OBJ_DIR_NAME)
 
 tidycheck:
@@ -411,9 +400,9 @@ tidydebug:
 
 tidyrelease:
 ifeq ($(RELEASE),1)
-	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME) $(PROVENANCE)
+	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
 else # Manually remove the release files on clean/tidy
-	rm -f $(FILE_NAME)-release.gba $(FILE_NAME)-release.elf $(FILE_NAME)-release.map $(FILE_NAME)-release.provenance.json
+	rm -f $(FILE_NAME)-release.gba $(FILE_NAME)-release.elf $(FILE_NAME)-release.map
 endif
 	rm -rf $(OBJ_DIR_NAME_RELEASE)
 
@@ -461,44 +450,96 @@ clean-teachables: clean-teachables_intermediates
 	rm -f $(ALL_LEARNABLES_JSON)
 	@touch $(C_SUBDIR)/pokemon.c
 
-# Freeze global settings before any object can lend target-specific CFLAGS to
-# the shared receipt. Per-target overrides and recipes live in compile_rules.mk.
-CONFIG_CPPFLAGS := $(CPPFLAGS)
-CONFIG_CFLAGS := $(CFLAGS)
-CONFIG_ASFLAGS := $(ASFLAGS)
-CONFIG_SCANFLAGS := $(INCLUDE_SCANINC_ARGS)
-CONFIG_KEEP_TEMPS := $(KEEP_TEMPS)
-CONFIG_CPP := $(CPP)
-CONFIG_AS := $(AS)
-CONFIG_ARMCC := $(ARMCC)
-CONFIG_PREPROC := $(PREPROC)
-CONFIG_SCANINC := $(SCANINC)
-CONFIG_SCAN_TOOL = $(if $(filter 1,$(NODEP)),,--tool=$(call shell_quote,$(CONFIG_SCANINC)))
-OBJECT_CONFIG := $(OBJ_DIR)/.objects-config.json
-BUILD_CONFIG_HELPER := scripts/update_build_config.py
-shell_quote = '$(subst ','"'"',$(1))'
+$(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
+$(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
+$(C_BUILDDIR)/agb_flash.o: override CFLAGS += -fno-toplevel-reorder
+$(C_BUILDDIR)/pokedex_plus_hgss.o: CFLAGS := -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
+# Annoyingly we can't turn this on just for src/data/trainers.h
+$(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret
 
-.PHONY: FORCE_BUILD_CONFIG FORCE_TEST_EXPORT
-FORCE_BUILD_CONFIG:
-FORCE_TEST_EXPORT:
+# Needed for parity with pret
+$(C_BUILDDIR)/graphics.o: override CFLAGS += -Wno-missing-braces
 
-$(OBJECT_CONFIG): FORCE_BUILD_CONFIG
-	@python3 $(BUILD_CONFIG_HELPER) $@ --value=$(call shell_quote,CPPFLAGS=$(CONFIG_CPPFLAGS)) --value=$(call shell_quote,CFLAGS=$(CONFIG_CFLAGS)) --value=$(call shell_quote,ASFLAGS=$(CONFIG_ASFLAGS)) --value=$(call shell_quote,SCANFLAGS=$(CONFIG_SCANFLAGS)) --value=$(call shell_quote,KEEP_TEMPS=$(CONFIG_KEEP_TEMPS)) --value=$(call shell_quote,SHELL=$(SHELL)) --tool=$(call shell_quote,$(CONFIG_ARMCC)) --tool=$(call shell_quote,$(CC1)) --tool=$(call shell_quote,$(CONFIG_CPP)) --tool=$(call shell_quote,$(CONFIG_AS)) --tool=$(call shell_quote,$(CONFIG_PREPROC)) $(CONFIG_SCAN_TOOL) --file=compile_rules.mk --file=map_data_rules.mk --file=audio_rules.mk --file=charmap.txt --env=CPATH --env=C_INCLUDE_PATH --env=COMPILER_PATH --env=GCC_EXEC_PREFIX --env=SOURCE_DATE_EPOCH
+# Dependency rules (for the *.c & *.s sources to .o files)
+# Have to be explicit or else missing files won't be reported.
+$(C_BUILDDIR)/move_relearner.o: $(C_SUBDIR)/move_relearner.c $(DATA_SRC_SUBDIR)/tutor_moves.h
+$(C_BUILDDIR)/pokemon.o: $(C_SUBDIR)/pokemon.c $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h
 
-$(OBJS): $(OBJECT_CONFIG)
-ifeq ($(TEST),1)
-$(TEST_OBJS): $(OBJECT_CONFIG)
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way (Icedude_907: there is soon).
+
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
+ifneq ($(KEEP_TEMPS),1)
+	@echo "$(CC1) <flags> -o $@ $<"
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+else
+	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
+	@$(PREPROC) -g $(ASSETS_DIR_NAME) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 endif
+
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
+	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
+
 ifneq ($(NODEP),1)
-$(OBJS:.o=.d): $(OBJECT_CONFIG)
+-include $(ALL_TUTORS_JSON), $(ALL_TEACHING_TYPES_JSON),
+-include $(addprefix $(OBJ_DIR)/,$(C_SRCS:.c=.d))
+endif
+
 ifeq ($(TEST),1)
-$(TEST_OBJS:.o=.d): $(OBJECT_CONFIG)
+$(TEST_BUILDDIR)/%.o: $(TEST_SUBDIR)/%.c
+	@echo "$(CC1) <flags> -o $@ $<"
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+
+$(TEST_BUILDDIR)/%.d: $(TEST_SUBDIR)/%.c
+	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
+
+ifneq ($(NODEP),1)
+-include $(addprefix $(OBJ_DIR)/,$(TEST_SRCS:.c=.d))
 endif
 endif
 
-include compile_rules.mk
+$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
+	$(AS) $(ASFLAGS) -o $@ $<
 
-TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(INCLUDE_DIRS)/constants/tms_hms.h $(INCLUDE_DIRS)/config/pokemon.h $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(INCLUDE_DIRS)/config/pokedex_plus_hgss.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
+$(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
+	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
+
+ifneq ($(NODEP),1)
+-include $(addprefix $(OBJ_DIR)/,$(ASM_SRCS:.s=.d))
+endif
+
+$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
+	$(PREPROC) $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
+	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
+
+ifneq ($(NODEP),1)
+-include $(addprefix $(OBJ_DIR)/,$(C_ASM_SRCS:.s=.d))
+endif
+
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
+	$(PREPROC) -s $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+
+$(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
+	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
+
+ifneq ($(NODEP),1)
+-include $(addprefix $(OBJ_DIR)/,$(DATA_ASM_SRCS:.s=.d))
+endif
+
+$(OBJ_DIR)/sym_bss.ld: sym_bss.txt
+	$(RAMSCRGEN) .bss $< ENGLISH > $@
+
+$(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
+	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
+
+$(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
+
+TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(INCLUDE_DIRS)/constants/tms_hms.h $(INCLUDE_DIRS)/config/pokemon.h $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(INCLUDE_DIRS)/config/pokedex_plus_hgss.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
 
 $(LEARNSET_HELPERS_BUILD_DIR):
 	@mkdir -p $@
@@ -515,31 +556,11 @@ $(ALL_TEACHING_TYPES_JSON): $(wildcard $(DATA_SRC_SUBDIR)/pokemon/species_info/*
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS) | $(ALL_TUTORS_JSON) $(ALL_TEACHING_TYPES_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py $(LEARNSET_HELPERS_BUILD_DIR)
 
-$(EC_PREPARATION_LEARNSETS): $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(PREPARATION_FORM_LEARNSETS_JSON) $(INCLUDE_DIRS)/constants/species.h $(INCLUDE_DIRS)/constants/moves.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
-	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py --preparation
-
-$(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(MOVE_ACCESS_REVIEW_JSON) | $(ALL_TUTORS_JSON)
+$(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json | $(ALL_TUTORS_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py  --tutors $(LEARNSET_HELPERS_BUILD_DIR)
 
 # Linker script
 LD_SCRIPT := ld_script_modern.ld
-
-# Build provenance. One identifier for the source (commit plus uncommitted
-# build inputs), configuration and toolchain is assembled into the ROM as the
-# kept symbol gEcBuildProvenance; after the ROM exists the same script checks
-# the embedded identifier, fingerprints the compiled save layout and writes
-# $(PROVENANCE) beside the ROM. See scripts/build_provenance.py.
-BUILD_PROVENANCE := scripts/build_provenance.py
-PROVENANCE_PREPARED := $(OBJ_DIR)/.build-provenance.json
-PROVENANCE_ASM := $(OBJ_DIR)/ec_build_provenance.s
-PROVENANCE_OBJ := $(OBJ_DIR)/ec_build_provenance.o
-PROVENANCE_OBJ_REL := $(patsubst $(OBJ_DIR)/%,%,$(PROVENANCE_OBJ))
-
-$(PROVENANCE_ASM): FORCE_BUILD_CONFIG
-	@python3 $(BUILD_PROVENANCE) prepare --asm $@ --json $(PROVENANCE_PREPARED) --value=$(call shell_quote,ROM=$(ROM)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --value=$(call shell_quote,MODES=RELEASE=$(RELEASE) DEBUG=$(DEBUG) TEST=$(TEST) LTO=$(LTO) EC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)) --value=$(call shell_quote,CPPFLAGS=$(CONFIG_CPPFLAGS)) --value=$(call shell_quote,CFLAGS=$(CONFIG_CFLAGS)) --value=$(call shell_quote,ASFLAGS=$(CONFIG_ASFLAGS)) --value=$(call shell_quote,LDFLAGS=$(LDFLAGS)) --tool=$(call shell_quote,$(CONFIG_ARMCC)) --tool=$(call shell_quote,$(CC1)) --tool=$(call shell_quote,$(CONFIG_AS)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(OBJCOPY)) --tool=$(call shell_quote,$(FIX)) --tool=$(call shell_quote,$(CONFIG_PREPROC))
-
-$(PROVENANCE_OBJ): $(PROVENANCE_ASM)
-	$(AS) $(ASFLAGS) -o $@ - < $<
 
 # Final rules
 
@@ -550,35 +571,27 @@ libagbsyscall:
 ifneq ($(LTO),0)
 LDFLAGS := -march=armv4t -mabi=apcs-gnu -mcpu=arm7tdmi -Xlinker -Map=../../$(MAP) -Xlinker --print-memory-usage -Xassembler -meabi=5 -Xassembler -march=armv4t -Xassembler -mcpu=arm7tdmi -Xlinker --gc-sections
 LDFLAGS += -Xlinker -flto=auto
-$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json $(PROVENANCE_OBJ)
+$(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
 	@echo "cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs>"
-	+@cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(PROVENANCE_OBJ_REL) $(LIB)
+	+@cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 else
 # Output .map file, memory usage readout and gc sections to clean-up unused data
 LDFLAGS = -Map ../../$(MAP) --print-memory-usage --gc-sections
-$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json $(PROVENANCE_OBJ)
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(PROVENANCE_OBJ_REL) $(LIB) | cat
+$(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs> | cat"
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 endif
 
 # Builds the rom from the elf file
 $(ROM): $(ELF)
-	@rm -f $(PROVENANCE)
 	$(OBJCOPY) -O binary $< $@
 	$(FIX) $@ -p --silent
-	@python3 $(BUILD_PROVENANCE) finalize --prepared $(PROVENANCE_PREPARED) --rom $@ --elf $< --out $(PROVENANCE) --cc=$(call shell_quote,$(ARMCC)) --objdump=$(call shell_quote,$(OBJDUMP)) --nm=$(call shell_quote,$(NM)) --flags=$(call shell_quote,$(CONFIG_CPPFLAGS) $(CONFIG_CFLAGS)) --work $(OBJ_DIR)/save-layout
 
 emerald: all
+firered: all
+leafgreen: all
 # Symbol file (`make syms`)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
-
-# Library builds are order-only here: their content identity, not a phony
-# prerequisite, decides whether the linked images need rebuilding.
-$(OBJ_DIR)/.link-config.json: FORCE_BUILD_CONFIG | libagbsyscall
-	@python3 $(BUILD_CONFIG_HELPER) $@ --value=$(call shell_quote,LDFLAGS=$(LDFLAGS)) --value=$(call shell_quote,LIB=$(LIB)) --value=$(call shell_quote,OBJECTS=$(OBJS_REL)) --value=$(call shell_quote,LTO=$(LTO)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(ARMCC)) --tool=$(call shell_quote,$(FIX)) --file=Makefile --file=$(LD_SCRIPT) --libraries=$(call shell_quote,$(LIB)) --library-directory=$(OBJ_DIR) --env=LIBRARY_PATH --env=COMPILER_PATH --env=GCC_EXEC_PREFIX
-
-$(OBJ_DIR)/.test-link-config.json: FORCE_BUILD_CONFIG | libagbsyscall tools check-tools
-	@python3 $(BUILD_CONFIG_HELPER) $@ --value=$(call shell_quote,TESTLDFLAGS=$(TESTLDFLAGS)) --value=$(call shell_quote,LIB=$(LIB)) --value=$(call shell_quote,OBJECTS=$(OBJS_REL)|$(TEST_OBJS_REL)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(FIX)) --file=Makefile --file=$(LD_SCRIPT_TEST) --libraries=$(call shell_quote,$(LIB)) --library-directory=$(OBJ_DIR) --env=LIBRARY_PATH

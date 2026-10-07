@@ -1,5 +1,4 @@
 #include "global.h"
-#include "guided_tutorial.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -73,6 +72,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId 
     [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,
     [CONTROLLER_23]                       = BtlController_Empty,
     [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_Empty,
     [CONTROLLER_STATUSANIMATION]          = BtlController_Empty,
     [CONTROLLER_STATUSXOR]                = BtlController_Empty,
@@ -108,9 +108,9 @@ void SetControllerToWally(enum BattlerId battler)
     gBattlerBattleController[battler] = BATTLE_CONTROLLER_WALLY;
     gBattlerControllerEndFuncs[battler] = WallyBufferExecCompleted;
     gBattlerControllerFuncs[battler] = WallyBufferRunCommand;
-    gBattleStruct->wallyBattleState = IsRivalDexNavTutorialActive() ? 3 : 0;
+    gBattleStruct->wallyBattleState = 0;
     gBattleStruct->wallyMovesState = 0;
-    gBattleStruct->wallyWaitFrames = IsRivalDexNavTutorialActive() ? B_WAIT_TIME_LONG : 0;
+    gBattleStruct->wallyWaitFrames = 0;
     gBattleStruct->wallyMoveFrames = 0;
 }
 
@@ -282,14 +282,14 @@ void WallyBufferExecCompleted(enum BattlerId battler)
 
 static void WallyHandleDrawTrainerPic(enum BattlerId battler)
 {
-    BtlController_HandleDrawTrainerPic(battler, RivalTutorialTrainerPic(), FALSE,
-                                       80, 80 + 4 * (8 - GetTrainerBackPicCoords(RivalTutorialTrainerPic())->size),
+    BtlController_HandleDrawTrainerPic(battler, TRAINER_PIC_WALLY, FALSE,
+                                       80, 80 + 4 * (8 - GetTrainerBackPicCoords(TRAINER_PIC_WALLY)->size),
                                        30);
 }
 
 static void WallyHandleTrainerSlide(enum BattlerId battler)
 {
-    BtlController_HandleTrainerSlide(battler, RivalTutorialTrainerPic());
+    BtlController_HandleTrainerSlide(battler, TRAINER_PIC_WALLY);
 }
 
 #undef sSpeedX
@@ -315,7 +315,7 @@ static void WallyHandleChooseAction(enum BattlerId battler)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(RivalTutorialActionPrompt());
+    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillWallyDo);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
@@ -366,7 +366,7 @@ static void WallyHandleFaintingCry(enum BattlerId battler)
 
 static void WallyHandleIntroTrainerBallThrow(enum BattlerId battler)
 {
-    const u16 *trainerPal = GetTrainerBackPicPalette(RivalTutorialTrainerPic());
+    const u16 *trainerPal = GetTrainerBackPicPalette(TRAINER_PIC_WALLY);
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
 }
 

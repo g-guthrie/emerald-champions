@@ -5,6 +5,7 @@
 #include "clock.h"
 #include "coins.h"
 #include "credits.h"
+#include "credits_frlg.h"
 #include "data.h"
 #include "daycare.h"
 #include "debug.h"
@@ -302,6 +303,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId);
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_PCBag_ClearBag(u8 taskId);
@@ -389,6 +391,7 @@ extern const u8 DebugScript_ZeroDaycareMons[];
 
 extern const u8 Debug_ShowFieldMessageStringVar4[];
 extern const u8 Debug_CheatStart[];
+extern const u8 Debug_CheatStartFrlg[];
 extern const u8 Debug_HatchAnEgg[];
 extern const u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern const u8 PlayersHouse_2F_EventScript_CheckWallClock[];
@@ -608,6 +611,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_PCBag_Fill[] =
     { COMPOUND_STRING("Fill PC Items") ,            DebugAction_PCBag_Fill_PCItemStorage },
     { COMPOUND_STRING("Fill Pocket Items"),         DebugAction_PCBag_Fill_PocketItems },
     { COMPOUND_STRING("Fill Pocket Poké Balls"),    DebugAction_PCBag_Fill_PocketPokeBalls },
+    { COMPOUND_STRING("Fill Pocket TMHM"),          DebugAction_PCBag_Fill_PocketTMHM },
     { COMPOUND_STRING("Fill Pocket Berries"),       DebugAction_PCBag_Fill_PocketBerries },
     { COMPOUND_STRING("Fill Pocket Key Items"),     DebugAction_PCBag_Fill_PocketKeyItems },
     { NULL }
@@ -1503,6 +1507,26 @@ static const u16 sLocationFlags[] =
     FLAG_VISITED_EVER_GRANDE_CITY,
     FLAG_LANDMARK_POKEMON_LEAGUE,
     FLAG_LANDMARK_BATTLE_FRONTIER,
+    FLAG_WORLD_MAP_PALLET_TOWN,
+    FLAG_WORLD_MAP_VIRIDIAN_CITY,
+    FLAG_WORLD_MAP_PEWTER_CITY,
+    FLAG_WORLD_MAP_CERULEAN_CITY,
+    FLAG_WORLD_MAP_LAVENDER_TOWN,
+    FLAG_WORLD_MAP_VERMILION_CITY,
+    FLAG_WORLD_MAP_CELADON_CITY,
+    FLAG_WORLD_MAP_FUCHSIA_CITY,
+    FLAG_WORLD_MAP_CINNABAR_ISLAND,
+    FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR,
+    FLAG_WORLD_MAP_SAFFRON_CITY,
+    FLAG_WORLD_MAP_ONE_ISLAND,
+    FLAG_WORLD_MAP_TWO_ISLAND,
+    FLAG_WORLD_MAP_THREE_ISLAND,
+    FLAG_WORLD_MAP_FOUR_ISLAND,
+    FLAG_WORLD_MAP_FIVE_ISLAND,
+    FLAG_WORLD_MAP_SEVEN_ISLAND,
+    FLAG_WORLD_MAP_SIX_ISLAND,
+    FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F,
+    FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F,
 };
 
 static u32 Debug_CheckToggleFlags(u8 id)
@@ -1530,6 +1554,9 @@ static u32 Debug_CheckToggleFlags(u8 id)
         result = TRUE;
         for (u32 i = 0; i < ARRAY_COUNT(sLocationFlags); i++)
         {
+            if (sLocationFlags[i] == 0) // Location flags for Frlg are set to flag 0 in Emerald and vice versa
+                continue;
+
             if (!FlagGet(sLocationFlags[i]))
             {
                 result = FALSE;
@@ -1974,7 +2001,10 @@ static void DebugAction_Util_CheatStart(u8 taskId)
         RtcInitLocalTimeOffset(0, 0);
 
     InitTimeBasedEvents();
-    Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
+    if (IS_FRLG)
+        Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStartFrlg);
+    else
+        Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
 }
 
 void BufferExpansionVersion(struct ScriptContext *ctx)
@@ -2232,10 +2262,7 @@ static void Debug_CreateTrainerIcon(u8 taskId)
     gTasks[taskId].tSpriteId = CreateObjectGraphicsSpriteWithTag(graphicsId, SpriteCallbackDummy, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, DEBUG_ICON_TAG);
     StartSpriteAnim(&gSprites[gTasks[taskId].tSpriteId], ANIM_STD_GO_SOUTH);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
-    // Object graphics use a temporary template. Read the installed palette
-    // instead of dereferencing that descriptor after the constructor freed it.
-    u16 paletteTag = GetSpritePaletteTagByPaletteNum(gSprites[gTasks[taskId].tSpriteId].oam.paletteNum);
-    gSprites[gTasks[taskId].tSpriteId].oam.paletteNum = LoadObjectEventPaletteCopy(paletteTag, DEBUG_ICON_TAG);
+    gSprites[gTasks[taskId].tSpriteId].oam.paletteNum =  LoadObjectEventPaletteCopy(gSprites[gTasks[taskId].tSpriteId].template->paletteTag, DEBUG_ICON_TAG);
 }
 
 static void DebugSelectionStep_UpdateMapTrainer(u8 taskId, u8 digits, u32 min, u32 max)
@@ -2982,7 +3009,8 @@ static void DebugAction_FlagsVars_RunningShoes(u8 taskId)
 
 static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
 {
-    if (FlagGet(sLocationFlags[0]))
+    u32 checkedFlag = sLocationFlags[0] == 0 ? sLocationFlags[ARRAY_COUNT(sLocationFlags) - 1] : sLocationFlags[0];
+    if (FlagGet(checkedFlag))
     {
         PlaySE(SE_PC_OFF);
         for (u32 i = 0; i < ARRAY_COUNT(sLocationFlags); i++)
@@ -3101,9 +3129,12 @@ static void Debug_DisplayItemIcon(u8 taskId, enum Item itemId)
 {
     DestroyDebugIcon(taskId);
     gTasks[taskId].tSpriteId = AddItemIconSprite(DEBUG_ICON_TAG, DEBUG_ICON_TAG,  itemId);
-    gSprites[gTasks[taskId].tSpriteId].x = DEBUG_NUMBER_ICON_X + 8;
-    gSprites[gTasks[taskId].tSpriteId].y = DEBUG_NUMBER_ICON_Y + 8;
-    gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+    if (gTasks[taskId].tSpriteId != MAX_SPRITES)
+    {
+        gSprites[gTasks[taskId].tSpriteId].x = DEBUG_NUMBER_ICON_X + 8;
+        gSprites[gTasks[taskId].tSpriteId].y = DEBUG_NUMBER_ICON_Y + 8;
+        gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+    }
 }
 
 static void DebugSelectionStep_UpdateItem(u8 taskId, u8 digits, u32 min, u32 max)
@@ -3113,6 +3144,16 @@ static void DebugSelectionStep_UpdateItem(u8 taskId, u8 digits, u32 min, u32 max
     ConvertIntToDecimalStringN(gStringVar3, itemId, STR_CONV_MODE_LEADING_ZEROS, digits);
     StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("Item ID: {STR_VAR_3}"));
     u8* end = CopyItemName(itemId, gStringVar2);
+    enum Move moveId = ItemIdToBattleMoveId(itemId);
+    if (moveId != MOVE_NONE)
+    {
+        end = StringCopy(end, gText_Space);
+        end = StringCopy(end, GetMoveName(moveId));
+    }
+    else if (CheckIfItemIsTMHMOrEvolutionStone(itemId) == ITEM_IS_TM_HM)
+    {
+        end = StringCopy(end, COMPOUND_STRING(" None"));
+    }
     WrapFontIdToFit(gStringVar2, end, DEBUG_MENU_FONT, WindowWidthPx(gTasks[taskId].tSubWindowId));
     StringCopy(gStringVar3, COMPOUND_STRING(""));
     DebugNativeStep_PrintWindowSelection(taskId);
@@ -3283,6 +3324,22 @@ static void DebugSelectionStep_UpdateGigantamaxFactor(u8 taskId, u8 digits, u32 
     DebugSelectionStep_PrintGenericBooleanInput(taskId, COMPOUND_STRING("Gmax Factor:"));
 }
 
+static void DebugSelectionStep_UpdateTeraType(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    if (gTasks[taskId].tInput == TYPE_MYSTERY)
+    {
+        if (JOY_NEW(DPAD_DOWN))
+            gTasks[taskId].tInput--;
+        else
+            gTasks[taskId].tInput++;
+    }
+    ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, digits);
+    StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("Tera Type: {STR_VAR_3}"));
+    StringCopy(gStringVar2, gTypesInfo[gTasks[taskId].tInput].name);
+    StringCopy(gStringVar3, COMPOUND_STRING(""));
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
 static const struct DebugSelectionStep sGenderSelectionStep = {
     .stepUpdate = DebugSelectionStep_UpdateGender,
     .stepConfirm = DebugSelectionStep_GenderConfirm,
@@ -3350,6 +3407,14 @@ static const struct DebugSelectionStep sGigantamaxFactorSelectionStep = {
     .digits = 1,
 };
 
+static const struct DebugSelectionStep sTeraTypeSelectionStep = {
+    .stepUpdate = DebugSelectionStep_UpdateTeraType,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 1,
+    .maxValue = NUMBER_OF_MON_TYPES - 1,
+    .digits = 2,
+};
+
 static bool32 DebugSelection_GiveComplexPokemon_OnComplete(u8 taskId)
 {
     u16 *monData = (u16 *)GetWordTaskArg(taskId, STEPS_DATA_PTR_ARG);
@@ -3389,6 +3454,7 @@ static bool32 DebugSelection_GiveComplexPokemon_OnComplete(u8 taskId)
 
     SetMonData(&mon, MON_DATA_DYNAMAX_LEVEL, &monData[22]);
     SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &monData[23]);
+    SetMonData(&mon, MON_DATA_TERA_TYPE, &monData[24]);
 
     CalculateMonStats(&mon);
     GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
@@ -3412,8 +3478,9 @@ static const struct DebugSelection sComplexPokemonSelection = {
         &sEVsSelectionStep,
         &sDynamaxLevelSelectionStep,
         &sGigantamaxFactorSelectionStep,
+        &sTeraTypeSelectionStep,
     },
-    .maxSteps = 11,
+    .maxSteps = 12,
 };
 
 static bool32 DebugSelection_GiveEggPokemon_OnComplete(u8 taskId)
@@ -3580,7 +3647,6 @@ static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffini
         {
             if (!GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
             {
-                memset(speciesName, EOS, sizeof(speciesName));
                 StringCopy(speciesName, GetSpeciesName(species));
                 SetBoxMonData(&boxMon, MON_DATA_NICKNAME, &speciesName);
                 SetBoxMonData(&boxMon, MON_DATA_SPECIES, &species);
@@ -3658,6 +3724,18 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
     {
         if (CheckBagHasSpace(gPokeBalls[ballId].itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(gPokeBalls[ballId].itemId, MAX_BAG_ITEM_CAPACITY);
+    }
+}
+
+static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
+{
+    u16 index, itemId;
+
+    for (index = 0; index < NUM_ALL_MACHINES; index++)
+    {
+        itemId = GetTMHMItemId(index + 1);
+        if (CheckBagHasSpace(itemId, 1) && ItemIdToBattleMoveId(itemId) != MOVE_NONE)
+            AddBagItem(itemId, 1);
     }
 }
 

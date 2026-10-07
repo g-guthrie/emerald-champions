@@ -84,6 +84,10 @@
 #define FAKE_OUT_SAVE_ALLY_CHANCE                               50 // Chance for AI to Fake Out to save its ally when ally is fast KO'd by both opponents
 
 // AI damage calc considerations
+#define RISKY_AI_CRIT_STAGE_THRESHOLD                           2   // Stat stages at which Risky will assume it gets a crit
+#define RISKY_AI_CRIT_THRESHOLD_GEN_1                           128 // "Stat stage" at which Risky will assume it gets a crit with gen 1 mechanics (this translates to an X / 255 % crit threshold)
+#define AI_DAMAGES_THROUGH_BERRIES                              TRUE // AI will see through resist berries when considering a certain KO threshold for the purposes damage calcs; this is considered when comparing best moves to KO to still pick the actual OHKO if needed
+#define AI_IGNORE_BERRY_KO_THRESHOLD                            2   // KO threshold AI must meet in order to treat it berry though it doesn't exist (ie. 2 means "If the AI can 2HKO with berry resisted attack + not-berry resisted next attack, ignore berry resistence when calcing first attack"). Requires AI_DAMAGES_THROUGH_BERRIES
 
 // AI damage calc roll considerations
 #define AI_ROLL_MIN                                             1
@@ -92,8 +96,8 @@
 #define AI_ROLL_RANDOM                                          4
 #define AI_ROLL_TYPE_COUNT                                      5
 
-// Define the truthful damage statistic used by each decision context.
-#define AI_ROLL_ATTACKING                                       AI_ROLL_MEDIAN
+// Define which roll type to use in each context; overridden by AI_FLAG_RISKY and AI_FLAG_CONSERVATIVE
+#define AI_ROLL_ATTACKING                                       AI_ROLL_MAX
 #define AI_ROLL_DEFENDING                                       AI_ROLL_MEDIAN
 #define AI_ROLL_SWITCHIN_ATTACKING                              AI_ROLL_MEDIAN
 #define AI_ROLL_SWITCHIN_DEFENDING                              AI_ROLL_MEDIAN
@@ -104,6 +108,9 @@
 #define PREDICT_SWITCH_CHANCE                                   50
 #define PREDICT_MOVE_CHANCE                                     100
 
+// AI Terastalization chances
+#define AI_CONSERVE_TERA_CHANCE_PER_MON                         10 // Chance for AI with smart tera flag to decide not to tera before considering defensive benefit is this*(X-1), where X is the number of alive Pokémon that could tera
+#define AI_TERA_PREDICT_CHANCE                                  40 // Chance for AI with smart tera flag to tera in the situation where tera would save it from a KO, but could be punished by a KO from a different move.
 
 // AI_FLAG_PP_STALL_PREVENTION settings
 #define PP_STALL_DISREGARD_MOVE_PERCENTAGE                      50 // Detection chance per roll

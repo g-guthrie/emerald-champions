@@ -854,10 +854,6 @@ bool8 IsWeatherNotFadingIn(void)
 
 void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
 {
-    // LoadSpritePalette returns 0xFF when no OBJ palette can be allocated.
-    // Never turn that failure into an offset beyond the palette buffers.
-    if (spritePaletteIndex >= 16)
-        return;
     u16 paletteIndex = 16 + spritePaletteIndex;
     u16 i;
 
@@ -914,6 +910,14 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
 void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes)
 {
     ApplyColorMap(startPalIndex, numPalettes, gWeatherPtr->colorMapIndex);
+}
+
+static bool8 UNUSED IsFirstFrameOfWeatherFadeIn(void)
+{
+    if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
+        return gWeatherPtr->fadeInFirstFrame;
+    else
+        return FALSE;
 }
 
 void LoadCustomWeatherSpritePalette(const u16 *palette)
@@ -1056,6 +1060,43 @@ bool8 Weather_UpdateBlend(void)
 }
 
 // Uses the same numbering scheme as the coord events
+static void UNUSED SetFieldWeather(u8 weather)
+{
+    switch (weather)
+    {
+    case COORD_EVENT_WEATHER_SUNNY_CLOUDS:
+        SetWeather(WEATHER_SUNNY_CLOUDS);
+        break;
+    case COORD_EVENT_WEATHER_SUNNY:
+        SetWeather(WEATHER_SUNNY);
+        break;
+    case COORD_EVENT_WEATHER_RAIN:
+        SetWeather(WEATHER_RAIN);
+        break;
+    case COORD_EVENT_WEATHER_SNOW:
+        SetWeather(WEATHER_SNOW);
+        break;
+    case COORD_EVENT_WEATHER_RAIN_THUNDERSTORM:
+        SetWeather(WEATHER_RAIN_THUNDERSTORM);
+        break;
+    case COORD_EVENT_WEATHER_FOG_HORIZONTAL:
+        SetWeather(WEATHER_FOG_HORIZONTAL);
+        break;
+    case COORD_EVENT_WEATHER_FOG_DIAGONAL:
+        SetWeather(WEATHER_FOG_DIAGONAL);
+        break;
+    case COORD_EVENT_WEATHER_VOLCANIC_ASH:
+        SetWeather(WEATHER_VOLCANIC_ASH);
+        break;
+    case COORD_EVENT_WEATHER_SANDSTORM:
+        SetWeather(WEATHER_SANDSTORM);
+        break;
+    case COORD_EVENT_WEATHER_SHADE:
+        SetWeather(WEATHER_SHADE);
+        break;
+    }
+}
+
 u8 GetCurrentWeather(void)
 {
     return gWeatherPtr->currWeather;
@@ -1158,25 +1199,25 @@ bool32 IsWeatherAlphaBlend(void)
 }
 
 static const u8 sWeatherNames[WEATHER_COUNT][24] = {
-    [WEATHER_NONE]               = _("None"),
-    [WEATHER_SUNNY_CLOUDS]       = _("Sunny Clouds"),
-    [WEATHER_SUNNY]              = _("Sunny"),
-    [WEATHER_RAIN]               = _("Rain"),
-    [WEATHER_SNOW]               = _("Snow"),
-    [WEATHER_RAIN_THUNDERSTORM]  = _("Rain Thunderstorm"),
-    [WEATHER_FOG_HORIZONTAL]     = _("Fog Horizontal"),
-    [WEATHER_VOLCANIC_ASH]       = _("Volcanic Ash"),
-    [WEATHER_SANDSTORM]          = _("Sandstorm"),
-    [WEATHER_FOG_DIAGONAL]       = _("Fog Diagonal"),
-    [WEATHER_UNDERWATER]         = _("Underwater"),
-    [WEATHER_SHADE]              = _("Shade"),
-    [WEATHER_DROUGHT]            = _("Drought"),
-    [WEATHER_DOWNPOUR]           = _("Downpour"),
-    [WEATHER_UNDERWATER_BUBBLES] = _("Underwater Bubbles"),
-    [WEATHER_ABNORMAL]           = _("Abnormal"),
-    [WEATHER_ROUTE119_CYCLE]     = _("Route 119 Cycle"),
-    [WEATHER_ROUTE123_CYCLE]     = _("Route 123 Cycle"),
-    [WEATHER_FOG]                = _("Fog"),
+    [WEATHER_NONE]               = _("NONE"),
+    [WEATHER_SUNNY_CLOUDS]       = _("SUNNY CLOUDS"),
+    [WEATHER_SUNNY]              = _("SUNNY"),
+    [WEATHER_RAIN]               = _("RAIN"),
+    [WEATHER_SNOW]               = _("SNOW"),
+    [WEATHER_RAIN_THUNDERSTORM]  = _("RAIN THUNDERSTORM"),
+    [WEATHER_FOG_HORIZONTAL]     = _("FOG HORIZONTAL"),
+    [WEATHER_VOLCANIC_ASH]       = _("VOLCANIC ASH"),
+    [WEATHER_SANDSTORM]          = _("SANDSTORM"),
+    [WEATHER_FOG_DIAGONAL]       = _("FOG DIAGONAL"),
+    [WEATHER_UNDERWATER]         = _("UNDERWATER"),
+    [WEATHER_SHADE]              = _("SHADE"),
+    [WEATHER_DROUGHT]            = _("DROUGHT"),
+    [WEATHER_DOWNPOUR]           = _("DOWNPOUR"),
+    [WEATHER_UNDERWATER_BUBBLES] = _("UNDERWATER BUBBLES"),
+    [WEATHER_ABNORMAL]           = _("ABNORMAL(NOT WORKING)"),
+    [WEATHER_ROUTE119_CYCLE]     = _("ROUTE119 CYCLE"),
+    [WEATHER_ROUTE123_CYCLE]     = _("ROUTE123 CYCLE"),
+    [WEATHER_FOG]                = _("FOG"),
 };
 
 static const u8 sDebugText_WeatherNotDefined[] = _("NOT DEFINED!!!");

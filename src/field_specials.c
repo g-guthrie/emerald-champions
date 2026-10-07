@@ -3,18 +3,13 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_special.h"
-#include "caps.h"
 #include "cable_club.h"
 #include "data.h"
 #include "daycare.h"
 #include "decoration.h"
-#include "decoration_inventory.h"
 #include "diploma.h"
 #include "event_data.h"
 #include "event_object_movement.h"
-#include "emerald_champions_battle_sets.h"
-#include "emerald_champions_opening.h"
-#include "mega_stone_rewards.h"
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -22,9 +17,7 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
-#include "pokeball.h"
 #include "field_weather.h"
-#include "frontier_util.h"
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -32,13 +25,11 @@
 #include "item_menu.h"
 #include "link.h"
 #include "list_menu.h"
-#include "legendary_signs.h"
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
 #include "match_call.h"
 #include "menu.h"
-#include "move.h"
 #include "metatile_behavior.h"
 #include "mystery_gift.h"
 #include "overworld.h"
@@ -53,9 +44,7 @@
 #include "region_map.h"
 #include "rtc.h"
 #include "script.h"
-#include "money.h"
 #include "script_menu.h"
-#include "shop.h"
 #include "sound.h"
 #include "starter_choose.h"
 #include "string_util.h"
@@ -82,6 +71,7 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/battle_frontier.h"
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "constants/rgb.h"
@@ -89,14 +79,12 @@
 #include "battle_util.h"
 #include "naming_screen.h"
 #include "chooseboxmon.h"
-#include "data/day_care_gift_eggs.h"
 
 #define TAG_ITEM_ICON 5500
 
 #define GFXTAG_MULTICHOICE_SCROLL_ARROWS 2000
 #define PALTAG_MULTICHOICE_SCROLL_ARROWS 100
 
-static const u8 sText_Back[] = _("Back");
 #define ELEVATOR_WINDOW_WIDTH  3
 #define ELEVATOR_WINDOW_HEIGHT 3
 #define ELEVATOR_LIGHT_STAGES  3
@@ -117,636 +105,13 @@ static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
 
-struct EmeraldChampionsGameCornerPokemonPrize
-{
-    enum Species species;
-    u16 claimedFlag;
-};
-
-static const struct EmeraldChampionsGameCornerPokemonPrize sEmeraldChampionsGameCornerPokemonPrizes[] =
-{
-    {SPECIES_BULBASAUR,  FLAG_EC_STARTER_ARCHIVE_BULBASAUR},
-    {SPECIES_CHARMANDER, FLAG_EC_STARTER_ARCHIVE_CHARMANDER},
-    {SPECIES_SQUIRTLE,   FLAG_EC_STARTER_ARCHIVE_SQUIRTLE},
-    {SPECIES_CHIKORITA,  FLAG_EC_STARTER_ARCHIVE_CHIKORITA},
-    {SPECIES_CYNDAQUIL,  FLAG_EC_STARTER_ARCHIVE_CYNDAQUIL},
-    {SPECIES_TOTODILE,   FLAG_EC_STARTER_ARCHIVE_TOTODILE},
-    {SPECIES_TREECKO,    FLAG_EC_STARTER_ARCHIVE_TREECKO},
-    {SPECIES_TORCHIC,    FLAG_EC_STARTER_ARCHIVE_TORCHIC},
-    {SPECIES_MUDKIP,     FLAG_EC_STARTER_ARCHIVE_MUDKIP},
-    {SPECIES_TURTWIG,    FLAG_EC_STARTER_ARCHIVE_TURTWIG},
-    {SPECIES_CHIMCHAR,   FLAG_EC_STARTER_ARCHIVE_CHIMCHAR},
-    {SPECIES_PIPLUP,     FLAG_EC_STARTER_ARCHIVE_PIPLUP},
-    {SPECIES_SNIVY,      FLAG_EC_STARTER_ARCHIVE_SNIVY},
-    {SPECIES_TEPIG,      FLAG_EC_STARTER_ARCHIVE_TEPIG},
-    {SPECIES_OSHAWOTT,   FLAG_EC_STARTER_ARCHIVE_OSHAWOTT},
-    {SPECIES_CHESPIN,    FLAG_EC_STARTER_ARCHIVE_CHESPIN},
-    {SPECIES_FENNEKIN,   FLAG_EC_STARTER_ARCHIVE_FENNEKIN},
-    {SPECIES_FROAKIE,    FLAG_EC_STARTER_ARCHIVE_FROAKIE},
-    {SPECIES_ROWLET,     FLAG_EC_STARTER_ARCHIVE_ROWLET},
-    {SPECIES_LITTEN,     FLAG_EC_STARTER_ARCHIVE_LITTEN},
-    {SPECIES_POPPLIO,    FLAG_EC_STARTER_ARCHIVE_POPPLIO},
-    {SPECIES_GROOKEY,    FLAG_EC_STARTER_ARCHIVE_GROOKEY},
-    {SPECIES_SCORBUNNY,  FLAG_EC_STARTER_ARCHIVE_SCORBUNNY},
-    {SPECIES_SOBBLE,     FLAG_EC_STARTER_ARCHIVE_SOBBLE},
-    {SPECIES_SPRIGATITO, FLAG_EC_STARTER_ARCHIVE_SPRIGATITO},
-    {SPECIES_FUECOCO,    FLAG_EC_STARTER_ARCHIVE_FUECOCO},
-    {SPECIES_QUAXLY,     FLAG_EC_STARTER_ARCHIVE_QUAXLY},
-    {SPECIES_GENESECT,   FLAG_RECEIVED_GAME_CORNER_GENESECT},
-};
-
-static u16 GetEmeraldChampionsGameCornerPokemonPrizeFlag(enum Species species)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsGameCornerPokemonPrizes); i++)
-    {
-        if (sEmeraldChampionsGameCornerPokemonPrizes[i].species == species)
-            return sEmeraldChampionsGameCornerPokemonPrizes[i].claimedFlag;
-    }
-    return 0;
-}
-
-static bool32 IsEmeraldChampionsInitialStarter(enum Species species)
-{
-    u16 generation = VarGet(VAR_STARTER_GEN);
-    return species == GetStarterPokemonForGeneration(VarGet(VAR_STARTER_MON), generation)
-        || (HasEmeraldChampionsSecondStarter()
-            && species == GetStarterPokemonForGeneration(VarGet(VAR_EC_SECOND_STARTER) - 1, generation));
-}
-
-
-static const u16 sEmeraldChampionsOffenseItems[] =
-{
-    ITEM_WHITE_HERB,
-    ITEM_CHOICE_BAND,
-    ITEM_SCOPE_LENS,
-    ITEM_POWER_HERB,
-    ITEM_CHOICE_SCARF,
-    ITEM_CHOICE_SPECS,
-    ITEM_WIDE_LENS,
-    ITEM_ZOOM_LENS,
-    ITEM_METRONOME,
-    ITEM_MUSCLE_BAND,
-    ITEM_WISE_GLASSES,
-    ITEM_EXPERT_BELT,
-    ITEM_LIFE_ORB,
-    ITEM_TOXIC_ORB,
-    ITEM_FLAME_ORB,
-    ITEM_WEAKNESS_POLICY,
-    ITEM_THROAT_SPRAY,
-    ITEM_BLUNDER_POLICY,
-    ITEM_CLEAR_AMULET,
-    ITEM_LOADED_DICE,
-    ITEM_PUNCHING_GLOVE,
-    ITEM_MIRROR_HERB,
-    ITEM_BOOSTER_ENERGY,
-    ITEM_PROTECTIVE_PADS,
-    ITEM_NONE,
-};
-
-static const u16 sEmeraldChampionsDefenseItems[] =
-{
-    ITEM_BRIGHT_POWDER,
-    ITEM_FOCUS_BAND,
-    ITEM_LEFTOVERS,
-    ITEM_FOCUS_SASH,
-    ITEM_BLACK_SLUDGE,
-    ITEM_SHED_SHELL,
-    ITEM_EVIOLITE,
-    ITEM_ROCKY_HELMET,
-    ITEM_AIR_BALLOON,
-    ITEM_ASSAULT_VEST,
-    ITEM_SAFETY_GOGGLES,
-    ITEM_HEAVY_DUTY_BOOTS,
-    ITEM_UTILITY_UMBRELLA,
-    ITEM_COVERT_CLOAK,
-    ITEM_ABILITY_SHIELD,
-    ITEM_BIG_ROOT,
-    ITEM_SHELL_BELL,
-    ITEM_NONE,
-};
-
-static const u16 sEmeraldChampionsFieldItems[] =
-{
-    ITEM_QUICK_CLAW,
-    ITEM_MENTAL_HERB,
-    ITEM_LIGHT_CLAY,
-    ITEM_DAMP_ROCK,
-    ITEM_HEAT_ROCK,
-    ITEM_SMOOTH_ROCK,
-    ITEM_ICY_ROCK,
-    ITEM_RED_CARD,
-    ITEM_EJECT_BUTTON,
-    ITEM_ABSORB_BULB,
-    ITEM_CELL_BATTERY,
-    ITEM_LUMINOUS_MOSS,
-    ITEM_SNOWBALL,
-    ITEM_ADRENALINE_ORB,
-    ITEM_TERRAIN_EXTENDER,
-    ITEM_ELECTRIC_SEED,
-    ITEM_PSYCHIC_SEED,
-    ITEM_MISTY_SEED,
-    ITEM_GRASSY_SEED,
-    ITEM_EJECT_PACK,
-    ITEM_ROOM_SERVICE,
-    ITEM_BINDING_BAND,
-    ITEM_GRIP_CLAW,
-    ITEM_FLOAT_STONE,
-    ITEM_RING_TARGET,
-    ITEM_IRON_BALL,
-    ITEM_LAGGING_TAIL,
-    ITEM_DESTINY_KNOT,
-    ITEM_NONE,
-};
-
-static const u16 sEmeraldChampionsTypeItems[] =
-{
-    ITEM_SILK_SCARF,
-    ITEM_BLACK_BELT,
-    ITEM_SHARP_BEAK,
-    ITEM_POISON_BARB,
-    ITEM_SOFT_SAND,
-    ITEM_HARD_STONE,
-    ITEM_SILVER_POWDER,
-    ITEM_SPELL_TAG,
-    ITEM_CHARCOAL,
-    ITEM_MYSTIC_WATER,
-    ITEM_MIRACLE_SEED,
-    ITEM_MAGNET,
-    ITEM_NEVER_MELT_ICE,
-    ITEM_TWISTED_SPOON,
-    ITEM_DRAGON_FANG,
-    ITEM_BLACK_GLASSES,
-    ITEM_FAIRY_FEATHER,
-    ITEM_NONE,
-};
-
-static const u16 sEmeraldChampionsGemItems[] =
-{
-    ITEM_NORMAL_GEM,
-    ITEM_FIRE_GEM,
-    ITEM_WATER_GEM,
-    ITEM_ELECTRIC_GEM,
-    ITEM_GRASS_GEM,
-    ITEM_ICE_GEM,
-    ITEM_FIGHTING_GEM,
-    ITEM_POISON_GEM,
-    ITEM_GROUND_GEM,
-    ITEM_FLYING_GEM,
-    ITEM_PSYCHIC_GEM,
-    ITEM_BUG_GEM,
-    ITEM_ROCK_GEM,
-    ITEM_GHOST_GEM,
-    ITEM_DRAGON_GEM,
-    ITEM_DARK_GEM,
-    ITEM_STEEL_GEM,
-    ITEM_FAIRY_GEM,
-    ITEM_NONE,
-};
-
-static const u16 sEmeraldChampionsSpeciesItems[] =
-{
-    ITEM_SOUL_DEW,
-    ITEM_THICK_CLUB,
-    ITEM_LEEK,
-    ITEM_LIGHT_BALL,
-    ITEM_LUCKY_PUNCH,
-    ITEM_METAL_POWDER,
-    ITEM_QUICK_POWDER,
-    ITEM_FIGHTING_MEMORY,
-    ITEM_FLYING_MEMORY,
-    ITEM_POISON_MEMORY,
-    ITEM_GROUND_MEMORY,
-    ITEM_ROCK_MEMORY,
-    ITEM_BUG_MEMORY,
-    ITEM_GHOST_MEMORY,
-    ITEM_STEEL_MEMORY,
-    ITEM_FIRE_MEMORY,
-    ITEM_WATER_MEMORY,
-    ITEM_GRASS_MEMORY,
-    ITEM_ELECTRIC_MEMORY,
-    ITEM_PSYCHIC_MEMORY,
-    ITEM_ICE_MEMORY,
-    ITEM_DRAGON_MEMORY,
-    ITEM_DARK_MEMORY,
-    ITEM_FAIRY_MEMORY,
-    ITEM_ADAMANT_CRYSTAL,
-    ITEM_LUSTROUS_GLOBE,
-    ITEM_GRISEOUS_CORE,
-    ITEM_DOUSE_DRIVE,
-    ITEM_SHOCK_DRIVE,
-    ITEM_BURN_DRIVE,
-    ITEM_CHILL_DRIVE,
-    ITEM_NONE,
-};
-
-static const u16 *const sEmeraldChampionsBattleItemCategories[] =
-{
-    [EC_BATTLE_ITEM_CATEGORY_OFFENSE] = sEmeraldChampionsOffenseItems,
-    [EC_BATTLE_ITEM_CATEGORY_DEFENSE] = sEmeraldChampionsDefenseItems,
-    [EC_BATTLE_ITEM_CATEGORY_FIELD] = sEmeraldChampionsFieldItems,
-    [EC_BATTLE_ITEM_CATEGORY_TYPE] = sEmeraldChampionsTypeItems,
-    [EC_BATTLE_ITEM_CATEGORY_GEM] = sEmeraldChampionsGemItems,
-    [EC_BATTLE_ITEM_CATEGORY_SPECIES] = sEmeraldChampionsSpeciesItems,
-};
-
-static const u16 sEmeraldChampionsEvolutionItems[] =
-{
-#include "data/emerald_champions_form_items.h"
-    ITEM_NONE,
-};
-
-EWRAM_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
+COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
 EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
 
+static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
-
-// VAR_0x8004 = species; VAR_RESULT = whether the Pokédex records it as caught.
-void CheckPlayerCaughtSpecies(void)
-{
-    gSpecialVar_Result = GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), FLAG_GET_CAUGHT) != 0;
-}
-
-void IsEmeraldChampionsGameCornerPokemonClaimed(void)
-{
-    u16 flag = GetEmeraldChampionsGameCornerPokemonPrizeFlag(gSpecialVar_0x8004);
-
-    gSpecialVar_Result = flag != 0
-                      && (FlagGet(flag) || IsEmeraldChampionsInitialStarter(gSpecialVar_0x8004));
-}
-
-static u8 TryGiveEmeraldChampionsPreparedPokemon(enum Species species, u8 level)
-{
-    struct Pokemon mon;
-
-    if (species <= SPECIES_NONE
-     || species >= NUM_SPECIES
-     || level == 0
-     || level > MAX_LEVEL)
-        return EC_GAME_CORNER_PRIZE_SET_FAILED;
-
-    CreateRandomMon(&mon, species, level);
-
-    // Field gifts need no battle restoration record. Battle startup records
-    // the actual party, while in-battle captures update their new slot separately.
-    return GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
-}
-
-static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 flag, bool32 rejectInitialStarter)
-{
-    u8 giveResult;
-
-    if (flag == 0
-     || FlagGet(flag)
-     || (rejectInitialStarter && IsEmeraldChampionsInitialStarter(species)))
-        return EC_GAME_CORNER_PRIZE_SET_FAILED;
-
-    if (!CanAcquireLegendarySignSpecies(species))
-        return EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT;
-
-    // Every Game Corner Pokemon prize arrives at the current level cap.
-    giveResult = TryGiveEmeraldChampionsPreparedPokemon(species, GetCurrentLevelCap());
-    if (giveResult != MON_GIVEN_TO_PARTY && giveResult != MON_GIVEN_TO_PC)
-        return giveResult;
-
-    MarkLegendarySignCaughtBySpecies(species);
-    FlagSet(flag);
-    return giveResult;
-}
-
-void GiveEmeraldChampionsGameCornerPokemon(void)
-{
-    enum Species species = gSpecialVar_0x8004;
-
-    gSpecialVar_Result = TryGiveEmeraldChampionsGameCornerPokemon(
-        species,
-        GetEmeraldChampionsGameCornerPokemonPrizeFlag(species),
-        TRUE);
-}
-
-#if TESTING
-u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 flag)
-{
-    return TryGiveEmeraldChampionsGameCornerPokemon(species, flag, FALSE);
-}
-
-u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
-{
-    return TryGiveEmeraldChampionsPreparedPokemon(species, level);
-}
-#endif
-
-// The catalogue's flat index for an item, or -1 if it is not vendor stock.
-// Berries are deliberately outside this: the harvest economy governs them.
-static enum Species GetFormEquipmentSpecies(enum Item item);
-
-static s32 EmeraldChampionsBattleItemIndex(enum Item item)
-{
-    s32 index = 0;
-
-    if (item == ITEM_NONE)
-        return -1;
-    for (u32 category = 0; category < ARRAY_COUNT(sEmeraldChampionsBattleItemCategories); category++)
-    {
-        for (u32 i = 0; sEmeraldChampionsBattleItemCategories[category][i] != ITEM_NONE; i++, index++)
-        {
-            // Unlock bits live in a fixed save array; stock beyond it stays ungated.
-            if (sEmeraldChampionsBattleItemCategories[category][i] == item)
-                return index < (s32)(sizeof(gSaveBlock1Ptr->battleItemsUnlocked) * 8) ? index : -1;
-        }
-    }
-    return -1;
-}
-
-// Items no pickup or gift hands over: the vendor stocks them once the Trainer
-// has enough Badges, so nothing competitive depends on a lucky wild held item.
-// A world pickup, gift or purchase still unlocks one before its Badge floor.
-// Floor 0: battle items that wild Pokémon met before the first Badge used to
-// hold; the vendor stocks them from the start instead.
-static const struct { u16 item; u8 badges; } sBadgeStockedBattleItems[] =
-{
-    {ITEM_BRIGHT_POWDER,    0},   // was Wurmple's
-    {ITEM_FOCUS_BAND,       0},   // was Machop's (Rusturf Tunnel)
-    {ITEM_HARD_STONE,       0},   // was Roggenrola's (Rusturf Tunnel)
-    {ITEM_MENTAL_HERB,      0},   // was Lotad's and Pancham's (also on every Poke Mart shelf)
-    {ITEM_METRONOME,        0},   // was Kricketot's
-    {ITEM_MYSTIC_WATER,     0},   // was Goldeen's
-    {ITEM_MIRACLE_SEED,     0},   // was Cherubi's (Petalburg Woods honey)
-    {ITEM_POISON_BARB,      0},   // was Budew's
-    {ITEM_POWER_HERB,       0},   // was Seedot's
-    {ITEM_QUICK_CLAW,       0},   // was Meowth's
-    {ITEM_SOFT_SAND,        0},   // was Nincada's
-    {ITEM_SPELL_TAG,        0},   // was Sandygast's
-    {ITEM_ABSORB_BULB,      1},   // was Oddish's (Petalburg Woods 3)
-    {ITEM_GRASSY_SEED,      1},   // was Bounsweet's (Petalburg Woods 2)
-    {ITEM_LAGGING_TAIL,     1},   // was Slowpoke's (Petalburg Woods 3)
-    {ITEM_DRAGON_FANG,      1},   // was Bagon's (Granite Cave)
-    {ITEM_GRIP_CLAW,        1},   // was Sandshrew's (Granite Cave)
-    {ITEM_PSYCHIC_SEED,     1},   // was Exeggcute's (Route 106)
-    {ITEM_TWISTED_SPOON,    1},   // was Abra's (Granite Cave)
-    {ITEM_LOADED_DICE,      2},
-    {ITEM_EJECT_PACK,       3},
-    {ITEM_HEAVY_DUTY_BOOTS, 4},
-    {ITEM_CLEAR_AMULET,     4},
-    {ITEM_COVERT_CLOAK,     5},
-    {ITEM_MIRROR_HERB,      5},
-    {ITEM_BOOSTER_ENERGY,   5},
-};
-
-static bool32 IsBattleItemStockedByBadges(enum Item item)
-{
-    u32 badges = 0;
-    for (u32 flag = FLAG_BADGE01_GET; flag <= FLAG_BADGE08_GET; flag++)
-        badges += FlagGet(flag);
-    for (u32 i = 0; i < ARRAY_COUNT(sBadgeStockedBattleItems); i++)
-        if (sBadgeStockedBattleItems[i].item == item)
-            return badges >= sBadgeStockedBattleItems[i].badges;
-    return FALSE;
-}
-
-bool32 IsEmeraldChampionsBattleItemUnlocked(enum Item item)
-{
-    s32 index = EmeraldChampionsBattleItemIndex(item);
-
-    // Thick Club waits for four badges even if acquired or its user is caught.
-    if (item == ITEM_THICK_CLUB && !FlagGet(FLAG_BADGE04_GET))
-        return FALSE;
-
-    // Anything outside the catalogue is not gated at all.
-    if (index < 0)
-        return TRUE;
-    // Species equipment must have a first source even when no world pickup
-    // exists. Catching its user introduces these paid shelves.
-    enum Species equipmentSpecies = GetFormEquipmentSpecies(item);
-    if (equipmentSpecies != SPECIES_NONE
-        && GetSetPokedexFlag(SpeciesToNationalPokedexNum(equipmentSpecies), FLAG_GET_CAUGHT))
-        return TRUE;
-    if (IsBattleItemStockedByBadges(item))
-        return TRUE;
-    return (gSaveBlock1Ptr->battleItemsUnlocked[index / 8] >> (index % 8)) & 1;
-}
-
-// World pickups, gifts and purchases introduce permanent vendor stock.
-// Successful captures, gifts and trades also record held-item acquisition.
-// Battle theft, Pickup and transfers between owned inventories do not.
-void EmeraldChampions_UnlockBattleItem(enum Item item)
-{
-    s32 index = EmeraldChampionsBattleItemIndex(item);
-
-    if (index >= 0)
-        gSaveBlock1Ptr->battleItemsUnlocked[index / 8] |= 1u << (index % 8);
-}
-
-// The daily flower-shop gift is all-or-nothing, including on a full-Bag retry.
-// Gift berries do not mint harvest credit.
-void GiveFlowerShopBerryBundle(void)
-{
-    const enum Item items[] = {
-        gSpecialVar_0x8004, ITEM_POMEG_BERRY, ITEM_KELPSY_BERRY,
-        ITEM_QUALOT_BERRY, ITEM_HONDEW_BERRY, ITEM_GREPA_BERRY, ITEM_TAMATO_BERRY,
-    };
-
-    gSpecialVar_Result = FALSE;
-    if (items[0] < FIRST_BERRY_INDEX || items[0] >= FIRST_BERRY_INDEX + 8)
-        return;
-    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
-    {
-        if (!AddBagItem(items[i], 1))
-        {
-            while (i > 0)
-                RemoveBagItem(items[--i], 1);
-            return;
-        }
-    }
-    gSpecialVar_Result = TRUE;
-}
-
-bool32 CanReceiveLanetteDolls(void)
-{
-    return GetNumOwnedDecorationsInCategory(DECORCAT_DOLL) + 2 <= gDecorationInventories[DECORCAT_DOLL].size;
-}
-
-// VAR_0x8004 and VAR_0x8005 are the two Berries.
-bool32 CanReceiveBerryPair(void)
-{
-    const struct ItemSlot gifts[] = {{gSpecialVar_0x8004, 1}, {gSpecialVar_0x8005, 1}};
-    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
-}
-
-bool32 CanReceiveWeatherInstituteRocks(void)
-{
-    static const struct ItemSlot gifts[] = {
-        {ITEM_HEAT_ROCK, 1}, {ITEM_DAMP_ROCK, 1}, {ITEM_ICY_ROCK, 1}, {ITEM_SMOOTH_ROCK, 1},
-    };
-    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
-}
-
-bool32 CanReceiveFrontierReward(void)
-{
-    const struct ItemSlot gifts[] = {
-        {gSpecialVar_0x8004, 1}, {ITEM_BOTTLE_CAP, gSpecialVar_0x8005},
-    };
-    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
-}
-
-bool32 CanReceiveLatiStones(void)
-{
-    struct ItemSlot gifts[2];
-    u32 count = 0;
-
-    if (!GetFiniteDuplicateRewardValue(ITEM_LATIOSITE))
-        gifts[count++] = (struct ItemSlot){ITEM_LATIOSITE, 1};
-    if (!GetFiniteDuplicateRewardValue(ITEM_LATIASITE))
-        gifts[count++] = (struct ItemSlot){ITEM_LATIASITE, 1};
-    return count == 0 || CheckBagHasSpaceForItemBundle(gifts, count);
-}
-
-bool32 CanReceiveShellBellReward(void)
-{
-    struct ItemSlot gifts[2] = {{ITEM_SHELL_BELL, 1}};
-    u32 count = 1;
-
-    if (!FlagGet(FLAG_SHOALCAVE_SLOWBRONITE) && !GetFiniteDuplicateRewardValue(ITEM_SLOWBRONITE))
-        gifts[count++] = (struct ItemSlot){ITEM_SLOWBRONITE, 1};
-    return CheckBagHasSpaceForItemBundle(gifts, count);
-}
-
-// CanReceiveNormanMegaGift lives in mega_stone_rewards.c beside the starter stone table.
-
-bool32 CanReceiveGoGogglesGift(void)
-{
-    static const struct ItemSlot gifts[] = {{ITEM_GO_GOGGLES, 1}, {ITEM_SAFETY_GOGGLES, 1}};
-    return CheckBagHasSpaceForItemBundle(gifts, ARRAY_COUNT(gifts));
-}
-
-// The kit is all or nothing: every listed item arrives together, or none does
-// and the receipt stays clear for a retry. (Checking "already unlocked" here
-// skipped the Eviolite for a Torchic player whose starter merely held one.)
-void GiveEmeraldChampionsStarterBattleItems(void)
-{
-    static const struct ItemSlot items[] = {
-        {ITEM_CHOICE_BAND, 1}, {ITEM_CHOICE_SPECS, 1}, {ITEM_CHOICE_SCARF, 1},
-        {ITEM_FOCUS_SASH, 1}, {ITEM_EVIOLITE, 1}, {ITEM_LEFTOVERS, 1},
-    };
-
-    if (FlagGet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS))
-    {
-        gSpecialVar_Result = TRUE;
-        return;
-    }
-    gSpecialVar_Result = FALSE;
-    // AddBagItem also unlocks clerk stock. Check the whole kit before any
-    // addition, since removing an item cannot undo that permanent unlock.
-    if (!CheckBagHasSpaceForItemBundle(items, ARRAY_COUNT(items)))
-        return;
-    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
-        AddBagItem(items[i].itemId, items[i].quantity);
-    FlagSet(FLAG_EC_RECEIVED_STARTER_BATTLE_ITEMS);
-    gSpecialVar_Result = TRUE;
-}
-
-static EWRAM_DATA u16 sEmeraldChampionsUnlockedStock[EC_BATTLE_ITEM_MAX_CATEGORY + 1];
-
-// Builds the unlocked shelf for category VAR_0x8004; VAR_RESULT is its item
-// count, so the vendor can say an empty category is out of stock instead of
-// opening a Buy list that holds only Cancel.
-void BufferEmeraldChampionsBattleItemStock(void)
-{
-    u16 category = gSpecialVar_0x8004;
-    const u16 *stock;
-    u32 out = 0;
-
-    sEmeraldChampionsUnlockedStock[0] = ITEM_NONE;
-    gSpecialVar_Result = 0;
-    if (category >= ARRAY_COUNT(sEmeraldChampionsBattleItemCategories))
-        return;
-    stock = sEmeraldChampionsBattleItemCategories[category];
-    for (u32 i = 0; stock[i] != ITEM_NONE && out < ARRAY_COUNT(sEmeraldChampionsUnlockedStock) - 1; i++)
-    {
-        if (IsEmeraldChampionsBattleItemUnlocked(stock[i]))
-            sEmeraldChampionsUnlockedStock[out++] = stock[i];
-    }
-    sEmeraldChampionsUnlockedStock[out] = ITEM_NONE;
-    gSpecialVar_Result = out;
-}
-
-// Opens the shelf BufferEmeraldChampionsBattleItemStock prepared, straight
-// into its Buy list.
-void OpenEmeraldChampionsBattleItemMart(void)
-{
-    CreatePokemartBuyMenu(sEmeraldChampionsUnlockedStock);
-    ScriptContext_Stop();
-}
-
-// The Center clerk's Sell row: the Bag in sell mode, then back to her menu.
-void OpenEmeraldChampionsSellMenu(void)
-{
-    CreatePokemartSellMenu();
-    ScriptContext_Stop();
-}
-
-// Story handoffs consume exactly one item from either player inventory store.
-void CheckEmeraldChampionsHandoffItem(void)
-{
-    gSpecialVar_Result = CheckBagHasItem(gSpecialVar_0x8004, 1)
-        || CheckPCHasItem(gSpecialVar_0x8004, 1);
-}
-
-void TakeEmeraldChampionsHandoffItem(void)
-{
-    enum Item item = gSpecialVar_0x8004;
-    gSpecialVar_Result = FALSE;
-    if (CheckBagHasItem(item, 1))
-    {
-        gSpecialVar_Result = RemoveBagItem(item, 1);
-        return;
-    }
-    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
-    {
-        if (gSaveBlock1Ptr->pcItems[slot].itemId == item
-            && gSaveBlock1Ptr->pcItems[slot].quantity != 0)
-        {
-            RemovePCItem(slot, 1);
-            gSpecialVar_Result = TRUE;
-            return;
-        }
-    }
-}
-
-static enum Species GetFormEquipmentSpecies(enum Item item)
-{
-    if (gItemsInfo[item].sortType == ITEM_TYPE_MEMORY)
-        return SPECIES_SILVALLY;
-    switch (item)
-    {
-    case ITEM_LUCKY_PUNCH: return SPECIES_CHANSEY;
-    case ITEM_ADAMANT_CRYSTAL: return SPECIES_DIALGA;
-    case ITEM_LUSTROUS_GLOBE: return SPECIES_PALKIA;
-    case ITEM_GRISEOUS_CORE: return SPECIES_GIRATINA;
-    case ITEM_DOUSE_DRIVE: return SPECIES_GENESECT;
-    case ITEM_SHOCK_DRIVE: return SPECIES_GENESECT;
-    case ITEM_BURN_DRIVE: return SPECIES_GENESECT;
-    case ITEM_CHILL_DRIVE: return SPECIES_GENESECT;
-    default: return SPECIES_NONE;
-    }
-}
-
-void OpenEmeraldChampionsEvolutionItemArchive(void)
-{
-    static EWRAM_DATA u16 stock[ARRAY_COUNT(sEmeraldChampionsEvolutionItems)] = {0};
-    u32 count = 0;
-    for (u32 i = 0; sEmeraldChampionsEvolutionItems[i] != ITEM_NONE; i++)
-    {
-        enum Item item = sEmeraldChampionsEvolutionItems[i];
-        enum Species species = GetFormEquipmentSpecies(item);
-        if (species == SPECIES_NONE || IsEmeraldChampionsBattleItemUnlocked(item)
-            || GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-            stock[count++] = item;
-    }
-    stock[count] = ITEM_NONE;
-    CreatePokemartBuyMenu(stock);
-    ScriptContext_Stop();
-}
+static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
@@ -797,6 +162,15 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
 #else
 static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer);
 #endif //FREE_LINK_BATTLE_RECORDS
+static void Task_ElevatorShake(u8 taskId);
+static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
+static void Task_AnimateElevatorWindowView(u8 taskId);
+static void Task_RunPokemonLeagueLightingEffect(u8 taskId);
+static void Task_CancelPokemonLeagueLightingEffect(u8 taskId);
+static enum Species SampleResortGorgeousMon(void);
+static u16 SampleResortGorgeousReward(void);
+static void Task_ShakeScreen(u8 taskId);
+static void Task_EndScreenShake(u8 taskId);
 
 static const u8 sText_BigGuy[] = _("Big guy");
 static const u8 sText_BigGirl[] = _("Big girl");
@@ -807,12 +181,12 @@ static const u8 sText_1MinutePlus[] = _("1 minute +");
 static const u8 sText_SpaceSeconds[] = _(" seconds");
 static const u8 sText_SpaceTimes[] = _(" time(s)");
 
-static const u8 sText_Wallace[] = _("Wallace");
-static const u8 sText_Steven[] = _("Steven");
-static const u8 sText_Brawly[] = _("Brawly");
-static const u8 sText_Winona[] = _("Winona");
-static const u8 sText_Phoebe[] = _("Phoebe");
-static const u8 sText_Glacia[] = _("Glacia");
+static const u8 sText_Wallace[] = _("WALLACE");
+static const u8 sText_Steven[] = _("STEVEN");
+static const u8 sText_Brawly[] = _("BRAWLY");
+static const u8 sText_Winona[] = _("WINONA");
+static const u8 sText_Phoebe[] = _("PHOEBE");
+static const u8 sText_Glacia[] = _("GLACIA");
 
 void Special_ShowDiploma(void)
 {
@@ -986,7 +360,6 @@ enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y
         return SS_TIDAL_LOCATION_LILYCOVE;
     case SS_TIDAL_DEPART_LILYCOVE:
     case SS_TIDAL_EXIT_CURRENTS_LEFT:
-    case SS_TIDAL_EXPEDITION:
         return SS_TIDAL_LOCATION_ROUTE124;
     case SS_TIDAL_DEPART_SLATEPORT:
         if (*varCruiseStepCount < 60)
@@ -1026,6 +399,31 @@ enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y
     *mapGroup = MAP_GROUP(MAP_ROUTE132);
     *y = 20;
     return SS_TIDAL_LOCATION_CURRENTS;
+}
+
+bool32 ShouldDoWallyCall(void)
+{
+    if (FlagGet(FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL))
+    {
+        switch (gMapHeader.mapType)
+        {
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
+                return FALSE;
+            break;
+        default:
+            return FALSE;
+        }
+    }
+    else
+    {
+        return FALSE;
+    }
+
+    return TRUE;
 }
 
 bool32 ShouldDoScottFortreeCall(void)
@@ -1620,16 +1018,39 @@ void FieldShowRegionMap(void)
 
 static bool32 IsBuildingPCTile(u32 tileId)
 {
-    return (MetatileBehavior_IsPC(GetAttributeByMetatileIdAndMapLayout(tileId, METATILE_ATTRIBUTE_BEHAVIOR)));
+    if (IS_FRLG)
+        return FALSE;
+
+    return (MetatileBehavior_IsPC(GetAttributeByMetatileIdAndMapLayout(tileId, METATILE_ATTRIBUTE_BEHAVIOR, FALSE)));
+}
+
+static bool32 IsBuildingPCTileFrlg(u32 tileId)
+{
+    if (IS_FRLG)
+        return gMapHeader.mapLayout->primaryTileset == &gTileset_BuildingFrlg && (tileId == METATILE_BuildingFrlg_PCOn || tileId == METATILE_BuildingFrlg_PCOff);
+
+    return FALSE;
 }
 
 static bool32 IsPlayerHousePCTile(u32 tileId)
 {
+    if (IS_FRLG)
+        return FALSE;
+
     return gMapHeader.mapLayout->secondaryTileset == &gTileset_BrendansMaysHouse
         && (tileId == METATILE_BrendansMaysHouse_BrendanPC_On
             || tileId == METATILE_BrendansMaysHouse_BrendanPC_Off
             || tileId == METATILE_BrendansMaysHouse_MayPC_On
             || tileId == METATILE_BrendansMaysHouse_MayPC_Off);
+}
+
+static bool32 IsPlayerHousePCTileFrlg(u32 tileId)
+{
+    if (IS_FRLG)
+        return gMapHeader.mapLayout->secondaryTileset == &gTileset_GenericBuilding1
+            && (tileId == METATILE_GenericBuilding1_PlayersPCOn || tileId == METATILE_GenericBuilding1_PlayersPCOff);
+
+    return FALSE;
 }
 
 static bool8 IsPlayerInFrontOfPC(void)
@@ -1641,7 +1062,9 @@ static bool8 IsPlayerInFrontOfPC(void)
     tileInFront = MapGridGetMetatileIdAt(x, y);
 
     return IsBuildingPCTile(tileInFront)
-        || IsPlayerHousePCTile(tileInFront);
+        || IsBuildingPCTileFrlg(tileInFront)
+        || IsPlayerHousePCTile(tileInFront)
+        || IsPlayerHousePCTileFrlg(tileInFront);
 }
 
 // Task data for Task_PCTurnOnEffect and Task_LotteryCornerComputerEffect
@@ -1721,21 +1144,25 @@ static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
     {
         // Screen is on, set it off
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-            metatileId = METATILE_Building_PC_Off;
+            metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOff : METATILE_Building_PC_Off;
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
+            metatileId = METATILE_GenericBuilding1_PlayersPCOff;
     }
     else
     {
         // Screen is off, set it on
         if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-            metatileId = METATILE_Building_PC_On;
+            metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOn : METATILE_Building_PC_On;
         else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_BrendanPC_On;
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_On;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
+            metatileId = METATILE_GenericBuilding1_PlayersPCOn;
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
 }
@@ -1776,11 +1203,13 @@ static void PCTurnOffEffect(void)
     }
 
     if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-        metatileId = METATILE_Building_PC_Off;
+        metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOff : METATILE_Building_PC_Off;
     else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
     else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
+        metatileId = METATILE_GenericBuilding1_PlayersPCOff;
 
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
     DrawWholeMapView();
@@ -1850,7 +1279,7 @@ void EndLotteryCornerComputerEffect(void)
 void SetTrickHouseNuggetFlag(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_SHINY_STONE;
+    u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET;
     *specVar = flag;
     FlagSet(flag);
 }
@@ -1858,7 +1287,7 @@ void SetTrickHouseNuggetFlag(void)
 void ResetTrickHouseNuggetFlag(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_SHINY_STONE;
+    u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET;
     *specVar = flag;
     FlagClear(flag);
 }
@@ -2004,7 +1433,7 @@ u16 GetSlotMachineId(void)
 bool8 FoundAbandonedShipRoom1Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_1;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
         return FALSE;
@@ -2015,7 +1444,7 @@ bool8 FoundAbandonedShipRoom1Key(void)
 bool8 FoundAbandonedShipRoom2Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_2;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
         return FALSE;
@@ -2026,7 +1455,7 @@ bool8 FoundAbandonedShipRoom2Key(void)
 bool8 FoundAbandonedShipRoom4Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_4;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
         return FALSE;
@@ -2037,12 +1466,38 @@ bool8 FoundAbandonedShipRoom4Key(void)
 bool8 FoundAbandonedShipRoom6Key(void)
 {
     u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS_KEY_TO_ROOM_6;
+    u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
         return FALSE;
 
     return TRUE;
+}
+
+bool8 LeadMonHasEffortRibbon(void)
+{
+    return GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON);
+}
+
+void GiveLeadMonEffortRibbon(void)
+{
+    bool8 ribbonSet;
+    struct Pokemon *leadMon;
+    IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
+    FlagSet(FLAG_SYS_RIBBON_GET);
+    ribbonSet = TRUE;
+    leadMon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
+    SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
+    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
+        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
+}
+
+bool8 Special_AreLeadMonEVsMaxedOut(void)
+{
+    if (GetMonEVCount(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
+        return TRUE;
+
+    return FALSE;
 }
 
 u8 TryUpdateRusturfTunnelState(void)
@@ -2065,6 +1520,11 @@ u8 TryUpdateRusturfTunnelState(void)
     return FALSE;
 }
 
+void SetShoalItemFlag(u16 unused)
+{
+    FlagSet(FLAG_SYS_SHOAL_ITEM);
+}
+
 void LoadWallyZigzagoon(void)
 {
     u16 monData;
@@ -2081,23 +1541,13 @@ void LoadWallyZigzagoon(void)
 
 bool8 IsStarterInParty(void)
 {
-    for (u32 slot = 0; slot < CalculatePlayerPartyCount(); slot++)
+    u8 i;
+    u16 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
+    u8 partyCount = CalculatePlayerPartyCount();
+    for (i = 0; i < partyCount; i++)
     {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-        if (GetMonData(mon, MON_DATA_IS_EGG))
-            continue;
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-        enum Species root = GetEggSpecies(species);
-        for (u32 partner = 0; partner < (HasEmeraldChampionsSecondStarter() ? 2 : 1); partner++)
-        {
-            u16 choice = partner == 0 ? VarGet(VAR_STARTER_MON) : VarGet(VAR_EC_SECOND_STARTER) - 1;
-            if (root == GetStarterPokemonForGeneration(choice, VarGet(VAR_STARTER_GEN)))
-            {
-                gSpecialVar_0x8005 = choice;
-                StringCopy(gStringVar1, GetSpeciesName(species));
-                return TRUE;
-            }
-        }
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) == starter)
+            return TRUE;
     }
     return FALSE;
 }
@@ -2158,6 +1608,11 @@ static void StopCameraShake(u8 taskId)
 #undef tDelay
 #undef tVerticalPan
 
+bool8 FoundBlackGlasses(void)
+{
+    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES);
+}
+
 void SetRoute119Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
@@ -2185,8 +1640,6 @@ u8 GetLeadMonIndex(void)
 
 enum Species ScriptGetPartyMonSpecies(void)
 {
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        return SPECIES_NONE;
     return GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
 }
 
@@ -2194,6 +1647,23 @@ enum Species ScriptGetPartyMonSpecies(void)
 void TryInitBattleTowerAwardManObjectEvent(void)
 {
     //TryInitLocalObjectEvent(6);
+}
+
+u16 GetDaysUntilPacifidlogTMAvailable(void)
+{
+    u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
+    if (gLocalTime.days - tmReceivedDay >= 7)
+        return 0;
+    else if (gLocalTime.days < 0)
+        return 8;
+
+    return 7 - (gLocalTime.days - tmReceivedDay);
+}
+
+u16 SetPacifidlogTMReceivedDay(void)
+{
+    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
+    return gLocalTime.days;
 }
 
 bool8 MonOTNameNotPlayer(void)
@@ -2261,6 +1731,17 @@ u16 GetMysteryGiftCardStat(void)
     default:
         return 0;
     }
+}
+
+bool8 BufferTMHMMoveName(void)
+{
+    if (gItemsInfo[gSpecialVar_0x8004].pocket == POCKET_TM_HM)
+    {
+        StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_0x8004)));
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 bool8 IsBadEggInParty(void)
@@ -2577,6 +2058,45 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
 #undef tDescending
 #undef tTotalMoves
 
+void BufferVarsForIVRater(void)
+{
+    u32 i;
+    u32 ivStorage[NUM_STATS];
+
+    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+       ivStorage[i] = GetBoxMonData(boxmon, MON_DATA_HP_IV + i);
+    }
+
+    gSpecialVar_0x8005 = 0;
+
+    for (i = 0; i < NUM_STATS; i++)
+        gSpecialVar_0x8005 += ivStorage[i];
+
+    gSpecialVar_0x8006 = 0;
+    gSpecialVar_0x8007 = ivStorage[STAT_HP];
+
+    for (i = 1; i < NUM_STATS; i++)
+    {
+        if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
+        {
+            gSpecialVar_0x8006 = i;
+            gSpecialVar_0x8007 = ivStorage[i];
+        }
+        else if (ivStorage[gSpecialVar_0x8006] == ivStorage[i])
+        {
+            u16 randomNumber = Random();
+            if (randomNumber & 1)
+            {
+                gSpecialVar_0x8006 = i;
+                gSpecialVar_0x8007 = ivStorage[i];
+            }
+        }
+    }
+}
+
 bool8 UsedPokemonCenterWarp(void)
 {
     static const u16 sPokemonCenters[] =
@@ -2726,25 +2246,25 @@ void ShowFrontierManiacMessage(void)
             winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_DOME:
-        if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50];
+        if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_FACTORY:
-        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50];
+        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_PALACE:
-        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_50];
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_DOUBLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_ARENA:
         if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50]
@@ -2843,6 +2363,16 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
+    case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
+        task->tNumItems = 8;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 9;
+        task->tHeight = 10;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
     case SCROLL_MULTI_POKEMON_FAN_CLUB_RATER:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 12;
@@ -2873,7 +2403,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 7;
         task->tLeft = 14;
@@ -2883,7 +2413,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 10;
         task->tLeft = 14;
@@ -2966,74 +2496,6 @@ void ShowScrollableMultichoice(void)
         task->tScrollOffset = sElevatorScroll;
         task->tSelectedRow = sElevatorCursorPos;
         break;
-    case SCROLL_MULTI_STARTER_REGIONS:
-        task->tMaxItemsOnScreen = 5;
-        task->tNumItems = 9;
-        task->tLeft = 18;
-        task->tTop = 1;
-        task->tWidth = 11;
-        task->tHeight = task->tMaxItemsOnScreen * 2;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        // The list always opens at its top, in generation order; VAR_0x8005 only
-        // chooses which visible row carries the cursor (the script passes Hoenn).
-        task->tScrollOffset = 0;
-        task->tSelectedRow = min(gSpecialVar_0x8005, task->tMaxItemsOnScreen - 1);
-        break;
-    case SCROLL_MULTI_FURFROU_TRIMS:
-        task->tMaxItemsOnScreen = 5;
-        task->tNumItems = 11; // Ten trims plus Back.
-        task->tLeft = 18;
-        task->tTop = 1;
-        task->tWidth = 11;
-        task->tHeight = task->tMaxItemsOnScreen * 2;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        task->tScrollOffset = min(min(gSpecialVar_0x8005, 10), task->tNumItems - task->tMaxItemsOnScreen);
-        task->tSelectedRow = min(gSpecialVar_0x8005, 10) - task->tScrollOffset;
-        break;
-    case SCROLL_MULTI_GAMECORNER_POKEMON:
-        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 14; // Thirteen prize Pokemon plus Exit.
-        task->tLeft = 19;
-        task->tTop = 1;
-        task->tWidth = 12;
-        task->tHeight = 12;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        break;
-    case SCROLL_MULTI_GAMECORNER_GRASS_STARTERS:
-    case SCROLL_MULTI_GAMECORNER_FIRE_STARTERS:
-    case SCROLL_MULTI_GAMECORNER_WATER_STARTERS:
-        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 10; // Nine starters plus Exit.
-        task->tLeft = 19;
-        task->tTop = 1;
-        task->tWidth = 12;
-        task->tHeight = 12;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        break;
-    case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
-        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
-        task->tNumItems = 7; // Three flutes, caps, two furnishings, Exit.
-        task->tLeft = 1;
-        task->tTop = 1;
-        task->tWidth = 9;
-        task->tHeight = 10;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        break;
-    case SCROLL_MULTI_HIDDEN_POWER:
-        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 17; // Sixteen Hidden Power types plus Exit.
-        task->tLeft = 20;
-        task->tTop = 1;
-        task->tWidth = 14;
-        task->tHeight = 12;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        break;
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;
         DestroyTask(taskId);
@@ -3047,19 +2509,16 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     {
         gText_Exit
     },
-    [SCROLL_MULTI_FURFROU_TRIMS] =
+    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
     {
-        COMPOUND_STRING("Heart"),
-        COMPOUND_STRING("Star"),
-        COMPOUND_STRING("Diamond"),
-        COMPOUND_STRING("Debutante"),
-        COMPOUND_STRING("Matron"),
-        COMPOUND_STRING("Dandy"),
-        COMPOUND_STRING("La Reine"),
-        COMPOUND_STRING("Kabuki"),
-        COMPOUND_STRING("Pharaoh"),
-        COMPOUND_STRING("Natural"),
-        sText_Back,
+        COMPOUND_STRING("BLUE FLUTE"),
+        COMPOUND_STRING("YELLOW FLUTE"),
+        COMPOUND_STRING("RED FLUTE"),
+        COMPOUND_STRING("WHITE FLUTE"),
+        COMPOUND_STRING("BLACK FLUTE"),
+        COMPOUND_STRING("PRETTY CHAIR"),
+        COMPOUND_STRING("PRETTY DESK"),
+        gText_Exit
     },
     [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] =
     {
@@ -3078,63 +2537,63 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] =
     {
-        COMPOUND_STRING("Kiss Poster{CLEAR_TO 94}16BP"),
-        COMPOUND_STRING("Kiss Cushion{CLEAR_TO 94}32BP"),
-        COMPOUND_STRING("Smoochum Doll{CLEAR_TO 94}32BP"),
-        COMPOUND_STRING("Togepi Doll{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("Meowth Doll{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("Clefairy Doll{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("Ditto Doll{CLEAR_TO 94}48BP"),
-        COMPOUND_STRING("Cyndaquil Doll{CLEAR_TO 94}80BP"),
-        COMPOUND_STRING("Chikorita Doll{CLEAR_TO 94}80BP"),
-        COMPOUND_STRING("Totodile Doll{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("KISS POSTER{CLEAR_TO 94}16BP"),
+        COMPOUND_STRING("KISS CUSHION{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("SMOOCHUM DOLL{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("TOGEPI DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("MEOWTH DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("CLEFAIRY DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("DITTO DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("CYNDAQUIL DOLL{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("CHIKORITA DOLL{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("TOTODILE DOLL{CLEAR_TO 94}80BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2] =
     {
-        COMPOUND_STRING("Lapras Doll{CLEAR_TO 88}128BP"),
-        COMPOUND_STRING("Snorlax Doll{CLEAR_TO 88}128BP"),
-        COMPOUND_STRING("Venusaur Doll{CLEAR_TO 88}256BP"),
-        COMPOUND_STRING("Charizard Doll{CLEAR_TO 88}256BP"),
-        COMPOUND_STRING("Blastoise Doll{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("LAPRAS DOLL{CLEAR_TO 88}128BP"),
+        COMPOUND_STRING("SNORLAX DOLL{CLEAR_TO 88}128BP"),
+        COMPOUND_STRING("VENUSAUR DOLL{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("CHARIZARD DOLL{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("BLASTOISE DOLL{CLEAR_TO 88}256BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
     {
-        COMPOUND_STRING("Quick Ball{CLEAR_TO 100}2BP"),
-        COMPOUND_STRING("Timer Ball{CLEAR_TO 100}2BP"),
-        COMPOUND_STRING("Max Revive{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("Sacred Ash{CLEAR_TO 94}32BP"),
-        COMPOUND_STRING("Dream Ball{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("Beast Ball{CLEAR_TO 100}8BP"),
+        COMPOUND_STRING("PROTEIN{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("CALCIUM{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("IRON{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("ZINC{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("CARBOS{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("HP UP{CLEAR_TO 100}1BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
     {
-        COMPOUND_STRING("Linking Cord{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("Protector{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("Electirizer{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("Magmarizer{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("Reaper Cloth{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("Razor Claw{CLEAR_TO 94}12BP"),
-        COMPOUND_STRING("Sweet Apple{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("Tart Apple{CLEAR_TO 100}8BP"),
-        COMPOUND_STRING("Prism Scale{CLEAR_TO 94}16BP"),
+        COMPOUND_STRING("LEFTOVERS{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("WHITE HERB{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("QUICK CLAW{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("MENTAL HERB{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("BRIGHTPOWDER{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("CHOICE BAND{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("KING'S ROCK{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("FOCUS BAND{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("SCOPE LENS{CLEAR_TO 94}64BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BERRY_POWDER_VENDOR] =
     {
-        COMPOUND_STRING("Energy Powder{CLEAR_TO 114}{FONT_SMALL}50"),
-        COMPOUND_STRING("Energy Root{CLEAR_TO 114}{FONT_SMALL}80"),
-        COMPOUND_STRING("Heal Powder{CLEAR_TO 114}{FONT_SMALL}50"),
-        COMPOUND_STRING("Revival Herb{CLEAR_TO 108}{FONT_SMALL}300"),
-        COMPOUND_STRING("Ether{CLEAR_TO 99}{FONT_SMALL}500"),
-        COMPOUND_STRING("Max Ether{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("Elixir{CLEAR_TO 99}{FONT_SMALL}1,500"),
-        COMPOUND_STRING("Max Elixir{CLEAR_TO 99}{FONT_SMALL}3,000"),
-        COMPOUND_STRING("PP Up{CLEAR_TO 99}{FONT_SMALL}3,000"),
-        COMPOUND_STRING("PP Max{CLEAR_TO 99}{FONT_SMALL}9,000"),
-        COMPOUND_STRING("Sacred Ash{CLEAR_TO 99}{FONT_SMALL}12,000"),
+        COMPOUND_STRING("ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50"),
+        COMPOUND_STRING("ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80"),
+        COMPOUND_STRING("HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50"),
+        COMPOUND_STRING("REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300"),
+        COMPOUND_STRING("PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("IRON{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("ZINC{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("HP UP{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("PP UP{CLEAR_TO 99}{FONT_SMALL}3,000"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_RECEPTIONIST] =
@@ -3152,30 +2611,30 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
-        COMPOUND_STRING("Soft-Boiled{CLEAR_TO 78}16BP"),
-        COMPOUND_STRING("Seismic Toss{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Dream Eater{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Mega Punch{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Mega Kick{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Body Slam{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Rock Slide{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Counter{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Thunder Wave{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Swords Dance{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("SOFTBOILED{CLEAR_TO 78}16BP"),
+        COMPOUND_STRING("SEISMIC TOSS{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("DREAM EATER{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("MEGA PUNCH{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("MEGA KICK{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("BODY SLAM{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("ROCK SLIDE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("COUNTER{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("THUNDER WAVE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("SWORDS DANCE{CLEAR_TO 78}48BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_2] =
     {
-        COMPOUND_STRING("Defense Curl{CLEAR_TO 78}16BP"),
-        COMPOUND_STRING("Snore{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Mud-Slap{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Swift{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Icy Wind{CLEAR_TO 78}24BP"),
-        COMPOUND_STRING("Endure{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Psych Up{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Ice Punch{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Thunder Punch{CLEAR_TO 78}48BP"),
-        COMPOUND_STRING("Fire Punch{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("DEFENSE CURL{CLEAR_TO 78}16BP"),
+        COMPOUND_STRING("SNORE{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("MUD-SLAP{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("SWIFT{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("ICY WIND{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("ENDURE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("PSYCH UP{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("ICE PUNCH{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("THUNDERPUNCH{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("FIRE PUNCH{CLEAR_TO 78}48BP"),
         gText_Exit
     },
     [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
@@ -3224,105 +2683,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_2F,
         gText_1F,
         gText_Exit,
-    },
-    [SCROLL_MULTI_STARTER_REGIONS] =
-    {
-        COMPOUND_STRING("Kanto"),
-        COMPOUND_STRING("Johto"),
-        COMPOUND_STRING("Hoenn"),
-        COMPOUND_STRING("Sinnoh"),
-        COMPOUND_STRING("Unova"),
-        COMPOUND_STRING("Kalos"),
-        COMPOUND_STRING("Alola"),
-        COMPOUND_STRING("Galar"),
-        COMPOUND_STRING("Paldea"),
-    },
-    [SCROLL_MULTI_GAMECORNER_POKEMON] =
-    {
-        COMPOUND_STRING("Porygon{CLEAR_TO 72}5,000 Coins"),
-        COMPOUND_STRING("Munchlax{CLEAR_TO 72}4,000 Coins"),
-        COMPOUND_STRING("Vulpix{CLEAR_TO 72}2,000 Coins"),
-        COMPOUND_STRING("Sandshrew{CLEAR_TO 72}2,000 Coins"),
-        COMPOUND_STRING("Rattata{CLEAR_TO 72}1,000 Coins"),
-        COMPOUND_STRING("Meowth{CLEAR_TO 72}2,000 Coins"),
-        COMPOUND_STRING("Grimer{CLEAR_TO 72}2,000 Coins"),
-        COMPOUND_STRING("Diglett{CLEAR_TO 72}2,000 Coins"),
-        COMPOUND_STRING("Geodude{CLEAR_TO 72}2,000 Coins"),
-        COMPOUND_STRING("Raichu{CLEAR_TO 72}4,500 Coins"),
-        COMPOUND_STRING("Marowak{CLEAR_TO 72}4,500 Coins"),
-        COMPOUND_STRING("Exeggutor{CLEAR_TO 72}4,500 Coins"),
-        COMPOUND_STRING("Genesect{CLEAR_TO 72}5,000 Coins"),
-        gText_Exit,
-    },
-    [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
-    {
-        COMPOUND_STRING("Bulbasaur{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Chikorita{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Treecko{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Turtwig{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Snivy{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Chespin{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Rowlet{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Grookey{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Sprigatito{CLEAR_TO 72}500 Coins"),
-        gText_Exit,
-    },
-    [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
-    {
-        COMPOUND_STRING("Charmander{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Cyndaquil{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Torchic{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Chimchar{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Tepig{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Fennekin{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Litten{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Scorbunny{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Fuecoco{CLEAR_TO 72}500 Coins"),
-        gText_Exit,
-    },
-    [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
-    {
-        COMPOUND_STRING("Squirtle{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Totodile{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Mudkip{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Piplup{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Oshawott{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Froakie{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Popplio{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Sobble{CLEAR_TO 72}500 Coins"),
-        COMPOUND_STRING("Quaxly{CLEAR_TO 72}500 Coins"),
-        gText_Exit,
-    },
-    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
-    {
-        COMPOUND_STRING("Blue Flute"),
-        COMPOUND_STRING("Yellow Flute"),
-        COMPOUND_STRING("Red Flute"),
-        COMPOUND_STRING("Bottle Caps"),
-        COMPOUND_STRING("Pretty Chair"),
-        COMPOUND_STRING("Pretty Desk"),
-        gText_Exit,
-    },
-    [SCROLL_MULTI_HIDDEN_POWER] =
-    {
-        COMPOUND_STRING("Fighting"),
-        COMPOUND_STRING("Flying"),
-        COMPOUND_STRING("Poison"),
-        COMPOUND_STRING("Ground"),
-        COMPOUND_STRING("Rock"),
-        COMPOUND_STRING("Bug"),
-        COMPOUND_STRING("Ghost"),
-        COMPOUND_STRING("Steel"),
-        COMPOUND_STRING("Fire"),
-        COMPOUND_STRING("Water"),
-        COMPOUND_STRING("Grass"),
-        COMPOUND_STRING("Electric"),
-        COMPOUND_STRING("Psychic"),
-        COMPOUND_STRING("Ice"),
-        COMPOUND_STRING("Dragon"),
-        COMPOUND_STRING("Dark"),
-        gText_Exit,
-    },
+    }
 };
 
 static void Task_ShowScrollableMultichoice(u8 taskId)
@@ -3343,10 +2704,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
 
     for (width = 0, i = 0; i < task->tNumItems; i++)
     {
-        const u8 *text;
-        {
-            text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
-        }
+        const u8 *text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
         sScrollableMultichoice_ListMenuItem[i].name = text;
         sScrollableMultichoice_ListMenuItem[i].id = i;
         width = DisplayTextAndGetWidth(text, width);
@@ -3574,48 +2932,11 @@ void ShowNatureGirlMessage(void)
     ShowFieldMessage(gNaturesInfo[nature].natureGirlMessage);
 }
 
-// Saved challenge numbers keep their original 0-11 meanings. New wagers use
-// only facilities the player can still enter.
-static const u8 sOpenFrontierGamblerChallenges[] = {1, 2, 4, 6, 8, 10, 11};
-
-static bool32 IsOpenFrontierGamblerChallenge(u32 challenge)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sOpenFrontierGamblerChallenges); i++)
-        if (sOpenFrontierGamblerChallenges[i] == challenge)
-            return TRUE;
-    return FALSE;
-}
-
-static u16 NextOpenFrontierGamblerChallenge(u32 challenge)
-{
-    challenge %= FRONTIER_GAMBLER_CHALLENGE_COUNT;
-    while (!IsOpenFrontierGamblerChallenge(challenge))
-        challenge = (challenge + 1) % FRONTIER_GAMBLER_CHALLENGE_COUNT;
-    return challenge;
-}
-
 void UpdateFrontierGambler(u16 daysSince)
 {
     u16 *var = GetVarPointer(VAR_FRONTIER_GAMBLER_CHALLENGE);
-    *var = NextOpenFrontierGamblerChallenge((u32)*var + daysSince);
-}
-
-void RefundRetiredFrontierGamblerBet(void)
-{
-    gSpecialVar_Result = FALSE;
-    if (VarGet(VAR_FRONTIER_GAMBLER_STATE) != FRONTIER_GAMBLER_PLACED_BET
-     || IsOpenFrontierGamblerChallenge(VarGet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE)))
-        return;
-
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    u16 bet = VarGet(VAR_FRONTIER_GAMBLER_AMOUNT_BET);
-    u32 points = bet <= FRONTIER_GAMBLER_BET_15 ? (bet + 1) * 5 : 0;
-    u32 balance = min(gSaveBlock2Ptr->frontier.battlePoints, MAX_BATTLE_FRONTIER_POINTS);
-    u32 refunded = min(points, MAX_BATTLE_FRONTIER_POINTS - balance);
-    gSaveBlock2Ptr->frontier.battlePoints = balance + refunded;
-    ConvertIntToDecimalStringN(gStringVar1, refunded, STR_CONV_MODE_LEFT_ALIGN, 2);
-    VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WAITING);
-    gSpecialVar_Result = TRUE;
+    *var += daysSince;
+    *var %= FRONTIER_GAMBLER_CHALLENGE_COUNT;
 }
 
 void ShowFrontierGamblerLookingMessage(void)
@@ -3636,8 +2957,7 @@ void ShowFrontierGamblerLookingMessage(void)
         BattleFrontier_Lounge3_Text_ChallengeBattlePyramid,
     };
 
-    u16 challenge = NextOpenFrontierGamblerChallenge(VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE));
-    VarSet(VAR_FRONTIER_GAMBLER_CHALLENGE, challenge);
+    u16 challenge = VarGet(VAR_FRONTIER_GAMBLER_CHALLENGE);
     ShowFieldMessage(sFrontierGamblerLookingMessages[challenge]);
     VarSet(VAR_FRONTIER_GAMBLER_SET_CHALLENGE, challenge);
 }
@@ -3677,7 +2997,7 @@ void FrontierGamblerSetWonOrLost(bool8 won)
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES),
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PYRAMID, FRONTIER_MODE_SINGLES)
     };
 
@@ -3687,11 +3007,7 @@ void FrontierGamblerSetWonOrLost(bool8 won)
 
     if (VarGet(VAR_FRONTIER_GAMBLER_STATE) == FRONTIER_GAMBLER_PLACED_BET)
     {
-        bool32 matchesCurrent = challenge < ARRAY_COUNT(sFrontierChallenges)
-            && sFrontierChallenges[challenge] == FRONTIER_CHALLENGE(frontierFacilityId, battleMode);
-        bool32 matchesOldPikeSave = challenge == 10 && frontierFacilityId == FRONTIER_FACILITY_PIKE
-            && battleMode == FRONTIER_MODE_SINGLES;
-        if (matchesCurrent || matchesOldPikeSave)
+        if (sFrontierChallenges[challenge] ==  FRONTIER_CHALLENGE(frontierFacilityId, battleMode))
         {
             if (won)
                 VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON);
@@ -3784,7 +3100,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
-    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR)
+    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR)
     {
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (menu)
@@ -3815,13 +3131,13 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
                 sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
             }
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_SupplyDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Supplies[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_EvolutionItemDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_EvolutionItems[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
             break;
         default:
             break;
@@ -3851,8 +3167,8 @@ static void HideFrontierExchangeCornerItemIcon(enum ScrollMulti menu, u16 unused
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
             // This makes sure deleting the icon will not clear palettes in use by object events
             FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
             break;
@@ -3980,15 +3296,6 @@ void ScrollableMultichoice_ClosePersistentMenu(void)
     }
 }
 
-#if EC_HEADLESS_FIXTURES
-bool32 IsScrollableMultichoiceHeadlessActive(u16 menu)
-{
-    u8 taskId = FindTaskIdByFunc(ScrollableMultichoice_ProcessInput);
-
-    return taskId != TASK_NONE && gTasks[taskId].tScrollMultiId == menu;
-}
-#endif
-
 // Undefine Scrollable Multichoice task data macros
 #undef tMaxItemsOnScreen
 #undef tNumItems
@@ -4095,8 +3402,16 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
 
     CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK;
-    gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
-    gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
+    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG))
+    {
+        gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
+        gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
+    }
+    else
+    {
+        gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
+        gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
+    }
     gFieldEffectArguments[3] = sDeoxysRockCoords[rockLevel][0];
     gFieldEffectArguments[4] = sDeoxysRockCoords[rockLevel][1];
 
@@ -4122,12 +3437,14 @@ static void WaitForDeoxysRockMovement(u8 taskId)
 
 void IncrementBirthIslandRockStepCount(void)
 {
-    u32 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
-    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
+    u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
+    if ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
+     || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG)))
     {
-        // Extra walking must not wrap back below the shortest-path limit.
-        // The next rock interaction owns resetting this counter.
-        VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, min(stepCount + 1, 99));
+        if (++stepCount > 99)
+            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
+        else
+            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, stepCount);
     }
 }
 
@@ -4135,9 +3452,6 @@ void IncrementBirthIslandRockStepCount(void)
 void SetDeoxysRockPalette(void)
 {
     u32 paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE);
-    // The solved triangle is absent after battle and on later visits.
-    if (paletteNum == 0xFF)
-        return;
     LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
     // Set faded to all black, weather blending handled during fade-in
     CpuFill16(RGB_BLACK, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
@@ -4163,6 +3477,31 @@ bool8 ShouldShowBoxWasFullMessage(void)
             return TRUE;
         }
     }
+    return FALSE;
+}
+
+bool8 IsDestinationBoxFull(void)
+{
+    int box;
+    int i;
+    SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
+    box = StorageGetCurrentBox();
+    do
+    {
+        for (i = 0; i < IN_BOX_COUNT; i++)
+        {
+            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == SPECIES_NONE)
+            {
+                if (GetPCBoxToSendMon() != box)
+                    FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
+                VarSet(VAR_PC_BOX_TO_SEND_MON, box);
+                return ShouldShowBoxWasFullMessage();
+            }
+        }
+
+        if (++box == TOTAL_BOXES_COUNT)
+            box = 0;
+    } while (box != StorageGetCurrentBox());
     return FALSE;
 }
 
@@ -5133,16 +4472,9 @@ static void UIAskConfirmation(void)
     DisplayYesNoMenuDefaultYes();
 }
 
-static s32 UIWaitConfirmation(bool32 keepOnNo)
+static s32 UIWaitConfirmation(void)
 {
-    s32 result = Menu_ProcessInputNoWrap();
-    if (result == MENU_NOTHING_CHOSEN)
-        return result;
-    if (keepOnNo && (result == 1 || result == MENU_B_PRESSED))
-        Menu_MoveCursorNoWrapAround(-1); // The follow-up question defaults to Yes.
-    else
-        EraseYesNoWindow();
-    return result;
+    return Menu_ProcessInputNoWrapClearOnChoose();
 }
 
 static void UIPrintMessage(const u8 *message)
@@ -5166,17 +4498,10 @@ static void UIEndTask(u8 taskId)
 #define tMove          data[2]
 #define tRecoverPp     data[3]
 
-// Where CanTeachMoveBoxMon resumes after the forget-a-move summary screen,
-// kept here rather than in the calling script's special vars.
-static EWRAM_DATA struct {
-    u16 partyIndex;
-    u16 move;
-} sFieldMoveTutorResume = {0};
-
 static void UIShowMoveList(u8 taskId)
 {
-    sFieldMoveTutorResume.partyIndex = gTasks[taskId].tPartyIndex;
-    sFieldMoveTutorResume.move = gTasks[taskId].tMove;
+    gSpecialVar_0x8000 = gTasks[taskId].tPartyIndex;
+    gSpecialVar_0x8001 = gTasks[taskId].tMove;
     DestroyTask(taskId);
     ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_ReturnToFieldWhileLearningMove, gTasks[taskId].tMove);
 }
@@ -5232,8 +4557,8 @@ static void Task_ReturnToFieldWhileLearningMove(u8 taskId)
     {
         gTasks[taskId].func = Task_LearnMove;
         gTasks[taskId].tState = GetLearnMoveResumeAfterSummaryScreenState();
-        gTasks[taskId].tPartyIndex = sFieldMoveTutorResume.partyIndex;
-        gTasks[taskId].tMove = sFieldMoveTutorResume.move;
+        gTasks[taskId].tPartyIndex = gSpecialVar_0x8000;
+        gTasks[taskId].tMove = gSpecialVar_0x8001;
     }
 }
 
@@ -5269,6 +4594,31 @@ void SetAbility(void)
     SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_ABILITY_NUM, &ability);
 }
 
+void DaisyMassageServices(void)
+{
+    AdjustFriendship(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], FRIENDSHIP_EVENT_MASSAGE);
+    VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 0);
+}
+
+u8 GetLeadMonFriendship(void)
+{
+    struct Pokemon * pokemon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
+        return 6;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
+        return 5;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
+        return 4;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
+        return 3;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
+        return 2;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) > 0)
+        return 1;
+    else
+        return 0;
+}
+
 enum Move GetFirstPartnerMove(enum Species species)
 {
     switch (species)
@@ -5284,20 +4634,1004 @@ enum Move GetFirstPartnerMove(enum Species species)
     }
 }
 
+bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
+{
+    // Returns:
+    //   8005 = Move tutor index
+    //   8006 = Num moves known by lead mon
+    //   8007 = Index of lead mon
+    //   to specialvar = whether a move can be taught in the first place
+    u8 i, leadMonSlot, moveCount = 0;
+    enum Move moveId;
+    u16 tutorFlag;
+    struct Pokemon *leadMon;
+
+    leadMonSlot = GetLeadMonIndex();
+    leadMon = &gParties[B_TRAINER_PLAYER][leadMonSlot];
+
+    if (GetMonData(leadMon, MON_DATA_FRIENDSHIP) != 255)
+        return FALSE;
+
+    moveId = GetFirstPartnerMove(GetMonData(leadMon, MON_DATA_SPECIES_OR_EGG));
+    switch (moveId)
+    {
+    case MOVE_FRENZY_PLANT:
+        tutorFlag = FLAG_TUTOR_FRENZY_PLANT;
+        break;
+    case MOVE_BLAST_BURN:
+        tutorFlag = FLAG_TUTOR_BLAST_BURN;
+        break;
+    case MOVE_HYDRO_CANNON:
+        tutorFlag = FLAG_TUTOR_HYDRO_CANNON;
+        break;
+    default:
+        return FALSE;
+    }
+
+    StringCopy(gStringVar2, gMovesInfo[moveId].name);
+    if (FlagGet(tutorFlag) == TRUE)
+        return FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        moveCount += (GetMonData(leadMon, MON_DATA_MOVE1 + i) != MOVE_NONE);
+
+    gSpecialVar_0x8005 = moveId;
+    gSpecialVar_0x8006 = moveCount;
+    gSpecialVar_0x8007 = leadMonSlot;
+
+    return TRUE;
+}
+
+bool8 HasLearnedAllMovesFromCapeBrinkTutor(void)
+{
+    // 8005 is set by CapeBrinkGetMoveToTeachLeadPokemon
+    switch (gSpecialVar_0x8005)
+    {
+    case MOVE_FRENZY_PLANT:
+        FlagSet(FLAG_TUTOR_FRENZY_PLANT);
+        break;
+    case MOVE_BLAST_BURN:
+        FlagSet(FLAG_TUTOR_BLAST_BURN);
+        break;
+    case MOVE_HYDRO_CANNON:
+        FlagSet(FLAG_TUTOR_HYDRO_CANNON);
+        break;
+    }
+
+    return (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
+        && (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
+        && (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE);
+}
+
+void SetSeenMon(void)
+{
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), 2);
+}
+
 #define tTimer data[0]
 #define tState data[1]
 #define tX     data[2]
 #define tY     data[3]
+
+static void Task_DrawTeleporterHousing(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (tTimer == 0)
+    {
+        // Alternate the teleporter light / brightness of the teleporter door
+        if ((tState & 1) == 0)
+        {
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Yellow | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_HalfGlowing | MAPGRID_COLLISION_MASK);
+        }
+        else
+        {
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Red | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_FullGlowing | MAPGRID_COLLISION_MASK);
+        }
+        CurrentMapDrawMetatileAt(tX, tY);
+        CurrentMapDrawMetatileAt(tX, tY + 2);
+    }
+
+    tTimer++;
+    if (tTimer != 16)
+        return;
+
+    tTimer = 0;
+    tState++;
+    if (tState != 13)
+        return;
+
+    MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Green | MAPGRID_COLLISION_MASK);
+    MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door | MAPGRID_COLLISION_MASK);
+    CurrentMapDrawMetatileAt(tX, tY);
+    CurrentMapDrawMetatileAt(tX, tY + 2);
+    DestroyTask(taskId);
+}
+
+void AnimateTeleporterHousing(void)
+{
+    u8 taskId;
+    s16 *data;
+
+    taskId = CreateTask(Task_DrawTeleporterHousing, 0);
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tState = 0;
+    data = gTasks[taskId].data;
+    PlayerGetDestCoords(&tX, &tY);
+
+    // Set the coords of whichever teleporter is being animated
+    // 0 for the right teleporter, 1 for the left teleporter
+    if (gSpecialVar_0x8004 == 0)
+    {
+        gTasks[taskId].tX += 6;
+        gTasks[taskId].tY -= 5;
+    }
+    else
+    {
+        gTasks[taskId].tX -= 1;
+        gTasks[taskId].tY -= 5;
+    }
+}
+
+static void Task_DrawTeleporterCable(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (tTimer == 0)
+    {
+        if (tState != 0)
+        {
+            // Set default cable tiles to clear the ball
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Cable_Top | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_Cable_Bottom | MAPGRID_COLLISION_MASK);
+            CurrentMapDrawMetatileAt(tX, tY);
+            CurrentMapDrawMetatileAt(tX, tY + 1);
+
+            // End after drawing 4 times (length of the cable)
+            if (tState == 4)
+            {
+                DestroyTask(taskId);
+                return;
+            }
+
+            tX--;
+        }
+
+        // Draw the cable ball
+        MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_CableBall_Top | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_CableBall_Bottom | MAPGRID_COLLISION_MASK);
+        CurrentMapDrawMetatileAt(tX, tY);
+        CurrentMapDrawMetatileAt(tX, tY + 1);
+    }
+
+    tTimer++;
+    if (tTimer == 4)
+    {
+        tTimer = 0;
+        tState++;
+    }
+}
+
+void AnimateTeleporterCable(void)
+{
+    u8 taskId;
+    s16 *data;
+
+    taskId = CreateTask(Task_DrawTeleporterCable, 0);
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tState = 0;
+    data = gTasks[taskId].data;
+    PlayerGetDestCoords(&tX, &tY);
+    gTasks[taskId].tX += 4;
+    gTasks[taskId].tY -= 5;
+}
 
 #undef tTimer
 #undef tState
 #undef tX
 #undef tY
 
+void SetVermilionTrashCans(void)
+{
+    u16 idx = (Random() % 15) + 1;
+    gSpecialVar_0x8004 = idx;
+    gSpecialVar_0x8005 = idx;
+    switch (gSpecialVar_0x8004)
+    {
+    case 1:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 += 1;
+        else
+            gSpecialVar_0x8005 += 5;
+        break;
+    case 2:
+    case 3:
+    case 4:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 += 1;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 5:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 6:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 1;
+        else
+            gSpecialVar_0x8005 += 5;
+        break;
+    case 7:
+    case 8:
+    case 9:
+        idx = Random() % 4;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 1;
+        else if (idx == 2)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 10:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 11:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else
+            gSpecialVar_0x8005 += 1;
+        break;
+    case 12:
+    case 13:
+    case 14:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 1;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 15:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    }
+    if (gSpecialVar_0x8005 > 15)
+    {
+        if (gSpecialVar_0x8004 % 5 == 1)
+            gSpecialVar_0x8005 = gSpecialVar_0x8004 + 1;
+        else if (gSpecialVar_0x8004 % 5 == 0)
+            gSpecialVar_0x8005 = gSpecialVar_0x8004 - 1;
+        else
+            gSpecialVar_0x8005 = gSpecialVar_0x8004 + 1;
+    }
+}
+
+bool8 DoesPlayerPartyContainSpecies(void)
+{
+    u8 partyCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static const u8 sSlotMachineIndices[] = {
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5
+};
+
+u8 GetRandomSlotMachineId(void)
+{
+    u16 rval = Random() % NELEMS(sSlotMachineIndices);
+    return sSlotMachineIndices[rval];
+}
+
+static const struct WindowTemplate sElevatorCurrentFloorWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 1,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x008
+};
+
+static const u8 *const sFloorNamePointers[] = {
+    gText_B4F,
+    gText_B3F,
+    gText_B2F,
+    gText_B1F,
+    gText_1F,
+    gText_2F,
+    gText_3F,
+    gText_4F,
+    gText_5F,
+    gText_6F,
+    gText_7F,
+    gText_8F,
+    gText_9F,
+    gText_10F,
+    gText_11F,
+    gText_Rooftop
+};
+
+static const u16 sElevatorWindowMetatilesGoingUp[][3] = {
+    {
+        METATILE_SilphCo_ElevatorWindow_Top0,
+        METATILE_SilphCo_ElevatorWindow_Top1,
+        METATILE_SilphCo_ElevatorWindow_Top2
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Mid0,
+        METATILE_SilphCo_ElevatorWindow_Mid1,
+        METATILE_SilphCo_ElevatorWindow_Mid2
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Bottom0,
+        METATILE_SilphCo_ElevatorWindow_Bottom1,
+        METATILE_SilphCo_ElevatorWindow_Bottom2
+    }
+};
+
+static const u16 sElevatorWindowMetatilesGoingDown[][3] = {
+    {
+        METATILE_SilphCo_ElevatorWindow_Top0,
+        METATILE_SilphCo_ElevatorWindow_Top2,
+        METATILE_SilphCo_ElevatorWindow_Top1
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Mid0,
+        METATILE_SilphCo_ElevatorWindow_Mid2,
+        METATILE_SilphCo_ElevatorWindow_Mid1
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Bottom0,
+        METATILE_SilphCo_ElevatorWindow_Bottom2,
+        METATILE_SilphCo_ElevatorWindow_Bottom1
+    }
+};
+
+static const u8 sElevatorAnimationDuration[] = {
+    8,
+    16,
+    24,
+    32,
+    38,
+    46,
+    53,
+    56,
+    57
+};
+
+static const u8 sElevatorWindowAnimDuration[] = {
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27
+};
+
+void GetElevatorFloor(void)
+{
+    u16 floor = 4;
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_ROCKET_HIDEOUT_B1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_SILPH_CO_1F):
+            floor = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_2F):
+            floor = 5;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_3F):
+            floor = 6;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_4F):
+            floor = 7;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_5F):
+            floor = 8;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_6F):
+            floor = 9;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_7F):
+            floor = 10;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_8F):
+            floor = 11;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_9F):
+            floor = 12;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_10F):
+            floor = 13;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_11F):
+            floor = 14;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B1F):
+            floor = 3;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B2F):
+            floor = 2;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B4F):
+            floor = 0;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_1F):
+            floor = 4;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_2F):
+            floor = 5;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_3F):
+            floor = 6;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_4F):
+            floor = 7;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_5F):
+            floor = 8;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_TRAINER_TOWER_1F):
+        case MAP_NUM(MAP_TRAINER_TOWER_2F):
+        case MAP_NUM(MAP_TRAINER_TOWER_3F):
+        case MAP_NUM(MAP_TRAINER_TOWER_4F):
+        case MAP_NUM(MAP_TRAINER_TOWER_5F):
+        case MAP_NUM(MAP_TRAINER_TOWER_6F):
+        case MAP_NUM(MAP_TRAINER_TOWER_7F):
+        case MAP_NUM(MAP_TRAINER_TOWER_8F):
+        case MAP_NUM(MAP_TRAINER_TOWER_ROOF):
+            floor = 15;
+            break;
+        case MAP_NUM(MAP_TRAINER_TOWER_LOBBY):
+            floor = 3;
+            break;
+        }
+    }
+    VarSet(VAR_ELEVATOR_FLOOR, floor);
+}
+
+u16 InitElevatorFloorSelectMenuPos(void)
+{
+    sElevatorScroll = 0;
+    sElevatorCursorPos = 0;
+
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_ROCKET_HIDEOUT_B1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_SILPH_CO_11F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_10F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_9F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 2;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_8F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 3;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_7F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_6F):
+            sElevatorScroll = 1;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_5F):
+            sElevatorScroll = 2;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_4F):
+            sElevatorScroll = 3;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_3F):
+            sElevatorScroll = 4;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_2F):
+            sElevatorScroll = 5;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_1F):
+            sElevatorScroll = 5;
+            sElevatorCursorPos = 5;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B1F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B2F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B4F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 2;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_5F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_4F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_3F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 2;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_2F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 3;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_1F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 4;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_TRAINER_TOWER_1F):
+        case MAP_NUM(MAP_TRAINER_TOWER_2F):
+        case MAP_NUM(MAP_TRAINER_TOWER_3F):
+        case MAP_NUM(MAP_TRAINER_TOWER_4F):
+        case MAP_NUM(MAP_TRAINER_TOWER_5F):
+        case MAP_NUM(MAP_TRAINER_TOWER_6F):
+        case MAP_NUM(MAP_TRAINER_TOWER_7F):
+        case MAP_NUM(MAP_TRAINER_TOWER_8F):
+        case MAP_NUM(MAP_TRAINER_TOWER_ROOF):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_TRAINER_TOWER_LOBBY):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        }
+    }
+    return sElevatorCursorPos;
+}
+
+void AnimateElevator(void)
+{
+    u16 nfloors;
+    s16 *data = gTasks[CreateTask(Task_ElevatorShake, 9)].data;
+    data[1] = 0;
+    data[2] = 0;
+    data[4] = 1;
+    if (gSpecialVar_0x8005 > gSpecialVar_0x8006)
+    {
+        nfloors = gSpecialVar_0x8005 - gSpecialVar_0x8006;
+        data[6] = 1;
+    }
+    else
+    {
+        nfloors = gSpecialVar_0x8006 - gSpecialVar_0x8005;
+        data[6] = 0;
+    }
+    if (nfloors > 8)
+        nfloors = 8;
+    data[5] = sElevatorAnimationDuration[nfloors];
+    SetCameraPanningCallback(NULL);
+    AnimateElevatorWindowView(nfloors, data[6]);
+    PlaySE(SE_ELEVATOR);
+}
+
+static void Task_ElevatorShake(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1]++;
+    if ((data[1] % 3) == 0)
+    {
+        data[1] = 0;
+        data[2]++;
+        data[4] = -data[4];
+        SetCameraPanning(0, data[4]);
+        if (data[2] == data[5])
+        {
+            PlaySE(SE_DING_DONG);
+            DestroyTask(taskId);
+            ScriptContext_Enable();
+            InstallCameraPanAheadCallback();
+        }
+    }
+}
+
+static const u8 sText_NowOn[] = _("Now on:");
+
+void DrawElevatorCurrentFloorWindow(void)
+{
+    const u8 *floorname;
+    u32 strwidth;
+
+    sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
+    LoadUserWindowBorderGfx(sElevatorCurrentFloorWindowId, 0x21D, BG_PLTT_ID(13));
+    DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 13);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, sText_NowOn, 0, 2, 0xFF, NULL);
+    floorname = sFloorNamePointers[gSpecialVar_0x8005];
+    strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, floorname, 56 - strwidth, 16, 0xFF, NULL);
+    PutWindowTilemap(sElevatorCurrentFloorWindowId);
+    CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
+}
+
+void CloseElevatorCurrentFloorWindow(void)
+{
+    ClearStdWindowAndFrameToTransparent(sElevatorCurrentFloorWindowId, TRUE);
+    RemoveWindow(sElevatorCurrentFloorWindowId);
+}
+
+static void AnimateElevatorWindowView(u16 nfloors, u8 direction)
+{
+    u8 taskId;
+    if (FuncIsActiveTask(Task_AnimateElevatorWindowView) != TRUE)
+    {
+        taskId = CreateTask(Task_AnimateElevatorWindowView, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = direction;
+        gTasks[taskId].data[3] = sElevatorWindowAnimDuration[nfloors];
+    }
+}
+
+static void Task_AnimateElevatorWindowView(u8 taskId)
+{
+    u8 i;
+    u8 j;
+    s16 *data = gTasks[taskId].data;
+    if (data[1] == 6)
+    {
+        data[0]++;
+        if (data[2] == 0)
+        {
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 3; j++)
+                    MapGridSetMetatileIdAt(j + 1 + MAP_OFFSET, i + MAP_OFFSET, sElevatorWindowMetatilesGoingUp[i][data[0] % 3] | MAPGRID_COLLISION_MASK);
+            }
+        }
+        else
+        {
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 3; j++)
+                    MapGridSetMetatileIdAt(j + 1 + MAP_OFFSET, i + MAP_OFFSET, sElevatorWindowMetatilesGoingDown[i][data[0] % 3] | MAPGRID_COLLISION_MASK);
+            }
+        }
+        DrawWholeMapView();
+        data[1] = 0;
+        if (data[0] == data[3])
+            DestroyTask(taskId);
+    }
+    data[1]++;
+}
+
+void ForcePlayerOntoBike(void)
+{
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT)
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+    Overworld_SetSavedMusic(IS_FRLG ? MUS_RG_CYCLING : MUS_CYCLING);
+    Overworld_ChangeMusicTo(IS_FRLG ? MUS_RG_CYCLING : MUS_CYCLING);
+}
+
+bool8 IsPlayerNotInTrainerTowerLobby(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_LOBBY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_LOBBY))
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void BrailleCursorToggle(void)
+{
+    // 8004 = x - 27
+    // 8005 = y
+    // 8006 = action (0 = create, 1 = delete)
+    u16 x = gSpecialVar_0x8004 + 27;
+
+    if (gSpecialVar_0x8006 == 0)
+        sBrailleTextCursorSpriteID = CreateTextCursorSprite(0, x, gSpecialVar_0x8005, 0, 0);
+    else
+        DestroyTextCursorSprite(sBrailleTextCursorSpriteID);
+}
+
+static const u16 sEliteFourLightingPalettes[][16] = {
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_0.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_8.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_9.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_10.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_11.pal", ".gbapal")
+};
+
+static const u16 sChampionRoomLightingPalettes[][16] = {
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_0.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_8.pal", ".gbapal")
+};
+
+static const u8 sEliteFourLightingTimers[] = {
+    40,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12
+};
+
+static const u8 sChampionRoomLightingTimers[] = {
+    20,
+     8,
+     8,
+     8,
+     8,
+     8,
+     8,
+     8
+};
+
+void DoPokemonLeagueLightingEffect(void)
+{
+    u8 taskId = CreateTask(Task_RunPokemonLeagueLightingEffect, 8);
+    s16 *data = gTasks[taskId].data;
+    if (FlagGet(FLAG_TEMP_3) == TRUE)
+    {
+        gTasks[taskId].func = Task_CancelPokemonLeagueLightingEffect;
+    }
+    else
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            data[0] = sChampionRoomLightingTimers[0];
+            data[2] = 8;
+            LoadPalette(sChampionRoomLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        else
+        {
+            data[0] = sEliteFourLightingTimers[0];
+            data[2] = 11;
+            LoadPalette(sEliteFourLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        data[1] = 0;
+        // ApplyGlobalTintToPaletteSlot(7, 1);
+    }
+}
+
+static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active
+     && FlagGet(FLAG_TEMP_2) != FALSE
+     && FlagGet(FLAG_TEMP_5) != TRUE
+     && --data[0] == 0
+    )
+    {
+        if (++data[1] == data[2])
+            data[1] = 0;
+
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            data[0] = sChampionRoomLightingTimers[data[1]];
+            LoadPalette(sChampionRoomLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        else
+        {
+            data[0] = sEliteFourLightingTimers[data[1]];
+            LoadPalette(sEliteFourLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        // ApplyGlobalTintToPaletteSlot(7, 1);
+    }
+}
+
+static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
+{
+    if (FlagGet(FLAG_TEMP_4) != FALSE)
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM))
+            LoadPalette(sChampionRoomLightingPalettes[8], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        else
+            LoadPalette(sEliteFourLightingPalettes[11], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        // ApplyGlobalTintToPaletteSlot(7, 1);
+        if (gPaletteFade.active)
+        {
+            BlendPalettes(0x00000080, 16, RGB_BLACK);
+        }
+        DestroyTask(taskId);
+    }
+}
+
 /*
  * Determines which of Lorelei's doll collection to show
  * based on how many times you've entered the Hall of Fame.
  */
+void UpdateLoreleiDollCollection(void)
+{
+    u32 numHofClears = GetGameStat(GAME_STAT_ENTERED_HOF);
+    if (numHofClears >= 25)
+    {
+        FlagClear(FLAG_HIDE_LORELEI_HOUSE_MEOWTH_DOLL);
+        if (numHofClears >= 50)
+            FlagClear(FLAG_HIDE_LORELEI_HOUSE_CHANSEY_DOLL);
+        if (numHofClears >= 75)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_F_DOLL);
+        if (numHofClears >= 100)
+            FlagClear(FLAG_HIDE_LORELEI_HOUSE_JIGGLYPUFF_DOLL);
+        if (numHofClears >= 125)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_M_DOLL);
+        if (numHofClears >= 150)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_FEAROW_DOLL);
+        if (numHofClears >= 175)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_PIDGEOT_DOLL);
+        if (numHofClears >= 200)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_LAPRAS_DOLL);
+    }
+}
+
+void SampleResortGorgeousMonAndReward(void)
+{
+    enum Species requestedSpecies = VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON);
+    if (requestedSpecies == SPECIES_NONE || requestedSpecies == 0xFFFF)
+    {
+        VarSet(VAR_RESORT_GORGEOUS_REQUESTED_MON, SampleResortGorgeousMon());
+        VarSet(VAR_RESORT_GORGEOUS_REWARD, SampleResortGorgeousReward());
+        VarSet(VAR_RESORT_GOREGEOUS_STEP_COUNTER, 0);
+    }
+    StringCopy(gStringVar1, gSpeciesInfo[VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON)].speciesName);
+}
+
+static enum Species SampleResortGorgeousMon(void)
+{
+    u16 i;
+    enum Species species;
+    for (i = 0; i < 100; i++)
+    {
+        species = (Random() % (NUM_SPECIES - 1)) + 1;
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == TRUE)
+            return species;
+    }
+    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != TRUE)
+    {
+        if (species == SPECIES_BULBASAUR)
+            species = NUM_SPECIES - 1;
+        else
+            species--;
+    }
+    return species;
+}
+
+static const u16 sResortGorgeousDeluxeRewards[] = {
+    ITEM_BIG_PEARL,
+    ITEM_PEARL,
+    ITEM_STARDUST,
+    ITEM_STAR_PIECE,
+    ITEM_NUGGET,
+    ITEM_RARE_CANDY
+};
+
+static u16 SampleResortGorgeousReward(void)
+{
+    if ((Random() % 100) >= 30)
+        return ITEM_LUXURY_BALL;
+    else
+        return sResortGorgeousDeluxeRewards[Random() % NELEMS(sResortGorgeousDeluxeRewards)];
+}
+
+bool8 PlayerPartyContainsSpeciesWithPlayerID(void)
+{
+    // 8004 = species
+    u8 playerCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < playerCount; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004
+            && GetPlayerIDAsU32() == GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_OT_ID, NULL))
+            return TRUE;
+    }
+    return FALSE;
+}
 
 #define tXtrans   data[0]
 #define tTimer    data[1]
@@ -5305,11 +5639,125 @@ enum Move GetFirstPartnerMove(enum Species species)
 #define tDuration data[3]
 #define tYtrans   data[4]
 
+void ShakeScreen(void)
+{
+    /*
+     * 0x8004 = x translation
+     * 0x8005 = y translation
+     * 0x8006 = num interations
+     * 0x8007 = duration of an iteration
+     */
+    u8 taskId = CreateTask(Task_ShakeScreen, 9);
+    gTasks[taskId].tXtrans = gSpecialVar_0x8005;
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tNremain = gSpecialVar_0x8006;
+    gTasks[taskId].tDuration = gSpecialVar_0x8007;
+    gTasks[taskId].tYtrans = gSpecialVar_0x8004;
+    SetCameraPanningCallback(NULL);
+    PlaySE(SE_M_STRENGTH);
+}
+
+static void Task_ShakeScreen(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    tTimer++;
+    if (tTimer % tDuration == 0)
+    {
+        tTimer = 0;
+        tNremain--;
+        tXtrans = -tXtrans;
+        tYtrans = -tYtrans;
+        SetCameraPanning(tXtrans, tYtrans);
+        if (tNremain == 0)
+        {
+            Task_EndScreenShake(taskId);
+            InstallCameraPanAheadCallback();
+        }
+    }
+}
+
+static void Task_EndScreenShake(u8 taskId)
+{
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
 #undef tYtrans
 #undef tDuration
 #undef tNremain
 #undef tTimer
 #undef tXtrans
+
+bool8 CutMoveRuinValleyCheck(void)
+{
+    if (FlagGet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE) != TRUE
+     && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SIX_ISLAND_RUIN_VALLEY)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SIX_ISLAND_RUIN_VALLEY)
+     && gSaveBlock1Ptr->pos.x == 24
+     && gSaveBlock1Ptr->pos.y == 25
+     && GetPlayerFacingDirection() == DIR_NORTH
+    )
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void CutMoveOpenDottedHoleDoor(void)
+{
+    MapGridSetMetatileIdAt(31, 31, METATILE_SeviiIslands67_DottedHoleDoor_Open);
+    DrawWholeMapView();
+    PlaySE(SE_BANG);
+    FlagSet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE);
+    UnlockPlayerFieldControls();
+}
+
+void ForcePlayerToStartSurfing(void)
+{
+    SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
+}
+
+void UpdateTrainerCardPhotoIcons(void)
+{
+    enum Species species[PARTY_SIZE];
+    u32 personality[PARTY_SIZE];
+    u8 i;
+    u8 partyCount;
+    for (i = 0; i < PARTY_SIZE; i++)
+        species[i] = SPECIES_NONE;
+    partyCount = CalculatePlayerPartyCount();
+    for (i = 0; i < partyCount; i++)
+    {
+        species[i] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL);
+        personality[i] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_PERSONALITY, NULL);
+    }
+    VarSet(VAR_TRAINER_CARD_MON_ICON_1, SpeciesToMailSpecies(species[0], personality[0]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_2, SpeciesToMailSpecies(species[1], personality[1]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_3, SpeciesToMailSpecies(species[2], personality[2]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_4, SpeciesToMailSpecies(species[3], personality[3]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_5, SpeciesToMailSpecies(species[4], personality[4]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_6, SpeciesToMailSpecies(species[5], personality[5]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_TINT_IDX, gSpecialVar_0x8004);
+}
+
+u16 StickerManGetBragFlags(void)
+{
+    u16 result = 0;
+    u32 numEggs;
+    gSpecialVar_0x8004 = GetGameStat(GAME_STAT_ENTERED_HOF);
+    numEggs = GetGameStat(GAME_STAT_HATCHED_EGGS);
+    gSpecialVar_0x8006 = GetGameStat(GAME_STAT_LINK_BATTLE_WINS);
+    if (numEggs > 0xFFFF)
+        gSpecialVar_0x8005 = 0xFFFF;
+    else
+        gSpecialVar_0x8005 = numEggs;
+    if (gSpecialVar_0x8004 != 0)
+        result |= 1 << 0;
+    if (gSpecialVar_0x8005 != 0)
+        result |= 1 << 1;
+    if (gSpecialVar_0x8006 != 0)
+        result |= 1 << 2;
+    return result;
+}
 
 bool8 CheckAddCoins(void)
 {
@@ -5317,434 +5765,4 @@ bool8 CheckAddCoins(void)
         return FALSE;
     else
         return TRUE;
-}
-
-bool32 IsSelectedMonEeveelution(void)
-{
-    enum Species species;
-
-    if (gSpecialVar_0x8004 >= CalculatePlayerPartyCount())
-        return FALSE;
-
-    species = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES);
-    return species == SPECIES_VAPOREON
-        || species == SPECIES_JOLTEON
-        || species == SPECIES_FLAREON
-        || species == SPECIES_ESPEON
-        || species == SPECIES_UMBREON
-        || species == SPECIES_LEAFEON
-        || species == SPECIES_GLACEON
-        || species == SPECIES_SYLVEON;
-}
-
-// Keep Inclement's pre-badge visibility without overriding unlocked/manual Flash.
-void SetGraniteCaveFlashLevel(void)
-{
-    SetDefaultFlashLevel();
-    if (GetFlashLevel() > 4)
-        SetFlashLevel(4);
-}
-
-
-// Bonding takes VAR_0x8004 = party slot and VAR_0x8005 = value row
-// (0 keeps its distance, 1 ready to evolve, 2 adores you). The script keeps
-// its own copies in VAR_BONDING_MON and VAR_BONDING_CURSOR.
-static struct Pokemon *GetEmeraldChampionsServiceMon(void)
-{
-    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
-        return NULL;
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE
-        || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
-        return NULL;
-    return mon;
-}
-
-void BufferEmeraldChampionsBondingPreview(void)
-{
-    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
-    gSpecialVar_Result = mon != NULL && gSpecialVar_0x8005 < 3;
-    if (!gSpecialVar_Result)
-        return;
-    static const u8 *const sBondingPrompts[] =
-    {
-        COMPOUND_STRING("{STR_VAR_1} will keep its distance\nfrom you. Is that okay?"),
-        COMPOUND_STRING("{STR_VAR_1} will be close enough\nto evolve. Is that okay?"),
-        COMPOUND_STRING("{STR_VAR_1} will adore you!\nIs that okay?"),
-    };
-    GetMonNickname(mon, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, sBondingPrompts[gSpecialVar_0x8005]);
-}
-
-void ApplyEmeraldChampionsBonding(void)
-{
-    BufferEmeraldChampionsBondingPreview();
-    if (gSpecialVar_Result)
-    {
-        static const u8 values[] = {0, FRIENDSHIP_EVO_THRESHOLD, 255};
-        SetMonData(GetEmeraldChampionsServiceMon(), MON_DATA_FRIENDSHIP, &values[gSpecialVar_0x8005]);
-    }
-}
-
-static const u16 sPaidEvolutionItems[] =
-{
-#include "data/emerald_champions_paid_evolution_items.h"
-    ITEM_NONE,
-};
-
-bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item)
-{
-    if (item == ITEM_NONE || GetFormEquipmentSpecies(item) != SPECIES_NONE)
-        return FALSE;
-    // Battle items are bought now, so they sell back like anything else. Only
-    // what the game still hands over for nothing is barred from the counter.
-    for (u32 i = 0; sEmeraldChampionsEvolutionItems[i] != ITEM_NONE; i++)
-        if (sEmeraldChampionsEvolutionItems[i] == item)
-            return TRUE;
-    return FALSE;
-}
-
-void OpenEmeraldChampionsEvolutionSpecialist(void)
-{
-    // Stable inventory storage is needed until the native Mart closes.
-    static EWRAM_DATA u16 stock[ARRAY_COUNT(sPaidEvolutionItems)] = {0};
-    u32 count = 0;
-    for (u32 i = 0; sPaidEvolutionItems[i] != ITEM_NONE; i++)
-    {
-        enum Item item = sPaidEvolutionItems[i];
-        bool32 stone = gItemsInfo[item].sortType == ITEM_TYPE_EVOLUTION_STONE;
-        if ((gSpecialVar_0x8004 == 0 && stone) || (gSpecialVar_0x8004 == 1 && !stone))
-            stock[count++] = item;
-    }
-    stock[count] = ITEM_NONE;
-    CreatePokemartMenu(stock);
-    ScriptContext_Stop();
-}
-
-void ConvertEmeraldChampionsFiniteReward(void)
-{
-    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
-    enum Item item = gSpecialVar_0x8000;
-    u32 bonus = gSpecialVar_0x8001 == 1 ? GetFiniteDuplicateRewardValue(item) : 0;
-    gSpecialVar_Result = bonus != 0;
-    if (bonus)
-    {
-        AddMoney(&gSaveBlock1Ptr->money, bonus);
-        CopyItemName(item, gStringVar1);
-        ConvertIntToDecimalStringN(gStringVar2, bonus, STR_CONV_MODE_LEFT_ALIGN, 4);
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Specials the restored Inclement Emerald map scripts call.
-//
-// These were reimplemented against this engine's APIs rather than copied from
-// the 2021 donor; the drift each one had to cross is noted above it.
-// ---------------------------------------------------------------------------
-
-// Wally's catching tutorial in Petalburg Gym lends the player a Zigzagoon for
-// one scripted battle (the script brackets it with SavePlayerParty /
-// LoadPlayerParty). LoadWallyZigzagoon above already builds exactly that mon
-// with this engine's CreateRandomMon signature, so this is simply the name the
-// Inclement script asks for. The donor built it with the old eight-argument
-// CreateMon(..., fixedIV, hasFixedPersonality, ..., otIdType, fixedOtId).
-void PutZigzagoonInPlayerParty(void)
-{
-    LoadWallyZigzagoon();
-}
-
-static void CB2_WallyLevelerFromBag(void)
-{
-    gSpecialVar_ItemId = ITEM_LEVELER;
-    StartLevelerTutorialSequence(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-}
-
-void StartWallyLevelerTutorial(void)
-{
-    // Battle cleanup kept Wally's actual catch in the temporary party. The map
-    // script restores the player's saved party after this demonstration.
-    ShowTutorialBagItem(ITEM_LEVELER, CB2_WallyLevelerFromBag);
-}
-
-// Fossil IDs are not contiguous; acceptance and revival share this mapping.
-static const struct
-{
-    enum Item item;
-    enum Species species;
-} sRevivableFossils[] =
-{
-    {ITEM_HELIX_FOSSIL, SPECIES_OMANYTE},
-    {ITEM_DOME_FOSSIL, SPECIES_KABUTO},
-    {ITEM_OLD_AMBER, SPECIES_AERODACTYL},
-    {ITEM_ROOT_FOSSIL, SPECIES_LILEEP},
-    {ITEM_CLAW_FOSSIL, SPECIES_ANORITH},
-    {ITEM_ARMOR_FOSSIL, SPECIES_SHIELDON},
-    {ITEM_SKULL_FOSSIL, SPECIES_CRANIDOS},
-    {ITEM_COVER_FOSSIL, SPECIES_TIRTOUGA},
-    {ITEM_PLUME_FOSSIL, SPECIES_ARCHEN},
-    {ITEM_JAW_FOSSIL, SPECIES_TYRUNT},
-    {ITEM_SAIL_FOSSIL, SPECIES_AMAURA},
-};
-
-static enum Species GetFossilSpecies(enum Item item)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sRevivableFossils); i++)
-        if (item == sRevivableFossils[i].item)
-            return sRevivableFossils[i].species;
-    return SPECIES_NONE;
-}
-
-bool8 IsItemFossil(void)
-{
-    return GetFossilSpecies(gSpecialVar_ItemId) != SPECIES_NONE;
-}
-
-bool8 DoesPlayerHaveFossil(void)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sRevivableFossils); i++)
-        if (CheckBagHasItem(sRevivableFossils[i].item, 1))
-            return TRUE;
-    return FALSE;
-}
-
-// VAR_0x8004 is the fossil item; its species lands in VAR_0x8006. Preserve the
-// existing no-write result for an invalid fossil selection.
-void FossilToSpecies(void)
-{
-    enum Species species = GetFossilSpecies(gSpecialVar_0x8004);
-    if (species != SPECIES_NONE)
-        gSpecialVar_0x8006 = species;
-}
-
-// Lets the player pick an item out of the Items pocket. The chosen item lands
-// in gSpecialVar_ItemId (VAR_ITEM_ID), and cancelling stores ITEM_NONE.
-// Deferred through a callback exactly as the donor did, so the bag allocates
-// on the frame after the script's fadescreen rather than during it.
-void Bag_ChooseItem(void)
-{
-    SetMainCallback2(CB2_ChooseItem);
-}
-
-// As above, but restricted to the Poke Balls pocket. Used by the Ball Swapper.
-void Bag_ChoosePokeBall(void)
-{
-    SetMainCallback2(CB2_ChoosePokeBall);
-}
-
-// Repaints the chosen party mon's Poke Ball.
-// gSpecialVar_0x8004: party slot, gSpecialVar_0x8005: the ball to change to.
-void ChangePokeBall(void)
-{
-    u16 pokeball = ItemIdToBallId(gSpecialVar_0x8005);
-
-    SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_POKEBALL, &pokeball);
-}
-
-// Changes the chosen party mon's species, used by the Rotom, Deoxys and Eevee
-// form scripts. gSpecialVar_0x8004: party slot, gSpecialVar_0x8005: species.
-//
-// The donor also wrote MON_DATA_SPECIES2. That field is MON_DATA_SPECIES_OR_EGG
-// here and is derived, not stored - SetMonData ignores writes to it (see the
-// empty case in src/pokemon.c) - so writing MON_DATA_SPECIES alone is both
-// necessary and sufficient.
-void ChangeMonSpecies(void)
-{
-    u16 newSpecies = gSpecialVar_0x8005;
-    if (gSpecialVar_0x8004 >= PARTY_SIZE || newSpecies == SPECIES_NONE
-     || newSpecies == SPECIES_EGG || newSpecies >= NUM_SPECIES
-     || GetSpeciesBaseHP(newSpecies) == 0)
-        return;
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
-    enum Species current = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-    if (current == SPECIES_NONE || current == SPECIES_EGG)
-        return;
-    SetMonData(mon, MON_DATA_SPECIES, &newSpecies);
-    CalculateMonStats(mon);
-}
-
-// Checks the party for up to three species at once, for the Regi legendary
-// events. 0x8004/0x8005/0x8006 hold the species to look for and 0x8007 holds
-// how many of them must be present.
-bool8 CheckSpeciesInParty(void)
-{
-    u16 wanted[3] = { gSpecialVar_0x8004, gSpecialVar_0x8005, gSpecialVar_0x8006 };
-    u32 numSpecies = gSpecialVar_0x8007;
-    u32 speciesFound = 0;
-    bool8 found[ARRAY_COUNT(wanted)] = {FALSE};
-    if (numSpecies > ARRAY_COUNT(wanted))
-        return FALSE;
-
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        u16 species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
-
-        // An empty slot also reads back as SPECIES_NONE, so never let an
-        // unused wanted[] entry be satisfied by an empty party slot.
-        if (species == SPECIES_NONE || species == SPECIES_EGG)
-            continue;
-
-        for (u32 j = 0; j < ARRAY_COUNT(wanted); j++)
-        {
-            if (!found[j] && wanted[j] != SPECIES_NONE && species == wanted[j])
-            {
-                found[j] = TRUE;
-                speciesFound++;
-            }
-        }
-    }
-
-    return speciesFound == numSpecies;
-}
-
-// Route 116: has the Black Glasses hidden item already been picked up?
-bool8 FoundBlackGlasses(void)
-{
-    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES);
-}
-
-// Route 118: TRUE only when every party slot holds a Magikarp.
-bool8 CheckMagikarpBattle(void)
-{
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_MAGIKARP)
-            return FALSE;
-    }
-    return TRUE;
-}
-
-// One rule for every scripted Pokemon: gifts (givemon), fossils, prizes and
-// static encounters (setwildbattle) all arrive at the live level cap, left in
-// gSpecialVar_0x800A. Nothing scripted is ever over the cap, and a Pokemon
-// that still evolves by level is not stranded below it: at the cap the
-// Leveler evolves it (IsMonEligibleForLeveler), exactly as it raises the rest
-// of the party. Legendary and Ultra Beast statics already meet the player at
-// the cap through GetLegendaryEncounterLevel.
-void GetLevelCapForScriptedGift(void)
-{
-    gSpecialVar_0x800A = GetCurrentLevelCap();
-}
-
-// VAR_RESULT: some party Pokémon (not an Egg) is still below its level cap,
-// so the Leveler has work to do. The Route 103 rival waits until it is used.
-void IsPlayerPartyBelowLevelCap(void)
-{
-    gSpecialVar_Result = FALSE;
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-
-        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG))
-            continue;
-        if (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(species))
-        {
-            gSpecialVar_Result = TRUE;
-            return;
-        }
-    }
-}
-
-// The same rule under its older name (fossils at Devon, Cosmog at Birch's Lab).
-void GetStaticEncounterLevel(void)
-{
-    GetLevelCapForScriptedGift();
-}
-
-// Birth Island, Faraway Island, Navel Rock and Southern Island set up their
-// legendary with this. Upstream renamed it to CreateEnemyEventMon when
-// "event legal" became "modern fateful encounter"; the restored scripts still
-// use the old name, so keep the alias rather than renaming upstream API.
-// VAR_0x8004 = species, VAR_0x8005 = level, VAR_0x8006 = held item. Legendary
-// and Ultra Beast species follow the shared scripted rule instead of the
-// script's level: current cap plus the authored or random non-Mega set.
-void CreateEventLegalEnemyMon(void)
-{
-    enum Species species = gSpecialVar_0x8004;
-    u16 scriptLevel = gSpecialVar_0x8005;
-    bool32 legendary = IsLegendaryEncounterSpecies(species);
-
-    if (legendary)
-        gSpecialVar_0x8005 = GetLegendaryEncounterLevel(species);
-    CreateEnemyEventMon();
-    gSpecialVar_0x8005 = scriptLevel;
-    if (legendary)
-        ApplyLegendaryEncounterSet(&gParties[B_TRAINER_OPPONENT_A][0], gSpecialVar_0x8006);
-}
-
-// Repeat Day Care eggs (src/data/day_care_gift_eggs.h) supplement habitats that
-// are already accessible. The first, guaranteed Togepi stays in the map script.
-// Feebas remains a Route 119 tile discovery. 0x8004 takes the species, 0x8005
-// the special move.
-void SetSpeciesAndEggMove(void)
-{
-    u8 eligible[ARRAY_COUNT(sDayCareGiftEggs)];
-    u32 count = 0;
-    // Old saves may still carry either retired bicycle id.
-    bool32 hasBike = CheckBagHasItem(ITEM_BICYCLE, 1)
-                  || CheckBagHasItem(ITEM_MACH_BIKE, 1)
-                  || CheckBagHasItem(ITEM_ACRO_BIKE, 1);
-
-    for (u32 i = 0; i < ARRAY_COUNT(sDayCareGiftEggs); i++)
-    {
-        if (sDayCareGiftEggs[i].licenseFlag && !FlagGet(sDayCareGiftEggs[i].licenseFlag))
-            continue;
-        if (sDayCareGiftEggs[i].badgeFlag && !FlagGet(sDayCareGiftEggs[i].badgeFlag))
-            continue;
-        if (sDayCareGiftEggs[i].needsBike && !hasBike)
-            continue;
-        eligible[count++] = i;
-    }
-
-    u32 randSpecies = eligible[Random() % count]; // five ungated species always fit
-    u32 randEggMove = Random() % 3;
-
-    gSpecialVar_0x8004 = sDayCareGiftEggs[randSpecies].species;
-    gSpecialVar_0x8005 = sDayCareGiftEggs[randSpecies].moves[randEggMove];
-}
-
-// Teaches the gift egg the move SetSpeciesAndEggMove rolled.
-// gSpecialVar_0x8005: the move, gSpecialVar_0x8006: the egg's party slot.
-// MonKnowsMove(mon, MOVE_NONE) is the engine's idiom for "has a free slot".
-void SetGiftEggMove(void)
-{
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8006];
-    enum Move move = gSpecialVar_0x8005;
-
-    if (MonKnowsMove(mon, MOVE_NONE))
-        GiveMoveToMon(mon, move);
-    else
-        SetMonMoveSlot(mon, move, 0);
-}
-
-// Slateport's Effort Ribbon judge.
-bool8 LeadMonHasEffortRibbon(void)
-{
-    return GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON);
-}
-
-void GiveLeadMonEffortRibbon(void)
-{
-    bool8 ribbonSet = TRUE;
-    struct Pokemon *leadMon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
-
-    IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
-    FlagSet(FLAG_SYS_RIBBON_GET);
-    SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
-        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
-}
-
-// Pacifidlog: TRUE when the player is carrying a Diancie at max friendship.
-bool8 GetDiancieFriendshipScore(void)
-{
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-
-        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_DIANCIE
-         && GetMonData(mon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
-            return TRUE;
-    }
-    return FALSE;
 }

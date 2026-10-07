@@ -240,6 +240,11 @@ void MailboxMenu_RemoveWindow(u8 windowIdx)
     sMailboxWindowIds[windowIdx] = WINDOW_NONE;
 }
 
+static u8 UNUSED MailboxMenu_GetWindowId(u8 windowIdx)
+{
+    return sMailboxWindowIds[windowIdx];
+}
+
 static void MailboxMenu_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     u8 buffer[30];
@@ -734,21 +739,11 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
     gMultiuseListMenuTemplate = sMoveRelearnerMovesListTemplate;
     gMultiuseListMenuTemplate.totalItems = numChoices;
     gMultiuseListMenuTemplate.items = items;
-    if (gRelearnMode == RELEARN_MODE_SCRIPT)
-        gMultiuseListMenuTemplate.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
 
-    // Six rows fill the window. A longer list shows five, 8 pixels down, so
-    // its scroll arrows get a lane of their own above and below them
-    // (sMoveListScrollArrowsTemplate).
-    if (numChoices <= 6)
-    {
+    if (numChoices < 6)
         gMultiuseListMenuTemplate.maxShowed = numChoices;
-    }
     else
-    {
-        gMultiuseListMenuTemplate.maxShowed = 5;
-        gMultiuseListMenuTemplate.upText_Y += 8;
-    }
+        gMultiuseListMenuTemplate.maxShowed = 6;
 
     return gMultiuseListMenuTemplate.maxShowed;
 }
@@ -1393,7 +1388,7 @@ void CreateConditionSparkleSprites(struct Sprite **sprites, u8 monSpriteId, u8 _
 
     for (i = 0; i < count + 1; i++)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_ConditionSparkle, 0, 0, 0);
+        spriteId = CreateSpriteUnchecked(&sSpriteTemplate_ConditionSparkle, 0, 0, 0);
         if (spriteId != MAX_SPRITES)
         {
             sprites[i] = &gSprites[spriteId];

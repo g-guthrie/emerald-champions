@@ -184,10 +184,36 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if a substitute was hi
     }
 }
 
+SINGLE_BATTLE_TEST("Rage Fist base power is not lost if user switches out (Gen9)")
+{
+    s16 timesGotHit[2];
+
+    GIVEN {
+        WITH_CONFIG(B_RAGE_FIST, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_REGIROCK);
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_SCRATCH); }
+        TURN { SWITCH(player, 1); MOVE(opponent, MOVE_SCRATCH); }
+        TURN { SWITCH(player, 0); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[0]);
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        SWITCH_OUT_MESSAGE("Wynaut");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[1]);
+    } THEN {
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
+    }
+}
 
 SINGLE_BATTLE_TEST("Rage Fist base power is lost if user switches out (Champions)")
 {
-    s16 damage[3];
+    s16 timesGotHit[2];
 
     GIVEN {
         WITH_CONFIG(B_RAGE_FIST, GEN_CHAMPIONS);
@@ -196,25 +222,19 @@ SINGLE_BATTLE_TEST("Rage Fist base power is lost if user switches out (Champions
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_SCRATCH); }
-        TURN { MOVE(player, MOVE_RAGE_FIST); }
         TURN { SWITCH(player, 1); MOVE(opponent, MOVE_SCRATCH); }
         TURN { SWITCH(player, 0); }
         TURN { MOVE(player, MOVE_RAGE_FIST); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
-        HP_BAR(opponent, captureDamage: &damage[0]);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        HP_BAR(player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
-        HP_BAR(opponent, captureDamage: &damage[1]);
+        HP_BAR(opponent, captureDamage: &timesGotHit[0]);
         SWITCH_OUT_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         SWITCH_OUT_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
-        HP_BAR(opponent, captureDamage: &damage[2]);
+        HP_BAR(opponent, captureDamage: &timesGotHit[1]);
     } THEN {
-        EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
-        EXPECT_EQ(damage[0], damage[2]);
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(1.0), timesGotHit[0]);
     }
 }
 
@@ -293,6 +313,32 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if move had no affect"
     }
 }
 
+SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks (Gen7)")
+{
+    s16 timesGotHit[2];
+    enum Species species = SPECIES_NONE;
+
+    PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
+    PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
+
+    GIVEN {
+        WITH_CONFIG(B_DISGUISE_HP_LOSS, GEN_7);
+        PLAYER(species) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_REGIROCK);
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_ROCK_THROW); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ROCK_THROW, opponent);
+        ABILITY_POPUP(player, ABILITY_DISGUISE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[1]);
+    } THEN {
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
+    }
+}
 
 SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks (Gen8+)")
 {
@@ -344,15 +390,11 @@ SINGLE_BATTLE_TEST("Rage Fist number of hits is copied by Transform")
     }
 }
 
-SINGLE_BATTLE_TEST("Rage Fist forced-switch power follows the configured generation")
+SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 if user was hit and forces out")
 {
     s16 timesGotHit[2];
-    u32 generation;
-    PARAMETRIZE { generation = GEN_9; }
-    PARAMETRIZE { generation = GEN_CHAMPIONS; }
 
     GIVEN {
-        WITH_CONFIG(B_RAGE_FIST, generation);
         ASSUME(GetMoveEffect(MOVE_DRAGON_TAIL) == EFFECT_HIT_SWITCH_TARGET);
         PLAYER(SPECIES_REGIROCK);
         OPPONENT(SPECIES_REGIROCK);
@@ -369,10 +411,7 @@ SINGLE_BATTLE_TEST("Rage Fist forced-switch power follows the configured generat
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);
         HP_BAR(player, captureDamage: &timesGotHit[1]);
     } THEN {
-        if (generation == GEN_9)
-            EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
-        else
-            EXPECT_EQ(timesGotHit[0], timesGotHit[1]);
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
     }
 }
 

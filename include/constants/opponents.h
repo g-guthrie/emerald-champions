@@ -2,6 +2,7 @@
 #define GUARD_CONSTANTS_OPPONENTS_H
 
 #include "constants/battle_partner.h"
+#include "constants/opponents_frlg.h"
 
 #define TRAINER_NONE                          0
 #define TRAINER_SAWYER_1                      1
@@ -859,28 +860,6 @@
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
 
-// Emerald Champions reuses disabled Gym-rematch slots for one-time bespoke
-// campaign encounters. Match Call and Gym rematches are runtime-disabled, so
-// this preserves the save layout and Trainer flag boundary.
-#define TRAINER_ARCHIE_SLATEPORT            TRAINER_BRAWLY_2
-#define TRAINER_COURTNEY_METEOR_FALLS       TRAINER_BRAWLY_3
-#define TRAINER_GRUNT_METEOR_FALLS          TRAINER_BRAWLY_4
-#define TRAINER_LUCY_LAVARIDGE              TRAINER_BRAWLY_5
-#define TRAINER_GRETA_SLATEPORT             TRAINER_WINONA_2
-#define TRAINER_SPENSER_FORTREE             TRAINER_WINONA_3
-#define TRAINER_MAGIKARP_GUY                TRAINER_WINONA_4
-#define TRAINER_BUFFEL                      TRAINER_WINONA_5
-#define TRAINER_COURTNEY_MAGMA_HIDEOUT      TRAINER_WATTSON_2
-#define TRAINER_MATT_MT_PYRE                TRAINER_WATTSON_3
-#define TRAINER_COURTNEY_MOSSDEEP           TRAINER_WATTSON_4
-#define TRAINER_WALLACE_DOUBLES_LEGENDS     TRAINER_WATTSON_5
-#define TRAINER_LEAF_ALTERING_CAVE          TRAINER_ROXANNE_2
-#define TRAINER_CYNTHIA_1                   TRAINER_ROXANNE_3
-#define TRAINER_ALANNAH                     TRAINER_ROXANNE_4
-#define TRAINER_MARTIN                      TRAINER_ROXANNE_5
-#define TRAINER_ROMAN                       TRAINER_JUAN_4
-#define TRAINER_ELMER                       TRAINER_JUAN_5
-
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
@@ -888,39 +867,13 @@
 #define TRAINERS_COUNT_EMERALD     855
 #define MAX_TRAINERS_COUNT_EMERALD 864
 
+#if IS_FRLG
+#define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG
+#define MAX_TRAINERS_COUNT                  MAX_TRAINERS_COUNT_FRLG
+#else
 #define TRAINERS_COUNT                      TRAINERS_COUNT_EMERALD
 #define MAX_TRAINERS_COUNT                  MAX_TRAINERS_COUNT_EMERALD
-
+#endif
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
-#if TESTING
-// Append two synthetic records after campaign IDs without changing
-// MAX_TRAINERS_COUNT: that constant also fixes the campaign flag layout.
-#include "test/trainer_ids.h"
-#undef TRAINERS_COUNT
-#define TRAINERS_COUNT TEST_TRAINERS_COUNT
-#endif
-
-// Emerald Champions: Inclement Emerald's Elite Four / Champion rematch ladder is
-// restored in script, but its teams are not authored yet (the user is doing that
-// later). These names alias to each member's base trainer so the ladder links and
-// plays -- a rematch currently fights the same team as the first encounter.
-// To author a real rematch, give the name its own slot and party instead of this alias.
-// VAR_ELITE_4_MODE: 0 = singles, 1 = singles+legends (_3), 2 = doubles (_2), 3 = doubles+legends (_4).
-#define TRAINER_SIDNEY_2                    TRAINER_SIDNEY
-#define TRAINER_SIDNEY_3                    TRAINER_SIDNEY
-#define TRAINER_SIDNEY_4                    TRAINER_SIDNEY
-#define TRAINER_PHOEBE_2                    TRAINER_PHOEBE
-#define TRAINER_PHOEBE_3                    TRAINER_PHOEBE
-#define TRAINER_PHOEBE_4                    TRAINER_PHOEBE
-#define TRAINER_GLACIA_2                    TRAINER_GLACIA
-#define TRAINER_GLACIA_3                    TRAINER_GLACIA
-#define TRAINER_GLACIA_4                    TRAINER_GLACIA
-#define TRAINER_DRAKE_2                     TRAINER_DRAKE
-#define TRAINER_DRAKE_3                     TRAINER_DRAKE
-#define TRAINER_DRAKE_4                     TRAINER_DRAKE
-#define TRAINER_WALLACE_DOUBLES             TRAINER_WALLACE
-#define TRAINER_WALLACE_LEGENDS             TRAINER_WALLACE
-#define TRAINER_CYNTHIA_2                   TRAINER_CYNTHIA_1
-
-#endif
+#endif  // GUARD_CONSTANTS_OPPONENTS_H

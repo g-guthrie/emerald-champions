@@ -25,6 +25,7 @@
 #include "config/follower_npc.h"
 #include "config/general.h"
 #include "config/item.h"
+#include "config/map_preview_screen.h"
 #include "config/overworld.h"
 #include "config/pokemon.h"
 #include "config/summary_screen.h"
@@ -63,7 +64,18 @@ enum Language
     NUM_LANGUAGES = LANGUAGE_SPANISH,
 };
 
-#define GAME_VERSION (VERSION_EMERALD)
+#ifdef FIRERED
+    #define GAME_VERSION (VERSION_FIRE_RED)
+    #define IS_FRLG 1
+#else
+    #ifdef LEAFGREEN
+    #define GAME_VERSION (VERSION_LEAF_GREEN)
+    #define IS_FRLG 1
+    #else
+    #define GAME_VERSION (VERSION_EMERALD)
+    #define IS_FRLG 0
+    #endif
+#endif
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
 // party sizes
@@ -97,26 +109,12 @@ enum Language
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
 
-// Legacy Emerald bag storage. These counts must not change: keeping the five
-// original arrays byte-for-byte preserves every subsequent SaveBlock1 offset.
-#define BAG_LEGACY_ITEMS_COUNT    30
-#define BAG_LEGACY_KEYITEMS_COUNT 30
-#define BAG_LEGACY_POKEBALLS_COUNT 16
-#define BAG_LEGACY_BERRIES_COUNT  46
-
-// Inclement Emerald's seven-pocket capacities. Extra slots live in append-only
-// SaveBlock1/SaveBlock3 extensions so existing Emerald Champions saves migrate.
-#define BAG_ITEMS_COUNT      93
-#define BAG_MEDICINE_COUNT   44
-#define BAG_BATTLE_COUNT     180
-#define BAG_BERRIES_PRIMARY_COUNT 66
-#define BAG_BERRIES_COUNT    68
-#define BAG_POKEBALLS_COUNT  27
-#define BAG_KEYITEMS_COUNT   55
-// Emerald Champions has 99 distinct stones plus the two Primal Orbs. Inclement
-// only needed 70 slots; retaining that capacity would make the archive fail.
-#define BAG_MEGASTONES_PRIMARY_COUNT 90
-#define BAG_MEGASTONES_COUNT         101
+// Bag constants
+#define BAG_ITEMS_COUNT 30
+#define BAG_KEYITEMS_COUNT 30
+#define BAG_POKEBALLS_COUNT 16
+#define BAG_TMHM_COUNT 64
+#define BAG_BERRIES_COUNT 46
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

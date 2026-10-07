@@ -194,10 +194,9 @@ enum AnimFunctionIDs
 };
 
 enum BackAnim GetSpeciesBackAnimSet(enum Species species);
-u8 LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId);
+void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId);
 void StartMonSummaryAnimation(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId);
-u8 LaunchAnimationTaskForBackSprite(struct Sprite *sprite, enum BackAnim backAnimSet);
-void TrackMonAnimationForBattle(u8 taskId);
+void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, enum BackAnim backAnimSet);
 void SetSpriteCB_MonAnimDummy(struct Sprite *sprite);
 
 #endif // GUARD_POKEMON_ANIMATION_H

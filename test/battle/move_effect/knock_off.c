@@ -391,6 +391,22 @@ SINGLE_BATTLE_TEST("Knock Off doesn't knock off begin-battle form-change hold it
     }
 }
 
+SINGLE_BATTLE_TEST("Knock Off does not activate if user faints (Gen9)")
+{
+    GIVEN {
+        WITH_CONFIG(B_FAINT_MOVE_EFFECT_TIMING, GEN_9);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ROCKY_HELMET); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_KNOCK_OFF); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
+        MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Rocky Helmet!");
+        MESSAGE("Wobbuffet fainted!");
+    } THEN {
+        EXPECT(opponent->item == ITEM_ROCKY_HELMET);
+    }
+}
 
 SINGLE_BATTLE_TEST("Knock Off does activate if user faints (Champions)")
 {
@@ -419,9 +435,7 @@ SINGLE_BATTLE_TEST("Knock Off doesn't remove item if it's prevented by Sticky Ho
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        // Emerald Champions berries trigger at half HP + 1 (GetBerryActivationThreshold),
-        // so start above that for the Oran Berry to survive until Knock Off lands.
-        OPPONENT(SPECIES_MUK) { MaxHP(100); HP(52); Item(ITEM_ORAN_BERRY); Ability(ABILITY_STICKY_HOLD); }
+        OPPONENT(SPECIES_MUK) { MaxHP(100); HP(51); Item(ITEM_ORAN_BERRY); Ability(ABILITY_STICKY_HOLD); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_KNOCK_OFF); }
     } SCENE {
@@ -533,7 +547,30 @@ SINGLE_BATTLE_TEST("Knock Off used by a Paradox mon doesn't knock off a non-Para
     }
 }
 
+SINGLE_BATTLE_TEST("Knock Off does not remove items that can change the form of the Knock Off user (Gen9-)", s16 damage)
+{
+    enum Item item;
+    
+    PARAMETRIZE { item = ITEM_MASTER_BALL; }
+    PARAMETRIZE { item = ITEM_MALAMARITE; }
 
+    GIVEN {
+        WITH_CONFIG(B_KNOCK_OFF_REMOVAL, GEN_9);
+        PLAYER(SPECIES_MALAMAR);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_KNOCK_OFF); }
+    } SCENE {
+        NOT MESSAGE("Malamar knocked off the opposing Wobbuffet's Malamarite!");
+    } THEN {
+        if (item == ITEM_MALAMARITE)
+        {
+            EXPECT(opponent->item == ITEM_MALAMARITE);
+        }
+    } FINALLY {
+        EXPECT_MUL_EQ(results[1].damage, UQ_4_12(1.5), results[0].damage);
+    }
+}
 
 SINGLE_BATTLE_TEST("Knock Off remove items that can change the form of the Knock Off user (Champions)", s16 damage)
 {
@@ -559,28 +596,5 @@ SINGLE_BATTLE_TEST("Knock Off remove items that can change the form of the Knock
         EXPECT(opponent->item == ITEM_NONE);
     } FINALLY {
         EXPECT_MUL_EQ(results[1].damage, UQ_4_12(1.0), results[0].damage);
-    }
-}
-
-SINGLE_BATTLE_TEST("Knock Off gets past a full-HP Focus Sash; Sticky Hold keeps it (Emerald Champions)")
-{
-    enum Move move;
-    enum Ability ability;
-    bool32 survives;
-    PARAMETRIZE { move = MOVE_KNOCK_OFF; ability = ABILITY_TELEPATHY;    survives = FALSE; }
-    PARAMETRIZE { move = MOVE_TACKLE;    ability = ABILITY_TELEPATHY;    survives = TRUE; }
-    PARAMETRIZE { move = MOVE_KNOCK_OFF; ability = ABILITY_STICKY_HOLD;  survives = TRUE; }
-    GIVEN {
-        ASSUME(gItemsInfo[ITEM_FOCUS_SASH].holdEffect == HOLD_EFFECT_FOCUS_SASH);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { HP(2); MaxHP(2); Item(ITEM_FOCUS_SASH); Ability(ability); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, move); if (!survives) SEND_OUT(opponent, 1); }
-    } THEN {
-        if (survives)
-            EXPECT_EQ(gBattleMons[B_BATTLER_1].hp, 1);
-        else
-            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP), 0);
     }
 }

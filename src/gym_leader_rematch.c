@@ -33,9 +33,6 @@ static const u16 GymLeaderRematches_BeforeNewMauville[] = {
 
 void UpdateGymLeaderRematch(void)
 {
-    if (!OW_TRAINER_REMATCHES)
-        return;
-
     if (FlagGet(FLAG_SYS_GAME_CLEAR) && (Random() % 100) <= 30)
     {
         if (FlagGet(FLAG_WATTSON_REMATCH_AVAILABLE))
@@ -49,8 +46,6 @@ s32 GetCurrentGymLeaderRematchLevel(void)
 {
     u32 i, j;
     u32 maxLevel = REMATCHES_COUNT;
-    if (!OW_TRAINER_REMATCHES)
-        return 0;
     if (!FlagGet(FLAG_SYS_GAME_CLEAR))
         return 0;
     for (i = REMATCH_SPECIAL_TRAINER_START; i < REMATCH_ELITE_FOUR_ENTRIES; i++)

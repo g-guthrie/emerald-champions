@@ -20,6 +20,12 @@ enum
 
 enum
 {
+    HEALTH_BAR,
+    EXP_BAR
+};
+
+enum
+{
     HP_BAR_EMPTY,
     HP_BAR_RED,
     HP_BAR_YELLOW,
@@ -84,6 +90,7 @@ enum
 #define TAG_GIMMICK_TRIGGER_PAL         0xD777
 #define TAG_MEGA_INDICATOR_PAL          0xD778
 #define TAG_MISC_INDICATOR_PAL          0xD779 // Alpha, Omega, and Dynamax indicators use the same palette as each of them only uses 4 different colors.
+#define TAG_TERA_INDICATOR_PAL          0xD77A
 
 enum
 {
@@ -93,6 +100,7 @@ enum
     HEALTHBOX_LEVEL,
     HEALTHBOX_NICK,
     HEALTHBOX_HEALTH_BAR,
+    HEALTHBOX_EXP_BAR,
     HEALTHBOX_UNUSED_7,
     HEALTHBOX_UNUSED_8,
     HEALTHBOX_STATUS_ICON,
@@ -113,9 +121,9 @@ void GetBattlerHealthboxCoords(enum BattlerId battler, s16 *x, s16 *y);
 void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
 void SwapHpBarsWithHpText(void);
 u8 CreatePartyStatusSummarySprites(enum BattlerId battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart);
-void HidePartyStatusSummary(enum BattlerId battler);
+void Task_HidePartyStatusSummary(u8 taskId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
-s32 MoveBattleBar(enum BattlerId battler, u8 healthboxSpriteId);
+s32 MoveBattleBar(enum BattlerId battler, u8 healthboxSpriteId, u8 whichBar, u8 unused);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
 bool32 IsAnyAbilityPopUpActive(void);

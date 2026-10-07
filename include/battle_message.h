@@ -255,7 +255,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId);
 void SetPPNumbersPaletteInMoveSelection(enum BattlerId battler);
 u8 GetCurrentPPToMaxPPState(u8 currentPP, u8 maxPP);
-void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 
@@ -274,8 +274,8 @@ extern const u8 gText_WhatWillPkmnDo2[];
 extern const u8 gText_WhatWillWallyDo[];
 extern const u8 gText_LinkStandby[];
 extern const u8 gText_BattleMenu[];
-extern const u8 gText_BattleMenuNoBag[];
 extern const u8 gText_SafariZoneMenu[];
+extern const u8 gText_SafariZoneMenuFrlg[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
 extern const u8 gText_MoveInterfacePPType[];

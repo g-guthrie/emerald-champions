@@ -1,52 +1,72 @@
-LilycoveCity_DepartmentStore_3F_MapScripts:: @ 821FC64
+LilycoveCity_DepartmentStore_3F_MapScripts::
 	.byte 0
 
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft:: @ 821FC65
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_PPBoosters
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-	@ PP Boosters (the 1F floor sign): no other counter sells them for money.
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_PPBoosters:
-	.2byte ITEM_PP_UP
-	.2byte ITEM_PP_MAX
-	.2byte ITEM_NONE
+LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	pokemartlistend
+
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM:: @ 821FCB6
-	msgbox LilycoveCity_DepartmentStore_3F_Text_PPUpForFewPPMoves, MSGBOX_NPC
+	.align 2
+LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_SP_ATK
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_DIRE_HIT
+	.2byte ITEM_GUARD_SPEC
+	.2byte ITEM_X_ACCURACY
+	pokemartlistend
+
+LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
+	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_PokefanM:: @ 821FCBF
+LilycoveCity_DepartmentStore_3F_EventScript_PokefanM::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_EventScript_Woman:: @ 821FCC8
-	msgbox LilycoveCity_DepartmentStore_3F_Text_SwitchedAbilityForFree, MSGBOX_NPC
+LilycoveCity_DepartmentStore_3F_EventScript_Woman::
+	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_Text_PPUpForFewPPMoves:
-	.string "A PP Up lets a move be used a few\n"
-	.string "more times in every battle.\p"
-	.string "I save mine for strong moves that\n"
-	.string "run out of PP too fast!$"
+LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon:
+	.string "For quickly toughening up POKéMON,\n"
+	.string "items are the best.\p"
+	.string "PROTEIN boosts ATTACK,\n"
+	.string "and CALCIUM raises SP. ATK.$"
 
 LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance:
-	.string "I want my Pokémon to have more\n"
+	.string "I want my POKéMON to have more\n"
 	.string "endurance.\p"
-	.string "Should its EVs go into Defense,\n"
-	.string "or into Sp. Def?\p"
-	.string "The move tutor can always change\n"
-	.string "them later, so I can't go wrong!$"
+	.string "I'm trying to decide whether to raise\n"
+	.string "DEFENSE with IRON, or SP. DEF with ZINC.$"
 
-LilycoveCity_DepartmentStore_3F_Text_SwitchedAbilityForFree:
-	.string "I switched my Pokémon's Ability\n"
-	.string "right from the party menu.\p"
-	.string "It didn't cost a thing!$"
+LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon:
+	.string "I gave a CARBOS to my POKéMON,\n"
+	.string "and its SPEED went up.$"
+

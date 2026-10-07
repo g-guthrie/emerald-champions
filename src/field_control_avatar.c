@@ -1,7 +1,6 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "bike.h"
-#include "braille_puzzles.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
@@ -23,12 +22,11 @@
 #include "fldeff_misc.h"
 #include "follower_npc.h"
 #include "item_menu.h"
-#include "item.h"
 #include "link.h"
+#include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
-#include "pokerus.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -41,18 +39,14 @@
 #include "wild_encounter_ow.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
-#include "weather_anomaly.h"
-#include "field_weather.h"
 #include "constants/field_poison.h"
 #include "constants/layouts.h"
-#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
-static EWRAM_DATA u8 sHotSpringPokerusSteps = 0;
 
 COMMON_DATA u8 gSelectedObjectEvent = 0;
 
@@ -93,7 +87,19 @@ static const u8 *GetSignpostScriptAtMapPosition(struct MapPosition *position);
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
-    memset(input, 0, sizeof(*input));
+    input->pressedAButton = FALSE;
+    input->checkStandardWildEncounter = FALSE;
+    input->pressedStartButton = FALSE;
+    input->pressedSelectButton = FALSE;
+    input->heldDirection = FALSE;
+    input->heldDirection2 = FALSE;
+    input->tookStep = FALSE;
+    input->pressedBButton = FALSE;
+    input->pressedRButton = FALSE;
+    input->input_field_1_1 = FALSE;
+    input->input_field_1_2 = FALSE;
+    input->input_field_1_3 = FALSE;
+    input->dpadDirection = 0;
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -104,10 +110,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 
     if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
-        // The unified Bicycle retains top-speed capability even at rest.
-        // Lock interaction/menu keys only while actually riding at that speed.
-        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST
-         || (IsPlayerStandingStill() && runningState != MOVING))
+        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
         {
             if (newKeys & START_BUTTON)
                 input->pressedStartButton = TRUE;
@@ -119,10 +122,6 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedBButton = TRUE;
             if (newKeys & R_BUTTON)
                 input->pressedRButton = TRUE;
-            // L is reserved to act as A when that option is enabled, so the
-            // L register slot is treated as unbound in that mode.
-            if ((newKeys & L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_L_EQUALS_A)
-                input->pressedLButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -136,7 +135,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (tileTransitionState == T_TILE_CENTER && runningState == MOVING)
             input->tookStep = TRUE;
-        if (tileTransitionState == T_TILE_CENTER)
+        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER)
             input->checkStandardWildEncounter = TRUE;
     }
 
@@ -184,15 +183,8 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
-        UpdateWeatherAnomaliesOnStep();
-        UpdateWeatherAnomalyWeather();
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
-        if (UpdateHotSpringPokerusSteps(metatileBehavior))
-        {
-            ScriptContext_SetupScript(LavaridgeTown_EventScript_PokerusSoakComplete);
-            return TRUE;
-        }
         if (FindTaskIdByFunc(Task_FollowerNPCOutOfDoor) == TASK_NONE && TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
@@ -239,21 +231,14 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     }
 
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField(REGISTER_BUTTON_SELECT) == TRUE)
+    if (input->tookStep && TryFindHiddenPokemon())
         return TRUE;
 
-    if (input->pressedLButton && UseRegisteredKeyItemOnField(REGISTER_BUTTON_L) == TRUE)
+    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
 
-    if (input->pressedRButton)
-    {
-        // A registered item bound to R takes priority; otherwise R keeps
-        // its existing DexNav search behavior.
-        if (UseRegisteredKeyItemOnField(REGISTER_BUTTON_R) == TRUE)
-            return TRUE;
-        if (TryStartDexNavSearch())
-            return TRUE;
-    }
+    if (input->pressedRButton && TryStartDexNavSearch())
+        return TRUE;
 
     if (input->input_field_1_2 && DEBUG_OVERWORLD_MENU && !DEBUG_OVERWORLD_IN_MENU)
     {
@@ -308,6 +293,7 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     // Don't play interaction sound for certain scripts.
     if (script != LittlerootTown_BrendansHouse_2F_EventScript_PC
      && script != LittlerootTown_MaysHouse_2F_EventScript_PC
+     && script != EventScript_PalletTown_PlayersHouse_2F_TurnOnPC
      && script != SecretBase_EventScript_PC
      && script != SecretBase_EventScript_RecordMixingPC
      && script != SecretBase_EventScript_DollInteract
@@ -336,13 +322,6 @@ static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileB
     script = GetInteractedWaterScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
-
-    // The tomb clues describe where to stand, so interact at the player's
-    // solution position without adding an object or requiring a party menu.
-    if (ShouldDoBrailleRegirockEffect())
-        return EventScript_BrailleRockSmash;
-    if (ShouldDoBrailleRegisteelEffect())
-        return EventScript_BrailleFlash;
 
     return NULL;
 }
@@ -480,14 +459,6 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         gSpecialVar_0x8004 = bgEvent->bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START;
         gSpecialVar_0x8005 = bgEvent->bgUnion.hiddenItem.item;
         gSpecialVar_0x8009 = bgEvent->bgUnion.hiddenItem.quantity;
-        if (gSpecialVar_0x8005 == ITEM_EVERSTONE
-            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_GRANITE_CAVE_B2F)
-            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_GRANITE_CAVE_B2F)
-            && PlayerOwnsItem(ITEM_EVERSTONE))
-        {
-            gSpecialVar_0x8005 = ITEM_DUSK_BALL;
-            gSpecialVar_0x8009 = 10;
-        }
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         return EventScript_HiddenItemScript;
@@ -510,7 +481,10 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
     {
-        return EventScript_TV;
+        if (IS_FRLG)
+            return EventScript_PlayerFacingTVScreen;
+        else
+            return EventScript_TV;
     }
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return EventScript_PC;
@@ -550,6 +524,65 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_Questionnaire;
     if (MetatileBehavior_IsTrainerHillTimer(metatileBehavior) == TRUE)
         return EventScript_TrainerHillTimer;
+    if (IS_FRLG)
+    {
+        if (MetatileBehavior_IsFood(metatileBehavior) == TRUE)
+            return EventScript_Food;
+        if (MetatileBehavior_IsImpressiveMachine(metatileBehavior) == TRUE)
+            return EventScript_ImpressiveMachine;
+        if (MetatileBehavior_IsBlueprints(metatileBehavior) == TRUE)
+            return EventScript_Blueprints;
+        if (MetatileBehavior_IsVideoGame(metatileBehavior) == TRUE)
+            return EventScript_VideoGame;
+        if (MetatileBehavior_IsBurglary(metatileBehavior) == TRUE)
+            return EventScript_Burglary;
+        if (MetatileBehavior_IsTrainerTowerMonitor(metatileBehavior) == TRUE)
+            return TrainerTower_EventScript_ShowTime;
+        if (MetatileBehavior_IsComputer(metatileBehavior) == TRUE)
+            return EventScript_Computer;
+        if (MetatileBehavior_IsCabinet(metatileBehavior) == TRUE)
+            return EventScript_Cabinet;
+        if (MetatileBehavior_IsKitchen(metatileBehavior) == TRUE)
+            return EventScript_Kitchen;
+        if (MetatileBehavior_IsDresser(metatileBehavior) == TRUE)
+            return EventScript_Dresser;
+        if (MetatileBehavior_IsSnacks(metatileBehavior) == TRUE)
+            return EventScript_Snacks;
+        if (MetatileBehavior_IsPainting(metatileBehavior) == TRUE)
+            return EventScript_Painting;
+        if (MetatileBehavior_IsPowerPlantMachine(metatileBehavior) == TRUE)
+            return EventScript_PowerPlantMachine;
+        if (MetatileBehavior_IsTelephone(metatileBehavior) == TRUE)
+            return EventScript_Telephone;
+        if (MetatileBehavior_IsAdvertisingPoster(metatileBehavior) == TRUE)
+            return EventScript_AdvertisingPoster;
+        if (MetatileBehavior_IsTastyFood(metatileBehavior) == TRUE)
+            return EventScript_TastyFood;
+        if (MetatileBehavior_IsCup(metatileBehavior) == TRUE)
+            return EventScript_Cup;
+        if (MetatileBehavior_IsBlinkingLights(metatileBehavior) == TRUE)
+            return EventScript_BlinkingLights;
+        if (MetatileBehavior_IsNeatlyLinedUpTools(metatileBehavior) == TRUE)
+            return EventScript_NeatlyLinedUpTools;
+        if (MetatileBehavior_IsPlayerFacingCableClubWirelessMonitor(metatileBehavior, direction) == TRUE)
+            return CableClub_EventScript_ShowWirelessCommunicationScreen_Frlg;
+        if (MetatileBehavior_IsPlayerFacingBattleRecords(metatileBehavior, direction) == TRUE)
+            return CableClub_EventScript_ShowBattleRecords_Frlg;
+        if (MetatileBehavior_IsIndigoPlateauSign1(metatileBehavior) == TRUE)
+        {
+            if (direction != DIR_NORTH)
+                return NULL;
+            SetMsgSignPostAndVarFacing(direction);
+            return EventScript_Indigo_UltimateGoal;
+        }
+        if (MetatileBehavior_IsIndigoPlateauSign2(metatileBehavior) == TRUE)
+        {
+            if (direction != DIR_NORTH)
+                return NULL;
+            SetMsgSignPostAndVarFacing(direction);
+            return EventScript_Indigo_HighestAuthority;
+        }
+    }
 
     if (MetatileBehavior_IsPokeMartSign(metatileBehavior) == TRUE)
     {
@@ -608,24 +641,19 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 {
     if (MetatileBehavior_IsFastWater(metatileBehavior) == TRUE && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return EventScript_CurrentTooFast;
-    if (IsPlayerFacingSurfableFishableWater() == TRUE
+    if (IsFieldMoveUnlocked(FIELD_MOVE_SURF) && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
-     && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-    {
-        if (FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) == PARTY_SIZE)
-            return EventScript_SurfLocked;
+     )
         return EventScript_UseSurf;
-    }
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_WATERFALL)
      )
     {
-        if (!IsPlayerSurfingNorth())
+        if (IsFieldMoveUnlocked(FIELD_MOVE_WATERFALL) && IsPlayerSurfingNorth() == TRUE)
+            return EventScript_UseWaterfall;
+        else
             return EventScript_CannotUseWaterfall;
-        if (FieldMove_GetUserSlot(FIELD_MOVE_WATERFALL, TRUE) == PARTY_SIZE)
-            return EventScript_WaterfallLocked;
-        return EventScript_UseWaterfall;
     }
     return NULL;
 }
@@ -635,10 +663,9 @@ static bool32 TrySetupDiveDownScript(void)
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE))
         return FALSE;
 
-    if (TrySetDiveWarp() == 2)
+    if (IsFieldMoveUnlocked(FIELD_MOVE_DIVE) && TrySetDiveWarp() == 2)
     {
-        ScriptContext_SetupScript(FieldMove_GetUserSlot(FIELD_MOVE_DIVE, TRUE) != PARTY_SIZE
-            ? EventScript_UseDive : EventScript_DiveLocked);
+        ScriptContext_SetupScript(EventScript_UseDive);
         return TRUE;
     }
     return FALSE;
@@ -649,10 +676,9 @@ static bool32 TrySetupDiveEmergeScript(void)
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE))
         return FALSE;
 
-    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+    if (IsFieldMoveUnlocked(FIELD_MOVE_DIVE) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
-        ScriptContext_SetupScript(FieldMove_GetUserSlot(FIELD_MOVE_DIVE, TRUE) != PARTY_SIZE
-            ? EventScript_UseDiveUnderwater : EventScript_DiveLocked);
+        ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
         return TRUE;
     }
     return FALSE;
@@ -718,28 +744,6 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
     return FALSE;
 }
 
-void ResetHotSpringPokerusSteps(void)
-{
-    sHotSpringPokerusSteps = 0;
-}
-
-bool32 UpdateHotSpringPokerusSteps(u16 metatileBehavior)
-{
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_LAVARIDGE_TOWN)
-     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_LAVARIDGE_TOWN)
-     || !MetatileBehavior_IsHotSprings(metatileBehavior))
-    {
-        ResetHotSpringPokerusSteps();
-        return FALSE;
-    }
-
-    if (++sHotSpringPokerusSteps < 25)
-        return FALSE;
-
-    ResetHotSpringPokerusSteps();
-    return PreparePartyPokerusInHotSpring();
-}
-
 static bool8 TryStartStepCountScript(u16 metatileBehavior)
 {
     if (InUnionRoom() == TRUE)
@@ -747,6 +751,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return FALSE;
     }
 
+    IncrementRematchStepCounter();
     IncrementDaycareSteps();
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();
@@ -775,6 +780,11 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         if (ShouldDoBrailleRegicePuzzle() == TRUE)
         {
             ScriptContext_SetupScript(IslandCave_EventScript_OpenRegiEntrance);
+            return TRUE;
+        }
+        if (ShouldDoWallyCall() == TRUE)
+        {
+            ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
             return TRUE;
         }
         if (ShouldDoScottFortreeCall() == TRUE)
@@ -811,8 +821,14 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         ScriptContext_SetupScript(SSTidalCorridor_EventScript_ReachedStepCount);
         return TRUE;
     }
-    // Match Call is removed; no random calls on the 10th step.
+    if (TryStartMatchCall())
+        return TRUE;
     return FALSE;
+}
+
+static void UNUSED ClearFriendshipStepCounter(void)
+{
+    VarSet(VAR_FRIENDSHIP_STEP_COUNTER, 0);
 }
 
 static void UpdateFriendshipStepCounter(void)
@@ -835,7 +851,8 @@ static void UpdateFriendshipStepCounter(void)
 
 static void UpdateFollowerStepCounter(void)
 {
-    IncrementFollowerSteps();
+    if (gPartiesCount[B_TRAINER_PLAYER] > 0 && gFollowerSteps < (u16)-1)
+        gFollowerSteps++;
 }
 
 void ClearPoisonStepCounter(void)

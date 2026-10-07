@@ -1,106 +1,89 @@
-VictoryRoad_B1F_MapScripts:: @ 82364E4
-	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_B1F_OnTransition
+VictoryRoad_B1F_MapScripts::
 	.byte 0
 
-@ The east corridor is only reached through the north rock/boulder cluster,
-@ which can only be cleared from the west. Coming back down the south-east
-@ ladder (from 1F's dead-end Metagrossite pocket) reloads the cluster intact
-@ and would seal the player in with no Escape Rope for sale; so that ladder
-@ arrives with the cluster already cleared.
-VictoryRoad_B1F_OnTransition:
-	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	goto_if_ne VAR_TEMP_0, 42, VictoryRoad_B1F_OnTransition_End
-	goto_if_ne VAR_TEMP_1, 25, VictoryRoad_B1F_OnTransition_End
-	setflag FLAG_TEMP_19
-	setflag FLAG_TEMP_1A
-	setobjectxyperm 1, 20, 6
-	setobjectxyperm 2, 21, 3
-VictoryRoad_B1F_OnTransition_End:
-	end
-
-VictoryRoad_B1F_EventScript_Samuel:: @ 82364E5
-	trainerbattle_double TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat, EmeraldChampions_Text_NeedTwoPokemon
+VictoryRoad_B1F_EventScript_Samuel::
+	trainerbattle_single TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat
 	msgbox VictoryRoad_B1F_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_B1F_EventScript_Shannon:: @ 82364FC
-	trainerbattle_double TRAINER_SHANNON, VictoryRoad_B1F_Text_ShannonIntro, VictoryRoad_B1F_Text_ShannonDefeat, EmeraldChampions_Text_NeedTwoPokemon
+VictoryRoad_B1F_EventScript_Shannon::
+	trainerbattle_single TRAINER_SHANNON, VictoryRoad_B1F_Text_ShannonIntro, VictoryRoad_B1F_Text_ShannonDefeat
 	msgbox VictoryRoad_B1F_Text_ShannonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_B1F_EventScript_Michelle:: @ 8236513
-	trainerbattle_double TRAINER_MICHELLE, VictoryRoad_B1F_Text_MichelleIntro, VictoryRoad_B1F_Text_MichelleDefeat, EmeraldChampions_Text_NeedTwoPokemon
+VictoryRoad_B1F_EventScript_Michelle::
+	trainerbattle_single TRAINER_MICHELLE, VictoryRoad_B1F_Text_MichelleIntro, VictoryRoad_B1F_Text_MichelleDefeat
 	msgbox VictoryRoad_B1F_Text_MichellePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_B1F_EventScript_Mitchell:: @ 823652A
-	trainerbattle_double TRAINER_MITCHELL, VictoryRoad_B1F_Text_MitchellIntro, VictoryRoad_B1F_Text_MitchellDefeat, EmeraldChampions_Text_NeedTwoPokemon
+VictoryRoad_B1F_EventScript_Mitchell::
+	trainerbattle_single TRAINER_MITCHELL, VictoryRoad_B1F_Text_MitchellIntro, VictoryRoad_B1F_Text_MitchellDefeat
 	msgbox VictoryRoad_B1F_Text_MitchellPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_B1F_EventScript_Halle:: @ 8236541
-	trainerbattle_double TRAINER_HALLE, VictoryRoad_B1F_Text_HalleIntro, VictoryRoad_B1F_Text_HalleDefeat, EmeraldChampions_Text_NeedTwoPokemon
+VictoryRoad_B1F_EventScript_Halle::
+	trainerbattle_single TRAINER_HALLE, VictoryRoad_B1F_Text_HalleIntro, VictoryRoad_B1F_Text_HalleDefeat
 	msgbox VictoryRoad_B1F_Text_HallePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_B1F_Text_SamuelIntro: @ 8236558
+VictoryRoad_B1F_Text_SamuelIntro:
 	.string "The thought that I'm getting closer to\n"
-	.string "the Pokémon League…\p"
+	.string "the POKéMON LEAGUE…\p"
 	.string "I'm getting stage fright…$"
 
-VictoryRoad_B1F_Text_SamuelDefeat: @ 82365AD
+VictoryRoad_B1F_Text_SamuelDefeat:
 	.string "I couldn't do a thing…$"
 
-VictoryRoad_B1F_Text_SamuelPostBattle: @ 82365C4
-	.string "The Pokémon League became distant\n"
+VictoryRoad_B1F_Text_SamuelPostBattle:
+	.string "The POKéMON LEAGUE became distant\n"
 	.string "again… What a letdown…$"
 
-VictoryRoad_B1F_Text_ShannonIntro: @ 82365FD
-	.string "To win your way through the Pokémon\n"
-	.string "League, you need the trust of your\l"
-	.string "Pokémon.$"
+VictoryRoad_B1F_Text_ShannonIntro:
+	.string "To win your way through the POKéMON\n"
+	.string "LEAGUE, you need the trust of your\l"
+	.string "POKéMON.$"
 
-VictoryRoad_B1F_Text_ShannonDefeat: @ 823664D
+VictoryRoad_B1F_Text_ShannonDefeat:
 	.string "Your relationship is based on\n"
 	.string "solid trust.$"
 
-VictoryRoad_B1F_Text_ShannonPostBattle: @ 8236678
+VictoryRoad_B1F_Text_ShannonPostBattle:
 	.string "By being together all the time, trust\n"
-	.string "grows between Pokémon and Trainers.$"
+	.string "grows between POKéMON and TRAINERS.$"
 
-VictoryRoad_B1F_Text_MichelleIntro: @ 82366C2
+VictoryRoad_B1F_Text_MichelleIntro:
 	.string "This isn't the goal. It's only a place\n"
-	.string "on the way to the Pokémon League.$"
+	.string "on the way to the POKéMON LEAGUE.$"
 
-VictoryRoad_B1F_Text_MichelleDefeat: @ 823670B
+VictoryRoad_B1F_Text_MichelleDefeat:
 	.string "That's the way!$"
 
-VictoryRoad_B1F_Text_MichellePostBattle: @ 823671B
+VictoryRoad_B1F_Text_MichellePostBattle:
 	.string "You'll do fine, for sure!\n"
-	.string "Your Pokémon are all eager to go!$"
+	.string "Your POKéMON are all eager to go!$"
 
-VictoryRoad_B1F_Text_MitchellIntro: @ 8236757
-	.string "My Pokémon are cosmically\n"
+VictoryRoad_B1F_Text_MitchellIntro:
+	.string "My POKéMON are cosmically\n"
 	.string "awe inspiring!$"
 
-VictoryRoad_B1F_Text_MitchellDefeat: @ 8236780
+VictoryRoad_B1F_Text_MitchellDefeat:
 	.string "I've never met anyone like you before.$"
 
-VictoryRoad_B1F_Text_MitchellPostBattle: @ 82367A7
+VictoryRoad_B1F_Text_MitchellPostBattle:
 	.string "Even outside of battle, I sense\n"
 	.string "incredible power emanating from you\l"
-	.string "and your Pokémon.$"
+	.string "and your POKéMON.$"
 
-VictoryRoad_B1F_Text_HalleIntro: @ 82367FD
+VictoryRoad_B1F_Text_HalleIntro:
 	.string "Okay, no need to get your back up!\n"
 	.string "Relax, let's take it easy!$"
 
-VictoryRoad_B1F_Text_HalleDefeat: @ 823683B
+VictoryRoad_B1F_Text_HalleDefeat:
 	.string "Whoa!\n"
 	.string "Wonderful!$"
 
-VictoryRoad_B1F_Text_HallePostBattle: @ 823684C
-	.string "Sure, this is Victory Road.\p"
+VictoryRoad_B1F_Text_HallePostBattle:
+	.string "Sure, this is VICTORY ROAD.\p"
 	.string "But it's not all that different from\n"
 	.string "the path you've taken so far.\p"
 	.string "Try to enjoy things the rest of\n"

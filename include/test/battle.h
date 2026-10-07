@@ -428,6 +428,20 @@
  *     ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
  * target can only be specified for ANIM_TYPE_MOVE.
  *
+ * EXPERIENCE_BAR(battler, [exp: | captureGainedExp:])
+ * If exp: is used, causes the test to fail if that amount of
+ * experience is not gained, e.g.:
+ *     EXPERIENCE_BAR(player, exp: 0);
+ * If captureGainedExp: is used, causes the test to fail if
+ * the Experience bar does not change, and then writes that change to the
+ * pointer, e.g.:
+ *     u32 exp;
+ *     EXPERIENCE_BAR(player, captureGainedExp: &exp);
+ * If none of the above are used, causes the test to fail if the Exp
+ * does not change at all.
+ * Please note that due to nature of tests, this command
+ * is only usable in WILD_BATTLE_TEST and will fail elsewhere.
+ *
  * HP_BAR(battler, [damage: | hp: | captureDamage: | captureHP:])
  * If hp: or damage: are used, causes the test to fail if that amount of
  * damage is not dealt, e.g.:
@@ -545,9 +559,7 @@
 
 // NOTE: If the stack is too small the test runner will probably crash
 // or loop.
-// Direct AI evaluations in THEN need the same headroom as a native battle
-// callback; 1 KiB overflows into the runner's trial/probability bookkeeping.
-#define BATTLE_TEST_STACK_SIZE 4096
+#define BATTLE_TEST_STACK_SIZE 1024
 #define MAX_TURNS 16
 #define MAX_QUEUED_EVENTS 30
 #define MAX_EXPECTED_ACTIONS 10
@@ -594,11 +606,11 @@ enum
     QUEUED_ANIMATION_EVENT,
     QUEUED_HP_EVENT,
     QUEUED_SUB_HIT_EVENT,
+    QUEUED_EXP_EVENT,
     QUEUED_MESSAGE_EVENT,
     QUEUED_STATUS_EVENT,
     QUEUED_CATCH_CHANCE_EVENT,
     QUEUED_EFFECTIVENESS_EVENT,
-    QUEUED_MUSIC_EVENT,
     QUEUED_ITEM_POPUP_EVENT,
 };
 
@@ -606,11 +618,6 @@ struct QueuedEffectiveness
 {
     u8 battlerId;
     u16 soundId;
-};
-
-struct QueuedMusic
-{
-    u16 songId;
 };
 
 struct QueuedAbilityEvent
@@ -635,6 +642,7 @@ struct QueuedAnimationEvent
 };
 
 enum { HP_EVENT_NEW_HP, HP_EVENT_DELTA_HP };
+enum { EXP_EVENT_NEW_EXP, EXP_EVENT_DELTA_EXP };
 
 struct QueuedHPEvent
 {
@@ -649,6 +657,13 @@ struct QueuedSubHitEvent
     u32 checkBreak:1;
     u32 breakSub:1;
     u32 address:27;
+};
+
+struct QueuedExpEvent
+{
+    enum BattlerId battlerId:3;
+    u32 type:1;
+    u32 address:28;
 };
 
 struct QueuedMessageEvent
@@ -680,11 +695,11 @@ struct QueuedEvent
         struct QueuedAnimationEvent animation;
         struct QueuedHPEvent hp;
         struct QueuedSubHitEvent subHit;
+        struct QueuedExpEvent exp;
         struct QueuedMessageEvent message;
         struct QueuedStatusEvent status;
         struct QueuedCaptureEvent capture;
         struct QueuedEffectiveness eff_se;
-        struct QueuedMusic music;
     } as;
 };
 
@@ -780,7 +795,6 @@ struct BattleTestData
     enum Ability forcedAbilities[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     u8 chosenGimmick[MAX_BATTLE_TRAINERS][PARTY_SIZE];
     u8 forcedEnvironment;
-    bool8 useOverworldWeather;
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
     u8 turnState;
@@ -792,7 +806,6 @@ struct BattleTestData
     bool8 explicitInventory:1;
 
     struct ItemSlot inventory[TEST_ITEM_SLOTS];
-    struct ItemSlot fullPocket[2]; // Item to fill to capacity, then the filler for the pocket's other slots.
     struct RecordedBattleSave recordedBattle;
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u8 battleRecordTurnNumbers[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
@@ -858,9 +871,9 @@ bool32 IsAITest(void);
 #define APPEND_COMMA_TRUE(a) , a, TRUE
 #define R_APPEND_TRUE(...) __VA_OPT__(FIRST(__VA_ARGS__), TRUE RECURSIVELY(R_FOR_EACH(APPEND_COMMA_TRUE, EXCEPT_1(__VA_ARGS__))))
 
-#define AI_TRAINER_NAME "Pokémon Trainer LEAF"
-#define AI_TRAINER_2_NAME "Pokémon Trainer RED"
-#define AI_PARTNER_NAME "Pokémon Trainer 1"
+#define AI_TRAINER_NAME "{PKMN} TRAINER LEAF"
+#define AI_TRAINER_2_NAME "{PKMN} TRAINER RED"
+#define AI_PARTNER_NAME "{PKMN} TRAINER 1"
 
 /* Test */
 
@@ -982,8 +995,7 @@ bool32 IsAITest(void);
 
 #undef PARAMETRIZE // Override test/test.h's implementation.
 
-// Use the runner's state, not the test function's shadowable local name `i`.
-#define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == gBattleTestRunnerState->runParameter)
+#define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == i)
 
 /* Randomly */
 
@@ -1045,11 +1057,10 @@ struct moveWithPP {
 #define OTName(otName) do {static const u8 otName_[] = _(otName); OTName_(__LINE__, otName_);} while (0)
 #define DynamaxLevel(dynamaxLevel) DynamaxLevel_(__LINE__, dynamaxLevel)
 #define GigantamaxFactor(gigantamaxFactor) GigantamaxFactor_(__LINE__, gigantamaxFactor)
+#define TeraType(teraType) TeraType_(__LINE__, teraType)
 #define Shadow(isShadow) Shadow_(__LINE__, isShadow)
 #define Shiny(isShiny) Shiny_(__LINE__, isShiny)
 #define Environment(environment) Environment_(__LINE__, environment)
-// Explicitly exercise field weather; recorded test battles normally omit it.
-#define UseOverworldWeather() UseOverworldWeather_(__LINE__)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
 void SetVarForTest(u32 sourceLine, u16 varId, u16 value);
@@ -1090,10 +1101,10 @@ void Status1_(u32 sourceLine, u32 status1);
 void OTName_(u32 sourceLine, const u8 *otName);
 void DynamaxLevel_(u32 sourceLine, s16 dynamaxLevel);
 void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor);
+void TeraType_(u32 sourceLine, enum Type teraType);
 void Shadow_(u32 sourceLine, bool32 isShadow);
 void Shiny_(u32 sourceLine, bool32 isShiny);
 void Environment_(u32 sourceLine, u32 environment);
-void UseOverworldWeather_(u32 sourceLine);
 
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
 struct FourMoves
@@ -1148,7 +1159,6 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
 #define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define GIVE_PLAYER_ITEM(item, quantity) GivePlayerItem(__LINE__, item, quantity)
-#define FILL_PLAYER_BAG_POCKET(item, filler) FillPlayerBagPocket(__LINE__, item, filler)
 #define WITH_RNG(tag, value) rng: ((struct RiggedRNG) { tag, value })
 #define TIE_BREAK_SCORE(rngTag, scoreTieRes, value) TieBreakScore(__LINE__, rngTag, scoreTieRes, value)
 #define TIE_BREAK_TARGET(targetTieRes, value) TieBreakTarget(__LINE__, targetTieRes, value)
@@ -1206,7 +1216,6 @@ void SkipTurn(u32 sourceLine, struct BattlePokemon *);
 void UseItem(u32 sourceLine, struct BattlePokemon *, struct ItemContext);
 void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void GivePlayerItem(u32 sourceLine, enum Item, u32 quantity);
-void FillPlayerBagPocket(u32 sourceLine, enum Item item, enum Item filler);
 
 /* Scene */
 
@@ -1222,6 +1231,7 @@ void FillPlayerBagPocket(u32 sourceLine, enum Item item, enum Item filler);
 #define ANIMATION(type, id, ...) QueueAnimation(__LINE__, type, id, (struct AnimationEventContext) { __VA_ARGS__ })
 #define HP_BAR(battler, ...) QueueHP(__LINE__, battler, (struct HPEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define SUB_HIT(battler, ...) QueueSubHit(__LINE__, battler, (struct SubHitEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
+#define EXPERIENCE_BAR(battler, ...) QueueExp(__LINE__, battler, (struct ExpEventContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define MESSAGE(pattern) QueueMessage(__LINE__, COMPOUND_STRING(pattern))
 #define STATUS_ICON(battler, status) QueueStatus(__LINE__, battler, (struct StatusEventContext) { status })
 #define CATCHING_CHANCE(address) QueueCatchingChance(__LINE__, address)
@@ -1244,7 +1254,6 @@ void FillPlayerBagPocket(u32 sourceLine, enum Item item, enum Item filler);
                                      MESSAGE("Your opponent's weak! Get 'em, " name "!");   \
                                  }
 #define EFFECTIVENESS_SE(battler, ...) QueueEffectivenessSound(__LINE__, battler, (struct EffectivenessEventContext) { __VA_ARGS__ })
-#define MUSIC(songId) QueueMusic(__LINE__, songId)
 
 enum QueueGroupType
 {
@@ -1296,6 +1305,15 @@ struct SubHitEventContext
     bool8 explicitCaptureDamage;
 };
 
+struct ExpEventContext
+{
+    u8 _;
+    u32 exp;
+    bool8 explicitExp;
+    s32 *captureGainedExp;
+    bool8 explicitCaptureGainedExp;
+};
+
 struct StatusEventContext
 {
     u16 status1;
@@ -1335,11 +1353,11 @@ void QueueAbility(u32 sourceLine, struct BattlePokemon *battler, struct AbilityE
 void QueueAnimation(u32 sourceLine, u32 type, u32 id, struct AnimationEventContext);
 void QueueHP(u32 sourceLine, struct BattlePokemon *battler, struct HPEventContext);
 void QueueSubHit(u32 sourceLine, struct BattlePokemon *battler, struct SubHitEventContext);
+void QueueExp(u32 sourceLine, struct BattlePokemon *battler, struct ExpEventContext);
 void QueueMessage(u32 sourceLine, const u8 *pattern);
 void QueueStatus(u32 sourceLine, struct BattlePokemon *battler, struct StatusEventContext);
 void QueueCatchingChance(u32 sourceLine, u32 *captureAdress);
 void QueueEffectivenessSound(u32 sourceLine, struct BattlePokemon *battler, struct EffectivenessEventContext);
-void QueueMusic(u32 sourceLine, u32 songId);
 void QueueItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemEventContext);
 
 /* Then */

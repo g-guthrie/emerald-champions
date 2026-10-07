@@ -739,8 +739,7 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
 
     template.tileTag = gate->shape + ROTATING_GATE_TILE_TAG;
 
-    spriteId = CreateSpriteWithTemplateCopy(&template, 0, 0, OW_OBJECT_SUBPRIORITY - 1); // Above shadows
-    fatal_assertf(spriteId < MAX_SPRITES, "Out of sprite slots");
+    spriteId = CreateSpriteUnchecked(&template, 0, 0, OW_OBJECT_SUBPRIORITY - 1); // Above shadows
     if (spriteId == MAX_SPRITES)
         return MAX_SPRITES;
 
