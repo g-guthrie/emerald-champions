@@ -998,6 +998,17 @@ enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id)
     return sBattleTransitionTable_BattleFrontier[var % ARRAY_COUNT(sBattleTransitionTable_BattleFrontier)];
 }
 
+// The rival takes the starter the player did not. The rival scripts branch on
+// the player's starter (VAR_STARTER_MON) the way vanilla does: on branch b the
+// rival has starter (b + 1) % 3, so the rival's starter r is branch (r + 2) % 3.
+void BufferRivalStarterBranch(void)
+{
+    u16 first = VarGet(VAR_STARTER_MON) % 3, second = VarGet(VAR_SECOND_STARTER_MON) % 3;
+    u16 rival = (first == second) ? (first + 1) % 3 : 3 - first - second;
+
+    gSpecialVar_Result = (rival + 2) % 3;
+}
+
 void ChooseStarter(void)
 {
     SetMainCallback2(CB2_ChooseStarter);
@@ -1006,11 +1017,11 @@ void ChooseStarter(void)
 
 static void CB2_GiveStarter(void)
 {
-    u16 starterMon;
-
+    // Birch gives two starters: the first and second choice (CB2_ChooseStarter).
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
-    starterMon = GetStarterPokemon(gSpecialVar_Result);
-    ScriptGiveMon(starterMon, 5, ITEM_NONE);
+    *GetVarPointer(VAR_SECOND_STARTER_MON) = gSpecialVar_0x8004;
+    ScriptGiveMon(GetStarterPokemon(gSpecialVar_Result), 5, ITEM_NONE);
+    ScriptGiveMon(GetStarterPokemon(gSpecialVar_0x8004), 5, ITEM_NONE);
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
@@ -1024,7 +1035,7 @@ static void CB2_StartFirstBattle(void)
 
     if (IsBattleTransitionDone() == TRUE)
     {
-        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
+        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_DOUBLE;
         gMain.savedCallback = CB2_EndFirstBattle;
         FreeAllWindowBuffers();
         SetMainCallback2(CB2_InitBattle);

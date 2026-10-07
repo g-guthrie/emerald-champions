@@ -106,21 +106,25 @@ LittlerootTown_ProfessorBirchsLab_OnFrame:
 @ This is just where the game tells you its yours and lets you nickname it
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	lockall
-	bufferleadmonspeciesname STR_VAR_1
+	bufferpartymonnick STR_VAR_1, 0
+	bufferpartymonnick STR_VAR_2, 1
 	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
 	waitmessage
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexNav
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
 	setvar VAR_0x8004, 0
-	call Common_EventScript_NameReceivedPartyMon
+	call LittlerootTown_ProfessorBirchsLab_EventScript_OfferStarterNickname
+	setvar VAR_0x8004, 1
+	call LittlerootTown_ProfessorBirchsLab_EventScript_OfferStarterNickname
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexNav
 	end
+
+@ VAR_0x8004: the party slot of the starter to offer a nickname for.
+LittlerootTown_ProfessorBirchsLab_EventScript_OfferStarterNickname::
+	bufferpartymonnick STR_VAR_1, VAR_0x8004
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, Common_EventScript_NameReceivedPartyMon
+	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexNav::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_TakeDexNav, MSGBOX_DEFAULT
@@ -703,9 +707,10 @@ LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
 	.string "I guess you have your father's blood\n"
 	.string "in your veins after all!\p"
 	.string "Oh, yes. As thanks for rescuing me,\n"
-	.string "I'd like you to have the POKéMON you\l"
-	.string "used earlier.\p"
-	.string "{PLAYER} received the {STR_VAR_1}!$"
+	.string "I'd like you to have the two POKéMON\l"
+	.string "you used earlier.\p"
+	.string "{PLAYER} received {STR_VAR_1}\n"
+	.string "and {STR_VAR_2}!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 	.string "PROF. BIRCH: While you're at it, why not\n"

@@ -23,16 +23,22 @@ Route101_EventScript_StartBirchRescue::
 	closemessage
 	setobjectxy LOCALID_ROUTE101_BIRCH, 0, 15
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 0, 16
+	@ Poochyena runs two tiles behind Zigzagoon, replaying its path two steps
+	@ late, and steps up beside it when they corner Birch.
+	setobjectxy LOCALID_ROUTE101_POOCHYENA, 0, 18
 	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChase1
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChaseInCircles
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaFlankZigzagoon
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
@@ -77,7 +83,7 @@ Route101_Movement_PreventExitWest:
 	step_end
 
 Route101_Movement_PreventExitNorth:
-	walk_down
+	walk_left
 	step_end
 
 Route101_Movement_ZigzagoonChaseInCircles:
@@ -123,6 +129,55 @@ Route101_Movement_ZigzagoonChase1:
 	step_end
 
 @ Leftover data? This command is unused.
+	step_end
+
+Route101_Movement_PoochyenaChase1:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	step_end
+
+Route101_Movement_PoochyenaChaseInCircles:
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	step_end
+
+Route101_Movement_PoochyenaFlankZigzagoon:
+	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_in_place_fast_left
 	step_end
 
 Route101_Movement_ZigzagoonFaceBirch:
@@ -220,8 +275,11 @@ Route101_EventScript_BirchsBag::
 	faceplayer
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_RESCUED_BIRCH
+	msgbox Route101_Text_TakeTwo, MSGBOX_DEFAULT
+	closemessage
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
+	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
@@ -263,7 +321,13 @@ Route101_Text_PleaseHelp:
 	.string "Hello! You over there!\n"
 	.string "Please! Help!\p"
 	.string "In my BAG!\n"
-	.string "There's a POKé BALL!$"
+	.string "There are POKé BALLS!$"
+
+Route101_Text_TakeTwo:
+	.string "PROF. BIRCH: There are two of them!\n"
+	.string "Take two POKéMON from my BAG!\p"
+	.string "Both of them fight at once!\n"
+	.string "Pick a move and a target for each!$"
 
 Route101_Text_DontLeaveMe:
 	.string "Wh-Where are you going?!\n"

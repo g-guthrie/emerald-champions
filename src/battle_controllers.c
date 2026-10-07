@@ -160,7 +160,16 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     BattleAI_SetupFlags();
 
     if (!IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-        CreateWildMon(SPECIES_ZIGZAGOON, 2);
+    {
+        // Poochyena and Zigzagoon chased Birch together: a double battle.
+        CreateWildMon(SPECIES_POOCHYENA, 2);
+        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        {
+            struct Pokemon poochyena = gParties[B_TRAINER_OPPONENT_A][0];
+            CreateWildMon(SPECIES_ZIGZAGOON, 2);
+            gParties[B_TRAINER_OPPONENT_A][1] = poochyena;
+        }
+    }
 }
 
 void InitBattleControllers(void)
