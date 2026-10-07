@@ -145,6 +145,7 @@ static void Task_DexNavWaitFadeIn(u8 taskId);
 static void Task_DexNavMain(u8 taskId);
 static void PrintCurrentSpeciesInfo(void);
 static u32 GetEncounterRate(enum Species species);
+static const u8 *GetRarityText(u32 rate);
 static void PrintPanelLabels(void);
 // SEARCH
 static bool8 TryStartHiddenMonFieldEffect(enum EncounterType environment, u8 xSize, u8 ySize, bool8 smallScan);
@@ -183,7 +184,11 @@ static const u32 sHiddenMonIconGfx[] = INCGFX_U32("graphics/dexnav/hidden.png", 
 static const u8 sText_DexNav_NoInfo[] = _("--------");
 static const u8 sText_DexNav_Yes[] = _("Yes");
 static const u8 sText_DexNav_No[] = _("No");
-static const u8 sText_DexNav_Percent[] = _("{STR_VAR_1}%");
+static const u8 sText_DexNav_VeryCommon[] = _("Very common");
+static const u8 sText_DexNav_Common[] = _("Common");
+static const u8 sText_DexNav_Uncommon[] = _("Uncommon");
+static const u8 sText_DexNav_Rare[] = _("Rare");
+static const u8 sText_DexNav_ExtremelyRare[] = _("Extremely rare");
 static const u8 sText_DexNav_Caught[] = _("CAUGHT");
 static const u8 sText_DexNav_EncounterRate[] = _("ENCOUNTER RATE");
 static const u8 sText_DexNav_PressRToRegister[] = _("R TO REGISTER!");
@@ -1819,9 +1824,7 @@ static void PrintCurrentSpeciesInfo(void)
     }
     else
     {
-        ConvertIntToDecimalStringN(gStringVar1, GetEncounterRate(species), STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, sText_DexNav_Percent);
-        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, ENCOUNTER_RATE_Y, sFontColor_Black, 0, gStringVar4);
+        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, ENCOUNTER_RATE_Y, sFontColor_Black, 0, GetRarityText(GetEncounterRate(species)));
     }
 
     //current chain
@@ -1858,6 +1861,20 @@ static u32 GetEncounterRate(enum Species species)
             rate += GetWildMonSlotChance(water, i);
     }
     return rate;
+}
+
+// How often this species appears here, in words, from its percent chance.
+static const u8 *GetRarityText(u32 rate)
+{
+    if (rate >= 30)
+        return sText_DexNav_VeryCommon;
+    if (rate >= 15)
+        return sText_DexNav_Common;
+    if (rate >= 5)
+        return sText_DexNav_Uncommon;
+    if (rate >= 2)
+        return sText_DexNav_Rare;
+    return sText_DexNav_ExtremelyRare;
 }
 
 // The panel's CAUGHT and ENCOUNTER RATE labels, printed onto the blank red label

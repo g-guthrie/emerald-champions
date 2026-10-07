@@ -113,12 +113,23 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
+	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexNav
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
 	setvar VAR_0x8004, 0
 	call Common_EventScript_NameReceivedPartyMon
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexNav
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexNav::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_TakeDexNav, MSGBOX_DEFAULT
+	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedDexNav
+	waitmessage
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	setflag FLAG_RECEIVED_DEXNAV
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav, MSGBOX_DEFAULT
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
 	end
 
@@ -699,6 +710,29 @@ LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
 LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 	.string "PROF. BIRCH: While you're at it, why not\n"
 	.string "give a nickname to that {STR_VAR_1}?$"
+
+LittlerootTown_ProfessorBirchsLab_Text_TakeDexNav:
+	.string "PROF. BIRCH: Oh, and take this, too.\p"
+	.string "It's a DEXNAV, a gadget I've been\n"
+	.string "building for my field research.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ReceivedDexNav:
+	.string "{PLAYER} received the DEXNAV!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ExplainDexNav:
+	.string "PROF. BIRCH: Open it from the menu,\n"
+	.string "and it shows every POKéMON living\l"
+	.string "where you're standing.\p"
+	.string "Pick one and press A, and the DEXNAV\n"
+	.string "finds where it's hiding nearby.\p"
+	.string "Hold A to sneak up on it, though.\n"
+	.string "Run at it, and it'll get away!\p"
+	.string "Press R on one to register it.\n"
+	.string "Then press R anywhere to search\l"
+	.string "for it again.\p"
+	.string "Find the same POKéMON again and again,\n"
+	.string "and you might meet one with a rare,\l"
+	.string "shining color!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
 	.string "PROF. BIRCH: If you work at POKéMON\n"

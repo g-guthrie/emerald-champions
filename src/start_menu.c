@@ -6,7 +6,6 @@
 #include "bg.h"
 #include "debug.h"
 #include "event_data.h"
-#include "pokemon_storage_system.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "event_scripts.h"
@@ -328,9 +327,6 @@ static void BuildNormalStartMenu(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
 
-    // The DexNav arrives with the second Pokémon: the game is played in doubles.
-    if (DN_FLAG_DEXNAV_GET != 0 && !FlagGet(DN_FLAG_DEXNAV_GET) && CountPartyNonEggMons() >= 2)
-        FlagSet(DN_FLAG_DEXNAV_GET);
     if (DN_FLAG_DEXNAV_GET != 0 && FlagGet(DN_FLAG_DEXNAV_GET))
         AddStartMenuAction(MENU_ACTION_DEXNAV);
 
