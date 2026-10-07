@@ -4402,6 +4402,31 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     return TRUE;
 }
 
+// The Leveler: raise a Pokémon straight to the current level cap.
+bool32 RaiseMonToLevelerTarget(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 target = min(GetCurrentLevelCap(), MAX_LEVEL);
+    u32 experience;
+
+    if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG)
+     || GetMonData(mon, MON_DATA_LEVEL) >= target)
+        return FALSE;
+    experience = gExperienceTables[gSpeciesInfo[species].growthRate][target];
+    SetMonData(mon, MON_DATA_EXP, &experience);
+    CalculateMonStats(mon);
+    return TRUE;
+}
+
+// Below the cap, or ready to evolve by level.
+bool32 IsMonEligibleForLeveler(struct Pokemon *mon)
+{
+    return GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
+        && !GetMonData(mon, MON_DATA_IS_EGG)
+        && (GetMonData(mon, MON_DATA_LEVEL) < min(GetCurrentLevelCap(), MAX_LEVEL)
+            || GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO) != SPECIES_NONE);
+}
+
 enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, enum Item evolutionItem, struct Pokemon *tradePartner, bool32 *canStopEvo, enum EvoState evoState)
 {
     int i;

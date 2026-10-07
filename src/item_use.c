@@ -77,6 +77,8 @@ static void Task_StartUseLure(u8 taskId);
 static void Task_UseRepel(u8);
 static void Task_UseLure(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8);
+static void CB2_OpenLevelerFromBag(void);
+static void Task_OpenRegisteredLeveler(u8 taskId);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
@@ -87,6 +89,7 @@ static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!
 static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildly!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CoinCase[] = _("Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerNoEffect[] = _("Your party has caught up.\nNo POKéMON is ready to evolve.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PowderQty[] = _("POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BootedUpTM[] = _("Booted up a TM.");
 static const u8 sText_BootedUpHM[] = _("Booted up an HM.");
@@ -270,6 +273,53 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
 #else
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
 #endif
+}
+
+static bool32 CanLevelPartyToCap(void)
+{
+    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
+    {
+        if (IsMonEligibleForLeveler(&gParties[B_TRAINER_PLAYER][i]))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+void ItemUseOutOfBattle_Leveler(u8 taskId)
+{
+    if (!CanLevelPartyToCap())
+    {
+        if (!gTasks[taskId].tUsingRegisteredKeyItem)
+            DisplayItemMessage(taskId, FONT_NORMAL, sText_LevelerNoEffect, CloseItemMessage);
+        else
+            DisplayItemMessageOnField(taskId, sText_LevelerNoEffect, Task_CloseCantUseKeyItemMessage);
+    }
+    else if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenLevelerFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredLeveler;
+    }
+}
+
+static void CB2_OpenLevelerFromBag(void)
+{
+    StartLevelerPartySequence(CB2_ReturnToBagMenuPocket);
+}
+
+static void Task_OpenRegisteredLeveler(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        StartLevelerPartySequence(CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
 }
 
 void ItemUseOutOfBattle_Bike(u8 taskId)

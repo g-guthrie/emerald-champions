@@ -226,7 +226,21 @@ static EWRAM_DATA u8 sFinalLevel = 0;
 // IWRAM common
 COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
+// The Leveler walks the party one eligible slot at a time, evolving as it goes.
+static EWRAM_DATA u8 sLevelerNextSlot = 0;
+static EWRAM_DATA enum Species sLevelerEvolutionSpecies = SPECIES_NONE;
+static EWRAM_DATA MainCallback sLevelerExitCallback = NULL;
+static EWRAM_DATA bool8 sLevelerRaisedParty = FALSE;
+static const u8 sText_LevelerComplete[] = _("Your party grew to the current\nlevel cap: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
+
 static void ResetPartyMenu(void);
+static u8 FindNextLevelerSlot(void);
+static void CB2_ShowPartyMenuForLeveler(void);
+static void Task_SetLevelerCB(u8 taskId);
+static void LevelerUseOnSlot(u8 taskId);
+static void Task_ContinueLevelerAfterText(u8 taskId);
+static void Task_ShowLevelerComplete(u8 taskId);
+static void CB2_ContinueLevelerEvolution(void);
 static void CB2_InitPartyMenu(void);
 static void CB2_ReloadPartyMenu(void);
 static bool8 ShowPartyMenu(void);
@@ -5912,6 +5926,135 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     }
 }
 
+static u8 FindNextLevelerSlot(void)
+{
+    for (u32 slot = sLevelerNextSlot; slot < gPartiesCount[B_TRAINER_PLAYER]; slot++)
+    {
+        if (IsMonEligibleForLeveler(&gParties[B_TRAINER_PLAYER][slot]))
+            return slot;
+    }
+    return PARTY_SIZE;
+}
+
+void StartLevelerPartySequence(MainCallback exitCallback)
+{
+    sLevelerNextSlot = 0;
+    sLevelerEvolutionSpecies = SPECIES_NONE;
+    sLevelerExitCallback = exitCallback;
+    sLevelerRaisedParty = FALSE;
+    SetMainCallback2(CB2_ShowPartyMenuForLeveler);
+}
+
+static void CB2_ShowPartyMenuForLeveler(void)
+{
+    u8 slot = FindNextLevelerSlot();
+
+    if (slot == PARTY_SIZE)
+    {
+        if (sLevelerRaisedParty)
+        {
+            gPartyMenu.slotId = 0;
+            InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE,
+                          PARTY_MSG_NONE, Task_ShowLevelerComplete, sLevelerExitCallback);
+        }
+        else
+        {
+            SetMainCallback2(sLevelerExitCallback);
+        }
+        return;
+    }
+
+    gPartyMenu.slotId = slot;
+    sLevelerNextSlot = slot + 1;
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE,
+                  PARTY_MSG_NONE, Task_SetLevelerCB, sLevelerExitCallback);
+}
+
+static void Task_SetLevelerCB(u8 taskId)
+{
+    if (gPaletteFade.active)
+        return;
+    LevelerUseOnSlot(taskId);
+}
+
+// Raise the selected Pokémon to the cap, then evolve it if it is ready.
+static void LevelerUseOnSlot(u8 taskId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+
+    sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
+    if (RaiseMonToLevelerTarget(mon))
+    {
+        sFinalLevel = GetMonData(mon, MON_DATA_LEVEL);
+        gPartyMenuUseExitCallback = TRUE;
+        UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+        sLevelerRaisedParty = TRUE;
+        PlaySE(SE_USE_ITEM);
+    }
+    PartyMenuTryEvolution(taskId);
+}
+
+static void Task_ContinueLevelerAfterText(u8 taskId)
+{
+    u8 newSlot;
+
+    if (IsPartyMenuTextPrinterActive())
+        return;
+
+    newSlot = FindNextLevelerSlot();
+    if (newSlot == PARTY_SIZE)
+    {
+        gTasks[taskId].func = Task_ShowLevelerComplete;
+        return;
+    }
+
+    AnimatePartySlot(gPartyMenu.slotId, 0);
+    gPartyMenu.slotId = newSlot;
+    sLevelerNextSlot = newSlot + 1;
+    AnimatePartySlot(newSlot, 1);
+    LevelerUseOnSlot(taskId);
+}
+
+static void Task_ShowLevelerComplete(u8 taskId)
+{
+    if (gPaletteFade.active || IsPartyMenuTextPrinterActive())
+        return;
+
+    ConvertIntToDecimalStringN(gStringVar1, min(GetCurrentLevelCap(), MAX_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, sText_LevelerComplete);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gPartyMenuUseExitCallback = TRUE;
+    sLevelerRaisedParty = FALSE;
+    gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+}
+
+// After an evolution scene: evolve again if the new form is also ready, else move on.
+static void CB2_ContinueLevelerEvolution(void)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+    enum Species currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
+    if (currentSpecies != sLevelerEvolutionSpecies)
+    {
+        bool32 canStopEvo = TRUE;
+        enum Species targetSpecies;
+
+        sLevelerRaisedParty = TRUE;
+        targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
+        if (targetSpecies != SPECIES_NONE)
+        {
+            GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
+            sLevelerEvolutionSpecies = currentSpecies;
+            gCB2_AfterEvolution = CB2_ContinueLevelerEvolution;
+            BeginEvolutionScene(mon, targetSpecies, canStopEvo, gPartyMenu.slotId);
+            return;
+        }
+    }
+    sLevelerEvolutionSpecies = SPECIES_NONE;
+    SetMainCallback2(CB2_ShowPartyMenuForLeveler);
+}
+
 static void UpdateMonDisplayInfoAfterRareCandy(u8 slot, struct Pokemon *mon)
 {
     SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[slot]);
@@ -6049,7 +6192,12 @@ static void PartyMenuTryEvolution(u8 taskId)
     {
         GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
         FreePartyPointers();
-        if (GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_RareCandy && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+        if (gSpecialVar_ItemId == ITEM_LEVELER && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+        {
+            sLevelerEvolutionSpecies = GetMonData(mon, MON_DATA_SPECIES);
+            gCB2_AfterEvolution = CB2_ContinueLevelerEvolution;
+        }
+        else if (GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_RareCandy && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
             gCB2_AfterEvolution = CB2_ReturnToPartyMenuUsingRareCandy;
         else
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
@@ -6058,7 +6206,9 @@ static void PartyMenuTryEvolution(u8 taskId)
     }
     else
     {
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+        if (gSpecialVar_ItemId == ITEM_LEVELER && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ContinueLevelerAfterText;
+        else if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         else
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;

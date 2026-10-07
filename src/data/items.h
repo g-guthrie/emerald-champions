@@ -16099,6 +16099,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    [ITEM_LEVELER] =
+    {
+        .name = ITEM_NAME("Leveler"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Raises your party\n"
+            "to the level cap;\n"
+            "evolves ready ones."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Leveler,
+        .iconPic = gItemIcon_RareCandy,
+        .iconPalette = gItemIconPalette_RareCandy,
+    },
 };
 
 #undef ITEM_NAME

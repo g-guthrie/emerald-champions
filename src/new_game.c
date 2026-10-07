@@ -202,6 +202,7 @@ void NewGameInitData(void)
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
+    AddBagItem(ITEM_LEVELER, 1); // battles give no experience; the Leveler raises the party to the cap
     NewGameInitPCItems();
     ClearPokeblocks();
     ClearDecorationInventories();
