@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_specials.h"
@@ -196,7 +197,7 @@ static void ResetStarterStones(u16 generation, u16 first, u16 second)
     VarSet(VAR_STARTER_GEN, generation);
     VarSet(VAR_STARTER_MON, first);
     VarSet(VAR_EC_SECOND_STARTER, second + 1);
-    VarSet(VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED);
+    StoryStageAt(STORY_STEP_CHOSE_STARTERS);
 }
 
 static void SaveStarterVars(void)
@@ -204,7 +205,7 @@ static void SaveStarterVars(void)
     sSavedStarterVars[0] = VarGet(VAR_STARTER_GEN);
     sSavedStarterVars[1] = VarGet(VAR_STARTER_MON);
     sSavedStarterVars[2] = VarGet(VAR_EC_SECOND_STARTER);
-    sSavedStarterVars[3] = VarGet(VAR_EC_OPENING_STATE);
+    sSavedStarterVars[3] = GetStoryStep();
 }
 
 static void RestoreStarterVars(void)
@@ -216,7 +217,7 @@ static void RestoreStarterVars(void)
     VarSet(VAR_STARTER_GEN, sSavedStarterVars[0]);
     VarSet(VAR_STARTER_MON, sSavedStarterVars[1]);
     VarSet(VAR_EC_SECOND_STARTER, sSavedStarterVars[2]);
-    VarSet(VAR_EC_OPENING_STATE, sSavedStarterVars[3]);
+    StoryStageAt(sSavedStarterVars[3]);
 }
 
 // PetalburgCity_Gym_EventScript_NormanStarterGift: each owed stone after victory

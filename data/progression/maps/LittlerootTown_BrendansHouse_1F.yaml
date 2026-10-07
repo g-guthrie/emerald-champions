@@ -12,7 +12,6 @@ entities:
     schedule:   # where Mom stands at each step of the move-in
       - {from: NEW_GAME, at: [2, 6]}
       - {from: ENTERED_HOUSE, at: [9, 8], movement_type: MOVEMENT_TYPE_FACE_UP}   # by the door
-      - {from: SENT_UPSTAIRS, at: [2, 6]}
       - {from: UPSTAIRS, at: [8, 4], movement_type: MOVEMENT_TYPE_FACE_UP}        # at the stairs
       - {from: CLOCK_SET, at: [4, 5], movement_type: MOVEMENT_TYPE_FACE_UP}       # by the TV
       - {from: SENT_TO_RIVAL, at: [2, 6]}

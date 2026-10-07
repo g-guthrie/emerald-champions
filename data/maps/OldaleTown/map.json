@@ -59,7 +59,21 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_FOOTPRINTS_MAN",
+      "local_id": "LOCALID_FOOTPRINTS_MAN_S0",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
+      "x": 1,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "OldaleTown_EventScript_FootprintsMan",
+      "flag": "STORY_E154_S0"
+    },
+    {
+      "local_id": "LOCALID_FOOTPRINTS_MAN_S1",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 8,
       "y": 9,
@@ -70,7 +84,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "OldaleTown_EventScript_FootprintsMan",
-      "flag": "0"
+      "flag": "STORY_E154_S1"
     },
     {
       "local_id": "LOCALID_OLDALE_RIVAL",
@@ -84,7 +98,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "OldaleTown_EventScript_Rival",
-      "flag": "FLAG_HIDE_OLDALE_TOWN_RIVAL"
+      "flag": "STORY_OLDALE_RIVAL"
     }
   ],
   "warp_events": [
@@ -123,8 +137,8 @@
       "x": 0,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_OLDALE_TOWN_STATE",
-      "var_value": "0",
+      "var": "STORY_OLDALE_WEST_GUARD",
+      "var_value": "1",
       "script": "OldaleTown_EventScript_BlockedPath"
     },
     {
@@ -132,7 +146,7 @@
       "x": 8,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_OLDALE_RIVAL_STATE",
+      "var": "STORY_OLDALE_RIVAL",
       "var_value": "1",
       "script": "OldaleTown_EventScript_RivalTrigger1"
     },
@@ -141,7 +155,7 @@
       "x": 9,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_OLDALE_RIVAL_STATE",
+      "var": "STORY_OLDALE_RIVAL",
       "var_value": "1",
       "script": "OldaleTown_EventScript_RivalTrigger2"
     },
@@ -150,7 +164,7 @@
       "x": 10,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_OLDALE_RIVAL_STATE",
+      "var": "STORY_OLDALE_RIVAL",
       "var_value": "1",
       "script": "OldaleTown_EventScript_RivalTrigger3"
     }

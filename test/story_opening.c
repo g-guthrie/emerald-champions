@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "emerald_champions_opening.h"
 #include "event_data.h"
@@ -62,12 +63,12 @@ TEST("Story opening: every region grants each distinct starter pair atomically")
             for (u32 second = 0; second < 3; second++)
             {
                 ZeroPlayerPartyMons();
-                VarSet(VAR_EC_OPENING_STATE, 0);
+                StoryStageAt(STORY_STEP_BIRCH_IN_DANGER);
                 if (first == second)
                 {
                     EXPECT(!GiveEmeraldChampionsStarterPair(first, second));
                     EXPECT_EQ(CalculatePlayerPartyCount(), 0);
-                    EXPECT_EQ(VarGet(VAR_EC_OPENING_STATE), 0);
+                    EXPECT_EQ(GetStoryStep(), STORY_STEP_BIRCH_IN_DANGER);
                     continue;
                 }
                 EXPECT(GiveEmeraldChampionsStarterPair(first, second));
@@ -77,7 +78,7 @@ TEST("Story opening: every region grants each distinct starter pair atomically")
                 ExpectUntrainedOpeningMon(&gParties[B_TRAINER_PLAYER][0], 5, TRUE);
                 ExpectUntrainedOpeningMon(&gParties[B_TRAINER_PLAYER][1], 5, TRUE);
                 EXPECT_EQ(GetEmeraldChampionsRivalStarterIndex(), 3 - first - second);
-                EXPECT_EQ(VarGet(VAR_EC_OPENING_STATE), EC_OPENING_PAIR_GRANTED);
+                EXPECT_EQ(GetStoryStep(), STORY_STEP_CHOSE_STARTERS);
                 EXPECT(!GiveEmeraldChampionsStarterPair(first, second));
                 EXPECT_EQ(CalculatePlayerPartyCount(), 2);
             }

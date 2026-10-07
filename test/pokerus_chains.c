@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "test/test.h"
 #include "pokemon.h"
 #include "event_data.h"
@@ -19,7 +20,7 @@ TEST("Hunt preparation: boxed donors allow six isolated direct infections before
 {
     static EWRAM_DATA struct BoxPokemon originalBox[PARTY_SIZE];
     bool32 hadPokedex = FlagGet(FLAG_SYS_POKEDEX_GET);
-    FlagClear(FLAG_SYS_POKEDEX_GET);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     ZeroPlayerPartyMons();
     for (u32 i = 0; i < PARTY_SIZE; i++)
         originalBox[i] = *GetBoxedMonPtr(0, i);
@@ -54,7 +55,7 @@ TEST("Hunt preparation: boxed donors allow six isolated direct infections before
     EXPECT(IsPokerusInParty());
     ZeroPlayerPartyMons();
     if (hadPokedex)
-        FlagSet(FLAG_SYS_POKEDEX_GET);
+        StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
 }
 
 TEST("Hunt rewards: exact independent shiny and Pokerus chain thresholds")

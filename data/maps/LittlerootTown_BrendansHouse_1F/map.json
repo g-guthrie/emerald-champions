@@ -45,10 +45,10 @@
     {
       "local_id": "LOCALID_BRENDANS_HOUSE_MOM_S2",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
-      "x": 2,
-      "y": 6,
+      "x": 8,
+      "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -59,8 +59,8 @@
     {
       "local_id": "LOCALID_BRENDANS_HOUSE_MOM_S3",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
-      "x": 8,
-      "y": 4,
+      "x": 4,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -73,20 +73,6 @@
     {
       "local_id": "LOCALID_BRENDANS_HOUSE_MOM_S4",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
-      "x": 4,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "PlayersHouse_1F_EventScript_Mom",
-      "flag": "STORY_E39_S4"
-    },
-    {
-      "local_id": "LOCALID_BRENDANS_HOUSE_MOM_S5",
-      "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 2,
       "y": 6,
       "elevation": 3,
@@ -96,7 +82,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PlayersHouse_1F_EventScript_Mom",
-      "flag": "STORY_E39_S5"
+      "flag": "STORY_E39_S4"
     },
     {
       "local_id": "LOCALID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F_VIGOROTH_CARRYING_BOX",

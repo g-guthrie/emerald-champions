@@ -69,8 +69,8 @@
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
-#define FLAG_SET_WALL_CLOCK                      0x51
-#define FLAG_RESCUED_BIRCH                       0x52
+#define FLAG_SET_WALL_CLOCK STORY_REACHED_CLOCK_SET // story machine: true from step CLOCK_SET (data/progression/story.yaml); never stored
+#define FLAG_RESCUED_BIRCH STORY_REACHED_RESCUED_BIRCH // story machine: true from step RESCUED_BIRCH (data/progression/story.yaml); never stored
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
 
 #define FLAG_UNUSED_0x54                         0x54 // Unused Flag; was FLAG_EC_ITEM_PETALBURG_WOODS_2_QUICK_BALL, may be set in older saves
@@ -107,7 +107,7 @@
 #define FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE 0x71 // Unused Flag. Used in R/S to indicate whether player defeated or caught Groudon/Kyogre in Cave of Origin.
 #define FLAG_SCOTT_CALL_BATTLE_FRONTIER      0x72 // Used in order to activate a phone call from Scott, inviting the player to the SS Tidal.
 #define FLAG_RECEIVED_METEORITE              0x73
-#define FLAG_ADVENTURE_STARTED               0x74 // RECEIVED Pokédex.
+#define FLAG_ADVENTURE_STARTED STORY_REACHED_GOT_POKEDEX // story machine: true from step GOT_POKEDEX (data/progression/story.yaml); never stored
 #define FLAG_DEFEATED_MAGMA_SPACE_CENTER     0x75 // Set when Team Magma is defeated at Mossdeep's Space Center.
 #define FLAG_MET_HIDDEN_POWER_GIVER          0x76
 
@@ -123,7 +123,7 @@
 #define FLAG_MET_PRETTY_PETAL_SHOP_OWNER     0x7F
 #define FLAG_ENABLE_ROXANNE_FIRST_CALL       0x80 // Set after defeating Brawly. This will activate a call with Roxanne in order to register her.
 #define FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN  0x81
-#define FLAG_DEFEATED_RIVAL_ROUTE103         0x82
+#define FLAG_DEFEATED_RIVAL_ROUTE103 STORY_REACHED_BEAT_RIVAL_103 // story machine: true from step BEAT_RIVAL_103 (data/progression/story.yaml); never stored
 #define FLAG_RECEIVED_DOLL_LANETTE           0x83
 #define FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN          0x84
 #define FLAG_RECEIVED_AMULET_COIN            0x85
@@ -250,7 +250,7 @@
 #define FLAG_RECEIVED_LAVARIDGE_FIRE_STONE    0xFE
 #define FLAG_LATIOS_OR_LATIAS_ROAMING        0xFF
 #define FLAG_RECEIVED_REPEAT_BALL            0x100
-#define FLAG_RECEIVED_OLD_ROD                0x101
+#define FLAG_RECEIVED_OLD_ROD STORY_REACHED_GOT_RUNNING_SHOES // story machine: true from step GOT_RUNNING_SHOES (data/progression/story.yaml); never stored
 #define FLAG_RECEIVED_COIN_CASE              0x102
 #define FLAG_RETURNED_RED_OR_BLUE_ORB        0x103
 #define FLAG_RECEIVED_SS_TIDAL_REAPER_CLOTH    0x104
@@ -267,7 +267,7 @@
 #define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
 #define FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON  0x110
 #define FLAG_POKERUS_EXPLAINED               0x111
-#define FLAG_RECEIVED_RUNNING_SHOES          0x112
+#define FLAG_RECEIVED_RUNNING_SHOES STORY_REACHED_GOT_RUNNING_SHOES // story machine: true from step GOT_RUNNING_SHOES (data/progression/story.yaml); never stored
 #define FLAG_RECEIVED_SCHOOL_SUN_STONE         0x113
 #define FLAG_RECEIVED_KINGS_ROCK             0x114
 #define FLAG_RECEIVED_WINSTRATE_KANGASKHANITE 0x115
@@ -293,7 +293,7 @@
 #define FLAG_RECEIVED_BELDUM                 0x12A
 #define FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK  0x12B
 #define FLAG_MET_FANCLUB_YOUNGER_BROTHER     0x12C
-#define FLAG_RIVAL_LEFT_FOR_ROUTE103         0x12D
+#define FLAG_RIVAL_LEFT_FOR_ROUTE103 STORY_REACHED_MET_RIVAL // story machine: true from step MET_RIVAL (data/progression/story.yaml); never stored
 #define FLAG_OMIT_DIVE_FROM_STEVEN_LETTER    0x12E
 #define FLAG_HAS_MATCH_CALL                  0x12F // Restored at Inclement Emerald's own ID.
                                                    // The match call subsystem itself is gone from this
@@ -755,7 +755,7 @@
 #define FLAG_UNUSED_0x2B3             0x2B3 // Unused Flag; was FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED, may be set in older saves
 #define FLAG_EC_WOODS_DUSK_BALLS_PENDING       0x2B4 // Petalburg Woods Dusk Balls held by the nurse; clear only on delivery.
 #define FLAG_EC_OLDALE_SHOP_TUTORIAL_COMPLETE 0x2B5 // Oldale nurse and clerk introduction; also hides visiting nurse.
-#define FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE 0x2B6
+#define FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE STORY_REACHED_DEXNAV_LESSON_DONE // story machine: true from step DEXNAV_LESSON_DONE (data/progression/story.yaml); never stored
 #define FLAG_HIDE_ROUTE101_DEXNAV_RIVAL 0x2BF
 #define FLAG_UNUSED_0x2B7               0x2B7 // Unused Flag; was FLAG_EC_FIRST_ISLAND_VOYAGE_COMPLETE, may be set in older saves
 // Hoenn starter Mega Stone receipts: Norman's victory gift or his shown-partner gift (src/mega_stone_rewards.c).
@@ -1306,7 +1306,7 @@
 #define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag; was FLAG_EC_CAUGHT_RESHIRAM, may be set in older saves
 #define FLAG_HIDE_ROUTE133_VIAL_NURSE                              0x4EA
 #define FLAG_RECEIVED_GAME_CORNER_GENESECT                          0x4EB
-#define FLAG_RECEIVED_DEXNAV                                        0x4EC // DexNav in the start menu; Birch adds it to the Pokedex. Reclaimed the retired
+#define FLAG_RECEIVED_DEXNAV STORY_REACHED_GOT_POKEDEX // story machine: true from step GOT_POKEDEX (data/progression/story.yaml); never stored
         // Game Corner Poipole prize flag (no references). Saves with the Pokedex get it on load.
 #define FLAG_HIDE_LEGENDARY_SIGN_DARKRAI                            0x4ED
 #define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag; was FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA, set in older saves
@@ -1385,8 +1385,8 @@
 
 #define SYSTEM_FLAGS                                   (TRAINER_FLAGS_END + 1) // 0x860
 
-#define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
-#define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
+#define FLAG_SYS_POKEMON_GET STORY_REACHED_CHOSE_STARTERS // story machine: true from step CHOSE_STARTERS (data/progression/story.yaml); never stored
+#define FLAG_SYS_POKEDEX_GET STORY_REACHED_GOT_POKEDEX // story machine: true from step GOT_POKEDEX (data/progression/story.yaml); never stored
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
 #define FLAG_EC_GIFT_LAVARIDGE_TOWN_HOUSE                            (SYSTEM_FLAGS + 0x3) // Unused Flag
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
@@ -1450,7 +1450,7 @@
 #define FLAG_SYS_CHANGED_DEWFORD_TREND              (SYSTEM_FLAGS + 0x33)
 #define FLAG_SYS_MIX_RECORD                         (SYSTEM_FLAGS + 0x34)
 #define FLAG_SYS_CLOCK_SET                          (SYSTEM_FLAGS + 0x35)
-#define FLAG_SYS_NATIONAL_DEX                       (SYSTEM_FLAGS + 0x36)
+#define FLAG_SYS_NATIONAL_DEX STORY_REACHED_GOT_POKEDEX // story machine: true from step GOT_POKEDEX (data/progression/story.yaml); never stored
 #define FLAG_ITEM_SEASPRAY_CAVE_B1_F_ROCKY_HELMET           (SYSTEM_FLAGS + 0x37) // Formerly unused R/S debug flag; old 0x44 belongs to King's Rock.
 #define FLAG_EC_RESTRICTED_RULE_EXPLAINED           (SYSTEM_FLAGS + 0x38) // Formerly unused R/S debug flag; 0x2AC belongs to a Route 120 hidden item.
 #define FLAG_EC_EXPLAINED_RESTRICTED_MEGA            (SYSTEM_FLAGS + 0x39) // Formerly unused R/S debug flag; 0x2AD belongs to a Route 120 hidden item.
@@ -1498,7 +1498,7 @@
 #define FLAG_LANDMARK_SKY_PILLAR                    (SYSTEM_FLAGS + 0x5E)
 
 #define FLAG_SYS_SHOAL_ITEM                         (SYSTEM_FLAGS + 0x5F)
-#define FLAG_SYS_B_DASH                             (SYSTEM_FLAGS + 0x60) // RECEIVED Running Shoes
+#define FLAG_SYS_B_DASH STORY_REACHED_GOT_RUNNING_SHOES // story machine: true from step GOT_RUNNING_SHOES (data/progression/story.yaml); never stored
 #define FLAG_SYS_CTRL_OBJ_DELETE                    (SYSTEM_FLAGS + 0x61)
 #define FLAG_SYS_RESET_RTC_ENABLE                   (SYSTEM_FLAGS + 0x62)
 
@@ -1543,7 +1543,7 @@
 
 #define FLAG_EC_GIFT_VERDANTURF_TOWN_MART                           (SYSTEM_FLAGS + 0x83) // Unused Flag
 
-#define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
+#define FLAG_RECEIVED_POKEDEX_FROM_BIRCH STORY_REACHED_GOT_POKEDEX // story machine: true from step GOT_POKEDEX (data/progression/story.yaml); never stored
 
 #define FLAG_EC_REPORT_C14_COMPLETE                      (SYSTEM_FLAGS + 0x85)
 #define FLAG_EC_REPORT_C26_COMPLETE                      (SYSTEM_FLAGS + 0x86)

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "constants/trainers.h"
@@ -1102,7 +1103,7 @@ TEST("Center guide: finale names the next unbeaten cabin and pending tickets")
 
 TEST("Center guide: Route 103 directs refused beginners to tools and leveling")
 {
-    FlagClear(FLAG_DEFEATED_RIVAL_ROUTE103);
+    StoryStageBefore(STORY_STEP_BEAT_RIVAL_103);
     FlagClear(FLAG_SYS_GAME_CLEAR);
     RemoveBagItem(ITEM_LEVELER, 1);
     // Existing tests leave no Leveler in the PC; a real under-cap partner

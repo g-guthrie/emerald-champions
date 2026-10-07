@@ -48,15 +48,16 @@ def load_story():
         for i, seg in enumerate(sched):
             a = max(lo, index[seg['from']])
             b = min(hi, index[sched[i + 1]['from']] if i + 1 < len(sched) else len(steps))
-            w = {'id': f"E{e['id']}_S{i}", 'from': steps[a] if a < len(steps) else steps[-1]}
+            w = {'id': f"E{e['id']}_S{i}", 'from': steps[a] if a < len(steps) else steps[-1], 'schedule': True}
             if b < len(steps): w['until'] = steps[b]
             if a >= b: w = {'id': w['id'], 'never': True, 'from': steps[0], 'until': steps[0]}
             if base and base.get('player'): w['player'] = base['player']
+            if base and base.get('player_from'): w['player_from'] = base['player_from']
             windows.append(w)
     for base in player_windows():
         src = by_id.get(base, {'from': steps[0]}) if base != 'ANY' else {'from': steps[0]}
         for p, suffix in (('male', 'M'), ('female', 'F')):
-            w = {k: v for k, v in src.items() if k in ('from', 'until', 'never')}
+            w = {k: v for k, v in src.items() if k in ('from', 'until', 'never', 'player_from')}
             w.update(id=f'{base}_{suffix}', player=p)
             windows.append(w)
     seen = set()
@@ -203,6 +204,8 @@ def generate():
     name_count = Counter(e['name'] for _, e in all_entities() if 'name' in e)
     for mapid, e in all_entities():
         # Names shared across maps (the two houses' rival family) have no single position.
+        if e.get('schedule'):
+            h.append(f"#define LOCALID_{e['name']}_LAST LOCALID_{e['name']}_S{len(e['schedule']) - 1}")
         if 'name' in e and 'at' in e and not isinstance(e['at'], dict) and name_count[e['name']] == 1:
             h.append(f"#define STORY_{e['name']}_X {e['at'][0]}")
             h.append(f"#define STORY_{e['name']}_Y {e['at'][1]}")
@@ -211,7 +214,9 @@ def generate():
          'const struct StoryWindow gStoryWindows[STORY_WINDOWS_COUNT + 1] =', '{']
     for w in windows:
         until = (f"STORY_STEP_{w['until']}" if w.get('until') is not None else 'STORY_STEP_COUNT')
-        c.append(f"    [STORY_{w['id']} - STORY_WINDOWS_START] = {{STORY_STEP_{w['from']}, {until}, {PLAYERS[w.get('player')]}}},")
+        pf = f"STORY_STEP_{w['player_from']}" if w.get('player_from') else '0'
+        sched = 1 if w.get('schedule') else 0
+        c.append(f"    [STORY_{w['id']} - STORY_WINDOWS_START] = {{STORY_STEP_{w['from']}, {until}, {PLAYERS[w.get('player')]}, {pf}, {sched}}},")
     c += ['};', '', 'const u8 *const gStoryStepNames[STORY_STEP_COUNT] =', '{']
     for s in steps:
         c.append(f'    [STORY_STEP_{s}] = (const u8 *)"{s}",')
@@ -393,7 +398,15 @@ def check():
     maps = [yaml.safe_load(open(f))['map'] for f in sorted(MAPS.glob('*.yaml'))]
     found = scan(maps)
     bad = {}
+    steps = set(yaml.safe_load(open(STORY))['steps'])
+    derived = {k for k, v in (table.get('engine') or {}).items() if v in steps}
     for (kind, subj), where in sorted(found.items()):
+        if kind == 'write':
+            # Writing old story state, a presence flag, a flag now derived from the step,
+            # the step itself, or staging: only advance_story moves the story.
+            if subj in ('VAR_STORY_STEP', 'story_stage') or subj in derived or classify('flag', subj, table) in ('story', 'window'):
+                bad.setdefault('writes story state', []).append((kind, subj, where))
+            continue
         c = classify(kind, subj, table)
         if c is None: bad.setdefault('unclassified', []).append((kind, subj, where))
         elif c in ('story', 'window'): bad.setdefault(f'still uses old {c} state', []).append((kind, subj, where))
@@ -494,6 +507,9 @@ COND = [
     (re.compile(r'^\s*(checkpartymove|getpartysize|checkplayergender|checktrainerflag|checkfieldmove)\b\s*(\w*)'), lambda m: ('player', (m.group(1) + ' ' + m.group(2)).strip())),
     (re.compile(r'^\s*(specialvar\s+\w+\s*,|special)\s*(\w+)'), lambda m: ('special', m.group(2))),
     (re.compile(r'^\s*callnative\s+(\w+)'), lambda m: ('special', m.group(1))),
+    (re.compile(r'^\s*(?:setflag|clearflag)\s+(\w+)'), lambda m: ('write', m.group(1))),
+    (re.compile(r'^\s*(?:setvar|addvar|subvar|copyvar)\s+(\w+)\s*,'), lambda m: ('write', m.group(1))),
+    (re.compile(r'^\s*story_stage\b'), lambda m: ('write', 'story_stage')),
 ]
 CHOICE = re.compile(r'MSGBOX_YESNO|yesnobox|multichoice|ShowScrollableMultichoice|ChooseStarter|ChoosePartyMon|ChooseMonFor|ScrollableMultichoice|ShowNatureGirl')
 OBJ_DEFAULT = dict(elevation=3, movement_type='MOVEMENT_TYPE_FACE_DOWN', movement_range_x=0, movement_range_y=0,

@@ -1125,6 +1125,13 @@
 	story_walk \obj, 2, fast=\fast
 	.endm
 
+	@ Debug only: place the story at a step without playing its scenes.
+	@ story.py check fails if a story-machine map's script uses it.
+	.macro story_stage step:req
+	callnative ScrCmd_storystage, requests_effects=1
+	.2byte STEP_\step
+	.endm
+
 	.macro getrandomspecies dest:req, option:req, arg1=0xFFFF, arg2=0xFFFF
 	callnative ScrCmd_getrandomspecies, requests_effects=1
 	.2byte \dest

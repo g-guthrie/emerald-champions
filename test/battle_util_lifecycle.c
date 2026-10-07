@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "main.h"
 #include "battle_util.h"
@@ -23,10 +24,11 @@ TEST("Battle utility: field gifts and starter grants need no battle allocation")
     gMain.inBattle = FALSE;
     gBattleStruct = NULL;
     ZeroPlayerPartyMons();
+    StoryStageAt(STORY_STEP_BIRCH_IN_DANGER);
     EXPECT(GiveEmeraldChampionsStarterPair(0, 1));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), GetStarterPokemon(0));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), GetStarterPokemon(1));
-    EXPECT_EQ(VarGet(VAR_EC_OPENING_STATE), EC_OPENING_PAIR_GRANTED);
+    EXPECT_EQ(GetStoryStep(), STORY_STEP_CHOSE_STARTERS);
     EXPECT(FlagGet(FLAG_SYS_POKEMON_GET));
     EXPECT_EQ(gBattleStruct, NULL);
     EXPECT_EQ(GiveEmeraldChampionsPreparedPokemonForTesting(SPECIES_BELDUM, 5), MON_GIVEN_TO_PARTY);

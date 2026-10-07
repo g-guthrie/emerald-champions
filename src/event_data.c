@@ -77,7 +77,7 @@ void DisableNationalPokedex(void)
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.nationalMagic = 0;
     *nationalDexVar = 0;
-    FlagClear(FLAG_SYS_NATIONAL_DEX);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
 }
 
 void EnableNationalPokedex(void)
@@ -85,7 +85,7 @@ void EnableNationalPokedex(void)
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.nationalMagic = 0xDA;
     *nationalDexVar = 0x302;
-    FlagSet(FLAG_SYS_NATIONAL_DEX);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
     gSaveBlock2Ptr->pokedex.order = 0;
     ResetPokedexScrollPositions();

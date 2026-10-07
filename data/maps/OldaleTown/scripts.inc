@@ -1,5 +1,5 @@
-.set LOCALID_MART_EMPLOYEE, 2
-.set LOCALID_RIVAL, 4
+.set LOCALID_MART_EMPLOYEE, LOCALID_OLDALE_MART_EMPLOYEE
+.set LOCALID_RIVAL, LOCALID_OLDALE_RIVAL
 
 OldaleTown_MapScripts:: @ 81E8EA2
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_OnTransition
@@ -8,20 +8,10 @@ OldaleTown_MapScripts:: @ 81E8EA2
 OldaleTown_OnTransition: @ 81E8EA8
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
-	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
+	@ The footprints man guards the west exit until the Pokedex (his schedule;
+	@ window OLDALE_WEST_GUARD runs his turn-back tile).
 	call_if_unset FLAG_RECEIVED_POKE_BALL_OLDALE_TOWN, OldaleTown_EventScript_MoveMartEmployee
-	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
 	end
-
-@ Keeps the west exit open on re-entry; OldaleTown_EventScript_BlockedPath runs while this var is 0.
-OldaleTown_EventScript_SetOldaleState:: @ 81E8ECC
-	setvar VAR_OLDALE_TOWN_STATE, 1
-	return
-
-OldaleTown_EventScript_BlockWestEntrance:: @ 81E8ED2
-	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 1, 11
-	setobjectmovementtype LOCALID_FOOTPRINTS_MAN, MOVEMENT_TYPE_FACE_LEFT
-	return
 
 OldaleTown_EventScript_MoveMartEmployee:: @ 81E8EDE
 	setobjectxyperm LOCALID_MART_EMPLOYEE, 13, 14
@@ -166,10 +156,10 @@ OldaleTown_Movement_PlayerNorth: @ 81E900B
 OldaleTown_EventScript_FootprintsMan:: @ 81E901F
 	lock
 	faceplayer
-	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_NotBlockingPath
+	goto_if_set STORY_REACHED_GOT_POKEDEX, OldaleTown_EventScript_NotBlockingPath
 	msgbox OldaleTown_Text_DiscoveredFootprints, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_FOOTPRINTS_MAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_FOOTPRINTS_MAN_S0, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -177,11 +167,11 @@ OldaleTown_EventScript_FootprintsMan:: @ 81E901F
 OldaleTown_EventScript_BlockedPath:: @ 81E903F
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerStepBack
-	applymovement LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_BackUp
+	applymovement LOCALID_FOOTPRINTS_MAN_S0, OldaleTown_Movement_BackUp
 	waitmovement 0
 	msgbox OldaleTown_Text_WaitDontComeInHere, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_FOOTPRINTS_MAN, OldaleTown_Movement_ReturnToOriginalPosition
+	applymovement LOCALID_FOOTPRINTS_MAN_S0, OldaleTown_Movement_ReturnToOriginalPosition
 	waitmovement 0
 	releaseall
 	end
@@ -256,8 +246,7 @@ OldaleTown_EventScript_RivalFinish:: @ 81E911A
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
 	waitmovement 0
 	removeobject LOCALID_RIVAL
-	setvar VAR_OLDALE_RIVAL_STATE, 2
-	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
+	advance_story RIVAL_LEFT_OLDALE
 	releaseall
 	end
 

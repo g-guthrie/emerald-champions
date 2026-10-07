@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_util.h"
@@ -50,8 +51,7 @@ bool32 GiveEmeraldChampionsStarterPair(u16 first, u16 second)
     GiveScriptedMonToPlayer(&pair[1], 1);
     VarSet(VAR_STARTER_MON, first);
     VarSet(VAR_EC_SECOND_STARTER, second + 1);
-    VarSet(VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED);
-    FlagSet(FLAG_SYS_POKEMON_GET);
+    AdvanceStory(STORY_STEP_CHOSE_STARTERS);
     return TRUE;
 }
 
@@ -62,9 +62,7 @@ u16 GetEmeraldChampionsSecondStarterIndex(void)
 
 bool32 HasEmeraldChampionsSecondStarter(void)
 {
-    u16 state = VarGet(VAR_EC_OPENING_STATE);
-
-    return state >= EC_OPENING_PAIR_GRANTED && state <= EC_OPENING_RESCUE_WON
+    return FlagGet(STORY_REACHED_CHOSE_STARTERS)
         && VarGet(VAR_EC_SECOND_STARTER) >= 1 && VarGet(VAR_EC_SECOND_STARTER) <= 3;
 }
 
@@ -86,7 +84,7 @@ void BufferEmeraldChampionsRivalBranch(void)
 bool32 IsEmeraldChampionsBirchRescueBattle(void)
 {
     return (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-        && VarGet(VAR_EC_OPENING_STATE) == EC_OPENING_PAIR_GRANTED;
+        && GetStoryStep() == STORY_STEP_CHOSE_STARTERS;
 }
 
 void CreateEmeraldChampionsBirchRescueParty(void)

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "script.h"
 #include "story.h"
 #include "constants/vars.h"
@@ -11,6 +12,11 @@
 // Set when a script tries to move the story anywhere but one step forward:
 // (current << 16) | requested. The chain test fails on any non-zero value.
 EWRAM_DATA u32 gStoryOrderViolation = 0;
+
+// Set when the story moves; the next frame the player has control, a scheduled
+// character whose segment closed is replaced by the segment now open (never mid-scene).
+// Other objects stay as scenes left them until the map reloads, as they always have.
+static EWRAM_DATA bool8 sStoryRefreshPending = FALSE;
 
 u16 GetStoryStep(void)
 {
@@ -29,10 +35,13 @@ bool32 IsStoryWindowOpen(u16 id)
 
     if (step < window->from || step >= window->until)
         return FALSE;
-    if (window->player == 1 && gSaveBlock2Ptr->playerGender != MALE)
-        return FALSE;
-    if (window->player == 2 && gSaveBlock2Ptr->playerGender != FEMALE)
-        return FALSE;
+    if (step >= window->playerFrom)
+    {
+        if (window->player == 1 && gSaveBlock2Ptr->playerGender != MALE)
+            return FALSE;
+        if (window->player == 2 && gSaveBlock2Ptr->playerGender != FEMALE)
+            return FALSE;
+    }
     return TRUE;
 }
 
@@ -49,7 +58,28 @@ bool32 AdvanceStory(u16 step)
         return FALSE;
     }
     VarSet(VAR_STORY_STEP, step);
+    sStoryRefreshPending = TRUE;
     return TRUE;
+}
+
+void StoryRefreshObjects(void)
+{
+    if (!sStoryRefreshPending)
+        return;
+    sStoryRefreshPending = FALSE;
+    for (u32 i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        struct ObjectEvent *obj = &gObjectEvents[i];
+        const struct ObjectEventTemplate *template;
+
+        if (!obj->active || obj->isPlayer)
+            continue;
+        template = GetObjectEventTemplateByLocalIdAndMap(obj->localId, obj->mapNum, obj->mapGroup);
+        if (template != NULL && IsStoryWindowId(template->flagId) && !IsStoryWindowOpen(template->flagId)
+         && gStoryWindows[template->flagId - STORY_WINDOWS_START].schedule)
+            RemoveObjectEvent(obj);
+    }
+    TrySpawnObjectEvents(0, 0);
 }
 
 // advance_story STEP (asm/macros/event.inc)
@@ -60,4 +90,36 @@ void ScrCmd_advancestory(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1);
     Script_RequestWriteVar(VAR_STORY_STEP);
     AdvanceStory(step);
+}
+
+void StoryStageAt(u16 step);
+
+// story_stage STEP (debug scripts only; asm/macros/event.inc)
+void ScrCmd_storystage(struct ScriptContext *ctx)
+{
+    u16 step = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1);
+    Script_RequestWriteVar(VAR_STORY_STEP);
+    StoryStageAt(step);
+}
+
+// Staging, for tests, debug menus and headless fixtures only: place the story at a
+// step without playing the scenes. Gameplay moves the story only with AdvanceStory.
+void StoryStageAt(u16 step)
+{
+    VarSet(VAR_STORY_STEP, step < STORY_STEP_COUNT ? step : STORY_STEP_COUNT - 1);
+    sStoryRefreshPending = TRUE;
+}
+
+void StoryStageAtLeast(u16 step)
+{
+    if (GetStoryStep() < step)
+        StoryStageAt(step);
+}
+
+void StoryStageBefore(u16 step)
+{
+    if (GetStoryStep() >= step)
+        StoryStageAt(step == 0 ? 0 : step - 1);
 }

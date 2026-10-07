@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "data.h"
@@ -39,12 +40,12 @@ TEST("Campaign factory: regional rivals keep their authored evolution stage and 
     u16 savedGeneration = VarGet(VAR_STARTER_GEN);
     u16 savedFirst = VarGet(VAR_STARTER_MON);
     u16 savedSecond = VarGet(VAR_EC_SECOND_STARTER);
-    u16 savedOpening = VarGet(VAR_EC_OPENING_STATE);
+    u16 savedOpening = GetStoryStep();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
     VarSet(VAR_STARTER_MON, 0);
     VarSet(VAR_EC_SECOND_STARTER, 2); // Grass/Fire pair leaves the regional Water starter.
-    VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
+    StoryStageAt(STORY_STEP_RESCUED_BIRCH);
     EXPECT_EQ(GetEmeraldChampionsRivalStarterIndex(), 2);
     for (u32 stage = 0; stage < ARRAY_COUNT(fights); stage++)
     {
@@ -93,7 +94,7 @@ TEST("Campaign factory: regional rivals keep their authored evolution stage and 
     VarSet(VAR_STARTER_GEN, savedGeneration);
     VarSet(VAR_STARTER_MON, savedFirst);
     VarSet(VAR_EC_SECOND_STARTER, savedSecond);
-    VarSet(VAR_EC_OPENING_STATE, savedOpening);
+    StoryStageAt(savedOpening);
 }
 
 TEST("Campaign factory: legacy unpaired saves use the native rival-index fallback")
@@ -103,13 +104,13 @@ TEST("Campaign factory: legacy unpaired saves use the native rival-index fallbac
     u16 savedGeneration = VarGet(VAR_STARTER_GEN);
     u16 savedFirst = VarGet(VAR_STARTER_MON);
     u16 savedSecond = VarGet(VAR_EC_SECOND_STARTER);
-    u16 savedOpening = VarGet(VAR_EC_OPENING_STATE);
+    u16 savedOpening = GetStoryStep();
     static const u16 aliases[] = {TRAINER_BRENDAN_ROUTE_103_MUDKIP, TRAINER_MAY_ROUTE_103_TORCHIC};
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
     VarSet(VAR_STARTER_GEN, 4);
     VarSet(VAR_STARTER_MON, 7); // Native first%3=Fire, so legacy rival takes Water.
     VarSet(VAR_EC_SECOND_STARTER, 0);
-    VarSet(VAR_EC_OPENING_STATE, 0);
+    StoryStageAt(STORY_STEP_NEW_GAME); // before the pair: the legacy single starter
     EXPECT_EQ(GetEmeraldChampionsRivalStarterIndex(), 2);
     for (u32 i = 0; i < ARRAY_COUNT(aliases); i++)
     {
@@ -124,5 +125,5 @@ TEST("Campaign factory: legacy unpaired saves use the native rival-index fallbac
     VarSet(VAR_STARTER_GEN, savedGeneration);
     VarSet(VAR_STARTER_MON, savedFirst);
     VarSet(VAR_EC_SECOND_STARTER, savedSecond);
-    VarSet(VAR_EC_OPENING_STATE, savedOpening);
+    StoryStageAt(savedOpening);
 }

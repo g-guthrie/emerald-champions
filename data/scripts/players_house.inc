@@ -553,13 +553,13 @@ PlayersHouse_1F_EventScript_SSTicketNoRoom::
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD
-	setvar VAR_0x800A, LOCALID_BRENDANS_HOUSE_MOM_S5  @ the same local id in May's house (both list Mom first)
+	setvar VAR_0x800A, LOCALID_BRENDANS_HOUSE_MOM_LAST  @ the same local id in May's house (both list Mom first)
 	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale::
 	setvar VAR_0x8008, FEMALE
 	setvar VAR_0x8009, LOCALID_PLAYERS_HOUSE_1F_DAD
-	setvar VAR_0x800A, LOCALID_BRENDANS_HOUSE_MOM_S5  @ the same local id in May's house (both list Mom first)
+	setvar VAR_0x800A, LOCALID_BRENDANS_HOUSE_MOM_LAST  @ the same local id in May's house (both list Mom first)
 	return
 
 PlayersHouse_1F_EventScript_DadApproachPlayerMale::

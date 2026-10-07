@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "dexnav.h"
 #include "event_data.h"
@@ -123,12 +124,12 @@ TEST("Rival tutorial: lab return requires completion and preserves Norman's late
     bool32 oldComplete = FlagGet(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE);
     VarSet(VAR_PETALBURG_GYM_STATE, gymState);
     FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-    FlagClear(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE);
+    StoryStageBefore(STORY_STEP_DEXNAV_LESSON_DONE);
     FlagClear(DN_FLAG_SEARCHING);
     ZeroPlayerPartyMons();
     PrepareRivalDexNavTutorial();
     if (complete)
-        FlagSet(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE);
+        StoryStageAtLeast(STORY_STEP_DEXNAV_LESSON_DONE);
     FinishRivalDexNavTutorial();
     EXPECT_EQ(FlagGet(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL), hidden);
     EXPECT_EQ(FlagGet(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE), complete);
@@ -137,9 +138,9 @@ TEST("Rival tutorial: lab return requires completion and preserves Norman's late
     else
         FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
     if (oldComplete)
-        FlagSet(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE);
+        StoryStageAtLeast(STORY_STEP_DEXNAV_LESSON_DONE);
     else
-        FlagClear(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE);
+        StoryStageBefore(STORY_STEP_DEXNAV_LESSON_DONE);
     VarSet(VAR_PETALBURG_GYM_STATE, oldGymState);
 }
 

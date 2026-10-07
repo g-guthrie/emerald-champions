@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "berry.h"
@@ -3592,7 +3593,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId) //Credit: Sierraffini
     }
 
     // Set flag for user convenience
-    FlagSet(FLAG_SYS_POKEMON_GET);
+    StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
@@ -3623,7 +3624,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Slow(u8 taskId)
     }
 
     // Set flag for user convenience
-    FlagSet(FLAG_SYS_POKEMON_GET);
+    StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
     if (spaceAvailable)
         PlayBGM(GetCurrentMapMusic());
 

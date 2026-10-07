@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/event_bg.h"
 #include "emerald_champions_studio.h"
 
 #if EC_HEADLESS_FIXTURES
@@ -28,12 +29,20 @@
 
 // Local Studio sessions only. Addresses are resolved from the matching ELF.
 // Commands execute on the game thread at an idle field boundary, never mid-script.
+bool32 ShouldTriggerScriptRun(const struct CoordEvent *coordEvent);
+
 EWRAM_DATA volatile u32 gEcStudioCommand = 0;
 EWRAM_DATA volatile u32 gEcStudioResult = 0;
 EWRAM_DATA volatile u32 gEcStudioArgs[8] = {0};
 EWRAM_DATA volatile u32 gEcStudioState[32] = {0};
 EWRAM_DATA volatile u32 gEcStudioActors[OBJECT_EVENTS_COUNT][6] = {{0}};
 EWRAM_DATA volatile u8 gEcStudioText[512] = {0};
+// Census, refreshed every overworld frame: the current map's trigger tiles and hidden
+// items as the game decides them (ShouldTriggerScriptRun, FlagGet), for the story diff.
+// Bytes: [n] then n x (x, y, elevation, fires-now); [m] then m x (x, y, kind, taken);
+// [k] then k x (graphics lo, graphics hi, x, y, movement type, hidden): every object the
+// map would spawn, from the live templates (after load scripts) and FlagGet on its flag.
+EWRAM_DATA volatile u8 gEcStudioCensus[1024] = {0};
 static EWRAM_DATA u32 sTextSerial = 0;
 static EWRAM_DATA u32 sTextLength = 0;
 static EWRAM_DATA u32 sFacingAfterWarp = 0;
@@ -62,6 +71,49 @@ void EmeraldChampionsStudioPoll(void)
         PlayerGetDestCoords(&x, &y);
         x -= MAP_OFFSET;
         y -= MAP_OFFSET;
+    }
+    if (field)
+    {
+        const struct MapEvents *events = gMapHeader.events;
+        u32 at = 1, n = 0, m = 0, mAt;
+        for (u32 i = 0; i < events->coordEventCount && at + 4 < sizeof(gEcStudioCensus) - 1; i++)
+        {
+            const struct CoordEvent *c = &events->coordEvents[i];
+            if (c->script == NULL || c->trigger == TRIGGER_RUN_IMMEDIATELY)
+                continue;
+            gEcStudioCensus[at++] = c->x;
+            gEcStudioCensus[at++] = c->y;
+            gEcStudioCensus[at++] = c->elevation;
+            gEcStudioCensus[at++] = ShouldTriggerScriptRun(c) ? 1 : 0;
+            n++;
+        }
+        gEcStudioCensus[0] = n;
+        mAt = at++;
+        for (u32 i = 0; i < events->bgEventCount && at + 4 < sizeof(gEcStudioCensus) - 1; i++)
+        {
+            const struct BgEvent *b = &events->bgEvents[i];
+            gEcStudioCensus[at++] = b->x;
+            gEcStudioCensus[at++] = b->y;
+            gEcStudioCensus[at++] = b->kind;
+            gEcStudioCensus[at++] = (b->kind == BG_EVENT_HIDDEN_ITEM) ? FlagGet(b->bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START) : 0;
+            m++;
+        }
+        gEcStudioCensus[mAt] = m;
+        {
+            u32 k = 0, kAt = at++;
+            for (u32 i = 0; i < events->objectEventCount && at + 6 < sizeof(gEcStudioCensus) - 1; i++)
+            {
+                const struct ObjectEventTemplate *o = &gSaveBlock1Ptr->objectEventTemplates[i];
+                gEcStudioCensus[at++] = o->graphicsId & 0xFF;
+                gEcStudioCensus[at++] = o->graphicsId >> 8;
+                gEcStudioCensus[at++] = o->x;
+                gEcStudioCensus[at++] = o->y;
+                gEcStudioCensus[at++] = o->movementType;
+                gEcStudioCensus[at++] = FlagGet(o->flagId) ? 1 : 0;
+                k++;
+            }
+            gEcStudioCensus[kAt] = k;
+        }
     }
     gEcStudioState[0] = ready;
     gEcStudioState[1] = gMain.inBattle;

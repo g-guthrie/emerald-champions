@@ -52,7 +52,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE"
+      "flag": "STORY_ROUTE101_BIRCH_CHASED"
     },
     {
       "local_id": "LOCALID_ROUTE101_BIRCHS_BAG",
@@ -66,7 +66,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route101_EventScript_BirchsBag",
-      "flag": "FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG"
+      "flag": "STORY_ROUTE101_BIRCH_CHASED"
     },
     {
       "local_id": "LOCALID_ROUTE101_ZIGZAGOON",
@@ -80,7 +80,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_ROUTE_101_ZIGZAGOON"
+      "flag": "STORY_ROUTE101_BIRCH_CHASED"
     },
     {
       "local_id": "LOCALID_ROUTE101_PROF_BIRCH",
@@ -108,7 +108,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route101_EventScript_Boy",
-      "flag": "FLAG_HIDE_ROUTE_101_BOY"
+      "flag": "STORY_ROUTE101_BOY"
     },
     {
       "local_id": "LOCALID_ROUTE101_RIVAL_TUTORIAL",
@@ -122,7 +122,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EC_RivalDexNavTutorial_Begin",
-      "flag": "FLAG_HIDE_ROUTE101_DEXNAV_RIVAL"
+      "flag": "STORY_ROUTE101_DEXNAV_RIVAL"
     },
     {
       "local_id": "LOCALID_ROUTE101_POOCHYENA",
@@ -136,7 +136,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_ROUTE_101_ZIGZAGOON"
+      "flag": "STORY_ROUTE101_BIRCH_CHASED"
     }
   ],
   "warp_events": [],
@@ -146,7 +146,7 @@
       "x": 10,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
+      "var": "STORY_ROUTE101_RESCUE_START",
       "var_value": "1",
       "script": "Route101_EventScript_StartBirchRescue"
     },
@@ -155,7 +155,7 @@
       "x": 11,
       "y": 19,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
+      "var": "STORY_ROUTE101_RESCUE_START",
       "var_value": "1",
       "script": "Route101_EventScript_StartBirchRescue"
     },
@@ -164,8 +164,8 @@
       "x": 10,
       "y": 18,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitSouth"
     },
     {
@@ -173,8 +173,8 @@
       "x": 11,
       "y": 18,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitSouth"
     },
     {
@@ -182,8 +182,8 @@
       "x": 6,
       "y": 16,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitWest"
     },
     {
@@ -191,8 +191,8 @@
       "x": 6,
       "y": 15,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitWest"
     },
     {
@@ -200,8 +200,8 @@
       "x": 6,
       "y": 17,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitWest"
     },
     {
@@ -209,8 +209,8 @@
       "x": 6,
       "y": 18,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitWest"
     },
     {
@@ -218,8 +218,8 @@
       "x": 7,
       "y": 13,
       "elevation": 3,
-      "var": "VAR_ROUTE101_STATE",
-      "var_value": "2",
+      "var": "STORY_ROUTE101_RESCUE_PEN",
+      "var_value": "1",
       "script": "Route101_EventScript_PreventExitNorth"
     }
   ],

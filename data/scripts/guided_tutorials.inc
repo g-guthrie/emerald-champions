@@ -2,8 +2,8 @@
 @ are preserved; no demonstration Pokémon is awarded to the player.
 EC_RivalDexNavTutorial_Begin::
 	lockall
-	goto_if_set FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE, EC_RivalDexNavTutorial_AlreadyDone
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
+	goto_if_set STORY_REACHED_DEXNAV_LESSON_DONE, EC_RivalDexNavTutorial_AlreadyDone
+	advance_story DEXNAV_LESSON
 	getplayerxy VAR_0x8004, VAR_0x8005
 	goto_if_eq VAR_0x8005, 19, EC_RivalDexNavTutorial_FromEntrance
 	msgbox EC_RivalDexNavTutorial_Text_ComeAlong, MSGBOX_DEFAULT
@@ -55,12 +55,11 @@ EC_RivalDexNavTutorial_Capture::
 	msgbox EC_RivalDexNavTutorial_Text_Gold, MSGBOX_DEFAULT
 	msgbox EC_RivalDexNavTutorial_Text_Chain, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE
+	advance_story DEXNAV_LESSON_DONE
 	special FinishRivalDexNavTutorial
 	applymovement LOCALID_ROUTE101_RIVAL_TUTORIAL, EC_RivalDexNavTutorial_Movement_Leave
 	waitmovement 0
 	removeobject LOCALID_ROUTE101_RIVAL_TUTORIAL
-	setflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
 	releaseall
 	end
 

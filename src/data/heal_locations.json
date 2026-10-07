@@ -6,7 +6,7 @@
       "x": 4,
       "y": 2,
       "respawn_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
-      "respawn_npc": "LOCALID_BRENDANS_HOUSE_MOM_S5",
+      "respawn_npc": "LOCALID_BRENDANS_HOUSE_MOM_LAST",
       "respawn_x": 2,
       "respawn_y": 7
     },
@@ -16,7 +16,7 @@
       "x": 4,
       "y": 2,
       "respawn_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
-      "respawn_npc": "LOCALID_MAYS_HOUSE_MOM_S5",
+      "respawn_npc": "LOCALID_MAYS_HOUSE_MOM_LAST",
       "respawn_x": 8,
       "respawn_y": 7
     },
@@ -107,7 +107,7 @@
       "x": 5,
       "y": 9,
       "respawn_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
-      "respawn_npc": "LOCALID_BRENDANS_HOUSE_MOM_S5",
+      "respawn_npc": "LOCALID_BRENDANS_HOUSE_MOM_LAST",
       "respawn_x": 2,
       "respawn_y": 7
     },
@@ -117,7 +117,7 @@
       "x": 14,
       "y": 9,
       "respawn_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
-      "respawn_npc": "LOCALID_MAYS_HOUSE_MOM_S5",
+      "respawn_npc": "LOCALID_MAYS_HOUSE_MOM_LAST",
       "respawn_x": 8,
       "respawn_y": 7
     },

@@ -19,7 +19,7 @@ entities:
     advances: GOT_RUNNING_SHOES
     text:
       wait: 'Mom: Wait, {PLAYER}!'
-      gift: 'Mom: {PLAYER}! {PLAYER}! Did you\nintroduce yourself to Prof. Birch?\pOh! What adorable Pokémon!\nProf. Birch gave you both? How nice!\pYou''re your father''s child, all right.\nYou look good together with Pokémon!\pHere, honey! If you''re going out on an\nadventure, take Dad''s {GIFT_1}.\pHe never uses it anyway!'
+      gift: 'Mom: {PLAYER}! {PLAYER}! Did you\nintroduce yourself to Prof. Birch?\pOh! What adorable Pokémon!\nProf. Birch gave you both? How nice!\pYou''re your father''s child, all right.\nYou look good together with Pokémon!\pHere, honey! If you''re going out on an\nadventure, take Dad''s old Fishing Rod.\pHe never uses it anyway!'
       shoes: 'Mom: Oh, and put these on, too!'
       switched: '{PLAYER} switched shoes with the\nRunning Shoes.'
       explain: 'Mom: They came with a note:\p“Hold the B Button to run.\nNow get out there and explore!”'

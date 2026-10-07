@@ -98,8 +98,8 @@
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
 #define VAR_FALLARBOR_TOWN_STATE                         0x404E // 0: rival warning pending, 1: complete
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
-#define VAR_LITTLEROOT_TOWN_STATE                        0x4050
-#define VAR_OLDALE_TOWN_STATE                            0x4051
+#define VAR_UNUSED_0x4050                                0x4050 // Unused Var; was VAR_LITTLEROOT_TOWN_STATE, replaced by VAR_STORY_STEP (story machine)
+#define VAR_UNUSED_0x4051                                0x4051 // Unused Var; was VAR_OLDALE_TOWN_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point
@@ -114,7 +114,7 @@
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
 #define VAR_SOOTOPOLIS_CITY_STATE                        0x405E // SOOTOPOLIS_STATE_* (constants/quest_states.h)
 #define VAR_EVER_GRANDE_CITY_STATE                       0x405F // Unused Var
-#define VAR_ROUTE101_STATE                               0x4060
+#define VAR_UNUSED_0x4060                                0x4060 // Unused Var; was VAR_ROUTE101_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_CHANSEY_NURSE_STATE                          0x4061 // CHANSEY_NURSE_* (constants/quest_states.h)
 #define VAR_STORY_STEP                                   0x4062 // The story machine: src/story.c, data/progression/story.yaml
 #define VAR_ROUTE104_STATE                               0x4063
@@ -153,7 +153,7 @@
 #define VAR_EC_REPEL_SPRAY_STEPS                         0x4081 // Emerald Champions: Repel Spray steps remaining (was unused VAR_ROUTE134_STATE).
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
 #define VAR_STARTER_GEN                                  0x4083 // 1=Kanto through 9=Paldea; 0 safely defaults to Hoenn.
-#define VAR_BIRCH_LAB_STATE                              0x4084
+#define VAR_UNUSED_0x4084                                0x4084 // Unused Var; was VAR_BIRCH_LAB_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
 #define VAR_CABLE_CLUB_STATE                             0x4087
@@ -162,12 +162,12 @@
 #define VAR_CONTEST_PRIZE_PICKUP                         0x408A
 #define VAR_LEGENDARY_SIGNS_UNLOCKED_4                   0x408B // Append-only Sign IDs 64-79.
 #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN              0x408C
-#define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
+#define VAR_UNUSED_0x408D                                0x408D // Unused Var; was VAR_LITTLEROOT_RIVAL_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
 #define VAR_DEVON_CORP_3F_STATE                          0x408F
 #define VAR_BRINEY_HOUSE_STATE                           0x4090
 #define VAR_POKE_VIAL_CHARGES                            0x4091 // Remaining portable party-heal uses.
-#define VAR_LITTLEROOT_INTRO_STATE                       0x4092
+#define VAR_UNUSED_0x4092                                0x4092 // Unused Var; was VAR_LITTLEROOT_INTRO_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_MAUVILLE_GYM_STATE                           0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE                     0x4094
 #define VAR_LILYCOVE_FAN_CLUB_STATE                      0x4095
@@ -224,7 +224,7 @@
 #define VAR_FOSSIL_RESURRECTION_STATE                    0x40C4
 #define VAR_WHICH_FOSSIL_REVIVED                         0x40C5
 #define VAR_STEVENS_HOUSE_STATE                          0x40C6
-#define VAR_OLDALE_RIVAL_STATE                           0x40C7
+#define VAR_UNUSED_0x40C7                                0x40C7 // Unused Var; was VAR_OLDALE_RIVAL_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_JAGGED_PASS_STATE                            0x40C8
 #define VAR_SCOTT_PETALBURG_ENCOUNTER                    0x40C9
 #define VAR_SKY_PILLAR_STATE                             0x40CA
@@ -254,7 +254,7 @@
 #define VAR_DEX_UPGRADE_JOHTO_STARTER_STATE                 0x40E0  // Restored from Inclement Emerald. Reclaimed the
         // id of VAR_STEVEN_STARTER_STONE_DELIVERY, which had zero references in data/, src/ or include/.
 #define VAR_EC_SECOND_STARTER                         0x40E1 // 0 unset; second regional starter index + 1.
-#define VAR_EC_OPENING_STATE                         0x40E2 // EC_OPENING_* transaction state.
+#define VAR_UNUSED_0x40E2                                0x40E2 // Unused Var; was VAR_EC_OPENING_STATE, replaced by VAR_STORY_STEP (story machine)
 #define VAR_EC_CIRCUIT_BEST_WINS                         0x40E3 // Best observed Circuit streak; 0 means no record yet.
 #define VAR_LEGENDARY_RELIC_DELIVERY_2                    0x40E4 // Pending bits 24-31 and earned grant bits 6-13. Reclaimed
         // VAR_GIFT_UNUSED_7, which was only ever cleared to 0 and never read.

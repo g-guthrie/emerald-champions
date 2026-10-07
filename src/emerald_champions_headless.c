@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "emerald_champions_studio.h"
 #include "reload_save.h"
 #include "money.h"
@@ -395,9 +396,9 @@ static void PrepareBookResearchScene(void)
     SetMoney(&gSaveBlock1Ptr->money, 6000);
     for (u32 badge = 0; badge < badges; badge++)
         FlagSet(FLAG_BADGE01_GET + badge);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-    FlagSet(FLAG_SYS_POKEDEX_GET);
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
     VarSet(VAR_WEATHER_INSTITUTE_STATE, 1);
     VarSet(VAR_REPEL_STEP_COUNT, 250);
@@ -789,7 +790,7 @@ static void PrepareHeadlessPokedex(void)
         gSaveBlock2Ptr->pokedex.order = ORDER_ALPHABETICAL;
     }
 
-    FlagSet(FLAG_SYS_POKEDEX_GET);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     EnableNationalPokedex();
     for (u32 i = 0; i < count; i++)
     {
@@ -1266,12 +1267,12 @@ static void PrepareHeadlessEconomyPokemon(void)
         FlagSet(FLAG_BADGE01_GET + badge);
     FlagSet(FLAG_SYS_GAME_CLEAR);
     FlagSet(FLAG_IS_CHAMPION);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-    FlagSet(FLAG_ADVENTURE_STARTED);
-    FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+    StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
     FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-    VarSet(VAR_BIRCH_LAB_STATE, 5);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 85, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     if (gEcHeadlessFixtureParam <= 2)
@@ -2173,8 +2174,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 5, OTID_STRUCT_PLAYER_ID);
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_MUDKIP, 5, OTID_STRUCT_PLAYER_ID);
         CalculatePlayerPartyCount();
-        FlagSet(FLAG_SYS_POKEMON_GET);
-        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
+        StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
+        StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
         EmeraldChampionsAgentBattleBegin(gEcHeadlessFixtureParam & 0xFF,
                                          (gEcHeadlessFixtureParam >> 8) & 0xFF);
         // Wattson awards the Mega Ring with his third badge, the cap-40 stage.
@@ -2200,12 +2201,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         if (gEcHeadlessFixtureParam == 101)
         {
             // The real opening: empty party at Birch's bag, before the pair is chosen.
-            VarSet(VAR_ROUTE101_STATE, 2);
-            VarSet(VAR_EC_OPENING_STATE, EC_OPENING_UNSELECTED);
-            FlagClear(FLAG_HIDE_ROUTE_101_ZIGZAGOON);
-            FlagClear(FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE);
-            FlagClear(FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG);
-            FlagClear(FLAG_RESCUED_BIRCH);
+            StoryStageAt(STORY_STEP_BIRCH_IN_DANGER);
             LoadHeadlessMap(MAP_ROUTE101, 7, 15);
             return;
         }
@@ -2215,8 +2211,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         GiveMonInitialMoveset(&gParties[B_TRAINER_PLAYER][0]);
         GiveMonInitialMoveset(&gParties[B_TRAINER_PLAYER][1]);
         CalculatePlayerPartyCount();
-        FlagSet(FLAG_SYS_POKEMON_GET);
-        VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
+        StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
+        StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
         if (gEcHeadlessFixtureParam == 4)
         {
             VarSet(VAR_PETALBURG_CITY_STATE, 1);
@@ -2316,12 +2312,12 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
 
         gEcHeadlessCampaignBattleSerial = 0;
         gEcHeadlessCampaignCaptureSerial = 0;
-        FlagClear(FLAG_SYS_POKEDEX_GET);
-        FlagClear(FLAG_RECEIVED_DEXNAV);
-        FlagClear(FLAG_SYS_NATIONAL_DEX);
-        FlagClear(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
-        FlagClear(FLAG_ADVENTURE_STARTED);
-        FlagSet(FLAG_SYS_POKEMON_GET);
+        StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+        StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+        StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+        StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+        StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+        StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
         CreateHealthyHeadlessMon(
             &gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 10,
             OTID_STRUCT_PLAYER_ID
@@ -2413,7 +2409,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         {
             // Cap/UI fixture: real item, Leveler, summary and storage flows.
             FlagSet(FLAG_DELIVERED_DEVON_GOODS); // Chapter cap 30.
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             AddBagItem(ITEM_MEGA_RING, 1);
             AddBagItem(ITEM_VENUSAURITE, 1);
             AddBagItem(ITEM_CHARIZARDITE_X, 1);
@@ -2478,7 +2474,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
             CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_EEVEE, 30, OTID_STRUCT_PLAYER_ID);
             CalculatePlayerPartyCount();
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             FlagSet(FLAG_BADGE01_GET);
             FlagSet(FLAG_BADGE02_GET);
             FlagClear(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
@@ -2486,7 +2482,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             VarSet(VAR_STARTER_GEN, 3);
             VarSet(VAR_STARTER_MON, 0);
             VarSet(VAR_EC_SECOND_STARTER, 2);
-            VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
+            StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
             if (gEcHeadlessFixtureParam == 15)
                 for (u32 badge = 0; badge < 8; badge++)
                     FlagSet(FLAG_BADGE01_GET + badge);
@@ -2657,9 +2653,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (index >= ARRAY_COUNT(sEcHeadlessMapSweep))
                 break;
             // Established-save state so story objects are in their normal positions.
-            FlagSet(FLAG_SYS_POKEDEX_GET);
-            FlagSet(FLAG_RECEIVED_DEXNAV);
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+            StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             FlagSet(FLAG_SYS_POKENAV_GET);
             // Ground Mega Stone actors only spawn once the Ring is carried.
             AddBagItem(ITEM_MEGA_RING, 1);
@@ -2678,7 +2674,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam == EC_HEADLESS_LEAF_FIRST_BATTLE)
                 CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 80, OTID_STRUCT_PLAYER_ID);
             CalculatePlayerPartyCount();
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             VarSet(VAR_LEAF_STATE, 0);
             FlagClear(FLAG_DEFEATED_LEAF);
             ClearTrainerFlag(TRAINER_LEAF_ALTERING_CAVE);
@@ -2734,7 +2730,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 30, OTID_STRUCT_PLAYER_ID);
             CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 30, OTID_STRUCT_PLAYER_ID);
             CalculatePlayerPartyCount();
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             ClearBag();
             memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
             VarSet(VAR_STARTER_MON, 1);
@@ -2765,16 +2761,16 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, OTID_STRUCT_PLAYER_ID);
             CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 20, OTID_STRUCT_PLAYER_ID);
             CalculatePlayerPartyCount();
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             ClearBag();
             memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
             // Opening reward/bracelet audit: synthetic prerequisites, native scripts.
             if (gEcHeadlessFixtureParam >= 252 && gEcHeadlessFixtureParam <= 283)
             {
                 u32 scene = gEcHeadlessFixtureParam;
-                FlagSet(FLAG_ADVENTURE_STARTED);
-                FlagSet(FLAG_RESCUED_BIRCH);
-                FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+                StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 FlagClear(FLAG_BADGE01_GET);
                 FlagClear(FLAG_BADGE02_GET);
                 VarSet(VAR_PETALBURG_CITY_STATE, 3);
@@ -3418,7 +3414,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     else if (gEcHeadlessFixtureParam <= 170)
                     {
                         // Full roster for real three-of-six selection and restoration.
-                        FlagSet(FLAG_ADVENTURE_STARTED);
+                        StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                         SetLastHealLocationWarp(HEAL_LOCATION_MOSSDEEP_CITY);
                         PrepareCircuitParty();
                         for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
@@ -4139,7 +4135,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             {
                 FlagSet(FLAG_BADGE01_GET);
                 FlagSet(FLAG_BADGE02_GET);
-                FlagSet(FLAG_ADVENTURE_STARTED);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 FlagSet(FLAG_RECEIVED_POKENAV);
                 FlagSet(FLAG_SYS_POKENAV_GET);
                 FlagSet(FLAG_DELIVERED_DEVON_GOODS);
@@ -4164,7 +4160,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam == 28)
             {
                 FlagSet(FLAG_BADGE01_GET);
-                FlagSet(FLAG_ADVENTURE_STARTED);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 FlagSet(FLAG_RECEIVED_POKENAV);
                 FlagSet(FLAG_SYS_POKENAV_GET);
                 FlagSet(FLAG_DELIVERED_DEVON_GOODS);
@@ -4176,7 +4172,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam == 27)
             {
                 FlagSet(FLAG_BADGE01_GET);
-                FlagSet(FLAG_ADVENTURE_STARTED);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
                 FlagSet(FLAG_RECEIVED_POKENAV);
                 FlagClear(FLAG_DELIVERED_DEVON_GOODS);
@@ -4191,7 +4187,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam == 25 || gEcHeadlessFixtureParam == 26)
             {
                 FlagSet(FLAG_BADGE01_GET);
-                FlagSet(FLAG_ADVENTURE_STARTED);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 FlagSet(FLAG_RETURNED_DEVON_GOODS);
                 if (gEcHeadlessFixtureParam == 25)
                 {
@@ -4212,7 +4208,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam >= 22 && gEcHeadlessFixtureParam <= 24)
             {
                 FlagSet(FLAG_BADGE01_GET);
-                FlagSet(FLAG_ADVENTURE_STARTED);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 FlagSet(FLAG_RECEIVED_POKENAV);
                 FlagSet(FLAG_SYS_POKENAV_GET);
                 if (gEcHeadlessFixtureParam == 22)
@@ -4276,9 +4272,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             if (gEcHeadlessFixtureParam >= 10 && gEcHeadlessFixtureParam <= 16)
             {
                 StringCopy(gSaveBlock2Ptr->playerName, COMPOUND_STRING("WWWWWWW"));
-                FlagSet(FLAG_ADVENTURE_STARTED);
-                FlagSet(FLAG_RESCUED_BIRCH);
-                FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+                StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
                 VarSet(VAR_PETALBURG_CITY_STATE, 3);
                 VarSet(VAR_PETALBURG_GYM_STATE, 2);
                 if (gEcHeadlessFixtureParam <= 13)
@@ -4305,16 +4301,15 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 u32 storage = (gEcHeadlessFixtureParam - 4) % 3;
                 gSaveBlock2Ptr->playerGender = gEcHeadlessFixtureParam >= 7 ? FEMALE : MALE;
                 StringCopy(gSaveBlock2Ptr->playerName, COMPOUND_STRING("WWWWWWW"));
-                FlagSet(FLAG_RESCUED_BIRCH);
-                FlagSet(FLAG_DEFEATED_RIVAL_ROUTE103);
-                FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
-                FlagSet(FLAG_SYS_POKEDEX_GET);
-                FlagSet(FLAG_RECEIVED_DEXNAV);
-                FlagClear(FLAG_ADVENTURE_STARTED);
+                StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
+                StoryStageAtLeast(STORY_STEP_BEAT_RIVAL_103);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+                StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+                StoryStageBefore(STORY_STEP_GOT_POKEDEX);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-                VarSet(VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON);
-                VarSet(VAR_BIRCH_LAB_STATE, 4);
+                StoryStageAtLeast(STORY_STEP_RESCUED_BIRCH);
                 if (storage != 0)
                 {
                     struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GREAT_BALL)];
@@ -4368,7 +4363,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 break;
             CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 5, OTID_STRUCT_PLAYER_ID);
             CalculatePlayerPartyCount();
-            FlagSet(FLAG_SYS_POKEMON_GET);
+            StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
             ClearBag();
             for (slot = 0; slot < pocket->capacity; slot++)
                 BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POTION, 1);
@@ -4381,7 +4376,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         // have been cleared. Keep a real party and native Repel protection.
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 100, OTID_STRUCT_PLAYER_ID);
         CalculatePlayerPartyCount();
-        FlagSet(FLAG_SYS_POKEMON_GET);
+        StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
         FlagSet(FLAG_DEFEATED_ELECTRODE_2_NEW_MAUVILLE);
         FlagSet(FLAG_HIDE_NEW_MAUVILLE_ELECTRODE_2);
         FlagSet(FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER);
@@ -4391,9 +4386,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_START_MENU_FULL:
         // Every Start menu row an established save can show: Pokedex, DexNav, Pokemon,
         // Bag, PokeNav, Player, Save, Reload, Option, Exit (ten rows, two more than fit).
-        FlagSet(FLAG_SYS_POKEDEX_GET);
-        FlagSet(FLAG_RECEIVED_DEXNAV);
-        FlagSet(FLAG_SYS_POKEMON_GET);
+        StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+        StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
+        StoryStageAtLeast(STORY_STEP_CHOSE_STARTERS);
         FlagSet(FLAG_SYS_POKENAV_GET);
         gSaveFileStatus = SAVE_STATUS_OK; // makes the Reload row appear, as on a real save
         LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 7, 6);

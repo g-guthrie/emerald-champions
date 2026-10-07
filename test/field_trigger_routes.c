@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "bike.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
@@ -10,7 +11,7 @@
 
 extern const u8 RustboroCity_EventScript_HelpGetGoodsTrigger0[];
 extern const u8 RustboroCity_EventScript_ReturnGoodsTrigger0[];
-extern const u8 LittlerootTown_EventScript_NeedPokemonTriggerRight[];
+extern const u8 LittlerootTown_EventScript_NeedPokemonTrigger[];
 extern const u8 LittlerootTown_EventScript_GoSaveBirchTrigger[];
 extern const u8 NewMauville_Inside_EventScript_Rotom[];
 extern const u8 NewMauville_Inside_EventScript_Rotom2[];
@@ -40,7 +41,7 @@ TEST("Field triggers: shared tiles select the matching story state instead of th
         const u8 *first, *second;
     } cases[] = {
         {MAP_RUSTBORO_CITY, VAR_RUSTBORO_CITY_STATE, 3, 5, 30, 9, 3, RustboroCity_EventScript_HelpGetGoodsTrigger0, RustboroCity_EventScript_ReturnGoodsTrigger0},
-        {MAP_LITTLEROOT_TOWN, VAR_LITTLEROOT_TOWN_STATE, 0, 1, 11, 1, 3, LittlerootTown_EventScript_NeedPokemonTriggerRight, LittlerootTown_EventScript_GoSaveBirchTrigger},
+        {MAP_LITTLEROOT_TOWN, VAR_STORY_STEP, STORY_STEP_NEW_GAME, STORY_STEP_MET_RIVAL, 11, 1, 3, LittlerootTown_EventScript_NeedPokemonTrigger, LittlerootTown_EventScript_GoSaveBirchTrigger},
         {MAP_NEW_MAUVILLE_INSIDE, VAR_NEW_MAUVILLE_STATE, 2, 4, 32, 6, 0, NewMauville_Inside_EventScript_Rotom, NewMauville_Inside_EventScript_Rotom2},
     };
     struct MapHeader saved = gMapHeader;

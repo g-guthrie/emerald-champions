@@ -1129,7 +1129,8 @@ static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 e
     return WARP_ID_NONE;
 }
 
-static bool32 ShouldTriggerScriptRun(const struct CoordEvent *coordEvent)
+// Not static: the Studio census asks this same function (emerald_champions_studio.c).
+bool32 ShouldTriggerScriptRun(const struct CoordEvent *coordEvent)
 {
     u16 *varPtr;
 

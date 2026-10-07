@@ -5,7 +5,7 @@
 #          a time. Each step names the script that moves the story onto it.
 # windows: when something exists. Open from `from` (inclusive) until `until`
 #          (exclusive; omitted = forever); `player: male|female` limits it to one
-#          player. A map object whose flag is STORY_<id> is present only while its
+#          player (from step `player_from` on, if given). A map object whose flag is STORY_<id> is present only while its
 #          window is open; a trigger whose var is STORY_<id> with var_value 1 fires
 #          only while it is open (as a var, a window reads 1 open, 0 closed). Every step S also gets STORY_REACHED_S, which reads
 #          as a set flag once the story has reached S (scripts/story.py, src/story.c).
@@ -22,13 +22,14 @@ steps:
   - MET_RIVAL_MOM       # *_1F_EventScript_YoureNewNeighbor (rival's house 1F on frame)
   - RIVAL_UPSTAIRS      # *_2F_EventScript_SetReadyToMeet* (rival's house 2F on transition)
   - MET_RIVAL           # *_EventScript_MeetRival / MeetBrendan / MeetMay
+  - SENT_TO_BIRCH       # LittlerootTown_EventScript_GoSaveBirchTrigger (the twin's plea; also by talking to her)
   - ON_ROUTE101         # Route101_EventScript_HideMapNamePopup (Route 101 on frame)
   - BIRCH_IN_DANGER     # Route101_EventScript_StartBirchRescue (trigger tiles)
   - CHOSE_STARTERS      # ChooseStarter (C: the pair is granted; replaces VAR_EC_OPENING_STATE)
   - RESCUED_BIRCH       # Route101_EventScript_FinishRescue
   - SENT_TO_RIVAL_103   # LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival
-  - TOURED_OLDALE_MART  # OldaleTown_Mart_EventScript_FirstShopping (the nurse's tools: Leveler)
-  - BEAT_RIVAL_103      # Route103_EventScript_RivalEnd (requires: Leveler held, party at the cap)
+  - BEAT_RIVAL_103      # Route103_EventScript_RivalEnd (rival requires: Leveler held, party at the cap;
+                        # the Leveler comes from any nurse or the Oldale Mart visitor, whichever is first)
   - RIVAL_LEFT_OLDALE   # OldaleTown_EventScript_RivalFinish, or LittlerootTown on transition
   - GOT_POKEDEX         # LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
   - GOT_RUNNING_SHOES   # LittlerootTown_EventScript_SetReceivedRunningShoes
@@ -40,15 +41,15 @@ windows:
   # The truck and the two houses. Brendan's house is the player's when male, May's when
   # female; each house has the player's mom and movers, and the rival's mom and sibling.
   - {id: TRUCK_EXIT,                 from: NEW_GAME, until: TRUCK_STOPPED}
-  - {id: TRUCK_PARKED,               from: NEW_GAME, until: ENTERED_HOUSE}   # per player: in front of their house
-  - {id: BRENDANS_HOUSE_MOM,         from: NEW_GAME, player: male}
-  - {id: MAYS_HOUSE_MOM,             from: NEW_GAME, player: female}
-  - {id: BRENDANS_HOUSE_RIVAL_MOM,   from: NEW_GAME, player: female}
-  - {id: MAYS_HOUSE_RIVAL_MOM,       from: NEW_GAME, player: male}
-  - {id: BRENDANS_HOUSE_RIVAL_SIBLING, from: NEW_GAME, player: female}
-  - {id: MAYS_HOUSE_RIVAL_SIBLING,   from: NEW_GAME, player: male}
-  - {id: BRENDANS_HOUSE_RIVALS_BALL, from: NEW_GAME, until: MET_RIVAL, player: female}
-  - {id: MAYS_HOUSE_RIVALS_BALL,     from: NEW_GAME, until: MET_RIVAL, player: male}
+  - {id: TRUCK_PARKED,               from: NEW_GAME, until: ENTERED_HOUSE, player_from: TRUCK_STOPPED}   # per player: in front of their house
+  - {id: BRENDANS_HOUSE_MOM,         from: NEW_GAME, player: male, player_from: TRUCK_STOPPED}
+  - {id: MAYS_HOUSE_MOM,             from: NEW_GAME, player: female, player_from: TRUCK_STOPPED}
+  - {id: BRENDANS_HOUSE_RIVAL_MOM,   from: NEW_GAME, player: female, player_from: TRUCK_STOPPED}
+  - {id: MAYS_HOUSE_RIVAL_MOM,       from: NEW_GAME, player: male, player_from: TRUCK_STOPPED}
+  - {id: BRENDANS_HOUSE_RIVAL_SIBLING, from: NEW_GAME, player: female, player_from: TRUCK_STOPPED}
+  - {id: MAYS_HOUSE_RIVAL_SIBLING,   from: NEW_GAME, player: male, player_from: TRUCK_STOPPED}
+  - {id: BRENDANS_HOUSE_RIVALS_BALL, from: NEW_GAME, until: MET_RIVAL, player: female, player_from: TRUCK_STOPPED}
+  - {id: MAYS_HOUSE_RIVALS_BALL,     from: NEW_GAME, until: MET_RIVAL, player: male, player_from: TRUCK_STOPPED}
   - {id: PLAYERS_HOUSE_MOVERS,       from: NEW_GAME, until: CLOCK_SET}
   - {id: HOUSE_SENT_UPSTAIRS,        from: SENT_UPSTAIRS, until: UPSTAIRS}       # Mom: go see your room
   - {id: BRENDANS_HOUSE_NEW_NEIGHBOR, from: SENT_TO_RIVAL, until: MET_RIVAL_MOM, player: female}
@@ -60,13 +61,15 @@ windows:
   - {id: LITTLEROOT_FAT_MAN,         from: ENTERED_HOUSE}
   - {id: LITTLEROOT_NORTH_GUARD,     from: NEW_GAME, until: MET_RIVAL}          # twin: no Pokemon, no Route 101
   - {id: LITTLEROOT_TWIN_WORRIED,    from: MET_RIVAL, until: RESCUED_BIRCH}     # twin on the left exit tile
-  - {id: LITTLEROOT_SEND_TO_BIRCH,   from: MET_RIVAL, until: ON_ROUTE101}       # twin's plea on the right exit tile
+  - {id: LITTLEROOT_SEND_TO_BIRCH,   from: MET_RIVAL, until: SENT_TO_BIRCH}     # twin's plea on the right exit tile
   - {id: LITTLEROOT_TWIN_FREE,       from: RESCUED_BIRCH}
   - {id: LITTLEROOT_MOM_SHOES,       from: GOT_POKEDEX, until: GOT_RUNNING_SHOES}
   # Route 101
   - {id: ROUTE101_RESCUE_START,      from: ON_ROUTE101, until: BIRCH_IN_DANGER}
   - {id: ROUTE101_RESCUE_PEN,        from: BIRCH_IN_DANGER, until: RESCUED_BIRCH}
   - {id: ROUTE101_BIRCH_CHASED,      from: NEW_GAME, until: RESCUED_BIRCH}
+  - {id: ROUTE101_BOY,               from: SENT_TO_RIVAL_103}
+  - {id: ROUTE101_DEXNAV_RIVAL,      from: GOT_POKEDEX, until: DEXNAV_LESSON_DONE}
   # Oldale Town
   - {id: OLDALE_WEST_GUARD,          from: NEW_GAME, until: GOT_POKEDEX}
-  - {id: OLDALE_RIVAL,               from: BEAT_RIVAL_103, until: RIVAL_LEFT_OLDALE}
+  - {id: OLDALE_RIVAL,               from: BEAT_RIVAL_103, until: RIVAL_LEFT_OLDALE}   # and his trigger tiles

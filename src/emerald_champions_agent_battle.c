@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "emerald_champions_agent_battle.h"
 
 #if EC_HEADLESS_FIXTURES
@@ -882,7 +883,7 @@ static void WriteRescuePlayerFactory(void)
     gEcAgentBattlePlayerFactory[3] = VarGet(VAR_STARTER_MON);
     gEcAgentBattlePlayerFactory[4] = GetEmeraldChampionsSecondStarterIndex();
     gEcAgentBattlePlayerFactory[5] = gSaveBlock2Ptr->playerGender;
-    gEcAgentBattlePlayerFactory[6] = VarGet(VAR_EC_OPENING_STATE);
+    gEcAgentBattlePlayerFactory[6] = GetStoryStep();
     for (u32 slot = 0; slot < 2; slot++)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
@@ -934,7 +935,7 @@ static void StartRequestedScriptedWildBattle(void)
         }
         ZeroPlayerPartyMons();
         ZeroEnemyPartyMons();
-        VarSet(VAR_EC_OPENING_STATE, 0);
+        StoryStageAt(STORY_STEP_BIRCH_IN_DANGER);
         if (!GiveEmeraldChampionsStarterPair(gEcAgentBattleFirstStarter, gEcAgentBattleSecondStarter))
         {
             gEcAgentBattleResult = EC_AGENT_BATTLE_BAD_PARTY;

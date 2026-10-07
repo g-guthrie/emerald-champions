@@ -220,7 +220,7 @@ void FinishRivalDexNavTutorial(void)
     VarSet(DN_VAR_SPECIES, sRivalSavedSearchTarget);
     gDexNavSpecies = SPECIES_NONE;
     gPlayerAvatar.creeping = FALSE;
-    if (sReturnRivalToLab && FlagGet(FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE))
+    if (sReturnRivalToLab && FlagGet(STORY_REACHED_DEXNAV_LESSON_DONE))
         FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
     sRivalTutorialPhase = DEMO_NONE;
 }

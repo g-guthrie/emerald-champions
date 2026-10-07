@@ -162,8 +162,13 @@ LittlerootTown_EventScript_GoSaveBirch:: @ 81E805D
 	closemessage
 	applymovement LOCALID_LITTLEROOT_TWIN_WORRIED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
+	call_if_eq VAR_STORY_STEP, STORY_STEP_MET_RIVAL, LittlerootTown_EventScript_SentToBirch
 	release
 	end
+
+LittlerootTown_EventScript_SentToBirch:
+	advance_story SENT_TO_BIRCH
+	return
 
 LittlerootTown_EventScript_YouSavedBirch:: @ 81E807A
 	special GetPlayerBigGuyGirlString
@@ -211,6 +216,7 @@ LittlerootTown_EventScript_GoSaveBirchTrigger:: @ 81E811F
 	closemessage
 	applymovement LOCALID_LITTLEROOT_TWIN_WORRIED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
+	advance_story SENT_TO_BIRCH
 	releaseall
 	end
 

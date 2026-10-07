@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "guided_tutorial.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
@@ -1594,6 +1595,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     CancelSignPostMessageBox(&inputStruct);
     if (!ArePlayerFieldControlsLocked())
     {
+        StoryRefreshObjects();
         if (ProcessPlayerFieldInput(&inputStruct) == 1)
         {
             LockPlayerFieldControls();

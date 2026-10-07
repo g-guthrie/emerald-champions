@@ -1,6 +1,6 @@
-.set LOCALID_AIDE, 1
-.set LOCALID_BIRCH, 2
-.set LOCALID_RIVAL, 3
+.set LOCALID_AIDE, LOCALID_BIRCHS_LAB_AIDE
+.set LOCALID_BIRCH, LOCALID_BIRCHS_LAB_BIRCH
+.set LOCALID_RIVAL, LOCALID_BIRCHS_LAB_RIVAL
 
 LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
@@ -15,13 +15,6 @@ LittlerootTown_ProfessorBirchsLab_MapScripts:: @ 81F9C91
 	@ 4: Entered lab after catching all Hoenn mons; completion gift ready
 	@ 5: Completion gift pending (also migrates an old pending Johto choice)
 	@ 6: Claimed completion gift (or a Johto starter on an older save)
-
-	@ State descriptions for VAR_BIRCH_LAB_STATE
-	@ 1: Never occurs
-	@ 2: Chose starter
-	@ 3: Received starter in lab
-	@ 4: Defeated rival on Route 103
-	@ 5: Received pokedex
 
 LittlerootTown_ProfessorBirchsLab_OnTransition: @ 81F9CA1
 	call Common_EventScript_SetupRivalGfxId
@@ -62,7 +55,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterDexRewardLayout:: @ 81F9CF
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnWarp: @ 81F9D06
-	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
+	map_script_2 VAR_STORY_STEP, STORY_STEP_RESCUED_BIRCH, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
@@ -101,8 +94,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexReward::
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame: @ 81F9DB9
-	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
-	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
+	map_script_2 VAR_STORY_STEP, STORY_STEP_RESCUED_BIRCH, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
+	map_script_2 VAR_STORY_STEP, STORY_STEP_RIVAL_LEFT_OLDALE, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GiveDexRewardEvent
 	.2byte 0
@@ -139,8 +132,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival:: @ 81F9E17
 
 LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival:: @ 81F9E36
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
-	clearflag FLAG_HIDE_ROUTE_101_BOY
-	setvar VAR_BIRCH_LAB_STATE, 3
+	advance_story SENT_TO_RIVAL_103
 	releaseall
 	end
 
@@ -276,8 +268,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForDexReward: @ 81F9F7C
 LittlerootTown_ProfessorBirchsLab_EventScript_Aide:: @ 81F9F84
 	lock
 	faceplayer
-	compare VAR_BIRCH_LAB_STATE, 3
-	goto_if_ge LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
+	goto_if_set STORY_REACHED_SENT_TO_RIVAL_103, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
 	goto_if_set FLAG_BIRCH_AIDE_MET, LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork, MSGBOX_DEFAULT
 	setflag FLAG_BIRCH_AIDE_MET
@@ -345,7 +336,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting:: @ 81FA294
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister:: @ 81FA29E
-	goto_if_unset FLAG_RECEIVED_DEXNAV, LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit
+	goto_if_unset STORY_REACHED_GOT_POKEDEX, LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OfferDexNavRefresher, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ExplainDexNav
@@ -357,8 +348,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_NormalVisit:
 	goto_if_eq ProfBirch_EventScript_RatePokedexOrRegister
 	compare VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	goto_if_ge ProfBirch_EventScript_RatePokedexOrRegister
-	compare VAR_BIRCH_LAB_STATE, 5
-	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
+	goto_if_set STORY_REACHED_GOT_POKEDEX, LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
 	release
 	end
@@ -384,11 +374,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex:: @ 81FA2F8
 	waitmovement 0
 	removeobject LOCALID_RIVAL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
-	setvar VAR_BIRCH_LAB_STATE, 5
-	setflag FLAG_ADVENTURE_STARTED
-	setvar VAR_OLDALE_TOWN_STATE, 1
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 5 @ Pending Route 101 demonstration; preserves Mom's normal exit event.
-	setvar VAR_LITTLEROOT_TOWN_STATE, 3
 	releaseall
 	end
 
@@ -425,12 +410,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex:: @ 81FA3AC
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
 	waitfanfare
-	setflag FLAG_SYS_POKEDEX_GET
-	setflag FLAG_RECEIVED_DEXNAV
+	advance_story GOT_POKEDEX
 	setvar VAR_DEXNAV_SPECIES, SPECIES_NONE
 	special SetUnlockedPokedexFlags
-	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	setflag FLAG_SYS_NATIONAL_DEX
 	special EnableNationalPokedex
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
 	return

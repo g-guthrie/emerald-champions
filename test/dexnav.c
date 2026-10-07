@@ -1,4 +1,5 @@
 #include "global.h"
+#include "story.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "bg.h"
@@ -294,7 +295,7 @@ static void CheckDexNavAgainstRosterAt(u32 when)
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     u16 savedCave = VarGet(VAR_ALTERING_CAVE_WILD_SET);
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_ALTERING_CAVE_WILD_SET, 0);
     ResetWorld();
@@ -307,7 +308,7 @@ static void CheckDexNavAgainstRosterAt(u32 when)
         SetCaughtLegends(TRUE);
     EXPECT_EQ(CheckDexNavAgainstRoster(), 0);
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     VarSet(VAR_ALTERING_CAVE_WILD_SET, savedCave);
     gSaveBlock1Ptr->location = savedLocation;
 }
@@ -325,7 +326,7 @@ TEST("DexNav reveals Route 103 residents with an entirely unseen Pokedex")
     memset(gSaveBlock1Ptr->dexSeen, 0, sizeof(seen));
     memset(gSaveBlock1Ptr->dexCaught, 0, sizeof(caught));
     ResetWorld();
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     SetLocation(MAP_ROUTE103);
 
     EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_SEEN), 0);
@@ -343,7 +344,7 @@ TEST("DexNav reveals Route 103 residents with an entirely unseen Pokedex")
     memcpy(gSaveBlock1Ptr->dexSeen, seen, sizeof(seen));
     memcpy(gSaveBlock1Ptr->dexCaught, caught, sizeof(caught));
     if (!hadDexNav)
-        FlagClear(FLAG_RECEIVED_DEXNAV);
+        StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
     gMapHeader = savedHeader;
 }
@@ -369,7 +370,7 @@ TEST("DexNav shows and searches a gated legend once its gate opens, and drops it
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
     u8 savedChain = gSaveBlock3Ptr->dexNavChain;
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     SetLocation(MAP_ROUTE110);
     // Raikou waits for the third badge.
@@ -399,7 +400,7 @@ TEST("DexNav shows and searches a gated legend once its gate opens, and drops it
     EXPECT(!DexNavLists(SPECIES_RAIKOU));
     EXPECT_EQ(Test_DexNavGenerateMonLevel(SPECIES_RAIKOU, ENCOUNTER_TYPE_LAND), MON_LEVEL_NONEXISTENT);
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -407,7 +408,7 @@ TEST("DexNav storm guests stay visible but cannot bypass their ordinary encounte
 {
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     SetMilestones(5);
     FlagSet(FLAG_VISITED_FORTREE_CITY);
@@ -441,7 +442,7 @@ TEST("DexNav storm guests stay visible but cannot bypass their ordinary encounte
     EXPECT(DexNavLists(SPECIES_TORNADUS));
     EXPECT(Test_DexNavCreateSearchMon(SPECIES_TORNADUS, ENCOUNTER_TYPE_LAND));
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -531,12 +532,12 @@ TEST("DexNav makes a searched legend exactly as its wild slot does")
 {
     struct WarpData savedLocation = gSaveBlock1Ptr->location;
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     SetMilestones(3);
     CheckSearchedLegendMatchesSlot(MAP_ROUTE110, SPECIES_RAIKOU, ENCOUNTER_TYPE_LAND);
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -547,7 +548,7 @@ TEST("DexNav lists a roamer where it roams but never searches it")
     u8 mapGroup, mapNum;
     u32 count, checked = 0;
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     gSpecialVar_0x8004 = 0;
     InitRoamer();
@@ -565,7 +566,7 @@ TEST("DexNav lists a roamer where it roams but never searches it")
     }
     EXPECT_GT(checked, 0);
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -578,7 +579,7 @@ TEST("DexNav shows every method: rods, Rock Smash, Honey, Cut trees and Feebas s
     const enum Item tools[] = {ITEM_OLD_ROD, ITEM_GOOD_ROD, ITEM_SUPER_ROD, ITEM_HONEY};
     bool8 savedLicenses[ARRAY_COUNT(licenses)], addedTools[ARRAY_COUNT(tools)];
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     // Every method is tested after its real license, badge and tool gates
     // are met. An early-game roster deliberately hides locked methods.
@@ -620,7 +621,7 @@ TEST("DexNav shows every method: rods, Rock Smash, Honey, Cut trees and Feebas s
     for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
         if (addedTools[i])
             RemoveBagItem(tools[i], 1);
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -711,7 +712,7 @@ TEST("DexNav panel hints fit the info column on every wild map, Safari Zone incl
     struct WildRosterEntry list[WILD_ROSTER_MAX_ENTRIES];
     u32 checked = 0;
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     for (u32 safari = 0; safari < 2; safari++)
     {
@@ -728,7 +729,7 @@ TEST("DexNav panel hints fit the info column on every wild map, Safari Zone incl
     }
     EXPECT_GT(checked, 0);
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -738,7 +739,7 @@ TEST("DexNav only shows in the Safari Zone and lists nothing where no wild Pokem
     struct WildRosterEntry list[WILD_ROSTER_MAX_ENTRIES];
     u32 count;
 
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     ResetWorld();
     SetLocation(MAP_SAFARI_ZONE_SOUTHWEST);
     FlagSet(FLAG_SYS_SAFARI_MODE);
@@ -752,7 +753,7 @@ TEST("DexNav only shows in the Safari Zone and lists nothing where no wild Pokem
     SetLocation(MAP_LITTLEROOT_TOWN);
     EXPECT_EQ(Test_DexNavGetList(list, ARRAY_COUNT(list)), 0);
     ResetWorld();
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     gSaveBlock1Ptr->location = savedLocation;
 }
 
@@ -802,9 +803,9 @@ TEST("DexNav needs Birch's gift and searches nowhere in the Safari Zone, Pike an
 
     gMapHeader.mapLayoutId = LAYOUT_ROUTE101;
     FlagClear(FLAG_SYS_SAFARI_MODE);
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     EXPECT(!Test_DexNavIsUsableHere());
-    FlagSet(FLAG_RECEIVED_DEXNAV);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     EXPECT(Test_DexNavIsUsableHere());
 
     FlagSet(FLAG_SYS_SAFARI_MODE);
@@ -817,18 +818,18 @@ TEST("DexNav needs Birch's gift and searches nowhere in the Safari Zone, Pike an
     EXPECT(!Test_DexNavIsUsableHere());
 
     gMapHeader.mapLayoutId = savedLayout;
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
 }
 
 TEST("DexNav arrives once on saves that already hold the Pokedex")
 {
-    FlagClear(FLAG_RECEIVED_DEXNAV);
-    FlagClear(FLAG_SYS_POKEDEX_GET);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     VarSet(VAR_DEXNAV_SPECIES, 1);
     GiveDexNavIfNeeded();
     EXPECT(!FlagGet(FLAG_RECEIVED_DEXNAV));
 
-    FlagSet(FLAG_SYS_POKEDEX_GET);
+    StoryStageAtLeast(STORY_STEP_GOT_POKEDEX);
     GiveDexNavIfNeeded();
     EXPECT(FlagGet(FLAG_RECEIVED_DEXNAV));
     EXPECT_EQ(VarGet(VAR_DEXNAV_SPECIES), SPECIES_NONE);
@@ -838,8 +839,8 @@ TEST("DexNav arrives once on saves that already hold the Pokedex")
     GiveDexNavIfNeeded();
     EXPECT_EQ(VarGet(VAR_DEXNAV_SPECIES), SPECIES_ZIGZAGOON);
 
-    FlagClear(FLAG_SYS_POKEDEX_GET);
-    FlagClear(FLAG_RECEIVED_DEXNAV);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
+    StoryStageBefore(STORY_STEP_GOT_POKEDEX);
     VarSet(VAR_DEXNAV_SPECIES, SPECIES_NONE);
 }
 

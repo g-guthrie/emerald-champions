@@ -6,29 +6,22 @@ Route101_MapScripts::
 Route101_OnTransition:
 	call ProfBirch_EventScript_UpdateLocation
 	call Common_EventScript_SetupRivalGfxId
-	setflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
-	goto_if_unset FLAG_RECEIVED_DEXNAV, Route101_TutorialVisibilityDone
-	goto_if_set FLAG_EC_RIVAL_DEXNAV_TUTORIAL_COMPLETE, Route101_TutorialVisibilityDone
-	clearflag FLAG_HIDE_ROUTE101_DEXNAV_RIVAL
-	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 5, Route101_RivalWaitingAtEntrance
+	@ The rival is present from the Pokedex until the lesson is done (window
+	@ ROUTE101_DEXNAV_RIVAL); after an unfinished lesson they wait in the grass.
+	goto_if_ne VAR_STORY_STEP, STORY_STEP_DEXNAV_LESSON, Route101_TutorialVisibilityDone
 	setobjectxyperm LOCALID_ROUTE101_RIVAL_TUTORIAL, 11, 12
 	setobjectmovementtype LOCALID_ROUTE101_RIVAL_TUTORIAL, MOVEMENT_TYPE_FACE_LEFT
 Route101_TutorialVisibilityDone:
 	end
 
-Route101_RivalWaitingAtEntrance:
-	setobjectxyperm LOCALID_ROUTE101_RIVAL_TUTORIAL, 10, 14
-	setobjectmovementtype LOCALID_ROUTE101_RIVAL_TUTORIAL, MOVEMENT_TYPE_FACE_DOWN
-	end
-
 Route101_OnFrame:
-	map_script_2 VAR_LITTLEROOT_RIVAL_STATE, 5, EC_RivalDexNavTutorial_Begin
-	map_script_2 VAR_ROUTE101_STATE, 0, Route101_EventScript_HideMapNamePopup
+	map_script_2 VAR_STORY_STEP, STORY_STEP_GOT_RUNNING_SHOES, EC_RivalDexNavTutorial_Begin
+	map_script_2 VAR_STORY_STEP, STORY_STEP_SENT_TO_BIRCH, Route101_EventScript_HideMapNamePopup
 	.2byte 0
 
 Route101_EventScript_HideMapNamePopup::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
-	setvar VAR_ROUTE101_STATE, 1
+	advance_story ON_ROUTE101
 	end
 
 Route101_EventScript_StartBirchRescue::
@@ -59,7 +52,7 @@ Route101_EventScript_StartBirchRescue::
 	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_ROUTE101_STATE, 2
+	advance_story BIRCH_IN_DANGER
 	releaseall
 	end
 
@@ -278,8 +271,8 @@ Route101_EventScript_RouteSign::
 Route101_EventScript_BirchsBag::
 	lockall
 	faceplayer
-	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, Route101_EventScript_FinishRescue
-	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_BattleRescue
+	goto_if_eq VAR_STORY_STEP, STORY_STEP_RESCUED_BIRCH, Route101_EventScript_FinishRescue
+	goto_if_eq VAR_STORY_STEP, STORY_STEP_CHOSE_STARTERS, Route101_EventScript_BattleRescue
 	@ Birch's doubles cue, while both wild Pokémon are still in view.
 	msgbox Route101_Text_TwoOfThem, MSGBOX_DEFAULT
 	closemessage
@@ -300,20 +293,14 @@ Route101_EventScript_BattleRescue::
 	setobjectxy LOCALID_PLAYER, 6, 13
 	special StartEmeraldChampionsBirchRescue
 	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route101_EventScript_RescueLost
-	setvar VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON
-	setflag FLAG_RESCUED_BIRCH
+	advance_story RESCUED_BIRCH
 
 Route101_EventScript_FinishRescue::
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
 	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
 	special HealPlayerParty
-	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
-	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
-	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
-	setvar VAR_BIRCH_LAB_STATE, 2
-	setvar VAR_ROUTE101_STATE, 3
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, Route101_EventScript_HideMayInBedroom
@@ -339,8 +326,6 @@ Route101_EventScript_ReturnToBag::
 	setobjectxy LOCALID_PLAYER, 7, 15
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	clearflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
-	clearflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
 	addobject LOCALID_ROUTE101_BIRCH
 	addobject LOCALID_ROUTE101_ZIGZAGOON
 	addobject LOCALID_ROUTE101_POOCHYENA
@@ -351,7 +336,6 @@ Route101_EventScript_ReturnToBag::
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_ROUTE101_POOCHYENA, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	setvar VAR_ROUTE101_STATE, 2
 	playbgm MUS_HELP, TRUE
 	fadescreen FADE_FROM_BLACK
 	releaseall
