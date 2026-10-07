@@ -46,9 +46,10 @@ enum EncounterType
 
 #define SPECIES_INFO_Y          5
 #define TYPE_ICONS_Y            (SPECIES_INFO_Y + 24)
-#define SEARCH_LEVEL_Y          (TYPE_ICONS_Y + 24)
-#define HA_INFO_Y               (SEARCH_LEVEL_Y + 24)
-#define CHAIN_BONUS_Y           (HA_INFO_Y + 24)
+#define CAUGHT_INFO_Y           (TYPE_ICONS_Y + 24)
+#define ENCOUNTER_RATE_Y        (CAUGHT_INFO_Y + 24)
+#define CHAIN_BONUS_Y           (ENCOUNTER_RATE_Y + 24)
+#define PANEL_LABEL_Y           1 // label text inside a label window (two tile rows over the red box)
 
 #define MON_LEVEL_NONEXISTENT   255 // If mon not in area GetEncounterLevel returns this to exit the search
 

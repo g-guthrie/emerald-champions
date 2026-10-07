@@ -72,6 +72,8 @@ enum WindowIds
 {
     WINDOW_INFO,
     WINDOW_REGISTERED,
+    WINDOW_LABEL_CAUGHT,
+    WINDOW_LABEL_RATE,
     WINDOW_COUNT,
 };
 
@@ -142,12 +144,10 @@ EWRAM_DATA enum Species gDexNavSpecies = SPECIES_NONE;
 static void Task_DexNavWaitFadeIn(u8 taskId);
 static void Task_DexNavMain(u8 taskId);
 static void PrintCurrentSpeciesInfo(void);
+static u32 GetEncounterRate(enum Species species);
+static void PrintPanelLabels(void);
 // SEARCH
 static bool8 TryStartHiddenMonFieldEffect(enum EncounterType environment, u8 xSize, u8 ySize, bool8 smallScan);
-static void DexNavGenerateMoveset(enum Species species, u8 searchLevel, u8 encounterLevel, u16 *moveDst);
-static enum Item DexNavGenerateHeldItem(enum Species species, u8 searchLevel);
-static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel);
-static u8 DexNavGeneratePotential(u8 searchLevel);
 static u8 DexNavTryGenerateMonLevel(enum Species species, enum EncounterType environment);
 static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment);
 static void CreateDexNavWildMon(enum Species species, u8 potential, u8 level, u8 abilityNum, enum Item item, enum Move *moves);
@@ -181,7 +181,11 @@ static const u32 sHiddenMonIconGfx[] = INCGFX_U32("graphics/dexnav/hidden.png", 
 
 // strings
 static const u8 sText_DexNav_NoInfo[] = _("--------");
-static const u8 sText_DexNav_CaptureToSee[] = _("Capture first!");
+static const u8 sText_DexNav_Yes[] = _("Yes");
+static const u8 sText_DexNav_No[] = _("No");
+static const u8 sText_DexNav_Percent[] = _("{STR_VAR_1}%");
+static const u8 sText_DexNav_Caught[] = _("CAUGHT");
+static const u8 sText_DexNav_EncounterRate[] = _("ENCOUNTER RATE");
 static const u8 sText_DexNav_PressRToRegister[] = _("R TO REGISTER!");
 static const u8 sText_DexNav_SearchForRegisteredSpecies[] = _("Search {STR_VAR_1}");
 static const u8 sText_DexNav_NotFoundHere[] = _("This Pokémon cannot be found here!");
@@ -220,6 +224,26 @@ static const struct WindowTemplate sDexNavGuiWindowTemplates[] =
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 200,
+    },
+    [WINDOW_LABEL_CAUGHT] =
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 10,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 136,
+    },
+    [WINDOW_LABEL_RATE] =
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 13,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 154,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -572,126 +596,113 @@ static void DexNavProximityUpdate(void)
 }
 
 //Pick a specific tile based on environment
-static bool8 DexNavPickTile(enum EncounterType environment, u8 areaX, u8 areaY, bool8 smallScan)
+// Only ordinary walking or Surfing paths qualify. The native collision routine
+// is not used because it would trigger objects and field encounters.
+static bool32 DexNavCanStep(struct ObjectEvent *probe, s16 x, s16 y, enum Direction direction, bool32 surfing)
 {
-    // area of map to cover starting from camera position {-7, -7}
-    s16 topX = gSaveBlock1Ptr->pos.x - SCANSTART_X + (smallScan * 5);
-    s16 topY = gSaveBlock1Ptr->pos.y - SCANSTART_Y + (smallScan * 5);
-    s16 botX = topX + areaX;
-    s16 botY = topY + areaY;
-    u8 i;
-    bool8 nextIter;
-    u8 scale = 0;
-    u8 weight = 0;
-    enum MapType currMapType = GetCurrentMapType();
-    u8 tileBehaviour;
-    u8 tileBuffer = 2;
-    u8 *xPos = AllocZeroed((botX - topX) * (botY - topY) * sizeof(u8));
-    u8 *yPos = AllocZeroed((botX - topX) * (botY - topY) * sizeof(u8));
-    u32 iter = 0;
-    bool32 ret = FALSE;
+    u8 behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    // loop through every tile in area and evaluate
-    while (topY < botY)
+    if (!AreCoordsInsidePlayerMap(x, y)
+     || MapGridGetCollisionAt(x, y)
+     || IsElevationMismatchAt(probe->currentElevation, x, y)
+     || IsMetatileDirectionallyImpassable(probe, x, y, direction)
+     || MetatileBehavior_IsSurfableWaterOrUnderwater(behavior) != surfing
+     || MetatileBehavior_IsForcedMovementTile(behavior))
+        return FALSE;
+    for (u32 i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        while (topX < botX)
-        {
-            tileBehaviour = MapGridGetMetatileBehaviorAt(topX, topY);
-            //Check for objects
-            nextIter = FALSE;
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
-                tileBuffer = SNEAKING_PROXIMITY + 3;
-            else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
-                tileBuffer = SNEAKING_PROXIMITY + 1;
-
-            if (GetPlayerDistance(topX, topY) <= tileBuffer)
-            {
-                // tile too close to player
-                topX++;
-                continue;
-            }
-
-            for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
-            {
-                if (gObjectEvents[i].currentCoords.x == topX && gObjectEvents[i].currentCoords.y == topY)
-                {
-                    // cannot be on a tile where an object exists
-                    nextIter = TRUE;
-                    break;
-                }
-            }
-
-            if (nextIter)
-            {
-                topX++;
-                continue;
-            }
-
-            weight = 0; // initiliaze weight
-            switch (environment)
-            {
-            case ENCOUNTER_TYPE_LAND:
-                if (MetatileBehavior_IsLandWildEncounter(tileBehaviour))
-                {
-                    if (currMapType == MAP_TYPE_UNDERGROUND)
-                    {
-                        // inside (cave)
-                        if (IsElevationMismatchAt(gObjectEvents[gPlayerAvatar.spriteId].currentElevation, topX, topY))
-                            break; //occurs at same z coord
-
-                        scale = 440 - (smallScan * 200) - (GetPlayerDistance(topX, topY) / 2)  - (2 * (topX + topY));
-                        weight = ((Random() % scale) < 1) && !MapGridGetCollisionAt(topX, topY);
-                    }
-                    else
-                    {
-                        // outdoors: grass
-                        scale = 100 - (GetPlayerDistance(topX, topY) * 2);
-                        weight = (Random() % scale <= 5) && !MapGridGetCollisionAt(topX, topY);
-                    }
-                }
-                break;
-            case ENCOUNTER_TYPE_WATER:
-                if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehaviour))
-                {
-                    u8 scale = 320 - (smallScan * 200) - (GetPlayerDistance(topX, topY) / 2);
-                    if (IsElevationMismatchAt(gObjectEvents[gPlayerAvatar.spriteId].currentElevation, topX, topY))
-                        break;
-
-                    weight = (Random() % scale <= 1) && !MapGridGetCollisionAt(topX, topY);
-                }
-                break;
-            default:
-                break;
-            }
-
-            if (weight > 0)
-            {
-                xPos[iter] = topX;
-                yPos[iter] = topY;
-                iter++;
-            }
-
-            topX++;
-        }
-
-        topY++;
-        topX = gSaveBlock1Ptr->pos.x - SCANSTART_X + (smallScan * 5);
+        const struct ObjectEvent *object = &gObjectEvents[i];
+        if (object->active && i != gPlayerAvatar.objectEventId
+         && AreElevationsCompatible(probe->currentElevation, object->currentElevation)
+         && ((object->currentCoords.x == x && object->currentCoords.y == y)
+          || (object->previousCoords.x == x && object->previousCoords.y == y)))
+            return FALSE;
     }
-
-    if (iter > 0)
+    for (u32 i = 0; i < gMapHeader.events->warpCount; i++)
     {
-        i = Random() % iter;
-        sDexNavSearchDataPtr->tileX = xPos[i];
-        sDexNavSearchDataPtr->tileY = yPos[i];
-        ret = TRUE;
+        if (gMapHeader.events->warps[i].x + MAP_OFFSET == x && gMapHeader.events->warps[i].y + MAP_OFFSET == y)
+            return FALSE;
     }
-
-    Free(xPos);
-    Free(yPos);
-
-    return ret;
+    return TRUE;
 }
 
+// The Pokémon only appears where the player can reach it in time: flood the
+// area from the player's position along walkable (or surfable) tiles and pick
+// uniformly from the reachable habitat. No valid tile is discarded at random.
+static bool8 DexNavPickTile(enum EncounterType environment, u8 areaX, u8 areaY, bool8 smallScan)
+{
+    s16 playerX = gSaveBlock1Ptr->pos.x + MAP_OFFSET;
+    s16 playerY = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
+    s16 topX = playerX - areaX / 2, topY = playerY - areaY / 2;
+    u32 cells = areaX * areaY, head = 0, tail = 0, candidates = 0;
+    u32 maxSteps = MAX_PROXIMITY;
+    bool32 surfing = TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) != 0;
+    struct ObjectEvent probe = gObjectEvents[gPlayerAvatar.objectEventId];
+    u8 *distance, *queue;
+    u32 origin;
+
+    // When the Pokémon moves mid-search, it stays within the steps the player
+    // can still sneak before time runs out (a slow step takes 32 frames).
+    if (smallScan)
+    {
+        u32 elapsed = gMain.vblankCounter1 - sDexNavSearchDataPtr->startingTime;
+        if (elapsed >= DEXNAV_TIMEOUT * 60)
+            return FALSE;
+        maxSteps = min(maxSteps, (DEXNAV_TIMEOUT * 60 - elapsed) / 32);
+    }
+    distance = Alloc(cells * 2);
+    if (distance == NULL)
+        return FALSE;
+    queue = distance + cells;
+    memset(distance, 0xFF, cells);
+    origin = (playerY - topY) * areaX + playerX - topX;
+    distance[origin] = 0;
+    queue[tail++] = origin;
+    while (head < tail)
+    {
+        u32 cell = queue[head++];
+        s16 x = topX + cell % areaX, y = topY + cell / areaX;
+        u8 behavior = MapGridGetMetatileBehaviorAt(x, y);
+        u8 elevation;
+
+        if (distance[cell] > CREEPING_PROXIMITY
+         && GetPlayerDistance(x, y) > CREEPING_PROXIMITY
+         && ((environment == ENCOUNTER_TYPE_LAND && MetatileBehavior_IsLandWildEncounter(behavior))
+          || (environment == ENCOUNTER_TYPE_WATER && MetatileBehavior_IsSurfableWaterOrUnderwater(behavior))))
+        {
+            if (RandomUniform(RNG_NONE, 0, ++candidates - 1) == 0)
+            {
+                sDexNavSearchDataPtr->tileX = x;
+                sDexNavSearchDataPtr->tileY = y;
+            }
+        }
+        if (distance[cell] >= maxSteps)
+            continue;
+        probe.currentCoords.x = x;
+        probe.currentCoords.y = y;
+        probe.currentMetatileBehavior = behavior;
+        probe.currentElevation = gObjectEvents[gPlayerAvatar.objectEventId].currentElevation;
+        elevation = MapGridGetElevationAt(x, y);
+        if (elevation != ELEVATION_TRANSITION && elevation != ELEVATION_MULTI_LEVEL)
+            probe.currentElevation = elevation;
+        for (enum Direction direction = DIR_SOUTH; direction <= DIR_EAST; direction++)
+        {
+            s16 nextX = x, nextY = y;
+            u32 next;
+
+            MoveCoords(direction, &nextX, &nextY);
+            if (nextX < topX || nextX >= topX + areaX || nextY < topY || nextY >= topY + areaY)
+                continue;
+            next = (nextY - topY) * areaX + nextX - topX;
+            if (distance[next] != 0xFF || !DexNavCanStep(&probe, nextX, nextY, direction, surfing))
+                continue;
+            distance[next] = distance[cell] + 1;
+            queue[tail++] = next;
+        }
+    }
+    Free(distance);
+    return candidates != 0;
+}
 
 static bool8 TryStartHiddenMonFieldEffect(enum EncounterType environment, u8 xSize, u8 ySize, bool8 smallScan)
 {
@@ -804,10 +815,6 @@ static void SetUpDexNavSearch(void)
     sDexNavSearchDataPtr->exclamationSpriteId = MAX_SPRITES;
     sDexNavSearchDataPtr->searchLevel = searchLevel;
 
-    DexNavGenerateMoveset(species, searchLevel, sDexNavSearchDataPtr->monLevel, &sDexNavSearchDataPtr->moves[0]);
-    sDexNavSearchDataPtr->heldItem = DexNavGenerateHeldItem(species, searchLevel);
-    sDexNavSearchDataPtr->abilityNum = DexNavGetAbilityNum(species, searchLevel);
-    sDexNavSearchDataPtr->potential = DexNavGeneratePotential(searchLevel);
     DexNavProximityUpdate();
 
     LoadSearchIconData();
@@ -1116,12 +1123,21 @@ bool32 OnStep_DexNavSearch(void)
         && sDexNavSearchDataPtr->proximity < GetMovementProximityBySearchLevel() && sDexNavSearchDataPtr->movementCount < 2
         && !sDexNavSearchDataPtr->hiddenSearch)
     {
-        FieldEffectStop(&gSprites[sDexNavSearchDataPtr->fldEffSpriteId], sDexNavSearchDataPtr->fldEffId);
+        s16 oldX = sDexNavSearchDataPtr->tileX, oldY = sDexNavSearchDataPtr->tileY;
+        u8 oldSprite = sDexNavSearchDataPtr->fldEffSpriteId, oldEffect = sDexNavSearchDataPtr->fldEffId;
 
-        if (!TryStartHiddenMonFieldEffect(sDexNavSearchDataPtr->environment, 10, 10, TRUE))
+        // If no reachable tile is left, the Pokémon keeps its spot.
+        if (TryStartHiddenMonFieldEffect(sDexNavSearchDataPtr->environment, 10, 10, TRUE))
         {
-            EndDexNavSearchSetupScript(EventScript_PokemonGotAway);
-            return TRUE;
+            FieldEffectStop(&gSprites[oldSprite], oldEffect);
+            DexNavProximityUpdate();
+        }
+        else
+        {
+            sDexNavSearchDataPtr->tileX = oldX;
+            sDexNavSearchDataPtr->tileY = oldY;
+            sDexNavSearchDataPtr->fldEffSpriteId = oldSprite;
+            sDexNavSearchDataPtr->fldEffId = oldEffect;
         }
 
         sDexNavSearchDataPtr->movementCount++;
@@ -1181,20 +1197,16 @@ static void CreateDexNavWildMon(enum Species species, u8 potential, u8 level, u8
 {
     struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
 
-    CreateWildMon(species, level);  // shiny rate bonus handled in CreateBoxMon
-    SetBoxMonPerfectIVs(&mon->box, min(3, potential)); // Will not exceed 3 Perfect IVs
+    u32 chain = gSaveBlock3Ptr->dexNavChain;
 
-    //Set ability
-    SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
-
-    // Set Held Item
-    if (item)
-        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
-
-    //Set moves
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(mon, moves[i], i);
-
+    // An ordinary wild Pokémon of its slot. On a chain, the chain is the percent
+    // chance that it is shiny (a chain of 100 always is).
+    CreateWildMon(species, level);
+    if (chain != 0 && RandomUniform(RNG_NONE, 0, 99) < chain)
+    {
+        bool32 shiny = TRUE;
+        SetMonData(mon, MON_DATA_IS_SHINY, &shiny);
+    }
     CalculateMonStats(mon);
 }
 
@@ -1202,269 +1214,7 @@ static void CreateDexNavWildMon(enum Species species, u8 potential, u8 level, u8
 //if it was a hidden encounter, updates the environment it is to be found from the wildheader encounterRate
 static u8 DexNavTryGenerateMonLevel(enum Species species, enum EncounterType environment)
 {
-    u8 levelBase = GetEncounterLevelFromMapData(species, environment);
-    u8 levelBonus = gSaveBlock3Ptr->dexNavChain / 5;
-
-    if (levelBase == MON_LEVEL_NONEXISTENT)
-        return MON_LEVEL_NONEXISTENT;   //species not found in the area
-
-    if (Random() % 100 < 4)
-        levelBonus += 10; //4% chance of having a +10 level
-
-    if (levelBase + levelBonus > MAX_LEVEL)
-        return MAX_LEVEL;
-    else
-        return levelBase + levelBonus;
-}
-
-static enum Move GetRandomEggMove(enum Species species)
-{
-    u32 numEggMoves = 0;
-    const u16 *eggMoveLearnset = GetSpeciesEggMoves(species);
-    for (u32 i = 0; eggMoveLearnset[i] != MOVE_UNAVAILABLE; i++)
-        numEggMoves++;
-
-    enum Move result = *(const u16 *)(RandomElementArray(RNG_DEXNAV_RANDOM_EGG_MOVE, eggMoveLearnset, sizeof(u16), numEggMoves));
-    return result;
-}
-
-static void DexNavGenerateMoveset(enum Species species, u8 searchLevel, u8 encounterLevel, u16 *moveDst)
-{
-    bool8 genMove = FALSE;
-    u16 randVal = Random() % 100;
-    u16 i;
-
-    // see if first move slot should be an egg move
-    if (searchLevel < 5)
-    {
-        if (SEARCHLEVEL0_MOVECHANCE != 0 && randVal < SEARCHLEVEL0_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 10)
-    {
-        if (SEARCHLEVEL5_MOVECHANCE != 0 && randVal < SEARCHLEVEL5_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 25)
-    {
-        if (SEARCHLEVEL10_MOVECHANCE != 0 && randVal < SEARCHLEVEL10_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 50)
-    {
-        if (SEARCHLEVEL25_MOVECHANCE != 0 && randVal < SEARCHLEVEL25_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else if (searchLevel < 100)
-    {
-        if (SEARCHLEVEL50_MOVECHANCE != 0 && randVal < SEARCHLEVEL50_MOVECHANCE)
-            genMove = TRUE;
-    }
-    else
-    {
-        if (SEARCHLEVEL100_MOVECHANCE != 0 && randVal < SEARCHLEVEL100_MOVECHANCE)
-            genMove = TRUE;
-    }
-
-    // Generate a wild mon just to get the initial moveset (later overwritten by CreateDexNavWildMon)
-    CreateWildMon(species, encounterLevel);
-
-    // Store generated mon moves into Dex Nav Struct
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        moveDst[i] = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + i);
-
-    // set first move slot to a random egg move if search level is good enough
-    if (genMove)
-        moveDst[0] = GetRandomEggMove(GetEggSpecies(species));
-}
-
-static enum Item DexNavGenerateHeldItem(enum Species species, u8 searchLevel)
-{
-    u16 randVal = Random() % 100;
-    u8 searchLevelInfluence = searchLevel >> 1;
-    enum Item item1 = gSpeciesInfo[species].itemCommon;
-    enum Item item2 = gSpeciesInfo[species].itemRare;
-
-    // if both are the same, 100% to hold
-    if (item1 == item2)
-        return item1;
-
-    // if no items can be held, then yeah...no items
-    if (item2 == ITEM_NONE && item1 == ITEM_NONE)
-        return ITEM_NONE;
-
-    // if only one entry, 50% chance
-    if (item2 == ITEM_NONE && item1 != ITEM_NONE)
-        return (randVal < 50) ? item1 : ITEM_NONE;
-
-    // if both are distinct item1 = 50% + srclvl/2; item2 = 5% + srchlvl/2
-    if (randVal < (50 + searchLevelInfluence + 5 + searchLevel))
-        return (randVal > 5 + searchLevelInfluence) ? item1 : item2;
-    else
-        return ITEM_NONE;
-
-    return ITEM_NONE;
-}
-
-static u8 DexNavGetAbilityNum(enum Species species, u8 searchLevel)
-{
-    bool8 genAbility = FALSE;
-    u16 randVal = Random() % 100;
-    u8 abilityNum = 0;
-
-    if (searchLevel < 5)
-    {
-        #if (SEARCHLEVEL0_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL0_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 10)
-    {
-        #if (SEARCHLEVEL5_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL5_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 25)
-    {
-        #if (SEARCHLEVEL10_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL10_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 50)
-    {
-        #if (SEARCHLEVEL25_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL25_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else if (searchLevel < 100)
-    {
-        #if (SEARCHLEVEL50_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL50_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-    else
-    {
-        #if (SEARCHLEVEL100_ABILITYCHANCE != 0)
-        if (randVal < SEARCHLEVEL100_ABILITYCHANCE)
-            genAbility = TRUE;
-        #endif
-    }
-
-    if (genAbility
-            && GetSpeciesAbility(species, 2) != ABILITY_NONE
-            && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-    {
-        //Only give hidden ability if Pokemon has been caught before
-        abilityNum = 2;
-    }
-    else
-    {
-        //Pick a normal ability of that Pokemon
-        if (GetSpeciesAbility(species, 1) != ABILITY_NONE)
-            abilityNum = Random() & 1;
-        else
-            abilityNum = 0;
-    }
-
-    return abilityNum;
-}
-
-static u8 DexNavGeneratePotential(u8 searchLevel)
-{
-    u8 genChance = 0;
-    int randVal = Random() % 100;
-
-    if (searchLevel < 5)
-    {
-        genChance = SEARCHLEVEL0_ONESTAR + SEARCHLEVEL0_TWOSTAR + SEARCHLEVEL0_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL0_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL0_ONESTAR + SEARCHLEVEL0_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 10)
-    {
-        genChance = SEARCHLEVEL5_ONESTAR + SEARCHLEVEL5_TWOSTAR + SEARCHLEVEL5_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL5_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL5_ONESTAR + SEARCHLEVEL5_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 25)
-    {
-        genChance = SEARCHLEVEL10_ONESTAR + SEARCHLEVEL10_TWOSTAR + SEARCHLEVEL10_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL10_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL10_ONESTAR + SEARCHLEVEL10_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 50)
-    {
-        genChance = SEARCHLEVEL25_ONESTAR + SEARCHLEVEL25_TWOSTAR + SEARCHLEVEL25_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL25_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL25_ONESTAR + SEARCHLEVEL25_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else if (searchLevel < 100)
-    {
-        genChance = SEARCHLEVEL50_ONESTAR + SEARCHLEVEL50_TWOSTAR + SEARCHLEVEL50_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL50_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL50_ONESTAR + SEARCHLEVEL50_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-    else
-    {
-        genChance = SEARCHLEVEL100_ONESTAR + SEARCHLEVEL100_TWOSTAR + SEARCHLEVEL100_THREESTAR;
-        if (randVal < genChance)
-        {
-            // figure out which star it is
-            if (randVal < SEARCHLEVEL100_ONESTAR)
-                return 1;
-            else if (randVal < (SEARCHLEVEL100_ONESTAR + SEARCHLEVEL100_TWOSTAR))
-                return 2;
-            else
-                return 3;
-        }
-    }
-
-    return 0;   // No potential
+    return GetEncounterLevelFromMapData(species, environment);
 }
 
 static u8 GetEncounterLevelFromMapData(enum Species species, enum EncounterType environment)
@@ -1752,37 +1502,6 @@ static bool8 CapturedAllWaterMons(u32 headerId)
     return TRUE;    //technically, no mon data means you caught them all
 }
 
-static bool8 CapturedAllHiddenMons(u32 headerId)
-{
-    u32 i;
-    enum Species species;
-    u8 count = 0;
-    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_HIDDEN);
-
-        const struct WildPokemonInfo *hiddenMonsInfo = gWildMonHeaders[headerId].encounterTypes[timeOfDay].hiddenMonsInfo;
-
-    if (hiddenMonsInfo != NULL)
-    {
-        for (i = 0; i < NUM_HIDDEN_MONS_ENCOUNTER_SLOTS; ++i)
-        {
-            species = hiddenMonsInfo->wildPokemon[i].species;
-            if (species != SPECIES_NONE)
-            {
-                count++;
-                if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
-                    break;
-            }
-        }
-
-        if (i >= NUM_HIDDEN_MONS_ENCOUNTER_SLOTS && count > 0)
-            return TRUE;
-        else
-            return FALSE;
-    }
-
-    return TRUE;    //technically, no mon data means you caught them all
-}
-
 static void DexNavLoadCapturedAllSymbols(void)
 {
     u32 headerId = GetCurrentMapWildMonHeaderId();
@@ -1797,8 +1516,6 @@ static void DexNavLoadCapturedAllSymbols(void)
     if (CapturedAllWaterMons(headerId))
         CreateSprite(&sCaptureAllMonsSpriteTemplate, 139, 17, 0);
 
-    if (CapturedAllHiddenMons(headerId))
-        CreateSprite(&sCaptureAllMonsSpriteTemplate, 114, 123, 0);
 }
 
 //#define WIN_DETAILS_TILE        0x3a3
@@ -1806,6 +1523,7 @@ static void DexNav_InitWindows(void)
 {
     InitWindows(sDexNavGuiWindowTemplates);
     DeactivateAllTextPrinters();
+    PrintPanelLabels();
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1956,8 +1674,6 @@ static void TryDrawIconInSlot(enum Species species, s16 x, s16 y)
 {
     if (species == SPECIES_NONE || species > NUM_SPECIES)
         CreateNoDataIcon(x, y);   //'X' in slot
-    else if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
-        CreateMonIcon(SPECIES_NONE, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF); //question mark
     else
         CreateMonIcon(species, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF);
 }
@@ -1983,19 +1699,6 @@ static void DrawSpeciesIcons(void)
         x = ROW_WATER_ICON_X + 24 * i;
         y = ROW_WATER_ICON_Y;
         TryDrawIconInSlot(species, x, y);
-    }
-
-    for (i = 0; i < NUM_HIDDEN_MONS_ENCOUNTER_SLOTS; i++)
-    {
-        species = sDexNavUiDataPtr->hiddenSpecies[i];
-        x = ROW_HIDDEN_ICON_X + 24 * i;
-        y = ROW_HIDDEN_ICON_Y;
-        if (FlagGet(DN_FLAG_DETECTOR_MODE))
-            TryDrawIconInSlot(species, x, y);
-       else if (species == SPECIES_NONE || species > NUM_SPECIES)
-            CreateNoDataIcon(x, y);
-        else
-            CreateMonIcon(SPECIES_NONE, SpriteCB_MonIcon, x, y, 0, 0xFFFFFFFF); //question mark if detector mode inactive
     }
 }
 
@@ -2023,9 +1726,6 @@ static enum Species DexNavGetSpecies(void)
     default:
         return SPECIES_NONE;
     }
-
-    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
-        return SPECIES_NONE;
 
     return species;
 }
@@ -2079,9 +1779,6 @@ static void PrintCurrentSpeciesInfo(void)
     enum NationalDexOrder dexNum = SpeciesToNationalPokedexNum(species);
     enum Type type1, type2;
 
-    if (!GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
-        species = SPECIES_NONE;
-
     // clear windows
     FillWindowPixelBuffer(WINDOW_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
 
@@ -2108,32 +1805,23 @@ static void PrintCurrentSpeciesInfo(void)
         SetTypeIconPosAndPal(type2, 168 + 33, 69, 1);
     }
 
-    //search level
+    //caught
     if (species == SPECIES_NONE)
-    {
-        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
-    }
+        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, CAUGHT_INFO_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
     else
-    {
-        ConvertIntToDecimalStringN(gStringVar4, GetSearchLevel(species), 0, 4);
-        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, gStringVar4);
-    }
+        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, CAUGHT_INFO_Y, sFontColor_Black, 0,
+                                     GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT) ? sText_DexNav_Yes : sText_DexNav_No);
 
-    //hidden ability
+    //encounter rate
     if (species == SPECIES_NONE)
     {
-        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, HA_INFO_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
-    }
-    else if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
-    {
-        if (GetSpeciesAbility(species, 2) != ABILITY_NONE)
-            AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, HA_INFO_Y, sFontColor_Black, 0, gAbilitiesInfo[GetSpeciesAbility(species, 2)].name);
-        else
-            AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, HA_INFO_Y, sFontColor_Black, 0, gText_None);
+        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, ENCOUNTER_RATE_Y, sFontColor_Black, 0, sText_DexNav_NoInfo);
     }
     else
     {
-        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, HA_INFO_Y, sFontColor_Black, 0, sText_DexNav_CaptureToSee);
+        ConvertIntToDecimalStringN(gStringVar1, GetEncounterRate(species), STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, sText_DexNav_Percent);
+        AddTextPrinterParameterized3(WINDOW_INFO, FONT_SMALL, 0, ENCOUNTER_RATE_Y, sFontColor_Black, 0, gStringVar4);
     }
 
     //current chain
@@ -2142,6 +1830,50 @@ static void PrintCurrentSpeciesInfo(void)
 
     CopyWindowToVram(WINDOW_INFO, 3);
     PutWindowTilemap(WINDOW_INFO);
+    PutWindowTilemap(WINDOW_LABEL_CAUGHT);
+    PutWindowTilemap(WINDOW_LABEL_RATE);
+}
+
+// The percent chance that a wild encounter here (land or Surf, by the selected
+// row) is this species: the sum of its slots' chances.
+static u32 GetEncounterRate(enum Species species)
+{
+    u32 headerId = GetCurrentMapWildMonHeaderId();
+    bool32 water = (sDexNavUiDataPtr->environment == ENCOUNTER_TYPE_WATER);
+    enum TimeOfDay timeOfDay;
+    const struct WildPokemonInfo *info;
+    u32 i, count, rate = 0;
+
+    if (headerId == HEADER_NONE || sDexNavUiDataPtr->environment == ENCOUNTER_TYPE_HIDDEN)
+        return 0;
+    timeOfDay = GetTimeOfDayForEncounters(headerId, water ? WILD_AREA_WATER : WILD_AREA_LAND);
+    info = water ? gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo
+                 : gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo;
+    if (info == NULL)
+        return 0;
+    count = water ? NUM_WATER_MONS_ENCOUNTER_SLOTS : NUM_LAND_MONS_ENCOUNTER_SLOTS;
+    for (i = 0; i < count; i++)
+    {
+        if (info->wildPokemon[i].species == species)
+            rate += GetWildMonSlotChance(water, i);
+    }
+    return rate;
+}
+
+// The panel's CAUGHT and ENCOUNTER RATE labels, printed onto the blank red label
+// boxes in the background (graphics/dexnav/gui_tilemap.bin) like the others.
+static void PrintPanelLabels(void)
+{
+    static const u8 sLabelColor[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT};
+
+    FillWindowPixelBuffer(WINDOW_LABEL_CAUGHT, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WINDOW_LABEL_RATE, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    AddTextPrinterParameterized3(WINDOW_LABEL_CAUGHT, FONT_SMALL, 3, PANEL_LABEL_Y, sLabelColor, 0, sText_DexNav_Caught);
+    AddTextPrinterParameterized3(WINDOW_LABEL_RATE, FONT_SMALL, 3, PANEL_LABEL_Y, sLabelColor, 0, sText_DexNav_EncounterRate);
+    PutWindowTilemap(WINDOW_LABEL_CAUGHT);
+    PutWindowTilemap(WINDOW_LABEL_RATE);
+    CopyWindowToVram(WINDOW_LABEL_CAUGHT, 3);
+    CopyWindowToVram(WINDOW_LABEL_RATE, 3);
 }
 
 static void PrintMapName(void)
@@ -2337,9 +2069,7 @@ static void Task_DexNavMain(u8 taskId)
     {
         if (sDexNavUiDataPtr->cursorRow == ROW_WATER)
         {
-            sDexNavUiDataPtr->cursorRow = ROW_HIDDEN;
-            if (sDexNavUiDataPtr->cursorCol >= COL_HIDDEN_COUNT)
-                sDexNavUiDataPtr->cursorCol = COL_HIDDEN_MAX;
+            sDexNavUiDataPtr->cursorRow = ROW_LAND_BOT;
         }
         else
         {
@@ -2354,16 +2084,12 @@ static void Task_DexNavMain(u8 taskId)
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
-        if (sDexNavUiDataPtr->cursorRow == ROW_HIDDEN)
+        if (sDexNavUiDataPtr->cursorRow == ROW_LAND_BOT)
         {
-            sDexNavUiDataPtr->cursorRow = ROW_WATER;
-        }
-        else if (sDexNavUiDataPtr->cursorRow == ROW_LAND_BOT)
-        {
-            if (sDexNavUiDataPtr->cursorCol >= COL_HIDDEN_COUNT)
-                sDexNavUiDataPtr->cursorCol = COL_HIDDEN_MAX;
+            if (sDexNavUiDataPtr->cursorCol > COL_WATER_MAX)
+                sDexNavUiDataPtr->cursorCol = COL_WATER_MAX;
 
-            sDexNavUiDataPtr->cursorRow++;
+            sDexNavUiDataPtr->cursorRow = ROW_WATER;
         }
         else
         {
@@ -2641,12 +2367,7 @@ static void DexNavDrawHiddenIcons(void)
 /////////////////////////
 u32 CalculateDexNavShinyRolls(void)
 {
-    u32 chainBonus, rndBonus;
-    u8 chain = gSaveBlock3Ptr->dexNavChain;
-
-    chainBonus = (chain >= 100) ? 10 : (chain >= 50) ? 5 : 0;
-    rndBonus = (Random() % 100 < 4) ? 4 : 0;
-    return chainBonus + rndBonus;
+    return 0; // the chain's shiny chance is applied in CreateDexNavWildMon
 }
 
 void TryIncrementSpeciesSearchLevel()
