@@ -1109,7 +1109,7 @@
 #define FLAG_ITEM_PETALBURG_WOODS_GREAT_BALL                        0x420
 #define FLAG_ITEM_ROUTE_104_POKE_BALL                               0x421
 #define FLAG_ITEM_PETALBURG_WOODS_ETHER                             0x422
-#define FLAG_ITEM_MAGMA_HIDEOUT_3F_3R_ECAPE_ROPE                    0x423
+#define FLAG_ITEM_MAGMA_HIDEOUT_3F_3R_MAGMARIZER                    0x423
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_1_ORANGE_MAIL                  0x424
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_HARBOR_MAIL                  0x425
 #define FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_WAVE_MAIL                    0x426
@@ -1159,7 +1159,7 @@
 #define FLAG_ITEM_ROUTE_119_HYPER_POTION_2                          0x452
 #define FLAG_ITEM_ROUTE_120_ABSOLITE                            0x453
 #define FLAG_ITEM_ROUTE_120_NEST_BALL                               0x454
-#define FLAG_ITEM_ROUTE_123_ELIXIR                                  0x455
+#define FLAG_ITEM_ROUTE_123_SHINY_STONE                                  0x455
 #define FLAG_ITEM_NEW_MAUVILLE_THUNDER_STONE                        0x456
 #define FLAG_ITEM_FIERY_PATH_FIRE_STONE                             0x457
 #define FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_HAIL                       0x458
@@ -1173,7 +1173,7 @@
 #define FLAG_ITEM_MT_PYRE_3F_REAPER_CLOTH                            0x460
 #define FLAG_ITEM_ROUTE_118_HYPER_POTION                            0x461
 #define FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL                            0x462
-#define FLAG_ITEM_NEW_MAUVILLE_PARALYZE_HEAL                        0x463
+#define FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER                        0x463
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL                      0x464
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MASTER_BALL                 0x465 // Unused Flag, leftover from the Ruby Magma hideout
 #define FLAG_ITEM_OLD_MAGMA_HIDEOUT_B1F_MAX_ELIXIR                  0x466 // Unused Flag, leftover from the Ruby Magma hideout
