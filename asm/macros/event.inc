@@ -2386,6 +2386,17 @@
 	stringvar \stringVarId
 	.endm
 
+	@ Plays the cry of the Pokémon following the player.
+	.macro playfollowermoncry
+	callnative PlayFollowerMonCry, requests_effects=1
+	.endm
+
+	@ Buffers the nickname of the Pokémon following the player.
+	.macro bufferfollowermonnickname stringVarId:req
+	callnative BufferFollowerMonNickname, requests_effects=1
+	stringvar \stringVarId
+	.endm
+
 	@ Executes Follower actions
 	.macro getfolloweraction
 	callnative GetFollowerAction

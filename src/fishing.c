@@ -524,7 +524,7 @@ static u32 CalculateFishingBiteOdds(u32 rod, bool32 isStickyHold)
 static u32 CalculateFishingFollowerBoost()
 {
     u32 friendship;
-    struct Pokemon *mon = GetFirstLiveMon();
+    struct Pokemon *mon = GetFollowerMon();
 
     if (!I_FISHING_FOLLOWER_BOOST || !mon)
         return 0;

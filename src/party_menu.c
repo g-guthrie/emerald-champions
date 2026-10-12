@@ -110,6 +110,7 @@ enum {
     MENU_CATALOG_MOWER,
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
+    MENU_FOLLOW,
     MENU_FIELD_MOVES
 };
 
@@ -185,7 +186,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[9];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -482,6 +483,8 @@ static void CursorCb_CatalogFan(u8);
 static void CursorCb_CatalogMower(u8);
 static void CursorCb_ChangeForm(u8);
 static void CursorCb_ChangeAbility(u8);
+static void CursorCb_Follow(u8);
+static bool32 CanChooseMonToFollow(struct Pokemon *);
 void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer trainer);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
@@ -2970,6 +2973,9 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         }
     }
 
+    if (CanChooseMonToFollow(&mons[slotId]))
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_FOLLOW);
+
     if (!InBattlePike())
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
@@ -3171,11 +3177,40 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void)
     InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_DO_WHAT_WITH_MON, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
 }
 
+// FOLLOW is offered for a Pokémon that could follow but isn't the one following now
+static bool32 CanChooseMonToFollow(struct Pokemon *mon)
+{
+    if (!OW_POKEMON_OBJECT_EVENTS || !OW_FOLLOWERS_ENABLED
+     || FlagGet(B_FLAG_FOLLOWERS_DISABLED)
+     || FlagGet(FLAG_TEMP_HIDE_FOLLOWER)
+     || PlayerHasFollowerNPC()
+     || InBattlePike()
+     || InBattlePyramid())
+        return FALSE;
+
+    return IsMonEligibleFollower(mon) && mon != GetFollowerMon();
+}
+
+static const u8 sText_PkmnIsNowFollowingYou[] = _("{STR_VAR_1} is now following you!{PAUSE_UNTIL_PRESS}");
+
+static void CursorCb_Follow(u8 taskId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetChosenFollowerMon(mon);
+    gFollowerSteps = 0;
+    GetMonNickname(mon, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, sText_PkmnIsNowFollowingYou);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+}
+
 static void CursorCb_Switch(u8 taskId)
 {
-    // Reset follower steps when the party leader is changed
-    if (gPartyMenu.slotId == 0 || gPartyMenu.slotId2 == 0)
-        gFollowerSteps = 0;
     PlaySE(SE_SELECT);
     gPartyMenu.action = PARTY_ACTION_SWITCH;
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -3398,6 +3433,8 @@ static void SwitchPartyMon(void)
     struct PartyMenuBox *menuBoxes[2];
     struct Pokemon *mon1, *mon2;
     struct Pokemon *monBuffer;
+    struct Pokemon *follower = GetFollowerMon();
+    u32 followerPersonality = follower ? GetMonData(follower, MON_DATA_PERSONALITY) : 0;
 
     menuBoxes[0] = &sPartyMenuBoxes[gPartyMenu.slotId];
     menuBoxes[1] = &sPartyMenuBoxes[gPartyMenu.slotId2];
@@ -3408,6 +3445,10 @@ static void SwitchPartyMon(void)
     *mon1 = *mon2;
     *mon2 = *monBuffer;
     Free(monBuffer);
+    // Reset follower steps when switching changes which Pokémon follows
+    follower = GetFollowerMon();
+    if (followerPersonality != (follower ? GetMonData(follower, MON_DATA_PERSONALITY) : 0))
+        gFollowerSteps = 0;
     SwitchMenuBoxSprites(&menuBoxes[0]->pokeballSpriteId, &menuBoxes[1]->pokeballSpriteId);
     SwitchMenuBoxSprites(&menuBoxes[0]->itemSpriteId, &menuBoxes[1]->itemSpriteId);
     SwitchMenuBoxSprites(&menuBoxes[0]->monSpriteId, &menuBoxes[1]->monSpriteId);

@@ -6434,7 +6434,7 @@ static void SetMovingMonData(u8 boxId, u8 position)
     if (boxId == TOTAL_BOXES_COUNT)
     {
         sStorage->movingMon = gParties[B_TRAINER_PLAYER][sCursorPosition];
-        if (&gParties[B_TRAINER_PLAYER][sCursorPosition] == GetFirstLiveMon())
+        if (&gParties[B_TRAINER_PLAYER][sCursorPosition] == GetFollowerMon())
             gFollowerSteps = 0;
     }
     else
@@ -6456,7 +6456,7 @@ static void SetPlacedMonData(u8 boxId, u8 position)
     {
         gParties[B_TRAINER_PLAYER][position] = sStorage->movingMon;
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][position];
-        if (mon == GetFirstLiveMon())
+        if (mon == GetFollowerMon())
             gFollowerSteps = 0;
         SetMonFormPSS(&mon->box, FORM_CHANGE_WITHDRAW);
     }

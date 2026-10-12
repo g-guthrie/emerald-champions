@@ -2133,6 +2133,16 @@ void BufferFirstLiveMonNickname(struct ScriptContext *ctx)
     StringGet_Nickname(GetStringVar(stringVarIndex));
 }
 
+void BufferFollowerMonNickname(struct ScriptContext *ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+
+    Script_RequestEffects(SCREFF_V1);
+
+    GetMonData(GetFollowerMon(), MON_DATA_NICKNAME, GetStringVar(stringVarIndex));
+    StringGet_Nickname(GetStringVar(stringVarIndex));
+}
+
 bool8 ScrCmd_bufferpartymonnick(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
@@ -2684,6 +2694,13 @@ void PlayFirstMonCry(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     PlayCry_Script(GetMonData(GetFirstLiveMon(), MON_DATA_SPECIES), CRY_MODE_NORMAL);
+}
+
+void PlayFollowerMonCry(struct ScriptContext *ctx)
+{
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+
+    PlayCry_Script(GetMonData(GetFollowerMon(), MON_DATA_SPECIES), CRY_MODE_NORMAL);
 }
 
 bool8 ScrCmd_waitmoncry(struct ScriptContext *ctx)
