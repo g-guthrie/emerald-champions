@@ -174,7 +174,10 @@ static const u8 ALIGNED(2) sBasePaletteColorMapTypes[32] =
     COLOR_MAP_NONE,
     COLOR_MAP_NONE,
     // sprite palettes
-    COLOR_MAP_CONTRAST,
+    // Sprite palettes are allocated dynamically, so the slot alone does not say what
+    // a palette is. Vanilla gives COLOR_MAP_CONTRAST to the player/NPC palette slots
+    // (0, 2-5, 10); here that is decided per palette tag in GetPaletteColorMapType.
+    COLOR_MAP_DARK_CONTRAST,
     COLOR_MAP_DARK_CONTRAST,
     COLOR_MAP_DARK_CONTRAST,
     COLOR_MAP_DARK_CONTRAST,
@@ -451,6 +454,18 @@ static bool32 IsSpritePalTagBlendImmune(u32 palIndex)
     return (palIndex >= 16 && IS_BLEND_IMMUNE_TAG(GetSpritePaletteTagByPaletteNum(palIndex - 16)));
 }
 
+// Returns the color map type for a palette. Object event palettes (player and NPCs,
+// but not their reflections) get COLOR_MAP_CONTRAST wherever they were allocated,
+// matching the colors vanilla gives its fixed player/NPC palette slots.
+static u8 GetPaletteColorMapType(u32 palIndex)
+{
+    u8 type = sPaletteColorMapTypes[palIndex];
+    if (type == COLOR_MAP_DARK_CONTRAST && palIndex >= 16
+     && ObjectEventPaletteTagUsesContrastColorMap(GetSpritePaletteTagByPaletteNum(palIndex - 16)))
+        return COLOR_MAP_CONTRAST;
+    return type;
+}
+
 static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
 {
     u16 curPalIndex;
@@ -490,7 +505,7 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
             {
                 u8 r, g, b;
 
-                if (sPaletteColorMapTypes[curPalIndex] == COLOR_MAP_CONTRAST || curPalIndex - 16 == gWeatherPtr->contrastColorMapSpritePalIndex)
+                if (GetPaletteColorMapType(curPalIndex) == COLOR_MAP_CONTRAST || curPalIndex - 16 == gWeatherPtr->contrastColorMapSpritePalIndex)
                     colorMap = sContrastColorMaps[colorMapIndex];
                 else
                     colorMap = sDarkenedContrastColorMaps[colorMapIndex];
@@ -583,7 +598,7 @@ static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMap
         {
             const u8 *colorMap;
 
-            if (sPaletteColorMapTypes[curPalIndex] == COLOR_MAP_DARK_CONTRAST)
+            if (GetPaletteColorMapType(curPalIndex) == COLOR_MAP_DARK_CONTRAST)
                 colorMap = sDarkenedContrastColorMaps[colorMapIndex];
             else
                 colorMap = sContrastColorMaps[colorMapIndex];
