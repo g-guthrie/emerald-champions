@@ -236,6 +236,7 @@ SINGLE_BATTLE_TEST("Primordial Sea fails if overworld weather is present (Gen9)"
     SetStartingStatus(STARTING_STATUS_WEATHER_SUN);
 
     GIVEN {
+        WITH_CONFIG(B_OVERWORLD_WEATHER_OVERRIDE, GEN_9);
         PLAYER(SPECIES_KYOGRE) { Item(ITEM_BLUE_ORB); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -245,6 +246,25 @@ SINGLE_BATTLE_TEST("Primordial Sea fails if overworld weather is present (Gen9)"
         MESSAGE("But it failed!");
     } THEN {
         EXPECT(gBattleWeather & B_WEATHER_SUN);
+        ResetStartingStatuses();
+    }
+}
+
+SINGLE_BATTLE_TEST("Primordial Sea overrides overworld weather (Gen8)")
+{
+    SetStartingStatus(STARTING_STATUS_WEATHER_SUN);
+
+    GIVEN {
+        WITH_CONFIG(B_OVERWORLD_WEATHER_OVERRIDE, GEN_8);
+        PLAYER(SPECIES_KYOGRE) { Item(ITEM_BLUE_ORB); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {}
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_PRIMORDIAL_SEA);
+        NOT MESSAGE("But it failed!");
+    } THEN {
+        EXPECT(gBattleWeather & B_WEATHER_RAIN_PRIMAL);
         ResetStartingStatuses();
     }
 }

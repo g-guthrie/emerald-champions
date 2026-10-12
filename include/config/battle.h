@@ -337,7 +337,7 @@
 #define B_OVERWORLD_WEATHER_OVERRIDE    GEN_8 // In Gen9+, overworld weather cannot be overridden.
 
 // Terrain settings
-#define B_TERRAIN_BG_CHANGE         FALSE       // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.
+#define B_TERRAIN_BG_CHANGE         TRUE        // If set to TRUE, terrain moves permanently change the default battle background until the effect fades.
 #define B_THUNDERSTORM_TERRAIN      FALSE       // If set to TRUE, overworld Thunderstorm summons rain and Electric Terrain as in Gen8.
 #define B_TERRAIN_TYPE_BOOST        GEN_LATEST // In Gen8+, terrain increases the power of same-type moves by 30% instead of 50%.
 #define B_SECRET_POWER_EFFECT       GEN_LATEST // Secret Power's effects change depending on the terrain and generation. See MOVE_EFFECT_SECRET_POWER's case in `SetMoveEffect`.

@@ -627,6 +627,39 @@ void HandleAction_Switch(void)
     TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_SWITCH_OUT, GetBattlerAbility(gBattlerAttacker));
 }
 
+// Embargo stops a trainer from using items on the affected Pokémon
+static bool32 IsBattleItemBlockedByEmbargo(enum BattlerId user, enum Item item)
+{
+    u32 partyIndex = gBattleStruct->itemPartyIndex[user];
+
+    switch (GetItemBattleUsage(item))
+    {
+    case EFFECT_ITEM_RESTORE_HP:
+    case EFFECT_ITEM_CURE_STATUS:
+    case EFFECT_ITEM_HEAL_AND_CURE_STATUS:
+    case EFFECT_ITEM_INCREASE_STAT:
+    case EFFECT_ITEM_SET_FOCUS_ENERGY:
+    case EFFECT_ITEM_RESTORE_PP:
+    case EFFECT_ITEM_INCREASE_ALL_STATS:
+        break;
+    default:
+        return FALSE;
+    }
+
+    if (partyIndex >= PARTY_SIZE)
+        return gBattleMons[user].volatiles.embargoTimer != 0;
+
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+    {
+        if (IsBattlerAlly(battler, user)
+         && gBattlerPartyIndexes[battler] == partyIndex
+         && !gBattleStruct->battlerState[battler].notOnField
+         && gBattleMons[battler].volatiles.embargoTimer)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 void HandleAction_UseItem(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
@@ -635,6 +668,12 @@ void HandleAction_UseItem(void)
     ClearVariousBattlerFlags(gBattlerAttacker);
 
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
+    if (IsBattleItemBlockedByEmbargo(gBattlerAttacker, gLastUsedItem))
+    {
+        gBattlescriptCurrInstr = BattleScript_ItemBlockedByEmbargo;
+        gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+        return;
+    }
     if (X_ITEM_FRIENDSHIP_INCREASE > 0
         && GetItemEffectType(gLastUsedItem) == ITEM_EFFECT_X_ITEM
         && !ShouldSkipFriendshipChange())
@@ -3228,6 +3267,9 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                             move = gBattleMons[i].moves[j];
                             enum BattleMoveEffects moveEffect = GetMoveEffect(move);
                             moveType = GetBattleMoveType(move);
+                            // Hidden Power is the one dynamic type Anticipation sees (Gen6+)
+                            if (moveEffect == EFFECT_HIDDEN_POWER)
+                                moveType = GetDynamicMoveType(GetBattlerMon(i), move, i, ABILITY_NONE, HOLD_EFFECT_NONE, MON_IN_BATTLE);
 
                             ctx.battlerAtk = i;
                             ctx.battlerDef = battler;
@@ -4877,6 +4919,9 @@ bool32 TryPrimalReversion(enum BattlerId battler)
 
 bool32 IsNeutralizingGasOnField(void)
 {
+    if (gBattleStruct->neutralizingGasLingering)
+        return TRUE;
+
     for (enum BattlerId i = 0; i < gBattlersCount; i++)
     {
         if (gBattleMons[i].volatiles.neutralizingGas && !gBattleMons[i].volatiles.gastroAcid)

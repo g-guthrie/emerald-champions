@@ -42,7 +42,8 @@ SINGLE_BATTLE_TEST("SetStartingStatus starts a chosen terrain at the beginning o
             MESSAGE("An electric current is running across the battlefield!");
             break;
         }
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
+        if (B_TERRAIN_BG_CHANGE)
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
         if (terrain != STARTING_STATUS_ELECTRIC_TERRAIN_TEMPORARY) {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
@@ -53,7 +54,8 @@ SINGLE_BATTLE_TEST("SetStartingStatus starts a chosen terrain at the beginning o
             }
         } else {
             MESSAGE("The electricity disappeared from the battlefield.");
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
+            if (B_TERRAIN_BG_CHANGE)
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
         }
     } THEN {
         ResetStartingStatuses();
@@ -84,7 +86,8 @@ SINGLE_BATTLE_TEST("Terrain started after the one which started the battle lasts
     } SCENE {
         // Electric Terrain at battle's start
         MESSAGE("An electric current is running across the battlefield!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
+        if (B_TERRAIN_BG_CHANGE)
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
         // Player uses Grassy Terrain
         if (viaMove) {
             MESSAGE("Tapu Bulu used Grassy Terrain!");
@@ -93,7 +96,8 @@ SINGLE_BATTLE_TEST("Terrain started after the one which started the battle lasts
         } else {
             ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
             MESSAGE("Grass grew to cover the battlefield!");
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
+            if (B_TERRAIN_BG_CHANGE)
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
         }
 
         // 5 turns
@@ -107,7 +111,8 @@ SINGLE_BATTLE_TEST("Terrain started after the one which started the battle lasts
         MESSAGE("The opposing Wobbuffet used Celebrate!");
 
         MESSAGE("The grass disappeared from the battlefield.");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
+        if (B_TERRAIN_BG_CHANGE)
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
     } THEN {
         ResetStartingStatuses();
     }

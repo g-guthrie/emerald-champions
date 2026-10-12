@@ -5057,13 +5057,6 @@ u32 IsAbilityStatusProtected(enum BattlerId battler, enum Ability ability)
     SWAP(sideTimerPlayer->structField, sideTimerOpp->structField, temp);\
 }                                                                       \
 
-#define UPDATE_COURTCHANGED_BATTLER(structField)\
-{                                               \
-    temp = sideTimerPlayer->structField;        \
-    sideTimerPlayer->structField = ((sideTimerOpp->structField) ^ BIT_SIDE);        \
-    sideTimerOpp->structField = (temp ^ BIT_SIDE);        \
-}                                               \
-
 void BS_CourtChangeSwapSideStatuses(void)
 {
     NATIVE_ARGS();
@@ -5099,8 +5092,9 @@ void BS_CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->spikesAmount, sideTimerOpp->spikesAmount, temp);
     SWAP(sideTimerPlayer->toxicSpikesAmount, sideTimerOpp->toxicSpikesAmount, temp);
 
-    // Change battler IDs of swapped effects. Needed for the correct string when they expire
-    UPDATE_COURTCHANGED_BATTLER(stickyWebBattlerId);
+    // The web keeps its original setter (for Mirror Armor), it just changes sides.
+    // Don't remap the ID: the setter is still the same battler, and 0xFF means no setter.
+    SWAP(sideTimerPlayer->stickyWebBattlerId, sideTimerOpp->stickyWebBattlerId, temp);
 
     // Track which side originally set the Sticky Web
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
@@ -7680,6 +7674,8 @@ bool32 IsSubstituteProtected(enum BattlerId battlerAtk, enum BattlerId battlerDe
         return FALSE;
     else if (MoveIgnoresSubstitute(move))
         return FALSE;
+    else if (GetMoveEffect(move) == EFFECT_DEFOG && GetConfig(B_DEFOG_EFFECT_CLEARING) < GEN_5)
+        return FALSE; // Gen4 Defog's evasion drop goes through Substitute
     else if (GetConfig(B_INFILTRATOR_SUBSTITUTE) < GEN_6)
         return TRUE;
     else if (GetMoveEffect(move) == EFFECT_TRANSFORM || GetMoveEffect(move) == EFFECT_SKY_DROP)

@@ -62,7 +62,6 @@ SINGLE_BATTLE_TEST("Defog fails if target has minimum evasion stat change")
 
 SINGLE_BATTLE_TEST("Defog lowers evasiveness of target behind Substitute (Gen4)")
 {
-    KNOWN_FAILING;
     GIVEN {
         WITH_CONFIG(B_DEFOG_EFFECT_CLEARING, GEN_4);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
@@ -82,7 +81,6 @@ SINGLE_BATTLE_TEST("Defog lowers evasiveness of target behind Substitute (Gen4)"
 
 SINGLE_BATTLE_TEST("Defog fails if target has minimum evasion stat change behind Substitute (Gen4)")
 {
-    KNOWN_FAILING;
     GIVEN {
         WITH_CONFIG(B_DEFOG_EFFECT_CLEARING, GEN_4);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
@@ -94,10 +92,14 @@ SINGLE_BATTLE_TEST("Defog fails if target has minimum evasion stat change behind
         TURN { MOVE(player, MOVE_DEFOG); }
     } SCENE {
         MESSAGE("The opposing Wobbuffet used Substitute!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's evasiveness harshly fell!");
-        MESSAGE("But it failed!");
+        for (u32 i = 0; i < 3; i++)
+        {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("The opposing Wobbuffet's evasiveness harshly fell!");
+        }
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
+        MESSAGE("The opposing Wobbuffet's evasiveness won't go any lower!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_EVASION], DEFAULT_STAT_STAGE - 6);
     }
@@ -487,7 +489,8 @@ SINGLE_BATTLE_TEST("Defog removes terrain (Gen 8+)")
             else if (move == MOVE_GRASSY_TERRAIN) {
                 MESSAGE("The grass disappeared from the battlefield.");
             }
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG, player);
+            if (B_TERRAIN_BG_CHANGE)
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG, player);
         } else {
             NONE_OF {
                 MESSAGE("The weirdness disappeared from the battlefield!");

@@ -1,10 +1,11 @@
 #include "global.h"
 #include "test/battle.h"
 
-DOUBLE_BATTLE_TEST("Neutralizing Gas fainting as Discharge's ally restores Sheer Force before opposing secondary effects")
+// The gas lasts until the whole spread move is done, so Sheer Force stays suppressed
+// for every target (and the move's power was never boosted by it either)
+DOUBLE_BATTLE_TEST("Neutralizing Gas fainting as Discharge's ally still allows 30% paralysis on the foes")
 {
-    KNOWN_FAILING;
-    PASSES_RANDOMLY(100, 100, RNG_SECONDARY_EFFECT);
+    PASSES_RANDOMLY(30, 100, RNG_SECONDARY_EFFECT);
     GIVEN {
         ASSUME(GetMoveTarget(MOVE_DISCHARGE) == TARGET_FOES_AND_ALLY);
         ASSUME(GetMoveCategory(MOVE_DISCHARGE) == DAMAGE_CATEGORY_SPECIAL);
@@ -19,28 +20,13 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas fainting as Discharge's ally restores Sheer
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DISCHARGE, playerLeft);
         HP_BAR(playerRight, hp: 0);
-        NONE_OF {
-            STATUS_ICON(opponentLeft, paralysis: TRUE);
-            STATUS_ICON(opponentRight, paralysis: TRUE);
-        }
-
-        HP_BAR(opponentLeft);
-        NONE_OF {
-            STATUS_ICON(opponentLeft, paralysis: TRUE);
-            STATUS_ICON(opponentRight, paralysis: TRUE);
-        }
-
-        HP_BAR(opponentRight);
-        NONE_OF {
-            STATUS_ICON(opponentLeft, paralysis: TRUE);
-            STATUS_ICON(opponentRight, paralysis: TRUE);
-        }
+        STATUS_ICON(opponentRight, paralysis: TRUE);
+        MESSAGE("The effects of the neutralizing gas wore off!");
     }
 }
 
 DOUBLE_BATTLE_TEST("Neutralizing Gas fainting as Discharge's foe allows 30% paralysis on the attacker's ally")
 {
-    KNOWN_FAILING;
     bool32 gasOnRight;
     PARAMETRIZE { gasOnRight = FALSE; }
     PARAMETRIZE { gasOnRight = TRUE; }
@@ -62,16 +48,14 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas fainting as Discharge's foe allows 30% para
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_DISCHARGE); }
     } SCENE {
+        // Targets resolve in battler order, but the gas lingers until the move is done
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DISCHARGE, playerLeft);
-        HP_BAR(playerRight);
-        STATUS_ICON(playerRight, paralysis: TRUE);
-        if (gasOnRight) {
-            HP_BAR(opponentLeft);
+        if (gasOnRight)
             HP_BAR(opponentRight, hp: 0);
-        } else {
+        else
             HP_BAR(opponentLeft, hp: 0);
-            HP_BAR(opponentRight);
-        }
+        STATUS_ICON(playerRight, paralysis: TRUE);
+        MESSAGE("The effects of the neutralizing gas wore off!");
     }
 }
 

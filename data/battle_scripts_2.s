@@ -51,6 +51,12 @@ BattleScript_UseItemMessage:
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_ItemBlockedByEmbargo::
+	call BattleScript_UseItemMessage
+	printstring STRINGID_BUTNOTHINGHAPPENED
+	waitmessage B_WAIT_TIME_LONG
+	end
+
 BattleScript_ItemRestoreHPRet:
 	clearmoveresultflags MOVE_RESULT_NO_EFFECT
 	healthbarupdate BS_SCRIPTING

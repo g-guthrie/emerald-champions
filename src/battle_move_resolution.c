@@ -3686,7 +3686,12 @@ static enum MoveEndResult MoveEndFaintBlock(struct BattleCalcValues *cv)
             if (gBattleMons[cv->battlerDef].volatiles.neutralizingGas)
             {
                 gBattleMons[cv->battlerDef].volatiles.neutralizingGas = FALSE;
-                if (!IsNeutralizingGasOnField())
+                // A spread move keeps resolving under the same conditions it started with:
+                // the gas lingers until every target is done (see MoveEndNextTarget)
+                if (IsSpreadMove(GetBattlerMoveTargetType(cv->battlerAtk, cv->move))
+                 && GetNextTarget(GetBattlerMoveTargetType(cv->battlerAtk, cv->move), TRUE) != MAX_BATTLERS_COUNT)
+                    gBattleStruct->neutralizingGasLingering |= 1u << cv->battlerDef;
+                else if (!IsNeutralizingGasOnField())
                 {
                     BattleScriptCall(BattleScript_NeutralizingGasExits);
                     result = MOVEEND_RESULT_RUN_SCRIPT;
@@ -3901,6 +3906,16 @@ static enum MoveEndResult MoveEndNextTarget(struct BattleCalcValues *cv)
 
             gBattlescriptCurrInstr = BattleScript_FlushMessageBox;
             return MOVEEND_RESULT_BREAK;
+        }
+    }
+
+    if (gBattleStruct->neutralizingGasLingering)
+    {
+        gBattleStruct->neutralizingGasLingering = 0;
+        if (!IsNeutralizingGasOnField())
+        {
+            BattleScriptCall(BattleScript_NeutralizingGasExits);
+            return MOVEEND_RESULT_RUN_SCRIPT;
         }
     }
 
@@ -4186,12 +4201,25 @@ static enum MoveEndResult MoveEndMoveBlockRecoil(struct BattleCalcValues *cv)
 
 static enum MoveEndResult MoveEndSheerForce(struct BattleCalcValues *cv)
 {
-    if (IsSheerForceAffected(cv->move, cv->abilities[cv->battlerAtk]))
-        gBattleScripting.moveendState = MOVEEND_ITEMS_EFFECTS_ALL;
-    else
-        gBattleScripting.moveendState++;
-
+    // The suppressed steps are skipped in MoveEnd via IsMoveEndStepSuppressedBySheerForce
+    gBattleScripting.moveendState++;
     return MOVEEND_RESULT_CONTINUE;
+}
+
+// Sheer Force suppresses every step between MOVEEND_SHEER_FORCE and MOVEEND_ITEMS_EFFECTS_ALL.
+// As of Champions, the target's Color Change / Berserk / Anger Shell and Pickpocket still activate.
+static bool32 IsMoveEndStepSuppressedBySheerForce(struct BattleCalcValues *cv)
+{
+    u32 state = gBattleScripting.moveendState;
+
+    if (state <= MOVEEND_SHEER_FORCE || state >= MOVEEND_ITEMS_EFFECTS_ALL)
+        return FALSE;
+    if (!IsSheerForceAffected(cv->move, cv->abilities[cv->battlerAtk]))
+        return FALSE;
+    if (GetConfig(B_SHEER_FORCE_AGAINST_ABILITIES) >= GEN_CHAMPIONS
+     && (state == MOVEEND_COLOR_CHANGE || state == MOVEEND_PICKPOCKET))
+        return FALSE;
+    return TRUE;
 }
 
 static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
@@ -5177,6 +5205,8 @@ static bool32 ShouldSetStompingTantrumTimer(void)
 
 static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
 {
+    gBattleStruct->neutralizingGasLingering = 0; // Never outlives the move
+
     // go to next Bouncer or original attacker if possible
     if (gBattleStruct->bouncedMoveIsUsed)
     {
@@ -5378,7 +5408,15 @@ enum MoveEndResult DoMoveEnd(enum MoveEndState endMode, enum MoveEndState endSta
 
     do
     {
-        result = sMoveEndHandlers[gBattleScripting.moveendState](&cv);
+        if (IsMoveEndStepSuppressedBySheerForce(&cv))
+        {
+            gBattleScripting.moveendState++;
+            result = MOVEEND_RESULT_CONTINUE;
+        }
+        else
+        {
+            result = sMoveEndHandlers[gBattleScripting.moveendState](&cv);
+        }
 
         if (endMode == 1 && result == MOVEEND_RESULT_CONTINUE)
             gBattleScripting.moveendState = MOVEEND_COUNT;

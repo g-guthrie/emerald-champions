@@ -526,7 +526,9 @@ bool32 Ai_IsPriorityBlocked(enum BattlerId battlerAtk, enum BattlerId battlerDef
 
 bool32 AI_CanMoveBeBlockedByTarget(struct DamageContext *ctx)
 {
-    return CanMoveBeBlockedByTarget(ctx, GetBattleMovePriority(ctx->battlerAtk, ctx->abilities[ctx->battlerAtk], ctx->move));
+    s32 movePriority = GetBattleMovePriority(ctx->battlerAtk, ctx->abilities[ctx->battlerAtk], ctx->move);
+    // Uses ctx->terrain, so the AI also sees terrain it is only simulating (e.g. a Psychic Surge switch-in)
+    return CanMoveBeBlockedByTarget(ctx, movePriority) || CanPsychicTerrainProtectTarget(ctx, movePriority);
 }
 
 // To save computation time this function has 2 variants. One saves, sets and restores battlers, while the other doesn't.

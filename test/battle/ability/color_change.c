@@ -190,7 +190,6 @@ SINGLE_BATTLE_TEST("Color Change does not activate if move is boosted by Sheer F
 
 SINGLE_BATTLE_TEST("Color Change does activate if move is boosted by Sheer Force (Champions)")
 {
-    KNOWN_FAILING;
     GIVEN {
         WITH_CONFIG(B_SHEER_FORCE_AGAINST_ABILITIES, GEN_CHAMPIONS);
         PLAYER(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
