@@ -330,6 +330,7 @@ PetalburgCity_Gym_EventScript_NormanPostBattle::
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GiveEnigmaBerry
 	goto_if_unset FLAG_RECEIVED_TM_FACADE, PetalburgCity_Gym_EventScript_GiveFacade2
+	goto_if_unset FLAG_RECEIVED_GARDEVOIRITE, PetalburgCity_Gym_EventScript_GiveMegaStone2
 	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough
 	msgbox PetalburgCity_Gym_Text_DadGoingToKeepTraining, MSGBOX_DEFAULT
 	release
@@ -337,6 +338,7 @@ PetalburgCity_Gym_EventScript_NormanPostBattle::
 
 PetalburgCity_Gym_EventScript_GiveFacade2::
 	call PetalburgCity_Gym_EventScript_GiveFacade
+	call PetalburgCity_Gym_EventScript_GiveMegaStone
 	release
 	end
 
@@ -388,6 +390,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	call PetalburgCity_Gym_EventScript_UnlockAllDoors
 	special DrawWholeMapView
 	call PetalburgCity_Gym_EventScript_GiveFacade
+	call PetalburgCity_Gym_EventScript_GiveMegaStone
 	delay 30
 	msgbox PetalburgCity_Gym_Text_DadHappyAndSad, MSGBOX_DEFAULT
 	closemessage
@@ -1137,6 +1140,22 @@ PetalburgCity_Gym_EventScript_GymStatue::
 	releaseall
 	end
 
+PetalburgCity_Gym_EventScript_GiveMegaStone::
+	goto_if_unset FLAG_RECEIVED_TM_FACADE, PetalburgCity_Gym_EventScript_GiveMegaStoneEnd
+	goto_if_set FLAG_RECEIVED_GARDEVOIRITE, PetalburgCity_Gym_EventScript_GiveMegaStoneEnd
+	msgbox PetalburgCity_Gym_Text_TakeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_GARDEVOIRITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox PetalburgCity_Gym_Text_ExplainMegaStone, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_GARDEVOIRITE
+PetalburgCity_Gym_EventScript_GiveMegaStoneEnd::
+	return
+
+PetalburgCity_Gym_EventScript_GiveMegaStone2::
+	call PetalburgCity_Gym_EventScript_GiveMegaStone
+	release
+	end
+
 PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon:
 	.string "DAD: Hm?\p"
 	.string "Well, if it isn't {PLAYER}!\n"
@@ -1589,3 +1608,12 @@ PetalburgCity_Gym_Text_NormanRematchNeedTwoMons:
 	.string "Sorry, but you'll have to come back\n"
 	.string "with at least two POKéMON.$"
 
+PetalburgCity_Gym_Text_TakeMegaStone:
+	.string "I'd like you to have this, too.$"
+
+PetalburgCity_Gym_Text_ExplainMegaStone:
+	.string "That's a GARDEVOIRITE.\p"
+	.string "A GARDEVOIR holding it can MEGA\n"
+	.string "EVOLVE in battle.\p"
+	.string "WALLY's RALTS may grow into one\n"
+	.string "someday, too.$"

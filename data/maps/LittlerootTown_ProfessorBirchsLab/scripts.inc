@@ -407,6 +407,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile::
 	hidemonpic
+	setflag FLAG_CHOSE_TOTODILE
+	call LittlerootTown_ProfessorBirchsLab_EventScript_GiveFeraligite
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
 	releaseall
@@ -453,6 +455,16 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita::
 	releaseall
 	end
 
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveFeraligite::
+	goto_if_set FLAG_RECEIVED_FERALIGITE, LittlerootTown_ProfessorBirchsLab_EventScript_GiveFeraligiteEnd
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_TakeFeraligite, MSGBOX_DEFAULT
+	giveitem ITEM_FERALIGITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainFeraligite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_FERALIGITE
+LittlerootTown_ProfessorBirchsLab_EventScript_GiveFeraligiteEnd::
+	return
+
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
@@ -463,6 +475,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
+	call_if_set FLAG_CHOSE_TOTODILE, LittlerootTown_ProfessorBirchsLab_EventScript_GiveFeraligite
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -992,3 +1005,12 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_TakeFeraligite:
+	.string "PROF. BIRCH: Oh, and STEVEN left this\n"
+	.string "with me for whoever chose TOTODILE.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_ExplainFeraligite:
+	.string "That stone lets FERALIGATR MEGA\n"
+	.string "EVOLVE. TOTODILE's final form!\p"
+	.string "I can't wait to hear about it!$"

@@ -58,6 +58,7 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_Gym_EventScript_TateAndLizaRematch
 	goto_if_unset FLAG_RECEIVED_TM_CALM_MIND, MossdeepCity_Gym_EventScript_GiveCalmMind2
+	goto_if_unset FLAG_RECEIVED_ALAKAZITE, MossdeepCity_Gym_EventScript_GiveMegaStone2
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -83,6 +84,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 1
 	call MossdeepCity_Gym_EventScript_GiveCalmMind
+	call MossdeepCity_Gym_EventScript_GiveMegaStone
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -99,6 +101,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind2::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_CALM_MIND
+	call MossdeepCity_Gym_EventScript_GiveMegaStone
 	release
 	end
 
@@ -367,6 +370,22 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch::
 	turnrotatingtileobjects
 	waitmovement 0
 	freerotatingtilepuzzle
+	end
+
+MossdeepCity_Gym_EventScript_GiveMegaStone::
+	goto_if_unset FLAG_RECEIVED_TM_CALM_MIND, MossdeepCity_Gym_EventScript_GiveMegaStoneEnd
+	goto_if_set FLAG_RECEIVED_ALAKAZITE, MossdeepCity_Gym_EventScript_GiveMegaStoneEnd
+	msgbox MossdeepCity_Gym_Text_TakeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_ALAKAZITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox MossdeepCity_Gym_Text_ExplainMegaStone, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_ALAKAZITE
+MossdeepCity_Gym_EventScript_GiveMegaStoneEnd::
+	return
+
+MossdeepCity_Gym_EventScript_GiveMegaStone2::
+	call MossdeepCity_Gym_EventScript_GiveMegaStone
+	release
 	end
 
 MossdeepCity_Gym_Text_GymGuideAdvice:
@@ -651,3 +670,13 @@ MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons:
 	.string "LIZA: You brought just one POKéMON!\p"
 	.string "TATE: We need you to bring at least…\n"
 	.string "LIZA: Two POKéMON when you come back.$"
+
+MossdeepCity_Gym_Text_TakeMegaStone:
+	.string "TATE: There's one more thing…\n"
+	.string "LIZA: …we'd like you to have!$"
+
+MossdeepCity_Gym_Text_ExplainMegaStone:
+	.string "TATE: That's an ALAKAZITE…\n"
+	.string "LIZA: …for an ALAKAZAM to hold!\p"
+	.string "TATE: With it, ALAKAZAM can…\n"
+	.string "LIZA: …MEGA EVOLVE in battle!$"

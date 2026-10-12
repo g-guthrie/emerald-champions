@@ -78,6 +78,7 @@ MauvilleCity_Gym_EventScript_Wattson::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
 	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveShockWave2
+	goto_if_unset FLAG_RECEIVED_MANECTITE, MauvilleCity_Gym_EventScript_GiveMegaStone2
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
@@ -100,6 +101,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	special DrawWholeMapView
 	playse SE_UNLOCK
 	call MauvilleCity_Gym_EventScript_GiveShockWave
+	call MauvilleCity_Gym_EventScript_GiveMegaStone
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -116,6 +118,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
+	call MauvilleCity_Gym_EventScript_GiveMegaStone
 	release
 	end
 
@@ -254,6 +257,22 @@ MauvilleCity_Gym_EventScript_GymStatueCertified::
 MauvilleCity_Gym_EventScript_GymStatue::
 	msgbox MauvilleCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
+	end
+
+MauvilleCity_Gym_EventScript_GiveMegaStone::
+	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveMegaStoneEnd
+	goto_if_set FLAG_RECEIVED_MANECTITE, MauvilleCity_Gym_EventScript_GiveMegaStoneEnd
+	msgbox MauvilleCity_Gym_Text_TakeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_MANECTITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox MauvilleCity_Gym_Text_ExplainMegaStone, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_MANECTITE
+MauvilleCity_Gym_EventScript_GiveMegaStoneEnd::
+	return
+
+MauvilleCity_Gym_EventScript_GiveMegaStone2::
+	call MauvilleCity_Gym_EventScript_GiveMegaStone
+	release
 	end
 
 MauvilleCity_Gym_Text_GymGuideAdvice:
@@ -419,3 +438,13 @@ MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons:
 	.string "Come see me with two or more\n"
 	.string "POKéMON, all right?$"
 
+MauvilleCity_Gym_Text_TakeMegaStone:
+	.string "Wahahahaha!\n"
+	.string "I've got one more thing for you!$"
+
+MauvilleCity_Gym_Text_ExplainMegaStone:
+	.string "That's a MANECTITE!\p"
+	.string "Let a MANECTRIC hold it, and it can\n"
+	.string "MEGA EVOLVE in battle!\p"
+	.string "Positively electrifying, isn't it?\n"
+	.string "Wahahahaha!$"

@@ -48,6 +48,7 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
 	goto_if_unset FLAG_RECEIVED_TM_OVERHEAT, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
+	goto_if_unset FLAG_RECEIVED_CAMERUPTITE, LavaridgeTown_Gym_1F_EventScript_GiveMegaStone2
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -67,6 +68,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
+	call LavaridgeTown_Gym_1F_EventScript_GiveMegaStone
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -83,6 +85,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_OVERHEAT
+	call LavaridgeTown_Gym_1F_EventScript_GiveMegaStone
 	release
 	end
 
@@ -178,6 +181,22 @@ LavaridgeTown_Gym_1F_EventScript_GymStatueCertified::
 LavaridgeTown_Gym_1F_EventScript_GymStatue::
 	msgbox LavaridgeTown_Gym_1F_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
+	end
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone::
+	goto_if_unset FLAG_RECEIVED_TM_OVERHEAT, LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneEnd
+	goto_if_set FLAG_RECEIVED_CAMERUPTITE, LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneEnd
+	msgbox LavaridgeTown_Gym_1F_Text_TakeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_CAMERUPTITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox LavaridgeTown_Gym_1F_Text_ExplainMegaStone, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_CAMERUPTITE
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStoneEnd::
+	return
+
+LavaridgeTown_Gym_1F_EventScript_GiveMegaStone2::
+	call LavaridgeTown_Gym_1F_EventScript_GiveMegaStone
+	release
 	end
 
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
@@ -397,3 +416,13 @@ LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons:
 	.string "that can battle?\p"
 	.string "I hate to say this, but when you come\n"
 	.string "see me, bring at least two POKéMON.$"
+
+LavaridgeTown_Gym_1F_Text_TakeMegaStone:
+	.string "And… Um… Here!\n"
+	.string "Please take this, too!$"
+
+LavaridgeTown_Gym_1F_Text_ExplainMegaStone:
+	.string "That's a CAMERUPTITE.\p"
+	.string "If a CAMERUPT holds it, it can MEGA\n"
+	.string "EVOLVE and erupt with power!\p"
+	.string "That's what Grandpa told me, anyway.$"

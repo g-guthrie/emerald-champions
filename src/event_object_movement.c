@@ -23,6 +23,7 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "item.h"
+#include "item_ball.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -1892,6 +1893,9 @@ u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemp
     const struct SubspriteTable *subspriteTables = NULL;
     const struct ObjectEventTemplate objectEventTemplateLocal = TryGetObjectEventTemplateForOWE(objectEventTemplate);
     u16 graphicsId = objectEventTemplateLocal.graphicsId;
+
+    if (graphicsId == OBJ_EVENT_GFX_ITEM_BALL && IsPostGameItemBallHidden(objectEventTemplateLocal.trainerRange_berryTreeId))
+        return OBJECT_EVENTS_COUNT;
 
     graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(graphicsId, objectEventTemplateLocal.movementType, &spriteTemplate, &subspriteTables);

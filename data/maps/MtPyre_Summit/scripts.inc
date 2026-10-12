@@ -154,10 +154,28 @@ MtPyre_Summit_EventScript_OldManNewTale::
 MtPyre_Summit_EventScript_OldLady::
 	lock
 	faceplayer
+	goto_if_unset FLAG_SYS_GAME_CLEAR, MtPyre_Summit_EventScript_OldLadyOrbStory
+	goto_if_unset FLAG_RECEIVED_PRIMAL_ORBS, MtPyre_Summit_EventScript_OldLadyGiveOrbs
+MtPyre_Summit_EventScript_OldLadyOrbStory::
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	call_if_ge VAR_MT_PYRE_STATE, 3, MtPyre_Summit_EventScript_OldLadyOrbsReturned
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
 	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_Summit_EventScript_OldLadyGiveOrbs::
+	msgbox MtPyre_Summit_Text_ChampionShouldKeepOrbs, MSGBOX_DEFAULT
+	checkitem ITEM_RED_ORB
+	goto_if_eq VAR_RESULT, TRUE, MtPyre_Summit_EventScript_OldLadyGiveBlueOrb
+	giveitem ITEM_RED_ORB
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+MtPyre_Summit_EventScript_OldLadyGiveBlueOrb::
+	giveitem ITEM_BLUE_ORB
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RETURNED_RED_OR_BLUE_ORB
+	setflag FLAG_RECEIVED_PRIMAL_ORBS
+	msgbox MtPyre_Summit_Text_OrbsAwakenAncientPower, MSGBOX_DEFAULT
 	release
 	end
 
@@ -615,3 +633,15 @@ MtPyre_Summit_Text_HoennTrioTale:
 	.string "Then, its duty done, the green POKéMON\n"
 	.string "flew off into the wild blue yonder…$"
 
+MtPyre_Summit_Text_ChampionShouldKeepOrbs:
+	.string "You have become the CHAMPION, I hear.\p"
+	.string "Then I believe you are the one who\n"
+	.string "should keep the RED ORB and BLUE ORB.\p"
+	.string "Please, take them.$"
+
+MtPyre_Summit_Text_OrbsAwakenAncientPower:
+	.string "It is said that GROUDON and KYOGRE\n"
+	.string "regain their ancient power…\p"
+	.string "…when they hold the ORB that once\n"
+	.string "sealed them away.\p"
+	.string "Please, take good care of them.$"

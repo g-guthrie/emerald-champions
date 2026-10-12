@@ -124,8 +124,18 @@ MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare::
 MossdeepCity_StevensHouse_EventScript_ReceivedBeldum::
 	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
 	setflag FLAG_RECEIVED_BELDUM
+	call MossdeepCity_StevensHouse_EventScript_GiveMetagrossite
 	releaseall
 	end
+
+MossdeepCity_StevensHouse_EventScript_GiveMetagrossite::
+	goto_if_set FLAG_RECEIVED_METAGROSSITE, MossdeepCity_StevensHouse_EventScript_GiveMetagrossiteEnd
+	msgbox MossdeepCity_StevensHouse_Text_StoneBesideBall, MSGBOX_DEFAULT
+	giveitem ITEM_METAGROSSITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	setflag FLAG_RECEIVED_METAGROSSITE
+MossdeepCity_StevensHouse_EventScript_GiveMetagrossiteEnd::
+	return
 
 MossdeepCity_StevensHouse_EventScript_RockDisplay::
 	msgbox MossdeepCity_StevensHouse_Text_CollectionOfRareRocks, MSGBOX_SIGN
@@ -138,6 +148,7 @@ MossdeepCity_StevensHouse_EventScript_Steven::
 MossdeepCity_StevensHouse_EventScript_Letter::
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_LetterFromSteven, MSGBOX_DEFAULT
+	call_if_set FLAG_RECEIVED_BELDUM, MossdeepCity_StevensHouse_EventScript_GiveMetagrossite
 	releaseall
 	end
 
@@ -204,6 +215,8 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven:
 	.string "the desk.\p"
 	.string "Inside it is a BELDUM, my favorite\n"
 	.string "POKéMON.\p"
+	.string "The stone beside it is for BELDUM,\n"
+	.string "once it has grown into a METAGROSS.\p"
 	.string "I'm counting on you.\p"
 	.string "May our paths cross someday.\p"
 	.string "STEVEN STONE$"
@@ -212,3 +225,6 @@ MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by STEVEN.$"
 
+MossdeepCity_StevensHouse_Text_StoneBesideBall:
+	.string "There was a stone beside the\n"
+	.string "POKé BALL…$"

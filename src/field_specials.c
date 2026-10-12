@@ -5766,3 +5766,17 @@ bool8 CheckAddCoins(void)
     else
         return TRUE;
 }
+
+// Rayquaza can only Mega Evolve while it knows DRAGON ASCENT, which it learns
+// at level 1, so the Rayquaza waiting on SKY PILLAR already knows it.
+void GiveWildRayquazaDragonAscent(void)
+{
+    u32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i) == MOVE_DRAGON_ASCENT)
+            return;
+    }
+    SetMonMoveSlot(&gEnemyParty[0], MOVE_DRAGON_ASCENT, 0);
+}

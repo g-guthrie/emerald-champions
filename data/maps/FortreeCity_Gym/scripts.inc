@@ -22,6 +22,7 @@ FortreeCity_Gym_EventScript_Winona::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
 	goto_if_unset FLAG_RECEIVED_TM_AERIAL_ACE, FortreeCity_Gym_EventScript_GiveAerialAce2
+	goto_if_unset FLAG_RECEIVED_ALTARIANITE, FortreeCity_Gym_EventScript_GiveMegaStone2
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -36,6 +37,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_GiveAerialAce
+	call FortreeCity_Gym_EventScript_GiveMegaStone
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -54,6 +56,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_AERIAL_ACE
+	call FortreeCity_Gym_EventScript_GiveMegaStone
 	release
 	end
 
@@ -132,6 +135,22 @@ FortreeCity_Gym_EventScript_GymStatueCertified::
 FortreeCity_Gym_EventScript_GymStatue::
 	msgbox FortreeCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
+	end
+
+FortreeCity_Gym_EventScript_GiveMegaStone::
+	goto_if_unset FLAG_RECEIVED_TM_AERIAL_ACE, FortreeCity_Gym_EventScript_GiveMegaStoneEnd
+	goto_if_set FLAG_RECEIVED_ALTARIANITE, FortreeCity_Gym_EventScript_GiveMegaStoneEnd
+	msgbox FortreeCity_Gym_Text_TakeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_ALTARIANITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	msgbox FortreeCity_Gym_Text_ExplainMegaStone, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_ALTARIANITE
+FortreeCity_Gym_EventScript_GiveMegaStoneEnd::
+	return
+
+FortreeCity_Gym_EventScript_GiveMegaStone2::
+	call FortreeCity_Gym_EventScript_GiveMegaStone
+	release
 	end
 
 FortreeCity_Gym_Text_GymGuideAdvice:
@@ -317,3 +336,11 @@ FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
 	.string "POKéMON with you?\p"
 	.string "Please return with two POKéMON\n"
 	.string "at the very least.$"
+
+FortreeCity_Gym_Text_TakeMegaStone:
+	.string "Please accept this as well.$"
+
+FortreeCity_Gym_Text_ExplainMegaStone:
+	.string "That is an ALTARIANITE.\p"
+	.string "Held by an ALTARIA, it lets it MEGA\n"
+	.string "EVOLVE and soar ever higher.$"
