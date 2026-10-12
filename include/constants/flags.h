@@ -1095,7 +1095,7 @@
 #define FLAG_ITEM_LILYCOVE_CITY_STARMINITE                           0x412
 #define FLAG_ITEM_MOSSDEEP_CITY_NET_BALL                            0x413
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_TM_IRON_TAIL                   0x414
-#define FLAG_ITEM_METEOR_FALLS_1F_1R_SALAMENCITE                      0x415
+#define FLAG_ITEM_METEOR_FALLS_1F_1R_AGGRONITE                      0x415
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_MOON_STONE                     0x416
 #define FLAG_ITEM_METEOR_FALLS_1F_1R_PP_UP                          0x417
 #define FLAG_ITEM_RUSTURF_TUNNEL_POKE_BALL                          0x418
@@ -1134,11 +1134,11 @@
 #define FLAG_ITEM_SHOAL_CAVE_ENTRANCE_DAWN_STONE                     0x439
 #define FLAG_ITEM_SHOAL_CAVE_INNER_ROOM_RARE_CANDY                  0x43A
 #define FLAG_ITEM_SHOAL_CAVE_STAIRS_ROOM_GLALITITE                   0x43B
-#define FLAG_ITEM_VICTORY_ROAD_1F_AGGRONITE                        0x43C
+#define FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR                        0x43C
 #define FLAG_ITEM_VICTORY_ROAD_1F_PP_UP                             0x43D
 #define FLAG_ITEM_VICTORY_ROAD_B1F_TM_PSYCHIC                       0x43E
 #define FLAG_ITEM_VICTORY_ROAD_B1F_MAWILITE                     0x43F
-#define FLAG_ITEM_VICTORY_ROAD_B2F_FULL_HEAL                        0x440
+#define FLAG_ITEM_VICTORY_ROAD_B2F_SALAMENCITE                        0x440
 #define FLAG_ITEM_MT_PYRE_6F_TM_SHADOW_BALL                         0x441
 #define FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_EARTHQUAKE              0x442
 #define FLAG_ITEM_FIERY_PATH_TM_TOXIC                               0x443
