@@ -3183,8 +3183,9 @@ bool8 ScrCmd_hidefollower(struct ScriptContext *ctx)
     if (obj)
         FlagSet(FLAG_SAFE_FOLLOWER_MOVEMENT);
 
-    // execute next script command with no delay
-    return TRUE;
+    // Yield only to wait for the follower; otherwise run the next command
+    // this frame, so scripts without a follower keep vanilla timing.
+    return obj != NULL && wait;
 }
 
 bool8 ScrCmd_addtime(struct ScriptContext *ctx)

@@ -410,6 +410,11 @@ static void StartBattle(void)
     STATE->checkProgressParameter = 0;
     STATE->checkProgressTrial = 0;
     STATE->checkProgressTurn = 0;
+    // gBattleResults is only cleared once the new battle reaches
+    // BeginBattleIntro, so until then it still holds the previous battle's
+    // turn count. Clear it now so a progress check during battle setup
+    // cannot record a stale turn that the new battle later matches.
+    gBattleResults.battleTurnCounter = 0;
 
     PrintTestName();
 }

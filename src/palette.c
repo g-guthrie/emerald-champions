@@ -323,7 +323,8 @@ static u32 UpdateNormalPaletteFade_Alternate(void)
 
     if (!gPaletteFade.objPaletteToggle)
     {
-        selectedPalettes = gPaletteFadeSelectedPalettes;
+        // Background palettes only; sprites follow on the next frame, as in vanilla
+        selectedPalettes = gPaletteFadeSelectedPalettes & 0xFFFF;
     }
     else
     {

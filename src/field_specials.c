@@ -5775,8 +5775,8 @@ void GiveWildRayquazaDragonAscent(void)
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i) == MOVE_DRAGON_ASCENT)
+        if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + i) == MOVE_DRAGON_ASCENT)
             return;
     }
-    SetMonMoveSlot(&gEnemyParty[0], MOVE_DRAGON_ASCENT, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], MOVE_DRAGON_ASCENT, 0);
 }

@@ -5043,7 +5043,7 @@ u16 SpeciesToPokedexNum(enum Species species)
     else
     {
         species = SpeciesToRegionalPokedexNum(species);
-        if (species <= REGIONAL_DEX_COUNT)
+        if (species != 0 && species <= REGIONAL_DEX_COUNT)
             return species;
         return 0xFFFF;
     }
