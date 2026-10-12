@@ -51,9 +51,17 @@ u32 GetNumberSprayStrength(void)
     return CountOrGetSprays(SPRAY_COUNT);
 }
 
+// Offers the strongest kind still in the bag (Max > Super > regular)
 u32 GetSprayId(void)
 {
-    return CountOrGetSprays(SPRAY_GET);
+    u32 spray = GetLastUsedSprayType();
+
+    for (s32 i = NUM_SPRAY_STRENGTH - 1; i >= 0; i--)
+    {
+        if (CheckBagHasItem(spray + i, 1))
+            return spray + i;
+    }
+    return ITEM_NONE;
 }
 
 u32 GetLastUsedSprayType(void)

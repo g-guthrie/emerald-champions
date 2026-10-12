@@ -52,7 +52,7 @@ EventScript_UseSingleSpray::
 	checkitem VAR_LAST_REPEL_LURE_USED, 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_UseSingleSpray_2
-	call EventScript_UseDifferentSpray
+	call EventScript_UseDifferentSpray @ None of the same kind left: offer the strongest kind still in the bag
 .endif
 EventScript_UseSingleSpray_1:
 	closemessage
@@ -140,7 +140,7 @@ Text_SprayWoreOff::
 	.string "{STR_VAR_1}'s effect wore off…$"
 
 Text_SprayWoreOffAskUseAnother::
-	.string "{STR_VAR_1}'s effect wore off!\n"
+	.string "{STR_VAR_1}'s effect wore off…\n"
 	.string "Use another?$"
 
 Text_SprayWoreOffAskUseX::
