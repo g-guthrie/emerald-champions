@@ -1,124 +1,45 @@
 #include "global.h"
 #include "event_data.h"
-#include "script_menu.h"
-#include "strings.h"
-#include "constants/items.h"
 #include "item.h"
-#include "script_menu.h"
-#include "menu.h"
+#include "constants/items.h"
 
-#define SPRAY_COUNT 0
-#define SPRAY_GET 1
+// Helpers for EventScript_RepelWoreOff (data/scripts/repel.inc).
+// Each family's strengths are consecutive item ids: REPEL, SUPER REPEL, MAX REPEL
+// (and LURE, SUPER LURE, MAX LURE).
+#define NUM_SPRAY_STRENGTHS 3
 
-#define NUM_SPRAY_STRENGTH 3
-#define SPRAY_MENU_Y_COORD 8
+u16 GetRepelToOffer(void);
+void UseRepelFromPrompt(void);
 
-#define LOCAL_VAR_SPRAY gSpecialVar_0x8004
-#define LOCAL_VAR_SPRAY_CONST VAR_0x8004
-
-u32 CountOrGetSprays(u32);
-u32 GetNumberSprayStrength(void);
-u32 GetSprayId(void);
-u32 GetLastUsedSprayType(void);
-u32 SetSprayMenuCursorPosition(int, int);
-#if I_REPEL_LURE_MENU == TRUE
-void DrawSprayMenu(void);
-#endif
-void HandleSprayMenuChoice(void);
-
-u32 CountOrGetSprays(u32 func)
+static enum Item GetSprayFamily(void)
 {
-    u32 i, currentSpray, sprayCount = 0;
-    u32 spray = GetLastUsedSprayType();
-
-    for (i = 0; i < NUM_SPRAY_STRENGTH; i++)
-    {
-        currentSpray = spray + i;
-
-        if (!CheckBagHasItem(currentSpray,1))
-            continue;
-
-        if (func == SPRAY_COUNT)
-            sprayCount++;
-        else
-            return (currentSpray);
-    }
-    return sprayCount;
+    return IS_LAST_USED_LURE(VarGet(VAR_REPEL_STEP_COUNT)) ? ITEM_LURE : ITEM_REPEL;
 }
 
-u32 GetNumberSprayStrength(void)
+// Another of the kind that just wore off, otherwise the strongest kind left in the bag.
+u16 GetRepelToOffer(void)
 {
-    return CountOrGetSprays(SPRAY_COUNT);
-}
+    enum Item lastUsed = VarGet(VAR_LAST_REPEL_LURE_USED);
+    enum Item family = GetSprayFamily();
 
-// Offers the strongest kind still in the bag (Max > Super > regular)
-u32 GetSprayId(void)
-{
-    u32 spray = GetLastUsedSprayType();
+    if (lastUsed != ITEM_NONE && CheckBagHasItem(lastUsed, 1))
+        return lastUsed;
 
-    for (s32 i = NUM_SPRAY_STRENGTH - 1; i >= 0; i--)
+    for (s32 i = NUM_SPRAY_STRENGTHS - 1; i >= 0; i--)
     {
-        if (CheckBagHasItem(spray + i, 1))
-            return spray + i;
+        if (CheckBagHasItem(family + i, 1))
+            return family + i;
     }
     return ITEM_NONE;
 }
 
-u32 GetLastUsedSprayType(void)
+// Uses the spray in VAR_0x8004 exactly as using it from the bag would.
+void UseRepelFromPrompt(void)
 {
-    if (IS_LAST_USED_LURE(VarGet(VAR_REPEL_STEP_COUNT)))
-        return ITEM_LURE;
-    else
-        return ITEM_REPEL;
-}
+    enum Item spray = gSpecialVar_0x8004;
+    u32 lureMask = (GetSprayFamily() == ITEM_LURE) ? REPEL_LURE_MASK : 0;
 
-u32 SetSprayMenuCursorPosition(int currentSpray, int count)
-{
-    if (VarGet(VAR_LAST_REPEL_LURE_USED) == currentSpray)
-        return count;
-
-    return 0;
-}
-
-#if I_REPEL_LURE_MENU == TRUE
-void DrawSprayMenu(void)
-{
-    struct MenuAction menuItems[NUM_SPRAY_STRENGTH+1] = {NULL};
-    int sprayIndex, count = 0, menuPos = 0, currentSpray, yCoord = 0;
-    u32 spray = GetLastUsedSprayType();
-
-    for (sprayIndex = 0; sprayIndex < (NUM_SPRAY_STRENGTH); sprayIndex++)
-    {
-        currentSpray = spray + sprayIndex;
-
-        if (!CheckBagHasItem(currentSpray, 1))
-            continue;
-
-        menuItems[count].text = GetItemName(currentSpray);
-        VarSet(LOCAL_VAR_SPRAY_CONST + count, currentSpray);
-
-        if (VAR_LAST_REPEL_LURE_USED != 0)
-            menuPos = SetSprayMenuCursorPosition(currentSpray, count);
-
-        yCoord = SPRAY_MENU_Y_COORD - (2 * count);
-        count++;
-    }
-
-    gSpecialVar_0x8003 = count;
-    menuItems[count].text = gText_Cancel2;
-
-    DrawMultichoiceMenuInternal(18, yCoord, 0, FALSE, menuPos, menuItems, count+1);
-}
-#endif
-
-void HandleSprayMenuChoice(void)
-{
-    u32 lureMask = (GetLastUsedSprayType() == ITEM_LURE) ? REPEL_LURE_MASK : 0;
-
-    LOCAL_VAR_SPRAY = VarGet(LOCAL_VAR_SPRAY_CONST + gSpecialVar_Result);
-
-    VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(LOCAL_VAR_SPRAY) | lureMask);
-
-    if (VAR_LAST_REPEL_LURE_USED != 0)
-        VarSet(VAR_LAST_REPEL_LURE_USED, LOCAL_VAR_SPRAY);
+    VarSet(VAR_REPEL_STEP_COUNT, GetItemHoldEffectParam(spray) | lureMask);
+    VarSet(VAR_LAST_REPEL_LURE_USED, spray);
+    RemoveBagItem(spray, 1);
 }

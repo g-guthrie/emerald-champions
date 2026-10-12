@@ -542,9 +542,8 @@ gSpecials::
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
-	def_special GetNumberSprayStrength
-	def_special GetSprayId
-	def_special GetLastUsedSprayType
+	def_special GetRepelToOffer
+	def_special UseRepelFromPrompt
 	def_special TrySkyBattle
 	def_special VsSeekerResetObjectMovementAfterChargeComplete
 	def_special VsSeekerFreezeObjectsAfterChargeComplete

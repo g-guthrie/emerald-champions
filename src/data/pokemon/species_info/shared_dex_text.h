@@ -1,6 +1,6 @@
 // fallback
 const u8 gFallbackPokedexText[] = _(
-    "This is a newly discovered Pokémon.\n"
+    "This is a newly discovered POKéMON.\n"
     "It is currently under investigation.\n"
     "No detailed information is available\n"
     "at this time.");
@@ -31,17 +31,17 @@ const u8 gMarowakAlolaPokedexText[] = _(
     "pain that will never fade.");
 
 const u8 gEeveePokedexText[] = _(
-    "An Eevee has an unstable genetic makeup\n"
+    "An EEVEE has an unstable genetic makeup\n"
     "that suddenly mutates due to its\n"
     "environment. Radiation from various\n"
-    "Stones causes this Pokémon to evolve.");
+    "STONES causes this POKéMON to evolve.");
 
 // Gen 2 families
 const u8 gUnownPokedexText[] = _(
-    "This Pokémon is shaped like ancient text\n"
+    "This POKéMON is shaped like ancient text\n"
     "characters. Although research is ongoing,\n"
     "it is a mystery as to which came first,\n"
-    "the ancient writings or the various Unown.");
+    "the ancient writings or the various UNOWN.");
 
 // Gen 4 families
 const u8 gMothimPokedexText[] = _(

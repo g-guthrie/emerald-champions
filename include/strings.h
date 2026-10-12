@@ -757,8 +757,6 @@ extern const u8 gText_FrontierFacilityRoomsCleared[];
 extern const u8 gText_FrontierFacilityKOsStreak[];
 extern const u8 gText_FrontierFacilityFloorsCleared[];
 extern const u8 gText_FrontierFacilityTotalCaughtSpeciesBanned[];
-extern const u8 gText_FrontierFacilityIncluding[];
-extern const u8 gText_FrontierFacilityAreInelegible[];
 
 // Battle Tower
 extern const u8 BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Intro[];

@@ -171,10 +171,13 @@ u8 *CopyItemName(enum Item itemId, u8 *dst)
 }
 
 const u8 sText_s[] =_("S"); // Names are in vanilla caps
+static const u8 sText_Berry[] = _("BERRY");
+static const u8 sText_ies[] = _("IES");
 
+// As in vanilla, only POKé BALLS and BERRIES take a plural name
 u8 *CopyItemNameHandlePlural(enum Item itemId, u8 *dst, u32 quantity)
 {
-    if (quantity == 1)
+    if (quantity < 2 || (itemId != ITEM_POKE_BALL && GetItemPocket(itemId) != POCKET_BERRIES))
     {
         return StringCopy(dst, GetItemName(itemId));
     }
@@ -185,6 +188,9 @@ u8 *CopyItemNameHandlePlural(enum Item itemId, u8 *dst, u32 quantity)
     else
     {
         u8 *end = StringCopy(dst, GetItemName(itemId));
+        // Vanilla pluralizes "BERRY" as "BERRIES" (GetBerryCountString).
+        if (end - dst >= 5 && StringCompareN(end - 5, sText_Berry, 5) == 0)
+            return StringCopy(end - 1, sText_ies);
         return StringCopy(end, sText_s);
     }
 }

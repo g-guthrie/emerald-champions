@@ -1,6 +1,8 @@
 #ifndef GUARD_CONFIG_ITEM_H
 #define GUARD_CONFIG_ITEM_H
 
+#include "constants/vars.h" // VAR_LAST_REPEL_LURE_USED below must resolve wherever it is tested with #if
+
 // Item config
 #define I_SHINY_CHARM_ADDITIONAL_ROLLS  2           // The amount of additional Shiny rolls if the player has the Shiny Charm. Set it to 0 to disable the Shiny Charm's effects.
 #define I_KEY_FOSSILS                   GEN_LATEST  // In Gen4+, fossils are no longer Key Items.
@@ -19,7 +21,7 @@
 #define I_POWER_ITEM_BOOST              GEN_LATEST  // In Gen7+, Pokémon holding Power items gain 8 extra EVs instead of 4.
 #define I_PREMIER_BALL_BONUS            GEN_LATEST  // In LGPE onwards (Gen8+ here), the player is given a Premier Ball for every 10 Poké Balls of any type in the same purchase. Previously, this only applied to regular Poké Balls and only 1 could be obtained per purchase.
 #define I_ROTOM_CATALOG_THUNDER_SHOCK   GEN_LATEST  // In Gen9+, changing Rotom to its base form will teach it Thunder Shock even if it knows another move.
-#define I_REPEL_INCLUDE_FAINTED         GEN_LATEST  // In Gen1 and Gen6+, Repels use the level of the first party member to check which wild Pokémon to prevent encounters with, even if that member is fainted. In Gens2-5, they use the level of the first non-fainted Pokémon.
+#define I_REPEL_INCLUDE_FAINTED         GEN_3       // In Gen1 and Gen6+, Repels use the level of the first party member to check which wild Pokémon to prevent encounters with, even if that member is fainted. In Gens2-5, they use the level of the first non-fainted Pokémon.
 #define I_LAX_INCENSE_BOOST             GEN_LATEST  // In Gen4+, Lax Incense lowers accuracy by 10% instead of 5%.
 
 // TM config
@@ -33,8 +35,7 @@
 
 // Repel/Lure config
 // These two settings are both independent and complementary.
-#define VAR_LAST_REPEL_LURE_USED    0x404E   // VAR_LAST_REPEL_USED (numeric so #if checks always see it).  If this var has been assigned, the last Repel/Lure used will be saved and the player will be prompted with the vanilla repel YES/NO option, unless I_REPEL_LURE_MENU is set to TRUE.
-#define I_REPEL_LURE_MENU           FALSE    // If set to TRUE, the player is able to choose which Repel/Lure to use once the previous one runs out. Cursor position is saved by VAR_LAST_REPEL_LURE_USED if not 0.
+#define VAR_LAST_REPEL_LURE_USED    VAR_LAST_REPEL_USED // Remembers the last REPEL used so the "wore off" prompt can offer another of the same kind.
 
 // Vs. Seeker
 #define I_VS_SEEKER_CHARGING        0                     // If this flag is assigned, the Vs. Seeker functionality will be enabled. When the player has the Vs. Seeker, Match Call rematch functions will stop working. Documentation for the Vs. Seeker can be found in docs/tutorials/vs_seeker.md.

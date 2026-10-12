@@ -2031,19 +2031,43 @@ static void CheckBattleTypeFlag(void)
         gSpecialVar_Result = FALSE;
 }
 
-static void AppendCaughtBannedMonSpeciesName(enum Species species, u8 count, s32 numBannedMonsCaught)
+// More caught banned species than this are summarized instead of named
+#define MAX_LISTED_CAUGHT_BANNED 10
+
+// Vanilla line layout: "EGGS, NAME,\nNAME, NAME,\lNAME and NAME\lare"
+static u8 AppendCaughtBannedMonSpeciesName(enum Species species, u8 count, s32 numBannedMonsCaught)
 {
-    if (count == 1)
-        ;
-    else if (numBannedMonsCaught == count)
-        StringAppend(gStringVar1, gText_SpaceAndSpace);
-    else if (numBannedMonsCaught > count)
-        StringAppend(gStringVar1, gText_CommaSpace);
-    if (count == 3)
-        StringAppend(gStringVar1, gText_NewLine2);
-    else if (count == 6)
+    count++;
+    switch (count)
+    {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 9:
+    case 11:
+        if (numBannedMonsCaught == count)
+            StringAppend(gStringVar1, gText_SpaceAndSpace);
+        else if (numBannedMonsCaught > count)
+            StringAppend(gStringVar1, gText_CommaSpace);
+        break;
+    case 2:
+        if (count == numBannedMonsCaught)
+            StringAppend(gStringVar1, gText_SpaceAndSpace);
+        else
+            StringAppend(gStringVar1, gText_CommaSpace);
+        StringAppend(gStringVar1, gText_NewLine);
+        break;
+    default:
+        if (count == numBannedMonsCaught)
+            StringAppend(gStringVar1, gText_SpaceAndSpace);
+        else
+            StringAppend(gStringVar1, gText_CommaSpace);
         StringAppend(gStringVar1, gText_LineBreak);
+        break;
+    }
     StringAppend(gStringVar1, GetSpeciesName(species));
+    return count;
 }
 
 static void AppendIfValid(enum Species species, enum Item heldItem, u16 hp, enum FrontierLevelMode lvlMode, u8 monLevel, enum Species *speciesArray, enum Item *itemsArray, u8 *count)
@@ -2138,11 +2162,9 @@ static void CheckPartyIneligibility(void)
 
     if (numEligibleMons < toChoose)
     {
-        u32 i, j;
+        u32 i;
         enum Species baseSpecies = 0;
         u32 totalCaughtBanned = 0;
-        u32 totalPartyBanned = 0;
-        u32 partyBanned[PARTY_SIZE] = {0};
 
         for (i = 0; i < NUM_SPECIES; i++)
         {
@@ -2156,44 +2178,42 @@ static void CheckPartyIneligibility(void)
             }
         }
 
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
-            if (species == SPECIES_EGG || species == SPECIES_NONE)
-                continue;
-            if (gSpeciesInfo[GET_BASE_SPECIES_ID(species)].isFrontierBanned)
-            {
-                bool32 addToList = TRUE;
-                for (j = 0; j < totalPartyBanned; j++)
-                    if (partyBanned[j] == species)
-                        addToList = FALSE;
-                if (addToList)
-                {
-                    partyBanned[totalPartyBanned] = species;
-                    totalPartyBanned++;
-                }
-            }
-        }
-
         gStringVar1[0] = EOS;
         gSpecialVar_0x8004 = TRUE;
-        if (totalCaughtBanned == 0)
+        gSpecialVar_0x8005 = 0;
+        if (totalCaughtBanned <= MAX_LISTED_CAUGHT_BANNED)
         {
-            StringAppend(gStringVar1, gText_FrontierFacilityAreInelegible);
+            // List caught banned species by name, as vanilla did
+            count = 0;
+            for (i = 0; i < NUM_SPECIES; i++)
+            {
+                if (!IsSpeciesEnabled(i) || GET_BASE_SPECIES_ID(i) != i || !gSpeciesInfo[i].isFrontierBanned)
+                    continue;
+                if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(i), FLAG_GET_CAUGHT))
+                    count = AppendCaughtBannedMonSpeciesName(i, count, totalCaughtBanned);
+            }
+
+            if (count == 0)
+            {
+                StringAppend(gStringVar1, gText_Space2);
+                StringAppend(gStringVar1, gText_Are);
+            }
+            else
+            {
+                if (count & 1)
+                    StringAppend(gStringVar1, gText_LineBreak);
+                else
+                    StringAppend(gStringVar1, gText_Space2);
+                StringAppend(gStringVar1, gText_Are2);
+            }
         }
         else
         {
-            ConvertIntToDecimalStringN(gStringVar2, totalCaughtBanned, STR_CONV_MODE_LEFT_ALIGN, 3);
-            StringExpandPlaceholders(gStringVar4, gText_FrontierFacilityTotalCaughtSpeciesBanned);
-            StringAppend(gStringVar1, gStringVar4);
+            // Too many names to fit; summarize, and offer the list afterwards
+            ConvertIntToDecimalStringN(gStringVar3, totalCaughtBanned, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringExpandPlaceholders(gStringVar1, gText_FrontierFacilityTotalCaughtSpeciesBanned);
+            gSpecialVar_0x8005 = totalCaughtBanned;
         }
-        if (totalPartyBanned > 0)
-        {
-            StringAppend(gStringVar1, gText_FrontierFacilityIncluding);
-            for (i = 0; i < totalPartyBanned; i++)
-                AppendCaughtBannedMonSpeciesName(partyBanned[i], i+1, totalPartyBanned);
-        }
-        gSpecialVar_0x8005 = totalCaughtBanned;
     }
     else
     {
