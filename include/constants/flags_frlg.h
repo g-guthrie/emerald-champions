@@ -2309,7 +2309,7 @@
 #define FLAG_ITEM_ROUTE_110_RARE_CANDY                              0
 #define FLAG_ITEM_ROUTE_110_DIRE_HIT                                0
 #define FLAG_ITEM_ROUTE_111_TM_SANDSTORM                            0
-#define FLAG_ITEM_ROUTE_111_STARDUST                                0
+#define FLAG_ITEM_ROUTE_111_DAWN_STONE                                0
 #define FLAG_ITEM_ROUTE_111_HP_UP                                   0
 #define FLAG_ITEM_ROUTE_112_NUGGET                                  0
 #define FLAG_ITEM_ROUTE_113_MAX_ETHER                               0
@@ -2381,7 +2381,7 @@
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_2_SCANNER        0
 #define FLAG_ITEM_SCORCHED_SLAB_TM_SUNNY_DAY                        0
 #define FLAG_ITEM_METEOR_FALLS_B1F_2R_TM_DRAGON_CLAW                0
-#define FLAG_ITEM_SHOAL_CAVE_ENTRANCE_BIG_PEARL                     0
+#define FLAG_ITEM_SHOAL_CAVE_ENTRANCE_DAWN_STONE                     0
 #define FLAG_ITEM_SHOAL_CAVE_INNER_ROOM_RARE_CANDY                  0
 #define FLAG_ITEM_SHOAL_CAVE_STAIRS_ROOM_ICE_HEAL                   0
 #define FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR                        0
@@ -2419,8 +2419,8 @@
 #define FLAG_ITEM_MAUVILLE_CITY_X_SPEED                             0
 #define FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL                     0
 #define FLAG_ITEM_ROUTE_115_GREAT_BALL                              0
-#define FLAG_ITEM_SAFARI_ZONE_NORTH_CALCIUM                         0
-#define FLAG_ITEM_MT_PYRE_3F_SUPER_REPEL                            0
+#define FLAG_ITEM_SAFARI_ZONE_NORTH_PROTECTOR                         0
+#define FLAG_ITEM_MT_PYRE_3F_REAPER_CLOTH                            0
 #define FLAG_ITEM_ROUTE_118_HYPER_POTION                            0
 #define FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL                            0
 #define FLAG_ITEM_NEW_MAUVILLE_PARALYZE_HEAL                        0
@@ -2469,8 +2469,8 @@
 #define FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_NUGGET                        0
 #define FLAG_ITEM_MAGMA_HIDEOUT_3F_2R_PP_MAX                        0
 #define FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE                       0
-#define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0
-#define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0
+#define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_PEAT_BLOCK                     0
+#define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_RAZOR_FANG                  0
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0
