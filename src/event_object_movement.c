@@ -3379,6 +3379,83 @@ static u8 FindObjectEventPaletteIndexByTag(u16 tag)
     return 0xFF;
 }
 
+// Vanilla loads a hand-made reflection palette for each object palette
+// (sObjectPaletteTagSets, sPlayerReflectionPaletteSets and
+// sSpecialObjectReflectionPaletteSets). Palettes are allocated dynamically here,
+// so the reflection palette is looked up by the object's palette tag instead.
+static const u16 sObjectReflectionPaletteTags[][2] = {
+    {OBJ_EVENT_PAL_TAG_BRENDAN,           OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_MAY,               OBJ_EVENT_PAL_TAG_MAY_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER, OBJ_EVENT_PAL_TAG_PLAYER_UNDERWATER},
+    {OBJ_EVENT_PAL_TAG_NPC_1,             OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_2,             OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_3,             OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_4,             OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_QUINTY_PLUMP,      OBJ_EVENT_PAL_TAG_QUINTY_PLUMP_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_TRUCK,             OBJ_EVENT_PAL_TAG_TRUCK},
+    {OBJ_EVENT_PAL_TAG_VIGOROTH,          OBJ_EVENT_PAL_TAG_VIGOROTH},
+    {OBJ_EVENT_PAL_TAG_MOVING_BOX,        OBJ_EVENT_PAL_TAG_MOVING_BOX},
+    {OBJ_EVENT_PAL_TAG_CABLE_CAR,         OBJ_EVENT_PAL_TAG_CABLE_CAR},
+    {OBJ_EVENT_PAL_TAG_SSTIDAL,           OBJ_EVENT_PAL_TAG_SSTIDAL},
+    {OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW,  OBJ_EVENT_PAL_TAG_SUBMARINE_SHADOW},
+    {OBJ_EVENT_PAL_TAG_KYOGRE,            OBJ_EVENT_PAL_TAG_KYOGRE_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_GROUDON,           OBJ_EVENT_PAL_TAG_GROUDON_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_RED_LEAF,          OBJ_EVENT_PAL_TAG_RED_LEAF},
+#if IS_FRLG
+    {OBJ_EVENT_PAL_TAG_PLAYER_RED,        OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_PLAYER_GREEN,      OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_BLUE,          OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_PINK,          OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_GREEN,         OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION},
+    {OBJ_EVENT_PAL_TAG_NPC_WHITE,         OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION},
+#endif
+};
+
+// Returns the tag of the reflection palette vanilla uses for objects with this
+// palette, or TAG_NONE if there is none.
+u16 GetObjectEventReflectionPaletteTag(u16 paletteTag)
+{
+    u32 i;
+    for (i = 0; i < ARRAY_COUNT(sObjectReflectionPaletteTags); i++)
+    {
+        if (sObjectReflectionPaletteTags[i][0] == paletteTag)
+            return sObjectReflectionPaletteTags[i][1];
+    }
+    return TAG_NONE;
+}
+
+// TRUE for the palette of an object event itself (player, NPCs, special objects),
+// which vanilla keeps in slots that weather maps with COLOR_MAP_CONTRAST.
+// Reflection palettes and everything else use COLOR_MAP_DARK_CONTRAST.
+bool32 ObjectEventPaletteTagUsesContrastColorMap(u16 paletteTag)
+{
+    if (paletteTag < OBJ_EVENT_PAL_TAG_BRENDAN || paletteTag >= OBJ_EVENT_PAL_TAG_NONE)
+        return FALSE;
+
+    switch (paletteTag)
+    {
+    case OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_MAY_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_2_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_3_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_4_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_QUINTY_PLUMP_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_KYOGRE_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_GROUDON_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION:
+    case OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION:
+        return FALSE;
+    default:
+        return TRUE;
+    }
+}
+
 static void UNUSED IncrementObjectEventCoords(struct ObjectEvent *objectEvent, s16 x, s16 y)
 {
     objectEvent->previousCoords.x = objectEvent->currentCoords.x;

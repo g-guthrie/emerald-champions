@@ -109,12 +109,15 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
         || (bridgeType = MetatileBehavior_GetBridgeType(objectEvent->currentMetatileBehavior)))
     {
         reflectionSprite->sReflectionVerticalOffset = bridgeReflectionVerticalOffsets[bridgeType - 1];
-        LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite);
+        // As in vanilla, only objects with a bridge reflection palette (the player)
+        // turn solid blue; other objects keep their regular reflection palette.
+        if (GetObjectEventGraphicsInfo(objectEvent->graphicsId)->reflectionPaletteTag != OBJ_EVENT_PAL_TAG_NONE)
+        {
+            LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite);
+            return;
+        }
     }
-    else
-    {
-        LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
-    }
+    LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
 }
 
 // Apply a blue tint effect to a palette
@@ -163,26 +166,62 @@ static void ApplyIceFilter(u8 paletteNum, u16 *dest)
     }
 }
 
-static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+// Returns the slot of the reflection palette for mainSprite's palette, loading it if needed.
+// Objects that exist in vanilla use vanilla's hand-made reflection palettes
+// (e.g. OBJ_EVENT_PAL_TAG_NPC_1 -> OBJ_EVENT_PAL_TAG_NPC_1_REFLECTION). Objects whose
+// vanilla reflection reuses the object's own palette get a copy under the reflection tag,
+// so weather maps it like vanilla's reflection slot. Anything else gets a tinted palette.
+static u8 LoadReflectionPaletteForSprite(struct Sprite *reflectionSprite, const struct Sprite *mainSprite)
 {
-    const struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
     u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
-    u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
-    u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-    if (paletteNum == 0xFF)
+    u16 vanillaTag = GetObjectEventReflectionPaletteTag(baseTag);
+    u16 paletteTag;
+    u8 paletteNum;
+
+    if (vanillaTag != TAG_NONE && vanillaTag != baseTag)
+        paletteTag = vanillaTag;
+    else
+        paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
+
+    paletteNum = IndexOfSpritePaletteTag(paletteTag);
+    if (paletteNum != 0xFF)
+        return paletteNum;
+
+    // Free the reflection's previous palette if nothing else uses it
+    if (reflectionSprite->inUse)
     {
-        // Load filtered palette
+        reflectionSprite->inUse = FALSE;
+        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
+        reflectionSprite->inUse = TRUE;
+    }
+
+    if (vanillaTag != TAG_NONE)
+    {
+        paletteNum = LoadObjectEventPaletteCopy(vanillaTag, paletteTag);
+    }
+    else
+    {
         u16 filteredData[16];
         struct SpritePalette filteredPal = {.tag = paletteTag, .data = filteredData};
-        if (sprite->sIsStillReflection == FALSE)
+        if (reflectionSprite->sIsStillReflection == FALSE)
             ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
         else
             ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
         paletteNum = LoadSpritePalette(&filteredPal);
-        UpdateSpritePaletteWithWeather(paletteNum, TRUE);
     }
-    sprite->oam.paletteNum = paletteNum;
-    sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+    if (paletteNum != 0xFF)
+        UpdateSpritePaletteWithWeather(paletteNum, TRUE);
+    return paletteNum;
+}
+
+static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    const struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
+    sprite->oam.paletteNum = LoadReflectionPaletteForSprite(sprite, mainSprite);
+    // Vanilla reflections are drawn opaque with their hand-made palettes;
+    // only the generated tinted reflections of non-vanilla objects are blended.
+    if (GetObjectEventReflectionPaletteTag(GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum)) == TAG_NONE)
+        sprite->oam.objMode = ST_OAM_OBJ_BLEND;
 }
 
 // When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
@@ -208,31 +247,10 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
         return;
     }
 
-    // Only filter palette if not using the high bridge blue palette
-    // This is basically a copy of LoadObjectRegularReflectionPalette
+    // Keep the reflection palette in sync with the main sprite's palette,
+    // unless it is using the high bridge blue palette
     if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum)
-    {
-        u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
-        u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
-        u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
-        if (paletteNum == 0xFF)
-        {
-            // Build filtered palette
-            u16 filteredData[16];
-            struct SpritePalette filteredPal = {.tag = paletteTag, .data = filteredData};
-            // Free palette if unused
-            reflectionSprite->inUse = FALSE;
-            FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
-            reflectionSprite->inUse = TRUE;
-            if (reflectionSprite->sIsStillReflection == FALSE)
-                ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
-            else
-                ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
-            paletteNum = LoadSpritePalette(&filteredPal);
-            UpdateSpritePaletteWithWeather(paletteNum, TRUE);
-        }
-        reflectionSprite->oam.paletteNum = paletteNum;
-    }
+        reflectionSprite->oam.paletteNum = LoadReflectionPaletteForSprite(reflectionSprite, mainSprite);
     reflectionSprite->oam.shape = mainSprite->oam.shape;
     reflectionSprite->oam.size = mainSprite->oam.size;
     reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;

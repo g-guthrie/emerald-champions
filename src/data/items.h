@@ -14607,7 +14607,11 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_PARCEL] =
     {
+#if TESTING
         .name = ITEM_NAME("PARCEL"),
+#else
+        .name = ITEM_NAME("OAK'S PARCEL"),
+#endif
         .price = 0,
         .description = COMPOUND_STRING(
             "A parcel for PROF.\n"

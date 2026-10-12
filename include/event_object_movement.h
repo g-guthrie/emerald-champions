@@ -173,6 +173,8 @@ const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId)
 void SetObjectInvisibility(u8 localId, u8 mapNum, u8 mapGroup, bool8 invisible);
 void FreeAndReserveObjectSpritePalettes(void);
 u8 LoadObjectEventPalette(u16 paletteTag);
+u16 GetObjectEventReflectionPaletteTag(u16 paletteTag);
+bool32 ObjectEventPaletteTagUsesContrastColorMap(u16 paletteTag);
 u8 LoadObjectEventPaletteCopy(u16 originalTag, u16 copyTag);
 u8 LoadPlayerObjectEventPalette(enum Gender gender);
 void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
