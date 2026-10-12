@@ -36,7 +36,7 @@ MoveRelearner_Text_CantTeachMoveToPkmn:
 	.string "I can teach that Pokémon.$"
 
 MoveRelearner_Text_LevelUpMoveLWR::
-	.string "level up move$"
+	.string "move$"
 
 MoveRelearner_Text_EggMoveLWR::
 	.string "egg move$"

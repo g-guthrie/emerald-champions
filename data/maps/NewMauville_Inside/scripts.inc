@@ -188,6 +188,7 @@ NewMauville_Inside_EventScript_Voltorb1::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedVoltorb1
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NewMauville_Inside_EventScript_DefeatedVoltorb1
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NewMauville_Inside_EventScript_DefeatedVoltorb1
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, NewMauville_Inside_EventScript_DefeatedVoltorb1
 	setflag FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE
 	release
 	end
@@ -212,6 +213,7 @@ NewMauville_Inside_EventScript_Voltorb2::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedVoltorb2
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NewMauville_Inside_EventScript_DefeatedVoltorb2
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NewMauville_Inside_EventScript_DefeatedVoltorb2
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, NewMauville_Inside_EventScript_DefeatedVoltorb2
 	setflag FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE
 	release
 	end
@@ -236,6 +238,7 @@ NewMauville_Inside_EventScript_Voltorb3::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedVoltorb3
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NewMauville_Inside_EventScript_DefeatedVoltorb3
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NewMauville_Inside_EventScript_DefeatedVoltorb3
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, NewMauville_Inside_EventScript_DefeatedVoltorb3
 	setflag FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE
 	release
 	end

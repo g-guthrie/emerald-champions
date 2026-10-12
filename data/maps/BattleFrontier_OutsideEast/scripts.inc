@@ -134,6 +134,7 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
 	setflag FLAG_DEFEATED_SUDOWOODO
 	release
 	end

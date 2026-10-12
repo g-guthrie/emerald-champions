@@ -12,7 +12,6 @@
 
 #define DEFAULT_MAX_SIZE 0x8000 // was 0x8100 in Ruby/Sapphire
 #define DEFAULT_MAX_SIZE_MAGIKARP 0
-static u8* ReturnHeightStringNoWhitespace(u32 size);
 
 struct UnknownStruct
 {
@@ -98,25 +97,16 @@ static u32 GetMonSize(enum Species species, u16 b)
 
 static void FormatMonSizeRecord(u8 *string, u32 size)
 {
-    size = (f64)(size / 100);
-    StringCopy(string,ReturnHeightStringNoWhitespace(size));
+#if UNITS == UNITS_IMPERIAL
+    //Convert size from centimeters to inches
+    size = (f64)(size * 10) / (CM_PER_INCH * 10);
+#endif
+
+    string = ConvertIntToDecimalStringN(string, size / 10, STR_CONV_MODE_LEFT_ALIGN, 8);
+    string = StringAppend(string, gText_DecimalPoint);
+    ConvertIntToDecimalStringN(string, size % 10, STR_CONV_MODE_LEFT_ALIGN, 1);
 }
 
-static u8* ReturnHeightStringNoWhitespace(u32 size)
-{
-    u8* heightStr = ConvertMonHeightToString(size);
-    u32 length = StringLength(heightStr);
-    u32 i =  0, j =  0;
-
-    while (i < length && !(heightStr[i] >= CHAR_0 && heightStr[i] <= CHAR_9))
-        i++;
-
-    while (i < length)
-        heightStr[j++] = heightStr[i++];
-
-    heightStr[j] = EOS;
-    return heightStr;
-}
 
 static u8 CompareMonSize(enum Species species, u16 *sizeRecord)
 {

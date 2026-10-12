@@ -199,6 +199,7 @@ Route120_EventScript_StevenBattleKecleon::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route120_EventScript_RemoveBridgeKecleonPostBattle
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route120_EventScript_RemoveBridgeKecleonPostBattle
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route120_EventScript_RemoveBridgeKecleonPostBattle
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, Route120_EventScript_RemoveBridgeKecleonPostBattle
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
 

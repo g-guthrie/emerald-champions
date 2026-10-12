@@ -464,6 +464,7 @@ extern const u8 BattleFrontier_Lounge5_Text_NatureGirlAttackHighAttackLow[];
 extern const u8 BattleFrontier_Lounge5_Text_NatureGirlAttackHighDefenseLow[];
 extern const u8 BattleFrontier_Lounge5_Text_NatureGirlAttackHighSupportLow[];
 extern const u8 BattleFrontier_Lounge5_Text_NatureGirlDefenseHighAttackLow[];
+extern const u8 BattleFrontier_Lounge5_Text_NatureGirlDefenseHighDefenseLowEven[];
 extern const u8 BattleFrontier_Lounge5_Text_NatureGirlDefenseHighDefenseLow[];
 extern const u8 BattleFrontier_Lounge5_Text_NatureGirlDefenseHighSupportLow[];
 extern const u8 BattleFrontier_Lounge5_Text_NatureGirlSupportHighAttackLow[];

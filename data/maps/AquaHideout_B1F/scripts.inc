@@ -41,6 +41,7 @@ AquaHideout_B1F_EventScript_Electrode1::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AquaHideout_B1F_EventScript_DefeatedElectrode1
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AquaHideout_B1F_EventScript_DefeatedElectrode1
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode1
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode1
 	setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
 	release
 	end
@@ -65,6 +66,7 @@ AquaHideout_B1F_EventScript_Electrode2::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AquaHideout_B1F_EventScript_DefeatedElectrode2
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AquaHideout_B1F_EventScript_DefeatedElectrode2
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode2
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode2
 	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
 	release
 	end

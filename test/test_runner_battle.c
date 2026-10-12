@@ -1751,6 +1751,16 @@ void TestRunner_Battle_RecordExp(enum BattlerId battlerId, u32 oldExp, u32 newEx
     }
 }
 
+// The game shows names in vanilla caps, so tests match text ignoring case
+static u32 FoldCase(u32 c)
+{
+    if (c >= CHAR_a && c <= CHAR_z)
+        return c - CHAR_a + CHAR_A;
+    if (c == CHAR_e_ACUTE)
+        return CHAR_E_ACUTE;
+    return c;
+}
+
 static s32 TryMessage(s32 i, s32 n, const u8 *string)
 {
     s32 j, k;
@@ -1785,7 +1795,7 @@ static s32 TryMessage(s32 i, s32 n, const u8 *string)
                 if (string[j] == CHAR_PROMPT_CLEAR)
                     j++;
             }
-            if (string[j] != event->pattern[k])
+            if (FoldCase(string[j]) != FoldCase(event->pattern[k]))
             {
                 break;
             }

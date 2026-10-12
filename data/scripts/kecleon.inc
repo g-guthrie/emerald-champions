@@ -79,6 +79,7 @@ EventScript_BattleKecleon::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EventScript_RemoveKecleon
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EventScript_RemoveKecleon
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EventScript_RemoveKecleon
+	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, EventScript_RemoveKecleon
 	release
 	end
 

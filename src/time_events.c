@@ -25,7 +25,7 @@ static u32 GetMirageRnd(void)
 
 static void SetMirageRnd(u32 rnd)
 {
-    #if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLESD == FALSE
+    #if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES == FALSE
     VarSet(VAR_MIRAGE_RND_H, rnd >> 16);
     VarSet(VAR_MIRAGE_RND_L, rnd);
     #endif

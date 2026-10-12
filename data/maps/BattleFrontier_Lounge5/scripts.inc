@@ -75,6 +75,13 @@ BattleFrontier_Lounge5_Text_NatureGirlDefenseHighAttackLow::
 	.string "But if it gets enough ouchies,\l"
 	.string "it will hit back!$"
 
+@ Bashful and Calm use vanilla's slightly different wording
+BattleFrontier_Lounge5_Text_NatureGirlDefenseHighDefenseLowEven::
+	.string "Hmhm…\p"
+	.string "This one says it looks after itself!\n"
+	.string "It says it worries about itself even\l"
+	.string "if it has a lot of ouchies!$"
+
 BattleFrontier_Lounge5_Text_NatureGirlDefenseHighDefenseLow::
 	.string "Hmhm…\p"
 	.string "This one says it looks after itself!\n"
