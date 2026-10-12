@@ -108,7 +108,7 @@ static const u8 sSadMsg01[] = _("{STR_VAR_1} is stepping on your\nfeet!");
 static const u8 sSadMsg02[] = _("{STR_VAR_1} seems a little tired.");
 // Conditional messages begin, index 3
 static const u8 sSadMsg03[] = _("{STR_VAR_1} is not happy.");
-static const u8 sSadMsg04[] = _("{STR_VAR_1} is going to fall down!\n");
+static const u8 sSadMsg04[] = _("{STR_VAR_1} is going to fall down!");
 static const u8 sSadMsg05[] = _("{STR_VAR_1} seems to be about to\nfall over!");
 static const u8 sSadMsg06[] = _("{STR_VAR_1} is trying very hard to\nkeep up with you…");
 static const u8 sSadMsg07[] = _("{STR_VAR_1} is nervous.");
@@ -181,7 +181,7 @@ const struct FollowerMsgInfo gFollowerPensiveMessages[] = {
 
 // All 'love' messages are unconditional
 static const u8 sLoveMsg00[] = _("{STR_VAR_1} suddenly started walking\ncloser!");
-static const u8 sLoveMsg01[] = _("{STR_VAR_1} cheeks are becoming\nrosy!");
+static const u8 sLoveMsg01[] = _("{STR_VAR_1}'s cheeks are becoming\nrosy!");
 static const u8 sLoveMsg02[] = _("Woah! {STR_VAR_1} suddenly hugged\nyou!");
 static const u8 sLoveMsg03[] = _("Woah! {STR_VAR_1} is suddenly\nplayful!");
 static const u8 sLoveMsg04[] = _("{STR_VAR_1} is rubbing against your\nlegs!");

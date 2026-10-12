@@ -2102,26 +2102,84 @@ u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevati
     return spriteId;
 }
 
+// Whether this party mon can be the follower: a conscious, non-Egg Pokémon passing the config restrictions
+bool32 IsMonEligibleFollower(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    if (species == SPECIES_NONE)
+        return FALSE;
+
+    if ((OW_FOLLOWERS_ALLOWED_SPECIES && species != VarGet(OW_FOLLOWERS_ALLOWED_SPECIES))
+     || (OW_FOLLOWERS_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LVL))
+     || (OW_FOLLOWERS_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LOC)))
+        return FALSE;
+
+    return mon->hp > 0 && !(mon->box.isEgg || mon->box.isBadEgg);
+}
+
 // Return address of first conscious party mon or NULL
 struct Pokemon *GetFirstLiveMon(void)
 {
     u32 i;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        if (species == SPECIES_NONE)
-            continue;
-
-        if ((OW_FOLLOWERS_ALLOWED_SPECIES && species != VarGet(OW_FOLLOWERS_ALLOWED_SPECIES))
-         || (OW_FOLLOWERS_ALLOWED_MET_LVL && GetMonData(mon, MON_DATA_MET_LEVEL) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LVL))
-         || (OW_FOLLOWERS_ALLOWED_MET_LOC && GetMonData(mon, MON_DATA_MET_LOCATION) != VarGet(OW_FOLLOWERS_ALLOWED_MET_LOC)))
-            continue;
-
-        if (gParties[B_TRAINER_PLAYER][i].hp > 0 && !(gParties[B_TRAINER_PLAYER][i].box.isEgg || gParties[B_TRAINER_PLAYER][i].box.isBadEgg))
+        if (IsMonEligibleFollower(&gParties[B_TRAINER_PLAYER][i]))
             return &gParties[B_TRAINER_PLAYER][i];
     }
     return NULL;
+}
+
+// The player's chosen follower is remembered by personality value and OT ID,
+// so the choice survives party reordering, deposits and saving.
+static u32 GetChosenFollowerPersonality(void)
+{
+    return VarGet(VAR_FOLLOWER_MON_PID_LO) | (VarGet(VAR_FOLLOWER_MON_PID_HI) << 16);
+}
+
+static u32 GetChosenFollowerOtId(void)
+{
+    return VarGet(VAR_FOLLOWER_MON_OTID_LO) | (VarGet(VAR_FOLLOWER_MON_OTID_HI) << 16);
+}
+
+void SetChosenFollowerMon(struct Pokemon *mon)
+{
+    u32 personality = mon ? GetMonData(mon, MON_DATA_PERSONALITY) : 0;
+    u32 otId = mon ? GetMonData(mon, MON_DATA_OT_ID) : 0;
+    VarSet(VAR_FOLLOWER_MON_PID_LO, personality & 0xFFFF);
+    VarSet(VAR_FOLLOWER_MON_PID_HI, personality >> 16);
+    VarSet(VAR_FOLLOWER_MON_OTID_LO, otId & 0xFFFF);
+    VarSet(VAR_FOLLOWER_MON_OTID_HI, otId >> 16);
+}
+
+// Return the party mon chosen to follow if it is in the party and able to follow
+static struct Pokemon *GetChosenFollowerMon(void)
+{
+    u32 i;
+    u32 personality = GetChosenFollowerPersonality();
+    u32 otId = GetChosenFollowerOtId();
+
+    if (personality == 0 && otId == 0)
+        return NULL;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        if (GetMonData(mon, MON_DATA_PERSONALITY) == personality
+         && GetMonData(mon, MON_DATA_OT_ID) == otId
+         && IsMonEligibleFollower(mon))
+            return mon;
+    }
+    return NULL;
+}
+
+// Return the party mon that follows the player: the chosen one if it can,
+// otherwise the first conscious party mon. NULL if none can follow.
+struct Pokemon *GetFollowerMon(void)
+{
+    struct Pokemon *mon = GetChosenFollowerMon();
+    if (mon != NULL)
+        return mon;
+    return GetFirstLiveMon();
 }
 
 // Return follower ObjectEvent or NULL
@@ -2339,7 +2397,7 @@ static bool8 GetMonInfo(struct Pokemon *mon, enum Species *species, bool32 *shin
 // Retrieve graphic information about the following Pokémon, if any
 bool8 GetFollowerInfo(enum Species *species, bool32 *shiny, bool32 *female)
 {
-    return GetMonInfo(GetFirstLiveMon(), species, shiny, female);
+    return GetMonInfo(GetFollowerMon(), species, shiny, female);
 }
 
 // Update following Pokémon if any
@@ -2570,7 +2628,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
     u32 condCount = 0;
     u32 emotion;
     struct ObjectEvent *objEvent = GetFollowerObject();
-    struct Pokemon *mon = GetFirstLiveMon();
+    struct Pokemon *mon = GetFollowerMon();
     u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] =
     {
         [FOLLOWER_EMOTION_HAPPY] = 10,
@@ -5700,7 +5758,7 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
     }
 
     if (OW_FOLLOWERS_COPY_WILD_PKMN
-        && (MonKnowsMove(mon = GetFirstLiveMon(), MOVE_TRANSFORM)
+        && (MonKnowsMove(mon = GetFollowerMon(), MOVE_TRANSFORM)
          || (ability = GetMonAbility(mon)) == ABILITY_IMPOSTER || ability == ABILITY_ILLUSION)
         && (Random() & 0xFFFF) < 18 && GetLocalWildMon(FALSE))
     {
@@ -6371,7 +6429,7 @@ void IsFollowerFieldMoveUser(struct ScriptContext *ctx)
 
     u16 *var = GetVarPointer(varId);
     u16 userIndex = gFieldEffectArguments[0]; // field move user index
-    struct Pokemon *follower = GetFirstLiveMon();
+    struct Pokemon *follower = GetFollowerMon();
     struct ObjectEvent *obj = GetFollowerObject();
     if (var == NULL)
         return;
@@ -7761,7 +7819,7 @@ static void ObjectEventSetPokeballGfx(struct ObjectEvent *objEvent)
     enum PokeBall ball = BALL_STRANGE;
     if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
     {
-        struct Pokemon *mon = GetFirstLiveMon();
+        struct Pokemon *mon = GetFollowerMon();
         if (mon)
             ball = GetMonData(mon, MON_DATA_POKEBALL);
     }

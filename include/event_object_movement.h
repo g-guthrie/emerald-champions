@@ -150,6 +150,9 @@ void ClearObjectEventMovement(struct ObjectEvent *objectEvent, struct Sprite *sp
 void ObjectEventClearHeldMovement(struct ObjectEvent *objectEvent);
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *objectEvent);
 struct Pokemon *GetFirstLiveMon(void);
+bool32 IsMonEligibleFollower(struct Pokemon *mon);
+struct Pokemon *GetFollowerMon(void);
+void SetChosenFollowerMon(struct Pokemon *mon);
 enum Species GetOverworldWeatherSpecies(enum Species species);
 void UpdateFollowingPokemon(void);
 void RemoveFollowingPokemon(void);

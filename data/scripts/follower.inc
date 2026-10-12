@@ -12,8 +12,8 @@ gText_WantsToFly::
 
 EventScript_Follower::
 	lock
-	bufferlivemonnickname STR_VAR_1
-	playfirstmoncry
+	bufferfollowermonnickname STR_VAR_1
+	playfollowermoncry
 	getfolloweraction
 EventScript_FollowerEnd::
 	waitfieldeffect FLDEFF_EMOTE

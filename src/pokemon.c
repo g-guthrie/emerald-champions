@@ -4357,7 +4357,7 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
                 currentCondition = TRUE;
             break;
         case IF_MIN_OVERWORLD_STEPS:
-            if (mon == GetFirstLiveMon() && gFollowerSteps >= params[i].arg1)
+            if (mon == GetFollowerMon() && gFollowerSteps >= params[i].arg1)
                 currentCondition = TRUE;
             break;
         case IF_BAG_ITEM_COUNT:
