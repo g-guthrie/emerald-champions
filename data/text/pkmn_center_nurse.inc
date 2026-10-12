@@ -17,6 +17,14 @@ gText_RestoredPkmnToFullHealth::
 gText_WeHopeToSeeYouAgain::
 	.string "We hope to see you again!$"
 
+gText_NurseTakeThisPokeVial::
+	.string "Oh, you're just beginning your journey?\n"
+	.string "Please take this with you.$"
+
+gText_NurseExplainPokeVial::
+	.string "It can heal your POKéMON three times.\n"
+	.string "We'll refill it whenever you visit us!$"
+
 gText_WelcomeCutShort::
 	.string "Hello, and welcome to\n"
 	.string "the POKéMON CENTER.\p"

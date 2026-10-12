@@ -428,6 +428,8 @@ extern const u16 gItemIconPalette_FullRestore[];
 extern const u32 gItemIcon_Revive[];
 extern const u16 gItemIconPalette_Revive[];
 extern const u32 gItemIcon_MaxRevive[];
+extern const u32 gItemIcon_PokeVial[];
+extern const u16 gItemIconPalette_PokeVial[];
 extern const u32 gItemIcon_FreshWater[];
 extern const u16 gItemIconPalette_FreshWater[];
 extern const u32 gItemIcon_SodaPop[];

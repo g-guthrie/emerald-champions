@@ -62,7 +62,7 @@
 #define FLAG_RECEIVED_FERALIGITE 0x28
 #define FLAG_CHOSE_TOTODILE      0x29
 #define FLAG_RECEIVED_PRIMAL_ORBS 0x2A
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
+#define FLAG_RECEIVED_POKE_VIAL  0x2B
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag

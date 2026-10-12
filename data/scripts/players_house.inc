@@ -355,6 +355,7 @@ PlayersHouse_1F_EventScript_SeeYouHoney::
 PlayersHouse_1F_EventScript_HealParty::
 	closemessage
 	call Common_EventScript_OutOfCenterPartyHeal
+	setvar VAR_POKE_VIAL_USES, POKE_VIAL_MAX_USES
 	incrementgamestat GAME_STAT_RESTED_AT_HOME
 	msgbox PlayersHouse_1F_Text_TakeCareHoney, MSGBOX_DEFAULT
 	release

@@ -48,6 +48,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
+	setvar VAR_POKE_VIAL_USES, POKE_VIAL_MAX_USES
 	callnative UpdateFollowingPokemon
 	return
 
@@ -67,7 +68,19 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	waitmessage
 	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
+	call_if_unset FLAG_RECEIVED_POKE_VIAL, EventScript_PkmnCenterNurse_GivePokeVial
 	message gText_WeHopeToSeeYouAgain
+	return
+
+@ The first nurse to heal the player's party hands over the POKé VIAL
+EventScript_PkmnCenterNurse_GivePokeVial::
+	msgbox gText_NurseTakeThisPokeVial, MSGBOX_DEFAULT
+	giveitem ITEM_POKE_VIAL
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_GivePokeVialEnd
+	setflag FLAG_RECEIVED_POKE_VIAL
+	setvar VAR_POKE_VIAL_USES, POKE_VIAL_MAX_USES
+	msgbox gText_NurseExplainPokeVial, MSGBOX_DEFAULT
+EventScript_PkmnCenterNurse_GivePokeVialEnd::
 	return
 
 EventScript_PkmnCenterNurse_ReturnPkmn2::
