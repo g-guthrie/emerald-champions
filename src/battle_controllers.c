@@ -3134,7 +3134,9 @@ void TryShinyAnimAfterMonAnim(enum BattlerId battler)
             TryShinyAnimation(battler, GetBattlerMon(battler));
         }
 
-        if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim)
+        // As in vanilla, also wait for the Pokemon's entry animation and cry
+        if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim
+         && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
         {
             gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
