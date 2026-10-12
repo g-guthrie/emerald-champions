@@ -88,6 +88,11 @@ static const u8 sText_ItemFinderOnTop[] = _("Oh!\nThe ITEMFINDER's shaking wildl
 static const u8 sText_ItemFinderNothing[] = _("… … … …Nope!\nThere's no response.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CoinCase[] = _("Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PowderQty[] = _("POWDER QTY: {STR_VAR_1}{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PokeVialUsed[] = _("{PLAYER} used the POKé VIAL.\pYour POKéMON were fully healed!\n");
+static const u8 sText_PokeVialUsesLeft[] = _("The POKé VIAL has {STR_VAR_1} uses left.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PokeVialOneUseLeft[] = _("The POKé VIAL has 1 use left.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PokeVialNowEmpty[] = _("The POKé VIAL is now empty.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PokeVialEmpty[] = _("The POKé VIAL is empty.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BootedUpTM[] = _("Booted up a TM.");
 static const u8 sText_BootedUpHM[] = _("Booted up an HM.");
 static const u8 sText_TMHMContainedVar1[] = _("It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?");
@@ -772,6 +777,76 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
     }
     else
     {
+        DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+    }
+}
+
+static bool32 PartyNeedsHealing(void)
+{
+    u32 i, j;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+
+        if (!GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES) || GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+        if (GetMonData(mon, MON_DATA_HP) < GetMonData(mon, MON_DATA_MAX_HP)
+         || GetMonData(mon, MON_DATA_STATUS) != STATUS1_NONE)
+            return TRUE;
+        for (j = 0; j < MAX_MON_MOVES; j++)
+        {
+            enum Move move = GetMonData(mon, MON_DATA_MOVE1 + j);
+            if (move != MOVE_NONE
+             && GetMonData(mon, MON_DATA_PP1 + j) < CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), j))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Fully heals the party like a POKéMON CENTER, from a limited number of uses
+// that are refilled whenever the party is healed at a POKéMON CENTER or at home.
+void ItemUseOutOfBattle_PokeVial(u8 taskId)
+{
+    u32 uses = VarGet(VAR_POKE_VIAL_USES);
+    const u8 *usesLeftText;
+
+    if (uses == 0)
+    {
+        StringCopy(gStringVar4, sText_PokeVialEmpty);
+    }
+    else if (!PartyNeedsHealing())
+    {
+        StringCopy(gStringVar4, gText_WontHaveEffect);
+    }
+    else
+    {
+        u32 i;
+
+        for (i = 0; i < gPlayerPartyCount; i++)
+            HealPokemon(&gPlayerParty[i]);
+        VarSet(VAR_POKE_VIAL_USES, --uses);
+        PlaySE(SE_USE_ITEM);
+
+        if (uses == 0)
+            usesLeftText = sText_PokeVialNowEmpty;
+        else if (uses == 1)
+            usesLeftText = sText_PokeVialOneUseLeft;
+        else
+            usesLeftText = sText_PokeVialUsesLeft;
+        ConvertIntToDecimalStringN(gStringVar1, uses, STR_CONV_MODE_LEFT_ALIGN, 1);
+        StringExpandPlaceholders(gStringVar4, sText_PokeVialUsed);
+        StringExpandPlaceholders(gStringVar4 + StringLength(gStringVar4), usesLeftText);
+    }
+
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
+    }
+    else
+    {
+        UpdateFollowingPokemon();
         DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
     }
 }

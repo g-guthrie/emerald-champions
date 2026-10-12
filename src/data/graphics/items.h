@@ -108,6 +108,9 @@ const u16 gItemIconPalette_Revive[] = INCGFX_U16("graphics/items/icon_palettes/r
 
 const u32 gItemIcon_MaxRevive[] = INCGFX_U32("graphics/items/icons/max_revive.png", ".4bpp.smol");
 
+const u32 gItemIcon_PokeVial[] = INCGFX_U32("graphics/items/icons/poke_vial.png", ".4bpp.smol");
+const u16 gItemIconPalette_PokeVial[] = INCGFX_U16("graphics/items/icon_palettes/poke_vial.pal", ".gbapal");
+
 const u32 gItemIcon_FreshWater[] = INCGFX_U32("graphics/items/icons/fresh_water.png", ".4bpp.smol");
 const u16 gItemIconPalette_FreshWater[] = INCGFX_U16("graphics/items/icon_palettes/fresh_water.pal", ".gbapal");
 

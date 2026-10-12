@@ -1052,6 +1052,9 @@ enum __attribute__((packed)) Item
     ITEM_TATSUGIRINITE = 872,
     ITEM_GLIMMORANITE = 873,
 
+    // Emerald additions
+    ITEM_POKE_VIAL = 874,
+
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };
@@ -1085,6 +1088,9 @@ enum BerryId
 #define ITEM_TO_MAIL(itemId) ((itemId) - FIRST_MAIL_INDEX)
 #define MAIL_NONE 0xFF
 #define ITEM_TO_MULCH(itemId)(((itemId) - ITEM_GROWTH_MULCH) + 1)
+
+// Number of heals the POKé VIAL holds when full (see VAR_POKE_VIAL_USES)
+#define POKE_VIAL_MAX_USES 3
 
 #define MAX_BAG_ITEM_CAPACITY         99
 #define MAX_PC_ITEM_CAPACITY          999
