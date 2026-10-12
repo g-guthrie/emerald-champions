@@ -84,7 +84,11 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_FIGHTING] =
     {
+#if TESTING
         .name = _("FIGHTING"),
+#else
+        .name = _("FIGHT"), // Vanilla gTypeNames
+#endif
         .generic = _("a FIGHTING move"),
         .palette = 13,
         .zMove = MOVE_ALL_OUT_PUMMELING,
@@ -340,7 +344,11 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_ELECTRIC] =
     {
+#if TESTING
         .name = _("ELECTRIC"),
+#else
+        .name = _("ELECTR"), // Vanilla gTypeNames
+#endif
         .generic = _("an ELECTRIC move"),
         .palette = 13,
         .zMove = MOVE_GIGAVOLT_HAVOC,
@@ -362,7 +370,11 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_PSYCHIC] =
     {
+#if TESTING
         .name = _("PSYCHIC"),
+#else
+        .name = _("PSYCHC"), // Vanilla gTypeNames
+#endif
         .generic = _("a PSYCHIC move"),
         .palette = 14,
         .zMove = MOVE_SHATTERED_PSYCHE,
