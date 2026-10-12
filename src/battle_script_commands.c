@@ -5202,7 +5202,8 @@ static void Cmd_tryhealhalfhealth(void)
     if (cmd->battler == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
 
-    SetHealAmount(gBattlerTarget, GetNonDynamaxMaxHP(gBattlerTarget) / 2);
+    // 50% heals round half up, as in the games (99 max HP heals 50).
+    SetHealAmount(gBattlerTarget, (GetNonDynamaxMaxHP(gBattlerTarget) + 1) / 2);
     if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
         gBattlescriptCurrInstr = failInstr;
     else
@@ -9622,7 +9623,7 @@ void BS_TryHealPulse(void)
         else if (gFieldTimers.terrain == B_TERRAIN_GRASSY && GetMoveEffectArg_MoveProperty(gCurrentMove) == MOVE_EFFECT_FLORAL_HEALING)
             healAmount = GetNonDynamaxMaxHP(gBattlerTarget) * 2 / 3;
         else
-            healAmount = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+            healAmount = (GetNonDynamaxMaxHP(gBattlerTarget) + 1) / 2;
 
         SetHealAmount(gBattlerTarget, healAmount);
         gBattlescriptCurrInstr = cmd->nextInstr;
