@@ -1583,6 +1583,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
                                                                                    "{B_ATK_NAME_WITH_PREFIX} lost some\nof its HP!")),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING(VANILLA_TEXT("{B_ATK_NAME_WITH_PREFIX} hasn't eaten any held Berries, so it can't possibly belch!\p",
                                                                                    "{B_ATK_NAME_WITH_PREFIX} hasn't eaten a\nBERRY, so it can't BELCH!\p")),
+    [STRINGID_TEAMGAINEDEXPPOINTS]                  = COMPOUND_STRING(VANILLA_TEXT("The rest of your team gained {B_BUFF3} EXP. Points!\p",
+                                                                                   "The rest of your team gained\n{B_BUFF3} EXP. Points!\p")),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

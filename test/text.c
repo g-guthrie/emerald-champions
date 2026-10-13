@@ -685,6 +685,10 @@ TEST("Battle strings fit on the battle message window")
         PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_ABOOSTED); // 'gained a boosted'
         PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, sixDigitNines);
         break;
+    // Buffer "999999" to B_BUFF3
+    case STRINGID_TEAMGAINEDEXPPOINTS:
+        PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, sixDigitNines);
+        break;
     // Buffer Nickname with prefix to B_BUFF1, "100" to B_BUFF2
     case STRINGID_PKMNGREWTOLV:
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, 0);

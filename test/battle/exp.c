@@ -164,6 +164,7 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
     PARAMETRIZE { item = ITEM_EXP_SHARE; }
 
     GIVEN {
+        WITH_CONFIG(B_TEAM_EXP, FALSE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT) { Level(40); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
@@ -232,5 +233,183 @@ AI_ONE_VS_TWO_BATTLE_TEST("Both opponent's Pokemon give experience in battle aga
         TURN { }
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), expectedXp);
+    }
+}
+
+#define MON_EXP(slot) GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_EXP)
+#define LEVEL_EXP(species, level) gExperienceTables[gSpeciesInfo[species].growthRate][level]
+
+WILD_BATTLE_TEST("Team exp: every able party member gains the highest amount a participant would earn", s32 exp)
+{
+    bool32 team = FALSE;
+
+    PARAMETRIZE { team = FALSE; }
+    PARAMETRIZE { team = TRUE; }
+
+    GIVEN {
+        if (team) {
+            PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+            PLAYER(SPECIES_WOBBUFFET) { Level(10); }
+            PLAYER(SPECIES_WOBBUFFET) { Level(30); }
+        } else {
+            PLAYER(SPECIES_WOBBUFFET) { Level(10); }
+        }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Caterpie fainted!");
+        MESSAGE("Wobbuffet gained 79 EXP. Points!");
+        EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
+        if (team)
+            MESSAGE("The rest of your team gained 79 EXP. Points!");
+        else
+            NOT MESSAGE("The rest of your team gained 79 EXP. Points!");
+    } THEN {
+        if (team) {
+            // The Lv. 10 bench Pokémon would earn the most, so everyone gets its amount.
+            EXPECT_EQ(MON_EXP(0) - LEVEL_EXP(SPECIES_WOBBUFFET, 20), MON_EXP(1) - LEVEL_EXP(SPECIES_WOBBUFFET, 10));
+            EXPECT_EQ(MON_EXP(2) - LEVEL_EXP(SPECIES_WOBBUFFET, 30), MON_EXP(1) - LEVEL_EXP(SPECIES_WOBBUFFET, 10));
+            // Non-participants also gain EVs.
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP_EV), gSpeciesInfo[SPECIES_CATERPIE].evYield_HP);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_HP_EV), gSpeciesInfo[SPECIES_CATERPIE].evYield_HP);
+        }
+    } FINALLY {
+        EXPECT_EQ(results[0].exp, results[1].exp);
+    }
+}
+
+WILD_BATTLE_TEST("Team exp: fainted Pokemon and Pokemon at max level gain no experience")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); HP(0); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(MAX_LEVEL); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Caterpie fainted!");
+        EXPERIENCE_BAR(player);
+        NOT MESSAGE("The rest of your team gained 79 EXP. Points!");
+    } THEN {
+        EXPECT_GT(MON_EXP(0), LEVEL_EXP(SPECIES_WOBBUFFET, 20));
+        EXPECT_EQ(MON_EXP(1), LEVEL_EXP(SPECIES_WOBBUFFET, 10));
+        EXPECT_EQ(MON_EXP(2), LEVEL_EXP(SPECIES_WOBBUFFET, MAX_LEVEL));
+    }
+}
+
+WILD_BATTLE_TEST("Team exp: Lucky Egg and traded boosts apply to their own Pokemon only")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Item(ITEM_LUCKY_EGG); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Caterpie fainted!");
+        MESSAGE("Wobbuffet gained 79 EXP. Points!");
+        MESSAGE("Wobbuffet gained 118 EXP. Points!");
+        MESSAGE("The rest of your team gained 79 EXP. Points!");
+    } THEN {
+        EXPECT_EQ(MON_EXP(0), LEVEL_EXP(SPECIES_WOBBUFFET, 20) + 79);
+        EXPECT_EQ(MON_EXP(1), LEVEL_EXP(SPECIES_WOBBUFFET, 10) + 118);
+        EXPECT_EQ(MON_EXP(2), LEVEL_EXP(SPECIES_WOBBUFFET, 30) + 79);
+    }
+}
+
+WILD_BATTLE_TEST("Exp. Share holder below the top level gains ten times the team amount")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Item(ITEM_EXP_SHARE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Caterpie fainted!");
+        MESSAGE("Wobbuffet gained 79 EXP. Points!");
+        MESSAGE("Wobbuffet gained 790 EXP. Points!");
+        MESSAGE("The rest of your team gained 79 EXP. Points!");
+    } THEN {
+        EXPECT_EQ(MON_EXP(0), LEVEL_EXP(SPECIES_WOBBUFFET, 20) + 79);
+        EXPECT_EQ(MON_EXP(1), LEVEL_EXP(SPECIES_WOBBUFFET, 10) + 790);
+        EXPECT_EQ(MON_EXP(2), LEVEL_EXP(SPECIES_WOBBUFFET, 30) + 79);
+    }
+}
+
+WILD_BATTLE_TEST("Exp. Share catch-up stops exactly at the top level")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(29); Item(ITEM_EXP_SHARE); }
+        OPPONENT(SPECIES_BLISSEY) { Level(20); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Blissey fainted!");
+        EXPERIENCE_BAR(player);
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 30);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 30);
+        EXPECT_EQ(MON_EXP(1), LEVEL_EXP(SPECIES_WOBBUFFET, 30));
+    }
+}
+
+WILD_BATTLE_TEST("Exp. Share holder at the top level gains the normal team amount")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); Item(ITEM_EXP_SHARE); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Caterpie fainted!");
+        EXPERIENCE_BAR(player);
+    } THEN {
+        EXPECT_EQ(MON_EXP(1) - LEVEL_EXP(SPECIES_WOBBUFFET, 30), MON_EXP(0) - LEVEL_EXP(SPECIES_WOBBUFFET, 20));
+    }
+}
+
+WILD_BATTLE_TEST("Team exp: catching a Pokemon gives the whole team experience")
+{
+    GIVEN {
+        WITH_CONFIG(B_EXP_CATCH, GEN_6);
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); Item(ITEM_EXP_SHARE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(30); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_ULTRA_BALL, WITH_RNG(RNG_BALLTHROW_SHAKE, 0)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_SPECIAL, B_ANIM_BALL_THROW, player);
+        MESSAGE("Wobbuffet gained 79 EXP. Points!");
+        MESSAGE("Wobbuffet gained 790 EXP. Points!");
+        MESSAGE("The rest of your team gained 79 EXP. Points!");
+    } THEN {
+        EXPECT_EQ(MON_EXP(0), LEVEL_EXP(SPECIES_WOBBUFFET, 20) + 79);
+        EXPECT_EQ(MON_EXP(1), LEVEL_EXP(SPECIES_WOBBUFFET, 10) + 790);
+        EXPECT_EQ(MON_EXP(2), LEVEL_EXP(SPECIES_WOBBUFFET, 30) + 79);
+    }
+}
+
+WILD_BATTLE_TEST("Team exp off: non-participants without Exp. Share gain nothing")
+{
+    GIVEN {
+        WITH_CONFIG(B_TEAM_EXP, FALSE);
+        PLAYER(SPECIES_WOBBUFFET) { Level(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(10); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("The wild Caterpie fainted!");
+        EXPERIENCE_BAR(player);
+    } THEN {
+        EXPECT_EQ(MON_EXP(1), LEVEL_EXP(SPECIES_WOBBUFFET, 10));
     }
 }

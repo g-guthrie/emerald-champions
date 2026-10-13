@@ -9769,9 +9769,15 @@ const struct ItemInfo gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
     #else
         .description = COMPOUND_STRING(
+        #if B_TEAM_EXP
+            "Lets the holder\n"
+            "catch up to your\n"
+            "strongest POKéMON."),
+        #else
             "A hold item that\n"
             "gets EXP. points\n"
             "from battles."),
+        #endif
         .price = (I_PRICE == GEN_1) ? 1 : 3000,
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_HELD_ITEM,

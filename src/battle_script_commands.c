@@ -2132,6 +2132,89 @@ static enum BattlerId GetBattlerFromPlayerPartyId(u32 partyId)
     return MAX_BATTLERS_COUNT;
 }
 
+// Team experience (B_TEAM_EXP): every able party member below MAX_LEVEL gains
+// the highest amount any of them would earn as a participant. Personal boosts
+// (traded, Lucky Egg) then apply to each Pokémon's own share, and a held EXP. SHARE
+// multiplies its holder's share by 10 until it reaches the party's top level.
+static void ApplyPersonalExpBoosts(s32 *expAmount, u32 expGetterMonId)
+{
+    if (IsTradedMon(&gParties[B_TRAINER_PLAYER][expGetterMonId]))
+        *expAmount = (*expAmount * 150) / 100;
+    if (GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][expGetterMonId]) == HOLD_EFFECT_LUCKY_EGG)
+        *expAmount = (*expAmount * 150) / 100;
+}
+
+static void ApplySharedExpMultipliers(s32 *expAmount, u32 expGetterMonId, u32 faintedBattler);
+
+static u32 GetTeamExpValue(u32 expValue, u32 faintedBattler)
+{
+    u32 i, best = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        s32 candidate;
+
+        if (!IsValidForBattle(mon) || GetMonData(mon, MON_DATA_LEVEL) >= MAX_LEVEL)
+            continue;
+        candidate = GetSoftLevelCapExpValue(GetMonData(mon, MON_DATA_LEVEL), expValue);
+        ApplySharedExpMultipliers(&candidate, i, faintedBattler);
+        if (candidate > (s32)best)
+            best = candidate;
+    }
+    return best;
+}
+
+static u32 GetPartyTopLevel(void)
+{
+    u32 i, level, top = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
+        if (species == SPECIES_NONE || species == SPECIES_EGG)
+            continue;
+        level = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
+        if (level > top)
+            top = level;
+    }
+    return top;
+}
+
+static u32 GetTeamExpReward(u32 expGetterMonId, u32 teamExpValue)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][expGetterMonId];
+    s32 reward = teamExpValue;
+    u32 level = GetMonData(mon, MON_DATA_LEVEL);
+    u32 topLevel = GetPartyTopLevel();
+
+    ApplyPersonalExpBoosts(&reward, expGetterMonId);
+    if (GetMonHoldEffect(mon) == HOLD_EFFECT_EXP_SHARE && level < topLevel)
+    {
+        u32 currentExp = GetMonData(mon, MON_DATA_EXP);
+        u32 topLevelExp = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][topLevel];
+        u64 boosted = (u64)reward * 10;
+
+        if (currentExp + boosted > topLevelExp)
+            boosted = topLevelExp - currentExp;
+        reward = boosted;
+    }
+    return reward;
+}
+
+static bool32 IsTeamExpOwnLineMon(u32 partyId, u32 teamExpValue)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyId];
+    s32 reward = teamExpValue;
+
+    if (!IsValidForBattle(mon))
+        return FALSE;
+    if (GetMonHoldEffect(mon) == HOLD_EFFECT_EXP_SHARE)
+        return TRUE;
+    ApplyPersonalExpBoosts(&reward, partyId);
+    return reward != (s32)teamExpValue;
+}
+
 static void Cmd_getexp(void)
 {
     CMD_ARGS(u8 battler);
@@ -2241,6 +2324,39 @@ static void Cmd_getexp(void)
                     gBattleStruct->expShareExpValue = 1;
             }
 
+            if (GetConfig(B_TEAM_EXP))
+            {
+                // Participants first, then Pokémon with their own message (EXP. SHARE holders,
+                // boosted Pokémon), then the rest of the team under a single message.
+                u32 teamExp;
+
+                *exp = (GetConfig(B_SPLIT_EXP) < GEN_6) ? SAFE_DIV(calculatedExp, viaSentIn) : calculatedExp;
+                if (*exp == 0)
+                    *exp = 1;
+                teamExp = GetTeamExpValue(*exp, gBattlerFainted);
+                gBattleStruct->expShareExpValue = teamExp;
+
+                orderId = 0;
+                for (i = 0; i < PARTY_SIZE; i++)
+                {
+                    if ((1u << i) & sentInBits)
+                        gBattleStruct->expGettersOrder[orderId++] = i;
+                }
+                for (i = 0; i < PARTY_SIZE; i++)
+                {
+                    if (!((1u << i) & sentInBits) && IsTeamExpOwnLineMon(i, teamExp))
+                        gBattleStruct->expGettersOrder[orderId++] = i;
+                }
+                for (i = 0; i < PARTY_SIZE; i++)
+                {
+                    if (!((1u << i) & sentInBits) && !IsTeamExpOwnLineMon(i, teamExp)
+                     && IsValidForBattle(&gParties[B_TRAINER_PLAYER][i]))
+                        gBattleStruct->expGettersOrder[orderId++] = i;
+                }
+                if (orderId < PARTY_SIZE)
+                    gBattleStruct->expGettersOrder[orderId] = PARTY_SIZE;
+            }
+
             gBattleScripting.getexpState++;
             gBattleStruct->expOrderId = 0;
             *expMonId = gBattleStruct->expGettersOrder[0];
@@ -2253,7 +2369,12 @@ static void Cmd_getexp(void)
             bool32 wasSentOut = (gBattleStruct->expSentInMons & (1u << *expMonId)) != 0;
             holdEffect = GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][*expMonId]);
 
-            if ((holdEffect != HOLD_EFFECT_EXP_SHARE && !wasSentOut && !IsGen6ExpShareEnabled())
+            if (*expMonId >= PARTY_SIZE)
+            {
+                gBattleScripting.getexpState = 5;
+                gBattleStruct->battlerExpReward = 0;
+            }
+            else if ((holdEffect != HOLD_EFFECT_EXP_SHARE && !wasSentOut && !IsGen6ExpShareEnabled() && !GetConfig(B_TEAM_EXP))
              || GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 gBattleScripting.getexpState = 5;
@@ -2280,7 +2401,46 @@ static void Cmd_getexp(void)
                     gBattleStruct->wildVictorySong++;
                 }
 
-                if (IsValidForBattle(&gParties[B_TRAINER_PLAYER][*expMonId]))
+                if (GetConfig(B_TEAM_EXP) && IsValidForBattle(&gParties[B_TRAINER_PLAYER][*expMonId]))
+                {
+                    u32 teamExp = gBattleStruct->expShareExpValue;
+                    bool32 ownLine = wasSentOut || IsTeamExpOwnLineMon(*expMonId, teamExp);
+
+                    gBattleStruct->battlerExpReward = GetTeamExpReward(*expMonId, teamExp);
+
+                    if (B_EXP_CAP_TYPE == EXP_CAP_HARD && gBattleStruct->battlerExpReward != 0)
+                    {
+                        enum GrowthRate growthRate = gSpeciesInfo[GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES)].growthRate;
+                        u32 currentExp = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_EXP);
+                        u32 levelCap = GetCurrentLevelCap();
+
+                        if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) >= levelCap)
+                            gBattleStruct->battlerExpReward = 0;
+                        else if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleStruct->battlerExpReward)
+                            gBattleStruct->battlerExpReward = gExperienceTables[growthRate][levelCap] - currentExp;
+                    }
+
+                    if (gBattleStruct->battlerExpReward != 0)
+                    {
+                        if (ownLine)
+                        {
+                            PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, 0, *expMonId);
+                            // buffer 'gained' or 'gained a boosted'
+                            PREPARE_STRING_BUFFER(gBattleTextBuff2, IsTradedMon(&gParties[B_TRAINER_PLAYER][*expMonId]) ? STRINGID_ABOOSTED : STRINGID_EMPTYSTRING4);
+                            PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleStruct->battlerExpReward);
+                            PrepareStringBattle(STRINGID_PKMNGAINEDEXP, 0);
+                        }
+                        else if (!gBattleStruct->teamGotExpMsgPrinted)
+                        {
+                            PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, teamExp);
+                            PrepareStringBattle(STRINGID_TEAMGAINEDEXPPOINTS, 0);
+                            gBattleStruct->teamGotExpMsgPrinted = TRUE;
+                        }
+                    }
+
+                    MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                }
+                else if (IsValidForBattle(&gParties[B_TRAINER_PLAYER][*expMonId]))
                 {
                     if (wasSentOut)
                         gBattleStruct->battlerExpReward = GetSoftLevelCapExpValue(gParties[B_TRAINER_PLAYER][*expMonId].level, gBattleStruct->expValue);
@@ -9256,12 +9416,12 @@ u8 GetFirstFaintedPartyIndex(enum BattlerId battler)
 
 void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler)
 {
-    enum HoldEffect holdEffect = GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][expGetterMonId]);
+    ApplyPersonalExpBoosts(expAmount, expGetterMonId);
+    ApplySharedExpMultipliers(expAmount, expGetterMonId, faintedBattler);
+}
 
-    if (IsTradedMon(&gParties[B_TRAINER_PLAYER][expGetterMonId]))
-        *expAmount = (*expAmount * 150) / 100;
-    if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
-        *expAmount = (*expAmount * 150) / 100;
+static void ApplySharedExpMultipliers(s32 *expAmount, u32 expGetterMonId, u32 faintedBattler)
+{
     if (GetConfig(B_UNEVOLVED_EXP_MULTIPLIER) >= GEN_6 && IsMonPastEvolutionLevel(&gParties[B_TRAINER_PLAYER][expGetterMonId]))
         *expAmount = (*expAmount * 4915) / 4096;
     if (GetConfig(B_AFFECTION_MECHANICS) == TRUE && GetMonAffectionHearts(&gParties[B_TRAINER_PLAYER][expGetterMonId]) >= AFFECTION_FOUR_HEARTS)
