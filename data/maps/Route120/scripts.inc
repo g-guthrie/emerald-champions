@@ -218,6 +218,12 @@ Route120_EventScript_StevenGiveDeconScope::
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
 	setflag FLAG_RECEIVED_DEVON_SCOPE
+	msgbox Route120_Text_StevenTakeStarterStone, MSGBOX_DEFAULT
+	setvar VAR_0x8004, ITEM_SCEPTILITE
+	call_if_eq VAR_STARTER_MON, 1, Route120_EventScript_BufferBlazikenite
+	call_if_eq VAR_STARTER_MON, 2, Route120_EventScript_BufferSwampertite
+	giveitem VAR_0x8004
+	call_if_eq VAR_RESULT, TRUE, Route120_EventScript_ExplainStarterStone
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterDown
@@ -235,6 +241,18 @@ Route120_EventScript_StevenGiveDeconScope::
 	special DrawWholeMapView
 	release
 	end
+
+Route120_EventScript_BufferBlazikenite::
+	setvar VAR_0x8004, ITEM_BLAZIKENITE
+	return
+
+Route120_EventScript_BufferSwampertite::
+	setvar VAR_0x8004, ITEM_SWAMPERTITE
+	return
+
+Route120_EventScript_ExplainStarterStone::
+	msgbox Route120_Text_StevenExplainStarterStone, MSGBOX_DEFAULT
+	return
 
 Route120_EventScript_PlayerApproachKecleonNorth::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
@@ -428,3 +446,14 @@ Route120_Text_RouteSignFortree:
 Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"
 	.string "{LEFT_ARROW} ROUTE 120$"
+
+Route120_Text_StevenTakeStarterStone:
+	.string "STEVEN: And there's something else.\p"
+	.string "This stone is for the POKéMON\n"
+	.string "you've been with since the start.$"
+
+Route120_Text_StevenExplainStarterStone:
+	.string "STEVEN: Once your partner has fully\n"
+	.string "evolved, let it hold that stone.\p"
+	.string "With your MEGA RING, I'm sure you'll\n"
+	.string "be amazed.$"

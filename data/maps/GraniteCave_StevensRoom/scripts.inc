@@ -15,12 +15,6 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	giveitem ITEM_MEGA_RING
 	setflag FLAG_RECEIVED_MEGA_RING
 	msgbox GraniteCave_StevensRoom_Text_ExplainMegaRing, MSGBOX_DEFAULT
-	setvar VAR_0x8004, ITEM_SCEPTILITE
-	call_if_eq VAR_STARTER_MON, 1, GraniteCave_StevensRoom_EventScript_BufferBlazikenite
-	call_if_eq VAR_STARTER_MON, 2, GraniteCave_StevensRoom_EventScript_BufferSwampertite
-	giveitem VAR_0x8004
-	call_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
-	msgbox GraniteCave_StevensRoom_Text_ExplainStarterStone, MSGBOX_DEFAULT
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -56,14 +50,6 @@ GraniteCave_StevensRoom_EventScript_StevenExitSouth::
 	applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
-	return
-
-GraniteCave_StevensRoom_EventScript_BufferBlazikenite::
-	setvar VAR_0x8004, ITEM_BLAZIKENITE
-	return
-
-GraniteCave_StevensRoom_EventScript_BufferSwampertite::
-	setvar VAR_0x8004, ITEM_SWAMPERTITE
 	return
 
 GraniteCave_StevensRoom_EventScript_BagFull::
@@ -144,11 +130,4 @@ GraniteCave_StevensRoom_Text_ExplainMegaRing:
 	.string "MEGA RING.\p"
 	.string "A POKéMON holding a MEGA STONE can\n"
 	.string "MEGA EVOLVE in battle, as long as\l"
-	.string "its TRAINER has a KEY STONE.\p"
-	.string "And this stone is for the POKéMON\n"
-	.string "you received from PROF. BIRCH.$"
-
-GraniteCave_StevensRoom_Text_ExplainStarterStone:
-	.string "STEVEN: Once your partner has fully\n"
-	.string "evolved, let it hold that stone.\p"
-	.string "I'm sure you'll be amazed.$"
+	.string "its TRAINER has a KEY STONE.$"

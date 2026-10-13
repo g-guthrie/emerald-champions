@@ -1061,7 +1061,7 @@
 #define FLAG_ITEM_ROUTE_111_TM_SANDSTORM                            0x3F0
 #define FLAG_ITEM_ROUTE_111_DAWN_STONE                                0x3F1
 #define FLAG_ITEM_ROUTE_111_HP_UP                                   0x3F2
-#define FLAG_ITEM_ROUTE_112_NUGGET                                  0x3F3
+#define FLAG_ITEM_ROUTE_112_ALAKAZITE                                  0x3F3
 #define FLAG_ITEM_ROUTE_113_MAX_ETHER                               0x3F4
 #define FLAG_ITEM_ROUTE_113_SUPER_REPEL                             0x3F5
 #define FLAG_ITEM_ROUTE_114_RARE_CANDY                              0x3F6
@@ -1149,14 +1149,14 @@
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_ESCAPE_ROPE              0x448
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_B1F_DIVE_BALL              0x449
 #define FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM_ICE_BEAM              0x44A
-#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_SABLENITE                  0x44B
+#define FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_REVIVE                  0x44B
 #define FLAG_ITEM_ABANDONED_SHIP_CAPTAINS_OFFICE_STORAGE_KEY        0x44C
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_WATER_STONE    0x44D
 #define FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM_RAIN_DANCE  0x44E
 #define FLAG_ITEM_ROUTE_121_CARBOS                                  0x44F
 #define FLAG_ITEM_ROUTE_123_ULTRA_BALL                              0x450
 #define FLAG_ITEM_ROUTE_126_GREEN_SHARD                             0x451
-#define FLAG_ITEM_ROUTE_119_HYPER_POTION_2                          0x452
+#define FLAG_ITEM_ROUTE_119_GALLADITE                          0x452
 #define FLAG_ITEM_ROUTE_120_ABSOLITE                            0x453
 #define FLAG_ITEM_ROUTE_120_NEST_BALL                               0x454
 #define FLAG_ITEM_ROUTE_123_SHINY_STONE                                  0x455
@@ -1171,7 +1171,7 @@
 #define FLAG_ITEM_ROUTE_115_GREAT_BALL                              0x45E
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_PROTECTOR                         0x45F
 #define FLAG_ITEM_MT_PYRE_3F_REAPER_CLOTH                            0x460
-#define FLAG_ITEM_ROUTE_118_HYPER_POTION                            0x461
+#define FLAG_ITEM_ROUTE_118_GYARADOSITE                            0x461
 #define FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL                            0x462
 #define FLAG_ITEM_NEW_MAUVILLE_ELECTIRIZER                        0x463
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL                      0x464
@@ -1190,9 +1190,9 @@
 #define FLAG_ITEM_ROUTE_103_PP_UP                                   0x471
 #define FLAG_UNUSED_0x472                                           0x472 // Unused Flag
 #define FLAG_ITEM_ROUTE_108_STAR_PIECE                              0x473
-#define FLAG_ITEM_ROUTE_109_GYARADOSITE                                  0x474
-#define FLAG_ITEM_ROUTE_110_ELIXIR                                  0x475
-#define FLAG_ITEM_ROUTE_111_GALLADITE                                  0x476
+#define FLAG_ITEM_ROUTE_109_POTION                                  0x474
+#define FLAG_ITEM_ROUTE_110_SABLENITE                                  0x475
+#define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
 #define FLAG_ITEM_ROUTE_113_SKARMORITE                            0x477
 #define FLAG_ITEM_ROUTE_115_HEAL_POWDER                             0x478
 #define FLAG_UNUSED_0x479                                           0x479 // Unused Flag
