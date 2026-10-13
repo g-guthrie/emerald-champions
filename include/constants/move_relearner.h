@@ -13,6 +13,10 @@ enum MoveRelearnerStates
     MOVE_RELEARNER_EGG_MOVES,
     MOVE_RELEARNER_TM_MOVES,
     MOVE_RELEARNER_TUTOR_MOVES,
+    // Every level-up move of the Pokémon's current species/form, at any level
+    // (no pre-evolution moves). Only set by a script (the Pokémon Center move
+    // tutor); never cycled to from the summary screen or the relearner menu.
+    MOVE_RELEARNER_ALL_LEVEL_UP_MOVES,
     MOVE_RELEARNER_COUNT,
 };
 
