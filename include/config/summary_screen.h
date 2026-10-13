@@ -34,7 +34,7 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 #define P_SORT_MOVES                     FALSE   // If TRUE, sorts all moves alphabetically in the relearner's list.
 
 // Level up Relearner
-#define P_PRE_EVO_MOVES                  FALSE   // If TRUE, it enables the Pokémon to learn moves from it's pre evolution.
+#define P_PRE_EVO_MOVES                  TRUE    // If TRUE, it enables the Pokémon to learn moves from it's pre evolution. Only the level-up relearner (Fallarbor MOVE TUTOR) uses it; the Pokémon Center tutor (MOVE_RELEARNER_ALL_LEVEL_UP_MOVES) ignores it.
 #define P_ENABLE_ALL_LEVEL_UP_MOVES      FALSE   // If TRUE, it enables the Pokémon to learn all level up moves, regardless of its level.
 
 // TM Relearner

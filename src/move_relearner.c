@@ -260,14 +260,17 @@ static bool32 IsLevelUpMoveRelearnerActive(void);
 static bool32 IsEggMoveRelearnerActive(void);
 static bool32 IsTMMoveRelearnerActive(void);
 static bool32 IsTutorMoveRelearnerActive(void);
+static bool32 IsAllLevelUpMoveRelearnerActive(void);
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon);
+static bool32 HasRelearnerAllLevelUpMoves(struct BoxPokemon *boxMon);
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
+static u32 GetRelearnerAllLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
@@ -300,6 +303,12 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .hasMoveToRelearn = HasRelearnerTutorMoves,
         .getMoves = GetRelearnerTutorMoves,
         .moveText = MoveRelearner_Text_TutorMoveLWR
+    },
+    [MOVE_RELEARNER_ALL_LEVEL_UP_MOVES] = {
+        .isActive = IsAllLevelUpMoveRelearnerActive,
+        .hasMoveToRelearn = HasRelearnerAllLevelUpMoves,
+        .getMoves = GetRelearnerAllLevelUpMoves,
+        .moveText = MoveRelearner_Text_MoveLWR
     },
 };
 
@@ -1010,6 +1019,43 @@ static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
     return numMoves;
 }
 
+// Every level-up move of the current species/form, whatever its level, that
+// the Pokémon doesn't know yet. Unlike GetRelearnerLevelUpMoves this ignores
+// P_ENABLE_ALL_LEVEL_UP_MOVES and P_PRE_EVO_MOVES: the Pokémon Center move
+// tutor always offers the whole learnset of what the Pokémon is now.
+static u32 GetRelearnerAllLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
+{
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(GetBoxMonData(mon, MON_DATA_SPECIES));
+    u32 numMoves = 0;
+
+    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END && numMoves < MAX_RELEARNER_MOVES; i++)
+    {
+        enum Move move = learnset[i].move;
+        bool32 alreadyInList = FALSE;
+
+        if (BoxMonKnowsMove(mon, move))
+            continue;
+
+        for (u32 j = 0; j < numMoves; j++)
+        {
+            if (moves[j] == move)
+            {
+                alreadyInList = TRUE;
+                break;
+            }
+        }
+        if (!alreadyInList)
+            moves[numMoves++] = move;
+    }
+
+    return numMoves;
+}
+
+u32 GetRelearnableMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates state, u16 *moves)
+{
+    return sRelearnTypes[state].getMoves(boxMon, moves);
+}
+
 void Special_HasMoveToRelearn(void)
 {
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
@@ -1120,6 +1166,19 @@ static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon)
     return FALSE;
 }
 
+static bool32 HasRelearnerAllLevelUpMoves(struct BoxPokemon *boxMon)
+{
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(GetBoxMonData(boxMon, MON_DATA_SPECIES));
+
+    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
+    {
+        if (!BoxMonKnowsMove(boxMon, learnset[i].move))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 static bool32 IsLevelUpMoveRelearnerActive(void)
 {
     return TRUE;
@@ -1138,4 +1197,10 @@ static bool32 IsTMMoveRelearnerActive(void)
 static bool32 IsTutorMoveRelearnerActive(void)
 {
     return (FlagGet(P_FLAG_TUTOR_MOVES) || P_ENABLE_MOVE_RELEARNERS);
+}
+
+// Script-only: the summary screen and the relearner's SELECT button skip it.
+static bool32 IsAllLevelUpMoveRelearnerActive(void)
+{
+    return FALSE;
 }
